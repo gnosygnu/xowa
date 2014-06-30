@@ -1,0 +1,46 @@
+20130902_005258.296 app diags: version=0.9.0.0;
+20130902_005258.312 sys diags: jar url=C:\xowa\dev\400_xowa\xowa.jar; op_sys=windows32
+20130902_005258.328 build_date=2013-09-02 00:52;
+20130902_005258.328 XOWA: the XOWA Offline Wiki Application
+Copyright (c) 2012 gnosygnu@gmail.com
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+--------------------------------------------------------------------------------
+
+version: 0.9.0.0; build date: 2013-09-02 00:52
+20130902_005258.328 
+arguments:
+  **** NONE ****
+  use --help to show help
+
+20130902_005258.562 creating user_system_cfg.gfs: C:\xowa\dev\400_xowa\user\anonymous\app\data\cfg\user_system_cfg.gfs
+20130902_005258.562 moving history files
+20130902_005258.578 moved history files: 0
+20130902_005258.859 run_failed: init_desktop 	class java.lang.NullPointerException null <java.lang.NullPointerException>
+	gplx.ErrMsgWtr.Message_gplx
+--------------------------------------------------------------------------------
+	gplx.xowa.Xowa_main.main
+		(Xowa_main.java:22)
+	gplx.xowa.Xoa_app_.Run
+		(Xoa_app_.java:25)
+	gplx.xowa.Xoa_app_.Run_args
+		(Xoa_app_.java:126)
+	gplx.xowa.Xoa_gui_mgr.Run
+		(Xoa_gui_mgr.java:83)
+	gplx.xowa.Xoa_app_.Run_ui
+		(Xoa_app_.java:172)
+	gplx.ErrMsgWtr.Message_gplx
+		(ErrMsgWtr.java:21)
+

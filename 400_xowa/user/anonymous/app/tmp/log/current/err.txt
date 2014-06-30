@@ -1,0 +1,16 @@
+20130902_005258.859 run_failed: init_desktop 	class java.lang.NullPointerException null <java.lang.NullPointerException>
+	gplx.ErrMsgWtr.Message_gplx
+--------------------------------------------------------------------------------
+	gplx.xowa.Xowa_main.main
+		(Xowa_main.java:22)
+	gplx.xowa.Xoa_app_.Run
+		(Xoa_app_.java:25)
+	gplx.xowa.Xoa_app_.Run_args
+		(Xoa_app_.java:126)
+	gplx.xowa.Xoa_gui_mgr.Run
+		(Xoa_gui_mgr.java:83)
+	gplx.xowa.Xoa_app_.Run_ui
+		(Xoa_app_.java:172)
+	gplx.ErrMsgWtr.Message_gplx
+		(ErrMsgWtr.java:21)
+
