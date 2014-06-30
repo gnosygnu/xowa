@@ -1,15 +1,23 @@
 ## xowa: the xowa offline wiki application
 
+### Summary
 XOWA is an application for reading Wikipedia and other wikis offline.
 
-XOWA is written in Java and requires 1.6 or above. It has seven dependencies:
+### Environment
+The xowa_source was built with Eclipse Indigo on Windows. For simplicity's sake, the remainder of these instructions will target Windows machines. There are no OS dependencies, so the same instructions apply to other OS's, except the paths will need to be updated.
 
-* JUnit 4.8.2 (default version with Eclipse)
-* [SWT 4.2.1: GUI Library](https://download.eclipse.org/eclipse/downloads/drops4/R-4.2.1-201209141800/#SWT)
-* [luaj_xowa.jar: Lua library](https://sourceforge.net/projects/xowa/files/support/luaj/)
-* [jtidy_xowa.jar: HTML tidy library](https://sourceforge.net/projects/xowa/files/support/jtidy)
-* [sqlite-jdbc-3.7.15-SNAPSHOT-2.jar: Database library](https://bitbucket.org/xerial/sqlite-jdbc/downloads)
-* [mysql-connector-java-5.1.12-bin.jar: Database library](https://dev.mysql.com/downloads/connector/j/)
-* [postgresql-8.4-701.jdbc4.jar: Database library](https://jdbc.postgresql.org/download.html)
+There are no explicit dependencies on Eclipse, so the source code should be usable in other Java IDEs.
 
-This github repo is a work in progress. If you have any questions, please feel free to ask
+## Instructions
+* Download '''xowa_app_windows_*''' from https://sourceforge.net/projects/xowa/files/ and unzip to the proper directory. The following will be required:
+  * All files under C:\xowa\user\anonymous\
+  * The main cfg file: C:\xowa\xowa.gfs
+  * The swt.jar at C:\xowa\bin\wnt\swt\swt.jar
+* Download the xowa repo
+* Unzip it to C:\xowa\dev\. You will have a folder called C:\xowa\dev\400_xowa\ as well as many others.
+* Move the swt.jar from C:\xowa\bin\wnt\swt\swt.jar to C:\xowa\dev\150_gfui\lib\swt\swt.jar
+* Launch Eclipse. Choose a workbench folder of C:\xowa\dev
+* Select all four projects. Do File -> Refresh.
+* Right-click on 400_xowa in the Package Explorer. Select Debug As -> Java Application. Select Xowa_main. XOWA should launch.
+* Right-click on 400_xowa in the Package Explorer. Select Debug As -> JUnit Test. All tests should pass.
+
