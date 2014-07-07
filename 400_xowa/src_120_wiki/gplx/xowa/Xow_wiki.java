@@ -100,7 +100,6 @@ public class Xow_wiki implements GfoInvkAble {
 	public Xop_redirect_mgr Redirect_mgr() {return redirect_mgr;} private Xop_redirect_mgr redirect_mgr;
 	public Xop_ctx Ctx() {return ctx;} private Xop_ctx ctx;
 	public ListAdp Rls_list() {if (rls_list == null) rls_list = ListAdp_.new_(); return rls_list;} private ListAdp rls_list;
-	public HashAdp If_exists_regy() {return if_exists_regy;} HashAdp if_exists_regy = HashAdp_.new_bry_();
 
 	public Xow_xwiki_mgr Xwiki_mgr() {return xwiki_mgr;} private Xow_xwiki_mgr xwiki_mgr;
 	public Xow_file_mgr File_mgr() {return file_mgr;} private Xow_file_mgr file_mgr;

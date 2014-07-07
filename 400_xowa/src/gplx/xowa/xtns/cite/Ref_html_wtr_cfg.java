@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.xtns.refs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.cite; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 public class Ref_html_wtr_cfg {
 	public Bry_fmtr Itm_html() 			{return itm_html;} 			private Bry_fmtr itm_html; 			public Ref_html_wtr_cfg Itm_html_(String v) {itm_html 				= Bry_fmtr.new_(v, "itm_id", "grp_id", "grp_key"); return this;}
 	public Bry_fmtr Itm_id_uid() 		{return itm_id_uid;} 		private Bry_fmtr itm_id_uid; 		public Ref_html_wtr_cfg Itm_id_uid_(String v) {itm_id_uid 			= Bry_fmtr.new_(v, "uid"); return this;}

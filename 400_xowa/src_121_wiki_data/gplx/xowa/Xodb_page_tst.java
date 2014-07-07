@@ -27,7 +27,7 @@ public class Xodb_page_tst {
 class Xodb_page_fxt {
 	public void Init() {
 		if (ns_mgr == null) {
-			ns_mgr = new Xow_ns_mgr();
+			ns_mgr = new Xow_ns_mgr(gplx.xowa.langs.cases.Xol_case_mgr_.Ascii());
 			ns_mgr.Add_new(Xow_ns_.Id_main, "");
 			ns_mgr.Add_new(Xow_ns_.Id_user_talk, "User talk");
 			ns_mgr.Init_w_defaults();

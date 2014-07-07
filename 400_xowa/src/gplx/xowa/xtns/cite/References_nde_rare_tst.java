@@ -15,10 +15,10 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.xtns.refs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.cite; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
 public class References_nde_rare_tst {		
-	@Before public void init() {fxt.Page().Ref_mgr().Grps_clear(); fxt.Reset();} private Xop_fxt fxt = new Xop_fxt();
+	@Before public void init() {fxt.Clear_ref_mgr(); fxt.Reset();} private Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
 	@Test  public void Recursive() {	// PURPOSE: handle recursive situations; EX: ja.w:Kソリューション ; ja.w:Template:cite web。; DATE:2014-03-05
 		fxt.Init_page_create("Template:Recursive", "<ref>{{Recursive}}</ref>");

@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.xtns.refs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.cite; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
 public class Ref_itm_mgr_cfg_tst {		
 	@Before public void init() {fxt.Clear();} private Ref_itm_mgr_cfg_fxt fxt = new Ref_itm_mgr_cfg_fxt();

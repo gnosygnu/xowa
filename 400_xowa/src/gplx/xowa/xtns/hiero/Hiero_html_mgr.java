@@ -239,8 +239,8 @@ class Hiero_html_wtr {
 	private Hiero_phoneme_mgr phoneme_mgr;
 	private Bry_bfr temp_bfr = Bry_bfr.reset_(255);
 	public Hiero_html_wtr(Hiero_html_mgr mgr, Hiero_phoneme_mgr phoneme_mgr) {this.phoneme_mgr = phoneme_mgr;}
-	public void Hr(Bry_bfr bfr)			{bfr.Add(Html_consts.Hr_bry).Add_byte_nl();}
-	public void Tbl_eol(Bry_bfr bfr)		{bfr.Add(Tbl_eol_bry);}	
+	public void Hr(Bry_bfr bfr)			{bfr.Add(Html_tag_.Hr_bry).Add_byte_nl();}
+	public void Tbl_eol(Bry_bfr bfr)	{bfr.Add(Tbl_eol_bry);}	
 	private static final String
 	  Tbl_bgn_str = "<table class=\"mw-hiero-table\">"
 	;
@@ -311,7 +311,7 @@ class Hiero_html_wtr {
 		int height = (int)((Hiero_html_mgr.Max_height * Hiero_html_mgr.scale) / 100);
 		Hiero_phoneme_itm phoneme_itm = phoneme_mgr.Get_by_key(glyph); if (phoneme_itm == null) throw Err_.new_fmt_("missing phoneme: {0}", String_.new_utf8_(glyph));
 		byte[] code = phoneme_itm.Gardiner_code();
-		byte[] title = bgn ? Html_consts.Lt : Html_consts.Gt;
+		byte[] title = bgn ? Html_entity_.Lt_bry : Html_entity_.Gt_bry;
 		return cartouche_img_fmtr.Bld_bry_many(temp_bfr, Hiero_xtn_mgr.Img_src_dir, code, height, title);
 	}
 	private static final Bry_fmtr cartouche_img_fmtr = Bry_fmtr.new_(String_.Concat

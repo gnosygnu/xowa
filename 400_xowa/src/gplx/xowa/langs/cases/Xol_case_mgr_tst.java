@@ -17,9 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.cases; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import org.junit.*;
-public class Xol_case_mgr_tst {
-	Xol_case_mgr_fxt fxt = new Xol_case_mgr_fxt();
-	@Before public void init() {fxt.Clear();}
+public class Xol_case_mgr_tst {		
+	@Before public void init() {fxt.Clear();} private Xol_case_mgr_fxt fxt = new Xol_case_mgr_fxt();
 	@Test  public void Mw_parse() {
 		fxt.parse_mw__tst(fxt.itm_both_("A", "a"), fxt.itm_both_("B", "b"));
 	}
@@ -40,7 +39,7 @@ public class Xol_case_mgr_tst {
 		fxt.Test_reuse_1st_upper("É");
 	}
 //		@Test  public void Hack() {
-//			Xol_case_itm[] ary = Xol_case_itm_.Universal;
+//			Xol_case_itm[] ary = Xol_case_mgr_.Utf_8;
 //			Bry_bfr bfr = Bry_bfr.new_();
 //			for (int i = 0; i < ary.length; i++) {
 //				Xol_case_itm itm = ary[i];
@@ -52,13 +51,11 @@ public class Xol_case_mgr_tst {
 //		}
 }
 class Xol_case_mgr_fxt {
-	Xol_case_mgr case_mgr = new Xol_case_mgr();
-	public void Clear() {
-		case_mgr.Clear();
-	}	String_bldr sb = String_bldr_.new_();
-	public Xol_case_itm_ary itm_both_(String src, String trg)	{return new Xol_case_itm_ary(Xol_case_itm_.Tid_both , Bry_.new_utf8_(src), Bry_.new_utf8_(trg));}
-	public Xol_case_itm_ary itm_upper_(String src, String trg) {return new Xol_case_itm_ary(Xol_case_itm_.Tid_upper, Bry_.new_utf8_(src), Bry_.new_utf8_(trg));}
-	public Xol_case_itm_ary itm_lower_(String src, String trg) {return new Xol_case_itm_ary(Xol_case_itm_.Tid_lower, Bry_.new_utf8_(src), Bry_.new_utf8_(trg));}
+	private Xol_case_mgr case_mgr = Xol_case_mgr_.new_(); private String_bldr sb = String_bldr_.new_();
+	public void Clear() {case_mgr.Clear();}
+	public Xol_case_itm_bry itm_both_(String src, String trg)	{return new Xol_case_itm_bry(Xol_case_itm_.Tid_both , Bry_.new_utf8_(src), Bry_.new_utf8_(trg));}
+	public Xol_case_itm_bry itm_upper_(String src, String trg) {return new Xol_case_itm_bry(Xol_case_itm_.Tid_upper, Bry_.new_utf8_(src), Bry_.new_utf8_(trg));}
+	public Xol_case_itm_bry itm_lower_(String src, String trg) {return new Xol_case_itm_bry(Xol_case_itm_.Tid_lower, Bry_.new_utf8_(src), Bry_.new_utf8_(trg));}
 	public String Init_ltrs_raw() {
 		return String_.Concat_lines_nl
 			(	"0|a|A"
@@ -67,11 +64,12 @@ class Xol_case_mgr_fxt {
 			);
 	}
 	public Xol_case_mgr_fxt Init_ltrs() {
+		case_mgr = Xol_case_mgr_.new_();
 		case_mgr.Add_bulk(Bry_.new_utf8_(Init_ltrs_raw()));
 		return this;
 	}
 	public Xol_case_mgr_fxt Init_ltrs_universal() {
-		case_mgr.Add_bulk(Xol_case_itm_.Universal);
+		case_mgr = Xol_case_mgr_.Utf8();
 		return this;
 	}
 	public Xol_case_mgr_fxt Upper(String raw_str, String expd) {return Case_build(Bool_.Y, raw_str, expd);}
@@ -82,10 +80,10 @@ class Xol_case_mgr_fxt {
 		Tfds.Eq(expd, String_.new_utf8_(actl));
 		return this;
 	}
-	public void parse_xo__tst(String raw, Xol_case_itm_ary... expd) {
+	public void parse_xo__tst(String raw, Xol_case_itm_bry... expd) {
 		Tfds.Eq_str_lines(Xto_str(expd), Xto_str(Xol_case_itm_.parse_xo_(Bry_.new_utf8_(raw))));
 	}
-	public void parse_mw__tst(Xol_case_itm_ary... expd) {
+	public void parse_mw__tst(Xol_case_itm_bry... expd) {
 		String raw = raw_(expd);
 		Xol_case_itm[] actl = Xol_case_itm_.parse_mw_(Bry_.new_utf8_(raw));
 		Tfds.Eq_str_lines(Xto_str(expd), Xto_str(actl));
@@ -98,11 +96,11 @@ class Xol_case_mgr_fxt {
 		}
 		return sb.XtoStrAndClear();
 	}
-	public String raw_(Xol_case_itm_ary[] itms) {
+	public String raw_(Xol_case_itm_bry[] itms) {
 		int itms_len = itms.length;
 		uppers_list.Clear(); lowers_list.Clear();
 		for (int i = 0; i < itms_len; i++) {
-			Xol_case_itm_ary itm = itms[i];
+			Xol_case_itm_bry itm = itms[i];
 			String src = String_.new_utf8_(itm.Src_ary());
 			String trg = String_.new_utf8_(itm.Trg_ary());
 			switch (itm.Tid()) {

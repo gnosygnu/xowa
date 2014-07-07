@@ -36,7 +36,7 @@ public class Xoa_app_fxt {
 	public static Xow_wiki wiki_(Xoa_app app, String key) {return wiki_(app, key, app.Lang_mgr().Lang_en());}
 	public static Xow_wiki wiki_(Xoa_app app, String key, Xol_lang lang) {
 		Io_url wiki_dir = app.Fsys_mgr().Wiki_dir().GenSubDir(key);
-		Xow_wiki rv = new Xow_wiki(app, wiki_dir, Xow_ns_mgr_.default_(), lang);
+		Xow_wiki rv = new Xow_wiki(app, wiki_dir, Xow_ns_mgr_.default_(lang.Case_mgr()), lang);
 		rv.File_mgr().Meta_mgr().Depth_(2);					// TEST: written for 2 depth
 		rv.Props().Main_page_(Xoa_page_.Main_page_bry);		// TEST: default to Main Page (nothing tests loading Main Page from wiki.gfs)			
 		rv.Ns_mgr().Ids_get_or_null(Xow_ns_.Id_main).Subpages_enabled_(true);

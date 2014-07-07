@@ -118,7 +118,7 @@ class Xol_mw_parse_fxt {
 	private ListAdp tmp_itm_list = ListAdp_.new_();
 	private Xol_mw_parse_grp Parse_grp(Php_line_assign line) {
 		Xol_mw_parse_grp grp = new Xol_mw_parse_grp();
-		byte[] key =  line.Key().Val_obj_bry();					// EX: "zh2Hant"
+		byte[] key =  line.Key().Val_obj_bry();				// EX: "zh2Hant"
 		key = Bry_.Lower_ascii(key);						// EX: "zh2hant"
 		byte[][] parts = Bry_.Split(key, Byte_ascii.Num_2);	// EX: "zh", "hant"
 		byte[] src = parts[0];

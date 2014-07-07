@@ -93,6 +93,14 @@ public class Xow_file_mgr implements GfoInvkAble {
 			return xfer_itm.Atrs_calc_for_html();
 		}
 	}
+	public boolean Exists(byte[] ttl_bry) {
+		if (this.Version_1_y()) {
+			Xof_meta_itm meta = meta_mgr.Get_itm_or_new(ttl_bry);
+			return meta.Orig_exists() == Bool_.Y_byte || meta.Thumbs().length != 0;
+		}
+		else
+			return fsdb_mgr.Reg_select_itm_exists(ttl_bry);
+	}
 
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_repos))					return repo_mgr;

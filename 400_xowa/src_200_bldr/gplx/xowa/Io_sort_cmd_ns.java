@@ -48,8 +48,8 @@ public class Io_sort_cmd_ns implements Io_make_cmd {
 	private void Flush() {
 		reg_bfr
 			.Add_int_variable(fil_count++).Add_byte(Byte_ascii.Pipe)
-			.Add_bfr(key_bfr_0).Add_byte(Byte_ascii.Pipe)
-			.Add_bfr(key_bfr_n).Add_byte(Byte_ascii.Pipe)
+			.Add_bfr_and_preserve(key_bfr_0).Add_byte(Byte_ascii.Pipe)
+			.Add_bfr_and_preserve(key_bfr_n).Add_byte(Byte_ascii.Pipe)
 			.Add_int_variable(itm_count).Add_byte(Byte_ascii.NewLine);
 		itm_count = 0;
 		key_bfr_0.Clear();

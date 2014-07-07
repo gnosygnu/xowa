@@ -17,23 +17,25 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.html; import gplx.*;
 public class Html_utl {
-	public static byte[] Escape_for_atr_val_as_bry(String s, byte quote_byte) {
-		Bry_bfr tmp_bfr = null;
+	public static byte[] Escape_for_atr_val_as_bry(Bry_bfr tmp_bfr, byte quote_byte, String s) {
 		if (s == null) return null;
 		byte[] bry = Bry_.new_utf8_(s);
+		int bry_len = bry.length;
+		boolean dirty = Escape_for_atr_val_as_bry(tmp_bfr, quote_byte, bry, 0, bry_len);
+		return dirty ? tmp_bfr.XtoAryAndClear() : bry;
+	}
+	public static boolean Escape_for_atr_val_as_bry(Bry_bfr tmp_bfr, byte quote_byte, byte[] src, int bgn, int end) {
 		boolean dirty = false;
-		int len = bry.length;
-		for (int i = 0; i < len; i++) {
-			byte b = bry[i];
+		for (int i = bgn; i < end; i++) {
+			byte b = src[i];
 			if (b == quote_byte) {
 				if (!dirty) {
-					tmp_bfr = Bry_bfr.reset_(256);
-					tmp_bfr.Add_mid(bry, 0, i);
+					tmp_bfr.Add_mid(src, bgn, i);
 					dirty = true;
 				}
 				switch (quote_byte) {
-					case Byte_ascii.Apos: 	tmp_bfr.Add(Html_consts.Apos); break;
-					case Byte_ascii.Quote: 	tmp_bfr.Add(Html_consts.Quote); break;
+					case Byte_ascii.Apos: 	tmp_bfr.Add(Html_entity_.Apos_num_bry); break;
+					case Byte_ascii.Quote: 	tmp_bfr.Add(Html_entity_.Quote_bry); break;
 					default: 				throw Err_.unhandled(quote_byte);
 				}
 			}
@@ -42,7 +44,7 @@ public class Html_utl {
 					tmp_bfr.Add_byte(b);
 			}
 		}
-		return dirty ? tmp_bfr.XtoAryAndClear() : bry;
+		return dirty;
 	}
 	public static String Escape_html_as_str(String v)						{return String_.new_utf8_(Escape_html_as_bry(Bry_.new_utf8_(v)));}
 	public static byte[] Escape_html_as_bry(Bry_bfr tmp, byte[] bry)		{return Escape_html(false, tmp, bry, 0, bry.length, true, true, true, true, true);}
@@ -60,11 +62,11 @@ public class Html_utl {
 		for (int i = bgn; i < end; i++) {
 			byte b = bry[i];
 			switch (b) {
-				case Byte_ascii.Lt: 	if (escape_lt)		escaped = Html_consts.Lt; break;
-				case Byte_ascii.Gt: 	if (escape_gt)		escaped = Html_consts.Gt; break;
-				case Byte_ascii.Amp:	if (escape_amp)		escaped = Html_consts.Amp; break;
-				case Byte_ascii.Quote:	if (escape_quote)	escaped = Html_consts.Quote; break;
-				case Byte_ascii.Apos:	if (escape_apos)	escaped = Html_consts.Apos; break;
+				case Byte_ascii.Lt: 	if (escape_lt)		escaped = Html_entity_.Lt_bry; break;
+				case Byte_ascii.Gt: 	if (escape_gt)		escaped = Html_entity_.Gt_bry; break;
+				case Byte_ascii.Amp:	if (escape_amp)		escaped = Html_entity_.Amp_bry; break;
+				case Byte_ascii.Quote:	if (escape_quote)	escaped = Html_entity_.Quote_bry; break;
+				case Byte_ascii.Apos:	if (escape_apos)	escaped = Html_entity_.Apos_num_bry; break;
 				default:
 					if (dirty || write_to_bfr)
 						bfr.Add_byte(b);
@@ -91,11 +93,11 @@ public class Html_utl {
 	}
 
 	private static final ByteTrieMgr_slim unescape_trie = ByteTrieMgr_slim.ci_ascii_()
-	.Add_bry_bval(Html_consts.Lt		, Byte_ascii.Lt)
-	.Add_bry_bval(Html_consts.Gt		, Byte_ascii.Gt)
-	.Add_bry_bval(Html_consts.Amp		, Byte_ascii.Amp)
-	.Add_bry_bval(Html_consts.Quote		, Byte_ascii.Quote)
-	.Add_bry_bval(Html_consts.Apos		, Byte_ascii.Apos)
+	.Add_bry_bval(Html_entity_.Lt_bry		, Byte_ascii.Lt)
+	.Add_bry_bval(Html_entity_.Gt_bry		, Byte_ascii.Gt)
+	.Add_bry_bval(Html_entity_.Amp_bry		, Byte_ascii.Amp)
+	.Add_bry_bval(Html_entity_.Quote_bry	, Byte_ascii.Quote)
+	.Add_bry_bval(Html_entity_.Apos_num_bry	, Byte_ascii.Apos)
 	;
 	public static String Unescape_as_str(String src) {
 		Bry_bfr bfr = Bry_bfr.reset_(255);
@@ -149,18 +151,18 @@ public class Html_utl {
 	public static byte[] Del_comments(Bry_bfr bfr, byte[] src, int pos, int end) {
 		while (true) {
 			if (pos >= end) break;
-			int comm_bgn = Bry_finder.Find_fwd(src, Html_consts.Comm_bgn, pos);											// look for <!--
+			int comm_bgn = Bry_finder.Find_fwd(src, Html_tag_.Comm_bgn, pos);											// look for <!--
 			if (comm_bgn == Bry_finder.Not_found) {																		// not found; consume rest
 				bfr.Add_mid(src, pos, end);
 				break;
 			}
-			int comm_end = Bry_finder.Find_fwd(src, Html_consts.Comm_end, comm_bgn + Html_consts.Comm_bgn_len);			// look for -->
+			int comm_end = Bry_finder.Find_fwd(src, Html_tag_.Comm_end, comm_bgn + Html_tag_.Comm_bgn_len);			// look for -->
 			if (comm_end == Bry_finder.Not_found) {																		// not found; consume rest
 				bfr.Add_mid(src, pos, end);
 				break;
 			}
 			bfr.Add_mid(src, pos, comm_bgn);																					// add everything between pos and comm_bgn
-			pos = comm_end + Html_consts.Comm_end_len;																			// reposition pos after comm_end
+			pos = comm_end + Html_tag_.Comm_end_len;																			// reposition pos after comm_end
 		}
 		return bfr.XtoAryAndClear();
 	}

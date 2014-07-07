@@ -48,7 +48,7 @@ public class Xop_hdr_wkr implements Xop_ctx_wkr {
 	}
 	public int Make_tkn_end(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos, int stackPos, int end_hdr_len) {// REF.MW: Parser|doHeadings
 		if (ctx.Cur_tkn_tid() == Xop_tkn_itm_.Tid_tmpl_curly_bgn) return ctx.Lxr_make_txt_(cur_pos);
-		Xop_hdr_tkn hdr = (Xop_hdr_tkn)ctx.Stack_pop_til(root, src, stackPos, false, bgn_pos, cur_pos);
+		Xop_hdr_tkn hdr = (Xop_hdr_tkn)ctx.Stack_pop_til(root, src, stackPos, false, bgn_pos, cur_pos, Xop_tkn_itm_.Tid_hdr);
 		ctx.Apos().EndFrame(ctx, root, src, bgn_pos, false);	// end any apos; EX: ==''a==
 		int hdr_len = hdr.Hdr_len(), bgn_manual = 0, end_manual = 0;
 		boolean dirty = false;
@@ -91,7 +91,7 @@ public class Xop_hdr_wkr implements Xop_ctx_wkr {
 			if (stop) break;
 		}
 		if (stack_pos == -1) return;
-		ctx.Stack_pop_til(root, src, stack_pos, true, bgn_pos, cur_pos);
+		ctx.Stack_pop_til(root, src, stack_pos, true, bgn_pos, cur_pos, Xop_tkn_itm_.Tid_hdr);
 	}
 	private static int Find_fwd_while_ws_hdr_version(byte[] src, int cur, int end) {
 		int last_nl = -1;

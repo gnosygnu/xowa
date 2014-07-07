@@ -19,6 +19,7 @@ package gplx.gfui; import gplx.*;
 public class Gfui_html_cfg implements GfoInvkAble {
 	public String Doc_html()													{return Exec_fmt(fmtr_doc_html);}									private Bry_fmtr fmtr_doc_html = Bry_fmtr.new_();
 	public String Doc_body_focus()												{return Exec_fmt(fmtr_doc_body_focus);}								private Bry_fmtr fmtr_doc_body_focus = Bry_fmtr.new_();
+	public String Doc_selection_focus_toggle()									{return Exec_fmt(fmtr_doc_selection_focus_toggle);}					private Bry_fmtr fmtr_doc_selection_focus_toggle = Bry_fmtr.new_();
 	public String Doc_selected_get_text_or_href()								{return Exec_fmt(fmtr_doc_selected_get_text_or_href);}				private Bry_fmtr fmtr_doc_selected_get_text_or_href = Bry_fmtr.keys_();
 	public String Doc_selected_get_href_or_text()								{return Exec_fmt(fmtr_doc_selected_get_href_or_text);}				private Bry_fmtr fmtr_doc_selected_get_href_or_text = Bry_fmtr.keys_();
 	public String Doc_selected_get_src_or_empty()								{return Exec_fmt(fmtr_doc_selected_get_src_or_empty);}				private Bry_fmtr fmtr_doc_selected_get_src_or_empty = Bry_fmtr.keys_();
@@ -63,6 +64,7 @@ public class Gfui_html_cfg implements GfoInvkAble {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_doc_html_))							fmtr_doc_html.Fmt_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_doc_body_focus_))					fmtr_doc_body_focus.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_doc_selection_focus_toggle_))		fmtr_doc_selection_focus_toggle.Fmt_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_doc_selected_get_text_or_href_))		fmtr_doc_selected_get_text_or_href.Fmt_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_doc_selected_get_href_or_text_))		fmtr_doc_selected_get_href_or_text.Fmt_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_doc_selected_get_src_or_empty_))		fmtr_doc_selected_get_src_or_empty.Fmt_(m.ReadBry("v"));
@@ -95,7 +97,8 @@ public class Gfui_html_cfg implements GfoInvkAble {
 		node_path.Val_(node_path_val);
 	}
 	public static final String Invk_debug_file_ = "debug_file_"
-	, Invk_doc_html_ = "doc_html_", Invk_doc_body_focus_ = "doc_body_focus_", Invk_doc_active_atr_get_ = "doc_active_atr_get_", Invk_doc_find_html_ = "doc_find_html_", Invk_doc_find_edit_ = "doc_find_edit_"
+	, Invk_doc_html_ = "doc_html_", Invk_doc_body_focus_ = "doc_body_focus_", Invk_doc_selection_focus_toggle_ = "doc_selection_focus_toggle_"
+	, Invk_doc_active_atr_get_ = "doc_active_atr_get_", Invk_doc_find_html_ = "doc_find_html_", Invk_doc_find_edit_ = "doc_find_edit_"
 	, Invk_doc_selected_get_text_or_href_ = "doc_selected_get_text_or_href_", Invk_doc_selected_get_href_or_text_ = "doc_selected_get_href_or_text_", Invk_doc_selected_get_src_or_empty_ = "doc_selected_get_src_or_empty_"
 	, Invk_win_print_preview_ = "win_print_preview_"
 	, Invk_elem_atr_get_ = "elem_atr_get_", Invk_elem_atr_get_toString_ = "elem_atr_get_toString_", Invk_elem_atr_set_ = "elem_atr_set_", Invk_elem_atr_set_append_ = "elem_atr_set_append_"

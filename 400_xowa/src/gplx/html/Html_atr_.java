@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.html; import gplx.*;
-public class Html_atrs {
+public class Html_atr_ {
 	public static final String
 	  Src_str = "src"
 	;

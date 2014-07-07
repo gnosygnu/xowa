@@ -53,7 +53,7 @@ public class Xobc_parse_run extends Xob_itm_basic_base implements Xob_cmd, GfoIn
 		Parse_ns(wiki.Ns_mgr().Ns_category());
 		compress_max = 20;
 		Parse_ns(wiki.Ns_mgr().Ns_template());
-		ConsoleAdp._.WriteLine(Int_.XtoStr(Pfunc_ifexist.Count));
+//			ConsoleAdp._.WriteLine(Int_.XtoStr(Pfunc_ifexist.Count));
 	}
 	public void Cmd_end() {
 		img_dump.Wkr_end();

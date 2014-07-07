@@ -218,7 +218,7 @@ public class Scrib_lib_language implements Scrib_lib {
 	public boolean ConvertPlural(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		Xol_lang lang = lang_(args);
 		int count = args.Pull_int(1);
-		byte[][] words = args.Cast_params_as_bry_ary_or_empty(2);
+		byte[][] words = args.Cast_params_as_bry_ary_or_rest_of_ary(2);
 		byte[] rv = lang.Plural().Plural_eval(lang, count, words);
 		return rslt.Init_obj(rv);
 	}

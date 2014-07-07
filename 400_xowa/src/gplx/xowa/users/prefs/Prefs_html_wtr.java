@@ -113,7 +113,7 @@ class Prefs_html_wtr {
 	}
 	private void Write__value_atr(Bry_bfr bfr, Object prop_val) {
 		bfr.Add(Atr_stub_value);					// " value='"
-		bfr.Add(Html_utl.Escape_for_atr_val_as_bry(Object_.XtoStr_OrEmpty(prop_val), Byte_ascii.Apos));	
+		bfr.Add(Html_utl.Escape_for_atr_val_as_bry(tmp_bfr, Byte_ascii.Apos, Object_.XtoStr_OrEmpty(prop_val)));	
 													// "abcde"
 		bfr.Add_byte(Byte_ascii.Apos);				// "'"
 	}

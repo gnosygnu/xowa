@@ -57,7 +57,7 @@ public class Scrib_invoke_func extends Pf_func_base {
 		}
 		catch (Exception e) {
 			bfr.Add_mid(src, self.Src_bgn(), self.Src_end());
-			bfr.Add(Html_consts.Comm_bgn).Add_str(Err_.Message_gplx_brief(e)).Add(Html_consts.Comm_end);
+			bfr.Add(Html_tag_.Comm_bgn).Add_str(Err_.Message_gplx_brief(e)).Add(Html_tag_.Comm_end);
 			ctx.App().Usr_dlg().Warn_many("", "", "invoke failed: ~{0} ~{1} ~{2}", String_.new_utf8_(ctx.Cur_page().Ttl().Raw()), String_.new_utf8_(src, self.Src_bgn(), self.Src_end()), Err_.Message_gplx_brief(e));
 			Scrib_core.Core_invalidate();	// reset core
 		}

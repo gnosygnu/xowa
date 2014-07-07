@@ -78,7 +78,7 @@ public class Xol_mw_lang_parser_tst {
 			;
 	}
 	@Test  public void Xtn_keywords_fr() {fxt.Parse_xtn("$magicWords['fr'] = array('if' => array(0, 'si' ));").Tst_parse("{{si:|y|n}}", "n");}
-	@Test  public void Xtn_keywords_de() {fxt.Parse_xtn("$magicWords['de'] = array('if' => array(0, 'si' ));").Tst_parse("{{si:|y|n}}", "<a href=\"/wiki/Template:si:\">Template:si:</a>");}
+	@Test  public void Xtn_keywords_de() {fxt.Parse_xtn("$magicWords['de'] = array('if' => array(0, 'si' ));").Tst_parse("{{si:|y|n}}", "<a href=\"/wiki/Template:Si:\">Template:Si:</a>");}	// should be "Si", not "si"; ALSO, should probably be "{{si:|y|n}}" not "[[:Template:si:]]" DATE:2014-07-04
 	@Test  public void Core_messages() {
 		fxt.Parse_core("$messages = array('sunday' => 'dimanche');")
 			.Tst_message("sunday", 0, "dimanche", false)

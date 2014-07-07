@@ -56,7 +56,7 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xop_lnki_log
 		property_wkr = this.Property_wkr();				// set member reference
 		property_wkr = log_mgr.Make_wkr_property();
 		wiki.App().Wiki_mgr().Wdata_mgr().Enabled_(wdata_enabled);
-		if (!xtn_ref_enabled) gplx.xowa.xtns.refs.References_nde.Enabled = false;
+		if (!xtn_ref_enabled) gplx.xowa.xtns.cite.References_nde.Enabled = false;
 		gplx.xowa.xtns.gallery.Gallery_xnde.Log_wkr = log_mgr.Make_wkr().Save_src_str_(Bool_.Y);
 		gplx.xowa.xtns.imageMap.Xop_imageMap_xnde.Log_wkr = log_mgr.Make_wkr();
 		gplx.xowa.Xop_xnde_wkr.Timeline_log_wkr = log_mgr.Make_wkr();

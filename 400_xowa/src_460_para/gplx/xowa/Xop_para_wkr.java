@@ -59,7 +59,7 @@ public class Xop_para_wkr implements Xop_ctx_wkr {
 			prv_ws_bgn = 0;
 		this.Process_block__bgn_n__end_y(Xop_xnde_tag_.Tag_div);
 	}
-	private void Process_block(Xop_xnde_tag tag, boolean bgn, boolean end)	{
+	private void Process_block(Xop_xnde_tag tag, boolean bgn, boolean end) {
 		if (prv_ws_bgn > 0) {
 			prv_para.Space_bgn_(prv_ws_bgn);
 			prv_ws_bgn = 0;
@@ -112,7 +112,7 @@ public class Xop_para_wkr implements Xop_ctx_wkr {
 				prv_ws_bgn = 0;																// MW: $t = substr( $t, 1 );
 			}
 			else {
-				if (bgn_pos - prv_nl_pos == 1 || line_is_ws) {				// line is blank ("b" for blank)						MW: if ( trim( $t ) === '' ) {
+				if (bgn_pos - prv_nl_pos == 1 || line_is_ws) {								// line is blank ("b" for blank)						MW: if ( trim( $t ) === '' ) {
 					if (para_stack != Para_stack_none) {									// "b1"; stack has "<p>" or "</p><p>"; output "<br/>";	MW: if ( $paragraphStack ) {
 						Para_stack_end(cur_pos); Add_br(ctx, root, bgn_pos);				//														MW: $output .= $paragraphStack . '<br />';
 						para_stack = Para_stack_none;										//														MW: $paragraphStack = false;
@@ -135,7 +135,7 @@ public class Xop_para_wkr implements Xop_ctx_wkr {
 						cur_mode = Mode_para;												//														MW: $this->mLastSection = 'p';
 					}
 					else if (cur_mode != Mode_para) {										// "t2"; cur is '' or <pre>								MW: elseif ( $this->mLastSection !== 'p' ) {
-						Prv_para_end(); Prv_para_bgn(Xop_para_tkn.Tid_para);			//														MW: $output .= $this->closeParagraph() . '<p>';
+						Prv_para_end(); Prv_para_bgn(Xop_para_tkn.Tid_para);				//														MW: $output .= $this->closeParagraph() . '<p>';
 						cur_mode = Mode_para;												//														MW: $this->mLastSection = 'p';
 					}
 					else {}																	// "t3"

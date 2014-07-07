@@ -44,8 +44,18 @@ public class Xol_kwd_mgr implements GfoInvkAble {
 	public static ByteTrieMgr_slim trie_(Xol_kwd_mgr mgr, int id) {
 		Xol_kwd_grp grp = mgr.Get_at(id);
 		ByteTrieMgr_slim rv = ByteTrieMgr_slim.new_(grp.Case_match());
-		int words_len = grp.Itms().length;
-		for (int i = 0; i < words_len; i++) {
+		int len = grp.Itms().length;
+		for (int i = 0; i < len; i++) {
+			Xol_kwd_itm itm = grp.Itms()[i];
+			rv.Add(itm.Val(), itm);
+		}
+		return rv;
+	}
+	public static Hash_adp_bry hash_(Xol_kwd_mgr mgr, int id) {
+		Xol_kwd_grp grp = mgr.Get_at(id);
+		Hash_adp_bry rv = Hash_adp_bry.c__utf8_(grp.Case_match(), mgr.lang.Case_mgr());
+		int len = grp.Itms().length;
+		for (int i = 0; i < len; i++) {
 			Xol_kwd_itm itm = grp.Itms()[i];
 			rv.Add(itm.Val(), itm);
 		}

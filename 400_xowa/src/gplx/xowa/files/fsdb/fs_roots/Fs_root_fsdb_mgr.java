@@ -52,8 +52,8 @@ public class Fs_root_fsdb_mgr implements Xof_fsdb_mgr, GfoInvkAble {
 				Js_img_mgr.Update_img(page, itm);
 		}
 	}
-	public void Reg_select_only(Xoa_page page, byte exec_tid, ListAdp itms, OrderedHash hash) {
-	}
+	public void Reg_select_only(Xoa_page page, byte exec_tid, ListAdp itms, OrderedHash hash) {}
+	public boolean Reg_select_itm_exists(byte[] ttl) {throw Err_.not_implemented_();}
 	public void Rls() {}
 	private Io_url Xto_url(byte[] v) {
 		if (Op_sys.Cur().Tid_is_wnt())

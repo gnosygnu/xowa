@@ -55,7 +55,7 @@ class Xop_nl_lxr implements Xop_lxr {
 		switch (ctx.Cur_tkn_tid()) {
 			case Xop_tkn_itm_.Tid_hdr:		// last tkn was hdr; close it; EX: \n==a==\nb; "\n" should close 2nd "=="; DATE:2014-02-17
 				int acs_pos = ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_hdr);
-				ctx.Stack_pop_til(root, src, acs_pos, true, bgn_pos, cur_pos);
+				ctx.Stack_pop_til(root, src, acs_pos, true, bgn_pos, cur_pos, Xop_tkn_itm_.Tid_newLine);
 				para_wkr.Process_block__bgn_n__end_y(Xop_xnde_tag_.Tag_h2);
 				break;
 			case Xop_tkn_itm_.Tid_list:		// close list
@@ -64,7 +64,7 @@ class Xop_nl_lxr implements Xop_lxr {
 				break;
 			case Xop_tkn_itm_.Tid_lnke:		// close lnke
 				if (ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_tmpl_invk) == -1) // only close if no tmpl; MWR: [[SHA-2]]; * {{cite journal|title=Proposed 
-					ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_lnke), true, bgn_pos, cur_pos);
+					ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_lnke), true, bgn_pos, cur_pos, Xop_tkn_itm_.Tid_newLine);
 				break;
 			case Xop_tkn_itm_.Tid_lnki:		// NOTE: \n in caption or other multipart lnki; don't call para_wkr.Process
 				Xop_tkn_itm nl_tkn = tkn_mkr.Space(root, bgn_pos, cur_pos);	// convert \n to \s. may result in multiple \s, but rely on htmlViewer to suppress; EX: w:Schwarzschild_radius; and the stellar [[Velocity dispersion|velocity\ndispersion]];

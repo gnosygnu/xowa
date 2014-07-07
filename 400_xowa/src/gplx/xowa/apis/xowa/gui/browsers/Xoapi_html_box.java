@@ -27,10 +27,16 @@ public class Xoapi_html_box implements GfoInvkAble {
 		if (tab.View_mode() != Xog_page_mode.Tid_read)	// if edit / html, place focus in edit box
 			html_box.Html_elem_focus(Xog_html_itm.Elem_id__xowa_edit_data_box);
 	}
+	public void Selection_focus() {
+		Xog_tab_itm tab = win.Active_tab(); if (tab == Xog_tab_itm_.Null) return;
+		Gfui_html html_box = tab.Html_itm().Html_box();
+		html_box.Html_doc_selection_focus_toggle();
+	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_focus)) 					this.Focus();
+		else if	(ctx.Match(k, Invk_selection_focus_toggle)) 		this.Selection_focus();
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}
-	private static final String Invk_focus = "focus";
+	private static final String Invk_focus = "focus", Invk_selection_focus_toggle = "selection_focus_toggle";
 }

@@ -22,7 +22,7 @@ public class Pfunc_expr extends Pf_func_base {
 		byte[] val_dat_ary = Eval_argx(ctx, src, caller, self); if (val_dat_ary == Bry_.Empty) return;
 		DecimalAdp rslt = shunter.Evaluate(ctx, val_dat_ary);	// NOTE: php uses "float" but really is a double; http://www.php.net/manual/en/language.types.float.php
 		if (rslt == Pfunc_expr_shunter.Null_rslt) {
-			bb.Add_bfr(shunter.Err());
+			bb.Add_bfr_and_preserve(shunter.Err());
 //				ctx.Msg_log().Add_args(src, self.Src_bgn(), self.Src_end(), Pfunc_expr_msg.Unknown);
 			shunter.Err().Clear();
 		}

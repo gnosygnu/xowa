@@ -20,7 +20,7 @@ import org.junit.*;
 public class Pf_wiki_stats_tst {
 	private Xop_fxt fxt = new Xop_fxt();
 	@Before	public void setup()						{fxt.Reset();}
-	@Test  public void SiteName()					{fxt.Test_parse_tmpl_str_test("{{SITENAME}}"				, "{{test}}", "Wikipedia");}
+	@Test  public void SiteName()					{fxt.Test_parse_tmpl_str_test("{{SITENAME}}"			, "{{test}}", "Wikipedia");}
 	@Test  public void ServerName()					{fxt.Test_parse_tmpl_str_test("{{SERVERNAME}}"			, "{{test}}", "en.wikipedia.org");}
 	@Test  public void Server()						{fxt.Test_parse_tmpl_str_test("{{SERVER}}"				, "{{test}}", "http://en.wikipedia.org");}
 	@Test  public void ArticlePath()				{fxt.Test_parse_tmpl_str_test("{{ARTICLEPATH}}"			, "{{test}}", "/wiki/");}	// FUTURE: should be /wiki/$1

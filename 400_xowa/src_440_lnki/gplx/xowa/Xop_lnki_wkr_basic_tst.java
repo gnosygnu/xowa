@@ -93,6 +93,9 @@ public class Xop_lnki_wkr_basic_tst {
 	@Test  public void Size_large_numbers() {	// PURPOSE: perf code identified large sizes as caption; DATE:2014-02-15
 		fxt.Test_parse_page_wiki("[[Image:a|1234567890x1234567890px]]"		, fxt.tkn_lnki_().Width_(1234567890).Height_(1234567890));
 	}
+	@Test  public void Size_dangling_xnde() {	// PURPOSE: dangling xnde should not eat rest of lnki; PAGE:sr.w:Сићевачка_клисура DATE:2014-07-03
+		fxt.Init_log_(Xop_xnde_log.Dangling_xnde).Test_parse_page_wiki("[[Image:a.png|<b>c|40px]]"	, fxt.tkn_lnki_().Width_(40).Height_(-1));
+	}
 	@Test   public void Size_ws_para() {	// PURPOSE: <p> in arg_bldr causes parse to fail; EX: w:Supreme_Court_of_the_United_States; DATE:2014-04-05
 		fxt.Init_para_y_();
 		fxt.Test_parse_page_all("[[File:A.png| \n 40px]]"
@@ -182,9 +185,8 @@ public class Xop_lnki_wkr_basic_tst {
 		fxt.Test_parse_page_wiki("[[ ]]", fxt.tkn_txt_(0, 2), fxt.tkn_space_(2, 3), fxt.tkn_txt_(3, 5));
 	}
 	@Test  public void Exc_invalid_utf8() {	// PURPOSE: "%DO" is an invalid UTF-8 sequence (requires 2 bytes, not just %D0); DATE:2013-11-11
-		fxt.Ctx().Lang().Case_mgr().Add_bulk(Xol_case_itm_.Universal);	// NOTE: only occurs during Universal
-		fxt.Test_parse_page_all_str("[[%D0]]", "[[%D0]]");				// invalid titles render literally
-		fxt.Ctx().Lang().Case_mgr().Add_bulk(Xol_case_itm_.English);
+		fxt.Ctx().Lang().Case_mgr_utf8_();						// NOTE: only occurs during Universal
+		fxt.Test_parse_page_all_str("[[%D0]]", "[[%D0]]");		// invalid titles render literally
 	}
 	@Test  public void Ex_eq() {	// make sure that eq is not evaluated for kv delimiter
 		fxt.Test_parse_page_wiki("[[=]]", fxt.tkn_lnki_(0, 5));

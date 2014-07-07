@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.intl.*; import gplx.xowa.xtns.refs.*; import gplx.xowa.xtns.gallery.*; import gplx.xowa.bldrs.langs.*; import gplx.xowa.langs.numbers.*;
+import gplx.intl.*; import gplx.xowa.xtns.cite.*; import gplx.xowa.xtns.gallery.*; import gplx.xowa.bldrs.langs.*; import gplx.xowa.langs.numbers.*;
 public class Xol_lang_ {
 	public static Io_url xo_lang_fil_(Xoa_app app, String lang_key) {return app.User().Fsys_mgr().Root_dir().GenSubFil_nest("lang", Xol_mw_lang_parser.Dir_name_xowa, lang_key + ".gfs");}
 	public static final byte Char_tid_ltr_l = 0, Char_tid_ltr_u = 1, Char_tid_num = 2, Char_tid_ws = 3, Char_tid_sym = 4, Char_tid_misc = 5;

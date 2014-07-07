@@ -62,6 +62,7 @@ class Mem_html extends GxwTextMemo_lang implements Gxw_html {		public String Htm
 		return rv == null ? or : rv;
 	}
 	public void Html_doc_body_focus() {}
+	public void Html_doc_selection_focus_toggle() {}
 	public String Html_window_vpos() {return "";}
 	public boolean Html_window_vpos_(String v) {return true;}
 	public boolean Html_elem_focus(String v) {return true;}

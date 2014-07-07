@@ -15,22 +15,9 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.html; import gplx.*;
-public class Html_tags {
-	public static final String 
-	  A_str = "a"
-	, Img_str = "img"
-	;
-	public static final byte[]
-	  Body_lhs					= Bry_.new_ascii_("<body>")
-	, Body_rhs					= Bry_.new_ascii_("</body>")
-	, Html_rhs					= Bry_.new_ascii_("</html>")
-	, Head_lhs_bgn				= Bry_.new_ascii_("<head")
-	, Head_rhs					= Bry_.new_ascii_("</head>")
-	, Style_lhs_w_type			= Bry_.new_ascii_("<style type=\"text/css\">")
-	, Style_rhs					= Bry_.new_ascii_("</style>")
-	, Script_lhs				= Bry_.new_ascii_("<script>")
-	, Script_lhs_w_type			= Bry_.new_ascii_("<script type='text/javascript'>")
-	, Script_rhs				= Bry_.new_ascii_("</script>")
-	;
+package gplx.brys; import gplx.*;
+public class Bry_fmtr_arg_bfr_preserve implements Bry_fmtr_arg {
+	public Bry_fmtr_arg_bfr_preserve Data_(Bry_bfr v) {bfr = v; return this;}
+	public void XferAry(Bry_bfr trg, int idx) {trg.Add_bfr_and_preserve(bfr);}
+	public Bry_fmtr_arg_bfr_preserve(Bry_bfr bfr) {this.bfr = bfr;} Bry_bfr bfr;
 }

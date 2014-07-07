@@ -58,16 +58,28 @@ public class Scrib_proc_args {
 		Object rv = Get_or_fail(i);
 		return (KeyVal[])rv;
 	}
-	public byte[][]	Cast_params_as_bry_ary_or_empty(int params_idx)	{
+	public byte[][]	Cast_params_as_bry_ary_or_rest_of_ary(int params_idx)	{	// PAGE:ru.w:Ленин,_Владимир_Ильич; DATE:2014-07-01 MW:LanguageLibrary.php|ConvertPlural: if (is_array($args[0])) $args = $args[0];  $forms = array_values(array_map('strval', $args));
 		if (params_idx < 0 || params_idx >= ary_len) return Bry_.Ary_empty;
-		KeyVal[] tbl = (KeyVal[])ary[params_idx].Val();
-		int rv_len = tbl.length;
-		byte[][] rv = new byte[rv_len][];
-		for (int i = 0; i < rv_len; i++) {
-			KeyVal itm = tbl[i];
-			rv[i] = Bry_.new_utf8_(String_.cast_(itm.Val()));
+		Object o = ary[params_idx].Val();
+		if (ClassAdp_.Eq_typeSafe(o, KeyVal[].class)) {
+			KeyVal[] tbl = (KeyVal[])o;
+			int rv_len = tbl.length;
+			byte[][] rv = new byte[rv_len][];
+			for (int i = 0; i < rv_len; i++) {
+				KeyVal itm = tbl[i];
+				rv[i] = Bry_.new_utf8_(String_.cast_(itm.Val()));
+			}
+			return rv;
 		}
-		return rv;
+		else {
+			int rv_len = ary_len - params_idx;
+			byte[][] rv = new byte[rv_len][];			
+			for (int i = 0; i < rv_len; i++) {
+				KeyVal itm = ary[i + params_idx];
+				rv[i] = Bry_.new_utf8_(String_.cast_(itm.Val()));
+			}
+			return rv;
+		}
 	}
 	public byte[] Extract_qry_args(Xow_wiki wiki, int idx) {
 		Object qry_args_obj = Cast_obj_or_null(idx);

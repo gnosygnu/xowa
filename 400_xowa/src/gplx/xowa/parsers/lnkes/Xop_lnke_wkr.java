@@ -198,7 +198,7 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 //			}
 		int lnke_bgn_idx = ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_lnke);
 		if (lnke_bgn_idx == -1) return ctx.Lxr_make_txt_(cur_pos);	// no lnke_bgn tkn; occurs when just ]; EX: "a]b"
-		Xop_lnke_tkn bgnTkn = (Xop_lnke_tkn)ctx.Stack_pop_til(root, src, lnke_bgn_idx, false, bgn_pos, cur_pos);
+		Xop_lnke_tkn bgnTkn = (Xop_lnke_tkn)ctx.Stack_pop_til(root, src, lnke_bgn_idx, false, bgn_pos, cur_pos, Xop_tkn_itm_.Tid_lnke);
 		bgnTkn.Src_end_(cur_pos);
 		bgnTkn.Subs_move(root);
 		return cur_pos;

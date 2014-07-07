@@ -65,7 +65,7 @@ public class Bry_bfr {
 		bfr_len += len;
 		return this;
 	}
-	public Bry_bfr Add_bfr(Bry_bfr src) {
+	public Bry_bfr Add_bfr_and_preserve(Bry_bfr src) {
 		int len = src.bfr_len;
 		if (bfr_len + len > bfr_max) Resize((bfr_max + len) * 2);
 		Bry_.Copy_by_pos(src.bfr, 0, len, bfr, bfr_len);
@@ -74,9 +74,14 @@ public class Bry_bfr {
 		return this;
 	}
 	public Bry_bfr Add_bfr_and_clear(Bry_bfr src) {
-		Add_bfr(src);
+		Add_bfr_and_preserve(src);
 		src.ClearAndReset();
 		return this;
+	}
+	public Bry_bfr Add_bfr_or_mid(boolean escaped, Bry_bfr tmp_bfr, byte[] src, int src_bgn, int src_end) {
+		return escaped
+			? this.Add_bfr_and_clear(tmp_bfr)
+			: this.Add_mid(src, src_bgn, src_end);
 	}
 	public Bry_bfr Add_bfr_trim_and_clear(Bry_bfr src, boolean trim_bgn, boolean trim_end) {return Add_bfr_trim_and_clear(src, trim_bgn, trim_end, Bry_.Trim_ary_ws);}
 	public Bry_bfr Add_bfr_trim_and_clear(Bry_bfr src, boolean trim_bgn, boolean trim_end, byte[] trim_ary) {
@@ -326,7 +331,7 @@ public class Bry_bfr {
 		else if	(o_type == Byte.class)            Add_byte(Byte_.cast_(o));           
 		else if	(o_type == Long.class)            Add_long_variable(Long_.cast_(o));  
 		else if	(o_type == String.class)          Add_str((String)o);
-		else if	(o_type == Bry_bfr.class)			Add_bfr((Bry_bfr)o);
+		else if	(o_type == Bry_bfr.class)			Add_bfr_and_preserve((Bry_bfr)o);
 		else if	(o_type == DateAdp.class)         Add_dte((DateAdp)o);
 		else if	(o_type == Io_url.class)			Add(((Io_url)o).RawBry());
 		else if	(o_type == boolean.class)			Add_yn(Bool_.cast_(o));
@@ -375,6 +380,20 @@ public class Bry_bfr {
 	public Bry_bfr Del_by(int count) {
 		int new_len = bfr_len - count;
 		if (new_len > -1) bfr_len = new_len;
+		return this;
+	}
+	public Bry_bfr Trim_end(byte trim_byte) {
+		if (bfr_len == 0) return this;
+		int count = 0;
+		for (int i = bfr_len - 1; i > -1; --i) {
+			byte b = bfr[i];
+			if (b == trim_byte)
+				++count;
+			else
+				break;
+		}
+		if (count > 0)
+			this.Del_by(count);
 		return this;
 	}
 	public Bry_bfr Concat_skip_empty(byte[] dlm, byte[]... ary) {

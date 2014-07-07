@@ -19,7 +19,7 @@ package gplx.xowa.specials; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.users.history.*;
 import gplx.xowa.specials.*;
 import gplx.xowa.specials.allPages.*; import gplx.xowa.specials.search.*; import gplx.xowa.specials.nearby.*; import gplx.xowa.specials.randoms.*; import gplx.xowa.specials.statistics.*; import gplx.xowa.xtns.translates.*; import gplx.xowa.specials.movePage.*;
-import gplx.xowa.specials.xowa.system_data.*; import gplx.xowa.specials.xowa.default_tab.*;
+import gplx.xowa.specials.xowa.system_data.*; import gplx.xowa.specials.xowa.default_tab.*; import gplx.xowa.specials.xowa.popup_history.*;
 import gplx.xowa.xtns.wdatas.*;	
 public class Xows_mgr {
 	public Xows_mgr(Xow_wiki wiki) {
@@ -40,6 +40,7 @@ public class Xows_mgr {
 	public Move_page					Page_movePage() {return page_movePage;} private Move_page page_movePage = new Move_page();
 	public System_data_page				Page_system_data() {return page_system_data;} private System_data_page page_system_data = new System_data_page();
 	public Default_tab_page				Page_default_tab() {return page_default_tab;} private Default_tab_page page_default_tab = new Default_tab_page();
+	public Popup_history_page			Page_popup_history() {return page_popup_history;} private Popup_history_page page_popup_history = new Popup_history_page();
 	public void Evt_lang_changed(Xol_lang lang) {
 		hash.Clear();
 		hash.Add_str_obj("search"								, page_search);
@@ -56,6 +57,7 @@ public class Xows_mgr {
 		hash.Add_str_obj("movePage"								, page_movePage);
 		hash.Add_str_obj("XowaSystemData"						, page_system_data);
 		hash.Add_str_obj(Default_tab_page.Ttl_name_str			, page_default_tab);
+		hash.Add_bry_obj(Popup_history_page.Ttl_name_bry		, page_popup_history);
 	}
 	public void Special_gen(Xoa_url calling_url, Xoa_page page, Xow_wiki wiki, Xoa_ttl ttl) {
 		int slash_pos = Bry_finder.Find_fwd(ttl.Page_txt_wo_qargs(), Xoa_ttl.Subpage_spr);	// check for slash

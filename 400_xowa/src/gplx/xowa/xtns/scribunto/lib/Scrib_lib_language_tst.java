@@ -98,7 +98,8 @@ public class Scrib_lib_language_tst {
 		fxt.Test_lib_proc(lib, Scrib_lib_language.Invk_convertGrammar, Object_.Ary("fi", "talo", "elative"), "talosta");
 	}
 	@Test  public void ConvertPlural() {
-		fxt.Test_lib_proc(lib, Scrib_lib_language.Invk_convertPlural, Object_.Ary("ru", 5, Kv_ary_("a", "b", "c")), "c");
+		fxt.Test_lib_proc(lib, Scrib_lib_language.Invk_convertPlural, Object_.Ary("ru", 5, Kv_ary_("a", "b", "c")), "c");			// forms in kv_ary
+		fxt.Test_lib_proc(lib, Scrib_lib_language.Invk_convertPlural, Object_.Ary("ru", 5, "a", "b", "c"), "c");					// forms as rest of ary; PAGE:ru.w:Ленин,_Владимир_Ильич DATE:2014-07-01
 	}
 	@Test  public void IsRTL() {
 		fxt.Test_lib_proc(lib, Scrib_lib_language.Invk_isRTL, Object_.Ary("en"), "false");

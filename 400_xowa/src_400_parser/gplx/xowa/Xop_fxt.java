@@ -57,8 +57,9 @@ public class Xop_fxt {
 		ctx.Clear();
 		ctx.App().Free_mem(false);
 		ctx.Cur_page().Clear();
-		ctx.Wiki().Db_mgr().Load_mgr().Clear();
-		ctx.App().Wiki_mgr().Clear();
+		wiki.Db_mgr().Load_mgr().Clear();
+		app.Wiki_mgr().Clear();
+		Io_mgr._.InitEngine_mem();	// clear created pages
 		return this;
 	}
 	public Xop_fxt Reset_for_msgs() {
@@ -373,4 +374,11 @@ public class Xop_fxt {
 		separator_mgr.Set(gplx.xowa.langs.numbers.Xol_num_mgr.Separators_key__dec, Bry_.new_utf8_(dec_spr));
 		return this;
 	}
+	public void Init_lang_kwds(int kwd_id, boolean case_match, String... kwds) {Init_lang_kwds(wiki.Lang(), kwd_id, case_match, kwds);}
+	public void Init_lang_kwds(Xol_lang lang, int kwd_id, boolean case_match, String... kwds) {
+		Xol_kwd_mgr kwd_mgr = lang.Kwd_mgr();
+		Xol_kwd_grp kwd_grp = kwd_mgr.Get_or_new(kwd_id);
+		kwd_grp.Srl_load(case_match, Bry_.Ary(kwds));
+	}
+	public void Clear_ref_mgr() {this.Page().Ref_mgr().Grps_clear();}			// clear to reset count
 }

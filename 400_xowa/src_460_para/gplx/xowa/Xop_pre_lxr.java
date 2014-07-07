@@ -73,7 +73,7 @@ class Xop_pre_lxr implements Xop_lxr {
 			if (Bry_finder.Find_fwd(src, ctx.Wiki().Ns_mgr().Ns_category().Name_db_w_colon(), txt_pos, src_len) == txt_pos)	// look for "Category:"
 				return false;														// "[[Category:" found; "\n\s[[Category:" should not close list; note that [[Category]] is invisible
 		}
-		ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_list), true, bgn_pos, cur_pos);	// "* a\n\sb" found; close *a
+		ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_list), true, bgn_pos, cur_pos, Xop_tkn_itm_.Tid_pre);	// "* a\n\sb" found; close *a
 		if (	txt_pos < src_len									// bounds check
 			&&	src[txt_pos] == Byte_ascii.NewLine) {				// NOTE: handle "*a\n\s\n" between lists; DATE:2013-07-12
 			Xop_list_wkr_.Close_list_if_present(ctx, root, src, bgn_pos, cur_pos);	// NOTE: above line only closes one list; should probably change to close all lists, but for now, close all lists only if "\n\s", not "\n"; DATE:2013-07-12

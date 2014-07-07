@@ -31,7 +31,7 @@ public class Xoctg_html_mgr implements GfoInvkAble {
 				Bld_html_v2(wiki, page, tmp_bfr);
 			else
 				Bld_html_v1(wiki, page, tmp_bfr);
-			bfr.Add_bfr(tmp_bfr.Mkr_rls());
+			bfr.Add_bfr_and_preserve(tmp_bfr.Mkr_rls());
 		}
 		catch (Exception e) { // ctg error should never cause page to fail
 			tmp_bfr.Mkr_rls();

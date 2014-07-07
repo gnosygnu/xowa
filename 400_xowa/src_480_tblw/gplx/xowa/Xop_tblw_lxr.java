@@ -38,7 +38,7 @@ class Xop_tblw_lxr implements Xop_lxr {
 					) {	
 					int lnki_pos = ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_lnki);
 					if (lnki_pos != Xop_ctx.Stack_not_found && wlxr_type == Xop_tblw_wkr.Tblw_type_td) {// lnki present;// NOTE: added Xop_tblw_wkr.Tblw_type_td b/c th should not apply when tkn_mkr.Pipe() is called below; DATE:2013-04-24
-						Xop_tkn_itm lnki_tkn = ctx.Stack_pop_til(root, src, lnki_pos, false, bgn_pos, cur_pos);	// pop any intervening nodes until lnki
+						Xop_tkn_itm lnki_tkn = ctx.Stack_pop_til(root, src, lnki_pos, false, bgn_pos, cur_pos, Xop_tkn_itm_.Tid_tblw_td);	// pop any intervening nodes until lnki
 						ctx.Stack_add(lnki_tkn);												// push lnki back onto stack; TODO: combine these 2 lines into 1
 						// NOTE: this is a "\n|" inside a [[ ]]; must create two tokens for lnki to build correctly;
 						ctx.Subs_add(root, tkn_mkr.NewLine(bgn_pos, bgn_pos + 1, Xop_nl_tkn.Tid_char, 1));

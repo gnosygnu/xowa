@@ -123,8 +123,8 @@ public class Xob_make_cmd_site implements Io_make_cmd {
 	private void Flush_reg() {
 		reg_bfr
 			.Add_int_variable(fil_count++).Add_byte(Byte_ascii.Pipe)
-			.Add_bfr(reg_key_0).Add_byte(Byte_ascii.Pipe)
-			.Add_bfr(reg_key_n).Add_byte(Byte_ascii.Pipe)
+			.Add_bfr_and_preserve(reg_key_0).Add_byte(Byte_ascii.Pipe)
+			.Add_bfr_and_preserve(reg_key_n).Add_byte(Byte_ascii.Pipe)
 			.Add_int_variable(itm_count).Add_byte(Byte_ascii.NewLine);
 		itm_count = 0;
 		reg_key_0.Clear();

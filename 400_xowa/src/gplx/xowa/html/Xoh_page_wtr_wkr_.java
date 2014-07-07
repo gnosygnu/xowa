@@ -35,7 +35,7 @@ public class Xoh_page_wtr_wkr_ {
 	public static void Bld_head_end(Bry_bfr html_bfr, Xoa_page page) {
 		byte[] head_end = page.Html_data().Custom_head_end();
 		if (head_end == null) return;
-		int insert_pos = Bry_finder.Find_fwd(html_bfr.Bfr(), Html_tags.Head_rhs);
+		int insert_pos = Bry_finder.Find_fwd(html_bfr.Bfr(), Html_tag_.Head_rhs);
 		if (insert_pos == Bry_finder.Not_found) {
 			page.App().Usr_dlg().Warn_many("", "", "could not find </head>");
 			return;
@@ -45,7 +45,7 @@ public class Xoh_page_wtr_wkr_ {
 	public static void Bld_html_end(Bry_bfr html_bfr, Xoa_page page) {
 		byte[] html_end = page.Html_data().Custom_html_end();
 		if (html_end == null) return;
-		int insert_pos = Bry_finder.Find_bwd(html_bfr.Bfr(), Html_tags.Html_rhs, html_bfr.Len());
+		int insert_pos = Bry_finder.Find_bwd(html_bfr.Bfr(), Html_tag_.Html_rhs, html_bfr.Len());
 		if (insert_pos == Bry_finder.Not_found) {
 			page.App().Usr_dlg().Warn_many("", "", "could not find </html>");
 			return;

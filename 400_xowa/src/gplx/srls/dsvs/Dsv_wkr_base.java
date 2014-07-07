@@ -26,7 +26,9 @@ public abstract class Dsv_wkr_base implements GfoInvkAble {
 		tbl_parser.Init(this, this.Fld_parsers());
 		tbl_parser.Parse(src);
 		tbl_parser.Rls();
+		Load_by_bry_end();
 	}
+	@gplx.Virtual public void Load_by_bry_end() {}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_load_by_str))			Load_by_bry(m.ReadBry("v"));
 		else	return GfoInvkAble_.Rv_unhandled;

@@ -41,7 +41,7 @@ public class Scrib_lib_site_tst {
 //			fxt.Test_lib_proc(lib, Scrib_lib_site.Invk_loadSiteStats, Object_.Ary_empty, "1;2;3;4;5;6;7");
 //		}
 	@Test   public void Init_lib_site() {
-		Xow_ns_mgr ns_mgr = new Xow_ns_mgr();
+		Xow_ns_mgr ns_mgr = new Xow_ns_mgr(fxt.Core().Wiki().Lang().Case_mgr());
 		ns_mgr.Add_new(Scrib_xtn_mgr.Ns_id_module, "Module");
 		ns_mgr.Add_new(Scrib_xtn_mgr.Ns_id_module_talk, "Module talk");
 		ns_mgr.Add_new(Xow_ns_.Id_special, "Special");

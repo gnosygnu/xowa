@@ -16,12 +16,14 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.xtns.gallery.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.poems.*; import gplx.xowa.xtns.hiero.*;
+import gplx.xowa.xtns.gallery.*; import gplx.xowa.xtns.cite.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.poems.*; import gplx.xowa.xtns.hiero.*;
 import gplx.xowa.xtns.scores.*; import gplx.xowa.xtns.listings.*; import gplx.xowa.xtns.titleBlacklists.*;
 public class Xow_xtn_mgr implements GfoInvkAble {
 	private OrderedHash regy = OrderedHash_.new_bry_();
 	public int Count() {return regy.Count();}
+	public Cite_xtn_mgr Xtn_cite() {return xtn_cite;} private Cite_xtn_mgr xtn_cite;
 	public Xow_xtn_mgr Ctor_by_app(Xoa_app app) {	// NOTE: needed for options
+		Add(app, new Cite_xtn_mgr());
 		Add(app, new Scrib_xtn_mgr());
 		Add(app, new Gallery_xtn_mgr());
 		Add(app, new Poem_xtn_mgr());
@@ -40,6 +42,7 @@ public class Xow_xtn_mgr implements GfoInvkAble {
 			Xox_mgr mgr = proto.Clone_new();
 			mgr.Xtn_ctor_by_wiki(wiki);
 			regy.Add(mgr.Xtn_key(), mgr);
+			Set_members(mgr);
 		}
 		return this;
 	}
@@ -63,7 +66,11 @@ public class Xow_xtn_mgr implements GfoInvkAble {
 	private Xox_mgr Add(Xoa_app app, Xox_mgr xtn) {
 		xtn.Xtn_ctor_by_app(app);
 		regy.Add(xtn.Xtn_key(), xtn);
+		Set_members(xtn);
 		return xtn;
+	}
+	private void Set_members(Xox_mgr mgr) {
+		if (Bry_.Eq(mgr.Xtn_key(), Cite_xtn_mgr.XTN_KEY)) xtn_cite = (Cite_xtn_mgr)mgr;
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_get))				return Get_or_fail(m.ReadBry("v"));

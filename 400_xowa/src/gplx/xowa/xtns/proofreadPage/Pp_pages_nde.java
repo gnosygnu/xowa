@@ -346,7 +346,7 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 			lst_pfunc_wkr.Init_include(ttl.Full_db(), cur_sect_bgn, cur_sect_end).Exec(page_bfr, ctx);
 			ctx.Tmpl_prepend_nl(full_bfr, page_bfr.Bfr(), page_bfr.Len());
 			full_bfr.Add_bfr_and_clear(page_bfr);
-			full_bfr.Add(gplx.html.Html_consts.Space_bry);
+			full_bfr.Add(gplx.html.Html_entity_.Space_bry);
 		}			
 		page_bfr.Mkr_rls();
 		ctx.Tmpl_output_(null);

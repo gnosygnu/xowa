@@ -107,16 +107,31 @@ public class Xop_under_lxr_tst {
 	@Test  public void Eos() {	// PURPOSE: check that __ at eos doesn't fail; es.s:Luisa de Bustamante: 3; DATE:2014-02-15
 		fxt.Test_parse_page_all_str("__", "__");
 	}
-	@Test  public void Ws_preserve() {	// preserve ws; DATE:2014-04-07
+	@Test  public void Pre_toc() {				// PURPOSE: make sure that "\n\s__TOC" does not create pre; PAGE:de.w:Main_Page; DATE:2014-04-07
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
+		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 		(	"a"
-		,	" __TOC__ "
+		,	" __TOC__ "							// NOTE: this should not be a pre; DATE:2014-07-05
 		,	"b"
 		), String_.Concat_lines_nl
 		(	"<p>a"
 		,	"</p>"
-		,	" "
+		,	" "									// NOTE: \s should not be captured, but leaving for now
+		,	""
+		,	"<p>b"
+		,	"</p>"
+		));
+		fxt.Init_para_n_();
+	}
+	@Test  public void Pre_notoc() {			// PURPOSE: make sure that "\n\s__NOTOC" does not create pre. note that mechanism is different from TOC; DATE:2014-07-05
+		fxt.Init_para_y_();
+		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		(	"a"
+		,	" __NOTOC__ "						// NOTE: does not capture " "; confirmed against MW
+		,	"b"
+		), String_.Concat_lines_nl
+		(	"<p>a"
+		,	"</p>"
 		,	""
 		,	"<p>b"
 		,	"</p>"
@@ -125,9 +140,15 @@ public class Xop_under_lxr_tst {
 	}
 	@Test  public void Hook_alt() {	// PURPOSE: ja wikis use alternate __; DATE:2014-03-04
 		Xow_wiki wiki = fxt.Wiki(); Xol_lang lang = wiki.Lang();
-		Xol_kwd_grp kwd_grp = lang.Kwd_mgr().Get_or_new(Xol_kwd_grp_.Id_toc);
-		kwd_grp.Srl_load(true, new byte[][] {Bry_.new_utf8_("＿＿TOC＿＿")});
+		fxt.Init_lang_kwds(lang, Xol_kwd_grp_.Id_toc, true, "＿＿TOC＿＿");
 		wiki.Parser().Init_by_lang(lang);
 		fxt.Test_parse_page_all_str("a＿＿TOC＿＿b", "ab");
+	}
+	@Test  public void Hook_utf8() {	// PURPOSE: ja wikis use alternate __; DATE:2014-03-04
+		Xow_wiki wiki = fxt.Wiki(); Xol_lang lang = wiki.Lang();
+		fxt.Init_lang_kwds(lang, Xol_kwd_grp_.Id_toc, false, "__TOC__");
+		wiki.Parser().Init_by_lang(lang);
+		fxt.Test_parse_page_all_str("a__TOC__b", "ab");
+		fxt.Test_parse_page_all_str("a__toc__b", "ab");
 	}
 }

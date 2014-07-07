@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.xtns.refs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.cite; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.html.*;
 public class References_nde implements Xox_xnde, Xop_xnde_atr_parser {
 	public byte[] Group() {return group;} public References_nde Group_(byte[] v) {group = v; return this;} private byte[] group = Bry_.Empty;
@@ -26,11 +26,11 @@ public class References_nde implements Xox_xnde, Xop_xnde_atr_parser {
 		switch (xatr_key.Val()) {
 			case Xatr_id_group:		{
 				group = xatr.Val_as_bry(src);
-				if (Bry_.Match(group, Bry_group)) group = Bry_.Empty;  // HACK: reflist returns <references group>
+				if (Bry_.Eq(group, wiki.Xtn_mgr().Xtn_cite().Group_default_name())) group = Bry_.Empty;	// if group == default, make it same as empty; DATE:2014-07-03
 				break;
 			}
 		}
-	}	private static byte[] Bry_group = Bry_.new_ascii_("group");
+	}
 	public void Xtn_parse(Xow_wiki wiki, Xop_ctx ctx, Xop_root_tkn cur_root, byte[] src, Xop_xnde_tkn xnde) {
 		if (ctx.Tid_is_popup()) return;
 		Ref_itm_mgr ref_mgr = ctx.Cur_page().Ref_mgr();

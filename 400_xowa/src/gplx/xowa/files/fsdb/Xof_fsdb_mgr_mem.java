@@ -93,6 +93,7 @@ public class Xof_fsdb_mgr_mem implements Xof_fsdb_mgr, Xof_bin_wkr {
 		}
 		Xof_fsdb_mgr_._.Fsdb_search(this, fs_dir, page, exec_tid, itms, bin_mgr.Repo_mgr(), url_bldr);
 	}
+	public boolean Reg_select_itm_exists(byte[] ttl) {return reg_hash.Has(ttl);}
 	public byte Bin_wkr_tid() {return Xof_bin_wkr_.Tid_fsdb_wiki;}
 	public gplx.ios.Io_stream_rdr Bin_wkr_get_as_rdr(ListAdp temp_files, Xof_fsdb_itm itm, boolean is_thumb, int w) {
 		byte[] wiki = itm.Orig_wiki();

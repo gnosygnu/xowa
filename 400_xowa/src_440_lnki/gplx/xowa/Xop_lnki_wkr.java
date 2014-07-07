@@ -53,7 +53,7 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 		}
 		int lvl_pos = ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_lnki);
 		if (lvl_pos == Xop_ctx.Stack_not_found) return ctx.Lxr_make_txt_(cur_pos);	// "]]" found but no "[[" in stack; interpet "]]" literally
-		Xop_lnki_tkn lnki = (Xop_lnki_tkn)ctx.Stack_pop_til(root, src, lvl_pos, false, bgn_pos, cur_pos);
+		Xop_lnki_tkn lnki = (Xop_lnki_tkn)ctx.Stack_pop_til(root, src, lvl_pos, false, bgn_pos, cur_pos, Xop_tkn_itm_.Tid_lnki_end);
 		if (!arg_bldr.Bld(ctx, tkn_mkr, this, Xop_arg_wkr_.Typ_lnki, root, lnki, bgn_pos, cur_pos, lnki.Tkn_sub_idx() + 1, root.Subs_len(), src))
 			return Xop_lnki_wkr_.Invalidate_lnki(ctx, src, root, lnki, bgn_pos);
 		cur_pos = Xop_lnki_wkr_.Chk_for_tail(ctx.Lang(), src, cur_pos, src_len, lnki);

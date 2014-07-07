@@ -16,9 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.wikis.*; import gplx.xowa.net.*;
+import gplx.html.*; import gplx.xowa.wikis.*; import gplx.xowa.net.*;
 import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*;
-import gplx.xowa.xtns.*; import gplx.xowa.xtns.dynamicPageList.*; import gplx.xowa.xtns.math.*; import gplx.xowa.langs.vnts.*; import gplx.xowa.xtns.refs.*;
+import gplx.xowa.xtns.*; import gplx.xowa.xtns.dynamicPageList.*; import gplx.xowa.xtns.math.*; import gplx.xowa.langs.vnts.*; import gplx.xowa.xtns.cite.*;
 public class Xoh_html_wtr {
 	private Xow_wiki wiki; private Xoa_app app; private Xoa_page page; private Xop_xatr_whitelist_mgr whitelist_mgr;
 	public Xoh_html_wtr(Xow_wiki wiki, Xow_html_mgr html_mgr) {
@@ -583,9 +583,9 @@ public class Xoh_html_wtr {
 							break;
 						default:
 							byte[] tag_name = sub_xnde.Tag().Name_bry();
-							bfr.Add(Xop_xnde_wkr.Bry_escape_lt).Add(tag_name);
+							bfr.Add(Html_entity_.Lt_bry).Add(tag_name);
 							if (xnde.Atrs_bgn() > Xop_tblw_wkr.Atrs_ignore_check) Xnde_atrs(sub_xnde.Tag().Id(), hctx, src, sub_xnde.Atrs_bgn(), sub_xnde.Atrs_end(), xnde.Atrs_ary(), bfr);
-							bfr.Add(Xop_xnde_wkr.Bry_escape_gt);
+							bfr.Add(Html_entity_.Gt_bry);
 							break;
 					}
 					Xnde_subs_escape(ctx, hctx, bfr, src, sub_xnde, amp_enable, false);

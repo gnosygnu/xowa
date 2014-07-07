@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.parsers.amps.*;
+import gplx.html.*; import gplx.xowa.parsers.amps.*;
 public class Xoh_html_wtr_escaper {
 	public static byte[] Escape(Xoa_app app, Bry_bfr tmp_bfr, byte[] src) {
 		Escape(app, tmp_bfr, src, 0, src.length, true, false);
@@ -40,17 +40,17 @@ public class Xoh_html_wtr_escaper {
 							}
 						}
 					}
-					bfr.Add(Xop_xnde_wkr.Bry_escape_lt);
+					bfr.Add(Html_entity_.Lt_bry);
 					break;
 				case Byte_ascii.Gt:
-					bfr.Add(Xop_xnde_wkr.Bry_escape_gt);
+					bfr.Add(Html_entity_.Gt_bry);
 					break;
 				case Byte_ascii.Amp:
 					if (interpret_amp) {
 						int text_bgn = i + 1;	// i is &; i + 1 is first char after amp
 						Object o = (text_bgn < end) ? amp_trie.MatchAtCur(src, text_bgn, end) : null;	// check if this is a valid &; note must check that text_bgn < end or else arrayIndex error; occurs when src is just "&"; DATE:2013-12-19
 						if (o == null)										// invalid; EX: "a&b"; "&bad;"; "&#letters;"; 
-							bfr.Add(Xop_xnde_wkr.Bry_escape_amp);			// escape & and continue
+							bfr.Add(Html_entity_.Amp_bry);					// escape & and continue
 						else {												// is either (1) a name or (2) an ncr (hex/dec)
 							Xop_amp_trie_itm itm = (Xop_amp_trie_itm)o;
 							int match_pos = amp_trie.Match_pos();
@@ -67,15 +67,15 @@ public class Xoh_html_wtr_escaper {
 									i = end_pos - 1;
 								}
 								else										// parse failed; escape and continue
-									bfr.Add(Xop_xnde_wkr.Bry_escape_amp);
+									bfr.Add(Html_entity_.Amp_bry);
 							}
 						}
 					}
 					else
-						bfr.Add(Xop_xnde_wkr.Bry_escape_amp);
+						bfr.Add(Html_entity_.Amp_bry);
 					break;
 				case Byte_ascii.Quote:
-					bfr.Add(Xop_xnde_wkr.Bry_escape_quote);
+					bfr.Add(Html_entity_.Quote_bry);
 					break;
 				default:
 					bfr.Add_byte(b);

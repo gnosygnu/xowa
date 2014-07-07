@@ -37,26 +37,27 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 		show_init_word_count = api_popups.Show_init_word_count();
 		show_more_word_count = api_popups.Show_more_word_count();
 		Ns_allowed_(api_popups.Ns_allowed());
-		parser.Show_all_if_less_than_(api_popups.Show_all_if_less_than());
-		parser.Xnde_ignore_ids_(api_popups.Xnde_ignore_ids());
-		parser.Scan_len_(api_popups.Scan_len());
-		parser.Scan_max_(api_popups.Scan_max());
-		parser.Html_fmtr().Fmt_(api_popups.Html_fmt());
-		parser.Read_til_stop_fwd_(api_popups.Read_til_stop_fwd());
-		parser.Read_til_stop_bwd_(api_popups.Read_til_stop_bwd());
+		parser.Cfg().Show_all_if_less_than_(api_popups.Show_all_if_less_than());
+		parser.Cfg().Tmpl_read_len_(api_popups.Scan_len());
+		parser.Cfg().Tmpl_read_max_(api_popups.Scan_max());
+		parser.Cfg().Read_til_stop_fwd_(api_popups.Read_til_stop_fwd());
+		parser.Cfg().Read_til_stop_bwd_(api_popups.Read_til_stop_bwd());
+		parser.Cfg().Stop_if_hdr_after_(api_popups.Stop_if_hdr_after());
 		parser.Tmpl_tkn_max_(api_popups.Tmpl_tkn_max());
+		if (!Env_.Mode_testing())
+			parser.Tmpl_keeplist_init_(api_popups.Tmpl_keeplist());
+		parser.Wrdx_mkr().Xnde_ignore_ids_(api_popups.Xnde_ignore_ids());
+		parser.Html_mkr().Fmtr_popup().Fmt_(api_popups.Html_fmtr_popup());
+		parser.Html_mkr().Fmtr_viewed().Fmt_(api_popups.Html_fmtr_viewed());
+		parser.Html_mkr().Fmtr_wiki().Fmt_(api_popups.Html_fmtr_wiki());
+		parser.Html_mkr().Fmtr_next_sect().Fmt_(api_popups.Html_fmtr_next_sect_fmt());
 		GfoEvMgr_.SubSame_many(api_popups, this
-		, Xoapi_popups.Evt_show_init_word_count_changed
-		, Xoapi_popups.Evt_show_more_word_count_changed
-		, Xoapi_popups.Evt_show_all_if_less_than_changed
-		, Xoapi_popups.Evt_xnde_ignore_ids_changed
-		, Xoapi_popups.Evt_scan_len_changed
-		, Xoapi_popups.Evt_scan_max_changed
-		, Xoapi_popups.Evt_html_fmt_changed
-		, Xoapi_popups.Evt_read_til_stop_fwd_changed
-		, Xoapi_popups.Evt_read_til_stop_bwd_changed
+		, Xoapi_popups.Evt_show_init_word_count_changed, Xoapi_popups.Evt_show_more_word_count_changed , Xoapi_popups.Evt_show_all_if_less_than_changed
+		, Xoapi_popups.Evt_scan_len_changed, Xoapi_popups.Evt_scan_max_changed
+		, Xoapi_popups.Evt_read_til_stop_fwd_changed, Xoapi_popups.Evt_read_til_stop_bwd_changed, Xoapi_popups.Evt_stop_if_hdr_after_changed
 		, Xoapi_popups.Evt_ns_allowed_changed
-		, Xoapi_popups.Evt_tmpl_tkn_max_changed
+		, Xoapi_popups.Evt_xnde_ignore_ids_changed, Xoapi_popups.Evt_tmpl_tkn_max_changed, Xoapi_popups.Evt_tmpl_keeplist_changed
+		, Xoapi_popups.Evt_html_fmtr_popup_changed, Xoapi_popups.Evt_html_fmtr_viewed_changed, Xoapi_popups.Evt_html_fmtr_wiki_changed, Xoapi_popups.Evt_html_fmtr_next_sect_changed
 		);
 	}
 	public String Show_init(byte[] href, int id) {
@@ -93,14 +94,15 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 		try {
 			synchronized (async_thread_guard) {
 				if (itm.Canceled()) return null;
-				cur_page.Popup_itms().AddReplace(itm.Popup_id(), itm);
+				cur_page.Popup_mgr().Itms().AddReplace(itm.Popup_id(), itm);
 				app.Href_parser().Parse(temp_href, itm.Page_href(), wiki, cur_page.Ttl().Page_url());
 				Xow_wiki popup_wiki = app.Wiki_mgr().Get_by_key_or_null(temp_href.Wiki());
 				popup_wiki.Init_assert();
 				Xoa_ttl popup_ttl = Xoa_ttl.parse_(popup_wiki, temp_href.Page());
 				if (ns_allowed_regy.Count() > 0 && !ns_allowed_regy.Has(ns_allowed_regy_key.Val_(popup_ttl.Ns().Id()))) return Bry_.Empty;
+				itm.Init(popup_wiki.Domain_bry(), popup_ttl);
 				Xoa_page popup_page = popup_wiki.Data_mgr().Get_page(popup_ttl, false);
-				byte[] rv = popup_wiki.Html_mgr().Module_mgr().Popup_mgr().Parser().Parse(itm, popup_page, wiki.Domain_bry(), cur_page.Tab());
+				byte[] rv = popup_wiki.Html_mgr().Module_mgr().Popup_mgr().Parser().Parse(wiki, popup_page, cur_page.Tab(), itm);
 				Xog_win_itm__prog_href_mgr.Hover(app, cur_page, String_.new_utf8_(itm.Page_href())); // set page ttl again in prog bar; DATE:2014-06-28
 				return rv;
 			}
@@ -163,20 +165,26 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 		return (Int_obj_ref[])rv.XtoAry(Int_obj_ref.class);
 	}	private HashAdp ns_allowed_regy = HashAdp_.new_(); private Int_obj_ref ns_allowed_regy_key = Int_obj_ref.zero_();
 	private Xoa_page Cur_page() {return app.Gui_mgr().Browser_win().Active_page();}
-	private Xow_popup_itm Itms_get_or_null(Xoa_page page, String popup_id) {return (Xow_popup_itm)page.Popup_itms().Fetch(popup_id);}
+	private Xow_popup_itm Itms_get_or_null(Xoa_page page, String popup_id) {return (Xow_popup_itm)page.Popup_mgr().Itms().Fetch(popup_id);}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_show_popup_async))								Show_popup_async();
 		else if	(ctx.Match(k, Invk_show_popup))										Show_popup();
 		else if	(ctx.Match(k, Xoapi_popups.Evt_show_init_word_count_changed))		show_init_word_count = m.ReadInt("v");
 		else if	(ctx.Match(k, Xoapi_popups.Evt_show_more_word_count_changed))		show_more_word_count = m.ReadInt("v");
-		else if	(ctx.Match(k, Xoapi_popups.Evt_show_all_if_less_than_changed))		parser.Show_all_if_less_than_(m.ReadInt("v"));
-		else if	(ctx.Match(k, Xoapi_popups.Evt_xnde_ignore_ids_changed))			parser.Xnde_ignore_ids_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Xoapi_popups.Evt_scan_len_changed))					parser.Scan_len_(m.ReadInt("v"));
-		else if	(ctx.Match(k, Xoapi_popups.Evt_scan_max_changed))					parser.Scan_max_(m.ReadInt("v"));
-		else if	(ctx.Match(k, Xoapi_popups.Evt_html_fmt_changed))					parser.Html_fmtr().Fmt_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Xoapi_popups.Evt_read_til_stop_fwd_changed))			parser.Read_til_stop_fwd_(m.ReadInt("v"));
+		else if	(ctx.Match(k, Xoapi_popups.Evt_show_all_if_less_than_changed))		parser.Cfg().Show_all_if_less_than_(m.ReadInt("v"));
+		else if	(ctx.Match(k, Xoapi_popups.Evt_xnde_ignore_ids_changed))			parser.Wrdx_mkr().Xnde_ignore_ids_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Xoapi_popups.Evt_scan_len_changed))					parser.Cfg().Tmpl_read_len_(m.ReadInt("v"));
+		else if	(ctx.Match(k, Xoapi_popups.Evt_scan_max_changed))					parser.Cfg().Tmpl_read_max_(m.ReadInt("v"));
+		else if	(ctx.Match(k, Xoapi_popups.Evt_read_til_stop_bwd_changed))			parser.Cfg().Read_til_stop_bwd_(m.ReadInt("v"));
+		else if	(ctx.Match(k, Xoapi_popups.Evt_read_til_stop_fwd_changed))			parser.Cfg().Read_til_stop_fwd_(m.ReadInt("v"));
+		else if	(ctx.Match(k, Xoapi_popups.Evt_stop_if_hdr_after_changed))			parser.Cfg().Stop_if_hdr_after_(m.ReadInt("v"));
 		else if	(ctx.Match(k, Xoapi_popups.Evt_ns_allowed_changed))					Ns_allowed_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Xoapi_popups.Evt_tmpl_tkn_max_changed))				parser.Tmpl_tkn_max_(m.ReadInt("v"));
+		else if	(ctx.Match(k, Xoapi_popups.Evt_tmpl_keeplist_changed))				parser.Tmpl_keeplist_init_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Xoapi_popups.Evt_html_fmtr_popup_changed))			parser.Html_mkr().Fmtr_popup().Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Xoapi_popups.Evt_html_fmtr_viewed_changed))			parser.Html_mkr().Fmtr_viewed().Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Xoapi_popups.Evt_html_fmtr_wiki_changed))				parser.Html_mkr().Fmtr_wiki().Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Xoapi_popups.Evt_html_fmtr_next_sect_changed))		parser.Html_mkr().Fmtr_next_sect().Fmt_(m.ReadBry("v"));
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}

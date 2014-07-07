@@ -70,7 +70,16 @@ public class Byte_ascii {
 		  ;
 	}
 	public static final byte[]
-	  Dot_bry		= new byte[] {Byte_ascii.Dot}
-	, NewLine_bry	= new byte[] {Byte_ascii.NewLine}
+	  Dot_bry				= new byte[] {Byte_ascii.Dot}
+	, NewLine_bry			= new byte[] {Byte_ascii.NewLine}
+	, Colon_bry				= new byte[] {Byte_ascii.Colon}
+	, Lt_bry				= new byte[] {Byte_ascii.Lt}
+	, Gt_bry				= new byte[] {Byte_ascii.Gt}
+	, Brack_bgn_bry			= new byte[] {Byte_ascii.Brack_bgn}
+	, Apos_bry				= new byte[] {Byte_ascii.Apos}
+	, Pipe_bry				= new byte[] {Byte_ascii.Pipe}
+	, Underline_bry			= new byte[] {Byte_ascii.Underline}
+	, Asterisk_bry			= new byte[] {Byte_ascii.Asterisk}
+	, Space_bry				= new byte[] {Byte_ascii.Space}
 	;
 }

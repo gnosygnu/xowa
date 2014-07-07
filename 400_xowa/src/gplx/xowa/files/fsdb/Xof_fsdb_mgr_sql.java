@@ -80,6 +80,7 @@ public class Xof_fsdb_mgr_sql implements Xof_fsdb_mgr, GfoInvkAble {
 		bin_wkr_fsdb = new Xof_bin_wkr_fsdb_sql(this).Bin_bfr_len_(64 * Io_mgr.Len_kb);	// most thumbs are 40 kb
 		cache_mgr = wiki.App().File_mgr().Cache_mgr();
 	}	private boolean init = false;
+	public boolean Reg_select_itm_exists(byte[] ttl) {return Xof_wiki_orig_tbl.Select_itm_exists(img_regy_provider, ttl);}
 	public void Reg_select_only(Xoa_page page, byte exec_tid, ListAdp itms, OrderedHash hash) {
 		Xof_wiki_orig_tbl.Select_list(wiki.App().Usr_dlg(), img_regy_provider, exec_tid, itms, hash, url_bldr, bin_mgr.Repo_mgr());
 	}

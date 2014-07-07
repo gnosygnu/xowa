@@ -48,7 +48,7 @@ public class Xol_vnt_mgr implements GfoInvkAble {
 			if (i == 0) cur_vnt = itm.Key();	// default to 1st item
 		}
 	}
-	public Xodb_page Convert_ttl(Xow_wiki wiki, Xoa_ttl ttl) {return Convert_ttl(wiki, ttl.Ns(), ttl.Full_db());}
+	public Xodb_page Convert_ttl(Xow_wiki wiki, Xoa_ttl ttl) {return Convert_ttl(wiki, ttl.Ns(), ttl.Page_db());}	// NOTE: not Full_db as ttl.Ns is passed; EX:Шаблон:Šablon:Jez-eng; PAGE:sr.w:ДНК DATE:2014-07-06
 	public Xodb_page Convert_ttl(Xow_wiki wiki, Xow_ns ns, byte[] ttl_bry) {
 		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
 		Xodb_page rv = Convert_ttl(wiki, tmp_bfr, ns, ttl_bry);
@@ -56,7 +56,7 @@ public class Xol_vnt_mgr implements GfoInvkAble {
 		return rv;
 	}
 	public Xodb_page Convert_ttl(Xow_wiki wiki, Bry_bfr tmp_bfr, Xow_ns ns, byte[] ttl_bry) {	// REF.MW:LanguageConverter.php|findVariantLink
-		int converted = Convert_ttl_convert(tmp_bfr, ns, ttl_bry);			// convert ttl for each vnt
+		int converted = Convert_ttl_convert(wiki, tmp_bfr, ns, ttl_bry);	// convert ttl for each vnt
 		if (converted == 0) return Xodb_page.Null;							// ttl_bry has no conversions; exit;
 		wiki.Db_mgr().Load_mgr().Load_by_ttls(Cancelable_.Never, tmp_page_list, true, 0, converted);
 		for (int i = 0; i < converted; i++) {
@@ -65,15 +65,17 @@ public class Xol_vnt_mgr implements GfoInvkAble {
 		}
 		return Xodb_page.Null;
 	}
-	private int Convert_ttl_convert(Bry_bfr tmp_bfr, Xow_ns ns, byte[] ttl_bry) {
+	private int Convert_ttl_convert(Xow_wiki wiki, Bry_bfr tmp_bfr, Xow_ns ns, byte[] ttl_bry) {
 		tmp_page_list.Clear();
 		int rv = 0;
-		for (int i = 0; i < converter_ary_len; i++) {				// convert ttl for each variant
+		for (int i = 0; i < converter_ary_len; i++) {					// convert ttl for each variant
 			Xol_vnt_converter converter = converter_ary[i];
 			tmp_bfr.Clear();
 			if (!converter.Convert_text(tmp_bfr, ttl_bry)) continue;	// ttl is not converted for variant; ignore
+			Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ns.Id(), tmp_bfr.XtoAryAndClear());	// NOTE: must convert to ttl in order to upper 1st letter; EX:{{jez-eng|sense}} -> Jez-eng; PAGE:sr.w:ДНК DATE:2014-07-06
+			if (ttl == null) continue;
 			Xodb_page page = new Xodb_page();
-			page.Ttl_(ns, tmp_bfr.XtoAryAndClear());
+			page.Ttl_(ns, ttl.Page_db());
 			byte[] converted_ttl = page.Ttl_w_ns();
 			if (tmp_page_list.Has(converted_ttl)) continue;
 			tmp_page_list.Add(converted_ttl, page);

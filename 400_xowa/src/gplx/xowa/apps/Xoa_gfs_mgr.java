@@ -37,7 +37,12 @@ public class Xoa_gfs_mgr implements GfoInvkAble, GfoInvkRootWkr {
 		else if	(String_.Eq(type, "xowa_user_cfg"))		url = fsys_mgr.App_data_cfg_user_fil();
 		else if	(String_.Eq(type, "xowa"))				url = app.Fsys_mgr().Root_dir().GenSubFil("xowa.gfs");
 		else											throw Err_mgr._.fmt_(GRP_KEY, "invalid_gfs_type", "invalid gfs type: ~{0}", type);
-		Run_url(url);
+		try {Run_url(url);}
+		catch (Exception e) {				// gfs is corrupt; may happen if multiple XOWAs opened, and "Close all" chosen in OS; DATE:2014-07-01
+			if	(!String_.Eq(type, "xowa"))			// check if user.gfs
+				Io_mgr._.MoveFil(url, url.GenNewNameOnly(url.NameOnly() + "-" + DateAdp_.Now().XtoStr_fmt_yyyyMMdd_HHmmss()));	// move file
+			app.Usr_dlg().Warn_many("", "", "invalid gfs; obsoleting: src=~{0} err=~{1}", url.Raw(), Err_.Message_gplx(e));
+		}
 	}
 	public GfoMsg Parse_root_msg(String v) {return gplx.gfs.Gfs_msg_bldr._.ParseToMsg(v);}
 	public Gfs_wtr Wtr() {return wtr;} private Gfs_wtr wtr = new Gfs_wtr();

@@ -40,6 +40,11 @@ public class Xop_xnde_wkr__xatrs_tst {
 	@Test  public void Id_encode() {
 		fxt.Test_parse_page_all_str("<div id=\"a b c\"></div>", "<div id=\"a_b_c\"></div>");
 	}
+	@Test  public void Lt_should_not_be_escaped_in_input() {	// PURPOSE: options textboxes were escaped if input's value had "<"; DATE:2014-07-04
+		fxt.Page().Html_data().Restricted_n_();
+		fxt.Test_parse_page_wiki_str("<input value='a<'></input>", "<input value='a<'></input>");	// NOTE: do not call parse_page_all_str which will call Page.Clear and reset Restricted
+		fxt.Page().Html_data().Restricted_y_();
+	}
 //		@Test  public void Unclosed() {	// PURPOSE: unclosed atr should be treated as key, which should be ignored; EX.WP:Palace of Versailles
 //			fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 //			(	"<span id=\"1�>a"		// id="1� -> key named 'id="1�' which fails whitelist keys

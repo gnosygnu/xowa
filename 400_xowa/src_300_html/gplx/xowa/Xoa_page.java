@@ -17,7 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.xowa.gui.*; import gplx.xowa.gui.views.*; import gplx.xowa.html.*;
-import gplx.xowa.files.*; import gplx.xowa.xtns.refs.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.html.tocs.*;
+import gplx.xowa.files.*; import gplx.xowa.xtns.cite.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.html.tocs.*;
+import gplx.xowa.html.modules.popups.*;
 public class Xoa_page {
 	Xoa_page(Xow_wiki wiki, Xoa_ttl ttl) {
 		this.wiki = wiki; this.ttl = ttl;
@@ -51,7 +52,7 @@ public class Xoa_page {
 	public Xof_lnki_file_mgr	Lnki_file_mgr() {return lnki_file_mgr;} private Xof_lnki_file_mgr lnki_file_mgr = new Xof_lnki_file_mgr();
 	public Xop_lnki_logger_redlinks_mgr Lnki_redlinks_mgr() {return lnki_redlinks_mgr;} private Xop_lnki_logger_redlinks_mgr lnki_redlinks_mgr;
 	public Ref_itm_mgr			Ref_mgr() {return ref_mgr;} private Ref_itm_mgr ref_mgr = new Ref_itm_mgr();
-	public HashAdp				Popup_itms() {return popup_itms;} private HashAdp popup_itms = HashAdp_.new_(); 
+	public Xopg_popup_mgr		Popup_mgr() {return popup_mgr;} private Xopg_popup_mgr popup_mgr = new Xopg_popup_mgr();
 	public Xoh_xtn_mgr			Xtn_mgr() {return xtn_mgr;} private Xoh_xtn_mgr xtn_mgr = new Xoh_xtn_mgr();
 	public ListAdp				Xwiki_langs() {return xwiki_langs;} private ListAdp xwiki_langs = ListAdp_.new_();
 	public boolean					Lang_convert_content() {return lang_convert_content;} public Xoa_page Lang_convert_content_(boolean v) {lang_convert_content = v; return this;} private boolean lang_convert_content = true;
@@ -89,7 +90,7 @@ public class Xoa_page {
 		pages_recursed = false;
 		tmpl_stack_ary = Bry_.Ary_empty;
 		tmpl_stack_ary_len = tmpl_stack_ary_max = 0;
-		popup_itms.Clear();
+		popup_mgr.Clear();
 	}
 	public static final Xoa_page Empty = new Xoa_page().Missing_();
 	public static final Xoa_page Null = null;

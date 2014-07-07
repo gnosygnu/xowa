@@ -57,21 +57,28 @@ public class Xop_curly_wkr implements Xop_ctx_wkr {
 				return lxr_end_pos;
 			}
 
-			Xop_curly_bgn_tkn bgn_tkn = (Xop_curly_bgn_tkn)ctx.Stack_pop_til(root, src, acs_pos, true, lxr_bgn_pos, lxr_end_pos);	// NOTE: in theory, an unclosed [[ can be on stack; for now, ignore
+			Xop_curly_bgn_tkn bgn_tkn = (Xop_curly_bgn_tkn)ctx.Stack_pop_til(root, src, acs_pos, true, lxr_bgn_pos, lxr_end_pos, Xop_tkn_itm_.Tid_tmpl_curly_bgn);	// NOTE: in theory, an unclosed [[ can be on stack; for now, ignore
 			int bgn_tkn_len = bgn_tkn.Src_end() - bgn_tkn.Src_bgn();
 			int bgn_tkn_pos_bgn = bgn_tkn.Src_bgn();// save original pos_bgn
 			boolean vnt_dash_adjust = false;
-			if (vnt_enabled) {
+			if (vnt_enabled ) {
 				int curly_bgn_dash = bgn_tkn.Src_bgn() - 1;
-				if (curly_bgn_dash > -1 && src[curly_bgn_dash] == Byte_ascii.Dash) {			// "-" before curlies; EX: "-{{"
+				if (curly_bgn_dash > -1 && src[curly_bgn_dash] == Byte_ascii.Dash) {			// "-" exists before curlies; EX: "-{{"
 					int curly_end_dash = lxr_end_pos;
-					if (curly_end_dash < src_len && src[curly_end_dash] == Byte_ascii.Dash) {	// "-" after curlies;  EX: "}}-"
+					if (curly_end_dash < src_len && src[curly_end_dash] == Byte_ascii.Dash) {	// "-" exists after curlies;  EX: "}}-"
 						if (bgn_tkn_len > 2 && end_tkn_len > 2) {	// more than 3 curlies at bgn / end with flanking dashes; EX: "-{{{ }}}-"; NOTE: 3 is needed b/c 2 will never be reduced; EX: "-{{" will always be "-" and "{{", not "-{" and "{"
-							--bgn_tkn_len;		// reduce bgn curlies by 1; EX: "{{{" -> "{{"
-							++bgn_tkn_pos_bgn;	// add one to bgn tkn_pos;
-							--end_tkn_len;		// reduce end curlies by 1; EX: "}}}" -> "}}"
-							--lxr_end_pos;		// reduce end by 1; this will "reprocess" the final "}" as a text tkn; EX: "}}}-" -> "}}" and position before "}-"
-							vnt_dash_adjust = true;
+							int numeric_val = Bry_.X_to_int_or(src, bgn_tkn.Src_end(), lxr_bgn_pos, -1);
+							if (	numeric_val != -1						// do not apply if numeric val; EX:"-{{{0}}}-" vs "-{{{#expr:0}}}-" sr.w:Template:Link_FA
+								&&	bgn_tkn_len == 3 && end_tkn_len == 3	// exactly 3 tokens; assume param token; "-{{{" -> "-" + "{{{" x> -> "-{" + "{{"; if unbalanced (3,4 or 4,3) fall into code below
+								) {
+							}												// noop; PAGE:sr.w:ДНК; EX:<span id="interwiki-{{{1}}}-fa"></span> DATE:2014-07-03
+							else {
+								--bgn_tkn_len;		// reduce bgn curlies by 1; EX: "{{{" -> "{{"
+								++bgn_tkn_pos_bgn;	// add one to bgn tkn_pos;
+								--end_tkn_len;		// reduce end curlies by 1; EX: "}}}" -> "}}"
+								--lxr_end_pos;		// reduce end by 1; this will "reprocess" the final "}" as a text tkn; EX: "}}}-" -> "}}" and position before "}-"
+								vnt_dash_adjust = true;
+							}
 						}
 					}
 				}

@@ -130,7 +130,7 @@ class Scrib_lib_message_data {
 		byte[] msg_val = Fetch_msg(cur_lang, wiki, ctx, exec_params);
 		if (Bry_.Len_eq_0(msg_val)) {
 			Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
-			bfr.Add(gplx.html.Html_consts.Lt).Add(msg_key).Add(gplx.html.Html_consts.Gt);	// NOTE: Message.php has logic that says: if plain, "< >", else "&lt; &gt;"; for now, always use escaped
+			bfr.Add(gplx.html.Html_entity_.Lt_bry).Add(msg_key).Add(gplx.html.Html_entity_.Gt_bry);	// NOTE: Message.php has logic that says: if plain, "< >", else "&lt; &gt;"; for now, always use escaped
 			return bfr.Mkr_rls().XtoAryAndClear();
 		}
 		switch (fmt_tid) {

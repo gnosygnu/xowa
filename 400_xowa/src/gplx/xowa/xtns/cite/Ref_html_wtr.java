@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.xtns.refs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.cite; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.html.*;
 public class Ref_html_wtr {
 	public Ref_html_wtr(Xow_wiki wiki) {
@@ -23,7 +23,7 @@ public class Ref_html_wtr {
 	}
 	public void Xnde_ref(Xoh_html_wtr_ctx opts, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {
 		Ref_nde itm = (Ref_nde)xnde.Xnde_xtn();
-		if (itm == null) return;	// FUTURE: See Battle of Midway
+		if (itm == null) return;
 		if (itm.Follow_y()) return;	// NOTE: "follow" is always appended to preceding ref; will never generate its own ^ a  
 		cfg.Itm_html().Bld_bfr_many(bfr
 			, Itm_id(itm, true)
@@ -70,7 +70,6 @@ public class Ref_html_wtr {
 		int itms_len = lst.Itms_len();
 		for (int j = 0; j < itms_len; j++) {	// iterate over itms in grp
 			Ref_nde head_itm = lst.Itms_get_at(j);
-//				if (head_itm.Exists_in_lnki_title()) continue;	// EX: if ref is in lnki_title only, ignore; EX:w:UK; DATE:2014-03-05
 			Bry_bfr tmp = Bry_bfr.new_();
 			int list_len = List_len(head_itm);
 			grp_list_fmtr.Init(ctx.Wiki(), cfg, head_itm);

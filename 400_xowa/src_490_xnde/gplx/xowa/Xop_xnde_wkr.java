@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.apps.fsys.*; import gplx.xowa.wikis.*; import gplx.xowa.xtns.*;
+import gplx.xowa.apps.fsys.*; import gplx.xowa.wikis.*; import gplx.xowa.xtns.*; import gplx.html.*;
 import gplx.xowa.parsers.logs.*;
 public class Xop_xnde_wkr implements Xop_ctx_wkr {
 	public void Ctor_ctx(Xop_ctx ctx) {}
@@ -27,10 +27,11 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 	private void Clear() {
 		pre_at_bos = false;
 	}
-	public void AutoClose(Xop_ctx ctx, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos, Xop_tkn_itm tkn) {
+	public void AutoClose(Xop_ctx ctx, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos, Xop_tkn_itm tkn, int closing_tkn_tid) {
 		Xop_xnde_tkn xnde = (Xop_xnde_tkn)tkn;
 		xnde.Src_end_(src_len);
 		xnde.Subs_move(root);	// NOTE: ctx.Root used to be root which was a member variable; DATE:2013-12-11
+		if (closing_tkn_tid == Xop_tkn_itm_.Tid_lnki_end) Xop_xnde_wkr_.AutoClose_handle_dangling_nde_in_caption(root, tkn);	// PAGE:sr.w:Сићевачка_клисура; DATE:2014-07-03
 		ctx.Msg_log().Add_itm_none(Xop_xnde_log.Dangling_xnde, src, xnde.Src_bgn(), xnde.Name_end());	// NOTE: xnde.Src_bgn to start at <; xnde.Name_end b/c xnde.Src_end is -1
 	}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
@@ -134,8 +135,12 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 					int name_bgn_pos = i + 1;
 					if (name_bgn_pos < src_len) {	// chk that name_bgn is less than src_len else arrayIndex error; EX: <ref><p></p<<ref/>; not that "<" is last char of String; DATE:2014-01-18							
 						int valid_inner_xnde_gt = atr_parser.Xnde_find_gt_find(src, name_bgn_pos, src_len); // check if <nowiki>, <noinclude>, <includeonly> or <onlyinclude> (which can exist inside tag)
-						if (valid_inner_xnde_gt == String_.Find_none)	// not a <nowiki>; escape text; EX: "<div </div>" -> "&lt;div </div>"; SEE:it.u:; DATE:2014-02-03
-							return ctx.Lxr_make_txt_(cur_pos);
+						if (valid_inner_xnde_gt == String_.Find_none){	// not a <nowiki>
+							switch (tag.Id()) {
+								case Xop_xnde_tag_.Tid_input:	break; // noop; needed for Options which may have < in value; DATE:2014-07-04
+								default:						return ctx.Lxr_make_txt_(cur_pos);	// escape text; EX: "<div </div>" -> "&lt;div </div>"; SEE:it.u:; DATE:2014-02-03
+							}								
+						}
 						else {											// is a <nowiki> skip to </nowiki>
 							if (	i == end_name_pos
 								&&	ctx.Parse_tid() == Xop_parser_.Parse_tid_tmpl
@@ -212,10 +217,10 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 	private static Xop_tkn_itm Make_bry_tkn(Xop_tkn_mkr tkn_mkr, byte[] src, int bgn_pos, int cur_pos) {
 		int len = cur_pos - bgn_pos;
 		byte[] bry = null;
-		if		(len == 1	&& src[cur_pos]		== Byte_ascii.Lt)		bry = Bry_escape_lt;
+		if		(len == 1	&& src[cur_pos]		== Byte_ascii.Lt)		bry = Html_entity_.Lt_bry;
 		else if	(len == 2	&& src[cur_pos]		== Byte_ascii.Lt
 							&& src[cur_pos + 1]	== Byte_ascii.Slash)	bry = Bry_escape_lt_slash;
-		else															bry = Bry_.Add(Bry_escape_lt, Bry_.Mid(src, bgn_pos + 1, cur_pos));	// +1 to skip <
+		else															bry = Bry_.Add(Html_entity_.Lt_bry, Bry_.Mid(src, bgn_pos + 1, cur_pos));	// +1 to skip <
 		return tkn_mkr.Bry(bgn_pos, cur_pos, bry);
 	}
 	private int Make_noinclude(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int gtPos, Xop_xnde_tag tag, int tag_end_pos, boolean tag_is_closing) {
@@ -306,7 +311,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			if (	page.Html_data().Restricted() 
 				&&	page.Wiki().Domain_tid() != Xow_wiki_domain_.Tid_home) {
 				int end_pos = gtPos + 1;
-				ctx.Subs_add(root, tkn_mkr.Bry(bgn_pos, end_pos, Bry_.Add(gplx.html.Html_consts.Lt, Bry_.Mid(src, bgn_pos + 1, end_pos)))); // +1 to skip <
+				ctx.Subs_add(root, tkn_mkr.Bry(bgn_pos, end_pos, Bry_.Add(gplx.html.Html_entity_.Lt_bry, Bry_.Mid(src, bgn_pos + 1, end_pos)))); // +1 to skip <
 				return end_pos;
 			}
 		}
@@ -473,13 +478,13 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 								ctx.Msg_log().Add_itm_none(Xop_xnde_log.Auto_closing_section, src, bgn_nde.Src_bgn(), bgn_nde.Name_end());
 						}
 						else
-							ctx.Stack_autoClose(root, src, tkn, bgn_pos, cur_pos);
+							ctx.Stack_autoClose(root, src, tkn, bgn_pos, cur_pos, Xop_tkn_itm_.Tid_xnde);
 					}
 				}
 			}
 		}
 		if (end_tag.Restricted())	// restricted tags (like <script>) are not placed on stack; for now, just write it out
-			ctx.Subs_add(root, tkn_mkr.Bry(bgn_pos, cur_pos, Bry_.Add(gplx.html.Html_consts.Lt, Bry_.Mid(src, bgn_pos + 1, cur_pos)))); // +1 to skip <
+			ctx.Subs_add(root, tkn_mkr.Bry(bgn_pos, cur_pos, Bry_.Add(gplx.html.Html_entity_.Lt_bry, Bry_.Mid(src, bgn_pos + 1, cur_pos)))); // +1 to skip <
 		else {
 			if (pre2_pending) {
 				// ctx.Subs_add(root, tkn_mkr.Bry(bgn_pos, cur_pos, src));
@@ -499,7 +504,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		bgn_nde.CloseMode_(Xop_xnde_tkn.CloseMode_pair);
 		bgn_nde.Tag_close_rng_(bgn_pos, cur_pos);
 		if (pop)
-			ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_xnde), false, cur_pos, cur_pos);
+			ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_xnde), false, cur_pos, cur_pos, Xop_tkn_itm_.Tid_xnde);
 		bgn_nde.Subs_move(root);	// NOTE: Subs_move must go after Stack_pop_til, b/c Stack_pop_til adds tkns; see Xnde_td_list
 		ctx.Para().Process_block__xnde(end_tag, end_tag.Block_close());
 	}
@@ -629,8 +634,8 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 					case Xop_xnde_tag_.Tid_xowa_cmd:				xnde_xtn = tkn_mkr.Xnde_xowa_cmd(); break;
 					case Xop_xnde_tag_.Tid_math:					xnde_xtn = tkn_mkr.Xnde_math(); if (file_wkr != null) file_wkr.Wkr_run(ctx, root, xnde); break;
 					case Xop_xnde_tag_.Tid_poem:					xnde_xtn = tkn_mkr.Xnde_poem(); break;
-					case Xop_xnde_tag_.Tid_ref:						xnde_xtn = gplx.xowa.xtns.refs.References_nde.Enabled ? tkn_mkr.Xnde_ref() : null; break;
-					case Xop_xnde_tag_.Tid_references:				xnde_xtn = gplx.xowa.xtns.refs.References_nde.Enabled ? tkn_mkr.Xnde_references() : null; break;
+					case Xop_xnde_tag_.Tid_ref:						xnde_xtn = gplx.xowa.xtns.cite.References_nde.Enabled ? tkn_mkr.Xnde_ref() : null; break;
+					case Xop_xnde_tag_.Tid_references:				xnde_xtn = gplx.xowa.xtns.cite.References_nde.Enabled ? tkn_mkr.Xnde_references() : null; break;
 					case Xop_xnde_tag_.Tid_gallery:					xnde_xtn = tkn_mkr.Xnde_gallery(); break;
 					case Xop_xnde_tag_.Tid_imageMap:				xnde_xtn = tkn_mkr.Xnde_imageMap(); break;
 					case Xop_xnde_tag_.Tid_hiero:					xnde_xtn = tkn_mkr.Xnde_hiero(); break;
@@ -696,8 +701,9 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		ctx.Subs_add(root, rv);
 		return rv;
 	}
-	public static final byte[] Bry_escape_lt = Bry_.new_ascii_("&lt;"), Bry_escape_lt_slash = Bry_.new_ascii_("&lt;/"), Bry_escape_gt = Bry_.new_ascii_("&gt;"), Bry_escape_quote = Bry_.new_ascii_("&quot;"), Bry_escape_amp = Bry_.new_ascii_("&amp;"), Bry_escape_brack_bgn = Bry_.new_ascii_("&#91;"), Bry_apos = new byte[] {Byte_ascii.Apos};
-	public static final byte[] Bry_lt = new byte[] {Byte_ascii.Lt}, Bry_brack_bgn = new byte[] {Byte_ascii.Brack_bgn}, Bry_pipe = Xoa_consts.Pipe_bry;
+	private static final byte[] 
+	  Bry_escape_lt_slash = Bry_.new_ascii_("&lt;/")
+	;
 	public static int Find_gt_pos(Xop_ctx ctx, byte[] src, int cur_pos, int src_len) {	// UNUSED
 		int gt_pos = -1;	// find closing >
 		for (int i = cur_pos; i < src_len; i++) {
@@ -718,6 +724,20 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		return gt_pos;
 	}
 	public static Xop_log_basic_wkr Timeline_log_wkr = Xop_log_basic_wkr.Null;
+}
+class Xop_xnde_wkr_ {
+	public static void AutoClose_handle_dangling_nde_in_caption(Xop_root_tkn root, Xop_tkn_itm owner) {
+		int subs_bgn = -1, subs_len = owner.Subs_len();
+		for (int i = 0; i < subs_len; i++) {
+			Xop_tkn_itm sub_itm = owner.Subs_get(i);
+			if (sub_itm.Tkn_tid() == Xop_tkn_itm_.Tid_pipe) {	// tkn is "|"; assume that caption should end here
+				subs_bgn = i;
+				break;
+			}
+		}
+		if (subs_bgn != -1) 
+			root.Subs_move(owner, subs_bgn, subs_len);			// move everything after "|" back to root
+	}
 }
 /*
 NOTE_1: special logic for <*include*>

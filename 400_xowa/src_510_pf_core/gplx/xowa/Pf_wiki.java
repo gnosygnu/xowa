@@ -17,18 +17,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 class Pf_wiki_props extends Pf_func_base {
-	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bb) {
+	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr rslt_bfr) {
 		Xow_wiki_props props = ctx.Wiki().Props();
 	    switch (id) {
-			case Xol_kwd_grp_.Id_site_sitename: bb.Add(props.SiteName()); break;
-			case Xol_kwd_grp_.Id_site_server: bb.Add(props.Server()); break;
-			case Xol_kwd_grp_.Id_site_servername: bb.Add(props.ServerName()); break;
-			case Xol_kwd_grp_.Id_site_articlepath: bb.Add(props.ArticlePath()); break;
-			case Xol_kwd_grp_.Id_site_scriptpath: bb.Add(props.ScriptPath()); break;
-			case Xol_kwd_grp_.Id_site_stylepath: bb.Add(props.StylePath()); break;
-			case Xol_kwd_grp_.Id_site_contentlanguage: bb.Add(ctx.Cur_page().Lang().Key_bry()); break;
-			case Xol_kwd_grp_.Id_site_directionmark: bb.Add(props.DirectionMark()); break;	// FUTURE: find page that uses it
-			case Xol_kwd_grp_.Id_site_currentversion: bb.Add(props.CurrentVersion()); break;
+			case Xol_kwd_grp_.Id_site_sitename: rslt_bfr.Add(props.SiteName()); break;
+			case Xol_kwd_grp_.Id_site_server: rslt_bfr.Add(props.Server()); break;
+			case Xol_kwd_grp_.Id_site_servername: rslt_bfr.Add(props.ServerName()); break;
+			case Xol_kwd_grp_.Id_site_articlepath: rslt_bfr.Add(props.ArticlePath()); break;
+			case Xol_kwd_grp_.Id_site_scriptpath: rslt_bfr.Add(props.ScriptPath()); break;
+			case Xol_kwd_grp_.Id_site_stylepath: rslt_bfr.Add(props.StylePath()); break;
+			case Xol_kwd_grp_.Id_site_contentlanguage: rslt_bfr.Add(ctx.Cur_page().Lang().Key_bry()); break;
+			case Xol_kwd_grp_.Id_site_directionmark: rslt_bfr.Add(props.DirectionMark()); break;	// FUTURE: find page that uses it
+			case Xol_kwd_grp_.Id_site_currentversion: rslt_bfr.Add(props.CurrentVersion()); break;
 			default: throw Err_.unhandled(id);
 		}
 	}
@@ -38,7 +38,7 @@ class Pf_wiki_props extends Pf_func_base {
 	public static final Pf_wiki_props _ = new Pf_wiki_props(-1);
 }
 class Pf_wiki_stats extends Pf_func_base {
-	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bb) {
+	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr rslt_bfr) {
 		byte[] argx = Eval_argx(ctx, src, caller, self);
 		boolean raw = false;			
 		if (argx.length == 1) {
@@ -59,9 +59,9 @@ class Pf_wiki_stats extends Pf_func_base {
 			default: throw Err_.unhandled(id);
 		}
 		if (raw)
-			bb.Add_int_variable(v);
+			rslt_bfr.Add_int_variable(v);
 		else
-			bb.Add_str(Int_.XtoStr_fmt(v, "#,##0"));	// FUTURE.LANG:
+			rslt_bfr.Add(ctx.Cur_page().Lang().Num_mgr().Format_num(v));
 	}
 	public Pf_wiki_stats(int id) {this.id = id;}
 	@Override public int Id() {return id;} private int id;

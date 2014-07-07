@@ -77,7 +77,7 @@ public class Score_xnde implements Xox_xnde, Xop_xnde_atr_parser, Xoh_cmd_itm {
 		html_id_img = hcmd_id + "_img";
 		html_id_a	= hcmd_id + "_a";
 		html_a_href = ""; html_img_src = "";
-		html_img_alt = String_.new_utf8_(Bry_.Replace(code, Xoa_consts.Nl_bry, gplx.html.Html_consts.Nl_bry));
+		html_img_alt = String_.new_utf8_(Bry_.Replace(code, Xoa_consts.Nl_bry, gplx.html.Html_entity_.Nl_bry));
 		String html_img_alt_tmp = "", html_img_src_tmp = "", html_a_href_tmp = "";
 		html_img_src = png_file.To_http_file_str();			
 		html_a_href = aud_file.To_http_file_str();

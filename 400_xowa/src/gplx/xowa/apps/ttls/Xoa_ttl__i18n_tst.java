@@ -28,14 +28,14 @@ public class Xoa_ttl__i18n_tst {
 		fxt.Init_ttl("&#x2c65;").Expd_full_txt("ⱥ").Test();
 	}
 	@Test   public void First_char_is_multi_byte() {	// PURPOSE: if multi-byte, uppercasing is complicated; EX: µ -> Μ; DATE:2013-11-27
-		fxt.Wiki().Lang().Case_mgr().Add_bulk(Xol_case_itm_.Universal);
+		fxt.Wiki().Lang().Case_mgr_utf8_();
 		fxt.Init_ttl("µ").Expd_full_txt("Μ").Test();						// NOTE: this is not an ASCII "Μ"
 		fxt.Init_ttl("µab").Expd_full_txt("Μab").Test();					// check that rest of title works fine
 		fxt.Init_ttl("Help:µab").Expd_full_txt("Help:Μab").Test();		// check ns
 		fxt.Init_ttl("Ι").Expd_full_txt("Ι").Test();						// check that Ι is not upper-cased to COMBINING GREEK YPOGEGRAMMENI; DATE:2014-02-24
 	}
 	@Test   public void First_char_is_multi_byte_assymetrical() { // PURPOSE: test multi-byte asymmetry (lc is 3 bytes; uc is 2 bytes)
-		fxt.Wiki().Lang().Case_mgr().Add_bulk(Xol_case_itm_.Universal);
+		fxt.Wiki().Lang().Case_mgr_utf8_();
 		fxt.Init_ttl("ⱥ").Expd_full_txt("Ⱥ").Test();
 		fxt.Init_ttl("ⱥab").Expd_full_txt("Ⱥab").Test();				// check that rest of title works fine
 		fxt.Init_ttl("Help:ⱥab").Expd_full_txt("Help:Ⱥab").Test();	// check ns

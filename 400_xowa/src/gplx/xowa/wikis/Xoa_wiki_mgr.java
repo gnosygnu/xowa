@@ -40,6 +40,11 @@ public class Xoa_wiki_mgr implements GfoInvkAble {
 		if (rv == null) rv = New_wiki(key);
 		return rv;
 	}
+	public Xow_wiki Wiki_commons() {
+		Xow_wiki rv = this.Get_by_key_or_null(Xow_wiki_domain_.Url_commons);
+		if (rv != null) rv.Init_assert();
+		return rv;
+	}
 	public Xow_wiki Add(Xow_wiki wiki) {
 		Xow_wiki rv = (Xow_wiki)hash.Get_by_bry(wiki.Domain_bry());
 		if (rv == null) {
@@ -78,10 +83,10 @@ public class Xoa_wiki_mgr implements GfoInvkAble {
 	}	private static final String Invk_get = "get", Invk_groups = "groups", Invk_scripts = "scripts", Invk_wdata = "wdata";
 	private static final String Invk_len = "len", Invk_get_at = "get_at";
 	private Xow_wiki New_wiki(byte[] key) {
-		Xow_ns_mgr ns_mgr = Xow_ns_mgr_.default_();
 		Xow_wiki_domain wiki_type = Xow_wiki_domain_.parse_by_domain(key);
 		byte[] lang_key = wiki_type.Lang(); if (lang_key == Xol_lang_itm_.Key__unknown) lang_key = Xol_lang_.Key_en;
 		Xol_lang lang = app.Lang_mgr().Get_by_key_or_new(lang_key);
+		Xow_ns_mgr ns_mgr = Xow_ns_mgr_.default_(lang.Case_mgr());
 		Io_url wiki_dir = app.Fsys_mgr().Wiki_dir().GenSubDir(String_.new_utf8_(key));
 		Xow_wiki rv = new Xow_wiki(app, wiki_dir, ns_mgr, lang);
 		Add(rv);

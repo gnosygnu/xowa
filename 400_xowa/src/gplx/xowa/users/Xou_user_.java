@@ -16,13 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.wikis.*; import gplx.xowa.xtns.scribunto.*;
+import gplx.xowa.langs.cases.*; import gplx.xowa.wikis.*; import gplx.xowa.xtns.scribunto.*;
 class Xou_user_ {
 	public static Xow_wiki new_or_create_(Xou_user user, Xoa_app app) {
 		Io_url wiki_dir = user.Fsys_mgr().Home_wiki_dir().GenSubDir_nest("wiki", Xow_wiki_domain_.Key_home_str);
 		Xol_lang lang = app.Lang_mgr().Get_by_key_or_new(app.Lang_mgr().Default_lang());
 		lang.Init_by_load();	// NOTE: lang.Load() must occur before new Xow_wiki b/c wiki will create parsers based on lang
-		Xow_wiki rv = new Xow_wiki(app, wiki_dir, ns_home_(), lang);
+		Xow_wiki rv = new Xow_wiki(app, wiki_dir, ns_home_(lang.Case_mgr()), lang);
 		app.Wiki_mgr().Add(rv);
 		rv.Sys_cfg().Xowa_cmd_enabled_(true);
 		rv.Sys_cfg().Xowa_proto_enabled_(true);
@@ -48,8 +48,8 @@ class Xou_user_ {
 		,	""
 		,	"Please delete bookmarks by editing this page."
 		);
-	private static Xow_ns_mgr ns_home_() {
-		Xow_ns_mgr rv = new Xow_ns_mgr();
+	private static Xow_ns_mgr ns_home_(Xol_case_mgr case_mgr) {
+		Xow_ns_mgr rv = new Xow_ns_mgr(case_mgr);
 		rv = rv.Add_new(-2, "Media").Add_new(-1, "Special").Add_new(0, "").Add_new(1, "Talk").Add_new(2, "User").Add_new(3, "User talk").Add_new(4, "Wikipedia").Add_new(5, "Wikipedia talk")
 			.Add_new(6, "File").Add_new(7, "File talk").Add_new(8, "MediaWiki").Add_new(9, "MediaWiki talk").Add_new(10, "Template").Add_new(11, "Template talk")
 			.Add_new(12, "Help").Add_new(13, "Help talk").Add_new(14, "Category").Add_new(15, "Category talk").Add_new(100, "Portal").Add_new(101, "Portal talk")

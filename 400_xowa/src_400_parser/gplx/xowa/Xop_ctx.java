@@ -19,7 +19,7 @@ package gplx.xowa; import gplx.*;
 import gplx.xowa.gui.*; import gplx.xowa.xtns.lst.*;
 import gplx.xowa.xtns.scribunto.*;
 import gplx.xowa.xtns.wdatas.*;
-import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.logs.*;
+import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.html.modules.popups.keeplists.*;
 public class Xop_ctx {
 	private Xop_ctx_wkr[] wkrs = new Xop_ctx_wkr[] {};
 	Xop_ctx(Xow_wiki wiki, Xoa_page page) {
@@ -49,6 +49,7 @@ public class Xop_ctx {
 
 	public boolean					Tmpl_load_enabled() {return tmpl_load_enabled;} public void Tmpl_load_enabled_(boolean v) {tmpl_load_enabled = v;} private boolean tmpl_load_enabled = true;
 	public int					Tmpl_tkn_max()		{return tmpl_tkn_max;} public void Tmpl_tkn_max_(int v) {tmpl_tkn_max = v;} private int tmpl_tkn_max = Int_.MaxValue;
+	public Xop_keeplist_wiki	Tmpl_keeplist()		{return tmpl_keeplist;} public void Tmpl_keeplist_(Xop_keeplist_wiki v) {this.tmpl_keeplist = v;} private Xop_keeplist_wiki tmpl_keeplist;
 	public boolean					Tmpl_args_parsing() {return tmpl_args_parsing;} public Xop_ctx Tmpl_args_parsing_(boolean v) {tmpl_args_parsing = v; return this;} private boolean tmpl_args_parsing;
 	public Bry_bfr				Tmpl_output() {return tmpl_output;} public Xop_ctx Tmpl_output_(Bry_bfr v) {tmpl_output = v; return this;} private Bry_bfr tmpl_output;
 	public Xot_defn_trace		Defn_trace()		{return defn_trace;} public Xop_ctx Defn_trace_(Xot_defn_trace v) {defn_trace = v; return this;} private Xot_defn_trace defn_trace = Xot_defn_trace_null._;
@@ -83,7 +84,7 @@ public class Xop_ctx {
 		for (Xop_ctx_wkr wkr : wkrs) wkr.Page_bgn(this, root);
 	}
 	public void Page_end(Xop_root_tkn root, byte[] src, int src_len) {
-		Stack_pop_til(root, src, 0, true, src_len, src_len);
+		Stack_pop_til(root, src, 0, true, src_len, src_len, Xop_tkn_itm_.Tid_txt);
 		for (Xop_ctx_wkr wkr : wkrs) wkr.Page_end(this, root, src, src_len);
 	}
 	public boolean		Lxr_make()	{return lxr_make;} public Xop_ctx Lxr_make_(boolean v) {lxr_make = v; return this;} private boolean lxr_make = false;
@@ -230,35 +231,35 @@ public class Xop_ctx {
 			}
 		}
 	}
-	public Xop_tkn_itm Stack_pop_til(Xop_root_tkn root, byte[] src, int til_idx, boolean include, int bgn_pos, int cur_pos) {
+	public Xop_tkn_itm Stack_pop_til(Xop_root_tkn root, byte[] src, int til_idx, boolean include, int bgn_pos, int cur_pos, int closing_tkn_tid) {
 		if (stack_len == 0) return null;
 		int min_idx = include ? til_idx - 1 : til_idx;
 		if (min_idx < -1) min_idx = -1;
 		Xop_tkn_itm rv = null;
 		for (int i = stack_len - 1; i > min_idx; i--) {
 			rv = stack[i];
-			Stack_autoClose(root, src, rv, bgn_pos, cur_pos);
+			Stack_autoClose(root, src, rv, bgn_pos, cur_pos, closing_tkn_tid);
 		}
 		Stack_pop_idx(til_idx);
 		return include ? rv : stack[stack_len]; // if include, return poppedTkn; if not, return tkn before poppedTkn
 	}
-	public Xop_tkn_itm Stack_pop_before(Xop_root_tkn root, byte[] src, int til_idx, boolean include, int bgn_pos, int cur_pos) {	// used by Xop_tblw_lxr to detect \n| in lnki; seems useful as well
+	public Xop_tkn_itm Stack_pop_before(Xop_root_tkn root, byte[] src, int til_idx, boolean include, int bgn_pos, int cur_pos, int closing_tkn_tid) {	// used by Xop_tblw_lxr to detect \n| in lnki; seems useful as well
 		if (stack_len == 0) return null;
 		int min_idx = include ? til_idx - 1 : til_idx;
 		if (min_idx < -1) min_idx = -1;
 		Xop_tkn_itm rv = null;
 		for (int i = stack_len - 1; i > min_idx; i--) {
 			rv = stack[i];
-			Stack_autoClose(root, src, rv, bgn_pos, cur_pos);
+			Stack_autoClose(root, src, rv, bgn_pos, cur_pos, closing_tkn_tid);
 		}
 		return include ? rv : stack[stack_len]; // if include, return poppedTkn; if not, return tkn before poppedTkn
 	}
-	public void Stack_autoClose(Xop_root_tkn root, byte[] src, Xop_tkn_itm tkn, int bgn_pos, int cur_pos) {
+	public void Stack_autoClose(Xop_root_tkn root, byte[] src, Xop_tkn_itm tkn, int bgn_pos, int cur_pos, int closing_tkn_tid) {
 		int src_len = src.length;
 		switch (tkn.Tkn_tid()) {
 			case Xop_tkn_itm_.Tid_newLine: break;	// NOOP: just a marker
 			case Xop_tkn_itm_.Tid_list: list.AutoClose(this, app.Tkn_mkr(), root, src, src_len, bgn_pos, cur_pos, tkn); break;
-			case Xop_tkn_itm_.Tid_xnde: xnde.AutoClose(this, root, src, src_len, bgn_pos, cur_pos, tkn); break;
+			case Xop_tkn_itm_.Tid_xnde: xnde.AutoClose(this, root, src, src_len, bgn_pos, cur_pos, tkn, closing_tkn_tid); break;
 			case Xop_tkn_itm_.Tid_apos: apos.AutoClose(this, src, src_len, bgn_pos, cur_pos, tkn); break;
 			case Xop_tkn_itm_.Tid_lnke: lnke.AutoClose(this, src, src_len, bgn_pos, cur_pos, tkn); break;
 			case Xop_tkn_itm_.Tid_hdr:  hdr.AutoClose(this, app.Tkn_mkr(), root, src, src_len, bgn_pos, cur_pos, tkn); break;
@@ -291,7 +292,7 @@ public class Xop_ctx {
 			if (stop) break;
 		}
 		if (stack_pos == -1) return;
-		ctx.Stack_pop_til(root, src, stack_pos, true, bgn_pos, cur_pos);
+		ctx.Stack_pop_til(root, src, stack_pos, true, bgn_pos, cur_pos, Xop_tkn_itm_.Tid_txt);
 	}
 	public void Tmpl_prepend_nl(Bry_bfr cur, byte[] val, int val_len) {			// cur=current bfr; tmpl_output=main bfr that cur will eventually be appended to; val=result of template
 		if (	val_len == 0													// val is empty

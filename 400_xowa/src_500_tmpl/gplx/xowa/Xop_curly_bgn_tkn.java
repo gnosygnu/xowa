@@ -62,7 +62,7 @@ class Xop_brack_end_lxr implements Xop_lxr {
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		int acs_pos = ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_brack_bgn);
 		if (acs_pos != -1 && ctx.Cur_tkn_tid() != Xop_tkn_itm_.Tid_tmpl_curly_bgn)	// NOTE: do not pop tkn if inside tmpl; EX: [[a|{{#switch:{{{1}}}|b=c]]|d=e]]|f]]}}
-			ctx.Stack_pop_til(root, src, acs_pos, true, bgn_pos, cur_pos);
+			ctx.Stack_pop_til(root, src, acs_pos, true, bgn_pos, cur_pos, Xop_tkn_itm_.Tid_tmpl_curly_bgn);
 		Xop_tkn_itm tkn = tkn_mkr.Brack_end(bgn_pos, cur_pos);
 		ctx.Subs_add(root, tkn);
 		return cur_pos;

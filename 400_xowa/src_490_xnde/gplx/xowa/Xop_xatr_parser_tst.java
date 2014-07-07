@@ -24,6 +24,7 @@ public class Xop_xatr_parser_tst {
 	@Test  public void Kv_empty()				{fxt.tst_("a=''", fxt.new_atr_("a", ""));}
 	@Test  public void Kv_key_has_underline()	{fxt.tst_("a_b=c", fxt.new_atr_("a_b", "c"));}
 	@Test  public void Val_quote_none()			{fxt.tst_("b", fxt.new_atr_("b", "b"));}
+	@Test  public void Val_quote_none_ws()		{fxt.tst_(" b ", fxt.new_atr_("b", "b"));}	// PURPOSE:discovered while writing test for ref's "lower-alpha" DATE:2014-07-03
 	@Test  public void Invalid_key_plus() 		{fxt.tst_("a+b", fxt.new_invalid_(0, 3));}
 	@Test  public void Invalid_key_plus_many() 	{fxt.tst_("a+b c=d", fxt.new_invalid_(0, 3), fxt.new_atr_("c", "d"));}
 	@Test  public void Invalid_val_plus() 		{fxt.tst_("a=b+c", fxt.new_invalid_(0, 5));}

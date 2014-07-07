@@ -163,7 +163,7 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 				switch (prv_tid) {
 					case Xop_tkn_itm_.Tid_tblw_tb: break;	// noop; <table><tr>
 					case Xop_tkn_itm_.Tid_tblw_tc:			// fix;  <caption><tr>      -> <caption></caption><tr>
-						ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_tblw_tc), true, bgn_pos, bgn_pos);
+						ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_tblw_tc), true, bgn_pos, bgn_pos, Xop_tkn_itm_.Tid_tblw_td);
 						break;
 					case Xop_tkn_itm_.Tid_tblw_td:			// fix;  <td><tr>           -> <td></td></tr><tr>
 					case Xop_tkn_itm_.Tid_tblw_th:			// fix;  <th><tr>           -> <th></th></tr><tr>
@@ -171,15 +171,15 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 							ctx.Para().Process_nl(ctx, root, src, bgn_pos, bgn_pos + 1);	// simulate "\n"; 2012-12-08
 						int stack_pos = ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_tblw_tr);
 						if (stack_pos != Xop_ctx.Stack_not_found)							// don't pop <tr> if none found; EX:en.w:Turks_in_Denmark DATE:2014-03-02
-							ctx.Stack_pop_til(root, src, stack_pos, true, bgn_pos, bgn_pos);
+							ctx.Stack_pop_til(root, src, stack_pos, true, bgn_pos, bgn_pos, Xop_tkn_itm_.Tid_tblw_td);
 						break;
 					case Xop_tkn_itm_.Tid_tblw_tr:			// fix;  <tr><tr>           -> <tr>							
 						if (prv_tkn.Tblw_subs_len() == 0) {	// NOTE: set prv_row to ignore, but do not pop; see Tr_dupe_xnde and [[Jupiter]]; only invoke if same type; EX: <tr><tr> but not |-<tr>; DATE:2013-12-09
-							Xop_tkn_itm prv_row = ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_tblw_tr), false, bgn_pos, bgn_pos);
+							Xop_tkn_itm prv_row = ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_tblw_tr), false, bgn_pos, bgn_pos, Xop_tkn_itm_.Tid_tblw_td);
 							prv_row.Ignore_y_();
 						}
 						else
-							ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_tblw_tr), true, bgn_pos, bgn_pos);						
+							ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_tblw_tr), true, bgn_pos, bgn_pos, Xop_tkn_itm_.Tid_tblw_td);						
 						break;
 				}					
 				Xop_tblw_tr_tkn tr_tkn = tkn_mkr.Tblw_tr(bgn_pos, cur_pos, tbl_is_xml, false);
@@ -194,10 +194,10 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 						if (!tbl_is_xml)					// only for "\n|" not <td>
 							ctx.Para().Process_nl(ctx, root, src, bgn_pos, bgn_pos + 1);	// simulate "\n"; DATE:2014-02-20; ru.w:;[[Help:Download]]; DATE:2014-02-20
 						ctx.Para().Process_block__bgn_y__end_n(Xop_xnde_tag_.Tag_td);	// <td>
-						ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(prv_tid), true, bgn_pos, bgn_pos);
+						ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(prv_tid), true, bgn_pos, bgn_pos, Xop_tkn_itm_.Tid_tblw_td);
 						break;
 					case Xop_tkn_itm_.Tid_tblw_th:			// fix;  <th><td>           -> <th></th><td>
-						ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(prv_tid), true, bgn_pos, bgn_pos);
+						ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(prv_tid), true, bgn_pos, bgn_pos, Xop_tkn_itm_.Tid_tblw_td);
 						if (wlxr_type == Tblw_type_td2) create_th = true;	// !a||b -> <th><th>; but !a|b -> <th><td>
 						break;
 					case Xop_tkn_itm_.Tid_tblw_tb:			// fix;  <table><td>        -> <table><tr><td>
@@ -213,7 +213,7 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 						}
 						break;
 					case Xop_tkn_itm_.Tid_tblw_tc:			// fix;  <caption><td>      -> <caption></caption><tr><td>
-						ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_tblw_tc), true, bgn_pos, bgn_pos);
+						ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_tblw_tc), true, bgn_pos, bgn_pos, Xop_tkn_itm_.Tid_tblw_td);
 						new_tkn = tkn_mkr.Tblw_tr(bgn_pos, cur_pos, tbl_is_xml, true);
 						ctx.Subs_add_and_stack_tblw(root, prv_tkn, new_tkn);
 						prv_tid = new_tkn.Tkn_tid();
@@ -232,7 +232,7 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 					case Xop_tkn_itm_.Tid_tblw_th:			// fix;  <th><th>           -> <th></th><th>
 						if (tbl_is_xml														// tbl_is_xml always closes previous token
 							|| (wlxr_type == Tblw_type_th2 || wlxr_type == Tblw_type_th))	// ! always closes; EX: "! !!"; "!! !!"; REMOVE: 2012-05-07; had (&& !ws_enabled) but caused "\n !" to fail; guard is no longer necessary since tblw_ws changed...
-							ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(prv_tid), true, bgn_pos, bgn_pos);
+							ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(prv_tid), true, bgn_pos, bgn_pos, Xop_tkn_itm_.Tid_tblw_td);
 						else {
 							ctx.Subs_add(root, tkn_mkr.Txt(bgn_pos, cur_pos));
 							return cur_pos;
@@ -241,7 +241,7 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 					case Xop_tkn_itm_.Tid_tblw_td:			// fix;  <td><th>           -> <td></td><th> NOTE: common use of using <th> after <td> for formatting
 						if (tbl_is_xml													// tbl_is_xml always closes previous token
 							|| (wlxr_type == Tblw_type_th))								// "| !" closes; "| !!" does not;
-							ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(prv_tid), true, bgn_pos, bgn_pos);
+							ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(prv_tid), true, bgn_pos, bgn_pos, Xop_tkn_itm_.Tid_tblw_td);
 						else {
 							ctx.Subs_add(root, tkn_mkr.Txt(bgn_pos, cur_pos));
 							return cur_pos;
@@ -251,7 +251,7 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 						ctx.Subs_add_and_stack_tblw(root, prv_tkn, tkn_mkr.Tblw_tr(bgn_pos, cur_pos, tbl_is_xml, true));
 						break;
 					case Xop_tkn_itm_.Tid_tblw_tc:			// fix;  <caption><th>      -> <caption></caption><tr><th>
-						ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_tblw_tc), true, bgn_pos, bgn_pos);
+						ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_tblw_tc), true, bgn_pos, bgn_pos, Xop_tkn_itm_.Tid_tblw_td);
 						ctx.Subs_add_and_stack_tblw(root, prv_tkn, tkn_mkr.Tblw_tr(bgn_pos, cur_pos, tbl_is_xml, true));
 						break;
 				}
@@ -262,15 +262,15 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 				switch (prv_tid) {
 					case Xop_tkn_itm_.Tid_tblw_tb: break;	// noop; <table><caption>
 					case Xop_tkn_itm_.Tid_tblw_tr:			// fix;  <tr><caption>      -> <tr></tr><caption>  TODO: caption should be ignored and placed in quarantine
-						ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_tblw_tr), true, bgn_pos, bgn_pos);
+						ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_tblw_tr), true, bgn_pos, bgn_pos, Xop_tkn_itm_.Tid_tblw_td);
 						break;
 					case Xop_tkn_itm_.Tid_tblw_td:			// fix;  <td><caption>      -> <td></td><caption>
 					case Xop_tkn_itm_.Tid_tblw_th:			// fix;  <th><caption>		-> <th></th><caption>
-						ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_tblw_tr), true, bgn_pos, bgn_pos);	// NOTE: closing <tr> in order to close <td>/<th>
+						ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_tblw_tr), true, bgn_pos, bgn_pos, Xop_tkn_itm_.Tid_tblw_td);	// NOTE: closing <tr> in order to close <td>/<th>
 						ctx.Msg_log().Add_itm_none(Xop_tblw_log.Caption_after_td, src, prv_tkn.Src_bgn(), bgn_pos);
 						break;
 					case Xop_tkn_itm_.Tid_tblw_tc:			// fix;  <caption><caption> -> <caption></caption><caption>
-						ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_tblw_tc), true, bgn_pos, bgn_pos);
+						ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_tblw_tc), true, bgn_pos, bgn_pos, Xop_tkn_itm_.Tid_tblw_td);
 						ctx.Msg_log().Add_itm_none(Xop_tblw_log.Caption_after_tc, src, prv_tkn.Src_bgn(), bgn_pos);
 						break;
 				}
@@ -312,10 +312,10 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 			switch (prv_tid) {
 				case Xop_tkn_itm_.Tid_tblw_td:			// fix;  <td></table>       -> <td></td></tr></table>
 				case Xop_tkn_itm_.Tid_tblw_th:			// fix;  <th></table>       -> <th></th></tr></table>
-					ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_tblw_tr), true, bgn_pos, bgn_pos);
+					ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_tblw_tr), true, bgn_pos, bgn_pos, Xop_tkn_itm_.Tid_tblw_td);
 					break;
 				case Xop_tkn_itm_.Tid_tblw_tc:			// fix;  <caption></table>  -> <caption></caption></table>
-					ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_tblw_tc), true, bgn_pos, bgn_pos);
+					ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_tblw_tc), true, bgn_pos, bgn_pos, Xop_tkn_itm_.Tid_tblw_td);
 					break;
 				case Xop_tkn_itm_.Tid_tblw_tr:			// fix;  <tr></table>       -> </table>  : tr but no tds; remove tr
 					boolean blank = true;
@@ -353,14 +353,14 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 						ctx.Subs_add_and_stack_tblw(root, prv_tkn, new_tkn);
 						new_tkn = tkn_mkr.Tblw_td(bgn_pos, bgn_pos, tbl_is_xml);
 						ctx.Subs_add_and_stack_tblw(root, prv_tkn, new_tkn);
-						ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_tblw_tb), true, bgn_pos, bgn_pos);
+						ctx.Stack_pop_til(root, src, ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_tblw_tb), true, bgn_pos, bgn_pos, Xop_tkn_itm_.Tid_tblw_td);
 						return cur_pos;
 					}
 					break;
 			}
 			int tb_idx = ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_tblw_tb); 
 			if (tb_idx == -1) return cur_pos;	// NOTE: tb_idx can be -1 when called from Pipe in Tmpl mode
-			Xop_tblw_tb_tkn tb = (Xop_tblw_tb_tkn)ctx.Stack_pop_til(root, src, tb_idx, false, bgn_pos, bgn_pos);	// NOTE: need to pop manually in order to set all intermediate node ends to bgn_pos, but tb ent to cur_pos; EX: for stack of "tb,tr,td" tr and td get End_() of bgn_pos but tb gets End_() of cur_pos
+			Xop_tblw_tb_tkn tb = (Xop_tblw_tb_tkn)ctx.Stack_pop_til(root, src, tb_idx, false, bgn_pos, bgn_pos, Xop_tkn_itm_.Tid_tblw_td);	// NOTE: need to pop manually in order to set all intermediate node ends to bgn_pos, but tb ent to cur_pos; EX: for stack of "tb,tr,td" tr and td get End_() of bgn_pos but tb gets End_() of cur_pos
 			tb.Subs_move(root);
 			tb.Src_end_(cur_pos);
 			ctx.Para().Process_block__bgn_n__end_y(Xop_xnde_tag_.Tag_table);	// NOTE: must clear block state that was started by <tr>; code implicitly relies on td clearing block state, but no td was created
@@ -395,7 +395,7 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 			}
 		}
 		if (acs_pos != -1) {
-			Xop_tblw_tkn bgn_tkn = (Xop_tblw_tkn)ctx.Stack_pop_til(root, src, acs_pos, false, bgn_pos, cur_pos);
+			Xop_tblw_tkn bgn_tkn = (Xop_tblw_tkn)ctx.Stack_pop_til(root, src, acs_pos, false, bgn_pos, cur_pos, Xop_tkn_itm_.Tid_tblw_td);
 			switch (wlxr_type) {
 				case Tblw_type_tb:
 					ctx.Para().Process_block__bgn_n__end_y(Xop_xnde_tag_.Tag_table);

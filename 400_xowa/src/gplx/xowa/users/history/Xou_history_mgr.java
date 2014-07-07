@@ -54,9 +54,11 @@ public class Xou_history_mgr implements GfoInvkAble {// app.user.history
 	}
 	public void Add(Xoa_url url, Xoa_ttl ttl, byte[] page_ttl) {
 		if (!load_chk) Load(app);
+		byte[] page_db = ttl.Page_db();
 		if (	ttl.Ns().Id_special()
-			&&	(	Bry_.Eq(ttl.Page_db(), Xou_history_mgr.Ttl_name)	// do not add XowaPageHistory to history
-				||	Bry_.Eq(ttl.Page_db(), gplx.xowa.specials.xowa.default_tab.Default_tab_page.Ttl_name_bry)
+			&&	(	Bry_.Eq(page_db, Xou_history_mgr.Ttl_name)	// do not add XowaPageHistory to history
+				||	Bry_.Eq(page_db, gplx.xowa.specials.xowa.popup_history.Popup_history_page.Ttl_name_bry)
+				||	Bry_.Eq(page_db, gplx.xowa.specials.xowa.default_tab.Default_tab_page.Ttl_name_bry)
 				)
 			) return; 
 		byte[] key = Xou_history_itm.key_(url.Wiki_bry(), page_ttl);

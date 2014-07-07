@@ -359,8 +359,8 @@ public class Xop_xatr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_AT
 			if (key_bgn_exists && val_bgn_exists)
 				xatr = new Xop_xatr_itm(quote_byte, atr_bgn, atr_end, key_bgn, key_end, val_bgn, val_end, eq_pos);
 			else {
-				if (key_bgn_exists) val_bgn = key_bgn;	// NOTE: occurs when "raw" val only; EX: "a b c"; a, b, c are all raw vals
-				xatr = new Xop_xatr_itm(quote_byte, atr_bgn, atr_end, val_bgn, val_end);
+				if (key_end == -1) key_end = val_end;		// NOTE: key_end == -1 when eos; EX: "a" would have key_bgn = 0; key_end = -1; val_end = 1 DATE:2014-07-03
+				xatr = new Xop_xatr_itm(quote_byte, atr_bgn, atr_end, key_bgn, key_end);
 			}
 		}
 		else {

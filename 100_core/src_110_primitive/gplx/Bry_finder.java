@@ -117,7 +117,7 @@ public class Bry_finder {
 		}
 		return rv;
 	}
-	public static int Find_bwd_non_ws(byte[] src, int cur, int end) { // get pos of 1st char that is not ws; 
+	public static int Find_bwd_non_ws_or_not_found(byte[] src, int cur, int end) { // get pos of 1st char that is not ws; 
 		if (cur >= src.length) return Bry_finder.Not_found;
 		for (int i = cur; i >= end; i--) {
 			byte b = src[i];
@@ -129,6 +129,19 @@ public class Bry_finder {
 			}
 		}
 		return Bry_finder.Not_found;
+	}
+	public static int Find_bwd_non_ws_or_end(byte[] src, int cur, int end) {
+		if (cur >= src.length) return Bry_finder.Not_found;
+		for (int i = cur; i >= end; i--) {
+			byte b = src[i];
+			switch (b) {
+				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.NewLine: case Byte_ascii.CarriageReturn:
+					break;
+				default:
+					return i;
+			}
+		}
+		return end;
 	}
 	public static int Find_bwd_while(byte[] src, int cur, int end, byte while_byte) {
 		--cur;

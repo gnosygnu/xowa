@@ -23,7 +23,7 @@ public class Bry_fmtr_arg_ {
 	public static Bry_fmtr_arg_byt byt_(byte v)				{return new Bry_fmtr_arg_byt(v);}
 	public static Bry_fmtr_arg_int int_(int v)				{return new Bry_fmtr_arg_int(v);}
 	public static Bry_fmtr_arg_bfr bfr_(Bry_bfr v)			{return new Bry_fmtr_arg_bfr(v);}
-	public static Bry_fmtr_arg_bfr_retain bfr_retain_(Bry_bfr v)		{return new Bry_fmtr_arg_bfr_retain(v);}
+	public static Bry_fmtr_arg_bfr_preserve bfr_retain_(Bry_bfr v)		{return new Bry_fmtr_arg_bfr_preserve(v);}
 	public static Bry_fmtr_arg fmtr_(Bry_fmtr v, Bry_fmtr_arg... arg_ary) {return new Bry_fmtr_arg_fmtr(v, arg_ary);}
 	public static Bry_fmtr_arg_fmtr_objs fmtr_null_() {return new Bry_fmtr_arg_fmtr_objs(null, null);}
 	public static final Bry_fmtr_arg Null = new Bry_fmtr_arg_null();

@@ -16,12 +16,17 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.xowa.langs.cases.*;
 import gplx.xowa.xtns.scribunto.*;
 public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 	private OrderedHash id_hash = OrderedHash_.new_();		// hash for retrieval by id
-	private Hash_adp_bry name_hash = Hash_adp_bry.ci_();	// hash for retrieval by name; note that ns names are case-insensitive "File:" == "fILe:"
-	private Hash_adp_bry tmpl_hash = Hash_adp_bry.ci_();	// hash for retrieval by name; PERF for templates
+	private Hash_adp_bry name_hash;							// hash for retrieval by name; note that ns names are case-insensitive "File:" == "fILe:"
+	private Hash_adp_bry tmpl_hash;							// hash for retrieval by name; PERF for templates
 	private OrderedHash aliases = OrderedHash_.new_();		// hash to store aliases; used to populate name_hash;
+	public Xow_ns_mgr(Xol_case_mgr case_mgr) {
+		name_hash = Hash_adp_bry.ci_utf8_(case_mgr);
+		tmpl_hash = Hash_adp_bry.ci_utf8_(case_mgr);
+	}
 	public void Clear() {
 		name_hash.Clear();
 		id_hash.Clear();

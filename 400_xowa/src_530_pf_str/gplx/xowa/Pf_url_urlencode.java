@@ -21,7 +21,7 @@ class Pf_url_urlencode extends Pf_func_base {	// EX: {{urlencode:a b}} -> a+b
 	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bb) {
 		byte[] val_ary = Eval_argx(ctx, src, caller, self); if (val_ary == Bry_.Empty) return;
 		ctx.App().Url_converter_url().Encode(urlEncodeBfr, val_ary);
-		bb.Add_bfr(urlEncodeBfr);
+		bb.Add_bfr_and_preserve(urlEncodeBfr);
 		urlEncodeBfr.Clear();
 	}	private Bry_bfr urlEncodeBfr = Bry_bfr.new_(128);
 	@Override public int Id() {return Xol_kwd_grp_.Id_url_urlencode;}

@@ -16,8 +16,17 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.cases; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-public class Xol_case_mgr implements GfoInvkAble {
+import gplx.intl.*;
+public class Xol_case_mgr implements GfoInvkAble, Gfo_case_mgr {
 	private Bry_bfr tmp_bfr = Bry_bfr.new_(); private ByteTrieMgr_fast upper_trie = ByteTrieMgr_fast.cs_(), lower_trie = ByteTrieMgr_fast.cs_(); private Xol_case_itm[] itms;
+	public Xol_case_mgr(byte tid) {this.tid = tid;}
+	public byte Tid() {return tid;} private byte tid;
+	public Gfo_case_itm Get_or_null(byte bgn_byte, byte[] src, int bgn, int end) {
+		Object rv = lower_trie.Match(bgn_byte, src, bgn, end);
+		return rv == null
+			? (Gfo_case_itm)upper_trie.Match(bgn_byte, src, bgn, end)
+			: (Gfo_case_itm)rv;
+	}
 	public void Clear() {upper_trie.Clear(); lower_trie.Clear();}
 	public boolean Match(byte b, byte[] src, int bgn_pos, int end_pos) {
 		return upper_trie.Match(b, src, bgn_pos, end_pos) != null
@@ -117,18 +126,9 @@ public class Xol_case_mgr implements GfoInvkAble {
 		bfr.Add_mid(src, bgn + b_len, end);
 		return bfr.XtoAryAndClear();
 	}
-	public Xol_case_mgr Clone() {
-		Xol_case_mgr rv = new Xol_case_mgr();
-		int itms_len = itms == null ? 0 : itms.length;
-		Xol_case_itm[] rv_ary = new Xol_case_itm[itms_len];
-		for (int i = 0; i < itms_len; i++)
-			rv_ary[i] = itms[i].Clone();
-		rv.itms = rv_ary;
-		return rv;
-	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_add_bulk))				Add_bulk(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_clear))					Clear();
+		else if	(ctx.Match(k, Invk_clear))					throw Err_.not_implemented_();
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_clear = "clear", Invk_add_bulk = "add_bulk";

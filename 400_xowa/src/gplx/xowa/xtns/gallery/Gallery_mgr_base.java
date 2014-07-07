@@ -176,10 +176,10 @@ public abstract class Gallery_mgr_base {
 		return tmp_bfr.XtoAryAndClear();
 	}
 	private static void Box_hdr_write(Bry_bfr bfr, Xop_xatr_whitelist_mgr whitelist_mgr, byte[] src, byte[] gallery_ul_uid, byte[] cls, byte[] style, ListAdp xatr_list) {
-		bfr.Add_byte(Byte_ascii.Lt).Add(Html_consts.Ul_tag_bry);
-		Html_wtr.Write_atr(bfr, Html_atrs.Id_bry, gallery_ul_uid);
-		Html_wtr.Write_atr(bfr, Html_atrs.Cls_bry, cls);
-		Html_wtr.Write_atr(bfr, Html_atrs.Style_bry, style);
+		bfr.Add_byte(Byte_ascii.Lt).Add(Html_tag_.Ul_name_bry);
+		Html_wtr.Write_atr(bfr, Html_atr_.Id_bry, gallery_ul_uid);
+		Html_wtr.Write_atr(bfr, Html_atr_.Cls_bry, cls);
+		Html_wtr.Write_atr(bfr, Html_atr_.Style_bry, style);
 		if (xatr_list != null) {
 			int len = xatr_list.Count();
 			for (int i = 0; i < len; i++) {

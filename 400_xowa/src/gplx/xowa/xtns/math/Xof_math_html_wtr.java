@@ -53,10 +53,10 @@ public class Xof_math_html_wtr {
 		for (int i = bgn; i < end; i++) {
 			byte b = bry[i];
 			switch (b) {
-				case Byte_ascii.Lt: 	if (mathjax) escaped = gplx.html.Html_consts.Lt; break;
-				case Byte_ascii.Gt: 	if (mathjax) escaped = gplx.html.Html_consts.Gt; break;
+				case Byte_ascii.Lt: 	if (mathjax) escaped = gplx.html.Html_entity_.Lt_bry; break;
+				case Byte_ascii.Gt: 	if (mathjax) escaped = gplx.html.Html_entity_.Gt_bry; break;
 				case Byte_ascii.Amp:	escaped = Const_amp; break;
-				case Byte_ascii.Quote:	if (mathjax) escaped = gplx.html.Html_consts.Quote; break;
+				case Byte_ascii.Quote:	if (mathjax) escaped = gplx.html.Html_entity_.Quote_bry; break;
 				default:
 					if (dirty || write_to_bfr)
 						bfr.Add_byte(b);

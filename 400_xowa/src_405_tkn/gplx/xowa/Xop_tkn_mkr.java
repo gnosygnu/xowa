@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.xtns.refs.*;
+import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.xtns.cite.*;
 public class Xop_tkn_mkr {
 	Xop_space_tkn space_tkn_immutable = new Xop_space_tkn(true, -1, -1);
 	public Xop_root_tkn Root(byte[] raw)													{return new Xop_root_tkn().Root_src_(raw);}

@@ -103,6 +103,7 @@ public class Xog_cmd_itm_ {
 	, Key_gui_browser_tabs_close_undo							= new_dflt_(Xog_ctg_itm_.Tid_tabs			, "xowa.gui.browser.tabs.close_undo")
 	, Key_gui_browser_tabs_pin_toggle							= new_dflt_(Xog_ctg_itm_.Tid_tabs			, "xowa.gui.browser.tabs.pin_toggle")
 	, Key_gui_browser_html_focus								= new_dflt_(Xog_ctg_itm_.Tid_browser		, "xowa.gui.browser.html.focus")
+	, Key_gui_browser_html_selection_focus_toggle				= new_dflt_(Xog_ctg_itm_.Tid_browser		, "xowa.gui.browser.html.selection_focus_toggle")
 	, Key_gui_browser_find_show									= new_dflt_(Xog_ctg_itm_.Tid_browser		, "xowa.gui.browser.find.show")
 	, Key_gui_browser_find_show_by_paste						= new_dflt_(Xog_ctg_itm_.Tid_browser		, "xowa.gui.browser.find.show_by_paste")
 	, Key_gui_browser_find_hide									= new_dflt_(Xog_ctg_itm_.Tid_browser		, "xowa.gui.browser.find.hide")

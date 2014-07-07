@@ -30,12 +30,8 @@ public class Xol_lang implements GfoInvkAble {
 		message_mgr = new Xol_msg_mgr(this, true);
 		fragment_mgr = new Xol_fragment_mgr(this);
 		specials_mgr = new Xol_specials_mgr(this);
-		if (lang_id == Xol_lang_itm_.Id_en) {	// NOTE: if test (and english) load case_mgr; NOTE: placed here b/c tests do not call load; NOTE: using English b/c Universal is large
-			if (Env_.Mode_testing())
-				case_mgr.Add_bulk(Xol_case_itm_.English);
-		}
-		else
-			fallback_bry_ary = Fallback_bry_ary__en;
+		case_mgr = Env_.Mode_testing() ? Xol_case_mgr_.Ascii() : Xol_case_mgr_.Utf8(); // NOTE: if test load ascii b/c utf8 is large; NOTE: placed here b/c tests do not call load; DATE:2014-07-04
+		if (lang_id != Xol_lang_itm_.Id_en) fallback_bry_ary = Fallback_bry_ary__en;	// NOTE: do not set fallback_ary for en to en, else recursive loop
 		grammar = Xol_grammar_.new_by_lang_id(lang_id);
 		plural = Xol_plural_.new_by_lang_id(lang_id);
 		num_mgr = Xol_num_mgr_.new_by_lang_id(lang_id);
@@ -58,7 +54,8 @@ public class Xol_lang implements GfoInvkAble {
 	public Xol_ns_grp Ns_aliases() {return ns_aliases;} private Xol_ns_grp ns_aliases;
 	public Xol_kwd_mgr Kwd_mgr() {return keyword_mgr;} private Xol_kwd_mgr keyword_mgr;
 	public Xol_msg_mgr Msg_mgr() {return message_mgr;} private Xol_msg_mgr message_mgr;
-	public Xol_case_mgr Case_mgr() {return case_mgr;} private Xol_case_mgr case_mgr = new Xol_case_mgr();
+	public Xol_case_mgr Case_mgr() {return case_mgr;} private Xol_case_mgr case_mgr;
+	public void Case_mgr_utf8_() {case_mgr = Xol_case_mgr_.Utf8();}		// TEST:
 	public Xol_font_info Gui_font() {return gui_font;} private Xol_font_info gui_font = new Xol_font_info(null, 0, gplx.gfui.FontStyleAdp_.Plain);
 	public byte[] Fallback_bry() {return fallback_bry;}
 	public Xol_lang Fallback_bry_(byte[] v) {
@@ -79,8 +76,6 @@ public class Xol_lang implements GfoInvkAble {
 	
 	public Xop_lnki_arg_parser Lnki_arg_parser() {return lnki_arg_parser;} private Xop_lnki_arg_parser lnki_arg_parser = new Xop_lnki_arg_parser(); 
 	public Xol_func_name_regy Func_regy() {return func_regy;} private Xol_func_name_regy func_regy;
-
-//		public Xol_num_fmtr_base Num_fmt_mgr() {return num_fmt_mgr;} public Xol_lang Num_fmt_mgr_(Xol_num_fmtr_base v) {num_fmt_mgr = v; return this;} private Xol_num_fmtr_base num_fmt_mgr = new Xol_num_fmtr_base();
 	public byte Img_thumb_halign_default() {return img_thumb_halign_default;} private byte img_thumb_halign_default = Xop_lnki_align_h.Right;
 
 	public Hash_adp_bry Xatrs_ref() {return xatrs_ref;} private Hash_adp_bry xatrs_ref = Hash_adp_bry.ci_();
@@ -126,7 +121,6 @@ public class Xol_lang implements GfoInvkAble {
 		this.loaded = true;
 		boolean lang_is_en = lang_id == Xol_lang_itm_.Id_en;
 		if (!lang_is_en) Xol_lang_.Lang_init(this);
-		case_mgr.Add_bulk(lang_is_en && Env_.Mode_testing() ? Xol_case_itm_.English : Xol_case_itm_.Universal);
 		message_mgr.Itm_by_key_or_new(Bry_.new_utf8_("Lang")).Atrs_set(key_bry, false, false);	// set "Lang" keyword; EX: for "fr", "{{int:Lang}}" -> "fr"
 		Load_lang(key_bry);
 		ns_aliases.Ary_add_(Xow_ns_.Canonical);	// NOTE: always add English canonical as aliases to all languages

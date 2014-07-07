@@ -58,14 +58,14 @@ public class Xow_popup_parser_tst {
 		));
 	}
 	@Test   public void Lnke_brack() {	// PURPOSE: count lnke caption words; DATE:2014-06-20
-		fxt.Init_scan_len_(32).Init_word_min_(5).Test_parse
+		fxt.Init_tmpl_read_len_(32).Init_word_needed_(5).Test_parse
 		( "a [http://b.org b c] d e f g", String_.Concat_lines_nl_skip_last
 		( "<p>a b c d e"
 		, "</p>"
 		));
 	}
 	@Test   public void Lnke_text() {	// PURPOSE: count entire lnke as one word
-		fxt.Init_scan_len_(32).Init_word_min_(5).Test_parse
+		fxt.Init_tmpl_read_len_(32).Init_word_needed_(5).Test_parse
 		( "a http://b.org c d e f g", String_.Concat_lines_nl_skip_last
 		( "<p>a <a href=\"http://b.org\" class=\"external text\" rel=\"nofollow\">http://b.org</a> c d e"
 		, "</p>"
@@ -141,6 +141,24 @@ public class Xow_popup_parser_tst {
 		( "<span id='a'/>"
 		, String_.Concat_lines_nl_skip_last
 		( "<p><span id='a'></span>"
+		, "</p>"
+		));
+	}
+	@Test   public void Xnde_br() {	// PURPOSE: check that br is added correctly; PAGE:en.q:Earth; DATE:2014-06-30
+		fxt.Init_word_needed_(3).Test_parse
+		( "a<br>b<br/>"
+		, String_.Concat_lines_nl_skip_last
+		( "<p>a<br>b<br/>"
+		, "</p>"
+		));
+	}
+	@Test   public void Xnde_math() {	// PURPOSE: <math> should be treated as one word; PAGE:en.w:System_of_polynomial_equations; DATE:2014-07-01
+		fxt	.Init_word_needed_(5)		// need to read more words to pick up 1st word after header
+			.Init_read_til_stop_bwd_(2)	// need to do read_bwd to start counting before ==e== into <math> node
+			.Test_parse
+		( "a <math>b c d</math> \n==e==\nf g h i"
+		, String_.Concat_lines_nl_skip_last
+		( "<p>a <span id='xowa_math_txt_0'>b c d</span> (e)"	// used to fail as <p>a &lt;math&gt;b c d (e)
 		, "</p>"
 		));
 	}
@@ -284,7 +302,7 @@ public class Xow_popup_parser_tst {
 		));
 	}
 	@Test   public void End_early_dangling() {	// PURPOSE: dangling tkn is too long; end early; PAGE:en.w:List_of_air_forces; DATE:2014-06-18
-		fxt.Init_scan_max_(8).Test_parse
+		fxt.Init_tmpl_read_max_(8).Test_parse
 		( "a [[File:Test.png]] k"
 		, String_.Concat_lines_nl_skip_last
 		( "<p>a "
@@ -304,18 +322,10 @@ public class Xow_popup_parser_tst {
 		( "<p>a"
 		, "</p>"
 		));
-		fxt.Test_parse	// no ellipsis: entire extract with skip
+		fxt.Test_parse	// no ellipsis: entire extract multiple reads
 		( "a <div>b</div>"
 		, String_.Concat_lines_nl_skip_last
 		( "<p>a "
-		, "</p>"
-		));
-	}
-	@Test   public void Stop_at_hdr() {
-		fxt.Init_ellipsis_("...").Init_stop_at_header_(true).Test_parse
-		( "a\n==b==\nc"
-		, String_.Concat_lines_nl_skip_last
-		( "<p>a"
 		, "</p>"
 		));
 	}
@@ -326,24 +336,80 @@ public class Xow_popup_parser_tst {
 		fxt.Test_ns_allowed("(Main)|Help"		, Xow_ns_.Id_main, Xow_ns_.Id_help);
 	}
 	@Test   public void Read_til_stop_fwd() {
-		fxt.Init_word_min_(2).Init_read_til_stop_fwd_(2).Test_parse("a b c\n==d==", String_.Concat_lines_nl_skip_last
-		( "<p>a b c"
+		fxt.Init_word_needed_(2).Init_read_til_stop_fwd_(2)					// read fwd found hdr
+		.Test_parse("a b c\n==d==", String_.Concat_lines_nl_skip_last
+		( "<p>a b c (d)"
 		, "</p>"
 		));
-		fxt.Init_word_min_(2).Init_read_til_stop_fwd_(2).Test_parse("a b c d", String_.Concat_lines_nl_skip_last
+		fxt.Init_word_needed_(2).Init_read_til_stop_fwd_(2)					// read fwd did not find hdr; reset back to min
+		.Test_parse("a b c d", String_.Concat_lines_nl_skip_last
 		( "<p>a b"
 		, "</p>"
 		));
 	}
+	@Test   public void Read_til_stop_bwd() {
+		fxt.Init_word_needed_(8).Init_read_til_stop_bwd_(4)					// read bwd found hdr
+		.Test_parse("01 02 03 04 05\n==06==\n07 08 09 10 11 12 13 14 15 16", String_.Concat_lines_nl_skip_last
+		( "<p>01 02 03 04 05 (06)"
+		, "</p>"
+		));
+		fxt.Init_tmpl_read_len_(40).Init_word_needed_(5).Init_read_til_stop_bwd_(3)		// read bwd at eos should not return "next_sect"; DATE:2014-07-01
+		.Test_parse("01 02 03 \n==04==\n", String_.Concat_lines_nl_skip_last
+		( "<p>01 02 03 "
+		, "</p>"
+		, ""
+		, "<h2>04</h2>"
+		));
+	}
+	@Test   public void Stop_if_hdr_after() {
+		fxt.Init_word_needed_(5).Init_stop_if_hdr_after_(1)
+		.Test_parse("a b\n==c==\nd e", String_.Concat_lines_nl_skip_last
+		( "<p>a b"
+		, "</p>"
+		, ""
+		, "<h2>c</h2>"
+		));
+	}
 	@Test   public void Tmpl_tkn_max() {
-		fxt.Init_tmpl_tkn_max_(5).Init_page("Template:A", "a");
+		fxt.Init_tmpl_tkn_max_(5).Init_page("Template:A", "a");		// eval
 		fxt.Test_parse
 		( "{{A}}"
 		, String_.Concat_lines_nl_skip_last
 		( "<p>a"
 		, "</p>"
 		));
-		fxt.Test_parse( "{{A|b|c}}", "<p>\n</p>");
+		fxt.Test_parse("{{A|b|c}}"			, "");					// skip; NOTE: output should be blank, not <p>\n</p>; PAGE:en.w:List_of_countries_by_GDP_(PPP); DATE:2014-07-01
+	}
+	@Test   public void Tmpl_tkn_max__comment_and_tblw() {	// PURPOSE: garbled popup when tmpl_tkn_max is set and comments in front of tblw; PAGE:en.w:Gwynedd; DATE:2014-07-01
+		fxt	.Init_tmpl_tkn_max_(5)		// set tmpl_tkn_max
+			.Init_tmpl_read_len_(20)	// set read_len to 20 (must read entire "<!---->\n{|" at once
+			.Test_parse(String_.Concat_lines_nl_skip_last
+		( "{{A|b}}"
+		, "{{A|b}}"
+		, "{|"
+		, "|-"
+		, "|a b c d"
+		, "|}"
+		), "");	// should be blank, not <table>]
+	}
+	@Test   public void Tmpl_tkn_max__apos() {	// PURPOSE: handle apos around skipped tmpl token; PAGE:en.w:Somalia; DATE:2014-07-02
+		fxt.Init_tmpl_tkn_max_(5).Test_parse("a''{{A|b}}''b", String_.Concat_lines_nl_skip_last
+		( "<p>a<i> </i>b"
+		, "</p>"
+		));
+	}
+	@Test   public void Notoc_and_para_issue() {	// PURPOSE.fix: issue with "\s__NOTOC__" and "a\n"b; PAGE:en.w:Spain; DATE:2014-07-05
+		fxt.Init_word_needed_(3).Init_notoc_(" __NOTOC__").Test_parse("a\nb", String_.Concat_lines_nl_skip_last
+		( "<p>a"		// was <p>a</p>b
+		, "b "
+		, "</p>"
+		));
+	}
+	@Test  public void Test_Assert_at_end() {
+		fxt.Test_Assert_at_end("a"			, "a\n");			// add one
+		fxt.Test_Assert_at_end("a\n"		, "a\n");			// noop
+		fxt.Test_Assert_at_end("a\n\n\n"	, "a\n");			// remove til one
+		fxt.Test_Assert_at_end(""			, "");				// empty check
 	}
 }
 class Xop_popup_parser_fxt {
@@ -354,26 +420,31 @@ class Xop_popup_parser_fxt {
 		this.wiki = Xoa_app_fxt.wiki_(app, "en.wiki");
 		parser = wiki.Html_mgr().Module_mgr().Popup_mgr().Parser();
 		parser.Init_by_wiki(wiki);
-		parser.Scan_len_(4);
-		parser.Html_fmtr().Fmt_("~{content}");
-		parser.Ellipsis_(Bry_.Empty);
-		parser.Notoc_(Bry_.Empty);
-		parser.Stop_at_hdr_(false);
-		parser.Output_js_clean_(false);
-		parser.Output_tidy_(false);
-		parser.Show_all_if_less_than_(-1);
-		parser.Xnde_ignore_ids_(Xoapi_popups.Dflt_coordinates);
-		parser.Read_til_stop_fwd_(-1);
+		parser.Cfg().Tmpl_read_len_(4);
+		parser.Cfg().Ellipsis_(Bry_.Empty);
+		parser.Cfg().Notoc_(Bry_.Empty);
+		parser.Cfg().Show_all_if_less_than_(-1);
+		parser.Cfg().Read_til_stop_fwd_(-1);
+		parser.Cfg().Read_til_stop_bwd_(-1);
+		parser.Cfg().Stop_if_hdr_after_(-1);
+		parser.Html_mkr().Fmtr_popup().Fmt_("~{content}");
+		parser.Html_mkr().Output_js_clean_(false);
+		parser.Html_mkr().Output_tidy_(false);
+		parser.Html_mkr().Fmtr_next_sect().Fmt_(" (~{next_sect_val})");
+		parser.Wrdx_mkr().Xnde_ignore_ids_(Xoapi_popups.Dflt_xnde_ignore_ids);
 		word_min = 2;
 	}
-	public Xop_popup_parser_fxt Init_scan_len_(int v) {parser.Scan_len_(v); return this;}
-	public Xop_popup_parser_fxt Init_scan_max_(int v) {parser.Scan_max_(v); return this;}
-	public Xop_popup_parser_fxt Init_word_min_(int v) {word_min = v; return this;}
+	public Xop_popup_parser_fxt Init_notoc_(String v) {parser.Cfg().Notoc_(Bry_.new_utf8_(v)); return this;}
+	public Xop_popup_parser_fxt Init_tmpl_read_len_(int v) {parser.Cfg().Tmpl_read_len_(v); return this;}
+	public Xop_popup_parser_fxt Init_tmpl_read_max_(int v) {parser.Cfg().Tmpl_read_max_(v); return this;}
+	public Xop_popup_parser_fxt Init_word_needed_(int v) {word_min = v; return this;}
 	public Xop_popup_parser_fxt Init_para_enabled_(boolean v) {parser.Wtxt_ctx().Para().Enabled_(v); return this;}
-	public Xop_popup_parser_fxt Init_stop_at_header_(boolean v) {parser.Stop_at_hdr_(v); return this;}
-	public Xop_popup_parser_fxt Init_ellipsis_(String v) {parser.Ellipsis_(Bry_.new_utf8_(v)); return this;}
-	public Xop_popup_parser_fxt Init_read_til_stop_fwd_(int v) {parser.Read_til_stop_fwd_(v); return this;}
+	public Xop_popup_parser_fxt Init_ellipsis_(String v) {parser.Cfg().Ellipsis_(Bry_.new_utf8_(v)); return this;}
+	public Xop_popup_parser_fxt Init_read_til_stop_fwd_(int v) {parser.Cfg().Read_til_stop_fwd_(v); return this;}
+	public Xop_popup_parser_fxt Init_read_til_stop_bwd_(int v) {parser.Cfg().Read_til_stop_bwd_(v); return this;}
+	public Xop_popup_parser_fxt Init_stop_if_hdr_after_(int v) {parser.Cfg().Stop_if_hdr_after_(v); return this;}
 	public Xop_popup_parser_fxt Init_tmpl_tkn_max_(int v) {parser.Tmpl_tkn_max_(v); return this;}
+	public Xop_popup_parser_fxt Init_fmtr_next_sect_(String v) {parser.Html_mkr().Fmtr_next_sect().Fmt_(v); return this;}
 	public Xop_popup_parser_fxt Init_page(String ttl, String txt) {Xop_fxt.Init_page_create_static(wiki, ttl, txt); return this;}
 	public Xop_popup_parser_fxt Test_ns_allowed(String raw, int... expd) {
 		Int_obj_ref[] ids = Xow_popup_mgr.Ns_allowed_parse(wiki, Bry_.new_utf8_(raw));
@@ -384,7 +455,14 @@ class Xop_popup_parser_fxt {
 		Xoa_page page = Xoa_page.create_(wiki, Xoa_ttl.parse_(wiki, Bry_.new_ascii_("Test_1")));
 		page.Data_raw_(Bry_.new_utf8_(raw));
 		Xow_popup_itm itm = new Xow_popup_itm(1, Bry_.new_utf8_(raw), word_min);
-		byte[] actl = parser.Parse(itm, page, wiki.Domain_bry(), null);
+		itm.Init(wiki.Domain_bry(), page.Ttl());
+		byte[] actl = parser.Parse(wiki, page, null, itm);
 		Tfds.Eq_str_lines(expd, String_.new_utf8_(actl));
 	}
+	public void Test_Assert_at_end(String raw, String expd) {
+		if (test_bfr == null) test_bfr = Bry_bfr.new_();
+		test_bfr.Clear().Add_str(raw);
+		Bry_bfr_.Assert_at_end(test_bfr, Byte_ascii.NewLine);
+		Tfds.Eq(expd, test_bfr.XtoStrAndClear());
+	}	private Bry_bfr test_bfr;
 }

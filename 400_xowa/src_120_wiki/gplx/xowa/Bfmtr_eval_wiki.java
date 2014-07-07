@@ -23,4 +23,9 @@ public class Bfmtr_eval_wiki implements Bry_fmtr_eval_mgr {
 		Object rslt = GfsCore._.Exec_bry(cmd, wiki);
 		return Bry_.new_utf8_(Object_.XtoStr_OrNullStr(rslt));
 	}
+	public void Eval_mgr_(Bry_fmtr... fmtrs) {
+		int fmtrs_len = fmtrs.length;
+		for (int i = 0; i < fmtrs_len; i++)
+			fmtrs[i].Eval_mgr_(this);
+	}
 }

@@ -21,7 +21,7 @@ class Xodb_ns_map_mgr {
 	public static Xodb_ns_map_mgr Parse(byte[] src) {
 		byte[][] lines = Bry_.Split(src, Byte_ascii.NewLine);
 		int lines_len = lines.length;
-		Xow_ns_mgr canonical_ns_mgr = Xow_ns_mgr_.default_();
+		Xow_ns_mgr canonical_ns_mgr = Xow_ns_mgr_.default_(gplx.xowa.langs.cases.Xol_case_mgr_.Ascii());
 		Xodb_ns_map_mgr rv = new Xodb_ns_map_mgr();
 		ListAdp itms = ListAdp_.new_();
 		for (int i = 0; i < lines_len; i++) {

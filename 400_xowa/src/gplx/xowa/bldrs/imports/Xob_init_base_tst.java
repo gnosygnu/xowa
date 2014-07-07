@@ -27,7 +27,7 @@ public class Xob_init_base_tst {
 		app.User().Wiki().Xwiki_mgr().Add_full("en.wikipedia.org", "en.wikipedia.org");
 		Tfds.Eq("", wikis_list.Itms_as_html());			// still empty
 		new Xob_init_txt(app.Bldr(), wiki).Cmd_end();	// mock "init" task
-		Tfds.Eq("\n        <li><a href=\"/site/en.wikipedia.org/\">en.wikipedia.org</a></li>", wikis_list.Itms_as_html());	// no longer empty
+		Tfds.Eq("\n        <li><a href=\"/site/en.wikipedia.org/\" class='xowa-hover-off'>en.wikipedia.org</a></li>", wikis_list.Itms_as_html());	// no longer empty
 	}
 }
 class Xob_init_base_fxt {		

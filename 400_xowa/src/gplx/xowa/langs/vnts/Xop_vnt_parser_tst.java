@@ -34,9 +34,13 @@ public class Xop_vnt_parser_tst {	// uses zh-hant as cur_vnt
 		fxt.Parser_fxt().Init_page_create("Template:A", "B");
 		fxt.Test_parse("-{{{A}}}-", "B");
 	}
-	@Test  public void Tmpl_arg() {
+	@Test  public void Tmpl_arg_4() {	// PURPOSE: handle "-{" + "{{{"
 		fxt.Parser_fxt().Init_page_create("Template:A", "-{{{{1}}}}-");
-		fxt.Test_parse("{{A|B}}", "B");
+		fxt.Test_parse("{{A|B}}", "B");	//  -{ {{{1}}} }- -> -{B}- -> B
+	}
+	@Test  public void Tmpl_arg_3() {	// PURPOSE: handle "-" + "{{{"; PAGE:sr.w:ДНК; EX:<span id="interwiki-{{{1}}}-fa"></span> DATE:2014-07-03
+		fxt.Parser_fxt().Init_page_create("Template:A", "-{{{1}}}-");
+		fxt.Test_parse("{{A|B}}", "-B-");
 	}
 	@Test  public void Parser_function() {
 		fxt.Test_parse("-{{{#expr:1}}}-", "1");

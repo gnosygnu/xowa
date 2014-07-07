@@ -51,7 +51,7 @@ class Html_utl_fxt {
 		Tfds.Eq(expd, String_.new_ascii_(actl));
 	}
 	public void Test_escape_for_atr(String src, boolean quote_is_apos, String expd) {
-		byte[] actl = Html_utl.Escape_for_atr_val_as_bry(src, quote_is_apos ? Byte_ascii.Apos : Byte_ascii.Quote);
+		byte[] actl = Html_utl.Escape_for_atr_val_as_bry(tmp_bfr, quote_is_apos ? Byte_ascii.Apos : Byte_ascii.Quote, src);
 		Tfds.Eq(expd, String_.new_utf8_(actl));
 	}
 	public void Test_unescape_html(boolean lt, boolean gt, boolean amp, boolean quote, boolean apos, String src, String expd) {

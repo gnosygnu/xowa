@@ -35,13 +35,10 @@ public class Pf_tag extends Pf_func_base {
 			tmp.Add_byte(Byte_ascii.Lt).Add(tag_name);
 			if (args_len > 1) {
 				for (int i = 1; i < args_len; i++) {
-					byte[] arg = Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, args_len, i);
-					if (arg.length == 0) continue;	// if atr is empty, skip; see test
+					byte[] arg = Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, args_len, i);	// NOTE: must evaluate arg; don't try to parse arg_tkn's key / val separately; EX:{{#tag:pre|a|{{#switch:a|a=id}}=c}}
+					if (arg.length == 0) continue;	// skip empty atrs
 					tmp.Add_byte(Byte_ascii.Space);
-					if (!AddHtmlArg(arg, tmp)) {
-						ctx.Msg_log().Add_itm_none(Xop_tag_log.Invalid, arg, 0, arg.length);
-						tmp.Clear();
-					}
+					Pf_tag_kv_bldr.Add_arg_as_html_atr(arg, tmp);
 				}
 			}
 			tmp.Add_byte(Byte_ascii.Gt);
@@ -54,23 +51,47 @@ public class Pf_tag extends Pf_func_base {
 		}
 		finally {tmp.Mkr_rls();}
 	}
-	private boolean AddHtmlArg(byte[] src, Bry_bfr tmp) {
-		ParseKeyVal(src, kv_bldr);
-		//if (!kv_bldr.Valid()) return false;
-		if (kv_bldr.Key_bgn() != -1)
-			tmp.Add(Bry_.Mid(src, kv_bldr.Key_bgn(), kv_bldr.KeyEnd()));
-		if (kv_bldr.Val_bgn() != -1) {
-			if (kv_bldr.Key_bgn() != -1) {
-				tmp.Add_byte(Byte_ascii.Eq);
+	public static final int
+	  Xtag_len = 27	// <xtag_bgn id='1234567890'/>
+	, Xtag_bgn = 14 // <xtag_bgn id='
+	;
+	public static final byte[]
+	  Xtag_bgn_lhs = Bry_.new_ascii_("<xtag_bgn id='")
+	, Xtag_end_lhs = Bry_.new_ascii_("<xtag_end id='")
+	, Xtag_rhs = Bry_.new_ascii_("'/>")
+	;
+}
+class Pf_tag_kv_bldr {
+	public int Key_bgn() {return key_bgn;} private int key_bgn;
+	public int KeyEnd() {return key_end;} private int key_end;
+	public Pf_tag_kv_bldr Key_rng_(int bgn, int end) {key_bgn = bgn; key_end = end; return this;}
+	public int Val_bgn() {return val_bgn;} private int val_bgn;
+	public int Val_end() {return val_end;} private int val_end;
+	public Pf_tag_kv_bldr Val_rng_(int bgn, int end) {val_bgn = bgn; val_end = end; return this;}
+	public boolean Valid() {
+		return key_bgn != -1 && key_end != -1 && val_bgn != -1 && val_end != -1 && key_bgn <= key_end && val_bgn <= val_end;
+	}
+	public void Clear() {
+		key_bgn = key_end = val_bgn = val_end = -1;
+	}
+	public static void Add_arg_as_html_atr(byte[] src, Bry_bfr tmp) {
+		synchronized (kv_bldr) {
+			ParseKeyVal(src, kv_bldr);
+			if (kv_bldr.Val_bgn() == -1) return;	// ignore atrs with empty vals: EX:{{#tag:ref||group=}} PAGE:ru.w:Колчак,_Александр_Васильевич DATE:2014-07-03
+			if (kv_bldr.Key_bgn() != -1)
+				tmp.Add(Bry_.Mid(src, kv_bldr.Key_bgn(), kv_bldr.KeyEnd()));
+			if (kv_bldr.Val_bgn() != -1) {
+				if (kv_bldr.Key_bgn() != -1) {
+					tmp.Add_byte(Byte_ascii.Eq);
+				}
+				tmp.Add_byte(Byte_ascii.Quote);
+				tmp.Add(Bry_.Mid(src, kv_bldr.Val_bgn(), kv_bldr.Val_end()));
+				tmp.Add_byte(Byte_ascii.Quote);
 			}
-			tmp.Add_byte(Byte_ascii.Quote);
-			tmp.Add(Bry_.Mid(src, kv_bldr.Val_bgn(), kv_bldr.Val_end()));
-			tmp.Add_byte(Byte_ascii.Quote);
+			kv_bldr.Clear();
 		}
-		kv_bldr.Clear();
-		return true;
-	}	private KeyValBldr kv_bldr = new KeyValBldr();
-	private static void ParseKeyVal(byte[] src, KeyValBldr kv_bldr) {
+	}
+	private static void ParseKeyVal(byte[] src, Pf_tag_kv_bldr kv_bldr) {
 		int itm_bgn = -1, itm_end = -1, src_len = src.length;
 		boolean mode_is_key = true;
 		for (int i = 0; i < src_len; i++) {
@@ -101,27 +122,5 @@ public class Pf_tag extends Pf_func_base {
 		if (itm_end == -1) itm_end = src_len;
 		kv_bldr.Val_rng_(itm_bgn, itm_end);
 	}
-	public static final int
-	  Xtag_len = 27	// <xtag_bgn id='1234567890'/>
-	, Xtag_bgn = 14 // <xtag_bgn id='
-	;
-	public static final byte[]
-	  Xtag_bgn_lhs = Bry_.new_ascii_("<xtag_bgn id='")
-	, Xtag_end_lhs = Bry_.new_ascii_("<xtag_end id='")
-	, Xtag_rhs = Bry_.new_ascii_("'/>")
-	;
-}
-class KeyValBldr {
-	public int Key_bgn() {return key_bgn;} private int key_bgn;
-	public int KeyEnd() {return key_end;} private int key_end;
-	public KeyValBldr Key_rng_(int bgn, int end) {key_bgn = bgn; key_end = end; return this;}
-	public int Val_bgn() {return val_bgn;} private int val_bgn;
-	public int Val_end() {return val_end;} private int val_end;
-	public KeyValBldr Val_rng_(int bgn, int end) {val_bgn = bgn; val_end = end; return this;}
-	public boolean Valid() {
-		return key_bgn != -1 && key_end != -1 && val_bgn != -1 && val_end != -1 && key_bgn <= key_end && val_bgn <= val_end;
-	}
-	public void Clear() {
-		key_bgn = key_end = val_bgn = val_end = -1;
-	}
+	private static Pf_tag_kv_bldr kv_bldr = new Pf_tag_kv_bldr();
 }

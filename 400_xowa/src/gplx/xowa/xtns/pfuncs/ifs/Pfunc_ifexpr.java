@@ -26,7 +26,7 @@ public class Pfunc_ifexpr extends Pf_func_base {
 		DecimalAdp result = shunter.Evaluate(ctx, val_dat_ary);
 		boolean is_nan = result == Pfunc_expr_shunter.Null_rslt;
 		if (is_nan && shunter.Err().Len() > 0) {
-			bb.Add_bfr(shunter.Err());
+			bb.Add_bfr_and_preserve(shunter.Err());
 			shunter.Err().Clear();
 		}
 		else {

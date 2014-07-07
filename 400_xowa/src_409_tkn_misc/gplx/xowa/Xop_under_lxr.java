@@ -87,15 +87,17 @@ class Xop_under_lxr implements Xop_lxr {
 		if (o == null) return ctx.Lxr_make_txt_(cur_pos);					// kwd not found; EX: "TOCA__"
 		int kwd_id = ((Int_obj_val)(o)).Val();
 		Xop_under_lxr.Make_tkn(ctx, tkn_mkr, root, src, src_len, bgn_pos, rv, kwd_id);
-
-		ctx.Para().Process_block_lnki_div();	// close any existing pre's by faking div; EX:\n\s__TOC; de.w;pt.b; DATE:2014-04-07
 		return rv;
 	}
 	public static void Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos, int kwd_id) {
 		Xoa_page page = ctx.Cur_page();
 		Xow_hdr_mgr hdr_mgr = page.Hdr_mgr();
 		switch (kwd_id) {
-			case Xol_kwd_grp_.Id_toc:				hdr_mgr.Toc_manual_(); ctx.Subs_add(root, tkn_mkr.Under(bgn_pos, cur_pos, kwd_id)); break;	// NOTE: only save under_tkn for TOC (b/c its position is needed for insertion); DATE:2013-07-01
+			case Xol_kwd_grp_.Id_toc:
+				hdr_mgr.Toc_manual_();
+				ctx.Para().Process_block_lnki_div();							// NOTE: __TOC__ will manually place <div toc> here; simulate div in order to close any pres; EX:\n\s__TOC__; PAGE:de.w:  DATE:2014-07-05
+				ctx.Subs_add(root, tkn_mkr.Under(bgn_pos, cur_pos, kwd_id));	// NOTE: only save under_tkn for TOC (b/c its position is needed for insertion); DATE:2013-07-01
+				break;	
 			case Xol_kwd_grp_.Id_forcetoc:			hdr_mgr.Toc_force_(); break;
 			case Xol_kwd_grp_.Id_notoc:				hdr_mgr.Toc_hide_(); break;
 			case Xol_kwd_grp_.Id_noeditsection:		break;	// ignore; not handling edit sections

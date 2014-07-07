@@ -17,34 +17,39 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import org.junit.*;
-public class Xop_redirect_mgr_tst {
+public class Xop_redirect_mgr_tst {		
+	@Before public void init() {fxt.Clear();} private Xop_redirect_mgr_fxt fxt = new Xop_redirect_mgr_fxt();
+	@Test  public void Basic()					{fxt.Test_redirect("#REDIRECT [[a]]", "A");}
+	@Test  public void Basic_colon()			{fxt.Test_redirect("#REDIRECT:[[a]]", "A");}
+	@Test  public void Ns_help()				{fxt.Test_redirect("#REDIRECT [[Help:a]]", "Help:A");}
+	@Test  public void First()					{fxt.Test_redirect("#REDIRECT [[a]] [[b]]", "A");}
+	@Test  public void Exc_false_match()		{fxt.Test_redirect("#REDIRECTA [[a]]", "");}
+	@Test  public void Exc_lnki_not_found()		{fxt.Test_redirect("#REDIRECT test", "");}
+	@Test  public void Ws()						{fxt.Test_redirect("\n#REDIRECT [[a]]", "A");}	// EX.WP:Germany; {{Template group}} -> \n#REDIRECT [[Template:Navboxes]]
+	@Test  public void Utf8() {
+		fxt.Init_utf8();
+		fxt.Init_kwds(Bool_.N, "#REDIRECT", "#перенаправление");
+		fxt.Test_redirect("#REDIRECT [[A]]", "A");
+		fxt.Test_redirect("#reDirect [[A]]", "A");
+		fxt.Test_redirect("#перенаправление [[A]]", "A");
+		fxt.Test_redirect("#ПЕРЕНАПРАВЛЕНИЕ [[A]]", "A");
+	}
+}
+class Xop_redirect_mgr_fxt {
 	private Xop_fxt fxt = new Xop_fxt();
-	@Test  public void Basic()					{tst_Redirect("#REDIRECT [[a]]", "A");}
-	@Test  public void Basic_colon()			{tst_Redirect("#REDIRECT:[[a]]", "A");}
-	@Test  public void Ns_help()				{tst_Redirect("#REDIRECT [[Help:a]]", "Help:A");}
-	@Test  public void First()					{tst_Redirect("#REDIRECT [[a]] [[b]]", "A");}
-	@Test  public void Exc_false_match()		{tst_Redirect("#REDIRECTA [[a]]", Xop_redirect_log.False_match);}
-	@Test  public void Exc_lnki_not_found()		{tst_Redirect("#REDIRECT test", Xop_redirect_log.Lnki_not_found);}
-	@Test  public void Ws()						{tst_Redirect("\n#REDIRECT [[a]]", "A");}	// EX.WP:Germany; {{Template group}} -> \n#REDIRECT [[Template:Navboxes]]
-	private void tst_Redirect(String src_str, Object expd) {
-		Xop_redirect_mgr redirect_mgr = new Xop_redirect_mgr(fxt.Ctx().Wiki());
-		fxt.Log_clear();
-
-		byte[] src = Bry_.new_utf8_(src_str);
-		Xoa_ttl actl_ttl = redirect_mgr.Extract_redirect(src, src.length);
-		byte[] actl = actl_ttl == null ? Bry_.Empty : actl_ttl.Full_txt();
-		String expd_str = String_.as_(expd);
-		if (actl == Bry_.Empty) {
-			if (expd_str != null) throw Err_.new_("result is null; expecting " + expd);
-			Gfo_msg_itm itm = (Gfo_msg_itm)expd;
-			String[] actl_ary = fxt.Log_xtoAry();
-			Tfds.Eq_ary_str(new String[] {String_.new_utf8_(itm.Owner().Path()) + "." + String_.new_utf8_(itm.Key_bry())}, actl_ary);
-			return;
-		}
-		if (expd_str == null) {
-			Gfo_msg_itm expd_hdr = (Gfo_msg_itm)expd;
-			throw Err_.new_("result is valued; expecting error " + expd_hdr.Path_str());
-		}
-		Tfds.Eq(expd_str, String_.new_utf8_(actl));
+	public void Clear() {
+		fxt.Reset();
+	}
+	public void Init_kwds(boolean case_match, String... kwds) {fxt.Init_lang_kwds(Xol_kwd_grp_.Id_redirect, case_match, kwds);}
+	public void Init_utf8() {
+		fxt.Wiki().Lang().Case_mgr_utf8_();
+	}
+	public void Test_redirect(String raw_str, String expd_str) {
+		Xop_redirect_mgr redirect_mgr = fxt.Ctx().Wiki().Redirect_mgr();
+		redirect_mgr.Clear();
+		byte[] raw_bry = Bry_.new_utf8_(raw_str);
+		Xoa_ttl actl_ttl = redirect_mgr.Extract_redirect(raw_bry, raw_bry.length);
+		byte[] actl_bry = actl_ttl == null ? Bry_.Empty : actl_ttl.Full_txt();
+		Tfds.Eq(expd_str, String_.new_utf8_(actl_bry));
 	}
 }

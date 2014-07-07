@@ -83,10 +83,23 @@ public class Xop_xnde_wkr__nowiki_tst {
 			,	""
 			));
 	}
-	@Test  public void Pre() {	// PURPOSE: nowikis inside pre should be ignored; DATE:2013-03-30
+	@Test  public void Prex() {	// PURPOSE: nowikis inside pre should be ignored; DATE:2013-03-30
 		fxt.Test_parse_page_all_str("<pre>a<nowiki>&lt;</nowiki>b</pre>"				, "<pre>a&lt;b</pre>");								// basic
 		fxt.Test_parse_page_all_str("<pre>a<nowiki>&lt;<nowiki>b</pre>"					, "<pre>a&lt;nowiki&gt;&lt;&lt;nowiki&gt;b</pre>");	// not closed
 		fxt.Test_parse_page_all_str("<pre><nowiki>a<nowiki>b</nowiki>c</nowiki></pre>"	, "<pre>&lt;nowiki&gt;abc&lt;/nowiki&gt;</pre>");	// nested; this is wrong, but leave for now; should be a<nowiki>b</nowiki>c
+	}
+	@Test  public void Prew() {	// PURPOSE: space inside nowiki should be ignored; ru.b:Rubyn DATE:2014-07-03
+		fxt.Init_para_y_();
+		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
+		( " a<nowiki>"
+		, " <b></b></nowiki>"	// note that "\s" must remain "\s" so that <pre> continues uninterrupted
+		), String_.Concat_lines_nl
+		( "<pre>a"
+		, "&lt;b&gt;&lt;/b&gt;"
+		, "</pre>"
+		)
+		);
+		fxt.Init_para_n_();
 	}
 	@Test  public void Code() {	// PURPOSE.fix:HtmlNcr-escaped refs were being ignored; caused by HtmlTidy fix for frwiki templates;DATE:2013-06-27
 		fxt.Test_parse_page_all_str("<code><nowiki>|:</nowiki></code>", "<code>|:</code>");

@@ -24,8 +24,8 @@ public class Xoa_html_data {
 	public Bry_bfr				Portal_div_xtn() {return portal_div_xtn;} private Bry_bfr portal_div_xtn = Bry_bfr.reset_(255);
 	public int					Lnke_autonumber_next() {return lnke_autonumber++;} private int lnke_autonumber = 1;
 	public String				Bmk_pos() {return html_bmk_pos;} public void Bmk_pos_(String v) {html_bmk_pos = v;} private String html_bmk_pos;
-	public boolean					Restricted() {return html_restricted;} public void Restricted_n_() {html_restricted = false;} private boolean html_restricted = true;
-	public void Restricted_y_() {html_restricted = true;}
+	public boolean					Restricted() {return html_restricted;} private boolean html_restricted = true;
+	public void					Restricted_(boolean v) {html_restricted = v;} public void Restricted_n_() {Restricted_(Bool_.N);}  public void Restricted_y_() {Restricted_(Bool_.Y);}
 	public byte[]				Edit_preview() {return edit_preview;} public void Edit_preview_(byte[] v) {edit_preview = v;} private byte[] edit_preview = Bry_.Empty;
 	public byte[]				Search_text() {return search_text;} public void Search_text_(byte[] v) {search_text = v;} private byte[] search_text = Bry_.Empty;
 	public byte[]				Custom_html() {return custom_html;} public Xoa_html_data Custom_html_(byte[] v) {custom_html = v; return this;} private byte[] custom_html;

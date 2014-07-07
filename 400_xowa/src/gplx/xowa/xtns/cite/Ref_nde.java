@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.xtns.refs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.cite; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.html.*;
 public class Ref_nde implements Xox_xnde, Xop_xnde_atr_parser {
 	public byte[] Name() {return name;} public Ref_nde Name_(byte[] v) {name = v; return this;} private byte[] name = Bry_.Empty;
@@ -35,8 +35,12 @@ public class Ref_nde implements Xox_xnde, Xop_xnde_atr_parser {
 		Byte_obj_val xatr_key = (Byte_obj_val)xatr_key_obj;
 		switch (xatr_key.Val()) {
 			case Xatr_id_name:		name = wiki.App().Sanitizer().Escape_id(xatr.Val_as_bry(src)); break;
-			case Xatr_id_group:		group = xatr.Val_as_bry(src); break;
 			case Xatr_id_follow:	follow = xatr.Val_as_bry(src); break;
+			case Xatr_id_group:		{
+				group = xatr.Val_as_bry(src);
+				if (Bry_.Eq(group, wiki.Xtn_mgr().Xtn_cite().Group_default_name())) group = Bry_.Empty;	// if group == default, make it same as empty; DATE:2014-07-03
+				break;
+			}
 		}
 	}
 	public void Xtn_parse(Xow_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {

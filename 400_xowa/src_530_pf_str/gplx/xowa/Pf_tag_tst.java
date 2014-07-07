@@ -17,14 +17,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import org.junit.*;
-public class Pf_tag_tst {
-	private Xop_fxt fxt = new Xop_fxt();
-	@Before public void init()			{fxt.Reset();}
+public class Pf_tag_tst {		
+	@Before public void init()			{fxt.Reset();} private Xop_fxt fxt = new Xop_fxt();
 	@Test   public void Basic()			{fxt.Test_html_full_str("{{#tag:pre|a|id=b|style=c}}"				, "<pre id=\"b\" style=\"c\">a</pre>");}
 //		@Test   public void Missing_val()	{fxt.ini_Msg(Mwl_tag_rsc._.Invalid).Test_parse_tmpl_str_test("{{#tag:pre|a|id=}}"	, "{{test}}"	, "");}	// see {{Reflist|colwidth=30em}} -> <ref group=a>a</ref>{{#tag:references||group=}} -> ""
 	@Test   public void Atr2_empty()	{fxt.Test_html_full_str("{{#tag:pre|a|id=b|}}"						, "<pre id=\"b\">a</pre>");}	// see {{Reflist|colwidth=30em}} -> <ref group=a>a</ref>{{#tag:references||group=a|}} -> "<references group=a/>"
 	@Test   public void Val_apos()		{fxt.Test_html_full_str("{{#tag:pre|a|id='b'}}"						, "<pre id=\"b\">a</pre>");}
 	@Test   public void Val_quote()		{fxt.Test_html_full_str("{{#tag:pre|a|id=\"b\"}}"					, "<pre id=\"b\">a</pre>");}
+	@Test   public void Val_empty()		{fxt.Test_html_full_str("{{#tag:pre|a|id=}}"						, "<pre>a</pre>");}				// PURPOSE: ignore atrs with no val; EX:{{#ref||group=}} PAGE:ru.w:Колчак,_Александр_Васильевич; DATE:2014-07-03
+	@Test   public void Tmpl()			{fxt.Test_html_full_str("{{#tag:pre|a|{{#switch:a|a=id}}=c}}"		, "<pre id=\"c\">a</pre>");}	// PURPOSE: args must be evaluated
 	@Test   public void Ws_all()	    {fxt.Test_html_full_str("{{#tag:pre|a|   id   =   b   }}"			, "<pre id=\"b\">a</pre>");}
 	@Test   public void Ws_quoted()		{fxt.Test_html_full_str("{{#tag:pre|a|   id   = ' b ' }}"			, "<pre id=\"_b_\">a</pre>");}
 	@Test   public void Err_bad_key()	{fxt.Test_html_full_str("{{#tag:pre|a|id=val|b}}"					, "<pre id=\"val\">a</pre>");}	// PURPOSE: b was failing b/c id was larger and key_end set to 4 (whereas b was len=1)

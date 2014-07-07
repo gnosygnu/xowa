@@ -117,6 +117,9 @@ public class Scrib_lib_mw_tst {
 		fxt.Test_lib_proc(lib, Scrib_lib_mw.Invk_callParserFunction, Object_.Ary("current", "#if", "", "y", "n")							, "n");	// list: args is ary
 		fxt.Test_lib_proc(lib, Scrib_lib_mw.Invk_callParserFunction, Object_.Ary("current", "#if", Scrib_kv_utl_.base1_many_("", "y", "n"))	, "n");	// list: args is table
 		fxt.Test_lib_proc(lib, Scrib_lib_mw.Invk_callParserFunction, Object_.Ary("current", "#if:", "y", "n")								, "n");	// colon_in_name
+	}
+	@Test  public void CallParserFunction_tag() {
+		fxt.Init_page("{{#invoke:Mod_0|Prc_0}}");
 		fxt.Test_lib_proc_kv(lib, Scrib_lib_mw.Invk_callParserFunction, Scrib_kv_utl_.flat_many_(1, "current", 2, "#tag", 3, Scrib_kv_utl_.flat_many_("3", "id=1", "2", "text", "1", "pre")), "<pre 3=\"id=1\">2=text</pre>");// named: sort args; NOTE: keys should probably be stripped
 	}
 	@Test  public void CallParserFunction_displayTitle() {	// PURPOSE: DISPLAYTITLE not being set when called through CallParserFunction; DATE:2013-08-05

@@ -63,9 +63,9 @@ public class Xoh_tidy_mgr implements GfoInvkAble {
 	}
 	public static boolean Tidy_unwrap(Bry_bfr bfr) {
 		byte[] bfr_bry = bfr.Bfr();
-		int find = Bry_finder.Find_fwd(bfr_bry, Html_tags.Body_lhs); if (find == Bry_finder.Not_found) return false;
-		bfr.Delete_rng_to_bgn(find + Html_tags.Body_lhs.length);
-		find = Bry_finder.Find_bwd(bfr_bry, Html_tags.Body_rhs, bfr.Len()); if (find == Bry_finder.Not_found) return false;
+		int find = Bry_finder.Find_fwd(bfr_bry, Html_tag_.Body_lhs); if (find == Bry_finder.Not_found) return false;
+		bfr.Delete_rng_to_bgn(find + Html_tag_.Body_lhs.length);
+		find = Bry_finder.Find_bwd(bfr_bry, Html_tag_.Body_rhs, bfr.Len()); if (find == Bry_finder.Not_found) return false;
 		bfr.Delete_rng_to_end(find);
 		return true;
 	}

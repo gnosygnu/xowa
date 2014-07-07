@@ -15,11 +15,10 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.xtns.refs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.cite; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
-public class References_nde_basic_tst {
-	private Xop_fxt fxt = new Xop_fxt();
-	@Before public void init() {fxt.Page().Ref_mgr().Grps_clear();}
+public class References_nde_basic_tst {	
+	@Before public void init() {fxt.Clear_ref_mgr();} private Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
 	@Test  public void Basic() {
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
@@ -89,71 +88,6 @@ public class References_nde_basic_tst {
 			, "</ol>"
 			, ""
 			));
-	}
-	@Test  public void Group() {
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
-			( "<ref>x</ref>"
-			, "<ref group='group_a'>y</ref>"
-			, "<ref>z</ref>"
-			, "<references group='group_a'/>"
-			, "<references/>"
-			), String_.Concat_lines_nl_skip_last
-			( "<sup id=\"cite_ref-0\" class=\"reference\"><a href=\"#cite_note-0\">[1]</a></sup>"
-			, "<sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">[group_a 1]</a></sup>"
-			, "<sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">[2]</a></sup>"
-			, "<ol class=\"references\">"
-			, "<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">^</a></span> <span class=\"reference-text\">y</span></li>"
-			, "</ol>"
-			, "<ol class=\"references\">"
-			, "<li id=\"cite_note-0\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-0\">^</a></span> <span class=\"reference-text\">x</span></li>"
-			, "<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">^</a></span> <span class=\"reference-text\">z</span></li>"
-			, "</ol>"
-			, ""
-			));
-	}
-	@Test  public void Pre_ignored() {
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
-			( "<ref> x</ref>"
-			, "<references/>"
-			), String_.Concat_lines_nl_skip_last
-			( "<sup id=\"cite_ref-0\" class=\"reference\"><a href=\"#cite_note-0\">[1]</a></sup>"
-			, "<ol class=\"references\">"
-			, "<li id=\"cite_note-0\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-0\">^</a></span> <span class=\"reference-text\"> x</span></li>"
-			, "</ol>"
-			, ""
-			));
-	}
-	@Test  public void Pre_ignored_2() {	// PURPOSE: <ref> creates <li> which will effectively disable all pre; EX.WP: Robert Browning
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
-			( "<ref>x"
-			, " y"
-			, "</ref>"
-			, "<references/>"
-			), String_.Concat_lines_nl_skip_last
-			( "<sup id=\"cite_ref-0\" class=\"reference\"><a href=\"#cite_note-0\">[1]</a></sup>"
-			, "<ol class=\"references\">"
-			, "<li id=\"cite_note-0\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-0\">^</a></span> <span class=\"reference-text\">x"
-			, " y"
-			, "</span></li>"
-			, "</ol>"
-			, ""
-			));
-	}
-	@Test  public void Pre_ignored_3() {	// PURPOSE: " <references>" should not create pre; fr.w:Heidi_(roman); DATE:2014-02-17
-		fxt.Init_para_y_();
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
-			( "<ref>x</ref>"
-			, ""
-			, " <references/>"
-			), String_.Concat_lines_nl_skip_last
-			( "<p><sup id=\"cite_ref-0\" class=\"reference\"><a href=\"#cite_note-0\">[1]</a></sup>"
-			, "</p>"
-			, " <ol class=\"references\">"
-			, "<li id=\"cite_note-0\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-0\">^</a></span> <span class=\"reference-text\">x</span></li>"
-			, "</ol>"
-			, ""
-			));
-		fxt.Init_para_n_();
 	}
 	@Test  public void List_ignored() {
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
@@ -236,45 +170,6 @@ public class References_nde_basic_tst {
 			, "</ol>"
 			, ""
 			));
-	}
-	@Test  public void Empty_name() {	// PURPOSE: <references group=""/> is same as <references/>; DATE:2013-02-06
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
-			( "<ref>b</ref>"
-			, "<references group=\"\"/>"
-			), String_.Concat_lines_nl_skip_last
-			( "<sup id=\"cite_ref-0\" class=\"reference\"><a href=\"#cite_note-0\">[1]</a></sup>"
-			, "<ol class=\"references\">"
-			, "<li id=\"cite_note-0\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-0\">^</a></span> <span class=\"reference-text\">b</span></li>"
-			, "</ol>"
-			, ""
-			));
-	}
-	@Test  public void Multiple_same_name_groups() {	// PURPOSE: multiple groups with same name "clears" out references; DATE:2013-02-11
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
-			( "<ref>a</ref>"
-			, "<references/>"
-			, "<ref>b</ref>"
-			, "<references/>"
-			, "<ref>c</ref>"
-			, "<references/>"
-			), String_.Concat_lines_nl_skip_last
-			( "<sup id=\"cite_ref-0\" class=\"reference\"><a href=\"#cite_note-0\">[1]</a></sup>"
-			, "<ol class=\"references\">"
-			, "<li id=\"cite_note-0\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-0\">^</a></span> <span class=\"reference-text\">a</span></li>"
-			, "</ol>"
-			, "<sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">[1]</a></sup>"
-			, "<ol class=\"references\">"
-			, "<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">^</a></span> <span class=\"reference-text\">b</span></li>"
-			, "</ol>"
-			, "<sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">[1]</a></sup>"
-			, "<ol class=\"references\">"
-			, "<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">^</a></span> <span class=\"reference-text\">c</span></li>"
-			, "</ol>"
-			, ""
-			));
-	}
-	@Test   public void Empty_group() {	// PURPOSE: group without items should be blank; should not throw error; DATE:2013-02-12
-		fxt.Test_parse_page_wiki_str("<references name='group_a'/>", "");
 	}
 	@Test   public void Empty_group_before_ref() {	// PURPOSE: empty grp before itm should not throw error; DATE:2013-02-18; EX: w:Help:External links and references; Johnstown,_Colorado
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl

@@ -123,8 +123,8 @@ public class Xog_bnd_mgr {
 		Init_itm(Xog_cmd_itm_.Key_gui_page_view_mode_read						, Xog_bnd_box_.Tid_browser				, "mod.c+key.m,mod.c+key.r");
 		Init_itm(Xog_cmd_itm_.Key_gui_page_view_mode_edit						, Xog_bnd_box_.Tid_browser				, "mod.c+key.m,mod.c+key.e");
 		Init_itm(Xog_cmd_itm_.Key_gui_page_view_mode_html						, Xog_bnd_box_.Tid_browser				, "mod.c+key.m,mod.c+key.h");
-		Init_itm(Xog_cmd_itm_.Key_gui_page_view_reload							, Xog_bnd_box_.Tid_browser				, "key.f5");
-		Init_itm(Xog_cmd_itm_.Key_gui_page_view_refresh							, Xog_bnd_box_.Tid_browser				, "mod.s+key.f5");
+		Init_itm(Xog_cmd_itm_.Key_gui_page_view_reload							, Xog_bnd_box_.Tid_browser				, "mod.s+key.f5");
+		Init_itm(Xog_cmd_itm_.Key_gui_page_view_refresh							, Xog_bnd_box_.Tid_browser				, "key.f5");
 		Init_itm(Xog_cmd_itm_.Key_gui_page_view_save_as							, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_gui_page_view_print							, Xog_bnd_box_.Tid_browser				, "");
 
@@ -148,7 +148,7 @@ public class Xog_bnd_mgr {
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_search_exec						, Xog_bnd_box_.Tid_browser_search		, "key.enter");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_tabs_new_dflt__at_dflt__focus_y	, Xog_bnd_box_.Tid_browser				, "mod.c+key.t");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_tabs_new_link__at_dflt__focus_n	, Xog_bnd_box_.Tid_browser_html			, "mouse.middle");
-		Init_itm(Xog_cmd_itm_.Key_gui_browser_tabs_new_href__at_dflt__focus_y	, Xog_bnd_box_.Tid_browser				, "mod.c+key.g");
+		Init_itm(Xog_cmd_itm_.Key_gui_browser_tabs_new_href__at_dflt__focus_y	, Xog_bnd_box_.Tid_browser				, "mod.c+key.g,mod.c+key.f");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_tabs_close_cur					, Xog_bnd_box_.Tid_browser				, "mod.c+key.w");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_tabs_close_others					, Xog_bnd_box_.Tid_browser				, "mod.cs+key.w,mod.cs+key.w");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_tabs_close_to_bgn					, Xog_bnd_box_.Tid_browser				, "mod.cs+key.w,mod.cs+key.left");
@@ -172,6 +172,7 @@ public class Xog_bnd_mgr {
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_html_focus					,  2, Xog_bnd_box_.Tid_browser_search		, "key.escape");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_html_focus					,  3, Xog_bnd_box_.Tid_browser_prog			, "key.escape");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_html_focus					,  4, Xog_bnd_box_.Tid_browser_info			, "key.escape");
+		Init_itm(Xog_cmd_itm_.Key_gui_browser_html_selection_focus_toggle		, Xog_bnd_box_.Tid_browser				, "mod.c+key.g,mod.c+key.g");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_find_show							, Xog_bnd_box_.Tid_browser				, "mod.c+key.f");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_find_show_by_paste				, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_gui_browser_find_hide							, Xog_bnd_box_.Tid_browser_find			, "key.escape");

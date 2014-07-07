@@ -31,7 +31,9 @@ public class Pf_url_ns_tst {
 	@Test  public void Ns_Image()			{fxt.Test_parse_tmpl_str_test("{{ns:Image}}"					, "{{test}}", "File");}
 	@Test  public void Ns_Templatex()		{fxt.Test_parse_tmpl_str_test("{{ns:Templatex}}"				, "{{test}}", "");}
 	@Test  public void Ns_Talk() {	// PURPOSE: non-English wikis may have parameterized Project Talk ($1 talk); swap out with ns:4; REF.MW: Language.php!fixVariableInNamespace
-		fxt.Wiki().Ns_mgr_(new Xow_ns_mgr().Add_new(4, "wiki").Add_new(5, "$1 talk").Add_new(10, "Template").Init());
+		Xow_ns_mgr ns_mgr = new Xow_ns_mgr(gplx.xowa.langs.cases.Xol_case_mgr_.Ascii());
+		ns_mgr.Add_new(4, "wiki").Add_new(5, "$1 talk").Add_new(10, "Template").Init();
+		fxt.Wiki().Ns_mgr_(ns_mgr);
 		fxt.Test_parse_tmpl_str_test("{{ns:5}}"					, "{{test}}", "wiki talk");
 	}
 }

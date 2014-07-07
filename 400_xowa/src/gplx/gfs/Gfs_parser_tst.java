@@ -184,7 +184,7 @@ class Gfs_parser_fxt {
 	}
 	private void To_str_atr(Bry_bfr bfr, Bry_bfr path_bfr, byte[] src, byte[] name, byte[] val, int val_bgn, int val_end) {
 		if (val == null && val_bgn == -1 && val_end == -1) return;
-		bfr.Add_bfr(path_bfr).Add_byte(Byte_ascii.Colon);
+		bfr.Add_bfr_and_preserve(path_bfr).Add_byte(Byte_ascii.Colon);
 		bfr.Add(name);
 		if (val == null)
 			bfr.Add_mid(src, val_bgn, val_end);

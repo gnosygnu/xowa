@@ -18,49 +18,40 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.xowa.html.*;
 public class Xop_redirect_mgr {
-	public Xop_redirect_mgr(Xow_wiki wiki) {this.wiki = wiki; this.log_mgr = wiki.App().Msg_log();} private Xow_wiki wiki; Gfo_msg_log log_mgr; ByteTrieMgr_slim trie;
+	private Hash_adp_bry redirect_hash;
+	public Xop_redirect_mgr(Xow_wiki wiki) {this.wiki = wiki;} private Xow_wiki wiki;
+	public void Clear() {redirect_hash = null;}	// TEST:
 	public boolean Is_redirect(byte[] text, int text_len) {return this.Extract_redirect(text, text_len) != null;}
 	public Xoa_ttl Extract_redirect_loop(byte[] src) {
 		Xoa_ttl rv = null;
-		for (int i = 0; i < Extract_redirect_loop_max; i++) {
+		for (int i = 0; i < Redirect_max_allowed; i++) {
 			rv = Extract_redirect(src, src.length);
 			if (rv != null) return rv;
 		}
 		return null;
 	}
 	public Xoa_ttl Extract_redirect(byte[] src) {return Extract_redirect(src, src.length);}
-	public static final Xoa_ttl Extract_redirect_is_null = null;
-	public static final int Extract_redirect_loop_max = 4;
-	public Xoa_ttl Extract_redirect(byte[] src, int src_len) {
+	public Xoa_ttl Extract_redirect(byte[] src, int src_len) {	// NOTE: this proc is called by every page. be careful of changes; DATE:2014-07-05
 		if (src_len == 0) return Redirect_null_ttl;
 		int bgn = Bry_finder.Find_fwd_while_not_ws(src, 0, src_len);
 		if (bgn == src_len) return Redirect_null_ttl; // article is entirely whitespace
-		if (trie == null) trie = Xol_kwd_mgr.trie_(wiki.Lang().Kwd_mgr(), Xol_kwd_grp_.Id_redirect);
-		if (trie.MatchAtCur(src, bgn, src_len) == null) return Redirect_null_ttl; 
-		int cur_pos = trie.Match_pos();
-		if (cur_pos == src_len) {log_mgr.Add_itm_none(Xop_redirect_log.Lnki_not_found, src, 0, cur_pos); return Redirect_null_ttl;} // occurs when just #REDIRECT
-		switch (src[cur_pos]) {	// REF.MW: Ttl.php|newFromRedirectInternal; see regx
-			case Byte_ascii.NewLine:
-			case Byte_ascii.Space:
-			case Byte_ascii.Tab:
-			case Byte_ascii.Brack_bgn:
-			case Byte_ascii.Colon:
-				break;
-			default:
-				log_mgr.Add_itm_none(Xop_redirect_log.False_match, src, 0, cur_pos);
-				return Redirect_null_ttl;
-		}
-		int bgn_pos = Bry_finder.Find_fwd(src, Xop_tkn_.Lnki_bgn, cur_pos);
-		if (bgn_pos == Bry_.NotFound) {log_mgr.Add_itm_none(Xop_redirect_log.Lnki_not_found, src, 0, cur_pos); return Redirect_null_ttl;}
-		bgn_pos += Xop_tkn_.Lnki_bgn.length;
-		int end_pos = Bry_finder.Find_fwd(src, Xop_tkn_.Lnki_end, bgn_pos);
-		if (end_pos == Bry_.NotFound) {log_mgr.Add_itm_none(Xop_redirect_log.Lnki_not_found, src, 0, cur_pos); return Redirect_null_ttl;}
-		byte[] redirect_ary = Bry_.Mid(src, bgn_pos, end_pos);
+		int kwd_end = Xop_redirect_mgr_.Get_kwd_end_or_end(src, bgn, src_len);
+		if (kwd_end == src_len) return Redirect_null_ttl;
+		if (redirect_hash == null) redirect_hash = Xol_kwd_mgr.hash_(wiki.Lang().Kwd_mgr(), Xol_kwd_grp_.Id_redirect);
+		Object redirect_itm = redirect_hash.Get_by_mid(src, bgn, kwd_end);
+		if (redirect_itm == null)		return Redirect_null_ttl; // not a redirect kwd
+		int ttl_bgn = Xop_redirect_mgr_.Get_ttl_bgn_or_neg1(src, kwd_end, src_len);
+		if (ttl_bgn == Bry_.NotFound)	return Redirect_null_ttl;
+		ttl_bgn += Xop_tkn_.Lnki_bgn.length;
+		int ttl_end = Bry_finder.Find_fwd(src, Xop_tkn_.Lnki_end, ttl_bgn);
+		if (ttl_end == Bry_.NotFound)	return Redirect_null_ttl;
+		byte[] redirect_ary = Bry_.Mid(src, ttl_bgn, ttl_end);
 		return Xoa_ttl.parse_(wiki, redirect_ary);
 	}
+	public static final Xoa_ttl Extract_redirect_is_null = null;
+	public static final int Redirect_max_allowed = 4;
 	public static final Xoa_ttl	Redirect_null_ttl = null;
 	public static final byte[]	Redirect_null_bry = Bry_.Empty;
-	public static final int Redirect_max_allowed = 4;
 	private static final byte[] Redirect_bry = Bry_.new_ascii_("#REDIRECT ");
 	public static byte[] Make_redirect_text(byte[] redirect_to_ttl) {
 		return Bry_.Add
@@ -95,4 +86,39 @@ public class Xop_redirect_mgr {
 		redirect_bfr.Clear().Mkr_rls(); fmt_bfr.Mkr_rls();
 		return fmt_bfr.XtoAryAndClear();
 	}	private static byte[] Bry_redirect_dlm = Bry_.new_ascii_(" <--- "), Bry_redirect_arg = Bry_.new_ascii_("?redirect=no");		
+}
+class Xop_redirect_mgr_ {
+	public static int Get_kwd_end_or_end(byte[] src, int bgn, int end) {	// get end of kwd
+		for (int i = bgn; i < end; ++i) {
+			switch (src[i]) {
+				case Byte_ascii.NewLine: case Byte_ascii.Space: case Byte_ascii.Tab:
+				case Byte_ascii.Brack_bgn: case Byte_ascii.Colon:
+					return i;	// ASSUME: kwd does not have these chars
+				default:
+					break;
+			}
+		}
+		return end;
+	}
+	public static int Get_ttl_bgn_or_neg1(byte[] src, int bgn, int end) {	// get bgn of ttl
+		boolean colon_null = true;
+		for (int i = bgn; i < end; ++i) {
+			switch (src[i]) {
+				case Byte_ascii.NewLine: case Byte_ascii.Space: case Byte_ascii.Tab: break;	// skip all ws
+				case Byte_ascii.Colon: // allow 1 colon
+					if (colon_null)
+						colon_null = false;
+					else
+						return Bry_.NotFound;
+					break;
+				default:
+					break;
+				case Byte_ascii.Brack_bgn:
+					int nxt_pos = i + 1;
+					if (nxt_pos >= end) return Bry_.NotFound;	// [ at eos
+					return src[nxt_pos] == Byte_ascii.Brack_bgn ? i : Bry_.NotFound;
+			}
+		}
+		return Bry_.NotFound;
+	}
 }

@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.xtns.refs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.cite; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 public class Ref_itm_mgr {
 	private Hash_adp_bry grps = Hash_adp_bry.ci_();
 	private Ref_itm_grp grp_default = new Ref_itm_grp(Bry_.Empty);

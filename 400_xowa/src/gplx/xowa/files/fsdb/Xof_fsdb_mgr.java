@@ -39,4 +39,5 @@ public interface Xof_fsdb_mgr extends RlsAble {
 	void Reg_insert(Xof_fsdb_itm itm, byte repo_id, byte status);
 	void Reg_select(Xoa_page page, byte exec_tid, ListAdp itms);
 	void Reg_select_only(Xoa_page page, byte exec_tid, ListAdp itms, OrderedHash hash);
+	boolean Reg_select_itm_exists(byte[] ttl);
 }

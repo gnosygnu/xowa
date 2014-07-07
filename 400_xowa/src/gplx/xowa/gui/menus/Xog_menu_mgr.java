@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.gui.menus; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 import gplx.xowa.gui.menus.dom.*;
 public class Xog_menu_mgr implements GfoInvkAble {
+	private Xoa_app app;
 	public Xog_menu_mgr(Xoa_gui_mgr gui_mgr) {
 		menu_bldr = new Xog_mnu_bldr();
 		regy = new Xog_mnu_regy(gui_mgr);
@@ -31,11 +32,16 @@ public class Xog_menu_mgr implements GfoInvkAble {
 	public void Init_by_app(Xoa_app app) {
 		this.app = app;
 		regy.Init_by_app(app);
-	}	private Xoa_app app;
+	}
 	public void Init_by_kit() {
-		popup_mnu_mgr.Init_by_kit();
-		window_mnu_mgr.Init_by_kit();
-		Lang_changed(app.User().Lang());
+		try {
+			popup_mnu_mgr.Init_by_kit();
+			window_mnu_mgr.Init_by_kit();
+			Lang_changed(app.User().Lang());
+		}
+		catch (Exception e) {	// ignore errors while loading custom menus, else fatal error; DATE:2014-07-01
+			app.Usr_dlg().Warn_many("", "", "error while loading menus; err=~{0}", Err_.Message_gplx(e));
+		}
 	}
 	public void Lang_changed(Xol_lang lang) {
 		window_mnu_mgr.Lang_changed(lang);

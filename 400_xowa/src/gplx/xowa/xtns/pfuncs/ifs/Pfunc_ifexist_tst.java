@@ -26,4 +26,25 @@ public class Pfunc_ifexist_tst {
 		fxt.Init_page_create("A_&_b", "");
 		fxt.Test_parse_tmpl_str_test("{{#ifexist:A & b|y|n}}", "{{test}}", "y");
 	}
+	@Test  public void Media_n() {// DATE:2014-07-04
+		Pfunc_ifexist.Mgr.Clear();
+		fxt.Test_parse_tmpl_str_test("{{#ifexist:Media:A.png|y|n}}", "{{test}}", "n");
+	}
+	@Test  public void Media_y_wiki() {// DATE:2014-07-04
+		Pfunc_ifexist.Mgr.Clear();
+		fxt.Init_page_create("File:A.png", "");
+		fxt.Test_parse_tmpl_str_test("{{#ifexist:Media:A.png|y|n}}", "{{test}}", "y");
+	}
+	@Test  public void Media_y_commons() {// DATE:2014-07-04
+		Pfunc_ifexist.Mgr.Clear();
+		Xow_wiki commons_wiki = fxt.App().Wiki_mgr().Get_by_key_or_make(gplx.xowa.wikis.Xow_wiki_domain_.Url_commons);
+		fxt.Init_page_create(commons_wiki, "File:A.png", "");
+		fxt.Test_parse_tmpl_str_test("{{#ifexist:Media:A.png|y|n}}", "{{test}}", "y");
+	}
+	@Test  public void Media_y_file_v1() {// DATE:2014-07-04
+		Pfunc_ifexist.Mgr.Clear();
+		Xof_meta_itm meta_itm = fxt.Wiki().File_mgr().Meta_mgr().Get_itm_or_new(Bry_.new_ascii_("A.png"));
+		meta_itm.Orig_exists_(Bool_.Y_byte);
+		fxt.Test_parse_tmpl_str_test("{{#ifexist:Media:A.png|y|n}}", "{{test}}", "y");
+	}
 }

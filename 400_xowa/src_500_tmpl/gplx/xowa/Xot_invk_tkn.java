@@ -43,12 +43,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 				val.Subs_get(j).Tmpl_compile(ctx, src, prep_data);
 		}
 	}
-	private static final byte[] Comment_tkn = Bry_.new_ascii_("<!---->");
 	@Override public boolean Tmpl_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Bry_bfr bfr) {	// EX: this="{{t|{{{0}}}}}" caller="{{t|1}}"
-		if (ctx.Tid_is_popup() && this.Src_end() - this.Src_bgn() > ctx.Tmpl_tkn_max()) {	// popup && cur_tmpl > tmpl_max
-			bfr.Add(Comment_tkn);	// add comment tkn; need something to separate ''{{lang|la|Ragusa}}'' else will become ''''; PAGE:en.w:Republic_of_Ragusa; DATE:2014-06-28
-			return false; 
-		}
 		boolean rv = false;
 		Xot_defn defn = tmpl_defn; Xow_wiki wiki = ctx.Wiki(); Xol_lang lang = wiki.Lang();
 		byte[] name_ary = defn.Name(), argx_ary = Bry_.Empty; Arg_itm_tkn name_key_tkn = name_tkn.Key_tkn();
@@ -172,6 +167,9 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 				name_ary = Bry_.Mid(name_ary, 0, colon_pos);
 			}
 			if (defn == Xot_defn_.Null) {
+				if (ctx.Tid_is_popup()) {	// popup && cur_tmpl > tmpl_max
+					if (Popup_skip(ctx, name_ary, bfr)) return false;
+				}
 				defn = wiki.Cache_mgr().Defn_cache().Get_by_key(name_ary);
 				if (defn == null) {
 					if (name_ary_len != 0 ) {	// name_ary_len != 0 for direct template inclusions; EX.WP:Human evolution and {{:Human evolution/Species chart}}; && ctx.Tmpl_whitelist().Has(name_ary)
@@ -283,6 +281,25 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		}
 		return rv;
 	}	private static final byte[] Ary_unknown_bgn = Bry_.new_ascii_("(? [["), Ary_unknown_end = Bry_.new_ascii_("]] ?)"), Ary_dynamic_is_blank = Bry_.new_ascii_("dynamic is blank");
+	private boolean Popup_skip(Xop_ctx ctx, byte[] ttl, Bry_bfr bfr) {
+		boolean skip = false;
+		skip = this.Src_end() - this.Src_bgn() > ctx.Tmpl_tkn_max();
+		if (!skip) {
+			gplx.xowa.html.modules.popups.keeplists.Xop_keeplist_wiki tmpl_keeplist = ctx.Tmpl_keeplist();
+			if (tmpl_keeplist != null && tmpl_keeplist.Enabled()) {
+				byte[] ttl_lower = Xoa_ttl.Replace_spaces(ctx.Wiki().Lang().Case_mgr().Case_build_lower(ttl));
+				skip = !tmpl_keeplist.Match(ttl_lower);
+//					if (skip)
+//	                    Tfds.Write_bry(ttl_lower);
+			}
+		}
+		if (skip) {
+			bfr.Add(gplx.xowa.html.modules.popups.Xow_popup_parser.Comment_tkn); // add comment tkn; need something to separate ''{{lang|la|Ragusa}}'' else will become ''''; PAGE:en.w:Republic_of_Ragusa; DATE:2014-06-28
+			return true; 
+		}
+		else
+			return false;
+	}
 	public static void Eval_func(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk invk, Bry_bfr bfr, Xot_defn defn, byte[] argx_ary) {
 		Pf_func_base defn_func = (Pf_func_base)defn;
 		int defn_func_id = defn_func.Id();

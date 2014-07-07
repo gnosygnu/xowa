@@ -127,7 +127,7 @@ public class Xot_defn_trace_dbg implements Xot_defn_trace {
 		if (bb.Len() != 0) bb.Add_byte_nl();	// only add newLine if something in bb; needed for tests
 		bb	.Add(Ary_source_lbl)
 			.Add(src).Add_byte_nl();
-		bb.Add_bfr(bfr);
+		bb.Add_bfr_and_preserve(bfr);
 		bfr.Clear();
 	}
 	public void Clear() {bfr.Clear(); indent = 0; count = 0;}

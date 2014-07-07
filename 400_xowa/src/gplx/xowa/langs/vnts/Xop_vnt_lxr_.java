@@ -24,8 +24,8 @@ public class Xop_vnt_lxr_ {
 			Xop_vnt_lxr_eqgt._.Init_by_wiki(wiki, wiki_trie);
 			Xop_vnt_lxr_bgn._.Init_by_wiki(wiki, wiki_trie);
 			new Xop_vnt_lxr_end().Init_by_wiki(wiki, wiki_trie);
-//				ByteTrieMgr_fast tmpl_trie = wiki.Parser().Tmpl_trie();
-//				Xop_vnt_lxr_tmpl_bgn._.Init_by_wiki(wiki, tmpl_trie);
+			// ByteTrieMgr_fast tmpl_trie = wiki.Parser().Tmpl_trie();	// do not add to tmpl trie
+			// Xop_vnt_lxr_bgn._.Init_by_wiki(wiki, tmpl_trie);
 		}
 	}
 	public static final byte[] Hook_bgn = new byte[] {Byte_ascii.Dash, Byte_ascii.Curly_bgn}, Hook_end = new byte[] {Byte_ascii.Curly_end, Byte_ascii.Dash};
@@ -65,7 +65,7 @@ class Xop_vnt_lxr_end implements Xop_lxr {
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		int stack_pos = ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_vnt);
 		if (stack_pos == Xop_ctx.Stack_not_found) return ctx.Lxr_make_txt_(cur_pos);	// "}-" found but no "-{" in stack;
-		Xop_vnt_tkn vnt_tkn = (Xop_vnt_tkn)ctx.Stack_pop_til(root, src, stack_pos, false, bgn_pos, cur_pos);
+		Xop_vnt_tkn vnt_tkn = (Xop_vnt_tkn)ctx.Stack_pop_til(root, src, stack_pos, false, bgn_pos, cur_pos, Xop_tkn_itm_.Tid_vnt);
 		try {
 			vnt_tkn.Src_end_(cur_pos);
 			vnt_tkn.Subs_move(root);
