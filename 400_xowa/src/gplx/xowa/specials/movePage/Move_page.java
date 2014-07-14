@@ -168,7 +168,7 @@ class Move_url_args {
 		create_redirect = false;
 	}
 	private static final byte Key_submitted = 1, Key_src_ttl = 2, Key_trg_ns = 3, Key_trg_ttl = 4, Key_create_redirect = 5;
-	private static final Hash_adp_bry arg_keys = Hash_adp_bry.ci_()
+	private static final Hash_adp_bry arg_keys = Hash_adp_bry.ci_ascii_()
 	.Add_str_byte("wpMove"			, Key_submitted)
 	.Add_str_byte("wpOldTitle"		, Key_src_ttl)
 	.Add_str_byte("wpNewTitleNs"	, Key_trg_ns)

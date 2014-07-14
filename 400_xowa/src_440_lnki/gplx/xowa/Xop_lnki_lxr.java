@@ -16,10 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.btries.*;
 class Xop_lnki_lxr_bgn implements Xop_lxr {
 	public byte Lxr_tid() {return Xop_lxr_.Tid_lnki_bgn;}
-	public void Init_by_wiki(Xow_wiki wiki, ByteTrieMgr_fast core_trie) {core_trie.Add(Xop_tkn_.Lnki_bgn, this);}
-	public void Init_by_lang(Xol_lang lang, ByteTrieMgr_fast core_trie) {}
+	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Xop_tkn_.Lnki_bgn, this);}
+	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		Xop_tkn_itm prv_tkn = ctx.Stack_get_last();
 		if (prv_tkn != null
@@ -38,8 +39,8 @@ class Xop_lnki_lxr_bgn implements Xop_lxr {
 }
 class Xop_lnki_lxr_end implements Xop_lxr {
 	public byte Lxr_tid() {return Xop_lxr_.Tid_lnki_end;}
-	public void Init_by_wiki(Xow_wiki wiki, ByteTrieMgr_fast core_trie) {core_trie.Add(Xop_tkn_.Lnki_end, this);}
-	public void Init_by_lang(Xol_lang lang, ByteTrieMgr_fast core_trie) {}
+	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Xop_tkn_.Lnki_end, this);}
+	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {return ctx.Lnki().Make_tkn(ctx, tkn_mkr, root, src, src_len, bgn_pos, cur_pos);}
 	public static final Xop_lnki_lxr_end _ = new Xop_lnki_lxr_end();
 }

@@ -16,10 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+import gplx.core.btries.*;
 public class Xop_lnke_end_lxr implements Xop_lxr {//20111222
 	public byte Lxr_tid() {return Xop_lxr_.Tid_lnke_end;}
-	public void Init_by_wiki(Xow_wiki wiki, ByteTrieMgr_fast core_trie) {core_trie.Add(Byte_ascii.Brack_end, this);}
-	public void Init_by_lang(Xol_lang lang, ByteTrieMgr_fast core_trie) {}
+	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Byte_ascii.Brack_end, this);}
+	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {return ctx.Lnke().MakeTkn_end(ctx, tkn_mkr, root, src, src_len, bgn_pos, cur_pos);}
 	public static final Xop_lnke_end_lxr _ = new Xop_lnke_end_lxr(); Xop_lnke_end_lxr() {}
 }

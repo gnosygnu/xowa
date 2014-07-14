@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.ios.*;
+import gplx.core.brys.*; import gplx.ios.*;
 public class Xodb_page_raw_parser {
 	public void Init(Gfo_usr_dlg usr_dlg, Xow_wiki wiki, int load_len) {
 		this.wiki = wiki; ns_mgr = wiki.Ns_mgr();

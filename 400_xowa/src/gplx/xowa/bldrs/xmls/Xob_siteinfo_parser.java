@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.xmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.xmls.*; // NOTE: gplx.xmls does not support Android; DATE:2013-01-17
+import gplx.ios.*; import gplx.xmls.*; // NOTE: gplx.xmls does not support Android; DATE:2013-01-17
 public class Xob_siteinfo_parser {
 	public static byte[] Siteinfo_extract(gplx.ios.Io_stream_rdr src_rdr) {
 		Io_buffer_rdr rdr = Io_buffer_rdr.Null;

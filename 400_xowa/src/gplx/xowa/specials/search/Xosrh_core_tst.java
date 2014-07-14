@@ -190,18 +190,16 @@ class Xos_search_mgr_fxt {
 		byte[] ttl_bry = Bry_.new_ascii_(ttl_str);
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry);
 		Xoa_page page = Xoa_page.test_(wiki, ttl);
-		Xoa_url url = new Xoa_url();
 		byte[] url_bry = Bry_.new_utf8_("http://en.wikipedia.org/wiki/Special:Search/" + ttl_str + args_str);
-		wiki.App().Url_parser().Parse(url, url_bry, 0, url_bry.length);
+		Xoa_url url = wiki.App().Url_parser().Parse(url_bry);
 		search_mgr.Special_gen(url, page, wiki, ttl);
 		Tfds.Eq_str_lines(expd_html, String_.new_utf8_(page.Root().Data_htm()));
 	}
 	public void Test_search2(byte match_tid, String ttl_str, int page_idx, byte sort_tid, String... expd_ary) {
 		Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_b128();
-		Xoa_url url = new Xoa_url();
 		Xoa_url_parser url_parser = new Xoa_url_parser();			
 		byte[] url_raw = Bry_.new_ascii_("Special:Search/" + ttl_str + ((match_tid == Xosrh_core.Match_tid_all) ? "" : "*")  + "?fulltext=y" + Xosrh_rslt_itm_sorter.Xto_url_arg(sort_tid) + "&xowa_page_size=1&xowa_page_index=" + page_idx);
-		url_parser.Parse(url, url_raw);
+		Xoa_url url = url_parser.Parse(url_raw);
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, url_raw);
 		Xoa_page page = wiki.Ctx().Cur_page();
 		search_mgr.Special_gen(url, page, wiki, ttl);

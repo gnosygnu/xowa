@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.ios.*; import gplx.threads.*;
+import gplx.core.btries.*; import gplx.core.flds.*; import gplx.ios.*; import gplx.threads.*;
 import gplx.xowa.apps.*; import gplx.xowa.apps.caches.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apis.*;
 import gplx.xowa.langs.*; import gplx.xowa.specials.*; import gplx.xowa.cfgs2.*;
 import gplx.xowa.wikis.*; import gplx.xowa.users.*; import gplx.xowa.gui.*; import gplx.xowa.cfgs.*; import gplx.xowa.ctgs.*; import gplx.xowa.html.tocs.*; import gplx.xowa.fmtrs.*; import gplx.xowa.html.*;
@@ -138,7 +138,7 @@ public class Xoa_app implements GfoInvkAble {
 	public Url_encoder			Url_converter_fsys()		{return url_converter_fsys;} private Url_encoder url_converter_fsys = Url_encoder.new_fsys_lnx_();
 	public Url_encoder			Url_converter_fsys_safe()	{return url_converter_fsys_safe;} private Url_encoder url_converter_fsys_safe = Url_encoder.new_fsys_wnt_();
 	public Xoh_file_main_wkr	File_main_wkr() {return file_main_wkr;} private Xoh_file_main_wkr file_main_wkr = new Xoh_file_main_wkr();		
-	public ByteTrieMgr_slim		Utl_trie_tblw_ws() {return utl_trie_tblw_ws;} private ByteTrieMgr_slim utl_trie_tblw_ws = Xop_tblw_ws_itm.trie_();
+	public Btrie_slim_mgr		Utl_trie_tblw_ws() {return utl_trie_tblw_ws;} private Btrie_slim_mgr utl_trie_tblw_ws = Xop_tblw_ws_itm.trie_();
 	public Bry_bfr_mkr			Utl_bry_bfr_mkr() {return utl_bry_bfr_mkr;} Bry_bfr_mkr utl_bry_bfr_mkr = new Bry_bfr_mkr();
 	public Gfo_fld_rdr			Utl_fld_rdr() {return utl_fld_rdr;} Gfo_fld_rdr utl_fld_rdr = Gfo_fld_rdr.xowa_();
 	public Gfo_log_bfr			Log_bfr() {return log_bfr;} private Gfo_log_bfr log_bfr = new Gfo_log_bfr();

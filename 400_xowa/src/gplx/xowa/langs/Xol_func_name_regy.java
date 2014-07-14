@@ -16,8 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs; import gplx.*; import gplx.xowa.*;
-import gplx.intl.*;
+import gplx.core.btries.*; import gplx.intl.*;
 public class Xol_func_name_regy {
+	private Xol_func_name_itm finder = new Xol_func_name_itm();
+	private Btrie_slim_mgr cs_trie = Btrie_slim_mgr.cs_(), ci_trie = Btrie_slim_mgr.ci_utf_8_();
 	public Xol_func_name_regy(Xol_lang lang) {this.lang = lang;} private Xol_lang lang;
 	public void Evt_lang_changed(Xol_lang lang) {
 		Xol_kwd_mgr kwd_mgr = lang.Kwd_mgr();
@@ -46,22 +48,22 @@ public class Xol_func_name_regy {
 	}
 	private void Add(byte[] ary, boolean case_match, Xot_defn func) {
 		if (case_match)
-			cs_trie.Add(ary, func);
+			cs_trie.Add_obj(ary, func);
 		else {
 			byte[] lower_ary = lang.Case_mgr().Case_build_lower(ary, 0, ary.length);
-			ci_trie.Add(lower_ary, func);
+			ci_trie.Add_obj(lower_ary, func);
 		}
 	}
 	public Xol_func_name_itm Find_defn(byte[] src, int txt_bgn, int txt_end) {
 		finder.Clear();
 		for (int i = 0; i < 2; i++) {
 			if (txt_bgn == txt_end) return finder;	// NOTE: true when tmpl_name is either not loaded, or doesn't exist
-			Xot_defn func = MatchAtCur(src, txt_bgn, txt_end);
+			Xot_defn func = Match_bgn(src, txt_bgn, txt_end);
 			if (func == null) return finder;		// NOTE: null when tmpl_name is either not loaded, or doesn't exist
 			byte[] func_name = func.Name();
 			int match_pos = func_name.length + txt_bgn;
-			byte typeId = func.Defn_tid();
-			switch (typeId) {
+			byte defn_tid = func.Defn_tid();
+			switch (defn_tid) {
 				case Xot_defn_.Tid_func:
 					if		(match_pos == txt_end)						// next char is ws (b/c match_pos == txt_end)
 						finder.Func_set(func, -1);
@@ -73,11 +75,13 @@ public class Xol_func_name_regy {
 					break;
 				case Xot_defn_.Tid_safesubst:
 				case Xot_defn_.Tid_subst:
-					finder.Subst_set_(typeId, txt_bgn, match_pos);
+					finder.Subst_set_(defn_tid, txt_bgn, match_pos);
 					if (match_pos < txt_end) txt_bgn = Bry_finder.Find_fwd_while_not_ws(src, match_pos, txt_end);
 					break;
 				case Xot_defn_.Tid_raw:
-					finder.Subst_set_(typeId, txt_bgn, match_pos);
+				case Xot_defn_.Tid_msg:
+				case Xot_defn_.Tid_msgnw:
+					finder.Subst_set_(defn_tid, txt_bgn, match_pos);
 					if (match_pos + 1 < txt_end)	// +1 to include ":" (keyword id "raw", not "raw:")
 						txt_bgn = Bry_finder.Find_fwd_while_not_ws(src, match_pos + 1, txt_end);
 					break;
@@ -86,8 +90,8 @@ public class Xol_func_name_regy {
 		}
 		return finder;
 	}
-	Xot_defn MatchAtCur(byte[] src, int bgn, int end) {
-		Object cs_obj = cs_trie.MatchAtCur(src, bgn, end);
+	private Xot_defn Match_bgn(byte[] src, int bgn, int end) {
+		Object cs_obj = cs_trie.Match_bgn(src, bgn, end);
 		Xot_defn rv = null;
 		if (cs_obj != null) {					// match found for cs; could be false_match; EX: NAME"+"SPACE and NAME"+"SPACENUMBER
 			rv = (Xot_defn)cs_obj;
@@ -97,7 +101,7 @@ public class Xol_func_name_regy {
 		}
 		LowerAry(src, bgn, end);
 		byte[] ary = lang.Case_mgr().Case_build_lower(lower_ary, 0, end - bgn);
-		Xot_defn rv_alt = (Xot_defn)ci_trie.MatchAtCur(ary, 0, end - bgn);
+		Xot_defn rv_alt = (Xot_defn)ci_trie.Match_bgn(ary, 0, end - bgn);
 		return (rv != null && rv_alt == null) 
 			? rv		// name not found in ci, but name was found in cs; return cs; handles NAME"+"SPACENUMBER
 			: rv_alt;	// else return rv_alt
@@ -108,6 +112,4 @@ public class Xol_func_name_regy {
 		lower_ary_len = len;
 		Array_.CopyTo(src, bgn, lower_ary, 0, len);
 	}	byte[] lower_ary = new byte[255]; int lower_ary_len = 255;
-	Xol_func_name_itm finder = new Xol_func_name_itm();
-	private ByteTrieMgr_slim cs_trie = ByteTrieMgr_slim.cs_(), ci_trie = ByteTrieMgr_slim.ci_utf_8_();
 }

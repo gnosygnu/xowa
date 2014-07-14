@@ -16,9 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.btries.*;
 public class Xop_lnki_arg_parser {
 	private int lnki_w, lnki_h;
-	private ByteTrieMgr_fast key_trie = ByteTrieMgr_fast.cs_();
+	private Btrie_fast_mgr key_trie = Btrie_fast_mgr.cs_();
 	private Bry_bfr int_bfr = Bry_bfr.reset_(16);
 	public void Evt_lang_changed(Xol_lang lang) {
 		Bry_bfr tmp_bfr = int_bfr;
@@ -59,10 +60,10 @@ public class Xop_lnki_arg_parser {
 	}
 	public byte Identify_tid(byte[] src, int bgn, int end) {
 		int len = end - bgn;
-		Byte_obj_val val = (Byte_obj_val)key_trie.MatchAtCur(src, bgn, end);
+		Byte_obj_val val = (Byte_obj_val)key_trie.Match_bgn(src, bgn, end);
 		if (val != null && len == key_trie.Match_pos() - bgn)	// check for false matches; EX: alternate= should not match alt=
 			return val.Val();									// match; return val;
-		Object bwd_obj = bwd_trie.MatchAtCur(src, end - 1, bgn - 1);
+		Object bwd_obj = bwd_trie.Match_bgn(src, end - 1, bgn - 1);
 		if (bwd_obj != null && ((Byte_obj_val)bwd_obj).Val() == Tid_dim) { // ends with "px"; try to parse size
 			int_bfr.Clear();
 			int match_len = end -1 - bwd_trie.Match_pos();
@@ -70,7 +71,7 @@ public class Xop_lnki_arg_parser {
 			int itm_end = bgn + (len - match_len);							// remove trailing px
 			for (int i = bgn; i < itm_end; i++) {
 				byte b = src[i];
-				Object o = size_trie.Match(b, src, i, itm_end);
+				Object o = size_trie.Match_bgn_w_byte(b, src, i, itm_end);
 				if (o == null) return Tid_caption;				// letter or other invalid character; return caption
 				Byte_obj_val v = (Byte_obj_val)o;
 				switch (v.Val()) {
@@ -101,7 +102,7 @@ public class Xop_lnki_arg_parser {
 			return Tid_dim;
 		}
 		return Tid_caption;
-	}	private ByteTrieMgr_bwd_slim bwd_trie = ByteTrieMgr_bwd_slim.cs_(); private ByteTrieMgr_fast size_trie = ByteTrieMgr_fast.cs_();
+	}	private Btrie_bwd_mgr bwd_trie = Btrie_bwd_mgr.cs_(); private Btrie_fast_mgr size_trie = Btrie_fast_mgr.cs_();
 	private void Init_key_trie(byte[] key, byte v) {
 		Byte_obj_val val = Byte_obj_val.new_(v);
 		key_trie.Add(key, val);

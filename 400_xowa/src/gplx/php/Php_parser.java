@@ -16,10 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.php; import gplx.*;
+import gplx.core.btries.*;
 public class Php_parser {
 	Php_lxr[] lxrs; int lxrs_len;
 	int txt_bgn; Php_tkn_txt txt_tkn;
-	private ByteTrieMgr_slim trie = ByteTrieMgr_slim.ci_ascii_();	// NOTE:ci:PHP tkns are ASCII
+	private Btrie_slim_mgr trie = Btrie_slim_mgr.ci_ascii_();	// NOTE:ci:PHP tkns are ASCII
 	byte[] src; int src_len; Php_tkn_wkr tkn_wkr; Php_tkn_factory tkn_factory = new Php_tkn_factory(); Php_ctx ctx = new Php_ctx();
 	Php_parser_interrupt[] parser_interrupts = new Php_parser_interrupt[256]; 
 	public Php_parser() {
@@ -70,7 +71,7 @@ public class Php_parser {
 		txt_tkn = null; txt_bgn = 0;
 		boolean loop_raw = true, loop_txt = true;
 		while (loop_raw) {
-			Object o = trie.Match(b, src, pos, src_len);
+			Object o = trie.Match_bgn_w_byte(b, src, pos, src_len);
 			if (o == null) {		// char does not hook into a lxr
 				loop_txt = true;
 				while (loop_txt) {	// keep looping until end of String or parser_interrupt 

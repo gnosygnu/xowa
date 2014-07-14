@@ -16,10 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-import gplx.intl.*;
+import gplx.core.btries.*; import gplx.intl.*;
 import gplx.xowa.langs.cnvs.*;
 public class Xol_vnt_converter {
-	private ByteTrieMgr_slim trie = ByteTrieMgr_slim.cs_();
+	private Btrie_slim_mgr trie = Btrie_slim_mgr.cs_();
 	public Xol_vnt_converter(Xol_vnt_itm owner) {this.owner = owner;}
 	public byte[] Owner_key() {return owner.Key();}
 	public Xol_vnt_itm Owner() {return owner;} private Xol_vnt_itm owner;
@@ -29,7 +29,7 @@ public class Xol_vnt_converter {
 		boolean matched = false;
 		while (pos < end) {
 			byte b = src[pos];
-			Object o = trie.Match(b, src, pos, end);
+			Object o = trie.Match_bgn_w_byte(b, src, pos, end);
 			if (o == null) {						// no match; skip to next char
 				int char_len = Utf8_.Len_of_char_by_1st_byte(b);	// NOTE: must increment by char_len, not +1
 				if (matched) {
@@ -68,7 +68,7 @@ public class Xol_vnt_converter {
 		int len = convert_grp.Len();
 		for (int i = 0; i < len; i++) {
 			Xol_cnv_itm convert_itm = convert_grp.Get_at(i);
-			trie.Add(convert_itm.Src(), convert_itm.Trg());	// NOTE: for dupes, latest value wins
+			trie.Add_obj(convert_itm.Src(), convert_itm.Trg());	// NOTE: for dupes, latest value wins
 		}
 	}
 }

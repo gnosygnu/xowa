@@ -20,7 +20,7 @@ import gplx.xowa.wikis.*;
 public class Xow_xwiki_mgr implements GfoInvkAble {
 	public Xow_xwiki_mgr(Xow_wiki wiki) {this.wiki = wiki;} private Xow_wiki wiki;
 	public Xow_lang_mgr Lang_mgr() {return lang_mgr;} private Xow_lang_mgr lang_mgr = Xow_lang_mgr.dflt_();
-	public int Len() {return list.Count();} private OrderedHash list = OrderedHash_.new_bry_(); Hash_adp_bry hash = Hash_adp_bry.ci_(); 
+	public int Len() {return list.Count();} private OrderedHash list = OrderedHash_.new_bry_(); private Hash_adp_bry hash = Hash_adp_bry.ci_ascii_();	// ASCII:lang_code
 	public void Clear() {hash.Clear(); list.Clear();}
 	public Xow_xwiki_itm Get_at(int i)								{return (Xow_xwiki_itm)list.FetchAt(i);}
 	public Xow_xwiki_itm Get_by_key(byte[] key)						{return (Xow_xwiki_itm)hash.Get_by_bry(key);}
@@ -88,7 +88,7 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 	String Exec_itms_print(byte[] raw) {
 		Bry_fmtr fmtr = Bry_fmtr.new_bry_(raw, "wiki_key");//, "wiki_type_url", "wiki_lang", "wiki_name", "wiki_logo_url");
 		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_k004();
-		Hash_adp_bry seen = Hash_adp_bry.ci_();
+		Hash_adp_bry seen = Hash_adp_bry.ci_ascii_();	// ASCII:url_domain; EX:en.wikipedia.org
 		int wikis_len = list.Count();
 		for (int i = 0; i < wikis_len; i++) {
 			Xow_xwiki_itm itm = (Xow_xwiki_itm)list.FetchAt(i);

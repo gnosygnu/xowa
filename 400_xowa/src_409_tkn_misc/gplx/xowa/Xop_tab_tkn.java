@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.btries.*;
 public class Xop_tab_tkn extends Xop_tkn_itm_base {
 	public Xop_tab_tkn(int bgn, int end) {this.Tkn_ini_pos(false, bgn, end);}
 	@Override public byte Tkn_tid() {return Xop_tkn_itm_.Tid_tab;}
@@ -23,11 +24,11 @@ public class Xop_tab_tkn extends Xop_tkn_itm_base {
 }
 class Xop_tab_lxr implements Xop_lxr {
 	public byte Lxr_tid() {return Xop_lxr_.Tid_tab;}
-	public void Init_by_wiki(Xow_wiki wiki, ByteTrieMgr_fast core_trie) {
+	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr core_trie) {
 		core_trie.Add(Byte_ascii.Tab, this);
 		core_trie.Add(Xop_tab_tkn.Bry_tab_ent, this);
 	}	
-	public void Init_by_lang(Xol_lang lang, ByteTrieMgr_fast core_trie) {}
+	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		cur_pos = Bry_finder.Find_fwd_while(src, cur_pos, src_len, Byte_ascii.Tab);
 		src[bgn_pos] = Byte_ascii.Tab; // HACK: SEE:NOTE_1:tabs

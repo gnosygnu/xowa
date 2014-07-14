@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.lib; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
+import gplx.xowa.wikis.caches.*;
 public class Scrib_lib_title implements Scrib_lib {
 	public Scrib_lib_title(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
@@ -74,22 +75,25 @@ public class Scrib_lib_title implements Scrib_lib {
 		if (url_func_obj == null) throw Err_.new_fmt_("url_function is not valid: {0}", String_.new_utf8_(url_func_bry));
 		byte url_func_tid = ((Byte_obj_val)url_func_obj).Val();
 		byte[] qry_bry = args.Extract_qry_args(wiki, 2);
-//			byte[] proto = Scrib_kv_utl_.Val_to_bry_or(values, 3, null);
+		// byte[] proto = Scrib_kv_utl_.Val_to_bry_or(values, 3, null);	// NOTE: Scribunto has more conditional logic around argument 2 and setting protocols; DATE:2014-07-07
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry); if (ttl == null) return rslt.Init_obj(null);
 		Bry_bfr bfr = wiki.App().Utl_bry_bfr_mkr().Get_b512();
-//			if (url_func_tid == Pf_url_urlfunc.Tid_full) {
-//				if (proto == null) proto = Proto_relative;
-//				Object proto_obj = proto_hash.Fetch(proto); if (proto_obj == null) throw Err_.new_fmt_("protocol is not valid: {0}", proto);
-//				//qry_bry = (byte[])proto_obj;
-//				byte proto_tid = ((Byte_obj_val)proto_obj).Val();
-//				bfr.Add();
-//			}
+		//if (url_func_tid == Pf_url_urlfunc.Tid_full) {
+		//	if (proto == null) proto = Proto_relative;
+		//	Object proto_obj = proto_hash.Fetch(proto); if (proto_obj == null) throw Err_.new_fmt_("protocol is not valid: {0}", proto);
+		//	//qry_bry = (byte[])proto_obj;
+		//	byte proto_tid = ((Byte_obj_val)proto_obj).Val();
+		//	bfr.Add();
+		//}
 		Pf_url_urlfunc.UrlString(core.Ctx(), url_func_tid, false, ttl_bry, bfr, qry_bry);
 		return rslt.Init_obj(bfr.Mkr_rls().XtoStrAndClear());
 	}
-	private static final Hash_adp_bry url_func_hash = Hash_adp_bry.ci_().Add_str_byte("fullUrl", Pf_url_urlfunc.Tid_full).Add_str_byte("localUrl", Pf_url_urlfunc.Tid_local).Add_str_byte("canonicalUrl", Pf_url_urlfunc.Tid_canonical);
+	private static final Hash_adp_bry url_func_hash = Hash_adp_bry.ci_ascii_()
+	.Add_str_byte("fullUrl", Pf_url_urlfunc.Tid_full)
+	.Add_str_byte("localUrl", Pf_url_urlfunc.Tid_local)
+	.Add_str_byte("canonicalUrl", Pf_url_urlfunc.Tid_canonical);
 	// private static final byte[] Proto_relative = Bry_.new_ascii_("relative");
-	// private static final Hash_adp_bry proto_hash = Hash_adp_bry.ci_().Add_str_obj("http", Bry_.new_ascii_("http://")).Add_str_obj("https", Bry_.new_ascii_("https://")).Add_str_obj("relative", Bry_.new_ascii_("//")).Add_str_obj("canonical", Bry_.new_ascii_("1"));
+	// private static final Hash_adp_bry proto_hash = Hash_adp_bry.ci_ascii_().Add_str_obj("http", Bry_.new_ascii_("http://")).Add_str_obj("https", Bry_.new_ascii_("https://")).Add_str_obj("relative", Bry_.new_ascii_("//")).Add_str_obj("canonical", Bry_.new_ascii_("1"));
 	private byte[] Parse_ns(Xow_wiki wiki, Object ns_obj) {
 		if (ClassAdp_.Eq_typeSafe(ns_obj, String.class))
 			return Bry_.new_utf8_(String_.cast_(ns_obj));
@@ -130,8 +134,18 @@ public class Scrib_lib_title implements Scrib_lib {
 		byte[] ttl_bry = args.Pull_bry(0);
 		Xow_wiki wiki = core.Wiki();
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry); if (ttl == null) return rslt.Init_obj(null);
-		byte[] rv = wiki.Cache_mgr().Page_cache().Get_or_load_as_src(ttl); if (rv == null) return rslt.Init_obj(null);
-		return rslt.Init_obj(String_.new_utf8_(rv));
+		Xow_page_cache_itm page_itm = wiki.Cache_mgr().Page_cache().Get_or_load_as_itm(ttl);
+		byte[] rv = null;
+		if (page_itm != null) {
+			byte[] redirected_src = page_itm.Redirected_src();
+			if (redirected_src != null) {						// page is redirect; use its src, not its target's src; DATE:2014-07-11
+				rv = redirected_src;
+				core.Frame_parent().Rslt_is_redirect_(true);	// flag frame as redirect, so that \n won't be prepended; EX:"#REDIRECT" x> "\n#REDIRECT"
+			}
+			else
+				rv = page_itm.Src();
+		}
+		return rv == null ? rslt.Init_obj(null) : rslt.Init_obj(String_.new_utf8_(rv));
 	}
 	public boolean GetCurrentTitle(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		return rslt.Init_obj(Xto_kv_ary(core.Page().Ttl()));

@@ -27,19 +27,4 @@ public class Lst_pfunc_lst extends Pf_func_base {
 		new Lst_pfunc_wkr().Init_include(src_ttl_bry, sect_bgn, sect_end).Exec(bfr, ctx);
 	}
 	public static final Lst_pfunc_lst _ = new Lst_pfunc_lst(); Lst_pfunc_lst() {}
-	public static Hash_adp_bry new_xatrs_(Xol_lang lang) {
-		Hash_adp_bry rv = Hash_adp_bry.ci_();
-		rv.Add_str_byte("name", Lst_section_nde.Xatr_name);
-		Xatrs_add(rv, "begin", "end");
-		switch (lang.Lang_id()) {	// NOTE: as of v315572b, i18n is done directly in code, not in magic.php; am wary of adding keywords for general words like begin/end, so adding them manually per language; DATE:2013-02-09
-			case Xol_lang_itm_.Id_de: Xatrs_add(rv, "Anfang", "Ende"); break;
-			case Xol_lang_itm_.Id_he: Xatrs_add(rv, "התחלה", "סוף"); break;
-			case Xol_lang_itm_.Id_pt: Xatrs_add(rv, "começo", "fim"); break;
-		}
-		return rv;
-	}
-	private static void Xatrs_add(Hash_adp_bry hash, String key_begin, String key_end) {
-		hash.Add_str_byte(key_begin	, Lst_section_nde.Xatr_bgn);
-		hash.Add_str_byte(key_end	, Lst_section_nde.Xatr_end);
-	}
 }

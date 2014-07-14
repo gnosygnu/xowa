@@ -22,7 +22,7 @@ class Pf_intl_language extends Pf_func_base {
 	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {
 		byte[] argx = Eval_argx(ctx, src, caller, self);
 		Hash_adp_bry regy = Xol_lang_itm_.Regy();
-		if (argx.length == 0) return;	// {{#language:}} should return ""; note that byte[0] will fail in MatchAtCurExact
+		if (argx.length == 0) return;	// {{#language:}} should return ""; note that byte[0] will fail in Match_exact
 		Object o = regy.Get_by_bry(argx);
 		if (o == null)
 			bfr.Add(argx);

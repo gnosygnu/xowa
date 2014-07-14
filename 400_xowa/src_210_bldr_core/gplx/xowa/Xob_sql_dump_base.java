@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.ios.*; import gplx.xowa.bldrs.*; 
+import gplx.core.flds.*; import gplx.ios.*; import gplx.xowa.bldrs.*; 
 public abstract class Xob_sql_dump_base extends Xob_itm_dump_base implements Xob_cmd, GfoInvkAble {
 	public abstract String Cmd_key();
 	public Io_url Src_fil() {return src_fil;} Io_url src_fil;

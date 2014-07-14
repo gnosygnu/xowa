@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
-import gplx.html.*; import gplx.xowa.parsers.amps.*;
+import gplx.core.btries.*; import gplx.html.*; import gplx.xowa.parsers.amps.*;
 public class Xoh_html_wtr_escaper {
 	public static byte[] Escape(Xoa_app app, Bry_bfr tmp_bfr, byte[] src) {
 		Escape(app, tmp_bfr, src, 0, src.length, true, false);
@@ -24,7 +24,7 @@ public class Xoh_html_wtr_escaper {
 	}
 	public static void Escape(Xoa_app app, Bry_bfr bfr, byte[] src, int bgn, int end, boolean interpret_amp, boolean nowiki_skip) {
 		Xop_amp_mgr amp_mgr = app.Parser_amp_mgr();
-		ByteTrieMgr_slim amp_trie = amp_mgr.Amp_trie();
+		Btrie_slim_mgr amp_trie = amp_mgr.Amp_trie();
 		for (int i = bgn; i < end; i++) {
 			byte b = src[i];
 			switch (b) {
@@ -48,7 +48,7 @@ public class Xoh_html_wtr_escaper {
 				case Byte_ascii.Amp:
 					if (interpret_amp) {
 						int text_bgn = i + 1;	// i is &; i + 1 is first char after amp
-						Object o = (text_bgn < end) ? amp_trie.MatchAtCur(src, text_bgn, end) : null;	// check if this is a valid &; note must check that text_bgn < end or else arrayIndex error; occurs when src is just "&"; DATE:2013-12-19
+						Object o = (text_bgn < end) ? amp_trie.Match_bgn(src, text_bgn, end) : null;	// check if this is a valid &; note must check that text_bgn < end or else arrayIndex error; occurs when src is just "&"; DATE:2013-12-19
 						if (o == null)										// invalid; EX: "a&b"; "&bad;"; "&#letters;"; 
 							bfr.Add(Html_entity_.Amp_bry);					// escape & and continue
 						else {												// is either (1) a name or (2) an ncr (hex/dec)

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.btries.*;
 public class Xop_xatr_whitelist_mgr {
 	public boolean Chk(int tag_id, byte[] src, Xop_xatr_itm xatr) {
 		byte[] key_bry = xatr.Key_bry();
@@ -31,7 +32,7 @@ public class Xop_xatr_whitelist_mgr {
 			chk_bgn = 0;
 			chk_end = key_bry.length;
 		}
-		Object o = key_trie.MatchAtCur(chk_bry, chk_bgn, chk_end);
+		Object o = key_trie.Match_bgn(chk_bry, chk_bgn, chk_end);
 		if (o == null) return false;// unknown atr_key; EX: <b unknown=1/>
 		Xop_xatr_whitelist_itm itm = (Xop_xatr_whitelist_itm)o;
 		byte itm_key_tid = itm.Key_tid();
@@ -147,10 +148,10 @@ public class Xop_xatr_whitelist_mgr {
 		len = keys.Count();
 		for (int i = 0; i < len; i++) {
 			byte[] key_bry = (byte[])keys.FetchAt(i);
-			Xop_xatr_whitelist_itm itm = (Xop_xatr_whitelist_itm)key_trie.MatchAtCurExact(key_bry, 0, key_bry.length);
+			Xop_xatr_whitelist_itm itm = (Xop_xatr_whitelist_itm)key_trie.Match_exact(key_bry, 0, key_bry.length);
 			if (itm == null) {
 				itm = Ini_key_trie_add(key_bry, true);
-				key_trie.Add(key_bry, itm);
+				key_trie.Add_obj(key_bry, itm);
 			}
 			itm.Tags()[tag_tid] = 1;
 		}
@@ -159,7 +160,7 @@ public class Xop_xatr_whitelist_mgr {
 		byte[] key_bry = Bry_.new_ascii_(key_str);
 		Ini_key_trie_add(key_bry, false);
 		Xop_xatr_whitelist_itm itm = Ini_key_trie_add(key_bry, false);
-		key_trie.Add(key_bry, itm);
+		key_trie.Add_obj(key_bry, itm);
 		int len = Xop_xnde_tag_._MaxLen;
 		for (int i = 0; i < len; i++)
 			itm.Tags()[i] = 1;
@@ -168,15 +169,15 @@ public class Xop_xatr_whitelist_mgr {
 		Object key_tid_obj = tid_hash.Fetch(key);
 		byte key_tid = key_tid_obj == null ? Xop_xatr_itm.Key_tid_generic : ((Byte_obj_val)key_tid_obj).Val();
 		Xop_xatr_whitelist_itm rv = new Xop_xatr_whitelist_itm(key, key_tid, exact);
-		key_trie.Add(key, rv);
+		key_trie.Add_obj(key, rv);
 		return rv;
 	}
-	private Hash_adp_bry tid_hash = Hash_adp_bry.ci_()
+	private Hash_adp_bry tid_hash = Hash_adp_bry.ci_ascii_()
 	.Add_str_byte("id", Xop_xatr_itm.Key_tid_id)
 	.Add_str_byte("style", Xop_xatr_itm.Key_tid_style)
 	.Add_str_byte("role", Xop_xatr_itm.Key_tid_role)
 	;
-	private ByteTrieMgr_slim key_trie = ByteTrieMgr_slim.ci_ascii_();	// NOTE:ci.ascii:HTML.node_name
+	private Btrie_slim_mgr key_trie = Btrie_slim_mgr.ci_ascii_();	// NOTE:ci.ascii:HTML.node_name
 	public boolean Scrub_style(Xop_xatr_itm xatr, byte[] raw) { // REF:Sanitizer.php|checkCss; '! expression | filter\s*: | accelerator\s*: | url\s*\( !ix'; NOTE: this seems to affect MS IE only; DATE:2013-04-01
 		byte[] val_bry = xatr.Val_bry();
 		byte[] chk_bry; int chk_bgn, chk_end;
@@ -193,7 +194,7 @@ public class Xop_xatr_whitelist_mgr {
 		}
 		int pos = chk_bgn;
 		while (pos < chk_end) {
-			Object o = style_trie.MatchAtCur(chk_bry, pos, chk_end);
+			Object o = style_trie.Match_bgn(chk_bry, pos, chk_end);
 			if (o == null)
 				++pos;
 			else {
@@ -240,7 +241,7 @@ public class Xop_xatr_whitelist_mgr {
 		return Byte_ascii.Nil; 
 	}
 	static final byte Style_expression = 0, Style_filter = 1, Style_accelerator = 2, Style_url = 3, Style_urls = 4, Style_comment = 5, Style_image = 6, Style_image_set = 7;
-	private static ByteTrieMgr_slim style_trie = ByteTrieMgr_slim.ci_ascii_()	// NOTE:ci.ascii:Javascript
+	private static Btrie_slim_mgr style_trie = Btrie_slim_mgr.ci_ascii_()	// NOTE:ci.ascii:Javascript
 	.Add_str_byte("expression"	, Style_expression)
 	.Add_str_byte("filter"		, Style_filter)
 	.Add_str_byte("accelerator"	, Style_accelerator)

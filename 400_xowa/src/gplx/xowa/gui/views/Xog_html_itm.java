@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
-import gplx.gfui.*; import gplx.html.*; import gplx.xowa.gui.menus.*; import gplx.xowa.gui.menus.dom.*;
+import gplx.core.btries.*; import gplx.gfui.*; import gplx.html.*; import gplx.xowa.gui.menus.*; import gplx.xowa.gui.menus.dom.*;
 public class Xog_html_itm implements GfoInvkAble, GfoEvObj {
 	private Xoa_app app;
 	public Xog_html_itm(Xog_tab_itm owner_tab) {
@@ -61,8 +61,18 @@ public class Xog_html_itm implements GfoInvkAble, GfoEvObj {
 			page.Root().Data_htm_(html_src);
 		}
 	}
-	private void Html_src_(Xoa_page page, byte[] html_src) {
-		html_box.Html_doc_html_(String_.new_utf8_(html_src));
+	private void Html_src_(Xoa_page page, byte[] html_bry) {
+		String html_str = String_.new_utf8_(html_bry);
+		if (owner_tab.Tab_mgr().Html_load_tid__url()) {
+			Io_url html_url = app.User().Fsys_mgr().App_temp_html_dir().GenSubFil_ary(owner_tab.Tab_key(), ".html");
+			try {html_box.Html_doc_html_load_by_url(html_url.Xto_api(), html_str);}
+			catch (Exception e) {
+				app.Usr_dlg().Warn_many("", "", "failed to write html to file; writing directly by memory: page=~{0} file=~{1} err=~{2}", page.Url().Xto_full_str_safe(), html_url.Raw(), Err_.Message_gplx(e));
+				html_box.Html_doc_html_load_by_mem(html_str);
+			}
+		}
+		else
+			html_box.Html_doc_html_load_by_mem(html_str);
 	}
 	public void Html_swap(Xog_html_itm trg_itm) {
 		Xog_html_itm src_itm = this;
@@ -180,7 +190,7 @@ class Xog_html_itm__href_extractor {
 	private static final byte Href_tid_wiki = 1, Href_tid_site = 2, Href_tid_anchor = 3;
 	private static final byte[] File_protocol_bry = Bry_.new_ascii_("file://");
 	private static final int File_protocol_len = File_protocol_bry.length;
-	private static final ByteTrieMgr_slim href_trie = ByteTrieMgr_slim.cs_()
+	private static final Btrie_slim_mgr href_trie = Btrie_slim_mgr.cs_()
 	.Add_str_byte("/site/"		, Href_tid_site)
 	.Add_str_byte("/wiki/"		, Href_tid_wiki)
 	.Add_str_byte("#"			, Href_tid_anchor)
@@ -199,7 +209,7 @@ class Xog_html_itm__href_extractor {
 		if (Bry_.HasAtBgn(text_bry, File_protocol_bry, 2, text_len)) {
 			href_bgn += File_protocol_len;	// skip "file://"
 		}
-		Byte_obj_val href_tid = (Byte_obj_val)href_trie.MatchAtCur(text_bry, href_bgn, text_len);
+		Byte_obj_val href_tid = (Byte_obj_val)href_trie.Match_bgn(text_bry, href_bgn, text_len);
 		if (href_tid != null) {
 			switch (href_tid.Val()) {
 				case Href_tid_wiki:			return site + String_.new_utf8_(text_bry, href_bgn, text_len);		

@@ -23,6 +23,7 @@ public class Xou_fsys_mgr implements GfoInvkAble {
 		this.cur_root = user_dir;
 		app_root_dir = cur_root.GenSubDir("app");
 		app_temp_dir = app_root_dir.GenSubDir("tmp");
+		app_temp_html_dir = app_temp_dir.GenSubDir("html");
 		app_data_history_fil = app_root_dir.GenSubFil_nest("data", "history", "page_history.csv");
 		wiki_root_dir = cur_root.GenSubDir("wiki");
 		home_wiki_dir = wiki_root_dir.GenSubDir_nest(Xow_wiki_domain_.Key_home_str);
@@ -32,6 +33,7 @@ public class Xou_fsys_mgr implements GfoInvkAble {
 	public Io_url Wiki_html_dir(String wiki){return wiki_root_dir.GenSubDir_nest(wiki, "html");}
 	public Io_url App_data_history_fil()	{return app_data_history_fil;} private Io_url app_data_history_fil;
 	public Io_url App_temp_dir()			{return app_temp_dir;} private Io_url app_temp_dir;
+	public Io_url App_temp_html_dir()		{return app_temp_html_dir;} private Io_url app_temp_html_dir;
 	public Io_url App_img_dir()				{return app_root_dir.GenSubDir_nest("img");}
 	public Io_url App_data_dir()			{return app_root_dir.GenSubDir_nest("data");}
 	public Io_url App_data_cfg_dir()		{return app_root_dir.GenSubDir_nest("data", "cfg");}

@@ -15,41 +15,36 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx;
+package gplx.core.btries; import gplx.*; import gplx.core.*;
 import org.junit.*;
-public class ByteTrieMgr_bwd_slim_tst {
-	@Before public void init() {}	private ByteTrieMgr_bwd_slim trie;
+public class Btrie_slim_mgr_tst {
+	@Before public void init() {
+	}	private Btrie_slim_mgr trie;
 	private void ini_setup1() {
-		trie = new ByteTrieMgr_bwd_slim(false);
-		run_Add("c"		,	1);
+		trie = Btrie_slim_mgr.cs_();
+		run_Add("a"		,	1);
 		run_Add("abc"	,	123);
 	}
 	@Test  public void Fetch() {
 		ini_setup1();
-		tst_MatchAtCur("c"		, 1);
+		tst_MatchAtCur("a"		, 1);
 		tst_MatchAtCur("abc"	, 123);
-		tst_MatchAtCur("bc"		, 1);
-		tst_MatchAtCur("yzabc"	, 123);
-		tst_MatchAtCur("ab"		, null);
+		tst_MatchAtCur("ab"		, 1);
+		tst_MatchAtCur("abcde"	, 123);
+		tst_MatchAtCur(" a"		, null);
 	}
-	@Test  public void Fetch_intl() {
-		trie = new ByteTrieMgr_bwd_slim(false);
-		run_Add("a�",	1);
-		tst_MatchAtCur("a�"		, 1);
-		tst_MatchAtCur("�"		, null);
-	}
-	@Test  public void Eos() {
+	@Test  public void Bos() {
 		ini_setup1();
-		tst_Match("ab", Byte_ascii.Ltr_c, 2, 123);
+		tst_Match("bc", Byte_ascii.Ltr_a, -1, 123);
 	}
-	@Test  public void MatchAtCurExact() {
+	@Test  public void Match_exact() {
 		ini_setup1();
-		tst_MatchAtCurExact("c", 1);
-		tst_MatchAtCurExact("bc", null);
+		tst_MatchAtCurExact("a", 1);
+		tst_MatchAtCurExact("ab", null);
 		tst_MatchAtCurExact("abc", 123);
 	}
 	private void ini_setup2() {
-		trie = new ByteTrieMgr_bwd_slim(false);
+		trie = Btrie_slim_mgr.cs_();
 		run_Add("a"	,	1);
 		run_Add("b"	,	2);
 	}
@@ -59,7 +54,7 @@ public class ByteTrieMgr_bwd_slim_tst {
 		tst_MatchAtCur("b", 2);
 	}
 	private void ini_setup_caseAny() {
-		trie = ByteTrieMgr_bwd_slim.ci_();
+		trie = Btrie_slim_mgr.ci_ascii_();	// NOTE:ci.ascii:test
 		run_Add("a"	,	1);
 		run_Add("b"	,	2);
 	}
@@ -68,20 +63,30 @@ public class ByteTrieMgr_bwd_slim_tst {
 		tst_MatchAtCur("a", 1);
 		tst_MatchAtCur("A", 1);
 	}
-	private void run_Add(String k, int val) {trie.Add(Bry_.new_utf8_(k), val);}
+	@Test  public void Del() {
+		ini_setup1();
+		trie.Del(Bry_.new_ascii_("a"));	// delete "a"; "abc" still remains;
+		tst_MatchAtCur("a"		, null);
+		tst_MatchAtCur("abc"	, 123);
+
+		trie.Del(Bry_.new_ascii_("abc"));
+		tst_MatchAtCur("abc"	, null);
+	}
+
+	private void run_Add(String k, int val) {trie.Add_obj(Bry_.new_ascii_(k), val);}
 	private void tst_Match(String srcStr, byte b, int bgn_pos, int expd) {
-		byte[] src = Bry_.new_utf8_(srcStr);
-		Object actl = trie.Match(b, src, bgn_pos, -1);
+		byte[] src = Bry_.new_ascii_(srcStr);
+		Object actl = trie.Match_bgn_w_byte(b, src, bgn_pos, src.length);
 		Tfds.Eq(expd, actl);
 	}
 	private void tst_MatchAtCur(String srcStr, Object expd) {
-		byte[] src = Bry_.new_utf8_(srcStr);
-		Object actl = trie.Match(src[src.length - 1], src, src.length - 1, -1);
+		byte[] src = Bry_.new_ascii_(srcStr);
+		Object actl = trie.Match_bgn_w_byte(src[0], src, 0, src.length);
 		Tfds.Eq(expd, actl);
 	}
 	private void tst_MatchAtCurExact(String srcStr, Object expd) {
-		byte[] src = Bry_.new_utf8_(srcStr);
-		Object actl = trie.MatchAtCurExact(src, src.length - 1, -1);
+		byte[] src = Bry_.new_ascii_(srcStr);
+		Object actl = trie.Match_exact(src, 0, src.length);
 		Tfds.Eq(expd, actl);
 	}
 }

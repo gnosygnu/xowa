@@ -31,7 +31,7 @@ class Xoctg_url_fxt {
 	public void Clear() {
 		if (parser == null) {
 			parser = new Xoa_url_parser();
-			page_url = new Xoa_url();
+			page_url = Xoa_url.blank_();
 			ctg_url = new Xoctg_url();
 			expd = new Xoctg_url_chkr();
 		}

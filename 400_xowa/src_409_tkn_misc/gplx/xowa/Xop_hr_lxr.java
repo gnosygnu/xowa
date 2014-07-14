@@ -16,10 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.btries.*;
 public class Xop_hr_lxr implements Xop_lxr {
 	public byte Lxr_tid() {return Xop_lxr_.Tid_hr;}
-	public void Init_by_wiki(Xow_wiki wiki, ByteTrieMgr_fast parse_trie) {parse_trie.Add(Hook_ary, this);} static final byte[] Hook_ary = new byte[] {Byte_ascii.NewLine, Byte_ascii.Dash, Byte_ascii.Dash, Byte_ascii.Dash, Byte_ascii.Dash};
-	public void Init_by_lang(Xol_lang lang, ByteTrieMgr_fast core_trie) {}
+	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr parse_trie) {parse_trie.Add(Hook_ary, this);} static final byte[] Hook_ary = new byte[] {Byte_ascii.NewLine, Byte_ascii.Dash, Byte_ascii.Dash, Byte_ascii.Dash, Byte_ascii.Dash};
+	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		int nl_adj = -1;	// -1 to ignore nl at bgn for hr_len
 		boolean bos = bgn_pos == Xop_parser_.Doc_bgn_bos;

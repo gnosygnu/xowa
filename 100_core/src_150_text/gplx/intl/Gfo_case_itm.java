@@ -20,4 +20,5 @@ public interface Gfo_case_itm {
 	boolean Eq_lo(Gfo_case_itm itm);
 	int Hashcode_lo();
 	int Len_lo();
+	byte[] Asymmetric_bry();
 }

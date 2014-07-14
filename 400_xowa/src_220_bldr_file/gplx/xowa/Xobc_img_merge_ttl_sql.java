@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.ios.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wikis.images.*;
+import gplx.core.flds.*; import gplx.ios.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wikis.images.*;
 public class Xobc_img_merge_ttl_sql extends Xob_itm_dump_base implements Xob_cmd, GfoInvkAble {
 	public Xobc_img_merge_ttl_sql(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki); this.make_fil_len = Io_mgr.Len_mb;}
 	public String Cmd_key() {return KEY;} public static final String KEY = "img.merge_ttl";

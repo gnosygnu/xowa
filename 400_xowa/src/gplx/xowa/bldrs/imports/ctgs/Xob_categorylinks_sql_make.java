@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.imports.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.imports.*;
-import gplx.ios.*; import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.ctgs.*; 
+import gplx.core.flds.*; import gplx.ios.*; import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.ctgs.*; 
 public class Xob_categorylinks_sql_make implements Io_make_cmd {
 	public Xob_categorylinks_sql_make(Sql_file_parser sql_parser, Xow_wiki wiki) {this.wiki = wiki; this.sql_parser = sql_parser;} private Xow_wiki wiki; Xodb_mgr_sql db_mgr; Sql_file_parser sql_parser;
 	public Io_sort_cmd Make_dir_(Io_url v) {return this;}

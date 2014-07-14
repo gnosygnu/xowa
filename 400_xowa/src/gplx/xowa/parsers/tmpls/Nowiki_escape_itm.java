@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.html.*;
+import gplx.core.btries.*; import gplx.html.*;
 public class Nowiki_escape_itm {
 	public Nowiki_escape_itm(boolean tid_space, byte[] src, byte[] trg) {this.tid_space = tid_space; this.src = src; this.trg = trg;}
 	public byte[] Src() {return src;} private byte[] src;
@@ -27,7 +27,7 @@ public class Nowiki_escape_itm {
 		boolean dirty = false;
 		for (int i = bgn; i < end; i++) {
 			byte b = src[i];
-			Object o = trie.Match(b, src, i, end);
+			Object o = trie.Match_bgn_w_byte(b, src, i, end);
 			if (o == null) {
 				if (dirty)
 					tmp_bfr.Add_byte(b);
@@ -49,9 +49,9 @@ public class Nowiki_escape_itm {
 		}
 		return dirty;
 	}
-	private static final ByteTrieMgr_slim trie = trie_new();
-	private static ByteTrieMgr_slim trie_new() {
-		ByteTrieMgr_slim rv = ByteTrieMgr_slim.cs_();
+	private static final Btrie_slim_mgr trie = trie_new();
+	private static Btrie_slim_mgr trie_new() {
+		Btrie_slim_mgr rv = Btrie_slim_mgr.cs_();
 		trie_new_itm(rv, Bool_.N, Byte_ascii.Lt_bry				, Html_entity_.Lt_bry);
 		trie_new_itm(rv, Bool_.N, Byte_ascii.Brack_bgn_bry		, Html_entity_.Brack_bgn_bry);
 		trie_new_itm(rv, Bool_.N, Byte_ascii.Pipe_bry			, Html_entity_.Pipe_bry);
@@ -62,8 +62,8 @@ public class Nowiki_escape_itm {
 		trie_new_itm(rv, Bool_.Y, Byte_ascii.Space_bry			, Html_entity_.Space_bry);
 		return rv;
 	}
-	private static void trie_new_itm(ByteTrieMgr_slim rv, boolean tid_space, byte[] src, byte[] trg) {
+	private static void trie_new_itm(Btrie_slim_mgr rv, boolean tid_space, byte[] src, byte[] trg) {
 		Nowiki_escape_itm itm = new Nowiki_escape_itm(tid_space, src, trg);
-		rv.Add(src, itm);			
+		rv.Add_obj(src, itm);			
 	}
 }

@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx;
+package gplx.core.flds; import gplx.*; import gplx.core.*;
 public class Gfo_fld_rdr extends Gfo_fld_base {
 	private Bry_bfr bfr = Bry_bfr.new_(); private static final byte[] Bry_nil = Bry_.new_ascii_("\\0");
 	public byte[] Data() {return data;} public Gfo_fld_rdr Data_(byte[] v) {data = v; data_len = v.length; pos = 0; return this;} private byte[] data; int data_len;

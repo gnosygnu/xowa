@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+import gplx.core.btries.*;
 class Xop_vnt_flag_parser {
 	private Xop_vnt_flag_lang_bldr flag_lang_bldr;
 	public Xop_vnt_flag_parser(Xol_vnt_mgr vnt_mgr) {flag_lang_bldr = new Xop_vnt_flag_lang_bldr(vnt_mgr);}
@@ -64,7 +65,7 @@ class Xop_vnt_flag_parser {
 	private Xop_vnt_flag Parse_flag_bry(byte[] bry) {
 		int bry_len = bry.length;
 		if (bry_len == 0) return Xop_vnt_flag_.Flag_unknown;	// EX: exit early if 0 len, else trie will fail; EX: "-{|}-"
-		Object flag_obj = flag_trie.MatchAtCurExact(bry, 0, bry_len);
+		Object flag_obj = flag_trie.Match_exact(bry, 0, bry_len);
 		return flag_obj == null
 			? Parse_flag_vnts(bry, bry_len)		// unknown tid sequence; either (a) "lang" cmd ("-{zh-hans;zh-hant|a}-") or (b) invalid cmd ("-{X|a}-")
 			: (Xop_vnt_flag)flag_obj;			// known flag; check that next non_ws is |
@@ -72,11 +73,11 @@ class Xop_vnt_flag_parser {
 	private Xop_vnt_flag Parse_flag_vnts(byte[] bry, int bry_len) {
 		boolean loop = true;
 		int vnt_pos = 0;
-		ByteTrieMgr_slim trie = flag_lang_bldr.Trie();
+		Btrie_slim_mgr trie = flag_lang_bldr.Trie();
 		while (loop) {
 			boolean last = false;
 			boolean valid = true;
-			Object vnt_obj = trie.MatchAtCur(bry, vnt_pos, bry_len);
+			Object vnt_obj = trie.Match_bgn(bry, vnt_pos, bry_len);
 			if (vnt_obj == null) break;						// no more vnts found; stop
 			vnt_pos = trie.Match_pos();						// update pos to end of vnt
 			int semic_pos = Bry_finder.Find_fwd_while_not_ws(bry, vnt_pos, bry_len);
@@ -97,9 +98,9 @@ class Xop_vnt_flag_parser {
 		}
 		return flag_lang_bldr.Bld();
 	}
-	private static ByteTrieMgr_fast flag_trie = Xop_vnt_flag_.Trie;
+	private static Btrie_fast_mgr flag_trie = Xop_vnt_flag_.Trie;
 //		private static final byte Dlm_tid_bgn = 0, Dlm_tid_end = 1, Dlm_tid_pipe = 2, Dlm_tid_colon = 3, Dlm_tid_semic = 4, Dlm_tid_kv = 5;
-//		private static ByteTrieMgr_fast dlm_trie = ByteTrieMgr_fast.cs_()
+//		private static Btrie_fast_mgr dlm_trie = Btrie_fast_mgr.cs_()
 //		.Add_bry_bval(Xop_vnt_lxr_.Hook_bgn	, Dlm_tid_bgn)
 //		.Add_bry_bval(Xop_vnt_lxr_.Hook_end		, Dlm_tid_end)
 //		.Add_bry_bval(Byte_ascii.Pipe				, Dlm_tid_pipe)

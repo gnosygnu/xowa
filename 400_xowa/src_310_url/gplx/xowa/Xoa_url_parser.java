@@ -36,7 +36,12 @@ public class Xoa_url_parser {
 		if (url.Anchor_bry() != null)
 			tmp_bfr.Add_byte(Byte_ascii.Hash).Add(url.Anchor_bry());		// add anchor;		EX: "#B"
 		return tmp_bfr.XtoStrAndClear();
-	}		
+	}
+	public Xoa_url Parse(byte[] src) {
+		Xoa_url rv = Xoa_url.blank_();
+		Parse(rv, src);
+		return rv;
+	}
 	public boolean Parse(Xoa_url url, byte[] src, int bgn, int end) {return Parse(url, Bry_.Mid(src, bgn, end));}
 	public boolean Parse(Xoa_url url, byte[] src) {
 		url.Init(src);	// NOTE: need to call init to clear state; Xoa_url is often reused
@@ -124,7 +129,11 @@ public class Xoa_url_parser {
 			: ary
 			;
 	}
-	public static Xoa_url Parse_url(Xoa_app app, Xow_wiki cur_wiki, String raw) {Xoa_url rv = new Xoa_url(); byte[] raw_bry = Bry_.new_utf8_(raw); return Parse_url(rv, app, cur_wiki, raw_bry, 0, raw_bry.length, false);}
+	public static Xoa_url Parse_url(Xoa_app app, Xow_wiki cur_wiki, String raw) {
+		byte[] raw_bry = Bry_.new_utf8_(raw);
+		return Parse_url(Xoa_url.blank_(), app, cur_wiki, raw_bry, 0, raw_bry.length, false);
+	}
+	public static Xoa_url Parse_url(Xoa_app app, Xow_wiki cur_wiki, byte[] raw, int bgn, int end, boolean from_url_bar) {return Parse_url(Xoa_url.blank_(), app, cur_wiki, raw, bgn, end, from_url_bar);}
 	public static Xoa_url Parse_url(Xoa_url rv, Xoa_app app, Xow_wiki cur_wiki, byte[] raw, int bgn, int end, boolean from_url_bar) {
 		Xow_wiki wiki = null; Bry_bfr_mkr bfr_mkr = app.Utl_bry_bfr_mkr();
 		byte[] cur_wiki_key = cur_wiki.Domain_bry();
@@ -247,8 +256,7 @@ public class Xoa_url_parser {
 		bry = Parse_from_url_bar__strip_mobile(bry);
 		byte[] fmt = app.Gui_mgr().Url_macro_mgr().Fmt_or_null(bry);
 		if (fmt != null) bry = fmt;
-		Xoa_url rv = new Xoa_url();
-		Xoa_url_parser.Parse_url(rv, app, wiki, bry, 0, bry.length, true);
+		Xoa_url rv = Xoa_url_parser.Parse_url(app, wiki, bry, 0, bry.length, true);
 		if (app.Wiki_mgr().Wiki_regy().Url_is_invalid_domain(rv)) {	// handle lang_code entered; EX: "war" should redirect to "war" article in current wiki, not war.wikipedia.org; DATE:2014-02-07
 			rv.Page_bry_(rv.Wiki_bry());
 			rv.Wiki_(wiki);
@@ -283,6 +291,13 @@ public class Xoa_url_parser {
 	, Bry_arg_action = Bry_.new_ascii_("action")
 	, Bry_arg_action_edit = Bry_.new_ascii_("edit")
 	;
-	private static final Hash_adp_bry qry_args_hash = Hash_adp_bry.ci_().Add_bry_byte(Bry_arg_redirect, Id_arg_redirect).Add_bry_byte(Bry_arg_uselang, Id_arg_uselang).Add_bry_byte(Bry_arg_title, Id_arg_title).Add_bry_byte(Bry_arg_action, Id_arg_action).Add_bry_byte(Bry_arg_fulltext, Id_arg_fulltext);
-	private static final Hash_adp_bry upload_segs_hash = Hash_adp_bry.ci_().Add_bry_bry(Xow_wiki_domain_.Key_commons_bry);//.Add_bry_bry(Xow_wiki_domain_.Key_species_bry).Add_bry_bry(Xow_wiki_domain_.Key_meta_bry);
+	private static final Hash_adp_bry qry_args_hash = Hash_adp_bry.ci_ascii_()
+	.Add_bry_byte(Bry_arg_redirect, Id_arg_redirect)
+	.Add_bry_byte(Bry_arg_uselang, Id_arg_uselang)
+	.Add_bry_byte(Bry_arg_title, Id_arg_title)
+	.Add_bry_byte(Bry_arg_action, Id_arg_action)
+	.Add_bry_byte(Bry_arg_fulltext, Id_arg_fulltext)
+	;
+	private static final Hash_adp_bry upload_segs_hash = Hash_adp_bry.ci_ascii_()
+	.Add_bry_bry(Xow_wiki_domain_.Key_commons_bry);//.Add_bry_bry(Xow_wiki_domain_.Key_species_bry).Add_bry_bry(Xow_wiki_domain_.Key_meta_bry);
 }

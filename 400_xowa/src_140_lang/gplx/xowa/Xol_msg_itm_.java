@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.btries.*;
 public class Xol_msg_itm_ {
 public static final int
   Id_dte_dow_name_sunday = 0
@@ -266,7 +267,7 @@ public static final int
 		itm.Atrs_set(val, has_fmt_arg, has_tmpl_txt);
 	}
 	public static final byte[] Bry_nbsp = Byte_.Ary_by_ints(192, 160);
-	private static final ByteTrieMgr_slim trie_space = ByteTrieMgr_slim.cs_()	// MW:cache/MessageCache.php|get|Fix for trailing whitespace, removed by textarea|DATE:2014-04-29
+	private static final Btrie_slim_mgr trie_space = Btrie_slim_mgr.cs_()	// MW:cache/MessageCache.php|get|Fix for trailing whitespace, removed by textarea|DATE:2014-04-29
 		.Add_bry("&#32;"	, " ")
 		.Add_bry("&nbsp;"	, Bry_nbsp)
 		.Add_bry("&#160;"	, Bry_nbsp)

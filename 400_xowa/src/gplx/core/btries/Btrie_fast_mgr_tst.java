@@ -15,10 +15,10 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx;
+package gplx.core.btries; import gplx.*; import gplx.core.*;
 import org.junit.*;
-public class ByteTrieMgr_fast_tst {
-	private ByteTrieMgr_fast_fxt fxt = new ByteTrieMgr_fast_fxt();
+public class Btrie_fast_mgr_tst {
+	private Btrie_fast_mgr_fxt fxt = new Btrie_fast_mgr_fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test  public void Fetch() {
 		fxt.Test_matchAtCur("a"		, 1);
@@ -30,7 +30,7 @@ public class ByteTrieMgr_fast_tst {
 	@Test  public void Bos() {
 		fxt.Test_match("bc", Byte_ascii.Ltr_a, -1, 123);
 	}
-	@Test  public void MatchAtCurExact() {
+	@Test  public void Match_exact() {
 		fxt.Test_matchAtCurExact("a", 1);
 		fxt.Test_matchAtCurExact("ab", null);
 		fxt.Test_matchAtCurExact("abc", 123);
@@ -56,27 +56,27 @@ public class ByteTrieMgr_fast_tst {
 		fxt.Test_matchAtCurExact("abc"	, 123);
 	}
 }
-class ByteTrieMgr_fast_fxt {
-	private ByteTrieMgr_fast trie;
+class Btrie_fast_mgr_fxt {
+	private Btrie_fast_mgr trie;
 	public void Clear() {
-		trie = ByteTrieMgr_fast.cs_();
+		trie = Btrie_fast_mgr.cs_();
 		Init_add(  1	, Byte_ascii.Ltr_a);
 		Init_add(123	, Byte_ascii.Ltr_a, Byte_ascii.Ltr_b, Byte_ascii.Ltr_c);
 	}
 	public void Init_add(int val, byte... ary) {trie.Add(ary, val);}
 	public void Test_match(String src_str, byte b, int bgn_pos, int expd) {
 		byte[] src = Bry_.new_ascii_(src_str);
-		Object actl = trie.Match(b, src, bgn_pos, src.length);
+		Object actl = trie.Match_bgn_w_byte(b, src, bgn_pos, src.length);
 		Tfds.Eq(expd, actl);
 	}
 	public void Test_matchAtCur(String src_str, Object expd) {
 		byte[] src = Bry_.new_ascii_(src_str);
-		Object actl = trie.MatchAtCur(src, 0, src.length);
+		Object actl = trie.Match_bgn(src, 0, src.length);
 		Tfds.Eq(expd, actl);
 	}
 	public void Test_matchAtCurExact(String src_str, Object expd) {
 		byte[] src = Bry_.new_ascii_(src_str);
-		Object actl = trie.MatchAtCurExact(src, 0, src.length);
+		Object actl = trie.Match_exact(src, 0, src.length);
 		Tfds.Eq(expd, actl);
 	}
 	public void Exec_del(String src_str) {

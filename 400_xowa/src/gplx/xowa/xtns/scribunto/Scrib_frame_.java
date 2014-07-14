@@ -27,10 +27,9 @@ public class Scrib_frame_ {
 	public static Xot_invk Get_frame(Scrib_core core, String frame_id) {
 		if		(String_.Eq(frame_id, "current"))	return core.Frame_current();
 		else if (String_.Eq(frame_id, "parent"))	return core.Frame_parent();
+		else if (String_.Eq(frame_id, "empty"))		return Xot_invk_mock.new_(core.Frame_current().Defn_tid(), 0, KeyVal_.Ary_empty);	// not sure if it should return null title; DATE:2014-07-12
 		else {
-			Xot_invk rv = (Xot_invk)core.Frame_created_list().Fetch(frame_id);
-			if (rv == null) throw Err_.new_("invalid frame ID: frame_id={0}", frame_id);
-			return rv;
+			return (Xot_invk)core.Frame_created_list().Fetch(frame_id);	// NOTE: can return null; some calls expect nil; EX:mw.lua and "currentFrame = newFrame( 'empty' )"; DATE:2014-07-12
 		}
 	}
 	public static int Get_arg_adj(byte frame_tid) {

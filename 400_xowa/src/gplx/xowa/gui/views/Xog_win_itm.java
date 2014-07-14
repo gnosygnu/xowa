@@ -158,7 +158,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 			page.Wiki().ParsePage_root(page, true);		// NOTE: must reparse page if (a) Edit -> Read; or (b) "Options" save
 			Xoa_url url = page.Url();
 			if (url.Args_exists(Xoa_url_parser.Bry_arg_action, Xoa_url_parser.Bry_arg_action_edit))	// url has ?action=edit
-				app.Url_parser().Parse(url, url.X_to_full());	// remove all query args; handle (1) s.w:Earth?action=edit; (2) click on Read; DATE:2014-03-06
+				app.Url_parser().Parse(url, url.Xto_full_bry());	// remove all query args; handle (1) s.w:Earth?action=edit; (2) click on Read; DATE:2014-03-06
 		}
 		tab.View_mode_(new_mode_tid);
 		if (page.Missing()) return;
@@ -246,12 +246,12 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 	public byte[] App__retrieve_by_url(String url_str, String output_str) {
 		synchronized (App__retrieve__lock) {
 			boolean output_html = String_.Eq(output_str, "html");
-			Xoa_url url = new Xoa_url();
 			byte[] url_bry = Bry_.new_utf8_(url_str);
 			Xow_wiki home_wiki = app.User().Wiki();
 			Xoa_ttl ttl = Xoa_ttl.parse_(home_wiki, Xoa_page_.Main_page_bry);	// NOTE: must be Main_Page, not "" else Firefox Addon will fail; DATE:2014-03-13
 			Xoa_page new_page = Xoa_page.new_(home_wiki, ttl);
 			this.Active_page_(new_page);
+			Xoa_url url = Xoa_url.blank_();
 			url = Xoa_url_parser.Parse_url(url, app, new_page.Wiki(), url_bry, 0, url_bry.length, true);
 			new_page.Url_(url);
 			return App__retrieve_by_href(url, output_html);

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.gui.*; import gplx.xowa.xtns.lst.*;
+import gplx.core.btries.*; import gplx.xowa.gui.*; import gplx.xowa.xtns.lst.*;
 import gplx.xowa.xtns.scribunto.*;
 import gplx.xowa.xtns.wdatas.*;
 import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.html.modules.popups.keeplists.*;
@@ -297,7 +297,7 @@ public class Xop_ctx {
 	public void Tmpl_prepend_nl(Bry_bfr cur, byte[] val, int val_len) {			// cur=current bfr; tmpl_output=main bfr that cur will eventually be appended to; val=result of template
 		if (	val_len == 0													// val is empty
 			||	cur.Match_end_byt(Byte_ascii.NewLine)							// if cur has \n already, don't add; bn.w:লিওনেল_মেসি |ko.w:도쿄_지하철_히비야_선|DATE:2014-05-27
-			||	tmpl_prepend_nl_trie.MatchAtCur(val, 0, val_len) == null		// val does not start with {| : ; # *; REF.MW:Parser.php|braceSubstitution
+			||	tmpl_prepend_nl_trie.Match_bgn(val, 0, val_len) == null		// val does not start with {| : ; # *; REF.MW:Parser.php|braceSubstitution
 			) return;												
 		Bry_bfr prv_bfr = cur.Len() == 0										// note that cur_bfr should be checked first before tmpl_output				
 			? tmpl_output														// main template bfr
@@ -309,7 +309,7 @@ public class Xop_ctx {
 				) {
 				cur.Add_byte(Byte_ascii.NewLine);
 		}
-	}	private static final ByteTrieMgr_fast tmpl_prepend_nl_trie = Xop_curly_bgn_lxr.tmpl_bgn_trie_();
+	}	private static final Btrie_fast_mgr tmpl_prepend_nl_trie = Xop_curly_bgn_lxr.tmpl_bgn_trie_();
 	public static Xop_ctx new_(Xow_wiki wiki) {
 		Xop_ctx rv = new Xop_ctx(wiki, Xoa_page.new_(wiki, Xoa_ttl.parse_(wiki, Xoa_page_.Main_page_bry)));	// HACK: use "Main_Page" to put in valid page title
 		return rv;

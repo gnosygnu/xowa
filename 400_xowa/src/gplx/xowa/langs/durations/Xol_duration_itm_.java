@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.durations; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 public class Xol_duration_itm_ {
-	private static final Hash_adp_bry regy = Hash_adp_bry.ci_ascii_();	// ascii:MW.consts
+	private static final Hash_adp_bry regy = Hash_adp_bry.ci_ascii_();	// ASCII:MW.consts
 	public static final byte
 	  Tid_millenia		= 0
 	, Tid_centuries		= 1

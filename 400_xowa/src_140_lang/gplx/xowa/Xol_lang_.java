@@ -48,10 +48,6 @@ public class Xol_lang_ {
 		lang.Num_mgr().Separators_mgr().Set(Xol_num_mgr.Separators_key__grp, Xol_num_mgr.Separators_key__grp);
 		lang.Num_mgr().Separators_mgr().Set(Xol_num_mgr.Separators_key__dec, Xol_num_mgr.Separators_key__dec);
 		lang.Lnki_trail_mgr().Add_range(Byte_ascii.Ltr_a, Byte_ascii.Ltr_z);// REF.MW:MessagesEn.php|$linkTrail = '/^([a-z]+)(.*)$/sD';
-		lang.Xatrs_ref().Add_str_obj("name", Byte_obj_val.new_(Ref_nde.Xatr_id_name));
-		lang.Xatrs_ref().Add_str_obj("group", Byte_obj_val.new_(Ref_nde.Xatr_id_group));
-		lang.Xatrs_ref().Add_str_obj("follow", Byte_obj_val.new_(Ref_nde.Xatr_id_follow));
-		lang.Xatrs_references().Add_str_obj("group", Byte_obj_val.new_(References_nde.Xatr_id_group));
 Xol_kwd_mgr kwd_mgr = lang.Kwd_mgr();
 kwd_mgr.New(Bool_.Y, Xol_kwd_grp_.Id_utc_year										, "CURRENTYEAR");
 kwd_mgr.New(Bool_.Y, Xol_kwd_grp_.Id_utc_month_int_len2								, "CURRENTMONTH", "CURRENTMONTH2");

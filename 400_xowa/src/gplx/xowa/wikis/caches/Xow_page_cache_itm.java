@@ -17,8 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 public class Xow_page_cache_itm {
-	public Xow_page_cache_itm(Xoa_ttl ttl, byte[] src) {this.ttl = ttl; this.src = src;}
+	public Xow_page_cache_itm(Xoa_ttl ttl, byte[] src, byte[] redirected_src) {
+		this.ttl = ttl; this.src = src;
+		this.redirected_src = redirected_src;
+	}
 	public Xoa_ttl Ttl() {return ttl;} private Xoa_ttl ttl;
 	public byte[] Src() {return src;} private byte[] src;
+	public byte[] Redirected_src() {return redirected_src;} private byte[] redirected_src;
 	public static final Xow_page_cache_itm Null = null;
 }

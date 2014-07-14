@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.flds.*;
 public class Xof_meta_mgr implements GfoInvkAble {
 	Object[] root = new Object[16]; OrderedHash dirty_fils = OrderedHash_.new_bry_();
 	public Xof_meta_mgr(Xow_wiki wiki) {this.wiki = wiki; this.root_dir = wiki.App().Fsys_mgr().File_dir().GenSubDir_nest("#meta", wiki.Domain_str());}

@@ -27,7 +27,7 @@ class Gfs_lxr_whitespace implements Gfs_lxr {
 		int rv = Gfs_lxr_.Rv_eos, cur_pos;
 		for (cur_pos = end; cur_pos < src_len; cur_pos++) {
 			byte b = src[cur_pos];
-			Object o = ctx.Trie().Match(b, src, cur_pos, src_len);
+			Object o = ctx.Trie().Match_bgn_w_byte(b, src, cur_pos, src_len);
 			if (o == null) {
 				rv = Gfs_lxr_.Rv_null;
 				ctx.Process_null(cur_pos);
@@ -69,7 +69,7 @@ class Gfs_lxr_identifier implements Gfs_lxr {
 		int pos, rv = Gfs_lxr_.Rv_eos;
 		for (pos = end; pos < src_len; pos++) {
 			byte b = src[pos];
-			Object o = ctx.Trie().Match(b, src, pos, src_len);
+			Object o = ctx.Trie().Match_bgn_w_byte(b, src, pos, src_len);
 			if (o == null) {	// invalid char; stop;
 				rv = Gfs_lxr_.Rv_null;
 				ctx.Process_null(pos);

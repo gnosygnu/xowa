@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.xtns.gallery.*; import gplx.xowa.xtns.cite.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.poems.*; import gplx.xowa.xtns.hiero.*;
-import gplx.xowa.xtns.scores.*; import gplx.xowa.xtns.listings.*; import gplx.xowa.xtns.titleBlacklists.*;
+import gplx.xowa.xtns.scores.*; import gplx.xowa.xtns.listings.*; import gplx.xowa.xtns.titleBlacklists.*; import gplx.xowa.xtns.pfuncs.scribunto.*;
 public class Xow_xtn_mgr implements GfoInvkAble {
 	private OrderedHash regy = OrderedHash_.new_bry_();
 	public int Count() {return regy.Count();}
@@ -31,6 +31,7 @@ public class Xow_xtn_mgr implements GfoInvkAble {
 		Add(app, new Score_xtn_mgr());
 		Add(app, new Listing_xtn_mgr());
 		Add(app, new Blacklist_xtn_mgr());
+		Add(app, new Pfunc_xtn_mgr());
 		return this;
 	}
 	public Xow_xtn_mgr Ctor_by_wiki(Xow_wiki wiki) {

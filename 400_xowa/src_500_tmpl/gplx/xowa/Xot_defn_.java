@@ -18,7 +18,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 public class Xot_defn_ {
 	public static final Xot_defn Null = Xot_defn_null._;
-	public static final byte Tid_null = 0, Tid_func = 1, Tid_tmpl = 2, Tid_subst = Xol_kwd_grp_.Id_subst, Tid_safesubst = Xol_kwd_grp_.Id_safesubst, Tid_raw = Xol_kwd_grp_.Id_raw;
+	public static final byte 
+	  Tid_null = 0
+	, Tid_func = 1
+	, Tid_tmpl = 2
+	, Tid_subst = Xol_kwd_grp_.Id_subst
+	, Tid_safesubst = Xol_kwd_grp_.Id_safesubst
+	, Tid_raw = Xol_kwd_grp_.Id_raw
+	, Tid_msg = Xol_kwd_grp_.Id_msg
+	, Tid_msgnw = Xol_kwd_grp_.Id_msgnw
+	;
 	public static boolean Tid_is_subst(byte v) {
 		switch (v) {
 			case Tid_subst: case Tid_safesubst: return true;

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+import gplx.core.btries.*;
 public class Xop_vnt_flag {
 	public Xop_vnt_flag(byte tid) {this.tid = tid; this.langs = Bry_.Ary_empty;}
 	public Xop_vnt_flag(byte tid, byte[][] langs) {this.tid = tid; this.langs = langs;}
@@ -81,7 +82,7 @@ class Xop_vnt_flag_ {
 	, Flag_macro	= new Xop_vnt_flag(Tid_macro)
 	, Flag_name		= new Xop_vnt_flag(Tid_name)
 	;
-	public static final ByteTrieMgr_fast Trie = ByteTrieMgr_fast.ci_ascii_()	// NOTE: match either lc or uc; EX: -{D}- or -{d}-; // NOTE:ci.ascii:MW_const.en; flag keys; EX: -{S|a}-
+	public static final Btrie_fast_mgr Trie = Btrie_fast_mgr.ci_ascii_()	// NOTE: match either lc or uc; EX: -{D}- or -{d}-; // NOTE:ci.ascii:MW_const.en; flag keys; EX: -{S|a}-
 	.Add(Byte_ascii.Ltr_S			, Xop_vnt_flag_.Flag_show)
 	.Add(Byte_ascii.Plus			, Xop_vnt_flag_.Flag_all)
 	.Add(Byte_ascii.Ltr_E			, Xop_vnt_flag_.Flag_err)

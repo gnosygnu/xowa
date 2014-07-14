@@ -75,7 +75,7 @@ class Xop_vnt_tkn_mok {
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
 			byte[] bry = Bry_.new_ascii_(ary[i]);
-			Xop_vnt_flag flag = (Xop_vnt_flag)Xop_vnt_flag_.Trie.MatchAtCur(bry, 0, bry.length);
+			Xop_vnt_flag flag = (Xop_vnt_flag)Xop_vnt_flag_.Trie.Match_bgn(bry, 0, bry.length);
 			flags_list.Add(flag);
 		}
 		return this;

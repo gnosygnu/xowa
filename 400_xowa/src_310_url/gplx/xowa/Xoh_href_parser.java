@@ -16,10 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.net.*; import gplx.xowa.parsers.lnkes.*;
+import gplx.core.btries.*; import gplx.xowa.net.*; import gplx.xowa.parsers.lnkes.*;
 public class Xoh_href_parser {
 	private Url_encoder encoder; private Gfo_url_parser url_parser; private Gfo_url tmp_url = new Gfo_url(); 
-	private ByteTrieMgr_slim segs = ByteTrieMgr_slim.ci_ascii_(); // NOTE:ci.ascii:XO_const.en; /wiki/, /site/ etc.
+	private Btrie_slim_mgr segs = Btrie_slim_mgr.ci_ascii_(); // NOTE:ci.ascii:XO_const.en; /wiki/, /site/ etc.
 	private Bry_bfr bfr_encoder = Bry_bfr.reset_(255), tmp_bfr = Bry_bfr.reset_(255);
 	public Xoh_href_parser(Url_encoder encoder, Gfo_url_parser url_parser) {
 		this.encoder = encoder;
@@ -58,11 +58,11 @@ public class Xoh_href_parser {
 			rv.Anchor_(Bry_.Mid(raw, file_slash_end + 1, raw_len));				// +1 to skip #; i.e. Anchor should be "A" not "#A"
 			return;
 		}
-		Object seg_obj = segs.MatchAtCur(raw, bgn, raw_len);						// match /wiki/ or /site/ or /xcmd/
+		Object seg_obj = segs.Match_bgn(raw, bgn, raw_len);						// match /wiki/ or /site/ or /xcmd/
 		if (seg_obj == null)														// nothing matched; assume file; EX: file:///C/dir/fil.txt -> /C/dir/fil.txt
 			rv.Tid_(Xoh_href.Tid_file);
 		else {																		// something matched;
-			ByteTrie_stub seg = (ByteTrie_stub)seg_obj;
+			Btrie_itm_stub seg = (Btrie_itm_stub)seg_obj;
 			bgn += seg.Val().length;
 			switch (seg.Tid()) {
 				case Seg_wiki_tid:		Parse_wiki(rv, encoder, wiki, raw, bgn, raw_len); break;

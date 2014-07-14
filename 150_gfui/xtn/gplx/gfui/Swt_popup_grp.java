@@ -31,12 +31,13 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
-class Swt_popup_grp implements Gfui_mnu_grp {
+public class Swt_popup_grp implements Gfui_mnu_grp {
 	private Decorations owner_win; private Control owner_box; private boolean menu_is_bar = false;
 	Swt_popup_grp(String root_key){this.root_key = root_key;}
 	@Override public int Tid() {return Gfui_mnu_itm_.Tid_grp;}
 	@Override public String Uid() {return uid;} private String uid = Gfui_mnu_itm_.Gen_uid(); 
 	@Override public boolean Enabled() {return menu.getEnabled();} @Override public void Enabled_(boolean v) {menu.setEnabled(v);}
+	@Override public boolean Disposed() {return menu.isDisposed();}
 	@Override public String Text() {return menu_item.getText();} @Override public void Text_(String v) {menu_item.setText(v);}
 	@Override public ImageAdp Img() {return img;} @Override public void Img_(ImageAdp v) {
 		img = v; 

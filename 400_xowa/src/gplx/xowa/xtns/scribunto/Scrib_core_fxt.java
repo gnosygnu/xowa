@@ -18,6 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.xtns.scribunto.engines.process.*;
 public class Scrib_core_fxt {
+	public Scrib_core_fxt() {}
+	public Scrib_core_fxt(Xop_fxt fxt) {
+		app = fxt.App();
+		wiki = fxt.Wiki();
+		core = Scrib_core.Core_new_(app, wiki.Ctx());
+	}
 	public Scrib_core_fxt Clear() {
 		if (core == null) {
 			app = Xoa_app_fxt.app_();

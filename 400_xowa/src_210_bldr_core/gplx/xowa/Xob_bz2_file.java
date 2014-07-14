@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.wikis.*;
+import gplx.core.btries.*; import gplx.xowa.wikis.*;
 public class Xob_bz2_file {
 	public Io_url Fil() {return fil;} public Xob_bz2_file Fil_(Io_url v) {fil = v; return this;} Io_url fil;
 	public byte Tid() {return tid;} private byte tid;
@@ -34,7 +34,7 @@ public class Xob_bz2_file {
 	}
 	public static int Extract_lang(byte[] src) {
 		if (alias_bry_trie == null) Init_aliases();
-		Object o = alias_bry_trie.MatchAtCur(src, src.length - 1, 0 - 1);
+		Object o = alias_bry_trie.Match_bgn(src, src.length - 1, 0 - 1);
 		return (o == null) ? -1 : alias_bry_trie.Match_pos();
 	}
 	public static byte[] Build_alias(Xow_wiki_domain wiki_type) {
@@ -69,7 +69,7 @@ public class Xob_bz2_file {
 	public static byte[] Parse__domain_name(byte[] src, int bgn, int end) {
 		if (end - bgn == 0) return null; // empty bry;
 		if (alias_bry_trie == null) Init_aliases();
-		Object o = alias_bry_trie.MatchAtCur(src, end - 1, bgn - 1); if (o == null) return Parse__domain_name_null;
+		Object o = alias_bry_trie.Match_bgn(src, end - 1, bgn - 1); if (o == null) return Parse__domain_name_null;
 //																			 throw Err_mgr._.parse_(typeof(Xob_bz2_file), src);
 		byte domain_tid = ((Byte_obj_ref)o).Val();
 		Bry_bfr bfr = Bry_bfr.reset_(255);
@@ -129,7 +129,7 @@ public class Xob_bz2_file {
 	public static byte Parse__tid(byte[] src) {return Parse__tid(src, 0, src.length);}
 	public static byte Parse__tid(byte[] src, int bgn, int end) {
 		if (tid_bry_trie == null) Init_tids();
-		Object o = tid_bry_trie.MatchAtCur(src, bgn, end); if (o == null) throw Err_mgr._.parse_(Xob_bz2_file.class, src);
+		Object o = tid_bry_trie.Match_bgn(src, bgn, end); if (o == null) throw Err_mgr._.parse_(Xob_bz2_file.class, src);
 		return ((Byte_obj_ref)o).Val();
 	}
 	public static void Build_alias_by_lang_tid(Bry_bfr bfr, byte[] lang_key, Byte_obj_ref wiki_tid) {
@@ -174,7 +174,7 @@ public class Xob_bz2_file {
 	, Domain_mediawiki = Xow_wiki_domain_.Tid_mediawiki
 	, Domain_wikimediafoundation = Xow_wiki_domain_.Tid_wikimediafoundation;
 	private static void Init_aliases() {
-		alias_bry_trie = new ByteTrieMgr_bwd_slim(false);
+		alias_bry_trie = new Btrie_bwd_mgr(false);
 		alias_val_hash = HashAdp_.new_();
 		Init_alias("wiki"					, Domain_wikipedia);
 		Init_alias("wiktionary"				, Domain_wiktionary);
@@ -199,7 +199,7 @@ public class Xob_bz2_file {
 		alias_val_hash.Add(domain_bval, alias_bry);
 	}
 	private static void Init_tids() {
-		tid_bry_trie = ByteTrieMgr_slim.ci_ascii_();	// NOTE:ci.ascii:MW_const.en
+		tid_bry_trie = Btrie_slim_mgr.ci_ascii_();	// NOTE:ci.ascii:MW_const.en
 		tid_val_hash = HashAdp_.new_();
 		Init_tid(Key_pages_articles		, Tid_pages_articles);
 		Init_tid(Key_pages_meta_current	, Tid_pages_meta_current);
@@ -220,11 +220,11 @@ public class Xob_bz2_file {
 	private static void Init_tid(String tid_str, byte tid) {
 		byte[] tid_bry = Bry_.new_ascii_(tid_str);
 		Byte_obj_ref tid_val = Byte_obj_ref.new_(tid);
-		tid_bry_trie.Add(tid_bry, tid_val);
+		tid_bry_trie.Add_obj(tid_bry, tid_val);
 		tid_val_hash.Add(tid_val, tid_bry);
 	}
 	private static HashAdp alias_val_hash;
-	private static ByteTrieMgr_bwd_slim alias_bry_trie;
+	private static Btrie_bwd_mgr alias_bry_trie;
 	private static HashAdp tid_val_hash;
-	private static ByteTrieMgr_slim tid_bry_trie;
+	private static Btrie_slim_mgr tid_bry_trie;
 }

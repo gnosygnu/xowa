@@ -19,37 +19,36 @@ package gplx.xowa.xtns.scribunto.lib; import gplx.*; import gplx.xowa.*; import 
 import org.junit.*;
 public class Scrib_lib_message_tst {
 	@Before public void init() {
-		fxt.Clear();
-		fxt.Init_page("{{#invoke:Mod_0|Func_0}}");
+		fxt.Init_scrib_proc();
 		lib = fxt.Core().Lib_message().Init();
-	}	Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt(); Scrib_lib lib;
+	}	private Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt(); private Scrib_lib lib;
 	@Test   public void Plain() {
-		fxt.Test_lib_proc(lib, Scrib_lib_message.Invk_plain, Object_.Ary((Object)keys_ary("sun"))							, "Sun");
-		fxt.Test_lib_proc(lib, Scrib_lib_message.Invk_plain, Object_.Ary((Object)keys_ary("sunx"))							, "&lt;sunx&gt;");
-		fxt.Test_lib_proc(lib, Scrib_lib_message.Invk_plain, Object_.Ary((Object)keys_ary_arg("redirectedfrom", "A"))		, "(Redirected from A)");
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_message.Invk_plain, Object_.Ary((Object)keys_ary("sun"))							, "Sun");
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_message.Invk_plain, Object_.Ary((Object)keys_ary("sunx"))						, "&lt;sunx&gt;");
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_message.Invk_plain, Object_.Ary((Object)keys_ary_arg("redirectedfrom", "A"))		, "(Redirected from A)");
 	}
 	@Test  public void Plain_lang() {
 		Xol_lang lang = fxt.Parser_fxt().Wiki().App().Lang_mgr().Get_by_key_or_new(Bry_.new_ascii_("fr"));
 		Init_msg(lang, "sun", "dim");
-		fxt.Test_lib_proc(lib, Scrib_lib_message.Invk_plain, Object_.Ary((Object)keys_ary_lang("sun", "fr"))		, "dim");
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_message.Invk_plain, Object_.Ary((Object)keys_ary_lang("sun", "fr"))				, "dim");
 	}
 	@Test  public void Plain_rawMessage() {
-		fxt.Test_lib_proc(lib, Scrib_lib_message.Invk_plain, Object_.Ary((Object)Scrib_kv_utl_.flat_many_("rawMessage", "$1", "params", KeyVal_.Ary(KeyVal_.int_(1, "abc")))), "abc");
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_message.Invk_plain, Object_.Ary((Object)Scrib_kv_utl_.flat_many_("rawMessage", "$1", "params", KeyVal_.Ary(KeyVal_.int_(1, "abc")))), "abc");
 	}
 	@Test   public void Check() {
-		fxt.Test_lib_proc(lib, Scrib_lib_message.Invk_check, Object_.Ary("exists"				, keys_ary("sun"))							, "true");
-		fxt.Test_lib_proc(lib, Scrib_lib_message.Invk_check, Object_.Ary("exists"				, keys_ary("sunx"))							, "false");
-		fxt.Test_lib_proc(lib, Scrib_lib_message.Invk_check, Object_.Ary("isBlank"				, keys_ary("sun"))							, "false");
+		fxt.Test_scrib_proc_bool(lib, Scrib_lib_message.Invk_check, Object_.Ary("exists"				, keys_ary("sun"))							, true);
+		fxt.Test_scrib_proc_bool(lib, Scrib_lib_message.Invk_check, Object_.Ary("exists"				, keys_ary("sunx"))							, false);
+		fxt.Test_scrib_proc_bool(lib, Scrib_lib_message.Invk_check, Object_.Ary("isBlank"				, keys_ary("sun"))							, false);
 		Init_msg("blank", "");			
-		fxt.Test_lib_proc(lib, Scrib_lib_message.Invk_check, Object_.Ary("isBlank"				, keys_ary("blank"))						, "true");
+		fxt.Test_scrib_proc_bool(lib, Scrib_lib_message.Invk_check, Object_.Ary("isBlank"				, keys_ary("blank"))						, true);
 		Init_msg("disabled", "-");			
-		fxt.Test_lib_proc(lib, Scrib_lib_message.Invk_check, Object_.Ary("isDisabled"			, keys_ary("sun"))							, "false");
-		fxt.Test_lib_proc(lib, Scrib_lib_message.Invk_check, Object_.Ary("isDisabled"			, keys_ary("blank"))						, "true");
-		fxt.Test_lib_proc(lib, Scrib_lib_message.Invk_check, Object_.Ary("isDisabled"			, keys_ary("disabled"))						, "true");
-		fxt.Test_lib_proc(lib, Scrib_lib_message.Invk_check, Object_.Ary("isBlank"				, keys_ary("disabled"))						, "false");
+		fxt.Test_scrib_proc_bool(lib, Scrib_lib_message.Invk_check, Object_.Ary("isDisabled"			, keys_ary("sun"))							, false);
+		fxt.Test_scrib_proc_bool(lib, Scrib_lib_message.Invk_check, Object_.Ary("isDisabled"			, keys_ary("blank"))						, true);
+		fxt.Test_scrib_proc_bool(lib, Scrib_lib_message.Invk_check, Object_.Ary("isDisabled"			, keys_ary("disabled"))						, true);
+		fxt.Test_scrib_proc_bool(lib, Scrib_lib_message.Invk_check, Object_.Ary("isBlank"				, keys_ary("disabled"))						, false);
 	}
 	@Test  public void Init_message_for_lang() {
-		fxt.Test_lib_proc(lib, Scrib_lib_message.Invk_init_message_for_lang, Object_.Ary_empty						, "lang=en");
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_message.Invk_init_message_for_lang, Object_.Ary_empty						, "lang=en");
 	}
 	private void Init_msg(String key, String val) {Init_msg(fxt.Core().Wiki().Lang(), key, val);}
 	private void Init_msg(Xol_lang lang, String key, String val) {

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
+import gplx.core.btries.*;
 public class Xoh_js_cleaner {
 	private Xoa_app app; private boolean ctor = true;
 	public Xoh_js_cleaner(Xoa_app app) {this.app = app;}
@@ -37,7 +38,7 @@ public class Xoh_js_cleaner {
 			int pos = bgn;
 			while (pos < end) {
 				byte b = src[pos];
-				Object o = trie.Match(b, src, pos, end);
+				Object o = trie.Match_bgn_w_byte(b, src, pos, end);
 				if (o == null) {
 					if (dirty)
 						bfr.Add_byte(b);
@@ -198,5 +199,5 @@ public class Xoh_js_cleaner {
 		Reg_itm("seekSegmentTime");
 		ctor = false;
 	}
-	private void Reg_itm(String s) {trie.Add_bry(Bry_.new_ascii_(s));} ByteTrieMgr_slim trie = ByteTrieMgr_slim.ci_ascii_();	// NOTE:ci.ascii:javascript event name
+	private void Reg_itm(String s) {trie.Add_bry(Bry_.new_ascii_(s));} Btrie_slim_mgr trie = Btrie_slim_mgr.ci_ascii_();	// NOTE:ci.ascii:javascript event name
 }

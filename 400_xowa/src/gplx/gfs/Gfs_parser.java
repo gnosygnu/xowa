@@ -16,8 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfs; import gplx.*;
+import gplx.core.btries.*;
 public class Gfs_parser {
-	ByteTrieMgr_fast trie = Gfs_parser_.trie_();
+	Btrie_fast_mgr trie = Gfs_parser_.trie_();
 	Gfs_parser_ctx ctx = new Gfs_parser_ctx();
 	public Gfs_nde Parse(byte[] src) {
 		ctx.Root().Subs_clear();
@@ -26,7 +27,7 @@ public class Gfs_parser {
 		int pos = 0;
 		while (pos < src_len) {
 			byte b = src[pos];
-			Object o = trie.Match(b, src, pos, src_len);
+			Object o = trie.Match_bgn_w_byte(b, src, pos, src_len);
 			if (o == null)
 				ctx.Err_mgr().Fail_unknown_char(ctx, pos, b); 
 			else {
@@ -64,8 +65,8 @@ public class Gfs_parser {
 	}
 }
 class Gfs_parser_ {
-	public static ByteTrieMgr_fast trie_() {
-		ByteTrieMgr_fast rv = ByteTrieMgr_fast.ci_ascii_();	// NOTE:ci.ascii:gfs;letters/symbols only;
+	public static Btrie_fast_mgr trie_() {
+		Btrie_fast_mgr rv = Btrie_fast_mgr.ci_ascii_();	// NOTE:ci.ascii:gfs;letters/symbols only;
 		Gfs_lxr_identifier word_lxr = Gfs_lxr_identifier._;
 		trie_add_rng(rv, word_lxr, Byte_ascii.Ltr_a, Byte_ascii.Ltr_z);
 		trie_add_rng(rv, word_lxr, Byte_ascii.Ltr_A, Byte_ascii.Ltr_Z);
@@ -88,16 +89,16 @@ class Gfs_parser_ {
 		rv.Add(Byte_ascii.Eq, Gfs_lxr_equal._);
 		return rv;
 	}
-	private static void trie_add_rng(ByteTrieMgr_fast trie, Gfs_lxr lxr, byte bgn, byte end) {
+	private static void trie_add_rng(Btrie_fast_mgr trie, Gfs_lxr lxr, byte bgn, byte end) {
 		for (byte b = bgn; b <= end; b++)
 			trie.Add(b, lxr);
 	}
-	private static void trie_add_many(ByteTrieMgr_fast trie, Gfs_lxr lxr, byte... ary) {
+	private static void trie_add_many(Btrie_fast_mgr trie, Gfs_lxr lxr, byte... ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; i++)
 			trie.Add(ary[i], lxr);
 	}
-	private static void trie_add_quote(ByteTrieMgr_fast trie, byte[] bgn)				{trie_add_quote(trie, bgn, bgn);}
-	private static void trie_add_quote(ByteTrieMgr_fast trie, byte[] bgn, byte[] end)	{trie.Add(bgn, new Gfs_lxr_quote(bgn, end));}
-	private static void trie_add_comment(ByteTrieMgr_fast trie, byte[] bgn, byte[] end) {trie.Add(bgn, new Gfs_lxr_comment_flat(bgn, end));}
+	private static void trie_add_quote(Btrie_fast_mgr trie, byte[] bgn)				{trie_add_quote(trie, bgn, bgn);}
+	private static void trie_add_quote(Btrie_fast_mgr trie, byte[] bgn, byte[] end)	{trie.Add(bgn, new Gfs_lxr_quote(bgn, end));}
+	private static void trie_add_comment(Btrie_fast_mgr trie, byte[] bgn, byte[] end) {trie.Add(bgn, new Gfs_lxr_comment_flat(bgn, end));}
 }

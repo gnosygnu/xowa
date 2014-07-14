@@ -16,16 +16,17 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.btries.*;
 public class Xop_cr_tkn extends Xop_tkn_itm_base {
 	public Xop_cr_tkn(int bgn, int end) {this.Tkn_ini_pos(true, -1, -1);}
 	@Override public byte Tkn_tid() {return Xop_tkn_itm_.Tid_cr;}
 }
 class Xop_cr_lxr implements Xop_lxr {
 	public byte Lxr_tid() {return Xop_lxr_.Tid_cr;}
-	public void Init_by_wiki(Xow_wiki wiki, ByteTrieMgr_fast core_trie) {
+	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr core_trie) {
 		core_trie.Add(Byte_ascii.CarriageReturn, this);
 	}	
-	public void Init_by_lang(Xol_lang lang, ByteTrieMgr_fast core_trie) {}
+	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		return cur_pos;	//ignore
 	}

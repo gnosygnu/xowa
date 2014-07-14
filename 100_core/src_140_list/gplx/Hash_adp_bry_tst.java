@@ -17,9 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 import org.junit.*;
-public class Hash_adp_bry_tst {
-	Hash_adp_bry_fxt fxt = new Hash_adp_bry_fxt();
-	@Before public void setup() {fxt.Clear();}
+public class Hash_adp_bry_tst {		
+	@Before public void setup() {fxt.Clear();} private Hash_adp_bry_fxt fxt = new Hash_adp_bry_fxt();
 	@Test   public void Add_bry() {
 		fxt	.New_cs()
 			.Add("a0").Add("b0").Add("c0")
@@ -50,7 +49,7 @@ class Hash_adp_bry_fxt {
 	Hash_adp_bry hash; 
 	public void Clear() {}
 	public Hash_adp_bry_fxt New_cs() {hash = Hash_adp_bry.cs_(); return this;}
-	public Hash_adp_bry_fxt New_ci() {hash = Hash_adp_bry.ci_(); return this;}
+	public Hash_adp_bry_fxt New_ci() {hash = Hash_adp_bry.ci_ascii_(); return this;}
 	public Hash_adp_bry_fxt Add(String key) {byte[] key_bry = Bry_.new_utf8_(key); hash.Add(key_bry, key_bry); return this;}
 	public Hash_adp_bry_fxt Count_tst(int expd) {Tfds.Eq(expd, hash.Count()); return this;}
 	public Hash_adp_bry_fxt Get_bry_tst(String key) {return Get_bry_tst(key, key);}

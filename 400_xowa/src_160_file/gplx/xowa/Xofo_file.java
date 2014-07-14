@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.ios.*; import gplx.gfui.*;
+import gplx.core.flds.*; import gplx.ios.*; import gplx.gfui.*;
 class Xofo_file {
 	public byte[] Name() {return name;} public Xofo_file Name_(byte[] v) {name = v; return this;}  byte[] name = Bry_.Empty;
 	public byte[] Redirect() {return redirect;} private byte[] redirect = Bry_.Empty; public boolean Redirect_exists() {return redirect.length > 0;}

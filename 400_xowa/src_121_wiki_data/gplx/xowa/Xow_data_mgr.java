@@ -22,7 +22,7 @@ public class Xow_data_mgr implements GfoInvkAble {
 	public Xow_data_mgr(Xow_wiki wiki) {
 		this.wiki = wiki; this.redirect_mgr = wiki.Redirect_mgr();
 	}	private Xop_redirect_mgr redirect_mgr;
-	private Xoa_url tmp_url = new Xoa_url();
+	private Xoa_url tmp_url = Xoa_url.blank_();
 	public Xow_wiki Wiki() {return wiki;} private Xow_wiki wiki;
 	public Xoa_page Get_page(Xoa_ttl ttl, boolean called_from_tmpl) {wiki.App().Url_parser().Parse(tmp_url, ttl.Raw()); return Get_page(tmp_url, ttl, called_from_tmpl, false);}
 	public Xoa_page Get_page_from_msg(Xoa_ttl ttl) {wiki.App().Url_parser().Parse(tmp_url, ttl.Raw()); return Get_page(tmp_url, ttl, false, true);}
@@ -48,9 +48,9 @@ public class Xow_data_mgr implements GfoInvkAble {
 				}
 				break;
 		}
-		return Get_page(rv, url, ns, ttl, called_from_tmpl);
+		return Get_page(rv, ns, ttl, called_from_tmpl, url.Redirect_force());
 	}
-	private Xoa_page Get_page(Xoa_page rv, Xoa_url url, Xow_ns ns, Xoa_ttl ttl, boolean called_from_tmpl) {
+	public Xoa_page Get_page(Xoa_page rv, Xow_ns ns, Xoa_ttl ttl, boolean called_from_tmpl, boolean redirect_force) {
 		int redirects = 0;
 		Xodb_page db_page = Xodb_page.tmp_();
 		while (true) {
@@ -61,12 +61,13 @@ public class Xow_data_mgr implements GfoInvkAble {
 			wiki.Db_mgr().Load_mgr().Load_page(db_page, ns, !called_from_tmpl);
 			byte[] bry = db_page.Text();
 			rv.Data_raw_(bry).Revision_data().Modified_on_(db_page.Modified_on()).Id_(db_page.Id());
-			if (url != null && url.Redirect_force()) return rv;
+			if (redirect_force) return rv;
 			Xoa_ttl redirect_ttl = redirect_mgr.Extract_redirect(bry, bry.length);
 			if  (	redirect_ttl == null				// not a redirect
 				||	redirects++ > 4)					// too many redirects; something went wrong
 				break;				
-			rv.Redirect_list().Add(ttl.Full_url());	// NOTE: must be url_encoded; EX: "en.wikipedia.org/?!" should generate link of "en.wikipedia.org/%3F!?redirect=no"
+			rv.Redirected_ttls().Add(ttl.Full_url());	// NOTE: must be url_encoded; EX: "en.wikipedia.org/?!" should generate link of "en.wikipedia.org/%3F!?redirect=no"
+			if (rv.Redirected_src() == null) rv.Redirected_src_(bry);	// only add src for first redirect; DATE:2014-07-11
 			rv.Ttl_(redirect_ttl);
 			ns = redirect_ttl.Ns();
 			ttl = redirect_ttl;
@@ -77,7 +78,7 @@ public class Xow_data_mgr implements GfoInvkAble {
 		Xoa_ttl trg_ttl = Xoa_ttl.parse_(wiki, page_bry);
 		Xoa_url trg_url = Xoa_url.new_(wiki.Domain_bry(), page_bry);
 		page.Ttl_(trg_ttl).Url_(trg_url).Redirected_(true);
-		return wiki.Data_mgr().Get_page(page, trg_url, trg_ttl.Ns(), trg_ttl, false);
+		return wiki.Data_mgr().Get_page(page, trg_ttl.Ns(), trg_ttl, false, trg_url.Redirect_force());
 	}
 	public static final int File_idx_unknown = -1;
 	static final String GRP_KEY = "xowa.wiki.data";

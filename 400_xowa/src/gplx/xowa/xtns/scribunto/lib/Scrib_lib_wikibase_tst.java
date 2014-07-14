@@ -20,37 +20,44 @@ import org.junit.*;
 import gplx.xowa.xtns.wdatas.*;
 public class Scrib_lib_wikibase_tst {
 	@Before public void init() {
-		fxt.Clear();
-		fxt.Init_page("{{#invoke:Mod_0|Func_0}}");
+		fxt.Init_scrib_proc();
 		lib = fxt.Core().Lib_wikibase().Init();
 	}	private Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt(); private Scrib_lib lib;
 	@Test  public void GetGlobalSiteId() {
-		fxt.Test_lib_proc(lib, Scrib_lib_wikibase.Invk_getGlobalSiteId, Object_.Ary_empty, "enwiki");
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getGlobalSiteId, Object_.Ary_empty, "enwiki");
 	}
 	@Test  public void GetEntityId() {
 		Wdata_wiki_mgr_fxt wdata_fxt = new Wdata_wiki_mgr_fxt().Init(fxt.Parser_fxt(), false);
 		wdata_fxt.Init_links_add("enwiki", "Earth", "q2");
-		fxt.Test_lib_proc(lib, Scrib_lib_wikibase.Invk_getEntityId, Object_.Ary("Earth"							), "q2");
-		fxt.Test_lib_proc(lib, Scrib_lib_wikibase.Invk_getEntityId, Object_.Ary("missing_page"					), "");
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getEntityId, Object_.Ary("Earth"							), "q2");
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getEntityId, Object_.Ary("missing_page"					), "");
 	}
 	@Test  public void GetEntity() {
 		Wdata_wiki_mgr_fxt wdata_fxt = new Wdata_wiki_mgr_fxt().Init(fxt.Parser_fxt(), false);
 		wdata_fxt.Init_pages_add(wdata_fxt.page_bldr_("q2").Label_add("en", "b").Xto_page_doc());
-		fxt.Test_lib_proc(lib, Scrib_lib_wikibase.Invk_getEntity, Object_.Ary("q2", false), String_.Concat_lines_nl
-		(	""
-		,	"  q2;item;2;"
-		,	"    "
-		,	"      en;b"
+		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_wikibase.Invk_getEntity, Object_.Ary("q2", false), String_.Concat_lines_nl_skip_last
+		( "1="
+		, "  id=q2"
+		, "  type=item"
+		, "  schemaVersion=2"
+		, "  labels="
+		, "    en="
+		, "      language=en"
+		, "      value=b"
 		));
 	}
 	@Test  public void GetEntity_property() {	// PURPOSE: getEntity should be able to convert "p2" to "Property:P2"; EX:es.w:Arnold_Gesell; DATE:2014-02-18
 		Wdata_wiki_mgr_fxt wdata_fxt = new Wdata_wiki_mgr_fxt().Init(fxt.Parser_fxt(), false);
 		wdata_fxt.Init_pages_add(wdata_fxt.page_bldr_("Property:p2").Label_add("en", "b").Xto_page_doc());
-		fxt.Test_lib_proc(lib, Scrib_lib_wikibase.Invk_getEntity, Object_.Ary("p2", false), String_.Concat_lines_nl
-		(	""
-		,	"  Property:p2;item;2;"
-		,	"    "
-		,	"      en;b"
+		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_wikibase.Invk_getEntity, Object_.Ary("p2", false), String_.Concat_lines_nl_skip_last
+		( "1="
+		, "  id=Property:p2"	// only difference from above
+		, "  type=item"
+		, "  schemaVersion=2"
+		, "  labels="
+		, "    en="
+		, "      language=en"
+		, "      value=b"
 		));
 	}
 }	

@@ -16,10 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.amps; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+import gplx.core.btries.*;
 public class Xop_amp_trie {
-	public static final ByteTrieMgr_slim _ = new_(); Xop_amp_trie() {}
-	private static ByteTrieMgr_slim new_() {// REF.MW: Sanitizer|$wgHtmlEntities; NOTE:added apos
-		ByteTrieMgr_slim rv = ByteTrieMgr_slim.cs_();
+	public static final Btrie_slim_mgr _ = new_(); Xop_amp_trie() {}
+	private static Btrie_slim_mgr new_() {// REF.MW: Sanitizer|$wgHtmlEntities; NOTE:added apos
+		Btrie_slim_mgr rv = Btrie_slim_mgr.cs_();
 		Reg_char(rv,   39, "&apos;");
 		Reg_char(rv,  193, "&Aacute;");
 		Reg_char(rv,  225, "&aacute;");
@@ -278,15 +279,15 @@ public class Xop_amp_trie {
 		Reg_prefix(rv, Xop_amp_trie_itm.Tid_num_dec, "#");
 		return rv;
 	}
-	private static void Reg_char(ByteTrieMgr_slim trie, int char_int, String xml_name_str) {
+	private static void Reg_char(Btrie_slim_mgr trie, int char_int, String xml_name_str) {
 		byte[] xml_name_bry = Bry_.new_ascii_(xml_name_str);
 		Xop_amp_trie_itm itm = new Xop_amp_trie_itm(Xop_amp_trie_itm.Tid_name, char_int, xml_name_bry);
 		byte[] key = Bry_.Mid(xml_name_bry, 1, xml_name_bry.length); // ignore & for purpose of trie; EX: "amp;"; NOTE: must keep trailing ";" else "&amp " will be valid;
-		trie.Add(key, itm);
+		trie.Add_obj(key, itm);
 	}
-	private static void Reg_prefix(ByteTrieMgr_slim trie, byte prefix_type, String prefix) {
+	private static void Reg_prefix(Btrie_slim_mgr trie, byte prefix_type, String prefix) {
 		byte[] prefix_ary = Bry_.new_ascii_(prefix);
 		Xop_amp_trie_itm itm = new Xop_amp_trie_itm(prefix_type, Xop_amp_trie_itm.Char_int_null, prefix_ary);
-		trie.Add(prefix_ary, itm);
+		trie.Add_obj(prefix_ary, itm);
 	}
 }

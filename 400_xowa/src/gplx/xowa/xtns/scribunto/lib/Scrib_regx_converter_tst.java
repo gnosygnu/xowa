@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.scribunto.lib; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import org.junit.*;
 public class Scrib_regx_converter_tst {
-	@Before public void init() {fxt.Clear();} Scrib_regx_converter_fxt fxt = new Scrib_regx_converter_fxt();
+	@Before public void init() {fxt.Clear();} private Scrib_regx_converter_fxt fxt = new Scrib_regx_converter_fxt();
 	@Test   public void Basic()				{fxt.Test_parse("abc012ABC"				, "abc012ABC");}
 	@Test   public void Pow_0()				{fxt.Test_parse("^a"					, "\\Ga");}
 	@Test   public void Pow_1()				{fxt.Test_parse("a^b"					, "a\\^b");}

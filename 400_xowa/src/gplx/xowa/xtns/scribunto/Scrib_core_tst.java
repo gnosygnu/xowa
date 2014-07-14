@@ -90,22 +90,22 @@ public class Scrib_core_tst {
 			.Test_ExecuteModule(14, fxt.kv_func_("prc_0", 15), fxt.kv_func_("prc_1", 16))
 			;
 	}
-	@Test  public void Invoke() {
-		fxt	.Init_lib_mw();
-		fxt	.Init_cbks_add("getExpandedArgument", gplx.xowa.xtns.scribunto.lib.Scrib_lib_mw.Proc_getExpandedArgument);
-		fxt	.Expd_server_rcvd_add("0000004900000091{[\"op\"]=\"loadString\",[\"text\"]=\"Mod_0_code\",[\"chunkName\"]=\"=Module:Mod_0\"}")
-			.Init_server_prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:1;s:6:\"values\";a:1:{i:1;i:13;}}")			// NOTE: 13=id of "Module:Mod_0"
-			.Expd_server_rcvd_add("0000003E0000007B{[\"op\"]=\"call\",[\"id\"]=8,[\"nargs\"]=1,[\"args\"]={[1]=chunks[13]}}")	// NOTE: 8=executeModule; 13=id of "Module:Mod_0"
-			.Init_server_prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:1;s:6:\"values\";a:1:{i:1;a:1:{s:5:\"Prc_0\";O:42:\"Scribunto_LuaStandaloneInterpreterFunction\":1:{s:2:\"id\";i:14;}}}}")	// NOTE: 14=id of "Prc_0"
-			.Expd_server_rcvd_add("0000003E0000007B{[\"op\"]=\"call\",[\"id\"]=9,[\"nargs\"]=1,[\"args\"]={[1]=chunks[14]}}")	// NOTE: 9=executeFunction; 14=id of "Prc_0"
-			.Init_server_prep_add("a:4:{s:2:\"id\";s:32:\"mw_interface-getExpandedArgument\";s:2:\"op\";s:4:\"call\";s:5:\"nargs\";i:2;s:4:\"args\";a:2:{i:1;s:7:\"current\";i:2;s:1:\"1\";}}")
-			.Expd_server_rcvd_add("000000380000006F{[\"op\"]=\"return\",[\"nvalues\"]=1,[\"values\"]={[1]=\"arg_0\"}}")
-			.Init_server_prep_add("a:4:{s:2:\"id\";s:32:\"mw_interface-getExpandedArgument\";s:2:\"op\";s:4:\"call\";s:5:\"nargs\";i:2;s:4:\"args\";a:2:{i:1;s:7:\"current\";i:2;s:1:\"2\";}}")
-			.Expd_server_rcvd_add("000000380000006F{[\"op\"]=\"return\",[\"nvalues\"]=1,[\"values\"]={[1]=\"arg_1\"}}")
-			.Init_server_prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:1;s:6:\"values\";a:1:{i:1;s:11:\"arg_0,arg_1\";}}")
-			.Test_Invoke("Mod_0", "Mod_0_code", "Prc_0", Scrib_kv_utl_.base1_many_("arg_0", "arg_1"))
-			;
-	}
+//		@Test  public void Invoke() {
+//			fxt	.Init_lib_mw();
+//			fxt	.Init_cbks_add("getExpandedArgument", gplx.xowa.xtns.scribunto.lib.Scrib_lib_mw.Proc_getExpandedArgument);
+//			fxt	.Expd_server_rcvd_add("0000004900000091{[\"op\"]=\"loadString\",[\"text\"]=\"Mod_0_code\",[\"chunkName\"]=\"=Module:Mod_0\"}")
+//				.Init_server_prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:1;s:6:\"values\";a:1:{i:1;i:13;}}")			// NOTE: 13=id of "Module:Mod_0"
+//				.Expd_server_rcvd_add("0000003E0000007B{[\"op\"]=\"call\",[\"id\"]=8,[\"nargs\"]=1,[\"args\"]={[1]=chunks[13]}}")	// NOTE: 8=executeModule; 13=id of "Module:Mod_0"
+//				.Init_server_prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:1;s:6:\"values\";a:1:{i:1;a:1:{s:5:\"Prc_0\";O:42:\"Scribunto_LuaStandaloneInterpreterFunction\":1:{s:2:\"id\";i:14;}}}}")	// NOTE: 14=id of "Prc_0"
+//				.Expd_server_rcvd_add("0000003E0000007B{[\"op\"]=\"call\",[\"id\"]=9,[\"nargs\"]=1,[\"args\"]={[1]=chunks[14]}}")	// NOTE: 9=executeFunction; 14=id of "Prc_0"
+//				.Init_server_prep_add("a:4:{s:2:\"id\";s:32:\"mw_interface-getExpandedArgument\";s:2:\"op\";s:4:\"call\";s:5:\"nargs\";i:2;s:4:\"args\";a:2:{i:1;s:7:\"current\";i:2;s:1:\"1\";}}")
+//				.Expd_server_rcvd_add("000000380000006F{[\"op\"]=\"return\",[\"nvalues\"]=1,[\"values\"]={[1]=\"arg_0\"}}")
+//				.Init_server_prep_add("a:4:{s:2:\"id\";s:32:\"mw_interface-getExpandedArgument\";s:2:\"op\";s:4:\"call\";s:5:\"nargs\";i:2;s:4:\"args\";a:2:{i:1;s:7:\"current\";i:2;s:1:\"2\";}}")
+//				.Expd_server_rcvd_add("000000380000006F{[\"op\"]=\"return\",[\"nvalues\"]=1,[\"values\"]={[1]=\"arg_1\"}}")
+//				.Init_server_prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:1;s:6:\"values\";a:1:{i:1;s:11:\"arg_0,arg_1\";}}")
+//				.Test_Invoke("Mod_0", "Mod_0_code", "Prc_0", Scrib_kv_utl_.base1_many_("arg_0", "arg_1"))
+//				;
+//		}
 	String Mod_basic() {
 		return String_.Concat
 		(	"local p = {}"

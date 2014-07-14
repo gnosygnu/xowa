@@ -16,11 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.grammars; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+import gplx.core.btries.*;
 public class Xol_grammar_ru implements Xol_grammar {
 	static final byte Genitive_null = 0, Genitive_bnkn = 1, Genitive_Bnkn = 26, Genitive_b = 3, Genitive_nr = 4, Genitive_ka = 5, Genitive_tn = 6, Genitive_abl = 7, Genitive_hnk = 8;
-	private static ByteTrieMgr_bwd_slim Genitive_trie;
-	private static ByteTrieMgr_bwd_slim genitive_trie_() {
-		ByteTrieMgr_bwd_slim rv = new ByteTrieMgr_bwd_slim(false);
+	private static Btrie_bwd_mgr Genitive_trie;
+	private static Btrie_bwd_mgr genitive_trie_() {
+		Btrie_bwd_mgr rv = new Btrie_bwd_mgr(false);
 		genitive_trie_add(rv, Genitive_bnkn, "вики", null);
 		genitive_trie_add(rv, Genitive_Bnkn, "Вики", null);
 		genitive_trie_add(rv, Genitive_b, "ь", "я");
@@ -31,7 +32,7 @@ public class Xol_grammar_ru implements Xol_grammar {
 		genitive_trie_add(rv, Genitive_hnk , "ник", "ника");
 		return rv;
 	}
-	private static void genitive_trie_add(ByteTrieMgr_bwd_slim trie, byte tid, String find_str, String repl_str) {
+	private static void genitive_trie_add(Btrie_bwd_mgr trie, byte tid, String find_str, String repl_str) {
 		byte[] find_bry = Bry_.new_utf8_(find_str);
 		byte[] repl_bry = repl_str == null ? null : Bry_.new_utf8_(repl_str);
 		Xol_grammar_ru_genitive_itm itm = new Xol_grammar_ru_genitive_itm(tid, find_bry, repl_bry);
@@ -43,7 +44,7 @@ public class Xol_grammar_ru implements Xol_grammar {
 		switch (tid) {
 			case Xol_grammar_.Tid_genitive:		{
 				if (Genitive_trie == null) Genitive_trie = genitive_trie_(); 
-				Object o = Genitive_trie.MatchAtCur(word, word.length - 1, -1);
+				Object o = Genitive_trie.Match_bgn(word, word.length - 1, -1);
 				if (o != null) {
 					Xol_grammar_ru_genitive_itm itm = (Xol_grammar_ru_genitive_itm)o;
 					if (!itm.Repl_is_noop()) {

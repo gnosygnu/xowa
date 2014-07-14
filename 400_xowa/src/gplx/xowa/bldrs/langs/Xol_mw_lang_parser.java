@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.langs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.intl.*; import gplx.php.*;
+import gplx.core.btries.*; import gplx.intl.*; import gplx.php.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.numbers.*;
 public class Xol_mw_lang_parser {
 	private Php_parser parser = new Php_parser(); private Php_evaluator evaluator;
@@ -325,27 +325,27 @@ public class Xol_mw_lang_parser {
 	;
 	public static int Id_by_mw_name(byte[] src) {
 		if (mw_names == null) {
-			mw_names = ByteTrieMgr_slim.cs_();
-			mw_names.Add("NS_MEDIA", Int_obj_val.new_(Xow_ns_.Id_media));
-			mw_names.Add("NS_SPECIAL", Int_obj_val.new_(Xow_ns_.Id_special));
-			mw_names.Add("NS_MAIN", Int_obj_val.new_(Xow_ns_.Id_main));
-			mw_names.Add("NS_TALK", Int_obj_val.new_(Xow_ns_.Id_talk));
-			mw_names.Add("NS_USER", Int_obj_val.new_(Xow_ns_.Id_user));
-			mw_names.Add("NS_USER_TALK", Int_obj_val.new_(Xow_ns_.Id_user_talk));
-			mw_names.Add("NS_PROJECT", Int_obj_val.new_(Xow_ns_.Id_project));
-			mw_names.Add("NS_PROJECT_TALK", Int_obj_val.new_(Xow_ns_.Id_project_talk));
-			mw_names.Add("NS_FILE", Int_obj_val.new_(Xow_ns_.Id_file));
-			mw_names.Add("NS_FILE_TALK", Int_obj_val.new_(Xow_ns_.Id_file_talk));
-			mw_names.Add("NS_MEDIAWIKI", Int_obj_val.new_(Xow_ns_.Id_mediaWiki));
-			mw_names.Add("NS_MEDIAWIKI_TALK", Int_obj_val.new_(Xow_ns_.Id_mediaWiki_talk));
-			mw_names.Add("NS_TEMPLATE", Int_obj_val.new_(Xow_ns_.Id_template));
-			mw_names.Add("NS_TEMPLATE_TALK", Int_obj_val.new_(Xow_ns_.Id_template_talk));
-			mw_names.Add("NS_HELP", Int_obj_val.new_(Xow_ns_.Id_help));
-			mw_names.Add("NS_HELP_TALK", Int_obj_val.new_(Xow_ns_.Id_help_talk));
-			mw_names.Add("NS_CATEGORY", Int_obj_val.new_(Xow_ns_.Id_category));
-			mw_names.Add("NS_CATEGORY_TALK", Int_obj_val.new_(Xow_ns_.Id_category_talk));
+			mw_names = Btrie_slim_mgr.cs_();
+			mw_names.Add_obj("NS_MEDIA", Int_obj_val.new_(Xow_ns_.Id_media));
+			mw_names.Add_obj("NS_SPECIAL", Int_obj_val.new_(Xow_ns_.Id_special));
+			mw_names.Add_obj("NS_MAIN", Int_obj_val.new_(Xow_ns_.Id_main));
+			mw_names.Add_obj("NS_TALK", Int_obj_val.new_(Xow_ns_.Id_talk));
+			mw_names.Add_obj("NS_USER", Int_obj_val.new_(Xow_ns_.Id_user));
+			mw_names.Add_obj("NS_USER_TALK", Int_obj_val.new_(Xow_ns_.Id_user_talk));
+			mw_names.Add_obj("NS_PROJECT", Int_obj_val.new_(Xow_ns_.Id_project));
+			mw_names.Add_obj("NS_PROJECT_TALK", Int_obj_val.new_(Xow_ns_.Id_project_talk));
+			mw_names.Add_obj("NS_FILE", Int_obj_val.new_(Xow_ns_.Id_file));
+			mw_names.Add_obj("NS_FILE_TALK", Int_obj_val.new_(Xow_ns_.Id_file_talk));
+			mw_names.Add_obj("NS_MEDIAWIKI", Int_obj_val.new_(Xow_ns_.Id_mediaWiki));
+			mw_names.Add_obj("NS_MEDIAWIKI_TALK", Int_obj_val.new_(Xow_ns_.Id_mediaWiki_talk));
+			mw_names.Add_obj("NS_TEMPLATE", Int_obj_val.new_(Xow_ns_.Id_template));
+			mw_names.Add_obj("NS_TEMPLATE_TALK", Int_obj_val.new_(Xow_ns_.Id_template_talk));
+			mw_names.Add_obj("NS_HELP", Int_obj_val.new_(Xow_ns_.Id_help));
+			mw_names.Add_obj("NS_HELP_TALK", Int_obj_val.new_(Xow_ns_.Id_help_talk));
+			mw_names.Add_obj("NS_CATEGORY", Int_obj_val.new_(Xow_ns_.Id_category));
+			mw_names.Add_obj("NS_CATEGORY_TALK", Int_obj_val.new_(Xow_ns_.Id_category_talk));
 		}
-		Object o = mw_names.MatchAtCurExact(src, 0, src.length);
+		Object o = mw_names.Match_exact(src, 0, src.length);
 		return o == null ? Xow_ns_.Id_null : ((Int_obj_val)o).Val();
-	}	private static ByteTrieMgr_slim mw_names;
+	}	private static Btrie_slim_mgr mw_names;
 }

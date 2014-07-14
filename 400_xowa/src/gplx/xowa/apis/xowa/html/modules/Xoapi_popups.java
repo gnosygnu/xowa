@@ -184,7 +184,7 @@ public class Xoapi_popups implements GfoInvkAble, GfoEvMgrOwner {
 	;
 	public static final byte[]
 	  Dflt_xnde_ignore_ids		= Bry_.new_ascii_("coordinates")
-	, Dflt_tmpl_keeplist		= Bry_.new_ascii_("en.wikipedia.org|formatnum;age_in_days;as_of;gregorian_serial_date;currentminute;currentsecond;dmca;spaced_ndash;trim;month*;convert*;worldpop*;ipa*;lang*;nowrap*;h:*;vgy;iso_639_name;transl;translate;linktext;zh;nihongo;japanese_name;ko-hhrm;|\n")
+	, Dflt_tmpl_keeplist		= Bry_.new_ascii_("en.wikipedia.org|formatnum;age_in_days;as_of;gregorian_serial_date;currentminute;currentsecond;dmca;spaced_ndash;trim;month*;convert*;worldpop*;ipa*;lang*;nowrap*;h:*;mvar;math;vgy;audio;iso_639_name;transl;translate;linktext;zh;nihongo*;japanese_name;ko-hhrm|\n")
 	, Dflt_html_fmtr_popup = Bry_.new_ascii_(String_.Concat_lines_nl_skip_last
 	( "<div dir=~{page_lang_ltr}>"
 	, "  <div>~{content}"
@@ -226,7 +226,7 @@ public class Xoapi_popups implements GfoInvkAble, GfoEvMgrOwner {
 	, Dflt_show_more_word_count = 192
 	, Dflt_show_all_if_less_than = -1
 	, Dflt_show_all_win_max_w = -1
-	, Dflt_win_show_delay = 600, Dflt_win_hide_delay = 600
+	, Dflt_win_show_delay = 600, Dflt_win_hide_delay = 400
 	, Dflt_win_max_w = -1, Dflt_win_max_h = -1
 	, Dflt_win_show_all_max_w = 800
 	, Dflt_scan_len =  1 * Io_mgr.Len_kb

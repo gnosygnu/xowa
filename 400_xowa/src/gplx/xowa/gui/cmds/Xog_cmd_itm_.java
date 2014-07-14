@@ -76,6 +76,7 @@ public class Xog_cmd_itm_ {
 	, Key_gui_browser_url_exec									= new_dflt_(Xog_ctg_itm_.Tid_browser		, "xowa.gui.browser.url.exec")
 	, Key_gui_browser_url_exec_by_paste							= new_dflt_(Xog_ctg_itm_.Tid_browser		, "xowa.gui.browser.url.exec_by_paste")
 	, Key_gui_browser_url_exec_new_tab_by_paste					= new_dflt_(Xog_ctg_itm_.Tid_browser		, "xowa.gui.browser.url.exec_new_tab_by_paste")
+	, Key_gui_browser_url_restore								= new_dflt_(Xog_ctg_itm_.Tid_browser		, "xowa.gui.browser.url.restore")
 	, Key_gui_browser_search_focus								= new_dflt_(Xog_ctg_itm_.Tid_browser		, "xowa.gui.browser.search.focus")
 	, Key_gui_browser_search_exec								= new_dflt_(Xog_ctg_itm_.Tid_browser		, "xowa.gui.browser.search.exec")
 	, Key_gui_browser_tabs_new_dflt__at_dflt__focus_y			= new_dflt_(Xog_ctg_itm_.Tid_tabs			, "xowa.gui.browser.tabs.new_dflt__at_dflt__focus_y")

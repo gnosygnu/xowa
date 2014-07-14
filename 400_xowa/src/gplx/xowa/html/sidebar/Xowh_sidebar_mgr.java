@@ -89,7 +89,7 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 					cur_grp.Itms_add(cur_itm);
 			}
 		}
-	}	private Xoa_url tmp_url = new Xoa_url();
+	}	private Xoa_url tmp_url = Xoa_url.blank_();
 	public void Bld_html(Bry_bfr bfr) {
 		int len = grps.Count();
 		for (int i = 0; i < len; i++) {

@@ -45,7 +45,7 @@ public class Ref_nde implements Xox_xnde, Xop_xnde_atr_parser {
 	}
 	public void Xtn_parse(Xow_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
 		if (ctx.Tid_is_popup()) return;
-		Xop_xatr_itm.Xatr_parse(wiki.App(), this, wiki.Lang().Xatrs_ref(), wiki, src, xnde);
+		Xop_xatr_itm.Xatr_parse(wiki.App(), this, xatrs_hash, wiki, src, xnde);
 		if (xnde.CloseMode() == Xop_xnde_tkn.CloseMode_pair)
 			body = wiki.Parser().Parse_text_to_wdom_old_ctx(ctx, Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn()), false);
 		byte[] references_group = ctx.References_group();	// set by <references>
@@ -76,4 +76,9 @@ public class Ref_nde implements Xox_xnde, Xop_xnde_atr_parser {
 	}
 	public static final byte Xatr_id_name = 0, Xatr_id_group = 1, Xatr_id_follow = 2;
 	public static final int Idx_minor_follow = -2;
+	private static final Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_ascii_()
+	.Add_str_obj("name", Byte_obj_val.new_(Ref_nde.Xatr_id_name))
+	.Add_str_obj("group", Byte_obj_val.new_(Ref_nde.Xatr_id_group))
+	.Add_str_obj("follow", Byte_obj_val.new_(Ref_nde.Xatr_id_follow));
+
 }

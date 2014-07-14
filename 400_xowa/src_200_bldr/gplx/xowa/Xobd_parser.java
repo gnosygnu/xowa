@@ -16,8 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.btries.*;
 public class Xobd_parser implements Xobd_wkr {
-	private ByteTrieMgr_slim trie = ByteTrieMgr_slim.ci_ascii_();		// NOTE:ci.ascii:MW_const.en; ctg.v1 assumes [[Category:
+	private Btrie_slim_mgr trie = Btrie_slim_mgr.ci_ascii_();		// NOTE:ci.ascii:MW_const.en; ctg.v1 assumes [[Category:
 	private ListAdp wkr_list = ListAdp_.new_();
 	public String Wkr_key() {return KEY;} static final String KEY = "page_parser";
 	public void Wkr_ini(Xob_bldr bldr) {}
@@ -30,7 +31,7 @@ public class Xobd_parser implements Xobd_wkr {
 			int hooks_len = wkr.Wkr_hooks().Count();
 			for (int j = 0; j < hooks_len; j++) {
 				byte[] bry = (byte[])wkr.Wkr_hooks().FetchAt(j);
-				trie.Add(bry, wkr);
+				trie.Add_obj(bry, wkr);
 			}
 		}
 	}
@@ -39,7 +40,7 @@ public class Xobd_parser implements Xobd_wkr {
 		int pos = 0;
 		while (true) {
 			if (pos == src_len) break;
-			Object o = trie.MatchAtCur(src, pos, src_len);
+			Object o = trie.Match_bgn(src, pos, src_len);
 			if (o == null)
 				++pos;
 			else {

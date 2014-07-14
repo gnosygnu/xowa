@@ -39,7 +39,7 @@ public class Xow_wiki implements GfoInvkAble {
 		props.SiteName_(domain_tid).ServerName_(domain_bry);
 		props.ContentLanguage_(lang.Key_bry());
 		Pf_func_.Reg(lang.Func_regy(), lang);
-		special_mgr = new Xows_mgr(this);
+		special_mgr = new Xows_mgr(this, lang);
 		stats = new Xow_wiki_stats(this);
 		xwiki_mgr = new Xow_xwiki_mgr(this);
 		xwiki_mgr.Add_full(domain_bry, domain_bry);	// add full name to xwiki_mgr; needed for lookup in home ns; EX: [[en.wikipedia.org:Earth]]

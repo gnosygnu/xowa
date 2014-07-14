@@ -27,6 +27,8 @@ public class Xot_invk_temp implements Xot_invk {
 	public boolean Root_frame() {return root_frame;} private boolean root_frame;
 	public Arg_nde_tkn Name_tkn() {return name_tkn;} Arg_nde_tkn name_tkn;
 	public byte[] Frame_ttl() {return frame_ttl;} public void Frame_ttl_(byte[] v) {frame_ttl = v;} private byte[] frame_ttl = Bry_.Empty;	// NOTE: set frame_ttl to non-null value; PAGE:en.w:Constantine_the_Great {{Christianity}}; DATE:2014-06-26
+	public int Frame_lifetime() {return frame_lifetime;} public void Frame_lifetime_(int v) {frame_lifetime = v;} private int frame_lifetime;
+	public boolean Rslt_is_redirect() {return rslt_is_redirect;} public void Rslt_is_redirect_(boolean v) {rslt_is_redirect = v;} private boolean rslt_is_redirect;
 	public int Src_bgn() {return src_bgn;} private int src_bgn;
 	public int Src_end() {return src_end;} private int src_end;
 	public byte Scrib_frame_tid() {return scrib_tid;} public void Scrib_frame_tid_(byte v) {scrib_tid = v;} private byte scrib_tid;

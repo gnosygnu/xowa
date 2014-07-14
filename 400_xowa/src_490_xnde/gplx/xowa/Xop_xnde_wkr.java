@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.apps.fsys.*; import gplx.xowa.wikis.*; import gplx.xowa.xtns.*; import gplx.html.*;
+import gplx.core.btries.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.wikis.*; import gplx.xowa.xtns.*; import gplx.html.*;
 import gplx.xowa.parsers.logs.*;
 public class Xop_xnde_wkr implements Xop_ctx_wkr {
 	public void Ctor_ctx(Xop_ctx ctx) {}
@@ -60,8 +60,8 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			cur_byt = src[cur_pos];
 			tag_is_closing = true;
 		}
-		ByteTrieMgr_slim tag_trie = ctx.App().Xnde_tag_regy().XndeNames(ctx.Xnde_names_tid());
-		Object tag_obj = tag_trie.Match(cur_byt, src, cur_pos, src_len);	// NOTE:tag_obj can be null in wiki_tmpl mode; EX: "<ul" is not a valid tag in wiki_tmpl, but is valid in wiki_main
+		Btrie_slim_mgr tag_trie = ctx.App().Xnde_tag_regy().XndeNames(ctx.Xnde_names_tid());
+		Object tag_obj = tag_trie.Match_bgn_w_byte(cur_byt, src, cur_pos, src_len);	// NOTE:tag_obj can be null in wiki_tmpl mode; EX: "<ul" is not a valid tag in wiki_tmpl, but is valid in wiki_main
 		int atrs_bgn_pos = tag_trie.Match_pos();
 		int tag_end_pos = atrs_bgn_pos - 1;
 		if (tag_obj != null) {
@@ -553,9 +553,9 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			return Find_xtn_end_tag(ctx, src, src_len, open_end, close_bry, tag_bgn + Pf_tag.Xtag_bgn);
 		else {	// search rest of String for case-insensitive name; NOTE: used to do CS first, then fall-back on CI; DATE:2013-12-02
 			xtn_end_tag_trie.Clear();
-			xtn_end_tag_trie.Add(close_bry, close_bry);
+			xtn_end_tag_trie.Add_obj(close_bry, close_bry);
 			for (int i = open_end; i < src_len; i++) {
-				Object o = xtn_end_tag_trie.MatchAtCur(src, i, src_len);
+				Object o = xtn_end_tag_trie.Match_bgn(src, i, src_len);
 				if (o != null) {
 					return i;
 				}
@@ -565,14 +565,14 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 	}
 	private int Find_xtn_end_tag(Xop_ctx ctx, byte[] src, int src_len, int open_end, byte[] close_bry, int tag_bgn) {
 		int tag_id = Bry_.X_to_int_or(src, tag_bgn, tag_bgn + 10, -1);
-		if (tag_id == -1) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not extract int: page=~{0}", ctx.Cur_page().Url().X_to_full_str_safe()); return Bry_finder.Not_found;}
+		if (tag_id == -1) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not extract int: page=~{0}", ctx.Cur_page().Url().Xto_full_str_safe()); return Bry_finder.Not_found;}
 		Bry_bfr tmp = ctx.Wiki().Utl_bry_bfr_mkr().Get_b128();
 		tmp.Add(Pf_tag.Xtag_end_lhs).Add_int_pad_bgn(Byte_ascii.Num_0, 10, tag_id).Add(Pf_tag.Xtag_rhs);
 		byte[] tag_end = tmp.Mkr_rls().XtoAryAndClear();
 		int rv = Bry_finder.Find_fwd(src, tag_end, open_end + Pf_tag.Xtag_rhs.length);
-		if (rv == Bry_finder.Not_found) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not find end: page=~{0}", ctx.Cur_page().Url().X_to_full_str_safe()); return Bry_finder.Not_found;}
+		if (rv == Bry_finder.Not_found) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not find end: page=~{0}", ctx.Cur_page().Url().Xto_full_str_safe()); return Bry_finder.Not_found;}
 		rv = Bry_finder.Find_bwd(src, Byte_ascii.Lt, rv - 1);
-		if (rv == Bry_finder.Not_found) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not find <: page=~{0}", ctx.Cur_page().Url().X_to_full_str_safe()); return Bry_finder.Not_found;}
+		if (rv == Bry_finder.Not_found) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not find <: page=~{0}", ctx.Cur_page().Url().Xto_full_str_safe()); return Bry_finder.Not_found;}
 		return rv;
 	}
 	private int Make_xnde_xtn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, Xop_xnde_tag tag, int open_bgn, int open_end, int atrs_bgn, int atrs_end, Xop_xatr_itm[] atrs, boolean inline, boolean pre2_hack) {
@@ -693,7 +693,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			}
 		}
 		return xnde_end;
-	}	private ByteTrieMgr_slim xtn_end_tag_trie = ByteTrieMgr_slim.ci_ascii_();	// NOTE:ci.ascii:MW_const.en; listed XML node names are en
+	}	private Btrie_slim_mgr xtn_end_tag_trie = Btrie_slim_mgr.ci_ascii_();	// NOTE:ci.ascii:MW_const.en; listed XML node names are en
 	private Xop_xnde_tkn New_xnde_pair(Xop_ctx ctx, Xop_root_tkn root, Xop_tkn_mkr tkn_mkr, Xop_xnde_tag tag, int open_bgn, int open_end, int close_bgn, int close_end) {
 		Xop_xnde_tkn rv = tkn_mkr.Xnde(open_bgn, close_end).Tag_(tag).Tag_open_rng_(open_bgn, open_end).Tag_close_rng_(close_bgn, close_end).CloseMode_(Xop_xnde_tkn.CloseMode_pair);
 		int name_bgn = open_bgn + 1;

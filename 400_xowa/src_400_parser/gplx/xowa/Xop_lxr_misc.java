@@ -16,14 +16,19 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.btries.*;
 class Xop_colon_lxr implements Xop_lxr {
 	public byte Lxr_tid() {return Xop_lxr_.Tid_colon;}
-	public void Init_by_wiki(Xow_wiki wiki, ByteTrieMgr_fast core_trie) {core_trie.Add(Byte_ascii.Colon, this);}
-	public void Init_by_lang(Xol_lang lang, ByteTrieMgr_fast core_trie) {}
+	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Byte_ascii.Colon, this);}
+	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		Xop_list_wkr listCtx = ctx.List();
 		if (listCtx.Dd_chk()) {	// handle ";a:b" construct; REF.MW: Parser.php|doBlockLevels|; title : definition text
-			if (ctx.Cur_tkn_tid() != Xop_tkn_itm_.Tid_lnki && cur_pos < src_len && src[cur_pos] != Byte_ascii.NewLine) {	// FUTURE: emulate Parser.php|findColonNoLinks which does much more logic to see if ";a:b" construct should apply
+			int prv_pos = cur_pos -1 ;
+			if (	ctx.Cur_tkn_tid() != Xop_tkn_itm_.Tid_lnki	// ignore if inside link
+				&&	prv_pos > 0
+				&&	src[prv_pos] != Byte_ascii.NewLine			// only consider ":" which are not preceded by \n; DATE:2014-07-11 TODO: emulate Parser.php|findColonNoLinks which does much more logic to see if ";a:b" construct should apply
+				) {	
 				listCtx.Dd_chk_(false);
 				return listCtx.MakeTkn_bgn(ctx, tkn_mkr, root, src, src_len, bgn_pos, cur_pos);
 			}

@@ -62,7 +62,7 @@ public class Xoa_lang_mgr implements GfoInvkAble {
 	private static final String Invk_get = "get", Invk_local_set_bulk = "local_set_bulk", Invk_load_lang = "load_lang"
 	, Invk_groups = "groups", Invk_mediawiki_converter = "mediawiki_converter"
 	;
-	public Hash_adp_bry Fallback_regy() {return fallback_regy;} Hash_adp_bry fallback_regy = Hash_adp_bry.ci_();
+	public Hash_adp_bry Fallback_regy() {return fallback_regy;} Hash_adp_bry fallback_regy = Hash_adp_bry.cs_();	// changed from ci; DATE:2014-07-07
 	private void Load_lang(byte[] bry) {this.Get_by_key_or_new(bry).Init_by_load();}
 	public void Local_set_bulk(byte[] src) {	// NOTE: setting local lang names/grps on app level; may need to move to user level or wiki level (for groups) later
 		int len = src.length;

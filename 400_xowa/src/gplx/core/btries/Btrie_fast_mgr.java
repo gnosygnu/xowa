@@ -15,17 +15,17 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx;
-public class ByteTrieMgr_fast {
+package gplx.core.btries; import gplx.*; import gplx.core.*;
+public class Btrie_fast_mgr {
 	private ByteTrieItm_fast root;
-	public boolean CaseAny() {return root.CaseAny();} public ByteTrieMgr_fast CaseAny_(boolean v) {root.CaseAny_(v); return this;}
+	public boolean CaseAny() {return root.CaseAny();} public Btrie_fast_mgr CaseAny_(boolean v) {root.CaseAny_(v); return this;}
 	public int Match_pos() {return match_pos;} private int match_pos;
-	public Object MatchAtCurExact(byte[] src, int bgn_pos, int end_pos) {
-		Object rv = Match(src[bgn_pos], src, bgn_pos, end_pos);
+	public Object Match_exact(byte[] src, int bgn_pos, int end_pos) {
+		Object rv = Match_bgn_w_byte(src[bgn_pos], src, bgn_pos, end_pos);
 		return rv == null ? null : match_pos - bgn_pos == end_pos - bgn_pos ? rv : null;
 	}
-	public Object MatchAtCur(byte[] src, int bgn_pos, int end_pos) {return Match(src[bgn_pos], src, bgn_pos, end_pos);}
-	public Object Match(byte b, byte[] src, int bgn_pos, int src_len) {
+	public Object Match_bgn(byte[] src, int bgn_pos, int end_pos) {return Match_bgn_w_byte(src[bgn_pos], src, bgn_pos, end_pos);}
+	public Object Match_bgn_w_byte(byte b, byte[] src, int bgn_pos, int src_len) {
 		match_pos = bgn_pos;
 		ByteTrieItm_fast nxt = root.Ary_find(b); if (nxt == null) return null;	// nxt does not have b; return rv;
 		Object rv = null; int cur_pos = bgn_pos + 1;
@@ -41,11 +41,11 @@ public class ByteTrieMgr_fast {
 			++cur_pos;
 		}
 	}
-	public ByteTrieMgr_fast Add_bry_bval(byte   key, byte val) {return Add(new byte[] {key}, Byte_obj_val.new_(val));}
-	public ByteTrieMgr_fast Add_bry_bval(byte[] key, byte val) {return Add(key, Byte_obj_val.new_(val));}
-	public ByteTrieMgr_fast Add(byte key, Object val) {return Add(new byte[] {key}, val);}
-	public ByteTrieMgr_fast Add(String key, Object val) {return Add(Bry_.new_utf8_(key), val);}
-	public ByteTrieMgr_fast Add(byte[] key, Object val) {
+	public Btrie_fast_mgr Add_bry_bval(byte   key, byte val) {return Add(new byte[] {key}, Byte_obj_val.new_(val));}
+	public Btrie_fast_mgr Add_bry_bval(byte[] key, byte val) {return Add(key, Byte_obj_val.new_(val));}
+	public Btrie_fast_mgr Add(byte key, Object val) {return Add(new byte[] {key}, val);}
+	public Btrie_fast_mgr Add(String key, Object val) {return Add(Bry_.new_utf8_(key), val);}
+	public Btrie_fast_mgr Add(byte[] key, Object val) {
 		if (val == null) throw Err_.new_("null objects cannot be registered").Add("key", String_.new_utf8_(key));
 		int key_len = key.length; int key_end = key_len - 1;
 		ByteTrieItm_fast cur = root;
@@ -60,9 +60,9 @@ public class ByteTrieMgr_fast {
 		}
 		return this;
 	}
-	public ByteTrieMgr_fast Add_stub(byte tid, String s) {
+	public Btrie_fast_mgr Add_stub(byte tid, String s) {
 		byte[] bry = Bry_.new_utf8_(s);
-		ByteTrie_stub stub = new ByteTrie_stub(tid, bry);
+		Btrie_itm_stub stub = new Btrie_itm_stub(tid, bry);
 		return Add(bry, stub);
 	}
 	public void Del(byte[] key) {
@@ -91,7 +91,7 @@ public class ByteTrieMgr_fast {
 		boolean dirty = false;
 		while (pos < end) {
 			byte b = src[pos];
-			Object o = this.Match(b, src, pos, end);
+			Object o = this.Match_bgn_w_byte(b, src, pos, end);
 			if (o == null) {
 				if (dirty)
 					tmp_bfr.Add_byte(b);
@@ -108,10 +108,10 @@ public class ByteTrieMgr_fast {
 		}
 		return dirty ? tmp_bfr.XtoAryAndClear() : src;
 	}
-	public static ByteTrieMgr_fast cs_()		{return new ByteTrieMgr_fast(false);}
-	public static ByteTrieMgr_fast ci_ascii_()	{return new ByteTrieMgr_fast(true);}
-	public static ByteTrieMgr_fast new_(boolean case_any) {return new ByteTrieMgr_fast(case_any);}
-	ByteTrieMgr_fast(boolean caseAny) {
+	public static Btrie_fast_mgr cs_()		{return new Btrie_fast_mgr(false);}
+	public static Btrie_fast_mgr ci_ascii_()	{return new Btrie_fast_mgr(true);}
+	public static Btrie_fast_mgr new_(boolean case_any) {return new Btrie_fast_mgr(case_any);}
+	Btrie_fast_mgr(boolean caseAny) {
 		root = new ByteTrieItm_fast(Byte_.Zero, null, caseAny);
 	}
 }

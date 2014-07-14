@@ -27,6 +27,6 @@ public class Xoa_url_tst {
 }
 class Xoa_url_fxt {
 	public void Clear() {}
-	public Xoa_url url_(String wiki_str, String page_str, boolean redirect_force) {return new Xoa_url().Wiki_bry_(Bry_.new_utf8_(wiki_str)).Page_bry_(Bry_.new_utf8_(page_str)).Redirect_force_(redirect_force);}
+	public Xoa_url url_(String wiki_str, String page_str, boolean redirect_force) {return Xoa_url.blank_().Wiki_bry_(Bry_.new_utf8_(wiki_str)).Page_bry_(Bry_.new_utf8_(page_str)).Redirect_force_(redirect_force);}
 	public void Eq_page_tst(Xoa_url lhs, Xoa_url rhs, boolean expd) {Tfds.Eq(expd, lhs.Eq_page(rhs));}
 }

@@ -75,7 +75,7 @@ public class Xow_wiki_domain_ {
 		Object o = lang_map_hash.Get_by_bry(v);
 		return o == null ? v : (byte[])o;
 	}
-	private static final Hash_adp_bry lang_map_hash = Hash_adp_bry.ci_()
+	private static final Hash_adp_bry lang_map_hash = Hash_adp_bry.ci_ascii_()	// ASCII:lang_code
 	.Add_str_obj("simple"		, Bry_.new_ascii_("en"))
 	.Add_str_obj("zh-classical"	, Bry_.new_ascii_("lzh"))
 	.Add_str_obj("no"			, Bry_.new_ascii_("nb"))
@@ -105,7 +105,7 @@ public class Xow_wiki_domain_ {
 		, Key_wikidata_bry, Key_mediawiki_bry, Key_wikimediafoundation_bry
 		};
 	public static final byte[] Seg_org_bry = Bry_.new_ascii_("org"), Seg_wikimedia_bry = Bry_.new_ascii_("wikimedia"), Seg_www_bry = Bry_.new_utf8_("www");
-	private static final Hash_adp_bry key_hash = Hash_adp_bry.ci_()
+	private static final Hash_adp_bry key_hash = Hash_adp_bry.ci_ascii_()
 	.Add_bry_byte(Seg_wikimedia_bry, Tid_wikimedia)		// PERF: not a "key" but makes Parse quicker
 	.Add_bry_byte(Key_home_bry, Tid_home)
 	.Add_bry_byte(Key_commons_bry, Tid_commons)

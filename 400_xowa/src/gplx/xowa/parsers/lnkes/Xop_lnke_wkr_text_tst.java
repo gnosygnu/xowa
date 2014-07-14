@@ -61,4 +61,11 @@ public class Xop_lnke_wkr_text_tst {
 	@Test  public void Defect_reverse_caption_link() { // PURPOSE: bad lnke formatting (caption before link); ] should show up at end, but only [ shows up; EX.WP: Paul Philippoteaux; [caption http://www.americanheritage.com]
 		fxt.Test_parse_page_wiki_str("[caption irc://a]", "[caption <a href=\"irc://a\" class=\"external text\" rel=\"nofollow\">irc://a</a>]");
 	}
+	@Test  public void Lnki() {	// PURPOSE: trailing lnki should not get absorbed into lnke; DATE:2014-07-11
+		fxt.Test_parse_page_wiki_str
+		( "http://a.org[[B]]"	// NOTE: [[ should create another lnki
+		,String_.Concat_lines_nl_skip_last
+		( "<a href=\"http://a.org\" class=\"external text\" rel=\"nofollow\">http://a.org</a><a href=\"/wiki/B\">B</a>"
+		));
+	}
 }

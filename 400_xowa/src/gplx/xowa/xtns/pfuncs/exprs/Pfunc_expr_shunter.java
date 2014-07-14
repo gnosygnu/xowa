@@ -16,8 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.exprs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+import gplx.core.btries.*;
 public class Pfunc_expr_shunter {
-	ByteTrieMgr_fast trie = expression_();
+	Btrie_fast_mgr trie = expression_();
 	Val_stack val_stack = new Val_stack();
 	Func_tkn_stack prc_stack = new Func_tkn_stack();
 	public static final DecimalAdp Null_rslt = null;
@@ -41,7 +42,7 @@ public class Pfunc_expr_shunter {
 		while (true) {
 			// can't think of a way for this to happen; note that operators will automatically push values/operators off stack that are lower; can't get up to 100 
 			// if (val_stack.Len() > 100 || prc_stack.Len() > 100) return Err_set(ctx, Xol_msg_itm_.Id_pfunc_expr_err__stack_exhausted);
-			Object o = trie.Match(cur_byt, src, cur_pos, src_len);
+			Object o = trie.Match_bgn_w_byte(cur_byt, src, cur_pos, src_len);
 			int bgn_pos = cur_pos;
 			if (o == null) {	// letter or unknown symbol
 				while (cur_pos < src_len) {
@@ -156,8 +157,8 @@ public class Pfunc_expr_shunter {
 		}
 		return val_stack.Len() == 0 ? Null_rslt : val_stack.Pop();	// HACK: for [[List of Premiers of South Australia by time in office]] and {{#expr:\n{{age in days
 	}
-	private static ByteTrieMgr_fast expression_() {
-		ByteTrieMgr_fast rv = ByteTrieMgr_fast.ci_ascii_();	// NOTE:ci.ascii:MW_const.en; math and expressions
+	private static Btrie_fast_mgr expression_() {
+		Btrie_fast_mgr rv = Btrie_fast_mgr.ci_ascii_();	// NOTE:ci.ascii:MW_const.en; math and expressions
 		Trie_add(rv, new Ws_tkn(Byte_ascii.Space));
 		Trie_add(rv, new Ws_tkn(Byte_ascii.Tab));
 		Trie_add(rv, new Ws_tkn(Byte_ascii.NewLine));
@@ -214,6 +215,6 @@ public class Pfunc_expr_shunter {
 		Trie_add(rv, new Func_tkn_minus("&minus;"));
 		return rv;
 	}
-	private static void Trie_add(ByteTrieMgr_fast trie, Expr_tkn tkn) {trie.Add(tkn.Val_ary(), tkn);}
+	private static void Trie_add(Btrie_fast_mgr trie, Expr_tkn tkn) {trie.Add(tkn.Val_ary(), tkn);}
 	public static final Pfunc_expr_shunter _ = new Pfunc_expr_shunter(); Pfunc_expr_shunter() {}
 }

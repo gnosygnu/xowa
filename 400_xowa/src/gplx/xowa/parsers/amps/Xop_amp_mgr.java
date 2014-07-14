@@ -16,14 +16,15 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.amps; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+import gplx.core.btries.*;
 public class Xop_amp_mgr {
 	private Bry_bfr tmp_bfr = Bry_bfr.reset_(32);
-	public ByteTrieMgr_slim Amp_trie() {return amp_trie;} private ByteTrieMgr_slim amp_trie = Xop_amp_trie._;		
+	public Btrie_slim_mgr Amp_trie() {return amp_trie;} private Btrie_slim_mgr amp_trie = Xop_amp_trie._;		
 	public int Rslt_pos() {return rslt_pos;} private int rslt_pos;
 	public int Rslt_val() {return rslt_val;} private int rslt_val;
 	public Xop_tkn_itm Parse_as_tkn(Xop_tkn_mkr tkn_mkr, byte[] src, int src_len, int amp_pos, int cur_pos) {
 		rslt_pos = amp_pos + 1;	// default to fail pos; after amp;
-		Object o = amp_trie.MatchAtCur(src, cur_pos, src_len);
+		Object o = amp_trie.Match_bgn(src, cur_pos, src_len);
 		cur_pos = amp_trie.Match_pos();
 		if (o == null) return null;
 		Xop_amp_trie_itm itm = (Xop_amp_trie_itm)o;
@@ -48,7 +49,7 @@ public class Xop_amp_mgr {
 				int nxt_pos = pos + 1;
 				if (nxt_pos < src_len) {
 					byte nxt_b = src[nxt_pos];
-					Object amp_obj = amp_trie.Match(nxt_b, src, nxt_pos, src_len);
+					Object amp_obj = amp_trie.Match_bgn_w_byte(nxt_b, src, nxt_pos, src_len);
 					if (amp_obj != null) {
 						if (!dirty) {
 							tmp_bfr.Add_mid(src, 0, pos);

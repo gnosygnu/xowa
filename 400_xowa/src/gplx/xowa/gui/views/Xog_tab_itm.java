@@ -35,7 +35,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 		html_box.Html_invk_src_(win);
 		html_itm.Html_box_(html_box);
 		if (app.Mode() == Xoa_app_.Mode_gui) {	// NOTE: only run for gui; will cause firefox addon to fail; DATE:2014-05-03
-			html_box.Html_doc_html_("");	// NOTE: must set source, else control will be empty, and key events will not be raised; DATE:2014-04-30
+			html_box.Html_doc_html_load_by_mem("");	// NOTE: must set source, else control will be empty, and key events will not be raised; DATE:2014-04-30
 			IptBnd_.ipt_to_(IptCfg_.Null, html_box, this, "popup", IptEventType_.MouseDown, IptMouseBtn_.Right);
 			GfoEvMgr_.SubSame(html_box, GfuiElemKeys.Evt_menu_detected, html_itm);
 			gui_mgr.Bnd_mgr().Bind(Xog_bnd_box_.Tid_browser_html, html_box);
@@ -76,7 +76,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 		this.page = page;
 		if (update_ui) {
 			this.Tab_name_();
-			tab_box.Tab_tip_text_(String_.new_utf8_(page.Url().X_to_full()));
+			tab_box.Tab_tip_text_(page.Url().Xto_full_str());
 		}
 	}	private Xoa_page page;
 	public void Tab_name_() {
@@ -113,7 +113,8 @@ public class Xog_tab_itm implements GfoInvkAble {
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, url.Page_bry());
 		if (ttl == null) {usr_dlg.Prog_one("", "", "title is invalid: ~{0}", String_.new_utf8_(url.Raw())); return;}
 		usr_dlg.Prog_one("", "", "loading: ~{0}", String_.new_utf8_(ttl.Raw()));
-		this.Html_box().Html_js_eval_script("xowa_popups_hide_all();");
+		if (app.Api_root().Html().Modules().Popups().Enabled())
+			this.Html_box().Html_js_eval_script("if (window.xowa_popups_hide_all != null) window.xowa_popups_hide_all();");	// should be more configurable; DATE:2014-07-09
 		app.Thread_mgr().Page_load_mgr().Add_at_end(new Load_page_wkr(this, wiki, url, ttl)).Run();
 	}
 	public void Show_url_loaded(Xoa_page page) {
@@ -129,8 +130,8 @@ public class Xog_tab_itm implements GfoInvkAble {
 					Xog_tab_itm_read_mgr.Show_page(this, page, false);
 				}
 				else {
-					if (page.Redirect_list().Count() > 0)
-						usr_dlg.Prog_many("", "", "could not find: ~{0} (redirected from ~{1})", String_.new_utf8_(page.Url().Page_bry()), String_.new_utf8_((byte[])page.Redirect_list().FetchAt(0)));
+					if (page.Redirected_ttls().Count() > 0)
+						usr_dlg.Prog_many("", "", "could not find: ~{0} (redirected from ~{1})", String_.new_utf8_(page.Url().Page_bry()), String_.new_utf8_((byte[])page.Redirected_ttls().FetchAt(0)));
 					else {
 						if (ttl.Ns().Id_file())
 							usr_dlg.Prog_one("", "", "commons.wikimedia.org must be installed in order to view the file. See [[Help:Wikis/Commons]]: ~{0}", String_.new_utf8_(url.Raw()));
@@ -165,7 +166,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 	public void Async() {
 		if (page == null) return;	// TEST: occurs during Xog_win_mgr_tst
 		Xow_wiki wiki = page.Wiki(); Xoa_app app = wiki.App(); Xog_win_itm win_itm = tab_mgr.Win(); Gfo_usr_dlg usr_dlg = win_itm.Usr_dlg();
-		app.Usr_dlg().Log_many("", "", "page.async: url=~{0}", page.Url().X_to_full_str_safe());
+		app.Usr_dlg().Log_many("", "", "page.async: url=~{0}", page.Url().Xto_full_str_safe());
 		if (page.Url().Anchor_str() != null) html_itm.Scroll_page_by_id_gui(page.Url().Anchor_str());
 		if (usr_dlg.Canceled()) {usr_dlg.Prog_none("", "", ""); app.Log_wtr().Queue_enabled_(false); return;}
 		int xfer_len = 0;
@@ -226,7 +227,7 @@ class Load_page_wkr implements Gfo_thread_wkr {
 	public void Exec() {
 		try {
 			Xoa_app app = wiki.App();
-			app.Usr_dlg().Log_many("", "", "page.load: url=~{0}", url.X_to_full_str_safe());
+			app.Usr_dlg().Log_many("", "", "page.load: url=~{0}", url.Xto_full_str_safe());
 			if (Env_.System_memory_free() < app.Sys_cfg().Free_mem_when())	// check if low in memory
 				app.Free_mem(false);										// clear caches (which will clear bry_bfr_mk)
 			else															// not low in memory
@@ -248,7 +249,7 @@ class Load_files_wkr implements Gfo_thread_wkr {
 	public void Exec() {
 		try {tab.Async();}
 		catch (Exception e) {
-			tab.Tab_mgr().Win().App().Usr_dlg().Warn_many("error while running file wkr; page=~{0} err=~{1}", tab.Page().Url().X_to_full_str(), Err_.Message_gplx_brief(e));
+			tab.Tab_mgr().Win().App().Usr_dlg().Warn_many("error while running file wkr; page=~{0} err=~{1}", tab.Page().Url().Xto_full_str(), Err_.Message_gplx_brief(e));
 		}
 	}
 }

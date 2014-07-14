@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
+import gplx.core.btries.*;
 import gplx.xowa.parsers.amps.*;
 public class Url_encoder implements Url_encoder_interface {
 	private Url_encoder_itm[] encode_ary = new Url_encoder_itm[256], decode_ary = new Url_encoder_itm[256];
@@ -51,7 +52,7 @@ public class Url_encoder implements Url_encoder_interface {
 		}
 		return this;
 	}
-	public void Itms_raw_html_ent(byte src, ByteTrieMgr_slim trie) {
+	public void Itms_raw_html_ent(byte src, Btrie_slim_mgr trie) {
 		Url_encoder_itm_html_ent itm = new Url_encoder_itm_html_ent(trie);
 		encode_ary[src] = itm;
 	}
@@ -271,7 +272,7 @@ class Url_encoder_itm_hex implements Url_encoder_itm {
 	};
 } 
 class Url_encoder_itm_html_ent implements Url_encoder_itm {
-	public Url_encoder_itm_html_ent(ByteTrieMgr_slim amp_trie) {this.amp_trie = amp_trie;} ByteTrieMgr_slim amp_trie;
+	public Url_encoder_itm_html_ent(Btrie_slim_mgr amp_trie) {this.amp_trie = amp_trie;} Btrie_slim_mgr amp_trie;
 	public int Encode(Bry_bfr bfr, byte[] src, int end, int idx, byte b) {
 		++idx;					// b is &; get next character afterwards
 		if (idx == end) {		// & is last char; return
@@ -279,7 +280,7 @@ class Url_encoder_itm_html_ent implements Url_encoder_itm {
 			return 0;
 		}
 		b = src[idx];
-		Object o = amp_trie.Match(b, src, idx, end);
+		Object o = amp_trie.Match_bgn_w_byte(b, src, idx, end);
 		if (o == null) {	// unknown entity (EX:&unknown;); return &;
 			Url_encoder_itm_hex.Encode_byte(Byte_ascii.Amp, bfr, Byte_ascii.Dot);
 			return 0;

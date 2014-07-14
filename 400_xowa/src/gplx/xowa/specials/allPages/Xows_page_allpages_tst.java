@@ -187,7 +187,7 @@ class Xows_page_allpages_fxt {
 			Tfds.Eq_ary_str(Xto_str_ary(init_url.Args()), Xto_str_ary(expd_args_ary));
 		}
 		return this;
-	}	private Xoa_url init_url = new Xoa_url();
+	}	private Xoa_url init_url = Xoa_url.blank_();
 	public Xows_page_allpages_fxt Test_build_html(String expd) {
 		Exec_build();
 		allpages.Build_html(wiki.Ctx().Cur_page());

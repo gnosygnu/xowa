@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.xmls.*;
+import gplx.ios.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.xmls.*;
 public class Xobd_rdr implements Xob_cmd {
 	public Xobd_rdr(Xob_bldr bldr, Xow_wiki wiki) {this.bldr = bldr; this.wiki = wiki;} private Xob_bldr bldr; Xow_wiki wiki;
 	public String Cmd_key() {return KEY;} public static final String KEY = "dump_mgr";

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+import gplx.core.btries.*;
 class Xop_vnt_flag_lang_bldr {
 	private Xop_vnt_flag_lang_itm[] ary; private int ary_len;
 	private int ary_count;
@@ -25,12 +26,12 @@ class Xop_vnt_flag_lang_bldr {
 		for (int i = 0; i < len; i++) {
 			byte[] lang = converter_ary[i].Owner().Key();
 			Xop_vnt_flag_lang_itm itm = new Xop_vnt_flag_lang_itm(i, lang);
-			trie.Add(lang, itm);
+			trie.Add_obj(lang, itm);
 		}
 		ary = new Xop_vnt_flag_lang_itm[len];
 		ary_len = len;
 	}
-	public ByteTrieMgr_slim Trie() {return trie;} private ByteTrieMgr_slim trie = ByteTrieMgr_slim.ci_ascii_();	// NOTE:ci.ascii:MW_const.en; lang variant name; EX:zh-hans
+	public Btrie_slim_mgr Trie() {return trie;} private Btrie_slim_mgr trie = Btrie_slim_mgr.ci_ascii_();	// NOTE:ci.ascii:MW_const.en; lang variant name; EX:zh-hans
 	public void Add(Xop_vnt_flag_lang_itm itm) {
 		int idx = itm.Idx();
 		if (ary[idx] == null) {

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.imageMap; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.html.*;
+import gplx.core.btries.*; import gplx.xowa.html.*;
 import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.parsers.logs.*;
 public class Xop_imageMap_xnde implements Xox_xnde {
 	private boolean first = true;
@@ -36,7 +36,7 @@ public class Xop_imageMap_xnde implements Xox_xnde {
 			boolean last = cur_pos == content_end;
 			if (last) nl_1_pos = cur_pos;
 			if (nl_1_pos != -1 || last) {
-				Object typeId_obj = TypeTrie.MatchAtCur(src, nl_0_pos, nl_1_pos);
+				Object typeId_obj = TypeTrie.Match_bgn(src, nl_0_pos, nl_1_pos);
 				if (typeId_obj == null) {	// flag itm					
 					if (!first && nl_1_pos - nl_0_pos > 0)
 						ctx.Msg_log().Add_itm_none(Xtn_imageMap_msg.Line_type_unknown, src, nl_0_pos, nl_1_pos);
@@ -116,13 +116,13 @@ public class Xop_imageMap_xnde implements Xox_xnde {
 		}
 	}
 	public static final byte TypeId_default = 0, TypeId_rect = 4, TypeId_circle = 3, TypeId_poly = 5, TypeId_desc = 6, TypeId_comment = 7;
-	public static ByteTrieMgr_slim TypeTrie = ByteTrieMgr_slim.ci_ascii_()	// NOTE: names are not i18n'd; // NOTE:ci.ascii:MW_const.en
-	.Add("default"	, Byte_obj_val.new_(TypeId_default))
-	.Add("rect"		, Byte_obj_val.new_(TypeId_rect))
-	.Add("circle"	, Byte_obj_val.new_(TypeId_circle))
-	.Add("poly"		, Byte_obj_val.new_(TypeId_poly))
-	.Add("desc"		, Byte_obj_val.new_(TypeId_desc))
-	.Add("#"		, Byte_obj_val.new_(TypeId_comment))
+	public static Btrie_mgr TypeTrie = Btrie_slim_mgr.ci_ascii_()	// NOTE: names are not i18n'd; // NOTE:ci.ascii:MW_const.en
+	.Add_obj("default"	, Byte_obj_val.new_(TypeId_default))
+	.Add_obj("rect"		, Byte_obj_val.new_(TypeId_rect))
+	.Add_obj("circle"	, Byte_obj_val.new_(TypeId_circle))
+	.Add_obj("poly"		, Byte_obj_val.new_(TypeId_poly))
+	.Add_obj("desc"		, Byte_obj_val.new_(TypeId_desc))
+	.Add_obj("#"		, Byte_obj_val.new_(TypeId_comment))
 	; 
 }
 class Xtn_imageMap_shape {

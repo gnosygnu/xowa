@@ -53,7 +53,7 @@ class Gallery_mgr_base_ {
 	, Packed_hover_bry		= Bry_.new_ascii_("packed-hover")
 	, Packed_overlay_bry	= Bry_.new_ascii_("packed-overlay")
 	;
-	private static final Hash_adp_bry Hash = Hash_adp_bry.ci_()
+	private static final Hash_adp_bry Hash = Hash_adp_bry.ci_ascii_()
 	.Add_bry_byte(Traditional_bry		, Traditional_tid)
 	.Add_bry_byte(Nolines_bry			, Nolines_tid)
 	.Add_bry_byte(Packed_bry			, Packed_tid)

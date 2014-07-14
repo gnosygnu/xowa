@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.wikis.*;
-import gplx.xowa.parsers.lnkis.redlinks.*;
+import gplx.core.btries.*;
+import gplx.xowa.wikis.*; import gplx.xowa.parsers.lnkis.redlinks.*;
 public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 	private Arg_bldr arg_bldr = Arg_bldr._;
 	private NumberParser number_parser = new NumberParser();
@@ -235,10 +235,10 @@ class Xop_lnki_wkr_ {
 	}
 	public static int Chk_for_tail(Xol_lang lang, byte[] src, int cur_pos, int src_len, Xop_lnki_tkn lnki) {
 		int bgn_pos = cur_pos;
-		ByteTrieMgr_slim lnki_trail = lang.Lnki_trail_mgr().Trie();
+		Btrie_slim_mgr lnki_trail = lang.Lnki_trail_mgr().Trie();
 		while (true) {	// loop b/c there can be multiple consecutive lnki_trail_chars; EX: [[A]]bcde
 			if (cur_pos == src_len) break;
-			byte[] lnki_trail_bry = (byte[])lnki_trail.Match(src[cur_pos], src, cur_pos, src_len);
+			byte[] lnki_trail_bry = (byte[])lnki_trail.Match_bgn_w_byte(src[cur_pos], src, cur_pos, src_len);
 			if (lnki_trail_bry == null) break;	// no longer a lnki_trail char; stop
 			cur_pos += lnki_trail_bry.length;	// lnki_trail char; add
 		}

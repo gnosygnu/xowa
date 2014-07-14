@@ -16,9 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.ios.*;
-import gplx.xowa.parsers.lnkis.*;
-import gplx.xowa.files.*;
+import gplx.core.flds.*; import gplx.ios.*;
+import gplx.xowa.parsers.lnkis.*; import gplx.xowa.files.*;
 class Xofo_lnki {
 	public byte[] Name() {return name;} private byte[] name;
 	public byte Lnki_type() {return lnki_type;} public Xofo_lnki Lnki_type_(byte v) {lnki_type = v; return this;} private byte lnki_type;

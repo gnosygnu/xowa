@@ -52,7 +52,6 @@ public class Hash_adp_bry extends gplx.lists.HashAdp_base implements HashAdp {
 	public static Hash_adp_bry ci_ascii_()							{return new Hash_adp_bry(Hash_adp_bry_itm_ci_ascii._);}
 	public static Hash_adp_bry ci_utf8_(Gfo_case_mgr case_mgr)		{return new Hash_adp_bry(Hash_adp_bry_itm_ci_utf8.get_or_new(case_mgr));}
 	public static Hash_adp_bry c__utf8_(boolean case_match, Gfo_case_mgr case_mgr)	{return case_match ? cs_() : ci_utf8_(case_mgr);}
-	public static Hash_adp_bry ci_()								{return new Hash_adp_bry(Hash_adp_bry_itm_ci_ascii._);}
 }
 abstract class Hash_adp_bry_itm_base {
 	public abstract Hash_adp_bry_itm_base New();
@@ -129,7 +128,7 @@ class Hash_adp_bry_itm_ci_utf8 extends Hash_adp_bry_itm_base {
 		int rv = 0;
 		for (int i = src_bgn; i < src_end; i++) {
 			byte b = src[i];
-			int b_int = b & 0xFF;		// JAVA: patch
+			int b_int = b & 0xFF;			// JAVA: patch
 			Gfo_case_itm itm = case_mgr.Get_or_null(b, src, i, src_end);
 			if (itm == null) {				// unknown itm; byte is a number, symbol, or unknown; just use the existing byte
 			}
@@ -145,26 +144,30 @@ class Hash_adp_bry_itm_ci_utf8 extends Hash_adp_bry_itm_base {
 		if (obj == null) return false;
 		Hash_adp_bry_itm_ci_utf8 trg_itm = (Hash_adp_bry_itm_ci_utf8)obj;
 		byte[] trg = trg_itm.src; int trg_bgn = trg_itm.src_bgn, trg_end = trg_itm.src_end;
-		int trg_len = trg_end - trg_bgn, src_len = src_end - src_bgn;
-		if (trg_len != src_len) return false;
-		for (int i = 0; i < trg_len; i++) {	// ASSUME: upper/lower have same width; i.e.: upper'ing a character doesn't go from a 2-width byte to a 3-width byte
-			int src_pos = src_bgn + i;
-			if (src_pos >= src_end) return false;	// ran out of src; exit; EX: src=ab; find=abc
-			byte src_byte = src[src_pos];
-			byte trg_byte = trg[i + trg_bgn];
-			Gfo_case_itm src_case_itm = case_mgr.Get_or_null(src_byte, src, i, src_len);
-			Gfo_case_itm trg_case_itm = case_mgr.Get_or_null(trg_byte, trg, i, trg_len);
-			if		(src_case_itm != null && trg_case_itm == null)	return false;
-			else if (src_case_itm == null && trg_case_itm != null)	return false;
-			else if (src_case_itm == null && trg_case_itm == null) {
-				if (src_byte != trg_byte) return false;
+		int src_c_bgn = src_bgn;
+		int trg_c_bgn = trg_bgn;
+		while	(	src_c_bgn < src_end
+				&&	trg_c_bgn < trg_end) {			// exit once one goes out of bounds
+			byte src_c = src[src_c_bgn];
+			byte trg_c = trg[trg_c_bgn];
+			int src_c_len = Utf8_.Len_of_char_by_1st_byte(src_c);
+			int trg_c_len = Utf8_.Len_of_char_by_1st_byte(trg_c);
+			int src_c_end = src_c_bgn + src_c_len;
+			int trg_c_end = trg_c_bgn + trg_c_len;
+			Gfo_case_itm src_c_itm = case_mgr.Get_or_null(src_c, src, src_c_bgn, src_c_end);
+			Gfo_case_itm trg_c_itm = case_mgr.Get_or_null(trg_c, trg, trg_c_bgn, trg_c_end);
+			if		(src_c_itm != null && trg_c_itm == null)	return false;						// src == ltr; trg != ltr; EX: a, 1
+			else if (src_c_itm == null && trg_c_itm != null)	return false;						// src != ltr; trg == ltr; EX: 1, a
+			else if (src_c_itm == null && trg_c_itm == null) {										// src != ltr; trg != ltr; EX: 1, 2; ＿, Ⓐ
+				if (!Bry_.Match(src, src_c_bgn, src_c_end, trg, trg_c_bgn, trg_c_end)) return false;// syms do not match; return false;
 			}
 			else {
-				if (!src_case_itm.Eq_lo(trg_case_itm)) return false;
-				i += src_case_itm.Len_lo() - 1;
+				if (!src_c_itm.Eq_lo(trg_c_itm)) return false;										// lower-case hash-codes don't match; return false;
 			}
+			src_c_bgn = src_c_end;
+			trg_c_bgn = trg_c_end;
 		}
-		return true;
+		return src_c_bgn == src_end && trg_c_bgn == trg_end;										// only return true if both src and trg read to end of their brys, otherwise "a","ab" will match
 	}
         public static Hash_adp_bry_itm_ci_utf8 get_or_new(Gfo_case_mgr case_mgr) {
 		switch (case_mgr.Tid()) {

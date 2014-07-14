@@ -31,7 +31,11 @@ public class Xoa_fsys_eval implements Bry_fmtr_eval_mgr {
 			default:					throw Err_mgr._.unhandled_(val);
 		}
 	}
-	Hash_adp_bry hash = Hash_adp_bry.ci_().Add_bry_byte(Bry_bin_plat_dir, Tid_bin_plat_dir).Add_bry_byte(Bry_user_temp_dir, Tid_user_temp_dir).Add_bry_byte(Bry_xowa_root_dir, Tid_xowa_root_dir).Add_bry_byte(Bry_user_cfg_dir, Tid_user_cfg_dir);
-	private static final byte[] Bry_bin_plat_dir = Bry_.new_ascii_("bin_plat_dir"), Bry_user_temp_dir = Bry_.new_ascii_("user_temp_dir"), Bry_xowa_root_dir = Bry_.new_ascii_("xowa_root_dir"), Bry_user_cfg_dir = Bry_.new_ascii_("user_cfg_dir");
-	static final byte Tid_bin_plat_dir = 0, Tid_user_temp_dir = 1, Tid_xowa_root_dir = 2, Tid_user_cfg_dir = 3;
+	private static final byte Tid_bin_plat_dir = 0, Tid_user_temp_dir = 1, Tid_xowa_root_dir = 2, Tid_user_cfg_dir = 3;
+	private static final Hash_adp_bry hash = Hash_adp_bry.ci_ascii_()
+	.Add_str_byte("bin_plat_dir", Tid_bin_plat_dir)
+	.Add_str_byte("user_temp_dir", Tid_user_temp_dir)
+	.Add_str_byte("xowa_root_dir", Tid_xowa_root_dir)
+	.Add_str_byte("user_cfg_dir", Tid_user_cfg_dir)
+	;
 }

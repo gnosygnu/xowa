@@ -26,7 +26,7 @@ import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.graphics.*;
 import org.eclipse.swt.layout.*;
 import org.eclipse.swt.widgets.*;
-public class Swt_demo_main {
+public class Swt_app_main {
 	public static void main(String[] args) {
 //		Drag_drop();
 //		List_fonts();

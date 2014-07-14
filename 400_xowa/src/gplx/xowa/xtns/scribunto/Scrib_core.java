@@ -153,8 +153,13 @@ public class Scrib_core {
 		parent_frame.Scrib_frame_tid_(Scrib_frame_.Tid_parent); current_frame.Scrib_frame_tid_(Scrib_frame_.Tid_current);
 		try {
 			Scrib_lua_mod mod = Mods_get_or_new(mod_name, mod_text);
-			KeyVal[] fnc_args = Scrib_kv_utl_.base1_obj_(mod.Fncs_get_by_key(String_.new_utf8_(fnc_name)));
-			KeyVal[] rv = engine.CallFunction(lib_mw.Mod().Fncs_get_id("executeFunction"), fnc_args);
+//				KeyVal[] fnc_args = Scrib_kv_utl_.base1_obj_(mod.Fncs_get_by_key(String_.new_utf8_(fnc_name)));
+//				KeyVal[] rv = engine.CallFunction(lib_mw.Mod().Fncs_get_id("executeFunction"), fnc_args);
+			KeyVal[] fnc_args = Scrib_kv_utl_.base1_many_(mod.Init_chunk_func(), String_.new_utf8_(fnc_name));
+			KeyVal[] rv = engine.CallFunction(lib_mw.Mod().Fncs_get_id("executeModule"), fnc_args);
+			Scrib_lua_proc proc = (Scrib_lua_proc)rv[1].Val();
+			fnc_args = Scrib_kv_utl_.base1_many_(proc);
+			rv = engine.CallFunction(lib_mw.Mod().Fncs_get_id("executeFunction"), fnc_args);
 			String rslt = Scrib_kv_utl_.Val_to_str(rv, 0);	// NOTE: expects an array with 1 scalar value
 			bfr.Add_str(rslt);
 		}
@@ -173,7 +178,7 @@ public class Scrib_core {
 			rv.LoadString(String_.new_utf8_(mod_text));
 			mods.Add(mod_name, rv);
 		}
-		rv.Execute();
+		// rv.Execute();	// TODO: move inside rv == null
 		return rv;
 	}
 	public static Scrib_core Core() {return core;} public static Scrib_core Core_new_(Xoa_app app, Xop_ctx ctx) {core = new Scrib_core(app, ctx); return core;} private static Scrib_core core;

@@ -21,7 +21,7 @@ public class Gfo_url_parser {
 	private boolean pass = true;
 	private Gfo_url url;
 	private ListAdp segs = ListAdp_.new_(), args = ListAdp_.new_();
-	private Url_encoder encoder = Url_encoder.new_html_href_mw_().Itms_raw_same_many(Byte_ascii.Underline); private Hash_adp_bry protocols = Hash_adp_bry.ci_();
+	private Url_encoder encoder = Url_encoder.new_html_href_mw_().Itms_raw_same_many(Byte_ascii.Underline); private Hash_adp_bry protocols = Hash_adp_bry.ci_ascii_();	// ASCII:url_protocol; EX:"http:", "ftp:", etc
 	public Gfo_url_parser() {
 		Init_protocols(Xoo_protocol_itm.Ary());
 		Init_protocol(Xoo_protocol_itm.Tid_file, Xoo_protocol_itm.Str_file);

@@ -19,16 +19,14 @@ package gplx.xowa.xtns.scribunto.lib; import gplx.*; import gplx.xowa.*; import 
 import org.junit.*;
 public class Scrib_lib_text_tst {
 	@Before public void init() {
-		fxt.Clear();
-		fxt.Init_page("{{#invoke:Mod_0|Func_0}}");
+		fxt.Init_scrib_proc();
 		lib = fxt.Core().Lib_text().Init();
-	}	Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt(); Scrib_lib lib;
+	}	private Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt(); private Scrib_lib lib;
 	@Test  public void Unstrip() {
-		fxt.Test_lib_proc(lib, Scrib_lib_text.Invk_unstrip, Object_.Ary("a"), "a");
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_text.Invk_unstrip, Object_.Ary("a"), "a");
 	}
 	@Test  public void GetEntityTable() {
-		byte[] rv = fxt.Test_lib_proc_rv(lib, Scrib_lib_text.Invk_getEntityTable, Object_.Ary());
-		rv = Bry_.Replace(rv, new byte[] {Byte_ascii.Semic, Byte_ascii.Semic}, new byte[] {Byte_ascii.Semic});
-		Tfds.Eq(1510, Bry_.Split(rv, Byte_ascii.Semic).length);
+		KeyVal[] actl = fxt.Test_scrib_proc_rv_as_kv_ary(lib, Scrib_lib_text.Invk_getEntityTable, Object_.Ary());
+		Tfds.Eq(1510, actl.length);	// large result; only test # of entries
 	}
 }	

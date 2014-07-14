@@ -95,5 +95,5 @@ public class Xtn_syntaxHighlight_nde implements Xox_xnde, Xop_xnde_atr_parser {
 	}
 	private static final byte[] Lang_text = Bry_.new_ascii_("text"), Style_line = Bry_.new_ascii_("-moz-user-select:none;"), Style_highlight = Bry_.new_ascii_("background-color: #FFFFCC;"), Enclose_none = Bry_.new_ascii_("none");
 	public static final byte Xatr_enclose = 2, Xatr_lang = 3, Xatr_style = 4, Xatr_line = 5, Xatr_start = 6, Xatr_highlight = 7;
-	private static final Hash_adp_bry xatrs_syntaxHighlight = Hash_adp_bry.ci_().Add_str_byte("enclose", Xatr_enclose).Add_str_byte("lang", Xatr_lang).Add_str_byte("style", Xatr_style).Add_str_byte("line", Xatr_line).Add_str_byte("start", Xatr_start).Add_str_byte("highlight", Xatr_highlight);
+	private static final Hash_adp_bry xatrs_syntaxHighlight = Hash_adp_bry.ci_ascii_().Add_str_byte("enclose", Xatr_enclose).Add_str_byte("lang", Xatr_lang).Add_str_byte("style", Xatr_style).Add_str_byte("line", Xatr_line).Add_str_byte("start", Xatr_start).Add_str_byte("highlight", Xatr_highlight);
 }

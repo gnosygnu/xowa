@@ -148,7 +148,7 @@ class Dpl_itm {
 		else
 			usr_dlg.Warn_many("", "", err_msg);
 	}
-	private static final Hash_adp_bry Known_invalid_keys = Hash_adp_bry.ci_()
+	private static final Hash_adp_bry Known_invalid_keys = Hash_adp_bry.ci_ascii_()
 	.Add_str_obj("orcer"						, Bool_obj_val.True)	// ignore as per http://en.wikinews.org/wiki/Template_talk:United_States; (Note it doesn't make a difference, as categoryadd is the default order method.)
 	.Add_str_obj("addcategorydatefirst"			, Bool_obj_val.True)
 	.Add_str_obj("mainspace"					, Bool_obj_val.True)

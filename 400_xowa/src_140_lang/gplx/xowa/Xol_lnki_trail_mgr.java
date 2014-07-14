@@ -16,17 +16,18 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.btries.*;
 public class Xol_lnki_trail_mgr implements GfoInvkAble {
 	public Xol_lnki_trail_mgr(Xol_lang lang) {}
 	public void Clear() {trie.Clear();}
 	public int Count() {return trie.Count();}
-	public ByteTrieMgr_slim Trie() {return trie;} ByteTrieMgr_slim trie = ByteTrieMgr_slim.cs_();
-	public void Add(byte[] v) {trie.Add(v, v);}
+	public Btrie_slim_mgr Trie() {return trie;} Btrie_slim_mgr trie = Btrie_slim_mgr.cs_();
+	public void Add(byte[] v) {trie.Add_obj(v, v);}
 	public void Del(byte[] v) {trie.Del(v);}
 	private void Add(String... ary) {
 		for (String itm_str : ary) {
 			byte[] itm = Bry_.new_utf8_(itm_str);
-			trie.Add(itm, itm);
+			trie.Add_obj(itm, itm);
 		}
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

@@ -123,7 +123,7 @@ public class Xop_list_wkr_uncommon_tst {
 			));
 		fxt.Init_para_n_();
 	}
-	@Test  public void Dt_dd_colon_at_eol() {		// PURPOSE: dangling ":" should not put next line in <dt>; EX.WP: Stein; b was being wrapped in <dt>b</dt>
+	@Test  public void Dt_dd_colon_at_eol() {		// PURPOSE: dangling ":" should not put next line in <dt>; PAGE:en.w:Stein; b was being wrapped in <dt>b</dt>
 		fxt.Init_para_y_();
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 			(	";a:"
@@ -154,13 +154,14 @@ public class Xop_list_wkr_uncommon_tst {
 		fxt.Init_para_n_();
 	}
 	@Test  public void Dd_should_not_print_colon() {// PURPOSE: ;a:\n should show as ";a" not ";a:". colon should still be considered as part of empty list; DATE:2013-11-07
-		fxt.Test_parse_page_all_str(";a:\nb"
+		fxt.Test_parse_page_all_str
+		( ";a:\nb"
 		,	String_.Concat_lines_nl_skip_last
-		(	"<dl>"
-		,	"  <dt>a"
-		,	"  </dt>"
-		,	"</dl>"
-		,	"b"
+		( "<dl>"
+		, "  <dt>a"
+		, "  </dt>"
+		, "</dl>"
+		, "b"
 		));		
 	}
 	@Test  public void Dt_dd_colon_in_lnki() {	// PURPOSE: "; [[Portal:a]]" should not split lnki; EX.WP: Wikipedia:WikiProject Military history/Operation Majestic Titan; "; [[Wikipedia:WikiProject Military history/Operation Majestic Titan/Phase I|Phase I]]: a b"
@@ -346,6 +347,19 @@ public class Xop_list_wkr_uncommon_tst {
 		, "</ul>b"
 		, "</li>"
 		, "</ul>"
+		));		
+	}
+	@Test  public void Colon_causes_dd() { // PURPOSE: colon was mistakenly being ignored due to proximity to "\n;"; PAGE:de.w:Schmach_von_Tirana#Kuriosit.C3.A4t:_EM-Qualifikationsspiel_vom_20._November_1983 DATE:2014-07-11
+		fxt.Test_parse_page_all_str
+		( String_.Concat_lines_nl_skip_last
+		( "a:b"
+		, ";c"
+		), String_.Concat_lines_nl_skip_last
+		( "a:b"
+		, "<dl>"
+		, "  <dt>c"
+		, "  </dt>"
+		, "</dl>"
 		));		
 	}
 }

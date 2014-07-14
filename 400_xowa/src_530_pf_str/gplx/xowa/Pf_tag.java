@@ -28,7 +28,7 @@ public class Pf_tag extends Pf_func_base {
 		Bry_bfr tmp = app.Utl_bry_bfr_mkr().Get_b512();			
 		try {
 			int tag_idx = ctx.Cur_page().Ref_mgr().Tag__next_id();
-			Xop_xnde_tag tag = (Xop_xnde_tag)app.Xnde_tag_regy().XndeNames(ctx.Xnde_names_tid()).MatchAtCurExact(tag_name, 0, tag_name.length);
+			Xop_xnde_tag tag = (Xop_xnde_tag)app.Xnde_tag_regy().XndeNames(ctx.Xnde_names_tid()).Match_exact(tag_name, 0, tag_name.length);
 			boolean tag_is_ref = tag != null && tag.Id() == Xop_xnde_tag_.Tid_ref;
 			if (tag_is_ref)	// <ref>; add <xtag_bgn> to handle nested refs; PAGE:en.w:Battle_of_Midway; DATE:2014-06-27
 				tmp.Add(Xtag_bgn_lhs).Add_int_pad_bgn(Byte_ascii.Num_0, 10, tag_idx).Add(Xtag_rhs);				

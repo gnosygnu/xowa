@@ -16,8 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.btries.*;
 public class Xop_xnde_tag_regy {
-	public ByteTrieMgr_slim XndeNames(int i) {
+	public Btrie_slim_mgr XndeNames(int i) {
 		if (nild) {Init(); nild = false;}
 		switch (i) {
 			case Xop_parser_.Parse_tid_tmpl:		return tagRegy_tmpl;
@@ -39,13 +40,13 @@ public class Xop_xnde_tag_regy {
 			rv.Add(itm);
 		return (Xop_xnde_tag[])rv.XtoAry(Xop_xnde_tag.class);
 	}
-	private void Init_reg(ByteTrieMgr_slim tagRegy, Xop_xnde_tag... ary) {
+	private void Init_reg(Btrie_slim_mgr tagRegy, Xop_xnde_tag... ary) {
 		for (Xop_xnde_tag tag : ary)
-			tagRegy.Add(tag.Name_bry(), tag);
+			tagRegy.Add_obj(tag.Name_bry(), tag);
 	}
-	private ByteTrieMgr_slim
-	  tagRegy_wiki_main = ByteTrieMgr_slim.ci_ascii_()	// NOTE:ci.ascii:MW_const.en; listed XML node names are en
-	, tagRegy_wiki_tmpl = ByteTrieMgr_slim.ci_ascii_()
-	, tagRegy_tmpl		= ByteTrieMgr_slim.ci_ascii_()
+	private Btrie_slim_mgr
+	  tagRegy_wiki_main = Btrie_slim_mgr.ci_ascii_()	// NOTE:ci.ascii:MW_const.en; listed XML node names are en
+	, tagRegy_wiki_tmpl = Btrie_slim_mgr.ci_ascii_()
+	, tagRegy_tmpl		= Btrie_slim_mgr.ci_ascii_()
 	;
 }

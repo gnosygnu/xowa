@@ -76,8 +76,7 @@ class Xog_history_stack_fxt {
 		Xoa_page page = Xoa_page.test_(wiki, ttl);
 		byte[] url_bry = ttl_bry;
 		if (arg_str != null) url_bry = Bry_.Add(url_bry, Bry_.new_utf8_(arg_str));
-		Xoa_url url = new Xoa_url();
-		url_parser.Parse(url, url_bry);
+		Xoa_url url = url_parser.Parse(url_bry);
 		page.Url_(url);  // set url b/c history_mgr.Add uses url
 		stack.Add(page);
 		return this;

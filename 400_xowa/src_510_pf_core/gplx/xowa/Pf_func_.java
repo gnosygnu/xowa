@@ -183,6 +183,8 @@ public class Pf_func_ {
 	,	Xol_kwd_grp_.Id_subst
 	,	Xol_kwd_grp_.Id_safesubst
 	,	Xol_kwd_grp_.Id_raw
+	,	Xol_kwd_grp_.Id_msg
+	,	Xol_kwd_grp_.Id_msgnw
 	,	Xol_kwd_grp_.Id_xowa_dbg
 	,	Xol_kwd_grp_.Id_xtn_geodata_coordinates
 	,	Xol_kwd_grp_.Id_url_canonicalurl
@@ -333,6 +335,8 @@ public class Pf_func_ {
 
 			case Xol_kwd_grp_.Id_subst:
 			case Xol_kwd_grp_.Id_safesubst:
+			case Xol_kwd_grp_.Id_msg:
+			case Xol_kwd_grp_.Id_msgnw:
 			case Xol_kwd_grp_.Id_raw:							return new Xot_defn_subst((byte)id, Bry_.Empty);
 
 			case Xol_kwd_grp_.Id_xowa_dbg:						return new Xop_xowa_dbg();

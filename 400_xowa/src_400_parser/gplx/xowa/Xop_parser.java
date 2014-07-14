@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.btries.*;
 public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-write state
 	private Xow_wiki wiki;
 	public Xop_parser(Xow_wiki wiki, Xop_lxr_mgr tmpl_lxr_mgr, Xop_lxr_mgr wtxt_lxr_mgr) {
@@ -25,8 +26,8 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 	}
 	public Xop_lxr_mgr Tmpl_lxr_mgr() {return tmpl_lxr_mgr;} private Xop_lxr_mgr tmpl_lxr_mgr;
 	public Xop_lxr_mgr Wtxt_lxr_mgr() {return wtxt_lxr_mgr;} private Xop_lxr_mgr wtxt_lxr_mgr;
-	public ByteTrieMgr_fast Tmpl_trie() {return tmpl_trie;} private ByteTrieMgr_fast tmpl_trie;
-	public ByteTrieMgr_fast Wtxt_trie() {return wtxt_trie;} private ByteTrieMgr_fast wtxt_trie;
+	public Btrie_fast_mgr Tmpl_trie() {return tmpl_trie;} private Btrie_fast_mgr tmpl_trie;
+	public Btrie_fast_mgr Wtxt_trie() {return wtxt_trie;} private Btrie_fast_mgr wtxt_trie;
 	public void Init_by_wiki(Xow_wiki wiki) {
 		tmpl_lxr_mgr.Init_by_wiki(wiki);
 		wtxt_lxr_mgr.Init_by_wiki(wiki);
@@ -105,7 +106,7 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 		root.Root_src_(wtxt);	// always set latest src; needed for Parse_all wherein src will first be raw and then parsed tmpl
 		Parse(root, ctx, tkn_mkr, wtxt, Xop_parser_.Parse_tid_page_wiki, wtxt_trie, doc_bgn_pos);
 	}
-	private void Parse(Xop_root_tkn root, Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, byte[] src, byte parse_type, ByteTrieMgr_fast trie, int doc_bgn_pos) {
+	private void Parse(Xop_root_tkn root, Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, byte[] src, byte parse_type, Btrie_fast_mgr trie, int doc_bgn_pos) {
 		int len = src.length; if (len == 0) return;	// nothing to parse;
 		byte parse_tid_old = ctx.Parse_tid();	// NOTE: must store parse_tid b/c ctx can be reused by other classes
 		ctx.Parse_tid_(parse_type);
@@ -114,11 +115,11 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 		ctx.Page_end(root, src, len);
 		ctx.Parse_tid_(parse_tid_old);
 	}
-	public int Parse_to_src_end(Xop_root_tkn root, Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, byte[] src, ByteTrieMgr_fast trie, int pos, int len) {
+	public int Parse_to_src_end(Xop_root_tkn root, Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, byte[] src, Btrie_fast_mgr trie, int pos, int len) {
 		byte b = pos == -1 ? Byte_ascii.NewLine : src[pos];	// simulate newLine at bgn of src; needed for lxrs which rely on \n (EX: "=a=")
 		int txt_bgn = pos == -1 ? 0 : pos; Xop_tkn_itm txt_tkn = null;
 		while (true) {
-			Object o = trie.Match(b, src, pos, len);
+			Object o = trie.Match_bgn_w_byte(b, src, pos, len);
 			if (o == null)				// no lxr found; char is txt; increment pos
 				pos++;
 			else {						// lxr found
@@ -135,13 +136,13 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 		if (txt_bgn != pos) txt_tkn = Txt_add(ctx, tkn_mkr, root, txt_tkn, txt_bgn, pos);
 		return pos;
 	}
-	public int Parse_to_stack_end(Xop_root_tkn root, Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, byte[] src, int src_len, ByteTrieMgr_fast trie, int pos, int end) {
+	public int Parse_to_stack_end(Xop_root_tkn root, Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, byte[] src, int src_len, Btrie_fast_mgr trie, int pos, int end) {
 		byte b = pos == -1 ? Byte_ascii.NewLine : src[pos];	// simulate newLine at bgn of src; needed for lxrs which rely on \n (EX: "=a=")
 		int txt_bgn = pos == -1 ? 0 : pos; Xop_tkn_itm txt_tkn = null;
 		Xop_lxr lxr = null;
 		while (true) {
 			lxr = null;
-			Object o = trie.Match(b, src, pos, src_len);
+			Object o = trie.Match_bgn_w_byte(b, src, pos, src_len);
 			if (o == null)				// no lxr found; char is txt; increment pos
 				pos++;
 			else {						// lxr found

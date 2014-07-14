@@ -48,7 +48,7 @@ public class Xof_img_wkr_api_size_base_wmf extends Xof_img_wkr_api_size_base {
 		}
 		return true;
 	}
-	private static Int_2_ref parse_xml_rng = new Int_2_ref(); static Xoa_url parse_xml_url = new Xoa_url();
+	private static Int_2_ref parse_xml_rng = new Int_2_ref(); static Xoa_url parse_xml_url = Xoa_url.blank_();
 	private static Gfo_url_parser url_parser = new Gfo_url_parser(); static Gfo_url url = new Gfo_url();
 	private static boolean Parse_xml_val(Int_2_ref rv, Gfo_usr_dlg usr_dlg, byte[] xml, int xml_len, int pos, byte[] key) {
 		int bgn = 0, end = 0;

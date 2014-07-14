@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.html; import gplx.*;
+import gplx.core.btries.*;
 public class Html_utl {
 	public static byte[] Escape_for_atr_val_as_bry(Bry_bfr tmp_bfr, byte quote_byte, String s) {
 		if (s == null) return null;
@@ -92,7 +93,7 @@ public class Html_utl {
 			return dirty ? bfr.XtoAryAndClear() : bry;
 	}
 
-	private static final ByteTrieMgr_slim unescape_trie = ByteTrieMgr_slim.ci_ascii_()
+	private static final Btrie_slim_mgr unescape_trie = Btrie_slim_mgr.ci_ascii_()
 	.Add_bry_bval(Html_entity_.Lt_bry		, Byte_ascii.Lt)
 	.Add_bry_bval(Html_entity_.Gt_bry		, Byte_ascii.Gt)
 	.Add_bry_bval(Html_entity_.Amp_bry		, Byte_ascii.Amp)
@@ -111,7 +112,7 @@ public class Html_utl {
 		int pos = bgn;
 		while (pos < end) {
 			byte b = bry[pos];
-			Object o = unescape_trie.Match(b, bry, pos, end);
+			Object o = unescape_trie.Match_bgn_w_byte(b, bry, pos, end);
 			if (o == null) {
 				if (dirty || write_to_bfr)
 					bfr.Add_byte(b);

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
+import gplx.core.btries.*;
 class Xosrh_scanner {
 	ListAdp tkns = ListAdp_.new_(); byte[] src; int src_len; int pos; int txt_bgn;
 	public Xosrh_qry_tkn[] Scan(byte[] src) {			
@@ -23,7 +24,7 @@ class Xosrh_scanner {
 		tkns.Clear(); pos = 0; txt_bgn = -1; 
 		while (pos < src_len) {
 			byte cur_b = src[pos];
-			Object cur_obj = trie.Match(cur_b, src, pos, src_len);
+			Object cur_obj = trie.Match_bgn_w_byte(cur_b, src, pos, src_len);
 			if (cur_obj == null) {					// text character
 				if (txt_bgn == -1) txt_bgn = pos;	// 1st character not set; set it
 				++pos;
@@ -76,7 +77,7 @@ class Xosrh_scanner {
 		if (txt_bgn == -1) {		// no pending word;
 			if (cur_tid == Xosrh_qry_tkn.Tid_not) return false;	// NOT is only operator if no pending tkn; EX: -abc -> NOT abc; a-b -> a-b
 			byte nxt_b = pos_end < src_len ? src[pos_end] : Byte_ascii.Nil;
-			Object nxt_obj = trie.Match(nxt_b, src, pos_end, src_len);
+			Object nxt_obj = trie.Match_bgn_w_byte(nxt_b, src, pos_end, src_len);
 			if (nxt_obj == null)	// next tkn is text; join must be word
 				join_is_word = true;
 			else {					// next tkn is tkn
@@ -129,7 +130,7 @@ class Xosrh_scanner {
 	OrderedHash tmp_list = OrderedHash_.new_(); Bry_bfr tmp_bfr = Bry_bfr.new_();
 	Xosrh_qry_tkn new_tkn_(byte tid, int val_bgn, int val_end) {return Xosrh_qry_tkn.new_pos_(tid, val_bgn, val_end);}
 	private static byte[] Bry_and = Bry_.new_ascii_("AND");
-	private static final ByteTrieMgr_slim trie = ByteTrieMgr_slim.ci_ascii_()// NOTE:ci.ascii:OR / AND only
+	private static final Btrie_slim_mgr trie = Btrie_slim_mgr.ci_ascii_()// NOTE:ci.ascii:OR / AND only
 	.Add_str_byte(" ", Xosrh_qry_tkn.Tid_space)
 	.Add_str_byte("\"", Xosrh_qry_tkn.Tid_quote)
 	.Add_str_byte("-", Xosrh_qry_tkn.Tid_not)

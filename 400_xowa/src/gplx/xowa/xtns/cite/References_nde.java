@@ -36,7 +36,7 @@ public class References_nde implements Xox_xnde, Xop_xnde_atr_parser {
 		Ref_itm_mgr ref_mgr = ctx.Cur_page().Ref_mgr();
 		if (ref_mgr.References__recursing()) return;	// skip nested <references> else refs will be lost; EX:"<references><references/></references>"; PAGE:en.w:Hwair; DATE:2014-06-27
 		ctx.Para().Process_block__bgn_n__end_y(Xop_xnde_tag_.Tag_div);	// xnde generates <block_node>; <references> -> <ol>; close any blocks; PAGE:fr.w:Heidi_(roman); DATE:2014-02-17
-		Xop_xatr_itm.Xatr_parse(wiki.App(), this, wiki.Lang().Xatrs_references(), wiki, src, xnde);
+		Xop_xatr_itm.Xatr_parse(wiki.App(), this, xatrs_hash, wiki, src, xnde);
 		if (xnde.CloseMode() == Xop_xnde_tkn.CloseMode_pair) {	// "<references>", "</references>"; parse anything in between but only to pick up <ref> tags; discard everything else; DATE:2014-06-27
 			int itm_bgn = xnde.Tag_open_end(), itm_end = xnde.Tag_close_bgn();
 			Xop_ctx references_ctx = Xop_ctx.new_sub_(wiki).References_group_(group);
@@ -56,4 +56,6 @@ public class References_nde implements Xox_xnde, Xop_xnde_atr_parser {
 	}
 	public static final byte Xatr_id_group = 0;
 	public static boolean Enabled = true;
+	private static final Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_ascii_()
+	.Add_str_obj("group", Byte_obj_val.new_(References_nde.Xatr_id_group));
 }

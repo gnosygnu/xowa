@@ -16,11 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.xowa.net.*;
+import gplx.core.btries.*; import gplx.xowa.net.*;
 public class Xop_lnke_lxr implements Xop_lxr {
 	Xop_lnke_lxr(byte lnke_typ, byte[] protocol, byte tid) {this.lnke_typ = lnke_typ; this.protocol = protocol; this.tid = tid;} private byte lnke_typ; byte[] protocol; byte tid;
 	public byte Lxr_tid() {return Xop_lxr_.Tid_lnke_bgn;}
-	public void Init_by_wiki(Xow_wiki wiki, ByteTrieMgr_fast core_trie) {
+	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr core_trie) {
 		Xoo_protocol_itm[] ary = Xoo_protocol_itm.Ary();
 		int ary_len = ary.length;
 		for (int i = 0; i < ary_len; i++) {
@@ -31,8 +31,8 @@ public class Xop_lnke_lxr implements Xop_lxr {
 		core_trie.Add(Bry_relative_2, new Xop_lnke_lxr(Xop_lnke_tkn.Lnke_typ_brack, Xoa_consts.Url_relative_prefix, Xoo_protocol_itm.Tid_relative_2));
 		Ctor_lxr_add(core_trie, Bry_.new_ascii_("xowa-cmd"), Xoo_protocol_itm.Tid_xowa);
 	}	private static final byte[] Bry_relative_1 = Bry_.new_ascii_("[//"), Bry_relative_2 = Bry_.new_ascii_("[[//");
-	public void Init_by_lang(Xol_lang lang, ByteTrieMgr_fast core_trie) {}
-	private void Ctor_lxr_add(ByteTrieMgr_fast core_trie, byte[] protocol_bry, byte tid) {
+	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
+	private void Ctor_lxr_add(Btrie_fast_mgr core_trie, byte[] protocol_bry, byte tid) {
 		core_trie.Add(protocol_bry										, new Xop_lnke_lxr(Xop_lnke_tkn.Lnke_typ_text, protocol_bry, tid));
 		core_trie.Add(Bry_.Add(Byte_ascii.Brack_bgn, protocol_bry)	, new Xop_lnke_lxr(Xop_lnke_tkn.Lnke_typ_brack, protocol_bry, tid));
 	}

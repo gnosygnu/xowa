@@ -71,7 +71,7 @@ public class Xof_fsdb_mgr_ {
 				Js_img_mgr.Update_img(page, itm);
 			}
 			else {
-				usr_dlg.Warn_many("", "", "file not found: page=~{0} file=~{1} width=~{2}", page.Url().X_to_full_str_safe(), String_.new_utf8_(itm.Lnki_ttl()), itm.Lnki_w());
+				usr_dlg.Warn_many("", "", "file not found: page=~{0} file=~{1} width=~{2}", page.Url().Xto_full_str_safe(), String_.new_utf8_(itm.Lnki_ttl()), itm.Lnki_w());
 				itm.Rslt_bin_(Xof_bin_wkr_.Tid_not_found);
 				fsdb_mgr.Reg_insert(itm, orig_wiki, Xof_wiki_orig_wkr_.Tid_missing_bin);
 //					gplx.xowa.files.gui.Js_img_mgr.Update_img_missing(usr_dlg, itm.Html_uid());

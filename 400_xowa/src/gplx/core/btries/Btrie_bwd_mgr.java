@@ -15,20 +15,20 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx;
-public class ByteTrieMgr_bwd_slim {
+package gplx.core.btries; import gplx.*; import gplx.core.*;
+public class Btrie_bwd_mgr {
 	public int Match_pos() {return match_pos;} private int match_pos;
-	public Object MatchAtCurExact(byte[] src, int bgn_pos, int end_pos) {
+	public Object Match_exact(byte[] src, int bgn_pos, int end_pos) {
 		Object rv = Match(src[bgn_pos], src, bgn_pos, end_pos);
 		return rv == null ? null : match_pos - bgn_pos == end_pos - bgn_pos ? rv : null;
 	}
-	public Object MatchAtCur(byte[] src, int bgn_pos, int end_pos) {return Match(src[bgn_pos], src, bgn_pos, end_pos);}
+	public Object Match_bgn(byte[] src, int bgn_pos, int end_pos) {return Match(src[bgn_pos], src, bgn_pos, end_pos);}
 	public Object Match(byte b, byte[] src, int bgn_pos, int end_pos) {
 		// NOTE: bgn, end follows same semantics as fwd where bgn >= & end < except reversed: bgn <= & end >; EX: "abcde" should pass 5, -1
 		Object rv = null; int cur_pos = match_pos = bgn_pos;
-		ByteTrieItm_slim cur = root;
+		Btrie_slim_itm cur = root;
 		while (true) {
-			ByteTrieItm_slim nxt = cur.Ary_find(b); if (nxt == null) return rv;	// nxt does not hav b; return rv;
+			Btrie_slim_itm nxt = cur.Ary_find(b); if (nxt == null) return rv;	// nxt does not hav b; return rv;
 			--cur_pos;
 			if (nxt.Ary_is_empty()) {match_pos = cur_pos; return nxt.Val();}	// nxt is leaf; return nxt.Val() (which should be non-null)
 			Object nxt_val = nxt.Val();
@@ -38,8 +38,8 @@ public class ByteTrieMgr_bwd_slim {
 			cur = nxt;
 		}
 	}
-	public ByteTrieMgr_bwd_slim Add_str_byte(String key, byte val) {return Add(Bry_.new_utf8_(key), Byte_obj_val.new_(val));}
-	public ByteTrieMgr_bwd_slim Add_byteVal_strAry(byte val, String... ary) {
+	public Btrie_bwd_mgr Add_str_byte(String key, byte val) {return Add(Bry_.new_utf8_(key), Byte_obj_val.new_(val));}
+	public Btrie_bwd_mgr Add_byteVal_strAry(byte val, String... ary) {
 		int ary_len = ary.length;
 		Byte_obj_val byteVal = Byte_obj_val.new_(val);
 		for (int i = 0; i < ary_len; i++) {
@@ -48,15 +48,15 @@ public class ByteTrieMgr_bwd_slim {
 		}
 		return this;
 	}
-	public ByteTrieMgr_bwd_slim Add(String key, Object val) {return Add(Bry_.new_utf8_(key), val);}
-	public ByteTrieMgr_bwd_slim Add(byte[] key, Object val) {
+	public Btrie_bwd_mgr Add(String key, Object val) {return Add(Bry_.new_utf8_(key), val);}
+	public Btrie_bwd_mgr Add(byte[] key, Object val) {
 		if (val == null) throw Err_.new_("null objects cannot be registered").Add("key", String_.new_utf8_(key));
 		int key_len = key.length;
-		ByteTrieItm_slim cur = root;
+		Btrie_slim_itm cur = root;
 		for (int i = key_len - 1; i > -1; i--) {
 			byte b = key[i];
 			if (root.Case_any() && (b > 64 && b < 91)) b += 32;
-			ByteTrieItm_slim nxt = cur.Ary_find(b);
+			Btrie_slim_itm nxt = cur.Ary_find(b);
 			if (nxt == null)
 				nxt = cur.Ary_add(b, null);
 			if (i == 0)
@@ -69,7 +69,7 @@ public class ByteTrieMgr_bwd_slim {
 	public int Count() {return count;} private int count;
 	public void Del(byte[] key) {
 		int key_len = key.length;
-		ByteTrieItm_slim cur = root;
+		Btrie_slim_itm cur = root;
 		for (int i = 0; i < key_len; i++) {
 			byte b = key[i];
 			cur = cur.Ary_find(b);
@@ -79,9 +79,9 @@ public class ByteTrieMgr_bwd_slim {
 		count--; // FUTURE: do not decrement if not found
 	}
 	public void Clear() {root.Clear(); count = 0;}
-	public static ByteTrieMgr_bwd_slim cs_() {return new ByteTrieMgr_bwd_slim(false);}
-	public static ByteTrieMgr_bwd_slim ci_() {return new ByteTrieMgr_bwd_slim(true);}
-	public ByteTrieMgr_bwd_slim(boolean caseAny) {
-		root = new ByteTrieItm_slim(Byte_.Zero, null, caseAny);
-	}	private ByteTrieItm_slim root;
+	public static Btrie_bwd_mgr cs_() {return new Btrie_bwd_mgr(false);}
+	public static Btrie_bwd_mgr ci_() {return new Btrie_bwd_mgr(true);}
+	public Btrie_bwd_mgr(boolean caseAny) {
+		root = new Btrie_slim_itm(Byte_.Zero, null, caseAny);
+	}	private Btrie_slim_itm root;
 }

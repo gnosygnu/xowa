@@ -91,9 +91,8 @@ public class Xog_url_wkr {
 		return Rslt_handled;
 	}
 	private Xoa_url Exec_url_page(Xoa_app app, Xoa_page page, Xog_win_itm win, byte[] href_bry) {	// EX: "Page"; "/wiki/Page"; // rewritten; DATE:2014-01-19
-		Xoa_url rv = new Xoa_url();
 		Xow_wiki wiki = page.Wiki();
-		app.Url_parser().Parse(rv, href_bry);						// needed for query_args
+		Xoa_url rv = app.Url_parser().Parse(href_bry);	// needed for query_args
 		byte[] anchor_bry = href.Anchor();
 		byte[] page_bry = rv.Page_bry();
 		byte[][] segs_ary = rv.Segs_ary();

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.btries.*;
 class Xoi_css_offline_itm {
 	public Xoi_css_offline_itm(byte[] http_url) {this.http_url = http_url;}
 	public byte[] Http_url() {return http_url;} private byte[] http_url;
@@ -63,7 +64,7 @@ class Xoi_css_offline_mgr {
 		while (true) {
 			boolean last = pos == src_len;
 			byte b = last ? Byte_ascii.NewLine : src[pos];
-			Object o = tkns_trie.Match(b, src, pos, src_len);
+			Object o = tkns_trie.Match_bgn_w_byte(b, src, pos, src_len);
 			if (o == null) {
 				bfr.Add_byte(b);
 				++pos;
@@ -214,7 +215,7 @@ class Xoi_css_offline_mgr {
 
 	public static final byte[] Tkn_url_bry = Bry_.new_ascii_(" url(");
 	private static final byte Tkn_import = 1, Tkn_url = 2;
-	private static final ByteTrieMgr_slim tkns_trie = ByteTrieMgr_slim.ci_ascii_()
+	private static final Btrie_slim_mgr tkns_trie = Btrie_slim_mgr.ci_ascii_()
 	.Add_str_byte("@import"		, Tkn_import)
 	.Add_bry_bval(Tkn_url_bry	, Tkn_url)
 	;

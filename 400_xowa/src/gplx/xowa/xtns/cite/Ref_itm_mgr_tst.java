@@ -26,8 +26,8 @@ public class Ref_itm_mgr_tst {
 	@Test  public void Follow()	{fxt.run_Add("key_1").run_Add_follow("key_1").tst(fxt.itm_("key_1", 0, 0).Related_(fxt.itm_uid_(1).Idx_minor_follow_()));}
 }
 class Ref_itm_mgr_fxt {
-	Ref_itm_mgr ref_mgr = new Ref_itm_mgr();
-	Tst_mgr tst_mgr = new Tst_mgr();
+	private Ref_itm_mgr ref_mgr = new Ref_itm_mgr();
+	private Tst_mgr tst_mgr = new Tst_mgr();
 	public Xtn_ref_nde_chkr itm_uid_(int uid)					{return itm_(null, -1, uid);}
 	public Xtn_ref_nde_chkr itm_(String key, int idx)			{return itm_(key, idx, -1);}
 	public Xtn_ref_nde_chkr itm_(String key, int idx, int uid)	{return new Xtn_ref_nde_chkr().Key_(key).Idx_major_(idx).Uid_(uid);}

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.langs.numbers.*;
+import gplx.core.btries.*; import gplx.xowa.langs.numbers.*;
 public class Pf_site_pagesincategory extends Pf_func_base {
 	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bb) {
 		byte[] val_dat_ary = Eval_argx(ctx, src, caller, self); if (Bry_.Len_eq_0(val_dat_ary)) {bb.Add_int_fixed(0, 1); return;}
@@ -31,14 +31,14 @@ public class Pf_site_pagesincategory extends Pf_func_base {
 		boolean fmt_num = true;
 		if (self_args_len == 1) {
 			byte[] arg1 = Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, self_args_len, 0);
-			if (arg1 != Bry_.Empty && trie.MatchAtCurExact(arg1, 0, arg1.length) != null)
+			if (arg1 != Bry_.Empty && trie.Match_exact(arg1, 0, arg1.length) != null)
 				fmt_num = false;
 		}
 		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b128().Mkr_rls();
 		byte[] ctg_len_bry = tmp_bfr.Add_int_variable(ctg_len).XtoAryAndClear();			
 		byte[] rslt = fmt_num ? lang.Num_mgr().Format_num(ctg_len_bry) : lang.Num_mgr().Raw(ctg_len_bry);
 		bb.Add(rslt);
-	}	private ByteTrieMgr_slim trie;
+	}	private Btrie_slim_mgr trie;
 	@Override public int Id() {return Xol_kwd_grp_.Id_site_pagesincategory;}
 	@Override public Pf_func New(int id, byte[] name) {return new Pf_site_pagesincategory().Name_(name);}
 	public static final Pf_site_pagesincategory _ = new Pf_site_pagesincategory(); Pf_site_pagesincategory() {}

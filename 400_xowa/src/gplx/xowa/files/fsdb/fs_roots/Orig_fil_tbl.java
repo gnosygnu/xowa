@@ -24,7 +24,7 @@ interface Orig_fil_tbl extends RlsAble {
 }
 class Orig_fil_tbl_mem implements Orig_fil_tbl {
 	private Hash_adp_bry hash;
-	public void Ctor(Db_provider provider, boolean created) {hash = Hash_adp_bry.ci_();}
+	public void Ctor(Db_provider provider, boolean created) {hash = Hash_adp_bry.cs_();}	// NOTE: cs_ b/c ttl-based
 	public Orig_fil_itm Select_itm(byte[] ttl) {return (Orig_fil_itm)hash.Get_by_bry(ttl);}
 	public void Insert(Orig_fil_itm fil_itm) {hash.Add(fil_itm.Fil_name(), fil_itm);}
 	public void Rls() {}

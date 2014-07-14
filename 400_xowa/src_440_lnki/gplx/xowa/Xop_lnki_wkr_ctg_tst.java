@@ -63,8 +63,20 @@ public class Xop_lnki_wkr_ctg_tst {
 			, "</ul>"
 			));
 	}
+	@Test   public void Li_w_lnke() {	// PURPOSE: [[Category]] was being absorbed into lnke; PAGE:de.w:ISO/IEC/IEEE_29119_Software_Testing DATE:2014-07-11
+		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		( "* http://a.org"
+		, "[[Category:B]]" // category should not show below
+		), String_.Concat_lines_nl_skip_last
+		( "<ul>"
+		, "  <li> <a href=\"http://a.org\" class=\"external text\" rel=\"nofollow\">http://a.org</a>"
+		, "  </li>"
+		, "</ul>"
+		, ""
+		));
+	}
 	@Test   public void Merge_li() {	// PURPOSE: trim ws preceding [[Category:; de.d:plant; DATE:2014-03-27
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 			( "*a"
 			, ""
 			, " [[Category:B]] c" 
@@ -96,7 +108,7 @@ public class Xop_lnki_wkr_ctg_tst {
 		));
 	}
 	@Test   public void Hdr_w_nl() {	// PURPOSE: hdr code broken by Category; DATE:2014-04-17
-		fxt.Test_parse_page_wiki_str("==a==\n[[Category:C]]"
+		fxt.Test_parse_page_all_str("==a==\n[[Category:C]]"
 		, String_.Concat_lines_nl_skip_last
 		(	"<h2>a</h2>"
 		,	""

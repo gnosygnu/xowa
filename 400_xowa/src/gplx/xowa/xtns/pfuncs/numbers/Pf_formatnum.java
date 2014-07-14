@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.numbers; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.intl.*; import gplx.xowa.langs.numbers.*;
+import gplx.core.btries.*; import gplx.intl.*; import gplx.xowa.langs.numbers.*;
 public class Pf_formatnum extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_str_formatnum;}
 	@Override public Pf_func New(int id, byte[] name) {return new Pf_formatnum().Name_(name);}
@@ -29,13 +29,13 @@ public class Pf_formatnum extends Pf_func_base {
 		bfr.Add(Format_num(lang, argx, arg1));
 	}
 	public static byte[] Format_num(Xol_lang lang, byte[] num, byte[] arg1) {
-		ByteTrieMgr_slim trie_raw = lang.Kwd_mgr().Trie_raw();
-		ByteTrieMgr_slim trie_nosep = lang.Kwd_mgr().Trie_nosep();
+		Btrie_slim_mgr trie_raw = lang.Kwd_mgr().Trie_raw();
+		Btrie_slim_mgr trie_nosep = lang.Kwd_mgr().Trie_nosep();
 		int arg1_len = arg1.length;
 		if (Bry_.Len_gt_0(arg1)) {		// argument specified
-			if		(trie_raw	.MatchAtCurExact(arg1, 0, arg1_len) != null)
+			if		(trie_raw	.Match_exact(arg1, 0, arg1_len) != null)
 				return lang.Num_mgr().Raw(num);
-			else if (trie_nosep	.MatchAtCurExact(arg1, 0, arg1_len) != null)
+			else if (trie_nosep	.Match_exact(arg1, 0, arg1_len) != null)
 				return lang.Num_mgr().Format_num_no_separators(num);
 		}
 		return lang.Num_mgr().Format_num(num);

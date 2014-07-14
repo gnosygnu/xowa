@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="src_020_byte"/>
 	<classpathentry kind="src" path="src_040_io"/>
 	<classpathentry kind="src" path="src_060_utl"/>
 	<classpathentry kind="src" path="src_100_app"/>

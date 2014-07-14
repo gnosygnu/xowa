@@ -16,11 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.urls.url_macros; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*; import gplx.xowa.gui.urls.*;
+import gplx.core.btries.*;
 public class Xog_url_macro_grp implements GfoInvkAble {
-	public ByteTrieMgr_slim Trie() {return trie;} private ByteTrieMgr_slim trie = ByteTrieMgr_slim.cs_();
+	public Btrie_slim_mgr Trie() {return trie;} private Btrie_slim_mgr trie = Btrie_slim_mgr.cs_();
 	public void Del(byte[] abrv) {trie.Del(abrv);}
 	public void Set(String abrv, String fmt) {Set(Bry_.new_utf8_(abrv), Bry_.new_utf8_(fmt));}
-	public void Set(byte[] abrv, byte[] fmt) {trie.Add(abrv, new Xog_url_macro_itm(abrv, fmt));}
+	public void Set(byte[] abrv, byte[] fmt) {trie.Add_obj(abrv, new Xog_url_macro_itm(abrv, fmt));}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_clear))						trie.Clear();
 		else if	(ctx.Match(k, Invk_set))						Set(m.ReadBry("abrv"), m.ReadBry("fmt"));

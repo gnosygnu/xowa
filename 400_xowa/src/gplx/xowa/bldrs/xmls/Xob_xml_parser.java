@@ -16,8 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.xmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+import gplx.core.btries.*; import gplx.ios.*;
 public class Xob_xml_parser {
-	ByteTrieMgr_fast trie = Xob_xml_parser_.trie_(); Bry_bfr data_bfr = Bry_bfr.new_(); DateAdp_parser date_parser = DateAdp_parser.new_();
+	Btrie_fast_mgr trie = Xob_xml_parser_.trie_(); Bry_bfr data_bfr = Bry_bfr.new_(); DateAdp_parser date_parser = DateAdp_parser.new_();
 	public Xob_xml_parser Tag_len_max_(int v) {tag_len_max = v; return this;} private int tag_len_max = 255; // max size of any (a) xml tag, (b) int or (c) date; everything else goes into a data_bfr
 	public Xob_xml_parser Data_bfr_len_(int v) {data_bfr.Resize(v); return this;} // PERF: resize data_bfr once to large size, rather than grow incremently to it
 	public Xob_xml_parser Trie_tab_del_() {trie.Del(Xob_xml_parser_.Bry_tab); return this;}
@@ -44,7 +45,7 @@ public class Xob_xml_parser {
 			}
 			if (pos >= src_len) return Bry_.NotFound;	// no more src left; should only happen at end of file
 			byte b = src[pos];
-			Object o = trie.Match(b, src, pos, src_len);
+			Object o = trie.Match_bgn_w_byte(b, src, pos, src_len);
 			if (o == null) {								// text_data; not an xml_nde (<id>), xml_escape (&lt;), or tab
 				if (data_bfr_add) data_bfr.Add_byte(b);		// add to src if data_bfr_add is on (only happens for <title>, <text>)
 				++pos;

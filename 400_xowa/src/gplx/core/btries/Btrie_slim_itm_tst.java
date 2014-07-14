@@ -15,10 +15,10 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx;
+package gplx.core.btries; import gplx.*; import gplx.core.*;
 import org.junit.*;
-public class ByteTrieItm_slim_tst {
-	private ByteTrieItm_slim itm = new ByteTrieItm_slim(Byte_.Zero, null, false);
+public class Btrie_slim_itm_tst {
+	private Btrie_slim_itm itm = new Btrie_slim_itm(Byte_.Zero, null, false);
 	@Before public void init() {itm.Clear();}
 	@Test  public void Find_nil() {
 		tst_Find(Byte_ascii.Ltr_a, null);
@@ -40,7 +40,7 @@ public class ByteTrieItm_slim_tst {
 		tst_Find(Byte_ascii.Ltr_B, "B");
 	}
 	private void tst_Find(byte b, String expd) {
-		ByteTrieItm_slim actl_itm = itm.Ary_find(b);
+		Btrie_slim_itm actl_itm = itm.Ary_find(b);
 		Object actl = actl_itm == null ? null : actl_itm.Val();
 		Tfds.Eq(expd, actl);
 	}

@@ -19,27 +19,24 @@ package gplx.xowa.xtns.scribunto.lib; import gplx.*; import gplx.xowa.*; import 
 import org.junit.*;
 public class Scrib_lib_site_tst {
 	@Before public void init() {
-		fxt.Clear();
-		fxt.Init_page("{{#invoke:Mod_0|Func_0}}");
+		fxt.Init_scrib_proc();
 		lib = fxt.Core().Lib_site().Init();
-	}	Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt(); Scrib_lib lib;
+	}	private Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt(); private Scrib_lib lib;
 	@Test   public void GetNsIndex() {
-		fxt.Test_lib_proc(lib, Scrib_lib_site.Invk_getNsIndex, Object_.Ary("Help"), "12");
-		fxt.Test_lib_proc(lib, Scrib_lib_site.Invk_getNsIndex, Object_.Ary("Helpx"), "");	// unknown ns; return empty String
+		fxt.Test_scrib_proc_int(lib, Scrib_lib_site.Invk_getNsIndex, Object_.Ary("Help"), 12);
+	}
+	@Test   public void GetNsIndex_invalid() {
+		fxt.Test_scrib_proc_empty(lib, Scrib_lib_site.Invk_getNsIndex, Object_.Ary("Helpx"));	// unknown ns; return empty String
 	}
 	@Test   public void UsersInGroup() {
-		fxt.Test_lib_proc(lib, Scrib_lib_site.Invk_usersInGroup, Object_.Ary("sysop"), "0"); // SELECT * FROM user_groups;
+		fxt.Test_scrib_proc_int(lib, Scrib_lib_site.Invk_usersInGroup, Object_.Ary("sysop"), 0); // SELECT * FROM user_groups;
 	}
 	@Test   public void PagesInCategory() {
-		fxt.Test_lib_proc(lib, Scrib_lib_site.Invk_pagesInCategory, Object_.Ary("A"), "0");
+		fxt.Test_scrib_proc_int(lib, Scrib_lib_site.Invk_pagesInCategory, Object_.Ary("A"), 0);
 	}
 	@Test   public void PagesInNs() {
-		fxt.Test_lib_proc(lib, Scrib_lib_site.Invk_pagesInNs, Object_.Ary("12"), "0");
+		fxt.Test_scrib_proc_int(lib, Scrib_lib_site.Invk_pagesInNs, Object_.Ary("12"), 0);
 	}
-//		@Test   public void LoadSiteStats() {	// deprecated by Scribunto; DATE:2013-04-12
-//			fxt.Parser_fxt().Wiki().Stats().NumPages_(1).NumArticles_(2).NumFiles_(3).NumEdits_(4).NumViews_(5).NumUsers_(6).NumUsersActive_(7);
-//			fxt.Test_lib_proc(lib, Scrib_lib_site.Invk_loadSiteStats, Object_.Ary_empty, "1;2;3;4;5;6;7");
-//		}
 	@Test   public void Init_lib_site() {
 		Xow_ns_mgr ns_mgr = new Xow_ns_mgr(fxt.Core().Wiki().Lang().Case_mgr());
 		ns_mgr.Add_new(Scrib_xtn_mgr.Ns_id_module, "Module");
@@ -51,16 +48,111 @@ public class Scrib_lib_site_tst {
 		Xow_wiki wiki = fxt.Parser_fxt().Wiki();
 		fxt.Parser_fxt().Wiki().Stats().NumPages_(1).NumArticles_(2).NumFiles_(3).NumEdits_(4).NumViews_(5).NumUsers_(6).NumUsersActive_(7).NumAdmins_(8);
 		wiki.Ns_mgr_(ns_mgr);
-		fxt.Test_lib_proc(lib, Scrib_lib_site.Invk_init_site_for_wiki, Object_.Ary_empty, String_.Concat_lines_nl
-		(	""
-		,	"  Wikipedia;http://en.wikipedia.org;/wiki;/wiki/skins;1.21wmf11;"
-		,	"    "	// namespaces
-		,	"      -1;Special;Special;false;false;false;false;true;false;true;false;null;{};-1;"
-		,	"      0;;;false;false;false;true;true;true;true;false;null;{};0;1;1;(Main);"
-		,	"      1;Talk;Talk;false;false;false;false;true;true;false;true;null;{};1;1;0;"
-		,	"      828;Module;Module;false;false;false;false;true;true;true;false;null;{};828;829;829;"
-		,	"      829;Module talk;Module_talk;false;false;false;false;true;true;false;true;null;{};829;829;828;"
-		,	"    1;2;3;4;5;6;7;8"
+		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_site.Invk_init_site_for_wiki, Object_.Ary_empty, String_.Concat_lines_nl_skip_last
+		( "1="
+		, "  siteName=Wikipedia"
+		, "  server=http://en.wikipedia.org"
+		, "  scriptPath=/wiki"
+		, "  stylePath=/wiki/skins"
+		, "  currentVersion=1.21wmf11"
+		, "  namespaces="
+		, "    -1="
+		, "      id=-1"
+		, "      name=Special"
+		, "      canonicalName=Special"
+		, "      hasSubpages=false"
+		, "      hasGenderDistinction=false"
+		, "      isCapitalized=false"
+		, "      isContent=false"
+		, "      isIncludable=true"
+		, "      isMovable=false"
+		, "      isSubject=true"
+		, "      isTalk=false"
+		, "      defaultContentModel=<<NULL>>"
+		, "      aliases="
+		, "      subject=-1"
+		, "    0="
+		, "      id=0"
+		, "      name="
+		, "      canonicalName="
+		, "      hasSubpages=false"
+		, "      hasGenderDistinction=false"
+		, "      isCapitalized=false"
+		, "      isContent=true"
+		, "      isIncludable=true"
+		, "      isMovable=true"
+		, "      isSubject=true"
+		, "      isTalk=false"
+		, "      defaultContentModel=<<NULL>>"
+		, "      aliases="
+		, "      subject=0"
+		, "      talk=1"
+		, "      associated=1"
+		, "      displayName=(Main)"
+		, "    1="
+		, "      id=1"
+		, "      name=Talk"
+		, "      canonicalName=Talk"
+		, "      hasSubpages=false"
+		, "      hasGenderDistinction=false"
+		, "      isCapitalized=false"
+		, "      isContent=false"
+		, "      isIncludable=true"
+		, "      isMovable=true"
+		, "      isSubject=false"
+		, "      isTalk=true"
+		, "      defaultContentModel=<<NULL>>"
+		, "      aliases="
+		, "      subject=1"
+		, "      talk=1"
+		, "      associated=0"
+		, "    828="
+		, "      id=828"
+		, "      name=Module"
+		, "      canonicalName=Module"
+		, "      hasSubpages=false"
+		, "      hasGenderDistinction=false"
+		, "      isCapitalized=false"
+		, "      isContent=false"
+		, "      isIncludable=true"
+		, "      isMovable=true"
+		, "      isSubject=true"
+		, "      isTalk=false"
+		, "      defaultContentModel=<<NULL>>"
+		, "      aliases="
+		, "      subject=828"
+		, "      talk=829"
+		, "      associated=829"
+		, "    829="
+		, "      id=829"
+		, "      name=Module talk"
+		, "      canonicalName=Module_talk"
+		, "      hasSubpages=false"
+		, "      hasGenderDistinction=false"
+		, "      isCapitalized=false"
+		, "      isContent=false"
+		, "      isIncludable=true"
+		, "      isMovable=true"
+		, "      isSubject=false"
+		, "      isTalk=true"
+		, "      defaultContentModel=<<NULL>>"
+		, "      aliases="
+		, "      subject=829"
+		, "      talk=829"
+		, "      associated=828"
+		, "  stats="
+		, "    pages=1"
+		, "    articles=2"
+		, "    files=3"
+		, "    edits=4"
+		, "    views=5"
+		, "    users=6"
+		, "    activeUsers=7"
+		, "    admins=8"
 		));
 	}
+//		@Test   public void LoadSiteStats() {	// deprecated by Scribunto; DATE:2013-04-12
+//			fxt.Parser_fxt().Wiki().Stats().NumPages_(1).NumArticles_(2).NumFiles_(3).NumEdits_(4).NumViews_(5).NumUsers_(6).NumUsersActive_(7);
+//			fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_site.Invk_loadSiteStats, Object_.Ary_empty, "1;2;3;4;5;6;7");
+//		}
 }	

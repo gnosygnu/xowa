@@ -16,9 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.parsers.amps.*;
+import gplx.core.btries.*; import gplx.xowa.parsers.amps.*;
 public class Xop_sanitizer {
-	private ByteTrieMgr_slim trie = ByteTrieMgr_slim.cs_(), amp_trie;
+	private Btrie_slim_mgr trie = Btrie_slim_mgr.cs_(), amp_trie;
 	private Xop_amp_mgr amp_mgr;
 	private Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	public Xop_sanitizer(Xop_amp_mgr amp_mgr, Gfo_msg_log msg_log) {
@@ -41,7 +41,7 @@ public class Xop_sanitizer {
 		while (loop) {
 			if (pos == end) break;
 			byte b = src[pos];
-			Object o = trie.Match(b, src, pos, end);
+			Object o = trie.Match_bgn_w_byte(b, src, pos, end);
 			if (o == null) {
 				if (dirty) bfr.Add_byte(b);
 				++pos;
@@ -51,7 +51,7 @@ public class Xop_sanitizer {
 					bfr.Add_mid(src, bgn, pos);
 					dirty = true;
 				}
-				ByteTrie_stub stub = (ByteTrie_stub)o;
+				Btrie_itm_stub stub = (Btrie_itm_stub)o;
 				switch (stub.Tid()) {
 					case Tid_space:		bfr.Add_byte(Byte_ascii.Underline)	; ++pos		; break;
 					case Tid_percent:	bfr.Add_byte(Byte_ascii.Percent)	; ++pos		; break;
@@ -64,7 +64,7 @@ public class Xop_sanitizer {
 							continue;
 						}
 						b = src[pos];
-						Object amp_obj = amp_trie.Match(b, src, pos, end);
+						Object amp_obj = amp_trie.Match_bgn_w_byte(b, src, pos, end);
 						if (amp_obj == null) {
 							bfr.Add_byte(Byte_ascii.Amp);
 							bfr.Add_byte(b);

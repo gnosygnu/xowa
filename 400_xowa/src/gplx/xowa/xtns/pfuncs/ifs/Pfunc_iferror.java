@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.ifs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+import gplx.core.btries.*;
 public class Pfunc_iferror extends Pf_func_base {
 	@Override public boolean Func_require_colon_arg() {return true;}
 	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bb) {			
@@ -43,7 +44,7 @@ public class Pfunc_iferror extends Pf_func_base {
 		while (true) {
 			if (pos == src_len) break;
 			byte b = src[pos];
-			Object o = trie.Match(b, src, pos, src_len);
+			Object o = trie.Match_bgn_w_byte(b, src, pos, src_len);
 			if (o == null) 
 				++pos;
 			else {
@@ -105,10 +106,10 @@ public class Pfunc_iferror extends Pf_func_base {
 		}
 		return false;
 	}
-	private static final ByteTrieMgr_slim trie = trie_();
+	private static final Btrie_slim_mgr trie = trie_();
 	static final byte State_null = 0, State_nde = 1, State_class = 2, State_error = 3, State_close = 4;
-	private static ByteTrieMgr_slim trie_() {
-		ByteTrieMgr_slim rv = ByteTrieMgr_slim.ci_ascii_();	// NOTE:ci.ascii:MW_const.en
+	private static Btrie_slim_mgr trie_() {
+		Btrie_slim_mgr rv = Btrie_slim_mgr.ci_ascii_();	// NOTE:ci.ascii:MW_const.en
 		trie_init(rv, State_nde  , "<strong");
 		trie_init(rv, State_nde  , "<span");
 		trie_init(rv, State_nde  , "<p");
@@ -118,5 +119,5 @@ public class Pfunc_iferror extends Pf_func_base {
 		trie_init(rv, State_close, ">");
 		return rv;
 	}
-	private static void trie_init(ByteTrieMgr_slim trie, byte b, String s) {trie.Add(s, Byte_obj_val.new_(b));}
+	private static void trie_init(Btrie_slim_mgr trie, byte b, String s) {trie.Add_obj(s, Byte_obj_val.new_(b));}
 }

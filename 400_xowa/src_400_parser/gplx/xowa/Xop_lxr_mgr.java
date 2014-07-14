@@ -16,11 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.btries.*;
 import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*;
 public class Xop_lxr_mgr {
 	private Xop_lxr[] ary;
 	public Xop_lxr_mgr(Xop_lxr[] ary) {this.ary = ary;}
-	public ByteTrieMgr_fast Trie() {return trie;} private ByteTrieMgr_fast trie = ByteTrieMgr_fast.cs_();
+	public Btrie_fast_mgr Trie() {return trie;} private Btrie_fast_mgr trie = Btrie_fast_mgr.cs_();
 	public void Init_by_wiki(Xow_wiki wiki) {
 		int ary_len = ary.length;
 		for (int i = 0; i < ary_len; i++) {

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.imports.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.imports.*;
-import gplx.ios.*; import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.ctgs.*;
+import gplx.core.flds.*; import gplx.ios.*; import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.ctgs.*;
 public class Xob_ctg_v1_sql extends Xob_ctg_v1_base {
 	@Override public String Wkr_key() {return KEY;} public static final String KEY = "import.sql.category_v1";
 	@Override public Io_sort_cmd Make_sort_cmd() {return new Xob_ctg_v1_sql_make(wiki);}

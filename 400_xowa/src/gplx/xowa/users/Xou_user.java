@@ -59,6 +59,8 @@ public class Xou_user implements GfoInvkAble {
 	public void App_term() {
 		session_mgr.Window_mgr().Save_window(app.Gui_mgr().Browser_win().Win_box());
 		history_mgr.Save(app);
+		if (app.Gui_mgr().Browser_win().Tab_mgr().Html_load_tid__url())
+			Io_mgr._.DeleteDirDeep(fsys_mgr.App_temp_html_dir());
 		db_mgr.App_term();
 	}
 	public void Bookmarks_add(byte[] wiki_domain, byte[] ttl_full_txt) {

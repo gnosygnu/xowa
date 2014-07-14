@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.ios.*;
+import gplx.core.flds.*; import gplx.ios.*;
 public class Sql_file_parser {
 	public Io_url Src_fil() {return src_fil;} public Sql_file_parser Src_fil_(Io_url v) {src_fil = v; return this;} Io_url src_fil;
 	public int Src_len() {return src_len;} public Sql_file_parser Src_len_(int v) {src_len = v; return this;} private int src_len = 8 * Io_mgr.Len_mb;

@@ -62,6 +62,38 @@ public class KeyVal_ {
 		}
 		return null;
 	}
+	public static String Ary_xto_str_nested(KeyVal... ary) {
+		Bry_bfr bfr = Bry_bfr.new_();
+		Ary_xto_str_nested(bfr, 0, ary);
+		return bfr.XtoStrAndClear();
+	}
+	private static void Ary_xto_str_nested(Bry_bfr bfr, int indent, KeyVal[] ary) {
+		int len = ary.length;
+		for (int i = 0; i < len; ++i) {
+			KeyVal itm = ary[i];
+			if (indent > 0)
+				bfr.Add_byte_repeat(Byte_ascii.Space, indent * 2);				// add indent	: "  "
+			bfr.Add_str(Object_.XtoStr_OrEmpty(itm.Key())).Add_byte_eq();		// add key + eq : "key="
+			Object val = itm.Val();
+			if (val == null)
+				bfr.Add_str(String_.Null_mark);
+			else {
+				Class<?> val_type = ClassAdp_.ClassOf_obj(val);
+				if		(ClassAdp_.Eq(val_type, KeyVal[].class)) {				// val is KeyVal[]; recurse
+					bfr.Add_byte_nl();												// add nl		: "\n"
+					Ary_xto_str_nested(bfr, indent + 1, (KeyVal[])val);
+					continue;														// don't add \n below
+				}
+				else if (ClassAdp_.Eq(val_type, Bool_.ClassOf)) {					// val is boolean
+					boolean val_as_bool = Bool_.cast_(val);
+					bfr.Add(val_as_bool ? Bool_.True_bry : Bool_.False_bry);		// add "true" or "false"; don't call toString
+				}
+				else
+					bfr.Add_str(Object_.XtoStr_OrNullStr(val));						// call toString()
+			}
+			bfr.Add_byte_nl();
+		}
+	}
 	public static KeyVal as_(Object obj) {return obj instanceof KeyVal ? (KeyVal)obj : null;}
 	public static KeyVal new_(String key)				{return new KeyVal(KeyVal_.Key_tid_str, key, key);}
 	public static KeyVal new_(String key, Object val)	{return new KeyVal(KeyVal_.Key_tid_str, key, val);}

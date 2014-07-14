@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+import gplx.core.btries.*;
 public class Pft_fmt_itm_ {
 	public static final int
 	  Tid_seg_int				=  1
@@ -76,7 +77,7 @@ public class Pft_fmt_itm_ {
 	, Rfc_5322					= new Pft_fmt_itm_rfc_5322()
 	, Timezone_offset			= new Pft_fmt_itm_timezone_offset()
 	;
-	public static final ByteTrieMgr_fast Regy = ByteTrieMgr_fast.cs_()
+	public static final Btrie_fast_mgr Regy = Btrie_fast_mgr.cs_()
 	.Add(Byte_ascii.Ltr_Y		, Pft_fmt_itm_.Year_len4)				// 2012
 	.Add(Byte_ascii.Ltr_y		, Pft_fmt_itm_.Year_len2)				// 12
 	.Add(Byte_ascii.Ltr_L		, Pft_fmt_itm_.Year_isLeap)				// 1,0
@@ -115,12 +116,12 @@ public class Pft_fmt_itm_ {
 	// TODO: foreign; space; "
 	;
 	public static Pft_fmt_itm[] Parse(Xop_ctx ctx, byte[] fmt) {
-		ByteTrieMgr_fast trie = Pft_fmt_itm_.Regy;
+		Btrie_fast_mgr trie = Pft_fmt_itm_.Regy;
 		int i = 0, fmt_len = fmt.length;
 		fmt_itms.Clear(); int raw_bgn = String_.Pos_neg1; byte raw_byt = Byte_.Zero;
 		while (i < fmt_len) {
 			byte b = fmt[i];
-			Object o = trie.Match(b, fmt, i, fmt_len);
+			Object o = trie.Match_bgn_w_byte(b, fmt, i, fmt_len);
 			if (o != null) {
 				if (raw_bgn != String_.Pos_neg1) {fmt_itms.Add(i - raw_bgn == 1 ? new Pft_fmt_itm_raw_byt(raw_byt) : (Pft_fmt_itm)new Pft_fmt_itm_raw_ary(fmt, raw_bgn, i)); raw_bgn = String_.Pos_neg1;}
 				fmt_itms.Add((Pft_fmt_itm)o);

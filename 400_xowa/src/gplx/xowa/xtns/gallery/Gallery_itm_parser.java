@@ -16,10 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+import gplx.core.btries.*;
 import gplx.xowa.parsers.lnkis.redlinks.*;
 import gplx.xowa.files.*;
 public class Gallery_itm_parser {		
-	private Xow_wiki wiki; private ByteTrieMgr_slim trie = ByteTrieMgr_slim.ci_utf_8_();
+	private Xow_wiki wiki; private Btrie_slim_mgr trie = Btrie_slim_mgr.ci_utf_8_();
 	private Gallery_itm cur_itm;
 	private byte[] src; private int end_pos;
 	private int cur_pos; private byte cur_byte;
@@ -95,7 +96,7 @@ public class Gallery_itm_parser {
 			case Mode_eos:
 				return mode;
 		}
-		Object o = trie.Match(cur_byte, src, cur_pos, end_pos);
+		Object o = trie.Match_bgn_w_byte(cur_byte, src, cur_pos, end_pos);
 		if (o != null) {						// either "alt" or "link"
 			int old_pos = cur_pos;
 			cur_pos = trie.Match_pos();
@@ -224,7 +225,7 @@ public class Gallery_itm_parser {
 		for (int i = 0; i < len; i++) {
 			Xol_kwd_itm itm = itms[i];
 			byte[] itm_bry = Xol_kwd_parse_data.Strip(caption_bfr, itm.Val(), tmp_bref);	// strip off =$1 for "alt=$1"
-			trie.Add(itm_bry, trie_ref);
+			trie.Add_obj(itm_bry, trie_ref);
 		}
 	}
 }

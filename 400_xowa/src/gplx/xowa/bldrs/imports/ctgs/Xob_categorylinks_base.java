@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.imports.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.imports.*;
-import gplx.ios.*; import gplx.xowa.ctgs.*;
+import gplx.core.brys.*; import gplx.ios.*; import gplx.xowa.ctgs.*;
 public abstract class Xob_categorylinks_base extends Xob_sql_dump_base implements Sql_file_parser_cmd {
 	public abstract Io_sort_cmd Make_sort_cmd(Sql_file_parser sql_parser);
 	@Override public String Sql_file_name() {return "categorylinks";}

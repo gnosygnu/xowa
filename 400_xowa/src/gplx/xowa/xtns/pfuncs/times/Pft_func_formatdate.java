@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+import gplx.core.btries.*;
 public class Pft_func_formatdate extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_str_formatdate;}
 	@Override public Pf_func New(int id, byte[] name) {return new Pft_func_formatdate().Name_(name);}
@@ -26,7 +27,7 @@ public class Pft_func_formatdate extends Pf_func_base {
 		byte[] fmt_bry = Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, self_args_len, 0);
 		if (fmt_bry == Bry_.Empty) {bfr.Add(date_bry); return;}	// no format given; add self;
 		int fmt_bry_len = fmt_bry.length;
-		Object o = trie.MatchAtCur(fmt_bry, 0, fmt_bry_len);
+		Object o = trie.Match_bgn(fmt_bry, 0, fmt_bry_len);
 		if (o == null 
 			|| o == Fmt_itms_default) {// NOOP for default?
 			bfr.Add(date_bry);
@@ -38,7 +39,7 @@ public class Pft_func_formatdate extends Pf_func_base {
 	}
 	public static Pft_func_formatdate_bldr Date_bldr() {return date_bldr;} private static Pft_func_formatdate_bldr date_bldr = new Pft_func_formatdate_bldr();		
 	private static final Pft_fmt_itm[] Fmt_itms_default = new Pft_fmt_itm[0];
-	private static final ByteTrieMgr_fast trie = ByteTrieMgr_fast.cs_()
+	private static final Btrie_fast_mgr trie = Btrie_fast_mgr.cs_()
 		.Add("dmy"			, new Pft_fmt_itm[] {Pft_fmt_itm_.Day_int, Pft_fmt_itm_.Byte_space, Pft_fmt_itm_.Month_name, Pft_fmt_itm_.Byte_space, Pft_fmt_itm_.Year_len4})
 		.Add("mdy"			, new Pft_fmt_itm[] {Pft_fmt_itm_.Month_name, Pft_fmt_itm_.Byte_space, Pft_fmt_itm_.Day_int, Pft_fmt_itm_.Byte_comma, Pft_fmt_itm_.Byte_space, Pft_fmt_itm_.Year_len4})
 		.Add("ymd"			, new Pft_fmt_itm[] {Pft_fmt_itm_.Year_len4, Pft_fmt_itm_.Byte_space, Pft_fmt_itm_.Month_name, Pft_fmt_itm_.Byte_space, Pft_fmt_itm_.Day_int})

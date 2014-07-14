@@ -174,6 +174,25 @@ public class Bry_finder {
 			}
 		}
 	}
+	public static int Trim_fwd_space_tab(byte[] src, int cur, int end) {
+		while (true) {
+			if (cur == end) return cur;
+			switch (src[cur]) {
+				case Byte_ascii.Space: case Byte_ascii.Tab:		++cur; break;
+				default:										return cur; 
+			}
+		}
+	}
+	public static int Trim_bwd_space_tab(byte[] src, int cur, int bgn) {
+		while (true) {
+			int prv_cur = cur - 1;				// check byte before cur; EX: "a b " will have len of 4, and pass cur=4;
+			if (prv_cur < bgn) return cur;		// checking byte before prv; exit;
+			switch (src[prv_cur]) {
+				case Byte_ascii.Space: case Byte_ascii.Tab:		--cur; break;
+				default:										return cur; 
+			}
+		}
+	}
 	public static int Find_fwd_while_ws(byte[] src, int cur, int end) {
 		while (true) {
 			if (cur == end) return cur;

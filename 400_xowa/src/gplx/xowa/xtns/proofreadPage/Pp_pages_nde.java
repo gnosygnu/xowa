@@ -362,7 +362,7 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 		tmp_parser.Parse_text_to_wdom(rv, tmp_ctx, tmp_ctx.Tkn_mkr(), wikitext, Xop_parser_.Doc_bgn_bos);
 		return rv;
 	}
-	private static Hash_adp_bry xtn_atrs = Hash_adp_bry.ci_()	// NOTE: these do not seem to be i18n'd; no ProofreadPage.magic.php; ProofreadPage.i18n.php only has messages; ProofreadPage.body.php refers to names literally
+	private static Hash_adp_bry xtn_atrs = Hash_adp_bry.ci_ascii_()	// NOTE: these do not seem to be i18n'd; no ProofreadPage.magic.php; ProofreadPage.i18n.php only has messages; ProofreadPage.body.php refers to names literally
 	.Add_str_obj("index"		, Byte_obj_val.new_(Pp_pages_nde.Xatr_index_ttl))
 	.Add_str_obj("from"			, Byte_obj_val.new_(Pp_pages_nde.Xatr_bgn_page))
 	.Add_str_obj("to"			, Byte_obj_val.new_(Pp_pages_nde.Xatr_end_page))

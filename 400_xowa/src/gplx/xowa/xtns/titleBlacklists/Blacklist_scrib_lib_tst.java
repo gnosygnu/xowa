@@ -20,11 +20,10 @@ import org.junit.*;
 import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.lib.*;
 public class Blacklist_scrib_lib_tst {
 	@Before public void init() {
-		fxt.Clear();
-		fxt.Init_page("{{#invoke:Mod_0|Func_0}}");
+		fxt.Init_scrib_proc();
 		lib = new Blacklist_scrib_lib().Init();
-	}	private Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt(); Scrib_lib lib;
+	}	private Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt(); private Scrib_lib lib;
 	@Test   public void Exec_test() {
-		fxt.Test_lib_proc(lib, Blacklist_scrib_lib.Invk_test, Object_.Ary("title")						, "null");
+		fxt.Test_scrib_proc_str(lib, Blacklist_scrib_lib.Invk_test, Object_.Ary("title")						, String_.Null_mark);
 	}
 }	

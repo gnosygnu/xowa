@@ -19,6 +19,7 @@ package gplx.gfui; import gplx.*;
 public interface Gfui_mnu_grp extends Gfui_mnu_itm {
 	String Root_key();
 	void Itms_clear();
+	boolean Disposed();
 	Gfui_mnu_itm Itms_add_btn_cmd	(String txt, ImageAdp img, GfoInvkAble invk, String invk_cmd);
 	Gfui_mnu_itm Itms_add_btn_msg	(String txt, ImageAdp img, GfoInvkAble invk, GfoInvkRootWkr root_wkr, GfoMsg msg);
 	Gfui_mnu_itm Itms_add_chk_msg	(String txt, ImageAdp img, GfoInvkAble invk, GfoInvkRootWkr root_wkr, GfoMsg msg_n, GfoMsg msg_y);
@@ -30,6 +31,7 @@ class Gfui_mnu_grp_null implements Gfui_mnu_grp {
 	public String Uid() {return "";}
 	public int Tid() {return Gfui_mnu_itm_.Tid_grp;}
 	public boolean Enabled() {return true;} public void Enabled_(boolean v) {}
+	public boolean Disposed() {return false;}
 	public String Text() {return null;} public void Text_(String v) {}
 	public ImageAdp Img() {return null;} public void Img_(ImageAdp v) {}
 	public boolean Selected() {return true;} public void Selected_(boolean v) {}

@@ -53,14 +53,15 @@ class Xol_case_itm_byt implements Xol_case_itm {
 	}
 	public int Hashcode_lo() {return lower_byte;}
 	public int Len_lo() {return 1;}
+	public byte[] Asymmetric_bry() {return null;}
 }
 class Xol_case_itm_bry implements Xol_case_itm {
 	public Xol_case_itm_bry(byte tid, byte[] src_ary, byte[] trg_ary) {
 		this.tid = tid; this.src_ary = src_ary; this.trg_ary = trg_ary;
 		switch (tid) {
-			case Xol_case_itm_.Tid_both:
-			case Xol_case_itm_.Tid_upper:		upper_ary = trg_ary; lower_ary = src_ary; break;
-			case Xol_case_itm_.Tid_lower:		upper_ary = src_ary; lower_ary = trg_ary; break;
+			case Xol_case_itm_.Tid_both:		upper_ary = trg_ary; lower_ary = src_ary; break;
+			case Xol_case_itm_.Tid_upper:		upper_ary = trg_ary; lower_ary = src_ary; asymmetric_bry = src_ary; break;
+			case Xol_case_itm_.Tid_lower:		upper_ary = src_ary; lower_ary = trg_ary; asymmetric_bry = trg_ary; break;
 		}
 		len_lo = lower_ary.length;
 		utf8_id_lo = Utf16_.Decode_to_int(lower_ary, 0);
@@ -86,5 +87,6 @@ class Xol_case_itm_bry implements Xol_case_itm {
 		Xol_case_itm_bry trg_itm = (Xol_case_itm_bry)trg_obj;
 		return utf8_id_lo == trg_itm.utf8_id_lo;
 	}
+	public byte[] Asymmetric_bry() {return asymmetric_bry;} private byte[] asymmetric_bry;
 	public int Hashcode_lo() {return hashcode_ci_lo;} private int hashcode_ci_lo;
 }

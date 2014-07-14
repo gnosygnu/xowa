@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.flds.*;
 public class Xof_meta_fil {
 	public Xof_meta_fil(Xof_meta_mgr meta_mgr, byte[] md5) {this.meta_mgr = meta_mgr; this.md5 = md5;}
 	public Xof_meta_mgr Owner_mgr() {return meta_mgr;}  Xof_meta_mgr meta_mgr;

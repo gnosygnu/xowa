@@ -22,8 +22,7 @@ public class Xop_xatr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_AT
 	private byte mode = Mode_atr_bgn;
 	private int atr_bgn = -1, key_bgn = -1, key_end = -1, eq_pos = -1, val_bgn = -1, val_end = -1; boolean valid = true;
 	private byte quote_byte = Byte_ascii.Nil;
-	private Hash_adp_bry xnde_hash = Hash_adp_bry.ci_().Add_bry_bry(Xop_xnde_tag_.Tag_nowiki.Name_bry()).Add_bry_bry(Xop_xnde_tag_.Tag_noinclude.Name_bry()).Add_bry_bry(Xop_xnde_tag_.Tag_includeonly.Name_bry()).Add_bry_bry(Xop_xnde_tag_.Tag_onlyinclude.Name_bry());
-	private Hash_adp_bry repeated_atrs_hash = Hash_adp_bry.ci_();
+	private Hash_adp_bry repeated_atrs_hash = Hash_adp_bry.ci_ascii_();		// ASCII:xnde_atrs
 	private Bry_bfr key_bfr = Bry_bfr.new_(), val_bfr = Bry_bfr.new_(); boolean key_bfr_on = false, val_bfr_on = false;
 	public Bry_obj_ref Bry_obj() {return bry_ref;} private Bry_obj_ref bry_ref = Bry_obj_ref.null_();
 	public int Xnde_find_gt_find(byte[] src, int pos, int end) {
@@ -386,6 +385,12 @@ public class Xop_xatr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_AT
 		}
 		repeated_atrs_hash.Add(key_bry, cur);
 	}
+	private static final Hash_adp_bry xnde_hash = Hash_adp_bry.ci_ascii_()
+	.Add_bry_bry(Xop_xnde_tag_.Tag_nowiki.Name_bry())
+	.Add_bry_bry(Xop_xnde_tag_.Tag_noinclude.Name_bry())
+	.Add_bry_bry(Xop_xnde_tag_.Tag_includeonly.Name_bry())
+	.Add_bry_bry(Xop_xnde_tag_.Tag_onlyinclude.Name_bry())
+	;
 	private static final Gfo_msg_grp owner = Gfo_msg_grp_.new_(Xoa_app_.Nde, "xatr_parser");
 	public static final Gfo_msg_itm
 		Log_invalid_atr			= Gfo_msg_itm_.new_warn_(owner, "invalid_atr")

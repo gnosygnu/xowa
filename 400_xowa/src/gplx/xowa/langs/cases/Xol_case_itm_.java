@@ -120,11 +120,7 @@ public class Xol_case_itm_ {
 							Xol_case_itm_bry itm = (Xol_case_itm_bry)hash.Fetch(upper);
 							if (itm == null) {
 								itm = new Xol_case_itm_bry(tid, upper, lower);
-//									try {
-									hash.Add(upper, itm);
-//									} catch (Exception e) {
-//										Err_.Noop(e);
-//									}
+								hash.Add(upper, itm);
 							}
 							else {
 								if (itm.Tid() == rev_tid && Bry_.Eq(itm.Src_ary(), upper) && Bry_.Eq(itm.Trg_ary(), lower))

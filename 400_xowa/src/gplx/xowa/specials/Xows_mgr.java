@@ -22,12 +22,14 @@ import gplx.xowa.specials.allPages.*; import gplx.xowa.specials.search.*; import
 import gplx.xowa.specials.xowa.system_data.*; import gplx.xowa.specials.xowa.default_tab.*; import gplx.xowa.specials.xowa.popup_history.*;
 import gplx.xowa.xtns.wdatas.*;	
 public class Xows_mgr {
-	public Xows_mgr(Xow_wiki wiki) {
+	private Hash_adp_bry hash;
+	public Xows_mgr(Xow_wiki wiki, Xol_lang lang) {
+		hash = Hash_adp_bry.ci_utf8_(lang.Case_mgr());
 		page_allpages = new Xows_page_allpages(wiki);
 		page_search = new Xosrh_core(wiki);
 		page_random = new Xows_page_random(wiki);
 		Evt_lang_changed(wiki.Lang());
-	}	private Hash_adp_bry hash = Hash_adp_bry.ci_();
+	}
 	public Xows_page_allpages			Page_allpages() {return page_allpages;} private Xows_page_allpages page_allpages;
 	public Xosrh_core					Page_search() {return page_search;} private Xosrh_core page_search;
 	public Xows_page_random				Page_random() {return page_random;} private Xows_page_random page_random;

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
-import gplx.gfui.*; import gplx.xowa.cfgs2.*;
+import gplx.gfui.*; import gplx.xowa.cfgs2.*; import gplx.xowa.apis.xowa.gui.browsers.*;
 public class Xog_tab_mgr implements GfoEvObj {
 	private OrderedHash tab_regy = OrderedHash_.new_(); private int tab_uid = 0;
 	public Xog_tab_mgr(Xog_win_itm win) {
@@ -26,6 +26,8 @@ public class Xog_tab_mgr implements GfoEvObj {
 	public GfoEvMgr EvMgr() {return ev_mgr;} private GfoEvMgr ev_mgr;
 	public Xog_win_itm Win() {return win;} private Xog_win_itm win;
 	public Gfui_tab_mgr Tab_mgr() {return tab_mgr;} private Gfui_tab_mgr tab_mgr;
+	public byte Html_load_tid() {return html_load_tid;} private byte html_load_tid;
+	public boolean Html_load_tid__url() {return html_load_tid == Gxw_html_load_tid_.Tid_url;}
 	public void Init_by_kit(Gfui_kit kit) {
 		tab_mgr = kit.New_tab_mgr("xowa.tab_mgr", win.Win_box());
 		active_tab = Xog_tab_itm_.Null;
@@ -43,6 +45,10 @@ public class Xog_tab_mgr implements GfoEvObj {
 		, Xocfg_tab_btn_mgr.Evt_close_visible_changed, Xocfg_tab_btn_mgr.Evt_unselected_close_visible_changed
 		, Xocfg_tab_btn_mgr.Evt_text_min_chars_changed, Xocfg_tab_btn_mgr.Evt_text_max_chars_changed
 		, Xocfg_tab_btn_mgr.Evt_hide_if_one_changed
+		);
+		html_load_tid = win.App().Api_root().Gui().Browser().Html().Load_tid();
+		GfoEvMgr_.SubSame_many(win.App().Api_root().Gui().Browser().Html(), this
+		, Xoapi_html_box.Evt_load_tid_changed
 		);
 	}
 	public Xog_tab_itm Active_tab() {return active_tab;} private Xog_tab_itm active_tab;
@@ -99,7 +105,7 @@ public class Xog_tab_mgr implements GfoEvObj {
 	}
 	public void Tabs_new_dupe(boolean focus) {
 		if (this.Active_tab_is_null()) return;
-		String url = active_tab.Page().Url().X_to_full_str();
+		String url = active_tab.Page().Url().Xto_full_str();
 		Tabs_new_dflt(focus);
 		win.Page__navigate_by_url_bar(url);
 	}
@@ -120,6 +126,8 @@ public class Xog_tab_mgr implements GfoEvObj {
 	public void Tabs_close_cur() {
 		if (this.Active_tab_is_null()) return;
 		tab_mgr.Tabs_close_by_idx(active_tab.Tab_idx());
+		Xog_tab_itm cur_tab = this.Active_tab();
+		if (cur_tab != null) cur_tab.Html_box().Focus();	// NOTE: needed to focus tab box else tab button will be focused; DATE:2014-07-13
 	}
 	public void Tabs_close_others() {this.Tabs_close_to_bgn(); this.Tabs_close_to_end();}
 	public void Tabs_close_to_bgn() {if (Active_tab_is_null()) return; Tabs_close_rng(0							, active_tab.Tab_idx());}
@@ -137,7 +145,8 @@ public class Xog_tab_mgr implements GfoEvObj {
 	private ListAdp closed_undo_list = ListAdp_.new_();
 	private void Tabs_closed(String key) {
 		Xog_tab_itm itm = Tabs_get_by_key_or_warn(key); if (itm == null) return;
-		closed_undo_list.Add(itm.Page().Url().X_to_full_str());
+		itm.Html_box().Html_dispose();
+		closed_undo_list.Add(itm.Page().Url().Xto_full_str());
 		tab_regy.Del(key);
 		if (tab_regy.Count() == 0) {
 			active_tab = Xog_tab_itm_.Null;
@@ -233,6 +242,7 @@ public class Xog_tab_mgr implements GfoEvObj {
 		else if	(ctx.Match(k, Xocfg_tab_btn_mgr.Evt_unselected_close_visible_changed))		Btns_unselected_close_visible_(m.ReadBool("v"));
 		else if	(ctx.Match(k, Xocfg_tab_btn_mgr.Evt_text_min_chars_changed))				Btns_text_recalc();
 		else if	(ctx.Match(k, Xocfg_tab_btn_mgr.Evt_text_max_chars_changed))				Btns_text_recalc();
+		else if	(ctx.Match(k, Xoapi_html_box.Evt_load_tid_changed))							html_load_tid = m.ReadByte("v");
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}

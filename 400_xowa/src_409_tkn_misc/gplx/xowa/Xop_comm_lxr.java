@@ -16,10 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-class Xop_comm_lxr implements Xop_lxr {
+import gplx.core.btries.*;
+public class Xop_comm_lxr implements Xop_lxr {
 	public byte Lxr_tid() {return Xop_lxr_.Tid_comment;}
-	public void Init_by_wiki(Xow_wiki wiki, ByteTrieMgr_fast core_trie) {core_trie.Add(Bgn_ary, this);}
-	public void Init_by_lang(Xol_lang lang, ByteTrieMgr_fast core_trie) {}
+	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Bgn_ary, this);}
+	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		int lhs_end = cur_pos;
 		int end_pos = Bry_finder.Find_fwd(src, End_ary, cur_pos, src_len);	// search for "-->"	// NOTE: do not reuse cur_pos, else cur_pos may become -1 and fatal error in ctx.Msg_log() below; DATE:2014-06-08
@@ -37,7 +38,7 @@ class Xop_comm_lxr implements Xop_lxr {
 	private static int Trim_ws_if_entire_line_is_commment(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int cur_pos, int lhs_end, int rhs_bgn) {// REF.MW:Preprocessor_DOM.php|preprocessToXml|handle comments; DATE:2014-02-24
 		if (	ctx.Tid_is_popup()
 			&&	ctx.Parse_tid() == Xop_parser_.Parse_tid_page_wiki		// note that only popup parse can generate <!-- --> that makes it to wtxt
-			&&	Bry_.Match(src, lhs_end, rhs_bgn, gplx.xowa.html.modules.popups.Xow_popup_parser.Comment_txt)	// <!--XOWA_SKIP-->
+			&&	Bry_.Match(src, lhs_end, rhs_bgn, Xowa_skip_text_bry)	// <!--XOWA_SKIP-->
 			)
 			return cur_pos;	// in popup mode only do not gobble trailing \n; PAGE:en.w:Gwynedd; DATE:2014-07-01
 		int nl_lhs = -1;
@@ -89,5 +90,7 @@ class Xop_comm_lxr implements Xop_lxr {
 	public static final byte[] Bgn_ary = new byte[] {60, 33, 45, 45}, /*<!--*/ End_ary = new byte[] {45, 45, 62}; /*-->*/
 	private static final int End_len = End_ary.length;
 	public static final Xop_comm_lxr _ = new Xop_comm_lxr(); Xop_comm_lxr() {}
-
+	private static final String Xowa_skip_text_str = "XOWA_SKIP";
+	private static final byte[] Xowa_skip_text_bry = Bry_.new_ascii_(Xowa_skip_text_str);
+	public static final byte[] Xowa_skip_comment_bry = Bry_.new_ascii_("<!--" + Xowa_skip_text_str + "-->");
 }

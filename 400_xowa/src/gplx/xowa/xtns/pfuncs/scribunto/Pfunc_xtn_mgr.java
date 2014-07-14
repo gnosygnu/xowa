@@ -15,11 +15,13 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx;
-public class Byte_xml {
-	public static final byte Nde_bgn = Byte_ascii.Lt, Nde_end = Byte_ascii.Gt
-		, Apos = Byte_ascii.Apos
-		, Space = Byte_ascii.Space
-		;
-	public static final byte[] Nde_close_bgn = Bry_.new_ascii_("</");
+package gplx.xowa.xtns.pfuncs.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+import gplx.xowa.xtns.scribunto.*;
+public class Pfunc_xtn_mgr extends Xox_mgr_base {
+	@Override public byte[] Xtn_key() {return XTN_KEY;} public static final byte[] XTN_KEY = Bry_.new_ascii_("ParserFunctions");
+	@Override public void Xtn_init_by_app(Xoa_app app) {
+		Scrib_xtn_mgr scrib_xtn = (Scrib_xtn_mgr)app.Xtn_mgr().Get_or_fail(Scrib_xtn_mgr.XTN_KEY);
+		scrib_xtn.Lib_mgr().Add(new Pfunc_scrib_lib());
+	}
+	@Override public Xox_mgr Clone_new() {return new Pfunc_xtn_mgr();}
 }

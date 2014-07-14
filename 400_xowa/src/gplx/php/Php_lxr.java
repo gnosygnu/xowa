@@ -16,9 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.php; import gplx.*;
+import gplx.core.btries.*;
 interface Php_lxr {
 	byte Lxr_tid();
-	void Lxr_ini(ByteTrieMgr_slim trie, Php_parser_interrupt[] parser_interrupts);
+	void Lxr_ini(Btrie_slim_mgr trie, Php_parser_interrupt[] parser_interrupts);
 	void Lxr_bgn(byte[] src, int src_len, Php_tkn_wkr tkn_wkr, Php_tkn_factory tkn_factory);
 	int Lxr_make(Php_ctx ctx, int bgn, int cur);
 }
@@ -28,14 +29,14 @@ class Php_lxr_ {
 abstract class Php_lxr_base implements Php_lxr {
 	protected byte[] src; protected int src_len; protected Php_tkn_wkr tkn_wkr; protected Php_tkn_factory tkn_factory;
 	public abstract byte Lxr_tid();
-	public abstract void Lxr_ini(ByteTrieMgr_slim trie, Php_parser_interrupt[] parser_interrupts);
+	public abstract void Lxr_ini(Btrie_slim_mgr trie, Php_parser_interrupt[] parser_interrupts);
 	public void Lxr_bgn(byte[] src, int src_len, Php_tkn_wkr tkn_wkr, Php_tkn_factory tkn_factory) {this.src = src; this.src_len = src_len; this.tkn_wkr = tkn_wkr; this.tkn_factory = tkn_factory;}
 	public abstract int Lxr_make(Php_ctx ctx, int bgn, int cur);
 }
 class Php_lxr_declaration extends Php_lxr_base {
 	@Override public byte Lxr_tid() {return Php_lxr_.Tid_declaration;}
-	@Override public void Lxr_ini(ByteTrieMgr_slim trie, Php_parser_interrupt[] parser_interrupts) {
-		trie.Add(Bry_declaration, this);
+	@Override public void Lxr_ini(Btrie_slim_mgr trie, Php_parser_interrupt[] parser_interrupts) {
+		trie.Add_obj(Bry_declaration, this);
 		parser_interrupts[Byte_ascii.Lt] = Php_parser_interrupt.Char;
 	}
 	@Override public int Lxr_make(Php_ctx ctx, int bgn, int cur) {
@@ -73,8 +74,8 @@ class Php_lxr_ws extends Php_lxr_base {
 	public byte Ws_tid() {return ws_tid;} private byte ws_tid;
 	public byte[] Ws_bry() {return ws_bry;} private byte[] ws_bry;
 	@Override public byte Lxr_tid() {return Php_lxr_.Tid_ws;}
-	@Override public void Lxr_ini(ByteTrieMgr_slim trie, Php_parser_interrupt[] parser_interrupts) {
-		trie.Add(ws_bry, this);
+	@Override public void Lxr_ini(Btrie_slim_mgr trie, Php_parser_interrupt[] parser_interrupts) {
+		trie.Add_obj(ws_bry, this);
 		parser_interrupts[ws_bry[0]] = Php_parser_interrupt.Char;
 	}
 	@Override public int Lxr_make(Php_ctx ctx, int bgn, int cur) {
@@ -106,8 +107,8 @@ class Php_lxr_comment extends Php_lxr_base {
 		}
 	}
 	@Override public byte Lxr_tid() {return Php_lxr_.Tid_comment;}
-	@Override public void Lxr_ini(ByteTrieMgr_slim trie, Php_parser_interrupt[] parser_interrupts) {
-		trie.Add(comment_bgn, this);
+	@Override public void Lxr_ini(Btrie_slim_mgr trie, Php_parser_interrupt[] parser_interrupts) {
+		trie.Add_obj(comment_bgn, this);
 		parser_interrupts[Byte_ascii.Slash] = Php_parser_interrupt.Char; 
 		parser_interrupts[Byte_ascii.Hash] = Php_parser_interrupt.Char; 
 	}
@@ -131,8 +132,8 @@ class Php_lxr_comment extends Php_lxr_base {
 }
 class Php_lxr_var extends Php_lxr_base {
 	@Override public byte Lxr_tid() {return Php_lxr_.Tid_var;}
-	@Override public void Lxr_ini(ByteTrieMgr_slim trie, Php_parser_interrupt[] parser_interrupts) {
-		trie.Add(Bry_var, this);
+	@Override public void Lxr_ini(Btrie_slim_mgr trie, Php_parser_interrupt[] parser_interrupts) {
+		trie.Add_obj(Bry_var, this);
 		parser_interrupts[Byte_ascii.Dollar] = Php_parser_interrupt.Char;
 	}
 	@Override public int Lxr_make(Php_ctx ctx, int bgn, int cur) {
@@ -169,8 +170,8 @@ class Php_lxr_var extends Php_lxr_base {
 class Php_lxr_sym extends Php_lxr_base {
 	public Php_lxr_sym(String hook_str, byte tkn_tid) {this.hook = Bry_.new_ascii_(hook_str); this.tkn_tid = tkn_tid;} private byte[] hook; byte tkn_tid;
 	@Override public byte Lxr_tid() {return Php_lxr_.Tid_sym;}
-	@Override public void Lxr_ini(ByteTrieMgr_slim trie, Php_parser_interrupt[] parser_interrupts) {
-		trie.Add(hook, this);
+	@Override public void Lxr_ini(Btrie_slim_mgr trie, Php_parser_interrupt[] parser_interrupts) {
+		trie.Add_obj(hook, this);
 		parser_interrupts[hook[0]] = Php_parser_interrupt.Char;
 	}
 	@Override public int Lxr_make(Php_ctx ctx, int bgn, int cur) {
@@ -187,8 +188,8 @@ class Php_lxr_quote extends Php_lxr_base {
 		}
 	}
 	@Override public byte Lxr_tid() {return Php_lxr_.Tid_quote;}
-	@Override public void Lxr_ini(ByteTrieMgr_slim trie, Php_parser_interrupt[] parser_interrupts) {
-		trie.Add(quote_bry, this);
+	@Override public void Lxr_ini(Btrie_slim_mgr trie, Php_parser_interrupt[] parser_interrupts) {
+		trie.Add_obj(quote_bry, this);
 		parser_interrupts[quote_tid] = Php_parser_interrupt.Char;
 	}
 	public byte Quote_tid() {return quote_tid;} private byte quote_tid;
@@ -232,7 +233,7 @@ class Php_lxr_quote extends Php_lxr_base {
 class Php_lxr_keyword extends Php_lxr_base {
 	public Php_lxr_keyword(String hook_str, byte tkn_tid) {this.hook = Bry_.new_ascii_(hook_str); this.tkn_tid = tkn_tid;} private byte[] hook; byte tkn_tid;
 	@Override public byte Lxr_tid() {return Php_lxr_.Tid_keyword;}
-	@Override public void Lxr_ini(ByteTrieMgr_slim trie, Php_parser_interrupt[] parser_interrupts) {trie.Add(hook, this);}
+	@Override public void Lxr_ini(Btrie_slim_mgr trie, Php_parser_interrupt[] parser_interrupts) {trie.Add_obj(hook, this);}
 	@Override public int Lxr_make(Php_ctx ctx, int bgn, int cur) {
 		if (cur < src_len) {
 			byte next_byte = src[cur];
@@ -257,9 +258,9 @@ class Php_lxr_keyword extends Php_lxr_base {
 }
 class Php_lxr_num extends Php_lxr_base {
 	@Override public byte Lxr_tid() {return Php_lxr_.Tid_keyword;}
-	@Override public void Lxr_ini(ByteTrieMgr_slim trie, Php_parser_interrupt[] parser_interrupts) {
+	@Override public void Lxr_ini(Btrie_slim_mgr trie, Php_parser_interrupt[] parser_interrupts) {
 		for (int i = 0; i < 10; i++)
-			trie.Add(new byte[] {(byte)(i + Byte_ascii.Num_0)}, this);
+			trie.Add_obj(new byte[] {(byte)(i + Byte_ascii.Num_0)}, this);
 	}
 	@Override public int Lxr_make(Php_ctx ctx, int bgn, int cur) {
 		boolean loop = true;

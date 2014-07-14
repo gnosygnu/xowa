@@ -23,7 +23,7 @@ public class Process_send_wtr {
 		Encode_obj(tmp_bfr, o);
 		return tmp_bfr.XtoStrAndClear();
 	}
-	public void Encode_bool(Bry_bfr bfr, boolean v)			{bfr.Add(v ? CONST_bool_true : CONST_bool_false);}
+	public void Encode_bool(Bry_bfr bfr, boolean v)		{bfr.Add(v ? CONST_bool_true : CONST_bool_false);}
 	public void Encode_int(Bry_bfr bfr, int v)			{bfr.Add_int_variable(v);}
 	public boolean Encode_double(Bry_bfr bfr, double v)	{
 		if (Double_.IsNaN(v)) {usr_dlg.Warn_many(GRP_KEY, "fail_encode_double", "cannot convert non-finite number"); return false;}
@@ -87,7 +87,7 @@ public class Process_send_wtr {
 		else if	(Object_.Eq(c, Double_.ClassOf))			{if (!Encode_double(bfr, Double_.cast_(o))) return false;}	
 		else if	(Object_.Eq(c, String.class))				{if (!Encode_str(bfr, (String)o)) return false;}
 		else if	(Object_.Eq(c, byte[].class))				{if (!Encode_str(bfr, (byte[])o)) return false;}	// NOTE: not in Scribunto; added here for PERF of not re-creating a String Object
-		else if	(Object_.Eq(c, Scrib_lua_proc.class))			{if (!Encode_prc(bfr, (Scrib_lua_proc)o)) return false;}
+		else if	(Object_.Eq(c, Scrib_lua_proc.class))		{if (!Encode_prc(bfr, (Scrib_lua_proc)o)) return false;}
 		else if	(Object_.Eq(c, KeyVal.class))				{if (!Encode_kv(bfr, (KeyVal)o)) return false;}
 		else if	(Object_.Eq(c, KeyVal[].class))			{if (!Encode_ary(bfr, (KeyVal[])o)) return false;}
 		else												{throw Scrib_xtn_mgr.err_("Object cannot be serialized: {0}", ClassAdp_.NameOf_obj(o));}

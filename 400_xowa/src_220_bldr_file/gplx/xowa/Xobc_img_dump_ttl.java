@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.ios.*;
+import gplx.core.flds.*; import gplx.ios.*;
 public class Xobc_img_dump_ttl extends Xob_itm_dump_base implements Xobd_wkr, GfoInvkAble {
 	public Xobc_img_dump_ttl(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Wkr_key() {return KEY;} public static final String KEY = "img.dump_ttl";

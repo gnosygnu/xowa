@@ -38,4 +38,19 @@ public class Lst_section_nde implements Xox_xnde, Xop_xnde_atr_parser {
 	}
 	public void Xtn_write(Xoa_app app, Xoh_html_wtr html_wtr, Xoh_html_wtr_ctx opts, Xop_ctx ctx, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {}	// NOTE: write nothing; <section> is just a bookmark
 	public static final byte Xatr_name = 0, Xatr_bgn = 1, Xatr_end = 2;
+	public static Hash_adp_bry new_xatrs_(Xol_lang lang) {
+		Hash_adp_bry rv = Hash_adp_bry.ci_utf8_(lang.Case_mgr());	// UTF8:see xatrs below
+		rv.Add_str_byte("name", Lst_section_nde.Xatr_name);
+		Xatrs_add(rv, "begin", "end");
+		switch (lang.Lang_id()) {	// NOTE: as of v315572b, i18n is done directly in code, not in magic.php; am wary of adding keywords for general words like begin/end, so adding them manually per language; DATE:2013-02-09
+			case Xol_lang_itm_.Id_de: Xatrs_add(rv, "Anfang", "Ende"); break;
+			case Xol_lang_itm_.Id_he: Xatrs_add(rv, "התחלה", "סוף"); break;
+			case Xol_lang_itm_.Id_pt: Xatrs_add(rv, "começo", "fim"); break;
+		}
+		return rv;
+	}
+	private static void Xatrs_add(Hash_adp_bry hash, String key_begin, String key_end) {
+		hash.Add_str_byte(key_begin	, Lst_section_nde.Xatr_bgn);
+		hash.Add_str_byte(key_end	, Lst_section_nde.Xatr_end);
+	}
 }

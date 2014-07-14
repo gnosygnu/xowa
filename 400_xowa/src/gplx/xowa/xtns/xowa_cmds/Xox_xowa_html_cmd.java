@@ -61,5 +61,5 @@ public class Xox_xowa_html_cmd implements Xox_xnde, Xop_xnde_atr_parser {
 	.Add_bry_byte(Xatr_pos_val__html_end, Pos_html_end)
 	;
 	private static final byte Xatr_pos_id = 1;
-	private static final Hash_adp_bry atr_hash = Hash_adp_bry.ci_().Add_bry_byte(Xatr_pos_key, Xatr_pos_id);
+	private static final Hash_adp_bry atr_hash = Hash_adp_bry.ci_ascii_().Add_bry_byte(Xatr_pos_key, Xatr_pos_id);
 }

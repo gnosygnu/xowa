@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.cite; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 public class Ref_itm_mgr {
-	private Hash_adp_bry grps = Hash_adp_bry.ci_();
+	private Hash_adp_bry grps = Hash_adp_bry.cs_();	// CASE_MATCH:changed from ci; DATE:2014-07-07
 	private Ref_itm_grp grp_default = new Ref_itm_grp(Bry_.Empty);
 	private int uid_last;		
 	public int Tag__next_id() {return ++tag__next_id;} private int tag__next_id = 0;

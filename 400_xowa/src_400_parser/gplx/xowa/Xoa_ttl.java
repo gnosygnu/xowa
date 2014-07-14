@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.parsers.amps.*;
+import gplx.core.btries.*; import gplx.xowa.parsers.amps.*;
 public class Xoa_ttl {	// EX.WP: http://en.wikipedia.org/wiki/Help:Link; REF.MW: Ttl.php|secureAndSplit;
 	public Xow_ns Ns() {return ns;} private Xow_ns ns;
 	public boolean ForceLiteralLink() {return forceLiteralLink;} private boolean forceLiteralLink;
@@ -130,8 +130,8 @@ public class Xoa_ttl {	// EX.WP: http://en.wikipedia.org/wiki/Help:Link; REF.MW:
 		boolean add_ws = false, ltr_bgn_reset = false;
 		int ltr_bgn = -1, txt_bb_len = 0, colon_count = 0; bfr.Clear();
 		Xop_amp_mgr amp_mgr = wiki.App().Parser_amp_mgr();
-		ByteTrieMgr_slim amp_trie = amp_mgr.Amp_trie();
-		//ByteTrieMgr_fast ttlTrie = wiki.App().TtlTrie(); 
+		Btrie_slim_mgr amp_trie = amp_mgr.Amp_trie();
+		//Btrie_fast_mgr ttlTrie = wiki.App().TtlTrie(); 
 		byte[] b_ary = null;
 		int cur = bgn;
 		int match_pos = -1;
@@ -201,9 +201,9 @@ public class Xoa_ttl {	// EX.WP: http://en.wikipedia.org/wiki/Help:Link; REF.MW:
 					break;
 				case Byte_ascii.Amp:
 					int cur2 = cur + 1;//cur = ttlTrie.Match_pos();
-					if (cur2 == end) {}	// guards against terminating &; EX: [[Bisc &]]; NOTE: needed b/c MatchAtCur does not do bounds checking for cur in src; src[src.length] will be called when & is last character;
+					if (cur2 == end) {}	// guards against terminating &; EX: [[Bisc &]]; NOTE: needed b/c Match_bgn does not do bounds checking for cur in src; src[src.length] will be called when & is last character;
 					else {
-						Object html_ent_obj = amp_trie.MatchAtCur(src, cur2, end);
+						Object html_ent_obj = amp_trie.Match_bgn(src, cur2, end);
 						if (html_ent_obj != null) {									
 							Xop_amp_trie_itm amp_itm = (Xop_amp_trie_itm)html_ent_obj;
 							match_pos = amp_trie.Match_pos();
@@ -370,9 +370,9 @@ public class Xoa_ttl {	// EX.WP: http://en.wikipedia.org/wiki/Help:Link; REF.MW:
 //						case Xoa_ttl_trie.Id_underline:if (ltr_bgn != -1) add_ws = true; cur = ttlTrie.Match_pos(); continue;	// only mark add_ws if ltr_seen; this ignores ws at bgn; also, note "continue"
 //						case Xoa_ttl_trie.Id_amp:
 //							cur = ttlTrie.Match_pos();
-//							if (cur == end) {}	// guards against terminating &; EX: [[Bisc &]]; NOTE: needed b/c MatchAtCur does not do bounds checking for cur in src; src[src.length] will be called when & is last character;
+//							if (cur == end) {}	// guards against terminating &; EX: [[Bisc &]]; NOTE: needed b/c Match_bgn does not do bounds checking for cur in src; src[src.length] will be called when & is last character;
 //							else {
-//								Object html_ent_obj = wiki.App().Amp_trie().MatchAtCur(src, cur, end);
+//								Object html_ent_obj = wiki.App().Amp_trie().Match_bgn(src, cur, end);
 //								if (html_ent_obj != null) {									
 //									Xop_amp_trie_itm amp_itm = (Xop_amp_trie_itm)html_ent_obj;
 //									switch (amp_itm.CharInt()) {
@@ -505,8 +505,8 @@ class Xoa_url_encoder {
 	public static final Xoa_url_encoder _ = new Xoa_url_encoder(); Xoa_url_encoder() {}
 }
 class Xoa_ttl_trie {
-	public static ByteTrieMgr_fast new_() {
-		ByteTrieMgr_fast rv = ByteTrieMgr_fast.cs_();
+	public static Btrie_fast_mgr new_() {
+		Btrie_fast_mgr rv = Btrie_fast_mgr.cs_();
 		rv.Add(Byte_ascii.Colon				, Byte_obj_val.new_(Id_colon));
 		rv.Add(Byte_ascii.Hash				, Byte_obj_val.new_(Id_hash));
 		rv.Add(Byte_ascii.Slash				, Byte_obj_val.new_(Id_slash));

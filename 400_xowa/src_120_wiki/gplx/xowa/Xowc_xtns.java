@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 public class Xowc_xtns implements GfoInvkAble {
-	private Hash_adp_bry hash = Hash_adp_bry.ci_();
+	private Hash_adp_bry hash = Hash_adp_bry.ci_ascii_();
 	public Xowc_xtns() {hash.Add(Xowc_xtn_pages.Xtn_key, itm_pages);}
 	public Xowc_xtn_pages Itm_pages() {return itm_pages;} private Xowc_xtn_pages itm_pages = new Xowc_xtn_pages();
 	public Object Get_by_key(byte[] key) {return hash.Get_by_bry(key);}

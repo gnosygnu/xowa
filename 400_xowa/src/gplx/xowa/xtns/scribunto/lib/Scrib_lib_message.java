@@ -148,7 +148,13 @@ class Scrib_lib_message_data {
 		return msg_val;
 	}
 	static final byte Key_tid_keys = 1, Key_tid_rawMessage = 2, Key_tid_lang = 3, Key_tid_useDB = 4, Key_tid_title = 5, Key_tid_params = 6;
-	private static final Hash_adp_bry key_hash = Hash_adp_bry.ci_().Add_str_byte("keys", Key_tid_keys).Add_str_byte("rawMessage", Key_tid_rawMessage).Add_str_byte("lang", Key_tid_lang).Add_str_byte("useDB", Key_tid_useDB).Add_str_byte("title", Key_tid_title).Add_str_byte("params", Key_tid_params);
+	private static final Hash_adp_bry key_hash = Hash_adp_bry.ci_ascii_()
+	.Add_str_byte("keys", Key_tid_keys)
+	.Add_str_byte("rawMessage", Key_tid_rawMessage)
+	.Add_str_byte("lang", Key_tid_lang)
+	.Add_str_byte("useDB", Key_tid_useDB)
+	.Add_str_byte("title", Key_tid_title)
+	.Add_str_byte("params", Key_tid_params);
 	public static byte parse_fmt_(byte[] key) {return parse_or_fail(fmt_hash, key, "invalid message format: {0}");}
 	public static byte parse_chk_(byte[] key) {return parse_or_fail(check_hash, key, "invalid check arg: {0}");}
 	public static byte parse_or_fail(Hash_adp_bry hash, byte[] key, String fmt) {
@@ -157,7 +163,15 @@ class Scrib_lib_message_data {
 		return ((Byte_obj_val)o).Val();
 	}
 	public static final byte Fmt_tid_parse = 1, Fmt_tid_text = 2, Fmt_tid_plain = 3, Fmt_tid_escaped = 4, Fmt_tid_parseAsBlock = 5;
-	private static final Hash_adp_bry fmt_hash = Hash_adp_bry.ci_().Add_str_byte("parse", Fmt_tid_parse).Add_str_byte("text", Fmt_tid_text).Add_str_byte("plain", Fmt_tid_plain).Add_str_byte("escaped", Fmt_tid_escaped).Add_str_byte("parseAsBlock", Fmt_tid_parseAsBlock);
+	private static final Hash_adp_bry fmt_hash = Hash_adp_bry.ci_ascii_()
+	.Add_str_byte("parse", Fmt_tid_parse)
+	.Add_str_byte("text", Fmt_tid_text)
+	.Add_str_byte("plain", Fmt_tid_plain)
+	.Add_str_byte("escaped", Fmt_tid_escaped)
+	.Add_str_byte("parseAsBlock", Fmt_tid_parseAsBlock);
 	public static final byte Check_tid_exists = 1, Check_tid_isBlank = 2, Check_tid_isDisabled = 3;
-	private static final Hash_adp_bry check_hash = Hash_adp_bry.ci_().Add_str_byte("exists", Check_tid_exists).Add_str_byte("isBlank", Check_tid_isBlank).Add_str_byte("isDisabled", Check_tid_isDisabled);
+	private static final Hash_adp_bry check_hash = Hash_adp_bry.ci_ascii_()
+	.Add_str_byte("exists", Check_tid_exists)
+	.Add_str_byte("isBlank", Check_tid_isBlank)
+	.Add_str_byte("isDisabled", Check_tid_isDisabled);
 }

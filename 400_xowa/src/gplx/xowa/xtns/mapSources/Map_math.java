@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.mapSources; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
+import gplx.core.btries.*;
 class Map_math {// REF.MW:MapSources_math.php
 	private int word_idx_nsew;
 	private double[] rv = new double[4];
@@ -224,7 +225,7 @@ class Map_math {// REF.MW:MapSources_math.php
 	}
 	private static byte Parse_dir(byte[] dir) {
 		if (Bry_.Len_eq_0(dir)) return Dir_unknown_id;
-		Object dir_obj = Dir_trie.MatchAtCur(dir, 0, dir.length);
+		Object dir_obj = Dir_trie.Match_bgn(dir, 0, dir.length);
 		return dir_obj == null ? Dir_unknown_id : ((Byte_obj_val)dir_obj).Val();
 	}
 	private static int Parse_precision(int val) {	// REF.MW: MapSourcesMath.php|newCoord
@@ -238,7 +239,7 @@ class Map_math {// REF.MW:MapSources_math.php
 		int i = 0;
 		while (i < input_end) {
 			byte b = input[i];
-			Object o = Input_trie.Match(b, input, i, input_end);
+			Object o = Input_trie.Match_bgn_w_byte(b, input, i, input_end);
 			if (o == null) {
 				bfr.Add_byte(b);
 				++i;
@@ -260,7 +261,7 @@ class Map_math {// REF.MW:MapSources_math.php
 	}
 	private static final byte Dir_unknown_id = 0, Dir_lat_id = 1, Dir_long_id = 2;
 	public static final byte[] Dir_lat_bry = Bry_.new_ascii_("lat"), Dir_long_bry = Bry_.new_ascii_("long");
-	private static final ByteTrieMgr_slim Dir_trie = ByteTrieMgr_slim.ci_ascii_()	// NOTE:ci.ascii:MW_const.en
+	private static final Btrie_slim_mgr Dir_trie = Btrie_slim_mgr.ci_ascii_()	// NOTE:ci.ascii:MW_const.en
 	.Add_bry_bval(Dir_lat_bry			, Dir_lat_id)
 	.Add_bry_bval(Dir_long_bry			, Dir_long_id)
 	;
@@ -275,7 +276,7 @@ class Map_math {// REF.MW:MapSources_math.php
 	private static final byte[] Input_units = new byte[] {Input_byte_degree, Byte_ascii.Apos, Byte_ascii.Quote, Byte_ascii.Space};
 	private static final int Input_units_len = Input_units.length;
 	private static final byte[] Input_bry_degree = Bry_.new_utf8_("°");
-	private static final ByteTrieMgr_slim Input_trie = ByteTrieMgr_slim.cs_()
+	private static final Btrie_slim_mgr Input_trie = Btrie_slim_mgr.cs_()
 	.Add_str_byte("'"					, Input_tid_apos)		// NOTE: must add ' so that "'" -> "' "
 	.Add_str_byte("‘"					, Input_tid_apos)
 	.Add_str_byte("’"					, Input_tid_apos)

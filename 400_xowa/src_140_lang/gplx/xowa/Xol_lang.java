@@ -77,11 +77,7 @@ public class Xol_lang implements GfoInvkAble {
 	public Xop_lnki_arg_parser Lnki_arg_parser() {return lnki_arg_parser;} private Xop_lnki_arg_parser lnki_arg_parser = new Xop_lnki_arg_parser(); 
 	public Xol_func_name_regy Func_regy() {return func_regy;} private Xol_func_name_regy func_regy;
 	public byte Img_thumb_halign_default() {return img_thumb_halign_default;} private byte img_thumb_halign_default = Xop_lnki_align_h.Right;
-
-	public Hash_adp_bry Xatrs_ref() {return xatrs_ref;} private Hash_adp_bry xatrs_ref = Hash_adp_bry.ci_();
-	public Hash_adp_bry Xatrs_references() {return xatrs_references;} private Hash_adp_bry xatrs_references = Hash_adp_bry.ci_();
-	public Hash_adp_bry Xatrs_pages() {return xatrs_pages;} private Hash_adp_bry xatrs_pages = Hash_adp_bry.ci_();
-	public Hash_adp_bry Xatrs_section() {if (xatrs_section == null) xatrs_section = Lst_pfunc_lst.new_xatrs_(this); return xatrs_section;} private Hash_adp_bry xatrs_section;
+	public Hash_adp_bry Xatrs_section() {if (xatrs_section == null) xatrs_section = Lst_section_nde.new_xatrs_(this); return xatrs_section;} private Hash_adp_bry xatrs_section;
 	public void Evt_lang_changed() {
 		lnki_arg_parser.Evt_lang_changed(this);
 		func_regy.Evt_lang_changed(this);

@@ -16,15 +16,16 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.btries.*;
 class Xop_nl_tab_lxr implements Xop_lxr {
 	public byte Lxr_tid() {return Xop_lxr_.Tid_nl_tab;}
-	public void Init_by_wiki(Xow_wiki wiki, ByteTrieMgr_fast core_trie) {core_trie.Add(Hook_nl_tab, this);} private static final byte[] Hook_nl_tab = new byte[] {Byte_ascii.NewLine, Byte_ascii.Tab};
-	public void Init_by_lang(Xol_lang lang, ByteTrieMgr_fast core_trie) {}
+	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Hook_nl_tab, this);} private static final byte[] Hook_nl_tab = new byte[] {Byte_ascii.NewLine, Byte_ascii.Tab};
+	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		int non_ws_pos = Bry_finder.Find_fwd_while_space_or_tab(src, cur_pos, src_len);
 		if (non_ws_pos < src_len) {	// bounds check
-			ByteTrieMgr_slim tblw_trie = ctx.App().Utl_trie_tblw_ws();
-			Object tblw_obj = tblw_trie.MatchAtCur(src, non_ws_pos, src_len);
+			Btrie_slim_mgr tblw_trie = ctx.App().Utl_trie_tblw_ws();
+			Object tblw_obj = tblw_trie.Match_bgn(src, non_ws_pos, src_len);
 			if (tblw_obj != null) {
 				Xop_tblw_ws_itm tblw_itm = (Xop_tblw_ws_itm)tblw_obj;
 				byte itm_type = tblw_itm.Tblw_type();

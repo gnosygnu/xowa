@@ -42,9 +42,9 @@ public class Xou_history_mgr implements GfoInvkAble {// app.user.history
 		Xoa_url url = page.Url();
 		Xoa_ttl ttl = page.Ttl();
 		byte[] page_ttl = null;
-		ListAdp redirect_list = page.Redirect_list();
+		ListAdp redirect_list = page.Redirected_ttls();
 		if (redirect_list.Count() > 0)		// page was redirected; add src ttl to history, not trg; EX: UK -> United Kingdom; add "UK"; DATE:2014-02-28
-			page_ttl = (byte[])page.Redirect_list().FetchAt(0);
+			page_ttl = (byte[])page.Redirected_ttls().FetchAt(0);
 		else {
 			page_ttl = Bry_.Add(ttl.Ns().Name_db_w_colon(), ttl.Page_txt());  // use ttl.Page_txt() b/c it normalizes space/casing (url.Page_txt does not)
 			if (url.Args().length > 0)

@@ -25,6 +25,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 	public Scrib_lib Init() {procs.Init_by_lib(this, Proc_names); return this;}
 	public Scrib_lua_mod Register(Scrib_core core, Io_url script_dir) {
 		Init();
+		core.RegisterInterface(this, script_dir.GenSubFil("mwInit.lua"));	// DATE:2014-07-12
 		mod = core.RegisterInterface(this, script_dir.GenSubFil("mw.lua")
 			, KeyVal_.new_("allowEnvFuncs", allow_env_funcs));
 		return mod;
@@ -55,6 +56,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 			case Proc_isSubsting:							return IsSubsting(args, rslt);
 			case Proc_newChildFrame:						return NewChildFrame(args, rslt);
 			case Proc_getFrameTitle:						return GetFrameTitle(args, rslt);
+			case Proc_setTTL:								return SetTTL(args, rslt);
 			default: throw Err_.unhandled(key);
 		}
 	}
@@ -64,7 +66,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 	, Proc_getExpandedArgument = 3, Proc_getAllExpandedArguments = 4
 	, Proc_expandTemplate = 5, Proc_preprocess = 6, Proc_callParserFunction = 7
 	, Proc_incrementExpensiveFunctionCount = 8, Proc_isSubsting = 9
-	, Proc_newChildFrame = 10, Proc_getFrameTitle = 11
+	, Proc_newChildFrame = 10, Proc_getFrameTitle = 11, Proc_setTTL = 12
 	;
 	public static final String 
 	  Invk_loadPackage = "loadPackage"
@@ -72,7 +74,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 	, Invk_getExpandedArgument = "getExpandedArgument", Invk_getAllExpandedArguments = "getAllExpandedArguments"
 	, Invk_expandTemplate = "expandTemplate", Invk_preprocess = "preprocess", Invk_callParserFunction = "callParserFunction"
 	, Invk_incrementExpensiveFunctionCount = "incrementExpensiveFunctionCount", Invk_isSubsting = "isSubsting"
-	, Invk_newChildFrame = "newChildFrame", Invk_getFrameTitle = "getFrameTitle"
+	, Invk_newChildFrame = "newChildFrame", Invk_getFrameTitle = "getFrameTitle", Invk_setTTL = "setTTL"
 	;
 	private static final String[] Proc_names = String_.Ary
 	( Invk_loadPackage
@@ -80,7 +82,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 	, Invk_getExpandedArgument, Invk_getAllExpandedArguments
 	, Invk_expandTemplate, Invk_preprocess, Invk_callParserFunction
 	, Invk_incrementExpensiveFunctionCount, Invk_isSubsting
-	, Invk_newChildFrame, Invk_getFrameTitle
+	, Invk_newChildFrame, Invk_getFrameTitle, Invk_setTTL
 	);
 	public boolean LoadPackage(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		String mod_name = args.Pull_str(0);
@@ -355,6 +357,12 @@ public class Scrib_lib_mw implements Scrib_lib {
 		String frame_id = args.Pull_str(0);
 		Xot_invk frame = Scrib_frame_.Get_frame(core, frame_id);
 		return rslt.Init_obj(frame.Frame_ttl());
+	}
+	public boolean SetTTL(Scrib_proc_args args, Scrib_proc_rslt rslt) { // needed for {{cite web}} PAGE:en.w:A DATE:2014-07-12
+		int timeToLive = args.Pull_int(0);
+		Xot_invk current_frame = core.Frame_current();
+		current_frame.Frame_lifetime_(timeToLive);
+		return rslt.Init_empty();
 	}
 }
 class Scrib_lib_mw_callParserFunction_sorter implements gplx.lists.ComparerAble {

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.btries.*;
 public class Xop_tblw_lxr_ws {
 	public static int Make(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos, byte wlxr_type, boolean called_from_pre) {
 		int rv = Xop_tblw_lxr.Handle_bang(wlxr_type, ctx, ctx.Tkn_mkr(), root, src, src_len, bgn_pos, cur_pos);
@@ -71,8 +72,8 @@ class Xop_tblw_ws_itm {
 
 	public static final byte Type_tb = Xop_tblw_wkr.Tblw_type_tb, Type_te = Xop_tblw_wkr.Tblw_type_te, Type_tr = Xop_tblw_wkr.Tblw_type_tr, Type_tc = Xop_tblw_wkr.Tblw_type_tc
 		, Type_th = Xop_tblw_wkr.Tblw_type_th, Type_td = Xop_tblw_wkr.Tblw_type_td, Type_nl = 16, Type_xnde = 17;
-	public static ByteTrieMgr_slim trie_() {// MW.REF:Parser.php|doBlockLevels
-		ByteTrieMgr_slim rv = ByteTrieMgr_slim.cs_();
+	public static Btrie_slim_mgr trie_() {// MW.REF:Parser.php|doBlockLevels
+		Btrie_slim_mgr rv = Btrie_slim_mgr.cs_();
 		trie_itm(rv, Type_tb, Xop_tblw_lxr_ws.Hook_tb);
 		trie_itm(rv, Type_te, Xop_tblw_lxr_ws.Hook_te);
 		trie_itm(rv, Type_tr, Xop_tblw_lxr_ws.Hook_tr);
@@ -100,11 +101,11 @@ class Xop_tblw_ws_itm {
 		trie_itm_xnde(rv, Xop_xnde_tag_.Tag_ol);
 		return rv;
 	}
-	private static void trie_itm(ByteTrieMgr_slim trie, byte type, byte[] bry) {trie.Add(bry, new Xop_tblw_ws_itm(type, bry.length));}
-	private static void trie_itm_xnde(ByteTrieMgr_slim trie, Xop_xnde_tag tag) {
+	private static void trie_itm(Btrie_slim_mgr trie, byte type, byte[] bry) {trie.Add_obj(bry, new Xop_tblw_ws_itm(type, bry.length));}
+	private static void trie_itm_xnde(Btrie_slim_mgr trie, Xop_xnde_tag tag) {
 		byte[] tag_name = tag.Name_bry();
 		int tag_name_len = tag_name.length;
-		trie.Add(Bry_.Add(Bry_xnde_bgn, tag_name), new Xop_tblw_ws_itm(Type_xnde, tag_name_len));
-		trie.Add(Bry_.Add(Bry_xnde_end, tag_name), new Xop_tblw_ws_itm(Type_xnde, tag_name_len + 1));
+		trie.Add_obj(Bry_.Add(Bry_xnde_bgn, tag_name), new Xop_tblw_ws_itm(Type_xnde, tag_name_len));
+		trie.Add_obj(Bry_.Add(Bry_xnde_end, tag_name), new Xop_tblw_ws_itm(Type_xnde, tag_name_len + 1));
 	}	static byte[] Bry_xnde_bgn = new byte[] {Byte_ascii.Lt, Byte_ascii.Slash}, Bry_xnde_end = new byte[] {Byte_ascii.Lt};
 }

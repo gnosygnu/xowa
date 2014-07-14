@@ -16,12 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.modules.popups; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.modules.*;
+import gplx.core.btries.*;
 import gplx.xowa.apis.xowa.html.modules.*;
 import gplx.xowa.gui.views.*;
 import gplx.xowa.html.modules.popups.keeplists.*;
 public class Xow_popup_parser {
 	private Xoa_app app; private Xow_wiki wiki; private Xop_parser parser;
-	private ByteTrieMgr_fast tmpl_trie, wtxt_trie; private Xop_tkn_mkr tkn_mkr;
+	private Btrie_fast_mgr tmpl_trie, wtxt_trie; private Xop_tkn_mkr tkn_mkr;
 	private Xop_ctx tmpl_ctx; private Xop_root_tkn tmpl_root, wtxt_root; private Xot_compile_data tmpl_props = new Xot_compile_data();		
 	private Xoh_html_wtr_ctx hctx = Xoh_html_wtr_ctx.Popup;
 	public Xow_popup_cfg Cfg() {return cfg;} private Xow_popup_cfg cfg = new Xow_popup_cfg();
@@ -196,7 +197,4 @@ public class Xow_popup_parser {
 			tmpl_root.Subs_get(i).Tmpl_compile(tmpl_ctx, src, tmpl_props);
 		return Xot_tmpl_wtr._.Write_all(tmpl_ctx, tmpl_root, src);
 	}
-	private static final String Comment_txt_str = "XOWA_SKIP";
-	public static final byte[] Comment_txt = Bry_.new_ascii_(Comment_txt_str);
-	public static final byte[] Comment_tkn = Bry_.new_ascii_("<!--" + Comment_txt_str + "-->");
 }

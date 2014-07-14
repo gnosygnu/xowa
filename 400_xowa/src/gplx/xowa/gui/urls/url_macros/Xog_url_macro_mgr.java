@@ -43,9 +43,9 @@ public class Xog_url_macro_mgr {
 		boolean dot_missing = dot_pos == -1;
 		int type_bgn = dot_pos + 1, type_end = colon_pos;	// +1 to start type after dot;
 		if (dot_missing) type_bgn = 0;
-		Object custom_obj = custom_mgr.Trie().MatchAtCurExact(raw, 0, type_end);	// match entire prefix
+		Object custom_obj = custom_mgr.Trie().Match_exact(raw, 0, type_end);	// match entire prefix
 		if (custom_obj == null) {
-			Object type_obj = types_mgr.Trie().MatchAtCurExact(raw, type_bgn, type_end);
+			Object type_obj = types_mgr.Trie().Match_exact(raw, type_bgn, type_end);
 			if (type_obj == null) return Unhandled;	// type abrv is not known; exit; EX: "en.unknown:Page"; "Page"
 			byte[] lang_bry = dot_missing ? lang_default : Bry_.Mid(raw, 0, dot_pos);
 			Xog_url_macro_itm type_itm = (Xog_url_macro_itm)type_obj;

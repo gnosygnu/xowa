@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.ctgs; import gplx.*; import gplx.xowa.*;
+import gplx.core.flds.*;
 public class Xoctg_idx_mgr implements GfoInvkAble {
 	ListAdp itms = ListAdp_.new_();
 	public int Block_len() {return block_len;} public Xoctg_idx_mgr Block_len_(int v) {this.block_len = v; return this;} private int block_len = Io_mgr.Len_mb;

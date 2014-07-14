@@ -30,7 +30,7 @@ public class Xow_page_cache {
 		if (rv == null) {
 			Xoa_page page = wiki.Data_mgr().Get_page(ttl, true);	// NOTE: do not call Db_mgr.Load_page; need to handle redirects
 			if (!page.Missing()) {
-				rv = new Xow_page_cache_itm(page.Ttl(), page.Data_raw());
+				rv = new Xow_page_cache_itm(page.Ttl(), page.Data_raw(), page.Redirected_src());
 				cache.Add_bry_obj(ttl_full_db, rv);
 			}
 		}

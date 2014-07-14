@@ -16,10 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.grammars; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+import gplx.core.btries.*;
 public class Xol_grammar_ {
 	public static final byte Tid__max = 9; 
 	public static final byte Tid_genitive = 0, Tid_elative = 1, Tid_partitive = 2, Tid_illative = 3, Tid_inessive = 4, Tid_accusative = 5, Tid_instrumental = 6, Tid_prepositional = 7, Tid_dative = 8, Tid_unknown = Byte_.MaxValue_127;
-	private static final ByteTrieMgr_slim Tid_trie = ByteTrieMgr_slim.ci_ascii_()	// NOTE:ci.ascii:MW kwds
+	private static final Btrie_slim_mgr Tid_trie = Btrie_slim_mgr.ci_ascii_()	// NOTE:ci.ascii:MW kwds
 	.Add_str_byte("genitive", Tid_genitive)
 	.Add_str_byte("elative", Tid_elative)
 	.Add_str_byte("partitive", Tid_partitive)
@@ -32,7 +33,7 @@ public class Xol_grammar_ {
 	;
 	public static byte Tid_of_type(byte[] v) {
 		if (Bry_.Len_eq_0(v)) return Tid_unknown;
-		Object o = Xol_grammar_.Tid_trie.MatchAtCurExact(v, 0, v.length);
+		Object o = Xol_grammar_.Tid_trie.Match_exact(v, 0, v.length);
 		return o == null ? Tid_unknown : ((Byte_obj_val)o).Val();
 	}
 	public static Xol_grammar new_by_lang_id(int lang_id) {

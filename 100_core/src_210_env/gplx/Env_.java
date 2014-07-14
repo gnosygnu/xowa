@@ -53,6 +53,9 @@ public class Env_ {
 	public static int TickCount_elapsed_in_frac(long time_bgn) {return (int)(Env_.TickCount() - time_bgn);}
 	public static long TickCount_Test = -1;	// in milliseconds
 	public static void TickCount_normal() {TickCount_Test = -1;}
+	public static long System_cpu_count() {return Runtime.getRuntime().availableProcessors();}	
+	public static long System_memory_max() {return Runtime.getRuntime().maxMemory();}	
+	public static long System_memory_total() {return Runtime.getRuntime().totalMemory();}	
 	public static long System_memory_free() {return Runtime.getRuntime().freeMemory();}	
 	public static final String LocalHost = "127.0.0.1";
 	public static String NewLine_lang() {return mode_testing ? "\n" : "\n";}	

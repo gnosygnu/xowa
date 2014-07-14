@@ -128,7 +128,7 @@ public class Xobc_parse_run extends Xob_itm_basic_base implements Xob_cmd, GfoIn
 			ctx.App().Utl_bry_bfr_mkr().Clear_fail_check();
 		}
 		catch (Exception exc) {
-			bldr.Usr_dlg().Warn_many(GRP_KEY, "parse", "failed to parse ~{0} error ~{1}", ctx.Cur_page().Url().X_to_full_str_safe(), Err_.Message_gplx_brief(exc));
+			bldr.Usr_dlg().Warn_many(GRP_KEY, "parse", "failed to parse ~{0} error ~{1}", ctx.Cur_page().Url().Xto_full_str_safe(), Err_.Message_gplx_brief(exc));
 			ctx.App().Utl_bry_bfr_mkr().Clear();
 		}
 	}	private Xop_redirect_mgr redirect_mgr;

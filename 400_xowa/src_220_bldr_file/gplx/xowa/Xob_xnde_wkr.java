@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.ios.*;
+import gplx.core.flds.*; import gplx.ios.*;
 public interface Xob_xnde_wkr {
 	void Wkr_run(Xop_ctx ctx, Xop_root_tkn root, Xop_xnde_tkn xnde);
 }

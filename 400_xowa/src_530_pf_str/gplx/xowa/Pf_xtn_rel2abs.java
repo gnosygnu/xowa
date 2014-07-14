@@ -16,17 +16,18 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.btries.*;
 public class Pf_xtn_rel2abs extends Pf_func_base {
 	@Override public boolean Func_require_colon_arg() {return true;}
 	private static final byte[] Ary_dot_slash = Bry_.new_ascii_("./"), Ary_dot_dot = Bry_.new_ascii_(".."), Ary_dot_dot_slash = Bry_.new_ascii_("../");
 	private static void qry_bgns_with_init() {
-		qry_bgns_with = ByteTrieMgr_fast.cs_();
+		qry_bgns_with = Btrie_fast_mgr.cs_();
 		qry_bgns_with.Add(Byte_ascii.Slash, Int_obj_ref.new_(Id_slash));
 		qry_bgns_with.Add(Byte_ascii.Dot, Int_obj_ref.new_(Id_dot));
 		qry_bgns_with.Add(Ary_dot_slash, Int_obj_ref.new_(Id_dot_slash));
 		qry_bgns_with.Add(Ary_dot_dot, Int_obj_ref.new_(Id_dot_dot));
 		qry_bgns_with.Add(Ary_dot_dot_slash, Int_obj_ref.new_(Id_dot_dot_slash));
-	}	static ByteTrieMgr_fast qry_bgns_with;
+	}	static Btrie_fast_mgr qry_bgns_with;
 	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bb) {// REF.MW:ParserFunctions_body.php
 		byte[] qry = Eval_argx(ctx, src, caller, self);
 		byte[] orig = Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, self.Args_len(), 0);
@@ -66,7 +67,7 @@ public class Pf_xtn_rel2abs extends Pf_func_base {
 		byte[] tmp = src;
 		int tmp_adj = 0, i = 0, prv_slash_end = 0, tmp_len = src_len, seg_pos = 0;
 		boolean tmp_is_1st = true;		
-		Object o = qry_bgns_with.MatchAtCur(qry, 0, qry_len);	// check if qry begins with ".", "/", "./", "../"; if it doesn't return;
+		Object o = qry_bgns_with.Match_bgn(qry, 0, qry_len);	// check if qry begins with ".", "/", "./", "../"; if it doesn't return;
 		if (o != null) {
 			int id = ((Int_obj_ref)o).Val();
 			rel2abs_tid.Val_(id);

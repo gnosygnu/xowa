@@ -53,4 +53,11 @@ public class Xop_lnke_wkr_brack_tst {
 		,	"http://a.org"
 		);
 	}
+	@Test  public void Lnki_one() {	// PURPOSE: parallel test for "http://a.org[[B]]"; DATE:2014-07-11
+		fxt.Test_parse_page_wiki_str
+		( "[http://a.org b [[C]] d]"
+		,String_.Concat_lines_nl_skip_last
+		( "<a href=\"http://a.org\" class=\"external text\" rel=\"nofollow\">b <a href=\"/wiki/C\">C</a> d</a>"
+		));
+	}
 }

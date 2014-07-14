@@ -22,6 +22,11 @@ public class Double_ {
 	public static final double NaN = Double.NaN;;					
 	public static final byte[] NaN_bry = Bry_.new_ascii_("NaN");
 	public static boolean IsNaN(double v) {return Double.isNaN(v);}	
+	public static int Compare(double lhs, double rhs) {
+		if		(lhs == rhs) 	return CompareAble_.Same;
+		else if (lhs < rhs)		return CompareAble_.Less;
+		else 					return CompareAble_.More;
+	}
 	public static double coerce_(Object v) {
 		try {String s = String_.as_(v); return s == null ? Double_.cast_(v) : Double_.parse_(s);}
 		catch (Exception e) {throw Err_.cast_(e, double.class, v);}

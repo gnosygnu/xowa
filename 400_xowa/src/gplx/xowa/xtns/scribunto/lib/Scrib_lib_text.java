@@ -43,7 +43,7 @@ public class Scrib_lib_text implements Scrib_lib {
 	public boolean GetEntityTable(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		if (Html_entity_ == null) Html_entity_ = Scrib_lib_text_html_entities.new_();
 		return rslt.Init_obj(Html_entity_);
-	}	static KeyVal[] Html_entity_;
+	}	private static KeyVal[] Html_entity_;
 	public void Notify_wiki_changed() {if (notify_wiki_changed_fnc != null) core.Interpreter().CallFunction(notify_wiki_changed_fnc.Id(), KeyVal_.Ary_empty);}
 	public boolean Init_text_for_wiki(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		Xow_msg_mgr msg_mgr = core.Wiki().Msg_mgr();

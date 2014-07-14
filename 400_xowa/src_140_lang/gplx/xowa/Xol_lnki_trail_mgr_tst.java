@@ -35,7 +35,7 @@ class Xol_lnki_trail_mgr_fxt {
 		Tfds.Eq(expd_len, lang.Lnki_trail_mgr().Count());
 		for (int i = 0; i < expd_len; i++) {
 			byte[] expd_bry = Bry_.new_utf8_(expd_ary[i]);
-			byte[] actl_bry = (byte[])lnki_trail_mgr.Trie().MatchAtCur(expd_bry, 0, expd_bry.length);
+			byte[] actl_bry = (byte[])lnki_trail_mgr.Trie().Match_bgn(expd_bry, 0, expd_bry.length);
 			Tfds.Eq_bry(expd_bry, actl_bry);
 		}
 	}

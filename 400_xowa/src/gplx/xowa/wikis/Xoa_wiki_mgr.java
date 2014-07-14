@@ -17,12 +17,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.xtns.wdatas.*;
-public class Xoa_wiki_mgr implements GfoInvkAble {		
+public class Xoa_wiki_mgr implements GfoInvkAble {
+	private Xoa_app app;
+	private ListAdp list = ListAdp_.new_(); private Hash_adp_bry hash = Hash_adp_bry.ci_ascii_();	// ASCII:url_domain; EX:en.wikipedia.org
 	public Xoa_wiki_mgr(Xoa_app app) {
 		this.app = app;
 		wiki_regy = new Xoa_wiki_regy(app);
 		wdata_mgr = new Wdata_wiki_mgr(app);
-	}	private Xoa_app app;
+	}
 	public Xoa_wiki_regy Wiki_regy() {return wiki_regy;} private Xoa_wiki_regy wiki_regy;
 	public Cfg_nde_root Groups() {return groups;} Cfg_nde_root groups = new Cfg_nde_root().Root_(new Xoac_wiki_grp(Bry_.Empty), Xoac_lang_grp.Make_grp, Bry_.Ary_empty);
 	public Xow_script_mgr Scripts() {return scripts;} private Xow_script_mgr scripts = new Xow_script_mgr();
@@ -31,7 +33,7 @@ public class Xoa_wiki_mgr implements GfoInvkAble {
 	public void Init_by_app() {
 		css_installer.Init_by_app(app);
 	}
-	public int Count() {return hash.Count();} Hash_adp_bry hash = Hash_adp_bry.ci_(); ListAdp list = ListAdp_.new_();
+	public int Count() {return hash.Count();}
 	public Xow_wiki Get_at(int i) {return Int_.Between(i, 0, this.Count() - 1) ? (Xow_wiki)list.FetchAt(i) : null;}
 	public Xow_wiki Get_by_key_or_null(byte[] key) {return Bry_.Len_eq_0(key) ? null : (Xow_wiki)hash.Fetch(key);}
 	public Xow_wiki Get_by_key_or_null(byte[] src, int bgn, int end) {return (Xow_wiki)hash.Get_by_mid(src, bgn, end);}

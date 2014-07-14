@@ -16,8 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfs; import gplx.*;
+import gplx.core.btries.*;
 class Gfs_parser_ctx {
-	public ByteTrieMgr_fast Trie() {return trie;} ByteTrieMgr_fast trie;
+	public Btrie_fast_mgr Trie() {return trie;} Btrie_fast_mgr trie;
 	public Gfs_nde Root() {return root;} Gfs_nde root = new Gfs_nde();
 	public byte[] Src() {return src;} private byte[] src;
 	public int Src_len() {return src_len;} private int src_len;
@@ -29,7 +30,7 @@ class Gfs_parser_ctx {
 	public void Process_eos() {}
 	public void Process_lxr(int nxt_pos, Gfs_lxr nxt_lxr)	{this.nxt_pos = nxt_pos; this.nxt_lxr = nxt_lxr;}
 	public void Process_null(int cur_pos)					{this.nxt_pos = cur_pos; this.nxt_lxr = null;}
-	public void Init(ByteTrieMgr_fast trie, byte[] src, int src_len) {
+	public void Init(Btrie_fast_mgr trie, byte[] src, int src_len) {
 		this.trie = trie; this.src = src; this.src_len = src_len;
 		cur_nde = root;
 		Stack_add();

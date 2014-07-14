@@ -20,11 +20,10 @@ import org.junit.*;
 import gplx.xowa.xtns.wdatas.*;
 public class Scrib_lib_wikibase_entity_tst {
 	@Before public void init() {
-		fxt.Clear();
-		fxt.Init_page("{{#invoke:Mod_0|Func_0}}");
+		fxt.Init_scrib_proc();
 		lib = fxt.Core().Lib_wikibase().Init();
 	}	private Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt(); private Scrib_lib lib;
 	@Test  public void GetGlobalSiteId() {
-		fxt.Test_lib_proc(lib, Scrib_lib_wikibase_entity.Invk_getGlobalSiteId, Object_.Ary_empty, "enwiki");
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase_entity.Invk_getGlobalSiteId, Object_.Ary_empty, "enwiki");
 	}
 }	

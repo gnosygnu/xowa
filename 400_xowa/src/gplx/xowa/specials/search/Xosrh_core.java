@@ -120,7 +120,7 @@ class Xosrh_args_mgr {
 		ns_mgr.Add_main_if_empty();
 	}	private static final byte Arg_search = 0, Arg_page_idx = 1, Arg_sort = 2;
 	private static byte[] Ns_bry = Bry_.new_ascii_("ns");
-	private static final Hash_adp_bry url_args = Hash_adp_bry.ci_()
+	private static final Hash_adp_bry url_args = Hash_adp_bry.ci_ascii_()
 		.Add_str_byte("xowa_page_index", Arg_page_idx)
 		.Add_str_byte("xowa_sort", Arg_sort)
 		.Add_str_byte("search", Arg_search)

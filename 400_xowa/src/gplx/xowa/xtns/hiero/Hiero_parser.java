@@ -16,9 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.hiero; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.html.*; import gplx.xowa.html.*;
+import gplx.core.btries.*; import gplx.html.*; import gplx.xowa.html.*;
 class Hiero_parser {
-	private ByteTrieMgr_slim trie = ByteTrieMgr_slim.cs_();
+	private Btrie_slim_mgr trie = Btrie_slim_mgr.cs_();
 	private ListAdp blocks = ListAdp_.new_();
 	private Hiero_block cur_block;
 	private Bry_bfr cur_tkn = Bry_bfr.reset_(16);
@@ -30,7 +30,7 @@ class Hiero_parser {
 		while (true) {
 			if (pos == end) break;
 			byte b = src[pos];
-			Object o = trie.Match(b, src, pos, end);
+			Object o = trie.Match_bgn_w_byte(b, src, pos, end);
 			if (o == null) {
 				New_char(b);
 				++pos;
@@ -114,7 +114,7 @@ class Hiero_parser {
 			String key_str = keys[i];
 			byte[] key_bry = Bry_.new_utf8_(key_str);
 			Hiero_parser_itm itm = new Hiero_parser_itm(tid, key_bry);
-			trie.Add(key_bry, itm);
+			trie.Add_obj(key_bry, itm);
 		}
 	}
 }

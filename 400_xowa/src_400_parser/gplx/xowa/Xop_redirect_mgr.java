@@ -62,7 +62,7 @@ public class Xop_redirect_mgr {
 			);
 	}
 	public static byte[] Bld_redirect_msg(Xoa_app app, Xow_wiki wiki, Xoa_page page) {
-		ListAdp list = page.Redirect_list();
+		ListAdp list = page.Redirected_ttls();
 		int list_len = list.Count();
 		if (list_len == 0) return Bry_.Empty;
 		Bry_bfr redirect_bfr = app.Utl_bry_bfr_mkr().Get_b512();

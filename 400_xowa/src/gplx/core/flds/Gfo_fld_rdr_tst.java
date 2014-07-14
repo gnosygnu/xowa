@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx;
+package gplx.core.flds; import gplx.*; import gplx.core.*;
 import org.junit.*;
 import gplx.ios.*;
 public class Gfo_fld_rdr_tst {

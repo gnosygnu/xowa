@@ -16,6 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui;
+import java.security.acl.Owner;
+
 import gplx.*;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.*;
@@ -40,14 +42,24 @@ class Swt_html implements Gxw_html, Swt_control, FocusListener {
 		browser.addStatusTextListener(lnr_status);
 		browser.addFocusListener(this);
 		browser.addTitleListener(new Swt_html_lnr_title(this));
-//		browser.addTraverseListener(new Swt_html_lnr_Traverse(this));
+		// browser.addTraverseListener(new Swt_html_lnr_Traverse(this));
 	}
 	public Swt_kit Kit() {return kit;} private Swt_kit kit;
 	@Override public Control Under_control() {return browser;} private Browser browser;
 	@Override public Composite Under_composite() {return null;}
 	@Override public Control Under_menu_control() {return browser;}
 	public String 		Html_doc_html() 												{return Eval_script_as_str(kit.Html_cfg().Doc_html());}
-	public void 		Html_doc_html_(String s) 										{browser.setText(s);}	// DBG: Io_mgr._.SaveFilStr(Io_url_.new_fil_("C:\\temp.txt"), s)
+	public void 		Html_doc_html_load_by_mem(String html) {
+		html_doc_html_load_tid = Gxw_html_load_tid_.Tid_mem;
+		browser.setText(html);	// DBG: Io_mgr._.SaveFilStr(Io_url_.new_fil_("C:\\temp.txt"), s)
+	}
+	public void Html_doc_html_load_by_url(String path, String html) {
+		html_doc_html_load_tid = Gxw_html_load_tid_.Tid_url;
+		Io_mgr._.SaveFilStr(path, html);
+		browser.setUrl(path);
+	}
+	public byte 		Html_doc_html_load_tid() {return html_doc_html_load_tid;} private byte html_doc_html_load_tid;
+	public void 		Html_doc_html_load_tid_(byte v) {html_doc_html_load_tid = v;}
 	public String 		Html_doc_selected_get_text_or_href() 							{return Eval_script_as_str(kit.Html_cfg().Doc_selected_get_text_or_href());}
 	public String 		Html_doc_selected_get_href_or_text() 							{return Eval_script_as_str(kit.Html_cfg().Doc_selected_get_href_or_text());}
 	public String 		Html_doc_selected_get_src_or_empty() 							{return Eval_script_as_str(kit.Html_cfg().Doc_selected_get_src_or_empty());}
@@ -102,6 +114,13 @@ class Swt_html implements Gxw_html, Swt_control, FocusListener {
 		return true;
 	}	private String prv_find_str = ""; private int prv_find_bgn;
 	public void Html_invk_src_(GfoEvObj invk) {lnr_location.Host_set(invk); lnr_status.Host_set(invk);}
+	public void Html_dispose() {
+		browser.dispose();
+		delete_owner.SubElems().DelOrFail(delete_cur);	// NOTE: must delete cur from owner, else new tab will fail after closing one; DATE:2014-07-09
+		Env_.GarbageCollect();
+	}
+	private GfuiElem delete_owner, delete_cur;
+	public void Delete_elems_(GfuiElem delete_owner, GfuiElem delete_cur) {this.delete_owner = delete_owner; this.delete_cur = delete_cur;}	// HACK: set owner / cur so delete can work;
 	private String Escape_quotes(String v) {return String_.Replace(String_.Replace(v, "'", "\\'"), "\"", "\\\"");}
 	@Override public GxwCore_base Core() {return core;} private GxwCore_base core;
 	@Override public GxwCbkHost Host() {return host;} @Override public void Host_set(GxwCbkHost host) {this.host = host;} GxwCbkHost host;
@@ -208,6 +227,9 @@ class Swt_html_lnr_location implements LocationListener {
 	void Pub_evt(LocationEvent arg, String evt) {		
 		String location = arg.location;
 		if (String_.Eq(location, "about:blank")) return;	// location changing event fires once when page is loaded; ignore
+		if (	html_box.Html_doc_html_load_tid() == Gxw_html_load_tid_.Tid_url	// navigating to file://page.html will fire location event; ignore if url mode
+			&& 	String_.HasAtEnd(location, ".html"))
+			return;
 		try {
 			GfoEvMgr_.PubObj(host, evt, "v", location);
 			arg.doit = false; // cancel navigation event, else there will be an error when trying to go to invalid location

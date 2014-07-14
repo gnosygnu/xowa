@@ -126,7 +126,66 @@ public class Scrib_invoke_func_fxt {
 	public void Test_log_rcvd(int i, String expd) {
 		Tfds.Eq(expd, (String)server.Log_rcvd().FetchAt(i));
 	}
-	public static final String Null_rslt = "null";	// NOTE: Scrib procs will return null, which will show up in tests as "null"
+	public void Init_scrib_proc() {
+		fxt = new Xop_fxt();	// NOTE: don't try to cache fxt on func_fxt level; causes errors in Language_lib
+		core_fxt = new Scrib_core_fxt(fxt);
+		core = core_fxt.Core();
+		core.Frame_parent_(Xot_invk_mock.new_());
+		core.Frame_current_(Xot_invk_mock.new_());
+		Io_mgr._.InitEngine_mem();
+		fxt.Reset();
+		core.When_page_changed(fxt.Page());
+	}
+	public void Test_scrib_proc_str(Scrib_lib lib, String proc_name, Object[] args, String expd) {Test_scrib_proc_str(lib, proc_name, Scrib_kv_utl_.base1_many_(args), expd);}
+	public void Test_scrib_proc_str(Scrib_lib lib, String proc_name, KeyVal[] args, String expd) {
+		KeyVal[] actl = Test_scrib_proc_rv(lib, proc_name, args);
+		Tfds.Eq(Object_.XtoStr_OrNullStr(expd), Object_.XtoStr_OrNullStr(actl[0].Val()));
+	}
+	public void Test_scrib_proc_kv_vals(Scrib_lib lib, String proc_name, Object[] args, String expd) {Test_scrib_proc_kv_vals(lib, proc_name, Scrib_kv_utl_.base1_many_(args), expd);}
+	public void Test_scrib_proc_kv_vals(Scrib_lib lib, String proc_name, KeyVal[] args, String expd) {
+		KeyVal[] actl_ary = Test_scrib_proc_rv(lib, proc_name, args);
+		Tfds.Eq(expd, Kv_ary_to_kv_vals_str(actl_ary));
+	}
+	private String Kv_ary_to_kv_vals_str(KeyVal[] ary) {
+		Bry_bfr bfr = Bry_bfr.new_();
+		int len = ary.length;
+		for (int i = 0; i < len; ++i) {
+			if (i != 0) bfr.Add_byte(Byte_ascii.Semic);
+			KeyVal kv = ary[i];
+			bfr.Add_str(Object_.XtoStr_OrNullStr(kv.Val()));
+		}
+		return bfr.XtoStrAndClear();
+	}
+	public void Test_scrib_proc_bool(Scrib_lib lib, String proc_name, Object[] args, boolean expd) {Test_scrib_proc_obj(lib, proc_name, Scrib_kv_utl_.base1_many_(args), expd);}
+	public void Test_scrib_proc_int(Scrib_lib lib, String proc_name, Object[] args, int expd) {Test_scrib_proc_obj(lib, proc_name, Scrib_kv_utl_.base1_many_(args), expd);}
+	public void Test_scrib_proc_obj(Scrib_lib lib, String proc_name, Object[] args, Object expd) {Test_scrib_proc_obj(lib, proc_name, Scrib_kv_utl_.base1_many_(args), expd);}
+	public void Test_scrib_proc_obj(Scrib_lib lib, String proc_name, KeyVal[] args, Object expd) {
+		KeyVal[] actl = Test_scrib_proc_rv(lib, proc_name, args);
+		Tfds.Eq(expd, actl[0].Val());
+	}
+	public void Test_scrib_proc_empty(Scrib_lib lib, String proc_name, Object[] args) {Test_scrib_proc_empty(lib, proc_name, Scrib_kv_utl_.base1_many_(args));}
+	public void Test_scrib_proc_empty(Scrib_lib lib, String proc_name, KeyVal[] args) {
+		KeyVal[] actl = Test_scrib_proc_rv(lib, proc_name, args);
+		Tfds.Eq(0, actl.length);
+	}
+	public void Test_scrib_proc_str_ary(Scrib_lib lib, String proc_name, Object[] args, String expd) {Test_scrib_proc_str_ary(lib, proc_name, Scrib_kv_utl_.base1_many_(args), expd);}
+	public void Test_scrib_proc_str_ary(Scrib_lib lib, String proc_name, KeyVal[] args, String expd) {
+		KeyVal[] actl_ary = Test_scrib_proc_rv(lib, proc_name, args);
+		String actl = KeyVal_.Ary_xto_str_nested(actl_ary);
+		Tfds.Eq_str_lines(expd, actl);
+	}
+	public KeyVal[] Test_scrib_proc_rv_as_kv_ary(Scrib_lib lib, String proc_name, Object[] args) {
+		KeyVal[] actl = Test_scrib_proc_rv(lib, proc_name, Scrib_kv_utl_.base1_many_(args));
+		return (KeyVal[])actl[0].Val();
+	}
+	private KeyVal[] Test_scrib_proc_rv(Scrib_lib lib, String proc_name, KeyVal[] args) {
+		Scrib_proc proc = lib.Procs().Get_by_key(proc_name);
+		Scrib_proc_rslt proc_rslt = new Scrib_proc_rslt();
+		proc.Proc_exec(new Scrib_proc_args(args), proc_rslt);
+		return proc_rslt.Ary();
+	}
+	public static final String Null_rslt		= "<<NULL>>";
+	public static final String Null_rslt_ary	= "1=<<NULL>>";
 }
 class Scrib_lua_rsp_bldr {
 	Bry_bfr bfr = Bry_bfr.reset_(255);

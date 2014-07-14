@@ -27,7 +27,11 @@ public class Gxw_html_server implements Gxw_html {
 		cfg = Swt_kit._.Html_cfg();
 	} 
 	public String		Html_doc_html() {return Exec(cfg.Doc_html());}
-	public void			Html_doc_html_(String s) {Exec("location.reload(true);");}	// HACK: force reload of page
+	public void			Html_doc_html_load_by_mem(String html) {Exec("location.reload(true);");}	// HACK: force reload of page
+	public void			Html_doc_html_load_by_url(String path, String html) {Exec("location.reload(true);");}	// HACK: force reload of page
+	public byte			Html_doc_html_load_tid() {return html_doc_html_load_tid;} private byte html_doc_html_load_tid;
+	public void			Html_doc_html_load_tid_(byte v) {html_doc_html_load_tid = v;}
+	public void			Html_dispose() {}
 	public String		Html_doc_selected_get_text_or_href() {return Exec(cfg.Doc_selected_get_text_or_href());}
 	public String		Html_doc_selected_get_href_or_text() {return Exec(cfg.Doc_selected_get_href_or_text());}
 	public String		Html_doc_selected_get_src_or_empty() {return Exec(cfg.Doc_selected_get_src_or_empty());}

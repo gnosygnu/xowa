@@ -139,9 +139,11 @@ public class Swt_kit implements Gfui_kit {
 			KeyVal browser_type = htmlBox_args.FetchOrNull(Cfg_Html_BrowserType);
 			if (browser_type != null) ctor_args.Add(browser_type);
 		}
-		Gfui_html rv = Gfui_html.kit_(this, key, new Swt_html(this, Swt_control_.cast_or_fail(owner), ctor_args), ctor_args);
+		Swt_html html_control = new Swt_html(this, Swt_control_.cast_or_fail(owner), ctor_args);
+		Gfui_html rv = Gfui_html.kit_(this, key, html_control, ctor_args);
 		((Swt_html)rv.UnderElem()).Under_control().addMenuDetectListener(new Swt_lnr__menu_detect(rv));
 		rv.Owner_(owner);
+		html_control.Delete_elems_(owner, rv);
 		return rv;
 	}
 	public Gfui_tab_mgr New_tab_mgr(String key, GfuiElem owner, KeyVal... args) {

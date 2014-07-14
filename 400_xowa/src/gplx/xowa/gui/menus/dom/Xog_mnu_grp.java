@@ -24,7 +24,10 @@ public class Xog_mnu_grp extends Xog_mnu_base {
 		this.Ctor(gui_mgr);
 	}	private Xoa_app app;
 	public String Key() {return key;} private String key; private boolean mnu_is_popup;
-	public Gfui_mnu_grp Under_mnu() {return under_mnu;} private Gfui_mnu_grp under_mnu; 				
+	public Gfui_mnu_grp Under_mnu() {
+		if (under_mnu.Disposed()) Build();	// NOTE: menu may be disposed when calling .dispose on Swt_html; rebuild if needed; DATE:2014-07-09
+		return under_mnu;
+	}	private Gfui_mnu_grp under_mnu; 				
 	@Override public boolean Tid_is_app_menu_grp() {return !mnu_is_popup;}
 	public boolean Enabled() {return enabled;} private boolean enabled = true;
 	public void Enabled_(boolean v) {

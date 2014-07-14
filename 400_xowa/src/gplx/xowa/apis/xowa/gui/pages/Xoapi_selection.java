@@ -30,7 +30,7 @@ public class Xoapi_selection implements GfoInvkAble {
 		if (this.Active_tab_is_null()) return;
 		Xog_html_itm html_itm = win.Tab_mgr().Active_tab().Html_itm();
 		String src = html_itm.Html_selected_get_src_or_empty();
-		if (String_.Len_eq_0(src)) {app.Usr_dlg().Prog_many("", "", "no file selected: tab=~{0}", html_itm.Owner_tab().Page().Url().X_to_full_str()); return;}
+		if (String_.Len_eq_0(src)) {app.Usr_dlg().Prog_many("", "", "no file selected: tab=~{0}", html_itm.Owner_tab().Page().Url().Xto_full_str()); return;}
 		Io_url src_url = Io_url_.http_any_(src, Op_sys.Cur().Tid_is_wnt());
 		String trg_name = src_url.NameAndExt();
 		if (String_.Has(src, "/thumb/")) trg_name = src_url.OwnerDir().NameOnly();

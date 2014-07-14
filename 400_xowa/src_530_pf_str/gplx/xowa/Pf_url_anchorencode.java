@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.btries.*;
 import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*;
 public class Pf_url_anchorencode extends Pf_func_base {	// EX: {{anchorencode:a b}} -> a+b
 	@Override public boolean Func_require_colon_arg() {return true;}
@@ -97,7 +98,7 @@ public class Pf_url_anchorencode extends Pf_func_base {	// EX: {{anchorencode:a 
 			Tkn(src, xnde.Subs_get(i), xnde, i, tmp_bfr);
 		}		
 	}
-	private static ByteTrieMgr_fast encode_trie = ByteTrieMgr_fast.cs_();
+	private static Btrie_fast_mgr encode_trie = Btrie_fast_mgr.cs_();
 	private static Xop_ctx anchor_ctx;  static Xop_tkn_mkr anchor_tkn_mkr;
 	private static Xop_parser anchor_parser; 
 }

@@ -48,13 +48,19 @@ class Mem_html extends GxwTextMemo_lang implements Gxw_html {		public String Htm
 		else													throw Err_.unhandled(atr_key);
 		return true;
 	}
-	public void Html_doc_html_(String s) {
+	public void Html_doc_html_load_by_mem(String s) {
 //			this.Core().ForeColor_set(plainText ? ColorAdp_.Black : ColorAdp_.Gray);
 		s = String_.Replace(s, "\r", "");
 		s = String_.Replace(s, "\n", "\r\n");
 		this.TextVal_set(s);
 		this.SelBgn_set(0);
+		html_doc_html_load_tid = Gxw_html_load_tid_.Tid_mem;
 	}
+	public void Html_doc_html_load_by_url(String path, String html) {
+		html_doc_html_load_tid = Gxw_html_load_tid_.Tid_url;
+	}
+	public byte Html_doc_html_load_tid() {return html_doc_html_load_tid;} private byte html_doc_html_load_tid;
+	public void Html_doc_html_load_tid_(byte v) {html_doc_html_load_tid = v;}
 	public String Html_active_atr_get_str(String atrKey, String or) { // NOTE: fuzzy way of finding current href; EX: <a href="a">b</a>
 		String txt = this.TextVal();
 		int pos = this.SelBgn();
@@ -115,6 +121,7 @@ class Mem_html extends GxwTextMemo_lang implements Gxw_html {		public String Htm
 	public void Html_js_enabled_(boolean v) {}
 	public void Html_js_eval_proc(String proc, String... args) {}
 	public void Html_js_cbks_add(String js_func_name, GfoInvkAble invk) {}
+	public void Html_dispose() {}
 	private TxtFindMgr txtFindMgr = new TxtFindMgr();
 	public Mem_html() {
 		this.ctor_MsTextBoxMultiline_();

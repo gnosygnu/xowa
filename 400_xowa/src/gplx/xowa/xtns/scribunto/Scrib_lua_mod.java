@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 public class Scrib_lua_mod {
 	private OrderedHash hash = OrderedHash_.new_();
-	private Scrib_lua_proc load_string_fnc;
 	public Scrib_lua_mod(Scrib_core core, String name) {this.name = name; this.core = core;} private Scrib_core core;
 	public int Lua_id() {return lua_id;} private int lua_id = -1;
 	public String Name() {return name;} private String name;
+	public Scrib_lua_proc Init_chunk_func() {return init_chunk_func;} private Scrib_lua_proc init_chunk_func;
 	public byte[] Text_bry() {return text_bry;} private byte[] text_bry;
 	public void Fncs_clear() {hash.Clear();}
 	public int Fncs_len() {return hash.Count();}
@@ -33,12 +33,12 @@ public class Scrib_lua_mod {
 		return fnc.Id();
 	}
 	public Scrib_lua_proc LoadString(String text) {
-		if (lua_id != -1) return load_string_fnc;
+		if (lua_id != -1) return init_chunk_func;
 		text = String_.Replace(text, "&#09;", "\t");	// NOTE: this should only get called once per module
 		text_bry = Bry_.new_utf8_(text);
-		load_string_fnc = core.Interpreter().LoadString("=" + name, text);	// MW: Scribunto: Prepending an "=" to the chunk name avoids truncation or a "[string" prefix;
-		lua_id = load_string_fnc.Id();
-		return load_string_fnc;
+		init_chunk_func = core.Interpreter().LoadString("=" + name, text);	// MW: Scribunto: Prepending an "=" to the chunk name avoids truncation or a "[string" prefix;
+		lua_id = init_chunk_func.Id();
+		return init_chunk_func;
 	}
 	public void Execute() {
 		hash.Clear();	// NOTE: questionable. should probably be removed, as it forces all modules to be "loadString"'d again; DATE:2013-10-16
@@ -58,6 +58,5 @@ public class Scrib_lua_mod {
 				fnc = new Scrib_lua_proc(prc_key, -1);
 			Fncs_add(fnc);
 		}
-//			return exports[0].Val();
 	}
 }

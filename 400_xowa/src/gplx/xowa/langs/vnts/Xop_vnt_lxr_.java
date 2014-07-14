@@ -16,15 +16,16 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+import gplx.core.btries.*;
 public class Xop_vnt_lxr_ {
 	public static void set_(Xow_wiki wiki) {
-		ByteTrieMgr_fast wiki_trie = wiki.Parser().Wtxt_trie();
-		Object exists = wiki_trie.MatchAtCur(Xop_vnt_lxr_.Hook_bgn, 0, Xop_vnt_lxr_.Hook_bgn.length);
+		Btrie_fast_mgr wiki_trie = wiki.Parser().Wtxt_trie();
+		Object exists = wiki_trie.Match_bgn(Xop_vnt_lxr_.Hook_bgn, 0, Xop_vnt_lxr_.Hook_bgn.length);
 		if (exists == null) {
 			Xop_vnt_lxr_eqgt._.Init_by_wiki(wiki, wiki_trie);
 			Xop_vnt_lxr_bgn._.Init_by_wiki(wiki, wiki_trie);
 			new Xop_vnt_lxr_end().Init_by_wiki(wiki, wiki_trie);
-			// ByteTrieMgr_fast tmpl_trie = wiki.Parser().Tmpl_trie();	// do not add to tmpl trie
+			// Btrie_fast_mgr tmpl_trie = wiki.Parser().Tmpl_trie();	// do not add to tmpl trie
 			// Xop_vnt_lxr_bgn._.Init_by_wiki(wiki, tmpl_trie);
 		}
 	}
@@ -32,8 +33,8 @@ public class Xop_vnt_lxr_ {
 }
 class Xop_vnt_lxr_eqgt implements Xop_lxr {
 	public byte Lxr_tid() {return Xop_lxr_.Tid_vnt_eqgt;}
-	public void Init_by_wiki(Xow_wiki wiki, ByteTrieMgr_fast core_trie) {core_trie.Add(Hook, this);}
-	public void Init_by_lang(Xol_lang lang, ByteTrieMgr_fast core_trie) {}
+	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Hook, this);}
+	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		ctx.Subs_add_and_stack(root, tkn_mkr.Vnt_eqgt(bgn_pos, cur_pos));
 		return cur_pos;
@@ -43,8 +44,8 @@ class Xop_vnt_lxr_eqgt implements Xop_lxr {
 }
 class Xop_vnt_lxr_bgn implements Xop_lxr {
 	public byte Lxr_tid() {return Xop_lxr_.Tid_vnt_bgn;}
-	public void Init_by_wiki(Xow_wiki wiki, ByteTrieMgr_fast core_trie) {core_trie.Add(Xop_vnt_lxr_.Hook_bgn, this);}
-	public void Init_by_lang(Xol_lang lang, ByteTrieMgr_fast core_trie) {}
+	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Xop_vnt_lxr_.Hook_bgn, this);}
+	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		ctx.Subs_add_and_stack(root, tkn_mkr.Vnt(bgn_pos, cur_pos));
 		return cur_pos;
@@ -55,13 +56,13 @@ class Xop_vnt_lxr_end implements Xop_lxr {
 	private Xop_vnt_flag_parser flag_parser;
 	private Xop_vnt_rules_parser rule_parser;
 	public byte Lxr_tid() {return Xop_lxr_.Tid_vnt_end;}
-	public void Init_by_wiki(Xow_wiki wiki, ByteTrieMgr_fast core_trie) {
+	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr core_trie) {
 		core_trie.Add(Xop_vnt_lxr_.Hook_end, this);
 		Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();
 		flag_parser = new Xop_vnt_flag_parser(vnt_mgr);
 		rule_parser = new Xop_vnt_rules_parser(vnt_mgr);
 	}
-	public void Init_by_lang(Xol_lang lang, ByteTrieMgr_fast core_trie) {}
+	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		int stack_pos = ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_vnt);
 		if (stack_pos == Xop_ctx.Stack_not_found) return ctx.Lxr_make_txt_(cur_pos);	// "}-" found but no "-{" in stack;

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.imports.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.imports.*;
-import gplx.ios.*;
+import gplx.core.btries.*; import gplx.core.flds.*; import gplx.ios.*;
 public abstract class Xob_ctg_v1_base extends Xob_itm_dump_base implements Xobd_parser_wkr, GfoInvkAble {
 	protected Xob_ctg_v1_base() {}	// TEST:needed for fxt
 	public Xob_ctg_v1_base Ctor(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki); return this;}
@@ -41,9 +41,9 @@ public abstract class Xob_ctg_v1_base extends Xob_itm_dump_base implements Xobd_
 				Log(Tid_eos, page, src, bgn);
 				return end;
 			}
-			Object o = trie.MatchAtCur(src, pos, src_len);
+			Object o = trie.Match_bgn(src, pos, src_len);
 			if (o != null) {
-				ByteTrie_stub stub = (ByteTrie_stub)o;
+				Btrie_itm_stub stub = (Btrie_itm_stub)o;
 				byte[] bry = stub.Val();
 				switch (stub.Tid()) {
 					case Tid_brack_end: case Tid_pipe:
@@ -93,7 +93,7 @@ public abstract class Xob_ctg_v1_base extends Xob_itm_dump_base implements Xobd_
 		if (delete_temp) Io_mgr._.DeleteDirDeep(temp_dir);
 	}
 	private Gfo_fld_wtr fld_wtr = Gfo_fld_wtr.xowa_();
-	ByteTrieMgr_fast trie = ByteTrieMgr_fast.cs_().Add_stub(Tid_brack_end, "]]").Add_stub(Tid_pipe, "|").Add_stub(Tid_nl, "\n").Add_stub(Tid_brack_bgn, "[[");
+	Btrie_fast_mgr trie = Btrie_fast_mgr.cs_().Add_stub(Tid_brack_end, "]]").Add_stub(Tid_pipe, "|").Add_stub(Tid_nl, "\n").Add_stub(Tid_brack_bgn, "[[");
 	static final int row_fixed_len = 5 + 1 + 1;	// 5=rowId; 1=|; 1=\n
 	ListAdp category_list = ListAdp_.new_(); Int_obj_ref cur_pos = Int_obj_ref.zero_();
 	static final byte Tid_eos = 0, Tid_brack_end = 1, Tid_pipe = 2, Tid_nl = 3, Tid_brack_bgn = 4;

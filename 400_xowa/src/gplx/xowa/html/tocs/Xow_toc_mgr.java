@@ -108,7 +108,7 @@ public class Xow_toc_mgr implements Bry_fmtr_arg {
 			bfr.Mkr_rls();
 			return bfr.XtoAryAndClear();
 		} catch (Exception e) {
-			page.App().Usr_dlg().Warn_many("", "", "failed to write toc: url=~{0} err=~{1}", page.Url().X_to_full_str_safe(), Err_.Message_gplx_brief(e));
+			page.App().Usr_dlg().Warn_many("", "", "failed to write toc: url=~{0} err=~{1}", page.Url().Xto_full_str_safe(), Err_.Message_gplx_brief(e));
 			return Bry_.Empty;
 		}
 	}

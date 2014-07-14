@@ -19,7 +19,10 @@ package gplx.gfui; import gplx.*;
 public class Gfui_html extends GfuiElemBase {		
 	public void					Under_html_(Gxw_html v) {under = v;} private Gxw_html under;
 	public String				Html_doc_html() {return under.Html_doc_html();}
-	public void					Html_doc_html_(String s) {under.Html_doc_html_(s);}
+	public void					Html_doc_html_load_by_mem(String html)				{under.Html_doc_html_load_by_mem(html);}
+	public void					Html_doc_html_load_by_url(String path, String html)	{under.Html_doc_html_load_by_url(path, html);}
+	public byte					Html_doc_html_load_tid()							{return under.Html_doc_html_load_tid();}
+	public void					Html_doc_html_load_tid_(byte v)						{under.Html_doc_html_load_tid_(v);}
 	public String				Html_doc_selected_get_text_or_href() {return under.Html_doc_selected_get_text_or_href();}
 	public String				Html_doc_selected_get_href_or_text() {return under.Html_doc_selected_get_href_or_text();}
 	public String				Html_doc_selected_get_src_or_empty() {return under.Html_doc_selected_get_src_or_empty();}
@@ -45,8 +48,9 @@ public class Gfui_html extends GfuiElemBase {
 	public String				Html_js_eval_script(String script) {return under.Html_js_eval_script(script);}
 	public void					Html_js_cbks_add(String js_func_name, GfoInvkAble invk) {under.Html_js_cbks_add(js_func_name, invk);}
 	public void					Html_invk_src_(GfoEvObj v) {under.Html_invk_src_(v);}
+	public void					Html_dispose() {under.Html_dispose();}
 	@Override public GfuiElem Text_(String v) {
-		this.Html_doc_html_(v);
+		this.Html_doc_html_load_by_mem(v);
 		return this;
 	}
 	public static Gfui_html kit_(Gfui_kit kit, String key, Gxw_html under, KeyValHash ctorArgs) {

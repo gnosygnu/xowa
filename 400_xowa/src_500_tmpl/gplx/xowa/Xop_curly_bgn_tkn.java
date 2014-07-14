@@ -16,18 +16,19 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.btries.*;
 public class Xop_curly_bgn_tkn extends Xop_tkn_itm_base {
 	@Override public byte Tkn_tid() {return Xop_tkn_itm_.Tid_tmpl_curly_bgn;}
 	public Xop_curly_bgn_tkn(int bgn, int end) {this.Tkn_ini_pos(false, bgn, end);}
 }
 class Xop_curly_bgn_lxr implements Xop_lxr {
 	public byte Lxr_tid() {return Xop_lxr_.Tid_curly_bgn;}
-	public void Init_by_wiki(Xow_wiki wiki, ByteTrieMgr_fast core_trie) {core_trie.Add(Hook, this);} public static final byte[] Hook = new byte[] {Byte_ascii.Curly_bgn, Byte_ascii.Curly_bgn};
-	public void Init_by_lang(Xol_lang lang, ByteTrieMgr_fast core_trie) {}
+	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Hook, this);} public static final byte[] Hook = new byte[] {Byte_ascii.Curly_bgn, Byte_ascii.Curly_bgn};
+	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {return ctx.Curly().MakeTkn_bgn(ctx, tkn_mkr, root, src, src_len, bgn_pos, cur_pos);}
 	public static final Xop_curly_bgn_lxr _ = new Xop_curly_bgn_lxr(); Xop_curly_bgn_lxr() {}
-	public static ByteTrieMgr_fast tmpl_bgn_trie_() {	// hook sequences for adding new_line to tmpl return; "{|" "|-" ":" ";" "#" "*"; EX: "{{a}}" returns "*"; convert to "\n*"
-		ByteTrieMgr_fast rv = ByteTrieMgr_fast.cs_();
+	public static Btrie_fast_mgr tmpl_bgn_trie_() {	// hook sequences for adding new_line to tmpl return; "{|" "|-" ":" ";" "#" "*"; EX: "{{a}}" returns "*"; convert to "\n*"
+		Btrie_fast_mgr rv = Btrie_fast_mgr.cs_();
 		rv.Add(Xop_tblw_lxr_ws.Hook_tb, Bry_.Empty);
 		rv.Add(Bry_.new_ascii_("|-"), Bry_.Empty);
 		rv.Add(Byte_ascii.Colon, Bry_.Empty);
@@ -39,15 +40,15 @@ class Xop_curly_bgn_lxr implements Xop_lxr {
 }
 class Xop_curly_end_lxr implements Xop_lxr {
 	public byte Lxr_tid() {return Xop_lxr_.Tid_curly_end;}
-	public void Init_by_wiki(Xow_wiki wiki, ByteTrieMgr_fast core_trie) {core_trie.Add(Hook, this);} public static final byte[] Hook = new byte[] {Byte_ascii.Curly_end, Byte_ascii.Curly_end};
-	public void Init_by_lang(Xol_lang lang, ByteTrieMgr_fast core_trie) {}
+	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Hook, this);} public static final byte[] Hook = new byte[] {Byte_ascii.Curly_end, Byte_ascii.Curly_end};
+	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {return ctx.Curly().MakeTkn_end(ctx, tkn_mkr, root, src, src_len, bgn_pos, cur_pos);}
 	public static final Xop_curly_end_lxr _ = new Xop_curly_end_lxr(); Xop_curly_end_lxr() {}
 }
 class Xop_brack_bgn_lxr implements Xop_lxr {
 	public byte Lxr_tid() {return Xop_lxr_.Tid_brack_bgn;}
-	public void Init_by_wiki(Xow_wiki wiki, ByteTrieMgr_fast core_trie) {core_trie.Add(Xop_tkn_.Lnki_bgn, this);}
-	public void Init_by_lang(Xol_lang lang, ByteTrieMgr_fast core_trie) {}
+	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Xop_tkn_.Lnki_bgn, this);}
+	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		Xop_tkn_itm tkn = tkn_mkr.Brack_bgn(bgn_pos, cur_pos);
 		ctx.Subs_add_and_stack(root, tkn);			
@@ -57,8 +58,8 @@ class Xop_brack_bgn_lxr implements Xop_lxr {
 }
 class Xop_brack_end_lxr implements Xop_lxr {
 	public byte Lxr_tid() {return Xop_lxr_.Tid_brack_end;}
-	public void Init_by_wiki(Xow_wiki wiki, ByteTrieMgr_fast core_trie) {core_trie.Add(Xop_tkn_.Lnki_end, this);}
-	public void Init_by_lang(Xol_lang lang, ByteTrieMgr_fast core_trie) {}
+	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Xop_tkn_.Lnki_end, this);}
+	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		int acs_pos = ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_brack_bgn);
 		if (acs_pos != -1 && ctx.Cur_tkn_tid() != Xop_tkn_itm_.Tid_tmpl_curly_bgn)	// NOTE: do not pop tkn if inside tmpl; EX: [[a|{{#switch:{{{1}}}|b=c]]|d=e]]|f]]}}

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+import gplx.core.btries.*;
 class Pxd_parser {
 	byte[] src; int cur_pos, tkn_bgn_pos, src_len, tkn_type;
 	public Pxd_itm[] Tkns() {return tkns;} Pxd_itm[] tkns;
@@ -76,7 +77,7 @@ class Pxd_parser {
 				case Byte_ascii.Ltr_u: case Byte_ascii.Ltr_v: case Byte_ascii.Ltr_w: case Byte_ascii.Ltr_x: case Byte_ascii.Ltr_y: case Byte_ascii.Ltr_z:
 				case Byte_ascii.At:
 					MakePrvTkn(cur_pos, Pxd_itm_.TypeId_null);			// first, make prv tkn
-					Object o = trie.Match(b, src, cur_pos, src_len);	// now match String against tkn
+					Object o = trie.Match_bgn_w_byte(b, src, cur_pos, src_len);	// now match String against tkn
 					if (o == null) return false;	// unknown letter / word; exit now;
 					tkns[tkns_len] = ((Pxd_itm_prototype)o).MakeNew(tkns_len); 
 					++tkns_len;
@@ -158,16 +159,16 @@ class Pxd_parser {
 			}
 		}
 	}
-	private static ByteTrieMgr_slim trie = Pxd_parser_.Trie();
+	private static Btrie_slim_mgr trie = Pxd_parser_.Trie();
 }
 class Pxd_parser_ {
-	public static ByteTrieMgr_slim Trie() {
+	public static Btrie_slim_mgr Trie() {
 		if (trie == null) {
-			trie = ByteTrieMgr_slim.ci_ascii_();	// NOTE:ci.ascii:MW_const.en
+			trie = Btrie_slim_mgr.ci_ascii_();	// NOTE:ci.ascii:MW_const.en
 			Init();
 		}
 		return trie;
-	}	static ByteTrieMgr_slim trie;
+	}	static Btrie_slim_mgr trie;
 	private static final    String[] Names_month_full		= {"january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"};
 	private static final    String[] Names_month_abrv		= {"jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"};
 	private static final    String[] Names_month_roman		= {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"};
@@ -183,7 +184,7 @@ class Pxd_parser_ {
 		int name_ary_len = name_ary.length;
 		for (int i = 0; i < name_ary_len; i++) {
 			byte[] name_bry = Bry_.new_utf8_(name_ary[i]);
-			trie.Add(name_bry, new Pxd_itm_unit(-1, name_bry, seg_idx, seg_val));
+			trie.Add_obj(name_bry, new Pxd_itm_unit(-1, name_bry, seg_idx, seg_val));
 		}
 	}
 	public static final byte[] 
@@ -206,10 +207,10 @@ class Pxd_parser_ {
 		Init_unit(DateAdp_.SegIdx_month 	, "month", "months");
 		Init_unit(DateAdp_.SegIdx_year  	, "year", "years");
 		Init_unit(DateAdp_.SegIdx_day,  7	, "week", "weeks");
-		trie.Add(Pxd_itm_ago.Name_ago, new Pxd_itm_ago(-1, -1));
+		trie.Add_obj(Pxd_itm_ago.Name_ago, new Pxd_itm_ago(-1, -1));
 		Init_suffix(Names_day_suffix);
 		Init_relative();
-		trie.Add(Pxd_itm_unixtime.Name_unixtime, new Pxd_itm_unixtime(-1, -1));
+		trie.Add_obj(Pxd_itm_unixtime.Name_unixtime, new Pxd_itm_unixtime(-1, -1));
 	}
 	private static void Init_reg_months(String[] names) {
 		for (int i = 0; i < names.length; i++)
@@ -217,31 +218,31 @@ class Pxd_parser_ {
 	}
 	private static void Init_reg_month(String name_str, int seg_val) {
 		byte[] name_ary = Bry_.new_utf8_(name_str);
-		trie.Add(name_ary, new Pxd_itm_month_name(-1, name_ary, DateAdp_.SegIdx_month, seg_val));
+		trie.Add_obj(name_ary, new Pxd_itm_month_name(-1, name_ary, DateAdp_.SegIdx_month, seg_val));
 	}
 	private static void Init_reg_days_of_week(String[] ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
 			byte[] itm_bry = Bry_.new_utf8_(ary[i]);
-			trie.Add(itm_bry, new Pxd_itm_dow_name(-1, itm_bry, i));	// NOTE: days are base0; 0-6
+			trie.Add_obj(itm_bry, new Pxd_itm_dow_name(-1, itm_bry, i));	// NOTE: days are base0; 0-6
 		}
 	}
 	private static void Init_suffix(String[] suffix_ary) {
 		int len = suffix_ary.length;
 		for (int i = 0; i < len; i++) {
 			String suffix = suffix_ary[i];
-			trie.Add(suffix, Pxd_itm_day_suffix._);
+			trie.Add_obj(suffix, Pxd_itm_day_suffix._);
 		}
 	}
 	private static void Init_relative() {
-		trie.Add("today", Pxd_itm_day_relative.Today);
-		trie.Add("tomorrow", Pxd_itm_day_relative.Tomorrow);
-		trie.Add("yesterday", Pxd_itm_day_relative.Yesterday);
-		trie.Add("now", Pxd_itm_time_relative.Now);
-		trie.Add("next", Pxd_itm_unit_relative.Next);
-		trie.Add("last", Pxd_itm_unit_relative.Prev);
-		trie.Add("previous", Pxd_itm_unit_relative.Prev);
-		trie.Add("this", Pxd_itm_unit_relative.This);
+		trie.Add_obj("today", Pxd_itm_day_relative.Today);
+		trie.Add_obj("tomorrow", Pxd_itm_day_relative.Tomorrow);
+		trie.Add_obj("yesterday", Pxd_itm_day_relative.Yesterday);
+		trie.Add_obj("now", Pxd_itm_time_relative.Now);
+		trie.Add_obj("next", Pxd_itm_unit_relative.Next);
+		trie.Add_obj("last", Pxd_itm_unit_relative.Prev);
+		trie.Add_obj("previous", Pxd_itm_unit_relative.Prev);
+		trie.Add_obj("this", Pxd_itm_unit_relative.This);
 	}
 }
 /*

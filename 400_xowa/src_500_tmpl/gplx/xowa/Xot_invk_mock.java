@@ -25,8 +25,10 @@ public class Xot_invk_mock implements Xot_invk {
 	public byte Defn_tid() {return defn_tid;} private byte defn_tid = Xot_defn_.Tid_null;
 	public Arg_nde_tkn Name_tkn() {return Arg_nde_tkn.Null;}
 	public byte[] Frame_ttl() {return frame_ttl;} public void Frame_ttl_(byte[] v) {frame_ttl = v;} private byte[] frame_ttl;
-	public int Args_len() {return args.Count() + idx_adj;} private OrderedHash args = OrderedHash_.new_bry_();
+	public int Frame_lifetime() {return frame_lifetime;} public void Frame_lifetime_(int v) {frame_lifetime = v;} private int frame_lifetime;
 	public byte Scrib_frame_tid() {return scrib_tid;} public void Scrib_frame_tid_(byte v) {scrib_tid = v;} private byte scrib_tid;
+	public boolean Rslt_is_redirect() {return rslt_is_redirect;} public void Rslt_is_redirect_(boolean v) {rslt_is_redirect = v;} private boolean rslt_is_redirect;
+	public int Args_len() {return args.Count() + idx_adj;} private OrderedHash args = OrderedHash_.new_bry_();
 	public Arg_nde_tkn Args_get_by_idx(int i) {return (Arg_nde_tkn)args.FetchAt(i - idx_adj);}
 	public Arg_nde_tkn Args_eval_by_idx(byte[] src, int idx) {// DUPE:MW_ARG_RETRIEVE
 		int cur = 0, list_len = args.Count(); 

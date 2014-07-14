@@ -94,18 +94,16 @@ public class Xoa_url_parser_basic_tst {
 		fxt.Expd_wiki("en.wikipedia.org").Expd_page("A").Expd_action_is_edit_y().Test_parse_w_wiki("A?action=edit");
 	}
 	@Test  public void Assert_state_cleared() {	// PURPOSE.fix: action_is_edit (et. al.) was not being cleared on parse even though Xoa_url reused; DATE:20121231
-		Xoa_url url = new Xoa_url();
 		byte[] raw = Bry_.new_ascii_("A?action=edit");
-		Xoa_url_parser.Parse_url(url, fxt.App(), fxt.Wiki(), raw, 0, raw.length, false);
+		Xoa_url url = Xoa_url_parser.Parse_url(fxt.App(), fxt.Wiki(), raw, 0, raw.length, false);
 		Tfds.Eq(true, url.Action_is_edit());
 		raw = Bry_.new_ascii_("B");
 		Xoa_url_parser.Parse_url(url, fxt.App(), fxt.Wiki(), raw, 0, raw.length, false);
 		Tfds.Eq(false, url.Action_is_edit());
 	}
 	@Test  public void Query_arg() {	// PURPOSE.fix: query args were not printing out
-		Xoa_url url = new Xoa_url();
 		byte[] raw = Bry_.new_ascii_("en.wikipedia.org/wiki/Special:Search/Earth?fulltext=yes");
-		Xoa_url_parser.Parse_url(url, fxt.App(), fxt.Wiki(), raw, 0, raw.length, false);
+		Xoa_url url = Xoa_url_parser.Parse_url(fxt.App(), fxt.Wiki(), raw, 0, raw.length, false);
 		Xoa_url_parser parser = new Xoa_url_parser();
 		Tfds.Eq("en.wikipedia.org/wiki/Special:Search/Earth?fulltext=yes", parser.Build_str(url));
 	}
@@ -157,7 +155,7 @@ class Xoa_url_parser_chkr implements Tst_chkr {
 	}
 	public Xoa_url_parser_chkr Test_parse_from_url_bar(String raw, String expd) {
 		Xoa_url actl_url = Xoa_url_parser.Parse_from_url_bar(app, wiki, raw);
-		Tfds.Eq(expd, String_.new_ascii_(actl_url.X_to_full()));
+		Tfds.Eq(expd, actl_url.Xto_full_str());
 		return this;
 	}
 	public void Test_parse_w_wiki(String raw) {Test_parse_w_wiki(wiki, raw);}

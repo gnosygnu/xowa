@@ -16,12 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+import gplx.core.btries.*;
 class Xop_vnt_rules_parser {
 	private byte mode;
 	private Xop_vnt_tkn vnt_tkn;		
 	private boolean loop_vnt_subs; private int vnt_subs_cur, vnt_subs_bgn, vnt_subs_len;
 	private int rule_texts_bgn;
-	private ByteTrieMgr_slim trie;
+	private Btrie_slim_mgr trie;
 	private ListAdp rules_list = ListAdp_.new_();
 	private ListAdp text_tkns_list = ListAdp_.new_();
 	private int text_tkns_ws_end_idx;
@@ -32,15 +33,15 @@ class Xop_vnt_rules_parser {
 	private byte[] cur_macro_bry = null;
 	private byte[] cur_lang_bry = null;
 	public Xop_vnt_rules_parser(Xol_vnt_mgr vnt_mgr) {
-		trie = ByteTrieMgr_slim.ci_ascii_();	// NOTE:ci.ascii:MW_const.en; lang variant name; EX:zh-hans
+		trie = Btrie_slim_mgr.ci_ascii_();	// NOTE:ci.ascii:MW_const.en; lang variant name; EX:zh-hans
 		Xol_vnt_converter[] ary = vnt_mgr.Converter_ary();
 		int ary_len = ary.length;
 		for (int i = 0; i < ary_len; i++) {
 			Xol_vnt_converter itm = ary[i];
 			byte[] itm_lang = itm.Owner_key();
-			trie.Add(itm_lang, Xop_vnt_rule_trie_itm.lang_(itm_lang));
+			trie.Add_obj(itm_lang, Xop_vnt_rule_trie_itm.lang_(itm_lang));
 		}
-		trie.Add(";", Xop_vnt_rule_trie_itm.Dlm_semic);
+		trie.Add_obj(";", Xop_vnt_rule_trie_itm.Dlm_semic);
 //			trie.Add("=>", Xop_vnt_rule_trie_itm.Dlm_eqgt);
 	}
 	public void Clear_all() {
@@ -128,7 +129,7 @@ class Xop_vnt_rules_parser {
 			if (pos == src_end) break;
 			if (cur_key_bgn == -1) cur_key_bgn = pos;
 			byte b = src[pos];
-			Object itm_obj = trie.Match(b, src, pos, src_end);
+			Object itm_obj = trie.Match_bgn_w_byte(b, src, pos, src_end);
 			if (itm_obj == null) {			// not a lang, semic, or eqgt; treat rest of vnt as one rule tkn
 //					if (mode == Mode_key)
 //						loop_key_bry = Make_rule_literal();

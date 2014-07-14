@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.btries.*;
 public class Xof_repo_itm implements GfoInvkAble {
 	public Xof_repo_itm(Xoa_repo_mgr mgr, byte[] key) {this.mgr = mgr; this.key = key;} private Xoa_repo_mgr mgr;
 	public byte[] Key() {return key;} private byte[] key;
@@ -56,12 +57,12 @@ public class Xof_repo_itm implements GfoInvkAble {
 		int ttl_len = ttl.length;
 		for (int i = 0; i < ttl_len; i++) {
 			byte b = ttl[i];
-			Object o = wnt_trie.Match(b, ttl, i, ttl_len);
+			Object o = wnt_trie.Match_bgn_w_byte(b, ttl, i, ttl_len);
 			if (o == null)		wnt_tmp_bfr.Add_byte(b);		// regular char; add orig byte
 			else				wnt_tmp_bfr.Add((byte[])o);		// invalid char; add swap byte(s)
 		}
 		return wnt_tmp_bfr.XtoAryAndClear();
-	}	private static final Bry_bfr wnt_tmp_bfr = Bry_bfr.reset_(255); private static final ByteTrieMgr_slim wnt_trie = trie_make();
+	}	private static final Bry_bfr wnt_tmp_bfr = Bry_bfr.reset_(255); private static final Btrie_slim_mgr wnt_trie = trie_make();
 	public static byte[] Ttl_shorten_ttl(int ttl_max, byte[] ttl, byte[] md5, Xof_ext ext) {
 		byte[] rv = ttl;
 		int exceed_len = rv.length - ttl_max;
@@ -80,20 +81,20 @@ public class Xof_repo_itm implements GfoInvkAble {
 		int name_len = name.length;
 		for (int i = 0; i < name_len; i++) {
 			byte b = name[i];
-			Object o = trie.Match(b, name, i, name_len);
+			Object o = trie.Match_bgn_w_byte(b, name, i, name_len);
 			if (o == null)		tmp_bfr.Add_byte(b);
 			else				tmp_bfr.Add((byte[])o);
 		}
 		byte[] rv = tmp_bfr.XtoAryAndReset(300);
 		return rv;
-	}	private Bry_bfr tmp_bfr = Bry_bfr.new_(); ByteTrieMgr_slim trie = trie_make();
-	private static ByteTrieMgr_slim trie_make() {
-		ByteTrieMgr_slim rv = ByteTrieMgr_slim.cs_();
+	}	private Bry_bfr tmp_bfr = Bry_bfr.new_(); Btrie_slim_mgr trie = trie_make();
+	private static Btrie_slim_mgr trie_make() {
+		Btrie_slim_mgr rv = Btrie_slim_mgr.cs_();
 		byte[] invalid = Op_sys.Wnt.Fsys_invalid_chars();
 		byte[] underline = new byte[] {Byte_ascii.Underline};
 		int len = invalid.length;
 		for (int i = 0; i < len; i++)
-			rv.Add(new byte[] {invalid[i]}, underline);
+			rv.Add_obj(new byte[] {invalid[i]}, underline);
 		return rv;
 	}
 	public byte[] Gen_name_trg(byte[] bry, byte[] md5, Xof_ext ext) {

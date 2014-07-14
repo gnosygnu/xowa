@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.html; import gplx.*;
-import gplx.core.bytes.*;
+import gplx.core.brys.*;
 public class Html_parser {
 	public Html_parser() {
 		Bry_bldr bry_bldr = new Bry_bldr();

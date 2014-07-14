@@ -15,9 +15,10 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx;
-public class ByteTrie_stub {
-	public ByteTrie_stub(byte tid, byte[] val) {this.tid = tid; this.val = val;}
-	public byte Tid() {return tid;} private byte tid;
-	public byte[] Val() {return val;} private byte[] val;
+package gplx.core.btries; import gplx.*; import gplx.core.*;
+public interface Btrie_mgr {
+	int Match_pos();
+	Object Match_bgn(byte[] src, int bgn_pos, int end_pos);
+	Btrie_mgr Add_obj(String key, Object val);
+	Btrie_mgr Add_obj(byte[] key, Object val);
 }

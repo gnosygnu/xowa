@@ -32,7 +32,7 @@ class Xow_wiki_fxt {
 	public void Test_getPageByTtl(String ttl_str, String expd) {
 		Xow_wiki wiki = fxt.Wiki();
 		byte[] ttl_bry = Bry_.new_ascii_(ttl_str);
-		Xoa_url url = new Xoa_url().Raw_(ttl_bry);
+		Xoa_url url = Xoa_url.blank_().Raw_(ttl_bry);
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry);
 		Xoa_page actl = fxt.Wiki().GetPageByTtl(url, ttl);
 		if (expd == null) Tfds.Eq_true(actl.Missing());

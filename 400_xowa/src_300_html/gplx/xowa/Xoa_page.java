@@ -33,12 +33,13 @@ public class Xoa_page {
 	public Xoa_revision_data	Revision_data() {return revision_data;} private Xoa_revision_data revision_data = new Xoa_revision_data();
 	public Xoa_html_data		Html_data() {return html_data;} private Xoa_html_data html_data = new Xoa_html_data();
 	public Xoa_ttl				Ttl() {return ttl;} public Xoa_page Ttl_(Xoa_ttl v) {ttl = v; url.Wiki_bry_(wiki.Domain_bry()).Page_bry_(v.Full_url()); return this;} private Xoa_ttl ttl;
-	public Xoa_url				Url() {return url;} public Xoa_page Url_(Xoa_url v) {url = v; return this;} private Xoa_url url = new Xoa_url();
+	public Xoa_url				Url() {return url;} public Xoa_page Url_(Xoa_url v) {url = v; return this;} private Xoa_url url = Xoa_url.blank_();
 	public Xog_tab_itm			Tab() {return tab;} public void Tab_(Xog_tab_itm v) {tab = v;} private Xog_tab_itm tab;
 
 	public boolean					Missing() {return missing;} public Xoa_page Missing_() {return Missing_(true);} public Xoa_page Missing_(boolean v) {missing = v; return this;}  private boolean missing;
 	public boolean					Redirected() {return redirected;} public Xoa_page Redirected_(boolean v) {redirected = v; return this;} private boolean redirected;
-	public ListAdp				Redirect_list() {return redirect_list;} private ListAdp redirect_list = ListAdp_.new_();
+	public ListAdp				Redirected_ttls() {return redirected_ttls;} private ListAdp redirected_ttls = ListAdp_.new_();
+	public byte[]				Redirected_src() {return redirected_src;} public void Redirected_src_(byte[] v) {this.redirected_src = v;}  private byte[] redirected_src;
 	public byte					Edit_mode() {return edit_mode;} private byte edit_mode; public void	Edit_mode_update_() {edit_mode = Xoa_page_.Edit_mode_update;}
 	public byte[]				Display_ttl() {return display_ttl;} public Xoa_page Display_ttl_(byte[] v) {display_ttl = v; return this;} private byte[] display_ttl;
 	public Xop_root_tkn			Root() {return root;} public Xoa_page Root_(Xop_root_tkn v) {root = v; return this;} private Xop_root_tkn root;
@@ -73,7 +74,7 @@ public class Xoa_page {
 		tmpl_stack_ary_len = new_len;
 		return true;
 	}	private byte[][] tmpl_stack_ary = Bry_.Ary_empty; private int tmpl_stack_ary_len = 0, tmpl_stack_ary_max = 0;
-	public void Clear() { // NOTE: this is called post-fetch but pre-parse; do not clear items set by post-fetch, such as id, ttl, redirect_list, data_raw
+	public void Clear() { // NOTE: this is called post-fetch but pre-parse; do not clear items set by post-fetch, such as id, ttl, redirected_ttls, data_raw
 		hdr_mgr.Clear();
 		lnki_list.Clear();
 		file_math.Clear();

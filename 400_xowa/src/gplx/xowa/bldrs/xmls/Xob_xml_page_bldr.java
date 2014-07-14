@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.xmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+import gplx.ios.*;
 public class Xob_xml_page_bldr {
 	public byte[] Xto_bry() {return bfr.XtoAryAndClear();}
 	public Io_buffer_rdr XtoByteStreamRdr() {return XtoByteStreamRdr(Io_mgr.Len_kb);}

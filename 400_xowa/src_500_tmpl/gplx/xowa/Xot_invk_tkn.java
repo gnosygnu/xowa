@@ -25,10 +25,12 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 	public byte Defn_tid() {return defn_tid;} private byte defn_tid = Xot_defn_.Tid_null;
 	public int Tmpl_subst_bgn() {return tmpl_subst_bgn;} private int tmpl_subst_bgn;
 	public int Tmpl_subst_end() {return tmpl_subst_end;} private int tmpl_subst_end;
-	public Xot_invk_tkn Tmpl_subst_props_(byte type, int bgn, int end) {defn_tid = type; tmpl_subst_bgn = bgn; tmpl_subst_end = end; return this;}
+	public Xot_invk_tkn Tmpl_subst_props_(byte tid, int bgn, int end) {defn_tid = tid; tmpl_subst_bgn = bgn; tmpl_subst_end = end; return this;}
 	public Xot_defn Tmpl_defn() {return tmpl_defn;} public Xot_invk_tkn Tmpl_defn_(Xot_defn v) {tmpl_defn = v; return this;} private Xot_defn tmpl_defn = Xot_defn_.Null;
 	public byte[] Frame_ttl() {return frame_ttl;} public void Frame_ttl_(byte[] v) {frame_ttl = v;} private byte[] frame_ttl;
+	public int Frame_lifetime() {return frame_lifetime;} public void Frame_lifetime_(int v) {frame_lifetime = v;} private int frame_lifetime;
 	public byte Scrib_frame_tid() {return scrib_tid;} public void Scrib_frame_tid_(byte v) {scrib_tid = v;} private byte scrib_tid;
+	public boolean Rslt_is_redirect() {return rslt_is_redirect;} public void Rslt_is_redirect_(boolean v) {rslt_is_redirect = v;} private boolean rslt_is_redirect;
 	@Override public void Tmpl_fmt(Xop_ctx ctx, byte[] src, Xot_fmtr fmtr) {fmtr.Reg_tmpl(ctx, src, name_tkn, args_len, args);}
 	@Override public void Tmpl_compile(Xop_ctx ctx, byte[] src, Xot_compile_data prep_data) {
 		name_tkn.Tmpl_compile(ctx, src, prep_data);
@@ -43,7 +45,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 				val.Subs_get(j).Tmpl_compile(ctx, src, prep_data);
 		}
 	}
-	@Override public boolean Tmpl_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Bry_bfr bfr) {	// EX: this="{{t|{{{0}}}}}" caller="{{t|1}}"
+	@Override public boolean Tmpl_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Bry_bfr bfr) {	// this="{{t|{{{0}}}}}" caller="{{t|1}}"
 		boolean rv = false;
 		Xot_defn defn = tmpl_defn; Xow_wiki wiki = ctx.Wiki(); Xol_lang lang = wiki.Lang();
 		byte[] name_ary = defn.Name(), argx_ary = Bry_.Empty; Arg_itm_tkn name_key_tkn = name_tkn.Key_tkn();
@@ -64,7 +66,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 			name_ary_len = name_ary.length;
 			name_bgn = Bry_finder.Find_fwd_while_not_ws(name_ary, 0, name_ary_len);
 			if (	name_ary_len == 0			// name is blank; can occur with failed inner tmpl; EX: {{ {{does not exist}} }}
-				||	name_bgn == name_ary_len	// name is ws; EX: {{test| }} -> {{{{{1}}}}}is whitespace String; EX.WIKT: wear one's heart on one's sleeve; {{t+|fr|avoir le c�ur sur la main| }}
+				||	name_bgn == name_ary_len	// name is ws; EX: {{test| }} -> {{{{{1}}}}}is whitespace String; PAGE:en.d:wear_one's_heart_on_one's_sleeve; EX:{{t+|fr|avoir le c�ur sur la main| }}
 				) {								
 				bfr.Add(Ary_unknown_bgn).Add(Ary_dynamic_is_blank).Add(Ary_unknown_end);	// FUTURE: excerpt actual String; WHEN: add raw to defn
 				return false;
@@ -90,9 +92,9 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 			}
 
 			Object ns_eval = wiki.Ns_mgr().Names_get_w_colon(name_ary, 0, name_ary_len);	// match {{:Portal or {{:Wikipedia
-			if (ns_eval != null && !template_prefix_found) {		// do not transclude ns if Template prefix seen earlier; EX: {{Template:Wikipedia:A}} should not transclude "Wikipedia:A"; DATE:2013-04-03
+			if (ns_eval != null && !template_prefix_found)									// do not transclude ns if Template prefix seen earlier; EX: {{Template:Wikipedia:A}} should not transclude "Wikipedia:A"; DATE:2013-04-03
 				return SubEval(ctx, wiki, bfr, name_ary, caller, src);
-			}
+
 			Xol_func_name_itm finder = lang.Func_regy().Find_defn(name_ary, name_bgn, name_ary_len);
 			defn = finder.Func();
 			int colon_pos = -1;
@@ -137,12 +139,12 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 					}
 					break;
 				case Xot_defn_.Tid_raw:
+				case Xot_defn_.Tid_msg:
 					int raw_colon_pos = Bry_finder.Find_fwd(name_ary, Byte_ascii.Colon);
-					if (raw_colon_pos == Bry_.NotFound) {}		// colon missing; EX: {{raw}}; noop and assume template name; DATE:2014-02-11
-					else {	// colon present;
-						name_ary = Bry_.Mid(name_ary, finder.Subst_end() + 1, name_ary_len);		// chop off "raw"; +1 is for ":"; note that +1 is in bounds b/c raw_colon was found
+					if (raw_colon_pos == Bry_.NotFound) {}												// colon missing; EX: {{raw}}; noop and assume template name; DATE:2014-02-11
+					else {																				// colon present;
+						name_ary = Bry_.Mid(name_ary, finder.Subst_end() + 1, name_ary_len);			// chop off "raw"; +1 is for ":"; note that +1 is in bounds b/c raw_colon was found
 						name_ary_len = name_ary.length;
-
 						Object ns_eval2 = wiki.Ns_mgr().Names_get_w_colon(name_ary, 0, name_ary_len);	// match {{:Portal or {{:Wikipedia
 						if (ns_eval2 != null) {
 							Xow_ns ns_eval_itm = (Xow_ns)ns_eval2;
@@ -150,6 +152,11 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 							if (pre_len < name_ary_len && name_ary[pre_len] == Byte_ascii.Colon)
 								return SubEval(ctx, wiki, bfr, name_ary, caller, src);
 						}
+					}
+					switch (finder.Tid()) {
+						case Xot_defn_.Tid_msg:
+							defn = Xot_defn_.Null;	// null out defn to force template load below; DATE:2014-07-10
+							break;
 					}
 					break;
 			}
@@ -213,7 +220,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		switch (defn.Defn_tid()) {
 			case Xot_defn_.Tid_null:	// defn is unknown
 				if (ignore_hash == null) {					// ignore SafeSubst templates
-					ignore_hash = Hash_adp_bry.ci_();
+					ignore_hash = Hash_adp_bry.ci_ascii_();
 					ignore_hash.Add_str_obj("Citation needed{{subst", String_.Empty);
 					ignore_hash.Add_str_obj("Clarify{{subst", String_.Empty);
 				}
@@ -289,12 +296,11 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 			if (tmpl_keeplist != null && tmpl_keeplist.Enabled()) {
 				byte[] ttl_lower = Xoa_ttl.Replace_spaces(ctx.Wiki().Lang().Case_mgr().Case_build_lower(ttl));
 				skip = !tmpl_keeplist.Match(ttl_lower);
-//					if (skip)
-//	                    Tfds.Write_bry(ttl_lower);
+				// if (skip) Tfds.Write_bry(ttl_lower);
 			}
 		}
 		if (skip) {
-			bfr.Add(gplx.xowa.html.modules.popups.Xow_popup_parser.Comment_tkn); // add comment tkn; need something to separate ''{{lang|la|Ragusa}}'' else will become ''''; PAGE:en.w:Republic_of_Ragusa; DATE:2014-06-28
+			bfr.Add(gplx.xowa.Xop_comm_lxr.Xowa_skip_comment_bry); // add comment tkn; need something to separate ''{{lang|la|Ragusa}}'' else will become ''''; PAGE:en.w:Republic_of_Ragusa; DATE:2014-06-28
 			return true; 
 		}
 		else
@@ -310,7 +316,10 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 			invk.Frame_ttl_(ctx.Wiki().Ns_mgr().Ns_module().Gen_ttl(defn_func.Argx_dat()));	// NOTE: always prepend "Module:" to frame_ttl; DATE:2014-06-13
 		Bry_bfr bfr_func = Bry_bfr.new_();
 		defn_func.Func_evaluate(ctx, src, caller, invk, bfr_func);
-		ctx.Tmpl_prepend_nl(bfr, bfr_func.Bfr(), bfr_func.Len());
+		if (caller.Rslt_is_redirect())			// do not prepend if page is redirect; EX:"#REDIRECT" x> "\n#REDIRECT" DATE:2014-07-11
+			caller.Rslt_is_redirect_(false);	// reset flag; needed for TEST; kludgy, but Rslt_is_redirect is intended for single use
+		else 
+			ctx.Tmpl_prepend_nl(bfr, bfr_func.Bfr(), bfr_func.Len());
 		bfr.Add_bfr_and_clear(bfr_func);
 	}
 	private static Hash_adp_bry ignore_hash;

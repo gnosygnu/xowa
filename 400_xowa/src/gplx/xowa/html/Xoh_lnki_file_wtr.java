@@ -25,7 +25,7 @@ public class Xoh_lnki_file_wtr {
 	}	private Xow_html_mgr html_mgr; private boolean lnki_title_enabled;
 	private Xow_wiki wiki; private Xoh_html_wtr html_wtr;
 	private Xoh_lnki_txt_fmtr media_alt_fmtr = new Xoh_lnki_txt_fmtr(), caption_fmtr = new Xoh_lnki_txt_fmtr(); private Bry_bfr_mkr bfr_mkr;
-	private Xoa_url tmp_url = new Xoa_url();
+	private Xoa_url tmp_url = Xoa_url.blank_();
 	public void Write_or_queue(Bry_bfr bfr, Xoa_page page, Xop_ctx ctx, Xoh_html_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki) {
 		Xof_xfer_itm xfer_itm = this.Lnki_eval(ctx, page, lnki, queue_add_ref);
 		this.Write_media(bfr, hctx, src, lnki, xfer_itm, Alt_text(src, lnki));

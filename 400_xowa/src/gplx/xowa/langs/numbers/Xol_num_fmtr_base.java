@@ -16,8 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.numbers; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+import gplx.core.btries.*;
 public class Xol_num_fmtr_base implements GfoInvkAble {
-	private ByteTrieMgr_fast dlm_trie = ByteTrieMgr_fast.cs_(); 
+	private Btrie_fast_mgr dlm_trie = Btrie_fast_mgr.cs_(); 
 	private Xol_num_grp[] grp_ary = Xol_num_grp.Ary_empty; int grp_ary_len;
 	private Gfo_num_fmt_wkr[] cache; int cache_len = 16;
 	private Bry_bfr tmp = Bry_bfr.new_();
@@ -28,7 +29,7 @@ public class Xol_num_fmtr_base implements GfoInvkAble {
 		int src_len = src.length;
 		for (int i = 0; i < src_len; i++) {
 			byte b = src[i];
-			Object o = dlm_trie.MatchAtCur(src, i, src_len);
+			Object o = dlm_trie.Match_bgn(src, i, src_len);
 			if (o == null)
 				tmp.Add_byte(b);
 			else {
@@ -117,7 +118,7 @@ public class Xol_num_fmtr_base implements GfoInvkAble {
 		for (int i = 0; i < grp_ary_len; i++) {
 			Xol_num_grp itm = grp_ary[i];
 			byte[] itm_dlm = itm.Dlm();
-			Object o = dlm_trie.MatchAtCurExact(itm_dlm, 0, itm_dlm.length);	// check for existing Object
+			Object o = dlm_trie.Match_exact(itm_dlm, 0, itm_dlm.length);	// check for existing Object
 			if (o == null) {
 				dlm_trie.Add_bry_bval(itm_dlm, Raw_tid_grp);
 				grp_dlm = itm_dlm;

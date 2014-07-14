@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.xowa.apps.fsys.*; import gplx.xowa.net.*;
 public class Xop_lnke_wkr implements Xop_ctx_wkr {
-	public void Ctor_ctx(Xop_ctx ctx) {url_parser = ctx.App().Url_parser().Url_parser();} Gfo_url_parser url_parser; Gfo_url_site_data site_data = new Gfo_url_site_data(); Xoa_url_parser xo_url_parser = new Xoa_url_parser(); Xoa_url xo_url_parser_url = new Xoa_url();
+	public void Ctor_ctx(Xop_ctx ctx) {url_parser = ctx.App().Url_parser().Url_parser();} Gfo_url_parser url_parser; Gfo_url_site_data site_data = new Gfo_url_site_data(); Xoa_url_parser xo_url_parser = new Xoa_url_parser(); Xoa_url xo_url_parser_url = Xoa_url.blank_();
 	public void Page_bgn(Xop_ctx ctx, Xop_root_tkn root) {}
 	public void Page_end(Xop_ctx ctx, Xop_root_tkn root, byte[] src, int src_len) {}
 	public boolean Dangling_goes_on_stack() {return dangling_goes_on_stack;} public void Dangling_goes_on_stack_(boolean v) {dangling_goes_on_stack = v;} private boolean dangling_goes_on_stack;
@@ -74,29 +74,32 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 			}
 		}
 		int lnke_bgn = bgn_pos, lnke_end = -1, brack_end_pos = -1;
-		int lnke_endType = EndType_null;
-		while (true) {	// loop until lnke_endType char;
-			if (cur_pos == src_len) {lnke_endType = EndType_eos; lnke_end = cur_pos; break;}
+		int lnke_end_tid = End_tid_null;
+		while (true) {	// loop until lnke_end_tid char;
+			if (cur_pos == src_len) {lnke_end_tid = End_tid_eos; lnke_end = cur_pos; break;}
 			switch (src[cur_pos]) {
 				case Byte_ascii.Brack_end:
 					if (lnke_type_brack) {	// NOTE: check that frame begins with [ in order to end with ] 
-						lnke_endType = EndType_brack; brack_end_pos = cur_pos + Launcher_app_mgr.Adj_next_char;
+						lnke_end_tid = End_tid_brack; brack_end_pos = cur_pos + Launcher_app_mgr.Adj_next_char;
 					}
 					else {					// NOTE: frame does not begin with [ but ] encountered. mark "invalid" in order to force parser to stop before "]"
-						lnke_endType = EndType_invalid;
+						lnke_end_tid = End_tid_invalid;
 					}
 					break;
-				case Byte_ascii.Space:		lnke_endType = EndType_space; break;
-				case Byte_ascii.NewLine:	lnke_endType = EndType_nl; break;
+				case Byte_ascii.Space:		lnke_end_tid = End_tid_space; break;
+				case Byte_ascii.NewLine:	lnke_end_tid = End_tid_nl; break;
 				case Byte_ascii.Gt: case Byte_ascii.Lt: 
-					lnke_endType = EndType_invalid;
+					lnke_end_tid = End_tid_invalid;
 					break;
 				case Byte_ascii.Apos:
 					if (cur_pos + 1 < src_len && src[cur_pos + 1] == Byte_ascii.Apos)	// NOTE: '' breaks link, but not '; EX: [http://a.org''b'']]; DATE:2013-03-18
-						lnke_endType = EndType_invalid;
+						lnke_end_tid = End_tid_invalid;
+					break;
+				case Byte_ascii.Brack_bgn:	// NOTE: always stop lnke at "[" regardless of brack_type; EX: [http:a.org[[B]]] and http:a.org[[B]]; DATE:2014-07-11
+					lnke_end_tid = End_tid_symbol;
 					break;
 			}
-			if  (lnke_endType == EndType_null) 	cur_pos++;
+			if  (lnke_end_tid == End_tid_null) 	cur_pos++;
 			else {
 				lnke_end = cur_pos;
 				cur_pos++;
@@ -104,8 +107,8 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 			}
 		}
 		if (lnke_type_brack) {
-			switch (lnke_endType) {
-				case EndType_eos:
+			switch (lnke_end_tid) {
+				case End_tid_eos:
 					if (brack_end_pos == -1) {	// eos but no ]; EX: "[irc://a"
 						if (dangling_goes_on_stack) {	// added for Xow_popup_parser which needs to handle dangling lnke due to block_len; DATE:2014-06-20
 							ctx.Subs_add_and_stack(root, tkn_mkr.Txt(bgn_pos, src_len));	// note that tkn doesn't matter, as Xow_popup_parser only cares *if* something is on stack, not *what* is on stack
@@ -118,7 +121,7 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 						lnke_type = Xop_lnke_tkn.Lnke_typ_brack_dangling;
 					}
 					break;
-				case EndType_nl:
+				case End_tid_nl:
 					lnke_type = Xop_lnke_tkn.Lnke_typ_brack_dangling;
 					return ctx.Lxr_make_txt_(lnke_end);	// textify lnk; EX: [irc://a\n] textifies "[irc://a"
 				default:
@@ -132,11 +135,11 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 			lnke_type = Xop_lnke_tkn.Lnke_typ_text;
 			if (ctx.Cur_tkn_tid() == Xop_tkn_itm_.Tid_lnki) {	// SEE:NOTE_1
 				Xop_tkn_itm prv_tkn = root.Subs_get(root.Subs_len() - 1);	// get last tkn
-				if (prv_tkn.Tkn_tid() == Xop_tkn_itm_.Tid_lnki) {		// is tkn lnki?
+				if (prv_tkn.Tkn_tid() == Xop_tkn_itm_.Tid_lnki) {			// is tkn lnki?
 					root.Subs_del_after(prv_tkn.Tkn_sub_idx());				// delete [[ tkn and replace with [ tkn
 					root.Subs_add(tkn_mkr.Txt(prv_tkn.Src_bgn(), prv_tkn.Src_bgn() + 1));
-					ctx.Stack_pop_last();							// don't forget to remove from stack
-					lnke_type = Xop_lnke_tkn.Lnke_typ_brack;		// change lnke_typee to brack
+					ctx.Stack_pop_last();									// don't forget to remove from stack
+					lnke_type = Xop_lnke_tkn.Lnke_typ_brack;			// change lnke_typee to brack
 					--bgn_pos;
 				}
 			}
@@ -162,30 +165,31 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 		}			
 		ctx.Subs_add(root, tkn);
 		if (lnke_type == Xop_lnke_tkn.Lnke_typ_brack) {
-			if (lnke_endType == EndType_brack) {
+			if (lnke_end_tid == End_tid_brack) {
 				tkn.Src_end_(cur_pos);
 				tkn.Subs_move(root);
 				return cur_pos;
 			}
 			ctx.Stack_add(tkn);
-			if (lnke_endType == EndType_invalid) {
+			if (lnke_end_tid == End_tid_invalid) {
 				return cur_pos - 1;	// -1 to return before < or >
 			}
 		}
 		else {
-			switch (lnke_endType) {
-				case EndType_space:
+			switch (lnke_end_tid) {
+				case End_tid_space:
 					ctx.Subs_add(root, tkn_mkr.Space(root, cur_pos - 1, cur_pos));
 					break;			
-				case EndType_nl:
-				case EndType_invalid:	// NOTE that cur_pos is set after <, must subtract 1 else </xnde> will be ignored; EX: <span>irc://a</span>
+				case End_tid_symbol:
+				case End_tid_nl:
+				case End_tid_invalid:	// NOTE that cur_pos is set after <, must subtract 1 else </xnde> will be ignored; EX: <span>irc://a</span>
 					return cur_pos - 1;
 			}
 		}
 		return cur_pos;
 	}
 	private static final byte Lnki_linkMode_init = 0, Lnki_linkMode_eq = 1, Lnki_linkMode_text = 2;
-	private static final byte EndType_null = 0, EndType_eos = 1, EndType_brack = 2, EndType_space = 3, EndType_nl = 4, EndType_invalid = 5;
+	private static final byte End_tid_null = 0, End_tid_eos = 1, End_tid_brack = 2, End_tid_space = 3, End_tid_nl = 4, End_tid_symbol = 5, End_tid_invalid = 6;
 	public int MakeTkn_end(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 //			Xop_tkn_itm last_tkn = ctx.Stack_get_last();		// BLOCK:invalid_ttl_check; // TODO: backout apos changes
 //			if (	last_tkn != null
@@ -225,7 +229,7 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 		if (prv_byte >= Byte_ascii.Ascii_min && prv_byte <= Byte_ascii.Ascii_max) return true;	// consider all other ASCII chars as true; EX: \t\n !, etc; 
 		prv_pos = gplx.intl.Utf8_.Get_pos0_of_char_bwd(src, prv_pos);
 		prv_byte = src[prv_pos];
-		boolean prv_char_is_letter = ctx.Lang().Case_mgr().Match(prv_byte, src, prv_pos, bgn_pos);
+		boolean prv_char_is_letter = ctx.Lang().Case_mgr().Match_any_exists(prv_byte, src, prv_pos, bgn_pos);
 		return !prv_char_is_letter;
 	}
 	private int Make_tkn_xowa(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos, byte[] protocol, byte proto_tid, byte lnke_type) {

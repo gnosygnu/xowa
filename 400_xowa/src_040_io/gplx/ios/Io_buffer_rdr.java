@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx;
+package gplx.ios; import gplx.*;
 import gplx.ios.*;/*IoStream*/
 public class Io_buffer_rdr implements RlsAble {	//_20120115
 	Io_buffer_rdr(Io_stream_rdr rdr, Io_url url, int bfr_len) {

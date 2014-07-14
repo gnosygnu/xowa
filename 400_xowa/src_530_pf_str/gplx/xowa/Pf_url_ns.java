@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 class Pf_url_ns extends Pf_func_base {	// EX: {{ns:6}} -> File
+	private boolean encode;
 	public Pf_url_ns(boolean encode) {this.encode = encode; if (canonical == null) canonical_();}
 	@Override public int Id() {return Xol_kwd_grp_.Id_url_ns;}
 	@Override public Pf_func New(int id, byte[] name) {return new Pf_url_ns(encode).Name_(name);}
@@ -43,15 +44,14 @@ class Pf_url_ns extends Pf_func_base {	// EX: {{ns:6}} -> File
 			bb.Add(encode ? itm.Name_enc() : itm.Name_txt());
 		}
 	}
-	boolean encode;
 	private static Hash_adp_bry canonical;
+	private static void canonical_() {
+		canonical = Hash_adp_bry.ci_ascii_();	// ASCII:canonical English names
+		for (Xow_ns ns : Xow_ns_.Canonical)
+			canonical_add(ns.Id(), ns.Name_bry());
+	}
 	private static void canonical_add(int ns_id, byte[] ns_name) {
 		Xow_ns ns = new Xow_ns(ns_id, Xow_ns_case_.Id_all, ns_name, false);
 		canonical.Add(ns_name, ns);
-	}
-	private static void canonical_() {
-		canonical = Hash_adp_bry.ci_();
-		for (Xow_ns ns : Xow_ns_.Canonical)
-			canonical_add(ns.Id(), ns.Name_bry());
 	}
 }	

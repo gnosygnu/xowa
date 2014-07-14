@@ -37,14 +37,14 @@ public class Wdata_prop_itm_base_ {
 		if	(bval_obj == null) return Val_tid_unknown;		
 		return ((Byte_obj_val)bval_obj).Val();
 	}
-	private static final Hash_adp_bry Val_tid_regy = Hash_adp_bry.ci_()
-		.Add_bry_byte(Val_bry_string, Wdata_prop_itm_base_.Val_tid_string)
-		.Add_bry_byte(Val_bry_entity, Wdata_prop_itm_base_.Val_tid_entity)
-		.Add_bry_byte(Val_bry_time, Wdata_prop_itm_base_.Val_tid_time)
-		.Add_bry_byte(Val_bry_globecoordinate, Wdata_prop_itm_base_.Val_tid_globecoordinate)
-		.Add_bry_byte(Val_bry_quantity, Wdata_prop_itm_base_.Val_tid_quantity)
-		.Add_bry_byte(Val_bry_bad, Wdata_prop_itm_base_.Val_tid_bad)
-		;
+	private static final Hash_adp_bry Val_tid_regy = Hash_adp_bry.ci_ascii_()
+	.Add_bry_byte(Val_bry_string, Wdata_prop_itm_base_.Val_tid_string)
+	.Add_bry_byte(Val_bry_entity, Wdata_prop_itm_base_.Val_tid_entity)
+	.Add_bry_byte(Val_bry_time, Wdata_prop_itm_base_.Val_tid_time)
+	.Add_bry_byte(Val_bry_globecoordinate, Wdata_prop_itm_base_.Val_tid_globecoordinate)
+	.Add_bry_byte(Val_bry_quantity, Wdata_prop_itm_base_.Val_tid_quantity)
+	.Add_bry_byte(Val_bry_bad, Wdata_prop_itm_base_.Val_tid_bad)
+	;
 	public static String Val_tid_to_string(byte tid) {
 		switch (tid) {
 			case Val_tid_string				: return Val_str_string;
@@ -62,11 +62,11 @@ public class Wdata_prop_itm_base_ {
 		if	(bval_obj == null) throw Err_.new_fmt_("unknown snak type_id: ~{0}", String_.new_utf8_(v));
 		return ((Byte_obj_val)bval_obj).Val();
 	}
-	private static Hash_adp_bry Snak_tid_regy = Hash_adp_bry.ci_()
-		.Add_bry_byte(Wdata_doc_consts.Val_prop_novalue_bry, Snak_tid_novalue)
-		.Add_str_byte(Wdata_doc_consts.Val_prop_value_str, Snak_tid_value)
-		.Add_str_byte(Wdata_doc_consts.Val_prop_somevalue_str, Snak_tid_somevalue)
-		;
+	private static Hash_adp_bry Snak_tid_regy = Hash_adp_bry.ci_ascii_()
+	.Add_bry_byte(Wdata_doc_consts.Val_prop_novalue_bry, Snak_tid_novalue)
+	.Add_str_byte(Wdata_doc_consts.Val_prop_value_str, Snak_tid_value)
+	.Add_str_byte(Wdata_doc_consts.Val_prop_somevalue_str, Snak_tid_somevalue)
+	;
 	public static String Snak_tid_string(byte v) {
 		switch (v) {
 			case Snak_tid_value:	return Wdata_doc_consts.Val_prop_value_str;

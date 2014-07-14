@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
-import gplx.html.*; import gplx.xowa.wikis.*; import gplx.xowa.net.*;
+import gplx.core.btries.*; import gplx.html.*; import gplx.xowa.wikis.*; import gplx.xowa.net.*;
 import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*;
 import gplx.xowa.xtns.*; import gplx.xowa.xtns.dynamicPageList.*; import gplx.xowa.xtns.math.*; import gplx.xowa.langs.vnts.*; import gplx.xowa.xtns.cite.*;
 public class Xoh_html_wtr {
@@ -664,7 +664,7 @@ class Xoh_display_ttl_wtr {
 	  Atr_key_style = Bry_.new_ascii_("style")
 	, Msg_style_restricted = Bry_.new_ascii_(" style='/* attempt to bypass $wgRestrictDisplayTitle */'")
 	;
-	private ByteTrieMgr_slim style_trie = ByteTrieMgr_slim.ci_ascii_()
+	private Btrie_slim_mgr style_trie = Btrie_slim_mgr.ci_ascii_()
 	.Add_str_byte__many(Byte_.int_(0), "display", "user-select", "visibility");  // if ( preg_match( '/(display|user-select|visibility)\s*:/i', $decoded['style'] ) ) {
 	public boolean Is_style_restricted(Bry_bfr bfr, Xoh_html_wtr_ctx hctx, byte[] src, Xop_xatr_itm atr, byte[] atr_key) {
 		if (atr_key != null 
@@ -675,7 +675,7 @@ class Xoh_display_ttl_wtr {
 			int atr_pos = 0;
 			while (atr_pos < atr_val_len) {
 				byte b = atr_val[atr_pos];
-				Object o = style_trie.Match(b, atr_val, atr_pos, atr_val_len);
+				Object o = style_trie.Match_bgn_w_byte(b, atr_val, atr_pos, atr_val_len);
 				if (o != null) {
 					bfr.Add(Msg_style_restricted);
 					return true;

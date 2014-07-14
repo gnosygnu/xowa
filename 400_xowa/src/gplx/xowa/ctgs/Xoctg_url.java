@@ -58,7 +58,7 @@ public class Xoctg_url {
 		}
 	}
 	public static final byte Tid_all_bgn = 0, Tid_subc_bgn = 1, Tid_subc_end = 2, Tid_file_bgn = 3, Tid_file_end = 4, Tid_page_bgn = 5, Tid_page_end = 6, Tid_all_end = 8;
-	public static final Hash_adp_bry Arg_keys = Hash_adp_bry.ci_()
+	public static final Hash_adp_bry Arg_keys = Hash_adp_bry.ci_ascii_()
 	.Add_bry_byte(Xoctg_fmtr_all.Url_arg_from, Tid_all_bgn)
 	.Add_bry_byte(Xoctg_fmtr_all.Url_arg_until, Tid_all_end)
 	.Add_bry_byte(Xoctg_fmtr_all.Url_arg_subc_bgn, Tid_subc_bgn)

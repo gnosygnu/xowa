@@ -24,6 +24,10 @@ public class Xoapi_url implements GfoInvkAble {
 	public void Exec()					{Exec_wkr(Bool_.N, this.Url_box().Text());}
 	public void Exec_by_paste()			{Exec_wkr(Bool_.N, ClipboardAdp_.GetText());}
 	public void Exec_new_tab_by_paste() {Exec_wkr(Bool_.Y, ClipboardAdp_.GetText());}
+	public void Restore() {
+		Xog_tab_itm tab = app.Gui_mgr().Browser_win().Active_tab(); if (tab == Xog_tab_itm_.Null) return;
+		this.Url_box().Text_(tab.Page().Url().Xto_full_str());
+	}
 	private void Exec_wkr(boolean new_tab, String urls_text) {
 		if (Op_sys.Cur().Tid_is_wnt())
 			urls_text = String_.Replace(urls_text, Op_sys.Wnt.Nl_str(), Op_sys.Lnx.Nl_str());
@@ -49,9 +53,10 @@ public class Xoapi_url implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_exec)) 						this.Exec();
 		else if	(ctx.Match(k, Invk_exec_by_paste)) 				this.Exec_by_paste();
 		else if	(ctx.Match(k, Invk_exec_new_tab_by_paste)) 		this.Exec_new_tab_by_paste();
+		else if	(ctx.Match(k, Invk_restore)) 					this.Restore();
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}
-	private static final String Invk_focus = "focus", Invk_exec_by_paste = "exec_by_paste", Invk_exec_new_tab_by_paste = "exec_new_tab_by_paste";
+	private static final String Invk_focus = "focus", Invk_exec_by_paste = "exec_by_paste", Invk_exec_new_tab_by_paste = "exec_new_tab_by_paste", Invk_restore = "restore";
 	public static final String Invk_exec = "exec";
 }

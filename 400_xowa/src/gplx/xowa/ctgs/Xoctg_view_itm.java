@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.ctgs; import gplx.*; import gplx.xowa.*;
+import gplx.core.flds.*;
 public class Xoctg_view_itm implements gplx.CompareAble {
 	public byte Tid() {return tid;} private byte tid;
 	public int Id() {return id;} private int id;

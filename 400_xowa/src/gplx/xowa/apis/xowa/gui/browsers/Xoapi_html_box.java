@@ -17,9 +17,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apis.xowa.gui.browsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.apis.*; import gplx.xowa.apis.xowa.*; import gplx.xowa.apis.xowa.gui.*;
 import gplx.gfui.*; import gplx.xowa.gui.*; import gplx.xowa.gui.views.*;
-public class Xoapi_html_box implements GfoInvkAble {
+public class Xoapi_html_box implements GfoInvkAble, GfoEvMgrOwner {
 	private Xog_win_itm win;
+	public Xoapi_html_box() {
+		evMgr = GfoEvMgr.new_(this);
+	}
+	public GfoEvMgr EvMgr() {return evMgr;} private GfoEvMgr evMgr;
 	public void Init_by_kit(Xoa_app app) {this.win = app.Gui_mgr().Browser_win();}
+	public byte Load_tid() {return load_tid;} private byte load_tid;
 	public void Focus() {
 		Xog_tab_itm tab = win.Active_tab(); if (tab == Xog_tab_itm_.Null) return;
 		Gfui_html html_box = tab.Html_itm().Html_box();
@@ -33,10 +38,16 @@ public class Xoapi_html_box implements GfoInvkAble {
 		html_box.Html_doc_selection_focus_toggle();
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_focus)) 					this.Focus();
+		if		(ctx.Match(k, Invk_focus)) 							this.Focus();
 		else if	(ctx.Match(k, Invk_selection_focus_toggle)) 		this.Selection_focus();
+		else if	(ctx.Match(k, Invk_load_tid)) 						return Gxw_html_load_tid_.Xto_key(load_tid);
+		else if	(ctx.Match(k, Invk_load_tid_)) 						{load_tid = Gxw_html_load_tid_.Xto_tid(m.ReadStr("v")); GfoEvMgr_.PubVal(this, Evt_load_tid_changed, load_tid);}
+		else if	(ctx.Match(k, Invk_load_tid_list))					return Gxw_html_load_tid_.Options__list;
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}
-	private static final String Invk_focus = "focus", Invk_selection_focus_toggle = "selection_focus_toggle";
+	private static final String Invk_focus = "focus", Invk_selection_focus_toggle = "selection_focus_toggle"
+	, Invk_load_tid = "load_tid", Invk_load_tid_ = "load_tid_", Invk_load_tid_list = "load_tid_list"
+	;
+	public static final String Evt_load_tid_changed = "load_tid_changed";
 }

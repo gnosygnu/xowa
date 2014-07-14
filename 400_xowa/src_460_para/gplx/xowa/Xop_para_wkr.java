@@ -156,7 +156,7 @@ public class Xop_para_wkr implements Xop_ctx_wkr {
 	}
 	public int Process_pre(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos, int txt_pos) {
 		Dd_clear(ctx);
-		Object o = ctx.App().Utl_trie_tblw_ws().MatchAtCur(src, txt_pos, src_len);
+		Object o = ctx.App().Utl_trie_tblw_ws().Match_bgn(src, txt_pos, src_len);
 		if (o != null) {	// tblw_ws found
 			Xop_tblw_ws_itm ws_itm = (Xop_tblw_ws_itm)o;
 			byte tblw_type = ws_itm.Tblw_type();

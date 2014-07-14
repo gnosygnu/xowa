@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.langs.cases.*;
+import gplx.core.btries.*; import gplx.xowa.langs.cases.*;
 import gplx.xowa.xtns.scribunto.*;
 public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 	private OrderedHash id_hash = OrderedHash_.new_();		// hash for retrieval by id
@@ -37,7 +37,7 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 		ns_count = 0;
 		ns_file = null;
 	}
-	public ByteTrieMgr_slim Category_trie() {return category_trie;}		private ByteTrieMgr_slim category_trie;
+	public Btrie_slim_mgr Category_trie() {return category_trie;}		private Btrie_slim_mgr category_trie;
 	public Xow_ns		Ns_main()				{return ns_main;}		private Xow_ns ns_main;
 	public Xow_ns		Ns_template()			{return ns_template;}	private Xow_ns ns_template;
 	public Xow_ns		Ns_file()				{return ns_file;}		private Xow_ns ns_file;
@@ -152,8 +152,8 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 			case Xow_ns_.Id_category:
 				ns_category = ns;
 				if (category_trie == null)
-					category_trie = ByteTrieMgr_slim.new_(ns.Case_match() == Xow_ns_case_.Id_all);
-				category_trie.Add(ns.Name_bry(), this);
+					category_trie = Btrie_slim_mgr.new_(ns.Case_match() == Xow_ns_case_.Id_all);
+				category_trie.Add_obj(ns.Name_bry(), this);
 				break;
 		}
 		++ns_count;

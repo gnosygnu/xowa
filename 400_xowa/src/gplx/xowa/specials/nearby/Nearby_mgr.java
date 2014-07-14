@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.specials.nearby; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
 public class Nearby_mgr implements Xows_page {
 	Xow_wiki wiki; byte[] trg;
-	Hash_adp_bry excluded = Hash_adp_bry.ci_();
-	Hash_adp_bry visited = Hash_adp_bry.ci_();
+	private Hash_adp_bry excluded = Hash_adp_bry.ci_ascii_();
+	private Hash_adp_bry visited = Hash_adp_bry.ci_ascii_();
 	ListAdp trail = ListAdp_.new_();
 	ListAdp results = ListAdp_.new_();	
 	int results_cur = 0;

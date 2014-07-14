@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.imports.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.imports.*;
+import gplx.core.btries.*;
 class Uca_trie {
 	public void Init() {
 Init_itm(1, Bry_.ints_(1,1));
@@ -1042,12 +1043,12 @@ Init_itm(1021, Bry_.ints_(91,74,1,5,1,143));
 Init_itm(1022, Bry_.ints_(91,72,1,5,1,143));
 Init_itm(1023, Bry_.ints_(91,76,1,5,1,143));
 Init_itm(1024, Bry_.ints_(92,52,1,134,143,1,143,5));
-	}	private ByteTrieMgr_slim trie = ByteTrieMgr_slim.cs_();
+	}	private Btrie_slim_mgr trie = Btrie_slim_mgr.cs_();
 	public void Clear() {trie.Clear();}
 	public void Decode(Bry_bfr tmp, byte[] src, int bgn, int end) {
 		int i = bgn;
 		while (i < end) {
-			Object o = trie.MatchAtCur(src, i, end);
+			Object o = trie.Match_bgn(src, i, end);
 			if (src[i] < 4) return;
 			if (o == null) return; //throw Err_.new_fmt_("unknown error: {0}", i);
 			byte[] utf8_char = (byte[])o;
@@ -1067,7 +1068,7 @@ Init_itm(1024, Bry_.ints_(92,52,1,134,143,1,143,5));
 		}
 		if (uca_last == 0) return;
 		uca = Bry_.Mid(uca, 0, uca_last);
-		if (trie.MatchAtCur(uca, 0, uca.length) == null)
-			trie.Add(uca, gplx.intl.Utf16_.Encode_int_to_bry(charAsInt));
+		if (trie.Match_bgn(uca, 0, uca.length) == null)
+			trie.Add_obj(uca, gplx.intl.Utf16_.Encode_int_to_bry(charAsInt));
 	}
 }
