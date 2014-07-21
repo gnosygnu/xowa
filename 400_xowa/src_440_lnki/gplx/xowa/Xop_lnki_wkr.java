@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.core.btries.*;
-import gplx.xowa.wikis.*; import gplx.xowa.parsers.lnkis.redlinks.*;
+import gplx.xowa.wikis.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.xtns.pfuncs.ttls.*;
 public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 	private Arg_bldr arg_bldr = Arg_bldr._;
 	private NumberParser number_parser = new NumberParser();
@@ -183,10 +183,9 @@ class Xop_lnki_wkr_ {
 		lnki.Tkn_tid_to_txt();						// convert initial "[[" to text; note that this lnki has no pipes as pipe_lxr does similar check; EX: [[<invalid>]]; DATE:2014-03-26
 		root.Subs_del_after(lnki.Tkn_sub_idx() + 1);// remove all tkns after [[ from root
 		int reparse_bgn = lnki.Src_end();			// NOTE: reparse all text from "[["; needed to handle [[|<i>a</i>]] where "<i>a</i>" cannot be returned as text; DATE:2014-03-04
-		int reparse_len = cur_pos - reparse_bgn;
 		ctx.App().Msg_log().Add_itm_none(Xop_lnki_log.Invalid_ttl, src, reparse_bgn, reparse_bgn + 128);
-		if (reparse_len > 512)
-			ctx.App().Usr_dlg().Warn_many("", "", "lnki.reparsing large block; page=~{0} len=~{1} src=~{2}", Xop_ctx_.Page_as_str(ctx), reparse_len, Xop_ctx_.Src_limit_and_escape_nl(src, reparse_bgn, Invalidate_lnki_len));
+		// int reparse_len = cur_pos - reparse_bgn;
+		// if (reparse_len > 512) ctx.App().Usr_dlg().Warn_many("", "", "lnki.reparsing large block; page=~{0} len=~{1} src=~{2}", Xop_ctx_.Page_as_str(ctx), reparse_len, Xop_ctx_.Src_limit_and_escape_nl(src, reparse_bgn, Invalidate_lnki_len));
 		return reparse_bgn;
 	}
 	public static boolean Parse_ttl(Xop_ctx ctx, byte[] src, Xop_lnki_tkn lnki, int pipe_pos) {
@@ -199,13 +198,13 @@ class Xop_lnki_wkr_ {
 	public static boolean Parse_ttl(Xop_ctx ctx, byte[] src, Xop_lnki_tkn lnki, int ttl_bgn, int ttl_end) {
 		Xoa_app app = ctx.App();
 		byte[] ttl_bry = Bry_.Mid(src, ttl_bgn, ttl_end);
-		ttl_bry = app.Url_converter_url_ttl().Decode(ttl_bry);
+		ttl_bry = app.Encoder_mgr().Url_ttl().Decode(ttl_bry);
 		int ttl_bry_len = ttl_bry.length;
 		Xoa_ttl page_ttl = ctx.Cur_page().Ttl();
 		if (page_ttl.Ns().Subpages_enabled()
-			&& Pf_xtn_rel2abs.Rel2abs_ttl(ttl_bry, 0, ttl_bry_len)) { // Linker.php|normalizeSubpageLink
+			&& Pfunc_rel2abs.Rel2abs_ttl(ttl_bry, 0, ttl_bry_len)) { // Linker.php|normalizeSubpageLink
 			Bry_bfr tmp_bfr = app.Utl_bry_bfr_mkr().Get_b512();
-			byte[] new_bry = Pf_xtn_rel2abs.Rel2abs(tmp_bfr, ttl_bry, page_ttl.Raw(), rel2abs_tid.Val_zero_());
+			byte[] new_bry = Pfunc_rel2abs.Rel2abs(tmp_bfr, ttl_bry, page_ttl.Raw(), rel2abs_tid.Val_zero_());
 			lnki.Subpage_tid_(rel2abs_tid.Val());
 			lnki.Subpage_slash_at_end_(Bry_.Get_at_end(ttl_bry) == Byte_ascii.Slash);
 			ttl_bry = new_bry;

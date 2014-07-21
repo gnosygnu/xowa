@@ -44,17 +44,17 @@ public class Pft_func_time_basic_tst {
 	@Test   public void Error()					{fxt.Test_parse_tmpl_str_test("{{#time:M|2}}"								, "{{test}}"			, "<strong class=\"error\">Invalid year: 2</strong>");}
 	@Test   public void Error2()				{fxt.Test_parse_tmpl_str_test("{{#time:Y|July 28 - August 1, 1975}}"		, "{{test}}"			, "<strong class=\"error\">Invalid time</strong>");}
 	@Test   public void Error3()				{fxt.Test_parse_tmpl_str_test("{{#time:Y|106BC-43BC}}"						, "{{test}}"			, "<strong class=\"error\">Invalid time</strong>");}
-	@Test   public void Timestamp()				{fxt.Test_parse_tmpl_str_test("{{#time:F j, Y|20060827072854}}"				, "{{test}}"			, "August 27, 2006");}	// EX.WP: Great Fire of London
+	@Test   public void Timestamp()				{fxt.Test_parse_tmpl_str_test("{{#time:F j, Y|20060827072854}}"				, "{{test}}"			, "August 27, 2006");}	// PAGE:en.w:Great Fire of London
 	@Test   public void Unixtime_read()			{fxt.Test_parse_tmpl_str_test("{{#time:Y-m-d h:i:s A|@0}}"					, "{{test}}"			, "1970-01-01 12:00:00 AM");}	// EX:w:Wikipedia:WikiProject_Articles_for_creation/BLD_Preload
 	@Test   public void Unixtime_read_neg()		{fxt.Test_parse_tmpl_str_test("{{#time:Y-m-d h:i:s A|@-3600}}"				, "{{test}}"			, "1969-12-31 11:00:00 PM");}	// EX:w:Wikipedia:WikiProject_Articles_for_creation/October_-_November_2012_Backlog_Elimination_Drive; DATE:2014-05-10
 	@Test   public void Unixtime_8_digit()		{fxt.Test_parse_tmpl_str_test("{{#time:Y-m-d h:i:s A|@20120304}}"			, "{{test}}"			, "1970-08-21 08:58:24 PM");}	// PURPOSE: make sure yyyy-MM-dd is gobbled by "@" and not evaluated again as date; EX:w:Wikipedia:WikiProject_Articles_for_creation/October_-_November_2012_Backlog_Elimination_Drive; DATE:2014-05-10
-	@Test   public void Unixtime_write()		{fxt.Test_parse_tmpl_str_test("{{#time:U|2012-08-02}}"						, "{{test}}"			, "1343865600");}	// EX.WP: Opa (programming language)
-	@Test   public void Year_4_digit()			{fxt.Test_parse_tmpl_str_test("{{#time:Y|June 20, 451}}"					, "{{test}}"			, "0451");}	// EX.WP: Battle of the Catalaunian Plains
-	@Test   public void Year_month()			{fxt.Test_parse_tmpl_str_test("{{#time:F Y|November 2012}}"					, "{{test}}"			, "November 2012");}	// EX.WP: Project:Current events
-	@Test   public void Day_addition_with_dash(){fxt.Test_parse_tmpl_str_test("{{#time:Y-m-d|2011-11-13 +1 day}}"			, "{{test}}"			, "2011-11-14");}	// PURPOSE: +1 day was becoming -1 day b/c it was picking up - at -13; EX.WP: Template:POTD/2012-10-09	
-	@Test   public void Fmt_time_before_day()	{fxt.Test_parse_tmpl_str_test("{{#time:Y-m-d H:i|04:50, 17 December 2010}}"	, "{{test}}"			, "2010-12-17 04:50");}	// PURPOSE: strange day time format; EX.WP:Talk:Battle of Fort Washington
+	@Test   public void Unixtime_write()		{fxt.Test_parse_tmpl_str_test("{{#time:U|2012-08-02}}"						, "{{test}}"			, "1343865600");}	// PAGE:en.w:Opa (programming language)
+	@Test   public void Year_4_digit()			{fxt.Test_parse_tmpl_str_test("{{#time:Y|June 20, 451}}"					, "{{test}}"			, "0451");}	// PAGE:en.w:Battle of the Catalaunian Plains
+	@Test   public void Year_month()			{fxt.Test_parse_tmpl_str_test("{{#time:F Y|November 2012}}"					, "{{test}}"			, "November 2012");}	// PAGE:en.w:Project:Current events
+	@Test   public void Day_addition_with_dash(){fxt.Test_parse_tmpl_str_test("{{#time:Y-m-d|2011-11-13 +1 day}}"			, "{{test}}"			, "2011-11-14");}	// PURPOSE: +1 day was becoming -1 day b/c it was picking up - at -13; PAGE:en.w:Template:POTD/2012-10-09	
+	@Test   public void Fmt_time_before_day()	{fxt.Test_parse_tmpl_str_test("{{#time:Y-m-d H:i|04:50, 17 December 2010}}"	, "{{test}}"			, "2010-12-17 04:50");}	// PURPOSE: strange day time format; PAGE:en.w:Talk:Battle of Fort Washington
 	@Test   public void Fmt_time_before_day_2()	{fxt.Test_parse_tmpl_str_test("{{#time:Y-m-d H:i|04:50, December 11, 2010}}", "{{test}}"			, "2010-12-11 04:50");}	// PURPOSE: handle hh:nn ymd; PAGE:en.w:Wikipedia:WikiProject_Maine/members; DATE:2014-06-25
-	@Test   public void Hour_zero()				{fxt.Test_parse_tmpl_str_test("{{#time:Y-m-d H:i|August 18 2006 00:14}}"	, "{{test}}"			, "2006-08-18 00:14");}	// PURPOSE: fix; invalid hour; EX.WP:Talk:Martin Luther
+	@Test   public void Hour_zero()				{fxt.Test_parse_tmpl_str_test("{{#time:Y-m-d H:i|August 18 2006 00:14}}"	, "{{test}}"			, "2006-08-18 00:14");}	// PURPOSE: fix; invalid hour; PAGE:en.w:Talk:Martin Luther
 	@Test   public void Iso()					{fxt.Test_parse_tmpl_str_test("{{#time:c|2012-01-02 03:04:05}}"				, "{{test}}"			, "2012-01-02T03:04:05-05:00");}
 	@Test   public void Ymdh()					{fxt.Test_parse_tmpl_str_test("{{#time:Y-m-d|2012-01-02-99}}"				, "{{test}}"			, "2012-01-06");}	// PURPOSE: "99" is treated as 99th hour; EX:w:LimeWire; DATE:2014-03-24
 	@Test   public void Ymdh_noop()				{fxt.Test_parse_tmpl_str_test("{{#time:Y-m-d|2012-01-02-100}}"				, "{{test}}"			, "2012-01-02");}	// PURPOSE: "100" is ignored

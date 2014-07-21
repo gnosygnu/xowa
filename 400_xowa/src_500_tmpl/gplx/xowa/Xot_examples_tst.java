@@ -36,7 +36,7 @@ public class Xot_examples_tst {
 	@Test  public void About() {
 		Init_tmpl_about(); fxt.Test_parse_tmpl_str("{{About|abc}}", "This article is about abc.&#32;&#32;For other uses, see [[Test page (disambiguation)]].");
 	}
-	@Test  public void About_2() {	// EX.WP: {{About|the NASA space mission||Messenger (disambiguation)}}
+	@Test  public void About_2() {	// PAGE:en.w:{{About|the NASA space mission||Messenger (disambiguation)}}
 		Init_tmpl_about(); fxt.Test_parse_tmpl_str("{{About|a||b{{!}}c}}", "This article is about a.&#32;&#32;For other uses, see [[b|c]].");
 	}
 	@Test  public void OtherUses() {

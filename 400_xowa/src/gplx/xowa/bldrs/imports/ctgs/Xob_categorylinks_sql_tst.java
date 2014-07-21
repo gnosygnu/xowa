@@ -115,8 +115,8 @@ class Db_tst_qry {
 		for (int i = 0; i < len; i++) {
 			Db_tst_val expd_val = expd_vals[i];
 			String expd_key = expd_val.Key();
-			String expd_str = Object_.XtoStr_OrEmpty(expd_val.Val());
-			String actl_str = Object_.XtoStr_OrEmpty(rdr.Read(expd_key));
+			String expd_str = Object_.Xto_str_strict_or_empty(expd_val.Val());
+			String actl_str = Object_.Xto_str_strict_or_empty(rdr.Read(expd_key));
 			boolean eq = String_.Eq(expd_str, actl_str);	// NOTE: always compare strings, not objs; problems with comparing byte to int
 			bfr.Add_str_pad_space_end(expd_key, pad_max);
 			bfr.Add_str_pad_space_bgn(expd_str, pad_max);

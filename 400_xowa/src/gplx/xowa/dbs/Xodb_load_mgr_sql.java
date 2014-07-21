@@ -112,7 +112,7 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 	private Db_provider search_provider = null;
 	private void Search_version_init() {
 		if (search_provider == null) {
-			Xodb_file search_file = db_mgr.Fsys_mgr().Get_tid_root(Xodb_file.Tid_search);
+			Xodb_file search_file = db_mgr.Fsys_mgr().Get_tid_root(Xodb_file_tid_.Tid_search);
 			if (search_file == null) {
 				search_provider = Db_provider_.Null;
 				search_version = gplx.xowa.specials.search.Xosrh_core.Version_1;
@@ -128,7 +128,7 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 		if (search_version == gplx.xowa.specials.search.Xosrh_core.Version_1)
 			db_mgr.Tbl_page().Select_by_search(cancelable, rv, search, results_max);
 		else {
-			Xodb_search_title_word_tbl.Select_by_word(cancelable, rv, search, results_max, db_mgr.Fsys_mgr().Get_tid_root(Xodb_file.Tid_search).Provider());
+			Xodb_search_title_word_tbl.Select_by_word(cancelable, rv, search, results_max, db_mgr.Fsys_mgr().Get_tid_root(Xodb_file_tid_.Tid_search).Provider());
 			db_mgr.Tbl_page().Select_by_id_list(cancelable, true, rv);
 		}
 	}

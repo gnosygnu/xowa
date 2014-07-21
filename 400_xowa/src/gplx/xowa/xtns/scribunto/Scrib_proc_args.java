@@ -51,8 +51,8 @@ public class Scrib_proc_args {
 	public boolean		Cast_bool_or_y(int i)			{Object rv = Get_or_null(i); return rv == null ? Bool_.Y		: Bool_.cast_(rv);}
 	public boolean		Cast_bool_or_n(int i)			{Object rv = Get_or_null(i); return rv == null ? Bool_.N		: Bool_.cast_(rv);}
 	public int		Cast_int_or(int i, int or)		{Object rv = Get_or_null(i); return rv == null ? or				: Int_.coerce_(rv);}	// coerce to handle "1" and 1;
-	public String	Form_str_or_null(int i)			{Object rv = Get_or_null(i); return rv == null ? null			: Object_.XtoStr_OrNull(rv);}	// NOTE: Modules can throw exceptions in which return value is nothing; do not fail; return ""; EX: -logy; DATE:2013-10-14
-	public byte[]	Form_bry_or_null(int i)			{Object rv = Get_or_null(i); return rv == null ? null			: Bry_.new_utf8_(Object_.XtoStr_OrNull(rv));}
+	public String	Xstr_str_or_null(int i)			{Object rv = Get_or_null(i); return rv == null ? null			: Object_.Xto_str_loose_or(rv, null);}	// NOTE: Modules can throw exceptions in which return value is nothing; do not fail; return ""; EX: -logy; DATE:2013-10-14
+	public byte[]	Xstr_bry_or_null(int i)			{Object rv = Get_or_null(i); return rv == null ? null			: Bry_.new_utf8_(Object_.Xto_str_loose_or(rv, null));}
 	public KeyVal[] Cast_kv_ary_or_null(int i)		{Object rv = Get_or_null(i); return rv == null ? null			: (KeyVal[])rv;}
 	public KeyVal[] Pull_kv_ary(int i) {
 		Object rv = Get_or_fail(i);

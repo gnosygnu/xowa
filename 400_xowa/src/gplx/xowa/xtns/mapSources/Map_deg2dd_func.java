@@ -22,7 +22,7 @@ public class Map_deg2dd_func extends Pf_func_base {
 	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {
 		byte[] coord = Eval_argx(ctx, src, caller, self);
 		byte[] precision_bry = Pf_func_.Eval_val_or(ctx, src, caller, self, self.Args_len(), 0, null);
-		int prec = precision_bry == null ? -1 : Bry_.X_to_int_or(precision_bry, -1);
+		int prec = precision_bry == null ? -1 : Bry_.Xto_int_or(precision_bry, -1);
 		Map_math map_math = Map_math._;
 		if (map_math.Ctor(coord, prec, Bry_.Empty, 2))
 			bfr.Add_double(map_math.Coord_dec());

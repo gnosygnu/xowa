@@ -132,10 +132,10 @@ public class Http_server_mgr implements GfoInvkAble {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_port))					return port;
 		else if	(ctx.Match(k, Invk_port_))					Port_(m.ReadInt("v"));
-		else if	(ctx.Match(k, Invk_running))				return Yn.X_to_str(running);
+		else if	(ctx.Match(k, Invk_running))				return Yn.Xto_str(running);
 		else if	(ctx.Match(k, Invk_running_))				Running_(m.ReadYn("v"));
-		else if	(ctx.Match(k, Invk_retrieve_mode))			return File_retrieve_mode.X_to_str(retrieve_mode);
-		else if	(ctx.Match(k, Invk_retrieve_mode_))			retrieve_mode = File_retrieve_mode.X_to_byte(m.ReadStr("v"));
+		else if	(ctx.Match(k, Invk_retrieve_mode))			return File_retrieve_mode.Xto_str(retrieve_mode);
+		else if	(ctx.Match(k, Invk_retrieve_mode_))			retrieve_mode = File_retrieve_mode.Xto_byte(m.ReadStr("v"));
 		else if	(ctx.Match(k, Invk_retrieve_mode_list))		return File_retrieve_mode.Options__list;
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;

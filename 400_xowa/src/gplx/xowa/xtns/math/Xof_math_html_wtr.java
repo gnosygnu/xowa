@@ -55,8 +55,8 @@ public class Xof_math_html_wtr {
 			switch (b) {
 				case Byte_ascii.Lt: 	if (mathjax) escaped = gplx.html.Html_entity_.Lt_bry; break;
 				case Byte_ascii.Gt: 	if (mathjax) escaped = gplx.html.Html_entity_.Gt_bry; break;
-				case Byte_ascii.Amp:	escaped = Const_amp; break;
-				case Byte_ascii.Quote:	if (mathjax) escaped = gplx.html.Html_entity_.Quote_bry; break;
+				// case Byte_ascii.Amp:	escaped = Const_amp; break;	// TOMBSTONE:never escape ampersand; PAGE:s.w:Matrix_(mathematics); DATE:2014-07-19
+				// case Byte_ascii.Quote:	if (mathjax) escaped = gplx.html.Html_entity_.Quote_bry; break; // TOMBSTONE:do not escape quote; PAGE:s.w:Matrix_(mathematics); DATE:2014-07-19
 				default:
 					if (dirty || write_to_bfr)
 						bfr.Add_byte(b);
@@ -81,5 +81,4 @@ public class Xof_math_html_wtr {
 		else
 			return dirty ? bfr.XtoAryAndClear() : bry;
 	}
-	private static final byte[] Const_amp = Bry_.new_ascii_("\\&");
 }

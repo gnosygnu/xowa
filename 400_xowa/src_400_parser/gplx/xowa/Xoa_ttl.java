@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.core.btries.*; import gplx.xowa.parsers.amps.*;
-public class Xoa_ttl {	// EX.WP: http://en.wikipedia.org/wiki/Help:Link; REF.MW: Ttl.php|secureAndSplit;
+public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.MW: Ttl.php|secureAndSplit;
 	public Xow_ns Ns() {return ns;} private Xow_ns ns;
 	public boolean ForceLiteralLink() {return forceLiteralLink;} private boolean forceLiteralLink;
 	// NOTE: in procs below, all -1 are used to skip previous delimiters; they will only occur for end_pos arguments

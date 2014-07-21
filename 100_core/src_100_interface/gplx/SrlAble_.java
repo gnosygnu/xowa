@@ -24,7 +24,7 @@ public class SrlAble_ {
 		return sb.XtoStr();
 	}
 	public static String XtoStr(Object o) {
-		SrlAble s = SrlAble_.as_(o); if (s == null) return Object_.XtoStr_OrNullStr(o);
+		SrlAble s = SrlAble_.as_(o); if (s == null) return Object_.Xto_str_strict_or_null_mark(o);
 		GfoMsg m = GfoMsg_.new_parse_("root");
 		s.Srl(m);
 		return XtoStr(m);
@@ -36,7 +36,7 @@ public class SrlAble_ {
 		for (int i = 0; i < owner.Args_count(); i++) {
 			if (i != 0) sb.Add(" ");
 			KeyVal kv = owner.Args_getAt(i);
-			sb.Add(kv.Key()).Add("=").Add("'").Add(Object_.XtoStr_OrNullStr(kv.Val())).Add("'");
+			sb.Add(kv.Key()).Add("=").Add("'").Add(Object_.Xto_str_strict_or_null_mark(kv.Val())).Add("'");
 		}
 		int subsCount = owner.Subs_count();
 		if	(subsCount == 0) {

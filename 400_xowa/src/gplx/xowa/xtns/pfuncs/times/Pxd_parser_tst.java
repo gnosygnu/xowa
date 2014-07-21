@@ -53,10 +53,10 @@ public class Pxd_parser_tst {
 	@Test  public void Time_all()									{tst_both_("04-03-05 06:07:08"		, "2005-03-04 06:07:08.000");}
 	@Test  public void Unit_day_pos()								{tst_date_("+ 3 days"				, "2012-03-01");}
 	@Test  public void Unit_day_neg()								{tst_date_("- 3 days"				, "2012-02-24");}
-	@Test  public void Unit_day_neg_w_day()							{tst_date_("30 May 2012 -1 days"	, "2012-05-29");}	// EX.WP: Main Page
+	@Test  public void Unit_day_neg_w_day()							{tst_date_("30 May 2012 -1 days"	, "2012-05-29");}	// PAGE:en.w:Main Page
 	@Test  public void Unit_week()									{tst_date_("- 1 week"				, "2012-02-26");}  // PURPOSE.FIX: "week" was not being handled; error on main Page; EX:da.wikipedia.org/Main_Page
 	@Test  public void Time_len_6()									{tst_time_("041526"					, "04:15:26.000");}
-	@Test  public void Err_one_num()								{tst_time_("2"						, "Invalid year: 2");}	// occurs on some templates; EX.WP: Voyager 1 and {{date}}
+	@Test  public void Err_one_num()								{tst_time_("2"						, "Invalid year: 2");}	// occurs on some templates; PAGE:en.w:Voyager 1 and {{date}}
 	@Test  public void Dmy_at_y_dot()								{tst_date_("1.2.70"					, "1970-02-01");}	// PURPOSE: dmy when delimiter is dot
 	@Test  public void Mdy_at_y_slash()								{tst_date_("1/2/70"					, "1970-01-02");}	// PURPOSE: mdy when delimiter is slash
 	@Test  public void Ago()										{tst_date_("1 month ago"			, "2012-01-27");}

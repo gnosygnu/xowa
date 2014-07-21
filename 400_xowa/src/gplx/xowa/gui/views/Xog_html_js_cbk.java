@@ -37,7 +37,7 @@ public class Xog_html_js_cbk implements GfoInvkAble {
 		String[] rv = new String[len + 1];
 		rv[0] = Invk_xowa_exec_test_as_array;
 		for (int i = 0; i < len; i++)
-			rv[i + 1] = Object_.XtoStr_OrEmpty(m.ReadValAt(i));
+			rv[i + 1] = Object_.Xto_str_strict_or_empty(m.ReadValAt(i));
 		return rv;
 	}
 	private String Parse_to_html(GfoMsg m) {
@@ -75,7 +75,7 @@ public class Xog_html_js_cbk implements GfoInvkAble {
 	}
 	private String Popups_get_html(GfoMsg m) {
 		try {
-			int	   popups_id	= Int_.X_by_double_(Double_.cast_(m.Args_getAt(0).Val()));
+			int	   popups_id	= Int_.Xby_double_(Double_.cast_(m.Args_getAt(0).Val()));
 			byte[] href_bry		= m.Args_getAt(1).Val_to_bry();
 			return html_itm.Owner_tab().Page().Wiki().Html_mgr().Module_mgr().Popup_mgr().Show_init(href_bry, popups_id);
 		} catch (Exception e) {Err_.Noop(e); return null;}
@@ -164,7 +164,7 @@ public class Xog_html_js_cbk implements GfoInvkAble {
 			rv = app.Gfs_mgr().Run_str(m.Args_getAt(0).Val_to_str_or_empty());
 		}
 		catch (Exception e) {Err_.Noop(e); return null;}
-		return Object_.XtoStr_OrEmpty(rv);
+		return Object_.Xto_str_strict_or_empty(rv);
 	}
 	private static final byte[] Wikidata_get_label_xowa_ui_lang = Bry_.new_ascii_("xowa_ui_lang"), Wikidata_get_label_xowa_title = Bry_.new_ascii_("xowa_title");
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

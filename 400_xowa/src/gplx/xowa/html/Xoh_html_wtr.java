@@ -161,17 +161,19 @@ public class Xoh_html_wtr {
 				else {							// xowa or regular; EX: http://a.org
 					if (proto_is_xowa) {
 						bfr.Add(Xoh_consts.A_bgn).Add(Xop_lnke_wkr.Bry_xowa_protocol);
-						ctx.App().Url_converter_gfs().Encode(bfr, src, lnke_bgn, lnke_end);
+						ctx.App().Encoder_mgr().Gfs().Encode(bfr, src, lnke_bgn, lnke_end);
 						bfr.Add(Xoh_consts.A_bgn_lnke_0_xowa);	
 					}
 					else						// regular; add href
 						bfr.Add(Xoh_consts.A_bgn).Add_mid(src, lnke_bgn, lnke_end).Add(Xoh_consts.A_bgn_lnke_0);
 				}
 			}
-			else {
-				bfr.Add(Xoh_consts.A_bgn).Add(Xoh_href_parser.Href_site_bry).Add(lnke_xwiki_wiki).Add(Xoh_href_parser.Href_wiki_bry).Add(lnke.Lnke_xwiki_page());
+			else {	// xwiki
+				Url_encoder href_encoder = ctx.App().Encoder_mgr().Href_quotes();
+				bfr.Add(Xoh_consts.A_bgn).Add(Xoh_href_parser.Href_site_bry).Add(lnke_xwiki_wiki).Add(Xoh_href_parser.Href_wiki_bry)
+					.Add(href_encoder.Encode(lnke.Lnke_xwiki_page()));	// NOTE: must encode page; EX:%22%3D -> '">' which will end attribute; PAGE:en.w:List_of_Category_A_listed_buildings_in_West_Lothian DATE:2014-07-15
 				if (lnke.Lnke_xwiki_qargs() != null)
-					Xoa_url_arg_hash.Concat_bfr(bfr, lnke.Lnke_xwiki_qargs());
+					Xoa_url_arg_hash.Concat_bfr(bfr, href_encoder, lnke.Lnke_xwiki_qargs()); // NOTE: must encode args
 				bfr.Add(Xoh_consts.__end_quote);
 			}
 		}
@@ -279,7 +281,7 @@ public class Xoh_html_wtr {
 		}
 	}
 	public void Space(Xop_ctx ctx, Xoh_html_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Xop_tkn_grp grp, int sub_idx, Xop_space_tkn space) {
-		bfr.Add_byte_repeat(Byte_ascii.Space, space.Src_end_grp(grp, sub_idx) - space.Src_bgn_grp(grp, sub_idx));	// NOTE: lnki.caption will convert \n to \s; see Xop_nl_lxr; EX.WP: Schwarzschild radius
+		bfr.Add_byte_repeat(Byte_ascii.Space, space.Src_end_grp(grp, sub_idx) - space.Src_bgn_grp(grp, sub_idx));	// NOTE: lnki.caption will convert \n to \s; see Xop_nl_lxr; PAGE:en.w:Schwarzschild radius
 	}
 	@gplx.Virtual public void Para(Xop_ctx ctx, Xoh_html_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Xop_para_tkn para) {
 		if (para.Nl_bgn() && bfr.Len() > 0) {
@@ -447,6 +449,7 @@ public class Xoh_html_wtr {
 			case Xop_xnde_tag_.Tid_listing_sleep:
 			case Xop_xnde_tag_.Tid_xowa_cmd:
 			case Xop_xnde_tag_.Tid_rss:
+			case Xop_xnde_tag_.Tid_quiz:
 			case Xop_xnde_tag_.Tid_math:
 			case Xop_xnde_tag_.Tid_xowa_html:
 				Xox_xnde xtn = xnde.Xnde_xtn();
@@ -562,7 +565,7 @@ public class Xoh_html_wtr {
 		bfr.Add_byte(quote_byte);
 	}
 	private static void Xnde_atr_write_id(Bry_bfr bfr, Xoa_app app, byte[] bry, int bgn, int end) {
-		app.Url_converter_id().Encode(bfr, bry, bgn, end);
+		app.Encoder_mgr().Id().Encode(bfr, bry, bgn, end);
 	}
 	private void Xnde_subs(Xop_ctx ctx, Xoh_html_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {
 		int subs_len = xnde.Subs_len();

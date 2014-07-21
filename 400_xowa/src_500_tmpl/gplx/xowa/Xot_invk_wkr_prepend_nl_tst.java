@@ -48,10 +48,10 @@ public class Xot_invk_wkr_prepend_nl_tst {
 		));
 		fxt.Init_defn_clear();
 	}
-	@Test  public void Pfunc() {// PURPOSE: if {| : ; # *, auto add new_line; parser_function variant; EX.WP:Soviet Union; Infobox former country
+	@Test  public void Pfunc() {// PURPOSE: if {| : ; # *, auto add new_line; parser_function variant; PAGE:en.w:Soviet Union; Infobox former country
 		fxt.Test_parse_tmpl_str_test(""					, "z {{#if:true|#a|n}}"		, "z \n#a");
 	}
-	@Test  public void Bos() {	// PURPOSE: function should expand "*a" to "\n*a" even if "*a" is bos; SEE:NOTE_1 EX.WP: Rome and Panoramas;
+	@Test  public void Bos() {	// PURPOSE: function should expand "*a" to "\n*a" even if "*a" is bos; SEE:NOTE_1 PAGE:en.w:Rome and Panoramas;
 		fxt.Test_parse_page_tmpl_str("{{#if:x|*a}}", "\n*a");
 	}
 	@Test  public void Tmpl_arg() {	// PURPOSE: tmpl arg should auto-create?

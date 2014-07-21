@@ -41,8 +41,8 @@ public class Gfui_bnd_parser {
 	};
 	private byte[] src; private int src_len;
 	private ListAdp tkns = ListAdp_.new_(); private int mod_val = Mod_val_null;
-	public String X_to_norm(String src_str) {return Convert(Bool_.Y, src_str);}
-	public String X_to_gfui(String src_str) {return Convert(Bool_.N, src_str);}
+	public String Xto_norm(String src_str) {return Convert(Bool_.Y, src_str);}
+	public String Xto_gfui(String src_str) {return Convert(Bool_.N, src_str);}
 	private String Convert(boolean src_is_gfui, String src_str) {			
 		this.src = Bry_.new_utf8_(src_str); this.src_len = src.length;			
 		tkns.Clear(); mod_val = Mod_val_null;

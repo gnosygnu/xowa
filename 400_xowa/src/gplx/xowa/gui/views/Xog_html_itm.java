@@ -143,7 +143,7 @@ public class Xog_html_itm implements GfoInvkAble, GfoEvObj {
 	private boolean Scroll_page_by_id(String id) {
 		return (id == null) 
 			? false
-			: html_box.Html_elem_scroll_into_view(app.Url_converter_id().Encode_str(id));
+			: html_box.Html_elem_scroll_into_view(app.Encoder_mgr().Id().Encode_str(id));
 	}
 	public void Js_enabled_(boolean v) {
 		html_box.Html_js_enabled_(v);
@@ -197,7 +197,7 @@ class Xog_html_itm__href_extractor {
 	;
 	public static String Html_extract_text(String site, String page, String text_str) {
 		byte[] text_bry = Bry_.new_utf8_(text_str);
-		int text_tid = Byte_ascii.X_to_digit(text_bry[0]);
+		int text_tid = Byte_ascii.Xto_digit(text_bry[0]);
 		int text_len = text_bry.length;
 		switch (text_tid) {
 			case Text_tid_none: return "";

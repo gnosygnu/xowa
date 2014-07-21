@@ -145,6 +145,11 @@ public class Scrib_core {
 	@gplx.Internal protected void Frame_parent_(Xot_invk v) {frame_parent = v;}	// TEST:
 	public Xop_ctx Ctx() {return ctx;} private Xop_ctx ctx;
 	public byte[] Cur_src() {return cur_src;} private byte[] cur_src; // only used for error reporting
+	public void Invoke_init(Xow_wiki wiki, Xop_ctx ctx, byte[] src, Xot_invk parent_frame, Xot_invk current_frame) {	// TEST
+		this.wiki = wiki; this.ctx = ctx; this.cur_src = src;
+		lib_mw.Invoke_bgn(wiki, ctx, src);
+		this.frame_parent = parent_frame; this.frame_current = current_frame;
+	}
 	public void Invoke(Xow_wiki wiki, Xop_ctx ctx, byte[] src, Xot_invk parent_frame, Xot_invk current_frame, Bry_bfr bfr, byte[] mod_name, byte[] mod_text, byte[] fnc_name) {
 		this.wiki = wiki; this.ctx = ctx; this.cur_src = src;
 		lib_mw.Invoke_bgn(wiki, ctx, src);
@@ -153,14 +158,12 @@ public class Scrib_core {
 		parent_frame.Scrib_frame_tid_(Scrib_frame_.Tid_parent); current_frame.Scrib_frame_tid_(Scrib_frame_.Tid_current);
 		try {
 			Scrib_lua_mod mod = Mods_get_or_new(mod_name, mod_text);
-//				KeyVal[] fnc_args = Scrib_kv_utl_.base1_obj_(mod.Fncs_get_by_key(String_.new_utf8_(fnc_name)));
-//				KeyVal[] rv = engine.CallFunction(lib_mw.Mod().Fncs_get_id("executeFunction"), fnc_args);
-			KeyVal[] fnc_args = Scrib_kv_utl_.base1_many_(mod.Init_chunk_func(), String_.new_utf8_(fnc_name));
-			KeyVal[] rv = engine.CallFunction(lib_mw.Mod().Fncs_get_id("executeModule"), fnc_args);
-			Scrib_lua_proc proc = (Scrib_lua_proc)rv[1].Val();
-			fnc_args = Scrib_kv_utl_.base1_many_(proc);
-			rv = engine.CallFunction(lib_mw.Mod().Fncs_get_id("executeFunction"), fnc_args);
-			String rslt = Scrib_kv_utl_.Val_to_str(rv, 0);	// NOTE: expects an array with 1 scalar value
+			KeyVal[] func_args = Scrib_kv_utl_.base1_many_(mod.Init_chunk_func(), String_.new_utf8_(fnc_name));
+			KeyVal[] func_rslt = engine.CallFunction(lib_mw.Mod().Fncs_get_id("executeModule"), func_args);			// call init_chunk to get proc dynamically; DATE:2014-07-12
+			Scrib_lua_proc proc = (Scrib_lua_proc)func_rslt[1].Val();												// note that init_chunk should have: [0]:true/false result; [1]:proc
+			func_args = Scrib_kv_utl_.base1_many_(proc);
+			func_rslt = engine.CallFunction(lib_mw.Mod().Fncs_get_id("executeFunction"), func_args);				// call function now
+			String rslt = Scrib_kv_utl_.Val_to_str(func_rslt, 0);													// rslt expects an array with 1 scalar value
 			bfr.Add_str(rslt);
 		}
 		finally {
@@ -178,7 +181,6 @@ public class Scrib_core {
 			rv.LoadString(String_.new_utf8_(mod_text));
 			mods.Add(mod_name, rv);
 		}
-		// rv.Execute();	// TODO: move inside rv == null
 		return rv;
 	}
 	public static Scrib_core Core() {return core;} public static Scrib_core Core_new_(Xoa_app app, Xop_ctx ctx) {core = new Scrib_core(app, ctx); return core;} private static Scrib_core core;

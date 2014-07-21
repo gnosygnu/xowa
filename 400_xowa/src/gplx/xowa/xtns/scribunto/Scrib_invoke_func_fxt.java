@@ -19,7 +19,11 @@ package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx
 import gplx.xowa.xtns.scribunto.lib.*;
 import gplx.xowa.xtns.scribunto.engines.process.*;
 public class Scrib_invoke_func_fxt {
-	public void Clear() {
+	private Xop_fxt fxt; Bry_bfr tmp_bfr = Bry_bfr.reset_(255); Scrib_core core; Process_server_mock server; Scrib_lua_rsp_bldr rsp_bldr = new Scrib_lua_rsp_bldr();
+	public Xop_fxt Parser_fxt() {return fxt;}
+	public Scrib_core_fxt Core_fxt() {return core_fxt;} Scrib_core_fxt core_fxt;
+	public Scrib_core Core() {return core;}
+	public void Clear_for_invoke() {
 		fxt = new Xop_fxt();	// NOTE: don't try to cache fxt on func_fxt level; causes errors in Language_lib
 		core_fxt = new Scrib_core_fxt();
 		core_fxt.Clear();
@@ -33,13 +37,6 @@ public class Scrib_invoke_func_fxt {
 		init_tmpl = init_page = null;
 		fxt.Init_page_create("Module:Mod_0");
 		this.Init_lua_rcvd_loadModule(); 
-	}	private Xop_fxt fxt; Bry_bfr tmp_bfr = Bry_bfr.reset_(255); Scrib_core core; Process_server_mock server; Scrib_lua_rsp_bldr rsp_bldr = new Scrib_lua_rsp_bldr();
-	public Xop_fxt Parser_fxt() {return fxt;}
-	public Scrib_core_fxt Core_fxt() {return core_fxt;} Scrib_core_fxt core_fxt;
-	public Scrib_core Core() {return core;}
-	public Scrib_invoke_func_fxt Init_module(String ttl, String text) {
-		fxt.Init_page_create("Module:" + ttl, text);
-		return this;
 	}
 	public Scrib_invoke_func_fxt Init_cbk(String lib_name, Scrib_lib lib, String... proc_names) {
 		int len = proc_names.length;
@@ -50,7 +47,6 @@ public class Scrib_invoke_func_fxt {
 		}
 		return this;
 	}
-	public Scrib_invoke_func_fxt Init_lua_module() {this.Init_lua_rcvd_executeModule(); return this;}
 	public Scrib_invoke_func_fxt Init_tmpl(String v) {init_tmpl = v; return this;} private String init_tmpl;
 	public Scrib_invoke_func_fxt Init_page(String v) {init_page = v; return this;} private String init_page;
 	public Scrib_invoke_func_fxt Init_server_print_key_y_() {server.Print_key_(true); return this;}
@@ -60,16 +56,12 @@ public class Scrib_invoke_func_fxt {
 		server.Prep_add(rsp_bldr.Bld_mw_cbk(cbk_name, ary));
 		return this;
 	}
-	public Scrib_invoke_func_fxt Init_lua_rcvd_loadModule() {
+	public Scrib_invoke_func_fxt Init_lua_module() {
+		server.Prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:1;s:6:\"values\";a:2:{i:1;b:1;i:2;O:42:\"Scribunto_LuaStandaloneInterpreterFunction\":1:{s:2:\"id\";i:14;}}}");
+		return this;
+	}
+	private Scrib_invoke_func_fxt Init_lua_rcvd_loadModule() {
 		server.Prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:1;s:6:\"values\";a:1:{i:1;i:1;}}");
-		return this;
-	}
-	public Scrib_invoke_func_fxt Init_lua_rcvd_executeModule() {
-		server.Prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:1;s:6:\"values\";a:1:{i:1;a:1:{s:5:\"Prc_0\";O:42:\"Scribunto_LuaStandaloneInterpreterFunction\":1:{s:2:\"id\";i:14;}}}}");
-		return this;
-	}
-	public Scrib_invoke_func_fxt Init_lua_rcvd_executeFunctionChunk() {
-		server.Prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:1;s:6:\"values\";a:1:{i:1;s:11:\"arg_0,arg_1\";}}");
 		return this;
 	}
 	public Scrib_invoke_func_fxt Init_lua_rcvd_preprocess(String frame, String cmd) {
@@ -87,10 +79,6 @@ public class Scrib_invoke_func_fxt {
 		server.Prep_add_dynamic_val();
 		return this;
 	}
-	public Scrib_invoke_func_fxt Expd_lua_send(String v) {
-		expd_lua_send = v;
-		return this;
-	}	String expd_lua_send;
 	public void Test_invoke(String expd) {
 		if (init_tmpl != null) fxt.Init_defn_add("test", init_tmpl);
 		fxt.Test_parse_tmpl_str(init_page, expd);
@@ -100,22 +88,10 @@ public class Scrib_invoke_func_fxt {
 		byte[] expd_err = tmp_bfr.XtoAryAndClear();
 		fxt.Test_parse_page_tmpl_str(raw, String_.new_utf8_(expd_err));
 	}
-	public Object Test_lib_proc_direct(Scrib_lib lib, String proc_key, Object[] args_ary) {
-		int proc_id = lib.Procs().Get_by_key(proc_key).Proc_id();
-		Scrib_proc_args args = new Scrib_proc_args(Scrib_kv_utl_.base1_many_(args_ary));
-		Scrib_proc_rslt rslt = new Scrib_proc_rslt();
-		lib.Procs_exec(proc_id, args, rslt);
-		return rslt.Ary()[0].Val();
-	}
 	public void Test_lib_proc(Scrib_lib lib, String func_name, Object[] args, String expd) {Test_lib_proc_kv(lib, func_name, Scrib_kv_utl_.base1_many_(args), expd);}
 	public void Test_lib_proc_kv(Scrib_lib lib, String func_name, KeyVal[] args, String expd) {
 		Test_lib_proc_internal(lib, func_name, args);
 		this.Test_invoke(expd);
-	}
-	public byte[] Test_lib_proc_rv(Scrib_lib lib, String func_name, Object[] args) {
-		Test_lib_proc_internal(lib, func_name, Scrib_kv_utl_.base1_many_(args));
-		if (init_tmpl != null) fxt.Init_defn_add("test", init_tmpl);
-		return fxt.Test_parse_tmpl_str_rv(init_page);
 	}
 	private void Test_lib_proc_internal(Scrib_lib lib, String func_name, KeyVal[] args) {
 		Init_lua_module();
@@ -126,20 +102,27 @@ public class Scrib_invoke_func_fxt {
 	public void Test_log_rcvd(int i, String expd) {
 		Tfds.Eq(expd, (String)server.Log_rcvd().FetchAt(i));
 	}
-	public void Init_scrib_proc() {
+	public void Init_frame_parent(String ttl, KeyVal... ary) {
+		core.Frame_parent_(Xot_invk_mock.test_(ary));
+		core.Frame_parent().Frame_ttl_(Bry_.new_utf8_(ttl));
+	}
+	public void Init_frame_current(KeyVal... ary) {
+		core.Frame_current_(Xot_invk_mock.test_(ary));
+		core.Frame_current().Frame_ttl_(Bry_.new_ascii_("Module:Mod_0"));
+	}
+	public void Clear_for_lib() {
 		fxt = new Xop_fxt();	// NOTE: don't try to cache fxt on func_fxt level; causes errors in Language_lib
 		core_fxt = new Scrib_core_fxt(fxt);
 		core = core_fxt.Core();
-		core.Frame_parent_(Xot_invk_mock.new_());
-		core.Frame_current_(Xot_invk_mock.new_());
-		Io_mgr._.InitEngine_mem();
-		fxt.Reset();
+		Xot_invk parent_frame = new Xot_invk_temp(true); parent_frame.Scrib_frame_tid_(Scrib_frame_.Tid_null); 
+		Xot_invk current_frame = Xot_invk_mock.test_(); current_frame.Frame_ttl_(Bry_.new_ascii_("Module:Mod_0"));
+		core.Invoke_init(core.Wiki(), core.Ctx(), Bry_.Empty, parent_frame, current_frame);
 		core.When_page_changed(fxt.Page());
 	}
 	public void Test_scrib_proc_str(Scrib_lib lib, String proc_name, Object[] args, String expd) {Test_scrib_proc_str(lib, proc_name, Scrib_kv_utl_.base1_many_(args), expd);}
 	public void Test_scrib_proc_str(Scrib_lib lib, String proc_name, KeyVal[] args, String expd) {
 		KeyVal[] actl = Test_scrib_proc_rv(lib, proc_name, args);
-		Tfds.Eq(Object_.XtoStr_OrNullStr(expd), Object_.XtoStr_OrNullStr(actl[0].Val()));
+		Tfds.Eq(Object_.Xto_str_strict_or_null_mark(expd), Object_.Xto_str_strict_or_null_mark(actl[0].Val()));
 	}
 	public void Test_scrib_proc_kv_vals(Scrib_lib lib, String proc_name, Object[] args, String expd) {Test_scrib_proc_kv_vals(lib, proc_name, Scrib_kv_utl_.base1_many_(args), expd);}
 	public void Test_scrib_proc_kv_vals(Scrib_lib lib, String proc_name, KeyVal[] args, String expd) {
@@ -152,7 +135,7 @@ public class Scrib_invoke_func_fxt {
 		for (int i = 0; i < len; ++i) {
 			if (i != 0) bfr.Add_byte(Byte_ascii.Semic);
 			KeyVal kv = ary[i];
-			bfr.Add_str(Object_.XtoStr_OrNullStr(kv.Val()));
+			bfr.Add_str(Object_.Xto_str_strict_or_null_mark(kv.Val()));
 		}
 		return bfr.XtoStrAndClear();
 	}

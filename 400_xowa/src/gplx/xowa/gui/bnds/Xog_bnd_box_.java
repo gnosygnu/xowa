@@ -35,15 +35,15 @@ public class Xog_bnd_box_ {
 		return ary;
 	}	private static Xog_bnd_box[] ary;
 	private static void ary_init(Xog_bnd_box[] ary, int tid, String key) {ary[tid] = new Xog_bnd_box(tid, key);}
-	public static int[] X_to_sys_int_ary(String s) {
+	public static int[] Xto_sys_int_ary(String s) {
 		String[] ary = String_.Split(s, "|");
 		int len = ary.length;
 		int[] rv = new int[len];
 		for (int i = 0; i < len; i++)
-			rv[i] = X_to_sys_int(ary[i]);
+			rv[i] = Xto_sys_int(ary[i]);
 		return rv;
 	}
-	public static int X_to_sys_int(String s) {
+	public static int Xto_sys_int(String s) {
 		if		(String_.Eq(s, Key_browser))			return Tid_browser;
 		else if	(String_.Eq(s, Key_browser_url))		return Tid_browser_url;
 		else if	(String_.Eq(s, Key_browser_search))		return Tid_browser_search;
@@ -53,7 +53,7 @@ public class Xog_bnd_box_ {
 		else if	(String_.Eq(s, Key_browser_info))		return Tid_browser_info;
 		else											throw Err_.unhandled(s);
 	}
-	public static String X_to_sys_str(int v) {
+	public static String Xto_sys_str(int v) {
 		switch (v) {
 			case Tid_browser:					return Key_browser;
 			case Tid_browser_url:				return Key_browser_url;
@@ -65,7 +65,7 @@ public class Xog_bnd_box_ {
 			default:							throw Err_.unhandled(v);
 		}
 	}
-	public static String X_to_gui_str(int v) {
+	public static String Xto_gui_str(int v) {
 		switch (v) {
 			case Tid_browser:					return Gui_browser;
 			case Tid_browser_url:				return Gui_browser_url;
@@ -77,7 +77,7 @@ public class Xog_bnd_box_ {
 			default:							throw Err_.unhandled(v);
 		}
 	}
-	public static int X_by_gui_str(String s) {
+	public static int Xby_gui_str(String s) {
 		if		(String_.Eq(s, Gui_browser))			return Tid_browser;
 		else if	(String_.Eq(s, Gui_browser_url))		return Tid_browser_url;
 		else if	(String_.Eq(s, Gui_browser_search))		return Tid_browser_search;

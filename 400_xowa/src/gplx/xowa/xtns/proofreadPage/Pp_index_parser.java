@@ -30,7 +30,7 @@ class Pp_index_parser {
 		Inspect_tmpl(rv, src, index_root, index_root.Subs_len(), ns_page_id, 1);
 		sub_parser.Parse_wtxt_to_wdom(index_root, sub_ctx, tkn_mkr, mid_text, Xop_parser_.Doc_bgn_bos);
 		rv.Src_(mid_text);
-		Inspect_wiki(rv, src, index_root, index_root.Subs_len(), ns_page_id, 1);
+		Inspect_wiki(rv, mid_text, index_root, index_root.Subs_len(), ns_page_id, 1);	// changed from src to mid_text; DATE:2014-07-14
 		return rv;
 	}
 	private static void Inspect_tmpl(Pp_index_page rv, byte[] src, Xop_tkn_itm_base owner, int owner_len, int ns_page_id, int depth) {

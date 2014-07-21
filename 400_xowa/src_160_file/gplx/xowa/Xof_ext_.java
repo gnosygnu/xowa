@@ -163,8 +163,8 @@ public class Xof_ext_ {
 			default: return false;
 		}
 	}
-	public static boolean Id_is_video(int id) {return id == Xof_ext_.Id_ogv || id == Xof_ext_.Id_ogg || id == Xof_ext_.Id_webm;}	// NOTE: ogg can be vid; EX.WP: Comet; Encke_tail_rip_off.ogg
-	public static boolean Id_is_video_strict(int id) {return id == Xof_ext_.Id_ogv || id == Xof_ext_.Id_webm;}	// NOTE: ogg can be aud / vid; EX.WP: Comet; Encke_tail_rip_off.ogg
+	public static boolean Id_is_video(int id) {return id == Xof_ext_.Id_ogv || id == Xof_ext_.Id_ogg || id == Xof_ext_.Id_webm;}	// NOTE: ogg can be vid; PAGE:en.w:Comet; Encke_tail_rip_off.ogg
+	public static boolean Id_is_video_strict(int id) {return id == Xof_ext_.Id_ogv || id == Xof_ext_.Id_webm;}	// NOTE: ogg can be aud / vid; PAGE:en.w:Comet; Encke_tail_rip_off.ogg
 	public static boolean Id_is_audio_strict(int id) {	// same as above, but deliberately exclude ambiguous ogg
 		switch (id) {
 			case Xof_ext_.Id_mid: case Xof_ext_.Id_oga: case Xof_ext_.Id_flac: return true;

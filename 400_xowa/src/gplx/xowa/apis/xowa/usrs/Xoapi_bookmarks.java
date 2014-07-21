@@ -42,7 +42,7 @@ public class Xoapi_bookmarks implements GfoInvkAble {
 	}
 	public void Show() {win.Page__navigate_by_url_bar("home/wiki/Data:Bookmarks");}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_enabled)) 							return Yn.X_to_str(this.Enabled());
+		if		(ctx.Match(k, Invk_enabled)) 							return Yn.Xto_str(this.Enabled());
 		else if	(ctx.Match(k, Invk_enabled_)) 							Enabled_(m.ReadYn("v"));
 		else if	(ctx.Match(k, Invk_add)) 								this.Add(m.ReadStrOr("v", null));
 		else if	(ctx.Match(k, Invk_show)) 								this.Show();

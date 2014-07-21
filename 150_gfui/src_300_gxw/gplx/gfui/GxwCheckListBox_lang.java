@@ -197,5 +197,5 @@ class CheckListItem {
     public Object Data() {return data;} Object data;       
     public boolean Selected() {return selected;} public void Selected_set(boolean selected) {this.selected = selected;}	protected boolean selected;
     public void Selected_toggle() {selected = !selected;}
-    public String toString() {return Object_.XtoStr_OrNullStr(data);}
+    public String toString() {return Object_.Xto_str_strict_or_null_mark(data);}
 }

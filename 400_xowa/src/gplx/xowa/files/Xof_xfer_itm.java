@@ -166,7 +166,7 @@ public class Xof_xfer_itm implements Xof_file_itm {
 				html_view_src = Trg_html(Xof_repo_itm.Mode_thumb, this.File_w());
 				thumb = meta_itm.Thumbs_get_img(html_w, 0);
 				if (thumb == null) {						// exact thumb not found
-					if (html_w == meta_itm.Orig_w()			// html_w matches orig_w; occurs when thumb,upright requested, but upright size is larger than orig; EX.WP:St. Petersburg
+					if (html_w == meta_itm.Orig_w()			// html_w matches orig_w; occurs when thumb,upright requested, but upright size is larger than orig; PAGE:en.w:St. Petersburg
 						&& !lnki_ext.Id_needs_convert()		// but ext cannot be something that needs conversion; EX: 120,90 svg may match thumb of 120,90, but .png still needs to be generated
 						&& meta_itm.Orig_exists() == Xof_meta_itm.Exists_y
 						) {	

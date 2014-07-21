@@ -33,6 +33,7 @@ public class Xob_wdata_pid_sql extends Xob_wdata_pid_base {
 	@Override public void Pid_end() {
 		provider.Txn_mgr().Txn_end_all();
 		stmt.Rls();
-		db_mgr.Fsys_mgr().Index_create(wiki.App().Usr_dlg(), Byte_.Ary(Xodb_file.Tid_core, Xodb_file.Tid_wikidata), Xodb_file.Indexes_wikidata_pids);
+		db_mgr.Fsys_mgr().Index_create(wiki.App().Usr_dlg(), Byte_.Ary(Xodb_file_tid_.Tid_core, Xodb_file_tid_.Tid_wikidata), Index_wdata_pids);
 	}
+	private static final Db_idx_itm Index_wdata_pids	= Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS wdata_pids__src ON wdata_pids (wp_src_lang, wp_src_ttl);");
 }

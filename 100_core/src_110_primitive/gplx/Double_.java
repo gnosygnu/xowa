@@ -35,6 +35,12 @@ public class Double_ {
 				int v_int = (int)v;
 		return v - v_int == 0 ? Int_.XtoStr(v_int) : Double.toString(v);
 			}
+	public static String Xto_str_loose(double v) {
+		int v_as_int = (int)v;			
+		return v == v_as_int
+			? Int_.XtoStr(v_as_int)		// convert to int, and call print String to eliminate any trailing decimal places
+			: String.format("%g", v);	// call "%g" format which should eliminate most, though not all; EX:2449.6000000000004; DATE:2014-07-14 
+	}
 	public static double cast_(Object o) {try {return (Double)o;} catch(Exception e) {throw Err_.type_mismatch_exc_(e, double.class, o);}}
 	public static double parse_(String raw) {try {return Double.parseDouble(raw);} catch(Exception e) {throw Err_.parse_type_exc_(e, double.class, raw);}}
 	public static double parseOr_(String raw, double v) {try {return Double.parseDouble(raw);} catch(Exception e) {Err_.Noop(e); return v;}}

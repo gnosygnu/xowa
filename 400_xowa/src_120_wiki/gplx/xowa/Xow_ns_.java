@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 public class Xow_ns_ {
-	public static final int	// EX.WP: http://www.mediawiki.org/wiki/Help:Namespaces
+	public static final int	// PAGE:en.w:http://www.mediawiki.org/wiki/Help:Namespaces
 		  Id_media				=  -2
 		, Id_special			=  -1
 		, Id_main				=   0				, Id_talk				=   1

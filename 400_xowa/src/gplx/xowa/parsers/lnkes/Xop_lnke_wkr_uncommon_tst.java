@@ -39,7 +39,7 @@ public class Xop_lnke_wkr_uncommon_tst {
 			,	fxt.tkn_txt_(14, 15)
 			);
 	}
-	@Test  public void Defect_2nd_consecutive_lnke() {	// PURPOSE: bad code that was causing lnkes to show up; EX.WP:Template:Infobox_country;
+	@Test  public void Defect_2nd_consecutive_lnke() {	// PURPOSE: bad code that was causing lnkes to show up; PAGE:en.w:Template:Infobox_country;
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		(	"[[http://a.org a]] [[http://b.org b]]"
 		), String_.Concat_lines_nl_skip_last

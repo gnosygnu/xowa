@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 public class Gfs_bldr {		
-	public Bry_bfr Bfr() {return bfr;} Bry_bfr bfr = Bry_bfr.new_();
+	public Bry_bfr Bfr() {return bfr;} private Bry_bfr bfr = Bry_bfr.new_();
 	public byte[] Xto_bry() {return bfr.XtoAryAndClear();}
 	public Gfs_bldr Add_byte(byte b)		{bfr.Add_byte(b); return this;}
 	public Gfs_bldr Add_blob(byte[] bry)	{bfr.Add(bry); return this;}

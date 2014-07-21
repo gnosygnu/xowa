@@ -20,12 +20,12 @@ public class GfoNdeTstr {
 	public static void tst_ValsByCol(GfoNde nde, String fld, Object... expdAry) {
 		ListAdp expd = ListAdp_.new_();
 		for (int i = 0; i < expdAry.length; i++) {
-			expd.Add(Object_.XtoStr_OrEmpty(expdAry[i]));
+			expd.Add(Object_.Xto_str_strict_or_empty(expdAry[i]));
 		}
 		ListAdp actl = ListAdp_.new_();
 		for (int i = 0; i < nde.Subs().Count(); i++) {
 			GfoNde sub = nde.Subs().FetchAt_asGfoNde(i);
-			actl.Add(Object_.XtoStr_OrEmpty(sub.Read(fld)));
+			actl.Add(Object_.Xto_str_strict_or_empty(sub.Read(fld)));
 		}
 		Tfds.Eq_ary(expd.XtoStrAry(), actl.XtoStrAry());
 	}

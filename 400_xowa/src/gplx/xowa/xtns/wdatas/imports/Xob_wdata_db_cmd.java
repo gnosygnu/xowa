@@ -263,7 +263,7 @@ class Wdata_claim_tbl extends Wdata_tbl_base {
 						claim_val = claim.Val();
 						break;
 					case Wdata_prop_itm_base_.Val_tid_entity:
-						entity_id = Bry_.X_to_int_or(claim.Val(), -2);
+						entity_id = Bry_.Xto_int_or(claim.Val(), -2);
 						Wdata_doc entity_doc = wdata_mgr.Pages_get(Bry_.Add(Wdata_wiki_mgr.Bry_q, claim.Val()));
 						if (entity_doc != null)	// NOTE: invalid document could be cited; EX: Q3235 cites prop p832 as Q14916523
 							claim_val = entity_doc.Label_list_get(lang_key);

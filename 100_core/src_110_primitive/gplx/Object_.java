@@ -24,18 +24,23 @@ public class Object_ {
 		else if (lhs == null || rhs == null)	return false;
 		else									return lhs.equals(rhs);		
 	}
-	public static Object Parse(String val, String valType) {
-		if		(String_.Eq(valType, IntClassXtn.Key_const)) return Int_.parse_(val);
-		else	return val;
-	}
-	public static String XtoStr_OrNull(Object v)		{return v == null ? null			: ToString_lang(v);}
-	public static String XtoStr_OrNullStr(Object v)		{return v == null ? String_.Null_mark	: ToString_lang(v);}
-	public static String XtoStr_OrEmpty(Object v)		{return v == null ? String_.Empty	: ToString_lang(v);}
+	public static String Xto_str_strict_or_null(Object v)		{return v == null ? null				: ToString_lang(v);}
+	public static String Xto_str_strict_or_null_mark(Object v)	{return v == null ? String_.Null_mark	: ToString_lang(v);}
+	public static String Xto_str_strict_or_empty(Object v)		{return v == null ? String_.Empty		: ToString_lang(v);}
 	static String ToString_lang(Object v) {
 		if (v == null) return null;
 		Class<?> c = v.getClass();
 		if		(ClassAdp_.Eq(c, Bry_.ClassOf))	return String_.new_utf8_((byte[])v);
 		else if (ClassAdp_.Eq(c, String_.ClassOf))	return (String)v;
 		else										return v.toString();	
+	}
+	public static String Xto_str_loose_or(Object v, String or) {	// tries to pretty-print doubles; also standardizes true/false; DATE:2014-07-14
+		if (v == null) return null;
+		Class<?> c = ClassAdp_.ClassOf_obj(v);
+		if		(ClassAdp_.Eq(c, Bry_.ClassOf))			return String_.new_utf8_((byte[])v);
+		else if (ClassAdp_.Eq(c, String_.ClassOf))		return (String)v;
+		else if (ClassAdp_.Eq(c, Bool_.ClassOf))		return Bool_.cast_(v) ? Bool_.True_str : Bool_.False_str;	// always return true / false
+		else if	(ClassAdp_.Eq(c, Double_.ClassOf))		return Double_.Xto_str_loose(Double_.cast_(v));
+		else											return v.toString();	
 	}
 }

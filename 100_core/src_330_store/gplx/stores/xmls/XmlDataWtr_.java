@@ -23,7 +23,7 @@ class XmlDataWtr extends DataWtr_base implements DataWtr {
 	public void InitWtr(String key, Object val) {}
 	@Override public void WriteData(String name, Object val) {
 //			if (val == null) return;
-		String valString = Object_.XtoStr_OrEmpty(val);
+		String valString = Object_.Xto_str_strict_or_empty(val);
 		int valStringLen = String_.Len(valString);
 		sb.Add(" ").Add(name).Add("=\"");
 		for (int i = 0; i < valStringLen; i++) {

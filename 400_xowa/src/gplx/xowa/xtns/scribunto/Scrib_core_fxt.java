@@ -131,13 +131,6 @@ public class Scrib_core_fxt {
 		Test_server_logs();
 		return this;
 	}
-	public Scrib_core_fxt Test_ParentFrameExists(boolean init_parent_frame) {
-		if (init_parent_frame)
-			core.Frame_parent_(Xot_invk_mock.new_());
-		core.Interpreter().ExecuteModule(9);
-		Test_server_logs();
-		return this;
-	}
 	public Scrib_core_fxt Test_Invoke(String mod_name, String mod_code, String prc_name, KeyVal... args) {
 		core.Invoke(wiki, core.Ctx(), Bry_.Empty, Xot_invk_mock.Null, Xot_invk_mock.new_(args), tmp_bfr, Bry_.new_utf8_(mod_name), Bry_.new_utf8_(mod_code), Bry_.new_utf8_(prc_name));
 		Test_server_logs();

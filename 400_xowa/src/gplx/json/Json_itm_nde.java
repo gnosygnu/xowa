@@ -67,6 +67,6 @@ public class Json_itm_nde extends Json_itm_base implements Json_grp {
 		Json_grp_.Print_nl(bfr); Json_grp_.Print_indent(bfr, depth);
 		bfr.Add_byte(Byte_ascii.Curly_end).Add_byte_nl();
 	}
-	Json_itm[] subs = Json_itm_.Ary_empty;
+	private Json_itm[] subs = Json_itm_.Ary_empty;
 	public static Json_itm_nde cast_(Json_itm v) {return v == null || v.Tid() != Json_itm_.Tid_nde ? null : (Json_itm_nde)v;}
 }

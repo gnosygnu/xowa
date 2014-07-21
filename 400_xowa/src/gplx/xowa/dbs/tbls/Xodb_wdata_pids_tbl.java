@@ -30,7 +30,7 @@ public class Xodb_wdata_pids_tbl {
 			String pid_str = (String)stmt.Val_str_by_bry_(src_lang).Val_str_by_bry_(src_ttl).Exec_select_val();
 			if (pid_str == null) return Wdata_wiki_mgr.Pid_null;	// occurs when pid exists, but does not have entry for language; see hu.w:Marco Polo argali; DATE: 2014-02-01
 			byte[] pid_bry = Bry_.new_utf8_(pid_str);
-			return pid_bry == null ?  Wdata_wiki_mgr.Pid_null : Bry_.X_to_int_or(pid_bry, 1, pid_bry.length, Wdata_wiki_mgr.Pid_null);
+			return pid_bry == null ?  Wdata_wiki_mgr.Pid_null : Bry_.Xto_int_or(pid_bry, 1, pid_bry.length, Wdata_wiki_mgr.Pid_null);
 		} finally {stmt.Rls();}
 	}
 	public static final String Tbl_name = "wdata_pids", Fld_wp_src_lang = "wp_src_lang", Fld_wp_src_ttl = "wp_src_ttl", Fld_wp_trg_ttl = "wp_trg_ttl";

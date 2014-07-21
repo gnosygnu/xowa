@@ -30,12 +30,12 @@ public class Xob_search_sql_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		if (!Env_.Mode_testing()) wiki.Init_assert();
 		Xodb_fsys_mgr db_fs = wiki.Db_mgr_as_sql().Fsys_mgr();
 		usr_dlg.Log_many("", "", "search_title.cmd: getting core db");
-		Xodb_file page_db = db_fs.Get_tid_root(Xodb_file.Tid_core);
+		Xodb_file page_db = db_fs.Get_tid_root(Xodb_file_tid_.Tid_core);
 		usr_dlg.Log_many("", "", "search_title.cmd: getting existing searchdb");
-		Xodb_file search_db = db_fs.Get_tid_root(Xodb_file.Tid_search);
+		Xodb_file search_db = db_fs.Get_tid_root(Xodb_file_tid_.Tid_search);
 		if (search_db == null) {
 			usr_dlg.Log_many("", "", "search_title.cmd: making new searchdb");
-			search_db = db_fs.Make(Xodb_file.Tid_search);
+			search_db = db_fs.Make(Xodb_file_tid_.Tid_search);
 		}
 		DataRdr page_rdr = DataRdr_.Null;
 		Db_provider search_provider = search_db.Provider();

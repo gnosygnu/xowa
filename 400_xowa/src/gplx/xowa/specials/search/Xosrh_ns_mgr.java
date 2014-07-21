@@ -45,13 +45,13 @@ public class Xosrh_ns_mgr {
 		ns_all = true;
 	}
 	public void Add_by_parse(byte[] key, byte[] val) {
-		int ns_enabled = Bry_.X_to_int(val);
+		int ns_enabled = Bry_.Xto_int(val);
 		if (ns_enabled == 1) {										// make sure set to 1; EX: ignore &ns0=0
 			int key_len = key.length;
 			if (key_len == 3 && key[2] == Byte_ascii.Asterisk)		// translate ns* as ns_all
 				ns_all = true;
 			else {
-				int ns_id = Bry_.X_to_int_or(key, 2, key_len, -1);
+				int ns_id = Bry_.Xto_int_or(key, 2, key_len, -1);
 				if (ns_id != -1) {									// ignore invalid ints; EX: &nsabc=1;
 					Add_by_id(ns_id);
 					ns_main = ns_all = false;

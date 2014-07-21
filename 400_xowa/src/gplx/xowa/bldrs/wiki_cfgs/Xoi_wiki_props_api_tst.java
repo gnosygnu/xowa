@@ -71,13 +71,13 @@ class Xoi_wiki_props_fxt {
 	public void Test_parse(String xml, Xoi_wiki_props_wiki expd) {
 		Xoi_wiki_props_wiki actl = new Xoi_wiki_props_wiki();
 		api.Parse(actl, xml);
-		Tfds.Eq_str_lines(X_to_str(expd), X_to_str(actl));
+		Tfds.Eq_str_lines(Xto_str(expd), Xto_str(actl));
 	}
 	public void Test_build(Xoi_wiki_props_wiki wiki, String expd) {
 		api.Build_cfg(bfr, wiki);
 		Tfds.Eq_str_lines(expd, bfr.XtoStrAndClear());
 	}
-	private String X_to_str(Xoi_wiki_props_wiki v) {
+	private String Xto_str(Xoi_wiki_props_wiki v) {
 		int len = v.Alias_ary().length;
 		bfr.Add_str("aliases").Add_byte_nl();
 		for (int i = 0; i < len; i++) {

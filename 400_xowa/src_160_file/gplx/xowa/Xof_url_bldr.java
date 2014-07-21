@@ -96,7 +96,7 @@ public class Xof_url_bldr {
 			if (wmf_protocol_is_file)													// sitting on local file system (as opposed to http)
 				bfr.Add(ttl);															// NOTE: file_names are not url-encoded; this includes symbols (') and foreign characters (ö)
 			else																		// wmf_http
-				bfr.Add(encoder_src_http.Encode(ttl));									// NOTE: file_names must be url-encoded; JAVA will default to native charset which on Windows will be 1252; foreign character urls will fail due to conversion mismatch (1252 on windows; UTF-8 on WMF); EX.WP:Möbius strip
+				bfr.Add(encoder_src_http.Encode(ttl));									// NOTE: file_names must be url-encoded; JAVA will default to native charset which on Windows will be 1252; foreign character urls will fail due to conversion mismatch (1252 on windows; UTF-8 on WMF); PAGE:en.w:Möbius strip
 		}
 		else
 			bfr.Add(ttl);																// add title;				EX: "A.png"

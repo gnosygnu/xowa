@@ -36,7 +36,7 @@ public class DataBndr_whenEvt_execCmd implements InjectAble, GfoInvkAble, GfoEvO
 		if		(ctx.Match(k, whenEvt)) {
 			Object evtVal = m.CastObjOr(whenArg, "");
 			Object getVal = getInvk.Invk(GfsCtx._, 0, getCmd, GfoMsg_.new_cast_(getCmd).Add("v", evtVal));
-			GfoMsg setMsg = GfoMsg_.new_cast_(setCmd).Add("v", Object_.XtoStr_OrEmpty(getVal));
+			GfoMsg setMsg = GfoMsg_.new_cast_(setCmd).Add("v", Object_.Xto_str_strict_or_empty(getVal));
 			setInvk.Invk(GfsCtx._, 0, setCmd, setMsg);
 			return GfoInvkAble_.Rv_handled;
 		}

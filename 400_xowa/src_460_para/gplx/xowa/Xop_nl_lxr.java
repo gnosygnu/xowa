@@ -73,7 +73,7 @@ class Xop_nl_lxr implements Xop_lxr {
 				return cur_pos;
 			// case Xop_tkn_itm_.Tid_tblw_tc: case Xop_tkn_itm_.Tid_tblw_td:	// STUB: tc/td should not have attributes
 			case Xop_tkn_itm_.Tid_tblw_tb: case Xop_tkn_itm_.Tid_tblw_tr: case Xop_tkn_itm_.Tid_tblw_th:	// nl should close previous tblw's atrs range; EX {{Infobox planet}} and |-\n<tr>
-				Xop_tblw_wkr.Atrs_close(ctx, src, root);
+				Xop_tblw_wkr.Atrs_close(ctx, src, root, Bool_.N);
 				break;
 		}
 		if (	ctx.Parse_tid() == Xop_parser_.Parse_tid_page_wiki			// parse_mode is wiki

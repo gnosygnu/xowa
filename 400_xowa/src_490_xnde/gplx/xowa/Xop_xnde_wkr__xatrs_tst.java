@@ -45,7 +45,7 @@ public class Xop_xnde_wkr__xatrs_tst {
 		fxt.Test_parse_page_wiki_str("<input value='a<'></input>", "<input value='a<'></input>");	// NOTE: do not call parse_page_all_str which will call Page.Clear and reset Restricted
 		fxt.Page().Html_data().Restricted_y_();
 	}
-//		@Test  public void Unclosed() {	// PURPOSE: unclosed atr should be treated as key, which should be ignored; EX.WP:Palace of Versailles
+//		@Test  public void Unclosed() {	// PURPOSE: unclosed atr should be treated as key, which should be ignored; PAGE:en.w:Palace of Versailles
 //			fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 //			(	"<span id=\"1�>a"		// id="1� -> key named 'id="1�' which fails whitelist keys
 //			,	"</span>"

@@ -53,7 +53,7 @@ public class Xot_tmpl_wtr {
 						// NOTE: originally "if (ctx.Parse_tid() == Xop_parser_.Parse_tid_page_tmpl) {" but if not needed; Xot_tmpl_wtr should not be called for tmpls and <oi> should not make it to page_wiki
 						Bry_bfr tmp_bfr = Bry_bfr.new_();
 						ctx.Only_include_evaluate_(true);
-						xnde.Tmpl_evaluate(ctx, src, Xot_invk_temp.PageIsCaller, tmp_bfr);
+						xnde.Tmpl_evaluate(ctx, src, Xot_invk_temp.Page_is_caller, tmp_bfr);
 						ctx.Only_include_evaluate_(false);
 						rslt_bfr.Add_bfr_and_preserve(tmp_bfr);
 						break;
@@ -85,7 +85,7 @@ public class Xot_tmpl_wtr {
 				rslt_bfr.Add_mid(src, tkn.Src_bgn(), tkn.Src_end()); break;			// write src from bgn/end
 			case Xop_tkn_itm_.Tid_ignore: break;								// hide comments and <*include*> ndes
 			case Xop_tkn_itm_.Tid_tmpl_prm:
-				tkn.Tmpl_evaluate(ctx, src, Xot_invk_temp.PageIsCaller.Src_(src), rslt_bfr);
+				tkn.Tmpl_evaluate(ctx, src, Xot_invk_temp.Page_is_caller.Src_(src), rslt_bfr);
 				break;
 			case Xop_tkn_itm_.Tid_tvar:
 				gplx.xowa.xtns.translates.Xop_tvar_tkn tvar_tkn = (gplx.xowa.xtns.translates.Xop_tvar_tkn)tkn;
@@ -93,7 +93,7 @@ public class Xot_tmpl_wtr {
 				break;
 			case Xop_tkn_itm_.Tid_tmpl_invk:
 				try {
-					tkn.Tmpl_evaluate(ctx, src, Xot_invk_temp.PageIsCaller.Src_(src), rslt_bfr);
+					tkn.Tmpl_evaluate(ctx, src, Xot_invk_temp.Page_is_caller.Src_(src), rslt_bfr);
 				}
 				catch (Exception exc) {
 					Err_string = String_.new_utf8_(src, tkn.Src_bgn(), tkn.Src_end()) + "|" + ClassAdp_.NameOf_obj(exc) + "|" + Err_.Message_lang(exc);

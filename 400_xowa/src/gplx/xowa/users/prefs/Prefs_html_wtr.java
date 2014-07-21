@@ -40,7 +40,7 @@ class Prefs_html_wtr {
 	private void Write_textarea(Bry_bfr bfr, Html_nde hnde, int prop_idx, Object prop_val) {
 		Write__id(bfr, prop_idx);						// " id='xowa_prop_123'"
 		Write__nde_end(bfr);							// ">"
-		bfr.Add(Html_utl.Escape_html_as_bry(Bry_.new_utf8_(Object_.XtoStr_OrEmpty(prop_val))));
+		bfr.Add(Html_utl.Escape_html_as_bry(Bry_.new_utf8_(Object_.Xto_str_strict_or_empty(prop_val))));
 														// "abcde"
 	}
 	private void Write_checkbox(Bry_bfr bfr, Html_nde hnde, int prop_idx, Object prop_val) {
@@ -61,7 +61,7 @@ class Prefs_html_wtr {
 			bfr.Add(Nde_stub_option_bgn);				// "  <option value='"
 			bfr.Add_str(option.Key());					// "option_key"
 			bfr.Add_byte(Byte_ascii.Apos);				// "'"
-			if (String_.Eq(Object_.XtoStr_OrEmpty(prop_val), option.Key()))
+			if (String_.Eq(Object_.Xto_str_strict_or_empty(prop_val), option.Key()))
 				bfr.Add_str(" selected='selected'");	// " selected='selected'"
 			bfr.Add_byte(Byte_ascii.Gt);				// ">"
 			bfr.Add_str(option.Val_to_str_or_empty());	// "option_text"
@@ -113,7 +113,7 @@ class Prefs_html_wtr {
 	}
 	private void Write__value_atr(Bry_bfr bfr, Object prop_val) {
 		bfr.Add(Atr_stub_value);					// " value='"
-		bfr.Add(Html_utl.Escape_for_atr_val_as_bry(tmp_bfr, Byte_ascii.Apos, Object_.XtoStr_OrEmpty(prop_val)));	
+		bfr.Add(Html_utl.Escape_for_atr_val_as_bry(tmp_bfr, Byte_ascii.Apos, Object_.Xto_str_strict_or_empty(prop_val)));	
 													// "abcde"
 		bfr.Add_byte(Byte_ascii.Apos);				// "'"
 	}

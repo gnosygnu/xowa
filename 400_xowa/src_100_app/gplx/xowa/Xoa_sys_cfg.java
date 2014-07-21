@@ -19,7 +19,6 @@ package gplx.xowa; import gplx.*;
 public class Xoa_sys_cfg implements GfoInvkAble {
 	private Xoa_app app;
 	public Xoa_sys_cfg(Xoa_app app) {this.app = app;}
-	public String Launch_url() {return launch_url;} public Xoa_sys_cfg Launch_url_(String v) {launch_url = v; return this;} private String launch_url = Launch_url_dflt; public static final String Launch_url_dflt = "home/wiki/Main_Page";
 	public byte[] Lang() {return lang_key;}
 	public Xoa_sys_cfg Lang_(byte[] v) {
 		lang_key = Xol_lang_itm_.Get_by_key_or_en(v).Key();

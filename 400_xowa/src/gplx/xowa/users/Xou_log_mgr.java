@@ -19,7 +19,7 @@ package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
 public class Xou_log_mgr implements GfoInvkAble {
 	public boolean Log_redlinks() {return log_redlinks;} private boolean log_redlinks;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_log_redlinks))			return Yn.X_to_str(log_redlinks);
+		if		(ctx.Match(k, Invk_log_redlinks))			return Yn.Xto_str(log_redlinks);
 		else if	(ctx.Match(k, Invk_log_redlinks_))			log_redlinks = m.ReadYn("v");
 		return this;
 	}

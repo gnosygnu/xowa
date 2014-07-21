@@ -30,7 +30,7 @@ public class Xouc_window_mgr implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_mode_list))				return Options_mode_list;
 		else if	(ctx.Match(k, Invk_rect))					return rect;
 		else if	(ctx.Match(k, Invk_rect_))					rect = Rect_ref.parse_(m.ReadStr("v"));
-		else if	(ctx.Match(k, Invk_safe_mode))				return Yn.X_to_str(safe_mode);
+		else if	(ctx.Match(k, Invk_safe_mode))				return Yn.Xto_str(safe_mode);
 		else if	(ctx.Match(k, Invk_safe_mode_))				safe_mode = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_previous_adj))			return previous_adj;
 		else if	(ctx.Match(k, Invk_previous_adj_))			previous_adj = Rect_ref.parse_(m.ReadStr("v"));

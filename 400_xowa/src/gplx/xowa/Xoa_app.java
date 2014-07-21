@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.core.btries.*; import gplx.core.flds.*; import gplx.ios.*; import gplx.threads.*;
-import gplx.xowa.apps.*; import gplx.xowa.apps.caches.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apis.*;
+import gplx.xowa.apps.*; import gplx.xowa.apps.caches.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apis.*; import gplx.xowa.urls.encoders.*;
 import gplx.xowa.langs.*; import gplx.xowa.specials.*; import gplx.xowa.cfgs2.*;
 import gplx.xowa.wikis.*; import gplx.xowa.users.*; import gplx.xowa.gui.*; import gplx.xowa.cfgs.*; import gplx.xowa.ctgs.*; import gplx.xowa.html.tocs.*; import gplx.xowa.fmtrs.*; import gplx.xowa.html.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*;
@@ -39,7 +39,7 @@ public class Xoa_app implements GfoInvkAble {
 		gui_mgr = new Xoa_gui_mgr(this);
 		bldr = new Xob_bldr(this);
 		file_mgr.Init_app(this, usr_dlg);
-		href_parser = new Xoh_href_parser(url_converter_href, url_parser.Url_parser());
+		href_parser = new Xoh_href_parser(encoder_mgr.Href(), url_parser.Url_parser());
 		sanitizer = new Xop_sanitizer(parser_amp_mgr, msg_log);
 		user_mgr = new Xou_user_mgr(this, user);
 		sys_cfg = new Xoa_sys_cfg(this);
@@ -49,7 +49,7 @@ public class Xoa_app implements GfoInvkAble {
 		gfs_mgr = new Xoa_gfs_mgr(this);
 		xtn_mgr = new Xow_xtn_mgr().Ctor_by_app(this);
 		hive_mgr = new Xoa_hive_mgr(this);
-		Io_url.Http_file_str_encoder = url_converter_fsys;
+		Io_url.Http_file_str_encoder = encoder_mgr.Fsys();
 		tcp_server.App_ctor(this);
 		fmtr_mgr = new Xoa_fmtr_mgr(this);
 		log_mgr = new Xop_log_mgr(this);
@@ -113,7 +113,7 @@ public class Xoa_app implements GfoInvkAble {
 	public byte					Mode() {return mode;} public Xoa_app Mode_(byte v) {mode = v; return this;} private byte mode = Xoa_app_.Mode_console;
 	public Xop_amp_mgr			Parser_amp_mgr() {return parser_amp_mgr;} private Xop_amp_mgr parser_amp_mgr = new Xop_amp_mgr();
 	public Xoa_thread_mgr		Thread_mgr() {return thread_mgr;} private Xoa_thread_mgr thread_mgr = new Xoa_thread_mgr();
-
+	public Url_encoder_mgr		Encoder_mgr() {return encoder_mgr;} private Url_encoder_mgr encoder_mgr = new Url_encoder_mgr();
 
 	public Xoa_fsys_mgr			Fsys_mgr() {return fsys_mgr;} private Xoa_fsys_mgr fsys_mgr;
 	public Xoa_hive_mgr			Hive_mgr() {return hive_mgr;} private Xoa_hive_mgr hive_mgr;
@@ -129,21 +129,13 @@ public class Xoa_app implements GfoInvkAble {
 	public Gfo_msg_log			Msg_log() {return msg_log;} private Gfo_msg_log msg_log = new Gfo_msg_log(Xoa_app_.Name);
 	public Gfo_msg_log			Msg_log_null() {return msg_log_null;} private Gfo_msg_log msg_log_null = new Gfo_msg_log("null_log");
 
-	public Url_encoder			Url_converter_id()			{return url_converter_id;} private Url_encoder url_converter_id = Url_encoder.new_html_id_();
-	public Url_encoder			Url_converter_url()			{return url_converter_url;} private Url_encoder url_converter_url = Url_encoder.new_http_url_();
-	public Url_encoder			Url_converter_url_ttl()		{return url_converter_url_ttl;} private Url_encoder url_converter_url_ttl = Url_encoder.new_http_url_ttl_();
-	public Url_encoder			Url_converter_href()		{return url_converter_href;} private Url_encoder url_converter_href = Url_encoder.new_html_href_mw_();
-	public Url_encoder			Url_converter_comma()		{return url_converter_comma;} private Url_encoder url_converter_comma = Url_encoder.url_comma();
-	public Url_encoder			Url_converter_gfs()			{return url_converter_gfs;} private Url_encoder url_converter_gfs = Url_encoder.new_gfs_();
-	public Url_encoder			Url_converter_fsys()		{return url_converter_fsys;} private Url_encoder url_converter_fsys = Url_encoder.new_fsys_lnx_();
-	public Url_encoder			Url_converter_fsys_safe()	{return url_converter_fsys_safe;} private Url_encoder url_converter_fsys_safe = Url_encoder.new_fsys_wnt_();
 	public Xoh_file_main_wkr	File_main_wkr() {return file_main_wkr;} private Xoh_file_main_wkr file_main_wkr = new Xoh_file_main_wkr();		
 	public Btrie_slim_mgr		Utl_trie_tblw_ws() {return utl_trie_tblw_ws;} private Btrie_slim_mgr utl_trie_tblw_ws = Xop_tblw_ws_itm.trie_();
 	public Bry_bfr_mkr			Utl_bry_bfr_mkr() {return utl_bry_bfr_mkr;} Bry_bfr_mkr utl_bry_bfr_mkr = new Bry_bfr_mkr();
 	public Gfo_fld_rdr			Utl_fld_rdr() {return utl_fld_rdr;} Gfo_fld_rdr utl_fld_rdr = Gfo_fld_rdr.xowa_();
 	public Gfo_log_bfr			Log_bfr() {return log_bfr;} private Gfo_log_bfr log_bfr = new Gfo_log_bfr();
 	public Xoa_sys_cfg			Sys_cfg() {return sys_cfg;} private Xoa_sys_cfg sys_cfg;
-	public Bry_fmtr			Tmp_fmtr() {return tmp_fmtr;} Bry_fmtr tmp_fmtr = Bry_fmtr.new_("");
+	public Bry_fmtr				Tmp_fmtr() {return tmp_fmtr;} Bry_fmtr tmp_fmtr = Bry_fmtr.new_("");
 	public boolean					Xwiki_missing(byte[] wiki_key)	{return user.Wiki().Xwiki_mgr().Get_by_key(wiki_key) == null;} // NOTE: only the user_wiki has a full list of all wikis b/c it has xwiki objects; wiki_mgr does not, b/c it has heavier wiki objects which are loaded dynamically;
 	public boolean					Xwiki_exists(byte[] wiki_key)	{return user.Wiki().Xwiki_mgr().Get_by_key(wiki_key) != null;}
 	public Xoa_ctg_mgr			Ctg_mgr() {return ctg_mgr;} private Xoa_ctg_mgr ctg_mgr = new Xoa_ctg_mgr();

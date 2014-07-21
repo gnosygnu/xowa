@@ -41,29 +41,29 @@ public class References_nde_group_tst {
 			, ""
 			));
 	}
-	@Test  public void Lower_alpha_is_ignored() {
-		String expd = 
-			String_.Concat_lines_nl_skip_last
-			( "<sup id=\"cite_ref-0\" class=\"reference\"><a href=\"#cite_note-0\">[1]</a></sup>"
-			, "<sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">[2]</a></sup>"
-			, "<ol class=\"references\">"
-			, "<li id=\"cite_note-0\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-0\">^</a></span> <span class=\"reference-text\">x</span></li>"
-			, "<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">^</a></span> <span class=\"reference-text\">y</span></li>"
-			, "</ol>"
-			, ""
-			);
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
-			( "<ref group='lower-alpha'>x</ref>"
-			, "<ref>y</ref>"						// note: no group name, but still goes in "lower-alpha" group
-			, "<references group='lower-alpha'/>"
-			), expd);
-		fxt.Clear_ref_mgr();
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
-			( "<ref group='lower-alpha'>x</ref>"	// note: "lower-alpha" group name, but goes in default group
-			, "<ref>y</ref>"
-			, "<references/>"
-			), expd);
-	}
+//		@Test  public void Lower_alpha_is_ignored() {
+//			String expd = 
+//				String_.Concat_lines_nl_skip_last
+//				( "<sup id=\"cite_ref-0\" class=\"reference\"><a href=\"#cite_note-0\">[1]</a></sup>"
+//				, "<sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">[2]</a></sup>"
+//				, "<ol class=\"references\">"
+//				, "<li id=\"cite_note-0\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-0\">^</a></span> <span class=\"reference-text\">x</span></li>"
+//				, "<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">^</a></span> <span class=\"reference-text\">y</span></li>"
+//				, "</ol>"
+//				, ""
+//				);
+//			fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+//				( "<ref group='lower-alpha'>x</ref>"
+//				, "<ref>y</ref>"						// note: no group name, but still goes in "lower-alpha" group
+//				, "<references group='lower-alpha'/>"
+//				), expd);
+//			fxt.Clear_ref_mgr();
+//			fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+//				( "<ref group='lower-alpha'>x</ref>"	// note: "lower-alpha" group name, but goes in default group
+//				, "<ref>y</ref>"
+//				, "<references/>"
+//				), expd);
+//		}
 	@Test  public void Empty() {	// PURPOSE: <references group=""/> is same as <references/>; DATE:2013-02-06
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			( "<ref>b</ref>"

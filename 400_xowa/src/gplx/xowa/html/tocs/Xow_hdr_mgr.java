@@ -61,7 +61,7 @@ public class Xow_hdr_mgr {
 		Xoa_app app = wiki.App();
 		Bry_bfr raw_bfr = app.Utl_bry_bfr_mkr().Get_b128(), enc_bfr = app.Utl_bry_bfr_mkr().Get_b128();
 		Id_bld_recurse(raw_bfr, src, hdr);
-		Url_encoder encoder = wiki.App().Url_converter_id();
+		Url_encoder encoder = wiki.App().Encoder_mgr().Id();
 		encoder.Encode(enc_bfr, raw_bfr.Bfr(), 0, raw_bfr.Len());
 		byte[] hdrs_id = enc_bfr.XtoAry();
 		Object o = hdrs_hash.Fetch(hdrs_ref.Val_(hdrs_id));

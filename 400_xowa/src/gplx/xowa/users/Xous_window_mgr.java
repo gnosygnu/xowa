@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.gui.views.*;
+import gplx.xowa.apis.xowa.startups.tabs.*;
 public class Xous_window_mgr implements GfoInvkAble {
 	public Xous_window_mgr(Xou_user user) {
 		this.user = user;
@@ -27,16 +28,30 @@ public class Xous_window_mgr implements GfoInvkAble {
 	public void Save_window(gplx.gfui.GfuiWin win) {
 		gplx.xowa.cfgs.Xoa_cfg_mgr cfg_mgr = user.App().Cfg_mgr();
 		if (user.Cfg_mgr().Startup_mgr().Window_mgr().Mode_tid() == Xouc_window_mgr.Mode_tid_previous) {
-			cfg_mgr.Set_by_app("app.user.session.window.maximized"	, Yn.X_to_str(win.Maximized()));
+			cfg_mgr.Set_by_app("app.user.session.window.maximized"	, Yn.Xto_str(win.Maximized()));
 			cfg_mgr.Set_by_app("app.user.session.window.rect"		, win.Rect().Xto_str());
 		}
-		cfg_mgr.Set_by_app("app.gui.html.portal.wikis.visible"	, Yn.X_to_str(user.App().Gui_mgr().Html_mgr().Portal_mgr().Wikis().Visible()));
+		Xoapi_startup_tabs startup_tabs = user.App().Api_root().App().Startup().Tabs();
+		if (startup_tabs.Type() == Xoapi_startup_tabs_tid_.Tid_previous) {
+			cfg_mgr.Set_by_app("xowa.api.app.startup.tabs.previous"	, Calc_previous_tabs(user.App().Gui_mgr().Browser_win().Tab_mgr()));
+		}
+		cfg_mgr.Set_by_app("app.gui.html.portal.wikis.visible"	, Yn.Xto_str(user.App().Gui_mgr().Html_mgr().Portal_mgr().Wikis().Visible()));
 		cfg_mgr.Db_save_txt();
+	}
+	private String Calc_previous_tabs(Xog_tab_mgr tab_mgr) {
+		Bry_bfr bfr = Bry_bfr.new_();
+		int len = tab_mgr.Tabs_len();
+		for (int i = 0; i < len; ++i) {
+			if (i != 0) bfr.Add_byte_nl();
+			Xog_tab_itm tab = tab_mgr.Tabs_get_at(i);
+			bfr.Add_str(tab.Page().Url().Xto_full_str_safe());
+		}
+		return bfr.XtoStrAndClear();
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_rect))					return rect;
 		else if	(ctx.Match(k, Invk_rect_))					rect = Rect_ref.parse_(m.ReadStr("v"));
-		else if	(ctx.Match(k, Invk_maximized))				return Yn.X_to_str(maximized);
+		else if	(ctx.Match(k, Invk_maximized))				return Yn.Xto_str(maximized);
 		else if	(ctx.Match(k, Invk_maximized_))				maximized = m.ReadYn("v");
 		return this;
 	}	public static final String Invk_rect = "rect", Invk_rect_ = "rect_", Invk_maximized = "maximized", Invk_maximized_ = "maximized_";

@@ -60,6 +60,6 @@ class Bfmtr_eval_invk implements Bry_fmtr_eval_mgr {
 	public boolean Enabled() {return enabled;} public void Enabled_(boolean v) {enabled = v;} private boolean enabled = true;
 	public byte[] Eval(byte[] cmd) {
 		Object rslt = app.Gfs_mgr().Run_str_for(invk, String_.new_utf8_(cmd));
-		return Bry_.new_utf8_(Object_.XtoStr_OrNullStr(rslt));
+		return Bry_.new_utf8_(Object_.Xto_str_strict_or_null_mark(rslt));
 	}
 }

@@ -243,7 +243,7 @@ public class Xot_invk_wkr_basic_tst {
 		fxt.Test_parse_tmpl_str("{{test_1| a }}", "a");
 		fxt.Init_defn_clear();
 	}
-	@Test  public void Ws_trimmed_key_2() {	// PURPOSE: trim prm; note that 1 is key not idx; EX.WP:Coord in Chernobyl disaster, Sahara
+	@Test  public void Ws_trimmed_key_2() {	// PURPOSE: trim prm; note that 1 is key not idx; PAGE:en.w:Coord in Chernobyl disaster, Sahara
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("test_1", "{{test_2|1={{{1}}}}}");
 		fxt.Init_defn_add("test_2", "{{{1}}}");
@@ -265,7 +265,7 @@ public class Xot_invk_wkr_basic_tst {
 		fxt.Test_parse_tmpl_str("{{test_1|a}}", "a");
 		fxt.Init_defn_clear();
 	}
-	@Test  public void Keyd_arg_is_trimmed() { // PURPOSE: trim entire arg only, not individual prm; EX.WP: William Shakespeare; {{Relatebardtree}}
+	@Test  public void Keyd_arg_is_trimmed() { // PURPOSE: trim entire arg only, not individual prm; PAGE:en.w:William Shakespeare; {{Relatebardtree}}
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("test_1", "{{test_2|1={{{{{{1}}}}}}}}");
 		fxt.Init_defn_add("test_2", "{{{1}}}");
@@ -278,7 +278,7 @@ public class Xot_invk_wkr_basic_tst {
 		fxt.Test_parse_tmpl_str("{{test_1| }}", "(? [[dynamic is blank]] ?)");
 		fxt.Init_defn_clear();
 	}
-	@Test  public void Xnde_xtn_ref_not_arg() {	// PURPOSE: <ref name= should not be interpreted as arg; EX: {{tmp|a<ref name="b"/>}}; arg1 is a<ref name="b"/> not "b"; EX.WP: WWI
+	@Test  public void Xnde_xtn_ref_not_arg() {	// PURPOSE: <ref name= should not be interpreted as arg; EX: {{tmp|a<ref name="b"/>}}; arg1 is a<ref name="b"/> not "b"; PAGE:en.w:WWI
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("test_1", "{{{1}}}");
 		fxt.Test_parse_page_tmpl_str("{{test_1|a<ref name=b />}}", "a<ref name=b />");
@@ -426,5 +426,5 @@ Template:Test with text of "#a"
 a) "a{{test}}" would return "a\n#a" b/c of rule for auto-adding \n
 b) bug was that "{{test}}" would return "#a" b/c "#a" was at bos which would expand to list later
    however, needs to be "\n#a" b/c appended to other strings wherein bos would be irrelevant.
-Actual situation was very complicated. EX.WP:Rome
+Actual situation was very complicated. PAGE:en.w:Rome
 */

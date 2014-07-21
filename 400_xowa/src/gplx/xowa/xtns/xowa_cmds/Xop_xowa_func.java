@@ -22,7 +22,7 @@ public class Xop_xowa_func extends Pf_func_base {
 			int args_len = self.Args_len();
 			byte[] arg_0 = Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, args_len, 0);
 			Object rslt = ctx.App().Gfs_mgr().Run_str(String_.new_utf8_(arg_0));
-			bfr.Add(Bry_.new_utf8_(Object_.XtoStr_OrNullStr(rslt)));
+			bfr.Add(Bry_.new_utf8_(Object_.Xto_str_strict_or_null_mark(rslt)));
 		}
 		else {
 			bfr.Add_mid(src, self.Src_bgn(), self.Src_end());

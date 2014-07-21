@@ -71,12 +71,14 @@ class Xob_fsdb_regy_tbl {
 	,	", fsdb_db_id		     integer             NOT NULL"
 	,	", fsdb_size		     bigint              NOT NULL"
 	,	", fsdb_status		     tinyint             NOT NULL"
+	,	", fsdb_fil_id           integer             NOT NULL"
+	,	", fsdb_thm_id           integer             NOT NULL"
 	,	");"
 	);
 	public static final Db_idx_itm Idx_main = Db_idx_itm.sql_("CREATE INDEX fsdb_regy__main ON fsdb_regy (fsdb_name, fsdb_is_orig, fsdb_repo, fsdb_w, fsdb_time, fsdb_page);");
 	public static final String 
 		Insert_fsdb_fil = String_.Concat_lines_nl
-	(	"INSERT INTO fsdb_regy (fsdb_name, fsdb_is_orig, fsdb_repo, fsdb_w, fsdb_time, fsdb_page, fsdb_db_id, fsdb_size, fsdb_status)"
+	(	"INSERT INTO fsdb_regy (fsdb_name, fsdb_is_orig, fsdb_repo, fsdb_w, fsdb_time, fsdb_page, fsdb_db_id, fsdb_size, fsdb_status, fsdb_fil_id, fsdb_thm_id)"
 	,	"SELECT  f.fil_name"
 	,	",       1"
 	,	",       CASE WHEN d.dir_name = 'commons.wikimedia.org' THEN 0 ELSE 1 END"
@@ -86,13 +88,15 @@ class Xob_fsdb_regy_tbl {
 	,	",       f.fil_bin_db_id"
 	,	",       f.fil_size"
 	,	",       0"
+	,	",       f.fil_id"
+	,	",       -1"
 	,	"FROM    fsdb_db.fsdb_fil f"
 	,	"        JOIN fsdb_db.fsdb_dir d ON f.fil_owner_id = d.dir_id"
 	,	"WHERE   f.fil_bin_db_id != -1"
 	,	";"
 	)
 	,	Insert_fsdb_thm = String_.Concat_lines_nl
-	(	"INSERT INTO fsdb_regy (fsdb_name, fsdb_is_orig, fsdb_repo, fsdb_w, fsdb_time, fsdb_page, fsdb_db_id, fsdb_size, fsdb_status)"
+	(	"INSERT INTO fsdb_regy (fsdb_name, fsdb_is_orig, fsdb_repo, fsdb_w, fsdb_time, fsdb_page, fsdb_db_id, fsdb_size, fsdb_status, fsdb_fil_id, fsdb_thm_id)"
 	,	"SELECT  f.fil_name"
 	,	",       0"
 	,	",       CASE WHEN d.dir_name = 'commons.wikimedia.org' THEN 0 ELSE 1 END"
@@ -102,13 +106,15 @@ class Xob_fsdb_regy_tbl {
 	,	",       t.thm_bin_db_id"
 	,	",       t.thm_size"
 	,	",       0"
+	,	",       f.fil_id"
+	,	",       t.thm_id"
 	,	"FROM    fsdb_db.fsdb_fil f"
 	,	"        JOIN fsdb_db.fsdb_xtn_thm t ON f.fil_id = t.thm_owner_id"
 	,	"        JOIN fsdb_db.fsdb_dir d ON f.fil_owner_id = d.dir_id"
 	,	";"
 	)
 	,	Insert_fsdb_thm_v0 = String_.Concat_lines_nl
-	(	"INSERT INTO fsdb_regy (fsdb_name, fsdb_is_orig, fsdb_repo, fsdb_w, fsdb_time, fsdb_page, fsdb_db_id, fsdb_size, fsdb_status)"
+	(	"INSERT INTO fsdb_regy (fsdb_name, fsdb_is_orig, fsdb_repo, fsdb_w, fsdb_time, fsdb_page, fsdb_db_id, fsdb_size, fsdb_status, fsdb_fil_id, fsdb_thm_id)"
 	,	"SELECT  f.fil_name"
 	,	",       0"
 	,	",       CASE WHEN d.dir_name = 'commons.wikimedia.org' THEN 0 ELSE 1 END"
@@ -118,6 +124,8 @@ class Xob_fsdb_regy_tbl {
 	,	",       t.thm_bin_db_id"
 	,	",       t.thm_size"
 	,	",       0"
+	,	",       f.fil_id"
+	,	",       t.thm_id"
 	,	"FROM    fsdb_db.fsdb_fil f"
 	,	"        JOIN fsdb_db.fsdb_xtn_thm t ON f.fil_id = t.thm_owner_id"
 	,	"        JOIN fsdb_db.fsdb_dir d ON f.fil_owner_id = d.dir_id"

@@ -36,7 +36,7 @@ public class Xot_invk_mock implements Xot_invk {
 		for (int i = 0; i < list_len; i++) {	// iterate over list to find nth *non-keyd* arg; SEE:NOTE_1
 			Arg_nde_tkn nde = (Arg_nde_tkn)args.FetchAt(i);
 			if (nde.KeyTkn_exists()) {
-				int key_int = Bry_.X_to_int_or(nde.Key_tkn().Dat_ary(), -1);
+				int key_int = Bry_.Xto_int_or(nde.Key_tkn().Dat_ary(), -1);
 				if (key_int == -1)
 					continue;
 				else {	// key is numeric
@@ -55,7 +55,8 @@ public class Xot_invk_mock implements Xot_invk {
 	}
 	public Arg_nde_tkn Args_get_by_key(byte[] src, byte[] key) {return (Arg_nde_tkn)args.Fetch(key);}
 	public static Xot_invk_mock new_(byte defn_tid, KeyVal... args)	{return new_(defn_tid, 1, args);}
-	public static Xot_invk_mock new_(KeyVal... args)							{return new_(Xot_defn_.Tid_null, 1, args);}
+	public static Xot_invk_mock new_(KeyVal... args)					{return new_(Xot_defn_.Tid_null, 1, args);}
+	public static Xot_invk_mock test_(KeyVal... args)					{return new_(Xot_defn_.Tid_null, 0, args);}
 //		public static Xot_invk_mock new_(byte defn_tid, int idx_adj, params KeyVal[] args) {
 //			Xot_invk_mock rv = new Xot_invk_mock(defn_tid, idx_adj);
 //			int len = args.length;

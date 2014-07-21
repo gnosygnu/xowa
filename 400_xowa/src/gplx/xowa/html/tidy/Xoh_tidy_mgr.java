@@ -43,11 +43,11 @@ public class Xoh_tidy_mgr implements GfoInvkAble {
 		Tidy_unwrap(bfr);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_enabled))				return Yn.X_to_str(enabled);
+		if		(ctx.Match(k, Invk_enabled))				return Yn.Xto_str(enabled);
 		else if	(ctx.Match(k, Invk_enabled_))				enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_enabled_toggle))			enabled = !enabled;
-		else if	(ctx.Match(k, Invk_engine_type))			return Xoh_tidy_wkr_.X_to_key(wkr.Tid());
-		else if	(ctx.Match(k, Invk_engine_type_))			Wkr_tid_(Xoh_tidy_wkr_.X_to_tid(m.ReadStr("v")));
+		else if	(ctx.Match(k, Invk_engine_type))			return Xoh_tidy_wkr_.Xto_key(wkr.Tid());
+		else if	(ctx.Match(k, Invk_engine_type_))			Wkr_tid_(Xoh_tidy_wkr_.Xto_tid(m.ReadStr("v")));
 		else if	(ctx.Match(k, Invk_engine_type_list))		return Xoh_tidy_wkr_.Options__list;
 		else if	(ctx.Match(k, Invk_lib))					return wkr_tidy;
 		else	return GfoInvkAble_.Rv_unhandled;

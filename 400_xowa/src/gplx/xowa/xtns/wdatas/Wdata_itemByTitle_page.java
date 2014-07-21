@@ -53,7 +53,7 @@ public class Wdata_itemByTitle_page implements Xows_page {
 		page.Html_data().Restricted_n_();		// [[Special:]] pages allow all HTML
 	}
 	private static boolean Navigate(Gfo_usr_dlg usr_dlg, Xoa_app app, Wdata_wiki_mgr wdata_mgr, Xoa_page page, byte[] site_bry, byte[] page_bry) {
-		page_bry = app.Url_converter_url().Decode(page_bry);				// NOTE: space is converted to + on postback to url; decode
+		page_bry = app.Encoder_mgr().Url().Decode(page_bry);				// NOTE: space is converted to + on postback to url; decode
 		byte[] wiki_domain = Xob_bz2_file.Parse_wmf_key(site_bry); 			if (wiki_domain == null) {usr_dlg.Warn_many("", "", "site_bry parse failed; site_bry:~{0}", String_.new_utf8_(site_bry)); return false;}
 		Xow_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(wiki_domain);		if (wiki == null) {usr_dlg.Warn_many("", "", "wiki_domain does not exist; wiki_domain:~{0}", String_.new_utf8_(wiki_domain)); return false;}
 		Xoa_ttl wdata_ttl = Xoa_ttl.parse_(wiki, page_bry);					if (wdata_ttl == null) {usr_dlg.Warn_many("", "", "ttl is invalid; ttl:~{0}", String_.new_utf8_(page_bry)); return false;}

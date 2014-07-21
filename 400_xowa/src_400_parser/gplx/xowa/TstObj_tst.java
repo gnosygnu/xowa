@@ -166,7 +166,7 @@ public class TstObj_tst {
 		TstRslt rslt = new TstRslt().Expd_(expd).Actl_(actl)
 			.Id_(id).Key_(key)
 			.EvalType_(evalType).EvalPass_(evalPass).EvalStr_(evalStr)
-			.ExpdStr_(Object_.XtoStr_OrNullStr(expd.Val())).ActlStr_(Object_.XtoStr_OrNullStr(actl.Val()))
+			.ExpdStr_(Object_.Xto_str_strict_or_null_mark(expd.Val())).ActlStr_(Object_.Xto_str_strict_or_null_mark(actl.Val()))
 			;
 		rslts.Add(rslt);
 	}

@@ -31,6 +31,15 @@ public class Url_encoder implements Url_encoder_interface {
 		}
 		decode_ary[primary_encode_marker] = hex;
 	}
+	public void Itms_raw_diff_many(byte primary_encode_marker, int... ary) {
+		Url_encoder_itm_hex hex = new Url_encoder_itm_hex(primary_encode_marker);
+		int ary_len = ary.length;
+		for (int i = 0; i < ary_len; i++) {
+			encode_ary[ary[i]] = hex;
+			decode_ary[ary[i]] = hex;
+		}
+		decode_ary[primary_encode_marker] = hex;
+	}
 	public void Itms_decode_marker(byte decode_marker) {
 		Url_encoder_itm_hex hex = new Url_encoder_itm_hex(decode_marker);
 		decode_ary[decode_marker & 0xff] = hex;// PATCH.JAVA:need to convert to unsigned byte
@@ -205,6 +214,15 @@ public class Url_encoder implements Url_encoder_interface {
 				, Byte_ascii.Hash// NOTE: not part of wfUrlEncode; not sure where this is specified; needed for A#b
 				);
 		rv.anchor_encoder = new_html_id_();
+		return rv;
+	}
+	public static Url_encoder new_html_href_quotes_() {
+		Url_encoder rv = new Url_encoder();
+		rv.Itms_ini(Byte_ascii.Percent);
+		rv.Itms_raw_same_rng(0, 255);													// default everything to same;
+		rv.Itms_raw_diff_many(Byte_ascii.Percent
+		, Byte_ascii.Apos, Byte_ascii.Quote, Byte_ascii.Lt, Byte_ascii.Gt);				// encode ', ", <, >
+		rv.Itms_raw_diff(Byte_ascii.Space, Byte_ascii.Underline);						// convert " " to "_"
 		return rv;
 	}
 	public static Url_encoder url_comma() {

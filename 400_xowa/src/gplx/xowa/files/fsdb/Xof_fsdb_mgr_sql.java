@@ -57,19 +57,21 @@ public class Xof_fsdb_mgr_sql implements Xof_fsdb_mgr, GfoInvkAble {
 	}
 	public boolean Init_by_wiki(Xow_wiki wiki) {
 		if (init) return false;
-		this.wiki = wiki;
-		usr_dlg = wiki.App().Usr_dlg();
-		mnt_mgr.Usr_dlg_(usr_dlg);
-		init = true;
-		Xow_repo_mgr repo_mgr = wiki.File_mgr().Repo_mgr();
-		Init_by_wiki(wiki, wiki.App().Fsys_mgr().File_dir().GenSubDir(wiki.Domain_str()), wiki.App().Fsys_mgr().File_dir(), repo_mgr);
-		Xof_qry_wkr_xowa_reg qry_xowa = new Xof_qry_wkr_xowa_reg(img_regy_provider);
+		try {
+			this.wiki = wiki;
+			usr_dlg = wiki.App().Usr_dlg();
+			mnt_mgr.Usr_dlg_(usr_dlg);
+			init = true;
+			Xow_repo_mgr repo_mgr = wiki.File_mgr().Repo_mgr();
+			Init_by_wiki(wiki, wiki.App().Fsys_mgr().File_dir().GenSubDir(wiki.Domain_str()), wiki.App().Fsys_mgr().File_dir(), repo_mgr);
+			Xof_qry_wkr_xowa_reg qry_xowa = new Xof_qry_wkr_xowa_reg(img_regy_provider);
 //			Xof_qry_wkr_xowa qry_xowa = new Xof_qry_wkr_xowa(new Xof_wiki_finder(wiki.App().Wiki_mgr().Get_by_key_or_make(Xow_wiki_.Domain_commons_bry), wiki), new gplx.xowa.files.qrys.Xof_img_meta_wkr_xowa());
-		Xof_qry_wkr_wmf_api qry_wmf_api = new Xof_qry_wkr_wmf_api(wiki, new Xof_img_wkr_api_size_base_wmf());
-		qry_mgr.Add_many(qry_xowa, qry_wmf_api);
-		wiki.Rls_list().Add(this);
-		bin_mgr.Resizer_(wiki.App().File_mgr().Img_mgr().Wkr_resize_img());
-		return true;
+			Xof_qry_wkr_wmf_api qry_wmf_api = new Xof_qry_wkr_wmf_api(wiki, new Xof_img_wkr_api_size_base_wmf());
+			qry_mgr.Add_many(qry_xowa, qry_wmf_api);
+			wiki.Rls_list().Add(this);
+			bin_mgr.Resizer_(wiki.App().File_mgr().Img_mgr().Wkr_resize_img());
+			return true;
+		} catch (Exception exc) {throw Err_.new_fmt_("failed to initialize fsdb_mgr: wiki=~{0) err=~{1}", wiki.Domain_str(), Err_.Message_gplx_brief(exc));}
 	}
 	public void Init_by_wiki(Xow_wiki wiki, Io_url db_dir, Io_url app_file_dir, Xow_repo_mgr repo_mgr) {
 		this.app_file_dir = app_file_dir;

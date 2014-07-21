@@ -25,10 +25,10 @@ public class Xow_html_mgr implements GfoInvkAble {
 		Xoa_app app = wiki.App();
 		page_wtr_mgr = new Xoh_page_wtr_mgr(app, app.Gui_mgr().Kit().Tid() != gplx.gfui.Gfui_kit_.Swing_tid);	// reverse logic to handle swt,drd but not mem
 		Io_url file_dir = app.User().Fsys_mgr().App_img_dir().GenSubDir_nest("file");
-		img_media_play_btn = app.Url_converter_fsys().Encode_http(file_dir.GenSubFil("play.png"));
-		img_media_info_btn = app.Url_converter_fsys().Encode_http(file_dir.GenSubFil("info.png"));
-		img_thumb_magnify  = app.Url_converter_fsys().Encode_http(file_dir.GenSubFil("magnify-clip.png"));
-		img_xowa_protocol = app.Url_converter_fsys().Encode_http(app.User().Fsys_mgr().App_img_dir().GenSubFil_nest("xowa", "protocol.png"));
+		img_media_play_btn = app.Encoder_mgr().Fsys().Encode_http(file_dir.GenSubFil("play.png"));
+		img_media_info_btn = app.Encoder_mgr().Fsys().Encode_http(file_dir.GenSubFil("info.png"));
+		img_thumb_magnify  = app.Encoder_mgr().Fsys().Encode_http(file_dir.GenSubFil("magnify-clip.png"));
+		img_xowa_protocol = app.Encoder_mgr().Fsys().Encode_http(app.User().Fsys_mgr().App_img_dir().GenSubFil_nest("xowa", "protocol.png"));
 		portal_mgr = new Xow_portal_mgr(wiki);
 		imgs_mgr = new Xoh_imgs_mgr(this);
 		module_mgr = new Xow_module_mgr(wiki);
@@ -36,6 +36,7 @@ public class Xow_html_mgr implements GfoInvkAble {
 	public void Init_by_wiki(Xow_wiki wiki) {
 		html_wtr.Init_by_wiki(wiki);
 		module_mgr.Init_by_wiki(wiki);
+		portal_mgr.Init_by_wiki(wiki);
 	}
 	public void Init_by_lang(Xol_lang lang) {
 		portal_mgr.Init_by_lang(lang);

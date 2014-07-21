@@ -116,13 +116,6 @@ class Xop_tag_log {
 		  Invalid							= Gfo_msg_itm_.new_warn_(owner, "Invalid")
 		;
 }
-class Pf_xtn_titleparts_log {
-	private static final Gfo_msg_grp owner = Gfo_msg_grp_.new_(Xoa_app_.Nde, "tmpl_func_titleparts");
-	public static final Gfo_msg_itm
-		  Len_is_invalid					= Gfo_msg_itm_.new_warn_(owner, "Len_is_invalid")
-		, Bgn_is_invalid					= Gfo_msg_itm_.new_warn_(owner, "Bgn_is_invalid")
-		;
-}
 //	class Pf_func_lang_log {
 //		private static final Gfo_msg_grp owner = Gfo_msg_grp_.new_(Xoa_app_.Nde, "tmpl_func_lang");
 //		public static final Gfo_msg_itm

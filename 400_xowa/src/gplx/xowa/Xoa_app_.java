@@ -23,7 +23,7 @@ public class Xoa_app_ {
 		boot_mgr.Run(args);
 	}
 	public static final String Name = "xowa";
-	public static final String Version = "1.7.2.1";
+	public static final String Version = "1.7.3.1";
 	public static String Build_date = "2012-12-30 00:00:00";
 	public static String Op_sys;
 	public static String User_agent = "";
@@ -120,7 +120,7 @@ class Xoa_app_boot_mgr {
 			Io_url wiki_dir = args_mgr.Args_get("wiki_dir").Val_as_url_rel_dir_or(root_dir.GenSubDir("wiki"), root_dir.GenSubDir("wiki"));
 			Io_url cmd_file = args_mgr.Args_get("cmd_file").Val_as_url_rel_fil_or(jar_dir, root_dir.GenSubFil("xowa.gfs"));
 			String app_mode = args_mgr.Args_get("app_mode").Val_as_str_or("gui");
-			String launch_url = args_mgr.Args_get("url").Val_as_str_or(Xoa_sys_cfg.Launch_url_dflt);
+			String launch_url = args_mgr.Args_get("url").Val_as_str_or(null);
 			int server_port_recv = args_mgr.Args_get("server_port_recv").Val_as_int_or(55000);
 			int server_port_send = args_mgr.Args_get("server_port_send").Val_as_int_or(55001);
 			int http_server_port = args_mgr.Args_get("http_server_port").Val_as_int_or(8080);
@@ -133,8 +133,9 @@ class Xoa_app_boot_mgr {
 			app = new Xoa_app(usr_dlg, root_dir, user_dir, Xoa_app_.Op_sys); usr_dlg.Log_wtr().Queue_enabled_(false); log_wtr.Log_msg_to_session_fmt("app.init");
 			app.Fsys_mgr().Wiki_dir_(wiki_dir);
 			try {
-				app.Sys_cfg().Lang_(System_lang()); chkpoint = "lang";
-				app.Sys_cfg().Launch_url_(launch_url); chkpoint = "url";
+				app.Sys_cfg().Lang_(System_lang());
+				if (launch_url != null)
+					app.Api_root().App().Startup().Tabs().Manual_(launch_url);
 				app.Tcp_server().Rdr_port_(server_port_recv).Wtr_port_(server_port_send);
 				app.Http_server().Port_(http_server_port);
 				app.Init(); chkpoint = "init_gfs";
@@ -147,7 +148,7 @@ class Xoa_app_boot_mgr {
 			catch (Exception e) {
 				usr_dlg.Warn_many("", "", "script file failed: ~{0} ~{1} ~{2}", chkpoint, cmd_file.Raw(), Err_.Message_gplx(e));
 				if (app_mode_gui)
-					GfuiEnv_.ShowMsg(Err_.Message_gplx_brief(e));
+					GfuiEnv_.ShowMsg(Err_.Message_gplx(e));
 			}
 
 			// launch
@@ -158,7 +159,7 @@ class Xoa_app_boot_mgr {
 				app.Http_server().Run();
 			else {
 				if (cmd_text != null)
-					ConsoleAdp._.WriteLine_utf8(Object_.XtoStr_OrEmpty(app.Gfs_mgr().Run_str(cmd_text)));
+					ConsoleAdp._.WriteLine_utf8(Object_.Xto_str_strict_or_empty(app.Gfs_mgr().Run_str(cmd_text)));
 				if (app_mode_gui) {
 					app.Mode_(Xoa_app_.Mode_gui);
 					app.Gui_mgr().Run(); chkpoint = "run";

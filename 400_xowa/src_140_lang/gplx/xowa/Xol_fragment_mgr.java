@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.xowa.langs.msgs.*;
 public class Xol_fragment_mgr implements GfoInvkAble {
 	public Xol_fragment_mgr(Xol_lang lang) {this.lang = lang;} private Xol_lang lang;
 	public byte[] Html_js_wikidata() {if (html_js_wikidata == null) html_js_wikidata = Html_js_wikidata_init(); return html_js_wikidata;} private byte[] html_js_wikidata;
@@ -102,7 +103,7 @@ public class Xol_fragment_mgr implements GfoInvkAble {
 	}
 	private byte[] Html_js_wikidata_val(Xow_wiki wdata_wiki, int id) {
 		Xol_msg_itm msg = lang.Msg_mgr().Itm_by_id_or_null(id);
-		byte[] rv = wdata_wiki == null ? msg.Val() : Pf_msg_mgr.Get_msg_val(wdata_wiki, lang, msg.Key(), Bry_.Ary_empty);
+		byte[] rv = wdata_wiki == null ? msg.Val() : Xol_msg_mgr_.Get_msg_val(wdata_wiki, lang, msg.Key(), Bry_.Ary_empty);
 		if (Bry_finder.Find_fwd(rv, Byte_ascii.Apos) != Bry_.NotFound)
 			rv = Bry_.Replace(rv, Bry_find, Bry_repl);
 		return rv;

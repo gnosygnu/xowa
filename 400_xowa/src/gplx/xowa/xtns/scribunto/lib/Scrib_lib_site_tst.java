@@ -19,7 +19,7 @@ package gplx.xowa.xtns.scribunto.lib; import gplx.*; import gplx.xowa.*; import 
 import org.junit.*;
 public class Scrib_lib_site_tst {
 	@Before public void init() {
-		fxt.Init_scrib_proc();
+		fxt.Clear_for_lib();
 		lib = fxt.Core().Lib_site().Init();
 	}	private Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt(); private Scrib_lib lib;
 	@Test   public void GetNsIndex() {

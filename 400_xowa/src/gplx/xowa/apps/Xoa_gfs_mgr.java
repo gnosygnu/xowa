@@ -99,7 +99,7 @@ public class Xoa_gfs_mgr implements GfoInvkAble, GfoInvkRootWkr {
 	public static void Msg_parser_init() {
 		GfsCore._.MsgParser_(gplx.gfs.Gfs_msg_bldr._);
 	}
-	public static byte[] Cfg_save_escape(String v) {return Cfg_save_escape(Bry_.new_ascii_(v));}
+	public static byte[] Cfg_save_escape(String v) {return Cfg_save_escape(Bry_.new_utf8_(v));}
 	public static byte[] Cfg_save_escape(byte[] v) {
 		return Bry_finder.Find_fwd(v, Byte_ascii.Apos) == Bry_.NotFound ? v : Bry_.Replace(v, Bry_apos_1, Bry_apos_2);
 	}	static final byte[] Bry_apos_1 = Bry_.new_ascii_("'"), Bry_apos_2 = Bry_.new_ascii_("''");

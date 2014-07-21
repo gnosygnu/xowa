@@ -85,7 +85,7 @@ public class Xof_xfer_mgr {
 				src_url = trg_url;
 			}
 			boolean limit = !ext.Id_is_svg();	// do not limit if svg
-			Xof_xfer_itm_.Calc_xfer_size(calc_size, xfer_itm.Lnki_type(), wiki.Html_mgr().Img_thumb_width(), file_w, file_h, lnki_w, lnki_h, lnki_thumbable, xfer_itm.Lnki_upright(), limit);	// NOTE: always recalc w/h; needed for (a) when width < 1 and (b) when w/h are wrong; xfer=160,160, lnki=65,50, actl should be 50,50; EX.WP: [[Image:Gnome-mime-audio-openclipart.svg|65x50px|center|link=|alt=]]
+			Xof_xfer_itm_.Calc_xfer_size(calc_size, xfer_itm.Lnki_type(), wiki.Html_mgr().Img_thumb_width(), file_w, file_h, lnki_w, lnki_h, lnki_thumbable, xfer_itm.Lnki_upright(), limit);	// NOTE: always recalc w/h; needed for (a) when width < 1 and (b) when w/h are wrong; xfer=160,160, lnki=65,50, actl should be 50,50; PAGE:en.w:[[Image:Gnome-mime-audio-openclipart.svg|65x50px|center|link=|alt=]]
 			lnki_w = calc_size.Val_0(); lnki_h = calc_size.Val_1();
 			trg_url = this.Trg_url(trg_repo, Xof_repo_itm.Mode_thumb, lnki_w);
 			if (!Img_convert(src_url, trg_url)) return false;	// convert failed; exit
@@ -150,7 +150,7 @@ public class Xof_xfer_mgr {
 	private boolean Make_img_thumb(){
 		String src_str; Io_url trg_url;
 		boolean limit = !ext.Id_is_svg();	// do not limit if svg
-		if (lnki_w > 0) {								// if width is -1, don't bother (wmf only has > 0 width); EX.WP:Paris;[[File:IMA-Ile-St-Louis.jpg|thumb|x220]]   
+		if (lnki_w > 0) {								// if width is -1, don't bother (wmf only has > 0 width); PAGE:en.w:Paris;[[File:IMA-Ile-St-Louis.jpg|thumb|x220]]   
 			for (int i = 0; i < 2; i++) {
 				Xof_xfer_itm_.Calc_xfer_size(calc_size, xfer_itm.Lnki_type(), wiki.Html_mgr().Img_thumb_width(), meta_itm.Orig_w(), meta_itm.Orig_h(), lnki_w, lnki_h, lnki_thumbable, lnki_upright, limit);
 				lnki_w = calc_size.Val_0(); 
@@ -160,12 +160,12 @@ public class Xof_xfer_mgr {
 				trg_url = this.Trg_url(trg_repo, Xof_repo_itm.Mode_thumb, lnki_w);
 				if (Make_img_exec(src_str, trg_url)) {		// download passed
 					trg_url = rslt.Trg();
-					if (lnki_w > 0 && lnki_h > 0) {			// lnki specified width and height; check against xfer; needed when w/h are wrong; lnki=65,50 but xfer=160,160; actl should be 50,50; EX.WP: [[Image:Gnome-mime-audio-openclipart.svg|65x50px|center|link=|alt=]]; SEE:NOTE_1
+					if (lnki_w > 0 && lnki_h > 0) {			// lnki specified width and height; check against xfer; needed when w/h are wrong; lnki=65,50 but xfer=160,160; actl should be 50,50; PAGE:en.w:[[Image:Gnome-mime-audio-openclipart.svg|65x50px|center|link=|alt=]]; SEE:NOTE_1
 						Xof_xfer_itm_.Calc_xfer_size(calc_size, xfer_itm.Lnki_type(), wiki.Html_mgr().Img_thumb_width(), file_w, file_h, lnki_w, lnki_h, lnki_thumbable, -1, limit);	// NOTE: do not use lnki_upright; already applied above to generate new lnki_w; using it again will double-apply it 
 						if (Int_.Between(lnki_w, calc_size.Val_0() - 1, calc_size.Val_0() + 1))	// width matches; done
 							return true;
 						else {								// width fails; cleanup invalid thumb
-							trg_url = rslt.Trg();			// NOTE: update url b/c size may have changed; EX.WP:commons/Image:Tempesta.djvu which is 800px, but resized to 799px
+							trg_url = rslt.Trg();			// NOTE: update url b/c size may have changed; PAGE:en.w:commons/Image:Tempesta.djvu which is 800px, but resized to 799px
 							Io_mgr._.DeleteFil(trg_url);	// delete file
 							meta_itm.Thumbs_del(lnki_w);	// delete thumb
 							lnki_w = calc_size.Val_0(); lnki_h = calc_size.Val_1();
@@ -207,7 +207,7 @@ public class Xof_xfer_mgr {
 						if (Int_.Between(lnki_w, calc_size.Val_0() - 1, calc_size.Val_0() + 1))	// width matches; done
 							return true;
 						else {								// width fails; cleanup invalid thumb; EX:w:[[File:Upper and Middle Manhattan.jpg|x120px]]
-							trg_url = rslt.Trg();			// NOTE: update url b/c size may have changed; EX.WP:commons/Image:Tempesta.djvu which is 800px, but resized to 799px
+							trg_url = rslt.Trg();			// NOTE: update url b/c size may have changed; PAGE:en.w:commons/Image:Tempesta.djvu which is 800px, but resized to 799px
 							Io_mgr._.DeleteFil(trg_url);	// delete file
 							meta_itm.Thumbs_del(lnki_w);	// delete thumb
 							lnki_w = calc_size.Val_0(); lnki_h = calc_size.Val_1();
@@ -230,9 +230,9 @@ public class Xof_xfer_mgr {
 		if (src_repo_is_wmf) {											// src is wmf >>> copy down thumb; NOTE: thumb not available in tar
 			String src_str = this.Src_url(src_repo, Xof_repo_itm.Mode_thumb, lnki_w);
 			Io_url trg_url = this.Trg_url(trg_repo, Xof_repo_itm.Mode_thumb, lnki_w);
-			thumb_pass = Cmd_download(src_str, trg_url, false);			// NOTE: ogg audios may sometimes have thumb, but 0 size; thumb_pass will be true, but will fail on thumb_rename; EX.WP:Beethoven; [[File:Ludwig van Beethoven - Symphonie 5 c-moll - 1. Allegro con brio.ogg]]
+			thumb_pass = Cmd_download(src_str, trg_url, false);			// NOTE: ogg audios may sometimes have thumb, but 0 size; thumb_pass will be true, but will fail on thumb_rename; PAGE:en.w:Beethoven; [[File:Ludwig van Beethoven - Symphonie 5 c-moll - 1. Allegro con brio.ogg]]
 			if (thumb_pass) {
-				thumb_pass = Img_rename_by_size(trg_url);					// NOTE: lnki cites view_w which will rarely match file_w; EX.WP:Earth;Northwest coast of United States to Central South America at Night.ogv|250px; which is atually 640
+				thumb_pass = Img_rename_by_size(trg_url);					// NOTE: lnki cites view_w which will rarely match file_w; PAGE:en.w:Earth;Northwest coast of United States to Central South America at Night.ogv|250px; which is atually 640
 				if (thumb_pass) {
 					Xof_meta_thumb thumb = meta_itm.Update_thumb_add(file_w, file_h); // NOTE: only store 1 width; depend on browser to resize to other widths; this matches MW's behavior
 					if (Xof_doc_thumb.Null_n(lnki_thumbtime)) {		// lnki specified seek
@@ -264,7 +264,7 @@ public class Xof_xfer_mgr {
 		rslt.Atrs_src_trg_(src_str, trg_url);	// NOTE: must be set at start; Img_rename_by_size may overwrite trg
 		if (!Cmd_download(src_str, trg_url, !cur_is_thumb)) return false;
 		if (cur_is_thumb) {
-			if (orig_w < 1 || orig_h < 1 || lnki_w < 1 || lnki_h < 1) {	// NOTE: if orig is unknown, calc will be based on lnki size which may be incorrect; EX.WP:{{Olympic Summer Games Host Cities}};[[File:Flag of the United States.svg|22x20px]] which is really 22x12px
+			if (orig_w < 1 || orig_h < 1 || lnki_w < 1 || lnki_h < 1) {	// NOTE: if orig is unknown, calc will be based on lnki size which may be incorrect; PAGE:en.w:{{Olympic Summer Games Host Cities}};[[File:Flag of the United States.svg|22x20px]] which is really 22x12px
 				if (!Img_rename_by_size(trg_url)) return false;
 				trg_url = rslt.Trg();	// NOTE: update url b/c size may have changed
 			}

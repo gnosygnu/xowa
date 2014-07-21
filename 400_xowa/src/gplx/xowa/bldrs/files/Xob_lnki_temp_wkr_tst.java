@@ -19,27 +19,27 @@ package gplx.xowa.bldrs.files; import gplx.*; import gplx.xowa.*; import gplx.xo
 import org.junit.*;
 public class Xob_lnki_temp_wkr_tst {
 	private Xob_lnki_temp_wkr_fxt fxt = new Xob_lnki_temp_wkr_fxt();
-	@Test   public void X_to_commons() {
-		fxt.Init_X_to_commons(true);
-		fxt.Test_X_to_commons("a", "A");
-		fxt.Test_X_to_commons("A", null);
+	@Test   public void Xto_commons() {
+		fxt.Init_Xto_commons(true);
+		fxt.Test_Xto_commons("a", "A");
+		fxt.Test_Xto_commons("A", null);
 
-		fxt.Init_X_to_commons(false);
-		fxt.Test_X_to_commons("a", null);
-		fxt.Test_X_to_commons("A", null);
+		fxt.Init_Xto_commons(false);
+		fxt.Test_Xto_commons("a", null);
+		fxt.Test_Xto_commons("A", null);
 	}
 }
 class Xob_lnki_temp_wkr_fxt {
 	private boolean wiki_ns_file_is_case_match_all;
 	private Xow_wiki commons_wiki;
-	public Xob_lnki_temp_wkr_fxt Init_X_to_commons(boolean wiki_ns_file_is_case_match_all) {
+	public Xob_lnki_temp_wkr_fxt Init_Xto_commons(boolean wiki_ns_file_is_case_match_all) {
 		Xoa_app app = Xoa_app_fxt.app_();
 		this.wiki_ns_file_is_case_match_all = wiki_ns_file_is_case_match_all;
 		this.commons_wiki = Xoa_app_fxt.wiki_tst_(app);	// commons_wiki will default to Xow_ns.Id_file of case_match_1st
 		return this;
 	}
 
-	public void Test_X_to_commons(String ttl, String expd) {
-		Tfds.Eq(expd, String_.new_utf8_(Xob_lnki_temp_wkr.X_to_commons(wiki_ns_file_is_case_match_all, commons_wiki, Bry_.new_utf8_(ttl))));
+	public void Test_Xto_commons(String ttl, String expd) {
+		Tfds.Eq(expd, String_.new_utf8_(Xob_lnki_temp_wkr.Xto_commons(wiki_ns_file_is_case_match_all, commons_wiki, Bry_.new_utf8_(ttl))));
 	}
 }

@@ -190,7 +190,7 @@ class DsvDataRdr_fxt {
 			GfoNde row = tbl.Subs().FetchAt_asGfoNde(i);
 			for (int j = 0; j < row.Flds().Count(); j++)  {
 				if (j != 0) sb.Add("~");
-				sb.Add_obj(Object_.XtoStr_OrNullStr(row.ReadAt(j)));
+				sb.Add_obj(Object_.Xto_str_strict_or_null_mark(row.ReadAt(j)));
 			}
 			expdList.Add(sb.XtoStrAndClear());
 		}
@@ -201,7 +201,7 @@ class DsvDataRdr_fxt {
 			}
 			for (int j = 0; j < expdRow.length; j++) {
 				if (j != 0) sb.Add("~");
-				sb.Add_obj(Object_.XtoStr_OrNullStr(expdRow[j]));
+				sb.Add_obj(Object_.Xto_str_strict_or_null_mark(expdRow[j]));
 			}
 			actlList.Add(sb.XtoStrAndClear());
 		}

@@ -63,6 +63,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		Btrie_slim_mgr tag_trie = ctx.App().Xnde_tag_regy().XndeNames(ctx.Xnde_names_tid());
 		Object tag_obj = tag_trie.Match_bgn_w_byte(cur_byt, src, cur_pos, src_len);	// NOTE:tag_obj can be null in wiki_tmpl mode; EX: "<ul" is not a valid tag in wiki_tmpl, but is valid in wiki_main
 		int atrs_bgn_pos = tag_trie.Match_pos();
+		int name_bgn = cur_pos, name_end = atrs_bgn_pos;
 		int tag_end_pos = atrs_bgn_pos - 1;
 		if (tag_obj != null) {
 			if (atrs_bgn_pos >= src_len) return ctx.Lxr_make_txt_(atrs_bgn_pos);	// truncated tag; EX: "<br"
@@ -111,7 +112,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 				}
 			}
 			else {
-				if (ctx_cur_tid_is_tblw_atr_owner) Xop_tblw_wkr.Atrs_close(ctx, src, root);
+				if (ctx_cur_tid_is_tblw_atr_owner) Xop_tblw_wkr.Atrs_close(ctx, src, root, Bool_.N);
 				return ctx.Lxr_make_txt_(cur_pos);
 			}
 		}
@@ -208,11 +209,12 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 				}
 				break;
 		}
-		if (ctx_cur_tid_is_tblw_atr_owner) Xop_tblw_wkr.Atrs_close(ctx, src, root);	// < found inside tblw; close off tblw attributes; EX: |- id='abcd' <td>a</td> (which is valid wikitext; NOTE: must happen after <nowiki>
+		if (ctx_cur_tid_is_tblw_atr_owner)
+			Xop_tblw_wkr.Atrs_close(ctx, src, root, Bool_.Y);	// < found inside tblw; close off tblw attributes; EX: |- id='abcd' <td>a</td> (which is valid wikitext; NOTE: must happen after <nowiki>
 		if (tag_is_closing)
 			return Make_xtag_end(ctx, tkn_mkr, root, src, src_len, bgn_pos, gt_pos, tag);
 		else
-			return Make_xtag_bgn(ctx, tkn_mkr, root, src, src_len, bgn_pos, gt_pos, tag, atrs_bgn_pos, src[tag_end_pos], force_xtn_for_nowiki, pre2_hack);
+			return Make_xtag_bgn(ctx, tkn_mkr, root, src, src_len, bgn_pos, gt_pos, name_bgn, name_end, tag, atrs_bgn_pos, src[tag_end_pos], force_xtn_for_nowiki, pre2_hack);
 	}
 	private static Xop_tkn_itm Make_bry_tkn(Xop_tkn_mkr tkn_mkr, byte[] src, int bgn_pos, int cur_pos) {
 		int len = cur_pos - bgn_pos;
@@ -269,7 +271,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		return end_rhs;
 	}
 	private boolean pre2_pending = false;
-	private int Make_xtag_bgn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int gtPos, Xop_xnde_tag tag, int tag_end_pos, byte tag_end_byte, boolean force_xtn_for_nowiki, boolean pre2_hack) {
+	private int Make_xtag_bgn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int gtPos, int name_bgn, int name_end, Xop_xnde_tag tag, int tag_end_pos, byte tag_end_byte, boolean force_xtn_for_nowiki, boolean pre2_hack) {
 		boolean inline = false;
 		int open_tag_end = gtPos + Launcher_app_mgr.Adj_next_char, atrs_bgn = -1, atrs_end = -1;
 		// calc (a) inline; (b) atrs
@@ -304,7 +306,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			||	(force_xtn_for_nowiki && !inline)
 			)
 			)	{
-			return Make_xnde_xtn(ctx, tkn_mkr, root, src, src_len, tag, bgn_pos, gtPos + 1, atrs_bgn, atrs_end, atrs, inline, pre2_hack);	// find end tag and do not parse anything inbetween
+			return Make_xnde_xtn(ctx, tkn_mkr, root, src, src_len, tag, bgn_pos, gtPos + 1, name_bgn, name_end, atrs_bgn, atrs_end, atrs, inline, pre2_hack);	// find end tag and do not parse anything inbetween
 		}
 		if (tag.Restricted()) {
 			Xoa_page page = ctx.Cur_page();
@@ -564,7 +566,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		}
 	}
 	private int Find_xtn_end_tag(Xop_ctx ctx, byte[] src, int src_len, int open_end, byte[] close_bry, int tag_bgn) {
-		int tag_id = Bry_.X_to_int_or(src, tag_bgn, tag_bgn + 10, -1);
+		int tag_id = Bry_.Xto_int_or(src, tag_bgn, tag_bgn + 10, -1);
 		if (tag_id == -1) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not extract int: page=~{0}", ctx.Cur_page().Url().Xto_full_str_safe()); return Bry_finder.Not_found;}
 		Bry_bfr tmp = ctx.Wiki().Utl_bry_bfr_mkr().Get_b128();
 		tmp.Add(Pf_tag.Xtag_end_lhs).Add_int_pad_bgn(Byte_ascii.Num_0, 10, tag_id).Add(Pf_tag.Xtag_rhs);
@@ -575,7 +577,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		if (rv == Bry_finder.Not_found) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not find <: page=~{0}", ctx.Cur_page().Url().Xto_full_str_safe()); return Bry_finder.Not_found;}
 		return rv;
 	}
-	private int Make_xnde_xtn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, Xop_xnde_tag tag, int open_bgn, int open_end, int atrs_bgn, int atrs_end, Xop_xatr_itm[] atrs, boolean inline, boolean pre2_hack) {
+	private int Make_xnde_xtn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, Xop_xnde_tag tag, int open_bgn, int open_end, int name_bgn, int name_end, int atrs_bgn, int atrs_end, Xop_xatr_itm[] atrs, boolean inline, boolean pre2_hack) {
 		// NOTE: find end_tag that exactly matches bgnTag; must be case sensitive;
 		int xnde_end = open_end;
 		Xop_xnde_tkn xnde = null;
@@ -585,6 +587,13 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		}
 		else {
 			byte[] close_bry = tag.XtnEndTag_tmp();				// get tmp bry (so as not to new)
+			if (tag.Langs() != null) {							// cur tag has langs; EX:<section>; DATE:2014-07-18
+				Xop_xnde_tag_lang tag_lang = tag.Langs_get(ctx.Lang().Case_mgr(), ctx.Cur_page().Lang().Lang_id(), src, name_bgn, name_end);
+				if (tag_lang == null)							// tag does not match lang; EX:<trecho> and lang=de;
+					return ctx.Lxr_make_txt_(open_end);
+				if (tag_lang != Xop_xnde_tag_lang._)			// tag matches; note Xop_xnde_tag_lang._ is a wildcard match; EX:<section>
+					close_bry = tag_lang.XtnEndTag_tmp();
+			}
 			int src_offset = open_bgn - 1;						// open bgn to start at <; -2 to ignore </ ; +1 to include <
 			int close_ary_len = close_bry.length;
 			for (int i = 2; i < close_ary_len; i++)				// 2 to ignore </
@@ -652,6 +661,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 					case Xop_xnde_tag_.Tid_languages:				xnde_xtn = tkn_mkr.Xnde_languages(); break;
 					case Xop_xnde_tag_.Tid_templateData:			xnde_xtn = tkn_mkr.Xnde_templateData(); break;
 					case Xop_xnde_tag_.Tid_rss:						xnde_xtn = tkn_mkr.Xnde_rss(); break;
+					case Xop_xnde_tag_.Tid_quiz:					xnde_xtn = tkn_mkr.Xnde_quiz(); break;
 					case Xop_xnde_tag_.Tid_xowa_html:				xnde_xtn = tkn_mkr.Xnde_xowa_html(); break;
 					case Xop_xnde_tag_.Tid_listing_buy:
 					case Xop_xnde_tag_.Tid_listing_do:

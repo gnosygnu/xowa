@@ -128,7 +128,7 @@ class Xop_vnt_lxr_fxt {
 			if (itm_tid == Xop_vnt_flag_.Tid_lang)
 				Vnt_flag_lang_to_bfr(bfr, itm);
 			else
-				bfr.Add_str(Xop_vnt_flag_.X_to_name(itm_tid)).Add_byte(Byte_ascii.Semic);
+				bfr.Add_str(Xop_vnt_flag_.Xto_name(itm_tid)).Add_byte(Byte_ascii.Semic);
 		}
 		return bfr.XtoStrAndClear();
 	}

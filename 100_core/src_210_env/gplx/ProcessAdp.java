@@ -71,9 +71,9 @@ public class ProcessAdp implements GfoInvkAble, RlsAble {
 			default:					throw Err_mgr._.unhandled_(run_mode);
 		}
 	}
-	public String[] X_to_process_bldr_args(String... args) {
+	public String[] Xto_process_bldr_args(String... args) {
 		String args_str = args_fmtr.Bld_str_many(args);
-		return X_to_process_bldr_args_utl(exe_url, args_str);
+		return Xto_process_bldr_args_utl(exe_url, args_str);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_enabled))					return enabled;
@@ -209,7 +209,7 @@ public class ProcessAdp implements GfoInvkAble, RlsAble {
 		exit_code = Exit_init;
 		rslt_out = "";
 		WhenBgn_run();
-		pb = new ProcessBuilder(X_to_process_bldr_args_utl(exe_url, args_str));
+		pb = new ProcessBuilder(Xto_process_bldr_args_utl(exe_url, args_str));
 		pb.redirectErrorStream(true);								// NOTE: need to redirectErrorStream or rdr.readLine() will hang; see inkscape and Ostfriesland Verkehr-de.svg
 		if (working_dir != null)
 			pb.directory(new File(working_dir.Xto_api()));
@@ -259,7 +259,7 @@ public class ProcessAdp implements GfoInvkAble, RlsAble {
 	}
 	private static final String GRP_KEY = "gplx.process";
 	public static final int Exit_pass = 0, Exit_init = -1;
-	public static String[] X_to_process_bldr_args_utl(Io_url exe_url, String args_str) {		
+	public static String[] Xto_process_bldr_args_utl(Io_url exe_url, String args_str) {		
 		ListAdp list = ListAdp_.new_();
 		list.Add(exe_url.Xto_api());
 		String_bldr sb = String_bldr_.new_();

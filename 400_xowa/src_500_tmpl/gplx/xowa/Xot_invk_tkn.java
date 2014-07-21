@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.xowa.langs.*;
 import gplx.xowa.langs.vnts.*; import gplx.xowa.langs.cnvs.*;
-import gplx.xowa.wikis.caches.*; import gplx.xowa.xtns.scribunto.*;
+import gplx.xowa.wikis.caches.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.pfuncs.ttls.*;
 public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 	public boolean Root_frame() {return false;}
 	public Arg_nde_tkn Name_tkn() {return name_tkn;} public Xot_invk_tkn Name_tkn_(Arg_nde_tkn v) {name_tkn = v; return this;} Arg_nde_tkn name_tkn = Arg_nde_tkn.Null;
@@ -179,7 +179,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 				}
 				defn = wiki.Cache_mgr().Defn_cache().Get_by_key(name_ary);
 				if (defn == null) {
-					if (name_ary_len != 0 ) {	// name_ary_len != 0 for direct template inclusions; EX.WP:Human evolution and {{:Human evolution/Species chart}}; && ctx.Tmpl_whitelist().Has(name_ary)
+					if (name_ary_len != 0 ) {	// name_ary_len != 0 for direct template inclusions; PAGE:en.w:Human evolution and {{:Human evolution/Species chart}}; && ctx.Tmpl_whitelist().Has(name_ary)
 						Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.Add(wiki.Ns_mgr().Ns_template().Name_db_w_colon(), name_ary));
 						if (ttl == null) { // ttl is not valid; just output orig; REF.MW:Parser.php|braceSubstitution|if ( !$found ) $text = $frame->virtualBracketedImplode( '{{', '|', '}}', $titleWithSpaces, $args );
 							byte[] missing_ttl 
@@ -225,9 +225,9 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 					ignore_hash.Add_str_obj("Clarify{{subst", String_.Empty);
 				}
 				if (ignore_hash.Get_by_bry(name_ary) == null) {
-					if (Pf_xtn_rel2abs.Rel2abs_ttl(name_ary, name_bgn, name_ary_len)) {// rel_path; EX: {{/../Peer page}}; DATE:2013-03-27
+					if (Pfunc_rel2abs.Rel2abs_ttl(name_ary, name_bgn, name_ary_len)) {// rel_path; EX: {{/../Peer page}}; DATE:2013-03-27
 						Bry_bfr tmp_bfr = ctx.App().Utl_bry_bfr_mkr().Get_b512();
-						name_ary = Pf_xtn_rel2abs.Rel2abs(tmp_bfr, Bry_.Mid(name_ary, name_bgn, name_ary_len), ctx.Cur_page().Ttl().Raw());
+						name_ary = Pfunc_rel2abs.Rel2abs(tmp_bfr, Bry_.Mid(name_ary, name_bgn, name_ary_len), ctx.Cur_page().Ttl().Raw());
 						tmp_bfr.Mkr_rls();
 						return SubEval(ctx, wiki, bfr, name_ary, caller, src);				
 					}

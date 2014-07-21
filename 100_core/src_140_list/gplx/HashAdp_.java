@@ -26,7 +26,7 @@ class HashAdp_null implements HashAdp {
 	public int Count() {return 0;}
 	public boolean Has(Object key) {return false;}
 	public Object Fetch(Object key) {return null;}
-	public Object FetchOrFail(Object key)				{throw Err_.missing_key_(Object_.XtoStr_OrNullStr(key));}
+	public Object FetchOrFail(Object key)				{throw Err_.missing_key_(Object_.Xto_str_strict_or_null_mark(key));}
 	public Object FetchOrNew(Object key, NewAble proto) {throw Err_.new_("could not add to null hash");}
 	public void Add(Object key, Object val) {}
 	public void AddKeyVal(Object val) {}

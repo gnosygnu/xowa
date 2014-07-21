@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.apis; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.apis.xowa.*; import gplx.xowa.gui.cmds.*;
 public class Xoapi_root implements GfoInvkAble {
-	public Xoa_app app;
+	private Xoa_app app;
 	public Xoapi_root(Xoa_app app) {usr_api.Ctor_by_app(app);}
 	public void Init_by_kit(Xoa_app app) {
 		this.app = app;

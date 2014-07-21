@@ -46,7 +46,7 @@ public class TimeSpanAdp_ {
 			switch (b) {
 				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
 				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-					int unit_digit = Byte_ascii.X_to_digit(b);
+					int unit_digit = Byte_ascii.Xto_digit(b);
 					unit_val = (unit_multiple == 1) ? unit_digit : unit_val + (unit_digit * unit_multiple);
 					switch (colon_pos) {
 						case 0:		val_s = unit_val; break;

@@ -100,7 +100,7 @@ public class Xog_mnu_grp extends Xog_mnu_base {
 	}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_build))					this.Build();
-		else if	(ctx.Match(k, Invk_enabled))				return Yn.X_to_str(enabled);
+		else if	(ctx.Match(k, Invk_enabled))				return Yn.Xto_str(enabled);
 		else if	(ctx.Match(k, Invk_enabled_))				this.Enabled_(m.ReadYn("v"));
 		else if	(ctx.Match(k, Invk_source))					return source;
 		else if	(ctx.Match(k, Invk_source_))				this.Source_(app.Gfs_mgr(), m.ReadStr("v"));

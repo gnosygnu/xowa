@@ -21,7 +21,7 @@ public class Xoa_url_arg_hash {
 	public Gfo_url_arg Get_arg(byte[] key) {return (Gfo_url_arg)hash.Fetch(key);}
 	public int Get_val_int_or(byte[] key, int or) {
 		byte[] val_bry = Get_val_bry_or(key, null); if (val_bry == null) return or;		
-		return Bry_.X_to_int_or(val_bry, or);		
+		return Bry_.Xto_int_or(val_bry, or);		
 	}
 	public byte[] Get_val_bry_or(byte[] key, byte[] or) {
 		Gfo_url_arg arg = (Gfo_url_arg)hash.Fetch(key);
@@ -63,12 +63,14 @@ public class Xoa_url_arg_hash {
 		Gfo_url_arg[] ary = (Gfo_url_arg[])hash.XtoAry(Gfo_url_arg.class);
 		url.Args_(ary);
 	}
-	public static void Concat_bfr(Bry_bfr bfr, Gfo_url_arg[] ary) {
+	public static void Concat_bfr(Bry_bfr bfr, Url_encoder href_encoder, Gfo_url_arg[] ary) {
 		int ary_len = ary.length;
 		for (int i = 0; i < ary_len; i++) {
 			Gfo_url_arg itm = ary[i];
 			bfr.Add_byte(i == 0 ? Byte_ascii.Question : Byte_ascii.Amp);
-			bfr.Add(itm.Key_bry()).Add_byte(Byte_ascii.Eq).Add(itm.Val_bry());
+			href_encoder.Encode(bfr, itm.Key_bry());
+			bfr.Add_byte(Byte_ascii.Eq);
+			href_encoder.Encode(bfr, itm.Val_bry());
 		}
 	}
 }

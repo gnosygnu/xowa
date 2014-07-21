@@ -135,7 +135,7 @@ public class Wdata_doc_bldr {
 						wtr.Comma();
 						wtr.Nde_bgn();
 						wtr.Kv(Bool_.N, Wdata_doc_consts.Key_ent_entity_type_bry, Wdata_doc_consts.Val_ent_entity_type_item_bry);
-						wtr.Kv(Bool_.Y, Wdata_doc_consts.Key_ent_numeric_id_bry, Bry_.X_to_int(prop.Val()));
+						wtr.Kv(Bool_.Y, Wdata_doc_consts.Key_ent_numeric_id_bry, Bry_.Xto_int(prop.Val()));
 						wtr.Nde_end();
 						break;
 					case Wdata_prop_itm_base_.Val_tid_time:

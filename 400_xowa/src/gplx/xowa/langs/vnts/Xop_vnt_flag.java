@@ -39,7 +39,7 @@ class Xop_vnt_flag_ {
 	, Tid_name 		= 10	// EX: -{N|zh-hans:A;zh-hant:B}-		-> ""
 	, Tid_lang		= 11	// EX: -{zh-hant|B}-					-> "B"
 	;		
-	public static String X_to_name(byte tid) {
+	public static String Xto_name(byte tid) {
 		switch (tid) {
 			case Tid_unknown: return "unknown";
 			case Tid_show	: return "show";

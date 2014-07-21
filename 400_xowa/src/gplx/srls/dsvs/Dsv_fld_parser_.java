@@ -63,14 +63,14 @@ class Dsv_fld_parser_int implements Dsv_fld_parser {
 			boolean pos_is_last = pos == src_len;				
 			byte b = pos_is_last ? row_dlm : src[pos];
 			if		(b == fld_dlm) {
-				boolean pass = wkr.Write_int(parser, fld_idx, pos, Bry_.X_to_int_or(src, fld_bgn, pos, -1));
+				boolean pass = wkr.Write_int(parser, fld_idx, pos, Bry_.Xto_int_or(src, fld_bgn, pos, -1));
 				if (!pass) throw Dsv_fld_parser_.err_fld_unhandled(this, wkr, fld_idx, src, fld_bgn, pos);
 				int rv = pos + 1; // fld_dlm is always 1 byte
 				parser.Update_by_fld(rv);
 				return rv;
 			}
 			else if (b == row_dlm) {
-				boolean pass = wkr.Write_int(parser, fld_idx, pos, Bry_.X_to_int_or(src, fld_bgn, pos, -1));
+				boolean pass = wkr.Write_int(parser, fld_idx, pos, Bry_.Xto_int_or(src, fld_bgn, pos, -1));
 				if (!pass) throw Dsv_fld_parser_.err_fld_unhandled(this, wkr, fld_idx, src, fld_bgn, pos);
 				wkr.Commit_itm(parser, pos);
 				int rv = pos + 1; // row_dlm is always 1 byte

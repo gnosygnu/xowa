@@ -37,6 +37,6 @@ class GfsCoreFxt {
 	public void tst_MsgStr(GfoMsg msg, Object expd) {
 		GfsCtx ctx = GfsCtx.new_();
 		Object actl = core.ExecOne(ctx, msg);
-		Tfds.Eq(Object_.XtoStr_OrNullStr(expd), Object_.XtoStr_OrNullStr(actl));
+		Tfds.Eq(Object_.Xto_str_strict_or_null_mark(expd), Object_.Xto_str_strict_or_null_mark(actl));
 	}
 }

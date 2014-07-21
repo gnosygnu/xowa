@@ -157,7 +157,7 @@ class Sql_cmd_wtr_ansi implements Sql_cmd_wtr {
 			||	valType == Integer.class	|| valType == Long.class
 			||	valType == Float.class || valType == Double.class
 			)
-			sb.Add(Object_.XtoStr_OrNull(val));
+			sb.Add(Object_.Xto_str_strict_or_null(val));
 				else if (valType == DateAdp.class)
 			XtoSqlVal_DateAdp(sb, prm, (DateAdp)val);
 		else if (valType == DecimalAdp.class) {
@@ -167,7 +167,7 @@ class Sql_cmd_wtr_ansi implements Sql_cmd_wtr {
 		//		else if (valType == System.Enum.class)
 //			sb.Add_any(Enm_.XtoInt(val));				// save enum as 0 or 1, since (a) no db supports enum datatype; (b) names are fungible; (c) int is less space than name
 				else {
-			String valString = Object_.XtoStr_OrNull(val);
+			String valString = Object_.Xto_str_strict_or_null(val);
 			XtoSqlVal_Str(sb, prm, valString);
 		}
 	}
@@ -268,7 +268,7 @@ class Sql_cmd_wtr_ansi implements Sql_cmd_wtr {
 				sb.Add(fld.Name());
 				sb.Add("=");
 				if (quote) sb.Add("'");
-				sb.Add(Object_.XtoStr_OrEmpty(val));
+				sb.Add(Object_.Xto_str_strict_or_empty(val));
 				if (quote) sb.Add("'");
 			}
 			sb.Add(")");

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 interface Pxd_itm_int_interface extends Pxd_itm {
-	int X_to_int_or(int or);
+	int Xto_int_or(int or);
 }
 class Pxd_itm_int extends Pxd_itm_base implements Pxd_itm_int_interface {
 	public Pxd_itm_int(int ary_idx, int digits, int val) {
@@ -39,7 +39,7 @@ class Pxd_itm_int extends Pxd_itm_base implements Pxd_itm_int_interface {
 	@Override public byte Tkn_tid() {return Pxd_itm_.TypeId_int;}
 	@Override public int Eval_idx() {return eval_idx;} private int eval_idx = 99;
 	public int Val() {return val;} public Pxd_itm_int Val_(int v) {val = v; return this;} private int val;
-	public int X_to_int_or(int or) {return val;}
+	public int Xto_int_or(int or) {return val;}
 	public int Digits() {return digits;} private int digits;
 	@Override public void Time_ini(DateAdpBldr bldr) {
 		if (this.Seg_idx() == Pxd_itm_base.Seg_idx_skip) return;
@@ -291,7 +291,7 @@ class Pxd_itm_int_ {
 							factor = -1;
 						}
 						state.Seg_idxs_((Pxd_itm_base)itm, Pxd_itm_base.Seg_idx_skip, -1);
-						return itm_int.X_to_int_or(or) * factor;
+						return itm_int.Xto_int_or(or) * factor;
 					}
 					break;
 			}
@@ -306,7 +306,7 @@ class Pxd_itm_int_ {
 				itm.Val_(val + (val > 69 ? 1900 : 2000));	// ASSUME that 70 refers to 1970 and 69 refers to 2069
 				state.Seg_idxs_(itm, DateAdp_.SegIdx_year);
 				return false;
-			case 3:	// NOTE: 3 digit numbers are valid years; MW relies on PHP time parse which always zero-pad numbers; EX.WP: Battle of the Catalaunian Plains; {{#time:Y|June 20, 451}}
+			case 3:	// NOTE: 3 digit numbers are valid years; MW relies on PHP time parse which always zero-pad numbers; PAGE:en.w:Battle of the Catalaunian Plains; {{#time:Y|June 20, 451}}
 			case 4:
 				state.Seg_idxs_(itm, DateAdp_.SegIdx_year);
 				return false;

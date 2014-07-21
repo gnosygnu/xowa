@@ -61,7 +61,7 @@ class Xop_pipe_lxr implements Xop_lxr {
 				}
 				else {
 					Xop_tblw_tkn cur_tkn = (Xop_tblw_tkn)ctx.Stack_get_typ(cur_stack_tid);
-					Xop_tblw_wkr.Atrs_make(ctx, src, root, ctx.Tblw(), cur_tkn);
+					Xop_tblw_wkr.Atrs_make(ctx, src, root, ctx.Tblw(), cur_tkn, Bool_.N);
 					return cur_pos;
 				}
 			case Xop_tkn_itm_.Tid_vnt:

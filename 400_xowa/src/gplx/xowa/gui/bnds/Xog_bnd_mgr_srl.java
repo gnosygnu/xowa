@@ -55,8 +55,8 @@ public class Xog_bnd_mgr_srl extends Dsv_wkr_base {
 
 		if (uids == null) Init();
 		Xog_bnd_itm bnd = (Xog_bnd_itm)uids.Fetch(Int_obj_val.new_(uid));
-		int box = Xog_bnd_box_.X_by_gui_str(String_.new_utf8_(box_bry));
-		IptArg ipt = IptArg_.parse_or_none_(bnd_parser.X_to_gfui(String_.new_utf8_(ipt_bry)));
+		int box = Xog_bnd_box_.Xby_gui_str(String_.new_utf8_(box_bry));
+		IptArg ipt = IptArg_.parse_or_none_(bnd_parser.Xto_gfui(String_.new_utf8_(ipt_bry)));
 		bnd_mgr.Del(bnd, ipt);
 		Xog_bnd_mgr_srl.Update_cfg(app, bnd, box, ipt);
 		uid = -1; box_bry = ipt_bry = null;

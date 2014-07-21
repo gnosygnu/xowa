@@ -27,7 +27,7 @@ public class Err_ {	//_20110415
 	public static Err err_(Exception e, String fmt, Object... args) {return Err.exc_(e, String_.Format(fmt, args));}
 	public static Err cast_(Exception ignore, Class<?> t, Object o) {
 		String o_str = "";
-		try {o_str = Object_.XtoStr_OrNullStr(o);}
+		try {o_str = Object_.Xto_str_strict_or_null_mark(o);}
 		catch (Exception e) {Err_.Noop(e); o_str = "<ERROR>";}
 		return cast_manual_msg_(ignore, t, o_str);
 	}
@@ -46,7 +46,7 @@ public class Err_ {	//_20110415
 		return Err.hdr_("type mismatch")
 			.Add("expdType", ClassAdp_.FullNameOf_type(t))
 			.Add("actlType", ClassAdp_.NameOf_obj(o))
-			.Add("actlObj", Object_.XtoStr_OrNullStr(o))
+			.Add("actlObj", Object_.Xto_str_strict_or_null_mark(o))
 			;
 	}
 	public static Err missing_idx_(int idx, int len)				{return Err.hdr_("index is out of bounds").Add("idx", idx).Add("len", len);}

@@ -80,7 +80,7 @@ public class GfmlDataWtr extends DataWtr_base implements DataWtr {
 	}
 	String XtoStr(Object obj) {
 		if (obj == null) return "''";
-		String s = Object_.XtoStr_OrEmpty(obj);
+		String s = Object_.Xto_str_strict_or_empty(obj);
 		return String_.Concat("'", String_.Replace(s, "'", "''"), "'");
 	}
 	GfmlTkn AddTkn_raw(String raw) {return AddTkn(raw, raw);}

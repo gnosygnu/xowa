@@ -199,9 +199,11 @@ public class Xog_tab_itm implements GfoInvkAble {
 			catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.cmds: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_brief(e));}
 		}
 		try {
-			Xop_lnki_logger_redlinks_wkr redlinks_wkr = new Xop_lnki_logger_redlinks_wkr(win_itm, page);
-			ThreadAdp_.invk_(redlinks_wkr, gplx.xowa.parsers.lnkis.redlinks.Xop_lnki_logger_redlinks_wkr.Invk_run).Start();
-			usr_dlg.Prog_none("", "imgs.done", "");
+			if (page.Tab() != null) {	// needed b/c Preview has page.Tab of null which causes null_ref error in redlinks
+				Xop_lnki_logger_redlinks_wkr redlinks_wkr = new Xop_lnki_logger_redlinks_wkr(win_itm, page);
+				ThreadAdp_.invk_(redlinks_wkr, gplx.xowa.parsers.lnkis.redlinks.Xop_lnki_logger_redlinks_wkr.Invk_run).Start();
+				usr_dlg.Prog_none("", "imgs.done", "");
+			}
 		}	catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.redlinks: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_brief(e));}
 		try {app.File_mgr().Cache_mgr().Compress_check();}
 		catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.cache: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_brief(e));}

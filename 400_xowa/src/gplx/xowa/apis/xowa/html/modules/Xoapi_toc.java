@@ -21,7 +21,7 @@ public class Xoapi_toc implements GfoInvkAble {
 	}
 	public boolean Collapsed() {return collapsed;} private boolean collapsed = false;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_collapsed))	 		return Yn.X_to_str(collapsed);
+		if		(ctx.Match(k, Invk_collapsed))	 		return Yn.Xto_str(collapsed);
 		else if	(ctx.Match(k, Invk_collapsed_))	 		collapsed = m.ReadYn("v");
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;

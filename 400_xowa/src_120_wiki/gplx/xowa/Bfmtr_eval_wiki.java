@@ -21,7 +21,7 @@ public class Bfmtr_eval_wiki implements Bry_fmtr_eval_mgr {
 	public boolean Enabled() {return enabled;} public void Enabled_(boolean v) {enabled = v;} private boolean enabled = true;
 	public byte[] Eval(byte[] cmd) {
 		Object rslt = GfsCore._.Exec_bry(cmd, wiki);
-		return Bry_.new_utf8_(Object_.XtoStr_OrNullStr(rslt));
+		return Bry_.new_utf8_(Object_.Xto_str_strict_or_null_mark(rslt));
 	}
 	public void Eval_mgr_(Bry_fmtr... fmtrs) {
 		int fmtrs_len = fmtrs.length;

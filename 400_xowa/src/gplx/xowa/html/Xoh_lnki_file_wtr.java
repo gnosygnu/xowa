@@ -167,7 +167,7 @@ public class Xoh_lnki_file_wtr {
 //					if (lnki_img_type == Xop_lnki_type.Id_none) bfr.Add(Bry_div_float_none).Add_byte_nl();
 				switch (lnki.Align_h()) {
 					case Xop_lnki_align_h.Left:		bfr.Add(Bry_div_float_left).Add_byte_nl();	break;
-					case Xop_lnki_align_h.Right:		bfr.Add(Bry_div_float_right).Add_byte_nl();	break;
+					case Xop_lnki_align_h.Right:	bfr.Add(Bry_div_float_right).Add_byte_nl();	break;
 					case Xop_lnki_align_h.None:		bfr.Add(Bry_div_float_none).Add_byte_nl();	break;
 				}
 				Arg_nde_tkn lnki_link_tkn = lnki.Link_tkn();
@@ -178,6 +178,7 @@ public class Xoh_lnki_file_wtr {
 					byte[] link_ref = link_tkn.Dat_to_bry(src);
 					byte[] link_ref_new = tmp_link_parser.Parse(tmp_bfr, tmp_url, wiki, link_ref, lnki_href);
 					link_ref = link_ref_new == null ? lnki_href: link_ref_new;	// if parse fails, then assign to lnki_href; EX:link={{{1}}}
+					link_ref = ctx.App().Encoder_mgr().Href_quotes().Encode(link_ref);	// must encode quotes; PAGE:en.w:List_of_cultural_heritage_sites_in_Punjab,_Pakistan; DATE:2014-07-16
 					lnki_ttl = Bry_.Coalesce(lnki_ttl, tmp_link_parser.Html_xowa_ttl());
 					html_mgr.Lnki_full_image().Bld_bfr_many(bfr, elem_id, link_ref, html_view_src, xfer_itm.Html_w(), xfer_itm.Html_h(), lnki_alt_text, lnki_ttl, tmp_link_parser.Html_anchor_cls(), tmp_link_parser.Html_anchor_rel(), anchor_title, Img_cls(lnki));
 				}

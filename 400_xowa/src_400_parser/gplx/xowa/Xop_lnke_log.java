@@ -18,5 +18,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 public class Xop_lnke_log {
 	private static final Gfo_msg_grp owner = Gfo_msg_grp_.new_(Xoa_app_.Nde, "lnke");
-	public static final Gfo_msg_itm Dangling = Gfo_msg_itm_.new_note_(owner, "dangling");	// NOTE: WP.BOT:YOBOT;EX.WP: Pan_flute
+	public static final Gfo_msg_itm Dangling = Gfo_msg_itm_.new_note_(owner, "dangling");	// NOTE: WP.BOT:YOBOT;PAGE:en.w:Pan_flute
 }

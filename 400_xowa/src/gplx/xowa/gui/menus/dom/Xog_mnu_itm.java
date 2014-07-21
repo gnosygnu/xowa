@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.menus.dom; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*; import gplx.xowa.gui.menus.*;
-import gplx.gfui.*; import gplx.xowa.gui.cmds.*;
+import gplx.gfui.*; import gplx.xowa.gui.cmds.*; import gplx.xowa.langs.msgs.*;
 public class Xog_mnu_itm extends Xog_mnu_base {
 	private Xoa_gui_mgr gui_mgr;
 	public Xog_mnu_itm(Xoa_gui_mgr gui_mgr, String key) {
@@ -45,9 +45,9 @@ public class Xog_mnu_itm extends Xog_mnu_base {
 		return this;
 	}
 	public void Init_by_lang(Xol_lang lang) {
-		this.name			= Pf_msg_mgr.Get_msg_val_gui_or(lang, Xog_cmd_itm_.Msg_pre_api, key_bry, Xog_cmd_itm_.Msg_suf_name, name);	// NOTE: custom cmds must use Get_val_or, not Get_val_or_null; DATE:2014-05-30
-		this.shortcut		= Pf_msg_mgr.Get_msg_val_gui_or(lang, Xog_cmd_itm_.Msg_pre_api, key_bry, Xog_cmd_itm_.Msg_suf_letter, shortcut);
-		this.img_nest		= Img_nest_of(Pf_msg_mgr.Get_msg_val_gui_or(lang, Xog_cmd_itm_.Msg_pre_api, key_bry, Xog_cmd_itm_.Msg_suf_image, ""));
+		this.name			= Xol_msg_mgr_.Get_msg_val_gui_or(lang, Xog_cmd_itm_.Msg_pre_api, key_bry, Xog_cmd_itm_.Msg_suf_name, name);	// NOTE: custom cmds must use Get_val_or, not Get_val_or_null; DATE:2014-05-30
+		this.shortcut		= Xol_msg_mgr_.Get_msg_val_gui_or(lang, Xog_cmd_itm_.Msg_pre_api, key_bry, Xog_cmd_itm_.Msg_suf_letter, shortcut);
+		this.img_nest		= Img_nest_of(Xol_msg_mgr_.Get_msg_val_gui_or(lang, Xog_cmd_itm_.Msg_pre_api, key_bry, Xog_cmd_itm_.Msg_suf_image, ""));
 		this.gui_text		= Gui_text_calc(name, shortcut);
 	}
 	public void Init_by_custom(String name, String shortcut, String img_nest_str) {

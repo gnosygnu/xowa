@@ -27,12 +27,12 @@ public class Xob_text_db_prep extends Xob_itm_basic_base implements Xob_cmd {
 	}
 	public void Cmd_run() {
 		Xodb_fsys_mgr db_fsys_mgr = wiki.Db_mgr_as_sql().Fsys_mgr();
-		String page_db_url = db_fsys_mgr.Get_tid_root(Xodb_file.Tid_core).Url().Raw();
+		String page_db_url = db_fsys_mgr.Get_tid_root(Xodb_file_tid_.Tid_core).Url().Raw();
 		db_files = db_fsys_mgr.Ary();
 		int len = db_files.length;
 		for (int i = 0; i < len; i++) {
 			Xodb_file db_file = db_files[i];
-			if (db_file.Tid() == Xodb_file.Tid_text)
+			if (db_file.Tid() == Xodb_file_tid_.Tid_text)
 				Prep_db(page_db_url, db_file);
 		}
 	}
@@ -40,7 +40,7 @@ public class Xob_text_db_prep extends Xob_itm_basic_base implements Xob_cmd {
 		int len = db_files.length;
 		for (int i = 0; i < len; i++) {
 			Xodb_file db_file = db_files[i];
-			if (db_file.Tid() == Xodb_file.Tid_text)
+			if (db_file.Tid() == Xodb_file_tid_.Tid_text)
 				db_file.Rls();
 		}
 		db_files = null;

@@ -25,10 +25,12 @@ public class Xow_popup_parser_data {
 	public int Words_found() {return words_found;} private int words_found;
 	public Bry_bfr Wrdx_bfr() {return wrdx_bfr;} private Bry_bfr wrdx_bfr = Bry_bfr.reset_(255);
 	public Xow_popup_word[] Words_found_ary() {return (Xow_popup_word[])words_found_list.XtoAryAndClear(Xow_popup_word.class);} private ListAdp words_found_list = ListAdp_.new_();
+	public int Tmpl_loop_count() {return tmpl_loop_count;} private int tmpl_loop_count;
+	public void Tmpl_loop_count_add() {++tmpl_loop_count;}
 	private Xow_popup_itm popup_itm;
 	public boolean Html_restricted() {return html_restricted;} private boolean html_restricted;
 	public void Init(Xow_popup_cfg cfg, Xow_popup_itm popup_itm, int tmpl_len) {
-		words_found = 0;
+		words_found = tmpl_loop_count= 0;
 		words_found_list.Clear();
 		wrdx_bfr.Clear();
 

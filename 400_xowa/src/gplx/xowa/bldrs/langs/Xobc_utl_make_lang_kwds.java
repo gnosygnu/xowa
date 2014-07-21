@@ -57,7 +57,7 @@ public class Xobc_utl_make_lang_kwds implements GfoInvkAble, Xol_lang_transform 
 				tmp.Clear();
 				if (kwd_grp == null) {
 					kwd_grp = lang.Kwd_mgr().Get_or_new(kwd_id);
-					kwd_grp.Srl_load(false, Bry_.Ary_empty);	// ASSUME: kwd explicitly added, but does not exist in language; default to !case_match
+					kwd_grp.Srl_load(Bool_.N, Bry_.Ary_empty);	// ASSUME: kwd explicitly added, but does not exist in language; default to !case_match
 				}
 
 				for (Xol_kwd_itm itm : kwd_grp.Itms())

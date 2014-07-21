@@ -28,7 +28,7 @@ public class Xog_html_mgr implements GfoInvkAble {
 	public String Auto_focus_id() {return auto_focus_id;} private String auto_focus_id = "";
 	public byte[] Css_xtn() {return css_xtn;} public void Css_xtn_(byte[] v) {css_xtn = v;} private byte[] css_xtn = Bry_.Empty;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_javascript_enabled))			return Yn.X_to_str(javascript_enabled);
+		if		(ctx.Match(k, Invk_javascript_enabled))			return Yn.Xto_str(javascript_enabled);
 		else if	(ctx.Match(k, Invk_javascript_enabled_))		Javascript_enabled_(m.ReadYn("v"));
 		else if	(ctx.Match(k, Invk_auto_focus_id_))				auto_focus_id = m.ReadStr("v");
 		else if	(ctx.Match(k, Invk_css_xtn))					return css_xtn;

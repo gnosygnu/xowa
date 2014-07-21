@@ -42,7 +42,7 @@ public class Xoa_available_wikis_mgr implements GfoInvkAble {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_itms_as_html))		return this.Itms_as_html();
 		else if	(ctx.Match(k, Invk_itms_refresh))		Itms_refresh();
-		else if	(ctx.Match(k, Invk_visible))			return Yn.X_to_str(visible);
+		else if	(ctx.Match(k, Invk_visible))			return Yn.Xto_str(visible);
 		else if	(ctx.Match(k, Invk_visible_))			visible = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_visible_toggle))		{visible = !visible; app.Gui_mgr().Browser_win().Active_html_box().Html_js_eval_proc("xowa-portal-wikis-visible-toggle", Bool_.XtoStr_lower(visible));}
 		else if	(ctx.Match(k, Invk_itms_as_html_fmtr_))	itms_as_html_fmtr.Fmt_(m.ReadBry("v"));

@@ -78,6 +78,10 @@ public class Xop_ctx {
 		tmpl_args_parsing = false;
 		return this;
 	}
+	public String Page_url_str() {
+		try {return cur_page.Url().Xto_full_str_safe();}
+		catch (Exception e) {Err_.Noop(e); return "page_url shouldn't fail";}
+	}
 	public void Page_bgn(Xop_root_tkn root, byte[] src) {
 		this.Msg_log().Clear(); cur_tkn_tid = Xop_tkn_itm_.Tid_null;
 		empty_ignored = false;

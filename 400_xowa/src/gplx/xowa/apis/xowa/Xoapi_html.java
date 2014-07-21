@@ -24,10 +24,12 @@ public class Xoapi_html implements GfoInvkAble {
 	}
 	public Xoapi_tidy		Tidy() {return tidy;} private Xoapi_tidy tidy = new Xoapi_tidy();
 	public Xoapi_modules	Modules() {return modules;} private Xoapi_modules modules = new Xoapi_modules();
+	public Xoapi_skins		Skins() {return skins;} private Xoapi_skins skins = new Xoapi_skins();
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_tidy)) 						return tidy;
 		else if	(ctx.Match(k, Invk_modules)) 					return modules;
+		else if	(ctx.Match(k, Invk_skins)) 						return skins;
 		else	return GfoInvkAble_.Rv_unhandled;
 	}
-	private static final String Invk_tidy = "tidy", Invk_modules = "modules";
+	private static final String Invk_tidy = "tidy", Invk_modules = "modules", Invk_skins = "skins";
 }

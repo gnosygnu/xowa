@@ -165,13 +165,13 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 		String_bldr sb = String_bldr_.new_();
 		int aryLen = Array_.Len(ary);
 		for (int i = 0; i < aryLen; i++)
-			sb.Add_many("'", Object_.XtoStr_OrNullStr(ary[i]), "'", " ");
+			sb.Add_many("'", Object_.Xto_str_strict_or_null_mark(ary[i]), "'", " ");
 		WriteText(sb.XtoStr() + String_.CrLf);
 	}
 }
 class TfdsEqListItmStr_cls_default implements TfdsEqListItmStr {
 	public String XtoStr(Object cur, Object actl) {
-		return Object_.XtoStr_OrNullStr(cur);
+		return Object_.Xto_str_strict_or_null_mark(cur);
 	}
 	public static final TfdsEqListItmStr_cls_default _ = new TfdsEqListItmStr_cls_default(); TfdsEqListItmStr_cls_default() {}
 }
@@ -230,7 +230,7 @@ class TfdsMsgBldr {
 		if (s != null) return String_.Concat("'", s, "'"); // if Object is String, put quotes around it for legibility
 		XtoStrAble xtoStrAble = XtoStrAble_.as_(obj);
 		if (xtoStrAble != null) return xtoStrAble.XtoStr();
-		return Object_.XtoStr_OrNullStr(obj);
+		return Object_.Xto_str_strict_or_null_mark(obj);
 	}
 	String WrapMsg(String text) {
 		return String_.Concat(String_.CrLf

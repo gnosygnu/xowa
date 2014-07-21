@@ -43,7 +43,7 @@ public class Xol_mw_lang_parser {
 			if (lang.Fallback_bry() != null)	// NOTE: fallback will often be null; EX: en
 				bldr.Add_proc_cont_one(Xol_lang.Invk_fallback_load).Add_parens_str(lang.Fallback_bry()).Add_nl();
 			if (!lang.Dir_ltr())				// NOTE: only save dir_ltr if false; EX: en
-				bldr.Add_proc_cont_one(Xol_lang.Invk_dir_rtl_).Add_parens_str(Yn.X_to_str(!lang.Dir_ltr())).Add_nl();
+				bldr.Add_proc_cont_one(Xol_lang.Invk_dir_rtl_).Add_parens_str(Yn.Xto_str(!lang.Dir_ltr())).Add_nl();
 			Xol_lang_srl.Save_ns_grps(bldr, lang.Ns_names(), Xol_lang.Invk_ns_names);
 			Xol_lang_srl.Save_ns_grps(bldr, lang.Ns_aliases(), Xol_lang.Invk_ns_aliases);
 			Xol_lang_srl.Save_specials(bldr, lang.Specials_mgr());

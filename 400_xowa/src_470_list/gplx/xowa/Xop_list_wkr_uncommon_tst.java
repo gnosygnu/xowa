@@ -20,7 +20,7 @@ import org.junit.*;
 public class Xop_list_wkr_uncommon_tst {
 	private Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
-	@Test  public void Bug_specified_div() {	// FIX: </div> was not clearing state for lnki; EX.WP:Ananke (moon)
+	@Test  public void Bug_specified_div() {	// FIX: </div> was not clearing state for lnki; PAGE:en.w:Ananke (moon)
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 			(	"<div>"
 			,	"#<i>a"
@@ -39,7 +39,7 @@ public class Xop_list_wkr_uncommon_tst {
 			,	"</ul>"
 			));
 	}
-	@Test  public void Bug_mismatched() {	// FIX: </div> was not clearing state for lnki; EX.WP:Ananke (moon)
+	@Test  public void Bug_mismatched() {	// FIX: </div> was not clearing state for lnki; PAGE:en.w:Ananke (moon)
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 			(	"::a"
 			,	":::1"
@@ -71,7 +71,7 @@ public class Xop_list_wkr_uncommon_tst {
 			,	"</dl>"
 			));
 	}
-	@Test  public void Empty_li_ignored() {	// PURPOSE: inner template can cause dupe li; EX.WP: any Calendar day and NYT link; EX: 1/1
+	@Test  public void Empty_li_ignored() {	// PURPOSE: inner template can cause dupe li; PAGE:en.w:any Calendar day and NYT link; EX: 1/1
 		fxt.Init_para_y_();
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 			(	"*a"
@@ -91,7 +91,7 @@ public class Xop_list_wkr_uncommon_tst {
 			));
 		fxt.Init_para_n_();
 	}
-	@Test  public void List_in_tblw() {	// PURPOSE: list inside table should not be close outer list; EX.WP: Cato the Elder
+	@Test  public void List_in_tblw() {	// PURPOSE: list inside table should not be close outer list; PAGE:en.w:Cato the Elder
 		fxt.Init_para_y_();
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 			(	"*a"
@@ -164,7 +164,7 @@ public class Xop_list_wkr_uncommon_tst {
 		, "b"
 		));		
 	}
-	@Test  public void Dt_dd_colon_in_lnki() {	// PURPOSE: "; [[Portal:a]]" should not split lnki; EX.WP: Wikipedia:WikiProject Military history/Operation Majestic Titan; "; [[Wikipedia:WikiProject Military history/Operation Majestic Titan/Phase I|Phase I]]: a b"
+	@Test  public void Dt_dd_colon_in_lnki() {	// PURPOSE: "; [[Portal:a]]" should not split lnki; PAGE:en.w:Wikipedia:WikiProject Military history/Operation Majestic Titan; "; [[Wikipedia:WikiProject Military history/Operation Majestic Titan/Phase I|Phase I]]: a b"
 		fxt.Init_para_y_();
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 			(	";[[Portal:a]]"
@@ -177,7 +177,7 @@ public class Xop_list_wkr_uncommon_tst {
 			));
 		fxt.Init_para_n_();
 	}			
-	@Test  public void Max_list_depth() {	// PURPOSE: 256+ * caused list parser to fail; ignore; EX.WP:Bariatric surgery
+	@Test  public void Max_list_depth() {	// PURPOSE: 256+ * caused list parser to fail; ignore; PAGE:en.w:Bariatric surgery
 		String multiple = String_.Repeat("*", 300);
 		fxt.Test_parse_page_all_str(multiple
 				,	String_.Concat_lines_nl_skip_last

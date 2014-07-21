@@ -20,7 +20,7 @@ import org.junit.*;
 import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.lib.*;
 public class Blacklist_scrib_lib_tst {
 	@Before public void init() {
-		fxt.Init_scrib_proc();
+		fxt.Clear_for_lib();
 		lib = new Blacklist_scrib_lib().Init();
 	}	private Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt(); private Scrib_lib lib;
 	@Test   public void Exec_test() {

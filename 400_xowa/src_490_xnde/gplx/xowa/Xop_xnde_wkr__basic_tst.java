@@ -20,7 +20,7 @@ import org.junit.*;
 public class Xop_xnde_wkr__basic_tst {
 	private Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
-	@Test  public void Escape_lt() {	// PURPOSE: some templates have unknown tags; EX.WP:PHP
+	@Test  public void Escape_lt() {	// PURPOSE: some templates have unknown tags; PAGE:en.w:PHP
 		fxt.Init_para_y_();
 		fxt.Test_parse_page_wiki_str("a<code><?</code>b", String_.Concat_lines_nl_skip_last
 			(	"<p>a<code>&lt;?</code>b"

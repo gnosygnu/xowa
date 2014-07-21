@@ -31,7 +31,7 @@ public abstract class Xox_mgr_base implements Xox_mgr {
 	@gplx.Virtual public void Xtn_init_by_app(Xoa_app app) {}
 	@gplx.Virtual public void Xtn_init_by_wiki(Xow_wiki wiki) {}
 	@gplx.Virtual public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_enabled))			return Yn.X_to_str(enabled);
+		if		(ctx.Match(k, Invk_enabled))			return Yn.Xto_str(enabled);
 		else if	(ctx.Match(k, Invk_enabled_))			enabled = m.ReadYn("v");
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
@@ -40,15 +40,22 @@ public abstract class Xox_mgr_base implements Xox_mgr {
 	public static void Xtn_write_escape(Xoa_app app, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {Xtn_write_escape(app, bfr, src, xnde.Src_bgn(), xnde.Src_end());}
 	public static void Xtn_write_escape(Xoa_app app, Bry_bfr bfr, byte[] src)					{Xtn_write_escape(app, bfr, src, 0, src.length);}
 	public static void Xtn_write_escape(Xoa_app app, Bry_bfr bfr, byte[] src, int bgn, int end)	{Xoh_html_wtr_escaper.Escape(app, bfr, src, bgn, end, true, false);}
-	public static void Xtn_write_unsupported(Xoa_app app, Xop_ctx ctx, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde, boolean parse_content) {
+	public static void Xtn_write_unsupported(Xoa_app app, Xop_ctx ctx, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde, byte parse_content_tid) {
 		bfr.Add(Xowa_not_implemented);
 		Xox_mgr_base.Xtn_write_escape(app, bfr, src, xnde.Tag_open_bgn(), xnde.Tag_open_end());
 		if (xnde.CloseMode() != Xop_xnde_tkn.CloseMode_pair) return;	// inline node
-		if (parse_content)
-			bfr.Add(ctx.Wiki().Parser().Parse_text_to_html(ctx, Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn())));
-		else
-			Xox_mgr_base.Xtn_write_escape(app, bfr, src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
+		switch (parse_content_tid) {
+			case Parse_content_tid_escape:
+				Xox_mgr_base.Xtn_write_escape(app, bfr, src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
+				break;
+			case Parse_content_tid_html:
+				bfr.Add(ctx.Wiki().Parser().Parse_text_to_html(ctx, Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn())));
+				break;
+			case Parse_content_tid_none: default:
+				break;
+		}
 		Xox_mgr_base.Xtn_write_escape(app, bfr, src, xnde.Tag_close_bgn(), xnde.Tag_close_end());
 	}
 	private static final byte[] Xowa_not_implemented = Bry_.new_ascii_("XOWA does not support this extension: ");
+	public static final byte Parse_content_tid_none = 0, Parse_content_tid_escape = 1, Parse_content_tid_html = 2;
 }

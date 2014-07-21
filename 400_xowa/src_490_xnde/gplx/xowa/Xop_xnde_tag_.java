@@ -133,8 +133,9 @@ public class Xop_xnde_tag_ {
 , Tid_xowa_html = 108
 , Tid_xowa_tag_bgn = 109
 , Tid_xowa_tag_end = 110
+, Tid_quiz = 111
 	;
-	public static final int _MaxLen = 111;
+	public static final int _MaxLen = 112;
 	public static final Xop_xnde_tag[] Ary = new Xop_xnde_tag[_MaxLen];
 	private static Xop_xnde_tag new_(int id, String name) {
 		Xop_xnde_tag rv = new Xop_xnde_tag(id, name);
@@ -217,7 +218,7 @@ public class Xop_xnde_tag_ {
 , Tag_hiero = new_(Tid_hiero, "hiero").Xtn_()
 , Tag_inputBox = new_(Tid_inputBox, "inputBox").Xtn_()
 , Tag_pages = new_(Tid_pages, "pages").Xtn_()
-, Tag_section = new_(Tid_section, "section").Xtn_()
+, Tag_section = new_(Tid_section, "section").Xtn_().Langs_(Xol_lang_itm_.Id_de, "Abschnitt").Langs_(Xol_lang_itm_.Id_he, "קטע").Langs_(Xol_lang_itm_.Id_pt, "trecho") // DATE:2014-07-18
 , Tag_pagequality = new_(Tid_pagequality, "pagequality").Xtn_()
 , Tag_pagelist = new_(Tid_pagelist, "pagelist").Xtn_()
 , Tag_categoryList = new_(Tid_categoryList, "categoryList").Xtn_()
@@ -253,5 +254,6 @@ public class Xop_xnde_tag_ {
 , Tag_xowa_html = new_(Tid_xowa_html, "xowa_html").Xtn_()
 , Tag_xowa_tag_bgn = new_(Tid_xowa_tag_bgn, "xtag_bgn").Xtn_()
 , Tag_xowa_tag_end = new_(Tid_xowa_tag_end, "xtag_end").Xtn_()
+, Tag_quiz = new_(Tid_quiz, "quiz").Xtn_()
 	;
 }

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.core.btries.*;
-class Xop_tblw_lxr implements Xop_lxr {
+public class Xop_tblw_lxr implements Xop_lxr {
 	public byte Lxr_tid() {return Xop_lxr_.Tid_tblw;}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		int rv = Handle_bang(wlxr_type, ctx, ctx.Tkn_mkr(), root, src, src_len, bgn_pos, cur_pos);

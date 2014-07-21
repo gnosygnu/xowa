@@ -41,7 +41,7 @@ class Xob_dump_src_ttl implements Xob_parse_all_db {
 		if (len == 1) return new Xodb_file[] {file_ary[0]};	// single file: return core; note that there are no Tid = Text
 		for (int i = 0; i < len; i++) {
 			Xodb_file file = file_ary[i];
-			if (file.Tid() == Xodb_file.Tid_text)
+			if (file.Tid() == Xodb_file_tid_.Tid_text)
 				text_files_list.Add(file);
 		}
 		return (Xodb_file[])text_files_list.XtoAryAndClear(Xodb_file.class);
@@ -54,7 +54,7 @@ class Xob_dump_src_id {
 	public Xob_dump_src_id Init(Xow_wiki wiki, byte redirect, int size_max) {
 		this.db_mgr = wiki.Db_mgr_as_sql(); this.redirect = redirect;
 		this.size_max = size_max;
-		page_db_url = db_mgr.Fsys_mgr().Get_tid_root(Xodb_file.Tid_core).Url().Raw();
+		page_db_url = db_mgr.Fsys_mgr().Get_tid_root(Xodb_file_tid_.Tid_core).Url().Raw();
 		return this;
 	}
 	public void Get_pages(ListAdp list, int text_db_idx, int cur_ns, int prv_id) {

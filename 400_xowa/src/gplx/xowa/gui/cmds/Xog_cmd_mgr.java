@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
-import gplx.xowa.apis.xowa.*;
+import gplx.xowa.apis.xowa.*; import gplx.xowa.langs.msgs.*;
 public class Xog_cmd_mgr {
 	public void Init_by_kit(Xoa_app app) {
 		invk_mgr.Ctor(app, this);
@@ -30,7 +30,7 @@ public class Xog_cmd_mgr {
 		Xol_lang lang = app.User().Lang();
 		for (int i = 0; i < len; i++) {
 			Xog_cmd_ctg itm = ary[i];
-			itm.Name_(Pf_msg_mgr.Get_msg_val_gui_or_null(lang, Xog_cmd_itm_.Msg_pre_ctg, itm.Key_bry(), Xog_cmd_itm_.Msg_suf_name));
+			itm.Name_(Xol_msg_mgr_.Get_msg_val_gui_or_null(lang, Xog_cmd_itm_.Msg_pre_ctg, itm.Key_bry(), Xog_cmd_itm_.Msg_suf_name));
 		}
 	}
 	private void Load_cmd_msgs(Xoa_app app) {
@@ -38,8 +38,8 @@ public class Xog_cmd_mgr {
 		Xol_lang lang = app.User().Lang();
 		for (int i = 0; i < len; i++) {
 			Xog_cmd_itm itm = this.Get_at(i);
-			itm.Name_(Pf_msg_mgr.Get_msg_val_gui_or_null(lang, Xog_cmd_itm_.Msg_pre_api, itm.Key_bry(), Xog_cmd_itm_.Msg_suf_name));
-			itm.Tip_(Pf_msg_mgr.Get_msg_val_gui_or_null(lang, Xog_cmd_itm_.Msg_pre_api, itm.Key_bry(), Xog_cmd_itm_.Msg_suf_tip));
+			itm.Name_(Xol_msg_mgr_.Get_msg_val_gui_or_null(lang, Xog_cmd_itm_.Msg_pre_api, itm.Key_bry(), Xog_cmd_itm_.Msg_suf_name));
+			itm.Tip_(Xol_msg_mgr_.Get_msg_val_gui_or_null(lang, Xog_cmd_itm_.Msg_pre_api, itm.Key_bry(), Xog_cmd_itm_.Msg_suf_tip));
 		}
 	}
 	public int Len() {return Xog_cmd_itm_.Regy_len();}

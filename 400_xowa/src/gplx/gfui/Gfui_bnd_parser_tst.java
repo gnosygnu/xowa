@@ -48,9 +48,9 @@ class Gfui_bnd_parser_fxt {
 		parser = Gfui_bnd_parser.new_en_();
 	}
 	public void Test_x_to_norm(String key, String expd) {
-		Tfds.Eq(expd, parser.X_to_norm(key));
+		Tfds.Eq(expd, parser.Xto_norm(key));
 	}
 	public void Test_x_to_gfui(String key, String expd) {
-		Tfds.Eq(expd, parser.X_to_gfui(key));
+		Tfds.Eq(expd, parser.Xto_gfui(key));
 	}
 }

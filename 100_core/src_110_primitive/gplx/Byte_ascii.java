@@ -56,7 +56,7 @@ public class Byte_ascii {
 	public static boolean Is_num(byte b) {
 		return b > Byte_ascii.Slash && b < Byte_ascii.Colon;
 	}
-	public static int X_to_digit(byte b) {return b - Byte_ascii.Num_0;}
+	public static int Xto_digit(byte b) {return b - Byte_ascii.Num_0;}
 	public static byte Case_upper(byte b) {
 		return b > 96 && b < 123
 			? (byte)(b - 32)

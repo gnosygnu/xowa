@@ -33,7 +33,7 @@ public class Xob_wiki_redirect_cmd extends Xob_dump_mgr_base {
 		this.db_mgr = wiki.Db_mgr_as_sql();
 		Xoa_app app = bldr.App();
 		redirect_mgr = wiki.Redirect_mgr();
-		encoder = app.Url_converter_url_ttl();
+		encoder = app.Encoder_mgr().Url_ttl();
 //			app.Usr_dlg().Prog_none("", "", "dropping index: page__title");
 //			db_mgr.Fsys_mgr().Core_provider().Exec_sql("DROP INDEX IF EXISTS page__title");
 //			Sqlite_engine_.Idx_create(app.Usr_dlg(), db_mgr.Fsys_mgr().Core_provider(), "page", Idx_page_title);
@@ -57,7 +57,7 @@ public class Xob_wiki_redirect_cmd extends Xob_dump_mgr_base {
 	@Override public void Exec_end_hook() {
 		provider.Txn_mgr().Txn_end_all();			
 		tbl_redirect.Create_indexes(usr_dlg, provider);
-		tbl_redirect.Update_redirects(provider, db_mgr.Fsys_mgr().Get_url(Xodb_file.Tid_core), 4);
+		tbl_redirect.Update_redirects(provider, db_mgr.Fsys_mgr().Get_url(Xodb_file_tid_.Tid_core), 4);
 	}
 //		private static final Db_idx_itm Idx_page_title = Db_idx_itm.sql_("CREATE UNIQUE INDEX IF NOT EXISTS page__title ON page (page_namespace, page_title, page_id, page_len, page_is_redirect, page_file_idx);");	// PERF:page_id for general queries; PERF: page_len for search_suggest
 }

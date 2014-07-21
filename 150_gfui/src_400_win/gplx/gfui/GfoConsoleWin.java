@@ -109,7 +109,7 @@ class GfoConsoleWinCmds implements GfoInvkAble {
 		try {runMsg = GfsCore._.MsgParser().ParseToMsg(cmd);} catch (Exception e) {statusBox.Text_("invalid gfml " + Err_.Message_gplx(e)); return;}
 		GfsCtx ctx = GfsCtx.new_();
 		Object rv = GfsCore._.ExecMany(ctx, runMsg);
-		resultBox.Text_(Object_.XtoStr_OrEmpty(rv));
+		resultBox.Text_(Object_.Xto_str_strict_or_empty(rv));
 	}
 	void Help() {
 		statusBox.Text_("");
@@ -122,7 +122,7 @@ class GfoConsoleWinCmds implements GfoInvkAble {
 		try {
 		Object rv = GfsCore._.ExecOne(ctx, runMsg);
 		if (rv != GfoInvkAble_.Rv_handled && rv != GfoInvkAble_.Rv_unhandled) {
-			UsrDlg_._.Note(Object_.XtoStr_OrEmpty(rv));
+			UsrDlg_._.Note(Object_.Xto_str_strict_or_empty(rv));
 		}
 //			Results_add(FixNewLines(ctx.Results_XtoStr()));
 		} catch (Exception e) {statusBox.Text_("help failed " + Err_.Message_gplx(e)); return;}

@@ -47,7 +47,7 @@ class Imap_itm_parser {
 			itm_bgn = Bry_finder.Trim_fwd_space_tab(src, itm_end + 1, src_end);					// trim ws at start, and look for first char
 			if (itm_bgn == src_end) break;														// line is entirely ws and terminated by eos; EX: "\n  EOS"
 			itm_end = Bry_finder.Find_fwd_until(src, itm_bgn, src_end, Byte_ascii.NewLine);		// look for \n
-			if (itm_end == Bry_finder.Not_found) itm_end = src_end;								// no \n; make EOS \n
+			if (itm_end == Bry_finder.Not_found) itm_end = src_end;								// no \n; make EOS = \n
 			itm_end = Bry_finder.Trim_bwd_space_tab(src, itm_end, itm_bgn);						// trim any ws at end
 			if (itm_end - itm_bgn == 0) continue;												// line is entirely ws; continue;
 			byte b = src[itm_bgn];
@@ -79,7 +79,7 @@ class Imap_itm_parser {
 	private void Parse_invalid(int itm_bgn, int itm_end) {usr_dlg.Warn_many("", "", "imap has invalid line: page=~{0} line=~{1}", page_url.Xto_full_str_safe(), String_.new_utf8_(src, itm_bgn, itm_end));}
 	private void Parse_desc(int itm_bgn, int itm_end) {itms.Add(new Imap_itm_desc(itm_idx, itm_bgn, itm_end));}
 	private void Parse_shape(byte shape_tid, int itm_bgn, int itm_end, int reqd_pts) {			
-		int num_bgn = -1; // differs from MW parser which loks for link via regx, and then chops off rest; regx is difficult due to lnke; doing opposite approach which is eat numbers until something else
+		int num_bgn = -1; // differs from MW parser which looks for link via regx, and then chops off rest; regx is difficult due to lnke; doing opposite approach which is eat numbers until something else
 		int pos = Bry_finder.Trim_fwd_space_tab(src, itm_bgn, itm_end);
 		boolean reading_numbers = true;
 		while (reading_numbers) {

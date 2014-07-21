@@ -41,7 +41,7 @@ public class Byte_ {
 	public static byte cast_(Object o) {try {return (Byte)o;} catch (Exception e) {throw Err_.type_mismatch_exc_(e, byte.class, o);}}
 	public static byte parse_(String raw) {return Byte.parseByte(raw);}	
 	public static byte int_(int v) {return v > 127 ? (byte)(v - 256) : (byte)v;} // PERF?: (byte)(v & 0xff)
-	public static byte X_to_boolean_byte(boolean v) {
+	public static byte Xto_boolean_byte(boolean v) {
 		return v ? Bool_.Y_byte : Bool_.N_byte;
 	}
 	public static final byte Zero = 0, MaxValue_127 = 127;

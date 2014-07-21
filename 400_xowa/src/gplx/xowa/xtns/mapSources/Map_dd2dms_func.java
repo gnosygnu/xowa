@@ -34,7 +34,7 @@ public class Map_dd2dms_func extends Pf_func_base {
 				switch (((Byte_obj_val)key_tid_obj).Val()) {
 					case Key_tid_plus:		plus = val; break;
 					case Key_tid_minus:		minus = val; break;
-					case Key_tid_precision:	prec = Bry_.X_to_int_or(val, prec); break;
+					case Key_tid_precision:	prec = Bry_.Xto_int_or(val, prec); break;
 				}
 			}
 		}

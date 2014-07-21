@@ -26,7 +26,7 @@ public class Xoapi_history implements GfoInvkAble {
 	public void Goto_recent()		{win.Page__navigate_by_url_bar(app.User().History_mgr().Get_at_last(app));}
 	public void Show()				{win.Page__navigate_by_url_bar("home/wiki/Special:XowaPageHistory");}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_enabled)) 							return Yn.X_to_str(this.Enabled());
+		if		(ctx.Match(k, Invk_enabled)) 							return Yn.Xto_str(this.Enabled());
 		else if	(ctx.Match(k, Invk_enabled_)) 							Enabled_(m.ReadYn("v"));
 		else if	(ctx.Match(k, Invk_goto_recent)) 						this.Goto_recent();
 		else if	(ctx.Match(k, Invk_show)) 								this.Show();

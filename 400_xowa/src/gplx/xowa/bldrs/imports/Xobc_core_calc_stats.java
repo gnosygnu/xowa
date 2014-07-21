@@ -60,7 +60,7 @@ public class Xobc_core_calc_stats extends Xob_itm_basic_base implements Xob_cmd 
 			for (int i = 0; i < len; i++) {
 				if (i != 0) bfr.Add_byte(Byte_ascii.Comma).Add_byte(Byte_ascii.Space);
 				Object val = vals[i];
-				bfr.Add_str(Object_.XtoStr_OrNullStr(val));
+				bfr.Add_str(Object_.Xto_str_strict_or_null_mark(val));
 			}
 			bfr.Add_byte(Byte_ascii.Paren_end);
 		}

@@ -109,7 +109,7 @@ public class Bry__tst {
 		tst_XtoInt("", -1);
 	}
 	void tst_XtoInt(String val, int expd)					{tst_XtoInt(val, -1, expd);}
-	void tst_XtoInt(String val, int or, int expd)			{Tfds.Eq(expd, Bry_.X_to_int_or(Bry_.new_utf8_(val), or));}
+	void tst_XtoInt(String val, int or, int expd)			{Tfds.Eq(expd, Bry_.Xto_int_or(Bry_.new_utf8_(val), or));}
 	void tst_XtoIntBy4Bytes(int expd, byte... ary)	{Tfds.Eq(expd, Bry_.XtoIntBy4Bytes(ary), "XtoInt"); Tfds.Eq_ary(ary, Bry_.XbyInt(expd), "XbyInt");}
 	void tst_ReadCsvStr(String raw, String expd)			{tst_ReadCsvStr(raw, Int_obj_ref.zero_()  , expd);}
 	void tst_ReadCsvStr(String raw, int bgn, String expd)	{tst_ReadCsvStr(raw, Int_obj_ref.new_(bgn), expd);}
@@ -141,21 +141,21 @@ public class Bry__tst {
 		Trim_tst("a  c", 1, 3, "");
 		Trim_tst("  ", 0, 2, "");
 	}	void Trim_tst(String raw, int bgn, int end, String expd) {Tfds.Eq(expd, String_.new_utf8_(Bry_.Trim(Bry_.new_utf8_(raw), bgn, end)));}
-	@Test  public void X_to_int_lax() {
-		tst_X_to_int_lax("12a", 12);
-		tst_X_to_int_lax("1", 1);
-		tst_X_to_int_lax("123", 123);
-		tst_X_to_int_lax("a", 0);
-		tst_X_to_int_lax("-1", -1);
+	@Test  public void Xto_int_lax() {
+		tst_Xto_int_lax("12a", 12);
+		tst_Xto_int_lax("1", 1);
+		tst_Xto_int_lax("123", 123);
+		tst_Xto_int_lax("a", 0);
+		tst_Xto_int_lax("-1", -1);
 	}
-	private void tst_X_to_int_lax(String val, int expd)				{Tfds.Eq(expd, Bry_.X_to_int_or_lax(Bry_.new_utf8_(val), 0, String_.Len(val), 0));}
-	@Test  public void X_to_int_or_trim() {
-		tst_X_to_int_trim("123 "	, 123);
-		tst_X_to_int_trim(" 123"	, 123);
-		tst_X_to_int_trim(" 123 "	, 123);
-		tst_X_to_int_trim(" 1 3 "	, -1);
+	private void tst_Xto_int_lax(String val, int expd)				{Tfds.Eq(expd, Bry_.Xto_int_or_lax(Bry_.new_utf8_(val), 0, String_.Len(val), 0));}
+	@Test  public void Xto_int_or_trim() {
+		tst_Xto_int_trim("123 "	, 123);
+		tst_Xto_int_trim(" 123"	, 123);
+		tst_Xto_int_trim(" 123 "	, 123);
+		tst_Xto_int_trim(" 1 3 "	, -1);
 	}
-	private void tst_X_to_int_trim(String val, int expd)			{Tfds.Eq(expd, Bry_.X_to_int_or_trim(Bry_.new_utf8_(val), 0, String_.Len(val), -1));}
+	private void tst_Xto_int_trim(String val, int expd)			{Tfds.Eq(expd, Bry_.Xto_int_or_trim(Bry_.new_utf8_(val), 0, String_.Len(val), -1));}
 	@Test  public void Compare() {
 		tst_Compare("abcde", 0, 1, "abcde", 0, 1, CompareAble_.Same);
 		tst_Compare("abcde", 0, 1, "abcde", 1, 2, CompareAble_.Less);

@@ -154,9 +154,9 @@ class Move_url_args {
 				switch (((Byte_obj_val)tid_obj).Val()) {
 					case Key_submitted:				submitted = true; break;	// wpMove will only be in query_args if move button is pressed
 					case Key_src_ttl:				src_ttl = val_bry; break;
-					case Key_trg_ns:				trg_ns = Bry_.X_to_int_or_fail(val_bry); break;
+					case Key_trg_ns:				trg_ns = Bry_.Xto_int_or_fail(val_bry); break;
 					case Key_trg_ttl:				trg_ttl = val_bry; break;
-					case Key_create_redirect:		create_redirect = Bry_.X_to_bool_by_int_or_fail(val_bry); break;
+					case Key_create_redirect:		create_redirect = Bry_.Xto_bool_by_int_or_fail(val_bry); break;
 				}
 			}
 		}

@@ -74,7 +74,7 @@ public class Xoa_gfs_php_mgr {
 					)
 					throw Err_.new_("invalid gfs; num_end not found={0}", String_.new_utf8_(src));
 				bfr.Add_byte(Byte_ascii.Dollar);
-				int arg_idx = Bry_.X_to_int_or(src, num_bgn, num_end, -1);
+				int arg_idx = Bry_.Xto_int_or(src, num_bgn, num_end, -1);
 				if (arg_idx == -1) {
 					throw Err_.new_("invalid int");
 				}
@@ -103,7 +103,7 @@ public class Xoa_gfs_php_mgr {
 					break;
 				case Byte_ascii.Dollar:
 					int end_pos = Php_text_itm_parser.Find_fwd_non_int(raw, i + 1, raw_len);
-					int int_val = Bry_.X_to_int_or(raw, i + 1, end_pos, -1);
+					int int_val = Bry_.Xto_int_or(raw, i + 1, end_pos, -1);
 					bfr.Add_byte(Bry_fmtr.char_escape).Add_byte(Bry_fmtr.char_arg_bgn).Add_int_variable(int_val - 1).Add_byte(Bry_fmtr.char_arg_end);
 					i = end_pos - 1;
 					break;

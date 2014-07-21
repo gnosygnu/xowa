@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.lists.*; /*ComparerAble*/ import gplx.xowa.bldrs.imports.ctgs.*;
-import gplx.xowa.dbs.*; import gplx.xowa.wikis.*;
+import gplx.xowa.dbs.*; import gplx.xowa.wikis.*; import gplx.xowa.langs.msgs.*;
 public class Xow_data_mgr implements GfoInvkAble {
 	public Xow_data_mgr(Xow_wiki wiki) {
 		this.wiki = wiki; this.redirect_mgr = wiki.Redirect_mgr();
@@ -41,7 +41,7 @@ public class Xow_data_mgr implements GfoInvkAble {
 					byte[] msg_key = ttl.Page_db();
 					Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
 					msg_key = lang.Case_mgr().Case_build_1st_lower(tmp_bfr, msg_key, 0, msg_key.length);
-					byte[] msg_val = Pf_msg_mgr.Get_msg_itm(tmp_bfr, wiki, wiki.Lang(), msg_key).Val();	// NOTE: do not change to Get_msg_val; Get_msg_val, also replaces $1 with values, and $1 needs to be preserved for callers;
+					byte[] msg_val = Xol_msg_mgr_.Get_msg_itm(tmp_bfr, wiki, wiki.Lang(), msg_key).Val();	// NOTE: do not change to Get_msg_val; Get_msg_val, also replaces $1 with values, and $1 needs to be preserved for callers;
 					rv.Data_raw_(msg_val);
 					tmp_bfr.Mkr_rls();
 					return rv;

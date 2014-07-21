@@ -100,7 +100,7 @@ public class Xob_xdat_file_tst {
 	}
 	private void tst_Find(Xob_xdat_file rdr, String find, int expd, boolean exact) {
 		rdr.Find(itm, Bry_.new_utf8_(find), 2, Byte_ascii.NewLine, exact);
-		int id = Bry_.X_to_int_or(Bry_.Mid(itm.Itm_bry(), 0, 1), -1);
+		int id = Bry_.Xto_int_or(Bry_.Mid(itm.Itm_bry(), 0, 1), -1);
 			Tfds.Eq(expd, id);
 	}
 	private void tst_ReadAt(Xob_xdat_file rdr, int i, String expd) {rdr.GetAt(itm, i); Tfds.Eq(expd, String_.new_utf8_(itm.Itm_bry()));}

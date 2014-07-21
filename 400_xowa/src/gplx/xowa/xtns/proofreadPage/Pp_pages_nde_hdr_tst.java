@@ -137,4 +137,20 @@ public class Pp_pages_nde_hdr_tst {
 		,	"</p>"
 		));
 	}
+	@Test  public void Xwiki() {	// PURPOSE: Mainspace links should be sent to toc; DATE:2014-01-27
+		fxt.Init_xwiki_add_wiki_and_user_("commons", "commons.wikimedia.org");
+		fxt.Init_page_create("Index:A" , String_.Concat_lines_nl_skip_last
+		( "[[Page/1]]"
+		, "[[:commons:File:A.png]]"
+		));
+		// next only
+		fxt.Page_ttl_("Page/1");
+		fxt.Test_parse_page_wiki_str("<pages index='A' />", String_.Concat_lines_nl
+		(	"<p>value=toc;current=<b>Page/1</b>;next=<a href=\"/site/commons.wikimedia.org/wiki/File:A.png\">File:A.png</a>;"
+		,	"</p>"
+		,	""
+		,	"<p><br/>"
+		,	"</p>"
+		));
+	}
 }

@@ -52,7 +52,7 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 	public DateAdp Dump_date_query() {
 		DateAdp rv = wiki.Props().Modified_latest();
 		if (rv != null) return rv;
-		Io_url url = fsys_mgr.Get_url(Xodb_file.Tid_core);
+		Io_url url = fsys_mgr.Get_url(Xodb_file_tid_.Tid_core);
 		return Io_mgr._.QueryFil(url).ModifiedTime();
 	}
 	public void Init_make(String ns_map) {

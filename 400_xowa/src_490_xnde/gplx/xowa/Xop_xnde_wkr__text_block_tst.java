@@ -45,10 +45,10 @@ public class Xop_xnde_wkr__text_block_tst {
 		));
 		fxt.Init_para_n_();
 	}
-	@Test  public void Code_dangling() {	// EX.WP: HTML; <code>&lt;i&gt;<code> and <code>&lt;center&gt;<code> tags. There are
+	@Test  public void Code_dangling() {	// PAGE:en.w:HTML; <code>&lt;i&gt;<code> and <code>&lt;center&gt;<code> tags. There are
 		fxt.Test_parse_page_wiki_str("a<code>b<code>c", "a<code>b</code>c");
 	}
-	@Test  public void Code_do_not_escape() { // PURPOSE: <code> was mistakenly marked as escape, causing inner tags to be rendered incorrectly; EX.WP:UTF8
+	@Test  public void Code_do_not_escape() { // PURPOSE: <code> was mistakenly marked as escape, causing inner tags to be rendered incorrectly; PAGE:en.w:UTF8
 		fxt.Test_parse_page_all_str
 		( "<code><span style=\"color:red;\">0100100</span></code>"
 		, "<code><span style=\"color:red;\">0100100</span></code>"
@@ -61,7 +61,7 @@ public class Xop_xnde_wkr__text_block_tst {
 		fxt.Test_parse_page_all_str("<pre>a&#x9;b</pre>"			, "<pre>a&#x9;b</pre>");					// known ncr/hex
 		fxt.Test_parse_page_all_str("<pre>a&apos;b</pre>"			, "<pre>a&apos;b</pre>");					// known name; embed
 		fxt.Test_parse_page_all_str("<pre>a&apox;b</pre>"			, "<pre>a&amp;apox;b</pre>");				// unknown name; escape
-		fxt.Test_parse_page_all_str("<pre>&\"<></pre>"				, "<pre>&amp;&quot;&lt;&gt;</pre>");		// no ncr or name; escape; needed for <pre><img ...></pre>; EX.WP: Alt attribute
+		fxt.Test_parse_page_all_str("<pre>&\"<></pre>"				, "<pre>&amp;&quot;&lt;&gt;</pre>");		// no ncr or name; escape; needed for <pre><img ...></pre>; PAGE:en.w:Alt attribute
 	}
 	@Test  public void Pre_and_space() {// PURPOSE: make sure pre does not careate <p></p> around it; also, make sure " a" is preserved; DATE:2014-02-20
 		fxt.Init_para_y_();

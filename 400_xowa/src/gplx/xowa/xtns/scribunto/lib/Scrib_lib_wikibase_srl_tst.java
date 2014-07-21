@@ -341,6 +341,6 @@ class Scrib_lib_wikibase_srl_fxt {
 		Class<?> kv_val_cls = kv_val.getClass();
 		if 	(ClassAdp_.Eq(kv_val_cls, KeyVal[].class)) 	{bfr.Add_byte_nl(); Xto_str(bfr, (KeyVal[])kv_val, depth + 1);}
 		else if (ClassAdp_.Eq(kv_val_cls, KeyVal[].class)) 	{bfr.Add_byte_nl(); Xto_str(bfr, (KeyVal)kv_val, depth + 1);}
-		else bfr.Add_byte(Byte_ascii.Apos).Add_str(Object_.XtoStr_OrEmpty(kv_val)).Add_byte(Byte_ascii.Apos).Add_byte_nl();
+		else bfr.Add_byte(Byte_ascii.Apos).Add_str(Object_.Xto_str_strict_or_empty(kv_val)).Add_byte(Byte_ascii.Apos).Add_byte_nl();
 	}
 }

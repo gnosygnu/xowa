@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.portal; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import gplx.xowa.wikis.*; import gplx.xowa.gui.*; import gplx.xowa.html.sidebar.*;
+import gplx.xowa.apis.xowa.html.*; import gplx.xowa.apis.xowa.html.skins.*;
 public class Xow_portal_mgr implements GfoInvkAble {
 	public Xow_portal_mgr(Xow_wiki wiki) {
 		this.wiki = wiki;
@@ -25,6 +26,12 @@ public class Xow_portal_mgr implements GfoInvkAble {
 	}	private Xow_wiki wiki; private boolean lang_is_rtl;
 	public void Init_by_lang(Xol_lang lang) {
 		lang_is_rtl = !lang.Dir_ltr();
+	}
+	private Xoapi_skin_app_base api_skin;
+	public void Init_by_wiki(Xow_wiki wiki) {
+		Xoa_app app = wiki.App();
+		Xoapi_skins skins = app.Api_root().Html().Skins();
+		api_skin = app.Mode() == Xoa_app_.Mode_gui ? skins.Desktop() : skins.Server();
 	}
 	public Xowh_sidebar_mgr Sidebar_mgr() {return sidebar_mgr;} private Xowh_sidebar_mgr sidebar_mgr;
 	public Bry_fmtr Div_home_fmtr() {return div_home_fmtr;} Bry_fmtr div_home_fmtr = Bry_fmtr.new_("");
@@ -40,7 +47,7 @@ public class Xow_portal_mgr implements GfoInvkAble {
 		byte[] wiki_user_name = wiki.User().Name();
 		div_personal_bry = Init_fmtr(tmp_bfr, eval_mgr, div_personal_fmtr, Bry_.Add(Xoh_href_parser.Href_wiki_bry, wiki.Ns_mgr().Ids_get_or_null(Xow_ns_.Id_user).Name_db_w_colon(), wiki_user_name), wiki_user_name, Ns_cls_by_id(wiki.Ns_mgr(), Xow_ns_.Id_user), Bry_.Add(Xoh_href_parser.Href_wiki_bry, wiki.Ns_mgr().Ids_get_or_null(Xow_ns_.Id_user_talk).Name_db_w_colon(), wiki_user_name), Ns_cls_by_id(wiki.Ns_mgr(), Xow_ns_.Id_user_talk));
 		byte[] main_page_href_bry = tmp_bfr.Add(Xoh_href_parser.Href_site_bry).Add(wiki.Domain_bry()).Add(Xoh_href_parser.Href_wiki_bry).XtoAryAndClear();	// NOTE: build /site/en.wikipedia.org/wiki/ href; no Main_Page, as that will be inserted by Xoh_href_parser
-		div_logo_bry = Init_fmtr(tmp_bfr, eval_mgr, div_logo_fmtr, main_page_href_bry, wiki.App().Url_converter_fsys().Encode_http(wiki.App().User().Fsys_mgr().Wiki_root_dir().GenSubFil_nest(wiki.Domain_str(), "html", "logo.png")));
+		div_logo_bry = Init_fmtr(tmp_bfr, eval_mgr, div_logo_fmtr, main_page_href_bry, wiki.App().Encoder_mgr().Fsys().Encode_http(wiki.App().User().Fsys_mgr().Wiki_root_dir().GenSubFil_nest(wiki.Domain_str(), "html", "logo.png")));
 		div_home_bry = Init_fmtr(tmp_bfr, eval_mgr, div_home_fmtr);
 		div_wikis_fmtr.Eval_mgr_(eval_mgr);
 		tmp_bfr.Mkr_rls();
@@ -85,7 +92,7 @@ public class Xow_portal_mgr implements GfoInvkAble {
 		return tmp_bfr.Mkr_rls().XtoAryAndClear();
 	}	public static final byte[] Cls_selected_y = Bry_.new_ascii_("selected"), Cls_new = Bry_.new_ascii_("new"), Cls_display_none = Bry_.new_ascii_("xowa_display_none");
 	public byte[] Div_logo_bry() {return div_logo_bry;} private byte[] div_logo_bry = Bry_.Empty;
-	public byte[] Div_home_bry() {return div_home_bry;} private byte[] div_home_bry = Bry_.Empty;
+	public byte[] Div_home_bry() {return api_skin != null && api_skin.Sidebar_home_enabled() ? div_home_bry : Bry_.Empty;} private byte[] div_home_bry = Bry_.Empty;
 	public byte[] Div_wikis_bry(Bry_bfr_mkr bfr_mkr) {
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();
 		div_wikis_fmtr.Bld_bfr_many(tmp_bfr);

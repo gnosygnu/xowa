@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.files.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.users.history.*;
+import gplx.xowa.files.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.users.history.*; import gplx.xowa.xtns.pfuncs.ttls.*;
 public class Xoh_lnki_wtr {
 	private Xoa_app app; private Xow_wiki wiki; private Xoa_page page; private Xop_ctx ctx;
 	private Xoh_html_wtr_cfg cfg;
@@ -54,7 +54,7 @@ public class Xoh_lnki_wtr {
 		redlinks_mgr.Lnki_add(lnki);
 		boolean stage_is_alt = hctx.Mode_is_alt();
 		switch (lnki.Ns_id()) {
-			case Xow_ns_.Id_media:		if (!stage_is_alt) file_wtr.Write_or_queue(bfr, page, ctx, hctx, src, lnki); return; // NOTE: literal ":" has no effect; EX.WP:Beethoven and [[:Media:De-Ludwig_van_Beethoven.ogg|listen]]
+			case Xow_ns_.Id_media:		if (!stage_is_alt) file_wtr.Write_or_queue(bfr, page, ctx, hctx, src, lnki); return; // NOTE: literal ":" has no effect; PAGE:en.w:Beethoven and [[:Media:De-Ludwig_van_Beethoven.ogg|listen]]
 			case Xow_ns_.Id_file:		if (!literal_link && !stage_is_alt) {file_wtr.Write_or_queue(bfr, page, ctx, hctx, src, lnki); return;} break;
 			case Xow_ns_.Id_category:	if (!literal_link) {page.Html_data().Ctgs_add(lnki.Ttl()); return;} break;
 		}
@@ -75,8 +75,8 @@ public class Xoh_lnki_wtr {
 	private void Write_plain(Bry_bfr bfr, Xoh_html_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xoa_ttl lnki_ttl, Xop_lnki_caption_wtr caption_wkr) {
 		byte[] ttl_bry = lnki.Ttl_ary();
 		if (Bry_.Len_eq_0(ttl_bry)) ttl_bry = lnki_ttl.Full_txt_raw();		// NOTE: handles ttls like [[fr:]] and [[:fr;]] which have an empty Page_txt, but a valued Full_txt_raw
-		if (Bry_.Eq(lnki_ttl.Full_txt(), page.Ttl().Full_txt())) {			// lnki is same as pagename; bold; SEE: Month widget on day pages will bold current day; EX.WP: January 1
-			if (lnki_ttl.Anch_bgn() == -1 && Bry_.Eq(lnki_ttl.Wik_txt(), page.Ttl().Wik_txt())) {		// only bold if lnki is not pointing to anchor on same page; EX.WP: Comet; [[Comet#Physical characteristics|ion tail]]
+		if (Bry_.Eq(lnki_ttl.Full_txt(), page.Ttl().Full_txt())) {			// lnki is same as pagename; bold; SEE: Month widget on day pages will bold current day; PAGE:en.w:January 1
+			if (lnki_ttl.Anch_bgn() == -1 && Bry_.Eq(lnki_ttl.Wik_txt(), page.Ttl().Wik_txt())) {		// only bold if lnki is not pointing to anchor on same page; PAGE:en.w:Comet; [[Comet#Physical characteristics|ion tail]]
 				bfr.Add(Xoh_consts.B_bgn);
 				Write_caption(bfr, ctx, hctx, src, lnki, ttl_bry, true, caption_wkr);
 				bfr.Add(Xoh_consts.B_end);
@@ -130,17 +130,17 @@ public class Xoh_lnki_wtr {
 		}
 	}
 	private static boolean Write_caption_for_rel2abs(Bry_bfr bfr, Xop_lnki_tkn lnki) {
-		int subpage_tid = lnki.Subpage_tid(); if (subpage_tid == Pf_xtn_rel2abs.Id_null) return false;	// not a subpage
+		int subpage_tid = lnki.Subpage_tid(); if (subpage_tid == Pfunc_rel2abs.Id_null) return false;	// not a subpage
 		boolean subpage_slash_at_end = lnki.Subpage_slash_at_end();
 		byte[] leaf_txt = lnki.Ttl().Leaf_txt_wo_qarg();
 		switch (subpage_tid) {
-			case Pf_xtn_rel2abs.Id_slash:
+			case Pfunc_rel2abs.Id_slash:
 				if (subpage_slash_at_end)		// "/" at end; only add text;		EX: [[/A/]] -> A
 					bfr.Add(leaf_txt);
 				else							// "/" absent; add slash to bgn;	EX: [[/A]]  -> /A
 					bfr.Add_byte(Byte_ascii.Slash).Add(leaf_txt);
 				return true;
-			case Pf_xtn_rel2abs.Id_dot_dot_slash:
+			case Pfunc_rel2abs.Id_dot_dot_slash:
 				if (subpage_slash_at_end)		// "/" at end; only add text;		EX: [[../A/]] -> A
 					bfr.Add(leaf_txt);
 				else							// "/" absent; add page;			EX: [[../A]]  -> Page/A

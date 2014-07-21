@@ -16,14 +16,15 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.xowa.xtns.scribunto.*;
 public class Xot_invk_temp implements Xot_invk {
+	public Xot_invk_temp(boolean root_frame) {this.root_frame = root_frame;}
 	public Xot_invk_temp(byte defn_tid, byte[] src, Arg_nde_tkn name_tkn, int src_bgn, int src_end) {
 		this.defn_tid = defn_tid; this.src = src;
 		this.name_tkn = name_tkn; this.src_bgn = src_bgn; this.src_end = src_end;
 	}
 	public byte[] Src() {return src;} private byte[] src; public Xot_invk_temp Src_(byte[] src) {this.src = src; return this;}
 	public byte Defn_tid() {return defn_tid;} private byte defn_tid = Xot_defn_.Tid_null;
-	public Xot_invk_temp(boolean root_frame) {this.root_frame = root_frame;}
 	public boolean Root_frame() {return root_frame;} private boolean root_frame;
 	public Arg_nde_tkn Name_tkn() {return name_tkn;} Arg_nde_tkn name_tkn;
 	public byte[] Frame_ttl() {return frame_ttl;} public void Frame_ttl_(byte[] v) {frame_ttl = v;} private byte[] frame_ttl = Bry_.Empty;	// NOTE: set frame_ttl to non-null value; PAGE:en.w:Constantine_the_Great {{Christianity}}; DATE:2014-06-26
@@ -38,7 +39,7 @@ public class Xot_invk_temp implements Xot_invk {
 		for (int i = 0; i < list_len; i++) {	// iterate over list to find nth *non-keyd* arg; SEE:NOTE_1
 			Arg_nde_tkn nde = (Arg_nde_tkn)list.FetchAt(i);
 			if (nde.KeyTkn_exists()) {
-				int key_int = Bry_.X_to_int_or(nde.Key_tkn().Dat_ary(), -1);
+				int key_int = Bry_.Xto_int_or(nde.Key_tkn().Dat_ary(), -1);
 				if (key_int == -1)
 					continue;
 				else {	// key is numeric
@@ -65,7 +66,7 @@ public class Xot_invk_temp implements Xot_invk {
 		hash.Del(key_ref);
 		hash.Add(key_ref, arg);
 	}	HashAdp hash = HashAdp_.new_();
-	public static final Xot_invk_temp PageIsCaller = new Xot_invk_temp(true);	// SEE NOTE_2
+	public static final Xot_invk_temp Page_is_caller = new Xot_invk_temp(true);	// SEE NOTE_2
 	Xot_invk_temp() {}
 }
 /*
@@ -83,6 +84,6 @@ WIKI: "a {{mwo_concat|{{{1}}}|b}} c"
 TEXT: "a {{{1}}}b c"
 
 Note that in order to resolve mwo_concat we need to pass in an Xot_invk
-This Xot_invk is the "PageIsCaller" ref
+This Xot_invk is the "Page_is_caller" ref
 Note this has no parameters and is always empty
 */

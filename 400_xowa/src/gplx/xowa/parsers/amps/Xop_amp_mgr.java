@@ -94,7 +94,7 @@ public class Xop_amp_mgr {
 				else if	(b >=  65 && b <=  70)	cur = b - 55;
 				else if	(b >=  97 && b <= 102)	cur = b - 87;
 				else if((b >=  71 && b <=  90)
-					||  (b >=  91 && b <= 122))	continue;	// NOTE: wiki discards letters G-Z; EX.WP:Miscellaneous_Symbols "{{Unicode|&#xx26D0;}}"; NOTE 2nd x is discarded
+					||  (b >=  91 && b <= 122))	continue;	// NOTE: wiki discards letters G-Z; PAGE:en.w:Miscellaneous_Symbols "{{Unicode|&#xx26D0;}}"; NOTE 2nd x is discarded
 				else							return false;
 			}
 			else {

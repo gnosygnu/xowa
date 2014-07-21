@@ -19,7 +19,7 @@ package gplx.json; import gplx.*;
 public class Json_itm_tmp implements Json_itm {
 	public Json_itm_tmp(byte tid, String data) {this.tid = tid; this.data = data;}
 	public byte Tid() {return tid;} private byte tid;
-	public byte[] Data_bry() {return Bry_.new_utf8_(Object_.XtoStr_OrEmpty(data));}
+	public byte[] Data_bry() {return Bry_.new_utf8_(Object_.Xto_str_strict_or_empty(data));}
 	public int Src_bgn() {return -1;}
 	public int Src_end() {return -1;}
 	public Object Data() {return data;} private String data;

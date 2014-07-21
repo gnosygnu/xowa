@@ -31,7 +31,7 @@ public class Fsdb_db_bin_mgr implements RlsAble {
 		for (int i = 0; i < itms_len; i++)
 			itms[i].Bin_max_(v);
 		return this;
-	}	private long db_bin_max = Io_mgr.Len_mb * Long_.X_by_int(188);
+	}	private long db_bin_max = Io_mgr.Len_mb * Long_.Xby_int(188);
 	public Fsdb_db_bin_fil Get_at(int i) {return itms[i];}
 	private Fsdb_db_bin_fil Get_cur() {return itms_len == 0 ? null : itms[itms_len - 1];}
 	public void Txn_open() {		

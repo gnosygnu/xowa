@@ -208,7 +208,7 @@ public class Xoa_url_parser {
 				page_bry = Xoa_page_.Main_page_bry_empty;
 		}
 		if (rv.Anchor_bry() != null) {
-			byte[] anchor_bry = app.Url_converter_id().Encode(rv.Anchor_bry());	// reencode for anchors (which use . encoding, not % encoding); EX.WP: Enlightenment_Spain#Enlightened_despotism_.281759%E2%80%931788.29
+			byte[] anchor_bry = app.Encoder_mgr().Id().Encode(rv.Anchor_bry());	// reencode for anchors (which use . encoding, not % encoding); PAGE:en.w:Enlightenment_Spain#Enlightened_despotism_.281759%E2%80%931788.29
 			rv.Anchor_bry_(anchor_bry);
 		}
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, page_bry);

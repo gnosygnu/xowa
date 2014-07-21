@@ -223,7 +223,7 @@ public class Xow_wiki implements GfoInvkAble {
 		app.Gfs_mgr().Run_url_for(this, user.Fsys_mgr().Wiki_root_dir().GenSubFil_nest("#cfg", "system", domain_str + ".gfs"));		// run cfg for wiki by user ; EX: /xowa/user/anonymous/wiki/en.wikipedia.org/cfg/user_wiki.gfs
 		fsys_mgr.Scan_dirs();
 		if (lang.Init_by_load()) {
-			if (domain_tid == Xow_wiki_domain_.Tid_wikipedia)	// NOTE: if type is wikipedia, add "Wikipedia" as an alias; EX.WP: pt.wikipedia.org/wiki/Página principal which redirects to Wikipedia:Página principal
+			if (domain_tid == Xow_wiki_domain_.Tid_wikipedia)	// NOTE: if type is wikipedia, add "Wikipedia" as an alias; PAGE:en.w:pt.wikipedia.org/wiki/Página principal which redirects to Wikipedia:Página principal
 				ns_mgr.Aliases_add(Xow_ns_.Id_project, Xow_ns_.Ns_name_wikipedia);
 		}
 		cfg_parser.Xtns().Itm_pages().Init(ns_mgr);	// init ns_mgr for Page / Index ns just before rebuild; usually set by #cfg file

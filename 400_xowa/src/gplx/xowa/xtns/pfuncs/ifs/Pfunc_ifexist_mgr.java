@@ -30,14 +30,14 @@ public class Pfunc_ifexist_mgr {
 		regy.Add(ttl_bry, exists_itm);
 		db_page.Clear();
 		Xow_ns ttl_ns = ttl.Ns();
+		boolean rv = false;
 		switch (ttl_ns.Id()) {
-			case Xow_ns_.Id_special:
-				wiki.App().Usr_dlg().Warn_many("", "", "ifexist.special ns page; page=~{0} ifexist=~{1}", wiki.Ctx().Cur_page().Url().Xto_full_str_safe(), String_.new_utf8_(raw_bry));
-				exists_itm.Exists_(true);
-				return true;
-			case Xow_ns_.Id_media:		return Find_ttl_for_media_ns(exists_itm, wiki, ttl_ns, ttl_bry);
-			default:					return Find_ttl_in_db(exists_itm, wiki, ttl_ns, ttl_bry);
+			case Xow_ns_.Id_special:	rv = true; break; // NOTE: some pages call for [[Special]]; always return true for now; DATE:2014-07-17
+			case Xow_ns_.Id_media:		rv = Find_ttl_for_media_ns(exists_itm, wiki, ttl_ns, ttl_bry); break;
+			default:					rv = Find_ttl_in_db(exists_itm, wiki, ttl_ns, ttl_bry); break;
 		}
+		exists_itm.Exists_(rv);
+		return rv;
 	}
 	private boolean Find_ttl_in_db(Pfunc_ifexist_itm itm, Xow_wiki wiki, Xow_ns ns, byte[] ttl_bry) {
 		boolean rv = wiki.Db_mgr().Load_mgr().Load_by_ttl(db_page, ns, ttl_bry);

@@ -17,16 +17,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apis.xowa; import gplx.*; import gplx.xowa.*; import gplx.xowa.apis.*;
 import gplx.xowa.gui.views.*;
+import gplx.xowa.apis.xowa.startups.*;
 public class Xoapi_app implements GfoInvkAble {
 	private Xog_win_itm win;
 	public void Init_by_kit(Xoa_app app) {
 		win = app.Gui_mgr().Browser_win();
 	}
 	public void Exit()			{win.App__exit();}
+	public Xoapi_startups Startup() {return startup;} private Xoapi_startups startup = new Xoapi_startups();
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_exit)) 								this.Exit();
+		else if	(ctx.Match(k, Invk_startup)) 							return startup;
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}
-	private static final String Invk_exit = "exit";
+	private static final String Invk_exit = "exit", Invk_startup = "startup";
 }

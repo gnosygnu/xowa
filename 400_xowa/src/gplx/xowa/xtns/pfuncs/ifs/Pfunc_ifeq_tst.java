@@ -37,12 +37,12 @@ public class Pfunc_ifeq_tst {
 	@Test  public void Ifeq_exc_args_1()	{fxt.Test_parse_tmpl_str_test("{{#ifeq:1|1}}"					, "{{test}}"		, "");}
 	@Test  public void Ifeq_exc_args_2()	{fxt.Test_parse_tmpl_str_test("{{#ifeq:1|1|a}}"					, "{{test}}"		, "a");}
 	@Test  public void Ifeq_exp()			{fxt.Test_parse_tmpl_str_test("{{#ifeq:0.006|+6.0E-3|y|n}}"		, "{{test}}"		, "y");}
-	@Test  public void Ifeq_plus_minus()	{fxt.Test_parse_tmpl_str_test("{{#ifeq:+|-|y}}"					, "{{test}}"		, "");}	// PURPOSE: was evaluating to y; EX.WP:Permian-Triassic extinction
-	@Test  public void Tab_ent() {	// PURPOSE: hack; tabs are materialized as "&#09;" which causes trimming problems; EX.WP: Template:Cretaceous_graphical_timeline and "|period11=    Campanian\s\t"
+	@Test  public void Ifeq_plus_minus()	{fxt.Test_parse_tmpl_str_test("{{#ifeq:+|-|y}}"					, "{{test}}"		, "");}	// PURPOSE: was evaluating to y; PAGE:en.w:Permian-Triassic extinction
+	@Test  public void Tab_ent() {	// PURPOSE: hack; tabs are materialized as "&#09;" which causes trimming problems; PAGE:en.w:Template:Cretaceous_graphical_timeline and "|period11=    Campanian\s\t"
 		fxt.Test_parse_page_all_str("{{#ifeq:a|a &#09;|y|n}}", "y");	// note that "|a\s\t" gets trimmed to "a"
 	}
 	@Test  public void Ifeq_hex()			{fxt.Test_parse_tmpl_str_test("{{#ifeq:44|0X002C|y|n}}"			, "{{test}}"		, "y");}	// PURPOSE: hex compares to int; EX:w:Comma 
-	@Test  public void Colon_2() {	// PURPOSE: 2nd colon causes error b/c of bad whitespace evaluation; EX.WP:de.wiktionary.org/wiki/glitschig; DATE:2013-12-10
+	@Test  public void Colon_2() {	// PURPOSE: 2nd colon causes error b/c of bad whitespace evaluation; PAGE:en.w:de.wiktionary.org/wiki/glitschig; DATE:2013-12-10
 		fxt.Test_parse_tmpl_str_test("{{#ifeq: :|a|b|c}}"			, "{{test}}"		, "c");
 	}
 }

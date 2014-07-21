@@ -33,7 +33,7 @@ public class Json_doc_srl {
 		if	(ClassAdp_.Is_array(t))
 			Write_kv_ary(comma, key, (Object[])val);
 		else
-			Write_kv_str(comma, key, Object_.XtoStr_OrEmpty(val));
+			Write_kv_str(comma, key, Object_.Xto_str_strict_or_empty(val));
 	}
 	private void Write_kv_ary(boolean comma, byte[] key, Object[] val) {
 		Write_key(comma, key); Write_new_line();	// '"key":\n'
@@ -42,7 +42,7 @@ public class Json_doc_srl {
 		int len = val.length;
 		for (int i = 0; i < len; i++) {
 			Write_itm_hdr(i != 0);					// ', '
-			Write_str(Bry_.new_utf8_(Object_.XtoStr_OrNull(val[i])));
+			Write_str(Bry_.new_utf8_(Object_.Xto_str_strict_or_null(val[i])));
 			Write_new_line();
 		}
 		Indent_del();

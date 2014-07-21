@@ -85,7 +85,7 @@ public class Xof_xfer_queue_bldr_wmf_tst {
 	@Test  public void Nil_height() {
 		fxt.Rdr("A.png|||0|0|0|0|0||8,-1,80")
 		.Src(	fxt.img_("mem/src/commons.wikimedia.org/7/70/A.png", 220, 160)
-			,	fxt.img_("mem/src/commons.wikimedia.org/thumb/7/70/A.png/220px-A.png", 220, 160)	// NOTE: make sure default thumb is ignored; i.e.: 220 should not be substituted for -1; EX.WP:Paris;[[File:IMA-Ile-St-Louis.jpg|thumb|x220]] 
+			,	fxt.img_("mem/src/commons.wikimedia.org/thumb/7/70/A.png/220px-A.png", 220, 160)	// NOTE: make sure default thumb is ignored; i.e.: 220 should not be substituted for -1; PAGE:en.w:Paris;[[File:IMA-Ile-St-Louis.jpg|thumb|x220]] 
 			)
 		.Trg(	fxt.img_("mem/trg/commons.wikimedia.org/raw/7/0/A.png", 220, 160)
 			,	fxt.img_("mem/trg/commons.wikimedia.org/fit/7/0/A.png/110px.png", 110, 80)
@@ -113,7 +113,7 @@ public class Xof_xfer_queue_bldr_wmf_tst {
 			)
 		.tst();
 	}
-	@Test  public void Nil_width_wrong_width_2() {		// EX.WP: [[Image:Gnome-mime-audio-openclipart.svg|65x50px|center|link=|alt=]]
+	@Test  public void Nil_width_wrong_width_2() {		// PAGE:en.w:[[Image:Gnome-mime-audio-openclipart.svg|65x50px|center|link=|alt=]]
 		fxt.Rdr("A.svg|||0|0|0|0|0||8,65,50")
 		.Src(	fxt.svg_("mem/src/commons.wikimedia.org/7/75/A.svg", 160, 160)
 			,	fxt.img_("mem/src/commons.wikimedia.org/thumb/7/75/A.svg/65px-A.svg.png", 65, 60))
@@ -123,7 +123,7 @@ public class Xof_xfer_queue_bldr_wmf_tst {
 			)
 		.tst();
 	}
-	@Test  public void Svg_thumb_irregular() {// EX.WP:{{Olympic Summer Games Host Cities}};[[File:Flag of the United States.svg|22x20px]]
+	@Test  public void Svg_thumb_irregular() {// PAGE:en.w:{{Olympic Summer Games Host Cities}};[[File:Flag of the United States.svg|22x20px]]
 		fxt.Rdr("A.svg|||0|0|0|8|0||8,22,20")
 		.Src(	fxt.img_("mem/src/commons.wikimedia.org/thumb/7/75/A.svg/22px-A.svg.png", 22, 12)
 			)
@@ -132,7 +132,7 @@ public class Xof_xfer_queue_bldr_wmf_tst {
 			)
 		.tst();
 	}
-	@Test  public void Rounding_converts_to_double() {// bugfix wherein (double) is needed else integer division loses precision; EX.WP:{{Olympic Summer Games Host Cities}};[[File:Flag of the United States.svg|22x20px]]
+	@Test  public void Rounding_converts_to_double() {// bugfix wherein (double) is needed else integer division loses precision; PAGE:en.w:{{Olympic Summer Games Host Cities}};[[File:Flag of the United States.svg|22x20px]]
 		fxt.Rdr("A.svg|||0|0|0|8|0||8,22,12")
 		.Src(	fxt.svg_("mem/src/commons.wikimedia.org/7/75/A.svg", 1235, 650))
 		.Trg(	fxt.svg_("mem/trg/commons.wikimedia.org/raw/7/5/A.svg", 1235, 650)
@@ -177,7 +177,7 @@ public class Xof_xfer_queue_bldr_wmf_tst {
 			)
 		.tst();
 	}
-	@Test  public void Ogv_width_custom() {	// EX.WP:Earth;Northwest coast of United States to Central South America at Night.ogv|250px
+	@Test  public void Ogv_width_custom() {	// PAGE:en.w:Earth;Northwest coast of United States to Central South America at Night.ogv|250px
 		fxt.Rdr("A.ogv|||0|0|0|0|0||8,250,-1")
 		.Src(	fxt.ogg_("mem/src/commons.wikimedia.org/d/d0/A.ogv")
 			,	fxt.img_("mem/src/commons.wikimedia.org/thumb/d/d0/A.ogv/mid-A.ogv.jpg", 640, 425)	
@@ -207,7 +207,7 @@ public class Xof_xfer_queue_bldr_wmf_tst {
 			)
 		.tst();
 	}
-	@Test  public void Upright() {	// PURPOSE: upright can generate thumb that is larger than orig; thumb is not on wmf, so orig must be used EX.WP:Saint Petersburg [[File:Georgyj Poltavchenko.jpeg|thumb|left|upright]]
+	@Test  public void Upright() {	// PURPOSE: upright can generate thumb that is larger than orig; thumb is not on wmf, so orig must be used PAGE:en.w:Saint Petersburg [[File:Georgyj Poltavchenko.jpeg|thumb|left|upright]]
 		fxt.Rdr("A.png|||0|0|0|0|0||8,-1,-1,upright=1")
 		.Src(	fxt.img_("mem/src/commons.wikimedia.org/7/70/A.png", 148, 186))
 		.Trg(	fxt.img_("mem/trg/commons.wikimedia.org/raw/7/0/A.png", 148, 186)
@@ -235,7 +235,7 @@ public class Xof_xfer_queue_bldr_wmf_tst {
 			)
 		.tst();
 	}
-	@Test  public void Rounding() {	// PURPOSE: bug; 3000,3002 image gets scaled to 99,99 instead of 100,100; EX.WP: Solar System#Visual summary
+	@Test  public void Rounding() {	// PURPOSE: bug; 3000,3002 image gets scaled to 99,99 instead of 100,100; PAGE:en.w:Solar System#Visual summary
 		fxt.Rdr("A.png|||10000|3000|3002|8|0||0,100,100")
 		.Src(	fxt.img_("mem/src/commons.wikimedia.org/7/70/A.png", 3000, 3002))
 		.Trg(	fxt.img_("mem/trg/commons.wikimedia.org/raw/7/0/A.png", 3000, 3002)

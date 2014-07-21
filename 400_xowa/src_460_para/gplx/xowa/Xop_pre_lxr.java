@@ -42,7 +42,7 @@ class Xop_pre_lxr implements Xop_lxr {
 		}
 		switch (ctx.Cur_tkn_tid()) {					// close tblw attrs; NOTE: after BOS (since no tblw at BOS) but before "\n !" check
 			case Xop_tkn_itm_.Tid_tblw_tb: case Xop_tkn_itm_.Tid_tblw_tr: case Xop_tkn_itm_.Tid_tblw_th:
-				Xop_tblw_wkr.Atrs_close(ctx, src, root);
+				Xop_tblw_wkr.Atrs_close(ctx, src, root, Bool_.N);
 				break;
 			case Xop_tkn_itm_.Tid_list:
 				if (Close_list(ctx, root, src, src_len, bgn_pos, cur_pos, txt_pos)) {

@@ -29,7 +29,6 @@
 	<classpathentry kind="src" path="src_490_xnde"/>
 	<classpathentry kind="src" path="src_500_tmpl"/>
 	<classpathentry kind="src" path="src_510_pf_core"/>
-	<classpathentry kind="src" path="src_530_pf_str"/>
 	<classpathentry kind="src" path="xtn"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/100_core"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/150_gfui"/>

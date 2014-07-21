@@ -50,7 +50,7 @@ class GxwListBox_lang extends JList implements GxwListBox {
 	@Override public void setBounds(Rectangle r) {super.setBounds(r); this.validate();}
 	@Override public void setSize(int w, int h) {super.setSize(w, h); this.validate();}
 	@Override public void setSize(Dimension d) {super.setSize(d); this.validate();}
-	public String TextVal() {return Object_.XtoStr_OrEmpty(this.SelectedItm());} public void TextVal_set(String v) {this.SelectedItm_set(v);}
+	public String TextVal() {return Object_.Xto_str_strict_or_empty(this.SelectedItm());} public void TextVal_set(String v) {this.SelectedItm_set(v);}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		return this;
 	}

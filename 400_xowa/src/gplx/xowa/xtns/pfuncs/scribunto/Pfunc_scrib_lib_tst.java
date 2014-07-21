@@ -20,7 +20,7 @@ import org.junit.*;
 import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.lib.*;
 public class Pfunc_scrib_lib_tst {
 	@Before public void init() {
-		fxt.Init_scrib_proc();
+		fxt.Clear_for_lib();
 		lib = new Pfunc_scrib_lib();
 		lib.Init();
 		lib.Core_(fxt.Core());

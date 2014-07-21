@@ -49,7 +49,7 @@ public class KeyVal_ {
 			if (ClassAdp_.Eq_typeSafe(itm_val, KeyVal[].class))
 				sb.Add(Ary_x_to_str((KeyVal[])itm_val));
 			else
-				sb.Add(Object_.XtoStr_OrNullStr(itm_val));
+				sb.Add(Object_.Xto_str_strict_or_null_mark(itm_val));
 			sb.Add_char_nl();
 		}
 		return sb.XtoStr();
@@ -73,7 +73,7 @@ public class KeyVal_ {
 			KeyVal itm = ary[i];
 			if (indent > 0)
 				bfr.Add_byte_repeat(Byte_ascii.Space, indent * 2);				// add indent	: "  "
-			bfr.Add_str(Object_.XtoStr_OrEmpty(itm.Key())).Add_byte_eq();		// add key + eq : "key="
+			bfr.Add_str(Object_.Xto_str_strict_or_empty(itm.Key())).Add_byte_eq();		// add key + eq : "key="
 			Object val = itm.Val();
 			if (val == null)
 				bfr.Add_str(String_.Null_mark);
@@ -89,7 +89,7 @@ public class KeyVal_ {
 					bfr.Add(val_as_bool ? Bool_.True_bry : Bool_.False_bry);		// add "true" or "false"; don't call toString
 				}
 				else
-					bfr.Add_str(Object_.XtoStr_OrNullStr(val));						// call toString()
+					bfr.Add_str(Object_.Xto_str_strict_or_null_mark(val));						// call toString()
 			}
 			bfr.Add_byte_nl();
 		}

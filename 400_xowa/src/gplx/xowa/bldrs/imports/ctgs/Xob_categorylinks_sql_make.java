@@ -26,11 +26,11 @@ public class Xob_categorylinks_sql_make implements Io_make_cmd {
 		name_id_rdr = New_registry_rdr(wiki, usr_dlg);
 		cur_cat_file_max = wiki.App().Setup_mgr().Dump_mgr().Db_categorylinks_max();
 
-		db_mgr.Delete_by_tid(Xodb_file.Tid_category);
+		db_mgr.Delete_by_tid(Xodb_file_tid_.Tid_category);
 		Xodb_fsys_mgr fsys_mgr = db_mgr.Fsys_mgr();
-		Xodb_file category_file = fsys_mgr.Get_tid_root(Xodb_file.Tid_core);
+		Xodb_file category_file = fsys_mgr.Get_tid_root(Xodb_file_tid_.Tid_core);
 		if (cur_cat_file_max > 0) {
-			category_file = fsys_mgr.Make(Xodb_file.Tid_category);
+			category_file = fsys_mgr.Make(Xodb_file_tid_.Tid_category);
 			fsys_mgr.Init_by_tid_category(category_file);
 		}
 
@@ -70,7 +70,7 @@ public class Xob_categorylinks_sql_make implements Io_make_cmd {
 			db_mgr.Category_version_update(false);
 		cat_provider.Txn_mgr().Txn_end_all();
 		ctg_stmt.Rls();
-		fsys_mgr.Index_create(usr_dlg, Byte_.Ary(Xodb_file.Tid_core, Xodb_file.Tid_category), Xodb_file.Indexes_categorylinks_from, Xodb_file.Indexes_categorylinks_main);
+		fsys_mgr.Index_create(usr_dlg, Byte_.Ary(Xodb_file_tid_.Tid_core, Xodb_file_tid_.Tid_category), Index_categorylinks_from, Index_categorylinks_main);
 		name_id_rdr.Rls();
 		if (String_.Eq(sql_parser.Src_fil().NameAndExt(), Xob_ctg_v1_sql_make.Url_sql))	// delete temp xowa_categorylinks.sql file created by cat_v1
 			Io_mgr._.DeleteFil(sql_parser.Src_fil());
@@ -79,7 +79,7 @@ public class Xob_categorylinks_sql_make implements Io_make_cmd {
 		if (cur_cat_ttl != Bry_.Empty && cur_cat_id != -1)
 			db_mgr.Tbl_category().Insert(ctg_stmt, cur_cat_id, cur_cat_counts[Xoa_ctg_mgr.Tid_page], cur_cat_counts[Xoa_ctg_mgr.Tid_subc], cur_cat_counts[Xoa_ctg_mgr.Tid_file], Xoa_ctg_mgr.Hidden_n, cur_cat_file_idx);
 		if (new_ctg_ttl == Ttl_last) return Cur_cat_id_null;	// last ttl; called by this.End(); exit early else will fail in Cur_cat_id_find()
-		if (cur_cat_file_max > 0 && cur_cat_file_size > cur_cat_file_max) {File_close(); File_open(db_mgr.Fsys_mgr().Make(Xodb_file.Tid_category));}
+		if (cur_cat_file_max > 0 && cur_cat_file_size > cur_cat_file_max) {File_close(); File_open(db_mgr.Fsys_mgr().Make(Xodb_file_tid_.Tid_category));}
 		cur_cat_id = Cur_cat_id_find(new_ctg_ttl);
 		for (int i = 0; i < Xoa_ctg_mgr.Tid__max; i++)
 			cur_cat_counts[i] = 0;
@@ -130,6 +130,10 @@ public class Xob_categorylinks_sql_make implements Io_make_cmd {
 		return new Io_line_rdr(usr_dlg, urls).Key_gen_(Io_line_rdr_key_gen_.first_pipe);
 	}	Io_line_rdr name_id_rdr;
 	private static final byte[] Ttl_last = null, Ttl_first = Bry_.Empty;
+	private static final Db_idx_itm
+	  Index_categorylinks_main = Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS categorylinks__cl_main ON categorylinks (cl_to_id, cl_type_id, cl_sortkey, cl_from);")
+	, Index_categorylinks_from = Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS categorylinks__cl_from ON categorylinks (cl_from);")
+	;
 }
 /*
 NOTE_1: categorylinks row size: 34 + 20 + 12 + (ctg_sortkey.length * 2)

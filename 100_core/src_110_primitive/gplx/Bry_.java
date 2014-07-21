@@ -75,7 +75,7 @@ public class Bry_ {
 		byte[][] rv = new byte[ary_len][];
 		for (int i = 0; i < ary_len; i++) {
 			Object itm = ary[i];
-			rv[i] = itm == null ? null : Bry_.new_utf8_(Object_.XtoStr_OrEmpty(itm));
+			rv[i] = itm == null ? null : Bry_.new_utf8_(Object_.Xto_str_strict_or_empty(itm));
 		}
 		return rv;
 	}
@@ -450,6 +450,19 @@ public class Bry_ {
 			if (lhs[i] != rhs[i + rhs_bgn]) return false;
 		return true;
 	}
+	public static boolean Eq_ci_ascii(byte[] lhs, byte[] rhs, int rhs_bgn, int rhs_end) {
+		if		(lhs == null && rhs == null) return true;
+		else if (lhs == null || rhs == null) return false;
+		int lhs_len = lhs.length;
+		int rhs_len = rhs_end - rhs_bgn;
+		if (lhs_len != rhs_len) return false;
+		for (int i = 0; i < lhs_len; i++) {
+			byte lhs_b = lhs[i];				if (lhs_b > 64 && lhs_b < 91) lhs_b += 32;	// lowercase
+			byte rhs_b = rhs[i + rhs_bgn];		if (rhs_b > 64 && rhs_b < 91) rhs_b += 32;	// lowercase
+			if (lhs_b != rhs_b) return false;
+		}
+		return true;
+	}
 	public static byte[] XtoStrBytesByInt(int val, int padLen) {return XtoStrBytesByInt(val, null, 0, padLen);}
 	public static byte[] XtoStrBytesByInt(int val, byte[] ary, int aryPos, int padLen) {
 		int neg = 0;
@@ -481,24 +494,24 @@ public class Bry_ {
 		}
 		return ary;
 	}
-	public static byte X_to_byte_by_int(byte[] ary, int bgn, int end, byte or)	{return (byte)X_to_int_or(ary, bgn, end, or);}
-	public static int X_to_int(byte[] ary)										{return X_to_int_or(ary, null, 0, ary.length, -1);}
-	public static int X_to_int_or_fail(byte[] ary)								{
-		int rv = X_to_int_or(ary, null, 0, ary.length, Int_.MinValue);
+	public static byte Xto_byte_by_int(byte[] ary, int bgn, int end, byte or)	{return (byte)Xto_int_or(ary, bgn, end, or);}
+	public static int Xto_int(byte[] ary)										{return Xto_int_or(ary, null, 0, ary.length, -1);}
+	public static int Xto_int_or_fail(byte[] ary)								{
+		int rv = Xto_int_or(ary, null, 0, ary.length, Int_.MinValue);
 		if (rv == Int_.MinValue) throw Err_.new_fmt_("could not parse to int; val={0}", String_.new_utf8_(ary));
 		return rv;
 	}
-	public static boolean X_to_bool_by_int_or_fail(byte[] ary) {
-		int rv = X_to_int_or(ary, null, 0, ary.length, Int_.MinValue);
+	public static boolean Xto_bool_by_int_or_fail(byte[] ary) {
+		int rv = Xto_int_or(ary, null, 0, ary.length, Int_.MinValue);
 		switch (rv) {
 			case 0: return false;
 			case 1: return true;
 			default: throw Err_.new_fmt_("could not parse to boolean int; val={0}", String_.new_utf8_(ary));
 		}
 	}
-	public static int X_to_int_or(byte[] ary, int or)							{return X_to_int_or(ary, null, 0, ary.length, or);}
-	public static int X_to_int_or(byte[] ary, int bgn, int end, int or)			{return X_to_int_or(ary, null, bgn, end, or);}
-	public static int X_to_int_or(byte[] ary, byte[] ignore_ary, int bgn, int end, int or) {
+	public static int Xto_int_or(byte[] ary, int or)							{return Xto_int_or(ary, null, 0, ary.length, or);}
+	public static int Xto_int_or(byte[] ary, int bgn, int end, int or)			{return Xto_int_or(ary, null, bgn, end, or);}
+	public static int Xto_int_or(byte[] ary, byte[] ignore_ary, int bgn, int end, int or) {
 		if (	ary == null
 			||	end == bgn				// null-len
 			)	return or;
@@ -532,7 +545,7 @@ public class Bry_ {
 		}
 		return rv;
 	}
-	public static int X_to_int_or_trim(byte[] ary, int bgn, int end, int or) {	// NOTE: same as X_to_int_or, except trims ws at bgn / end; DATE:2014-02-09
+	public static int Xto_int_or_trim(byte[] ary, int bgn, int end, int or) {	// NOTE: same as Xto_int_or, except trims ws at bgn / end; DATE:2014-02-09
 		if (end == bgn) return or;	// null len
 		int rv = 0, multiple = 1;
 		boolean numbers_seen = false, ws_seen = false;
@@ -558,7 +571,7 @@ public class Bry_ {
 		}
 		return rv;
 	}
-	public static int X_to_int_or_lax(byte[] ary, int bgn, int end, int or) {
+	public static int Xto_int_or_lax(byte[] ary, int bgn, int end, int or) {
 		if (end == bgn) return or;	// null-len
 		int end_num = end;
 		for (int i = bgn; i < end; i++) {
@@ -579,7 +592,7 @@ public class Bry_ {
 					break;
 			}
 		}
-		return X_to_int_or(ary, bgn, end_num, or);
+		return Xto_int_or(ary, bgn, end_num, or);
 	}
 	public static float XtoFloatByPos(byte[] ary, int bgn, int end) {return Float_.parse_(String_.new_utf8_(ary, bgn, end));}
 	public static double XtoDoubleByPosOr(byte[] ary, int bgn, int end, double or) {return Double_.parseOr_(String_.new_utf8_(ary, bgn, end), or);}
@@ -655,7 +668,7 @@ public class Bry_ {
 		int bgn = posRef.Val();
 		int pos = Bry_finder.Find_fwd(ary, lkp, bgn, ary.length);
 		if (pos == Bry_.NotFound) throw Err_.new_("lkp failed").Add("lkp", (char)lkp).Add("bgn", bgn);
-		int rv = Bry_.X_to_int_or(ary, posRef.Val(), pos, -1);
+		int rv = Bry_.Xto_int_or(ary, posRef.Val(), pos, -1);
 		posRef.Val_(pos + 1);	// +1 = lkp.Len
 		return rv;
 	}

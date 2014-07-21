@@ -110,7 +110,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 		return rslt.Init_many_objs(pcre, regx_converter.Capt_ary());
 	}
 	public boolean Gmatch_callback(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		String text = args.Form_str_or_null(0); // NOTE: UstringLibrary.php!ustringGmatchCallback calls preg_match directly; $s can be any type, and php casts automatically; 
+		String text = args.Xstr_str_or_null(0); // NOTE: UstringLibrary.php!ustringGmatchCallback calls preg_match directly; $s can be any type, and php casts automatically; 
 		String regx = args.Pull_str(1);
 		KeyVal[] capt = args.Cast_kv_ary_or_null(2);
 		int pos = args.Pull_int(3);
@@ -160,7 +160,7 @@ class Scrib_lib_ustring_gsub_mgr {
 	public boolean Exec(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		Object text_obj = args.Cast_obj_or_null(0);
 		String text = String_.as_(text_obj);
-		if (text == null) text = Object_.XtoStr_OrEmpty(text_obj);
+		if (text == null) text = Object_.Xto_str_strict_or_empty(text_obj);
 		String regx = args.Cast_str_or_null(1);
 		if (args.Len() == 2) return rslt.Init_obj(text);	// if no replace arg, return self; EX:enwikt:'orse; DATE:2013-10-13
 		Object repl_obj = args.Cast_obj_or_null(2);

@@ -119,7 +119,7 @@ public abstract class ListAdp_base implements ListAdp, GfoInvkAble {
 		for (int i = 0; i < count; i++) {
 			if (i != 0) sb.Add_char_crlf();
 			Object val = list[i];
-			sb.Add_obj(Object_.XtoStr_OrEmpty(val));
+			sb.Add_obj(Object_.Xto_str_strict_or_empty(val));
 		}
 		return sb.XtoStr();
 	}

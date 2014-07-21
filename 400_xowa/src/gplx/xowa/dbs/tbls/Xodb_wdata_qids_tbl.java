@@ -27,7 +27,7 @@ public class Xodb_wdata_qids_tbl {
 		Db_stmt stmt = Db_stmt_.Null;
 		try {
 			stmt = Db_stmt_.new_select_(p, Tbl_name, String_.Ary(Fld_wq_src_wiki, Fld_wq_src_ns, Fld_wq_src_ttl), Fld_wq_trg_ttl);
-			String rv = (String)stmt.Val_str_by_bry_(src_wiki).Val_int_(Bry_.X_to_int(src_ns)).Val_str_by_bry_(src_ttl).Exec_select_val();
+			String rv = (String)stmt.Val_str_by_bry_(src_wiki).Val_int_(Bry_.Xto_int(src_ns)).Val_str_by_bry_(src_ttl).Exec_select_val();
 			return rv == null ? null : Bry_.new_utf8_(rv);
 		} finally {stmt.Rls();}
 	}

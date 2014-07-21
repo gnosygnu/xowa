@@ -41,7 +41,8 @@ public class Bool_ implements GfoInvkAble {
 	public static final byte N_byte = 0, Y_byte = 1, __byte = 127;
 	public static final boolean N = false, Y = true;
 	public static final String N_str = "n", Y_str = "y";
-	public static final byte[] True_bry = Bry_.new_ascii_("true"), False_bry = Bry_.new_ascii_("false");
+	public static final String True_str = "true", False_str = "false";
+	public static final byte[] True_bry = Bry_.new_ascii_(True_str), False_bry = Bry_.new_ascii_(False_str);
 	public static final byte[] Y_bry = new byte[] {Byte_ascii.Ltr_y}, N_bry = new byte[] {Byte_ascii.Ltr_n};
 	public static final Bool_ Gfs = new Bool_();
 

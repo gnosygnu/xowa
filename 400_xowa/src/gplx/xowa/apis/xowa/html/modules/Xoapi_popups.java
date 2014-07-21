@@ -60,7 +60,7 @@ public class Xoapi_popups implements GfoInvkAble, GfoEvMgrOwner {
 		wiki.Html_mgr().Module_mgr().Popup_mgr().Show_all(popup_id);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_enabled))						return Yn.X_to_str(enabled);
+		if		(ctx.Match(k, Invk_enabled))						return Yn.Xto_str(enabled);
 		else if	(ctx.Match(k, Invk_enabled_))						enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_show_more))	 					Show_more(m.ReadStr("popup_id"));
 		else if	(ctx.Match(k, Invk_show_all))	 					Show_all (m.ReadStr("popup_id"));
@@ -80,7 +80,7 @@ public class Xoapi_popups implements GfoInvkAble, GfoEvMgrOwner {
 		else if	(ctx.Match(k, Invk_win_max_h_))	 					{win_max_h = Set_int(m, win_max_h, Evt_win_max_h_changed);}
 		else if	(ctx.Match(k, Invk_win_show_all_max_w))	 			return win_show_all_max_w;
 		else if	(ctx.Match(k, Invk_win_show_all_max_w_))	 		{win_show_all_max_w = m.ReadInt("v");}
-		else if	(ctx.Match(k, Invk_win_bind_focus_blur))		 	return Yn.X_to_str(win_bind_focus_blur);
+		else if	(ctx.Match(k, Invk_win_bind_focus_blur))		 	return Yn.Xto_str(win_bind_focus_blur);
 		else if	(ctx.Match(k, Invk_win_bind_focus_blur_))	 		win_bind_focus_blur = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_xnde_ignore_ids))	 			return String_.new_utf8_(xnde_ignore_ids);
 		else if	(ctx.Match(k, Invk_xnde_ignore_ids_))	 			{xnde_ignore_ids = m.ReadBry("v"); GfoEvMgr_.PubVal(this, Evt_xnde_ignore_ids_changed, xnde_ignore_ids);}
@@ -184,7 +184,7 @@ public class Xoapi_popups implements GfoInvkAble, GfoEvMgrOwner {
 	;
 	public static final byte[]
 	  Dflt_xnde_ignore_ids		= Bry_.new_ascii_("coordinates")
-	, Dflt_tmpl_keeplist		= Bry_.new_ascii_("en.wikipedia.org|formatnum;age_in_days;as_of;gregorian_serial_date;currentminute;currentsecond;dmca;spaced_ndash;trim;month*;convert*;worldpop*;ipa*;lang*;nowrap*;h:*;mvar;math;vgy;audio;iso_639_name;transl;translate;linktext;zh;nihongo*;japanese_name;ko-hhrm|\n")
+	, Dflt_tmpl_keeplist		= Bry_.new_ascii_("en.wikipedia.org|formatnum;age;age_in_days;age_in_years_and_days*;nts;number_table_sorting*;as_of;gregorian_serial_date;currentminute;currentsecond;dmca;spaced_ndash;trim;month*;convert*;worldpop*;ipa*;lang*;nowrap*;h:*;mvar;math;vgy;audio;iso_639_name;transl;translate;linktext;zh;nihongo*;japanese_name;ko-hhrm|\n")
 	, Dflt_html_fmtr_popup = Bry_.new_ascii_(String_.Concat_lines_nl_skip_last
 	( "<div dir=~{page_lang_ltr}>"
 	, "  <div>~{content}"

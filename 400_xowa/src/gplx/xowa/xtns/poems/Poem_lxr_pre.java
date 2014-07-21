@@ -32,7 +32,7 @@ public class Poem_lxr_pre implements Xop_lxr {
 				break;
 			}
 		}
-		if (bgn_pos != Xop_parser_.Doc_bgn_bos) {	// do not add xnde/nl if \n is BOS \n; EX.WP: Teresa of Ávila; "<poem>\n\s\s"
+		if (bgn_pos != Xop_parser_.Doc_bgn_bos) {	// do not add xnde/nl if \n is BOS \n; PAGE:en.w:Teresa of Ávila; "<poem>\n\s\s"
 			ctx.Subs_add(root, tkn_mkr.Xnde(cur_pos, cur_pos).Tag_(Xop_xnde_tag_.Tag_br));
 			ctx.Subs_add(root, tkn_mkr.NewLine(cur_pos, cur_pos, Xop_nl_tkn.Tid_char, 1));
 		}

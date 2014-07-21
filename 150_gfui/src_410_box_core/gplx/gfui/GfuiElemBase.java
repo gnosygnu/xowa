@@ -68,7 +68,7 @@ public class GfuiElemBase implements GfuiElem {
 	public GfuiElem Border_off_() {border.All_(null); return this;}
 	public GfxStringData TextMgr() {return textMgr;} GfxStringData textMgr;
 	public String Text() {return textMgr.Val();}
-	public GfuiElem Text_any_(Object obj) {return Text_(Object_.XtoStr_OrNullStr(obj));}
+	public GfuiElem Text_any_(Object obj) {return Text_(Object_.Xto_str_strict_or_null_mark(obj));}
 	@gplx.Virtual public GfuiElem Text_(String v) {
 		this.TextMgr().Text_set(v);
 		Click_key_set_(v);

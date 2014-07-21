@@ -31,10 +31,10 @@ public class Xof_img_wkr_api_size_base_wmf extends Xof_img_wkr_api_size_base {
 		pos += Bry_xml_ii.length;
 
 		if (Parse_xml_val(parse_xml_rng, usr_dlg, xml, xml_len, pos, Bry_xml_width))
-			rv.Orig_w_(Bry_.X_to_int_or(xml, parse_xml_rng.Val_0(), parse_xml_rng.Val_1(), 0));
+			rv.Orig_w_(Bry_.Xto_int_or(xml, parse_xml_rng.Val_0(), parse_xml_rng.Val_1(), 0));
 
 		if (Parse_xml_val(parse_xml_rng, usr_dlg, xml, xml_len, pos, Bry_xml_height))
-			rv.Orig_h_(Bry_.X_to_int_or(xml, parse_xml_rng.Val_0(), parse_xml_rng.Val_1(), 0));
+			rv.Orig_h_(Bry_.Xto_int_or(xml, parse_xml_rng.Val_0(), parse_xml_rng.Val_1(), 0));
 
 		if (Parse_xml_val(parse_xml_rng, usr_dlg, xml, xml_len, pos, Bry_xml_descriptionurl)) {
 			byte[] file_url = Bry_.Mid(xml, parse_xml_rng.Val_0(), parse_xml_rng.Val_1());

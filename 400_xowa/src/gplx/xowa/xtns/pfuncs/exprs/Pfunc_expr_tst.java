@@ -77,7 +77,7 @@ public class Pfunc_expr_tst {
 	@Test  public void Atan()				{fxt.Test_parse_tmpl_str_test("{{#expr:atan(0)}}"								, "{{test}}"	, "0");}
 	@Test  public void Round()				{fxt.Test_parse_tmpl_str_test("{{#expr:1.5 round 0}}"							, "{{test}}"	, "2");}
 	@Test  public void Round_0()			{fxt.Test_parse_tmpl_str_test("{{#expr:0 round 1}}"								, "{{test}}"	, "0");}		// PURPOSE: 0 round 1 should be 0, not 0.0; DATE:2013-11-09
-	@Test  public void Round_ex_1()			{fxt.Test_parse_tmpl_str_test("{{#expr:(0.03937007874015)round(3)}}"			, "{{test}}"	, "0.039");}	// PURPOSE: rounding results in excessive decimal places; EX.WP:Milky Way (light year conversions)
+	@Test  public void Round_ex_1()			{fxt.Test_parse_tmpl_str_test("{{#expr:(0.03937007874015)round(3)}}"			, "{{test}}"	, "0.039");}	// PURPOSE: rounding results in excessive decimal places; PAGE:en.w:Milky Way (light year conversions)
 	@Test  public void Mod_frac()			{fxt.Test_parse_tmpl_str_test("{{#expr:0.00999999mod10}}"						, "{{test}}"	, "0");}
 	@Test  public void Mod_large()			{fxt.Test_parse_tmpl_str_test("{{#expr:39052000900mod100}}"						, "{{test}}"	, "0");}		// PURPOSE: JAVA was failing in converting to int and converted to Int_.MaxValue instead; DATE:2013-01-26
 	@Test  public void Fmod()				{fxt.Test_parse_tmpl_str_test("{{#expr:1.25 fmod .5}}"							, "{{test}}"	, "0.25");}
@@ -86,10 +86,10 @@ public class Pfunc_expr_tst {
 	@Test  public void Esc_xml_entRef()		{fxt.Test_parse_tmpl_str_test("{{#expr:&minus;1 &lt; 5}}"						, "{{test}}"	, "1");}
 	@Test  public void Ex_1()				{fxt.Test_parse_tmpl_str_test("{{#expr:1e2round0}}"								, "{{test}}"	, "100");}		// PURPOSE: used in Convert
 	@Test  public void Floating()			{fxt.Test_parse_tmpl_str_test("{{#expr:27.321582}}"								, "{{test}}"	, "27.321582");}
-	@Test  public void Floating_2()			{fxt.Test_parse_tmpl_str_test("{{#expr:0.1*41}}"								, "{{test}}"	, "4.1");}		// PURPOSE: division results in expanded floating-point; EX.WP:Wikipedia
-	@Test  public void Floating_3()			{fxt.Test_parse_tmpl_str_test("{{#expr:111/10^(-1)}}"							, "{{test}}"	, "1110");}		// PURPOSE: division by pow; EX.WP:Wikipedia:Featured articles
+	@Test  public void Floating_2()			{fxt.Test_parse_tmpl_str_test("{{#expr:0.1*41}}"								, "{{test}}"	, "4.1");}		// PURPOSE: division results in expanded floating-point; PAGE:en.w:Wikipedia
+	@Test  public void Floating_3()			{fxt.Test_parse_tmpl_str_test("{{#expr:111/10^(-1)}}"							, "{{test}}"	, "1110");}		// PURPOSE: division by pow; PAGE:en.w:Wikipedia:Featured articles
 	@Test  public void Floating_4()			{fxt.Test_parse_tmpl_str_test("{{#expr:abs(-73.9023)}}"							, "{{test}}"	, "73.9023");}	// PURPOSE: Abs;
-	@Test  public void Unicode_8722()		{fxt.Test_parse_tmpl_str_test("{{#expr:2−1}}"									, "{{test}}"	, "1");}		// PURPOSE: handle alternate minus; EX.WP: Australian krill
+	@Test  public void Unicode_8722()		{fxt.Test_parse_tmpl_str_test("{{#expr:2−1}}"									, "{{test}}"	, "1");}		// PURPOSE: handle alternate minus; PAGE:en.w:Australian krill
 	@Test  public void Exp_large_neg()		{fxt.Test_parse_tmpl_str_test("{{#expr:418400000000000000000000E-23}}"			, "{{test}}"	, "4.184");}	// PURPOSE: handle large neg; EX: w:Chicxulub_crater; {{convert|100|TtonTNT|J|lk=on}}
 	@Test  public void Exp_large_neg2()		{fxt.Test_parse_tmpl_str_test("{{#expr:210000000000000000E-17}}"				, "{{test}}"	, "2.1");}		// PURPOSE: handle large neg2; EX: w:Chicxulub_crater; {{convert|50|MtonTNT|J|lk=on}}
 	@Test  public void Fix_transclusion()	{fxt.Test_parse_tmpl_str_test("{{#expr:{{#if:||1}}/.2}}"						, "{{test}}"	, "5");}		// PURPOSE: /. was invoking transclusion; DATE:2013-04-26

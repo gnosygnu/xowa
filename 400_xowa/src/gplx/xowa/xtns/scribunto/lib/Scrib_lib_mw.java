@@ -136,12 +136,12 @@ public class Scrib_lib_mw implements Scrib_lib {
 		int key_int = Bry_.NotFound;
 		byte[] key_dat_ary = nde.Key_tkn().Dat_ary();
 		if (Env_.Mode_testing() && src == null)	// some tests will always pass a null src;
-			key_int = Bry_.X_to_int_or(key_dat_ary, 0, key_dat_ary.length, Bry_.NotFound);
+			key_int = Bry_.Xto_int_or(key_dat_ary, 0, key_dat_ary.length, Bry_.NotFound);
 		else {
 			if (Bry_.Len_eq_0(key_dat_ary))	// should be called by current context;
-				key_int = Bry_.X_to_int_or(src, nde.Key_tkn().Src_bgn(), nde.Key_tkn().Src_end(), Bry_.NotFound);
+				key_int = Bry_.Xto_int_or(src, nde.Key_tkn().Src_bgn(), nde.Key_tkn().Src_end(), Bry_.NotFound);
 			else							// will be called by parent context; note that this calls Xot_defn_tmpl_.Make_itm which sets a key_dat_ary; DATE:2013-09-23
-				key_int = Bry_.X_to_int_or(key_dat_ary, 0, key_dat_ary.length, Bry_.NotFound);
+				key_int = Bry_.Xto_int_or(key_dat_ary, 0, key_dat_ary.length, Bry_.NotFound);
 		}
 		if (key_int == Bry_.NotFound)		// key is not-numeric
 			return false;
@@ -155,8 +155,8 @@ public class Scrib_lib_mw implements Scrib_lib {
 		Xot_invk parent_frame = Scrib_frame_.Get_parent(core, frame_tid);
 		int frame_arg_adj = Scrib_frame_.Get_arg_adj(frame_tid);
 		int args_len = frame.Args_len() - frame_arg_adj;
-		if (args_len < 1) return rslt.Init_obj(KeyVal_.Ary_empty);	// occurs when "frame:getParent().args" but no parent frame
-		Bry_bfr tmp_bfr = ctx.Wiki().Utl_bry_bfr_mkr().Get_b128();			// NOTE: do not make modular level variable, else random failures; DATE:2013-10-14
+		if (args_len < 1) return rslt.Init_obj(KeyVal_.Ary_empty);		// occurs when "frame:getParent().args" but no parent frame
+		Bry_bfr tmp_bfr = ctx.Wiki().Utl_bry_bfr_mkr().Get_b128();		// NOTE: do not make modular level variable, else random failures; DATE:2013-10-14
 		ListAdp rv = ListAdp_.new_();
 		int arg_idx = 0;
 		for (int i = 0; i < args_len; i++) {
@@ -180,7 +180,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 			if (key_missing)	// key missing; EX: {{a|val}}
 				key_as_int = ++arg_idx;// NOTE: MW requires a key; if none, then default to int index; NOTE: must be int, not String; NOTE: must be indexed to keyless args; EX: in "key1=val1,val2", "val2" must be "1" (1st keyless arg) not "2" (2nd arg); DATE:2013-11-09
 			else {				// key exists; EX:{{a|key=val}}
-				key_as_int = Bry_.X_to_int_or(tmp_bfr.Bfr(), 0, tmp_bfr.Len(), Int_.MinValue);
+				key_as_int = Bry_.Xto_int_or(tmp_bfr.Bfr(), 0, tmp_bfr.Len(), Int_.MinValue);
 				if (key_as_int == Int_.MinValue) {		// key is not int; create str
 					key_as_str = tmp_bfr.XtoStrAndClear();
 					key_is_str = true;
@@ -202,7 +202,9 @@ public class Scrib_lib_mw implements Scrib_lib {
 		Xot_invk frame = Scrib_frame_.Get_frame(core, frame_id);
 		return rslt.Init_obj(frame != null);
 	}
-	public boolean ParentFrameExists(Scrib_proc_args args, Scrib_proc_rslt rslt) {return rslt.Init_obj(!core.Frame_parent().Root_frame());}
+	public boolean ParentFrameExists(Scrib_proc_args args, Scrib_proc_rslt rslt) {
+		return rslt.Init_obj(!core.Frame_parent().Root_frame());
+	}
 	public boolean Preprocess(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		String frame_id = args.Pull_str(0);
 		Xot_invk frame = Scrib_frame_.Get_frame(core, frame_id);

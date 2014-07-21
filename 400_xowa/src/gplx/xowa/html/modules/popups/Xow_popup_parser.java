@@ -91,7 +91,7 @@ public class Xow_popup_parser {
 				&&	tmpl_read_len_cur < tmpl_len								// only reparse if tmpl_read_len_cur is < entire page; needed for pages which have dangling items; EX:"<i>a"
 				) {	
 				new_tmpl_bgn = tmpl_bgn;
-				tmpl_read_len_cur += cfg.Tmpl_read_len();
+				tmpl_read_len_cur = Xow_popup_parser_.Calc_read_len(wtxt_ctx, tmpl_read_len_cur, cfg.Tmpl_read_len(), tmpl_src, tmpl_bgn, tmpl_end);
 				wtxt_ctx.Clear();
 			}
 			else {
@@ -99,6 +99,7 @@ public class Xow_popup_parser {
 				tmpl_read_len_cur = cfg.Tmpl_read_len();
 			}
 			tmpl_bgn = new_tmpl_bgn;
+			data.Tmpl_loop_count_add();
 			if (	tmpl_bgn == tmpl_len				// end of template
 				||	tmpl_bgn >	data.Tmpl_max()			// too much read; stop and give whatever's available
 				)
@@ -196,5 +197,38 @@ public class Xow_popup_parser {
 		for (int i = 0; i < subs_len; i++)
 			tmpl_root.Subs_get(i).Tmpl_compile(tmpl_ctx, src, tmpl_props);
 		return Xot_tmpl_wtr._.Write_all(tmpl_ctx, tmpl_root, src);
+	}
+}
+class Xow_popup_parser_ {
+	public static int Calc_read_len(Xop_ctx ctx, int tmpl_read_cur, int tmpl_read_len, byte[] src, int bgn, int end) {// DATE:2014-07-19
+		int rv_default = tmpl_read_cur + tmpl_read_len;
+		Xop_tkn_itm tkn = Get_expensive_dangling_tkn(ctx);
+		if (tkn == null) return rv_default;					// no expensive tkns found; return rv_default; EX: headers are not considered expensive
+		int tkn_end = Calc_tkn_end(tkn, src, end);
+		if (tkn_end == Bry_.NotFound) return rv_default;	// no end found; return rv_default; might want to return src.length at future date
+		return tkn_end - bgn;
+	}
+	private static Xop_tkn_itm Get_expensive_dangling_tkn(Xop_ctx ctx) {
+		int stack_len = ctx.Stack_len();
+		if (stack_len == 0) return null;	// no dangling tkns; just add tmpl_read_len; shouldn't happen, but keep prior behavior
+		for (int i = 0; i < stack_len; ++i) {
+			Xop_tkn_itm tkn = ctx.Stack_get(i);
+			switch (tkn.Tkn_tid()) {
+				case Xop_tkn_itm_.Tid_tblw_tb:
+					return tkn;
+			}
+		}
+		return null;
+	}
+	private static int Calc_tkn_end(Xop_tkn_itm tkn, byte[] src, int pos) {
+		byte[] end_bry = null;
+		switch (tkn.Tkn_tid()) {
+			case Xop_tkn_itm_.Tid_tblw_tb:	// "{|" can be expensive; PAGE:en.w:List_of_countries_and_dependencies_by_area; DATE:2014-07-19
+				end_bry = Xop_tblw_lxr.Hook_te;
+				break;
+		}
+		if (end_bry == null) return Bry_.NotFound;	// no end defined for tkn; return null which should revert to dflt
+		int end_pos = Bry_finder.Find_fwd(src, end_bry, pos);
+		return end_pos == Bry_finder.Not_found ? Bry_finder.Not_found : end_pos + end_bry.length;
 	}
 }

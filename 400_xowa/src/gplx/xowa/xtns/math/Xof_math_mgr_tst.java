@@ -21,7 +21,7 @@ public class Xof_math_mgr_tst {
 	@Before public void init() {} Xof_math_subst_regy subst_regy = new Xof_math_subst_regy().Init();
 	@Test  public void Basic()						{tst("a\\plusmn b"			, "a\\pm b");}
 	@Test  public void Match_fails()				{tst("a\\plusmna b"			, "a\\plusmna b");}
-	@Test  public void Part()						{tst("a\\part_t b"			, "a\\partial_t b");}	// EX.WP: Faraday's law of induction
+	@Test  public void Part()						{tst("a\\part_t b"			, "a\\partial_t b");}	// PAGE:en.w:Faraday's law of induction
 	@Test  public void Partial()					{tst("a\\partial_{x_i}"		, "a\\partial_{x_i}");}	// DEFECT: partial -> partialial
 	private void tst(String src, String expd) {Tfds.Eq(expd, String_.new_utf8_(subst_regy.Subst(Bry_.new_utf8_(src))));}
 }

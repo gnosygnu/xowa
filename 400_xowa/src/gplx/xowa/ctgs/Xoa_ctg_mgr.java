@@ -35,7 +35,7 @@ public class Xoa_ctg_mgr implements GfoInvkAble {
 		if		(ctx.Match(k, Invk_missing_ctg_cls))				return Missing_ctg_cls_tid_print(missing_ctg_cls_tid);
 		else if	(ctx.Match(k, Invk_missing_ctg_cls_))				missing_ctg_cls_tid = Missing_ctg_cls_tid_parse(m.ReadStr("v"));
 		else if	(ctx.Match(k, Invk_missing_ctg_cls_list))			return Options_missing_ctg_cls_list;
-		else if	(ctx.Match(k, Invk_pagecats_grouping_enabled))		return Yn.X_to_str(pagecats_grouping_enabled);
+		else if	(ctx.Match(k, Invk_pagecats_grouping_enabled))		return Yn.Xto_str(pagecats_grouping_enabled);
 		else if	(ctx.Match(k, Invk_pagecats_grouping_enabled_))		pagecats_grouping_enabled = m.ReadYn("v");
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;

@@ -162,7 +162,7 @@ public class Scrib_lib_language implements Scrib_lib {
 	public boolean CaseFold(Scrib_proc_args args, Scrib_proc_rslt rslt) {return Uc(args, rslt);}	// REF.MW:Language.php!caseFold; http://www.w3.org/International/wiki/Case_folding
 	public boolean FormatNum(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		Xol_lang lang = lang_(args);
-		byte[] num = args.Form_bry_or_null(1);
+		byte[] num = args.Xstr_bry_or_null(1);
 		boolean skip_commafy = false;
 		if (num != null) {	// MW: if num present, check options table for noCommafy arg;
 			KeyVal[] kv_ary = args.Cast_kv_ary_or_null(2);
@@ -194,7 +194,7 @@ public class Scrib_lib_language implements Scrib_lib {
 	}
 	public boolean ParseFormattedNumber(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		Xol_lang lang = lang_(args);
-		byte[] num = args.Form_bry_or_null(1);
+		byte[] num = args.Xstr_bry_or_null(1);
 		if (num == null) return rslt.Init_null(); // ParseFormattedNumber can sometimes take 1 arg ({'en'}), or null arg ({'en', null}); return null (not ""); DATE:2014-01-07
 		byte[] rv = lang.Num_mgr().Raw(num);
 		return rslt.Init_obj(rv);
@@ -203,7 +203,7 @@ public class Scrib_lib_language implements Scrib_lib {
 		Xol_lang lang = lang_(args);
 		long seconds = args.Pull_long(1);
 		KeyVal[] intervals_kv_ary = args.Cast_kv_ary_or_null(2);
-		Xol_duration_itm[] intervals = Xol_duration_itm_.X_to_itm_ary(intervals_kv_ary);
+		Xol_duration_itm[] intervals = Xol_duration_itm_.Xto_itm_ary(intervals_kv_ary);
 		byte[] rv = lang.Duration_mgr().Format_durations(core.Ctx(), seconds, intervals);
 		return rslt.Init_obj(rv);
 	}
@@ -211,9 +211,9 @@ public class Scrib_lib_language implements Scrib_lib {
 		Xol_lang lang = lang_(args);
 		long seconds = args.Pull_long(1);
 		KeyVal[] intervals_kv_ary = args.Cast_kv_ary_or_null(2);
-		Xol_duration_itm[] intervals = Xol_duration_itm_.X_to_itm_ary(intervals_kv_ary);
+		Xol_duration_itm[] intervals = Xol_duration_itm_.Xto_itm_ary(intervals_kv_ary);
 		Xol_interval_itm[] rv = lang.Duration_mgr().Get_duration_intervals(seconds, intervals);
-		return rslt.Init_obj(Xol_interval_itm.X_to_kv_ary(rv));
+		return rslt.Init_obj(Xol_interval_itm.Xto_kv_ary(rv));
 	}
 	public boolean ConvertPlural(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		Xol_lang lang = lang_(args);

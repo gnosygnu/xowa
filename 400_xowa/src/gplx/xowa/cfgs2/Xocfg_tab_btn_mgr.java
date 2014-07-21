@@ -31,21 +31,21 @@ public class Xocfg_tab_btn_mgr implements GfoInvkAble, GfoEvMgrOwner {
 	public int Text_max_chars() {return text_max_chars;} public Xocfg_tab_btn_mgr Text_max_chars_(int v) {text_max_chars = v; return this;} private int text_max_chars = 40;
 	public boolean Hide_if_one() {return hide_if_one;} public Xocfg_tab_btn_mgr Hide_if_one_(boolean v) {hide_if_one = v; return this;} private boolean hide_if_one;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_place_on_top))					return Yn.X_to_str(place_on_top);
+		if		(ctx.Match(k, Invk_place_on_top))					return Yn.Xto_str(place_on_top);
 		else if	(ctx.Match(k, Invk_place_on_top_))					{place_on_top = m.ReadYn("v"); GfoEvMgr_.PubVal(this, Evt_place_on_top_changed, place_on_top);}
-		else if	(ctx.Match(k, Invk_curved))							return Yn.X_to_str(curved);
+		else if	(ctx.Match(k, Invk_curved))							return Yn.Xto_str(curved);
 		else if	(ctx.Match(k, Invk_curved_))						{curved = m.ReadYn("v"); GfoEvMgr_.PubVal(this, Evt_curved_changed, curved);}
 		else if	(ctx.Match(k, Invk_height))							return height;
 		else if	(ctx.Match(k, Invk_height_))						{height = m.ReadInt("v"); GfoEvMgr_.PubVal(this, Evt_height_changed, height);}
-		else if	(ctx.Match(k, Invk_close_visible))					return Yn.X_to_str(close_visible);
+		else if	(ctx.Match(k, Invk_close_visible))					return Yn.Xto_str(close_visible);
 		else if	(ctx.Match(k, Invk_close_visible_))					{close_visible = m.ReadYn("v"); GfoEvMgr_.PubVal(this, Evt_close_visible_changed, close_visible);}
-		else if	(ctx.Match(k, Invk_unselected_close_visible))		return Yn.X_to_str(unselected_close_visible);
+		else if	(ctx.Match(k, Invk_unselected_close_visible))		return Yn.Xto_str(unselected_close_visible);
 		else if	(ctx.Match(k, Invk_unselected_close_visible_))		{unselected_close_visible = m.ReadYn("v"); GfoEvMgr_.PubVal(this, Evt_unselected_close_visible_changed, unselected_close_visible);}
 		else if	(ctx.Match(k, Invk_text_min_chars))					return text_min_chars;
 		else if	(ctx.Match(k, Invk_text_min_chars_))				{text_min_chars = m.ReadInt("v"); GfoEvMgr_.PubVal(this, Evt_text_min_chars_changed, text_min_chars);}
 		else if	(ctx.Match(k, Invk_text_max_chars))					return text_max_chars;
 		else if	(ctx.Match(k, Invk_text_max_chars_))				{text_max_chars = m.ReadInt("v"); GfoEvMgr_.PubVal(this, Evt_text_max_chars_changed, text_max_chars);}
-		else if	(ctx.Match(k, Invk_hide_if_one))					return Yn.X_to_str(hide_if_one);
+		else if	(ctx.Match(k, Invk_hide_if_one))					return Yn.Xto_str(hide_if_one);
 		else if	(ctx.Match(k, Invk_hide_if_one_))					{hide_if_one = m.ReadYn("v"); GfoEvMgr_.PubVal(this, Evt_hide_if_one_changed, hide_if_one);}
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;

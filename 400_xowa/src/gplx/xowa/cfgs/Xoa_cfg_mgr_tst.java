@@ -69,7 +69,7 @@ class Xoa_cfg_mgr_fxt {
 		Test_cfg_get(wiki, prop_key, expd_val);
 	}
 	private void Test_cfg_get(GfoInvkAble invk, String prop, String expd) {
-		Tfds.Eq(expd, Object_.XtoStr_OrNullStr(app.Cfg_mgr().Eval_get(invk, prop)));		
+		Tfds.Eq(expd, Object_.Xto_str_strict_or_null_mark(app.Cfg_mgr().Eval_get(invk, prop)));		
 	}
 	public void Test_cfg_itm(String wiki, String prop, boolean expd_customized, boolean expd_dirty) {
 		Test_cfg_itm(Bry_.new_ascii_(wiki), Bry_.new_ascii_(prop), expd_customized, expd_dirty);

@@ -22,7 +22,7 @@ public class Xog_win_itm__prog_href_mgr {
 	private static Bry_bfr	tmp_bfr		= Bry_bfr.reset_(512);
 	public static void Print(Xog_win_itm win) {	// PURPOSE: print href in prog box when in content editable mode
 		String href = win.Active_html_box().Html_active_atr_get_str(Gfui_html.Atr_href, "");// get selected href from html_box
-		href = win.App().Url_converter_href().Decode_str(href);								// remove url encodings
+		href = win.App().Encoder_mgr().Href().Decode_str(href);								// remove url encodings
 		if (!String_.Eq(href, win.Prog_box().Text()))
 			win.Usr_dlg().Prog_direct(href);
 	}

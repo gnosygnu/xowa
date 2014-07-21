@@ -25,7 +25,7 @@ public class Xop_redirect_mgr_tst {
 	@Test  public void First()					{fxt.Test_redirect("#REDIRECT [[a]] [[b]]", "A");}
 	@Test  public void Exc_false_match()		{fxt.Test_redirect("#REDIRECTA [[a]]", "");}
 	@Test  public void Exc_lnki_not_found()		{fxt.Test_redirect("#REDIRECT test", "");}
-	@Test  public void Ws()						{fxt.Test_redirect("\n#REDIRECT [[a]]", "A");}	// EX.WP:Germany; {{Template group}} -> \n#REDIRECT [[Template:Navboxes]]
+	@Test  public void Ws()						{fxt.Test_redirect("\n#REDIRECT [[a]]", "A");}	// PAGE:en.w:Germany; {{Template group}} -> \n#REDIRECT [[Template:Navboxes]]
 	@Test  public void Utf8() {
 		fxt.Init_utf8();
 		fxt.Init_kwds(Bool_.N, "#REDIRECT", "#перенаправление");

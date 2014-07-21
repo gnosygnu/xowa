@@ -21,18 +21,18 @@ public class Xop_xnde_tag_regy {
 	public Btrie_slim_mgr XndeNames(int i) {
 		if (nild) {Init(); nild = false;}
 		switch (i) {
-			case Xop_parser_.Parse_tid_tmpl:		return tagRegy_tmpl;
-			case Xop_parser_.Parse_tid_page_tmpl:	return tagRegy_wiki_tmpl;
-			case Xop_parser_.Parse_tid_page_wiki:	return tagRegy_wiki_main;
-			default:								return tagRegy_wiki_tmpl; //throw Err_.unhandled(i);
+			case Xop_parser_.Parse_tid_tmpl:		return tag_regy_tmpl;
+			case Xop_parser_.Parse_tid_page_tmpl:	return tag_regy_wiki_tmpl;
+			case Xop_parser_.Parse_tid_page_wiki:	return tag_regy_wiki_main;
+			default:								return tag_regy_wiki_tmpl; //throw Err_.unhandled(i);
 		}
 	}	boolean nild = true;
 	public void Init() {
-		Init_reg(tagRegy_tmpl		, FilterXtns(Xop_xnde_tag_.Ary, Xop_xnde_tag_.Tag_includeonly, Xop_xnde_tag_.Tag_noinclude, Xop_xnde_tag_.Tag_onlyinclude, Xop_xnde_tag_.Tag_nowiki));
-		Init_reg(tagRegy_wiki_tmpl	, FilterXtns(Xop_xnde_tag_.Ary, Xop_xnde_tag_.Tag_includeonly, Xop_xnde_tag_.Tag_noinclude, Xop_xnde_tag_.Tag_onlyinclude, Xop_xnde_tag_.Tag_nowiki));
-		Init_reg(tagRegy_wiki_main	, Xop_xnde_tag_.Ary);
+		Init_reg(tag_regy_tmpl		, FilterXtns(Xop_xnde_tag_.Ary, Xop_xnde_tag_.Tag_includeonly, Xop_xnde_tag_.Tag_noinclude, Xop_xnde_tag_.Tag_onlyinclude, Xop_xnde_tag_.Tag_nowiki));
+		Init_reg(tag_regy_wiki_tmpl	, FilterXtns(Xop_xnde_tag_.Ary, Xop_xnde_tag_.Tag_includeonly, Xop_xnde_tag_.Tag_noinclude, Xop_xnde_tag_.Tag_onlyinclude, Xop_xnde_tag_.Tag_nowiki));
+		Init_reg(tag_regy_wiki_main	, Xop_xnde_tag_.Ary);
 	}
-	Xop_xnde_tag[] FilterXtns(Xop_xnde_tag[] ary, Xop_xnde_tag... more) {
+	private Xop_xnde_tag[] FilterXtns(Xop_xnde_tag[] ary, Xop_xnde_tag... more) {
 		ListAdp rv = ListAdp_.new_();
 		for (Xop_xnde_tag itm : ary)
 			if (itm.Xtn()) rv.Add(itm);
@@ -40,13 +40,22 @@ public class Xop_xnde_tag_regy {
 			rv.Add(itm);
 		return (Xop_xnde_tag[])rv.XtoAry(Xop_xnde_tag.class);
 	}
-	private void Init_reg(Btrie_slim_mgr tagRegy, Xop_xnde_tag... ary) {
-		for (Xop_xnde_tag tag : ary)
-			tagRegy.Add_obj(tag.Name_bry(), tag);
+	private void Init_reg(Btrie_slim_mgr tag_regy, Xop_xnde_tag... ary) {
+		for (Xop_xnde_tag tag : ary) {
+			tag_regy.Add_obj(tag.Name_bry(), tag);
+			OrderedHash langs = tag.Langs();
+			if (langs != null) {						// tag has langs; EX: <section>; DATE:2014-07-18
+				int langs_len = langs.Count();
+				for (int i = 0; i < langs_len; ++i) {	// register each lang's tag; EX:"<Abschnitt>", "<trecho>"
+					Xop_xnde_tag_lang lang = (Xop_xnde_tag_lang)langs.FetchAt(i);
+					tag_regy.Add_obj(lang.Name_bry(), tag);
+				}
+			}
+		}
 	}
 	private Btrie_slim_mgr
-	  tagRegy_wiki_main = Btrie_slim_mgr.ci_ascii_()	// NOTE:ci.ascii:MW_const.en; listed XML node names are en
-	, tagRegy_wiki_tmpl = Btrie_slim_mgr.ci_ascii_()
-	, tagRegy_tmpl		= Btrie_slim_mgr.ci_ascii_()
+	  tag_regy_wiki_main	= Btrie_slim_mgr.ci_utf_8_()	// NOTE:ci.utf8; he.s and <section> alias DATE:2014-07-18
+	, tag_regy_wiki_tmpl	= Btrie_slim_mgr.ci_utf_8_()
+	, tag_regy_tmpl			= Btrie_slim_mgr.ci_utf_8_()
 	;
 }

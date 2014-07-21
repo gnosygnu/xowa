@@ -66,7 +66,7 @@ class DataTypes_base_fxt {
 		Tfds.Eq(rdr.ReadStr("full_name"), "John Doe");
 		Tfds.Eq(rdr.ReadBool("is_active"), true);
 		Tfds.Eq_date(rdr.ReadDate("last_update"), DateAdp_.parse_gplx("2006-03-30 22:22:00.000"));
-		Tfds.Eq(floatStr, Object_.XtoStr_OrEmpty(rdr.ReadFloat("quantity")));
+		Tfds.Eq(floatStr, Object_.Xto_str_strict_or_empty(rdr.ReadFloat("quantity")));
 		Tfds.Eq_decimal(rdr.ReadDecimal("amount"), DecimalAdp_.parts_(12, 345));
 	}
 	public void UpdateDate_hook() {

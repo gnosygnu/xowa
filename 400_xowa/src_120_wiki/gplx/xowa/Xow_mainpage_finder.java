@@ -16,13 +16,14 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.xowa.langs.msgs.*;
 public class Xow_mainpage_finder {
 	public static byte[] Find_or(Xow_wiki wiki, byte[] or) {
 		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
-		Xol_msg_itm msg_itm = Pf_msg_mgr.Get_msg_itm(tmp_bfr, wiki, wiki.Lang(), Msg_mainpage);
+		Xol_msg_itm msg_itm = Xol_msg_mgr_.Get_msg_itm(tmp_bfr, wiki, wiki.Lang(), Msg_mainpage);
 		byte[] rv = msg_itm.Src_is_missing()
 			? or
-			: Pf_msg_mgr.Get_msg_val(tmp_bfr, wiki, msg_itm, Bry_.Ary_empty)
+			: Xol_msg_mgr_.Get_msg_val(tmp_bfr, wiki, msg_itm, Bry_.Ary_empty)
 			;
 		tmp_bfr.Mkr_rls();
 		return rv;

@@ -33,7 +33,7 @@ public class GfoNde implements GfoInvkAble {
 		String_bldr sb = String_bldr_.new_();
 		for (int i = 0; i < aryLen; i++) {
 			String key = i >= flds.Count()	? "<< NULL " + i + " >>" : flds.FetchAt(i).Key();
-			String val = i >= aryLen		? "<< NULL " + i + " >>" : Object_.XtoStr_OrNullStr(ary[i]);
+			String val = i >= aryLen		? "<< NULL " + i + " >>" : Object_.Xto_str_strict_or_null_mark(ary[i]);
 			sb.Add(key).Add("=").Add(val);
 		}
 		return sb.XtoStr();

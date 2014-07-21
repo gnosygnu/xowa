@@ -65,7 +65,7 @@ public class Xosrv_server implements GfoInvkAble {
 	}
 	private String Exec_cmd(String msg_text) {
 		Object rv_obj = app.Gfs_mgr().Run_str(msg_text);
-		String rv = ClassAdp_.Eq_typeSafe(rv_obj, String_.ClassOf) ? (String)rv_obj : Object_.XtoStr_OrNull(rv_obj);
+		String rv = ClassAdp_.Eq_typeSafe(rv_obj, String_.ClassOf) ? (String)rv_obj : Object_.Xto_str_strict_or_null(rv_obj);
 		return rv;
 	}
 	public String Exec_js(byte[] sender, byte[] msg_text) {
@@ -76,7 +76,7 @@ public class Xosrv_server implements GfoInvkAble {
 //				xowa_exec_args = (Object[])Array_.Resize(xowa_exec_args, xowa_exec_args.length + 1);
 //				xowa_exec_args[xowa_exec_args.length - 1] = sender;
 			Object rv_obj = gplx.gfui.Gfui_html.Js_args_exec(app.Gui_mgr().Browser_win().Active_html_itm().Js_cbk(), xowa_exec_args);
-			trace.Val_("json_write: " + Object_.XtoStr_OrNullStr(rv_obj));
+			trace.Val_("json_write: " + Object_.Xto_str_strict_or_null_mark(rv_obj));
 			return json_wtr.Write_root(Bry_xowa_js_result, rv_obj).Bld_as_str();
 		} catch (Exception e) {throw Err_.err_(e, "exec_js error: {0} {1} {2}", trace, msg_text, Err_.Message_gplx(e));}
 	}	private Xosrv_xowa_exec_parser xowa_exec_parser = new Xosrv_xowa_exec_parser(); private Json_doc_srl json_wtr = new Json_doc_srl(); private static final byte[] Bry_xowa_js_result = Bry_.new_ascii_("xowa_js_result");

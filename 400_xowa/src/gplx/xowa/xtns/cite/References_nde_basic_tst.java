@@ -159,7 +159,7 @@ public class References_nde_basic_tst {
 			, ""
 			));
 	}
-	@Test  public void Key_ignore_nl_tab() {	// PURPOSE: \n in ref_name should be escaped to \s; EX.WP:Self-Transcendence 3100 Mile Race
+	@Test  public void Key_ignore_nl_tab() {	// PURPOSE: \n in ref_name should be escaped to \s; PAGE:en.w:Self-Transcendence 3100 Mile Race
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			( "<ref name=\"name\na\">b</ref>"
 			, "<references/>"

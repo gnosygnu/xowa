@@ -39,7 +39,7 @@ class Imap_html_bldr {
 		area_fmtr.Bld_bfr_many(rslt_bfr, itm.Shape_link_href(), itm.Shape_link_caption(), shape_name, pts_fmtr_arg);
 	}
 	private static final Bry_fmtr area_fmtr = Bry_fmtr.new_
-	("<area href=\"~{href}\" shape=\"~{shape}\" coords=\"~{pts}\" alt=\"{caption}\" title=\"~{caption}\"/>"
+	( "<area href=\"~{href}\" shape=\"~{shape}\" coords=\"~{pts}\" alt=\"{caption}\" title=\"~{caption}\"/>"
 	, "href", "caption", "shape", "pts"
 	);
 }

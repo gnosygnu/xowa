@@ -72,7 +72,7 @@ public class Xof_math_mgr implements GfoInvkAble {
 		return pass;
 	}
 	private String_bldr tmp_sb = String_bldr_.new_();
-	private String Latex_wrap(byte[] math) {return Latex_doc_fmtr.Bld_str_many(String_.Replace(String_.new_utf8_(math), "\n\n", "\n"));}	// NOTE: remove lines that are completely blank; not sure if this is right; EX.WP: Standard Model (mathematical formulation); <math>(\mathbf{1},\mathbf\n\n{1},0)</math>
+	private String Latex_wrap(byte[] math) {return Latex_doc_fmtr.Bld_str_many(String_.Replace(String_.new_utf8_(math), "\n\n", "\n"));}	// NOTE: remove lines that are completely blank; not sure if this is right; PAGE:en.w:Standard Model (mathematical formulation); <math>(\mathbf{1},\mathbf\n\n{1},0)</math>
 	private static Bry_fmtr Latex_doc_fmtr = new Bry_fmtr()
 	.Fmt_(String_.Concat_lines_nl_skip_last
 	(	"\\documentclass{article}"
@@ -92,7 +92,7 @@ public class Xof_math_mgr implements GfoInvkAble {
 	));
 	public boolean Enabled() {return enabled;} public Xof_math_mgr Enabled_(boolean v) {enabled = v; return this;} private boolean enabled = true;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_enabled))		return Yn.X_to_str(enabled);
+		if		(ctx.Match(k, Invk_enabled))		return Yn.Xto_str(enabled);
 		else if	(ctx.Match(k, Invk_enabled_))		enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_renderer))		return renderer_is_mathjax ? "mathjax" : "latex";
 		else if	(ctx.Match(k, Invk_renderer_))		renderer_is_mathjax = String_.Eq(m.ReadStr("v"), "mathjax");

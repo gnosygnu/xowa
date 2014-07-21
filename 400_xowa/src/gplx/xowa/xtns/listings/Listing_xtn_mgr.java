@@ -61,7 +61,7 @@ public class Listing_xtn_mgr extends Xox_mgr_base {
 			hwtr.Nde_full_atrs(Listing_xnde.Tag_abbr, symbol_text, true
 				, Listing_xnde.Atr_a_title, Html_utl.Escape_html_as_bry(template_text)
 				);
-			rv = hwtr.X_to_bry_and_clear();
+			rv = hwtr.Xto_bry_and_clear();
 		}
 		else {
 			rv = template_text;

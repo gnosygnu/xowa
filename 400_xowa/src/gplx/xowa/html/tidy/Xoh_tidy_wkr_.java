@@ -20,7 +20,7 @@ public class Xoh_tidy_wkr_ {
 	public static final byte Tid_null = 0, Tid_tidy = 1, Tid_jtidy = 2;
 	public static final String Key_null = "null", Key_tidy = "tidy", Key_jtidy = "jtidy";
 	public static final Xoh_tidy_wkr Wkr_null = new Xoh_tidy_wkr_null();
-	public static String X_to_key(byte v) {
+	public static String Xto_key(byte v) {
 		switch (v) {
 			case Tid_null:							return Key_null;
 			case Tid_tidy:							return Key_tidy;
@@ -28,7 +28,7 @@ public class Xoh_tidy_wkr_ {
 			default:								throw Err_.not_implemented_();
 		}
 	}
-	public static byte X_to_tid(String s) {
+	public static byte Xto_tid(String s) {
 		if		(String_.Eq(s, Key_tidy))			return Tid_tidy;
 		else if	(String_.Eq(s, Key_jtidy))			return Tid_jtidy;
 		else if	(String_.Eq(s, Key_null))			return Tid_null;

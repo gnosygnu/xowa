@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.engines.process; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
 public class Process_server_mock implements Scrib_server {
-	ListAdp rsps = ListAdp_.new_(); int rsps_idx = 0;
+	private ListAdp rsps = ListAdp_.new_(); private int rsps_idx = 0;
 	public void Init(String... process_args) {}
 	public int Server_timeout() {return server_timeout;} public Scrib_server Server_timeout_(int v) {server_timeout = v; return this;} private int server_timeout = 8000;
 	public int Server_timeout_polling() {return server_timeout_polling;} public Scrib_server Server_timeout_polling_(int v) {server_timeout_polling = v; return this;} private int server_timeout_polling = 1;
@@ -41,8 +41,8 @@ public class Process_server_mock implements Scrib_server {
 	public boolean Print_key() {return print_key;} public Process_server_mock Print_key_(boolean v) {print_key = v; return this;} private boolean print_key;
 	public void Prep_add(String v) {rsps.Add(new Process_server_mock_rcvd_str(v));}
 	public void Prep_add_dynamic_val() {rsps.Add(new Process_server_mock_rcvd_val(print_key));}
-	public ListAdp Log_rcvd() {return log_rcvd;} ListAdp log_rcvd = ListAdp_.new_();
-	public ListAdp Log_sent() {return log_sent;} ListAdp log_sent = ListAdp_.new_();
+	public ListAdp Log_rcvd() {return log_rcvd;} private ListAdp log_rcvd = ListAdp_.new_();
+	public ListAdp Log_sent() {return log_sent;} private ListAdp log_sent = ListAdp_.new_();
 }
 interface Process_server_mock_rcvd {
 	String Bld(Object[] cmd_obs); 

@@ -33,12 +33,12 @@ public class Xocfg_bnd_itm implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_cmd_ctg_sort))	return cmd.Ctg().Tid();
 		else if	(ctx.Match(k, Invk_bnd_key))		return bnd.Key();
 		else if	(ctx.Match(k, Invk_bnd_uid))		return bnd.Uid();
-		else if	(ctx.Match(k, Invk_bnd_sys))		return Yn.X_to_str(bnd.Sys());
+		else if	(ctx.Match(k, Invk_bnd_sys))		return Yn.Xto_str(bnd.Sys());
 		else if	(ctx.Match(k, Invk_bnd_cmd))		return bnd.Cmd();
 		else if	(ctx.Match(k, Invk_bnd_cmd_))		bnd.Cmd_(m.ReadStr("v"));
-		else if	(ctx.Match(k, Invk_bnd_box))		return Xog_bnd_box_.X_to_gui_str(bnd.Box());
+		else if	(ctx.Match(k, Invk_bnd_box))		return Xog_bnd_box_.Xto_gui_str(bnd.Box());
 		else if	(ctx.Match(k, Invk_bnd_box_idx))	return bnd.Box();
-		else if	(ctx.Match(k, Invk_bnd_ipt))		return mgr.Bnd_mgr().Bnd_parser().X_to_norm(bnd.Ipt().Key());
+		else if	(ctx.Match(k, Invk_bnd_ipt))		return mgr.Bnd_mgr().Bnd_parser().Xto_norm(bnd.Ipt().Key());
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}

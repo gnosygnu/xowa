@@ -39,7 +39,7 @@ public class Map_geolink_func extends Pf_func_base {
 						case Key_tid_lat_neg:	mer_x_neg = val; break;
 						case Key_tid_long_pos:	mer_y_pos = val; break;
 						case Key_tid_long_min:	mer_y_neg = val; break;
-						case Key_tid_prec:		prec = Bry_.X_to_int_or(val, prec); break;
+						case Key_tid_prec:		prec = Bry_.Xto_int_or(val, prec); break;
 					}
 				}
 			}
@@ -56,29 +56,29 @@ public class Map_geolink_func extends Pf_func_base {
 				return;
 			}
 			Object[] args = new Object[6];
-			args[0] = X_to_coord(tmp_bfr, mer_x_math, mer_x_pass, mer_x_math.Coord_dir_ns(), Bry_arg_0_fail);
-			args[1] = X_to_coord(tmp_bfr, mer_y_math, mer_y_pass, mer_y_math.Coord_dir_ew(), Bry_arg_1_fail);
-			args[2] = X_to_dms(mer_x_math, mer_x_pass, mer_x_pos, mer_x_neg);
-			args[3] = X_to_dms(mer_y_math, mer_y_pass, mer_y_pos, mer_y_neg);
-			args[4] = X_to_dec(tmp_bfr, mer_x_math, mer_x_pass);
-			args[5] = X_to_dec(tmp_bfr, mer_y_math, mer_y_pass);
+			args[0] = Xto_coord(tmp_bfr, mer_x_math, mer_x_pass, mer_x_math.Coord_dir_ns(), Bry_arg_0_fail);
+			args[1] = Xto_coord(tmp_bfr, mer_y_math, mer_y_pass, mer_y_math.Coord_dir_ew(), Bry_arg_1_fail);
+			args[2] = Xto_dms(mer_x_math, mer_x_pass, mer_x_pos, mer_x_neg);
+			args[3] = Xto_dms(mer_y_math, mer_y_pass, mer_y_pos, mer_y_neg);
+			args[4] = Xto_dec(tmp_bfr, mer_x_math, mer_x_pass);
+			args[5] = Xto_dec(tmp_bfr, mer_y_math, mer_y_pass);
 			bfr.Add(Xol_msg_itm_.eval_(tmp_bfr, tmp_msg_itm, pattern, args));
 		} finally {tmp_bfr.Mkr_rls();}
 	}
 	private static final Xol_msg_itm tmp_msg_itm = new Xol_msg_itm(-1, Bry_.Empty);
-	private static byte[] X_to_coord(Bry_bfr bfr, Map_math math, boolean pass, byte[] dir, byte[] or) {
+	private static byte[] Xto_coord(Bry_bfr bfr, Map_math math, boolean pass, byte[] dir, byte[] or) {
 		return pass
 			? bfr.Add_double(Math_.Abs_double(math.Dec())).Add_byte(Byte_ascii.Underline).Add(dir).XtoAryAndClear()
 			: or
 			;
 	}
-	private static byte[] X_to_dms(Map_math math, boolean pass, byte[] pos, byte[] neg) {
+	private static byte[] Xto_dms(Map_math math, boolean pass, byte[] pos, byte[] neg) {
 		return pass
 			? math.Get_dms(pos, neg)
 			: Bry_.Empty		// mapsources-math-incorrect-input
 			;
 	}
-	private static byte[] X_to_dec(Bry_bfr bfr, Map_math math, boolean pass) {
+	private static byte[] Xto_dec(Bry_bfr bfr, Map_math math, boolean pass) {
 		return pass
 			? bfr.Add_double(math.Dec()).XtoAryAndClear()
 			: Bry_arg_5_fail

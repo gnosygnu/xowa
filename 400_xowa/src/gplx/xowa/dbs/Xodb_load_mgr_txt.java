@@ -481,7 +481,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		if (pids_root == null)
 			pids_root = wiki.App().Wiki_mgr().Wdata_mgr().Wdata_wiki().Fsys_mgr().Site_dir().GenSubDir_nest("data", "pid");
 		Xob_xdat_itm pid_itm = Load_xdat_itm_by_dir(pids_root.GenSubDir(String_.new_utf8_(lang_key)), pid_name); if (pid_itm == null) return gplx.xowa.xtns.wdatas.Wdata_wiki_mgr.Pid_null;
-		return Bry_.X_to_int_or(pid_itm.Src(), pid_itm.Itm_bgn() + pid_name.length + 1 + 1, pid_itm.Itm_end(), gplx.xowa.xtns.wdatas.Wdata_wiki_mgr.Pid_null);	// extract pid; note that all itms have format of "ttl|pid"; +1=skip pipe; +1 skip p
+		return Bry_.Xto_int_or(pid_itm.Src(), pid_itm.Itm_bgn() + pid_name.length + 1 + 1, pid_itm.Itm_end(), gplx.xowa.xtns.wdatas.Wdata_wiki_mgr.Pid_null);	// extract pid; note that all itms have format of "ttl|pid"; +1=skip pipe; +1 skip p
 	}	Io_url pids_root;
 	public int Load_ctg_count(byte[] ttl) {return wiki.Db_mgr().Category_version() == Xoa_ctg_mgr.Version_1 ? Load_ctg_count_v1(ttl) : Load_ctg_count_v2(ttl);}
 	int Load_ctg_count_v1(byte[] ttl) {

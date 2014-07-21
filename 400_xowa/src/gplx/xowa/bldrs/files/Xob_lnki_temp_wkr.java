@@ -105,7 +105,7 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xop_lnki_log
 		Xof_ext ext = Xof_ext_.new_by_ttl_(ttl);
 		double lnki_thumbtime = lnki.Thumbtime();
 		int lnki_page = lnki.Page();
-		byte[] ttl_commons = X_to_commons(wiki_ns_file_is_case_match_all, commons_wiki, ttl);
+		byte[] ttl_commons = Xto_commons(wiki_ns_file_is_case_match_all, commons_wiki, ttl);
 		if (	Xof_doc_page.Null_n(lnki_page) 					// page set
 			&&	Xof_doc_thumb.Null_n(lnki_thumbtime))			// thumbtime set
 				usr_dlg.Warn_many("", "", "page and thumbtime both set; this may be an issue with fsdb: page=~{0} ttl=~{1}", ctx.Cur_page().Ttl().Page_db_as_str(), String_.new_utf8_(ttl));
@@ -137,7 +137,7 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xop_lnki_log
 		if (property_wkr == null) property_wkr = bldr.App().Wiki_mgr().Wdata_mgr().Property_wkr_or_new();
 		return property_wkr;
 	}
-	public static byte[] X_to_commons(boolean wiki_ns_file_is_case_match_all, Xow_wiki commons_wiki, byte[] ttl_bry) {
+	public static byte[] Xto_commons(boolean wiki_ns_file_is_case_match_all, Xow_wiki commons_wiki, byte[] ttl_bry) {
 		if (!wiki_ns_file_is_case_match_all) return null;	// return "" if wiki matches common
 		Xoa_ttl ttl = Xoa_ttl.parse_(commons_wiki, Xow_ns_.Id_file, ttl_bry);
 		byte[] rv = ttl.Page_db();

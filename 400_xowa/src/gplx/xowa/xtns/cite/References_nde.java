@@ -26,7 +26,7 @@ public class References_nde implements Xox_xnde, Xop_xnde_atr_parser {
 		switch (xatr_key.Val()) {
 			case Xatr_id_group:		{
 				group = xatr.Val_as_bry(src);
-				if (Bry_.Eq(group, wiki.Xtn_mgr().Xtn_cite().Group_default_name())) group = Bry_.Empty;	// if group == default, make it same as empty; DATE:2014-07-03
+				// if (Bry_.Eq(group, wiki.Xtn_mgr().Xtn_cite().Group_default_name())) group = Bry_.Empty;	// if group == default, make it same as empty; DATE:2014-07-03
 				break;
 			}
 		}

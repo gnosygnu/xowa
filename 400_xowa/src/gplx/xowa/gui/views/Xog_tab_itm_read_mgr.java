@@ -84,28 +84,6 @@ public class Xog_tab_itm_read_mgr {
 		win.Win_box().Text_(err_msg);
 	}
 	public static void Launch(Xog_win_itm win) {
-		Xoa_app app = win.App();
-		Gfo_log_bfr log_bfr = app.Log_bfr();
-		log_bfr.Add("app.launch.page.bgn");
-		Xow_wiki home_wiki = app.User().Wiki();
-		Xoa_page launch_page = Xog_tab_itm_read_mgr.Launch_page(win, home_wiki, app.Sys_cfg().Launch_url());
-		if (launch_page.Missing())
-			launch_page = Xog_tab_itm_read_mgr.Launch_page(win, home_wiki, Xoa_sys_cfg.Launch_url_dflt);
-		log_bfr.Add("app.launch.page.show");
-		Xog_tab_itm tab = win.Active_tab();
-		Xog_tab_itm_read_mgr.Show_page(tab, launch_page, false);
-		tab.History_mgr().Add(launch_page);
-		tab.Html_itm().Html_box().Focus(); //this.Html_box().Html_doc_body_focus();	// focus the html_box so wheel scroll works; DATE:2013-02-08
-		app.Gui_wtr().Prog_none("", "", "");
-		log_bfr.Add("app.launch.page.end");
-		app.Gui_wtr().Log_wtr().Log_msg_to_session_direct(log_bfr.Xto_str());
-	}
-	private static Xoa_page Launch_page(Xog_win_itm win, Xow_wiki home_wiki, String launch_str) {
-		Xoa_url launch_url = Xoa_url_parser.Parse_url(win.App(), home_wiki, launch_str);
-		Xow_wiki launch_wiki = launch_url.Wiki();
-		Xoa_ttl launch_ttl = Xoa_ttl.parse_(launch_wiki, launch_url.Page_bry());
-		Xoa_page rv = launch_wiki.GetPageByTtl(launch_url, launch_ttl).Url_(launch_url);	// FUTURE: .Url_() should not be called (needed for anchor); EX: en.wikipedia.org/Earth#Biosphere
-		win.Active_page_(rv);	// set to blank page
-		return rv;
+		Xog_launcher_tabs._.Launch(win);
 	}
 }

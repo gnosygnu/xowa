@@ -112,7 +112,7 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 		if (prv_tkn != null && !prv_tkn.Tblw_xml()) {			// note that this logic is same as Atrs_close; repeated here for "perf"
 			switch (prv_tid) {
 				case Xop_tkn_itm_.Tid_tblw_tb: case Xop_tkn_itm_.Tid_tblw_tr:
-					Atrs_make(ctx, src, root, this, prv_tkn);
+					Atrs_make(ctx, src, root, this, prv_tkn, Bool_.N);
 					break;
 			}
 		}
@@ -410,17 +410,29 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 		}
 		return cur_pos;
 	}
-	public static void Atrs_close(Xop_ctx ctx, byte[] src, Xop_root_tkn root) {
+	public static void Atrs_close(Xop_ctx ctx, byte[] src, Xop_root_tkn root, boolean called_from_xnde) {
 		Xop_tblw_tkn prv_tkn = ctx.Stack_get_tbl();
 		if (prv_tkn == null || prv_tkn.Tblw_xml()) return;			// no tblw or tblw_xnde (which does not have tblw atrs)
 		switch (prv_tkn.Tkn_tid()) {
 			case Xop_tkn_itm_.Tid_tblw_tb: case Xop_tkn_itm_.Tid_tblw_tr:	// only tb and tr have tblw atrs (EX: "{|id=1\n"); td/th use pipes for atrs (EX: "|id=1|a"); tc has no atrs; te is never on stack
-				Xop_tblw_wkr.Atrs_make(ctx, src, root, ctx.Tblw(), prv_tkn);
+				Xop_tblw_wkr.Atrs_make(ctx, src, root, ctx.Tblw(), prv_tkn, called_from_xnde);
 				break;
 		}
 	}
-	public static boolean Atrs_make(Xop_ctx ctx, byte[] src, Xop_root_tkn root, Xop_tblw_wkr wkr, Xop_tblw_tkn prv_tblw) {
-		if (prv_tblw.Atrs_bgn() != Xop_tblw_wkr.Atrs_null) return false;	// atr_bgn/end is empty or already has explicit value; ignore;				
+	public static boolean Atrs_make(Xop_ctx ctx, byte[] src, Xop_root_tkn root, Xop_tblw_wkr wkr, Xop_tblw_tkn prv_tblw, boolean called_from_xnde) {
+		if (prv_tblw.Atrs_bgn() != Xop_tblw_wkr.Atrs_null) {	// atr_bgn/end is empty or already has explicit value; ignore;
+			if (prv_tblw.Atrs_bgn() == Atrs_invalid_by_xnde) {	// atr range marked invalid; ignore all tkns between prv_tblw and end of root; EX:"|-id=1<br/>"; PAGE:en.w:A DATE:2014-07-16
+				for (int j = root.Subs_len() - 1; j > -1; --j) {
+					Xop_tkn_itm sub = root.Subs_get(j);
+					if (sub == prv_tblw)
+						return false;
+					else
+						sub.Ignore_y_();
+				}
+				ctx.App().Usr_dlg().Warn_many("", "", "xnde.invalided attributes could not find previous tkn; page=~{0}", ctx.Page_url_str());	// should never happen; DATE:2014-07-16
+			}
+			return false;	
+		}
 		int subs_bgn = prv_tblw.Tkn_sub_idx() + 1, subs_end = root.Subs_len() - 1;
 		int subs_pos = subs_bgn;
 		Xop_tkn_itm last_atr_tkn = null;
@@ -441,7 +453,14 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 			}
 		}
 		if (last_atr_tkn == null) {										// no atrs found; mark tblw_tkn as Atrs_empty
-			prv_tblw.Atrs_rng_set(Xop_tblw_wkr.Atrs_empty, Xop_tblw_wkr.Atrs_empty);
+			int atr_rng_tid
+				=	called_from_xnde
+				&&	!prv_tblw.Tblw_xml()
+				&&	prv_tblw.Tkn_tid() == Xop_tkn_itm_.Tid_tblw_tr		// called from xnde && current tid is Tblw_tr; EX:"|- <br/>" PAGE:en.w:A DATE:2014-07-16
+				? Atrs_invalid_by_xnde									// invalidate everything
+				: Atrs_empty
+				;
+			prv_tblw.Atrs_rng_set(atr_rng_tid, atr_rng_tid);
 			return false;
 		}
 		root.Subs_del_between(ctx, subs_bgn, subs_pos);
@@ -514,7 +533,7 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 		ctx.Subs_add(root, tkn);
 		return cur_pos;
 	}
-	public static final int Atrs_null = -1, Atrs_empty = -2, Atrs_ignore_check = -1;
+	public static final int Atrs_null = -1, Atrs_empty = -2, Atrs_invalid_by_xnde = -3, Atrs_ignore_check = -1;
 	public static final byte Tblw_type_tb = 0, Tblw_type_te = 1, Tblw_type_tr = 2, Tblw_type_td = 3, Tblw_type_th = 4, Tblw_type_tc = 5, Tblw_type_td2 = 6, Tblw_type_th2 = 7;
 }
 /*

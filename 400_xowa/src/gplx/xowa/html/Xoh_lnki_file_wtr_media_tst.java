@@ -20,7 +20,7 @@ import org.junit.*;
 public class Xoh_lnki_file_wtr_media_tst {
 	private Xop_fxt fxt = new Xop_fxt();
 	@Before public void init() {fxt.Reset();}
-	@Test  public void Lnki_caption_nested_media() { // EX.WP:Beethoven;
+	@Test  public void Lnki_caption_nested_media() { // PAGE:en.w:Beethoven;
 		fxt.Test_parse_page_wiki_str("[[File:A.png|thumb|b [[Media:A.ogg]] c]]", String_.Concat_lines_nl_skip_last
 		(	"<div class=\"thumb tright\">"
 		,	"  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"

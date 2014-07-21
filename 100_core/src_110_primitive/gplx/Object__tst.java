@@ -18,10 +18,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 import org.junit.*;
 public class Object__tst {
-	@Test public void Eq() {
-		tst_Eq(null, null, true);	// both null
-		tst_Eq(5, 5, true);			// both non-null
-		tst_Eq(5, null, false);		// rhs non-null
-		tst_Eq(null, 5, false);		// lhs non-null
-	}	void tst_Eq(Object lhs, Object rhs, boolean expd) {Tfds.Eq(expd, Object_.Eq(lhs, rhs));}
+	@Before public void init() {} private Object__fxt fxt = new Object__fxt();
+	@Test  public void Eq() {
+		fxt.Test_eq(null, null, true);		// both null
+		fxt.Test_eq(5, 5, true);			// both non-null
+		fxt.Test_eq(5, null, false);		// rhs non-null
+		fxt.Test_eq(null, 5, false);		// lhs non-null
+	}
+	@Test  public void Xto_str_loose_or_null() {
+		fxt.Test_xto_str_loose_or_null(null, null);	
+		fxt.Test_xto_str_loose_or_null(2449.6000000000004d, "2449.60");	
+	}
+}
+class Object__fxt {
+	public void Test_eq(Object lhs, Object rhs, boolean expd) {Tfds.Eq(expd, Object_.Eq(lhs, rhs));}
+	public void Test_xto_str_loose_or_null(Object v, String expd) {Tfds.Eq(expd, Object_.Xto_str_loose_or(v, null));}
 }

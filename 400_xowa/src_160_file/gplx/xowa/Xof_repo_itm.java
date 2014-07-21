@@ -49,7 +49,7 @@ public class Xof_repo_itm implements GfoInvkAble {
 			root_url = App_cmd_arg.Val_as_url_rel_url_or(root_str, mgr.App().Fsys_mgr().File_dir(), Io_url_.new_dir_(root_str), true);
 			root = root_url.RawBry();
 			dir_spr = root_url.Info().DirSpr_byte();
-			root_http = mgr.App().Url_converter_fsys().Encode_http(root_url);
+			root_http = mgr.App().Encoder_mgr().Fsys().Encode_http(root_url);
 		}
 		return this;
 	}

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.lib; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import gplx.xowa.wikis.caches.*;
+import gplx.xowa.wikis.caches.*; import gplx.xowa.xtns.pfuncs.ttls.*;
 public class Scrib_lib_title implements Scrib_lib {
 	public Scrib_lib_title(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
@@ -56,7 +56,7 @@ public class Scrib_lib_title implements Scrib_lib {
 		Xow_wiki wiki = core.Wiki();
 		byte[] ns_bry = null;
 		if (ns_obj != null) {
-			ns_bry = Parse_ns(wiki, ns_obj); if (ns_bry == null) throw Err_.new_fmt_("unknown ns: {0}", Object_.XtoStr_OrEmpty(ns_bry));
+			ns_bry = Parse_ns(wiki, ns_obj); if (ns_bry == null) throw Err_.new_fmt_("unknown ns: {0}", Object_.Xto_str_strict_or_empty(ns_bry));
 		}
 		if (ns_bry != null) {
 			Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
@@ -78,20 +78,20 @@ public class Scrib_lib_title implements Scrib_lib {
 		// byte[] proto = Scrib_kv_utl_.Val_to_bry_or(values, 3, null);	// NOTE: Scribunto has more conditional logic around argument 2 and setting protocols; DATE:2014-07-07
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry); if (ttl == null) return rslt.Init_obj(null);
 		Bry_bfr bfr = wiki.App().Utl_bry_bfr_mkr().Get_b512();
-		//if (url_func_tid == Pf_url_urlfunc.Tid_full) {
+		//if (url_func_tid == Pfunc_urlfunc.Tid_full) {
 		//	if (proto == null) proto = Proto_relative;
 		//	Object proto_obj = proto_hash.Fetch(proto); if (proto_obj == null) throw Err_.new_fmt_("protocol is not valid: {0}", proto);
 		//	//qry_bry = (byte[])proto_obj;
 		//	byte proto_tid = ((Byte_obj_val)proto_obj).Val();
 		//	bfr.Add();
 		//}
-		Pf_url_urlfunc.UrlString(core.Ctx(), url_func_tid, false, ttl_bry, bfr, qry_bry);
+		Pfunc_urlfunc.UrlString(core.Ctx(), url_func_tid, false, ttl_bry, bfr, qry_bry);
 		return rslt.Init_obj(bfr.Mkr_rls().XtoStrAndClear());
 	}
 	private static final Hash_adp_bry url_func_hash = Hash_adp_bry.ci_ascii_()
-	.Add_str_byte("fullUrl", Pf_url_urlfunc.Tid_full)
-	.Add_str_byte("localUrl", Pf_url_urlfunc.Tid_local)
-	.Add_str_byte("canonicalUrl", Pf_url_urlfunc.Tid_canonical);
+	.Add_str_byte("fullUrl", Pfunc_urlfunc.Tid_full)
+	.Add_str_byte("localUrl", Pfunc_urlfunc.Tid_local)
+	.Add_str_byte("canonicalUrl", Pfunc_urlfunc.Tid_canonical);
 	// private static final byte[] Proto_relative = Bry_.new_ascii_("relative");
 	// private static final Hash_adp_bry proto_hash = Hash_adp_bry.ci_ascii_().Add_str_obj("http", Bry_.new_ascii_("http://")).Add_str_obj("https", Bry_.new_ascii_("https://")).Add_str_obj("relative", Bry_.new_ascii_("//")).Add_str_obj("canonical", Bry_.new_ascii_("1"));
 	private byte[] Parse_ns(Xow_wiki wiki, Object ns_obj) {
@@ -127,7 +127,7 @@ public class Scrib_lib_title implements Scrib_lib {
 			|| !ttl.Ns().Id_file_or_media()
 			) return rslt.Init_obj(false);
 		if (ttl.Ns().Id_media()) ttl = Xoa_ttl.parse_(wiki, Xow_ns_.Id_file, ttl.Page_db());	// if [[Media:]] change to [[File:]]; theoretically, this should be changed in Get_page, but not sure if I want to put this logic that low; DATE:2014-01-07
-		Xoa_page file_page = Pf_url_filepath.Load_page(wiki, ttl);
+		Xoa_page file_page = Pfunc_filepath.Load_page(wiki, ttl);
 		return rslt.Init_obj(!file_page.Missing());
 	}
 	public boolean GetContent(Scrib_proc_args args, Scrib_proc_rslt rslt) {

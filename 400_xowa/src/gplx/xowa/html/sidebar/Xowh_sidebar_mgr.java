@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.sidebar; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
+import gplx.xowa.langs.msgs.*;
 public class Xowh_sidebar_mgr implements GfoInvkAble {
 	public Xowh_sidebar_mgr(Xow_wiki wiki) {this.wiki = wiki;} private Xow_wiki wiki;		
 	public int Grps_len() {return grps.Count();} ListAdp grps = ListAdp_.new_();
@@ -24,7 +25,7 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 	public void Init() {
 		try {
 			Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
-			Xol_msg_itm sidebar_msg = Pf_msg_mgr.Get_msg_itm(bfr, wiki, wiki.Lang(), CONST_sidebar_ttl);
+			Xol_msg_itm sidebar_msg = Xol_msg_mgr_.Get_msg_itm(bfr, wiki, wiki.Lang(), CONST_sidebar_ttl);
 			if (	sidebar_msg.Src() == Xol_msg_itm.Src_missing
 				||	(	sidebar_msg.Src() == Xol_msg_itm.Src_lang
 					&&	wiki.Domain_tid() == gplx.xowa.wikis.Xow_wiki_domain_.Tid_home
@@ -52,7 +53,7 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 	public void Parse(Bry_bfr bfr, Bry_bfr comment_bfr, byte[] src) {
 		byte[][] lines = Bry_.Split(src, Byte_ascii.NewLine);
 		int lines_len = lines.length;
-		Xoa_app app = wiki.App(); Url_encoder id_encoder = app.Url_converter_id();
+		Xoa_app app = wiki.App(); Url_encoder id_encoder = app.Encoder_mgr().Id();
 		Xowh_sidebar_itm cur_grp = null;
 		Xop_link_parser link_parser = new Xop_link_parser();
 		for (int i = 0; i < lines_len; i++) {

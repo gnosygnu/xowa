@@ -196,7 +196,7 @@ class Xoh_href_parser_fxt {
 		wiki = Xoa_app_fxt.wiki_tst_(app);
 		wiki.Xwiki_mgr().Add_bulk(Bry_.new_ascii_("wikt|en.wiktionary.org"));
 		app.User().Wiki().Xwiki_mgr().Add_bulk(Bry_.new_ascii_("en.wiktionary.org|en.wiktionary.org"));
-		href_parser = new Xoh_href_parser(app.Url_converter_href(), app.Url_parser().Url_parser());
+		href_parser = new Xoh_href_parser(app.Encoder_mgr().Href(), app.Url_parser().Url_parser());
 	}
 	public Xoa_app App() {return app;} private Xoa_app app;
 	public Xoh_href_parser_fxt Init_xwiki_alias(String alias, String domain) {

@@ -56,7 +56,7 @@ public class Xol_duration_itm_ {
 	, Itm_minutes
 	, Itm_seconds
 	};
-	public static Xol_duration_itm[] X_to_itm_ary(KeyVal[] kv_ary) {
+	public static Xol_duration_itm[] Xto_itm_ary(KeyVal[] kv_ary) {
 		if (kv_ary == null) return Xol_duration_itm_.Ary_default;
 		ListAdp rv = ListAdp_.new_();
 		int len = kv_ary.length;

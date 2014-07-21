@@ -77,7 +77,7 @@ public class Xob_page_sql extends Xob_itm_basic_base implements Xobd_wkr, GfoInv
 		db_mgr.Tbl_xowa_ns().Insert(ns_mgr);														// save ns
 		db_mgr.Tbl_xowa_db().Commit_all(page_provider, db_mgr.Fsys_mgr().Ary());					// save dbs; note that dbs can be saved again later
 		db_mgr.Tbl_xowa_cfg().Insert_str(Xodb_mgr_sql.Grp_wiki_init, "props.modified_latest", modified_latest.XtoStr_fmt(DateAdp_.Fmt_iso8561_date_time));
-		fsys_mgr.Index_create(usr_dlg, Byte_.Ary(Xodb_file.Tid_core, Xodb_file.Tid_text), Xodb_file.Indexes_page_title, Xodb_file.Indexes_page_random);
+		fsys_mgr.Index_create(usr_dlg, Byte_.Ary(Xodb_file_tid_.Tid_core, Xodb_file_tid_.Tid_text), Index_page_title, Index_page_random);
 	}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_txn_commit_interval_))		txn_commit_interval = m.ReadInt("v");
@@ -85,6 +85,10 @@ public class Xob_page_sql extends Xob_itm_basic_base implements Xobd_wkr, GfoInv
 	}	private static final String Invk_txn_commit_interval_ = "txn_commit_interval_";
 	public void Wkr_ini(Xob_bldr bldr) {}
 	public void Wkr_print() {}
+	private static final Db_idx_itm 
+	  Index_page_title	= Db_idx_itm.sql_("CREATE UNIQUE INDEX IF NOT EXISTS page__title       ON page (page_namespace, page_title, page_id, page_len, page_is_redirect);")	// PERF:page_id for general queries; PERF: page_len for search_suggest; PREF:page_is_redirect for oimg
+	, Index_page_random	= Db_idx_itm.sql_("CREATE UNIQUE INDEX IF NOT EXISTS page__name_random ON page (page_namespace, page_random_int);")
+	;
 }
 class Xob_text_stmts_mgr {
 	public Xob_text_stmts_mgr(Xodb_mgr_sql db_mgr, Xodb_fsys_mgr fsys_mgr) {this.db_mgr = db_mgr; this.fsys_mgr = fsys_mgr;} private Xodb_mgr_sql db_mgr; Xodb_fsys_mgr fsys_mgr;
@@ -116,12 +120,12 @@ class Xob_text_stmts_mgr {
 	Xodb_file File_get(int file_idx, int text_len) {
 		if (file_idx == Xow_ns.Bldr_file_idx_heap) {
 			file_idx = fsys_mgr.Tid_text_idx();
-			Xodb_file file = fsys_mgr.Get_or_make(Xodb_file.Tid_text, file_idx);
+			Xodb_file file = fsys_mgr.Get_or_make(Xodb_file_tid_.Tid_text, file_idx);
 			long file_len = file.File_len();
 			long file_max = fsys_mgr.Tid_text_max();
 			if (file_max != Xodb_fsys_mgr.Heap_max_infinite && (file_len + text_len > file_max)) {	// file is "full"
 				file.Provider().Txn_mgr().Txn_end_all();	// close txn
-				file = fsys_mgr.Make(Xodb_file.Tid_text);
+				file = fsys_mgr.Make(Xodb_file_tid_.Tid_text);
 				file_idx = file.Id();
 				fsys_mgr.Tid_text_idx_(file_idx);
 			}
@@ -129,7 +133,7 @@ class Xob_text_stmts_mgr {
 			return file;
 		}
 		else
-			return fsys_mgr.Get_or_make(Xodb_file.Tid_text, file_idx);
+			return fsys_mgr.Get_or_make(Xodb_file_tid_.Tid_text, file_idx);
 	}
 	private void Add(Db_stmt stmt, int stmt_idx) {
 		int new_len = stmt_idx + 1;

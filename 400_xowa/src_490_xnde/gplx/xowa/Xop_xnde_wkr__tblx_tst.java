@@ -31,7 +31,7 @@ public class Xop_xnde_wkr__tblx_tst {
 			, fxt.tkn_txt_ (35, 36)
 			);
 	}
-	@Test  public void Ws_bgn() {	// PURPOSE: some templates return leading ws; EX.WP:UK
+	@Test  public void Ws_bgn() {	// PURPOSE: some templates return leading ws; PAGE:en.w:UK
 		fxt.Init_para_y_();
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			(	"  <table>"

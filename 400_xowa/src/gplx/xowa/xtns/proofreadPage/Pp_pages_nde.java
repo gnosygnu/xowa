@@ -118,14 +118,16 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 	}	private static final byte[] Toc_bry = Bry_.new_ascii_("toc");
 	private byte[] Make_lnki(Bry_bfr full_bfr, byte[] index_page_src, Xop_lnki_tkn lnki) {
 		byte[] caption = Get_caption(full_bfr, index_page_src, lnki);
-		return full_bfr
-			.Add(Xop_tkn_.Lnki_bgn)
-			.Add(lnki.Ttl().Full_db())
-			.Add_byte_pipe()
+		full_bfr.Add(Xop_tkn_.Lnki_bgn);
+		Xoa_ttl lnki_ttl = lnki.Ttl();
+		if (lnki_ttl.Wik_bgn() == -1)				// no xwiki; just add ns + page
+			full_bfr.Add(lnki_ttl.Full_db());
+		else										// xwiki; add entire ttl which also includes xwiki; PAGE:sv.s:Valda_dikter_(Bj�rck); EX:[[:Commons:File:Valda dikter (tredje upplagan).djvu|Commons]]; DATE:2014-07-14
+			full_bfr.Add(lnki_ttl.Raw());
+		full_bfr.Add_byte_pipe()
 			.Add(caption)
-			.Add(Xop_tkn_.Lnki_end)
-			.XtoAryAndClear()
-			;
+			.Add(Xop_tkn_.Lnki_end);
+		return full_bfr.XtoAryAndClear();
 	}
 	private byte[] Get_caption(Bry_bfr full_bfr, byte[] index_page_src, Xop_lnki_tkn lnki) {
 		byte[] rv = Bry_.Empty;
@@ -262,7 +264,7 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 			Xodb_page page = (Xodb_page)rslt.FetchAt(i);
 			Xoa_ttl page_ttl = Xoa_ttl.parse_(wiki, ns_page_id, page.Ttl_wo_ns());		if (page_ttl == null) continue;					// page_ttl is not valid; should never happen;
 			byte[] page_ttl_leaf = page_ttl.Leaf_txt();									if (page_ttl_leaf == null) continue;			// page is not leaf; should not happen
-			int page_leaf_val = Bry_.X_to_int_or(page_ttl_leaf, Int_.MinValue);		if (page_leaf_val == Int_.MinValue) continue;	// leaf is not int; ignore
+			int page_leaf_val = Bry_.Xto_int_or(page_ttl_leaf, Int_.MinValue);		if (page_leaf_val == Int_.MinValue) continue;	// leaf is not int; ignore
 			if (page_leaf_val > page_leaf_max) page_leaf_max = page_leaf_val;
 		}
 		return page_leaf_max;
@@ -308,7 +310,7 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 			step_int = 1;
 			return true;
 		}
-		step_int = Bry_.X_to_int_or(step_bry, Int_.MinValue);
+		step_int = Bry_.Xto_int_or(step_bry, Int_.MinValue);
 		if (step_int < 1 || step_int > 1000) {
 			Fail_args("pages node does not have a valid 'step': step={0}", String_.new_utf8_(step_bry));
 			return false;

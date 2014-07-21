@@ -67,7 +67,7 @@ public class Xop_curly_wkr implements Xop_ctx_wkr {
 					int curly_end_dash = lxr_end_pos;
 					if (curly_end_dash < src_len && src[curly_end_dash] == Byte_ascii.Dash) {	// "-" exists after curlies;  EX: "}}-"
 						if (bgn_tkn_len > 2 && end_tkn_len > 2) {	// more than 3 curlies at bgn / end with flanking dashes; EX: "-{{{ }}}-"; NOTE: 3 is needed b/c 2 will never be reduced; EX: "-{{" will always be "-" and "{{", not "-{" and "{"
-							int numeric_val = Bry_.X_to_int_or(src, bgn_tkn.Src_end(), lxr_bgn_pos, -1);
+							int numeric_val = Bry_.Xto_int_or(src, bgn_tkn.Src_end(), lxr_bgn_pos, -1);
 							if (	numeric_val != -1						// do not apply if numeric val; EX:"-{{{0}}}-" vs "-{{{#expr:0}}}-" sr.w:Template:Link_FA
 								&&	bgn_tkn_len == 3 && end_tkn_len == 3	// exactly 3 tokens; assume param token; "-{{{" -> "-" + "{{{" x> -> "-{" + "{{"; if unbalanced (3,4 or 4,3) fall into code below
 								) {

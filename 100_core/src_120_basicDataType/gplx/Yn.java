@@ -39,7 +39,7 @@ public class Yn {
 		if (v_int == Bool_.__int) Err_mgr._.unhandled_(v);
 		return v_int == Bool_.Y_int;
 	}
-	public static String X_to_str(boolean v) {return v ? "y" : "n";}
+	public static String Xto_str(boolean v) {return v ? "y" : "n";}
 	public static boolean store_bool_or(SrlMgr mgr, String key, boolean or) {
 		String v = mgr.SrlStrOr(key, "");
 		return mgr.Type_rdr() ? parse_or_(v, or) : or;

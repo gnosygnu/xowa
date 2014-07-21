@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.servers.http; import gplx.*; import gplx.xowa.*; import gplx.xowa.servers.*;
 class File_retrieve_mode {
-	public static String X_to_str(byte v) {
+	public static String Xto_str(byte v) {
 		switch (v) {
 			case Mode_skip:				return "skip";
 			case Mode_wait:				return "wait";
@@ -25,7 +25,7 @@ class File_retrieve_mode {
 			default:					throw Err_.not_implemented_();
 		}
 	}
-	public static byte X_to_byte(String s) {
+	public static byte Xto_byte(String s) {
 		if		(String_.Eq(s, "skip"))				return Mode_skip;
 		else if	(String_.Eq(s, "wait"))				return Mode_wait;
 		else if	(String_.Eq(s, "async_server"))		return Mode_async_server;

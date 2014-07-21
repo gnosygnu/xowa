@@ -27,14 +27,26 @@ public class Pft_func_formatdate_bldr {
 		this.fmt_itms = fmt_itms;
 		int len = fmt_itms.length;
 		idx_cur = 0; idx_nxt = -1;
+		Pft_fmt_itm last = null;
 		while (idx_cur < len) {
 			Pft_fmt_itm fmt_itm = fmt_itms[idx_cur];
-			fmt_itm.Fmt(bfr, wiki, lang, date, this);
+			if (fmt_itm.TypeId() == Pft_fmt_itm_.Tid_hebrew_numeral)
+				last = fmt_itm;
+			else {
+				fmt_itm.Fmt(bfr, wiki, lang, date, this);
+			}
 			if (idx_nxt == -1)
 				++idx_cur;
 			else {
 				idx_cur = idx_nxt;
 				idx_nxt = -1;
+			}
+		}
+		if (last != null) {
+			int year_int = bfr.XtoIntAndClear(-1);
+			if (year_int != -1) {	// handle no format; EX:{{#time:xh}} DATE:2014-07-20
+				date = DateAdp_.seg_(new int[]  {year_int, date.Month(), date.Day(), date.Hour(), date.Minute(), date.Second(), date.Frac()});
+				last.Fmt(bfr, wiki, lang, date, this);
 			}
 		}
 	}

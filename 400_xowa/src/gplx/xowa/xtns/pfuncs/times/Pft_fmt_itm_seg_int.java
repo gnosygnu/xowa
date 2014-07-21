@@ -79,7 +79,7 @@ class Pft_fmt_itm_dayOfYear implements Pft_fmt_itm {
 	public int TypeId() {return Pft_fmt_itm_.Tid_dayOfYear;}
 	public void Fmt(Bry_bfr bfr, Xow_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {bfr.Add_int_variable(date.DayOfYear() - Int_.Base1);}	// php is base1; .net/java is base0
 }
-class Pft_fmt_itm_AmPm implements Pft_fmt_itm {
+class Pft_fmt_itm_am_pm implements Pft_fmt_itm {
 	public int TypeId() {return Pft_fmt_itm_.Tid_AmPm;}
 	public void Fmt(Bry_bfr bfr, Xow_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
 		boolean am = date.Hour() < 13;
@@ -90,7 +90,7 @@ class Pft_fmt_itm_AmPm implements Pft_fmt_itm {
 		else if (!am && !lower) val = Ary_pm_upper;
 		bfr.Add(val);
 	}	static final byte[] Ary_am_upper = Bry_.new_ascii_("AM"), Ary_pm_upper = Bry_.new_ascii_("PM"), Ary_am_lower = Bry_.new_ascii_("am"), Ary_pm_lower = Bry_.new_ascii_("pm");
-	public Pft_fmt_itm_AmPm(boolean lower) {this.lower = lower;} private boolean lower;
+	public Pft_fmt_itm_am_pm(boolean lower) {this.lower = lower;} private boolean lower;
 }
 class Pft_fmt_itm_dow_base0 implements Pft_fmt_itm {
 	public int TypeId() {return Pft_fmt_itm_.Tid_dow_base0;}
@@ -98,36 +98,6 @@ class Pft_fmt_itm_dow_base0 implements Pft_fmt_itm {
 		int dow = date.DayOfWeek();
 		if (dow == 0) dow = 7;
 		bfr.Add_int_fixed(dow, 1);
-	}
-}
-class Pft_fmt_itm_roman implements Pft_fmt_itm {
-	public int TypeId() {return Pft_fmt_itm_.Tid_roman;}
-	public void Fmt(Bry_bfr bfr, Xow_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
-		int nxt_idx = bldr.Idx_cur() + 1;
-		Pft_fmt_itm[] ary = bldr.Fmt_itms();
-		if (nxt_idx < ary.length) {
-			Pft_fmt_itm itm = (Pft_fmt_itm)ary[nxt_idx];
-			if (itm.TypeId() == Pft_fmt_itm_.Tid_seg_int) {
-				Pft_fmt_itm_seg_int nxt_int = (Pft_fmt_itm_seg_int)ary[nxt_idx];	// FUTURE: should check tkn type
-				int v = date.Segment(nxt_int.SegIdx());
-				Pfxtp_roman.ToRoman(v, bfr);
-				bldr.Idx_nxt_(nxt_idx + 1);
-				return;
-			}
-		}
-		bfr.Add_str("xf");
-	}
-}
-class Pft_fmt_itm_thai implements Pft_fmt_itm {
-	public int TypeId() {return Pft_fmt_itm_.Tid_thai;}
-	public void Fmt(Bry_bfr bfr, Xow_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
-		bfr.Add_int_variable(date.Year() + 543);
-	}
-}
-class Pft_fmt_itm_minguo implements Pft_fmt_itm {
-	public int TypeId() {return Pft_fmt_itm_.Tid_minguo;}
-	public void Fmt(Bry_bfr bfr, Xow_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
-		bfr.Add_int_variable(date.Year() - 1911);
 	}
 }
 class Pft_fmt_itm_iso_fmt implements Pft_fmt_itm {

@@ -109,7 +109,7 @@ public class Gallery_xnde_tst {
 				)
 			));
 	}
-	@Test   public void Err_pre() {	// PURPOSE: leading ws was failing; EX.WP: Vlaardingen; "\nA.jpg| <center>Visbank</center>\n"
+	@Test   public void Err_pre() {	// PURPOSE: leading ws was failing; PAGE:en.w:Vlaardingen; "\nA.jpg| <center>Visbank</center>\n"
 		raw_src = " <center>a</center>";
 		fxt.Test_parse_page_wiki(String_.Concat_lines_nl_skip_last
 		(	"<gallery>"
@@ -121,7 +121,7 @@ public class Gallery_xnde_tst {
 				)
 			));
 	}
-	@Test   public void Err_comment() {	// PURPOSE: comment was being rendered; EX.WP: Perpetual motion; <!-- removed A.jpg|bcde -->
+	@Test   public void Err_comment() {	// PURPOSE: comment was being rendered; PAGE:en.w:Perpetual motion; <!-- removed A.jpg|bcde -->
 		raw_src = "b";
 		fxt.Init_log_(Xop_ttl_log.Comment_eos).Test_parse_page_wiki(String_.Concat_lines_nl_skip_last
 		(	"<gallery>"

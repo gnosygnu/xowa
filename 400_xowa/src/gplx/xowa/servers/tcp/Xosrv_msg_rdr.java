@@ -27,8 +27,8 @@ public class Xosrv_msg_rdr {
 			else					return Xosrv_msg.fail_("header is invalid; hdr:{0}", String_.new_utf8_(header_bry, 0, bytes_read));
 		}
 		byte version = header_bry[0];									if (version != Byte_ascii.Num_0)	return Xosrv_msg.fail_("version must be 0; version:{0}", Byte_.XtoStr(version));
-		int body_len = Bry_.X_to_int_or(header_bry,  2, 12, -1); 	if (body_len == -1)					return Xosrv_msg.fail_("body_len is not number; body_len:{0}", String_.new_utf8_(header_bry,  2, 23));
-		int cksum    = Bry_.X_to_int_or(header_bry, 13, 23, -1);	if (cksum == -1)					return Xosrv_msg.fail_("checksum is not number; cksum:{0}", String_.new_utf8_(header_bry, 13, 23));
+		int body_len = Bry_.Xto_int_or(header_bry,  2, 12, -1); 	if (body_len == -1)					return Xosrv_msg.fail_("body_len is not number; body_len:{0}", String_.new_utf8_(header_bry,  2, 23));
+		int cksum    = Bry_.Xto_int_or(header_bry, 13, 23, -1);	if (cksum == -1)					return Xosrv_msg.fail_("checksum is not number; cksum:{0}", String_.new_utf8_(header_bry, 13, 23));
 		if (!Chk_bytes(header_bry, Byte_ascii.Pipe, 1, 12, 23)) return Xosrv_msg.fail_("message should be delimited by pipes at 1, 12 and 23; message:{0}", String_.new_utf8_(header_bry, 0, 24));
 		if (cksum != (body_len * 2) + 1) return Xosrv_msg.fail_("checksum failed; body_len:{0} chksum:{1}", body_len, cksum);
 		byte[] body_bry = body_len > default_body_bry_len ? new byte[body_len] : default_body_bry;

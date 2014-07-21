@@ -20,7 +20,7 @@ public class Err_mgr {
 	Err_mgr(Gfo_msg_root msg_root) {this.msg_root = msg_root;} Gfo_msg_root msg_root;
 	public Err not_implemented_()												{return Err_.new_(Msg_not_implemented.Gen_str_none());}
 	public Err unhandled_(Object obj)											{return Err_.new_(Msg_unhandled.Gen_str_one(obj));}
-	public Err cast_(Exception e, Class<?> obj_class, Object obj)		{return Err_.new_(Msg_cast.Gen_str_many(ClassAdp_.NameOf_type(obj_class), Object_.XtoStr_OrNullStr(obj)));}
+	public Err cast_(Exception e, Class<?> obj_class, Object obj)		{return Err_.new_(Msg_cast.Gen_str_many(ClassAdp_.NameOf_type(obj_class), Object_.Xto_str_strict_or_null_mark(obj)));}
 	public Err parse_(Class<?> type		, byte[] raw)						{return Err_.new_(Msg_parse.Gen_str_many(ClassAdp_.NameOf_type(type), String_.new_utf8_len_safe_(raw, 0, 255)));}
 	public Err parse_obj_(Object o			, byte[] raw)						{return Err_.new_(Msg_parse.Gen_str_many(ClassAdp_.NameOf_obj(o), String_.new_utf8_len_safe_(raw, 0, 255)));}
 	public Err parse_(String type_name, byte[] raw)								{return Err_.new_(Msg_parse.Gen_str_many(type_name, String_.new_utf8_len_safe_(raw, 0, 255)));}

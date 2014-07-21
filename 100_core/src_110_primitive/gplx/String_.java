@@ -283,7 +283,7 @@ public class String_ implements GfoInvkAble {
 		for (int i = 0; i < aryLen; i++) {
 			if (i != 0) sb.Add(separator);
 			Object val = ary[i];
-			sb.Add_obj(Object_.XtoStr_OrEmpty(val));
+			sb.Add_obj(Object_.Xto_str_strict_or_empty(val));
 		}
 		return sb.XtoStr();			
 	}
@@ -373,7 +373,7 @@ public class String_ implements GfoInvkAble {
 				else if (c == bracketEnd) {
 					int aryIdx = Int_.parse_or_(numberStr, Int_.MinValue);
 					if (aryIdx != Int_.MinValue && Int_.Between(aryIdx, 0, aryLength - 1))	// check (a) aryIdx is num; (b) aryIdx is in bounds
-						aryVal = Object_.XtoStr_OrEmpty(ary[aryIdx]);
+						aryVal = Object_.Xto_str_strict_or_empty(ary[aryIdx]);
 					else
 						aryVal = String_.Concat_any(bracketBgn, numberStr, bracketEnd);		// not valid, just add String
 					sb.Add(aryVal);

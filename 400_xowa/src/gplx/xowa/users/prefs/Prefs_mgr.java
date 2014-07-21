@@ -87,7 +87,7 @@ public class Prefs_mgr implements GfoInvkAble {
 		}			
 		byte[] get_cmd = Props_get(eval_code); 
 		Object get_val = Eval_run(Bry_.Add(get_cmd, Byte_ascii.Semic));
-		String get_str = Object_.XtoStr_OrNullStr(get_val);
+		String get_str = Object_.Xto_str_strict_or_null_mark(get_val);
 		hnde_val = Scrub_tidy_trailing_nl_in_textarea(tidy_enabled, elem_tid, hnde_val);
 		get_str  = Scrub_tidy_trailing_nl_in_textarea(tidy_enabled, elem_tid, get_str);
 		if (String_.Eq(get_str, hnde_val)) return;

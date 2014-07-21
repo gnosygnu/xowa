@@ -411,6 +411,23 @@ public class Xow_popup_parser_tst {
 		fxt.Test_Assert_at_end("a\n\n\n"	, "a\n");			// remove til one
 		fxt.Test_Assert_at_end(""			, "");				// empty check
 	}
+	@Test  public void Skip_to_end__tblw() {	// PURPOSE: skip to end of tblw; PAGE:en.w:List_of_countries_and_dependencies_by_area; DATE:2014-07-19
+		fxt.Init_tmpl_read_len_(4).Test_parse
+		( String_.Concat_lines_nl_skip_last
+		( "a"
+		, "{|"
+		, "|-"
+		, "|b"
+		, "|c"
+		, "|d"
+		, "|}"
+		)
+		, String_.Concat_lines_nl_skip_last
+		( "<p>a"
+		, "</p>"
+		));
+		fxt.Expd_tmpl_loop_count(2);
+	}
 }
 class Xop_popup_parser_fxt {
 	private Xow_popup_parser parser; private Xow_wiki wiki;
@@ -446,6 +463,7 @@ class Xop_popup_parser_fxt {
 	public Xop_popup_parser_fxt Init_tmpl_tkn_max_(int v) {parser.Tmpl_tkn_max_(v); return this;}
 	public Xop_popup_parser_fxt Init_fmtr_next_sect_(String v) {parser.Html_mkr().Fmtr_next_sect().Fmt_(v); return this;}
 	public Xop_popup_parser_fxt Init_page(String ttl, String txt) {Xop_fxt.Init_page_create_static(wiki, ttl, txt); return this;}
+	public Xop_popup_parser_fxt Expd_tmpl_loop_count(int expd) {Tfds.Eq(expd, parser.Data().Tmpl_loop_count()); return this;}
 	public Xop_popup_parser_fxt Test_ns_allowed(String raw, int... expd) {
 		Int_obj_ref[] ids = Xow_popup_mgr.Ns_allowed_parse(wiki, Bry_.new_utf8_(raw));
 		Tfds.Eq_ary(expd, Int_obj_ref.Ary_xto_int_ary(ids));

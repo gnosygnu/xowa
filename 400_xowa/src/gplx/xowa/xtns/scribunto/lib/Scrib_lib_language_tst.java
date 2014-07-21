@@ -20,7 +20,7 @@ import org.junit.*;
 import gplx.xowa.langs.numbers.*;
 public class Scrib_lib_language_tst {
 	@Before public void init() {
-		fxt.Init_scrib_proc();
+		fxt.Clear_for_lib();
 		lib = fxt.Core().Lib_language().Init();
 	}	private Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt(); private Scrib_lib lib;
 	@Test  public void GetContLangCode() {

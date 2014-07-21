@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.xtns.pfuncs.ifs.*; import gplx.xowa.xtns.pfuncs.times.*; import gplx.xowa.xtns.pfuncs.numbers.*;
+import gplx.xowa.xtns.pfuncs.ifs.*; import gplx.xowa.xtns.pfuncs.times.*; import gplx.xowa.xtns.pfuncs.numbers.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.xtns.pfuncs.langs.*; import gplx.xowa.xtns.pfuncs.strings.*;
 public class Pf_func_ {
 	public static byte[] Eval_arg_or_empty(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, int self_args_len, int i) {return Eval_arg_or(ctx, src, caller, self, self_args_len, i, Bry_.Empty);}
 	public static final byte Name_dlm = Byte_ascii.Colon;
@@ -295,30 +295,30 @@ public class Pf_func_ {
 			case Xol_kwd_grp_.Id_noeditsection:					return Pf_page_noeditsection._;
 			case Xol_kwd_grp_.Id_site_pagesincategory:			return Pf_site_pagesincategory._;
 
-			case Xol_kwd_grp_.Id_url_ns:						return new Pf_url_ns(false);
-			case Xol_kwd_grp_.Id_url_nse:						return new Pf_url_ns(true);
-			case Xol_kwd_grp_.Id_url_urlencode:					return new Pf_url_urlencode();
-			case Xol_kwd_grp_.Id_str_lc:						return new Pf_str_case(Xol_lang.Tid_lower, false);
-			case Xol_kwd_grp_.Id_str_lcfirst:					return new Pf_str_case(Xol_lang.Tid_lower, true);
-			case Xol_kwd_grp_.Id_str_uc:						return new Pf_str_case(Xol_lang.Tid_upper, false);
-			case Xol_kwd_grp_.Id_str_ucfirst:					return new Pf_str_case(Xol_lang.Tid_upper, true);
-			case Xol_kwd_grp_.Id_str_padleft:					return new Pf_str_pad(Xol_kwd_grp_.Id_str_padleft, false);
-			case Xol_kwd_grp_.Id_str_padright:					return new Pf_str_pad(Xol_kwd_grp_.Id_str_padright, true);
+			case Xol_kwd_grp_.Id_url_ns:						return new Pfunc_ns(false);
+			case Xol_kwd_grp_.Id_url_nse:						return new Pfunc_ns(true);
+			case Xol_kwd_grp_.Id_url_urlencode:					return new Pfunc_urlencode();
+			case Xol_kwd_grp_.Id_str_lc:						return new Pfunc_case(Xol_lang.Tid_lower, false);
+			case Xol_kwd_grp_.Id_str_lcfirst:					return new Pfunc_case(Xol_lang.Tid_lower, true);
+			case Xol_kwd_grp_.Id_str_uc:						return new Pfunc_case(Xol_lang.Tid_upper, false);
+			case Xol_kwd_grp_.Id_str_ucfirst:					return new Pfunc_case(Xol_lang.Tid_upper, true);
+			case Xol_kwd_grp_.Id_str_padleft:					return new Pfunc_pad(Xol_kwd_grp_.Id_str_padleft, false);
+			case Xol_kwd_grp_.Id_str_padright:					return new Pfunc_pad(Xol_kwd_grp_.Id_str_padright, true);
 			case Xol_kwd_grp_.Id_str_formatnum:					return new Pf_formatnum();
 			case Xol_kwd_grp_.Id_str_formatdate:				return new Pft_func_formatdate();
-			case Xol_kwd_grp_.Id_url_localurl:					return new Pf_url_urlfunc(Xol_kwd_grp_.Id_url_localurl, Pf_url_urlfunc.Tid_local, false);
-			case Xol_kwd_grp_.Id_url_localurle:					return new Pf_url_urlfunc(Xol_kwd_grp_.Id_url_localurle, Pf_url_urlfunc.Tid_local, true);
-			case Xol_kwd_grp_.Id_url_fullurl:					return new Pf_url_urlfunc(Xol_kwd_grp_.Id_url_fullurl, Pf_url_urlfunc.Tid_full, false);
-			case Xol_kwd_grp_.Id_url_fullurle:					return new Pf_url_urlfunc(Xol_kwd_grp_.Id_url_fullurle, Pf_url_urlfunc.Tid_full, true);
-			case Xol_kwd_grp_.Id_url_canonicalurl:				return new Pf_url_urlfunc(Xol_kwd_grp_.Id_url_canonicalurl, Pf_url_urlfunc.Tid_canonical, false);
-			case Xol_kwd_grp_.Id_url_canonicalurle:				return new Pf_url_urlfunc(Xol_kwd_grp_.Id_url_canonicalurle, Pf_url_urlfunc.Tid_canonical, false);
-			case Xol_kwd_grp_.Id_url_filepath:					return new Pf_url_filepath();
-			case Xol_kwd_grp_.Id_url_anchorencode:				return new Pf_url_anchorencode();
+			case Xol_kwd_grp_.Id_url_localurl:					return new Pfunc_urlfunc(Xol_kwd_grp_.Id_url_localurl, Pfunc_urlfunc.Tid_local, false);
+			case Xol_kwd_grp_.Id_url_localurle:					return new Pfunc_urlfunc(Xol_kwd_grp_.Id_url_localurle, Pfunc_urlfunc.Tid_local, true);
+			case Xol_kwd_grp_.Id_url_fullurl:					return new Pfunc_urlfunc(Xol_kwd_grp_.Id_url_fullurl, Pfunc_urlfunc.Tid_full, false);
+			case Xol_kwd_grp_.Id_url_fullurle:					return new Pfunc_urlfunc(Xol_kwd_grp_.Id_url_fullurle, Pfunc_urlfunc.Tid_full, true);
+			case Xol_kwd_grp_.Id_url_canonicalurl:				return new Pfunc_urlfunc(Xol_kwd_grp_.Id_url_canonicalurl, Pfunc_urlfunc.Tid_canonical, false);
+			case Xol_kwd_grp_.Id_url_canonicalurle:				return new Pfunc_urlfunc(Xol_kwd_grp_.Id_url_canonicalurle, Pfunc_urlfunc.Tid_canonical, false);
+			case Xol_kwd_grp_.Id_url_filepath:					return new Pfunc_filepath();
+			case Xol_kwd_grp_.Id_url_anchorencode:				return new Pfunc_anchorencode();
 
-			case Xol_kwd_grp_.Id_i18n_plural:					return new Pf_intl_plural();
-			case Xol_kwd_grp_.Id_i18n_language:					return new Pf_intl_language();
-			case Xol_kwd_grp_.Id_i18n_int:						return new Pf_intl_int();
-			case Xol_kwd_grp_.Id_i18n_grammar:					return new Pf_intl_grammar();
+			case Xol_kwd_grp_.Id_i18n_plural:					return new Pfunc_plural();
+			case Xol_kwd_grp_.Id_i18n_language:					return new Pfunc_language();
+			case Xol_kwd_grp_.Id_i18n_int:						return new Pfunc_int();
+			case Xol_kwd_grp_.Id_i18n_grammar:					return new Pfunc_grammar();
 			case Xol_kwd_grp_.Id_misc_tag:						return new Pf_tag();
 
 			case Xol_kwd_grp_.Id_xtn_expr:						return new gplx.xowa.xtns.pfuncs.exprs.Pfunc_expr();
@@ -327,11 +327,11 @@ public class Pf_func_ {
 			case Xol_kwd_grp_.Id_xtn_iferror:					return new Pfunc_iferror();
 			case Xol_kwd_grp_.Id_xtn_ifexpr:					return new Pfunc_ifexpr();
 			case Xol_kwd_grp_.Id_xtn_ifexist:					return new Pfunc_ifexist();
-			case Xol_kwd_grp_.Id_xtn_rel2abs:					return new Pf_xtn_rel2abs();
+			case Xol_kwd_grp_.Id_xtn_rel2abs:					return new Pfunc_rel2abs();
 			case Xol_kwd_grp_.Id_xtn_switch:					return new Pfunc_switch();
 			case Xol_kwd_grp_.Id_xtn_time:						return Pft_func_time._Utc;
 			case Xol_kwd_grp_.Id_xtn_timel:						return Pft_func_time._Lcl;
-			case Xol_kwd_grp_.Id_xtn_titleparts:				return new Pf_xtn_titleparts();
+			case Xol_kwd_grp_.Id_xtn_titleparts:				return new Pfunc_titleparts();
 
 			case Xol_kwd_grp_.Id_subst:
 			case Xol_kwd_grp_.Id_safesubst:

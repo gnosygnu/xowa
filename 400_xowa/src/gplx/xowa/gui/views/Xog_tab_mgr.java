@@ -70,9 +70,7 @@ public class Xog_tab_mgr implements GfoEvObj {
 		}
 	}
 	public int Tabs_len() {return tab_regy.Count();}
-	public void Tabs_new_init() {
-		this.Tabs_new(true, true);
-	}
+	public Xog_tab_itm Tabs_new_init() {return this.Tabs_new(true, true);}
 	public Xog_tab_itm Tabs_get_at(int i) {return (Xog_tab_itm)tab_regy.FetchAt(i);}
 	public Xog_tab_itm Tabs_new_dflt() {return Tabs_new_dflt(false);}
 	public Xog_tab_itm Tabs_new_dflt(boolean focus) {return Tabs_new_dflt(false, focus);}

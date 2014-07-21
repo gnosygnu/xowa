@@ -20,10 +20,10 @@ import org.junit.*;
 public class Xop_xnde_wkr__include_uncommon_tst {
 	private Xop_fxt fxt = new Xop_fxt();
 	@Before public void init()							{fxt.Reset();}
-	@Test  public void Ex_Tmpl_io_oi()		{		// PURPOSE: <includeonly> not parsing internals; EX.WP: [[Template:MONTHNAME]]
+	@Test  public void Ex_Tmpl_io_oi()		{		// PURPOSE: <includeonly> not parsing internals; PAGE:en.w:[[Template:MONTHNAME]]
 		fxt.Test_parse_tmpl_str_test("<includeonly>{{#if:{{{1}}}|a|b}}</includeonly><noinclude>c</noinclude>", "{{test|1}}", "a");
 	}
-	@Test  public void Ex_Tmpl_io_subst()		{	// PURPOSE: <includeonly> and @gplx.Internal protected subst; EX.WP: [[Template:Dubious]]
+	@Test  public void Ex_Tmpl_io_subst()		{	// PURPOSE: <includeonly> and @gplx.Internal protected subst; PAGE:en.w:[[Template:Dubious]]
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("mwo_print", "{{{1}}}");
 		fxt.Init_defn_add("substcheck", "SUBST");
@@ -43,7 +43,7 @@ public class Xop_xnde_wkr__include_uncommon_tst {
 			,	"SUBST\n");
 		fxt.Init_defn_clear();
 	}
-	@Test  public void Ex_Tmpl_noinclude_prm_1() {	// PURPOSE: <noinclude> should not process @gplx.Internal protected tkns; EX.WP: [[Template:See]]
+	@Test  public void Ex_Tmpl_noinclude_prm_1() {	// PURPOSE: <noinclude> should not process @gplx.Internal protected tkns; PAGE:en.w:[[Template:See]]
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("mwo_print", "{{{1}}}{{{2}}}");
 		fxt.Test_parse_tmpl_str_test
@@ -98,7 +98,7 @@ public class Xop_xnde_wkr__include_uncommon_tst {
 			,	"a<noinclude/a/>bcde"
 			);
 	}
-	@Test  public void Defect_onlyinclude_inside_template() {	// PURPOSE: was eating up next template; EX.WP:Wikipedia:Featured_articles
+	@Test  public void Defect_onlyinclude_inside_template() {	// PURPOSE: was eating up next template; PAGE:en.w:Wikipedia:Featured_articles
 		fxt.Test_parse_page_all_str
 			(	"{{formatnum: <onlyinclude>1</onlyinclude>}} {{formatnum:2}}"
 			,	"1 2"
@@ -154,7 +154,7 @@ public class Xop_xnde_wkr__include_uncommon_tst {
 //		}
 
 //		@Test  public void Wiki_includeonly_ignore() {fxt.Test_parse_wiki_text("[[a<includeonly>b</includeonly>c]]", "[[ac]]");}	// FUTURE: ttl parses by idx, and ignores includeonly: WHEN: upon encountering; may need to redo in other parsers?
-	@Test  public void Defect_noinclude_inside_main() {		// PURPOSE: <onlyinclude> inside main was not returning content; EX.WP:Wikipedia:Featured_articles
+	@Test  public void Defect_noinclude_inside_main() {		// PURPOSE: <onlyinclude> inside main was not returning content; PAGE:en.w:Wikipedia:Featured_articles
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("Test_tmpl", "{{:Test_page}}");
 		fxt.Data_create("Test_page", "a{{#expr:<onlyinclude>1</onlyinclude>}}c");

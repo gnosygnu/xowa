@@ -209,7 +209,7 @@ public class Xop_para_wkr_basic_tst {
 			,	"</p>"
 			));			
 	}
-	@Test  public void Pre_5() {	// EX.WP: SHA-2
+	@Test  public void Pre_5() {	// PAGE:en.w:SHA-2
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			(	"a"
 			,	" b"
@@ -226,7 +226,7 @@ public class Xop_para_wkr_basic_tst {
 			,	"</pre>"
 			));			
 	}
-	@Test  public void Pre_6() {	// PURPOSE: close list if open; EX.WP: SHA-2
+	@Test  public void Pre_6() {	// PURPOSE: close list if open; PAGE:en.w:SHA-2
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			(	"*a"
 			,	" b"
@@ -248,7 +248,7 @@ public class Xop_para_wkr_basic_tst {
 			,	"</pre>"
 			));
 	}
-	@Test  public void Pre_leading_ws() {	// PURPOSE: preserve leading ws; EX.WP:Merge sort
+	@Test  public void Pre_leading_ws() {	// PURPOSE: preserve leading ws; PAGE:en.w:Merge sort
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			(	" a"
 			,	"   b"
@@ -328,7 +328,7 @@ public class Xop_para_wkr_basic_tst {
 			,	"</p>"
 			));
 	}
-	@Test  public void Pre_xnde_code() {	// EX.WP: cURL
+	@Test  public void Pre_xnde_code() {	// PAGE:en.w:cURL
 		raw = String_.Concat_lines_nl_skip_last
 			(	"a"
 			,	" <code>b</code>"
@@ -366,7 +366,7 @@ public class Xop_para_wkr_basic_tst {
 			,	"</ul>"
 			));
 	}
-	@Test  public void Pre_td() {	// PURPOSE: EX: "\n a</td>"; </td> deactivates pre; EX.WP: AGPLv3
+	@Test  public void Pre_td() {	// PURPOSE: EX: "\n a</td>"; </td> deactivates pre; PAGE:en.w:AGPLv3
 		raw = String_.Concat_lines_nl_skip_last
 			(	"<table>"
 			,	"<tr>"
@@ -516,7 +516,7 @@ public class Xop_para_wkr_basic_tst {
 			,	fxt.tkn_txt_(34, 35), fxt.tkn_para_end_para_(35)
 			);
 	}
-	@Test  public void File_6() {	// EX.WP: Pyotr Ilyich Tchaikovsky
+	@Test  public void File_6() {	// PAGE:en.w:Pyotr Ilyich Tchaikovsky
 		raw = String_.Concat_lines_nl_skip_last
 			(	"a"
 			,	" [[Image:Test.png|thumb|caption]]"

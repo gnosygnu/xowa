@@ -29,12 +29,12 @@ public class Cache_fil_itm implements CompareAble {
 	public long Fil_size() {return fil_size;} private long fil_size;
 	public void Fil_size_(long v) {
 		this.fil_size = v;
-		cmd_mode = Db_cmd_mode.X_to_update(cmd_mode);
+		cmd_mode = Db_cmd_mode.Xto_update(cmd_mode);
 	}
 	public long Cache_time() {return cache_time;} private long cache_time;
 	public void Cache_time_now_() {
 		this.cache_time = DateAdp_.Now().XtoUtc().Timestamp_unix();
-		cmd_mode = Db_cmd_mode.X_to_update(cmd_mode);
+		cmd_mode = Db_cmd_mode.Xto_update(cmd_mode);
 	}
 	public byte Cmd_mode() {return cmd_mode;} public Cache_fil_itm Cmd_mode_(byte v) {cmd_mode = v; return this;} private byte cmd_mode;
 	public void Cmd_mode_delete_() {

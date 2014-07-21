@@ -19,25 +19,33 @@ package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import g
 import gplx.core.btries.*;
 public class Pft_fmt_itm_ {
 	public static final int
-	  Tid_seg_int				=  1
-	, Tid_hour_base12			=  2
-	, Tid_dow_base0				=  3
-	, Tid_seg_str				=  4
-	, Tid_year_isLeap			=  5
-	, Tid_timestamp_unix		=  6
-	, Tid_raw_ary				=  7
-	, Tid_raw_byt				=  8
-	, Tid_dayOfYear				=  9
-	, Tid_daysInMonth			= 10
-	, Tid_AmPm					= 11
-	, Tid_roman					= 12
-	, Tid_iso_fmt				= 13
-	, Tid_rfc_5322				= 14
-	, Tid_raw					= 15
-	, Tid_timezone_offset		= 16
-	, Tid_thai					= 17
-	, Tid_minguo				= 18
+	  Tid_seg_int						=  1
+	, Tid_hour_base12					=  2
+	, Tid_dow_base0						=  3
+	, Tid_seg_str						=  4
+	, Tid_year_isLeap					=  5
+	, Tid_timestamp_unix				=  6
+	, Tid_raw_ary						=  7
+	, Tid_raw_byt						=  8
+	, Tid_dayOfYear						=  9
+	, Tid_daysInMonth					= 10
+	, Tid_AmPm							= 11
+	, Tid_roman							= 12
+	, Tid_iso_fmt						= 13
+	, Tid_rfc_5322						= 14
+	, Tid_raw							= 15
+	, Tid_timezone_offset				= 16
+	, Tid_thai							= 17
+	, Tid_minguo						= 18
+	, Tid_hebrew_year_num				= 21
+	, Tid_hebrew_month_num				= 20
+	, Tid_hebrew_day_num				= 19
+	, Tid_hebrew_month_days_count		= 22
+	, Tid_hebrew_month_name_full		= 23
+	, Tid_hebrew_month_name_gen			= 24
+	, Tid_hebrew_numeral				= 25
 	;
+
 	public static final Pft_fmt_itm 
 	  Year_len4					= new Pft_fmt_itm_seg_int(DateAdp_.SegIdx_year			, 4, Bool_.Y)
 	, Year_len2					= new Pft_fmt_itm_seg_int(DateAdp_.SegIdx_year			, 2, Bool_.Y)
@@ -67,11 +75,18 @@ public class Pft_fmt_itm_ {
 	, Byte_dash					= new Pft_fmt_itm_raw_byt(Byte_ascii.Dash)
 	, DayOfYear_int				= new Pft_fmt_itm_dayOfYear()
 	, DaysInMonth_int			= new Pft_fmt_itm_daysInMonth()
-	, AmPm_lower				= new Pft_fmt_itm_AmPm(true)
-	, AmPm_upper				= new Pft_fmt_itm_AmPm(false)
+	, AmPm_lower				= new Pft_fmt_itm_am_pm(true)
+	, AmPm_upper				= new Pft_fmt_itm_am_pm(false)
 	, Roman						= new Pft_fmt_itm_roman()
 	, Thai						= new Pft_fmt_itm_thai()
 	, Minguo					= new Pft_fmt_itm_minguo()
+	, Hebrew_year_num			= new Pft_fmt_itm_hebrew_year_num()
+	, Hebrew_month_num			= new Pft_fmt_itm_hebrew_month_num()
+	, Hebrew_day_num			= new Pft_fmt_itm_hebrew_day_num()
+	, Hebrew_month_days_count	= new Pft_fmt_itm_hebrew_month_days_count()
+	, Hebrew_month_name_full	= new Pft_fmt_itm_hebrew_month_name_full()
+	, Hebrew_month_name_gen		= new Pft_fmt_itm_hebrew_month_name_gen()
+	, Hebrew_numeral			= new Pft_fmt_itm_hebrew_numeral()
 	, Raw						= new Pft_fmt_itm_raw()
 	, Iso_fmt					= new Pft_fmt_itm_iso_fmt()
 	, Rfc_5322					= new Pft_fmt_itm_rfc_5322()
@@ -113,6 +128,13 @@ public class Pft_fmt_itm_ {
 	.Add("xoY"					, Pft_fmt_itm_.Minguo)					// Year -= 1911
 	.Add("xn"					, Pft_fmt_itm_.Raw)						// NOTE: really does nothing; REF.MW: Language.php|sprintfdate does $s .= $num; DATE:2013-12-31
 	.Add("xN"					, Pft_fmt_itm_.Raw)
+	.Add("xjj"					, Pft_fmt_itm_.Hebrew_day_num)
+	.Add("xjn"					, Pft_fmt_itm_.Hebrew_month_num)
+	.Add("xjt"					, Pft_fmt_itm_.Hebrew_month_days_count)
+	.Add("xjF"					, Pft_fmt_itm_.Hebrew_month_name_full)
+	.Add("xjx"					, Pft_fmt_itm_.Hebrew_month_name_gen)
+	.Add("xjY"					, Pft_fmt_itm_.Hebrew_year_num)
+	.Add("xh"					, Pft_fmt_itm_.Hebrew_numeral)
 	// TODO: foreign; space; "
 	;
 	public static Pft_fmt_itm[] Parse(Xop_ctx ctx, byte[] fmt) {

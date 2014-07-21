@@ -50,7 +50,7 @@ abstract class String_bldr_base implements String_bldr {
 	public String_bldr Add_fmt_line(String format, Object... args) {Add_str_w_crlf(String_.Format(format, args)); return this;}
 	public String_bldr Add_kv_obj(String k, Object v) {
 		if (this.Count() != 0) this.Add(" ");
-		this.Add_fmt("{0}={1}", k, Object_.XtoStr_OrNullStr(v));
+		this.Add_fmt("{0}={1}", k, Object_.Xto_str_strict_or_null_mark(v));
 		return this;
 	}
 	public String_bldr Add_char_pipe()	{return Add("|");}

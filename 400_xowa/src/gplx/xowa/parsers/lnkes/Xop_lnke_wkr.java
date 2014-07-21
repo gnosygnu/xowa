@@ -67,7 +67,7 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 					Xop_tkn_itm link_tkn = root.Subs_get(i);
 					tkn_idx = i;
 					switch (link_tkn.Tkn_tid()) {
-//							case Xop_tkn_itm_.Tid_txt: return cur_pos;	// REMOVED:2012-11-12: was causing [[http://a.org a]] [[http://b.org b]] to fail; EX.WP:Template:Infobox_country
+//							case Xop_tkn_itm_.Tid_txt: return cur_pos;	// REMOVED:2012-11-12: was causing [[http://a.org a]] [[http://b.org b]] to fail; PAGE:en.w:Template:Infobox_country
 						case Xop_tkn_itm_.Tid_space: case Xop_tkn_itm_.Tid_tab: break;
 					}
 				}

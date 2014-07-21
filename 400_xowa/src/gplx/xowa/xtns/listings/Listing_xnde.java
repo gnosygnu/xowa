@@ -72,7 +72,7 @@ public class Listing_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 		Html_wtr hwtr = xtn_mgr.Hwtr();
 		if (!Bld_by_template(xnde, atrs, src)) {
 			Bld_by_args(xtn_mgr, hwtr, xnde, src);
-			html_output = hwtr.X_to_bry_and_clear();
+			html_output = hwtr.Xto_bry_and_clear();
 		}
 	}
 	public void Xtn_write(Xoa_app app, Xoh_html_wtr html_wtr, Xoh_html_wtr_ctx opts, Xop_ctx ctx, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {
@@ -108,7 +108,7 @@ public class Listing_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 	private void Bld_by_args(Listing_xtn_mgr xtn_mgr, Html_wtr wtr, Xop_xnde_tkn xnde, byte[] src) {
 		wtr.Nde_full(Tag_strong, xatr_name);							// <strong>name</strong>
 		if (xatr_url != null)
-			wtr.Nde_full_atrs(Tag_a, wtr.X_to_bry_and_clear(), false
+			wtr.Nde_full_atrs(Tag_a, wtr.Xto_bry_and_clear(), false
 			, Atr_a_href		, xatr_url
 			, Atr_a_class		, Atr_a_class_external_text
 			, Atr_a_rel			, Atr_a_rel_nofollow

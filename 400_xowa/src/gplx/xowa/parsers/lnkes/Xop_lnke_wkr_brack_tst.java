@@ -60,4 +60,35 @@ public class Xop_lnke_wkr_brack_tst {
 		( "<a href=\"http://a.org\" class=\"external text\" rel=\"nofollow\">b <a href=\"/wiki/C\">C</a> d</a>"
 		));
 	}
+	@Test  public void Encode_xwiki() {	// PURPOSE: href title and args should always be encoded; PAGE:en.w:List_of_Category_A_listed_buildings_in_West_Lothian DATE:2014-07-15
+		fxt.App().User().Wiki().Xwiki_mgr().Add_full(Bry_.new_utf8_("commons.wikimedia.org"), Bry_.new_utf8_("commons.wikimedia.org"));
+		fxt.Test_parse_page_wiki_str		// encode page
+		( "[http://commons.wikimedia.org/%22%3E_A B]"
+		, "<a href=\"/site/commons.wikimedia.org/wiki/%22%3E_A\">B</a>"		// '%22%3E' not '">'
+		);
+		fxt.Test_parse_page_wiki_str		// encode args
+		( "[http://commons.wikimedia.org/A?b=%22%3E_C D]"
+		, "<a href=\"/site/commons.wikimedia.org/wiki/A?b=%22%3E_C\">D</a>"	// '%22%3E' not '">'
+		);
+	}
+	@Test  public void Encode_basic() {	// PURPOSE: counterpart to Encode_xwiki; DATE:2014-07-15
+		fxt.Test_parse_page_wiki_str		// encode page
+		( "[http://a.org/%22%3E_A B]"
+		, "<a href=\"http://a.org/%22%3E_A\" class=\"external text\" rel=\"nofollow\">B</a>"		// '%22%3E' not '">'
+		);
+		fxt.Test_parse_page_wiki_str		// encode args
+		( "[http://a.org/A?b=%22%3E_C D]"
+		, "<a href=\"http://a.org/A?b=%22%3E_C\" class=\"external text\" rel=\"nofollow\">D</a>"	// '%22%3E' not '">'
+		);
+	}
+	@Test  public void Encode_relative() {	// PURPOSE: counterpart to Encode_xwiki; DATE:2014-07-15
+		fxt.Test_parse_page_wiki_str		// encode page
+		( "[//a.org/%22%3E_A B]"
+		, "<a href=\"http://a.org/%22%3E_A\" class=\"external text\" rel=\"nofollow\">B</a>"		// '%22%3E' not '">'
+		);
+		fxt.Test_parse_page_wiki_str		// encode args
+		( "[//a.org/A?b=%22%3E_C D]"
+		, "<a href=\"http://a.org/A?b=%22%3E_C\" class=\"external text\" rel=\"nofollow\">D</a>"	// '%22%3E' not '">'
+		);
+	}
 }

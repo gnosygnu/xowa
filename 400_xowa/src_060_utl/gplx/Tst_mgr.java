@@ -72,7 +72,7 @@ public class Tst_mgr {
 		if (actl_obj == null || !ClassAdp_.IsAssignableFrom(expd_obj.TypeOf(), actl_obj.getClass())) {
 			results.Add(Tst_itm.fail_("!=", path, "<cast type>", ClassAdp_.NameOf_type(expd_obj.TypeOf()), actl_type));
 			return 1;
-//				results.Add(Tst_itm.fail_("!=", path, "<cast value>", Object_.XtoStr_OrNull(expd_obj.ValueOf()), Object_.XtoStr_OrNull(actl_obj)));
+//				results.Add(Tst_itm.fail_("!=", path, "<cast value>", Object_.Xto_str_strict_or_null(expd_obj.ValueOf()), Object_.Xto_str_strict_or_null(actl_obj)));
 		}
 		else {
 			return expd_obj.Chk(this, path, actl_obj);
@@ -83,7 +83,7 @@ public class Tst_mgr {
 		int len = Array_.Len(ary);
 		for (int i = 0; i < len; i++) {
 			Object itm = Array_.FetchAt(ary, i);
-			ary_sb.Add(Object_.XtoStr_OrNullStr(itm)).Add(",");
+			ary_sb.Add(Object_.Xto_str_strict_or_null_mark(itm)).Add(",");
 		}
 		return ary_sb.XtoStrAndClear();
 	}	String_bldr ary_sb = String_bldr_.new_();
@@ -119,8 +119,8 @@ class Tst_itm {
 	public static Tst_itm eq_(boolean skip, String path, String name, Object expd, Object actl) {
 		boolean pass = skip ? true : Object_.Eq(expd, actl);
 		String comp = pass ? "==" : "!=";
-		String expd_str = Object_.XtoStr_OrNullStr(expd);
-		String actl_str = Object_.XtoStr_OrNullStr(actl);
+		String expd_str = Object_.Xto_str_strict_or_null_mark(expd);
+		String actl_str = Object_.Xto_str_strict_or_null_mark(actl);
 		if (skip) expd_str = actl_str;
 		return new_(skip, pass, comp, path, name, expd_str, actl_str);
 	}

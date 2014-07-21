@@ -108,7 +108,7 @@ public class Wdata_wiki_mgr implements GfoInvkAble {
 		for (int i = 0; i < qids_len; i++) {
 			byte[] qid = qids[i];
 			int qid_len = qid.length;
-			int qid_val = Bry_.X_to_int_or(qid, 1, qid_len, Int_.MaxValue);
+			int qid_val = Bry_.Xto_int_or(qid, 1, qid_len, Int_.MaxValue);
 			if (qid_val < qid_min) {
 				qid_min = qid_val;
 				qid_idx = i;
@@ -147,7 +147,7 @@ public class Wdata_wiki_mgr implements GfoInvkAble {
 						case Wdata_prop_itm_base_.Val_tid_quantity: {
 							byte[][] flds = Bry_.Split(prop.Val(), Wdata_prop_itm_core.Prop_dlm);
 							byte[] amount_bry = flds[0];
-							int val = Bry_.X_to_int_or(amount_bry, Ignore_comma, 0, amount_bry.length, 0);
+							int val = Bry_.Xto_int_or(amount_bry, Ignore_comma, 0, amount_bry.length, 0);
 							Xol_lang lang = app.Lang_mgr().Get_by_key(lang_key);
 							bfr.Add(lang.Num_mgr().Format_num(val));	// amount; EX: 1,234
 							bfr.Add(Bry_quantity_margin_of_error);		// symbol: EX: ±
@@ -178,7 +178,7 @@ public class Wdata_wiki_mgr implements GfoInvkAble {
 		return parser.Parse(src);
 	}	
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_enabled))			return Yn.X_to_str(enabled);
+		if		(ctx.Match(k, Invk_enabled))			return Yn.Xto_str(enabled);
 		else if	(ctx.Match(k, Invk_enabled_))			enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_domain))				return String_.new_utf8_(domain);
 		else if	(ctx.Match(k, Invk_domain_))			domain = m.ReadBry("v");

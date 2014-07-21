@@ -38,14 +38,14 @@ public class Xop_xnde_wkr__nowiki_tst {
 			));
 		fxt.Init_para_n_();
 	}
-	@Test  public void H2() {	// EX.WP:HTML
+	@Test  public void H2() {	// PAGE:en.w:HTML
 		fxt.Test_parse_page_all_str
 			(	"a<nowiki><h1>b<h6></nowiki>c"
 			,	String_.Concat_lines_nl_skip_last
 			(	"a&lt;h1&gt;b&lt;h6&gt;c"
 			));
 	}
-	@Test  public void Lnke() {	// EX.WP: Doomsday argument; <nowiki>[0,&nbsp;1]</nowiki>
+	@Test  public void Lnke() {	// PAGE:en.w:Doomsday argument; <nowiki>[0,&nbsp;1]</nowiki>
 		fxt.Test_parse_page_wiki_str("a <nowiki>[0,&nbsp;1]</nowiki> b", "a [0,&nbsp;1] b");	// NOTE: not "0" + Byte_.XtoStr(160) + "1"; depend on browser to translate &nbsp;
 	}
 	@Test  public void Xatrs_val_text() {

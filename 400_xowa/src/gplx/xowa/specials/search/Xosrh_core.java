@@ -107,7 +107,7 @@ class Xosrh_args_mgr {
 			if (tid != null) {
 				switch (((Byte_obj_val)tid).Val()) {
 					case Arg_search: 		search_bry 	= Bry_.Replace(arg.Val_bry(), Byte_ascii.Plus, Byte_ascii.Space); break;
-					case Arg_page_idx: 		page_idx 	= Bry_.X_to_int_or(arg.Val_bry(), 0); break;
+					case Arg_page_idx: 		page_idx 	= Bry_.Xto_int_or(arg.Val_bry(), 0); break;
 					case Arg_sort: 			sort_tid	= Xosrh_rslt_itm_sorter.parse_(String_.new_ascii_(arg.Val_bry())); break;			
 					default:				break;
 				}

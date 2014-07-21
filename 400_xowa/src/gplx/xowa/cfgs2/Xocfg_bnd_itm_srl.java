@@ -29,7 +29,7 @@ public class Xocfg_bnd_itm_srl implements GfoInvkAble {
 	public IptArg	Ipt() {return ipt;} private IptArg ipt;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_src_))			Src_(app, this, m.ReadStr("v"));
-		else if	(ctx.Match(k, Invk_box_))			box = Xog_bnd_box_.X_to_sys_int(m.ReadStr("v"));
+		else if	(ctx.Match(k, Invk_box_))			box = Xog_bnd_box_.Xto_sys_int(m.ReadStr("v"));
 		else if	(ctx.Match(k, Invk_ipt_))			ipt = IptArg_.parse_(m.ReadStr("v"));
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
@@ -37,7 +37,7 @@ public class Xocfg_bnd_itm_srl implements GfoInvkAble {
 	private static final String Invk_src_ = "src_", Invk_box_ = "box_", Invk_ipt_ = "ipt_";
 	public static String Src(Xoa_app app, int box, IptArg ipt) {	// box_('browser').ipt_('mod.c+key.q');
 		Gfs_wtr wtr = app.Gfs_mgr().Wtr();
-		wtr.Add_set_eq(Key_box, Bry_.new_ascii_(Xog_bnd_box_.X_to_sys_str(box)));
+		wtr.Add_set_eq(Key_box, Bry_.new_ascii_(Xog_bnd_box_.Xto_sys_str(box)));
 		wtr.Add_set_eq(Key_ipt, Bry_.new_ascii_(ipt.Key()));
 		return wtr.Bfr().XtoStrAndClear();			
 	}	private static final byte[] Key_box = Bry_.new_ascii_("box"), Key_ipt = Bry_.new_ascii_("ipt");

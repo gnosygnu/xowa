@@ -47,8 +47,8 @@ public class Xoh_page_wtr_mgr implements GfoInvkAble {
 	}
 	public boolean Html_capable() {return html_capable;} public Xoh_page_wtr_mgr Html_capable_(boolean v) {html_capable = v; return this;} private boolean html_capable;
 	public Bry_fmtr Page_read_fmtr() {return page_read_fmtr;}
-	public byte[] Css_common_bry() {return css_common_bry;} public Xoh_page_wtr_mgr Css_common_bry_(Io_url v) {css_common_bry = app.Url_converter_fsys().Encode_http(v); return this;} private byte[] css_common_bry;
-	public byte[] Css_wiki_bry() {return css_wiki_bry;} public Xoh_page_wtr_mgr Css_wiki_bry_(Io_url v) {css_wiki_bry = app.Url_converter_fsys().Encode_http(v); return this;} private byte[] css_wiki_bry;
+	public byte[] Css_common_bry() {return css_common_bry;} public Xoh_page_wtr_mgr Css_common_bry_(Io_url v) {css_common_bry = app.Encoder_mgr().Fsys().Encode_http(v); return this;} private byte[] css_common_bry;
+	public byte[] Css_wiki_bry() {return css_wiki_bry;} public Xoh_page_wtr_mgr Css_wiki_bry_(Io_url v) {css_wiki_bry = app.Encoder_mgr().Fsys().Encode_http(v); return this;} private byte[] css_wiki_bry;
 	private Bry_fmtr page_read_fmtr = Bry_fmtr.new_(""
 		, "page_id", "page_name", "page_title", "page_content_sub", "page_data", "page_langs", "page_modified_on_msg", "page_lang_ltr"
 		, "html_css_common_path", "html_css_wiki_path", "html_content_editable"
@@ -128,5 +128,5 @@ NOTE_1:xowa_anchor_button
 . text-align:center; forces img to be in center
 
 General notes:
-. contentSub div is needed; EX.WP: Battle of Spotsylvania Court House
+. contentSub div is needed; PAGE:en.w:Battle of Spotsylvania Court House
 */

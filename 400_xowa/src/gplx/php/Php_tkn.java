@@ -59,7 +59,7 @@ class Php_tkn_var extends Php_tkn_base {
 class Php_tkn_num extends Php_tkn_base {
 	public Php_tkn_num(int src_bgn, int src_end) {this.Src_rng_(src_bgn, src_end);}
 	@Override public byte Tkn_tid() {return Php_tkn_.Tid_num;}
-	public int Num_val_int(byte[] src) {return Bry_.X_to_int_or(src, this.Src_bgn(), this.Src_end(), Int_.MinValue);}
+	public int Num_val_int(byte[] src) {return Bry_.Xto_int_or(src, this.Src_bgn(), this.Src_end(), Int_.MinValue);}
 }
 class Php_tkn_quote extends Php_tkn_base {
 	public Php_tkn_quote(int src_bgn, int src_end, byte quote_tid) {this.Src_rng_(src_bgn, src_end); this.quote_tid = quote_tid;}

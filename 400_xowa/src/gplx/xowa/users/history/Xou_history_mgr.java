@@ -102,7 +102,7 @@ public class Xou_history_mgr implements GfoInvkAble {// app.user.history
 		return current_itms;
 	}	int current_itms_max = 512, current_itms_reset = 256;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-//			if		(ctx.Match(k, Invk_enabled))				return Yn.X_to_str(enabled);
+//			if		(ctx.Match(k, Invk_enabled))				return Yn.Xto_str(enabled);
 //			else if	(ctx.Match(k, Invk_enabled_))				enabled = m.ReadBool("v");
 		if		(ctx.Match(k, Invk_html_grp))				return String_.new_utf8_(html_mgr.Html_grp().Fmt());
 		else if	(ctx.Match(k, Invk_html_grp_))				html_mgr.Html_grp().Fmt_(m.ReadBry("v"));

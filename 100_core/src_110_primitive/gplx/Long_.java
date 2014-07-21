@@ -101,7 +101,7 @@ public class Long_ {
 	public static long Int_merge(int hi, int lo)	{return (long)hi << 32 | (lo & 0xFFFFFFFFL);}
 	public static int  Int_split_lo(long v)			{return (int)(v);}
 	public static int  Int_split_hi(long v)			{return (int)(v >> 32);}
-	public static long X_by_int(int v) {return (long)v;}
+	public static long Xby_int(int v) {return (long)v;}
 }
 /* alternate for Int_merge does not work in java
 		public static long MergeInts(int lo, int hi)	{return (uint)(hi << 32) | (lo & 0xffffffff);}
