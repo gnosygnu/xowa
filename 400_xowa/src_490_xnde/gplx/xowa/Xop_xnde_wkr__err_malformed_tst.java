@@ -37,7 +37,7 @@ public class Xop_xnde_wkr__err_malformed_tst {
 		));
 	}
 	@Test  public void Incomplete_tag_div() { // PURPOSE: handle broken tags; EX: <div a </div> -> &lt;div a; DATE:2014-02-03
-		fxt.Test_parse_page_all_str("<div a </div>", "&lt;div a ");	// note that "<div a " is escaped (not considered xnde; while "</div>" is dropped (dangling end xndes are ignored)
+		fxt.Test_parse_page_all_str("<div a </div>", "&lt;div a </div>");	// note that "<div a " is escaped (not considered xnde; while "</div>" is literally printed; // TIDY.dangling: tidy will correct dangling node; DATE:2014-07-22
 	}
 	@Test  public void Incomplete_tag_ref() {// PURPOSE: invalid tag shouldn't break parser; EX:w:Cullen_(surname); "http://www.surnamedb.com/Surname/Cullen<ref"
 		fxt.Test_parse_page_all_str("a<ref", "a&lt;ref");
@@ -56,7 +56,7 @@ public class Xop_xnde_wkr__err_malformed_tst {
 		, "</div>"
 		), String_.Concat_lines_nl_skip_last
 		( "<div>"
-		, "<table><center>"
+		, "<table><center></div>"	// TIDY.dangling: tidy will correct dangling node; DATE:2014-07-22
 		, "  <tr>"
 		, "    <td>"
 		, "    </td>"

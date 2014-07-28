@@ -267,6 +267,15 @@ public class Xof_xfer_queue_html_cases_tst {
 		.Html_size_(300, 40)
 		.tst();
 	}
+	@Test  public void Thumbtime_ignored_if_non_media() { // PURPOSE: ignore thumbtime if not media; PAGE:en.w:Moon; EX:[[File:A.png|thumbtime=0.02]] DATE:2014-07-22
+		fxt	.ini_page_create_en_wiki("File:A.png");
+		fxt	.Lnki_("A.png", true, 90, Xof_img_size.Size_null_deprecated, Xof_img_size.Size_null_deprecated, 2)	// thumbtime of 2 specified; will be ignored below
+			.Src(	fxt.img_("mem/src/en.wikipedia.org/thumb/7/70/A.png/90px-A.png", 90, 80))
+			.Trg(	fxt.img_("mem/trg/en.wikipedia.org/fit/7/0/A.png/90px.png", 90, 80)
+				,	fxt.reg_("mem/xowa/file/#meta/en.wikipedia.org/7/70.csv", "A.png|y||2?0,0|1?90,80")
+				);
+		fxt.tst();
+	}
 
 //		@Test  public void Ogg_full_skip() {	// DISABLED: 2012-12-03; not sure about logic
 //			fxt	.ini_page_create_commons			("File:A.ogg");

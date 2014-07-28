@@ -65,14 +65,17 @@ class Arg_bldr {
 					else if	(wkr_typ == Xop_arg_wkr_.Typ_prm) {}	// always ignore for prm
 					else {
 						if (	cur_nde_idx != 0										// if 1st arg, treat equal_tkn as txt_tkn; i.e.: eq should not be used to separate key/val
-							&&	cur_nde.Eq_tkn() == Xop_tkn_null.Null_tkn				// only mark key if not set; handle multiple-keys; EX: {{name|key1=b=c}}; DATE:2014-02-09
+							&&	cur_nde.Eq_tkn() == Xop_tkn_null.Null_tkn				// only mark key if key is not set; handle multiple-keys; EX: {{name|key1=b=c}}; DATE:2014-02-09
 							) {
+							Xop_eq_tkn sub_as_eq = (Xop_eq_tkn)sub;
+							if (sub_as_eq.Eq_len() == 1)  {								// only treat as kv eq if len == 1; MW.REF:Preprocessor_DOM.php|preprocessToXml; "if ( $count == 1 && $findEquals )" PAGE:en.w:Wikipedia:Picture_of_the_day/June_2014; DATE:2014-07-21
 								cur_nde.Eq_tkn_(sub);
 								key_exists = true;
 								Arg_itm_end(ctx, cur_nde, cur_itm, ws_bgn_idx, ws_end_idx, cur_itm_subs_len, sub_pos_bgn, wkr_typ, key_exists, true, itm_is_static, src, cur_nde_idx);
 								cur_nde.Key_tkn_(cur_itm);
 								cur_itm = null;
 								continue;												// do not add tkn to cur_itm
+							}
 						}
 						if (ws_bgn_chk) ws_bgn_chk = false; else ws_end_idx = -1;		// INLINE: AdjustWsForTxtTkn
 					break;

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.html.*;
+import gplx.xowa.html.*; import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.lists.*;
 public class Xop_fxt {
 	public Xop_fxt() {
 		Xoa_app app = Xoa_app_fxt.app_();
@@ -91,11 +91,11 @@ public class Xop_fxt {
 	@gplx.Internal protected Xop_ignore_tkn_chkr tkn_comment_(int bgn, int end)		{return tkn_ignore_(bgn, end, Xop_ignore_tkn.Ignore_tid_comment);}
 	@gplx.Internal protected Xop_ignore_tkn_chkr tkn_ignore_(int bgn, int end, byte t){return (Xop_ignore_tkn_chkr)new Xop_ignore_tkn_chkr().Ignore_tid_(t).Src_rng_(bgn, end);}
 	public Xop_tkn_chkr_hr   tkn_hr_(int bgn, int end)				{return new Xop_tkn_chkr_hr(bgn, end).Hr_len_(Xop_hr_lxr.Hr_len);}
-	@gplx.Internal protected Xop_tblw_tb_tkn_chkr tkn_tblw_tb_(int bgn, int end) 		{return (Xop_tblw_tb_tkn_chkr)new Xop_tblw_tb_tkn_chkr().Src_rng_(bgn, end);}
-	@gplx.Internal protected Xop_tblw_tc_tkn_chkr tkn_tblw_tc_(int bgn, int end) 		{return (Xop_tblw_tc_tkn_chkr)new Xop_tblw_tc_tkn_chkr().Src_rng_(bgn, end);}
-	@gplx.Internal protected Xop_tblw_td_tkn_chkr tkn_tblw_td_(int bgn, int end) 		{return (Xop_tblw_td_tkn_chkr)new Xop_tblw_td_tkn_chkr().Src_rng_(bgn, end);}
-	@gplx.Internal protected Xop_tblw_th_tkn_chkr tkn_tblw_th_(int bgn, int end) 		{return (Xop_tblw_th_tkn_chkr)new Xop_tblw_th_tkn_chkr().Src_rng_(bgn, end);}
-	@gplx.Internal protected Xop_tblw_tr_tkn_chkr tkn_tblw_tr_(int bgn, int end) 		{return (Xop_tblw_tr_tkn_chkr)new Xop_tblw_tr_tkn_chkr().Src_rng_(bgn, end);}
+	public Xop_tblw_tb_tkn_chkr tkn_tblw_tb_(int bgn, int end) 		{return (Xop_tblw_tb_tkn_chkr)new Xop_tblw_tb_tkn_chkr().Src_rng_(bgn, end);}
+	public Xop_tblw_tc_tkn_chkr tkn_tblw_tc_(int bgn, int end) 		{return (Xop_tblw_tc_tkn_chkr)new Xop_tblw_tc_tkn_chkr().Src_rng_(bgn, end);}
+	public Xop_tblw_td_tkn_chkr tkn_tblw_td_(int bgn, int end) 		{return (Xop_tblw_td_tkn_chkr)new Xop_tblw_td_tkn_chkr().Src_rng_(bgn, end);}
+	public Xop_tblw_th_tkn_chkr tkn_tblw_th_(int bgn, int end) 		{return (Xop_tblw_th_tkn_chkr)new Xop_tblw_th_tkn_chkr().Src_rng_(bgn, end);}
+	public Xop_tblw_tr_tkn_chkr tkn_tblw_tr_(int bgn, int end) 		{return (Xop_tblw_tr_tkn_chkr)new Xop_tblw_tr_tkn_chkr().Src_rng_(bgn, end);}
 	public Xop_hdr_tkn_chkr tkn_hdr_(int bgn, int end, int hdr_len)	{return (Xop_hdr_tkn_chkr)new Xop_hdr_tkn_chkr().Hdr_len_(hdr_len).Src_rng_(bgn, end);}
 	@gplx.Internal protected Xop_xnde_tkn_chkr tkn_xnde_br_(int pos)					{return tkn_xnde_(pos, pos).Xnde_tagId_(Xop_xnde_tag_.Tid_br);}
 	public Xop_xnde_tkn_chkr tkn_xnde_()							{return tkn_xnde_(String_.Pos_neg1, String_.Pos_neg1);}

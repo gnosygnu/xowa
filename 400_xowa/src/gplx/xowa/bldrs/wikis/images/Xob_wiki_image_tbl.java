@@ -20,8 +20,8 @@ import gplx.dbs.*;
 public class Xob_wiki_image_tbl {
 	public Xob_wiki_image_tbl Create_table(Db_provider p) {Sqlite_engine_.Tbl_create_and_delete(p, Tbl_name, Tbl_sql); return this;}
 	public Xob_wiki_image_tbl Create_index(Db_provider p) {Sqlite_engine_.Idx_create(p, Idx_img_name); return this;}
-	public Db_stmt Insert_stmt(Db_provider p) {return Db_stmt_.new_insert_(p, Tbl_name, Fld_img_name, Fld_img_media_type, Fld_img_minor_mime, Fld_img_size, Fld_img_width, Fld_img_height, Fld_img_bits, Fld_img_ext_id);}
-	public void Insert(Db_stmt stmt, byte[] ttl, byte[] media_type, byte[] minor_mime, int size, int w, int h, int bits, int ext_id) {
+	public Db_stmt Insert_stmt(Db_provider p) {return Db_stmt_.new_insert_(p, Tbl_name, Fld_img_name, Fld_img_media_type, Fld_img_minor_mime, Fld_img_size, Fld_img_width, Fld_img_height, Fld_img_bits, Fld_img_ext_id, Fld_img_timestamp);}
+	public void Insert(Db_stmt stmt, byte[] ttl, byte[] media_type, byte[] minor_mime, int size, int w, int h, int bits, int ext_id, byte[] img_timestamp) {
 		stmt.Clear()
 		.Val_str_by_bry_(ttl)
 		.Val_str_by_bry_(media_type)
@@ -31,11 +31,13 @@ public class Xob_wiki_image_tbl {
 		.Val_int_(h)
 		.Val_int_(bits)
 		.Val_int_(ext_id)
+		.Val_str_by_bry_(img_timestamp)
 		.Exec_insert();
 	}
 	public static final String Tbl_name = "image"
 	, Fld_img_name = "img_name", Fld_img_media_type = "img_media_type", Fld_img_minor_mime = "img_minor_mime"
 	, Fld_img_size = "img_size", Fld_img_width = "img_width", Fld_img_height = "img_height", Fld_img_bits = "img_bits", Fld_img_ext_id = "img_ext_id"
+	, Fld_img_timestamp = "img_timestamp"
 	;
 	private static final String Tbl_sql = String_.Concat_lines_nl
 	(	"CREATE TABLE IF NOT EXISTS image"
@@ -47,9 +49,10 @@ public class Xob_wiki_image_tbl {
 	,	", img_height      integer         NOT NULL -- int(5)"
 	,	", img_bits        smallint        NOT NULL -- int(3)"
 	,	", img_ext_id      int             NOT NULL -- xowa"
+	,	", img_timestamp   varchar(14)     NOT NULL -- 20140101155749"
 	,	");"
 	);
 	private static final Db_idx_itm
-		Idx_img_name     	= Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS image__img_name ON image (img_name);")
+		Idx_img_name     	= Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS image__img_name ON image (img_name, img_timestamp);")
 	;
 }

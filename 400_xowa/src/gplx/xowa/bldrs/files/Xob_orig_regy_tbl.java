@@ -28,7 +28,7 @@ class Xob_orig_regy_tbl {
 		byte repo_0_tid = Xof_repo_itm.Repo_local, repo_1_tid = Xof_repo_itm.Repo_remote;
 		boolean local_is_remote = Bry_.Eq(repo_0_wiki.Domain_bry(), repo_1_wiki.Domain_bry());
 		if (	repo_0_is_remote														// .gfs manually marked specifes repo_0 as remote
-			||	(	Bry_.Eq(repo_0_wiki.Domain_bry(), Xow_wiki_.Domain_commons_bry)	// repo_0 = commons; force repo_0 to be remote; else all orig_repo will be 1; DATE:2014-02-01
+			||	(	Bry_.Eq(repo_0_wiki.Domain_bry(), Xow_wiki_.Domain_commons_bry)		// repo_0 = commons; force repo_0 to be remote; else all orig_repo will be 1; DATE:2014-02-01
 				&&	local_is_remote														// repo_0 = repo_1
 				)
 			) {
@@ -47,7 +47,7 @@ class Xob_orig_regy_tbl {
 		Sqlite_engine_.Idx_create(usr_dlg, p, "orig_regy", Idx_xfer_temp);
 	}
 	private static void Create_data_for_repo(Gfo_usr_dlg usr_dlg, Db_provider cur, byte wiki_tid, Io_url join) {
-		usr_dlg.Note_many("", "", "inserting page: ~{0}", join.NameOnly());
+		usr_dlg.Note_many("", "", "inserting page for xowa.wiki.image: ~{0}", join.OwnerDir().NameOnly());
 		Sqlite_engine_.Db_attach(cur, "image_db", join.Raw());
 		cur.Exec_sql(String_.Format(Sql_update_repo_page, wiki_tid));
 		cur.Exec_sql(String_.Format(Sql_update_repo_redirect, wiki_tid));
@@ -57,18 +57,19 @@ class Xob_orig_regy_tbl {
 		p.Exec_sql(Xob_orig_regy_tbl.Sql_cs_mark_dupes);	// orig_regy: find dupes; see note in SQL
 		p.Exec_sql(Xob_orig_regy_tbl.Sql_cs_update_ttls);	// orig_regy: update lnki_ttl with lnki_commons_ttl
 		Create_data_for_repo(usr_dlg, p, Xof_repo_itm.Repo_remote, repo_remote_dir.GenSubFil(Xodb_db_file.Name__wiki_image));
-		p.Exec_sql(Xob_lnki_regy_tbl.Sql_cs_mark_changed);	// lnki_regy: update lnki_ttl with lnki_commons_ttl
-		p.Exec_sql(Xob_lnki_regy_tbl.Sql_cs_update_ttls);	// lnki_regy: update lnki_ttl with lnki_commons_ttl
+		p.Exec_sql(Xob_lnki_regy_tbl.Sql_cs_mark_changed);	// lnki_regy: update lnki_commons_flag
+		p.Exec_sql(Xob_lnki_regy_tbl.Sql_cs_update_ttls);	// lnki_regy: update cs
 	}
 	public static final String Tbl_name = "orig_regy"
 	, Fld_lnki_id = "lnki_id", Fld_lnki_ttl = "lnki_ttl", Fld_lnki_ext = "lnki_ext", Fld_lnki_count = "lnki_count"
 	, Fld_orig_repo = "orig_repo", Fld_orig_page_id = "orig_page_id"
 	, Fld_orig_redirect_id = "orig_redirect_id", Fld_orig_redirect_ttl = "orig_redirect_ttl", Fld_orig_file_id = "orig_file_id", Fld_orig_file_ttl = "orig_file_ttl"
 	, Fld_orig_size = "orig_size", Fld_orig_w = "orig_w", Fld_orig_h = "orig_h", Fld_orig_bits = "orig_bits"
-	, Fld_orig_media_type = "orig_media_type", Fld_orig_minor_mime = "orig_minor_mime", Fld_orig_file_ext = "orig_file_ext";
+	, Fld_orig_media_type = "orig_media_type", Fld_orig_minor_mime = "orig_minor_mime", Fld_orig_file_ext = "orig_file_ext", Fld_orig_timestamp = "orig_timestamp"
+	;
 	private static final Db_idx_itm
 		Idx_ttl     		= Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS orig_regy__ttl           ON orig_regy (lnki_ttl);")
-	,   Idx_xfer_temp 		= Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS orig_regy__xfer_temp     ON orig_regy (lnki_ttl, orig_file_ttl);")
+	,   Idx_xfer_temp 		= Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS orig_regy__xfer_temp     ON orig_regy (lnki_ttl, orig_file_ttl, orig_timestamp);")
 	;
 	private static final String
 		Tbl_sql = String_.Concat_lines_nl
@@ -92,16 +93,18 @@ class Xob_orig_regy_tbl {
 	,	", orig_bits                   smallint            NULL"
 	,	", orig_media_type             varchar(64)         NULL"
 	,	", orig_minor_mime             varchar(32)         NULL"
+	,	", orig_timestamp              varchar(14)         NULL"
 	,	");"
 	)
 	,	Sql_create_data = String_.Concat_lines_nl
-	(	"INSERT INTO orig_regy (lnki_id, lnki_ttl, lnki_commons_ttl, orig_commons_flag, lnki_ext, lnki_count)"
+	(	"INSERT INTO orig_regy (lnki_id, lnki_ttl, lnki_commons_ttl, orig_commons_flag, lnki_ext, lnki_count, orig_timestamp)"
 	,	"SELECT  Min(lnki_id)"
 	,	",       lnki_ttl"
 	,	",       lnki_commons_ttl"
 	,	",       NULL"
 	,	",       lnki_ext"
 	,	",       Sum(lnki_count)"
+	,	",       ''"
 	,	"FROM    lnki_regy"
 	,	"GROUP BY lnki_ttl"
 	,	",       lnki_ext"
@@ -129,10 +132,11 @@ class Xob_orig_regy_tbl {
 	,	",       i.img_bits"
 	,	",       i.img_media_type"
 	,	",       i.img_minor_mime"
+	,	",       i.img_timestamp"
 	,	"FROM    orig_regy o"
 	,	"        JOIN image_db.image i ON o.lnki_ttl = i.img_name"
 	,	"        JOIN page_db.page_regy m ON m.repo_id = {0} AND m.itm_tid = 0 AND o.lnki_ttl = m.src_ttl"
-	,	"WHERE   o.orig_file_ttl IS NULL"
+	,	"WHERE   i.img_timestamp > o.orig_timestamp"	// NOTE: this handles an image in local and remote by taking later version; DATE:2014-07-22
 	,	"ORDER BY 1"	// must order by lnki_id since it is PRIMARY KEY, else sqlite will spend hours shuffling rows in table
 	,	";"
 	)
@@ -157,10 +161,11 @@ class Xob_orig_regy_tbl {
 	,	",       i.img_bits"
 	,	",       i.img_media_type"
 	,	",       i.img_minor_mime"
+	,	",       i.img_timestamp"
 	,	"FROM    orig_regy o"
 	,	"        JOIN page_db.page_regy m ON m.repo_id = {0} AND m.itm_tid = 1 AND o.lnki_ttl = m.src_ttl"
 	,	"            JOIN image_db.image i ON m.trg_ttl = i.img_name"
-	,	"WHERE   o.orig_file_ttl IS NULL"
+	,	"WHERE   i.img_timestamp > o.orig_timestamp"	// NOTE: this handles an image in local and remote by taking later version; DATE:2014-07-22
 	,	"ORDER BY 1"	// must order by lnki_id since it is PRIMARY KEY, else sqlite will spend hours shuffling rows in table
 	,	";"
 	)
@@ -185,9 +190,10 @@ class Xob_orig_regy_tbl {
 	,	",       o.orig_bits"
 	,	",       o.orig_media_type"
 	,	",       o.orig_minor_mime"
+	,	",       o.orig_timestamp"
 	,	"FROM    orig_regy o"
 	,	"        JOIN orig_regy o2 ON o.lnki_commons_ttl = o2.lnki_ttl"	// EX: 2 rows in table (1) A.jpg; and (2) "a.jpg,A.jpg"; do not insert row (2) b/c row (1) exists;
-	,	"WHERE   o.orig_file_ttl IS NULL"
+	,	"WHERE   o.orig_file_ttl IS NULL"	// NOTE: don't use timestamp logic here
 	,	"ORDER BY 1"	// must order by lnki_id since it is PRIMARY KEY, else sqlite will spend hours shuffling rows in table
 	,	";"
 	)

@@ -32,7 +32,7 @@ public class Js_img_mgr {
 		if (Env_.Mode_testing()) return;
 		Xog_html_itm html_itm = page.Tab().Html_itm();
 		if (elem_tid == Xof_html_elem.Tid_gallery_v2) {
-			img_wkr.Html_update(html_itm, w, h, view_src, orig_src);
+			img_wkr.Html_update(page, html_itm, w, h, view_src, orig_src);
 			return;
 		}
 		String html_id = "xowa_file_img_" + uid;

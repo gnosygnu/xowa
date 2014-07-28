@@ -27,15 +27,16 @@ public class Xoa_fsys_mgr implements GfoInvkAble {
 		temp_dir				= root_dir.GenSubDir("tmp");
 		app_mgr					= new Launcher_app_mgr(app);
 	}
-	public Io_url Root_dir()		{return root_dir;} private Io_url root_dir;
-	public Io_url File_dir()		{return file_dir;} private Io_url file_dir;
-	public Io_url Wiki_dir()		{return wiki_dir;} public Xoa_fsys_mgr Wiki_dir_(Io_url v) {wiki_dir = v; return this;} private Io_url wiki_dir;
-	public Io_url Temp_dir()		{return temp_dir;} public Xoa_fsys_mgr Temp_dir_(Io_url v) {temp_dir = v; return this;} private Io_url temp_dir;	// set to /xowa/user/<name>/temp
-	public Io_url Bin_any_dir()		{return bin_any_dir;} private Io_url bin_any_dir;
-	public Io_url Bin_extensions_dir() {return bin_extensions_dir;} private Io_url bin_extensions_dir;
-	public Io_url Bin_plat_dir()	{return bin_plat_dir;} private Io_url bin_plat_dir;
-	public Io_url Bin_db_dir()		{return bin_any_dir.GenSubDir_nest("sql", "xowa");}
-	public Launcher_app_mgr App_mgr()	{return app_mgr;} Launcher_app_mgr app_mgr;
+	public Io_url Root_dir()				{return root_dir;} private Io_url root_dir;
+	public Io_url File_dir()				{return file_dir;} private Io_url file_dir;
+	public Io_url Wiki_dir()				{return wiki_dir;} public Xoa_fsys_mgr Wiki_dir_(Io_url v) {wiki_dir = v; return this;} private Io_url wiki_dir;
+	public Io_url Temp_dir()				{return temp_dir;} public Xoa_fsys_mgr Temp_dir_(Io_url v) {temp_dir = v; return this;} private Io_url temp_dir;	// set to /xowa/user/<name>/temp
+	public Io_url Bin_any_dir()				{return bin_any_dir;} private Io_url bin_any_dir;
+	public Io_url Bin_extensions_dir()		{return bin_extensions_dir;} private Io_url bin_extensions_dir;
+	public Io_url Bin_plat_dir()			{return bin_plat_dir;} private Io_url bin_plat_dir;
+	public Io_url Bin_db_dir()				{return bin_any_dir.GenSubDir_nest("sql", "xowa");}
+	public Io_url Bin_data_os_cfg_fil()		{return bin_plat_dir.GenSubFil_nest("xowa", "cfg", Xoa_gfs_mgr.Cfg_os);}
+	public Launcher_app_mgr App_mgr()		{return app_mgr;} Launcher_app_mgr app_mgr;
 	public void Init() {
 		app_mgr.Init();
 	}

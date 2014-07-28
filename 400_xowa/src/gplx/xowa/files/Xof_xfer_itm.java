@@ -93,6 +93,14 @@ public class Xof_xfer_itm implements Xof_file_itm {
 		this.html_pass = true;
 		this.file_found = true;
 	}
+	public Xof_xfer_itm Init_by_lnki(byte[] ttl, byte[] redirect, byte lnki_type, int w, int h, double upright, double thumbtime, int lnki_page) {
+		this.Atrs_by_ttl(ttl, redirect);
+		this.lnki_type = lnki_type; this.lnki_w = w; this.lnki_h = h; this.lnki_upright = upright; this.lnki_thumbtime = thumbtime; this.lnki_page = lnki_page;
+		lnki_thumbable = Xof_xfer_itm_.Lnki_thumbable_calc(lnki_type, lnki_w, lnki_h);
+		if (lnki_thumbtime != Xof_doc_thumb.Null && !lnki_ext.Id_is_media())	// thumbtime is set, but ext is not media; PAGE:en.w:Moon; EX:[[File:A.png|thumbtime=0:02]] DATE:2014-07-22
+			lnki_thumbtime = Xof_doc_thumb.Null;								// disable thumbtime
+		return this;
+	}
 	public void			Atrs_by_meta(Xof_meta_itm meta_itm, Xof_repo_itm trg_repo, int thumb_w_img) {this.meta_itm = meta_itm; this.trg_repo = trg_repo; this.thumb_w_img = thumb_w_img;} private int thumb_w_img;
 	public void			Atrs_by_meta_only(Xof_meta_itm meta_itm) {this.meta_itm = meta_itm; Atrs_by_ttl(meta_itm.Ttl(), meta_itm.Ptr_ttl());}
 	public Xof_xfer_itm Atrs_by_ttl(byte[] ttl, byte[] redirect) {
@@ -101,11 +109,6 @@ public class Xof_xfer_itm implements Xof_file_itm {
 		this.lnki_ttl = Xof_xfer_itm_.Md5_decoder.Decode_lax(Xof_xfer_itm_.Ttl_standardize(lnki_ttl));	// NOTE: this line is repeated in static method below
 		this.lnki_md5 = Xof_xfer_itm_.Md5_calc(lnki_ttl);				// NOTE: md5 is calculated off of url_decoded ttl; EX: A%2Cb is converted to A,b and then md5'd. note that A%2Cb still remains the title
 		this.lnki_ext = Xof_ext_.new_by_ttl_(lnki_ttl);
-		return this;
-	}
-	public Xof_xfer_itm Atrs_by_lnki(byte lnki_type, int w, int h, double upright, double thumbtime, int lnki_page) {
-		this.lnki_type = lnki_type; this.lnki_w = w; this.lnki_h = h; this.lnki_upright = upright; this.lnki_thumbtime = thumbtime; this.lnki_page = lnki_page;
-		lnki_thumbable = Xof_xfer_itm_.Lnki_thumbable_calc(lnki_type, lnki_w, lnki_h);
 		return this;
 	}
 	public Xof_xfer_itm Atrs_by_orig(int w, int h, int orig_file_len) {this.orig_w = w; this.orig_h = h; this.orig_file_len = orig_file_len; return this;}

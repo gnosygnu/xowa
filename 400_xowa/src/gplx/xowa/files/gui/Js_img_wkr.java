@@ -18,5 +18,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files.gui; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.xowa.gui.views.*;
 public interface Js_img_wkr {
-	void Html_update(Xog_html_itm html_itm, int w, int h, String view_src, String orig_src);
+	void Html_update(Xoa_page page, Xog_html_itm html_itm, int w, int h, String view_src, String orig_src);
 }

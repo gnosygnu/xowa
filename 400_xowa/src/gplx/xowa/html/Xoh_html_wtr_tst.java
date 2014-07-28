@@ -57,19 +57,6 @@ public class Xoh_html_wtr_tst {
 	@Test  public void Apos_ib()					{fxt.Test_parse_page_wiki_str("'''''a'''''"					, "<i><b>a</b></i>");}
 	@Test  public void Html_ent()					{fxt.Test_parse_page_wiki_str("&#33;"						, "!");}
 	@Test  public void Html_ref()					{fxt.Test_parse_page_wiki_str("&gt;"						, "&gt;");}
-	@Test  public void Lnke_basic()					{fxt.Test_parse_page_wiki_str("[irc://a]"					, "<a href=\"irc://a\" class=\"external text\" rel=\"nofollow\">[1]</a>");}
-	@Test  public void Lnke_autonumber()			{fxt.Test_parse_page_wiki_str("[irc://a] [irc://b]"			, "<a href=\"irc://a\" class=\"external text\" rel=\"nofollow\">[1]</a> <a href=\"irc://b\" class=\"external text\" rel=\"nofollow\">[2]</a>");}
-	@Test  public void Lnke_caption()				{fxt.Test_parse_page_wiki_str("[irc://a b]"					, "<a href=\"irc://a\" class=\"external text\" rel=\"nofollow\">b</a>");}
-	@Test  public void Lnke_caption_fmt()			{fxt.Test_parse_page_wiki_str("[irc://a ''b'']"				, "<a href=\"irc://a\" class=\"external text\" rel=\"nofollow\"><i>b</i></a>");}
-	@Test  public void Lnke_xowa()	{
-		String img = "<img src=\"file:///mem/xowa/user/test_user/app/img/xowa/protocol.png\"/>";
-		fxt.Wiki().Sys_cfg().Xowa_proto_enabled_(true);
-		fxt.Test_parse_page_wiki_str("[xowa-cmd:\"a\" z]"			, "<a href=\"xowa-cmd:a\">z" + img + "</a>");
-		fxt.Test_parse_page_wiki_str("[xowa-cmd:\"a.b('c_d');\" z]"	, "<a href=\"xowa-cmd:a.b('c_d');\">z" + img + "</a>");
-		fxt.Test_parse_page_wiki_str("[xowa-cmd:*\"a\"b*c\"* z]"		, "<a href=\"xowa-cmd:a%22b%2Ac\">z" + img + "</a>");
-		fxt.Wiki().Sys_cfg().Xowa_proto_enabled_(false);
-		fxt.Test_parse_page_wiki_str("[xowa-cmd:\"a\" b]"			, "[xowa-cmd:&quot;a&quot; b]");	// protocol is disabled: literalize String (i.e.: don't make it an anchor)
-	}
 	@Test  public void List_1_itm()	{
 		fxt.Test_parse_page_wiki_str("*a", String_.Concat_lines_nl_skip_last
 			( "<ul>"

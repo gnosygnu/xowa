@@ -21,8 +21,12 @@ public class Html_tag_ {
 	  Ul_name_bry		= Bry_.new_ascii_("ul")
 	;
 	public static final byte[]
-	  Body_lhs					= Bry_.new_ascii_("<body>")
-	, Body_rhs					= Bry_.new_ascii_("</body>")
+	  Br_inl					= Bry_.new_ascii_("<br/>")
+	, Hr_inl					= Bry_.new_ascii_("<hr/>")
+	, Body_lhs					= Bry_.new_ascii_("<body>")			, Body_rhs					= Bry_.new_ascii_("</body>")
+	, B_lhs						= Bry_.new_ascii_("<b>")			, B_rhs						= Bry_.new_ascii_("</b>")
+	, I_lhs						= Bry_.new_ascii_("<i>")			, I_rhs						= Bry_.new_ascii_("</i>")
+	, P_lhs						= Bry_.new_ascii_("<p>")			, P_rhs						= Bry_.new_ascii_("</p>")
 	, Html_rhs					= Bry_.new_ascii_("</html>")
 	, Head_lhs_bgn				= Bry_.new_ascii_("<head")
 	, Head_rhs					= Bry_.new_ascii_("</head>")
@@ -31,7 +35,6 @@ public class Html_tag_ {
 	, Script_lhs				= Bry_.new_ascii_("<script>")
 	, Script_lhs_w_type			= Bry_.new_ascii_("<script type='text/javascript'>")
 	, Script_rhs				= Bry_.new_ascii_("</script>")
-	, Hr_bry					= Bry_.new_ascii_("<hr/>")
 	;
 	public static final String 
 	  Comm_bgn_str = "<!--"

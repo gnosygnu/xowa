@@ -25,12 +25,14 @@ public class Ref_html_wtr {
 		Ref_nde itm = (Ref_nde)xnde.Xnde_xtn();
 		if (itm == null) return;
 		if (itm.Follow_y()) return;	// NOTE: "follow" is always appended to preceding ref; will never generate its own ^ a  
+		byte[] itm_group = itm.Group();
+		boolean itm_group_is_default = Bry_.Eq(itm_group, Bry_.Empty) || Bry_.Eq(itm_group, Cite_xtn_mgr.Group_default_name());	// do not show "lower-alpha"; PAGE:en.w:Moon; DATE:2014-07-21
 		cfg.Itm_html().Bld_bfr_many(bfr
 			, Itm_id(itm, true)
 			, Grp_id(itm)
-			, itm.Group() == Bry_.Empty	// grp_key
-				? itm.Idx_major() + 1
-				: (Object)grp_key_fmtr.Atrs_(cfg.Itm_grp_text(), itm.Group(), itm.Idx_major() + 1)
+			, itm_group_is_default
+			? itm.Idx_major() + 1
+			: (Object)grp_key_fmtr.Atrs_(cfg.Itm_grp_text(), itm.Group(), itm.Idx_major() + 1)
 			);
 	}	private Bry_fmtr_arg_fmtr_objs grp_key_fmtr = Bry_fmtr_arg_.fmtr_null_();
 	public Ref_html_wtr_cfg Cfg() {return cfg;} private Ref_html_wtr_cfg cfg;

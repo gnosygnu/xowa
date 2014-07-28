@@ -19,6 +19,7 @@ package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx
 import gplx.html.*;
 import gplx.xowa.html.*;
 import gplx.xowa.parsers.logs.*;
+import gplx.xowa.xtns.pfuncs.*;
 public class Scrib_invoke_func extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_invoke;}
 	@Override public Pf_func New(int id, byte[] name) {return new Scrib_invoke_func().Name_(name);}

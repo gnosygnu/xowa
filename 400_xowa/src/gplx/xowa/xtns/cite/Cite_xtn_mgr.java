@@ -18,7 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.cite; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 public class Cite_xtn_mgr extends Xox_mgr_base {
 	@Override public byte[] Xtn_key() {return XTN_KEY;} public static final byte[] XTN_KEY = Bry_.new_ascii_("cite");
-	public byte[] Group_default_name() {return group_default_name;} private byte[] group_default_name = Bry_.new_ascii_("lower-alpha");
+//		public byte[] Group_default_name() {return group_default_name;} private byte[] group_default_name = Bry_.new_ascii_("lower-alpha");
+	public static byte[] Group_default_name() {return group_default_name;} private static byte[] group_default_name = Bry_.new_ascii_("lower-alpha");
 	@Override public Xox_mgr Clone_new() {return new Cite_xtn_mgr();}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_group_default_name))		return String_.new_utf8_(group_default_name);

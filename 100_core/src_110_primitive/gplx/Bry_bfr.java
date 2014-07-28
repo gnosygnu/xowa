@@ -120,10 +120,12 @@ public class Bry_bfr {
 		return this;
 	}
 	public Bry_bfr Add_byte_eq()			{return Add_byte(Byte_ascii.Eq);}
-	public Bry_bfr Add_byte_pipe()		{return Add_byte(Byte_ascii.Pipe);}
-	public Bry_bfr Add_byte_apos()		{return Add_byte(Byte_ascii.Apos);}
-	public Bry_bfr Add_byte_quote()		{return Add_byte(Byte_ascii.Quote);}
-	public Bry_bfr Add_byte_space()		{return Add_byte(Byte_ascii.Space);}
+	public Bry_bfr Add_byte_pipe()			{return Add_byte(Byte_ascii.Pipe);}
+	public Bry_bfr Add_byte_comma()			{return Add_byte(Byte_ascii.Comma);}
+	public Bry_bfr Add_byte_apos()			{return Add_byte(Byte_ascii.Apos);}
+	public Bry_bfr Add_byte_backslash()		{return Add_byte(Byte_ascii.Backslash);}
+	public Bry_bfr Add_byte_quote()			{return Add_byte(Byte_ascii.Quote);}
+	public Bry_bfr Add_byte_space()			{return Add_byte(Byte_ascii.Space);}
 	public Bry_bfr Add_byte_nl()			{return Add_byte(Byte_ascii.NewLine);}
 	public Bry_bfr Add_byte(byte val) {
 		int newPos = bfr_len + 1;

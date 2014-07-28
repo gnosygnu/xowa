@@ -106,7 +106,7 @@ public class Xop_lnki_wkr__basic_tst {
 
 	@Test  public void Image_upright() {
 		fxt.Test_parse_page_wiki("[[Image:a|upright=.123]]"	, fxt.tkn_lnki_().Upright_(.123));
-		fxt.Test_parse_page_wiki("[[Image:a|upright]]"		, fxt.tkn_lnki_().Upright_(1));		// no eq tokn
+		fxt.Test_parse_page_wiki("[[Image:a|upright]]"		, fxt.tkn_lnki_().Upright_(gplx.xowa.files.Xof_img_size.Upright_default_marker));		// no eq tokn
 		fxt.Test_parse_page_wiki("[[Image:a|upright=.42190046219457]]", fxt.tkn_lnki_().Upright_(.42190046219457));	// many decimal places breaks upright
 		fxt.Init_log_(Xop_lnki_log.Upright_val_is_invalid)
 		  .Test_parse_page_wiki("[[Image:a|upright=y]]"		, fxt.tkn_lnki_().Upright_(-1));		// invalid

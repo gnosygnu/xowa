@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.json.*;
+import gplx.xowa.xtns.pfuncs.*;
 public class Wdata_pf_noExternalLangLinks extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_noexternallanglinks;}
 	@Override public Pf_func New(int id, byte[] name) {return new Wdata_pf_noExternalLangLinks().Name_(name);}

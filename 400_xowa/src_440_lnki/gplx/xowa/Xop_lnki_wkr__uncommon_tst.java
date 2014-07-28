@@ -26,6 +26,10 @@ public class Xop_lnki_wkr__uncommon_tst {
 	@Test  public void Single_bracket() {		// PURPOSE: handle [[A|[b]]] PAGE:en.w:Aubervilliers DATE:2014-06-25
 		fxt.Test_html_full_str("[[A|[B]]]", "<a href=\"/wiki/A\">[B]</a>");
 	}
+	@Test  public void Triple_bracket() {	// PURPOSE: "]]]" shouldn't invalidate tkn; PAGE:en.w:Tall_poppy_syndrome; DATE:2014-07-23
+		fxt.Test_parse_page_all_str("[[A]]]"	,  "<a href=\"/wiki/A\">A</a>]");	// title only
+		fxt.Test_parse_page_all_str("[[A|B]]]"	,  "<a href=\"/wiki/A\">B]</a>");	// title + caption; note that ] should be outside </a> b/c MW has more logic that says "if caption starts with '['", but leaving as is; DATE:2014-07-23
+	}
 	@Test  public void Multiple_captions() {	// PURPOSE: multiple captions should be concatenated (used to only take first); EX:zh.d:维基词典:Unicode字符索引/0000–0FFF; DATE:2014-05-05
 		fxt.Test_parse_page_all_str("[[A|B|C|D]]"		, "<a href=\"/wiki/A\">B|C|D</a>");
 	}

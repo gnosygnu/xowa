@@ -20,6 +20,7 @@ import gplx.xowa.gui.*;
 import gplx.xowa.apis.xowa.html.modules.*;
 public class Xoh_module_itm__popups implements Xoh_module_itm {
 	public boolean Enabled() {return enabled;} public void Enabled_y_() {enabled = true;} public void Enabled_(boolean v) {enabled = v;} private boolean enabled;
+	public boolean Bind_hover_area() {return bind_hover_area;} public void Bind_hover_area_(boolean v) {bind_hover_area = v;} private boolean bind_hover_area;
 	public void Clear() {enabled = false;}
 	public byte[] Key() {return Key_const;} private static final byte[] Key_const = Bry_.new_ascii_("popups");
 	public void Write_css_script(Xoa_app app, Xow_wiki wiki, Xoa_page page, Xoh_module_wtr wtr) {}
@@ -51,6 +52,7 @@ public class Xoh_module_itm__popups implements Xoh_module_itm {
 		wtr.Write_js_global_ini_atr_val(Key_win_max_h				, api_popups.Win_max_h());
 		wtr.Write_js_global_ini_atr_val(Key_win_show_all_max_w		, api_popups.Win_show_all_max_w());
 		wtr.Write_js_global_ini_atr_val(Key_win_bind_focus_blur		, api_popups.Win_bind_focus_blur());
+		wtr.Write_js_global_ini_atr_val(Key_win_bind_hover_area		, bind_hover_area);
 	}
 	private static byte[] Css_url, Js_line_2;
 	private static final byte[]
@@ -63,5 +65,6 @@ public class Xoh_module_itm__popups implements Xoh_module_itm {
 	, Key_win_max_h					= Bry_.new_ascii_("popups-win-max_h")
 	, Key_win_show_all_max_w		= Bry_.new_ascii_("popups-win-show_all_max_w")
 	, Key_win_bind_focus_blur		= Bry_.new_ascii_("popups-win-bind_focus_blur")
+	, Key_win_bind_hover_area		= Bry_.new_ascii_("popups-win-bind_hover_area")
 	;
 }

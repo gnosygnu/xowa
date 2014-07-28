@@ -92,7 +92,7 @@ public class Xoh_module_wtr {
 	private void Write_js_global_ini_atr(byte[] key, boolean quote_val, byte[] val) {
 		Write_js_global_ini_atr_bgn(key);
 		if (quote_val)
-			Write_quote(Byte_ascii.Apos, val);
+			Write_js_quote(Byte_ascii.Apos, val);
 		else
 			bfr.Add(val);
 		bfr.Add_byte(Byte_ascii.Comma);
@@ -115,7 +115,7 @@ public class Xoh_module_wtr {
 		bfr.Add(key);
 		bfr.Add(Js_var_mid);
 		if (quote_val)
-			Write_quote(Byte_ascii.Apos, val);
+			Write_js_quote(Byte_ascii.Apos, val);
 		else
 			bfr.Add(val);
 		bfr.Add(Js_var_end);
@@ -124,12 +124,12 @@ public class Xoh_module_wtr {
 		Indent();
 		bfr.Add(v);
 	}
-	private void Write_quote(byte quote_byte, byte[] val) {
+	private void Write_js_quote(byte quote_byte, byte[] val) {
 		int val_len = val.length;
 		bfr.Add_byte(quote_byte);
 		for (int i = 0; i < val_len; i++) {
 			byte b = val[i];
-			if (b == quote_byte) bfr.Add_byte(b);	// double up quotes
+			if (b == quote_byte) bfr.Add_byte_backslash();	// escape quote
 			bfr.Add_byte(b);
 		}
 		bfr.Add_byte(quote_byte);

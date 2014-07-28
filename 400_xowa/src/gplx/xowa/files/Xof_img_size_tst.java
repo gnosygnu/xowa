@@ -91,7 +91,7 @@ class Xof_img_size_fxt {
 	public Xof_img_size_fxt Lnki_(int w, int h) {lnki_w = w; lnki_h = h; return this;} private int lnki_w, lnki_h;
 	public void Test_html(int expd_w, int expd_h) {Test_html(expd_w, expd_h, false);}
 	public void Test_html(int expd_html_w, int expd_html_h, boolean expd_file_is_orig) {
-		img_size.Html_size_calc(Xof_exec_tid.Tid_wiki_page, lnki_w, lnki_h, lnki_type, true, lnki_upright, lnki_ext, orig_w, orig_h, Xof_img_size.Thumb_width_img);
+		img_size.Html_size_calc(Xof_exec_tid.Tid_wiki_page, lnki_w, lnki_h, lnki_type, Xof_patch_upright_tid_.Tid_all, lnki_upright, lnki_ext, orig_w, orig_h, Xof_img_size.Thumb_width_img);
 		Tfds.Eq(expd_html_w, img_size.Html_w(), "html_w");
 		Tfds.Eq(expd_html_h, img_size.Html_h(), "html_h");
 		Tfds.Eq(expd_file_is_orig, img_size.File_is_orig(), "file_is_orig");

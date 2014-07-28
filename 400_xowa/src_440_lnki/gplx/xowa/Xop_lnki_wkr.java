@@ -30,30 +30,19 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 		lnki.Tkn_tid_to_txt();
 		ctx.Msg_log().Add_itm_none(Xop_misc_log.Eos, src, lnki.Src_bgn(), lnki.Src_end());			
 	}
-	private static final byte[] Brack_end_bry = Bry_.new_ascii_("]");
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		if (ctx.Cur_tkn_tid() == Xop_tkn_itm_.Tid_lnke) {		// if lnke then take 1st ] in "]]" and use it close lnke
 			int lnke_end_pos = bgn_pos + 1;
 			ctx.Lnke().MakeTkn_end(ctx, tkn_mkr, root, src, src_len, bgn_pos, lnke_end_pos);
 			return lnke_end_pos;
 		}
-		if (	cur_pos < src_len								// bounds check
-			&&	src[cur_pos] == Byte_ascii.Brack_end			// is next char after "]]", "]"; i.e.: "]]]"; PAGE:en.w:Aubervilliers DATE:2014-06-25
-			) {
-			int nxt_pos = cur_pos + 1;
-			if (	nxt_pos == src_len							// allow "]]]EOS"
-				||	(	nxt_pos < src_len						// bounds check
-					&&	src[nxt_pos] != Byte_ascii.Brack_end	// is next char after "]]]", "]"; i.e.: not "]]]]"; PAGE:ru.w:Меркатале_ин_Валь_ди_Песа; DATE:2014-02-04
-					)
-
-			) {
-				root.Subs_add(tkn_mkr.Bry(bgn_pos, bgn_pos + 1, Brack_end_bry));	// add "]" as bry
-				++bgn_pos; ++cur_pos;							// position "]]" at end of "]]]"
-			}
+		int stack_pos = ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_lnki);
+		if (stack_pos == Xop_ctx.Stack_not_found) return ctx.Lxr_make_txt_(cur_pos);	// "]]" found but no "[[" in stack; return literal "]]"
+		Xop_lnki_tkn lnki = (Xop_lnki_tkn)ctx.Stack_pop_til(root, src, stack_pos, false, bgn_pos, cur_pos, Xop_tkn_itm_.Tid_lnki_end);
+		if (Xop_lnki_wkr_.Adjust_for_brack_end_len_of_3(ctx, tkn_mkr, root, src, src_len, cur_pos, lnki)) {	// convert "]]]" into "]" + "]]", not "]]" + "]"
+			root.Subs_add(tkn_mkr.Bry(bgn_pos, bgn_pos + 1, Byte_ascii.Brack_end_bry));	// add "]" as bry
+			++bgn_pos; ++cur_pos;														// position "]]" at end of "]]]"
 		}
-		int lvl_pos = ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_lnki);
-		if (lvl_pos == Xop_ctx.Stack_not_found) return ctx.Lxr_make_txt_(cur_pos);	// "]]" found but no "[[" in stack; interpet "]]" literally
-		Xop_lnki_tkn lnki = (Xop_lnki_tkn)ctx.Stack_pop_til(root, src, lvl_pos, false, bgn_pos, cur_pos, Xop_tkn_itm_.Tid_lnki_end);
 		if (!arg_bldr.Bld(ctx, tkn_mkr, this, Xop_arg_wkr_.Typ_lnki, root, lnki, bgn_pos, cur_pos, lnki.Tkn_sub_idx() + 1, root.Subs_len(), src))
 			return Xop_lnki_wkr_.Invalidate_lnki(ctx, src, root, lnki, bgn_pos);
 		cur_pos = Xop_lnki_wkr_.Chk_for_tail(ctx.Lang(), src, cur_pos, src_len, lnki);
@@ -162,7 +151,7 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 								lnki.Upright_(number_parser.AsDec().XtoDouble());
 						}
 						else	// no =; EX: [[Image:a|upright]]
-							lnki.Upright_(1);
+							lnki.Upright_(gplx.xowa.files.Xof_img_size.Upright_default_marker);// NOTE: was incorrectly hardcoded as 1; DATE:2014-07-23
 						break;
 					case Xop_lnki_arg_parser.Tid_noicon:		lnki.Media_icon_n_();  break;
 					case Xop_lnki_arg_parser.Tid_page:			Xop_lnki_wkr_.Page_parse(ctx, src, number_parser, lnki, arg); break;
@@ -265,5 +254,20 @@ class Xop_lnki_wkr_ {
 		}
 		else
 			lnki.Thumbtime_(fracs / TimeSpanAdp_.Ratio_f_to_s);
+	}
+	public static boolean Adjust_for_brack_end_len_of_3(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int cur_pos, Xop_lnki_tkn lnki) {
+		if (	cur_pos < src_len								// bounds check
+			&&	src[cur_pos] == Byte_ascii.Brack_end			// is next char after "]]", "]"; i.e.: "]]]"; PAGE:en.w:Aubervilliers DATE:2014-06-25
+			) {
+			int nxt_pos = cur_pos + 1;
+			if (	nxt_pos == src_len							// allow "]]]EOS"
+				||	(	nxt_pos < src_len						// bounds check
+					&&	src[nxt_pos] != Byte_ascii.Brack_end	// is next char after "]]]", "]"; i.e.: not "]]]]"; PAGE:ru.w:Меркатале_ин_Валь_ди_Песа; DATE:2014-02-04
+					)
+			) {
+				return lnki.Ttl() != null;						// only change "]]]" to "]" + "]]" if lnki is not title; otherwise [[A]]] -> "A]" which will be invalid; PAGE:en.w: Tall_poppy_syndrome DATE:2014-07-23
+			}
+		}
+		return false;
 	}
 }

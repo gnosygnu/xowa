@@ -21,7 +21,7 @@ import gplx.xowa.files.fsdb.caches.*;
 import gplx.xowa.files.gui.*;
 public interface Xof_fsdb_mgr extends RlsAble {
 	boolean Tid_is_mem();
-	boolean Patch_upright();
+	int Patch_upright();
 	Xow_wiki Wiki();
 	Xof_qry_mgr Qry_mgr();
 	Xof_bin_mgr Bin_mgr();

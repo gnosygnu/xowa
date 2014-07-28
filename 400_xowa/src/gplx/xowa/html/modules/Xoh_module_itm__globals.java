@@ -65,12 +65,12 @@ public class Xoh_module_itm__globals implements Xoh_module_itm {
 		bfr.Add_byte(Byte_ascii.Brack_bgn).Add_byte(Byte_ascii.Apos).Add_byte(Byte_ascii.Apos);
 		for (int i = january_id; i <= december_id; i++) {
 			bfr.Add_byte(Byte_ascii.Comma).Add_byte(Byte_ascii.Space).Add_byte(Byte_ascii.Apos);
-			bfr.Add(msg_mgr.Val_by_id(i));
+			bfr.Add(Bry_.Replace(msg_mgr.Val_by_id(i), Byte_ascii.Apos_bry, Apos_escape));
 			bfr.Add_byte(Byte_ascii.Apos);
 		}
 		bfr.Add_byte(Byte_ascii.Brack_end);
 		return bfr.XtoAryAndClear();
-	}
+	}	private static final byte[] Apos_escape = Bry_.new_ascii_("\\'");
 	private static byte[] Html_js_table_num_format_separators(Bry_bfr bfr, Xol_transform_mgr separator_mgr) {
 		byte[] dec_spr = separator_mgr.Get_val_or_self(Xol_num_mgr.Separators_key__dec);
 		bfr.Add_byte(Byte_ascii.Brack_bgn)							.Add_byte(Byte_ascii.Apos).Add(dec_spr).Add_byte(Byte_ascii.Tab).Add_byte(Byte_ascii.Dot).Add_byte(Byte_ascii.Apos);

@@ -20,7 +20,7 @@ import gplx.ios.*; import gplx.xowa.bldrs.*; import gplx.dbs.*; import gplx.xowa
 public class Xob_wiki_image_sql extends Xob_itm_dump_base implements Xob_cmd, GfoInvkAble, Sql_file_parser_cmd {
 	private Db_provider provider = null; private Db_stmt stmt = null;
 	private Xob_wiki_image_tbl tbl_image = new Xob_wiki_image_tbl();
-	private byte[] cur_ttl, cur_media_type, cur_minor_mime; private int cur_size, cur_width, cur_height, cur_bits, cur_ext_id;
+	private byte[] cur_ttl, cur_media_type, cur_minor_mime, cur_timestamp; private int cur_size, cur_width, cur_height, cur_bits, cur_ext_id;
 	private int commit_count = 10000;
 	public Xob_wiki_image_sql(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Cmd_key() {return KEY;} public static final String KEY = "wiki.image";
@@ -34,7 +34,7 @@ public class Xob_wiki_image_sql extends Xob_itm_dump_base implements Xob_cmd, Gf
 			src_fil = Xobd_rdr.Find_fil_by(wiki.Fsys_mgr().Root_dir(), "*-image.sql");
 			if (src_fil == null) throw Err_mgr._.fmt_(Xob_cmd_mgr.GRP_KEY, "sql_file_missing", ".sql file not found in dir: ~{0}", wiki.Fsys_mgr().Root_dir());
 		}
-		parser.Src_fil_(src_fil).Trg_fil_gen_(dump_url_gen).Fld_cmd_(this).Flds_req_idx_(20, Fld_img_name, Fld_img_size, Fld_img_width, Fld_img_height, Fld_img_bits, Fld_img_media_type, Fld_img_minor_mime);
+		parser.Src_fil_(src_fil).Trg_fil_gen_(dump_url_gen).Fld_cmd_(this).Flds_req_idx_(20, Fld_img_name, Fld_img_size, Fld_img_width, Fld_img_height, Fld_img_bits, Fld_img_media_type, Fld_img_minor_mime, Fld_img_timestamp);
 
 		provider = Xodb_db_file.init__wiki_image(wiki.Fsys_mgr().Root_dir()).Provider();
 		provider.Txn_mgr().Txn_bgn_if_none();
@@ -55,9 +55,10 @@ public class Xob_wiki_image_sql extends Xob_itm_dump_base implements Xob_cmd, Gf
 			case Fld_img_height:		cur_height = Bry_.Xto_int_or(src, fld_bgn, fld_end, -1); break;
 			case Fld_img_bits: 			cur_bits = Bry_.Xto_int_or(src, fld_bgn, fld_end, -1); break;
 			case Fld_img_media_type:	cur_media_type = Bry_.Mid(src, fld_bgn, fld_end); break;
-			case Fld_img_minor_mime:	cur_minor_mime = Bry_.Mid(src, fld_bgn, fld_end);
+			case Fld_img_minor_mime:	cur_minor_mime = Bry_.Mid(src, fld_bgn, fld_end); break;
+			case Fld_img_timestamp:	cur_timestamp = Bry_.Mid(src, fld_bgn, fld_end);
 				cur_ext_id = Calc_ext_id(show_issues ? app.Usr_dlg() : Gfo_usr_dlg_.Null, cur_ttl, cur_media_type, cur_minor_mime, cur_width, cur_height);
-				tbl_image.Insert(stmt, cur_ttl, cur_media_type, cur_minor_mime, cur_size, cur_width, cur_height, cur_bits, cur_ext_id);
+				tbl_image.Insert(stmt, cur_ttl, cur_media_type, cur_minor_mime, cur_size, cur_width, cur_height, cur_bits, cur_ext_id, cur_timestamp);
 				++commit_count;
 				if ((commit_count % 10000) == 0) {
 					usr_dlg.Prog_many("", "", "committing: count=~{0} last=~{1}", commit_count, String_.new_utf8_(cur_ttl));
@@ -69,7 +70,7 @@ public class Xob_wiki_image_sql extends Xob_itm_dump_base implements Xob_cmd, Gf
 	public void Cmd_end() {}
 	public void Cmd_print() {}
 	private boolean show_issues = true;
-	private static final int Fld_img_name = 0, Fld_img_size = 1, Fld_img_width = 2, Fld_img_height = 3, Fld_img_bits = 5, Fld_img_media_type = 6, Fld_img_minor_mime = 8;
+	private static final int Fld_img_name = 0, Fld_img_size = 1, Fld_img_width = 2, Fld_img_height = 3, Fld_img_bits = 5, Fld_img_media_type = 6, Fld_img_minor_mime = 8, Fld_img_timestamp = 12;
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_src_fil_))			src_fil = m.ReadIoUrl("v");
 		else if	(ctx.Match(k, Invk_show_issues_))		show_issues = m.ReadYn("v");

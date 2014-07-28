@@ -40,9 +40,8 @@ public abstract class Xob_wdata_qid_base extends Xob_itm_dump_base implements Xo
 		Json_itm_nde links_nde = Json_itm_nde.cast_(doc.Get_grp(Wdata_doc_consts.Key_atr_links_bry)); if (links_nde == null) return; // no links; ignore
 		int len = links_nde.Subs_len(); if (len == 0) return;	// no subs; return;
 		Wdata_qid_data data_core = null;
-		links.Clear();
-		// iterate links; find data_core (hopefully enwiki)
-		for (int i = 0; i < len; i++) {
+		links.Clear();			
+		for (int i = 0; i < len; i++) {		// iterate links; find data_core (hopefully enwiki)
 			Json_itm_kv kv = (Json_itm_kv)links_nde.Subs_get_at(i);
 			byte[] xwiki_key = kv.Key().Data_bry();
 			byte[] ttl_bry = Wdata_doc_.Link_extract(kv);
@@ -52,15 +51,11 @@ public abstract class Xob_wdata_qid_base extends Xob_itm_dump_base implements Xo
 			if (Bry_.Eq(xwiki_key, Xwiki_key_en)) data_core = data;
 		}
 
-		// get core_ns; warn if not enwiki
-//			if (!Bry_.Eq(data_core.Xwiki_key(), Xwiki_key_en) && Bry_finder.Find_fwd(data_core.Ttl(), Byte_ascii.Colon) != Bry_.NotFound)
-//				bldr.App().Usr_dlg().Log_many(GRP_KEY, "enwiki_not_found", "enwiki not found; namespace parsing may be inaccurate; ~{0} ~{1}", String_.new_ascii_(qid), String_.new_ascii_(data_core.Ttl()));
-		Xoa_ttl core_ttl = Xoa_ttl.parse_(wiki, data_core.Ttl());	// parse ttl to get ns; this may still be inaccurate as it is using wikidata's ns, not enwiki's;
+		Xoa_ttl core_ttl = Xoa_ttl.parse_(wiki, data_core.Ttl());	// NOTE: parse ttl to get ns; this may still be inaccurate as it is using wikidata's ns, not enwiki's;; DATE:2014-07-23
 		Xow_ns core_ns = core_ttl.Ns();
 		boolean core_ns_is_main = core_ns.Id_main();
-
-		// iterate links again; do parsing, but assume any ns is same as enwiki
-		for (int i = 0; i < len; i++) {
+		
+		for (int i = 0; i < len; i++) { // iterate links again; do parsing, but assume any ns is same as enwiki
 			Wdata_qid_data data = (Wdata_qid_data)links.FetchAt(i);
 			byte[] data_ttl_bry = data.Ttl();
 			byte[] actl_ttl = null;

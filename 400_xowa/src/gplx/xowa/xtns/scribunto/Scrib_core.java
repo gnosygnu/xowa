@@ -101,6 +101,7 @@ public class Scrib_core {
 		}
 		lib_uri.Notify_page_changed();
 		lib_title.Notify_page_changed();
+		lib_wikibase.Notify_page_changed();
 	}	
 	public byte[] Cur_wiki() {return cur_wiki;} private byte[] cur_wiki = Bry_.Empty; 
 	public byte[] Cur_lang() {return cur_lang;} private byte[] cur_lang = Bry_.Empty;
@@ -155,7 +156,7 @@ public class Scrib_core {
 		lib_mw.Invoke_bgn(wiki, ctx, src);
 		Xot_invk old_frame_parent = this.frame_parent; Xot_invk old_frame_current = this.frame_current;
 		this.frame_parent = parent_frame; this.frame_current = current_frame;
-		parent_frame.Scrib_frame_tid_(Scrib_frame_.Tid_parent); current_frame.Scrib_frame_tid_(Scrib_frame_.Tid_current);
+		parent_frame.Frame_tid_(Scrib_frame_.Tid_parent); current_frame.Frame_tid_(Scrib_frame_.Tid_current);
 		try {
 			Scrib_lua_mod mod = Mods_get_or_new(mod_name, mod_text);
 			KeyVal[] func_args = Scrib_kv_utl_.base1_many_(mod.Init_chunk_func(), String_.new_utf8_(fnc_name));
@@ -168,7 +169,7 @@ public class Scrib_core {
 		}
 		finally {
 			lib_mw.Invoke_end();
-			parent_frame.Scrib_frame_tid_(Scrib_frame_.Tid_null); current_frame.Scrib_frame_tid_(Scrib_frame_.Tid_null);
+			parent_frame.Frame_tid_(Scrib_frame_.Tid_null); current_frame.Frame_tid_(Scrib_frame_.Tid_null);
 			this.frame_parent = old_frame_parent; this.frame_current = old_frame_current;	// NOTE: reset template frame; PAGE:en.w:Constantine_the_Great {{Christianity}}; DATE:2014-06-26
 			frame_created_list.Clear();
 		}

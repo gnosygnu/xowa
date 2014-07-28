@@ -21,7 +21,7 @@ public class Xoh_page_wtr_wkr_ {
 	public static byte[] Bld_page_content_sub(Xoa_app app, Xow_wiki wiki, Xoa_page page, Bry_bfr tmp_bfr) {
 		byte[] page_content_sub = page.Html_data().Content_sub();		// contentSub exists; SEE: {{#isin}}
 		byte[] redirect_msg = Xop_redirect_mgr.Bld_redirect_msg(app, wiki, page);			
-		return tmp_bfr.Concat_skip_empty(Xoh_consts.Br, page_content_sub, redirect_msg).XtoAryAndClear();
+		return tmp_bfr.Concat_skip_empty(Html_tag_.Br_inl, page_content_sub, redirect_msg).XtoAryAndClear();
 	}
 	public static byte[] Bld_page_name(Bry_bfr tmp_bfr, Xoa_ttl ttl, byte[] display_ttl) {
 		if (display_ttl != null) return display_ttl;	// display_ttl explicitly set; use it

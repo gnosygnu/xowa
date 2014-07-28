@@ -76,7 +76,9 @@ public class Byte_ascii {
 	, Lt_bry				= new byte[] {Byte_ascii.Lt}
 	, Gt_bry				= new byte[] {Byte_ascii.Gt}
 	, Brack_bgn_bry			= new byte[] {Byte_ascii.Brack_bgn}
+	, Brack_end_bry			= new byte[] {Byte_ascii.Brack_end}
 	, Apos_bry				= new byte[] {Byte_ascii.Apos}
+	, Quote_bry				= new byte[] {Byte_ascii.Quote}
 	, Pipe_bry				= new byte[] {Byte_ascii.Pipe}
 	, Underline_bry			= new byte[] {Byte_ascii.Underline}
 	, Asterisk_bry			= new byte[] {Byte_ascii.Asterisk}

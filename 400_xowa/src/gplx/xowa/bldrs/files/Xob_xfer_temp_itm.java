@@ -111,7 +111,7 @@ class Xob_xfer_temp_itm {
 			chk_tid = Chk_tid_ns_is_media;
 			return false;
 		}
-		boolean upright_patch = true;	// all future blds will have upright_patch
+		int upright_patch = Xof_patch_upright_tid_.Tid_all;	// all future blds will have upright_patch
 		img_size.Html_size_calc(Xof_exec_tid.Tid_wiki_page, lnki_w, lnki_h, lnki_type, upright_patch, lnki_upright, lnki_ext, orig_w, orig_h, Xof_img_size.Thumb_width_img);
 		return true;
 	}

@@ -27,7 +27,7 @@ public class Xof_img_size {
 		html_w = html_h = file_w = file_h = 0;
 		file_is_orig = false;
 	}
-	public void Html_size_calc(byte exec_tid, int lnki_w, int lnki_h, byte lnki_type, boolean upright_patch, double lnki_upright, int lnki_ext, int orig_w, int orig_h, int thm_dflt_w) {
+	public void Html_size_calc(byte exec_tid, int lnki_w, int lnki_h, byte lnki_type, int upright_patch, double lnki_upright, int lnki_ext, int orig_w, int orig_h, int thm_dflt_w) {
 		this.Clear();											// always clear before calc; caller should be responsible, but just to be safe.
 		if (lnki_type == Xop_lnki_type.Id_frame					// frame: always return orig size; Linker.php!makeThumbLink2; // Use image dimensions, don't scale
 			&& lnki_h == Null) {								// unless lnki_h specified; DATE:2013-12-22
@@ -102,15 +102,18 @@ public class Xof_img_size {
 			? 0
 			: (int)Math_.Round(((double)lnki_w * file_h) / file_w, 0);	// NOTE: (double) needed else result will be int and fraction will be truncated
 	}
-	public static int Upright_calc(boolean upright_patch, double upright, int cur_w, int lnki_w, int lnki_h, byte lnki_type) {
-		if (upright_patch) {
+	public static int Upright_calc(int upright_patch_tid, double upright, int cur_w, int lnki_w, int lnki_h, byte lnki_type) {
+		boolean upright_patch_use_thumb_w = Xof_patch_upright_tid_.Split_use_thumb_w(upright_patch_tid);
+		boolean upright_patch_fix_default = Xof_patch_upright_tid_.Split_fix_default(upright_patch_tid);
+		double upright_default_val = upright_patch_fix_default ? .75f : 1f;
+		if (upright_patch_use_thumb_w) {
 			if	(upright != Upright_null							// upright set
 				&& lnki_w == Null									// w is null; EX: ( -1, 220); must exit early or will become 0; DATE:2013-11-23
 				&& lnki_h == Null									// h is null; EX: (220,  -1); REF:Linker.php|makeImageLink|"if (... !$hp['width'] ); 
 				&& Xop_lnki_type.Id_supports_upright(lnki_type)
 				) {
-				if	(upright == Upright_default) upright = .75f;	// upright is default; set val to .75; EX: [[File:A.png|upright]]
-				int rv = (int)(Thumb_width_img * upright);  
+				if	(upright == Upright_default_marker) upright = upright_default_val;	// upright is default; set val to .75; EX: [[File:A.png|upright]]						
+				int rv = (int)(Thumb_width_img * upright);
 				return Round_10p2(rv);
 			}
 			else
@@ -118,7 +121,7 @@ public class Xof_img_size {
 		}
 		else {														// support old broken calc
 			if 		(upright == Upright_null)		return cur_w;	// upright is null; return width
-			else if (upright == 1)					upright = .75f;	// upright is default; set val to .75; NOTE: wrong b/c [[File:A.png|upright=1]] -> .75
+			else if (upright == Upright_default_marker)upright = upright_default_val;	// upright is default; set val to .75; NOTE: wrong b/c [[File:A.png|upright=1]] -> .75
 			if		(cur_w == Null)					return Null;	// width is null (-1); must exit early or will become 0; DATE:2013-11-23
 			int rv = (int)(cur_w * upright);						// NOTE: wrong b/c should be Thumb_width_img, not cur_w
 			return Round_10p2(rv);
@@ -132,7 +135,7 @@ public class Xof_img_size {
 	}
 	public static final int Null = -1;
 	public static final int Thumb_width_img = 220, Thumb_width_ogv = 220;
-	public static final double Upright_null = -1, Upright_default = -2;
+	public static final double Upright_null = -1, Upright_default_marker = 0; // REF:MW: if ( isset( $fp['upright'] ) && $fp['upright'] == 0 )
 	public static final int Size_null_deprecated = -1, Size_null = 0;	// Size_null = 0, b/c either imageMagick / inkscape fails when -1 is passed
 	public static final int Size__same_as_orig = -1;
 	private static final int Svg_max_width = 2048;

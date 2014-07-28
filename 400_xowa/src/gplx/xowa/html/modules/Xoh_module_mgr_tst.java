@@ -40,7 +40,7 @@ public class Xoh_module_mgr_tst {
 		, "      'toc-enabled' : true,"
 		, "      'mw_hidetoc' : '0',"
 		, "      'showtoc' : 'Sh\"ow',"
-		, "      'hidetoc' : 'Hi''de',"
+		, "      'hidetoc' : 'Hi\\'de',"
 		, "    }"
 		, "  </script>"
 		));

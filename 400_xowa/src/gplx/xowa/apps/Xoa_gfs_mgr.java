@@ -26,16 +26,15 @@ public class Xoa_gfs_mgr implements GfoInvkAble, GfoInvkRootWkr {
 		eval_mgr = new Xoa_app_eval(app);
 	}	private Xoa_app app;
 	public Xoa_app_eval Eval_mgr() {return eval_mgr;} private Xoa_app_eval eval_mgr;
-	public static boolean Fail_if_unhandled = false;
-	public static final String Cfg_user_file = "xowa_user_cfg.gfs", Cfg_user_custom_file = "user_custom_cfg.gfs";
 	private void Run_url_by_type(String type) {
 		Xou_fsys_mgr fsys_mgr = app.User().Fsys_mgr();
 		Io_url app_data_dir = fsys_mgr.App_data_dir();
 		Io_url url = null;
 		if		(String_.Eq(type, "user_system_cfg"))	url = app_data_dir.GenSubFil_nest("cfg", "user_system_cfg.gfs");
-		else if	(String_.Eq(type, "user_custom_cfg"))	url = fsys_mgr.App_data_cfg_custom_fil();
-		else if	(String_.Eq(type, "xowa_user_cfg"))		url = fsys_mgr.App_data_cfg_user_fil();
-		else if	(String_.Eq(type, "xowa"))				url = app.Fsys_mgr().Root_dir().GenSubFil("xowa.gfs");
+		else if	(String_.Eq(type, "xowa_cfg_custom"))	url = fsys_mgr.App_data_cfg_custom_fil();
+		else if	(String_.Eq(type, "xowa_cfg_user"))		url = fsys_mgr.App_data_cfg_user_fil();
+		else if	(String_.Eq(type, "xowa_cfg_os"))		{url = app.Fsys_mgr().Bin_data_os_cfg_fil(); Xoa_gfs_mgr_.Cfg_os_assert(url);}
+		else if	(String_.Eq(type, "xowa_cfg_app"))		url = app.Fsys_mgr().Root_dir().GenSubFil("xowa.gfs");
 		else											throw Err_mgr._.fmt_(GRP_KEY, "invalid_gfs_type", "invalid gfs type: ~{0}", type);
 		try {Run_url(url);}
 		catch (Exception e) {				// gfs is corrupt; may happen if multiple XOWAs opened, and "Close all" chosen in OS; DATE:2014-07-01
@@ -111,4 +110,16 @@ public class Xoa_gfs_mgr implements GfoInvkAble, GfoInvkRootWkr {
 		}
 		return Build_code_bfr.XtoStrAndClear();
 	}	static final Bry_bfr Build_code_bfr = Bry_bfr.new_();
+	public static final String Cfg_user_file = "xowa_user_cfg.gfs", Cfg_user_custom_file = "user_custom_cfg.gfs", Cfg_os = "xowa_cfg_os.gfs";
+	public static boolean Fail_if_unhandled = false;
+}
+class Xoa_gfs_mgr_ {
+	public static void Cfg_os_assert(Io_url orig_url) {
+		Io_url dflt_url = orig_url.GenNewNameOnly(orig_url.NameOnly() + "_default");
+		if (!Io_mgr._.ExistsFil(dflt_url)) return;	// no dflt
+		if (!Io_mgr._.ExistsFil(orig_url)) {
+			Io_mgr._.CopyFil(dflt_url, orig_url, true);
+			Gfo_usr_dlg_._.Log_many("", "", "xowa_cfg_os generated; url=~{0}", orig_url.Raw());
+		}
+	}
 }

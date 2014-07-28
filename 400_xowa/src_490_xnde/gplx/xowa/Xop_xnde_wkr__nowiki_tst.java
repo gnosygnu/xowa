@@ -45,7 +45,7 @@ public class Xop_xnde_wkr__nowiki_tst {
 			(	"a&lt;h1&gt;b&lt;h6&gt;c"
 			));
 	}
-	@Test  public void Lnke() {	// PAGE:en.w:Doomsday argument; <nowiki>[0,&nbsp;1]</nowiki>
+	@Test  public void Lnke() {	// PAGE:en.w:Doomsday_argument; <nowiki>[0,&nbsp;1]</nowiki>
 		fxt.Test_parse_page_wiki_str("a <nowiki>[0,&nbsp;1]</nowiki> b", "a [0,&nbsp;1] b");	// NOTE: not "0" + Byte_.XtoStr(160) + "1"; depend on browser to translate &nbsp;
 	}
 	@Test  public void Xatrs_val_text() {
@@ -103,5 +103,10 @@ public class Xop_xnde_wkr__nowiki_tst {
 	}
 	@Test  public void Code() {	// PURPOSE.fix:HtmlNcr-escaped refs were being ignored; caused by HtmlTidy fix for frwiki templates;DATE:2013-06-27
 		fxt.Test_parse_page_all_str("<code><nowiki>|:</nowiki></code>", "<code>|:</code>");
+	}
+	@Test  public void Brack_end() {	// PURPOSE: check that "]" is escaped; PAGE:en.w:Tall_poppy_syndrome; DATE:2014-07-23
+		fxt.Test_parse_page_all_str
+		( "<nowiki>[</nowiki>[[A]]<nowiki>]</nowiki>"
+		, "[<a href=\"/wiki/A\">A</a>]");			// was showing up as [[[A]]]
 	}
 }

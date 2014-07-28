@@ -29,6 +29,6 @@ public class Html_entity_ {
 	, Nl_bry = Bry_.new_ascii_(Nl_str), Space_bry = Bry_.new_ascii_("&#32;")
 	, Pipe_bry = Bry_.new_ascii_("&#124;")
 	, Colon_bry = Bry_.new_ascii_("&#58;"), Underline_bry = Bry_.new_ascii_("&#95;"), Asterisk_bry = Bry_.new_ascii_("&#42;")
-	, Brack_bgn_bry = Bry_.new_ascii_("&#91;")
+	, Brack_bgn_bry = Bry_.new_ascii_("&#91;"), Brack_end_bry = Bry_.new_ascii_("&#93;")
 	;
 }

@@ -68,7 +68,7 @@ public class Xof_xfer_queue {
 		wiki.File_mgr().Fsdb_mgr().Init_by_wiki__add_bin_wkrs(wiki);
 		wiki.File_mgr().Fsdb_mgr().Reg_select(page, exec_tid, Xfer_itms_to_fsdb_itms(list, wiki.File_mgr().Fsdb_mgr().Patch_upright()));
 	}
-	private ListAdp Xfer_itms_to_fsdb_itms(ListAdp list, boolean upright_patch) {
+	private ListAdp Xfer_itms_to_fsdb_itms(ListAdp list, int upright_patch) {
 		ListAdp rv = ListAdp_.new_();
 		int list_len = list.Count();
 		for (int i = 0; i < list_len; i++) {

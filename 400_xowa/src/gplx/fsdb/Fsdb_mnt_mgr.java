@@ -111,9 +111,10 @@ public class Fsdb_mnt_mgr implements GfoInvkAble {
 	public static final int Mnt_idx_main = 0, Mnt_idx_user = 1, Insert_to_bin_null = -1;
 	public static void Patch(Fsdb_mnt_mgr mnt_mgr) {
 		mnt_mgr.Abc_mgr_at(Fsdb_mnt_mgr.Mnt_idx_main).Cfg_mgr()
-			.Update(Xof_fsdb_mgr_cfg.Grp_xowa, Xof_fsdb_mgr_cfg.Key_gallery_fix_defaults, "y")
-			.Update(Xof_fsdb_mgr_cfg.Grp_xowa, Xof_fsdb_mgr_cfg.Key_gallery_packed, "y")
-			.Update(Xof_fsdb_mgr_cfg.Grp_xowa, Xof_fsdb_mgr_cfg.Key_upright_patch, "y")
+			.Update(Xof_fsdb_mgr_cfg.Grp_xowa, Xof_fsdb_mgr_cfg.Key_gallery_fix_defaults	, "y")
+			.Update(Xof_fsdb_mgr_cfg.Grp_xowa, Xof_fsdb_mgr_cfg.Key_gallery_packed			, "y")
+			.Update(Xof_fsdb_mgr_cfg.Grp_xowa, Xof_fsdb_mgr_cfg.Key_upright_use_thumb_w		, "y")
+			.Update(Xof_fsdb_mgr_cfg.Grp_xowa, Xof_fsdb_mgr_cfg.Key_upright_fix_default		, "y")
 			;
 	}
 }

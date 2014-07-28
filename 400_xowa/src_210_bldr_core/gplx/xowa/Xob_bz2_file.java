@@ -146,6 +146,8 @@ public class Xob_bz2_file {
 			case Xow_wiki_domain_.Tid_wikimediafoundation:
 				bfr.Add(domain_suffix);
 				break;
+			case Xow_wiki_domain_.Tid_other:
+				break;
 			default:
 				bfr.Add(lang_key).Add(domain_suffix);
 				break;

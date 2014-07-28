@@ -22,7 +22,7 @@ public class Xof_fsdb_mgr_mem implements Xof_fsdb_mgr, Xof_bin_wkr {
 	private Hash_adp_bry bin_hash = Hash_adp_bry.cs_(); private Bry_bfr bin_key_bfr = Bry_bfr.new_();
 	private Hash_adp_bry reg_hash = Hash_adp_bry.cs_();		
 	public boolean Tid_is_mem() {return true;}
-	public boolean Patch_upright() {return true;}
+	public int Patch_upright() {return Xof_patch_upright_tid_.Tid_all;}
 	public Xof_qry_mgr Qry_mgr() {return qry_mgr;} private Xof_qry_mgr qry_mgr = new Xof_qry_mgr();
 	public Xof_bin_mgr Bin_mgr() {return bin_mgr;} private Xof_bin_mgr bin_mgr;
 	public Xof_bin_wkr Bin_wkr_fsdb() {return this;}

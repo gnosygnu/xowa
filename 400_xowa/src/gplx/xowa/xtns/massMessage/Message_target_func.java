@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.massMessage; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+import gplx.xowa.xtns.pfuncs.*;
 public class Message_target_func extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_massMessage_target;}
 	@Override public Pf_func New(int id, byte[] name) {return new Message_target_func().Name_(name);}

@@ -100,6 +100,16 @@ public class Bry_finder {
 		}
 		return rv;
 	}
+	public static int Find_bwd_ws(byte[] src, int cur, int end)	{
+		for (int i = cur; i > -1; --i) {
+			byte b = src[i];
+			switch (b) {
+				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.NewLine: case Byte_ascii.CarriageReturn:
+					return i;
+			}
+		}
+		return Bry_finder.Not_found;
+	}
 	public static int Find_fwd_last_ws(byte[] src, int cur)	{
 		int end = src.length;
 		if (cur >= end) return Bry_finder.Not_found;
@@ -163,6 +173,18 @@ public class Bry_finder {
 			if (	cur == end
 				||	src[cur] == until_byte) return cur;
 			cur++;
+		}
+	}
+	public static int Find_fwd_until_space_or_tab(byte[] src, int cur, int end) {
+		while (true) {
+			if (cur == end) return Bry_finder.Not_found;
+			switch (src[cur])  {
+				case Byte_ascii.Space: case Byte_ascii.Tab:
+					return cur;
+				default: 
+					++cur;
+					break;
+			}
 		}
 	}
 	public static int Find_fwd_while_space_or_tab(byte[] src, int cur, int end) {

@@ -62,18 +62,18 @@ public class Xop_xnde_wkr__li_tst {
 			,	"</ul>"
 			));
 	}
-	@Test  public void Empty_ignored_error() { // EX:WP:Sukhoi Su-47; "* </li>" causes error b/c </li> tries to close non-existent node
+	@Test  public void Empty_ignored_error() { // PAGE:en.w:Sukhoi_Su-47; "* </li>" causes error b/c </li> tries to close non-existent node
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
-			(	"* a"
-			,	"* </li>"
-			), String_.Concat_lines_nl_skip_last
-			(	"<ul>"
-			,	"  <li> a"
-			,	"  </li>"
-			,	"  <li> "
-			,	"  </li>"
-			,	"</ul>"
-			));
+		(	"* a"
+		,	"* </li>"
+		), String_.Concat_lines_nl_skip_last
+		(	"<ul>"
+		,	"  <li> a"
+		,	"  </li>"
+		,	"  <li> </li>" // TIDY.dangling: tidy will correct dangling node; DATE:2014-07-22
+		,	"  </li>"
+		,	"</ul>"
+		));
 	}
 	@Test  public void Insert_nl() {// PURPOSE: <li> should always be separated by nl, or else items will merge, creating long horizontal scroll bar; EX:w:Music
 		fxt.Init_para_y_();

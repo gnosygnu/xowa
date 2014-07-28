@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.xowa.xtns.pfuncs.*;
 public class Xot_defn_trace_dbg implements Xot_defn_trace {
 	public void Trace_bgn(Xop_ctx ctx, byte[] src, byte[] name, Xot_invk caller, Xot_invk invk, Xot_defn defn) {
 		if (count++ != 0) bfr.Add_byte_nl();	// do not add new line for 1st template

@@ -24,11 +24,7 @@ public class References_nde implements Xox_xnde, Xop_xnde_atr_parser {
 		if (xatr_key_obj == null) return;
 		Byte_obj_val xatr_key = (Byte_obj_val)xatr_key_obj;
 		switch (xatr_key.Val()) {
-			case Xatr_id_group:		{
-				group = xatr.Val_as_bry(src);
-				// if (Bry_.Eq(group, wiki.Xtn_mgr().Xtn_cite().Group_default_name())) group = Bry_.Empty;	// if group == default, make it same as empty; DATE:2014-07-03
-				break;
-			}
+			case Xatr_id_group:		group = xatr.Val_as_bry(src); break;
 		}
 	}
 	public void Xtn_parse(Xow_wiki wiki, Xop_ctx ctx, Xop_root_tkn cur_root, byte[] src, Xop_xnde_tkn xnde) {

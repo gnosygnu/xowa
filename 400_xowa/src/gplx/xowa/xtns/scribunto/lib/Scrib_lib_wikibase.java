@@ -25,8 +25,9 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 	public Scrib_lua_mod Register(Scrib_core core, Io_url script_dir) {
 		Init();
 		mod = core.RegisterInterface(this, script_dir.GenSubFil("mw.wikibase.lua"));
+		notify_page_changed_fnc = mod.Fncs_get_by_key("notify_page_changed");
 		return mod;
-	}
+	}	private Scrib_lua_proc notify_page_changed_fnc;
 	public Scrib_proc_mgr Procs() {return procs;} private Scrib_proc_mgr procs = new Scrib_proc_mgr();
 	public boolean Procs_exec(int key, Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		switch (key) {
@@ -39,6 +40,7 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 	private static final int Proc_getEntity = 0, Proc_getEntityId = 1, Proc_getGlobalSiteId = 2;
 	public static final String Invk_getEntity = "getEntity", Invk_getEntityId = "getEntityId", Invk_getGlobalSiteId = "getGlobalSiteId";
 	private static final String[] Proc_names = String_.Ary(Invk_getEntity, Invk_getEntityId, Invk_getGlobalSiteId);
+	public void Notify_page_changed() {if (notify_page_changed_fnc != null) core.Interpreter().CallFunction(notify_page_changed_fnc.Id(), KeyVal_.Ary_empty);}
 	public boolean GetEntity(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] ttl_bry = args.Pull_bry(0);
 		if (Bry_.Len_eq_0(ttl_bry)) return rslt.Init_empty();	// NOTE: some Modules do not pass in an argument; return early, else spurious warning "invalid qid for ttl" (since ttl is blank); EX:w:Module:Authority_control; DATE:2013-10-27

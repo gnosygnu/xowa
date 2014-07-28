@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+import gplx.xowa.xtns.pfuncs.*;
 public class Wdata_external_lang_links_data {
 	private ListAdp langs_list = ListAdp_.new_(); private Hash_adp_bry langs_hash = Hash_adp_bry.ci_ascii_(); // ASCII:lang_code
 	public boolean Enabled() {return enabled;} private boolean enabled; public Wdata_external_lang_links_data Enabled_(boolean v) {enabled = v; return this;}

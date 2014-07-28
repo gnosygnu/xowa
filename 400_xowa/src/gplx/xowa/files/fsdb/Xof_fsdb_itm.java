@@ -30,7 +30,7 @@ public class Xof_fsdb_itm {
 	public double		Lnki_upright() {return lnki_upright;} private double lnki_upright;
 	public double		Lnki_thumbtime() {return lnki_thumbtime;} public Xof_fsdb_itm Lnki_thumbtime_(double v) {lnki_thumbtime = v; return this;} private double lnki_thumbtime = Xof_doc_thumb.Null;
 	public int			Lnki_page() {return lnki_page;} public Xof_fsdb_itm Lnki_page_(int v) {lnki_page = v; return this;} private int lnki_page = Xof_doc_page.Null;
-	public Xof_fsdb_itm	Init_by_lnki(byte[] lnki_ttl, Xof_ext ext, byte[] md5, byte lnki_type, int lnki_w, int lnki_h, boolean lnki_upright_patch, double lnki_upright, double lnki_thumbtime, int lnki_page) {
+	public Xof_fsdb_itm	Init_by_lnki(byte[] lnki_ttl, Xof_ext ext, byte[] md5, byte lnki_type, int lnki_w, int lnki_h, int lnki_upright_patch, double lnki_upright, double lnki_thumbtime, int lnki_page) {
 		this.lnki_ttl = lnki_ttl; this.lnki_ext = ext; this.lnki_md5 = md5;
 		this.lnki_w = lnki_w; this.lnki_h = lnki_h;
 		this.lnki_upright_patch = lnki_upright_patch;
@@ -39,7 +39,7 @@ public class Xof_fsdb_itm {
 		this.orig_ttl = lnki_ttl;
 		return this;
 	}
-	private boolean lnki_upright_patch;
+	private int lnki_upright_patch;
 	public void Lnki_type_(byte v) {
 		this.lnki_type = v;
 		if (lnki_ext.Id_is_audio_strict())

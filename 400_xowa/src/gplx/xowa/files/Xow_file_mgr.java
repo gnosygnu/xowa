@@ -46,9 +46,9 @@ public class Xow_file_mgr implements GfoInvkAble {
 		this.fsdb_mgr = fsdb_mgr;
 		version = Version_2;
 	}
-	public boolean Patch_upright() {
+	public int Patch_upright() {
 		return this.Version() == Version_1
-			? true
+			? Xof_patch_upright_tid_.Tid_all
 			: fsdb_mgr.Patch_upright()
 			;
 	}

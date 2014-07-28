@@ -28,17 +28,20 @@ public class Xof_fsdb_mgr_sql implements Xof_fsdb_mgr, GfoInvkAble {
 	public Xof_bin_wkr Bin_wkr_fsdb() {return bin_wkr_fsdb;} private Xof_bin_wkr_fsdb_sql bin_wkr_fsdb;
 	public void Db_bin_max_(long v) {mnt_mgr.Bin_db_max_(v);}
 	public Fsdb_mnt_mgr Mnt_mgr() {return mnt_mgr;} private Fsdb_mnt_mgr mnt_mgr = new Fsdb_mnt_mgr();
-	public boolean Patch_upright() {
+	public int Patch_upright() {
 		if (patch_upright_null) {
 			if (mnt_mgr.Abc_mgr_len() > 0) {
-				patch_upright = mnt_mgr.Abc_mgr_at(0).Cfg_mgr().Grps_get_or_load(Xof_fsdb_mgr_cfg.Grp_xowa).Get_yn_or(Xof_fsdb_mgr_cfg.Key_upright_patch, false);
+				Fsdb_cfg_grp cfg_grp = mnt_mgr.Abc_mgr_at(0).Cfg_mgr().Grps_get_or_load(Xof_fsdb_mgr_cfg.Grp_xowa);
+				boolean use_thumb_w	= cfg_grp.Get_yn_or(Xof_fsdb_mgr_cfg.Key_upright_use_thumb_w, Bool_.N);
+				boolean fix_default	= cfg_grp.Get_yn_or(Xof_fsdb_mgr_cfg.Key_upright_fix_default, Bool_.N);
+				patch_upright_tid = Xof_patch_upright_tid_.Merge(use_thumb_w, fix_default);
 			}
 			else	// TEST: no cfg dbs
-				patch_upright = true;
+				patch_upright_tid = Xof_patch_upright_tid_.Tid_all;
 			patch_upright_null = false;
 		}
-		return patch_upright;
-	}	private boolean patch_upright_null = true, patch_upright = false;
+		return patch_upright_tid;
+	}	private boolean patch_upright_null = true; private int patch_upright_tid;
 	public Io_url Db_dir() {return db_dir;} public Xof_fsdb_mgr_sql Db_dir_(Io_url v) {db_dir = v; mnt_mgr.Init(db_dir); return this;} private Io_url db_dir;
 	public Gfo_usr_dlg Usr_dlg() {return usr_dlg;} Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Null;
 	public Cache_mgr Cache_mgr() {return cache_mgr;} private Cache_mgr cache_mgr;

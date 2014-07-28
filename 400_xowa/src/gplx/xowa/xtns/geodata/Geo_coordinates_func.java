@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.geodata; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+import gplx.xowa.xtns.pfuncs.*;
 public class Geo_coordinates_func extends Pf_func_base {
 	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {}	// NOOP: MW uses to save coordinates for API retrieval
 	@Override public int Id() {return Xol_kwd_grp_.Id_xtn_geodata_coordinates;}

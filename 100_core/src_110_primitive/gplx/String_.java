@@ -152,7 +152,7 @@ public class String_ implements GfoInvkAble {
 			rv[i] = (int)s.charAt(i);		
 		return rv;
 	}
-	public static String Coalesce(String s, String alt) {return Len(s) == 0 ? alt : s;}
+	public static String Coalesce(String s, String alt) {return Len_eq_0(s) ? alt : s;}
 	public static boolean In(String s, String... ary) {
 		for (String itm : ary)
 			if (String_.Eq(s, itm)) return true;

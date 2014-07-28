@@ -17,10 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.modules.popups; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.modules.*;
 public class Xow_popup_itm implements Cancelable {
-	public Xow_popup_itm(int id, byte[] page_href, int init_words_needed) {
+	public Xow_popup_itm(int id, byte[] page_href, byte[] tooltip, int init_words_needed) {
 		this.popup_id = "popup_" + Int_.XtoStr(id);
 		this.words_needed = init_words_needed;
 		this.page_href = page_href;
+		this.tooltip = tooltip;
 	}
 	public boolean Canceled() {return canceled;} private boolean canceled = false;
 	public void Cancel() {canceled = true;}
@@ -39,6 +40,7 @@ public class Xow_popup_itm implements Cancelable {
 	}
 	public String Popup_id() {return popup_id;} private String popup_id;
 	public byte[] Popup_html() {return popup_html;} public void Popup_html_(byte[] v) {popup_html = v;} private byte[] popup_html;
+	public byte[] Tooltip() {return tooltip;} private byte[] tooltip;
 	public byte[] Wiki_domain() {return wiki_domain;} private byte[] wiki_domain;
 	public byte[] Page_href() {return page_href;} private byte[] page_href;
 	public Xoa_ttl Page_ttl() {return page_ttl;} private Xoa_ttl page_ttl;

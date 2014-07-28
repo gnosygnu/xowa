@@ -71,7 +71,7 @@ public class Xof_offline_png_tst {
 		if (fxt.Db_skip()) return;
 		fxt.Init_qry_xowa(Xof_fsdb_arg_init_qry.new_().Init_commons("A.png", 1378, 1829));
 		fxt.Init_bin_fsdb(Xof_fsdb_arg_init_bin.new_().Init_commons_thumb("A.png", 170, 226));
-		fxt.Exec_get(Xof_fsdb_arg_exec_get.new_().Init_thumb("A.png", Xop_lnki_tkn.Width_null, Xop_lnki_tkn.Height_null).Lnki_upright_(Xof_img_size.Upright_default));
+		fxt.Exec_get(Xof_fsdb_arg_exec_get.new_().Init_thumb("A.png", Xop_lnki_tkn.Width_null, Xop_lnki_tkn.Height_null).Lnki_upright_(Xof_img_size.Upright_default_marker));
 		fxt.Test_fsys("mem/root/common/thumb/7/0/A.png/170px.png", "170,226");
 	}
 }

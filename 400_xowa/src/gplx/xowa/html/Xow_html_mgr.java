@@ -57,85 +57,85 @@ public class Xow_html_mgr implements GfoInvkAble {
 	public Xoctg_html_mgr Ns_ctg() {return ns_ctg;} private Xoctg_html_mgr ns_ctg = new Xoctg_html_mgr();
 	public Xoh_imgs_mgr Imgs_mgr() {return imgs_mgr;} private Xoh_imgs_mgr imgs_mgr;
 	public Bry_fmtr Lnki_full_image() {return lnki_full_image;} Bry_fmtr lnki_full_image = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
-		(	"<a href=\"~{href}\"~{anchor_class}~{anchor_rel}~{anchor_title} xowa_title=\"~{lnki_title}\"><img id=\"xowa_file_img_~{elem_id}\" alt=\"~{alt}\" src=\"~{src}\" width=\"~{width}\" height=\"~{height}\"~{img_class} /></a>"
-		),	"elem_id", "href", "src", "width", "height", "alt", "lnki_title", "anchor_class", "anchor_rel", "anchor_title", "img_class"
-		);
+	(	"<a href=\"~{href}\"~{anchor_class}~{anchor_rel}~{anchor_title} xowa_title=\"~{lnki_title}\"><img id=\"xowa_file_img_~{elem_id}\" alt=\"~{alt}\" src=\"~{src}\" width=\"~{width}\" height=\"~{height}\"~{img_class} /></a>"
+	),	"elem_id", "href", "src", "width", "height", "alt", "lnki_title", "anchor_class", "anchor_rel", "anchor_title", "img_class"
+	);
 	public Bry_fmtr Lnki_full_media() {return lnki_full_media;} Bry_fmtr lnki_full_media = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
-		(	"<a href=\"~{lnki_src}\" xowa_title=\"~{lnki_title}\">~{lnki_caption}"
-		,	"</a>"
-		), "lnki_src", "lnki_title", "lnki_caption"
-		);
+	(	"<a href=\"~{lnki_src}\" xowa_title=\"~{lnki_title}\">~{lnki_caption}"
+	,	"</a>"
+	), "lnki_src", "lnki_title", "lnki_caption"
+	);
 
 	public Bry_fmtr Lnki_thumb_core() {return lnki_thumb_core;} Bry_fmtr lnki_thumb_core = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last	// REF.MW: Linker.php|makeImageLink2
-		(	"<div class=\"thumb t~{lnki_halign}\">"
-		,	"  <div id=\"xowa_file_div_~{elem_id}\" class=\"thumbinner\" style=\"width:~{div_width}px;\">"
-		,	"~{lnki_content}"
-		,	"  </div>"
-		,	"</div>"
-		,	""
-		), "div_width", "lnki_halign", "lnki_content", "elem_id"
-		);
+	(	"<div class=\"thumb t~{lnki_halign}\">"
+	,	"  <div id=\"xowa_file_div_~{elem_id}\" class=\"thumbinner\" style=\"width:~{div_width}px;\">"
+	,	"~{lnki_content}"
+	,	"  </div>"
+	,	"</div>"
+	,	""
+	), "div_width", "lnki_halign", "lnki_content", "elem_id"
+	);
 	public Bry_fmtr Lnki_thumb_file_image() {return lnki_thumb_file_image;} Bry_fmtr lnki_thumb_file_image = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
-		(	"    ~{thumb_image}~{lnki_caption}~{lnki_alt}"
-		), "thumb_image", "lnki_caption", "lnki_alt");    
+	(	"    ~{thumb_image}~{lnki_caption}~{lnki_alt}"
+	), "thumb_image", "lnki_caption", "lnki_alt");    
 	public Bry_fmtr Lnki_thumb_file_video() {return lnki_thumb_file_video;} Bry_fmtr lnki_thumb_file_video = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
-		(	"    <div id=\"xowa_media_div\">~{video_thumb}~{play_btn}"
-		,	"    </div>~{lnki_caption}~{lnki_alt}"
-		), "play_btn", "video_thumb", "lnki_caption", "lnki_alt");
+	(	"    <div id=\"xowa_media_div\">~{video_thumb}~{play_btn}"
+	,	"    </div>~{lnki_caption}~{lnki_alt}"
+	), "play_btn", "video_thumb", "lnki_caption", "lnki_alt");
 	public Bry_fmtr Lnki_thumb_file_audio() {return lnki_thumb_file_audio;} Bry_fmtr lnki_thumb_file_audio = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
-		(	"    <div id=\"xowa_media_div\">~{play_btn}~{info_btn}"
-		,	"    </div>~{lnki_caption}~{lnki_alt}"
-		), "play_btn", "info_btn", "lnki_caption", "lnki_alt");
+	(	"    <div id=\"xowa_media_div\">~{play_btn}~{info_btn}"
+	,	"    </div>~{lnki_caption}~{lnki_alt}"
+	), "play_btn", "info_btn", "lnki_caption", "lnki_alt");
 	public Bry_fmtr Lnki_thumb_part_image() {return lnki_thumb_part_image;} Bry_fmtr lnki_thumb_part_image = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
-		(	""
-		,	"      <div>" 
-		,	"        <a href=\"~{lnki_href}\" class=\"~{lnki_class}\" title=\"~{lnki_title}\">"
-		,	"          <img id=\"xowa_file_img_~{elem_id}\" src=\"~{lnki_src}\" width=\"~{lnki_width}\" height=\"~{lnki_height}\" alt=\"~{lnki_alt}\" />"
-		,	"        </a>"
-		,	"      </div>"
-		), "elem_id", "lnki_class", "lnki_href", "lnki_title", "lnki_src", "lnki_width", "lnki_height", "lnki_alt");
+	(	""
+	,	"      <div>" 
+	,	"        <a href=\"~{lnki_href}\" class=\"~{lnki_class}\" title=\"~{lnki_title}\">"
+	,	"          <img id=\"xowa_file_img_~{elem_id}\" src=\"~{lnki_src}\" width=\"~{lnki_width}\" height=\"~{lnki_height}\" alt=\"~{lnki_alt}\" />"
+	,	"        </a>"
+	,	"      </div>"
+	), "elem_id", "lnki_class", "lnki_href", "lnki_title", "lnki_src", "lnki_width", "lnki_height", "lnki_alt");
 	public Bry_fmtr Lnki_thumb_part_caption() {return lnki_thumb_part_caption;} Bry_fmtr lnki_thumb_part_caption = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
-		(	""
-		,	"    <div class=\"thumbcaption\">~{magnify_btn}"
-		,	"      ~{lnki_caption}"
-		,	"    </div>"
-		), "magnify_btn", "lnki_caption");
+	(	""
+	,	"    <div class=\"thumbcaption\">~{magnify_btn}"
+	,	"      ~{lnki_caption}"
+	,	"    </div>"
+	), "magnify_btn", "lnki_caption");
 	public Bry_fmtr Lnki_thumb_part_alt() {return lnki_thumb_part_alt;} Bry_fmtr lnki_thumb_part_alt = Bry_fmtr.new_
-		(String_.Concat_lines_nl_skip_last
-		(	""
-		,	"    <hr/>"
-		,	"    <div class=\"thumbcaption\">"
-		,	"~{alt_html}"
-		,	"    </div>"
-		)  
-		, "alt_html");
+	(String_.Concat_lines_nl_skip_last
+	(	""
+	,	"    <hr/>"
+	,	"    <div class=\"thumbcaption\">"
+	,	"~{alt_html}"
+	,	"    </div>"
+	)  
+	, "alt_html");
 	public Bry_fmtr Lnki_thumb_part_magnfiy_btn() {return lnki_thumb_part_magnify_btn;} Bry_fmtr lnki_thumb_part_magnify_btn = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
-		(	""
-		,	"      <div class=\"magnify\">"
-		,	"        <a href=\"~{lnki_src}\" class=\"internal\" title=\"~{lnki_enlarge_msg}\">"
-		,	"          <img src=\"~{magnify_icon}\" width=\"15\" height=\"11\" alt=\"\" />"
-		,	"        </a>"
-		,	"      </div>"
-		), "magnify_icon", "lnki_src", "lnki_enlarge_msg");
+	(	""
+	,	"      <div class=\"magnify\">"
+	,	"        <a href=\"~{lnki_src}\" class=\"internal\" title=\"~{lnki_enlarge_msg}\">"
+	,	"          <img src=\"~{magnify_icon}\" width=\"15\" height=\"11\" alt=\"\" />"
+	,	"        </a>"
+	,	"      </div>"
+	), "magnify_icon", "lnki_src", "lnki_enlarge_msg");
 	public Bry_fmtr Lnki_thumb_part_play_btn() {return lnki_thumb_part_play_btn;} Bry_fmtr lnki_thumb_part_play_btn = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
-		(	""
-		,	"      <div>" 
-		,	"        <a id=\"xowa_file_play_~{play_id}\" href=\"~{lnki_url}\" xowa_title=\"~{lnki_title}\" class=\"xowa_anchor_button\" style=\"width:~{play_width}px;max-width:~{play_max_width}px;\">"
-		,	"          <img src=\"~{play_icon}\" width=\"22\" height=\"22\" alt=\"Play sound\" />" 
-		,	"        </a>" 
-		,	"      </div>"
-		), "play_id", "play_icon", "play_width", "play_max_width", "lnki_url", "lnki_title");
+	(	""
+	,	"      <div>" 
+	,	"        <a id=\"xowa_file_play_~{play_id}\" href=\"~{lnki_url}\" xowa_title=\"~{lnki_title}\" class=\"xowa_anchor_button\" style=\"width:~{play_width}px;max-width:~{play_max_width}px;\">"
+	,	"          <img src=\"~{play_icon}\" width=\"22\" height=\"22\" alt=\"Play sound\" />" 
+	,	"        </a>" 
+	,	"      </div>"
+	), "play_id", "play_icon", "play_width", "play_max_width", "lnki_url", "lnki_title");
 	public Bry_fmtr Lnki_thumb_part_info_btn() {return lnki_thumb_part_info_btn;} Bry_fmtr lnki_thumb_part_info_btn = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
-		(	""
-		,	"      <div>" 
-		,	"        <a href=\"~{lnki_href}\" class=\"image\" title=\"About this file\">"
-		,	"          <img src=\"~{info_icon}\" width=\"22\" height=\"22\" />" 
-		,	"        </a>" 
-		,	"      </div>" 
-		), "info_icon", "lnki_href");
+	(	""
+	,	"      <div>" 
+	,	"        <a href=\"~{lnki_href}\" class=\"image\" title=\"About this file\">"
+	,	"          <img src=\"~{info_icon}\" width=\"22\" height=\"22\" />" 
+	,	"        </a>" 
+	,	"      </div>" 
+	), "info_icon", "lnki_href");
 	public Bry_fmtr Plain() {return plain;} Bry_fmtr plain = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
-		(	"~{val}"
-		),	"val");
+	(	"~{val}"
+	),	"val");
 	public void Copy_cfg(Xow_html_mgr html_mgr) {imgs_mgr.Copy_cfg(html_mgr.Imgs_mgr());}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_lnki_full_image_))					lnki_full_image.Fmt_(m.ReadBry("v"));

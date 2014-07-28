@@ -186,11 +186,17 @@ public class Swt_kit implements Gfui_kit {
 	public Gfui_mnu_grp New_mnu_bar(String key, GfuiWin owner) 		{return Swt_popup_grp.new_bar(key, owner);}
 	public float Calc_font_height(GfuiElem elem, String s) {
 		if (String_.Len_eq_0(s)) return 8;
-		String old_text = elem.Text();
-		elem.Text_(s);
-		float rv = ((Swt_text_w_border)(elem.UnderElem())).Under_text().getFont().getFontData()[0].height;
-		shell.setText(old_text);
-		return rv;
+		try {
+			String old_text = elem.Text();
+			elem.Text_(s);
+			float rv = ((Swt_text_w_border)(elem.UnderElem())).Under_text().getFont().getFontData()[0].height;
+			elem.Text_(old_text);	// was shell.setText(old_text); DATE:2014-07-25
+			return rv;
+		}
+		catch (Exception e) {
+			Gfo_usr_dlg_._.Warn_many("", "", "error while calculating font height; err=~{0}", Err_.Message_gplx_brief(e));
+			return 8;
+		}
 	}
 	public void Set_mnu_popup(GfuiElem owner, Gfui_mnu_grp grp) {
 		Control control = Swt_control_.cast_or_fail(owner).Under_menu_control();

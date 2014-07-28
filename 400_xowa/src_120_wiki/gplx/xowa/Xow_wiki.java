@@ -20,7 +20,7 @@ import gplx.xowa.apps.*;
 import gplx.xowa.wikis.*; import gplx.xowa.users.*; import gplx.xowa.html.*; import gplx.xowa.users.history.*; import gplx.xowa.specials.*; import gplx.xowa.xtns.*; import gplx.xowa.dbs.*; import gplx.xowa.files.*;
 import gplx.xowa.langs.vnts.*; import gplx.xowa.gui.views.*;
 import gplx.xowa.setup.maints.*; import gplx.xowa.wikis.caches.*;
-import gplx.xowa.bldrs.imports.*;
+import gplx.xowa.bldrs.imports.*;  import gplx.xowa.xtns.pfuncs.*;
 public class Xow_wiki implements GfoInvkAble {
 	private Xow_html_util util;
 	public Xow_wiki(Xoa_app app, Io_url wiki_dir, Xow_ns_mgr ns_mgr, Xol_lang lang) {
@@ -61,6 +61,7 @@ public class Xow_wiki implements GfoInvkAble {
 			wdata_wiki_tid	= domain_tid;
 			wdata_wiki_lang = lang.Key_bry();
 		}
+		Wdata_wiki_abrv_();
 		db_mgr = new gplx.xowa.dbs.Xodb_mgr_txt(this, data_mgr);
 		domain_abrv = Xob_bz2_file.Build_alias(Xow_wiki_domain_.parse_by_domain(domain_bry));
 		maint_mgr = new Xow_maint_mgr(this);
@@ -91,9 +92,16 @@ public class Xow_wiki implements GfoInvkAble {
 	public Xow_fragment_mgr Fragment_mgr() {return fragment_mgr;} private Xow_fragment_mgr fragment_mgr;
 	public Bfmtr_eval_wiki Eval_mgr() {return eval_mgr;} private Bfmtr_eval_wiki eval_mgr;
 	public Bry_bfr_mkr			Utl_bry_bfr_mkr() {return app.Utl_bry_bfr_mkr();}
-	public byte Wdata_wiki_tid() {return wdata_wiki_tid;} private byte wdata_wiki_tid;
-	public byte[] Wdata_wiki_lang() {return wdata_wiki_lang;} private byte[] wdata_wiki_lang;
-	public void Wdata_wiki_lang_(byte[] v) {this.wdata_wiki_lang = v;}	// TEST:
+//		public byte					Wdata_wiki_tid() {return wdata_wiki_tid;} 
+	public byte[]				Wdata_wiki_lang() {return wdata_wiki_lang;} private byte[] wdata_wiki_lang;
+	public void					Wdata_wiki_lang_(byte[] v) {this.wdata_wiki_lang = v; Wdata_wiki_abrv_();}	// TEST:
+	public byte[]				Wdata_wiki_abrv() {return wdata_wiki_abrv;} private byte[] wdata_wiki_abrv; private byte wdata_wiki_tid;
+	private void Wdata_wiki_abrv_() {
+		Bry_bfr bfr = app.Utl_bry_bfr_mkr().Get_b128();
+		Xob_bz2_file.Build_alias_by_lang_tid(bfr, wdata_wiki_lang, Byte_obj_ref.new_(wdata_wiki_tid));
+		wdata_wiki_abrv = bfr.Mkr_rls().XtoAryAndClear();
+	}
+
 	public boolean Init_needed() {return init_needed;} public Xow_wiki Init_needed_(boolean v) {init_needed = v; return this;} private boolean init_needed = true;
 
 	public Xop_parser Parser() {return parser;} private Xop_parser parser;

@@ -58,10 +58,11 @@ public class Wdata_wiki_mgr_fxt {
 		tmp_bfr.Mkr_rls();
 	}
 	public void Init_pids_add(String lang_key, String pid_name, int pid) {wdata_mgr.Pids_add(Bry_.new_utf8_(lang_key + "|" + pid_name), pid);}
-	public void Init_links_add(String wiki, String ttl, String qid) {
+	public void Init_links_add(String wiki, String ttl, String qid) {Init_links_add(wiki, "000", ttl, qid);}
+	public void Init_links_add(String wiki, String ns_num, String ttl, String qid) {
 		byte[] ttl_bry = Bry_.new_utf8_(ttl);
 		Xowd_regy_mgr regy_mgr = app.Hive_mgr().Regy_mgr();
-		Io_url regy_fil = wdata_mgr.Wdata_wiki().Fsys_mgr().Site_dir().GenSubDir_nest("data", "qid").GenSubFil_nest(wiki, "000", "reg.csv");
+		Io_url regy_fil = wdata_mgr.Wdata_wiki().Fsys_mgr().Site_dir().GenSubDir_nest("data", "qid").GenSubFil_nest(wiki, ns_num, "reg.csv");
 		regy_mgr.Init(regy_fil);
 		regy_mgr.Create(ttl_bry);
 		regy_mgr.Save();
@@ -70,7 +71,7 @@ public class Wdata_wiki_mgr_fxt {
 		byte[] itm = bfr.Add(ttl_bry).Add_byte(Byte_ascii.Pipe).Add(Bry_.new_ascii_(qid)).Add_byte_nl().XtoAryAndClear();
 		Xob_xdat_file xdat_file = new Xob_xdat_file();
 		xdat_file.Insert(bfr, itm);
-		Io_url file_orig = Xob_wdata_qid_base_tst.ttl_(app.Wiki_mgr().Wdata_mgr().Wdata_wiki(), wiki, "000", 0);
+		Io_url file_orig = Xob_wdata_qid_base_tst.ttl_(app.Wiki_mgr().Wdata_mgr().Wdata_wiki(), wiki, ns_num, 0);
 		xdat_file.Save(file_orig);
 	}
 	public void Init_external_links_mgr_clear() {wiki.Ctx().Cur_page().Wdata_external_lang_links().Reset();}
@@ -89,8 +90,10 @@ public class Wdata_wiki_mgr_fxt {
 	public void Test_get_low_qid(String qid, String expd) {
 		Tfds.Eq(expd, String_.new_ascii_(Wdata_wiki_mgr.Get_low_qid(Bry_.new_ascii_(qid))));
 	}
-	public void Test_link(String lang, String page, String expd) {
-		Tfds.Eq(expd, String_.new_utf8_(wdata_mgr.Qids_get(Bry_.new_ascii_(lang), Xow_wiki_domain_.Tid_wikipedia, Bry_.new_ascii_("000"), Bry_.new_utf8_(page))));
+	public void Test_link(String ttl_str, String expd) {Test_link(Xoa_ttl.parse_(wiki, Xow_ns_.Id_main, Bry_.new_utf8_(ttl_str)), expd);}
+	public void Test_link(Xoa_ttl ttl, String expd) {
+		byte[] qid_ttl = wdata_mgr.Qids_get(wiki, ttl);
+		Tfds.Eq(expd, String_.new_utf8_(qid_ttl));
 	}
 	public void Test_parse_pid_null(String val)			{Test_parse_pid(val, Wdata_wiki_mgr.Pid_null);}
 	public void Test_parse_pid(String val, int expd)	{Tfds.Eq(expd, Wdata_pf_property.Parse_pid(num_parser, Bry_.new_ascii_(val)));} private NumberParser num_parser = new NumberParser();

@@ -32,13 +32,15 @@ public class Xof_wiki_orig_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	public void Cmd_end() {}
 	public void Cmd_print() {}
 	private void Exec() {
+		usr_dlg.Prog_many("", "", "deleting wiki_orig");		provider.Exec_sql(Sql_delete_wiki_orig);	// always delete wiki_orig, else will not pick up changed sizes / moved repos; DATE:2014-07-21
 		usr_dlg.Prog_many("", "", "inserting xfer direct");		provider.Exec_sql(Sql_create_xfer_direct);
 		usr_dlg.Prog_many("", "", "inserting xfer redirect");	provider.Exec_sql(Sql_create_xfer_redirect);
 		usr_dlg.Prog_many("", "", "inserting orig direct");		provider.Exec_sql(Sql_create_orig_direct);
 		usr_dlg.Prog_many("", "", "inserting orig redirect");	provider.Exec_sql(Sql_create_orig_redirect);
 	}
 	private static final String 
-	Sql_create_xfer_direct = String_.Concat_lines_nl
+		Sql_delete_wiki_orig = "DELETE FROM wiki_orig;"
+	,	Sql_create_xfer_direct = String_.Concat_lines_nl
 	(	"INSERT INTO wiki_orig "
 	,	"(orig_ttl, status, orig_repo, orig_ext, orig_w, orig_h, orig_redirect)"
 	,	"SELECT DISTINCT"

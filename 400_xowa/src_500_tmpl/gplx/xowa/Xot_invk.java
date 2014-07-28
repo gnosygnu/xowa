@@ -18,9 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 public interface Xot_invk {
 	byte Defn_tid();
-	boolean Root_frame();
 	int Src_bgn();
 	int Src_end();
+	boolean Frame_is_root();
+	byte Frame_tid(); void Frame_tid_(byte v);
 	byte[] Frame_ttl(); void Frame_ttl_(byte[] v);
 	int Frame_lifetime(); void Frame_lifetime_(int v);
 	boolean Rslt_is_redirect(); void Rslt_is_redirect_(boolean v);
@@ -29,5 +30,4 @@ public interface Xot_invk {
 	Arg_nde_tkn Args_get_by_idx(int i);
 	Arg_nde_tkn Args_eval_by_idx(byte[] src, int idx);
 	Arg_nde_tkn Args_get_by_key(byte[] src, byte[] key);
-	byte Scrib_frame_tid(); void Scrib_frame_tid_(byte v);
 }

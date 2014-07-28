@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import org.junit.*;
+import org.junit.*; import gplx.xowa.parsers.lists.*;
 public class Xop_para_wkr_basic_tst {
 	private Xop_fxt fxt = new Xop_fxt(); String raw;
 	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();}

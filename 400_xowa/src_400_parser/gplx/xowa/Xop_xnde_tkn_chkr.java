@@ -39,60 +39,6 @@ public class Xop_xnde_tkn_chkr extends Xop_tkn_chkr_base {
 		return err;
 	}
 }
-class Xop_tblw_tb_tkn_chkr extends Xop_tkn_chkr_base {
-	@Override public Class<?> TypeOf() {return Xop_tblw_tb_tkn.class;}
-	@Override public byte Tkn_tid() {return Xop_tkn_itm_.Tid_tblw_tb;}
-	public int Caption_count() {return caption_count;} public Xop_tblw_tb_tkn_chkr Caption_count_(int v) {caption_count = v; return this;} private int caption_count = Int_.Neg1_count;
-	public Xop_tblw_tb_tkn_chkr Atrs_rng_(int bgn, int end) {this.atrs_bgn = bgn; this.atrs_end = end; return this;} private int atrs_bgn = Xop_tblw_wkr.Atrs_null, atrs_end = Xop_tblw_wkr.Atrs_null;
-	@Override public int Chk_hook(Tst_mgr mgr, String path, Object actl_obj, int err) {
-		Xop_tblw_tb_tkn actl = (Xop_tblw_tb_tkn)actl_obj;
-		err += mgr.Tst_val(caption_count == Int_.Neg1_count, path, "caption_count", caption_count, actl.Caption_count());
-		err += mgr.Tst_val(atrs_bgn == Xop_tblw_wkr.Atrs_null, path, "atrs_bgn", atrs_bgn, actl.Atrs_bgn());
-		err += mgr.Tst_val(atrs_end == Xop_tblw_wkr.Atrs_null, path, "atrs_end", atrs_end, actl.Atrs_end());
-		return err;
-	}
-}
-class Xop_tblw_tc_tkn_chkr extends Xop_tkn_chkr_base {
-	@Override public Class<?> TypeOf() {return Xop_tblw_tc_tkn.class;}
-	@Override public byte Tkn_tid() {return Xop_tkn_itm_.Tid_tblw_tc;}
-	@Override public int Chk_hook(Tst_mgr mgr, String path, Object actl_obj, int err) {
-//			Xop_tblw_tc_tkn actl = (Xop_tblw_tc_tkn)actl_obj;
-		return err;
-	}
-}
-class Xop_tblw_td_tkn_chkr extends Xop_tkn_chkr_base {
-	@Override public Class<?> TypeOf() {return Xop_tblw_td_tkn.class;}
-	@Override public byte Tkn_tid() {return Xop_tkn_itm_.Tid_tblw_td;}
-	public Xop_tblw_td_tkn_chkr Atrs_rng_(int bgn, int end) {this.atrs_bgn = bgn; this.atrs_end = end; return this;} private int atrs_bgn = Xop_tblw_wkr.Atrs_null, atrs_end = Xop_tblw_wkr.Atrs_null;
-	@Override public int Chk_hook(Tst_mgr mgr, String path, Object actl_obj, int err) {
-		Xop_tblw_td_tkn actl = (Xop_tblw_td_tkn)actl_obj;
-		err += mgr.Tst_val(atrs_bgn == Xop_tblw_wkr.Atrs_null, path, "atrs_bgn", atrs_bgn, actl.Atrs_bgn());
-		err += mgr.Tst_val(atrs_end == Xop_tblw_wkr.Atrs_null, path, "atrs_end", atrs_end, actl.Atrs_end());
-		return err;
-	}
-}
-class Xop_tblw_tr_tkn_chkr extends Xop_tkn_chkr_base {
-	@Override public Class<?> TypeOf() {return Xop_tblw_tr_tkn.class;}
-	@Override public byte Tkn_tid() {return Xop_tkn_itm_.Tid_tblw_tr;}
-	public Xop_tblw_tr_tkn_chkr Atrs_rng_(int bgn, int end) {this.atrs_bgn = bgn; this.atrs_end = end; return this;} private int atrs_bgn = Xop_tblw_wkr.Atrs_null, atrs_end = Xop_tblw_wkr.Atrs_null;
-	@Override public int Chk_hook(Tst_mgr mgr, String path, Object actl_obj, int err) {
-		Xop_tblw_tr_tkn actl = (Xop_tblw_tr_tkn)actl_obj;
-		err += mgr.Tst_val(atrs_bgn == -1, path, "atrs_bgn", atrs_bgn, actl.Atrs_bgn());
-		err += mgr.Tst_val(atrs_end == -1, path, "atrs_end", atrs_end, actl.Atrs_end());
-		return err;
-	}
-}
-class Xop_tblw_th_tkn_chkr extends Xop_tkn_chkr_base {
-	@Override public Class<?> TypeOf() {return Xop_tblw_th_tkn.class;}
-	@Override public byte Tkn_tid() {return Xop_tkn_itm_.Tid_tblw_th;}
-	public Xop_tblw_th_tkn_chkr Atrs_rng_(int bgn, int end) {this.atrs_bgn = bgn; this.atrs_end = end; return this;} private int atrs_bgn = Xop_tblw_wkr.Atrs_null, atrs_end = Xop_tblw_wkr.Atrs_null;
-	@Override public int Chk_hook(Tst_mgr mgr, String path, Object actl_obj, int err) {
-		Xop_tblw_th_tkn actl = (Xop_tblw_th_tkn)actl_obj;
-		err += mgr.Tst_val(atrs_bgn == -1, path, "atrs_bgn", atrs_bgn, actl.Atrs_bgn());
-		err += mgr.Tst_val(atrs_end == -1, path, "atrs_end", atrs_end, actl.Atrs_end());
-		return err;
-	}
-}
 class Xop_para_tkn_chkr extends Xop_tkn_chkr_base {
 	@Override public Class<?> TypeOf() {return Xop_para_tkn.class;}
 	@Override public byte Tkn_tid() {return Xop_tkn_itm_.Tid_para;}

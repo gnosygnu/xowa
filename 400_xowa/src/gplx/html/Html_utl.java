@@ -20,9 +20,11 @@ import gplx.core.btries.*;
 public class Html_utl {
 	public static byte[] Escape_for_atr_val_as_bry(Bry_bfr tmp_bfr, byte quote_byte, String s) {
 		if (s == null) return null;
-		byte[] bry = Bry_.new_utf8_(s);
-		int bry_len = bry.length;
-		boolean dirty = Escape_for_atr_val_as_bry(tmp_bfr, quote_byte, bry, 0, bry_len);
+		return Escape_for_atr_val_as_bry(tmp_bfr, quote_byte, Bry_.new_utf8_(s));
+	}
+	public static byte[] Escape_for_atr_val_as_bry(Bry_bfr tmp_bfr, byte quote_byte, byte[] bry) {
+		if (bry == null) return null;
+		boolean dirty = Escape_for_atr_val_as_bry(tmp_bfr, quote_byte, bry, 0, bry.length);
 		return dirty ? tmp_bfr.XtoAryAndClear() : bry;
 	}
 	public static boolean Escape_for_atr_val_as_bry(Bry_bfr tmp_bfr, byte quote_byte, byte[] src, int bgn, int end) {

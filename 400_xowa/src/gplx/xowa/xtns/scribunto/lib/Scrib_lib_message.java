@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.lib; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import gplx.xowa.html.*;
+import gplx.html.*;
 public class Scrib_lib_message implements Scrib_lib {
 	public Scrib_lib_message(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
@@ -139,7 +139,7 @@ class Scrib_lib_message_data {
 				break;
 			case Fmt_tid_parseAsBlock:	// NOTE: MW passes msg_val through parser and strips <p> if tid==parse; XOWA does the opposite, so add <p> if parseAsBlock requested
 				Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
-				msg_val = bfr.Add(Xoh_consts.P_bgn).Add(msg_val).Add(Xoh_consts.P_end).Mkr_rls().XtoAryAndClear();
+				msg_val = bfr.Add(Html_tag_.P_lhs).Add(msg_val).Add(Html_tag_.P_rhs).Mkr_rls().XtoAryAndClear();
 				break;
 			case Fmt_tid_escaped:
 				msg_val = gplx.html.Html_utl.Escape_html_as_bry(msg_val);

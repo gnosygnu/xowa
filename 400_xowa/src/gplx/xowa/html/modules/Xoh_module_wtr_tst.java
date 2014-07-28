@@ -38,7 +38,7 @@ public class Xoh_module_wtr_tst {
 		, "var xowa_global_values = {"
 		, "  'key_1' : 'val_1',"
 		, "  'key_2' : 'val_2',"
-		, "  'key_3' : 'apos_''_1',"
+		, "  'key_3' : 'apos_\\'_1',"
 		, "}"
 		));
 	}

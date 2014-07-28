@@ -31,6 +31,8 @@ public class Xoa_html_data {
 	public byte[]				Custom_html() {return custom_html;} public Xoa_html_data Custom_html_(byte[] v) {custom_html = v; return this;} private byte[] custom_html;
 	public byte[]				Custom_name() {return custom_name;} public Xoa_html_data Custom_name_(byte[] v) {custom_name = v; return this;} private byte[] custom_name;
 	public byte[]				Custom_head_end() {return custom_head_end;}
+	public boolean					Gallery_packed_exists() {return gallery_packed_exists;} public void Gallery_packed_exists_y_() {gallery_packed_exists = true;} private boolean gallery_packed_exists;
+	public int					Imap_id_next() {return ++imap_id_next;} private int imap_id_next;
 	public void Custom_head_end_concat(byte[] v) {
 		if (v == null)
 			custom_head_end = v;
@@ -46,12 +48,14 @@ public class Xoa_html_data {
 	}	private byte[] custom_html_end;
 	public void Clear() {
 		if (ctg_hash != null) ctg_hash.Clear();
+		gallery_packed_exists = false;
 		module_mgr.Clear();
 		lnke_autonumber = 1;
 		html_restricted = true;
 		html_content_sub = Bry_.Empty;
 		search_text = Bry_.Empty;
 		custom_html_end = custom_head_end = custom_html = custom_name = null;
+		imap_id_next = 0;
 	}
 	public byte[][] Ctgs_to_ary() {return ctg_hash == null ? Bry_.Ary_empty : (byte[][])ctg_hash.XtoAry(byte[].class);}
 	public void Ctgs_add(Xoa_ttl ttl) {

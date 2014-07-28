@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.files.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.users.history.*; import gplx.xowa.xtns.pfuncs.ttls.*;
+import gplx.html.*; import gplx.xowa.files.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.users.history.*; import gplx.xowa.xtns.pfuncs.ttls.*;
 public class Xoh_lnki_wtr {
 	private Xoa_app app; private Xow_wiki wiki; private Xoa_page page; private Xop_ctx ctx;
 	private Xoh_html_wtr_cfg cfg;
@@ -72,14 +72,17 @@ public class Xoh_lnki_wtr {
 	public void Write_plain_by_tkn(Bry_bfr bfr, Xoh_html_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xoa_ttl lnki_ttl) {
 		Write_plain(bfr, hctx, src, lnki, lnki_ttl, caption_tkn_wtr);
 	}
+	public void Write_caption(Bry_bfr bfr, Xoh_html_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xoa_ttl lnki_ttl) {
+		Write_caption(bfr, ctx, hctx, src, lnki, lnki.Ttl_ary(), true, caption_tkn_wtr);
+	}
 	private void Write_plain(Bry_bfr bfr, Xoh_html_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xoa_ttl lnki_ttl, Xop_lnki_caption_wtr caption_wkr) {
 		byte[] ttl_bry = lnki.Ttl_ary();
 		if (Bry_.Len_eq_0(ttl_bry)) ttl_bry = lnki_ttl.Full_txt_raw();		// NOTE: handles ttls like [[fr:]] and [[:fr;]] which have an empty Page_txt, but a valued Full_txt_raw
 		if (Bry_.Eq(lnki_ttl.Full_txt(), page.Ttl().Full_txt())) {			// lnki is same as pagename; bold; SEE: Month widget on day pages will bold current day; PAGE:en.w:January 1
 			if (lnki_ttl.Anch_bgn() == -1 && Bry_.Eq(lnki_ttl.Wik_txt(), page.Ttl().Wik_txt())) {		// only bold if lnki is not pointing to anchor on same page; PAGE:en.w:Comet; [[Comet#Physical characteristics|ion tail]]
-				bfr.Add(Xoh_consts.B_bgn);
+				bfr.Add(Html_tag_.B_lhs);
 				Write_caption(bfr, ctx, hctx, src, lnki, ttl_bry, true, caption_wkr);
-				bfr.Add(Xoh_consts.B_end);
+				bfr.Add(Html_tag_.B_rhs);
 				return;
 			}
 		}

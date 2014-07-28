@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs; import gplx.*; import gplx.xowa.*;
-import gplx.core.btries.*; import gplx.intl.*;
+import gplx.core.btries.*; import gplx.intl.*; import gplx.xowa.xtns.pfuncs.*;
 public class Xol_func_name_regy {
 	private Xol_func_name_itm finder = new Xol_func_name_itm();
 	private Btrie_slim_mgr cs_trie = Btrie_slim_mgr.cs_(), ci_trie = Btrie_slim_mgr.ci_utf_8_();

@@ -17,14 +17,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.modules.popups; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.modules.*;
 import gplx.core.btries.*;
-import gplx.xowa.apis.xowa.html.modules.*;
-import gplx.xowa.gui.views.*;
-import gplx.xowa.html.modules.popups.keeplists.*;
+import gplx.xowa.apis.xowa.html.modules.*; import gplx.xowa.html.modules.popups.keeplists.*;
+import gplx.xowa.gui.views.*; import gplx.xowa.parsers.hdrs.*;
 public class Xow_popup_parser {
 	private Xoa_app app; private Xow_wiki wiki; private Xop_parser parser;
 	private Btrie_fast_mgr tmpl_trie, wtxt_trie; private Xop_tkn_mkr tkn_mkr;
 	private Xop_ctx tmpl_ctx; private Xop_root_tkn tmpl_root, wtxt_root; private Xot_compile_data tmpl_props = new Xot_compile_data();		
 	private Xoh_html_wtr_ctx hctx = Xoh_html_wtr_ctx.Popup;
+	private Xow_popup_anchor_finder hdr_finder = new Xow_popup_anchor_finder();
 	public Xow_popup_cfg Cfg() {return cfg;} private Xow_popup_cfg cfg = new Xow_popup_cfg();
 	public Xow_popup_wrdx_mkr Wrdx_mkr() {return wrdx_mkr;} private Xow_popup_wrdx_mkr wrdx_mkr = new Xow_popup_wrdx_mkr();
 	public Xow_popup_html_mkr Html_mkr() {return html_mkr;} private Xow_popup_html_mkr html_mkr = new Xow_popup_html_mkr();
@@ -69,7 +69,8 @@ public class Xow_popup_parser {
 	}
 	public byte[] Parse(Xow_wiki cur_wiki, Xoa_page page, Xog_tab_itm cur_tab, Xow_popup_itm popup_itm) {	// NOTE: must pass cur_wiki for xwiki label; DATE:2014-07-02
 		byte[] tmpl_src = page.Data_raw(); int tmpl_len = tmpl_src.length; if (tmpl_len == 0) return Bry_.Empty;
-		int tmpl_bgn = Xop_parser_.Doc_bgn_bos;
+		int tmpl_bgn_orig = Xow_popup_parser_.Tmpl_bgn_get_(app, popup_itm, page.Ttl(), hdr_finder, tmpl_src, tmpl_len);
+		int tmpl_bgn = tmpl_bgn_orig;
 		int tmpl_read_len_cur = cfg.Tmpl_read_len();
 		wrdx_mkr.Init();
 		data.Init(cfg, popup_itm, tmpl_len);
@@ -100,8 +101,8 @@ public class Xow_popup_parser {
 			}
 			tmpl_bgn = new_tmpl_bgn;
 			data.Tmpl_loop_count_add();
-			if (	tmpl_bgn == tmpl_len				// end of template
-				||	tmpl_bgn >	data.Tmpl_max()			// too much read; stop and give whatever's available
+			if (	tmpl_bgn == tmpl_len								// end of template
+				||	tmpl_bgn - tmpl_bgn_orig >	data.Tmpl_max()			// too much read; stop and give whatever's available
 				)
 				break;
 		}
@@ -200,6 +201,13 @@ public class Xow_popup_parser {
 	}
 }
 class Xow_popup_parser_ {
+	public static int Tmpl_bgn_get_(Xoa_app app, Xow_popup_itm itm, Xoa_ttl page_ttl, Xow_popup_anchor_finder hdr_finder, byte[] src, int src_len) {
+		int rv = Xop_parser_.Doc_bgn_bos; if (itm.Mode_all()) return rv;
+		byte[] anch = itm.Page_href()[0] == Byte_ascii.Hash ? Bry_.Mid(app.Encoder_mgr().Href().Decode(itm.Page_href()), 1) : page_ttl.Anch_txt();
+		if (anch == null) return rv;
+		int hdr_bgn = hdr_finder.Find(src, src_len, anch, rv);	// NOTE: starting search from Xop_parser_.Doc_bgn_bos
+		return hdr_bgn == Bry_finder.Not_found ? rv : hdr_bgn;
+	}
 	public static int Calc_read_len(Xop_ctx ctx, int tmpl_read_cur, int tmpl_read_len, byte[] src, int bgn, int end) {// DATE:2014-07-19
 		int rv_default = tmpl_read_cur + tmpl_read_len;
 		Xop_tkn_itm tkn = Get_expensive_dangling_tkn(ctx);

@@ -71,7 +71,7 @@ public class Xof_xfer_queue_html_wmf_api_tst {
 	}
 	@Test  public void Upright_defect() {	// PURPOSE.fix: upright not working;  PAGE:en.w:Beethoven; [[File:Rudolf-habsburg-olmuetz.jpg|thumb|upright|]]; changed upright to = Upright_default; DATE:2014-05-23
 		fxt	.ini_page_api("en_wiki", "A.png", "", 1378, 1829);
-		fxt	.Lnki_("A.png", true, -1, -1, Xof_img_size.Upright_default, Xof_doc_thumb.Null_as_int)
+		fxt	.Lnki_("A.png", true, -1, -1, Xof_img_size.Upright_default_marker, Xof_doc_thumb.Null_as_int)
 			.Src(	fxt.img_("mem/src/en.wikipedia.org/thumb/7/70/A.png/170px-A.png", 170, 226))
 			.Trg(	fxt.img_("mem/trg/en.wikipedia.org/fit/7/0/A.png/170px.png", 170, 226)
 				,	fxt.reg_("mem/xowa/file/#meta/en.wikipedia.org/7/70.csv"		, "A.png|y||2?1378,1829|1?170,226")

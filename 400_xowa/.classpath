@@ -19,16 +19,11 @@
 	<classpathentry kind="src" path="src_400_parser"/>
 	<classpathentry kind="src" path="src_405_tkn"/>
 	<classpathentry kind="src" path="src_409_tkn_misc"/>
-	<classpathentry kind="src" path="src_420_apos"/>
-	<classpathentry kind="src" path="src_430_lnke"/>
 	<classpathentry kind="src" path="src_440_lnki"/>
-	<classpathentry kind="src" path="src_450_hdr"/>
 	<classpathentry kind="src" path="src_460_para"/>
-	<classpathentry kind="src" path="src_470_list"/>
 	<classpathentry kind="src" path="src_480_tblw"/>
 	<classpathentry kind="src" path="src_490_xnde"/>
 	<classpathentry kind="src" path="src_500_tmpl"/>
-	<classpathentry kind="src" path="src_510_pf_core"/>
 	<classpathentry kind="src" path="xtn"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/100_core"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/150_gfui"/>

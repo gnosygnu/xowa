@@ -48,6 +48,7 @@ public class Xof_lnki_file_mgr {
 				xfer_itm.Lnki_ext_(fsdb_itm.Lnki_ext());			// WORKAROUND: hacky, but fsdb_itm knows when ogg is ogv whereas xfer_itm does not; so, always override xfer_itm.ext with fsdb's; DATE:2014-02-02
 				xfer_itm.Url_bldr_(url_bldr);						// default Url_bldr for xfer_itm uses @ for thumbtime; switch to -; DATE:2014-02-02
 				Init_fsdb_by_xfer(fsdb_itm, xfer_itm);				// copy xfer itm props to fsdb_itm;
+				xfer_itm.Atrs_by_orig(fsdb_itm.Orig_w(), fsdb_itm.Orig_h(), xfer_itm.Orig_file_len());	// copy orig props from orig_itm to xfer_itm
 				fsdb_itm.Html__init(wiki.File_mgr().Repo_mgr(), url_bldr, tmp_img_size, exec_tid);
 				xfer_itm.Html_orig_src_(Bry_.new_utf8_(fsdb_itm.Html_orig_url().To_http_file_str()));	// always set orig_url; note that w,h are not necessary for orig url; orig url needed for [[Media:]] links; DATE:2014-01-19
 				gplx.ios.IoItmFil fil = Io_mgr._.QueryFil(fsdb_itm.Html_url());
@@ -71,7 +72,7 @@ public class Xof_lnki_file_mgr {
 			return false;
 		}
 	}
-	private void Create_xfer_itms(ListAdp lnki_list, boolean upright_patch) {
+	private void Create_xfer_itms(ListAdp lnki_list, int upright_patch) {
 		int len = lnki_list.Count();
 		for (int i = 0; i < len; i++) {
 			Xop_lnki_tkn lnki_tkn = (Xop_lnki_tkn)lnki_list.FetchAt(i);
@@ -95,7 +96,7 @@ public class Xof_lnki_file_mgr {
 			)
 			xfer_list.Add(key, itm);
 	}
-	private void Init_fsdb_by_lnki(Xof_fsdb_itm fsdb_itm, Xop_lnki_tkn lnki_tkn, boolean lnki_upright_patch) {
+	private void Init_fsdb_by_lnki(Xof_fsdb_itm fsdb_itm, Xop_lnki_tkn lnki_tkn, int lnki_upright_patch) {
 		byte[] lnki_ttl = lnki_tkn.Ttl().Page_db();
 		Xof_ext lnki_ext = Xof_ext_.new_by_ttl_(lnki_ttl);
 		byte[] lnki_md5 = Xof_xfer_itm_.Md5_(lnki_ttl);

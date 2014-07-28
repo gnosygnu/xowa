@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.apos; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
+import gplx.xowa.parsers.lists.*;
 public class Xop_apos_wkr_tst {
 	private Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Basic() {

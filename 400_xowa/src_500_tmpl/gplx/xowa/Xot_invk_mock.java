@@ -19,15 +19,15 @@ package gplx.xowa; import gplx.*;
 import gplx.xowa.xtns.scribunto.*;
 public class Xot_invk_mock implements Xot_invk {
 	public Xot_invk_mock(byte defn_tid, int idx_adj) {this.defn_tid = defn_tid; this.idx_adj = idx_adj;} private int idx_adj; // SEE NOTE_1:
-	public boolean Root_frame() {return false;}
 	public int Src_bgn() {return -1;}
 	public int Src_end() {return -1;}
 	public byte Defn_tid() {return defn_tid;} private byte defn_tid = Xot_defn_.Tid_null;
-	public Arg_nde_tkn Name_tkn() {return Arg_nde_tkn.Null;}
+	public boolean Frame_is_root() {return false;}
+	public byte Frame_tid() {return scrib_tid;} public void Frame_tid_(byte v) {scrib_tid = v;} private byte scrib_tid;
 	public byte[] Frame_ttl() {return frame_ttl;} public void Frame_ttl_(byte[] v) {frame_ttl = v;} private byte[] frame_ttl;
 	public int Frame_lifetime() {return frame_lifetime;} public void Frame_lifetime_(int v) {frame_lifetime = v;} private int frame_lifetime;
-	public byte Scrib_frame_tid() {return scrib_tid;} public void Scrib_frame_tid_(byte v) {scrib_tid = v;} private byte scrib_tid;
 	public boolean Rslt_is_redirect() {return rslt_is_redirect;} public void Rslt_is_redirect_(boolean v) {rslt_is_redirect = v;} private boolean rslt_is_redirect;
+	public Arg_nde_tkn Name_tkn() {return Arg_nde_tkn.Null;}
 	public int Args_len() {return args.Count() + idx_adj;} private OrderedHash args = OrderedHash_.new_bry_();
 	public Arg_nde_tkn Args_get_by_idx(int i) {return (Arg_nde_tkn)args.FetchAt(i - idx_adj);}
 	public Arg_nde_tkn Args_eval_by_idx(byte[] src, int idx) {// DUPE:MW_ARG_RETRIEVE

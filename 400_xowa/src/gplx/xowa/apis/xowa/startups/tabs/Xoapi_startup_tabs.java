@@ -19,9 +19,9 @@ package gplx.xowa.apis.xowa.startups.tabs; import gplx.*; import gplx.xowa.*; im
 public class Xoapi_startup_tabs implements GfoInvkAble {
 	public String Custom() {return custom;} private String custom;
 	public boolean Custom_is_expr() {return custom_is_expr;} private boolean custom_is_expr;
-	public String Previous() {return previous;} public Xoapi_startup_tabs Previous_(String v) {previous = v; return this;} private String previous = "";
+	public String Previous() {return previous;} public Xoapi_startup_tabs Previous_(String v) {previous = v; return this;} private String previous;
 	public String Manual() {return manual;} public void Manual_(String v) {manual = v;} private String manual;
-	public byte Type() {return type;} private byte type = Xoapi_startup_tabs_tid_.Tid_xowa;
+	public byte Type() {return type;} private byte type = Xoapi_startup_tabs_tid_.Tid_previous;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_type)) 								return Xoapi_startup_tabs_tid_.Xto_key(type);
 		else if (ctx.Match(k, Invk_type_))								type = Xoapi_startup_tabs_tid_.Xto_tid(m.ReadStr("v"));
@@ -41,14 +41,46 @@ public class Xoapi_startup_tabs implements GfoInvkAble {
 	, Invk_previous = "previous", Invk_previous_ = "previous_"
 	, Invk_custom_is_expr = "custom_is_expr", Invk_custom_is_expr_ = "custom_is_expr_"
 	;
-	public String[] Calc_startup_strs() {
-		if (manual != null) return new String[] {manual};
-		switch (type) {
-			case Xoapi_startup_tabs_tid_.Tid_blank:			return new String[] {gplx.xowa.specials.xowa.default_tab.Default_tab_page.Ttl_full_str};
-			case Xoapi_startup_tabs_tid_.Tid_xowa:			return new String[] {gplx.xowa.users.Xouc_pages_mgr.Page_xowa};
-			case Xoapi_startup_tabs_tid_.Tid_custom:		return String_.SplitLines_nl(String_.Trim(custom));
-			case Xoapi_startup_tabs_tid_.Tid_previous:		return String_.SplitLines_nl(String_.Trim(previous));
-			default:										throw Err_.unhandled(type);
+	public String[] Calc_startup_strs(Xoa_app app) {
+		ListAdp rv = ListAdp_.new_();
+		String xowa_home = gplx.xowa.users.Xouc_pages_mgr.Page_xowa;
+		if (manual == null) {
+			switch (type) {
+				case Xoapi_startup_tabs_tid_.Tid_blank:			rv.Add(gplx.xowa.specials.xowa.default_tab.Default_tab_page.Ttl_full_str); break;
+				case Xoapi_startup_tabs_tid_.Tid_xowa:			rv.Add(xowa_home); break;
+				case Xoapi_startup_tabs_tid_.Tid_custom:		Add_ary(rv, custom); break;
+				case Xoapi_startup_tabs_tid_.Tid_previous:		Add_ary(rv, previous); break;
+				default:										throw Err_.unhandled(type);
+			}
+		}
+		else
+			rv.Add(manual);
+		Add_xowa_home_if_new_version(rv, app, xowa_home);
+		return rv.XtoStrAry();
+	}
+	private static void Add_ary(ListAdp list, String s) {
+		if (String_.Len_eq_0(s)) return;
+		String[] ary = String_.SplitLines_nl(String_.Trim(s));
+		int len = ary.length;
+		for (int i = 0; i < len; ++i) {
+			String itm = ary[i];
+			if (String_.Len_eq_0(itm)) continue;
+			list.Add(itm);
+		}
+	}
+	private static void Add_xowa_home_if_new_version(ListAdp rv, Xoa_app app, String xowa_home) {
+		if (gplx.xowa.apps.versions.Xoa_version_.Compare(app.Api_root().App().Env().Version_previous(), Xoa_app_.Version) == CompareAble_.Less) {
+			boolean xowa_home_exists = false;
+			int len = rv.Count();
+			for (int i = 0; i < len; ++i) {
+				String itm = (String)rv.FetchAt(i);
+				if (String_.Eq(itm, xowa_home)) {
+					xowa_home_exists = true;
+					break;
+				}
+			}
+			if (!xowa_home_exists)
+				rv.Add(xowa_home);
 		}
 	}
 }

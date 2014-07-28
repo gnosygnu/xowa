@@ -418,6 +418,13 @@ public class Xot_invk_wkr_basic_tst {
 		fxt.Test_parse_tmpl_str("{{cASE_MATCH}}",	"found");				// Xot_invk_tkn will do 2 searches: "tEST" and "TEST"
 		fxt.Init_defn_clear();
 	}
+	@Test  public void Kv_same() {	// PURPOSE: multiple identical keys should retrieve last, not first; EX: {{A|1=a|1=b}}; PAGE:el.d:ἔχω DATE:2014-07-23
+		fxt.Init_defn_clear();
+		fxt.Init_defn_add("tmpl_1", "{{{1}}}");
+		fxt.Test_parse_tmpl_str_test("{{tmpl_1|1=a|1=b}}"	, "{{test}}"		, "b");	// duplicate "1"; use last
+		fxt.Test_parse_tmpl_str_test("{{tmpl_1|a|1=b}}"		, "{{test}}"		, "b");	// "a" has implicit key of "1"; overwritten by "1=b"; verified against MW
+		fxt.Test_parse_tmpl_str_test("{{tmpl_1|1=a|b}}"		, "{{test}}"		, "b");	// "b" has implicit key of "1"; overwritten by "1=b"; verified against MW
+	}
 }
 /*
 NOTE_1: function should expand "*a" to "\n*a" even if "*a" is bos

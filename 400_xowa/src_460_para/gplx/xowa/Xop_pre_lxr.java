@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.core.btries.*;
+import gplx.core.btries.*; import gplx.xowa.parsers.lists.*;
 class Xop_pre_lxr implements Xop_lxr {
 	public byte Lxr_tid() {return Xop_lxr_.Tid_pre;}
 	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Hook_space, this);}	// NOTE: do not treat \n\t as shorthand pre; EX:pl.w:Main_Page; DATE:2014-05-06

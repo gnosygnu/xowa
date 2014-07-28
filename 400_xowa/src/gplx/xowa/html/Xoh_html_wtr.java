@@ -17,21 +17,25 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
 import gplx.core.btries.*; import gplx.html.*; import gplx.xowa.wikis.*; import gplx.xowa.net.*;
-import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*;
+import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.lists.*;
 import gplx.xowa.xtns.*; import gplx.xowa.xtns.dynamicPageList.*; import gplx.xowa.xtns.math.*; import gplx.xowa.langs.vnts.*; import gplx.xowa.xtns.cite.*;
 public class Xoh_html_wtr {
 	private Xow_wiki wiki; private Xoa_app app; private Xoa_page page; private Xop_xatr_whitelist_mgr whitelist_mgr;
 	public Xoh_html_wtr(Xow_wiki wiki, Xow_html_mgr html_mgr) {
 		this.wiki = wiki; this.app = wiki.App(); this.whitelist_mgr = app.Html_mgr().Whitelist_mgr();
+		this.html_mgr = html_mgr;
 		lnki_wtr = new Xoh_lnki_wtr(this, wiki, html_mgr, cfg);
 		ref_wtr = new Ref_html_wtr(wiki);
+		lnke_wtr = new Xoh_lnke_wtr(wiki);
 	}
 	public void Init_by_wiki(Xow_wiki wiki) {
 		cfg.Toc_show_(true).Lnki_title_(true).Lnki_visited_(true).Lnki_id_(true);	// NOTE: set during Init_by_wiki, b/c all tests assume these are false
 		ref_wtr.Init_by_wiki(wiki);
 	}
+	public Xow_html_mgr Html_mgr() {return html_mgr;} private Xow_html_mgr html_mgr;
 	public Xoh_html_wtr_cfg Cfg() {return cfg;} private Xoh_html_wtr_cfg cfg = new Xoh_html_wtr_cfg();
 	public Xoh_lnki_wtr Lnki_wtr() {return lnki_wtr;} private Xoh_lnki_wtr lnki_wtr;
+	public Xoh_lnke_wtr Lnke_wtr() {return lnke_wtr;} private Xoh_lnke_wtr lnke_wtr;
 	public Ref_html_wtr Ref_wtr() {return ref_wtr;} private Ref_html_wtr ref_wtr; 
 	public void Init_by_page(Xop_ctx ctx, Xoa_page page) {this.page = page; lnki_wtr.Init_by_page(ctx, page);}
 	public void Write_all(Bry_bfr bfr, Xop_ctx ctx, byte[] src, Xop_root_tkn root) {Write_all(bfr, ctx, Xoh_html_wtr_ctx.Basic, src, root);}
@@ -68,7 +72,7 @@ public class Xoh_html_wtr {
 			case Xop_tkn_itm_.Tid_hr:				Hr(ctx, hctx, bfr, src, (Xop_hr_tkn)tkn); break;
 			case Xop_tkn_itm_.Tid_hdr:				Hdr(ctx, hctx, bfr, src, (Xop_hdr_tkn)tkn); break;
 			case Xop_tkn_itm_.Tid_apos:				Apos(ctx, hctx, bfr, src, (Xop_apos_tkn)tkn); break;
-			case Xop_tkn_itm_.Tid_lnke:				Lnke(ctx, hctx, bfr, src, (Xop_lnke_tkn)tkn); break;
+			case Xop_tkn_itm_.Tid_lnke:				lnke_wtr.Write_all(bfr, this, hctx, ctx, src, (Xop_lnke_tkn)tkn); break;
 			case Xop_tkn_itm_.Tid_lnki:				lnki_wtr.Write(bfr, hctx, src, (Xop_lnki_tkn)tkn); break;
 			case Xop_tkn_itm_.Tid_list:				List(ctx, hctx, bfr, src, (Xop_list_tkn)tkn); break;
 			case Xop_tkn_itm_.Tid_xnde:				Xnde(ctx, hctx, bfr, src, (Xop_xnde_tkn)tkn); break;
@@ -134,64 +138,20 @@ public class Xoh_html_wtr {
 		if (literal_apos > 0)
 			bfr.Add_byte_repeat(Byte_ascii.Apos, literal_apos);
 		switch (apos.Apos_cmd()) {
-			case Xop_apos_tkn_.Cmd_b_bgn:			bfr.Add(Xoh_consts.B_bgn); break;
-			case Xop_apos_tkn_.Cmd_b_end:			bfr.Add(Xoh_consts.B_end); break;
-			case Xop_apos_tkn_.Cmd_i_bgn:			bfr.Add(Xoh_consts.I_bgn); break;		
-			case Xop_apos_tkn_.Cmd_i_end:			bfr.Add(Xoh_consts.I_end); break;
-			case Xop_apos_tkn_.Cmd_bi_bgn:			bfr.Add(Xoh_consts.B_bgn).Add(Xoh_consts.I_bgn); break;		
-			case Xop_apos_tkn_.Cmd_ib_end:			bfr.Add(Xoh_consts.I_end).Add(Xoh_consts.B_end); break;
-			case Xop_apos_tkn_.Cmd_ib_bgn:			bfr.Add(Xoh_consts.I_bgn).Add(Xoh_consts.B_bgn); break;		
-			case Xop_apos_tkn_.Cmd_bi_end:			bfr.Add(Xoh_consts.B_end).Add(Xoh_consts.I_end);; break;
-			case Xop_apos_tkn_.Cmd_bi_end__b_bgn:	bfr.Add(Xoh_consts.B_end).Add(Xoh_consts.I_end).Add(Xoh_consts.B_bgn); break;
-			case Xop_apos_tkn_.Cmd_ib_end__i_bgn:	bfr.Add(Xoh_consts.I_end).Add(Xoh_consts.B_end).Add(Xoh_consts.I_bgn); break;
-			case Xop_apos_tkn_.Cmd_b_end__i_bgn:	bfr.Add(Xoh_consts.B_end).Add(Xoh_consts.I_bgn); break;		
-			case Xop_apos_tkn_.Cmd_i_end__b_bgn:	bfr.Add(Xoh_consts.I_end).Add(Xoh_consts.B_bgn); break;
+			case Xop_apos_tkn_.Cmd_b_bgn:			bfr.Add(Html_tag_.B_lhs); break;
+			case Xop_apos_tkn_.Cmd_b_end:			bfr.Add(Html_tag_.B_rhs); break;
+			case Xop_apos_tkn_.Cmd_i_bgn:			bfr.Add(Html_tag_.I_lhs); break;		
+			case Xop_apos_tkn_.Cmd_i_end:			bfr.Add(Html_tag_.I_rhs); break;
+			case Xop_apos_tkn_.Cmd_bi_bgn:			bfr.Add(Html_tag_.B_lhs).Add(Html_tag_.I_lhs); break;		
+			case Xop_apos_tkn_.Cmd_ib_end:			bfr.Add(Html_tag_.I_rhs).Add(Html_tag_.B_rhs); break;
+			case Xop_apos_tkn_.Cmd_ib_bgn:			bfr.Add(Html_tag_.I_lhs).Add(Html_tag_.B_lhs); break;		
+			case Xop_apos_tkn_.Cmd_bi_end:			bfr.Add(Html_tag_.B_rhs).Add(Html_tag_.I_rhs);; break;
+			case Xop_apos_tkn_.Cmd_bi_end__b_bgn:	bfr.Add(Html_tag_.B_rhs).Add(Html_tag_.I_rhs).Add(Html_tag_.B_lhs); break;
+			case Xop_apos_tkn_.Cmd_ib_end__i_bgn:	bfr.Add(Html_tag_.I_rhs).Add(Html_tag_.B_rhs).Add(Html_tag_.I_lhs); break;
+			case Xop_apos_tkn_.Cmd_b_end__i_bgn:	bfr.Add(Html_tag_.B_rhs).Add(Html_tag_.I_lhs); break;		
+			case Xop_apos_tkn_.Cmd_i_end__b_bgn:	bfr.Add(Html_tag_.I_rhs).Add(Html_tag_.B_lhs); break;
 			case Xop_apos_tkn_.Cmd_nil:				break;
 			default: throw Err_.unhandled(apos.Apos_cmd());
-		}
-	}
-	private void Lnke(Xop_ctx ctx, Xoh_html_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Xop_lnke_tkn lnke) {
-		int lnke_bgn = lnke.Lnke_bgn(), lnke_end = lnke.Lnke_end();
-		byte[] lnke_xwiki_wiki = lnke.Lnke_xwiki_wiki();
-		boolean proto_is_xowa = lnke.Proto_tid() == Xoo_protocol_itm.Tid_xowa;
-		if (!hctx.Mode_is_alt()) {
-			if (lnke_xwiki_wiki == null) {
-				if (lnke.Lnke_relative())		// relative; EX: //a.org
-					bfr.Add(Xoh_consts.A_bgn).Add(app.Url_parser().Url_parser().Relative_url_protocol_bry()).Add_mid(src, lnke_bgn, lnke_end).Add(Xoh_consts.A_bgn_lnke_0);
-				else {							// xowa or regular; EX: http://a.org
-					if (proto_is_xowa) {
-						bfr.Add(Xoh_consts.A_bgn).Add(Xop_lnke_wkr.Bry_xowa_protocol);
-						ctx.App().Encoder_mgr().Gfs().Encode(bfr, src, lnke_bgn, lnke_end);
-						bfr.Add(Xoh_consts.A_bgn_lnke_0_xowa);	
-					}
-					else						// regular; add href
-						bfr.Add(Xoh_consts.A_bgn).Add_mid(src, lnke_bgn, lnke_end).Add(Xoh_consts.A_bgn_lnke_0);
-				}
-			}
-			else {	// xwiki
-				Url_encoder href_encoder = ctx.App().Encoder_mgr().Href_quotes();
-				bfr.Add(Xoh_consts.A_bgn).Add(Xoh_href_parser.Href_site_bry).Add(lnke_xwiki_wiki).Add(Xoh_href_parser.Href_wiki_bry)
-					.Add(href_encoder.Encode(lnke.Lnke_xwiki_page()));	// NOTE: must encode page; EX:%22%3D -> '">' which will end attribute; PAGE:en.w:List_of_Category_A_listed_buildings_in_West_Lothian DATE:2014-07-15
-				if (lnke.Lnke_xwiki_qargs() != null)
-					Xoa_url_arg_hash.Concat_bfr(bfr, href_encoder, lnke.Lnke_xwiki_qargs()); // NOTE: must encode args
-				bfr.Add(Xoh_consts.__end_quote);
-			}
-		}
-		int subs_len = lnke.Subs_len();
-		if (subs_len == 0) {																			// no text; auto-number; EX: "[1]"
-			if (lnke.Lnke_typ() == Xop_lnke_tkn.Lnke_typ_text)
-				bfr.Add_mid(src, lnke.Lnke_bgn(), lnke.Lnke_end());
-			else
-				bfr.Add_byte(Byte_ascii.Brack_bgn).Add_int_variable(page.Html_data().Lnke_autonumber_next()).Add_byte(Byte_ascii.Brack_end);
-		}
-		else {																							// text available
-			for (int i = 0; i < subs_len; i++)
-				Write_tkn(bfr, ctx, hctx, src, lnke, i, lnke.Subs_get(i));
-		}
-		if (!hctx.Mode_is_alt()) {
-			if (proto_is_xowa)	// add <img />
-				bfr.Add(Xoh_consts.Img_bgn).Add(wiki.Html_mgr().Img_xowa_protocol()).Add(Xoh_consts.__inline_quote);
-			bfr.Add(Xoh_consts.A_end);
 		}
 	}
 	public static byte[] Ttl_to_title(byte[] ttl) {return ttl;}	// FUTURE: swap html chars?
@@ -373,16 +333,8 @@ public class Xoh_html_wtr {
 			case Xop_xnde_tag_.Tid_table: case Xop_xnde_tag_.Tid_tr: case Xop_xnde_tag_.Tid_td: case Xop_xnde_tag_.Tid_th: case Xop_xnde_tag_.Tid_caption: case Xop_xnde_tag_.Tid_tbody:
 			case Xop_xnde_tag_.Tid_ruby: case Xop_xnde_tag_.Tid_rt: case Xop_xnde_tag_.Tid_rb: case Xop_xnde_tag_.Tid_rp: 
 			case Xop_xnde_tag_.Tid_time: case Xop_xnde_tag_.Tid_bdi: case Xop_xnde_tag_.Tid_data: case Xop_xnde_tag_.Tid_mark: case Xop_xnde_tag_.Tid_wbr: case Xop_xnde_tag_.Tid_bdo:	// HTML 5: write literally and let browser handle them
-			{
-//					byte[] name = tag.Name_bry();
-//					bfr.Add_byte(Tag__bgn).Add(name);
-//					if (xnde.Atrs_bgn() > Xop_tblw_wkr.Atrs_ignore_check) Xnde_atrs(tag_id, hctx, src, xnde.Atrs_bgn(), xnde.Atrs_end(), xnde.Atrs_ary(), bfr);
-//					bfr.Add_byte(Tag__end);
-//					Xnde_subs(hctx, bfr, src, xnde, depth);					// NOTE: do not escape; <p>, <table> etc may have nested nodes
-//					bfr.Add(Tag__end_bgn).Add(name).Add_byte(Tag__end);		// NOTE: inline is never written as <b/>; will be written as <b></b>; SEE: NOTE_1
 				Write_xnde(bfr, ctx, hctx, xnde, tag, tag_id, src);
 				break;
-			}
 			case Xop_xnde_tag_.Tid_pre: {
 				if (xnde.Tag_open_end() == xnde.Tag_close_bgn()) return; // ignore empty tags, else blank pre line will be printed; DATE:2014-03-12
 				byte[] name = tag.Name_bry();

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.xtns.cite.*;
+import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.lists.*; import gplx.xowa.xtns.cite.*;
 public class Xop_tkn_mkr {
 	Xop_space_tkn space_tkn_immutable = new Xop_space_tkn(true, -1, -1);
 	public Xop_root_tkn Root(byte[] raw)													{return new Xop_root_tkn().Root_src_(raw);}
@@ -69,8 +69,8 @@ public class Xop_tkn_mkr {
 	public References_nde Xnde_references()													{return new References_nde();}
 	public gplx.xowa.xtns.math.Math_nde Xnde_math()											{return new gplx.xowa.xtns.math.Math_nde();}
 	public gplx.xowa.xtns.gallery.Gallery_xnde Xnde_gallery()								{return new gplx.xowa.xtns.gallery.Gallery_xnde();}
-	public gplx.xowa.xtns.imageMap.Xop_imageMap_xnde Xnde_imageMap()						{return new gplx.xowa.xtns.imageMap.Xop_imageMap_xnde();}
-	public gplx.xowa.xtns.hiero.Hiero_xnde Xnde_hiero()										{return new gplx.xowa.xtns.hiero.Hiero_xnde();}
+	public gplx.xowa.xtns.imaps.Imap_xnde Xnde_imageMap()						{return new gplx.xowa.xtns.imaps.Imap_xnde();}
+	public gplx.xowa.xtns.hieros.Hiero_xnde Xnde_hiero()										{return new gplx.xowa.xtns.hieros.Hiero_xnde();}
 	public gplx.xowa.xtns.proofreadPage.Pp_pages_nde Xnde_pages()							{return new gplx.xowa.xtns.proofreadPage.Pp_pages_nde();}
 	public gplx.xowa.xtns.proofreadPage.Pp_pagelist_nde Xnde_pagelist()						{return new gplx.xowa.xtns.proofreadPage.Pp_pagelist_nde();}
 	public gplx.xowa.xtns.proofreadPage.Pp_pagequality_nde Xnde_pagequality()				{return new gplx.xowa.xtns.proofreadPage.Pp_pagequality_nde();}

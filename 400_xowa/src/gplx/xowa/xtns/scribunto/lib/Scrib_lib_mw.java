@@ -99,7 +99,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 	public boolean GetExpandedArgument(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		String frame_id = args.Pull_str(0);
 		Xot_invk frame = Scrib_frame_.Get_frame(core, frame_id);
-		int frame_arg_adj = Scrib_frame_.Get_arg_adj(frame.Scrib_frame_tid());
+		int frame_arg_adj = Scrib_frame_.Get_arg_adj(frame.Frame_tid());
 		String idx_str = args.Pull_str(1);
 		int idx_int = Int_.parse_or_(idx_str, Int_.MinValue);	// NOTE: should not receive int value < -1; idx >= 0
 		Bry_bfr tmp_bfr = Bry_bfr.new_();	// NOTE: do not make modular level variable, else random failures; DATE:2013-10-14
@@ -151,7 +151,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 	public boolean GetAllExpandedArguments(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		String frame_id = args.Pull_str(0);
 		Xot_invk frame = Scrib_frame_.Get_frame(core, frame_id);
-		byte frame_tid = frame.Scrib_frame_tid();
+		byte frame_tid = frame.Frame_tid();
 		Xot_invk parent_frame = Scrib_frame_.Get_parent(core, frame_tid);
 		int frame_arg_adj = Scrib_frame_.Get_arg_adj(frame_tid);
 		int args_len = frame.Args_len() - frame_arg_adj;
@@ -203,12 +203,12 @@ public class Scrib_lib_mw implements Scrib_lib {
 		return rslt.Init_obj(frame != null);
 	}
 	public boolean ParentFrameExists(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		return rslt.Init_obj(!core.Frame_parent().Root_frame());
+		return rslt.Init_obj(!core.Frame_parent().Frame_is_root());
 	}
 	public boolean Preprocess(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		String frame_id = args.Pull_str(0);
 		Xot_invk frame = Scrib_frame_.Get_frame(core, frame_id);
-		byte frame_tid = frame.Scrib_frame_tid();
+		byte frame_tid = frame.Frame_tid();
 		Xot_invk parent_frame = Scrib_frame_.Get_parent(core, frame_tid);
 		String text_str = args.Pull_str(1);
 		byte[] text_bry = Bry_.new_utf8_(text_str);

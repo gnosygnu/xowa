@@ -20,15 +20,23 @@ import org.junit.*; import gplx.xowa.xtns.wdatas.imports.*;
 public class Wdata_wiki_mgr_tst {
 	@Test  public void Basic() {
 		Wdata_wiki_mgr_fxt fxt = new Wdata_wiki_mgr_fxt().Init();
-		fxt.Init_links_add("enwiki", "q1", "q1_en");
-		fxt.Test_link("en", "q1", "q1_en");
-		fxt.Test_link("en", "q2", null);
+		fxt.Init_links_add("enwiki", "Q1", "Q1_en");
+		fxt.Test_link("Q1", "Q1_en");
+		fxt.Test_link("Q2", null);
 	}
 	@Test  public void Case_sensitive() {	// PURPOSE: wikidata lkp should be case_sensitive; a vs A DATE:2013-09-03
 		Wdata_wiki_mgr_fxt fxt = new Wdata_wiki_mgr_fxt().Init();
-		fxt.Init_links_add("enwiki", "q1", "q1_lc");
-		fxt.Test_link("en", "q1", "q1_lc");
-		fxt.Test_link("en", "Q1", null);	// Q1 should not match q1
+		fxt.Init_links_add("enwiki", "Page", "Page_data");
+		fxt.Test_link("Page", "Page_data");
+		fxt.Test_link("PAGE", null);
+	}
+	@Test  public void Non_canonical_ns() {	// PURPOSE: handle wikidata entries in non-canonical ns; EX:ukwikisource and Author; PAGE:uk.s:Автор:Богдан_Гаврилишин DATE:2014-07-23
+		Wdata_wiki_mgr_fxt fxt = new Wdata_wiki_mgr_fxt().Init();
+		Xow_wiki wiki = fxt.Wiki();
+		wiki.Ns_mgr().Add_new(124, "Test_ns");
+		fxt.Init_links_add("enwiki", "000", "Test_ns:Test_page", "pass");	// NOTE: wdata will save to "000" ns, b/c "124" ns is not canonical
+		Xoa_ttl ttl = Xoa_ttl.parse_(fxt.Wiki(), 124, Bry_.new_ascii_("Test_page"));
+		fxt.Test_link(ttl, "pass");
 	}
 	@Test   public void Write_json_as_html() {
 		Wdata_wiki_mgr_fxt fxt = new Wdata_wiki_mgr_fxt().Init();

@@ -46,7 +46,7 @@ public class Xot_invk_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 	}
 	public boolean Args_add(Xop_ctx ctx, byte[] src, Xop_tkn_itm tkn, Arg_nde_tkn nde, int nde_idx) {
 		Xot_invk_tkn invk = (Xot_invk_tkn)tkn;
-		if (nde_idx == 0)
+		if (nde_idx == 0)	// 1st arg; name_tkn
 			AddNameArg(ctx, src, invk, nde);
 		else
 			invk.Args_add(ctx, nde);

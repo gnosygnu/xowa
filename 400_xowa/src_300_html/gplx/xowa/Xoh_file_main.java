@@ -18,17 +18,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.xowa.files.*;
 class Xoh_file_main_alts implements Bry_fmtr_arg {
-	public Xoh_file_main_alts Ini_(Xoh_file_page opt) {
-		this.opt = opt;
-		return this;
-	}	private Xoh_file_page opt; Xof_xfer_itm xfer_itm = new Xof_xfer_itm();
+	private Xof_xfer_itm orig_itm; private Xoh_file_page opt; private Xof_xfer_itm xfer_itm = new Xof_xfer_itm();
+	public Xoh_file_main_alts Ctor(Xof_xfer_itm orig_itm, Xoh_file_page opt) {
+		this.orig_itm = orig_itm; this.opt = opt; return this;
+	}
 	public void XferAry(Bry_bfr bfr, int idx) {
 		Int_2_ref[] size_alts = opt.Size_alts();
 		int len = size_alts.length;
 		for (int i = 0; i < len; i++) {
 			Int_2_ref size = size_alts[i];
 			if (xfer_itm.Html_w() < size.Val_0()) continue;
-			xfer_itm.Atrs_by_lnki(Xop_lnki_type.Id_none, size.Val_0(), size.Val_1(), Xop_lnki_tkn.Upright_null, Xof_doc_thumb.Null, Xof_doc_page.Null);
+			xfer_itm.Init_by_lnki(orig_itm.Lnki_ttl(), orig_itm.Lnki_redirect(), Xop_lnki_type.Id_none, size.Val_0(), size.Val_1(), Xop_lnki_tkn.Upright_null, Xof_doc_thumb.Null, Xof_doc_page.Null);
 			xfer_itm.Atrs_calc_for_html();
 			opt.Html_alts().Bld_bfr_many(bfr, xfer_itm.Html_w(), xfer_itm.Html_h(), xfer_itm.Html_view_src(), i == len - 1 ? opt.Html_alt_dlm_last() : opt.Html_alt_dlm_default());
 		}

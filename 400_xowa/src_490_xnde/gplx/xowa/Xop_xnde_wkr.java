@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.core.btries.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.wikis.*; import gplx.xowa.xtns.*; import gplx.html.*;
+import gplx.core.btries.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.wikis.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.strings.*; import gplx.html.*;
 import gplx.xowa.parsers.logs.*;
 public class Xop_xnde_wkr implements Xop_ctx_wkr {
 	public void Ctor_ctx(Xop_ctx ctx) {}
@@ -431,18 +431,6 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			Tblw_end(ctx, tkn_mkr, root, src, src_len, bgn_pos, cur_pos, end_tag_id);
 			return cur_pos;
 		}
-		byte wlst_tid = Xop_list_tkn_.List_itmTyp_null;
-		switch (end_tag_id) {
-			case Xop_xnde_tag_.Tid_ul: wlst_tid = Xop_list_tkn_.List_itmTyp_ul; break;
-			case Xop_xnde_tag_.Tid_ol: wlst_tid = Xop_list_tkn_.List_itmTyp_ol; break;
-			case Xop_xnde_tag_.Tid_dd: wlst_tid = Xop_list_tkn_.List_itmTyp_dd; break;
-			case Xop_xnde_tag_.Tid_dt: wlst_tid = Xop_list_tkn_.List_itmTyp_dt; break;
-		}
-		if (	wlst_tid != Xop_list_tkn_.List_itmTyp_null		// end tag is list; EX: </ul>
-			&&	ctx.List().List_dirty()							// wlst is in effect; EX: *a
-			) {
-			ctx.List().AutoClose(ctx, tkn_mkr, root, src, src_len, bgn_pos, cur_pos, tkn_mkr.List_end(cur_pos, wlst_tid));	// xnde can close wlst; PAGE:en.w:Bristol_Bullfinch DATE:2014-06-24
-		}
 		if (end_tag.Empty_ignored() && ctx.Empty_ignored()		// emulate TidyHtml logic for pruning empty tags; EX: "<li> </li>" -> "")
 			&& bgn_nde != null) {								// bgn_nde will be null if only end_nde; EX:WP:Sukhoi Su-47; "* </li>" 
 			ctx.Empty_ignore(root, bgn_nde.Tkn_sub_idx());
@@ -487,14 +475,17 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		}
 		if (end_tag.Restricted())	// restricted tags (like <script>) are not placed on stack; for now, just write it out
 			ctx.Subs_add(root, tkn_mkr.Bry(bgn_pos, cur_pos, Bry_.Add(gplx.html.Html_entity_.Lt_bry, Bry_.Mid(src, bgn_pos + 1, cur_pos)))); // +1 to skip <
-		else {
+		else {                
 			if (pre2_pending) {
-				// ctx.Subs_add(root, tkn_mkr.Bry(bgn_pos, cur_pos, src));
 				pre2_pending = false;
 				return ctx.Lxr_make_txt_(cur_pos);
 			}
-			else
-				ctx.Subs_add(root, tkn_mkr.Ignore(bgn_pos, cur_pos, Xop_ignore_tkn.Ignore_tid_xnde_dangling));
+			else {
+				if (end_tag.Xtn())	// if xtn end tag, ignore it; tidy / browser doesn't know about xtn_tags like "</poem>" so these need to be hidden, else they will show; DATE:2014-07-22
+					ctx.Subs_add(root, tkn_mkr.Ignore(bgn_pos, cur_pos, Xop_ignore_tkn.Ignore_tid_xnde_dangling));
+				else				// regular tag; show it; depend on tidy to clean up; DATE:2014-07-22
+					ctx.Subs_add(root, tkn_mkr.Bry(src, bgn_pos, cur_pos));
+			}
 		}
 		ctx.Para().Process_block__xnde(end_tag, end_tag.Block_close());
 
@@ -549,10 +540,10 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		return found ? rv : Bry_.NotFound;
 	}
 	private int Find_xtn_end_lhs(Xop_ctx ctx, Xop_xnde_tag tag, byte[] src, int src_len, int open_bgn, int open_end, byte[] close_bry) {
-		int tag_bgn = open_bgn - Pf_tag.Xtag_len;
+		int tag_bgn = open_bgn - Pfunc_tag.Xtag_len;
 		if (tag_bgn > -1 
-			&& Bry_.Eq(Pf_tag.Xtag_bgn_lhs, src, tag_bgn, tag_bgn + Pf_tag.Xtag_bgn_lhs.length))	// xtn created by tag
-			return Find_xtn_end_tag(ctx, src, src_len, open_end, close_bry, tag_bgn + Pf_tag.Xtag_bgn);
+			&& Bry_.Eq(Pfunc_tag.Xtag_bgn_lhs, src, tag_bgn, tag_bgn + Pfunc_tag.Xtag_bgn_lhs.length))	// xtn created by tag
+			return Find_xtn_end_tag(ctx, src, src_len, open_end, close_bry, tag_bgn + Pfunc_tag.Xtag_bgn);
 		else {	// search rest of String for case-insensitive name; NOTE: used to do CS first, then fall-back on CI; DATE:2013-12-02
 			xtn_end_tag_trie.Clear();
 			xtn_end_tag_trie.Add_obj(close_bry, close_bry);
@@ -569,9 +560,9 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		int tag_id = Bry_.Xto_int_or(src, tag_bgn, tag_bgn + 10, -1);
 		if (tag_id == -1) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not extract int: page=~{0}", ctx.Cur_page().Url().Xto_full_str_safe()); return Bry_finder.Not_found;}
 		Bry_bfr tmp = ctx.Wiki().Utl_bry_bfr_mkr().Get_b128();
-		tmp.Add(Pf_tag.Xtag_end_lhs).Add_int_pad_bgn(Byte_ascii.Num_0, 10, tag_id).Add(Pf_tag.Xtag_rhs);
+		tmp.Add(Pfunc_tag.Xtag_end_lhs).Add_int_pad_bgn(Byte_ascii.Num_0, 10, tag_id).Add(Pfunc_tag.Xtag_rhs);
 		byte[] tag_end = tmp.Mkr_rls().XtoAryAndClear();
-		int rv = Bry_finder.Find_fwd(src, tag_end, open_end + Pf_tag.Xtag_rhs.length);
+		int rv = Bry_finder.Find_fwd(src, tag_end, open_end + Pfunc_tag.Xtag_rhs.length);
 		if (rv == Bry_finder.Not_found) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not find end: page=~{0}", ctx.Cur_page().Url().Xto_full_str_safe()); return Bry_finder.Not_found;}
 		rv = Bry_finder.Find_bwd(src, Byte_ascii.Lt, rv - 1);
 		if (rv == Bry_finder.Not_found) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not find <: page=~{0}", ctx.Cur_page().Url().Xto_full_str_safe()); return Bry_finder.Not_found;}

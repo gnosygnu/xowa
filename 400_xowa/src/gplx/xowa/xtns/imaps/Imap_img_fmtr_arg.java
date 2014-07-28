@@ -1,0 +1,49 @@
+/*
+XOWA: the XOWA Offline Wiki Application
+Copyright (C) 2012 gnosygnu@gmail.com
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+class Imap_img_fmtr_arg implements Bry_fmtr_arg {
+	private Imap_map map;
+	private int img_elem_id, img_w, img_h;
+	private byte[] img_alt, img_src, img_cls, img_href;
+	private Int_2_ref margin_calc = new Int_2_ref();
+	public void Init(Imap_map map, int img_elem_id, byte[] img_alt, byte[] img_src, int img_w, int img_h, byte[] img_cls, byte[] img_href) {
+		this.map = map;
+		this.img_elem_id = img_elem_id; this.img_w = img_w; this.img_h = img_h;
+		this.img_alt = img_alt;
+		this.img_src = img_src;
+		this.img_cls = img_cls;
+		this.img_href = img_href;
+	}
+	public void XferAry(Bry_bfr bfr, int idx) {
+		Bry_fmtr fmtr = Imap_html_fmtrs.Img_anchor_none;
+		byte[] anchor_href = Bry_.Empty, anchor_text = Bry_.Empty;
+		Imap_itm_dflt itm_dflt = map.Dflt();
+		if (itm_dflt != null) {
+			fmtr = itm_dflt.Link_tid() == Xop_tkn_itm_.Tid_lnki ? Imap_html_fmtrs.Img_anchor_lnki : Imap_html_fmtrs.Img_anchor_lnke;
+			anchor_href = itm_dflt.Link_href();
+			anchor_text = itm_dflt.Link_text();
+		}
+		fmtr.Bld_bfr_many(bfr, map.Id(), img_elem_id, img_alt, img_src, img_w, img_h, img_cls, anchor_href, anchor_text);
+		Imap_itm_desc itm_desc = map.Desc();
+		if (itm_desc != null) {
+			Imap_desc_tid.calc_desc_margins(margin_calc, itm_desc.Desc_tid(), img_w, img_h);
+			Imap_xtn_mgr xtn_mgr = map.Xtn_mgr();
+			Imap_html_fmtrs.Desc_main.Bld_bfr_many(bfr, margin_calc.Val_0(), margin_calc.Val_1(), img_href, xtn_mgr.Desc_msg(), xtn_mgr.Desc_icon_url());
+		}
+	}
+}

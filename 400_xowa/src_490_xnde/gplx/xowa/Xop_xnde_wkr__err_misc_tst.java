@@ -40,7 +40,7 @@ public class Xop_xnde_wkr__err_misc_tst {
 			));
 		fxt.Init_para_n_();
 	}
-	@Test  public void Div_should_not_pop_past_td() {	// PURPOSE: extra </div> should not close <div> that is outside of <td>; PAGE:en.w:Rome and Ankara
+	@Test  public void Div_should_not_pop_past_td() {	// PURPOSE: extra </div> should not close <div> that is outside of <td>; PAGE:en.w:Rome en.w:Ankara
 		fxt.Init_para_y_();
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			(	"<table>"
@@ -94,6 +94,7 @@ public class Xop_xnde_wkr__err_misc_tst {
 			,	"<p>b"
 			,	"</p>"
 			,	"</div>"
+			,	"</div>"				// TIDY.dangling: tidy will correct dangling node; DATE:2014-07-22
 			,	"          </td>"
 			,	"          <td>"
 			,	"<div>"

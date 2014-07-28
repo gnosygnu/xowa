@@ -20,7 +20,7 @@ import org.junit.*;
 public class Xop_tblw_wkr__dangling_tst {
 	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();} private Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
-	@Test  public void Dangling_tb_in_xnde() {// PURPOSE: dangling tblw incorrectly auto-closed by </xnde>; NOTE: this test is not correct; needs HTML tidy to close </div> earlier; EX:w:Atlanta_Olympics; DATE:2014-03-18
+	@Test  public void Dangling_tb_in_xnde() {// PURPOSE: dangling tblw incorrectly auto-closed by </xnde>; PAGE:en.w:Atlanta_Olympics; DATE:2014-03-18
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 		(	"<div align='center'>"
 		,	"{|"
@@ -44,6 +44,7 @@ public class Xop_tblw_wkr__dangling_tst {
 		,	"          </td>"
 		,	"        </tr>"
 		,	"      </table>"
+		,	"</div>"	// TIDY.dangling: tidy will correct dangling node; DATE:2014-07-22
 		,	""
 		,	"<p>b"
 		,	"    </td>"

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.files.*; import gplx.xowa.xtns.pfuncs.ttls.*;
+import gplx.xowa.files.*; import gplx.xowa.html.*; import gplx.xowa.xtns.pfuncs.ttls.*;
 public class Xop_lnki_tkn extends Xop_tkn_itm_base {
 	@Override public byte	Tkn_tid() {return tkn_tid;} private byte tkn_tid = Xop_tkn_itm_.Tid_lnki;
 	public void				Tkn_tid_to_txt() {tkn_tid = Xop_tkn_itm_.Tid_txt;}
@@ -46,6 +46,7 @@ public class Xop_lnki_tkn extends Xop_tkn_itm_base {
 	public int				Html_id() {return html_id;} public Xop_lnki_tkn Html_id_(int v) {html_id = v; return this;} private int html_id;
 	public int				Pipe_count() {return pipe_count;} private int pipe_count;
 	public boolean				Pipe_count_is_zero() {return pipe_count++ == 0;} 
+	public Xoh_lnki_file_wkr Lnki_file_wkr() {return lnki_file_wkr;} public void Lnki_file_wkr_(Xoh_lnki_file_wkr v) {lnki_file_wkr = v;} private Xoh_lnki_file_wkr lnki_file_wkr;
 	public byte[] Ttl_ary() {
 		return ttl.ForceLiteralLink() || nsId != Xow_ns_.Id_main		// if [[:]] or non-main (Category, Template)
 			? ttl.Full_txt()											// use full_txt (no initial colon; capitalize first)

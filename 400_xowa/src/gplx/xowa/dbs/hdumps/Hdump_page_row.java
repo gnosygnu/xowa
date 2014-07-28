@@ -18,13 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.dbs.hdumps; import gplx.*; import gplx.xowa.*; import gplx.xowa.dbs.*;
 import gplx.ios.*;
 public class Hdump_page_row {
-	public int Id() {return id;} private int id;
-	public byte[] Html() {return html;} private byte[] html;
+	public int Page_id() {return page_id;} private int page_id;
+	public byte[] Page_html() {return page_html;} private byte[] page_html;
 	public int Frags_len() {return frags_len;} private int frags_len;
 	public int Make_id() {return make_id;} private int make_id;
-	public Hdump_page_row Ctor(int id, byte[] html, int frags_len, int make_id) {
-		this.id				= id;
-		this.html			= html;
+	public Hdump_page_row Ctor(int page_id, byte[] page_html, int frags_len, int make_id) {
+		this.page_id		= page_id;
+		this.page_html		= page_html;
 		this.frags_len		= frags_len;
 		this.make_id		= make_id;
 		return this;

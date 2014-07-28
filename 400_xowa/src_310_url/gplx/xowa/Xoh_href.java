@@ -22,6 +22,11 @@ public class Xoh_href {
 	public byte[] Page() {return page;} public Xoh_href Page_(byte[] v) {page = v; return this;} private byte[] page;
 	public byte[] Anchor() {return anchor;} public Xoh_href Anchor_(byte[] v) {anchor = v; return this;} private byte[] anchor;
 	public byte Tid() {return tid;} public Xoh_href Tid_(byte v) {tid = v; return this;} private byte tid;
+	public byte[] Page_and_anchor() {
+		if		(Bry_.Len_eq_0(anchor)) return page;
+		else if (Bry_.Len_eq_0(page))	return anchor;
+		else							return Bry_.Add_w_dlm(Byte_ascii.Hash, page, anchor);
+	}
 	public byte Protocol_tid() {return protocol_tid;} private byte protocol_tid;
 	public void Init(byte[] raw, byte protocol_tid) {
 		this.raw = raw; this.protocol_tid = protocol_tid;

@@ -29,7 +29,7 @@ public class Fs_root_fsdb_mgr implements Xof_fsdb_mgr, GfoInvkAble {
 	public Gfo_usr_dlg Usr_dlg() {return usr_dlg;} private Gfo_usr_dlg usr_dlg;
 	public Cache_mgr Cache_mgr() {throw Err_.not_implemented_();}
 	public void Db_bin_max_(long v) {throw Err_.not_implemented_();}
-	public boolean Patch_upright() {return true;}
+	public int Patch_upright() {return Xof_patch_upright_tid_.Tid_all;}
 	public Fsdb_mnt_mgr Mnt_mgr() {throw Err_.not_implemented_();}
 	public void Img_insert(Fsdb_xtn_img_itm rv, byte[] dir, byte[] fil, int ext_id, int img_w, int img_h, DateAdp modified, String hash, long bin_len, gplx.ios.Io_stream_rdr bin_rdr) {throw Err_.not_implemented_();}
 	public void Thm_insert(Fsdb_xtn_thm_itm rv, byte[] dir, byte[] fil, int ext_id, int thm_w, int thm_h, double thumbtime, int page, DateAdp modified, String hash, long bin_len, gplx.ios.Io_stream_rdr bin_rdr) {throw Err_.not_implemented_();}

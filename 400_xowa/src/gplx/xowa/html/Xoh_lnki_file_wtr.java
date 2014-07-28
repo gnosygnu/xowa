@@ -17,11 +17,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.files.*;
-import gplx.xowa.parsers.lnkis.*;	
+import gplx.xowa.parsers.lnkis.*;
 public class Xoh_lnki_file_wtr {
+	private Xoh_lnki_file_wkr_basic lnki_file_wkr_basic = new Xoh_lnki_file_wkr_basic();
 	public Xoh_lnki_file_wtr(Xow_wiki wiki, Xow_html_mgr html_mgr, Xoh_html_wtr html_wtr) {
 		this.html_mgr = html_mgr;
 		this.wiki = wiki; this.html_wtr = html_wtr; bfr_mkr = wiki.Utl_bry_bfr_mkr();
+		lnki_file_wkr_basic.Init(html_mgr.Lnki_full_image());
 	}	private Xow_html_mgr html_mgr; private boolean lnki_title_enabled;
 	private Xow_wiki wiki; private Xoh_html_wtr html_wtr;
 	private Xoh_lnki_txt_fmtr media_alt_fmtr = new Xoh_lnki_txt_fmtr(), caption_fmtr = new Xoh_lnki_txt_fmtr(); private Bry_bfr_mkr bfr_mkr;
@@ -42,7 +44,7 @@ public class Xoh_lnki_file_wtr {
 	public Xof_xfer_itm Lnki_eval(Xop_ctx ctx, Xof_xfer_queue queue, byte[] lnki_ttl, byte lnki_type, int lnki_w, int lnki_h, double lnki_upright, double lnki_thumbtime, int lnki_page, boolean lnki_is_media_ns, Bool_obj_ref queue_add_ref) {
 		this.ctx = ctx;
 		queue_add_ref.Val_n_();
-		tmp_xfer_itm.Clear().Atrs_by_ttl(lnki_ttl, Bry_.Empty).Atrs_by_lnki(lnki_type, lnki_w, lnki_h, lnki_upright, lnki_thumbtime, lnki_page);
+		tmp_xfer_itm.Clear().Init_by_lnki(lnki_ttl, Bry_.Empty, lnki_type, lnki_w, lnki_h, lnki_upright, lnki_thumbtime, lnki_page);
 		boolean found = Find_file(ctx, tmp_xfer_itm);
 		boolean file_queue_add = File_queue_add(wiki, tmp_xfer_itm, lnki_is_media_ns, found);
 		Xof_xfer_itm rv = tmp_xfer_itm;
@@ -102,7 +104,7 @@ public class Xoh_lnki_file_wtr {
 		byte[] html_orig_src = xfer_itm.Html_orig_src();
 		byte[] html_view_src = xfer_itm.Html_view_src();
 		byte[] content = Bry_.Empty;
-		byte[] lnki_ttl = lnki.Ttl().Page_txt();
+		byte[] lnki_ttl = lnki.Ttl().Page_txt();				
 		Xof_ext lnki_ext = xfer_itm.Lnki_ext();
 		if (	html_mgr.Img_suppress_missing_src()			// option to suppress src when file is missing
 			&&	!xfer_itm.Html_pass()					// file is missing; wipe values and wait for "correct" info before regenerating; mostly to handle unknown redirects
@@ -152,9 +154,10 @@ public class Xoh_lnki_file_wtr {
 			byte[] anchor_title = lnki_title_enabled 
 				? Make_anchor_title(tmp_bfr, src, lnki, lnki_ttl, anchor_title_wkr)	// NOTE: Make_anchor_title should only be called if there is no caption, else refs may not show; DATE:2014-03-05
 				: Bry_.Empty;	
+			Xoh_lnki_file_wkr lnki_file_wkr = lnki.Lnki_file_wkr(); if (lnki_file_wkr == null) lnki_file_wkr = lnki_file_wkr_basic;
 			if (Xop_lnki_type.Id_is_thumbable(lnki.Lnki_type())) {	// is "thumb"
 				if (bfr.Len() > 0) bfr.Add_byte_nl();
-				content = Image_thumb(src, hctx, lnki, xfer_itm, elem_id, lnki_href, html_view_src, html_orig_src, lnki_alt_text, lnki_ttl, anchor_title);
+				content = Image_thumb(lnki_file_wkr, src, hctx, lnki, xfer_itm, elem_id, lnki_href, html_view_src, html_orig_src, lnki_alt_text, lnki_ttl, anchor_title);
 				html_mgr.Lnki_thumb_core().Bld_bfr_many(bfr, div_width, lnki_halign_bry, content, elem_id);
 			}
 			else {
@@ -164,7 +167,6 @@ public class Xoh_lnki_file_wtr {
 					Caption(src, lnki, Xoh_html_wtr_ctx.Alt, html_orig_src).XferAry(tmp_bfr, 0);
 					lnki_alt_text = tmp_bfr.XtoAryAndClear();
 				}
-//					if (lnki_img_type == Xop_lnki_type.Id_none) bfr.Add(Bry_div_float_none).Add_byte_nl();
 				switch (lnki.Align_h()) {
 					case Xop_lnki_align_h.Left:		bfr.Add(Bry_div_float_left).Add_byte_nl();	break;
 					case Xop_lnki_align_h.Right:	bfr.Add(Bry_div_float_right).Add_byte_nl();	break;
@@ -172,7 +174,7 @@ public class Xoh_lnki_file_wtr {
 				}
 				Arg_nde_tkn lnki_link_tkn = lnki.Link_tkn();
 				if (lnki_link_tkn == Arg_nde_tkn.Null)						
-					html_mgr.Lnki_full_image().Bld_bfr_many(bfr, elem_id, lnki_href, html_view_src, xfer_itm.Html_w(), xfer_itm.Html_h(), lnki_alt_text, lnki_ttl, Xow_html_mgr.Bry_anchor_class_image, Xow_html_mgr.Bry_anchor_rel_blank, anchor_title, Img_cls(lnki));
+					lnki_file_wkr.Write_img_full(bfr, xfer_itm, elem_id, lnki_href, html_view_src, xfer_itm.Html_w(), xfer_itm.Html_h(), lnki_alt_text, lnki_ttl, Xow_html_mgr.Bry_anchor_class_image, Xow_html_mgr.Bry_anchor_rel_blank, anchor_title, Img_cls(lnki));
 				else {
 					Arg_itm_tkn link_tkn = lnki_link_tkn.Val_tkn();
 					byte[] link_ref = link_tkn.Dat_to_bry(src);
@@ -180,7 +182,7 @@ public class Xoh_lnki_file_wtr {
 					link_ref = link_ref_new == null ? lnki_href: link_ref_new;	// if parse fails, then assign to lnki_href; EX:link={{{1}}}
 					link_ref = ctx.App().Encoder_mgr().Href_quotes().Encode(link_ref);	// must encode quotes; PAGE:en.w:List_of_cultural_heritage_sites_in_Punjab,_Pakistan; DATE:2014-07-16
 					lnki_ttl = Bry_.Coalesce(lnki_ttl, tmp_link_parser.Html_xowa_ttl());
-					html_mgr.Lnki_full_image().Bld_bfr_many(bfr, elem_id, link_ref, html_view_src, xfer_itm.Html_w(), xfer_itm.Html_h(), lnki_alt_text, lnki_ttl, tmp_link_parser.Html_anchor_cls(), tmp_link_parser.Html_anchor_rel(), anchor_title, Img_cls(lnki));
+					lnki_file_wkr.Write_img_full(bfr, xfer_itm, elem_id, link_ref, html_view_src, xfer_itm.Html_w(), xfer_itm.Html_h(), lnki_alt_text, lnki_ttl, tmp_link_parser.Html_anchor_cls(), tmp_link_parser.Html_anchor_rel(), anchor_title, Img_cls(lnki));
 				}
 				switch (lnki.Align_h()) {
 					case Xop_lnki_align_h.Left:
@@ -220,13 +222,13 @@ public class Xoh_lnki_file_wtr {
 			html_mgr.Lnki_thumb_file_video().Bld_bfr_many(tmp_bfr, Play_btn(elem_id, play_btn_width, play_btn_width, html_orig_src, lnki.Ttl().Page_txt()), Img_thumb(lnki, xfer_itm, elem_id, lnki_href, html_view_src, lnki_alt_text), Bry_.Empty, Bry_.Empty);
 		return tmp_bfr.Mkr_rls().XtoAryAndClear();
 	}
-	private byte[] Image_thumb(byte[] src, Xoh_html_wtr_ctx hctx, Xop_lnki_tkn lnki, Xof_xfer_itm xfer_itm, int elem_id, byte[] lnki_href, byte[] html_view_src, byte[] html_orig_src, byte[] lnki_alt_text, byte[] lnki_ttl, byte[] anchor_title) {
+	private byte[] Image_thumb(Xoh_lnki_file_wkr lnki_file_wkr, byte[] src, Xoh_html_wtr_ctx hctx, Xop_lnki_tkn lnki, Xof_xfer_itm xfer_itm, int elem_id, byte[] lnki_href, byte[] html_view_src, byte[] html_orig_src, byte[] lnki_alt_text, byte[] lnki_ttl, byte[] anchor_title) {
 		byte[] lnki_alt_html = Alt_html(src, lnki);
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();
 		byte[] lnki_class = xfer_itm.Html_pass()
 			? Xow_html_mgr.Bry_img_class_thumbimage
 			: Xow_html_mgr.Bry_img_class_none;
-		html_mgr.Lnki_full_image().Bld_bfr_many(tmp_bfr, elem_id, lnki_href, html_view_src, xfer_itm.Html_w(), xfer_itm.Html_h(), lnki_alt_text, lnki_ttl, Xow_html_mgr.Bry_anchor_class_image, Xow_html_mgr.Bry_anchor_rel_blank, anchor_title, lnki_class);
+		lnki_file_wkr.Write_img_full(tmp_bfr, xfer_itm, elem_id, lnki_href, html_view_src, xfer_itm.Html_w(), xfer_itm.Html_h(), lnki_alt_text, lnki_ttl, Xow_html_mgr.Bry_anchor_class_image, Xow_html_mgr.Bry_anchor_rel_blank, anchor_title, lnki_class);
 		byte[] thumb = tmp_bfr.XtoAryAndClear();
 		if (!wiki.Html_mgr().Imgs_mgr().Alt_in_caption().Val()) lnki_alt_html = Bry_.Empty;
 		html_mgr.Lnki_thumb_file_image().Bld_bfr_many(tmp_bfr, thumb, Caption_div(src, lnki, html_orig_src, lnki_href), lnki_alt_html);

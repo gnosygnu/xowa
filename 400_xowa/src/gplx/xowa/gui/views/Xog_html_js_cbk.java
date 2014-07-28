@@ -77,7 +77,8 @@ public class Xog_html_js_cbk implements GfoInvkAble {
 		try {
 			int	   popups_id	= Int_.Xby_double_(Double_.cast_(m.Args_getAt(0).Val()));
 			byte[] href_bry		= m.Args_getAt(1).Val_to_bry();
-			return html_itm.Owner_tab().Page().Wiki().Html_mgr().Module_mgr().Popup_mgr().Show_init(href_bry, popups_id);
+			byte[] tooltip_bry	= m.Args_getAt(2).Val_to_bry();
+			return html_itm.Owner_tab().Page().Wiki().Html_mgr().Module_mgr().Popup_mgr().Show_init(popups_id, href_bry, tooltip_bry);
 		} catch (Exception e) {Err_.Noop(e); return null;}
 	}
 	private String[] Get_title_meta(Xow_wiki wiki, byte[] ttl_bry) {

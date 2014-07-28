@@ -43,6 +43,7 @@ public class Int_ implements GfoInvkAble {
 			rv[i] = bgn + i;
 		return rv;
 	}
+	public static boolean Bounds_chk(int bgn, int end, int len) {return bgn > -1 && end < len;}
 	public static final int
 		  MinValue	= Integer.MIN_VALUE	
 		, MaxValue	= Integer.MAX_VALUE	

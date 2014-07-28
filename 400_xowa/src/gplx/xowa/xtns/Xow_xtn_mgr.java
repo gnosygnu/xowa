@@ -16,22 +16,22 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.xtns.gallery.*; import gplx.xowa.xtns.cite.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.poems.*; import gplx.xowa.xtns.hiero.*;
-import gplx.xowa.xtns.scores.*; import gplx.xowa.xtns.listings.*; import gplx.xowa.xtns.titleBlacklists.*; import gplx.xowa.xtns.pfuncs.scribunto.*;
+import gplx.xowa.xtns.cite.*;
 public class Xow_xtn_mgr implements GfoInvkAble {
 	private OrderedHash regy = OrderedHash_.new_bry_();
 	public int Count() {return regy.Count();}
 	public Cite_xtn_mgr Xtn_cite() {return xtn_cite;} private Cite_xtn_mgr xtn_cite;
 	public Xow_xtn_mgr Ctor_by_app(Xoa_app app) {	// NOTE: needed for options
 		Add(app, new Cite_xtn_mgr());
-		Add(app, new Scrib_xtn_mgr());
-		Add(app, new Gallery_xtn_mgr());
-		Add(app, new Poem_xtn_mgr());
-		Add(app, new Hiero_xtn_mgr());
-		Add(app, new Score_xtn_mgr());
-		Add(app, new Listing_xtn_mgr());
-		Add(app, new Blacklist_xtn_mgr());
-		Add(app, new Pfunc_xtn_mgr());
+		Add(app, new gplx.xowa.xtns.scribunto.Scrib_xtn_mgr());
+		Add(app, new gplx.xowa.xtns.gallery.Gallery_xtn_mgr());
+		Add(app, new gplx.xowa.xtns.imaps.Imap_xtn_mgr());
+		Add(app, new gplx.xowa.xtns.poems.Poem_xtn_mgr());
+		Add(app, new gplx.xowa.xtns.hieros.Hiero_xtn_mgr());
+		Add(app, new gplx.xowa.xtns.scores.Score_xtn_mgr());
+		Add(app, new gplx.xowa.xtns.listings.Listing_xtn_mgr());
+		Add(app, new gplx.xowa.xtns.titleBlacklists.Blacklist_xtn_mgr());
+		Add(app, new gplx.xowa.xtns.pfuncs.scribunto.Pfunc_xtn_mgr());
 		return this;
 	}
 	public Xow_xtn_mgr Ctor_by_wiki(Xow_wiki wiki) {

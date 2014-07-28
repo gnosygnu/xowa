@@ -30,7 +30,7 @@ public class Xof_xfer_itm_ {
 			if (lnki_thumb)		rv_w = thumb_default_w;		// do not default to thumb if only height is set; EX: x900px should have w=0 h=900
 			else				rv_w = file_w;
 		}
-		rv_w = Xof_img_size.Upright_calc(true, lnki_upright, rv_w, lnki_w, lnki_h, lnki_type);	// only v1 calls Calc_xfer_size
+		rv_w = Xof_img_size.Upright_calc(Xof_patch_upright_tid_.Tid_all, lnki_upright, rv_w, lnki_w, lnki_h, lnki_type);	// only v1 calls Calc_xfer_size
 		if (file_w < 1)				rv.Val_all_(rv_w, rv_h);
 		else						Xof_xfer_itm_.Calc_view(rv, lnki_type, rv_w, rv_h, file_w, file_h, thumb_width_must_be_lt_file_width);
 	}

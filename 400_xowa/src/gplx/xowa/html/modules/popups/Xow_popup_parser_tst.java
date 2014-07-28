@@ -370,6 +370,32 @@ public class Xow_popup_parser_tst {
 		, "<h2>c</h2>"
 		));
 	}
+	@Test   public void Anchor() {
+		fxt.Test_parse(String_.Concat_lines_nl_skip_last
+		( "a b c d"
+		, ""
+		, "== e =="
+		, "f g h i"
+		), "#e", String_.Concat_lines_nl_skip_last
+		( "<h2> e </h2>"
+		, ""
+		, "<p>f"
+		, "</p>"
+		));
+	}
+	@Test   public void Anchor_underline() {
+		fxt.Test_parse(String_.Concat_lines_nl_skip_last
+		( "a b c d"
+		, ""
+		, "== e f =="
+		, "g h i"
+		), "#e_f", String_.Concat_lines_nl_skip_last
+		( "<h2> e f </h2>"
+		, ""
+		, "<p>g"
+		, "</p>"
+		));
+	}
 	@Test   public void Tmpl_tkn_max() {
 		fxt.Init_tmpl_tkn_max_(5).Init_page("Template:A", "a");		// eval
 		fxt.Test_parse
@@ -469,10 +495,11 @@ class Xop_popup_parser_fxt {
 		Tfds.Eq_ary(expd, Int_obj_ref.Ary_xto_int_ary(ids));
 		return this;
 	}
-	public void Test_parse(String raw, String expd)  {
-		Xoa_page page = Xoa_page.create_(wiki, Xoa_ttl.parse_(wiki, Bry_.new_ascii_("Test_1")));
+	public void Test_parse(String raw, String expd)				{Test_parse(raw, "Test_1", expd);}
+	public void Test_parse(String raw, String ttl, String expd)	{
+		Xoa_page page = Xoa_page.create_(wiki, Xoa_ttl.parse_(wiki, Bry_.new_ascii_(ttl)));
 		page.Data_raw_(Bry_.new_utf8_(raw));
-		Xow_popup_itm itm = new Xow_popup_itm(1, Bry_.new_utf8_(raw), word_min);
+		Xow_popup_itm itm = new Xow_popup_itm(1, Bry_.new_utf8_(raw), Bry_.Empty, word_min);
 		itm.Init(wiki.Domain_bry(), page.Ttl());
 		byte[] actl = parser.Parse(wiki, page, null, itm);
 		Tfds.Eq_str_lines(expd, String_.new_utf8_(actl));

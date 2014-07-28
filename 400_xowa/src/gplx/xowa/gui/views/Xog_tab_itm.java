@@ -174,7 +174,11 @@ public class Xog_tab_itm implements GfoInvkAble {
 		String page_ttl_str = String_.new_utf8_(page.Ttl().Raw());
 		if (xfer_len > 0){
 			usr_dlg.Prog_one("", "", "downloading images: ~{0}", xfer_len);
-			try {page.File_queue().Exec(gplx.xowa.files.Xof_exec_tid.Tid_wiki_page, usr_dlg, wiki, page);}
+			try {
+				page.File_queue().Exec(gplx.xowa.files.Xof_exec_tid.Tid_wiki_page, usr_dlg, wiki, page);
+				if (page.Html_data().Gallery_packed_exists())	// packed_gallery exists; fire js once; PAGE:en.w:National_Sculpture_Museum_(Valladolid); DATE:2014-07-21
+					html_itm.Html_gallery_packed_exec();
+			}
 			catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.image: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_brief(e));}
 		}
 		xfer_len = page.File_math().Count();

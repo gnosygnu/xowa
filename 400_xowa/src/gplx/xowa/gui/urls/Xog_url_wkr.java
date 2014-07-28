@@ -76,7 +76,7 @@ public class Xog_url_wkr {
 		if (!Io_mgr._.ExistsFil(href_url)) {
 			Xof_xfer_itm xfer_itm = new Xof_xfer_itm();
 			byte[] title = app.Encoder_mgr().Url().Decode(Bry_.new_utf8_(xowa_ttl));
-			xfer_itm.Atrs_by_lnki(Xop_lnki_type.Id_none, -1, -1, -1, Xof_doc_thumb.Null, Xof_doc_page.Null).Atrs_by_ttl(title, Bry_.Empty);
+			xfer_itm.Init_by_lnki(title, Bry_.Empty, Xop_lnki_type.Id_none, -1, -1, -1, Xof_doc_thumb.Null, Xof_doc_page.Null);
 			page.Wiki().File_mgr().Find_meta(xfer_itm);
 			page.File_queue().Clear();
 			page.File_queue().Add(xfer_itm);	// NOTE: set elem_id to "impossible" number, otherwise it will auto-update an image on the page with a super-large size; [[File:Alfred Sisley 062.jpg]]

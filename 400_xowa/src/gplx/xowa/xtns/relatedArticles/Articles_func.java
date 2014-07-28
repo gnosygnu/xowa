@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.relatedArticles; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.html.*;
+import gplx.xowa.xtns.pfuncs.*;
 public class Articles_func extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_relatedArticles;}
 	@Override public Pf_func New(int id, byte[] name) {return new Articles_func().Name_(name);}

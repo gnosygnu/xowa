@@ -54,6 +54,7 @@ public class Nowiki_escape_itm {
 		Btrie_slim_mgr rv = Btrie_slim_mgr.cs_();
 		trie_new_itm(rv, Bool_.N, Byte_ascii.Lt_bry				, Html_entity_.Lt_bry);
 		trie_new_itm(rv, Bool_.N, Byte_ascii.Brack_bgn_bry		, Html_entity_.Brack_bgn_bry);
+		trie_new_itm(rv, Bool_.N, Byte_ascii.Brack_end_bry		, Html_entity_.Brack_end_bry);	// PAGE:en.w: Tall_poppy_syndrome DATE:2014-07-23
 		trie_new_itm(rv, Bool_.N, Byte_ascii.Pipe_bry			, Html_entity_.Pipe_bry);
 		trie_new_itm(rv, Bool_.N, Byte_ascii.Apos_bry			, Html_entity_.Apos_key_bry);	// NOTE: for backward compatibility, use &apos; note that amp_wkr will turn &apos; -> &#39 but &#39 -> '; DATE:2014-07-03
 		trie_new_itm(rv, Bool_.N, Byte_ascii.Colon_bry			, Html_entity_.Colon_bry);

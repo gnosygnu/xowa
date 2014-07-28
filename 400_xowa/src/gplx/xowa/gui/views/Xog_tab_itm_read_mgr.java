@@ -33,11 +33,9 @@ public class Xog_tab_itm_read_mgr {
 		win.Usr_dlg().Prog_none("", "", "locating images");
 		try	{tab.Html_itm().Show(new_page);}
 		catch (Exception e) {
+			if (String_.Eq(Err_.Message_lang(e), "class org.eclipse.swt.SWTException Widget is disposed")) return; // ignore errors caused by user closing tab early; DATE:2014-07-26
 			if (show_is_err) {	// trying to show error page, but failed; don't show again, else recursion until out of memory; TODO:always load error page; no reason it should fail; WHEN:html_skin; DATE:2014-06-08
-				String new_page_url = new_page.Url().Xto_full_str_safe();
-				String err_msg = "fatal error trying to load error page; page=" + new_page_url;
-				app.Usr_dlg().Warn_many("", "", err_msg);
-				app.Gui_mgr().Kit().Ask_ok("", "", err_msg);
+				app.Usr_dlg().Warn_many("", "", "fatal error trying to load error page; page=~{0} err=~{1}" + new_page.Url().Xto_full_str_safe(), Err_.Message_gplx(e));
 				return;
 			}
 			else

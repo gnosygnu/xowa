@@ -65,7 +65,6 @@ public class Xoa_gui_mgr implements GfoInvkAble {
 		app.Api_root().Init_by_kit(app);
 		menu_mgr.Menu_bldr().Init_by_kit(app, kit, app.User().Fsys_mgr().App_img_dir().GenSubDir_nest("window", "menu"));
 		menu_mgr.Init_by_kit();
-		browser_win.Tab_mgr().Tabs_new_init();
 		bnd_mgr.Init_by_kit(app);
 	}
 	public void Lang_changed(Xol_lang lang) {

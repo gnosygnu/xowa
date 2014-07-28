@@ -33,13 +33,12 @@ class Xog_launcher_tabs {
 		app.Gui_wtr().Log_wtr().Log_msg_to_session_direct(log_bfr.Xto_str());
 	}
 	private boolean Restore_tabs(Xoa_app app, Xow_wiki home_wiki, Xog_win_itm win, Io_fil_marker fil_marker) {
-		Xog_tab_itm tab = win.Active_tab();
-		String[] launch_urls = app.Api_root().App().Startup().Tabs().Calc_startup_strs();
+		String[] launch_urls = app.Api_root().App().Startup().Tabs().Calc_startup_strs(app);
 		try {
 			int launch_urls_len = launch_urls.length;
 			for (int i = 0; i < launch_urls_len; ++i) {
 				String launch_url = launch_urls[i];
-				tab = i == 0 ? win.Active_tab() : win.Tab_mgr().Tabs_new_init();
+				Xog_tab_itm tab = win.Tab_mgr().Tabs_new_init();
 				Launch_tab(tab, win, home_wiki, launch_url);
 			}
 			fil_marker.End();
@@ -55,18 +54,11 @@ class Xog_launcher_tabs {
 		Launch_tab(win.Active_tab(), win, home_wiki, gplx.xowa.users.Xouc_pages_mgr.Page_xowa);
 	}
 	private void Launch_tab(Xog_tab_itm tab, Xog_win_itm win, Xow_wiki home_wiki, String launch_str) {
-		Xoa_page launch_page = Launch_page(win, home_wiki, launch_str);
-		if (launch_page.Missing()) return;
-		Xog_tab_itm_read_mgr.Show_page(tab, launch_page, false);
-		tab.History_mgr().Add(launch_page);
-	}
-	private Xoa_page Launch_page(Xog_win_itm win, Xow_wiki home_wiki, String launch_str) {
 		Xoa_url launch_url = Xoa_url_parser.Parse_from_url_bar(win.App(), home_wiki, launch_str);
 		Xow_wiki launch_wiki = launch_url.Wiki();
 		Xoa_ttl launch_ttl = Xoa_ttl.parse_(launch_wiki, launch_url.Page_bry());
-		Xoa_page rv = launch_wiki.GetPageByTtl(launch_url, launch_ttl).Url_(launch_url);	// FUTURE: .Url_() should not be called (needed for anchor); EX: en.wikipedia.org/Earth#Biosphere
-		win.Active_page_(rv);	// set to blank page
-		return rv;
+		tab.Page_(Xoa_page.new_(launch_wiki, launch_ttl));	// WORKAROUND: set the tab to an empty page, else null ref later; DATE:2014-07-23
+		tab.Show_url_bgn(launch_url);
 	}
         public static final Xog_launcher_tabs _ = new Xog_launcher_tabs(); Xog_launcher_tabs() {}
 }

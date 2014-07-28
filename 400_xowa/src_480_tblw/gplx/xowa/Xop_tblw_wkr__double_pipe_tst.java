@@ -27,27 +27,6 @@ public class Xop_tblw_wkr__double_pipe_tst {
 		, ""
 		));
 	}
-	@Test  public void Image_map() {// PURPOSE: if || is inside table and imagemap, treat as lnki; EX:w:United_States_presidential_election,_1992; DATE:2014-03-29; DATE:2014-05-06
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
-		( "{|"
-		, "|-"
-		, "| z"
-		, "<imagemap>"
-		, "File:A.png||123px|b"	// NOTE: "||" should not be tblw; also should not be pipe + text; if it is pipe + text, then caption will be "|123px" and width will be -1; DATE:2014-05-06
-		, "</imagemap>"
-		, "|}"
-		) , String_.Concat_lines_nl_skip_last
-		( "<table>"
-		, "  <tr>"
-		, "    <td> z"
-		, "<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"b\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/123px.png\" width=\"123\" height=\"0\" /></a>"	// NOTE: width must be 123, not 0
-		, "    </td>"
-		, "  </tr>"
-		, "</table>"
-		, ""
-		)
-		);
-	}
 	@Test  public void Tblw_lnki_nth() {	// PURPOSE: if || is nth pipe, then treat as lnki; EX:en.w:Main_Page;de.w:Main_Page; DATE:2014-05-06
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "{|"

@@ -33,8 +33,10 @@ public class Xot_defn_tmpl_ {
 			if (orig_arg.KeyTkn_exists()) {
 				Arg_itm_tkn key_tkn = orig_arg.Key_tkn();
 				copy_arg.Key_tkn_(Make_itm(false, ctx, tkn_mkr, src, key_tkn, caller, orig_arg));
-				rv.Args_addByKey(copy_arg.Key_tkn().Dat_ary(), copy_arg);	// NOTE: was originally Bry_.Mid(caller.Src(), key_tkn.Dat_bgn(), key_tkn.Dat_end()) which was wrong; caused {{{increment}}} instead of "increment"
+				rv.Args_add_by_key(copy_arg.Key_tkn().Dat_ary(), copy_arg);	// NOTE: was originally Bry_.Mid(caller.Src(), key_tkn.Dat_bgn(), key_tkn.Dat_end()) which was wrong; caused {{{increment}}} instead of "increment"
 			}
+			else
+				rv.Args_add_by_idx(copy_arg);	// NOTE: not a key, so add to idx_hash; DATE:2014-07-23
 			copy_arg.Val_tkn_(Make_itm(true, ctx, tkn_mkr, src, orig_arg.Val_tkn(), caller, orig_arg));
 			rv.Args_add(copy_arg);
 		}
