@@ -20,6 +20,7 @@ import org.junit.*;
 public class Imap_parser_tst {		
 	@Before public void init() {fxt.Reset();} private Imap_parser_fxt fxt = new Imap_parser_fxt();
 	@Test  public void Rect_pass()				{fxt.Test_shape("rect 1 2 3 4 [[A]]"								, fxt.itm_rect_("[[A]]", 1, 2, 3, 4));}
+	@Test  public void Rect_pass_many()			{fxt.Test_shape("rect 1 2 3 4 5 6[[A]]"								, fxt.itm_rect_("[[A]]", 1, 2, 3, 4));} // PURPOSE: MW allows extra points to be passed; PAGE:en.w:Kilauea DATE:2014-07-28
 	@Test  public void Circle_pass()			{fxt.Test_shape("circle 1 2 3 [[A]]"								, fxt.itm_circle_("[[A]]", 1, 2, 3));}
 	@Test  public void Poly_pass()				{fxt.Test_shape("poly 1 2 3 4 5 6 [[A]]"							, fxt.itm_poly_("[[A]]", 1, 2, 3, 4, 5, 6));}
 	@Test  public void Poly_pass_chars()		{fxt.Test_shape("poly a b [[A]]"									, fxt.itm_poly_("[[A]]", 0, 0));}	// PURPOSE: non-numeric should be converted to 0; PAGE:uk.w:Стратосфера; DATE:2014-07-26

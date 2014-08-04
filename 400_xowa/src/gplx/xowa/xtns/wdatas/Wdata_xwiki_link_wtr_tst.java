@@ -33,27 +33,29 @@ public class Wdata_xwiki_link_wtr_tst {
 		fxt.Test_xwiki_links("Q1_en", "Q1_de");
 		fxt.Init_external_links_mgr_clear();
 		fxt.Test_parse_langs("{{noexternallanglinks:de}}", String_.Concat_lines_nl
-		(	"<div id=\"xowa-lang\">"
-		,	"  <h5>In other languages (<a href=\"/site/www.wikidata.org/wiki/Q1\">wikidata</a>)</h5>"
-		,	"  <h4>grp1</h4>"
-		,	"  <table style='width: 100%;'>"
-		,	"    <tr>"
-		,	"      <td style='width: 10%; padding-bottom: 5px;'>German</td><td style='width: 20%; padding-bottom: 5px;'><a hreflang=\"de\" title=\"Q1 de\" href=\"/site/de.wikipedia.org/wiki/Q1 de\">Q1 de</a></td><td style='width: 3%; padding-bottom: 5px;'></td>"
-		,	"    </tr>"
-		,	"  </table>"
-		,	"</div>"
+		( "<div id=\"xowa-lang\">"
+		, "  <h5>In other languages (<a href=\"/site/www.wikidata.org/wiki/Q1\">wikidata</a>)<a href='javascript:xowa_toggle_visible(\"wikidata-langs\");'><img id='wikidata-langs-toggle-icon' src='file:///mem/xowa/user/test_user/app/img/window/portal/twisty_right.png' title='' /></a></h5>"
+		, "  <div id='wikidata-langs-toggle-elem' style='display:none;'>"
+		, "  <h4>grp1</h4>"
+		, "  <table style='width: 100%;'>"
+		, "    <tr>"
+		, "      <td style='width: 10%; padding-bottom: 5px;'>German</td><td style='width: 20%; padding-bottom: 5px;'><a hreflang=\"de\" title=\"Q1 de\" href=\"/site/de.wikipedia.org/wiki/Q1 de\">Q1 de</a></td><td style='width: 3%; padding-bottom: 5px;'></td>"
+		, "    </tr>"
+		, "  </table>"
+		, "  </div>"
+		, "</div>"
 		));
 	}
 	@Test   public void Links_w_name_fmt() {	// PURPOSE: wikidata changed links node from "enwiki:A" to "enwiki:{name:A,badges:[]}"; DATE:2013-09-14
 		fxt.Init_xwikis_add("en", "fr", "de");
 		fxt.Init_qids_add("en", Xow_wiki_domain_.Tid_wikipedia, "Q1_en", "Q1");
 		Json_doc jdoc = Json_doc.new_(String_.Concat_lines_nl
-		(	"{ \"entity\":\"q1\""
-		,	", \"links\":"
-		,	"  { \"dewiki\":\"q1_de\""
-		,	"  , \"frwiki\":{\"name\":\"q1_fr\",\"badges\":[]}"
-		,	"  }"
-		,	"}"
+		( "{ \"entity\":\"q1\""
+		, ", \"links\":"
+		, "  { \"dewiki\":\"q1_de\""
+		, "  , \"frwiki\":{\"name\":\"q1_fr\",\"badges\":[]}"
+		, "  }"
+		, "}"
 		));
 		Wdata_doc wdata_doc = new Wdata_doc(Bry_.new_ascii_("Q1"), fxt.App().Wiki_mgr().Wdata_mgr(), jdoc);
 		fxt.Init_pages_add(wdata_doc);
@@ -63,13 +65,13 @@ public class Wdata_xwiki_link_wtr_tst {
 		fxt.Init_xwikis_add("en", "fr", "de");
 		fxt.Init_qids_add("en", Xow_wiki_domain_.Tid_wikipedia, "Q1_en", "Q1");
 		Json_doc jdoc = Json_doc.new_(String_.Concat_lines_nl
-		(	"{ \"entity\":\"q1\""
-		,	", \"links\":"
-		,	"  { \"dewiki\":\"q1_de\""
-		,	"  , \"frwiki\":{\"name\":\"q1_fr\",\"badges\":[]}"
+		( "{ \"entity\":\"q1\""
+		, ", \"links\":"
+		, "  { \"dewiki\":\"q1_de\""
+		, "  , \"frwiki\":{\"name\":\"q1_fr\",\"badges\":[]}"
 		,  "   , \"dewikisource\":\"q1_dewikisource\""		// this should be ignored
-		,	"  }"
-		,	"}"
+		, "  }"
+		, "}"
 		));
 		Wdata_doc wdata_doc = new Wdata_doc(Bry_.new_ascii_("Q1"), fxt.App().Wiki_mgr().Wdata_mgr(), jdoc);
 		fxt.Init_pages_add(wdata_doc);
@@ -78,14 +80,14 @@ public class Wdata_xwiki_link_wtr_tst {
 //		@Test   public void No_wikidata_link() {
 //			fxt.Init_xwikis_add("fr", "de");
 //			fxt.Test_parse_langs("[[fr:A]]", String_.Concat_lines_nl
-//			(	"<div id=\"xowa-lang\">"
-//			,	"  <h5>In other languages</h5>"
-//			,	"  <h4>grp1</h4>"
-//			,	"  <ul style='-moz-column-count: 3; list-style:none;'>"
-//			,	"    <li><span style='display:inline-block; min-width:150px'>French</span><a hreflang=\"fr\" title=\"A\" href=\"/site/fr.wikipedia.org/wiki/A\">A</a></li>"
-//			,	"    <li><span style='display:inline-block; min-width:150px'>French</span><a hreflang=\"fr\" title=\"A\" href=\"/site/fr.wikipedia.org/wiki/A\">A</a></li>"
-//			,	"  </ul>"
-//			,	"</div>"
+//			( "<div id=\"xowa-lang\">"
+//			, "  <h5>In other languages</h5>"
+//			, "  <h4>grp1</h4>"
+//			, "  <ul style='-moz-column-count: 3; list-style:none;'>"
+//			, "    <li><span style='display:inline-block; min-width:150px'>French</span><a hreflang=\"fr\" title=\"A\" href=\"/site/fr.wikipedia.org/wiki/A\">A</a></li>"
+//			, "    <li><span style='display:inline-block; min-width:150px'>French</span><a hreflang=\"fr\" title=\"A\" href=\"/site/fr.wikipedia.org/wiki/A\">A</a></li>"
+//			, "  </ul>"
+//			, "</div>"
 //			));
 //		}
 
@@ -97,14 +99,14 @@ public class Wdata_xwiki_link_wtr_tst {
 //			fxt.Test_xwiki_links("Q1_en", "Q1_de", "Q1_fr");
 //			fxt.Init_external_links_mgr_clear();
 //			fxt.Test_parse_langs("{{noexternallanglinks:*}}", String_.Concat_lines_nl
-//			(	"<div id=\"xowa-lang\">"
-//			,	"  <h5>In other languages (<a href=\"/site/www.wikidata.org/wiki/Q1\">wikidata</a>)</h5>"
-//			,	"  <h4>grp1</h4>"
-//			,	"  <ul style='-moz-column-count: 3; list-style:none;'>"
-//			,	"    <li><span style='display:inline-block; min-width:150px'>German</span><a hreflang=\"de\" title=\"Q1 de\" href=\"/site/de.wikipedia.org/wiki/Q1 de\">Q1 de</a></li>"
-//			,	"    <li><span style='display:inline-block; min-width:150px'>French</span><a hreflang=\"fr\" title=\"Q1 fr\" href=\"/site/fr.wikipedia.org/wiki/Q1 fr\">Q1 fr</a></li>"
-//			,	"  </ul>"
-//			,	"</div>"
+//			( "<div id=\"xowa-lang\">"
+//			, "  <h5>In other languages (<a href=\"/site/www.wikidata.org/wiki/Q1\">wikidata</a>)</h5>"
+//			, "  <h4>grp1</h4>"
+//			, "  <ul style='-moz-column-count: 3; list-style:none;'>"
+//			, "    <li><span style='display:inline-block; min-width:150px'>German</span><a hreflang=\"de\" title=\"Q1 de\" href=\"/site/de.wikipedia.org/wiki/Q1 de\">Q1 de</a></li>"
+//			, "    <li><span style='display:inline-block; min-width:150px'>French</span><a hreflang=\"fr\" title=\"Q1 fr\" href=\"/site/fr.wikipedia.org/wiki/Q1 fr\">Q1 fr</a></li>"
+//			, "  </ul>"
+//			, "</div>"
 //			));
 //		}
 }

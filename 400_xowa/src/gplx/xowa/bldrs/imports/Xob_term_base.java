@@ -26,7 +26,7 @@ public abstract class Xob_term_base implements Xob_cmd, GfoInvkAble {
 	public void Cmd_run() {}
 	public void Cmd_end() {
 		Xoa_app app = wiki.App();
-		app.Gui_mgr().Html_mgr().Portal_mgr().Wikis().Itms_refresh();	// NOTE: dirty wiki list so that next refresh will load itm			
+		app.Gui_mgr().Html_mgr().Portal_mgr().Wikis().Itms_reset();	// NOTE: dirty wiki list so that next refresh will load itm			
 		app.Free_mem(false);	// clear cache, else import will load new page with old items from cache; DATE:2013-11-21
 		wiki.Init_needed_(true);// flag init_needed prior to show; dir_info will show page_txt instead of page_gz;
 		wiki.Init_assert();	// force load; needed to pick up MediaWiki ns for MediaWiki:mainpage

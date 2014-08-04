@@ -212,7 +212,8 @@ public class Bry_ {
 	}
 	public static byte[] Mid_by_len(byte[] src, int bgn, int len) {return Mid(src, bgn, bgn + len);}
 	public static byte[] Mid_by_len_safe(byte[] src, int bgn, int len) {
-		if (len > src.length) len = src.length;
+		int src_len = src.length;
+		if (len + bgn > src_len) len = (src_len - bgn);
 		return Mid(src, bgn, bgn + len);
 	}
 	public static String MidByLenToStr(byte[] src, int bgn, int len) {

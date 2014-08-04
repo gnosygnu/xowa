@@ -21,6 +21,9 @@ public class IoEngine_xrg_downloadFil {
 	public Io_url Trg() {return trg;} public IoEngine_xrg_downloadFil Trg_(Io_url v) {trg = v; return this;} Io_url trg;
 	public byte Rslt() {return rslt;} public IoEngine_xrg_downloadFil Rslt_(byte v) {rslt = v; return this;} private byte rslt = Rslt_pass;
 	public Exception Rslt_err() {return rslt_err;} public IoEngine_xrg_downloadFil Rslt_err_(Exception v) {rslt_err = v; return this;} Exception rslt_err;
+	public String Rslt_err_str() {
+		return rslt_err == null ? "none" : Err_.Message_gplx_brief(rslt_err);
+	}
 	public String User_agent() {return user_agent;} public IoEngine_xrg_downloadFil User_agent_(String v) {user_agent = v; return this;} private String user_agent;
 	public Gfo_usr_dlg Prog_dlg() {return prog_dlg;} public IoEngine_xrg_downloadFil Prog_dlg_(Gfo_usr_dlg v) {prog_dlg = v; download_fmt.Ctor(prog_dlg); return this;} Gfo_usr_dlg prog_dlg;
 	public Bry_fmtr Prog_fmtr() {return prog_fmtr;} Bry_fmtr prog_fmtr = Bry_fmtr.new_("~{download_header}: ~{download_read} of ~{download_length} kb;", "download_header", "download_url", "download_read", "download_length");

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.ctgs.*; import gplx.xowa.xtns.gallery.*;
-import gplx.xowa.html.portal.*; import gplx.xowa.html.tocs.*; import gplx.xowa.html.modules.*;
+import gplx.xowa.html.portal.*; import gplx.xowa.html.tocs.*; import gplx.xowa.wikis.modules.*;
 public class Xow_html_mgr implements GfoInvkAble {
 	public Xow_html_mgr(Xow_wiki wiki) {
 		this.wiki = wiki;
@@ -154,6 +154,7 @@ public class Xow_html_mgr implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_portal))								return portal_mgr;
 		else if	(ctx.Match(k, Invk_imgs))								return imgs_mgr;
 		else if	(ctx.Match(k, Invk_ns_ctg))								return ns_ctg;
+		else if	(ctx.Match(k, Invk_modules))							return module_mgr;
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}
@@ -164,6 +165,7 @@ public class Xow_html_mgr implements GfoInvkAble {
 	, Invk_lnki_thumb_part_magnify_btn_ = "lnki_thumb_part_magnify_btn_", Invk_lnki_thumb_part_play_btn_ = "lnki_thumb_part_play_btn_", Invk_lnki_thumb_part_info_btn_ = "lnki_thumb_part_info_btn_"
 	, Invk_article = "article"
 	, Invk_portal = "portal", Invk_imgs = "imgs", Invk_ns_ctg = "ns_ctg"
+	, Invk_modules = "modules"
 	;
 	public static final String Str_img_class_thumbimage = "thumbimage";
 	public static final byte[] Bry_anchor_class_image = Bry_.new_ascii_(" class=\"image\""), Bry_anchor_class_blank = Bry_.Empty, Bry_anchor_rel_nofollow = Bry_.new_ascii_(" rel=\"nofollow\""), Bry_anchor_rel_blank = Bry_.Empty, Bry_img_class_thumbimage = Bry_.new_ascii_(" class=\"thumbimage\""), Bry_img_class_none = Bry_.Empty;

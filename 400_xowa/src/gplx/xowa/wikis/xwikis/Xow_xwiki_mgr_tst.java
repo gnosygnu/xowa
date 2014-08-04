@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa; import gplx.*;
+package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import org.junit.*; import gplx.xowa.wikis.*; import gplx.xowa.langs.*;
 public class Xow_xwiki_mgr_tst {
 	Xow_xwiki_mgr_fxt fxt = new Xow_xwiki_mgr_fxt();
@@ -30,7 +30,7 @@ public class Xow_xwiki_mgr_tst {
 	@Test  public void Add_bulk_langs_grp_itm() 				{fxt.Langs_ini().Tst_add_bulk_langs("europe_west~ja", fxt.xwiki_("de", "de.wikipedia.org", "http://de.wikipedia.org/wiki/~{0}"), fxt.xwiki_("fr", "fr.wikipedia.org", "http://fr.wikipedia.org/wiki/~{0}"), fxt.xwiki_("ja", "ja.wikipedia.org", "http://ja.wikipedia.org/wiki/~{0}"));}
 	@Test  public void Add_bulk_langs_grp_commons() {
 		fxt.Langs_ini();
-		GfoInvkAble_.InvkCmd_msg(fxt.Wiki().Xwiki_mgr(), Xow_xwiki_mgr.Invk_add_bulk_langs, GfoMsg_.new_parse_(Xow_xwiki_mgr.Invk_add_bulk_langs).Add("grp_key", "europe_west").Add("wiki_type_name", "wikipedia"));
+		fxt.Wiki().Xwiki_mgr().Add_bulk_langs(Bry_.new_ascii_("europe_west"), Xow_wiki_domain_.Tid_wikipedia);
 		fxt.Tst_itms(fxt.xwiki_("de", "de.wikipedia.org", "http://de.wikipedia.org/wiki/~{0}"), fxt.xwiki_("fr", "fr.wikipedia.org", "http://fr.wikipedia.org/wiki/~{0}"));
 	}
 	@Test  public void Add_bulk_peers() 						{fxt.Peers_ini().Tst_add_bulk_peers("peer", fxt.xwiki_null_("commons"), fxt.xwiki_null_("m"), fxt.xwiki_("wikt", "en.wiktionary.org", "http://en.wiktionary.org/wiki/~{0}"), fxt.xwiki_("wiktionary", "en.wiktionary.org", "http://en.wiktionary.org/wiki/~{0}"), fxt.xwiki_("s", "en.wikisource.org", "http://en.wikisource.org/wiki/~{0}"));}
@@ -54,7 +54,7 @@ class Xow_xwiki_mgr_fxt {
 	public Xow_xwiki_itm xwiki_(String key, String domain, String fmt) {return new Xow_xwiki_itm(Bry_.new_utf8_(key), Bry_.new_utf8_(fmt), Xow_wiki_domain_.Tid_other, Xol_lang_itm_.Id__unknown, Bry_.new_utf8_(domain));}
 	public Xow_xwiki_mgr_fxt Tst_add_bulk(String raw, int lang_tid, byte wiki_tid, String alias, String fmt, String domain) {
 		Xow_xwiki_itm itm = xwiki_mgr.Add_bulk_row(Xol_lang_itm_.Regy(), Bry_.new_ascii_(raw));
-		Tfds.Eq(alias, String_.new_ascii_(itm.Key()));
+		Tfds.Eq(alias, String_.new_ascii_(itm.Key_bry()));
 		Tfds.Eq(fmt, String_.new_ascii_(itm.Fmt()));
 		Tfds.Eq(wiki_tid, itm.Wiki_tid(), "wiki_tid");
 		Tfds.Eq(lang_tid, itm.Lang_id(), "lang_id");
@@ -102,7 +102,7 @@ class Xow_xwiki_mgr_fxt {
 		int len = itms.length;
 		ListAdp rv = ListAdp_.new_();
 		for (int i = 0; i < len; i++) {
-			byte[] alias = itms[i].Key();
+			byte[] alias = itms[i].Key_bry();
 			Xow_xwiki_itm itm = xwiki_mgr.Get_by_key(alias);
 			if (itm == null) itm = xwiki_null_(String_.new_utf8_(alias)); // "null", ignore
 			rv.Add(itm);
@@ -114,9 +114,9 @@ class Xow_xwiki_mgr_fxt {
 		for (int i = 0; i < len; i++) {
 			Xow_xwiki_itm itm = itms[i];
 			if (Bry_.Len_eq_0(itm.Domain()))	// "null", ignore
-				sb.Add(itm.Key()).Add_char_nl();
+				sb.Add(itm.Key_bry()).Add_char_nl();
 			else {
-				sb.Add(itm.Key()).Add_char_pipe().Add(itm.Domain()).Add_char_pipe().Add(itm.Fmt()).Add_char_nl();
+				sb.Add(itm.Key_bry()).Add_char_pipe().Add(itm.Domain()).Add_char_pipe().Add(itm.Fmt()).Add_char_nl();
 			}
 		}
 		return sb.XtoStrAndClear();

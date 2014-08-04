@@ -23,13 +23,13 @@ public class GfsCore_tst {
 		core.AddObj(String_.Gfs, "String_");
 		core.AddObj(Int_.Gfs, "Int_");
 	}	GfsCore core;
-	@Test public void Basic() {					// String_.Len('abc') >> 3
+	@Test  public void Basic() {					// String_.Len('abc') >> 3
 		tst_Msg
 			(	msg_("String_").Subs_
 			(		msg_("Len").Add("v", "abc"))
 			,	3);
 	}
-	@Test public void PrimitiveConversion() {		// String_.Len('abc').Add(-3) >> 0
+	@Test  public void PrimitiveConversion() {		// String_.Len('abc').Add(-3) >> 0
 		tst_Msg
 			(	msg_("String_").Subs_
 			(		msg_("Len").Add("v", "abc").Subs_
@@ -37,32 +37,32 @@ public class GfsCore_tst {
 			)
 			,	0);
 	}
-//		@Test public void Fail_notFound() {			// String_.DoesNotExists
+//		@Test  public void Fail_notFound() {			// String_.DoesNotExists
 //			tst_Err
 //				(	msg_("help").Add("", "String_.DoesNotExist")
 //				,	GfsHelp.Err_Unhandled("String_", "DoesNotExist"));
 //		}
-	@Test public void Cmd() {						// cmd
+	@Test  public void Cmd() {						// cmd
 		core.AddCmd(new GfsTest_cmd(), "testCmd");
 		tst_Msg
 			(	msg_("testCmd").Add("s", "pass")
 			,	"pass");
 	}
-	@Test public void EmptyMsg() {
+	@Test  public void EmptyMsg() {
 		tst_Msg
 			(	msg_("")
 			,	GfoInvkAble_.Rv_unhandled);
 	}
-//		@Test public void Fail_argMissing() {			// String_.Len()
+//		@Test  public void Fail_argMissing() {			// String_.Len()
 //			tst_String__Len_Err(msg_("Len"), GfsCtx.Err_KeyNotFound("v", "<<EMPTY>>"));
 //		}
-//		@Test public void Fail_argWrongKey() {			// String_.Len(badKey='abc')
+//		@Test  public void Fail_argWrongKey() {			// String_.Len(badKey='abc')
 //			tst_String__Len_Err(msg_("Len").Add("badKey", "abc"), GfsCtx.Err_KeyNotFound("v", "badKey;"));
 //		}
-//		@Test public void Fail_argExtraKey() {			// String_.Len(v='abc' extraKey=1)
+//		@Test  public void Fail_argExtraKey() {			// String_.Len(v='abc' extraKey=1)
 //			tst_String__Len_Err(msg_("Len").Add("v", "abc").Add("extraKey", 1), GfsCtx.Err_KeyNotFound("v", "badKey;"));
 //		}
-	@Test public void Add_obj_deep() {			// String_.Len(badKey='abc')
+	@Test  public void Add_obj_deep() {			// String_.Len(badKey='abc')
 		GfsCore_tst_nest obj1 = GfsCore_tst_nest.new_("1", "val1");
 		GfsCore_tst_nest obj1_1 = GfsCore_tst_nest.new_("1_1", "val2");
 		core.AddObj(obj1, "1");

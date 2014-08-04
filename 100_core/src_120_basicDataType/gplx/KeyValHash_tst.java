@@ -18,12 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 import org.junit.*;
 public class KeyValHash_tst {
-	@Test public void AryVals() {
+	@Test  public void AryVals() {
 		tst_AryVals(ary_());
 		tst_AryVals(ary_("key1", "1"), kv_("key1", "1"));
 		tst_AryVals(ary_("key1", "1", "key2", "2"), kv_("key1", "1"), kv_("key2", "2"));
 	}
-	@Test public void Fail_lengthMustBeEven() {
+	@Test  public void Fail_lengthMustBeEven() {
 		try {
 			tst_AryVals(ary_("key1"), kv_("key1", "1"));
 			Tfds.Fail_expdError();

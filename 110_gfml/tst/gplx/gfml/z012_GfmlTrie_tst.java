@@ -22,28 +22,28 @@ public class z012_GfmlTrie_tst {
 	@Before public void setup() {
 		trie = GfmlTrie.new_();
 	}	GfmlTrie trie;
-	@Test public void Null() {
+	@Test  public void Null() {
 		tst_FindMatch_first("", null);
 		tst_FindMatch_first("{", null);
 	}
-	@Test public void OneChar() {
+	@Test  public void OneChar() {
 		trie.Add("{", "val0");
 		tst_FindMatch_first("{", "val0");
 		tst_FindMatch_first(":", null);	
 	}
-	@Test public void TwoChar() {
+	@Test  public void TwoChar() {
 		trie.Add("/*", "val0");
 		tst_FindMatch_first("/*", "val0");
 		tst_FindMatch_first("//", null);
 	}
-	@Test public void ManySym() {
+	@Test  public void ManySym() {
 		trie.Add(":", "val0");
 		trie.Add("{", "val1");
 		tst_FindMatch_first(":", "val0");
 		tst_FindMatch_first("{", "val1");
 		tst_FindMatch_first("-", null);
 	}
-	@Test public void Overlap_1_2() {
+	@Test  public void Overlap_1_2() {
 		trie.Add("[", "val0");
 		trie.Add("[:", "val1");
 		tst_FindMatch_first("[", "val0");
@@ -51,7 +51,7 @@ public class z012_GfmlTrie_tst {
 		tst_FindMatch_first("[-", "val0");
 		tst_FindMatch_first(":", null);
 	}
-	@Test public void Overlap_2_1() {
+	@Test  public void Overlap_2_1() {
 		trie.Add("[:", "val0");
 		trie.Add("[", "val1");
 		tst_FindMatch_first("[:", "val0");	
@@ -59,7 +59,7 @@ public class z012_GfmlTrie_tst {
 		tst_FindMatch_first("[-", "val1");
 		tst_FindMatch_first(":", null);
 	}
-	@Test public void Overlap_1_1() {
+	@Test  public void Overlap_1_1() {
 		trie.Add("[", "val0");
 		trie.Add("[", "val1");
 		tst_FindMatch_first("[", "val1");	// return last added

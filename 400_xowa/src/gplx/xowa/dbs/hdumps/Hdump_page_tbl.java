@@ -18,9 +18,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.dbs.hdumps; import gplx.*; import gplx.xowa.*; import gplx.xowa.dbs.*;
 import gplx.dbs.*; import gplx.ios.*;
 public class Hdump_page_tbl {
+	private Db_provider provider;
 	private Db_stmt stmt_select, stmt_insert, stmt_update, stmt_delete;
 	private Io_stream_zip_mgr zip_mgr; private byte zip_tid;
 	public void Ctor(Io_stream_zip_mgr zip_mgr, byte zip_tid) {this.zip_mgr = zip_mgr; this.zip_tid = zip_tid;}
+	public void Ctor(Db_provider provider, Io_stream_zip_mgr zip_mgr, byte zip_tid) {this.provider = provider; this.zip_mgr = zip_mgr; this.zip_tid = zip_tid;}
+	@gplx.Virtual public void Insert(int page_id, byte[] page_html, int frags_len, int make_id) {
+		if (stmt_insert == null) stmt_insert = Db_stmt_.new_insert_(provider, Tbl_name, Flds_all);
+		try {
+			page_html = zip_mgr.Zip(zip_tid, page_html);
+			stmt_insert.Val_int_(page_id).Val_str_by_bry_(page_html).Val_int_(frags_len).Val_int_(make_id).Exec_insert();
+		}	finally {stmt_insert.Rls();}
+	}
 	@gplx.Virtual public void Insert(Db_provider provider, int page_id, byte[] page_html, int frags_len, int make_id) {
 		if (stmt_insert == null) stmt_insert = Db_stmt_.new_insert_(provider, Tbl_name, Flds_all);
 		try {

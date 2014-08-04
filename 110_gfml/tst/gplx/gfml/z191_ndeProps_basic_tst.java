@@ -29,20 +29,20 @@ public class z191_ndeProps_basic_tst {
 			,	GfmlDocLxrs.NdeInline_lxr()
 			);
 	}
-	@Test public void Basic() {
+	@Test  public void Basic() {
 		fx.tst_Doc("a:[b]{}"
 			,	fx.nde_().Hnd_("a").Subs_
 			(		fx.nde_().KeyedSubObj_().Atru_("b"))
 			);
 	}
-	@Test public void Basic_empty() {
+	@Test  public void Basic_empty() {
 		fx.tst_Tkn("[];"
 			,	fx.tkn_grp_
 			(		fx.tkn_grp_ary_("[", "]")
 			,		fx.tkn_itm_(";")
 			));
 	}	
-	@Test public void Hdr() {
+	@Test  public void Hdr() {
 		fx.tst_Tkn("a[];"
 			,	fx.tkn_grp_
 			(		fx.tkn_grp_ary_("a")
@@ -50,52 +50,52 @@ public class z191_ndeProps_basic_tst {
 			,		fx.tkn_itm_(";")
 			));
 	}	
-	@Test public void WithInnerNde() {
+	@Test  public void WithInnerNde() {
 		fx.tst_Doc("a:[b]{c;}"
 			,	fx.nde_().Hnd_("a").Subs_
 			(		fx.nde_().KeyedSubObj_().Atru_("b")
 			,		fx.nde_().Atru_("c")
 			));
 	}	
-	@Test public void DoesNotUsurpDatTknForName() {
+	@Test  public void DoesNotUsurpDatTknForName() {
 		fx.tst_Doc("a:b[c]{}"
 			,	fx.nde_().Hnd_("a").Atru_("b").Subs_
 			(		fx.nde_().KeyedSubObj_().Atru_("c")
 			));
 	}	
-	@Test public void NoHeader_body() {
+	@Test  public void NoHeader_body() {
 		fx.tst_Doc("a[b]{}"
 			,	fx.nde_().Atru_("a").Subs_
 			(		fx.nde_().KeyedSubObj_().Atru_("b")
 			));
 	}
-	@Test public void NoHeader_inline() {
+	@Test  public void NoHeader_inline() {
 		fx.tst_Doc("a[b];"
 			,	fx.nde_().Atru_("a").Subs_
 			(		fx.nde_().KeyedSubObj_().Atru_("b")
 			));
 	}	
-	@Test public void Nesting() {
+	@Test  public void Nesting() {
 		fx.tst_Doc("a:[b:;]{}"
 			,	fx.nde_().Hnd_("a").Subs_
 			(		fx.nde_().KeyedSubObj_().Subs_
 			(			fx.nde_().Hnd_("b"))
 			));
 	}	
-	@Test public void Nesting2() {
+	@Test  public void Nesting2() {
 		fx.tst_Doc("a:[b{}]{}"
 			,	fx.nde_().Hnd_("a").Subs_
 			(		fx.nde_().KeyedSubObj_().Atru_("b")
 			));
 	}	
-	@Test public void CanBeKeyed_header() {
+	@Test  public void CanBeKeyed_header() {
 		fx.ini_RootLxr_Add(GfmlDocLxrs.ElmKey_lxr());
 		fx.tst_Doc("a:b=[c];"
 			,	fx.nde_().Hnd_("a").Subs_
 			(		fx.nde_().KeyedSubObj_().Key_("b").Atru_("c")
 			));
 	}	
-	@Test public void CanBeKeyed2_inline() {
+	@Test  public void CanBeKeyed2_inline() {
 		fx.ini_RootLxr_Add
 			(	GfmlDocLxrs.Whitespace_lxr()
 			,	GfmlDocLxrs.ElmKey_lxr()
@@ -105,12 +105,12 @@ public class z191_ndeProps_basic_tst {
 			(		fx.nde_().KeyedSubObj_().Key_("b").Atru_("c")
 			));
 	}	
-	@Test public void Sole() {
+	@Test  public void Sole() {
 		fx.ini_RootLxr_Add(GfmlDocLxrs.Whitespace_lxr());
 		fx.tst_Doc("[a b]"
 			,	fx.nde_().KeyedSubObj_().Atru_("a").Atru_("b"));
 	}	
-	@Test public void Nest1() {
+	@Test  public void Nest1() {
 		fx.ini_RootLxr_Add(GfmlDocLxrs.Whitespace_lxr());
 		fx.tst_Doc("[a [b]]"
 			,	fx.nde_().Atru_("a").Subs_

@@ -35,8 +35,8 @@ public class Xous_window_mgr implements GfoInvkAble {
 		if (startup_tabs.Type() == Xoapi_startup_tabs_tid_.Tid_previous) {
 			cfg_mgr.Set_by_app("xowa.api.app.startup.tabs.previous"	, Calc_previous_tabs(user.App().Gui_mgr().Browser_win().Tab_mgr()));
 		}
-		cfg_mgr.Set_by_app("app.gui.html.portal.wikis.visible"	, Yn.Xto_str(user.App().Gui_mgr().Html_mgr().Portal_mgr().Wikis().Visible()));
 		cfg_mgr.Set_by_app("xowa.api.app.env.version_previous"	, Xoa_app_.Version);
+		user.App().Api_root().Html().Page().Toggle_mgr().Save(cfg_mgr);
 		cfg_mgr.Db_save_txt();
 	}
 	private String Calc_previous_tabs(Xog_tab_mgr tab_mgr) {

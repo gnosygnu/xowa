@@ -29,7 +29,7 @@ public class z192_ndeProps_dots_tst {
 			,	GfmlDocLxrs.NdePropEnd_lxr()
 			);
 	}
-	@Test public void Stress() {
+	@Test  public void Stress() {
 		fx.tst_Doc("a.b[c];"
 			,	fx.nde_().Hnd_("a").Subs_
 			(		fx.nde_().Hnd_("b").Subs_

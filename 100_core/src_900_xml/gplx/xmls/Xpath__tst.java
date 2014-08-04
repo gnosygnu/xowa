@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xmls; import gplx.*;
 import org.junit.*;
 public class Xpath__tst {
-	@Test public void Select_all() {
+	@Test  public void Select_all() {
 		String xml = String_.Concat
 			( "<root>"
 			,	"<a>"

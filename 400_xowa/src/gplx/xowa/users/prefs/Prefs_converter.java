@@ -18,21 +18,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.users.prefs; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.xowa.cfgs.*;
 public class Prefs_converter {
-	Bry_bfr bfr = Bry_bfr.new_();
-	ListAdp list = ListAdp_.new_();
+	private Bry_bfr bfr = Bry_bfr.new_();
+	private ListAdp list = ListAdp_.new_();
 	public void Check(Xoa_app app) {
 		int options_version = app.Sys_cfg().Options_version();
 		if (options_version == 1) {
 			Io_url cfg_dir = app.User().Fsys_mgr().App_data_cfg_dir();
 			Io_url cfg_fil = cfg_dir.GenSubFil("user_system_cfg.gfs");
 			Io_url trg_fil = cfg_fil.GenNewNameAndExt(gplx.xowa.cfgs.Xoa_cfg_db_txt.File_name);
-			if (Io_mgr._.ExistsFil(trg_fil)) return;	// do not overwrite file if it is there (i.e.: it's already converted); needed when running in app_mode = cmd (see HACK in Xob_bldr.Run)
-			String old_str = Io_mgr._.LoadFilStr_args(cfg_fil).MissingIgnored_(true).Exec();
-			String new_str = Convert(old_str);
-			Io_mgr._.SaveFilStr(trg_fil, new_str);
-			app.Cfg_mgr().Db_load_txt();
-			app.Cfg_mgr().Set_by_app("app.setup.dumps.wiki_storage_type", "sqlite");
-			app.Log_wtr().Log_msg_to_session_fmt("converted options to v2");
+			if (!Io_mgr._.ExistsFil(trg_fil)) {	// do not overwrite file if it is there (i.e.: it's already converted); needed when running in app_mode = cmd (see HACK in Xob_bldr.Run)
+				String old_str = Io_mgr._.LoadFilStr_args(cfg_fil).MissingIgnored_(true).Exec();
+				String new_str = Convert(old_str);
+				Io_mgr._.SaveFilStr(trg_fil, new_str);
+				app.Cfg_mgr().Db_load_txt();
+				app.Cfg_mgr().Set_by_app("app.setup.dumps.wiki_storage_type", "sqlite");
+				app.Log_wtr().Log_msg_to_session_fmt("converted options to v2");
+			}
 		}
 	}
 	public String Convert(String raw) {

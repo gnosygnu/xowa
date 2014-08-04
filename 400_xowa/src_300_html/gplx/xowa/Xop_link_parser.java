@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.html.*; import gplx.xowa.net.*;
+import gplx.xowa.wikis.xwikis.*; import gplx.xowa.html.*; import gplx.xowa.net.*;
 public class Xop_link_parser {
 	public byte[] Html_xowa_ttl()	{return html_xowa_ttl;} private byte[] html_xowa_ttl;
 	public byte[] Html_anchor_cls()	{return html_anchor_cls;} private byte[] html_anchor_cls;
@@ -75,7 +75,7 @@ public class Xop_link_parser {
 			Xow_xwiki_itm xwiki_itm = page_ttl.Wik_itm();
 			if (xwiki_itm != null) {				// is alias; set wiki, page
 				wiki_bry = xwiki_itm.Domain();
-				page_bry = Bry_.Mid(page_bry, xwiki_itm.Key().length + 1, page_bry.length);	// +1 for ":"
+				page_bry = Bry_.Mid(page_bry, xwiki_itm.Key_bry().length + 1, page_bry.length);	// +1 for ":"
 			}
 			else									// is regular page; use ttl.Full_db() to normalize; EX: &nbsp; -> _
 				page_bry = page_ttl.Full_db();

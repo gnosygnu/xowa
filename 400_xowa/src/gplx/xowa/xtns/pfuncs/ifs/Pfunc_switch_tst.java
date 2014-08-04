@@ -77,5 +77,15 @@ public class Pfunc_switch_tst {
 		fxt.Test_parse_tmpl_str_test("{{#switch:a|#default|#default=1}}"	, "{{test}}"			, "1");		// override "|#default|" with "|#default=2|"
 		fxt.Test_parse_tmpl_str_test("{{#switch:b|#default|1}}"				, "{{test}}"			, "1");		// override "|#default|" with "|2|"
 		fxt.Test_parse_tmpl_str_test("{{#switch:b|#defaultabc=1}}"			, "{{test}}"			, "1");		// this is also supported by MW
-	}		
+	}
+	@Test  public void Multiple() {
+		fxt.Wiki().Lang().Kwd_mgr().Kwd_default_match_reset();
+		Xol_kwd_grp kwd_grp = fxt.Wiki().Lang().Kwd_mgr().Get_or_new(Xol_kwd_grp_.Id_xtn_default);
+		kwd_grp.Srl_load(Bool_.Y, new byte[][] {Bry_.new_ascii_("#default1"), Bry_.new_ascii_("#default2")});
+		fxt.Test_parse_tmpl_str_test("{{#switch:|n=n|#default1=y}}"			, "{{test}}"			, "y");
+		fxt.Test_parse_tmpl_str_test("{{#switch:|n=n|#default2=y}}"			, "{{test}}"			, "y");
+		fxt.Test_parse_tmpl_str_test("{{#switch:a|n=n|#default=y}}"			, "{{test}}"			, "");	// #default is just a case
+		fxt.Test_parse_tmpl_str_test("{{#switch:|n=n|#default=y}}"			, "{{test}}"			, "");	// make sure empty String doesn't throw out of bounds
+		fxt.Wiki().Lang().Kwd_mgr().Kwd_default_match_reset();
+	}
 }

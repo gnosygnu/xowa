@@ -18,14 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.stores.xmls; import gplx.*; import gplx.stores.*;
 import org.junit.*;
 public class XmlDataRdr_tst {
-	@Test public void Read() {
+	@Test  public void Read() {
 		DataRdr rdr = fx.rdr_("<title id=\"1\" name=\"first\" profiled=\"false\" />");
 		Tfds.Eq(rdr.NameOfNode(), "title");
 		Tfds.Eq(rdr.ReadStr("name"), "first");
 		Tfds.Eq(rdr.ReadInt("id"), 1);
 		Tfds.Eq(rdr.ReadBool("profiled"), false);
 	}
-	@Test public void None() {
+	@Test  public void None() {
 		DataRdr rdr = fx.rdr_
 			(	"<root>"
 			,		"<find/>"
@@ -33,7 +33,7 @@ public class XmlDataRdr_tst {
 			);
 		fx.tst_Subs_ByName(rdr, "no_nde", "no_atr");
 	}
-	@Test public void One() {
+	@Test  public void One() {
 		DataRdr rdr = fx.rdr_
 			(	"<root>"
 			,		"<find id=\"f0\" />"
@@ -41,7 +41,7 @@ public class XmlDataRdr_tst {
 			);
 		fx.tst_Subs_ByName(rdr, "find", "id", "f0");
 	}
-	@Test public void One_IgnoreOthers() {
+	@Test  public void One_IgnoreOthers() {
 		DataRdr rdr = fx.rdr_
 			(	"<root>"
 			,		"<find id=\"f0\" />"
@@ -50,7 +50,7 @@ public class XmlDataRdr_tst {
 			);
 		fx.tst_Subs_ByName(rdr, "find", "id", "f0");
 	}
-	@Test public void Many() {
+	@Test  public void Many() {
 		DataRdr rdr = fx.rdr_
 			(	"<root>"
 			,		"<find id=\"f0\" />"
@@ -59,7 +59,7 @@ public class XmlDataRdr_tst {
 			);
 		fx.tst_Subs_ByName(rdr, "find", "id", "f0", "f1");
 	}
-	@Test public void Nested() {
+	@Test  public void Nested() {
 		DataRdr rdr = fx.rdr_
 			(	"<root>"
 			,		"<sub1>"
@@ -70,7 +70,7 @@ public class XmlDataRdr_tst {
 			);
 		fx.tst_Subs_ByName(rdr, "sub1/find", "id", "f0", "f1");
 	}
-	@Test public void Nested_IgnoreOthers() {
+	@Test  public void Nested_IgnoreOthers() {
 		DataRdr rdr = fx.rdr_
 			(	"<root>"
 			,		"<sub1>"

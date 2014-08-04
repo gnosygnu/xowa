@@ -54,8 +54,9 @@ public class Gfo_thread_cmd_download implements Gfo_thread_cmd {
 	private void Download() {
 		download_pass = true;
 		if (!xrg.Exec()) {
-			kit.Ask_ok(GRP_KEY, "download.fail", "download failed. Please select 'read from file' if you've already downloaded a dump: url=~{0} error=~{1}", src, Err_.Message_gplx_brief(xrg.Rslt_err()));
+			xrg.Prog_running_(false);
 			download_pass = false;
+			kit.Ask_ok(GRP_KEY, "download.fail", "download failed. Please select 'read from file' if you've already downloaded a dump: url=~{0} error=~{1}", src, xrg.Rslt_err_str());
 		}
 	}	boolean download_pass = true;
 	protected gplx.ios.IoEngine_xrg_downloadFil xrg = Io_mgr._.DownloadFil_args("", Io_url_.Null);

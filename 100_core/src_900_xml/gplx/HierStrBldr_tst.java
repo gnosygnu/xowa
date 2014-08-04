@@ -20,19 +20,19 @@ import org.junit.*;
 import gplx.ios.*; import gplx.texts.*;
 public class HierStrBldr_tst {
 	@Before public void setup() {bldr = new HierStrBldr();}  HierStrBldr bldr;
-	@Test public void Hier0() {
+	@Test  public void Hier0() {
 		bldr.Ctor("/root/", "dir_{0}/", "idx_{0}.csv", "000");
 		tst_MakeName( 0, "/root/idx_000.csv");
 		tst_MakeName( 1, "/root/idx_001.csv");
 		tst_MakeName(10, "/root/idx_010.csv");
 	}
-	@Test public void Hier1() {
+	@Test  public void Hier1() {
 		bldr.Ctor("/root/", "dir_{0}/", "idx_{0}.csv", "000", 10);
 		tst_MakeName( 0, "/root/dir_000/idx_000.csv");
 		tst_MakeName( 1, "/root/dir_000/idx_001.csv");
 		tst_MakeName(10, "/root/dir_010/idx_010.csv");
 	}
-	@Test public void Hier2() {
+	@Test  public void Hier2() {
 		bldr.Ctor("/root/", "dir_{0}/", "idx_{0}.csv", "000", 5, 10);
 		tst_MakeName(  0, "/root/dir_000/dir_000/idx_000.csv");
 		tst_MakeName(  1, "/root/dir_000/dir_000/idx_001.csv");

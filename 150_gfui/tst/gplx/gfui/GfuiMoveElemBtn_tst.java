@@ -24,7 +24,7 @@ public class GfuiMoveElemBtn_tst {
 		GfuiMoveElemBnd bnd = GfuiMoveElemBnd.new_(); bnd.TargetElem_set(form);
 		moveBtn.IptBnds().Add(bnd);
 	}
-	@Test public void Basic() {
+	@Test  public void Basic() {
 		Tfds.Eq(form.X(), 0);
 		IptEventMgr.ExecKeyDown(moveBtn, IptEvtDataKey.test_(MoveRightArg()));
 		Tfds.Eq(form.X(), 10);

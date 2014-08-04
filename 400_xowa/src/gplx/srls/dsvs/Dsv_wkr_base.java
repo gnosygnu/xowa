@@ -24,10 +24,12 @@ public abstract class Dsv_wkr_base implements GfoInvkAble {
 	public void Load_by_bry(byte[] src) {
 		Dsv_tbl_parser tbl_parser = new Dsv_tbl_parser();	// NOTE: this proc should only be called once, so don't bother caching tbl_parser
 		tbl_parser.Init(this, this.Fld_parsers());
+		Load_by_bry_bgn();
 		tbl_parser.Parse(src);
 		tbl_parser.Rls();
 		Load_by_bry_end();
 	}
+	@gplx.Virtual public void Load_by_bry_bgn() {}
 	@gplx.Virtual public void Load_by_bry_end() {}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_load_by_str))			Load_by_bry(m.ReadBry("v"));

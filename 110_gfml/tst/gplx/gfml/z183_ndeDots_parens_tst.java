@@ -28,7 +28,7 @@ public class z183_ndeDots_parens_tst {
 			,	GfmlDocLxrs.NdeHdrEnd_lxr()
 			);
 	}	GfmlParse_fxt fx = GfmlParse_fxt.new_();
-	@Test public void Basic() {
+	@Test  public void Basic() {
 		fx.tst_Doc("{a.b(c);z;}"
 			,	fx.nde_().ChainId_(0).Subs_
 			(		fx.nde_().Hnd_("a").ChainId_(1).Subs_
@@ -37,7 +37,7 @@ public class z183_ndeDots_parens_tst {
 			,		fx.nde_().ChainId_(0).Atru_("z")
 			));
 	}
-	@Test public void Basic_tkn() {
+	@Test  public void Basic_tkn() {
 		//A_('1');
 		fx.tst_Tkn("a(c);"
 			,	fx.tkn_grp_
@@ -47,7 +47,7 @@ public class z183_ndeDots_parens_tst {
 			)
 			);
 	}
-	@Test public void Basic2_tkn() {
+	@Test  public void Basic2_tkn() {
 		fx.tst_Tkn("a.b(c);"
 			,	fx.tkn_grp_
 			(	fx.tkn_itm_("a"), fx.tkn_itm_(".")
@@ -57,7 +57,7 @@ public class z183_ndeDots_parens_tst {
 			)
 			);
 	}
-	@Test public void Many() {
+	@Test  public void Many() {
 		fx.ini_RootLxr_Add(GfmlDocLxrs.Whitespace_lxr());
 		fx.tst_Doc("{a.b(c d e);z;}"
 			,	fx.nde_().ChainId_(0).Subs_
@@ -67,7 +67,7 @@ public class z183_ndeDots_parens_tst {
 			,		fx.nde_().ChainId_(0).Atru_("z")
 			));
 	}
-//		@Test public void Many2() {
+//		@Test  public void Many2() {
 //			fx.ini_RootLxr_Add(GfmlDocLxrs.Whitespace_lxr());
 //			fx.tst_Doc("{a.b(c){d();}}"
 //				,	fx.nde_().ChainId_(0).Subs_
@@ -78,7 +78,7 @@ public class z183_ndeDots_parens_tst {
 //				)
 //				));
 //		}
-	@Test public void Chain() {
+	@Test  public void Chain() {
 		fx.ini_RootLxr_Add(GfmlDocLxrs.Whitespace_lxr());
 		fx.tst_Doc("{a.b(c).d(e);z;}"
 			,	fx.nde_().ChainId_(0).Subs_
@@ -90,7 +90,7 @@ public class z183_ndeDots_parens_tst {
 			,		fx.nde_().ChainId_(0).Atru_("z")
 			));
 	}
-	@Test public void Nest() {
+	@Test  public void Nest() {
 		fx.tst_Doc("{a.b(c.d);z;}"
 			,	fx.nde_().ChainId_(0).Subs_
 			(		fx.nde_().Hnd_("a").ChainId_(1).Subs_
@@ -103,7 +103,7 @@ public class z183_ndeDots_parens_tst {
 			,		fx.nde_().Atru_("z")
 			));
 	}
-	@Test public void Nest_longer() {
+	@Test  public void Nest_longer() {
 		fx.tst_Doc("{a.b.c(d.e.f);z;}"
 			,	fx.nde_().ChainId_(0).Subs_
 			(		fx.nde_().Hnd_("a").ChainId_(1).Subs_
@@ -120,7 +120,7 @@ public class z183_ndeDots_parens_tst {
 			,		fx.nde_().Atru_("z")
 			));
 	}
-	@Test public void Nest_deeper() {
+	@Test  public void Nest_deeper() {
 		fx.tst_Doc("{a.b(c.d(e.f));z;}"
 			,	fx.nde_().ChainId_(0).Subs_
 			(		fx.nde_().Hnd_("a").ChainId_(1).Subs_

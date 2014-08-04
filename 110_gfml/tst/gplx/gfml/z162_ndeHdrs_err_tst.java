@@ -24,10 +24,10 @@ public class z162_ndeHdrs_err_tst {
 			(	GfmlDocLxrs.NdeHeader_lxr()
 			);
 	}
-	@Test public void NotNamed() {
+	@Test  public void NotNamed() {
 		fx.tst_Err(":", UsrMsg_mok.new_(GfmlUsrMsgs.fail_DatTkn_notFound()));
 	}
-	@Test public void Dangling() {
+	@Test  public void Dangling() {
 		fx.tst_Err("a{", UsrMsg_mok.new_(GfmlUsrMsgs.fail_Frame_danglingBgn()));
 	}
 }

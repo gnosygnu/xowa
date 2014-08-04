@@ -161,6 +161,7 @@ public class Scrib_core {
 			Scrib_lua_mod mod = Mods_get_or_new(mod_name, mod_text);
 			KeyVal[] func_args = Scrib_kv_utl_.base1_many_(mod.Init_chunk_func(), String_.new_utf8_(fnc_name));
 			KeyVal[] func_rslt = engine.CallFunction(lib_mw.Mod().Fncs_get_id("executeModule"), func_args);			// call init_chunk to get proc dynamically; DATE:2014-07-12
+			if (func_rslt == null || func_rslt.length == 0) throw Err_.new_("lua.error:function did not return a value; fnc_name=~{0}", String_.new_utf8_(fnc_name));
 			Scrib_lua_proc proc = (Scrib_lua_proc)func_rslt[1].Val();												// note that init_chunk should have: [0]:true/false result; [1]:proc
 			func_args = Scrib_kv_utl_.base1_many_(proc);
 			func_rslt = engine.CallFunction(lib_mw.Mod().Fncs_get_id("executeFunction"), func_args);				// call function now
@@ -186,18 +187,13 @@ public class Scrib_core {
 	}
 	public static Scrib_core Core() {return core;} public static Scrib_core Core_new_(Xoa_app app, Xop_ctx ctx) {core = new Scrib_core(app, ctx); return core;} private static Scrib_core core;
 	public void Handle_error(String err, String traceback) {
-		byte[] excerpt = Bry_.Empty;
+		String excerpt = "";
 		try {
 			Xot_invk src_frame = frame_current;
 			if (src_frame != null)
-				excerpt = Bry_.Mid(cur_src, src_frame.Src_bgn(), src_frame.Src_end());
+				excerpt = String_.new_utf8_(cur_src, src_frame.Src_bgn(), src_frame.Src_end());
 		} catch (Exception e) {Err_.Noop(e);}
-		app.Usr_dlg().Warn_many("", "", "lua error; page=~{0} excerpt=~{1} err=~{2} ~{3}"
-		, page.Ttl().Page_db_as_str()
-		, String_.new_utf8_(excerpt)
-		, err
-		, traceback
-		);
+		throw Err_.new_(err, page.Ttl().Page_db_as_str(), excerpt, traceback);
 	}
 	public static void Core_page_changed(Xoa_page page) {
 		if (core != null) {

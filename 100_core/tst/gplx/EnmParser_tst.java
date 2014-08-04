@@ -21,7 +21,7 @@ public class EnmParser_tst {
 	@Before public void setup() {
 		parser = EnmMgr.new_();
 	}
-	@Test public void Basic() { // 1,2,4,8
+	@Test  public void Basic() { // 1,2,4,8
 		parser.BitRngEnd_(8);
 		run_Reg(0, "zero");
 		run_Reg(1, "one");
@@ -34,7 +34,7 @@ public class EnmParser_tst {
 		tst_Convert("eight", 8);
 		tst_Convert("one+eight", 9);
 	}
-	@Test public void Keys() {
+	@Test  public void Keys() {
 		parser.BitRngBgn_(65536).BitRngEnd_(262144);
 		run_Reg(	65, "a");
 		run_Reg( 65536, "shift");
@@ -45,7 +45,7 @@ public class EnmParser_tst {
 		tst_Convert("ctrl+a", 65 + 131072);
 		tst_Convert("shift+ctrl+a", 65 + 65536 + 131072);
 	}
-	@Test public void Prefix() {
+	@Test  public void Prefix() {
 		parser.Prefix_("key.").BitRngBgn_(128).BitRngEnd_(128);
 		run_Reg(65, "a");
 		tst_Convert("key.a", 65);

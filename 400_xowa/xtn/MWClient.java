@@ -15,24 +15,24 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-import org.luaj.vm2.LuaTable;
-import org.luaj.vm2.LuaValue;
-import org.luaj.vm2.lib.OneArgFunction;
-import org.luaj.vm2.lib.jse.JsePlatform;
-
-import gplx.xowa.xtns.scribunto.engines.luaj.Luaj_server_func_recv;
-public class MWClient extends OneArgFunction {
-	/** The implementation of the ZeroArgFunction interface.
-	 * This will be called once when the library is loaded via require().
-	 * @param arg LuaString containing the name used in the call to require().
-	 * @return Value that will be returned in the require() call.  In this case, 
-	 * it is the library itself.
-	 */
-	public LuaValue call(LuaValue libname) {
-		LuaValue library = tableOf();
-		library.set("client_recv", Luaj_server_func_recv._);
-		LuaValue env = gplx.xowa.xtns.scribunto.engines.luaj.Luaj_server.Globals_singleton; 
-		env.set( "MWClient", library );
-		return library;
-	}
-}
+//import org.luaj.vm2.LuaTable;
+//import org.luaj.vm2.LuaValue;
+//import org.luaj.vm2.lib.OneArgFunction;
+//import org.luaj.vm2.lib.jse.JsePlatform;
+//
+//import gplx.xowa.xtns.scribunto.engines.luaj.Luaj_server_func_recv;
+//public class MWClient extends OneArgFunction {
+//	/** The implementation of the ZeroArgFunction interface.
+//	 * This will be called once when the library is loaded via require().
+//	 * @param arg LuaString containing the name used in the call to require().
+//	 * @return Value that will be returned in the require() call.  In this case, 
+//	 * it is the library itself.
+//	 */
+//	public LuaValue call(LuaValue libname) {
+//		LuaValue library = tableOf();
+//		library.set("client_recv", Luaj_server_func_recv._);
+//		LuaValue env = gplx.xowa.xtns.scribunto.engines.luaj.Luaj_server.Globals_singleton; 
+//		env.set( "MWClient", library );
+//		return library;
+//	}
+//}

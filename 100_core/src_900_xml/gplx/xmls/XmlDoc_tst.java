@@ -19,13 +19,13 @@ package gplx.xmls; import gplx.*;
 import org.junit.*;
 public class XmlDoc_tst {
 	String xml; XmlDoc xdoc; XmlNde xnde;
-	@Test public void parse_() {
+	@Test  public void parse_() {
 		xml = String_.Concat("<root/>");
 		xdoc = XmlDoc_.parse_(xml);
 		Tfds.Eq("root", xdoc.Root().Name());
 		Tfds.Eq(true, xdoc.Root().NdeType_element());
 	}
-	@Test public void Xml_outer() {
+	@Test  public void Xml_outer() {
 		xml = String_.Concat
 			( "<root>"
 			,	"<a>"
@@ -39,7 +39,7 @@ public class XmlDoc_tst {
 		Tfds.Eq("a", xnde.Name());
 		Tfds.Eq("<a><b/><b/></a>", xnde.Xml_outer());	
 	}
-	@Test public void Text_inner() {
+	@Test  public void Text_inner() {
 		xml = String_.Concat
 			( "<root>"
 			,	"<a>"
@@ -52,7 +52,7 @@ public class XmlDoc_tst {
 		Tfds.Eq("a", xnde.Name());
 		Tfds.Eq("test me", xnde.Text_inner());
 	}
-	@Test public void Atrs() {
+	@Test  public void Atrs() {
 		xml = String_.Concat
 			( "<root atr0=\"0\" atr1=\"1\">"
 			, "</root>"

@@ -66,6 +66,12 @@ public class Err_ {	//_20110415
 	public static String Message_lang(Exception e)			{return e.getClass() + " " + e.getMessage();} 
 	public static String Message_gplx(Exception e)			{return ErrMsgWtr._.Message_gplx(e);}
 	public static String Message_gplx_brief(Exception e)		{return ErrMsgWtr._.Message_gplx_brief(e);}
+	public static String Message_hdr_or_message(Exception e) {
+		if (e == null) return "exception is null";
+		return ClassAdp_.Eq(e.getClass(), Err.class)
+			? ((Err)e).Hdr()
+			: Message_lang(e);
+	}
 	@gplx.Internal protected static String StackTrace_lang(Exception e) {
 				String_bldr sb = String_bldr_.new_();
 		StackTraceElement[] stackTraceAry = e.getStackTrace();

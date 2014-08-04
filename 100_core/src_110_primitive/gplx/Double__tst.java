@@ -15,12 +15,15 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.html.modules; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import gplx.xowa.html.modules.popups.*;
-public class Xow_module_mgr {
-	public Xow_module_mgr(Xow_wiki wiki) {this.popup_mgr = new Xow_popup_mgr(wiki);}
-	public void Init_by_wiki(Xow_wiki wiki) {
-		popup_mgr.Init_by_wiki(wiki);
+package gplx;
+import org.junit.*;
+public class Double__tst {
+	private Double__fxt fxt = new Double__fxt();
+	@Test  public void Xto_str_loose() {			
+		fxt.Test_Xto_str_loose(2449.6000000d		, "2449.6");
+		fxt.Test_Xto_str_loose(623.700d				, "623.7");
 	}
-	public Xow_popup_mgr Popup_mgr() {return popup_mgr;} private Xow_popup_mgr popup_mgr;
+}
+class Double__fxt {
+	public void Test_Xto_str_loose(double v, String expd) {Tfds.Eq(expd, Double_.Xto_str_loose(v));}
 }

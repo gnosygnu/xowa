@@ -18,23 +18,23 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.stores; import gplx.*;
 import org.junit.*;
 public class GfoNdeRdr_read_tst {
-	@Test public void ReadInt() {
+	@Test  public void ReadInt() {
 		rdr = rdr_(IntClassXtn._, "id", 1);
 		Tfds.Eq(rdr.ReadInt("id"), 1);
 	}
-	@Test public void ReadIntOr() {
+	@Test  public void ReadIntOr() {
 		rdr = rdr_(IntClassXtn._, "id", 1);
 		Tfds.Eq(rdr.ReadIntOr("id", -1), 1);
 	}
-	@Test public void ReadIntElse_minus1() {
+	@Test  public void ReadIntElse_minus1() {
 		rdr = rdr_(IntClassXtn._, "id", null);
 		Tfds.Eq(rdr.ReadIntOr("id", -1), -1);
 	}
-	@Test public void ReadInt_parse() {
+	@Test  public void ReadInt_parse() {
 		rdr = rdr_(StringClassXtn._, "id", "1");
 		Tfds.Eq(rdr.ReadInt("id"), 1);
 	}
-	@Test public void ReadIntElse_parse() {
+	@Test  public void ReadIntElse_parse() {
 		rdr = rdr_(StringClassXtn._, "id", "2");
 		Tfds.Eq(rdr.ReadIntOr("id", -1), 2);
 	}

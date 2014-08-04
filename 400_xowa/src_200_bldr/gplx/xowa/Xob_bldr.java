@@ -65,7 +65,10 @@ public class Xob_bldr implements GfoInvkAble {
 			app.Usr_dlg().Note_many(GRP_KEY, "bldr_done", "bldr done: ~{0}", TimeSpanAdp_.from_(time_bgn).XtoStrUiAbbrv());
 			cmd_mgr.Clear();
 			if (pause_at_end && !Env_.Mode_testing()) {ConsoleAdp._.ReadLine("press enter to continue");}
-		}	catch (Exception e) {throw Err_.err_(e, "error during build: ~{0}", Err_.Message_gplx(e));}
+		}
+		catch (Exception e) {
+			throw Err_.err_(e, "error during build: ~{0}", Err_.Message_gplx(e));
+		}
 	}
 	private void Cancel() {
 		int cmd_mgr_len = cmd_mgr.Len();

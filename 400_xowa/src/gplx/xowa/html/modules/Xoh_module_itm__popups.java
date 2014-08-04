@@ -33,15 +33,7 @@ public class Xoh_module_itm__popups implements Xoh_module_itm {
 	public void Write_js_head_script(Xoa_app app, Xow_wiki wiki, Xoa_page page, Xoh_module_wtr wtr) {}
 	public void Write_js_tail_script(Xoa_app app, Xow_wiki wiki, Xoa_page page, Xoh_module_wtr wtr) {
 		if (!enabled) return;
-		if (Js_line_2 == null) {
-			Js_line_2 = Bry_.Add
-			( Js_line_2_bgn
-			, app.Fsys_mgr().Bin_any_dir().GenSubFil_nest("xowa", "html", "modules", "xowa.popups", "xowa.popups.js").To_http_file_bry()
-			, Js_line_2_end
-			);
-		}
-		wtr.Write_js_line(Js_line_1);
-		wtr.Write_js_line(Js_line_2);
+		wtr.Write_js_tail_load_lib(app.Fsys_mgr().Bin_any_dir().GenSubFil_nest("xowa", "html", "modules", "xowa.popups", "xowa.popups.js"));
 	}
 	public void Write_js_head_global(Xoa_app app, Xow_wiki wiki, Xoa_page page, Xoh_module_wtr wtr) {
 		if (!enabled) return;
@@ -54,12 +46,9 @@ public class Xoh_module_itm__popups implements Xoh_module_itm {
 		wtr.Write_js_global_ini_atr_val(Key_win_bind_focus_blur		, api_popups.Win_bind_focus_blur());
 		wtr.Write_js_global_ini_atr_val(Key_win_bind_hover_area		, bind_hover_area);
 	}
-	private static byte[] Css_url, Js_line_2;
+	private static byte[] Css_url;
 	private static final byte[]
-	  Js_line_1						= Bry_.new_ascii_("xowa.js.jquery.init();")
-	, Js_line_2_bgn					= Bry_.new_ascii_("xowa.js.load_lib('")
-	, Js_line_2_end					= Bry_.new_ascii_("');")
-	, Key_win_show_delay			= Bry_.new_ascii_("popups-win-show_delay")
+	  Key_win_show_delay			= Bry_.new_ascii_("popups-win-show_delay")
 	, Key_win_hide_delay			= Bry_.new_ascii_("popups-win-hide_delay")
 	, Key_win_max_w					= Bry_.new_ascii_("popups-win-max_w")
 	, Key_win_max_h					= Bry_.new_ascii_("popups-win-max_h")

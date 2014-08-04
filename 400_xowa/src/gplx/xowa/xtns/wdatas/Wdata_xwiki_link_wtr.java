@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.json.*; import gplx.xowa.wikis.*; import gplx.xowa.xtns.wdatas.*;
+import gplx.json.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.xtns.wdatas.*;
 public class Wdata_xwiki_link_wtr implements Bry_fmtr_arg {
 	public Wdata_xwiki_link_wtr Page_(Xoa_page page) {this.page = page; return this;} private Xoa_page page;
 	public void XferAry(Bry_bfr bfr, int idx) {

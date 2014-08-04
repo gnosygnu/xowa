@@ -19,7 +19,7 @@ package gplx.stores.dsvs; import gplx.*; import gplx.stores.*;
 import org.junit.*;
 public class DsvDataRdr_dsv_hdr_tst {
 	@Before public void setup() {fx.Clear();} DsvDataRdr_fxt fx = DsvDataRdr_fxt.new_();
-	@Test public void Names() {
+	@Test  public void Names() {
 		fx.run_parse_lines_
 			(	"id,name, ,\" \",@"
 			,	"0,me"
@@ -32,7 +32,7 @@ public class DsvDataRdr_dsv_hdr_tst {
 			,	fx.ary_("1", "you")
 			);
 	}
-	@Test public void Types() {
+	@Test  public void Types() {
 		fx.run_parse_lines_
 			(	"int," + StringClassXtn.Key_const + ", ,\" \",$"
 			,	"0,me"
@@ -44,7 +44,7 @@ public class DsvDataRdr_dsv_hdr_tst {
 			,	fx.ary_(1, "you")
 			);
 	}
-	@Test public void NamesAndTypes() {
+	@Test  public void NamesAndTypes() {
 		fx.run_parse_lines_
 			(	"id,name, ,\" \",@"
 			,	"int," + StringClassXtn.Key_const + ", ,\" \",$"
@@ -57,7 +57,7 @@ public class DsvDataRdr_dsv_hdr_tst {
 			,	fx.ary_(1, "you")
 			);
 	}
-	@Test public void MultipleTables_NoData() {
+	@Test  public void MultipleTables_NoData() {
 		fx.run_parse_lines_
 			(	"persons, ,\" \",#"
 			,	"id,name, ,\" \",@"
@@ -70,7 +70,7 @@ public class DsvDataRdr_dsv_hdr_tst {
 		fx.tst_Dat(0);
 		fx.tst_Dat(1);
 	}
-	@Test public void Comment() {
+	@Test  public void Comment() {
 		fx.run_parse_lines_
 			(	"--------------------, ,\" \",//"
 			,	"tbl0, ,\" \",#"

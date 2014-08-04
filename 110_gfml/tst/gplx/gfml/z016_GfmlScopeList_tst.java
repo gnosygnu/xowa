@@ -21,14 +21,14 @@ public class z016_GfmlScopeList_tst {
 	@Before public void setup() {
 		list = GfmlScopeList.new_("test");
 	}	GfmlScopeList list;
-	@Test public void None() {
+	@Test  public void None() {
 		tst_Itm(list, GfmlDocPos_.Root, null);
 	}
-	@Test public void One() {
+	@Test  public void One() {
 		run_Add(list, var_("val1"));
 		tst_Itm(list, GfmlDocPos_.Root, "val1");
 	}
-	@Test public void ByPos() {
+	@Test  public void ByPos() {
 		run_Add(list, var_("val1").DocPos_(docPos_(0, 0)));
 		run_Add(list, var_("val2").DocPos_(docPos_(0, 0, 0)));
 		tst_Itm(list, docPos_(0, 0), "val1");

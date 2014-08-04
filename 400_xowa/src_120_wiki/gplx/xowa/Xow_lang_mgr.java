@@ -16,17 +16,20 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.xowa.wikis.xwikis.*; import gplx.xowa.apis.xowa.html.*;
 public class Xow_lang_mgr {
 	Xow_lang_mgr() {
 		int len = Xol_lang_itm_.Id__max;
 		itms = new Xow_lang_itm[len];
+		
 	}
-	public Bry_fmtr Html_div() {return html_div;} Bry_fmtr html_div = Bry_fmtr.new_(
-		String_.Concat_lines_nl_skip_last
-		(	"<div id=\"xowa-lang\">"
-		,	"  <h5>~{langs_hdr}~{wikidata_link}</h5>~{grps}"
-		,	"</div>"
-		), "grps", "langs_hdr", "wikidata_link");
+	public Bry_fmtr Html_div() {return html_div;} Bry_fmtr html_div = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	( "<div id=\"xowa-lang\">"
+	, "  <h5>~{langs_hdr}~{wikidata_link}<a href='javascript:xowa_toggle_visible(\"wikidata-langs\");'><img id='wikidata-langs-toggle-icon' src='~{icon_src}' title='~{icon_title}' /></a></h5>"
+	, "  <div id='wikidata-langs-toggle-elem' style='~{elem_display}'>~{grps}"
+	, "  </div>"
+	, "</div>"
+	), "langs_hdr", "wikidata_link", "icon_src", "icon_title", "elem_display", "grps");
 	public Bry_fmtr Html_wikidata_link() {return html_wikidata_link;} Bry_fmtr html_wikidata_link = Bry_fmtr.new_(" (<a href=\"/site/www.wikidata.org/wiki/~{qid}\">wikidata</a>)", "qid");
 	public void Clear() {hash.Clear();}
 	public void Itms_reg(Xow_xwiki_itm xwiki, Xoac_lang_itm lang) {
@@ -103,8 +106,10 @@ class Xow_lang_html implements Bry_fmtr_arg {
 			case 0: {
 				stage = 1;
 				Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b128().Mkr_rls();
+				byte[] msg_lang = wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_page_lang_header);
 				byte[] wikidata_link = Bry_.Len_eq_0(qid) ? Bry_.Empty : lang_mgr.Html_wikidata_link().Bld_bry_many(tmp_bfr, qid);
-				lang_mgr.Html_div().Bld_bfr_many(bfr, this, wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_page_lang_header), wikidata_link);
+				Xoapi_toggle_itm visible_data = wiki.App().Api_root().Html().Page().Toggle_mgr().Itm_wikidata_langs().Init(wiki);
+				lang_mgr.Html_div().Bld_bfr_many(bfr, msg_lang, wikidata_link, visible_data.Icon_src(), visible_data.Icon_title(), visible_data.Elem_display(), this);
 				stage = 0;
 				break;
 			}

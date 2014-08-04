@@ -19,29 +19,29 @@ package gplx.gfml; import gplx.*;
 import org.junit.*;
 public class z015_GfmlDocPos_tst {
 	GfmlDocPos root = GfmlDocPos_.Root;
-	@Test public void Root() {
+	@Test  public void Root() {
 		tst_Path(root, "0");
 	}
-	@Test public void MoveDown() {
+	@Test  public void MoveDown() {
 		tst_Path(root.NewDown(0), "0_0");
 		tst_Path(root.NewDown(0).NewDown(0), "0_0_0");
 		tst_Path(root.NewDown(1).NewDown(2), "0_1_2");
 	}
-	@Test public void MoveUp() {
+	@Test  public void MoveUp() {
 		tst_Path(root.NewDown(1).NewDown(2).NewUp(), "0_1");
 	}
-	@Test public void CompareTo_same() {
+	@Test  public void CompareTo_same() {
 		GfmlDocPos lhs = root.NewDown(0);
 		GfmlDocPos rhs = root.NewDown(0);
 		tst_CompareTo(lhs, rhs, CompareAble_.Same);
 	}
-	@Test public void CompareTo_diffIndex() {
+	@Test  public void CompareTo_diffIndex() {
 		GfmlDocPos lhs = root.NewDown(0);
 		GfmlDocPos rhs = root.NewDown(1);
 		tst_CompareTo(lhs, rhs, CompareAble_.Less);
 		tst_CompareTo(rhs, lhs, CompareAble_.More);
 	}
-	@Test public void CompareTo_diffLevel() {
+	@Test  public void CompareTo_diffLevel() {
 		GfmlDocPos lhs = root;
 		GfmlDocPos rhs = root.NewDown(0);
 		tst_CompareTo(lhs, rhs, CompareAble_.Less);

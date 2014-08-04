@@ -58,7 +58,7 @@ public class Xodb_fsys_mgr {
 		if (max == Max_core_db) return files_ary[File_id_core];
 		return Make(tid).File_max_(max);
 	}
-	private void Init_by_tid_core(Xodb_file file)				{core_provider = page_provider = category_provider = wikidata_provider = file.Provider();}
+	private void Init_by_tid_core(Xodb_file file)		{core_provider = page_provider = category_provider = wikidata_provider = file.Provider();}
 	public void Init_by_tid_category(Xodb_file file)	{category_provider = file.Provider();}
 	public void Init_by_tid_wikidata(Xodb_file file)	{wikidata_provider = file.Provider();}
 	private void Init_by_ns_map(Xow_ns_mgr ns_mgr, Xodb_ns_map_mgr ns_map) {
@@ -97,7 +97,7 @@ public class Xodb_fsys_mgr {
 		for (int i = 0; i < files_ary_len; i++) {
 			Xodb_file file = files_ary[i];
 			if (Byte_.In(file.Tid(), tids))
-				Xodb_fsdb_mgr_.Index_create(usr_dlg, file, idxs);
+				Sqlite_engine_.Idx_create(usr_dlg, file.Provider(), Int_.XtoStr(file.Id()), idxs);
 		}
 	}
 	public void Overwrite(int file_idx) {Create_sqlite3(src_dir, trg_dir, trg_name, file_idx);}
@@ -129,18 +129,4 @@ public class Xodb_fsys_mgr {
 	}
 	public static final int Heap_max_infinite = 0;
 	public static final long Max_core_db = -1;
-}
-class Xodb_fsdb_mgr_ {
-	public static void Index_create(Gfo_usr_dlg usr_dlg, Xodb_file file, Db_idx_itm[] idxs) {
-		Db_provider provider = file.Provider();
-		provider.Txn_mgr().Txn_end_all();	// commit any pending transactions
-		int len = idxs.length;
-		for (int i = 0; i < len; i++) {
-			provider.Txn_mgr().Txn_bgn_if_none();
-			String index = idxs[i].Xto_sql();
-			usr_dlg.Prog_many("", "", "creating index: ~{0} ~{1}", file.Id(), index);
-			provider.Exec_sql(index);
-			provider.Txn_mgr().Txn_end_all();
-		}
-	}
 }

@@ -22,6 +22,31 @@ public class Xol_kwd_mgr implements GfoInvkAble {
 	public int Len() {return grps.length;}
 	public Btrie_slim_mgr Trie_raw() {if (trie_raw == null) trie_raw = Xol_kwd_mgr.trie_(this, Xol_kwd_grp_.Id_str_rawsuffix); return trie_raw;} private Btrie_slim_mgr trie_raw;
 	public Btrie_slim_mgr Trie_nosep() {if (trie_nosep == null) trie_nosep = Xol_kwd_mgr.trie_(this, Xol_kwd_grp_.Id_nocommafysuffix); return trie_nosep;} private Btrie_slim_mgr trie_nosep;
+	public void Kwd_default_match_reset() {kwd_default_init_needed = true;}	// TEST:
+	public boolean Kwd_default_match(byte[] match) {	// handle multiple #default keywords; DATE:2014-07-28
+		if (match == null) return false;			// null never matches #default
+		int match_len = match.length;
+		if (match_len == 0) return false;			// "" never matches default
+		if (kwd_default_init_needed) {
+			kwd_default_init_needed = false;
+			Xol_kwd_grp grp = this.Get_at(Xol_kwd_grp_.Id_xtn_default);
+			int len = grp.Itms().length;
+			if (len == 1) 
+				kwd_default_key = grp.Itms()[0].Val();
+			else {
+				kwd_default_trie = Btrie_slim_mgr.new_(grp.Case_match());
+				for (int i = 0; i < len; i++) {
+					Xol_kwd_itm itm = grp.Itms()[i];
+					kwd_default_trie.Add_obj(itm.Val(), itm);
+				}
+			}
+		}
+		return kwd_default_trie == null
+			? Bry_.HasAtBgn(match, kwd_default_key, 0, match_len)
+			: kwd_default_trie.Match_bgn(match, 0, match_len) != null
+			;
+	}
+	private Btrie_slim_mgr kwd_default_trie; private byte[] kwd_default_key; private boolean kwd_default_init_needed = true;
 	public Xol_kwd_grp Get_at(int id) {return grps[id];}
 	public Xol_kwd_grp Get_or_new(int id) {
 		Xol_kwd_grp rv = grps[id];

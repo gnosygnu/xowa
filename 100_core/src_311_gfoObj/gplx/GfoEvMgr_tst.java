@@ -21,31 +21,31 @@ public class GfoEvMgr_tst {
 	@Before public void setup() {
 		pub = make_(); sub = make_();
 	}	MockEvObj pub, sub;
-	@Test public void Basic() {
+	@Test  public void Basic() {
 		GfoEvMgr_.SubSame(pub, "ev1", sub);
 		GfoEvMgr_.PubVal(pub, "ev1", "val1");			
 		sub.tst_Handled("val1");
 	}
-	@Test public void None() {// make sure no subscribers does not cause exception
+	@Test  public void None() {// make sure no subscribers does not cause exception
 		GfoEvMgr_.SubSame(pub, "ev1", sub);
 		GfoEvMgr_.PubVal(pub, "ev2", "val1");	//ev2 does not exist
 		sub.tst_Handled();
 	}
-	@Test public void Lnk() {
+	@Test  public void Lnk() {
 		MockEvObj mid = make_();
 		mid.EvMgr().Lnk(pub);
 		GfoEvMgr_.SubSame(mid, "ev1", sub);
 		GfoEvMgr_.PubVal(pub, "ev1", "val1");
 		sub.tst_Handled("val1");
 	}
-	@Test public void RlsSub() {
+	@Test  public void RlsSub() {
 		this.Basic();
 
 		GfoEvMgr_.RlsSub(sub);
 		GfoEvMgr_.PubVal(pub, "ev1", "val1");
 		sub.tst_Handled();
 	}
-	@Test public void RlsPub() {
+	@Test  public void RlsPub() {
 		this.Basic();
 
 		GfoEvMgr_.RlsSub(pub);

@@ -45,6 +45,60 @@ public class Xoh_module_mgr_tst {
 		, "  </script>"
 		));
 	}
+	@Test  public void Globals() {
+		fxt.Init_msg(Xol_msg_itm_.Id_dte_month_name_january, "Jan'uary" );	// add apos to simulate apostrophes in Hebrew months; DATE:2014-07-28
+		fxt.Mgr().Itm_globals().Enabled_y_();
+		fxt.Test_write(String_.Concat_lines_nl_skip_last
+		( ""
+		, "  <script type='text/javascript'>"
+		, "    var xowa_root_dir = 'file:///mem/xowa/';"
+		, "    var xowa_mode_is_server = false;"
+		, "    var xowa_global_values = {"
+		, "      'mode_is_gui' : false,"
+		, "      'mode_is_http' : false,"
+		, "      'http-port' : 8080,"
+		, "      'sort-ascending' : 'Sort ascending',"
+		, "      'sort-descending' : 'Sort descending',"
+		, "      'wgContentLanguage' : 'en',"
+		, "      'wgSeparatorTransformTable' : ['.\t.', ',\t,'],"
+		, "      'wgDigitTransformTable' : ['', ''],"
+		, "      'wgDefaultDateFormat' : 'dmy',"
+		, "      'wgMonthNames' : ['', 'Jan\\'uary', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],"
+		, "      'wgMonthNamesShort' : ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],"
+		, "    }"
+		, "  </script>"
+		, "  <script src=\"file:///mem/xowa/bin/any/xowa/html/modules/xowa.core/xowa.core.js\" type='text/javascript'></script>"
+		));
+		fxt.Init_msg(Xol_msg_itm_.Id_dte_month_name_january, "January" );	// set it back
+	}
+	@Test   public void Globals_la() { // PURPOSE: la.gfs only specifies "," not "."; make sure both "." and "," show up, or else null ref error during import; DATE:2014-05-13
+		Xol_lang la_lang = fxt.Wiki().Lang();
+		gplx.xowa.langs.numbers.Xol_transform_mgr separators_mgr = la_lang.Num_mgr().Separators_mgr();
+		separators_mgr.Clear();
+		separators_mgr.Set(gplx.xowa.langs.numbers.Xol_num_mgr.Separators_key__grp, Bry_.new_ascii_(" "));
+		fxt.Mgr().Itm_globals().Enabled_y_();
+		fxt.Test_write(String_.Concat_lines_nl_skip_last
+		( ""
+		, "  <script type='text/javascript'>"
+		, "    var xowa_root_dir = 'file:///mem/xowa/';"
+		, "    var xowa_mode_is_server = false;"
+		, "    var xowa_global_values = {"
+		, "      'mode_is_gui' : false,"
+		, "      'mode_is_http' : false,"
+		, "      'http-port' : 8080,"
+		, "      'sort-ascending' : 'Sort ascending',"
+		, "      'sort-descending' : 'Sort descending',"
+		, "      'wgContentLanguage' : 'en',"
+		, "      'wgSeparatorTransformTable' : ['.\t.', ' \t,'],"	// note that grp spr (",") is ""
+		, "      'wgDigitTransformTable' : ['', ''],"
+		, "      'wgDefaultDateFormat' : 'dmy',"
+		, "      'wgMonthNames' : ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],"
+		, "      'wgMonthNamesShort' : ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],"
+		, "    }"
+		, "  </script>"
+		, "  <script src=\"file:///mem/xowa/bin/any/xowa/html/modules/xowa.core/xowa.core.js\" type='text/javascript'></script>"
+		));
+	}
 }
 class Xoh_module_mgr_fxt {
 	private Xop_fxt fxt = new Xop_fxt();
@@ -52,6 +106,7 @@ class Xoh_module_mgr_fxt {
 	private Bry_bfr bfr = Bry_bfr.reset_(255);
 	public Xow_wiki Wiki() {return wiki;} private Xow_wiki wiki;
 	public Xoh_module_mgr Mgr() {return mgr;}
+	public Xol_lang Make_lang(String key) {return wiki.App().Lang_mgr().Get_by_key_or_new(Bry_.new_ascii_(key));}
 	public void Clear() {
 		fxt.Reset();
 		mgr = fxt.Page().Html_data().Module_mgr();
@@ -59,6 +114,10 @@ class Xoh_module_mgr_fxt {
 	}
 	public void Init_msg(byte[] key, String val) {
 		wiki.Msg_mgr().Get_or_make(key).Atrs_set(Bry_.new_ascii_(val), false, false);
+	}
+	public void Init_msg(int id, String val) {
+		Xol_msg_itm msg_itm = wiki.Lang().Msg_mgr().Itm_by_id_or_null(id);
+		msg_itm.Atrs_set(Bry_.new_ascii_(val), false, false);
 	}
 	public void Test_write(String expd) {
 		mgr.Write(bfr, fxt.App(), wiki, fxt.Page());

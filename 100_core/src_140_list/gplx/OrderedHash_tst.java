@@ -21,11 +21,11 @@ public class OrderedHash_tst {
 	@Before public void setup() {
 		hash = OrderedHash_.new_();
 	}
-	@Test public void FetchAt() {
+	@Test  public void FetchAt() {
 		hash.Add("key1", "val1");
 		Tfds.Eq("val1", hash.FetchAt(0));
 	}
-	@Test public void iterator() {
+	@Test  public void iterator() {
 		hash.Add("key2", "val2");
 		hash.Add("key1", "val1");
 

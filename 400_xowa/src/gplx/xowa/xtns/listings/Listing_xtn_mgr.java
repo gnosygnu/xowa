@@ -77,5 +77,4 @@ public class Listing_xtn_mgr extends Xox_mgr_base {
 	private Xol_msg_itm Load_msg(Xow_wiki wiki, Xop_ctx sub_ctx, String ttl) {
 		return wiki.Msg_mgr().Find_or_null(Bry_.new_utf8_(ttl)); 
 	}
-	public static void Create_msgs() {}
 }

@@ -39,7 +39,7 @@ public class Double_ {
 		int v_as_int = (int)v;			
 		return v == v_as_int
 			? Int_.XtoStr(v_as_int)		// convert to int, and call print String to eliminate any trailing decimal places
-			: String.format("%g", v);	// call "%g" format which should eliminate most, though not all; EX:2449.6000000000004; DATE:2014-07-14 
+			: Float_.XtoStr((float)v);	// calling ((float)v).toString is better at removing trailing 0s than String.format("%g", v). note that .net .toString() handles it better; EX:2449.600000000000d; DATE:2014-07-29
 	}
 	public static double cast_(Object o) {try {return (Double)o;} catch(Exception e) {throw Err_.type_mismatch_exc_(e, double.class, o);}}
 	public static double parse_(String raw) {try {return Double.parseDouble(raw);} catch(Exception e) {throw Err_.parse_type_exc_(e, double.class, raw);}}

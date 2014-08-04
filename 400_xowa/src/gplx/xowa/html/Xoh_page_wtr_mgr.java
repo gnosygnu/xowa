@@ -56,7 +56,7 @@ public class Xoh_page_wtr_mgr implements GfoInvkAble {
 		, "portal_div_personal", "portal_div_ns", "portal_div_view"
 		, "portal_div_logo", "portal_div_home", "portal_div_xtn", "portal_div_wikis", "portal_sidebar"
 	    , "edit_div_rename", "edit_div_preview"
-		, "app_version", "app_build_date", "app_root_dir", "js_article_view_vars", "js_wikidata", "js_edit_toolbar", "xowa_mode_is_server"
+		, "app_version", "app_build_date", "app_root_dir", "js_wikidata", "js_edit_toolbar", "xowa_mode_is_server"
 		);
 	public Bry_fmtr Page_edit_fmtr() {return page_edit_fmtr;} private Bry_fmtr page_edit_fmtr = Bry_fmtr.new_(""
 		, "page_id", "page_name", "page_title", "page_content_sub", "page_data", "page_langs", "page_modified_on_msg", "page_lang_ltr"
@@ -65,7 +65,7 @@ public class Xoh_page_wtr_mgr implements GfoInvkAble {
 		, "portal_div_personal", "portal_div_ns", "portal_div_view"
 		, "portal_div_logo", "portal_div_home", "portal_div_xtn", "portal_div_wikis", "portal_sidebar"
 	    , "edit_div_rename", "edit_div_preview"
-		, "app_version", "app_build_date", "app_root_dir", "js_article_view_vars", "js_wikidata", "js_edit_toolbar", "xowa_mode_is_server"
+		, "app_version", "app_build_date", "app_root_dir", "js_wikidata", "js_edit_toolbar", "xowa_mode_is_server"
 		);
 	public Bry_fmtr Page_html_fmtr() {return page_html_fmtr;} private Bry_fmtr page_html_fmtr = Bry_fmtr.new_(""
 		, "page_id", "page_name", "page_title", "page_content_sub", "page_data", "page_langs", "page_modified_on_msg", "page_lang_ltr"
@@ -74,7 +74,7 @@ public class Xoh_page_wtr_mgr implements GfoInvkAble {
 		, "portal_div_personal", "portal_div_ns", "portal_div_view"
 		, "portal_div_logo", "portal_div_home", "portal_div_xtn", "portal_div_wikis", "portal_sidebar"
 	    , "edit_div_rename", "edit_div_preview"
-		, "app_version", "app_build_date", "app_root_dir", "js_article_view_vars", "js_wikidata", "js_edit_toolbar", "xowa_mode_is_server"
+		, "app_version", "app_build_date", "app_root_dir", "js_wikidata", "js_edit_toolbar", "xowa_mode_is_server"
 		);
 	private Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	public byte[] Edit_rename_div_bry(Xoa_ttl ttl) {			

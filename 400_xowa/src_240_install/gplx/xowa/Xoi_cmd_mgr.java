@@ -22,7 +22,7 @@ public class Xoi_cmd_mgr implements GfoInvkAble {
 	public Xoi_cmd_mgr(Xoi_setup_mgr install_mgr) {this.app = install_mgr.App(); this.install_mgr = install_mgr;} private Xoa_app app; Xoi_setup_mgr install_mgr;
 	public Xoa_app App() {return app;}
 	public void Canceled_y_() {canceled = true;} private boolean canceled = false;
-	public boolean Working() {return working;} private boolean working;
+	public boolean Working() {return working;} public void Working_n_() {working = false;} private boolean working;		
 	private void Process_async(Gfo_thread_cmd cmd) {
 		byte init_rslt = cmd.Async_init();
 		if (init_rslt == Gfo_thread_cmd_.Init_ok) {

@@ -133,11 +133,12 @@ class Imap_parser {
 		}
 		int pts_len = pts.Count();
 		if (reqd_pts == Reqd_poly) {
-			if		(pts_len == 0)		return Add_err(Bool_.Y, itm_bgn, itm_end, "imagemap_missing_coord");
-			else if (pts_len % 2 != 0)	return Add_err(Bool_.Y, itm_bgn, itm_end, "imagemap_poly_odd");
+			if		(pts_len == 0)			return Add_err(Bool_.Y, itm_bgn, itm_end, "imagemap_missing_coord");
+			else if (pts_len % 2 != 0)		return Add_err(Bool_.Y, itm_bgn, itm_end, "imagemap_poly_odd");
 		}
 		else {
-			if (pts_len < reqd_pts )	return Add_err(Bool_.Y, itm_bgn, itm_end, "imagemap_missing_coord");
+			if		(pts_len < reqd_pts)	return Add_err(Bool_.Y, itm_bgn, itm_end, "imagemap_missing_coord");
+			else if (pts_len > reqd_pts)	pts.Del_range(reqd_pts, pts_len - 1);	// NOTE: MW allows more points, but doesn't show them; EX: rect 1 2 3 4 5 -> rect 1 2 3 4; PAGE:en.w:Kilauea DATE:2014-07-28
 		}
 		pos = Bry_finder.Trim_fwd_space_tab(src, pos, itm_end);
 		Imap_itm_shape shape_itm = new Imap_itm_shape(shape_tid, (Double_obj_val[])pts.XtoAryAndClear(Double_obj_val.class));

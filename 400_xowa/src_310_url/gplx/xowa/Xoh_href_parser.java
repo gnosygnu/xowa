@@ -16,9 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.core.btries.*; import gplx.xowa.net.*; import gplx.xowa.parsers.lnkes.*;
+import gplx.core.btries.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.net.*; import gplx.xowa.parsers.lnkes.*;
 public class Xoh_href_parser {
-	private Url_encoder encoder; private Gfo_url_parser url_parser; private Gfo_url tmp_url = new Gfo_url(); 
+	private Gfo_url_parser url_parser; private Gfo_url tmp_url = new Gfo_url(); 
 	private Btrie_slim_mgr segs = Btrie_slim_mgr.ci_ascii_(); // NOTE:ci.ascii:XO_const.en; /wiki/, /site/ etc.
 	private Bry_bfr bfr_encoder = Bry_bfr.reset_(255), tmp_bfr = Bry_bfr.reset_(255);
 	public Xoh_href_parser(Url_encoder encoder, Gfo_url_parser url_parser) {
@@ -27,6 +27,7 @@ public class Xoh_href_parser {
 		url_parser.Init_protocol(Protocol_xowa_tid, Xop_lnke_wkr.Str_xowa_protocol);
 		segs.Add_stubs(Seg__ary);
 	}
+	public Url_encoder Encoder() {return encoder;} private Url_encoder encoder; 
 	public void Parse(Xoh_href rv, String raw, Xow_wiki wiki, byte[] cur_page) {Parse(rv, Bry_.new_utf8_(raw), wiki, cur_page);}
 	public void Parse(Xoh_href rv, byte[] raw, Xow_wiki wiki, byte[] cur_page) {
 		int bgn = 0, raw_len = raw.length; int file_slash_end = 0;

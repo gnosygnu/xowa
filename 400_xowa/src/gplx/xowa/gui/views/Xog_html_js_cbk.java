@@ -169,24 +169,25 @@ public class Xog_html_js_cbk implements GfoInvkAble {
 	}
 	private static final byte[] Wikidata_get_label_xowa_ui_lang = Bry_.new_ascii_("xowa_ui_lang"), Wikidata_get_label_xowa_title = Bry_.new_ascii_("xowa_title");
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_parse_to_html))			return Parse_to_html(m);
-		else if	(ctx.Match(k, Invk_wikidata_get_label))		return Wikidata_get_label(m);
-		else if	(ctx.Match(k, Invk_get_page))				return Get_page(m);
-		else if	(ctx.Match(k, Invk_popups_get_async_bgn))	return Popups_get_async_bgn(m);
-		else if	(ctx.Match(k, Invk_popups_get_html))		return Popups_get_html(m);
-		else if	(ctx.Match(k, Invk_scripts_exec))			return Scripts_exec(m);
-		else if	(ctx.Match(k, Invk_get_search_suggestions))	return Get_search_suggestions(m);
-		else if	(ctx.Match(k, Invk_get_titles_meta))		return Get_titles_meta(m);
-		else if	(ctx.Match(k, Invk_get_titles_exists))		return Get_titles_exists(m);
-		else if	(ctx.Match(k, Invk_get_current_url))		return String_.new_utf8_(html_itm.Owner_tab().Page().Url().Raw());
-		else if	(ctx.Match(k, Invk_xowa_exec_test))			return Xowa_exec_test(m);
-		else if	(ctx.Match(k, Invk_xowa_exec_test_as_array))return Xowa_exec_test_as_array(m);
+		if		(ctx.Match(k, Invk_parse_to_html))						return Parse_to_html(m);
+		else if	(ctx.Match(k, Invk_wikidata_get_label))					return Wikidata_get_label(m);
+		else if	(ctx.Match(k, Invk_get_page))							return Get_page(m);
+		else if	(ctx.MatchIn(k, Invk_cmd, Invk_scripts_exec))			return Scripts_exec(m);
+		else if	(ctx.Match(k, Invk_scripts_exec))						return Scripts_exec(m);
+		else if	(ctx.Match(k, Invk_popups_get_async_bgn))				return Popups_get_async_bgn(m);
+		else if	(ctx.Match(k, Invk_popups_get_html))					return Popups_get_html(m);
+		else if	(ctx.Match(k, Invk_get_search_suggestions))				return Get_search_suggestions(m);
+		else if	(ctx.Match(k, Invk_get_titles_meta))					return Get_titles_meta(m);
+		else if	(ctx.Match(k, Invk_get_titles_exists))					return Get_titles_exists(m);
+		else if	(ctx.Match(k, Invk_get_current_url))					return String_.new_utf8_(html_itm.Owner_tab().Page().Url().Raw());
+		else if	(ctx.Match(k, Invk_xowa_exec_test))						return Xowa_exec_test(m);
+		else if	(ctx.Match(k, Invk_xowa_exec_test_as_array))			return Xowa_exec_test_as_array(m);
 		else	return GfoInvkAble_.Rv_unhandled;
 	}
-	public static final String Invk_parse_to_html = "parse_to_html", Invk_wikidata_get_label = "wikidata_get_label", Invk_get_page = "get_page", Invk_scripts_exec = "scripts_exec"
+	public static final String Invk_parse_to_html = "parse_to_html", Invk_wikidata_get_label = "wikidata_get_label", Invk_get_page = "get_page", Invk_cmd = "cmd", Invk_scripts_exec = "scripts_exec"
 	, Invk_get_search_suggestions = "get_search_suggestions", Invk_get_titles_meta = "get_titles_meta", Invk_get_titles_exists = "get_titles_exists", Invk_get_current_url = "get_current_url"
 	, Invk_xowa_exec_test = "xowa_exec_test", Invk_xowa_exec_test_as_array = "xowa_exec_test_as_array"
 	, Invk_popups_get_async_bgn = "popups_get_async_bgn"
-	, Invk_popups_get_html = "popups_get_html"
+	, Invk_popups_get_html = "popups_get_html"		
 	;
 }

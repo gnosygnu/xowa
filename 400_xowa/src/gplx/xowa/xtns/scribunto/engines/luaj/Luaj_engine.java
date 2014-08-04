@@ -27,6 +27,7 @@ public class Luaj_engine implements Scrib_engine {
 		server = new Luaj_server(core, debug_enabled);
 		proc_mgr = core.Proc_mgr();
 		Luaj_server_func_recv._.Engine_(this);
+		Luaj_server_func_dbg._.Core_(core);
 	}
 	public Scrib_server Server() {return server;} public void Server_(Scrib_server v) {server = (Luaj_server)v;} 
 	public boolean Dbg_print() {return dbg_print;} public void Dbg_print_(boolean v) {dbg_print = v;} private boolean dbg_print;

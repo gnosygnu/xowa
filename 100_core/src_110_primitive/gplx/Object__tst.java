@@ -27,7 +27,7 @@ public class Object__tst {
 	}
 	@Test  public void Xto_str_loose_or_null() {
 		fxt.Test_xto_str_loose_or_null(null, null);	
-		fxt.Test_xto_str_loose_or_null(2449.6000000000004d, "2449.60");	
+		fxt.Test_xto_str_loose_or_null(2449.6000000000004d, "2449.6");
 	}
 }
 class Object__fxt {

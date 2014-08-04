@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.security; import gplx.*;
 import org.junit.*;
 public class HashAlgo_tth192_tree_tst {
-	@Test public void CalcRecursiveHalves() {
+	@Test  public void CalcRecursiveHalves() {
 		tst_CalcRecursiveHalves(129, 128);
 		tst_CalcRecursiveHalves(128, 127);
 		tst_CalcRecursiveHalves(100, 99);
@@ -31,7 +31,7 @@ public class HashAlgo_tth192_tree_tst {
 		tst_CalcRecursiveHalves(1, 0);
 		tst_CalcRecursiveHalves(0, 0);
 	}
-	@Test public void CalcWorkUnits() {
+	@Test  public void CalcWorkUnits() {
 		tst_CalcWorkUnits(101, 21); // leafs; 10 full, 1 part (+11) -> reduce 11 to 5+1 (+5) -> reduce 6 to 3 (+3) -> reduce 3 to 1+1 (+1) -> reduce 2 to 1 (+1)
 		tst_CalcWorkUnits(100, 19); // leafs; 10 full (+10) -> reduce 10 to 5 (+5) -> reduce 5 to 2+1 (+2) -> reduce 3 to 1+1 (+1) -> reduce 2 to 1 (+1)
 		tst_CalcWorkUnits(30, 5); // leafs; 3 full (+3) -> reduce 3 to 1+1 (+1) -> reduce 2 to 1 (+1)

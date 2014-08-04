@@ -28,7 +28,7 @@ public class z164_hdeHdrs_data_tst {
 			,	GfmlDocLxrs.NdeBodyEnd_lxr()
 			);
 	}
-	@Test public void Bas1() {
+	@Test  public void Bas1() {
 		fx.tst_Tkn("a:b;"
 			,	fx.tkn_grp_
 			(		fx.tkn_itm_("a")
@@ -37,7 +37,7 @@ public class z164_hdeHdrs_data_tst {
 			,		fx.tkn_itm_(";")
 			));
 	}	
-	@Test public void Basic3() {
+	@Test  public void Basic3() {
 		fx.tst_Tkn("a:b{c;}"
 			,	fx.tkn_grp_
 			(		fx.tkn_itm_("a")

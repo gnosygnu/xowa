@@ -25,16 +25,16 @@ public class z123_quotes_quoteBlock_tst {
 			,	GfmlDocLxrs.QuoteBlock_lxr()
 			);
 	}
-	@Test public void Basic() {
+	@Test  public void Basic() {
 		fx.tst_Doc("|'abc'|;", fx.nde_().Atru_("abc"));
 	}
-	@Test public void Escape_bgn() {
+	@Test  public void Escape_bgn() {
 		fx.tst_Doc("|'a|'|'b'|;", fx.nde_().Atru_("a|'b"));
 	}
-	@Test public void Escape_end() {
+	@Test  public void Escape_end() {
 		fx.tst_Doc("|'a'|'|b'|;", fx.nde_().Atru_("a'|b"));
 	}
-	@Test public void Nest() {
+	@Test  public void Nest() {
 		fx.tst_Doc("|'a|'-'|b'|;", fx.nde_().Atru_("a-b"));
 	}
 }

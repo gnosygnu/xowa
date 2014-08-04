@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.wikis.*; import gplx.xowa.net.*;
+import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.net.*;
 public class Xoa_url_parser {
 	private Url_encoder encoder = Url_encoder.new_html_href_mw_().Itms_raw_same_many(Byte_ascii.Underline); private Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	public Gfo_url_parser Url_parser() {return url_parser;} private Gfo_url_parser url_parser = new Gfo_url_parser(); private Gfo_url gfo_url = new Gfo_url();

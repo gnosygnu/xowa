@@ -15,10 +15,11 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa; import gplx.*;
-import gplx.xowa.wikis.*;
+package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 public class Xow_xwiki_mgr implements GfoInvkAble {
-	public Xow_xwiki_mgr(Xow_wiki wiki) {this.wiki = wiki;} private Xow_wiki wiki;
+	private Xow_xwiki_mgr_srl srl;
+	public Xow_xwiki_mgr(Xow_wiki wiki) {this.wiki = wiki; srl = new Xow_xwiki_mgr_srl(this);} 
+	public Xow_wiki Wiki() {return wiki;} private Xow_wiki wiki;
 	public Xow_lang_mgr Lang_mgr() {return lang_mgr;} private Xow_lang_mgr lang_mgr = Xow_lang_mgr.dflt_();
 	public int Len() {return list.Count();} private OrderedHash list = OrderedHash_.new_bry_(); private Hash_adp_bry hash = Hash_adp_bry.ci_ascii_();	// ASCII:lang_code
 	public void Clear() {hash.Clear(); list.Clear();}
@@ -40,16 +41,6 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 		Xow_xwiki_itm itm = new Xow_xwiki_itm(alias, fmt, wiki_tid, lang_tid, domain);
 		Add_itm(itm, null);
 	}
-	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_count))						return list.Count();
-		else if	(ctx.Match(k, Invk_add_bulk))					Add_bulk(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_add_bulk_langs))				Add_bulk_langs(m);
-		else if	(ctx.Match(k, Invk_add_bulk_peers))				Add_bulk_peers(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_itms_print))					return Exec_itms_print(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_clear))						this.Clear();
-		else	return GfoInvkAble_.Rv_unhandled;
-		return this;
-	}	public static final String Invk_add_bulk = "add_bulk", Invk_add_bulk_langs = "add_bulk_langs", Invk_add_bulk_peers = "add_bulk_peers", Invk_itms_print = "itms_print", Invk_count = "count", Invk_clear = "clear";
 	public void Sort_by_key() {
 		list.Sort();
 	}
@@ -92,7 +83,7 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 		int wikis_len = list.Count();
 		for (int i = 0; i < wikis_len; i++) {
 			Xow_xwiki_itm itm = (Xow_xwiki_itm)list.FetchAt(i);
-			byte[] key = itm.Key();
+			byte[] key = itm.Key_bry();
 			if (Bry_.Eq(key, Xow_wiki_domain_.Key_home_bry)) continue;	// skip home
 			byte[] domain = itm.Domain();
 			if (seen.Has(domain)) continue;
@@ -157,7 +148,7 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 		Add_bulk_langs(grp_key, wiki_tid);
 	}
 	public void Add_bulk_langs(byte[] grp_key) {Add_bulk_langs(grp_key, wiki.Domain_tid());}
-	private void Add_bulk_langs(byte[] grp_key, byte wiki_tid) {
+	public void Add_bulk_langs(byte[] grp_key, byte wiki_tid) {
 		OrderedHash langs = wiki.App().Lang_mgr().Xto_hash(grp_key);
 		int len = langs.Count();
 		byte[] wiki_tid_name = Xow_wiki_domain_.Key_by_tid(wiki_tid);
@@ -175,11 +166,28 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 		}
 		lang_mgr.Grps_sort();
 	}	private static final String GRP_KEY = "xowa.wiki.xwikis";
+	public void Add_itm(Xow_xwiki_itm itm) {Add_itm(itm, null);}
 	private void Add_itm(Xow_xwiki_itm xwiki, Xoac_lang_itm lang) {
-		if (	!hash.Has(xwiki.Key())		// only register xwiki / lang pair once
-			&&	lang != null)				// null lang should not be registered
+		if (	!hash.Has(xwiki.Key_bry())		// only register xwiki / lang pair once
+			&&	lang != null)					// null lang should not be registered
 			lang_mgr.Itms_reg(xwiki, lang);
-		hash.AddReplace(xwiki.Key(), xwiki);
-		list.AddReplace(xwiki.Key(), xwiki);
+		hash.AddReplace(xwiki.Key_bry(), xwiki);
+		list.AddReplace(xwiki.Key_bry(), xwiki);
 	}
+	public void Add_many(byte[] v) {srl.Load_by_bry(v);}
+	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
+		if		(ctx.Match(k, Invk_count))						return list.Count();
+		else if	(ctx.Match(k, Invk_add_bulk))					Add_bulk(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_add_bulk_langs))				Add_bulk_langs(m);
+		else if	(ctx.Match(k, Invk_add_bulk_peers))				Add_bulk_peers(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_add_many))					Add_many(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_itms_print))					return Exec_itms_print(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_clear))						this.Clear();
+		else	return GfoInvkAble_.Rv_unhandled;
+		return this;
+	}
+	private static final String 
+	  Invk_add_bulk = "add_bulk", Invk_add_bulk_langs = "add_bulk_langs", Invk_add_bulk_peers = "add_bulk_peers", Invk_add_many = "add_many"
+	, Invk_itms_print = "itms_print", Invk_count = "count", Invk_clear = "clear"
+	;
 }

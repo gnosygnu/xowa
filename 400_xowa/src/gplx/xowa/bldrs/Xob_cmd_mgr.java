@@ -58,6 +58,7 @@ public class Xob_cmd_mgr implements GfoInvkAble {
 		else if	(String_.Eq(cmd_key, Xof_wiki_orig_cmd.KEY_oimg))			return Add(new Xof_wiki_orig_cmd(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_download_wkr.KEY_oimg))			return Add(new Xob_download_wkr(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_page_regy_cmd.KEY_oimg))			return Add(new Xob_page_regy_cmd(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_exec_sql.KEY))					return Add(new Xob_cmd_exec_sql(bldr, wiki));
 
 		else if	(String_.Eq(cmd_key, Xob_wiki_redirect_cmd.KEY_redirect))	return Add(new Xob_wiki_redirect_cmd(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_wiki_image_sql.KEY))				return Add(new Xob_wiki_image_sql(bldr, wiki));

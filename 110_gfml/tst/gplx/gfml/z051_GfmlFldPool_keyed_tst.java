@@ -23,26 +23,26 @@ public class z051_GfmlFldPool_keyed_tst {
 		GfmlType type = makr.MakeSubType("point", "x", "y", "z");
 		fldPool = GfmlFldPool.new_(type);
 	}	GfmlFldPool fldPool;
-	@Test public void PopByKey_inOrder() {
+	@Test  public void PopByKey_inOrder() {
 		tst_Keyed_PopByKey(fldPool, "x", "x", "y", "z");
 	}
-	@Test public void PopByKey_outOfOrder() {
+	@Test  public void PopByKey_outOfOrder() {
 		tst_Keyed_PopByKey(fldPool, "y", "y", "x", "z");
 	}
-	@Test public void PopByKey_unknown() {
+	@Test  public void PopByKey_unknown() {
 		tst_Keyed_PopByKey(fldPool, "a", GfmlItmKeys.NullKey, "x", "y", "z");
 	}
-	@Test public void PopByKey_alreadyRemoved() {
+	@Test  public void PopByKey_alreadyRemoved() {
 		tst_Keyed_PopByKey(fldPool, "x", "x", "y", "z");
 		tst_Keyed_PopByKey(fldPool, "x", GfmlItmKeys.NullKey, "y", "z");
 	}
-	@Test public void PopByKey_depleted() {
+	@Test  public void PopByKey_depleted() {
 		tst_Keyed_PopByKey(fldPool, "x", "x", "y", "z");
 		tst_Keyed_PopByKey(fldPool, "y", "y", "z");
 		tst_Keyed_PopByKey(fldPool, "z", "z");
 		tst_Keyed_PopByKey(fldPool, "x", GfmlItmKeys.NullKey);
 	}
-	@Test public void PopNext_inOrder() {
+	@Test  public void PopNext_inOrder() {
 		tst_Keyed_PopNext(fldPool, "x", "y", "z");
 		tst_Keyed_PopNext(fldPool, "y", "z");
 		tst_Keyed_PopNext(fldPool, "z");
@@ -52,7 +52,7 @@ public class z051_GfmlFldPool_keyed_tst {
 		}
 		catch (Exception exc) {Err_.Noop(exc);}
 	}
-	@Test public void PopByKey_PopNext() {
+	@Test  public void PopByKey_PopNext() {
 		tst_Keyed_PopByKey(fldPool, "y", "y", "x", "z");
 		tst_Keyed_PopNext(fldPool, "x", "z");
 	}

@@ -18,13 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.dbs.tbls.*; import gplx.ios.*;
 public class Xob_page_sql extends Xob_itm_basic_base implements Xobd_wkr, GfoInvkAble {
+	private Db_idx_mode idx_mode = Db_idx_mode.Itm_end;
 	private Xop_redirect_mgr redirect_mgr; private Io_stream_zip_mgr zip_mgr; private byte data_storage_format; 
 	private Xodb_mgr_sql db_mgr; private Xodb_fsys_mgr fsys_mgr; private Db_provider page_provider; private Db_stmt page_stmt; private Xob_text_stmts_mgr text_stmts_mgr;
 	private int page_count_all, page_count_main = 0; private int txn_commit_interval = 100000;	// 100 k
 	private DateAdp modified_latest = DateAdp_.MinValue;
 	public Xob_page_sql(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Wkr_key() {return KEY;} public static final String KEY = "import.sql.page";
-	public void Wkr_bgn(Xob_bldr bldr) {			
+	public void Wkr_bgn(Xob_bldr bldr) {
 		// init local variables
 		Xoa_app app = wiki.App();
 		app.Bldr().Parser().Trie_tab_del_();	// disable swapping &#09; for \t
@@ -40,6 +41,7 @@ public class Xob_page_sql extends Xob_itm_basic_base implements Xobd_wkr, GfoInv
 		page_stmt = db_mgr.Tbl_page().Insert_stmt(page_provider);
 		page_provider.Txn_mgr().Txn_bgn_if_none();
 		text_stmts_mgr = new Xob_text_stmts_mgr(db_mgr, fsys_mgr);
+		if (idx_mode.Tid_is_bgn()) Idx_create();
 	}
 	public void Wkr_run(Xodb_page page) {
 		int page_id = page.Id();
@@ -69,25 +71,33 @@ public class Xob_page_sql extends Xob_itm_basic_base implements Xobd_wkr, GfoInv
 		if (page_count_all % txn_commit_interval == 0) text_stmt.Provider().Txn_mgr().Txn_end_all_bgn_if_none();
 	}
 	public void Wkr_end() {
+		usr_dlg.Log_many("", "", "import.page: insert done; committing pages; pages=~{0}", page_count_all);
 		page_provider.Txn_mgr().Txn_end_all();
 		page_stmt.Rls();
 		text_stmts_mgr.Rls();
+		usr_dlg.Log_many("", "", "import.page: updating core stats");
 		Xow_ns_mgr ns_mgr = wiki.Ns_mgr();
 		db_mgr.Tbl_site_stats().Update(page_count_main, page_count_all, ns_mgr.Ns_file().Count());	// save page stats
 		db_mgr.Tbl_xowa_ns().Insert(ns_mgr);														// save ns
 		db_mgr.Tbl_xowa_db().Commit_all(page_provider, db_mgr.Fsys_mgr().Ary());					// save dbs; note that dbs can be saved again later
 		db_mgr.Tbl_xowa_cfg().Insert_str(Xodb_mgr_sql.Grp_wiki_init, "props.modified_latest", modified_latest.XtoStr_fmt(DateAdp_.Fmt_iso8561_date_time));
-		fsys_mgr.Index_create(usr_dlg, Byte_.Ary(Xodb_file_tid_.Tid_core, Xodb_file_tid_.Tid_text), Index_page_title, Index_page_random);
+		if (idx_mode.Tid_is_end()) Idx_create();
+	}
+	private void Idx_create() {
+		fsys_mgr.Index_create(usr_dlg, Byte_.Ary(Xodb_file_tid_.Tid_core, Xodb_file_tid_.Tid_text), Idx_page_title, Idx_page_random);
 	}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_txn_commit_interval_))		txn_commit_interval = m.ReadInt("v");
-		return super.Invk(ctx, ikey, k, m);
-	}	private static final String Invk_txn_commit_interval_ = "txn_commit_interval_";
+		else if	(ctx.Match(k, Invk_idx_mode_))					idx_mode = Db_idx_mode.Xto_itm(m.ReadStr("v"));
+		else													return super.Invk(ctx, ikey, k, m);
+		return this;
+	}
+	private static final String Invk_txn_commit_interval_ = "txn_commit_interval_", Invk_idx_mode_ = "idx_mode_";
 	public void Wkr_ini(Xob_bldr bldr) {}
 	public void Wkr_print() {}
-	private static final Db_idx_itm 
-	  Index_page_title	= Db_idx_itm.sql_("CREATE UNIQUE INDEX IF NOT EXISTS page__title       ON page (page_namespace, page_title, page_id, page_len, page_is_redirect);")	// PERF:page_id for general queries; PERF: page_len for search_suggest; PREF:page_is_redirect for oimg
-	, Index_page_random	= Db_idx_itm.sql_("CREATE UNIQUE INDEX IF NOT EXISTS page__name_random ON page (page_namespace, page_random_int);")
+	private static final Db_idx_itm
+	  Idx_page_title	= Db_idx_itm.sql_("CREATE UNIQUE INDEX IF NOT EXISTS page__title ON page (page_namespace, page_title, page_id, page_len, page_is_redirect);")	// PERF:page_id for general queries; PERF: page_len for search_suggest; PREF:page_is_redirect for oimg
+	, Idx_page_random	= Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS page__name_random ON page (page_namespace, page_random_int);")
 	;
 }
 class Xob_text_stmts_mgr {

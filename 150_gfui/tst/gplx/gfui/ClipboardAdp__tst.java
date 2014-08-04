@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfui; import gplx.*;
 import org.junit.*;
 public class ClipboardAdp__tst {
-	@Test public void Basic() {
+	@Test  public void Basic() {
 		ClipboardAdp_.SetText("test");
 		Tfds.Eq(true, ClipboardAdp_.IsText());
 		Tfds.Eq("test", ClipboardAdp_.GetText());

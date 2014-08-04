@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
-import gplx.html.*; import gplx.xowa.files.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.users.history.*; import gplx.xowa.xtns.pfuncs.ttls.*;
+import gplx.html.*; import gplx.xowa.files.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.users.history.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.xtns.relatedSites.*;
+import gplx.xowa.wikis.xwikis.*;
 public class Xoh_lnki_wtr {
 	private Xoa_app app; private Xow_wiki wiki; private Xoa_page page; private Xop_ctx ctx;
 	private Xoh_html_wtr_cfg cfg;
@@ -86,6 +87,10 @@ public class Xoh_lnki_wtr {
 				return;
 			}
 		}
+//			if (wiki.Domain_tid() == gplx.xowa.wikis.Xow_wiki_domain_.Tid_wikivoyage && lnki_ttl.Wik_bgn() != -1) {
+//				wiki.Xtn_mgr().Xtn_sites().Match(lnki_ttl, page.Html_data().Related_sites());
+//				return;
+//			}
 		if (hctx.Mode_is_alt())
 			Write_caption(bfr, ctx, hctx, src, lnki, ttl_bry, true, caption_wkr);
 		else {

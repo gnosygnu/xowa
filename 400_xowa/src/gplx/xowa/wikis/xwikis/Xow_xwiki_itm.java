@@ -15,16 +15,21 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa; import gplx.*;
+package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 public class Xow_xwiki_itm implements gplx.CompareAble {
-	public Xow_xwiki_itm(byte[] key, byte[] fmt, byte wiki_tid, int lang_id, byte[] domain) {this.key = key; this.fmt = fmt; this.wiki_tid = wiki_tid; this.lang_id = lang_id; this.domain = domain; this.key_str = String_.new_utf8_(key);}
-	public byte[] Key() {return key;} private byte[] key;
+	public Xow_xwiki_itm(byte[] key_bry, byte[] fmt, byte wiki_tid, int lang_id, byte[] domain) {
+		this.key_bry = key_bry; this.key_str = String_.new_utf8_(key_bry);
+		this.fmt = fmt; this.wiki_tid = wiki_tid; this.lang_id = lang_id; this.domain = domain;
+		this.name = key_bry;
+	}
+	public byte[] Key_bry() {return key_bry;} private byte[] key_bry;
 	public String Key_str() {return key_str;} private String key_str;
 	public byte[] Fmt() {return fmt;} private byte[] fmt;
 	public byte[] Domain() {return domain;} private byte[] domain;
 	public byte Wiki_tid() {return wiki_tid;} private byte wiki_tid;
 	public int Lang_id() {return lang_id;} private int lang_id;
 	public boolean Type_is_lang(int cur_lang_id) {return lang_id != Xol_lang_itm_.Id__unknown && cur_lang_id != lang_id && Bry_.Len_gt_0(fmt);}
+	public byte[] Name() {return name;} public Xow_xwiki_itm Name_(byte[] v) {name = v; return this;} private byte[] name;
 	public boolean Offline() {return offline;} public Xow_xwiki_itm Offline_(boolean v) {offline = v; return this;} private boolean offline;
-	public int compareTo(Object obj) {Xow_xwiki_itm comp = (Xow_xwiki_itm)obj; return Bry_.Compare(key, comp.key);}		
+	public int compareTo(Object obj) {Xow_xwiki_itm comp = (Xow_xwiki_itm)obj; return Bry_.Compare(key_bry, comp.key_bry);}
 }

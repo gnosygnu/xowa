@@ -18,7 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.imports.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.imports.*;
 import gplx.core.flds.*; import gplx.ios.*; import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.ctgs.*; 
 public class Xob_categorylinks_sql_make implements Io_make_cmd {
-	public Xob_categorylinks_sql_make(Sql_file_parser sql_parser, Xow_wiki wiki) {this.wiki = wiki; this.sql_parser = sql_parser;} private Xow_wiki wiki; Xodb_mgr_sql db_mgr; Sql_file_parser sql_parser;
+	private Xow_wiki wiki; private Sql_file_parser sql_parser; private Db_idx_mode idx_mode;
+	private Xodb_mgr_sql db_mgr;
+	public Xob_categorylinks_sql_make(Sql_file_parser sql_parser, Xow_wiki wiki, Db_idx_mode idx_mode) {
+		this.wiki = wiki; this.sql_parser = sql_parser; this.idx_mode = idx_mode;
+	}
 	public Io_sort_cmd Make_dir_(Io_url v) {return this;}
 	public void Sort_bgn() {
 		usr_dlg = wiki.App().Usr_dlg();
@@ -38,6 +42,7 @@ public class Xob_categorylinks_sql_make implements Io_make_cmd {
 		ctg_stmt = db_mgr.Tbl_category().Insert_stmt(cat_provider);
 		File_open(category_file);
 		first_provider = true;
+		if (idx_mode.Tid_is_bgn()) Idx_create(fsys_mgr);
 	}	Db_provider cl_provider, cat_provider; Gfo_fld_rdr fld_rdr = Gfo_fld_rdr.xowa_(); Db_stmt cl_stmt = Db_stmt_.Null, ctg_stmt = Db_stmt_.Null; int row_count = 0; Gfo_usr_dlg usr_dlg; boolean first_provider;
 	int[] cur_cat_counts = new int[Xoa_ctg_mgr.Tid__max]; long cur_cat_file_size, cur_cat_file_max; byte[] cur_cat_ttl = Ttl_first; int cur_cat_id; int cur_cat_file_idx;
 	public byte Line_dlm() {return line_dlm;} public Xob_categorylinks_sql_make Line_dlm_(byte v) {line_dlm = v; return this;} private byte line_dlm = Byte_ascii.Nil;
@@ -68,12 +73,16 @@ public class Xob_categorylinks_sql_make implements Io_make_cmd {
 		db_mgr.Tbl_xowa_db().Commit_all(fsys_mgr.Core_provider(), fsys_mgr.Ary());
 		if (db_mgr.Category_version() == Xoa_ctg_mgr.Version_null)	// NOTE: ctg_v1 wkr will set this to v1; only set to v2 if null  
 			db_mgr.Category_version_update(false);
+		usr_dlg.Log_many("", "", "import.category.v2: insert done; committing; rows=~{0}", row_count);
 		cat_provider.Txn_mgr().Txn_end_all();
 		ctg_stmt.Rls();
-		fsys_mgr.Index_create(usr_dlg, Byte_.Ary(Xodb_file_tid_.Tid_core, Xodb_file_tid_.Tid_category), Index_categorylinks_from, Index_categorylinks_main);
+		if (idx_mode.Tid_is_end()) Idx_create(fsys_mgr);
 		name_id_rdr.Rls();
 		if (String_.Eq(sql_parser.Src_fil().NameAndExt(), Xob_ctg_v1_sql_make.Url_sql))	// delete temp xowa_categorylinks.sql file created by cat_v1
 			Io_mgr._.DeleteFil(sql_parser.Src_fil());
+	}
+	private void Idx_create(Xodb_fsys_mgr fsys_mgr) {
+		fsys_mgr.Index_create(usr_dlg, Byte_.Ary(Xodb_file_tid_.Tid_core, Xodb_file_tid_.Tid_category), Idx_categorylinks_from, Idx_categorylinks_main);
 	}
 	int Ctg_grp_end(byte[] new_ctg_ttl) {
 		if (cur_cat_ttl != Bry_.Empty && cur_cat_id != -1)
@@ -131,8 +140,8 @@ public class Xob_categorylinks_sql_make implements Io_make_cmd {
 	}	Io_line_rdr name_id_rdr;
 	private static final byte[] Ttl_last = null, Ttl_first = Bry_.Empty;
 	private static final Db_idx_itm
-	  Index_categorylinks_main = Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS categorylinks__cl_main ON categorylinks (cl_to_id, cl_type_id, cl_sortkey, cl_from);")
-	, Index_categorylinks_from = Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS categorylinks__cl_from ON categorylinks (cl_from);")
+	  Idx_categorylinks_main = Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS categorylinks__cl_main ON categorylinks (cl_to_id, cl_type_id, cl_sortkey, cl_from);")
+	, Idx_categorylinks_from = Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS categorylinks__cl_from ON categorylinks (cl_from);")
 	;
 }
 /*

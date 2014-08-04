@@ -25,6 +25,7 @@ import java.sql.*;
 public class SqliteDbMain {
 	public static void main(String[] args) throws Exception {
 		SqliteDbMain main = new SqliteDbMain();
+//		main.JdbcInit(args);
 //		main.Read();
 //		main.Mass_upload(Io_url_.new_dir_("J:\\gplx\\xowl\\file\\all#meta\\en.wikipedia.org\\"));
 //		main.CreateMany(20, 0);
@@ -38,6 +39,15 @@ public class SqliteDbMain {
 '5719' '174'  
 '5766' '173' 
 */
+
+//	private void JdbcInit(String[] args) {
+//		try {
+//        Class.forName("SQLite.JDBCDriver");
+//		}
+//		catch (Exception e) {
+//			ConsoleAdp._.WriteLine(e.getMessage());
+//		}		
+//	}
 	private void CreateMany(int number, int base_val) {
 		long time_bgn = Env_.TickCount();
 		Db_provider provider = Sqlite_engine_.Provider_load_or_make_(Io_url_.new_fil_("E:\\test.sqlite3"));		

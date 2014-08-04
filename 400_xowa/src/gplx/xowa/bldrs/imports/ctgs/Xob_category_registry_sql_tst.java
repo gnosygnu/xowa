@@ -18,8 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.imports.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.imports.*;
 import org.junit.*;
 public class Xob_category_registry_sql_tst {
-	@Before public void init() {fxt.Clear();} private Xob_category_registry_sql_fxt fxt = new Xob_category_registry_sql_fxt();
+	@Before public void init() {if (Xoa_test_.Db_skip()) return; fxt.Clear();} private Xob_category_registry_sql_fxt fxt = new Xob_category_registry_sql_fxt();
 	@Test   public void Basic() {
+		if (Xoa_test_.Db_skip()) return;
 		fxt.Init_page_insert(String_.Ary("Ctg3", "Ctg2", "Ctg1"));
 		fxt.Exec_category_registry_cmd();
 		fxt.Test_ids(Int_.Ary(3, 2, 1));	// note that Ctg1 is page_id 3

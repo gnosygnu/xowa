@@ -21,42 +21,6 @@ import gplx.xowa.langs.numbers.*;
 public class Xow_fragment_mgr_tst {
 	Xow_fragment_mgr_fxt fxt = new Xow_fragment_mgr_fxt();
 	@Before public void init()	{fxt.Clear();}
-	@Test   public void Html_js_table_fmt() {
-		fxt.Test_fragment(Xow_fragment_mgr.Invk_html_js_table, String_.Concat_lines_nl
-		(	"  var xowa_global_values = {"
-		,	"    'collapsible-collapse'         : 'Collapse',"
-		,	"    'collapsible-expand'           : 'Expand',"
-		,	"    'sort-descending'              : 'Sort descending',"
-		,	"    'sort-ascending'               : 'Sort ascending',"
-		,	"    'wgContentLanguage'            : 'en',"
-		,	"    'wgSeparatorTransformTable'    : ['.\t.', ',\t,'],"
-		,	"    'wgDigitTransformTable'        : ['', ''],"
-		,	"    'wgDefaultDateFormat'          : 'dmy',"
-		,	"    'wgMonthNames'                 : ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],"
-		,	"    'wgMonthNamesShort'            : ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],"
-		,	"  };"
-		));
-	}
-	@Test   public void Html_js_table_fmt_la() { // PURPOSE: la.gfs only specifies "," not "."; make sure both "." and "," show up, or else null ref error during import; DATE:2014-05-13
-		Xol_lang la_lang = fxt.Make_lang("la");
-		Xol_transform_mgr separators_mgr = la_lang.Num_mgr().Separators_mgr();
-		separators_mgr.Clear();
-		separators_mgr.Set(Xol_num_mgr.Separators_key__grp, Bry_.new_ascii_(" "));
-		fxt.Test_fragment(la_lang, Xow_fragment_mgr.Invk_html_js_table, String_.Concat_lines_nl
-		(	"  var xowa_global_values = {"
-		,	"    'collapsible-collapse'         : 'Collapse',"
-		,	"    'collapsible-expand'           : 'Expand',"
-		,	"    'sort-descending'              : 'Sort descending',"
-		,	"    'sort-ascending'               : 'Sort ascending',"
-		,	"    'wgContentLanguage'            : 'la',"
-		,	"    'wgSeparatorTransformTable'    : ['.\t.', ' \t,'],"
-		,	"    'wgDigitTransformTable'        : ['', ''],"
-		,	"    'wgDefaultDateFormat'          : 'dmy',"
-		,	"    'wgMonthNames'                 : ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],"
-		,	"    'wgMonthNamesShort'            : ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],"
-		,	"  };"
-		));
-	}
 	@Test   public void Html_js_edit_toolbar_fmt() {
 		fxt.Test_fragment(Xow_fragment_mgr.Invk_html_js_edit_toolbar, String_.Concat_lines_nl
 		(	"  var xowa_edit_i18n = {"

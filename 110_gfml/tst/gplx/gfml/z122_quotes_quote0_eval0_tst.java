@@ -25,7 +25,7 @@ public class z122_quotes_quote0_eval0_tst {
 			,	GfmlDocLxrs.Quote0_Eval0_lxr()
 			);
 	}
-	@Test public void Basic() {
+	@Test  public void Basic() {
 		fx.tst_Doc("'a<~t>b';", fx.nde_().Atru_("a\tb"));
 		fx.tst_Tkn("'a<~t>b';"
 			,	fx.tkn_grp_
@@ -41,7 +41,7 @@ public class z122_quotes_quote0_eval0_tst {
 			)
 			);
 	}
-	@Test public void QuoteInside() {
+	@Test  public void QuoteInside() {
 		fx.tst_Doc("'a<~'t'>b';", fx.nde_().Atru_("a\tb"));
 		fx.tst_Tkn("'a<~'t'>b';"
 			,	fx.tkn_grp_

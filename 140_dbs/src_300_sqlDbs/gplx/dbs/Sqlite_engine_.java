@@ -59,11 +59,10 @@ public class Sqlite_engine_ {
 		int len = idxs.length;
 		p.Txn_mgr().Txn_end_all();	// commit any pending transactions
 		for (int i = 0; i < len; i++) {
-			p.Txn_mgr().Txn_bgn_if_none();
 			String index = idxs[i].Xto_sql();
-			usr_dlg.Prog_many("", "", "creating index: ~{0} ~{1}", file_id, index);
+			usr_dlg.Plog_many("", "", "creating index: ~{0} ~{1}", file_id, index);
 			p.Exec_qry(Db_qry_sql.ddl_(index));
-			p.Txn_mgr().Txn_end_all();
+			usr_dlg.Log_many("", "", "index created: ~{0} ~{1}", file_id, index);
 		}
 	}
 	public static Db_provider Provider_load_or_fail_(Io_url url) {

@@ -71,11 +71,13 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 		, mgr.Css_common_bry(), mgr.Css_wiki_bry(), html_content_editable
 		, page.Html_data().Module_mgr().Init(app, wiki, page).Init_dflts()
 		, portal_mgr.Div_personal_bry(), portal_mgr.Div_ns_bry(app.Utl_bry_bfr_mkr(), page.Ttl(), wiki.Ns_mgr()), portal_mgr.Div_view_bry(app.Utl_bry_bfr_mkr(), view_tid, page.Html_data().Search_text())
-		, portal_mgr.Div_logo_bry(), portal_mgr.Div_home_bry(), page.Html_data().Portal_div_xtn(), portal_mgr.Div_wikis_bry(app.Utl_bry_bfr_mkr()), portal_mgr.Sidebar_mgr().Html_bry()
-		, mgr.Edit_rename_div_bry(page.Ttl()), page.Html_data().Edit_preview()
+		, portal_mgr.Div_logo_bry(), portal_mgr.Div_home_bry(), Xoh_page_wtr_wkr_.Bld_portal_div_xtn(wiki, page), portal_mgr.Div_wikis_bry(app.Utl_bry_bfr_mkr()), portal_mgr.Sidebar_mgr().Html_bry()
+		, mgr.Edit_rename_div_bry(page.Ttl())
+		, page.Html_data().Edit_preview_w_dbg()
 		, Xoa_app_.Version, Xoa_app_.Build_date
 		, app.Fsys_mgr().Root_dir().To_http_file_bry()
-		, wiki.Fragment_mgr().Html_js_table(), js_wikidata_bry, js_edit_toolbar_bry, app.Tcp_server().Running_str()
+		, js_wikidata_bry, js_edit_toolbar_bry
+		, app.Tcp_server().Running_str()
 		);
 		Xoh_page_wtr_wkr_.Bld_head_end(html_bfr, page);
 		Xoh_page_wtr_wkr_.Bld_html_end(html_bfr, page);

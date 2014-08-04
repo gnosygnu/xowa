@@ -18,9 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import org.junit.*; import gplx.dbs.*; import gplx.xowa.specials.search.*; import gplx.xowa.bldrs.imports.ctgs.*;
 public class Xob_page_sql_tst {
-	@Before public void init() {fxt.Ctor_fsys();} Db_mgr_fxt fxt = new Db_mgr_fxt();
-	@After public void term() {fxt.Rls();} 
+	@Before public void init() {if (Xoa_test_.Db_skip()) return; fxt.Ctor_fsys();} Db_mgr_fxt fxt = new Db_mgr_fxt();
+	@After public void term() {if (Xoa_test_.Db_skip()) return; fxt.Rls();} 
 	@Test   public void Basic() {
+		if (Xoa_test_.Db_skip()) return;
 		fxt.Init_db_sqlite();
 		fxt.doc_ary_
 		(	fxt.doc_(2, "2013-06-03 01:23", "A", "text_a")

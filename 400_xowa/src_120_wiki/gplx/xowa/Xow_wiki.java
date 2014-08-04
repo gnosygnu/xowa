@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.xowa.apps.*;
 import gplx.xowa.wikis.*; import gplx.xowa.users.*; import gplx.xowa.html.*; import gplx.xowa.users.history.*; import gplx.xowa.specials.*; import gplx.xowa.xtns.*; import gplx.xowa.dbs.*; import gplx.xowa.files.*;
-import gplx.xowa.langs.vnts.*; import gplx.xowa.gui.views.*;
+import gplx.xowa.langs.vnts.*; import gplx.xowa.gui.views.*; import gplx.xowa.wikis.xwikis.*;
 import gplx.xowa.setup.maints.*; import gplx.xowa.wikis.caches.*;
 import gplx.xowa.bldrs.imports.*;  import gplx.xowa.xtns.pfuncs.*;
 public class Xow_wiki implements GfoInvkAble {

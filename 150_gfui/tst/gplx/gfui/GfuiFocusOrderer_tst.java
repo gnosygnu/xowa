@@ -22,28 +22,28 @@ public class GfuiFocusOrderer_tst {
 		owner = GfuiElem_.new_();
 		list = ListAdp_.new_();	// list of all controls
 	}
-	@Test public void Horizontal() {
+	@Test  public void Horizontal() {
 		ini_Subs(owner, list, xy_(40, 0), xy_(20, 0), xy_(0, 0));
 		tst_FocusIndxs(owner, list, 0, 1, 2);
 
 		GfuiFocusOrderer.OrderByX(owner);
 		tst_FocusIndxs(owner, list, 2, 1, 0);
 	}
-	@Test public void Vertical() {
+	@Test  public void Vertical() {
 		ini_Subs(owner, list, xy_(0, 40), xy_(0, 20), xy_(0, 0));
 		tst_FocusIndxs(owner, list, 0, 1, 2);
 
 		GfuiFocusOrderer.OrderByY(owner);
 		tst_FocusIndxs(owner, list, 2, 1, 0);
 	}
-	@Test public void Grid() {
+	@Test  public void Grid() {
 		ini_Subs(owner, list, xy_(20, 20), xy_(0, 20), xy_(20, 0), xy_(0, 0));
 		tst_FocusIndxs(owner, list, 0, 1, 2, 3);
 
 		GfuiFocusOrderer.OrderByX(owner);
 		tst_FocusIndxs(owner, list, 3, 2, 1, 0);
 	}
-	@Test public void Deep() {
+	@Test  public void Deep() {
 		ini_Subs(owner, list, xy_(20, 0), xy_(0, 0));
 		GfuiElem sub0 = sub_(owner, 0), sub1 = sub_(owner, 1);
 		ini_Subs(sub0, list, xy_(20, 0), xy_(0, 0));
@@ -53,7 +53,7 @@ public class GfuiFocusOrderer_tst {
 		GfuiFocusOrderer.OrderByX(owner);
 		tst_FocusIndxs(owner, list, 3, 0, 5, 4, 2, 1);
 	}
-	@Test public void Manusl() {
+	@Test  public void Manusl() {
 		ini_Subs(owner, list, xy_(0, 0), xy_(20, 0));
 		tst_FocusIndxs(owner, list, 0, 1);
 

@@ -18,13 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfml; import gplx.*;
 import org.junit.*;
 public class z811_useCase_GfmlIoSql_tst {
-	@Test public void Basic() {
+	@Test  public void Basic() {
 		tst_Doc("fld1=val1", nde_("fld").Atrs_add_("word", "fld1").Atrs_add_("op", "=").Atrs_add_("word", "val1"));
 		tst_Doc("fld1 = val1", nde_("fld").Atrs_add_("word", "fld1").Atrs_add_("op", "=").Atrs_add_("word", "val1"));
 		tst_Doc("fld1='val1'", nde_("fld").Atrs_add_("word", "fld1").Atrs_add_("op", "=").Atrs_add_("word", "val1"));
 		tst_Doc("fld1='val 1'", nde_("fld").Atrs_add_("word", "fld1").Atrs_add_("op", "=").Atrs_add_("word", "val 1"));
 	}
-	@Test public void Basic2() {
+	@Test  public void Basic2() {
 		tst_Doc("1=1 OR 2=2", nde_("fld").Atrs_add_("word", "1").Atrs_add_("op", "=").Atrs_add_("word", "1")
 			.Atrs_add_("word", "OR")
 			.Atrs_add_("word", "2").Atrs_add_("op", "=").Atrs_add_("word", "2")

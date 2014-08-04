@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.html.*;
 import gplx.xowa.html.modules.*;
 public class Xoa_html_data {
 	private OrderedHash ctg_hash;
@@ -26,13 +27,15 @@ public class Xoa_html_data {
 	public String				Bmk_pos() {return html_bmk_pos;} public void Bmk_pos_(String v) {html_bmk_pos = v;} private String html_bmk_pos;
 	public boolean					Restricted() {return html_restricted;} private boolean html_restricted = true;
 	public void					Restricted_(boolean v) {html_restricted = v;} public void Restricted_n_() {Restricted_(Bool_.N);}  public void Restricted_y_() {Restricted_(Bool_.Y);}
-	public byte[]				Edit_preview() {return edit_preview;} public void Edit_preview_(byte[] v) {edit_preview = v;} private byte[] edit_preview = Bry_.Empty;
+	public byte[]				Edit_preview_w_dbg() {return Bry_.Add(dbg, edit_preview);} public void Edit_preview_(byte[] v) {edit_preview = v;} private byte[] edit_preview = Bry_.Empty;
 	public byte[]				Search_text() {return search_text;} public void Search_text_(byte[] v) {search_text = v;} private byte[] search_text = Bry_.Empty;
 	public byte[]				Custom_html() {return custom_html;} public Xoa_html_data Custom_html_(byte[] v) {custom_html = v; return this;} private byte[] custom_html;
 	public byte[]				Custom_name() {return custom_name;} public Xoa_html_data Custom_name_(byte[] v) {custom_name = v; return this;} private byte[] custom_name;
 	public byte[]				Custom_head_end() {return custom_head_end;}
+	public byte[]				Dbg() {return dbg;} public void Dbg_(byte[] v) {dbg = Bry_.Add(dbg, v);} private byte[] dbg = Bry_.Empty;
 	public boolean					Gallery_packed_exists() {return gallery_packed_exists;} public void Gallery_packed_exists_y_() {gallery_packed_exists = true;} private boolean gallery_packed_exists;
 	public int					Imap_id_next() {return ++imap_id_next;} private int imap_id_next;
+	public ListAdp				Related_sites() {return related_sites;} private ListAdp related_sites = ListAdp_.new_();
 	public void Custom_head_end_concat(byte[] v) {
 		if (v == null)
 			custom_head_end = v;
@@ -56,6 +59,7 @@ public class Xoa_html_data {
 		search_text = Bry_.Empty;
 		custom_html_end = custom_head_end = custom_html = custom_name = null;
 		imap_id_next = 0;
+		related_sites.Clear();
 	}
 	public byte[][] Ctgs_to_ary() {return ctg_hash == null ? Bry_.Ary_empty : (byte[][])ctg_hash.XtoAry(byte[].class);}
 	public void Ctgs_add(Xoa_ttl ttl) {

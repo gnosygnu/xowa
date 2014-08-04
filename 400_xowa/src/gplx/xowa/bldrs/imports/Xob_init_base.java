@@ -35,7 +35,7 @@ public abstract class Xob_init_base implements Xob_cmd, GfoInvkAble {
 		this.Cmd_run_end(wiki);					// save site info
 	}
 	public void Cmd_end() {
-		wiki.App().Gui_mgr().Html_mgr().Portal_mgr().Wikis().Itms_refresh();	// dirty wiki list so that next refresh will load itm
+		wiki.App().Gui_mgr().Html_mgr().Portal_mgr().Wikis().Itms_reset();	// dirty wiki list so that next refresh will load itm
 		if (wiki.App().Setup_mgr().Dump_mgr().Css_wiki_update()) {
 			Io_url url = wiki.App().User().Fsys_mgr().Wiki_html_dir(wiki.Domain_str()).GenSubFil(Xoa_css_extractor.Css_wiki_name);
 			usr_dlg.Log_many("", "", "deleting css: ~{0}", url.Raw());

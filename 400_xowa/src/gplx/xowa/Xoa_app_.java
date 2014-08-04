@@ -23,7 +23,7 @@ public class Xoa_app_ {
 		boot_mgr.Run(args);
 	}
 	public static final String Name = "xowa";
-	public static final String Version = "1.7.4.1";
+	public static final String Version = "1.8.1.1";
 	public static String Build_date = "2012-12-30 00:00:00";
 	public static String Op_sys;
 	public static String User_agent = "";
@@ -35,7 +35,7 @@ public class Xoa_app_ {
 		rv.Log_wtr().Queue_enabled_(true);
 		return rv;
 	}
-	public static final byte Mode_console = 0, Mode_gui = 1;
+	public static final byte Mode_console = 0, Mode_gui = 1, Mode_http = 2;
 }	
 class Xoa_app_boot_mgr {
 	private Gfo_usr_dlg usr_dlg; private Gfo_log_wtr log_wtr; private String chkpoint = "null";
@@ -144,6 +144,7 @@ class Xoa_app_boot_mgr {
 			app.Gui_wtr().Log_wtr_(app.Log_wtr());	// NOTE: log_wtr must be set for cmd-line (else process will fail);
 
 			// run gfs
+			gplx.xowa.users.prefs.Prefs_rename_mgr._.Check(app.User().Fsys_mgr().App_data_cfg_user_fil());
 			try {app.Gfs_mgr().Run_url(cmd_file); chkpoint = "run_url";}
 			catch (Exception e) {
 				usr_dlg.Warn_many("", "", "script file failed: ~{0} ~{1} ~{2}", chkpoint, cmd_file.Raw(), Err_.Message_gplx(e));
@@ -155,8 +156,10 @@ class Xoa_app_boot_mgr {
 			app.Launch(); chkpoint = "launch";
 			if		(String_.Eq(app_mode, "server"))
 				app.Tcp_server().Run();
-			else if	(String_.Eq(app_mode, "http_server"))
+			else if	(String_.Eq(app_mode, "http_server")) {
+				app.Mode_(Xoa_app_.Mode_http);
 				app.Http_server().Run();
+			}
 			else {
 				if (cmd_text != null)
 					ConsoleAdp._.WriteLine_utf8(Object_.Xto_str_strict_or_empty(app.Gfs_mgr().Run_str(cmd_text)));

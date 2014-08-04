@@ -19,13 +19,14 @@ package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.html.tidy.*; import gplx.xowa.html.utils.*;
 public class Xoh_html_mgr implements GfoInvkAble {
 	public Xoh_html_mgr(Xoa_app app) {
+		page_mgr = new Xoh_page_mgr(app);
 		js_cleaner = new Xoh_js_cleaner(app);
 	}
 	public void Init_by_app(Xoa_app app) {
 		tidy_mgr.Init_by_app(app);
 	}
 	public Xop_xatr_whitelist_mgr Whitelist_mgr() {return whitelist_mgr;} private Xop_xatr_whitelist_mgr whitelist_mgr = new Xop_xatr_whitelist_mgr().Ini();
-	public Xoh_page_mgr Page_mgr() {return page_mgr;} private Xoh_page_mgr page_mgr = new Xoh_page_mgr();
+	public Xoh_page_mgr Page_mgr() {return page_mgr;} private Xoh_page_mgr page_mgr;
 	public Xoh_tidy_mgr Tidy_mgr() {return tidy_mgr;} private Xoh_tidy_mgr tidy_mgr = new Xoh_tidy_mgr();
 	public Xoh_js_cleaner Js_cleaner() {return js_cleaner;} private Xoh_js_cleaner js_cleaner;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

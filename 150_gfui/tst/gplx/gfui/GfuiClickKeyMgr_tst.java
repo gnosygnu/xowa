@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfui; import gplx.*;
 import org.junit.*;
 public class GfuiClickKeyMgr_tst {
-	@Test public void ExtractKeyFromText() {
+	@Test  public void ExtractKeyFromText() {
 		tst_ExtractKey("&click", IptKey_.C);
 		tst_ExtractKey("&", IptKey_.None);
 		tst_ExtractKey("trailing &", IptKey_.None);

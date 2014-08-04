@@ -47,7 +47,7 @@ class Imap_html_fmtrs {
 	, "      </a>"
 	), "imap_id", "img_elem_id", "img_alt", "img_src", "img_w", "img_h", "img_cls", "anchor_href", "anchor_title"
 	)
-	, Desc_style = Bry_fmtr.new_(" style=\"height:~{div_h}px; width: ~{div_w}px;\"", "div_h", "div_w")
+	, Desc_style = Bry_fmtr.new_(" style=\"height:~{div_h}px; width: ~{div_w}px;\"", "div_w", "div_h")
 	, Desc_main = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "      <div style=\"margin-left:~{margin_left}px; margin-top:~{margin_top}px; text-align:left;\">"

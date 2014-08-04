@@ -32,6 +32,10 @@ public class Gfo_usr_dlg_base implements Gfo_usr_dlg {
 	public String Note_many(String grp_key, String msg_key, String fmt, Object... args)	{String rv = Bld_msg_many(grp_key, msg_key, fmt, args	); log_wtr.Log_msg_to_session(rv); ui_wkr.Write_note(rv); return rv;}
 	public String Note_none(String grp_key, String msg_key, String fmt)							{String rv = Bld_msg_none(grp_key, msg_key, fmt			); log_wtr.Log_msg_to_session(rv); ui_wkr.Write_note(rv); return rv;}
 	public String Note_gui_none(String grp_key, String msg_key, String fmt)						{String rv = Bld_msg_none(grp_key, msg_key, fmt			);                                 ui_wkr.Write_note(rv); return rv;}
+	public String Plog_many(String grp_key, String msg_key, String fmt, Object... args) {
+		String rv = Log_many(grp_key, msg_key, fmt, args);
+		return Prog_direct(rv);
+	}
 	public Err Fail_many(String grp_key, String msg_key, String fmt, Object... args) {
 		Err rv = Err_.new_(Bld_msg_many(grp_key, msg_key, fmt, args));
 		log_wtr.Log_err(Err_.Message_gplx(rv));

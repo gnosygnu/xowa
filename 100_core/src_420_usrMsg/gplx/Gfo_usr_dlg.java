@@ -32,4 +32,5 @@ public interface Gfo_usr_dlg extends GfoInvkAble, Cancelable {
 	String Prog_one(String grp_key, String msg_key, String fmt, Object arg);
 	String Prog_direct(String msg);
 	String Log_direct(String msg);
+	String Plog_many(String grp_key, String msg_key, String fmt, Object... args);
 }

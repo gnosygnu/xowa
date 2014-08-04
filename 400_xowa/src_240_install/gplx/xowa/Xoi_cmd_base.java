@@ -48,7 +48,12 @@ abstract class Xoi_cmd_base implements Gfo_thread_cmd {
 		bldr.Cmd_mgr().Clear();
 		Process_async_init(app, wiki, bldr);
 		bldr.Pause_at_end_(false);
-		bldr.Run();
+		try {bldr.Run();}
+		catch (Exception e) {
+			running = false;
+			install_mgr.Cmd_mgr().Working_n_();
+			throw Err_.err_(e, "error during import: ~{0}", Err_.Message_hdr_or_message(e));
+		}
 		app.Gui_wtr().Prog_none("", "clear", "");
 		app.Gui_wtr().Note_none("", "clear", "");
 		Process_async_done(app, wiki, bldr);

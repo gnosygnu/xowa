@@ -16,7 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.html.portal.*;
 public class Xoh_page_mgr implements GfoInvkAble {
+	public Xoh_page_mgr(Xoa_app app) {
+		this.subpages_bldr = new Xoh_subpages_bldr(app);
+	}
+	public Xoh_subpages_bldr Subpages_bldr() {return subpages_bldr;} private Xoh_subpages_bldr subpages_bldr;
 	public boolean Font_enabled() {return font_enabled;} private boolean font_enabled = false;
 	public void Font_enabled_(boolean v) {font_enabled = v;}
 	public String Font_name() {return font_name;} private String font_name = "Arial";

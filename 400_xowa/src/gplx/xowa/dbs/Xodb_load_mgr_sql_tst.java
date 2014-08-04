@@ -18,8 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.dbs; import gplx.*; import gplx.xowa.*;
 import org.junit.*; import gplx.xowa.bldrs.*; import gplx.xowa.ctgs.*; import gplx.dbs.*; import gplx.xowa.dbs.tbls.*;
 public class Xodb_load_mgr_sql_tst {
-	@Before public void init() {fxt.Clear();} private Xodb_load_mgr_sql_fxt fxt = new Xodb_load_mgr_sql_fxt();
+	@Before public void init() {if (Xoa_test_.Db_skip()) return; fxt.Clear();} private Xodb_load_mgr_sql_fxt fxt = new Xodb_load_mgr_sql_fxt();
 	@Test  public void Load_ctg_ttls() {
+		if (Xoa_test_.Db_skip()) return;
 		Xodb_page[] ctgs = fxt.pages_
 		(	fxt.ctg_(1, "Ctg_1", Bool_.Y, 10, 11, 12)
 		,	fxt.ctg_(2, "Ctg_2", Bool_.N, 20, 21, 22)

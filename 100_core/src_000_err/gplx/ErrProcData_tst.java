@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 import org.junit.*;
 public class ErrProcData_tst {
-	@Test public void parse_() {
+	@Test  public void parse_() {
 				tst_parse_("gplx._tst.Err__tst.RdrLoad(MethodData_tst.java:1)"
 			, ErrProcData.new_()
 			.SignatureRaw_("gplx._tst.Err__tst.RdrLoad")
@@ -27,7 +27,7 @@ public class ErrProcData_tst {
 			.IdeAddress_("(MethodData_tst.java:1)")
 			);
 			}
-	@Test public void parse_ary_() {
+	@Test  public void parse_ary_() {
 		String stackTrace = "";
 		try {ThrowException();} catch (Exception exc) {stackTrace = Err_.StackTrace_lang(exc);}
 		ErrProcData[] ary = ErrProcData.parse_ary_(stackTrace);

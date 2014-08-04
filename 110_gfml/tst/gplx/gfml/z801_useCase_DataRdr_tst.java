@@ -20,7 +20,7 @@ import org.junit.*;
 import gplx.stores.*;
 public class z801_useCase_DataRdr_tst {
 	String raw;
-	@Test public void Subs_byName() {
+	@Test  public void Subs_byName() {
 		raw = String_.Concat
 			(	"_type:{"
 			,	"	item {"
@@ -39,7 +39,7 @@ public class z801_useCase_DataRdr_tst {
 		subRdr = rdr.Subs_byName_moveFirst("point");
 		fx_rdr.tst_Atrs(subRdr, kv_("x", "1"), kv_("y", "2"));
 	}
-//		@Test
+//		@Test 
 	public void Subs_byName3() {
 		raw = String_.Concat
 			(	"_type:{"

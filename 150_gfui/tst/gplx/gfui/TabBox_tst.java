@@ -21,11 +21,11 @@ public class TabBox_tst {
 //		@Before public void setup() {
 //			fx = TabBoxFxt.new_();
 //		}	TabBoxFxt fx;
-	@Test public void Add() {
+	@Test  public void Add() {
 //			fx.Make(1).tst_Selected("0").FetchBtnAt(0).tst_X(0);
 //			fx.Make(3).tst_Selected("2").FetchBtnAt(2).tst_X(160);
 	}
-//		@Test public void DelAt() {
+//		@Test  public void DelAt() {
 //			fx.Make(2).DelAt(1).tst_Btns("0");
 //			fx.Make(2).DelAt(0).tst_Btns("1");
 //			fx.Make(3).DelAt(0).tst_Btns("1", "2");
@@ -36,17 +36,17 @@ public class TabBox_tst {
 //			fx.Make(3).Select(1).DelAt(0).tst_Selected("1");	// 0 deleted; 1 still remains active (but will have idx of 0
 //			fx.Make(3).Select(2).DelAt(2).tst_Selected("1");	// 2 deleted; 1 selected
 //		}
-//		@Test public void Selected_byAdd() {
+//		@Test  public void Selected_byAdd() {
 //			fx.Make(2).Select(0).tst_Selected("0").Select(1).tst_Selected("1");
 //		}
-//		@Test public void Selected_byBtn() {
+//		@Test  public void Selected_byBtn() {
 //			fx.Make(2).tst_Selected("1");
 //
 //			GfuiBtn btn = fx.TabBox().SubBtnArea().FetchAt(0);
 //			btn.Click();
 //			fx.tst_Selected("0");
 //		}
-//		@Test public void ReorderTab() {
+//		@Test  public void ReorderTab() {
 //			fx.Make(3).Reorder(0, -1).tst_Raised(false);
 //			fx.Make(3).Reorder(2, 1).tst_Raised(false);
 //			fx.Make(3).Reorder(0, 1).tst_Btns("1", "0", "2").tst_Raised(true).tst_FocusOrder();

@@ -87,7 +87,7 @@ public class Imap_xnde_html_all_tst {
 		, "desc top-left"
 		, "</imagemap>"
 		), String_.Concat_lines_nl_skip_last
-		( "<div class=\"noresize\" style=\"height:123px; width: 0px;\">"
+		( "<div class=\"noresize\" style=\"height:0px; width: 123px;\">"
 		, "      <map name=\"imageMap_1_1\">"
 		, "      </map>"
 		, "      <img id=\"xowa_file_img_0\" alt=\"a1\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/123px.png\" width=\"123\" height=\"0\" usemap=\"#imageMap_1_1\"/>"

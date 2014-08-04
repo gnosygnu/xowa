@@ -57,7 +57,7 @@ public class Scrib_invoke_func extends Pf_func_base {
 				invoke_wkr.Eval_end(ctx.Cur_page(), mod_name, fnc_name, log_time_bgn);
 		}
 		catch (Exception e) {
-			bfr.Add_mid(src, self.Src_bgn(), self.Src_end());
+			Error(bfr, wiki.Msg_mgr(), "");
 			bfr.Add(Html_tag_.Comm_bgn).Add_str(Err_.Message_gplx_brief(e)).Add(Html_tag_.Comm_end);
 			ctx.App().Usr_dlg().Warn_many("", "", "invoke failed: ~{0} ~{1} ~{2}", String_.new_utf8_(ctx.Cur_page().Ttl().Raw()), String_.new_utf8_(src, self.Src_bgn(), self.Src_end()), Err_.Message_gplx_brief(e));
 			Scrib_core.Core_invalidate();	// reset core
@@ -65,7 +65,7 @@ public class Scrib_invoke_func extends Pf_func_base {
 	}
 	public static void Error(Bry_bfr bfr, Xow_msg_mgr msg_mgr, String error) {Error(bfr, msg_mgr, Bry_.new_utf8_(error));}
 	public static void Error(Bry_bfr bfr, Xow_msg_mgr msg_mgr, byte[] error) {
-		Bry_fmtr fmtr = Bry_fmtr.new_("<strong class=\"error\"><span class=\"scribunto-error\" id=\"mw-scribunto-error-0\">~{0}: ~{1}.</span></strong>");	// <!--~{0}: ~{1}.-->
+		Bry_fmtr fmtr = Bry_fmtr.new_("<strong class=\"error\"><span class=\"scribunto-error\" id=\"mw-scribunto-error-0\">~{0} ~{1}</span></strong>");	// <!--~{0}: ~{1}.-->
 		byte[] script_error_msg = msg_mgr.Val_by_id(Xol_msg_itm_.Id_scribunto_parser_error);
 		fmtr.Bld_bfr_many(bfr, script_error_msg, error);
 	}

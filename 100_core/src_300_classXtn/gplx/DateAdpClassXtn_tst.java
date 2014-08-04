@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 import org.junit.*;
 public class DateAdpClassXtn_tst {
-	@Test public void XtoDb() {
+	@Test  public void XtoDb() {
 		tst_XtoDb("20091115 220102.999", "2009-11-15 22:01:02.999");
 	}
 	void tst_XtoDb(String val, String expdRaw) {

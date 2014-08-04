@@ -21,19 +21,19 @@ public class CharStream_tst {
 	@Before public void setup() {
 		stream = CharStream.pos0_("abcdefgh");
 	}
-	@Test public void XtoStr() {
+	@Test  public void XtoStr() {
 		Tfds.Eq(stream.XtoStr(), "abcdefgh");
 	}
-	@Test public void CurrentText() {
+	@Test  public void CurrentText() {
 		stream.MoveNextBy(1);
 		Tfds.Eq(stream.XtoStrAtCur(2), "bc");
 		Tfds.Eq(stream.XtoStr(), "abcdefgh");
 	}
-	@Test public void CurrentText_outOfBounds() {
+	@Test  public void CurrentText_outOfBounds() {
 		stream.MoveNextBy(7);
 		Tfds.Eq(stream.XtoStrAtCur(2), "h");
 	}
-	@Test public void Match() {
+	@Test  public void Match() {
 		stream.MoveNextBy(6);
 		tst_Match(true, "g");
 		tst_Match(false, "z");
@@ -41,7 +41,7 @@ public class CharStream_tst {
 		tst_Match(false, "gz");
 		tst_Match(false, "ghi");
 	}
-	@Test public void AtBounds() {
+	@Test  public void AtBounds() {
 		stream.MoveTo(-1);
 		tst_AtBounds(true, false, false);
 

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.lists; import gplx.*;
 import org.junit.*;
 public class StackAdp_tst {
-	@Test public void XtoList() {
+	@Test  public void XtoList() {
 		tst_XtoList(1, 2, 3);
 	}
 	void tst_XtoList(int... ary) {

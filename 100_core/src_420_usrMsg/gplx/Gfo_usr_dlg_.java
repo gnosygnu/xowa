@@ -37,6 +37,7 @@ class Gfo_usr_dlg_null implements Gfo_usr_dlg {
 	public String Prog_one(String grp_key, String msg_key, String fmt, Object arg) {return "";}
 	public String Prog_direct(String msg) {return "";}
 	public String Log_direct(String msg) {return "";}
+	public String Plog_many(String grp_key, String msg_key, String fmt, Object... args) {return "";}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {return this;}
         public static final Gfo_usr_dlg_null _ = new Gfo_usr_dlg_null(); Gfo_usr_dlg_null() {}
 }

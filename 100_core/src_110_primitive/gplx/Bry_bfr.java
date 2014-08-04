@@ -123,6 +123,7 @@ public class Bry_bfr {
 	public Bry_bfr Add_byte_pipe()			{return Add_byte(Byte_ascii.Pipe);}
 	public Bry_bfr Add_byte_comma()			{return Add_byte(Byte_ascii.Comma);}
 	public Bry_bfr Add_byte_apos()			{return Add_byte(Byte_ascii.Apos);}
+	public Bry_bfr Add_byte_slash()			{return Add_byte(Byte_ascii.Slash);}
 	public Bry_bfr Add_byte_backslash()		{return Add_byte(Byte_ascii.Backslash);}
 	public Bry_bfr Add_byte_quote()			{return Add_byte(Byte_ascii.Quote);}
 	public Bry_bfr Add_byte_space()			{return Add_byte(Byte_ascii.Space);}

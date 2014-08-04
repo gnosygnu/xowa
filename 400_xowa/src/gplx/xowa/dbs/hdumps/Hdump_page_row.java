@@ -22,6 +22,7 @@ public class Hdump_page_row {
 	public byte[] Page_html() {return page_html;} private byte[] page_html;
 	public int Frags_len() {return frags_len;} private int frags_len;
 	public int Make_id() {return make_id;} private int make_id;
+	public Hdump_frag_row[] Frags() {return frags;} public void Frags_(Hdump_frag_row[] frags) {this.frags = frags;} private Hdump_frag_row[] frags;
 	public Hdump_page_row Ctor(int page_id, byte[] page_html, int frags_len, int make_id) {
 		this.page_id		= page_id;
 		this.page_html		= page_html;

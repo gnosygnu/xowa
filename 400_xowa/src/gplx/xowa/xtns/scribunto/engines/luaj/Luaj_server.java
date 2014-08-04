@@ -27,7 +27,7 @@ public class Luaj_server implements Scrib_server {
 		Globals_singleton = JsePlatform.standardGlobals();
 		Globals_singleton.load(new DebugLib());
 		Globals_singleton.load(new MWClient());
-
+		Globals_singleton.set("dbg", Luaj_server_func_dbg._);
 		String root_str = init_args[2];
 		if (Op_sys.Cur().Tid_is_wnt())
 			root_str = String_.Replace(root_str, Op_sys.Wnt.Fsys_dir_spr_str(), Op_sys.Lnx.Fsys_dir_spr_str());

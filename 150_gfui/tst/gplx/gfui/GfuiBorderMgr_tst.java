@@ -21,20 +21,20 @@ public class GfuiBorderMgr_tst {
 	@Before public void setup() {
 		borderMgr = GfuiBorderMgr.new_();
 	}
-	@Test public void NullToEdge() { // all null -> one edge
+	@Test  public void NullToEdge() { // all null -> one edge
 		tst_Eq(borderMgr, null, null, null, null, null);
 
 		borderMgr.Top_(red);
 		tst_Eq(borderMgr, null, red, null, null, null);
 	}
-	@Test public void EdgeToAll() { // one edge -> all edge
+	@Test  public void EdgeToAll() { // one edge -> all edge
 		borderMgr.Top_(red);
 		tst_Eq(borderMgr, null, red, null, null, null);
 
 		borderMgr.All_(black);
 		tst_Eq(borderMgr, black, null, null, null, null);
 	}
-	@Test public void AllToEdge() { // all edge -> one new; three old
+	@Test  public void AllToEdge() { // all edge -> one new; three old
 		borderMgr.All_(red);
 		tst_Eq(borderMgr, red, null, null, null, null);
 

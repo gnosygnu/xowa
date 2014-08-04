@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 import org.junit.*;
 public class UuidAdp__tst {
-	@Test public void parse_() {
+	@Test  public void parse_() {
 		tst_parse_("467ffb41-cdfe-402f-b22b-be855425784b");
 	}
 	void tst_parse_(String s) {

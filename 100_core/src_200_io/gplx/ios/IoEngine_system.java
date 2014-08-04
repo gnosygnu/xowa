@@ -392,8 +392,10 @@ public class IoEngine_system extends IoEngine_base {
 		Io_download_fmt xfer_fmt = xrg.Download_fmt();
 		prog_dlg = xfer_fmt.usr_dlg;
 		if (!Web_access_enabled) {
-			if (session_fil == null) session_fil = prog_dlg.Log_wtr().Session_dir().GenSubFil("internet.txt");
-			if (prog_dlg != null) prog_dlg.Log_wtr().Log_msg_to_url_fmt(session_fil, "download disabled: src='~{0}' trg='~{1}'", xrg.Src(), xrg.Trg().Raw());
+			if (prog_dlg != null) {
+				if (session_fil == null) session_fil = prog_dlg.Log_wtr().Session_dir().GenSubFil("internet.txt");
+				prog_dlg.Log_wtr().Log_msg_to_url_fmt(session_fil, "download disabled: src='~{0}' trg='~{1}'", xrg.Src(), xrg.Trg().Raw());				
+			}
 			return false;
 		}
 		try {

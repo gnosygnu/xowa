@@ -19,9 +19,13 @@ package gplx.xowa.html.modules; import gplx.*; import gplx.xowa.*; import gplx.x
 import gplx.html.*;
 public class Xoh_module_wtr {
 	private int indent; private int reset_bgn, reset_end;
+	private boolean js_tail_inited = false;
 	public Bry_bfr Bfr() {return bfr;} private Bry_bfr bfr;
 	public void Init(Bry_bfr bfr)	{this.bfr = bfr;}
-	public void Term()				{this.bfr = null;}
+	public void Term() {
+		this.bfr = null;
+		js_tail_inited = true;
+	}
 	public void Write_css_include(byte[] url) {
 		Write_nl_and_indent();
 		bfr.Add(Css_include_bgn).Add(url).Add(Css_include_end);
@@ -77,6 +81,23 @@ public class Xoh_module_wtr {
 		Write_nl_and_indent();
 		bfr.Add(Js_globals_ini_var_end);
 	}
+	private void Write_js_tail_init() {
+		if (js_tail_inited) return;
+		js_tail_inited = true;
+		Write_js_line(Js_line_1);
+	}
+	public void Write_js_tail_load_lib(Io_url url) {
+		Write_js_tail_init();
+		Write_nl_and_indent();
+		bfr.Add(Js_line_2_bgn);
+		bfr.Add(url.To_http_file_bry());
+		bfr.Add(Js_line_2_end);
+	}
+	private static final byte[]
+	  Js_line_1						= Bry_.new_ascii_("xowa.js.jquery.init();")
+	, Js_line_2_bgn					= Bry_.new_ascii_("xowa.js.load_lib('")
+	, Js_line_2_end					= Bry_.new_ascii_("');")
+	;
 	private boolean Reset() {
 		if (bfr.Len() == reset_end) {			// itms wrote nothing
 			bfr.Delete_rng_to_end(reset_bgn);	// delete bgn
@@ -109,6 +130,12 @@ public class Xoh_module_wtr {
 		bfr.Add_byte_apos();
 		bfr.Add(Js_globals_ini_atr_mid);
 	}
+	public void Write_js_ary_bgn() {js_ary_idx = 0; bfr.Add_byte(Byte_ascii.Brack_bgn);}
+	public void Write_js_ary_itm(byte[] val) {
+		if (++js_ary_idx != 1) bfr.Add(js_ary_dlm);
+		Write_js_quote(Byte_ascii.Apos, val);
+	}	private int js_ary_idx = 0; private static final byte[] js_ary_dlm = Bry_.new_ascii_(", ");
+	public void Write_js_ary_end() {js_ary_idx = 0; bfr.Add_byte(Byte_ascii.Brack_end);}
 	public void Write_js_var(byte[] key, boolean quote_val, byte[] val) {
 		Write_nl_and_indent();
 		bfr.Add(Js_var_bgn);

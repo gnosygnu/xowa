@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.ttls; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+import gplx.xowa.wikis.xwikis.*;
 public class Pfunc_urlfunc extends Pf_func_base {	// EX: {{lc:A}} -> a
 	@Override public boolean Func_require_colon_arg() {return true;}
 	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bb) {
@@ -31,12 +32,12 @@ public class Pfunc_urlfunc extends Pf_func_base {	// EX: {{lc:A}} -> a
 		Xow_xwiki_itm xwiki = ttl.Wik_itm();
 		if (xwiki != null) {	// xwiki exists; add as //commons.wikimedia.org/wiki/A#b?c=d
 			if (tid == Tid_canonical)
-				trg.Add(Xoh_href_parser.Href_http_bry);						//	"http://"
+				trg.Add(Xoh_href_parser.Href_http_bry);							//	"http://"
 			else
-				trg.Add(Xoa_consts.Url_relative_prefix);					//	"//"
-			trg.Add(xwiki.Domain())											//  "commons.wikimedia.org"
-				.Add(Xoh_href_parser.Href_wiki_bry)							//	"/wiki/"
-				.Add_mid(ttl_ary, xwiki.Key().length + 1, ttl_ary.length);	//	"A#b?c=d"; +1 for colon after "commons:"; NOTE: ugly way of getting rest of url, but ttl currently does not have Full_wo_wiki
+				trg.Add(Xoa_consts.Url_relative_prefix);						//	"//"
+			trg.Add(xwiki.Domain())												//  "commons.wikimedia.org"
+				.Add(Xoh_href_parser.Href_wiki_bry)								//	"/wiki/"
+				.Add_mid(ttl_ary, xwiki.Key_bry().length + 1, ttl_ary.length);	//	"A#b?c=d"; +1 for colon after "commons:"; NOTE: ugly way of getting rest of url, but ttl currently does not have Full_wo_wiki
 		}
 		else {
 			Bry_bfr tmp_bfr = ctx.App().Utl_bry_bfr_mkr().Get_b512().Mkr_rls();

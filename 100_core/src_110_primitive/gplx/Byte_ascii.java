@@ -70,8 +70,10 @@ public class Byte_ascii {
 		  ;
 	}
 	public static final byte[]
-	  Dot_bry				= new byte[] {Byte_ascii.Dot}
+	  Tab_bry				= new byte[] {Byte_ascii.Tab}
 	, NewLine_bry			= new byte[] {Byte_ascii.NewLine}
+	, Dot_bry				= new byte[] {Byte_ascii.Dot}
+	, Comma_bry				= new byte[] {Byte_ascii.Comma}
 	, Colon_bry				= new byte[] {Byte_ascii.Colon}
 	, Lt_bry				= new byte[] {Byte_ascii.Lt}
 	, Gt_bry				= new byte[] {Byte_ascii.Gt}
