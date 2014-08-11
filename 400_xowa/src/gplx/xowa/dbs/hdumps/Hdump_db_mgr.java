@@ -16,13 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs.hdumps; import gplx.*; import gplx.xowa.*; import gplx.xowa.dbs.*;
-import gplx.ios.*;
-public class Hdump_skin_row {
-	public int Skin_id() {return skin_id;} private int skin_id;
-	public byte[] Skin_html() {return skin_html;} private byte[] skin_html;
-	public Hdump_skin_row Ctor(int skin_id, byte[] skin_html) {
-		this.skin_id		= skin_id;
-		this.skin_html		= skin_html;
-		return this;
+import gplx.dbs.*;
+public class Hdump_db_mgr {
+	public Db_provider Db_provider_by_page(int page_id) {
+		return null;
 	}
+	public int Next_insert_id() {return 0;}
 }

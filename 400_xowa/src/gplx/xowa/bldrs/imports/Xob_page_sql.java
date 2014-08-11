@@ -56,7 +56,7 @@ public class Xob_page_sql extends Xob_itm_basic_base implements Xobd_wkr, GfoInv
 		int random_int = ns.Count() + 1;
 		ns.Count_(random_int);		
 		text = zip_mgr.Zip(data_storage_format, text);
-		int text_stmt_idx = text_stmts_mgr.Get_by_ns(ns.Bldr_file_idx(), text.length);
+		int text_stmt_idx = text_stmts_mgr.Get_by_ns(ns.Bldr_file_idx(), text.length);	// NOTE: was text.length, but want text_len which is original page_len, not compressed; DATE:2014-08-04
 		Db_stmt text_stmt = text_stmts_mgr.Get_at(text_stmt_idx);
 		try {
 			db_mgr.Page_create(page_stmt, text_stmt, page_id, page.Ns_id(), page.Ttl_wo_ns(), redirect, modified, text, random_int, text_stmt_idx);

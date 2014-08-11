@@ -55,7 +55,7 @@ public class Xosrh_core implements GfoInvkAble, Xows_page {
 			html_mgr.Bld_html(tmp_bfr, this, cur_grp, search_bry, page_idx, page_mgr.Pages_len());
 			page.Data_raw_(tmp_bfr.Mkr_rls().XtoAryAndClear());
 			wiki.ParsePage(page, false);	// do not clear else previous Search_text will be lost
-			page.Html_data().Search_text_(search_bry);
+			page.Html_data().Xtn_search_text_(search_bry);
 		}
 		else {														// page found; return it;
 			wiki.ParsePage(find_page, true);

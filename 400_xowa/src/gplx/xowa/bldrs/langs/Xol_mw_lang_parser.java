@@ -21,12 +21,12 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.numbers.*;
 public class Xol_mw_lang_parser {
 	private Php_parser parser = new Php_parser(); private Php_evaluator evaluator;
 	public Xol_mw_lang_parser(Gfo_msg_log msg_log) {evaluator = new Php_evaluator(msg_log);}
-	public void Bld_all(Xoa_app app, Io_url user_root) {Bld_all(app, user_root, Xol_lang_transform_null._);}
-	public static final String Dir_name_xowa = Xoa_app_.Name;
-	public void Bld_all(Xoa_app app, Io_url user_root, Xol_lang_transform lang_transform) {
-		Io_url lang_root = user_root.GenSubDir("lang");
+	public void Bld_all(Xoa_app app) {Bld_all(app, Xol_lang_transform_null._);}
+	public static final String Dir_name_core = "core";
+	public void Bld_all(Xoa_app app, Xol_lang_transform lang_transform) {
+		Io_url lang_root = app.Fsys_mgr().Cfg_lang_core_dir().OwnerDir();
 		Parse_mediawiki(app, lang_root.GenSubDir("mediawiki"), lang_transform);
-		Save_langs(app, lang_root.GenSubDir(Xol_mw_lang_parser.Dir_name_xowa), OrderedHash_.new_bry_(), OrderedHash_.new_bry_());
+		Save_langs(app, lang_root.GenSubDir(Xol_mw_lang_parser.Dir_name_core), OrderedHash_.new_bry_(), OrderedHash_.new_bry_());
 	}
 	public void Save_langs(Xoa_app app, Io_url xowa_root, OrderedHash manual_text_bgn, OrderedHash manual_text_end) {
 		Xoa_lang_mgr lang_mgr = app.Lang_mgr();
@@ -61,11 +61,13 @@ public class Xol_mw_lang_parser {
 	}
 	public void Parse_mediawiki(Xoa_app app, Io_url mediawiki_root, Xol_lang_transform lang_transform) {
 		Bry_bfr bfr = Bry_bfr.new_();
-		Parse_file_messages(app, mediawiki_root, bfr, lang_transform);
-		Parse_file_extensions(app, mediawiki_root, bfr, lang_transform);
+		Parse_file_core_php(app, mediawiki_root, bfr, lang_transform);
+		Parse_file_xtns_php(app, mediawiki_root, bfr, lang_transform);
+		Parse_file_json(app, bfr, lang_transform, mediawiki_root.GenSubDir("core_json"));
+		Parse_file_json(app, bfr, lang_transform, mediawiki_root.GenSubDir("xtns_json"));
 	}
-	private void Parse_file_messages(Xoa_app app, Io_url mediawiki_root, Bry_bfr bfr, Xol_lang_transform lang_transform) {
-		Io_url dir = mediawiki_root.GenSubDir("messages");
+	private void Parse_file_core_php(Xoa_app app, Io_url mediawiki_root, Bry_bfr bfr, Xol_lang_transform lang_transform) {
+		Io_url dir = mediawiki_root.GenSubDir("core_php");
 		Io_url[] urls = Io_mgr._.QueryDir_fils(dir);
 		int len = urls.length;
 		for (int i = 0; i < len; i++) {
@@ -76,11 +78,11 @@ public class Xol_mw_lang_parser {
 				String text = Io_mgr._.LoadFilStr(url);
 				Xol_lang lang = app.Lang_mgr().Get_by_key_or_new(Bry_.new_utf8_(lang_key));
 				this.Parse_core(text, lang, bfr, lang_transform);
-			} catch (Exception exc) {Err_.Noop(exc); Tfds.WriteText("failed to parse " + url.Raw() + Err_.Message_gplx_brief(exc) + "\n");}
+			} catch (Exception exc) {Err_.Noop(exc); Tfds.WriteText("failed to parse " + url.NameOnly() + Err_.Message_gplx_brief(exc) + "\n");}
 		}
 	}
-	private void Parse_file_extensions(Xoa_app app, Io_url mediawiki_root, Bry_bfr bfr, Xol_lang_transform lang_transform) {
-		Io_url dir = mediawiki_root.GenSubDir("extensions");
+	private void Parse_file_xtns_php(Xoa_app app, Io_url mediawiki_root, Bry_bfr bfr, Xol_lang_transform lang_transform) {
+		Io_url dir = mediawiki_root.GenSubDir("xtns_php");
 		Io_url[] urls = Io_mgr._.QueryDir_fils(dir);
 		int len = urls.length;
 		for (int i = 0; i < len; i++) {
@@ -89,7 +91,24 @@ public class Xol_mw_lang_parser {
 			String text = Io_mgr._.LoadFilStr(url);
 			boolean prepend_hash = String_.Eq("ParserFunctions.i18n.magic", url.NameOnly());
 			this.Parse_xtn(text, url, app, bfr, prepend_hash, lang_transform);
-			} catch (Exception exc) {Err_.Noop(exc); Tfds.WriteText("failed to parse " + url.Raw() + Err_.Message_gplx_brief(exc));}
+			} catch (Exception exc) {Err_.Noop(exc); Tfds.WriteText("failed to parse " + url.NameOnly() + Err_.Message_gplx_brief(exc));}
+		}
+	}
+	private void Parse_file_json(Xoa_app app, Bry_bfr bfr, Xol_lang_transform lang_transform, Io_url root_dir) {
+		Io_url[] dirs = Io_mgr._.QueryDir_args(root_dir).DirOnly_().ExecAsUrlAry();
+		int dirs_len = dirs.length;
+		gplx.xowa.bldrs.langs.Xob_i18n_parser i18n_parser = app.Bldr().I18n_parser();
+		for (int i = 0; i < dirs_len; i++) {
+			Io_url dir = dirs[i];
+			Io_url[] fils = Io_mgr._.QueryDir_args(dir).ExecAsUrlAry();
+			int fils_len = fils.length;
+			for (int j = 0; j < fils_len; ++j) {
+				Io_url fil = fils[j];
+				try {
+					Xol_lang lang = app.Lang_mgr().Get_by_key_or_new(Bry_.new_utf8_(fil.NameOnly()));
+					i18n_parser.Load_msgs(true, lang, fil);
+				}	catch (Exception exc) {Err_.Noop(exc); Tfds.WriteText(String_.Format("failed to parse json file; url={0} err={1}", fil.Raw(), Err_.Message_gplx_brief(exc)));}
+			}
 		}
 	}
 	public void Parse_core(String text, Xol_lang lang, Bry_bfr bfr, Xol_lang_transform lang_transform) {
@@ -182,7 +201,7 @@ public class Xol_mw_lang_parser {
 								Parse_magicwords(line, lang.Key_bry(), lang.Kwd_mgr(), prepend_hash, lang_transform); 
 							break;
 					}
-				} catch (Exception exc) {Err_.Noop(exc); Tfds.WriteText("failed to parse " + url.Raw() + Err_.Message_gplx_brief(exc) + "\n");}
+				} catch (Exception exc) {Err_.Noop(exc); Tfds.WriteText("failed to parse " + url.NameOnly() + Err_.Message_gplx_brief(exc) + "\n");}
 			}
 		}
 	}

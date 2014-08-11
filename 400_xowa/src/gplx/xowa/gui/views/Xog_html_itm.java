@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
-import gplx.core.btries.*; import gplx.gfui.*; import gplx.html.*; import gplx.xowa.gui.menus.*; import gplx.xowa.gui.menus.dom.*;
+import gplx.core.btries.*; import gplx.gfui.*; import gplx.html.*; import gplx.xowa.gui.menus.*; import gplx.xowa.gui.menus.dom.*; import gplx.xowa.html.modules.*;
 public class Xog_html_itm implements GfoInvkAble, GfoEvObj {
 	private Xoa_app app;
 	public Xog_html_itm(Xog_tab_itm owner_tab) {
@@ -114,13 +114,19 @@ public class Xog_html_itm implements GfoInvkAble, GfoEvObj {
 		GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_gallery_packed_exec, m);
 		module_packed_done = true;
 	}
-	private boolean module_packed_done = false;
+	public void Html_popups_bind_hover_to_doc() {
+		if (!String_.Eq(owner_tab.Tab_key(), owner_tab.Tab_mgr().Active_tab().Tab_key())) return;	// do not exec unless active;
+		GfoMsg m = GfoMsg_.new_cast_(Invk_html_popups_bind_hover_to_doc);
+		GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_popups_bind_hover_to_doc, m);
+		module_popups_done = true;
+	}
+	private boolean module_packed_done = false, module_popups_done = false;
 	public void Tab_selected(Xoa_page page) {
-		if (	page.Html_data().Module_mgr().Itm_gallery().Enabled()
-			&&	!module_packed_done
-			) {
+		Xoh_module_mgr module_mgr = page.Html_data().Module_mgr();
+		if (module_mgr.Itm_gallery().Enabled() && !module_packed_done)
 			this.Html_gallery_packed_exec();
-		}
+		if (module_mgr.Itm_popups().Enabled() && !module_popups_done)
+			this.Html_popups_bind_hover_to_doc();
 	}
 	public void Scroll_page_by_bmk_gui()	{GfoInvkAble_.InvkCmd(cmd_async, Invk_scroll_page_by_bmk);}
 	private void Scroll_page_by_bmk() {
@@ -165,6 +171,7 @@ public class Xog_html_itm implements GfoInvkAble, GfoEvObj {
 		else if	(ctx.Match(k, Invk_html_elem_delete))					html_box.Html_elem_delete(m.ReadStr("elem_id"));
 		else if	(ctx.Match(k, Invk_html_elem_replace_html))				html_box.Html_elem_replace_html(m.ReadStr("id"), m.ReadStr("html"));
 		else if	(ctx.Match(k, Invk_html_gallery_packed_exec))			html_box.Html_gallery_packed_exec();
+		else if	(ctx.Match(k, Invk_html_popups_bind_hover_to_doc))		html_box.Html_js_eval_script("xowa_popups_bind_doc();");
 		else if (ctx.Match(k, Invk_scroll_page_by_bmk))					Scroll_page_by_bmk();
 		else if (ctx.Match(k, Invk_scroll_page_by_id))					Scroll_page_by_id(m.ReadStr("v"));
 		else if (ctx.Match(k, Invk_html_elem_focus))					html_box.Html_elem_focus(m.ReadStr("v"));
@@ -173,7 +180,7 @@ public class Xog_html_itm implements GfoInvkAble, GfoEvObj {
 		return this;
 	}
 	private static final String 
-	  Invk_html_gallery_packed_exec = "html_gallery_packed_exec"
+	  Invk_html_gallery_packed_exec = "html_gallery_packed_exec", Invk_html_popups_bind_hover_to_doc = "html_popups_bind_hover_to_doc"
 	, Invk_html_img_update = "html_img_update", Invk_html_elem_atr_set = "html_elem_atr_set"
 	, Invk_html_elem_atr_set_append = "html_elem_atr_set_append", Invk_html_elem_delete = "html_elem_delete", Invk_html_elem_replace_html = "html_elem_replace_html"
 	, Invk_scroll_page_by_bmk = "scroll_page_by_bmk", Invk_scroll_page_by_id = "scroll_page_by_id"

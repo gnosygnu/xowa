@@ -95,7 +95,7 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 			synchronized (async_thread_guard) {
 				if (itm.Canceled()) return null;
 				cur_page.Popup_mgr().Itms().AddReplace(itm.Popup_id(), itm);
-				app.Href_parser().Parse(temp_href, itm.Page_href(), wiki, cur_page.Ttl().Page_url());
+				app.Href_parser().Parse(temp_href, itm.Page_href(), wiki, cur_page.Ttl().Full_url());	// NOTE: use Full_url, not Page_url, else anchors won't work for non-main ns; PAGE:en.w:Project:Sandbox; DATE:2014-08-07
 				Xow_wiki popup_wiki = app.Wiki_mgr().Get_by_key_or_null(temp_href.Wiki());
 				popup_wiki.Init_assert();
 				Xoa_ttl popup_ttl = Xoa_ttl.parse_(popup_wiki, temp_href.Page_and_anchor());

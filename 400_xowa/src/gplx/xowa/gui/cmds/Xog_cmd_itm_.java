@@ -35,6 +35,7 @@ public class Xog_cmd_itm_ {
 	, Key_nav_help_about										= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.about"								, "home/wiki/Help:About")
 	, Key_nav_help_change_log									= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.change_log"						, "home/wiki/Help:Change_log")
 	, Key_nav_help_diagnostics									= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.diagnostics"						, "home/wiki/Help:Diagnostics")
+	, Key_nav_help_xowa_main									= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.help.xowa_main"							, "home/wiki/Main_Page")
 
 	, Key_nav_setup_import_from_list							= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.setup.import_from_list"					, "home/wiki/Help:Import/List")
 	, Key_nav_setup_import_from_script							= new_page_(Xog_ctg_itm_.Tid_nav_pages		, "xowa.nav.setup.import_from_script"				, "home/wiki/Help:Import/Script")

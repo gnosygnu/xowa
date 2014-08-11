@@ -40,6 +40,9 @@ public class Process_engine implements Scrib_engine {
 	public void RegisterLibrary(KeyVal[] functions_ary) {
 		this.Dispatch("op", "registerLibrary", "name", Scrib_core.Key_mw_interface, "functions", functions_ary);
 	}
+	public void CleanupChunks(KeyVal[] ids) {
+		this.Dispatch("op", "cleanupChunks", "ids", ids);
+	}
 	public KeyVal[] ExecuteModule(int mod_id) {
 		return this.CallFunction(core.Lib_mw().Mod().Fncs_get_id("executeModule"), Scrib_kv_utl_.base1_obj_(new Scrib_lua_proc("", mod_id)));
 	}

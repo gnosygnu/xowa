@@ -16,37 +16,61 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.relatedSites; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.pages.skins.*;
+class Sites_xtn_skin_itm implements Xopg_xtn_skin_itm {
+	private ListAdp itms = ListAdp_.new_();
+	private Sites_html_bldr html_bldr;
+	public Sites_xtn_skin_itm(Sites_html_bldr html_bldr) {this.html_bldr = html_bldr;}
+	public byte Tid() {return Xopg_xtn_skin_itm_tid.Tid_sidebar;}
+	public byte[] Key() {return KEY;} public static final byte[] KEY = Bry_.new_utf8_("RelatedSites");
+	public void Add(Sites_regy_itm itm) {itms.Add(itm);}
+	public void Write(Bry_bfr bfr, Xoa_page page) {
+		html_bldr.Bld_all(bfr, page, itms);
+	}
+}
 public class Sites_html_bldr implements Bry_fmtr_arg {
 	private Sites_xtn_mgr xtn_mgr;
-	private Bry_bfr tmp_bfr = Bry_bfr.reset_(255), tmp_ttl = Bry_bfr.reset_(255);
+	private Bry_bfr tmp_ttl = Bry_bfr.reset_(255);
 	private ListAdp list; private int list_len;
+	private Hash_adp_bry hash = Hash_adp_bry.cs_();
 	public Sites_html_bldr(Sites_xtn_mgr xtn_mgr) {this.xtn_mgr = xtn_mgr;}
 	private Bry_fmtr url_fmtr = Bry_fmtr.keys_("title");
-	public byte[] Bld_all(ListAdp list) {
-		list_len = list.Count(); if (list_len == 0) return Bry_.Empty;
-		this.list = list;
-		fmtr_grp.Bld_bfr_many(tmp_bfr, xtn_mgr.Msg_related_sites(), this);
-		return tmp_bfr.XtoAryAndClear();
+	public void Bld_all(Bry_bfr bfr, Xoa_page page, ListAdp list) {
+		this.list = list; this.list_len = list.Count();
+		hash.Clear();
+		fmtr_grp.Bld_bfr_many(bfr, xtn_mgr.Msg_related_sites(), this);
 	}
 	public void XferAry(Bry_bfr bfr, int idx) {
+		Xow_wiki wiki = xtn_mgr.Wiki();
+		Xoh_href_parser href_parser = wiki.App().Href_parser();
 		for (int i = 0; i < list_len; ++i) {
 			Sites_regy_itm itm = (Sites_regy_itm)list.FetchAt(i);
-			byte[] href = url_fmtr.Fmt_(itm.Xwiki_itm().Fmt()).Bld_bry_many(tmp_ttl, itm.Ttl().Page_db());
-			fmtr_itm.Bld_bfr(bfr, itm.Cls(), href, itm.Xwiki_itm().Name());
+			byte[] xwiki_itm_name = itm.Xwiki_itm().Name();
+			if (hash.Has(xwiki_itm_name)) continue;
+			hash.Add(xwiki_itm_name, xwiki_itm_name);
+			byte[] href = Xto_href(tmp_ttl, url_fmtr, href_parser, wiki, itm.Xwiki_itm(), itm.Ttl().Page_db());
+			fmtr_itm.Bld_bfr(bfr, itm.Cls(), href, xwiki_itm_name);
 		}
+	}
+	private static byte[] Xto_href(Bry_bfr tmp_bfr, Bry_fmtr url_fmtr, Xoh_href_parser href_parser, Xow_wiki wiki, Xow_xwiki_itm xwiki_itm, byte[] ttl_page_db) {
+		href_parser.Encoder().Encode(tmp_bfr, ttl_page_db);
+		byte[] rv = url_fmtr.Fmt_(xwiki_itm.Fmt()).Bld_bry_many(tmp_bfr, tmp_bfr.XtoAryAndClear());			
+		if (xwiki_itm.Wiki_tid() != Xow_wiki_domain_.Tid_other)
+			rv = Bry_.Add(Xoh_href_parser.Href_site_bry, rv);
+		return rv;
 	}
 	private static final Bry_fmtr
 	  fmtr_grp = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
-	( "<div id=\"p-relatedsites\" class=\"portal\">"
+	( "<div id='p-relatedsites' class='portal'>"
 	, "  <h3>~{related_sites_hdr}</h3>"
-	, "  <div class=\"body\">"
+	, "  <div class='body'>"
 	, "    <ul>~{itms}"
 	, "    </ul>"
 	, "  </div>"
 	, "</div>"
 	), "related_sites_hdr", "itms")
 	, fmtr_itm = Bry_fmtr.new_
-	( "\n      <li class=\"interwiki-~{key}\"><a href=\"~{href}\">~{name}</a></li>"
+	( "\n      <li class='interwiki-~{key}'><a class='xowa-hover-off' href='~{href}'>~{name}</a></li>"
 	, "key", "href", "name")
 	;
 }

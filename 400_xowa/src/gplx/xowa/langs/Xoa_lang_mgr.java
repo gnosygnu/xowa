@@ -96,7 +96,7 @@ public class Xoa_lang_mgr implements GfoInvkAble {
 	}
 	public void Bld_xowa() {
 		Xol_mw_lang_parser lang_parser = new Xol_mw_lang_parser(app.Msg_log());
-		lang_parser.Bld_all(app, app.User().Fsys_mgr().Root_dir());
+		lang_parser.Bld_all(app);
 	}
 	public OrderedHash Xto_hash(byte[] raw) {
 		byte[][] keys = Bry_.Split(raw, Byte_ascii.Tilde);

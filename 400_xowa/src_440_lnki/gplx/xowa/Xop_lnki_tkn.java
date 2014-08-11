@@ -46,6 +46,7 @@ public class Xop_lnki_tkn extends Xop_tkn_itm_base {
 	public int				Html_id() {return html_id;} public Xop_lnki_tkn Html_id_(int v) {html_id = v; return this;} private int html_id;
 	public int				Pipe_count() {return pipe_count;} private int pipe_count;
 	public boolean				Pipe_count_is_zero() {return pipe_count++ == 0;} 
+	public boolean				Xtn_sites_link() {return xtn_sites_link;} public void Xtn_sites_link_(boolean v) {xtn_sites_link = v;} private boolean xtn_sites_link;
 	public Xoh_lnki_file_wkr Lnki_file_wkr() {return lnki_file_wkr;} public void Lnki_file_wkr_(Xoh_lnki_file_wkr v) {lnki_file_wkr = v;} private Xoh_lnki_file_wkr lnki_file_wkr;
 	public byte[] Ttl_ary() {
 		return ttl.ForceLiteralLink() || nsId != Xow_ns_.Id_main		// if [[:]] or non-main (Category, Template)

@@ -60,6 +60,12 @@ public class Luaj_engine implements Scrib_engine {
 	public KeyVal[] ExecuteModule(int mod_id) {
 		return this.CallFunction(core.Lib_mw().Mod().Fncs_get_id("executeModule"), Scrib_kv_utl_.base1_obj_(new Scrib_lua_proc("", mod_id)));
 	}
+	public void CleanupChunks(KeyVal[] ids) {
+		LuaTable msg = LuaValue.tableOf();
+		msg.set("op", "cleanupChunks");
+		msg.set("ids", Luaj_value_.X_obj_to_val(server, ids));
+		this.Dispatch_as_kv_ary(msg);		
+	}
 	public KeyVal[] Dispatch_as_kv_ary(LuaTable msg) {
 		while (true) {
 			LuaTable rsp = server.Dispatch(msg);

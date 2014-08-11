@@ -21,9 +21,11 @@ public class Imap_xnde implements Xox_xnde {
 	private Imap_xtn_mgr xtn_mgr;
 	private Imap_map imap_data;
 	public void Xtn_parse(Xow_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
-		xtn_mgr = (Imap_xtn_mgr)wiki.Xtn_mgr().Get_or_fail(Imap_xtn_mgr.Xtn_key_static);
+		xtn_mgr = wiki.Xtn_mgr().Xtn_imap();
 		xtn_mgr.Xtn_assert();
-		ctx.Cur_page().Html_data().Module_mgr().Itm_popups().Bind_hover_area_(true);
+		Xoa_page page = ctx.Cur_page();
+		page.Html_data().Module_mgr().Itm_popups().Bind_hover_area_(true);
+		page.Html_data().Xtn_imap_exists_y_();
 		ctx.Para().Process_block__xnde(xnde.Tag(), Xop_xnde_tag.Block_end);
 		imap_data = xtn_mgr.Parser().Parse(wiki, ctx, root, src, xnde);
 		ctx.Para().Process_block__xnde(xnde.Tag(), Xop_xnde_tag.Block_end);			

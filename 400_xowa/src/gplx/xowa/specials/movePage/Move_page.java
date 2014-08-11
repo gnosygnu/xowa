@@ -29,7 +29,7 @@ public class Move_page implements Xows_page {
 			return;
 		}
 		byte[] html = Bld_html(page);
-		page.Html_data().Restricted_n_();	// [[Special:]] pages allow all HTML
+		page.Html_data().Html_restricted_n_();	// [[Special:]] pages allow all HTML
 		page.Data_raw_(html);
 	}
 	private void Exec_rename(Xow_wiki wiki, Xoa_page page) {

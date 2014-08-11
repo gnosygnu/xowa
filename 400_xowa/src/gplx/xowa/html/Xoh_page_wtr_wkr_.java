@@ -18,12 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
 import gplx.html.*; import gplx.xowa.xtns.relatedSites.*;
 public class Xoh_page_wtr_wkr_ {
-	public static byte[] Bld_portal_div_xtn(Xow_wiki wiki, Xoa_page page) {
-		// byte[] rv = wiki.Xtn_mgr().Xtn_sites().Html_bldr().Bld_all(page.Html_data().Related_sites());
-		// rv = Bry_.Add(rv, page.Html_data().Portal_div_xtn().XtoAryAndClear());
-		// return rv;
-		return page.Html_data().Portal_div_xtn().XtoAryAndClear();
-	}
 	public static byte[] Bld_page_content_sub(Xoa_app app, Xow_wiki wiki, Xoa_page page, Bry_bfr tmp_bfr) {
 		byte[] subpages = app.Html_mgr().Page_mgr().Subpages_bldr().Bld(page.Ttl());
 		byte[] page_content_sub = page.Html_data().Content_sub();		// contentSub exists; SEE: {{#isin}}

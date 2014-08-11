@@ -151,16 +151,13 @@ class Xobc_utl_make_lang_fxt {
 	public Xobcl_kwd_row row_(String key, String... itms) {return new Xobcl_kwd_row(Bry_.new_ascii_(key), Bry_.Ary(itms));} 
 	public void Parse_rows(String raw, Xobcl_kwd_row... expd) {Tfds.Eq_str_lines(Xto_str(expd), Xto_str(Xobc_utl_make_lang_kwds.Parse(Bry_.new_ascii_(raw))));}
 	public void Ini_file_mw_core(String lang, String raw) {
-		Io_url fil = app.User().Fsys_mgr().Root_dir().GenSubFil_nest("lang", "mediawiki", "messages", "Messages" + String_.UpperFirst(lang) + ".php");
+		Io_url fil = app.Fsys_mgr().Cfg_lang_core_dir().OwnerDir().GenSubFil_nest("mediawiki", "core_php", "Messages" + String_.UpperFirst(lang) + ".php");
 		Io_mgr._.SaveFilStr(fil, raw);
 	}
 	public void Tst_file_xo(String lang, String expd) {
 		Io_url fil = Xol_lang_.xo_lang_fil_(app, lang);
 		Tfds.Eq_str_lines(expd, Io_mgr._.LoadFilStr(fil));
 	}
-//		public void Parse_trailing_colon(String raw, String[] langs, params Xobcl_kwd_row[] expd) {
-//			Tfds.Eq_str_lines(Xto_str(expd), Xto_str(Xobc_utl_make_lang_kwds.Parse(Bry_.new_ascii_(raw))));
-//		}
 	private String Xto_str(Xobcl_kwd_row[] expd) {
 		int len = expd.length;
 		for (int i = 0; i < len; i++) {

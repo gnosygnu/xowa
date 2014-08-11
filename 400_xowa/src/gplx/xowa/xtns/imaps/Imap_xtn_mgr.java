@@ -21,7 +21,7 @@ import gplx.core.btries.*;
 public class Imap_xtn_mgr extends Xox_mgr_base implements GfoInvkAble {
 	private boolean init;
 	@Override public boolean Enabled_default() {return true;}
-	@Override public byte[] Xtn_key() {return Xtn_key_static;} public static final byte[] Xtn_key_static = Bry_.new_ascii_("imageMap");
+	@Override public byte[] Xtn_key() {return XTN_KEY;} public static final byte[] XTN_KEY = Bry_.new_ascii_("imageMap");
 	public Xow_wiki Wiki() {return wiki;} private Xow_wiki wiki;
         @gplx.Internal protected Imap_parser Parser() {return parser;} private Imap_parser parser;
 	public void Desc_assert() {

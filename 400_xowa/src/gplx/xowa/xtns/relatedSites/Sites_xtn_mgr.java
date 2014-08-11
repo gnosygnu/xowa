@@ -18,27 +18,27 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.relatedSites; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.html.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*;
 public class Sites_xtn_mgr extends Xox_mgr_base {
-	private Xow_xwiki_mgr xwiki_mgr;
 	public Sites_xtn_mgr() {
 		html_bldr = new Sites_html_bldr(this);
+		regy_mgr = new Sites_regy_mgr(this);
 	}
 	@Override public boolean Enabled_default() {return false;}
-	@Override public byte[] Xtn_key() {return XTN_KEY;} public static final byte[] XTN_KEY = Bry_.new_ascii_("relatedSites");
+	@Override public byte[] Xtn_key() {return XTN_KEY;} public static final byte[] XTN_KEY = Bry_.new_ascii_("RelatedSites");
 	@Override public Xox_mgr Clone_new() {return new Sites_xtn_mgr();}
 	@Override public void Xtn_init_by_wiki(Xow_wiki wiki) {
 		this.wiki = wiki;
-		this.xwiki_mgr = wiki.Xwiki_mgr();
+		regy_mgr.Init_by_wiki(wiki);
 		if (!Enabled()) return;
-		msg_related_sites = wiki.Msg_mgr().Val_by_key_obj("relatedarticles-title");
+		Xox_mgr_base.Xtn_load_i18n(wiki, XTN_KEY);
+		msg_related_sites = wiki.Msg_mgr().Val_by_key_obj("relatedsites-title");
 	}
 	public Xow_wiki Wiki() {return wiki;} private Xow_wiki wiki;
+	public Sites_regy_mgr Regy_mgr() {return regy_mgr;} private Sites_regy_mgr regy_mgr;
 	public Sites_html_bldr Html_bldr() {return html_bldr;} private Sites_html_bldr html_bldr;
 	public byte[] Msg_related_sites() {return msg_related_sites;} private byte[] msg_related_sites;
-	public void Match(Xoa_ttl lnki_ttl, ListAdp list) {
-		if (!this.Enabled()) return;
-		byte[] xwiki_key = lnki_ttl.Wik_txt();
-		Xow_xwiki_itm xwiki_itm = xwiki_mgr.Get_by_key(xwiki_key); if (xwiki_itm == null) return;
-		Sites_regy_itm sites_itm = new Sites_regy_itm(xwiki_itm, lnki_ttl);
-		list.Add(sites_itm);
+	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
+		if		(String_.Eq(k, Invk_sites))		return regy_mgr;
+		else									return super.Invk (ctx, ikey, k, m);
 	}
+	private static final String Invk_sites = "sites";
 }

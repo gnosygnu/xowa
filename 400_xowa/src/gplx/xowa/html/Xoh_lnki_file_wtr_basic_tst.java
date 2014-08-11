@@ -137,11 +137,18 @@ public class Xoh_lnki_file_wtr_basic_tst {
 		Tst_img_title("[[File:A.png|thumb|a b]]", "Enlarge");	// caption should not replace text
 		fxt.Wtr_cfg().Lnki_title_(false);
 	}
+	@Test  public void Img_title__caption_has_lnki() {	// PURPOSE: caption with lnki should show in title; PAGE:en.w:Earth; DATE:2014-08-06
+		fxt.Wtr_cfg().Lnki_title_(true);
+		Tst_img_title("[[File:A.png|frameless|[[A]]]]"		, "A");		// ttl only
+		Tst_img_title("[[File:A.png|frameless|[[A|B]]]]"	, "B");		// caption
+		Tst_img_title("[[File:A.png|frameless|[[A]]b]]"		, "Ab");	// tail
+		fxt.Wtr_cfg().Lnki_title_(false);
+	}
 	@Test  public void Lnki_alt_is_text() {	// PURPOSE: (a) alt should default to caption; (b) alt should not show html chars (like <a src=")
 		fxt.Wtr_cfg().Lnki_title_(true);
 		fxt.Test_parse_page_all_str
 		(	"[[File:A.png|a[[b]]c]]"
-		,	"<a href=\"/wiki/File:A.png\" class=\"image\" title=\"a\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"abc\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
+		,	"<a href=\"/wiki/File:A.png\" class=\"image\" title=\"aBc\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"abc\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
 		);
 		fxt.Wtr_cfg().Lnki_title_(false);
 	}
@@ -213,7 +220,7 @@ public class Xoh_lnki_file_wtr_basic_tst {
 		fxt.Wtr_cfg().Lnki_title_(true);
 		fxt.Test_parse_page_wiki_str("[[File:A.png|none|[[File:B.png|20px|d]] c]]", String_.Concat_lines_nl_skip_last
 			(	"<div class=\"floatnone\">"
-			,	"<a href=\"/wiki/File:A.png\" class=\"image\" title=\" c\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"d c\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a></div>"
+			,	"<a href=\"/wiki/File:A.png\" class=\"image\" title=\"d c\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"d c\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a></div>"
 			,	""
 			));
 		fxt.Wtr_cfg().Lnki_title_(false);

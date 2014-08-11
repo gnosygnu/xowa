@@ -32,6 +32,6 @@ public class Xol_cnv_mgr implements GfoInvkAble {
 		if		(ctx.Match(k, Invk_get))				return Get_or_make(m.ReadBry("v"));
 		else	return GfoInvkAble_.Rv_unhandled;
 	}	private static final String Invk_get = "get";
-	public static Io_url Bld_url(Xoa_app app, String lang)	{return Bld_url(app.User().Fsys_mgr().Root_dir(), lang);}
-	public static Io_url Bld_url(Io_url dir, String lang)	{return dir.GenSubFil_nest("lang", "xowa", "variants", lang + ".gfs");}
+	public static Io_url Bld_url(Xoa_app app, String lang)	{return Bld_url(app.Fsys_mgr().Cfg_lang_core_dir(), lang);}
+	public static Io_url Bld_url(Io_url dir, String lang)	{return dir.GenSubFil_nest("variants", lang + ".gfs");}
 }

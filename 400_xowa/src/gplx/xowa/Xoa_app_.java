@@ -23,7 +23,7 @@ public class Xoa_app_ {
 		boot_mgr.Run(args);
 	}
 	public static final String Name = "xowa";
-	public static final String Version = "1.8.1.1";
+	public static final String Version = "1.8.2.1";
 	public static String Build_date = "2012-12-30 00:00:00";
 	public static String Op_sys;
 	public static String User_agent = "";
@@ -151,6 +151,7 @@ class Xoa_app_boot_mgr {
 				if (app_mode_gui)
 					GfuiEnv_.ShowMsg(Err_.Message_gplx(e));
 			}
+			gplx.xowa.apps.setups.Xoa_setup_mgr.Delete_old_files(app);
 
 			// launch
 			app.Launch(); chkpoint = "launch";

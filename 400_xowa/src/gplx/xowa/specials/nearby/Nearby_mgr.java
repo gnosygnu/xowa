@@ -29,7 +29,7 @@ public class Nearby_mgr implements Xows_page {
 	public int Results_max() {return results_max;} public Nearby_mgr Results_max_(int v) {results_max = v; return this;} private int results_max = 1;
 	public void Special_gen(Xoa_url calling_url, Xoa_page page, Xow_wiki wiki, Xoa_ttl ttl) {
 		page.Data_raw_(Bld_html(wiki));
-		page.Html_data().Restricted_n_();		// [[Special:]] pages allow all HTML
+		page.Html_data().Html_restricted_n_();		// [[Special:]] pages allow all HTML
 //			wiki.ParsePage(page, false);	// do not clear else previous Search_text will be lost		
 	}
 	byte[] Bld_html(Xow_wiki wiki) {

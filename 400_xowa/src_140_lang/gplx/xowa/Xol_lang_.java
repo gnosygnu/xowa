@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.intl.*; import gplx.xowa.xtns.cite.*; import gplx.xowa.xtns.gallery.*; import gplx.xowa.bldrs.langs.*; import gplx.xowa.langs.numbers.*;
 public class Xol_lang_ {
-	public static Io_url xo_lang_fil_(Xoa_app app, String lang_key) {return app.User().Fsys_mgr().Root_dir().GenSubFil_nest("lang", Xol_mw_lang_parser.Dir_name_xowa, lang_key + ".gfs");}
+	public static Io_url xo_lang_fil_(Xoa_app app, String lang_key) {return app.Fsys_mgr().Cfg_lang_core_dir().GenSubFil(lang_key + ".gfs");}
 	public static final byte Char_tid_ltr_l = 0, Char_tid_ltr_u = 1, Char_tid_num = 2, Char_tid_ws = 3, Char_tid_sym = 4, Char_tid_misc = 5;
 	public static byte Char_tid(byte b) {
 		switch (b) {
@@ -231,9 +231,10 @@ kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_mapSources_dd2dms								, "#dd2dms");
 kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_mapSources_geoLink								, "#geolink");
 kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_geoCrumbs_isin									, "#isin");
 kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_relatedArticles								, "#related");
-kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_relatedSites									, "#relatedSites");
+kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_insider										, "#insider");
 kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_massMessage_target								, "#target");
 kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_cascadingSources								, "CASCADINGSOURCES");
 kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_pendingChangesLevel							, "PENDINGCHANGESLEVEL");
+kwd_mgr.New(Bool_.Y, Xol_kwd_grp_.Id_bang											, "!");
 	}
 }

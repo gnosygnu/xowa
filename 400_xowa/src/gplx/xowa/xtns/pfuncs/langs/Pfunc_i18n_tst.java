@@ -36,13 +36,13 @@ class Pfunc_i18n_fxt {
 		return this;
 	}	private Xoa_app app; private Xop_fxt fxt; Xol_lang lang; Xow_wiki wiki;
 	public Pfunc_i18n_fxt Reg_func(String name, boolean case_match, String word) {
-		Io_url url = Io_url_.mem_fil_("mem/xowa/user/test_user/lang/xowa/" + lang_key + ".gfs");
+		Io_url url = Io_url_.mem_fil_("mem/xowa/bin/any/xowa/cfg/lang/core/" + lang_key + ".gfs");
 		String func = "keywords.load_text('" + name + "|" + (case_match ? "1" : "0") + "|" + name + "~" + word + "~');";
 		Io_mgr._.SaveFilStr(url, func);
 		return this;
 	}
 	public Pfunc_i18n_fxt Reg_msg(String key, String val) {
-		Io_url url = Io_url_.mem_fil_("mem/xowa/user/test_user/lang/xowa/" + lang_key + ".gfs");
+		Io_url url = Io_url_.mem_fil_("mem/xowa/bin/any/xowa/cfg/lang/core/" + lang_key + ".gfs");
 		String func = "messages.load_text('" + key + "|" + val + "');";
 		Io_mgr._.SaveFilStr(url, func);
 		return this;

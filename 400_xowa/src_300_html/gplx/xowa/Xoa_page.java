@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.gui.*; import gplx.xowa.gui.views.*; import gplx.xowa.html.*;
+import gplx.xowa.gui.*; import gplx.xowa.gui.views.*; import gplx.xowa.html.*; import gplx.xowa.pages.*;
 import gplx.xowa.files.*; import gplx.xowa.xtns.cite.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.html.tocs.*;
 import gplx.xowa.html.modules.popups.*;
 public class Xoa_page {
@@ -31,7 +31,7 @@ public class Xoa_page {
 	public Xow_wiki				Wiki() {return wiki;} private Xow_wiki wiki;
 	public Xol_lang				Lang() {return lang;} public Xoa_page Lang_(Xol_lang v) {lang = v; return this;} private Xol_lang lang;
 	public Xoa_revision_data	Revision_data() {return revision_data;} private Xoa_revision_data revision_data = new Xoa_revision_data();
-	public Xoa_html_data		Html_data() {return html_data;} private Xoa_html_data html_data = new Xoa_html_data();
+	public Xopg_html_data		Html_data() {return html_data;} private Xopg_html_data html_data = new Xopg_html_data();
 	public Xoa_ttl				Ttl() {return ttl;} public Xoa_page Ttl_(Xoa_ttl v) {ttl = v; url.Wiki_bry_(wiki.Domain_bry()).Page_bry_(v.Full_url()); return this;} private Xoa_ttl ttl;
 	public Xoa_url				Url() {return url;} public Xoa_page Url_(Xoa_url v) {url = v; return this;} private Xoa_url url = Xoa_url.blank_();
 	public Xog_tab_itm			Tab() {return tab;} public void Tab_(Xog_tab_itm v) {tab = v;} private Xog_tab_itm tab;
@@ -41,7 +41,6 @@ public class Xoa_page {
 	public ListAdp				Redirected_ttls() {return redirected_ttls;} private ListAdp redirected_ttls = ListAdp_.new_();
 	public byte[]				Redirected_src() {return redirected_src;} public void Redirected_src_(byte[] v) {this.redirected_src = v;}  private byte[] redirected_src;
 	public byte					Edit_mode() {return edit_mode;} private byte edit_mode; public void	Edit_mode_update_() {edit_mode = Xoa_page_.Edit_mode_update;}
-	public byte[]				Display_ttl() {return display_ttl;} public Xoa_page Display_ttl_(byte[] v) {display_ttl = v; return this;} private byte[] display_ttl;
 	public Xop_root_tkn			Root() {return root;} public Xoa_page Root_(Xop_root_tkn v) {root = v; return this;} private Xop_root_tkn root;
 	public byte[]				Data_raw() {return data_raw;} public Xoa_page Data_raw_(byte[] v) {data_raw = v; return this;} private byte[] data_raw = Bry_.Empty;
 	public Xow_hdr_mgr			Hdr_mgr() {return hdr_mgr;} private Xow_hdr_mgr hdr_mgr;
@@ -54,7 +53,6 @@ public class Xoa_page {
 	public Xop_lnki_logger_redlinks_mgr Lnki_redlinks_mgr() {return lnki_redlinks_mgr;} private Xop_lnki_logger_redlinks_mgr lnki_redlinks_mgr;
 	public Ref_itm_mgr			Ref_mgr() {return ref_mgr;} private Ref_itm_mgr ref_mgr = new Ref_itm_mgr();
 	public Xopg_popup_mgr		Popup_mgr() {return popup_mgr;} private Xopg_popup_mgr popup_mgr = new Xopg_popup_mgr();
-	public Xoh_xtn_mgr			Xtn_mgr() {return xtn_mgr;} private Xoh_xtn_mgr xtn_mgr = new Xoh_xtn_mgr();
 	public ListAdp				Xwiki_langs() {return xwiki_langs;} private ListAdp xwiki_langs = ListAdp_.new_();
 	public boolean					Lang_convert_content() {return lang_convert_content;} public Xoa_page Lang_convert_content_(boolean v) {lang_convert_content = v; return this;} private boolean lang_convert_content = true;
 	public boolean					Lang_convert_title() {return lang_convert_title;} public Xoa_page Lang_convert_title_(boolean v) {lang_convert_title = v; return this;} private boolean lang_convert_title = true;
@@ -84,7 +82,6 @@ public class Xoa_page {
 		wdata_external_lang_links.Reset();
 		gplx.xowa.xtns.scribunto.Scrib_core.Core_page_changed(this);
 		lang_convert_content = lang_convert_title = true;
-		xtn_mgr.Clear();
 		xwiki_langs.Clear();
 		html_data.Clear();
 		lnki_file_mgr.Clear();

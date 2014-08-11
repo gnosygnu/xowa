@@ -172,7 +172,7 @@ class Xob_wiki_cfg_bldr_fxt {
 			KeyVal kv = (KeyVal)hash.FetchAt(i);
 			String wiki = kv.Key();
 			String expd = (String)kv.Val();
-			String actl = Io_mgr._.LoadFilStr(app.User().Fsys_mgr().Wiki_root_dir().GenSubFil_nest("#cfg", "system", wiki + ".gfs"));
+			String actl = Io_mgr._.LoadFilStr(app.Fsys_mgr().Cfg_wiki_core_dir().GenSubFil(wiki + ".gfs"));
 			Tfds.Eq_str_lines(expd, actl);
 		}
 	}

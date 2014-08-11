@@ -425,6 +425,9 @@ public class Xot_invk_wkr_basic_tst {
 		fxt.Test_parse_tmpl_str_test("{{tmpl_1|a|1=b}}"		, "{{test}}"		, "b");	// "a" has implicit key of "1"; overwritten by "1=b"; verified against MW
 		fxt.Test_parse_tmpl_str_test("{{tmpl_1|1=a|b}}"		, "{{test}}"		, "b");	// "b" has implicit key of "1"; overwritten by "1=b"; verified against MW
 	}
+	@Test  public void Bang() {	// PURPOSE: support new bang keyword; DATE:2014-08-05
+		fxt.Test_parse_tmpl_str("{{!}}", "|");
+	}
 }
 /*
 NOTE_1: function should expand "*a" to "\n*a" even if "*a" is bos

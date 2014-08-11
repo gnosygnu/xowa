@@ -26,10 +26,10 @@ public class Xobc_utl_make_lang implements GfoInvkAble {
 	}	private Xoa_app app; Xol_mw_lang_parser lang_parser;
 	public Xobc_utl_make_lang_kwds Kwd_mgr() {return kwd_mgr;} private Xobc_utl_make_lang_kwds kwd_mgr;
 	public void Bld_all() {
-		Io_url lang_root = app.User().Fsys_mgr().Root_dir().GenSubDir("lang");
+		Io_url lang_root = app.Fsys_mgr().Cfg_lang_core_dir().OwnerDir();	// OwnerDir to get "/lang/" in "/cfg/lang/core/"
 		lang_parser.Parse_mediawiki(app, lang_root.GenSubDir("mediawiki"), kwd_mgr);
 		kwd_mgr.Add_words();
-		lang_parser.Save_langs(app, lang_root.GenSubDir(Xol_mw_lang_parser.Dir_name_xowa), manual_text_bgn_hash, manual_text_end_hash);
+		lang_parser.Save_langs(app, lang_root.GenSubDir(Xol_mw_lang_parser.Dir_name_core), manual_text_bgn_hash, manual_text_end_hash);
 		app.Usr_dlg().Prog_many("", "", "done");
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

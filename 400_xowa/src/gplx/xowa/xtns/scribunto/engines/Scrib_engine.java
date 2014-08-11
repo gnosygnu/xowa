@@ -23,4 +23,5 @@ public interface Scrib_engine {
 	KeyVal[] CallFunction(int id, KeyVal[] args);
 	void RegisterLibrary(KeyVal[] functions_ary);
 	KeyVal[] ExecuteModule(int mod_id);
+	void CleanupChunks(KeyVal[] ids);
 }

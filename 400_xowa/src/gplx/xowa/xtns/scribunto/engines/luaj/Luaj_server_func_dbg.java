@@ -16,6 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.engines.luaj; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
+import org.luaj.vm2.LuaTable;
+import org.luaj.vm2.LuaThread;
+import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 import org.luaj.vm2.lib.VarArgFunction;
 public class Luaj_server_func_dbg extends VarArgFunction {
@@ -25,10 +28,12 @@ public class Luaj_server_func_dbg extends VarArgFunction {
 		int len = args.narg();
 		Bry_bfr bfr = Bry_bfr.new_();
 		bfr.Add_str("<span class='xowa_dbg' style='color:red'>");
-		for (int i = 1; i <= len; ++i)
-			bfr.Add_str(gplx.html.Html_utl.Escape_html_as_str(args.arg(i).strvalue().toString()));
+		for (int i = 1; i <= len; ++i) {
+			String s = args.arg(i).strvalue().toString();
+			bfr.Add_str(gplx.html.Html_utl.Escape_html_as_str(s));
+		}
 		bfr.Add_str("</span><br/>");
-		core.Page().Html_data().Dbg_(bfr.XtoAryAndClear());
+		core.Page().Html_data().Xtn_scribunto_dbg_(bfr.XtoAryAndClear());
 		return NONE;
 	}
 	public static Luaj_server_func_dbg _ = new Luaj_server_func_dbg();

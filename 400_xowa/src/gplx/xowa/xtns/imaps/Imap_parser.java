@@ -42,12 +42,12 @@ class Imap_parser {
 		shapes.Clear(); pts.Clear(); errs.Clear();
 	}
 	public Imap_map Parse(Xow_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
-		Imap_map rv = new Imap_map();
+		Imap_map rv = new Imap_map(ctx.Cur_page().Html_data().Xtn_imap_next_id());
 		Init(wiki, ctx.Cur_page().Url(), wiki.App().Usr_dlg());
-		this.Parse(rv, ctx.Cur_page().Html_data().Imap_id_next(), src, xnde.Tag_open_end(), xnde.Tag_close_bgn());			
+		this.Parse(rv, src, xnde.Tag_open_end(), xnde.Tag_close_bgn());			
 		return rv;
 	}
-	public void Parse(Imap_map rv, int imap_id, byte[] src, int src_bgn, int src_end) {
+	public void Parse(Imap_map rv, byte[] src, int src_bgn, int src_end) {
 		this.Clear();
 		this.src = src;
 		itm_bgn = src_bgn; itm_end = src_bgn - 1;
@@ -84,7 +84,7 @@ class Imap_parser {
 			} catch (Exception e) {usr_dlg.Warn_many("", "", "imap.parse:skipping line; page=~{0} line=~{1} err=~{2}", page_url.Xto_full_str_safe(), Bry_.Mid_by_len_safe(src, itm_bgn, itm_end), Err_.Message_gplx(e));}
 			++itm_idx;
 		}
-		rv.Init(xtn_mgr, imap_id, imap_img_src, imap_img, imap_dflt, imap_desc, (Imap_itm_shape[])shapes.XtoAryAndClear(Imap_itm_shape.class), (Imap_err[])errs.XtoAryAndClear(Imap_err.class));
+		rv.Init(xtn_mgr, imap_img_src, imap_img, imap_dflt, imap_desc, (Imap_itm_shape[])shapes.XtoAryAndClear(Imap_itm_shape.class), (Imap_err[])errs.XtoAryAndClear(Imap_err.class));
 	}
 	private void Parse_comment(int itm_bgn, int itm_end) {}	// noop comments; EX: "# comment\n"
 	private void Parse_invalid(int itm_bgn, int itm_end) {usr_dlg.Warn_many("", "", "imap has invalid line: page=~{0} line=~{1}", page_url.Xto_full_str_safe(), String_.new_utf8_(src, itm_bgn, itm_end));}
@@ -122,7 +122,7 @@ class Imap_parser {
 				default:
 					int new_pos = Parse_shape_num(shape_tid, b, pos, num_bgn, pos, itm_end);
 					if (new_pos == -1)	return Add_err(Bool_.Y, itm_bgn, itm_end, "imagemap_invalid_coord");
-					if (new_pos == pos)
+					if (new_pos == pos)				// occurs when char is text
 						reading_numbers = false;
 					else
 						pos = Bry_finder.Trim_fwd_space_tab(src, new_pos, itm_end);
@@ -174,8 +174,9 @@ class Imap_parser {
 	}
 	private int Parse_shape_num(byte shape_tid, byte b, int pos, int num_bgn, int num_end, int itm_end) {
 		double num = 0;
+		boolean shape_is_poly = shape_tid == Imap_itm_.Tid_shape_poly;
 		if (num_bgn == -1) {								// 1st char is non-numeric; EX: "poly a"
-			if (	shape_tid == Imap_itm_.Tid_shape_poly	// poly code in ImageMap_body.php accepts invalid words and converts to 0; EX:"poly1"; PAGE:uk.w:Стратосфера; DATE:2014-07-26
+			if (	shape_is_poly							// poly code in ImageMap_body.php accepts invalid words and converts to 0; EX:"poly1"; PAGE:uk.w:Стратосфера; DATE:2014-07-26
 				&&	b != Byte_ascii.Brack_bgn				// skip logic if "[" which may be beginning of lnki / lnke
 				) {
 				num_end = Bry_finder.Find_fwd_until_space_or_tab(src, pos, itm_end);	// gobble up rest of word and search forward for space / tab to 
@@ -188,12 +189,14 @@ class Imap_parser {
 		else
 			num = Bry_.XtoDoubleByPosOr(src, num_bgn, num_end, Double_.NaN);
 		if (Double_.IsNaN(num)) { 
-			if (shape_tid == Imap_itm_.Tid_shape_poly)		// poly code in ImageMap_body.php accepts invalid words and converts to 0; EX:"poly 1a"
+			if (shape_is_poly)								// poly code in ImageMap_body.php accepts invalid words and converts to 0; EX:"poly 1a"
 				num = 0;
 			else
 				return -1;	// invalid number; EX: "1.2.3"
 		}
 		pts.Add(Double_obj_val.new_(num));
+		if (shape_is_poly && src[num_end] == Byte_ascii.Comma)	// PHP ignores trailing comma when casting numbers; EX:echo('123,' + 1) -> 124; PAGE:de.w:Kaimnitz; DATE:2014-08-05
+			++num_end;
 		return Bry_finder.Trim_fwd_space_tab(src, num_end, itm_end);
 	}
 	private void Parse_img(Imap_map imap, int itm_bgn, int itm_end) {

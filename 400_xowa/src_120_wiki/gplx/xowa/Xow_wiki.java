@@ -228,7 +228,7 @@ public class Xow_wiki implements GfoInvkAble {
 		app.Gfs_mgr().Run_url_for(this, fsys_mgr.Cfg_wiki_core_fil());
 		gplx.xowa.utls.upgrades.Xoa_upgrade_mgr.Check(this);
 		app.Gfs_mgr().Run_url_for(this, fsys_mgr.Cfg_wiki_stats_fil());
-		app.Gfs_mgr().Run_url_for(this, user.Fsys_mgr().Wiki_root_dir().GenSubFil_nest("#cfg", "system", domain_str + ".gfs"));		// run cfg for wiki by user ; EX: /xowa/user/anonymous/wiki/en.wikipedia.org/cfg/user_wiki.gfs
+		app.Gfs_mgr().Run_url_for(this, app.Fsys_mgr().Cfg_wiki_core_dir().GenSubFil(domain_str + ".gfs"));		// run cfg for wiki by user ; EX: /xowa/user/anonymous/wiki/en.wikipedia.org/cfg/user_wiki.gfs
 		fsys_mgr.Scan_dirs();
 		if (lang.Init_by_load()) {
 			if (domain_tid == Xow_wiki_domain_.Tid_wikipedia)	// NOTE: if type is wikipedia, add "Wikipedia" as an alias; PAGE:en.w:pt.wikipedia.org/wiki/Página principal which redirects to Wikipedia:Página principal

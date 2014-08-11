@@ -412,7 +412,7 @@ public class Xoh_html_wtr {
 				break;
 			default:	// unknown tag
 				if (tag.Restricted()) {	// a; img; script; etc..
-					if (	!page.Html_data().Restricted()								// page is not marked restricted (only [[Special:]])
+					if (	!page.Html_data().Html_restricted()							// page is not marked restricted (only [[Special:]])
 						||	page.Wiki().Domain_tid() == Xow_wiki_domain_.Tid_home) {	// page is in home wiki
 						bfr.Add_mid(src, xnde.Src_bgn(), xnde.Src_end());
 						return;

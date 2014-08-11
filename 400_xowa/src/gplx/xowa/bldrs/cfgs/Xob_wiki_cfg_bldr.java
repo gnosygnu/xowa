@@ -27,7 +27,7 @@ public class Xob_wiki_cfg_bldr implements GfoInvkAble {
 	}
 	private void Exec_fil(Xoac_wiki_cfg_bldr_fil fil) {
 		String wiki_key = fil.Wiki();
-		Io_url cfg_file = app.User().Fsys_mgr().Wiki_root_dir().GenSubFil_nest("#cfg", "system", wiki_key + ".gfs");
+		Io_url cfg_file = app.Fsys_mgr().Cfg_wiki_core_dir().GenSubFil(wiki_key + ".gfs");
 		String cfg_text = Io_mgr._.LoadFilStr_args(cfg_file).MissingIgnored_().Exec();
 		int len = fil.Itms_count();
 		String_bldr sb = String_bldr_.new_();

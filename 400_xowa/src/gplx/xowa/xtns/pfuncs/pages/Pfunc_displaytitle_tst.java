@@ -36,6 +36,6 @@ class Pfunc_displaytitle_fxt {
 	}
 	public void Test(String raw, String expd) {
 		fxt.Test_parse_tmpl_str_test(raw, "{{test}}", "");
-		Tfds.Eq(expd, String_.new_utf8_(fxt.Page().Display_ttl()));
+		Tfds.Eq(expd, String_.new_utf8_(fxt.Page().Html_data().Display_ttl()));
 	}
 }

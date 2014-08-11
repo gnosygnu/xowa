@@ -30,6 +30,17 @@ public class Xohp_title_wkr implements Bry_fmtr_arg {
 				Arg_nde_tkn arg_nde = (Arg_nde_tkn)tkn;
 				Bld_recurse(bfr, arg_nde.Val_tkn());
 				break;
+			case Xop_tkn_itm_.Tid_lnki:
+				Xop_lnki_tkn tkn_as_lnki = (Xop_lnki_tkn)tkn;
+				if (tkn_as_lnki.Caption_exists())
+					Bld_recurse(bfr, tkn_as_lnki.Caption_tkn());
+				else {
+					if (tkn_as_lnki.Ttl() != null)	// guard against invalid ttls
+						bfr.Add(tkn_as_lnki.Ttl().Page_txt());
+				}
+				if (tkn_as_lnki.Tail_bgn() != -1)
+					bfr.Add_mid(src, tkn_as_lnki.Tail_bgn(), tkn_as_lnki.Tail_end());
+				break;
 			default:	// all other tkns, just iterate over subs for txt tkns
 				if (tkn.Tkn_tid() == Xop_tkn_itm_.Tid_xnde) {
 					Xop_xnde_tkn xnde = (Xop_xnde_tkn)tkn; 

@@ -41,7 +41,7 @@ class Imap_img_fmtr_arg implements Bry_fmtr_arg {
 		fmtr.Bld_bfr_many(bfr, map.Id(), img_elem_id, img_alt, img_src, img_w, img_h, img_cls, anchor_href, anchor_text);
 		Imap_itm_desc itm_desc = map.Desc();
 		if (itm_desc != null) {
-			Imap_desc_tid.calc_desc_margins(margin_calc, itm_desc.Desc_tid(), img_w, img_h);
+			Imap_desc_tid.Calc_desc_margins(margin_calc, itm_desc.Desc_tid(), img_w, img_h);
 			Imap_xtn_mgr xtn_mgr = map.Xtn_mgr();
 			Imap_html_fmtrs.Desc_main.Bld_bfr_many(bfr, margin_calc.Val_0(), margin_calc.Val_1(), img_href, xtn_mgr.Desc_msg(), xtn_mgr.Desc_icon_url());
 		}

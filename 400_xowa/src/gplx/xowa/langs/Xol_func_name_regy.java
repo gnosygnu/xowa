@@ -69,7 +69,7 @@ public class Xol_func_name_regy {
 						finder.Func_set(func, -1);
 					else if (src[match_pos] == Pf_func_.Name_dlm)		// next char is :
 						finder.Func_set(func, match_pos);
-					else {											// func is close, but not quite: ex: #ifx: or padlefts:
+					else {												// func is close, but not quite: ex: #ifx: or padlefts:
 						return finder;
 					}
 					break;
@@ -95,7 +95,7 @@ public class Xol_func_name_regy {
 		Xot_defn rv = null;
 		if (cs_obj != null) {					// match found for cs; could be false_match; EX: NAME"+"SPACE and NAME"+"SPACENUMBER
 			rv = (Xot_defn)cs_obj;
-			if (rv.Name().length == end - bgn)	// func_name matchese cur_name; DATE:2013-04-15
+			if (rv.Name().length == end - bgn)	// func_name matches cur_name; DATE:2013-04-15
 				return rv;
 			// else {}							// func_name doesn't match cur_name; continue below; EX: NAME"+"SPACENUMBER passed in and matches NAME"+"SPACE (which is cs); note that NAME"+"SPACENUMBER only exists in ci
 		}

@@ -56,6 +56,11 @@ public abstract class Xox_mgr_base implements Xox_mgr {
 		}
 		Xox_mgr_base.Xtn_write_escape(app, bfr, src, xnde.Tag_close_bgn(), xnde.Tag_close_end());
 	}
+	public static void Xtn_load_i18n(Xow_wiki wiki, byte[] xtn_key) {
+		Xoa_app app = wiki.App();
+		Io_url url = app.Fsys_mgr().Bin_extensions_dir().GenSubFil_nest(String_.new_utf8_(xtn_key), "i18n", wiki.Lang().Key_str() + ".json");
+		wiki.App().Bldr().I18n_parser().Load_msgs(false, wiki.Lang(), url);
+	}
 	private static final byte[] Xowa_not_implemented = Bry_.new_ascii_("XOWA does not support this extension: ");
 	public static final byte Parse_content_tid_none = 0, Parse_content_tid_escape = 1, Parse_content_tid_html = 2;
 }

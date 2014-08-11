@@ -17,12 +17,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.core.btries.*;
-import gplx.xowa.wikis.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.xtns.pfuncs.ttls.*;
+import gplx.xowa.wikis.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.xtns.relatedSites.*;
 public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 	private Arg_bldr arg_bldr = Arg_bldr._;
 	private NumberParser number_parser = new NumberParser();
+	private Sites_regy_mgr sites_regy_mgr;
 	public void Ctor_ctx(Xop_ctx ctx) {}
-	public void Page_bgn(Xop_ctx ctx, Xop_root_tkn root) {}
+	public void Page_bgn(Xop_ctx ctx, Xop_root_tkn root) {
+		sites_regy_mgr = ctx.Wiki().Xtn_mgr().Xtn_sites().Regy_mgr(); if (!sites_regy_mgr.Xtn_mgr().Enabled()) sites_regy_mgr = null;	// sets sites_xtn_mgr status for page; see below
+	}
 	public void Page_end(Xop_ctx ctx, Xop_root_tkn root, byte[] src, int src_len) {}
 	public Xop_lnki_logger File_wkr() {return file_wkr;} public Xop_lnki_wkr File_wkr_(Xop_lnki_logger v) {file_wkr = v; return this;} private Xop_lnki_logger file_wkr;
 	public void Auto_close(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos, Xop_tkn_itm tkn) {
@@ -68,6 +71,12 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 		if (lnki_is_file) {
 			ctx.Cur_page().Lnki_list().Add(lnki);
 			if (file_wkr != null) file_wkr.Wkr_exec(ctx, src, lnki, gplx.xowa.bldrs.files.Xob_lnki_src_tid.Tid_file);
+		}
+		Xoa_ttl lnki_ttl = lnki.Ttl();
+		if (	lnki_ttl.Wik_bgn() != -1		// lnki is xwiki
+			&&	sites_regy_mgr != null			// relatedSites xtn is enabled
+			) {
+			lnki.Xtn_sites_link_(sites_regy_mgr.Match(ctx.Cur_page(), lnki_ttl));
 		}
 		return cur_pos;
 	}

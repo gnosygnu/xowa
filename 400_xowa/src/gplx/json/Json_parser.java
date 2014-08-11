@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.json; import gplx.*;
 public class Json_parser {
-	public Json_factory Factory() {return factory;} Json_factory factory = new Json_factory();
+	public Json_factory Factory() {return factory;} private Json_factory factory = new Json_factory();
 	private byte[] src; private int src_len, pos; private NumberParser num_parser = new NumberParser();
 	private static final byte[] Bry_bool_rue = Bry_.new_ascii_("rue"), Bry_bool_alse = Bry_.new_ascii_("alse"), Bry_null_ull = Bry_.new_ascii_("ull");
 	public Json_doc Parse(byte[] src) {

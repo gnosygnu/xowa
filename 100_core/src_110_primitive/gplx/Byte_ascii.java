@@ -72,6 +72,7 @@ public class Byte_ascii {
 	public static final byte[]
 	  Tab_bry				= new byte[] {Byte_ascii.Tab}
 	, NewLine_bry			= new byte[] {Byte_ascii.NewLine}
+	, Bang_bry				= new byte[] {Byte_ascii.Bang}
 	, Dot_bry				= new byte[] {Byte_ascii.Dot}
 	, Comma_bry				= new byte[] {Byte_ascii.Comma}
 	, Colon_bry				= new byte[] {Byte_ascii.Colon}

@@ -167,6 +167,8 @@ public class Scrib_core {
 			func_rslt = engine.CallFunction(lib_mw.Mod().Fncs_get_id("executeFunction"), func_args);				// call function now
 			String rslt = Scrib_kv_utl_.Val_to_str(func_rslt, 0);													// rslt expects an array with 1 scalar value
 			bfr.Add_str(rslt);
+			if (!Env_.Mode_testing())
+				engine.CleanupChunks(KeyVal_.Ary(KeyVal_.int_(proc.Id(), "")));										// cleanup chunk immediately; needed for heavy pages like en.d:water; DATE:2014-08-07
 		}
 		finally {
 			lib_mw.Invoke_end();

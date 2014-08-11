@@ -32,8 +32,8 @@ public class Xol_mw_parse_tst {
 		));
 	}
 //		@Test   public void Run() {
-//			Io_url src_dir = Io_url_.new_dir_("C:\\xowa\\user\\anonymous\\lang\\mediawiki\\converts\\");
-//			Io_url trg_dir = Io_url_.new_dir_("C:\\xowa\\user\\anonymous\\");
+//			Io_url src_dir = Io_url_.new_dir_("C:\\xowa\\bin\\any\\xowa\\lang\\mediawiki\\converts\\");
+//			Io_url trg_dir = Io_url_.new_dir_("C:\\xowa\\bin\\any\\xowa\\lang\\");
 //			fxt.Test_run(src_dir, trg_dir);
 //		}
 }

@@ -228,7 +228,9 @@ class Swt_html_lnr_location implements LocationListener {
 		String location = arg.location;
 		if (String_.Eq(location, "about:blank")) return;	// location changing event fires once when page is loaded; ignore
 		if (	html_box.Html_doc_html_load_tid() == Gxw_html_load_tid_.Tid_url	// navigating to file://page.html will fire location event; ignore if url mode
-			&& 	String_.HasAtEnd(location, ".html"))
+			&& 	String_.HasAtBgn(location, "file:")
+			&& 	String_.HasAtEnd(location, ".html")
+			)
 			return;
 		try {
 			GfoEvMgr_.PubObj(host, evt, "v", location);

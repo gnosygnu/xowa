@@ -20,7 +20,7 @@ import gplx.html.*;
 import gplx.xowa.wikis.*;
 public class Listing_xtn_mgr extends Xox_mgr_base {
 	@Override public boolean Enabled_default() {return false;}
-	@Override public byte[] Xtn_key() {return Xtn_key_static;} public static final byte[] Xtn_key_static = Bry_.new_ascii_("listings");
+	@Override public byte[] Xtn_key() {return Xtn_key_static;} public static final byte[] Xtn_key_static = Bry_.new_ascii_("Listings");
 	@Override public Xox_mgr Clone_new() {return new Listing_xtn_mgr();}
 	@Override public void Xtn_init_by_wiki(Xow_wiki wiki) {
 		if (!Enabled()) return;

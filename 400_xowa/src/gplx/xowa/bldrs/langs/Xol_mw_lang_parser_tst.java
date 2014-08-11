@@ -97,7 +97,7 @@ public class Xol_mw_lang_parser_tst {
 		fxt.Num_fmt_tst("1234,56", "1 234 56");	// NOTE: nbsp here; also, nbsp is repeated. see dewiki and {{formatnum:1234,56}}
 	}
 	@Test  public void Digit_transform_table() {
-		fxt.Save_file("mem/xowa/user/test_user/lang/mediawiki/messages/MessagesFr.php"
+		fxt.Save_file("mem/xowa/bin/any/xowa/cfg/lang/mediawiki/core_php/MessagesFr.php"
 		, "$digitTransformTable = array("
 		, "  '0' => 'nulla',"
 		, "  '1' => 'I',"
@@ -112,7 +112,7 @@ public class Xol_mw_lang_parser_tst {
 		, ");"
 		);
 		fxt.Run_bld_all();
-		fxt.Tst_file("mem/xowa/user/test_user/lang/xowa/fr.gfs", String_.Concat_lines_nl
+		fxt.Tst_file("mem/xowa/bin/any/xowa/cfg/lang/core/fr.gfs", String_.Concat_lines_nl
 		( "numbers {"
 		, "  digits {"
 		, "    clear;"
@@ -133,12 +133,12 @@ public class Xol_mw_lang_parser_tst {
 		));
 	}
 	@Test  public void Digit_grouping_pattern() {
-		fxt.Save_file("mem/xowa/user/test_user/lang/mediawiki/messages/MessagesFr.php"
+		fxt.Save_file("mem/xowa/bin/any/xowa/cfg/lang/mediawiki/core_php/MessagesFr.php"
 		, "$digitGroupingPattern = '##,##,###'"
 		, ");"
 		);
 		fxt.Run_bld_all();
-		fxt.Tst_file("mem/xowa/user/test_user/lang/xowa/fr.gfs", String_.Concat_lines_nl
+		fxt.Tst_file("mem/xowa/bin/any/xowa/cfg/lang/core/fr.gfs", String_.Concat_lines_nl
 		( "numbers {"
 		, "  digit_grouping_pattern = '##,##,###';"
 		, "}"
@@ -147,52 +147,73 @@ public class Xol_mw_lang_parser_tst {
 		));
 	}
 	@Test   public void Bld() {
-		//             mem/xowa/user/test_user/lang/mediawiki/messages/
-		fxt.Save_file("mem/xowa/user/test_user/lang/mediawiki/messages/MessagesFr.php"
-			,	"$fallback = 'zh-hans';"
-			,	"$rtl = true;"
-			,	"$namespaceNames = array(NS_FILE => 'Filex');"
-			,	"$namespaceAliases = array('File Discussion' => NS_FILE_TALK);"
-			,	"$magicWords = array('currentmonth' => array(0, 'CUR_MONTH'));"
-			,	"$messages = array('sunday' => 'sunday');"
-			);
-		fxt.Save_file("mem/xowa/user/test_user/lang/mediawiki/extensions/Test.il8n.php"
-			,	"$magicWords['fr'] = array('currentyear' => array(0, 'CUR_YEAR'));"
-			,	"$messages['fr'] = array('monday' => 'monday');"
-			);
+		fxt.Save_file("mem/xowa/bin/any/xowa/cfg/lang/mediawiki/core_php/MessagesFr.php"
+		, "$fallback = 'zh-hans';"
+		, "$rtl = true;"
+		, "$namespaceNames = array(NS_FILE => 'Filex');"
+		, "$namespaceAliases = array('File Discussion' => NS_FILE_TALK);"
+		, "$magicWords = array('currentmonth' => array(0, 'CUR_MONTH'));"
+		, "$messages = array('sunday' => 'sunday');"
+		);
+		fxt.Save_file("mem/xowa/bin/any/xowa/cfg/lang/mediawiki/xtns_php/Test.il8n.php"
+		, "$magicWords['fr'] = array('currentyear' => array(0, 'CUR_YEAR'));"
+		, "$messages['fr'] = array('monday' => 'monday');"
+		);
+		fxt.Save_file("mem/xowa/bin/any/xowa/cfg/lang/mediawiki/core_json/Messages/fr.json"
+		, "{"
+		, "    \"@metadata\": {"
+		, "        \"authors\": []"
+		, "    },"
+		, "\"key_1\": \"val_1\","
+		, "\"key_2\": \"val $1\","
+		, "}"
+		);
+		fxt.Save_file("mem/xowa/bin/any/xowa/cfg/lang/mediawiki/xtns_json/Test2/fr.json"
+		, "{"
+		, "    \"@metadata\": {"
+		, "        \"authors\": []"
+		, "    },"
+		, "\"key_3\": \"val_3\","
+		, "\"key_4\": \"val $1\","
+		, "}"
+		);
 		fxt.Run_bld_all();
-		fxt.Tst_file("mem/xowa/user/test_user/lang/xowa/fr.gfs", String_.Concat_lines_nl
-			(	"this"
-			,	".fallback_load('zh-hans')"
-			,	".dir_rtl_('y')"
-			,	".ns_names"
-			,	"  .load_text("
-			,	"<:['"
-			,	"6|Filex"
-			,	"']:>"
-			,	").lang"
-			,	".ns_aliases"
-			,	"  .load_text("
-			,	"<:['"
-			,	"7|File Discussion"
-			,	"']:>"
-			,	").lang"
-			,	".keywords"
-			,	"  .load_text("
-			,	"<:['"
-			,	"currentmonth|0|CUR_MONTH~"
-			,	"currentyear|0|CUR_YEAR~"
-			,	"']:>"
-			,	").lang"
-			,	".messages"
-			,	"  .load_text("
-			,	"<:['"
-			,	"sunday|sunday"
-			,	"monday|monday"
-			,	"']:>"
-			,	").lang"
-			,	";"
-			));
+		fxt.Tst_file("mem/xowa/bin/any/xowa/cfg/lang/core/fr.gfs", String_.Concat_lines_nl
+		( "this"
+		, ".fallback_load('zh-hans')"
+		, ".dir_rtl_('y')"
+		, ".ns_names"
+		, "  .load_text("
+		, "<:['"
+		, "6|Filex"
+		, "']:>"
+		, ").lang"
+		, ".ns_aliases"
+		, "  .load_text("
+		, "<:['"
+		, "7|File Discussion"
+		, "']:>"
+		, ").lang"
+		, ".keywords"
+		, "  .load_text("
+		, "<:['"
+		, "currentmonth|0|CUR_MONTH~"
+		, "currentyear|0|CUR_YEAR~"
+		, "']:>"
+		, ").lang"
+		, ".messages"
+		, "  .load_text("
+		, "<:['"
+		, "sunday|sunday"
+		, "monday|monday"
+		, "key_1|val_1"
+		, "key_2|val ~{0}"
+		, "key_3|val_3"
+		, "key_4|val ~{0}"
+		, "']:>"
+		, ").lang"
+		, ";"
+		));
 	}
 	@Test   public void Dir_ltr() {
 		fxt.Parse_core("$rtl = 'true';");
@@ -228,11 +249,8 @@ class Xol_mw_lang_parser_fxt {
 		GfoInvkAble_.InvkCmd_val(wiki, Xow_wiki.Invk_lang_, Bry_.new_ascii_("fr"));
 	}
 	public Xol_lang Lang() {return lang;} private Xol_lang lang;
-	public void Run_smoke(Io_url user_root) {
-		parser.Bld_all(app, user_root);
-	}
 	public void Num_fmt_tst(String raw, String expd) {Tfds.Eq(expd, String_.new_utf8_(lang.Num_mgr().Format_num(Bry_.new_utf8_(raw))));}
-	public void Run_bld_all() {parser.Bld_all(app, app.User().Fsys_mgr().Root_dir());}
+	public void Run_bld_all() {parser.Bld_all(app);}
 	public void Save_file(String path, String... lines) {
 		Io_mgr._.SaveFilStr(Io_url_.mem_fil_(path), String_.Concat_lines_nl(lines));
 	}

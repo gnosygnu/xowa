@@ -50,7 +50,7 @@ public class Wdata_itemByTitle_page implements Xows_page {
 		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_k004();
 		html_fmtr.Bld_bfr_many(tmp_bfr, "Search for items by site and title", "Site", site_bry, "Page", page_bry, "Search");
 		page.Data_raw_(tmp_bfr.Mkr_rls().XtoAryAndClear());
-		page.Html_data().Restricted_n_();		// [[Special:]] pages allow all HTML
+		page.Html_data().Html_restricted_n_();		// [[Special:]] pages allow all HTML
 	}
 	private static boolean Navigate(Gfo_usr_dlg usr_dlg, Xoa_app app, Wdata_wiki_mgr wdata_mgr, Xoa_page page, byte[] site_bry, byte[] page_bry) {
 		page_bry = app.Encoder_mgr().Url().Decode(page_bry);				// NOTE: space is converted to + on postback to url; decode

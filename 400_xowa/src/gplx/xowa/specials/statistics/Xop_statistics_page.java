@@ -23,7 +23,7 @@ public class Xop_statistics_page implements Xows_page {
 	private Xop_statistics_stats_ns_grp stats_ns = new Xop_statistics_stats_ns_grp();
 	public void Special_gen(Xoa_url calling_url, Xoa_page page, Xow_wiki wiki, Xoa_ttl ttl) {
 		byte[] html = Build_html(wiki);
-		page.Html_data().Restricted_n_();	// [[Special:]] pages allow all HTML
+		page.Html_data().Html_restricted_n_();	// [[Special:]] pages allow all HTML
 		page.Data_raw_(html);
 	}
 	public byte[] Build_html(Xow_wiki wiki) {

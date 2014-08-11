@@ -30,7 +30,8 @@ public class Swt_app_main {
 	public static void main(String[] args) {
 //		Drag_drop();
 //		List_fonts();
-		keystrokes(args);
+//		keystrokes(args);
+		Permission_denied();
 	}
 	static void Drag_drop() {
 		final Display display = new Display();

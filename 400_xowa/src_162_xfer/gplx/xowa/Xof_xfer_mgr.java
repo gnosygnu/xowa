@@ -43,9 +43,11 @@ public class Xof_xfer_mgr {
 	public Xof_xfer_mgr Check_file_exists_before_xfer_n_() {check_file_exists_before_xfer = false; return this;} private boolean check_file_exists_before_xfer = true;
 	public boolean Make_file(Xow_wiki wiki) {
 		rslt.Clear(); this.wiki = wiki;
-		if		(	ext.Id() == Xof_ext_.Id_ogg				// file is ogg; could be audio; DATE:2013-08-03
-				&&	!meta_itm.Thumbs_indicates_oga()		// check to make sure it hasn't been called before
-				&& src_repo.Wmf_api()						// make sure wmf_api enabled
+		if		(	src_repo.Wmf_api()												// make sure wmf_api enabled
+					&&	(	(	ext.Id() == Xof_ext_.Id_ogg							// file is ogg; could be audio; DATE:2013-08-03
+							&&	!meta_itm.Thumbs_indicates_oga())					// check to make sure it hasn't been called before
+						||	xfer_itm.Html_elem_tid() == Xof_html_elem.Tid_imap		// file is imap
+						)
 				)
 			Call_wmf_api();
 		if 		(ext.Id_is_thumbable_img())								Make_img();

@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
-import gplx.html.*; import gplx.xowa.html.portal.*;
-import gplx.xowa.wikis.*; import gplx.xowa.gui.*; import gplx.xowa.xtns.wdatas.*;	
+import gplx.html.*; import gplx.xowa.html.portal.*; import gplx.xowa.pages.skins.*;
+import gplx.xowa.wikis.*; import gplx.xowa.gui.*; import gplx.xowa.xtns.wdatas.*;
 public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 	private Xop_ctx ctx; private Xoa_page page; private Bry_bfr tmp_bfr = Bry_bfr.reset_(255); 
 	public Xoh_page_wtr_wkr(byte page_mode) {this.page_mode = page_mode;} private byte page_mode;
@@ -62,16 +62,15 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 		byte[] page_content_sub = Xoh_page_wtr_wkr_.Bld_page_content_sub(app, wiki, page, tmp_bfr);
 		byte[] js_wikidata_bry = Wdata_wiki_mgr.Wiki_page_is_json(wiki.Domain_tid(), page.Ttl().Ns().Id()) ? app.User().Lang().Fragment_mgr().Html_js_wikidata() : Bry_.Empty;
 		byte[] js_edit_toolbar_bry = view_tid == Xog_page_mode.Tid_edit ? wiki.Fragment_mgr().Html_js_edit_toolbar() : Bry_.Empty;
-		page.Xtn_mgr().Exec();
 		Xow_portal_mgr portal_mgr = wiki.Html_mgr().Portal_mgr().Init_assert();
 		fmtr.Bld_bfr_many(html_bfr, page.Revision_data().Id()
 		, Xoh_page_wtr_wkr_.Bld_page_name(tmp_bfr, page.Ttl(), null)					// NOTE: page_name does not show display_title (<i>). always pass in null
-		, Xoh_page_wtr_wkr_.Bld_page_name(tmp_bfr, page.Ttl(), page.Display_ttl())
+		, Xoh_page_wtr_wkr_.Bld_page_name(tmp_bfr, page.Ttl(), page.Html_data().Display_ttl())
 		, page_content_sub, page_data, wtr_page_lang, page_modified_on_msg, page.Lang().Dir_bry() 
 		, mgr.Css_common_bry(), mgr.Css_wiki_bry(), html_content_editable
 		, page.Html_data().Module_mgr().Init(app, wiki, page).Init_dflts()
-		, portal_mgr.Div_personal_bry(), portal_mgr.Div_ns_bry(app.Utl_bry_bfr_mkr(), page.Ttl(), wiki.Ns_mgr()), portal_mgr.Div_view_bry(app.Utl_bry_bfr_mkr(), view_tid, page.Html_data().Search_text())
-		, portal_mgr.Div_logo_bry(), portal_mgr.Div_home_bry(), Xoh_page_wtr_wkr_.Bld_portal_div_xtn(wiki, page), portal_mgr.Div_wikis_bry(app.Utl_bry_bfr_mkr()), portal_mgr.Sidebar_mgr().Html_bry()
+		, portal_mgr.Div_personal_bry(), portal_mgr.Div_ns_bry(app.Utl_bry_bfr_mkr(), page.Ttl(), wiki.Ns_mgr()), portal_mgr.Div_view_bry(app.Utl_bry_bfr_mkr(), view_tid, page.Html_data().Xtn_search_text())
+		, portal_mgr.Div_logo_bry(), portal_mgr.Div_home_bry(), new Xopg_xtn_skin_fmtr_arg(page, Xopg_xtn_skin_itm_tid.Tid_sidebar), portal_mgr.Div_wikis_bry(app.Utl_bry_bfr_mkr()), portal_mgr.Sidebar_mgr().Html_bry()
 		, mgr.Edit_rename_div_bry(page.Ttl())
 		, page.Html_data().Edit_preview_w_dbg()
 		, Xoa_app_.Version, Xoa_app_.Build_date

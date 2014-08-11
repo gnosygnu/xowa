@@ -87,10 +87,7 @@ public class Xoh_lnki_wtr {
 				return;
 			}
 		}
-//			if (wiki.Domain_tid() == gplx.xowa.wikis.Xow_wiki_domain_.Tid_wikivoyage && lnki_ttl.Wik_bgn() != -1) {
-//				wiki.Xtn_mgr().Xtn_sites().Match(lnki_ttl, page.Html_data().Related_sites());
-//				return;
-//			}
+		if (lnki.Xtn_sites_link()) return;	// lnki marked for relatedSites; don't write to page
 		if (hctx.Mode_is_alt())
 			Write_caption(bfr, ctx, hctx, src, lnki, ttl_bry, true, caption_wkr);
 		else {

@@ -16,18 +16,18 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs.hdumps; import gplx.*; import gplx.xowa.*; import gplx.xowa.dbs.*;
-import gplx.ios.*;
-public class Hdump_page_row {
-	public int Page_id() {return page_id;} private int page_id;
-	public byte[] Page_html() {return page_html;} private byte[] page_html;
-	public int Frags_len() {return frags_len;} private int frags_len;
-	public int Make_id() {return make_id;} private int make_id;
-	public Hdump_frag_row[] Frags() {return frags;} public void Frags_(Hdump_frag_row[] frags) {this.frags = frags;} private Hdump_frag_row[] frags;
-	public Hdump_page_row Ctor(int page_id, byte[] page_html, int frags_len, int make_id) {
-		this.page_id		= page_id;
-		this.page_html		= page_html;
-		this.frags_len		= frags_len;
-		this.make_id		= make_id;
-		return this;
+public class Hdump_img_itm {
+	public Hdump_img_itm(int img_id, byte[] img_src, int img_w, int img_h) {
+		this.img_id = img_id;
+		this.img_src = img_src;
+		this.img_w = img_w;
+		this.img_h = img_h;
 	}
+	public int Img_id() {return img_id;} private int img_id;
+	public byte[] Img_src() {return img_src;} private byte[] img_src;
+	public int Img_w() {return img_w;} private int img_w;
+	public int Img_h() {return img_h;} private int img_h;
+	public void Write_html(Bry_bfr bfr) {
+		fmtr.Bld_bfr_many(bfr, img_src, img_w, img_h);
+	}	private static final Bry_fmtr fmtr = Bry_fmtr.new_(" src='~{src}' width='~{w}' height='~{h}'", "src", "w", "h");
 }

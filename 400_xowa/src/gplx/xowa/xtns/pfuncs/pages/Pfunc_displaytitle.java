@@ -27,7 +27,7 @@ public class Pfunc_displaytitle extends Pf_func_base {
 		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
 		wiki.Html_mgr().Html_wtr().Write_tkn(tmp_bfr, new_ctx, gplx.xowa.html.Xoh_html_wtr_ctx.Display_title, new_root.Data_mid(), new_root, 0, new_root);
 		byte[] val_html = tmp_bfr.Mkr_rls().XtoAryAndClear();
-		ctx.Cur_page().Display_ttl_(val_html);
+		ctx.Cur_page().Html_data().Display_ttl_(val_html);
 	}
 	public static final Pfunc_displaytitle _ = new Pfunc_displaytitle(); Pfunc_displaytitle() {}
 }	

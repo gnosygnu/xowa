@@ -101,7 +101,10 @@ public class Xof_xfer_itm implements Xof_file_itm {
 			lnki_thumbtime = Xof_doc_thumb.Null;								// disable thumbtime
 		return this;
 	}
-	public void			Atrs_by_meta(Xof_meta_itm meta_itm, Xof_repo_itm trg_repo, int thumb_w_img) {this.meta_itm = meta_itm; this.trg_repo = trg_repo; this.thumb_w_img = thumb_w_img;} private int thumb_w_img;
+	public void			Atrs_by_meta(Xof_meta_itm meta_itm, Xof_repo_itm trg_repo, int thumb_w_img) {
+		this.meta_itm = meta_itm; this.trg_repo = trg_repo; this.thumb_w_img = thumb_w_img;
+		this.orig_w = meta_itm.Orig_w(); this.orig_h = meta_itm.Orig_h();		// orig_w / orig_h needed for imap; DATE:2014-08-08
+	}	private int thumb_w_img;
 	public void			Atrs_by_meta_only(Xof_meta_itm meta_itm) {this.meta_itm = meta_itm; Atrs_by_ttl(meta_itm.Ttl(), meta_itm.Ptr_ttl());}
 	public Xof_xfer_itm Atrs_by_ttl(byte[] ttl, byte[] redirect) {
 		this.lnki_redirect = redirect;

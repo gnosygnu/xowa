@@ -15,20 +15,15 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.xtns.relatedSites; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.dbs.hdumps.html; import gplx.*; import gplx.xowa.*; import gplx.xowa.dbs.*; import gplx.xowa.dbs.hdumps.*;
 import org.junit.*;
-public class Sites_func_tst {
-	@Before public void init()				{fxt.Reset();} private Sites_func_fxt fxt = new Sites_func_fxt();
+public class Hdump_html_mgr_tst {
+	@Before public void init() {fxt.Clear();} private Hdump_html_mgr_fxt fxt = new Hdump_html_mgr_fxt();
 	@Test  public void Basic() {
+		// fxt.Test_save("A b c", fxt.itm_text_("A b c"));
 	}
 }
-class Sites_func_fxt {
-	private Xop_fxt fxt = new Xop_fxt();
-	public void Reset() {
-		fxt.Reset();
+class Hdump_html_mgr_fxt {
+	public void Clear() {
 	}
-//		public void Test_parse(String raw, String expd) {
-//			fxt.Test_parse_tmpl_str_test(raw, "{{test}}"	, "");
-//			Tfds.Eq(expd, String_.new_utf8_(fxt.Page().Html_content_sub()));
-//		}
 }

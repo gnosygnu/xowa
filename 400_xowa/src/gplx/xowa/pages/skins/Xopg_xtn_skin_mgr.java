@@ -15,17 +15,12 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
-public class Xoh_xtn_mgr {
-	private OrderedHash itms = OrderedHash_.new_bry_();
-	public Xoh_xtn_itm Get_or_null(byte[] key) {return (Xoh_xtn_itm)itms.Fetch(key);}
-	public void Clear() {itms.Clear();}
-	public void Add(Xoh_xtn_itm itm) {itms.Add(itm.Key(), itm);}
-	public void Exec() {
-		int len = itms.Count();
-		for (int i = 0; i < len; i++) {
-			Xoh_xtn_itm itm = (Xoh_xtn_itm)itms.FetchAt(i);
-			itm.Exec();
-		}
-	}
+package gplx.xowa.pages.skins; import gplx.*; import gplx.xowa.*; import gplx.xowa.pages.*;
+public class Xopg_xtn_skin_mgr {
+	private OrderedHash hash = OrderedHash_.new_bry_();
+	public int Count() {return hash.Count();}
+	public void Add(Xopg_xtn_skin_itm itm) {hash.Add_if_new(itm.Key(), itm);}
+	public Xopg_xtn_skin_itm Get_at(int i) {return (Xopg_xtn_skin_itm)hash.FetchAt(i);}
+	public Xopg_xtn_skin_itm Get_or_null(byte[] key) {return (Xopg_xtn_skin_itm)hash.Fetch(key);}
+	public void Clear() {hash.Clear();}
 }

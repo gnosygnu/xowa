@@ -17,5 +17,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
 public class Xof_html_elem {
-	public static final byte Tid_none = 0, Tid_img = 1, Tid_vid = 2, Tid_gallery = 3, Tid_gallery_v2 = 4;
+	public static final byte Tid_none = 0, Tid_img = 1, Tid_vid = 2, Tid_gallery = 3, Tid_gallery_v2 = 4, Tid_imap = 5;
 }

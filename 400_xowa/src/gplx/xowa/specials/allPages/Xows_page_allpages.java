@@ -68,7 +68,7 @@ public class Xows_page_allpages implements GfoInvkAble, Bry_fmtr_arg, Xows_page 
 	public int Rslt_list_len() {return rslt_list_len;} public void Rslt_list_len_(int v) {rslt_list_len = v;} private int rslt_list_len;
 	public Xodb_page[] Rslt_list_ttls() {return rslt_list_ttls;} private Xodb_page[] rslt_list_ttls;
 	public void Special_gen(Xoa_url url, Xoa_page page, Xow_wiki wiki, Xoa_ttl ttl) {
-		wiki.Ctx().Cur_page().Display_ttl_(wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_sp_allpages_hdr));
+		wiki.Ctx().Cur_page().Html_data().Display_ttl_(wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_sp_allpages_hdr));
 		url.Page_bry_(Bry_.Add(Bry_.new_ascii_("Special:"), ttl.Page_txt_wo_qargs()));	// HACK: need to re-set Page b/c href_parser does not eliminate qargs; DATE:2013-02-08
 		if (wiki.Domain_tid() == Xow_wiki_domain_.Tid_home) {wiki.App().Usr_dlg().Prog_many(GRP_KEY, "home.invalid", "AllPages not implemented for home wiki"); return;}
 		if (rslt_list_ttls == null) this.Itms_per_page_(itms_per_page);
@@ -121,7 +121,7 @@ public class Xows_page_allpages implements GfoInvkAble, Bry_fmtr_arg, Xows_page 
 		html_all.Bld_bfr_many(tmp_bfr, this, anchor_prv, anchor_nxt);
 		page.Data_raw_(tmp_bfr.XtoAryAndClear());
 		tmp_bfr.Mkr_rls();
-		page.Html_data().Restricted_n_();
+		page.Html_data().Html_restricted_n_();
 	}
 	byte[] Build_html_end(Bry_bfr bfr, Xodb_page itm, boolean fwd) {
 		Xoa_ttl ttl = Xows_page_allpages.ttl_(wiki, init_ns, itm); if (ttl == null) return Bry_.Empty;	// occurs when range is empty; EX: Module:A in simplewikibooks

@@ -24,6 +24,7 @@ public class Imap_parser_tst {
 	@Test  public void Circle_pass()			{fxt.Test_shape("circle 1 2 3 [[A]]"								, fxt.itm_circle_("[[A]]", 1, 2, 3));}
 	@Test  public void Poly_pass()				{fxt.Test_shape("poly 1 2 3 4 5 6 [[A]]"							, fxt.itm_poly_("[[A]]", 1, 2, 3, 4, 5, 6));}
 	@Test  public void Poly_pass_chars()		{fxt.Test_shape("poly a b [[A]]"									, fxt.itm_poly_("[[A]]", 0, 0));}	// PURPOSE: non-numeric should be converted to 0; PAGE:uk.w:Стратосфера; DATE:2014-07-26
+	@Test  public void Poly_pass_commas()		{fxt.Test_shape("poly 1,2,3,4 [[A]]"								, fxt.itm_poly_("[[A]]", 1, 2, 3, 4));}	// PURPOSE: commas should be ignored; PAGE:de.w:Kaimnitz; DATE:2014-08-05
 	@Test  public void Rect_fail()				{fxt.Test_shape_err("rect 1 2 3 [[A]]"								, "imagemap_missing_coord");}
 	@Test  public void Circle_fail()			{fxt.Test_shape_err("circle 1 2 [[A]]"								, "imagemap_missing_coord");}
 	@Test  public void Poly_fail_odd()			{fxt.Test_shape_err("poly 1 2 3 [[A]]"								, "imagemap_poly_odd");}
@@ -66,12 +67,12 @@ class Imap_parser_fxt extends Imap_fxt_base {
 		parser = new Imap_parser(xtn_mgr);
 		parser.Init(wiki, url, Gfo_usr_dlg_.Null);
 		parser.Clear();
-		imap = new Imap_map();
+		imap = new Imap_map(1);
 	}
 	public void Test_shape(String raw_str, Imap_itm_shape expd) {
 		raw_str = "File:A.png\n" + raw_str;
 		byte[] raw = Bry_.new_utf8_(raw_str);			
-		parser.Parse(imap, 1, raw, 0, raw.length);
+		parser.Parse(imap, raw, 0, raw.length);
 		Imap_itm_shape[] actl_ary = imap.Shapes();
 		Imap_itm_shape actl = actl_ary == null | actl_ary.length != 1 ? null : (Imap_itm_shape)actl_ary[0];
 		if		(actl == null && expd == null) {}	// noop; test passed
@@ -88,7 +89,7 @@ class Imap_parser_fxt extends Imap_fxt_base {
 	public void Test_shape_err(String raw_str, String expd_err) {
 		raw_str = "File:A.png\n" + raw_str;
 		byte[] raw = Bry_.new_utf8_(raw_str);
-		parser.Parse(imap, 1, raw, 0, raw.length);
+		parser.Parse(imap, raw, 0, raw.length);
 		Imap_err[] err_ary = imap.Errs();
 		Tfds.Eq(1, err_ary.length, "expd 1 err");
 		Tfds.Eq(expd_err, err_ary[0].Err_key());

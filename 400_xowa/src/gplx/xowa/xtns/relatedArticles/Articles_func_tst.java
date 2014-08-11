@@ -16,17 +16,18 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.relatedArticles; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*;
+import org.junit.*; import gplx.xowa.pages.skins.*;
 public class Articles_func_tst {
 	@Before public void init()				{fxt.Reset();} private Articles_func_fxt fxt = new Articles_func_fxt();
 	@Test  public void Basic() {
-		fxt.Test_parse("{{#related:A1 && A 1}}{{#related:B1 && B 1}}", String_.Concat_lines_nl_skip_last
+		fxt.Test_parse("{{#related:A1 && A 1}}{{#related:B1 && B 1}}{{#related:C1}}", String_.Concat_lines_nl_skip_last	// C1 handles no caption; PAGE:de.v:W�rzburg; DATE:2014-08-06
 		(  "<div class=\"portal\" role=\"navigation\" id=\"p-relatedarticles\">"
 		, "  <h3>Related articles</h3>"
 		, "  <div class=\"body\">"
 		, "    <ul>"
 		, "      <li class=\"interwiki-relart\"><a href=\"/wiki/A1\">A 1</a></li>"
 		, "      <li class=\"interwiki-relart\"><a href=\"/wiki/B1\">B 1</a></li>"
+		, "      <li class=\"interwiki-relart\"><a href=\"/wiki/C1\">C1</a></li>"
 		, "    </ul>"
 		, "  </div>"
 		, "</div>"
@@ -41,7 +42,9 @@ class Articles_func_fxt {
 	}
 	public void Test_parse(String raw, String expd) {
 		fxt.Test_parse_page_all_str(raw, "");
-		fxt.Page().Xtn_mgr().Exec();
-		Tfds.Eq_str_lines(expd, fxt.Page().Html_data().Portal_div_xtn().XtoStrAndClear());
+		Xopg_xtn_skin_fmtr_arg fmtr_arg = new Xopg_xtn_skin_fmtr_arg(fxt.Page(), Xopg_xtn_skin_itm_tid.Tid_sidebar);
+		Bry_bfr bfr = Bry_bfr.new_();
+		fmtr_arg.XferAry(bfr, 0);
+		Tfds.Eq_str_lines(expd, bfr.XtoStrAndClear());
 	}
 }

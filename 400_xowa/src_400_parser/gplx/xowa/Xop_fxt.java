@@ -174,6 +174,9 @@ public class Xop_fxt {
 		byte[] text = Bry_.new_utf8_(text_str);
 		wiki.Db_mgr().Save_mgr().Data_create(ttl, text);
 	}
+	public static void Init_msg(Xow_wiki wiki, String key, String val) {
+		wiki.Lang().Msg_mgr().Itm_by_key_or_new(key, val);
+	}
 	public Xop_fxt	Init_page_update(String ttl, String txt) {return Init_page_update(wiki, ttl, txt);}
 	public Xop_fxt	Init_page_update(Xow_wiki wiki, String ttl, String txt) {
 		Xoa_ttl page_ttl = Xoa_ttl.parse_(wiki, Bry_.new_utf8_(ttl));

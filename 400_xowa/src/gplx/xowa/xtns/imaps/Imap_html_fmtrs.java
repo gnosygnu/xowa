@@ -18,12 +18,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 class Imap_html_fmtrs {
 	public static final Bry_fmtr
-	  Map = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
-	( "<div class=\"noresize\"~{desc_style}>"
-	, "      <map name=\"imageMap_1_~{imap_id}\">~{shapes}"
-	, "      </map>~{img}"
+	  All = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	( "<div id='imap_div_~{imap_id}' class=\"noresize\"~{desc_style}>~{map}~{img}"
 	, "    </div>"
-	), "imap_id", "desc_style", "img", "shapes"
+	), "imap_id", "desc_style", "map", "img"
+	)
+	, Map = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	( ""
+	, "      <map name=\"imageMap_1_~{imap_id}\">~{shapes}"
+	, "      </map>"
+	), "imap_id", "shapes"
 	)
 	, Area = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "\n        <area href=\"~{href}\" shape=\"~{shape}\" coords=\"~{coords}\" alt=\"~{title}\" title=\"~{title}\"/>"

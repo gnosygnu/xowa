@@ -24,12 +24,16 @@ public class Xoa_fsys_mgr implements GfoInvkAble {
 		bin_extensions_dir		= bin_any_dir.GenSubDir_nest("xowa", "xtns");
 		file_dir				= root_dir.GenSubDir("file");
 		wiki_dir				= root_dir.GenSubDir("wiki");
+		cfg_lang_core_dir		= bin_any_dir.GenSubDir_nest("xowa", "cfg", "lang", "core");
+		cfg_wiki_core_dir		= bin_any_dir.GenSubDir_nest("xowa", "cfg", "wiki", "core");
 		temp_dir				= root_dir.GenSubDir("tmp");
 		app_mgr					= new Launcher_app_mgr(app);
 	}
 	public Io_url Root_dir()				{return root_dir;} private Io_url root_dir;
 	public Io_url File_dir()				{return file_dir;} private Io_url file_dir;
 	public Io_url Wiki_dir()				{return wiki_dir;} public Xoa_fsys_mgr Wiki_dir_(Io_url v) {wiki_dir = v; return this;} private Io_url wiki_dir;
+	public Io_url Cfg_lang_core_dir()		{return cfg_lang_core_dir;} private Io_url cfg_lang_core_dir;
+	public Io_url Cfg_wiki_core_dir()		{return cfg_wiki_core_dir;} private Io_url cfg_wiki_core_dir;
 	public Io_url Temp_dir()				{return temp_dir;} public Xoa_fsys_mgr Temp_dir_(Io_url v) {temp_dir = v; return this;} private Io_url temp_dir;	// set to /xowa/user/<name>/temp
 	public Io_url Bin_any_dir()				{return bin_any_dir;} private Io_url bin_any_dir;
 	public Io_url Bin_extensions_dir()		{return bin_extensions_dir;} private Io_url bin_extensions_dir;

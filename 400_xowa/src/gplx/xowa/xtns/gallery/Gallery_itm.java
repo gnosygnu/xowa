@@ -43,16 +43,16 @@ public class Gallery_itm implements Js_img_wkr {
 		this.xnde = xnde; this.xfer_itm = xfer_itm;;
 		this.wiki = wiki; this.ctx = ctx; this.src = src; this.gallery_li_id_bry = gallery_li_id_bry; this.gallery_itm_idx = gallery_itm_idx;
 	}	private Gallery_xnde xnde; private Xof_xfer_itm xfer_itm; private Xow_wiki wiki; private Xop_ctx ctx; private byte[] src; private byte[] gallery_li_id_bry; private int gallery_itm_idx;
-	public void Html_update(Xoa_page page, Xog_html_itm html_itm, int w, int h, String view_src, String orig_src) {			
+	public void Html_update(Xoa_page page, Xog_html_itm html_itm, int html_uid, int html_w, int html_h, String html_src, int orig_w, int orig_h, String orig_src) {			
 		Gallery_mgr_base gallery_mgr = xnde.Gallery_mgr();
 		Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_k004(), tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_k004();
 		try {
-			xfer_itm.Init_xfer_by_gallery_update(w, h, view_src, orig_src);
+			xfer_itm.Init_xfer_by_gallery_update(html_w, html_h, html_src, orig_src);
 			gallery_mgr.Write_html_itm(bfr, tmp_bfr, wiki.App(), wiki, ctx.Cur_page(), ctx, wiki.Html_mgr().Html_wtr(), src, xnde, Bry_.Empty, gallery_itm_idx, xfer_itm);
 			String itm_html = bfr.XtoStrAndClear();
 			html_itm.Html_elem_replace_html(String_.new_utf8_(gallery_li_id_bry), itm_html);
 			if (gallery_itm_idx == xnde.Itms_len() - 1 && Gallery_mgr_base_.Mode_is_packed(xnde.Mode()))
-				page.Html_data().Gallery_packed_exists_y_();	// set flag for packed_gallery; don't fire multiple times; PAGE:en.w:National_Sculpture_Museum_(Valladolid); DATE:2014-07-21
+				page.Html_data().Xtn_gallery_packed_exists_y_();	// set flag for packed_gallery; don't fire multiple times; PAGE:en.html_w:National_Sculpture_Museum_(Valladolid); DATE:2014-07-21
 		}
 		finally {
 			bfr.Mkr_rls(); tmp_bfr.Mkr_rls();

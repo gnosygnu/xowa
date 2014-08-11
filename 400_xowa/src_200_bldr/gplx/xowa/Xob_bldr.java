@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.apps.*; import gplx.xowa.bldrs.xmls.*;
-import gplx.xowa.bldrs.cfgs.*;
+import gplx.xowa.bldrs.cfgs.*; import gplx.xowa.bldrs.langs.*;
 public class Xob_bldr implements GfoInvkAble {
 	private boolean pause_at_end = false;
 	public Xob_bldr(Xoa_app app) {
@@ -33,6 +33,7 @@ public class Xob_bldr implements GfoInvkAble {
 	public int					Make_fil_len() {return make_fil_len;} public Xob_bldr Make_fil_len_(int v) {make_fil_len = v; return this;} private int make_fil_len = 64 * Io_mgr.Len_kb;
 	public Xob_xml_parser		Parser() {if (parser == null) parser = new Xob_xml_parser(); return parser;} private Xob_xml_parser parser;
 	public Xob_wiki_cfg_bldr	Wiki_cfg_bldr() {return wiki_cfg_bldr;} private Xob_wiki_cfg_bldr wiki_cfg_bldr;
+	public Xob_i18n_parser		I18n_parser() {return i18n_parser;} private Xob_i18n_parser	i18n_parser = new Xob_i18n_parser();
 	public void StatusMgr_prog_fmt(long cur, long end, int pct_idx, String fmt, Object... ary) {
 		long now = Env_.TickCount(); if (now - StatusMgr_prog_prv < 100) return;
 		StatusMgr_prog_prv = now;

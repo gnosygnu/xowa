@@ -62,7 +62,7 @@ public class Xow_popup_parser {
 	private void Init_ctxs(byte[] tmpl_src, Xoa_ttl ttl) {
 		tmpl_ctx.Clear(); 
 		tmpl_ctx.Cur_page().Ttl_(ttl);	// NOTE: must set cur_page, else page-dependent templates won't work; EX: {{FULLPAGENAME}}; PAGE:en.w:June_20; DATE:2014-06-20
-		tmpl_ctx.Cur_page().Html_data().Restricted_(data.Html_restricted());	// NOTE: must set data.Html_restricted() if Special:XowaPopupHistory
+		tmpl_ctx.Cur_page().Html_data().Html_restricted_(data.Html_restricted());	// NOTE: must set data.Html_restricted() if Special:XowaPopupHistory
 		tmpl_ctx.Page_bgn(tmpl_root, tmpl_src);	
 		Wtxt_ctx_init(true, tmpl_src);
 		wtxt_ctx.Cur_page().Ttl_(ttl);	// NOTE: must set cur_page, or rel lnkis won't work; EX: [[../A]]
@@ -188,7 +188,7 @@ public class Xow_popup_parser {
 	}
 	private void Wtxt_ctx_init(boolean incremental, byte[] bry) {
 		wtxt_ctx.Clear();
-		wtxt_ctx.Cur_page().Html_data().Restricted_(data.Html_restricted());
+		wtxt_ctx.Cur_page().Html_data().Html_restricted_(data.Html_restricted());
 		wtxt_ctx.Para().Enabled_(!incremental);		// NOTE: if incremental, disable para; easier to work with \n rather than <p>; also, must be enabled before Page_bgn; DATE:2014-06-18DATE:2014-06-18
 		wtxt_ctx.Lnke().Dangling_goes_on_stack_(incremental);
 		wtxt_ctx.Page_bgn(wtxt_root, bry);

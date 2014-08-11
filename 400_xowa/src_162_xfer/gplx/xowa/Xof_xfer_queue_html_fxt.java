@@ -31,6 +31,7 @@ public class Xof_xfer_queue_html_fxt extends Xof_xfer_queue_base_fxt {
 		return this;
 	}	private Xof_xfer_itm xfer_itm = new Xof_xfer_itm(); Bool_obj_ref queue_add_ref = Bool_obj_ref.n_();
 	Xof_xfer_queue queue = new Xof_xfer_queue();
+	public Xof_xfer_itm Xfer_itm() {return xfer_itm;}
 	public Xof_xfer_queue_html_fxt Src(Io_fil... v) {return (Xof_xfer_queue_html_fxt)Src_base(v);}
 	public Xof_xfer_queue_html_fxt Trg(Io_fil... v) {return (Xof_xfer_queue_html_fxt)Trg_base(v);}
 	public Xof_xfer_queue_html_fxt Html_src_(String v) {return (Xof_xfer_queue_html_fxt)Html_src_base_(v);}
