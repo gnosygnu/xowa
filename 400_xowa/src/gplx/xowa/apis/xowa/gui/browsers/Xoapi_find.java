@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apis.xowa.gui.browsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.apis.*; import gplx.xowa.apis.xowa.*; import gplx.xowa.apis.xowa.gui.*;
-import gplx.gfui.*; import gplx.xowa.gui.*; import gplx.xowa.gui.views.*;
+import gplx.gfui.*; import gplx.xowa.pages.*; import gplx.xowa.gui.*; import gplx.xowa.gui.views.*;
 public class Xoapi_find implements GfoInvkAble {
 	private Xog_find_box find_box;
 	public void Init_by_kit(Xoa_app app) {
@@ -62,7 +62,7 @@ class Xog_find_box {
 	}
 	public void Exec() {
 		Xog_tab_itm tab = win.Tab_mgr().Active_tab(); if (tab == Xog_tab_itm_.Null) return;
-		String elem_id = tab.View_mode() == Xog_page_mode.Tid_read 
+		String elem_id = tab.View_mode() == Xopg_view_mode.Tid_read 
 			? Gfui_html.Elem_id_body
 			: Xog_html_itm.Elem_id__xowa_edit_data_box
 			;

@@ -24,5 +24,6 @@ public class Html_atr_ {
 	  Id_bry		= Bry_.new_ascii_("id")
 	, Cls_bry		= Bry_.new_ascii_("class")
 	, Style_bry		= Bry_.new_ascii_("style")
+	, Href_bry		= Bry_.new_ascii_("href")
 	;
 }

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.xowa.gui.*; import gplx.xowa.gui.views.*; import gplx.xowa.html.*; import gplx.xowa.pages.*;
 import gplx.xowa.files.*; import gplx.xowa.xtns.cite.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.html.tocs.*;
-import gplx.xowa.html.modules.popups.*;
+import gplx.xowa.html.modules.popups.*; import gplx.xowa.dbs.hdumps.*;
 public class Xoa_page {
 	Xoa_page(Xow_wiki wiki, Xoa_ttl ttl) {
 		this.wiki = wiki; this.ttl = ttl;
@@ -35,7 +35,7 @@ public class Xoa_page {
 	public Xoa_ttl				Ttl() {return ttl;} public Xoa_page Ttl_(Xoa_ttl v) {ttl = v; url.Wiki_bry_(wiki.Domain_bry()).Page_bry_(v.Full_url()); return this;} private Xoa_ttl ttl;
 	public Xoa_url				Url() {return url;} public Xoa_page Url_(Xoa_url v) {url = v; return this;} private Xoa_url url = Xoa_url.blank_();
 	public Xog_tab_itm			Tab() {return tab;} public void Tab_(Xog_tab_itm v) {tab = v;} private Xog_tab_itm tab;
-
+	public Xopg_hdump_data		Hdump_data() {return hdump_data;} private Xopg_hdump_data hdump_data = new Xopg_hdump_data();
 	public boolean					Missing() {return missing;} public Xoa_page Missing_() {return Missing_(true);} public Xoa_page Missing_(boolean v) {missing = v; return this;}  private boolean missing;
 	public boolean					Redirected() {return redirected;} public Xoa_page Redirected_(boolean v) {redirected = v; return this;} private boolean redirected;
 	public ListAdp				Redirected_ttls() {return redirected_ttls;} private ListAdp redirected_ttls = ListAdp_.new_();
@@ -79,6 +79,7 @@ public class Xoa_page {
 		file_queue.Clear();
 		ref_mgr.Grps_clear();
 		html_cmd_mgr.Clear();
+		hdump_data.Clear();
 		wdata_external_lang_links.Reset();
 		gplx.xowa.xtns.scribunto.Scrib_core.Core_page_changed(this);
 		lang_convert_content = lang_convert_title = true;

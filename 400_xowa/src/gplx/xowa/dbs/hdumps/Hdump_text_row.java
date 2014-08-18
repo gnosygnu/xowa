@@ -16,19 +16,22 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs.hdumps; import gplx.*; import gplx.xowa.*; import gplx.xowa.dbs.*;
-class Hdump_text_row {
-	public int Id() {return id;} private int id;
+public class Hdump_text_row {
+	public Hdump_text_row(int page_id, int tid, int idx, int version_id, byte[] data) {
+		this.page_id = page_id; this.tid = tid; this.idx = idx; this.version_id = version_id; this.data = data;
+	}
 	public int Page_id() {return page_id;} private int page_id;
 	public int Tid() {return tid;} private int tid;
-	public int Version() {return version;} private int version;
-	public byte[] Meta() {return meta;} private byte[] meta;
+	public int Idx() {return idx;} private int idx;
+	public int Version_id() {return version_id;} private int version_id;
 	public byte[] Data() {return data;} private byte[] data;
-	public int Sub_id() {return sub_id;} public void Sub_id_(int v) {sub_id = v;} private int sub_id;
-	public Hdump_text_row Init(int id, int page_id, int tid, int version, byte[] meta, byte[] data) {
-		this.id = id; this.page_id = page_id; this.tid = tid; this.version = version; this.meta = meta; this.data = data;
-		return this;
+	public static byte[] data_img_(Bry_bfr bfr, int uid, int img_w, int img_h, byte[] lnki_ttl, byte[] img_src_rel) {
+		bfr					.Add_int_variable(uid)
+			.Add_byte_pipe().Add_int_variable(img_w)
+			.Add_byte_pipe().Add_int_variable(img_h)
+			.Add_byte_pipe().Add(lnki_ttl)
+			.Add_byte_pipe().Add(img_src_rel)
+			;
+		return bfr.XtoAryAndClear();
 	}
-}
-class Hdump_text_row_tid {
-	public static final int Tid_body = 0, Tid_img = 1, Tid_display_ttl = 2, Tid_content_sub = 3, Tid_sidebar_div = 4;
 }

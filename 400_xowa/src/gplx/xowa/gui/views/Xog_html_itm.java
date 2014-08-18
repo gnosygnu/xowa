@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
-import gplx.core.btries.*; import gplx.gfui.*; import gplx.html.*; import gplx.xowa.gui.menus.*; import gplx.xowa.gui.menus.dom.*; import gplx.xowa.html.modules.*;
+import gplx.core.btries.*; import gplx.gfui.*; import gplx.html.*; import gplx.xowa.gui.menus.*; import gplx.xowa.gui.menus.dom.*; import gplx.xowa.html.modules.*; import gplx.xowa.pages.*;
 public class Xog_html_itm implements GfoInvkAble, GfoEvObj {
 	private Xoa_app app;
 	public Xog_html_itm(Xog_tab_itm owner_tab) {
@@ -56,7 +56,7 @@ public class Xog_html_itm implements GfoInvkAble, GfoEvObj {
 		byte view_mode = owner_tab.View_mode();
 		byte[] html_src = page.Wiki().Html_mgr().Page_wtr_mgr().Gen(page, view_mode);
 		Html_src_(page, html_src);
-		if (view_mode == Xog_page_mode.Tid_read){			// used only for Xosrh test; DATE:2014-01-29
+		if (view_mode == Xopg_view_mode.Tid_read){			// used only for Xosrh test; DATE:2014-01-29
 			html_box.Html_doc_body_focus();					// NOTE: only focus if read so up / down will scroll box; edit / html should focus edit-box; DATE:2014-06-05
 			page.Root().Data_htm_(html_src);
 		}

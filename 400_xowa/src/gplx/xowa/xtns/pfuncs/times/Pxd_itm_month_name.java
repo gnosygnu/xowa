@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 class Pxd_itm_month_name extends Pxd_itm_base implements Pxd_itm_prototype {
 	public Pxd_itm_month_name(int ary_idx, byte[] name, int seg_idx, int seg_val) {Ctor(ary_idx); this.name = name; Seg_idx_(seg_idx); this.seg_val = seg_val;} private byte[] name;
-	@Override public byte Tkn_tid() {return Pxd_itm_.TypeId_month_name;}
+	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_month_name;}
 	@Override public int Eval_idx() {return 20;}
 	int seg_val;
 	public Pxd_itm MakeNew(int ary_idx) {
@@ -88,8 +88,6 @@ class Pxd_itm_month_name extends Pxd_itm_base implements Pxd_itm_prototype {
 			}
 			default:
 			case 3: {
-//					Pxd_itm_int itm_0 = Pxd_itm_int_.CastOrNull(data_ary[0]);
-//					Pxd_itm_int itm_2 = Pxd_itm_int_.CastOrNull(data_ary[2]);
 				Pxd_itm_int itm_0 = Pxd_itm_int_.GetNearest(data_ary, this.Data_idx(), false);
 				Pxd_itm_int itm_2 = Pxd_itm_int_.GetNearest(data_ary, this.Data_idx(), true);
 				if (itm_0 == null || itm_2 == null) {return;} // trie: fail
@@ -148,7 +146,7 @@ class Pxd_itm_month_name extends Pxd_itm_base implements Pxd_itm_prototype {
 class Pxd_itm_unit extends Pxd_itm_base implements Pxd_itm_prototype {
 	public Pxd_itm_unit(int ary_idx, byte[] name, int seg_idx, int seg_multiple) {Ctor(ary_idx); this.name = name; Seg_idx_(seg_idx); this.seg_multiple = seg_multiple;} 
 	public byte[] Name() {return name;} private byte[] name;
-	@Override public byte Tkn_tid() {return Pxd_itm_.TypeId_unit;}
+	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_unit;}
 	@Override public int Eval_idx() {return 10;}
 	int seg_val = 1; int seg_multiple;
 	public Pxd_itm MakeNew(int ary_idx) {
@@ -168,11 +166,11 @@ class Pxd_itm_unit extends Pxd_itm_base implements Pxd_itm_prototype {
 		for (int i = itm_int.Ary_idx(); i > -1; i--) {
 			Pxd_itm itm = tkns[i];
 			switch (itm.Tkn_tid()) {
-				case Pxd_itm_.TypeId_dash:														// negative sign; stop;
+				case Pxd_itm_.Tid_dash:														// negative sign; stop;
 					seg_val *= -1;
 					i = -1;
 					break;
-				case Pxd_itm_.TypeId_dot: case Pxd_itm_.TypeId_int: case Pxd_itm_.TypeId_ws:	// ignore
+				case Pxd_itm_.Tid_dot: case Pxd_itm_.Tid_int: case Pxd_itm_.Tid_ws:	// ignore
 					break;
 				default:																		// word; stop;
 					i = -1;
@@ -199,7 +197,7 @@ class Pxd_itm_unit extends Pxd_itm_base implements Pxd_itm_prototype {
 class Pxd_itm_ago extends Pxd_itm_base implements Pxd_itm_prototype {
 	public Pxd_itm_ago(int ary_idx, int seg_idx) {Ctor(ary_idx); Seg_idx_(seg_idx);} 
 	public byte[] Name() {return Name_ago;} public static final byte[] Name_ago = Bry_.new_ascii_("ago");
-	@Override public byte Tkn_tid() {return Pxd_itm_.TypeId_ago;}
+	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_ago;}
 	@Override public int Eval_idx() {return 5;}	// set to high priority so it can evaluate before unit_name
 	public Pxd_itm MakeNew(int ary_idx) {return new Pxd_itm_ago(ary_idx, this.Seg_idx());}
 	@Override public void Eval(Pxd_parser state) {
@@ -209,9 +207,9 @@ class Pxd_itm_ago extends Pxd_itm_base implements Pxd_itm_prototype {
 		for (int i = end - 1; i > -1; i--) {	// loop over tokens, moving backward
 			Pxd_itm itm = tkns[i];
 			switch (itm.Tkn_tid()) {
-				case Pxd_itm_.TypeId_ws: break;	// ignore ws
-				case Pxd_itm_.TypeId_unit: unit_seen = true; break;	// unit seen; flag
-				case Pxd_itm_.TypeId_int:
+				case Pxd_itm_.Tid_ws: break;	// ignore ws
+				case Pxd_itm_.Tid_unit: unit_seen = true; break;	// unit seen; flag
+				case Pxd_itm_.Tid_int:
 					if (unit_seen) {	// only if unit seen, reverse int; EX: "1 month ago" effectively becomes "-1 month"
 						Pxd_itm_int itm_int = (Pxd_itm_int)itm;
 						itm_int.Val_(-itm_int.Val());
@@ -227,7 +225,7 @@ class Pxd_itm_ago extends Pxd_itm_base implements Pxd_itm_prototype {
 }
 class Pxd_itm_day_suffix extends Pxd_itm_base implements Pxd_itm_prototype {
 	public Pxd_itm_day_suffix(int ary_idx) {Ctor(ary_idx);}
-	@Override public byte Tkn_tid() {return Pxd_itm_.TypeId_day_suffix;}
+	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_day_suffix;}
 	@Override public int Eval_idx() {return 99;}	// set to low priority  so it can evaluate after day
 	public Pxd_itm MakeNew(int ary_idx) {return new Pxd_itm_day_suffix(ary_idx);}
 	@Override public void Eval(Pxd_parser state) {
@@ -243,7 +241,7 @@ class Pxd_itm_day_suffix extends Pxd_itm_base implements Pxd_itm_prototype {
 }
 class Pxd_itm_day_relative extends Pxd_itm_base implements Pxd_itm_prototype {
 	public Pxd_itm_day_relative(int adj, int ary_idx) {Ctor(ary_idx); this.adj = adj;}
-	@Override public byte Tkn_tid() {return Pxd_itm_.TypeId_day_relative;}
+	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_day_relative;}
 	@Override public int Eval_idx() {return 5;}	
 	public Pxd_itm MakeNew(int ary_idx) {return new Pxd_itm_day_relative(adj, ary_idx);}
 	@Override public void Eval(Pxd_parser state) {
@@ -265,7 +263,7 @@ class Pxd_itm_day_relative extends Pxd_itm_base implements Pxd_itm_prototype {
 }
 class Pxd_itm_time_relative extends Pxd_itm_base implements Pxd_itm_prototype {
 	public Pxd_itm_time_relative(int ary_idx) {Ctor(ary_idx);}
-	@Override public byte Tkn_tid() {return Pxd_itm_.TypeId_time_relative;}
+	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_time_relative;}
 	@Override public int Eval_idx() {return 5;}	
 	public Pxd_itm MakeNew(int ary_idx) {return new Pxd_itm_time_relative(ary_idx);}
 	@Override public void Eval(Pxd_parser state) {
@@ -287,11 +285,11 @@ class Pxd_itm_time_relative extends Pxd_itm_base implements Pxd_itm_prototype {
 }
 class Pxd_itm_unit_relative extends Pxd_itm_base implements Pxd_itm_prototype {
 	public Pxd_itm_unit_relative(int adj, int ary_idx) {Ctor(ary_idx); this.adj = adj;}
-	@Override public byte Tkn_tid() {return Pxd_itm_.TypeId_unit_relative;}
+	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_unit_relative;}
 	@Override public int Eval_idx() {return 5;}
 	public Pxd_itm MakeNew(int ary_idx) {return new Pxd_itm_unit_relative(adj, ary_idx);}
 	@Override public void Eval(Pxd_parser state) {
-		Pxd_itm itm = Pxd_itm_.Find_fwd_or_null(state.Tkns(), Pxd_itm_.TypeId_unit, this.Ary_idx() + 1);
+		Pxd_itm itm = Pxd_itm_.Find_fwd_by_tid(state.Tkns(), this.Ary_idx() + 1, Pxd_itm_.Tid_unit);
 		if (itm == null) state.Err_set(Pft_func_time_log.Invalid_date, Bry_fmtr_arg_.int_(adj));
 		Pxd_itm_unit unit_tkn = (Pxd_itm_unit)itm;
 		unit_tkn.Unit_seg_val_(adj);
@@ -308,8 +306,8 @@ class Pxd_itm_unit_relative extends Pxd_itm_base implements Pxd_itm_prototype {
 class Pxd_itm_unixtime extends Pxd_itm_base implements Pxd_itm_prototype {
 	private long unixtime;
 	public Pxd_itm_unixtime(int ary_idx, int seg_idx) {Ctor(ary_idx); Seg_idx_(seg_idx);} 
-	public byte[] Name() {return Name_unixtime;} public static final byte[] Name_unixtime = Bry_.new_ascii_("@");
-	@Override public byte Tkn_tid() {return Pxd_itm_.TypeId_unixtime;}
+	public byte[] Name() {return Name_const;} public static final byte[] Name_const = Bry_.new_ascii_("@");
+	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_unixtime;}
 	@Override public int Eval_idx() {return 5;}	// set to high priority so it can evaluate number early
 	public Pxd_itm MakeNew(int ary_idx) {return new Pxd_itm_unixtime(ary_idx, this.Seg_idx());}
 	@Override public void Eval(Pxd_parser state) {
@@ -331,7 +329,7 @@ class Pxd_itm_dow_name extends Pxd_itm_base implements Pxd_itm_prototype {
 	private int dow_idx;
 	private byte[] dow_name;
 	public Pxd_itm_dow_name(int ary_idx, byte[] dow_name, int dow_idx) {Ctor(ary_idx); this.dow_name = dow_name; this.Seg_idx_(DateAdp_.SegIdx_dayOfWeek); this.dow_idx = dow_idx;}
-	@Override public byte Tkn_tid() {return Pxd_itm_.TypeId_dow_name;}
+	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_dow_name;}
 	@Override public int Eval_idx() {return 20;}
 	public Pxd_itm MakeNew(int ary_idx) {return new Pxd_itm_dow_name(ary_idx, dow_name, dow_idx);}
 	@Override public void Eval(Pxd_parser state) {
@@ -341,5 +339,27 @@ class Pxd_itm_dow_name extends Pxd_itm_base implements Pxd_itm_prototype {
 		int adj = dow_idx - now.DayOfWeek();	// adj = requested_dow - current_dow; EX: requesting Friday, and today is Wednesday; adj = 2 (4 - 2); DATE:2014-05-02
 		if (adj < 0) adj += 7;					// requested_down is before current_dow; add 7 to get the next day
 		bldr.Date_(bldr.Date().Add_day(adj));
+	}
+}
+class Pxd_itm_iso8601_t extends Pxd_itm_base implements Pxd_itm_prototype {
+	public Pxd_itm_iso8601_t(int ary_idx, int seg_idx) {Ctor(ary_idx); Seg_idx_(seg_idx);} 
+	public byte[] Name() {return Name_const;} public static final byte[] Name_const = Bry_.new_ascii_("T");
+	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_iso8601_t;}
+	@Override public int Eval_idx() {return 99;}	// evaluate last
+	public Pxd_itm MakeNew(int ary_idx) {return new Pxd_itm_iso8601_t(ary_idx, this.Seg_idx());}
+	@Override public void Eval(Pxd_parser state) {			
+		Pxd_itm hour = Next_non_ws_tkn(state.Tkns(), this.Ary_idx() + 1);
+		if (hour != null && hour.Seg_idx() == DateAdp_.SegIdx_hour) return;	// next item is hour
+		state.Err_set(Pft_func_time_log.Invalid_hour, Bry_fmtr_arg_.bry_("T"));
+	}
+	@Override public void Time_ini(DateAdpBldr bldr) {
+	}
+	private static Pxd_itm Next_non_ws_tkn(Pxd_itm[] tkns, int bgn) {
+		int len = tkns.length;
+		for (int i = bgn; i < len; i++) {
+			Pxd_itm itm = tkns[i];
+			if (itm.Tkn_tid() != Pxd_itm_.Tid_ws) return itm;
+		}
+		return null;
 	}
 }

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs; import gplx.*; import gplx.xowa.*;
-import gplx.dbs.*; import gplx.xowa.ctgs.*;
+import gplx.dbs.*; import gplx.xowa.ctgs.*; import gplx.xowa.dbs.hdumps.*;
 public class Xodb_mgr_txt implements Xodb_mgr {
 	public Xodb_mgr_txt(Xow_wiki wiki, Xow_data_mgr data_mgr) {
 		this.wiki = wiki;
@@ -28,6 +28,7 @@ public class Xodb_mgr_txt implements Xodb_mgr {
 	public byte Data_storage_format() {return data_storage_format;} public void Data_storage_format_(byte v) {data_storage_format = v;} private byte data_storage_format = gplx.ios.Io_stream_.Tid_file;
 	public Xodb_load_mgr Load_mgr() {return load_mgr;} private Xodb_load_mgr_txt load_mgr;
 	public Xodb_save_mgr Save_mgr() {return save_mgr;} private Xodb_save_mgr_txt save_mgr;
+	public Xodb_html_mgr Html_mgr() {return html_mgr;} private Xodb_html_mgr html_mgr = new Xodb_html_mgr();
 	public DateAdp Dump_date_query() {
 		Io_url url = wiki.Fsys_mgr().Url_ns_fil(Xow_dir_info_.Tid_page, Xow_ns_.Id_main, 0);
 		return Io_mgr._.QueryFil(url).ModifiedTime();

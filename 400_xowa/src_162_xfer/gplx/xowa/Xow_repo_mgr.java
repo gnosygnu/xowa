@@ -65,7 +65,7 @@ public class Xow_repo_mgr implements GfoInvkAble {
 			xfer_itm.Trg_repo_idx_(meta_itm.Vrtl_repo());	// NOTE: set trg_repo_idx b/c xfer_mgr will always set meta_itm.Vrtl_repo() with trg_repo_idx
 		}
 		if (meta_itm.Ptr_ttl_exists())
-			xfer_itm.Atrs_by_ttl(meta_itm.Ttl(), meta_itm.Ptr_ttl());
+			xfer_itm.Set__ttl(meta_itm.Ttl(), meta_itm.Ptr_ttl());
 		boolean main_exists_unknown = src_wiki_key == null;		// WORKAROUND/HACK: SEE:NOTE_1:reset_main_exists
 		boolean rv = Xfer_by_meta__exec(chk_all, xfer_itm, meta_itm, src_wiki_key, queue, false);
 		if (!rv && (!chk_all && !main_exists_unknown)) {	// xfer failed even with page found in wiki; try again, but chk all

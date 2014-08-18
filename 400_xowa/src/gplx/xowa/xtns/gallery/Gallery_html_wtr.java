@@ -28,7 +28,7 @@ public class Gallery_html_wtr {
 	public byte[] Mgr_box_cls() {return mgr_box_cls;} private byte[] mgr_box_cls;
 	public Bry_fmtr Mgr_box_style() {return mgr_box_style;} private Bry_fmtr mgr_box_style;
 	public int Gallery_multiplier() {return gallery_multiplier;} private int gallery_multiplier;
-	public void Write_html(Xoa_app app, Xow_wiki wiki, Xop_ctx ctx, Xoa_page page, Xoh_html_wtr wtr, Xoh_html_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Gallery_xnde mgr) {
+	public void Write_html(Xoa_app app, Xow_wiki wiki, Xop_ctx ctx, Xoa_page page, Xoh_html_wtr wtr, Xoh_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Gallery_xnde mgr) {
 		itms_per_row = mgr.Itms_per_row();
 		if (itms_per_row == Gallery_xnde.Null) itms_per_row = wiki.Cfg_gallery().Imgs_per_row();
 		itms_len = mgr.Itms_len();
@@ -126,7 +126,7 @@ public class Gallery_html_wtr {
 		int mgr_box_width_max = mgr_box_width_all < mgr_box_width_row ? mgr_box_width_row : mgr_box_width_all;
 		fmtr_mgr_box.Bld_bfr_many(bfr, mgr_elem_id, mgr_box_cls, Bry_fmtr_arg_.fmtr_(mgr_box_style, Bry_fmtr_arg_.int_(mgr_box_width_max)), itm_bfr);
 	}
-	private static byte[] Bld_caption(Xow_wiki wiki, Xoh_html_wtr wtr, Xop_ctx ctx, Xoh_html_wtr_ctx hctx, Gallery_itm itm) {
+	private static byte[] Bld_caption(Xow_wiki wiki, Xoh_html_wtr wtr, Xop_ctx ctx, Xoh_wtr_ctx hctx, Gallery_itm itm) {
 		byte[] rv = itm.Caption_bry();
 		if (Bry_.Len_gt_0(rv)) {
 			Bry_bfr caption_bfr = wiki.Utl_bry_bfr_mkr().Get_k004();

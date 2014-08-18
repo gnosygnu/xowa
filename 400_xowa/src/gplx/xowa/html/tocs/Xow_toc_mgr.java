@@ -102,9 +102,9 @@ public class Xow_toc_mgr implements Bry_fmtr_arg {
 		try {
 			Xow_wiki wiki = page.Wiki();
 			Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_b128();
-			Xoh_html_wtr html_wtr = wiki.Html_mgr().Html_wtr(); html_wtr.Init_by_page(ctx, page);
-			Xoh_html_wtr_ctx html_wtr_opts = Xoh_html_wtr_ctx.Basic;
-			Toc_text_recurse(ctx, page, bfr, src, html_wtr, html_wtr_opts, hdr, 0);
+			Xoh_wtr_ctx hctx = Xoh_wtr_ctx.Basic;
+			Xoh_html_wtr html_wtr = wiki.Html_mgr().Html_wtr(); html_wtr.Init_by_page(ctx, hctx, src, page);
+			Toc_text_recurse(ctx, page, bfr, src, html_wtr, hctx, hdr, 0);
 			bfr.Mkr_rls();
 			return bfr.XtoAryAndClear();
 		} catch (Exception e) {
@@ -112,7 +112,7 @@ public class Xow_toc_mgr implements Bry_fmtr_arg {
 			return Bry_.Empty;
 		}
 	}
-	private static void Toc_text_recurse(Xop_ctx ctx, Xoa_page page, Bry_bfr bfr, byte[] src, Xoh_html_wtr html_wtr, Xoh_html_wtr_ctx html_wtr_opts, Xop_tkn_itm tkn, int depth) {
+	private static void Toc_text_recurse(Xop_ctx ctx, Xoa_page page, Bry_bfr bfr, byte[] src, Xoh_html_wtr html_wtr, Xoh_wtr_ctx html_wtr_opts, Xop_tkn_itm tkn, int depth) {
 		int subs_len = tkn.Subs_len();
 		boolean txt_seen = false; int ws_pending = 0;
 		for (int i = 0; i < subs_len; i++) {

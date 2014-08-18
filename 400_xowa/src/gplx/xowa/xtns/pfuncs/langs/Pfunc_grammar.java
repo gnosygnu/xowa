@@ -18,7 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.pfuncs.langs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 public class Pfunc_grammar extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_i18n_grammar;}
-	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_grammar().Name_(name);}
+	@Override public boolean Func_require_colon_arg() {return true;}
+	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_grammar().Name_(name);}	// NOTE: odmiana used as magic-word / template in pl.d; EX:pl.d:hund; DATE:2014-08-14
 	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {
 		byte[] argx = Eval_argx(ctx, src, caller, self);
 		byte[] word = Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, self.Args_len(), 0);

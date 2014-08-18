@@ -27,7 +27,7 @@ public class Xodb_text_tbl {
 	public void Update(int file_id, int page_id, byte[] text) {
 		Db_stmt stmt = Db_stmt_.Null;
 		try {
-			Db_provider provider = db_mgr.Fsys_mgr().Get_by_db_idx(file_id).Provider();
+			Db_provider provider = db_mgr.Fsys_mgr().Get_by_idx(file_id).Provider();
 			stmt = Db_stmt_.new_update_(provider, Tbl_name, String_.Ary(Fld_page_id), Fld_old_text);
 			stmt.Val_bry_(text).Val_int_(page_id).Exec_update();
 		}	finally {stmt.Rls();}		
@@ -35,7 +35,7 @@ public class Xodb_text_tbl {
 	public byte[] Select(int file_id, int page_id) {
 		Db_stmt stmt = Db_stmt_.Null;
 		try {
-			Db_provider provider = db_mgr.Fsys_mgr().Get_by_db_idx(file_id).Provider();
+			Db_provider provider = db_mgr.Fsys_mgr().Get_by_idx(file_id).Provider();
 			stmt = Db_stmt_.new_select_(provider, Tbl_name, String_.Ary(Fld_page_id), Fld_old_text);
 			byte[] rv = (byte[])stmt.Val_int_(page_id).Exec_select_val();
 			rv = zip_mgr.Unzip(db_mgr.Data_storage_format(), rv);

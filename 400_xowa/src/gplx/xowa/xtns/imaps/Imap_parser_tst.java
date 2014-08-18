@@ -23,8 +23,10 @@ public class Imap_parser_tst {
 	@Test  public void Rect_pass_many()			{fxt.Test_shape("rect 1 2 3 4 5 6[[A]]"								, fxt.itm_rect_("[[A]]", 1, 2, 3, 4));} // PURPOSE: MW allows extra points to be passed; PAGE:en.w:Kilauea DATE:2014-07-28
 	@Test  public void Circle_pass()			{fxt.Test_shape("circle 1 2 3 [[A]]"								, fxt.itm_circle_("[[A]]", 1, 2, 3));}
 	@Test  public void Poly_pass()				{fxt.Test_shape("poly 1 2 3 4 5 6 [[A]]"							, fxt.itm_poly_("[[A]]", 1, 2, 3, 4, 5, 6));}
-	@Test  public void Poly_pass_chars()		{fxt.Test_shape("poly a b [[A]]"									, fxt.itm_poly_("[[A]]", 0, 0));}	// PURPOSE: non-numeric should be converted to 0; PAGE:uk.w:Стратосфера; DATE:2014-07-26
-	@Test  public void Poly_pass_commas()		{fxt.Test_shape("poly 1,2,3,4 [[A]]"								, fxt.itm_poly_("[[A]]", 1, 2, 3, 4));}	// PURPOSE: commas should be ignored; PAGE:de.w:Kaimnitz; DATE:2014-08-05
+	@Test  public void Poly_pass_chars()		{fxt.Test_shape("poly a b [[A]]"									, fxt.itm_poly_("[[A]]", 0, 0));}		// PURPOSE: non-numeric should be converted to 0; PAGE:uk.w:Стратосфера; DATE:2014-07-26
+	@Test  public void Poly_pass_dots()			{fxt.Test_shape("poly 1.2 3.4 [[A]]"								, fxt.itm_poly_("[[A]]", 1.2d, 3.4d));}	// PURPOSE: make sure decimals are handled correctly
+	@Test  public void Poly_pass_commas()		{fxt.Test_shape("poly 1, 2, 3, 4 [[A]]"								, fxt.itm_poly_("[[A]]", 1, 2, 3, 4));}	// PURPOSE: commas should be ignored; PAGE:de.w:Kaimnitz; DATE:2014-08-05
+	@Test  public void Poly_pass_commas_2()		{fxt.Test_shape("poly 1,2 3,4 [[A]]"								, fxt.itm_poly_("[[A]]", 1, 3));}		// PURPOSE: commas should be ignored for purpose of parse; PAGE:fr.w:Gouesnou; DATE:2014-08-12
 	@Test  public void Rect_fail()				{fxt.Test_shape_err("rect 1 2 3 [[A]]"								, "imagemap_missing_coord");}
 	@Test  public void Circle_fail()			{fxt.Test_shape_err("circle 1 2 [[A]]"								, "imagemap_missing_coord");}
 	@Test  public void Poly_fail_odd()			{fxt.Test_shape_err("poly 1 2 3 [[A]]"								, "imagemap_poly_odd");}
@@ -38,10 +40,10 @@ class Imap_fxt_base {
 		wiki = Xoa_app_fxt.wiki_tst_(app);
 		wiki.Ctx().Para().Enabled_n_();
 	}
-	public Imap_itm_shape itm_rect_(String link, int... pts_ary) {return itm_shape_(Imap_itm_.Tid_shape_rect, link, pts_ary);}
-	public Imap_itm_shape itm_circle_(String link, int... pts_ary) {return itm_shape_(Imap_itm_.Tid_shape_circle, link, pts_ary);}
-	public Imap_itm_shape itm_poly_(String link, int... pts_ary) {return itm_shape_(Imap_itm_.Tid_shape_poly, link, pts_ary);}
-	private Imap_itm_shape itm_shape_(byte tid, String link, int... pts_ary) {
+	public Imap_itm_shape itm_rect_(String link, double... pts_ary) {return itm_shape_(Imap_itm_.Tid_shape_rect, link, pts_ary);}
+	public Imap_itm_shape itm_circle_(String link, double... pts_ary) {return itm_shape_(Imap_itm_.Tid_shape_circle, link, pts_ary);}
+	public Imap_itm_shape itm_poly_(String link, double... pts_ary) {return itm_shape_(Imap_itm_.Tid_shape_poly, link, pts_ary);}
+	private Imap_itm_shape itm_shape_(byte tid, String link, double... pts_ary) {
 		int pts_len = pts_ary.length;
 		Double_obj_val[] pts_doubles = new Double_obj_val[pts_len];
 		for (int i = 0; i < pts_len; ++i)

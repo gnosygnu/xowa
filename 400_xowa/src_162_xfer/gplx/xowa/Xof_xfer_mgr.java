@@ -24,20 +24,20 @@ public class Xof_xfer_mgr {
 	public Xof_xfer_mgr Force_orig_y_() {return Force_orig_(Bool_.Y);} public Xof_xfer_mgr Force_orig_n_() {return Force_orig_(Bool_.N);}
 	public void Atrs_by_itm(Xof_xfer_itm xfer_itm, Xof_repo_itm src_repo, Xof_repo_itm trg_repo) {
 		this.xfer_itm = xfer_itm;
-		this.lnki_w = xfer_itm.Lnki_w(); this.lnki_h = xfer_itm.Lnki_h(); this.lnki_thumbable = xfer_itm.Lnki_thumbable(); this.lnki_thumbtime = xfer_itm.Lnki_thumbtime(); this.lnki_page = xfer_itm.Lnki_page();
+		this.lnki_w = xfer_itm.Lnki_w(); this.lnki_h = xfer_itm.Lnki_h(); this.lnki_thumbable = xfer_itm.Img_is_thumbable(); this.lnki_thumbtime = xfer_itm.Lnki_thumbtime(); this.lnki_page = xfer_itm.Lnki_page();
 		this.lnki_type = xfer_itm.Lnki_type();
 		lnki_upright = xfer_itm.Lnki_upright();
 		this.ttl = xfer_itm.Lnki_ttl(); this.md5 = xfer_itm.Lnki_md5(); this.ext = xfer_itm.Lnki_ext();
-		orig_file_len = xfer_itm.Orig_file_len();
+		this.orig_file_len = xfer_itm.Orig_file_len();
 		this.src_repo = src_repo; src_repo_is_wmf = src_repo.Wmf_fsys();
 		this.trg_repo = trg_repo;
 		this.meta_itm = xfer_itm.Meta_itm();
 		ext_rule = src_repo.Ext_rules().Get_or_null(ext.Ext());
 		orig_w = 0; orig_h = 0; file_w = 0; file_h = 0;
 	}	private byte lnki_type;
-	Xof_xfer_itm xfer_itm; double lnki_thumbtime = Xof_doc_thumb.Null; boolean lnki_thumbable; int lnki_w, lnki_h, file_w, file_h; double lnki_upright;
-	Xof_ext ext; Xoft_rule_itm ext_rule; Xof_repo_itm src_repo, trg_repo; boolean src_repo_is_wmf; byte[] ttl, md5; int orig_w, orig_h, orig_file_len; 
-	int lnki_page = Xof_doc_page.Null;
+	private Xof_xfer_itm xfer_itm; private double lnki_thumbtime = Xof_doc_thumb.Null; private boolean lnki_thumbable; private int lnki_w, lnki_h, file_w, file_h; private double lnki_upright;
+	private Xof_ext ext; private Xoft_rule_itm ext_rule; private Xof_repo_itm src_repo, trg_repo; private boolean src_repo_is_wmf; private byte[] ttl, md5; private int orig_w, orig_h, orig_file_len; 
+	private int lnki_page = Xof_doc_page.Null;
 	public Xof_meta_itm Meta_itm() {return meta_itm;} private Xof_meta_itm meta_itm;
 	public boolean Download_allowed_by_ext() {return orig_file_len < ext_rule.Make_max();}
 	public Xof_xfer_mgr Check_file_exists_before_xfer_n_() {check_file_exists_before_xfer = false; return this;} private boolean check_file_exists_before_xfer = true;
@@ -55,7 +55,7 @@ public class Xof_xfer_mgr {
 		else															Make_other();
 		return rslt.Pass();
 	}	private Xow_wiki wiki; Xof_img_wkr_api_size_base_rslts rslts = new Xof_img_wkr_api_size_base_rslts();
-	boolean Make_img() {
+	private boolean Make_img() {
 		String src_str; Io_url trg_url;
 		// BLOCK: thumb
 		if (lnki_thumbable) {									// lnki is thumb with known width >>> try to do thumb
@@ -350,7 +350,7 @@ public class Xof_xfer_mgr {
 	}
 	String Src_url(Xof_repo_itm repo, byte mode, int lnki_w)	{return url_bldr.Set_src_file_(mode, repo, ttl, md5, ext, lnki_w, lnki_thumbtime, lnki_page).Xto_str();}
 	Io_url Trg_url(Xof_repo_itm repo, byte mode, int lnki_w)	{return url_bldr.Set_trg_file_(mode, repo, ttl, md5, ext, lnki_w, lnki_thumbtime, lnki_page).Xto_url();}
-	Xof_url_bldr url_bldr = new Xof_url_bldr();
+	private Xof_url_bldr url_bldr = new Xof_url_bldr();
 }
 /*
 NOTE_1:always recalc w/h

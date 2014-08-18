@@ -17,14 +17,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*;
-import gplx.xowa.apps.*; import gplx.xowa.dbs.tbls.*; import gplx.xowa.ctgs.*;
+import gplx.xowa.apps.*; import gplx.xowa.dbs.tbls.*; import gplx.xowa.ctgs.*; import gplx.xowa.dbs.hdumps.*;
 public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 	public Xodb_mgr_sql(Xow_wiki wiki) {
 		this.wiki = wiki;
-		load_mgr = new Xodb_load_mgr_sql(this);
+		fsys_mgr = new Xodb_fsys_mgr(wiki.App().Fsys_mgr().Bin_db_dir(), wiki.Fsys_mgr().Root_dir(), wiki.Domain_str());
+		load_mgr = new Xodb_load_mgr_sql(this, fsys_mgr);
 		save_mgr = new Xodb_save_mgr_sql(this);
 		tbl_text = new Xodb_text_tbl(this);
-		fsys_mgr.Ctor(wiki.App().Fsys_mgr().Bin_db_dir(), wiki.Fsys_mgr().Root_dir(), wiki.Domain_str());
 	}
 	public byte Tid() {return Tid_sql;} public static final byte Tid_sql = 1;
 	public String Tid_name() {return "sqlite3";}
@@ -33,9 +33,10 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 	public byte Category_version() {return category_version;} private byte category_version = Xoa_ctg_mgr.Version_null;
 	public byte Search_version() {return load_mgr.Search_version();}
 	public void Search_version_refresh() {load_mgr.Search_version_refresh();}
-	public Xodb_fsys_mgr Fsys_mgr() {return fsys_mgr;} private Xodb_fsys_mgr fsys_mgr = new Xodb_fsys_mgr();
+	public Xodb_fsys_mgr Fsys_mgr() {return fsys_mgr;} private Xodb_fsys_mgr fsys_mgr;
 	public Xodb_load_mgr Load_mgr() {return load_mgr;} private Xodb_load_mgr_sql load_mgr;
 	public Xodb_save_mgr Save_mgr() {return save_mgr;} private Xodb_save_mgr_sql save_mgr;
+	public Xodb_html_mgr Html_mgr() {return html_mgr;} private Xodb_html_mgr html_mgr = new Xodb_html_mgr();
 	public Xodb_xowa_cfg_tbl Tbl_xowa_cfg() {return tbl_cfg;} private Xodb_xowa_cfg_tbl tbl_cfg = new Xodb_xowa_cfg_tbl();
 	public Xodb_xowa_ns_tbl Tbl_xowa_ns() {return tbl_ns;} private Xodb_xowa_ns_tbl tbl_ns = new Xodb_xowa_ns_tbl();
 	public Xodb_xowa_db_tbl Tbl_xowa_db() {return tbl_db;} private Xodb_xowa_db_tbl tbl_db = new Xodb_xowa_db_tbl();
@@ -52,14 +53,14 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 	public DateAdp Dump_date_query() {
 		DateAdp rv = wiki.Props().Modified_latest();
 		if (rv != null) return rv;
-		Io_url url = fsys_mgr.Get_url(Xodb_file_tid_.Tid_core);
+		Io_url url = fsys_mgr.Get_url(Xodb_file_tid.Tid_core);
 		return Io_mgr._.QueryFil(url).ModifiedTime();
 	}
-	public void Init_make(String ns_map) {
+	public void Init_by_ns_map(String ns_map) {
 		Xoi_dump_mgr dump_mgr = wiki.App().Setup_mgr().Dump_mgr();
 		data_storage_format = dump_mgr.Data_storage_format();
-		fsys_mgr.Init_make(wiki.Ns_mgr(), ns_map, dump_mgr.Db_text_max());
-		Core_provider_(fsys_mgr.Core_provider());
+		fsys_mgr.Init_by_ns_map(wiki.Ns_mgr(), ns_map, dump_mgr.Db_text_max());
+		Core_provider_(fsys_mgr.Provider_core());
 		state = State_make;
 	}
 	public void Init_load(Db_connect connect) {
@@ -129,13 +130,14 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 		else if	(ctx.Match(k, Invk_category_version_))					category_version = m.ReadByte("v");
 		else if	(ctx.Match(k, Invk_search_version))						return this.Search_version();
 		else if	(ctx.Match(k, Invk_tid_name))							return this.Tid_name();
+		else if	(ctx.Match(k, Invk_html_mgr))							return html_mgr;
 		return this;
 	}
 	public static final String 
 	  Invk_data_storage_format = "data_storage_format", Invk_data_storage_format_ = "data_storage_format_"
 	, Invk_category_version = "category_version", Invk_category_version_ = "category_version_"
 	, Invk_search_version = "search_version"
-	, Invk_tid_name = "tid_name"
+	, Invk_tid_name = "tid_name", Invk_html_mgr = "html_mgr"
 	;
 	public void Category_version_update(boolean version_is_1) {
 		String grp = Xodb_mgr_sql.Grp_wiki_init;
@@ -146,7 +148,7 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 		tbl_cfg.Insert_str(grp, key, Byte_.XtoStr(category_version));
 	}
 	public void Delete_by_tid(byte tid) {
-		Xodb_file[] ary = fsys_mgr.Ary();
+		Xodb_file[] ary = fsys_mgr.Files_ary();
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
 			Xodb_file file = ary[i] ;
@@ -156,8 +158,8 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 			Io_mgr._.DeleteFil_args(sqlite.Url()).MissingFails_off().Exec();
 			file.Cmd_mode_(Db_cmd_mode.Delete);
 		}
-		tbl_db.Commit_all(fsys_mgr.Core_provider(), ary);
-		this.Init_load(fsys_mgr.Core_provider().ConnectInfo());
+		tbl_db.Commit_all(fsys_mgr.Provider_core(), ary);
+		this.Init_load(fsys_mgr.Provider_core().ConnectInfo());
 	}
 
 	public static final String Grp_wiki_init = "wiki.init";

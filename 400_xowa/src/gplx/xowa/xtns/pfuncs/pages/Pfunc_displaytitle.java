@@ -25,7 +25,7 @@ public class Pfunc_displaytitle extends Pf_func_base {
 		Xop_ctx new_ctx = Xop_ctx.new_sub_(wiki);
 		Xop_root_tkn new_root  = parser.Parse_text_to_wdom(new_ctx, val_dat_ary, false);
 		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
-		wiki.Html_mgr().Html_wtr().Write_tkn(tmp_bfr, new_ctx, gplx.xowa.html.Xoh_html_wtr_ctx.Display_title, new_root.Data_mid(), new_root, 0, new_root);
+		wiki.Html_mgr().Html_wtr().Write_tkn(tmp_bfr, new_ctx, gplx.xowa.html.Xoh_wtr_ctx.Display_title, new_root.Data_mid(), new_root, 0, new_root);
 		byte[] val_html = tmp_bfr.Mkr_rls().XtoAryAndClear();
 		ctx.Cur_page().Html_data().Display_ttl_(val_html);
 	}

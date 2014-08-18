@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.gui.*;
+import gplx.xowa.gui.*; import gplx.xowa.pages.*;
 public class Xoh_page_wtr_mgr implements GfoInvkAble {
 	private Xoh_page_wtr_wkr edit_wtr, html_wtr, read_wtr; private Xoa_app app;
 	public Xoh_page_wtr_mgr(Xoa_app app, boolean html_capable) {
@@ -41,9 +41,9 @@ public class Xoh_page_wtr_mgr implements GfoInvkAble {
 		,	"</html>"
 		));
 		this.html_capable = html_capable;
-		read_wtr = new Xoh_page_wtr_wkr(Xog_page_mode.Tid_read);
-		edit_wtr = new Xoh_page_wtr_wkr(Xog_page_mode.Tid_edit);
-		html_wtr = new Xoh_page_wtr_wkr(Xog_page_mode.Tid_html);
+		read_wtr = new Xoh_page_wtr_wkr(Xopg_view_mode.Tid_read);
+		edit_wtr = new Xoh_page_wtr_wkr(Xopg_view_mode.Tid_edit);
+		html_wtr = new Xoh_page_wtr_wkr(Xopg_view_mode.Tid_html);
 	}
 	public boolean Html_capable() {return html_capable;} public Xoh_page_wtr_mgr Html_capable_(boolean v) {html_capable = v; return this;} private boolean html_capable;
 	public Bry_fmtr Page_read_fmtr() {return page_read_fmtr;}
@@ -105,9 +105,9 @@ public class Xoh_page_wtr_mgr implements GfoInvkAble {
 	}
 	public Xoh_page_wtr_wkr Wkr(byte output_tid) {
 		switch (output_tid) {
-			case Xog_page_mode.Tid_edit: return edit_wtr;
-			case Xog_page_mode.Tid_html: return html_wtr;
-			case Xog_page_mode.Tid_read: return read_wtr;
+			case Xopg_view_mode.Tid_edit: return edit_wtr;
+			case Xopg_view_mode.Tid_html: return html_wtr;
+			case Xopg_view_mode.Tid_read: return read_wtr;
 			default: throw Err_.unhandled(output_tid);
 		}
 	}

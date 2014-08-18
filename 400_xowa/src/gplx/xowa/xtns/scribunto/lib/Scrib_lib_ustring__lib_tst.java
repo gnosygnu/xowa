@@ -53,12 +53,15 @@ public class Scrib_lib_ustring__lib_tst {
 		Exec_gsub_regx("aaaa", "[a]"		, 2, "A"		, "AAaa;2");
 		Exec_gsub_regx("a"	, "(a)"			, 1, "%%%1"		, "%a;1");
 		Exec_gsub_regx("à{b}c", "{b}"		, 1, "b"		, "àbc;1");		// utf8
-		Exec_gsub_regx("àbc", "^%s*(.-)%s*$", 1, "%1"		, "àbc;1");	// utf8; regx is for trim line
+		Exec_gsub_regx("àbc", "^%s*(.-)%s*$", 1, "%1"		, "àbc;1");		// utf8; regx is for trim line
 		Exec_gsub_regx("a"	, "[^]"			, 1, "b"		, "a;0");		// invalid regx should not fail; should return self; DATE:2013-10-20
 	}
 	@Test  public void Gsub_table() {
 		Exec_gsub_regx("abcd", "[ac]"		, -1, Scrib_kv_utl_.flat_many_("a", "A", "c", "C")	, "AbCd;2");
 		Exec_gsub_regx("abc" , "[ab]"		, -1, Scrib_kv_utl_.flat_many_("a", "A")			, "Abc;2");	// PURPOSE: match not in regex should still print itself; in this case [c] is not in tbl regex; DATE:2014-03-31
+	}
+	@Test  public void Gsub_table_match() {	// PURPOSE: replace using group, not found term; EX:"b" not "%b%" PAGE:en.w:Bannered_routes_of_U.S._Route_60; DATE:2014-08-15
+		Exec_gsub_regx("a%b%c", "%%(%w+)%%"	, -1, Scrib_kv_utl_.flat_many_("b", "B")			, "aBc;1");
 	}
 	@Test  public void Gsub_capture() {
 		Exec_gsub_regx("aa"			, "(a)%1"				, 1, "%1z", "az;1");	// capture

@@ -20,11 +20,11 @@ public class Hdump_page_itm {
 	public int Page_id() {return page_id;} private int page_id;
 	public byte[] Page_url() {return page_url;} private byte[] page_url;
 	public int Version_id() {return version_id;} public void Version_id_(int v) {version_id = v;} private int version_id;
-	public byte[] Page_body() {return page_body;} private byte[] page_body;
-	public byte[] Display_ttl() {return display_ttl;} private byte[] display_ttl;
-	public byte[] Content_sub() {return content_sub;} private byte[] content_sub;
-	public byte[][] Sidebar_divs() {return sidebar_divs;} private byte[][] sidebar_divs;
-	public Hdump_img_itm[] Img_itms() {return img_itms;} private Hdump_img_itm[] img_itms;
+	public byte[] Page_body() {return page_body;} public void Page_body_(byte[] v) {this.page_body = v;} private byte[] page_body = Bry_.Empty;
+	public byte[] Display_ttl() {return display_ttl;} private byte[] display_ttl = Bry_.Empty;
+	public byte[] Content_sub() {return content_sub;} private byte[] content_sub = Bry_.Empty;
+	public byte[][] Sidebar_divs() {return sidebar_divs;} private byte[][] sidebar_divs = Bry_.Ary_empty;
+	public Hdump_img_itm[] Img_itms() {return img_itms;} public void Img_itms_(Hdump_img_itm[] v) {this.img_itms = v;} private Hdump_img_itm[] img_itms = Hdump_img_itm.Ary_empty;
 	public void Init(int page_id, byte[] page_url, int version_id, byte[] display_ttl, byte[] content_sub, byte[] page_body, byte[][] sidebar_divs, Hdump_img_itm[] img_itms) {
 		this.page_id = page_id;
 		this.page_url = page_url;

@@ -16,16 +16,16 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apis.xowa.gui.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.apis.*; import gplx.xowa.apis.xowa.*; import gplx.xowa.apis.xowa.gui.*;
-import gplx.gfui.*; import gplx.xowa.gui.*; import gplx.xowa.gui.views.*;
+import gplx.gfui.*; import gplx.xowa.gui.*; import gplx.xowa.gui.views.*; import gplx.xowa.pages.*;
 public class Xoapi_view implements GfoInvkAble {
 	private Xoa_app app; private Xog_win_itm win;
 	public void Init_by_kit(Xoa_app app) {
 		this.app = app; this.win = app.Gui_mgr().Browser_win();
 	}
 	private boolean Active_tab_is_null() {return win.Tab_mgr().Active_tab_is_null();}
-	public void Mode_read()				{Mode(Xog_page_mode.Tid_read);}
-	public void Mode_edit()				{Mode(Xog_page_mode.Tid_edit);}
-	public void Mode_html()				{Mode(Xog_page_mode.Tid_html);}
+	public void Mode_read()				{Mode(Xopg_view_mode.Tid_read);}
+	public void Mode_edit()				{Mode(Xopg_view_mode.Tid_edit);}
+	public void Mode_html()				{Mode(Xopg_view_mode.Tid_html);}
 	private void Mode(byte v)			{if (Active_tab_is_null()) return; win.Page__mode_(v);}
 	public void Reload()				{if (Active_tab_is_null()) return; win.Page__reload();}
 	public void Refresh()				{if (Active_tab_is_null()) return; win.Page__refresh();}

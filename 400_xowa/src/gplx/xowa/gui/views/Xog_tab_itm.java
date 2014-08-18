@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 import gplx.threads.*; import gplx.gfui.*; import gplx.xowa.gui.history.*; import gplx.xowa.gui.bnds.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.cfgs2.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.cfgs2.*; import gplx.xowa.pages.*;
 public class Xog_tab_itm implements GfoInvkAble {
 	private Xog_win_itm win; private Xocfg_tab_mgr cfg_tab_mgr;
 	public Xog_tab_itm(Xog_tab_mgr tab_mgr, Gfui_tab_itm_data tab_data) {
@@ -91,9 +91,8 @@ public class Xog_tab_itm implements GfoInvkAble {
 		tab_box.Tab_name_(tab_name);
 	}
 	public Xog_history_mgr		History_mgr() {return history_mgr;} private Xog_history_mgr history_mgr = new Xog_history_mgr();
-	public byte					View_mode() {return view_mode;} public Xog_tab_itm View_mode_(byte v) {view_mode = v; return this;} private byte view_mode = Xog_page_mode.Tid_read;
-	public void Pin_toggle() {
-	}
+	public byte					View_mode() {return view_mode;} public Xog_tab_itm View_mode_(byte v) {view_mode = v; return this;} private byte view_mode = Xopg_view_mode.Tid_read;
+	public void Pin_toggle() {}
 	public void Show_url_bgn(Xoa_url url) {
 		this.tab_is_loading = true;
 		Xoa_app app = win.App(); Gfo_usr_dlg usr_dlg = app.Usr_dlg();
@@ -125,7 +124,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 			if (page.Missing()) {
 				if (wiki.Db_mgr().Save_mgr().Create_enabled()) {
 					page = Xoa_page.create_(wiki, ttl);
-					view_mode = Xog_page_mode.Tid_edit;
+					view_mode = Xopg_view_mode.Tid_edit;
 					history_mgr.Add(page);	// NOTE: must put new_page on stack so that pressing back will pop new_page, not previous page
 					Xog_tab_itm_read_mgr.Show_page(this, page, false);
 				}

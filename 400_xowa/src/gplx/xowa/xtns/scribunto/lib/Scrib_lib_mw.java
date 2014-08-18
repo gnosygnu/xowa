@@ -90,9 +90,9 @@ public class Scrib_lib_mw implements Scrib_lib {
 		if (mod_code != null)
 			return rslt.Init_obj(core.Interpreter().LoadString("@" + mod_name + ".lua", mod_code));
 		Xoa_ttl ttl = Xoa_ttl.parse_(cur_wiki, Bry_.new_utf8_(mod_name));// NOTE: should have Module: prefix
-		if (ttl == null) return rslt.Init_empty();
+		if (ttl == null) return rslt.Init_ary_empty();
 		Xoa_page page = cur_wiki.Data_mgr().Get_page(ttl, false);
-		if (page.Missing()) return rslt.Init_empty();
+		if (page.Missing()) return rslt.Init_ary_empty();
 		Scrib_lua_mod mod = new Scrib_lua_mod(core, mod_name);
 		return rslt.Init_obj(mod.LoadString(String_.new_utf8_(page.Data_raw())));
 	}
@@ -106,13 +106,13 @@ public class Scrib_lib_mw implements Scrib_lib {
 		if (idx_int != Int_.MinValue) {	// idx is integer
 			Arg_nde_tkn nde = Get_arg(frame, idx_int, frame_arg_adj);
 			//frame.Args_eval_by_idx(core.Ctx().Src(), idx_int); // NOTE: arg[0] is always MW function name; EX: {{#invoke:Mod_0|Func_0|Arg_1}}; arg_x = "Mod_0"; args[0] = "Func_0"; args[1] = "Arg_1"
-			if (nde == null) return rslt.Init_empty();
+			if (nde == null) return rslt.Init_ary_empty();
 			nde.Val_tkn().Tmpl_evaluate(ctx, src, core.Frame_parent(), tmp_bfr);
 			return rslt.Init_obj(tmp_bfr.XtoStrAndClear());
 		}
 		else {
 			Arg_nde_tkn nde = frame.Args_get_by_key(src, Bry_.new_utf8_(idx_str));
-			if (nde == null) return rslt.Init_empty();	// idx_str does not exist;
+			if (nde == null) return rslt.Init_ary_empty();	// idx_str does not exist;
 			nde.Val_tkn().Tmpl_evaluate(ctx, src, core.Frame_parent(), tmp_bfr);
 			return rslt.Init_obj(tmp_bfr.XtoStrAndClearAndTrim());	// NOTE: must trim if key_exists; DUPE:TRIM_IF_KEY
 		}
@@ -292,7 +292,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		String ttl_str = args.Pull_str(1);
 		byte[] ttl_bry = Bry_.new_utf8_(ttl_str);
 		Xoa_ttl ttl = Xoa_ttl.parse_(cur_wiki, ttl_bry);	// parse directly; handles titles where template is already part of title; EX: "Template:A"
-		if (ttl == null) return rslt.Init_empty();	// invalid ttl;
+		if (ttl == null) return rslt.Init_ary_empty();	// invalid ttl;
 		if (!ttl.ForceLiteralLink() && ttl.Ns().Id_main())	// title is not literal and is not prefixed with Template; parse again as template; EX: ":A" and "Template:A" are fine; "A" is parsed again as "Template:A"
 			ttl = Xoa_ttl.parse_(cur_wiki, Bry_.Add(cur_wiki.Ns_mgr().Ns_template().Name_db_w_colon(), ttl_bry));	// parse again, but add "Template:"
 		KeyVal[] args_ary = args.Pull_kv_ary(2);
@@ -314,7 +314,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		else {
 //				String err_msg = "expand_template failed; ttl=" + ttl_str;
 //				cur_wiki.App().Usr_dlg().Warn_many("", "", err_msg);
-			return rslt.Init_empty();
+			return rslt.Init_ary_empty();
 		}
 		// BLOCK.end:Xot_invk_tkn.Transclude
 	}
@@ -350,7 +350,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		}
 		KeyVal[] args_ary = args.Pull_kv_ary(2);
 		Xot_invk_mock new_frame = Xot_invk_mock.new_(core.Frame_current().Defn_tid(), 0, args_ary);
-		new_frame.Frame_ttl_(ttl.Full_db());
+		new_frame.Frame_ttl_(ttl.Full_txt());	// NOTE: use spaces, not unders; REF.MW:$frame->getTitle()->getPrefixedText(); DATE:2014-08-14
 		String new_frame_id = "frame" + Int_.XtoStr(frame_list_len);
 		frame_list.Add(new_frame_id, new_frame);
 		return rslt.Init_obj(new_frame_id);
@@ -364,7 +364,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		int timeToLive = args.Pull_int(0);
 		Xot_invk current_frame = core.Frame_current();
 		current_frame.Frame_lifetime_(timeToLive);
-		return rslt.Init_empty();
+		return rslt.Init_ary_empty();
 	}
 }
 class Scrib_lib_mw_callParserFunction_sorter implements gplx.lists.ComparerAble {

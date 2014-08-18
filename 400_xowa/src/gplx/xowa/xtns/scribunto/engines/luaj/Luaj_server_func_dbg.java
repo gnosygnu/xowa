@@ -29,7 +29,7 @@ public class Luaj_server_func_dbg extends VarArgFunction {
 		Bry_bfr bfr = Bry_bfr.new_();
 		bfr.Add_str("<span class='xowa_dbg' style='color:red'>");
 		for (int i = 1; i <= len; ++i) {
-			String s = args.arg(i).strvalue().toString();
+			String s = args.arg(i).toString();
 			bfr.Add_str(gplx.html.Html_utl.Escape_html_as_str(s));
 		}
 		bfr.Add_str("</span><br/>");

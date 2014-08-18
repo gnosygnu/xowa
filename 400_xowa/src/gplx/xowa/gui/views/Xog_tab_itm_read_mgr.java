@@ -17,13 +17,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 import gplx.gfui.*; import gplx.threads.*;
-import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.gui.history.*;
+import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.gui.history.*; import gplx.xowa.pages.*;
 public class Xog_tab_itm_read_mgr {
 	public static void Async(Xog_tab_itm tab) {tab.Async();}
 	public static void Show_page(Xog_tab_itm tab, Xoa_page new_page, boolean reset_to_read) {Show_page(tab, new_page, reset_to_read, false, false, Xog_history_stack.Nav_fwd);}
 	public static void Show_page(Xog_tab_itm tab, Xoa_page new_page, boolean reset_to_read, boolean new_page_is_same, boolean show_is_err, byte history_nav_type) {
-		if (reset_to_read) tab.View_mode_(Xog_page_mode.Tid_read);
-		if (new_page.Url().Action_is_edit()) tab.View_mode_(Xog_page_mode.Tid_edit);
+		if (reset_to_read) tab.View_mode_(Xopg_view_mode.Tid_read);
+		if (new_page.Url().Action_is_edit()) tab.View_mode_(Xopg_view_mode.Tid_edit);
 		Xoa_page cur_page = tab.Page(); Xog_html_itm html_itm = tab.Html_itm(); Gfui_html html_box = html_itm.Html_box();
 		Xoa_app app = cur_page.App(); Xog_win_itm win = tab.Tab_mgr().Win();
 		if (cur_page != null && !new_page_is_same) {	// if new_page_is_same, don't update DocPos; will "lose" current position
@@ -51,7 +51,7 @@ public class Xog_tab_itm_read_mgr {
 		tab.Tab_mgr().Tab_mgr().Focus();
 		html_box.Focus();
 		win.Usr_dlg().Prog_none("", "", "");	// blank out status bar
-		if (tab.View_mode() == Xog_page_mode.Tid_read)
+		if (tab.View_mode() == Xopg_view_mode.Tid_read)
 			html_itm.Scroll_page_by_bmk_gui();
 		else
 			GfoInvkAble_.InvkCmd_val(tab.Html_itm().Cmd_async(), Xog_html_itm.Invk_html_elem_focus, Xog_html_itm.Elem_id__xowa_edit_data_box);	// NOTE: must be async, else won't work; DATE:2014-06-05
@@ -76,7 +76,7 @@ public class Xog_tab_itm_read_mgr {
 		win.Usr_dlg().Warn_many("", "", err_msg);
 		win.App().Log_wtr().Queue_enabled_(false);
 		Xoa_page fail_page = wiki.Data_mgr().Get_page(ttl, false);
-		tab.View_mode_(Xog_page_mode.Tid_edit);
+		tab.View_mode_(Xopg_view_mode.Tid_edit);
 		Update_selected_tab(win.App(), win, url, ttl);
 		Show_page(tab, fail_page, false, false, true, Xog_history_stack.Nav_fwd);
 		win.Win_box().Text_(err_msg);

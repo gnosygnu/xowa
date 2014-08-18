@@ -24,7 +24,7 @@ public class Xoctg_hiddencat_parser_sql extends Xoctg_hiddencat_parser_base {
 		super.Cmd_bgn_hook(bldr, parser);
 		Xodb_mgr_sql db_mgr = wiki.Db_mgr_as_sql();
 		Xodb_fsys_mgr fsys_mgr = db_mgr.Fsys_mgr();
-		Db_provider provider = fsys_mgr.Category_provider();
+		Db_provider provider = fsys_mgr.Provider_ctg();
 		provider.Txn_mgr().Txn_bgn_if_none();
 		tbl = db_mgr.Tbl_category();
 		stmt = tbl.Update_stmt(provider);

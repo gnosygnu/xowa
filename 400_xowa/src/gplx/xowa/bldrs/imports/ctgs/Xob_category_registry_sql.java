@@ -29,7 +29,7 @@ public class Xob_category_registry_sql implements Xob_cmd {
 		Xob_tmp_wtr rslt_wtr = Xob_tmp_wtr.new_wo_ns_(Io_url_gen_.dir_(rslt_dir), Io_mgr.Len_mb);
 		
 		Xodb_mgr_sql db_mgr = Xodb_mgr_sql.Get_or_load(wiki);
-		Db_provider provider = db_mgr.Fsys_mgr().Core_provider();
+		Db_provider provider = db_mgr.Fsys_mgr().Provider_core();
 		Db_qry_select qry = Db_qry_select.new_()
 			.Cols_(Xodb_page_tbl.Fld_page_title, Xodb_page_tbl.Fld_page_id)
 			.From_(Xodb_page_tbl.Tbl_name)

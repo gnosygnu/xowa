@@ -90,5 +90,5 @@ public class References_nde_rare_tst {
 		, "</ol>"
 		, ""
 		));
-	}		
+	}
 }

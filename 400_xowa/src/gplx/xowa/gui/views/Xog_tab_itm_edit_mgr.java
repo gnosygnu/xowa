@@ -16,10 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
-import gplx.gfui.*; import gplx.xowa.html.*;
+import gplx.gfui.*; import gplx.xowa.html.*; import gplx.xowa.pages.*;
 public class Xog_tab_itm_edit_mgr {
 	public static void Save(Xog_tab_itm tab, boolean quick_save) {
-		if (tab.View_mode() != Xog_page_mode.Tid_edit) return;	// exit if not edit; handles ctrl+s being pressed on read/html modes
+		if (tab.View_mode() != Xopg_view_mode.Tid_edit) return;	// exit if not edit; handles ctrl+s being pressed in read/html modes
 		Xoa_page page = tab.Page(); Xow_wiki wiki = page.Wiki(); Xog_win_itm win_itm = tab.Tab_mgr().Win();
 		byte[] new_text = Get_new_text(tab);
 		if (page.Edit_mode() == Xoa_page_.Edit_mode_create) {
@@ -37,12 +37,13 @@ public class Xog_tab_itm_edit_mgr {
 			Xoa_page stack_page = tab.History_mgr().Cur_page(wiki);			// NOTE: must be to CurPage() else changes will be lost when going Bwd,Fwd
 			stack_page.Data_raw_(page.Data_raw());							// NOTE: overwrite with "saved" changes
 			stack_page.Wiki().ParsePage_root(page, true);					// NOTE: must reparse page if (a) Edit -> Read; or (b) "Options" save
-			win_itm.Page__mode_(Xog_page_mode.Tid_read);
+			win_itm.Page__mode_(Xopg_view_mode.Tid_read);
 			win_itm.Page__async__bgn(tab);
 		}
+		wiki.Db_mgr().Html_mgr().Save(page);
 	}
 	public static void Preview(Xog_tab_itm tab) {
-		if (tab.View_mode() != Xog_page_mode.Tid_edit) return;	// exit if not edit; handles preview somehow being called?
+		if (tab.View_mode() != Xopg_view_mode.Tid_edit) return;	// exit if not edit; handles preview somehow being called?
 		Xoa_page page = tab.Page(); Xow_wiki wiki = page.Wiki(); Xog_win_itm win_itm = tab.Tab_mgr().Win();
 		Xog_html_itm html_itm = tab.Html_itm();
 
@@ -54,19 +55,19 @@ public class Xog_tab_itm_edit_mgr {
 		tab.Page_(new_page);
 
 		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_m001();
-		Xoh_page_wtr_wkr wkr = wiki.Html_mgr().Page_wtr_mgr().Wkr(Xog_page_mode.Tid_read);
+		Xoh_page_wtr_wkr wkr = wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_view_mode.Tid_read);
 		wkr.Page_(new_page);
 		wkr.XferAry(tmp_bfr, 0);
 		byte[] new_html = tmp_bfr.Mkr_rls().XtoAryAndClear();
 		new_page.Html_data().Edit_preview_(new_html);
 
 		Invalidate(wiki);
-		win_itm.Page__mode_(Xog_page_mode.Tid_edit);
+		win_itm.Page__mode_(Xopg_view_mode.Tid_edit);
 		html_itm.Scroll_page_by_id_gui(Xog_html_itm.Elem_id__first_heading);// NOTE: was originally directly; changed to call on thread; DATE:2014-05-03
 		win_itm.Page__async__bgn(tab);	// NOTE: needed to show images during preview; DATE:2014-06-21
 	}
 	public static void Rename(Xog_tab_itm tab) {
-		if (tab.View_mode() != Xog_page_mode.Tid_edit) return;	// exit if not edit; handles ctrl+r being pressed
+		if (tab.View_mode() != Xopg_view_mode.Tid_edit) return;	// exit if not edit; handles ctrl+r being pressed
 		Xoa_page page = tab.Page(); Xow_wiki wiki = page.Wiki(); Xog_win_itm win_itm = tab.Tab_mgr().Win();
 		if (Bry_.Eq(page.Ttl().Page_db(), wiki.Props().Main_page())) {
 			win_itm.Usr_dlg().Warn_many("", "", "The Main Page cannot be renamed");
@@ -83,7 +84,7 @@ public class Xog_tab_itm_edit_mgr {
 		}
 		wiki.Db_mgr().Save_mgr().Data_rename(page, new_ns_id, new_text);
 		page.Ttl_(Xoa_ttl.parse_(wiki, Bry_.Add(page.Ttl().Ns().Name_db_w_colon(), new_text)));
-		win_itm.Page__mode_(Xog_page_mode.Tid_read);
+		win_itm.Page__mode_(Xopg_view_mode.Tid_read);
 		win_itm.Usr_dlg().Prog_one("", "", "renamed page to {0}", String_.new_utf8_(page.Ttl().Full_txt_raw()));
 	}
 	public static void Focus(Xog_win_itm win, String elem_focus_id) {

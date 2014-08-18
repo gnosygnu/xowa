@@ -341,20 +341,30 @@ public class Xop_fxt {
 	public static String html_img_none(String trg, String alt, String src, String ttl) {
 		return String_.Format(String_.Concat_lines_nl_skip_last("<a href=\"/wiki/{0}\" class=\"image\" xowa_title=\"{3}\"><img id=\"xowa_file_img_0\" alt=\"{1}\" src=\"{2}\" width=\"9\" height=\"8\" /></a>"), trg, alt, src, ttl);
 	}
-	private String Exec_html_full(String raw)								{return this.Exec_parse_page_all_as_str(raw);}
-	private String Exec_html_wiki(String raw)								{return this.Exec_parse_page_wiki_as_str(raw);}
-	public void Test_html_wiki_str(String raw, String expd)					{Test_str_full(raw, expd, Exec_html_wiki(raw));}
-	public void Test_html_full_str(String raw, String expd)					{Test_str_full(raw, expd, Exec_html_full(raw));}
-	public void Test_html_wiki_frag(String raw, String... expd_frags)	{Test_str_part(Exec_html_wiki(raw), expd_frags);}
-	public void Test_html_full_frag(String raw, String... expd_frags)	{Test_str_part(Exec_html_full(raw), expd_frags);}
+	private String Exec_html_full(String raw)										{return this.Exec_parse_page_all_as_str(raw);}
+	private String Exec_html_wiki(String raw)										{return this.Exec_parse_page_wiki_as_str(raw);}
+	public void Test_html_wiki_str(String raw, String expd)							{Test_str_full(raw, expd, Exec_html_wiki(raw));}
+	public void Test_html_full_str(String raw, String expd)							{Test_str_full(raw, expd, Exec_html_full(raw));}
+	public void Test_html_wiki_frag(String raw, String... expd_frags)			{Test_str_part_y(Exec_html_wiki(raw), expd_frags);}
+	public void Test_html_full_frag(String raw, String... expd_frags)			{Test_str_part_y(Exec_html_full(raw), expd_frags);}
+	public void Test_html_full_frag_n(String raw, String... expd_frags)		{Test_str_part_n(Exec_html_full(raw), expd_frags);}
 
 	public void Test_str_full(String raw, String expd, String actl) {Tfds.Eq_str_lines(expd, actl, raw);}
-	public void Test_str_part(String actl, String... expd_parts) {
+	private void Test_str_part_y(String actl, String... expd_parts) {
 		int expd_parts_len = expd_parts.length;
 		for (int i = 0; i < expd_parts_len; i++) {
 			String expd_part = expd_parts[i];
 			boolean pass = String_.Has(actl, expd_part);
 			if (!pass)
+				Tfds.Eq_true(false, expd_part + "\n" + actl);
+		}
+	}
+	private void Test_str_part_n(String actl, String... expd_parts) {
+		int expd_parts_len = expd_parts.length;
+		for (int i = 0; i < expd_parts_len; i++) {
+			String expd_part = expd_parts[i];
+			boolean has = String_.Has(actl, expd_part);
+			if (has)
 				Tfds.Eq_true(false, expd_part + "\n" + actl);
 		}
 	}

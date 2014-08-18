@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.files.*; import gplx.xowa.html.*; import gplx.xowa.xtns.pfuncs.ttls.*;
+import gplx.xowa.files.*; import gplx.xowa.html.*; import gplx.xowa.html.lnkis.*; import gplx.xowa.xtns.pfuncs.ttls.*;
 public class Xop_lnki_tkn extends Xop_tkn_itm_base {
 	@Override public byte	Tkn_tid() {return tkn_tid;} private byte tkn_tid = Xop_tkn_itm_.Tid_lnki;
 	public void				Tkn_tid_to_txt() {tkn_tid = Xop_tkn_itm_.Tid_txt;}
@@ -47,7 +47,7 @@ public class Xop_lnki_tkn extends Xop_tkn_itm_base {
 	public int				Pipe_count() {return pipe_count;} private int pipe_count;
 	public boolean				Pipe_count_is_zero() {return pipe_count++ == 0;} 
 	public boolean				Xtn_sites_link() {return xtn_sites_link;} public void Xtn_sites_link_(boolean v) {xtn_sites_link = v;} private boolean xtn_sites_link;
-	public Xoh_lnki_file_wkr Lnki_file_wkr() {return lnki_file_wkr;} public void Lnki_file_wkr_(Xoh_lnki_file_wkr v) {lnki_file_wkr = v;} private Xoh_lnki_file_wkr lnki_file_wkr;
+	public Xoh_file_img_wkr Lnki_file_wkr() {return lnki_file_wkr;} public void Lnki_file_wkr_(Xoh_file_img_wkr v) {lnki_file_wkr = v;} private Xoh_file_img_wkr lnki_file_wkr;
 	public byte[] Ttl_ary() {
 		return ttl.ForceLiteralLink() || nsId != Xow_ns_.Id_main		// if [[:]] or non-main (Category, Template)
 			? ttl.Full_txt()											// use full_txt (no initial colon; capitalize first)

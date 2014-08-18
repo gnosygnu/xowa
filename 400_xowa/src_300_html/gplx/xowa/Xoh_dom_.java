@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.html.*;
+import gplx.html.*;
 public class Xoh_dom_ {
 	private static final byte[] Lt_bry = Bry_.new_ascii_("<"), Space_bry = Bry_.new_ascii_(" ");
 	public static byte[] Query_val_by_where(Xoh_find rv, byte[] src, byte[] where_nde, byte[] where_key, byte[] where_val, byte[] query_key, int bgn) {
@@ -49,18 +49,18 @@ public class Xoh_dom_ {
 		int tag_end = Bry_finder.Find_fwd(src, Byte_ascii.Gt, tag_bgn, rng_end); 					if (tag_end == Bry_.NotFound) return false;
 		int key_bgn = Bry_finder.Find_fwd(src, key, tag_bgn, tag_end);								if (key_bgn == Bry_.NotFound) return false;
 		int key_end = key_bgn + key.length;
-		int val_bgn = Bry_finder.Find_fwd(src, Byte_ascii.Quote, key_end, tag_end);				if (val_bgn == Bry_.NotFound) return false;
+		int val_bgn = Bry_finder.Find_fwd(src, Byte_ascii.Quote, key_end, tag_end);					if (val_bgn == Bry_.NotFound) return false;
 		++val_bgn;
-		int val_end = Bry_finder.Find_fwd(src, Byte_ascii.Quote, val_bgn, tag_end);				if (val_end == Bry_.NotFound) return false;
+		int val_end = Bry_finder.Find_fwd(src, Byte_ascii.Quote, val_bgn, tag_end);					if (val_end == Bry_.NotFound) return false;
 		rv.Set_all(tag_bgn, tag_end, key_bgn, key_end, val_bgn, val_end);
 		return true;
 	}
 	public static boolean Find_atr_val_in_tag(Xoh_find rv, byte[] src, byte[] key, int tag_bgn, int tag_end) {
 		int key_bgn = Bry_finder.Find_fwd(src, key, tag_bgn, tag_end);								if (key_bgn == Bry_.NotFound) return false;
 		int key_end = key_bgn + key.length;
-		int val_bgn = Bry_finder.Find_fwd(src, Byte_ascii.Quote, key_end, tag_end);				if (val_bgn == Bry_.NotFound) return false;
+		int val_bgn = Bry_finder.Find_fwd(src, Byte_ascii.Quote, key_end, tag_end);					if (val_bgn == Bry_.NotFound) return false;
 		++val_bgn;
-		int val_end = Bry_finder.Find_fwd(src, Byte_ascii.Quote, val_bgn, tag_end);				if (val_end == Bry_.NotFound) return false;
+		int val_end = Bry_finder.Find_fwd(src, Byte_ascii.Quote, val_bgn, tag_end);					if (val_end == Bry_.NotFound) return false;
 		rv.Set_all(tag_bgn, tag_end, key_bgn, key_end, val_bgn, val_end);
 		return true;
 	}
@@ -71,7 +71,7 @@ public class Xoh_dom_ {
 		bfr.Add_mid(href_dec, 0, slash_pos + Int_.Const_dlm_len);	// include trailing slash			
 		bfr.Add(name_enc);
 		byte[] href_enc = bfr.XtoAryAndClear();			
-		byte[] xowa_title = Xoh_dom_.Query_val_by_where(dom_find, html_src, Xoh_html_tag.Nde_a_bry, Xoh_html_tag.Nde_href_bry, href_enc, Xoh_html_tag.Nde_xowa_title_bry, 0);
+		byte[] xowa_title = Xoh_dom_.Query_val_by_where(dom_find, html_src, Html_tag_.A_name_bry, Html_atr_.Href_bry, href_enc, gplx.xowa.html.Xoh_consts.Atr_xowa_title_bry, 0);
 		return String_.new_utf8_(xowa_title);
 	}	static final Xoh_find dom_find = new Xoh_find(); 
 }

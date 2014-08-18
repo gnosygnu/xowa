@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.gui.*; import gplx.xowa.xtns.wdatas.imports.*;
+import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.gui.*; import gplx.xowa.xtns.wdatas.imports.*; import gplx.xowa.pages.*;
 import gplx.xowa.langs.*;
 public class Wdata_wiki_mgr_fxt {
 	public Xow_wiki Wiki() {return parser_fxt.Wiki();}
@@ -136,7 +136,7 @@ public class Wdata_wiki_mgr_fxt {
 		parser_fxt.Page_ttl_("Q1_en");
 		parser_fxt.Exec_parse_page_all_as_str(raw);
 		Bry_bfr tmp_bfr = wiki.App().Utl_bry_bfr_mkr().Get_b512();
-		wiki.Html_mgr().Page_wtr_mgr().Wkr(Xog_page_mode.Tid_read).Wdata_lang_wtr().Page_(page).XferAry(tmp_bfr, 0);
+		wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_view_mode.Tid_read).Wdata_lang_wtr().Page_(page).XferAry(tmp_bfr, 0);
 	    Tfds.Eq_str_lines(expd, tmp_bfr.Mkr_rls().XtoStrAndClear());
 	}
 	public void Test_xwiki_links(String ttl, String... expd) {

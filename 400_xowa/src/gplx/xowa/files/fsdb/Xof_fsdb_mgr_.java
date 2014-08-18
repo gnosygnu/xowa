@@ -46,7 +46,7 @@ public class Xof_fsdb_mgr_ {
 			case Xof_wiki_orig_wkr_.Tid_missing_qry:
 			case Xof_wiki_orig_wkr_.Tid_missing_bin:	return;	// already missing; do not try to find again
 		}
-		if (itm.Lnki_ext().Id_is_audio() && exec_tid != Xof_exec_tid.Tid_viewer_app) {	// NOTE: was audio_strict, but v2 always redefines .ogg as .ogv; DATE:2014-02-02
+		if (Is_not_viewable(exec_tid, itm.Lnki_ext())) {	// NOTE: was audio_strict, but v2 always redefines .ogg as .ogv; DATE:2014-02-02
 			itm.Rslt_qry_(Xof_qry_wkr_.Tid_noop);
 			return;
 		}
@@ -57,7 +57,7 @@ public class Xof_fsdb_mgr_ {
 				return;
 			}
 			byte orig_wiki = repo_pair.Repo_id();	// NOTE: should be itm.Orig_repo, but throws null refs
-			if (itm.Lnki_ext().Id_is_audio() && exec_tid != Xof_exec_tid.Tid_viewer_app) {	// NOTE: was audio_strict, but v2 always redefines .ogg as .ogv; DATE:2014-02-02
+			if (Is_not_viewable(exec_tid, itm.Lnki_ext())) {
 				itm.Rslt_qry_(Xof_qry_wkr_.Tid_mock);
 				itm.Rslt_bin_(Xof_bin_wkr_.Tid_noop);
 				fsdb_mgr.Reg_insert(itm, orig_wiki, Xof_wiki_orig_wkr_.Tid_noop);
@@ -74,13 +74,19 @@ public class Xof_fsdb_mgr_ {
 				usr_dlg.Warn_many("", "", "file not found: page=~{0} file=~{1} width=~{2}", page.Url().Xto_full_str_safe(), String_.new_utf8_(itm.Lnki_ttl()), itm.Lnki_w());
 				itm.Rslt_bin_(Xof_bin_wkr_.Tid_not_found);
 				fsdb_mgr.Reg_insert(itm, orig_wiki, Xof_wiki_orig_wkr_.Tid_missing_bin);
-//					gplx.xowa.files.gui.Js_img_mgr.Update_img_missing(usr_dlg, itm.Html_uid());
+				// gplx.xowa.files.gui.Js_img_mgr.Update_img_missing(usr_dlg, itm.Html_uid());	// TODO: update caption with "" if image is missing
 			}
 		}
 		else {
 			fsdb_mgr.Reg_insert(itm, Xof_repo_itm.Repo_unknown, Xof_wiki_orig_wkr_.Tid_missing_qry);
-//				gplx.xowa.files.gui.Js_img_mgr.Update_img_missing(usr_dlg, itm.Html_uid());
+				// gplx.xowa.files.gui.Js_img_mgr.Update_img_missing(usr_dlg, itm.Html_uid());	// TODO: update caption with "" if image is missing
 		}
+	}
+	private static boolean Is_not_viewable(byte exec_tid, Xof_ext ext) {
+		return	exec_tid != Xof_exec_tid.Tid_viewer_app		// only apply logic if !Tid_viewer_app; note that if Tid_viewer_app, then user clicked on file, so return true;
+				&&	(	ext.Id_is_audio()					// NOTE: was audio_strict, but v2 always redefines .ogg as .ogv; DATE:2014-02-02
+					||	ext.Id() == Xof_ext_.Id_unknown		// ignore unknown exts, else will download needlessly when viewing page; EX: .wav before .wav was registered; PAGE:pl.s:Śpiąca_królewna_(Oppman); DATE:2014-08-17
+					);
 	}
 	private Xof_img_size img_size = new Xof_img_size();
 	private void Itm_process(Xof_fsdb_mgr fsdb_mgr, Io_url file_dir, Gfo_usr_dlg usr_dlg, Xof_fsdb_itm itm, ListAdp fsdb_list, Xow_repo_mgr repo_mgr, Xof_url_bldr url_bldr, byte exec_tid) {

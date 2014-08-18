@@ -32,7 +32,7 @@ public class Err extends RuntimeException {
 		return rv;
 	}	@gplx.Internal protected Err() {}
 	@gplx.Internal protected static Err exc_(Exception thrown, String hdr) {
-		Err rv = hdr_(hdr);
+		Err rv = hdr_(hdr + ":" + Err_.Message_lang(thrown));	// add a better error description; DATE:2014-08-15
 		rv.inner = convert_(thrown);
 		for (int i = 0; i < rv.inner.callStack.Count(); i++) {
 			ErrProcData itm = (ErrProcData)rv.inner.callStack.FetchAt(i);

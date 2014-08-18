@@ -229,14 +229,17 @@ public class Scrib_regx_converter {
 	;
 	public static final byte[] Anchor_null = null, Anchor_G = Bry_.new_ascii_("\\G"), Anchor_pow = Bry_.new_ascii_("^");
 	private void Init() {
-		Init_itm(Bool_.Y, "d", "\\p{Nd}");
+		// REF:tchrist@http://stackoverflow.com/questions/4304928/unicode-equivalents-for-w-and-b-in-java-regular-expressions; PAGE:pl.w:Benjamin_Franklin DATE:2014-08-13			
+				String regx_w = "[\\pL\\pM\\p{Nd}\\p{Nl}\\p{Pc}[\\p{InEnclosedAlphanumerics}&&\\p{So}]]";
+		String regx_W = "[^\\pL\\pM\\p{Nd}\\p{Nl}\\p{Pc}[\\p{InEnclosedAlphanumerics}&&\\p{So}]]";
+				Init_itm(Bool_.Y, "d", "\\p{Nd}");
 		Init_itm(Bool_.Y, "l", "\\p{Ll}");
 		Init_itm(Bool_.Y, "u", "\\p{Lu}");
 		Init_itm(Bool_.Y, "a", "\\p{L}");
 		Init_itm(Bool_.Y, "c", "\\p{Cc}");
 		Init_itm(Bool_.Y, "p", "\\p{P}");
 		Init_itm(Bool_.Y, "s", "\\s");
-		Init_itm(Bool_.Y, "w", "[\\p{L}\\p{Nd}]");
+		Init_itm(Bool_.Y, "w", regx_w);
 		Init_itm(Bool_.Y, "x", "[0-9A-Fa-f0-9A-Fa-f]");
 		Init_itm(Bool_.Y, "z", "\\x00");
 		Init_itm(Bool_.Y, "D", "\\P{Nd}");
@@ -246,12 +249,12 @@ public class Scrib_regx_converter {
 		Init_itm(Bool_.Y, "C", "\\P{Cc}");
 		Init_itm(Bool_.Y, "P", "\\P{P}");
 		Init_itm(Bool_.Y, "S", "\\S");						// JAVA: \P{Xps} not valid
-		Init_itm(Bool_.Y, "W", "[\\P{L}\\P{Nd}]");
+		Init_itm(Bool_.Y, "W", regx_W);
 		Init_itm(Bool_.Y, "X", "[^0-9A-Fa-f0-9A-Fa-f]");
 		Init_itm(Bool_.Y, "Z", "[^\\x00]");
-		Init_itm(Bool_.N, "w", "\\p{L}\\p{Nd}");
+		Init_itm(Bool_.N, "w", regx_w);
 		Init_itm(Bool_.N, "x", "0-9A-Fa-f0-9A-Fa-f");
-		Init_itm(Bool_.N, "W", "\\P{Xan}\\p{Nl}\\p{No}");	// Xan is L plus N, so ^Xan plus Nl plus No is anything that's not L or Nd
+		Init_itm(Bool_.N, "W", regx_W);
 		Init_itm(Bool_.N, "X", "\\x00-\\x2f\\x3a-\\x40\\x47-\\x60\\x67-\\x{ff0f}\\x{ff1a}-\\x{ff20}\\x{ff27}-\\x{ff40}\\x{ff47}-\\x{10ffff}");
 		Init_itm(Bool_.N, "Z", "\\x01-\\x{10ffff}");
 	}

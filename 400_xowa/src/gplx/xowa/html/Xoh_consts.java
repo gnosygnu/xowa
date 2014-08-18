@@ -17,6 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
 public class Xoh_consts {
+	public static final String
+	  Atr_xowa_title_str				= "xowa_title"
+	;
 	public static final byte[] 
 	  __end = Bry_.new_ascii_(">")
 	, __end_quote = Bry_.new_ascii_("\">")
@@ -46,6 +49,8 @@ public class Xoh_consts {
 	, Title_atr = Bry_.new_ascii_("\" title=\"")
 	, Id_atr = Bry_.new_ascii_(" id=\"")
 	, Style_atr = Bry_.new_ascii_(" style=\"")
+	, Atr_xowa_title_bry				= Bry_.new_ascii_(Atr_xowa_title_str)
 	;
+
 	public static final int Nbsp_int = 160;
 }

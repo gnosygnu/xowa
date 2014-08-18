@@ -24,7 +24,7 @@ public class Xow_ns_ {
 		, Id_user				=   2				, Id_user_talk			=   3
 		, Id_project			=   4				, Id_project_talk		=   5
 		, Id_file				=   6				, Id_file_talk			=   7
-		, Id_mediaWiki			=   8				, Id_mediaWiki_talk		=   9
+		, Id_mediawiki			=   8				, Id_mediaWiki_talk		=   9
 		, Id_template			=  10				, Id_template_talk		=  11
 		, Id_help				=  12				, Id_help_talk			=  13
 		, Id_category			=  14				, Id_category_talk		=  15
@@ -72,7 +72,7 @@ public class Xow_ns_ {
 	,	Canonical_new_(Id_project_talk,			Key_project_talk)
 	,	Canonical_new_(Id_file,					Key_file)
 	,	Canonical_new_(Id_file_talk,			Key_file_talk)
-	,	Canonical_new_(Id_mediaWiki,			Key_mediaWiki)
+	,	Canonical_new_(Id_mediawiki,			Key_mediaWiki)
 	,	Canonical_new_(Id_mediaWiki_talk,		Key_mediaWiki_talk)
 	,	Canonical_new_(Id_template,				Key_template)
 	,	Canonical_new_(Id_template_talk,		Key_template_talk)

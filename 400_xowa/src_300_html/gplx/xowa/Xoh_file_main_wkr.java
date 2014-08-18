@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.html.*;
+import gplx.xowa.html.*; import gplx.xowa.html.lnkis.*;
 import gplx.xowa.files.*;
 public class Xoh_file_main_wkr implements Bry_fmtr_arg {
 	private Xof_xfer_itm xfer_itm; private Xoh_file_main_alts alts = new Xoh_file_main_alts(); private Xoh_file_page opt; 
@@ -31,20 +31,19 @@ public class Xoh_file_main_wkr implements Bry_fmtr_arg {
 		Xof_repo_itm trg_repo = null;
 		trg_repo = meta_itm.Repo_itm(wiki);
 		if (trg_repo == null) trg_repo = wiki.File_mgr().Repo_mgr().Repos_get_at(0).Trg();
-		xfer_itm.Atrs_by_meta(meta_itm, trg_repo, Xof_repo_itm.Thumb_default_null);
-		xfer_itm.Atrs_by_orig(meta_itm.Orig_w(), meta_itm.Orig_h(), Xof_img_size.Size_null);
-
+		xfer_itm.Set__meta(meta_itm, trg_repo, Xof_repo_itm.Thumb_default_null);
+		xfer_itm.Set__orig(meta_itm.Orig_w(), meta_itm.Orig_h(), Xof_img_size.Size_null);
 		xfer_itm.Trg_repo_idx_(meta_itm.Vrtl_repo());
 
 		play_btn_icon = wiki.Html_mgr().Img_media_play_btn();
-
 		file_size_bry = Bry_.Empty;
-		if (xfer_itm.Atrs_calc_for_html(true)) {
+		if (xfer_itm.Calc_by_meta(true)) {
 			long file_size = Io_mgr._.QueryFil(xfer_itm.Trg_file(Xof_repo_itm.Mode_orig, Xof_img_size.Size_null_deprecated)).Size();
 			file_size_bry = Bry_.new_ascii_(gplx.ios.Io_size_.Xto_str(file_size));
 		}
-		else {	// NOTE: commons.wikimedia.org/wiki/File:Solar_Life_Cycle.svg would not load on subsequent views; note that "xfer_itm.Atrs_calc_for_html(true)" resizes image b/c it is .svg; DATE:2013-03-01
-			xfer_itm = Xoh_lnki_file_wtr.Queue_add_manual(queue, xfer_itm);
+		else {	// NOTE: PAGE:c:File:Solar_Life_Cycle.svg would not load on subsequent views; note that "xfer_itm.Atrs_calc_for_html(true)" resizes image b/c it is .svg; DATE:2013-03-01
+			xfer_itm = xfer_itm.Clone();
+			queue.Add(xfer_itm);
 		}
 		opt.Html_main().Bld_bfr_many(bfr, this);
 	}	private byte[] play_btn_icon; private Bool_obj_ref queue_add_ref = Bool_obj_ref.n_();
@@ -59,8 +58,9 @@ public class Xoh_file_main_wkr implements Bry_fmtr_arg {
 		if (ext.Id_is_thumbable_img())
 			opt.Html_main_img().Bld_bfr_many(bfr, xfer_itm.Orig_w(), xfer_itm.Orig_h(), xfer_itm.Html_orig_src(), file_size_bry, ext.Mime_type(), elem_id_val, xfer_itm.Html_w(), xfer_itm.Html_h(), xfer_itm.Html_view_src(), ttl.Full_txt(), wiki.App().Encoder_mgr().Url().Encode(ttl.Page_url()), alts);
 		else if (ext.Id_is_video())	// NOTE: video must precede audio else File:***.ogg will not show thumbs
-			opt.Html_main_vid().Bld_bfr_many(bfr, elem_id_val, xfer_itm.Html_view_src(), Xoh_lnki_file_wtr.Bry_class_internal, ttl.Page_db(), xfer_itm.Html_view_src(), xfer_itm.Html_w(), xfer_itm.Html_h(), Bry_.Empty, xfer_itm.Html_orig_src(), xfer_itm.Html_w(), xfer_itm.Html_w(), play_btn_icon);
+			opt.Html_main_vid().Bld_bfr_many(bfr, elem_id_val, xfer_itm.Html_view_src(), Atr_class_image, ttl.Page_db(), xfer_itm.Html_view_src(), xfer_itm.Html_w(), xfer_itm.Html_h(), Bry_.Empty, xfer_itm.Html_orig_src(), xfer_itm.Html_w(), xfer_itm.Html_w(), play_btn_icon);
 		else if (ext.Id_is_audio())
 			opt.Html_main_aud().Bld_bfr_many(bfr, xfer_itm.Html_orig_src(), ttl.Page_db(), xfer_itm.Html_w(), xfer_itm.Html_w(), play_btn_icon);
 	}
+	private static final byte[] Atr_class_image = Bry_.new_ascii_("image");
 }

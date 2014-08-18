@@ -20,7 +20,6 @@ import gplx.core.btries.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.wikis.
 import gplx.xowa.parsers.logs.*;
 public class Xop_xnde_wkr implements Xop_ctx_wkr {
 	public void Ctor_ctx(Xop_ctx ctx) {}
-	public Xob_xnde_wkr File_wkr() {return file_wkr;} public Xop_xnde_wkr File_wkr_(Xob_xnde_wkr v) {file_wkr = v; return this;} private Xob_xnde_wkr file_wkr;
 	public boolean Pre_at_bos() {return pre_at_bos;} public void Pre_at_bos_(boolean v) {pre_at_bos = v;} private boolean pre_at_bos;
 	public void Page_bgn(Xop_ctx ctx, Xop_root_tkn root) {} 
 	public void Page_end(Xop_ctx ctx, Xop_root_tkn root, byte[] src, int src_len) {this.Clear();}
@@ -632,7 +631,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 				int tag_id = tag.Id();
 				switch (tag_id) {
 					case Xop_xnde_tag_.Tid_xowa_cmd:				xnde_xtn = tkn_mkr.Xnde_xowa_cmd(); break;
-					case Xop_xnde_tag_.Tid_math:					xnde_xtn = tkn_mkr.Xnde_math(); if (file_wkr != null) file_wkr.Wkr_run(ctx, root, xnde); break;
+					case Xop_xnde_tag_.Tid_math:					xnde_xtn = tkn_mkr.Xnde_math(); break;
 					case Xop_xnde_tag_.Tid_poem:					xnde_xtn = tkn_mkr.Xnde_poem(); break;
 					case Xop_xnde_tag_.Tid_ref:						xnde_xtn = gplx.xowa.xtns.cite.References_nde.Enabled ? tkn_mkr.Xnde_ref() : null; break;
 					case Xop_xnde_tag_.Tid_references:				xnde_xtn = gplx.xowa.xtns.cite.References_nde.Enabled ? tkn_mkr.Xnde_references() : null; break;

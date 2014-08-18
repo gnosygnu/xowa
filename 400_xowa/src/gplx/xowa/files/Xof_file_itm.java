@@ -29,7 +29,7 @@ public interface Xof_file_itm {
 	int					Orig_w();
 	int					Orig_h();
 //		byte				Orig_repo();
-	boolean				File_is_orig();
+	boolean				Img_is_thumbable();
 	int					File_w();
 	int					Html_uid();
 	int					Html_w();

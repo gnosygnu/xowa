@@ -165,9 +165,38 @@ public class Imap_xnde_html_all_tst {
 		)
 		);
 	}
-	@Test  public void Tmpl() {	// PURPOSE: handle templates in caption; PAGE:en.w:Kilauea; DATE:2014-07-27
+	@Test  public void Template_image() {	// PURPOSE: handle templates in caption; PAGE:en.w:Kilauea; DATE:2014-07-27
 		fxt.Fxt().Init_page_create("Template:Test_template", "xyz");
 		fxt.Test_html_full_frag("<imagemap>File:A.png|thumb|{{Test_template}}\n</imagemap>", "xyz");
+	}
+	@Test  public void Template_shape() {	// PURPOSE: handle templates in shape; PAGE:fr.w:Arrondissements_de_Lyon DATE:2014-08-12
+		fxt.Fxt().Init_page_create("Template:B1", "<b>b1</b>");	// note that an xnde is a better example as it will throw ArrayOutOfBounds error
+		fxt.Test_html_full_str(String_.Concat_lines_nl_skip_last
+		( "<imagemap>"
+		, "File:A.png|thumb|123px|a1"
+		, "circle 0 0 5 [[B|{{b1}}]]"
+		, "desc none"
+		, "</imagemap>"
+		), String_.Concat_lines_nl_skip_last
+		( "<div class=\"thumb tright\">"
+		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:123px;\">"
+		, "    <div id='imap_div_0' class=\"noresize\">"
+		, "      <map name=\"imageMap_1_1\">"
+		, "        <area href=\"/wiki/B\" shape=\"circle\" coords=\"0,0,5\" alt=\"b1\" title=\"b1\"/>"
+		, "      </map>"
+		, "      <img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/123px.png\" width=\"123\" height=\"0\" usemap=\"#imageMap_1_1\"/>"
+		, "    </div>"
+		, "    <div class=\"thumbcaption\">"
+		, "      <div class=\"magnify\">"
+		, "        <a href=\"/wiki/File:A.png\" class=\"internal\" title=\"Enlarge\">"
+		, "          <img src=\"file:///mem/xowa/user/test_user/app/img/file/magnify-clip.png\" width=\"15\" height=\"11\" alt=\"\" />"
+		, "        </a>"
+		, "      </div>"
+		, "      a1"
+		, "    </div>"
+		, "  </div>"
+		, "</div>"
+		));
 	}
 }
 class Imap_xnde_html_fxt {

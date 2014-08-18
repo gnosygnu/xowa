@@ -70,8 +70,8 @@ public class Scrib_lib_mw__lib_tst {
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_mw.Invk_getFrameTitle, Object_.Ary("current")	, "Module:Mod_0");
 	}
 	@Test  public void GetFrameTitle_parent() {
-		fxt.Init_frame_parent("Template:Test");
-		fxt.Test_scrib_proc_str(lib, Scrib_lib_mw.Invk_getFrameTitle, Object_.Ary("parent")	, "Template:Test");
+		fxt.Init_frame_parent("Template:Test A");
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_mw.Invk_getFrameTitle, Object_.Ary("parent")	, "Template:Test A");
 	}
 	@Test  public void GetFrameTitle_empty() {
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_mw.Invk_getFrameTitle, Object_.Ary("empty")	, Scrib_invoke_func_fxt.Null_rslt);

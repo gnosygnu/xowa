@@ -19,8 +19,8 @@ package gplx.xowa.dbs; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*;
 public class Xodb_file {
 	public Xodb_file(int id, byte tid) {this.id = id; this.tid = tid;}
-	public int		Id()		{return id;} private int id;
-	public byte		Tid()		{return tid;} private byte tid;
+	public int		Id()		{return id;}			private final int id;		// unique id in xowa_db
+	public byte		Tid()		{return tid;}			private final byte tid;		// db type id
 	public Io_url	Url()		{return url;}			public Xodb_file Url_(Io_url v) {url = v; return this;}				private Io_url url;
 	public String	Url_rel()	{return url_rel;}		public Xodb_file Url_rel_(String v) {url_rel = v; return this;}		private String url_rel;
 	public long		File_len()	{return file_len;}		public Xodb_file File_len_add(int v) {file_len += v; return this;}	private long file_len;
@@ -39,7 +39,6 @@ public class Xodb_file {
 			provider.Rls();
 		}	finally {provider = null;}
 	}
-
 	public static Xodb_file load_(int id, byte tid, String url) {return new Xodb_file(id, tid).Url_rel_(url).Cmd_mode_(Db_cmd_mode.Ignore);}
 	public static Xodb_file make_(int id, byte tid, String url) {return new Xodb_file(id, tid).Url_rel_(url).Cmd_mode_(Db_cmd_mode.Create);}
 }

@@ -44,7 +44,7 @@ public class Xox_xowa_html_cmd implements Xox_xnde, Xop_xnde_atr_parser {
 		else
 			ctx.Cur_page().Html_data().Custom_html_end_concat(raw);
 	}
-	public void Xtn_write(Xoa_app app, Xoh_html_wtr html_wtr, Xoh_html_wtr_ctx opts, Xop_ctx ctx, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {}
+	public void Xtn_write(Xoa_app app, Xoh_html_wtr html_wtr, Xoh_wtr_ctx opts, Xop_ctx ctx, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {}
 	private static byte Pos_val(byte[] bry) {
 		Object o = pos_val_hash.Get_by_bry(bry);
 		if (o == null) throw Err_.new_("unknown pos:{0}", String_.new_utf8_(bry));

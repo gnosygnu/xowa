@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.imports.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.imports.*;
 import org.junit.*;
 public class Xoctg_hiddencat_ttl_wkr_tst {
-	@Before public void init() {fxt.Clear();} private Xobc_base_fxt fxt = new Xobc_base_fxt();
+	@Before public void init() {fxt.Clear();} private Xob_base_fxt fxt = new Xob_base_fxt();
 	@Test   public void Basic() {
 		fxt
 		.Init_fil("mem/xowa/wiki/en.wikipedia.org/tmp/ctg.hiddencat_sql/make/0000000000.csv", String_.Concat_lines_nl

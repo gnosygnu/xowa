@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.portal; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import gplx.xowa.wikis.*; import gplx.xowa.gui.*; import gplx.xowa.html.sidebar.*;
+import gplx.xowa.wikis.*; import gplx.xowa.gui.*; import gplx.xowa.html.sidebar.*; import gplx.xowa.pages.*;
 import gplx.xowa.apis.xowa.html.*; import gplx.xowa.apis.xowa.html.skins.*;
 public class Xow_portal_mgr implements GfoInvkAble {
 	public Xow_portal_mgr(Xow_wiki wiki) {
@@ -84,9 +84,9 @@ public class Xow_portal_mgr implements GfoInvkAble {
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();
 		byte[] read_cls = Bry_.Empty, edit_cls = Bry_.Empty, html_cls = Bry_.Empty;
 		switch (output_tid) {
-			case Xog_page_mode.Tid_read: read_cls = Cls_selected_y; break;
-			case Xog_page_mode.Tid_edit: edit_cls = Cls_selected_y; break;
-			case Xog_page_mode.Tid_html: html_cls = Cls_selected_y; break;
+			case Xopg_view_mode.Tid_read: read_cls = Cls_selected_y; break;
+			case Xopg_view_mode.Tid_edit: edit_cls = Cls_selected_y; break;
+			case Xopg_view_mode.Tid_html: html_cls = Cls_selected_y; break;
 		}
 		div_view_fmtr.Bld_bfr_many(tmp_bfr, read_cls, edit_cls, html_cls, search_text);
 		return tmp_bfr.Mkr_rls().XtoAryAndClear();

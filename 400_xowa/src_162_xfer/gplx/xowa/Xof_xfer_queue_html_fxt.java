@@ -43,7 +43,7 @@ public class Xof_xfer_queue_html_fxt extends Xof_xfer_queue_base_fxt {
 		this.Api_size().Ini(wiki_key, ttl_str, redirect_str, orig_w, orig_h, pass);
 		return this;
 	}
-	public void tst() {
+	@gplx.Virtual public void tst() {
 		Xow_wiki wiki = this.En_wiki();
 		ini_src_fils();
 		wiki.App().File_mgr().Download_mgr().Enabled_(true);

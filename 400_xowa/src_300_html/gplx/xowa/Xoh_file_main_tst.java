@@ -105,8 +105,8 @@ class Xoh_fil_main_fxt {
 	public void tst(String expd) {
 		byte[] ttl_bry = Bry_.new_utf8_(ttl_str);
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry);
-		file.Atrs_by_html_for_tests(html_w, html_h, Bry_.new_utf8_(html_src), Bry_.new_utf8_(html_orig_src));
-		file.Atrs_by_ttl(ttl_bry, Bry_.Empty);
+		file.Init_for_test__img(html_w, html_h, Bry_.new_utf8_(html_src), Bry_.new_utf8_(html_orig_src));
+		file.Set__ttl(ttl_bry, Bry_.Empty);
 		wkr.Bld_html(wiki, bfr, file, ttl, opt, Bry_.XtoStrBytesByInt(html_file_size, 0), play_btn_icon, 0);	// TEST: must pass in elem_val b/c test only uses 2nd Bld_html while app uses 1st
 		Tfds.Eq_str_lines(expd, bfr.XtoStrAndClear());
 	}	static final byte[] play_btn_icon = Bry_.new_ascii_("file:///mem/xowa/user/test_user/app/img/file/play.png");

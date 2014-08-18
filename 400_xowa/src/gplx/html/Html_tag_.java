@@ -19,6 +19,7 @@ package gplx.html; import gplx.*;
 public class Html_tag_ {
 	public static final byte[]
 	  Ul_name_bry		= Bry_.new_ascii_("ul")
+	, A_name_bry		= Bry_.new_ascii_("a")
 	;
 	public static final byte[]
 	  Br_inl					= Bry_.new_ascii_("<br/>")
@@ -27,6 +28,7 @@ public class Html_tag_ {
 	, B_lhs						= Bry_.new_ascii_("<b>")			, B_rhs						= Bry_.new_ascii_("</b>")
 	, I_lhs						= Bry_.new_ascii_("<i>")			, I_rhs						= Bry_.new_ascii_("</i>")
 	, P_lhs						= Bry_.new_ascii_("<p>")			, P_rhs						= Bry_.new_ascii_("</p>")
+	, Div_lhs					= Bry_.new_ascii_("<div>")			, Div_rhs					= Bry_.new_ascii_("</div>")
 	, Html_rhs					= Bry_.new_ascii_("</html>")
 	, Head_lhs_bgn				= Bry_.new_ascii_("<head")
 	, Head_rhs					= Bry_.new_ascii_("</head>")
@@ -36,9 +38,11 @@ public class Html_tag_ {
 	, Script_lhs_w_type			= Bry_.new_ascii_("<script type='text/javascript'>")
 	, Script_rhs				= Bry_.new_ascii_("</script>")
 	;
+
 	public static final String 
-	  Comm_bgn_str = "<!--"
-	, Comm_end_str = "-->"
+	  Comm_bgn_str				= "<!--"
+	, Comm_end_str				= "-->"
+	, Anchor_str				= "#"
 	;
 	public static final byte[]
 	  Comm_bgn = Bry_.new_ascii_(Comm_bgn_str), Comm_end = Bry_.new_ascii_(Comm_end_str)

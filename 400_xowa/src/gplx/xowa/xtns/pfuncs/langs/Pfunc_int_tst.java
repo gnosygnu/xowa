@@ -27,6 +27,10 @@ public class Pfunc_int_tst {
 		fxt.Init_msg_gfs("tst_msg", "{{#expr:1}}", false, true);
 		fxt.Test_parse_en("{{int:tst_msg}}", "1");
 	}
+	@Test  public void Tmpl_html_entity() {	// PURPOSE: check that &nbsp; is swapped out correctly for (194,160); PAGE:fr.s:Main_Page DATE:2014-08-17
+		fxt.Init_msg_gfs("tst_msg", "A&nbsp;B", false, true);
+		fxt.Test_parse_en("{{int:tst_msg}}", "A B");	// NOTE: &nbsp;
+	}
 	@Test  public void Lang_current_defaults_to_en() {	// PURPOSE: specifying same language as current returns same; ie: int:january/en -> int:january
 		fxt.Test_parse_en("{{int:january/en}}", "January");
 	}

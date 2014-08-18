@@ -23,7 +23,7 @@ public class Xot_defn_tmpl_ {
 		Xow_wiki wiki = ctx.Wiki();
 		Xot_invk_temp rv = new Xot_invk_temp(orig.Defn_tid(), orig_src, orig.Name_tkn(), caller.Src_bgn(), caller.Src_end());
 		frame_ttl = wiki.Lang().Case_mgr().Case_reuse_1st_upper(frame_ttl);	// NOTE: always uppercase 1st; EX:{{navbox -> "Template:Navbox"; PAGE:en.w:Achilles DATE:2014-06-21
-		rv.Frame_ttl_(wiki.Ns_mgr().Ns_template().Gen_ttl(frame_ttl));		// NOTE: always prepend "Template:" to frame_ttl; DATE:2014-06-13
+		rv.Frame_ttl_(wiki.Ns_mgr().Ns_template().Gen_ttl(Xoa_ttl.Replace_unders(frame_ttl)));		// NOTE: always prepend "Template:" to frame_ttl; DATE:2014-06-13; NOTE: always use spaces; DATE:2014-08-14
 		int orig_args_len = orig.Args_len();
 		boolean tmpl_args_parsing_orig = ctx.Tmpl_args_parsing();
 		ctx.Tmpl_args_parsing_(true);

@@ -108,13 +108,4 @@ EX_1: view is 120,40 (3:1)
 EX_2: view is 120,80 (1.5:1)
 - (a) 120,60 or (b) 160,80
 - (a) 120,60
-
-NOTE_3:Lnki_thumbable
-. false only if following form
-[[A.png]]		-> must get orig
-. true in almost all other cases, especially if (a) type is thumb; (b) size exists; (c) upright;
-. basically, indicates that image will be stored on wmf server as "/thumb/" url
-[[A.png|thumb]] -> default to 220 and check for 220px
-[[A.png|40px]]  -> check for 40px
-[[A.png|x40px]] -> calc n width and check for npx
 */

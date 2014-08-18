@@ -21,7 +21,7 @@ public class Xof_math_html_wtr {
 	private Xof_math_itm tmp_math_itm = new Xof_math_itm();
 	private Bry_fmtr math_fmtr_latex		= Bry_fmtr.new_("<img id='xowa_math_img_~{math_idx}' src='' width='' height=''/><span id='xowa_math_txt_~{math_idx}'>~{math_text}</span>", "math_idx", "math_text");
 	private Bry_fmtr math_fmtr_mathjax	= Bry_fmtr.new_("<span id='xowa_math_txt_~{math_idx}'>~{math_text}</span>", "math_idx", "math_text");
-	public void Write(Xoh_html_wtr wtr, Xop_ctx ctx, Xoh_html_wtr_ctx opts, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {
+	public void Write(Xoh_html_wtr wtr, Xop_ctx ctx, Xoh_wtr_ctx opts, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {
 		Xoa_app app = ctx.App(); Xow_wiki wiki = ctx.Wiki(); Xoa_page page = ctx.Cur_page();
 		boolean renderer_is_latex = !app.File_mgr().Math_mgr().Renderer_is_mathjax();
 		byte[] math_bry = Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn());

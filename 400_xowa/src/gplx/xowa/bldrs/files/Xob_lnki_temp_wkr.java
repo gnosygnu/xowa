@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.dbs.tbls.*;
+import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.dbs.tbls.*; import gplx.xowa.pages.*;
 import gplx.xowa.wikis.*;
 import gplx.xowa.bldrs.oimgs.*; import gplx.fsdb.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.gui.*;
 import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.parsers.logs.*;
@@ -47,7 +47,7 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xop_lnki_log
 	}
 	@Override protected void Cmd_bgn_end() {
 		wiki_ns_file_is_case_match_all = Wiki_ns_for_file_is_case_match_all(wiki);	// NOTE: must call after wiki.init
-		wiki.Html_mgr().Page_wtr_mgr().Wkr(Xog_page_mode.Tid_read).Ctgs_enabled_(false);	// disable categories else progress messages written (also for PERF)
+		wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_view_mode.Tid_read).Ctgs_enabled_(false);	// disable categories else progress messages written (also for PERF)
 		commons_wiki = app.Wiki_mgr().Get_by_key_or_make(Xow_wiki_.Domain_commons_bry);
 		Xop_log_mgr log_mgr = ctx.App().Log_mgr();
 		log_mgr.Log_dir_(wiki.Fsys_mgr().Root_dir());	// put log in wiki dir, instead of user.temp
@@ -86,7 +86,7 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xop_lnki_log
 			parser.Parse_page_all_clear(root, ctx, ctx.Tkn_mkr(), page_src);
 			if (gen_html) {
 				page.Root_(root);
-				wiki.Html_mgr().Page_wtr_mgr().Gen(ctx.Cur_page(), gplx.xowa.gui.Xog_page_mode.Tid_read);
+				wiki.Html_mgr().Page_wtr_mgr().Gen(ctx.Cur_page(), Xopg_view_mode.Tid_read);
 			}
 			root.Clear();
 		}

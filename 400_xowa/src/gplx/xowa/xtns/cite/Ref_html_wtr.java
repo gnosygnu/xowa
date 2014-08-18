@@ -21,7 +21,7 @@ public class Ref_html_wtr {
 	public Ref_html_wtr(Xow_wiki wiki) {
 		cfg = Ref_html_wtr_cfg.new_();
 	}
-	public void Xnde_ref(Xoh_html_wtr_ctx opts, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {
+	public void Xnde_ref(Xoh_wtr_ctx opts, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {
 		Ref_nde itm = (Ref_nde)xnde.Xnde_xtn();
 		if (itm == null) return;
 		if (itm.Follow_y()) return;	// NOTE: "follow" is always appended to preceding ref; will never generate its own ^ a  
@@ -63,7 +63,7 @@ public class Ref_html_wtr {
 		}
 		return rv;
 	}
-	public void Xnde_references(Xoh_html_wtr wtr, Xop_ctx ctx, Xoh_html_wtr_ctx opts, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {
+	public void Xnde_references(Xoh_html_wtr wtr, Xop_ctx ctx, Xoh_wtr_ctx opts, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {
 		References_nde references = (References_nde)xnde.Xnde_xtn();
 		Ref_itm_lst lst = ctx.Cur_page().Ref_mgr().Lst_get(references.Group(), references.List_idx());	// get group; EX: <references group="note"/>
 		if (lst == null) return;	// NOTE: possible to have a grouped references without references; EX: Infobox planet; <references group=note> in sidebar, but no refs 

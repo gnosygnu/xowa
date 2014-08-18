@@ -136,7 +136,7 @@ class Swt_html implements Gxw_html, Swt_control, FocusListener {
 	private String Eval_script_as_str(String script) 	{return (String)Eval_script(script);}
 	public Object Eval_script(String script) {
 		eval_rslt.Clear();
-		try 				{
+		try {
 			eval_rslt.Result_set(browser.evaluate(script));
 			return eval_rslt.Result();
 		}

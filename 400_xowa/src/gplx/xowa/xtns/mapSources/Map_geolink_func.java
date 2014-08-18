@@ -48,19 +48,13 @@ public class Map_geolink_func extends Pf_func_base {
 			Map_math mer_y_math = new Map_math();
 			boolean mer_x_pass = mer_x_math.Ctor(mer_x_val, prec, Map_math.Dir_lat_bry, 2);
 			boolean mer_y_pass = mer_y_math.Ctor(mer_y_val, prec, Map_math.Dir_long_bry, 2);
-			if (!mer_x_pass) {
-				mer_x_math.Fail(ctx, src, self, bfr, this.Name());
-				return;
-			}
-			if (!mer_y_pass) {
-				mer_y_math.Fail(ctx, src, self, bfr, this.Name());
-				return;
-			}
+			if (!mer_x_pass) mer_x_math.Fail(ctx, src, self, bfr, this.Name());				
+			if (!mer_y_pass) mer_y_math.Fail(ctx, src, self, bfr, this.Name());
 			Object[] args = new Object[6];
 			args[0] = Xto_coord(tmp_bfr, mer_x_math, mer_x_pass, mer_x_math.Coord_dir_ns(), Bry_arg_0_fail);
 			args[1] = Xto_coord(tmp_bfr, mer_y_math, mer_y_pass, mer_y_math.Coord_dir_ew(), Bry_arg_1_fail);
-			args[2] = Xto_dms(mer_x_math, mer_x_pass, mer_x_pos, mer_x_neg);
-			args[3] = Xto_dms(mer_y_math, mer_y_pass, mer_y_pos, mer_y_neg);
+			args[2] = Xto_dms(ctx, mer_x_math, mer_x_pass, mer_x_pos, mer_x_neg);
+			args[3] = Xto_dms(ctx, mer_y_math, mer_y_pass, mer_y_pos, mer_y_neg);
 			args[4] = Xto_dec(tmp_bfr, mer_x_math, mer_x_pass);
 			args[5] = Xto_dec(tmp_bfr, mer_y_math, mer_y_pass);
 			bfr.Add(Xol_msg_itm_.eval_(tmp_bfr, tmp_msg_itm, pattern, args));
@@ -73,10 +67,10 @@ public class Map_geolink_func extends Pf_func_base {
 			: or
 			;
 	}
-	private static byte[] Xto_dms(Map_math math, boolean pass, byte[] pos, byte[] neg) {
+	private static byte[] Xto_dms(Xop_ctx ctx, Map_math math, boolean pass, byte[] pos, byte[] neg) {
 		return pass
 			? math.Get_dms(pos, neg)
-			: Bry_.Empty		// mapsources-math-incorrect-input
+			: ctx.Wiki().Msg_mgr().Val_by_key_obj("mapsources-math-incorrect-input")
 			;
 	}
 	private static byte[] Xto_dec(Bry_bfr bfr, Map_math math, boolean pass) {

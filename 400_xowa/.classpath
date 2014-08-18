@@ -12,7 +12,6 @@
 	<classpathentry kind="src" path="src_162_xfer"/>
 	<classpathentry kind="src" path="src_200_bldr"/>
 	<classpathentry kind="src" path="src_210_bldr_core"/>
-	<classpathentry kind="src" path="src_220_bldr_file"/>
 	<classpathentry kind="src" path="src_240_install"/>
 	<classpathentry kind="src" path="src_300_html"/>
 	<classpathentry kind="src" path="src_310_url"/>

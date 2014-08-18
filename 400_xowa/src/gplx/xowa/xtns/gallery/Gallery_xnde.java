@@ -26,7 +26,7 @@ public class Gallery_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 	public int Itm_h()						{return itm_h;} private int itm_h = Null;
 	public int Itms_per_row()				{return itms_per_row;} private int itms_per_row = Null;
 	public boolean Show_filename()				{return show_filename;} private boolean show_filename = false;
-	public byte[] Atr_caption()				{return atr_caption;} private byte[] atr_caption = Null_bry;
+	public byte[] Atr_caption()				{return atr_caption;} private byte[] atr_caption = Bry_.Empty;
 	public byte[] Atr_style()				{return atr_style;} private byte[] atr_style = Bry_.Empty;
 	public byte[] Atr_cls()					{return atr_cls;} private byte[] atr_cls = Bry_.Empty;
 	public ListAdp Atrs_other()				{return atrs_other;} private ListAdp atrs_other;
@@ -45,7 +45,7 @@ public class Gallery_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 				case Gallery_xnde_atrs.Widths_tid:			itm_w = xatr.Val_as_int_or(src, Null); break;
 				case Gallery_xnde_atrs.Heights_tid:			itm_h = xatr.Val_as_int_or(src, Null); break;
 				case Gallery_xnde_atrs.Showfilename_tid:	show_filename = xatr.Val_as_bool(src); break;
-				case Gallery_xnde_atrs.Caption_tid:			atr_caption = xatr.Val_as_bry(src); break;
+				case Gallery_xnde_atrs.Caption_tid:			if (!xatr.Tid_is_key_only()) atr_caption = xatr.Val_as_bry(src); break;	// NOTE: do not create caption for key only; EX:<gallery caption=> PAGE:fr.w:Chronologie_du_si�ge_de_Paris_(1870); DATE:2014-08-15
 				case Gallery_xnde_atrs.Style_tid:			atr_style = xatr.Val_as_bry(src); break;
 				case Gallery_xnde_atrs.Class_tid:			atr_cls = xatr.Val_as_bry(src); break;
 			}
@@ -69,7 +69,7 @@ public class Gallery_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 			wiki.App().Usr_dlg().Warn_many("", "", "failed to write gallery; src=~{0} err=~{1}", String_.new_utf8_(src, xnde.Src_bgn(), xnde.Src_end()), Err_.Message_gplx(exc));
 		}
 	}	public static Xop_log_basic_wkr Log_wkr = Xop_log_basic_wkr.Null;
-	public void Xtn_write(Xoa_app app, Xoh_html_wtr html_wtr, Xoh_html_wtr_ctx opts, Xop_ctx ctx, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {
+	public void Xtn_write(Xoa_app app, Xoh_html_wtr html_wtr, Xoh_wtr_ctx opts, Xop_ctx ctx, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {
 		Xow_wiki wiki = ctx.Wiki();
 		try {
 			if (html_wtr_v1)
@@ -101,7 +101,6 @@ public class Gallery_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 		gallery_mgr.Init(itms_per_row, this.Itm_w_or_default(), this.Itm_h_or_default());
 	}
 	public static final int Default = 120, Null = -1;
-	public static final byte[] Null_bry = null;
 }
 class Gallery_xnde_atrs {
 	public static final byte 

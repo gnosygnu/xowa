@@ -37,7 +37,7 @@ public class Xob_page_sql extends Xob_itm_basic_base implements Xobd_wkr, GfoInv
 		db_mgr = wiki.Db_mgr_as_sql();
 		db_mgr.Data_storage_format_(data_storage_format);
 		fsys_mgr = db_mgr.Fsys_mgr();
-		page_provider = fsys_mgr.Page_provider();
+		page_provider = fsys_mgr.Provider_page();
 		page_stmt = db_mgr.Tbl_page().Insert_stmt(page_provider);
 		page_provider.Txn_mgr().Txn_bgn_if_none();
 		text_stmts_mgr = new Xob_text_stmts_mgr(db_mgr, fsys_mgr);
@@ -79,12 +79,12 @@ public class Xob_page_sql extends Xob_itm_basic_base implements Xobd_wkr, GfoInv
 		Xow_ns_mgr ns_mgr = wiki.Ns_mgr();
 		db_mgr.Tbl_site_stats().Update(page_count_main, page_count_all, ns_mgr.Ns_file().Count());	// save page stats
 		db_mgr.Tbl_xowa_ns().Insert(ns_mgr);														// save ns
-		db_mgr.Tbl_xowa_db().Commit_all(page_provider, db_mgr.Fsys_mgr().Ary());					// save dbs; note that dbs can be saved again later
+		db_mgr.Tbl_xowa_db().Commit_all(page_provider, db_mgr.Fsys_mgr().Files_ary());				// save dbs; note that dbs can be saved again later
 		db_mgr.Tbl_xowa_cfg().Insert_str(Xodb_mgr_sql.Grp_wiki_init, "props.modified_latest", modified_latest.XtoStr_fmt(DateAdp_.Fmt_iso8561_date_time));
 		if (idx_mode.Tid_is_end()) Idx_create();
 	}
 	private void Idx_create() {
-		fsys_mgr.Index_create(usr_dlg, Byte_.Ary(Xodb_file_tid_.Tid_core, Xodb_file_tid_.Tid_text), Idx_page_title, Idx_page_random);
+		fsys_mgr.Index_create(usr_dlg, Byte_.Ary(Xodb_file_tid.Tid_core, Xodb_file_tid.Tid_text), Idx_page_title, Idx_page_random);
 	}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_txn_commit_interval_))		txn_commit_interval = m.ReadInt("v");
@@ -130,12 +130,12 @@ class Xob_text_stmts_mgr {
 	Xodb_file File_get(int file_idx, int text_len) {
 		if (file_idx == Xow_ns.Bldr_file_idx_heap) {
 			file_idx = fsys_mgr.Tid_text_idx();
-			Xodb_file file = fsys_mgr.Get_or_make(Xodb_file_tid_.Tid_text, file_idx);
+			Xodb_file file = fsys_mgr.Get_or_make(Xodb_file_tid.Tid_text, file_idx);
 			long file_len = file.File_len();
 			long file_max = fsys_mgr.Tid_text_max();
 			if (file_max != Xodb_fsys_mgr.Heap_max_infinite && (file_len + text_len > file_max)) {	// file is "full"
 				file.Provider().Txn_mgr().Txn_end_all();	// close txn
-				file = fsys_mgr.Make(Xodb_file_tid_.Tid_text);
+				file = fsys_mgr.Make(Xodb_file_tid.Tid_text);
 				file_idx = file.Id();
 				fsys_mgr.Tid_text_idx_(file_idx);
 			}
@@ -143,7 +143,7 @@ class Xob_text_stmts_mgr {
 			return file;
 		}
 		else
-			return fsys_mgr.Get_or_make(Xodb_file_tid_.Tid_text, file_idx);
+			return fsys_mgr.Get_or_make(Xodb_file_tid.Tid_text, file_idx);
 	}
 	private void Add(Db_stmt stmt, int stmt_idx) {
 		int new_len = stmt_idx + 1;

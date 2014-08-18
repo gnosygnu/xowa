@@ -49,7 +49,7 @@ public class Gallery_mgr_packed_base extends Gallery_mgr_base {
 	@Override public void Adjust_image_parameters(Xof_xfer_itm xfer_itm) {
 		int w = (int)(xfer_itm.Html_w() / Scale_factor);
 		int h = (int)(xfer_itm.Html_h() / Scale_factor);
-		xfer_itm.Init_xfer_html_size(w, h);
+		xfer_itm.Set__html_size(w, h);
 	}
 	public static final double Scale_factor = 1.5d;	// We artificially have 1.5 the resolution neccessary so that we can scale it up by that much on the client side, without worrying about requesting a new image.
 	private static final int Scale_factor_x_60 = (int)(Scale_factor * 60);

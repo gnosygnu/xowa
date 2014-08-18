@@ -85,9 +85,9 @@ public class Xof_fsdb_itm {
 			lnki_type_as_mode = file_is_orig ? Xof_repo_itm.Mode_orig : Xof_repo_itm.Mode_thumb;
 		}
 	}
-	public void			Html__init(Xow_repo_mgr repo_mgr, Xof_url_bldr url_bldr, Xof_img_size img_size, byte exec_tid) {
+	public void			Html__init(Xow_repo_mgr repo_mgr, Xof_url_bldr url_bldr, Xof_img_size img_size, byte exec_tid) {this.Html__init(repo_mgr.Repos_get_by_wiki(orig_wiki).Trg(), url_bldr, img_size, exec_tid);}
+	public void			Html__init(Xof_repo_itm repo, Xof_url_bldr url_bldr, Xof_img_size img_size, byte exec_tid) {
 		Html_size_calc(img_size, exec_tid);
-		Xof_repo_itm repo = repo_mgr.Repos_get_by_wiki(orig_wiki).Trg();
 		byte[] name_bry = Bry_.Len_eq_0(orig_redirect) ? lnki_ttl : orig_redirect; 
 		if (!lnki_ext.Id_is_media() && lnki_thumbtime != Xof_doc_thumb.Null)	// file is not media, but has thumbtime; this check can't be moved to Lnki_thumbtime_() b/c it needs ext
 			lnki_thumbtime = Xof_doc_thumb.Null;								// set thumbtime to null; needed else url will reference thumbtime; PAGE:en.w:Moon; EX:[[File:Lunar libration with phase Oct 2007 450px.gif|thumbtime=0:02]]; DATE:2014-07-20

@@ -64,7 +64,7 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 		page.Pages_recursed_(false);
 		full_bfr.Mkr_rls();
 	}
-	public void Xtn_write(Xoa_app app, Xoh_html_wtr html_wtr, Xoh_html_wtr_ctx opts, Xop_ctx ctx, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {
+	public void Xtn_write(Xoa_app app, Xoh_html_wtr html_wtr, Xoh_wtr_ctx opts, Xop_ctx ctx, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {
 		if (xtn_literal)
 			Xox_mgr_base.Xtn_write_escape(app, bfr, src, xnde);
 		else {
@@ -132,7 +132,7 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 	private byte[] Get_caption(Bry_bfr full_bfr, byte[] index_page_src, Xop_lnki_tkn lnki) {
 		byte[] rv = Bry_.Empty;
 		try {
-			wiki.Html_mgr().Html_wtr().Write_tkn(full_bfr, ctx, Xoh_html_wtr_ctx.Basic, index_page_src, null, -1, lnki.Caption_tkn());
+			wiki.Html_mgr().Html_wtr().Write_tkn(full_bfr, ctx, Xoh_wtr_ctx.Basic, index_page_src, null, -1, lnki.Caption_tkn());
 			rv = full_bfr.XtoAryAndClear();
 		}
 		catch (Exception e) {
@@ -160,7 +160,7 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 				Xop_lnki_tkn main_lnki = (Xop_lnki_tkn)main_lnkis.FetchAt(i);
 				if (page_ttl.Eq_full_db(main_lnki.Ttl())) {
 					Xoa_page old_page = ctx.Cur_page();
-					wiki.Html_mgr().Html_wtr().Init_by_page(ctx, ctx.Cur_page());
+					wiki.Html_mgr().Html_wtr().Init_by_page(ctx, Xoh_wtr_ctx.Basic, index_page_src, ctx.Cur_page());	// HACK: should not reuse html_wtr, but should be safe to use during parse (not html_gen)
 					if (toc_cur == null)	// do not set if "current" is specified, even if "blank" specified; EX: current=''
 						toc_cur = Make_lnki(full_bfr, index_page_src, main_lnki);
 					if (toc_prv == null		// do not set if "prev" is specified
@@ -169,7 +169,7 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 					if (toc_nxt == null		// do not set if "next" is specified
 						&& i + 1 < main_lnkis_len)
 						toc_nxt = Make_lnki(full_bfr, index_page_src, (Xop_lnki_tkn)main_lnkis.FetchAt(i + 1));
-					wiki.Html_mgr().Html_wtr().Init_by_page(ctx, old_page);
+					wiki.Html_mgr().Html_wtr().Init_by_page(ctx, Xoh_wtr_ctx.Basic, index_page_src, old_page);
 					break;
 				}
 			}

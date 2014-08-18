@@ -75,13 +75,6 @@ public class Xob_cmd_mgr implements GfoInvkAble {
 		else if	(String_.Eq(cmd_key, Xobc_core_decompress_bz.KEY))			return Add(new Xobc_core_decompress_bz(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xobc_deploy_zip.KEY))					return Add(new Xobc_deploy_zip(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xobc_deploy_copy.KEY))					return Add(new Xobc_deploy_copy(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xobc_parse_dump_templates.KEY))		return Xml_rdr_direct_add(wiki, new Xobc_parse_dump_templates(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xobc_parse_run.KEY))					return Add(new Xobc_parse_run(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xobc_img_dump_ttl.KEY))				return Xml_rdr_direct_add(wiki, new Xobc_img_dump_ttl(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xobc_img_merge_ttl_sql.KEY))			return Add(new Xobc_img_merge_ttl_sql(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xobc_img_prep_xfer.KEY))				return Add(new Xobc_img_prep_xfer(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xobc_img_run_xfer.KEY))				return Add(new Xobc_img_run_xfer(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xobc_math_run.KEY))					return Add(new Xobc_math_run(bldr, wiki));
 		else 																throw Err_.unhandled(cmd_key);
 	}
 	private Xobd_wkr Xml_rdr_direct_add(Xow_wiki wiki, Xobd_wkr wkr) {

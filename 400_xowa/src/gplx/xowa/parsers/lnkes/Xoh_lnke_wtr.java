@@ -20,7 +20,7 @@ import gplx.xowa.html.*; import gplx.xowa.net.*;
 public class Xoh_lnke_wtr {
 	private Xoa_app app;
 	public Xoh_lnke_wtr(Xow_wiki wiki) {this.app = wiki.App();}
-	public void Write_all(Bry_bfr bfr, Xoh_html_wtr html_wtr, Xoh_html_wtr_ctx hctx, Xop_ctx ctx, byte[] src, Xop_lnke_tkn lnke) {
+	public void Write_all(Bry_bfr bfr, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_ctx ctx, byte[] src, Xop_lnke_tkn lnke) {
 		int lnke_bgn = lnke.Lnke_bgn(), lnke_end = lnke.Lnke_end(); boolean proto_is_xowa = lnke.Proto_tid() == Xoo_protocol_itm.Tid_xowa;
 		if (!hctx.Mode_is_alt()) {		// write href, unless mode is alt
 			bfr.Add(Xoh_consts.A_bgn);
@@ -64,7 +64,7 @@ public class Xoh_lnke_wtr {
 			return false;
 		}
 	}
-	public void Write_caption(Bry_bfr bfr, Xoh_html_wtr html_wtr, Xoh_html_wtr_ctx hctx, Xop_ctx ctx, byte[] src, Xop_lnke_tkn lnke, int lnke_bgn, int lnke_end, boolean proto_is_xowa) {
+	public void Write_caption(Bry_bfr bfr, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_ctx ctx, byte[] src, Xop_lnke_tkn lnke, int lnke_bgn, int lnke_end, boolean proto_is_xowa) {
 		int subs_len = lnke.Subs_len();
 		if (subs_len == 0) {																			// no text; auto-number; EX: "[1]"
 			if (lnke.Lnke_typ() == Xop_lnke_tkn.Lnke_typ_text)

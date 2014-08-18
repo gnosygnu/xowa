@@ -67,7 +67,7 @@ public class Xop_languages_xnde implements Xox_xnde {
 		rv.SortBy(Xol_lang_itm_sorter_by_key._);
 		return rv;
 	}
-	public void Xtn_write(Xoa_app app, Xoh_html_wtr html_wtr, Xoh_html_wtr_ctx opts, Xop_ctx ctx, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {
+	public void Xtn_write(Xoa_app app, Xoh_html_wtr html_wtr, Xoh_wtr_ctx opts, Xop_ctx ctx, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {
 		if (langs.Count() == 0) return; // no langs; don't write anything;
 		fmtr_mgr_itms.Init(langs, ctx.Wiki(), root_ttl, ctx.Cur_page().Lang().Key_bry());
 		fmtr_all.Bld_bfr_many(bfr, "Other languages", fmtr_mgr_itms);

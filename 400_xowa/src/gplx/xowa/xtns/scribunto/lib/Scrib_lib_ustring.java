@@ -59,14 +59,14 @@ public class Scrib_lib_ustring implements Scrib_lib {
 			boolean found = pos != Bry_.NotFound;
 			return found 
 				? rslt.Init_many_objs(pos + Scrib_lib_ustring.Base1, pos + Scrib_lib_ustring.Base1 + String_.Len(regx) - Scrib_lib_ustring.End_adj)
-				: rslt.Init_empty()
+				: rslt.Init_ary_empty()
 				;
 		}
 		regx = regx_converter.Parse(Bry_.new_utf8_(regx), Scrib_regx_converter.Anchor_G);
 		RegxAdp regx_adp = Scrib_lib_ustring.RegxAdp_new_(core.Ctx(), regx);
 		RegxMatch[] regx_rslts = regx_adp.Match_all(text, bgn);	// NOTE: MW calculates an offset to handle mb strings. however, java's regex always takes offset in chars (not bytes like PHP preg_match); DATE:2014-03-04
 		int len = regx_rslts.length;
-		if (len == 0) return rslt.Init_empty();
+		if (len == 0) return rslt.Init_ary_empty();
 		ListAdp tmp_list = ListAdp_.new_();
 		for (int i = 0; i < len; i++) {
 			RegxMatch match = regx_rslts[i];
@@ -261,7 +261,18 @@ class Scrib_lib_ustring_gsub_mgr {
 				}
 				break;
 			case Repl_tid_table: {
-				String find_str = String_.Mid(text, match.Find_bgn(), match.Find_end());	// NOTE: rslt.Bgn() / .End() is for String pos (bry pos will fail for utf8 strings)
+				int match_bgn = -1, match_end = -1;
+				RegxGroup[] grps = match.Groups();
+				if (grps.length == 0) {
+					match_bgn = match.Find_bgn();
+					match_end = match.Find_end();
+				}
+				else {	// group exists, take first one (logic matches Scribunto); PAGE:en.w:Bannered_routes_of_U.S._Route_60; DATE:2014-08-15
+					RegxGroup grp = grps[0];
+					match_bgn = grp.Bgn();
+					match_end = grp.End();
+				}
+				String find_str = String_.Mid(text, match_bgn, match_end);	// NOTE: rslt.Bgn() / .End() is for String pos (bry pos will fail for utf8 strings)
 				Object actl_repl_obj = repl_hash.Fetch(find_str);
 				if (actl_repl_obj == null)			// match found, but no replacement specified; EX:"abc", "[ab]", "a:A"; "b" in regex but not in tbl; EX:d:DVD; DATE:2014-03-31
 					tmp_bfr.Add_str(find_str);

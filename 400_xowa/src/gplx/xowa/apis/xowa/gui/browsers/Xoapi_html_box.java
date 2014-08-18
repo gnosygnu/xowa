@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apis.xowa.gui.browsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.apis.*; import gplx.xowa.apis.xowa.*; import gplx.xowa.apis.xowa.gui.*;
-import gplx.gfui.*; import gplx.xowa.gui.*; import gplx.xowa.gui.views.*;
+import gplx.gfui.*; import gplx.xowa.pages.*; import gplx.xowa.gui.*; import gplx.xowa.gui.views.*;
 public class Xoapi_html_box implements GfoInvkAble, GfoEvMgrOwner {
 	private Xog_win_itm win;
 	public Xoapi_html_box() {
@@ -29,7 +29,7 @@ public class Xoapi_html_box implements GfoInvkAble, GfoEvMgrOwner {
 		Xog_tab_itm tab = win.Active_tab(); if (tab == Xog_tab_itm_.Null) return;
 		Gfui_html html_box = tab.Html_itm().Html_box();
 		html_box.Focus();
-		if (tab.View_mode() != Xog_page_mode.Tid_read)	// if edit / html, place focus in edit box
+		if (tab.View_mode() != Xopg_view_mode.Tid_read)	// if edit / html, place focus in edit box
 			html_box.Html_elem_focus(Xog_html_itm.Elem_id__xowa_edit_data_box);
 	}
 	public void Selection_focus() {

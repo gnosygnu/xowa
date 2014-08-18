@@ -17,10 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 public class Xop_xatr_itm {
-	public static final byte Tid_null = 0, Tid_invalid = 1, Tid_repeat = 2, Tid_keyVal = 3, Tid_keyOnly = 4;	// NOTE: id order is important; see below;
+	public static final byte Tid_null = 0, Tid_invalid = 1, Tid_repeat = 2, Tid_key_val = 3, Tid_key_only = 4;	// NOTE: id order is important; see below;
 	public byte Tid() {return tid;} private byte tid; 
 	public void Tid_to_repeat_() {tid = Tid_repeat;}
 	public void Tid_to_invalid_() {tid = Tid_invalid;}
+	public boolean Tid_is_key_only() {return tid == Tid_key_only;}
 	public int Key_bgn() {return key_bgn;} private int key_bgn;
 	public int Key_end() {return key_end;} private int key_end;
 	public byte[] Key_bry() {return key_bry;} public Xop_xatr_itm Key_bry_(byte[] v) {key_bry = v; return this;} private byte[] key_bry;
@@ -32,7 +33,7 @@ public class Xop_xatr_itm {
 	public int Atr_bgn() {return atr_bgn;} private int atr_bgn;
 	public int Atr_end() {return atr_end;} private int atr_end;
 	public int Eq_pos() {return eq_pos;} private int eq_pos;
-	public boolean Invalid() {return tid < Tid_keyVal;}	// NOTE: Tid order is important
+	public boolean Invalid() {return tid < Tid_key_val;}	// NOTE: Tid order is important
 	public byte Quote_byte() {return quote_byte;} private byte quote_byte;
 	public byte[] Val_as_bry(byte[] src) {if (val_bry == null) val_bry = Bry_.Mid(src, val_bgn, val_end); return val_bry;}	// NOTE: val_bry is cached
 	public byte[] Val_as_bry__blank_to_null(byte[] src) {byte[] rv = Val_as_bry(src); return Bry_.Len_eq_0(rv) ? null : rv;}
@@ -53,10 +54,10 @@ public class Xop_xatr_itm {
 		this.tid = Tid_invalid; this.atr_bgn = atr_bgn; this.atr_end = atr_end;
 	}
 	public Xop_xatr_itm(byte quote_byte, int atr_bgn, int atr_end, int key_bgn, int key_end) {
-		this.tid = Tid_keyOnly; this.quote_byte = quote_byte; this.atr_bgn = atr_bgn; this.atr_end = atr_end; this.key_bgn = key_bgn; this.key_end = key_end; this.val_bgn = key_bgn; this.val_end = key_end;
+		this.tid = Tid_key_only; this.quote_byte = quote_byte; this.atr_bgn = atr_bgn; this.atr_end = atr_end; this.key_bgn = key_bgn; this.key_end = key_end; this.val_bgn = key_bgn; this.val_end = key_end;
 	}
 	public Xop_xatr_itm(byte quote_byte, int atr_bgn, int atr_end, int key_bgn, int key_end, int val_bgn, int val_end, int eq_pos) {
-		this.tid = Tid_keyVal; this.quote_byte = quote_byte; this.atr_bgn = atr_bgn; this.atr_end = atr_end; this.key_bgn = key_bgn; this.key_end = key_end; this.val_bgn = val_bgn; this.val_end = val_end; this.eq_pos = eq_pos;
+		this.tid = Tid_key_val; this.quote_byte = quote_byte; this.atr_bgn = atr_bgn; this.atr_end = atr_end; this.key_bgn = key_bgn; this.key_end = key_end; this.val_bgn = val_bgn; this.val_end = val_end; this.eq_pos = eq_pos;
 	}
 	public static final Xop_xatr_itm[] Ary_empty = new Xop_xatr_itm[0];
 	public static final byte Key_tid_generic = 0, Key_tid_id = 1, Key_tid_style = 2, Key_tid_role = 3;

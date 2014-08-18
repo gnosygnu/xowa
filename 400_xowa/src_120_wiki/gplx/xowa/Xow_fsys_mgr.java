@@ -22,12 +22,15 @@ public class Xow_fsys_mgr {
 		ns_dir		= root_dir.GenSubDir(Xow_dir_info_.Name_ns);
 		site_dir	= root_dir.GenSubDir(Xow_dir_info_.Name_site);
 		tmp_dir		= root_dir.GenSubDir("tmp");
+		file_dir	= wiki.App().Fsys_mgr().File_dir().GenSubDir_nest(wiki.Domain_str());
+		file_dir_bry_len = file_dir.To_http_file_bry().length;
 	}	private Xow_wiki wiki;
-	public Io_url Root_dir()	{return root_dir;}	Io_url root_dir;
-	public Io_url Ns_dir()		{return ns_dir;}	Io_url ns_dir;
-	public Io_url Site_dir()	{return site_dir;}	Io_url site_dir;
-	public Io_url File_dir()	{return wiki.App().Fsys_mgr().File_dir().GenSubDir_nest(wiki.Domain_str());}
-	public Io_url Tmp_dir()		{return tmp_dir;}	public void Tmp_dir_(Io_url v) {tmp_dir = v;} Io_url tmp_dir;		
+	public Io_url Root_dir()		{return root_dir;}	private Io_url root_dir;
+	public Io_url Ns_dir()			{return ns_dir;}	private Io_url ns_dir;
+	public Io_url Site_dir()		{return site_dir;}	private Io_url site_dir;
+	public Io_url File_dir()		{return file_dir;}	private Io_url file_dir;
+	public int File_dir_bry_len()	{return file_dir_bry_len;} private int file_dir_bry_len;
+	public Io_url Tmp_dir()			{return tmp_dir;}	public void Tmp_dir_(Io_url v) {tmp_dir = v;} Io_url tmp_dir;		
 	public Io_url Cfg_wiki_core_fil()	{return root_dir.GenSubFil_nest(Const_url_cfg, "wiki_core.gfs");}
 	public Io_url Cfg_wiki_stats_fil()	{return root_dir.GenSubFil_nest(Const_url_cfg, "wiki_stats.gfs");}
 	public Xow_dir_info[] Dir_regy() {return dir_regy;} private Xow_dir_info[] dir_regy = Xow_dir_info_.regy_();

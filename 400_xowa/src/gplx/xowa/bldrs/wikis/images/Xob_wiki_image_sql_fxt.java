@@ -35,12 +35,7 @@ public class Xob_wiki_image_sql_fxt {
 		Io_mgr._.SaveFilStr(src_fil, raw_sql);
 
 		rv.Src_fil_(src_fil);
-		Xobc_base_fxt.Run_cmd(fxt.Bldr(), rv);
+		Xob_base_fxt.Run_cmd(fxt.Bldr(), rv);
 		return rv;
 	}
-//		public void Tst(String expd) {
-//			Io_url trg_fil = Io_url_.mem_fil_("mem/temp/sql_dump.sql");//cmd.Make_url_gen().Prv_urls()[0];
-//			String actl = Io_mgr._.LoadFilStr(trg_fil);
-//			Tfds.Eq_str_lines(expd, actl);
-//		}
 }

@@ -221,6 +221,10 @@ public class Bry_ {
 		byte[] ary = Bry_.Mid(src, bgn, end);
 		return String_.new_utf8_(ary);
 	}
+	public static byte[] Mid_safe(byte[] src, int bgn, int end) {
+		try {return Mid(src, bgn, end);}
+		catch (Exception e) {Err_.Noop(e); return Bry_.Add_w_dlm(Byte_ascii.Space, Bry_.XbyInt(bgn), Bry_.XbyInt(end));}
+	}
 	public static byte[] Mid(byte[] src, int bgn) {return Mid(src, bgn, src.length);}
 	public static byte[] Mid_or(byte[] src, int bgn, int end, byte[] or) {
 		int src_len = src.length;

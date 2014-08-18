@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 import gplx.threads.*; import gplx.gfui.*; import gplx.xowa.gui.*; import gplx.xowa.gui.history.*; import gplx.xowa.xtns.math.*; import gplx.xowa.files.*;
-import gplx.xowa.gui.urls.*; import gplx.xowa.gui.views.*;
+import gplx.xowa.gui.urls.*; import gplx.xowa.gui.views.*; import gplx.xowa.pages.*;
 import gplx.xowa.parsers.lnkis.redlinks.*;
 public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 	private GfoInvkAble sync_cmd;
@@ -62,17 +62,17 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 		else if (ctx.Match(k, Gfui_html.Evt_win_resized))					Refresh_win_size();
 		else if (ctx.Match(k, Invk_page_refresh))							Page__refresh();
 		else if	(ctx.Match(k, Invk_page_async_exec))						Xog_tab_itm_read_mgr.Async((Xog_tab_itm)m.ReadObj("v"));
-		else if	(ctx.Match(k, Invk_page_view_read))							Page__mode_(Xog_page_mode.Tid_read);
-		else if	(ctx.Match(k, Invk_page_view_edit))							Page__mode_(Xog_page_mode.Tid_edit);
-		else if	(ctx.Match(k, Invk_page_view_html))							Page__mode_(Xog_page_mode.Tid_html);
+		else if	(ctx.Match(k, Invk_page_view_read))							Page__mode_(Xopg_view_mode.Tid_read);
+		else if	(ctx.Match(k, Invk_page_view_edit))							Page__mode_(Xopg_view_mode.Tid_edit);
+		else if	(ctx.Match(k, Invk_page_view_html))							Page__mode_(Xopg_view_mode.Tid_html);
 		else if (ctx.Match(k, Invk_page_edit_save))							Xog_tab_itm_edit_mgr.Save(tab_mgr.Active_tab(), Bool_.N);
 		else if (ctx.Match(k, Invk_page_edit_save_draft))					Xog_tab_itm_edit_mgr.Save(tab_mgr.Active_tab(), Bool_.Y);
 		else if (ctx.Match(k, Invk_page_edit_preview))						Xog_tab_itm_edit_mgr.Preview(tab_mgr.Active_tab());
 		else if (ctx.Match(k, Invk_page_edit_rename))						Xog_tab_itm_edit_mgr.Rename(tab_mgr.Active_tab());
 		else if	(ctx.Match(k, Invk_page_edit_focus_box)) 					Xog_tab_itm_edit_mgr.Focus(this, Xog_html_itm.Elem_id__xowa_edit_data_box);
 		else if	(ctx.Match(k, Invk_page_edit_focus_first)) 					Xog_tab_itm_edit_mgr.Focus(this, Xog_html_itm.Elem_id__first_heading);
-		else if	(ctx.Match(k, Invk_page_dbg_html))							Xog_tab_itm_edit_mgr.Debug(this, Xog_page_mode.Tid_html);
-		else if	(ctx.Match(k, Invk_page_dbg_wiki))							Xog_tab_itm_edit_mgr.Debug(this, Xog_page_mode.Tid_edit);
+		else if	(ctx.Match(k, Invk_page_dbg_html))							Xog_tab_itm_edit_mgr.Debug(this, Xopg_view_mode.Tid_html);
+		else if	(ctx.Match(k, Invk_page_dbg_wiki))							Xog_tab_itm_edit_mgr.Debug(this, Xopg_view_mode.Tid_edit);
 		else if	(ctx.Match(k, Invk_page_goto))								Page__navigate_by_url_bar(m.ReadStr("v"));
 		else if	(ctx.Match(k, Invk_page_goto_recent))						Page__navigate_by_url_bar(app.User().History_mgr().Get_at_last(app));
 		else if	(ctx.Match(k, Invk_history_bwd))							{Page__navigate_by_history(Bool_.N);}
@@ -119,7 +119,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 	}
 	private void Win__link_clicked(String anchor_raw) {
 		String url = url_box.Text();
-		int pos = String_.FindFwd(url, gplx.xowa.html.Xoh_html_tag.Const_anchor);
+		int pos = String_.FindFwd(url, gplx.html.Html_tag_.Anchor_str);
 		if (pos != Bry_.NotFound) url = String_.Mid(url, 0, pos);
 		String anchor_str = Parse_evt_location_changing(anchor_raw);
 		byte[] anchor_bry = Bry_.new_utf8_(anchor_str);
@@ -142,14 +142,14 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 		app.Gfs_mgr().Run_str(snippet);
 	}
 	private static String Parse_evt_location_changing(String v) { // EX: about:blank#anchor -> anchor
-		int pos = String_.FindFwd(v, gplx.xowa.html.Xoh_html_tag.Const_anchor);
+		int pos = String_.FindFwd(v, gplx.html.Html_tag_.Anchor_str);
 		return pos == Bry_.NotFound
 			? null
 			: String_.Mid(v, pos + 1);
 	}
 	public void Page__mode_(byte new_mode_tid) {
 		Xog_tab_itm tab = tab_mgr.Active_tab(); Xoa_page page = tab.Page();
-		if (	new_mode_tid == Xog_page_mode.Tid_read	// used to be && cur_view_tid == Edit; removed clause else redlinks wouldn't show when going form html to read (or clicking read multiple times) DATE: 2013-11-26;
+		if (	new_mode_tid == Xopg_view_mode.Tid_read	// used to be && cur_view_tid == Edit; removed clause else redlinks wouldn't show when going form html to read (or clicking read multiple times) DATE: 2013-11-26;
 			&& !page.Missing()							// if new page, don't try to reload
 			) {
 			// NOTE: if moving from "Edit" to "Read", reload page (else Preview changes will still show); NOTE: do not call Exec_page_reload / Exec_page_refresh, which will fire redlinks code

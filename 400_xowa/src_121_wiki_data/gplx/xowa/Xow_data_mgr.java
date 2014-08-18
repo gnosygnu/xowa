@@ -33,7 +33,7 @@ public class Xow_data_mgr implements GfoInvkAble {
 			case Xow_ns_.Id_special:
 				wiki.Special_mgr().Special_gen(url, rv, wiki, ttl);
 				return rv;
-			case Xow_ns_.Id_mediaWiki:
+			case Xow_ns_.Id_mediawiki:
 				if (	!called_from_msg	// if called from msg, fall through to actual data retrieval below, else infinite loop; DATE:2014-05-09
 					&&	Xow_page_tid.Identify_by_ttl(ttl.Page_db()) == Xow_page_tid.Tid_wikitext // skip ".js" and ".css" pages in MediaWiki; DATE:2014-06-13
 					) {		

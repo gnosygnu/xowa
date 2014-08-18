@@ -146,7 +146,7 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 			case Xow_ns_.Id_template:				ns_template = ns; break;
 			case Xow_ns_.Id_portal:					ns_portal = ns; break;
 			case Xow_ns_.Id_project:				ns_project = ns; break;
-			case Xow_ns_.Id_mediaWiki:				ns_mediawiki = ns; break;
+			case Xow_ns_.Id_mediawiki:				ns_mediawiki = ns; break;
 			case Scrib_xtn_mgr.Ns_id_module:		ns_module = ns; break;
 			case Xow_ns_.Id_file:					if (ns_file == null) ns_file = ns; break;	// NOTE: if needed, else Image will become the official ns_file
 			case Xow_ns_.Id_category:

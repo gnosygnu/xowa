@@ -30,8 +30,8 @@ public class Xofw_wiki_wkr_mock implements Xofw_wiki_finder {
 	public Xofw_wiki_wkr_mock Redirect_(String if_ttl_str, String then_redirect_str) {this.if_ttl = Bry_.new_utf8_(if_ttl_str); this.then_redirect = Bry_.new_utf8_(then_redirect_str); return this;} private byte[] if_ttl, then_redirect;
 	public void Find(ListAdp repo_pairs, Xof_xfer_itm file) {
 		byte[] ttl = file.Lnki_ttl();
-		if (Bry_.Eq(ttl, if_ttl) && repo_idx != -1)	{file.Atrs_by_ttl(ttl, then_redirect);	file.Trg_repo_idx_(repo_idx);}
-		else							{file.Atrs_by_ttl(ttl, Bry_.Empty);	file.Trg_repo_idx_(Xof_meta_itm.Repo_unknown);}	// FUTURE: this should be missing, but haven't implemented unknown yet
+		if (Bry_.Eq(ttl, if_ttl) && repo_idx != -1)	{file.Set__ttl(ttl, then_redirect);	file.Trg_repo_idx_(repo_idx);}
+		else							{file.Set__ttl(ttl, Bry_.Empty);	file.Trg_repo_idx_(Xof_meta_itm.Repo_unknown);}	// FUTURE: this should be missing, but haven't implemented unknown yet
 	}
 	public boolean Locate(Xofw_file_finder_rslt rv, ListAdp repo_pairs, byte[] ttl) {
 		rv.Init(ttl);

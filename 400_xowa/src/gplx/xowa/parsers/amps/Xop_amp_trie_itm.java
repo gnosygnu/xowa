@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.amps; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+import gplx.xowa.html.lnkis.*;
 public class Xop_amp_trie_itm {
 	public Xop_amp_trie_itm(byte tid, int char_int, byte[] xml_name_bry) {
 		this.tid = tid;
@@ -35,9 +36,9 @@ public class Xop_amp_trie_itm {
 				bfr.Add(xml_name_bry);	// NOTE: never write actual char; EX: "&lt;" should be written as "&lt;", not "<"
 				break;
 			default:
-				bfr.Add(gplx.xowa.html.Xohp_title_wkr.Escape_bgn);	// &#
-				bfr.Add_int_variable(char_int);						// 160
-				bfr.Add_byte(Byte_ascii.Semic);						// ;
+				bfr.Add(Xoh_lnki_title_fmtr.Escape_bgn);					// &#
+				bfr.Add_int_variable(char_int);							// 160
+				bfr.Add_byte(Byte_ascii.Semic);							// ;
 				break;
 		}			
 	}

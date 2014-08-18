@@ -71,7 +71,7 @@ public class Xog_url_wkr {
 		Io_url href_url = Io_url_.http_any_(String_.new_utf8_(href_bry), Op_sys.Cur().Tid_is_wnt());
 		gplx.gfui.Gfui_html html_box = win.Active_html_box();
 		String xowa_ttl = page.Wiki().Gui_mgr().Cfg_browser().Content_editable()
-			? html_box.Html_active_atr_get_str(gplx.xowa.html.Xoh_html_tag.Nde_xowa_title_str, null)
+			? html_box.Html_active_atr_get_str(gplx.xowa.html.Xoh_consts.Atr_xowa_title_str, null)
 			: Xoh_dom_.Title_by_href(app.Encoder_mgr().Comma(), app.Utl_bry_bfr_mkr().Get_b512().Mkr_rls(), href_bry, Bry_.new_utf8_(html_box.Html_doc_html()));
 		if (!Io_mgr._.ExistsFil(href_url)) {
 			Xof_xfer_itm xfer_itm = new Xof_xfer_itm();

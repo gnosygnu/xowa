@@ -75,7 +75,7 @@ public class Listing_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 			html_output = hwtr.Xto_bry_and_clear();
 		}
 	}
-	public void Xtn_write(Xoa_app app, Xoh_html_wtr html_wtr, Xoh_html_wtr_ctx opts, Xop_ctx ctx, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {
+	public void Xtn_write(Xoa_app app, Xoh_html_wtr html_wtr, Xoh_wtr_ctx opts, Xop_ctx ctx, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {
 		if (xtn_mgr == null || !xtn_mgr.Enabled()) 
 			Xox_mgr_base.Xtn_write_escape(app, bfr, src, xnde);
 		else

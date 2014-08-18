@@ -27,27 +27,28 @@ interface Pxd_itm {
 }
 class Pxd_itm_ {
 	public static final int
-	  TypeId_null				= 0
-	, TypeId_int				= 1
-	, TypeId_int_dmy_14			= 2
-	, TypeId_int_hms_6			= 3
-	, TypeId_month_name			= 4
-	, TypeId_dow_name			= 5
-	, TypeId_unit				= 6
-	, TypeId_ago 				= 7
-	, TypeId_day_suffix			= 8		// 1st, 2nd
-	, TypeId_day_relative		= 9		// today, tomorrow, yesterday
-	, TypeId_time_relative		= 10	// now
-	, TypeId_unit_relative		= 11	// next, previous
-	, TypeId_unixtime			= 12	// @123
-	, TypeId_dash 				= Byte_ascii.Dash
-	, TypeId_dot 				= Byte_ascii.Dot
-	, TypeId_slash 				= Byte_ascii.Slash
-	, TypeId_colon 				= Byte_ascii.Colon
-	, TypeId_ws					= 98
-	, TypeId_sym				= 99
+	  Tid_null				= 0
+	, Tid_int				= 1
+	, Tid_int_dmy_14		= 2
+	, Tid_int_hms_6			= 3
+	, Tid_month_name		= 4
+	, Tid_dow_name			= 5
+	, Tid_unit				= 6
+	, Tid_ago 				= 7
+	, Tid_day_suffix		= 8		// 1st, 2nd
+	, Tid_day_relative		= 9		// today, tomorrow, yesterday
+	, Tid_time_relative		= 10	// now
+	, Tid_unit_relative		= 11	// next, previous
+	, Tid_unixtime			= 12	// @123
+	, Tid_iso8601_t			= 13	// T
+	, Tid_dash 				= Byte_ascii.Dash
+	, Tid_dot 				= Byte_ascii.Dot
+	, Tid_slash 			= Byte_ascii.Slash
+	, Tid_colon 			= Byte_ascii.Colon
+	, Tid_ws				= 98
+	, Tid_sym				= 99
 	;	
-	public static Pxd_itm Find_fwd_or_null(Pxd_itm[] tkns, int tid, int bgn) {
+	public static Pxd_itm Find_fwd_by_tid(Pxd_itm[] tkns, int bgn, int tid) {
 		int len = tkns.length;
 		for (int i = bgn; i < len; i++) {
 			Pxd_itm itm = tkns[i];
@@ -55,7 +56,6 @@ class Pxd_itm_ {
 		}
 		return null;
 	}
-
 }
 abstract class Pxd_itm_base implements Pxd_itm {
 	public abstract byte Tkn_tid();

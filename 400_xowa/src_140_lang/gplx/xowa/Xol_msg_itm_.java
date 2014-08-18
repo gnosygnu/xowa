@@ -266,7 +266,7 @@ public static final int
 		val = trie_space.Replace(tmp_bfr, val, 0, val.length);
 		itm.Atrs_set(val, has_fmt_arg, has_tmpl_txt);
 	}
-	public static final byte[] Bry_nbsp = Byte_.Ary_by_ints(192, 160);
+	public static final byte[] Bry_nbsp = Byte_.Ary_by_ints(194, 160);
 	private static final Btrie_slim_mgr trie_space = Btrie_slim_mgr.cs_()	// MW:cache/MessageCache.php|get|Fix for trailing whitespace, removed by textarea|DATE:2014-04-29
 		.Add_bry("&#32;"	, " ")
 		.Add_bry("&nbsp;"	, Bry_nbsp)

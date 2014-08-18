@@ -48,15 +48,17 @@ public class Xof_lnki_file_mgr {
 				xfer_itm.Lnki_ext_(fsdb_itm.Lnki_ext());			// WORKAROUND: hacky, but fsdb_itm knows when ogg is ogv whereas xfer_itm does not; so, always override xfer_itm.ext with fsdb's; DATE:2014-02-02
 				xfer_itm.Url_bldr_(url_bldr);						// default Url_bldr for xfer_itm uses @ for thumbtime; switch to -; DATE:2014-02-02
 				Init_fsdb_by_xfer(fsdb_itm, xfer_itm);				// copy xfer itm props to fsdb_itm;
-				xfer_itm.Atrs_by_orig(fsdb_itm.Orig_w(), fsdb_itm.Orig_h(), xfer_itm.Orig_file_len());	// copy orig props from orig_itm to xfer_itm
-				fsdb_itm.Html__init(wiki.File_mgr().Repo_mgr(), url_bldr, tmp_img_size, exec_tid);
+				xfer_itm.Set__orig(fsdb_itm.Orig_w(), fsdb_itm.Orig_h(), xfer_itm.Orig_file_len());	// copy orig props from orig_itm to xfer_itm
+				Xof_repo_itm repo = wiki.File_mgr().Repo_mgr().Repos_get_by_wiki(fsdb_itm.Orig_wiki()).Trg();
+				fsdb_itm.Html__init(repo, url_bldr, tmp_img_size, exec_tid);
+				xfer_itm.Trg_repo_(repo);
 				xfer_itm.Html_orig_src_(Bry_.new_utf8_(fsdb_itm.Html_orig_url().To_http_file_str()));	// always set orig_url; note that w,h are not necessary for orig url; orig url needed for [[Media:]] links; DATE:2014-01-19
 				gplx.ios.IoItmFil fil = Io_mgr._.QueryFil(fsdb_itm.Html_url());
 				if (fil.Exists()) {
 					if  (fil.Size() == 0)	// NOTE: fix; XOWA used to write 0 byte files if file was missing, delete them and do not return true; DATE:2014-06-21
 						Io_mgr._.DeleteFil(fsdb_itm.Html_url());
 					else {
-						xfer_itm.Atrs_calc_by_fsdb(fsdb_itm.Html_w(), fsdb_itm.Html_h(), fsdb_itm.Html_url(), fsdb_itm.Html_orig_url());
+						xfer_itm.Calc_by_fsdb(fsdb_itm.Html_w(), fsdb_itm.Html_h(), fsdb_itm.Html_url(), fsdb_itm.Html_orig_url());
 						return true;
 					}
 				}

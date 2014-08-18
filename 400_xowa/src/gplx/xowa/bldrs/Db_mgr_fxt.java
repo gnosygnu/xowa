@@ -37,7 +37,7 @@ public class Db_mgr_fxt {
 		Xodb_page_tbl tbl_page = wiki.Db_mgr_as_sql().Tbl_page();
 		Db_stmt stmt = Db_stmt_.Null;
 		try {
-			stmt = tbl_page.Insert_stmt(wiki.Db_mgr_as_sql().Fsys_mgr().Page_provider());
+			stmt = tbl_page.Insert_stmt(wiki.Db_mgr_as_sql().Fsys_mgr().Provider_page());
 			int len = ttls.length;
 			DateAdp modified_on = Tfds.Now_time0_add_min(0);
 			for (int i = 0; i < len; i++) {
@@ -130,8 +130,8 @@ public class Db_mgr_fxt {
 		Db_provider_pool._.Clear();
 		Xodb_mgr_sql db_mgr = wiki.Db_mgr_create_as_sql();
 		db_mgr.Data_storage_format_(gplx.ios.Io_stream_.Tid_file);
-		db_mgr.Init_make("");
-		Db_provider provider = db_mgr.Fsys_mgr().Core_provider();
+		db_mgr.Init_by_ns_map("");
+		Db_provider provider = db_mgr.Fsys_mgr().Provider_core();
 		provider.Exec_qry(Db_qry_delete.new_all_("xowa_cfg"));
 		provider.Exec_qry(Db_qry_delete.new_all_("xowa_db"));
 		provider.Exec_qry(Db_qry_delete.new_all_("xowa_ns"));
@@ -150,7 +150,7 @@ public class Db_mgr_fxt {
 		Io_url url2 = Io_url_.mem_fil_("mem/xowa/bin/any/sql/xowa/xowa.sqlite3");
 		Io_mgr._.SaveFilStr(url2, dsv_db);
 		this.Wiki().Db_mgr_create_as_sql();// .("gplx_key=tdb;url=" + url.Raw());
-		this.Wiki().Db_mgr_as_sql().Init_make("");
+		this.Wiki().Db_mgr_as_sql().Init_by_ns_map("");
 	}
 	private static String dsv_db_() {
 		String_bldr sb = String_bldr_.new_();

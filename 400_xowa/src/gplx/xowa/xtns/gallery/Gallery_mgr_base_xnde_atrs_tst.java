@@ -39,6 +39,12 @@ public class Gallery_mgr_base_xnde_atrs_tst {
 		, "<li class='gallerycaption'>B</li>"
 		);
 	}
+	@Test  public void Atr_caption_ignore() {	// PURPOSE: blank caption should not create caption element; PAGE:fr.w:Chronologie_du_si�ge_de_Paris_(1870) DATE:2014-08-15
+		fxt.Test_html_frag_n
+		( "<gallery caption=>File:A.png</gallery>"
+		, "<li class='gallerycaption'>"
+		);
+	}
 	@Test  public void Atr_show_filename() {	// PURPOSE: show filename
 		fxt.Test_html_frag
 		( "<gallery showfilename=true>A.png</gallery>"
@@ -51,7 +57,7 @@ public class Gallery_mgr_base_xnde_atrs_tst {
 		, "<ul id=\"xowa_gallery_ul_0\" class=\"gallery mw-gallery-traditional\">"
 		);
 	}
-//		@Test  public void Ttl_caption() {	// PURPOSE: category entries get rendered with name only (no ns)
+//		@Test  public void Ttl_caption() {	// TODO: PURPOSE: category entries get rendered with name only (no ns)
 //			fxt.Test_html_frag
 //			( "<gallery>Category:A</gallery>"
 //			, "<li class='gallerycaption'>B</li>"

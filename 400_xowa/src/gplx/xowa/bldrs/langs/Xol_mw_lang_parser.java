@@ -355,7 +355,7 @@ public class Xol_mw_lang_parser {
 			mw_names.Add_obj("NS_PROJECT_TALK", Int_obj_val.new_(Xow_ns_.Id_project_talk));
 			mw_names.Add_obj("NS_FILE", Int_obj_val.new_(Xow_ns_.Id_file));
 			mw_names.Add_obj("NS_FILE_TALK", Int_obj_val.new_(Xow_ns_.Id_file_talk));
-			mw_names.Add_obj("NS_MEDIAWIKI", Int_obj_val.new_(Xow_ns_.Id_mediaWiki));
+			mw_names.Add_obj("NS_MEDIAWIKI", Int_obj_val.new_(Xow_ns_.Id_mediawiki));
 			mw_names.Add_obj("NS_MEDIAWIKI_TALK", Int_obj_val.new_(Xow_ns_.Id_mediaWiki_talk));
 			mw_names.Add_obj("NS_TEMPLATE", Int_obj_val.new_(Xow_ns_.Id_template));
 			mw_names.Add_obj("NS_TEMPLATE_TALK", Int_obj_val.new_(Xow_ns_.Id_template_talk));

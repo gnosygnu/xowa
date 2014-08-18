@@ -36,7 +36,7 @@ class Pxd_itm_int extends Pxd_itm_base implements Pxd_itm_int_interface {
 				break;
 		}
 	}
-	@Override public byte Tkn_tid() {return Pxd_itm_.TypeId_int;}
+	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_int;}
 	@Override public int Eval_idx() {return eval_idx;} private int eval_idx = 99;
 	public int Val() {return val;} public Pxd_itm_int Val_(int v) {val = v; return this;} private int val;
 	public int Xto_int_or(int or) {return val;}
@@ -81,14 +81,14 @@ class Pxd_itm_int extends Pxd_itm_base implements Pxd_itm_int_interface {
 				if (val > Month_max) {													// value is not a month; assume day; DATE:2013-03-15
 					switch (data_idx) {
 						case 0:															// > 12 in slot 0
-							if (Match_sym(state, true, Pxd_itm_.TypeId_dot))			// next sym is dot; assume m.d.y; EX: 22.5.70
+							if (Match_sym(state, true, Pxd_itm_.Tid_dot))			// next sym is dot; assume m.d.y; EX: 22.5.70
 								Eval_day_at_pos_0(state); 
 							else														// next sym is not dot; assume y-m-d; EX: 70-5-22
 								Eval_month_at_pos_0(state); 
 							break;	
 						case 1: Eval_month_at_pos_1(state); break;						// > 12 in slot 1; assume m.d; EX: 5.22
 						case 2:															// > 12 in slot 2
-							if (Match_sym(state, false, Pxd_itm_.TypeId_dot))			// prv sym is dot; assume d.m.y; EX: 22.5.70
+							if (Match_sym(state, false, Pxd_itm_.Tid_dot))			// prv sym is dot; assume d.m.y; EX: 22.5.70
 								Eval_dmy_at_y(state); 
 							else														// prv sym is not dot; assume m-d-y; EX: 22.5.70
 								Eval_month_at_pos_2(state);
@@ -110,13 +110,13 @@ class Pxd_itm_int extends Pxd_itm_base implements Pxd_itm_int_interface {
 	}
 	private void Eval_unknown_at_pos_3(Pxd_parser state) {	// int at pos 4
 		if (	state.Seg_idxs_chk(DateAdp_.SegIdx_year, DateAdp_.SegIdx_month, DateAdp_.SegIdx_day)	// check that ymd is set
-			&&	Match_sym(state, false, Pxd_itm_.TypeId_dash))											// check that preceding symbol is "-"
+			&&	Match_sym(state, false, Pxd_itm_.Tid_dash))											// check that preceding symbol is "-"
 			Pxd_itm_int_.Hour_err(state, this);															// mark as hour; handles strange fmts like November 2, 1991-06; DATE:2013-06-19
 	}
 	private void Eval_unknown_at_pos_4(Pxd_parser state) {
 		if (	state.Seg_idxs_chk(DateAdp_.SegIdx_year
 				, DateAdp_.SegIdx_month, DateAdp_.SegIdx_day, DateAdp_.SegIdx_hour)						// check that ymdh is set
-			&&	Match_sym(state, false, Pxd_itm_.TypeId_dash))											// check that preceding symbol is "-"
+			&&	Match_sym(state, false, Pxd_itm_.Tid_dash))											// check that preceding symbol is "-"
 			state.Seg_idxs_(this, Pxd_itm_base.Seg_idx_skip);											// mark as ignore; handles strange fmts like November 2, 1991-06-19; DATE:2013-06-19
 	}
 	boolean Match_sym(Pxd_parser state, boolean fwd, int sym_tid) {
@@ -250,7 +250,7 @@ class Pxd_itm_int_ {
 		int tkn_idx = itm.Ary_idx();
 		state.Tkns()[tkn_idx] = new Pxd_itm_unit(tkn_idx, unit_name, seg_idx, rel_val);
 	}
-	public static Pxd_itm_int CastOrNull(Pxd_itm itm) {return itm.Tkn_tid() == Pxd_itm_.TypeId_int ? (Pxd_itm_int)itm : null; }
+	public static Pxd_itm_int CastOrNull(Pxd_itm itm) {return itm.Tkn_tid() == Pxd_itm_.Tid_int ? (Pxd_itm_int)itm : null; }
 	public static Pxd_itm_int GetNearest(Pxd_itm[] tkns, int tkn_idx, boolean fwd) {
 		int adj = 1, end = tkns.length;
 		if (!fwd) {
@@ -259,7 +259,7 @@ class Pxd_itm_int_ {
 		}
 		for (int i = tkn_idx + adj; i != end; i += adj) {
 			Pxd_itm itm = tkns[i];
-			if (itm.Tkn_tid() == Pxd_itm_.TypeId_int) {
+			if (itm.Tkn_tid() == Pxd_itm_.Tid_int) {
 				Pxd_itm_int itm_int = (Pxd_itm_int)itm;
 				return itm_int.Seg_idx() == -1 ? itm_int : null;
 			} 
@@ -276,12 +276,12 @@ class Pxd_itm_int_ {
 		for (int i = bgn + adj; i != end; i += adj) {
 			Pxd_itm itm = tkns[i];
 			switch (itm.Tkn_tid()) {
-				case Pxd_itm_.TypeId_dash:
+				case Pxd_itm_.Tid_dash:
 					dash_itm = itm;	// TODO: throw error if "--"; {{#time:U|@--1}}
 					break;
-				case Pxd_itm_.TypeId_int:
-				case Pxd_itm_.TypeId_int_dmy_14:
-				case Pxd_itm_.TypeId_int_hms_6:
+				case Pxd_itm_.Tid_int:
+				case Pxd_itm_.Tid_int_dmy_14:
+				case Pxd_itm_.Tid_int_hms_6:
 					Pxd_itm_int_interface itm_int = (Pxd_itm_int_interface)itm;
 					int itm_int_seg_idx = itm_int.Seg_idx();
 					if (itm_int_seg_idx == -1) { // not evaluated

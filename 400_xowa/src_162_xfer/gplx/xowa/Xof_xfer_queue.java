@@ -50,8 +50,8 @@ public class Xof_xfer_queue {
 			String queue_msg = wtr.Prog_many(GRP_KEY, "download.bgn", "downloading ~{0} of ~{1}: ~{2};", i + ListAdp_.Base1, xfer_len, xfer_itm.Lnki_ttl());
 			wiki.App().File_mgr().Download_mgr().Download_wkr().Download_xrg().Prog_fmt_hdr_(queue_msg);
 			wiki.File_mgr().Repo_mgr().Xfer_by_meta(xfer_itm, this);
-			xfer_itm.Atrs_by_meta(xfer_itm.Meta_itm(), xfer_itm.Meta_itm().Repo_itm(wiki), wiki.Html_mgr().Img_thumb_width());
-			xfer_itm.Atrs_calc_for_html();
+			xfer_itm.Set__meta(xfer_itm.Meta_itm(), xfer_itm.Meta_itm().Repo_itm(wiki), wiki.Html_mgr().Img_thumb_width());
+			xfer_itm.Calc_by_meta();
 			if (!xfer_itm.Html_pass()) continue;	// file not found; don't call Update_img, else invalid src will be passed and caption box will be incorrectly resized; EX:ar.d:جَبَّارَة; DATE:2014-04-13
 			if (Bry_.Len_gt_0(xfer_itm.Html_view_src())				// only update images that have been found; otherwise "Undefined" shows up in image box
 				&& xfer_itm.Html_elem_tid() != Xof_html_elem.Tid_none) {	// skip updates when downloading orig on File page (there won't be any frame to update)

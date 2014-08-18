@@ -25,9 +25,9 @@ public class Xob_search_sql_wkr extends Xob_search_base implements Io_make_cmd {
 	public void Sort_bgn() {
 		db_mgr = wiki.Db_mgr_as_sql();
 		boolean created = false;
-		Xodb_file search_db = db_mgr.Fsys_mgr().Get_tid_root(Xodb_file_tid_.Tid_search);
+		Xodb_file search_db = db_mgr.Fsys_mgr().Get_tid_root(Xodb_file_tid.Tid_search);
 		if (search_db == null) {
-			search_db = db_mgr.Fsys_mgr().Make(Xodb_file_tid_.Tid_search);
+			search_db = db_mgr.Fsys_mgr().Make(Xodb_file_tid.Tid_search);
 			created = true;
 		}
 		provider = search_db.Provider();

@@ -71,30 +71,6 @@ public class Xob_fxt {
 		Run(wkr);
 		return this;
 	}
-	public Xob_fxt Run_img(String expd) {
-		Xobc_parse_run wkr = new Xobc_parse_run(bldr, wiki).Load_len_(Io_mgr.Len_kb);
-		wkr.Tmpl_on_(true).Cmd_bgn(bldr);
-		for (int i = 0; i < doc_ary.length; i++) {
-			Xodb_page page = doc_ary[i];
-			wkr.Parse_page(page);
-		}
-		wkr.Cmd_end();
-		String actl = Io_mgr._.LoadFilStr(Io_url_.mem_fil_("mem/xowa/wiki/en.wikipedia.org/tmp/img.dump_link/make/0000000000.csv"));
-		Tfds.Eq_str_lines(expd, actl);
-		return this;
-	}
-	public Xob_fxt Run_math(String expd) {
-		Xobc_parse_run wkr = new Xobc_parse_run(bldr, wiki).Load_len_(Io_mgr.Len_kb);
-		wkr.Tmpl_on_(true).Cmd_bgn(bldr);
-		for (int i = 0; i < doc_ary.length; i++) {
-			Xodb_page page = doc_ary[i];
-			wkr.Parse_page(page);
-		}
-		wkr.Cmd_end();
-		String actl = Io_mgr._.LoadFilStr(Io_url_.mem_fil_("mem/xowa/wiki/en.wikipedia.org/tmp/math.text/make/0000000000.csv"));
-		Tfds.Eq_str_lines(expd, actl);
-		return this;
-	}
 	private void Run_wkr(Xobd_wkr wkr) {
 		wkr.Wkr_bgn(bldr);
 		for (int i = 0; i < doc_ary.length; i++) {

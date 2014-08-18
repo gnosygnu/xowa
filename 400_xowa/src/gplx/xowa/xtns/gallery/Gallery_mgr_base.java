@@ -61,8 +61,7 @@ public abstract class Gallery_mgr_base {
 		byte[] gallery_ul_id = tmp_bfr.Add(box_id_prefix_bry).Add_int_variable(page.File_queue().Elem_id().Val_add()).XtoAryAndClear();
 		Box_hdr_write(bfr, wiki.App().Html_mgr().Whitelist_mgr(), src, gallery_ul_id, box_cls, box_style, xnde.Atrs_other());
 		byte[] box_caption = xnde.Atr_caption();
-		if (box_caption != Gallery_xnde.Null_bry)
-			box_caption_fmtr.Bld_bfr_many(bfr, box_caption);
+		if (Bry_.Len_gt_0(box_caption)) box_caption_fmtr.Bld_bfr_many(bfr, box_caption);
 
 		Xoa_app app = wiki.App(); Xoh_html_wtr html_wtr = wiki.Html_mgr().Html_wtr();
 		int itm_len = xnde.Itms_len();
@@ -116,10 +115,10 @@ public abstract class Gallery_mgr_base {
 			this.Adjust_image_parameters(xfer_itm);	// trad=noop; packed=reduce by 1.5
 			int html_w_normal = xfer_itm.Html_w();
 			int html_h_normal = xfer_itm.Html_h();
-			xfer_itm.Init_xfer_for_gallery(html_w_normal, html_h_normal, html_w_expand);// NOTE: file_w should be set to expanded width so js can resize if gallery
+			xfer_itm.Init_for_gallery(html_w_normal, html_h_normal, html_w_expand);// NOTE: file_w should be set to expanded width so js can resize if gallery
 			itm_div0_fmtr.Bld_bfr_many(tmp_bfr, this.Get_thumb_div_width(html_w_expand));
 			itm_div1_fmtr.Bld_bfr_many(tmp_bfr, this.Get_vpad(itm_default_h, html_h_expand));	// <div style="margin:~{vpad}px auto;">
-			wiki.Html_mgr().Html_wtr().Lnki_wtr().Write_file(tmp_bfr, ctx, Xoh_html_wtr_ctx.Basic, src, lnki, xfer_itm, alt);
+			wiki.Html_mgr().Html_wtr().Lnki_wtr().Write_file(tmp_bfr, ctx, Xoh_wtr_ctx.Basic, src, lnki, xfer_itm, alt);
 			tmp_bfr.Add(itm_divs_end_bry);
 			itm_html = tmp_bfr.XtoAryAndClear();
 		}

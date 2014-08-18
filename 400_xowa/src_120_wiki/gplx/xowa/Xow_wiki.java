@@ -22,7 +22,7 @@ import gplx.xowa.langs.vnts.*; import gplx.xowa.gui.views.*; import gplx.xowa.wi
 import gplx.xowa.setup.maints.*; import gplx.xowa.wikis.caches.*;
 import gplx.xowa.bldrs.imports.*;  import gplx.xowa.xtns.pfuncs.*;
 public class Xow_wiki implements GfoInvkAble {
-	private Xow_html_util util;
+	private Xow_html_util util; private boolean hdump_enabled;
 	public Xow_wiki(Xoa_app app, Io_url wiki_dir, Xow_ns_mgr ns_mgr, Xol_lang lang) {
 		this.app = app; this.ns_mgr = ns_mgr; this.lang = lang;
 		domain_str = wiki_dir.NameOnly(); domain_bry = Bry_.new_utf8_(domain_str);			
@@ -192,6 +192,7 @@ public class Xow_wiki implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_maint))				return maint_mgr;
 		else if	(ctx.Match(k, Invk_domain))				return domain_str;
 		else if	(ctx.Match(k, Invk_xtns))				return xtn_mgr;
+		else if	(ctx.Match(k, Invk_hdump_enabled_))		hdump_enabled = m.ReadYn("v");
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}
@@ -203,7 +204,7 @@ public class Xow_wiki implements GfoInvkAble {
 	, Invk_msgs = "msgs", Invk_app = "app", Invk_util = "util"
 	, Invk_xtns = "xtns", Invk_data_storage_format_ = "data_storage_format_", Invk_import_mgr = "import"
 	, Invk_db_mgr = "db_mgr", Invk_db_mgr_to_sql_ = "db_mgr_to_sql_"
-	, Invk_domain = "domain", Invk_maint = "maint"
+	, Invk_domain = "domain", Invk_maint = "maint", Invk_hdump_enabled_ = "hdump_enabled_"
 	;
 	public Xodb_mgr_sql Db_mgr_create_as_sql() {Xodb_mgr_sql rv = new Xodb_mgr_sql(this); db_mgr = rv; return rv;}
 	public Xow_wiki Init_assert() {if (init_needed) Init_wiki(app.User()); return this;}
@@ -223,6 +224,7 @@ public class Xow_wiki implements GfoInvkAble {
 		if (sqlite_url != null) {
 			Xodb_mgr_sql db_mgr_sql = this.Db_mgr_create_as_sql();
 			db_mgr_sql.Init_load(gplx.dbs.Db_connect_.sqlite_(sqlite_url));
+			db_mgr_sql.Html_mgr().Enabled_(hdump_enabled);
 		}
 		db_mgr.Load_mgr().Load_init(this);
 		app.Gfs_mgr().Run_url_for(this, fsys_mgr.Cfg_wiki_core_fil());

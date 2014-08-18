@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.imports.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.imports.*;
 import org.junit.*;
 public class Xob_categorylinks_base_tst {
-	@Before public void init() {fxt.Clear();} private Xobc_base_fxt fxt = new Xobc_base_fxt();
+	@Before public void init() {fxt.Clear();} private Xob_base_fxt fxt = new Xob_base_fxt();
 	@Test   public void Basic() {
 		Io_url src_fil = Io_url_.new_fil_("mem/temp/sql_dump.sql");
 		fxt	.Init_fil(src_fil, String_.Concat

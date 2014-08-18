@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
 import org.junit.*;
-import gplx.xowa.gui.*;
+import gplx.xowa.gui.*; import gplx.xowa.pages.*;
 public class Xoh_page_wtr_wkr_tst {		
 	@Before public void init() {fxt.Clear();} private Xoh_page_wtr_wkr_fxt fxt = new Xoh_page_wtr_wkr_fxt();
 	@Test  public void Page_name() {
@@ -58,7 +58,7 @@ class Xoh_page_wtr_wkr_fxt {
 		Xoa_page page = wiki.Ctx().Cur_page();
 		page.Data_raw_(Bry_.new_utf8_(raw));
 		Xoh_page_wtr_mgr mgr = wiki.Html_mgr().Page_wtr_mgr();
-		Xoh_page_wtr_wkr wkr = mgr.Wkr(Xog_page_mode.Tid_edit).Page_(page).Mgr_(mgr);
+		Xoh_page_wtr_wkr wkr = mgr.Wkr(Xopg_view_mode.Tid_edit).Page_(page).Mgr_(mgr);
 		wkr.XferAry(tmp_bfr, 0);
 		Tfds.Eq(expd, tmp_bfr.XtoStrAndClear());
 	}
@@ -68,7 +68,7 @@ class Xoh_page_wtr_wkr_fxt {
 		page.Ttl_(Xoa_ttl.parse_(wiki, Bry_.new_ascii_(page_name)));
 		page.Data_raw_(Bry_.new_utf8_(page_text));
 		Xoh_page_wtr_mgr mgr = wiki.Html_mgr().Page_wtr_mgr();
-		Xoh_page_wtr_wkr wkr = mgr.Wkr(Xog_page_mode.Tid_read).Page_(page).Mgr_(mgr);
+		Xoh_page_wtr_wkr wkr = mgr.Wkr(Xopg_view_mode.Tid_read).Page_(page).Mgr_(mgr);
 		wkr.XferAry(tmp_bfr, 0);
 		Tfds.Eq(expd, tmp_bfr.XtoStrAndClear());
 	}

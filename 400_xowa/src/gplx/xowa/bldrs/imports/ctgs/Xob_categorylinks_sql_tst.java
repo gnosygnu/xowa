@@ -34,7 +34,7 @@ public class Xob_categorylinks_sql_tst {
 		));
 		fxt.Exec_run(new Xob_category_registry_sql(fxt.Bldr(), fxt.Wiki()));
 		fxt.Exec_run(new Xob_categorylinks_sql(fxt.Bldr(), fxt.Wiki()));
-		Db_provider provider = fxt.Wiki().Db_mgr_as_sql().Fsys_mgr().Category_provider();
+		Db_provider provider = fxt.Wiki().Db_mgr_as_sql().Fsys_mgr().Provider_ctg();
 		Db_tst_qry.tbl_(Xodb_category_tbl.Tbl_name, Xodb_category_tbl.Fld_cat_id)
 			.Cols_(Xodb_category_tbl.Fld_cat_id, Xodb_category_tbl.Fld_cat_subcats, Xodb_category_tbl.Fld_cat_files, Xodb_category_tbl.Fld_cat_pages)
 			.Rows_add_vals(1, 0, 0, 2)

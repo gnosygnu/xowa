@@ -81,7 +81,7 @@ class Imap_parser {
 						case Imap_itm_.Tid_invalid:			Parse_invalid(itm_bgn, itm_end); break;
 					}
 				}
-			} catch (Exception e) {usr_dlg.Warn_many("", "", "imap.parse:skipping line; page=~{0} line=~{1} err=~{2}", page_url.Xto_full_str_safe(), Bry_.Mid_by_len_safe(src, itm_bgn, itm_end), Err_.Message_gplx(e));}
+			} catch (Exception e) {usr_dlg.Warn_many("", "", "imap.parse:skipping line; page=~{0} line=~{1} err=~{2}", page_url.Xto_full_str_safe(), Bry_.Mid_safe(src, itm_bgn, itm_end), Err_.Message_gplx(e));}
 			++itm_idx;
 		}
 		rv.Init(xtn_mgr, imap_img_src, imap_img, imap_dflt, imap_desc, (Imap_itm_shape[])shapes.XtoAryAndClear(Imap_itm_shape.class), (Imap_err[])errs.XtoAryAndClear(Imap_err.class));
@@ -108,6 +108,7 @@ class Imap_parser {
 		int num_bgn = -1; // differs from MW parser which looks for link via regx, and then chops off rest; regx is difficult due to lnke; doing opposite approach which is eat numbers until something else
 		int pos = Bry_finder.Trim_fwd_space_tab(src, tid_end_pos, itm_end);
 		boolean reading_numbers = true;
+		int comma_pos_0 = -1;
 		while (reading_numbers) {
 			boolean last = pos == itm_end;
 			byte b = last ? Byte_ascii.Space : src[pos];
@@ -119,14 +120,21 @@ class Imap_parser {
 						num_bgn = pos;
 					++pos;
 					break;
+				case Byte_ascii.Comma:
+					if (comma_pos_0 == -1) comma_pos_0 = pos;
+					if (num_bgn == -1)
+						num_bgn = pos;
+					++pos;
+					break;
 				default:
-					int new_pos = Parse_shape_num(shape_tid, b, pos, num_bgn, pos, itm_end);
-					if (new_pos == -1)	return Add_err(Bool_.Y, itm_bgn, itm_end, "imagemap_invalid_coord");
+					int new_pos = Parse_shape_num(shape_tid, b, pos, num_bgn, pos, itm_end, comma_pos_0);
+					if (new_pos == -1) return Add_err(Bool_.Y, itm_bgn, itm_end, "imagemap_invalid_coord");
 					if (new_pos == pos)				// occurs when char is text
 						reading_numbers = false;
 					else
 						pos = Bry_finder.Trim_fwd_space_tab(src, new_pos, itm_end);
 					num_bgn = -1;
+					comma_pos_0 = -1;
 					break;
 			}
 			if (last) reading_numbers = false;
@@ -155,6 +163,7 @@ class Imap_parser {
 	private void Init_link_owner(Imap_link_owner link_owner, byte[] src, int bgn, int end) {
 		byte[] link_tkn_src = Bry_.Mid(src, bgn, end);
 		Xop_tkn_itm link_tkn = Parse_link(link_tkn_src);
+		link_tkn_src = imap_root.Data_mid();	// NOTE:must re-set link_tkn_src since link_tkn is expanded wikitext; i.e.: not "{{A}}" but "expanded"; PAGE:fr.w:Arrondissements_de_Lyon DATE:2014-08-12
 		Imap_link_owner_.Init(link_owner, app, wiki, link_tkn_src, link_tkn);
 	}
 	private Xop_tkn_itm Parse_link(byte[] raw) {
@@ -172,7 +181,7 @@ class Imap_parser {
 		}
 		return null;
 	}
-	private int Parse_shape_num(byte shape_tid, byte b, int pos, int num_bgn, int num_end, int itm_end) {
+	private int Parse_shape_num(byte shape_tid, byte b, int pos, int num_bgn, int num_end, int itm_end, int comma_pos_0) {
 		double num = 0;
 		boolean shape_is_poly = shape_tid == Imap_itm_.Tid_shape_poly;
 		if (num_bgn == -1) {								// 1st char is non-numeric; EX: "poly a"
@@ -186,8 +195,10 @@ class Imap_parser {
 			else
 				return num_end;
 		}
-		else
-			num = Bry_.XtoDoubleByPosOr(src, num_bgn, num_end, Double_.NaN);
+		else {
+			int parse_end = comma_pos_0 == -1 ? num_end : comma_pos_0;	// if commas exist, treat first as decimal; echo(intval(round('1,2,3,4' * 1))) -> 1; PAGE:fr.w:Gouesnou; DATE:2014-08-12
+			num = Bry_.XtoDoubleByPosOr(src, num_bgn, parse_end, Double_.NaN);
+		}
 		if (Double_.IsNaN(num)) { 
 			if (shape_is_poly)								// poly code in ImageMap_body.php accepts invalid words and converts to 0; EX:"poly 1a"
 				num = 0;
@@ -195,8 +206,6 @@ class Imap_parser {
 				return -1;	// invalid number; EX: "1.2.3"
 		}
 		pts.Add(Double_obj_val.new_(num));
-		if (shape_is_poly && src[num_end] == Byte_ascii.Comma)	// PHP ignores trailing comma when casting numbers; EX:echo('123,' + 1) -> 124; PAGE:de.w:Kaimnitz; DATE:2014-08-05
-			++num_end;
 		return Bry_finder.Trim_fwd_space_tab(src, num_end, itm_end);
 	}
 	private void Parse_img(Imap_map imap, int itm_bgn, int itm_end) {

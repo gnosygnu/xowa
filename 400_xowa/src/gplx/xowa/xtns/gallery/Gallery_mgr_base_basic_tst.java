@@ -135,7 +135,6 @@ public class Gallery_mgr_base_basic_tst {
 class Gallery_mgr_base_fxt {
 	public void Reset() {
 		fxt.Wiki().Xtn_mgr().Init_by_wiki(fxt.Wiki());
-		fxt.Wiki().Html_mgr().Html_wtr().Lnki_wtr().Init_by_page(fxt.Ctx(), fxt.Ctx().Cur_page());
 		Gallery_mgr_base.File_found_mode = Bool_.Y_byte;
 	}
 	public Xop_fxt Fxt() {return fxt;} private Xop_fxt fxt = new Xop_fxt();
@@ -144,6 +143,7 @@ class Gallery_mgr_base_fxt {
 	}
 	public void Test_html_str(String raw, String expd)						{fxt.Test_html_full_str(raw, expd);}
 	public void Test_html_frag(String raw, String... expd_frags)		{fxt.Test_html_full_frag(raw, expd_frags);}	// TODO: change to wiki_str; currently uids do not get reset if wiki
+	public void Test_html_frag_n(String raw, String... expd_frags)	{fxt.Test_html_full_frag_n(raw, expd_frags);}
 	public void Test_html_modules_js(String expd)							{
 		fxt.Page().Html_data().Module_mgr().Itm_globals().Enabled_n_();
 		fxt.Test_html_modules_js(expd);

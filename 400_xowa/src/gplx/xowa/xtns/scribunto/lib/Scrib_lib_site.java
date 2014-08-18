@@ -43,7 +43,7 @@ public class Scrib_lib_site implements Scrib_lib {
 	public boolean GetNsIndex(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] ns_name = args.Pull_bry(0);
 		Object ns_obj = core.Wiki().Ns_mgr().Names_get_or_null(ns_name, 0, ns_name.length);
-		return ns_obj == null ? rslt.Init_empty() : rslt.Init_obj(((Xow_ns)ns_obj).Id());
+		return ns_obj == null ? rslt.Init_ary_empty() : rslt.Init_obj(((Xow_ns)ns_obj).Id());
 	}
 	public boolean PagesInCategory(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] ctg_name = args.Pull_bry(0);

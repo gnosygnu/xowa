@@ -17,17 +17,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs.hdumps; import gplx.*; import gplx.xowa.*; import gplx.xowa.dbs.*;
 public class Hdump_img_itm {
-	public Hdump_img_itm(int img_id, byte[] img_src, int img_w, int img_h) {
-		this.img_id = img_id;
-		this.img_src = img_src;
-		this.img_w = img_w;
-		this.img_h = img_h;
+	public Hdump_img_itm(int idx, int view_w, int view_h, byte[] lnki_ttl, byte[] view_src) {
+		this.idx = idx;
+		this.view_w = view_w;
+		this.view_h = view_h;
+		this.lnki_ttl = lnki_ttl;
+		this.view_src = view_src;
 	}
-	public int Img_id() {return img_id;} private int img_id;
-	public byte[] Img_src() {return img_src;} private byte[] img_src;
-	public int Img_w() {return img_w;} private int img_w;
-	public int Img_h() {return img_h;} private int img_h;
-	public void Write_html(Bry_bfr bfr) {
-		fmtr.Bld_bfr_many(bfr, img_src, img_w, img_h);
-	}	private static final Bry_fmtr fmtr = Bry_fmtr.new_(" src='~{src}' width='~{w}' height='~{h}'", "src", "w", "h");
+	public int Idx() {return idx;} private int idx;
+	public byte[] Lnki_ttl() {return lnki_ttl;} private byte[] lnki_ttl;
+	public int View_w() {return view_w;} private int view_w;
+	public int View_h() {return view_h;} private int view_h;
+	public byte[] View_src() {return view_src;} private byte[] view_src;
+	@Override public String toString() {
+		return String_.Concat_with_str("|", Int_.XtoStr(idx), Int_.XtoStr(view_w), Int_.XtoStr(view_h), String_.new_utf8_(lnki_ttl), String_.new_utf8_(view_src));
+	}
+	public static final Hdump_img_itm[] Ary_empty = new Hdump_img_itm[0];
 }

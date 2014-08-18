@@ -19,5 +19,5 @@ package gplx.xowa.xtns.inputBox; import gplx.*; import gplx.xowa.*; import gplx.
 import gplx.xowa.html.*;
 public class Xtn_inputbox_nde implements Xox_xnde {
 	public void Xtn_parse(Xow_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {}	// FUTURE: noop for now so it doesn't show (since it's useless)
-	public void Xtn_write(Xoa_app app, Xoh_html_wtr html_wtr, Xoh_html_wtr_ctx opts, Xop_ctx ctx, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {}
+	public void Xtn_write(Xoa_app app, Xoh_html_wtr html_wtr, Xoh_wtr_ctx opts, Xop_ctx ctx, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {}
 }

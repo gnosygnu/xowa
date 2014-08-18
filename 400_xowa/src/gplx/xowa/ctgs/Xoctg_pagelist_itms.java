@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.ctgs; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.html.*;
+import gplx.xowa.html.*; import gplx.xowa.html.lnkis.*;
 import gplx.xowa.users.history.*;
 public class Xoctg_pagelist_itms implements Bry_fmtr_arg {
 	public void Init_app(Xoa_app app, Bry_fmtr fmtr_itm) {
@@ -32,7 +32,7 @@ public class Xoctg_pagelist_itms implements Bry_fmtr_arg {
 		for (int i = 0; i < len; i++) {
 			Xodb_page page = (Xodb_page)itms.FetchAt(i);
 			Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Xow_ns_.Id_category, page.Ttl_wo_ns());
-			byte[] lnki_cls = Xoh_lnki_file_wtr.Lnki_cls_visited(history_mgr, wiki.Domain_bry(), ttl.Page_txt());	// NOTE: must be ttl.Page_txt() in order to match Xou_history_mgr.Add
+			byte[] lnki_cls = Xoh_lnki_wtr.Lnki_cls_visited(history_mgr, wiki.Domain_bry(), ttl.Page_txt());	// NOTE: must be ttl.Page_txt() in order to match Xou_history_mgr.Add
 			byte[] lnki_href = href_parser.Build_to_bry(wiki, ttl);
 			byte[] lnki_ttl = ttl.Full_txt();
 			byte[] lnki_text = ttl.Page_txt();

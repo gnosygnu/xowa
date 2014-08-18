@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
 import org.junit.*;
-import gplx.xowa.gui.*; import gplx.xowa.html.*; import gplx.xowa.html.portal.*;
+import gplx.xowa.gui.*; import gplx.xowa.html.*; import gplx.xowa.html.portal.*; import gplx.xowa.pages.*;
 public class Xoh_page_wtr_mgr_tst {
 	@Before public void init() {}
 	@Test  public void Logo_has_correct_main_page() {	// PURPOSE: Logo href should be "/site/en.wikipedia.org/wiki/", not "/wiki/Main_Page"
@@ -27,7 +27,7 @@ public class Xoh_page_wtr_mgr_tst {
 		GfoInvkAble_.InvkCmd_val(portal_mgr, Xow_portal_mgr.Invk_div_logo_, Bry_.new_ascii_("~{portal_nav_main_href}"));
 		portal_mgr.Init_assert();
 		Xoh_page_wtr_mgr page_wtr_mgr = new Xoh_page_wtr_mgr(app, true);
-		page_wtr_mgr.Gen(wiki.Ctx().Cur_page(), Xog_page_mode.Tid_read);
+		page_wtr_mgr.Gen(wiki.Ctx().Cur_page(), Xopg_view_mode.Tid_read);
 		Tfds.Eq(String_.new_ascii_(portal_mgr.Div_logo_bry()), "/site/en.wikipedia.org/wiki/");
 	}
 }

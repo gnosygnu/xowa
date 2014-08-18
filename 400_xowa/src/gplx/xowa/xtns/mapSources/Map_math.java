@@ -44,12 +44,20 @@ class Map_math {// REF.MW:MapSources_math.php
 		return error == 0;
 	}
 	public void Fail(Xop_ctx ctx, byte[] src, Xot_invk self, Bry_bfr bfr, byte[] pfunc_name) {
-		byte[] self_src = Bry_.Mid(src, self.Src_bgn(), self.Src_end()); 
-		if (error != -1)	// -1 indicates empty coord; don't log, b/c it.v: often omits; it.v:Sami; DATE:2014-03-02
-			ctx.App().Usr_dlg().Warn_many("", "", "mapSources failed: page=~{0} src=~{1} err=~{2}", String_.new_utf8_(ctx.Cur_page().Ttl().Full_db()), String_.new_utf8_(self_src), error);
-		bfr.Add(pfunc_name).Add(Bry_failed);
-		return;
-	}	private static final byte[] Bry_failed = Bry_.new_ascii_(" failed.");
+		String page_str = ctx.Cur_page().Url().Xto_full_str_safe();
+		String pfunc_name_str = String_.new_utf8_(pfunc_name);
+		String self_str = String_.new_utf8_(src, self.Src_bgn(), self.Src_end()); 
+		switch (error) {
+			case  -1:	// empty coord; EX: {{#deg2dd:|precision=6}}}} PAGE:it.v:Sami; DATE:2014-03-02
+			case  -2:	// words > 4; EX:{{#geoLink: $1 $2 $3 $4 $5 $6|lat=51°20′00″19°55′50″}}; PAGE:pl.v:Rezerwat_przyrody_Jaksonek DATE:2014-08-14
+			case  -3:	// invalid delim; EX:{{#geoLink: $1 $2 $3 $4 $5 $6|lat=51°31′37″|long=20°13′17'}}; PAGE:pl.v:Rezerwat_przyrody_Ciosny DATE:2014-08-14
+				ctx.App().Usr_dlg().Log_many("", "", "mapSources failed: page=~{0} pfunc=~{1} err=~{2} src=~{3}", page_str, pfunc_name_str, error, self_str); // don't warn b/c there are many
+				break;
+			default:
+				ctx.App().Usr_dlg().Warn_many("", "", "mapSources failed: page=~{0} pfunc=~{1} err=~{2} src=~{3}", page_str, pfunc_name_str, error, self_str);
+				break;
+		}
+	}
 	private void New_coord(byte[] input, byte[] dir, int prec) {	// REF.MW:newCoord
 		this.error = 0; this.word_idx_nsew = -1;
 		coord_dec = coord_deg = coord_min = coord_sec = 0;
@@ -150,8 +158,8 @@ class Map_math {// REF.MW:MapSources_math.php
 			if (is_last) break;
 			i++;
 		}
-		if (word_idx_nsew != -1 && word_idx_nsew != words_len - 1) {error = -10; return;}
 		if (words_len < 1 || words_len > 4) {error = -2; return;}
+		if (word_idx_nsew != -1 && word_idx_nsew != words_len - 1) {error = -10; return;}
 		if (rv[0] >= 0)
 			dec = (rv[0] + rv[1] / 60 + rv[2] / 3600 ) * rv[3];
 		else
@@ -173,11 +181,11 @@ class Map_math {// REF.MW:MapSources_math.php
 		if (word_idx >= Input_units_len) return;
 		byte unit_dlm = Input_units[word_idx];
 		int pos = Bry_finder.Find_fwd(input, unit_dlm, word_bgn, word_end);
-		if (pos != Bry_.NotFound)	// remove dlms from end of bry; EX: "123'"  -> "123"
+		if (pos != Bry_.NotFound)	// remove dlms from end of bry; EX: "123'" -> "123"
 			word_end = pos;
 		if (!Parse_input_word_is_compass(input[word_bgn])) {	// if ( is_numeric( $v ) ) {
 			double word_val = Bry_.XtoDoubleByPosOr(input, word_bgn, word_end, Double_.NaN);
-			if (word_val != Double_.NaN) {
+			if (!Double_.IsNaN(word_val)) {
 				if (word_idx > 2) {error = -4; return;}
 				switch (word_idx) {
 					case 0:
@@ -196,7 +204,10 @@ class Map_math {// REF.MW:MapSources_math.php
 						break;
 				}
 			}
-			else {error = -3; return;}
+			else {
+				error = -3;
+				return;
+			}
 		}
 		else {	// 'NSEW'
 			word_idx_nsew = word_idx;

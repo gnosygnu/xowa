@@ -88,9 +88,12 @@ public class Pft_func_time_basic_tst {
 		fxt.Test_parse_tmpl_str_test("{{#time:F|2012-01|fr}}"		, "{{test}}"			, "Janvier");
 //			fxt.Test_parse_tmpl_str_test("{{#time:F|2012-01|fr_bad}}"	, "{{test}}"			, "January");	// default to english	// commented out; fails when running all at once
 	}
-	@Test   public void Hour_with_dash()				{fxt.Test_parse_tmpl_str_test("{{#time:c|January 2, 2001-06}}"					, "{{test}}"			, "2001-01-02T06:00:00-05:00");}	// PURPOSE.fix: w:Vim_(text_editor) generates this during {{time ago|November 2, 1991-06-19|min_magnitude=days}}; DATE:2013-06-19
-	@Test   public void Multiple_dates_gt_12()		{fxt.Test_parse_tmpl_str_test("{{#time:c|January 2, 2001-06-19}}"				, "{{test}}"			, "2001-01-02T06:00:00-05:00");}	// PURPOSE.fix: w:Vim_(text_editor)
-	@Test   public void Multiple_dates_lt_12()		{fxt.Test_parse_tmpl_str_test("{{#time:c|January 2, 2001-06-11}}"				, "{{test}}"			, "2001-01-02T06:00:00-05:00");}	// PURPOSE.fix: w:Vim_(text_editor)
-	@Test   public void Raw_H()						{fxt.Test_parse_tmpl_str_test("{{#time:xnH}}"									, "{{test}}"			, "08");}	// PURPOSE: ignore "xn" for now; chk 0-padded number is generated; DATE:2013-12-31
-	@Test   public void Raw_h()						{fxt.Test_parse_tmpl_str_test("{{#time:xnh}}"									, "{{test}}"			, "08");}	// PURPOSE: ignore "xn" for now; chk 0-padded number is generated; DATE:2013-12-31
+	@Test   public void Hour_with_dash()		{fxt.Test_parse_tmpl_str_test("{{#time:c|January 2, 2001-06}}"					, "{{test}}"			, "2001-01-02T06:00:00-05:00");}	// PURPOSE.fix: w:Vim_(text_editor) generates this during {{time ago|November 2, 1991-06-19|min_magnitude=days}}; DATE:2013-06-19
+	@Test   public void Multiple_dates_gt_12()	{fxt.Test_parse_tmpl_str_test("{{#time:c|January 2, 2001-06-19}}"				, "{{test}}"			, "2001-01-02T06:00:00-05:00");}	// PURPOSE.fix: w:Vim_(text_editor)
+	@Test   public void Multiple_dates_lt_12()	{fxt.Test_parse_tmpl_str_test("{{#time:c|January 2, 2001-06-11}}"				, "{{test}}"			, "2001-01-02T06:00:00-05:00");}	// PURPOSE.fix: w:Vim_(text_editor)
+	@Test   public void Raw_H()					{fxt.Test_parse_tmpl_str_test("{{#time:xnH}}"									, "{{test}}"			, "08");}	// PURPOSE: ignore "xn" for now; chk 0-padded number is generated; DATE:2013-12-31
+	@Test   public void Raw_h()					{fxt.Test_parse_tmpl_str_test("{{#time:xnh}}"									, "{{test}}"			, "08");}	// PURPOSE: ignore "xn" for now; chk 0-padded number is generated; DATE:2013-12-31
+	@Test   public void Iso8601_T()				{fxt.Test_parse_tmpl_str_test("{{#time:Y-m-d h:i:s A|T1:23}}"					, "{{test}}"			, "2012-01-01 01:23:00 AM");}	// handle "T" flag; PAGE:pl.w:StarCraft_II:_Wings_of_Liberty
+	@Test   public void Iso8601_T_ws()			{fxt.Test_parse_tmpl_str_test("{{#time:Y-m-d h:i:s A|T 1:23}}"					, "{{test}}"			, "2012-01-01 01:23:00 AM");}	// handle "T" flag and ws
+	@Test   public void Iso8601_T_fail()		{fxt.Test_parse_tmpl_str_test("{{#time:Y-m-d h:i:s A|T2012-01-02}}"				, "{{test}}"			, "<strong class=\"error\">Invalid hour: T</strong>");}	// handle "T" flag and ws
 }

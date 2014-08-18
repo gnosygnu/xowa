@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.ctgs; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.html.*;
+import gplx.xowa.html.*; import gplx.xowa.html.lnkis.*;
 import gplx.xowa.users.history.*;
 abstract class Xoctg_fmtr_itm_base implements Xoctg_fmtr_itm {
 	public void Init_from_all(Xow_wiki wiki, Xol_lang lang, Xoctg_view_ctg ctg, Xoctg_fmtr_all mgr, Xoctg_view_grp itms_list, int itms_list_len) {
@@ -60,7 +60,7 @@ abstract class Xoctg_fmtr_itm_base implements Xoctg_fmtr_itm {
 	@gplx.Virtual public void Bld_html(Bry_bfr bfr, Xow_wiki wiki, Xoctg_view_itm itm, Xoa_ttl ttl, byte[] ttl_page, Xoh_href_parser href_parser, Bry_fmtr html_itm) {
 		byte[] itm_href = href_parser.Build_to_bry(wiki, ttl);
 		byte[] itm_full_ttl = ttl.Full_txt();// NOTE: ttl.Full_txt() to get full ns; EX: Template:A instead of just "A"
-		byte[] itm_atr_cls = Xoh_lnki_file_wtr.Lnki_cls_visited(history_mgr, wiki.Domain_bry(), ttl.Page_txt());	// NOTE: must be ttl.Page_txt() in order to match Xou_history_mgr.Add
+		byte[] itm_atr_cls = Xoh_lnki_wtr.Lnki_cls_visited(history_mgr, wiki.Domain_bry(), ttl.Page_txt());	// NOTE: must be ttl.Page_txt() in order to match Xou_history_mgr.Add
 		Bry_fmtr fmtr = itm.Id_missing() ? html_itm_missing : html_itm;
 		fmtr.Bld_bfr_many(bfr, itm_href, itm_full_ttl, itm_full_ttl, itm.Id(), itm_atr_cls);
 	}

@@ -37,7 +37,7 @@ class Xofw_wiki_wkr_base implements Xofw_wiki_finder {
 			boolean found = repo_wiki.Db_mgr().Load_mgr().Load_by_ttl(tmp_db_page, file_ns, ttl.Page_db());
 			if (!found) {continue;}
 			byte[] redirect = Get_redirect(repo_wiki, file_ns, tmp_db_page);
-			file.Atrs_by_ttl(ttl.Page_txt(), redirect);
+			file.Set__ttl(ttl.Page_txt(), redirect);
 			file.Trg_repo_idx_(i);
 			return;
 		}

@@ -20,7 +20,7 @@ import gplx.xowa.xtns.wdatas.*;
 public class Xow_page_tid {
 	public static byte Identify(byte wiki_tid, int ns_id, byte[] ttl) {
 		switch (ns_id) {
-			case Xow_ns_.Id_mediaWiki:
+			case Xow_ns_.Id_mediawiki:
 			case Xow_ns_.Id_user:
 				return Identify_by_ttl(ttl);
 			case gplx.xowa.xtns.scribunto.Scrib_xtn_mgr.Ns_id_module:

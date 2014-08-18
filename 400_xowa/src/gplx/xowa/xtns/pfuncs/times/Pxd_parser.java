@@ -49,7 +49,7 @@ class Pxd_parser {
 	private boolean Tokenize(byte[] src) { 
 		this.src = src; src_len = src.length;
 		tkns = new Pxd_itm[src_len]; tkns_len = 0;		
-		tkn_type = Pxd_itm_.TypeId_null; tkn_bgn_pos = -1;
+		tkn_type = Pxd_itm_.Tid_null; tkn_bgn_pos = -1;
 		cur_pos = 0;
 		Colon_count = 0;
 		errorBfr.Clear();
@@ -59,12 +59,12 @@ class Pxd_parser {
 			byte b = src[cur_pos];
 			switch (b) {	
 				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.NewLine:
-					if (tkn_type != Pxd_itm_.TypeId_ws) MakePrvTkn(cur_pos, Pxd_itm_.TypeId_ws); break; // SEE:NOTE_1 for logic
+					if (tkn_type != Pxd_itm_.Tid_ws) MakePrvTkn(cur_pos, Pxd_itm_.Tid_ws); break; // SEE:NOTE_1 for logic
 				case Byte_ascii.Dash: case Byte_ascii.Dot: case Byte_ascii.Colon: case Byte_ascii.Slash:
 					if (tkn_type != b) MakePrvTkn(cur_pos, b); break;
 				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
 				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-					if (tkn_type != Pxd_itm_.TypeId_int)	MakePrvTkn(cur_pos, Pxd_itm_.TypeId_int); break;
+					if (tkn_type != Pxd_itm_.Tid_int)	MakePrvTkn(cur_pos, Pxd_itm_.Tid_int); break;
 				case Byte_ascii.Ltr_A: case Byte_ascii.Ltr_B: case Byte_ascii.Ltr_C: case Byte_ascii.Ltr_D: case Byte_ascii.Ltr_E:
 				case Byte_ascii.Ltr_F: case Byte_ascii.Ltr_G: case Byte_ascii.Ltr_H: case Byte_ascii.Ltr_I: case Byte_ascii.Ltr_J:
 				case Byte_ascii.Ltr_K: case Byte_ascii.Ltr_L: case Byte_ascii.Ltr_M: case Byte_ascii.Ltr_N: case Byte_ascii.Ltr_O:
@@ -76,7 +76,7 @@ class Pxd_parser {
 				case Byte_ascii.Ltr_p: case Byte_ascii.Ltr_q: case Byte_ascii.Ltr_r: case Byte_ascii.Ltr_s: case Byte_ascii.Ltr_t:
 				case Byte_ascii.Ltr_u: case Byte_ascii.Ltr_v: case Byte_ascii.Ltr_w: case Byte_ascii.Ltr_x: case Byte_ascii.Ltr_y: case Byte_ascii.Ltr_z:
 				case Byte_ascii.At:
-					MakePrvTkn(cur_pos, Pxd_itm_.TypeId_null);			// first, make prv tkn
+					MakePrvTkn(cur_pos, Pxd_itm_.Tid_null);			// first, make prv tkn
 					Object o = trie.Match_bgn_w_byte(b, src, cur_pos, src_len);	// now match String against tkn
 					if (o == null) return false;	// unknown letter / word; exit now;
 					tkns[tkns_len] = ((Pxd_itm_prototype)o).MakeNew(tkns_len); 
@@ -84,20 +84,20 @@ class Pxd_parser {
 					cur_pos = trie.Match_pos() - 1; // -1 b/c trie matches to next char, and ++ below
 					break;
 				case Byte_ascii.Comma: case Byte_ascii.Plus:
-					MakePrvTkn(cur_pos, Pxd_itm_.TypeId_null);					
+					MakePrvTkn(cur_pos, Pxd_itm_.Tid_null);					
 					tkns[tkns_len] = new Pxd_itm_sym(tkns_len, b);
 					++tkns_len;
 					break;
 			}
 			++cur_pos;
 		}
-		MakePrvTkn(cur_pos, Pxd_itm_.TypeId_null);
+		MakePrvTkn(cur_pos, Pxd_itm_.Tid_null);
 		return true;
 	}
 	private void MakePrvTkn(int cur_pos, int nxt_type) {
 		Pxd_itm itm = null;
 		switch (tkn_type) {
-			case Pxd_itm_.TypeId_int:
+			case Pxd_itm_.Tid_int:
 				int int_val = Bry_.Xto_int_or(src, tkn_bgn_pos, cur_pos, Int_.MinValue);
 				if (int_val == Int_.MinValue) {} // FUTURE: warn
 				int digits = cur_pos - tkn_bgn_pos;
@@ -111,12 +111,12 @@ class Pxd_parser {
 						itm = new Pxd_itm_int(tkns_len, digits, int_val); break;
 				}
 				break;
-			case Pxd_itm_.TypeId_ws: 	itm = new Pxd_itm_ws(tkns_len); break;
-			case Pxd_itm_.TypeId_dash:	itm = new Pxd_itm_dash(tkns_len); break;
-			case Pxd_itm_.TypeId_dot:	itm = new Pxd_itm_dot(tkns_len); break;
-			case Pxd_itm_.TypeId_colon:	itm = new Pxd_itm_colon(tkns_len); break;
-			case Pxd_itm_.TypeId_slash:	itm = new Pxd_itm_slash(tkns_len); break;
-			case Pxd_itm_.TypeId_null:	break; // NOOP
+			case Pxd_itm_.Tid_ws: 	itm = new Pxd_itm_ws(tkns_len); break;
+			case Pxd_itm_.Tid_dash:	itm = new Pxd_itm_dash(tkns_len); break;
+			case Pxd_itm_.Tid_dot:	itm = new Pxd_itm_dot(tkns_len); break;
+			case Pxd_itm_.Tid_colon:	itm = new Pxd_itm_colon(tkns_len); break;
+			case Pxd_itm_.Tid_slash:	itm = new Pxd_itm_slash(tkns_len); break;
+			case Pxd_itm_.Tid_null:	break; // NOOP
 		}
 		if (itm != null) {
 			tkns[tkns_len] = itm;
@@ -151,8 +151,8 @@ class Pxd_parser {
 		for (int i = 0; i < tkns_len; i++) {
 			Pxd_itm itm = tkns[i];
 			switch (itm.Tkn_tid()) {
-				case Pxd_itm_.TypeId_month_name:
-				case Pxd_itm_.TypeId_int:
+				case Pxd_itm_.Tid_month_name:
+				case Pxd_itm_.Tid_int:
 					itm.Data_idx_(data_ary_len);
 					data_ary[data_ary_len++] = itm;
 					break;			
@@ -210,7 +210,8 @@ class Pxd_parser_ {
 		trie.Add_obj(Pxd_itm_ago.Name_ago, new Pxd_itm_ago(-1, -1));
 		Init_suffix(Names_day_suffix);
 		Init_relative();
-		trie.Add_obj(Pxd_itm_unixtime.Name_unixtime, new Pxd_itm_unixtime(-1, -1));
+		trie.Add_obj(Pxd_itm_unixtime.Name_const, new Pxd_itm_unixtime(-1, -1));
+		trie.Add_obj(Pxd_itm_iso8601_t.Name_const, new Pxd_itm_iso8601_t(-1, -1));
 	}
 	private static void Init_reg_months(String[] names) {
 		for (int i = 0; i < names.length; i++)

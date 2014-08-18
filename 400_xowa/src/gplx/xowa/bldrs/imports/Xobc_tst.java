@@ -146,43 +146,6 @@ public class Xobc_tst {
 		.Run_ctg()
 		;
 	}
-	@Test  public void Img() {
-		fxt.doc_ary_
-		(	fxt.doc_wo_date_(2, "A",  "[[File:X.png|thumb|220x110px]] [[Image:Y.png|upright=.80]]")
-		,	fxt.doc_wo_date_(3, "B",  "[[File:X.png]] [[Image:Y.png|upright=.80]]")
-		)
-		.Run_img(String_.Concat_lines_nl
-		(	"X.png|0,-1,-1"
-		,	"X.png|8,220,110"
-		,	"Y.png|0,-1,-1,upright=0.8"
-		,	""
-		))
-		;
-	}
-	@Test  public void Img_chars() {
-		fxt.doc_ary_
-		(	fxt.doc_wo_date_(2, "A",  "[[File:A + b.png]] [[File:A %3c b.png]] [[File:A 折 b.png]]")
-		)
-		.Run_img(String_.Concat_lines_nl
-		(	"A_+_b.png|0,-1,-1"		// EX: ASLSJSW Aas+.PNG
-		,	"A_<_b.png|0,-1,-1"		// EX: ANKAW%C3%9C-Burgunder-wei%C3%9F.jpg
-		,	"A_折_b.png|0,-1,-1"		// EX: 折鶴 WUXGA.jpg
-		,	""
-		))
-		;
-	}
-	@Test  public void Math() {
-		fxt.doc_ary_
-		(	fxt.doc_wo_date_(2, "A",  "<math>a</math>")
-		,	fxt.doc_wo_date_(3, "B",  "<math>a</math> <math>b</math>")
-		)
-		.Run_math(String_.Concat_lines_nl
-		(	"a"
-		,	"b"
-		,	""
-		))
-		;
-	}
 	@Test  public void Tmpl_dump() {
 		fxt.doc_ary_
 		(	fxt.doc_wo_date_(2, "Template:A",  "a")
@@ -238,21 +201,4 @@ public class Xobc_tst {
 		.tst_()
 		*/;
 	}
-}
-class Xob_img_xfer_gen_fxt extends Xob_fxt {		public Xob_img_xfer_gen_fxt Files_len(int v) {expd_files_len = v; return this;} private int expd_files_len;
-	public Xob_img_xfer_gen_fxt Files_(Io_fil... v) {expd_files = v; return this;} Io_fil[] expd_files;
-	public Xob_img_xfer_gen_fxt tst() {
-		Xob_bldr bldr = this.Bldr();
-		Xobc_img_prep_xfer wkr = new Xobc_img_prep_xfer(bldr, this.Wiki());
-		wkr.Cmd_bgn(bldr);
-		wkr.Cmd_run();
-		wkr.Cmd_end();
-		Io_url[] urls = wkr.Dump_url_gen().Prv_urls();
-		Tfds.Eq(expd_files_len, urls.length);
-		return this;
-	}
-//	public void Cmd_end() {
-//		Io_url_gen make_url_gen = new Io_url_gen_md5(temp_dir.GenSubFil("make")); 
-//		Xobdc_merger.Basic(bldr.Status_mgr(), dump_url_gen, temp_dir.GenSubDir("sort"), sort_mem_len, Io_line_rdr_key_gen_.last_pipe, new Io_sort_fil_basic(bldr.Status_mgr(), make_url_gen, make_fil_len));
-//	}	int sort_mem_len = Int_.Neg1, make_fil_len = 100 * Io_mgr.Len_kb;
 }

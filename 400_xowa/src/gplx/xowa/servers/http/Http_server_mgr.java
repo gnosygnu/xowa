@@ -33,7 +33,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.servers.http; import gplx.*; import gplx.xowa.*; import gplx.xowa.servers.*;
-import gplx.ios.*; import gplx.json.*; import gplx.xowa.gui.*;
+import gplx.ios.*; import gplx.json.*; import gplx.xowa.gui.*; import gplx.xowa.pages.*;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.Console;
@@ -84,14 +84,14 @@ public class Http_server_mgr implements GfoInvkAble {
 			page.Data_raw_(Bry_.new_ascii_("'''Page not found.'''"));
 			wiki.ParsePage(page, false);			
 		}
-		byte[] output_html = wiki.Html_mgr().Page_wtr_mgr().Gen(page, Xog_page_mode.Tid_read);		// write html from page data
+		byte[] output_html = wiki.Html_mgr().Page_wtr_mgr().Gen(page, Xopg_view_mode.Tid_read);		// write html from page data
 		switch (retrieve_mode) {
 			case File_retrieve_mode.Mode_skip:				break;	// noop
 			case File_retrieve_mode.Mode_async_server:		app.Gui_mgr().Browser_win().Page__async__bgn(page.Tab()); break;
 			case File_retrieve_mode.Mode_wait:
 				if (page.File_queue().Count() > 0) {
 					app.Gui_mgr().Browser_win().Active_tab().Async();
-					output_html = wiki.Html_mgr().Page_wtr_mgr().Gen(page, Xog_page_mode.Tid_read);
+					output_html = wiki.Html_mgr().Page_wtr_mgr().Gen(page, Xopg_view_mode.Tid_read);
 				}
 				break;
 		}

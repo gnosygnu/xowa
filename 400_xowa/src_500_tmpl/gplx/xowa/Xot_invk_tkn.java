@@ -313,7 +313,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		if (argx_ary != Bry_.Empty) defn_func.Argx_dat_(argx_ary);
 		defn_func.Eval_argx(ctx, src, caller, invk);
 		if (defn_func_id == Xol_kwd_grp_.Id_invoke)	// NOTE: if #invoke, set frame_ttl to argx, not name; EX:{{#invoke:A}}
-			invk.Frame_ttl_(ctx.Wiki().Ns_mgr().Ns_module().Gen_ttl(defn_func.Argx_dat()));	// NOTE: always prepend "Module:" to frame_ttl; DATE:2014-06-13
+			invk.Frame_ttl_(ctx.Wiki().Ns_mgr().Ns_module().Gen_ttl(Xoa_ttl.Replace_unders(defn_func.Argx_dat())));	// NOTE: always prepend "Module:" to frame_ttl; DATE:2014-06-13; NOTE: always use spaces; DATE:2014-08-14
 		Bry_bfr bfr_func = Bry_bfr.new_();
 		defn_func.Func_evaluate(ctx, src, caller, invk, bfr_func);
 		if (caller.Rslt_is_redirect())			// do not prepend if page is redirect; EX:"#REDIRECT" x> "\n#REDIRECT" DATE:2014-07-11

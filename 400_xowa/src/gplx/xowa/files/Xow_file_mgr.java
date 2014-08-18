@@ -78,19 +78,19 @@ public class Xow_file_mgr implements GfoInvkAble {
 	public boolean Find_meta(Xof_xfer_itm xfer_itm) {
 		xfer_itm.Trg_repo_idx_(Xof_meta_itm.Repo_unknown);
 		byte[] xfer_itm_ttl = xfer_itm.Lnki_ttl();
-		xfer_itm.Atrs_by_ttl(xfer_itm_ttl, Bry_.Empty);
+		xfer_itm.Set__ttl(xfer_itm_ttl, Bry_.Empty);
 		Xof_meta_itm meta_itm = meta_mgr.Get_itm_or_new(xfer_itm_ttl, xfer_itm.Lnki_md5());
-		xfer_itm.Atrs_by_meta_only(meta_itm);
+		xfer_itm.Set__meta_only(meta_itm);
 		if (meta_itm.State_new()) {														// meta_itm is brand new
-			xfer_itm.Atrs_by_meta(meta_itm, repo_mgr.Repos_get_at(0).Trg(), wiki.Html_mgr().Img_thumb_width());	// default to 1st repo to prevent null_ref in xfer_mgr; questionable, but all wikis must have at least 1 repo
-			xfer_itm.Atrs_calc_for_html();
+			xfer_itm.Set__meta(meta_itm, repo_mgr.Repos_get_at(0).Trg(), wiki.Html_mgr().Img_thumb_width());	// default to 1st repo to prevent null_ref in xfer_mgr; questionable, but all wikis must have at least 1 repo
+			xfer_itm.Calc_by_meta();
 			return false;
 		}
 		else {																			// meta_itm exists
 			Xof_repo_itm cur_repo = null;
 			cur_repo = meta_itm.Repo_itm(wiki);
-			xfer_itm.Atrs_by_meta(meta_itm, cur_repo, wiki.Html_mgr().Img_thumb_width());
-			return xfer_itm.Atrs_calc_for_html();
+			xfer_itm.Set__meta(meta_itm, cur_repo, wiki.Html_mgr().Img_thumb_width());
+			return xfer_itm.Calc_by_meta();
 		}
 	}
 	public boolean Exists(byte[] ttl_bry) {
