@@ -106,6 +106,11 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 		}
 	}
 	private void Write_body_wikitext(Bry_bfr bfr, Xoa_app app, Xow_wiki wiki, byte[] data_raw, Xoh_wtr_ctx hctx, Xoa_page page, int ns_id) {
+		byte[] hdump_data = page.Hdump_data().Body();
+		if (Bry_.Len_gt_0(hdump_data)) {
+			bfr.Add(hdump_data);
+			return;
+		}
 		if	(ns_id == Xow_ns_.Id_mediawiki) {	// if MediaWiki and wikitext, must be a message; convert args back to php; DATE:2014-06-13
 			bfr.Add(gplx.xowa.apps.Xoa_gfs_php_mgr.Xto_php(tmp_bfr, Bool_.N, data_raw));
 			return;

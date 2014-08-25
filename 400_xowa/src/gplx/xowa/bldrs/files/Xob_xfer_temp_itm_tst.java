@@ -88,6 +88,15 @@ public class Xob_xfer_temp_itm_tst {
 		);
 		fxt.Test_itm_chk_fail_id(Xob_xfer_temp_itm.Chk_tid_ns_is_media);
 	}
+	@Test   public void Orig_width_is_0() {// PURPOSE: ignore files with an orig width of 0; note that ogg files that are sometimes flagged as VIDEO; EX:2009_10_08_Marc_Randazza_interview.ogg; DATE:2014-08-20
+		fxt.Test_bgn
+		(	KeyVal_.new_(Xob_orig_regy_tbl.Fld_lnki_ttl			, "A.ogg")
+		,	KeyVal_.new_(Xob_orig_regy_tbl.Fld_orig_media_type	, Xof_media_type.Name_video)	// VIDEO
+		,	KeyVal_.new_(Xob_orig_regy_tbl.Fld_orig_w			, 0)							// no width defined in image table
+		,	KeyVal_.new_(Xob_orig_regy_tbl.Fld_orig_h			, 0)
+		);
+		fxt.Test_itm_chk_fail_id(Xob_xfer_temp_itm.Chk_tid_orig_w_is_0);
+	}
 }
 class Xob_xfer_temp_itm_fxt {
 	private Xob_xfer_temp_itm itm = new Xob_xfer_temp_itm();

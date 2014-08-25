@@ -19,7 +19,7 @@ package gplx.fsdb; import gplx.*;
 import gplx.dbs.*; import gplx.cache.*;
 public class Fsdb_db_atr_fil implements RlsAble {
 	private Gfo_cache_mgr_bry dir_cache = new Gfo_cache_mgr_bry();		
-	private Fsdb_dir_tbl tbl_dir; private Fsdb_fil_tbl tbl_fil; private Fsdb_xtn_thm_tbl tbl_thm; private Fsdb_xtn_img_tbl tbl_img; private Bool_obj_ref img_needs_create = Bool_obj_ref.n_();
+	private Fsdb_dir_tbl tbl_dir; private Fsdb_fil_tbl tbl_fil; private Fsdb_xtn_thm_tbl tbl_thm;
 	public Fsdb_db_atr_fil(Fsdb_db_abc_mgr abc_mgr, Io_url url, boolean create) {
 		this.abc_mgr = abc_mgr;
 		Db_connect connect = create ? Db_connect_sqlite.make_(url) : Db_connect_sqlite.load_(url);
@@ -28,7 +28,6 @@ public class Fsdb_db_atr_fil implements RlsAble {
 		tbl_dir = new Fsdb_dir_tbl(provider, create);
 		tbl_fil = new Fsdb_fil_tbl(provider, create);
 		tbl_thm = new Fsdb_xtn_thm_tbl(this, provider, create);
-		tbl_img = new Fsdb_xtn_img_tbl(provider, create);
 	}
 	public Fsdb_db_abc_mgr Abc_mgr() {return abc_mgr;} private Fsdb_db_abc_mgr abc_mgr;
 	public Db_provider Provider() {return provider;} private Db_provider provider;
@@ -39,7 +38,6 @@ public class Fsdb_db_atr_fil implements RlsAble {
 	public void Rls() {
 		tbl_dir.Rls();
 		tbl_fil.Rls();
-		tbl_img.Rls();
 		tbl_thm.Rls();
 		provider.Txn_mgr().Txn_end_all();
 		provider.Rls();
@@ -74,10 +72,7 @@ public class Fsdb_db_atr_fil implements RlsAble {
 	}
 	public int Img_insert(Fsdb_xtn_img_itm rv, String dir, String fil, int ext_id, int img_w, int img_h, DateAdp modified, String hash, int bin_db_id, long bin_len, gplx.ios.Io_stream_rdr bin_rdr) {
 		int dir_id = Dir_id__get_or_insert(dir);
-		img_needs_create.Val_(false);
 		int fil_id = Fil_id__get_or_insert(Fsdb_xtn_tid_.Tid_img, dir_id, fil, ext_id, modified, hash, bin_db_id, bin_len);
-		if (img_needs_create.Val())	// NOTE: fsdb_fil row can already exist; EX: thm gets inserted -> fsdb_fil row gets created with -1 bin_db_id; orig gets inserted -> fsdb_fil row already exists
-			tbl_img.Insert(fil_id, img_w, img_h);
 		rv.Id_(fil_id);
 		return fil_id;
 	}
@@ -134,15 +129,12 @@ public class Fsdb_db_atr_fil implements RlsAble {
 		if (fil_id == Fsdb_fil_itm.Null_id) {	// new item
 			fil_id = abc_mgr.Next_id();				
 			tbl_fil.Insert(fil_id, dir_id, fil, xtn_tid, ext_id, bin_len, modified, hash, bin_db_id);
-			img_needs_create.Val_(true);
 		}
 		else {									// existing item				
 			if (	fil_itm.Db_bin_id() == Fsdb_bin_tbl.Null_db_bin_id	// prv row was previously inserted by thumb
 				&&	xtn_tid != Fsdb_xtn_tid_.Tid_thm					// cur row is not thumb
 				) {
 				tbl_fil.Update(fil_id, dir_id, fil, xtn_tid, ext_id, bin_len, modified, hash, bin_db_id);	// update props; note that thumb inserts null props, whereas file will insert real props (EX: bin_db_id)
-				if (xtn_tid == Fsdb_xtn_tid_.Tid_img)
-					img_needs_create.Val_(true);
 			}
 		}
 		return fil_id;

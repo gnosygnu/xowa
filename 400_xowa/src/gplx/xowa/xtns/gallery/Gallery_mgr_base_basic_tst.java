@@ -125,7 +125,10 @@ public class Gallery_mgr_base_basic_tst {
 	@Test   public void Link_is_empty() {	// PURPOSE: "link=" causes null pointer exception; DATE:2014-06-15
 		fxt.Test_html_frag("<gallery>File:A.png|link=</gallery>", "href=\"/wiki/File:A.png\"");
 	}
-//		@Test  public void Ttl_caption() {	// PURPOSE: category entries get rendered with name only (no ns)
+	@Test   public void Dangling_autcloses() {	// PURPOSE: dangling gallery should auto-close, not escape; PAGE:en.w:Wikipedia:Featured_pictures_thumbs_43 DATE:2014-08-23
+		fxt.Test_html_frag("<gallery>File:A.png|b", "<ul id=\"xowa_gallery_ul_0\"");
+	}
+//		@Test  public void Ttl_caption() {	// TODO: category entries get rendered with name only (no ns)
 //			fxt.Test_html_frag
 //			( "<gallery>Category:A</gallery>"
 //			, "<li class='gallerycaption'>B</li>"

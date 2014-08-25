@@ -429,12 +429,3 @@ public class Xot_invk_wkr_basic_tst {
 		fxt.Test_parse_tmpl_str("{{!}}", "|");
 	}
 }
-/*
-NOTE_1: function should expand "*a" to "\n*a" even if "*a" is bos
-consider following
-Template:Test with text of "#a"
-a) "a{{test}}" would return "a\n#a" b/c of rule for auto-adding \n
-b) bug was that "{{test}}" would return "#a" b/c "#a" was at bos which would expand to list later
-   however, needs to be "\n#a" b/c appended to other strings wherein bos would be irrelevant.
-Actual situation was very complicated. PAGE:en.w:Rome
-*/

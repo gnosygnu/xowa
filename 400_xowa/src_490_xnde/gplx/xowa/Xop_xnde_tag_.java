@@ -212,7 +212,7 @@ public class Xop_xnde_tag_ {
 , Tag_references = new_(Tid_references, "references").Xtn_().Nest_()
 , Tag_source = new_(Tid_source, "source").Xtn_().Block_open_bgn_().Block_close_end_()	// deactivate pre; pre; PAGE:en.w:Comment_(computer_programming); DATE:2014-06-23
 , Tag_syntaxHighlight = new_(Tid_syntaxHighlight, "syntaxHighlight").Xtn_().Block_open_bgn_().Block_close_end_()	// deactivate pre; pre; PAGE:en.w:Comment_(computer_programming); DATE:2014-06-23
-, Tag_gallery = new_(Tid_gallery, "gallery").Xtn_().Block_open_bgn_().Block_close_end_()
+, Tag_gallery = new_(Tid_gallery, "gallery").Xtn_().Block_open_bgn_().Block_close_end_().Xtn_auto_close_()
 , Tag_imageMap = new_(Tid_imageMap, "imageMap").Xtn_()
 , Tag_timeline = new_(Tid_timeline, "timeline").Xtn_()
 , Tag_hiero = new_(Tid_hiero, "hiero").Xtn_()

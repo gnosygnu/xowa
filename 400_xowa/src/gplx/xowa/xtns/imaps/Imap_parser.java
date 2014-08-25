@@ -44,7 +44,7 @@ class Imap_parser {
 	public Imap_map Parse(Xow_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
 		Imap_map rv = new Imap_map(ctx.Cur_page().Html_data().Xtn_imap_next_id());
 		Init(wiki, ctx.Cur_page().Url(), wiki.App().Usr_dlg());
-		this.Parse(rv, src, xnde.Tag_open_end(), xnde.Tag_close_bgn());			
+		this.Parse(rv, src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
 		return rv;
 	}
 	public void Parse(Imap_map rv, byte[] src, int src_bgn, int src_end) {
@@ -66,7 +66,7 @@ class Imap_parser {
 			}
 			try {
 				if (itm_idx == 0)
-					Parse_img(rv, itm_bgn, itm_end);
+					itm_end = Parse_img(rv, itm_bgn, itm_end, src_end);
 				else {
 					Object tid_obj = tid_trie.Match_bgn_w_byte(b, src, itm_bgn, itm_end);
 					byte tid_val = tid_obj == null ? Imap_itm_.Tid_invalid : ((Byte_obj_val)tid_obj).Val();
@@ -208,11 +208,12 @@ class Imap_parser {
 		pts.Add(Double_obj_val.new_(num));
 		return Bry_finder.Trim_fwd_space_tab(src, num_end, itm_end);
 	}
-	private void Parse_img(Imap_map imap, int itm_bgn, int itm_end) {
-		int pos = Bry_finder.Trim_fwd_space_tab(src, itm_bgn, itm_end);
-		imap_img_src = Bry_.Add(Xop_tkn_.Lnki_bgn, Bry_.Mid(src, pos, itm_end), Xop_tkn_.Lnki_end);
+	private int Parse_img(Imap_map imap, int itm_bgn, int itm_end, int src_end) {
+		int img_bgn = Bry_finder.Trim_fwd_space_tab(src, itm_bgn, itm_end);	// trim ws
+		int img_end = Parse_img__get_img_end(itm_end, src_end);
+		imap_img_src = Bry_.Add(Xop_tkn_.Lnki_bgn, Bry_.Mid(src, img_bgn, img_end), Xop_tkn_.Lnki_end);
 		Xop_lnki_tkn lnki_tkn = (Xop_lnki_tkn)Parse_link(imap_img_src);
-		imap_img_src = imap_root.Data_mid();	// NOTE: need to re-set src to pick up templates; EX: <imagemap>File:A.png|thumb|{{Test_template}}\n</imagemap>; PAGE:en.w:Kilauea; DATE:2014-07-27
+		imap_img_src = imap_root.Data_mid();					// need to re-set src to pick up templates; EX: <imagemap>File:A.png|thumb|{{Test_template}}\n</imagemap>; PAGE:en.w:Kilauea; DATE:2014-07-27
 		Xop_lnki_logger file_wkr = wiki_ctx.Lnki().File_wkr();	// NOTE: do not do imap_ctx.Lnki(); imap_ctx is brand new
 		if (lnki_tkn == null)
 			imap_ctx.Wiki().App().Usr_dlg().Warn_many("", "", "image_map failed to find lnki; page=~{0} imageMap=~{1}", String_.new_utf8_(imap_ctx.Cur_page().Ttl().Full_txt()), String_.new_utf8_(imap_img_src));
@@ -222,8 +223,33 @@ class Imap_parser {
 			wiki_ctx.Cur_page().Lnki_list().Add(lnki_tkn);
 			if (file_wkr != null) file_wkr.Wkr_exec(wiki_ctx, src, lnki_tkn, gplx.xowa.bldrs.files.Xob_lnki_src_tid.Tid_imageMap);
 		}
+		return img_end;
 	}
-	private static Btrie_slim_mgr tid_trie = Btrie_slim_mgr.ci_ascii_()	// NOTE: names are not i18n'd; // NOTE:ci.ascii:MW_const.en
+	private int Parse_img__get_img_end(int line_end, int src_end) {	// heuristic to handle images that span more than one line via ref; en.w:Archaea DATE:2014-08-22
+		int rv = line_end;
+		int pos = line_end + 1;
+		while (pos < src_end) {
+			pos = Bry_finder.Trim_fwd_space_tab(src, pos, src_end);	// trim ws
+			if (pos == src_end) break;
+			byte b = src[pos];
+			if (b == Byte_ascii.NewLine)	// new-line; end
+				break;
+			else {
+				Object tid_obj = tid_trie.Match_bgn_w_byte(b, src, pos, src_end);
+				if (tid_obj == null) {		// not a known imap line; assume continuation of img line and skip to next line
+					imap_ctx.Wiki().App().Usr_dlg().Note_many("", "", "image_map extending image over multiple lines; page=~{0} imageMap=~{1}", String_.new_utf8_(imap_ctx.Cur_page().Ttl().Full_txt()), String_.new_utf8_(imap_img_src));
+					int next_line = Bry_finder.Find_fwd(src, Byte_ascii.NewLine, pos);
+					if (next_line == Bry_finder.Not_found) next_line = src_end;
+					rv = next_line;
+					pos = rv + 1;
+				}
+				else						// known imap line; stop
+					break;
+			}
+		}
+		return rv;
+	}
+	private static Btrie_slim_mgr tid_trie = Btrie_slim_mgr.ci_ascii_()	// names are not i18n'd; // NOTE:ci.ascii:MW_const.en
 	.Add_str_byte("desc"						, Imap_itm_.Tid_desc)
 	.Add_str_byte("#"							, Imap_itm_.Tid_comment)
 	.Add_bry_bval(Imap_itm_.Key_dflt			, Imap_itm_.Tid_dflt)

@@ -214,6 +214,9 @@ public class Xog_tab_itm implements GfoInvkAble {
 		}	catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.redlinks: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_brief(e));}
 		try {app.File_mgr().Cache_mgr().Compress_check();}
 		catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.cache: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_brief(e));}
+		if (wiki.Db_mgr().Hdump_mgr().Enabled()) {
+			wiki.Db_mgr().Hdump_mgr().Save_if_missing(page);
+		}
 		app.Log_wtr().Queue_enabled_(false);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
@@ -241,7 +244,11 @@ class Load_page_wkr implements Gfo_thread_wkr {
 				app.Free_mem(false);										// clear caches (which will clear bry_bfr_mk)
 			else															// not low in memory
 				app.Utl_bry_bfr_mkr().Clear();								// clear bry_bfr_mk only; NOTE: call before page parse, not when page is first added, else threading errors; DATE:2014-05-30
-			Xoa_page page = wiki.GetPageByTtl(url, ttl, tab);
+			Xoa_page page = wiki.GetPageByTtl(url, ttl, wiki.Lang(), tab, false);
+			if (wiki.Db_mgr().Hdump_mgr().Enabled() && page.Revision_data().Html_db_id() != -1)
+				wiki.Db_mgr().Hdump_mgr().Load(wiki, page);
+			else
+				wiki.ParsePage(page, false);
 			GfoInvkAble_.InvkCmd_val(tab.Cmd_sync(), Xog_tab_itm.Invk_show_url_loaded_swt, page);
 		}
 		catch (Exception e) {

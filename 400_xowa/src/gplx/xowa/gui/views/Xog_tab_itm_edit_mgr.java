@@ -40,7 +40,7 @@ public class Xog_tab_itm_edit_mgr {
 			win_itm.Page__mode_(Xopg_view_mode.Tid_read);
 			win_itm.Page__async__bgn(tab);
 		}
-		wiki.Db_mgr().Html_mgr().Save(page);
+		wiki.Db_mgr().Hdump_mgr().Save(page);
 	}
 	public static void Preview(Xog_tab_itm tab) {
 		if (tab.View_mode() != Xopg_view_mode.Tid_edit) return;	// exit if not edit; handles preview somehow being called?

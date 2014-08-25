@@ -27,7 +27,7 @@ public class Xodb_search_title_word_tbl {
 		.Val_str_by_bry_(word)
 		.Exec_insert();
 	}	
-	public static void Select_by_word(Cancelable cancelable, ListAdp rv, byte[] search, int results_max, Db_provider p) {
+	public static void Select_by_word(Cancelable cancelable, ListAdp rv, Xow_wiki wiki, byte[] search, int results_max, Db_provider p) {
 		Db_qry_select qry = Db_qry_.select_()
 			.Cols_(Xodb_search_title_word_tbl.Fld_stw_word_id)
 			.From_(Xodb_search_title_word_tbl.Tbl_name, "w")
@@ -54,7 +54,7 @@ public class Xodb_search_title_word_tbl {
 
 		Xodb_in_wkr_search_title_id wkr = new Xodb_in_wkr_search_title_id();
 		wkr.Init(words, rv);
-		wkr.Select_in(p, cancelable, 0, words.Count());
+		wkr.Select_in(p, cancelable, wiki, 0, words.Count());
 	}
 	public static final String Tbl_name = "search_title_word", Fld_stw_word_id = "stw_word_id", Fld_stw_word = "stw_word";
 	private static final String Tbl_sql = String_.Concat_lines_nl
@@ -70,7 +70,7 @@ class Xodb_in_wkr_search_title_id extends Xodb_in_wkr_base {
 	private ListAdp words, pages;
 	@Override public int Interval() {return 990;}
 	public void Init(ListAdp words, ListAdp pages) {this.words = words; this.pages = pages;}
-	@Override public Db_qry Build_qry(int bgn, int end) {
+	@Override public Db_qry Build_qry(Xodb_ctx db_ctx, int bgn, int end) {
 		Object[] part_ary = Xodb_in_wkr_base.In_ary(end - bgn);
 		String in_fld_name = Xodb_search_title_page_tbl.Fld_stp_word_id; 
 		return Db_qry_.select_cols_
@@ -85,7 +85,7 @@ class Xodb_in_wkr_search_title_id extends Xodb_in_wkr_base {
 			stmt.Val_int_(word_id.Val());		
 		}
 	}
-	@Override public void Eval_rslts(Cancelable cancelable, DataRdr rdr) {
+	@Override public void Eval_rslts(Cancelable cancelable, Xow_wiki wiki, DataRdr rdr) {
 		while (rdr.MoveNextPeer()) {
 			if (cancelable.Canceled()) return;
 			int page_id = rdr.ReadInt(Xodb_search_title_page_tbl.Fld_stp_page_id);

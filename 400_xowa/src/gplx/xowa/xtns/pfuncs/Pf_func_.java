@@ -205,7 +205,8 @@ public class Pf_func_ {
 	,	Xol_kwd_grp_.Id_insider
 	,	Xol_kwd_grp_.Id_massMessage_target
 	,	Xol_kwd_grp_.Id_cascadingSources
-	,	Xol_kwd_grp_.Id_pendingChangesLevel
+	,	Xol_kwd_grp_.Id_pendingChangeLevel
+	,	Xol_kwd_grp_.Id_pagesUsingPendingChanges
 	,	Xol_kwd_grp_.Id_bang
 	};
 	public static Xot_defn Get_prototype(int id) {
@@ -360,8 +361,10 @@ public class Pf_func_ {
 
 			case Xol_kwd_grp_.Id_massMessage_target:			return gplx.xowa.xtns.massMessage.Message_target_func._;
 
+			case Xol_kwd_grp_.Id_pendingChangeLevel:			return gplx.xowa.xtns.flaggedRevs.Pending_change_level_func._;
+			case Xol_kwd_grp_.Id_pagesUsingPendingChanges:		return gplx.xowa.xtns.flaggedRevs.Pages_using_pending_changes_func._;
+
 			case Xol_kwd_grp_.Id_cascadingSources:
-			case Xol_kwd_grp_.Id_pendingChangesLevel:
 																return new Pf_func_noop(id);
 			case Xol_kwd_grp_.Id_bang:							return Pf_func_bang._;
 			default:											throw Err_mgr._.unhandled_(id);

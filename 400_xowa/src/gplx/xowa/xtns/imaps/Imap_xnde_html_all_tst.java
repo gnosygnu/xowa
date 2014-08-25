@@ -198,6 +198,14 @@ public class Imap_xnde_html_all_tst {
 		, "</div>"
 		));
 	}
+	@Test  public void Template_multi_line() {	// PURPOSE: handle multiple-line captions; PAGE:en.w:Archaea; DATE:2014-08-22			
+		fxt.Test_html_full_frag(String_.Concat_lines_nl_skip_last
+		( "<imagemap>"
+		, "File:A.png|thumb|<ref>text"
+		, "</ref>"
+		, "</imagemap>"
+		), "id=\"cite_ref-0\"");
+	}
 }
 class Imap_xnde_html_fxt {
 	public void Reset() {

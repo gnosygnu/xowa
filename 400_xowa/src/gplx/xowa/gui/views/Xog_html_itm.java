@@ -53,7 +53,7 @@ public class Xog_html_itm implements GfoInvkAble, GfoEvObj {
 		return Xog_html_itm__href_extractor.Html_extract_text(site, ttl, v);
 	}
 	public void Show(Xoa_page page) {
-		byte view_mode = owner_tab.View_mode();
+		byte view_mode = owner_tab.View_mode();			
 		byte[] html_src = page.Wiki().Html_mgr().Page_wtr_mgr().Gen(page, view_mode);
 		Html_src_(page, html_src);
 		if (view_mode == Xopg_view_mode.Tid_read){			// used only for Xosrh test; DATE:2014-01-29

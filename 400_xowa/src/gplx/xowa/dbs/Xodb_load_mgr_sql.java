@@ -128,7 +128,7 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 		if (search_version == gplx.xowa.specials.search.Xosrh_core.Version_1)
 			db_mgr.Tbl_page().Select_by_search(cancelable, rv, search, results_max);
 		else {
-			Xodb_search_title_word_tbl.Select_by_word(cancelable, rv, search, results_max, db_mgr.Fsys_mgr().Get_tid_root(Xodb_file_tid.Tid_search).Provider());
+			Xodb_search_title_word_tbl.Select_by_word(cancelable, rv, db_mgr.Wiki(), search, results_max, db_mgr.Fsys_mgr().Get_tid_root(Xodb_file_tid.Tid_search).Provider());
 			db_mgr.Tbl_page().Select_by_id_list(cancelable, true, rv);
 		}
 	}
@@ -166,7 +166,7 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 				hash2.Add(page.Id_val(), page);
 		}
 		len = hash2.Count();	// must update len (!hash2.Has() may have skipped titles)
-		db_mgr.Tbl_category().Select_by_cat_id_in(Cancelable_.Never, hash2, fsys_mgr.Provider_ctg(), 0, len);
+		db_mgr.Tbl_category().Select_by_cat_id_in(Cancelable_.Never, hash2, fsys_mgr.Provider_ctg(), db_mgr.Wiki(), 0, len);
 		return (Xodb_page[])hash.XtoAry(Xodb_page.class);
 	}
 }

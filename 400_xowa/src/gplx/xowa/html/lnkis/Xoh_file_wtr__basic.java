@@ -57,27 +57,27 @@ public class Xoh_file_wtr__basic {
 			) {						
 			img_orig_src = img_view_src = Bry_.Empty;				// null out src
 		}
-		if		(lnki.Ns_id() == Xow_ns_.Id_media) {				// NOTE: regardless of ext (ogg vs jpeg) and literal status (Media vs :Media), [[Media]] links are always rendered the same way; REF.MW:Linker.php|makeMediaLinkObj; PAGE:en.w:Beethoven; EX: [[:Media:De-Ludwig_van_Beethoven.ogg|listen]]); [[File:Beethoven 3.jpg|The [[Media:BeethovenWithLyreGuitar( W. J. Mahler - 1804).jpg|complete painting]]...]]
+		if		(lnki.Ns_id() == Xow_ns_.Id_media)					// NOTE: regardless of ext (ogg vs jpeg) and literal status (Media vs :Media), [[Media]] links are always rendered the same way; REF.MW:Linker.php|makeMediaLinkObj; PAGE:en.w:Beethoven; EX: [[:Media:De-Ludwig_van_Beethoven.ogg|listen]]); [[File:Beethoven 3.jpg|The [[Media:BeethovenWithLyreGuitar( W. J. Mahler - 1804).jpg|complete painting]]...]]
 			this.Write_file_ns_media(bfr, ctx, src, lnki, img_orig_src);
-			return;
-		}
-		if	(	Xof_ext_.Id_is_video_strict(lnki_ext.Id())		// id is .ogv or .webm
-				||	(	lnki_ext.Id_is_ogg()						// id is ogg
-					&&	wiki.File_mgr().Version_1_y()				// version is v1 (v2 always marks ogg as aud); DATE:2014-02-01
-					&&	(	xfer_itm.Html_pass()					// NOTE: xfer_itm.Html_pass() checks for video .ogg files (ext = .ogg and thumb is available); EX: WWI;
-						||	xfer_itm.Meta_itm().State_new()			// NOTE: State_new() will always assume that ogg is video; needed for 1st load and dynamic updates
+		else {
+			if	(	Xof_ext_.Id_is_video_strict(lnki_ext.Id())		// id is .ogv or .webm
+					||	(	lnki_ext.Id_is_ogg()					// id is ogg
+						&&	wiki.File_mgr().Version_1_y()			// version is v1 (v2 always marks ogg as aud); DATE:2014-02-01
+						&&	(	xfer_itm.Html_pass()				// NOTE: xfer_itm.Html_pass() checks for video .ogg files (ext = .ogg and thumb is available); EX: WWI;
+							||	xfer_itm.Meta_itm().State_new()		// NOTE: State_new() will always assume that ogg is video; needed for 1st load and dynamic updates
+							)
 						)
-					)
-				) {	
-			xfer_itm.Html_elem_tid_(Xof_html_elem.Tid_vid);
-			this.Write_file_video(bfr, ctx, src, lnki, uid, div_width, lnki_halign_bry, lnki_href, img_view_src, img_orig_src, img_alt, xfer_itm);
+					) {	
+				xfer_itm.Html_elem_tid_(Xof_html_elem.Tid_vid);
+				this.Write_file_video(bfr, ctx, src, lnki, uid, div_width, lnki_halign_bry, lnki_href, img_view_src, img_orig_src, img_alt, xfer_itm);
+			}
+			else if  (lnki_ext.Id_is_audio())						// audio
+				this.Write_file_audio(bfr, ctx, src, lnki, uid, div_width, lnki_halign_bry, lnki_href, img_orig_src, img_alt);
+			else													// image
+				this.Write_file_image(bfr, ctx, hctx, src, lnki, xfer_itm, uid, div_width, lnki_halign, lnki_halign_bry, lnki_ttl, lnki_ext, lnki_href, img_view_src, img_orig_src, img_alt);
 		}
-		else if  (lnki_ext.Id_is_audio())							// audio
-			this.Write_file_audio(bfr, ctx, src, lnki, uid, div_width, lnki_halign_bry, lnki_href, img_orig_src, img_alt);
-		else														// image
-			this.Write_file_image(bfr, ctx, hctx, src, lnki, xfer_itm, uid, div_width, lnki_halign, lnki_halign_bry, lnki_ttl, lnki_ext, lnki_href, img_view_src, img_orig_src, img_alt);
 		if (hctx.Mode_is_hdump()) {
-			byte[] rel_src = Bry_.Len_eq_0(img_view_src) ? Bry_.Empty : Bry_.Mid(img_view_src, xfer_itm.Trg_repo_root().length);
+			byte[] rel_src = Bry_.Len_eq_0(img_view_src) ? Bry_.Empty : Bry_.Mid(img_view_src, wiki.App().Fsys_mgr().File_dir().To_http_file_bry().length);
 			xfer_itm.Html_view_src_rel_(rel_src);
 			page.Hdump_data().Imgs().Add(xfer_itm.Clone());
 		}

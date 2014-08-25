@@ -137,13 +137,13 @@ public class Scrib_lib_title implements Scrib_lib {
 		Xow_page_cache_itm page_itm = wiki.Cache_mgr().Page_cache().Get_or_load_as_itm(ttl);
 		byte[] rv = null;
 		if (page_itm != null) {
-			byte[] redirected_src = page_itm.Redirected_src();
+			byte[] redirected_src = page_itm.Redirected_src_wtxt();
 			if (redirected_src != null) {						// page is redirect; use its src, not its target's src; DATE:2014-07-11
 				rv = redirected_src;
 				core.Frame_parent().Rslt_is_redirect_(true);	// flag frame as redirect, so that \n won't be prepended; EX:"#REDIRECT" x> "\n#REDIRECT"
 			}
 			else
-				rv = page_itm.Src();
+				rv = page_itm.Wtxt();
 		}
 		return rv == null ? rslt.Init_obj(null) : rslt.Init_obj(String_.new_utf8_(rv));
 	}

@@ -104,7 +104,7 @@ public class Xof_xfer_itm implements Xof_file_itm {
 		this.html_pass = true;
 		this.file_found = true;
 	}
-	public void Init_for_test__hdump(int uid, int img_w, int img_h, byte[] html_view_src_rel) {this.html_uid = uid; this.html_w = img_w; this.html_h = img_h; this.html_view_src_rel = html_view_src_rel;}
+	public Xof_xfer_itm Init_for_test__hdump(int uid, int img_w, int img_h, byte[] lnki_ttl, byte[] html_view_src_rel) {this.html_uid = uid; this.html_w = img_w; this.html_h = img_h; this.lnki_ttl = lnki_ttl; this.html_view_src_rel = html_view_src_rel; return this;}
 	public void	Init_for_test__img(int html_w, int html_h, byte[] html_view_src, byte[] html_orig_src) {this.html_w = html_w; this.html_h = html_h; this.html_view_src = html_view_src; this.html_orig_src = html_orig_src;}
 	public Xof_xfer_itm Set__ttl(byte[] ttl, byte[] redirect) {
 		this.lnki_redirect = redirect;

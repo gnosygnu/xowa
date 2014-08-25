@@ -30,6 +30,11 @@ public class Xop_lnki_wkr__uncommon_tst {
 		fxt.Test_parse_page_all_str("[[A]]]"	,  "<a href=\"/wiki/A\">A</a>]");	// title only
 		fxt.Test_parse_page_all_str("[[A|B]]]"	,  "<a href=\"/wiki/A\">B]</a>");	// title + caption; note that ] should be outside </a> b/c MW has more logic that says "if caption starts with '['", but leaving as is; DATE:2014-07-23
 	}
+	@Test  public void Triple_bracket_with_lnke_lnki() {	// PURPOSE: handle [http://a.org [[File:A.png|123px]]]; PAGE:ar.w:محمد DATE:2014-08-20
+		fxt.Test_parse_page_all_str("[http://a.org [[File:A.png|123px]]]"
+		,  "<a href=\"http://a.org\" class=\"external text\" rel=\"nofollow\"><a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/123px.png\" width=\"123\" height=\"0\" /></a></a>"
+		);
+	}
 	@Test  public void Multiple_captions() {	// PURPOSE: multiple captions should be concatenated (used to only take first); EX:zh.d:维基词典:Unicode字符索引/0000–0FFF; DATE:2014-05-05
 		fxt.Test_parse_page_all_str("[[A|B|C|D]]"		, "<a href=\"/wiki/A\">B|C|D</a>");
 	}

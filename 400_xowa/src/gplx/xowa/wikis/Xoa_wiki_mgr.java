@@ -34,6 +34,7 @@ public class Xoa_wiki_mgr implements GfoInvkAble {
 		css_installer.Init_by_app(app);
 	}
 	public int Count() {return hash.Count();}
+	public void Del(byte[] key) {hash.Del(key);}
 	public Xow_wiki Get_at(int i) {return Int_.Between(i, 0, this.Count() - 1) ? (Xow_wiki)list.FetchAt(i) : null;}
 	public Xow_wiki Get_by_key_or_null(byte[] key) {return Bry_.Len_eq_0(key) ? null : (Xow_wiki)hash.Fetch(key);}
 	public Xow_wiki Get_by_key_or_null(byte[] src, int bgn, int end) {return (Xow_wiki)hash.Get_by_mid(src, bgn, end);}

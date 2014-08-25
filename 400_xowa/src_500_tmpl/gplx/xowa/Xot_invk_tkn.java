@@ -16,9 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.langs.*;
-import gplx.xowa.langs.vnts.*; import gplx.xowa.langs.cnvs.*;
-import gplx.xowa.wikis.caches.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.pfuncs.*; import gplx.xowa.xtns.pfuncs.ttls.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.vnts.*; import gplx.xowa.langs.cnvs.*;
+import gplx.xowa.wikis.caches.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.pfuncs.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.pages.*;
 public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 	public Arg_nde_tkn Name_tkn() {return name_tkn;} public Xot_invk_tkn Name_tkn_(Arg_nde_tkn v) {name_tkn = v; return this;} Arg_nde_tkn name_tkn = Arg_nde_tkn.Null;
 	public byte Defn_tid() {return defn_tid;} private byte defn_tid = Xot_defn_.Tid_null;
@@ -193,7 +192,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 						else {	// some templates produce null ttls; EX: "Citation needed{{subst"
 							defn = wiki.Cache_mgr().Defn_cache().Get_by_key(ttl.Page_db());
 							if (defn == null && ctx.Tmpl_load_enabled())
-								defn = Load_defn(wiki, ctx, ttl, name_ary);
+								defn = Load_defn(wiki, ctx, this, ttl, name_ary);
 						}
 					}
 				}
@@ -212,7 +211,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 				}
 				defn = wiki.Cache_mgr().Defn_cache().Get_by_key(name_ary);
 				if (defn == null && ctx.Tmpl_load_enabled())
-					defn = Load_defn(wiki, ctx, ttl, name_ary);
+					defn = Load_defn(wiki, ctx, this, ttl, name_ary);
 				if (defn == null) defn = Xot_defn_.Null;
 			}
 		}
@@ -254,36 +253,35 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 				Xot_defn_tmpl defn_tmpl = (Xot_defn_tmpl)defn;
 				if (defn_tmpl.Root() == null) defn_tmpl.Parse_tmpl(ctx);	// NOTE: defn_tmpl.Root can be null after clearing out cache; must be non-null else will fail in trace; DATE:2013-02-01
 				Xot_invk invk_tmpl = Xot_defn_tmpl_.CopyNew(ctx, defn_tmpl, this, caller, src, name_ary);
+				invk_tmpl.Frame_ttl_(defn_tmpl.Frame_ttl());	// set frame_ttl; needed for redirects; PAGE:en.w:Statutory_city; DATE:2014-08-22
 				trace.Trace_bgn(ctx, src, name_ary, caller, invk_tmpl, defn);
 
-//					Bry_bfr bfr_tmpl = Bry_bfr.new_();
-//					rv = defn_tmpl.Tmpl_evaluate(ctx, invk_tmpl, bfr_tmpl);
-//					ctx.App().Tmpl_prepend_nl(bfr, bfr_tmpl.Bry(), bfr_tmpl.Len());
-//					bfr.Add_bfr_and_clear(bfr_tmpl);
-
-				Bry_bfr bfr_tmpl = Bry_bfr.new_();
-				Bld_key(invk_tmpl, name_ary, bfr_tmpl);
-				byte[] rslt_key = bfr_tmpl.XtoAryAndClear();
-				Object o = wiki.Cache_mgr().Tmpl_result_cache().Fetch(rslt_key);
-				if (o != null) {
-					byte[] rslt = (byte[])o;
-					ctx.Tmpl_prepend_nl(bfr, rslt, rslt.length);
-					bfr.Add(rslt);
-				}
-				else {
-					rv = defn_tmpl.Tmpl_evaluate(ctx, invk_tmpl, bfr_tmpl);
-					ctx.Tmpl_prepend_nl(bfr, bfr_tmpl.Bfr(), bfr_tmpl.Len());
-					if (Cache_enabled) {
-						byte[] rslt_val = bfr_tmpl.XtoAryAndClear();
-						bfr.Add(rslt_val);
-						HashAdp cache = wiki.Cache_mgr().Tmpl_result_cache();
-						cache.Del(rslt_key);
-						cache.Add(rslt_key, rslt_val);
+				Bry_bfr rslt_bfr = wiki.Utl_bry_bfr_mkr().Get_k004();
+				try {
+					Bld_key(invk_tmpl, name_ary, rslt_bfr);
+					byte[] rslt_key = rslt_bfr.XtoAryAndClear();
+					Object o = wiki.Cache_mgr().Tmpl_result_cache().Fetch(rslt_key);
+					Xopg_tmpl_prepend_mgr prepend_mgr = ctx.Cur_page().Tmpl_prepend_mgr().Bgn(bfr);
+					if (o != null) {
+						byte[] rslt = (byte[])o;
+						prepend_mgr.End(ctx, bfr, rslt, rslt.length, Bool_.Y);
+						bfr.Add(rslt);
 					}
-					else
-						bfr.Add_bfr_and_clear(bfr_tmpl);
-				}
-				trace.Trace_end(trg_bgn, bfr);
+					else {
+						rv = defn_tmpl.Tmpl_evaluate(ctx, invk_tmpl, rslt_bfr);
+						prepend_mgr.End(ctx, bfr, rslt_bfr.Bfr(), rslt_bfr.Len(), Bool_.Y);
+						if (Cache_enabled) {
+							byte[] rslt_val = rslt_bfr.XtoAryAndClear();
+							bfr.Add(rslt_val);
+							HashAdp cache = wiki.Cache_mgr().Tmpl_result_cache();
+							cache.Del(rslt_key);
+							cache.Add(rslt_key, rslt_val);
+						}
+						else
+							bfr.Add_bfr_and_clear(rslt_bfr);
+					}
+					trace.Trace_end(trg_bgn, bfr);
+				} finally {rslt_bfr.Mkr_rls();}
 				break;
 		}
 		return rv;
@@ -318,8 +316,8 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		defn_func.Func_evaluate(ctx, src, caller, invk, bfr_func);
 		if (caller.Rslt_is_redirect())			// do not prepend if page is redirect; EX:"#REDIRECT" x> "\n#REDIRECT" DATE:2014-07-11
 			caller.Rslt_is_redirect_(false);	// reset flag; needed for TEST; kludgy, but Rslt_is_redirect is intended for single use
-		else 
-			ctx.Tmpl_prepend_nl(bfr, bfr_func.Bfr(), bfr_func.Len());
+		else
+			ctx.Cur_page().Tmpl_prepend_mgr().End(ctx, bfr, bfr_func.Bfr(), bfr_func.Len(), Bool_.N);
 		bfr.Add_bfr_and_clear(bfr_func);
 	}
 	private static Hash_adp_bry ignore_hash;
@@ -350,7 +348,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 			if (	cache_itm != null
 //					&&  Bry_.Eq(cache_itm.Ttl().Full_db(), ctx.Cur_page().Page_ttl().Full_db())	// make sure that transcluded item is not same as page_ttl; DATE:2014-01-10
 				) {
-				transclude_src = cache_itm.Src();
+				transclude_src = cache_itm.Wtxt();
 				page_ttl = cache_itm.Ttl();
 			}
 		}
@@ -367,18 +365,22 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		boolean rv = false;
 		Xot_invk tmp_tmpl = Xot_defn_tmpl_.CopyNew(ctx, transclude_tmpl, this, caller, src, transclude_tmpl.Name());
 		Bry_bfr tmp_bfr = Bry_bfr.new_();
+		Xopg_tmpl_prepend_mgr prepend_mgr = ctx.Cur_page().Tmpl_prepend_mgr().Bgn(doc);
 		rv = transclude_tmpl.Tmpl_evaluate(ctx, tmp_tmpl, tmp_bfr);
-		ctx.Tmpl_prepend_nl(doc, tmp_bfr.Bfr(), tmp_bfr.Len());
+		prepend_mgr.End(ctx, doc, tmp_bfr.Bfr(), tmp_bfr.Len(), Bool_.Y);
 		doc.Add_bfr_and_clear(tmp_bfr);
 		return rv;
 	}
-	public static Xot_defn_tmpl Load_defn(Xow_wiki wiki, Xop_ctx ctx, Xoa_ttl ttl, byte[] name_ary) {
-		byte[] tmpl_page_bry = wiki.Cache_mgr().Page_cache().Get_or_load_as_src(ttl);
+	public static Xot_defn_tmpl Load_defn(Xow_wiki wiki, Xop_ctx ctx, Xot_invk_tkn invk_tkn, Xoa_ttl ttl, byte[] name_ary) {
+		Xow_page_cache_itm tmpl_page_itm = wiki.Cache_mgr().Page_cache().Get_or_load_as_itm(ttl);
+		byte[] tmpl_page_bry = tmpl_page_itm == null ? null : tmpl_page_itm.Wtxt();
 		Xot_defn_tmpl rv = null;
 		if (tmpl_page_bry != null) {
-			byte old_parse_tid = ctx.Parse_tid(); // NOTE: reusing templates is a bad idea; will change Parse_tid and cause strange errors; however, keeping for PERF reasons
+			byte old_parse_tid = ctx.Parse_tid(); // NOTE: reusing ctxs is a bad idea; will change Parse_tid and cause strange errors; however, keeping for PERF reasons
 			Xow_ns ns_tmpl = wiki.Ns_mgr().Ns_template();
 			rv = wiki.Parser().Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), ns_tmpl, name_ary, tmpl_page_bry);
+			byte[] frame_ttl = tmpl_page_itm.Ttl().Full_txt();		// NOTE: (1) must have ns (Full); (2) must be txt (underscore, not space); EX:Template:Location map+; DATE:2014-08-22
+			rv.Frame_ttl_(frame_ttl);								// set defn's frame_ttl; needed for redirect_trg; PAGE:en.w:Statutory_city; DATE:2014-08-22
 			ctx.Parse_tid_(old_parse_tid);
 			wiki.Cache_mgr().Defn_cache().Add(rv, ns_tmpl.Case_match());
 		}
@@ -407,7 +409,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 			Xow_page_cache_itm cache_itm = wiki.Cache_mgr().Page_cache().Get_or_load_as_itm(page_ttl);
 			if (	cache_itm != null) {
 				if (!Bry_.Eq(cache_itm.Ttl().Full_db(), ctx.Cur_page().Ttl().Full_db())) {	// make sure that transcluded item is not same as page_ttl; DATE:2014-01-10
-					transclude_tmpl = ctx.Wiki().Parser().Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), page_ttl.Ns(), page_ttl.Page_db(), cache_itm.Src());
+					transclude_tmpl = ctx.Wiki().Parser().Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), page_ttl.Ns(), page_ttl.Page_db(), cache_itm.Wtxt());
 					page_ttl = cache_itm.Ttl();
 				}
 			}

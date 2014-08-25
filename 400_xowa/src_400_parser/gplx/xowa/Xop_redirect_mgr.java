@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.xowa.html.*;
-public class Xop_redirect_mgr {
-	private Hash_adp_bry redirect_hash;
-	public Xop_redirect_mgr(Xow_wiki wiki) {this.wiki = wiki;} private Xow_wiki wiki;
+public class Xop_redirect_mgr {		
+	private final Xow_wiki wiki; private final Url_encoder url_decoder; private Hash_adp_bry redirect_hash;
+	public Xop_redirect_mgr(Xow_wiki wiki) {this.wiki = wiki; this.url_decoder = wiki.App().Encoder_mgr().Url_ttl();}	// NOTE: must be Url_ttl, not Url; PAGE:en.w:Template:Positionskarte+ -> Template:Location_map+, not Template:Location_map DATE:2014-08-21
 	public void Clear() {redirect_hash = null;}	// TEST:
 	public boolean Is_redirect(byte[] text, int text_len) {return this.Extract_redirect(text, text_len) != null;}
 	public Xoa_ttl Extract_redirect_loop(byte[] src) {
@@ -45,8 +45,9 @@ public class Xop_redirect_mgr {
 		ttl_bgn += Xop_tkn_.Lnki_bgn.length;
 		int ttl_end = Bry_finder.Find_fwd(src, Xop_tkn_.Lnki_end, ttl_bgn);
 		if (ttl_end == Bry_.NotFound)	return Redirect_null_ttl;
-		byte[] redirect_ary = Bry_.Mid(src, ttl_bgn, ttl_end);
-		return Xoa_ttl.parse_(wiki, redirect_ary);
+		byte[] redirect_bry = Bry_.Mid(src, ttl_bgn, ttl_end);
+		redirect_bry = url_decoder.Decode(redirect_bry);	// NOTE: url-decode links; PAGE: en.w:Watcher_(Buffy_the_Vampire_Slayer); DATE:2014-08-18
+		return Xoa_ttl.parse_(wiki, redirect_bry);
 	}
 	public static final Xoa_ttl Extract_redirect_is_null = null;
 	public static final int Redirect_max_allowed = 4;

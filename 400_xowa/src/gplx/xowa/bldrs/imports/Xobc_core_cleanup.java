@@ -27,7 +27,7 @@ public class Xobc_core_cleanup extends Xob_itm_basic_base implements Xob_cmd {
 	public Xobc_core_cleanup Delete_sqlite3_(boolean v){delete_sqlite3 = v; return this;} private boolean delete_sqlite3;
 	public Xobc_core_cleanup Delete_xml_(boolean v)	{delete_xml = v; return this;} private boolean delete_xml;
 	public Xobc_core_cleanup Delete_wiki_(boolean v)	{delete_wiki = v; return this;} private boolean delete_wiki;
-	public void Bz2_fil_(Io_url v)		{bz2_fil = v;} Io_url bz2_fil;
+	public void Bz2_fil_(Io_url v)		{bz2_fil = v;} private Io_url bz2_fil;
 	public void Cmd_run() {
 		Io_url wiki_root_dir = wiki.Fsys_mgr().Root_dir();
 		if (bz2_fil != null) {
@@ -39,20 +39,10 @@ public class Xobc_core_cleanup extends Xob_itm_basic_base implements Xob_cmd {
 		if (delete_xml)						Io_mgr._.DeleteFil(Xobd_rdr.Find_fil_by(wiki_root_dir, "*.xml"));
 		if (delete_wiki) {
 			usr_dlg.Note_many("", "delete_wiki", "deleting wiki");
-			Io_url[] dirs = Io_mgr._.QueryDir_args(wiki_root_dir).DirOnly_().DirInclude_().ExecAsUrlAry();
-			int dirs_len = dirs.length;
-			for (int i = 0; i < dirs_len; i++)
-				Io_mgr._.DeleteDirDeep(dirs[i]);
+			Delete_wiki_txt(wiki_root_dir);
 		}
-		if (delete_sqlite3) {
-			if (wiki.Db_mgr().Tid() == gplx.xowa.dbs.Xodb_mgr_sql.Tid_sql)	// NOTE: must check; if empty dir (or text db) than db_mgr will be txt
-				wiki.Db_mgr_as_sql().Fsys_mgr().Rls();						// NOTE: if sqlite files, must rls;
-			Io_url[] sqlite3_files = Io_mgr._.QueryDir_args(wiki_root_dir).FilPath_("*.sqlite3").ExecAsUrlAry();
-			int sqlite3_files_len = sqlite3_files.length;
-			usr_dlg.Note_many("", "delete_wiki", "deleting sqlite3 files: ~{0} ~{1}", sqlite3_files_len, wiki_root_dir.Raw());
-			for (int i = 0; i < sqlite3_files_len; i++)
-				Io_mgr._.DeleteFil(sqlite3_files[i]);
-		}
+		if (delete_sqlite3)
+			Delete_wiki_sql(wiki);			
 		if (delete_all)
 			Io_mgr._.DeleteDirDeep(wiki_root_dir);
 		if (delete_by_match_ary != null)
@@ -106,5 +96,21 @@ public class Xobc_core_cleanup extends Xob_itm_basic_base implements Xob_cmd {
 				}
 			}
 		}
+	}
+	private static void Delete_wiki_txt(Io_url wiki_root_dir) {
+		Io_url[] dirs = Io_mgr._.QueryDir_args(wiki_root_dir).DirOnly_().DirInclude_().ExecAsUrlAry();
+		int dirs_len = dirs.length;
+		for (int i = 0; i < dirs_len; i++)
+			Io_mgr._.DeleteDirDeep(dirs[i]);
+	}
+	public static void Delete_wiki_sql(Xow_wiki wiki) {
+		Gfo_usr_dlg usr_dlg = wiki.App().Usr_dlg(); Io_url wiki_root_dir = wiki.Fsys_mgr().Root_dir();
+		if (wiki.Db_mgr().Tid() == gplx.xowa.dbs.Xodb_mgr_sql.Tid_sql)		// NOTE: must check; if empty dir (or text db) than db_mgr will be txt
+			wiki.Db_mgr_as_sql().Fsys_mgr().Rls();							// NOTE: if sqlite files, must rls;
+		Io_url[] sqlite3_files = Io_mgr._.QueryDir_args(wiki_root_dir).FilPath_("*.sqlite3").ExecAsUrlAry();
+		int sqlite3_files_len = sqlite3_files.length;
+		usr_dlg.Note_many("", "delete_wiki", "deleting sqlite3 files: ~{0} ~{1}", sqlite3_files_len, wiki_root_dir.Raw());
+		for (int i = 0; i < sqlite3_files_len; i++)
+			Io_mgr._.DeleteFil(sqlite3_files[i]);
 	}
 }

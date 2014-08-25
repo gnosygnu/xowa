@@ -136,7 +136,8 @@ class Xob_orig_regy_tbl {
 	,	"FROM    orig_regy o"
 	,	"        JOIN image_db.image i ON o.lnki_ttl = i.img_name"
 	,	"        JOIN page_db.page_regy m ON m.repo_id = {0} AND m.itm_tid = 0 AND o.lnki_ttl = m.src_ttl"
-	,	"WHERE   i.img_timestamp > o.orig_timestamp"	// NOTE: this handles an image in local and remote by taking later version; DATE:2014-07-22
+	,	"WHERE o.orig_file_ttl IS NULL"						// NOTE: only insert if file doesn't exist; changed from timestamp b/c old images may exist in both wikis; EX:ar.n:File:Facebook.png; DATE:2014-08-20
+	// ,	"WHERE   i.img_timestamp > o.orig_timestamp"	// NOTE: this handles an image in local and remote by taking later version; DATE:2014-07-22
 	,	"ORDER BY 1"	// must order by lnki_id since it is PRIMARY KEY, else sqlite will spend hours shuffling rows in table
 	,	";"
 	)
@@ -165,7 +166,8 @@ class Xob_orig_regy_tbl {
 	,	"FROM    orig_regy o"
 	,	"        JOIN page_db.page_regy m ON m.repo_id = {0} AND m.itm_tid = 1 AND o.lnki_ttl = m.src_ttl"
 	,	"            JOIN image_db.image i ON m.trg_ttl = i.img_name"
-	,	"WHERE   i.img_timestamp > o.orig_timestamp"	// NOTE: this handles an image in local and remote by taking later version; DATE:2014-07-22
+	,	"WHERE o.orig_file_ttl IS NULL"						// NOTE: only insert if file doesn't exist; changed from timestamp b/c old images may exist in both wikis; EX:ar.n:File:Facebook.png; DATE:2014-08-20
+	// ,	"WHERE   i.img_timestamp > o.orig_timestamp"	// NOTE: this handles an image in local and remote by taking later version; DATE:2014-07-22
 	,	"ORDER BY 1"	// must order by lnki_id since it is PRIMARY KEY, else sqlite will spend hours shuffling rows in table
 	,	";"
 	)

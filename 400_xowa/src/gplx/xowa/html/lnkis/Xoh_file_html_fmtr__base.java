@@ -16,26 +16,30 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import gplx.xowa.files.*; import gplx.xowa.dbs.hdumps.htmls.*;
+import gplx.xowa.files.*; import gplx.xowa.hdumps.htmls.*;
 class Xoh_file_html_fmtr__hdump extends Xoh_file_html_fmtr__base {
+	private Bry_bfr tmp_bfr = Bry_bfr.reset_(128);
 	@gplx.Internal @Override protected Xoh_arg_img_core New_arg_img_core() {return new Xoh_arg_img_core__hdump();}
-	@Override public void Html_thumb_core(Bry_bfr tmp_bfr, int uid, byte[] div1_halign, int div2_width, byte[] div2_content) {
-		Write_fmt(tmp_bfr, Hdump_html_fmtr__body.Key_img_w, uid);
+	@Override public void Html_thumb_core(Bry_bfr bfr, int uid, byte[] div1_halign, int div2_width, byte[] div2_content) {
+		tmp_bfr.Add(Hdump_html_fmtr__body.Key_img_style);
+		tmp_bfr.Add_int_variable(uid);
+		tmp_bfr.Add_byte_apos();
 		byte[] div2_width_repl = tmp_bfr.XtoAryAndClear();
-		fmtr_thumb_core.Bld_bfr_many(tmp_bfr, uid, div1_halign, div2_width_repl, div2_content);
+		fmtr_thumb_core.Bld_bfr_many(bfr, uid, div1_halign, div2_width_repl, div2_content);
 	}
-	@Override public void Html_thumb_part_magnify(Bry_bfr tmp_bfr, int uid, byte[] a_href, byte[] a_title, byte[] img_src)									{Write_fmt(tmp_bfr, Hdump_html_fmtr__body.Key_mda_mgnf, uid);}
-	@Override public void Html_thumb_part_info(Bry_bfr tmp_bfr, int uid, byte[] a_href, byte[] img_src)														{Write_fmt(tmp_bfr, Hdump_html_fmtr__body.Key_mda_info, uid);}
-	@Override public void Html_thumb_part_play(Bry_bfr tmp_bfr, int uid, int a_width, int a_max_width, byte[] a_href, byte[] a_xowa_title, byte[] img_src)	{Write_fmt(tmp_bfr, Hdump_html_fmtr__body.Key_mda_play, uid);}
-	public static void Write_fmt(Bry_bfr bfr, byte[] key, int uid) {
+	@Override public void Html_thumb_part_magnify(Bry_bfr bfr, int uid, byte[] a_href, byte[] a_title, byte[] img_src)									{Write_xnde(bfr, Hdump_html_fmtr__body.Key_file_mgnf, uid);}
+	@Override public void Html_thumb_part_info(Bry_bfr bfr, int uid, byte[] a_href, byte[] img_src)														{Write_xnde(bfr, Hdump_html_fmtr__body.Key_file_info, uid);}
+	@Override public void Html_thumb_part_play(Bry_bfr bfr, int uid, int a_width, int a_max_width, byte[] a_href, byte[] a_xowa_title, byte[] img_src)	{Write_xnde(bfr, Hdump_html_fmtr__body.Key_file_play, uid);}
+	public static void Write_xnde(Bry_bfr bfr, byte[] key, int uid) {
 		bfr.Add(key);
 		bfr.Add_int_variable(uid);
-		bfr.Add_byte(Byte_ascii.Gt);
-	}
+		bfr.Add(Bry_xnde_end);
+	}	private static final byte[] Bry_xnde_end = Bry_.new_ascii_("'/>");
         public static final Xoh_file_html_fmtr__hdump Hdump = new Xoh_file_html_fmtr__hdump(); Xoh_file_html_fmtr__hdump() {}
 }
 public class Xoh_file_html_fmtr__base implements Xoh_file_img_wkr {
-	private final Xoh_arg_img_core arg_img_core; //Xoh_arg_img_core arg_img_mgnf;
+	private final Xoh_arg_img_core arg_img_core;
+	private Bry_bfr scratch_bfr = Bry_bfr.reset_(128);
 	public Xoh_file_html_fmtr__base() {
 		arg_img_core = New_arg_img_core();
 	}
@@ -56,16 +60,19 @@ public class Xoh_file_html_fmtr__base implements Xoh_file_img_wkr {
 	);
 
 	@gplx.Virtual public void Html_thumb_core(Bry_bfr tmp_bfr, int uid, byte[] div1_halign, int div2_width, byte[] div2_content) {
-		fmtr_thumb_core.Bld_bfr_many(tmp_bfr, uid, div1_halign, div2_width, div2_content);
-	}
+		scratch_bfr.Add(Bry_style_bgn);
+		scratch_bfr.Add_int_variable(div2_width);
+		scratch_bfr.Add(Bry_style_end);
+		fmtr_thumb_core.Bld_bfr_many(tmp_bfr, uid, div1_halign, scratch_bfr.XtoAryAndClear(), div2_content);
+	}	private static final byte[] Bry_style_bgn = Bry_.new_ascii_("style=\"width:"), Bry_style_end = Bry_.new_ascii_("px;\"");
 	protected Bry_fmtr fmtr_thumb_core = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last	// REF.MW: Linker.php|makeImageLink2
 	( "<div class=\"thumb t~{div1_halign}\">"
-	, "  <div id=\"xowa_file_div_~{uid}\" class=\"thumbinner\" style=\"width:~{div2_width}px;\">"
+	, "  <div id=\"xowa_file_div_~{uid}\" class=\"thumbinner\" ~{style}>"
 	, "~{div2_content}"
 	, "  </div>"
 	, "</div>"
 	, ""
-	), "uid", "div1_halign", "div2_width", "div2_content"
+	), "uid", "div1_halign", "style", "div2_content"
 	);
 	public byte[] Html_thumb_part_img(Bry_bfr tmp_bfr, Xoa_page page, Xof_xfer_itm xfer_itm, Xop_lnki_tkn lnki, int uid, byte[] a_href, byte[] img_src, byte[] img_alt) {
 		Html_thumb_part_img(tmp_bfr, page, xfer_itm, uid, a_href, lnki.Ttl().Page_txt(), xfer_itm.Html_w(), xfer_itm.Html_h(), img_src, img_alt);
@@ -162,7 +169,10 @@ class Xoh_arg_img_core__hdump implements Xoh_arg_img_core {
 		return this;
 	}
 	public void XferAry(Bry_bfr bfr, int idx) {
-		Xoh_file_html_fmtr__hdump.Write_fmt(bfr, Hdump_html_fmtr__body.Key_img, uid);
+		bfr.Add_str(" xowa_img='");
+		bfr.Add_int_variable(uid);
+		bfr.Add_str("'");
+//			Xoh_file_html_fmtr__hdump.Write_fmt(bfr, Hdump_html_fmtr__body.Key_img, uid);
 	}
 }
 class Xoh_arg_img_core__basic implements Xoh_arg_img_core {

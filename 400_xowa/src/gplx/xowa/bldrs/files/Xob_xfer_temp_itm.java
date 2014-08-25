@@ -73,10 +73,11 @@ class Xob_xfer_temp_itm {
 		orig_ext_id		= rdr.ReadInt(Xob_orig_regy_tbl.Fld_orig_file_ext);
 	}
 	public static final byte 
-		  Chk_tid_none = 0
-		, Chk_tid_orig_page_id_is_null = 1
-		, Chk_tid_orig_media_type_is_audio = 2
-		, Chk_tid_ns_is_media = 3
+	  Chk_tid_none = 0
+	, Chk_tid_orig_page_id_is_null = 1
+	, Chk_tid_orig_media_type_is_audio = 2
+	, Chk_tid_ns_is_media = 3
+	, Chk_tid_orig_w_is_0 = 4
 	;
 	public byte Chk_tid() {return chk_tid;} private byte chk_tid;
 	public boolean Chk(Xof_img_size img_size) {
@@ -101,6 +102,10 @@ class Xob_xfer_temp_itm {
 		}
 		if (orig_media_type_tid == Xof_media_type.Tid_audio) {		// ignore: audio will never have thumbs
 			chk_tid = Chk_tid_orig_media_type_is_audio;
+			return false;
+		}
+		if (orig_w <= 0) {	// ignore files that have an orig_w of 0; note that ogg files that are sometimes flagged as VIDEO; EX:2009_10_08_Marc_Randazza_interview.ogg; DATE:2014-08-20
+			chk_tid = Chk_tid_orig_w_is_0;
 			return false;
 		}
 		if (lnki_ext == Xof_ext_.Id_mid) {	// NOTE: .mid does not have orig_media_type of "AUDIO"

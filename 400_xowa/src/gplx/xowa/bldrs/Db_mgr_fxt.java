@@ -43,7 +43,7 @@ public class Db_mgr_fxt {
 			for (int i = 0; i < len; i++) {
 				String ttl = ttls[i];
 				int page_id = page_id_next.Val();
-				tbl_page.Insert(stmt, page_id, ns_id, Bry_.new_utf8_(ttl), false, modified_on, 0, page_id, 0);
+				tbl_page.Insert(stmt, page_id, ns_id, Bry_.new_utf8_(ttl), false, modified_on, 0, page_id, 0, 0);
 				page_id_next.Val_add(1);
 			}
 		} finally {stmt.Rls();}

@@ -16,13 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.wiki_orig; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.dbs.*; import gplx.xowa.files.fsdb.*;
+import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.files.fsdb.*;
 class Xof_wiki_orig_tbl_in_wkr extends gplx.xowa.dbs.tbls.Xodb_in_wkr_base {
 	private ListAdp itms_all;
 	@Override public int Interval() {return Sqlite_engine_.Stmt_arg_max;}
 	private OrderedHash itms_by_ttl;
 	public Xof_wiki_orig_tbl_in_wkr Init(ListAdp v, OrderedHash itms_by_ttl) {this.itms_all = v; this.itms_by_ttl = itms_by_ttl; return this;}
-	@Override public Db_qry Build_qry(int bgn, int end) {
+	@Override public Db_qry Build_qry(Xodb_ctx db_ctx, int bgn, int end) {
 		Object[] part_ary = gplx.xowa.dbs.tbls.Xodb_in_wkr_base.In_ary(end - bgn);
 		String in_fld_name = Xof_wiki_orig_tbl.Fld_orig_ttl; 
 		return Db_qry_.select_cols_
@@ -37,7 +37,7 @@ class Xof_wiki_orig_tbl_in_wkr extends gplx.xowa.dbs.tbls.Xodb_in_wkr_base {
 			stmt.Val_str_by_bry_(itm.Lnki_ttl());
 		}
 	}
-	@Override public void Eval_rslts(Cancelable cancelable, DataRdr rdr) {
+	@Override public void Eval_rslts(Cancelable cancelable, Xow_wiki wiki, DataRdr rdr) {
 		while (rdr.MoveNextPeer()) {
 			if (cancelable.Canceled()) return;
 			Xof_wiki_orig_itm itm = Xof_wiki_orig_itm.load_(rdr);

@@ -51,7 +51,7 @@ public class Xop_ctx {
 	public int					Tmpl_tkn_max()		{return tmpl_tkn_max;} public void Tmpl_tkn_max_(int v) {tmpl_tkn_max = v;} private int tmpl_tkn_max = Int_.MaxValue;
 	public Xop_keeplist_wiki	Tmpl_keeplist()		{return tmpl_keeplist;} public void Tmpl_keeplist_(Xop_keeplist_wiki v) {this.tmpl_keeplist = v;} private Xop_keeplist_wiki tmpl_keeplist;
 	public boolean					Tmpl_args_parsing() {return tmpl_args_parsing;} public Xop_ctx Tmpl_args_parsing_(boolean v) {tmpl_args_parsing = v; return this;} private boolean tmpl_args_parsing;
-	public Bry_bfr				Tmpl_output() {return tmpl_output;} public Xop_ctx Tmpl_output_(Bry_bfr v) {tmpl_output = v; return this;} private Bry_bfr tmpl_output;
+	public Bry_bfr				Tmpl_output() {return tmpl_output;} public Xop_ctx Tmpl_output_(Bry_bfr v) {tmpl_output = v; return this;} private Bry_bfr tmpl_output;	// OBSOLETE: after tmpl_prepend_nl rewrite; DATE:2014-08-21
 	public Xot_defn_trace		Defn_trace()		{return defn_trace;} public Xop_ctx Defn_trace_(Xot_defn_trace v) {defn_trace = v; return this;} private Xot_defn_trace defn_trace = Xot_defn_trace_null._;
 	public boolean					Only_include_evaluate() {return only_include_evaluate;} public Xop_ctx Only_include_evaluate_(boolean v) {only_include_evaluate = v; return this;} private boolean only_include_evaluate;
 	public Lst_section_nde_mgr	Lst_section_mgr()	{if (lst_section_mgr == null) lst_section_mgr = new Lst_section_nde_mgr(); return lst_section_mgr;} private Lst_section_nde_mgr lst_section_mgr;
@@ -298,22 +298,6 @@ public class Xop_ctx {
 		if (stack_pos == -1) return;
 		ctx.Stack_pop_til(root, src, stack_pos, true, bgn_pos, cur_pos, Xop_tkn_itm_.Tid_txt);
 	}
-	public void Tmpl_prepend_nl(Bry_bfr cur, byte[] val, int val_len) {			// cur=current bfr; tmpl_output=main bfr that cur will eventually be appended to; val=result of template
-		if (	val_len == 0													// val is empty
-			||	cur.Match_end_byt(Byte_ascii.NewLine)							// if cur has \n already, don't add; bn.w:লিওনেল_মেসি |ko.w:도쿄_지하철_히비야_선|DATE:2014-05-27
-			||	tmpl_prepend_nl_trie.Match_bgn(val, 0, val_len) == null		// val does not start with {| : ; # *; REF.MW:Parser.php|braceSubstitution
-			) return;												
-		Bry_bfr prv_bfr = cur.Len() == 0										// note that cur_bfr should be checked first before tmpl_output				
-			? tmpl_output														// main template bfr
-			: cur																// current bfr, which may be localized to within a template; see prepend tests
-			;
-		if (	tmpl_args_parsing												// if processing template args, always add \n; EX:vi.w:Friedrich_II_của_Phổ; DATE:2014-04-26
-			|| (	prv_bfr != null												// note that prv_bfr can be null when called from a subparse, as in Scrib.Preprocess; EX:w:Portal:Canada; DATE:2014-02-13
-				&& !prv_bfr.Match_end_byt(Byte_ascii.NewLine))					// previous char is not \n;
-				) {
-				cur.Add_byte(Byte_ascii.NewLine);
-		}
-	}	private static final Btrie_fast_mgr tmpl_prepend_nl_trie = Xop_curly_bgn_lxr.tmpl_bgn_trie_();
 	public static Xop_ctx new_(Xow_wiki wiki) {
 		Xop_ctx rv = new Xop_ctx(wiki, Xoa_page.new_(wiki, Xoa_ttl.parse_(wiki, Xoa_page_.Main_page_bry)));	// HACK: use "Main_Page" to put in valid page title
 		return rv;

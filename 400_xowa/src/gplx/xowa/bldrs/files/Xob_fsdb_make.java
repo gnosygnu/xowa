@@ -65,6 +65,7 @@ public class Xob_fsdb_make extends Xob_itm_basic_base implements Xob_cmd {
 		}
 		usr_dlg.Note_many("", "", "done: ~{0} ~{1}", exec_count, DecimalAdp_.divide_safe_(exec_count, Env_.TickCount_elapsed_in_sec(time_bgn)).XtoStr("#,###.000"));
 		this.Txn_save();
+		tbl_cfg.Delete(Cfg_fsdb_make, Cfg_page_id_bmk); tbl_cfg.Delete(Cfg_fsdb_make, Cfg_lnki_id_bmk);	// delete bmks if future reruns are needed; DATE:2014-08-20
 		trg_fsdb_mgr.Txn_save();
 		trg_fsdb_mgr.Rls();	// save changes and rls all connections
 		db_select_stmt.Rls();
@@ -237,7 +238,8 @@ public class Xob_fsdb_make extends Xob_itm_basic_base implements Xob_cmd {
 			trg_fsdb_mgr.Thm_insert(tmp_thm_itm, itm.Orig_wiki(), itm.Lnki_ttl(), itm.Lnki_ext_id(), itm.Html_w(), itm.Html_h(), itm.Lnki_thumbtime(), itm.Lnki_page(), Sqlite_engine_.Date_null, Fsdb_xtn_thm_tbl.Hash_null, rdr.Len(), rdr);
 			db_uid = tmp_thm_itm.Id();
 		}
-		app.Usr_dlg().Log_direct(String_.Format("download done; size=~{0} id=~{1}\n", rdr.Len(), db_uid));
+		if (app.Mode() == Xoa_app_.Mode_gui)
+			app.Usr_dlg().Log_direct(String_.Format("download done; size={0} id={1}", rdr.Len(), db_uid));
 	}
 	private void Txn_renew() {
 		this.Txn_save();

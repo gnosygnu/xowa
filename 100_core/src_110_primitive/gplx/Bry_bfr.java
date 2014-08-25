@@ -47,6 +47,7 @@ public class Bry_bfr {
 	}
 	public Bry_bfr Clear() {bfr_len = 0; return this;}
 	public Bry_bfr ClearAndReset() {bfr_len = 0; if (reset > 0) Reset_if_gt(reset); return this;}
+	public byte Get_at_last_or_nil_if_empty() {return bfr_len == 0 ? Byte_ascii.Nil : bfr[bfr_len - 1];}
 	public Bry_bfr Add_safe(byte[] val) {return val == null ? this : Add(val);}
 	public Bry_bfr Add(byte[] val) {
 		int val_len = val.length;

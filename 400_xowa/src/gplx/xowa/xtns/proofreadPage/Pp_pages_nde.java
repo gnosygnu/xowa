@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.proofreadPage; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.html.*; import gplx.xowa.parsers.amps.*;
-import gplx.xowa.xtns.lst.*;
+import gplx.xowa.xtns.lst.*; import gplx.xowa.pages.*;
 public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 	private boolean xtn_literal = false;
 	private Xop_root_tkn xtn_root;
@@ -345,8 +345,9 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 				if	(end_sect_bry != null)
 					cur_sect_end = end_sect_bry;
 			}
+			Xopg_tmpl_prepend_mgr prepend_mgr = ctx.Cur_page().Tmpl_prepend_mgr().Bgn(full_bfr);
 			lst_pfunc_wkr.Init_include(ttl.Full_db(), cur_sect_bgn, cur_sect_end).Exec(page_bfr, ctx);
-			ctx.Tmpl_prepend_nl(full_bfr, page_bfr.Bfr(), page_bfr.Len());
+			prepend_mgr.End(ctx, full_bfr, page_bfr.Bfr(), page_bfr.Len(), Bool_.Y);
 			full_bfr.Add_bfr_and_clear(page_bfr);
 			full_bfr.Add(gplx.html.Html_entity_.Space_bry);
 		}			

@@ -98,7 +98,7 @@ public class Xow_toc_mgr implements Bry_fmtr_arg {
 			trg.Add(Bry_list_end);
 		}
 	}
-	public static byte[] Toc_text(Xop_ctx ctx, Xoa_page page, byte[] src, Xop_hdr_tkn hdr) {
+	public static byte[] Toc_text(Xop_ctx ctx, Xoa_page page, byte[] src, Xop_tkn_itm hdr) {
 		try {
 			Xow_wiki wiki = page.Wiki();
 			Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_b128();

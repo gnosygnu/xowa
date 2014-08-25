@@ -21,6 +21,7 @@ public class Xot_defn_tmpl implements Xot_defn {
 	public boolean Defn_require_colon_arg() {return false;}
 	public int Cache_size() {return data_raw.length;}
 	public byte[] Name() {return name;} private byte[] name; private byte[] full_name;
+	public byte[] Frame_ttl() {return frame_ttl;} public void Frame_ttl_(byte[] v) {frame_ttl = v;} private byte[] frame_ttl;
 	public byte[] Data_raw() {return data_raw;} private byte[] data_raw;
 	public byte[] Data_mid() {return data_mid;} public Xot_defn_tmpl Data_mid_(byte[] v) {data_mid = v; return this;} private byte[] data_mid;
 	public Xop_ctx Ctx() {return ctx;} public Xot_defn_tmpl Ctx_(Xop_ctx v) {ctx = v; return this;} private Xop_ctx ctx;

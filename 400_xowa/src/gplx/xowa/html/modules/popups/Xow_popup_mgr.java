@@ -92,7 +92,14 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 	}
 	private byte[] Get_popup_html(Xoa_page cur_page, Xow_popup_itm itm) {
 		try {
-			synchronized (async_thread_guard) {
+			synchronized (async_thread_guard) {	// queue popups to reduce contention with Load_page_wkr; DATE:2014-08-24
+//					Load_popup_wkr load_popup_wkr = new Load_popup_wkr(wiki, cur_page, itm, temp_href, ns_allowed_regy, ns_allowed_regy_key);
+//					app.Thread_mgr().Page_load_mgr().Add_at_end(load_popup_wkr);
+//					load_popup_wkr.Exec();
+//					while (!load_popup_wkr.Rslt_done()) {
+//						ThreadAdp_.Sleep(100);
+//					}
+//					return load_popup_wkr.Rslt_bry();
 				if (itm.Canceled()) return null;
 				cur_page.Popup_mgr().Itms().AddReplace(itm.Popup_id(), itm);
 				app.Href_parser().Parse(temp_href, itm.Page_href(), wiki, cur_page.Ttl().Full_url());	// NOTE: use Full_url, not Page_url, else anchors won't work for non-main ns; PAGE:en.w:Project:Sandbox; DATE:2014-08-07
@@ -112,7 +119,7 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 			return null;
 		}
 	}
-	private static void Update_progress_bar(Xoa_app app, Xoa_page cur_page, Xow_popup_itm itm) {
+	public static void Update_progress_bar(Xoa_app app, Xoa_page cur_page, Xow_popup_itm itm) {
 		byte[] href = itm.Page_href();
 		byte[] tooltip = itm.Tooltip();
 		if (Bry_.Len_gt_0(tooltip))
@@ -214,5 +221,43 @@ class Xow_popup_mgr_ {
 		js_wtr.Add_str_quote_html(html);
 		js_wtr.Add_paren_end_semic();
 		return js_wtr.Xto_str_and_clear();
+	}
+}
+class Load_popup_wkr implements Gfo_thread_wkr {
+	private Xow_popup_itm itm; private Xoa_page cur_page; private Xoh_href temp_href;
+	private HashAdp ns_allowed_regy; 
+	private Int_obj_ref ns_allowed_regy_key = Int_obj_ref.zero_();
+	public Load_popup_wkr(Xow_wiki wiki, Xoa_page cur_page, Xow_popup_itm itm, Xoh_href temp_href, HashAdp ns_allowed_regy, Int_obj_ref ns_allowed_regy_key) {
+		this.wiki = wiki; this.cur_page = cur_page; this.itm = itm; this.temp_href = temp_href; this.ns_allowed_regy = ns_allowed_regy; this.ns_allowed_regy_key = ns_allowed_regy_key;
+	}
+	public String Name() {return "xowa.load_popup_wkr";}
+	public boolean Resume() {return false;}
+	public Xow_wiki Wiki() {return wiki;} private Xow_wiki wiki;
+	public byte[] Rslt_bry() {return rslt_bry;} private byte[] rslt_bry;
+	public boolean Rslt_done() {return rslt_done;} private boolean rslt_done;
+	public void Rslt_(byte[] bry) {this.rslt_done = true; rslt_bry = bry;}
+	public void Exec() {
+		Xoa_app app = wiki.App();
+		try {
+			if (itm.Canceled()) {Rslt_(null); return;}
+			cur_page.Popup_mgr().Itms().AddReplace(itm.Popup_id(), itm);
+			app.Href_parser().Parse(temp_href, itm.Page_href(), wiki, cur_page.Ttl().Full_url());	// NOTE: use Full_url, not Page_url, else anchors won't work for non-main ns; PAGE:en.w:Project:Sandbox; DATE:2014-08-07
+			Xow_wiki popup_wiki = app.Wiki_mgr().Get_by_key_or_null(temp_href.Wiki());
+			popup_wiki.Init_assert();
+			Xoa_ttl popup_ttl = Xoa_ttl.parse_(popup_wiki, temp_href.Page_and_anchor());
+			if (ns_allowed_regy.Count() > 0 && !ns_allowed_regy.Has(ns_allowed_regy_key.Val_(popup_ttl.Ns().Id()))) {Rslt_(Bry_.Empty); return;}
+			itm.Init(popup_wiki.Domain_bry(), popup_ttl);
+			Xoa_page popup_page = popup_wiki.Data_mgr().Get_page(popup_ttl, false);
+			byte[] rv = popup_wiki.Html_mgr().Module_mgr().Popup_mgr().Parser().Parse(wiki, popup_page, cur_page.Tab(), itm);
+			Xow_popup_mgr.Update_progress_bar(app, cur_page, itm);
+			Rslt_(rv);
+		}
+		catch(Exception e) {
+			app.Usr_dlg().Warn_many("", "", "failed to get popup: href=~{0} err=~{1}", String_.new_utf8_(itm.Page_href()), Err_.Message_gplx_brief(e));
+			Rslt_(null);
+		}
+		finally {
+			app.Thread_mgr().Page_load_mgr().Resume();
+		}
 	}
 }

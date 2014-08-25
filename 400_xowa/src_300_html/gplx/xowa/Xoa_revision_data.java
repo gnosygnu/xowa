@@ -18,7 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 public class Xoa_revision_data {
 	public int				Id() {return id;} public Xoa_revision_data Id_(int v) {id = v; return this;} private int id;
-	public DateAdp			Modified_on() {return modified_on;} public Xoa_revision_data Modified_on_(DateAdp v) {modified_on = v; return this;} DateAdp modified_on = DateAdp_.Now();
+	public DateAdp			Modified_on() {return modified_on;} public Xoa_revision_data Modified_on_(DateAdp v) {modified_on = v; return this;} private DateAdp modified_on = DateAdp_.MinValue;
 	public byte[]			User() {return user;} public Xoa_revision_data User_(byte[] v) {user = v; return this;} private byte[] user = Bry_.Empty;
 	public byte[]			Protection_level() {return protection_level;} public Xoa_revision_data Protection_level_(byte[] v) {protection_level = v; return this;} private byte[] protection_level = Bry_.Empty;
+	public int				Html_db_id() {return html_db_id;} public void Html_db_id_(int v) {html_db_id = v;} private int html_db_id = -1;
+	public void Clear() {// NOTE: do not clear data b/c saving in Edit will call clear and id will be reset to 0
+	}
 }

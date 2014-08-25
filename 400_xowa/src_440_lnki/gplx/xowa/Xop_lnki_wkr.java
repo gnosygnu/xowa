@@ -42,12 +42,10 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 		int stack_pos = ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_lnki);
 		if (stack_pos == Xop_ctx.Stack_not_found) return ctx.Lxr_make_txt_(cur_pos);	// "]]" found but no "[[" in stack; return literal "]]"
 		Xop_lnki_tkn lnki = (Xop_lnki_tkn)ctx.Stack_pop_til(root, src, stack_pos, false, bgn_pos, cur_pos, Xop_tkn_itm_.Tid_lnki_end);
-		if (Xop_lnki_wkr_.Adjust_for_brack_end_len_of_3(ctx, tkn_mkr, root, src, src_len, cur_pos, lnki)) {	// convert "]]]" into "]" + "]]", not "]]" + "]"
-			root.Subs_add(tkn_mkr.Bry(bgn_pos, bgn_pos + 1, Byte_ascii.Brack_end_bry));	// add "]" as bry
-			++bgn_pos; ++cur_pos;														// position "]]" at end of "]]]"
-		}
 		if (!arg_bldr.Bld(ctx, tkn_mkr, this, Xop_arg_wkr_.Typ_lnki, root, lnki, bgn_pos, cur_pos, lnki.Tkn_sub_idx() + 1, root.Subs_len(), src))
 			return Xop_lnki_wkr_.Invalidate_lnki(ctx, src, root, lnki, bgn_pos);
+		if (Xop_lnki_wkr_.Adjust_for_brack_end_len_of_3(ctx, tkn_mkr, root, src, src_len, cur_pos, lnki))	// convert "]]]" into "]" + "]]", not "]]" + "]"				
+			++cur_pos;																						// position "]]" at end of "]]]"
 		cur_pos = Xop_lnki_wkr_.Chk_for_tail(ctx.Lang(), src, cur_pos, src_len, lnki);
 		lnki.Src_end_(cur_pos);	// NOTE: must happen after Chk_for_tail; redundant with above, but above needed b/c of returns
 		root.Subs_del_after(lnki.Tkn_sub_idx() + 1);	// all tkns should now be converted to args in owner; delete everything in root
@@ -265,16 +263,24 @@ class Xop_lnki_wkr_ {
 			lnki.Thumbtime_(fracs / TimeSpanAdp_.Ratio_f_to_s);
 	}
 	public static boolean Adjust_for_brack_end_len_of_3(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int cur_pos, Xop_lnki_tkn lnki) {
-		if (	cur_pos < src_len								// bounds check
-			&&	src[cur_pos] == Byte_ascii.Brack_end			// is next char after "]]", "]"; i.e.: "]]]"; PAGE:en.w:Aubervilliers DATE:2014-06-25
+		if (	cur_pos < src_len										// bounds check
+			&&	src[cur_pos] == Byte_ascii.Brack_end					// is next char after "]]", "]"; i.e.: "]]]"; PAGE:en.w:Aubervilliers DATE:2014-06-25
 			) {
 			int nxt_pos = cur_pos + 1;
-			if (	nxt_pos == src_len							// allow "]]]EOS"
-				||	(	nxt_pos < src_len						// bounds check
-					&&	src[nxt_pos] != Byte_ascii.Brack_end	// is next char after "]]]", "]"; i.e.: not "]]]]"; PAGE:ru.w:Меркатале_ин_Валь_ди_Песа; DATE:2014-02-04
+			if (	nxt_pos == src_len									// allow "]]]EOS"
+				||	(	nxt_pos < src_len								// bounds check
+					&&	src[nxt_pos] != Byte_ascii.Brack_end			// is next char after "]]]", "]"; i.e.: not "]]]]"; PAGE:ru.w:Меркатале_ин_Валь_ди_Песа; DATE:2014-02-04
 					)
 			) {
-				return lnki.Ttl() != null;						// only change "]]]" to "]" + "]]" if lnki is not title; otherwise [[A]]] -> "A]" which will be invalid; PAGE:en.w: Tall_poppy_syndrome DATE:2014-07-23
+				if (	lnki.Caption_exists()							// does a caption exist?
+					&&	lnki.Caption_tkn().Src_end() + 2 == cur_pos		// is "]]]" at end of caption?; 2="]]".Len; handle [http://a.org [[File:A.png|123px]]] PAGE:ar.w:محمد; DATE:2014-08-20
+					&&	lnki.Ttl() != null								// only change "]]]" to "]" + "]]" if lnki is not title; otherwise [[A]]] -> "A]" which will be invalid; PAGE:en.w:Tall_poppy_syndrome DATE:2014-07-23
+					) {
+					Xop_tkn_itm caption_val_tkn = lnki.Caption_val_tkn();
+					caption_val_tkn.Subs_add(tkn_mkr.Bry(cur_pos, cur_pos + 1, Byte_ascii.Brack_end_bry));	// add "]" as bry
+					caption_val_tkn.Src_end_(caption_val_tkn.Src_end() + 1);
+					return true;
+				}
 			}
 		}
 		return false;

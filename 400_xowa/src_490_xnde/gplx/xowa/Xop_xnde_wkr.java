@@ -590,12 +590,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 				close_bry[i] = src[src_offset + i];
 			boolean auto_close = false;
 			int close_bgn = Find_xtn_end_lhs(ctx, tag, src, src_len, open_bgn, open_end, close_bry);
-			if (close_bgn == Bry_.NotFound) {
-				if (tag.Xtn_auto_close())
-					auto_close = true;
-				else
-					return ctx.Lxr_make_log_(Xop_xnde_log.Xtn_end_not_found, src, open_bgn, open_end);
-			}
+			if (close_bgn == Bry_.NotFound) auto_close = true;	// auto-close if end not found; verified with <poem>, <gallery>, <imagemap>, <hiero>, <references> DATE:2014-08-23
 			int close_end = -1;
 			if (auto_close) {
 				xnde_end = close_bgn = close_end = src_len;

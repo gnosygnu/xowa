@@ -18,10 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.dbs.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.dbs.*;
 import gplx.dbs.*; import gplx.criterias.*; 
 public class Xodb_page_tbl {
+	private Xow_wiki wiki;
+	public Xodb_page_tbl(Xow_wiki wiki) {this.wiki = wiki;}
+	public void Html_db_enabled_(boolean v) {html_db_enabled = v;} private boolean html_db_enabled;
 	public Db_provider Provider() {return provider;} public void Provider_(Db_provider provider) {this.provider = provider;} private Db_provider provider;
-	public void Delete_all() {provider.Exec_qry(Db_qry_.delete_tbl_(Tbl_name));}
-	public Db_stmt Insert_stmt(Db_provider p) {return Db_stmt_.new_insert_(p, Tbl_name, Fld_page_id, Fld_page_ns, Fld_page_title, Fld_page_is_redirect, Fld_page_touched, Fld_page_len, Fld_page_random_int, Fld_page_file_idx);}
-	public void Insert(Db_stmt stmt, int page_id, int ns_id, byte[] ttl_wo_ns, boolean redirect, DateAdp modified_on, int page_len, int random_int, int file_idx) {
+	public void Delete_all() {provider.Exec_qry(Db_qry_.delete_tbl_(Tbl_name));}		
+	public Db_stmt Insert_stmt(Db_provider p) {
+		return Db_stmt_.new_insert_(p, Tbl_name, html_db_enabled ? Flds_insert__html_y : Flds_insert__html_n);
+	}
+	public void Insert(Db_stmt stmt, int page_id, int ns_id, byte[] ttl_wo_ns, boolean redirect, DateAdp modified_on, int page_len, int random_int, int file_idx, int html_db_id) {
 		stmt.Clear()
 		.Val_int_(page_id)
 		.Val_int_(ns_id)
@@ -30,8 +35,10 @@ public class Xodb_page_tbl {
 		.Val_str_(Xto_touched_str(modified_on))
 		.Val_int_(page_len)
 		.Val_int_(random_int)
-		.Val_int_(file_idx)
-		.Exec_insert();
+		.Val_int_(file_idx);
+		if (html_db_enabled)
+			stmt.Val_int_(html_db_id);
+		stmt.Exec_insert();
 	}
 	public int Select_id(int ns_id, byte[] ttl) {
 		DataRdr rdr = DataRdr_.Null; 
@@ -61,33 +68,18 @@ public class Xodb_page_tbl {
 			.Val_int_(page_id)
 			.Exec_select();
 			while (rdr.MoveNextPeer()) {
-				Read_page(rv, rdr);
+				Read_page__all(rv, rdr, html_db_enabled);
 				return true;
 			}
 		} finally {rdr.Rls(); stmt.Rls();}
 		return false;		
-	}
-	public static void Read_page(Xodb_page page, DataRdr rdr) {
-		page.Id_			(rdr.ReadInt(Fld_page_id));
-		page.Ns_id_			(rdr.ReadInt(Fld_page_ns));
-		page.Ttl_wo_ns_		(rdr.ReadBryByStr(Fld_page_title));
-		page.Modified_on_	(DateAdp_.parse_fmt(rdr.ReadStr(Fld_page_touched), Page_touched_fmt));
-		page.Type_redirect_	(rdr.ReadByte(Fld_page_is_redirect) == 1);
-		page.Text_len_		(rdr.ReadInt(Fld_page_len));
-		page.Db_file_idx_	(rdr.ReadInt(Fld_page_file_idx));
-	}
-	public static void Read_page_for_search_suggest(Xodb_page page, DataRdr rdr) {
-		page.Id_			(rdr.ReadInt(Fld_page_id));
-		page.Ns_id_			(rdr.ReadInt(Fld_page_ns));
-		page.Ttl_wo_ns_		(rdr.ReadBryByStr(Fld_page_title));
-		page.Text_len_		(rdr.ReadInt(Fld_page_len));
 	}
 	private DataRdr Load_ttls_starting_with_rdr(int ns_id, byte[] ttl_frag, boolean include_redirects, int max_results, int min_page_len, int browse_len, boolean fwd, boolean search_suggest) {
 		Criteria crt_ttl = fwd ? Db_crt_.mte_(Fld_page_title, String_.new_utf8_(ttl_frag)) : Db_crt_.lt_(Fld_page_title, String_.new_utf8_(ttl_frag));
 		Criteria crt = Criteria_.And_many(Db_crt_.eq_(Fld_page_ns, ns_id), crt_ttl, Db_crt_.mte_(Fld_page_len, min_page_len));
 		if (!include_redirects)
 			crt = Criteria_.And(crt, Db_crt_.eq_(Fld_page_is_redirect, Byte_.Zero));
-		String[] cols = search_suggest ? Flds_ary_search_suggest : Flds_ary_all;
+		String[] cols = search_suggest ? Flds_select_idx : html_db_enabled ? Flds_select_all__html_y : Flds_select_all__html_n;
 		int limit = fwd ? max_results + 1 : max_results; // + 1 to get next item
 		Db_qry_select select = Db_qry_.select_cols_(Tbl_name, crt, cols).Limit_(limit).OrderBy_(Fld_page_title, fwd);
 		return select.Exec_qry_as_rdr(provider);
@@ -102,7 +94,7 @@ public class Xodb_page_tbl {
 			while (rdr.MoveNextPeer()) {
 				if (cancelable.Canceled()) return;
 				Xodb_page page = new Xodb_page();
-				Read_page_for_search_suggest(page, rdr);
+				Read_page__idx(page, rdr);
 				if (max_val_check && !Bry_.HasAtBgn(page.Ttl_wo_ns(), key)) break;
 				nxt_itm = page;
 				if (rslt_idx == max_results) {}	// last item which is not meant for rslts, but only for nxt itm
@@ -119,7 +111,7 @@ public class Xodb_page_tbl {
 				Xodb_page prv_itm = new Xodb_page();
 				boolean found = false;
 				while (rdr.MoveNextPeer()) {
-					Read_page(prv_itm, rdr);
+					Read_page__all(prv_itm, rdr, html_db_enabled);
 					found = true;
 				}
 				if (found)
@@ -143,7 +135,7 @@ public class Xodb_page_tbl {
 			while (rdr.MoveNextPeer()) {
 				if (cancelable.Canceled()) return;
 				Xodb_page page = new Xodb_page();
-				Read_page_for_search_suggest(page, rdr);
+				Read_page__idx(page, rdr);
 				rslt_list.Add(page);
 			}
 			rslt_list.SortBy(Xodb_page_sorter.TitleAsc);
@@ -164,7 +156,7 @@ public class Xodb_page_tbl {
 		}
 		Xodb_in_wkr_page_id wkr = new Xodb_in_wkr_page_id();
 		wkr.Init(rv, hash);
-		wkr.Select_in(provider, cancelable, bgn, end);
+		wkr.Select_in(provider, cancelable, wiki, bgn, end);
 		return true;		
 	}
 	public boolean Select_by_ttl(Xodb_page rv, Xow_ns ns, byte[] ttl) {
@@ -177,7 +169,7 @@ public class Xodb_page_tbl {
 			.Val_str_(String_.new_utf8_(ttl))
 			.Exec_select();
 			if (rdr.MoveNextPeer()) {
-				Read_page(rv, rdr);
+				Read_page__all(rv, rdr, html_db_enabled);
 				return true;
 			}
 		} finally {rdr.Rls(); stmt.Rls();}
@@ -231,7 +223,7 @@ public class Xodb_page_tbl {
 		Criteria crt = gplx.criterias.Criteria_.And_many(Db_crt_.eq_(Fld_page_ns, -1), Db_crt_.mt_(Fld_page_title, ""));
 		if (redirect != Bool_.__byte)
 			crt = gplx.criterias.Criteria_.And(crt, Db_crt_.eq_(Fld_page_is_redirect, redirect));
-		Db_qry_select qry = Db_qry_.select_().From_(Tbl_name).Cols_(Flds_all)
+		Db_qry_select qry = Db_qry_.select_().From_(Tbl_name).Cols_(html_db_enabled ? Flds_select_all__html_y : Flds_select_all__html_n)
 			.Where_(crt)
 			.Limit_(limit);
 		return p.Prepare(qry);
@@ -246,7 +238,7 @@ public class Xodb_page_tbl {
 			while (rdr.MoveNextPeer()) {
 				if (cancelable.Canceled()) return;
 				Xodb_page page = new Xodb_page();
-				Read_page(page, rdr);
+				Read_page__all(page, rdr, html_db_enabled);
 				rv.Add(page.Id_val(), page);
 			}
 		}	finally {rdr.Rls();}
@@ -255,159 +247,46 @@ public class Xodb_page_tbl {
 		Xodb_in_wkr_page_title_ns wkr = new Xodb_in_wkr_page_title_ns();
 		wkr.Fill_idx_fields_only_(fill_idx_fields_only);
 		wkr.Init(wiki, rv);
-		wkr.Select_in(provider, cancelable, bgn, end);
+		wkr.Select_in(provider, cancelable, wiki, bgn, end);
 	}
 	public void Select_by_ttl_in(Cancelable cancelable, OrderedHash rv, int ns_id, int bgn, int end) {
 		Xodb_in_wkr_page_title wkr = new Xodb_in_wkr_page_title();
 		wkr.Init(rv, ns_id);
-		wkr.Select_in(provider, cancelable, bgn, end);
+		wkr.Select_in(provider, cancelable, wiki, bgn, end);
+	}
+	public void Update_html_db_id(int page_id, int html_db_id) {
+		if (!html_db_enabled) throw Err_.new_("html_db not enabled");
+		Db_stmt stmt = Db_stmt_.new_update_(provider, Tbl_name, String_.Ary(Fld_page_id), Fld_page_html_db_id);
+		stmt.Val_int_(html_db_id).Val_int_(page_id).Exec_update();
 	}
 	private static final String Page_touched_fmt = "yyyyMMddHHmmss";
 	private static String Xto_touched_str(DateAdp v) {return v.XtoStr_fmt(Page_touched_fmt);}
-	public static final String Tbl_name = "page", Fld_page_id = "page_id", Fld_page_ns = "page_namespace", Fld_page_title = "page_title", Fld_page_is_redirect = "page_is_redirect", Fld_page_touched = "page_touched", Fld_page_len = "page_len", Fld_page_random_int = "page_random_int", Fld_page_file_idx = "page_file_idx";
-	private static final String[] Flds_all = new String[] {Fld_page_id, Fld_page_ns, Fld_page_title, Fld_page_touched, Fld_page_is_redirect, Fld_page_len, Fld_page_file_idx};
-	public static String[] Flds_ary_all = String_.Ary(Flds_all), Flds_ary_search_suggest = String_.Ary(Fld_page_id, Fld_page_ns, Fld_page_title, Fld_page_len);
+	public static final String Tbl_name = "page"
+	, Fld_page_id = "page_id", Fld_page_ns = "page_namespace", Fld_page_title = "page_title", Fld_page_is_redirect = "page_is_redirect", Fld_page_touched = "page_touched", Fld_page_len = "page_len"
+	, Fld_page_random_int = "page_random_int", Fld_page_file_idx = "page_file_idx", Fld_page_html_db_id = "page_html_db_id";
+	public static final String[] 
+	  Flds_insert__html_n		= String_.Ary(Fld_page_id, Fld_page_ns, Fld_page_title, Fld_page_is_redirect, Fld_page_touched, Fld_page_len, Fld_page_random_int, Fld_page_file_idx)
+	, Flds_insert__html_y		= String_.Ary(Fld_page_id, Fld_page_ns, Fld_page_title, Fld_page_is_redirect, Fld_page_touched, Fld_page_len, Fld_page_random_int, Fld_page_file_idx, Fld_page_html_db_id) 
+	, Flds_select_all__html_n	= String_.Ary(Fld_page_id, Fld_page_ns, Fld_page_title, Fld_page_touched, Fld_page_is_redirect, Fld_page_len, Fld_page_file_idx)
+	, Flds_select_all__html_y	= String_.Ary(Fld_page_id, Fld_page_ns, Fld_page_title, Fld_page_touched, Fld_page_is_redirect, Fld_page_len, Fld_page_file_idx, Fld_page_html_db_id)
+	, Flds_select_idx			= String_.Ary(Fld_page_id, Fld_page_ns, Fld_page_title, Fld_page_len)
+	;
 	public static final boolean Load_idx_flds_only_y = true;
-}
-class Xodb_in_wkr_page_id extends Xodb_in_wkr_page_base {
-	private ListAdp list;		// list is original list of ids which may have dupes; needed to fill statement (which takes range of bgn - end); DATE:2013-12-08
-	private OrderedHash hash;	// hash is unique list of ids; needed for fetch from rdr (which indexes by id)
-	public void Init(ListAdp list, OrderedHash hash) {this.list = list; this.hash = hash; this.Fill_idx_fields_only_(true);}
-	@Override public int Interval() {return 990;}
-	@Override public String In_fld_name() {return Xodb_page_tbl.Fld_page_id;}
-	@Override public Criteria In_filter(Object[] part_ary) {
-		return Db_crt_.in_(this.In_fld_name(), part_ary);
+	public static void Read_page__all(Xodb_page page, DataRdr rdr, boolean html_db_enabled) {
+		page.Id_			(rdr.ReadInt(Fld_page_id));
+		page.Ns_id_			(rdr.ReadInt(Fld_page_ns));
+		page.Ttl_wo_ns_		(rdr.ReadBryByStr(Fld_page_title));
+		page.Modified_on_	(DateAdp_.parse_fmt(rdr.ReadStr(Fld_page_touched), Page_touched_fmt));
+		page.Type_redirect_	(rdr.ReadByte(Fld_page_is_redirect) == 1);
+		page.Text_len_		(rdr.ReadInt(Fld_page_len));
+		page.Db_file_idx_	(rdr.ReadInt(Fld_page_file_idx));
+		if (html_db_enabled)
+			page.Html_db_id_(rdr.ReadInt(Fld_page_html_db_id));
 	}
-	@Override public void Fill_stmt(Db_stmt stmt, int bgn, int end) {
-		for (int i = bgn; i < end; i++) {
-			Xodb_page page = (Xodb_page)list.FetchAt(i);
-			stmt.Val_int_(page.Id());		
-		}
-	}
-	@Override public Xodb_page Eval_rslts_key(Xodb_page rdr_page) {return (Xodb_page)hash.Fetch(rdr_page.Id_val());}
-}
-class Xodb_in_wkr_page_title extends Xodb_in_wkr_page_base {
-	private OrderedHash hash;
-	private int in_ns;
-	@Override public int Interval() {return 64;}	// NOTE: 96+ overflows; EX: w:Space_Liability_Convention; DATE:2013-10-24
-	public void Init(OrderedHash hash, int in_ns) {this.hash = hash; this.in_ns = in_ns;}
-	@Override public String In_fld_name() {return Xodb_page_tbl.Fld_page_title;}
-	@Override public Criteria In_filter(Object[] part_ary) {
-		int len = part_ary.length;
-		Criteria[] crt_ary = new Criteria[len];
-		for (int i = 0; i < len; i++)
-			crt_ary[i] = Criteria_.And(Db_crt_.eq_(Xodb_page_tbl.Fld_page_ns, in_ns), Db_crt_.eq_(Xodb_page_tbl.Fld_page_title, Bry_.Empty));
-		return Criteria_.Or_many(crt_ary);
-	}
-	@Override public void Fill_stmt(Db_stmt stmt, int bgn, int end) {
-		for (int i = bgn; i < end; i++) {
-			Xodb_page page = (Xodb_page)hash.FetchAt(i);
-			stmt.Val_int_(in_ns);
-			stmt.Val_str_by_bry_(page.Ttl_wo_ns());
-		}
-	}
-	@Override public Xodb_page Eval_rslts_key(Xodb_page rdr_page) {return (Xodb_page)hash.Fetch(rdr_page.Ttl_wo_ns());}
-}
-class Xodb_in_wkr_page_title_ns extends Xodb_in_wkr_page_base {
-	private Xow_wiki wiki;
-	private OrderedHash hash;
-	@Override public int Interval() {return 64;}	// NOTE: 96+ overflows; EX: w:Space_Liability_Convention; DATE:2013-10-24
-	public void Init(Xow_wiki wiki, OrderedHash hash) {this.wiki = wiki; this.hash = hash;}
-	@Override public String In_fld_name() {return Xodb_page_tbl.Fld_page_title;}
-	@Override public Criteria In_filter(Object[] part_ary) {
-		int len = part_ary.length;
-		Criteria[] crt_ary = new Criteria[len];
-		for (int i = 0; i < len; i++)
-			crt_ary[i] = Criteria_.And(Db_crt_.eq_(Xodb_page_tbl.Fld_page_ns, 0), Db_crt_.eq_(Xodb_page_tbl.Fld_page_title, Bry_.Empty));
-		return Criteria_.Or_many(crt_ary);
-	}
-	@Override public void Fill_stmt(Db_stmt stmt, int bgn, int end) {
-		for (int i = bgn; i < end; i++) {
-			Xodb_page page = (Xodb_page)hash.FetchAt(i);
-			stmt.Val_int_(page.Ns_id());
-			stmt.Val_str_by_bry_(page.Ttl_wo_ns());
-		}
-	}
-//		public override Criteria In_filter(Object[] part_ary) {
-//			int len = part_ary.length;
-//			Object[] vals = new Object[len];
-//			for (int i = 0; i < len; i++)
-//				vals[i] = Bry_.Empty;
-//			Db_obj_ary_crt crt_x = Db_obj_ary_crt.new_(new Db_fld(Xodb_page_tbl.Fld_page_title, ClassAdp_.Tid_str));
-//			crt_x.Vals_(new Object[][] {vals});
-//			return Criteria_.And(Db_crt_.eq_(Xodb_page_tbl.Fld_page_ns, 0), crt_x);
-////			return Criteria_.And(Db_crt_.eq_(Xodb_page_tbl.Fld_page_ns, 0), Criteria_.Or_many(crt_ary));
-//		}
-//		public override void Fill_stmt(Db_stmt stmt, int bgn, int end) {
-//			stmt.Val_int_(0);
-//			for (int i = bgn; i < end; i++) {
-//				Xodb_page page = (Xodb_page)hash.FetchAt(i);
-//				stmt.Val_str_by_bry_(page.Ttl_wo_ns());
-//			}
-//		}
-	@Override public Xodb_page Eval_rslts_key(Xodb_page rdr_page) {
-		Xow_ns ns = wiki.Ns_mgr().Ids_get_or_null(rdr_page.Ns_id());
-		if (ns == null) return null;	// NOTE: ns seems to "randomly" be null when threading during redlinks; guard against null; DATE:2014-01-03
-		byte[] ttl_wo_ns = rdr_page.Ttl_wo_ns();
-		rdr_page.Ttl_(ns, ttl_wo_ns);
-		return (Xodb_page)hash.Fetch(rdr_page.Ttl_w_ns());
-	}
-}
-abstract class Xodb_in_wkr_page_base extends Xodb_in_wkr_base {
-	public String Tbl_name() {return Xodb_page_tbl.Tbl_name;}
-	public abstract String In_fld_name();
-	public abstract Criteria In_filter(Object[] part_ary);
-	public abstract Xodb_page Eval_rslts_key(Xodb_page rdr_page);
-	public boolean Fill_idx_fields_only() {return fill_idx_fields_only;} public Xodb_in_wkr_page_base Fill_idx_fields_only_(boolean v) {fill_idx_fields_only = v; return this;} private boolean fill_idx_fields_only;
-	@Override public Db_qry Build_qry(int bgn, int end) {
-		Object[] part_ary = Xodb_in_wkr_base.In_ary(end - bgn);
-		return Db_qry_.select_cols_
-		(	this.Tbl_name()
-		, 	In_filter(part_ary)
-		, 	fill_idx_fields_only ? Xodb_page_tbl.Flds_ary_search_suggest : Xodb_page_tbl.Flds_ary_all
-		)
-		;
-	}
-	@Override public void Eval_rslts(Cancelable cancelable, DataRdr rdr) {
-		Xodb_page temp = new Xodb_page();
-		while (rdr.MoveNextPeer()) {
-			if (cancelable.Canceled()) return;
-			if (fill_idx_fields_only)
-				Xodb_page_tbl.Read_page_for_search_suggest(temp, rdr);
-			else
-				Xodb_page_tbl.Read_page(temp, rdr);
-			Xodb_page page = Eval_rslts_key(temp);
-			if (page == null) continue; // page not found
-			temp.Exists_(true);
-			page.Copy(temp);
-		}
-	}
-}
-class Xodb_in_wkr_category_id extends Xodb_in_wkr_base {
-	private OrderedHash hash;
-	@Override public int Interval() {return 990;}
-	public void Init(OrderedHash hash) {this.hash = hash;}
-	@Override public Db_qry Build_qry(int bgn, int end) {
-		Object[] part_ary = Xodb_in_wkr_base.In_ary(end - bgn);
-		String in_fld_name = Xodb_category_tbl.Fld_cat_id; 
-		return Db_qry_.select_cols_
-		(	Xodb_category_tbl.Tbl_name
-		, 	Db_crt_.in_(in_fld_name, part_ary)
-		)
-		;
-	}
-	@Override public void Fill_stmt(Db_stmt stmt, int bgn, int end) {
-		for (int i = bgn; i < end; i++) {
-			Xodb_page page = (Xodb_page)hash.FetchAt(i);
-			stmt.Val_int_(page.Id());		
-		}
-	}
-	@Override public void Eval_rslts(Cancelable cancelable, DataRdr rdr) {
-		while (rdr.MoveNextPeer()) {
-			if (cancelable.Canceled()) return;
-			Xodb_category_itm ctg_data = Xodb_category_tbl.Read_ctg(rdr);
-			Xodb_page page = (Xodb_page)hash.Fetch(ctg_data.Id_val());
-			page.Xtn_(ctg_data);
-		}
+	public static void Read_page__idx(Xodb_page page, DataRdr rdr) {
+		page.Id_			(rdr.ReadInt(Fld_page_id));
+		page.Ns_id_			(rdr.ReadInt(Fld_page_ns));
+		page.Ttl_wo_ns_		(rdr.ReadBryByStr(Fld_page_title));
+		page.Text_len_		(rdr.ReadInt(Fld_page_len));
 	}
 }

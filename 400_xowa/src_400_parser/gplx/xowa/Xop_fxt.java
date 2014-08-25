@@ -60,6 +60,7 @@ public class Xop_fxt {
 		wiki.Db_mgr().Load_mgr().Clear();
 		app.Wiki_mgr().Clear();
 		Io_mgr._.InitEngine_mem();	// clear created pages
+		wiki.Cfg_parser().Display_title_restrict_(false);	// default to false, as a small number of tests assume restrict = false;
 		return this;
 	}
 	public Xop_fxt Reset_for_msgs() {
@@ -225,6 +226,12 @@ public class Xop_fxt {
 		byte[] actl = parser.Parse_text_to_wtxt(root, ctx, tkn_mkr, raw_bry);
 		Tfds.Eq(expd, String_.new_utf8_(actl));
 		tst_Log_check();
+	}
+	public Xop_root_tkn Test_parse_page_tmpl_tkn(String raw) {
+		byte[] raw_bry = Bry_.new_utf8_(raw);
+		Xop_root_tkn root = tkn_mkr.Root(raw_bry);
+		parser.Parse_text_to_wtxt(root, ctx, tkn_mkr, raw_bry);
+		return root;
 	}
 	public void Test_parse_page_tmpl(String raw, Tst_chkr... expd_ary) {
 		byte[] raw_bry = Bry_.new_utf8_(raw);

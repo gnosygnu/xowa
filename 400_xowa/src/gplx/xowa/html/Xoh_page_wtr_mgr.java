@@ -94,8 +94,8 @@ public class Xoh_page_wtr_mgr implements GfoInvkAble {
 		Xow_wiki wiki = page.Wiki();
 		if (init) {
 			init = false;
-			page_edit_fmtr.Eval_mgr_(wiki.Eval_mgr());
 			page_read_fmtr.Eval_mgr_(wiki.Eval_mgr());
+			page_edit_fmtr.Eval_mgr_(wiki.Eval_mgr());
 			page_html_fmtr.Eval_mgr_(wiki.Eval_mgr());
 		}
 		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_m001();

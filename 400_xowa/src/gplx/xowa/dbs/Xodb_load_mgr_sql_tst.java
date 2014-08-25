@@ -66,7 +66,7 @@ class Xodb_load_mgr_sql_fxt {
 		DateAdp modified = DateAdp_.Now();
 		for (int i = 0; i < len; i++) {
 			Xodb_page page = ary[i];
-			db_mgr.Tbl_page().Insert(page_stmt, page.Id(), page.Ns_id(), page.Ttl_wo_ns(), false, modified, 10, page.Id(), 0);
+			db_mgr.Tbl_page().Insert(page_stmt, page.Id(), page.Ns_id(), page.Ttl_wo_ns(), false, modified, 10, page.Id(), 0, 0);
 			Xodb_category_itm ctg_itm = (Xodb_category_itm)page.Xtn(); 
 			db_mgr.Tbl_category().Insert(category_stmt, ctg_itm.Id(), ctg_itm.Count_pages(), ctg_itm.Count_subcs(), ctg_itm.Count_files(), Bool_.Xto_byte(ctg_itm.Hidden()), 0);
 		}

@@ -26,7 +26,7 @@ public interface Db_txn_mgr {
 	int Txn_count(); void Txn_count_(int v);
 }
 class Db_txn_mgr_base implements Db_txn_mgr {
-	public Db_txn_mgr_base(Db_engine engine) {this.engine = engine;} Db_engine engine;
+	public Db_txn_mgr_base(Db_engine engine) {this.engine = engine;} private Db_engine engine;
 	public int Txn_depth() {return txn_depth;} int txn_depth;	// NOTE: only support 1 level for now;
 	public void Txn_bgn_if_none() {if (txn_depth == 0) this.Txn_bgn();}
 	public void Txn_bgn() {

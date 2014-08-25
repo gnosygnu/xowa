@@ -28,6 +28,7 @@ public class Xodb_page implements Xobl_data_itm {
 	public boolean Exists() {return exists;} public Xodb_page Exists_(boolean v) {exists = v; return this;} private boolean exists;
 	public int Db_file_idx() {return db_file_idx;} public Xodb_page Db_file_idx_(int v) {db_file_idx = v; return this;} private int db_file_idx;
 	public int Db_row_idx() {return db_row_idx;} public Xodb_page Db_row_idx_(int v) {db_row_idx = v; return this;} private int db_row_idx;
+	public int Html_db_id() {return html_db_id;} public Xodb_page Html_db_id_(int v) {html_db_id = v; return this;} private int html_db_id;
 	public DateAdp Modified_on() {return modified_on;} public Xodb_page Modified_on_(DateAdp v) {modified_on = v; return this;} DateAdp modified_on;
 	public Xow_ns Ns() {return ns;} private Xow_ns ns;
 	public Object Xtn() {return xtn;} public Xodb_page Xtn_(Object v) {this.xtn = v; return this;} Object xtn;
@@ -69,6 +70,7 @@ public class Xodb_page implements Xobl_data_itm {
 		type_redirect = exists = false;
 		modified_on = DateAdp_.MinValue;
 		id_val = null;
+		html_db_id = -1;
 	}
 	public void Copy(Xodb_page orig) {
 		this.id = orig.id;
@@ -84,6 +86,7 @@ public class Xodb_page implements Xobl_data_itm {
 		this.exists = orig.exists;
 		this.modified_on = orig.modified_on;
 		this.id_val = null;
+		this.html_db_id = orig.html_db_id;
 	}
 	public Xodb_page Set_all_(int id, int db_file_idx, int db_row_idx, boolean redirect, int text_len, byte[] ttl_wo_ns) {
 		this.id = id; this.db_file_idx = db_file_idx; this.db_row_idx = db_row_idx; this.type_redirect = redirect; this.text_len = text_len; this.ttl_wo_ns = ttl_wo_ns;

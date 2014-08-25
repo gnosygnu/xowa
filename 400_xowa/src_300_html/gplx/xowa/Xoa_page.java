@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.xowa.gui.*; import gplx.xowa.gui.views.*; import gplx.xowa.html.*; import gplx.xowa.pages.*;
 import gplx.xowa.files.*; import gplx.xowa.xtns.cite.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.html.tocs.*;
-import gplx.xowa.html.modules.popups.*; import gplx.xowa.dbs.hdumps.*;
+import gplx.xowa.html.modules.popups.*; import gplx.xowa.hdumps.pages.*;
 public class Xoa_page {
 	Xoa_page(Xow_wiki wiki, Xoa_ttl ttl) {
 		this.wiki = wiki; this.ttl = ttl;
@@ -58,6 +58,7 @@ public class Xoa_page {
 	public boolean					Lang_convert_title() {return lang_convert_title;} public Xoa_page Lang_convert_title_(boolean v) {lang_convert_title = v; return this;} private boolean lang_convert_title = true;
 	public Wdata_external_lang_links_data Wdata_external_lang_links() {return wdata_external_lang_links;} private Wdata_external_lang_links_data wdata_external_lang_links = new Wdata_external_lang_links_data();
 	public boolean					Pages_recursed() {return pages_recursed;} public void Pages_recursed_(boolean v) {pages_recursed = v; } private boolean pages_recursed;
+	public Xopg_tmpl_prepend_mgr Tmpl_prepend_mgr() {return tmpl_prepend_mgr;} private Xopg_tmpl_prepend_mgr tmpl_prepend_mgr = new Xopg_tmpl_prepend_mgr();
 	public void					Tmpl_stack_del() {--tmpl_stack_ary_len;}
 	public boolean					Tmpl_stack_add(byte[] key) {
 		for (int i = 0; i < tmpl_stack_ary_len; i++) {
@@ -90,6 +91,8 @@ public class Xoa_page {
 		tmpl_stack_ary = Bry_.Ary_empty;
 		tmpl_stack_ary_len = tmpl_stack_ary_max = 0;
 		popup_mgr.Clear();
+		revision_data.Clear();
+		tmpl_prepend_mgr.Clear();
 	}
 	public static final Xoa_page Empty = new Xoa_page().Missing_();
 	public static final Xoa_page Null = null;

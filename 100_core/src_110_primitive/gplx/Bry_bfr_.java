@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public class Bry_bfr_ {
+	public static Bry_bfr[] Ary_empty = new Bry_bfr[0];
 	public static void Assert_at_end(Bry_bfr bfr, byte assert_byte) {
 		int len = bfr.Len(); if (len == 0) return;
 		int assert_count = 0;

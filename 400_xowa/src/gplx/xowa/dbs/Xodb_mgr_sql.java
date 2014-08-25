@@ -17,14 +17,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*;
-import gplx.xowa.apps.*; import gplx.xowa.dbs.tbls.*; import gplx.xowa.ctgs.*; import gplx.xowa.dbs.hdumps.*;
+import gplx.xowa.apps.*; import gplx.xowa.dbs.tbls.*; import gplx.xowa.ctgs.*; import gplx.xowa.hdumps.*;
 public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
+	private boolean html_db_enabled;
 	public Xodb_mgr_sql(Xow_wiki wiki) {
 		this.wiki = wiki;
 		fsys_mgr = new Xodb_fsys_mgr(wiki.App().Fsys_mgr().Bin_db_dir(), wiki.Fsys_mgr().Root_dir(), wiki.Domain_str());
 		load_mgr = new Xodb_load_mgr_sql(this, fsys_mgr);
 		save_mgr = new Xodb_save_mgr_sql(this);
 		tbl_text = new Xodb_text_tbl(this);
+		tbl_page = new Xodb_page_tbl(wiki);
+		hdump_mgr = new Xodb_hdump_mgr(wiki);
 	}
 	public byte Tid() {return Tid_sql;} public static final byte Tid_sql = 1;
 	public String Tid_name() {return "sqlite3";}
@@ -33,14 +36,21 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 	public byte Category_version() {return category_version;} private byte category_version = Xoa_ctg_mgr.Version_null;
 	public byte Search_version() {return load_mgr.Search_version();}
 	public void Search_version_refresh() {load_mgr.Search_version_refresh();}
+	public void Html_db_enabled_(boolean v) {
+		html_db_enabled = v; db_ctx.Html_db_enabled_(v);
+		hdump_mgr.Enabled_(v);
+		tbl_page.Html_db_enabled_(v);
+		if (v) Xodb_hdump_mgr_setup.Hdump_db_file_init(hdump_mgr);
+	}
+	public Xodb_ctx Db_ctx() {return db_ctx;} private Xodb_ctx db_ctx = new Xodb_ctx();
 	public Xodb_fsys_mgr Fsys_mgr() {return fsys_mgr;} private Xodb_fsys_mgr fsys_mgr;
 	public Xodb_load_mgr Load_mgr() {return load_mgr;} private Xodb_load_mgr_sql load_mgr;
 	public Xodb_save_mgr Save_mgr() {return save_mgr;} private Xodb_save_mgr_sql save_mgr;
-	public Xodb_html_mgr Html_mgr() {return html_mgr;} private Xodb_html_mgr html_mgr = new Xodb_html_mgr();
+	public Xodb_hdump_mgr Hdump_mgr() {return hdump_mgr;} private Xodb_hdump_mgr hdump_mgr;
 	public Xodb_xowa_cfg_tbl Tbl_xowa_cfg() {return tbl_cfg;} private Xodb_xowa_cfg_tbl tbl_cfg = new Xodb_xowa_cfg_tbl();
 	public Xodb_xowa_ns_tbl Tbl_xowa_ns() {return tbl_ns;} private Xodb_xowa_ns_tbl tbl_ns = new Xodb_xowa_ns_tbl();
 	public Xodb_xowa_db_tbl Tbl_xowa_db() {return tbl_db;} private Xodb_xowa_db_tbl tbl_db = new Xodb_xowa_db_tbl();
-	public Xodb_page_tbl Tbl_page() {return tbl_page;} private Xodb_page_tbl tbl_page = new Xodb_page_tbl();
+	public Xodb_page_tbl Tbl_page() {return tbl_page;} private Xodb_page_tbl tbl_page;
 	public Xodb_text_tbl Tbl_text() {return tbl_text;} private Xodb_text_tbl tbl_text;
 	public Xodb_site_stats_tbl Tbl_site_stats() {return tbl_site_stats;} private Xodb_site_stats_tbl tbl_site_stats = new Xodb_site_stats_tbl();
 	public Xodb_wdata_qids_tbl Tbl_wdata_qids() {return tbl_wdata_qids;} private Xodb_wdata_qids_tbl tbl_wdata_qids = new Xodb_wdata_qids_tbl();
@@ -78,7 +88,9 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 		tbl_site_stats.Provider_(provider);
 	}
 	public void Page_create(Db_stmt page_stmt, Db_stmt text_stmt, int page_id, int ns_id, byte[] ttl_wo_ns, boolean redirect, DateAdp modified_on, byte[] text, int random_int, int file_idx) {
-		tbl_page.Insert(page_stmt, page_id, ns_id, ttl_wo_ns, redirect, modified_on, text.length, random_int, file_idx);
+		int text_len = text.length;
+		int html_db_id = (html_db_enabled) ? -1 : hdump_mgr.Html_db_id_default(text_len);
+		tbl_page.Insert(page_stmt, page_id, ns_id, ttl_wo_ns, redirect, modified_on, text_len, random_int, file_idx, html_db_id);
 		tbl_text.Insert(text_stmt, page_id, text, data_storage_format);
 	}
 	public boolean Ctg_select_v1(Xoctg_view_ctg view_ctg, Db_provider ctg_provider, Xodb_category_itm ctg) {
@@ -130,14 +142,14 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 		else if	(ctx.Match(k, Invk_category_version_))					category_version = m.ReadByte("v");
 		else if	(ctx.Match(k, Invk_search_version))						return this.Search_version();
 		else if	(ctx.Match(k, Invk_tid_name))							return this.Tid_name();
-		else if	(ctx.Match(k, Invk_html_mgr))							return html_mgr;
+		else if	(ctx.Match(k, Invk_html_mgr))							return hdump_mgr;
 		return this;
 	}
 	public static final String 
 	  Invk_data_storage_format = "data_storage_format", Invk_data_storage_format_ = "data_storage_format_"
 	, Invk_category_version = "category_version", Invk_category_version_ = "category_version_"
 	, Invk_search_version = "search_version"
-	, Invk_tid_name = "tid_name", Invk_html_mgr = "html_mgr"
+	, Invk_tid_name = "tid_name", Invk_html_mgr = "hdump_mgr"
 	;
 	public void Category_version_update(boolean version_is_1) {
 		String grp = Xodb_mgr_sql.Grp_wiki_init;

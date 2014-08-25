@@ -206,10 +206,11 @@ public static final int
 , Id_insider = 185
 , Id_massMessage_target = 186
 , Id_cascadingSources = 187
-, Id_pendingChangesLevel = 188
-, Id_bang = 189
+, Id_pendingChangeLevel = 188
+, Id_pagesUsingPendingChanges = 189
+, Id_bang = 190
 ;
-public static final int Id__max = 190;
+public static final int Id__max = 191;
 
 	private static byte[] ary_itm_(int id) {
 		switch (id) {
@@ -401,7 +402,8 @@ case Xol_kwd_grp_.Id_relatedArticles: return Bry_.new_utf8_("relatedArticles");
 case Xol_kwd_grp_.Id_insider: return Bry_.new_utf8_("insider");
 case Xol_kwd_grp_.Id_massMessage_target: return Bry_.new_utf8_("target");
 case Xol_kwd_grp_.Id_cascadingSources: return Bry_.new_utf8_("cascadingSources");
-case Xol_kwd_grp_.Id_pendingChangesLevel: return Bry_.new_utf8_("pendingChangesLevel");
+case Xol_kwd_grp_.Id_pendingChangeLevel: return Bry_.new_utf8_("pendingChangeLevel");
+case Xol_kwd_grp_.Id_pagesUsingPendingChanges: return Bry_.new_utf8_("pagesUsingPendingChanges");
 case Xol_kwd_grp_.Id_bang: return Bry_.new_utf8_("!");
 default: throw Err_mgr._.unhandled_(id);
 		}

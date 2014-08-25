@@ -21,7 +21,7 @@ public class Db_provider implements RlsAble {
 		this.engine = engine;
 		txn_mgr = new Db_txn_mgr_base(engine);
 	}
-	@gplx.Internal protected Db_engine Engine()					{return engine;} Db_engine engine;
+	@gplx.Internal protected Db_engine Engine()					{return engine;} private Db_engine engine;
 	public Db_connect ConnectInfo()				{return engine.ConnectInfo();}
 	public Db_stmt Prepare(Db_qry qry)			{return engine.New_db_stmt(this, qry);}
 	public int Exec_qry(Db_qry qry)				{txn_mgr.Txn_count_(txn_mgr.Txn_count() + 1); return Int_.cast_(engine.Execute(qry));}

@@ -234,7 +234,8 @@ kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_relatedArticles								, "#related");
 kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_insider										, "#insider");
 kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_massMessage_target								, "#target");
 kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_cascadingSources								, "CASCADINGSOURCES");
-kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_pendingChangesLevel							, "PENDINGCHANGESLEVEL");
+kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_pendingChangeLevel								, "PENDINGCHANGELEVEL");
+kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_pagesUsingPendingChanges						, "PAGESUSINGPENDINGCHANGES");
 kwd_mgr.New(Bool_.Y, Xol_kwd_grp_.Id_bang											, "!");
 	}
 }

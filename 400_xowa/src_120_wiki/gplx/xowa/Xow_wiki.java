@@ -128,9 +128,9 @@ public class Xow_wiki implements GfoInvkAble {
 		file_mgr.Meta_mgr().Clear();
 		db_mgr.Load_mgr().Clear();
 	}
-	public Xoa_page GetPageByTtl(Xoa_url url, Xoa_ttl ttl)					{return GetPageByTtl(url, ttl, lang, app.Gui_mgr().Browser_win().Active_tab());}
-	public Xoa_page GetPageByTtl(Xoa_url url, Xoa_ttl ttl, Xog_tab_itm tab) {return GetPageByTtl(url, ttl, lang, tab);}
-	private Xoa_page GetPageByTtl(Xoa_url url, Xoa_ttl ttl, Xol_lang lang, Xog_tab_itm tab) {
+	public Xoa_page GetPageByTtl(Xoa_url url, Xoa_ttl ttl)					{return GetPageByTtl(url, ttl, lang, app.Gui_mgr().Browser_win().Active_tab(), true);}
+	public Xoa_page GetPageByTtl(Xoa_url url, Xoa_ttl ttl, Xog_tab_itm tab) {return GetPageByTtl(url, ttl, lang, tab, true);}
+	public Xoa_page GetPageByTtl(Xoa_url url, Xoa_ttl ttl, Xol_lang lang, Xog_tab_itm tab, boolean parse_page) {
 		if (init_needed) Init_wiki(app.User());
 		Xoa_page page = data_mgr.Get_page(url, ttl, false, false);				// get page from data_mgr
 		if (page.Missing()) {													// page doesn't exist
@@ -138,7 +138,7 @@ public class Xow_wiki implements GfoInvkAble {
 				Xow_wiki commons_wiki = app.Wiki_mgr().Get_by_key_or_null(commons_wiki_key);
 				if (commons_wiki != null
 					&& !Bry_.Eq(domain_bry, commons_wiki.Domain_bry())) // if file, check commons wiki; note that !Bry_.Eq is recursion guard
-					return commons_wiki.GetPageByTtl(url, ttl, this.lang, tab);
+					return commons_wiki.GetPageByTtl(url, ttl, this.lang, tab, true);
 			}
 			else
 				return page.Missing_();
@@ -146,15 +146,14 @@ public class Xow_wiki implements GfoInvkAble {
 		if (page.Missing()) return page;									// NOTE: commons can return null page
 		page.Tab_(tab);
 		page.Lang_(lang);
-		gplx.xowa.xtns.scribunto.Scrib_core.Core_page_changed(page);		// notify scribunto about page changed
-		ParsePage(page, false);	// NOTE: do not clear page b/c reused for search
+		if (parse_page)
+			ParsePage(page, false);	// NOTE: do not clear page b/c reused for search
 		return page;
 	}
-	public void ParsePage_root(Xoa_page page, boolean clear) {
-		ParsePage(page, clear);
-	}
+	public void ParsePage_root(Xoa_page page, boolean clear) {ParsePage(page, clear);}
 	public void ParsePage(Xoa_page page, boolean clear) {
 		if (init_needed && !Env_.Mode_testing()) Init_wiki(app.User());
+		gplx.xowa.xtns.scribunto.Scrib_core.Core_page_changed(page);		// notify scribunto about page changed
 		ctx.Cur_page_(page);
 		Xop_root_tkn root = ctx.Tkn_mkr().Root(page.Data_raw());
 		if (clear) {page.Clear();}
@@ -224,8 +223,9 @@ public class Xow_wiki implements GfoInvkAble {
 		if (sqlite_url != null) {
 			Xodb_mgr_sql db_mgr_sql = this.Db_mgr_create_as_sql();
 			db_mgr_sql.Init_load(gplx.dbs.Db_connect_.sqlite_(sqlite_url));
-			db_mgr_sql.Html_mgr().Enabled_(hdump_enabled);
+			db_mgr_sql.Html_db_enabled_(hdump_enabled);
 		}
+		if (!Xob_import_marker.Check(this)) {app.Wiki_mgr().Del(domain_bry); init_needed = false; return;}	// NOTE: must call after Db_mgr_create_as_sql(); also, must delete wiki from mgr; DATE:2014-08-24
 		db_mgr.Load_mgr().Load_init(this);
 		app.Gfs_mgr().Run_url_for(this, fsys_mgr.Cfg_wiki_core_fil());
 		gplx.xowa.utls.upgrades.Xoa_upgrade_mgr.Check(this);

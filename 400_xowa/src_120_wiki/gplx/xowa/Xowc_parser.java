@@ -21,12 +21,16 @@ public class Xowc_parser implements GfoInvkAble {
 	public Xowc_parser(Xow_wiki wiki) {
 		lnki_cfg = new Xoc_lnki_cfg(wiki);
 	}
-	public boolean Flag_xtns_pages_init() {return flag_xtns_pages_init;} public Xowc_parser Flag_xtns_pages_init_(boolean v) {flag_xtns_pages_init = v; return this;} private boolean flag_xtns_pages_init = true;
 	public Xoc_lnki_cfg Lnki_cfg() {return lnki_cfg;} private Xoc_lnki_cfg lnki_cfg;
 	public Xowc_xtns Xtns() {return xtns;} private Xowc_xtns xtns = new Xowc_xtns();
+	public boolean Display_title_restrict() {return display_title_restrict;} public void Display_title_restrict_(boolean v) {display_title_restrict = v;} private boolean display_title_restrict = true;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_xtns))				return xtns;
-		else if	(ctx.Match(k, Invk_lnki))				return lnki_cfg;
-		else return GfoInvkAble_.Rv_unhandled;
-	}	private static final String Invk_xtns = "xtns", Invk_lnki = "lnki";
+		if		(ctx.Match(k, Invk_xtns))						return xtns;
+		else if	(ctx.Match(k, Invk_lnki))						return lnki_cfg;
+		else if	(ctx.Match(k, Invk_display_title_restrict))		return display_title_restrict;
+		else if	(ctx.Match(k, Invk_display_title_restrict_))	display_title_restrict = m.ReadYn("v");
+		else													return GfoInvkAble_.Rv_unhandled;
+		return this;
+	}
+	private static final String Invk_xtns = "xtns", Invk_lnki = "lnki", Invk_display_title_restrict = "display_title_restrict", Invk_display_title_restrict_ = "display_title_restrict_";
 }

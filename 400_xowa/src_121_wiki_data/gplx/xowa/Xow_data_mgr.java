@@ -19,10 +19,9 @@ package gplx.xowa; import gplx.*;
 import gplx.lists.*; /*ComparerAble*/ import gplx.xowa.bldrs.imports.ctgs.*;
 import gplx.xowa.dbs.*; import gplx.xowa.wikis.*; import gplx.xowa.langs.msgs.*;
 public class Xow_data_mgr implements GfoInvkAble {
-	public Xow_data_mgr(Xow_wiki wiki) {
-		this.wiki = wiki; this.redirect_mgr = wiki.Redirect_mgr();
-	}	private Xop_redirect_mgr redirect_mgr;
+	private Xop_redirect_mgr redirect_mgr;
 	private Xoa_url tmp_url = Xoa_url.blank_();
+	public Xow_data_mgr(Xow_wiki wiki) {this.wiki = wiki; this.redirect_mgr = wiki.Redirect_mgr();}
 	public Xow_wiki Wiki() {return wiki;} private Xow_wiki wiki;
 	public Xoa_page Get_page(Xoa_ttl ttl, boolean called_from_tmpl) {wiki.App().Url_parser().Parse(tmp_url, ttl.Raw()); return Get_page(tmp_url, ttl, called_from_tmpl, false);}
 	public Xoa_page Get_page_from_msg(Xoa_ttl ttl) {wiki.App().Url_parser().Parse(tmp_url, ttl.Raw()); return Get_page(tmp_url, ttl, false, true);}
@@ -60,7 +59,7 @@ public class Xow_data_mgr implements GfoInvkAble {
 				wiki.App().Gui_wtr().Prog_many(GRP_KEY, "file_load", "loading page for ~{0}", String_.new_utf8_(ttl.Raw()));
 			wiki.Db_mgr().Load_mgr().Load_page(db_page, ns, !called_from_tmpl);
 			byte[] bry = db_page.Text();
-			rv.Data_raw_(bry).Revision_data().Modified_on_(db_page.Modified_on()).Id_(db_page.Id());
+			rv.Data_raw_(bry).Revision_data().Modified_on_(db_page.Modified_on()).Id_(db_page.Id()).Html_db_id_(db_page.Html_db_id());
 			if (redirect_force) return rv;
 			Xoa_ttl redirect_ttl = redirect_mgr.Extract_redirect(bry, bry.length);
 			if  (	redirect_ttl == null				// not a redirect
