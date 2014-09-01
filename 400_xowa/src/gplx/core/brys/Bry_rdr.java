@@ -21,12 +21,23 @@ public class Bry_rdr {
 	public Bry_rdr Src_(byte[] src, int src_len) {this.src = src; this.src_len = src_len; pos = 0; return this;} public Bry_rdr Src_(byte[] src) {return Src_(src, src.length);}
 	public int Pos() {return pos;} public Bry_rdr Pos_(int v) {this.pos = v; return this;} private int pos;
 	public boolean Pos_is_eos() {return pos == src_len;}
+	public void Pos_add_one() {++pos;}
 	public int Or_int() {return or_int;} public void Or_int_(int v) {or_int = v;} private int or_int = Int_.MinValue;
 	public byte[] Or_bry() {return or_bry;} public void Or_bry_(byte[] v) {or_bry = v;} private byte[] or_bry;
+	public int Find_fwd__pos_at_lhs(byte[] find_bry) {return Find_fwd__pos_at(find_bry, Bool_.N);}
+	public int Find_fwd__pos_at_rhs(byte[] find_bry) {return Find_fwd__pos_at(find_bry, Bool_.Y);}
+	public int Find_fwd__pos_at(byte[] find_bry, boolean pos_at_rhs) {
+		int find_pos = Bry_finder.Find_fwd(src, find_bry, pos, src_len);
+		if (pos_at_rhs) find_pos += find_bry.length;
+		if (find_pos != Bry_finder.Not_found) pos = find_pos;
+		return find_pos;
+	}
 	public int Read_int_to_pipe() {return Read_int_to(Byte_ascii.Pipe);}
+	public int Read_int_to_nl() {return Read_int_to(Byte_ascii.NewLine);}
 	public int Read_int_to(byte to_char) {
 		int bgn = pos;
 		int rv = 0;
+		int negative = 1;
 		while (pos < src_len) {
 			byte b = src[pos++];
 			switch (b) {
@@ -34,11 +45,17 @@ public class Bry_rdr {
 				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
 					rv = (rv * 10) + (b - Byte_ascii.Num_0);
 					break;
+				case Byte_ascii.Dash:
+					if (negative == -1)		// 2nd negative
+						return or_int;		// return or_int
+					else					// 1st negative
+						negative = -1;		// flag negative
+					break;
 				default:
-					return b == to_char ? rv : or_int;
+					return b == to_char ? rv * negative : or_int;
 			}
 		}
-		return bgn == pos ? or_int : rv;
+		return bgn == pos ? or_int : rv * negative;
 	}
 	public byte[] Read_bry_to_nl()		{return Read_bry_to(Byte_ascii.NewLine);}
 	public byte[] Read_bry_to_pipe()	{return Read_bry_to(Byte_ascii.Pipe);}

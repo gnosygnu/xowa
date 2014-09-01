@@ -31,10 +31,10 @@ class Pxd_parser {
 			if (ary[i] == Pxd_itm_base.Seg_idx_null) return false;
 		return true;
 	}
-	public void Seg_idxs_(Pxd_itm_int itm, int seg_idx) {Seg_idxs_(itm, seg_idx, itm.Val());}
+	public void Seg_idxs_(Pxd_itm_int  itm, int seg_idx)				{Seg_idxs_(itm, seg_idx, itm.Val());}
 	public void Seg_idxs_(Pxd_itm_base itm, int seg_idx, int val) {
 		itm.Seg_idx_(seg_idx);
-		if (seg_idx >= 0) // ignore Seg_idx_null and Seg_idx_skip
+		if (seg_idx >= 0)	// ignore Seg_idx_null and Seg_idx_skip
 			seg_idxs[seg_idx] = val;
 	}
 	public void Err_set(Gfo_msg_itm itm, Bry_fmtr_arg... args) {
@@ -111,9 +111,9 @@ class Pxd_parser {
 						itm = new Pxd_itm_int(tkns_len, digits, int_val); break;
 				}
 				break;
-			case Pxd_itm_.Tid_ws: 	itm = new Pxd_itm_ws(tkns_len); break;
-			case Pxd_itm_.Tid_dash:	itm = new Pxd_itm_dash(tkns_len); break;
-			case Pxd_itm_.Tid_dot:	itm = new Pxd_itm_dot(tkns_len); break;
+			case Pxd_itm_.Tid_ws: 		itm = new Pxd_itm_ws(tkns_len); break;
+			case Pxd_itm_.Tid_dash:		itm = new Pxd_itm_dash(tkns_len); break;
+			case Pxd_itm_.Tid_dot:		itm = new Pxd_itm_dot(tkns_len); break;
 			case Pxd_itm_.Tid_colon:	itm = new Pxd_itm_colon(tkns_len); break;
 			case Pxd_itm_.Tid_slash:	itm = new Pxd_itm_slash(tkns_len); break;
 			case Pxd_itm_.Tid_null:	break; // NOOP

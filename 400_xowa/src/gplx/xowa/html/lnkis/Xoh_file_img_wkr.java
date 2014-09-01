@@ -18,5 +18,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import gplx.xowa.files.*;
 public interface Xoh_file_img_wkr {
-	void Html_full_img(Bry_bfr tmp_bfr, Xoa_page page, Xof_xfer_itm xfer_itm, int uid, byte[] a_href, byte[] a_class, byte[] a_rel, byte[] a_title, byte[] a_xowa_title, int img_w, int img_h, byte[] img_src, byte[] img_alt, byte[] img_class);
+	void Html_full_img(Bry_bfr tmp_bfr, Xoh_wtr_ctx hctx, Xoa_page page, Xof_xfer_itm xfer_itm, int uid, byte[] a_href, byte[] a_class, byte[] a_rel, byte[] a_title, byte[] a_xowa_title, int img_w, int img_h, byte[] img_src, byte[] img_alt, byte[] img_class);
 }

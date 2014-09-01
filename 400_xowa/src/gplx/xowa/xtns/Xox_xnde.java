@@ -19,5 +19,5 @@ package gplx.xowa.xtns; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.html.*;
 public interface Xox_xnde {
 	void Xtn_parse(Xow_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde);
-	void Xtn_write(Xoa_app app, Xoh_html_wtr html_wtr, Xoh_wtr_ctx opts, Xop_ctx ctx, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde);
+	void Xtn_write(Bry_bfr bfr, Xoa_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src);
 }

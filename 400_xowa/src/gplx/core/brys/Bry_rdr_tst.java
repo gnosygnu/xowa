@@ -26,6 +26,11 @@ public class Bry_rdr_tst {
 		fxt.Test_read_int(789);
 		fxt.Test_read_int(Int_.MinValue);
 	}
+	@Test   public void Int_negative() {
+		fxt.Init_src("-1|-2");
+		fxt.Test_read_int(-1);
+		fxt.Test_read_int(-2);
+	}
 	@Test   public void Bry() {
 		fxt.Init_src("abc|d||ef");
 		fxt.Test_read_bry("abc");

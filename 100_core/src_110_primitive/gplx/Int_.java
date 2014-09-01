@@ -36,6 +36,10 @@ public class Int_ implements GfoInvkAble {
 			rv[i] = ary[i];
 		return rv;
 	}
+	public static void Ary_copy_to(int[] src, int src_len, int[] trg) {
+		for (int i = 0; i < src_len; ++i)
+			trg[i] = src[i];
+	}
 	public static int[] AryRng(int bgn, int end) {
 		int len = end - bgn + 1;
 		int[] rv = new int[len];

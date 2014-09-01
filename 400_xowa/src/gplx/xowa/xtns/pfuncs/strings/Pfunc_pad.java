@@ -16,16 +16,17 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.strings; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+import gplx.intl.*;
 public class Pfunc_pad extends Pf_func_base {
 	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {// REF.MW: CoreParserFunctions.php|pad
 		int self_args_len = self.Args_len();
 		byte[] val = Eval_argx(ctx, src, caller, self);
-		int val_len = val.length;
+		int val_len = Utf8_.Len_of_bry(val);			// NOTE: length must be in chars, not bytes, else won't work for non-ASCII chars; EX:niǎo has length of 4, not 5; PAGE:zh.d:不 DATE:2014-08-27
 		
 		byte[] pad_len = Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, self_args_len, 0);
 		int pad_len_int = Bry_.Xto_int_or(pad_len, 0, pad_len.length, -1);
-		if (pad_len_int == -1) {bfr.Add(val); return;}// NOTE: if pad_len is non-int, add val and exit silently; EX: {{padleft: a|bad|0}}
-		if (pad_len_int > 500) pad_len_int = 500;	// MW: force to be <= 500
+		if (pad_len_int == -1) {bfr.Add(val); return;}	// NOTE: if pad_len is non-int, add val and exit silently; EX: {{padleft: a|bad|0}}
+		if (pad_len_int > 500) pad_len_int = 500;		// MW: force it to be <= 500
 		
 		byte[] pad_str = Pf_func_.Eval_arg_or(ctx, src, caller, self, self_args_len, 1, Ary_pad_dflt);
 		int pad_str_len = pad_str.length;

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import gplx.html.*; import gplx.xowa.files.*;
+import gplx.html.*; import gplx.xowa.files.*; import gplx.xowa.hdumps.core.*;
 public class Xoh_file_wtr__basic {		
 	private final Xow_wiki wiki; private final Xow_html_mgr html_mgr; private final Xoh_html_wtr html_wtr; private final Bry_bfr_mkr bfr_mkr; private final Bry_bfr scratch_bfr = Bry_bfr.reset_(Io_mgr.Len_kb);
 	private final Xoh_lnki_text_fmtr media_alt_fmtr, caption_fmtr;
@@ -76,10 +76,8 @@ public class Xoh_file_wtr__basic {
 			else													// image
 				this.Write_file_image(bfr, ctx, hctx, src, lnki, xfer_itm, uid, div_width, lnki_halign, lnki_halign_bry, lnki_ttl, lnki_ext, lnki_href, img_view_src, img_orig_src, img_alt);
 		}
-		if (hctx.Mode_is_hdump()) {
-			byte[] rel_src = Bry_.Len_eq_0(img_view_src) ? Bry_.Empty : Bry_.Mid(img_view_src, wiki.App().Fsys_mgr().File_dir().To_http_file_bry().length);
-			xfer_itm.Html_view_src_rel_(rel_src);
-			page.Hdump_data().Imgs().Add(xfer_itm.Clone());
+		if (hctx.Mode_is_hdump() && Xof_html_elem.Tid_is_file(xfer_itm.Html_elem_tid())) {
+			page.Hdump_data().Imgs_add(new Hdump_data_img__basic(), xfer_itm, Hdump_data_img__gallery.Tid_basic);
 		}
 	}
 	private void Write_file_ns_media(Bry_bfr bfr, Xop_ctx ctx, byte[] src, Xop_lnki_tkn lnki, byte[] img_orig_src) {
@@ -130,7 +128,7 @@ public class Xoh_file_wtr__basic {
 			}
 			Arg_nde_tkn lnki_link_tkn = lnki.Link_tkn();
 			if (lnki_link_tkn == Arg_nde_tkn.Null)		// full
-				lnki_file_wkr.Html_full_img(bfr, page, xfer_itm, uid, lnki_href, Xow_html_mgr.Bry_anchor_class_image, Xow_html_mgr.Bry_anchor_rel_blank, anchor_title, lnki_ttl, xfer_itm.Html_w(), xfer_itm.Html_h(), img_view_src, alt, Arg_img_cls(lnki));
+				lnki_file_wkr.Html_full_img(bfr, hctx, page, xfer_itm, uid, lnki_href, Xow_html_mgr.Bry_anchor_class_image, Xow_html_mgr.Bry_anchor_rel_blank, anchor_title, lnki_ttl, xfer_itm.Html_w(), xfer_itm.Html_h(), img_view_src, alt, Arg_img_cls(lnki));
 			else {										// thumb
 				Arg_itm_tkn link_tkn = lnki_link_tkn.Val_tkn();
 				byte[] link_ref = link_tkn.Dat_to_bry(src);
@@ -138,7 +136,7 @@ public class Xoh_file_wtr__basic {
 				link_ref = link_ref_new == null ? lnki_href: link_ref_new;	// if parse fails, then assign to lnki_href; EX:link={{{1}}}
 				link_ref = ctx.App().Encoder_mgr().Href_quotes().Encode(link_ref);	// must encode quotes; PAGE:en.w:List_of_cultural_heritage_sites_in_Punjab,_Pakistan; DATE:2014-07-16
 				lnki_ttl = Bry_.Coalesce(lnki_ttl, tmp_link_parser.Html_xowa_ttl());
-				lnki_file_wkr.Html_full_img(bfr, page, xfer_itm, uid, link_ref, tmp_link_parser.Html_anchor_cls(), tmp_link_parser.Html_anchor_rel(), anchor_title, lnki_ttl, xfer_itm.Html_w(), xfer_itm.Html_h(), img_view_src, alt, Arg_img_cls(lnki));
+				lnki_file_wkr.Html_full_img(bfr, hctx, page, xfer_itm, uid, link_ref, tmp_link_parser.Html_anchor_cls(), tmp_link_parser.Html_anchor_rel(), anchor_title, lnki_ttl, xfer_itm.Html_w(), xfer_itm.Html_h(), img_view_src, alt, Arg_img_cls(lnki));
 			}
 			if (div_align_exists) bfr.Add(Html_tag_.Div_rhs);	// close div from above
 		}
@@ -149,7 +147,7 @@ public class Xoh_file_wtr__basic {
 		byte[] lnki_alt_html = wiki.Html_mgr().Imgs_mgr().Alt_in_caption().Val() ? Arg_alt_html(ctx, src, lnki) : Bry_.Empty;
 		byte[] lnki_cls = xfer_itm.Html_pass() ? Xow_html_mgr.Bry_img_cls_thumbimage : Xow_html_mgr.Bry_img_cls_none;
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();
-		lnki_file_wkr.Html_full_img(tmp_bfr, page, xfer_itm, uid, lnki_href, Xow_html_mgr.Bry_anchor_class_image, Xow_html_mgr.Bry_anchor_rel_blank, anchor_title, lnki_ttl, xfer_itm.Html_w(), xfer_itm.Html_h(), view_src, lnki_alt_text, lnki_cls);
+		lnki_file_wkr.Html_full_img(tmp_bfr, hctx, page, xfer_itm, uid, lnki_href, Xow_html_mgr.Bry_anchor_class_image, Xow_html_mgr.Bry_anchor_rel_blank, anchor_title, lnki_ttl, xfer_itm.Html_w(), xfer_itm.Html_h(), view_src, lnki_alt_text, lnki_cls);
 		byte[] thumb = tmp_bfr.XtoAryAndClear();
 		html_fmtr.Html_thumb_file_image(tmp_bfr, thumb, Arg_caption_div(ctx, src, lnki, uid, img_orig_src, lnki_href), lnki_alt_html);
 		return tmp_bfr.Mkr_rls().XtoAryAndClear();

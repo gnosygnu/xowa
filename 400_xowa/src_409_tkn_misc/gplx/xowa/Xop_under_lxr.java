@@ -104,8 +104,8 @@ class Xop_under_lxr implements Xop_lxr {
 			case Xol_kwd_grp_.Id_forcetoc:			hdr_mgr.Toc_force_(); break;
 			case Xol_kwd_grp_.Id_notoc:				hdr_mgr.Toc_hide_(); break;
 			case Xol_kwd_grp_.Id_noeditsection:		break;	// ignore; not handling edit sections
-			case Xol_kwd_grp_.Id_nocontentconvert:	page.Lang_convert_content_(false); break;
-			case Xol_kwd_grp_.Id_notitleconvert:	page.Lang_convert_title_(false); break;
+			case Xol_kwd_grp_.Id_nocontentconvert:	page.Html_data().Lang_convert_content_(false); break;
+			case Xol_kwd_grp_.Id_notitleconvert:	page.Html_data().Lang_convert_title_(false); break;
 			default:								break;	// ignore anything else
 		}				
 	}

@@ -283,7 +283,7 @@ public class Xoh_html_wtr {
 		bfr.Add(bry.Val());
 	}
 	@gplx.Virtual public void Vnt(Xop_ctx ctx, Xoh_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Xop_vnt_tkn vnt) {
-		Xop_vnt_html_wtr.Write(this, ctx, hctx, bfr, src, vnt);	// NOTE: using wiki, b/c getting nullPointer with ctx during mass parse
+		Xop_vnt_html_wtr.Write(bfr, this, ctx, hctx, page, src, vnt);	// NOTE: using wiki, b/c getting nullPointer with ctx during mass parse
 	}
 	@gplx.Virtual public void Under(Xop_ctx ctx, Xoh_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Xop_under_tkn under) {
 		if (hctx.Mode_is_alt()) return;
@@ -405,7 +405,7 @@ public class Xoh_html_wtr {
 			case Xop_xnde_tag_.Tid_math:
 			case Xop_xnde_tag_.Tid_xowa_html:
 				Xox_xnde xtn = xnde.Xnde_xtn();
-				xtn.Xtn_write(app, this, hctx, ctx, bfr, src, xnde);
+				xtn.Xtn_write(bfr, app, ctx, this, hctx, xnde, src);
 				break;
 			case Xop_xnde_tag_.Tid_xowa_tag_bgn:
 			case Xop_xnde_tag_.Tid_xowa_tag_end:

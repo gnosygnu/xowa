@@ -19,17 +19,18 @@ package gplx.xowa.hdumps; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.html.*; import gplx.xowa.gui.*; 
 import gplx.xowa.hdumps.core.*; import gplx.xowa.hdumps.saves.*; import gplx.xowa.pages.*; import gplx.xowa.hdumps.loads.*; import gplx.xowa.hdumps.htmls.*; import gplx.xowa.hdumps.dbs.*;
 public class Xodb_hdump_mgr {
-	private Xodb_file hdump_db_file; private Hdump_html_mgr html_mgr = new Hdump_html_mgr();
+	private Xodb_file hdump_db_file;
 	public Xodb_hdump_mgr(Xow_wiki wiki) {
 		this.wiki = wiki;
 		load_mgr = new Hdump_load_mgr(this);
 		Tbl_(new Hdump_text_tbl());
 		Xoa_app app = wiki.App();
-		html_mgr.Init_by_app(app.Usr_dlg(), app.Fsys_mgr().File_dir().To_http_file_bry());
+		html_mgr.Init_by_app(app);
 	}
 	public Xow_wiki Wiki() {return wiki;} private final Xow_wiki wiki; 
 	@gplx.Internal protected Hdump_load_mgr Load_mgr() {return load_mgr;} private Hdump_load_mgr load_mgr;
 	@gplx.Internal protected Hdump_save_mgr Save_mgr() {return save_mgr;} private Hdump_save_mgr save_mgr = new Hdump_save_mgr();
+	public Hdump_html_mgr Html_mgr() {return html_mgr;} private Hdump_html_mgr html_mgr = new Hdump_html_mgr();
 	public Hdump_text_tbl Text_tbl() {return text_tbl;} private Hdump_text_tbl text_tbl;
 	public boolean Enabled() {return enabled;} public void Enabled_(boolean v) {enabled = v;}	private boolean enabled;
 	@gplx.Internal protected void Tbl_mem_() {Tbl_(new Hdump_text_tbl_mem());}
@@ -59,17 +60,25 @@ public class Xodb_hdump_mgr {
 	public void Load(Xow_wiki wiki, Xoa_page page) {
 		if (!Enabled_chk()) return;
 		page.Root_(new Xop_root_tkn());
-		Hdump_page_itm hdump_page = new Hdump_page_itm();
-		load_mgr.Load(hdump_page, page.Revision_data().Id(), page.Url());
+		Hdump_page hpg = new Hdump_page();
+		load_mgr.Load(hpg, page.Revision_data().Id(), page.Url());
+		Load_page(wiki, page, hpg);
+	}
+	private void Load_page(Xow_wiki wiki, Xoa_page page, Hdump_page hpg) {
 		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_m001();
-		html_mgr.Write(tmp_bfr, wiki, hdump_page);
+		html_mgr.Write(tmp_bfr, wiki, hpg);
 		page.Hdump_data().Body_(tmp_bfr.XtoAryAndClear());
+		Xopg_html_data html_data = page.Html_data();
+		html_data.Display_ttl_(hpg.Display_ttl());
+		html_data.Content_sub_(hpg.Content_sub());
+		html_data.Xtn_skin_mgr().Add(new Xopg_xtn_skin_itm_mock(hpg.Sidebar_div()));
+		Hdump_page_body_srl.Load_html_modules(html_data.Module_mgr(), hpg);
 		tmp_bfr.Mkr_rls();
 	}
 	private void Tbl_(Hdump_text_tbl v) {
 		text_tbl = v;
 		save_mgr.Tbl_(text_tbl);
-		load_mgr.Tbl_(text_tbl);
+//			load_mgr.Tbl_(text_tbl);
 	}
 	private boolean Enabled_chk() {
 		if (enabled && hdump_db_file == null) hdump_db_file = Xodb_hdump_mgr_setup.Hdump_db_file_init(this);

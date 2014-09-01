@@ -16,8 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.wikis.*;
-import gplx.core.btries.*;
+import gplx.core.btries.*; import gplx.xowa.wikis.*; import gplx.xowa.html.*; import gplx.xowa.html.lnkis.*;
 public class Imap_xtn_mgr extends Xox_mgr_base implements GfoInvkAble {
 	private boolean init;
 	@Override public boolean Enabled_default() {return true;}
@@ -33,6 +32,8 @@ public class Imap_xtn_mgr extends Xox_mgr_base implements GfoInvkAble {
 	public Btrie_slim_mgr Desc_trie() {return desc_trie;}	private Btrie_slim_mgr desc_trie;
 	public byte[] Desc_msg() {return desc_msg;} private byte[] desc_msg;
 	public byte[] Desc_icon_url() {return desc_icon_url;} private byte[] desc_icon_url;
+	public Xoh_arg_img_core Img_core_fmtr(boolean hctx_is_hdump) {return hctx_is_hdump ? img_core_hdump : img_core_basic;}
+	private final Xoh_arg_img_core img_core_basic = new Xoh_arg_img_core__basic(), img_core_hdump = new Xoh_arg_img_core__hdump();
 	@Override public Xox_mgr Clone_new() {return new Imap_xtn_mgr();}
 	@Override public void Xtn_init_by_wiki(Xow_wiki wiki) {
 		this.wiki = wiki;

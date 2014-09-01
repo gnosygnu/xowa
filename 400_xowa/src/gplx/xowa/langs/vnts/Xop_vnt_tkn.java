@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+import gplx.xowa.html.*;
 public class Xop_vnt_tkn extends Xop_tkn_itm_base {
 	public Xop_vnt_tkn(int bgn, int end) {
 		this.Tkn_ini_pos(false, bgn, end);
@@ -28,7 +29,7 @@ public class Xop_vnt_tkn extends Xop_tkn_itm_base {
 	public Xop_vnt_flag[] Vnt_flags() {return vnt_flags;} public Xop_vnt_tkn Vnt_flags_(Xop_vnt_flag[] v) {vnt_flags = v; return this;} private Xop_vnt_flag[] vnt_flags;
 	public Xop_vnt_rule[] Vnt_rules() {return vnt_rules;} public Xop_vnt_tkn Vnt_rules_(Xop_vnt_rule[] v) {vnt_rules = v; return this;} private Xop_vnt_rule[] vnt_rules;
 	public byte Vnt_cmd() {return vnt_cmd;} private byte vnt_cmd;
-	public void Vnt_cmd_calc() {
+	public void Vnt_cmd_calc(Xow_wiki wiki, Xoa_page page, Xop_ctx ctx, byte[] src) {
 		int flags_len = vnt_flags.length;
 		int rules_len = vnt_rules.length;
 		if		(flags_len == 0) {	// no flags; either literal ("-{A}-") or bidi ("-{zh-hans:A;zh-hant:B}-");
@@ -51,6 +52,18 @@ public class Xop_vnt_tkn extends Xop_tkn_itm_base {
 				case Xop_vnt_flag_.Tid_descrip	: vnt_cmd = Xop_vnt_html_wtr.Cmd_descrip; break;
 				case Xop_vnt_flag_.Tid_unknown	: vnt_cmd = Xop_vnt_html_wtr.Cmd_literal; break;	// flag is unknown; output text as literal; EX: "-{|a}-"; "-{X|a}-"
 				case Xop_vnt_flag_.Tid_macro	: vnt_cmd = Xop_vnt_html_wtr.Cmd_empty; break;		// TODO: implement macro; ignore for now; DATE:2014-05-03
+				case Xop_vnt_flag_.Tid_title: {	// title; same as {{DISPLAYTITLE}} but variant aware; PAGE:zh.w:Help:進階字詞轉換處理 DATE:2014-08-29
+					vnt_cmd = Xop_vnt_html_wtr.Cmd_title;
+					byte[] cur_lang_vnt = wiki.Lang().Vnt_mgr().Cur_vnt();
+					Xop_vnt_rule rule = Xop_vnt_html_wtr.Get_rule_by_key(vnt_rules, vnt_rules.length, cur_lang_vnt);
+					if (rule != null) {
+						Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
+						wiki.Html_mgr().Html_wtr().Write_tkn_ary(tmp_bfr, ctx, Xoh_wtr_ctx.Alt, src, rule.Rule_subs());
+						byte[] display_ttl = tmp_bfr.Mkr_rls().XtoAryAndClear();
+						page.Html_data().Display_ttl_vnt_(display_ttl);
+					}
+					break;
+				}
 			}
 		}
 	}

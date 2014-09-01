@@ -53,7 +53,6 @@ public class Xof_xfer_itm implements Xof_file_itm {
 	}	private Xof_repo_itm trg_repo;
 	public int			Trg_repo_idx() {return trg_repo_idx;} public Xof_xfer_itm Trg_repo_idx_(int trg_repo_idx) {this.trg_repo_idx = trg_repo_idx; return this;} private int trg_repo_idx = Xof_meta_itm.Repo_unknown;
 	public byte[]		Trg_repo_root() {return trg_repo_root;} private byte[] trg_repo_root = Bry_.Empty;	// HACK: needed for hdump
-	public byte[]		Html_view_src_rel() {return html_view_src_rel;} public void Html_view_src_rel_(byte[] v) {html_view_src_rel = v;} private byte[] html_view_src_rel;
 	private byte[]		Trg_html(byte mode_id, int width)	{return url_bldr.Set_trg_html_(mode_id, trg_repo, lnki_ttl, lnki_md5, lnki_ext, width, lnki_thumbtime, lnki_page).Xto_bry();}
 	public Io_url		Trg_file(byte mode_id, int width)	{return url_bldr.Set_trg_file_(mode_id, trg_repo, lnki_ttl, lnki_md5, lnki_ext, width, lnki_thumbtime, lnki_page).Xto_url();}
 	public Xof_url_bldr Url_bldr(){ return url_bldr;}
@@ -65,7 +64,7 @@ public class Xof_xfer_itm implements Xof_file_itm {
 		img_is_thumbable = false;
 		orig_file_len = 0;	// NOTE: cannot be -1, or else will always download orig; see ext rule chk and (orig_file_len < 0)
 		lnki_redirect = null; lnki_ttl = null; lnki_md5 = null; lnki_ext = null;
-		html_orig_src = html_view_src = html_view_src_rel = Bry_.Empty;
+		html_orig_src = html_view_src = Bry_.Empty;
 		trg_repo_idx = Int_.Neg1; meta_itm = null;
 		html_uid = Int_.Neg1; html_elem_tid = Xof_html_elem.Tid_none;
 		return this;
@@ -76,7 +75,7 @@ public class Xof_xfer_itm implements Xof_file_itm {
 		rv.img_is_thumbable = img_is_thumbable;
 		rv.orig_w = orig_w; rv.orig_h = orig_h; rv.orig_file_len = orig_file_len;
 		rv.lnki_redirect = lnki_redirect; rv.lnki_ttl = lnki_ttl; rv.lnki_md5 = lnki_md5; rv.lnki_ext = lnki_ext;
-		rv.html_w = html_w; rv.html_h = html_h; rv.html_view_src = html_view_src; rv.html_orig_src = html_orig_src; rv.html_view_src_rel = html_view_src_rel;
+		rv.html_w = html_w; rv.html_h = html_h; rv.html_view_src = html_view_src; rv.html_orig_src = html_orig_src;
 		rv.file_w = file_w;
 		rv.trg_repo_idx = trg_repo_idx;
 		rv.trg_repo_root = trg_repo_root;
@@ -104,7 +103,6 @@ public class Xof_xfer_itm implements Xof_file_itm {
 		this.html_pass = true;
 		this.file_found = true;
 	}
-	public Xof_xfer_itm Init_for_test__hdump(int uid, int img_w, int img_h, byte[] lnki_ttl, byte[] html_view_src_rel) {this.html_uid = uid; this.html_w = img_w; this.html_h = img_h; this.lnki_ttl = lnki_ttl; this.html_view_src_rel = html_view_src_rel; return this;}
 	public void	Init_for_test__img(int html_w, int html_h, byte[] html_view_src, byte[] html_orig_src) {this.html_w = html_w; this.html_h = html_h; this.html_view_src = html_view_src; this.html_orig_src = html_orig_src;}
 	public Xof_xfer_itm Set__ttl(byte[] ttl, byte[] redirect) {
 		this.lnki_redirect = redirect;

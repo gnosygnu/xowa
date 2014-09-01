@@ -352,8 +352,7 @@ class Pxd_itm_iso8601_t extends Pxd_itm_base implements Pxd_itm_prototype {
 		if (hour != null && hour.Seg_idx() == DateAdp_.SegIdx_hour) return;	// next item is hour
 		state.Err_set(Pft_func_time_log.Invalid_hour, Bry_fmtr_arg_.bry_("T"));
 	}
-	@Override public void Time_ini(DateAdpBldr bldr) {
-	}
+	@Override public void Time_ini(DateAdpBldr bldr) {}
 	private static Pxd_itm Next_non_ws_tkn(Pxd_itm[] tkns, int bgn) {
 		int len = tkns.length;
 		for (int i = bgn; i < len; i++) {

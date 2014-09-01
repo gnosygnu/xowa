@@ -35,6 +35,8 @@ public class Wdata_prop_itm_core extends Wdata_prop_itm_base {
 	public static Wdata_prop_itm_core new_geodata_(int pid, String lat, String lon)	{return new_(Wdata_prop_itm_base_.Val_tid_globecoordinate, pid, Bry_.Add_w_dlm(Prop_dlm, Bry_.new_ascii_(lat), Bry_.new_ascii_(lon)));}
 	public static Wdata_prop_itm_core new_quantity_(int pid, String amount, String unit, String ubound, String lbound)	
 																					{return new_(Wdata_prop_itm_base_.Val_tid_quantity, pid, Bry_.Add_w_dlm(Prop_dlm, Bry_.new_ascii_(amount), Bry_.new_ascii_(unit), Bry_.new_ascii_(ubound), Bry_.new_ascii_(lbound)));}
+	public static Wdata_prop_itm_core new_monolingualtext_(int pid, String text, String lang)
+																					{return new_(Wdata_prop_itm_base_.Val_tid_monolingualtext, pid, Bry_.Add_w_dlm(Prop_dlm, Bry_.new_ascii_(text), Bry_.new_utf8_(lang)));}
 	public static Wdata_prop_itm_core new_entity_(int pid, int v)					{return new_(Wdata_prop_itm_base_.Val_tid_entity, pid, Bry_.XtoStrBytesByInt(v, 0));}
 	private static Wdata_prop_itm_core new_(byte tid, int pid, byte[] val)			{return new Wdata_prop_itm_core(Wdata_prop_itm_base_.Snak_tid_value, pid, tid, val);}
 }

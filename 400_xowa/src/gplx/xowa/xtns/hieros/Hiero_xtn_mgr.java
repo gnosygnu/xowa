@@ -22,14 +22,13 @@ public class Hiero_xtn_mgr extends Xox_mgr_base implements GfoInvkAble {
 	@Override public byte[] Xtn_key() {return Xtn_key_static;} public static final byte[] Xtn_key_static = Bry_.new_ascii_("hiero");
 	@Override public Xox_mgr Clone_new() {return new Hiero_xtn_mgr();}
 	public static byte[] Img_src_dir;
-	@Override public void Xtn_init_by_wiki(Xow_wiki wiki) {
-	}
+	@Override public void Xtn_init_by_wiki(Xow_wiki wiki) {}
 	private static boolean xtn_init_done = false;
 	public void Xtn_init_assert(Xow_wiki wiki) {
 		if (xtn_init_done) return;
 		if (!Enabled()) return;
 		Xoa_app app = wiki.App();
-		Io_url ext_root_dir = app.Fsys_mgr().Bin_extensions_dir().GenSubDir("Wikihiero");
+		Io_url ext_root_dir = Hiero_root_dir(app);
 		Img_src_dir = Bry_.new_utf8_(ext_root_dir.GenSubDir("img").To_http_file_str());
 		app.Gfs_mgr().Run_url_for(this, ext_root_dir.GenSubFil_nest("data", "tables.gfs"));
 		html_wtr = new Hiero_html_mgr(this);
@@ -53,4 +52,5 @@ public class Hiero_xtn_mgr extends Xox_mgr_base implements GfoInvkAble {
 		else	return super.Invk(ctx, ikey, k, m);
 	}
 	public static final String Invk_prefabs = "prefabs", Invk_files = "files", Invk_phonemes = "phonemes";
+	public static Io_url Hiero_root_dir(Xoa_app app) {return app.Fsys_mgr().Bin_extensions_dir().GenSubDir("Wikihiero");}
 }

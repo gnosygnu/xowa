@@ -48,6 +48,13 @@ class Pxd_itm_ {
 	, Tid_ws				= 98
 	, Tid_sym				= 99
 	;	
+	public static Pxd_itm Find_bwd__non_ws(Pxd_itm[] tkns, int bgn) {
+		for (int i = bgn - 1; i > -1; --i) {
+			Pxd_itm itm = tkns[i];
+			if (itm.Tkn_tid() != Tid_ws) return itm;
+		}
+		return null;
+	}
 	public static Pxd_itm Find_fwd_by_tid(Pxd_itm[] tkns, int bgn, int tid) {
 		int len = tkns.length;
 		for (int i = bgn; i < len; i++) {
@@ -109,5 +116,6 @@ class Pft_func_time_log {
 		, Invalid_minute				= Gfo_msg_itm_.new_warn_(owner, "Invalid minute: ~{0}")
 		, Invalid_second				= Gfo_msg_itm_.new_warn_(owner, "Invalid second: ~{0}")
 		, Invalid_date					= Gfo_msg_itm_.new_warn_(owner, "Invalid date: ~{0}")
+		, Invalid_timezone				= Gfo_msg_itm_.new_warn_(owner, "Invalid timezone: ~{0}")
 		;
 }

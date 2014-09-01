@@ -43,6 +43,7 @@ public class Wdata_wiki_mgr_fxt {
 	public Wdata_prop_itm_core prop_time_(int pid, String val) {return Wdata_prop_itm_core.new_time_(pid, val);}
 	public Wdata_prop_itm_core prop_geodata_(int pid, String lat, String lon) {return Wdata_prop_itm_core.new_geodata_(pid, lat, lon);}
 	public Wdata_prop_itm_core prop_quantity_(int pid, String amount, String unit, String ubound, String lbound) {return Wdata_prop_itm_core.new_quantity_(pid, amount, unit, ubound, lbound);}
+	public Wdata_prop_itm_core prop_monolingualtext_(int pid, String text, String lang) {return Wdata_prop_itm_core.new_monolingualtext_(pid, text, lang);}
 	public Wdata_prop_itm_core prop_entity_(int pid, int val) {return Wdata_prop_itm_core.new_entity_(pid, val);}
 	public Wdata_doc doc_(String qid, Wdata_prop_itm_core... props) {return page_bldr.Qid_(qid).Props_add(props).Xto_page_doc();}
 	public void Init_xwikis_add(String... prefixes) {

@@ -260,6 +260,8 @@ class Wdata_claim_tbl extends Wdata_tbl_base {
 				switch (val_tid) {
 					case Wdata_prop_itm_base_.Val_tid_string:
 					case Wdata_prop_itm_base_.Val_tid_time:
+					case Wdata_prop_itm_base_.Val_tid_quantity:
+					case Wdata_prop_itm_base_.Val_tid_monolingualtext:
 						claim_val = claim.Val();
 						break;
 					case Wdata_prop_itm_base_.Val_tid_entity:
@@ -272,10 +274,6 @@ class Wdata_claim_tbl extends Wdata_tbl_base {
 					case Wdata_prop_itm_base_.Val_tid_bad: {
 						byte[][] flds = Bry_.Split(claim.Val(),Wdata_prop_itm_core.Prop_dlm);
 						claim_val = Bry_.Add_w_dlm(Byte_ascii.Comma, flds[0], flds[1]);
-						break;
-					}
-					case Wdata_prop_itm_base_.Val_tid_quantity: {
-						claim_val = claim.Val();
 						break;
 					}
 					default: 

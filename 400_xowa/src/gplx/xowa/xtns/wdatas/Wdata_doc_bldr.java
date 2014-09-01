@@ -175,6 +175,16 @@ public class Wdata_doc_bldr {
 						wtr.Nde_end();
 						break;
 					}
+					case Wdata_prop_itm_base_.Val_tid_monolingualtext: {
+						wtr.Val(Bool_.Y, Wdata_prop_itm_base_.Val_bry_monolingualtext);
+						wtr.Comma();
+						wtr.Nde_bgn();
+						byte[][] flds = Bry_.Split(prop.Val(), Byte_ascii.Pipe);
+						wtr.Kv			(Bool_.N, Wdata_doc_consts.Key_monolingualtext_text_bry		, flds[0]);		// text
+						wtr.Kv			(Bool_.Y, Wdata_doc_consts.Key_monolingualtext_language_bry	, flds[1]);		// en
+						wtr.Nde_end();
+						break;
+					}
 					default: throw Err_.unhandled(prop.Val_tid_byte());
 				}
 			}

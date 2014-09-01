@@ -33,6 +33,10 @@ public class Scrib_lib_ustring__lib_tst {
 		Exec_find("abcd"	, ""				, 2, Bool_.N, "2;1");				// empty regx should return values; regx; EX:w:Fool's_mate; DATE:2014-03-04
 		Exec_find("abcd"	, "^(c)"			, 3, Bool_.N, "3;3;c");				// ^ should be converted to \G; regx; EX:cs.n:Category:1._září_2008; DATE:2014-05-07
 	}
+	@Test  public void Find_surrogate() {	// PURPOSE: handle surrogates in Find PAGE:zh.w:南北鐵路_(越南); DATE:2014-08-28
+		Exec_find("aé𡼾\nbî𡼾\n"	, "\n"		, 1, Bool_.N, "4;4");				// 4 b/c \n starts at pos 4 (super 1)
+		Exec_find("aé𡼾\nbî𡼾\n"	, "\n"		, 5, Bool_.N, "8;8");				// 8 b/c \n starts at pos 8 (super 1)
+	}
 	@Test  public void Match() {
 		Exec_match("abcd"	, "bc"				, 1, "bc");							// basic
 		Exec_match("abcd"	, "x"				, 1, String_.Null_mark);			// empty

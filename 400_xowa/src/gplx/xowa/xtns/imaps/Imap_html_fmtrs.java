@@ -34,22 +34,22 @@ class Imap_html_fmtrs {
 	), "href", "shape", "coords", "title")
 	, Img_anchor_none = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
-	, "      <img id=\"xowa_file_img_~{img_elem_id}\" alt=\"~{img_alt}\" src=\"~{img_src}\" width=\"~{img_w}\" height=\"~{img_h}\"~{img_cls} usemap=\"#imageMap_1_~{imap_id}\"/>"
-	), "imap_id", "img_elem_id", "img_alt", "img_src", "img_w", "img_h", "img_cls", "anchor_href", "anchor_title"
+	, "      <img id=\"xowa_file_img_~{img_elem_id}\" alt=\"~{img_alt}\"~{img_core}~{img_cls} usemap=\"#imageMap_1_~{imap_id}\"/>"
+	), "imap_id", "img_elem_id", "img_alt", "img_core", "img_cls", "anchor_href", "anchor_title"
 	)
 	, Img_anchor_lnki = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "      <a href=\"~{anchor_href}\" title=\"~{anchor_title}\">"
-	, "        <img id=\"xowa_file_img_~{img_elem_id}\" alt=\"~{img_alt}\" src=\"~{img_src}\" width=\"~{img_w}\" height=\"~{img_h}\"~{img_cls} usemap=\"#imageMap_1_~{imap_id}\"/>"
+	, "        <img id=\"xowa_file_img_~{img_elem_id}\" alt=\"~{img_alt}\"~{img_core}~{img_cls} usemap=\"#imageMap_1_~{imap_id}\"/>"
 	, "      </a>"
-	), "imap_id", "img_elem_id", "img_alt", "img_src", "img_w", "img_h", "img_cls", "anchor_href", "anchor_title"
+	), "imap_id", "img_elem_id", "img_alt", "img_core", "img_cls", "anchor_href", "anchor_title"
 	)
 	, Img_anchor_lnke = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "      <a href=\"~{anchor_href}\" title=~{anchor_title} class=\"plainlinks\" rel=\"nofollow\">"
-	, "        <img id=\"xowa_file_img_~{img_elem_id}\" alt=\"~{img_alt}\" src=\"~{img_src}\" width=\"~{img_w}\" height=\"~{img_h}\"~{img_cls} usemap=\"#imageMap_1_~{imap_id}\"/>"
+	, "        <img id=\"xowa_file_img_~{img_elem_id}\" alt=\"~{img_alt}\"~{img_core}~{img_cls} usemap=\"#imageMap_1_~{imap_id}\"/>"
 	, "      </a>"
-	), "imap_id", "img_elem_id", "img_alt", "img_src", "img_w", "img_h", "img_cls", "anchor_href", "anchor_title"
+	), "imap_id", "img_elem_id", "img_alt", "img_core", "img_cls", "anchor_href", "anchor_title"
 	)
 	, Desc_style = Bry_fmtr.new_(" style=\"height:~{div_h}px; width: ~{div_w}px;\"", "div_w", "div_h")
 	, Desc_main = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last

@@ -15,16 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.hdumps.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
-public class Xopg_hdump_img_itm {
-	public Xopg_hdump_img_itm(int uid, int img_w, int img_h, byte[] img_src) {
-		this.uid = uid; this.img_w = img_w; this.img_h = img_h; this.img_src = img_src;
-	}
-	public int Uid() {return uid;} private final int uid;
-	public int Img_w() {return img_w;} private final int img_w;
-	public int Img_h() {return img_h;} private final int img_h;
-	public byte[] Img_src() {return img_src;} private final byte[] img_src;
-	@Override public String toString() {
-		return String_.Concat_with_str("|", Int_.XtoStr(uid), Int_.XtoStr(img_w), Int_.XtoStr(img_h), String_.new_utf8_(img_src));
-	}
+package gplx.xowa.hdumps.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
+public class Hdump_data_img__basic extends Hdump_data_img__base {
+	@Override public int Tid() {return Hdump_data_img__base.Tid_basic;}
 }

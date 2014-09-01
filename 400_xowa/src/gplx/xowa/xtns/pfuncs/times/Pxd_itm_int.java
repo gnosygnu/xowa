@@ -39,11 +39,24 @@ class Pxd_itm_int extends Pxd_itm_base implements Pxd_itm_int_interface {
 	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_int;}
 	@Override public int Eval_idx() {return eval_idx;} private int eval_idx = 99;
 	public int Val() {return val;} public Pxd_itm_int Val_(int v) {val = v; return this;} private int val;
+	public boolean Val_is_adj() {return val_is_adj;} public void Val_is_adj_(boolean v) {val_is_adj = v;} private boolean val_is_adj;
 	public int Xto_int_or(int or) {return val;}
 	public int Digits() {return digits;} private int digits;
 	@Override public void Time_ini(DateAdpBldr bldr) {
-		if (this.Seg_idx() == Pxd_itm_base.Seg_idx_skip) return;
-		bldr.Seg_set(this.Seg_idx(), val);
+		int seg_idx = this.Seg_idx();
+		if (seg_idx == Pxd_itm_base.Seg_idx_skip) return;
+		if (val_is_adj) {
+			if (val == 0) return;	// no adjustment to make
+			DateAdp date = bldr.Date();
+			switch (seg_idx) {
+				case DateAdp_.SegIdx_hour:			date = date.Add_hour(val); break;
+				case DateAdp_.SegIdx_minute:		date = date.Add_minute(val); break;
+				default:							return;
+			}
+			bldr.Date_(date);
+		}
+		else
+			bldr.Seg_set(seg_idx, val);
 	}
 	private static final int Month_max = 12;
 	@Override public void Eval(Pxd_parser state) {
@@ -110,13 +123,13 @@ class Pxd_itm_int extends Pxd_itm_base implements Pxd_itm_int_interface {
 	}
 	private void Eval_unknown_at_pos_3(Pxd_parser state) {	// int at pos 4
 		if (	state.Seg_idxs_chk(DateAdp_.SegIdx_year, DateAdp_.SegIdx_month, DateAdp_.SegIdx_day)	// check that ymd is set
-			&&	Match_sym(state, false, Pxd_itm_.Tid_dash))											// check that preceding symbol is "-"
+			&&	Match_sym(state, false, Pxd_itm_.Tid_dash))												// check that preceding symbol is "-"
 			Pxd_itm_int_.Hour_err(state, this);															// mark as hour; handles strange fmts like November 2, 1991-06; DATE:2013-06-19
 	}
 	private void Eval_unknown_at_pos_4(Pxd_parser state) {
 		if (	state.Seg_idxs_chk(DateAdp_.SegIdx_year
 				, DateAdp_.SegIdx_month, DateAdp_.SegIdx_day, DateAdp_.SegIdx_hour)						// check that ymdh is set
-			&&	Match_sym(state, false, Pxd_itm_.Tid_dash))											// check that preceding symbol is "-"
+			&&	Match_sym(state, false, Pxd_itm_.Tid_dash))												// check that preceding symbol is "-"
 			state.Seg_idxs_(this, Pxd_itm_base.Seg_idx_skip);											// mark as ignore; handles strange fmts like November 2, 1991-06-19; DATE:2013-06-19
 	}
 	boolean Match_sym(Pxd_parser state, boolean fwd, int sym_tid) {
@@ -356,7 +369,7 @@ class Pxd_itm_int_ {
 			case 1:
 			case 2:
 				if (val > -1 && val < 25) { 
-					state.Seg_idxs_(itm, DateAdp_.SegIdx_hour);
+					state.Seg_idxs_(itm, DateAdp_.SegIdx_hour, val);
 					return false;
 				}
 				break;
@@ -370,7 +383,7 @@ class Pxd_itm_int_ {
 			case 1:
 			case 2:
 				if (val > -1 && val < 60) { 
-					state.Seg_idxs_(itm, DateAdp_.SegIdx_minute);
+					state.Seg_idxs_(itm, DateAdp_.SegIdx_minute, val);
 					return false;
 				}
 				break;
@@ -390,6 +403,51 @@ class Pxd_itm_int_ {
 				break;
 		}
 		state.Err_set(Pft_func_time_log.Invalid_second, Bry_fmtr_arg_.int_(val));
+		return true;
+	}
+	public static byte Tz_sym_err(Pxd_parser state, Pxd_itm[] tkns, Pxd_itm_int hour_itm) {
+		Pxd_itm sym = Pxd_itm_.Find_bwd__non_ws(tkns, hour_itm.Ary_idx());
+		switch (sym.Tkn_tid()) {
+			case Pxd_itm_.Tid_sym:
+				Pxd_itm_sym sym_itm = (Pxd_itm_sym)sym;
+				if (sym_itm.Sym_byte() == Byte_ascii.Plus)
+					return Bool_.Y_byte;
+				break;
+			case Pxd_itm_.Tid_dash: return Bool_.N_byte;
+		}
+		state.Err_set(Pft_func_time_log.Invalid_timezone, Bry_fmtr_arg_.bry_("null"));
+		return Bool_.__byte;
+	}
+	public static boolean Tz_hour_err(Pxd_parser state, Pxd_itm_int itm, boolean negative) {
+		if (negative) itm.Val_(itm.Val() * -1);
+		int val = itm.Val();
+		switch (itm.Digits()) {
+			case 1:
+			case 2:
+				if (val > -12 && val < 12) {
+					itm.Val_is_adj_(Bool_.Y);
+					itm.Seg_idx_(DateAdp_.SegIdx_hour);
+					return false;
+				}
+				break;
+		}
+		state.Err_set(Pft_func_time_log.Invalid_hour, Bry_fmtr_arg_.int_(val));
+		return true;
+	}
+	public static boolean Tz_min_err(Pxd_parser state, Pxd_itm_int itm, boolean negative) {
+		int val = itm.Val();
+		if (negative) val *= -1;
+		switch (itm.Digits()) {
+			case 1:
+			case 2:
+				if (val > -60 && val < 60) { 
+					itm.Val_is_adj_(Bool_.Y);
+					itm.Seg_idx_(DateAdp_.SegIdx_minute);
+					return false;
+				}
+				break;
+		}
+		state.Err_set(Pft_func_time_log.Invalid_minute, Bry_fmtr_arg_.int_(val));
 		return true;
 	}
 }

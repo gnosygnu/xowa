@@ -29,11 +29,11 @@ public class Gallery_mgr_base_basic_tst {
 		, "</gallery>"
 		), String_.Concat_lines_nl_skip_last
 		( "<ul id=\"xowa_gallery_ul_0\" class=\"gallery mw-gallery-traditional\">"
-		, "  <li id=\"xowa_gallery_li_1\" class=\"gallerybox\" style=\"width: 235px\">"
+		, "  <li id=\"xowa_gallery_li_0\" class=\"gallerybox\" style=\"width: 235px\">"
 		, "    <div style=\"width: 235px\">"
 		, "      <div class=\"thumb\" style=\"width: 230px;\">"
 		, "        <div style=\"margin:15px auto;\">"
-		, "          <a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_1\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/200px.png\" width=\"200\" height=\"300\" /></a>"
+		, "          <a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/200px.png\" width=\"200\" height=\"300\" /></a>"
 		, "        </div>"
 		, "      </div>"
 		, "      <div class=\"gallerytext\"><p><i>a1</i>"
@@ -42,11 +42,11 @@ public class Gallery_mgr_base_basic_tst {
 		, "      </div>"
 		, "    </div>"
 		, "  </li>"
-		, "  <li id=\"xowa_gallery_li_2\" class=\"gallerybox\" style=\"width: 235px\">"
+		, "  <li id=\"xowa_gallery_li_1\" class=\"gallerybox\" style=\"width: 235px\">"
 		, "    <div style=\"width: 235px\">"
 		, "      <div class=\"thumb\" style=\"width: 230px;\">"
 		, "        <div style=\"margin:15px auto;\">"
-		, "          <a href=\"/wiki/File:B.png\" class=\"image\" xowa_title=\"B.png\"><img id=\"xowa_file_img_2\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/5/7/B.png/200px.png\" width=\"200\" height=\"300\" /></a>"
+		, "          <a href=\"/wiki/File:B.png\" class=\"image\" xowa_title=\"B.png\"><img id=\"xowa_file_img_1\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/5/7/B.png/200px.png\" width=\"200\" height=\"300\" /></a>"
 		, "        </div>"
 		, "      </div>"
 		, "      <div class=\"gallerytext\"><p><i>b1</i>"
@@ -64,7 +64,7 @@ public class Gallery_mgr_base_basic_tst {
 		fxt.Test_html_frag("<gallery>File:A.png|a{{test_tmpl}}c</gallery>", "<div class=\"gallerytext\"><p>abc\n</p>");
 	}
 	@Test  public void Itm_defaults_to_120() {
-		fxt.Test_html_frag("<gallery>File:A.png|a</gallery>", "<img id=\"xowa_file_img_1\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/120px.png\" width=\"120\" height=\"120\" />");
+		fxt.Test_html_frag("<gallery>File:A.png|a</gallery>", "<img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/120px.png\" width=\"120\" height=\"120\" />");
 	}
 	@Test   public void Height_fix() {
 		fxt.Fxt().Wiki().File_mgr().Cfg_set(Xof_fsdb_mgr_cfg.Grp_xowa, Xof_fsdb_mgr_cfg.Key_gallery_fix_defaults, "y");
@@ -73,7 +73,7 @@ public class Gallery_mgr_base_basic_tst {
 	}
 	@Test   public void Alt() {
 		fxt.Test_html_frag("<gallery>File:A.png|b|alt=c</gallery>"
-		, "<img id=\"xowa_file_img_1\" alt=\"c\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/120px.png\" width=\"120\" height=\"120\" />"
+		, "<img id=\"xowa_file_img_0\" alt=\"c\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/120px.png\" width=\"120\" height=\"120\" />"
 		, "<div class=\"gallerytext\"><p>b\n</p>"
 		);
 	}
@@ -90,7 +90,7 @@ public class Gallery_mgr_base_basic_tst {
 		fxt.Test_html_frag("<gallery>File:A.png</gallery>", "<div class=\"gallerytext\">\n");
 	}
 	@Test   public void Ttl_has_no_ns() {	// PURPOSE: MW allows ttl to not have ns; DATE: 2013-11-18
-		fxt.Test_html_frag("<gallery>A.png|b</gallery>", "<img id=\"xowa_file_img_1\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/120px.png\" width=\"120\" height=\"120\" />");	// make sure image is generated
+		fxt.Test_html_frag("<gallery>A.png|b</gallery>", "<img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/120px.png\" width=\"120\" height=\"120\" />");	// make sure image is generated
 	}
 	@Test   public void Ref() {	// PURPOSE: <ref> inside <gallery> was not showing up in <references>; DATE:2013-10-09
 		fxt.Test_html_frag("<gallery>File:A.png|<ref name='a'>b</ref></gallery><references/>"

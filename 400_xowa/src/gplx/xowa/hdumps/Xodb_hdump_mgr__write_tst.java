@@ -16,18 +16,19 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps; import gplx.*; import gplx.xowa.*;
-import org.junit.*; import gplx.xowa.files.*; import gplx.xowa.hdumps.dbs.*;
+import org.junit.*; import gplx.xowa.files.*;
+import gplx.xowa.hdumps.core.*; import gplx.xowa.hdumps.dbs.*; import gplx.xowa.hdumps.pages.*; import gplx.xowa.xtns.hieros.*;
 public class Xodb_hdump_mgr__write_tst {
 	@Before public void init() {fxt.Clear();} private Xodb_hdump_mgr__write_fxt fxt = new Xodb_hdump_mgr__write_fxt();
 	@Test   public void Image_full() {
 		fxt.Expd_itms_xfers(fxt.Make_xfer(0, 0, 0, "A.png", "trg/orig/7/0/A.png"));
-		fxt.Test_write
+		fxt.Test_write_all
 		( "[[File:A.png|test_caption]]"
 		, "<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"test_caption\" xowa_img='0' /></a>");
 	}
 	@Test   public void Image_thumb() {
 		fxt.Expd_itms_xfers(fxt.Make_xfer(0, 0, 0, "A.png", "trg/thumb/7/0/A.png/220px.png"));
-		fxt.Test_write
+		fxt.Test_write_all
 		( "[[File:A.png|thumb|test_caption]]", String_.Concat_lines_nl_skip_last
 		( "<div class=\"thumb tright\">"
 		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" xowa_img_style='0'>"
@@ -41,7 +42,7 @@ public class Xodb_hdump_mgr__write_tst {
 	}
 	@Test   public void Audio_thumb() {
 		fxt.Expd_itms_xfers(fxt.Make_xfer(0, 220, -1, "A.oga", ""));
-		fxt.Test_write
+		fxt.Test_write_all
 		( "[[File:A.oga|thumb|test_caption]]", String_.Concat_lines_nl_skip_last
 		( "<div class=\"thumb tright\">"
 		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" xowa_img_style='0'>"
@@ -56,7 +57,7 @@ public class Xodb_hdump_mgr__write_tst {
 	}
 	@Test   public void Video_thumb() {
 		fxt.Expd_itms_xfers(fxt.Make_xfer(0, 0, 0, "A.ogv", ""));
-		fxt.Test_write
+		fxt.Test_write_all
 		( "[[File:A.ogv|thumb|test_caption]]", String_.Concat_lines_nl_skip_last
 		( "<div class=\"thumb tright\">"
 		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" xowa_img_style='0'>"
@@ -74,12 +75,34 @@ public class Xodb_hdump_mgr__write_tst {
 		, "</div>"
 		));
 	}
+	@Test   public void Hiero() {
+		Hiero_html_mgr_fxt hiero_fxt = new Hiero_html_mgr_fxt(fxt.Fxt());
+		hiero_fxt.Reset();
+		hiero_fxt.Init_hiero_A1_B1();
+		fxt.Test_write_frag("<hiero>A1</hiero>", "src='~{xowa_hiero_dir}hiero_A1.png'");
+	}
+	@Test   public void Gallery() {
+		fxt.Test_write_all
+		( "<gallery>File:A.png|A1</gallery>", String_.Concat_lines_nl_skip_last
+		( "<ul id=\"xowa_gallery_ul_0\" class=\"gallery mw-gallery-traditional\" xowa_gly_box_max='0'>"
+		, "  <li id=\"xowa_gallery_li_0\" class=\"gallerybox\" xowa_gly_box_w='0'>"
+		, "    <div xowa_gly_box_w='0'>"
+		, "      <div class=\"thumb\" style=\"height: 150px;\">A.png</div>"
+		, "      <div class=\"gallerytext\"><p>A1"
+		, "</p>"
+		, ""
+		, "      </div>"
+		, "    </div>"
+		, "  </li>"
+		, "</ul>"
+		));
+	}
 }
 class Xodb_hdump_mgr__base_fxt {
 	protected Xodb_hdump_mgr hdump_mgr;
 	protected Bry_bfr bfr = Bry_bfr.reset_(255);
 	protected Xow_wiki wiki; protected Xoa_page page;
-	public Xop_fxt Fxt() {return fxt;} protected Xop_fxt fxt; 
+	public Xop_fxt Fxt() {return fxt;} protected Xop_fxt fxt;
 	public void Clear() {
 		if (fxt == null) {
 			fxt = new Xop_fxt();
@@ -101,23 +124,25 @@ class Xodb_hdump_mgr__base_fxt {
 class Xodb_hdump_mgr__write_fxt extends Xodb_hdump_mgr__base_fxt {
 	private ListAdp expd_itms_xfers = ListAdp_.new_();
 	@Override public void Clear_end() {expd_itms_xfers.Clear();}
-	public Xof_xfer_itm Make_xfer(int uid, int img_w, int img_h, String lnki_ttl, String img_src) {
-		Xof_xfer_itm rv = new Xof_xfer_itm();
-		rv.Init_for_test__hdump(uid, img_w, img_h, Bry_.new_utf8_(lnki_ttl), Bry_.new_utf8_(img_src));
-		return rv;
-	}
-	public void Expd_itms_xfers(Xof_xfer_itm... itms) {expd_itms_xfers.AddMany((Object[])itms);}
-	public void Test_write(String raw, String expd_html) {
+	public Hdump_data_img__base Make_xfer(int uid, int img_w, int img_h, String lnki_ttl, String img_src) {return new Hdump_data_img__basic().Init_by_base(uid, img_w, img_h, Bry_.new_utf8_(lnki_ttl), Bry_.new_utf8_(img_src));}
+	public void Expd_itms_xfers(Hdump_data_img__base... itms) {expd_itms_xfers.AddMany((Object[])itms);}
+	public void Test_write_all (String raw, String expd_html) {Test_write(Bool_.N, raw, expd_html);}
+	public void Test_write_frag(String raw, String expd_frag) {Test_write(Bool_.Y, raw, expd_frag);}
+	public void Test_write(boolean frag, String raw, String expd_html) {
 		this.Exec_write(raw);
-            Tfds.Eq_str_lines(expd_html, String_.new_utf8_(page.Hdump_data().Body()));
+		String actl_html = String_.new_utf8_(page.Hdump_data().Body());
+		if (frag)
+			Tfds.Eq_true(String_.Has(actl_html, expd_html), actl_html);
+		else
+			Tfds.Eq_str_lines(expd_html, actl_html);
 		if (expd_itms_xfers.Count() > 0) Tfds.Eq_ary_str(Xfer_to_str_ary(expd_itms_xfers), Xfer_to_str_ary(page.Hdump_data().Imgs()));
 	}
 	private static String[] Xfer_to_str_ary(ListAdp list) {
 		int len = list.Count();
 		String[] rv = new String[len];
 		for (int i = 0; i < len; ++i) {
-			Xof_xfer_itm itm = (Xof_xfer_itm)list.FetchAt(i);
-			rv[i] = String_.Concat_with_str("|", Int_.XtoStr(itm.Html_uid()), Int_.XtoStr(itm.Html_w()), Int_.XtoStr(itm.Html_h()), String_.new_utf8_(itm.Html_view_src_rel()));
+			Hdump_data_img__base itm = (Hdump_data_img__base)list.FetchAt(i);
+			rv[i] = itm.XtoStr();
 		}
 		return rv;
 	}

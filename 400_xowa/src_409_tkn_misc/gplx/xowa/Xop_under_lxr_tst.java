@@ -98,11 +98,12 @@ public class Xop_under_lxr_tst {
 		fxt.Test_parse_page_all_str("__DISAMBIG__", "");
 	}
 	@Test  public void Nocontentconvert() {	 // simple test; test for flag only; DATE:2014-02-06
-		Tfds.Eq(fxt.Page().Lang_convert_content(), true);
-		Tfds.Eq(fxt.Page().Lang_convert_title(), true);
+		gplx.xowa.pages.Xopg_html_data html_data = fxt.Page().Html_data();
+		Tfds.Eq(html_data.Lang_convert_content(), true);
+		Tfds.Eq(html_data.Lang_convert_title(), true);
 		fxt.Test_parse_page_all_str("__NOCONTENTCONVERT__ __NOTITLECONVERT__", " ");
-		Tfds.Eq(fxt.Page().Lang_convert_content(), false);
-		Tfds.Eq(fxt.Page().Lang_convert_title(), false);
+		Tfds.Eq(html_data.Lang_convert_content(), false);
+		Tfds.Eq(html_data.Lang_convert_title(), false);
 	}
 	@Test  public void Eos() {	// PURPOSE: check that __ at eos doesn't fail; es.s:Luisa de Bustamante: 3; DATE:2014-02-15
 		fxt.Test_parse_page_all_str("__", "__");

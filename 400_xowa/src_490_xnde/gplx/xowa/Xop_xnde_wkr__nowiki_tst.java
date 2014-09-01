@@ -101,6 +101,19 @@ public class Xop_xnde_wkr__nowiki_tst {
 		);
 		fxt.Init_para_n_();
 	}
+	@Test  public void Prew_2() {	// PURPOSE: prew should continue over nowiki, even if no space DATE:2014-07-03
+		fxt.Init_para_y_();
+		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
+		( " <nowiki>a"
+		, "b</nowiki>"	// note that "b" should be in pre b/c it is part of <nowiki> which is pre'd (even though there is no \n\s)
+		), String_.Concat_lines_nl
+		( "<pre>a"
+		, "b"
+		, "</pre>"
+		)
+		);
+		fxt.Init_para_n_();
+	}
 	@Test  public void Code() {	// PURPOSE.fix:HtmlNcr-escaped refs were being ignored; caused by HtmlTidy fix for frwiki templates;DATE:2013-06-27
 		fxt.Test_parse_page_all_str("<code><nowiki>|:</nowiki></code>", "<code>|:</code>");
 	}

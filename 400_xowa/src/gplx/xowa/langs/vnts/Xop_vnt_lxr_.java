@@ -67,6 +67,7 @@ class Xop_vnt_lxr_end implements Xop_lxr {
 		int stack_pos = ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_vnt);
 		if (stack_pos == Xop_ctx.Stack_not_found) return ctx.Lxr_make_txt_(cur_pos);	// "}-" found but no "-{" in stack;
 		Xop_vnt_tkn vnt_tkn = (Xop_vnt_tkn)ctx.Stack_pop_til(root, src, stack_pos, false, bgn_pos, cur_pos, Xop_tkn_itm_.Tid_vnt);
+		Xow_wiki wiki = ctx.Wiki();
 		try {
 			vnt_tkn.Src_end_(cur_pos);
 			vnt_tkn.Subs_move(root);
@@ -74,7 +75,7 @@ class Xop_vnt_lxr_end implements Xop_lxr {
 			int rule_subs_bgn = 0;
 			int pipe_tkn_count = vnt_tkn.Vnt_pipe_tkn_count();
 			if (pipe_tkn_count > 0) {
-				flag_parser.Parse(ctx.Wiki(), vnt_tkn, pipe_tkn_count, src);
+				flag_parser.Parse(wiki, vnt_tkn, pipe_tkn_count, src);
 				vnt_flag_ary = flag_parser.Rslt_flags();
 				rule_subs_bgn = flag_parser.Rslt_tkn_pos();
 				vnt_tkn.Vnt_pipe_idx_last_(flag_parser.Rslt_pipe_last());
@@ -82,7 +83,7 @@ class Xop_vnt_lxr_end implements Xop_lxr {
 			vnt_tkn.Vnt_flags_(vnt_flag_ary);
 			Xop_vnt_rule[] rules = rule_parser.Parse(ctx, vnt_tkn, src, rule_subs_bgn);
 			vnt_tkn.Vnt_rules_(rules);
-			vnt_tkn.Vnt_cmd_calc();
+			vnt_tkn.Vnt_cmd_calc(wiki, ctx.Cur_page(), ctx, src);
 		}
 		catch (Exception e) {
 			ctx.App().Usr_dlg().Warn_many("", "", "vnt.parse failed: page=~{0} src=~{1} err=~{2}", String_.new_utf8_(ctx.Cur_page().Ttl().Raw()), String_.new_utf8_(src, bgn_pos, cur_pos), Err_.Message_gplx_brief(e));

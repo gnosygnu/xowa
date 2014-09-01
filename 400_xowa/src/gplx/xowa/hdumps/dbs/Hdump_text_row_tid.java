@@ -17,5 +17,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
 public class Hdump_text_row_tid {	// NOTE: SERIALIZED
-	public static final int Tid_body = 0, Tid_img = 1, Tid_gallery = 2, Tid_imap = 3, Tid_display_ttl = 4, Tid_content_sub = 5, Tid_sidebar_div = 6;
+	public static final int Tid_body = 0, Tid_data = 1;
 }

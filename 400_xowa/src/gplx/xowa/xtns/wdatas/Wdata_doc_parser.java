@@ -119,6 +119,10 @@ public class Wdata_doc_parser {
 				Json_itm_nde sub_nde = Json_itm_nde.cast_(ary.Subs_get_at(3));
 				return Add_kvs(tmp_parse_bfr, sub_nde, 0, 4);
 			}
+			case Wdata_prop_itm_base_.Val_tid_monolingualtext: {
+				Json_itm_nde sub_nde = Json_itm_nde.cast_(ary.Subs_get_at(3));
+				return Add_kvs(tmp_parse_bfr, sub_nde, 0, 2);
+			}
 			default: {throw Err_.unhandled(val_tid);}
 		}		
 	}

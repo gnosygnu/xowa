@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.lnkis.redlinks; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*;
 import gplx.xowa.dbs.tbls.*;
-import gplx.xowa.langs.vnts.*; import gplx.xowa.gui.views.*;
+import gplx.xowa.langs.vnts.*; import gplx.xowa.gui.views.*; import gplx.xowa.pages.*;
 public class Xop_lnki_logger_redlinks_wkr implements GfoInvkAble {
 	private Xow_wiki wiki; private Xog_win_itm win; private Xoa_page page;
 	private ListAdp lnki_list; private boolean log_enabled; private Gfo_usr_dlg usr_dlg;
@@ -71,6 +71,7 @@ public class Xop_lnki_logger_redlinks_wkr implements GfoInvkAble {
 		Bry_bfr bfr = null;
 		boolean variants_enabled = wiki.Lang().Vnt_mgr().Enabled();
 		Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();
+		Int_list redlink_mgr = page.Html_data().Redlink_mgr();
 		for (int j = 0; j < len; j++) {
 			Xop_lnki_tkn lnki = (Xop_lnki_tkn)work_list.FetchAt(j);
 			byte[] full_db = lnki.Ttl().Full_db();
@@ -94,7 +95,9 @@ public class Xop_lnki_logger_redlinks_wkr implements GfoInvkAble {
 				}
 				if (win.Usr_dlg().Canceled()) return;
 				if (redlinks_mgr.Request_idx() != request_idx) return;
-				gplx.xowa.files.gui.Js_img_mgr.Update_link_missing(html_itm, Xop_lnki_logger_redlinks_mgr.Lnki_id_prefix + Int_.XtoStr(lnki.Html_id()));
+				int uid = lnki.Html_id();
+				gplx.xowa.files.gui.Js_img_mgr.Update_link_missing(html_itm, Xop_lnki_logger_redlinks_mgr.Lnki_id_prefix + Int_.XtoStr(uid));
+				redlink_mgr.Add(uid);
 				++redlink_count;
 			}
 		}

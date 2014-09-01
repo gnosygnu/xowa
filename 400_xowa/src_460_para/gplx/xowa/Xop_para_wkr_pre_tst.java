@@ -68,11 +68,11 @@ public class Xop_para_wkr_pre_tst {
 		( "<p>a"
 		, "</p>"
 		, " <ul id=\"xowa_gallery_ul_0\" class=\"gallery mw-gallery-traditional\">"
-		, "  <li id=\"xowa_gallery_li_1\" class=\"gallerybox\" style=\"width: 155px\">"
+		, "  <li id=\"xowa_gallery_li_0\" class=\"gallerybox\" style=\"width: 155px\">"
 		, "    <div style=\"width: 155px\">"
 		, "      <div class=\"thumb\" style=\"width: 150px;\">"
 		, "        <div style=\"margin:15px auto;\">"
-		, "          <a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_1\" alt=\"A.png\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/120px.png\" width=\"120\" height=\"120\" /></a>"
+		, "          <a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"A.png\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/120px.png\" width=\"120\" height=\"120\" /></a>"
 		, "        </div>"
 		, "      </div>"
 		, "      <div class=\"gallerytext\">"
@@ -94,11 +94,11 @@ public class Xop_para_wkr_pre_tst {
 			);
 		fxt.Test_parse_page_wiki_str(raw, String_.Concat_lines_nl_skip_last
 			( " <ul id=\"xowa_gallery_ul_0\" class=\"gallery mw-gallery-traditional\">"	// NOTE: leading " " matches MW; DATE:2014-06-23
-			, "  <li id=\"xowa_gallery_li_1\" class=\"gallerybox\" style=\"width: 155px\">"
+			, "  <li id=\"xowa_gallery_li_0\" class=\"gallerybox\" style=\"width: 155px\">"
 			, "    <div style=\"width: 155px\">"
 			, "      <div class=\"thumb\" style=\"width: 150px;\">"
 			, "        <div style=\"margin:15px auto;\">"
-			, "          <a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_1\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/120px.png\" width=\"120\" height=\"120\" /></a>"
+			, "          <a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/120px.png\" width=\"120\" height=\"120\" /></a>"
 			, "        </div>"
 			, "      </div>"
 			, "      <div class=\"gallerytext\"><p>b"

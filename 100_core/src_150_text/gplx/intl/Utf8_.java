@@ -17,6 +17,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.intl; import gplx.*;
 public class Utf8_ {
+	public static int Len_of_bry(byte[] ary) {
+		if (ary == null) return 0;
+		int rv = 0;
+		int pos = 0, len = ary.length;
+		while (pos < len) {
+			int char_len = Len_of_char_by_1st_byte(ary[pos]);
+			++rv;
+			pos += char_len;
+		}
+		return rv;
+	}
 	public static int Len_of_char_by_1st_byte(byte b) {// SEE:w:UTF-8
 		int i = b & 0xff;	// PATCH.JAVA:need to convert to unsigned byte
 		switch (i) {

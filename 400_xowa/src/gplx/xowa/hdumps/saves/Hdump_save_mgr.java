@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps.saves; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
 import gplx.dbs.*; import gplx.xowa.files.*; import gplx.xowa.hdumps.dbs.*;
-import gplx.xowa.hdumps.pages.*; import gplx.xowa.pages.*; import gplx.xowa.pages.skins.*;
+import gplx.xowa.hdumps.core.*; import gplx.xowa.hdumps.pages.*; import gplx.xowa.pages.*; import gplx.xowa.pages.skins.*; import gplx.xowa.hdumps.loads.*;
 public class Hdump_save_mgr {
 	private Bry_bfr tmp_bfr = Bry_bfr.reset_(10 * Io_mgr.Len_mb);
 	private Hdump_text_tbl text_tbl;
@@ -28,57 +28,28 @@ public class Hdump_save_mgr {
 		this.Insert(page);
 	}
 	public void Insert(Xoa_page page) {
-		tmp_bfr.Clear();
+		Hdump_page_body_srl.Save(tmp_bfr, page);
 		int page_id = page.Revision_data().Id();
-		Xopg_html_data html_data = page.Html_data();
-		Xopg_hdump_data hdump_data = page.Hdump_data();
-		text_tbl.Insert(page_id, Hdump_text_row_tid.Tid_body, hdump_data.Body());
-		Insert_files(page_id, hdump_data.Imgs());
-		Insert_if_exists(page_id, Hdump_text_row_tid.Tid_display_ttl, html_data.Display_ttl());
-		Insert_if_exists(page_id, Hdump_text_row_tid.Tid_content_sub, html_data.Content_sub());
-		Insert_sidebars(page_id, page, html_data.Xtn_skin_mgr());
-	}
-	private void Insert_files(int page_id, ListAdp imgs) {
-		byte[] imgs_bry = Write_imgs(tmp_bfr, imgs);
-		if (imgs_bry != null)
-			text_tbl.Insert(page_id, Hdump_text_row_tid.Tid_img, imgs_bry);
-	}
-	private void Insert_if_exists(int page_id, int tid, byte[] val) {
-		if (Bry_.Len_gt_0(val))
-			text_tbl.Insert(page_id, tid, val);
-	}
-	private void Insert_sidebars(int page_id, Xoa_page page, Xopg_xtn_skin_mgr xtn_skin_mgr) {
-		int len = xtn_skin_mgr.Count();
-		for (int i = 0; i < len; ++i) {
-			Xopg_xtn_skin_itm itm = xtn_skin_mgr.Get_at(i);
-			if (itm.Tid() == Xopg_xtn_skin_itm_tid.Tid_sidebar) {
-				itm.Write(tmp_bfr, page);
-				text_tbl.Insert(page_id, Hdump_text_row_tid.Tid_sidebar_div, tmp_bfr.XtoAryAndClear());
-			}
-		}
+		text_tbl.Insert(page_id, Hdump_text_row_tid.Tid_body, tmp_bfr.XtoAryAndClear());
+		byte[] redlinks_bry = Write_redlinks(tmp_bfr, page.Html_data().Redlink_mgr());
+		if (redlinks_bry != null)	text_tbl.Insert(page_id, Hdump_data_tid.Tid_redlink, redlinks_bry);
+		byte[] imgs_bry = Write_imgs(tmp_bfr, page.Hdump_data().Imgs());
+		if (imgs_bry != null)		text_tbl.Insert(page_id, Hdump_data_tid.Tid_img, imgs_bry);
 	}
 	public static byte[] Write_imgs(Bry_bfr bfr, ListAdp imgs) {
 		int len = imgs.Count(); if (len == 0) return null; // no images; exit early, else will write blank String
 		for (int i = 0; i < len; ++i) {
-			Xof_xfer_itm img = (Xof_xfer_itm)imgs.FetchAt(i);
-			Write_img(bfr, img.Html_uid(), img.Html_w(), img.Html_h(), img.Lnki_ttl(), img.Html_view_src_rel());
+			Hdump_data_img__base img = (Hdump_data_img__base)imgs.FetchAt(i);
+			img.Write(bfr);
 		}
 		return bfr.XtoAryAndClear();
 	}
-	private static void Write_img(Bry_bfr bfr, int uid, int img_w, int img_h, byte[] lnki_ttl, byte[] img_src_rel) {
-		bfr					.Add_int_variable(uid)
-			.Add_byte_pipe().Add_int_variable(img_w)
-			.Add_byte_pipe().Add_int_variable(img_h)
-			.Add_byte_pipe().Add(lnki_ttl)
-			.Add_byte_pipe().Add(img_src_rel)
-			.Add_byte_nl()
-			;
+	private static byte[] Write_redlinks(Bry_bfr bfr, Int_list redlink_mgr) {
+		int len = redlink_mgr.Len(); if (len == 0) return null;
+		bfr.Add_int_variable(len);
+		for (int i = 0; i < len; ++i) {
+			bfr.Add_byte_pipe().Add_int_variable(redlink_mgr.Get_at(i));
+		}
+		return bfr.XtoAryAndClear();
 	}
 }
-/*
-<0/>|0|metadata
-<1/>|title
-<2/>|content_sub
-<3/>|sidebar
-<4/>|body
-*/

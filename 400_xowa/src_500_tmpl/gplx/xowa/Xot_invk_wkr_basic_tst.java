@@ -411,6 +411,28 @@ public class Xot_invk_wkr_basic_tst {
 		);
 		fxt.Init_defn_clear();
 	}
+	@Test  public void Ignore_hdr_3() {	// PURPOSE: tkn with multiple eq should have be treated as value, not header; PAGE:zh.w:Wikipedia:条目评选; DATE:2014-08-27
+		fxt.Init_defn_clear();
+		fxt.Init_defn_add("test_1", "{{{key_1|null_key_1}}}");
+		fxt.Test_parse_page_tmpl_str(String_.Concat_lines_nl_skip_last
+		( "{{test_1"
+		, "|key_1===A=="	// note that this is not "===A==", but "=","===A=="
+		, "}}"
+		), "==A=="
+		);
+		fxt.Init_defn_clear();
+	}
+	@Test  public void Ignore_hdr_4() {	// PURPOSE: variation of above; make sure 2nd "==" doesn't trigger another key; DATE:2014-08-27
+		fxt.Init_defn_clear();
+		fxt.Init_defn_add("test_1", "{{{key_1|null_key_1}}}");
+		fxt.Test_parse_page_tmpl_str(String_.Concat_lines_nl_skip_last
+		( "{{test_1"
+		, "|key_1===A===B"	// = should be at "==A", not "==B"
+		, "}}"
+		), "==A===B"
+		);
+		fxt.Init_defn_clear();
+	}
 	@Test  public void Tmpl_case_match() {	// PURPOSE: template name should match by case; EX:es.d:eclipse; DATE:2014-02-12
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("CASE_MATCH", "found", Xow_ns_case_.Id_all);

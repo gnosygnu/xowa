@@ -139,6 +139,7 @@ class Scrib_lib_wikibase_srl {
 					case Wdata_prop_itm_base_.Val_tid_time				: return Srl_claims_prop_itm_core_time(itm);
 					case Wdata_prop_itm_base_.Val_tid_globecoordinate	: return Srl_claims_prop_itm_core_globecoordinate(itm);
 					case Wdata_prop_itm_base_.Val_tid_quantity			: return Srl_claims_prop_itm_core_quantity(itm);
+					case Wdata_prop_itm_base_.Val_tid_monolingualtext	: return Srl_claims_prop_itm_core_monolingualtext(itm);
 					default: return KeyVal_.Ary_empty;
 				}
 			}
@@ -206,6 +207,19 @@ class Scrib_lib_wikibase_srl {
 		rv[1] = KeyVal_.new_(Wdata_doc_consts.Key_quantity_unit_str			, String_.new_utf8_(flds[1]));
 		rv[2] = KeyVal_.new_(Wdata_doc_consts.Key_quantity_ubound_str		, String_.new_utf8_(flds[2]));
 		rv[3] = KeyVal_.new_(Wdata_doc_consts.Key_quantity_lbound_str		, String_.new_utf8_(flds[3]));
+		return rv;
+	}
+	private static KeyVal[] Srl_claims_prop_itm_core_monolingualtext(Wdata_prop_itm_core itm) {
+		KeyVal[] rv = new KeyVal[2];
+		rv[0] = KeyVal_.new_(Key_type, Wdata_doc_consts.Key_quantity_type_str);
+		rv[1] = KeyVal_.new_(Key_value, Srl_claims_prop_itm_core_monolingualtext_value(itm));
+		return rv;
+	}
+	private static KeyVal[] Srl_claims_prop_itm_core_monolingualtext_value(Wdata_prop_itm_core itm) {
+		byte[][] flds = Bry_.Split(itm.Val(), Byte_ascii.Pipe);
+		KeyVal[] rv = new KeyVal[2];
+		rv[0] = KeyVal_.new_(Wdata_doc_consts.Key_monolingualtext_text_str			, String_.new_utf8_(flds[0]));
+		rv[1] = KeyVal_.new_(Wdata_doc_consts.Key_monolingualtext_language_str		, String_.new_utf8_(flds[1]));
 		return rv;
 	}
 	private static final String Key_type = "type", Key_value = "value";

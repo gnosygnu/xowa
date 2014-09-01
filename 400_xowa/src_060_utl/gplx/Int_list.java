@@ -15,6 +15,24 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.wikis.modules; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-public class Xow_module__top_icon extends Xow_module_base {
+package gplx;
+public class Int_list {
+	private int[] ary = Int_.Ary_empty; private int ary_len, ary_max;
+	public void Add(int uid) {
+		int new_len = ary_len + 1;
+		if (new_len > ary_max) {
+			ary_max += 16;
+			int[] new_ary = new int[ary_max];
+			Int_.Ary_copy_to(ary, ary_len, new_ary);
+			ary = new_ary;
+		}
+		ary[ary_len] = uid;
+		ary_len = new_len;
+	}
+	public int Len() {return ary_len;}
+	public int Get_at(int i) {return ary[i];}
+	public void Clear() {
+		ary = Int_.Ary_empty;
+		ary_len = ary_max = 0;
+	}
 }

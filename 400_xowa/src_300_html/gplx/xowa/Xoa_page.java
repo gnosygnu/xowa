@@ -20,9 +20,11 @@ import gplx.xowa.gui.*; import gplx.xowa.gui.views.*; import gplx.xowa.html.*; i
 import gplx.xowa.files.*; import gplx.xowa.xtns.cite.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.html.tocs.*;
 import gplx.xowa.html.modules.popups.*; import gplx.xowa.hdumps.pages.*;
 public class Xoa_page {
+	private Xopg_hdump_data hdump_data;
 	Xoa_page(Xow_wiki wiki, Xoa_ttl ttl) {
 		this.wiki = wiki; this.ttl = ttl;
 		this.app = wiki.App(); this.lang = wiki.Lang();	// default to wiki.lang; can be override later by wikitext
+		hdump_data = new Xopg_hdump_data(app);
 		hdr_mgr = new Xow_hdr_mgr(wiki, this);
 		lnki_redlinks_mgr = new Xop_lnki_logger_redlinks_mgr(this);
 		Ttl_(ttl);
@@ -35,7 +37,7 @@ public class Xoa_page {
 	public Xoa_ttl				Ttl() {return ttl;} public Xoa_page Ttl_(Xoa_ttl v) {ttl = v; url.Wiki_bry_(wiki.Domain_bry()).Page_bry_(v.Full_url()); return this;} private Xoa_ttl ttl;
 	public Xoa_url				Url() {return url;} public Xoa_page Url_(Xoa_url v) {url = v; return this;} private Xoa_url url = Xoa_url.blank_();
 	public Xog_tab_itm			Tab() {return tab;} public void Tab_(Xog_tab_itm v) {tab = v;} private Xog_tab_itm tab;
-	public Xopg_hdump_data		Hdump_data() {return hdump_data;} private Xopg_hdump_data hdump_data = new Xopg_hdump_data();
+	public Xopg_hdump_data		Hdump_data() {return hdump_data;}
 	public boolean					Missing() {return missing;} public Xoa_page Missing_() {return Missing_(true);} public Xoa_page Missing_(boolean v) {missing = v; return this;}  private boolean missing;
 	public boolean					Redirected() {return redirected;} public Xoa_page Redirected_(boolean v) {redirected = v; return this;} private boolean redirected;
 	public ListAdp				Redirected_ttls() {return redirected_ttls;} private ListAdp redirected_ttls = ListAdp_.new_();
@@ -54,8 +56,6 @@ public class Xoa_page {
 	public Ref_itm_mgr			Ref_mgr() {return ref_mgr;} private Ref_itm_mgr ref_mgr = new Ref_itm_mgr();
 	public Xopg_popup_mgr		Popup_mgr() {return popup_mgr;} private Xopg_popup_mgr popup_mgr = new Xopg_popup_mgr();
 	public ListAdp				Xwiki_langs() {return xwiki_langs;} private ListAdp xwiki_langs = ListAdp_.new_();
-	public boolean					Lang_convert_content() {return lang_convert_content;} public Xoa_page Lang_convert_content_(boolean v) {lang_convert_content = v; return this;} private boolean lang_convert_content = true;
-	public boolean					Lang_convert_title() {return lang_convert_title;} public Xoa_page Lang_convert_title_(boolean v) {lang_convert_title = v; return this;} private boolean lang_convert_title = true;
 	public Wdata_external_lang_links_data Wdata_external_lang_links() {return wdata_external_lang_links;} private Wdata_external_lang_links_data wdata_external_lang_links = new Wdata_external_lang_links_data();
 	public boolean					Pages_recursed() {return pages_recursed;} public void Pages_recursed_(boolean v) {pages_recursed = v; } private boolean pages_recursed;
 	public Xopg_tmpl_prepend_mgr Tmpl_prepend_mgr() {return tmpl_prepend_mgr;} private Xopg_tmpl_prepend_mgr tmpl_prepend_mgr = new Xopg_tmpl_prepend_mgr();
@@ -83,7 +83,6 @@ public class Xoa_page {
 		hdump_data.Clear();
 		wdata_external_lang_links.Reset();
 		gplx.xowa.xtns.scribunto.Scrib_core.Core_page_changed(this);
-		lang_convert_content = lang_convert_title = true;
 		xwiki_langs.Clear();
 		html_data.Clear();
 		lnki_file_mgr.Clear();

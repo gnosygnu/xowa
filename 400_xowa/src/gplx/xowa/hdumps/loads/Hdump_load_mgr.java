@@ -16,60 +16,63 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps.loads; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
-import gplx.core.brys.*; import gplx.core.btries.*;  import gplx.dbs.*; import gplx.ios.*; import gplx.xowa.pages.*; import gplx.xowa.hdumps.core.*; import gplx.xowa.hdumps.dbs.*;
+import gplx.core.brys.*; import gplx.core.btries.*;  import gplx.dbs.*; import gplx.ios.*; import gplx.xowa.pages.*; import gplx.xowa.hdumps.core.*; import gplx.xowa.hdumps.dbs.*; import gplx.xowa.hdumps.pages.*;
+import gplx.xowa.pages.skins.*;
 public class Hdump_load_mgr {
-	private Xodb_hdump_mgr hdump_mgr;
-	private Io_stream_zip_mgr zip_mgr = new Io_stream_zip_mgr();
-	private byte[] page_text, display_ttl, content_sub;
-	private ListAdp sidebar_divs = ListAdp_.new_(), img_itms = ListAdp_.new_();
-	private Hdump_text_tbl text_tbl = new Hdump_text_tbl(); private ListAdp tmp_text_itms = ListAdp_.new_();
-	private Bry_rdr bry_rdr = new Bry_rdr();		
+	private Xodb_hdump_mgr hdump_mgr; private Hdump_text_tbl text_tbl = new Hdump_text_tbl(); private Bry_rdr rdr = new Bry_rdr(); // private Io_stream_zip_mgr zip_mgr = new Io_stream_zip_mgr();		
+	private ListAdp tmp_rows = ListAdp_.new_(), img_itms = ListAdp_.new_();				
 	public Hdump_load_mgr(Xodb_hdump_mgr hdump_mgr) {this.hdump_mgr = hdump_mgr;}
 	public byte Zip_tid() {return zip_tid;} public void Zip_tid_(byte v) {zip_tid = v;} private byte zip_tid = gplx.ios.Io_stream_.Tid_file;
-	public void Tbl_(Hdump_text_tbl v) {text_tbl = v;}
-	public void Clear() {
-		page_text = display_ttl = content_sub = null;
-		sidebar_divs.Clear();
-		img_itms.Clear();
-	}
-	public void Load(Hdump_page_itm page, int page_id, Xoa_url page_url) {
+	public void Load(Hdump_page hpg, int page_id, Xoa_url page_url) {
 		Db_provider provider = hdump_mgr.Db_provider_by_page(page_id);
-		text_tbl.Provider_(provider);
-		text_tbl.Select_by_page(tmp_text_itms, page_id);
-		Load_itm(page, page_id, page_url, tmp_text_itms);
+		text_tbl.Provider_(provider).Select_by_page(tmp_rows, page_id);
+		Load_rows(hpg, page_id, page_url, tmp_rows);
 	}
-	public void Load_itm(Hdump_page_itm page, int page_id, Xoa_url page_url, ListAdp itms) {
-		this.Clear();
-		int len = itms.Count();
+	public void Load_rows(Hdump_page hpg, int page_id, Xoa_url page_url, ListAdp rows) {
+		hpg.Init(page_id, page_url);
+		img_itms.Clear();
+		int len = rows.Count();
 		for (int i = 0; i < len; ++i) {
-			Hdump_text_row itm = (Hdump_text_row)itms.FetchAt(i);
-			switch (itm.Tid()) {
-				case Hdump_text_row_tid.Tid_body:			Load_itm_body(itm); break;
-				case Hdump_text_row_tid.Tid_img:			Load_itm_img(itm); break;
-				case Hdump_text_row_tid.Tid_sidebar_div:	sidebar_divs.Add(zip_mgr.Unzip(zip_tid, itm.Data())); break;
-				case Hdump_text_row_tid.Tid_display_ttl:	display_ttl = zip_mgr.Unzip(zip_tid, itm.Data()); break;
-				case Hdump_text_row_tid.Tid_content_sub:	content_sub = zip_mgr.Unzip(zip_tid, itm.Data()); break;
+			Hdump_text_row row = (Hdump_text_row)rows.FetchAt(i);
+			switch (row.Tid()) {
+				case Hdump_text_row_tid.Tid_body:			Hdump_page_body_srl.Load(hpg, rdr, row.Data()); break;
+				case Hdump_text_row_tid.Tid_data:			Load_data(hpg, row); break;
 			}
 		}
-		page.Init(page_id, page_url, 0, display_ttl, content_sub, page_text
-		, (byte[][])sidebar_divs.XtoAryAndClear(byte[].class)
-		, (Hdump_img_itm[])img_itms.XtoAryAndClear(Hdump_img_itm.class)
-		);
-		itms.Clear();
+		rows.Clear();
 	}
-	public void Load_itm_body(Hdump_text_row itm) {
-		page_text = zip_mgr.Unzip(zip_tid, itm.Data());
-	}
-	public void Load_itm_img(Hdump_text_row itm) {
-		bry_rdr.Src_(itm.Data());
-		while (!bry_rdr.Pos_is_eos()) {
-			int uid = bry_rdr.Read_int_to_pipe();
-			int w = bry_rdr.Read_int_to_pipe();
-			int h = bry_rdr.Read_int_to_pipe();
-			byte[] ttl = bry_rdr.Read_bry_to_pipe();
-			byte[] src = bry_rdr.Read_bry_to_nl();
-			Hdump_img_itm img_itm = new Hdump_img_itm(uid, w, h, ttl, src);
-			img_itms.Add(img_itm);
+	public void Load_data(Hdump_page hpg, Hdump_text_row row) {
+		rdr.Src_(row.Data());
+		while (!rdr.Pos_is_eos()) {
+			int tid = rdr.Read_int_to_pipe();
+			switch (tid) {
+				case Hdump_data_tid.Tid_img		:
+				case Hdump_data_tid.Tid_gallery	: Load_data_img(); break;			// 1|0|220|110|A.png|commons/7/0/orig/A.png
+				case Hdump_data_tid.Tid_redlink	: Load_data_redlink(hpg); break;		// 2|2|0|1
+			}
 		}
+		if (img_itms.Count() > 0) hpg.Img_itms_((Hdump_data_img__base[])img_itms.XtoAryAndClear(Hdump_data_img__base.class));
+	}
+	private void Load_data_img() {
+		int tid = rdr.Read_int_to_pipe();
+		int uid = rdr.Read_int_to_pipe();
+		int w = rdr.Read_int_to_pipe();
+		int h = rdr.Read_int_to_pipe();
+		byte[] ttl = rdr.Read_bry_to_pipe();
+		byte[] src = rdr.Read_bry_to_pipe();
+		Hdump_data_img__base img_itm = null;
+		switch (tid) {
+			case Hdump_data_img__base.Tid_basic		: img_itm = new Hdump_data_img__basic().Init_by_base(uid, w, h, ttl, src); break;
+			case Hdump_data_img__base.Tid_gallery	: img_itm = new Hdump_data_img__gallery().Init_by_gallery(rdr.Read_int_to_pipe(), rdr.Read_int_to_pipe(), rdr.Read_int_to_pipe(), rdr.Read_int_to_pipe()).Init_by_base(uid, w, h, ttl, src); break;
+		}
+		rdr.Pos_add_one();
+		img_itms.Add(img_itm);
+	}
+	public void Load_data_redlink(Hdump_page hpg) {
+		int len = rdr.Read_int_to_pipe();
+		int[] redlink_uids = new int[len];
+		for (int i = 0; i < len; ++i)
+			redlink_uids[i] = rdr.Read_int_to_pipe();
+		hpg.Redlink_uids_(redlink_uids);
 	}
 }

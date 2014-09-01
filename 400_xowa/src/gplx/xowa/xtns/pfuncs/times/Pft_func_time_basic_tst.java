@@ -80,7 +80,10 @@ public class Pft_func_time_basic_tst {
 		fxt.Test_parse_tmpl_str_test("{{#time:Z|}}"								, "{{test}}"			, "-18000");
 		DateAdp.Timezone_offset_test = Int_.MinValue;
 	}			// Z=timezone offset in seconds; http://php.net/manual/en/function.date.php;
-	@Test   public void Rfc5322()					{fxt.Test_parse_tmpl_str_test("{{#time:r|}}"				, "{{test}}"			, "Mon, 02 Jan 2012 08:04:05 +0000");}
+	@Test   public void Timezone_plus()			{fxt.Test_parse_tmpl_str_test("{{#time:Y-m-d H:i:s|2012-01-02 03:04:05+06:30}}"	, "{{test}}"	, "2012-01-02 09:34:05");}	// PURPOSE: handle timezone plus ; EX: +01:30; DATE:2014-08-26
+	@Test   public void Timezone_minus()		{fxt.Test_parse_tmpl_str_test("{{#time:Y-m-d H:i:s|2012-01-02 09:34:05-06:30}}"	, "{{test}}"	, "2012-01-02 03:04:05");}	// PURPOSE: handle timezone minus; EX: -01:30; DATE:2014-08-26 
+	@Test   public void Timezone_wrap()			{fxt.Test_parse_tmpl_str_test("{{#time:Y-m-d H:i:s|2012-01-31 22:30:05+01:30}}"	, "{{test}}"	, "2012-02-01 00:00:05");}	// PURPOSE: handle timezone wrap ; DATE:2014-08-26
+	@Test   public void Rfc5322()				{fxt.Test_parse_tmpl_str_test("{{#time:r|}}"				, "{{test}}"			, "Mon, 02 Jan 2012 08:04:05 +0000");}
 	@Test   public void Lang() {
 		Xol_lang fr_lang = fxt.App().Lang_mgr().Get_by_key_or_new(Bry_.new_ascii_("fr"));
 		Xol_msg_itm msg_itm = fr_lang.Msg_mgr().Itm_by_key_or_new(Bry_.new_ascii_("January"));

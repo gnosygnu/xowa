@@ -19,7 +19,7 @@ package gplx.xowa.hdumps.dbs; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.dbs.*;
 public class Hdump_text_tbl {
 	private Db_stmt stmt_select, stmt_insert, stmt_delete;
-	public Db_provider Provider() {return provider;} public void Provider_(Db_provider v) {this.Rls_all(); provider = v;} private Db_provider provider;
+	public Db_provider Provider() {return provider;} public Hdump_text_tbl Provider_(Db_provider v) {this.Rls_all(); provider = v; return this;} private Db_provider provider;
 	@gplx.Virtual public void Delete_by_page(int page_id) {
 		if (stmt_delete == null) stmt_delete = Db_stmt_.new_delete_(provider, Tbl_name, Fld_page_id);
 		try {stmt_delete.Clear().Val_int_(page_id).Exec_delete();}

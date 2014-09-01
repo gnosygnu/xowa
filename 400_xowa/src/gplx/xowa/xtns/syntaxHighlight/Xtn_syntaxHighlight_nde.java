@@ -39,7 +39,7 @@ public class Xtn_syntaxHighlight_nde implements Xox_xnde, Xop_xnde_atr_parser {
 		Xop_xatr_itm.Xatr_parse(app, this, xatrs_syntaxHighlight, wiki, src, xnde);
 		ctx.Para().Process_block__xnde(tag, tag.Block_close());	// deactivate pre; pre; PAGE:en.w:Comment_(computer_programming); DATE:2014-06-24
 	}
-	public void Xtn_write(Xoa_app app, Xoh_html_wtr html_wtr, Xoh_wtr_ctx opts, Xop_ctx ctx, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {
+	public void Xtn_write(Bry_bfr bfr, Xoa_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
 		boolean lang_is_text = Bry_.Eq(lang, Lang_text);
 		boolean enclose_is_none = Bry_.Eq(enclose, Enclose_none);
 		if 		(enclose_is_none) {

@@ -37,8 +37,8 @@ public class Xoh_module_mgr implements Bry_fmtr_arg {
 		return this;
 	}
 	public Xoh_module_mgr Init_dflts() {
-		if (page.Hdr_mgr().Toc_enabled())							itm_toc.Enabled_y_();
-		if (wiki.Html_mgr().Module_mgr().Itm_top_icon().Enabled())	itm_top_icon.Enabled_y_();
+		if (page.Hdr_mgr().Toc_enabled())								itm_toc.Enabled_y_();
+		if (wiki.Html_mgr().Module_mgr().Itm_top_icon().Enabled_y())	itm_top_icon.Enabled_y_();
 		itm_css.Enabled_y_();
 		itm_globals.Enabled_y_();	// for now, always mark this and rest as exists; DATE:2014-06-09
 		itm_collapsible.Enabled_y_();

@@ -153,6 +153,11 @@ public class Wdata_wiki_mgr implements GfoInvkAble {
 							bfr.Add(flds[1]);							// unit;   EX: 1
 							break;
 						}
+						case Wdata_prop_itm_base_.Val_tid_monolingualtext: {	// {{#property:monolingualprop}} -> some phrase (la)
+							byte[][] flds = Bry_.Split(prop.Val(), Wdata_prop_itm_core.Prop_dlm);
+							bfr.Add(flds[0]);							// phrase only; PAGE:en.w:Alberta; EX: {{#property:motto}} -> "Fortis et libre"; DATE:2014-08-28
+							break;
+						}
 						default: throw Err_.unhandled(prop.Val_tid_byte());
 					}
 					break;

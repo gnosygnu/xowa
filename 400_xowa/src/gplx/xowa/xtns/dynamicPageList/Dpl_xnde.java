@@ -27,7 +27,7 @@ public class Dpl_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 		if (itm.Sort_ascending() != Bool_.__byte)
 			pages.SortBy(new Dpl_page_sorter(itm));
 	}
-	public void Xtn_write(Xoa_app app, Xoh_html_wtr html_wtr, Xoh_wtr_ctx opts, Xop_ctx ctx, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {
+	public void Xtn_write(Bry_bfr bfr, Xoa_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
 		Xow_wiki wiki = ctx.Wiki();
 		Dpl_html_data html_mode = Dpl_html_data.new_(Dpl_itm_keys.Key_unordered);
 		int itms_len = pages.Count();

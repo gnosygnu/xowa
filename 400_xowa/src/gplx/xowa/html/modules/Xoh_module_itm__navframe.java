@@ -28,7 +28,7 @@ public class Xoh_module_itm__navframe implements Xoh_module_itm {
 	public void Write_js_head_global(Xoa_app app, Xow_wiki wiki, Xoa_page page, Xoh_module_wtr wtr) {
 		if (!enabled) return;
 		wtr.Write_js_global_ini_atr_val(Key_enabled		, true);
-		wtr.Write_js_global_ini_atr_val(Key_collapsed	, app.Api_root().Html().Modules().Navframe().Collapsed());
+		wtr.Write_js_global_ini_atr_val(Key_collapsed	, app.Api_root().Html().Modules().Navframe().Collapsed() || wiki.Html_mgr().Module_mgr().Itm_navframe().Enabled_n());
 		wtr.Write_js_global_ini_atr_msg(wiki			, Key_show);
 		wtr.Write_js_global_ini_atr_msg(wiki			, Key_hide);
 	}

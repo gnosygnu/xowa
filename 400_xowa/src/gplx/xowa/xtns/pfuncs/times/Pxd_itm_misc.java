@@ -20,22 +20,32 @@ class Pxd_itm_colon extends Pxd_itm_base {
 	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_colon;}
 	@Override public int Eval_idx() {return 20;}
 	@Override public void Eval(Pxd_parser state) {
-		state.Colon_count++;
-		int colon_count = state.Colon_count;
+		int colon_count = ++state.Colon_count;
 		Pxd_itm[] tkns = state.Tkns();
 		Pxd_itm_int itm_int = null;
 		switch (colon_count) {
-			case 1:				
-				itm_int = Pxd_itm_int_.GetNearest(tkns, this.Ary_idx(), false);
+			case 1:			// hh:mm
+				itm_int = Pxd_itm_int_.GetNearest(tkns, this.Ary_idx(), Bool_.N);
 				if (itm_int == null) {state.Err_set(Pft_func_time_log.Invalid_hour, Bry_fmtr_arg_.bry_("null")); return;}
 				if (Pxd_itm_int_.Hour_err(state, itm_int)) return;
 				itm_int = Pxd_itm_int_.GetNearest(tkns, this.Ary_idx(), true);
 				if (Pxd_itm_int_.Min_err(state, itm_int)) return;
 				break;
-			case 2:
-				state.Colon_count++;
+			case 2:			// :ss
 				itm_int = Pxd_itm_int_.GetNearest(tkns, this.Ary_idx(), true);
 				if (Pxd_itm_int_.Sec_err(state, itm_int)) return;
+				break;
+			case 3:			// +hh:mm; DATE:2014-08-26
+				itm_int = Pxd_itm_int_.GetNearest(tkns, this.Ary_idx(), Bool_.N);
+				if (itm_int == null) {state.Err_set(Pft_func_time_log.Invalid_timezone, Bry_fmtr_arg_.bry_("null")); return;}
+				byte tz_positive_val = Pxd_itm_int_.Tz_sym_err(state, tkns, itm_int);
+				if (tz_positive_val == Bool_.__byte) return;
+				boolean tz_negative = tz_positive_val == Bool_.N_byte;
+				if (Pxd_itm_int_.Tz_hour_err(state, itm_int, tz_negative)) return;
+				itm_int = Pxd_itm_int_.GetNearest(tkns, this.Ary_idx(), Bool_.Y);
+				if (itm_int == null) {state.Err_set(Pft_func_time_log.Invalid_timezone, Bry_fmtr_arg_.bry_("null")); return;}
+				if (tz_negative) itm_int.Val_(itm_int.Val() * -1);
+				if (Pxd_itm_int_.Tz_min_err(state, itm_int, tz_negative)) return;
 				break;
 		} 
 	}
@@ -70,7 +80,8 @@ class Pxd_itm_sym extends Pxd_itm_base {
 	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_sym;} 
 	@Override public int Eval_idx() {return 99;}
 	@Override public void Time_ini(DateAdpBldr bldr) {}
-	public Pxd_itm_sym(int ary_idx, int val) {this.Ctor(ary_idx);}
+	public byte Sym_byte() {return sym_byte;} private byte sym_byte;
+	public Pxd_itm_sym(int ary_idx, byte val) {this.Ctor(ary_idx); this.sym_byte = val;}
 }
 class Pxd_itm_int_dmy_14 extends Pxd_itm_base implements Pxd_itm_int_interface {
 	public Pxd_itm_int_dmy_14(int ary_idx, byte[] src, int digits) {this.Ctor(ary_idx); this.src = src; this.digits = digits;} private byte[] src; int digits;

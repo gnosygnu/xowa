@@ -16,8 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.lib; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import gplx.texts.*;
+import gplx.texts.*; import gplx.intl.*;
 public class Scrib_lib_ustring implements Scrib_lib {
+	private final String_surrogate_utl surrogate_utl = new String_surrogate_utl();
 	public Scrib_lib_ustring(Scrib_core core) {this.core = core; gsub_mgr = new Scrib_lib_ustring_gsub_mgr(core, regx_converter);} private Scrib_core core; Scrib_lib_ustring_gsub_mgr gsub_mgr;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
 	public int String_len_max() {return string_len_max;} public Scrib_lib_ustring String_len_max_(int v) {string_len_max = v; return this;} private int string_len_max = Xoa_page_.Page_len_max;
@@ -47,37 +48,44 @@ public class Scrib_lib_ustring implements Scrib_lib {
 	public static final String Invk_find = "find", Invk_match = "match", Invk_gmatch_init = "gmatch_init", Invk_gmatch_callback = "gmatch_callback", Invk_gsub = "gsub";
 	private static final String[] Proc_names = String_.Ary(Invk_find, Invk_match, Invk_gmatch_init, Invk_gmatch_callback, Invk_gsub);
 	public boolean Find(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		String text = args.Pull_str(0);
-		String regx = args.Pull_str(1);
-		int bgn = args.Cast_int_or(2, 1);
-		boolean plain = args.Cast_bool_or_n(3);
-		bgn = Bgn_adjust(text, bgn);
-		if (String_.Len_eq_0(regx))	// regx of "" should return (bgn, bgn - 1) regardless of plain = t / f
-			return rslt.Init_many_objs(bgn + Scrib_lib_ustring.Base1, bgn + Scrib_lib_ustring.Base1 - 1);
-		if (plain) {
-			int pos = String_.FindFwd(text, regx, bgn);
-			boolean found = pos != Bry_.NotFound;
-			return found 
-				? rslt.Init_many_objs(pos + Scrib_lib_ustring.Base1, pos + Scrib_lib_ustring.Base1 + String_.Len(regx) - Scrib_lib_ustring.End_adj)
-				: rslt.Init_ary_empty()
-				;
+		String text_str		= args.Pull_str(0);
+		String regx			= args.Pull_str(1);
+		int bgn_char_idx	= args.Cast_int_or(2, 1);
+		boolean plain			= args.Cast_bool_or_n(3);
+		synchronized (surrogate_utl) {
+			byte[] text_bry = Bry_.new_utf8_(text_str); int text_bry_len = text_bry.length;
+			bgn_char_idx = Bgn_adjust(text_str, bgn_char_idx);
+			int bgn_adj = surrogate_utl.Count_surrogates__char_idx(text_bry, text_bry_len, 0, bgn_char_idx);		// NOTE: convert from lua / php charidx to java regex codepoint; PAGE:zh.w:南北鐵路 (越南) DATE:2014-08-27
+			int bgn_codepoint_idx = bgn_char_idx + bgn_adj;
+			int bgn_byte_pos = surrogate_utl.Byte_pos();
+			if (String_.Len_eq_0(regx))	// regx of "" should return (bgn, bgn - 1) regardless of whether plain is true or false
+				return rslt.Init_many_objs(bgn_codepoint_idx + Scrib_lib_ustring.Base1, bgn_codepoint_idx + Scrib_lib_ustring.Base1 - 1);
+			if (plain) {
+				int pos = String_.FindFwd(text_str, regx, bgn_codepoint_idx);
+				boolean found = pos != Bry_.NotFound;
+				return found 
+					? rslt.Init_many_objs(pos + Scrib_lib_ustring.Base1, pos + Scrib_lib_ustring.Base1 + String_.Len(regx) - Scrib_lib_ustring.End_adj)
+					: rslt.Init_ary_empty()
+					;
+			}
+			regx = regx_converter.Parse(Bry_.new_utf8_(regx), Scrib_regx_converter.Anchor_G);
+			RegxAdp regx_adp = Scrib_lib_ustring.RegxAdp_new_(core.Ctx(), regx);
+			RegxMatch[] regx_rslts = regx_adp.Match_all(text_str, bgn_codepoint_idx);	// NOTE: MW calculates an offset to handle mb strings. however, java's regex always takes offset in chars (not bytes like PHP preg_match); DATE:2014-03-04
+			int len = regx_rslts.length;
+			if (len == 0) return rslt.Init_ary_empty();
+			ListAdp tmp_list = ListAdp_.new_();
+			RegxMatch match = regx_rslts[0];					// NOTE: take only 1st result; DATE:2014-08-27
+			int match_find_bgn_codepoint = match.Find_bgn();	// NOTE: java regex returns results in codepoint; PAGE:zh.w:南北鐵路 (越南) DATE:2014-08-27
+			int match_find_bgn_adj = -surrogate_utl.Count_surrogates__codepoint_idx1(text_bry, text_bry_len, bgn_byte_pos, match_find_bgn_codepoint - bgn_codepoint_idx); // NOTE: convert from java regex codepoint to lua / php char_idx; PAGE:zh.w:南北鐵路 (越南) DATE:2014-08-27
+			tmp_list.Add(match_find_bgn_codepoint + match_find_bgn_adj + -bgn_adj + Scrib_lib_ustring.Base1);
+			tmp_list.Add(match.Find_end()		  + match_find_bgn_adj + -bgn_adj + Scrib_lib_ustring.Base1 - Scrib_lib_ustring.End_adj);
+			//Tfds.Write(match_find_bgn_codepoint + match_find_bgn_adj + -bgn_adj + Scrib_lib_ustring.Base1
+			//			,match.Find_end()		  + match_find_bgn_adj + -bgn_adj + Scrib_lib_ustring.Base1 - Scrib_lib_ustring.End_adj);
+			AddCapturesFromMatch(tmp_list, match, text_str, regx_converter.Capt_ary(), false);
+			return rslt.Init_many_list(tmp_list);
 		}
-		regx = regx_converter.Parse(Bry_.new_utf8_(regx), Scrib_regx_converter.Anchor_G);
-		RegxAdp regx_adp = Scrib_lib_ustring.RegxAdp_new_(core.Ctx(), regx);
-		RegxMatch[] regx_rslts = regx_adp.Match_all(text, bgn);	// NOTE: MW calculates an offset to handle mb strings. however, java's regex always takes offset in chars (not bytes like PHP preg_match); DATE:2014-03-04
-		int len = regx_rslts.length;
-		if (len == 0) return rslt.Init_ary_empty();
-		ListAdp tmp_list = ListAdp_.new_();
-		for (int i = 0; i < len; i++) {
-			RegxMatch match = regx_rslts[i];
-			tmp_list.Add(match.Find_bgn() + Scrib_lib_ustring.Base1);
-			tmp_list.Add(match.Find_end() + Scrib_lib_ustring.Base1 - Scrib_lib_ustring.End_adj);
-			AddCapturesFromMatch(tmp_list, match, text, regx_converter.Capt_ary(), false);
-		}
-		return rslt.Init_many_list(tmp_list);
 	}
-	private int Bgn_adjust(String text, int bgn) {	// adjust to handle bgn < 0 or bgn > len (which PHP allows)
-//			if (bgn == 0) return 0;
+	private int Bgn_adjust(String text, int bgn) {	// adjust to handle bgn < 0 or bgn > len (which PHP allows)			
 		if (bgn > 0) bgn -= Scrib_lib_ustring.Base1;
 		int text_len = String_.Len(text);
 		if		(bgn < 0)			// negative number means search from rear of String
@@ -149,7 +157,8 @@ public class Scrib_lib_ustring implements Scrib_lib {
 		}
 		return rv;
 	}
-	static final int Base1 = 1, End_adj = 1;
+	private static final int Base1 = 1
+	, End_adj = 1;	// lua / php uses "end" as <= not <; EX: "abc" and bgn=0, end= 1; for XOWA, this is "a"; for MW / PHP it is "ab"
 }
 class Scrib_lib_ustring_gsub_mgr {
 	private Scrib_regx_converter regx_converter;

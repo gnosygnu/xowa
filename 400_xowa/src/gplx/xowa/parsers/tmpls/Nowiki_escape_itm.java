@@ -18,11 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.btries.*; import gplx.html.*;
 public class Nowiki_escape_itm {
-	public Nowiki_escape_itm(boolean tid_space, byte[] src, byte[] trg) {this.tid_space = tid_space; this.src = src; this.trg = trg;}
+	public Nowiki_escape_itm(byte[] src, byte[] trg) {this.src = src; this.trg = trg; this.src_adj = src.length - 1;}
+	private int src_adj;
 	public byte[] Src() {return src;} private byte[] src;
 	public byte[] Trg() {return trg;} private byte[] trg;
-	public boolean Tid_space() {return tid_space;} private boolean tid_space;
-
 	public static boolean Escape(Bry_bfr tmp_bfr, byte[] src, int bgn, int end) {// <nowiki> works by escaping all wtxt symbols so that wtxt parser does not hook into any of them
 		boolean dirty = false;
 		for (int i = bgn; i < end; i++) {
@@ -38,33 +37,31 @@ public class Nowiki_escape_itm {
 					dirty = true;
 				}
 				Nowiki_escape_itm itm = (Nowiki_escape_itm)o;
-				if (itm.Tid_space()) {				// NOTE: if space, check if preceding char is \n; else "\n\s" -> "\n&#32;" which will break prew; PAGE:ru.b:Rubyn DATE:2014-07-03
-					if (i > 0 && src[i - 1] == Byte_ascii.NewLine) {	// bounds check && is_preceding_char_nl
-						tmp_bfr.Add_byte_space();	// don't escape space
-						continue;
-					}
-				}
 				tmp_bfr.Add(itm.Trg());
+				i += itm.src_adj;
 			}
 		}
 		return dirty;
 	}
+	private static final byte[] Pre_bry = new byte[] {Byte_ascii.NewLine, Byte_ascii.Space};	// NOTE: must go before trie_new
 	private static final Btrie_slim_mgr trie = trie_new();
 	private static Btrie_slim_mgr trie_new() {
 		Btrie_slim_mgr rv = Btrie_slim_mgr.cs_();
-		trie_new_itm(rv, Bool_.N, Byte_ascii.Lt_bry				, Html_entity_.Lt_bry);
-		trie_new_itm(rv, Bool_.N, Byte_ascii.Brack_bgn_bry		, Html_entity_.Brack_bgn_bry);
-		trie_new_itm(rv, Bool_.N, Byte_ascii.Brack_end_bry		, Html_entity_.Brack_end_bry);	// PAGE:en.w: Tall_poppy_syndrome DATE:2014-07-23
-		trie_new_itm(rv, Bool_.N, Byte_ascii.Pipe_bry			, Html_entity_.Pipe_bry);
-		trie_new_itm(rv, Bool_.N, Byte_ascii.Apos_bry			, Html_entity_.Apos_key_bry);	// NOTE: for backward compatibility, use &apos; note that amp_wkr will turn &apos; -> &#39 but &#39 -> '; DATE:2014-07-03
-		trie_new_itm(rv, Bool_.N, Byte_ascii.Colon_bry			, Html_entity_.Colon_bry);
-		trie_new_itm(rv, Bool_.N, Byte_ascii.Underline_bry		, Html_entity_.Underline_bry);
-		trie_new_itm(rv, Bool_.N, Byte_ascii.Asterisk_bry		, Html_entity_.Asterisk_bry);
-		trie_new_itm(rv, Bool_.Y, Byte_ascii.Space_bry			, Html_entity_.Space_bry);
+		trie_new_itm(rv, Byte_ascii.Lt_bry				, Html_entity_.Lt_bry);
+		trie_new_itm(rv, Byte_ascii.Brack_bgn_bry		, Html_entity_.Brack_bgn_bry);
+		trie_new_itm(rv, Byte_ascii.Brack_end_bry		, Html_entity_.Brack_end_bry);	// PAGE:en.w: Tall_poppy_syndrome DATE:2014-07-23
+		trie_new_itm(rv, Byte_ascii.Pipe_bry			, Html_entity_.Pipe_bry);
+		trie_new_itm(rv, Byte_ascii.Apos_bry			, Html_entity_.Apos_key_bry);	// NOTE: for backward compatibility, use &apos; note that amp_wkr will turn &apos; -> &#39 but &#39 -> '; DATE:2014-07-03
+		trie_new_itm(rv, Byte_ascii.Colon_bry			, Html_entity_.Colon_bry);
+		trie_new_itm(rv, Byte_ascii.Underline_bry		, Html_entity_.Underline_bry);
+		trie_new_itm(rv, Byte_ascii.Asterisk_bry		, Html_entity_.Asterisk_bry);
+		trie_new_itm(rv, Byte_ascii.Space_bry			, Html_entity_.Space_bry);
+		trie_new_itm(rv, Byte_ascii.NewLine_bry			, Html_entity_.Nl_bry);
+		trie_new_itm(rv, Pre_bry						, Pre_bry);
 		return rv;
 	}
-	private static void trie_new_itm(Btrie_slim_mgr rv, boolean tid_space, byte[] src, byte[] trg) {
-		Nowiki_escape_itm itm = new Nowiki_escape_itm(tid_space, src, trg);
+	private static void trie_new_itm(Btrie_slim_mgr rv, byte[] src, byte[] trg) {
+		Nowiki_escape_itm itm = new Nowiki_escape_itm(src, trg);
 		rv.Add_obj(src, itm);			
 	}
 }

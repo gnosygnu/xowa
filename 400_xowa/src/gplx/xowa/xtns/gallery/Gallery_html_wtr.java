@@ -16,51 +16,44 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.files.*;
-import gplx.xowa.html.*;
+import gplx.xowa.files.*; import gplx.xowa.html.*; import gplx.xowa.html.lnkis.*; import gplx.xowa.hdumps.core.*; import gplx.xowa.hdumps.pages.*;
 public class Gallery_html_wtr {
-	private int itms_per_row, itms_len; private boolean mode_is_packed;
-	public int Itm_div_w() {return itm_div_w;} private int itm_div_w;
-	public int Itm_div_h() {return itm_div_h;} private int itm_div_h;
-	public int Itm_box_w() {return itm_box_w;} private int itm_box_w;
-	public int Mgr_box_width_row() {return mgr_box_width_row;} private int mgr_box_width_row;
-	public int Mgr_box_width_all() {return mgr_box_width_all;} private int mgr_box_width_all;
-	public byte[] Mgr_box_cls() {return mgr_box_cls;} private byte[] mgr_box_cls;
-	public Bry_fmtr Mgr_box_style() {return mgr_box_style;} private Bry_fmtr mgr_box_style;
-	public int Gallery_multiplier() {return gallery_multiplier;} private int gallery_multiplier;
-	public void Write_html(Xoa_app app, Xow_wiki wiki, Xop_ctx ctx, Xoa_page page, Xoh_html_wtr wtr, Xoh_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Gallery_xnde mgr) {
-		itms_per_row = mgr.Itms_per_row();
+	private final Xoh_arg_img_core img_core_fmtr_basic = new Xoh_arg_img_core__basic(), img_core_fmtr_hdump = new Xoh_arg_img_core__hdump();
+	public void Write_html(Bry_bfr bfr, Xoa_app app, Xow_wiki wiki, Xop_ctx ctx, Xoh_html_wtr wtr, Xoh_wtr_ctx hctx, Xoa_page page, Gallery_xnde mgr, byte[] src) {
+		int itm_div_w = Gallery_html_wtr_utl.Calc_itm_div_len(mgr.Itm_w_or_default());
+		int itm_div_h = Gallery_html_wtr_utl.Calc_itm_div_len(mgr.Itm_h_or_default());
+		int itm_box_w = Gallery_html_wtr_utl.Calc_itm_box_w(itm_div_w);
+		int itms_len = mgr.Itms_len();
+		int itms_per_row = mgr.Itms_per_row();
 		if (itms_per_row == Gallery_xnde.Null) itms_per_row = wiki.Cfg_gallery().Imgs_per_row();
-		itms_len = mgr.Itms_len();
-		itm_div_w = Gallery_html_wtr_utl.Calc_itm_div_len(mgr.Itm_w_or_default());
-		itm_div_h = Gallery_html_wtr_utl.Calc_itm_div_len(mgr.Itm_h_or_default());
-		itm_box_w = Gallery_html_wtr_utl.Calc_itm_box_w(itm_div_w);
+		int mgr_box_width_row = Gallery_html_wtr_utl.Calc_itm_pad_w(itm_box_w) * itms_per_row;
+		int row_multiplier; Bry_fmtr mgr_box_style;
 		if (itms_per_row == Gallery_xnde.Null) {	// no "perrow" defined; default to total # of items;
-			gallery_multiplier = itms_len;
-			mgr_box_style = fmtr_mgr_box_style_none;
+			row_multiplier = itms_len;
+			mgr_box_style = Gallery_html_wtr_.Mgr_box_style_none;
 		}
 		else {
-			gallery_multiplier = itms_per_row;
-			mgr_box_style = fmtr_mgr_box_style_per_row;
+			row_multiplier = itms_per_row;
+			mgr_box_style = Gallery_html_wtr_.Mgr_box_style_max;
 		}
-		mode_is_packed = Gallery_mgr_base_.Mode_is_packed(mgr.Mode());
-		int gallery_w_count = 0;
+		boolean mode_is_packed = Gallery_mgr_base_.Mode_is_packed(mgr.Mode());
+		byte[] mgr_box_cls; int mgr_box_width_all;
 		if (mode_is_packed) {
-			mgr_box_cls = Gallery_box_cls_packed;
+			mgr_box_cls = Gallery_html_wtr_.Cls_packed;
 			mgr_box_width_all = 0;
 		}
 		else {
 			mgr_box_cls = Bry_.Empty;
-			mgr_box_width_all = Gallery_html_wtr_utl.Calc_itm_pad_w(itm_box_w) * gallery_multiplier; // 8=Gallery Box borders; REF.MW:ImageGallery.php|GB_BORDERS;
+			mgr_box_width_all = Gallery_html_wtr_utl.Calc_itm_pad_w(itm_box_w) * row_multiplier; // 8=Gallery Box borders; REF.MW:ImageGallery.php|GB_BORDERS;
 		}
-		mgr_box_width_row = Gallery_html_wtr_utl.Calc_itm_pad_w(itm_box_w) * itms_per_row;
-		int itm_box_w_tmp = itm_box_w;
-		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_k004();
-		Bry_bfr itm_bfr = wiki.Utl_bry_bfr_mkr().Get_k004();
-		int mgr_elem_id = -1;
+		Bry_bfr itm_bfr = wiki.Utl_bry_bfr_mkr().Get_k004(), tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_k004();
+		int mgr_elem_id = -1; int gallery_w_count = 0;
+		boolean hctx_is_hdump = hctx.Mode_is_hdump();
+		Xoh_arg_img_core img_core_fmtr = hctx_is_hdump ? img_core_fmtr_hdump : img_core_fmtr_basic;
+		Xopg_hdump_data hdump_imgs = page.Hdump_data();
 		for (int i = 0; i < itms_len; i++) {
 			Gallery_itm itm = mgr.Itms_get_at(i);
-			byte[] itm_caption = Bld_caption(wiki, wtr, ctx, hctx, itm);
+			byte[] itm_caption = Gallery_html_wtr_.Bld_caption(wiki, ctx, wtr, hctx, itm);
 			Xoa_ttl itm_ttl = itm.Ttl();
 			if (	itm_ttl != null				// ttl does not have invalid characters
 				&&	itm_ttl.Ns().Id_file()		// ttl is in file ns;
@@ -72,12 +65,12 @@ public class Gallery_html_wtr {
 					;
 				if (mode_is_packed) {
 					if (gallery_w_count < itms_per_row) {
-						mgr_box_width_all += Gallery_html_wtr_utl.Calc_itm_pad_w(itm_box_w_tmp);
+						mgr_box_width_all += Gallery_html_wtr_utl.Calc_itm_pad_w(itm_box_w);
 						++gallery_w_count;
 					}
 					if (xfer_itm.Html_w() > 0) {
 						itm_div_w = Gallery_html_wtr_utl.Calc_itm_div_len(xfer_itm.Html_w());
-						itm_box_w_tmp = Gallery_html_wtr_utl.Calc_itm_box_w(itm_div_w);
+						itm_box_w = Gallery_html_wtr_utl.Calc_itm_box_w(itm_div_w);	// NOTE: redefine itm_box_w for rest of loop
 					}
 					if (xfer_itm.Html_h() > 0)
 						itm_div_h = Gallery_html_wtr_utl.Calc_itm_div_len(xfer_itm.Html_h());
@@ -92,7 +85,6 @@ public class Gallery_html_wtr {
 					html_w = mgr.Itm_w_or_default();
 					html_h = mgr.Itm_h_or_default();
 				}
-				int v_pad = Gallery_html_wtr_utl.Calc_vpad(mgr.Itm_h(), html_h);
 				byte[] lnki_ttl = lnki.Ttl().Page_txt();
 				Xoa_ttl lnki_link_ttl = itm_ttl;					// default href to ttl
 				if (	itm.Link_bgn() != Bry_.NotFound				// link is not -1; EX: "A.png" has no link specified
@@ -101,21 +93,23 @@ public class Gallery_html_wtr {
 					lnki_link_ttl = Xoa_ttl.parse_(wiki, Bry_.Mid(src, itm.Link_bgn(), itm.Link_end()));
 				byte[] lnki_href = app.Href_parser().Build_to_bry(wiki, lnki_link_ttl);
 				byte[] lnki_alt = itm.Alt_bgn() == Bry_.NotFound ? lnki_ttl : Xoh_html_wtr_escaper.Escape(app, tmp_bfr, Bry_.Mid(src, itm.Alt_bgn(), itm.Alt_end())); 
-				fmtr_gallery_itm_img.Bld_bfr_many(itm_bfr
-					, itm_box_w_tmp, itm_div_w
-					, v_pad
+				img_core_fmtr.Init(itm_elem_id, html_src, html_w, html_h);
+				int itm_margin = Gallery_html_wtr_utl.Calc_vpad(mgr.Itm_h(), html_h);
+				Gallery_html_wtr_.Itm_img_fmtr.Bld_bfr_many(itm_bfr
+					, itm_box_w, itm_div_w, itm_margin
 					, itm_elem_id
 					, lnki_ttl
 					, lnki_href
-					, html_src
-					, html_w, html_h
+					, img_core_fmtr
 					, itm_caption
 					, lnki_alt
 					);
+				if (hctx_is_hdump)
+					hdump_imgs.Imgs_add(new Hdump_data_img__gallery().Init_by_gallery(-1, itm_div_w, itm_box_w, itm_margin), xfer_itm, Hdump_data_img__gallery.Tid_gallery);
 			}
 			else {
-				fmtr_gallery_itm_txt.Bld_bfr_many(itm_bfr
-					, itm_box_w_tmp, itm_div_h
+				Gallery_html_wtr_.Itm_txt_fmtr.Bld_bfr_many(itm_bfr
+					, itm_box_w, itm_div_h
 					, Bry_.Mid(src, itm.Ttl_bgn(), itm.Ttl_end())
 					, itm_caption
 					);
@@ -124,9 +118,50 @@ public class Gallery_html_wtr {
 		itm_bfr.Mkr_rls();
 		tmp_bfr.Mkr_rls();
 		int mgr_box_width_max = mgr_box_width_all < mgr_box_width_row ? mgr_box_width_row : mgr_box_width_all;
-		fmtr_mgr_box.Bld_bfr_many(bfr, mgr_elem_id, mgr_box_cls, Bry_fmtr_arg_.fmtr_(mgr_box_style, Bry_fmtr_arg_.int_(mgr_box_width_max)), itm_bfr);
+		Gallery_html_wtr_.Mgr_all_fmtr.Bld_bfr_many(bfr, mgr_elem_id, mgr_box_cls, Bry_fmtr_arg_.fmtr_(mgr_box_style, Bry_fmtr_arg_.int_(mgr_box_width_max)), itm_bfr);
 	}
-	private static byte[] Bld_caption(Xow_wiki wiki, Xoh_html_wtr wtr, Xop_ctx ctx, Xoh_wtr_ctx hctx, Gallery_itm itm) {
+}
+class Gallery_html_wtr_ {
+	public static final byte[] Cls_packed = Bry_.new_utf8_(" mw-gallery-packed");
+	public static final Bry_fmtr
+	  Mgr_all_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	( "<ul id=\"xowa_gallery_ul_~{gallery_id}\" class=\"gallery~{gallery_cls}\" style=\"~{gallery_style}\">~{itm_list}"
+	, "</ul>"
+	), "gallery_id", "gallery_cls", "gallery_style", "itm_list"
+	)
+	, Mgr_box_style_none	= Bry_fmtr.new_()
+	, Mgr_box_style_max		= Bry_fmtr.new_("max-width:~{gallery_width}px; _width:~{gallery_width}px;", "gallery_width")
+	, Itm_img_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	( ""
+	, "  <li id=\"xowa_gallery_li_~{img_id}\" class=\"gallerybox\" style=\"width:~{itm_box_width}px;\">"
+	, "    <div id=\"xowa_gallery_div1_~{img_id}\" style=\"width:~{itm_box_width}px;\">"
+	, "      <div id=\"xowa_gallery_div2_~{img_id}\" class=\"thumb\" style=\"width:~{itm_div_width}px;\">"
+	, "        <div id=\"xowa_gallery_div3_~{img_id}\" style=\"margin:~{itm_margin}px auto;\">"
+	, "          <a href=\"~{img_href}\" class=\"image\">"
+	, "            <img id=\"xowa_file_img_~{img_id}\" alt=\"~{img_alt}\"~{img_core} />"
+	, "          </a>"
+	, "        </div>"
+	, "      </div>"
+	, "      <div class=\"gallerytext\">~{itm_caption}"
+	, "      </div>"
+	, "    </div>"
+	, "  </li>"
+	), "itm_box_width", "itm_div_width", "itm_margin", "img_id", "img_ttl", "img_href", "img_core", "itm_caption", "img_alt"
+	)
+	, Itm_txt_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	( ""
+	, "  <li id=\"xowa_gallery_li_~{img_id}\" class=\"gallerybox\" style=\"width:~{itm_box_width};\">"
+	, "    <div id=\"xowa_gallery_div1_~{img_id}\" style=\"width:~{itm_box_width};\">"
+	, "      <div id=\"xowa_gallery_div2_~{img_id}\" style=\"~{itm_div_height}\">"
+	, "        ~{itm_text}"
+	, "      </div>"
+	, "      <div class=\"gallerytext\">~{itm_caption}"
+	, "      </div>"
+	, "    </div>"
+	, "  </li>"
+	), "itm_box_width", "itm_div_height", "itm_text", "itm_caption"
+	);
+	public static byte[] Bld_caption(Xow_wiki wiki, Xop_ctx ctx, Xoh_html_wtr wtr, Xoh_wtr_ctx hctx, Gallery_itm itm) {
 		byte[] rv = itm.Caption_bry();
 		if (Bry_.Len_gt_0(rv)) {
 			Bry_bfr caption_bfr = wiki.Utl_bry_bfr_mkr().Get_k004();
@@ -136,44 +171,4 @@ public class Gallery_html_wtr {
 		}
 		return rv;
 	}
-	private static final byte[] Gallery_box_cls_packed = Bry_.new_utf8_(" mw-gallery-packed");
-	private Bry_fmtr
-	  fmtr_mgr_box = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
-	(	"<ul id=\"xowa_gallery_ul_~{gallery_id}\" class=\"gallery~{gallery_cls}\" style=\"~{gallery_style}\">~{itm_list}"
-	,	"</ul>"
-	),	"gallery_id", "gallery_cls", "gallery_style", "itm_list"
-	)
-	, fmtr_gallery_itm_img = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
-	(	""
-	,	"  <li id=\"xowa_gallery_li_~{img_id}\" class=\"gallerybox\" style=\"width:~{itm_box_width}px;\">"
-	,	"    <div id=\"xowa_gallery_div1_~{img_id}\" style=\"width:~{itm_box_width}px;\">"
-	,	"      <div id=\"xowa_gallery_div2_~{img_id}\" class=\"thumb\" style=\"width:~{itm_div_width}px;\">"
-	,	"        <div id=\"xowa_gallery_div3_~{img_id}\" style=\"margin:~{itm_margin}px auto;\">"
-	,	"          <a href=\"~{img_href}\" class=\"image\">"
-	,	"            <img id=\"xowa_file_img_~{img_id}\" alt=\"~{img_alt}\" src=\"~{html_src}\" width=\"~{img_width}\" height=\"~{img_height}\" />"
-	,	"          </a>"
-	,	"        </div>"
-	,	"      </div>"
-	,	"      <div class=\"gallerytext\">~{itm_caption}"
-	,	"      </div>"
-	,	"    </div>"
-	,	"  </li>"
-	),	"itm_box_width", "itm_div_width", "itm_margin", "img_id", "img_ttl", "img_href", "html_src", "img_width", "img_height", "itm_caption", "img_alt"
-	)
-	, fmtr_gallery_itm_txt = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
-	(	""
-	,	"  <li id=\"xowa_gallery_li_~{img_id}\" class=\"gallerybox\" style=\"width:~{itm_box_width};\">"
-	,	"    <div id=\"xowa_gallery_div1_~{img_id}\" style=\"width:~{itm_box_width};\">"
-	,	"      <div id=\"xowa_gallery_div2_~{img_id}\" style=\"~{itm_div_height}\">"
-	,	"        ~{itm_text}"
-	,	"      </div>"
-	,	"      <div class=\"gallerytext\">~{itm_caption}"
-	,	"      </div>"
-	,	"    </div>"
-	,	"  </li>"
-	),	"itm_box_width", "itm_div_height", "itm_text", "itm_caption"
-	)
-	, fmtr_mgr_box_style_none		= Bry_fmtr.new_()
-	, fmtr_mgr_box_style_per_row	= Bry_fmtr.new_("max-width:~{gallery_width}px; _width:~{gallery_width}px;", "gallery_width")
-	;
 }

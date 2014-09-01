@@ -54,8 +54,8 @@ public class Ref_nde implements Xox_xnde, Xop_xnde_atr_parser {
 			ctx.Cur_page().Ref_mgr().Grps_add(group, name, follow, this);
 		this.xnde = xnde;
 	}
-	public void Xtn_write(Xoa_app app, Xoh_html_wtr html_wtr, Xoh_wtr_ctx opts, Xop_ctx ctx, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {
-		html_wtr.Ref_wtr().Xnde_ref(opts, bfr, src, xnde);
+	public void Xtn_write(Bry_bfr bfr, Xoa_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
+		html_wtr.Ref_wtr().Xnde_ref(hctx, bfr, src, xnde);
 	}
 	private static final Ref_nde[] Ary_empty = new Ref_nde[0];
 	public Ref_nde[] Related() {return related;} Ref_nde[] related = Ary_empty;

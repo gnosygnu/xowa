@@ -58,8 +58,12 @@ public class Xop_vnt_parser_tst {	// uses zh-hant as cur_vnt
 	@Test  public void Macro_ignore() {	// PURPOSE: ignore macro (implement later); EX:zh.v:西安; Template:pagebanner; DATE:2014-05-03
 		fxt.Test_parse("-{H|zh-cn:亚琛; zh-tw:阿亨;}-", "");
 	}
+	@Test  public void Title() {	// PURPOSE: implement title; PAGE:zh.w:Help:進階字詞轉換處理 DATE:2014-08-29
+		fxt.Test_parse("-{T|zh-hant:A;zh-hans:B}-", "");
+		Tfds.Eq("A", String_.new_utf8_(fxt.Parser_fxt().Page().Html_data().Display_ttl_vnt()));
+	}
 }
-class Xop_vnt_parser_fxt {		
+class Xop_vnt_parser_fxt {
 	public Xop_fxt Parser_fxt() {return fxt;} private Xop_fxt fxt;
 	public Xop_vnt_parser_fxt Clear() {
 		Xoa_app app = Xoa_app_fxt.app_();

@@ -15,17 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.hdumps.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
- import gplx.xowa.hdumps.core.*;
-class Hdump_html_fmtr__sidebars implements Bry_fmtr_arg {
-	private Hdump_page_itm page;
-	public void Init_by_page(Hdump_page_itm page)						{this.page = page;}
-	public void XferAry(Bry_bfr bfr, int idx) {
-		byte[][] sidebar_divs = page.Sidebar_divs();
-		int sidebar_divs_len = sidebar_divs.length;
-		for (int i = 0; i < sidebar_divs_len; ++i) {
-			byte[] sidebar_div = sidebar_divs[i];
-			bfr.Add(sidebar_div);
-		}
-	}
+package gplx.xowa.html.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
+public interface Xoh_arg_img_core extends Bry_fmtr_arg {
+	Xoh_arg_img_core Init(int uid, byte[] src, int w, int h);
 }

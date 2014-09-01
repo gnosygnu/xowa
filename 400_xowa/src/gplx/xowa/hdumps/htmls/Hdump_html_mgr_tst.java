@@ -16,8 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
- import gplx.xowa.hdumps.core.*;
-import org.junit.*;
+import org.junit.*; import gplx.xowa.hdumps.core.*; import gplx.xowa.hdumps.dbs.*;
 public class Hdump_html_mgr_tst {
 	@Before public void init() {
 		fxt.Clear();
@@ -64,23 +63,47 @@ public class Hdump_html_mgr_tst {
 			, "      </div>"
 			));
 	}
+	@Test  public void Hiero_dir() {
+		fxt	.Init_body("<img src='~{xowa_hiero_dir}hiero_a&A1.png' />")
+			.Test_html("<img src='file:///mem/xowa/bin/any/xowa/xtns/Wikihiero/img/hiero_a&A1.png' />");
+	}
+	@Test  public void Gallery() {
+		fxt.Clear_imgs();
+		fxt	.Init_gly(0, 220, 110, "A.png", "commons.wikimedia.org/thumb/7/0/A.png/220.png", 800, 155, 150, 15);
+		fxt	.Init_body(String_.Concat_lines_nl_skip_last
+		( "<ul xowa_gly_box_max='0'>"
+		, "  <li class='gallerybox' xowa_gly_box_w='0'>"
+		, "    <div xowa_gly_box_w='0'>"
+		, "      <div class='thumb' xowa_gly_img_w='0'>"
+		, "        <div xowa_gly_img_pad='0'>"
+		))
+		.Test_html(String_.Concat_lines_nl_skip_last
+		( "<ul style=\"max-width:800px;_width:800px;\">"
+		, "  <li class='gallerybox' style=\"width:155px;\">"
+		, "    <div style=\"width:155px;\">"
+		, "      <div class='thumb' style=\"width:150px;\">"
+		, "        <div style=\"margin:15px auto;\">"
+		));
+	}
 }
 class Hdump_html_mgr_fxt {
-	private Hdump_html_mgr html_mgr = new Hdump_html_mgr();
-	private Hdump_page_itm page = new Hdump_page_itm();
+	private Hdump_html_mgr html_mgr;
 	private Bry_bfr bfr = Bry_bfr.reset_(255);
 	private ListAdp img_list = ListAdp_.new_();
 	private Xow_wiki wiki;
+	public Hdump_page Hpg() {return hpg;} private Hdump_page hpg = new Hdump_page();
 	public void Clear() {
-		html_mgr.Init_by_app(Gfo_usr_dlg_.Null, Bry_.new_ascii_("file:///mem/xowa/file/"));
 		Xoa_app app = Xoa_app_fxt.app_();
 		wiki = Xoa_app_fxt.wiki_tst_(app);
+		html_mgr = wiki.Db_mgr().Hdump_mgr().Html_mgr();
 	}
-	public Hdump_html_mgr_fxt Init_body(String body) {page.Page_body_(Bry_.new_utf8_(body)); return this;}
-	public Hdump_html_mgr_fxt Init_img(int id, int w, int h, String ttl, String src) {img_list.Add(new Hdump_img_itm(id, w, h, Bry_.new_utf8_(ttl), Bry_.new_utf8_(src))); return this;}
+	public void Clear_imgs() {img_list.Clear();}
+	public Hdump_html_mgr_fxt Init_body(String body) {hpg.Page_body_(Bry_.new_utf8_(body)); return this;}
+	public Hdump_html_mgr_fxt Init_img(int id, int w, int h, String ttl, String src) {img_list.Add(new Hdump_data_img__basic().Init_by_base(id, w, h, Bry_.new_utf8_(ttl), Bry_.new_utf8_(src))); return this;}
+	public Hdump_html_mgr_fxt Init_gly(int id, int w, int h, String ttl, String src, int box_max, int box_w, int img_w, int img_pad) {img_list.Add(new Hdump_data_img__gallery().Init_by_gallery(box_max, box_w, img_w, img_pad).Init_by_base(id, w, h, Bry_.new_utf8_(ttl), Bry_.new_utf8_(src))); return this;}
 	public Hdump_html_mgr_fxt Test_html(String expd) {
-		if (img_list.Count() > 0) page.Img_itms_((Hdump_img_itm[])img_list.XtoAryAndClear(Hdump_img_itm.class));
-		html_mgr.Write(bfr, wiki, page);
+		if (img_list.Count() > 0) hpg.Img_itms_((Hdump_data_img__base[])img_list.XtoAryAndClear(Hdump_data_img__base.class));
+		html_mgr.Write(bfr, wiki, hpg);
 		Tfds.Eq_str_lines(expd, bfr.XtoStrAndClear());
 		return this;
 	}

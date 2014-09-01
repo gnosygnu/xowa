@@ -69,13 +69,13 @@ public class Gallery_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 			wiki.App().Usr_dlg().Warn_many("", "", "failed to write gallery; src=~{0} err=~{1}", String_.new_utf8_(src, xnde.Src_bgn(), xnde.Src_end()), Err_.Message_gplx(exc));
 		}
 	}	public static Xop_log_basic_wkr Log_wkr = Xop_log_basic_wkr.Null;
-	public void Xtn_write(Xoa_app app, Xoh_html_wtr html_wtr, Xoh_wtr_ctx opts, Xop_ctx ctx, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {
+	public void Xtn_write(Bry_bfr bfr, Xoa_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
 		Xow_wiki wiki = ctx.Wiki();
 		try {
 			if (html_wtr_v1)
-				xtn_mgr.Html_wtr().Write_html(app, wiki, ctx, ctx.Cur_page(), html_wtr, opts, bfr, src, this);
+				xtn_mgr.Html_wtr().Write_html(bfr, app, wiki, ctx, html_wtr, hctx, ctx.Cur_page(), this, src);
 			else {
-				gallery_mgr.Write_html(bfr, wiki, ctx.Cur_page(), ctx, src, this);
+				gallery_mgr.Write_html(bfr, wiki, ctx.Cur_page(), ctx, hctx, src, this);
 			}
 		} catch (Exception exc) {
 			wiki.App().Usr_dlg().Warn_many("", "", "failed to write gallery; src=~{0} err=~{1}", String_.new_utf8_(src, xnde.Src_bgn(), xnde.Src_end()), Err_.Message_gplx(exc));
