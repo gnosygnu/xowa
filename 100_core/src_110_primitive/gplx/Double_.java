@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 public class Double_ {
 	public static final Class<?> ClassOf = Double.class; 
+	public static final String Cls_name = "double";
 	public static final double Inf_pos = Double.POSITIVE_INFINITY;;
 	public static final double NaN = Double.NaN;;					
 	public static final byte[] NaN_bry = Bry_.new_ascii_("NaN");
@@ -31,15 +32,15 @@ public class Double_ {
 		try {String s = String_.as_(v); return s == null ? Double_.cast_(v) : Double_.parse_(s);}
 		catch (Exception e) {throw Err_.cast_(e, double.class, v);}
 	}
-	public static String XtoStr(double v) {
+	public static String Xto_str(double v) {
 				int v_int = (int)v;
-		return v - v_int == 0 ? Int_.XtoStr(v_int) : Double.toString(v);
+		return v - v_int == 0 ? Int_.Xto_str(v_int) : Double.toString(v);
 			}
 	public static String Xto_str_loose(double v) {
 		int v_as_int = (int)v;			
 		return v == v_as_int
-			? Int_.XtoStr(v_as_int)		// convert to int, and call print String to eliminate any trailing decimal places
-			: Float_.XtoStr((float)v);	// calling ((float)v).toString is better at removing trailing 0s than String.format("%g", v). note that .net .toString() handles it better; EX:2449.600000000000d; DATE:2014-07-29
+			? Int_.Xto_str(v_as_int)		// convert to int, and call print String to eliminate any trailing decimal places
+			: Float_.Xto_str((float)v);	// calling ((float)v).toString is better at removing trailing 0s than String.format("%g", v). note that .net .toString() handles it better; EX:2449.600000000000d; DATE:2014-07-29
 	}
 	public static double cast_(Object o) {try {return (Double)o;} catch(Exception e) {throw Err_.type_mismatch_exc_(e, double.class, o);}}
 	public static double parse_(String raw) {try {return Double.parseDouble(raw);} catch(Exception e) {throw Err_.parse_type_exc_(e, double.class, raw);}}

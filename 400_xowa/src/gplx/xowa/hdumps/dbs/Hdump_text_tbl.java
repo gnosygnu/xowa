@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.hdumps.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
 import gplx.dbs.*;
 public class Hdump_text_tbl {
+	public static final String Tbl_name = "html_text", Fld_page_id = "page_id", Fld_text_tid = "text_tid", Fld_text_data = "text_data";
 	private Db_stmt stmt_select, stmt_insert, stmt_delete;
 	public Db_provider Provider() {return provider;} public Hdump_text_tbl Provider_(Db_provider v) {this.Rls_all(); provider = v; return this;} private Db_provider provider;
 	@gplx.Virtual public void Delete_by_page(int page_id) {
@@ -47,14 +48,30 @@ public class Hdump_text_tbl {
 		catch (Exception exc) {stmt_select = null; throw Err_.err_(exc, "stmt failed");} // must reset stmt, else next call will fail
 		finally {stmt_select.Rls();}
 	}
+//		private static final String[] Select_by_page_flds = new String[] {Fld_page_id, Fld_text_tid, Fld_text_data};
+//		public virtual void Select_by_page2(ListAdp rv, int page_id) {
+//			// if (stmt_select == null) stmt_select = provider.Stmt_select(Tbl_name, Select_by_page_flds, String_.Ary(Fld_page_id));
+//			try {
+//				Db_rdr rdr = null; //stmt_select.Clear().Val_int_(page_id).Exec_select_as_rdr();
+//				while(rdr.Move_next()) {
+//					Hdump_text_row row = new Hdump_text_row
+//					( rdr.Read_int(0)
+//					, rdr.Read_int(1)
+//					, rdr.Read_bry_by_str(2)
+//					);
+//					rv.Add(row);
+//				}
+//				rdr.Close();
+//			}
+//			catch (Exception exc) {stmt_select = null; throw Err_.err_(exc, "stmt failed");} // must reset stmt, else next call will fail
+//			finally {stmt_select.Rls();}
+//		}
 	public void Rls_all() {
 		if (stmt_select != null) {stmt_select.Rls(); stmt_select = null;}
 		if (stmt_insert != null) {stmt_insert.Rls(); stmt_insert = null;}
 		if (stmt_delete != null) {stmt_delete.Rls(); stmt_delete = null;}
 		provider = null;
 	}
-	public static final String Tbl_name = "html_text"
-	, Fld_page_id = "page_id", Fld_text_tid = "text_tid", Fld_text_data = "text_data";
 	private static final String[] Flds_all = new String[] {Fld_page_id, Fld_text_tid, Fld_text_data};
 	public static final String Tbl_sql = String_.Concat_lines_nl
 	( "CREATE TABLE IF NOT EXISTS html_text"

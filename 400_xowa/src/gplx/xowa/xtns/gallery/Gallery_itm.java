@@ -48,7 +48,7 @@ public class Gallery_itm implements Js_img_wkr {
 		Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_k004(), tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_k004();
 		try {
 			xfer_itm.Init_for_gallery_update(html_w, html_h, html_src, orig_src);
-			gallery_mgr.Write_html_itm(bfr, tmp_bfr, wiki.App(), wiki, ctx.Cur_page(), ctx, wiki.Html_mgr().Html_wtr(), Xoh_wtr_ctx.Basic, src, xnde, Bry_.Empty, gallery_itm_idx, xfer_itm, false, -1);
+			gallery_mgr.Write_html_itm(bfr, tmp_bfr, wiki.App(), wiki, ctx.Cur_page(), ctx, wiki.Html_mgr().Html_wtr(), Xoh_wtr_ctx.Basic, src, xnde, Bry_.Empty, gallery_itm_idx, xfer_itm, false);
 			String itm_html = bfr.XtoStrAndClear();
 			html_itm.Html_elem_replace_html(String_.new_utf8_(gallery_li_id_bry), itm_html);
 			if (gallery_itm_idx == xnde.Itms_len() - 1 && Gallery_mgr_base_.Mode_is_packed(xnde.Mode()))

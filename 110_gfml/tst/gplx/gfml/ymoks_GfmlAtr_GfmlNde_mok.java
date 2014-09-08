@@ -52,7 +52,7 @@ class GfmlNde_mok implements GfmlItm_mok {
 	public ListAdp Subs() {return subs;}
 	public String XtoStrStub() {
 		String_bldr sb = String_bldr_.new_();
-		sb.Add_kv("key=", key).Add_kv("hnd=", hnd).Add_kv("typ=", typ).Add_kv("subs=", Int_.XtoStr(subs.Count()));
+		sb.Add_kv("key=", key).Add_kv("hnd=", hnd).Add_kv("typ=", typ).Add_kv("subs=", Int_.Xto_str(subs.Count()));
 		return sb.XtoStr();
 	}
 	public GfmlNde_mok Subs_(GfmlItm_mok... ary) {
@@ -141,7 +141,7 @@ class GfmlTypeResolver_fxt {
 		for (int i = 0; i < max; i++) {
 			GfmlItm_mok expdSub = (GfmlItm_mok)tstr.List_FetchAtOrNull(expd.Subs(), i);
 			GfmlItm_mok actlSub = (GfmlItm_mok)tstr.List_FetchAtOrNull(actl.Subs(), i);
-			tstr.SubName_push(Int_.XtoStr(i));
+			tstr.SubName_push(Int_.Xto_str(i));
 			if (expdSub == null) {
 				GfmlNde_mok mm = GfmlNde_mok.as_(actlSub);
 				String actlSubStr = mm == null ? "sub:null" : mm.XtoStrStub();

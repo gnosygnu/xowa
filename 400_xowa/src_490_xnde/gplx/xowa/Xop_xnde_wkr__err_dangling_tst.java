@@ -172,7 +172,7 @@ public class Xop_xnde_wkr__err_dangling_tst {
 			, fxt.tkn_list_end_(7).List_path_(1)
 			);
 	}
-//		@Test  public void SpanX() {
-//			fxt.Test_parse_page_wiki_str("<span>a<p></span>", "<span>a<p></span>");
-//		}
+	@Test  public void Underline() {	// PURPOSE: 2nd <u> should auto-close; PAGE:en.b:Textbook_of_Psychiatry/Alcoholism_and_Psychoactive_Substance_Use_Disorders DATE:2014-09-05
+		fxt.Test_html_full_str("a<u>b<u>c", "a<u>b</u>c");
+	}
 }

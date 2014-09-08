@@ -57,7 +57,7 @@ class GfmlTypeCompiler_fxt {
 		for (int i = 0; i < max; i++) {
 			GfmlFld_mok expdFld = (GfmlFld_mok)tstr.List_FetchAtOrNull(expd.Subs(), i);
 			GfmlFld_mok actlFld = (GfmlFld_mok)tstr.List_FetchAtOrNull(actl.Subs(), i);
-			tstr.SubName_push(Int_.XtoStr(i) + " fld");
+			tstr.SubName_push(Int_.Xto_str(i) + " fld");
 			tst(tstr, expdFld, actlFld);
 			tstr.SubName_pop();
 		}

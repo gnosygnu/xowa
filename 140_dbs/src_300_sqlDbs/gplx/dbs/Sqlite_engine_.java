@@ -51,7 +51,7 @@ public class Sqlite_engine_ {
 	}
 	public static void Pragma_page_size_4096(Db_provider p) {Pragma_page_size(p, 4096);}
 	public static void Pragma_page_size(Db_provider p, int val) {
-		Db_qry qry = Db_qry_sql.ddl_("PRAGMA page_size = " + Int_.XtoStr(val) + ";");
+		Db_qry qry = Db_qry_sql.ddl_("PRAGMA page_size = " + Int_.Xto_str(val) + ";");
 		p.Exec_qry(qry);
 	}
 	public static void Idx_create(Db_provider p, Db_idx_itm... idxs) {Idx_create(Gfo_usr_dlg_.Null, p, "", idxs);}
@@ -68,15 +68,15 @@ public class Sqlite_engine_ {
 	public static Db_provider Provider_load_or_fail_(Io_url url) {
 		boolean exists = Io_mgr._.ExistsFil(url);
 		if (!exists) throw Err_.new_fmt_("db does not exist; url=~{0}", url.Raw());
-		Db_connect connect = Db_connect_sqlite.load_(url); 
-		return Db_provider_.new_(connect);
+		Db_conn_info connect = Db_conn_info__sqlite.load_(url); 
+		return Db_provider_.new_and_open_(connect);
 	}
 	public static Db_provider Provider_load_or_make_(Io_url url) {return Provider_load_or_make_(url, Bool_obj_ref.n_());}
 	public static Db_provider Provider_load_or_make_(Io_url url, Bool_obj_ref created) {
 		boolean exists = Io_mgr._.ExistsFil(url);
 		created.Val_(!exists);
-		Db_connect connect = exists ? Db_connect_sqlite.load_(url) : Db_connect_sqlite.make_(url); 
-		Db_provider p = Db_provider_.new_(connect);
+		Db_conn_info connect = exists ? Db_conn_info__sqlite.load_(url) : Db_conn_info__sqlite.make_(url); 
+		Db_provider p = Db_provider_.new_and_open_(connect);
 		if (!exists)
 			Pragma_page_size(p, 4096);
 		return p;

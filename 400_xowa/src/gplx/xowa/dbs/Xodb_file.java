@@ -26,9 +26,9 @@ public class Xodb_file {
 	public long		File_len()	{return file_len;}		public Xodb_file File_len_add(int v) {file_len += v; return this;}	private long file_len;
 	public long		File_max()	{return file_max;}		public Xodb_file File_max_(long v) {file_max = v; return this;}		private long file_max;
 	public byte		Cmd_mode()	{return cmd_mode;}		public Xodb_file Cmd_mode_(byte v) {cmd_mode = v; return this;}		private byte cmd_mode;
-	public Db_connect Connect() {return connect;}		public Xodb_file Connect_(Db_connect v) {connect = v; return this;} private Db_connect connect;
+	public Db_conn_info Connect() {return connect;}		public Xodb_file Connect_(Db_conn_info v) {connect = v; return this;} private Db_conn_info connect;
 	public Db_provider Provider() {
-		if (provider == null) provider = Db_provider_pool._.FetchOrNew(connect);
+		if (provider == null) provider = Db_provider_pool._.Get_or_new(connect);
 		return provider;
 	}	private Db_provider provider;
 	public void Provider_(Db_provider p) {provider = p;}
@@ -36,7 +36,7 @@ public class Xodb_file {
 		if (provider == null) return;
 		try {
 			provider.Txn_mgr().Txn_end_all();	// close any open transactions
-			provider.Rls();
+			provider.Conn_term();
 		}	finally {provider = null;}
 	}
 	public static Xodb_file load_(int id, byte tid, String url) {return new Xodb_file(id, tid).Url_rel_(url).Cmd_mode_(Db_cmd_mode.Ignore);}

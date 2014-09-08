@@ -79,7 +79,7 @@ class Gallery_itm_parser_fxt {
 	public String[] Expd(String ttl, String caption)									{return new String[] {ttl, caption, null, null, null};}
 	public String[] Expd(String ttl, String caption, String alt)						{return new String[] {ttl, caption, alt, null, null};}
 	public String[] Expd(String ttl, String caption, String alt, String link)			{return new String[] {ttl, caption, alt, link, null};}
-	public String[] Expd(String ttl, String caption, String alt, String link, int page)	{return new String[] {ttl, caption, alt, link, Int_.XtoStr(page)};}
+	public String[] Expd(String ttl, String caption, String alt, String link, int page)	{return new String[] {ttl, caption, alt, link, Int_.Xto_str(page)};}
 	public void Init_kwd_set(int kwd_id, String kwd_val) {
 		wiki.Lang().Kwd_mgr().Get_or_new(kwd_id).Itms()[0].Val_(Bry_.new_ascii_(kwd_val));
 		parser.Init_by_wiki(wiki);

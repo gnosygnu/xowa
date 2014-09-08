@@ -73,7 +73,7 @@ public class Gfui_html extends GfuiElemBase {
 		String proc = (String)args[0];
 		GfoMsg rv = GfoMsg_.new_parse_(proc);
 		for (int i = 1; i < args.length; i++)
-			rv.Add(Int_.XtoStr(i), args[i]);	// NOTE: args[i] can be either String or String[]
+			rv.Add(Int_.Xto_str(i), args[i]);	// NOTE: args[i] can be either String or String[]
 		return rv;
 	}
 	public static final String Atr_href = "href", Atr_title = "title", Atr_value = "value", Atr_innerHTML = "innerHTML", Atr_src = "src";

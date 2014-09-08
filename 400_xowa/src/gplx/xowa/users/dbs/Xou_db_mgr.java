@@ -50,7 +50,7 @@ public class Xou_db_mgr {
 	}
 	public void App_term() {
 		try {
-			app.Usr_dlg().Note_many("", "", "user_db.shut_down.bgn: ~{0}", provider.ConnectInfo().Raw_of_db_connect());
+			app.Usr_dlg().Note_many("", "", "user_db.shut_down.bgn: ~{0}", provider.Conn_info().Str_raw());
 			this.App_save();
 			int wkr_len = wkr_list.Count();
 			for (int i = 0; i < wkr_len; i++) {
@@ -58,7 +58,7 @@ public class Xou_db_mgr {
 				wkr.Db_term(this);
 			}
 			provider.Txn_mgr().Txn_end_all();
-			provider.Rls();
+			provider.Conn_term();
 			app.Usr_dlg().Note_many("", "", "user_db.shut_down.end");
 		} 
 		catch (Exception e) {

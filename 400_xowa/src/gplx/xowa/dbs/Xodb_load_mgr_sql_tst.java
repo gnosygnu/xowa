@@ -181,7 +181,7 @@ class Xoctg_mok_ctg {
 		int ns_id = Xow_ns_.Id_main;
 		byte ctg_tid = Xoa_ctg_mgr.Tid_page;
 		for (int i = bgn; i < end; i++) {
-			byte[] ttl = Bry_.Add(ttl_prefix, Bry_.new_ascii_(Int_.XtoStr_PadBgn(i, 3)));
+			byte[] ttl = Bry_.Add(ttl_prefix, Bry_.new_ascii_(Int_.Xto_str_pad_bgn(i, 3)));
 			Xoctg_page_xtn db_ctg = new Xoctg_page_xtn(ctg_tid, ttl);
 			Xodb_page page = new Xodb_page();
 			int page_id = next_id.Val_add_post();

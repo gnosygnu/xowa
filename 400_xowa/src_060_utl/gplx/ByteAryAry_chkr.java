@@ -27,7 +27,7 @@ public class ByteAryAry_chkr implements Tst_chkr {
 		err += mgr.Tst_val(true, path, "len", ary.length, actl_len);
 		for (int i = 0; i < expd_len; i++) {
 			byte[] actl_itm = i >= actl_len ? null : actl[i];
-			err += mgr.Tst_val(false, path, "ary:" + Int_.XtoStr(i), String_.new_utf8_(ary[i]), String_.new_utf8_(actl_itm));
+			err += mgr.Tst_val(false, path, "ary:" + Int_.Xto_str(i), String_.new_utf8_(ary[i]), String_.new_utf8_(actl_itm));
 		}
 		return err;
 	}

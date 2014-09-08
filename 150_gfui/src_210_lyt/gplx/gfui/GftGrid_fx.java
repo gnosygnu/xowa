@@ -27,7 +27,7 @@ class GftGrid_fx {
 	}
 	public GftGrid_fx ini_AddItms(int num) {
 		for (int i = 0; i < num; i++)
-			itms.Add(new GftItem_mok());//.Key_("key" + Int_.XtoStr(i)));
+			itms.Add(new GftItem_mok());//.Key_("key" + Int_.Xto_str(i)));
 		return this;
 	}
 	public GftGrid_fx ini_ItmWidth(int i, int width) {

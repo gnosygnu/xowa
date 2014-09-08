@@ -261,52 +261,6 @@ public class Xop_lnki_wkr__basic_tst {
 		, ""
 		));
 	}
-//		@Test   public void Subpage_parent() {	// DISABLED: MW does not allow ../ to go past root; DATE:2014-01-02
-//			fxt.Page_ttl_("A");
-//			fxt.Test_parse_page_wiki_str
-//			( "[[b/../c]]"
-//			, "<a href=\"/wiki/C\">c</a>"
-//			);
-//		}
-	@Test  public void Subpage_disabled() {	// PURPOSE: slash being interpreted as subpage; PAGE:en.w:[[/dev/null]]
-		fxt.Wiki().Ns_mgr().Ids_get_or_null(Xow_ns_.Id_main).Subpages_enabled_(false);
-		fxt.Test_parse_page_all_str("[[/dev/null]]", "<a href=\"/wiki//dev/null\">/dev/null</a>");
-		fxt.Wiki().Ns_mgr().Ids_get_or_null(Xow_ns_.Id_main).Subpages_enabled_(true);
-	}
-	@Test  public void Subpage_false_match() {// PAGE:en.w:en.wiktionary.org/wiki/Wiktionary:Requests for cleanup/archive/2006
-		fxt.Test_parse_page_wiki_str
-		( "[[.../compare ...]]"
-		, "<a href=\"/wiki/.../compare_...\">.../compare ...</a>"
-		);
-	}
-	@Test  public void Subpage_owner() {	// PURPOSE: ../c does "A/c", not "c"; DATE:2014-01-02
-		fxt.Page_ttl_("A/b");
-		fxt.Test_parse_page_wiki_str
-		( "[[../c]]"
-		, "<a href=\"/wiki/A/c\">A/c</a>"
-		);
-	}
-	@Test  public void Subpage_owner_w_slash() {	// PURPOSE: ../c/ does "c", not "A/c"; DATE:2014-01-02
-		fxt.Page_ttl_("A/b");
-		fxt.Test_parse_page_wiki_str
-		( "[[../c/]]"
-		, "<a href=\"/wiki/A/c\">c</a>"
-		);
-	}
-	@Test  public void Subpage_slash() {	// PURPOSE: /B should show /B, not A/B; DATE:2014-01-02
-		fxt.Page_ttl_("A");
-		fxt.Test_parse_page_wiki_str
-		( "[[/B]]", String_.Concat_lines_nl_skip_last
-		( "<a href=\"/wiki/A/B\">/B</a>"
-		));
-	}
-	@Test  public void Subpage_slash_w_slash() {	// PURPOSE: /B/ should show B, not /B; DATE:2014-01-02
-		fxt.Page_ttl_("A");
-		fxt.Test_parse_page_wiki_str
-		( "[[/B/]]", String_.Concat_lines_nl_skip_last
-		( "<a href=\"/wiki/A/B\">B</a>"
-		));
-	}
 	@Test  public void Xwiki_file() {	// PURPOSE: if xwiki and File, ignore xwiki (hackish); DATE:2013-12-22
 		Reg_xwiki_alias("test", "test.wikimedia.org");													// must register xwiki, else ttl will not parse it
 		fxt.Wiki().Cfg_parser().Lnki_cfg().Xwiki_repo_mgr().Add_or_mod(Bry_.new_ascii_("test"));	// must add to xwiki_repo_mgr

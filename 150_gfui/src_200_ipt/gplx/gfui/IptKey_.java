@@ -31,7 +31,7 @@ public class IptKey_ {
 	}
 	public static IptKey api_(int val) {
 		IptKey rv = (IptKey)enmMgr.Get(val);
-		return (rv == null) ? new_(val, "key_" + Int_.XtoStr(val)) : rv;
+		return (rv == null) ? new_(val, "key_" + Int_.Xto_str(val)) : rv;
 	}
 	public static IptKey parse_(String raw) {return getOrNew_(enmMgr.GetVal(raw));}
 	public static IptKey rdr_or_(DataRdr rdr, String key, IptKey or) {

@@ -135,14 +135,14 @@ class Xodb_hdump_mgr__write_fxt extends Xodb_hdump_mgr__base_fxt {
 			Tfds.Eq_true(String_.Has(actl_html, expd_html), actl_html);
 		else
 			Tfds.Eq_str_lines(expd_html, actl_html);
-		if (expd_itms_xfers.Count() > 0) Tfds.Eq_ary_str(Xfer_to_str_ary(expd_itms_xfers), Xfer_to_str_ary(page.Hdump_data().Imgs()));
+		if (expd_itms_xfers.Count() > 0) Tfds.Eq_ary_str(Xfer_to_str_ary(expd_itms_xfers), Xfer_to_str_ary(page.Hdump_data().Data()));
 	}
 	private static String[] Xfer_to_str_ary(ListAdp list) {
 		int len = list.Count();
 		String[] rv = new String[len];
 		for (int i = 0; i < len; ++i) {
 			Hdump_data_img__base itm = (Hdump_data_img__base)list.FetchAt(i);
-			rv[i] = itm.XtoStr();
+			rv[i] = itm.Data_print();
 		}
 		return rv;
 	}

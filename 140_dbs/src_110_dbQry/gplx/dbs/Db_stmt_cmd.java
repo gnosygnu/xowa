@@ -18,13 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs; import gplx.*;
 import java.sql.*;	
 class Db_stmt_cmd implements Db_stmt {
-	Db_engine engine;
-	PreparedStatement stmt = null;	
-	String sql;
-	int val_idx = 0;
+	private Db_engine engine;
+	private PreparedStatement stmt = null;	
+	private String sql;
+	private int val_idx = 0;
 	public Db_stmt_cmd(Db_provider provider, Db_qry qry) {
 		this.provider = provider; this.engine = provider.Engine();
-		sql = Sql_cmd_wtr_.Ansi.XtoSqlQry(qry, true);
+		sql = qry.Tid() == Db_qry_.Tid_select_in_tbl ? ((Db_qry__select_in_tbl)qry).Xto_sql() : Sql_cmd_wtr_.Ansi.XtoSqlQry(qry, true);
 		New();
 	}
 	public Db_stmt New() {
@@ -58,7 +58,7 @@ class Db_stmt_cmd implements Db_stmt {
 		return this;
 	}
 	public Db_stmt Val_decimal_(DecimalAdp v) {
-		try {stmt.setBigDecimal(++val_idx, v.XtoDecimal());} catch (Exception e) {throw Err_.err_(e, "failed to add value: type={0} val={1}", "decimal", v);}	
+		try {stmt.setBigDecimal(++val_idx, v.Xto_decimal());} catch (Exception e) {throw Err_.err_(e, "failed to add value: type={0} val={1}", "decimal", v);}	
 		return this;
 	}
 	public Db_stmt Val_bry_by_str_(String v) {return Val_bry_(Bry_.new_utf8_(v));}
@@ -87,6 +87,9 @@ class Db_stmt_cmd implements Db_stmt {
 	public DataRdr Exec_select() {
 		try {DataRdr rv = engine.NewDataRdr(stmt.executeQuery(), sql); return rv;} catch (Exception e) {throw Err_.err_(e, "failed to exec prepared statement: sql={0}", sql);}	
 	}	
+	public Db_rdr Exec_select_as_rdr() {
+		try {return engine.New_db_rdr(stmt.executeQuery(), sql);}	catch (Exception e) {throw Err_.err_(e, "select failed: sql={0}", sql);}	
+	}
 	public Object Exec_select_val() {
 		try {Object rv = Db_qry_select.Rdr_to_val(engine.NewDataRdr(stmt.executeQuery(), sql)); return rv;} catch (Exception e) {throw Err_.err_(e, "failed to exec prepared statement: sql={0}", sql);}	
 	}

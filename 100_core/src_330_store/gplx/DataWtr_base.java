@@ -44,7 +44,7 @@ public abstract class DataWtr_base implements SrlMgr {
 	public long SrlLongOr(String key, long or) {WriteData(key, or); return or;}
 	public String SrlStrOr(String key, String or) {WriteData(key, or); return or;}
 	public DateAdp SrlDateOr(String key, DateAdp or) {WriteData(key, or.XtoStr_gplx()); return or;}
-	public DecimalAdp SrlDecimalOr(String key, DecimalAdp or) {WriteData(key, or.XtoDecimal()); return or;}
+	public DecimalAdp SrlDecimalOr(String key, DecimalAdp or) {WriteData(key, or.Xto_decimal()); return or;}
 	public double SrlDoubleOr(String key, double or) {WriteData(key, or); return or;}
 	public Object SrlObjOr(String key, Object or) {throw Err_.not_implemented_();}
 	public void TypeKey_(String v) {}

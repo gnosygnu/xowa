@@ -66,9 +66,9 @@ public class Xob_xfer_update_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	, ",       cur.lnki_count"
 	, ",       CASE"
 	, "          WHEN old.lnki_ttl IS NULL THEN"	// not in old table; mark todo
-	, "            " + Byte_.XtoStr(Xob_xfer_regy_tbl.Status_todo)
+	, "            " + Byte_.Xto_str(Xob_xfer_regy_tbl.Status_todo)
 	, "          ELSE"									// in old table; mark processed
-	, "            " + Byte_.XtoStr(Xob_xfer_regy_tbl.Status_ignore_processed)
+	, "            " + Byte_.Xto_str(Xob_xfer_regy_tbl.Status_ignore_processed)
 	, "        END"
 	, ",       cur.xfer_bin_tid"
 	, ",       cur.xfer_bin_msg"

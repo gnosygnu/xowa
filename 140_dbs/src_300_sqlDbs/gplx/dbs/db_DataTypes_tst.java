@@ -24,7 +24,7 @@ public class db_DataTypes_tst {
 		fx.RunAll(Db_provider_fxt.Mysql());
 	}
 	@Test  public void Tdb() {if (Tfds.SkipDb) return;
-		fx.Select_FloatStr_(Float_.XtoStr(Float_.Div(1, 3)));
+		fx.Select_FloatStr_(Float_.Xto_str(Float_.Div(1, 3)));
 		fx.RunAll(Db_provider_fxt.Tdb("110_dbs_multiple_data_types.dsv"));
 	}
 	@Test  public void Postgres() {if (Db_provider_fxt.SkipPostgres) return;
@@ -51,12 +51,12 @@ INSERT INTO dbs_multiple_data_types VALUES (1, 'John Doe', B'1', '3/30/2006 10:2
 class DataTypes_base_fxt {
 	public Db_provider Provider() {return provider;} Db_provider provider;
 	public DataTypes_base_fxt() {}
-	public void Rls() {provider.Rls();}
+	public void Rls() {provider.Conn_term();}
 	public String Select_FloatStr() {return select_FloatStr;} public DataTypes_base_fxt Select_FloatStr_(String v) {select_FloatStr = v; return this;} private String select_FloatStr;
 	public void RunAll(Db_provider provider) {
 		this.provider = provider;
 		this.Select_hook(select_FloatStr);
-		provider.Rls();
+		provider.Conn_term();
 	}
 	public void Select_hook(String floatStr) {
 		DataRdr rdr = Db_qry_.select_tbl_("dbs_multiple_data_types").Exec_qry_as_rdr(provider);

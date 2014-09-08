@@ -22,28 +22,28 @@ public class DecimalAdp__tst {
 		tst_divide_(1, 1000, "0.001");
 		tst_divide_(1, 3, "0.33333333333333");	
 		tst_divide_(1, 7, "0.14285714285714");	
-	}	void tst_divide_(int lhs, int rhs, String expd) {Tfds.Eq(expd, DecimalAdp_.divide_(lhs, rhs).XtoStr());}
+	}	void tst_divide_(int lhs, int rhs, String expd) {Tfds.Eq(expd, DecimalAdp_.divide_(lhs, rhs).Xto_str());}
 	@Test  public void base1000_() {
 		tst_base1000_(1000, "1");
 		tst_base1000_(1234, "1.234");
 		tst_base1000_(123, "0.123");
-	}	void tst_base1000_(int val, String expd) {Tfds.Eq(expd, DecimalAdp_.base1000_(val).XtoStr());}
+	}	void tst_base1000_(int val, String expd) {Tfds.Eq(expd, DecimalAdp_.base1000_(val).Xto_str());}
 	@Test  public void parts_() {
 		tst_parts_(1, 0, "1");
 		tst_parts_(1, 2, "1.2");
 		tst_parts_(1, 23, "1.23");
 		tst_parts_(123, 4567, "123.4567");
-	}	void tst_parts_(int num, int fracs, String expd) {Tfds.Eq(expd, DecimalAdp_.parts_(num, fracs).XtoStr());}
+	}	void tst_parts_(int num, int fracs, String expd) {Tfds.Eq(expd, DecimalAdp_.parts_(num, fracs).Xto_str());}
 	@Test  public void parse_() {
 		tst_parse_("1", "1");
 		tst_parse_("1.2", "1.2");
 		tst_parse_("0.1", "0.1");
-	}	void tst_parse_(String raw, String expd) {Tfds.Eq(expd, DecimalAdp_.parse_(raw).XtoStr());}
+	}	void tst_parse_(String raw, String expd) {Tfds.Eq(expd, DecimalAdp_.parse_(raw).Xto_str());}
 	@Test  public void Truncate_decimal() {
 		tst_Truncate_decimal("1", "1");
 		tst_Truncate_decimal("1.1", "1");
 		tst_Truncate_decimal("1.9", "1");
-	}	void tst_Truncate_decimal(String raw, String expd) {Tfds.Eq(DecimalAdp_.parse_(expd).XtoStr(), DecimalAdp_.parse_(raw).Op_truncate_decimal().XtoStr());}
+	}	void tst_Truncate_decimal(String raw, String expd) {Tfds.Eq(DecimalAdp_.parse_(expd).Xto_str(), DecimalAdp_.parse_(raw).Op_truncate_decimal().Xto_str());}
 	@Test  public void Fraction1000() {
 		tst_Fraction1000(1, 1000, 1);			// 0.001
 		tst_Fraction1000(1, 3, 333);			// 0.33333333
@@ -58,5 +58,5 @@ public class DecimalAdp__tst {
 		tst_XtoStr_fmt(1, 2, "0.0", "0.5");
 		tst_XtoStr_fmt(1, 3, "0.0", "0.3");
 		tst_XtoStr_fmt(10000, 7, "0,000.000", "1,428.571");
-	}	void tst_XtoStr_fmt(int l, int r, String fmt, String expd) {Tfds.Eq(expd, DecimalAdp_.divide_(l, r).XtoStr(fmt));}
+	}	void tst_XtoStr_fmt(int l, int r, String fmt, String expd) {Tfds.Eq(expd, DecimalAdp_.divide_(l, r).Xto_str(fmt));}
 }

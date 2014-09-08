@@ -75,19 +75,19 @@ public class Fsdb_db_abc_mgr implements RlsAble {
 		atr_mgr.Rls();
 		bin_mgr.Rls();
 		cfg_mgr.Rls();
-		boot_provider.Rls();
+		boot_provider.Conn_term();
 	}
 	private void Init_load(Io_url dir, Io_url boot_url) {
-		Db_connect connect = Db_connect_sqlite.load_(boot_url);
-		boot_provider = Db_provider_.new_(connect);
+		Db_conn_info connect = Db_conn_info__sqlite.load_(boot_url);
+		boot_provider = Db_provider_.new_and_open_(connect);
 		atr_mgr = Fsdb_db_atr_mgr.load_(this, boot_provider, dir);
 		bin_mgr = Fsdb_db_bin_mgr.load_(boot_provider, dir);
 		cfg_mgr = Fsdb_cfg_mgr.load_(this, boot_provider);
 		if (!cfg_mgr.Patch_next_id()) Fsdb_db_abc_mgr_.Patch_next_id(this, dir);
 	}
 	private void Init_make(Io_url dir, Io_url boot_url) {
-		Db_connect connect = Db_connect_sqlite.make_(boot_url);
-		boot_provider = Db_provider_.new_(connect);
+		Db_conn_info connect = Db_conn_info__sqlite.make_(boot_url);
+		boot_provider = Db_provider_.new_and_open_(connect);
 		Sqlite_engine_.Pragma_page_size_4096(boot_provider);
 		atr_mgr = Fsdb_db_atr_mgr.make_(this, boot_provider, dir);
 		bin_mgr = Fsdb_db_bin_mgr.make_(boot_provider, dir);

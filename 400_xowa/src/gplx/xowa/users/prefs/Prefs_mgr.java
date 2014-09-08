@@ -75,7 +75,7 @@ public class Prefs_mgr implements GfoInvkAble {
 		byte[] eval_code = hnde.Atrs_val_by_key_bry(Bry_prop);
 		if 	(eval_code == null) eval_code = hnde.Atrs_val_by_key_bry(Bry_prop_set);
 		String hnde_val = null;
-		String hnde_key = "xowa_prop_" + Int_.XtoStr(i);
+		String hnde_key = "xowa_prop_" + Int_.Xto_str(i);
 		Gfui_html html_box = html_box_mok == null ? app.Gui_mgr().Browser_win().Active_tab().Html_itm().Html_box() : html_box_mok;	// TEST:
 		byte elem_tid = Prefs_mgr.Elem_tid_tid_of(hnde);
 		switch (elem_tid) {

@@ -86,15 +86,16 @@ public class Swt_kit implements Gfui_kit {
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch())
 				display.sleep();
-		}
-		cursor.dispose();
+		}		
+		gui_wtr.Log_many("", "", "swt.kit.term:bgn");
+		cursor.dispose(); gui_wtr.Log_many("", "", "swt.kit.term:cursor");
 		Kit_term();
 	}
 	public void Kit_term() {
 		mode_is_shutdown = true; // NOTE: must mark kit as shutting down, else writing to status.bar will create stack overflow exception; DATE:2014-05-05
-		usrMsgWkr_Stop.Rls();
-		clipboard.Rls();
-		display.dispose();
+		usrMsgWkr_Stop.Rls(); gui_wtr.Log_many("", "", "swt.kit.term:usrMsgWkr");
+		clipboard.Rls(); gui_wtr.Log_many("", "", "swt.kit.term:clipboard");
+		display.dispose(); gui_wtr.Log_many("", "", "swt.kit.term:display");
 	}	private Swt_UsrMsgWkr_Stop usrMsgWkr_Stop;
 	public boolean Ask_yes_no(String grp_key, String msg_key, String fmt, Object... args) 		{
 		Swt_dlg_msg dlg = (Swt_dlg_msg)New_dlg_msg(ask_fmtr.Bld_str_many(ask_bfr, fmt, args)).Init_btns_(Gfui_dlg_msg_.Btn_yes, Gfui_dlg_msg_.Btn_no).Init_ico_(Gfui_dlg_msg_.Ico_question);

@@ -46,8 +46,8 @@ public class Hdump_load_mgr {
 		while (!rdr.Pos_is_eos()) {
 			int tid = rdr.Read_int_to_pipe();
 			switch (tid) {
-				case Hdump_data_tid.Tid_img		:
-				case Hdump_data_tid.Tid_gallery	: Load_data_img(); break;			// 1|0|220|110|A.png|commons/7/0/orig/A.png
+				case Hdump_data_tid.Tid_img		: Load_data_img(); break;				// 1|0|220|110|A.png|commons/7/0/orig/A.png
+				case Hdump_data_tid.Tid_gallery	: Load_data_gallery(hpg); break;		// 3|0|800
 				case Hdump_data_tid.Tid_redlink	: Load_data_redlink(hpg); break;		// 2|2|0|1
 			}
 		}
@@ -63,7 +63,7 @@ public class Hdump_load_mgr {
 		Hdump_data_img__base img_itm = null;
 		switch (tid) {
 			case Hdump_data_img__base.Tid_basic		: img_itm = new Hdump_data_img__basic().Init_by_base(uid, w, h, ttl, src); break;
-			case Hdump_data_img__base.Tid_gallery	: img_itm = new Hdump_data_img__gallery().Init_by_gallery(rdr.Read_int_to_pipe(), rdr.Read_int_to_pipe(), rdr.Read_int_to_pipe(), rdr.Read_int_to_pipe()).Init_by_base(uid, w, h, ttl, src); break;
+			case Hdump_data_img__base.Tid_gallery	: img_itm = new Hdump_data_img__gallery().Init_by_gallery(rdr.Read_int_to_pipe(), rdr.Read_int_to_pipe(), rdr.Read_int_to_pipe()).Init_by_base(uid, w, h, ttl, src); break;
 		}
 		rdr.Pos_add_one();
 		img_itms.Add(img_itm);
@@ -74,5 +74,10 @@ public class Hdump_load_mgr {
 		for (int i = 0; i < len; ++i)
 			redlink_uids[i] = rdr.Read_int_to_pipe();
 		hpg.Redlink_uids_(redlink_uids);
+	}
+	public void Load_data_gallery(Hdump_page hpg) {
+		int uid = rdr.Read_int_to_pipe();
+		int box_max = rdr.Read_int_to_pipe();
+		hpg.Gly_itms().Add(uid, new Hdump_data_gallery(uid, box_max));
 	}
 }

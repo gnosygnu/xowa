@@ -35,10 +35,10 @@ class Cache_cfg_mgr {
 	}
 	public void Db_when_new(Db_provider provider) {
 		cfg_tbl.Provider_(provider);
-		cfg_tbl.Insert_str(Cfg_grp, Cfg_key__next_id, Int_.XtoStr(1));
-		cfg_tbl.Insert_str(Cfg_grp, Cfg_key__cache_len, Long_.XtoStr(0));
-		cfg_tbl.Insert_str(Cfg_grp, Cfg_key__cache_min, Long_.XtoStr(cache_min));
-		cfg_tbl.Insert_str(Cfg_grp, Cfg_key__cache_max, Long_.XtoStr(cache_max));
+		cfg_tbl.Insert_str(Cfg_grp, Cfg_key__next_id, Int_.Xto_str(1));
+		cfg_tbl.Insert_str(Cfg_grp, Cfg_key__cache_len, Long_.Xto_str(0));
+		cfg_tbl.Insert_str(Cfg_grp, Cfg_key__cache_min, Long_.Xto_str(cache_min));
+		cfg_tbl.Insert_str(Cfg_grp, Cfg_key__cache_max, Long_.Xto_str(cache_max));
 	}
 	public void Db_save() {
 		if (update_stmt == null) update_stmt = cfg_tbl.Update_stmt();

@@ -71,7 +71,7 @@ public class Score_xnde implements Xox_xnde, Xop_xnde_atr_parser, Xoh_cmd_itm {
 		output_dir = app.Fsys_mgr().File_dir().GenSubDir_nest(wiki.Domain_str(), "lilypond", Char_.XtoStr(sha1[0]), Char_.XtoStr(sha1[1]), String_.new_ascii_(sha1));	// NOTE: MW also adds an extra level for 8-len; EX: /.../sha1_32_len/sha1_8_len/
 		png_file = output_dir.GenSubFil(sha1_prefix + ".png");
 		aud_file = output_dir.GenSubFil(sha1_prefix + ".midi");
-		hcmd_id = "xowa_score_" + Int_.XtoStr(page.Html_cmd_mgr().Count());
+		hcmd_id = "xowa_score_" + Int_.Xto_str(page.Html_cmd_mgr().Count());
 
 		html_id_pre = hcmd_id + "_pre";
 		html_id_img = hcmd_id + "_img";

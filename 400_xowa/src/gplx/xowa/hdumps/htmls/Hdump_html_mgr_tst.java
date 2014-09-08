@@ -20,7 +20,7 @@ import org.junit.*; import gplx.xowa.hdumps.core.*; import gplx.xowa.hdumps.dbs.
 public class Hdump_html_mgr_tst {
 	@Before public void init() {
 		fxt.Clear();
-		fxt.Init_img(0, 220, 110, "A.png", "commons.wikimedia.org/thumb/7/0/A.png/220.png");
+		fxt.Init_data_img_basic(0, 220, 110, "A.png", "commons.wikimedia.org/thumb/7/0/A.png/220.png");
 	}	private Hdump_html_mgr_fxt fxt = new Hdump_html_mgr_fxt();
 	@Test  public void Img() {
 		fxt	.Init_body("<img xowa_img='0' />")
@@ -69,7 +69,8 @@ public class Hdump_html_mgr_tst {
 	}
 	@Test  public void Gallery() {
 		fxt.Clear_imgs();
-		fxt	.Init_gly(0, 220, 110, "A.png", "commons.wikimedia.org/thumb/7/0/A.png/220.png", 800, 155, 150, 15);
+		fxt	.Init_data_gly(0, 800);
+		fxt	.Init_data_img_gly(0, 220, 110, "A.png", "commons.wikimedia.org/thumb/7/0/A.png/220.png", 155, 150, 15);
 		fxt	.Init_body(String_.Concat_lines_nl_skip_last
 		( "<ul xowa_gly_box_max='0'>"
 		, "  <li class='gallerybox' xowa_gly_box_w='0'>"
@@ -99,8 +100,9 @@ class Hdump_html_mgr_fxt {
 	}
 	public void Clear_imgs() {img_list.Clear();}
 	public Hdump_html_mgr_fxt Init_body(String body) {hpg.Page_body_(Bry_.new_utf8_(body)); return this;}
-	public Hdump_html_mgr_fxt Init_img(int id, int w, int h, String ttl, String src) {img_list.Add(new Hdump_data_img__basic().Init_by_base(id, w, h, Bry_.new_utf8_(ttl), Bry_.new_utf8_(src))); return this;}
-	public Hdump_html_mgr_fxt Init_gly(int id, int w, int h, String ttl, String src, int box_max, int box_w, int img_w, int img_pad) {img_list.Add(new Hdump_data_img__gallery().Init_by_gallery(box_max, box_w, img_w, img_pad).Init_by_base(id, w, h, Bry_.new_utf8_(ttl), Bry_.new_utf8_(src))); return this;}
+	public Hdump_html_mgr_fxt Init_data_gly(int uid, int box_max) {hpg.Gly_itms().Add(uid, new Hdump_data_gallery(uid, box_max)); return this;}
+	public Hdump_html_mgr_fxt Init_data_img_basic(int uid, int w, int h, String ttl, String src) {img_list.Add(new Hdump_data_img__basic().Init_by_base(uid, w, h, Bry_.new_utf8_(ttl), Bry_.new_utf8_(src))); return this;}
+	public Hdump_html_mgr_fxt Init_data_img_gly(int uid, int w, int h, String ttl, String src, int box_w, int img_w, int img_pad) {img_list.Add(new Hdump_data_img__gallery().Init_by_gallery(box_w, img_w, img_pad).Init_by_base(uid, w, h, Bry_.new_utf8_(ttl), Bry_.new_utf8_(src))); return this;}
 	public Hdump_html_mgr_fxt Test_html(String expd) {
 		if (img_list.Count() > 0) hpg.Img_itms_((Hdump_data_img__base[])img_list.XtoAryAndClear(Hdump_data_img__base.class));
 		html_mgr.Write(bfr, wiki, hpg);

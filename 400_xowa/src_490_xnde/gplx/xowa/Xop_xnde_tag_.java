@@ -150,7 +150,7 @@ public class Xop_xnde_tag_ {
 , Tag_cite = new_(Tid_cite, "cite").NoInline_()
 , Tag_dfn = new_(Tid_dfn, "dfn").NoInline_()
 , Tag_var = new_(Tid_var, "var").NoInline_()
-, Tag_u = new_(Tid_u, "u").NoInline_()
+, Tag_u = new_(Tid_u, "u").NoInline_().Repeat_ends_()	// PAGE:en.b:Textbook_of_Psychiatry/Alcoholism_and_Psychoactive_Substance_Use_Disorders; DATE:2014-09-05
 , Tag_ins = new_(Tid_ins, "ins").NoInline_()
 , Tag_abbr = new_(Tid_abbr, "abbr").NoInline_()
 , Tag_strike = new_(Tid_strike, "strike").NoInline_()

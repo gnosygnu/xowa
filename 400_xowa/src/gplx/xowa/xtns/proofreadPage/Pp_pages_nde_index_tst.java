@@ -166,7 +166,7 @@ public class Pp_pages_nde_index_tst {
 		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=3/>", "<p>c d e \n</p>\n");							// to omitted
 		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from='' to=3 />", "<p> a b c \n</p>\n");					// from is blank
 		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=3 to=''/>", "<p>c d e \n</p>\n");						// to is blank
-		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=3 to='4.' />", "<p>c d \n</p>\n");					// allow decimal-like number; EX:en.w:Haworth's/Chapter_XIX; DATE:2014-01-19
+		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=3 to='4.' />", "<p>c d \n</p>\n");					// allow decimal-like number; PAGE:en.w:Haworth's/Chapter_XIX; DATE:2014-01-19
 		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to=5 exclude=''3' />", "<p>a b c d e \n</p>\n");	// exclude is invalid; EX:fr.s:Sanguis_martyrum/Première_partie/I DATE:2014-01-18
 		fxt.Test_parse_page_wiki_str("<pages index=\"A\" exclude from=1 to=5 />", "<p>a b c d e \n</p>\n");			// exclude empty; ru.s:ПБЭ/Гуттен,_Ульрих_фон DATE:2014-02-22
 	}

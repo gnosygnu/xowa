@@ -209,7 +209,7 @@ public class Xog_bnd_mgr {
 	}
 	private void Init_itm(String cmd, int idx, int box, String ipt) {Init_itm(cmd, idx, box, IptArg_.parse_or_none_(ipt));}
 	private void Init_itm(String cmd, int idx, int box, IptArg ipt) {
-		String key = cmd + "-" + Int_.XtoStr(idx + ListAdp_.Base1);		// EX: xowa.widgets.url.focus-1 xowa.widgets.url.focus-2
+		String key = cmd + "-" + Int_.Xto_str(idx + ListAdp_.Base1);		// EX: xowa.widgets.url.focus-1 xowa.widgets.url.focus-2
 		Xog_bnd_itm itm = new Xog_bnd_itm(key, Bool_.Y, cmd, box, ipt);
 		boxs[box].Add(itm);
 		regy.Add(itm.Key(), itm);

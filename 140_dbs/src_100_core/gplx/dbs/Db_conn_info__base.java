@@ -16,14 +16,15 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-public abstract class Db_connect_base implements Db_connect {
-	public abstract String Key_of_db_connect();
-	public String Database() {return database;} public Db_connect_base Database_(String v) {database = v; return this;} private String database = "";
-	public String Server() {return server;} public Db_connect_base Server_(String v) {server = v; return this;} private String server = "";
-	public String Raw_of_db_connect() {return raw;} public Db_connect XtoStr_raw_(String v) {raw = v; return this;} private String raw = "";
-	public String Api_of_db_connect() {return api;} public Db_connect XtoStr_std_(String v) {api = v; return this;} private String api = "";
-	public abstract Db_connect Clone_of_db_connect(String raw, GfoMsg m);
+public abstract class Db_conn_info__base implements Db_conn_info {
+	public abstract String Key();
+	public String Database() {return database;} public Db_conn_info__base Database_(String v) {database = v; return this;} private String database = "";
+	public String Server() {return server;} public Db_conn_info__base Server_(String v) {server = v; return this;} private String server = "";
+	public String Str_raw() {return raw;} public Db_conn_info XtoStr_raw_(String v) {raw = v; return this;} private String raw = "";
+	public String Str_api() {return api;} public Db_conn_info XtoStr_std_(String v) {api = v; return this;} private String api = "";
+	public abstract Db_conn_info Make_new(String raw, GfoMsg m);
 	protected void Ctor_of_db_connect(String server, String database, String raw, String api) {this.server = server; this.database = database; this.raw = raw; this.api = api;}
+
 	protected static String BldApi(GfoMsg m, KeyVal... xtnAry) {
 		String_bldr sb = String_bldr_.new_();
 		HashAdp hash = HashAdp_.new_();

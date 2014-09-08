@@ -30,7 +30,7 @@ public class Pfunc_ifexpr extends Pf_func_base {
 			shunter.Err().Clear();
 		}
 		else {
-			if (is_nan || result.XtoInt() == 0)
+			if (is_nan || result.Xto_int() == 0)
 				bb.Add(Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, self_args_len, 1));
 			else
 				bb.Add(Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, self_args_len, 0));

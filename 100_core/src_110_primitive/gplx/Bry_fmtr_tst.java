@@ -53,6 +53,9 @@ public class Bry_fmtr_tst {
 		Bry_fmtr_fxt fxt = new Bry_fmtr_fxt().Clear();
 		fxt.Bld_bfr_many_and_set_fmt("a~{0}c", Object_.Ary("b"), "abc");
 	}
+	@Test  public void Escape_tilde() {
+		Tfds.Eq("~~~~~~", Bry_fmtr.Escape_tilde("~~~"));
+	}
 }
 class Bry_fmtr_tst_mok implements Bry_fmtr_eval_mgr {
 	public boolean Enabled() {return enabled;} public void Enabled_(boolean v) {enabled = v;} private boolean enabled;

@@ -19,15 +19,15 @@ package gplx.dbs; import gplx.*;
 import gplx.stores.*;
 import java.sql.*; 
 class Sqlite_engine extends Db_engine_sql_base {
-	@Override public String Key() {return Db_connect_sqlite.KeyDef;}
-	@Override public Db_engine MakeEngine(Db_connect connectInfo) {
+	@Override public String Key() {return Db_conn_info__sqlite.Key_const;}
+	@Override public Db_engine Make_new(Db_conn_info connectInfo) {
 		Sqlite_engine rv = new Sqlite_engine();
 		rv.ctor_SqlEngineBase(connectInfo);
 		return rv;
 	}
 	@Override public DataRdr NewDataRdr(ResultSet rdr, String commandText) {return Sqlite_rdr.new_(rdr, commandText);}
 		static boolean loaded = false; 
-	@gplx.Internal @Override protected Connection NewDbCon() {
+	@gplx.Internal @Override protected Connection Conn_new() {
 		if (!loaded) {
 			try {
 				Class.forName("org.sqlite.JDBC");
@@ -35,7 +35,7 @@ class Sqlite_engine extends Db_engine_sql_base {
 			catch (ClassNotFoundException e) {throw Err_.new_("could not load sqlite jdbc driver");}
 			loaded = true;					
 		}
-		Db_connect_sqlite connUrl = (Db_connect_sqlite)dbInfo;
+		Db_conn_info__sqlite connUrl = (Db_conn_info__sqlite)conn_info;
 		return NewDbCon("jdbc:sqlite://" + String_.Replace(connUrl.Database(), "\\", "/"), "", "");
 	}
 	private boolean pragma_needed = true; 

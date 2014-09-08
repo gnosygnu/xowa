@@ -222,7 +222,7 @@ public class Xow_wiki implements GfoInvkAble {
 		Io_url sqlite_url = Xodb_mgr_sql.Find_core_url(this);
 		if (sqlite_url != null) {
 			Xodb_mgr_sql db_mgr_sql = this.Db_mgr_create_as_sql();
-			db_mgr_sql.Init_load(gplx.dbs.Db_connect_.sqlite_(sqlite_url));
+			db_mgr_sql.Init_load(gplx.dbs.Db_conn_info_.sqlite_(sqlite_url));
 			db_mgr_sql.Html_db_enabled_(hdump_enabled);
 		}
 		if (!Xob_import_marker.Check(this)) {app.Wiki_mgr().Del(domain_bry); init_needed = false; return;}	// NOTE: must call after Db_mgr_create_as_sql(); also, must delete wiki from mgr; DATE:2014-08-24

@@ -47,6 +47,7 @@ public class Db_qry_ {
 	}
 	public static final Object WhereAll = null;
 	public static Db_qry as_(Object obj) {return obj instanceof Db_qry ? (Db_qry)obj : null;}
+	public static final int Tid_basic = 0, Tid_select_in_tbl = 1;
 }
 interface Db_qryWkr {
 	Object Exec(Db_engine engine, Db_qry cmd);

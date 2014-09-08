@@ -54,7 +54,7 @@ public class Xol_num_fmtr_base implements GfoInvkAble {
 		}
 		return tmp.XtoAryAndClear();
 	}
-	public byte[] Fmt(int val) {return Fmt(Bry_.new_ascii_(Int_.XtoStr(val)));}
+	public byte[] Fmt(int val) {return Fmt(Bry_.new_ascii_(Int_.Xto_str(val)));}
 	public byte[] Fmt(byte[] src) {	// SEE: DOC_1:Fmt
 		int src_len = src.length;
 		int num_bgn = -1, dec_pos = -1;

@@ -21,8 +21,8 @@ public class Xog_html_js_cbk_tst {
 	@Before public void init() {fxt.Clear();} private Xog_html_js_cbk_fxt fxt = new Xog_html_js_cbk_fxt();
 	@Test   public void Get_title() {
 		fxt.Fxt().Init_page_create("exists");
-		fxt.Test_get_title("exists", "1" , "0" , Int_.XtoStr(Int_.MinValue), "Exists", "false", "0001-01-01 00:00:00", "0");
-		fxt.Test_get_title("absent", "0", "-1", Int_.XtoStr(Int_.MinValue), null	, "false", "0001-01-01 00:00:00", "0");
+		fxt.Test_get_title("exists", "1" , "0" , Int_.Xto_str(Int_.MinValue), "Exists", "false", "0001-01-01 00:00:00", "0");
+		fxt.Test_get_title("absent", "0", "-1", Int_.Xto_str(Int_.MinValue), null	, "false", "0001-01-01 00:00:00", "0");
 	}
 }
 class Xog_html_js_cbk_fxt {

@@ -21,7 +21,7 @@ public class Gfo_usr_dlg_fmt {
 		if (cur < prog_prv + prog_interval) return usr_dlg.Canceled();
 		prog_prv = cur;
 		String pct = DecimalAdp_.CalcPctStr(cur + ListAdp_.Base1, end, "00.00");
-		usr_dlg.Prog_many(grp_key, msg_key, fmt, Int_.XtoStr_PadBgn(cur + ListAdp_.Base1, endLen), end, pct);
+		usr_dlg.Prog_many(grp_key, msg_key, fmt, Int_.Xto_str_pad_bgn(cur + ListAdp_.Base1, endLen), end, pct);
 		return usr_dlg.Canceled();
 	}	String fmt; int end, endLen;
 	public static Gfo_usr_dlg_fmt fmt_(String grp_key, String msg_key, String fmt, int end, float pct) {

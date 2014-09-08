@@ -33,7 +33,7 @@ public class Xodb_fsys_mgr {
 		for (int i = 0; i < files_ary_len; i++) {
 			Xodb_file file = files_ary[i];
 			Io_url url = trg_dir.GenSubFil(file.Url_rel());	// relative name only
-			file.Connect_(Db_connect_.sqlite_(url)).Url_(url);
+			file.Connect_(Db_conn_info_.sqlite_(url)).Url_(url);
 			switch (file.Tid()) {
 				case Xodb_file_tid.Tid_core					: file.Provider_(p); Set_file_core(file); break;
 				case Xodb_file_tid.Tid_category				: if (category_provider_core_null) {Provider_ctg_(file); category_provider_core_null = false;} break;
@@ -80,13 +80,13 @@ public class Xodb_fsys_mgr {
 		for (int i = 0; i < files_ary_len; i++) {
 			Xodb_file file = files_ary[i];
 			if (Byte_.In(file.Tid(), tids))
-				Sqlite_engine_.Idx_create(usr_dlg, file.Provider(), Int_.XtoStr(file.Id()), idxs);
+				Sqlite_engine_.Idx_create(usr_dlg, file.Provider(), Int_.Xto_str(file.Id()), idxs);
 		}
 	}
 	public Xodb_file Make(byte file_tid) {
 		int file_idx = files_ary_len;
 		Io_url url = Create_sqlite3(src_dir, trg_dir, wiki_name, file_idx);
-		Xodb_file rv = Xodb_file.make_(file_idx, file_tid, url.NameAndExt()).Connect_(Db_connect_.sqlite_(url));
+		Xodb_file rv = Xodb_file.make_(file_idx, file_tid, url.NameAndExt()).Connect_(Db_conn_info_.sqlite_(url));
 		Xodb_xowa_cfg_tbl.Insert_str(rv.Provider(), "db.meta", "type_name", Xodb_file_tid.Xto_key(file_tid));
 		files_ary = (Xodb_file[])Array_.Resize(files_ary, files_ary_len + 1);
 		files_ary[files_ary_len++] = rv;
@@ -98,7 +98,7 @@ public class Xodb_fsys_mgr {
 	}
 	private static Io_url Create_sqlite3(Io_url src_dir, Io_url trg_dir, String wiki_name, int file_idx) {
 		Io_url src_fil = src_dir.GenSubFil("xowa.sqlite3");	 // /bin/any/sql/xowa/xowa.sqlite3
-		Io_url trg_fil = trg_dir.GenSubFil_ary(wiki_name, ".", Int_.XtoStr_PadBgn(file_idx, 3), ".sqlite3"); // /wiki/en.wikipedia.org/en.wikipedia.org.000.sqlite3
+		Io_url trg_fil = trg_dir.GenSubFil_ary(wiki_name, ".", Int_.Xto_str_pad_bgn(file_idx, 3), ".sqlite3"); // /wiki/en.wikipedia.org/en.wikipedia.org.000.sqlite3
 		Io_mgr._.CopyFil(src_fil, trg_fil, true);
 		return trg_fil;
 	}

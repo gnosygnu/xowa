@@ -22,11 +22,12 @@ class Xob_orig_regy_tbl {
 	public static void Create_data(Gfo_usr_dlg usr_dlg, Db_provider p, Xodb_db_file file_registry_db, boolean repo_0_is_remote, Xow_wiki repo_0_wiki, Xow_wiki repo_1_wiki, boolean wiki_ns_for_file_is_case_match_all) {
 		usr_dlg.Prog_many("", "", "inserting lnki_regy");
 		p.Exec_sql(Sql_create_data);
-		Sqlite_engine_.Idx_create(usr_dlg, p, "orig_regy", Idx_ttl);
+		Sqlite_engine_.Idx_create(usr_dlg, p, "orig_regy", Idx_ttl_local);
 		Sqlite_engine_.Db_attach(p, "page_db", file_registry_db.Url().Raw());
 		Io_url repo_0_dir = repo_0_wiki.Fsys_mgr().Root_dir(), repo_1_dir = repo_1_wiki.Fsys_mgr().Root_dir();
 		byte repo_0_tid = Xof_repo_itm.Repo_local, repo_1_tid = Xof_repo_itm.Repo_remote;
 		boolean local_is_remote = Bry_.Eq(repo_0_wiki.Domain_bry(), repo_1_wiki.Domain_bry());
+		Xow_wiki local_wiki = repo_0_wiki;
 		if (	repo_0_is_remote														// .gfs manually marked specifes repo_0 as remote
 			||	(	Bry_.Eq(repo_0_wiki.Domain_bry(), Xow_wiki_.Domain_commons_bry)		// repo_0 = commons; force repo_0 to be remote; else all orig_repo will be 1; DATE:2014-02-01
 				&&	local_is_remote														// repo_0 = repo_1
@@ -34,29 +35,34 @@ class Xob_orig_regy_tbl {
 			) {
 			repo_0_tid = Xof_repo_itm.Repo_remote;
 			repo_1_tid = Xof_repo_itm.Repo_local;
+			local_wiki = repo_1_wiki;
 		}
-		Create_data_for_repo(usr_dlg, p, Byte_.int_(repo_0_tid), repo_0_dir.GenSubFil(Xodb_db_file.Name__wiki_image));
+		Create_data_for_repo(usr_dlg, p, local_wiki, Byte_.int_(repo_0_tid), repo_0_dir.GenSubFil(Xodb_db_file.Name__wiki_image));
 		if (!local_is_remote) {	// only run for repo_1 if local != remote; only affects commons
-			Create_data_for_repo(usr_dlg, p, Byte_.int_(repo_1_tid), repo_1_dir.GenSubFil(Xodb_db_file.Name__wiki_image));
+			Create_data_for_repo(usr_dlg, p, local_wiki, Byte_.int_(repo_1_tid), repo_1_dir.GenSubFil(Xodb_db_file.Name__wiki_image));
 			if (wiki_ns_for_file_is_case_match_all) {
 				Io_url repo_remote_dir = repo_0_is_remote ? repo_0_dir : repo_1_dir;
-				Create_data_for_cs(usr_dlg, p, repo_remote_dir);
+				Create_data_for_cs(usr_dlg, p, local_wiki, repo_remote_dir);
 			}
 		}
 		Sqlite_engine_.Db_detach(p, "page_db");
 		Sqlite_engine_.Idx_create(usr_dlg, p, "orig_regy", Idx_xfer_temp);
 	}
-	private static void Create_data_for_repo(Gfo_usr_dlg usr_dlg, Db_provider cur, byte wiki_tid, Io_url join) {
+	private static void Create_data_for_repo(Gfo_usr_dlg usr_dlg, Db_provider cur, Xow_wiki local_wiki, byte repo_tid, Io_url join) {
 		usr_dlg.Note_many("", "", "inserting page for xowa.wiki.image: ~{0}", join.OwnerDir().NameOnly());
+		boolean wiki_has_cs_file = repo_tid == Xof_repo_itm.Repo_remote && local_wiki.Ns_mgr().Ns_file().Case_match() == Xow_ns_case_.Id_all;
+		String lnki_ttl_fld = wiki_has_cs_file ? "Coalesce(o.lnki_commons_ttl, o.lnki_ttl)" : "o.lnki_ttl";	// NOTE: use lnki_commons_ttl if [[File]] is cs PAGE:en.d:water EX:[[image:wikiquote-logo.png|50px|none|alt=]]; DATE:2014-09-05
+		if (wiki_has_cs_file)
+			Sqlite_engine_.Idx_create(usr_dlg, cur, "orig_regy", Idx_ttl_remote);
 		Sqlite_engine_.Db_attach(cur, "image_db", join.Raw());
-		cur.Exec_sql(String_.Format(Sql_update_repo_page, wiki_tid));
-		cur.Exec_sql(String_.Format(Sql_update_repo_redirect, wiki_tid));
+		cur.Exec_sql(String_.Format(Sql_update_repo_page, repo_tid, lnki_ttl_fld));
+		cur.Exec_sql(String_.Format(Sql_update_repo_redirect, repo_tid, lnki_ttl_fld));
 		Sqlite_engine_.Db_detach(cur, "image_db");
 	}
-	private static void Create_data_for_cs(Gfo_usr_dlg usr_dlg, Db_provider p, Io_url repo_remote_dir) {
+	private static void Create_data_for_cs(Gfo_usr_dlg usr_dlg, Db_provider p, Xow_wiki local_wiki, Io_url repo_remote_dir) {
 		p.Exec_sql(Xob_orig_regy_tbl.Sql_cs_mark_dupes);	// orig_regy: find dupes; see note in SQL
 		p.Exec_sql(Xob_orig_regy_tbl.Sql_cs_update_ttls);	// orig_regy: update lnki_ttl with lnki_commons_ttl
-		Create_data_for_repo(usr_dlg, p, Xof_repo_itm.Repo_remote, repo_remote_dir.GenSubFil(Xodb_db_file.Name__wiki_image));
+		Create_data_for_repo(usr_dlg, p, local_wiki, Xof_repo_itm.Repo_remote, repo_remote_dir.GenSubFil(Xodb_db_file.Name__wiki_image));
 		p.Exec_sql(Xob_lnki_regy_tbl.Sql_cs_mark_changed);	// lnki_regy: update lnki_commons_flag
 		p.Exec_sql(Xob_lnki_regy_tbl.Sql_cs_update_ttls);	// lnki_regy: update cs
 	}
@@ -68,8 +74,9 @@ class Xob_orig_regy_tbl {
 	, Fld_orig_media_type = "orig_media_type", Fld_orig_minor_mime = "orig_minor_mime", Fld_orig_file_ext = "orig_file_ext", Fld_orig_timestamp = "orig_timestamp"
 	;
 	private static final Db_idx_itm
-		Idx_ttl     		= Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS orig_regy__ttl           ON orig_regy (lnki_ttl);")
-	,   Idx_xfer_temp 		= Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS orig_regy__xfer_temp     ON orig_regy (lnki_ttl, orig_file_ttl, orig_timestamp);")
+	  Idx_ttl_local     	= Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS orig_regy__ttl_local  ON orig_regy (lnki_ttl);")
+	, Idx_ttl_remote     	= Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS orig_regy__ttl_remote ON orig_regy (lnki_commons_ttl, lnki_ttl);")
+	, Idx_xfer_temp			= Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS orig_regy__xfer_temp  ON orig_regy (lnki_ttl, orig_file_ttl, orig_timestamp);")
 	;
 	private static final String
 		Tbl_sql = String_.Concat_lines_nl
@@ -134,9 +141,9 @@ class Xob_orig_regy_tbl {
 	,	",       i.img_minor_mime"
 	,	",       i.img_timestamp"
 	,	"FROM    orig_regy o"
-	,	"        JOIN image_db.image i ON o.lnki_ttl = i.img_name"
-	,	"        JOIN page_db.page_regy m ON m.repo_id = {0} AND m.itm_tid = 0 AND o.lnki_ttl = m.src_ttl"
-	,	"WHERE o.orig_file_ttl IS NULL"						// NOTE: only insert if file doesn't exist; changed from timestamp b/c old images may exist in both wikis; EX:ar.n:File:Facebook.png; DATE:2014-08-20
+	,	"        JOIN image_db.image i ON {1} = i.img_name"
+	,	"        JOIN page_db.page_regy m ON m.repo_id = {0} AND m.itm_tid = 0 AND {1} = m.src_ttl"
+	,	"WHERE   o.orig_file_ttl IS NULL"					// NOTE: only insert if file doesn't exist; changed from timestamp b/c old images may exist in both wikis; EX:ar.n:File:Facebook.png; DATE:2014-08-20
 	// ,	"WHERE   i.img_timestamp > o.orig_timestamp"	// NOTE: this handles an image in local and remote by taking later version; DATE:2014-07-22
 	,	"ORDER BY 1"	// must order by lnki_id since it is PRIMARY KEY, else sqlite will spend hours shuffling rows in table
 	,	";"
@@ -164,9 +171,9 @@ class Xob_orig_regy_tbl {
 	,	",       i.img_minor_mime"
 	,	",       i.img_timestamp"
 	,	"FROM    orig_regy o"
-	,	"        JOIN page_db.page_regy m ON m.repo_id = {0} AND m.itm_tid = 1 AND o.lnki_ttl = m.src_ttl"
+	,	"        JOIN page_db.page_regy m ON m.repo_id = {0} AND m.itm_tid = 1 AND {1} = m.src_ttl"
 	,	"            JOIN image_db.image i ON m.trg_ttl = i.img_name"
-	,	"WHERE o.orig_file_ttl IS NULL"						// NOTE: only insert if file doesn't exist; changed from timestamp b/c old images may exist in both wikis; EX:ar.n:File:Facebook.png; DATE:2014-08-20
+	,	"WHERE   o.orig_file_ttl IS NULL"						// NOTE: only insert if file doesn't exist; changed from timestamp b/c old images may exist in both wikis; EX:ar.n:File:Facebook.png; DATE:2014-08-20
 	// ,	"WHERE   i.img_timestamp > o.orig_timestamp"	// NOTE: this handles an image in local and remote by taking later version; DATE:2014-07-22
 	,	"ORDER BY 1"	// must order by lnki_id since it is PRIMARY KEY, else sqlite will spend hours shuffling rows in table
 	,	";"

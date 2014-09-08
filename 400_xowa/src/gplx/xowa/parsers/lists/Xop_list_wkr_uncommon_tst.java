@@ -22,144 +22,150 @@ public class Xop_list_wkr_uncommon_tst {
 	@After public void term() {fxt.Init_para_n_();}
 	@Test  public void Bug_specified_div() {	// FIX: </div> was not clearing state for lnki; PAGE:en.w:Ananke (moon)
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
-			(	"<div>"
-			,	"#<i>a"
-			,	"</div>"
-			,	"*b"
-			) ,	String_.Concat_lines_nl_skip_last
-			(	"<div>"
-			,	"<ol>"
-			,	"  <li><i>a"
-			,	"</i>"
-			,	"  </li>"
-			,	"</ol></div>"
-			,	"<ul>"
-			,	"  <li>b"
-			,	"  </li>"
-			,	"</ul>"
-			));
+		( "<div>"
+		, "#<i>a"
+		, "</div>"
+		, "*b"
+		), String_.Concat_lines_nl_skip_last
+		( "<div>"
+		, "<ol>"
+		, "  <li><i>a"
+		, "</i>"
+		, "  </li>"
+		, "</ol></div>"
+		, "<ul>"
+		, "  <li>b"
+		, "  </li>"
+		, "</ul>"
+		));
 	}
 	@Test  public void Bug_mismatched() {	// FIX: </div> was not clearing state for lnki; PAGE:en.w:Ananke (moon)
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
-			(	"::a"
-			,	":::1"
-			,	"::::11"
-			,	":::::111"
-			,	"::b"
-			) ,	String_.Concat_lines_nl_skip_last
-			(	"<dl>"
-			,	"  <dd>"
-			,	"    <dl>"
-			,	"      <dd>a"
-			,	"        <dl>"
-			,	"          <dd>1"
-			,	"            <dl>"
-			,	"              <dd>11"
-			,	"                <dl>"
-			,	"                  <dd>111"
-			,	"                  </dd>"
-			,	"                </dl>"
-			,	"              </dd>"
-			,	"            </dl>"
-			,	"          </dd>"
-			,	"        </dl>"
-			,	"      </dd>"
-			,	"      <dd>b"
-			,	"      </dd>"
-			,	"    </dl>"
-			,	"  </dd>"
-			,	"</dl>"
-			));
+		( "::a"
+		, ":::1"
+		, "::::11"
+		, ":::::111"
+		, "::b"
+		), String_.Concat_lines_nl_skip_last
+		( "<dl>"
+		, "  <dd>"
+		, "    <dl>"
+		, "      <dd>a"
+		, "        <dl>"
+		, "          <dd>1"
+		, "            <dl>"
+		, "              <dd>11"
+		, "                <dl>"
+		, "                  <dd>111"
+		, "                  </dd>"
+		, "                </dl>"
+		, "              </dd>"
+		, "            </dl>"
+		, "          </dd>"
+		, "        </dl>"
+		, "      </dd>"
+		, "      <dd>b"
+		, "      </dd>"
+		, "    </dl>"
+		, "  </dd>"
+		, "</dl>"
+		));
 	}
-	@Test  public void Empty_li_ignored() {	// PURPOSE: inner template can cause dupe li; PAGE:en.w:any Calendar day and NYT link; EX: 1/1
+	@Test  public void Empty_li_ignored() {	// PURPOSE: inner template can cause dupe li; PAGE:en.w:any Calendar day and NYT link; NOTE:deactivated prune_empty_list logic; DATE:2014-09-05
 		fxt.Init_para_y_();
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
-			(	"*a"
-			,	"*    "
-			,	"*b"
-			,	"*c"
-			) ,	String_.Concat_lines_nl_skip_last
-			(	"<ul>"
-			,	"  <li>a"
-			,	"  </li>"
-			,	"  <li>b"
-			,	"  </li>"
-			,	"  <li>c"
-			,	"  </li>"
-			,	"</ul>"
-			,	""
-			));
+		( "*a"
+		, "*    "
+		, "*b"
+		, "*c"
+		), String_.Concat_lines_nl_skip_last
+		( "<ul>"
+		, "  <li>a"
+		, "  </li>"
+		, "  <li>    "
+		, "  </li>"
+		, "  <li>b"
+		, "  </li>"
+		, "  <li>c"
+		, "  </li>"
+		, "</ul>"
+		, ""
+		));
 		fxt.Init_para_n_();
 	}
 	@Test  public void List_in_tblw() {	// PURPOSE: list inside table should not be close outer list; PAGE:en.w:Cato the Elder
 		fxt.Init_para_y_();
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
-			(	"*a"
-			,	"{|"
-			,	"|b"
-			,	"::c"
-			,	"|}"
-			) ,	String_.Concat_lines_nl_skip_last
-			(	"<ul>"
-			,	"  <li>a"
-			,	"  </li>"
-			,	"</ul>"
-			,	"<table>"
-			,	"  <tr>"
-			,	"    <td>b"
-			,	""
-			,	"      <dl>"
-			,	"        <dd>"
-			,	"          <dl>"
-			,	"            <dd>c"
-			,	"            </dd>"
-			,	"          </dl>"
-			,	"        </dd>"
-			,	"      </dl>"
-			,	"    </td>"
-			,	"  </tr>"
-			,	"</table>"
-			,	""
-			));
+		( "*a"
+		, "{|"
+		, "|b"
+		, "::c"
+		, "|}"
+		), String_.Concat_lines_nl_skip_last
+		( "<ul>"
+		, "  <li>a"
+		, "  </li>"
+		, "</ul>"
+		, "<table>"
+		, "  <tr>"
+		, "    <td>b"
+		, ""
+		, "      <dl>"
+		, "        <dd>"
+		, "          <dl>"
+		, "            <dd>c"
+		, "            </dd>"
+		, "          </dl>"
+		, "        </dd>"
+		, "      </dl>"
+		, "    </td>"
+		, "  </tr>"
+		, "</table>"
+		, ""
+		));
 		fxt.Init_para_n_();
 	}
-	@Test  public void Dt_dd_colon_at_eol() {		// PURPOSE: dangling ":" should not put next line in <dt>; PAGE:en.w:Stein; b was being wrapped in <dt>b</dt>
+	@Test  public void Dt_dd_colon_at_eol() {		// PURPOSE: dangling ":" should not put next line in <dt>; PAGE:en.w:Stein; b was being wrapped in <dt>b</dt>; NOTE:deactivated prune_empty_list logic; DATE:2014-09-05
 		fxt.Init_para_y_();
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
-			(	";a:"
-			,	"*b"
-			,	""
-			,	";c"
-			,	"*d"
-			) ,	String_.Concat_lines_nl_skip_last
-			(	"<dl>"
-			,	"  <dt>a"
-			,	"  </dt>"
-			,	"</dl>"
-			,	"<ul>"
-			,	"  <li>b"
-			,	"  </li>"
-			,	"</ul>"
-			,	""
-			,	"<dl>"
-			,	"  <dt>c"
-			,	"  </dt>"
-			,	"</dl>"
-			,	"<ul>"
-			,	"  <li>d"
-			,	"  </li>"
-			,	"</ul>"
-			,	""
-			));
+		( ";a:"
+		, "*b"
+		, ""
+		, ";c"
+		, "*d"
+		), String_.Concat_lines_nl_skip_last
+		( "<dl>"
+		, "  <dt>a"
+		, "  </dt>"
+		,   "  <dd>"
+		,   "  </dd>"
+		, "</dl>"
+		, "<ul>"
+		, "  <li>b"
+		, "  </li>"
+		, "</ul>"
+		, ""
+		, "<dl>"
+		, "  <dt>c"
+		, "  </dt>"
+		, "</dl>"
+		, "<ul>"
+		, "  <li>d"
+		, "  </li>"
+		, "</ul>"
+		, ""
+		));
 		fxt.Init_para_n_();
 	}
-	@Test  public void Dd_should_not_print_colon() {// PURPOSE: ;a:\n should show as ";a" not ";a:". colon should still be considered as part of empty list; DATE:2013-11-07
+	@Test  public void Dd_should_not_print_colon() {// PURPOSE: ;a:\n should show as ";a" not ";a:". colon should still be considered as part of empty list; DATE:2013-11-07; NOTE:deactivated prune_empty_list logic; DATE:2014-09-05
 		fxt.Test_parse_page_all_str
 		( ";a:\nb"
 		,	String_.Concat_lines_nl_skip_last
 		( "<dl>"
 		, "  <dt>a"
 		, "  </dt>"
+		, "  <dd>"
+		, "  </dd>"
 		, "</dl>"
 		, "b"
 		));		
@@ -167,160 +173,170 @@ public class Xop_list_wkr_uncommon_tst {
 	@Test  public void Dt_dd_colon_in_lnki() {	// PURPOSE: "; [[Portal:a]]" should not split lnki; PAGE:en.w:Wikipedia:WikiProject Military history/Operation Majestic Titan; "; [[Wikipedia:WikiProject Military history/Operation Majestic Titan/Phase I|Phase I]]: a b"
 		fxt.Init_para_y_();
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
-			(	";[[Portal:a]]"
-			) ,	String_.Concat_lines_nl_skip_last
-			(	"<dl>"
-			,	"  <dt><a href=\"/wiki/Portal:A\">Portal:A</a>"
-			,	"  </dt>"
-			,	"</dl>"
-			,	""
-			));
+		( ";[[Portal:a]]"
+		), String_.Concat_lines_nl_skip_last
+		( "<dl>"
+		, "  <dt><a href=\"/wiki/Portal:A\">Portal:A</a>"
+		, "  </dt>"
+		, "</dl>"
+		, ""
+		));
 		fxt.Init_para_n_();
 	}			
 	@Test  public void Max_list_depth() {	// PURPOSE: 256+ * caused list parser to fail; ignore; PAGE:en.w:Bariatric surgery
 		String multiple = String_.Repeat("*", 300);
-		fxt.Test_parse_page_all_str(multiple
-				,	String_.Concat_lines_nl_skip_last
-				(	multiple
-				));
+		fxt.Test_parse_page_all_str(multiple, multiple);
 	}
 	@Test  public void Numbered_list_resets_incorrectly() {	// PURPOSE: as description
 		fxt.Init_para_y_();
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
-			(	"#A"
-			,	"#*Aa"
-			,	"#**Aaa"
-			,	"#*Ab"
-			,	"#B"
-			) ,	String_.Concat_lines_nl_skip_last
-			(	"<ol>"
-			,	"  <li>A"
-			,	""
-			,	"    <ul>"
-			,	"      <li>Aa"
-			,	""
-			,	"        <ul>"
-			,	"          <li>Aaa"
-			,	"          </li>"
-			,	"        </ul>"
-			,	"      </li>"
-			,	"      <li>Ab"
-			,	"      </li>"
-			,	"    </ul>"	// was showing as </ol>
-			,	"  </li>"
-			,	"  <li>B"
-			,	"  </li>"
-			,	"</ol>"
-			,	""
-			));
+		( "#A"
+		, "#*Aa"
+		, "#**Aaa"
+		, "#*Ab"
+		, "#B"
+		), String_.Concat_lines_nl_skip_last
+		( "<ol>"
+		, "  <li>A"
+		, ""
+		, "    <ul>"
+		, "      <li>Aa"
+		, ""
+		, "        <ul>"
+		, "          <li>Aaa"
+		, "          </li>"
+		, "        </ul>"
+		, "      </li>"
+		, "      <li>Ab"
+		, "      </li>"
+		, "    </ul>"	// was showing as </ol>
+		, "  </li>"
+		, "  <li>B"
+		, "  </li>"
+		, "</ol>"
+		, ""
+		));
 		fxt.Init_para_n_();
 	}			
 	@Test   public void List_should_not_end_indented_table() {// PURPOSE: :{| was being closed by \n*; EX:w:Maxwell's equations; DATE:20121231
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
-			(	":{|"
-			,	"|-"
-			,	"|"
-			,	"*a"
-			,	"|b"
-			,	"|}"
-			) ,	String_.Concat_lines_nl_skip_last
-			(	"<dl>"
-			,	"  <dd>"
-			,	"    <table>"
-			,	"      <tr>"
-			,	"        <td>"
-			,	"          <ul>"
-			,	"            <li>a"
-			,	"            </li>"
-			,	"          </ul>"
-			,	"        </td>"
-			,	"        <td>b"
-			,	"        </td>"
-			,	"      </tr>"
-			,	"    </table>"
-			,	"  </dd>"
-			,	"</dl>"
-			));
+		( ":{|"
+		, "|-"
+		, "|"
+		, "*a"
+		, "|b"
+		, "|}"
+		), String_.Concat_lines_nl_skip_last
+		( "<dl>"
+		, "  <dd>"
+		, "    <table>"
+		, "      <tr>"
+		, "        <td>"
+		, "          <ul>"
+		, "            <li>a"
+		, "            </li>"
+		, "          </ul>"
+		, "        </td>"
+		, "        <td>b"
+		, "        </td>"
+		, "      </tr>"
+		, "    </table>"
+		, "  </dd>"
+		, "</dl>"
+		));
 	}
 	@Test  public void Dt_dd_broken_by_xnde() {	// PURPOSE.fix: xnde was resetting dl incorrectly; EX:w:Virus; DATE:2013-01-31 
 		fxt.Test_parse_page_all_str(";<b>a</b>:c"
-		,	String_.Concat_lines_nl_skip_last
-		(	"<dl>"
-		,	"  <dt><b>a</b>"
-		,	"  </dt>"
-		,	"  <dd>c"
-		,	"  </dd>"
-		,	"</dl>"
+		, String_.Concat_lines_nl_skip_last
+		( "<dl>"
+		, "  <dt><b>a</b>"
+		, "  </dt>"
+		, "  <dd>c"
+		, "  </dd>"
+		, "</dl>"
 		));		
 	}
-	@Test   public void Trim_empty_list_items() {	// PURPOSE: empty list items should be ignored; DATE:2013-07-02
-		fxt.Test_parse_page_all_str("***   \n"
-		,	String_.Concat_lines_nl_skip_last
-		(	""
+	@Test   public void Trim_empty_list_items() {	// PURPOSE: empty list items should be ignored; DATE:2013-07-02; NOTE:deactivated prune_empty_list logic; DATE:2014-09-05
+		fxt.Test_parse_page_all_str
+		("***   \n"
+		, String_.Concat_lines_nl_skip_last
+		( "<ul>"
+		, "  <li>"
+		, "    <ul>"
+		, "      <li>"
+		, "        <ul>"
+		, "          <li>   "
+		, "          </li>"
+		, "        </ul>"
+		, "      </li>"
+		, "    </ul>"
+		, "  </li>"
+		, "</ul>"
+		, ""
 		));		
 	}
-	@Test   public void Trim_empty_list_items_error() {	// PURPOSE.fix: do not add empty itm's nesting to current list; DATE:2013-07-07
+	@Test   public void Trim_empty_list_items_error() {	// PURPOSE.fix: do not add empty itm's nesting to current list; DATE:2013-07-07; NOTE:deactivated prune_empty_list logic; DATE:2014-09-05
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
-		(	"* a"
-		,	"** "	// do not add ** to nest
-		,	"*** b"
-		,	"* c"
-		) ,	String_.Concat_lines_nl
-		(	"<ul>"
-		,	"  <li> a"
-		,	"    <ul>"
-		,	"      <li>"
-		,	"        <ul>"
-		,	"          <li> b"
-		,	"          </li>"
-		,	"        </ul>"
-		,	"      </li>"
-		,	"    </ul>"
-		,	"  </li>"
-		,	"  <li> c"
-		,	"  </li>"
-		,	"</ul>"
+		( "* a"
+		, "** "	// was: do not add ** to nest; now: add ** and \s
+		, "*** b"
+		, "* c"
+		), String_.Concat_lines_nl
+		( "<ul>"
+		, "  <li> a"
+		, "    <ul>"
+		, "      <li> "
+		, "        <ul>"
+		, "          <li> b"
+		, "          </li>"
+		, "        </ul>"
+		, "      </li>"
+		, "    </ul>"
+		, "  </li>"
+		, "  <li> c"
+		, "  </li>"
+		, "</ul>"
 		));		
 	}
 	@Test   public void Tblw_should_autoclose() {// PURPOSE: tblw should auto-close open list
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
-			(	"#a"
-			,	"{|"
-			,	"|b"
-			,	"|}"
-			) ,	String_.Concat_lines_nl_skip_last
-			(	"<ol>"
-			,	"  <li>a"
-			,	"  </li>"
-			,	"</ol>"
-			,	"<table>"
-			,	"  <tr>"
-			,	"    <td>b"
-			,	"    </td>"
-			,	"  </tr>"
-			,	"</table>"
-			,	""
+			( "#a"
+			, "{|"
+			, "|b"
+			, "|}"
+			), String_.Concat_lines_nl_skip_last
+			( "<ol>"
+			, "  <li>a"
+			, "  </li>"
+			, "</ol>"
+			, "<table>"
+			, "  <tr>"
+			, "    <td>b"
+			, "    </td>"
+			, "  </tr>"
+			, "</table>"
+			, ""
 			));
 	}
 	@Test   public void Tblx_should_not_autoclose() {	// PURPOSE: do not auto-close list if table is xnde; DATE:2014-02-05
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
-		(	"#a"
-		,	"# <table><tr><td>b</td></tr></table>"
-		,	"c"
-		) ,	String_.Concat_lines_nl
-		(	"<ol>"
-		,	"  <li>a"
-		,	"  </li>"
-		,	"  <li> "
-		,	"    <table>"
-		,	"      <tr>"
-		,	"        <td>b"
-		,	"        </td>"
-		,	"      </tr>"
-		,	"    </table>"
-		,	"  </li>"
-		,	"</ol>"
-		,	"c"
+		( "#a"
+		, "# <table><tr><td>b</td></tr></table>"
+		, "c"
+		), String_.Concat_lines_nl
+		( "<ol>"
+		, "  <li>a"
+		, "  </li>"
+		, "  <li> "
+		, "    <table>"
+		, "      <tr>"
+		, "        <td>b"
+		, "        </td>"
+		, "      </tr>"
+		, "    </table>"
+		, "  </li>"
+		, "</ol>"
+		, "c"
 		));		
 	}
 	@Test   public void Li_disappears() {	// PURPOSE: "\n*" disappears when followed by "<li>"; PAGE:en.w:Bristol_Bullfinch; DATE:2014-06-24

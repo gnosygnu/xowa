@@ -19,7 +19,7 @@ package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
 import gplx.html.*; import gplx.xowa.xtns.relatedSites.*;
 public class Xoh_page_wtr_wkr_ {
 	public static byte[] Bld_page_content_sub(Xoa_app app, Xow_wiki wiki, Xoa_page page, Bry_bfr tmp_bfr) {
-		byte[] subpages = app.Html_mgr().Page_mgr().Subpages_bldr().Bld(page.Ttl());
+		byte[] subpages = app.Html_mgr().Page_mgr().Subpages_bldr().Bld(wiki.Ns_mgr(), page.Ttl());
 		byte[] page_content_sub = page.Html_data().Content_sub();		// contentSub exists; SEE: {{#isin}}
 		byte[] redirect_msg = Xop_redirect_mgr.Bld_redirect_msg(app, wiki, page);			
 		return Bry_.Add(subpages, page_content_sub, redirect_msg);

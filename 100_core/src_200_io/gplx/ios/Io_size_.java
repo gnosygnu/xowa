@@ -26,7 +26,7 @@ public class Io_size_ {
 		long div = (long)Math_.Pow((long)1024, (long)pow);
 		DecimalAdp valDecimal = DecimalAdp_.divide_(val, div);
 		String[] unit = Io_size_.Units[pow];
-		return valDecimal.XtoStr("#,###.000") + " " + String_.PadBgn(unit[0], 2, " ");
+		return valDecimal.Xto_str("#,###.000") + " " + String_.PadBgn(unit[0], 2, " ");
 	}
 	public static long parse_or_(String raw, long or) {
 		if (raw == null || raw == String_.Empty) return or;
@@ -48,7 +48,7 @@ public class Io_size_ {
 		}
 		DecimalAdp comp = val.Op_truncate_decimal();
 		if (!val.Eq(comp)) return or;
-		return val.XtoLong();
+		return val.Xto_long();
 	}
 	static int parse_unitPow_(String unitStr) {
 		int unitLen = Array_.Len(Units);
@@ -104,7 +104,7 @@ class Io_size_fmtr_arg implements Bry_fmtr_arg {
 		}
 		long div = (long)Math_.Pow((long)1024, (long)pow);		
 		DecimalAdp val_decimal = DecimalAdp_.divide_(val, div);
-		bfr.Add_str(val_decimal.XtoStr("#,###.000")).Add_byte(Byte_ascii.Space).Add(gplx.ios.Io_size_.Units_bry[pow]);
+		bfr.Add_str(val_decimal.Xto_str("#,###.000")).Add_byte(Byte_ascii.Space).Add(gplx.ios.Io_size_.Units_bry[pow]);
 		if (suffix != null) 
 			bfr.Add(suffix);
 	}

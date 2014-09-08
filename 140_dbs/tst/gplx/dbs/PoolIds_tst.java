@@ -19,7 +19,7 @@ package gplx.dbs; import gplx.*;
 import org.junit.*;
 public class PoolIds_tst {
 	@Before public void setup() {
-		provider = Db_provider_pool._.FetchOrNew(Db_connect_.Test);
+		provider = Db_provider_pool._.Get_or_new(Db_conn_info_.Test);
 		Db_qry_fxt.DeleteAll(provider, PoolIds.Tbl_Name);
 		mgr = PoolIds._;
 	}

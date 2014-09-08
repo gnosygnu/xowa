@@ -104,7 +104,7 @@ public class Xop_xnde_wkr__include_uncommon_tst {
 			,	"1 2"
 			);
 	}
-	@Test  public void Only_include_preserves_nl() {	// PURPOSE: given "a\n<onlyinclude>{|\n", "{|" should be table; EX:en.w:Wikipedia:Reference_desk
+	@Test  public void Only_include_preserves_nl() {	// PURPOSE: given "a\n<onlyinclude>{|\n", "{|" should be table; PAGE:en.w:Wikipedia:Reference_desk
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
 			(	"a"
 			,	"<onlyinclude>==b==</onlyinclude>"
@@ -141,7 +141,7 @@ public class Xop_xnde_wkr__include_uncommon_tst {
 		fxt.Init_page_create("page", "abc");	// create page in main ns
 		fxt.Test_parse_page_all_str("{{:<includeonly>safesubst:</includeonly>page}}", "abc");	// will become {{:page}} which should then transclude page
 	}
-	@Test  public void Include_only_subst_in_function() {// PURPOSE: includeonly and subst inside function should be ignored; EX:en.w:WikiProject_Articles_for_creation/BLD_Preload; DATE:2014-04-29
+	@Test  public void Include_only_subst_in_function() {// PURPOSE: includeonly and subst inside function should be ignored; PAGE:en.w:WikiProject_Articles_for_creation/BLD_Preload; DATE:2014-04-29
 		fxt.Test_parse_page_all_str("{{<includeonly>subst:</includeonly>#expr:0}}", "0");
 	}
 	@Test  public void Hdr() {	// PURPOSE: includeonly should be evaluated during template parse; EX: es.b:Billar/T�cnica/Clases_de_puentes; DATE:2014-02-12

@@ -33,14 +33,14 @@ public class Hdump_save_mgr {
 		text_tbl.Insert(page_id, Hdump_text_row_tid.Tid_body, tmp_bfr.XtoAryAndClear());
 		byte[] redlinks_bry = Write_redlinks(tmp_bfr, page.Html_data().Redlink_mgr());
 		if (redlinks_bry != null)	text_tbl.Insert(page_id, Hdump_data_tid.Tid_redlink, redlinks_bry);
-		byte[] imgs_bry = Write_imgs(tmp_bfr, page.Hdump_data().Imgs());
+		byte[] imgs_bry = Write_imgs(tmp_bfr, page.Hdump_data().Data());
 		if (imgs_bry != null)		text_tbl.Insert(page_id, Hdump_data_tid.Tid_img, imgs_bry);
 	}
 	public static byte[] Write_imgs(Bry_bfr bfr, ListAdp imgs) {
 		int len = imgs.Count(); if (len == 0) return null; // no images; exit early, else will write blank String
 		for (int i = 0; i < len; ++i) {
-			Hdump_data_img__base img = (Hdump_data_img__base)imgs.FetchAt(i);
-			img.Write(bfr);
+			Hdump_data_itm itm = (Hdump_data_itm)imgs.FetchAt(i);
+			itm.Data_write(bfr);
 		}
 		return bfr.XtoAryAndClear();
 	}

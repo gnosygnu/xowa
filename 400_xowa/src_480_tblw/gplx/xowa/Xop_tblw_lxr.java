@@ -90,13 +90,6 @@ public class Xop_tblw_lxr implements Xop_lxr {
 			}
 			else {										// nth pipe; no need to check for invalidate
 				switch (wlxr_type) {
-					case Xop_tblw_wkr.Tblw_type_tc:		// \n|+
-					case Xop_tblw_wkr.Tblw_type_tr:		// \n|-
-					case Xop_tblw_wkr.Tblw_type_td:		// \n|
-					//case Xop_tblw_wkr.Tblw_type_te:	// |} // NOTE: ignore "|}"; needed for incomplete lnkis; EX: |[[a\n|}; EX:w:Wikipedia:Changing_attribution_for_an_edit; DATE:2014-03-16
-						ctx.Subs_add(root, tkn_mkr.NewLine(bgn_pos, bgn_pos + 1, Xop_nl_tkn.Tid_char, 1));
-						ctx.Subs_add(root, tkn_mkr.Pipe(bgn_pos + 1, bgn_pos + 2));
-						return bgn_pos + 2;				// +2 to skip "\n|", but still look at 3rd char; ("+", "-", or "}")
 					case Xop_tblw_wkr.Tblw_type_td2:	// ||
 						ctx.Subs_add(root, tkn_mkr.Pipe(bgn_pos, cur_pos));
 						return cur_pos;

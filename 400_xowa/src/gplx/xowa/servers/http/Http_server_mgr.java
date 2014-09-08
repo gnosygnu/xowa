@@ -129,7 +129,7 @@ public class Http_server_mgr implements GfoInvkAble {
 		if (wkr == null)
 			wkr = new Http_server_wkr(this, port);
 				new Thread(wkr, "thread:xowa.http_server").start();
-				Note("HTTP Server started: Navigate to http://localhost:" + Int_.XtoStr(port));
+				Note("HTTP Server started: Navigate to http://localhost:" + Int_.Xto_str(port));
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_port))					return port;

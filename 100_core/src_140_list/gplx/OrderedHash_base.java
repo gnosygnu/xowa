@@ -62,9 +62,9 @@ public class OrderedHash_base extends HashAdp_base implements OrderedHash, GfoIn
 	public String XtoStr_ui() {
 		String_bldr sb = String_bldr_.new_();
 		int count = ordered.Count();
-		int pad = String_.Len(Int_.XtoStr(count));
+		int pad = String_.Len(Int_.Xto_str(count));
 		for (int i = 0; i < count; i++) {
-			sb	.Add(Int_.XtoStr_PadBgn(i, pad))
+			sb	.Add(Int_.Xto_str_pad_bgn(i, pad))
 				.Add(":").Add(ordered.FetchAt(i).toString())
 				.Add(Op_sys.Cur().Nl_str());
 		}

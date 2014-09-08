@@ -70,7 +70,7 @@ class TabBoxFxt implements GfoInvkAble {
 		for (int i = 0; i < tabBox.Tabs_Count(); i++)
 			tabBox.Tabs_DelAt(0);
 		for (int i = 0; i < count; i++)
-			tabBox.Tabs_Add(Int_.XtoStr(i), Int_.XtoStr(i));
+			tabBox.Tabs_Add(Int_.Xto_str(i), Int_.Xto_str(i));
 		return this;
 	}
 	@gplx.Internal protected TabBoxFxt DelAt(int index) {tabBox.Tabs_DelAt(index); return this;}

@@ -28,7 +28,7 @@ public class Json_kv_ary_srl {
 	}
 	private static Object Val_by_itm(Json_itm itm) {
 		switch (itm.Tid()) {
-			case Json_itm_.Tid_bool:		return Bool_.XtoStr_lower(Bool_.cast_(itm.Data()));
+			case Json_itm_.Tid_bool:		return Bool_.Xto_str_lower(Bool_.cast_(itm.Data()));
 			case Json_itm_.Tid_int:
 			case Json_itm_.Tid_null:
 			case Json_itm_.Tid_string:
@@ -44,7 +44,7 @@ public class Json_kv_ary_srl {
 		KeyVal[] rv = new KeyVal[subs_len];
 		for (int i = 0; i < subs_len; i++) {
 			Json_itm sub = itm.Subs_get_at(i);
-			KeyVal kv = KeyVal_.new_(Int_.XtoStr(i + Int_.Base1), Val_by_itm(sub));
+			KeyVal kv = KeyVal_.new_(Int_.Xto_str(i + Int_.Base1), Val_by_itm(sub));
 			rv[i] = kv;
 		}
 		return rv;

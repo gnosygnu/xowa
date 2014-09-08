@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
 public interface Db_qry {
+	int Tid();
 	String KeyOfDb_qry();
 	boolean ExecRdrAble();
 	String XtoSql();

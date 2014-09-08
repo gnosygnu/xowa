@@ -34,8 +34,9 @@ public class Xow_portal_mgr implements GfoInvkAble {
 		api_skin = app.Mode() == Xoa_app_.Mode_gui ? skins.Desktop() : skins.Server();
 	}
 	public Xowh_sidebar_mgr Sidebar_mgr() {return sidebar_mgr;} private Xowh_sidebar_mgr sidebar_mgr;
-	public Bry_fmtr Div_home_fmtr() {return div_home_fmtr;} Bry_fmtr div_home_fmtr = Bry_fmtr.new_("");
+	public Bry_fmtr Div_home_fmtr() {return div_home_fmtr;} private Bry_fmtr div_home_fmtr = Bry_fmtr.new_("");
 	public Xow_portal_mgr Init_assert() {if (init_needed) Init(); return this;}
+	public byte[] Div_jump_to() {return div_jump_to;} private byte[] div_jump_to = Bry_.Empty;
 	public void Init() {
 		init_needed = false;
 		if (missing_ns_cls == null)	// if missing_ns_cls not set for wiki, use the home wiki's
@@ -50,6 +51,8 @@ public class Xow_portal_mgr implements GfoInvkAble {
 		div_logo_bry = Init_fmtr(tmp_bfr, eval_mgr, div_logo_fmtr, main_page_href_bry, wiki.App().Encoder_mgr().Fsys().Encode_http(wiki.App().User().Fsys_mgr().Wiki_root_dir().GenSubFil_nest(wiki.Domain_str(), "html", "logo.png")));
 		div_home_bry = Init_fmtr(tmp_bfr, eval_mgr, div_home_fmtr);
 		div_wikis_fmtr.Eval_mgr_(eval_mgr);
+		Xow_msg_mgr msg_mgr = wiki.Msg_mgr();
+		div_jump_to = Div_jump_to_fmtr.Bld_bry_many(tmp_bfr, msg_mgr.Val_by_key_obj("jumpto"), msg_mgr.Val_by_key_obj("jumptonavigation"), msg_mgr.Val_by_key_obj("comma-separator"), msg_mgr.Val_by_key_obj("jumptosearch"));
 		tmp_bfr.Mkr_rls();
 		sidebar_mgr.Init();
 	}	private boolean init_needed = true;
@@ -127,4 +130,7 @@ public class Xow_portal_mgr implements GfoInvkAble {
 	public static final String Invk_div_logo_ = "div_logo_";
 	private static KeyVal[] Options_missing_ns_cls_list = KeyVal_.Ary(KeyVal_.new_("", "Show as blue link"), KeyVal_.new_("new", "Show as red link"), KeyVal_.new_("xowa_display_none", "Hide")); 
 	private static final byte[] Missing_ns_cls_hide = Bry_.new_ascii_("xowa_display_none");
+	private static final Bry_fmtr Div_jump_to_fmtr = Bry_fmtr.new_
+	( "\n    <div id=\"jump-to-nav\" class=\"mw-jump\">~{jumpto}<a href=\"#mw-navigation\">~{jumptonavigation}</a>~{comma-separator}<a href=\"#p-search\">~{jumptosearch}</a></div>"
+	, "jumpto", "jumptonavigation", "comma-separator", "jumptosearch");
 }

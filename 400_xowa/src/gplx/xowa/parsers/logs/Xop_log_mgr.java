@@ -59,7 +59,7 @@ public class Xop_log_mgr implements GfoInvkAble {
 	public void Txn_end() {provider.Txn_mgr().Txn_end_all();}
 	public void Rls() {
 		if (log_tbl != null)	log_tbl.Rls();
-		if (provider != null)	{provider.Rls(); provider = null;}
+		if (provider != null)	{provider.Conn_term(); provider = null;}
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_commit_interval_))		commit_interval = m.ReadInt("v");

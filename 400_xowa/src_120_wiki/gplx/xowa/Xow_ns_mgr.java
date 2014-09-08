@@ -46,6 +46,7 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 	public Xow_ns		Ns_project()			{return ns_project;}	private Xow_ns ns_project;
 	public Xow_ns		Ns_module()				{return ns_module;}		private Xow_ns ns_module;
 	public Xow_ns		Ns_mediawiki()			{return ns_mediawiki;}	private Xow_ns ns_mediawiki;
+	public int			Ns_page_id()			{return ns_page_id;}	public void Ns_page_id_(int v) {ns_page_id = v;} private int ns_page_id = Int_.MinValue;
 	public int			Count() {return ns_count;} private int ns_count = 0;
 	public Xow_ns[]		Ords_ary() {return ords;} private Xow_ns[] ords = new Xow_ns[Xow_ns_mgr_.Ordinal_max];
 	public int			Ords_len() {return ords_len;} private int ords_len;

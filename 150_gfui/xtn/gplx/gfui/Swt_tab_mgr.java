@@ -83,8 +83,8 @@ public class Swt_tab_mgr implements Gxw_tab_mgr, Swt_control, FocusListener, Gfo
 		Gfui_tab_itm_data tab_data = Get_tab_data(itm);
 		CTabItem next_tab = Tabs_select_after_closing_itm(tab_data);	// NOTE: must calc next_tab before calling Pub_tab_closed; latter will recalc idx
 		Pub_tab_closed(tab_data.Key());	// NOTE: dispose does not call event for .close; must manually raise event;
-		itm.dispose();
 		this.Tabs_select_by_itm(next_tab);
+		itm.dispose();
 	}
 	@Override public void Tabs_select_by_idx(int i) {
 		if (i == Gfui_tab_itm_data.Idx_null) return;	// 0 tabs; return;

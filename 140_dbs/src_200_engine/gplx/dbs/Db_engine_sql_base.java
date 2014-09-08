@@ -17,19 +17,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
 import java.sql.*; 
-abstract class Db_engine_sql_base implements Db_engine, RlsAble {
+abstract class Db_engine_sql_base implements Db_engine {
 	public abstract String Key();
-	public Db_connect ConnectInfo() {return dbInfo;} protected Db_connect dbInfo;
-	public abstract Db_engine MakeEngine(Db_connect dbInfo);
+	public Db_conn_info Conn_info() {return conn_info;} protected Db_conn_info conn_info;
+	@gplx.Virtual public void Txn_bgn() {Execute(Db_qry_sql.xtn_("BEGIN TRANSACTION;"));}
+	@gplx.Virtual public void Txn_end() {Execute(Db_qry_sql.xtn_("COMMIT TRANSACTION;"));}
+	public abstract Db_engine Make_new(Db_conn_info conn_info);
 	@gplx.Virtual public Sql_cmd_wtr SqlWtr() {return Sql_cmd_wtr_.Ansi;}
 	public Object Execute(Db_qry cmd) {
 		Db_qryWkr wkr = (Db_qryWkr)wkrs.FetchOrFail(cmd.KeyOfDb_qry());
 		return wkr.Exec(this, cmd);
 	}
-	@gplx.Virtual public void Txn_bgn() {Execute(Db_qry_sql.xtn_("BEGIN TRANSACTION;"));}
-	@gplx.Virtual public void Txn_end() {Execute(Db_qry_sql.xtn_("COMMIT TRANSACTION;"));}
-	@gplx.Internal protected void ctor_SqlEngineBase(Db_connect dbInfo) {
-		this.dbInfo = dbInfo;
+	@gplx.Internal protected void ctor_SqlEngineBase(Db_conn_info conn_info) {
+		this.conn_info = conn_info;
 		wkrs.Add(Db_qry_select.KeyConst, new ExecSqlWkr());
 		wkrs.Add(Db_qry_insert.KeyConst, new ExecSqlWkr());
 		wkrs.Add(Db_qry_update.KeyConst, new ExecSqlWkr());
@@ -53,21 +53,22 @@ abstract class Db_engine_sql_base implements Db_engine, RlsAble {
 		}
 		catch (Exception exc) {throw Err_.err_(exc, "exec reader failed").Add("sql", sql).Add("err", Err_.Message_gplx_brief(exc));}
 	}
-	@gplx.Internal protected abstract Connection NewDbCon();	
+	@gplx.Internal protected abstract Connection Conn_new();	
 	@gplx.Virtual public DataRdr NewDataRdr(ResultSet rdr, String sql) {return gplx.stores.Db_data_rdr_.new_(rdr, sql);}
-	public Db_stmt New_db_stmt(Db_provider provider, Db_qry qry) {return new Db_stmt_cmd(provider, qry);}
+	public Db_rdr	New_db_rdr(Object rdr, String sql) {return new Db_rdr__basic((ResultSet)rdr, sql);}
+	public Db_stmt	New_db_stmt(Db_provider provider, Db_qry qry) {return new Db_stmt_cmd(provider, qry);}
 		public Object New_db_cmd(String sql) {
 		try {return connection.prepareStatement(sql);}
 		catch (Exception e) {
 			throw Err_.err_(e, "failed to prepare sql; sql={0}", sql);}
 	}
-	public void Connect() {
-		connection = NewDbCon();
+	public void Conn_open() {
+		connection = Conn_new();
 	}	private Connection connection;
-	public void Rls() {
+	public void Conn_term() {
 //		if (Env_.Mode_testing()) return;	// WORKAROUND:MYSQL:else errors randomly when running all tests. possible connection pooling issue (?); // commented out 2013-08-22
 		try 	{connection.close();}
-		catch 	(SQLException e) {throw Err_.err_(e, "close connection failed").Add("ConnectInfo", dbInfo.Raw_of_db_connect());}
+		catch 	(SQLException e) {throw Err_.err_(e, "close connection failed").Add("ConnectInfo", conn_info.Str_raw());}
 	}
 	Statement NewDbCmd(String commandText) {
 		Statement cmd = null;
@@ -77,6 +78,6 @@ abstract class Db_engine_sql_base implements Db_engine, RlsAble {
 	}
 	protected Connection NewDbCon(String url, String uid, String pwd) {
 		try {return DriverManager.getConnection(url, uid, pwd);}
-		catch (SQLException e) {throw Err_.err_(e, "connection open failed").Add("ConnectInfo", ConnectInfo().Raw_of_db_connect());}
+		catch (SQLException e) {throw Err_.err_(e, "connection open failed").Add("ConnectInfo", Conn_info().Str_raw());}
 	}
 	}

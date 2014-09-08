@@ -30,7 +30,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 	public void Make_html_box(int uid, Gfui_tab_itm tab_box, Xog_win_itm win, GfuiElem owner) {
 		this.tab_box = tab_box;
 		Xoa_app app = win.App(); Xoa_gui_mgr gui_mgr = win.Gui_mgr(); Gfui_kit kit = win.Kit();
-		Gfui_html html_box	= kit.New_html("html_box" + Int_.XtoStr(uid), owner);
+		Gfui_html html_box	= kit.New_html("html_box" + Int_.Xto_str(uid), owner);
 		html_box.Html_js_enabled_(gui_mgr.Html_mgr().Javascript_enabled());
 		html_box.Html_invk_src_(win);
 		html_itm.Html_box_(html_box);

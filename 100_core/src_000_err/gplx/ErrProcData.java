@@ -59,7 +59,7 @@ class ErrProcData {
 		int linEnd = String_.FindFwd(raw, ")", linBgn); if (linEnd == String_.Find_none) return rv;
 		String linRaw = String_.Mid(raw, linBgn, linEnd);
 		rv.sourceLine = Int_.parse_(linRaw);
-		rv.ideAddress = String_.Concat("(", rv.sourceFileRaw, ":", Int_.XtoStr(rv.sourceLine), ")");
+		rv.ideAddress = String_.Concat("(", rv.sourceFileRaw, ":", Int_.Xto_str(rv.sourceLine), ")");
 				return rv;
 	}
 	public static ErrProcData new_() {return new ErrProcData();} ErrProcData() {}

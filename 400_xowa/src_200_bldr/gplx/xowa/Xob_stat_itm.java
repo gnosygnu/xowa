@@ -29,10 +29,10 @@ public class Xob_stat_itm implements NewAble {
 	}
 	public void XtoStr(String_bldr sb) {
 		XtoStr_fld(sb, ns).XtoStr_fld(sb, Fils).XtoStr_fld(sb, Size).XtoStr_fld(sb, SizeMax).XtoStr_fld(sb, SizeMaxIdx).XtoStr_fld(sb, SizeMin);
-		sb.Add(Int_.XtoStr(SizeMinIdx));
+		sb.Add(Int_.Xto_str(SizeMinIdx));
 	}
-	Xob_stat_itm XtoStr_fld(String_bldr sb, long v) {sb.Add(Long_.XtoStr(v)).Add(Xob_stat_itm.Dlm); return this;}
-	Xob_stat_itm XtoStr_fld(String_bldr sb, int v) {sb.Add(Int_.XtoStr(v)).Add(Xob_stat_itm.Dlm); return this;}
+	Xob_stat_itm XtoStr_fld(String_bldr sb, long v) {sb.Add(Long_.Xto_str(v)).Add(Xob_stat_itm.Dlm); return this;}
+	Xob_stat_itm XtoStr_fld(String_bldr sb, int v) {sb.Add(Int_.Xto_str(v)).Add(Xob_stat_itm.Dlm); return this;}
 	Xob_stat_itm XtoStr_fld(String_bldr sb, String v) {sb.Add(v).Add(Xob_stat_itm.Dlm); return this;}
 	public Xob_stat_itm(String ns) {
 		this.ns = ns;

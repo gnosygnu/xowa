@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 public class Byte_ {
 	public static final byte MinValue = Byte.MIN_VALUE;	
+	public static final String Cls_name = "byte";
 	public static byte[] Ary(byte... ary) {return ary;}
 	public static byte[] Ary_by_ints(int... ary) {
 		int ary_len = ary.length;
@@ -26,8 +27,8 @@ public class Byte_ {
 			rv[i] = int_(ary[i]);
 		return rv;
 	}
-	public static String XtoStr(byte v) {return new Byte(v).toString();} 
-	public static int XtoInt(byte v) {return v < 0 ? (int)v + 256 : v;}
+	public static String Xto_str(byte v) {return new Byte(v).toString();} 
+	public static int Xto_int(byte v) {return v < 0 ? (int)v + 256 : v;}
 	public static boolean In(byte v, byte... ary) {
 		for (byte itm : ary)
 			if (v == itm) return true;

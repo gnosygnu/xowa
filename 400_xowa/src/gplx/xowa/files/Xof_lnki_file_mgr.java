@@ -106,7 +106,7 @@ public class Xof_lnki_file_mgr {
 	}
 	private void Init_fsdb_by_xfer(Xof_fsdb_itm fsdb_itm, Xof_xfer_itm xfer_itm) {	// DELETE: DATE:2014-02-04
 		fsdb_itm.Lnki_size_(xfer_itm.Lnki_w(), xfer_itm.Lnki_h());	// NOTE: must overwrite fsdb_itm.size with xfer_itm.size when the same image shows up in multiple sizes on a page; (only one item in wiki_orig); EX: w:Portal:Canada; [[File:Flag of Canada.svg|300x150px]]; [[File:Flag of Canada.svg|23px]]; DATE:2014-02-14
-		fsdb_itm.Lnki_type_(xfer_itm.Lnki_type());					// NOTE: must overwrite lnki_type, else multiple images on same page with different type wont show; EX:en.w:History_of_painting; DATE:2014-03-06
+		fsdb_itm.Lnki_type_(xfer_itm.Lnki_type());					// NOTE: must overwrite lnki_type, else multiple images on same page with different type wont show; PAGE:en.w:History_of_painting; DATE:2014-03-06
 		fsdb_itm.Lnki_page_(xfer_itm.Lnki_page());
 		fsdb_itm.Lnki_thumbtime_(xfer_itm.Lnki_thumbtime());
 //			byte[] lnki_ttl = xfer_itm.Lnki_ttl();

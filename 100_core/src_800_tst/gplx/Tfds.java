@@ -24,7 +24,7 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	public static void Eq_byte(byte expd, byte actl)										{Eq_wkr(expd, actl, true, EmptyStr);}
 	public static void Eq_long(long expd, long actl)										{Eq_wkr(expd, actl, true, EmptyStr);}
 	public static void Eq_float(float expd, float actl)										{Eq_wkr(expd, actl, true, EmptyStr);}
-	public static void Eq_decimal(DecimalAdp expd, DecimalAdp actl)							{Eq_wkr(expd.XtoDouble(), actl.XtoDouble(), true, EmptyStr);}
+	public static void Eq_decimal(DecimalAdp expd, DecimalAdp actl)							{Eq_wkr(expd.Xto_double(), actl.Xto_double(), true, EmptyStr);}
 	public static void Eq_date(DateAdp expd, DateAdp actl)									{Eq_wkr(expd.XtoStr_gplx(), actl.XtoStr_gplx(), true, EmptyStr);}
 	public static void Eq_date(DateAdp expd, DateAdp actl, String fmt, Object... args){Eq_wkr(expd.XtoStr_gplx(), actl.XtoStr_gplx(), true, String_.Format(fmt, args));}
 	public static void Eq_url(Io_url expd, Io_url actl)										{Eq_wkr(expd.Raw(), actl.Raw(), true, EmptyStr);}
@@ -206,14 +206,14 @@ class TfdsMsgBldr {
 		for (int i = 0; i < list.Count(); i++) {
 			TfdsEqAryItm itm = (TfdsEqAryItm)list.FetchAt(i);
 			sb.Add_fmt_line("{0}: {1} {2} {3}"
-				, Int_.XtoStr_PadBgn(itm.Idx(), 4)
+				, Int_.Xto_str_pad_bgn(itm.Idx(), 4)
 				, String_.PadBgn(itm.Lhs(), lhsLenMax, " ")
 				, itm.Eq() ? "==" : "!="
 				, String_.PadBgn(itm.Rhs(), rhsLenMax, " ")
 				);
 		}
 //			String compSym = isEq ? "  " : "!=";
-//			String result = String_.Format("{0}: {1}{2}  {3}  {4}", Int_.XtoStr_PadBgn(i, 4), lhsString, String_.CrLf + "\t\t", compSym, rhsString);
+//			String result = String_.Format("{0}: {1}{2}  {3}  {4}", Int_.Xto_str_pad_bgn(i, 4), lhsString, String_.CrLf + "\t\t", compSym, rhsString);
 //			foreach (Object obj in list) {
 //				String itmComparison = (String)obj;
 //				sb.Add_fmt_line("{0}{1}", "\t\t", itmComparison);

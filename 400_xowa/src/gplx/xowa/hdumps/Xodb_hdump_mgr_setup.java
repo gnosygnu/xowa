@@ -38,7 +38,7 @@ public class Xodb_hdump_mgr_setup {
 		try {
 			Xodb_xowa_cfg_tbl.Insert_str(core_provider, "db.meta", "html_db.exists", "y");
 			core_provider.Exec_sql("ALTER TABLE page ADD COLUMN page_html_db_id integer NOT NULL DEFAULT '-1'");
-		}	catch (Exception e) {Gfo_usr_dlg_._.Warn_many("", "", "failed to update core: db=~{0} err=~{1}", core_provider.ConnectInfo().Raw_of_db_connect(), Err_.Message_gplx(e));}
+		}	catch (Exception e) {Gfo_usr_dlg_._.Warn_many("", "", "failed to update core: db=~{0} err=~{1}", core_provider.Conn_info().Str_raw(), Err_.Message_gplx(e));}
 	}
 	private static Xodb_file Create_db(Xodb_mgr_sql db_mgr, Xodb_fsys_mgr fsys_mgr) {
 		Xodb_file html_db_file = fsys_mgr.Make(Xodb_file_tid.Tid_html);

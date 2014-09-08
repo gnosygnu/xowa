@@ -34,7 +34,7 @@ public abstract class Xoctg_hiddencat_parser_base extends Xob_sql_dump_base impl
 			case Fld_val:
 				if (!cur_is_hiddencat) {data.Cancel_row_y_(); return;}
 				Exec_hook(file_bfr, cur_id, cur_is_hiddencat);
-				if (++rows % 100000 == 0) usr_dlg.Prog_many("", "", "reading row ~{0}", Int_.XtoStr_fmt(rows, "#,##0"));
+				if (++rows % 100000 == 0) usr_dlg.Prog_many("", "", "reading row ~{0}", Int_.Xto_str_fmt(rows, "#,##0"));
 				break;
 		}
 	}

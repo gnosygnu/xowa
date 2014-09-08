@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 public class Int_ implements GfoInvkAble {
 	public static final Class<?> ClassOf = Integer.class; 
+	public static final String Cls_name = "int";
 	public static final int Base1 = 1;
 	public static final int Const_dlm_len = 1;
 	public static final int Const_position_after_char = 1;
@@ -132,11 +133,11 @@ public class Int_ implements GfoInvkAble {
 		if (val < 0) throw Err_.new_("key must be >= 0").Add("key", key).Add("val", val);
 		return this;
 	}
-	public static String XtoStr_PadBgn_space(int v, int reqdPlaces) {return Xto_str_pad_bgn(v, reqdPlaces, Byte_ascii.Space, true);}	// EX: 1, 3 returns "  1"
-	public static String XtoStr_PadBgn(int v, int reqdPlaces)		{return Xto_str_pad_bgn(v, reqdPlaces, Byte_ascii.Num_0, true);}	// EX: 1, 3 returns "001"
+	public static String Xto_str_pad_bgn_space(int v, int reqdPlaces) {return Xto_str_pad_bgn(v, reqdPlaces, Byte_ascii.Space, true);}	// EX: 1, 3 returns "  1"
+	public static String Xto_str_pad_bgn(int v, int reqdPlaces)		{return Xto_str_pad_bgn(v, reqdPlaces, Byte_ascii.Num_0, true);}	// EX: 1, 3 returns "001"
 	static String Xto_str_pad_bgn(int val, int places, byte pad_chr, boolean bgn) {
 		int len = DigitCount(val);
-		int pad_len = places - len; if (pad_len < 0) return Int_.XtoStr(val);
+		int pad_len = places - len; if (pad_len < 0) return Int_.Xto_str(val);
 		Bry_bfr bfr = Bry_bfr.new_();
 		boolean neg = val < 0;
 		if (bgn) {	// special logic to handle negative numbers; EX: -1 -> "-001", not "00-1"
@@ -157,13 +158,13 @@ public class Int_ implements GfoInvkAble {
 	public static int cast_(Object obj) {try {return (Integer)obj;} catch(Exception exc) {throw Err_.type_mismatch_exc_(exc, int.class, obj);}}
 	public static int cast_or_(Object obj, int or) {try {return (Integer)obj;} catch(Exception e) {Err_.Noop(e); return or;}}
 	public static int Xby_double_(double v) {return (int)v;}
-	public static String XtoStr(int v) {return new Integer(v).toString();}
-	public static String XtoStr_fmt(int v, String fmt) {return new java.text.DecimalFormat(fmt).format(v);}
+	public static String Xto_str(int v) {return new Integer(v).toString();}
+	public static String Xto_str_fmt(int v, String fmt) {return new java.text.DecimalFormat(fmt).format(v);}
 	public static boolean TypeMatch(Class<?> type) {return type == int.class || type == Integer.class;}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_XtoStr_PadBgn))			{
 			int v = m.ReadInt(GfsCore_.Arg_primitive), pad = m.ReadInt("pad");
-			return ctx.Deny() ? (Object)this : XtoStr_PadBgn(v, pad);
+			return ctx.Deny() ? (Object)this : Xto_str_pad_bgn(v, pad);
 		}
 		else if	(ctx.Match(k, "Add")) {
 			int v = m.ReadInt(GfsCore_.Arg_primitive), operand = m.ReadInt("operand");
@@ -196,16 +197,16 @@ public class Int_ implements GfoInvkAble {
 				return -1;
 		}
 	}
-	public static String XtoStr_hex(int v) {
+	public static String Xto_str_hex(int v) {
 		String rv = Integer.toHexString(v); 
 		int rvLen = String_.Len(rv);
 		if (rvLen < 8) rv = String_.Repeat("0", 8 - rvLen) + rv;
 		return String_.Upper(rv);
 	}
-	public static String XtoStr(int[] ary) {
+	public static String Xto_str(int[] ary) {
 		String_bldr sb = String_bldr_.new_();
 		for (int i = 0; i < ary.length; i++)
-			sb.Add_spr_unless_first(Int_.XtoStr(ary[i]), " ", i);
+			sb.Add_spr_unless_first(Int_.Xto_str(ary[i]), " ", i);
 		return sb.XtoStr();
 	}
 	public static int[] Ary_parse(String raw_str, int reqd_len, int[] or) {

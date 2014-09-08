@@ -73,8 +73,8 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 		Core_provider_(fsys_mgr.Provider_core());
 		state = State_make;
 	}
-	public void Init_load(Db_connect connect) {
-		Db_provider provider = Db_provider_pool._.FetchOrNew(connect);
+	public void Init_load(Db_conn_info connect) {
+		Db_provider provider = Db_provider_pool._.Get_or_new(connect);
 		Xodb_file[] files = tbl_db.Select_all(provider);
 		fsys_mgr.Init_by_files(provider, files);
 		Core_provider_(provider);
@@ -157,7 +157,7 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 //			if (category_version != Xoa_ctg_mgr.Version_null)
 			tbl_cfg.Delete(grp, key);// always delete ctg version
 		category_version = version_is_1 ? Xoa_ctg_mgr.Version_1 : Xoa_ctg_mgr.Version_2;
-		tbl_cfg.Insert_str(grp, key, Byte_.XtoStr(category_version));
+		tbl_cfg.Insert_str(grp, key, Byte_.Xto_str(category_version));
 	}
 	public void Delete_by_tid(byte tid) {
 		Xodb_file[] ary = fsys_mgr.Files_ary();
@@ -166,12 +166,12 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 			Xodb_file file = ary[i] ;
 			if (file.Tid() != tid) continue;
 			file.Rls();
-			gplx.dbs.Db_connect_sqlite sqlite = (gplx.dbs.Db_connect_sqlite)file.Connect();
+			gplx.dbs.Db_conn_info__sqlite sqlite = (gplx.dbs.Db_conn_info__sqlite)file.Connect();
 			Io_mgr._.DeleteFil_args(sqlite.Url()).MissingFails_off().Exec();
 			file.Cmd_mode_(Db_cmd_mode.Delete);
 		}
 		tbl_db.Commit_all(fsys_mgr.Provider_core(), ary);
-		this.Init_load(fsys_mgr.Provider_core().ConnectInfo());
+		this.Init_load(fsys_mgr.Provider_core().Conn_info());
 	}
 
 	public static final String Grp_wiki_init = "wiki.init";
@@ -194,7 +194,7 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 		Xodb_mgr_sql rv = db_mgr.Tid() == Xodb_mgr_txt.Tid_txt ? wiki.Db_mgr_create_as_sql() : wiki.Db_mgr_as_sql();
 		byte state = rv.State();
 		switch (state) {
-			case Xodb_mgr_sql.State_init: rv.Init_load(Db_connect_.sqlite_(Xodb_mgr_sql.Find_core_url(wiki))); break; // load
+			case Xodb_mgr_sql.State_init: rv.Init_load(Db_conn_info_.sqlite_(Xodb_mgr_sql.Find_core_url(wiki))); break; // load
 			case Xodb_mgr_sql.State_make: break;	// noop; being made; don't load from db;
 			case Xodb_mgr_sql.State_load: break;	// noop; already loaded;
 			default: throw Err_.unhandled(state);

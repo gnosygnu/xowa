@@ -45,6 +45,6 @@ class Json_kv_ary_srl_fxt {
 	public KeyVal kv_obj_(String key, Object val)		{return KeyVal_.new_(key, val);}
 	public KeyVal kv_str_(String key, String val)		{return KeyVal_.new_(key, val);}
 	public KeyVal kv_int_(String key, int val)			{return KeyVal_.new_(key, val);}
-	public KeyVal kv_bool_(String key, boolean val)		{return KeyVal_.new_(key, Bool_.XtoStr_lower(val));}
-	public KeyVal kv_dec_(String key, DecimalAdp val)	{return KeyVal_.new_(key, val.XtoStr());}
+	public KeyVal kv_bool_(String key, boolean val)		{return KeyVal_.new_(key, Bool_.Xto_str_lower(val));}
+	public KeyVal kv_dec_(String key, DecimalAdp val)	{return KeyVal_.new_(key, val.Xto_str());}
 }

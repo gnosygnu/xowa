@@ -1107,7 +1107,7 @@ public class Xol_case_mgr_ {
 , Xol_case_itm_.new_(Xol_case_itm_.Tid_lower, Bry_.ints_(199,136), Bry_.ints_(199,137)) // ǈ -> ǉ -- LATIN LETTER CAPITAL L SMALL J
 , Xol_case_itm_.new_(Xol_case_itm_.Tid_lower, Bry_.ints_(199,139), Bry_.ints_(199,140)) // ǋ -> ǌ -- LATIN LETTER CAPITAL N SMALL J
 , Xol_case_itm_.new_(Xol_case_itm_.Tid_lower, Bry_.ints_(199,178), Bry_.ints_(199,179)) // ǲ -> ǳ -- LATIN CAPITAL LETTER D WITH SMALL LETTER Z
-, Xol_case_itm_.new_(Xol_case_itm_.Tid_lower, Bry_.ints_(206,185), Bry_.ints_(206,153)) // ι -> Ι -- GREEK CAPITAL LETTER IOTA
+, Xol_case_itm_.new_(Xol_case_itm_.Tid_lower, Bry_.ints_(206,153), Bry_.ints_(206,185)) // Ι -> ι -- GREEK CAPITAL LETTER IOTA; NOTE: reversed; PAGE:en.d:ἀρχιερεύς DATE:2014-09-02
 , Xol_case_itm_.new_(Xol_case_itm_.Tid_lower, Bry_.ints_(207,180), Bry_.ints_(206,184)) // ϴ -> θ -- GREEK CAPITAL THETA SYMBOL
 , Xol_case_itm_.new_(Xol_case_itm_.Tid_lower, Bry_.ints_(225,186,158), Bry_.ints_(195,159)) // ẞ -> ß -- LATIN CAPITAL LETTER SHARP S
 , Xol_case_itm_.new_(Xol_case_itm_.Tid_lower, Bry_.ints_(226,132,166), Bry_.ints_(207,137)) // Ω -> ω -- OHM

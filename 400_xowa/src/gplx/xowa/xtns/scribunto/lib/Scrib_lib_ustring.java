@@ -141,7 +141,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 				if (	j < capts_len				// bounds check	b/c null can be passed
 					&&	Bool_.cast_(capts[j].Val())	// check if true; indicates that group is "()" or "anypos" see regex converter; DATE:2014-04-23
 					)
-					tmp_list.Add(Int_.XtoStr(grp.Bgn() + Scrib_lib_ustring.Base1));	// return index only for (); NOTE: always return as String; callers expect String, and may do operations like len(result), which will fail if int; DATE:2013-12-20
+					tmp_list.Add(Int_.Xto_str(grp.Bgn() + Scrib_lib_ustring.Base1));	// return index only for (); NOTE: always return as String; callers expect String, and may do operations like len(result), which will fail if int; DATE:2013-12-20
 				else
 					tmp_list.Add(grp.Val());		// return match
 			}
@@ -170,8 +170,8 @@ class Scrib_lib_ustring_gsub_mgr {
 		Object text_obj = args.Cast_obj_or_null(0);
 		String text = String_.as_(text_obj);
 		if (text == null) text = Object_.Xto_str_strict_or_empty(text_obj);
-		String regx = args.Cast_str_or_null(1);
-		if (args.Len() == 2) return rslt.Init_obj(text);	// if no replace arg, return self; EX:enwikt:'orse; DATE:2013-10-13
+		String regx = args.Xstr_str_or_null(1);				// NOTE: @pattern sometimes int; PAGE:en.d:λύω; DATE:2014-09-02
+		if (args.Len() == 2) return rslt.Init_obj(text);	// if no replace arg, return self; PAGE:en.d:'orse; DATE:2013-10-13
 		Object repl_obj = args.Cast_obj_or_null(2);
 		regx = regx_converter.Parse(Bry_.new_utf8_(regx), Scrib_regx_converter.Anchor_pow);
 		int limit = args.Cast_int_or(3, -1);
@@ -204,12 +204,18 @@ class Scrib_lib_ustring_gsub_mgr {
 			tmp_repl_tid = Repl_tid_luacbk;
 			repl_func = (Scrib_lua_proc)repl_obj;
 		}
+		else if	(Object_.Eq(repl_type, Int_.ClassOf)) {	// NOTE:@replace sometimes int; PAGE:en.d:λύω; DATE:2014-09-02
+			tmp_repl_tid = Repl_tid_string;
+			tmp_repl_bry = Bry_.new_utf8_(Int_.Xto_str(Int_.cast_(repl_obj)));
+		}
 		else throw Err_.unhandled(ClassAdp_.NameOf_type(repl_type));
 	}
 	private String Exec_repl(byte repl_tid, byte[] repl_bry, String text, String regx, int limit) {
 		RegxAdp regx_mgr = Scrib_lib_ustring.RegxAdp_new_(core.Ctx(), regx);
 		RegxMatch[] rslts = regx_mgr.Match_all(text, 0);
-		if (rslts.length == 0) return text;	// PHP: If matches are found, the new subject will be returned, otherwise subject will be returned unchanged.; http://php.net/manual/en/function.preg-replace-callback.php
+		if (	rslts.length == 0				// PHP: If matches are found, the new subject will be returned, otherwise subject will be returned unchanged.; http://php.net/manual/en/function.preg-replace-callback.php
+			||	regx_mgr.Pattern_is_invalid()	// NOTE: invalid patterns should return self; EX:[^]; DATE:2014-09-02
+			) return text;	
 		Bry_bfr tmp_bfr = Bry_bfr.new_();
 		int len = rslts.length;
 		int pos = 0;

@@ -18,11 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs; import gplx.*;
 import gplx.criterias.*;
 public class Db_qry_delete implements Db_qry {
+	public int Tid() {return Db_qry_.Tid_basic;}
 	public String KeyOfDb_qry() {return KeyConst;} public static final String KeyConst = "DELETE";
 	public boolean ExecRdrAble() {return false;}
 	public String XtoSql() {return Sql_cmd_wtr_.Ansi.XtoSqlQry(this, false);}		
 	public int Exec_qry(Db_provider provider) {return provider.Exec_qry(this);}
-
 	public Db_qry_delete Where_add_(String key, int val) {
 		Criteria crt = Db_crt_.eq_(key, val);
 		where = Sql_where.merge_or_new_(where, crt);

@@ -129,6 +129,21 @@ public class Xoa_css_img_downloader_tst {
 		)
 		);
 	}
+	@Test  public void Wikisource_freedimg() {	// PURPOSE: check that "wikimedia" is replaced for FreedImg hack; PAGE:en.s:Page:Notes_on_Osteology_of_Baptanodon._With_a_Description_of_a_New_Species.pdf/3 DATE:2014-09-06
+		fxt.Downloader().Stylesheet_prefix_(Bry_.new_utf8_("mem"));	// stylesheet prefix prefix defaults to ""; set to "mem", else test will try to retrieve "//url" which will fail
+		Io_mgr._.InitEngine_mem();
+		Io_mgr._.SaveFilStr("mem//en.wikisource.org/w/index.php?title=MediaWiki:Dynimg.css", ".freedImg img[src*=\"wikipedia\"], .freedImg img[src*=\"wikisource\"], .freedImg img[src*=\"score\"], .freedImg img[src*=\"math\"] {");
+		fxt.Test_css_convert
+		(	"x @import url(\"//en.wikisource.org/w/index.php?title=MediaWiki:Dynimg.css\") screen; z"	// starts with "//"
+		, 	String_.Concat_lines_nl
+		(	"x "
+		,	"/*XOWA://en.wikisource.org/w/index.php?title=MediaWiki:Dynimg.css*/"
+		,	".freedImg img[src*=\"wikipedia\"], .freedImg img[src*=\"wikisource\"], /*XOWA:handle file:// paths which will have /commons.wikimedia.org/ but not /wikipedia/ */ .freedImg img[src*=\"wikimedia\"], .freedImg img[src*=\"score\"], .freedImg img[src*=\"math\"] {"
+		,	""
+		,	" z"
+		)
+		);
+	}
 }
 class Xoa_css_img_downloader_fxt {
 	public Xoa_css_img_downloader Downloader() {return downloader;} private Xoa_css_img_downloader downloader;

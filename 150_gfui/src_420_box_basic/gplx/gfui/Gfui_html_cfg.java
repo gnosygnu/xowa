@@ -24,10 +24,10 @@ public class Gfui_html_cfg implements GfoInvkAble {
 	public String Doc_selected_get_href_or_text()								{return Exec_fmt(fmtr_doc_selected_get_href_or_text);}				private Bry_fmtr fmtr_doc_selected_get_href_or_text = Bry_fmtr.keys_();
 	public String Doc_selected_get_src_or_empty()								{return Exec_fmt(fmtr_doc_selected_get_src_or_empty);}				private Bry_fmtr fmtr_doc_selected_get_src_or_empty = Bry_fmtr.keys_();
 	public String Doc_find_html(String find, boolean dir_fwd, boolean case_match, boolean wrap_find, boolean search_text_is_diff, int prv_find_bgn) {
-		return Exec_fmt(fmtr_doc_find_html, find, Bool_.XtoStr_lower(dir_fwd), Bool_.XtoStr_lower(case_match), Bool_.XtoStr_lower(wrap_find), Bool_.XtoStr_lower(search_text_is_diff), Int_.XtoStr(prv_find_bgn));
+		return Exec_fmt(fmtr_doc_find_html, find, Bool_.Xto_str_lower(dir_fwd), Bool_.Xto_str_lower(case_match), Bool_.Xto_str_lower(wrap_find), Bool_.Xto_str_lower(search_text_is_diff), Int_.Xto_str(prv_find_bgn));
 	}	private Bry_fmtr fmtr_doc_find_html = Bry_fmtr.keys_("find_text", "dir_fwd", "case_match", "wrap_find", "find_text_is_diff", "prv_find_bgn");
 	public String Doc_find_edit(String find, boolean dir_fwd, boolean case_match, boolean wrap_find, boolean search_text_is_diff, int prv_find_bgn) {
-		return Exec_fmt(fmtr_doc_find_edit, find, Bool_.XtoStr_lower(dir_fwd), Bool_.XtoStr_lower(case_match), Bool_.XtoStr_lower(wrap_find), Bool_.XtoStr_lower(search_text_is_diff), Int_.XtoStr(prv_find_bgn));
+		return Exec_fmt(fmtr_doc_find_edit, find, Bool_.Xto_str_lower(dir_fwd), Bool_.Xto_str_lower(case_match), Bool_.Xto_str_lower(wrap_find), Bool_.Xto_str_lower(search_text_is_diff), Int_.Xto_str(prv_find_bgn));
 	}	private Bry_fmtr fmtr_doc_find_edit = Bry_fmtr.keys_("find_text", "dir_fwd", "case_match", "wrap_find", "find_text_is_diff", "prv_find_bgn");
 	public String Elem_atr_get(String elem_id, String atr_key)					{return Exec_fmt(fmtr_elem_atr_get, elem_id, atr_key);}				private Bry_fmtr fmtr_elem_atr_get = Bry_fmtr.keys_("elem_id", "atr_key");
 	public String Elem_atr_get_toString(String elem_id, String atr_key)			{return Exec_fmt(fmtr_elem_atr_get_toString, elem_id, atr_key);}	private Bry_fmtr fmtr_elem_atr_get_toString = Bry_fmtr.keys_("elem_id", "atr_key");
@@ -40,7 +40,7 @@ public class Gfui_html_cfg implements GfoInvkAble {
 	public String Gallery_packed_exec()											{return Exec_fmt(fmtr_gallery_packed_exec);}						private Bry_fmtr fmtr_gallery_packed_exec = Bry_fmtr.keys_();
 	public String Elem_focus(String elem_id)									{return Exec_fmt(fmtr_elem_focus, elem_id);}						private Bry_fmtr fmtr_elem_focus = Bry_fmtr.keys_("elem_id");
 	public String Elem_scroll_into_view(String elem_id)							{return Exec_fmt(fmtr_elem_scroll_into_view, elem_id);}				private Bry_fmtr fmtr_elem_scroll_into_view = Bry_fmtr.keys_("elem_id");
-	public String Elem_img_update(String id, String src, int w, int h)			{return Exec_fmt(fmtr_elem_img_update, id, src, Int_.XtoStr(w), Int_.XtoStr(h));} Bry_fmtr fmtr_elem_img_update = Bry_fmtr.keys_("elem_id", "elem_src", "elem_width", "elem_height");
+	public String Elem_img_update(String id, String src, int w, int h)			{return Exec_fmt(fmtr_elem_img_update, id, src, Int_.Xto_str(w), Int_.Xto_str(h));} Bry_fmtr fmtr_elem_img_update = Bry_fmtr.keys_("elem_id", "elem_src", "elem_width", "elem_height");
 	public String Window_vpos()													{return Exec_fmt(fmtr_window_vpos);}								private Bry_fmtr fmtr_window_vpos = Bry_fmtr.new_();
 	public String Window_vpos_(String node_path, String scroll_top)				{return Exec_fmt(fmtr_window_vpos_, node_path, scroll_top);}		private Bry_fmtr fmtr_window_vpos_ = Bry_fmtr.keys_("node_path", "scroll_top");
 	public String Window_print_preview()										{return Exec_fmt(fmtr_window_print_preview);}						private Bry_fmtr fmtr_window_print_preview = Bry_fmtr.keys_();

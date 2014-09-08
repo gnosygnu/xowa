@@ -31,7 +31,7 @@ public class PoolIds {
 		return rv;
 	}
 	public int FetchNextAndCommit(String dbInfo, String url) {
-		Db_provider provider = Db_provider_pool._.FetchOrNew(dbInfo);
+		Db_provider provider = Db_provider_pool._.Get_or_new(dbInfo);
 		int rv = PoolIds._.FetchNext(provider, url);
 		PoolIds._.Commit(provider, url, rv + 1);
 		return rv;
@@ -41,7 +41,7 @@ public class PoolIds {
 		if (rv == 0) {
 			rv = provider.Exec_qry(Db_qry_.insert_(Tbl_Name).Arg_(Fld_id_path, url).Arg_(Fld_id_next_id, val));
 		}
-		if (rv != 1) throw Err_.new_("failed to update nextId").Add("provider", provider.ConnectInfo().Raw_of_db_connect()).Add("url", url).Add("nextId", val);
+		if (rv != 1) throw Err_.new_("failed to update nextId").Add("provider", provider.Conn_info().Str_raw()).Add("url", url).Add("nextId", val);
 	}
 	public static final String Tbl_Name					= "pool_ids";
 	@gplx.Internal protected static final String Fld_id_path				= "id_path";

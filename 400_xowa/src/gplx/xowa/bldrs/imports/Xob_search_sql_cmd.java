@@ -41,7 +41,7 @@ public class Xob_search_sql_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		Db_provider search_provider = search_db.Provider();
 		usr_dlg.Log_many("", "", "search_title.cmd: droping tables");
 		Sqlite_engine_.Tbl_delete_many(search_provider, Xodb_tbl_search_title_temp.Tbl_name, Xodb_search_title_word_tbl.Tbl_name, Xodb_search_title_page_tbl.Tbl_name);
-		usr_dlg.Log_many("", "", "search_title.cmd: creating db connection; conn=~{0}", search_provider.ConnectInfo().Raw_of_db_connect());
+		usr_dlg.Log_many("", "", "search_title.cmd: creating db connection; conn=~{0}", search_provider.Conn_info().Str_raw());
 		Xodb_tbl_search_title_temp search_temp_tbl = new Xodb_tbl_search_title_temp().Create_table(search_provider);
 		try {
 			usr_dlg.Log_many("", "", "search_title.cmd: starting select;");

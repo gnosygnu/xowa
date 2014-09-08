@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
 class Db_stmt_sql implements Db_stmt {
-	Bry_bfr tmp_bfr = Bry_bfr.new_();
-	Bry_fmtr tmp_fmtr = Bry_fmtr.new_();
-	int val_idx = 0;
+	private Bry_bfr tmp_bfr = Bry_bfr.new_();
+	private Bry_fmtr tmp_fmtr = Bry_fmtr.new_();
+	private int val_idx = 0;
 	public Db_provider Provider() {return provider;} public void Provider_(Db_provider v) {this.provider = v;} Db_provider provider;
 	public Db_stmt New() {return this;}
 	public Db_stmt Val_bool_(boolean v) {
@@ -28,27 +28,27 @@ class Db_stmt_sql implements Db_stmt {
 	}
 	public Db_stmt Val_byte_by_bool_(boolean v) {return Val_byte_(v ? Bool_.Y_byte : Bool_.N_byte);}
 	public Db_stmt Val_byte_(byte v) {
-		try {Add(++val_idx, Byte_.XtoStr(v));} catch (Exception e) {throw Err_.err_(e, "failed to add value: type={0} val={1}", "byte", v);}
+		try {Add(++val_idx, Byte_.Xto_str(v));} catch (Exception e) {throw Err_.err_(e, "failed to add value: type={0} val={1}", "byte", v);}
 		return this;
 	}
 	public Db_stmt Val_int_(int v) {
-		try {Add(++val_idx, Int_.XtoStr(v));} catch (Exception e) {throw Err_.err_(e, "failed to add value: type={0} val={1}", "int", v);}
+		try {Add(++val_idx, Int_.Xto_str(v));} catch (Exception e) {throw Err_.err_(e, "failed to add value: type={0} val={1}", "int", v);}
 		return this;
 	}
 	public Db_stmt Val_long_(long v) {
-		try {Add(++val_idx, Long_.XtoStr(v));} catch (Exception e) {throw Err_.err_(e, "failed to add value: type={0} val={1}", "long", v);} 
+		try {Add(++val_idx, Long_.Xto_str(v));} catch (Exception e) {throw Err_.err_(e, "failed to add value: type={0} val={1}", "long", v);} 
 		return this;
 	}
 	public Db_stmt Val_float_(float v) {
-		try {Add(++val_idx, Float_.XtoStr(v));} catch (Exception e) {throw Err_.err_(e, "failed to add value: type={0} val={1}", "float", v);}
+		try {Add(++val_idx, Float_.Xto_str(v));} catch (Exception e) {throw Err_.err_(e, "failed to add value: type={0} val={1}", "float", v);}
 		return this;
 	}
 	public Db_stmt Val_double_(double v) {
-		try {Add(++val_idx, Double_.XtoStr(v));} catch (Exception e) {throw Err_.err_(e, "failed to add value: type={0} val={1}", "double", v);} 
+		try {Add(++val_idx, Double_.Xto_str(v));} catch (Exception e) {throw Err_.err_(e, "failed to add value: type={0} val={1}", "double", v);} 
 		return this;
 	}
 	public Db_stmt Val_decimal_(DecimalAdp v) {
-		try {Add(++val_idx, v.XtoStr());} catch (Exception e) {throw Err_.err_(e, "failed to add value: type={0} val={1}", "decimal", v);} 
+		try {Add(++val_idx, v.Xto_str());} catch (Exception e) {throw Err_.err_(e, "failed to add value: type={0} val={1}", "decimal", v);} 
 		return this;
 	}
 	public Db_stmt Val_bry_by_str_(String v) {return Val_bry_(Bry_.new_utf8_(v));}
@@ -84,6 +84,7 @@ class Db_stmt_sql implements Db_stmt {
 	public DataRdr Exec_select() {
 		try {DataRdr rv = provider.Exec_qry_as_rdr(Db_qry_sql.rdr_(this.Xto_sql())); return rv;} catch (Exception e) {throw Err_.err_(e, "failed to exec prepared statement: sql={0}", sql_orig);}
 	}	
+	public Db_rdr Exec_select_as_rdr() {throw Err_.not_implemented_();}	
 	public Object Exec_select_val() {
 		try {Object rv = Db_qry_select.Rdr_to_val(this.Exec_select()); return rv;} catch (Exception e) {throw Err_.err_(e, "failed to exec prepared statement: sql={0}", sql_orig);}
 	}

@@ -104,8 +104,8 @@ class Xow_cfg_wiki_core_fxt {
 		for (int i = 0; i < expd_len; i++) {
 			Xow_ns expd = expd_ary[i];
 			Xow_ns actl = wiki.Ns_mgr().Ids_get_or_null(expd.Id());
-			Tfds.Eq(expd.Case_match(), actl.Case_match(), Int_.XtoStr(expd.Id()));
-			Tfds.Eq(expd.Name_str(), actl.Name_str(), Int_.XtoStr(expd.Id()));
+			Tfds.Eq(expd.Case_match(), actl.Case_match(), Int_.Xto_str(expd.Id()));
+			Tfds.Eq(expd.Name_str(), actl.Name_str(), Int_.Xto_str(expd.Id()));
 		}
 	}
 }

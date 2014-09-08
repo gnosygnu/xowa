@@ -38,6 +38,7 @@ public class Xow_xtn_mgr implements GfoInvkAble {
 		Add(app, new gplx.xowa.xtns.listings.Listing_xtn_mgr());
 		Add(app, new gplx.xowa.xtns.titleBlacklists.Blacklist_xtn_mgr());
 		Add(app, new gplx.xowa.xtns.pfuncs.scribunto.Pfunc_xtn_mgr());
+		Add(app, new gplx.xowa.xtns.proofreadPage.Pp_xtn_mgr());
 		return this;
 	}
 	public Xow_xtn_mgr Ctor_by_wiki(Xow_wiki wiki) {

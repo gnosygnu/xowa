@@ -19,16 +19,16 @@ package gplx.dbs; import gplx.*;
 import gplx.stores.*;
 import java.sql.*; 
 class Mysql_engine extends Db_engine_sql_base {
-	@Override public String Key() {return Db_connect_mysql.KeyDef;}
+	@Override public String Key() {return Db_conn_info__mysql.Key_const;}
 	@Override public Sql_cmd_wtr SqlWtr() {return Sql_cmd_wtr_.BackslashSensitive;}
-	@Override public Db_engine MakeEngine(Db_connect connectInfo) {
+	@Override public Db_engine Make_new(Db_conn_info connectInfo) {
 		Mysql_engine rv = new Mysql_engine();
 		rv.ctor_SqlEngineBase(connectInfo);
 		return rv;
 	}
 	@Override public DataRdr NewDataRdr(ResultSet rdr, String commandText) {return Mysql_rdr.new_(rdr, commandText);}
-		@gplx.Internal @Override protected Connection NewDbCon() {
-		Db_connect_mysql connUrl = (Db_connect_mysql)dbInfo; 
+		@gplx.Internal @Override protected Connection Conn_new() {
+		Db_conn_info__mysql connUrl = (Db_conn_info__mysql)conn_info; 
 		return NewDbCon("jdbc:mysql://localhost/" + connUrl.Database() + "?characterEncoding=UTF8", connUrl.Uid(), connUrl.Pwd());
 	}
 		@gplx.Internal protected static final Mysql_engine _ = new Mysql_engine(); Mysql_engine() {}

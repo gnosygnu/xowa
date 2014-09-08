@@ -398,7 +398,8 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 
 	public static final Xoa_ttl[] Ttls_null = null;
 	private String Fail_msg_suffix() {
-		return String_.Format(" ttl={0} src={1}", String_.new_utf8_(cur_page_ttl.Full_db()), String_.new_utf8_(src, xnde_tkn.Src_bgn(), xnde_tkn.Src_end()));
+		String excerpt = Bry_fmtr.Escape_tilde(String_.new_utf8_(Bry_.Mid_by_len_safe(src, xnde_tkn.Src_bgn(), 32)));
+		return String_.Format(" ttl={0} src={1}", String_.new_utf8_(cur_page_ttl.Full_db()), excerpt);
 	}
 	private String Fail_msg_basic(String msg) {return msg + ";" + Fail_msg_suffix();}
 	private String Fail_msg_custom(String fmt, Object... args) {return String_.Format(fmt, args) + Fail_msg_suffix();}

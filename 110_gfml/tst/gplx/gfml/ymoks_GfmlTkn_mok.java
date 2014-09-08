@@ -68,7 +68,7 @@ class GfmlTkn_mok {
 		for (int i = 0; i < max; i++) {
 			GfmlTkn_mok expdSub = (GfmlTkn_mok)tstr.List_FetchAtOrNull(expd.Subs(), i);
 			GfmlTkn_mok actlSub = (GfmlTkn_mok)tstr.List_FetchAtOrNull(actl.Subs(), i);
-			tstr.SubName_push(Int_.XtoStr(i));
+			tstr.SubName_push(Int_.Xto_str(i));
 			tst(tstr, expdSub, actlSub);
 			tstr.SubName_pop();
 		}

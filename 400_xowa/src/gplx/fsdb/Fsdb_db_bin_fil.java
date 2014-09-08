@@ -34,16 +34,16 @@ public class Fsdb_db_bin_fil implements RlsAble {
 	public Db_provider Provider() {
 		if (provider == null) {
 			if (cmd_mode == Db_cmd_mode.Create) {
-				provider = Db_provider_.new_(Db_connect_sqlite.make_(url));
+				provider = Db_provider_.new_and_open_(Db_conn_info__sqlite.make_(url));
 				Sqlite_engine_.Pragma_page_size_4096(provider);
 				Fsdb_bin_tbl.Create_table(provider);
 			}
 			else
-				provider = Db_provider_.new_(Db_connect_sqlite.load_(url));
+				provider = Db_provider_.new_and_open_(Db_conn_info__sqlite.load_(url));
 		}
 		return provider;
 	} 	private Db_provider provider;
-	public void Rls() {if (provider != null) provider.Rls();}
+	public void Rls() {if (provider != null) provider.Conn_term();}
 	public long Insert(int bin_id, byte owner_tid, long bin_len, gplx.ios.Io_stream_rdr bin_rdr) {
 		Db_stmt stmt = Db_stmt_.Null;
 		try {

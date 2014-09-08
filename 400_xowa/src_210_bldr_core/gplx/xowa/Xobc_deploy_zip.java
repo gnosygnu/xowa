@@ -42,10 +42,10 @@ public class Xobc_deploy_zip extends Xob_itm_basic_base implements Xob_cmd {
 		bldr.Usr_dlg().Prog_one(GRP_KEY, "scan", "scanning dir ~{0}", type_name);
 		Io_url[] fils = Io_mgr._.QueryDir_args(root_dir.GenSubDir(type_name)).Recur_().ExecAsUrlAry();
 		int fils_len = fils.length;
-		String fils_len_str = Int_.XtoStr_PadBgn(fils_len, 6);
+		String fils_len_str = Int_.Xto_str_pad_bgn(fils_len, 6);
 		for (int i = 0; i < fils_len; i++) {
 			Io_url fil = fils[i];
-			bldr.StatusMgr_prog_fmt(i, fils.length, -1, "zipping ~{0} ~{1} ~{2} of ~{3}", type_name, ns_name, Int_.XtoStr_PadBgn(i, 6), fils_len_str);
+			bldr.StatusMgr_prog_fmt(i, fils.length, -1, "zipping ~{0} ~{1} ~{2} of ~{3}", type_name, ns_name, Int_.Xto_str_pad_bgn(i, 6), fils_len_str);
 			Io_url trg_fil = Gen_trg(root_dir, fil, type_name);
 			if (String_.Eq(fil.NameAndExt(), Xow_dir_info_.Name_reg_fil))	// do not zip reg.csv
 				Io_mgr._.CopyFil(fil, trg_fil, true);

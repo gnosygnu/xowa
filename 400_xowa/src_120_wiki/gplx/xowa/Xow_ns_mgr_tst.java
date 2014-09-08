@@ -52,7 +52,7 @@ class Xow_ns_mgr_fxt {
 		int ids_len = ids.length;
 		for (int i = 0; i < ids_len; i++) {
 			int id = ids[i];
-			ns_mgr.Add_new(id, Int_.XtoStr(id));
+			ns_mgr.Add_new(id, Int_.Xto_str(id));
 		}
 		return this;
 	}

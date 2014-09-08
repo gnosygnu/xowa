@@ -138,7 +138,7 @@ public class Xob_wiki_cfg_bldr_tst {
 				if (!String_.Eq(ns_nde.Name(), "ns")) continue;
 				int id = Int_.parse_(ns_nde.Atrs().FetchValOr("id", "-1"));
 				String name = String_.Replace(String_.Replace(ns_nde.Text_inner(), " ", "_"), "'", "''");
-				sb.Add(Int_.XtoStr(id)).Add("|").Add(String_.Trim(name)).Add_char_nl();
+				sb.Add(Int_.Xto_str(id)).Add("|").Add(String_.Trim(name)).Add_char_nl();
 			}
 			sb.Add("\");');\n");
 			}

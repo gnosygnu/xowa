@@ -66,7 +66,7 @@ public class NumberParser_tst {
 	private void tst_Dec(String raw, DecimalAdp expd) {
 		byte[] raw_bry = Bry_.new_ascii_(raw);
 		DecimalAdp actl = parser.Parse(raw_bry, 0, raw_bry.length).AsDec(); 
-		Tfds.Eq(expd.XtoDecimal(), actl.XtoDecimal(), raw);
+		Tfds.Eq(expd.Xto_decimal(), actl.Xto_decimal(), raw);
 	}
 	private void tst_Err(String raw, boolean expd) {
 		byte[] raw_bry = Bry_.new_ascii_(raw);

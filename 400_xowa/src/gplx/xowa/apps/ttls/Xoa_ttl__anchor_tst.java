@@ -34,4 +34,9 @@ public class Xoa_ttl__anchor_tst {
 	@Test   public void Anchor_and_slash() {	// PURPOSE: slash in anchor was being treated as a subpage; DATE:2014-01-14
 		fxt.Init_ttl("A#b/c").Expd_full_txt("A").Expd_anch_txt("b/c").Expd_leaf_txt("A").Test();	// NOTE: Leaf_txt should be Page_txt; used to fail
 	}
+	@Test   public void Decode_ncr() {	// PURPOSE: convert &#x23; to #; PAGE:en.s:The_English_Constitution_(1894) DATE:2014-09-07
+		fxt.Init_ttl("A&#x23;b").Expd_full_txt("A").Expd_page_txt("A").Expd_anch_txt("b").Test();
+		fxt.Init_ttl("A&#35;b").Expd_full_txt("A").Expd_page_txt("A").Expd_anch_txt("b").Test();
+		fxt.Init_ttl("A&#36;b").Expd_full_txt("A$b").Expd_page_txt("A$b").Expd_anch_txt("").Test();
+	}
 }

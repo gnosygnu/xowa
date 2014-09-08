@@ -69,7 +69,7 @@ public class Fsdb_db_atr_mgr implements RlsAble {
 		return rv;
 	}
 	private static Io_url url_(Io_url dir, int id) {
-		return dir.GenSubFil_ary("fsdb.atr.", Int_.XtoStr_PadBgn(id, 2), ".sqlite3");
+		return dir.GenSubFil_ary("fsdb.atr.", Int_.Xto_str_pad_bgn(id, 2), ".sqlite3");
 	}
 	public static final int Id_0 = 0;
 	public static final String Path_bgn_0 = "";

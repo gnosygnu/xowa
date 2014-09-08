@@ -32,7 +32,7 @@ public class Xow_ns implements GfoInvkAble {
 			this.name_db_w_colon	= Bry_.Add(v, Byte_ascii.Colon);
 			this.name_str			= String_.new_utf8_(v);
 		}
-		this.num_str = Int_.XtoStr_PadBgn(id, 3);
+		this.num_str = Int_.Xto_str_pad_bgn(id, 3);
 		this.num_bry = Bry_.new_ascii_(num_str);
 		this.name_enc = Xoa_url_encoder._.Encode(name_bry);
 		this.name_txt = Bry_.Replace(name_enc, Byte_ascii.Underline, Byte_ascii.Space);

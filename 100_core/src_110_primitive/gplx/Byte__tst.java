@@ -31,5 +31,5 @@ public class Byte__tst {
 		tst_XtoInt( 128,  128);
 		tst_XtoInt( 255,  255);
 		tst_XtoInt( 256,    0);
-	}	void tst_XtoInt(int v, int expd) {Tfds.Eq(expd, Byte_.XtoInt((byte)v));}	// WORKAROUND/JAVA: v is of type int b/c java promotes numbers to ints
+	}	void tst_XtoInt(int v, int expd) {Tfds.Eq(expd, Byte_.Xto_int((byte)v));}	// WORKAROUND/JAVA: v is of type int b/c java promotes numbers to ints
 }

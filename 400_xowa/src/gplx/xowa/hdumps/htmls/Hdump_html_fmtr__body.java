@@ -84,8 +84,8 @@ public class Hdump_html_fmtr__body implements Bry_fmtr_arg {
 			case Hdump_html_consts.Tid_file_mgnf: fmtr.Html_thumb_part_magnify(bfr, uid, a_href, a_title, html_mgr.Img_thumb_magnify()); return rv;
 			case Hdump_html_consts.Tid_file_play: fmtr.Html_thumb_part_play	(bfr, uid, img_view_w, Xoh_file_wtr__basic.Play_btn_max_width, a_href, a_title, html_mgr.Img_media_play_btn()); return rv;
 			case Hdump_html_consts.Tid_gallery_box_max: {
-				Hdump_data_img__gallery gly = (Hdump_data_img__gallery)img;
-				if (gly.Box_max() > 0) {	// -1 means no box_max
+				Hdump_data_gallery gly = (Hdump_data_gallery)hpg.Gly_itms().Fetch(uid);
+				if (gly != null) {	// -1 means no box_max
 					byte[] style = Gallery_mgr_base.box_style_max_width_fmtr.Bld_bry_many(tmp_bfr, gly.Box_max());
 					Html_wtr.Write_atr_bry(bfr, Bool_.N, Byte_ascii.Quote, Html_atr_.Style_bry, style);
 				}

@@ -51,7 +51,8 @@ public class Xoh_html_wtr_tst {
 //		@Test  public void Img_alt() {	// FUTURE: enable; WHEN: after fixing xnde to handle bad xnde; EX: France
 //			fxt.Test_parse_page_wiki_str("[[File:A.png|none|9x8px|alt=a<b>b</b>\"c\"d]]", Xop_fxt.html_img_none("File:A.png", "ab&quot;c&quot;d"));
 //		}
-	@Test  public void Url_encode()					{fxt.Test_parse_page_wiki_str("[[a;@$!*(),/ _^b|z]]"		, "<a href=\"/wiki/a;@$!*(),/__%5Eb\">z</a>");}
+	@Test  public void Url_encode()					{fxt.Test_parse_page_wiki_str("[[a;@$!*(),/ _^b|z]]"		, "<a href=\"/wiki/A;@$!*(),/_%5Eb\">z</a>");}	// NOTE: was "a" instead of "A"; "__" instead of "_" DATE:2014-09-07
+	@Test  public void Url_encode_space()			{fxt.Test_parse_page_wiki_str("[[a _b|z]]"					, "<a href=\"/wiki/A_b\">z</a>");}
 	@Test  public void Apos_i()						{fxt.Test_parse_page_wiki_str("''a''"						, "<i>a</i>");}
 	@Test  public void Apos_b()						{fxt.Test_parse_page_wiki_str("'''a'''"						, "<b>a</b>");}
 	@Test  public void Apos_ib()					{fxt.Test_parse_page_wiki_str("'''''a'''''"					, "<i><b>a</b></i>");}

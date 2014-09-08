@@ -25,7 +25,7 @@ public abstract class GroupBys_base_tst {
 		Db_qry_.delete_tbl_("dbs_group_bys").Exec_qry(provider);
 	}
 	@After public void teardown() {
-		provider.Rls();
+		provider.Conn_term();
 	}
 	protected void GroupBy_1fld_hook() {
 		provider.Exec_qry(Db_qry_.insert_("dbs_group_bys").Arg_("key1", "a").Arg_("val_int", 1));

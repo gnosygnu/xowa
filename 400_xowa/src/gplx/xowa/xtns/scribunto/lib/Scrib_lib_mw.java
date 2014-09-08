@@ -222,7 +222,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 			Arg_nde_tkn arg = frame.Args_get_by_idx(i + args_adj);
 			arg.Key_tkn().Tmpl_evaluate(ctx, src, frame, tmp_bfr);
 			String key = tmp_bfr.XtoStrAndClear();
-			if (String_.Eq(key, "")) key = Int_.XtoStr(i);
+			if (String_.Eq(key, "")) key = Int_.Xto_str(i);
 			arg.Val_tkn().Tmpl_evaluate(ctx, src, parent_frame, tmp_bfr);	// NOTE: must evaluate against parent_frame; evaluating against current frame may cause stack-overflow; DATE:2013-04-04
 			String val = tmp_bfr.XtoStrAndClear();
 			kv_args[i] = KeyVal_.new_(key, val);
@@ -351,7 +351,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		KeyVal[] args_ary = args.Pull_kv_ary(2);
 		Xot_invk_mock new_frame = Xot_invk_mock.new_(core.Frame_current().Defn_tid(), 0, args_ary);
 		new_frame.Frame_ttl_(ttl.Full_txt());	// NOTE: use spaces, not unders; REF.MW:$frame->getTitle()->getPrefixedText(); DATE:2014-08-14
-		String new_frame_id = "frame" + Int_.XtoStr(frame_list_len);
+		String new_frame_id = "frame" + Int_.Xto_str(frame_list_len);
 		frame_list.Add(new_frame_id, new_frame);
 		return rslt.Init_obj(new_frame_id);
 	}

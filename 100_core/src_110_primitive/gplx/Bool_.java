@@ -19,8 +19,8 @@ package gplx;
 public class Bool_ implements GfoInvkAble {
 	public static final boolean[] Ary_empty = new boolean[0];
 	public static final Class<?> ClassOf = Boolean.class; 
-	public static int		XtoInt(boolean v) {return v ? 1 : 0;}
-	public static String	XtoStr_lower(boolean v) {return v ? "true" : "false";}
+	public static int		Xto_int(boolean v) {return v ? 1 : 0;}
+	public static String	Xto_str_lower(boolean v) {return v ? "true" : "false";}
 	public static byte		Xto_byte(boolean v) {return v ? Y_byte : N_byte;}
 	public static boolean		cast_(Object obj) {try {return (Boolean)obj;} catch (Exception e) {throw Err_.type_mismatch_exc_(e, boolean.class, obj);}}
 	public static boolean		cast_or_(Object obj, boolean v) {try {return (Boolean)obj;} catch (Exception e) {Err_.Noop(e); return v;}}

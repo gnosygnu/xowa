@@ -71,11 +71,11 @@ public class Xob_bmk_mgr implements GfoInvkAble {
 	}
 	public void Save() {
 		if (repo_enable && repo_dirty) {
-			Save(Cfg_repo_prv, Byte_.XtoStr(repo_prv));
+			Save(Cfg_repo_prv, Byte_.Xto_str(repo_prv));
 			repo_dirty = false;
 		}
 		if (ns_enable && ns_dirty) {
-			Save(Cfg_ns_prv, Int_.XtoStr(ns_prv));
+			Save(Cfg_ns_prv, Int_.Xto_str(ns_prv));
 			ns_dirty = false;
 		}
 		if (ttl_enable && ttl_dirty) {

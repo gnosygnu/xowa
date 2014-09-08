@@ -82,7 +82,7 @@ public class SqliteDbMain {
 		}
 		long time_elapsed = (Env_.TickCount() - time_bgn);	
 //		provider.Txn_mgr().Txn_end();
-		provider.Rls();
+		provider.Conn_term();
 		Tfds.Write(time_elapsed, number / time_elapsed);
 		// 250; 260
 		Tfds.Write("");

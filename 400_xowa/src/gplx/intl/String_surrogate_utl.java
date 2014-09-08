@@ -24,8 +24,9 @@ public class String_surrogate_utl {
 		int char_count = 0, codepoint_count = 0;
 		byte_pos = byte_bgn;
 		while (true) {
-			if (stop_idx == (stop_idx_is_char ? char_count : codepoint_count)) return codepoint_count - char_count;
-			if (byte_pos >= src_len) throw Err_.new_("codepoint_idx is not in string; stop_idx={0} stop_idx_is_char={1} byte_bgn={2} string={3}", stop_idx, stop_idx_is_char, byte_bgn, String_.new_utf8_(src));
+			if (	stop_idx == (stop_idx_is_char ? char_count : codepoint_count)		// requested # of chars found
+				||	byte_pos >= src_len													// eos reached; DATE:2014-09-02
+				) return codepoint_count - char_count;
 			int char_len_in_bytes = gplx.intl.Utf8_.Len_of_char_by_1st_byte(src[byte_pos]);
 			++char_count;												// char_count always incremented by 1
 			codepoint_count += (char_len_in_bytes == 4) ? 2 : 1;		// codepoint_count incremented by 2 if surrogate pair; else 1

@@ -47,7 +47,7 @@ public class Scrib_lib_ustring__lib_tst {
 		Exec_match("abcd"	, "."				, -1, "d");							// -1
 		Exec_match("aaa"	, "a"				, 1, "a");							// should return 1st match not many
 		Exec_match("aaa"	, "(a)"				, 1, "a;a;a");						// should return all matches
-		Exec_match("a b"	, "%S"				, 1, "a");							// %S was returning every match instead of 1st; EX:en.w:Bertrand_Russell; DATE:2014-04-02
+		Exec_match("a b"	, "%S"				, 1, "a");							// %S was returning every match instead of 1st; PAGE:en.w:Bertrand_Russell; DATE:2014-04-02
 	}
 	@Test  public void Match_args_out_of_order() {
 		fxt.Test_scrib_proc_empty(lib, Scrib_lib_ustring.Invk_match, KeyVal_.Ary(KeyVal_.int_(2, "[a]")));
@@ -73,6 +73,12 @@ public class Scrib_lib_ustring__lib_tst {
 	}
 	@Test  public void Gsub_no_replace() {// PURPOSE: gsub with no replace argument should not fail; EX:d:'orse; DATE:2013-10-14
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_ustring.Invk_gsub, Object_.Ary("text", "regx")						, "1=text");	// NOTE: repl, limit deliberately omitted
+	}
+	@Test  public void Gsub_pattern_is_int() {	// PURPOSE: do not fail if integer is passed in for @regx; PAGE:en.d:λύω DATE:2014-09-02
+		Exec_gsub_regx("abcd", 1	 , -1, "A"		, "abcd;0");
+	}
+	@Test  public void Gsub_replace_is_int() {	// PURPOSE: do not fail if integer is passed in for @replace; PAGE:en.d:λύω DATE:2014-09-02
+		Exec_gsub_regx("abcd", 1	 , -1, 1		, "abcd;0");
 	}
 	@Test  public void Gmatch_init() {
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_ustring.Invk_gmatch_init, Object_.Ary("abcabc", "a(b)")						, "1=a(b)\n2=\n  1=false");
@@ -116,8 +122,8 @@ public class Scrib_lib_ustring__lib_tst {
 	private void Exec_match(String text, String regx, int bgn, String expd) {
 		fxt.Test_scrib_proc_kv_vals(lib, Scrib_lib_ustring.Invk_match, Scrib_kv_utl_.base1_many_(text, regx, bgn), expd);
 	}
-	private void Exec_gsub_regx(String text, String regx, int limit, Object repl, String expd) {Exec_gsub(text, regx, limit, repl, expd);}
-	private void Exec_gsub(String text, String regx, int limit, Object repl, String expd) {
+	private void Exec_gsub_regx(String text, Object regx, int limit, Object repl, String expd) {Exec_gsub(text, regx, limit, repl, expd);}
+	private void Exec_gsub(String text, Object regx, int limit, Object repl, String expd) {
 		fxt.Test_scrib_proc_kv_vals(lib, Scrib_lib_ustring.Invk_gsub, Scrib_kv_utl_.base1_many_(text, regx, repl, limit), expd);
 	}
 }

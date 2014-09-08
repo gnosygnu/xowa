@@ -55,7 +55,7 @@ public class Xob_orig_qry_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		String sql = String_.Concat_lines_nl_skip_last
 			(	"SELECT	lnki_ttl"
 			,	"FROM	orig_regy"	
-			,	"WHERE	lnki_repo >= '" + Byte_.XtoStr(prv_repo_id) + "'"
+			,	"WHERE	lnki_repo >= '" + Byte_.Xto_str(prv_repo_id) + "'"
 			,	"AND    lnki_ttl > '" + prv_ttl + "'"
 			,	"AND	oimg_orig_page_id = -1;"
 			);

@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
 public class Db_qry_flush implements Db_qry {
+	public int Tid() {return Db_qry_.Tid_basic;}
 	public String KeyOfDb_qry() {return KeyConst;} public static final String KeyConst = "FLUSH";
 	public boolean ExecRdrAble() {return false;}
 	public int Exec_qry(Db_provider provider) {return provider.Exec_qry(this);}

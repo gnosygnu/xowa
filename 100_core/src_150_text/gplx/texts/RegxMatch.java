@@ -19,7 +19,7 @@ package gplx.texts; import gplx.*;
 public class RegxMatch {
 	public RegxMatch(boolean rslt, int find_bgn, int find_end, RegxGroup[] groups) {this.rslt = rslt; this.find_bgn = find_bgn; this.find_end = find_end; this.groups = groups;}
 	public boolean Rslt() {return rslt;} private boolean rslt;
-	public boolean Rslt_none() {return !rslt || (find_end - find_bgn) == 0;}	// NOTE: find_end - find_bgn == 0 means find.length == 0; treating these as failed match, even thought matcher.find = true; DATE:2013-04-10
+	public boolean Rslt_none() {return !rslt;}	// NOTE: was "|| find_end - find_bgn == 0"; DATE:2013-04-11; DATE:2014-09-02
 	public int Find_bgn() {return find_bgn;} int find_bgn;
 	public int Find_end() {return find_end;} int find_end;
 	public int Find_len() {return find_end - find_bgn;}

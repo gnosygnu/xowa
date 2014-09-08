@@ -38,71 +38,73 @@ public class Xop_lnki_logger_redlinks_wkr implements GfoInvkAble {
 		return this;
 	}	public static final String Invk_run = "run";
 	public void Redlink() {
-		ListAdp work_list = ListAdp_.new_();
-		OrderedHash page_hash = OrderedHash_.new_bry_();
-		page_hash.Clear(); // NOTE: do not clear in Page_bgn, else will fail b/c of threading; EX: Open Page -> Preview -> Save; DATE:2013-11-17
-		work_list.Clear();
-		int len = lnki_list.Count();
-		if (log_enabled) usr_dlg.Log_many("", "", "redlink.redlink_bgn: page=~{0} total_links=~{1}", String_.new_utf8_(page.Ttl().Raw()), len);
-		for (int i = 0; i < len; i++) {	// make a copy of list else thread issues
-			if (win.Usr_dlg().Canceled()) return;
-			if (redlinks_mgr.Request_idx() != request_idx) return;
-			work_list.Add(lnki_list.FetchAt(i));
-		}
-		for (int i = 0; i < len; i++) {
-			if (win.Usr_dlg().Canceled()) return;
-			if (redlinks_mgr.Request_idx() != request_idx) return;
-			Xop_lnki_tkn lnki = (Xop_lnki_tkn)work_list.FetchAt(i);
-			Xoa_ttl ttl = lnki.Ttl();
-			Xodb_page db_page = new Xodb_page().Ttl_(ttl);
-			byte[] full_txt = ttl.Full_db();
-			if (!page_hash.Has(full_txt))
-				page_hash.Add(full_txt, db_page);
-		}
-		int page_len = page_hash.Count();
-		for (int i = 0; i < page_len; i += Batch_size) {
-			if (win.Usr_dlg().Canceled()) return;
-			if (redlinks_mgr.Request_idx() != request_idx) return;
-			int end = i + Batch_size;
-			if (end > page_len) end = page_len;
-			wiki.Db_mgr().Load_mgr().Load_by_ttls(win.Usr_dlg(), page_hash, Xodb_page_tbl.Load_idx_flds_only_y, i, end);
-		}
-		redlink_count = 0;
-		Bry_bfr bfr = null;
-		boolean variants_enabled = wiki.Lang().Vnt_mgr().Enabled();
-		Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();
-		Int_list redlink_mgr = page.Html_data().Redlink_mgr();
-		for (int j = 0; j < len; j++) {
-			Xop_lnki_tkn lnki = (Xop_lnki_tkn)work_list.FetchAt(j);
-			byte[] full_db = lnki.Ttl().Full_db();
-			Xodb_page db_page = (Xodb_page)page_hash.Fetch(full_db);
-			if (db_page == null) continue;	// pages shouldn't be null, but just in case
-			if (!db_page.Exists()) {
-				String lnki_id = Xop_lnki_logger_redlinks_mgr.Lnki_id_prefix + Int_.XtoStr(lnki.Html_id());
-				if (variants_enabled) {
-					Xodb_page vnt_page = vnt_mgr.Convert_ttl(wiki, lnki.Ttl());
-					if (vnt_page != null) {
-						Xoa_ttl vnt_ttl = Xoa_ttl.parse_(wiki, lnki.Ttl().Ns().Id(), vnt_page.Ttl_wo_ns());
-						html_itm.Html_atr_set(lnki_id, "href", "/wiki/" + String_.new_utf8_(vnt_ttl.Full_url()));
-						if (!String_.Eq(vnt_mgr.Html_style(), ""))
-							html_itm.Html_atr_set(lnki_id, "style", vnt_mgr.Html_style());
-						continue;
-					}
-				}
-				if (log_enabled) {
-					if (bfr == null) bfr = Bry_bfr.new_();
-					bfr.Add_int_variable(lnki.Html_id()).Add_byte_pipe().Add(Xop_tkn_.Lnki_bgn).Add(full_db).Add(Xop_tkn_.Lnki_end).Add_byte(Byte_ascii.Semic).Add_byte_space();
-				}
+		synchronized (this) {	// NOTE: attempt to eliminate random IndexBounds errors; DATE:2014-09-02
+			ListAdp work_list = ListAdp_.new_();
+			OrderedHash page_hash = OrderedHash_.new_bry_();
+			page_hash.Clear(); // NOTE: do not clear in Page_bgn, else will fail b/c of threading; EX: Open Page -> Preview -> Save; DATE:2013-11-17
+			work_list.Clear();
+			int len = lnki_list.Count();
+			if (log_enabled) usr_dlg.Log_many("", "", "redlink.redlink_bgn: page=~{0} total_links=~{1}", String_.new_utf8_(page.Ttl().Raw()), len);
+			for (int i = 0; i < len; i++) {	// make a copy of list else thread issues
 				if (win.Usr_dlg().Canceled()) return;
 				if (redlinks_mgr.Request_idx() != request_idx) return;
-				int uid = lnki.Html_id();
-				gplx.xowa.files.gui.Js_img_mgr.Update_link_missing(html_itm, Xop_lnki_logger_redlinks_mgr.Lnki_id_prefix + Int_.XtoStr(uid));
-				redlink_mgr.Add(uid);
-				++redlink_count;
+				work_list.Add(lnki_list.FetchAt(i));
 			}
+			for (int i = 0; i < len; i++) {
+				if (win.Usr_dlg().Canceled()) return;
+				if (redlinks_mgr.Request_idx() != request_idx) return;
+				Xop_lnki_tkn lnki = (Xop_lnki_tkn)work_list.FetchAt(i);
+				Xoa_ttl ttl = lnki.Ttl();
+				Xodb_page db_page = new Xodb_page().Ttl_(ttl);
+				byte[] full_txt = ttl.Full_db();
+				if (!page_hash.Has(full_txt))
+					page_hash.Add(full_txt, db_page);
+			}
+			int page_len = page_hash.Count();
+			for (int i = 0; i < page_len; i += Batch_size) {
+				if (win.Usr_dlg().Canceled()) return;
+				if (redlinks_mgr.Request_idx() != request_idx) return;
+				int end = i + Batch_size;
+				if (end > page_len) end = page_len;
+				wiki.Db_mgr().Load_mgr().Load_by_ttls(win.Usr_dlg(), page_hash, Xodb_page_tbl.Load_idx_flds_only_y, i, end);
+			}
+			redlink_count = 0;
+			Bry_bfr bfr = null;
+			boolean variants_enabled = wiki.Lang().Vnt_mgr().Enabled();
+			Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();
+			Int_list redlink_mgr = page.Html_data().Redlink_mgr();
+			for (int j = 0; j < len; j++) {
+				Xop_lnki_tkn lnki = (Xop_lnki_tkn)work_list.FetchAt(j);
+				byte[] full_db = lnki.Ttl().Full_db();
+				Xodb_page db_page = (Xodb_page)page_hash.Fetch(full_db);
+				if (db_page == null) continue;	// pages shouldn't be null, but just in case
+				if (!db_page.Exists()) {
+					String lnki_id = Xop_lnki_logger_redlinks_mgr.Lnki_id_prefix + Int_.Xto_str(lnki.Html_id());
+					if (variants_enabled) {
+						Xodb_page vnt_page = vnt_mgr.Convert_ttl(wiki, lnki.Ttl());
+						if (vnt_page != null) {
+							Xoa_ttl vnt_ttl = Xoa_ttl.parse_(wiki, lnki.Ttl().Ns().Id(), vnt_page.Ttl_wo_ns());
+							html_itm.Html_atr_set(lnki_id, "href", "/wiki/" + String_.new_utf8_(vnt_ttl.Full_url()));
+							if (!String_.Eq(vnt_mgr.Html_style(), ""))
+								html_itm.Html_atr_set(lnki_id, "style", vnt_mgr.Html_style());
+							continue;
+						}
+					}
+					if (log_enabled) {
+						if (bfr == null) bfr = Bry_bfr.new_();
+						bfr.Add_int_variable(lnki.Html_id()).Add_byte_pipe().Add(Xop_tkn_.Lnki_bgn).Add(full_db).Add(Xop_tkn_.Lnki_end).Add_byte(Byte_ascii.Semic).Add_byte_space();
+					}
+					if (win.Usr_dlg().Canceled()) return;
+					if (redlinks_mgr.Request_idx() != request_idx) return;
+					int uid = lnki.Html_id();
+					gplx.xowa.files.gui.Js_img_mgr.Update_link_missing(html_itm, Xop_lnki_logger_redlinks_mgr.Lnki_id_prefix + Int_.Xto_str(uid));
+					redlink_mgr.Add(uid);
+					++redlink_count;
+				}
+			}
+			if (log_enabled)
+				usr_dlg.Log_many("", "", "redlink.redlink_end: redlinks_run=~{0} links=~{1}", redlink_count, bfr == null ? String_.Empty : bfr.XtoStrAndClear());
 		}
-		if (log_enabled)
-			usr_dlg.Log_many("", "", "redlink.redlink_end: redlinks_run=~{0} links=~{1}", redlink_count, bfr == null ? String_.Empty : bfr.XtoStrAndClear());
 	}
 	public static final Xop_lnki_logger_redlinks_wkr Null = new Xop_lnki_logger_redlinks_wkr();  Xop_lnki_logger_redlinks_wkr() {}
 	private static final int Batch_size = 32;

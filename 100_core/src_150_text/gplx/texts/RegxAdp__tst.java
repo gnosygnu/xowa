@@ -26,7 +26,8 @@ public class RegxAdp__tst implements TfdsEqListItmStr {
 		tst_Match("[^a]", "b", true); // charSet_negate
 	}	void tst_Match(String find, String input, boolean expd) {Tfds.Eq(expd, RegxAdp_.Match(input, find));}
 	@Test  public void Match_all() {
-		tst_Match_all("#REDIRECT [[Template:Error]]", "^\\p{Nd}*", 0); // handle match = true but len = 0 DATE:2013-04-10
+		tst_Match_all("#REDIRECT [[Template:Error]]", "^\\p{Nd}*", 1);	// handle match = true but len = 0; DATE:2013-04-11
+		tst_Match_all("a", "$", 1);										// $ should match once, not zero; DATE:2014-09-02
 	}	void tst_Match_all(String input, String regx, int expd) {Tfds.Eq(expd, RegxAdp_.new_(regx).Match_all(input, 0).length);}
 	@Test  public void Replace() {
 		tst_Replace("ab", "a", "b", "bb");	// basic

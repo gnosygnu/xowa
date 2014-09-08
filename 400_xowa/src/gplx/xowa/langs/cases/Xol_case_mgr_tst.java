@@ -37,6 +37,7 @@ public class Xol_case_mgr_tst {
 		fxt.Test_reuse_1st_upper("Abc");
 		fxt.Test_reuse_1st_upper("é", "É");
 		fxt.Test_reuse_1st_upper("É");
+		fxt.Lower("Ι", "ι");	// PURPOSE:test reversal; PAGE:en.d:ἀρχιερεύς DATE:2014-09-02
 	}
 //		@Test  public void Hack() {
 //			Xol_case_itm[] ary = Xol_case_mgr_.Utf_8;
@@ -92,7 +93,7 @@ class Xol_case_mgr_fxt {
 		int ary_len = ary.length;
 		for (int i = 0; i < ary_len; i++) {
 			Xol_case_itm itm = ary[i];
-			sb.Add(Byte_.XtoStr(itm.Tid())).Add_char_pipe().Add(String_.new_utf8_(itm.Src_ary())).Add_char_pipe().Add(String_.new_utf8_(itm.Trg_ary())).Add_char_nl();
+			sb.Add(Byte_.Xto_str(itm.Tid())).Add_char_pipe().Add(String_.new_utf8_(itm.Src_ary())).Add_char_pipe().Add(String_.new_utf8_(itm.Trg_ary())).Add_char_nl();
 		}
 		return sb.XtoStrAndClear();
 	}

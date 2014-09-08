@@ -43,12 +43,12 @@ public class Db_provider_fxt implements RlsAble {
 		Tfds.Eq_ary(actlValAry, expdValAry);
 		return record;
 	}
-	public void Rls() {provider.Rls();}
+	public void Rls() {provider.Conn_term();}
 
-	public static Db_provider Mysql()				{return Db_provider_.new_(Db_connect_mysql.new_("127.0.0.1", "unit_tests", "gplx_user", "gplx_password"));}
-	public static Db_provider Tdb(String fileName)	{return Db_provider_.new_(Db_connect_.tdb_(Tfds.RscDir.GenSubDir_nest("140_dbs", "tdbs").GenSubFil(fileName)));}
-	public static Db_provider Postgres()			{return Db_provider_.new_(Db_connect_postgres.new_("127.0.0.1", "unit_tests", "gplx_user", "gplx_password"));}
-	public static Db_provider Sqlite()				{return Db_provider_.new_(Db_connect_sqlite.load_(Tfds.RscDir.GenSubFil_nest("140_dbs", "sqlite", "unit_tests.db")));}
+	public static Db_provider Mysql()				{return Db_provider_.new_and_open_(Db_conn_info__mysql.new_("127.0.0.1", "unit_tests", "gplx_user", "gplx_password"));}
+	public static Db_provider Tdb(String fileName)	{return Db_provider_.new_and_open_(Db_conn_info_.tdb_(Tfds.RscDir.GenSubDir_nest("140_dbs", "tdbs").GenSubFil(fileName)));}
+	public static Db_provider Postgres()			{return Db_provider_.new_and_open_(Db_conn_info__postgres.new_("127.0.0.1", "unit_tests", "gplx_user", "gplx_password"));}
+	public static Db_provider Sqlite()				{return Db_provider_.new_and_open_(Db_conn_info__sqlite.load_(Tfds.RscDir.GenSubFil_nest("140_dbs", "sqlite", "unit_tests.db")));}
 //		public static Db_provider Mssql() {return MssqlConnectUrl.WindowsAuth(".", "unit_tests");
 	public static final boolean SkipPostgres = Tfds.SkipDb || true;
 }

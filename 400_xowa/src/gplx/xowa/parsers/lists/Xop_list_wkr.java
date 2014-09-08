@@ -45,12 +45,6 @@ public class Xop_list_wkr implements Xop_ctx_wkr {
 		cur_pos = SymAry_fill(src, cur_pos, src_len, symByt);
 		symByt = src[cur_pos - 1];	// NOTE: get symByt again b/c cur_pos may have changed; EX: "#*"; # may have triggered list, but last symByt should be *
 		if (SymAry_fill_overflow) return ctx.Lxr_make_txt_(cur_pos);
-		int trim_line_end = Trim_empty_item(src, src_len, cur_pos);
-		if (trim_line_end != Bry_.NotFound) {
-			curSymLen = prvSymLen;
-			ctx.Tkn_mkr().Ignore(bgn_pos, trim_line_end, Xop_ignore_tkn.Ignore_tid_empty_li);
-			return trim_line_end; 
-		}
 		PrvItm_compare();
 		ctx.Para().Process_block__bgn__nl_w_symbol(ctx, root, src, bgn_pos, cur_pos - 1, Xop_xnde_tag_.Tag_li);	// -1 b/c cur_pos includes sym_byte; EX: \n*; pass li; should pass correct tag, but for purposes of para_wkr, <li> doesn't matter
 		if	(prvSymMatch) {
@@ -107,21 +101,6 @@ public class Xop_list_wkr implements Xop_ctx_wkr {
 		ctx.Subs_add(root, end_tkn);
 		// if (empty_ignored) ctx.Empty_ignore(root, bgn.Tkn_sub_idx());	// commented; code was incorrectly deactivating "*a" when "<li>" encountered; PAGE:en.w:Bristol_Bullfinch DATE:2014-06-24
 		ctx.Para().Process_block__bgn_n__end_y(Xop_xnde_tag_.Tag_ul);
-	}
-	private int Trim_empty_item(byte[] src, int src_len, int pos) {
-		while (pos < src_len) {
-			byte b = src[pos];
-			switch (b) {
-				case Byte_ascii.Tab: case Byte_ascii.CarriageReturn: case Byte_ascii.Space:
-					++pos;
-					break;
-				case Byte_ascii.NewLine:
-					return pos;
-				default:
-					return Bry_.NotFound;
-			} 		
-		}
-		return Bry_.NotFound;
 	}
 	private Xop_list_tkn PopTil(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos, byte subLast) {
 		int acs_pos = ctx.Stack_idx_find_but_stop_at_tbl(Xop_tkn_itm_.Tid_list);

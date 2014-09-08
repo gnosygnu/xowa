@@ -41,7 +41,7 @@ public class IptBnd_upDownRange implements InjectAble, GfoInvkAble, GfoEvObj {
 	public int Adj() {return adj;} public IptBnd_upDownRange Adj_(int v) {adj = v; return this;} int adj;
 	void WhenEvt(GfsCtx ctx, GfoMsg m) {
 		curVal = m.ReadInt(arg) + adj;
-		txtBox.Text_(Int_.XtoStr(curVal));
+		txtBox.Text_(Int_.Xto_str(curVal));
 	}
 	void ExecCmd(String c, int val) {
 		GfoInvkAble_.InvkCmd_val(src, c, val - adj);

@@ -51,7 +51,13 @@ class Xog_launcher_tabs {
 		}
 	}
 	private void Restore_tab_failover(Xoa_app app, Xow_wiki home_wiki, Xog_win_itm win) {
-		Launch_tab(win.Active_tab(), win, home_wiki, gplx.xowa.users.Xouc_pages_mgr.Page_xowa);
+		try {
+			Xog_tab_itm tab = win.Tab_mgr().Tabs_new_init();	// NOTE: was win.Active_tab which throws a nullRef; DATE:2014-09-01
+			Launch_tab(tab, win, home_wiki, gplx.xowa.users.Xouc_pages_mgr.Page_xowa);
+		}
+		catch (Exception e) {
+			app.Usr_dlg().Warn_many("", "", "failed to launch failover tab: err=~{0}", Err_.Message_gplx(e));
+		}
 	}
 	private void Launch_tab(Xog_tab_itm tab, Xog_win_itm win, Xow_wiki home_wiki, String launch_str) {
 		Xoa_url launch_url = Xoa_url_parser.Parse_from_url_bar(win.App(), home_wiki, launch_str);

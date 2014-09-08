@@ -23,7 +23,7 @@ public interface Php_tkn {
 }
 class Php_tkn_ {
 	public static final byte Tid_txt = 1, Tid_declaration = 2, Tid_ws = 3, Tid_comment = 4, Tid_var = 5, Tid_eq = 6, Tid_eq_kv = 7, Tid_semic = 8, Tid_comma = 9, Tid_paren_bgn = 10, Tid_paren_end = 11, Tid_null = 12, Tid_false = 13, Tid_true = 14, Tid_ary = 15, Tid_num = 16, Tid_quote = 17, Tid_brack_bgn = 18, Tid_brack_end = 19;
-	public static String Xto_str(byte tid) {return Byte_.XtoStr(tid);}
+	public static String Xto_str(byte tid) {return Byte_.Xto_str(tid);}
 }
 abstract class Php_tkn_base implements Php_tkn {
 	public abstract byte Tkn_tid();

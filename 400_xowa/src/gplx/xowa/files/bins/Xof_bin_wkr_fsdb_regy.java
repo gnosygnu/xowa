@@ -30,7 +30,7 @@ public class Xof_bin_wkr_fsdb_regy implements Xof_bin_wkr {
 		provider = Sqlite_engine_.Provider_load_or_make_(regy_url);
 	}
 	public void Rls() {
-		provider.Rls();
+		provider.Conn_term();
 	}
 	public Io_stream_rdr Bin_wkr_get_as_rdr(ListAdp temp_files, Xof_fsdb_itm itm, boolean is_thumb, int w) {
 		return null;

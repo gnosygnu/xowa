@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.stores; import gplx.*;
 import org.junit.*;
-import gplx.dbs.*; /*Db_connect*/
+import gplx.dbs.*; /*Db_conn_info*/
 public class DbMaprMgr_tst {
 	@Before public void setup() {
 		mgr = DbMaprMgr.new_().RootIndexFlds_(DbMaprArg.new_("id", "disc_id"))
@@ -37,9 +37,9 @@ public class DbMaprMgr_tst {
 			.			 Flds_add(MockStream.id_idk, "stream_id").Flds_add(MockStream.name_idk, "stream_name")
 			.			 ConstantFlds_add("stream_type", 1)
 			)));				
-		wtr = DbMaprWtr.new_by_url_(Db_connect_.Test);
+		wtr = DbMaprWtr.new_by_url_(Db_conn_info_.Test);
 		wtr.EnvVars().Add(DbMaprWtr.Key_Mgr, mgr);
-		provider = Db_provider_pool._.FetchOrNew(Db_connect_.Test);
+		provider = Db_provider_pool._.Get_or_new(Db_conn_info_.Test);
 		Db_qry_fxt.DeleteAll(provider, "mock_discs", "mock_titles", "mock_chapters", "mock_streams");
 	}	DbMaprMgr mgr; DbMaprWtr wtr; Db_provider provider; MockDisc disc; MockTitle title; MockChapter chapter; MockStream audio, subtitle; SrlMgr rdr;
 	@Test  public void PurgeObjTree() {
@@ -133,7 +133,7 @@ public class DbMaprMgr_tst {
 		Tfds.Eq("subtitle1", ((MockStream)t.Subtitles().FetchAt(0)).Name());
 	}
 	DbMaprRdr rdr_() {
-		DbMaprRdr rv = DbMaprRdr.new_(Db_connect_.Test, Db_crt_.eq_("disc_id", 1));
+		DbMaprRdr rv = DbMaprRdr.new_(Db_conn_info_.Test, Db_crt_.eq_("disc_id", 1));
 		rv.EnvVars().Add(DbMaprWtr.Key_Mgr, mgr);
 		return rv;
 	}

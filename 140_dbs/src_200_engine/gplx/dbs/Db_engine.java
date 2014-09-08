@@ -16,30 +16,35 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-interface Db_engine extends RlsAble {
-	String Key();
-	Db_connect ConnectInfo();
-	void Connect();
-	Object Execute(Db_qry cmd);
-	DataRdr NewDataRdr(java.sql.ResultSet rdr, String sql); 
-	Db_stmt New_db_stmt(Db_provider provider, Db_qry sql);
-	Object New_db_cmd(String sql);
-	void Txn_bgn();
-	void Txn_end();
-	Db_engine MakeEngine(Db_connect connectInfo);
+public interface Db_engine {
+	String			Key();
+	Db_conn_info	Conn_info();
+	void			Conn_open();
+	void			Conn_term();
+	void			Txn_bgn();
+	void			Txn_end();
+	Db_engine		Make_new(Db_conn_info conn_info);
+
+	Db_rdr			New_db_rdr(Object o, String sql);		// ResultSet if desktop; Cursor if android
+	Db_stmt			New_db_stmt(Db_provider provider, Db_qry sql);
+	Object			Execute(Db_qry cmd);
+	DataRdr			NewDataRdr(java.sql.ResultSet rdr, String sql); 
+	Object			New_db_cmd(String sql);
 }
 class Db_engine_null implements Db_engine {
-	public String Key() {return Db_connect_.Null.Key_of_db_connect();}
-	public Db_connect ConnectInfo() {return Db_connect_.Null;}
-	public void Connect() {}
+	public String			Key() {return Db_conn_info_.Null.Key();}
+	public Db_conn_info		Conn_info() {return Db_conn_info_.Null;}
+	public void				Conn_open() {}
+	public void				Conn_term() {}
+	public void				Txn_bgn() {}
+	public void				Txn_end() {}
+	public Db_engine		Make_new(Db_conn_info conn_info) {return this;}
+
 	public Object Execute(Db_qry cmd) {return cmd.ExecRdrAble() ? (Object)DataRdr_.Null : -1;}
-	public Object New_db_cmd(String sql) {throw Err_.not_implemented_();}
-	public DataRdr NewDataRdr(java.sql.ResultSet rdr, String sql) {return DataRdr_.Null;} 
-	public Db_stmt New_db_stmt(Db_provider provider, Db_qry qry) {return Db_stmt_.Null;}
-	public void Txn_bgn() {}
-	public void Txn_end() {}
-	public void Rls() {}
-	public Db_engine MakeEngine(Db_connect connectInfo) {return this;}
+	public Object	New_db_cmd(String sql) {throw Err_.not_implemented_();}
+	public DataRdr	NewDataRdr(java.sql.ResultSet rdr, String sql) {return DataRdr_.Null;} 
+	public Db_rdr	New_db_rdr(Object o, String sql) {return Db_rdr_.Null;}
+	public Db_stmt	New_db_stmt(Db_provider provider, Db_qry qry) {return Db_stmt_.Null;}
         public static final Db_engine_null _ = new Db_engine_null(); Db_engine_null() {}
 }
 class ExecSqlWkr implements Db_qryWkr {

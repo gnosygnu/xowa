@@ -79,7 +79,7 @@ public class GfuiMenuBar implements GfoInvkAble {
 			GfuiMenuBarItm itm = GfuiMenuBarItm.sub_(curOwnerItm);
 			itm.Type_(GfuiMenuBarItmType.Spr);
 			itm.Text_(text);
-			itm.Key_(curOwnerItm.Key() + "." + text + Int_.XtoStr(separatorIdx++));
+			itm.Key_(curOwnerItm.Key() + "." + text + Int_.Xto_str(separatorIdx++));
 			itm.ExecProps();
 		}
 		else if (ctx.Match(k, Invk_RegCmd)) {

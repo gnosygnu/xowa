@@ -95,7 +95,7 @@ class Scrib_lib_wikibase_srl {
 		KeyVal[] rv = new KeyVal[rv_len];
 		for (int i = 0; i < len; i++) {
 			Wdata_prop_grp grp = (Wdata_prop_grp)props.FetchAt(i);
-			String pid_str = Int_.XtoStr(grp.Id());
+			String pid_str = Int_.Xto_str(grp.Id());
 			KeyVal[] grp_val = Srl_claims_prop_grp("P" + pid_str, grp, base_adj);
 			rv[i] = KeyVal_.new_("P" + pid_str, grp_val);
 			if (legacy_style)

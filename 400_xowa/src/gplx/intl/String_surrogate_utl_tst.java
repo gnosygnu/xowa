@@ -28,6 +28,7 @@ public class String_surrogate_utl_tst {
 		fxt.Test_count_surrogates__char_idx			(test_str,  7, 2, 0, 10);		// bî
 		fxt.Test_count_surrogates__char_idx			(test_str,  7, 3, 1, 14);		// bî𡼾
 		fxt.Test_count_surrogates__char_idx			(test_str,  0, 6, 2, 14);		// aé𡼾bî𡼾
+		fxt.Test_count_surrogates__char_idx			(test_str, 14, 7, 0, 14);		// PURPOSE: test out of bounds; DATE:2014-09-02
 	}
 	@Test   public void Codepoint_idx() {
 		String test_str = "aé𡼾bî𡼾";

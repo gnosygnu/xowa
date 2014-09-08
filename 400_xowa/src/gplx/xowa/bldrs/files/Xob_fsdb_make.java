@@ -63,13 +63,13 @@ public class Xob_fsdb_make extends Xob_itm_basic_base implements Xob_cmd {
 			page_id_bmk = Int_.MaxValue;
 			lnki_id_bmk = Int_.MaxValue;
 		}
-		usr_dlg.Note_many("", "", "done: ~{0} ~{1}", exec_count, DecimalAdp_.divide_safe_(exec_count, Env_.TickCount_elapsed_in_sec(time_bgn)).XtoStr("#,###.000"));
+		usr_dlg.Note_many("", "", "done: ~{0} ~{1}", exec_count, DecimalAdp_.divide_safe_(exec_count, Env_.TickCount_elapsed_in_sec(time_bgn)).Xto_str("#,###.000"));
 		this.Txn_save();
 		tbl_cfg.Delete(Cfg_fsdb_make, Cfg_page_id_bmk); tbl_cfg.Delete(Cfg_fsdb_make, Cfg_lnki_id_bmk);	// delete bmks if future reruns are needed; DATE:2014-08-20
 		trg_fsdb_mgr.Txn_save();
 		trg_fsdb_mgr.Rls();	// save changes and rls all connections
 		db_select_stmt.Rls();
-		provider.Rls();
+		provider.Conn_term();
 	}
 	public void Cmd_print() {}
 	private int db_reset_tries_count = 0, db_reset_tries_max = 5;
@@ -130,8 +130,8 @@ public class Xob_fsdb_make extends Xob_itm_basic_base implements Xob_cmd {
 	private boolean Init_bmk(Xodb_xowa_cfg_tbl tbl_cfg) {
 		String page_id_str = tbl_cfg.Select_val(Cfg_fsdb_make, Cfg_page_id_bmk);
 		if (page_id_str == null) {	// bmks not found; new db; insert;
-			tbl_cfg.Insert_str(Cfg_fsdb_make, Cfg_page_id_bmk	, Int_.XtoStr(page_id_bmk));
-			tbl_cfg.Insert_str(Cfg_fsdb_make, Cfg_lnki_id_bmk	, Int_.XtoStr(lnki_id_bmk));
+			tbl_cfg.Insert_str(Cfg_fsdb_make, Cfg_page_id_bmk	, Int_.Xto_str(page_id_bmk));
+			tbl_cfg.Insert_str(Cfg_fsdb_make, Cfg_lnki_id_bmk	, Int_.Xto_str(lnki_id_bmk));
 			if (page_id_bmk == -1)
 				page_id_bmk = 0;
 			if (lnki_id_bmk == -1)

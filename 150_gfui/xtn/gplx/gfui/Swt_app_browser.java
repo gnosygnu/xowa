@@ -23,7 +23,8 @@ public class Swt_app_browser {
 	public static void main(String[] args) {
 		Display display = new Display();
 		Shell shell = new Shell(display);
-		System.setProperty("org.eclipse.swt.browser.XULRunnerPath", "C:\\xowa\\bin\\windows\\xulrunner");
+		try {
+		System.setProperty("org.eclipse.swt.browser.XULRunnerPath", "E:\\موسوعات\\Xowa\\bin\\windows\\xulrunner");
 		Swt_app_browser_mgr mgr = new Swt_app_browser_mgr(shell);
 		New_btn(shell, 0, "loa&d", new Swt_app_browser_cmd_load(mgr));
 		New_btn(shell, 1, "&free", new Swt_app_browser_cmd_free(mgr));
@@ -35,6 +36,9 @@ public class Swt_app_browser {
 		}
 		mgr.Free();
 		display.dispose();
+		} catch (SWTError e) {
+			Tfds.Write("a");
+		}
 	}
 	private static Button New_btn(Shell shell, int idx, String text, SelectionListener lnr) {
 		Button rv = new Button(shell, SWT.BORDER);
@@ -55,8 +59,8 @@ class Swt_app_browser_mgr {
 			browser.setBounds(0, 40, size.x, size.y - 40);
 		}
 //		browser.setUrl("about:blank");
-        browser.setUrl("file:///C:/temp.html");
-//		browser.setText(Io_mgr._.LoadFilStr("C:\\temp.html"));
+//        browser.setUrl("file:///C:/temp.html");
+		browser.setText("hello");
 	}
 	public void Free() {
 		if (browser != null) {

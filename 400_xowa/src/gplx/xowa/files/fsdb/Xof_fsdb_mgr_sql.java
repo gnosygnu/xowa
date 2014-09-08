@@ -124,7 +124,7 @@ public class Xof_fsdb_mgr_sql implements Xof_fsdb_mgr, GfoInvkAble {
 	public void Rls() {
 		this.Txn_save();	// NOTE: must call save, else user db will not update next id; DATE:2014-02-11
 		mnt_mgr.Rls();
-		img_regy_provider.Rls();
+		img_regy_provider.Conn_term();
 	}
 	public static Io_url Wiki_orig_url(Io_url root_dir) {return root_dir.GenSubFil("wiki.orig#00.sqlite3");}
 	public static Db_provider Wiki_orig_provider(Io_url root_dir) {

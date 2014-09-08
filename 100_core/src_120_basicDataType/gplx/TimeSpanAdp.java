@@ -77,7 +77,7 @@ public class TimeSpanAdp implements CompareAble, EqAble {
 			case 1: return "s";
 			case 2: return "m";
 			case 3: return "h";
-			default: return "unknown:<" + Int_.XtoStr(i) + ">";
+			default: return "unknown:<" + Int_.Xto_str(i) + ">";
 		}
 	}
 	@gplx.Internal protected TimeSpanAdp(long fracs) {this.fracs = fracs;}

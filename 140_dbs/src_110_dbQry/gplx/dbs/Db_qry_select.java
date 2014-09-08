@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs; import gplx.*;
 import gplx.criterias.*;
 public class Db_qry_select implements Db_qry {
+	public int Tid() {return Db_qry_.Tid_basic;}
 	public String KeyOfDb_qry() {return KeyConst;} public static final String KeyConst = "SELECT";
 	public boolean ExecRdrAble() {return true;}
 	public DataRdr Exec_qry_as_rdr(Db_provider provider) {return provider.Exec_qry_as_rdr(this);}

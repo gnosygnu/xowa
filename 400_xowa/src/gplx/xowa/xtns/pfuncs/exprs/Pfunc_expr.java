@@ -30,7 +30,7 @@ public class Pfunc_expr extends Pf_func_base {
 			return false;
 		}
 		else {
-			bfr.Add_str(rslt.XtoStr());
+			bfr.Add_str(rslt.Xto_str());
 			return true;
 		}
 	}

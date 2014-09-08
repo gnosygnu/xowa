@@ -85,7 +85,7 @@ public class Xog_tab_mgr implements GfoEvObj {
 		return rv;
 	}
 	private Xog_tab_itm Tabs_new(boolean focus, boolean active_tab_is_null) {
-		String tab_key = "tab_" + Int_.XtoStr(tab_uid++); int tab_idx = tab_regy.Count();
+		String tab_key = "tab_" + Int_.Xto_str(tab_uid++); int tab_idx = tab_regy.Count();
 		Gfui_tab_itm_data tab_data = new Gfui_tab_itm_data(tab_key, tab_idx);
 		Xog_tab_itm rv = new Xog_tab_itm(this, tab_data);
 		Gfui_tab_itm tab_box = tab_mgr.Tabs_add(tab_data);

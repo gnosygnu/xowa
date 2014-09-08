@@ -123,12 +123,18 @@ public class Xoa_css_img_downloader {
 			return Bry_.NotFound;	// css not found
 		}
 		bfr.Add_mid(src, old_pos, find_bgn - Bry_import_len).Add_byte_nl();
-		bfr.Add(Bry_comment_bgn).Add(css_url).Add(Bry_comment_end).Add_byte_nl();
+		bfr.Add(Bry_comment_bgn).Add(css_url).Add(Bry_comment_end).Add_byte_nl();			
+		if (Bry_finder.Find_fwd(css_url, Wikisource_dynimg_ttl) != -1) css_trg_bry = Bry_.Replace(css_trg_bry, Wikisource_dynimg_find, Wikisource_dynimg_repl);	// FreedImg hack; PAGE:en.s:Page:Notes_on_Osteology_of_Baptanodon._With_a_Description_of_a_New_Species.pdf/3 DATE:2014-09-06
 		bfr.Add(css_trg_bry).Add_byte_nl();
 		bfr.Add_byte_nl();
 		int semic_pos = Bry_finder.Find_fwd(src, Byte_ascii.Semic, find_bgn + url_raw.length, src_len);
 		return semic_pos + Int_.Const_dlm_len;
-	}	
+	}
+	private static final byte[]
+	  Wikisource_dynimg_ttl		= Bry_.new_ascii_("en.wikisource.org/w/index.php?title=MediaWiki:Dynimg.css")
+	, Wikisource_dynimg_find	= Bry_.new_ascii_(".freedImg img[src*=\"wikipedia\"], .freedImg img[src*=\"wikisource\"], .freedImg img[src*=\"score\"], .freedImg img[src*=\"math\"] {")
+	, Wikisource_dynimg_repl	= Bry_.new_ascii_(".freedImg img[src*=\"wikipedia\"], .freedImg img[src*=\"wikisource\"], /*XOWA:handle file:// paths which will have /commons.wikimedia.org/ but not /wikipedia/ */ .freedImg img[src*=\"wikimedia\"], .freedImg img[src*=\"score\"], .freedImg img[src*=\"math\"] {")
+	;
 	public byte[] Clean_img_url(byte[] raw, int raw_len) {
 		int pos_bgn = 0;
 		if (Bry_.HasAtBgn(raw, Bry_fwd_slashes, 0, raw_len)) pos_bgn = Bry_fwd_slashes.length;

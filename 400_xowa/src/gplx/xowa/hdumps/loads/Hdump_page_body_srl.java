@@ -23,7 +23,7 @@ public class Hdump_page_body_srl {
 	public static void Save(Bry_bfr bfr, Xoa_page page) {
 		bfr.Add_int_fixed(0, 1).Add_byte_pipe();	// version
 		Xopg_hdump_data hdump_data = page.Hdump_data();
-		bfr.Add_int_variable(hdump_data.Imgs().Count());	// imgs_count
+		bfr.Add_int_variable(hdump_data.Data_count_imgs());	// imgs_count
 		Xopg_html_data html_data = page.Html_data();
 		Save_html_modules(bfr, html_data);
 		Save_data(bfr, Tid_display_ttl	, html_data.Display_ttl());

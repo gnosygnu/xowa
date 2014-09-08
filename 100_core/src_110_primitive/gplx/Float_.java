@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public class Float_ {
+	public static final String Cls_name = "float";
 	public static final float NaN = Float.NaN;;					
 	public static boolean IsNaN(float v) {return Float.isNaN(v);}		
 	public static int RoundUp(float val) {
@@ -25,9 +26,9 @@ public class Float_ {
 	}
 	public static float Div(int val, int divisor) {return (float)val / (float)divisor;}
 	public static float Div(long val, long divisor) {return (float)val / (float)divisor;}
-	public static String XtoStr(float v) {
+	public static String Xto_str(float v) {
 				int v_int = (int)v;
-		return v - v_int == 0 ? Int_.XtoStr(v_int) : Float.toString(v);
+		return v - v_int == 0 ? Int_.Xto_str(v_int) : Float.toString(v);
 			}
 	public static float cast_double_(double v) {return (float)v;}
 	public static float cast_(Object obj) {try {return (Float)obj;} catch(Exception exc) {throw Err_.type_mismatch_exc_(exc, float.class, obj);}}

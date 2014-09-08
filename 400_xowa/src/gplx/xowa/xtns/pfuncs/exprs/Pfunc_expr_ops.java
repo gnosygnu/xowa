@@ -201,11 +201,11 @@ class Func_tkn_pow extends Func_tkn_base {
 	@Override public boolean Calc_hook(Xop_ctx ctx, Pfunc_expr_shunter shunter, Val_stack val_stack) {
 		DecimalAdp rhs = val_stack.Pop();
 		DecimalAdp lhs = val_stack.Pop();
-		int rhs_int = rhs.XtoInt();	
-		if ((double)rhs_int == rhs.XtoDouble())	// exponent is integer; use decimal pow which does less casts to double
+		int rhs_int = rhs.Xto_int();	
+		if ((double)rhs_int == rhs.Xto_double())	// exponent is integer; use decimal pow which does less casts to double
 			val_stack.Push(lhs.Op_pow(rhs_int));
 		else {
-			double rslt = Math_.Pow(lhs.XtoDouble(), rhs.XtoDouble());
+			double rslt = Math_.Pow(lhs.Xto_double(), rhs.Xto_double());
 			if (Double_.IsNaN(rslt)) {
 				shunter.Rslt_set(Double_.NaN_bry);
 				return false;
@@ -224,8 +224,8 @@ class Func_tkn_e_op extends Func_tkn_base {
 	@Override public boolean Calc_hook(Xop_ctx ctx, Pfunc_expr_shunter shunter, Val_stack val_stack) {
 		DecimalAdp rhs = val_stack.Pop();
 		DecimalAdp lhs = val_stack.Pop();
-		int rhs_int = rhs.XtoInt();
-		double rhs_double = rhs.XtoDouble();
+		int rhs_int = rhs.Xto_int();
+		double rhs_double = rhs.Xto_double();
 		if ((double)rhs_int == rhs_double)	// exponent is integer; use pow_10 which does less casts to double
 			val_stack.Push(lhs.Op_mult(DecimalAdp_.pow_10_(rhs_int)));
 		else
@@ -240,8 +240,8 @@ class Func_tkn_mod extends Func_tkn_base {
 	@Override public boolean Calc_hook(Xop_ctx ctx, Pfunc_expr_shunter shunter, Val_stack val_stack) {
 		// must convert to int else issues with {{#expr:0.00999999mod10}} and {{USCensusPop|1960=763956|1970=756510}}; REF: http://php.net/manual/en/language.operators.arithmetic.php: "Operands of modulus are converted to integers (by stripping the decimal part) before processing"
 		// must convert to long else issues with (39052000900/1) mod 100 which should be 0, not 47; JAVA does not fail int conversion, and instead converts to Int_.MaxValue; EX: de.w:Quijano_(Pi�lagos)
-		long rhs = ((DecimalAdp)val_stack.Pop()).XtoLong();
-		long lhs = ((DecimalAdp)val_stack.Pop()).XtoLong();
+		long rhs = ((DecimalAdp)val_stack.Pop()).Xto_long();
+		long lhs = ((DecimalAdp)val_stack.Pop()).Xto_long();
 		if (rhs == 0) {
 			shunter.Err_set(ctx, Xol_msg_itm_.Id_pfunc_expr_division_by_zero);
 			return false;
@@ -375,7 +375,7 @@ class Func_tkn_ceil extends Func_tkn_base {
 	@Override public int Precedence()	{return 9;}
 	@Override public boolean Calc_hook(Xop_ctx ctx, Pfunc_expr_shunter shunter, Val_stack val_stack) {
 		DecimalAdp val = val_stack.Pop();
-		val_stack.Push(DecimalAdp_.double_(Math_.Ceil(val.XtoDouble())));
+		val_stack.Push(DecimalAdp_.double_(Math_.Ceil(val.Xto_double())));
 		return true;
 	}
 }
@@ -385,7 +385,7 @@ class Func_tkn_trunc extends Func_tkn_base {
 	@Override public int Precedence()	{return 9;}
 	@Override public boolean Calc_hook(Xop_ctx ctx, Pfunc_expr_shunter shunter, Val_stack val_stack) {
 		DecimalAdp val = val_stack.Pop();
-		val_stack.Push(DecimalAdp_.double_(Math_.Trunc(val.XtoDouble())));
+		val_stack.Push(DecimalAdp_.double_(Math_.Trunc(val.Xto_double())));
 		return true;
 	}
 }
@@ -395,7 +395,7 @@ class Func_tkn_floor extends Func_tkn_base {
 	@Override public int Precedence()	{return 9;}
 	@Override public boolean Calc_hook(Xop_ctx ctx, Pfunc_expr_shunter shunter, Val_stack val_stack) {
 		DecimalAdp val = val_stack.Pop();
-		val_stack.Push(DecimalAdp_.double_(Math_.Floor(val.XtoDouble())));
+		val_stack.Push(DecimalAdp_.double_(Math_.Floor(val.Xto_double())));
 		return true;
 	}
 }
@@ -415,7 +415,7 @@ class Func_tkn_exp extends Func_tkn_base {
 	@Override public int Precedence()	{return 9;}
 	@Override public boolean Calc_hook(Xop_ctx ctx, Pfunc_expr_shunter shunter, Val_stack val_stack) {
 		DecimalAdp val = val_stack.Pop();
-		val_stack.Push(DecimalAdp_.double_(Math_.Exp(val.XtoDouble())));
+		val_stack.Push(DecimalAdp_.double_(Math_.Exp(val.Xto_double())));
 		return true;
 	}
 }
@@ -426,7 +426,7 @@ class Func_tkn_ln extends Func_tkn_base {
 	@Override public boolean Calc_hook(Xop_ctx ctx, Pfunc_expr_shunter shunter, Val_stack val_stack) {
 		DecimalAdp val = val_stack.Pop();
 		if (val.Comp_lte(0)) {shunter.Err_set(ctx, Xol_msg_itm_.Id_pfunc_expr_invalid_argument_ln); return false;}		
-		val_stack.Push(DecimalAdp_.double_(Math_.Log(val.XtoDouble())));
+		val_stack.Push(DecimalAdp_.double_(Math_.Log(val.Xto_double())));
 		return true;
 	}
 }
@@ -436,7 +436,7 @@ class Func_tkn_sin extends Func_tkn_base {
 	@Override public int Precedence()	{return 9;}
 	@Override public boolean Calc_hook(Xop_ctx ctx, Pfunc_expr_shunter shunter, Val_stack val_stack) {
 		DecimalAdp val = val_stack.Pop();
-		val_stack.Push(DecimalAdp_.double_(Math_.Sin(val.XtoDouble())));
+		val_stack.Push(DecimalAdp_.double_(Math_.Sin(val.Xto_double())));
 		return true;
 	}
 }
@@ -446,7 +446,7 @@ class Func_tkn_cos extends Func_tkn_base {
 	@Override public int Precedence()	{return 9;}
 	@Override public boolean Calc_hook(Xop_ctx ctx, Pfunc_expr_shunter shunter, Val_stack val_stack) {
 		DecimalAdp val = val_stack.Pop();
-		val_stack.Push(DecimalAdp_.double_(Math_.Cos(val.XtoDouble())));
+		val_stack.Push(DecimalAdp_.double_(Math_.Cos(val.Xto_double())));
 		return true;
 	}
 }
@@ -456,7 +456,7 @@ class Func_tkn_tan extends Func_tkn_base {
 	@Override public int Precedence()	{return 9;}
 	@Override public boolean Calc_hook(Xop_ctx ctx, Pfunc_expr_shunter shunter, Val_stack val_stack) {
 		DecimalAdp val = val_stack.Pop();
-		val_stack.Push(DecimalAdp_.double_(Math_.Tan(val.XtoDouble())));
+		val_stack.Push(DecimalAdp_.double_(Math_.Tan(val.Xto_double())));
 		return true;
 	}
 }
@@ -467,7 +467,7 @@ class Func_tkn_asin extends Func_tkn_base {
 	@Override public boolean Calc_hook(Xop_ctx ctx, Pfunc_expr_shunter shunter, Val_stack val_stack) {
 		DecimalAdp val = val_stack.Pop();
 		if (val.Comp_lt(-1) || val.Comp_gt(1)) {shunter.Err_set(ctx, Xol_msg_itm_.Id_pfunc_expr_invalid_argument, this.Val_ary()); return false;}
-		val_stack.Push(DecimalAdp_.double_(Math_.Asin(val.XtoDouble())));
+		val_stack.Push(DecimalAdp_.double_(Math_.Asin(val.Xto_double())));
 		return true;
 	}
 }
@@ -478,7 +478,7 @@ class Func_tkn_acos extends Func_tkn_base {
 	@Override public boolean Calc_hook(Xop_ctx ctx, Pfunc_expr_shunter shunter, Val_stack val_stack) {
 		DecimalAdp val = val_stack.Pop();
 		if (val.Comp_lt(-1) || val.Comp_gt(1)) {shunter.Err_set(ctx, Xol_msg_itm_.Id_pfunc_expr_invalid_argument, this.Val_ary()); return false;}
-		val_stack.Push(DecimalAdp_.double_(Math_.Acos(val.XtoDouble())));
+		val_stack.Push(DecimalAdp_.double_(Math_.Acos(val.Xto_double())));
 		return true;
 	}
 }
@@ -488,7 +488,7 @@ class Func_tkn_atan extends Func_tkn_base {
 	@Override public int Precedence()	{return 9;}
 	@Override public boolean Calc_hook(Xop_ctx ctx, Pfunc_expr_shunter shunter, Val_stack val_stack) {
 		DecimalAdp val = val_stack.Pop();
-		val_stack.Push(DecimalAdp_.double_(Math_.Atan(val.XtoDouble())));
+		val_stack.Push(DecimalAdp_.double_(Math_.Atan(val.Xto_double())));
 		return true;
 	}
 }
@@ -505,8 +505,8 @@ class Func_tkn_round extends Func_tkn_base {
 		else if (rhs.Comp_lt(-16)) {
 			rhs = DecimalAdp_.int_(-16);
 		}
-		DecimalAdp val = lhs.Op_round(rhs.XtoInt());
-		if (val.XtoDouble() == 0)	// NOTE: must explicitly check for zero, else "0.0" will be pushed onto stack; EXE: {{#expr: 0 round 1}}; DATE:2013-11-09
+		DecimalAdp val = lhs.Op_round(rhs.Xto_int());
+		if (val.Xto_double() == 0)	// NOTE: must explicitly check for zero, else "0.0" will be pushed onto stack; EXE: {{#expr: 0 round 1}}; DATE:2013-11-09
 			val_stack.Push(DecimalAdp_.Zero);
 		else
 			val_stack.Push(val);
@@ -520,7 +520,7 @@ class Func_tkn_fmod extends Func_tkn_base {
 	@Override public boolean Calc_hook(Xop_ctx ctx, Pfunc_expr_shunter shunter, Val_stack val_stack) {
 		DecimalAdp rhs = (DecimalAdp)val_stack.Pop();
 		DecimalAdp lhs = (DecimalAdp)val_stack.Pop();
-		if (rhs.XtoDouble() == 0) {
+		if (rhs.Xto_double() == 0) {
 			shunter.Err_set(ctx, Xol_msg_itm_.Id_pfunc_expr_division_by_zero);
 			return false;
 		}

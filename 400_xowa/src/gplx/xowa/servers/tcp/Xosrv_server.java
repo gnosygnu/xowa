@@ -25,7 +25,7 @@ public class Xosrv_server implements GfoInvkAble {
 	public int Wtr_port() {return wtr_port;} public Xosrv_server Wtr_port_(int v) {wtr_port = v; return this;} private int wtr_port = 55001;
 	public int Shutdown_interval() {return shutdown_interval;} public Xosrv_server Shutdown_interval_(int v) {shutdown_interval = v; return this;} private int shutdown_interval = -1;
 	public String Wtr_host() {return wtr_host;} private String wtr_host = "localhost";
-	public boolean Running() {return running;} public Xosrv_server Running_(boolean v) {running = v; running_str = Bool_.XtoStr_lower(running); return this;} private boolean running = false;
+	public boolean Running() {return running;} public Xosrv_server Running_(boolean v) {running = v; running_str = Bool_.Xto_str_lower(running); return this;} private boolean running = false;
 	public String Running_str() {return running_str;} String running_str = "false";
 	public void App_ctor(Xoa_app app) {this.app = app;}
 	public Xoa_app App() {return app;} private Xoa_app app;

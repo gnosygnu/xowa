@@ -49,7 +49,7 @@ public class ErrMsgWtr {
 		String msg = err.Hdr();
 		String typ = String_.Eq(err.Key(), "") ? "" : String_.Concat(" <", err.Key(), ">");
 		boolean onlyOne = errAry.length == 1;
-		String idxStr = onlyOne ? "" : Int_.XtoStr(i);
+		String idxStr = onlyOne ? "" : Int_.Xto_str(i);
 		sb.Add(idxStr).Add("\t").Add(msg).Add(typ).Add_char_crlf();	// ex: "	@count must be > 0 <gplx.arg>"
 		WriteKeyValAry(sb, err.Args());
 		sb.Add("\t").Add(err.Proc().SignatureRaw()).Add_char_crlf();
@@ -87,7 +87,7 @@ public class ErrMsgWtr {
 				ErrProcData comp = errAry[j].Proc();
 				if (String_.Eq(proc.Raw(), comp.Raw())) {idx = j; break;}
 			}
-			String idxStr = onlyOne ? "" : Int_.XtoStr(idx);
+			String idxStr = onlyOne ? "" : Int_.Xto_str(idx);
 			String hdr = idx == -1 ? "\t" : idxStr + "\t";
 			String ideAddressSpr = String_.CrLf + "\t\t";
 			String ideAddress = String_.Eq(proc.IdeAddress(), "") ? "" : ideAddressSpr + proc.IdeAddress();	// NOTE: ideAddress will be blank in compiled mode

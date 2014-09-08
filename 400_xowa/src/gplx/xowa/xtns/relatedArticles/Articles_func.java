@@ -43,7 +43,10 @@ public class Articles_func extends Pf_func_base {
 	private static final byte[] Const_dlm = new byte[] {Byte_ascii.Amp, Byte_ascii.Amp};
 }
 class Articles_itm {
-	public Articles_itm(byte[] ttl, byte[] text) {this.ttl = ttl; this.text = text;}
+	public Articles_itm(byte[] ttl, byte[] text) {
+		this.ttl = ttl;
+		this.text = Xoa_ttl.Replace_unders(text);	// placed in ctor, b/c called from two places above; DATE:2014-09-03
+	}
 	public byte[] Ttl() {return ttl;} private byte[] ttl;
 	public byte[] Text() {return text;} private byte[] text;
 }

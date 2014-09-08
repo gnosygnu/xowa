@@ -22,8 +22,8 @@ public class Fsdb_db_atr_fil implements RlsAble {
 	private Fsdb_dir_tbl tbl_dir; private Fsdb_fil_tbl tbl_fil; private Fsdb_xtn_thm_tbl tbl_thm;
 	public Fsdb_db_atr_fil(Fsdb_db_abc_mgr abc_mgr, Io_url url, boolean create) {
 		this.abc_mgr = abc_mgr;
-		Db_connect connect = create ? Db_connect_sqlite.make_(url) : Db_connect_sqlite.load_(url);
-		provider = Db_provider_.new_(connect);
+		Db_conn_info connect = create ? Db_conn_info__sqlite.make_(url) : Db_conn_info__sqlite.load_(url);
+		provider = Db_provider_.new_and_open_(connect);
 		Sqlite_engine_.Pragma_page_size_4096(provider);
 		tbl_dir = new Fsdb_dir_tbl(provider, create);
 		tbl_fil = new Fsdb_fil_tbl(provider, create);
@@ -40,7 +40,7 @@ public class Fsdb_db_atr_fil implements RlsAble {
 		tbl_fil.Rls();
 		tbl_thm.Rls();
 		provider.Txn_mgr().Txn_end_all();
-		provider.Rls();
+		provider.Conn_term();
 	}
 	public void Txn_open() {
 		provider.Txn_mgr().Txn_bgn_if_none();

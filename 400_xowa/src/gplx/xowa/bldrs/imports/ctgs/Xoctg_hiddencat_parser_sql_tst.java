@@ -56,7 +56,7 @@ public class Xoctg_hiddencat_parser_sql_tst {
 		for (int i = 0; i < len; i++) {
 			int ctg_id = ctgs[i];
 			Xodb_category_itm ctg_itm = tbl.Select(provider, ctg_id);
-			Tfds.Eq(expd_hidden, ctg_itm.Hidden(), Int_.XtoStr(ctg_id));
+			Tfds.Eq(expd_hidden, ctg_itm.Hidden(), Int_.Xto_str(ctg_id));
 		}
 	}
 }

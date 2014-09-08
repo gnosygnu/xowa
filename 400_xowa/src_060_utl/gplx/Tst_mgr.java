@@ -50,7 +50,7 @@ public class Tst_mgr {
 		int max_len = expd_ary_len > actl_ary_len ? expd_ary_len : actl_ary_len;
 		int err = 0;
 		for (int i = 0; i < max_len; i++) {
-			String path = ownerPath + Int_.XtoStr(i);
+			String path = ownerPath + Int_.Xto_str(i);
 			Tst_chkr expd_obj = i < expd_ary_len ? expd_ary[i] : Tst_mgr.Null_chkr;
 			Object actl_obj = i < actl_ary_len ? actl_ary[i] : "<NULL OBJ>";
 			String actl_type = i < actl_ary_len ? ClassAdp_.NameOf_obj(actl_obj) : "<NULL TYPE>";

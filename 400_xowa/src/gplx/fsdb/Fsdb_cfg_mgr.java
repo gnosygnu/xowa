@@ -32,7 +32,7 @@ public class Fsdb_cfg_mgr {
 		this.Update_next_id();
 	}
 	public void Rls() {cfg_tbl.Rls();}
-	private void Update_next_id()	{cfg_tbl.Update("core", "next_id", Int_.XtoStr(next_id));}
+	private void Update_next_id()	{cfg_tbl.Update("core", "next_id", Int_.Xto_str(next_id));}
 	public Fsdb_cfg_mgr Update(String grp, String key, String new_val) {
 		String cur_val = cfg_tbl.Select_as_str_or(grp, key, null);
 		if (cur_val == null)

@@ -47,4 +47,7 @@ public class Db_stmt_ {
 	public static Db_stmt new_select_all_(Db_provider provider, String tbl) {
 		return provider.Prepare(Db_qry_.select_tbl_(tbl));
 	}
+	public static Db_stmt new_select_as_rdr(Db_provider provider, Db_qry__select_in_tbl qry) {
+		return provider.Prepare(qry);
+	}
 }

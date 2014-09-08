@@ -108,7 +108,7 @@ class TimerWatch {
 		this.End();
 		Tfds.Write(XtoStr_ms() + " " + text);
 	}
-	public String XtoStr_ms() {return Long_.XtoStr(duration);}
+	public String XtoStr_ms() {return Long_.Xto_str(duration);}
         public static TimerWatch new_() {
 		TimerWatch rv = new TimerWatch();
 		rv.Bgn();

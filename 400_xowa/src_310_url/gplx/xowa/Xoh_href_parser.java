@@ -78,18 +78,11 @@ public class Xoh_href_parser {
 	public void Build_to_bfr(Bry_bfr bfr, Xow_wiki wiki, Xoa_ttl ttl, boolean force_site) {
 		byte[] page = ttl.Full_txt_raw();
 		Xow_xwiki_itm xwiki = ttl.Wik_itm();
-		if (xwiki == null) {								// not an xwiki; EX: [[wikt:Word]]
-			if (ttl.Leaf_bgn() != Bry_.NotFound) {			// NOTE: this is strange logic to handle urls of for form [[../a]]; need to revisit why (a) only Raw has resolved title and (b) why it's not encoded
-				encoder.Encode(bfr_encoder, ttl.Raw());
-			}
-			else {											// regular page; encode;
-				Build_to_bfr_page(ttl, page, 0);
-			}
-		}
-		else {												// xwiki; skip wiki and encode page only;
+		if (xwiki == null)																		// not an xwiki; EX: [[wikt:Word]]
+			Build_to_bfr_page(ttl, page, 0);													// write page only; NOTE: changed to remove leaf logic DATE:2014-09-07
+		else {																					// xwiki; skip wiki and encode page only;
 			byte[] wik_txt = ttl.Wik_txt();
 			Build_to_bfr_page(ttl, page, wik_txt.length + 1);
-//				encoder.Encode(bfr_encoder, page, wik_txt.length + 1, page.length);
 		}
 		if (xwiki == null) {																	// not an xwiki
 			if (ttl.Anch_bgn() != 1) {															// not an anchor-only;	EX: "#A"

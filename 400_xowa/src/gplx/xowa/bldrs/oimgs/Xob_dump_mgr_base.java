@@ -39,7 +39,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 		ctx = wiki.Ctx();
 		root = ctx.Tkn_mkr().Root(Bry_.Empty);			
 		wiki.Init_assert();	// NOTE: must init wiki for db_mgr_as_sql
-		wiki.Db_mgr_as_sql().Init_load(Db_connect_.sqlite_(Xodb_mgr_sql.Find_core_url(wiki)));	// NOTE: must reinit providers as previous steps may have rls'd (and left member variable provider which is closed)
+		wiki.Db_mgr_as_sql().Init_load(Db_conn_info_.sqlite_(Xodb_mgr_sql.Find_core_url(wiki)));	// NOTE: must reinit providers as previous steps may have rls'd (and left member variable provider which is closed)
 		db_fsys_mgr = wiki.Db_mgr_as_sql().Fsys_mgr();
 		db_ary = Xob_dump_src_ttl.Init_text_files_ary(db_fsys_mgr);
 		poll_interval = poll_mgr.Poll_interval();
@@ -171,7 +171,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 		Exec_commit(-1, -1, -1, Bry_.Empty);
 		Exec_end_hook();
 		Free();
-		usr_dlg.Note_many("", "", "done: ~{0} ~{1}", exec_count, DecimalAdp_.divide_safe_(exec_count, Env_.TickCount_elapsed_in_sec(time_bgn)).XtoStr("#,###.000"));
+		usr_dlg.Note_many("", "", "done: ~{0} ~{1}", exec_count, DecimalAdp_.divide_safe_(exec_count, Env_.TickCount_elapsed_in_sec(time_bgn)).Xto_str("#,###.000"));
 	}
 	private void Free() {
 		ctx.App().Free_mem(true);
@@ -278,13 +278,13 @@ class Xob_rate_mgr {
 		int dif = (int)(end - bgn) / 1000;
 		DecimalAdp rate = DecimalAdp_.divide_safe_(count, dif);
 		save_bfr
-			.Add_str(rate.XtoStr("#,##0.000")).Add_byte_pipe()
+			.Add_str(rate.Xto_str("#,##0.000")).Add_byte_pipe()
 			.Add_int_variable(count).Add_byte_pipe()
 			.Add_int_variable(dif).Add_byte_nl()
 			;
 		Io_mgr._.AppendFilByt(log_file, save_bfr.XtoAryAndClear());
 	}
-	public String Rate_as_str() {return Int_.XtoStr(Rate());}
+	public String Rate_as_str() {return Int_.Xto_str(Rate());}
 	public int Rate() {
 		int elapsed = Env_.TickCount_elapsed_in_sec(time_bgn);
 		return Math_.Div_safe_as_int(item_len, elapsed);

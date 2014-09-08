@@ -55,13 +55,13 @@ public abstract class Gallery_mgr_base {
 		boolean hctx_is_hdump = hctx.Mode_is_hdump();
 		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();			
 		byte[] box_style = xnde.Atr_style();
-		int max_width = -1;
+		int gallery_uid = page.Html_data().Xtn_gallery_next_id();
 		if (itms_per_row > 0) {
-			max_width = itms_per_row * (itm_default_w + this.Get_all_padding());
+			int max_width = itms_per_row * (itm_default_w + this.Get_all_padding());
 			box_style = Fmt_and_add(tmp_bfr, box_style_max_width_fmtr, box_style, max_width);
+			page.Hdump_data().Data_add(new Hdump_data_gallery(gallery_uid, max_width));
 		}
 		byte[] box_cls = Fmt_and_add(tmp_bfr, box_cls_fmtr, xnde.Atr_cls(), this.Tid_bry());
-		int gallery_uid = page.Html_data().Xtn_gallery_next_id();
 		byte[] gallery_ul_id = tmp_bfr.Add(box_id_prefix_bry).Add_int_variable(gallery_uid).XtoAryAndClear();
 		Box_hdr_write(bfr, wiki.App().Html_mgr().Whitelist_mgr(), src, gallery_ul_id, box_cls, box_style, xnde.Atrs_other(), hctx_is_hdump, gallery_uid);
 		byte[] box_caption = xnde.Atr_caption();
@@ -70,13 +70,13 @@ public abstract class Gallery_mgr_base {
 		Xoa_app app = wiki.App(); Xoh_html_wtr html_wtr = wiki.Html_mgr().Html_wtr();
 		int itm_len = xnde.Itms_len();
 		for (int i = 0; i < itm_len; i++) {
-			Write_html_itm(bfr, tmp_bfr, app, wiki, page, ctx, html_wtr, hctx, src, xnde, gallery_ul_id, i, null, hctx_is_hdump, max_width);
+			Write_html_itm(bfr, tmp_bfr, app, wiki, page, ctx, html_wtr, hctx, src, xnde, gallery_ul_id, i, null, hctx_is_hdump);
 		}
 		bfr.Add(box_html_end_bry);
 		tmp_bfr.Mkr_rls();
 	}	private static final byte[] box_id_prefix_bry = Bry_.new_ascii_("xowa_gallery_ul_"), itm_id_prefix_bry = Bry_.new_ascii_("xowa_gallery_li_");
 	public static byte File_found_mode = Bool_.__byte;
-	public void Write_html_itm(Bry_bfr bfr, Bry_bfr tmp_bfr, Xoa_app app, Xow_wiki wiki, Xoa_page page, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, byte[] src, Gallery_xnde xnde, byte[] gallery_ul_id, int i, Xof_xfer_itm xfer_itm, boolean hctx_is_hdump, int max_width) {
+	public void Write_html_itm(Bry_bfr bfr, Bry_bfr tmp_bfr, Xoa_app app, Xow_wiki wiki, Xoa_page page, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, byte[] src, Gallery_xnde xnde, byte[] gallery_ul_id, int i, Xof_xfer_itm xfer_itm, boolean hctx_is_hdump) {
 		Gallery_itm itm = (Gallery_itm)xnde.Itms_get_at(i);
 		Xoa_ttl ttl = itm.Ttl();
 		byte[] itm_caption = itm.Caption_bry(); if (itm_caption == null) itm_caption = Bry_.Empty;
@@ -149,7 +149,7 @@ public abstract class Gallery_mgr_base {
 		Wrap_gallery_text(bfr, itm_caption, html_w_expand, html_h_expand);
 		bfr.Add(itm_li_end_bry);
 		if (hctx_is_hdump)
-			page.Hdump_data().Imgs_add(new Hdump_data_img__gallery().Init_by_gallery(max_width, itm_div_width, img_div_w, vpad), xfer_itm, Hdump_data_img__gallery.Tid_gallery);
+			page.Hdump_data().Data_add_img(new Hdump_data_img__gallery().Init_by_gallery(itm_div_width, img_div_w, vpad), xfer_itm, Hdump_data_img__gallery.Tid_gallery);
 	}
 	private static final byte[] 
 	  Wrap_gallery_text_bgn = Bry_.new_ascii_("\n      <div class=\"gallerytext\">") // NOTE: The newline after <div class="gallerytext"> is needed to accommodate htmltidy

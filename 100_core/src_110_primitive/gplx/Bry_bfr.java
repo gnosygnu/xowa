@@ -248,8 +248,8 @@ public class Bry_bfr {
 		return this;
 	}
 	public Bry_bfr Add_str(String v) {return Add(Bry_.new_utf8_(v));}
-	public Bry_bfr Add_float(float f) {Add_str(Float_.XtoStr(f)); return this;}
-	public Bry_bfr Add_double(double v) {Add_str(Double_.XtoStr(v)); return this;}
+	public Bry_bfr Add_float(float f) {Add_str(Float_.Xto_str(f)); return this;}
+	public Bry_bfr Add_double(double v) {Add_str(Double_.Xto_str(v)); return this;}
 	public Bry_bfr Add_dte(DateAdp val) {return Add_dte_segs(val.Year(), val.Month(),val.Day(), val.Hour(), val.Minute(), val.Second(), val.Frac());}
 	public Bry_bfr Add_dte_segs(int y, int M, int d, int H, int m, int s, int f) {		// yyyyMMdd HHmmss.fff
 		if (bfr_len + 19      > bfr_max) Resize((bfr_len + 19) * 2);

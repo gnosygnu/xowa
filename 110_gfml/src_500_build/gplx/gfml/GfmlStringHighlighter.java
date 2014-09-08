@@ -66,12 +66,12 @@ class GfmlStringHighlighter {
 			int gap = nxtMarkBgn - endPos;
 			if (gap > 0) {
 				int gapDigits = Int_.DigitCount(gap);
-				posBfr.Add_fmt("[{0}]", Int_.XtoStr_PadBgn(gap, gapDigits));
+				posBfr.Add_fmt("[{0}]", Int_.Xto_str_pad_bgn(gap, gapDigits));
 				rawBfr.Add_fmt("[{0}]", String_.Repeat(".", gapDigits));
 				symBfr.Add_fmt(" {0} ", String_.Repeat(" ", gapDigits));
 			}
 			if (curMark.Sym() != ' ')
-				symList.Add(String_.Format("[{0}] {1} {2}", Int_.XtoStr_PadBgn(curMark.Pos(), rawLenDigits), curMark.Sym(), curMark.Msg()));
+				symList.Add(String_.Format("[{0}] {1} {2}", Int_.Xto_str_pad_bgn(curMark.Pos(), rawLenDigits), curMark.Sym(), curMark.Msg()));
 		}
 		if (rawBfrBgn == 0) {
 			posBfr.Add_at(0, "<");

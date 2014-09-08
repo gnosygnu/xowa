@@ -87,7 +87,7 @@ public class Xog_html_js_cbk implements GfoInvkAble {
 			Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry);
 			wiki.Db_mgr().Load_mgr().Load_by_ttl(tmp_page, ttl.Ns(), ttl.Page_db());
 		}
-		return String_.Ary(tmp_page.Exists() ? "1" : "0", Int_.XtoStr(tmp_page.Id()), Int_.XtoStr(tmp_page.Ns_id()), String_.new_utf8_(tmp_page.Ttl_wo_ns()), Bool_.XtoStr_lower(tmp_page.Type_redirect()), tmp_page.Modified_on().XtoStr_fmt("yyyy-MM-dd HH:mm:ss"), Int_.XtoStr(tmp_page.Text_len()));
+		return String_.Ary(tmp_page.Exists() ? "1" : "0", Int_.Xto_str(tmp_page.Id()), Int_.Xto_str(tmp_page.Ns_id()), String_.new_utf8_(tmp_page.Ttl_wo_ns()), Bool_.Xto_str_lower(tmp_page.Type_redirect()), tmp_page.Modified_on().XtoStr_fmt("yyyy-MM-dd HH:mm:ss"), Int_.Xto_str(tmp_page.Text_len()));
 	}	private static final Xodb_page tmp_page = Xodb_page.tmp_();
 	private String[][] Get_titles_meta(GfoMsg m) {
 		Xow_wiki wiki = html_itm.Owner_tab().Page().Wiki();

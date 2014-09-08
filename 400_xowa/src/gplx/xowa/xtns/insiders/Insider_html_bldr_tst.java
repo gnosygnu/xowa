@@ -20,13 +20,13 @@ import org.junit.*;
 public class Insider_html_bldr_tst {
 	@Before public void init() {fxt.Clear();} private Insider_html_bldr_fxt fxt = new Insider_html_bldr_fxt();
 	@Test  public void Basic() {
-		fxt.Init_insider("A");
+		fxt.Init_insider("A_1");
 		fxt.Test_bld(String_.Concat_lines_nl_skip_last
 		( "<div id='p-insiders' class='portal' role='navigation'>"
 		, "  <h3>Docent</h3>"
 		, "  <div class='body'>"
 		, "    <ul>"
-		, "      <li class='interwiki-insider'><a class='xowa-hover-off' href='/wiki/User:A'>A</a></li>"
+		, "      <li class='interwiki-insider'><a class='xowa-hover-off' href='/wiki/User:A_1'>A 1</a></li>"
 		, "      <li class='interwiki-insider'><a class='xowa-hover-off' href='/wiki/Docent_page'>About Docents</a></li>"
 		, "    </ul>"
 		, "  </div>"

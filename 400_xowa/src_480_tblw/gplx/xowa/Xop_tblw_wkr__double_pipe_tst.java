@@ -27,7 +27,7 @@ public class Xop_tblw_wkr__double_pipe_tst {
 		, ""
 		));
 	}
-	@Test  public void Tblw_lnki_nth() {	// PURPOSE: if || is nth pipe, then treat as lnki; EX:en.w:Main_Page;de.w:Main_Page; DATE:2014-05-06
+	@Test  public void Tblw_lnki_nth() {	// PURPOSE: if || is nth pipe, then treat as lnki; PAGE:en.w:Main_Page;de.w:Main_Page; DATE:2014-05-06
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "{|"
 		, "|[[File:A.png|b||c]]"

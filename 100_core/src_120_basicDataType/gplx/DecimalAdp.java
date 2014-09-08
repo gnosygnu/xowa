@@ -25,21 +25,21 @@ public class DecimalAdp implements CompareAble {
 
 		protected DecimalAdp(BigDecimal v) {this.under = v;} BigDecimal under;
 	protected DecimalAdp(int v) {this.under = new BigDecimal(v);}
-	public String XtoStr() {
+	public String Xto_str() {
 		BigDecimal tmp = under;
 		if (tmp.scale() > 14) tmp = tmp.setScale(14, RoundingMode.DOWN);	// NOTE: setting to 14 to match PHP/C# values more closely; RoundingMode.Down for same reason; see E, Pi tests 
 		return tmp	.stripTrailingZeros()									// NOTE: stripTrailingZeros for exp tests; EX: 120.0 -> 120; 0.01200000000000 -> .012 
 					.toPlainString();										// NOTE: toPlainString b/c stripTrailingZeros now converts 120 to 1.2E+2 (and any other value that is a multiple of 10)
 	}
-	public String XtoStr(String fmt) {return new DecimalFormat(fmt).format(under);}
+	public String Xto_str(String fmt) {return new DecimalFormat(fmt).format(under);}
 	@Override public String toString() {return under.toString();}
 	public boolean Eq(DecimalAdp v) {return v.under.doubleValue() == under.doubleValue();}
-	public BigDecimal XtoDecimal() {return under;}
-	public long XtoLong_Mult1000() {return under.movePointRight(3).longValue();}
+	public BigDecimal Xto_decimal() {return under;}
+	public long Xto_long_mult_1000() {return under.movePointRight(3).longValue();}
 	public int Fraction1000() {return  (int)(under.movePointRight(3).floatValue() % 1000);}
-	public double XtoDouble() {return under.doubleValue();}
-	public int XtoInt() {return (int)under.doubleValue();}
-	public long XtoLong() {return (long)under.doubleValue();}
+	public double Xto_double() {return under.doubleValue();}
+	public int Xto_int() {return (int)under.doubleValue();}
+	public long Xto_long() {return (long)under.doubleValue();}
 	public DecimalAdp Op_add(DecimalAdp v) 				{return new DecimalAdp(under.add(v.under, DecimalAdp_.Gplx_rounding_context));}
 	public DecimalAdp Op_subtract(DecimalAdp v) 		{return new DecimalAdp(under.subtract(v.under, DecimalAdp_.Gplx_rounding_context));}
 	public DecimalAdp Op_mult(DecimalAdp v)				{return new DecimalAdp(under.multiply(v.under));}

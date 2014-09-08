@@ -125,39 +125,41 @@ public class Xop_lnki_arg_parser {
 	}	
 	public static final byte[] Bry_upright = Bry_.new_utf8_("upright"), Bry_thumbtime = Bry_.new_utf8_("thumbtime");
 	public static final byte
-		Tid_unknown = 0, Tid_thumb = 1, Tid_left = 2, Tid_right = 3, Tid_none = 4, Tid_center = 5, Tid_frame = 6, Tid_frameless = 7, Tid_upright = 8, Tid_border = 9
-	,	Tid_alt = 10, Tid_link = 11, Tid_baseline = 12, Tid_sub = 13, Tid_super = 14, Tid_top = 15, Tid_text_top = 16, Tid_middle = 17, Tid_bottom = 18, Tid_text_bottom = 19
-	,	Tid_dim = 20
-	,	Tid_trg = 21, Tid_caption = 22
-	,	Tid_page = 23
-	,	Tid_noplayer = 24, Tid_noicon = 25, Tid_thumbtime = 26
+	  Tid_unknown = 0, Tid_thumb = 1, Tid_left = 2, Tid_right = 3, Tid_none = 4, Tid_center = 5, Tid_frame = 6, Tid_frameless = 7, Tid_upright = 8, Tid_border = 9
+	, Tid_alt = 10, Tid_link = 11, Tid_baseline = 12, Tid_sub = 13, Tid_super = 14, Tid_top = 15, Tid_text_top = 16, Tid_middle = 17, Tid_bottom = 18, Tid_text_bottom = 19
+	, Tid_dim = 20
+	, Tid_trg = 21, Tid_caption = 22
+	, Tid_page = 23
+	, Tid_noplayer = 24, Tid_noicon = 25, Tid_thumbtime = 26
+	, Tid_class = 27
 	;
 	private static final byte[] X_bry = Bry_.new_utf8_("x");
 	private static final byte Key_dim_num = 0, Key_dim_x = 1, Key_dim_px = 2, Key_space = 3;
 	private static final int[][] Keys_ids = new int[][] 
-	{	new int[] {Xol_kwd_grp_.Id_img_thumbnail	, Tid_thumb}
-	,	new int[] {Xol_kwd_grp_.Id_img_manualthumb	, Tid_thumb}	// RESEARCH: what is manualthumb? 'thumb=$1' vs 'thumb'
-	,	new int[] {Xol_kwd_grp_.Id_img_right		, Tid_right}
-	,	new int[] {Xol_kwd_grp_.Id_img_left			, Tid_left}
-	,	new int[] {Xol_kwd_grp_.Id_img_none			, Tid_none}
-	,	new int[] {Xol_kwd_grp_.Id_img_center		, Tid_center}
-	,	new int[] {Xol_kwd_grp_.Id_img_framed		, Tid_frame}
-	,	new int[] {Xol_kwd_grp_.Id_img_frameless	, Tid_frameless}
-	,	new int[] {Xol_kwd_grp_.Id_img_page			, Tid_page}		// for pdf
-	,	new int[] {Xol_kwd_grp_.Id_img_upright		, Tid_upright}
-	,	new int[] {Xol_kwd_grp_.Id_img_border		, Tid_border}
-	,	new int[] {Xol_kwd_grp_.Id_img_baseline		, Tid_baseline}
-	,	new int[] {Xol_kwd_grp_.Id_img_sub			, Tid_sub}
-	,	new int[] {Xol_kwd_grp_.Id_img_super		, Tid_super}
-	,	new int[] {Xol_kwd_grp_.Id_img_top			, Tid_top}
-	,	new int[] {Xol_kwd_grp_.Id_img_text_top		, Tid_text_top}
-	,	new int[] {Xol_kwd_grp_.Id_img_middle		, Tid_middle}
-	,	new int[] {Xol_kwd_grp_.Id_img_bottom		, Tid_bottom}
-	,	new int[] {Xol_kwd_grp_.Id_img_text_bottom	, Tid_text_bottom}
-	,	new int[] {Xol_kwd_grp_.Id_img_link			, Tid_link}
-	,	new int[] {Xol_kwd_grp_.Id_img_alt			, Tid_alt}
-	,	new int[] {Xol_kwd_grp_.Id_ogg_noplayer		, Tid_noplayer}	// RESEARCH: what does noplayer do?; find example
-	,	new int[] {Xol_kwd_grp_.Id_ogg_noicon		, Tid_noicon}
-	,	new int[] {Xol_kwd_grp_.Id_ogg_thumbtime	, Tid_thumbtime}
+	{ new int[] {Xol_kwd_grp_.Id_img_thumbnail		, Tid_thumb}
+	, new int[] {Xol_kwd_grp_.Id_img_manualthumb	, Tid_thumb}	// RESEARCH: what is manualthumb? 'thumb=$1' vs 'thumb'
+	, new int[] {Xol_kwd_grp_.Id_img_right			, Tid_right}
+	, new int[] {Xol_kwd_grp_.Id_img_left			, Tid_left}
+	, new int[] {Xol_kwd_grp_.Id_img_none			, Tid_none}
+	, new int[] {Xol_kwd_grp_.Id_img_center			, Tid_center}
+	, new int[] {Xol_kwd_grp_.Id_img_framed			, Tid_frame}
+	, new int[] {Xol_kwd_grp_.Id_img_frameless		, Tid_frameless}
+	, new int[] {Xol_kwd_grp_.Id_img_page			, Tid_page}		// for pdf
+	, new int[] {Xol_kwd_grp_.Id_img_upright		, Tid_upright}
+	, new int[] {Xol_kwd_grp_.Id_img_border			, Tid_border}
+	, new int[] {Xol_kwd_grp_.Id_img_baseline		, Tid_baseline}
+	, new int[] {Xol_kwd_grp_.Id_img_sub			, Tid_sub}
+	, new int[] {Xol_kwd_grp_.Id_img_super			, Tid_super}
+	, new int[] {Xol_kwd_grp_.Id_img_top			, Tid_top}
+	, new int[] {Xol_kwd_grp_.Id_img_text_top		, Tid_text_top}
+	, new int[] {Xol_kwd_grp_.Id_img_middle			, Tid_middle}
+	, new int[] {Xol_kwd_grp_.Id_img_bottom			, Tid_bottom}
+	, new int[] {Xol_kwd_grp_.Id_img_text_bottom	, Tid_text_bottom}
+	, new int[] {Xol_kwd_grp_.Id_img_link			, Tid_link}
+	, new int[] {Xol_kwd_grp_.Id_img_alt			, Tid_alt}
+	, new int[] {Xol_kwd_grp_.Id_img_class			, Tid_class}
+	, new int[] {Xol_kwd_grp_.Id_ogg_noplayer		, Tid_noplayer}	// RESEARCH: what does noplayer do?; find example
+	, new int[] {Xol_kwd_grp_.Id_ogg_noicon			, Tid_noicon}
+	, new int[] {Xol_kwd_grp_.Id_ogg_thumbtime		, Tid_thumbtime}
 	};
 }

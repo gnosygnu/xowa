@@ -39,5 +39,5 @@ class Xow_page_fetcher_mok implements Xow_page_fetcher {
 		Xodb_page rv = (Xodb_page)pages.Fetch(Make_key(ns_id, ttl));
 		return rv == null ? null : rv.Text();
 	}
-	String Make_key(int ns_id, byte[] ttl) {return Int_.XtoStr(ns_id) + "|" + String_.new_utf8_(ttl);}
+	String Make_key(int ns_id, byte[] ttl) {return Int_.Xto_str(ns_id) + "|" + String_.new_utf8_(ttl);}
 }

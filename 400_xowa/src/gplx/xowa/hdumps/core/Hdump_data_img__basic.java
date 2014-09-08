@@ -17,5 +17,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
 public class Hdump_data_img__basic extends Hdump_data_img__base {
-	@Override public int Tid() {return Hdump_data_img__base.Tid_basic;}
+	@Override public int Img_tid() {return Hdump_data_img__base.Tid_basic;}
 }

@@ -55,7 +55,7 @@ class Fs_root_dir {
 		if (Xof_ext_.Id_is_image(rv.Fil_ext_id()))
 			img_size = img_size_wkr.Exec(rv.Fil_url());
 		rv.Init_by_size(++fil_id_next, img_size.Width(), img_size.Height());
-		cfg_tbl.Update(Cfg_grp_root_dir, Cfg_key_fil_id_next, Int_.XtoStr(fil_id_next));
+		cfg_tbl.Update(Cfg_grp_root_dir, Cfg_key_fil_id_next, Int_.Xto_str(fil_id_next));
 		fil_tbl.Insert(rv);
 		return rv;
 	}
@@ -85,7 +85,7 @@ class Fs_root_dir {
 		cfg_tbl.Ctor(provider, created);
 		fil_tbl.Ctor(provider, created);
 		if (created)
-			cfg_tbl.Insert(Cfg_grp_root_dir, Cfg_key_fil_id_next, Int_.XtoStr(fil_id_next));
+			cfg_tbl.Insert(Cfg_grp_root_dir, Cfg_key_fil_id_next, Int_.Xto_str(fil_id_next));
 		else {
 			fil_id_next = cfg_tbl.Select_as_int_or_fail(Cfg_grp_root_dir, Cfg_key_fil_id_next);
 		}

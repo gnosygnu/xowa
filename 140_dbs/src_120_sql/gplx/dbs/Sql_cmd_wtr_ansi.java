@@ -151,7 +151,7 @@ class Sql_cmd_wtr_ansi implements Sql_cmd_wtr {
 		}
 		Class<?> valType = val.getClass();
 				if (valType == Boolean.class)
-			sb.Add_obj(Bool_.XtoInt(Bool_.cast_(val)));			// NOTE!: save boolean to 0 or 1, b/c (a) db may not support bit datatype (sqllite) and (b) avoid i18n issues with "true"/"false"
+			sb.Add_obj(Bool_.Xto_int(Bool_.cast_(val)));			// NOTE!: save boolean to 0 or 1, b/c (a) db may not support bit datatype (sqllite) and (b) avoid i18n issues with "true"/"false"
 		else if 
 			(	valType == Byte.class || valType == Short.class 
 			||	valType == Integer.class	|| valType == Long.class
@@ -162,7 +162,7 @@ class Sql_cmd_wtr_ansi implements Sql_cmd_wtr {
 			XtoSqlVal_DateAdp(sb, prm, (DateAdp)val);
 		else if (valType == DecimalAdp.class) {
 			DecimalAdp valDecimal = (DecimalAdp)val;				
-			sb.Add(valDecimal.XtoStr());
+			sb.Add(valDecimal.Xto_str());
 		}
 		//		else if (valType == System.Enum.class)
 //			sb.Add_any(Enm_.XtoInt(val));				// save enum as 0 or 1, since (a) no db supports enum datatype; (b) names are fungible; (c) int is less space than name

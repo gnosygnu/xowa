@@ -77,6 +77,6 @@ class Xob_diff_regy_sql_runner {
 			throw Err_.unhandled(fsdb_db_tid);
 	}
 	public static String Build_url(String wiki_domain, int fsdb_db_id, String fsdb_db_type) {
-		return String_.Format("{0}-{1}-{2}.sql", wiki_domain, Int_.XtoStr_PadBgn(fsdb_db_id, 3), fsdb_db_type);
+		return String_.Format("{0}-{1}-{2}.sql", wiki_domain, Int_.Xto_str_pad_bgn(fsdb_db_id, 3), fsdb_db_type);
 	}
 }

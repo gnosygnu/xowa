@@ -31,7 +31,7 @@ public class Xoa_url_arg_hash {
 		Gfo_url_arg arg = (Gfo_url_arg)hash.Fetch(key);
 		return arg == null ? or : String_.new_utf8_(arg.Val_bry());
 	}
-	public void Set_val_by_int(byte[] key, int val) {Set_val_by_bry(key, Bry_.new_ascii_(Int_.XtoStr(val)));}
+	public void Set_val_by_int(byte[] key, int val) {Set_val_by_bry(key, Bry_.new_ascii_(Int_.Xto_str(val)));}
 	public void Set_val_by_bry(byte[] key, byte[] val) {		
 		Gfo_url_arg arg = (Gfo_url_arg)hash.Fetch(key);
 		if (arg == null) {

@@ -44,7 +44,7 @@ public class Fsdb_mnt_mgr implements GfoInvkAble {
 			Fsdb_mnt_tbl.Create_table(provider);
 			Fsdb_mnt_tbl.Insert(provider, Mnt_idx_main, "fsdb.main", "fsdb.main");
 			Fsdb_mnt_tbl.Insert(provider, Mnt_idx_user, "fsdb.user", "fsdb.user");
-			tbl_cfg.Insert("core", "mnt.insert_idx", Int_.XtoStr(Mnt_idx_user));
+			tbl_cfg.Insert("core", "mnt.insert_idx", Int_.Xto_str(Mnt_idx_user));
 		}
 		return Fsdb_mnt_tbl.Select_all(provider);
 	}

@@ -259,4 +259,5 @@ public class Bry_fmtr {
 		byte[] bry = bfr.XtoAryAndClear();
 		this.Fmt_(bry).Compile();
 	}
+	public static String Escape_tilde(String v) {return String_.Replace(v, "~", "~~");}
 }

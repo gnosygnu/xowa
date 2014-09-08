@@ -69,7 +69,7 @@ public abstract class Xog_mnu_base implements GfoInvkAble {
 		return itm;
 	}
 	public Xog_mnu_itm Add_spr() {
-		String key = "xowa.spr" + Int_.XtoStr(list.Count());
+		String key = "xowa.spr" + Int_.Xto_str(list.Count());
 		Xog_mnu_itm rv = new Xog_mnu_itm(gui_mgr, key).Tid_(Xog_mnu_itm.Tid_spr);
 		list.Add(rv);
 		return rv;

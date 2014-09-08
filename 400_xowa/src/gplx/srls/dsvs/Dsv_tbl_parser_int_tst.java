@@ -34,7 +34,7 @@ class Mok_int_itm implements XtoStrAble {
 	private String fld_0;
 	private int fld_1, fld_2;
 	public Mok_int_itm(String fld_0, int fld_1, int fld_2) {this.fld_0 = fld_0; this.fld_1 = fld_1; this.fld_2 = fld_2;}
-	public String XtoStr() {return String_.Concat_with_str("|", fld_0, Int_.XtoStr(fld_1), Int_.XtoStr(fld_2));}
+	public String XtoStr() {return String_.Concat_with_str("|", fld_0, Int_.Xto_str(fld_1), Int_.Xto_str(fld_2));}
 }
 class Mok_int_mgr extends Mok_mgr_base {
 	public void Clear() {itms.Clear();}

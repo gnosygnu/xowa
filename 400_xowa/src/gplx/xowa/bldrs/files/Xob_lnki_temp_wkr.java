@@ -155,7 +155,7 @@ class Xob_lnki_temp_wkr_ {
 		for (int i = 0; i < aliases_len; i++) {
 			String alias = aliases[i];
 			int id = i < ids_len ? rv[i] : -1;
-			wiki.App().Usr_dlg().Note_many("", "", "ns: ~{0} <- ~{1}", Int_.XtoStr_fmt(id, "0000"), alias);
+			wiki.App().Usr_dlg().Note_many("", "", "ns: ~{0} <- ~{1}", Int_.Xto_str_fmt(id, "0000"), alias);
 		}
 		if (aliases_len != ids_len) throw Err_.new_fmt_("mismatch in aliases and ids: {0} vs {1}", aliases_len, ids_len);
 		return rv;

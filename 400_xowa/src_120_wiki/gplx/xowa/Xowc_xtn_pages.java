@@ -40,7 +40,7 @@ public class Xowc_xtn_pages implements GfoInvkAble {
 		for (int i = 0; i < len; i++) {	// Page / Index ns_ids are variable per wiki; iterate over ns, and set ns_id
 			Xow_ns ns = ns_mgr.Ords_get_at(i); if (ns == null) continue;
 			byte[] ns_name = ns.Name_enc();
-			if		(Bry_.Eq(ns_name, page_name))		ns_page_id = ns.Id();
+			if		(Bry_.Eq(ns_name, page_name))		{ns_page_id = ns.Id(); ns_mgr.Ns_page_id_(ns_page_id);}
 			else if (Bry_.Eq(ns_name, page_talk_name))	ns_page_talk_id = ns.Id();
 			else if (Bry_.Eq(ns_name, index_name))		ns_index_id = ns.Id();
 			else if (Bry_.Eq(ns_name, index_talk_name))	ns_index_talk_id = ns.Id();
@@ -56,9 +56,9 @@ public class Xowc_xtn_pages implements GfoInvkAble {
 	private int Set_canonical(Xow_ns_mgr ns_mgr, int aliases_added, int id, byte[] name) {
 		Xow_ns ns =  ns_mgr.Ids_get_or_null(id);
 		if (	ns == null							// ns doesn't exist; should throw error;
-			||	!Bry_.Eq(ns.Name_bry(), name)	// ns exists, but name doesn't match canonical
+			||	!Bry_.Eq(ns.Name_bry(), name)		// ns exists, but name doesn't match canonical
 			) {
-			ns_mgr.Aliases_add(id, String_.new_ascii_(name));
+			ns_mgr.Aliases_add(id, String_.new_ascii_(name));					
 			++aliases_added;
 		}
 		return aliases_added;

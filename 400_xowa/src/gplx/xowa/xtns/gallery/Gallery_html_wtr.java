@@ -105,7 +105,7 @@ public class Gallery_html_wtr {
 					, lnki_alt
 					);
 				if (hctx_is_hdump)
-					hdump_imgs.Imgs_add(new Hdump_data_img__gallery().Init_by_gallery(-1, itm_div_w, itm_box_w, itm_margin), xfer_itm, Hdump_data_img__gallery.Tid_gallery);
+					hdump_imgs.Data_add_img(new Hdump_data_img__gallery().Init_by_gallery(itm_div_w, itm_box_w, itm_margin), xfer_itm, Hdump_data_img__gallery.Tid_gallery);
 			}
 			else {
 				Gallery_html_wtr_.Itm_txt_fmtr.Bld_bfr_many(itm_bfr

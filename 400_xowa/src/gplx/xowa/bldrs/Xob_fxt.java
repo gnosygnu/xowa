@@ -38,7 +38,7 @@ public class Xob_fxt {
 	public Io_url fil_site_ctg(int idx)				{return wiki.Fsys_mgr().Url_site_fil(Xow_dir_info_.Tid_category, idx);}
 	public Io_url fil_site_id(int idx)				{return wiki.Fsys_mgr().Url_site_fil(Xow_dir_info_.Tid_id, idx);}
 	public Io_url fil_reg(byte tid) 				{return wiki.Fsys_mgr().Url_site_reg(tid);}
-	public Io_url fil_reg(int ns_id, byte tid) 		{return wiki.Fsys_mgr().Url_ns_reg(Int_.XtoStr_PadBgn(ns_id, 3), tid);}
+	public Io_url fil_reg(int ns_id, byte tid) 		{return wiki.Fsys_mgr().Url_ns_reg(Int_.Xto_str_pad_bgn(ns_id, 3), tid);}
 	public Xob_fxt Fil_expd(Io_url url, String... expd) {
 		String text = String_.Concat_lines_nl_skip_last(expd);	// skipLast b/c if trailing line wanted, easier to pass in extra argument for ""
 		expd_list.Add(new Io_fil_chkr(url, text));

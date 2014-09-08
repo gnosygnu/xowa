@@ -63,7 +63,7 @@ class Bry_bfr_mkr_mgr {
 			for (int i = 0; i < ary_max; i++) {
 				Bry_bfr itm = ary[i];
 				if (itm != null) {
-					if (itm.Mkr_mgr() != null) throw Err_.new_("failed to clear bfr: " + Int_.XtoStr(i));
+					if (itm.Mkr_mgr() != null) throw Err_.new_("failed to clear bfr: " + Int_.Xto_str(i));
 					itm.Clear();
 				}
 				ary[i] = null;

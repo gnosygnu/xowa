@@ -81,7 +81,7 @@ public class Fsdb_db_bin_mgr implements RlsAble {
 		Fsdb_db_bin_fil cur = Get_cur();
 		if (cur != null) {
 			cur.Provider().Txn_mgr().Txn_end_all();
-			cur.Provider().Rls();
+			cur.Provider().Conn_term();
 		}
 		int new_itms_len = itms_len + 1;
 		Fsdb_db_bin_fil[] new_itms = new Fsdb_db_bin_fil[new_itms_len];
@@ -94,6 +94,6 @@ public class Fsdb_db_bin_mgr implements RlsAble {
 		this.Txn_open();
 	}
 	private static Io_url url_(Io_url dir, int id) {
-		return dir.GenSubFil_ary("fsdb.bin.", Int_.XtoStr_PadBgn(id, 4), ".sqlite3");
+		return dir.GenSubFil_ary("fsdb.bin.", Int_.Xto_str_pad_bgn(id, 4), ".sqlite3");
 	}
 }

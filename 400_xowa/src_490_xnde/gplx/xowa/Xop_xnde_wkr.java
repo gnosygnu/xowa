@@ -24,6 +24,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 	public void Page_bgn(Xop_ctx ctx, Xop_root_tkn root) {} 
 	public void Page_end(Xop_ctx ctx, Xop_root_tkn root, byte[] src, int src_len) {this.Clear();}
 	private void Clear() {
+		
 		pre_at_bos = false;
 	}
 	public void AutoClose(Xop_ctx ctx, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos, Xop_tkn_itm tkn, int closing_tkn_tid) {

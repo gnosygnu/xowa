@@ -111,6 +111,7 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 					case Xop_lnki_arg_parser.Tid_text_top:		lnki.Align_v_(Xop_lnki_align_v.TextTop); break;
 					case Xop_lnki_arg_parser.Tid_text_bottom:	lnki.Align_v_(Xop_lnki_align_v.TextBottom); break;
 					case Xop_lnki_arg_parser.Tid_baseline:		lnki.Align_v_(Xop_lnki_align_v.Baseline); break;
+					case Xop_lnki_arg_parser.Tid_class:			lnki.Lnki_cls_(Xop_lnki_wkr_.Val_extract(src, arg)); break;
 					case Xop_lnki_arg_parser.Tid_alt:			lnki.Alt_tkn_(arg); 
 						lnki.Alt_tkn().Tkn_ini_pos(false, arg.Src_bgn(), arg.Src_end());
 						break;
@@ -155,7 +156,7 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 							if (number_parser.HasErr())
 								ctx.Msg_log().Add_itm_none(Xop_lnki_log.Upright_val_is_invalid, src, valTknBgn, valTknEnd);
 							else
-								lnki.Upright_(number_parser.AsDec().XtoDouble());
+								lnki.Upright_(number_parser.AsDec().Xto_double());
 						}
 						else	// no =; EX: [[Image:a|upright]]
 							lnki.Upright_(gplx.xowa.files.Xof_img_size.Upright_default_marker);// NOTE: was incorrectly hardcoded as 1; DATE:2014-07-23
@@ -252,6 +253,10 @@ class Xop_lnki_wkr_ {
 			ctx.Msg_log().Add_itm_none(Xop_lnki_log.Upright_val_is_invalid, src, val_tkn_bgn, val_tkn_end);
 		else
 			lnki.Page_(number_parser.AsInt());
+	}
+	public static byte[] Val_extract(byte[] src, Arg_nde_tkn arg) {
+		int val_tkn_bgn = arg.Val_tkn().Src_bgn(), val_tkn_end = arg.Val_tkn().Src_end();
+		return Bry_.Trim(src, val_tkn_bgn, val_tkn_end);	// trim trailing space
 	}
 	public static void Thumbtime_parse(Xop_ctx ctx, byte[] src, NumberParser number_parser, Xop_lnki_tkn lnki, Arg_nde_tkn arg) {
 		int val_tkn_bgn = arg.Val_tkn().Src_bgn(), val_tkn_end = arg.Val_tkn().Src_end();

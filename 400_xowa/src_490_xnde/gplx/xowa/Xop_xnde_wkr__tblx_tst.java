@@ -54,18 +54,18 @@ public class Xop_xnde_wkr__tblx_tst {
 	@Test  public void Td_in_lnki_should_be_ignored() {// PURPOSE: \n| inside lnki should not be interpreted as table cell; EX: uk.w:Дніпро; DATE:2014-03-11
 		fxt.Init_para_y_();
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
-			( "<table><tr><td>"
-			, "[[File:A.png|150px"
-			, "|B]]</td></tr></table>"
-			), String_.Concat_lines_nl_skip_last
-			( "<table>"
-			, "  <tr>"
-			, "    <td>"
-			, "<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"B\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/150px.png\" width=\"150\" height=\"0\" /></a>"
-			, "    </td>"
-			, "  </tr>"
-			, "</table>"
-			));
+		( "<table><tr><td>"
+		, "[[File:A.png|150px"
+		, "|B]]</td></tr></table>"
+		), String_.Concat_lines_nl_skip_last
+		( "<table>"
+		, "  <tr>"
+		, "    <td>"
+		, "<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"B\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/150px.png\" width=\"150\" height=\"0\" /></a>"
+		, "    </td>"
+		, "  </tr>"
+		, "</table>"
+		));
 		fxt.Init_para_n_();
 	}
 	@Test  public void Nl() {

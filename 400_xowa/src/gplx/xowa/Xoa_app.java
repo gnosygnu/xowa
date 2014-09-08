@@ -83,15 +83,16 @@ public class Xoa_app implements GfoInvkAble {
 	}
 	public byte Stage() {return stage;} public Xoa_app Stage_(byte v) {stage = v; return this;} private byte stage = Xoa_stage_.Tid_ctor;
 	public boolean Term_cbk() {
+		usr_dlg.Log_many("", "", "term:bgn");
 		if (setup_mgr.Cmd_mgr().Working()) {
 			if (!gui_mgr.Kit().Ask_yes_no("", "", "An import is in progress. Are you sure you want to exit?")) return false;
 		} 
-		gui_mgr.Browser_win().Usr_dlg().Canceled_y_();
-		user.App_term();
-		log_wtr.Term();
-		log_mgr.Rls();
-		if (Scrib_core.Core() != null) Scrib_core.Core().Term();
-		wiki_mgr.Rls();
+		gui_mgr.Browser_win().Usr_dlg().Canceled_y_();		
+		user.App_term(); usr_dlg.Log_many("", "", "term:app_term");
+		log_wtr.Term(); usr_dlg.Log_many("", "", "term:log_wtr");
+		log_mgr.Rls(); usr_dlg.Log_many("", "", "term:log_mgr");
+		if (Scrib_core.Core() != null) {Scrib_core.Core().Term(); usr_dlg.Log_many("", "", "term:scrib");}
+		wiki_mgr.Rls(); usr_dlg.Log_many("", "", "term:wiki_mgr");
 		return true;
 	}
 	public Xoa_wiki_mgr			Wiki_mgr() {return wiki_mgr;} private Xoa_wiki_mgr wiki_mgr;

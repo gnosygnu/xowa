@@ -19,17 +19,17 @@ package gplx.dbs; import gplx.*;
 import gplx.stores.*;
 import java.sql.*; 
 class Postgres_engine extends Db_engine_sql_base {
-	@Override public String Key() {return Db_connect_postgres.KeyDef;}
+	@Override public String Key() {return Db_conn_info__postgres.Key_const;}
 	@Override public Sql_cmd_wtr SqlWtr() {return Sql_cmd_wtr_.BackslashSensitive;}
-	@Override public Db_engine MakeEngine(Db_connect connectInfo) {
+	@Override public Db_engine Make_new(Db_conn_info connectInfo) {
 		Postgres_engine rv = new Postgres_engine();
 		rv.ctor_SqlEngineBase(connectInfo);
 		return rv;
 	}
 	@Override public DataRdr NewDataRdr(ResultSet rdr, String commandText) {return Db_data_rdr_.new_(rdr, commandText);}
-		@gplx.Internal @Override protected Connection NewDbCon() {
-		Db_connect_postgres connUrl = (Db_connect_postgres)dbInfo; 
-		return NewDbCon("jdbc:" + connUrl.Key_of_db_connect() + "://localhost/" + connUrl.Database(), connUrl.Uid(), connUrl.Pwd());
+		@gplx.Internal @Override protected Connection Conn_new() {
+		Db_conn_info__postgres connUrl = (Db_conn_info__postgres)conn_info; 
+		return NewDbCon("jdbc:" + connUrl.Key() + "://localhost/" + connUrl.Database(), connUrl.Uid(), connUrl.Pwd());
 	}
 		@gplx.Internal protected static final Postgres_engine _ = new Postgres_engine(); Postgres_engine() {}
 }

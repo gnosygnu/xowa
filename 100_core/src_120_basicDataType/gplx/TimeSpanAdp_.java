@@ -25,7 +25,7 @@ public class TimeSpanAdp_ {
 		return new TimeSpanAdp(fracs);
 	}
 	public static TimeSpanAdp decimal_(DecimalAdp seconds)	{
-		return new TimeSpanAdp(seconds.XtoLong_Mult1000());
+		return new TimeSpanAdp(seconds.Xto_long_mult_1000());
 	}
 	public static TimeSpanAdp units_(int frc, int sec, int min, int hour) {
 		int[] units = new int[] {frc, sec, min, hour};
@@ -92,7 +92,7 @@ public class TimeSpanAdp_ {
 					sb.Add(Sprs[i]);
 				if (val < 10)	// zeroPad
 					sb.Add("0");
-				sb.Add(Int_.XtoStr(val));
+				sb.Add(Int_.Xto_str(val));
 			}
 			return sb.XtoStrAndClear();
 		}
@@ -115,7 +115,7 @@ public class TimeSpanAdp_ {
 			zeros = first && !fmt_padZeros ? 1 : padZerosAry[i];	// if first, don't zero pad (avoid "01")
 			dlm = first ? "" : Sprs[i];						// if first, don't use dlm (avoid ":01")
 			sb.Add(dlm);
-			sb.Add(Int_.XtoStr_PadBgn(val, zeros));
+			sb.Add(Int_.Xto_str_pad_bgn(val, zeros));
 			first = false;
 		}
 		return sb.XtoStr();

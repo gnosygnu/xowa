@@ -39,7 +39,7 @@ class Criteria_or extends Criteria_bool_base {
 class Criteria_const implements Criteria {
 	public byte Crt_tid() {return Criteria_.Tid_const;}
 	public boolean Matches(Object comp) {return val;} private boolean val;
-	public String XtoStr() {return String_.Concat(" IS ", Bool_.XtoStr_lower(val));}
+	public String XtoStr() {return String_.Concat(" IS ", Bool_.Xto_str_lower(val));}
 	public Criteria_const(boolean val) {this.val = val;}
 }
 class Criteria_not implements Criteria {

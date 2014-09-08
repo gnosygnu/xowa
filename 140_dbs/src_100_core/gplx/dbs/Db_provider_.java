@@ -17,14 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
 public class Db_provider_ {
-	public static final Db_provider Null = new_(Db_connect_.Null);
-	public static Db_provider new_(Db_connect dbInfo) {
-		Db_engine prototype = Db_engineRegy._.Get(dbInfo.Key_of_db_connect());
-		Db_engine engine = prototype.MakeEngine(dbInfo);
-		engine.Connect();
-		Db_provider rv = new Db_provider(engine);
-//			Env_.Dispose_reg(rv);	// NOTE: need to dispose or else mysql error: Unable to release semaphore
-		return rv;
+	public static final Db_provider Null = new_and_open_(Db_conn_info_.Null);
+	public static Db_provider new_and_open_(Db_conn_info conn_info) {
+		Db_engine prototype = Db_engine_regy._.Get(conn_info.Key());
+		Db_engine engine = prototype.Make_new(conn_info);
+		engine.Conn_open();	// auto-open
+		return new Db_provider(engine);
 	}
 	public static int Select_fld0_as_int_or(Db_provider p, String sql, int or) {
 		DataRdr rdr = DataRdr_.Null;
@@ -42,11 +40,4 @@ public class Db_provider_ {
 			rdr.Rls();
 		}
 	}
-}
-class Db_engineRegy {
-	public Db_engine Get(String key) {return (Db_engine)hash.FetchOrFail(key);}
-	HashAdp hash = HashAdp_.new_();
-	Db_engineRegy Add(Db_engine engine) {hash.Add(engine.Key(), engine); return this;}
-	Db_engineRegy() {this.Add(Db_engine_null._).Add(TdbEngine._).Add(Mysql_engine._).Add(Postgres_engine._).Add(Sqlite_engine._);}
-	public static final Db_engineRegy _ = new Db_engineRegy();
 }

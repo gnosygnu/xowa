@@ -42,7 +42,7 @@ public class Scrib_regx_converter {
 					bfr.Add(q_flag ? Bry_dollar_escaped : Bry_dollar_literal);
 					break;
 				case Byte_ascii.Paren_bgn: {
-					if (i + 1 >= len) throw Err_.new_("Unmatched open-paren at pattern character " + Int_.XtoStr(i));
+					if (i + 1 >= len) throw Err_.new_("Unmatched open-paren at pattern character " + Int_.Xto_str(i));
 					boolean capt_itm = src[i + 1] == Byte_ascii.Paren_end;	// current is "()" 						
 					++grps_len;
 					capt_list.Add(KeyVal_.int_(grps_len, capt_itm));
@@ -53,7 +53,7 @@ public class Scrib_regx_converter {
 				}
 				case Byte_ascii.Paren_end:
 					if (grps_open.Count() == 0)
-						throw Err_.new_("Unmatched close-paren at pattern character " + Int_.XtoStr(i));
+						throw Err_.new_("Unmatched close-paren at pattern character " + Int_.Xto_str(i));
 					ListAdp_.DelAt_last(grps_open);
 					bfr.Add_byte(Byte_ascii.Paren_end);
 					break;
@@ -101,7 +101,7 @@ public class Scrib_regx_converter {
 							case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
 								grps_len = nxt - Byte_ascii.Num_0;
 								if (grps_len == 0 || grps_len > capt_list.Count() || grps_open_Has(grps_open, grps_len))
-									throw Err_.new_("invalid capture index %" + grps_len + " at pattern character " + Int_.XtoStr(i));
+									throw Err_.new_("invalid capture index %" + grps_len + " at pattern character " + Int_.Xto_str(i));
 								bfr.Add(Bry_bf2_seg_0).Add_int_variable(grps_len);//.Add(Bry_bf2_seg_1);	// $bfr .= "\\g{m$grps_len}";
 								break;
 							default:
@@ -160,7 +160,7 @@ public class Scrib_regx_converter {
 					bfr.Add_byte(Byte_ascii.Brack_end);
 					q_flag = true;
 					break;
-				case Byte_ascii.Brack_end: throw Err_.new_("Unmatched close-bracket at pattern character " + Int_.XtoStr(i));
+				case Byte_ascii.Brack_end: throw Err_.new_("Unmatched close-bracket at pattern character " + Int_.Xto_str(i));
 				case Byte_ascii.Dot:
 					q_flag = true;
 					bfr.Add_byte(Byte_ascii.Dot);

@@ -20,7 +20,7 @@ import org.junit.*;
 public class Xop_tblw_wkr__uncommon_tst {
 	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();} private Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
-	@Test  public void Tr_pops_entire_stack() {	// PURPOSE: in strange cases, tr will pop entire stack; EX:en.w:Turks_in_Denmark; DATE:2014-03-02
+	@Test  public void Tr_pops_entire_stack() {	// PURPOSE: in strange cases, tr will pop entire stack; PAGE:en.w:Turks_in_Denmark; DATE:2014-03-02
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 		( "{|"
 		, "<caption>a"
@@ -44,40 +44,61 @@ public class Xop_tblw_wkr__uncommon_tst {
 		, "</table>"
 		));
 	}
-	@Test   public void Atrs_defect() {	// PURPOSE: < in atrs was causing premature termination; EX:en.w:Wikipedia:List of hoaxes on Wikipedia
+	@Test   public void Atrs_defect() {	// PURPOSE: < in atrs was causing premature termination; PAGE:en.w:Wikipedia:List of hoaxes on Wikipedia
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
-			( "{|id=\"a<b\""
-			, "|a"
-			, "|}"), String_.Concat_lines_nl_skip_last
-			( "<table id=\"a.3Cb\">"
-			, "  <tr>"
-			, "    <td>a"
-			, "    </td>"
-			, "  </tr>"
-			, "</table>"
-			, ""
-			));
+		( "{|id=\"a<b\""
+		, "|a"
+		, "|}"), String_.Concat_lines_nl_skip_last
+		( "<table id=\"a.3Cb\">"
+		, "  <tr>"
+		, "    <td>a"
+		, "    </td>"
+		, "  </tr>"
+		, "</table>"
+		, ""
+		));
 	}
-	@Test   public void Broken_lnki() {	// PURPOSE: broken lnki was not closing table properly; EX:en.w:Wikipedia:Changing_attribution_for_an_edit; DATE:2014-03-16
+	@Test   public void Broken_lnki() {	// PURPOSE: broken lnki was not closing table properly; PAGE:en.w:Wikipedia:Changing_attribution_for_an_edit; DATE:2014-03-16
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
-			( "{|"
-			, "|-"
-			, "|a"
-			, "|[[b|c"
-			, "|}"
-			, "d"
-			), String_.Concat_lines_nl_skip_last
-			( "<table>"
-			, "  <tr>"
-			, "    <td>a"
-			, "    </td>"
-			, "    <td>[[b|c"
-			, "    </td>"
-			, "  </tr>"
-			, "</table>"
-			, ""
-			, "<p>d"
-			, "</p>"
-			));
+		( "{|"
+		, "|-"
+		, "|a"
+		, "|[[b|c"
+		, "|}"
+		, "d"
+		), String_.Concat_lines_nl_skip_last
+		( "<table>"
+		, "  <tr>"
+		, "    <td>a"
+		, "    </td>"
+		, "    <td>[[b|c"
+		, "    </td>"
+		, "  </tr>"
+		, "</table>"
+		, ""
+		, "<p>d"
+		, "</p>"
+		));
+	}
+	@Test   public void Broken_lnki_2() {	// PURPOSE: variation on above; PAGE:hr.b:Knjiga_pojmova_u_zrakoplovstvu/Kratice_u_zrakoplovstvu/S; DATE:2014-09-05
+		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		( "{|"
+		, "|-"
+		, "| [[A | b"
+		, "|-"
+		, "| B"
+		, "|}"
+		), String_.Concat_lines_nl_skip_last
+		( "<table>"
+		, "  <tr>"
+		, "    <td> [[A | b"
+		, "    </td>"
+		, "  </tr>"
+		, "  <tr>"
+		, "    <td> B"
+		, "    </td>"
+		, "  </tr>"
+		, "</table>"
+		));
 	}
 }

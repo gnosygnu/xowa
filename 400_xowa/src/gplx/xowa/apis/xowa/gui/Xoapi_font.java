@@ -36,9 +36,9 @@ public class Xoapi_font implements GfoInvkAble {
 		app.Html_mgr().Page_mgr().Font_enabled_(enabled);
 		app.Html_mgr().Page_mgr().Font_size_(html_font_size);
 		app.Cfg_mgr().Set_by_app("app.html.page.font_enabled", "y");
-		app.Cfg_mgr().Set_by_app("app.html.page.font_size", Float_.XtoStr(app.Html_mgr().Page_mgr().Font_size()));
+		app.Cfg_mgr().Set_by_app("app.html.page.font_size", Float_.Xto_str(app.Html_mgr().Page_mgr().Font_size()));
 		app.Gui_mgr().Win_cfg().Font().Size_(gui_font_size);
-		app.Cfg_mgr().Set_by_app("app.gui.win_opts.font.size", Float_.XtoStr(gui_font_size));
+		app.Cfg_mgr().Set_by_app("app.gui.win_opts.font.size", Float_.Xto_str(gui_font_size));
 		app.Cfg_mgr().Db_save_txt();
 		app.Gui_mgr().Browser_win().Page__reload();	// NOTE: force reload; needed if viewing Help:Options/HTML, else Font size won't update
 	}

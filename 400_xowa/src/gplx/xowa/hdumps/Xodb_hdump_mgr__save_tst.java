@@ -74,8 +74,7 @@ class Xodb_hdump_mgr__save_fxt extends Xodb_hdump_mgr__base_fxt {
 	}
 	public Hdump_text_row Make_row_body(int imgs_count, String body) {
 		page.Hdump_data().Body_(Bry_.new_utf8_(body));
-		for (int i = 0; i < imgs_count; ++i)
-			page.Hdump_data().Imgs().Add(null);
+		page.Hdump_data().Data_count_imgs_(imgs_count);
 		Hdump_page_body_srl.Save(tmp_bfr, page);
 		return new Hdump_text_row(page_id, Hdump_text_row_tid.Tid_body, tmp_bfr.XtoAryAndClear());
 	}

@@ -45,7 +45,7 @@ public class Xobc_core_calc_stats extends Xob_itm_basic_base implements Xob_cmd 
 			Xow_ns ns = wiki.Ns_mgr().Ords_ary()[i];
 			if (ns.Id() < 0) continue;
 			bfr.Add_byte_nl();
-			Gen_call(Bool_.N, bfr, Xow_wiki_stats.Invk_number_of_articles_in_ns_, ns.Num_str(), Int_.XtoStr_PadBgn(ns.Count(), 10));
+			Gen_call(Bool_.N, bfr, Xow_wiki_stats.Invk_number_of_articles_in_ns_, ns.Num_str(), Int_.Xto_str_pad_bgn(ns.Count(), 10));
 		}
 		bfr.Add_byte_nl().Add_byte(Byte_ascii.Semic).Add_byte_nl();
 		Io_url wiki_gfs = Wiki_gfs_url(wiki);

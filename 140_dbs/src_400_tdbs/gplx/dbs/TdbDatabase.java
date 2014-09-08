@@ -43,5 +43,5 @@ public class TdbDatabase {
 	}
 	int FileId_next = TdbFile.MainFileId + 1;
 	int TableId_next = 1;
-//		public static Io_url UrlOf(Db_connect url) {return Io_url_.new_any_(url.ServerName());}
+//		public static Io_url UrlOf(Db_conn_info url) {return Io_url_.new_any_(url.ServerName());}
 }

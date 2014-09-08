@@ -27,10 +27,16 @@ public class Xoh_subpages_bldr_tst {
 		, "</span>"
 		));
 	}
+	@Test  public void Skip_page() {
+		fxt.Wiki().Ns_mgr().Add_new(104, "Page");
+		fxt.Wiki().Ns_mgr().Ns_page_id_(104);
+		fxt.Test_bld("Page:A/B/C", "");
+	}
 }
 class Xoh_subpages_bldr_fxt {
-	private Xoa_app app; private Xow_wiki wiki;
+	private Xoa_app app;
 	private Xoh_subpages_bldr subpages_bldr;
+	public Xow_wiki Wiki() {return wiki;} private Xow_wiki wiki;
 	public void Init() {
 		this.app = Xoa_app_fxt.app_();
 		this.wiki = Xoa_app_fxt.wiki_tst_(app);
@@ -38,7 +44,7 @@ class Xoh_subpages_bldr_fxt {
 		this.subpages_bldr = new Xoh_subpages_bldr(app);
 	}
 	public void Test_bld(String ttl_str, String expd) {
-		byte[] actl = subpages_bldr.Bld(Xoa_ttl.parse_(wiki, Bry_.new_utf8_(ttl_str)));
+		byte[] actl = subpages_bldr.Bld(wiki.Ns_mgr(), Xoa_ttl.parse_(wiki, Bry_.new_utf8_(ttl_str)));
 		Tfds.Eq_str_lines(expd, String_.new_utf8_(actl));
 	}
 }

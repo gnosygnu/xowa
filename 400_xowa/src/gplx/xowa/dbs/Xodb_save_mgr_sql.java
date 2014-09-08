@@ -32,7 +32,7 @@ public class Xodb_save_mgr_sql implements Xodb_save_mgr {
 		if (page_id == null) {
 			DataRdr rdr = db_mgr.Tbl_page().Provider().Exec_sql_as_rdr("SELECT (Max(page_id) + 1) AS max_page_id FROM page;");
 			if (rdr.MoveNextPeer()) {
-				page_id = Int_.XtoStr(rdr.ReadInt("max_page_id"));
+				page_id = Int_.Xto_str(rdr.ReadInt("max_page_id"));
 				page_id_int = Int_.parse_(page_id);
 				db_mgr.Tbl_xowa_cfg().Insert_int("db", "page.id_next", page_id_int);
 			}

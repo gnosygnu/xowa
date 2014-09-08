@@ -39,7 +39,7 @@ public class Xow_fsys_mgr {
 	public Io_url Url_ns_fil(byte tid, int ns_id, int fil_idx) {
 		Xow_dir_info dir_info = dir_regy[tid];
 		String dir_name = dir_info.Name() + Xow_fsys_mgr.Wtr_dir(dir_info.Ext_tid());
-		return Xow_fsys_mgr.Url_fil(ns_dir.GenSubDir_nest(Int_.XtoStr_PadBgn(ns_id, 3), dir_name), fil_idx, dir_regy[tid].Ext_bry());
+		return Xow_fsys_mgr.Url_fil(ns_dir.GenSubDir_nest(Int_.Xto_str_pad_bgn(ns_id, 3), dir_name), fil_idx, dir_regy[tid].Ext_bry());
 	}
 	public Io_url Url_site_fil(byte tid, int fil_idx)	{return Xow_fsys_mgr.Url_fil(Url_site_dir(tid), fil_idx, Xow_dir_info_.Bry_xdat);}
 	public Io_url Url_site_reg(byte tid)				{return Url_site_dir(tid).GenSubFil(Xow_dir_info_.Name_reg_fil);}

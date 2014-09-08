@@ -22,7 +22,7 @@ public class Xof_doc_thumb {
 	public static int		Db_save_int(double v) {return (int)v;}
 	public static double	Db_load_int(DataRdr rdr, String fld) {return rdr.ReadInt(fld);}
 	public static int		X_int(double v) {return (int)v;}
-	public static String	X_str(double v) {return Double_.XtoStr(v);}
+	public static String	X_str(double v) {return Double_.Xto_str(v);}
 	public static final double		Null = -1;
 	public static boolean		Null_y(double v) {return v == Null;}
 	public static boolean		Null_n(double v) {return v != Null;}

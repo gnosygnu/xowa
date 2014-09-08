@@ -52,7 +52,11 @@ public class RegxAdp {
 			if (match.Rslt_none()) break;
 			rv.Add(match);
 			int find_bgn = match.Find_bgn();
-			idx = find_bgn + match.Find_len();
+			int find_len = match.Find_len();
+			idx = find_len == 0				// find_bgn == find_end
+				? find_bgn + 1				// add 1 to resume search from next char; DATE:2014-09-02
+				: find_bgn + find_len		// otherwise search after find_end
+				;
 		}
 		return (RegxMatch[])rv.XtoAry(RegxMatch.class);
 	}

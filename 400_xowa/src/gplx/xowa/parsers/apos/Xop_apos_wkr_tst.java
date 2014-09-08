@@ -125,7 +125,7 @@ public class Xop_apos_wkr_tst {
 	@Test  public void Apos_broken_by_tblw_th() {	// DATE:2013-04-24
 		fxt.Test_parse_page_all_str("A ''[[b!!]]'' c", "A <i><a href=\"/wiki/B!!\">b!!</a></i> c");
 	}
-	@Test   public void Nowiki() {	// EX:en.w:Wiki; DATE:2013-05-13
+	@Test   public void Nowiki() {	// PAGE:en.w:Wiki; DATE:2013-05-13
 		fxt.Test_parse_page_all_str("<nowiki>''a''</nowiki>", "&#39;&#39;a&#39;&#39;");
 	}
 	@Test  public void Lnki_multi_line() {	// PURPOSE: handle apos within multi-line lnki caption; DATE:2013-11-10

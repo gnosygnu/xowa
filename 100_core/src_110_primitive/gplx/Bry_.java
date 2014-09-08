@@ -19,6 +19,7 @@ package gplx;
 import java.lang.*;
 import gplx.ios.*;
 public class Bry_ {
+	public static final String Cls_name = "byte[]";
 	public static final int NotFound = -1;
 	public static final byte[] Empty = new byte[0];
 	public static final byte[][] Ary_empty = new byte[0][];

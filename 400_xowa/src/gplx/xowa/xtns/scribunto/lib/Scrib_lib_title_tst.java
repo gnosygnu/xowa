@@ -84,7 +84,7 @@ public class Scrib_lib_title_tst {
 		, "  isLocal=true"
 		, "  isRedirect=false"
 		, "  interwiki=" + xwiki
-		, "  namespace=" + Int_.XtoStr(ns_id)
+		, "  namespace=" + Int_.Xto_str(ns_id)
 		, "  nsText=" + ns_str
 		, "  text=" + ttl
 		, "  id=0"

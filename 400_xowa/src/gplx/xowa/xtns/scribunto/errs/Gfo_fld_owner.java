@@ -57,7 +57,7 @@ class Gfo_fld_crt implements Criteria {
 		Object comp = owner.Fld_val_as_obj(fld_idx);
 		return crt.Matches(comp);
 	}
-	public String XtoStr() {return String_.Concat(Byte_.XtoStr(fld_idx), " ", crt.XtoStr());}
+	public String XtoStr() {return String_.Concat(Byte_.Xto_str(fld_idx), " ", crt.XtoStr());}
 	public static Gfo_fld_crt new_(byte fld_idx, Criteria crt) {
 		Gfo_fld_crt rv = new Gfo_fld_crt();
 		rv.fld_idx = fld_idx; rv.crt = crt;

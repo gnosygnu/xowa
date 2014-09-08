@@ -161,7 +161,7 @@ public class Json_parser {
 	}
 	Err err_(byte[] src, int bgn, String fmt, Object... args) {return err_(src, bgn, src.length, fmt, args);}
 	Err err_(byte[] src, int bgn, int src_len, String fmt, Object... args) {
-		String msg = String_.Format(fmt, args) + " " + Int_.XtoStr(bgn) + " " + String_.new_utf8_len_safe_(src, bgn, 20);
+		String msg = String_.Format(fmt, args) + " " + Int_.Xto_str(bgn) + " " + String_.new_utf8_len_safe_(src, bgn, 20);
 		return Err_.new_(msg);
 	}
 }

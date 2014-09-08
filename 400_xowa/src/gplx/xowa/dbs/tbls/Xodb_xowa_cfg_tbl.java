@@ -60,8 +60,8 @@ public class Xodb_xowa_cfg_tbl {
 			stmt.Val_str_(grp).Val_str_(key).Exec_delete();
 		}	finally {stmt.Rls();}		
 	}
-	public void Insert_byte(String grp, String key, byte val)			{Insert_str(grp, key, Byte_.XtoStr(val));}
-	public void Insert_int(String grp, String key, int val)				{Insert_str(grp, key, Int_.XtoStr(val));}
+	public void Insert_byte(String grp, String key, byte val)			{Insert_str(grp, key, Byte_.Xto_str(val));}
+	public void Insert_int(String grp, String key, int val)				{Insert_str(grp, key, Int_.Xto_str(val));}
 	public void Insert_str_by_bry(String grp, String key, byte[] val)	{Insert_str(grp, key, String_.new_utf8_(val));}
 	public void Insert_str(String grp, String key, String val)			{Insert_str(provider, grp, key, val);}
 	public static void Insert_str(Db_provider p, String grp, String key, String val) {
@@ -73,8 +73,8 @@ public class Xodb_xowa_cfg_tbl {
 		p.Exec_qry(qry);
 	}
 	public Db_stmt Update_stmt() {return Db_stmt_.new_update_(provider, Tbl_name, String_.Ary(Fld_cfg_grp, Fld_cfg_key), Fld_cfg_val);}
-	public void Update(Db_stmt stmt, String grp, String key, long val) {Update(stmt, grp, key, Long_.XtoStr(val));}
-	public void Update(Db_stmt stmt, String grp, String key, int val) {Update(stmt, grp, key, Int_.XtoStr(val));}
+	public void Update(Db_stmt stmt, String grp, String key, long val) {Update(stmt, grp, key, Long_.Xto_str(val));}
+	public void Update(Db_stmt stmt, String grp, String key, int val) {Update(stmt, grp, key, Int_.Xto_str(val));}
 	public void Update(Db_stmt stmt, String grp, String key, String val) {
 		stmt.Clear()
 			.Val_str_(val)
@@ -82,7 +82,7 @@ public class Xodb_xowa_cfg_tbl {
 			.Val_str_(key)
 			.Exec_update();
 	}
-	public void Update(String grp, String key, int val) {Update(grp, key, Int_.XtoStr(val));}
+	public void Update(String grp, String key, int val) {Update(grp, key, Int_.Xto_str(val));}
 	public void Update(String grp, String key, String val) {
 		Db_qry qry = Db_qry_.update_common_(Tbl_name, Where_grp_key(grp, key), KeyVal_.new_(Fld_cfg_val, val));
 		provider.Exec_qry(qry);

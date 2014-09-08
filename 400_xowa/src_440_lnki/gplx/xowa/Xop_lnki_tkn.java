@@ -29,6 +29,7 @@ public class Xop_lnki_tkn extends Xop_tkn_itm_base {
 	public byte				Align_v() {return align_v;} public Xop_lnki_tkn Align_v_(byte v) {align_v = v; return this;} private byte align_v = Byte_.MaxValue_127;
 	public int				Lnki_w() {return lnki_w;} public Xop_lnki_tkn Lnki_w_(int v) {lnki_w = v; return this;} int lnki_w = Width_null;
 	public int				Lnki_h() {return lnki_h;} public Xop_lnki_tkn Lnki_h_(int v) {lnki_h = v; return this;} int lnki_h = Height_null;
+	public byte[]			Lnki_cls() {return lnki_cls;} public void Lnki_cls_(byte[] v) {lnki_cls = v;} private byte[] lnki_cls;
 	public boolean				Media_icon() {return media_icon;} public Xop_lnki_tkn Media_icon_n_() {media_icon = false; return this;} private boolean media_icon = true;
 	public double			Upright() {return upright;} public Xop_lnki_tkn Upright_(double v) {upright = v; return this;} double upright = Upright_null;
 	public double	        Thumbtime() {return thumbtime;} public Xop_lnki_tkn Thumbtime_(double v) {thumbtime = v; return this;} private double thumbtime = Xof_doc_thumb.Null;

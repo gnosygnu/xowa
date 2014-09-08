@@ -136,7 +136,7 @@ public class TstObj_tst {
 			TstObj expdSub = i < expdSubsLen ? (TstObj)expd.Subs().FetchAt(i) : TstObj.Null;
 			TstObj actlSub = i < actlSubsLen ? (TstObj)actl.Subs().FetchAt(i) : TstObj.Null;
 //				if (ruleMgr != null) ruleMgr.Eval(expd.TypeKey(), expdSub.PropName(), expdAtr, actlAtr, skip);
-			String iAsStr = Int_.XtoStr(i);
+			String iAsStr = Int_.Xto_str(i);
 			String subId = String_.Eq(idx, "") ? iAsStr : idx + "." + iAsStr;
 			if (expdSub == TstObj.Null && actlSub != TstObj.Null) {
 				TstAtr mis = new TstAtr().Key_("idx").Val_(i).ValType_(IntClassXtn._);

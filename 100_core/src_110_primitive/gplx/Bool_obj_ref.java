@@ -22,7 +22,7 @@ public class Bool_obj_ref {
 	public Bool_obj_ref Val_n_() {val = false; return this;}
 	public Bool_obj_ref Val_(boolean v) {val = v; return this;}
 	public Bool_obj_ref Val_toggle_() {val = !val; return this;}
-	@Override public String toString() {return Bool_.XtoStr_lower(val);}
+	@Override public String toString() {return Bool_.Xto_str_lower(val);}
         public static Bool_obj_ref n_() {return new_(false);}
         public static Bool_obj_ref y_() {return new_(true);}
         public static Bool_obj_ref new_(boolean val) {

@@ -25,11 +25,11 @@ class Io_url_gen_dir implements Io_url_gen {
 	public String Fmt() {return fmt;} public Io_url_gen_dir Fmt_(String v) {fmt = v; return this;} private String fmt = "{0}.csv";
 	public int Fmt_digits() {return fmt_digits;} public Io_url_gen_dir Fmt_digits_(int v) {fmt_digits = v; return this;} private int fmt_digits = 10;
 	public Io_url Cur_url() {return cur_url;} Io_url cur_url;
-	public Io_url Nxt_url() {cur_url = dir.GenSubFil(String_.Format(fmt, Int_.XtoStr_PadBgn(idx++, fmt_digits))); return cur_url;} private int idx = 0;
+	public Io_url Nxt_url() {cur_url = dir.GenSubFil(String_.Format(fmt, Int_.Xto_str_pad_bgn(idx++, fmt_digits))); return cur_url;} private int idx = 0;
 	public Io_url[] Prv_urls() {
 		Io_url[] rv = new Io_url[idx];
 		for (int i = 0; i < idx; i++) {
-			rv[i] = dir.GenSubFil(String_.Format(fmt, Int_.XtoStr_PadBgn(i, fmt_digits)));
+			rv[i] = dir.GenSubFil(String_.Format(fmt, Int_.Xto_str_pad_bgn(i, fmt_digits)));
 		}
 		return rv;
 	}

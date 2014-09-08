@@ -118,7 +118,7 @@ public class ListAdp_tst {
 		list_AddMany("0", "1", "2");
 		for (Object valObj : list) {
 			String val = (String)valObj;
-			Tfds.Eq(Int_.XtoStr(pos++), val);
+			Tfds.Eq(Int_.Xto_str(pos++), val);
 			tst_Enumerator("0", "1", "2");
 		}
 	}

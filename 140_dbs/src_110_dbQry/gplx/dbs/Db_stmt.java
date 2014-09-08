@@ -35,6 +35,7 @@ public interface Db_stmt extends RlsAble {
 	int Exec_update();
 	int Exec_delete();
 	DataRdr Exec_select();
+	Db_rdr Exec_select_as_rdr();
 	Object Exec_select_val();
 	Db_stmt Clear();
 	Db_stmt New();

@@ -15,7 +15,12 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.hdumps.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
-public class Hdump_data_tid {	// SERIALIZED
-	public static final int Tid_img = 1, Tid_redlink = 2, Tid_gallery = 3, Tid_imap = 4;
+package gplx.xowa.xtns.proofreadPage; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+import gplx.html.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*;
+public class Pp_xtn_mgr extends Xox_mgr_base {
+	@Override public boolean Enabled_default() {return false;}
+	@Override public byte[] Xtn_key() {return XTN_KEY;} public static final byte[] XTN_KEY = Bry_.new_ascii_("ProofreadPages");
+	@Override public Xox_mgr Clone_new() {return new Pp_xtn_mgr();}
+	@Override public void Xtn_init_by_wiki(Xow_wiki wiki) {
+	}
 }

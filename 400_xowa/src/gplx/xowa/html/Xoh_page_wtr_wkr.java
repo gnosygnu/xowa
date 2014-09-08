@@ -66,7 +66,9 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 		fmtr.Bld_bfr_many(html_bfr, page.Revision_data().Id()
 		, Xoh_page_wtr_wkr_.Bld_page_name(tmp_bfr, page.Ttl(), null)					// NOTE: page_name does not show display_title (<i>). always pass in null
 		, Xoh_page_wtr_wkr_.Bld_page_name(tmp_bfr, page.Ttl(), page.Html_data().Display_ttl())
-		, page_content_sub, page_data, wtr_page_lang, page_modified_on_msg, page.Lang().Dir_bry() 
+		, page_content_sub
+		, wiki.Html_mgr().Portal_mgr().Div_jump_to()
+		, page_data, wtr_page_lang, page_modified_on_msg, page.Lang().Dir_bry() 
 		, mgr.Css_common_bry(), mgr.Css_wiki_bry(), html_content_editable
 		, page.Html_data().Module_mgr().Init(app, wiki, page).Init_dflts()
 		, portal_mgr.Div_personal_bry(), portal_mgr.Div_ns_bry(app.Utl_bry_bfr_mkr(), page.Ttl(), wiki.Ns_mgr()), portal_mgr.Div_view_bry(app.Utl_bry_bfr_mkr(), view_tid, page.Html_data().Xtn_search_text())

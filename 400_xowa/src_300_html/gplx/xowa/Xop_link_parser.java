@@ -28,7 +28,7 @@ public class Xop_link_parser {
 		switch (tmp_url.Protocol_tid()) {
 			case Xoo_protocol_itm.Tid_http: case Xoo_protocol_itm.Tid_https:	// "http:" or "https:"; check if to offline wiki and redirect 
 				byte[] wiki_bry = tmp_url.Wiki_bry(), page_bry = tmp_url.Page_bry();
-				if (Bry_.Eq(wiki_bry, wiki.Domain_bry())			// link is to this wiki; check if alias
+				if (Bry_.Eq(wiki_bry, wiki.Domain_bry())				// link is to this wiki; check if alias
 					|| app.Xwiki_exists(wiki_bry)) {					// link is to an xwiki
 					page_bry = tmp_url.Page_for_lnki();
 					Parse__ttl(tmp_bfr, wiki, wiki_bry, page_bry);
