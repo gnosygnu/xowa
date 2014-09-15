@@ -16,10 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
-import gplx.dbs.*;
+import gplx.ios.*; import gplx.dbs.*; import gplx.xowa.dbs.*;
 public class Hdump_text_tbl {
 	public static final String Tbl_name = "html_text", Fld_page_id = "page_id", Fld_text_tid = "text_tid", Fld_text_data = "text_data";
+	private Xodb_mgr db_mgr; private Io_stream_zip_mgr zip_mgr;
 	private Db_stmt stmt_select, stmt_insert, stmt_delete;
+	public void Init_by_wiki(Xow_wiki wiki) {this.db_mgr = wiki.Db_mgr(); this.zip_mgr = wiki.App().Zip_mgr();}
 	public Db_provider Provider() {return provider;} public Hdump_text_tbl Provider_(Db_provider v) {this.Rls_all(); provider = v; return this;} private Db_provider provider;
 	@gplx.Virtual public void Delete_by_page(int page_id) {
 		if (stmt_delete == null) stmt_delete = Db_stmt_.new_delete_(provider, Tbl_name, Fld_page_id);
@@ -28,44 +30,30 @@ public class Hdump_text_tbl {
 	}
 	@gplx.Virtual public void Insert(int page_id, int tid, byte[] data) {
 		if (stmt_insert == null) stmt_insert = Db_stmt_.new_insert_(provider, Tbl_name, Flds_all);
+		if (zip_mgr != null) data = zip_mgr.Zip(db_mgr.Data_storage_format(), data);
 		try {stmt_insert.Clear().Val_int_(page_id).Val_int_(tid).Val_str_by_bry_(data).Exec_insert();}
 		catch (Exception exc) {stmt_insert = null; throw Err_.err_(exc, "stmt failed");} // must reset stmt, else next call will fail
 	}
+	private static final String[] Select_by_page_flds = new String[] {Fld_page_id, Fld_text_tid, Fld_text_data};
 	@gplx.Virtual public void Select_by_page(ListAdp rv, int page_id) {
-		if (stmt_select == null) stmt_select = Db_stmt_.new_select_(provider, Tbl_name, String_.Ary(Fld_page_id), Flds_all);
+		if (stmt_select == null) stmt_select = Db_stmt_.new_select_as_rdr(provider, Db_qry__select_in_tbl.new_(Tbl_name, String_.Ary(Fld_page_id), Select_by_page_flds));
 		try {
-			DataRdr rdr = stmt_select.Clear().Val_int_(page_id).Exec_select();
-			while(rdr.MoveNextPeer()) {
+			Db_rdr rdr = stmt_select.Clear().Val_int_(page_id).Exec_select_as_rdr();
+			while(rdr.Move_next()) {
+				byte[] data = rdr.Read_bry(2);
+				if (zip_mgr != null) data = zip_mgr.Unzip(db_mgr.Data_storage_format(), data);
 				Hdump_text_row row = new Hdump_text_row
-				( rdr.ReadInt(Fld_page_id)
-				, rdr.ReadInt(Fld_text_tid)
-				, rdr.ReadBryByStr(Fld_text_data)
+				( rdr.Read_int(0)
+				, rdr.Read_int(1)
+				, data
 				);
 				rv.Add(row);
 			}
-			rdr.Rls();
+			rdr.Close();
 		}
 		catch (Exception exc) {stmt_select = null; throw Err_.err_(exc, "stmt failed");} // must reset stmt, else next call will fail
 		finally {stmt_select.Rls();}
 	}
-//		private static final String[] Select_by_page_flds = new String[] {Fld_page_id, Fld_text_tid, Fld_text_data};
-//		public virtual void Select_by_page2(ListAdp rv, int page_id) {
-//			// if (stmt_select == null) stmt_select = provider.Stmt_select(Tbl_name, Select_by_page_flds, String_.Ary(Fld_page_id));
-//			try {
-//				Db_rdr rdr = null; //stmt_select.Clear().Val_int_(page_id).Exec_select_as_rdr();
-//				while(rdr.Move_next()) {
-//					Hdump_text_row row = new Hdump_text_row
-//					( rdr.Read_int(0)
-//					, rdr.Read_int(1)
-//					, rdr.Read_bry_by_str(2)
-//					);
-//					rv.Add(row);
-//				}
-//				rdr.Close();
-//			}
-//			catch (Exception exc) {stmt_select = null; throw Err_.err_(exc, "stmt failed");} // must reset stmt, else next call will fail
-//			finally {stmt_select.Rls();}
-//		}
 	public void Rls_all() {
 		if (stmt_select != null) {stmt_select.Rls(); stmt_select = null;}
 		if (stmt_insert != null) {stmt_insert.Rls(); stmt_insert = null;}

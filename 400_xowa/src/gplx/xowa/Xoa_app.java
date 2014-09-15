@@ -30,10 +30,11 @@ public class Xoa_app implements GfoInvkAble {
 		cfg_mgr = new Xoa_cfg_mgr(this);
 		api_root = new Xoapi_root(this);
 		url_cmd_eval = new Xoa_fsys_eval(this);
-		fsys_mgr = new Xoa_fsys_mgr(this, root_dir, bin_dir_name);
+		fsys_mgr = new Xoa_fsys_mgr(root_dir, bin_dir_name);
+		launcher = new Launcher_app_mgr(this);
+		fsys_mgr.Init_by_app(launcher);
 		user = new Xou_user(this, user_dir);
 		log_wtr.Log_dir_(user.Fsys_mgr().App_temp_dir().GenSubDir("log"));
-		fsys_mgr.Temp_dir_(user.Fsys_mgr().App_temp_dir());
 		lang_mgr = new Xoa_lang_mgr(this);
 		wiki_mgr = new Xoa_wiki_mgr(this);
 		gui_mgr = new Xoa_gui_mgr(this);
@@ -61,10 +62,10 @@ public class Xoa_app implements GfoInvkAble {
 	public NumberParser Utl_num_parser() {return utl_num_parser;} private NumberParser utl_num_parser = new NumberParser();
 	public void Init() {
 		stage = Xoa_stage_.Tid_init;
+		launcher.Init();
 		xtn_mgr.Init_by_app(this);
 		log_wtr.Init();
 		gui_mgr.Init_by_app();
-		fsys_mgr.Init();
 		user.Init_by_app();
 		file_mgr.Init_by_app();
 		wiki_mgr.Init_by_app();
@@ -115,7 +116,6 @@ public class Xoa_app implements GfoInvkAble {
 	public Xop_amp_mgr			Parser_amp_mgr() {return parser_amp_mgr;} private Xop_amp_mgr parser_amp_mgr = new Xop_amp_mgr();
 	public Xoa_thread_mgr		Thread_mgr() {return thread_mgr;} private Xoa_thread_mgr thread_mgr = new Xoa_thread_mgr();
 	public Url_encoder_mgr		Encoder_mgr() {return encoder_mgr;} private Url_encoder_mgr encoder_mgr = new Url_encoder_mgr();
-
 	public Xoa_fsys_mgr			Fsys_mgr() {return fsys_mgr;} private Xoa_fsys_mgr fsys_mgr;
 	public Xoa_hive_mgr			Hive_mgr() {return hive_mgr;} private Xoa_hive_mgr hive_mgr;
 	public Xoa_url_parser		Url_parser() {return url_parser;} private Xoa_url_parser url_parser = new Xoa_url_parser();
@@ -125,6 +125,7 @@ public class Xoa_app implements GfoInvkAble {
 	public Xop_xnde_tag_regy	Xnde_tag_regy() {return xnde_tag_regy;} private Xop_xnde_tag_regy xnde_tag_regy = new Xop_xnde_tag_regy();
 	public Xof_math_subst_regy	Math_subst_regy() {return math_subst_regy;} private Xof_math_subst_regy math_subst_regy = new Xof_math_subst_regy();
 	public Gfo_usr_dlg			Gui_wtr() {return gui_mgr.Browser_win().Usr_dlg();}
+	public Launcher_app_mgr		Launcher() {return launcher;} private Launcher_app_mgr launcher;
 
 	public Xoi_setup_mgr		Setup_mgr() {return setup_mgr;} private Xoi_setup_mgr setup_mgr;
 	public Gfo_msg_log			Msg_log() {return msg_log;} private Gfo_msg_log msg_log = new Gfo_msg_log(Xoa_app_.Name);

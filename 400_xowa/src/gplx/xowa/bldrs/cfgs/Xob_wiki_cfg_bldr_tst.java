@@ -111,7 +111,7 @@ public class Xob_wiki_cfg_bldr_tst {
 		));
 		String[] wikis = new String[] {"en.wikipedia.org"}; String protocol = "mem/";
 		Tfds.Eq_str_lines(Query_ns(protocol, gplx.ios.IoEngine_.MemKey, wikis), String_.Concat_lines_nl
-		(	"app.wiki_cfg_bldr.get('en.wikipedia.org').new_cmd_('wiki.ns_mgr.aliases', 'ns_mgr.add_alias_bulk(\""
+		(	"app.bldr.wiki_cfg_bldr.get('en.wikipedia.org').new_cmd_('wiki.ns_mgr.aliases', 'ns_mgr.add_alias_bulk(\""
 		,	"4|WP"
 		,	"5|WT"
 		,	"6|Image"
@@ -131,7 +131,7 @@ public class Xob_wiki_cfg_bldr_tst {
 			if (xml == null) continue;	// not found
 			gplx.xmls.XmlDoc xdoc = gplx.xmls.XmlDoc_.parse_(xml);
 			gplx.xmls.XmlNde xnde = gplx.xmls.Xpath_.SelectFirst(xdoc.Root(), "query/namespacealiases");
-			sb.Add("app.wiki_cfg_bldr.get('").Add(wiki).Add("').new_cmd_('wiki.ns_mgr.aliases', 'ns_mgr.add_alias_bulk(\"\n");
+			sb.Add("app.bldr.wiki_cfg_bldr.get('").Add(wiki).Add("').new_cmd_('wiki.ns_mgr.aliases', 'ns_mgr.add_alias_bulk(\"\n");
 			int xndes_len = xnde.SubNdes().Count();
 			for (int j = 0; j < xndes_len; j++) {
 				gplx.xmls.XmlNde ns_nde = xnde.SubNdes().FetchAt(j);

@@ -48,7 +48,7 @@ public class Xof_bin_wkr_http_wmf implements Xof_bin_wkr {
 		Xof_repo_pair repo_itm = repo_mgr.Repos_get_by_wiki(itm.Orig_wiki());
 		String queue_msg = String_.Format("downloading ~{0} of ~{1}: ~{2};", 0, 0, String_.new_utf8_(itm.Lnki_ttl()));
 		download.Prog_fmt_hdr_(queue_msg);
-		String src = url_bldr.Set_src_file_(mode, repo_itm.Src(), itm.Lnki_ttl(), itm.Lnki_md5(), itm.Lnki_ext(), w, itm.Lnki_thumbtime(), itm.Lnki_page()).Xto_str();
+		String src = url_bldr.Init_for_src_file(mode, repo_itm.Src(), itm.Lnki_ttl(), itm.Lnki_md5(), itm.Lnki_ext(), w, itm.Lnki_thumbtime(), itm.Lnki_page()).Xto_str();
 		download.Init(src, bin_url);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

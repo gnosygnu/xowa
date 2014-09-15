@@ -77,7 +77,6 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 		else if	(ctx.Match(k, Invk_page_goto_recent))						Page__navigate_by_url_bar(app.User().History_mgr().Get_at_last(app));
 		else if	(ctx.Match(k, Invk_history_bwd))							{Page__navigate_by_history(Bool_.N);}
 		else if	(ctx.Match(k, Invk_history_fwd))							{Page__navigate_by_history(Bool_.Y);}
-		else if	(ctx.Match(k, Invk_app_exit))								App__exit();
 		else if	(ctx.Match(k, Invk_eval))									App__eval(m.ReadStr("cmd"));
 		else if	(ctx.Match(k, Invk_page_async_cancel_wait))					Page__async__cancel__wait();
 		else if	(ctx.Match(k, Invk_page_async_restart))						Page__async__restart();
@@ -104,7 +103,6 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 	, Invk_page_edit_focus_box = "page_edit_focus_box", Invk_page_edit_focus_first = "page_edit_focus_first"
 	, Invk_page_edit_save = "page_edit_save", Invk_page_edit_save_draft = "page_edit_save_draft", Invk_page_edit_preview = "page_edit_preview", Invk_page_edit_rename = "page_edit_rename"
 	, Invk_page_dbg_wiki = "page_dbg_wiki", Invk_page_dbg_html = "page_dbg_html"
-	, Invk_app_exit = "app_exit"
 	, Invk_eval = "eval"
 	// xowa.gfs: shortcuts
 	, Invk_page_goto = "page_goto", Invk_page_goto_recent = "page_goto_recent"
@@ -134,8 +132,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 		app.User().History_mgr().Add(page.Url(), page.Ttl(), Bry_.Add_w_dlm(Byte_ascii.Hash, page.Url().Page_bry(), anchor_bry));
 	}
 	public void App__exit() {
-		if (!app.Term_cbk()) return; // NOTE: exit called by keyboard shortcut, or exit link; must call Term_cbk manually; Alt-F4/X button will call Term_cbk in closing event
-		app.Gui_mgr().Kit().Kit_term();
+		kit.Kit_term();	// NOTE: Kit_term calls shell.close() which in turn is hooked up to app.Term_cbk() event; DATE:2014-09-09
 	}
 	private void App__eval(String s) {
 		String snippet = this.Active_html_box().Html_elem_atr_get_str(s, Gfui_html.Atr_innerHTML);

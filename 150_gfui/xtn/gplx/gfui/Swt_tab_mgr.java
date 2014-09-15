@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui;
 import gplx.*;
+import gplx.threads.ThreadAdp_;
 
 import org.eclipse.swt.*;
 import org.eclipse.swt.custom.*;
@@ -25,7 +26,8 @@ import org.eclipse.swt.graphics.*;
 import org.eclipse.swt.layout.*;
 import org.eclipse.swt.widgets.*;
 public class Swt_tab_mgr implements Gxw_tab_mgr, Swt_control, FocusListener, GfoEvMgrOwner {
-	private GfuiInvkCmd cmd_async;	// NOTE: async needed for some actions like responding to key_down and calling .setSelection; else app hangs; DATE:2014-04-30 
+	private GfuiInvkCmd cmd_sync;
+//	private GfuiInvkCmd cmd_async;	// NOTE: async needed for some actions like responding to key_down and calling .setSelection; else app hangs; DATE:2014-04-30 
 	public Swt_tab_mgr(Swt_kit kit, Swt_control owner_control, KeyValHash ctorArgs) {
 		this.kit = kit;
 		tab_folder = new CTabFolder(owner_control.Under_composite(), SWT.BORDER);
@@ -38,7 +40,8 @@ public class Swt_tab_mgr implements Gxw_tab_mgr, Swt_control, FocusListener, Gfo
 		new Swt_tab_mgr_lnr_drag_drop(this, tab_folder);
 		tab_folder.addCTabFolder2Listener(new Swt_tab_mgr_lnr_close(this));
 		core = new Swt_core_cmds(tab_folder);
-		cmd_async = kit.New_cmd_async(this);
+//		cmd_async = kit.New_cmd_async(this);
+		cmd_sync = kit.New_cmd_sync(this);
 	}
 	public Swt_kit Kit() {return kit;} private Swt_kit kit;
 	public CTabFolder Under_ctabFolder() {return tab_folder;}
@@ -82,15 +85,15 @@ public class Swt_tab_mgr implements Gxw_tab_mgr, Swt_control, FocusListener, Gfo
 		CTabItem itm = tab_folder.getItems()[i];
 		Gfui_tab_itm_data tab_data = Get_tab_data(itm);
 		CTabItem next_tab = Tabs_select_after_closing_itm(tab_data);	// NOTE: must calc next_tab before calling Pub_tab_closed; latter will recalc idx
-		Pub_tab_closed(tab_data.Key());	// NOTE: dispose does not call event for .close; must manually raise event;
-		this.Tabs_select_by_itm(next_tab);
+		this.Tabs_select_by_itm(next_tab);								// NOTE: select tab before closing; DATE:2014-09-10
+		Pub_tab_closed(tab_data.Key());									// NOTE: dispose does not call event for .close; must manually raise event;
 		itm.dispose();
 	}
 	@Override public void Tabs_select_by_idx(int i) {
 		if (i == Gfui_tab_itm_data.Idx_null) return;	// 0 tabs; return;
 		msg_tabs_select_by_idx_swt.Clear();
 		msg_tabs_select_by_idx_swt.Add("v", i);
-		cmd_async.Invk(GfsCtx._, 0, Invk_tabs_select_by_idx_swt, msg_tabs_select_by_idx_swt);
+		cmd_sync.Invk(GfsCtx._, 0, Invk_tabs_select_by_idx_swt, msg_tabs_select_by_idx_swt);
 	}	private GfoMsg msg_tabs_select_by_idx_swt = GfoMsg_.new_cast_(Invk_tabs_select_by_idx_swt);
 	@Override public void Tabs_switch(int src, int trg) {Tabs_switch(tab_folder.getItem(src), tab_folder.getItem(trg));}
 	public boolean Tabs_switch(CTabItem src_tab_itm, CTabItem trg_tab_itm) {
@@ -117,7 +120,7 @@ public class Swt_tab_mgr implements Gxw_tab_mgr, Swt_control, FocusListener, Gfo
 		if (itm == null) return;	// 0 tabs; return;
 		msg_tabs_select_by_itm_swt.Clear();
 		msg_tabs_select_by_itm_swt.Add("v", itm);
-		cmd_async.Invk(GfsCtx._, 0, Invk_tabs_select_by_itm_swt, msg_tabs_select_by_itm_swt);
+		cmd_sync.Invk(GfsCtx._, 0, Invk_tabs_select_by_itm_swt, msg_tabs_select_by_itm_swt);
 	}	private GfoMsg msg_tabs_select_by_itm_swt = GfoMsg_.new_cast_(Invk_tabs_select_by_itm_swt);
 	private void Tabs_select_by_idx_swt(int idx) {
 		tab_folder.setSelection(idx);

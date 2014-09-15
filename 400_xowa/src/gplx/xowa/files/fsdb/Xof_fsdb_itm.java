@@ -91,8 +91,8 @@ public class Xof_fsdb_itm {
 		byte[] name_bry = Bry_.Len_eq_0(orig_redirect) ? lnki_ttl : orig_redirect; 
 		if (!lnki_ext.Id_is_media() && lnki_thumbtime != Xof_doc_thumb.Null)	// file is not media, but has thumbtime; this check can't be moved to Lnki_thumbtime_() b/c it needs ext
 			lnki_thumbtime = Xof_doc_thumb.Null;								// set thumbtime to null; needed else url will reference thumbtime; PAGE:en.w:Moon; EX:[[File:Lunar libration with phase Oct 2007 450px.gif|thumbtime=0:02]]; DATE:2014-07-20
-		html_url = url_bldr.Set_trg_file_(lnki_type_as_mode, repo, name_bry, lnki_md5, lnki_ext, html_w, lnki_thumbtime, lnki_page).Xto_url();
-		html_orig_url = url_bldr.Set_trg_file_(Xof_repo_itm.Mode_orig, repo, name_bry, lnki_md5, lnki_ext, Xof_img_size.Size_null_deprecated, Xof_doc_thumb.Null, Xof_doc_page.Null).Xto_url();
+		html_url = url_bldr.Init_for_trg_file(lnki_type_as_mode, repo, name_bry, lnki_md5, lnki_ext, html_w, lnki_thumbtime, lnki_page).Xto_url();
+		html_orig_url = url_bldr.Init_for_trg_file(Xof_repo_itm.Mode_orig, repo, name_bry, lnki_md5, lnki_ext, Xof_img_size.Size_null_deprecated, Xof_doc_thumb.Null, Xof_doc_page.Null).Xto_url();
 	}
 	public Io_url Html_orig_url() {return html_orig_url;} public Xof_fsdb_itm Html_orig_url_(Io_url v) {this.html_orig_url = v; return this;} private Io_url html_orig_url = Io_url_.Null;
 	public int Gallery_mgr_h() {return gallery_mgr_h;} public Xof_fsdb_itm Gallery_mgr_h_(int v) {gallery_mgr_h = v; return this;} private int gallery_mgr_h = Int_.Neg1;

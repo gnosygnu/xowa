@@ -22,7 +22,8 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 	private boolean html_db_enabled;
 	public Xodb_mgr_sql(Xow_wiki wiki) {
 		this.wiki = wiki;
-		fsys_mgr = new Xodb_fsys_mgr(wiki.App().Fsys_mgr().Bin_db_dir(), wiki.Fsys_mgr().Root_dir(), wiki.Domain_str());
+		Io_url bin_db_dir = wiki.App().Fsys_mgr().Bin_any_dir().GenSubDir_nest("sql", "xowa");
+		fsys_mgr = new Xodb_fsys_mgr(bin_db_dir, wiki.Fsys_mgr().Root_dir(), wiki.Domain_str());
 		load_mgr = new Xodb_load_mgr_sql(this, fsys_mgr);
 		save_mgr = new Xodb_save_mgr_sql(this);
 		tbl_text = new Xodb_text_tbl(this);

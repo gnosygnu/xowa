@@ -41,14 +41,18 @@ public class Xoh_lnki_wtr {
 	}
 	public void Write(Bry_bfr bfr, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki) {
 		Xoa_ttl lnki_ttl = lnki.Ttl();
-		Xow_xwiki_itm lang = lnki_ttl == null ? null : lnki_ttl.Wik_itm();
-		if (lang != null && lang.Type_is_lang(wiki.Lang().Lang_id()) && !lnki_ttl.ForceLiteralLink()) {
-			page.Xwiki_langs().Add(lnki_ttl);
-			return;
-		}
 		if (lnki_ttl == null) {// NOTE: parser failed to properly invalidate lnki; escape tkn now and warn; DATE:2014-06-06
 			app.Usr_dlg().Warn_many("", "", "invalid lnki evaded parser; page=~{0} ex=~{1}", ctx.Cur_page().Url().Xto_full_str(), String_.new_utf8_(src, lnki.Src_bgn(), lnki.Src_end()));
 			Xoh_html_wtr_escaper.Escape(app, bfr, src, lnki.Src_bgn(), lnki.Src_end(), true, false);
+			return;
+		}
+		Xow_xwiki_itm xwiki_lang = lnki_ttl.Wik_itm();
+		if (	xwiki_lang != null												// lnki is xwiki; EX: [[commons:]] [[en:]] [[wikt:]]
+			&&	xwiki_lang.Wiki_tid() == wiki.Xwiki_domain_tid()				// xwiki is same type as cur wiki; EX: cur=w xwiki=w -> add to xwiki_langs; cur=w xwikid=d -> don't add to xwiki_langs; DATE:2014-09-14
+			&&	xwiki_lang.Type_is_xwiki_lang(wiki.Domain_itm().Lang_orig_id())	// NOTE: use Lang_orig_id to handle xwikis between s.w and en.w; PAGE:s.q:Anonymous DATE:2014-09-10
+			&&	!lnki_ttl.ForceLiteralLink()									// not literal; [[:en:A]]
+			) {
+			page.Xwiki_langs().Add(lnki_ttl);
 			return;
 		}
 		boolean literal_link = lnki_ttl.ForceLiteralLink();	// NOTE: if literal link, then override ns behavior; for File, do not show image; for Ctg, do not display at bottom of page
@@ -102,10 +106,17 @@ public class Xoh_lnki_wtr {
 			if (cfg.Lnki_title())
 				bfr	.Add(Xoh_consts.A_bgn_lnki_0)					// '" title=\"'
 					.Add(lnki_ttl.Page_txt());						// 'Abcd'		NOTE: use Page_txt to (a) replace underscores with spaces; (b) get title casing; EX:[[roman_empire]] -> Roman empire
-			if (cfg.Lnki_visited()
-				&& history_mgr.Has(wiki.Domain_bry(), ttl_bry))
-				bfr.Add(Bry_xowa_visited);							// '" class="xowa-visited'
-			bfr.Add(Xoh_consts.__end_quote);						// '">'
+			if (hctx.Mode_is_hdump()) {
+				bfr.Add(gplx.xowa.hdumps.htmls.Hdump_html_consts.Html_redlink_bgn);
+				bfr.Add_int_variable(lnki.Html_id());
+				bfr.Add(gplx.xowa.hdumps.htmls.Hdump_html_consts.Html_redlink_end);
+			}
+			else {
+				if (cfg.Lnki_visited()
+					&& history_mgr.Has(wiki.Domain_bry(), ttl_bry))
+					bfr.Add(Bry_xowa_visited);						// '" class="xowa-visited'
+				bfr.Add(Xoh_consts.__end_quote);					// '">'	
+			}
 			if (lnki_ttl.Anch_bgn() != -1 && !lnki_ttl.Ns().Id_main()) {	// anchor exists and not main_ns; anchor must be manually added b/c Xoa_ttl does not handle # for non main-ns
 				byte[] anch_txt = lnki_ttl.Anch_txt();
 				byte anch_spr 

@@ -24,6 +24,7 @@ public class Xodb_hdump_mgr {
 		this.wiki = wiki;
 		load_mgr = new Hdump_load_mgr(this);
 		Tbl_(new Hdump_text_tbl());
+		text_tbl.Init_by_wiki(wiki);
 		Xoa_app app = wiki.App();
 		html_mgr.Init_by_app(app);
 	}
@@ -51,7 +52,7 @@ public class Xodb_hdump_mgr {
 		wiki.Db_mgr_as_sql().Tbl_page().Update_html_db_id(page.Revision_data().Id(), hdump_db_file.Id());
 		tmp_bfr.Mkr_rls();
 	}
-	@gplx.Internal protected void Write(Bry_bfr bfr, Xoa_page page) {
+	public void Write(Bry_bfr bfr, Xoa_page page) {
 		page.File_queue().Clear();	// need to reset uid to 0, else xowa_file_# will resume from last
 		Xoh_page_wtr_wkr wkr = wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_view_mode.Tid_read);
 		wkr.Write_body(bfr, Xoh_wtr_ctx.Hdump, page);

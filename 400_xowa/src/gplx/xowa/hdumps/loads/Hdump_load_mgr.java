@@ -55,16 +55,22 @@ public class Hdump_load_mgr {
 	}
 	private void Load_data_img() {
 		int tid = rdr.Read_int_to_pipe();
-		int uid = rdr.Read_int_to_pipe();
-		int w = rdr.Read_int_to_pipe();
-		int h = rdr.Read_int_to_pipe();
-		byte[] ttl = rdr.Read_bry_to_pipe();
-		byte[] src = rdr.Read_bry_to_pipe();
+		byte[] lnki_ttl = rdr.Read_bry_to_pipe();
+		int html_uid = rdr.Read_int_to_pipe();
+		int html_w = rdr.Read_int_to_pipe();
+		int html_h = rdr.Read_int_to_pipe();
+		int file_repo_id = rdr.Read_int_to_pipe();
+		int file_ext_id = rdr.Read_int_to_pipe();
+		boolean file_is_orig = rdr.Read_yn_to_pipe();
+		int file_w = rdr.Read_int_to_pipe();
+		double file_time = rdr.Read_double_to_pipe();
+		int file_page = rdr.Read_int_to_pipe();
 		Hdump_data_img__base img_itm = null;
 		switch (tid) {
-			case Hdump_data_img__base.Tid_basic		: img_itm = new Hdump_data_img__basic().Init_by_base(uid, w, h, ttl, src); break;
-			case Hdump_data_img__base.Tid_gallery	: img_itm = new Hdump_data_img__gallery().Init_by_gallery(rdr.Read_int_to_pipe(), rdr.Read_int_to_pipe(), rdr.Read_int_to_pipe()).Init_by_base(uid, w, h, ttl, src); break;
+			case Hdump_data_img__base.Tid_basic		: img_itm = new Hdump_data_img__basic(); break;
+			case Hdump_data_img__base.Tid_gallery	: img_itm = new Hdump_data_img__gallery().Init_by_gallery(rdr.Read_int_to_pipe(), rdr.Read_int_to_pipe(), rdr.Read_int_to_pipe()); break;
 		}
+		img_itm.Init_by_base(lnki_ttl, html_uid, html_w, html_h, file_repo_id, file_ext_id, file_is_orig, file_w, file_time, file_page);
 		rdr.Pos_add_one();
 		img_itms.Add(img_itm);
 	}

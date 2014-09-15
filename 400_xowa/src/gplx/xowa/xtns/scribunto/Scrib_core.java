@@ -24,7 +24,7 @@ public class Scrib_core {
 		this.app = app; this.ctx = ctx;
 		this.wiki = ctx.Wiki(); this.page = ctx.Cur_page();	// NOTE: wiki / page needed for title reg; DATE:2014-02-05
 		this.Engine_(Scrib_engine_type.Type_lua, false);	// TEST: default to lua
-		fsys_mgr.Root_dir_(app.Fsys_mgr().Bin_extensions_dir().GenSubDir_nest("Scribunto"));
+		fsys_mgr.Root_dir_(app.Fsys_mgr().Bin_xtns_dir().GenSubDir_nest("Scribunto"));
 		lib_mw = new Scrib_lib_mw(this);
 		lib_uri = new Scrib_lib_uri(this); 
 		lib_ustring = new Scrib_lib_ustring(this);
@@ -69,7 +69,7 @@ public class Scrib_core {
 		enabled = xtn_mgr.Enabled();
 		Io_url root_dir = fsys_mgr.Root_dir(), script_dir = fsys_mgr.Script_dir();
 		engine.Server().Init
-		(	app.Fsys_mgr().App_mgr().App_lua().Exe_url().Raw()
+		(	app.Launcher().App_lua().Exe_url().Raw()
 		,	root_dir.GenSubFil_nest("engines", "LuaStandalone", "mw_main.lua").Raw()
 		,	root_dir.Raw()
 		);

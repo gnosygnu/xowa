@@ -16,22 +16,33 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
-import gplx.core.brys.*; import gplx.core.btries.*; import gplx.html.*; import gplx.xowa.html.*;
-import gplx.xowa.hdumps.core.*; import gplx.xowa.html.lnkis.*; import gplx.xowa.xtns.gallery.*;	
-public class Hdump_html_fmtr__body implements Bry_fmtr_arg {
+import gplx.core.brys.*; import gplx.core.btries.*; import gplx.html.*; import gplx.xowa.html.*; import gplx.xowa.files.*;
+import gplx.xowa.apps.fsys.*; import gplx.xowa.hdumps.core.*; import gplx.xowa.html.lnkis.*; import gplx.xowa.xtns.gallery.*;	
+public class Hdump_html_body implements Bry_fmtr_arg {
 	private Bry_rdr bry_rdr = new Bry_rdr();
-	private Xow_wiki wiki; private Hdump_page page;
+	private Xof_url_bldr url_bldr = Xof_url_bldr.new_v2_();
+	private Xow_wiki wiki; private Hdump_page hpg;
+	private byte[] root_remote, root_local;
 	private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_._; private byte[] root_dir, file_dir, hiero_img_dir; private Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+	private Xoh_cfg_file cfg_file;
 	public void Init_by_app(Xoa_app app) {
 		this.usr_dlg = app.Usr_dlg();
 		this.root_dir = app.Fsys_mgr().Root_dir().To_http_file_bry();
 		this.file_dir = app.Fsys_mgr().File_dir().To_http_file_bry();
 		this.hiero_img_dir = gplx.xowa.xtns.hieros.Hiero_xtn_mgr.Hiero_root_dir(app).GenSubDir("img").To_http_file_bry();
+		cfg_file = new Xoh_cfg_file(app.Encoder_mgr().Fsys(), app.Fsys_mgr().Bin_xowa_dir());
 	}
-	public void Init_by_page(Xow_wiki wiki, Hdump_page page) {this.wiki = wiki; this.page = page;}
+	public void Init_by_page(Xow_wiki wiki, Hdump_page hpg) {
+		this.wiki = wiki; this.hpg = hpg;
+		root_remote = tmp_bfr.Add(file_dir).Add(Xow_wiki_.Domain_commons_bry).Add_byte_slash().XtoAryAndClear();
+		root_local  = tmp_bfr.Add(file_dir).Add(wiki.Domain_bry()).Add_byte_slash().XtoAryAndClear();
+	}
+	public void Init_by_drd(Url_encoder fsys_encoder, Xoa_fsys_mgr fsys_mgr) {
+		cfg_file = new Xoh_cfg_file(fsys_encoder, fsys_mgr.Bin_xowa_dir());
+	}
 	public void XferAry(Bry_bfr bfr, int idx) {
-		byte[] src = page.Page_body(); int len = src.length;
-		Hdump_data_img__base[] imgs = page.Img_itms(); int imgs_len = page.Img_itms().length;
+		byte[] src = hpg.Page_body(); int len = src.length;
+		Hdump_data_img__base[] imgs = hpg.Img_itms(); int imgs_len = hpg.Img_itms().length;
 		bry_rdr.Src_(src);
 		int pos = 0; int rng_bgn = -1;
 		Xow_html_mgr html_mgr = wiki.Html_mgr();
@@ -50,12 +61,21 @@ public class Hdump_html_fmtr__body implements Bry_fmtr_arg {
 				}
 				pos = trie.Match_pos();	// position after match; EX: "xowa_img='" positions after "'"
 				Hdump_html_fmtr_itm itm = (Hdump_html_fmtr_itm)o;
-				pos = Write_data(bfr, html_mgr, html_fmtr, page, src, imgs, imgs_len, pos, itm); // note no +1; Write_data return pos after }
+				pos = Write_data(bfr, html_fmtr, hpg, src, imgs, imgs_len, pos, itm); // note no +1; Write_data return pos after }
 			}
 		}
 		if (rng_bgn != -1) bfr.Add_mid(src, rng_bgn, len);
 	}
-	private int Write_data(Bry_bfr bfr, Xow_html_mgr html_mgr, Xoh_file_html_fmtr__base fmtr, Hdump_page hpg, byte[] src, Hdump_data_img__base[] imgs, int imgs_len, int uid_bgn, Hdump_html_fmtr_itm itm) {
+	private int Write_redlink(Bry_bfr bfr, Hdump_page hpg, int uid, int rv) {
+		int[] redlink_uids = hpg.Redlink_uids(); if (redlink_uids == null) return rv;
+		int redlink_uid_max = redlink_uids.length;
+		if (uid < redlink_uid_max && redlink_uids[uid] == 1)
+			bfr.Add(Redlink_cls_new);
+		else
+			bfr.Del_by_1();
+		return rv;
+	}	private static final byte[] Redlink_cls_new = Bry_.new_ascii_("class='new'");
+	private int Write_data(Bry_bfr bfr, Xoh_file_html_fmtr__base fmtr, Hdump_page hpg, byte[] src, Hdump_data_img__base[] imgs, int imgs_len, int uid_bgn, Hdump_html_fmtr_itm itm) {
 		bry_rdr.Pos_(uid_bgn);
 		int uid = itm.Subst_end_byte() == Byte_ascii.Nil ? -1 : bry_rdr.Read_int_to(itm.Subst_end_byte());
 		int uid_end = bry_rdr.Pos();			// set uid_end after subst_end
@@ -64,12 +84,14 @@ public class Hdump_html_fmtr__body implements Bry_fmtr_arg {
 		switch (tid) {
 			case Hdump_html_consts.Tid_dir:					bfr.Add(root_dir); return rv;
 			case Hdump_html_consts.Tid_hiero_dir:			bfr.Add(hiero_img_dir); return rv;
+			case Hdump_html_consts.Tid_redlink:				return Write_redlink(bfr, hpg, uid, rv);
 		}
 		if (itm.Elem_is_xnde()) rv += 2;		// if xnde, skip "/>"
-		if (uid == bry_rdr.Or_int())			{usr_dlg.Warn_many("", "", "index is not a valid int; page=~{0} text=~{1}", hpg.Page_url().Xto_full_str_safe(), Bry_.Mid_safe(src, uid_bgn, uid_end)); return uid_end;}
-		if (!Int_.Between(uid, 0, imgs_len))	{usr_dlg.Warn_many("", "", "index is out of range; page=~{0} idx=~{1} len=~{2}", hpg.Page_url().Xto_full_str_safe(), uid, imgs_len); return uid_end;}
+		if (uid == bry_rdr.Or_int())			{usr_dlg.Warn_many("", "", "index is not a valid int; hpg=~{0} text=~{1}", hpg.Page_url().Xto_full_str_safe(), Bry_.Mid_safe(src, uid_bgn, uid_end)); return uid_end;}
+		if (!Int_.Between(uid, 0, imgs_len))	{usr_dlg.Warn_many("", "", "index is out of range; hpg=~{0} idx=~{1} len=~{2}", hpg.Page_url().Xto_full_str_safe(), uid, imgs_len); return uid_end;}
+		if (uid >= imgs.length) return rv;
 		Hdump_data_img__base img = imgs[uid];
-		int img_view_w = img.View_w();
+		int img_view_w = img.Html_w();
 		switch (tid) {
 			case Hdump_html_consts.Tid_img_style: 
 				bfr.Add(Hdump_html_consts.Bry_img_style_bgn);
@@ -80,9 +102,9 @@ public class Hdump_html_fmtr__body implements Bry_fmtr_arg {
 		byte[] a_title = img.Lnki_ttl();
 		byte[] a_href = Bry_.Add(Hdump_html_consts.A_href_bgn, a_title);
 		switch (tid) {
-			case Hdump_html_consts.Tid_file_info: fmtr.Html_thumb_part_info	(bfr, uid, a_href, html_mgr.Img_media_info_btn()); return rv;
-			case Hdump_html_consts.Tid_file_mgnf: fmtr.Html_thumb_part_magnify(bfr, uid, a_href, a_title, html_mgr.Img_thumb_magnify()); return rv;
-			case Hdump_html_consts.Tid_file_play: fmtr.Html_thumb_part_play	(bfr, uid, img_view_w, Xoh_file_wtr__basic.Play_btn_max_width, a_href, a_title, html_mgr.Img_media_play_btn()); return rv;
+			case Hdump_html_consts.Tid_file_info: fmtr.Html_thumb_part_info	(bfr, uid, a_href, cfg_file.Img_media_info_btn()); return rv;
+			case Hdump_html_consts.Tid_file_mgnf: fmtr.Html_thumb_part_magnify(bfr, uid, a_href, a_title, cfg_file.Img_thumb_magnify()); return rv;
+			case Hdump_html_consts.Tid_file_play: fmtr.Html_thumb_part_play	(bfr, uid, img_view_w, Xoh_file_wtr__basic.Play_btn_max_width, a_href, a_title, cfg_file.Img_media_play_btn()); return rv;
 			case Hdump_html_consts.Tid_gallery_box_max: {
 				Hdump_data_gallery gly = (Hdump_data_gallery)hpg.Gly_itms().Fetch(uid);
 				if (gly != null) {	// -1 means no box_max
@@ -110,9 +132,11 @@ public class Hdump_html_fmtr__body implements Bry_fmtr_arg {
 				return rv;
 			}
 		}
-		byte[] img_src = Bry_.Add(file_dir, img.View_src()); 
+		url_bldr.Init_by_root(img.File_repo_id() == Xof_repo_itm.Repo_remote ? root_remote : root_local, Byte_ascii.Slash, false, false, 2);
+		url_bldr.Init_by_itm(img.File_is_orig() ? Xof_repo_itm.Mode_orig : Xof_repo_itm.Mode_thumb, img.Lnki_ttl(), Xof_xfer_itm_.Md5_(img.Lnki_ttl()), Xof_ext_.new_by_id_(img.File_ext_id()), img.File_w(), img.File_time(), img.File_page());
+		byte[] img_src = url_bldr.Xto_bry(); 
 		if (tid == Hdump_html_consts.Tid_img) {
-			fmtr_img.Bld_bfr_many(bfr, img_src, img_view_w, img.View_h());
+			fmtr_img.Bld_bfr_many(bfr, img_src, img_view_w, img.Html_h());
 		}
 		return rv;
 	}

@@ -17,17 +17,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps; import gplx.*; import gplx.xowa.*;
 import org.junit.*; import gplx.xowa.files.*;
-import gplx.xowa.hdumps.core.*; import gplx.xowa.hdumps.dbs.*; import gplx.xowa.hdumps.pages.*; import gplx.xowa.xtns.hieros.*;
+import gplx.xowa.hdumps.core.*; import gplx.xowa.hdumps.dbs.*; import gplx.xowa.hdumps.pages.*; import gplx.xowa.xtns.hieros.*; import gplx.xowa.xtns.gallery.*;
 public class Xodb_hdump_mgr__write_tst {
 	@Before public void init() {fxt.Clear();} private Xodb_hdump_mgr__write_fxt fxt = new Xodb_hdump_mgr__write_fxt();
 	@Test   public void Image_full() {
-		fxt.Expd_itms_xfers(fxt.Make_xfer(0, 0, 0, "A.png", "trg/orig/7/0/A.png"));
+		fxt.Expd_itms_xfers(fxt.Make_xfer("A.png", 0, 0, 0, Bool_.Y, Xof_ext_.Id_png));
 		fxt.Test_write_all
 		( "[[File:A.png|test_caption]]"
 		, "<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"test_caption\" xowa_img='0' /></a>");
 	}
 	@Test   public void Image_thumb() {
-		fxt.Expd_itms_xfers(fxt.Make_xfer(0, 0, 0, "A.png", "trg/thumb/7/0/A.png/220px.png"));
+		fxt.Expd_itms_xfers(fxt.Make_xfer("A.png", 0, 0, 0, Bool_.N, Xof_ext_.Id_png));
 		fxt.Test_write_all
 		( "[[File:A.png|thumb|test_caption]]", String_.Concat_lines_nl_skip_last
 		( "<div class=\"thumb tright\">"
@@ -41,7 +41,7 @@ public class Xodb_hdump_mgr__write_tst {
 		));
 	}
 	@Test   public void Audio_thumb() {
-		fxt.Expd_itms_xfers(fxt.Make_xfer(0, 220, -1, "A.oga", ""));
+		fxt.Expd_itms_xfers(fxt.Make_xfer("A.oga", 0, 220, -1, Bool_.N, Xof_ext_.Id_oga));
 		fxt.Test_write_all
 		( "[[File:A.oga|thumb|test_caption]]", String_.Concat_lines_nl_skip_last
 		( "<div class=\"thumb tright\">"
@@ -56,7 +56,7 @@ public class Xodb_hdump_mgr__write_tst {
 		));
 	}
 	@Test   public void Video_thumb() {
-		fxt.Expd_itms_xfers(fxt.Make_xfer(0, 0, 0, "A.ogv", ""));
+		fxt.Expd_itms_xfers(fxt.Make_xfer("A.ogv", 0, 0, 0, Bool_.N, Xof_ext_.Id_ogv));
 		fxt.Test_write_all
 		( "[[File:A.ogv|thumb|test_caption]]", String_.Concat_lines_nl_skip_last
 		( "<div class=\"thumb tright\">"
@@ -82,6 +82,7 @@ public class Xodb_hdump_mgr__write_tst {
 		fxt.Test_write_frag("<hiero>A1</hiero>", "src='~{xowa_hiero_dir}hiero_A1.png'");
 	}
 	@Test   public void Gallery() {
+		Gallery_mgr_base.File_found_mode = Bool_.__byte;
 		fxt.Test_write_all
 		( "<gallery>File:A.png|A1</gallery>", String_.Concat_lines_nl_skip_last
 		( "<ul id=\"xowa_gallery_ul_0\" class=\"gallery mw-gallery-traditional\" xowa_gly_box_max='0'>"
@@ -115,16 +116,18 @@ class Xodb_hdump_mgr__base_fxt {
 		this.Clear_end();
  		}
 	@gplx.Virtual public void Clear_end() {}
-	public void Exec_write(String raw) {
+	@gplx.Virtual public void Exec_write(String raw) {
 		Xop_root_tkn root = fxt.Exec_parse_page_all_as_root(Bry_.new_utf8_(raw));
 		page.Root_(root);
 		hdump_mgr.Write(bfr, page);
+	}
+	public Hdump_data_img__base Make_xfer(String lnki_ttl, int html_uid, int html_w, int html_h, boolean file_is_orig, int file_ext_id) {
+		return new Hdump_data_img__basic().Init_by_base(Bry_.new_utf8_(lnki_ttl), html_uid, html_w, html_h, Hdump_data_img__base.File_repo_id_null, file_ext_id, file_is_orig, html_w, Xof_doc_thumb.Null, Xof_doc_page.Null);
 	}
 }
 class Xodb_hdump_mgr__write_fxt extends Xodb_hdump_mgr__base_fxt {
 	private ListAdp expd_itms_xfers = ListAdp_.new_();
 	@Override public void Clear_end() {expd_itms_xfers.Clear();}
-	public Hdump_data_img__base Make_xfer(int uid, int img_w, int img_h, String lnki_ttl, String img_src) {return new Hdump_data_img__basic().Init_by_base(uid, img_w, img_h, Bry_.new_utf8_(lnki_ttl), Bry_.new_utf8_(img_src));}
 	public void Expd_itms_xfers(Hdump_data_img__base... itms) {expd_itms_xfers.AddMany((Object[])itms);}
 	public void Test_write_all (String raw, String expd_html) {Test_write(Bool_.N, raw, expd_html);}
 	public void Test_write_frag(String raw, String expd_frag) {Test_write(Bool_.Y, raw, expd_frag);}

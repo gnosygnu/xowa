@@ -41,14 +41,14 @@ public class Xoi_wiki_props_api_tst {
 		.Ns_ary_(fxt.ns_(0, false), fxt.ns_(1, true))
 		);
 	}
-	@Test   public void Build() {
+//		@Test   public void Build() {
 //			fxt.Test_build(fxt.wiki_("enwiki")
 //				.Alias_ary_(fxt.alias_(4, "WP"), fxt.alias_(5, "WT"))
 //				.Ns_ary_(fxt.ns_(0, false), fxt.ns_(1, true))
 //				, "");
-	}
+//		}
 //		Tfds.Eq_str_lines(Query_ns(protocol, gplx.ios.IoEngine_.MemKey, wikis), String_.Concat_lines_nl
-//		(	"app.wiki_cfg_bldr.get('en.wikipedia.org').new_cmd_('wiki.ns_mgr.aliases', 'ns_mgr.add_alias_bulk(\""
+//		(	"app.bldr.wiki_cfg_bldr.get('en.wikipedia.org').new_cmd_('wiki.ns_mgr.aliases', 'ns_mgr.add_alias_bulk(\""
 //		,	"4|WP"
 //		,	"5|WT"
 //		,	"6|Image"

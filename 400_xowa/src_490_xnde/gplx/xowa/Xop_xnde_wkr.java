@@ -625,6 +625,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			case Xop_parser_.Parse_tid_page_wiki: {
 				Xox_xnde xnde_xtn = null;
 				int tag_id = tag.Id();
+				boolean escaped = false;
 				switch (tag_id) {
 					case Xop_xnde_tag_.Tid_xowa_cmd:				xnde_xtn = tkn_mkr.Xnde_xowa_cmd(); break;
 					case Xop_xnde_tag_.Tid_math:					xnde_xtn = tkn_mkr.Xnde_math(); break;
@@ -635,7 +636,14 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 					case Xop_xnde_tag_.Tid_imageMap:				xnde_xtn = tkn_mkr.Xnde_imageMap(); break;
 					case Xop_xnde_tag_.Tid_hiero:					xnde_xtn = tkn_mkr.Xnde_hiero(); break;
 					case Xop_xnde_tag_.Tid_inputBox:				xnde_xtn = tkn_mkr.Xnde_inputbox(); break;
-					case Xop_xnde_tag_.Tid_pages:					xnde_xtn = tkn_mkr.Xnde_pages(); break;
+					case Xop_xnde_tag_.Tid_pages:					{
+						boolean enabled = ctx.Wiki().Xtn_mgr().Xtn_proofread().Enabled();
+						if (enabled)
+							xnde_xtn = tkn_mkr.Xnde_pages();
+						else
+							escaped = true;
+						break;
+					}
 					case Xop_xnde_tag_.Tid_pagequality:				xnde_xtn = tkn_mkr.Xnde_pagequality(); break;
 					case Xop_xnde_tag_.Tid_pagelist:				xnde_xtn = tkn_mkr.Xnde_pagelist(); break;
 					case Xop_xnde_tag_.Tid_section:					xnde_xtn = tkn_mkr.Xnde_section(); break;
@@ -669,6 +677,10 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 							ctx.Para().Process_nl(ctx, root, src, xnde.Tag_open_bgn(), xnde.Tag_open_bgn());
 						ctx.Para().Process_block__xnde(tag, Xop_xnde_tag.Block_end);
 						break;
+				}
+				if (escaped) {
+					root.Subs_del_after(root.Subs_len() - 1);	// since content is escaped, delete xnde_xtn; DATE:2014-09-08
+					return ctx.Lxr_make_txt_(open_end);			// return after lhs_end, not entire xnde;
 				}
 				if (xnde_xtn != null) {
 					try {

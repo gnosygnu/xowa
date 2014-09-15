@@ -22,7 +22,7 @@ public class Blacklist_scrib_lib implements Scrib_lib {
 	public Scrib_lib Init() {procs.Init_by_lib(this, Proc_names); return this;}
 	public Scrib_lua_mod Register(Scrib_core core, Io_url script_dir) {
 		Init();			
-		mod = core.RegisterInterface(this, core.App().Fsys_mgr().Bin_extensions_dir().GenSubFil_nest("TitleBlacklist", "mw.ext.TitleBlacklist.lua"));
+		mod = core.RegisterInterface(this, core.App().Fsys_mgr().Bin_xtns_dir().GenSubFil_nest("TitleBlacklist", "mw.ext.TitleBlacklist.lua"));
 		return mod;
 	}
 	public Scrib_proc_mgr Procs() {return procs;} private Scrib_proc_mgr procs = new Scrib_proc_mgr();

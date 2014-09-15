@@ -32,8 +32,10 @@ public class Bry_rdr {
 		if (find_pos != Bry_finder.Not_found) pos = find_pos;
 		return find_pos;
 	}
-	public int Read_int_to_pipe() {return Read_int_to(Byte_ascii.Pipe);}
-	public int Read_int_to_nl() {return Read_int_to(Byte_ascii.NewLine);}
+	public int Read_int_to_semic()	{return Read_int_to(Byte_ascii.Semic);}
+	public int Read_int_to_comma()	{return Read_int_to(Byte_ascii.Comma);}
+	public int Read_int_to_pipe()	{return Read_int_to(Byte_ascii.Pipe);}
+	public int Read_int_to_nl()		{return Read_int_to(Byte_ascii.NewLine);}
 	public int Read_int_to(byte to_char) {
 		int bgn = pos;
 		int rv = 0;
@@ -69,5 +71,15 @@ public class Bry_rdr {
 				++pos;
 		}
 		return bgn == pos ? or_bry : Bry_.Mid(src, bgn, src_len);
+	}
+	public boolean Read_yn_to_pipe() {
+		boolean rv = src[pos] == Byte_ascii.Ltr_y;
+		pos += 2;	// 1 for y/n; 1 for pipe
+		return rv;
+	}
+	public double Read_double_to_pipe() {return Read_double_to(Byte_ascii.Pipe);}
+	public double Read_double_to(byte to_char) {
+		byte[] double_bry = Read_bry_to(to_char);
+		return Double_.parse_(String_.new_ascii_(double_bry));	// double will never have utf8
 	}
 }

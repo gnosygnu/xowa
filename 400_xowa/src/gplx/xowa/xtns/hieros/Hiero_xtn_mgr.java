@@ -52,5 +52,5 @@ public class Hiero_xtn_mgr extends Xox_mgr_base implements GfoInvkAble {
 		else	return super.Invk(ctx, ikey, k, m);
 	}
 	public static final String Invk_prefabs = "prefabs", Invk_files = "files", Invk_phonemes = "phonemes";
-	public static Io_url Hiero_root_dir(Xoa_app app) {return app.Fsys_mgr().Bin_extensions_dir().GenSubDir("Wikihiero");}
+	public static Io_url Hiero_root_dir(Xoa_app app) {return app.Fsys_mgr().Bin_xtns_dir().GenSubDir("Wikihiero");}
 }

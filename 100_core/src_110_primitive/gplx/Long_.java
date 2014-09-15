@@ -31,7 +31,7 @@ public class Long_ {
   			};
 	public static String Xto_str(long v) {return Long.toString(v);}	
 	public static String Xto_str_PadBgn(long v, int reqdPlaces) {return String_.Pad(Xto_str(v), reqdPlaces, "0", true);}	// ex: 1, 3 returns 001
-	public static long parse_or_(String raw, int or) {
+	public static long parse_or_(String raw, long or) {
 		if (raw == null) return or;
 		try {
 			int rawLen = String_.Len(raw);

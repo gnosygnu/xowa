@@ -27,7 +27,7 @@ public class References_nde implements Xox_xnde, Xop_xnde_atr_parser {
 			case Xatr_id_group:		group = xatr.Val_as_bry(src); break;
 		}
 	}
-	public void Xtn_parse(Xow_wiki wiki, Xop_ctx ctx, Xop_root_tkn cur_root, byte[] src, Xop_xnde_tkn xnde) {
+	public void Xtn_parse(Xow_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
 		if (ctx.Tid_is_popup()) return;
 		Ref_itm_mgr ref_mgr = ctx.Cur_page().Ref_mgr();
 		if (ref_mgr.References__recursing()) return;	// skip nested <references> else refs will be lost; EX:"<references><references/></references>"; PAGE:en.w:Hwair; DATE:2014-06-27
@@ -39,10 +39,10 @@ public class References_nde implements Xox_xnde, Xop_xnde_atr_parser {
 			references_ctx.Para().Enabled_n_();	// disable para during <references> parsing
 			byte[] references_src = Bry_.Mid(src, itm_bgn, itm_end);
 			Xop_tkn_mkr tkn_mkr = ctx.Tkn_mkr();
-			Xop_root_tkn root = tkn_mkr.Root(src);
+			Xop_root_tkn sub_root = tkn_mkr.Root(src);
 			boolean prv_recursing = ref_mgr.References__recursing();
 			ref_mgr.References__recursing_(true);
-			wiki.Parser().Parse_text_to_wdom(root, references_ctx, tkn_mkr, references_src, Xop_parser_.Doc_bgn_char_0);	// NOTE: parse @gplx.Internal protected contents, but root will be discarded; only picking up <ref> tags; DATE:2014-06-27
+			wiki.Parser().Parse_text_to_wdom(sub_root, references_ctx, tkn_mkr, references_src, Xop_parser_.Doc_bgn_char_0);	// NOTE: parse @gplx.Internal protected contents, but root will be discarded; only picking up <ref> tags; DATE:2014-06-27
 			ref_mgr.References__recursing_(prv_recursing);
 		}
 		list_idx = ref_mgr.Grps_get(group).Grp_seal();	// NOTE: needs to be sealed at end; else inner refs will end up in new group; EX: <references><ref>don't seal prematurely</ref></references>

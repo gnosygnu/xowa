@@ -248,25 +248,32 @@ public class Bry__tst {
 	void Tst_match_bwd_any(String src, int src_end, int src_bgn, String find, boolean expd) {
 		Tfds.Eq(expd, Bry_.Match_bwd_any(Bry_.new_ascii_(src), src_end, src_bgn, Bry_.new_ascii_(find)));
 	}
-	private ByteAry_fxt fxt = new ByteAry_fxt();
+	private Bry__fxt fxt = new Bry__fxt();
 	@Test   public void Trim_end() {
 		fxt.Test_trim_end("a "		, Byte_ascii.Space, "a");	// trim.one
 		fxt.Test_trim_end("a   "	, Byte_ascii.Space, "a");	// trim.many
 		fxt.Test_trim_end("a"		, Byte_ascii.Space, "a");	// trim.none
 		fxt.Test_trim_end(""		, Byte_ascii.Space, "");	// empty
 	}
-	@Test  public void XtoByteAry() {
-		fxt.Test_new_utf8_("a"		, Bry_.ints_(97));
-		fxt.Test_new_utf8_("a b"	, Bry_.ints_(97, 32, 98));
-		fxt.Test_new_utf8_("©"		, Bry_.ints_(194, 169));
+	@Test  public void new_ascii_() {
+		fxt.Test_new_ascii_("a"		, Bry_.ints_(97));				// one
+		fxt.Test_new_ascii_("abc"	, Bry_.ints_(97, 98, 99));		// many
+		fxt.Test_new_ascii_(""		, Bry_.Empty);					// none
+		fxt.Test_new_ascii_("¢€𤭢"	, Bry_.ints_(63, 63, 63, 63));	// non-ascii -> ?
+	}
+	@Test  public void new_utf8_() {
+		fxt.Test_new_utf8_("a"		, Bry_.ints_(97));						// one
+		fxt.Test_new_utf8_("abc"	, Bry_.ints_(97, 98, 99));				// many
+		fxt.Test_new_utf8_("¢"		, Bry_.ints_(194, 162));				// bry_len=2; cent
+		fxt.Test_new_utf8_("€"		, Bry_.ints_(226, 130, 172));			// bry_len=3; euro
+		fxt.Test_new_utf8_("𤭢"		, Bry_.ints_(240, 164, 173, 162));		// bry_len=3; example from en.w:UTF-8
 	}
 }
-class ByteAry_fxt {
+class Bry__fxt {
 	public void Test_trim_end(String raw, byte trim, String expd) {
 		byte[] raw_bry = Bry_.new_ascii_(raw);
 		Tfds.Eq(expd, String_.new_utf8_(Bry_.Trim_end(raw_bry, trim, raw_bry.length)));
 	}
-	public void Test_new_utf8_(String raw, byte[] expd_bry) {
-		Tfds.Eq_ary(expd_bry, Bry_.new_utf8_(raw));
-	}
+	public void Test_new_utf8_(String raw, byte[] expd)			{Tfds.Eq_ary(expd, Bry_.new_utf8_(raw));}
+	public void Test_new_ascii_(String raw, byte[] expd)		{Tfds.Eq_ary(expd, Bry_.new_ascii_(raw));}
 }

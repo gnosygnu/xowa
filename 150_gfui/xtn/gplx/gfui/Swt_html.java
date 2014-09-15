@@ -19,6 +19,7 @@ package gplx.gfui;
 import java.security.acl.Owner;
 
 import gplx.*;
+import gplx.threads.ThreadAdp_;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.*;
 import org.eclipse.swt.events.*;
@@ -83,7 +84,14 @@ class Swt_html implements Gxw_html, Swt_control, FocusListener {
 	public String 		Html_js_eval_script(String script) 								{return Eval_script_as_str(script);}
 	public boolean Html_elem_img_update(String elem_id, String elem_src, int elem_width, int elem_height) {
 		elem_src = Escape_quotes(elem_src);
-		return Eval_script_as_bool(kit.Html_cfg().Elem_img_update(elem_id, elem_src, elem_width, elem_height));
+		int count = 0;
+		while (count < 5) {
+			boolean rv = Eval_script_as_bool(kit.Html_cfg().Elem_img_update(elem_id, elem_src, elem_width, elem_height));
+			if (rv) return rv;
+			ThreadAdp_.Sleep(100);
+			count++;
+		}
+		return false;
 	}
 	public String Html_active_atr_get_str(String atr_key, String or) {
 		Object rv_obj = Eval_script(kit.Html_cfg().Active_atr_get_str(atr_key));

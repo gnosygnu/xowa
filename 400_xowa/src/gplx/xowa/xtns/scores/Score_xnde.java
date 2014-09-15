@@ -58,7 +58,7 @@ public class Score_xnde implements Xox_xnde, Xop_xnde_atr_parser, Xoh_cmd_itm {
 		Xow_wiki wiki = ctx.Wiki(); Xoa_page page = ctx.Cur_page();
 		Score_xtn_mgr score_xtn = (Score_xtn_mgr)wiki.Xtn_mgr().Get_or_fail(Score_xtn_mgr.XTN_KEY);
 		if (!score_xtn.Enabled()) {Html_write_code_as_pre(bfr, app); return;}
-		ProcessAdp ly_process = app.Fsys_mgr().App_mgr().App_lilypond();
+		ProcessAdp ly_process = app.Launcher().App_lilypond();
 		if (ly_process.Exe_exists() == Bool_.__byte && ly_process.Exe_url() != null) {	// TEST: ly_process.Exe_url() is null
 			boolean exists = Io_mgr._.ExistsFil(ly_process.Exe_url());
 			ly_process.Exe_exists_(exists ? Bool_.Y_byte : Bool_.N_byte);
@@ -113,12 +113,12 @@ public class Score_xnde implements Xox_xnde, Xop_xnde_atr_parser, Xoh_cmd_itm {
 		Score_xtn_mgr score_xtn = (Score_xtn_mgr)wiki.Xtn_mgr().Get_or_fail(Score_xtn_mgr.XTN_KEY);
 		Io_url ly_file = output_dir.GenSubFil(sha1_prefix + ".ly");
 		byte[] ly_text = null;
-		ProcessAdp ly_process = app.Fsys_mgr().App_mgr().App_lilypond();
+		ProcessAdp ly_process = app.Launcher().App_lilypond();
 		if (Score_xtn_mgr.Lilypond_version == null) Score_xtn_mgr.Lilypond_version = Get_lilypond_version(ly_process);
 		if	(lang_is_abc) {
 			Io_url abc_file = output_dir.GenSubFil(sha1_prefix + ".abc");
 			Io_mgr._.SaveFilBry(abc_file, code);
-			ProcessAdp abc2ly_process = app.Fsys_mgr().App_mgr().App_abc2ly();
+			ProcessAdp abc2ly_process = app.Launcher().App_abc2ly();
 			if (!abc2ly_process.Run(abc_file, ly_file).Exit_code_pass()) {
 				fail_msg = abc2ly_process.Rslt_out();
 				app.Usr_dlg().Warn_many("", "", "abc2ly failed: ~{0}", fail_msg);
@@ -141,7 +141,7 @@ public class Score_xnde implements Xox_xnde, Xop_xnde_atr_parser, Xoh_cmd_itm {
 			return;
 		}
 		if (output_ogg) {
-			ProcessAdp timidity_process = app.Fsys_mgr().App_mgr().App_convert_midi_to_ogg();
+			ProcessAdp timidity_process = app.Launcher().App_convert_midi_to_ogg();
 			Io_url ogg_file = ly_file.GenNewExt(".ogg");
 			if (!timidity_process.Run(ly_file.GenNewExt(".midi"), ogg_file).Exit_code_pass()) {	// NOTE: do not exit; timidity currently not working for windows
 				fail_msg = timidity_process.Rslt_out();
@@ -152,7 +152,7 @@ public class Score_xnde implements Xox_xnde, Xop_xnde_atr_parser, Xoh_cmd_itm {
 		Io_mgr._.DeleteFil(ly_file);
 		Io_url png_file_untrimmed = png_file.GenNewNameOnly("untrimmed");
 		Io_mgr._.MoveFil(png_file, png_file_untrimmed);
-		app.Fsys_mgr().App_mgr().App_trim_img().Run(png_file_untrimmed, png_file);
+		app.Launcher().App_trim_img().Run(png_file_untrimmed, png_file);
 		Io_mgr._.DeleteFil(png_file_untrimmed);
 		fail_msg = null;		
 	}	private String fail_msg = null;

@@ -24,7 +24,7 @@ public class Xoa_page {
 	Xoa_page(Xow_wiki wiki, Xoa_ttl ttl) {
 		this.wiki = wiki; this.ttl = ttl;
 		this.app = wiki.App(); this.lang = wiki.Lang();	// default to wiki.lang; can be override later by wikitext
-		hdump_data = new Xopg_hdump_data(app);
+		hdump_data = new Xopg_hdump_data();
 		hdr_mgr = new Xow_hdr_mgr(wiki, this);
 		lnki_redlinks_mgr = new Xop_lnki_logger_redlinks_mgr(this);
 		Ttl_(ttl);

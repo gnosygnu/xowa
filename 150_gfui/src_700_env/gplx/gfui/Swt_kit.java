@@ -41,15 +41,18 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Button;
+import org.omg.PortableServer.THREAD_POLICY_ID;
 public class Swt_kit implements Gfui_kit {
+	private Shell shell;
 	private String xulRunnerPath = null;
-	private KeyValHash ctor_args = KeyValHash.new_(); private HashAdp kit_args = HashAdp_.new_();
+	private KeyValHash ctor_args = KeyValHash.new_(); private HashAdp kit_args = HashAdp_.new_(); private Swt_msg_wkr_stop msg_wkr_stop;
 	private KeyValHash nullArgs = KeyValHash.new_();
 	public byte Tid() {return Gfui_kit_.Swt_tid;}
 	public String Key() {return "swt";}
+	Display Swt_display() {return display;} private Display display;
 	public Gfui_clipboard Clipboard() {return clipboard;} private Swt_clipboard clipboard;
-	public Display Swt_display() {return display;} private Display display;
-	public boolean Mode_is_shutdown() {return mode_is_shutdown;} private boolean mode_is_shutdown = false;
+	public boolean Mode_is_shutdown() {return mode_is_shutdown;} public void Mode_is_shutdown_y_() {mode_is_shutdown = true;} private boolean mode_is_shutdown = false;
+	public GfoInvkAbleCmd Kit_term_cbk() {return term_cbk;} public void Kit_term_cbk_(GfoInvkAbleCmd v) {this.term_cbk = v;} private GfoInvkAbleCmd term_cbk = GfoInvkAbleCmd.Null;
 	public Gfui_html_cfg Html_cfg() {return html_cfg;} private Gfui_html_cfg html_cfg = new Gfui_html_cfg();
 	public void Cfg_set(String type, String key, Object val) {
 		if 		(String_.Eq(type, Gfui_kit_.Cfg_HtmlBox)) {
@@ -68,35 +71,32 @@ public class Swt_kit implements Gfui_kit {
 	public boolean Kit_init_done() {return kit_init_done;} private boolean kit_init_done;  
 	public void Kit_init(Gfo_usr_dlg gui_wtr) {
 		this.gui_wtr = gui_wtr;
-		usrMsgWkr_Stop = new Swt_UsrMsgWkr_Stop(this, gui_wtr);
+		msg_wkr_stop = new Swt_msg_wkr_stop(this, gui_wtr);
 		display = new Display();
-		UsrDlg_._.Reg(UsrMsgWkr_.Type_Warn, GfoConsoleWin._);
-		UsrDlg_._.Reg(UsrMsgWkr_.Type_Stop, usrMsgWkr_Stop);
 		clipboard = new Swt_clipboard(display);
+		UsrDlg_._.Reg(UsrMsgWkr_.Type_Warn, GfoConsoleWin._);
+		UsrDlg_._.Reg(UsrMsgWkr_.Type_Stop, msg_wkr_stop);
 		if (xulRunnerPath != null) System.setProperty("org.eclipse.swt.browser.XULRunnerPath", xulRunnerPath);
 		kit_init_done = true; 
 		gui_wtr.Log_many("", "", "swt.kit.init.done");
 	}	private Gfo_usr_dlg gui_wtr;
-	public void	Kit_term_cbk_(GfoInvkAbleCmd v) {this.term_cbk = v;} GfoInvkAbleCmd term_cbk = GfoInvkAbleCmd.Null;
 	public void Kit_run() {
-	    shell.addListener(SWT.Close, new Swt_lnr_shell_close(this));
+	    shell.addListener(SWT.Close, new Swt_shell_close_lnr(this));
 		shell.open();
 		Cursor cursor = new Cursor(display, SWT.CURSOR_ARROW);
 		shell.setCursor(cursor);	// set cursor to hand else cursor defaults to Hourglass until mouse is moved; DATE: 2014-01-31
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch())
 				display.sleep();
-		}		
+		}
 		gui_wtr.Log_many("", "", "swt.kit.term:bgn");
 		cursor.dispose(); gui_wtr.Log_many("", "", "swt.kit.term:cursor");
-		Kit_term();
 	}
 	public void Kit_term() {
-		mode_is_shutdown = true; // NOTE: must mark kit as shutting down, else writing to status.bar will create stack overflow exception; DATE:2014-05-05
-		usrMsgWkr_Stop.Rls(); gui_wtr.Log_many("", "", "swt.kit.term:usrMsgWkr");
 		clipboard.Rls(); gui_wtr.Log_many("", "", "swt.kit.term:clipboard");
-		display.dispose(); gui_wtr.Log_many("", "", "swt.kit.term:display");
-	}	private Swt_UsrMsgWkr_Stop usrMsgWkr_Stop;
+		msg_wkr_stop.Rls(); gui_wtr.Log_many("", "", "swt.kit.term:usrMsgWkr");
+		shell.close();
+	}	
 	public boolean Ask_yes_no(String grp_key, String msg_key, String fmt, Object... args) 		{
 		Swt_dlg_msg dlg = (Swt_dlg_msg)New_dlg_msg(ask_fmtr.Bld_str_many(ask_bfr, fmt, args)).Init_btns_(Gfui_dlg_msg_.Btn_yes, Gfui_dlg_msg_.Btn_no).Init_ico_(Gfui_dlg_msg_.Ico_question);
 		display.syncExec(dlg);
@@ -124,9 +124,8 @@ public class Swt_kit implements Gfui_kit {
 		this.shell = win.UnderShell();
 		shell.setLayout(null);
 		GfuiWin rv = GfuiWin_.kit_(this, key, win, nullArgs);
-		main_win = rv;
 		return rv;
-	}	Shell shell; GfuiWin main_win;
+	}
 	public GfuiBtn New_btn(String key, GfuiElem owner, KeyVal... args) {
 		GfuiBtn rv = GfuiBtn_.kit_(this, key, new Swt_btn_no_border(Swt_control_.cast_or_fail(owner), ctor_args), ctor_args);
 		owner.SubElems().Add(rv);
@@ -241,17 +240,18 @@ public class Swt_kit implements Gfui_kit {
 		control.setFont(rv);
 	}
 }
-class Swt_lnr_shell_close implements Listener {
-	public Swt_lnr_shell_close(Swt_kit kit) {this.kit = kit;} private Swt_kit kit;
+class Swt_shell_close_lnr implements Listener {
+	public Swt_shell_close_lnr(Swt_kit kit) {this.kit = kit;} private Swt_kit kit;
 	@Override public void handleEvent(Event event) {
-		if (kit.term_cbk.Cmd() == null) return; // close_cmd not defined
-		boolean rslt = Bool_.cast_(kit.term_cbk.Invk());
-		if (!rslt) 
-			event.doit = false;
+		kit.Mode_is_shutdown_y_(); 									// NOTE: must mark kit as shutting down, else writing to status_bar will create stack overflow; DATE:2014-05-05
+		GfoInvkAbleCmd term_cbk = kit.Kit_term_cbk();
+		if (term_cbk.Cmd() == null) return; 						// term_cbk not defined; exit
+		boolean rslt = Bool_.cast_(term_cbk.Invk());				// term_cbk defined; call it
+		if (!rslt) event.doit = false;								// term_cbk canceled term; stop close
 	}
 }
-class Swt_UsrMsgWkr_Stop implements UsrMsgWkr, RlsAble {
-	public Swt_UsrMsgWkr_Stop(Swt_kit kit, Gfo_usr_dlg gui_wtr) {this.kit = kit; this.gui_wtr = gui_wtr;} Swt_kit kit; Gfo_usr_dlg gui_wtr;
+class Swt_msg_wkr_stop implements UsrMsgWkr, RlsAble {
+	public Swt_msg_wkr_stop(Swt_kit kit, Gfo_usr_dlg gui_wtr) {this.kit = kit; this.gui_wtr = gui_wtr;} private Swt_kit kit; private Gfo_usr_dlg gui_wtr;
 	@Override public void Rls() {this.kit = null;}
 	public void ExecUsrMsg(int type, UsrMsg umsg) {
 		String msg = umsg.XtoStr(); 

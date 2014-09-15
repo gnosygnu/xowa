@@ -15,30 +15,18 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx;
-public class Int_list {
-	private int[] ary = Int_.Ary_empty; private int ary_len, ary_max;
-	public void Add(int uid) {
-		int new_len = ary_len + 1;
-		if (new_len > ary_max) {
-			ary_max += 16;
-			int[] new_ary = new int[ary_max];
-			Int_.Ary_copy_to(ary, ary_len, new_ary);
-			ary = new_ary;
-		}
-		ary[ary_len] = uid;
-		ary_len = new_len;
-	}
-	public int Len() {return ary_len;}
-	public int Get_at(int i) {return ary[i];}
+package gplx.xowa.hdumps.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
+public class Xopg_redlink_mgr {
+	private final Int_list list = new Int_list();
+	public int Len() {return list.Len();}
+	public int Max() {return max;} private int max;
+	public int Get_at(int i) {return list.Get_at(i);}
 	public void Clear() {
-		ary = Int_.Ary_empty;
-		ary_len = ary_max = 0;
+		list.Clear();
+		max = 0;
 	}
-	public static Int_list new_(int... ary) {
-		Int_list rv = new Int_list();
-		int len = ary.length;
-		rv.ary = ary; rv.ary_len = len; rv.ary_max = len;
-		return rv;
+	public void Add(int i) {
+		list.Add(i);
+		if (i > max) max = i;
 	}
 }

@@ -111,7 +111,6 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 		if (lang_key_bry == Xol_lang_itm_.Key__unknown) lang_key_bry = Xol_lang_.Key_en;	// default non-lang wikis to english
 		String lang_key_str = String_.new_utf8_(lang_key_bry);
 		int lang_id = Xol_lang_itm_.Get_by_key(lang_key_bry).Id();
-		byte wiki_tid = wiki.Domain_tid();
 		for (int i = 0; i < len; i++) {
 			Xoac_wiki_itm wiki_itm = (Xoac_wiki_itm)peers.FetchAt(i);
 			byte[] wiki_name_bry = wiki_itm.Key_bry();
@@ -136,7 +135,7 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 			for (int j = 0; j < aliases_len; j++) {
 				byte[] alias = wiki_itm.Aliases()[j];
 				if (wiki.Ns_mgr().Names_get_or_null(alias, 0, alias.length) != null) continue;	// NOTE: do not add xwiki if alias matches namespace; EX: en.wiktionary.org has ns of "Wiktionary"; do not add alias of "wiktionary"; note that wikipedia does have an alias to wiktionary
-				Xow_xwiki_itm xwiki = new Xow_xwiki_itm(alias, Bry_.new_utf8_(fmt), wiki_tid, lang_id, domain_bry).Offline_(offline_exists);
+				Xow_xwiki_itm xwiki = new Xow_xwiki_itm(alias, Bry_.new_utf8_(fmt), xwiki_tid_val, lang_id, domain_bry).Offline_(offline_exists);	// NOTE: xwiki_tid_val must be used, not wiki.Domain_tid; DATE:2014-09-14
 				Add_itm(xwiki, null);
 			}
 		}

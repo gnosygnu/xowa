@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.net.*;
+import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.net.*; import gplx.xowa.files.*;
 public class Xoa_url_parser {
 	private Url_encoder encoder = Url_encoder.new_html_href_mw_().Itms_raw_same_many(Byte_ascii.Underline); private Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	public Gfo_url_parser Url_parser() {return url_parser;} private Gfo_url_parser url_parser = new Gfo_url_parser(); private Gfo_url gfo_url = new Gfo_url();
@@ -150,8 +150,8 @@ public class Xoa_url_parser {
 			byte[] wiki_bry = rv.Wiki_bry();
 			if (Bry_.Len_gt_0(wiki_bry)) {				// NOTE: wiki_bry null when passing in Category:A from home_wiki
 				Xow_xwiki_itm xwiki_itm = app.User().Wiki().Xwiki_mgr().Get_by_key(wiki_bry);	// see if url.Wiki_bry is actually wiki; 
-				if (	xwiki_itm != null										// null-check
-					&&	!xwiki_itm.Type_is_lang(cur_wiki.Lang().Lang_id()))		// in xwiki, but not lang; EX: "fr.wikipedia.org" vs "fr"; ca.s:So/Natura_del_so; DATE:2014-04-26
+				if (	xwiki_itm != null											// null-check
+					&&	!xwiki_itm.Type_is_xwiki_lang(cur_wiki.Lang().Lang_id()))	// in xwiki, but not lang; EX: "fr.wikipedia.org" vs "fr"; ca.s:So/Natura_del_so; DATE:2014-04-26
 						wiki =  app.Wiki_mgr().Get_by_key_or_make(xwiki_itm.Domain());
 			}
 			if (rv.Page_bry() == null) {					// 1 seg; EX: "Earth"; "fr.wikipedia.org"
@@ -214,7 +214,7 @@ public class Xoa_url_parser {
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, page_bry);
 		if (ttl != null) {	// can still be empty; EX: "en.wikipedia.org"
 			Xow_xwiki_itm lang_xwiki = ttl.Wik_itm();
-			if (lang_xwiki != null && lang_xwiki.Type_is_lang(wiki.Lang().Lang_id())) {	// format of http://en.wikipedia.org/wiki/fr:A
+			if (lang_xwiki != null && lang_xwiki.Type_is_xwiki_lang(wiki.Lang().Lang_id())) {	// format of http://en.wikipedia.org/wiki/fr:A
 				wiki = app.Wiki_mgr().Get_by_key_or_make(lang_xwiki.Domain());
 				page_bry = ttl.Page_txt();
 			}

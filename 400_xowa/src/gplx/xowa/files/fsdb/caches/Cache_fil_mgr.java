@@ -127,7 +127,7 @@ class Cache_fil_mgr {
 		byte[] ttl = itm.Fil_name();			
 		byte[] md5 = Xof_xfer_itm_.Md5_(ttl);
 		int itm_ext_id = itm.Fil_ext().Id();
-		Io_url fil_url = url_bldr.Set_trg_file_(mode_id, trg_repo, ttl, md5, itm.Fil_ext(), itm.Fil_w()
+		Io_url fil_url = url_bldr.Init_for_trg_file(mode_id, trg_repo, ttl, md5, itm.Fil_ext(), itm.Fil_w()
 			, Xof_doc_thumb.Convert_to_xowa_thumbtime	(itm_ext_id, itm.Fil_thumbtime())
 			, Xof_doc_thumb.Convert_to_xowa_page		(itm_ext_id, itm.Fil_thumbtime())
 			).Xto_url();

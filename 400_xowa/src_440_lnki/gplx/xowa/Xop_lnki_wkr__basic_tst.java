@@ -261,52 +261,6 @@ public class Xop_lnki_wkr__basic_tst {
 		, ""
 		));
 	}
-	@Test  public void Xwiki_file() {	// PURPOSE: if xwiki and File, ignore xwiki (hackish); DATE:2013-12-22
-		Reg_xwiki_alias("test", "test.wikimedia.org");													// must register xwiki, else ttl will not parse it
-		fxt.Wiki().Cfg_parser().Lnki_cfg().Xwiki_repo_mgr().Add_or_mod(Bry_.new_ascii_("test"));	// must add to xwiki_repo_mgr
-		fxt.Test_parse_page_wiki_str
-		( "[[test:File:A.png|12x10px]]", String_.Concat_lines_nl_skip_last
-		( "<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
-		));
-		fxt.Wiki().Cfg_parser_lnki_xwiki_repos_enabled_(false);	// disable for other tests
-	}
-	@Test  public void Xwiki_anchor() {
-		Reg_xwiki_alias("test", "test.wikimedia.org");
-		fxt.Test_parse_page_wiki_str
-		( "[[test:A#b]]", String_.Concat_lines_nl_skip_last
-		( "<a href=\"/site/test.wikimedia.org/wiki/A#b\">test:A#b</a>"
-		));
-	}
-	@Test  public void Xwiki_empty() {
-		Reg_xwiki_alias("test", "test.wikimedia.org");
-		fxt.Test_parse_page_wiki_str
-		( "[[test:]]", String_.Concat_lines_nl_skip_last
-		( "<a href=\"/site/test.wikimedia.org/wiki/\">test:</a>"
-		));
-	}
-	@Test  public void Xwiki_empty_literal() {
-		Reg_xwiki_alias("test", "test.wikimedia.org");
-		fxt.Test_parse_page_wiki_str
-		( "[[:test:]]", String_.Concat_lines_nl_skip_last
-		( "<a href=\"/site/test.wikimedia.org/wiki/\">test:</a>"
-		));
-	}
-	@Test  public void Xwiki_not_registered() {
-		fxt.App().User().Wiki().Xwiki_mgr().Clear();
-		fxt.Wiki().Xwiki_mgr().Add_full(Bry_.new_ascii_("test"), Bry_.new_ascii_("test.wikimedia.org"));	// register alias only, but not in user_wiki
-		fxt.Test_parse_page_wiki_str
-		( "[[test:A|A]]", String_.Concat_lines_nl_skip_last
-		( "<a href=\"http://test.wikimedia.org/wiki/A\">A</a>"
-		));
-	}
-	@Test  public void Literal_lang() {
-		Reg_xwiki_alias("fr", "fr.wikipedia.org");
-		fxt.Test_parse_page_wiki_str
-		( "[[:fr:A]]", String_.Concat_lines_nl_skip_last
-		( "<a href=\"/site/fr.wikipedia.org/wiki/A\">A</a>"
-		));
-		Tfds.Eq(0, fxt.Page().Xwiki_langs().Count());
-	}
 	@Test  public void Html_ent_pound() {
 		fxt.Test_parse_page_wiki_str
 		( "[[A&#35;b|c]]", String_.Concat_lines_nl_skip_last
@@ -322,9 +276,6 @@ public class Xop_lnki_wkr__basic_tst {
 	@Test  public void Pipe_trick() {
 		fxt.Test_parse_page_wiki_str("[[Page1|]]"		, "<a href=\"/wiki/Page1\">Page1</a>");
 		fxt.Test_parse_page_wiki_str("[[Help:Page1|]]"	, "<a href=\"/wiki/Help:Page1\">Page1</a>");
-	}
-	private void Reg_xwiki_alias(String alias, String domain) {
-		Xop_fxt.Reg_xwiki_alias(fxt.Wiki(), alias, domain);
 	}
 	@Test  public void Thumb_first_align_trumps_all() {	// PURPOSE: if there are multiple alignment instructions, take the first EX:[[File:A.png|thumb|center|left]] DATE:20121226
 		fxt.Test_parse_page_wiki_str("[[File:A.png|thumb|right|center]]"	// NOTE: right trumps center

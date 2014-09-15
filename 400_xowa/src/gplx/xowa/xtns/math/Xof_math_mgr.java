@@ -22,7 +22,7 @@ public class Xof_math_mgr implements GfoInvkAble {
 	public ProcessAdp Cmd_convert_tex_to_dvi() {return cmd_convert_tex_to_dvi;} private ProcessAdp cmd_convert_tex_to_dvi = new ProcessAdp();
 	public ProcessAdp Cmd_convert_dvi_to_png() {return cmd_convert_dvi_to_png;} private ProcessAdp cmd_convert_dvi_to_png = new ProcessAdp();
 	public void Init(Xoa_app app) {
-		Launcher_app_mgr app_mgr = app.Fsys_mgr().App_mgr();
+		Launcher_app_mgr app_mgr = app.Launcher();
 		cmd_convert_tex_to_dvi = app_mgr.App_convert_tex_to_dvi();
 		cmd_convert_dvi_to_png = app_mgr.App_convert_dvi_to_png();
 	}
@@ -52,7 +52,7 @@ public class Xof_math_mgr implements GfoInvkAble {
 	}
 	public boolean MakePng(byte[] math, String hash, Io_url png_url, String prog_fmt) {
 		if (!enabled) return false;
-		Io_url tmp_dir = app.Fsys_mgr().Temp_dir().GenSubDir("math"); // cmd_convert_tex_to_dvi.Tmp_dir();
+		Io_url tmp_dir = app.User().Fsys_mgr().App_temp_dir().GenSubDir("math"); // cmd_convert_tex_to_dvi.Tmp_dir();
 		Io_url tex_url = tmp_dir.GenSubFil("xowa_math_temp.tex");
 		String latex = Latex_wrap(math);
 		prog_fmt = String_.Replace(prog_fmt, "~", "~~");	// double-up ~ or else will break in progress bar

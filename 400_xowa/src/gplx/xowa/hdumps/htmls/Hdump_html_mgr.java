@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.hdumps.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
 import gplx.xowa.hdumps.core.*;
 public class Hdump_html_mgr {
-	private Hdump_html_fmtr__body body_fmtr = new Hdump_html_fmtr__body();
+	private Hdump_html_body body_fmtr = new Hdump_html_body();
 	public Hdump_html_mgr Init_by_app(Xoa_app app) {body_fmtr.Init_by_app(app); return this;}
 	public void Write(Bry_bfr bfr, Xow_wiki wiki, Hdump_page page) {
 		body_fmtr.Init_by_page(wiki, page);

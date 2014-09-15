@@ -26,6 +26,7 @@ public class Hdump_html_consts {
 	public static final byte
 	  Tid_dir = 1, Tid_img = 2, Tid_img_style = 3, Tid_file_play = 4, Tid_file_info = 5, Tid_file_mgnf = 6
 	, Tid_hiero_dir = 7, Tid_gallery_box_max = 8, Tid_gallery_box_w = 9, Tid_gallery_img_w = 10, Tid_gallery_img_pad = 11
+	, Tid_redlink = 12
 	;
 	public static final byte[]
 	  Key_dir					= Bry_.new_ascii_("~{xowa_dir}")
@@ -39,6 +40,11 @@ public class Hdump_html_consts {
 	, Key_gallery_box_w			= Bry_.new_ascii_("xowa_gly_box_w='")
 	, Key_gallery_img_w			= Bry_.new_ascii_("xowa_gly_img_w='")
 	, Key_gallery_img_pad		= Bry_.new_ascii_("xowa_gly_img_pad='")
+	, Key_redlink				= Bry_.new_ascii_("xowa_redlink='")
+	;
+	public static final byte[]
+	  Html_redlink_bgn			= Bry_.Add(Bry_.new_ascii_("\" "), Key_redlink)
+	, Html_redlink_end			= Bry_.new_ascii_("'>")
 	;
 	public static Btrie_slim_mgr trie_() {
 		Btrie_slim_mgr rv = Btrie_slim_mgr.cs_();
@@ -53,6 +59,7 @@ public class Hdump_html_consts {
 		trie_itm(rv, Tid_gallery_box_w		, Byte_ascii.Apos		, Key_gallery_box_w);
 		trie_itm(rv, Tid_gallery_img_w		, Byte_ascii.Apos		, Key_gallery_img_w);
 		trie_itm(rv, Tid_gallery_img_pad	, Byte_ascii.Apos		, Key_gallery_img_pad);
+		trie_itm(rv, Tid_redlink			, Byte_ascii.Apos		, Key_redlink);
 		return rv;
 	}
 	private static void trie_itm(Btrie_slim_mgr trie, byte tid, byte subst_end_byte, byte[] key_bry) {

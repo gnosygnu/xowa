@@ -21,6 +21,7 @@ public class Pp_pages_nde_basic_tst {
 	private Xop_fxt fxt = new Xop_fxt();
 	@Before public void Init() {
 		Io_mgr._.InitEngine_mem();
+		fxt.Wiki().Xtn_mgr().Xtn_proofread().Enabled_y_();
 		fxt.Wiki().Db_mgr().Load_mgr().Clear(); // must clear; otherwise fails b/c files get deleted, but wiki.data_mgr caches the Xowd_regy_mgr (the .reg file) in memory;
 		fxt.Wiki().Ns_mgr().Add_new(Xowc_xtn_pages.Ns_page_id_default, "Page").Add_new(Xowc_xtn_pages.Ns_index_id_default, "Index").Init();
 	}
@@ -94,5 +95,13 @@ public class Pp_pages_nde_basic_tst {
 		(	"<p><a href=\"/wiki/Test_page/Sub1\">Sub 1</a> "	// NOTE: / is relative to Page_name (in this case Test_page)
 		,	"</p>"
 		));
+	}
+	@Test  public void Disable() {	// PURPOSE: simulate disabled wiki; PAGE:en.w:Wikipedia:Requests_for_adminship/Phantomsteve DATE:2014-09-08
+		fxt.Wiki().Xtn_mgr().Xtn_proofread().Enabled_n_();
+		fxt.Init_page_create("Page:A/1", "A");
+		fxt.Test_parse_page_wiki_str
+		( "<pages index=\"A\" from=1 to=1>a</pages>"
+		, "&lt;pages index=&quot;A&quot; from=1 to=1&gt;a"
+		);
 	}
 }

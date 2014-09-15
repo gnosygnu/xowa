@@ -27,7 +27,7 @@ public class Imap_xtn_mgr extends Xox_mgr_base implements GfoInvkAble {
 		if (desc_trie != null) return;
 		desc_trie = Imap_desc_tid.trie_(wiki);
 		desc_msg = wiki.Msg_mgr().Val_by_key_obj("imagemap_description");
-		desc_icon_url = wiki.App().Fsys_mgr().Bin_extensions_dir().GenSubFil_nest("ImageMap", "imgs", "desc-20.png").To_http_file_bry();
+		desc_icon_url = wiki.App().Fsys_mgr().Bin_xtns_dir().GenSubFil_nest("ImageMap", "imgs", "desc-20.png").To_http_file_bry();
 	}
 	public Btrie_slim_mgr Desc_trie() {return desc_trie;}	private Btrie_slim_mgr desc_trie;
 	public byte[] Desc_msg() {return desc_msg;} private byte[] desc_msg;

@@ -23,7 +23,7 @@ public class Ref_html_wtr_cfg {
 	public Bry_fmtr Itm_id_key_many() 	{return itm_id_key_many;} 	private Bry_fmtr itm_id_key_many; 	public Ref_html_wtr_cfg Itm_id_key_many_(String v) {itm_id_key_many	= Bry_fmtr.new_(v, "itm_key", "uid"); return this;}
 	public Bry_fmtr Itm_grp_text() 		{return itm_grp_text;} 		private Bry_fmtr itm_grp_text; 		public Ref_html_wtr_cfg Itm_grp_text_(String v) {itm_grp_text 		= Bry_fmtr.new_(v, "grp_key", "major"); return this;}
 	public Bry_fmtr Grp_html_one() 		{return grp_html_one;} 		private Bry_fmtr grp_html_one; 		public Ref_html_wtr_cfg Grp_html_one_(String v) {grp_html_one 		= Bry_fmtr.new_(v, "grp_id", "itm_id", "text"); return this;}
-	public Bry_fmtr Grp_html_many() 	{return grp_html_many;}		private Bry_fmtr grp_html_many; 	public Ref_html_wtr_cfg Grp_html_many_(String v) {grp_html_many 		= Bry_fmtr.new_(v, "grp_id", "related_ids", "text"); return this;}
+	public Bry_fmtr Grp_html_many() 	{return grp_html_many;}		private Bry_fmtr grp_html_many; 	public Ref_html_wtr_cfg Grp_html_many_(String v) {grp_html_many 	= Bry_fmtr.new_(v, "grp_id", "related_ids", "text"); return this;}
 	public Bry_fmtr Grp_html_list()		{return grp_html_list;}		private Bry_fmtr grp_html_list;		public Ref_html_wtr_cfg Grp_html_list_(String v) {grp_html_list		= Bry_fmtr.new_(v, "itm_id", "backlabel"); return this;}
 	public Bry_fmtr Grp_id_uid() 		{return grp_id_uid;} 		private Bry_fmtr grp_id_uid; 		public Ref_html_wtr_cfg Grp_id_uid_(String v) {grp_id_uid 			= Bry_fmtr.new_(v, "uid"); return this;}
 	public Bry_fmtr Grp_id_key() 		{return grp_id_key;} 		private Bry_fmtr grp_id_key; 		public Ref_html_wtr_cfg Grp_id_key_(String v) {grp_id_key 			= Bry_fmtr.new_(v, "itm_key", "major"); return this;}

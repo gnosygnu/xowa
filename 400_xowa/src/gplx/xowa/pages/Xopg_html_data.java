@@ -48,7 +48,6 @@ public class Xopg_html_data {
 	public byte[]				Xtn_search_text() {return xtn_search_txt;} public void Xtn_search_text_(byte[] v) {xtn_search_txt = v;} private byte[] xtn_search_txt = Bry_.Empty;
 	public byte[]				Xtn_scribunto_dbg() {return xtn_scribunto_dbg;} public void Xtn_scribunto_dbg_(byte[] v) {xtn_scribunto_dbg = Bry_.Add(xtn_scribunto_dbg, v);} private byte[] xtn_scribunto_dbg = Bry_.Empty;
 	public Xoh_module_mgr		Module_mgr() {return module_mgr;} private Xoh_module_mgr module_mgr = new Xoh_module_mgr();
-	public Int_list				Redlink_mgr() {return redlink_mgr;} private Int_list redlink_mgr = new Int_list();
 	public byte[]				Custom_html() {return custom_html;} public Xopg_html_data Custom_html_(byte[] v) {custom_html = v; return this;} private byte[] custom_html;
 	public byte[]				Custom_name() {return custom_name;} public Xopg_html_data Custom_name_(byte[] v) {custom_name = v; return this;} private byte[] custom_name;
 	public byte[]				Custom_head_end() {return custom_head_end;}
@@ -77,7 +76,6 @@ public class Xopg_html_data {
 		xtn_search_txt = Bry_.Empty;
 		xtn_scribunto_dbg = Bry_.Empty;
 		module_mgr.Clear();
-		redlink_mgr.Clear();
 		custom_html = custom_html_end = custom_head_end = custom_name = null;
 		if (ctg_hash != null) ctg_hash.Clear();
 	}

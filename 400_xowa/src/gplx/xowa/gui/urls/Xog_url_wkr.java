@@ -47,7 +47,7 @@ public class Xog_url_wkr {
 		return Rslt_handled;
 	}
 	private Xoa_url Exec_url_http(Xoa_app app) {		// EX: http:a.org
-		app.Fsys_mgr().App_mgr().Exec_view_web(href.Raw());
+		app.Launcher().Exec_view_web(href.Raw());
 		return Rslt_handled;
 	}
 	private Xoa_url Exec_url_anchor(Xog_win_itm win) {	// EX: #anchor
@@ -85,7 +85,7 @@ public class Xog_url_wkr {
 			page.Wiki().File_mgr().Repo_mgr().Xfer_mgr().Force_orig_n_();
 		}
 		if (Io_mgr._.ExistsFil(href_url)) {
-			ProcessAdp media_player = app.Fsys_mgr().App_mgr().App_by_ext(href_url.Ext());
+			ProcessAdp media_player = app.Launcher().App_by_ext(href_url.Ext());
 			media_player.Run(href_url);
 		}
 		return Rslt_handled;

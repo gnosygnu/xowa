@@ -75,7 +75,7 @@ class Xof_wiki_orig_tbl_evaluator {
 			if (Bry_.Len_gt_0(regy_itm.Orig_redirect()))	// redirect exists;
 				fsdb_itm.Init_by_redirect(regy_itm.Orig_redirect());
 			fsdb_itm.Html_size_calc(img_size, exec_tid);
-			Io_url html_url = url_bldr.Set_trg_file_(fsdb_itm.Lnki_type_as_mode(), repo, fsdb_itm.Lnki_ttl(), fsdb_itm.Lnki_md5(), fsdb_itm.Lnki_ext(), fsdb_itm.Html_w(), fsdb_itm.Lnki_thumbtime(), fsdb_itm.Lnki_page()).Xto_url();
+			Io_url html_url = url_bldr.Init_for_trg_file(fsdb_itm.Lnki_type_as_mode(), repo, fsdb_itm.Lnki_ttl(), fsdb_itm.Lnki_md5(), fsdb_itm.Lnki_ext(), fsdb_itm.Html_w(), fsdb_itm.Lnki_thumbtime(), fsdb_itm.Lnki_page()).Xto_url();
 			fsdb_itm.Html_url_(html_url);
 			if (!Io_mgr._.ExistsFil(html_url))
 				fsdb_itm.Rslt_reg_(Xof_wiki_orig_wkr_.Tid_missing_reg);

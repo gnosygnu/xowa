@@ -23,6 +23,17 @@ public class Xow_wiki_domain_ {
 		Object o = key_hash.Get_by_bry(key);
 		return o == null ? Tid_by_key_null : ((Byte_obj_val)o).Val();
 	}
+	public static byte Xwiki_tid(byte tid) {
+		switch (tid) {
+			case Tid_commons:
+			case Tid_species:
+			case Tid_incubator:
+			case Tid_mediawiki:
+			case Tid_wikimediafoundation:
+			case Tid_home:						return Tid_wikipedia;	// set xwiki_tid to wikipedia; allows [[da:Page]] to point to da.wikipedia.org; PAGE:species:Puccinia; DATE:2014-09-14
+			default:							return tid;
+		}
+	}
 	public static Xow_wiki_domain new_other_(byte[] raw) {return new Xow_wiki_domain(raw, Xow_wiki_domain_.Tid_other, Xol_lang_itm_.Key__unknown);}
 	public static Xow_wiki_domain parse_by_domain(byte[] raw) {
 		/*

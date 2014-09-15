@@ -19,22 +19,26 @@ package gplx.xowa.hdumps.saves; import gplx.*; import gplx.xowa.*; import gplx.x
 import gplx.dbs.*; import gplx.xowa.files.*; import gplx.xowa.hdumps.dbs.*;
 import gplx.xowa.hdumps.core.*; import gplx.xowa.hdumps.pages.*; import gplx.xowa.pages.*; import gplx.xowa.pages.skins.*; import gplx.xowa.hdumps.loads.*;
 public class Hdump_save_mgr {
-	private Bry_bfr tmp_bfr = Bry_bfr.reset_(10 * Io_mgr.Len_mb);
-	private Hdump_text_tbl text_tbl;
-	public void Tbl_(Hdump_text_tbl v) {text_tbl = v;}
+	private Bry_bfr tmp_bfr = Bry_bfr.reset_(10 * Io_mgr.Len_mb);		
+	public Hdump_text_tbl Tbl() {return text_tbl;} public void Tbl_(Hdump_text_tbl v) {text_tbl = v;} private Hdump_text_tbl text_tbl;
 	public void Update(Xoa_page page) {
 		int page_id = page.Revision_data().Id();
 		text_tbl.Delete_by_page(page_id);
 		this.Insert(page);
 	}
 	public void Insert(Xoa_page page) {
-		Hdump_page_body_srl.Save(tmp_bfr, page);
 		int page_id = page.Revision_data().Id();
-		text_tbl.Insert(page_id, Hdump_text_row_tid.Tid_body, tmp_bfr.XtoAryAndClear());
-		byte[] redlinks_bry = Write_redlinks(tmp_bfr, page.Html_data().Redlink_mgr());
+		Insert_body(page, page_id);
+		byte[] redlinks_bry = Write_redlinks(tmp_bfr, page.Hdump_data().Redlink_mgr());
 		if (redlinks_bry != null)	text_tbl.Insert(page_id, Hdump_data_tid.Tid_redlink, redlinks_bry);
 		byte[] imgs_bry = Write_imgs(tmp_bfr, page.Hdump_data().Data());
 		if (imgs_bry != null)		text_tbl.Insert(page_id, Hdump_data_tid.Tid_img, imgs_bry);
+	}
+	public int Insert_body(Xoa_page page, int page_id) {
+		Hdump_page_body_srl.Save(tmp_bfr, page);
+		byte[] body_bry = tmp_bfr.XtoAryAndClear();
+		text_tbl.Insert(page_id, Hdump_text_row_tid.Tid_body, body_bry);
+		return body_bry.length;
 	}
 	public static byte[] Write_imgs(Bry_bfr bfr, ListAdp imgs) {
 		int len = imgs.Count(); if (len == 0) return null; // no images; exit early, else will write blank String
@@ -44,9 +48,9 @@ public class Hdump_save_mgr {
 		}
 		return bfr.XtoAryAndClear();
 	}
-	private static byte[] Write_redlinks(Bry_bfr bfr, Int_list redlink_mgr) {
+	public static byte[] Write_redlinks(Bry_bfr bfr, Xopg_redlink_mgr redlink_mgr) {
 		int len = redlink_mgr.Len(); if (len == 0) return null;
-		bfr.Add_int_variable(len);
+		bfr.Add_int_variable(redlink_mgr.Max());
 		for (int i = 0; i < len; ++i) {
 			bfr.Add_byte_pipe().Add_int_variable(redlink_mgr.Get_at(i));
 		}

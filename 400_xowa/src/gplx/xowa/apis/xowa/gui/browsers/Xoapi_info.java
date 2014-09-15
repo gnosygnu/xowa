@@ -24,7 +24,7 @@ public class Xoapi_info implements Gfo_usr_dlg_ui_opt, GfoInvkAble {
 	public void Clear()				{app.Usr_dlg().Ui_wkr().Clear();}
 	public void Launch() {
 		Io_url session_fil = app.Log_wtr().Session_fil();
-		app.Fsys_mgr().App_mgr().App_view_text().Run(session_fil);
+		app.Launcher().App_view_text().Run(session_fil);
 	}
 	public boolean Warn_enabled() {return warn_enabled;} private boolean warn_enabled;
 	public boolean Note_enabled() {return note_enabled;} private boolean note_enabled;

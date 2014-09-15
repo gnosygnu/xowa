@@ -17,15 +17,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public class GfoInvkAbleCmd {
-	public GfoInvkAble InvkAble() {return invkAble;} GfoInvkAble invkAble;
+	private GfoMsg m;
+	public GfoInvkAble InvkAble() {return invkAble;} private GfoInvkAble invkAble;
 	public String Cmd() {return cmd;} private String cmd;
-	public Object Arg() {return arg;} Object arg;
+	public Object Arg() {return arg;} private Object arg;
 	public Object Invk() {
-		if (this == null) return GfoInvkAble_.Rv_unhandled;
 		return invkAble.Invk(GfsCtx._, 0, cmd, m);
 	}
-	GfoMsg m;
-
 	public static final GfoInvkAbleCmd Null = new GfoInvkAbleCmd();
         public static GfoInvkAbleCmd new_(GfoInvkAble invkAble, String cmd) {return arg_(invkAble, cmd, null);}
         public static GfoInvkAbleCmd arg_(GfoInvkAble invkAble, String cmd, Object arg) {

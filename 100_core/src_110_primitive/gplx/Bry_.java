@@ -32,15 +32,77 @@ public class Bry_ {
 			rv[i] = (byte)ary[i];
 		return rv;
 	}
+	public static byte[] new_ascii_(String s) {
+		try {
+			if (s == null) return null;
+			int s_len = s.length();						
+			if (s_len == 0) return Bry_.Empty;
+			byte[] rv = new byte[s_len];
+			for (int i = 0; i < s_len; ++i) {
+				char c = s.charAt(i);							
+				if (c > 128) c = '?';
+				rv[i] = (byte)c;
+			}
+			return rv;
+		}
+		catch (Exception e) {throw Err_.err_(e, "invalid ASCII sequence; s={0}", s);}
+	}
+	public static byte[] new_ascii_safe_null_(String s)	{return s == null ? null : new_ascii_(s);}
+	public static byte[] new_ascii_lang(String s) {
+		try {return s.getBytes("ASCII");}	
+		catch (Exception e) {throw Err_.err_(e, "unsupported encoding");}
+	}
 	public static byte[] new_utf8_(String s) {
+		try {
+			int s_len = s.length();								
+			int b_pos = 0;
+			for (int i = 0; i < s_len; ++i) {
+				char c = s.charAt(i);									
+				int c_len = 0;
+				if		(	 c <      128)		c_len = 1;		// 1 <<  7
+				else if	(	 c <     2048)		c_len = 2;		// 1 << 11
+				else if	(	(c >    55295)						// 0xD800
+						&&	(c <    56320))		c_len = 4;		// 0xDFFF
+				else							c_len = 3;		// 1 << 16
+				if (c_len == 4) ++i;							// surrogate is 2 wide, not 1
+				b_pos += c_len;
+			}
+			byte[] rv = new byte[b_pos];
+			b_pos = -1;
+			for (int i = 0; i < s_len; ++i) {
+				char c = s.charAt(i);									
+				if		(	 c <   128) {
+					rv[++b_pos]		= (byte)c;
+				}
+				else if (	 c <  2048) {
+					rv[++b_pos] 	= (byte)(0xC0 | (c >>   6));
+					rv[++b_pos] 	= (byte)(0x80 | (c & 0x3F));
+				}	
+				else if	(	(c > 55295)							// 0xD800
+						&&	(c < 56320)) {						// 0xDFFF
+					if (i >= s_len) throw Err_.new_fmt_("incomplete surrogate pair at end of String; char={0}", c);
+					char nxt_char = s.charAt(i + 1);					
+					int v = 0x10000 + (c - 0xD800) * 0x400 + (nxt_char - 0xDC00);
+					rv[++b_pos] 	= (byte)(0xF0 | (v >> 18));
+					rv[++b_pos] 	= (byte)(0x80 | (v >> 12) & 0x3F);
+					rv[++b_pos] 	= (byte)(0x80 | (v >>  6) & 0x3F);
+					rv[++b_pos] 	= (byte)(0x80 | (v        & 0x3F));
+					++i;
+				}
+				else {
+					rv[++b_pos] 	= (byte)(0xE0 | (c >> 12));
+					rv[++b_pos] 	= (byte)(0x80 | (c >>  6) & 0x3F);
+					rv[++b_pos] 	= (byte)(0x80 | (c        & 0x3F));
+				}
+			}
+			return rv;
+		}
+		catch (Exception e) {throw Err_.err_(e, "invalid UTF-8 sequence; s={0}", s);}
+	}
+	public static byte[] new_utf8_lang(String s) {
 		try {return s.getBytes("UTF-8");}	
 		catch (Exception e) {throw Err_.err_(e, "unsupported encoding");}
 	}
-	public static byte[] new_ascii_(String s) {
-		try {return s == null ? null : s.getBytes("ASCII");} 
-		catch (Exception e) {throw Err_.err_(e, "unsupported encoding");}
-	}
-	public static byte[] new_ascii_safe_null_(String s)	{return s == null ? null : new_ascii_(s);}
 	public static byte[] Coalesce(byte[] orig, byte[] val_if_not_blank) {return Bry_.Len_eq_0(val_if_not_blank) ? orig : val_if_not_blank;}
 	public static int While_fwd(byte[] src, byte while_byte, int bgn, int end) {
 		for (int i = bgn; i < end; i++)

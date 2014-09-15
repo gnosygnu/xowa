@@ -95,8 +95,8 @@ public class Xof_bin_mgr implements GfoInvkAble {
 	private Io_url Get_url(Xof_fsdb_itm itm, byte mode, boolean src) {
 		Xof_repo_pair repo = repo_mgr.Repos_get_by_wiki(itm.Orig_wiki());
 		return src 
-			? url_bldr.Set_src_file_(mode, repo.Src(), itm.Lnki_ttl(), itm.Lnki_md5(), itm.Lnki_ext(), itm.Html_w(), itm.Lnki_thumbtime(), itm.Lnki_page()).Xto_url()
-			: url_bldr.Set_trg_file_(mode, repo.Trg(), itm.Lnki_ttl(), itm.Lnki_md5(), itm.Lnki_ext(), itm.Html_w(), itm.Lnki_thumbtime(), itm.Lnki_page()).Xto_url()
+			? url_bldr.Init_for_src_file(mode, repo.Src(), itm.Lnki_ttl(), itm.Lnki_md5(), itm.Lnki_ext(), itm.Html_w(), itm.Lnki_thumbtime(), itm.Lnki_page()).Xto_url()
+			: url_bldr.Init_for_trg_file(mode, repo.Trg(), itm.Lnki_ttl(), itm.Lnki_md5(), itm.Lnki_ext(), itm.Html_w(), itm.Lnki_thumbtime(), itm.Lnki_page()).Xto_url()
 			;
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

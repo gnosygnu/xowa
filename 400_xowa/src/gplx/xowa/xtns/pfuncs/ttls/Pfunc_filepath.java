@@ -33,7 +33,7 @@ public class Pfunc_filepath extends Pf_func_base {
 		if (tmp_rslt .Repo_idx() == Byte_.MaxValue_127) return;
 		Xof_repo_itm trg_repo = wiki.File_mgr().Repo_mgr().Repos_get_at(tmp_rslt.Repo_idx()).Trg();
 		xfer_itm.Set__ttl(ttl_bry, Bry_.Empty);	// redirect is empty b/c Get_page does all redirect lookups
-		byte[] url = url_bldr.Set_trg_html_(Xof_repo_itm.Mode_orig, trg_repo, ttl_bry, xfer_itm.Lnki_md5(), xfer_itm.Lnki_ext(), Xof_img_size.Size_null_deprecated, Xof_doc_thumb.Null, Xof_doc_page.Null).Xto_bry();
+		byte[] url = url_bldr.Init_for_trg_html(Xof_repo_itm.Mode_orig, trg_repo, ttl_bry, xfer_itm.Lnki_md5(), xfer_itm.Lnki_ext(), Xof_img_size.Size_null_deprecated, Xof_doc_thumb.Null, Xof_doc_page.Null).Xto_bry();
 		bb.Add(url);
 	}	private static final byte[] Bry_file = Bry_.new_ascii_("File:");
 	private static final Xof_xfer_itm xfer_itm = new Xof_xfer_itm();

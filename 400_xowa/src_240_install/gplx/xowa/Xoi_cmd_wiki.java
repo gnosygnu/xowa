@@ -65,7 +65,7 @@ class Xoi_cmd_wiki_unzip extends Gfo_thread_cmd_unzip implements Gfo_thread_cmd 
 		}
 		Io_url src = urls[urls.length - 1];
 		Io_url trg = app.Fsys_mgr().Wiki_dir().GenSubFil_nest(wiki_key, src.NameOnly());	// NOTE: NameOnly() will strip trailing .bz2; EX: a.xml.bz2 -> a.xml
-		super.Init(app.Usr_dlg(), app.Gui_mgr().Kit(), app.Fsys_mgr().App_mgr().App_decompress_bz2(), app.Fsys_mgr().App_mgr().App_decompress_zip(), app.Fsys_mgr().App_mgr().App_decompress_gz(), src, trg);
+		super.Init(app.Usr_dlg(), app.Gui_mgr().Kit(), app.Launcher().App_decompress_bz2(), app.Launcher().App_decompress_zip(), app.Launcher().App_decompress_gz(), src, trg);
 		this.Term_cmd_for_src_(Term_cmd_for_src_move);
 		this.Term_cmd_for_src_url_(app.Fsys_mgr().Wiki_dir().GenSubFil_nest("#dump", "done", src.NameAndExt()));
 		if (Io_mgr._.ExistsFil(trg)) {

@@ -27,8 +27,8 @@ public class Xodb_hdump_mgr__save_tst {
 		fxt.Test_save("a[[File:A.png|test_caption]]b[[File:B.png|test_caption]]"
 		, fxt.Make_row_body(2, "a<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"test_caption\" xowa_img='0' /></a>b<a href=\"/wiki/File:B.png\" class=\"image\" xowa_title=\"B.png\"><img id=\"xowa_file_img_1\" alt=\"test_caption\" xowa_img='1' /></a>")
 		, fxt.Make_row_img
-			( fxt.Make_img(0, 0, 0, "A.png", "trg/orig/7/0/A.png")
-			, fxt.Make_img(1, 0, 0, "B.png", "trg/orig/5/7/B.png")
+			( fxt.Make_xfer("A.png", 0, 0, 0, Bool_.Y, Xof_ext_.Id_png)
+			, fxt.Make_xfer("B.png", 1, 0, 0, Bool_.Y, Xof_ext_.Id_png)
 			)
 		);
 	}
@@ -63,6 +63,13 @@ public class Xodb_hdump_mgr__save_tst {
 		, "<xo_5/>bcd"
 		));
 	}
+	@Test   public void Redlink() {
+		fxt.Init_redlinks(1);
+		fxt.Test_save("[[A]] [[B]]"
+		, fxt.Make_row_body(0, "<a href=\"/wiki/A\" xowa_redlink='1'>A</a> <a href=\"/wiki/B\" xowa_redlink='2'>B</a>")
+		, fxt.Make_row_redlink(1)
+		);
+	}
 }
 class Xodb_hdump_mgr__save_fxt extends Xodb_hdump_mgr__base_fxt {
 	private int page_id = 0;
@@ -71,19 +78,40 @@ class Xodb_hdump_mgr__save_fxt extends Xodb_hdump_mgr__base_fxt {
 	@Override public void Clear_end() {
 		hdump_mgr.Tbl_mem_();
 		hdump_mgr.Text_tbl().Provider_(Hdump_text_tbl_mem.Null_provider);
+		init_redlinks = null;
 	}
+	public void Init_redlinks(int... uids) {
+		this.init_redlinks = uids;
+		page.Lnki_redlinks_mgr().Page_bgn();
+	}	private int[] init_redlinks;
 	public Hdump_text_row Make_row_body(int imgs_count, String body) {
 		page.Hdump_data().Body_(Bry_.new_utf8_(body));
 		page.Hdump_data().Data_count_imgs_(imgs_count);
 		Hdump_page_body_srl.Save(tmp_bfr, page);
 		return new Hdump_text_row(page_id, Hdump_text_row_tid.Tid_body, tmp_bfr.XtoAryAndClear());
 	}
-	public Hdump_data_img__base Make_img(int uid, int img_w, int img_h, String lnki_ttl, String img_src_rel) {return new Hdump_data_img__basic().Init_by_base(uid, img_w, img_h, Bry_.new_utf8_(lnki_ttl), Bry_.new_utf8_(img_src_rel));}
 	public Hdump_text_row Make_row_img(Hdump_data_img__base... itms) {
 		ListAdp tmp_list = ListAdp_.new_();
 		tmp_list.AddMany((Object[])itms);
 		byte[] imgs_bry = Hdump_save_mgr.Write_imgs(tmp_bfr, tmp_list);
 		return new Hdump_text_row(page_id, Hdump_text_row_tid.Tid_data, imgs_bry);
+	}
+	public Hdump_text_row Make_row_redlink(int... uids) {
+		Xopg_redlink_mgr redlink_mgr = new Xopg_redlink_mgr();
+		for (int uid : uids)
+			redlink_mgr.Add(uid);
+		byte[] redlinks_bry = Hdump_save_mgr.Write_redlinks(tmp_bfr, redlink_mgr);
+		return new Hdump_text_row(page_id, Hdump_data_tid.Tid_redlink, redlinks_bry);
+	}
+	@Override public void Exec_write(String raw) {
+		super.Exec_write(raw);
+		if (init_redlinks != null) {
+			Xopg_redlink_mgr redlink_mgr = page.Hdump_data().Redlink_mgr();
+			int len = init_redlinks.length;
+			for (int i = 0; i < len; ++i) {
+				redlink_mgr.Add(init_redlinks[i]);
+			}
+		}
 	}
 	public void Test_write(String raw, String expd) {
 		this.Exec_write(raw);

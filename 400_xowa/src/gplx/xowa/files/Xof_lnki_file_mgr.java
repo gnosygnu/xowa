@@ -22,7 +22,7 @@ public class Xof_lnki_file_mgr {
 	private boolean page_init_needed = true;
 	private ListAdp fsdb_list = ListAdp_.new_();
 	private OrderedHash xfer_list = OrderedHash_.new_bry_();
-	private Xof_url_bldr url_bldr = new Xof_url_bldr().Thumbtime_dlm_dash_();
+	private Xof_url_bldr url_bldr = Xof_url_bldr.new_v2_();
 	private Xof_img_size tmp_img_size = new Xof_img_size();
 	public void Clear() {
 		page_init_needed = true;

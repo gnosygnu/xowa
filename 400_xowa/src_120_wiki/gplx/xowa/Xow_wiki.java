@@ -26,8 +26,9 @@ public class Xow_wiki implements GfoInvkAble {
 	public Xow_wiki(Xoa_app app, Io_url wiki_dir, Xow_ns_mgr ns_mgr, Xol_lang lang) {
 		this.app = app; this.ns_mgr = ns_mgr; this.lang = lang;
 		domain_str = wiki_dir.NameOnly(); domain_bry = Bry_.new_utf8_(domain_str);			
-		Xow_wiki_domain domain = Xow_wiki_domain_.parse_by_domain(domain_bry);
-		domain_tid = domain.Tid();
+		domain_itm = Xow_wiki_domain_.parse_by_domain(domain_bry);
+		domain_tid = domain_itm.Tid();
+		xwiki_domain_tid = Xow_wiki_domain_.Xwiki_tid(domain_tid);
 		fsys_mgr = new Xow_fsys_mgr(this, wiki_dir);
 		redirect_mgr = new Xop_redirect_mgr(this);
 		data_mgr = new Xow_data_mgr(this);
@@ -72,6 +73,8 @@ public class Xow_wiki implements GfoInvkAble {
 	public String				Domain_str() {return domain_str;} private String domain_str;
 	public byte					Domain_tid() {return domain_tid;} private byte domain_tid;
 	public byte[]				Domain_abrv() {return domain_abrv;} private byte[] domain_abrv;
+	public Xow_wiki_domain		Domain_itm() {return domain_itm;} private Xow_wiki_domain domain_itm;
+	public byte					Xwiki_domain_tid() {return xwiki_domain_tid;} private byte xwiki_domain_tid;
 	public Xol_lang				Lang() {return lang;} private Xol_lang lang;
 	public Xow_fsys_mgr			Fsys_mgr() {return fsys_mgr;} private Xow_fsys_mgr fsys_mgr;
 	public Xow_utl_mgr			Utl_mgr() {return utl_mgr;} private Xow_utl_mgr utl_mgr;

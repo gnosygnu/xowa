@@ -23,6 +23,7 @@ public class Xodb_xowa_cfg_tbl {
 		Db_qry qry = Db_qry_.select_cols_(Tbl_name, Db_crt_.eq_(Fld_cfg_grp, grp), Fld_cfg_key, Fld_cfg_val);
 		return provider.Exec_qry_as_rdr(qry);
 	}
+	public long Select_val_as_long_or(String grp, String key, long or) {return Long_.parse_or_(Select_val(grp, key), or);}
 	public int Select_val_as_int(String grp, String key) {return Int_.parse_(Select_val(grp, key));}
 	public String Select_val(String grp, String key) {return Select_val_or(grp, key, null);}
 	public String Select_val_or(String grp, String key, String or) {

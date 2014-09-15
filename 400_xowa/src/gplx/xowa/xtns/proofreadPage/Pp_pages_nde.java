@@ -52,6 +52,7 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 		}			
 	}
 	public void Xtn_parse(Xow_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
+//			if (!wiki.Xtn_mgr().Xtn_proofread().Enabled()) return;
 		if (!Init_vars(wiki, ctx, src, xnde)) return;
 		Xoa_page page = ctx.Cur_page();
 		if (page.Pages_recursed()) return;	// moved from Pp_index_parser; DATE:2014-05-21s

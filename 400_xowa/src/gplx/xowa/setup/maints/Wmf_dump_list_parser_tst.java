@@ -41,65 +41,65 @@ public class Wmf_dump_list_parser_tst {
 		,	fxt.itm("zh-classicalwiki", "20131128", Wmf_dump_itm.Status_tid_complete, "Dump complete", "2013-11-28 06:08:56")
 		);
 	}
-//		@Test  public void Update() {	// 2014-07-06
-//			Hash_adp_bry excluded_domains = Hash_adp_bry.cs_().Add_many_str
-//			( "advisory.wikipedia.org", "beta.wikiversity.org", "donate.wikipedia.org", "login.wikipedia.org"
-//			, "nostalgia.wikipedia.org", "outreach.wikipedia.org", "quality.wikipedia.org", "sources.wikipedia.org"
-//			, "strategy.wikipedia.org", "ten.wikipedia.org", "test2.wikipedia.org", "test.wikipedia.org"
-//			, "usability.wikipedia.org", "vote.wikipedia.org");
-//			Wmf_dump_itm[] itms = new Wmf_dump_list_parser().Parse(Io_mgr._.LoadFilBry("C:\\xowa\\bin\\any\\html\\xowa\\maint\\backup-index.html"));
-//			Array_.Sort(itms);
-//			Bry_bfr sql_bfr = Bry_bfr.new_();
-//			Bry_bfr bld_bfr = Bry_bfr.new_();
-//			int itms_len = itms.length;
-//			int counter = 1;
-//			for (int i = 0; i < itms_len; i++) {
-//				Wmf_dump_itm itm = itms[i];
-//				byte[] abrv = itm.Wiki_abrv();
-//				if (Bry_.Eq(abrv, Bry_.new_ascii_("testwikidatawiki"))) continue;
-//				byte[] domain_bry = Xob_bz2_file.Parse__domain_name(abrv, 0, abrv.length);
-//				if (domain_bry == null) continue;			// not a standard WMF wiki; ignore
-//				if (Bry_finder.Find_fwd(domain_bry, Bry_.new_ascii_("wikimania")) != Bry_.NotFound) continue;
-//				if (excluded_domains.Has(domain_bry)) continue;
-//				Xow_wiki_domain domain_itm = Xow_wiki_domain_.parse_by_domain(domain_bry);
-//				byte[] tid_name = Xto_display_name(Xow_wiki_domain_.Key_by_tid(domain_itm.Tid()));
-//				sql_bfr
-//					.Add_byte(Byte_ascii.Paren_bgn)
-//					.Add_int_variable(counter++)
-//					.Add_byte(Byte_ascii.Comma)
-//					.Add_int_variable(1)
-//					.Add_byte(Byte_ascii.Comma)
-//					.Add_byte(Byte_ascii.Apos)
-//					.Add(domain_itm.Lang_orig())
-//					.Add_byte(Byte_ascii.Apos)
-//					.Add_byte(Byte_ascii.Comma)
-//					.Add_byte(Byte_ascii.Apos)
-//					.Add(tid_name)
-//					.Add_byte(Byte_ascii.Apos)
-//					.Add_byte(Byte_ascii.Paren_end)
-//					.Add_byte(Byte_ascii.Comma)
-//					.Add_str("--" + String_.new_utf8_(abrv))
-//					.Add_byte_nl()
-//					;
-//				bld_bfr
-//					.Add_byte(Byte_ascii.Comma)
-//					.Add_byte(Byte_ascii.Space)
-//					.Add_byte(Byte_ascii.Quote)
-//					.Add(domain_bry)
-//					.Add_byte(Byte_ascii.Quote)
-//					.Add_byte_nl()
-//					;
-//			}
-//			Io_url temp = Io_url_.new_fil_("C:\\import_update.txt");
-//			Io_mgr._.SaveFilBfr(temp, sql_bfr);
-////			Io_mgr._.AppendFilBfr(temp, bld_bfr);
-//		}
-//		private static byte[] Xto_display_name(byte[] v) {
-//			if		(Bry_.Eq(v, Xow_wiki_domain_.Key_wikimediafoundation_bry))	return Bry_.new_ascii_("Wikimedia Foundation");
-//			else if	(Bry_.Eq(v, Xow_wiki_domain_.Key_species_bry))				return Bry_.new_ascii_("Wikispecies");
-//			else if	(Bry_.Eq(v, Xow_wiki_domain_.Key_mediawiki_bry))			return Bry_.new_ascii_("MediaWiki");
-//			else																	return Bry_.Add(Byte_ascii.Case_upper(v[0]), Bry_.Mid(v, 1, v.length));
-//		}
+	@Test  public void Update() {	// 2014-07-06
+		Hash_adp_bry excluded_domains = Hash_adp_bry.cs_().Add_many_str
+		( "advisory.wikipedia.org", "beta.wikiversity.org", "donate.wikipedia.org", "login.wikipedia.org"
+		, "nostalgia.wikipedia.org", "outreach.wikipedia.org", "quality.wikipedia.org", "sources.wikipedia.org"
+		, "strategy.wikipedia.org", "ten.wikipedia.org", "test2.wikipedia.org", "test.wikipedia.org"
+		, "usability.wikipedia.org", "vote.wikipedia.org");
+		Wmf_dump_itm[] itms = new Wmf_dump_list_parser().Parse(Io_mgr._.LoadFilBry("C:\\xowa\\bin\\any\\html\\xowa\\maint\\backup-index.html"));
+		Array_.Sort(itms);
+		Bry_bfr sql_bfr = Bry_bfr.new_();
+		Bry_bfr bld_bfr = Bry_bfr.new_();
+		int itms_len = itms.length;
+		int counter = 1;
+		for (int i = 0; i < itms_len; i++) {
+			Wmf_dump_itm itm = itms[i];
+			byte[] abrv = itm.Wiki_abrv();
+			if (Bry_.Eq(abrv, Bry_.new_ascii_("testwikidatawiki"))) continue;
+			byte[] domain_bry = Xob_bz2_file.Parse__domain_name(abrv, 0, abrv.length);
+			if (domain_bry == null) continue;			// not a standard WMF wiki; ignore
+			if (Bry_finder.Find_fwd(domain_bry, Bry_.new_ascii_("wikimania")) != Bry_.NotFound) continue;
+			if (excluded_domains.Has(domain_bry)) continue;
+			Xow_wiki_domain domain_itm = Xow_wiki_domain_.parse_by_domain(domain_bry);
+			byte[] tid_name = Xto_display_name(Xow_wiki_domain_.Key_by_tid(domain_itm.Tid()));
+			sql_bfr
+				.Add_byte(Byte_ascii.Paren_bgn)
+				.Add_int_variable(counter++)
+				.Add_byte(Byte_ascii.Comma)
+				.Add_int_variable(1)
+				.Add_byte(Byte_ascii.Comma)
+				.Add_byte(Byte_ascii.Apos)
+				.Add(domain_itm.Lang_orig())
+				.Add_byte(Byte_ascii.Apos)
+				.Add_byte(Byte_ascii.Comma)
+				.Add_byte(Byte_ascii.Apos)
+				.Add(tid_name)
+				.Add_byte(Byte_ascii.Apos)
+				.Add_byte(Byte_ascii.Paren_end)
+				.Add_byte(Byte_ascii.Comma)
+				.Add_str("--" + String_.new_utf8_(abrv))
+				.Add_byte_nl()
+				;
+			bld_bfr
+				.Add_byte(Byte_ascii.Comma)
+				.Add_byte(Byte_ascii.Space)
+				.Add_byte(Byte_ascii.Quote)
+				.Add(domain_bry)
+				.Add_byte(Byte_ascii.Quote)
+				.Add_byte_nl()
+				;
+		}
+		Io_url temp = Io_url_.new_fil_("C:\\import_update.txt");
+		Io_mgr._.SaveFilBfr(temp, sql_bfr);
+//			Io_mgr._.AppendFilBfr(temp, bld_bfr);
+	}
+	private static byte[] Xto_display_name(byte[] v) {
+		if		(Bry_.Eq(v, Xow_wiki_domain_.Key_wikimediafoundation_bry))	return Bry_.new_ascii_("Wikimedia Foundation");
+		else if	(Bry_.Eq(v, Xow_wiki_domain_.Key_species_bry))				return Bry_.new_ascii_("Wikispecies");
+		else if	(Bry_.Eq(v, Xow_wiki_domain_.Key_mediawiki_bry))			return Bry_.new_ascii_("MediaWiki");
+		else																	return Bry_.Add(Byte_ascii.Case_upper(v[0]), Bry_.Mid(v, 1, v.length));
+	}
 }
 class Wmf_dump_list_parser_fxt {
 	public void Clear() {}

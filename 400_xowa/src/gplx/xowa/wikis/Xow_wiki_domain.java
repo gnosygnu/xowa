@@ -17,10 +17,23 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
 public class Xow_wiki_domain {
-	public Xow_wiki_domain(byte[] raw, byte tid, byte[] lang)					{this.raw = raw; this.tid = tid; this.lang = this.lang_orig = lang;}
-	public Xow_wiki_domain(byte[] raw, byte tid, byte[] lang, byte[] lang_orig) {this.raw = raw; this.tid = tid; this.lang = lang; this.lang_orig = lang_orig;}
+	public Xow_wiki_domain(byte[] raw, byte tid, byte[] lang) {
+		this.raw = raw; this.tid = tid; this.lang = this.lang_orig = lang;
+		Lang_orig_id_();
+	}
+	public Xow_wiki_domain(byte[] raw, byte tid, byte[] lang, byte[] lang_orig) {
+		this.raw = raw; this.tid = tid; this.lang = lang; this.lang_orig = lang_orig;
+		Lang_orig_id_();
+	}
 	public byte[] Raw() {return raw;} private byte[] raw;
 	public byte Tid() {return tid;} private byte tid;
 	public byte[] Lang_orig() {return lang_orig;} private byte[] lang_orig;
+	public int Lang_orig_id() {return lang_orig_id;} private int lang_orig_id;
 	public byte[] Lang() {return lang;} private byte[] lang;
+	private void Lang_orig_id_() {
+//			if (Bry_.Eq(lang_orig, Commons_bry))
+//				lang_orig_id = Xol_lang_itm_.Id_en;
+//			else
+			lang_orig_id = Xol_lang_itm_.Get_by_key_or_intl(lang_orig, 0, lang_orig.length).Id();
+	}	// private static final byte[] Commons_bry = Bry_.new_ascii_("commons");
 }

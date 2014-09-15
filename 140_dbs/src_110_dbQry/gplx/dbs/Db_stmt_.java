@@ -50,4 +50,7 @@ public class Db_stmt_ {
 	public static Db_stmt new_select_as_rdr(Db_provider provider, Db_qry__select_in_tbl qry) {
 		return provider.Prepare(qry);
 	}
+	public static Db_stmt new_select_as_rdr(Db_provider provider, String sql) {
+		return provider.Prepare(Db_qry_sql.rdr_(sql));
+	}
 }

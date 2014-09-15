@@ -342,7 +342,7 @@ public class Xop_fxt {
 	}
 	public static void Reg_xwiki_alias(Xow_wiki wiki, String alias, String domain) {
 		byte[] domain_bry = Bry_.new_ascii_(domain);
-		wiki.Xwiki_mgr().Add_full(Bry_.new_ascii_(alias), domain_bry);
+		wiki.Xwiki_mgr().Add_full(Bry_.new_ascii_(alias), domain_bry, Bry_.Add(domain_bry, Bry_.new_ascii_("/wiki/~{0}")));
 		wiki.App().User().Wiki().Xwiki_mgr().Add_full(domain_bry, domain_bry);
 	}
 	public static String html_img_none(String trg, String alt, String src, String ttl) {

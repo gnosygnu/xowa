@@ -53,8 +53,8 @@ public class Xof_xfer_itm implements Xof_file_itm {
 	}	private Xof_repo_itm trg_repo;
 	public int			Trg_repo_idx() {return trg_repo_idx;} public Xof_xfer_itm Trg_repo_idx_(int trg_repo_idx) {this.trg_repo_idx = trg_repo_idx; return this;} private int trg_repo_idx = Xof_meta_itm.Repo_unknown;
 	public byte[]		Trg_repo_root() {return trg_repo_root;} private byte[] trg_repo_root = Bry_.Empty;	// HACK: needed for hdump
-	private byte[]		Trg_html(byte mode_id, int width)	{return url_bldr.Set_trg_html_(mode_id, trg_repo, lnki_ttl, lnki_md5, lnki_ext, width, lnki_thumbtime, lnki_page).Xto_bry();}
-	public Io_url		Trg_file(byte mode_id, int width)	{return url_bldr.Set_trg_file_(mode_id, trg_repo, lnki_ttl, lnki_md5, lnki_ext, width, lnki_thumbtime, lnki_page).Xto_url();}
+	private byte[]		Trg_html(byte mode_id, int width)	{return url_bldr.Init_for_trg_html(mode_id, trg_repo, lnki_ttl, lnki_md5, lnki_ext, width, lnki_thumbtime, lnki_page).Xto_bry();}
+	public Io_url		Trg_file(byte mode_id, int width)	{return url_bldr.Init_for_trg_file(mode_id, trg_repo, lnki_ttl, lnki_md5, lnki_ext, width, lnki_thumbtime, lnki_page).Xto_url();}
 	public Xof_url_bldr Url_bldr(){ return url_bldr;}
 	public Xof_xfer_itm Url_bldr_(Xof_url_bldr v) {url_bldr = v; return this;} private Xof_url_bldr url_bldr = Xof_url_bldr.Temp;
 	public Xof_xfer_itm Clear() {

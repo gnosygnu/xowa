@@ -348,8 +348,8 @@ public class Xof_xfer_mgr {
 		file_w = file_size.Width(); file_h = file_size.Height();
 		return true;
 	}
-	String Src_url(Xof_repo_itm repo, byte mode, int lnki_w)	{return url_bldr.Set_src_file_(mode, repo, ttl, md5, ext, lnki_w, lnki_thumbtime, lnki_page).Xto_str();}
-	Io_url Trg_url(Xof_repo_itm repo, byte mode, int lnki_w)	{return url_bldr.Set_trg_file_(mode, repo, ttl, md5, ext, lnki_w, lnki_thumbtime, lnki_page).Xto_url();}
+	String Src_url(Xof_repo_itm repo, byte mode, int lnki_w)	{return url_bldr.Init_for_src_file(mode, repo, ttl, md5, ext, lnki_w, lnki_thumbtime, lnki_page).Xto_str();}
+	Io_url Trg_url(Xof_repo_itm repo, byte mode, int lnki_w)	{return url_bldr.Init_for_trg_file(mode, repo, ttl, md5, ext, lnki_w, lnki_thumbtime, lnki_page).Xto_url();}
 	private Xof_url_bldr url_bldr = new Xof_url_bldr();
 }
 /*

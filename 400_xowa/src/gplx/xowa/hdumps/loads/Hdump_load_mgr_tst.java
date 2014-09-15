@@ -34,11 +34,11 @@ public class Hdump_load_mgr_tst {
 	}
 	@Test  public void Img() {
 		fxt.Init_row_img
-		( fxt.Make_img(0, 220, 110, "A.png", "commons.wikimedia.org/thumb/7/0/A.png/220.png")
-		, fxt.Make_img(1, 200, 100, "B.png", "commons.wikimedia.org/thumb/7/0/B.png/200.png")
+		( fxt.Make_img("A.png", 0, 220, 110)
+		, fxt.Make_img("B.png", 1, 200, 100)
 		);
-		fxt.Expd_img(0, 220, 110, "A.png", "commons.wikimedia.org/thumb/7/0/A.png/220.png");
-		fxt.Expd_img(1, 200, 100, "B.png", "commons.wikimedia.org/thumb/7/0/B.png/200.png");
+		fxt.Expd_img(fxt.Make_img("A.png", 0, 220, 110));
+		fxt.Expd_img(fxt.Make_img("B.png", 1, 200, 100));
 		fxt.Test_load(0);
 	}
 }
@@ -57,7 +57,9 @@ class Hdump_load_mgr_fxt {
 		expd_imgs.Clear();
 		page_url = Xoa_url.new_(Bry_.new_ascii_("enwiki"), Bry_.new_ascii_("Page_1"));
 	}
-	public Hdump_data_img__base Make_img(int uid, int img_w, int img_h, String lnki_ttl, String img_src_rel) {return new Hdump_data_img__basic().Init_by_base(uid, img_w, img_h, Bry_.new_utf8_(lnki_ttl), Bry_.new_utf8_(img_src_rel));}
+	public Hdump_data_img__base Make_img(String lnki_ttl, int html_uid, int html_w, int html_h) {
+		return new Hdump_data_img__basic().Init_by_base(Bry_.new_utf8_(lnki_ttl), html_uid, html_w, html_h, Hdump_data_img__base.File_repo_id_commons, Xof_ext_.Id_png, Bool_.N, html_w, Xof_doc_thumb.Null, Xof_doc_page.Null);
+	}
 	public void Init_row_img(Hdump_data_img__base... itms) {
 		ListAdp tmp_list = ListAdp_.new_();
 		Bry_bfr bfr = Bry_bfr.new_(255);
@@ -83,7 +85,7 @@ class Hdump_load_mgr_fxt {
 	public Hdump_load_mgr_fxt Expd_display_ttl(String v) {this.expd_display_ttl = v; return this;}
 	public Hdump_load_mgr_fxt Expd_content_sub(String v) {this.expd_content_sub = v; return this;}
 	public Hdump_load_mgr_fxt Expd_sidebar_div(String v) {this.expd_sidebar_div = v; return this;}
-	public Hdump_load_mgr_fxt Expd_img(int idx, int w, int h, String ttl, String src) {expd_imgs.Add(new Hdump_data_img__basic().Init_by_base(idx, w, h, Bry_.new_utf8_(ttl), Bry_.new_utf8_(src))); return this;}
+	public Hdump_load_mgr_fxt Expd_img(Hdump_data_img__base img) {expd_imgs.Add(img); return this;}
 	public Hdump_load_mgr_fxt Test_load(int page_id) {
 		load_mgr.Load_rows(hpg, page_id, page_url, init_rows);
 		if (expd_body != null)			Tfds.Eq(expd_body, String_.new_utf8_(hpg.Page_body()));

@@ -24,7 +24,7 @@ public class Xof_img_mgr {
 	public int Thumb_w_img() {return thumb_w_img;} private int thumb_w_img = Xof_img_size.Thumb_width_img;
 	public int Thumb_w_ogv() {return thumb_w_ogv;} private int thumb_w_ogv = Xof_img_size.Thumb_width_ogv;
 	public void Init_app(Xoa_app app) {
-		Launcher_app_mgr app_mgr = app.Fsys_mgr().App_mgr();
+		Launcher_app_mgr app_mgr = app.Launcher();
 		wkr_query_img_size = new Xof_img_wkr_query_img_size_imageMagick(app, app_mgr.App_query_img_size());
 		wkr_resize_img = new Xof_img_wkr_resize_img_imageMagick(app, app_mgr.App_resize_img(), app_mgr.App_convert_svg_to_png());
 		wkr_convert_djvu_to_tiff = new Xof_img_wkr_convert_djvu_to_tiff_app(app_mgr.App_convert_djvu_to_tiff());
