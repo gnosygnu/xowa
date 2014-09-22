@@ -20,6 +20,7 @@ import gplx.stores.*;
 import java.sql.*; 
 class Sqlite_engine extends Db_engine_sql_base {
 	@Override public String Key() {return Db_conn_info__sqlite.Key_const;}
+	@Override public String Conn_info_tid() {return this.Key();}
 	@Override public Db_engine Make_new(Db_conn_info connectInfo) {
 		Sqlite_engine rv = new Sqlite_engine();
 		rv.ctor_SqlEngineBase(connectInfo);

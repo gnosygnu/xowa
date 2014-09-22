@@ -254,4 +254,5 @@ public class Int_ implements GfoInvkAble {
 			rv[i] = Int_.parse_(ary[i]);
 		return rv;
 	}
+	public static byte[] Xto_bry(int v) {return Bry_.new_ascii_(Xto_str(v));}
 }

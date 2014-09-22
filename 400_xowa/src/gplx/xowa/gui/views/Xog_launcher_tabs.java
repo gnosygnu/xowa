@@ -38,8 +38,7 @@ class Xog_launcher_tabs {
 			int launch_urls_len = launch_urls.length;
 			for (int i = 0; i < launch_urls_len; ++i) {
 				String launch_url = launch_urls[i];
-				Xog_tab_itm tab = win.Tab_mgr().Tabs_new_init();
-				Launch_tab(tab, win, home_wiki, launch_url);
+				Launch_tab(win, home_wiki, launch_url);
 			}
 			fil_marker.End();
 			return true;
@@ -52,18 +51,17 @@ class Xog_launcher_tabs {
 	}
 	private void Restore_tab_failover(Xoa_app app, Xow_wiki home_wiki, Xog_win_itm win) {
 		try {
-			Xog_tab_itm tab = win.Tab_mgr().Tabs_new_init();	// NOTE: was win.Active_tab which throws a nullRef; DATE:2014-09-01
-			Launch_tab(tab, win, home_wiki, gplx.xowa.users.Xouc_pages_mgr.Page_xowa);
+			Launch_tab(win, home_wiki, gplx.xowa.users.Xouc_pages_mgr.Page_xowa);
 		}
 		catch (Exception e) {
 			app.Usr_dlg().Warn_many("", "", "failed to launch failover tab: err=~{0}", Err_.Message_gplx(e));
 		}
 	}
-	private void Launch_tab(Xog_tab_itm tab, Xog_win_itm win, Xow_wiki home_wiki, String launch_str) {
+	private void Launch_tab(Xog_win_itm win, Xow_wiki home_wiki, String launch_str) {
 		Xoa_url launch_url = Xoa_url_parser.Parse_from_url_bar(win.App(), home_wiki, launch_str);
 		Xow_wiki launch_wiki = launch_url.Wiki();
 		Xoa_ttl launch_ttl = Xoa_ttl.parse_(launch_wiki, launch_url.Page_bry());
-		tab.Page_(Xoa_page.new_(launch_wiki, launch_ttl));	// WORKAROUND: set the tab to an empty page, else null ref later; DATE:2014-07-23
+		Xog_tab_itm tab = win.Tab_mgr().Tabs_new_init(Xoa_page.new_(launch_wiki, launch_ttl)); // WORKAROUND: set the tab to an empty page, else null ref later; DATE:2014-07-23
 		tab.Show_url_bgn(launch_url);
 	}
         public static final Xog_launcher_tabs _ = new Xog_launcher_tabs(); Xog_launcher_tabs() {}

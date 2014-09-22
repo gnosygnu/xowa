@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.gui.*; import gplx.xowa.xtns.wdatas.imports.*; import gplx.xowa.pages.*;
-import gplx.xowa.langs.*;
+import gplx.xowa.langs.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.pfuncs.*;
 public class Wdata_wiki_mgr_fxt {
 	public Xow_wiki Wiki() {return parser_fxt.Wiki();}
 	public Wdata_wiki_mgr_fxt Init() {return Init(new Xop_fxt(), true);}
@@ -36,16 +36,16 @@ public class Wdata_wiki_mgr_fxt {
 	}	private Xoa_app app; Xow_wiki wiki; Wdata_wiki_mgr wdata_mgr; Wdata_doc_bldr page_bldr; Xop_fxt parser_fxt;
 	public Xoa_app App() {return app;}
 	public Wdata_doc_bldr page_bldr_(String qid) {return page_bldr.Qid_(qid);}
-	public Wdata_prop_itm_core prop_novalue_(int pid) {return Wdata_prop_itm_core.new_novalue_(pid);}
-	public Wdata_prop_itm_core prop_somevalue_(int pid) {return Wdata_prop_itm_core.new_somevalue_(pid);}
-	public Wdata_prop_itm_core prop_str_(int pid, String val) {return Wdata_prop_itm_core.new_str_(pid, val);}
-	public Wdata_prop_itm_core prop_str_(int pid, byte[] val) {return Wdata_prop_itm_core.new_str_(pid, val);}
-	public Wdata_prop_itm_core prop_time_(int pid, String val) {return Wdata_prop_itm_core.new_time_(pid, val);}
-	public Wdata_prop_itm_core prop_geodata_(int pid, String lat, String lon) {return Wdata_prop_itm_core.new_geodata_(pid, lat, lon);}
-	public Wdata_prop_itm_core prop_quantity_(int pid, String amount, String unit, String ubound, String lbound) {return Wdata_prop_itm_core.new_quantity_(pid, amount, unit, ubound, lbound);}
-	public Wdata_prop_itm_core prop_monolingualtext_(int pid, String text, String lang) {return Wdata_prop_itm_core.new_monolingualtext_(pid, text, lang);}
-	public Wdata_prop_itm_core prop_entity_(int pid, int val) {return Wdata_prop_itm_core.new_entity_(pid, val);}
-	public Wdata_doc doc_(String qid, Wdata_prop_itm_core... props) {return page_bldr.Qid_(qid).Props_add(props).Xto_page_doc();}
+	public Wdata_claim_itm_core prop_novalue_(int pid)			{return Wdata_claim_itm_system.new_novalue(pid);}
+	public Wdata_claim_itm_core prop_somevalue_(int pid)		{return Wdata_claim_itm_system.new_somevalue(pid);}
+	public Wdata_claim_itm_core prop_str_(int pid, String val) {return prop_str_(pid, Bry_.new_utf8_(val));}
+	public Wdata_claim_itm_core prop_str_(int pid, byte[] val) {return new Wdata_claim_itm_str(pid, Wdata_dict_snak_tid.Tid_value, val);}
+	public Wdata_claim_itm_core prop_time_(int pid, String val) {return new Wdata_claim_itm_time(pid, Wdata_dict_snak_tid.Tid_value, Wdata_doc_bldr.Xto_time(val), Bry_.Empty, Bry_.Empty, Bry_.Empty, Bry_.Empty, Bry_.Empty);}
+	public Wdata_claim_itm_core prop_monolingualtext_(int pid, String text, String lang) {return new Wdata_claim_itm_monolingualtext(pid, Wdata_dict_snak_tid.Tid_value, Bry_.new_utf8_(lang), Bry_.new_utf8_(text));}
+	public Wdata_claim_itm_core prop_geodata_(int pid, String lat, String lon) {return new Wdata_claim_itm_globecoordinate(pid, Wdata_dict_snak_tid.Tid_value, Bry_.new_ascii_(lat), Bry_.new_ascii_(lon), Bry_.Empty, Bry_.Empty, Bry_.Empty);}
+	public Wdata_claim_itm_core prop_quantity_(int pid, String amount, String unit, String ubound, String lbound) {return new Wdata_claim_itm_quantity(pid, Wdata_dict_snak_tid.Tid_value, Bry_.new_ascii_(amount), Bry_.new_ascii_(unit), Bry_.new_ascii_(ubound), Bry_.new_ascii_(lbound));}
+	public Wdata_claim_itm_core prop_entity_(int pid, int val) {return new Wdata_claim_itm_entity(pid, Wdata_dict_snak_tid.Tid_value, Int_.Xto_bry(val));}
+	public Wdata_doc doc_(String qid, Wdata_claim_itm_core... props) {return page_bldr.Qid_(qid).Props_add(props).Xto_page_doc();}
 	public void Init_xwikis_add(String... prefixes) {
 		int len = prefixes.length;
 		for (int i = 0; i < len; i++) {

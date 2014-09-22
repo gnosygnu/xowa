@@ -379,7 +379,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 			byte old_parse_tid = ctx.Parse_tid(); // NOTE: reusing ctxs is a bad idea; will change Parse_tid and cause strange errors; however, keeping for PERF reasons
 			Xow_ns ns_tmpl = wiki.Ns_mgr().Ns_template();
 			rv = wiki.Parser().Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), ns_tmpl, name_ary, tmpl_page_bry);
-			byte[] frame_ttl = tmpl_page_itm.Ttl().Full_txt();		// NOTE: (1) must have ns (Full); (2) must be txt (underscore, not space); EX:Template:Location map+; DATE:2014-08-22
+			byte[] frame_ttl = tmpl_page_itm.Ttl().Full_txt();		// NOTE: (1) must have ns (Full); (2) must be txt (space, not underscore); EX:Template:Location map+; DATE:2014-08-22
 			rv.Frame_ttl_(frame_ttl);								// set defn's frame_ttl; needed for redirect_trg; PAGE:en.w:Statutory_city; DATE:2014-08-22
 			ctx.Parse_tid_(old_parse_tid);
 			wiki.Cache_mgr().Defn_cache().Add(rv, ns_tmpl.Case_match());

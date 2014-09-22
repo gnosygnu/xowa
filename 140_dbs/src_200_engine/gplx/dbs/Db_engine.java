@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs; import gplx.*;
 public interface Db_engine {
 	String			Key();
+	String			Conn_info_tid();
 	Db_conn_info	Conn_info();
 	void			Conn_open();
 	void			Conn_term();
@@ -33,6 +34,7 @@ public interface Db_engine {
 }
 class Db_engine_null implements Db_engine {
 	public String			Key() {return Db_conn_info_.Null.Key();}
+	public String			Conn_info_tid() {return Db_conn_info_.Null.Key();}
 	public Db_conn_info		Conn_info() {return Db_conn_info_.Null;}
 	public void				Conn_open() {}
 	public void				Conn_term() {}

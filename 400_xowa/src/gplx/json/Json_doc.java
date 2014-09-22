@@ -37,7 +37,7 @@ public class Json_doc {
 		tmp_qry_bry[0] = qry_bry;
 		Json_itm rv = Find_nde(root, tmp_qry_bry, 0, 0); if (rv == null) return null;
 		return (Json_grp)rv;
-	}	byte[][] tmp_qry_bry = new byte[1][];
+	}	private byte[][] tmp_qry_bry = new byte[1][];
 	public Json_grp Get_grp(byte[][] qry_bry) {
 		Json_itm rv = Find_nde(root, qry_bry, qry_bry.length - 1, 0); if (rv == null) return null;
 		return (Json_grp)rv;

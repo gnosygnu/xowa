@@ -227,7 +227,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 			String val = tmp_bfr.XtoStrAndClear();
 			kv_args[i] = KeyVal_.new_(key, val);
 		}
-		Xot_invk_mock mock_frame = Xot_invk_mock.new_(kv_args);
+		Xot_invk_mock mock_frame = Xot_invk_mock.new_(Bry_.new_utf8_(frame_id), kv_args);	// use frame_id for Frame_ttl; in lieu of a better candidate; DATE:2014-09-21
 		tmp_ctx.Parse_tid_(Xop_parser_.Parse_tid_page_tmpl);	// default xnde names to template; needed for test, but should be in place; DATE:2014-06-27
 		cur_wiki.Parser().Parse_text_to_wtxt(tmp_root, tmp_ctx, tmp_ctx.Tkn_mkr(), text_bry);
 		tmp_root.Tmpl_evaluate(tmp_ctx, text_bry, mock_frame, tmp_bfr);
@@ -242,7 +242,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		Bry_obj_ref argx_ref = Bry_obj_ref.null_();
 		Bry_obj_ref fnc_name_ref = Bry_obj_ref.new_(fnc_name);
 		KeyVal[] parser_func_args = CallParserFunction_parse_args(cur_wiki.App().Utl_num_parser(), argx_ref, fnc_name_ref, args.Ary());
-		Xot_invk_mock frame = Xot_invk_mock.new_(parent_frame.Defn_tid(), 0, parser_func_args);
+		Xot_invk_mock frame = Xot_invk_mock.new_(parent_frame.Defn_tid(), 0, fnc_name, parser_func_args);	// pass something as frame_ttl; choosng fnc_name; DATE:2014-09-21
 		Xol_func_name_itm finder = cur_wiki.Lang().Func_regy().Find_defn(fnc_name, 0, fnc_name_len);
 		Xot_defn defn = finder.Func();
 		if (defn == Xot_defn_.Null) throw Err_.new_fmt_("callParserFunction: function \"{0}\" was not found", String_.new_utf8_(fnc_name));
@@ -305,7 +305,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		if (sub_src == null)						// ttl is not in template cache, or is a ttl in non-Template ns; load title
 			sub_src = core.Wiki().Cache_mgr().Page_cache().Get_or_load_as_src(ttl);
 		if (sub_src !=  null) {
-			Xot_invk_mock sub_frame = Xot_invk_mock.new_(core.Frame_current().Defn_tid(), 0, args_ary);
+			Xot_invk_mock sub_frame = Xot_invk_mock.new_(core.Frame_current().Defn_tid(), 0, ttl.Full_txt(), args_ary);	// NOTE: (1) must have ns (Full); (2) must be txt (space, not underscore); EX:Template:Location map+; DATE:2014-09-21
 			Xot_defn_tmpl transclude_tmpl = ctx.Wiki().Parser().Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), ttl.Ns(), ttl.Page_db(), sub_src);
 			Bry_bfr sub_bfr = cur_wiki.Utl_bry_bfr_mkr().Get_k004();
 			transclude_tmpl.Tmpl_evaluate(ctx, sub_frame, sub_bfr);
@@ -349,8 +349,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 			if (ttl == null) throw Err_.new_("newChild: invalid title; title={0}", (String)ttl_obj);
 		}
 		KeyVal[] args_ary = args.Pull_kv_ary(2);
-		Xot_invk_mock new_frame = Xot_invk_mock.new_(core.Frame_current().Defn_tid(), 0, args_ary);
-		new_frame.Frame_ttl_(ttl.Full_txt());	// NOTE: use spaces, not unders; REF.MW:$frame->getTitle()->getPrefixedText(); DATE:2014-08-14
+		Xot_invk_mock new_frame = Xot_invk_mock.new_(core.Frame_current().Defn_tid(), 0, ttl.Full_txt(), args_ary); // NOTE: use spaces, not unders; REF.MW:$frame->getTitle()->getPrefixedText(); DATE:2014-08-14
 		String new_frame_id = "frame" + Int_.Xto_str(frame_list_len);
 		frame_list.Add(new_frame_id, new_frame);
 		return rslt.Init_obj(new_frame_id);

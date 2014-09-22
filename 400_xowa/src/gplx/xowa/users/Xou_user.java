@@ -16,8 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.users.dbs.*;
-import gplx.xowa.wikis.*; import gplx.xowa.users.history.*; import gplx.xowa.xtns.scribunto.*;
+import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.users.dbs.*; import gplx.xowa.users.history.*; import gplx.xowa.xtns.scribunto.*;
 public class Xou_user implements GfoInvkAble {
 	public Xou_user(Xoa_app app, Io_url user_dir) {
 		this.app = app; this.key_str = user_dir.NameOnly(); key_bry = Bry_.new_utf8_(key_str);
@@ -53,8 +52,10 @@ public class Xou_user implements GfoInvkAble {
 	public void Init_by_app() {
 		Io_url user_system_cfg = fsys_mgr.App_data_cfg_dir().GenSubFil(Xou_fsys_mgr.Name_user_system_cfg);
 		if (!Io_mgr._.ExistsFil(user_system_cfg)) Xou_user_.User_system_cfg_make(app.Usr_dlg(), user_system_cfg);
-		if (!Env_.Mode_testing())
+		if (!Env_.Mode_testing()) {
 			db_mgr.App_init();
+			this.Available_from_fsys();
+		}
 	}
 	public void App_term() {
 		session_mgr.Window_mgr().Save_window(app.Gui_mgr().Browser_win().Win_box());
@@ -105,7 +106,9 @@ public class Xou_user implements GfoInvkAble {
 //					|| !Io_mgr._.ExistsDir(dir.GenSubFil_nest("ns"))
 				) continue;
 			byte[] dir_name_as_bry = Bry_.new_utf8_(name);
-			Available_add(usr_wiki, dir_name_as_bry);
+			Xow_xwiki_itm xwiki = Available_add(usr_wiki, dir_name_as_bry);
+			if (xwiki != null)			// Add_full can return null if adding invalid lang; should not apply here, but guard against null ref
+				xwiki.Offline_(true);	// mark xwiki as offline; needed for available wikis sidebar; DATE:2014-09-21
 			app.Setup_mgr().Maint_mgr().Wiki_mgr().Add(dir_name_as_bry);
 		}
 	}
@@ -116,5 +119,7 @@ public class Xou_user implements GfoInvkAble {
 		for (int i = 0; i < wikis_len; i++)
 			Available_add(usr_wiki, wikis[i]);
 	}
-	private void Available_add(Xow_wiki usr_wiki, byte[] wiki_name) {usr_wiki.Xwiki_mgr().Add_full(wiki_name, wiki_name);}
+	private Xow_xwiki_itm Available_add(Xow_wiki usr_wiki, byte[] wiki_name) {
+		return usr_wiki.Xwiki_mgr().Add_full(wiki_name, wiki_name);
+	}
 }

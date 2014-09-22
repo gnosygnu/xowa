@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs; import gplx.*;
 class TdbEngine implements Db_engine {
 	public String Key() {return KeyDef;} public static final String KeyDef = "tdb";
+	public String Conn_info_tid() {return this.Key();}
 	public Db_conn_info Conn_info() {return conn_info;} Db_conn_info conn_info;
 	public TdbDatabase Db() {return db;} TdbDatabase db;
 	public void Conn_open() {

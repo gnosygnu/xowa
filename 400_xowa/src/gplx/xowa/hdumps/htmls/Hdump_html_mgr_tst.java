@@ -101,7 +101,7 @@ public class Hdump_html_mgr_tst {
 	}
 }
 class Hdump_html_mgr_fxt {
-	private Hdump_html_mgr html_mgr;
+	private Hdump_html_body html_mgr;
 	private Bry_bfr bfr = Bry_bfr.reset_(255);
 	private ListAdp img_list = ListAdp_.new_();
 	private Xow_wiki wiki;
@@ -139,7 +139,7 @@ class Hdump_html_mgr_fxt {
 	}
 	public Hdump_html_mgr_fxt Test_html(String expd) {
 		if (img_list.Count() > 0) hpg.Img_itms_((Hdump_data_img__base[])img_list.XtoAryAndClear(Hdump_data_img__base.class));
-		html_mgr.Write(bfr, wiki, hpg);
+		html_mgr.Init_by_page(wiki.Domain_bry(), hpg).Write(bfr);
 		Tfds.Eq_str_lines(expd, bfr.XtoStrAndClear());
 		return this;
 	}

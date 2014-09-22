@@ -20,8 +20,8 @@ import gplx.threads.*; import gplx.gfui.*; import gplx.xowa.gui.history.*; impor
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.cfgs2.*; import gplx.xowa.pages.*;
 public class Xog_tab_itm implements GfoInvkAble {
 	private Xog_win_itm win; private Xocfg_tab_mgr cfg_tab_mgr;
-	public Xog_tab_itm(Xog_tab_mgr tab_mgr, Gfui_tab_itm_data tab_data) {
-		this.tab_mgr = tab_mgr; this.tab_data = tab_data; 
+	public Xog_tab_itm(Xog_tab_mgr tab_mgr, Gfui_tab_itm_data tab_data, Xoa_page page) {
+		this.tab_mgr = tab_mgr; this.tab_data = tab_data; this.page = page;
 		this.win = tab_mgr.Win(); this.cfg_tab_mgr = win.App().Cfg_regy	().App().Gui_mgr().Tab_mgr();
 		html_itm = new Xog_html_itm(this);
 		cmd_sync = win.Kit().New_cmd_sync(this);
@@ -71,14 +71,14 @@ public class Xog_tab_itm implements GfoInvkAble {
 	public Xog_html_itm			Html_itm() {return html_itm;} private Xog_html_itm html_itm;
 	public Gfui_html			Html_box() {return html_itm.Html_box();}
 	public Xoa_page				Page() {return page;}
-	public void Page_(Xoa_page page) {Page_(true, page);}
-	public void Page_(boolean update_ui, Xoa_page page) {
+	public void Page_(Xoa_page page) {
 		this.page = page;
-		if (update_ui) {
-			this.Tab_name_();
-			tab_box.Tab_tip_text_(page.Url().Xto_full_str());
-		}
-	}	private Xoa_page page;
+		this.Page_update_ui();	// force tab button to update when page changes
+	}	private Xoa_page page;		
+	public void Page_update_ui() {
+		this.Tab_name_();
+		tab_box.Tab_tip_text_(page.Url().Xto_full_str());
+	}
 	public void Tab_name_() {
 		byte[] tab_name = page.Html_data().Custom_name();
 		if (tab_name == null) tab_name = page.Ttl().Full_txt();
@@ -245,8 +245,9 @@ class Load_page_wkr implements Gfo_thread_wkr {
 			else															// not low in memory
 				app.Utl_bry_bfr_mkr().Clear();								// clear bry_bfr_mk only; NOTE: call before page parse, not when page is first added, else threading errors; DATE:2014-05-30
 			Xoa_page page = wiki.GetPageByTtl(url, ttl, wiki.Lang(), tab, false);
-			if (wiki.Db_mgr().Hdump_mgr().Enabled() && page.Revision_data().Html_db_id() != -1)
-				wiki.Db_mgr().Hdump_mgr().Load(wiki, page);
+			int html_db_id = page.Revision_data().Html_db_id();
+			if (wiki.Db_mgr().Hdump_mgr().Enabled() && html_db_id != -1)
+				wiki.Db_mgr().Hdump_mgr().Load(wiki, page, html_db_id);
 			else
 				wiki.ParsePage(page, false);
 			GfoInvkAble_.InvkCmd_val(tab.Cmd_sync(), Xog_tab_itm.Invk_show_url_loaded_swt, page);

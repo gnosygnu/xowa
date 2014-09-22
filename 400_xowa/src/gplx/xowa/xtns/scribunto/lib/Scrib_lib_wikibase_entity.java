@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.lib; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import gplx.xowa.xtns.wdatas.*;
-import gplx.json.*;
+import gplx.json.*; import gplx.xowa.xtns.wdatas.core.*;
 public class Scrib_lib_wikibase_entity implements Scrib_lib {
 	public Scrib_lib_wikibase_entity(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
@@ -49,7 +49,7 @@ public class Scrib_lib_wikibase_entity implements Scrib_lib {
 		byte[] lang = wiki.Wdata_wiki_lang();
 		Wdata_doc wdoc = wdata_mgr.Pages_get(qid); if (wdoc == null) {Wdata_wiki_mgr.Log_missing_qid(core.Ctx(), qid); return rslt.Init_str_empty();}	// NOTE: return empty String, not nil; PAGE:fr.s:Henri_Bergson; DATE:2014-08-13
 		int pid_int = wdata_mgr.Pids_get(lang, pid); if (pid_int == Wdata_wiki_mgr.Pid_null) return rslt.Init_str_empty();
-		Wdata_prop_grp prop_grp = wdoc.Claim_list_get(pid_int); if (prop_grp == null) return rslt.Init_str_empty();
+		Wdata_claim_grp prop_grp = wdoc.Claim_list_get(pid_int); if (prop_grp == null) return rslt.Init_str_empty();
 		Bry_bfr bfr = app.Utl_bry_bfr_mkr().Get_b512();
 		wdata_mgr.Resolve_to_bfr(bfr, prop_grp, lang);
 		return rslt.Init_obj(bfr.Mkr_rls().XtoAryAndClear());

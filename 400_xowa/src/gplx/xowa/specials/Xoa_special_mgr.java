@@ -19,7 +19,7 @@ package gplx.xowa.specials; import gplx.*; import gplx.xowa.*;
 public class Xoa_special_mgr implements GfoInvkAble {
 	private OrderedHash hash = OrderedHash_.new_();
 	public Xoa_special_mgr() {
-		hash.Add(gplx.xowa.xtns.wdatas.Wdata_itemByTitle_cfg.Key, new gplx.xowa.xtns.wdatas.Wdata_itemByTitle_cfg());
+		hash.Add(gplx.xowa.xtns.wdatas.specials.Wdata_itemByTitle_cfg.Key, new gplx.xowa.xtns.wdatas.specials.Wdata_itemByTitle_cfg());
 	}
 	public void Add(String key, GfoInvkAble cfg)	{hash.Add(key, cfg);}
 	public GfoInvkAble Get_or_null(String key)		{return (GfoInvkAble)hash.Fetch(key);}

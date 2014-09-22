@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.dbs.*; import gplx.xowa.bldrs.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.qrys.*;
-import gplx.json.*; import gplx.xowa.xtns.wdatas.*;
+import gplx.json.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.xtns.wdatas.core.*;
 import gplx.xowa.bldrs.oimgs.*;
 public class Xob_wdata_db_cmd extends Xob_dump_mgr_base implements Xob_cmd {
 	private Wdata_tbl_mgr tbl_mgr = new Wdata_tbl_mgr();
@@ -38,7 +38,7 @@ public class Xob_wdata_db_cmd extends Xob_dump_mgr_base implements Xob_cmd {
 	}
 	@Override protected void Cmd_bgn_end() {
 		wdata_mgr = bldr.App().Wiki_mgr().Wdata_mgr();
-		json_parser = wdata_mgr.Parser();
+		json_parser = wdata_mgr.Jdoc_parser();
 		tbl_mgr.Provider().Txn_mgr().Txn_bgn_if_none();
 	}
 	@Override public void Exec_pg_itm_hook(Xow_ns ns, Xodb_page page, byte[] page_src) {
@@ -196,7 +196,7 @@ class Wdata_link_tbl extends Wdata_tbl_base {
 	@Override public Db_idx_itm[] Idx_ary() {return new Db_idx_itm[] {Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS wdata_link__main ON wdata_link (page_id, wiki_key);")};}
 	@Override public String[] Fld_ary() {return new String[] {Fld_page_id, Fld_wiki_key, Fld_val};}
 	@Override public void Exec_insert_by_wdoc(byte[] lang_key, Wdata_wiki_mgr wdata_mgr, int page_id, Wdata_doc wdoc) {
-		OrderedHash hash = wdoc.Link_list();
+		OrderedHash hash = wdoc.Sitelink_list();
 		int len = hash.Count();
 		Db_stmt insert_stmt = this.Insert_stmt();
 		for (int i = 0; i < len; i++) {
@@ -250,35 +250,46 @@ class Wdata_claim_tbl extends Wdata_tbl_base {
 		OrderedHash list = wdoc.Claim_list();
 		int list_len = list.Count();
 		for (int i = 0; i < list_len; i++) {
-			Wdata_prop_grp claim_grp = (Wdata_prop_grp)list.FetchAt(i);
+			Wdata_claim_grp claim_grp = (Wdata_claim_grp)list.FetchAt(i);
 			int itms_len = claim_grp.Itms_len();
 			int entity_id = -1;
 			byte[] claim_val = Bry_.Empty;
 			for (int j = 0; j < itms_len; j++) {
-				Wdata_prop_itm_core claim = claim_grp.Itms_get_at(j);
-				byte val_tid = claim.Val_tid_byte();
+				Wdata_claim_itm_core claim = claim_grp.Itms_get_at(j);
+				byte val_tid = claim.Val_tid();
 				switch (val_tid) {
-					case Wdata_prop_itm_base_.Val_tid_string:
-					case Wdata_prop_itm_base_.Val_tid_time:
-					case Wdata_prop_itm_base_.Val_tid_quantity:
-					case Wdata_prop_itm_base_.Val_tid_monolingualtext:
-						claim_val = claim.Val();
+					case Wdata_dict_val_tid.Tid_string:
+						Wdata_claim_itm_str claim_str = (Wdata_claim_itm_str)claim;
+						claim_val = claim_str.Val_str();
 						break;
-					case Wdata_prop_itm_base_.Val_tid_entity:
-						entity_id = Bry_.Xto_int_or(claim.Val(), -2);
-						Wdata_doc entity_doc = wdata_mgr.Pages_get(Bry_.Add(Wdata_wiki_mgr.Bry_q, claim.Val()));
+					case Wdata_dict_val_tid.Tid_time:
+						Wdata_claim_itm_time claim_time = (Wdata_claim_itm_time)claim;
+						claim_val = claim_time.Time();
+						break;
+					case Wdata_dict_val_tid.Tid_quantity:
+						Wdata_claim_itm_quantity claim_quantity = (Wdata_claim_itm_quantity)claim;
+						claim_val = claim_quantity.Amount();
+						break;
+					case Wdata_dict_val_tid.Tid_monolingualtext:
+						Wdata_claim_itm_monolingualtext claim_monolingualtext = (Wdata_claim_itm_monolingualtext)claim;
+						claim_val = Bry_.Add_w_dlm(Byte_ascii.Pipe, claim_monolingualtext.Lang(), claim_monolingualtext.Text());
+						break;
+					case Wdata_dict_val_tid.Tid_entity:
+						Wdata_claim_itm_entity claim_entity = (Wdata_claim_itm_entity)claim;
+						entity_id = claim_entity.Entity_id();
+						Wdata_doc entity_doc = wdata_mgr.Pages_get(Bry_.Add(Wdata_wiki_mgr.Bry_q, claim_entity.Entity_id_bry()));
 						if (entity_doc != null)	// NOTE: invalid document could be cited; EX: Q3235 cites prop p832 as Q14916523
 							claim_val = entity_doc.Label_list_get(lang_key);
 						break;
-					case Wdata_prop_itm_base_.Val_tid_globecoordinate:
-					case Wdata_prop_itm_base_.Val_tid_bad: {
-						byte[][] flds = Bry_.Split(claim.Val(),Wdata_prop_itm_core.Prop_dlm);
-						claim_val = Bry_.Add_w_dlm(Byte_ascii.Comma, flds[0], flds[1]);
+					case Wdata_dict_val_tid.Tid_globecoordinate:
+					case Wdata_dict_val_tid.Tid_bad: {
+						Wdata_claim_itm_globecoordinate claim_globecoordinate = (Wdata_claim_itm_globecoordinate)claim;
+						claim_val = Bry_.Add_w_dlm(Byte_ascii.Comma, claim_globecoordinate.Lat(), claim_globecoordinate.Lng());
 						break;
 					}
 					default: 
-						if (   claim.Snak_tid() == Wdata_prop_itm_base_.Snak_tid_somevalue		// somevalue has no val_tid; not sure why; see Q17 and prop 138
-							|| claim.Snak_tid() == Wdata_prop_itm_base_.Snak_tid_novalue) {}	// novalue has no val_tid; see q30 and official language
+						if (   claim.Snak_tid() == Wdata_dict_snak_tid.Tid_somevalue		// somevalue has no val_tid; not sure why; see Q17 and prop 138
+							|| claim.Snak_tid() == Wdata_dict_snak_tid.Tid_novalue) {}	// novalue has no val_tid; see q30 and official language
 						else
 							throw Err_.unhandled(val_tid);
 						break;

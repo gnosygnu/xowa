@@ -80,12 +80,12 @@ class Redlink_wkr {
 		Db_rdr rdr = Db_rdr_.Null;
 		int cur_page_id = -1;
 		while (rdr.Move_next()) {
-			int lnki_page_id			= rdr.Read_int(1);
+			int lnki_page_id			= rdr.Read_int(0);
 			if (lnki_page_id != cur_page_id) {
 				Save(cur_page_id, bfr.XtoAryAndClear());
 				cur_page_id = lnki_page_id;
 			}
-			int html_uid			= rdr.Read_int(2);
+			int html_uid			= rdr.Read_int(1);
 			bfr.Add_int_variable(html_uid).Add_byte_pipe();
 		}
 		Save(cur_page_id, bfr.XtoAryAndClear());;
@@ -98,9 +98,9 @@ class Redlink_wkr {
 		Db_rdr rdr = Db_rdr_.Null;
 		Db_stmt stmt = Db_stmt_.Null;
 		while (rdr.Move_next()) {
-			int lnki_id				= rdr.Read_int(1);
-			int lnki_page_id		= rdr.Read_int(2);
-			byte[] page_ids			= rdr.Read_bry(3);
+			int lnki_id				= rdr.Read_int(0);
+			int lnki_page_id		= rdr.Read_int(1);
+			byte[] page_ids			= rdr.Read_bry(2);
 			Save_rl_html(stmt, lnki_id, lnki_page_id, bry_rdr.Src_(page_ids));
 		}
 	}

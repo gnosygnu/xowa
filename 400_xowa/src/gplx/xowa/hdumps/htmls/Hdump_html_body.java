@@ -18,35 +18,30 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.hdumps.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
 import gplx.core.brys.*; import gplx.core.btries.*; import gplx.html.*; import gplx.xowa.html.*; import gplx.xowa.files.*;
 import gplx.xowa.apps.fsys.*; import gplx.xowa.hdumps.core.*; import gplx.xowa.html.lnkis.*; import gplx.xowa.xtns.gallery.*;	
-public class Hdump_html_body implements Bry_fmtr_arg {
-	private Bry_rdr bry_rdr = new Bry_rdr();
-	private Xof_url_bldr url_bldr = Xof_url_bldr.new_v2_();
-	private Xow_wiki wiki; private Hdump_page hpg;
-	private byte[] root_remote, root_local;
-	private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_._; private byte[] root_dir, file_dir, hiero_img_dir; private Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
-	private Xoh_cfg_file cfg_file;
-	public void Init_by_app(Xoa_app app) {
-		this.usr_dlg = app.Usr_dlg();
-		this.root_dir = app.Fsys_mgr().Root_dir().To_http_file_bry();
-		this.file_dir = app.Fsys_mgr().File_dir().To_http_file_bry();
-		this.hiero_img_dir = gplx.xowa.xtns.hieros.Hiero_xtn_mgr.Hiero_root_dir(app).GenSubDir("img").To_http_file_bry();
-		cfg_file = new Xoh_cfg_file(app.Encoder_mgr().Fsys(), app.Fsys_mgr().Bin_xowa_dir());
+public class Hdump_html_body {
+	private Bry_bfr tmp_bfr = Bry_bfr.reset_(255); private Bry_rdr bry_rdr = new Bry_rdr(); private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_._;
+	private Hdump_page hpg; private Xoh_cfg_file cfg_file; private Xof_url_bldr url_bldr = Xof_url_bldr.new_v2_(); private Xoh_file_html_fmtr__base html_fmtr;
+	private byte[] root_dir, file_dir, file_dir_comm, file_dir_wiki, hiero_img_dir;
+	public Hdump_html_body Init_by_app(Gfo_usr_dlg usr_dlg, Xoa_fsys_mgr fsys_mgr, Url_encoder fsys_encoder) {
+		this.usr_dlg = usr_dlg;
+		this.root_dir = fsys_mgr.Root_dir().To_http_file_bry();
+		this.file_dir = fsys_mgr.File_dir().To_http_file_bry();
+		this.hiero_img_dir = gplx.xowa.xtns.hieros.Hiero_xtn_mgr.Hiero_root_dir(fsys_mgr).GenSubDir("img").To_http_file_bry();
+		this.cfg_file = new Xoh_cfg_file(fsys_encoder, fsys_mgr.Bin_xowa_dir());
+		this.html_fmtr = Xoh_file_html_fmtr__hdump.Base;
+		return this;
 	}
-	public void Init_by_page(Xow_wiki wiki, Hdump_page hpg) {
-		this.wiki = wiki; this.hpg = hpg;
-		root_remote = tmp_bfr.Add(file_dir).Add(Xow_wiki_.Domain_commons_bry).Add_byte_slash().XtoAryAndClear();
-		root_local  = tmp_bfr.Add(file_dir).Add(wiki.Domain_bry()).Add_byte_slash().XtoAryAndClear();
+	public Hdump_html_body Init_by_page(byte[] domain_bry, Hdump_page hpg) {
+		this.hpg = hpg;
+		file_dir_comm = tmp_bfr.Add(file_dir).Add(Xow_wiki_.Domain_commons_bry).Add_byte_slash().XtoAryAndClear();
+		file_dir_wiki  = tmp_bfr.Add(file_dir).Add(domain_bry).Add_byte_slash().XtoAryAndClear();
+		return this;
 	}
-	public void Init_by_drd(Url_encoder fsys_encoder, Xoa_fsys_mgr fsys_mgr) {
-		cfg_file = new Xoh_cfg_file(fsys_encoder, fsys_mgr.Bin_xowa_dir());
-	}
-	public void XferAry(Bry_bfr bfr, int idx) {
+	public void Write(Bry_bfr bfr) {
 		byte[] src = hpg.Page_body(); int len = src.length;
 		Hdump_data_img__base[] imgs = hpg.Img_itms(); int imgs_len = hpg.Img_itms().length;
 		bry_rdr.Src_(src);
 		int pos = 0; int rng_bgn = -1;
-		Xow_html_mgr html_mgr = wiki.Html_mgr();
-		Xoh_file_html_fmtr__base html_fmtr = html_mgr.Html_wtr().Lnki_wtr().File_wtr().File_wtr().Html_fmtr();
 		while (pos < len) {
 			byte b = src[pos];
 			Object o = trie.Match_bgn_w_byte(b, src, pos, len);
@@ -66,15 +61,6 @@ public class Hdump_html_body implements Bry_fmtr_arg {
 		}
 		if (rng_bgn != -1) bfr.Add_mid(src, rng_bgn, len);
 	}
-	private int Write_redlink(Bry_bfr bfr, Hdump_page hpg, int uid, int rv) {
-		int[] redlink_uids = hpg.Redlink_uids(); if (redlink_uids == null) return rv;
-		int redlink_uid_max = redlink_uids.length;
-		if (uid < redlink_uid_max && redlink_uids[uid] == 1)
-			bfr.Add(Redlink_cls_new);
-		else
-			bfr.Del_by_1();
-		return rv;
-	}	private static final byte[] Redlink_cls_new = Bry_.new_ascii_("class='new'");
 	private int Write_data(Bry_bfr bfr, Xoh_file_html_fmtr__base fmtr, Hdump_page hpg, byte[] src, Hdump_data_img__base[] imgs, int imgs_len, int uid_bgn, Hdump_html_fmtr_itm itm) {
 		bry_rdr.Pos_(uid_bgn);
 		int uid = itm.Subst_end_byte() == Byte_ascii.Nil ? -1 : bry_rdr.Read_int_to(itm.Subst_end_byte());
@@ -132,7 +118,7 @@ public class Hdump_html_body implements Bry_fmtr_arg {
 				return rv;
 			}
 		}
-		url_bldr.Init_by_root(img.File_repo_id() == Xof_repo_itm.Repo_remote ? root_remote : root_local, Byte_ascii.Slash, false, false, 2);
+		url_bldr.Init_by_root(img.File_repo_id() == Xof_repo_itm.Repo_remote ? file_dir_comm : file_dir_wiki, Byte_ascii.Slash, false, false, 2);
 		url_bldr.Init_by_itm(img.File_is_orig() ? Xof_repo_itm.Mode_orig : Xof_repo_itm.Mode_thumb, img.Lnki_ttl(), Xof_xfer_itm_.Md5_(img.Lnki_ttl()), Xof_ext_.new_by_id_(img.File_ext_id()), img.File_w(), img.File_time(), img.File_page());
 		byte[] img_src = url_bldr.Xto_bry(); 
 		if (tid == Hdump_html_consts.Tid_img) {
@@ -140,6 +126,15 @@ public class Hdump_html_body implements Bry_fmtr_arg {
 		}
 		return rv;
 	}
+	private int Write_redlink(Bry_bfr bfr, Hdump_page hpg, int uid, int rv) {
+		int[] redlink_uids = hpg.Redlink_uids(); if (redlink_uids == null) return rv;
+		int redlink_uid_max = redlink_uids.length;
+		if (uid < redlink_uid_max && redlink_uids[uid] == 1)
+			bfr.Add(Redlink_cls_new);
+		else
+			bfr.Del_by_1();
+		return rv;
+	}	private static final byte[] Redlink_cls_new = Bry_.new_ascii_("class='new'");
 	public static final Bry_fmtr fmtr_img = Bry_fmtr.new_("src='~{src}' width='~{w}' height='~{h}'", "src", "w", "h");
 	private static final Btrie_slim_mgr trie = Hdump_html_consts.trie_();
 }

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
 public class Db_provider {
-	@gplx.Internal protected Db_provider(Db_engine engine) {
+	public Db_provider(Db_engine engine) {
 		this.engine = engine;
 		this.txn_mgr = new Db_txn_mgr_base(engine);
 	}

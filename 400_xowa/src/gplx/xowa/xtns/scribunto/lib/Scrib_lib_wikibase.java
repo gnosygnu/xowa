@@ -16,8 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.lib; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import gplx.xowa.xtns.wdatas.*;
-import gplx.json.*;
+import gplx.json.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.xtns.wdatas.parsers.*;	
 public class Scrib_lib_wikibase implements Scrib_lib {
 	public Scrib_lib_wikibase(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
@@ -47,11 +46,10 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 		boolean base_0 = args.Pull_bool(1);
 		Xow_wiki wiki = core.Wiki();
 		Wdata_wiki_mgr wdata_mgr = wiki.App().Wiki_mgr().Wdata_mgr();
-		Wdata_doc page_doc = wdata_mgr.Pages_get_by_ttl_name(ttl_bry); 
-		if (page_doc == null) {Wdata_wiki_mgr.Log_missing_qid(core.Ctx(), ttl_bry); return rslt.Init_ary_empty();}
-		if (parser == null) parser = new Wdata_doc_parser(wiki.App().Usr_dlg());
-		return rslt.Init_obj(Scrib_lib_wikibase_srl.Srl(parser, page_doc, true, base_0));
-	}	private Wdata_doc_parser parser;
+		Wdata_doc wdoc = wdata_mgr.Pages_get_by_ttl_name(ttl_bry); 
+		if (wdoc == null) {Wdata_wiki_mgr.Log_missing_qid(core.Ctx(), ttl_bry); return rslt.Init_ary_empty();}
+		return rslt.Init_obj(Scrib_lib_wikibase_srl.Srl(wdoc, true, base_0));
+	}
 	public boolean GetEntityId(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] ttl_bry = args.Pull_bry(0);
 		Xow_wiki wiki = core.Wiki();

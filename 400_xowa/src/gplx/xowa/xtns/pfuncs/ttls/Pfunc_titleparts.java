@@ -23,7 +23,7 @@ public class Pfunc_titleparts extends Pf_func_base {
 		// get argx
 		int args_len = self.Args_len();
 		byte[] argx = Eval_argx(ctx, src, caller, self); if (argx == null) return; // no argx; return empty
-		Xoa_ttl argx_as_ttl = Xoa_ttl.new_(ctx.Wiki(), ctx.App().Msg_log_null(), argx, argx, 0, argx.length); // transform to title in order to upper first, replace _, etc..
+		Xoa_ttl argx_as_ttl = Xoa_ttl.new_(ctx.Wiki(), ctx.App().Msg_log_null(), argx, 0, argx.length); // transform to title in order to upper first, replace _, etc..
 		if (argx_as_ttl == null)	{bb.Add(argx); return;}	// NOTE: argx_as_ttl will be null if invalid, such as [[a|b]]; PAGE:en.w:owl and {{taxobox/showtaxon|Dinosauria}}
 		else						argx = argx_as_ttl.Full_txt();
 

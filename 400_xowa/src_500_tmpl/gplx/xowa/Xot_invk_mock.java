@@ -18,7 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.xowa.xtns.scribunto.*;
 public class Xot_invk_mock implements Xot_invk {
-	public Xot_invk_mock(byte defn_tid, int idx_adj) {this.defn_tid = defn_tid; this.idx_adj = idx_adj;} private int idx_adj; // SEE NOTE_1:
+	Xot_invk_mock(byte defn_tid, int idx_adj, byte[] frame_ttl) {
+		this.defn_tid = defn_tid; this.idx_adj = idx_adj; this.frame_ttl = frame_ttl;
+	}	private int idx_adj; // SEE NOTE_1:
 	public int Src_bgn() {return -1;}
 	public int Src_end() {return -1;}
 	public byte Defn_tid() {return defn_tid;} private byte defn_tid = Xot_defn_.Tid_null;
@@ -54,25 +56,11 @@ public class Xot_invk_mock implements Xot_invk {
 		return Args_get_by_key(src, Bry_.XtoStrBytesByInt(idx + 1, 1));
 	}
 	public Arg_nde_tkn Args_get_by_key(byte[] src, byte[] key) {return (Arg_nde_tkn)args.Fetch(key);}
-	public static Xot_invk_mock new_(byte defn_tid, KeyVal... args)	{return new_(defn_tid, 1, args);}
-	public static Xot_invk_mock new_(KeyVal... args)					{return new_(Xot_defn_.Tid_null, 1, args);}
-	public static Xot_invk_mock test_(KeyVal... args)					{return new_(Xot_defn_.Tid_null, 0, args);}
-//		public static Xot_invk_mock new_(byte defn_tid, int idx_adj, params KeyVal[] args) {
-//			Xot_invk_mock rv = new Xot_invk_mock(defn_tid, idx_adj);
-//			int len = args.length;
-//			for (int i = 0; i < len; i++) {
-//				KeyVal arg = args[i];
-//				Object arg_key_obj = arg.Key_as_obj();
-//				String arg_key = arg.Key();
-//				boolean arg_key_is_int = ClassAdp_.Eq_typeSafe(arg_key_obj, Int_.ClassOf);
-//				byte[] arg_key_bry = Bry_.new_utf8_(arg_key);
-////				if (!rv.args.Has(arg_key_bry))	// ignore duplicates; EX:{{Template1|key1=a|key2=b|key1=c}}
-//				rv.args.AddReplace(arg_key_bry, new Arg_nde_tkn_mock(arg_key_is_int, arg_key, arg.Val_to_str_or_empty()));
-//			}
-//			return rv;
-//		}
-	public static Xot_invk_mock new_(byte defn_tid, int idx_adj, KeyVal... args) {
-		Xot_invk_mock rv = new Xot_invk_mock(defn_tid, idx_adj);
+	public static Xot_invk_mock new_(byte defn_tid, byte[] frame_ttl, KeyVal... args)		{return new_(defn_tid, 1, frame_ttl, args);}
+	public static Xot_invk_mock new_(byte[] frame_ttl, KeyVal... args)					{return new_(Xot_defn_.Tid_null, 1, frame_ttl, args);}
+	public static Xot_invk_mock test_(byte[] frame_ttl, KeyVal... args)					{return new_(Xot_defn_.Tid_null, 0, frame_ttl, args);}
+	public static Xot_invk_mock new_(byte defn_tid, int idx_adj, byte[] frame_ttl, KeyVal... args) {
+		Xot_invk_mock rv = new Xot_invk_mock(defn_tid, idx_adj, frame_ttl);
 		int len = args.length;
 		for (int i = 0; i < len; i++) {
 			KeyVal kv = args[i];
@@ -94,7 +82,7 @@ public class Xot_invk_mock implements Xot_invk {
 		}
 		return rv;
 	}
-	public static final Xot_invk_mock Null = new Xot_invk_mock(Xot_defn_.Tid_null, 1);
+	public static final Xot_invk_mock Null = new Xot_invk_mock(Xot_defn_.Tid_null, 1, Bry_.Empty);
 }
 /*
 NOTE_1: Xot_invk_mock is being used as a container for two functions

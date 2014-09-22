@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 public class Xoa_test_ {
-	public static boolean Db_skip() {return false;}
+	public static boolean Db_skip() {return Bool_.N;}
 	public static boolean Fsdb_is_mem = false;
 	public static Io_url Url_root()			{return Io_url_.Usr().GenSubDir_nest("xowa", "dev", "tst", "400_xowa");}
 	public static Io_url Url_wiki_enwiki()	{return Url_root().GenSubDir_nest("root", "wiki", "en.wikipedia.org");}

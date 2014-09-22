@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 public class Xow_xwiki_mgr implements GfoInvkAble {
 	private Xow_xwiki_mgr_srl srl;
+	public Xow_xwiki_mgr() {}	// FIXME: current placeholder for viewer
 	public Xow_xwiki_mgr(Xow_wiki wiki) {this.wiki = wiki; srl = new Xow_xwiki_mgr_srl(this);} 
 	public Xow_wiki Wiki() {return wiki;} private Xow_wiki wiki;
 	public Xow_lang_mgr Lang_mgr() {return lang_mgr;} private Xow_lang_mgr lang_mgr = Xow_lang_mgr.dflt_();
@@ -26,20 +27,21 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 	public Xow_xwiki_itm Get_at(int i)								{return (Xow_xwiki_itm)list.FetchAt(i);}
 	public Xow_xwiki_itm Get_by_key(byte[] key)						{return (Xow_xwiki_itm)hash.Get_by_bry(key);}
 	public Xow_xwiki_itm Get_by_mid(byte[] src, int bgn, int end)	{return (Xow_xwiki_itm)hash.Get_by_mid(src, bgn, end);}
-	public void Add_full(String alias, String domain) {Add_full(Bry_.new_ascii_(alias), Bry_.new_ascii_(domain), null);}
-	public void Add_full(byte[] alias, byte[] domain) {Add_full(alias, domain, null);}
-	public void Add_full(byte[] alias, byte[] domain, byte[] fmt) {
+	public Xow_xwiki_itm Add_full(String alias, String domain)		{return Add_full(Bry_.new_ascii_(alias), Bry_.new_ascii_(domain), null);}
+	public Xow_xwiki_itm Add_full(byte[] alias, byte[] domain)		{return Add_full(alias, domain, null);}
+	public Xow_xwiki_itm Add_full(byte[] alias, byte[] domain, byte[] fmt) {
 		byte wiki_tid = Byte_.Zero;
 		int lang_tid = -1;
 		Xow_wiki_domain wiki_type = Xow_wiki_domain_.parse_by_domain(domain);
 		wiki_tid = wiki_type.Tid();
 		if (Bry_.Len_gt_0(wiki_type.Lang())) {	// domain has lang (EX: "en.")
 			Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key(wiki_type.Lang());
-			if (lang_itm == null) return;	// unknown lang: do not add to wiki collection; EX: en1.wikipedia.org
+			if (lang_itm == null) return null;	// unknown lang: do not add to wiki collection; EX: en1.wikipedia.org
 			lang_tid = lang_itm.Id();
 		}
 		Xow_xwiki_itm itm = new Xow_xwiki_itm(alias, fmt, wiki_tid, lang_tid, domain);
 		Add_itm(itm, null);
+		return itm;
 	}
 	public void Sort_by_key() {
 		list.Sort();

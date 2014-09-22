@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.wikis.*; import gplx.xowa.html.modules.*;
+import gplx.xowa.wikis.*; import gplx.xowa.html.modules.*; import gplx.xowa.apps.fsys.*;
 public class Hiero_xtn_mgr extends Xox_mgr_base implements GfoInvkAble {
 	@Override public boolean Enabled_default() {return true;}
 	@Override public byte[] Xtn_key() {return Xtn_key_static;} public static final byte[] Xtn_key_static = Bry_.new_ascii_("hiero");
@@ -28,7 +28,7 @@ public class Hiero_xtn_mgr extends Xox_mgr_base implements GfoInvkAble {
 		if (xtn_init_done) return;
 		if (!Enabled()) return;
 		Xoa_app app = wiki.App();
-		Io_url ext_root_dir = Hiero_root_dir(app);
+		Io_url ext_root_dir = Hiero_root_dir(app.Fsys_mgr());
 		Img_src_dir = Bry_.new_utf8_(ext_root_dir.GenSubDir("img").To_http_file_str());
 		app.Gfs_mgr().Run_url_for(this, ext_root_dir.GenSubFil_nest("data", "tables.gfs"));
 		html_wtr = new Hiero_html_mgr(this);
@@ -52,5 +52,5 @@ public class Hiero_xtn_mgr extends Xox_mgr_base implements GfoInvkAble {
 		else	return super.Invk(ctx, ikey, k, m);
 	}
 	public static final String Invk_prefabs = "prefabs", Invk_files = "files", Invk_phonemes = "phonemes";
-	public static Io_url Hiero_root_dir(Xoa_app app) {return app.Fsys_mgr().Bin_xtns_dir().GenSubDir("Wikihiero");}
+	public static Io_url Hiero_root_dir(Xoa_fsys_mgr fsys_mgr) {return fsys_mgr.Bin_xtns_dir().GenSubDir("Wikihiero");}
 }

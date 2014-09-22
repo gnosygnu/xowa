@@ -18,7 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs; import gplx.*;
 public class Db_engine_regy {
 	private final HashAdp hash = HashAdp_.new_();
-	Db_engine_regy() {
+	public Db_engine_regy() {}
+	Db_engine_regy(int dflt) {
 		this.Add(Db_engine_null._)
 			.Add(TdbEngine._)
 			.Add(Mysql_engine._)
@@ -28,5 +29,5 @@ public class Db_engine_regy {
 	}
 	public Db_engine_regy	Add(Db_engine engine) {hash.Add(engine.Key(), engine); return this;}
 	public Db_engine		Get(String key) {return (Db_engine)hash.FetchOrFail(key);}
-	public static final Db_engine_regy _ = new Db_engine_regy();
+	public static final Db_engine_regy _ = new Db_engine_regy(1);
 }

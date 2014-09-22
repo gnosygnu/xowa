@@ -40,16 +40,17 @@ public class Scrib_lib_title implements Scrib_lib {
 			case Proc_fileExists:						return FileExists(args, rslt);
 			case Proc_getCurrentTitle:					return GetCurrentTitle(args, rslt);
 			case Proc_protectionLevels:					return ProtectionLevels(args, rslt);
+			case Proc_cascadingProtection:				return CascadingProtection(args, rslt);
 			default: throw Err_.unhandled(key);
 		}
 	}
-	private static final int Proc_newTitle = 0, Proc_makeTitle = 1, Proc_getUrl = 2, Proc_getContent = 3, Proc_fileExists = 4, Proc_getCurrentTitle = 5, Proc_protectionLevels = 6;
+	private static final int Proc_newTitle = 0, Proc_makeTitle = 1, Proc_getUrl = 2, Proc_getContent = 3, Proc_fileExists = 4, Proc_getCurrentTitle = 5, Proc_protectionLevels = 6, Proc_cascadingProtection = 7;
 	public static final String 
 	  Invk_newTitle = "newTitle", Invk_makeTitle = "makeTitle"
 	, Invk_getUrl = "getUrl", Invk_getContent = "getContent", Invk_fileExists = "fileExists", Invk_getCurrentTitle = "getCurrentTitle"
-	, Invk_protectionLevels = "protectionLevels"
+	, Invk_protectionLevels = "protectionLevels", Invk_cascadingProtection = "cascadingProtection"
 	;
-	private static final String[] Proc_names = String_.Ary(Invk_newTitle, Invk_makeTitle, Invk_getUrl, Invk_getContent, Invk_fileExists, Invk_getCurrentTitle, Invk_protectionLevels);
+	private static final String[] Proc_names = String_.Ary(Invk_newTitle, Invk_makeTitle, Invk_getUrl, Invk_getContent, Invk_fileExists, Invk_getCurrentTitle, Invk_protectionLevels, Invk_cascadingProtection);
 	public boolean NewTitle(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] ttl_bry = args.Pull_bry(0);
 		Object ns_obj = args.Cast_obj_or_null(1);
@@ -156,6 +157,13 @@ public class Scrib_lib_title implements Scrib_lib {
 		// Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry); if (ttl == null) return rslt.Init_obj(null);
 		return rslt.Init_many_objs("");	// NOTE: always return no protection; protectionLevels are stored in different table which is currently not mirrored; DATE:2014-04-09
 	}
+	public boolean CascadingProtection(Scrib_proc_args args, Scrib_proc_rslt rslt) {
+		byte[] ttl_bry = args.Pull_bry(0);
+		Xow_wiki wiki = core.Wiki();
+		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry); if (ttl == null) return rslt.Init_obj(null);
+		return rslt.Init_obj(CascadingProtection_rv);
+	}
+	public static final KeyVal[] CascadingProtection_rv = KeyVal_.Ary(KeyVal_.new_("sources", Bool_.N), KeyVal_.new_("restrictions", KeyVal_.Ary_empty));
 	private KeyVal[] Xto_kv_ary(Xoa_ttl ttl) {
 		Xow_ns ns = ttl.Ns();
 		boolean ttl_exists = core.Wiki().Db_mgr().Load_mgr().Load_by_ttl(tmp_db_page, ttl.Ns(), ttl.Page_db());

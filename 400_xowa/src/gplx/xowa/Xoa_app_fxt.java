@@ -45,7 +45,7 @@ public class Xoa_app_fxt {
 	}
 	public static void Init_gui(Xoa_app app) {
 		app.Gui_mgr().Browser_win().Init_by_kit(gplx.gfui.Mem_kit._);
-		app.Gui_mgr().Browser_win().Tab_mgr().Tabs_new_init();
+		app.Gui_mgr().Browser_win().Tab_mgr().Tabs_new_init(Xoa_page.Empty);
 	}
 	public static Xob_bldr bldr_(Xoa_app app) {
 		Xob_bldr rv = new Xob_bldr(app);

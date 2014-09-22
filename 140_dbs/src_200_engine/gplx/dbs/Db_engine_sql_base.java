@@ -19,6 +19,7 @@ package gplx.dbs; import gplx.*;
 import java.sql.*; 
 abstract class Db_engine_sql_base implements Db_engine {
 	public abstract String Key();
+	public abstract String Conn_info_tid();
 	public Db_conn_info Conn_info() {return conn_info;} protected Db_conn_info conn_info;
 	@gplx.Virtual public void Txn_bgn() {Execute(Db_qry_sql.xtn_("BEGIN TRANSACTION;"));}
 	@gplx.Virtual public void Txn_end() {Execute(Db_qry_sql.xtn_("COMMIT TRANSACTION;"));}

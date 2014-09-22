@@ -52,13 +52,21 @@ public class Pfunc_ifexist_mgr {
 	}
 	private boolean Find_ttl_for_media_ns(Pfunc_ifexist_itm itm, Xow_wiki wiki, Xow_ns ns, byte[] ttl_bry) {
 		Xow_ns file_ns = wiki.Ns_mgr().Ns_file();
-		boolean rv = Find_ttl_in_db(itm, wiki, file_ns, ttl_bry); if (rv) return true;		// rarely true, but check first anyway
+		boolean rv = Find_ttl_in_db(itm, wiki, file_ns, ttl_bry); if (rv) return true;		// rarely true, but check local wiki's [[File:]] table anyway
 		Xow_wiki commons_wiki = wiki.App().Wiki_mgr().Wiki_commons();
-		if (commons_wiki == null)
-			return wiki.File_mgr().Exists(ttl_bry);										// user may not have commons_wiki; try to check files
-		else {
+		boolean env_is_testing = Env_.Mode_testing();
+		if (	commons_wiki != null														// null check
+			&&	(	commons_wiki.Init_assert().Db_mgr().Tid() == gplx.xowa.dbs.Xodb_mgr_sql.Tid_sql	// make sure tid=sql; tid=txt automatically created for online images; DATE:2014-09-21
+				||	env_is_testing
+				)
+			) {
 			file_ns = commons_wiki.Ns_mgr().Ns_file();
-			return Find_ttl_in_db(itm, commons_wiki, file_ns, ttl_bry);					// accurate test of whether or not Media file exists
+			return Find_ttl_in_db(itm, commons_wiki, file_ns, ttl_bry);						// accurate test using page table in commons wiki (provided commons is up to date)
+		}
+		else {
+			if (!env_is_testing)
+				wiki.File_mgr().Fsdb_mgr().Init_by_wiki__add_bin_wkrs(wiki);				// NOTE: must init Fsdb_mgr (else provider == null), and with bin_wkrs (else no images will ever load); DATE:2014-09-21
+			return wiki.File_mgr().Exists(ttl_bry);											// less-accurate test using either (1) orig_wiki table in local wiki (v2) or (2) meta_db_mgr (v1)
 		}
 	}
  	}

@@ -63,6 +63,7 @@ public class Http_server_mgr implements GfoInvkAble {
 	}
 	public Xoa_app App() {return app;} private Xoa_app app;
 	public int Port() {return port;} public Http_server_mgr Port_(int v) {port = v; return this;} private int port = 8080;
+	public String Home() {return home;} public void Home_(String v) {home = v;} private String home = "home/wiki/Main_Page";
 	private boolean init_gui_done = false;
 	private void Init_gui() {	// create a shim gui to automatically handle default XOWA gui JS calls
 		if (init_gui_done) return;
@@ -78,7 +79,7 @@ public class Http_server_mgr implements GfoInvkAble {
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, page_ttl);											// get the ttl
 		Xoa_page page = wiki.GetPageByTtl(page_url, ttl);										// get page and parse it
 		if (app.Gui_mgr().Browser_win().Active_tab() == null)									// no active tab
-			app.Gui_mgr().Browser_win().Tab_mgr().Tabs_new_init();								// create at least one active tab; DATE:2014-07-30
+			app.Gui_mgr().Browser_win().Tab_mgr().Tabs_new_init(page);							// create at least one active tab; DATE:2014-07-30
 		app.Gui_mgr().Browser_win().Active_page_(page);											// HACK: init gui_mgr's page for output (which server ordinarily doesn't need)
 		if (page.Missing()) {																	// if page does not exist, replace with message; else null_ref error; DATE:2014-03-08
 			page.Data_raw_(Bry_.new_ascii_("'''Page not found.'''"));
@@ -218,8 +219,7 @@ class HttpRequest implements Runnable{
 			
 			if(!req.contains("%file%")){
 				if(req.equals("/")){
-					req+="home/wiki/Main_Page"; //Forward to main page
-					/*Maybe add here a address from a config file, so that a custom main page could be defined*/
+					req += app.Http_server().Home();
 				}
 				if(req.endsWith("wiki/")) req+="Main_Page";
 				if(req.endsWith("wiki")) req+="/Main_Page";

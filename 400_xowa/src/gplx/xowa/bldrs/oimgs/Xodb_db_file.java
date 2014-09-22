@@ -18,8 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.oimgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.dbs.tbls.*;
 public class Xodb_db_file {
-	Xodb_db_file(String name, Io_url url, Db_provider provider, boolean created) {this.name = name; this.url = url; this.provider = provider; this.created = created;}
-	public String Name() {return name;} private String name;
+	Xodb_db_file(Io_url url, Db_provider provider, boolean created) {this.url = url; this.provider = provider; this.created = created;}
 	public Io_url Url() {return url;} private Io_url url;
 	public Db_provider Provider() {return provider;} private Db_provider provider;
 	public boolean Created() {return created;} public void Created_clear() {created = false;} private boolean created;
@@ -37,7 +36,7 @@ public class Xodb_db_file {
 			Xodb_xowa_cfg_tbl.Create_table(provider);
 			Xodb_xowa_cfg_tbl.Create_index(provider);
 		}
-		return new Xodb_db_file(name, url, provider, created.Val());
+		return new Xodb_db_file(url, provider, created.Val());
 	}
 	public static final String 
 	  Name__wiki_image = "xowa.wiki.image.sqlite3", Name__wiki_redirect = "xowa.wiki.redirect.sqlite3"

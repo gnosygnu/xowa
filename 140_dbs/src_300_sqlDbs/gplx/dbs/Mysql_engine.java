@@ -20,6 +20,7 @@ import gplx.stores.*;
 import java.sql.*; 
 class Mysql_engine extends Db_engine_sql_base {
 	@Override public String Key() {return Db_conn_info__mysql.Key_const;}
+	@Override public String Conn_info_tid() {return this.Key();}
 	@Override public Sql_cmd_wtr SqlWtr() {return Sql_cmd_wtr_.BackslashSensitive;}
 	@Override public Db_engine Make_new(Db_conn_info connectInfo) {
 		Mysql_engine rv = new Mysql_engine();

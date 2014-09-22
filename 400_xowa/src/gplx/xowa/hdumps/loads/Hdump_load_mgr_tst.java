@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps.loads; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
-import org.junit.*; import gplx.xowa.files.*; import gplx.xowa.hdumps.dbs.*; import gplx.xowa.hdumps.core.*; import gplx.xowa.hdumps.saves.*; import gplx.xowa.hdumps.pages.*;
+import org.junit.*; import gplx.xowa.files.*; import gplx.xowa.hdumps.dbs.*; import gplx.xowa.hdumps.core.*; import gplx.xowa.hdumps.saves.*; import gplx.xowa.hdumps.pages.*; import gplx.xowa.dbs.*;
 public class Hdump_load_mgr_tst {
 	@Before public void init() {fxt.Clear();} private Hdump_load_mgr_fxt fxt = new Hdump_load_mgr_fxt();
 	@Test  public void Body() {
@@ -50,7 +50,7 @@ class Hdump_load_mgr_fxt {
 	private ListAdp expd_imgs = ListAdp_.new_();
 	private int page_id = 0; private Xoa_url page_url;
 	public void Clear() {
-		load_mgr = new Hdump_load_mgr(null);
+		load_mgr = new Hdump_load_mgr();
 		load_mgr.Zip_tid_(gplx.ios.Io_stream_.Tid_file);
 		init_rows.Clear();
 		expd_body = expd_display_ttl = expd_content_sub = expd_sidebar_div = null;

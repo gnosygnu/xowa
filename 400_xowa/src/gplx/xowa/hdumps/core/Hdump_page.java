@@ -29,7 +29,7 @@ public class Hdump_page {
 	public int[]			Redlink_uids() {return redlink_uids;} public void Redlink_uids_(int[] v) {redlink_uids = v;} private int[] redlink_uids;
 	public Hdump_data_img__base[]	Img_itms() {return img_itms;} public void Img_itms_(Hdump_data_img__base[] v) {this.img_itms = v;} private Hdump_data_img__base[] img_itms;
 	public OrderedHash		Gly_itms() {return gly_itms;} private OrderedHash gly_itms = OrderedHash_.new_();
-	public void Init(int page_id, Xoa_url page_url) {
+	public Hdump_page Init(int page_id, Xoa_url page_url) {
 		this.page_id = page_id;
 		this.page_url = page_url;
 		content_sub = sidebar_div = Bry_.Empty;
@@ -37,5 +37,6 @@ public class Hdump_page {
 		img_itms = Hdump_data_img__base.Ary_empty;
 		module_mgr.Clear();
 		gly_itms.Clear();
+		return this;
 	}
 }

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.json.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.xtns.wdatas.*;
+import gplx.json.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.pfuncs.*;
 public class Wdata_xwiki_link_wtr implements Bry_fmtr_arg {
 	public Wdata_xwiki_link_wtr Page_(Xoa_page page) {this.page = page; return this;} private Xoa_page page;
 	public void XferAry(Bry_bfr bfr, int idx) {
@@ -36,13 +36,13 @@ public class Wdata_xwiki_link_wtr implements Bry_fmtr_arg {
 			Wdata_wiki_mgr wdata_mgr = wiki.App().Wiki_mgr().Wdata_mgr();
 			Wdata_doc doc = wdata_mgr.Pages_get(wiki, ttl); if (doc == null) return Qid_null;	// no links
 			boolean external_links_mgr_enabled = external_links_mgr.Enabled();
-			OrderedHash links = doc.Link_list();
+			OrderedHash links = doc.Sitelink_list();
 			Bry_bfr tmp_bfr = wiki.App().Utl_bry_bfr_mkr().Get_k004();
 			Xow_wiki_abrv wiki_abrv = new Xow_wiki_abrv();
 			int len = links.Count();
 			for (int i = 0; i < len; i++) {
-				Json_itm_kv kv = (Json_itm_kv)links.FetchAt(i);
-				byte[] xwiki_key = kv.Key().Data_bry();
+				Wdata_sitelink_itm sitelink = (Wdata_sitelink_itm)links.FetchAt(i);
+				byte[] xwiki_key = sitelink.Site();
 				Xow_wiki_abrv_.parse_(wiki_abrv, xwiki_key, 0, xwiki_key.length);
 				if (wiki_abrv.Domain_tid() == Xow_wiki_abrv_.Tid_null) {
 					wiki.App().Usr_dlg().Warn_many("", "", "unknown wiki in wikidata: ttl=~{0} wiki=~{1}", ttl.Page_db_as_str(), String_.new_utf8_(xwiki_key));
@@ -53,7 +53,7 @@ public class Wdata_xwiki_link_wtr implements Bry_fmtr_arg {
 				if (external_links_mgr_enabled && external_links_mgr.Langs_hide(lang_key, 0, lang_key.length)) continue;
 				tmp_bfr.Add(lang_key);
 				tmp_bfr.Add_byte(Byte_ascii.Colon);
-				tmp_bfr.Add(Wdata_doc_.Link_extract(kv));
+				tmp_bfr.Add(sitelink.Name());
 				Xoa_ttl lang_ttl = Xoa_ttl.parse_(wiki, tmp_bfr.XtoAryAndClear());
 				if (lang_ttl == null) continue;								// invalid ttl
 				Xow_xwiki_itm xwiki_itm = lang_ttl.Wik_itm();

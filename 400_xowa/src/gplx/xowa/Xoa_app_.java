@@ -17,13 +17,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.gfui.*; import gplx.xowa.users.*;
+import gplx.xowa.hdumps.*; import gplx.xowa.hdumps.core.*;
 public class Xoa_app_ {
 	public static void Run(String... args) {
 		Xoa_app_boot_mgr boot_mgr = new Xoa_app_boot_mgr();
 		boot_mgr.Run(args);
 	}
 	public static final String Name = "xowa";
-	public static final String Version = "1.9.3.1";
+	public static final String Version = "1.9.4.1";
 	public static String Build_date = "2012-12-30 00:00:00";
 	public static String Op_sys;
 	public static String User_agent = "";
@@ -34,6 +35,18 @@ public class Xoa_app_ {
 		rv.Log_wtr_(new Gfo_log_wtr_base());
 		rv.Log_wtr().Queue_enabled_(true);
 		return rv;
+	}
+	public static void Run_viewer() {
+		Io_url root_dir = Io_url_.new_dir_("J:\\gplx\\xowa\\");
+		Xoav_app app = new Xoav_app(Gfo_usr_dlg_._, root_dir, "drd");
+		app.Wiki_mgr().Load_default();
+
+		Xowv_wiki wiki = app.Wiki_mgr().Get_by_domain(Bry_.new_ascii_("simple.wikibooks.org"));
+		Hdump_page hpg = new Hdump_page();
+		wiki.Hdump_mgr().Load(hpg, Bry_.new_utf8_("Main_Page"));
+		String html = String_.new_utf8_(hpg.Page_body());
+		ConsoleAdp._.WriteLine(html);
+		ConsoleAdp._.ReadLine("");
 	}
 	public static final byte Mode_console = 0, Mode_gui = 1, Mode_http = 2;
 }	
@@ -87,6 +100,7 @@ class Xoa_app_boot_mgr {
 			,	App_cmd_arg.opt_("server_port_recv").Example_("55000").Note_("applies to --app_mode server; port where xowa server will receive messages; clients should send messages to this port")
 			,	App_cmd_arg.opt_("server_port_send").Example_("55001").Note_("applies to --app_mode server; port where xowa server will send messages; clients should listen for messages from this port")
 			,	App_cmd_arg.opt_("http_server_port").Example_("8080").Note_("applies to --app_mode http_server; port used by http_server; default is 8080")
+			,	App_cmd_arg.opt_("http_server_home").Example_("home/wiki/Main_Page").Note_("applies to --app_mode http_server; default home page for root address. EX: navigating to localhost:8080 will navigate to localhost:8080/home/wiki/Main_Page")
 			,	App_cmd_arg.sys_header_("show_license").Dflt_(true)
 			,	App_cmd_arg.sys_args_("show_args").Dflt_(true)
 			,	App_cmd_arg.sys_help_()
@@ -124,6 +138,7 @@ class Xoa_app_boot_mgr {
 			int server_port_recv = args_mgr.Args_get("server_port_recv").Val_as_int_or(55000);
 			int server_port_send = args_mgr.Args_get("server_port_send").Val_as_int_or(55001);
 			int http_server_port = args_mgr.Args_get("http_server_port").Val_as_int_or(8080);
+			String http_server_home = args_mgr.Args_get("http_server_home").Val_as_str_or("home/wiki/Main_Page");
 			Xoa_app_.Op_sys = args_mgr.Args_get("bin_dir_name").Val_as_str_or(Bin_dir_name());
 			Xoa_app_.User_agent = String_.Format("XOWA/{0} ({1}) [gnosygnu@gmail.com]", Xoa_app_.Version, Xoa_app_.Op_sys);
 			String cmd_text = args_mgr.Args_get("cmd_text").Val_as_str_or(null);
@@ -138,6 +153,7 @@ class Xoa_app_boot_mgr {
 					app.Api_root().App().Startup().Tabs().Manual_(launch_url);
 				app.Tcp_server().Rdr_port_(server_port_recv).Wtr_port_(server_port_send);
 				app.Http_server().Port_(http_server_port);
+				app.Http_server().Home_(http_server_home);
 				app.Init(); chkpoint = "init_gfs";
 			}
 			catch (Exception e) {usr_dlg.Warn_many("", "", "app init failed: ~{0} ~{1}", chkpoint, Err_.Message_gplx(e));}

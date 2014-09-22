@@ -103,19 +103,17 @@ public class Scrib_invoke_func_fxt {
 		Tfds.Eq(expd, (String)server.Log_rcvd().FetchAt(i));
 	}
 	public void Init_frame_parent(String ttl, KeyVal... ary) {
-		core.Frame_parent_(Xot_invk_mock.test_(ary));
-		core.Frame_parent().Frame_ttl_(Bry_.new_utf8_(ttl));
+		core.Frame_parent_(Xot_invk_mock.test_(Bry_.new_utf8_(ttl), ary));
 	}
 	public void Init_frame_current(KeyVal... ary) {
-		core.Frame_current_(Xot_invk_mock.test_(ary));
-		core.Frame_current().Frame_ttl_(Bry_.new_ascii_("Module:Mod_0"));
+		core.Frame_current_(Xot_invk_mock.test_(Bry_.new_ascii_("Module:Mod_0"), ary));
 	}
 	public void Clear_for_lib() {
 		fxt = new Xop_fxt();	// NOTE: don't try to cache fxt on func_fxt level; causes errors in Language_lib
 		core_fxt = new Scrib_core_fxt(fxt);
 		core = core_fxt.Core();
 		Xot_invk parent_frame = new Xot_invk_temp(true); parent_frame.Frame_tid_(Scrib_frame_.Tid_null); 
-		Xot_invk current_frame = Xot_invk_mock.test_(); current_frame.Frame_ttl_(Bry_.new_ascii_("Module:Mod_0"));
+		Xot_invk current_frame = Xot_invk_mock.test_(Bry_.new_ascii_("Module:Mod_0"));
 		core.Invoke_init(core.Wiki(), core.Ctx(), Bry_.Empty, parent_frame, current_frame);
 		core.When_page_changed(fxt.Page());
 	}

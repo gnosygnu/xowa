@@ -59,6 +59,13 @@ public class Json_itm_ary extends Json_itm_base implements Json_grp {
 		Json_grp_.Print_nl(bfr); Json_grp_.Print_indent(bfr, depth);
 		bfr.Add_byte(Byte_ascii.Brack_end).Add_byte_nl();
 	}
-	Json_itm[] subs = Json_itm_.Ary_empty;
+	public byte[][] Xto_bry_ary() {
+		if (subs_len == 0) return Bry_.Ary_empty;
+		byte[][] rv = new byte[subs_len][];
+		for (int i = 0; i < subs_len; ++i)
+			rv[i] = subs[i].Data_bry();
+		return rv;
+	}
+	private Json_itm[] subs = Json_itm_.Ary_empty;
 	public static Json_itm_ary cast_(Json_itm v) {return v == null || v.Tid() != Json_itm_.Tid_array ? null : (Json_itm_ary)v;}
 }

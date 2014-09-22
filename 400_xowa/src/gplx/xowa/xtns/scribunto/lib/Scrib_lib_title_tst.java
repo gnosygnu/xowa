@@ -75,6 +75,9 @@ public class Scrib_lib_title_tst {
 	@Test   public void ProtectionLevels() {
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_title.Invk_protectionLevels, Object_.Ary("A")									, "");
 	}
+	@Test   public void CascadingProtection() {
+		fxt.Test_scrib_proc_obj(lib, Scrib_lib_title.Invk_cascadingProtection, Object_.Ary("A")									, Scrib_lib_title.CascadingProtection_rv);
+	}
 	private static String ttl_data_(int ns_id, String ns_str, String ttl) {return ttl_data_(ns_id, ns_str, ttl, "", "", ttl);}
 	private static String ttl_data_(int ns_id, String ns_str, String ttl, String anchor) {return ttl_data_(ns_id, ns_str, ttl, anchor, "", ttl);}
 	private static String ttl_data_(int ns_id, String ns_str, String ttl, String anchor, String xwiki) {return ttl_data_(ns_id, ns_str, ttl, anchor, xwiki, ttl);}

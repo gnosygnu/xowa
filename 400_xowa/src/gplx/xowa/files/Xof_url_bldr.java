@@ -19,7 +19,7 @@ package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
 public class Xof_url_bldr {
 	private final Bry_bfr bfr = Bry_bfr.reset_(400);
 	private byte[] ttl; private byte[] md5; private Xof_ext ext; private boolean file_is_thumb; private int file_w;
-	private double time = Xof_doc_thumb.Null; private int page = Xof_doc_page.Null; private byte time_dlm = Byte_ascii.At;		
+	private double time = Xof_doc_thumb.Null; private int page = Xof_doc_page.Null; private byte time_dlm = Byte_ascii.At;
 	private byte[] root; private byte dir_spr; private boolean fsys_tid_is_wnt; private boolean wmf_dir_hive; private boolean wmf_protocol_is_file; private int md5_dir_depth; private byte[] area;
 	public Xof_url_bldr Root_(byte[] v) {root = v; return this;}
 	public Xof_url_bldr Init_by_root(byte[] root, byte dir_spr, boolean wmf_dir_hive, boolean wmf_protocol_is_file, int md5_dir_depth) {

@@ -25,13 +25,13 @@ class Db_rdr__basic implements Db_rdr {
 		try	 {return rdr.next();}	
 		catch (Exception e) {throw Err_.new_fmt_("move_next failed; check column casting error in SQL: err={0} sql={1}", Err_.Message_lang(e), sql);}
 	}
-	public byte[]		Read_bry(int i)			{try {return rdr.getBytes(i);} catch (Exception e) {throw Err_.new_("read failed: i={0} type={1} err={2}", i, Bry_.Cls_name, Err_.Message_lang(e));}} 
-	public byte[]		Read_bry_by_str(int i)	{try {return Bry_.new_utf8_(rdr.getString(i));} catch (Exception e) {throw Err_.new_("read failed: i={0} type={1} err={2}", i, String_.Cls_name, Err_.Message_lang(e));}} 
-	public String 		Read_str(int i)			{try {return rdr.getString(i);} catch (Exception e) {throw Err_.new_("read failed: i={0} type={1} err={2}", i, String_.Cls_name, Err_.Message_lang(e));}} 
-	public int 			Read_int(int i)			{try {return rdr.getInt(i);} catch (Exception e) {throw Err_.new_("read failed: i={0} type={1} err={2}", i, Int_.Cls_name, Err_.Message_lang(e));}} 
-	public long 		Read_long(int i)		{try {return rdr.getLong(i);} catch (Exception e) {throw Err_.new_("read failed: i={0} type={1} err={2}", i, Long_.Cls_name, Err_.Message_lang(e));}} 
-	public float		Read_float(int i)		{try {return rdr.getFloat(i);} catch (Exception e) {throw Err_.new_("read failed: i={0} type={1} err={2}", i, Float_.Cls_name, Err_.Message_lang(e));}} 
-	public double		Read_double(int i)		{try {return rdr.getDouble(i);} catch (Exception e) {throw Err_.new_("read failed: i={0} type={1} err={2}", i, Double_.Cls_name, Err_.Message_lang(e));}} 
-	public byte 		Read_byte(int i)		{try {return rdr.getByte(i);} catch (Exception e) {throw Err_.new_("read failed: i={0} type={1} err={2}", i, Byte_.Cls_name, Err_.Message_lang(e));}} 
+	public byte[]		Read_bry(int i)			{try {return rdr.getBytes(i + 1);} catch (Exception e) {throw Err_.new_("read failed: i={0} type={1} err={2}", i, Bry_.Cls_name, Err_.Message_lang(e));}} 
+	public byte[]		Read_bry_by_str(int i)	{try {return Bry_.new_utf8_(rdr.getString(i + 1));} catch (Exception e) {throw Err_.new_("read failed: i={0} type={1} err={2}", i, String_.Cls_name, Err_.Message_lang(e));}} 
+	public String 		Read_str(int i)			{try {return rdr.getString(i + 1);} catch (Exception e) {throw Err_.new_("read failed: i={0} type={1} err={2}", i, String_.Cls_name, Err_.Message_lang(e));}} 
+	public int 			Read_int(int i)			{try {return rdr.getInt(i + 1);} catch (Exception e) {throw Err_.new_("read failed: i={0} type={1} err={2}", i, Int_.Cls_name, Err_.Message_lang(e));}} 
+	public long 		Read_long(int i)		{try {return rdr.getLong(i + 1);} catch (Exception e) {throw Err_.new_("read failed: i={0} type={1} err={2}", i, Long_.Cls_name, Err_.Message_lang(e));}} 
+	public float		Read_float(int i)		{try {return rdr.getFloat(i + 1);} catch (Exception e) {throw Err_.new_("read failed: i={0} type={1} err={2}", i, Float_.Cls_name, Err_.Message_lang(e));}} 
+	public double		Read_double(int i)		{try {return rdr.getDouble(i + 1);} catch (Exception e) {throw Err_.new_("read failed: i={0} type={1} err={2}", i, Double_.Cls_name, Err_.Message_lang(e));}} 
+	public byte 		Read_byte(int i)		{try {return rdr.getByte(i + 1);} catch (Exception e) {throw Err_.new_("read failed: i={0} type={1} err={2}", i, Byte_.Cls_name, Err_.Message_lang(e));}} 
 	public void			Close()					{try {rdr.close();} catch (Exception e) {throw Err_.new_("close failed: err={0}", Err_.Message_lang(e));}} 
 }

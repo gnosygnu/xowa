@@ -120,22 +120,22 @@ public class Scrib_core_fxt {
 		else
 			this.Expd_server_rcvd_add("000000380000006F{[\"op\"]=\"return\",[\"nvalues\"]=1,[\"values\"]={[1]=\"" + expd + "\"}}");
 		this.Init_server_prep_add("a:2:{s:6:\"values\";a:1:{i:1;s:6:\"ignore\";}s:2:\"op\";s:6:\"return\";}");
-		core.Frame_current_(Xot_invk_mock.new_(args));
+		core.Frame_current_(Xot_invk_mock.new_(Frame_ttl_test, args));
 		core.Interpreter().ExecuteModule(9);
 		Test_server_logs();
 		return this;
 	}
 	public Scrib_core_fxt Test_GetAllExpandedArguments(KeyVal... args) {
-		core.Frame_current_(Xot_invk_mock.new_(args));
+		core.Frame_current_(Xot_invk_mock.new_(Frame_ttl_test, args));
 		core.Interpreter().ExecuteModule(9);
 		Test_server_logs();
 		return this;
 	}
 	public Scrib_core_fxt Test_Invoke(String mod_name, String mod_code, String prc_name, KeyVal... args) {
-		core.Invoke(wiki, core.Ctx(), Bry_.Empty, Xot_invk_mock.Null, Xot_invk_mock.new_(args), tmp_bfr, Bry_.new_utf8_(mod_name), Bry_.new_utf8_(mod_code), Bry_.new_utf8_(prc_name));
+		core.Invoke(wiki, core.Ctx(), Bry_.Empty, Xot_invk_mock.Null, Xot_invk_mock.new_(Frame_ttl_test, args), tmp_bfr, Bry_.new_utf8_(mod_name), Bry_.new_utf8_(mod_code), Bry_.new_utf8_(prc_name));
 		Test_server_logs();
 		return this;
-	}
+	}	private static final byte[] Frame_ttl_test = Bry_.new_ascii_("test");
 	private void Test_server_logs() {
 		if (expd_server_rcvd_list.Count() > 0) {
 			Tfds.Eq_ary_str(expd_server_rcvd_list.XtoStrAry(), server.Log_rcvd().XtoStrAry());

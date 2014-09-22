@@ -955,6 +955,15 @@ public class Bry_ {
 		}
 		return ary;
 	}
+	public static byte[] Lower_1st(byte[] ary) {
+		if (ary == null) return null;
+		int len = ary.length;
+		if (len == 0) return ary;
+		byte b = ary[0];
+		if (b > 64 && b < 91)
+			ary[0] = (byte)(b + 32);
+		return ary;
+	}
 	public static byte[] Lower_ascii(byte[] ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {

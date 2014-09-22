@@ -51,15 +51,15 @@ public class Xodb_page_tbl {
 		return false;
 	}
 	public static void Read_page__all2(Xodb_page page, Db_rdr rdr, boolean html_db_enabled) {
-		page.Id_			(rdr.Read_int(1));
-		page.Ns_id_			(rdr.Read_int(2));
-		page.Ttl_wo_ns_		(rdr.Read_bry_by_str(3));
-		page.Modified_on_	(DateAdp_.parse_fmt(rdr.Read_str(4), Page_touched_fmt));
-		page.Type_redirect_	(rdr.Read_byte(5) == 1);
-		page.Text_len_		(rdr.Read_int(6));
-		page.Db_file_idx_	(rdr.Read_int(7));
+		page.Id_			(rdr.Read_int(0));
+		page.Ns_id_			(rdr.Read_int(1));
+		page.Ttl_wo_ns_		(rdr.Read_bry_by_str(2));
+		page.Modified_on_	(DateAdp_.parse_fmt(rdr.Read_str(3), Page_touched_fmt));
+		page.Type_redirect_	(rdr.Read_byte(4) == 1);
+		page.Text_len_		(rdr.Read_int(5));
+		page.Db_file_idx_	(rdr.Read_int(6));
 		if (html_db_enabled)
-			page.Html_db_id_(rdr.Read_int(8));
+			page.Html_db_id_(rdr.Read_int(7));
 	}
 	public boolean Select_by_id(Xodb_page rv, int page_id) {
 		DataRdr rdr = DataRdr_.Null; 

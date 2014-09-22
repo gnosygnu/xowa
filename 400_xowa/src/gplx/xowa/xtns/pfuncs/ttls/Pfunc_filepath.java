@@ -25,7 +25,7 @@ public class Pfunc_filepath extends Pf_func_base {
 		byte[] val_ary = Eval_argx(ctx, src, caller, self); if (val_ary == Bry_.Empty) return;
 		Xow_wiki wiki = ctx.Wiki();
 		val_ary = Bry_.Add(Bry_file, val_ary);
-		Xoa_ttl ttl = Xoa_ttl.new_(wiki, ctx.App().Msg_log_null(), val_ary, val_ary, 0, val_ary.length);  if (ttl == null) return; // text is not valid ttl; return;
+		Xoa_ttl ttl = Xoa_ttl.new_(wiki, ctx.App().Msg_log_null(), val_ary, 0, val_ary.length);  if (ttl == null) return; // text is not valid ttl; return;
 		Xoa_page page = Load_page(wiki, ttl);
 		if (page.Missing()) return; // page not found in commons; exit;
 		byte[] ttl_bry = page.Ttl().Page_url();

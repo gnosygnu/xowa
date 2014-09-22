@@ -349,9 +349,9 @@ public class Pf_func_ {
 			case Xol_kwd_grp_.Id_lstx:							return gplx.xowa.xtns.lst.Lst_pfunc_lstx._;
 			case Xol_kwd_grp_.Id_invoke:						return new gplx.xowa.xtns.scribunto.Scrib_invoke_func();
 
-			case Xol_kwd_grp_.Id_property:						return new gplx.xowa.xtns.wdatas.Wdata_pf_property();
-			case Xol_kwd_grp_.Id_noexternallanglinks:			return new gplx.xowa.xtns.wdatas.Wdata_pf_noExternalLangLinks();
-			case Xol_kwd_grp_.Id_wbreponame:					return new gplx.xowa.xtns.wdatas.Wdata_pf_wbreponame();
+			case Xol_kwd_grp_.Id_property:						return new gplx.xowa.xtns.wdatas.pfuncs.Wdata_pf_property();
+			case Xol_kwd_grp_.Id_noexternallanglinks:			return new gplx.xowa.xtns.wdatas.pfuncs.Wdata_pf_noExternalLangLinks();
+			case Xol_kwd_grp_.Id_wbreponame:					return new gplx.xowa.xtns.wdatas.pfuncs.Wdata_pf_wbreponame();
 
 			case Xol_kwd_grp_.Id_mapSources_deg2dd:				return gplx.xowa.xtns.mapSources.Map_deg2dd_func._;
 			case Xol_kwd_grp_.Id_mapSources_dd2dms:				return gplx.xowa.xtns.mapSources.Map_dd2dms_func._;

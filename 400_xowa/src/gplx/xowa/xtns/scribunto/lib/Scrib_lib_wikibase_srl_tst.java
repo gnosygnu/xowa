@@ -17,8 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.lib; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import org.junit.*;
-import gplx.xowa.xtns.wdatas.*;
-import gplx.json.*;
+import gplx.json.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.parsers.*;	
 public class Scrib_lib_wikibase_srl_tst {
 	@Before public void init() {fxt.Clear();} private Scrib_lib_wikibase_srl_fxt fxt = new Scrib_lib_wikibase_srl_fxt();
 	@Test   public void Label() {
@@ -285,12 +284,10 @@ class Scrib_lib_wikibase_srl_fxt {
 		wdata_fxt.Init();
 		doc_bldr = wdata_fxt.page_bldr_("q2");
 		header_enabled = false;
-		parser = new Wdata_doc_parser(wdata_fxt.App().Usr_dlg());
 	}
 	public Wdata_wiki_mgr_fxt Wdata_fxt() {return wdata_fxt;} private Wdata_wiki_mgr_fxt wdata_fxt;
 	private Wdata_doc_bldr doc_bldr;
 	private boolean header_enabled;
-	private Wdata_doc_parser parser;
 	public Scrib_lib_wikibase_srl_fxt Init_header_enabled_y_() {header_enabled = true; return this;}
 	public Scrib_lib_wikibase_srl_fxt Init_label(String lang, String label) {
 		doc_bldr.Label_add(lang, label);
@@ -308,16 +305,16 @@ class Scrib_lib_wikibase_srl_fxt {
 		doc_bldr.Alias_add(lang, ary);
 		return this;
 	}
-	public Scrib_lib_wikibase_srl_fxt Init_prop(Wdata_prop_itm_core prop) {doc_bldr.Props_add(prop); return this;}
+	public Scrib_lib_wikibase_srl_fxt Init_prop(Wdata_claim_itm_core prop) {doc_bldr.Props_add(prop); return this;}
 	public Scrib_lib_wikibase_srl_fxt Test(String... expd) {return Test(false, expd);}
 	public Scrib_lib_wikibase_srl_fxt Test(boolean base0, String... expd) {
-		KeyVal[] actl = Scrib_lib_wikibase_srl.Srl(parser, doc_bldr.Xto_page_doc(), header_enabled, base0);
+		KeyVal[] actl = Scrib_lib_wikibase_srl.Srl(doc_bldr.Xto_page_doc(), header_enabled, base0);
 		Tfds.Eq_ary_str(expd, String_.SplitLines_nl(Xto_str(actl)));
 		return this;
 	}
 	public Scrib_lib_wikibase_srl_fxt Test(Wdata_doc wdoc, String... expd) {return Test(false, wdoc, expd);}
 	public Scrib_lib_wikibase_srl_fxt Test(boolean base0, Wdata_doc wdoc, String... expd) {
-		KeyVal[] actl = Scrib_lib_wikibase_srl.Srl(parser, wdoc, header_enabled, base0);
+		KeyVal[] actl = Scrib_lib_wikibase_srl.Srl(wdoc, header_enabled, base0);
 		Tfds.Eq_ary_str(expd, String_.SplitLines_nl(Xto_str(actl)));
 		return this;
 	}

@@ -50,11 +50,19 @@ public class Bry_bfr_mkr {
 	}
 }
 class Bry_bfr_mkr_mgr {
-	public Bry_bfr_mkr_mgr(byte mgr_id, int reset) {this.mgr_id = mgr_id; this.reset = reset;} private int reset;
+	private final Object thread_lock;
+	public Bry_bfr_mkr_mgr(byte mgr_id, int reset) {// NOTE: random IndexOutOfBounds errors in Get around free[--free_len] with free_len being -1; put member variable initialization within thread_lock to try to avoid; DATE:2014-09-21
+		thread_lock = new Object();
+		synchronized (thread_lock) {
+			this.mgr_id = mgr_id;
+			this.reset = reset;
+			this.free = Int_.Ary_empty;
+			this.free_len = 0;
+		}
+	}	private int reset;
 	public byte Mgr_id() {return mgr_id;} private byte mgr_id; 
 	private Bry_bfr[] ary = Ary_empty; private int nxt_idx = 0, ary_max = 0;
-	private int[] free = Int_.Ary_empty; private int free_len = 0;
-	private Object thread_lock = new Object();
+	private int[] free; private int free_len;
 	public void Reset_if_gt(int v) {
 		this.Clear();	// TODO: for now, just call clear
 	}
@@ -94,13 +102,14 @@ class Bry_bfr_mkr_mgr {
 			Bry_bfr rv = null;
 			int rv_idx = -1;
 			if (free_len > 0) {
-				rv_idx = free[--free_len];
-				rv = ary[rv_idx];
+				try {rv_idx = free[--free_len];}
+				catch (Exception e) {throw Err_.new_("failed to get free index; free_len={0} free.length={1} err={2}", free_len, free.length, Err_.Message_lang(e));}
+				try {rv = ary[rv_idx];}
+				catch (Exception e) {throw Err_.new_("failed to get bfr; rv_idx={0} ary.length={1} err={2}", rv_idx, ary.length, Err_.Message_lang(e));}
 			}
 			else {
-				if (nxt_idx == ary_max) {
+				if (nxt_idx == ary_max)
 					Expand();
-				}
 				rv_idx = nxt_idx++;
 				rv = ary[rv_idx];
 				if (rv == null) {

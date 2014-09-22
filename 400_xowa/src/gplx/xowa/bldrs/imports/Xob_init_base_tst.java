@@ -16,15 +16,15 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import org.junit.*;
-import gplx.xowa.html.portal.*;
+import org.junit.*; import gplx.xowa.html.portal.*; import gplx.xowa.wikis.xwikis.*;
 public class Xob_init_base_tst {
 	@Before public void init() {fxt.Clear();} private Xob_init_base_fxt fxt = new Xob_init_base_fxt();
 	@Test  public void Dirty_wiki_itms() {
 		Xoa_app app = fxt.App(); Xow_wiki wiki = fxt.Wiki();
 		Xoa_available_wikis_mgr wikis_list = fxt.App().Gui_mgr().Html_mgr().Portal_mgr().Wikis();
 		Tfds.Eq("", wikis_list.Itms_as_html());			// assert
-		app.User().Wiki().Xwiki_mgr().Add_full("en.wikipedia.org", "en.wikipedia.org");
+		Xow_xwiki_itm xwiki_itm = app.User().Wiki().Xwiki_mgr().Add_full("en.wikipedia.org", "en.wikipedia.org");
+		xwiki_itm.Offline_(Bool_.Y);	// simulate add via Available_from_fsys; DATE:2014-09-21
 		Tfds.Eq("", wikis_list.Itms_as_html());			// still empty
 		new Xob_init_txt(app.Bldr(), wiki).Cmd_end();	// mock "init" task
 		Tfds.Eq("\n        <li><a href=\"/site/en.wikipedia.org/\" class='xowa-hover-off'>en.wikipedia.org</a></li>", wikis_list.Itms_as_html());	// no longer empty

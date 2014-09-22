@@ -53,7 +53,7 @@ public class Xog_tab_mgr implements GfoEvObj {
 	}
 	public Xog_tab_itm Active_tab() {return active_tab;} private Xog_tab_itm active_tab;
 	public Xog_tab_itm Active_tab_assert() {
-		if (active_tab == Xog_tab_itm_.Null) this.Tabs_new_dflt(false, true);	// update_ui=false; create dflt tab, but do not update name; will be updated later by whatever loads page
+		if (active_tab == Xog_tab_itm_.Null) this.Tabs_new_dflt(true);
 		return active_tab;
 	}
 	public boolean Active_tab_is_null() {return active_tab == Xog_tab_itm_.Null;}
@@ -70,24 +70,23 @@ public class Xog_tab_mgr implements GfoEvObj {
 		}
 	}
 	public int Tabs_len() {return tab_regy.Count();}
-	public Xog_tab_itm Tabs_new_init() {return this.Tabs_new(true, true);}
+	public Xog_tab_itm Tabs_new_init(Xoa_page page) {return this.Tabs_new(true, true, page);}
 	public Xog_tab_itm Tabs_get_at(int i) {return (Xog_tab_itm)tab_regy.FetchAt(i);}
 	public Xog_tab_itm Tabs_new_dflt() {return Tabs_new_dflt(false);}
-	public Xog_tab_itm Tabs_new_dflt(boolean focus) {return Tabs_new_dflt(false, focus);}
-	public Xog_tab_itm Tabs_new_dflt(boolean update_ui, boolean focus) {
+	public Xog_tab_itm Tabs_new_dflt(boolean focus) {
 		boolean active_tab_is_null = this.Active_tab_is_null();
 		Xow_wiki cur_wiki = active_tab_is_null ? win.App().User().Wiki() : active_tab.Page().Wiki();
-		Xog_tab_itm rv = Tabs_new(focus, active_tab_is_null);
 		Xoa_ttl ttl = Xoa_ttl.parse_(cur_wiki, gplx.xowa.specials.xowa.default_tab.Default_tab_page.Ttl_full_bry);
 		Xoa_url url = Xoa_url_parser.Parse_from_url_bar(win.App(), cur_wiki, ttl.Full_db_as_str());
-		rv.Page_(update_ui, Xoa_page.new_(cur_wiki, ttl));
+		Xog_tab_itm rv = Tabs_new(focus, active_tab_is_null, Xoa_page.new_(cur_wiki, ttl));
+		rv.Page_update_ui();
 		rv.Show_url_bgn(url);
 		return rv;
 	}
-	private Xog_tab_itm Tabs_new(boolean focus, boolean active_tab_is_null) {
+	private Xog_tab_itm Tabs_new(boolean focus, boolean active_tab_is_null, Xoa_page page) {
 		String tab_key = "tab_" + Int_.Xto_str(tab_uid++); int tab_idx = tab_regy.Count();
 		Gfui_tab_itm_data tab_data = new Gfui_tab_itm_data(tab_key, tab_idx);
-		Xog_tab_itm rv = new Xog_tab_itm(this, tab_data);
+		Xog_tab_itm rv = new Xog_tab_itm(this, tab_data, page);
 		Gfui_tab_itm tab_box = tab_mgr.Tabs_add(tab_data);
 		rv.Make_html_box(tab_uid, tab_box, win, tab_mgr);
 		tab_box.Subs_add(rv.Html_itm().Html_box());
@@ -202,8 +201,7 @@ public class Xog_tab_mgr implements GfoEvObj {
 		Xow_wiki wiki = active_tab.Page().Wiki();
 		Xoa_url url = Xoa_url_parser.Parse_from_url_bar(win.App(), wiki, link);	// NOTE: link must be of form domain/wiki/page; DATE:2014-05-27
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, url.Page_bry());
-		Xog_tab_itm new_tab = Tabs_new(focus, false);
-		new_tab.Page_(false, Xoa_page.new_(wiki, ttl));
+		Xog_tab_itm new_tab = Tabs_new(focus, false, Xoa_page.new_(wiki, ttl));
 		new_tab.Tab_name_(String_.new_utf8_(Xoa_ttl.Replace_unders(url.Page_bry())));
 		new_tab.Show_url_bgn(url);
 		if (focus)

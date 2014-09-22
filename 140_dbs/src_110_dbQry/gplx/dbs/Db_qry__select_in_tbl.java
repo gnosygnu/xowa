@@ -35,7 +35,7 @@ public class Db_qry__select_in_tbl implements Db_qry {
 	}
 	public String Group_by_sql() {return group_by_sql;} private final String group_by_sql;
 	public String Having_sql() {return having_sql;} private final String having_sql;
-	public String Order_by_sql() {return order_by_sql;} private final String order_by_sql;
+	public String Order_by_sql() {return order_by_sql;} public Db_qry__select_in_tbl Order_by_sql_(String v) {order_by_sql = v; return this;} private String order_by_sql;
 	public String Limit_sql() {return limit_sql;} private final String limit_sql;
 	public static Db_qry__select_in_tbl new_(String tbl_name, String[] where_flds, String[] select_flds) {return new Db_qry__select_in_tbl(tbl_name, select_flds, where_flds, null, null, null, null);}
 	public String KeyOfDb_qry() {return "select_in_tbl";}
@@ -49,12 +49,13 @@ public class Db_qry__select_in_tbl implements Db_qry {
 			if (i != 0) sb.Add(",");
 			sb.Add(select_flds[i]);
 		}
-		sb.Add(" FROM ").Add(tbl_name).Add(" ");
-		if (where_flds		!= null) {sb.Add("WHERE "); Where_sql(sb);}
+		sb.Add(" FROM ").Add(tbl_name);
+		if (where_flds		!= null) {sb.Add(" WHERE "); Where_sql(sb);}
 		if (group_by_sql	!= null) sb.Add(group_by_sql);
 		if (having_sql		!= null) sb.Add(having_sql);
-		if (order_by_sql	!= null) sb.Add(order_by_sql);
+		if (order_by_sql	!= null) {sb.Add(" ORDER BY "); sb.Add(order_by_sql);}
 		if (limit_sql		!= null) sb.Add(limit_sql);
 		return sb.XtoStr();
 	}
+	public static final String[] Where_flds__all = null;
 }

@@ -81,6 +81,7 @@ public class Sqlite_engine_ {
 			Pragma_page_size(p, 4096);
 		return p;
 	}
+	public static Db_engine New_engine() {return Sqlite_engine._;}
 	public static final int Stmt_arg_max = 999;		// 999 is max number of variables allowed by sqlite
 	public static final boolean Supports_read_binary_stream = false;	
 	public static final boolean Supports_indexed_by = true;			

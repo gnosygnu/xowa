@@ -30,6 +30,7 @@ public class Xoa_available_wikis_mgr implements GfoInvkAble {
 			for (int i = 0; i < len; i++) {
 				Xow_xwiki_itm itm = xwiki_mgr.Get_at(i);
 				if (itm.Wiki_tid() == Xow_wiki_domain_.Tid_home) continue;// don't show home wiki
+				if (!itm.Offline()) continue;	// only show items marked Offline (added by Available_from_fsys); DATE:2014-09-21
 				itms_as_html_fmtr.Bld_bfr_many(tmp_bfr, itm.Domain(), itm_cls);
 			}
 			itms_as_html = tmp_bfr.XtoStr();

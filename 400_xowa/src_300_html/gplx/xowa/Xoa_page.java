@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.xowa.gui.*; import gplx.xowa.gui.views.*; import gplx.xowa.html.*; import gplx.xowa.pages.*;
 import gplx.xowa.files.*; import gplx.xowa.xtns.cite.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.html.tocs.*;
-import gplx.xowa.html.modules.popups.*; import gplx.xowa.hdumps.pages.*;
+import gplx.xowa.html.modules.popups.*; import gplx.xowa.hdumps.pages.*; import gplx.xowa.xtns.wdatas.pfuncs.*;
 public class Xoa_page {
 	private Xopg_hdump_data hdump_data;
 	Xoa_page(Xow_wiki wiki, Xoa_ttl ttl) {

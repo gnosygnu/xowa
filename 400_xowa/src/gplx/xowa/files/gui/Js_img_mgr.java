@@ -30,6 +30,7 @@ public class Js_img_mgr {
 	}
 	private static void Update_img(Xoa_page page, int uid, byte lnki_type, byte elem_tid, int html_w, int html_h, String html_src, int orig_w, int orig_h, String orig_src, byte[] lnki_ttl, int gallery_mgr_h, Js_img_wkr img_wkr) {
 		if (Env_.Mode_testing()) return;
+		if (page.App().Mode() != Xoa_app_.Mode_gui) return;	// do not update html widget unless app is gui; null ref on http server; DATE:2014-09-17
 		Xog_html_itm html_itm = page.Tab().Html_itm();
 		switch (elem_tid) {
 			case Xof_html_elem.Tid_gallery_v2:
