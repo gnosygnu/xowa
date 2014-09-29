@@ -149,7 +149,7 @@ public class Xoh_file_wtr_audio_video_tst {
 		fxt.Test_parse_page_wiki_str
 		(	"[[File:A.ogv|thumb|400px|a|alt=b]]", String_.Concat_lines_nl_skip_last
 		(	"<div class=\"thumb tright\">"
-		,	"  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:400px;\">"
+		,	"  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"		// NOTE:220px is default w for "non-found" thumb; DATE:2014-09-24
 		,	"    <div id=\"xowa_media_div\">"
 		,	"      <div>"
 		,	"        <a href=\"/wiki/File:A.ogv\" class=\"image\" title=\"A.ogv\">"
@@ -183,7 +183,7 @@ public class Xoh_file_wtr_audio_video_tst {
 		fxt.Test_parse_page_wiki_str
 		(	"[[File:A.webm|thumb|400px|a|alt=b]]", String_.Concat_lines_nl_skip_last
 		(	"<div class=\"thumb tright\">"
-		,	"  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:400px;\">"
+		,	"  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"	// NOTE:220px is default w for "non-found" thumb; DATE:2014-09-24
 		,	"    <div id=\"xowa_media_div\">"
 		,	"      <div>"
 		,	"        <a href=\"/wiki/File:A.webm\" class=\"image\" title=\"A.webm\">"

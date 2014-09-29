@@ -51,6 +51,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		byte[] name_ary_orig = Bry_.Empty;
 		int name_bgn = 0, name_ary_len = 0; 
 		boolean subst_found = false;
+		boolean name_had_subst = false;
 		if (defn == Xot_defn_.Null) {								// tmpl_name is not exact match; may be dynamic, subst, transclusion, etc..
 			if (name_key_tkn.Itm_static() == Bool_.N_byte) {		// tmpl is dynamic; EX:{{{{{1}}}|a}}
 				Bry_bfr name_tkn_bfr = Bry_bfr.new_(name_tkn.Src_end() - name_tkn.Src_bgn());
@@ -61,6 +62,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 			}
 			else													// tmpl is static; note that dat_ary is still valid but rest of name may not be; EX: {{subst:name{{{1}}}}}
 				name_ary = Bry_.Mid(src, name_key_tkn.Dat_bgn(), name_key_tkn.Dat_end());
+			name_had_subst = name_key_tkn.Dat_ary_had_subst();
 			name_ary_orig = name_ary;	// cache name_ary_orig
 			name_ary_len = name_ary.length;
 			name_bgn = Bry_finder.Find_fwd_while_not_ws(name_ary, 0, name_ary_len);
@@ -99,28 +101,18 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 			int colon_pos = -1;
 			switch (finder.Tid()) {
 				case Xot_defn_.Tid_subst:	// subst is added verbatim; EX: {{subst:!}} -> {{subst:!}}; logic below is to handle printing of arg which could be standardized if src[] was available for tmpl
-//						if (ctx.Parse_tid() == Xop_parser_.Parse_tid_tmpl) {
-						bfr.Add(Xop_curly_bgn_lxr.Hook).Add(name_ary);
-						for (int i = 0; i < args_len; i++) {
-							Arg_nde_tkn nde = args[i];
-							bfr.Add_byte(Byte_ascii.Pipe);
-							nde.Tmpl_fmt(ctx, src, Xot_fmtr_prm._);
-						}
-						Xot_fmtr_prm._.Print(bfr);
-						bfr.Add(Xop_curly_end_lxr.Hook);
-						return true;				// NOTE: nothing else to do; return
-//						}
-//						else {
-//							name_ary = Bry_.Mid(name_ary, finder.Subst_end(), name_ary_len);			// chop off "safesubst:"
-//							name_ary_len = name_ary.length;
-//							if (defn != Xot_defn_.Null) {	// func found
-//								if (finder.Colon_pos() != -1) colon_pos = finder.Func().Name().length;		// set colon_pos; SEE NOTE_1
-//							}
-//							subst_found = true;
-//						}
-//						break;
+					bfr.Add(Xop_curly_bgn_lxr.Hook).Add(name_ary);
+					for (int i = 0; i < args_len; i++) {
+						Arg_nde_tkn nde = args[i];
+						// bfr.Add_byte(Byte_ascii.Pipe);
+						Xot_fmtr_prm._.Write(Byte_ascii.Pipe);
+						nde.Tmpl_fmt(ctx, src, Xot_fmtr_prm._);
+					}
+					Xot_fmtr_prm._.Print(bfr);
+					bfr.Add(Xop_curly_end_lxr.Hook);
+					return true;				// NOTE: nothing else to do; return
 				case Xot_defn_.Tid_safesubst:
-					name_ary = Bry_.Mid(name_ary, finder.Subst_end(), name_ary_len);			// chop off "safesubst:"
+					name_ary = Bry_.Mid(name_ary, finder.Subst_end(), name_ary_len);				// chop off "safesubst:"
 					name_ary_len = name_ary.length;
 					if (defn != Xot_defn_.Null) {	// func found
 						if (finder.Colon_pos() != -1) colon_pos = finder.Func().Name().length;		// set colon_pos; SEE NOTE_1
@@ -270,6 +262,10 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 					else {
 						rv = defn_tmpl.Tmpl_evaluate(ctx, invk_tmpl, rslt_bfr);
 						prepend_mgr.End(ctx, bfr, rslt_bfr.Bfr(), rslt_bfr.Len(), Bool_.Y);
+						if (name_had_subst) {	// current invk had "subst:"; parse incoming invk again to remove effects of subst; PAGE:pt.w:Argentina DATE:2014-09-24
+							byte[] tmp_src = rslt_bfr.XtoAryAndClear();
+							rslt_bfr.Add(wiki.Parser().Parse_text_to_wtxt(tmp_src));	// this could be cleaner / more optimized
+						}
 						if (Cache_enabled) {
 							byte[] rslt_val = rslt_bfr.XtoAryAndClear();
 							bfr.Add(rslt_val);

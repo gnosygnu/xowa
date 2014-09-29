@@ -42,12 +42,14 @@ public class Xop_xatr_parser_tst {
 	@Test  public void Quote_ws_nl()			{fxt.tst_("a='b\nc'", fxt.new_atr_("a", "b c"));}
 	@Test  public void Quote_ws_mult()			{fxt.tst_("a='b  c'", fxt.new_atr_("a", "b c"));}
 	@Test  public void Quote_ws_mult_mult()		{fxt.tst_("a='b  c d'", fxt.new_atr_("a", "b c d"));}	// PURPOSE: fix wherein 1st-gobble gobbled rest of spaces (was b cd)
-	@Test  public void Quote_apos()				{fxt.tst_("a=\"b c'd\"", fxt.new_atr_("a", "b c'd"));}	// PURPOSE: fix wherein apos was gobbled up; EX: s:Alice's_Adventures_in_Wonderland; DATE:2013-11-22
-	@Test  public void Quote_apos_2()			{fxt.tst_("a=\"b'c d\"", fxt.new_atr_("a", "b'c d"));}	// PURPOSE: fix wherein apos was causing "'b'c d"; EX:s:Grimm's_Household_Tales,_Volume_1; DATE:2013-12-22
+	@Test  public void Quote_apos()				{fxt.tst_("a=\"b c'd\"", fxt.new_atr_("a", "b c'd"));}	// PURPOSE: fix wherein apos was gobbled up; PAGE:en.s:Alice's_Adventures_in_Wonderland; DATE:2013-11-22
+	@Test  public void Quote_apos_2()			{fxt.tst_("a=\"b'c d\"", fxt.new_atr_("a", "b'c d"));}	// PURPOSE: fix wherein apos was causing "'b'c d"; PAGE:en.s:Grimm's_Household_Tales,_Volume_1; DATE:2013-12-22
 	@Test  public void Multiple()				{fxt.tst_("a b1 c", fxt.new_atr_("a", "a"), fxt.new_atr_("b1", "b1"), fxt.new_atr_("c", "c"));}
-	@Test  public void Ws()						{fxt.tst_("a  = 'b'", fxt.new_atr_("a", "b"));}			// PURPOSE: fix wherein multiple space was causing "a=a"; EX:fr.s:La_Sculpture_dans_les_cimetières_de_Paris/Père-Lachaise; DATE:2014-01-18
+	@Test  public void Ws()						{fxt.tst_("a  = 'b'", fxt.new_atr_("a", "b"));}			// PURPOSE: fix wherein multiple space was causing "a=a"; PAGE:fr.s:La_Sculpture_dans_les_cimetières_de_Paris/Père-Lachaise; DATE:2014-01-18
 	@Test  public void Dangling_eos() 			{fxt.tst_("a='b' c='d", fxt.new_atr_("a", "b"), fxt.new_invalid_(6, 10));}	// PURPOSE: handle dangling quote at eos; PAGE:en.w:Aubervilliers DATE:2014-06-25
 	@Test  public void Dangling_bos() 			{fxt.tst_("a='b c=d", fxt.new_invalid_(0, 4), fxt.new_atr_("c", "d"));}	// PURPOSE: handle dangling quote at bos; resume at next valid atr; PAGE:en.w:Aubervilliers DATE:2014-06-25
+	@Test  public void Invalid_incomplete() 	{fxt.tst_("a= c=d", fxt.new_invalid_(0, 3), fxt.new_atr_("c", "d"));}	// PURPOSE: discard xatr if incomplete and followed by valid atr; PAGE:en.w:2013_in_American_television DATE:2014-09-25
+	@Test  public void Invalid_incomplete_2() 	{fxt.tst_("a=c=d", fxt.new_invalid_(0, 5));}	// PURPOSE: variation of above; per MW regex, missing space invalidates entire attribute; DATE:2014-09-25
 /*
 TODO:
 change ws to be end; EX: "a=b c=d" atr1 ends at 4 (not 3)

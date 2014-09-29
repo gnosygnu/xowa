@@ -25,7 +25,7 @@ public abstract class Wdata_claim_itm_base implements CompareAble {
 	public int Pid() {return pid;} private int pid;
 	public abstract byte Val_tid();
 	public byte Snak_tid() {return snak_tid;} private byte snak_tid = Wdata_dict_snak_tid.Tid_value;
-	public byte Rank_tid() {return rank_tid;} public void Rank_tid_(byte v) {this.rank_tid = v;} private byte rank_tid;
+	public byte Rank_tid() {return rank_tid;} public void Rank_tid_(byte v) {this.rank_tid = v;} private byte rank_tid = Wdata_dict_rank.Tid_normal;	// TEST: default to normal for tests
 	public int compareTo(Object obj) {
 		Wdata_claim_itm_base comp = (Wdata_claim_itm_base)obj;
 		return Int_.Compare(pid, comp.pid);

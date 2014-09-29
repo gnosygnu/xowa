@@ -17,10 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.json.*;
-public class Wdata_langtext_itm {
-	public Wdata_langtext_itm(byte[] lang, byte[] text) {this.lang = lang; this.text = text;} 
-	public byte[] Lang() {return lang;} private byte[] lang;
-	public byte[] Text() {return text;} private byte[] text;
+public class Wdata_langtext_itm implements Wdata_sortable {
+	public Wdata_langtext_itm(byte[] lang, byte[] text) {this.lang = lang; this.text = text; this.sort = -1;}  
+	public byte[] Lang() {return lang;} private final  byte[] lang;
+	public byte[] Text() {return text;} private final byte[] text;
+	public int Sort() {return sort;} public void Sort_(int v) {sort = v;} private int sort;
 	@Override public String toString() {// TEST:
 		return String_.Concat_with_str("|", String_.new_utf8_(lang), String_.new_utf8_(text));
 	}

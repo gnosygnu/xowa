@@ -169,6 +169,24 @@ public class Wdata_doc_parser_v2_tst {
 		, fxt.Make_claim_str(1, "abc")
 		);
 	}
+	@Test   public void Claims_novalue() {
+		fxt.Test_claims(String_.Concat_lines_nl_skip_last
+		( "{ 'claims':"
+		, "  { 'P1':"
+		, "    ["
+		, "      { 'mainsnak':"
+		, "        { 'snaktype':'novalue'"
+		, "        , 'property':'P1'"
+		, "        , 'hash':'84487fc3f93b4f74ab1cc5a47d78f596f0b49390'"
+		, "        }"
+		, "      }"
+		, "    ]"
+		, "  }"
+		, "}"
+		)
+		, fxt.Make_claim_novalue(1)
+		);
+	}
 	@Test   public void Claims_data_string() {
 		fxt.Test_claims_data(String_.Concat_lines_nl_skip_last
 		( "{ 'value':'abc'"
@@ -247,7 +265,104 @@ public class Wdata_doc_parser_v2_tst {
 		, fxt.Make_claim_time(1, "2001-02-03 04:05:06")
 		);
 	}
-}
-class Wdata_doc_parser_v2_fxt extends Wdata_doc_parser_fxt_base {
-	@Override public Wdata_doc_parser Make_parser() {return new Wdata_doc_parser_v2();}
+	@Test   public void Qualifiers() {
+		fxt.Test_qualifiers(String_.Concat_lines_nl_skip_last
+		( "{ 'qualifiers':"
+		, "  { 'P1':"
+		, "    [ "
+		, "      { 'snaktype':'value'"
+		, "      , 'property':'P1'"
+		, "      , 'hash':''"
+		, "      , 'datavalue':"
+		, "        { 'value':"
+		, "        { 'entity-type':'item'"
+		, "        , 'numeric-id':11"
+		, "        }"
+		, "        , 'type':'wikibase-entityid'"
+		, "        }"
+		, "      }"
+		, "    ,"
+		, "      { 'snaktype':'value'"
+		, "      , 'property':'P1'"
+		, "      , 'hash':''"
+		, "      , 'datavalue':"
+		, "        { 'value':"
+		, "        { 'entity-type':'item'"
+		, "        , 'numeric-id':12"
+		, "        }"
+		, "        , 'type':'wikibase-entityid'"
+		, "        }"
+		, "      }"
+		, "    ]"
+		, "  ,"
+		, "    'P2':"
+		, "    [ "
+		, "      { 'snaktype':'value'"
+		, "      , 'property':'P2'"
+		, "      , 'hash':''"
+		, "      , 'datavalue':"
+		, "        { 'value':"
+		, "        { 'entity-type':'item'"
+		, "        , 'numeric-id':21"
+		, "        }"
+		, "        , 'type':'wikibase-entityid'"
+		, "        }"
+		, "      }"
+		, "    ]"
+		, "  }"
+		, "}"
+		), fxt.Make_claim_entity(1, 11), fxt.Make_claim_entity(1, 12), fxt.Make_claim_entity(2, 21)
+		);
+	}
+	@Test   public void Pid_order() {
+		fxt.Test_pid_order
+		( "{ 'qualifiers-order':['P1', 'P2', 'P3'] }"
+		, 1, 2, 3
+		);
+	}
+	@Test   public void References() {
+		fxt.Test_references(String_.Concat_lines_nl_skip_last
+		( "{ 'references':"
+		, "  [ "
+		, "    { 'hash':'8e7d51e38606193465d2a1e9d41ba490e06682a6'"
+		, "    , 'snaks':"
+		, "      { 'P2':"
+		, "        [ "
+		, "          { 'snaktype':'value'"
+		, "          , 'property':'P2'"
+		, "          , 'hash':'358e3c0ffa2bfecfe962b39141d99dc2d482110f'"
+		, "          , 'datavalue':"
+		, "            { 'value':"
+		, "              { 'entity-type':'item'"
+		, "              , 'numeric-id':21"
+		, "              }"
+		, "            , 'type':'wikibase-entityid'"
+		, "            }"
+		, "          }"
+		, "        ]"
+		, "      , 'P3':"
+		, "        [ "
+		, "          { 'snaktype':'value'"
+		, "          , 'property':'P3'"
+		, "          , 'hash':'358e3c0ffa2bfecfe962b39141d99dc2d482110f'"
+		, "          , 'datavalue':"
+		, "            { 'value':"
+		, "              { 'entity-type':'item'"
+		, "              , 'numeric-id':31"
+		, "              }"
+		, "            , 'type':'wikibase-entityid'"
+		, "            }"
+		, "          }"
+		, "        ]"
+		, "      }"
+		, "    , 'snaks-order':"
+		, "      [ 'P2'"
+		, "      , 'P3'"
+		, "      ]"
+		, "    }"
+		, "  ]"
+		, "}"
+		), Int_.Ary(2, 3), fxt.Make_claim_entity(2, 21), fxt.Make_claim_entity(3, 31))
+		;
+	}
 }

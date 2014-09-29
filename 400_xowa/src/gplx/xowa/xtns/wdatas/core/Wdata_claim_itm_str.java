@@ -21,7 +21,7 @@ public class Wdata_claim_itm_str extends Wdata_claim_itm_core { 	public Wdata_cl
 		this.val = val;
 	}
 	@Override public byte Val_tid() {return Wdata_dict_val_tid.Tid_string;}
-	public byte[] Val_str() {return val;} private final byte[] val;
+	public byte[] Val_str() {return val;} private final byte[] val;		
 	@Override public String toString() {// TEST:
 		return String_.Concat_with_str("|", Wdata_dict_snak_tid.Xto_str(this.Snak_tid()), Wdata_dict_val_tid.Xto_str(this.Val_tid()), String_.new_utf8_(val));
 	}

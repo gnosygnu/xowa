@@ -46,6 +46,7 @@ public class Wdata_dict_val_tid {
 	, Bry_globecoordinate						= Bry_.new_ascii_(Str_globecoordinate)
 	, Bry_quantity								= Bry_.new_ascii_(Str_quantity)
 	, Bry_monolingualtext						= Bry_.new_ascii_(Str_monolingualtext)
+	, Bry_unknown								= Bry_.new_ascii_(Str_unknown)
 	;
 	private static final Hash_adp_bry Dict = Hash_adp_bry.cs_()
 	.Add_bry_byte(Bry_string					, Tid_string)

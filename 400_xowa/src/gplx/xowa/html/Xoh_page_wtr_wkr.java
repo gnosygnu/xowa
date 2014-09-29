@@ -58,6 +58,7 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 		}
 		DateAdp page_modified_on_dte = page.Revision_data().Modified_on();
 		byte[] page_modified_on_msg = wiki.Msg_mgr().Val_by_id_args(Xol_msg_itm_.Id_portal_lastmodified, page_modified_on_dte.XtoStr_fmt_yyyy_MM_dd(), page_modified_on_dte.XtoStr_fmt_HHmm());
+		byte[] page_body_class = Xoh_page_body_cls.Calc(tmp_bfr, page.Ttl());
 		byte[] html_content_editable = wiki.Gui_mgr().Cfg_browser().Content_editable() ? Content_editable_bry : Bry_.Empty;
 		byte[] page_content_sub = Xoh_page_wtr_wkr_.Bld_page_content_sub(app, wiki, page, tmp_bfr);
 		byte[] js_wikidata_bry = Wdata_wiki_mgr.Wiki_page_is_json(wiki.Domain_tid(), page.Ttl().Ns().Id()) ? app.User().Lang().Fragment_mgr().Html_js_wikidata() : Bry_.Empty;
@@ -69,7 +70,7 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 		, page_content_sub
 		, wiki.Html_mgr().Portal_mgr().Div_jump_to()
 		, page_data, wtr_page_lang, page_modified_on_msg, page.Lang().Dir_bry() 
-		, mgr.Css_common_bry(), mgr.Css_wiki_bry(), html_content_editable
+		, mgr.Css_common_bry(), mgr.Css_wiki_bry(), page_body_class, html_content_editable
 		, page.Html_data().Module_mgr().Init(app, wiki, page).Init_dflts()
 		, portal_mgr.Div_personal_bry(), portal_mgr.Div_ns_bry(app.Utl_bry_bfr_mkr(), page.Ttl(), wiki.Ns_mgr()), portal_mgr.Div_view_bry(app.Utl_bry_bfr_mkr(), view_tid, page.Html_data().Xtn_search_text())
 		, portal_mgr.Div_logo_bry(), portal_mgr.Div_home_bry(), new Xopg_xtn_skin_fmtr_arg(page, Xopg_xtn_skin_itm_tid.Tid_sidebar), portal_mgr.Div_wikis_bry(app.Utl_bry_bfr_mkr()), portal_mgr.Sidebar_mgr().Html_bry()

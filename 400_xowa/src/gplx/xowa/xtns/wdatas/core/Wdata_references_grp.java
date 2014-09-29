@@ -15,16 +15,9 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.xtns.wdatas; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*; import gplx.json.*;
-public class Wdata_doc_tst {
-	@Test  public void Link_extract() {
-		Tst_link_extract("{\"enwiki\":\"A\"}", "A");
-		Tst_link_extract("{\"enwiki\":{\"name\":\"A\",\"badges\":[]}}", "A");
-	}
-	private void Tst_link_extract(String src, String expd) {
-		Json_doc doc = Json_doc.new_(src);
-		Json_itm_kv root = (Json_itm_kv)doc.Root().Subs_get_at(0);
-		Tfds.Eq(expd, String_.new_ascii_(Wdata_doc_.Link_extract(root)));
-	}
+package gplx.xowa.xtns.wdatas.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
+public class Wdata_references_grp {
+	public Wdata_references_grp(Wdata_claim_grp_list references, int[] references_order) {this.references = references; this.references_order = references_order;}
+	public Wdata_claim_grp_list References() {return references;} private Wdata_claim_grp_list references;
+	public int[] References_order() {return references_order;} private int[] references_order;
 }

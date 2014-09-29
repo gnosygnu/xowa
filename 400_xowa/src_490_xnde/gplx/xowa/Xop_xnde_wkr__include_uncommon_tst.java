@@ -172,10 +172,6 @@ public class Xop_xnde_wkr__include_uncommon_tst {
 			(	"<pre>a</pre>"
 			));
 	}
-	@Test  public void Noinclude_inline_w_space_inside_safesubst() {	// PURPOSE: "<noinclude />" did not work with safesubst b/c of space; PAGE:en.w:Wikipedia:Featured_picture_candidates; DATE:2014-06-24
-		fxt.Test_parse_tmpl_str_test("{{SAFESUBST:<noinclude />#if:val_exists|y|n}}", "{{test}}", "y");
-	}
-
 //		@Test  public void Pre_and_includeonly2() {
 //			fxt.Init_defn_add("pre2", "<pre<includeonly></includeonly>><nowiki>{{{1}}}</nowiki></pre>");
 //			fxt.Test_parse_page_all_str
@@ -184,4 +180,15 @@ public class Xop_xnde_wkr__include_uncommon_tst {
 //				(	"<pre>a</pre>"
 //				));
 //		}
+	@Test  public void Noinclude_inline_w_space_inside_safesubst() {	// PURPOSE: "<noinclude />" did not work with safesubst b/c of space; PAGE:en.w:Wikipedia:Featured_picture_candidates; DATE:2014-06-24
+		fxt.Test_parse_tmpl_str_test("{{SAFESUBST:<noinclude />#if:val_exists|y|n}}", "{{test}}", "y");
+	}
+	@Test  public void Subst() {// PURPOSE: handle subst-includeonly-subst combination; PAGE:pt.w:Argentina DATE:2014-09-24
+		fxt.Init_defn_clear();
+		fxt.Init_defn_add("test", "{{<includeonly>subst:</includeonly>#switch:1|1=y|default=n}}");
+		//fxt.Init_defn_add("test", "{{subst:#switch:1|1=y|default=n}}");	// keeping around for debugging purposes
+		//fxt.Init_defn_add("test", "{{<includeonly>#switch:</includeonly>1|1=y|default=n}}"); // keeping around for debugging purposes
+		fxt.Test_parse_page_all_str("{{test}}", "{{subst:#switch:1|1=y|default=n}}");	// note that subst is preserved b/c of <includeonly>
+		fxt.Test_parse_page_all_str("{{subst:test}}", "y");								// note that expression is evaluated b/c of subst:
+	}
 }

@@ -29,7 +29,7 @@ public class Imap_xnde_html_all_tst {
 		, "</imagemap>"
 		), String_.Concat_lines_nl_skip_last
 		( "<div class=\"thumb tright\">"
-		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:123px;\">"
+		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"	// NOTE:220px is default w for "non-found" thumb; DATE:2014-09-24
 		, "    <div id='imap_div_0' class=\"noresize\">"
 		, "      <map name=\"imageMap_1_1\">"
 		, "        <area href=\"/wiki/B\" shape=\"circle\" coords=\"0,0,5\" alt=\"b1\" title=\"b1\"/>"
@@ -60,7 +60,7 @@ public class Imap_xnde_html_all_tst {
 		, "</imagemap>"
 		), String_.Concat_lines_nl_skip_last
 		( "<div class=\"thumb tright\">"
-		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:123px;\">"
+		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"	// NOTE:220px is default w for "non-found" thumb; DATE:2014-09-24
 		, "    <div id='imap_div_0' class=\"noresize\">"
 		, "      <map name=\"imageMap_1_1\">"
 		, "      </map>"
@@ -108,7 +108,7 @@ public class Imap_xnde_html_all_tst {
 		, "</imagemap>"
 		), String_.Concat_lines_nl_skip_last
 		( "<div class=\"thumb tright\">"
-		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:123px;\">"
+		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"	// NOTE:220px is default w for "non-found" thumb; DATE:2014-09-24
 		, "    <div id='imap_div_0' class=\"noresize\">"
 		, "      <map name=\"imageMap_1_1\">"
 		, "        <area href=\"http://b.org\" shape=\"circle\" coords=\"0,0,5\" alt=\"b1\" title=\"b1\"/>"
@@ -179,7 +179,7 @@ public class Imap_xnde_html_all_tst {
 		, "</imagemap>"
 		), String_.Concat_lines_nl_skip_last
 		( "<div class=\"thumb tright\">"
-		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:123px;\">"
+		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"	// NOTE:220px is default w for "non-found" thumb; DATE:2014-09-24
 		, "    <div id='imap_div_0' class=\"noresize\">"
 		, "      <map name=\"imageMap_1_1\">"
 		, "        <area href=\"/wiki/B\" shape=\"circle\" coords=\"0,0,5\" alt=\"b1\" title=\"b1\"/>"

@@ -69,4 +69,25 @@ public class Wdata_dict_value_time {
 	, Val_timezone_bry							= Bry_.new_ascii_(Val_timezone_str)
 	, Val_calendarmodel_bry						= Bry_.new_ascii_(Val_calendarmodel_str)
 	;
+	public static byte[] Xto_time(String date) {return Xto_time(DateAdp_.parse_fmt(date, "yyyy-MM-dd HH:mm:ss"));}
+	public static byte[] Xto_time(DateAdp date) {
+		// +0000000yyyy-MM-ddTHH:mm:ssZ
+		tmp_bfr
+		.Add(Bry_year_prefix)
+		.Add_int_fixed(date.Year(), 4)
+		.Add_byte(Byte_ascii.Dash)
+		.Add_int_fixed(date.Month(), 2)
+		.Add_byte(Byte_ascii.Dash)
+		.Add_int_fixed(date.Day(), 2)
+		.Add_byte(Byte_ascii.Ltr_T)
+		.Add_int_fixed(date.Hour(), 2)
+		.Add_byte(Byte_ascii.Colon)
+		.Add_int_fixed(date.Minute(), 2)
+		.Add_byte(Byte_ascii.Colon)
+		.Add_int_fixed(date.Second(), 2)
+		.Add_byte(Byte_ascii.Ltr_Z)
+		;
+		return tmp_bfr.XtoAryAndClear();
+	}
+	private static Bry_bfr tmp_bfr = Bry_bfr.new_(); private static byte[] Bry_year_prefix = Bry_.new_ascii_("+0000000");
 }

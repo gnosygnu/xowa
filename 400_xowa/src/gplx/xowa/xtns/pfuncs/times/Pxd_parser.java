@@ -40,11 +40,11 @@ class Pxd_parser {
 	public void Err_set(Gfo_msg_itm itm, Bry_fmtr_arg... args) {
 		if (itm == null) return;
 		Bry_fmtr fmtr = itm.Fmtr();
-		fmtr.Bld_bfr(errorBfr, args);
-	}	private Bry_bfr errorBfr = Bry_bfr.new_(32);
-	public DateAdp Parse(byte[] src, Bry_bfr errorBfr) {
+		fmtr.Bld_bfr(error_bfr, args);
+	}	private Bry_bfr error_bfr = Bry_bfr.new_(32);
+	public DateAdp Parse(byte[] src, Bry_bfr error_bfr) {
 		Tokenize(src);	// NOTE: should check if Tokenize failed, but want to be liberal as date parser is not fully implemented; this will always default to 1st day of year; DATE:2014-03-27
-		return Evaluate(src, errorBfr);
+		return Evaluate(src, error_bfr);
 	}
 	private boolean Tokenize(byte[] src) { 
 		this.src = src; src_len = src.length;
@@ -52,7 +52,7 @@ class Pxd_parser {
 		tkn_type = Pxd_itm_.Tid_null; tkn_bgn_pos = -1;
 		cur_pos = 0;
 		Colon_count = 0;
-		errorBfr.Clear();
+		error_bfr.Clear();
 		for (int i = 0; i < DateAdp_.SegIdx__max; i++)
 			seg_idxs[i] = Pxd_itm_base.Seg_idx_null;
 		while (cur_pos < src_len) {
@@ -134,8 +134,8 @@ class Pxd_parser {
 		MakeDataAry();
 		for (int i = 0; i < tkns_len; i++) {
 			eval_ary[i].Eval(this);
-			if (errorBfr.Len() != 0) {
-				error.Add_bfr_and_clear(errorBfr);
+			if (error_bfr.Len() != 0) {
+				error.Add_bfr_and_clear(error_bfr);
 				return DateAdp_.MinValue;			
 			}
 		}

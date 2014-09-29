@@ -69,15 +69,15 @@ public class Xop_xnde_wkr__include_basic_tst {
 <includeonly>-({{{1}}}={{{1}}}round-5)-({{{1}}}={{{1}}}round-4)-({{{1}}}={{{1}}}round-3)-({{{1}}}={{{1}}}round-2)-({{{1}}}={{{1}}}round-1)</includeonly><noinclude>
 {{pp-template}}Called by {{lt|precision/0}}</noinclude>
 
-==includeonly==
+==includeonly -- aka: do not eval in template ==
 main: a<includeonly>b</includeonly>c<br/>
 tmpl: {{mwo_include_only|a|b|c}}
 
-==noinclude==
+==noinclude   -- aka: eval in template only==
 main: a<noinclude>b</noinclude>c<br/>
 tmpl: {{mwo_no_include|a|b|c}}
 
-==onlyinclude==
+==onlyinclude -- aka: only include in template only (ignore everything else) ==
 main: a<onlyinclude>b</onlyinclude>c<br/>
 tmpl: {{mwo_only_include|a|b|c}}
 */

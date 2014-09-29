@@ -52,7 +52,7 @@ class Wdata_itemByTitle_page_fxt {
 	}	private Xop_fxt parser_fxt; private Xoa_app app; private Wdata_itemByTitle_page special_page; private Xow_wiki wiki;
 	Wdata_wiki_mgr_fxt wdata_fxt;
 	public void Init_wdata_page(String qid_ttl, String text) {
-		Wdata_doc doc = wdata_fxt.doc_(qid_ttl);
+		Wdata_doc doc = wdata_fxt.Wdoc_bldr(qid_ttl).Xto_wdoc();
 		app.Wiki_mgr().Wdata_mgr().Pages_add(Bry_.new_ascii_(qid_ttl), doc);
 		parser_fxt.Init_page_create(app.Wiki_mgr().Wdata_mgr().Wdata_wiki(), qid_ttl, text);
 	}

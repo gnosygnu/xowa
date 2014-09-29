@@ -30,9 +30,9 @@ public class Xop_xnde_wkr__err_dangling_tst {
 	}
 	@Test  public void Nested() {
 		fxt.Test_parse_page_wiki_str
-			( "<div><div><center>a</div></div>"
-			, "<div><div><center>a</center></div></div>"
-			);
+		( "<div><div><center>a</div></div>"
+		, "<div><div><center>a</center></div></div>"
+		);
 	}
 	@Test  public void Center() {
 		fxt.Init_log_(Xop_xnde_log.Dangling_xnde).Test_parse_page_wiki("a<center>b"
@@ -46,6 +46,12 @@ public class Xop_xnde_wkr__err_dangling_tst {
 			, fxt.tkn_xnde_	(1, 4).Subs_(fxt.tkn_txt_(4, 5))
 			, fxt.tkn_xnde_	(5, 13).Subs_(fxt.tkn_txt_(8, 9))
 			);
+	}
+	@Test   public void Alternating() {	// PURPOSE: confirmation test for alternating dangling nodes; PAGE:en.w:Portal:Pornography/Selected_historical_image/Archive; DATE:2014-09-24
+		fxt.Test_parse_page_wiki_str
+		( "c<b><i>d<b><i>e"
+		, "c<b><i>d<b><i>e</i></b></i></b>"
+		);
 	}
 	@Test  public void Li() {	// PURPOSE: auto-close <li>; NOTE: no longer encloses in <ul/>; DATE:2014-06-26
 		fxt.Test_parse_page_wiki_str

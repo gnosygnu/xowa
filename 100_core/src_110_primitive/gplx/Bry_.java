@@ -208,6 +208,32 @@ public class Bry_ {
 			if (b == find) src[i] = repl;			
 		}
 	}
+	public static byte[] Add_w_dlm(byte[] dlm, byte[]... ary) {
+		int ary_len = ary.length;
+		if (ary_len == 0) return Bry_.Empty;
+		int dlm_len = dlm.length;
+		int rv_len = dlm_len * (ary_len - 1);	// rv will have at least as many dlms as itms - 1	
+		for (int i = 0; i < ary_len; i++) {
+			byte[] itm = ary[i];
+			if (itm != null) rv_len += itm.length;
+		}
+		int rv_pos = 0;
+		byte[] rv = new byte[rv_len];
+		for (int i = 0; i < ary_len; i++) {
+			byte[] itm = ary[i];
+			if (i != 0) {
+				for (int j = 0; j < dlm_len; j++) {
+					rv[rv_pos++] = dlm[j];
+				}
+			}
+			if (itm == null) continue;
+			int itm_len = itm.length;
+			for (int j = 0; j < itm_len; j++) {
+				rv[rv_pos++] = itm[j]; 
+			}
+		}
+		return rv;
+	}
 	public static byte[] Add_w_dlm(byte dlm, byte[]... ary) {
 		int ary_len = ary.length;
 		if (ary_len == 0) return Bry_.Empty;

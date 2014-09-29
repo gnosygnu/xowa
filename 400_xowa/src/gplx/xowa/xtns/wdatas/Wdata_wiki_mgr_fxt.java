@@ -25,7 +25,7 @@ public class Wdata_wiki_mgr_fxt {
 		this.parser_fxt = parser_fxt;
 		this.wiki = parser_fxt.Wiki();
 		app = wiki.App();
-		page_bldr = new Wdata_doc_bldr(app.Wiki_mgr().Wdata_mgr());
+		wdoc_bldr = new Wdata_doc_bldr();
 		wdata_mgr = app.Wiki_mgr().Wdata_mgr();
 		wdata_mgr.Clear();
 		if (reset) {
@@ -33,19 +33,28 @@ public class Wdata_wiki_mgr_fxt {
 			parser_fxt.Reset();
 		}
 		return this;
-	}	private Xoa_app app; Xow_wiki wiki; Wdata_wiki_mgr wdata_mgr; Wdata_doc_bldr page_bldr; Xop_fxt parser_fxt;
+	}	private Xoa_app app; private Xow_wiki wiki; private Wdata_wiki_mgr wdata_mgr; private Wdata_doc_bldr wdoc_bldr; private Xop_fxt parser_fxt;
 	public Xoa_app App() {return app;}
-	public Wdata_doc_bldr page_bldr_(String qid) {return page_bldr.Qid_(qid);}
-	public Wdata_claim_itm_core prop_novalue_(int pid)			{return Wdata_claim_itm_system.new_novalue(pid);}
-	public Wdata_claim_itm_core prop_somevalue_(int pid)		{return Wdata_claim_itm_system.new_somevalue(pid);}
-	public Wdata_claim_itm_core prop_str_(int pid, String val) {return prop_str_(pid, Bry_.new_utf8_(val));}
-	public Wdata_claim_itm_core prop_str_(int pid, byte[] val) {return new Wdata_claim_itm_str(pid, Wdata_dict_snak_tid.Tid_value, val);}
-	public Wdata_claim_itm_core prop_time_(int pid, String val) {return new Wdata_claim_itm_time(pid, Wdata_dict_snak_tid.Tid_value, Wdata_doc_bldr.Xto_time(val), Bry_.Empty, Bry_.Empty, Bry_.Empty, Bry_.Empty, Bry_.Empty);}
-	public Wdata_claim_itm_core prop_monolingualtext_(int pid, String text, String lang) {return new Wdata_claim_itm_monolingualtext(pid, Wdata_dict_snak_tid.Tid_value, Bry_.new_utf8_(lang), Bry_.new_utf8_(text));}
-	public Wdata_claim_itm_core prop_geodata_(int pid, String lat, String lon) {return new Wdata_claim_itm_globecoordinate(pid, Wdata_dict_snak_tid.Tid_value, Bry_.new_ascii_(lat), Bry_.new_ascii_(lon), Bry_.Empty, Bry_.Empty, Bry_.Empty);}
-	public Wdata_claim_itm_core prop_quantity_(int pid, String amount, String unit, String ubound, String lbound) {return new Wdata_claim_itm_quantity(pid, Wdata_dict_snak_tid.Tid_value, Bry_.new_ascii_(amount), Bry_.new_ascii_(unit), Bry_.new_ascii_(ubound), Bry_.new_ascii_(lbound));}
-	public Wdata_claim_itm_core prop_entity_(int pid, int val) {return new Wdata_claim_itm_entity(pid, Wdata_dict_snak_tid.Tid_value, Int_.Xto_bry(val));}
-	public Wdata_doc doc_(String qid, Wdata_claim_itm_core... props) {return page_bldr.Qid_(qid).Props_add(props).Xto_page_doc();}
+	public Wdata_doc_bldr Wdoc_bldr(String qid) {return wdoc_bldr.Qid_(qid);}
+	public Wdata_claim_itm_core Make_claim_novalue(int pid)			{return Wdata_claim_itm_system.new_novalue(pid);}
+	public Wdata_claim_itm_core Make_claim_somevalue(int pid)		{return Wdata_claim_itm_system.new_somevalue(pid);}
+	public Wdata_claim_itm_core Make_claim_str(int pid, String val) {return Make_claim_str(pid, Bry_.new_utf8_(val));}
+	public Wdata_claim_itm_core Make_claim_str(int pid, byte[] val) {return new Wdata_claim_itm_str(pid, Wdata_dict_snak_tid.Tid_value, val);}
+	public Wdata_claim_itm_core Make_claim_time(int pid, String val) {return new Wdata_claim_itm_time(pid, Wdata_dict_snak_tid.Tid_value, Wdata_dict_value_time.Xto_time(val), Bry_.Empty, Bry_.Empty, Bry_.Empty, Bry_.Empty, Bry_.Empty);}
+	public Wdata_claim_itm_core Make_claim_monolingual(int pid, String lang, String text) {return new Wdata_claim_itm_monolingualtext(pid, Wdata_dict_snak_tid.Tid_value, Bry_.new_utf8_(lang), Bry_.new_utf8_(text));}
+	public Wdata_claim_itm_core Make_claim_geo(int pid, String lat, String lon) {return new Wdata_claim_itm_globecoordinate(pid, Wdata_dict_snak_tid.Tid_value, Bry_.new_ascii_(lat), Bry_.new_ascii_(lon), Bry_.Empty, Bry_.Empty, Bry_.Empty);}
+	public Wdata_claim_itm_core Make_claim_quantity(int pid, String amount, String unit, String ubound, String lbound) {return new Wdata_claim_itm_quantity(pid, Wdata_dict_snak_tid.Tid_value, Bry_.new_ascii_(amount), Bry_.new_ascii_(unit), Bry_.new_ascii_(ubound), Bry_.new_ascii_(lbound));}
+	public Wdata_claim_itm_core Make_claim_entity(int pid, int val) {return new Wdata_claim_itm_entity(pid, Wdata_dict_snak_tid.Tid_value, Int_.Xto_bry(val));}
+	public Wdata_claim_grp Make_qualifiers_grp(int pid, Wdata_claim_itm_core... ary) {return new Wdata_claim_grp(Int_obj_ref.new_(pid), ary);}
+	public Wdata_claim_grp_list Make_qualifiers(Wdata_claim_grp... ary) {
+		Wdata_claim_grp_list rv = new Wdata_claim_grp_list();
+		int len = ary.length;
+		for (int i = 0; i < len; ++i) 
+			rv.Add(ary[i]);
+		return rv;
+	}
+
+	public Wdata_doc doc_(String qid, Wdata_claim_itm_core... props) {return wdoc_bldr.Qid_(qid).Add_claims(props).Xto_wdoc();}
 	public void Init_xwikis_add(String... prefixes) {
 		int len = prefixes.length;
 		for (int i = 0; i < len; i++) {

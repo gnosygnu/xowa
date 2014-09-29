@@ -199,12 +199,14 @@ class Http_server_wkr implements Runnable {
 	}
 }
 class HttpRequest implements Runnable{
-	final static String CRLF = "\r\n";
-	Socket socket;
-	Xoa_app app;
+	private static final String CRLF = "\r\n";
+	private Socket socket;
+	private Xoa_app app;
+	private String app_root_dir;
 	public HttpRequest(Socket socket, Xoa_app app){
 		this.socket = socket;
 		this.app = app;
+		this.app_root_dir = app.Fsys_mgr().Root_dir().To_http_file_str();
 	}
 	public void run(){
 		try {
@@ -218,8 +220,15 @@ class HttpRequest implements Runnable{
 			String page_name = "Main_Page";
 			
 			if(!req.contains("%file%")){
-				if(req.equals("/")){
-					req += app.Http_server().Home();
+				if(req.equals("/")) {	// no page; EX:"localhost:8080" vs "localhost:8080/en.wikipedia.org/wiki/Earth"
+					String home_url = app.Http_server().Home();;
+					if (String_.HasAtBgn(home_url, "file://")) {
+						Io_url file_url = Io_url_.http_any_(home_url, Op_sys.Cur().Tid_is_wnt());
+						String page_html = Io_mgr._.LoadFilStr(file_url);
+						Write_page(dos, page_html, app_root_dir, wiki_domain);
+					}
+					else
+						req += app.Http_server().Home();
 				}
 				if(req.endsWith("wiki/")) req+="Main_Page";
 				if(req.endsWith("wiki")) req+="/Main_Page";
@@ -238,8 +247,8 @@ class HttpRequest implements Runnable{
 				dos.close();
 			}else
 			if(req.contains("%file%")){
-				String path = req.replace("/%file%/", app.Fsys_mgr().Root_dir().To_http_file_str());
-				path = path.substring(path.indexOf(app.Fsys_mgr().Root_dir().To_http_file_str())+5);
+				String path = req.replace("/%file%/", app_root_dir);
+				path = path.substring(path.indexOf(app_root_dir)+5);
 				Url_encoder url_converter = Url_encoder.new_http_url_();
 				path = url_converter.Decode_str(path);
 				if(path.contains("?")){
@@ -271,22 +280,10 @@ class HttpRequest implements Runnable{
 					Url_encoder url_converter = Url_encoder.new_http_url_();
 					page_name = url_converter.Decode_str(page_name);
 					//page_name = app.Url_converter_url().Decode_str(page_name);
-
 				}
-				dos.writeBytes("HTTP/1.1 200 OK: ");
-				dos.writeBytes("Content-Type: text/html; charset=utf-8" + CRLF);
-				dos.writeBytes(CRLF);
-				
 				try{
 					String page_html = app.Http_server().Parse_page_to_html(app, wiki_domain, page_name);
-					page_html = page_html.replaceAll(app.Fsys_mgr().Root_dir().To_http_file_str(),"%file%/");
-					page_html = page_html.replaceAll("xowa-cmd", "%xowa-cmd%/xowa-cmd");
-					page_html = page_html.replaceAll("<a href=\"/wiki/","<a href=\"/"+wiki_domain+"/wiki/");
-					page_html = page_html.replaceAll("action=\"/wiki/", "action=\"/"+wiki_domain+"/wiki/");
-					page_html = page_html.replaceAll("/site","");
-
-					dos.write(page_html.getBytes(Charset.forName("UTF-8")));
-					dos.close();
+					Write_page(dos, page_html, app_root_dir, wiki_domain);
 				}catch(Exception err) {
 					dos.writeBytes("Site not found. Check address please, or see console log.\n"+err.getMessage());
 					dos.close();
@@ -299,6 +296,33 @@ class HttpRequest implements Runnable{
 			System.out.println("error retrieving page. Please make sure your url is of the form: http://localhost:8080/home/wiki/Main_Page");
 			e.printStackTrace();
 		}
+	}
+	private static void Write_page(DataOutputStream strm, String page_html, String app_file_dir, String wiki_domain) {
+		page_html = Convert_page(page_html, app_file_dir, wiki_domain);
+		Write_to_stream(strm, page_html);		
+	}
+	private static String Convert_page(String page_html, String app_file_dir, String wiki_domain) {
+		page_html = page_html.replaceAll(app_file_dir			, "%file%/");
+		page_html = page_html.replaceAll("xowa-cmd"				, "%xowa-cmd%/xowa-cmd");
+		page_html = page_html.replaceAll("<a href=\"/wiki/"		, "<a href=\"/"+wiki_domain+"/wiki/");
+		page_html = page_html.replaceAll("action=\"/wiki/"		, "action=\"/"+wiki_domain+"/wiki/");
+		page_html = page_html.replaceAll("/site"				, "");
+		return page_html;
+	}
+	private static void Write_to_stream(DataOutputStream strm, String page_html) {
+		try{
+			strm.writeBytes("HTTP/1.1 200 OK: ");
+			strm.writeBytes("Content-Type: text/html; charset=utf-8" + CRLF);
+			strm.writeBytes(CRLF);				
+			strm.write(page_html.getBytes(Charset.forName("UTF-8")));
+			strm.close();
+		} catch (Exception err) {
+			try {
+				strm.writeBytes("Site not found. Check address please, or see console log.\n"+err.getMessage());
+				strm.close();
+			}
+			catch (Exception io_err) {}
+		}		
 	}
 	private void sendBytes(FileInputStream fis, DataOutputStream dos) {
 		byte[] buffer = new byte[1024];

@@ -39,7 +39,6 @@ public class Xop_xnde_tag {
 	public Xop_xnde_tag EndNdeMode_escape_() {endNdeMode = Xop_xnde_tag_.EndNdeMode_escape; return this;}
 	public boolean SingleOnly() {return singleOnly;} public Xop_xnde_tag SingleOnly_() {singleOnly = true; return this;} private boolean singleOnly;
 	public boolean TblSub() {return tblSub;} public Xop_xnde_tag TblSub_() {tblSub = true; return this;} private boolean tblSub;
-	public boolean Nest() {return nest;} public Xop_xnde_tag Nest_() {nest = true; return this;} private boolean nest;
 	public boolean Restricted() {return restricted;} public Xop_xnde_tag Restricted_() {restricted = true; return this;} private boolean restricted;
 	public boolean NoInline() {return noInline;} public Xop_xnde_tag NoInline_() {noInline = true; return this;} private boolean noInline;
 	public boolean Inline_by_backslash() {return inline_by_backslash;} public Xop_xnde_tag Inline_by_backslash_() {inline_by_backslash = true; return this;} private boolean inline_by_backslash;

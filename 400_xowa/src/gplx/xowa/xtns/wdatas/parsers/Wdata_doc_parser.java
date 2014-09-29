@@ -22,6 +22,9 @@ public interface Wdata_doc_parser {
 	OrderedHash Parse_sitelinks(byte[] qid, Json_doc doc);
 	OrderedHash Parse_langvals(byte[] qid, Json_doc doc, boolean label_or_description);
 	OrderedHash Parse_aliases(byte[] qid, Json_doc doc);
-	OrderedHash Parse_claims(Json_doc doc);
-	Wdata_claim_itm_base Parse_claims_data(int pid, byte snak_tid, Json_itm_nde nde);
+	OrderedHash Parse_claims(byte[] qid, Json_doc doc);
+	Wdata_claim_itm_base Parse_claims_data(byte[] qid, int pid, byte snak_tid, Json_itm_nde nde);
+	Wdata_claim_grp_list Parse_qualifiers(byte[] qid, Json_itm_nde nde);
+	int[] Parse_pid_order(byte[] qid, Json_itm_ary ary);
+	Wdata_references_grp[] Parse_references(byte[] qid, Json_itm_ary owner);
 }

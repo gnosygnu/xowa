@@ -161,7 +161,7 @@ public class Scrib_core {
 			Scrib_lua_mod mod = Mods_get_or_new(mod_name, mod_text);
 			KeyVal[] func_args = Scrib_kv_utl_.base1_many_(mod.Init_chunk_func(), String_.new_utf8_(fnc_name));
 			KeyVal[] func_rslt = engine.CallFunction(lib_mw.Mod().Fncs_get_id("executeModule"), func_args);			// call init_chunk to get proc dynamically; DATE:2014-07-12
-			if (func_rslt == null || func_rslt.length == 0) throw Err_.new_("lua.error:function did not return a value; fnc_name=~{0}", String_.new_utf8_(fnc_name));
+			if (func_rslt == null || func_rslt.length < 2) throw Err_.new_("lua.error:function did not return a value; fnc_name=~{0}", String_.new_utf8_(fnc_name)); // must return at least 2 items for func_rslt[1] below; DATE:2014-09-22
 			Scrib_lua_proc proc = (Scrib_lua_proc)func_rslt[1].Val();												// note that init_chunk should have: [0]:true/false result; [1]:proc
 			func_args = Scrib_kv_utl_.base1_many_(proc);
 			func_rslt = engine.CallFunction(lib_mw.Mod().Fncs_get_id("executeFunction"), func_args);				// call function now

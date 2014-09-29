@@ -32,7 +32,7 @@ class Xoctg_fmtr_grp implements Bry_fmtr_arg {
 				byte[] ttl_char_0_new = gplx.intl.Utf8_.Get_char_at_pos_as_bry(itm_sortkey, 0);
 				byte[] grp_name = ttl_char_0_new;
 				if (Bry_.Eq(ttl_char_0, ttl_char_0_new)) {
-					grp_name = Bry_.Add(ttl_char_0, Bry_space, wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_list_continues));
+					grp_name = Bry_.Add(ttl_char_0, Byte_ascii.Space_bry, wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_list_continues));
 				}
 				ttl_char_0 = ttl_char_0_new;
 				if (col_bgn_needed) {
@@ -79,5 +79,4 @@ class Xoctg_fmtr_grp implements Bry_fmtr_arg {
 		int col_max = ((len - 1) / cols_total) + 1;	// NOTE: example is easiest explanation; EX: 4, 5, 6 should have max of 2, so (a) subtract 1; (b) divide by 3; (c) add 1
 		return col_idx <= ((len - 1) % cols_total) ? col_max : col_max - 1; // NOTE: example is easiest explanation; EX: 4=2,1,1; 5=2,2,1; 6=2,2,2
 	}
-	private static final byte[] Bry_space = new byte[] {Byte_ascii.Space};
 }

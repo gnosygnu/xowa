@@ -27,8 +27,8 @@ class Scrib_lib_wikibase_srl {
 			rv.Add(KeyVal_.new_("schemaVersion", base_adj + 1));	// NOTE: needed by mw.wikibase.lua
 		}
 		Srl_root(rv, Wdata_doc_parser_v2.Str_labels			, Srl_langtexts	(Wdata_dict_langtext.Str_language	, Wdata_dict_langtext.Str_value, wdoc.Label_list()));
-		Srl_root(rv, Wdata_doc_parser_v2.Str_descriptions	, Srl_langtexts	(Wdata_dict_langtext.Str_language	, Wdata_dict_langtext.Str_value, wdoc.Description_list()));
-		Srl_root(rv, Wdata_doc_parser_v2.Str_sitelinks		, Srl_sitelinks	(Wdata_dict_sitelink.Str_site		, Wdata_dict_sitelink.Str_title, wdoc.Sitelink_list()));
+		Srl_root(rv, Wdata_doc_parser_v2.Str_descriptions	, Srl_langtexts	(Wdata_dict_langtext.Str_language	, Wdata_dict_langtext.Str_value, wdoc.Descr_list()));
+		Srl_root(rv, Wdata_doc_parser_v2.Str_sitelinks		, Srl_sitelinks	(Wdata_dict_sitelink.Str_site		, Wdata_dict_sitelink.Str_title, wdoc.Slink_list()));
 		Srl_root(rv, Wdata_doc_parser_v2.Str_aliases		, Srl_aliases	(base_adj, wdoc.Alias_list()));
 		Srl_root(rv, Wdata_doc_parser_v2.Str_claims			, Srl_claims	(base_adj, legacy_style, wdoc.Claim_list()));
 		return (KeyVal[])rv.XtoAry(KeyVal.class);
@@ -93,10 +93,10 @@ class Scrib_lib_wikibase_srl {
 		return rv;
 	}
 	private static KeyVal[] Srl_claims_prop_grp(String pid, Wdata_claim_grp grp, int base_adj) {
-		int len = grp.Itms_len();
+		int len = grp.Len();
 		KeyVal[] rv = new KeyVal[len];
 		for (int i = 0; i < len; i++) {
-			Wdata_claim_itm_core itm = grp.Itms_get_at(i);
+			Wdata_claim_itm_core itm = grp.Get_at(i);
 			rv[i] = KeyVal_.int_(i + base_adj, Srl_claims_prop_itm(pid, itm));	// NOTE: must be super 0 or super 1; DATE:2014-05-09
 		}
 		return rv;
@@ -107,7 +107,26 @@ class Scrib_lib_wikibase_srl {
 		list.Add(KeyVal_.new_("mainsnak", Srl_claims_prop_itm_core(pid, itm)));
 		list.Add(KeyVal_.new_(Wdata_dict_claim_v1.Str_rank, Wdata_dict_rank.Xto_str(itm.Rank_tid())));
 		list.Add(KeyVal_.new_("type", itm.Prop_type()));
+		Srl_root(list, Wdata_dict_claim.Str_qualifiers, Srl_qualifiers(itm.Qualifiers()));
 		return (KeyVal[])list.XtoAryAndClear(KeyVal.class);
+	}
+	private static KeyVal[] Srl_qualifiers(Wdata_claim_grp_list list) {
+		if (list == null) return null;
+		int list_len = list.Len(); if (list_len == 0) return KeyVal_.Ary_empty;
+		ListAdp rv = ListAdp_.new_();
+		ListAdp pid_list = ListAdp_.new_();
+		for (int i = 0; i < list_len; ++i) {
+			Wdata_claim_grp grp = list.Get_at(i);
+			int grp_len = grp.Len();
+			pid_list.Clear();
+			String itm_pid = grp.Id_str();
+			for (int j = 0; j < grp_len; ++j) {
+				Wdata_claim_itm_core itm = grp.Get_at(j);
+				pid_list.Add(KeyVal_.int_(j + ListAdp_.Base1, Srl_claims_prop_itm_core(itm_pid, itm)));
+			}
+			rv.Add(KeyVal_.new_(itm_pid, (KeyVal[])pid_list.XtoAryAndClear(KeyVal.class)));
+		}
+		return (KeyVal[])rv.XtoAryAndClear(KeyVal.class);
 	}
 	private static KeyVal[] Srl_claims_prop_itm_core(String pid, Wdata_claim_itm_core itm) {
 		KeyVal[] rv = new KeyVal[3];

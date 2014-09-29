@@ -15,14 +15,10 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.xtns.wdatas; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-public class Wdata_itemByTitle_cfg implements GfoInvkAble {
-	public byte[] Site_default() {return site_default;} private byte[] site_default = Bry_.new_ascii_("enwiki");
-	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_site_default))		return site_default;
-		else if (ctx.Match(k, Invk_site_default_))		site_default = m.ReadBry("v");
-		else	return GfoInvkAble_.Rv_unhandled;
-		return this;
-	}	private static final String Invk_site_default = "site_default", Invk_site_default_ = "site_default_";
-	public static final String Key = "itemByTitle";
+package gplx.xowa.xtns.wdatas.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
+public class Wdata_claim_grp_list {
+	private OrderedHash hash = OrderedHash_.new_();
+	public void Add(Wdata_claim_grp itm) {hash.Add(itm.Id_ref(), itm);}
+	public int Len() {return hash.Count();}
+	public Wdata_claim_grp Get_at(int i) {return (Wdata_claim_grp)hash.FetchAt(i);}
 }

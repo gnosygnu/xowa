@@ -23,7 +23,7 @@ public class Xop_xatr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_AT
 	private int atr_bgn = -1, key_bgn = -1, key_end = -1, eq_pos = -1, val_bgn = -1, val_end = -1; boolean valid = true;
 	private byte quote_byte = Byte_ascii.Nil;
 	private Hash_adp_bry repeated_atrs_hash = Hash_adp_bry.ci_ascii_();		// ASCII:xnde_atrs
-	private Bry_bfr key_bfr = Bry_bfr.new_(), val_bfr = Bry_bfr.new_(); boolean key_bfr_on = false, val_bfr_on = false;
+	private Bry_bfr key_bfr = Bry_bfr.new_(), val_bfr = Bry_bfr.new_(); boolean key_bfr_on = false, val_bfr_on = false, ws_is_before_val = false;
 	public Bry_obj_ref Bry_obj() {return bry_ref;} private Bry_obj_ref bry_ref = Bry_obj_ref.null_();
 	public int Xnde_find_gt_find(byte[] src, int pos, int end) {
 		bry_ref.Val_(null);
@@ -84,6 +84,7 @@ public class Xop_xatr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_AT
 						mode = Mode_atr_bgn;
 						val_bfr.Clear();
 						val_bfr_on = false;
+						ws_is_before_val = false;
 						continue;
 					}
 					else
@@ -219,6 +220,7 @@ public class Xop_xatr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_AT
 				case Mode_val_bgn:
 					switch (b) {
 						case Byte_ascii.Space: case Byte_ascii.NewLine: case Byte_ascii.Tab: // skip-ws
+							ws_is_before_val = true;
 							break;
 						case Byte_ascii.Quote: case Byte_ascii.Apos:
 							mode = Mode_val_quote; quote_byte = b; prv_is_ws = false;
@@ -262,15 +264,11 @@ public class Xop_xatr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_AT
 								Make(log_mgr, src, i + 1);	// NOTE: set atr_end *after* quote
 							}
 							prv_is_ws = false; if (val_bfr_on) val_bfr.Add_byte(b);		// INLINE: add char
-//								else {
-//									if (!val_bfr_on) val_bfr.Add_mid(src, val_bgn, i + 1);	// +1 to include '
-//									val_bfr_on = true;
-//								}
 							break;
 						case Byte_ascii.Lt:	// "<" try to find nowiki inside atr
 							int gt_pos = Xnde_find_gt(log_mgr, src, i, end);
 							if (gt_pos == String_.Find_none) {
-//									valid = false; mode = Mode_invalid;	// DELETE: 2012-11-13; unpaired < should not mark atr invalid; EX: style='margin:1em<f'
+								// valid = false; mode = Mode_invalid;	// DELETE: 2012-11-13; unpaired < should not mark atr invalid; EX: style='margin:1em<f'
 								if (!val_bfr_on) val_bfr.Add_mid(src, val_bgn, i + 1);	// +1 to include <
 								val_bfr_on = true;
 							}
@@ -292,23 +290,12 @@ public class Xop_xatr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_AT
 								prv_is_ws = true; val_bfr.Add_byte(Byte_ascii.Space);									
 							}
 							break;
-//							case Byte_ascii.Space:	// DELETE: 2012-10-14: no test to support this construct; causes problems with "a  b c"
-//								if (prv_is_ws) {
-//									if (!val_bfr_on) {
-//										val_bfr.Add_mid(src, val_bgn, i);
-//										val_bfr_on = true;
-//									}
-//								}
-//								else {
-//									prv_is_ws = true;
-//								}
-//								break;
 						default:
 							prv_is_ws = false; if (val_bfr_on) val_bfr.Add_byte(b);		// INLINE: add char
 							break;
 					}
 					break;
-				case Mode_val_raw:
+				case Mode_val_raw:	// no quotes; EX:a=bcd
 					switch (b) {
 						case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
 						case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
@@ -333,6 +320,18 @@ public class Xop_xatr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_AT
 						case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.NewLine:
 							val_end = i;
 							Make(log_mgr, src, i);
+							break;
+						case Byte_ascii.Eq:	// EX:"a= b=c" or "a=b=c"; PAGE:en.w:2013_in_American_television
+							if (ws_is_before_val) {		// "a= b=c"; discard 1st and resume at 2nd
+								int old_val_bgn = val_bgn;
+								valid = false; mode = Mode_invalid; Make(log_mgr, src, val_bgn);	// invalidate cur atr; EX:"a="
+								atr_bgn = key_bgn = old_val_bgn;	// reset atr / key to new atr; EX: "b"
+								key_end = i;
+								mode = Mode_val_bgn;				// set mode to val_bgn (basically, put after =)
+							}
+							else {						// "a=b=c"; discard all
+								valid = false; mode = Mode_invalid;
+							}
 							break;
 						case Byte_ascii.Lt:
 							val_end = i;
@@ -375,7 +374,7 @@ public class Xop_xatr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_AT
 		xatrs.Add(xatr);
 		mode = Mode_atr_bgn; quote_byte = Byte_ascii.Nil; valid = true;
 		atr_bgn = key_bgn = val_bgn = key_end = val_end = eq_pos = -1;
-		val_bfr_on = key_bfr_on = false;
+		val_bfr_on = key_bfr_on = ws_is_before_val = false;
 	}
 	private void Invalidate_repeated_atr(Xop_xatr_itm cur, byte[] key_bry) {
 		Xop_xatr_itm prv = (Xop_xatr_itm)repeated_atrs_hash.Fetch(key_bry);

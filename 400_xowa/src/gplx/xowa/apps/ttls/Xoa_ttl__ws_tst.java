@@ -24,4 +24,6 @@ public class Xoa_ttl__ws_tst {
 	@Test   public void Nl()					{fxt.Init_ttl("\n\na\n\n")			.Expd_page_txt("A").Test();}
 	@Test   public void Nl_end()				{fxt.Init_ttl("a\nb")				.Expd_page_txt("A b").Test();}
 	@Test   public void Tab()					{fxt.Init_ttl("\ta\t")				.Expd_page_txt("A").Test();}
+	@Test   public void Nbsp()					{fxt.Init_ttl("A&nbsp;bc")			.Expd_page_url("A_bc").Expd_page_txt("A bc").Test();}	// PURPOSE:convert "&nbsp;" to " "; DATE:2014-09-25
+	@Test   public void Nbsp_mix()				{fxt.Init_ttl("A &nbsp; bc")		.Expd_page_url("A_bc").Expd_page_txt("A bc").Test();}	// PURPOSE:convert multiple "&nbsp;" to " "; PAGE:en.w:Greek_government-debt_crisis; DATE:2014-09-25
 }

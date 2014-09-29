@@ -110,7 +110,7 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 			return rv;
 		} catch (Exception e) {throw Err_.err_(e, "failed to parse aliases; qid={0}", String_.new_utf8_(qid));}
 	}
-	public OrderedHash Parse_claims(Json_doc doc) {
+	public OrderedHash Parse_claims(byte[] qid, Json_doc doc) {
 		try {
 			Json_itm_ary list_nde = Json_itm_ary.cast_(doc.Get_grp(Bry_claims)); if (list_nde == null) return Empty_ordered_hash_generic;
 			ListAdp temp_list = ListAdp_.new_();
@@ -124,7 +124,7 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 			return Claims_list_to_hash(temp_list);
 		} catch (Exception e) {throw Err_.err_(e, "failed to parse claims; qid={0}", String_.new_utf8_(doc.Src()));}
 	}
-	public Wdata_claim_itm_base Parse_claims_data(int pid, byte snak_tid, Json_itm_nde nde) {throw Err_.not_implemented_();}
+	public Wdata_claim_itm_base Parse_claims_data(byte[] qid, int pid, byte snak_tid, Json_itm_nde nde) {throw Err_.not_implemented_();}
 	public static OrderedHash Claims_list_to_hash(ListAdp full_list) {
 		full_list.Sort();
 		OrderedHash rv = OrderedHash_.new_(); ListAdp temp_itms = ListAdp_.new_();
@@ -238,6 +238,9 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 		}
 		return rv;
 	}
+	public Wdata_claim_grp_list Parse_qualifiers(byte[] qid, Json_itm_nde nde)		{throw Err_.not_implemented_();}
+	public Wdata_references_grp[] Parse_references(byte[] qid, Json_itm_ary owner)	{throw Err_.not_implemented_();}
+	public int[] Parse_pid_order(byte[] qid, Json_itm_ary ary) {throw Err_.not_implemented_();}
 	public static final String
 	  Str_entity								= "entity"
 	, Str_id									= "id"

@@ -123,7 +123,7 @@ public class Xog_bnd_mgr {
 
 		Init_itm(Xog_cmd_itm_.Key_gui_page_view_mode_read						, Xog_bnd_box_.Tid_browser				, "mod.c+key.m,mod.c+key.r");
 		Init_itm(Xog_cmd_itm_.Key_gui_page_view_mode_edit						, Xog_bnd_box_.Tid_browser				, "mod.c+key.m,mod.c+key.e");
-		Init_itm(Xog_cmd_itm_.Key_gui_page_view_mode_html						, Xog_bnd_box_.Tid_browser				, "mod.c+key.m,mod.c+key.h");
+		Init_itm(Xog_cmd_itm_.Key_gui_page_view_mode_html						, Xog_bnd_box_.Tid_browser				, "mod.c+key.m,mod.c+key.h", "mod.c+key.u");
 		Init_itm(Xog_cmd_itm_.Key_gui_page_view_reload							, Xog_bnd_box_.Tid_browser				, "mod.s+key.f5");
 		Init_itm(Xog_cmd_itm_.Key_gui_page_view_refresh							, Xog_bnd_box_.Tid_browser				, "key.f5");
 		Init_itm(Xog_cmd_itm_.Key_gui_page_view_save_as							, Xog_bnd_box_.Tid_browser				, "");

@@ -23,8 +23,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 	public boolean Pre_at_bos() {return pre_at_bos;} public void Pre_at_bos_(boolean v) {pre_at_bos = v;} private boolean pre_at_bos;
 	public void Page_bgn(Xop_ctx ctx, Xop_root_tkn root) {} 
 	public void Page_end(Xop_ctx ctx, Xop_root_tkn root, byte[] src, int src_len) {this.Clear();}
-	private void Clear() {
-		
+	private void Clear() {			
 		pre_at_bos = false;
 	}
 	public void AutoClose(Xop_ctx ctx, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos, Xop_tkn_itm tkn, int closing_tkn_tid) {
@@ -338,7 +337,6 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		else if (tagId == prv_xnde_tagId && tag.Repeat_mids()) {	// EX: "<li>a<li>b" -> "<li>a</li><li>b"
 			End_tag(ctx, root, prv_xnde, src, src_len, bgn_pos - 1, bgn_pos - 1, tagId, true, tag);
 		}
-		else if (!tag.Nest() && Stack_find_xnde(ctx, tagId)) return ctx.Lxr_make_log_(Xop_xnde_log.Invalid_nest, src, bgn_pos, gtPos);
 		else if (tag.SingleOnly()) inline = true; // <br></br> not allowed; convert <br> to <br/> </br> will be escaped
 		else if (tag.NoInline() && inline) {
 			Xop_xnde_tkn xnde_inline = Xnde_bgn(ctx, tkn_mkr, root, tag, Xop_xnde_tkn.CloseMode_open, src, bgn_pos, open_tag_end, atrs_bgn, atrs_end, atrs);

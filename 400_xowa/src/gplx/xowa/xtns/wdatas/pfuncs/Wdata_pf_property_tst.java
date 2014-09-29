@@ -21,83 +21,83 @@ public class Wdata_pf_property_tst {
 	@Before public void init() {fxt.Init();} Wdata_wiki_mgr_fxt fxt = new Wdata_wiki_mgr_fxt();
 	@Test   public void String() {
 		fxt.Init_links_add("enwiki", "Test_page", "q1");
-		fxt.Init_pages_add(fxt.doc_("q1", fxt.prop_str_(1, "a")));
+		fxt.Init_pages_add(fxt.doc_("q1", fxt.Make_claim_str(1, "a")));
 		fxt.Test_parse("{{#property:p1}}", "a");
 		fxt.Test_parse("{{#property:p2}}", "");
 	}
 	@Test   public void Entity() {
 		fxt.Init_links_add("enwiki", "Test_page", "q1");
-		fxt.Init_pages_add(fxt.page_bldr_("q2").Label_add("en", "b").Xto_page_doc());
-		fxt.Init_pages_add(fxt.doc_("q1", fxt.prop_entity_(1, 2)));
+		fxt.Init_pages_add(fxt.Wdoc_bldr("q2").Add_label("en", "b").Xto_wdoc());
+		fxt.Init_pages_add(fxt.doc_("q1", fxt.Make_claim_entity(1, 2)));
 		fxt.Test_parse("{{#property:p1}}", "b");
 	}
 	@Test   public void Entity_fr() {	// PURPOSE: non-English wiki should default to English label if non-English label not available; DATE:2013-12-19
 		fxt.Wiki().Wdata_wiki_lang_(Bry_.new_ascii_("fr"));							// set wiki to French
 		fxt.Init_links_add("frwiki", "Test_page", "q1");								// create link for en:Test_page in wikidata
-		fxt.Init_pages_add(fxt.doc_("q1", fxt.prop_entity_(1, 2)));						// create wdata page Q1 with prop entity reference to Q2
-		fxt.Init_pages_add(fxt.page_bldr_("q2").Label_add("en", "b").Xto_page_doc());	// create wdata page Q2 with label in en (not fr)
+		fxt.Init_pages_add(fxt.doc_("q1", fxt.Make_claim_entity(1, 2)));						// create wdata page Q1 with prop entity reference to Q2
+		fxt.Init_pages_add(fxt.Wdoc_bldr("q2").Add_label("en", "b").Xto_wdoc());	// create wdata page Q2 with label in en (not fr)
 		fxt.Test_parse("{{#property:p1}}", "b");										// parse; should get en label
 	}
 	@Test   public void Entity_missing() {	// PURPOSE: wiki may refer to entity that no longer exists; EX: {{#property:p1}} which links to Q1, but p1 links to Q2 and Q2 was deleted; DATE:2014-02-01
 		fxt.Init_links_add("enwiki", "Test_page", "q1");								// create link for en:Test_page in wikidata
-		fxt.Init_pages_add(fxt.doc_("q1", fxt.prop_entity_(1, 2)));						// create wdata page Q1 with prop entity reference to Q2; note that Q2 is not created
+		fxt.Init_pages_add(fxt.doc_("q1", fxt.Make_claim_entity(1, 2)));						// create wdata page Q1 with prop entity reference to Q2; note that Q2 is not created
 		fxt.Test_parse("{{#property:p1}}", "");											// parse; get ""
 	}
 	@Test   public void Time() {
 		fxt.Init_links_add("enwiki", "Test_page", "q1");
-		fxt.Init_pages_add(fxt.doc_("q1", fxt.prop_time_(1, "2012-01-02 03:04:05")));
+		fxt.Init_pages_add(fxt.doc_("q1", fxt.Make_claim_time(1, "2012-01-02 03:04:05")));
 		fxt.Test_parse("{{#property:p1}}", "+00000002012-01-02T03:04:05Z");
 	}
 	@Test   public void Geodata() {
 		fxt.Init_links_add("enwiki", "Test_page", "q1");
-		fxt.Init_pages_add(fxt.doc_("q1", fxt.prop_geodata_(1, "1.2345", "6.789")));
+		fxt.Init_pages_add(fxt.doc_("q1", fxt.Make_claim_geo(1, "1.2345", "6.789")));
 		fxt.Test_parse("{{#property:p1}}", "1.2345, 6.789");
 	}
 	@Test   public void Quantity() {
 		fxt.Init_links_add("enwiki", "Test_page", "q1");
-		fxt.Init_pages_add(fxt.doc_("q1", fxt.prop_quantity_(1, "+1,234", "2", "+1,236", "+1232")));
+		fxt.Init_pages_add(fxt.doc_("q1", fxt.Make_claim_quantity(1, "+1,234", "2", "+1,236", "+1232")));
 		fxt.Test_parse("{{#property:p1}}", "1,234±2");
 	}
 	@Test   public void Monolingualtext() {
 		fxt.Init_links_add("enwiki", "Test_page", "q1");
-		fxt.Init_pages_add(fxt.doc_("q1", fxt.prop_monolingualtext_(1, "Lorem ipsum dolor sit amet", "la")));
+		fxt.Init_pages_add(fxt.doc_("q1", fxt.Make_claim_monolingual(1, "la", "Lorem ipsum dolor sit amet")));
 		fxt.Test_parse("{{#property:p1}}", "Lorem ipsum dolor sit amet");
 	}
 	@Test   public void Novalue() {
 		fxt.Init_links_add("enwiki", "Test_page", "q1");
-		fxt.Init_pages_add(fxt.doc_("q1", fxt.prop_novalue_(1)));
+		fxt.Init_pages_add(fxt.doc_("q1", fxt.Make_claim_novalue(1)));
 		fxt.Test_parse("{{#property:p1}}", "novalue");
 	}
 	@Test   public void Somevalue() {
 		fxt.Init_links_add("enwiki", "Test_page", "q1");
-		fxt.Init_pages_add(fxt.doc_("q1", fxt.prop_somevalue_(1)));
+		fxt.Init_pages_add(fxt.doc_("q1", fxt.Make_claim_somevalue(1)));
 		fxt.Test_parse("{{#property:p1}}", "somevalue");
 	}
 	@Test   public void Multiple() {
 		fxt.Init_links_add("enwiki", "Test_page", "q1");
-		fxt.Init_pages_add(fxt.doc_("q1", fxt.prop_str_(1, "a"), fxt.prop_str_(1, "b")));
+		fxt.Init_pages_add(fxt.doc_("q1", fxt.Make_claim_str(1, "a"), fxt.Make_claim_str(1, "b")));
 		fxt.Test_parse("{{#property:p1}}", "a, b");
 	}
 	@Test   public void Q() {
 		fxt.Init_links_add("enwiki", "Test_page", "q2");
-		fxt.Init_pages_add(fxt.doc_("q2", fxt.prop_str_(1, "a")));
+		fxt.Init_pages_add(fxt.doc_("q2", fxt.Make_claim_str(1, "a")));
 		fxt.Test_parse("{{#property:p1|q=q2}}", "a");
 	}
 	@Test   public void Of() {
 		fxt.Init_links_add("enwiki", "Of_page", "q2");
-		fxt.Init_pages_add(fxt.doc_("q2", fxt.prop_str_(1, "a")));
+		fxt.Init_pages_add(fxt.doc_("q2", fxt.Make_claim_str(1, "a")));
 		fxt.Test_parse("{{#property:p1|of=Of_page}}", "a");
 	}
 	@Test   public void Pid_as_name() {
 		fxt.Init_links_add("enwiki", "Test_page", "q2");
 		fxt.Init_pids_add("en", "astronomic symbol", 1);
-		fxt.Init_pages_add(fxt.doc_("q2", fxt.prop_str_(1, "a")));
+		fxt.Init_pages_add(fxt.doc_("q2", fxt.Make_claim_str(1, "a")));
 		fxt.Test_parse("{{#property:astronomic symbol}}", "a");
 	}
 	@Test   public void Empty_arg() {	// PURPOSE: {{#property:p1|}} should not fail / warn; DATE:2013-11-15
 		fxt.Init_links_add("enwiki", "Test_page", "q2");
 		fxt.Init_pids_add("en", "astronomic symbol", 1);
-		fxt.Init_pages_add(fxt.doc_("q2", fxt.prop_str_(1, "a")));
+		fxt.Init_pages_add(fxt.doc_("q2", fxt.Make_claim_str(1, "a")));
 		fxt.Test_parse("{{#property:p1|}}", "a");
 	}
 	@Test  public void Data() {
@@ -119,7 +119,6 @@ class Wdata_pf_property_data_fxt {
 		if (app == null) {
 			parser_fxt = new Xop_fxt();
 			app = parser_fxt.App();
-			page_bldr = new Wdata_doc_bldr(app.Wiki_mgr().Wdata_mgr());
 			wdata_mgr = app.Wiki_mgr().Wdata_mgr();
 		}
 		Io_mgr._.InitEngine_mem();
@@ -128,7 +127,7 @@ class Wdata_pf_property_data_fxt {
 		expd_id_int = -1;
 		expd_q = expd_of = null;
 		return this;
-	}	private Xoa_app app; Wdata_wiki_mgr wdata_mgr; Wdata_doc_bldr page_bldr; Xop_fxt parser_fxt;
+	}	private Xoa_app app; private Wdata_wiki_mgr wdata_mgr; private Xop_fxt parser_fxt;
 	public Wdata_pf_property_data_fxt Expd_id_int_(int v) {expd_id_int = v; return this;} private int expd_id_int;
 	public Wdata_pf_property_data_fxt Expd_q_(String v) {expd_q = Bry_.new_ascii_(v); return this;} private byte[] expd_q;
 	public Wdata_pf_property_data_fxt Expd_of_(String v) {expd_of = Bry_.new_ascii_(v); return this;} private byte[] expd_of;

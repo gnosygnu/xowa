@@ -56,7 +56,7 @@ public class Xoh_module_itm__globals implements Xoh_module_itm {
 		wtr.Write_js_global_ini_atr_obj(Key_wgMonthNames				, months_long);
 		wtr.Write_js_global_ini_atr_obj(Key_wgMonthNamesShort			, months_short);
 	}
-	private static final byte[] 
+	public static final byte[] 
 	  Key_mode_is_gui					= Bry_.new_ascii_("mode_is_gui")
 	, Key_mode_is_http					= Bry_.new_ascii_("mode_is_http")
 	, Key_http_port						= Bry_.new_ascii_("http-port")

@@ -20,13 +20,13 @@ import org.junit.*; import gplx.xowa.xtns.wdatas.*;
 public class Xog_html_js_cbk_wdata_labels_tst {
 	@Before public void init() {fxt.Init();} Wdata_wiki_mgr_fxt fxt = new Wdata_wiki_mgr_fxt();
 	@Test   public void Basic() {
-		fxt.Init_pages_add(fxt.page_bldr_("q1").Label_add("en", "en_q1").Xto_page_doc());
-		fxt.Init_pages_add(fxt.page_bldr_("q2").Label_add("en", "en_q2").Xto_page_doc());
-		fxt.Init_pages_add(fxt.page_bldr_("Property:P1").Label_add("en", "en_property_p1").Xto_page_doc());
+		fxt.Init_pages_add(fxt.Wdoc_bldr("q1").Add_label("en", "en_q1").Xto_wdoc());
+		fxt.Init_pages_add(fxt.Wdoc_bldr("q2").Add_label("en", "en_q2").Xto_wdoc());
+		fxt.Init_pages_add(fxt.Wdoc_bldr("Property:P1").Add_label("en", "en_property_p1").Xto_wdoc());
 		Tst_wikidata_label_get(String_.Ary("en", "q1", "q2", "Property:P1"), String_.Ary("en_q1", "en_q2", "en_property_p1"));
 	}
 	@Test   public void Outliers() {
-		fxt.Init_pages_add(fxt.page_bldr_("q1").Label_add("en", "en_q1").Label_add("de", "de_q1").Xto_page_doc());
+		fxt.Init_pages_add(fxt.Wdoc_bldr("q1").Add_label("en", "en_q1").Add_label("de", "de_q1").Xto_wdoc());
 		Tst_wikidata_label_get(String_.Ary("fr", "q1"), String_.Ary((String)null));
 		Tst_wikidata_label_get(String_.Ary("de", "q1"), String_.Ary("de_q1"));
 		Tst_wikidata_label_get(String_.Ary("xowa_title", "q1"), String_.Ary("q1"));

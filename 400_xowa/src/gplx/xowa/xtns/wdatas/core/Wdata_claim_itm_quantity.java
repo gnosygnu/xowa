@@ -22,10 +22,23 @@ public class Wdata_claim_itm_quantity extends Wdata_claim_itm_core { 	public Wda
 	}
 	@Override public byte Val_tid() {return Wdata_dict_val_tid.Tid_quantity;}
 	public byte[] Amount() {return amount;} private final byte[] amount;
-	public byte[] Unit() {return unit;} private final byte[] unit;
+	public long Amount_as_long() {
+		if (amount_as_long == Long_.MinValue) amount_as_long = Long_.parse_(String_.new_ascii_(amount));
+		return amount_as_long;
+	}	private long amount_as_long = Long_.MinValue;
 	public byte[] Ubound() {return ubound;} private final byte[] ubound;
+	public long Ubound_as_long() {
+		if (ubound_as_long == Long_.MinValue) ubound_as_long = Long_.parse_(String_.new_ascii_(ubound));
+		return ubound_as_long;
+	}	private long ubound_as_long = Long_.MinValue;
 	public byte[] Lbound() {return lbound;} private final byte[] lbound;
+	public long Lbound_as_long() {
+		if (lbound_as_long == Long_.MinValue) lbound_as_long = Long_.parse_(String_.new_ascii_(lbound));
+		return lbound_as_long;
+	}	private long lbound_as_long = Long_.MinValue;
+	public byte[] Unit() {return unit;} private final byte[] unit;
 	@Override public String toString() {// TEST:
 		return String_.Concat_with_str("|", Wdata_dict_snak_tid.Xto_str(this.Snak_tid()), Wdata_dict_val_tid.Xto_str(this.Val_tid()), String_.new_utf8_(amount), String_.new_utf8_(unit), String_.new_utf8_(ubound), String_.new_utf8_(lbound));
 	}
+	public static final byte[] Unit_1 = Bry_.new_ascii_("1");
 }

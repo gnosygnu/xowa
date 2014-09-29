@@ -178,7 +178,7 @@ class Wdata_description_tbl extends Wdata_tbl_base {
 		);
 	}
 	@Override public Db_idx_itm[] Idx_ary() {return new Db_idx_itm[] {Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS wdata_description__main ON wdata_description (page_id, lang_key);")};}
-	@Override public void Exec_insert_by_wdoc(byte[] lang_key, Wdata_wiki_mgr wdata_mgr, int page_id, Wdata_doc wdoc) {Exec_insert_kvs(this.Insert_stmt(), page_id, wdoc.Description_list());}
+	@Override public void Exec_insert_by_wdoc(byte[] lang_key, Wdata_wiki_mgr wdata_mgr, int page_id, Wdata_doc wdoc) {Exec_insert_kvs(this.Insert_stmt(), page_id, wdoc.Descr_list());}
 	@Override public String[] Fld_ary() {return new String[] {Fld_page_id, Fld_lang_key, Fld_val};}
 	private static final String Fld_page_id = "page_id", Fld_lang_key  = "lang_key", Fld_val = "val";
 }
@@ -196,7 +196,7 @@ class Wdata_link_tbl extends Wdata_tbl_base {
 	@Override public Db_idx_itm[] Idx_ary() {return new Db_idx_itm[] {Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS wdata_link__main ON wdata_link (page_id, wiki_key);")};}
 	@Override public String[] Fld_ary() {return new String[] {Fld_page_id, Fld_wiki_key, Fld_val};}
 	@Override public void Exec_insert_by_wdoc(byte[] lang_key, Wdata_wiki_mgr wdata_mgr, int page_id, Wdata_doc wdoc) {
-		OrderedHash hash = wdoc.Sitelink_list();
+		OrderedHash hash = wdoc.Slink_list();
 		int len = hash.Count();
 		Db_stmt insert_stmt = this.Insert_stmt();
 		for (int i = 0; i < len; i++) {
@@ -251,11 +251,11 @@ class Wdata_claim_tbl extends Wdata_tbl_base {
 		int list_len = list.Count();
 		for (int i = 0; i < list_len; i++) {
 			Wdata_claim_grp claim_grp = (Wdata_claim_grp)list.FetchAt(i);
-			int itms_len = claim_grp.Itms_len();
+			int itms_len = claim_grp.Len();
 			int entity_id = -1;
 			byte[] claim_val = Bry_.Empty;
 			for (int j = 0; j < itms_len; j++) {
-				Wdata_claim_itm_core claim = claim_grp.Itms_get_at(j);
+				Wdata_claim_itm_core claim = claim_grp.Get_at(j);
 				byte val_tid = claim.Val_tid();
 				switch (val_tid) {
 					case Wdata_dict_val_tid.Tid_string:

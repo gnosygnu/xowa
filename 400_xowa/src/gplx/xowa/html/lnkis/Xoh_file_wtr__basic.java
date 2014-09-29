@@ -50,6 +50,9 @@ public class Xoh_file_wtr__basic {
 		byte[] img_orig_src = xfer_itm.Html_orig_src();
 		byte[] lnki_ttl = lnki.Ttl().Page_txt();				
 		Xof_ext lnki_ext = xfer_itm.Lnki_ext();
+		boolean lnki_is_thumbable = Xop_lnki_type.Id_is_thumbable(lnki.Lnki_type());
+		if (lnki_is_thumbable && !xfer_itm.File_found())			// "non-found" thumbs should default to 220; otherwise large "non-found" thumbs will create large boxes; PAGE:en.w:Wikipedia:Featured_picture_candidates/September_Morn "|1000000x260px"; DATE:2014-09-24
+			div_width = Xof_img_size.Thumb_width_img;
 		if (	html_mgr.Img_suppress_missing_src()					// option to suppress src when file is missing
 			&&	!xfer_itm.Html_pass()								// file is missing; wipe values and wait for "correct" info before regenerating; mostly to handle unknown redirects
 			&&	!lnki_ext.Id_is_media()								// file is media; never suppress; src needs to be available for "click" on play; note that most media will be missing (not downloaded)
@@ -74,7 +77,7 @@ public class Xoh_file_wtr__basic {
 			else if  (lnki_ext.Id_is_audio())						// audio
 				this.Write_file_audio(bfr, ctx, src, lnki, uid, div_width, lnki_halign_bry, lnki_href, img_orig_src, img_alt);
 			else													// image
-				this.Write_file_image(bfr, ctx, hctx, src, lnki, xfer_itm, uid, div_width, lnki_halign, lnki_halign_bry, lnki_ttl, lnki_ext, lnki_href, img_view_src, img_orig_src, img_alt);
+				this.Write_file_image(bfr, ctx, hctx, src, lnki, xfer_itm, uid, lnki_is_thumbable, div_width, lnki_halign, lnki_halign_bry, lnki_ttl, lnki_ext, lnki_href, img_view_src, img_orig_src, img_alt);
 		}
 		if (hctx.Mode_is_hdump() && Xof_html_elem.Tid_is_file(xfer_itm.Html_elem_tid())) {
 			page.Hdump_data().Data_add_img(new Hdump_data_img__basic(), xfer_itm, Hdump_data_img__gallery.Tid_basic);
@@ -99,7 +102,7 @@ public class Xoh_file_wtr__basic {
 		else
 			bfr.Add(content);
 	}
-	private void Write_file_image(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xof_xfer_itm xfer_itm, int uid, int div_width, int lnki_halign, byte[] lnki_halign_bry
+	private void Write_file_image(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xof_xfer_itm xfer_itm, int uid, boolean lnki_is_thumbable, int div_width, int lnki_halign, byte[] lnki_halign_bry
 		, byte[] lnki_ttl, Xof_ext lnki_ext, byte[] lnki_href, byte[] img_view_src, byte[] img_orig_src, byte[] alt) {
 		if (lnki_halign == Xop_lnki_align_h.Center) bfr.Add(Div_center_bgn);
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();
@@ -107,7 +110,7 @@ public class Xoh_file_wtr__basic {
 			? Arg_anchor_title(tmp_bfr, src, lnki, lnki_ttl, anchor_title_wkr)	// NOTE: Arg_anchor_title should only be called if there is no caption, else refs may not show; DATE:2014-03-05
 			: Bry_.Empty;	
 		Xoh_file_img_wkr lnki_file_wkr = lnki.Lnki_file_wkr(); if (lnki_file_wkr == null) lnki_file_wkr = html_fmtr;
-		if (Xop_lnki_type.Id_is_thumbable(lnki.Lnki_type())) {	// is "thumb"
+		if (lnki_is_thumbable) {	// is "thumb"
 			if (bfr.Len() > 0) bfr.Add_byte_nl();
 			byte[] content = Arg_content_thumb(lnki_file_wkr, ctx, hctx, src, lnki, xfer_itm, uid, lnki_href, img_view_src, img_orig_src, alt, lnki_ttl, anchor_title);
 			html_fmtr.Html_thumb_core(bfr, uid, lnki_halign_bry, div_width, content);

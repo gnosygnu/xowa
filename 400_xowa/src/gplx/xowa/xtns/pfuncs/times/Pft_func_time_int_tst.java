@@ -15,13 +15,10 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.xtns.wdatas; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.json.*;
-import gplx.xowa.xtns.pfuncs.*;
-public class Wdata_pf_wbreponame extends Pf_func_base {
-	@Override public int Id() {return Xol_kwd_grp_.Id_wbreponame;}
-	@Override public Pf_func New(int id, byte[] name) {return new Wdata_pf_wbreponame().Name_(name);}
-	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {
-		bfr.Add(Reponame);	// NOTE: MW has logic to look for message named "wbreponame", and returning it if it exists; only applies to non-WMF Wikidatas; DATE:2014-09-07
-	}	private static final byte[] Reponame = Bry_.new_ascii_("Wikidata");
+package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+import org.junit.*;
+public class Pft_func_time_int_tst {
+	@Before	public void init()							{fxt.Reset(); Tfds.Now_set(DateAdp_.new_(2012, 1, 2, 3, 4, 5, 6));} private Xop_fxt fxt = new Xop_fxt();
+	@Test   public void Time_before_date__dmy()			{fxt.Test_parse_tmpl_str("{{#time:Y-m-d H:i|01:02 3.4.2005}}"				, "2005-04-03 01:02");}	// PAGE:sk.w:Dr._House; DATE:2014-09-23
+	@Test   public void Time_before_date__mdy()			{fxt.Test_parse_tmpl_str("{{#time:Y-m-d H:i|01:02 3.14.2005}}"				, "<strong class=\"error\">Invalid month: 14</strong>");}	// mdy is invalid; DATE:2014-09-23
 }

@@ -17,9 +17,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 public class Wdata_dict_utl {
-	public static byte Get_tid_or_fail(Hash_adp_bry dict, byte[] key) {
+	public static byte Get_tid_or_invalid(byte[] qid, Hash_adp_bry dict, byte[] key) {
 		Object rv_obj = dict.Get_by_bry(key);
-		if (rv_obj == null) throw Err_.new_("unknown key; key={0}", String_.new_ascii_(key));
+		if (rv_obj == null) {
+			Gfo_usr_dlg_._.Warn_many("", "", "unknown wikidata key; qid=~{0} key=~{1}", String_.new_utf8_(qid), String_.new_utf8_(key));
+			return Tid_invalid;
+		}
 		return ((Byte_obj_val)rv_obj).Val();
 	}
+	public static final byte Tid_invalid = Byte_.MaxValue_127;
 }

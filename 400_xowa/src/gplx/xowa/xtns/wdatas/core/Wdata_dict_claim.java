@@ -26,14 +26,23 @@ public class Wdata_dict_claim {
 	, Tid_qualifiers							= 5
 	, Tid_qualifiers_order						= 6
 	;
+	public static String
+	  Str_mainsnak								= "mainsnak"
+	, Str_type									= "type"
+	, Str_id									= "id"
+	, Str_rank									= "rank"
+	, Str_references							= "references"
+	, Str_qualifiers							= "qualifiers"
+	, Str_qualifiers_order						= "qualifiers-order"
+	;
 	public static byte[] 
-	  Bry_mainsnak								= Bry_.new_ascii_("mainsnak")
-	, Bry_type									= Bry_.new_ascii_("type")
-	, Bry_id									= Bry_.new_ascii_("id")
-	, Bry_rank									= Bry_.new_ascii_("rank")
-	, Bry_references							= Bry_.new_ascii_("references")
-	, Bry_qualifiers							= Bry_.new_ascii_("qualifiers")
-	, Bry_qualifiers_order						= Bry_.new_ascii_("qualifiers-order")
+	  Bry_mainsnak								= Bry_.new_ascii_(Str_mainsnak)
+	, Bry_type									= Bry_.new_ascii_(Str_type)
+	, Bry_id									= Bry_.new_ascii_(Str_id)
+	, Bry_rank									= Bry_.new_ascii_(Str_rank)
+	, Bry_references							= Bry_.new_ascii_(Str_references)
+	, Bry_qualifiers							= Bry_.new_ascii_(Str_qualifiers)
+	, Bry_qualifiers_order						= Bry_.new_ascii_(Str_qualifiers_order)
 	;
 	public static final Hash_adp_bry Dict = Hash_adp_bry.cs_()
 	.Add_bry_byte(Bry_mainsnak					, Tid_mainsnak)

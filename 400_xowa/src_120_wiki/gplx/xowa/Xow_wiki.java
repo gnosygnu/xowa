@@ -135,7 +135,7 @@ public class Xow_wiki implements GfoInvkAble {
 	public Xoa_page GetPageByTtl(Xoa_url url, Xoa_ttl ttl, Xog_tab_itm tab) {return GetPageByTtl(url, ttl, lang, tab, true);}
 	public Xoa_page GetPageByTtl(Xoa_url url, Xoa_ttl ttl, Xol_lang lang, Xog_tab_itm tab, boolean parse_page) {
 		if (init_needed) Init_wiki(app.User());
-		Xoa_page page = data_mgr.Get_page(url, ttl, false, false);				// get page from data_mgr
+		Xoa_page page = data_mgr.Get_page(url, ttl, false, false);						// get page from data_mgr
 		if (page.Missing()) {													// page doesn't exist
 			if (ttl.Ns().Id_file()) {
 				Xow_wiki commons_wiki = app.Wiki_mgr().Get_by_key_or_null(commons_wiki_key);

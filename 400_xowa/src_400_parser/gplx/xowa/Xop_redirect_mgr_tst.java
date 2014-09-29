@@ -36,6 +36,7 @@ public class Xop_redirect_mgr_tst {
 	}
 	@Test  public void Url_decode()				{fxt.Test_redirect("#REDIRECT [[A%28B%29]]"	, "A(B)");}		// PURPOSE: url-decode links; PAGE:en.w:Watcher_(Buffy_the_Vampire_Slayer); DATE:2014-08-18
 	@Test  public void Url_decode_plus()		{fxt.Test_redirect("#REDIRECT [[A%28B%29+]]", "A(B)+");}	// PURPOSE: do not url-decode +; PAGE:en.w:Template:Positionskarte+; DATE:2014-08-22
+	@Test  public void Amp()					{fxt.Test_redirect("#REDIRECT [[A &amp; B]]", "A & B");}	// PURPOSE: &amp; -> &; PAGE:en.w:Amadou Bagayoko?redirect=n; DATE:2014-09-23
 	@Test  public void Frame_ttl() {	// PURPOSE: redirect should set invk frame title to redirect_trg, not original; PAGE:en.w:Statutory_city DATE:2014-08-22
 		fxt.Test_frame_ttl("Template:A", "#REDIRECT [[Template:B]]", "Template:B", "Template:B");
 	}

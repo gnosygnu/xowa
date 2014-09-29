@@ -22,6 +22,10 @@ public class Wdata_claim_itm_time extends Wdata_claim_itm_core { 	public Wdata_c
 	}
 	@Override public byte Val_tid() {return Wdata_dict_val_tid.Tid_time;}
 	public byte[] Time() {return time;} private final byte[] time;
+	public Wdata_date Time_as_date() {
+		if (time_as_date == null) time_as_date = Wdata_date.parse(time);
+		return time_as_date;
+	} private Wdata_date time_as_date;
 	public byte[] Before() {return before;} private final byte[] before;
 	public byte[] After() {return after;} private final byte[] after;
 	public byte[] Precision() {return precision;} private final byte[] precision;

@@ -76,6 +76,7 @@ public class Byte_ascii {
 	, Dot_bry				= new byte[] {Byte_ascii.Dot}
 	, Comma_bry				= new byte[] {Byte_ascii.Comma}
 	, Colon_bry				= new byte[] {Byte_ascii.Colon}
+	, Amp_bry				= new byte[] {Byte_ascii.Amp}
 	, Lt_bry				= new byte[] {Byte_ascii.Lt}
 	, Gt_bry				= new byte[] {Byte_ascii.Gt}
 	, Brack_bgn_bry			= new byte[] {Byte_ascii.Brack_bgn}

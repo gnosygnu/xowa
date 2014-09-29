@@ -54,8 +54,8 @@ class Pxd_itm_month_name extends Pxd_itm_base implements Pxd_itm_prototype {
 				Pxd_itm_int itm_1 = Pxd_itm_int_.CastOrNull(data_ary[1]);
 				if (itm_1 == null) {return;} // trie: fail
 				switch (itm_1.Digits()) {
-					case 4: 	Pxd_itm_int_.Year_err(state, itm_1); break;
-					default: 	Pxd_itm_int_.Day_err(state, itm_1); break;				
+					case 4: 	Pxd_eval_seg.Eval_as_y(state, itm_1); break;
+					default: 	Pxd_eval_seg.Eval_as_d(state, itm_1); break;				
 				}
 				break;
 			}
@@ -65,10 +65,10 @@ class Pxd_itm_month_name extends Pxd_itm_base implements Pxd_itm_prototype {
 				Pxd_itm_int itm_2 = Pxd_itm_int_.CastOrNull(data_ary[2]);
 				if (itm_1 == null || itm_2 == null) {return;} // trie: fail
 				if (itm_1.Digits() == 4) {	// ASSUME: year since there are 4 digits; EX: May 2012
-					if (!Pxd_itm_int_.Year_err(state, itm_1)) return;	// no error; return; otherwise continue below;
+					if (Pxd_eval_seg.Eval_as_y(state, itm_1)) return;	// no error; return; otherwise continue below;
 				}
-				if (Pxd_itm_int_.Day_err(state, itm_1)) return;
-				if (Pxd_itm_int_.Year_err(state, itm_2)) return;
+				if (!Pxd_eval_seg.Eval_as_d(state, itm_1)) return;
+				if (!Pxd_eval_seg.Eval_as_y(state, itm_2)) return;
 				break;
 			}
 		}
@@ -81,8 +81,8 @@ class Pxd_itm_month_name extends Pxd_itm_base implements Pxd_itm_prototype {
 				Pxd_itm_int itm_0 = Pxd_itm_int_.CastOrNull(data_ary[0]);
 				if (itm_0 == null) {return;} // trie: fail
 				switch (itm_0.Digits()) {
-					case 4: 	Pxd_itm_int_.Year_err(state, itm_0); break;
-					default: 	Pxd_itm_int_.Day_err(state, itm_0); break;				
+					case 4: 	Pxd_eval_seg.Eval_as_y(state, itm_0); break;
+					default: 	Pxd_eval_seg.Eval_as_d(state, itm_0); break;				
 				}
 				break;
 			}
@@ -93,17 +93,17 @@ class Pxd_itm_month_name extends Pxd_itm_base implements Pxd_itm_prototype {
 				if (itm_0 == null || itm_2 == null) {return;} // trie: fail
 				switch (itm_0.Digits()) {
 					case 4:
-						if (Pxd_itm_int_.Year_err(state, itm_0)) return;						
-						if (Pxd_itm_int_.Day_err(state, itm_2)) return;
+						if (!Pxd_eval_seg.Eval_as_y(state, itm_0)) return;						
+						if (!Pxd_eval_seg.Eval_as_d(state, itm_2)) return;
 						break;
 					default:
 						if (itm_2.Digits() == 4) {
-							if (Pxd_itm_int_.Day_err(state, itm_0)) return;							
-							if (Pxd_itm_int_.Year_err(state, itm_2)) return;						
+							if (!Pxd_eval_seg.Eval_as_d(state, itm_0)) return;							
+							if (!Pxd_eval_seg.Eval_as_y(state, itm_2)) return;						
 						}
 						else { // 2 digits on either side of month; assume dd mm yy; EX: 03 Feb 01 -> 2001-02-03
-							if (Pxd_itm_int_.Day_err(state, itm_0)) return;						
-							if (Pxd_itm_int_.Year_err(state, itm_2)) return;							
+							if (!Pxd_eval_seg.Eval_as_d(state, itm_0)) return;						
+							if (!Pxd_eval_seg.Eval_as_y(state, itm_2)) return;							
 						}
 						break;
 				}
@@ -121,17 +121,17 @@ class Pxd_itm_month_name extends Pxd_itm_base implements Pxd_itm_prototype {
 				if (itm_0 == null || itm_1 == null) {return;} // trie: fail
 				switch (itm_0.Digits()) {
 					case 4:
-						if (Pxd_itm_int_.Year_err(state, itm_0)) return;						
-						if (Pxd_itm_int_.Day_err(state, itm_1)) return;
+						if (!Pxd_eval_seg.Eval_as_y(state, itm_0)) return;						
+						if (!Pxd_eval_seg.Eval_as_d(state, itm_1)) return;
 						break;
 					default:
 						if (itm_1.Digits() == 4) {
-							if (Pxd_itm_int_.Day_err(state, itm_0)) return;							
-							if (Pxd_itm_int_.Year_err(state, itm_1)) return;
+							if (!Pxd_eval_seg.Eval_as_d(state, itm_0)) return;							
+							if (!Pxd_eval_seg.Eval_as_y(state, itm_1)) return;
 						}
 						else { // 2 digits on either side of month; assume dd mm yy; EX: 03 Feb 01 -> 2001-02-03
-							if (Pxd_itm_int_.Day_err(state, itm_0)) return;						
-							if (Pxd_itm_int_.Year_err(state, itm_1)) return;							
+							if (!Pxd_eval_seg.Eval_as_d(state, itm_0)) return;						
+							if (!Pxd_eval_seg.Eval_as_y(state, itm_1)) return;							
 						}
 						break;
 				}

@@ -63,6 +63,7 @@ class Pxd_itm_ {
 		}
 		return null;
 	}
+	public static boolean Eval_needed(Pxd_itm itm) {return itm.Seg_idx() == -1;}
 }
 abstract class Pxd_itm_base implements Pxd_itm {
 	public abstract byte Tkn_tid();

@@ -20,6 +20,10 @@ public class Html_tag_ {
 	public static final byte[]
 	  Ul_name_bry		= Bry_.new_ascii_("ul")
 	, A_name_bry		= Bry_.new_ascii_("a")
+	, Code_name_bry		= Bry_.new_ascii_("code")
+	, Tr_name_bry		= Bry_.new_ascii_("tr")
+	, Td_name_bry		= Bry_.new_ascii_("td")
+	, Table_name_bry	= Bry_.new_ascii_("table")
 	;
 	public static final byte[]
 	  Br_inl					= Bry_.new_ascii_("<br/>")

@@ -66,7 +66,6 @@ public class Io_mgr {	// exists primarily to gather all cmds under gplx namespac
 	}
 	public void AliasDir_sysEngine(String srcRoot, String trgRoot)			{AliasDir(srcRoot, trgRoot, IoEngine_.SysKey);}
 	public void AliasDir(String srcRoot, String trgRoot, String engineKey)	{IoUrlInfoRegy._.Reg(IoUrlInfo_.alias_(srcRoot, trgRoot, engineKey));}
-//		public IoStream						OpenStreamRead2(Io_url url)		{return IoEngine_xrg_openRead.new_(url).ExecAsIoStreamOrFail();}
 	public IoStream						OpenStreamRead(Io_url url)		{return OpenStreamRead_args(url).ExecAsIoStreamOrFail();}
 	public IoEngine_xrg_openRead		OpenStreamRead_args(Io_url url)	{return IoEngine_xrg_openRead.new_(url);}
 	public String						LoadFilStr(String url) {return LoadFilStr_args(Io_url_.new_fil_(url)).Exec();}

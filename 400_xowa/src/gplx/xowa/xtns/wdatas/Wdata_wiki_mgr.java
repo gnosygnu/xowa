@@ -121,10 +121,10 @@ public class Wdata_wiki_mgr implements GfoInvkAble {
 		return qids[qid_idx];
 	}
 	public void Resolve_to_bfr(Bry_bfr bfr, Wdata_claim_grp prop_grp, byte[] lang_key) {
-		int len = prop_grp.Itms_len();
+		int len = prop_grp.Len();
 		for (int i = 0; i < len; i++) {	// NOTE: multiple props possible; EX: roles = scientist,painter
 			if (i != 0) bfr.Add(Prop_tmpl_val_dlm);
-			Wdata_claim_itm_core prop = prop_grp.Itms_get_at(i);
+			Wdata_claim_itm_core prop = prop_grp.Get_at(i);
 			switch (prop.Snak_tid()) {
 				case Wdata_dict_snak_tid.Tid_novalue	: bfr.Add(Wdata_dict_snak_tid.Bry_novalue); break;
 				case Wdata_dict_snak_tid.Tid_somevalue	: bfr.Add(Wdata_dict_snak_tid.Bry_somevalue); break;
@@ -180,7 +180,8 @@ public class Wdata_wiki_mgr implements GfoInvkAble {
 	private static final byte[] Ignore_comma = new byte[]{Byte_ascii.Comma};
 	private static final byte[] Bry_quantity_margin_of_error = Bry_.new_utf8_("±");
 	public static final byte[] Bry_q = Bry_.new_ascii_("q"), Prop_tmpl_val_dlm = Bry_.new_ascii_(", ");
-	public void Write_json_as_html(Bry_bfr bfr, byte[] data_raw) {
+	public void Write_json_as_html(Bry_bfr bfr, byte[] data_raw) {Write_json_as_html(jdoc_parser, bfr, data_raw);}
+	public static void Write_json_as_html(Json_parser jdoc_parser, Bry_bfr bfr, byte[] data_raw) {
 		bfr.Add(Xoh_consts.Span_bgn_open).Add(Xoh_consts.Id_atr).Add(Html_json_id).Add(Xoh_consts.__end_quote);	// <span id="xowa-wikidata-json">
 		Json_doc json = jdoc_parser.Parse(data_raw);
 		json.Root().Print_as_json(bfr, 0);

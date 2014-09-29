@@ -213,9 +213,12 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 							if (amp_itm.Tid() == Xop_amp_trie_itm.Tid_name) {
 								switch (amp_itm.Char_int()) {
 									case 160:	// NOTE: &nbsp must convert to space; EX:w:United States [[Image:Dust Bowl&nbsp;- Dallas, South Dakota 1936.jpg|220px|alt=]]
-										b_ary = Bry_space;
-										break;
+										if (ltr_bgn != -1) add_ws = true;	// apply same ws rules as Space, NewLine; needed for converting multiple ws into one; EX:" &nbsp; " -> " " x> "   "; PAGEen.w:Greek_government-debt_crisis; DATE:2014-09-25
+										cur = match_pos; // set cur after ";"
+										continue;
 									case Byte_ascii.Amp:
+										b_ary = Byte_ascii.Amp_bry;		// NTOE: if &amp; convert to &; PAGE:en.w:Amadou Bagayoko?redirect=n; DATE:2014-09-23
+										break;
 									case Byte_ascii.Quote:
 									case Byte_ascii.Lt:
 									case Byte_ascii.Gt:
@@ -352,7 +355,6 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 		tors_txt = tors_ns.Name_txt_w_colon();
 		return true;
 	}		
-	private byte[] Bry_space = Bry_.new_ascii_(" ");
 	public static byte[] Replace_spaces(byte[] raw) {return Bry_.Replace(raw, Byte_ascii.Space, Byte_ascii.Underline);}
 	public static byte[] Replace_unders(byte[] raw) {return Bry_.Replace(raw, Byte_ascii.Underline, Byte_ascii.Space);}
 	private int wik_bgn = -1, ns_bgn = -1, page_bgn = 0, leaf_bgn = -1, anch_bgn = -1, root_bgn = -1;
