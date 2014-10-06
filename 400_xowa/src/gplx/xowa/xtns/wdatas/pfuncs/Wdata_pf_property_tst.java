@@ -50,7 +50,7 @@ public class Wdata_pf_property_tst {
 	}
 	@Test   public void Geodata() {
 		fxt.Init_links_add("enwiki", "Test_page", "q1");
-		fxt.Init_pages_add(fxt.doc_("q1", fxt.Make_claim_geo(1, "1.2345", "6.789")));
+		fxt.Init_pages_add(fxt.doc_("q1", fxt.Make_claim_geo(1, "6.789", "1.2345")));
 		fxt.Test_parse("{{#property:p1}}", "1.2345, 6.789");
 	}
 	@Test   public void Quantity() {

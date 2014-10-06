@@ -187,7 +187,12 @@ public class Scrib_core {
 		}
 		return rv;
 	}
-	public static Scrib_core Core() {return core;} public static Scrib_core Core_new_(Xoa_app app, Xop_ctx ctx) {core = new Scrib_core(app, ctx); return core;} private static Scrib_core core;
+	public static Scrib_core Core() {return core;}
+	public static Scrib_core Core_new_(Xoa_app app, Xop_ctx ctx) {
+		core = new Scrib_core(app, ctx);
+		core_invalidate_when_page_changes = false;
+		return core;
+	}	private static Scrib_core core;
 	public void Handle_error(String err, String traceback) {
 		String excerpt = "";
 		try {
@@ -197,8 +202,12 @@ public class Scrib_core {
 		} catch (Exception e) {Err_.Noop(e);}
 		throw Err_.new_(err, page.Ttl().Page_db_as_str(), excerpt, traceback);
 	}
+	public static void Core_invalidate_when_page_changes() {core_invalidate_when_page_changes = true;} private static boolean core_invalidate_when_page_changes;
 	public static void Core_page_changed(Xoa_page page) {
-		if (core != null) {
+		if (	core != null						// core explicitly invalidated
+			||	core_invalidate_when_page_changes	// core marked invalidated b/c of error in {{#invoke}} but won't be regen'd until page changes; invalidate now; PAGE:th.d:all; DATE:2014-10-03
+			) {
+			core_invalidate_when_page_changes = false;
 			if (Bry_.Eq(page.Wiki().Domain_bry(), core.Cur_wiki()))	// current page is in same wiki as last page
 				core.When_page_changed(page);
 			else														// current page is in different wiki

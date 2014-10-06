@@ -61,7 +61,7 @@ public abstract class Xox_mgr_base implements Xox_mgr {
 	public static void Xtn_load_i18n(Xow_wiki wiki, byte[] xtn_key) {
 		Xoa_app app = wiki.App();
 		Io_url url = app.Fsys_mgr().Bin_xtns_dir().GenSubFil_nest(String_.new_utf8_(xtn_key), "i18n", wiki.Lang().Key_str() + ".json");
-		wiki.App().Bldr().I18n_parser().Load_msgs(false, wiki.Lang(), url);
+		app.Bldr().I18n_parser().Load_msgs(false, wiki.Lang(), url);
 	}
 	private static final byte[] Xowa_not_implemented = Bry_.new_ascii_("XOWA does not support this extension: ");
 	public static final byte Parse_content_tid_none = 0, Parse_content_tid_escape = 1, Parse_content_tid_html = 2;

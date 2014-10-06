@@ -60,7 +60,7 @@ public class Scrib_invoke_func extends Pf_func_base {
 			Error(bfr, wiki.Msg_mgr(), "");
 			bfr.Add(Html_tag_.Comm_bgn).Add_str(Err_.Message_gplx_brief(e)).Add(Html_tag_.Comm_end);
 			ctx.App().Usr_dlg().Warn_many("", "", "invoke failed: ~{0} ~{1} ~{2}", String_.new_utf8_(ctx.Cur_page().Ttl().Raw()), String_.new_utf8_(src, self.Src_bgn(), self.Src_end()), Err_.Message_gplx_brief(e));
-			Scrib_core.Core_invalidate();	// reset core
+			Scrib_core.Core_invalidate_when_page_changes();	// NOTE: invalidate core when page changes, not for rest of page, else page with many errors will be very slow due to multiple invalidations; PAGE:th.d:all; DATE:2014-10-03
 		}
 	}
 	public static void Error(Bry_bfr bfr, Xow_msg_mgr msg_mgr, String error) {Error(bfr, msg_mgr, Bry_.new_utf8_(error));}

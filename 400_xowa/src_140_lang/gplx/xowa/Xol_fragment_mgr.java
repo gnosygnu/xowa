@@ -185,7 +185,7 @@ public class Xol_fragment_mgr implements GfoInvkAble {
 		,	"    'deprecated'         : '~{deprecated}'"
 		,	"  };"
 		,	"  </script>"
-		,	"  <script src=\"~{app_root_dir}bin/any/javascript/xowa/wikidata/wikidata.js\" type='text/javascript'></script>"
+//			,	"  <script src=\"~{app_root_dir}bin/any/javascript/xowa/wikidata/wikidata.js\" type='text/javascript'></script>"
 		)
 		, "languages", "toc", "labels", "aliasesHead", "descriptions", "links", "claims", "json", "language", "wiki", "label", "aliases", "description", "link", "property", "value", "references", "qualifiers"
 		, "comma_separator", "word_separator", "parentheses", "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec", "ago", "novalue", "somevalue"

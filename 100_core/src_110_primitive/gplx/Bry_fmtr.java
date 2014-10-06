@@ -232,6 +232,7 @@ public class Bry_fmtr {
 	public static final Bry_fmtr Null = new Bry_fmtr().Fmt_("");
 	public static Bry_fmtr tmp_() {return new Bry_fmtr().Fmt_("").Keys_();}
 	public static Bry_fmtr new_(String fmt, String... keys) {return new Bry_fmtr().Fmt_(fmt).Keys_(keys);}	// NOTE: keys may seem redundant, but are needed to align ordinals with proc; EX: fmt may be "~{A} ~{B}" or "~{B} ~{A}"; call will always be Bld(a, b); passing in "A", "B" guarantees A is 0 and B is 1;
+	public static Bry_fmtr new_(byte[] fmt, String... keys) {return new Bry_fmtr().Fmt_(fmt).Keys_(keys);}	// NOTE: keys may seem redundant, but are needed to align ordinals with proc; EX: fmt may be "~{A} ~{B}" or "~{B} ~{A}"; call will always be Bld(a, b); passing in "A", "B" guarantees A is 0 and B is 1;
 	public static Bry_fmtr new_() {return new Bry_fmtr();}
 	public static Bry_fmtr keys_(String... keys) {return new Bry_fmtr().Keys_(keys);}
 	public static Bry_fmtr new_bry_(byte[] fmt, String... keys) {return new Bry_fmtr().Fmt_(fmt).Keys_(keys);}

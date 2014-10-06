@@ -98,7 +98,7 @@ public class Xol_fragment_mgr_tst {
 		,	"    'deprecated'         : 'deprecated'"
 		,	"  };"
 		,	"  </script>"
-		,	"  <script src=\"file:///mem/xowa/bin/any/javascript/xowa/wikidata/wikidata.js\" type='text/javascript'></script>"
+//			,	"  <script src=\"file:///mem/xowa/bin/any/javascript/xowa/wikidata/wikidata.js\" type='text/javascript'></script>"
 		));
 	}
 }

@@ -22,8 +22,8 @@ public class Xow_xwiki_itm_ {
 		url_parser.Parse(tmp_url, url_gfs, 0, url_gfs.length);
 		byte[] domain_bry = tmp_url.Site();
 		Xow_wiki_domain domain = Xow_wiki_domain_.parse_by_domain(domain_bry);
-		Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key(domain.Lang());
+		Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key(domain.Lang_key());
 		int lang_id = lang_itm == null ? Xol_lang_itm_.Id__unknown : lang_itm.Id();
-		return new Xow_xwiki_itm(key, url_gfs, domain.Tid(), lang_id, domain_bry).Name_(name);
+		return new Xow_xwiki_itm(key, url_gfs, domain.Wiki_tid(), lang_id, domain_bry).Name_(name);
 	}
 }

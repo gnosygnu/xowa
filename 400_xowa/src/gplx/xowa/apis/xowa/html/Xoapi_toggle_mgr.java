@@ -18,34 +18,33 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.apis.xowa.html; import gplx.*; import gplx.xowa.*; import gplx.xowa.apis.*; import gplx.xowa.apis.xowa.*;
 import gplx.xowa.cfgs.*;
 public class Xoapi_toggle_mgr implements GfoInvkAble {
-	private Hash_adp_bry itms = Hash_adp_bry.cs_();
-	public Xoapi_toggle_mgr() {
-		itm_wikidata_langs = itms_add(itms, Key_wikidata_langs);
-		itm_offline_wikis = itms_add(itms, Key_offline_wikis);
-	}
-	public Xoapi_toggle_itm Itm_wikidata_langs() {return itm_wikidata_langs;} private Xoapi_toggle_itm itm_wikidata_langs;
-	public Xoapi_toggle_itm Itm_offline_wikis() {return itm_offline_wikis;} private Xoapi_toggle_itm itm_offline_wikis;
-	public Xoapi_toggle_itm Get(byte[] key) {return (Xoapi_toggle_itm)itms.Get_by_bry(key);}
-	public void Save(Xoa_cfg_mgr cfg_mgr) {
-		Save_itm(cfg_mgr, itm_wikidata_langs, itm_offline_wikis);
-	}
-	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_get)) 			return this.Get(m.ReadBry("key"));
-		else	return GfoInvkAble_.Rv_unhandled;
-	}
-	private static final String Invk_get = "get";
-	private static final String Key_wikidata_langs = "wikidata-langs", Key_offline_wikis = "offline-wikis";
-	private static Xoapi_toggle_itm itms_add(Hash_adp_bry itms, String name_str) {
-		byte[] name_bry = Bry_.new_utf8_(name_str);
-		Xoapi_toggle_itm rv = new Xoapi_toggle_itm(name_bry);
-		itms.Add(name_bry, rv);
+	private OrderedHash hash = OrderedHash_.new_bry_();
+	public Xoapi_toggle_itm Get_or_new(String key_str) {
+		byte[] key_bry = Bry_.new_utf8_(key_str);
+		Xoapi_toggle_itm rv = (Xoapi_toggle_itm)hash.Fetch(key_bry);
+		if (rv == null) {
+			rv = new Xoapi_toggle_itm(key_bry);
+			hash.Add(key_bry, rv);
+		}
 		return rv;
 	}
-	private static void Save_itm(Xoa_cfg_mgr cfg_mgr, Xoapi_toggle_itm... itms) {
-		int itms_len = itms.length;
-		for (int i = 0; i < itms_len; ++i) {
-			Xoapi_toggle_itm itm = itms[i];
+	public void Img_dir_(Io_url v) {
+		int len = hash.Count();
+		for (int i = 0; i < len; ++i) {
+			Xoapi_toggle_itm itm = (Xoapi_toggle_itm)hash.FetchAt(i);
+			itm.Init_fsys(v);
+		}
+	}
+	public void Save(Xoa_cfg_mgr cfg_mgr) {
+		int len = hash.Count();
+		for (int i = 0; i < len; ++i) {
+			Xoapi_toggle_itm itm = (Xoapi_toggle_itm)hash.FetchAt(i);
 			cfg_mgr.Set_by_app("xowa.api.html.page.toggles.get('" + String_.new_utf8_(itm.Key_bry()) + "').visible", Yn.Xto_str(itm.Visible()));
 		}
 	}
+	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
+		if		(ctx.Match(k, Invk_get)) 			return this.Get_or_new(m.ReadStr("key"));
+		else	return GfoInvkAble_.Rv_unhandled;
+	}
+	private static final String Invk_get = "get";
 }

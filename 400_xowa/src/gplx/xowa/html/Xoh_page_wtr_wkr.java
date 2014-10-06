@@ -57,24 +57,26 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 			return;
 		}
 		DateAdp page_modified_on_dte = page.Revision_data().Modified_on();
+		Xoa_ttl page_ttl = page.Ttl(); int page_ns_id = page_ttl.Ns().Id();
+		byte page_tid = Xow_page_tid.Identify(wiki.Domain_tid(), page_ns_id, page_ttl.Page_db());
 		byte[] page_modified_on_msg = wiki.Msg_mgr().Val_by_id_args(Xol_msg_itm_.Id_portal_lastmodified, page_modified_on_dte.XtoStr_fmt_yyyy_MM_dd(), page_modified_on_dte.XtoStr_fmt_HHmm());
-		byte[] page_body_class = Xoh_page_body_cls.Calc(tmp_bfr, page.Ttl());
+		byte[] page_body_class = Xoh_page_body_cls.Calc(tmp_bfr, page_ttl, page_tid);
 		byte[] html_content_editable = wiki.Gui_mgr().Cfg_browser().Content_editable() ? Content_editable_bry : Bry_.Empty;
 		byte[] page_content_sub = Xoh_page_wtr_wkr_.Bld_page_content_sub(app, wiki, page, tmp_bfr);
-		byte[] js_wikidata_bry = Wdata_wiki_mgr.Wiki_page_is_json(wiki.Domain_tid(), page.Ttl().Ns().Id()) ? app.User().Lang().Fragment_mgr().Html_js_wikidata() : Bry_.Empty;
+		byte[] js_wikidata_bry = Wdata_wiki_mgr.Wiki_page_is_json(wiki.Domain_tid(), page_ns_id) ? app.User().Lang().Fragment_mgr().Html_js_wikidata() : Bry_.Empty;
 		byte[] js_edit_toolbar_bry = view_tid == Xopg_view_mode.Tid_edit ? wiki.Fragment_mgr().Html_js_edit_toolbar() : Bry_.Empty;
 		Xow_portal_mgr portal_mgr = wiki.Html_mgr().Portal_mgr().Init_assert();
 		fmtr.Bld_bfr_many(html_bfr, page.Revision_data().Id()
-		, Xoh_page_wtr_wkr_.Bld_page_name(tmp_bfr, page.Ttl(), null)					// NOTE: page_name does not show display_title (<i>). always pass in null
-		, Xoh_page_wtr_wkr_.Bld_page_name(tmp_bfr, page.Ttl(), page.Html_data().Display_ttl())
+		, Xoh_page_wtr_wkr_.Bld_page_name(tmp_bfr, page_ttl, null)					// NOTE: page_name does not show display_title (<i>). always pass in null
+		, Xoh_page_wtr_wkr_.Bld_page_name(tmp_bfr, page_ttl, page.Html_data().Display_ttl())
 		, page_content_sub
 		, wiki.Html_mgr().Portal_mgr().Div_jump_to()
 		, page_data, wtr_page_lang, page_modified_on_msg, page.Lang().Dir_bry() 
 		, mgr.Css_common_bry(), mgr.Css_wiki_bry(), page_body_class, html_content_editable
 		, page.Html_data().Module_mgr().Init(app, wiki, page).Init_dflts()
-		, portal_mgr.Div_personal_bry(), portal_mgr.Div_ns_bry(app.Utl_bry_bfr_mkr(), page.Ttl(), wiki.Ns_mgr()), portal_mgr.Div_view_bry(app.Utl_bry_bfr_mkr(), view_tid, page.Html_data().Xtn_search_text())
+		, portal_mgr.Div_personal_bry(), portal_mgr.Div_ns_bry(app.Utl_bry_bfr_mkr(), page_ttl, wiki.Ns_mgr()), portal_mgr.Div_view_bry(app.Utl_bry_bfr_mkr(), view_tid, page.Html_data().Xtn_search_text())
 		, portal_mgr.Div_logo_bry(), portal_mgr.Div_home_bry(), new Xopg_xtn_skin_fmtr_arg(page, Xopg_xtn_skin_itm_tid.Tid_sidebar), portal_mgr.Div_wikis_bry(app.Utl_bry_bfr_mkr()), portal_mgr.Sidebar_mgr().Html_bry()
-		, mgr.Edit_rename_div_bry(page.Ttl())
+		, mgr.Edit_rename_div_bry(page_ttl)
 		, page.Html_data().Edit_preview_w_dbg()
 		, Xoa_app_.Version, Xoa_app_.Build_date
 		, app.Fsys_mgr().Root_dir().To_http_file_bry()
@@ -87,28 +89,28 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 	public void XferAry(Bry_bfr bfr, int idx) {Write_body(bfr, Xoh_wtr_ctx.Basic, page);}
 	public void Write_body(Bry_bfr bfr, Xoh_wtr_ctx hctx, Xoa_page page) {
 		Xow_wiki wiki = page.Wiki(); Xoa_app app = wiki.App();
-		int ns_id = page.Ttl().Ns().Id();
+		Xoa_ttl page_ttl = page.Ttl(); int page_ns_id = page_ttl.Ns().Id();
+		byte page_tid = Xow_page_tid.Identify(wiki.Domain_tid(), page_ns_id, page_ttl.Page_db());	// NOTE: can't cache page_tid b/c Write_body is called directly; DATE:2014-10-02
 		byte[] data_raw = page.Data_raw();
-		byte page_tid = Xow_page_tid.Identify(wiki.Domain_tid(), ns_id, page.Ttl().Page_db());
 		boolean page_tid_uses_pre = false;
 		int bfr_page_bgn = bfr.Len();
 		if (page_mode == Xopg_view_mode.Tid_edit)
-			Write_body_edit(bfr, data_raw, ns_id, page_tid);
+			Write_body_edit(bfr, data_raw, page_ns_id, page_tid);
 		else {
 			switch (page_tid) {
 				case Xow_page_tid.Tid_js:
 				case Xow_page_tid.Tid_css:
 				case Xow_page_tid.Tid_lua:		Write_body_pre			(bfr, app, wiki, data_raw, tmp_bfr); page_tid_uses_pre = true; break;
-				case Xow_page_tid.Tid_wikitext: Write_body_wikitext		(bfr, app, wiki, data_raw, hctx, page, ns_id); break;
-				case Xow_page_tid.Tid_json:		app.Wiki_mgr().Wdata_mgr().Write_json_as_html(bfr, data_raw); break;
+				case Xow_page_tid.Tid_wikitext: Write_body_wikitext		(bfr, app, wiki, data_raw, hctx, page, page_tid, page_ns_id); break;
+				case Xow_page_tid.Tid_json:		app.Wiki_mgr().Wdata_mgr().Write_json_as_html(bfr, page_ttl.Page_db(), data_raw); break;
 			}
 		}
 		if (	wiki.Domain_tid() != Xow_wiki_domain_.Tid_home	// allow home wiki to use javascript
 			&&  !page_tid_uses_pre) {							// if .js, .css or .lua, skip test; may have js fragments, but entire text is escaped and put in pre; don't show spurious warning; DATE:2013-11-21
-			app.Html_mgr().Js_cleaner().Clean_bfr(wiki, page.Ttl(), bfr, bfr_page_bgn);
+			app.Html_mgr().Js_cleaner().Clean_bfr(wiki, page_ttl, bfr, bfr_page_bgn);
 		}
 	}
-	private void Write_body_wikitext(Bry_bfr bfr, Xoa_app app, Xow_wiki wiki, byte[] data_raw, Xoh_wtr_ctx hctx, Xoa_page page, int ns_id) {
+	private void Write_body_wikitext(Bry_bfr bfr, Xoa_app app, Xow_wiki wiki, byte[] data_raw, Xoh_wtr_ctx hctx, Xoa_page page, byte page_tid, int ns_id) {
 		byte[] hdump_data = page.Hdump_data().Body();
 		if (Bry_.Len_gt_0(hdump_data)) {
 			bfr.Add(hdump_data);

@@ -64,6 +64,7 @@ public interface GfoMsg {
 	Object	ReadObjOr(String k, ParseAble parseAble, Object or);
 	String[]ReadStrAry(String k, String spr);
 	String[]ReadStrAryIgnore(String k, String spr, String ignore);
+	byte[][]ReadBryAry(String k, byte spr);
 	Object  ReadValAt(int i);
 	Object	CastObj(String k);
 	Object	CastObjOr(String k, Object or);

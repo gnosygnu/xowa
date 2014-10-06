@@ -142,6 +142,7 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 		return rv;
 	}
 	private static void Claims_list_to_hash__add(OrderedHash rv, int pid, ListAdp temp_itms) {
+		if (temp_itms.Count() == 0) return; // NOTE: will be empty when claims are empty; EX: "claims": []; PAGE:wd.p:585; DATE:2014-10-03
 		Int_obj_ref claim_grp_key = Int_obj_ref.new_(pid);
 		Wdata_claim_grp claim_grp = new Wdata_claim_grp(claim_grp_key, (Wdata_claim_itm_core[])temp_itms.XtoAryAndClear(Wdata_claim_itm_core.class));
 		rv.Add(claim_grp_key, claim_grp);

@@ -15,8 +15,8 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.xtns.wdatas.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
-public interface Wdata_sortable {
-	byte[] Lang();
-	int Sort(); void Sort_(int v);
+package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
+import gplx.xowa.xtns.wdatas.core.*;
+public interface Wdata_lbl_wkr {
+	void Resolve(Wdata_lbl_mgr lbl_mgr, Wdata_lang_sorter sorter);
 }

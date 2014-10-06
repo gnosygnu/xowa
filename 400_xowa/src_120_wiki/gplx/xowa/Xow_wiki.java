@@ -27,7 +27,7 @@ public class Xow_wiki implements GfoInvkAble {
 		this.app = app; this.ns_mgr = ns_mgr; this.lang = lang;
 		domain_str = wiki_dir.NameOnly(); domain_bry = Bry_.new_utf8_(domain_str);			
 		domain_itm = Xow_wiki_domain_.parse_by_domain(domain_bry);
-		domain_tid = domain_itm.Tid();
+		domain_tid = domain_itm.Wiki_tid();
 		xwiki_domain_tid = Xow_wiki_domain_.Xwiki_tid(domain_tid);
 		fsys_mgr = new Xow_fsys_mgr(this, wiki_dir);
 		redirect_mgr = new Xop_redirect_mgr(this);
@@ -64,7 +64,7 @@ public class Xow_wiki implements GfoInvkAble {
 		}
 		Wdata_wiki_abrv_();
 		db_mgr = new gplx.xowa.dbs.Xodb_mgr_txt(this, data_mgr);
-		domain_abrv = Xob_bz2_file.Build_alias(Xow_wiki_domain_.parse_by_domain(domain_bry));
+		domain_abrv = Xow_wiki_alias.Build_alias(Xow_wiki_domain_.parse_by_domain(domain_bry));
 		maint_mgr = new Xow_maint_mgr(this);
 		cache_mgr = new Xow_cache_mgr(this);
 	}
@@ -101,7 +101,7 @@ public class Xow_wiki implements GfoInvkAble {
 	public byte[]				Wdata_wiki_abrv() {return wdata_wiki_abrv;} private byte[] wdata_wiki_abrv; private byte wdata_wiki_tid;
 	private void Wdata_wiki_abrv_() {
 		Bry_bfr bfr = app.Utl_bry_bfr_mkr().Get_b128();
-		Xob_bz2_file.Build_alias_by_lang_tid(bfr, wdata_wiki_lang, Byte_obj_ref.new_(wdata_wiki_tid));
+		Xow_wiki_alias.Build_alias_by_lang_tid(bfr, wdata_wiki_lang, Byte_obj_ref.new_(wdata_wiki_tid));
 		wdata_wiki_abrv = bfr.Mkr_rls().XtoAryAndClear();
 	}
 

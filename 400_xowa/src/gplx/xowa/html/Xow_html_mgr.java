@@ -36,10 +36,12 @@ public class Xow_html_mgr implements GfoInvkAble {
 	public void Init_by_wiki(Xow_wiki wiki) {
 		html_wtr.Init_by_wiki(wiki);
 		module_mgr.Init_by_wiki(wiki);
-		portal_mgr.Init_by_wiki(wiki);
 	}
 	public void Init_by_lang(Xol_lang lang) {
 		portal_mgr.Init_by_lang(lang);
+	}
+	public void Init_by_kit() {
+		portal_mgr.Init_by_kit(wiki);
 	}
 	public Xow_wiki				Wiki() {return wiki;} private Xow_wiki wiki;
 	public Xoh_html_wtr			Html_wtr() {return html_wtr;} private Xoh_html_wtr html_wtr;

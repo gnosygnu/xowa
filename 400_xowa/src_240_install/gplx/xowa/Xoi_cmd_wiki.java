@@ -41,7 +41,7 @@ class Xoi_cmd_wiki_download extends Gfo_thread_cmd_download implements Gfo_threa
 				Dump_servers_offline_msg_shown = true;
 			}
 		}
-		Xow_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(dump_file.Wiki_type().Raw());
+		Xow_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(dump_file.Wiki_type().Domain_bry());
 		Io_url root_dir = wiki.Fsys_mgr().Root_dir();
 		Io_url[] trg_fil_ary = Io_mgr._.QueryDir_args(root_dir).FilPath_("*." + dump_type + Download_file_ext() + "*").ExecAsUrlAry();
 		Io_url trg = trg_fil_ary.length == 0 ? root_dir.GenSubFil(dump_file.File_name()) : trg_fil_ary[0];

@@ -15,11 +15,11 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa; import gplx.*;
+package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
 import org.junit.*; import gplx.xowa.wikis.*;
-public class Xob_bz2_file_tst {
-	Xob_bz2_file_fxt fxt = new Xob_bz2_file_fxt();
-	@Test  public void Parse()	{fxt.Parse("enwiki-20121201-pages-articles.xml.bz2", "en.wikipedia.org", "20121201", Xob_bz2_file.Tid_pages_articles);}
+public class Xow_wiki_alias_tst {
+	Xow_wiki_alias_fxt fxt = new Xow_wiki_alias_fxt();
+	@Test  public void Parse()	{fxt.Parse("enwiki-20121201-pages-articles.xml.bz2", "en.wikipedia.org", "20121201", Xow_wiki_alias.Tid_pages_articles);}
 	@Test  public void Parse__domain_name() {
 		fxt.Parse__domain_name("foundationwiki"			, "wikimediafoundation.org");
 		fxt.Parse__domain_name("wikidatawiki"			, "www.wikidata.org");
@@ -38,8 +38,8 @@ public class Xob_bz2_file_tst {
 		fxt.Parse__domain_name("enwikivoyage"			, "en.wikivoyage.org");
 	}
 	@Test  public void Parse__tid() {
-		fxt.Parse__tid("pages-articles.xml"				, Xob_bz2_file.Tid_pages_articles);
-		fxt.Parse__tid("pages-meta-current.xml"			, Xob_bz2_file.Tid_pages_meta_current);
+		fxt.Parse__tid("pages-articles.xml"				, Xow_wiki_alias.Tid_pages_articles);
+		fxt.Parse__tid("pages-meta-current.xml"			, Xow_wiki_alias.Tid_pages_meta_current);
 	}
 	@Test  public void Build_alias() {
 		fxt.Build_alias("simple.wikipedia.org", "simplewiki");
@@ -50,14 +50,14 @@ public class Xob_bz2_file_tst {
 		fxt.Build_wmf_src_dir("simplewiki", "latest", "http://dumps.wikimedia.your.org/simplewiki/latest/");
 	}
 	@Test  public void Build_wmf_src_name() {
-		fxt.Build_wmf_src_name("simplewiki", "latest", Xob_bz2_file.Key_pages_articles, "simplewiki-latest-pages-articles.xml.bz2");
+		fxt.Build_wmf_src_name("simplewiki", "latest", Xow_wiki_alias.Key_pages_articles, "simplewiki-latest-pages-articles.xml.bz2");
 	}
 	@Test  public void Build_alias_by_lang_tid() {
 		fxt.Build_alias_by_lang_tid("en", Xow_wiki_domain_.Tid_wikipedia, "enwiki");
 	}
 }
-class Xob_bz2_file_fxt {
-	Xob_bz2_file file = new Xob_bz2_file();
+class Xow_wiki_alias_fxt {
+	Xow_wiki_alias file = new Xow_wiki_alias();
 	public void Parse(String name, String domain, String date, byte tid) {
 		Io_url fil = Io_url_.mem_fil_("mem/xowa/temp/" + name);
 		file.Fil_(fil).Parse(fil.NameOnly());
@@ -65,11 +65,11 @@ class Xob_bz2_file_fxt {
 		Tfds.Eq(date	, file.Date());
 		Tfds.Eq(tid		, file.Tid());
 	}
-	public void Parse__domain_name(String raw_str, String expd) {byte[] raw = Bry_.new_ascii_(raw_str); Tfds.Eq(expd, String_.new_ascii_(Xob_bz2_file.Parse__domain_name(raw, 0, raw.length)));}
-	public void Parse__tid(String raw_str, byte expd) {Tfds.Eq(expd, Xob_bz2_file.Parse__tid(raw_str));}
+	public void Parse__domain_name(String raw_str, String expd) {byte[] raw = Bry_.new_ascii_(raw_str); Tfds.Eq(expd, String_.new_ascii_(Xow_wiki_alias.Parse__domain_name(raw, 0, raw.length)));}
+	public void Parse__tid(String raw_str, byte expd) {Tfds.Eq(expd, Xow_wiki_alias.Parse__tid(raw_str));}
 	public void Build_alias(String domain_str, String expd) {
 		Xow_wiki_domain domain = Xow_wiki_domain_.parse_by_domain(Bry_.new_ascii_(domain_str));
-		byte[] actl = Xob_bz2_file.Build_alias(domain);
+		byte[] actl = Xow_wiki_alias.Build_alias(domain);
 		Tfds.Eq(expd, String_.new_ascii_(actl));
 	}	private Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	public void Build_wmf_src_dir(String alias, String date, String expd) {
@@ -81,7 +81,7 @@ class Xob_bz2_file_fxt {
 		Tfds.Eq(expd, String_.new_ascii_(actl));
 	}
 	public void Build_alias_by_lang_tid(String lang_key, byte wiki_tid, String expd) {
-		Xob_bz2_file.Build_alias_by_lang_tid(tmp_bfr, Bry_.new_ascii_(lang_key), wiki_tid_ref.Val_(wiki_tid));
+		Xow_wiki_alias.Build_alias_by_lang_tid(tmp_bfr, Bry_.new_ascii_(lang_key), wiki_tid_ref.Val_(wiki_tid));
 		Tfds.Eq_bry(Bry_.new_utf8_(expd), tmp_bfr.XtoAryAndClear());
 	}	static final Byte_obj_ref wiki_tid_ref = Byte_obj_ref.zero_();
 }

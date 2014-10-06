@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.modules.popups; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.modules.*;
-import gplx.core.btries.*;
+import gplx.core.btries.*; import gplx.xowa.wikis.*;
 import gplx.xowa.apis.xowa.html.modules.*; import gplx.xowa.html.modules.popups.keeplists.*;
 import gplx.xowa.gui.views.*; import gplx.xowa.parsers.hdrs.*;
 public class Xow_popup_parser {
@@ -68,46 +68,51 @@ public class Xow_popup_parser {
 		wtxt_ctx.Cur_page().Ttl_(ttl);	// NOTE: must set cur_page, or rel lnkis won't work; EX: [[../A]]
 	}
 	public byte[] Parse(Xow_wiki cur_wiki, Xoa_page page, Xog_tab_itm cur_tab, Xow_popup_itm popup_itm) {	// NOTE: must pass cur_wiki for xwiki label; DATE:2014-07-02
-		byte[] tmpl_src = page.Data_raw(); int tmpl_len = tmpl_src.length; if (tmpl_len == 0) return Bry_.Empty;
-		int tmpl_bgn_orig = Xow_popup_parser_.Tmpl_bgn_get_(app, popup_itm, page.Ttl(), hdr_finder, tmpl_src, tmpl_len);
-		int tmpl_bgn = tmpl_bgn_orig;
-		int tmpl_read_len_cur = cfg.Tmpl_read_len();
-		wrdx_mkr.Init();
-		data.Init(cfg, popup_itm, tmpl_len);
-		Init_ctxs(tmpl_src, page.Ttl());
-		while (data.Words_needed_chk()) {
-			if (Canceled(popup_itm, cur_tab)) return null;
-			tmpl_root.Clear();
-			int tmpl_end = tmpl_bgn + tmpl_read_len_cur; if (tmpl_end > tmpl_len) tmpl_end = tmpl_len; // limit to tmpl_len; EX: page is 16 bytes, but block is 1024
-			int new_tmpl_bgn = parser.Parse_to_stack_end(tmpl_root, tmpl_ctx, tkn_mkr, tmpl_src, tmpl_len, tmpl_trie, tmpl_bgn, tmpl_end);
-			if (Canceled(popup_itm, cur_tab)) return null;
-			byte[] wtxt_bry = Parse_to_wtxt(tmpl_src);
-			int wtxt_len = wtxt_bry.length;
-			wtxt_root.Clear();
-			int wtxt_bgn = (tmpl_bgn == Xop_parser_.Doc_bgn_bos) ? Xop_parser_.Doc_bgn_bos : 0;	// if first pass, parse from -1; needed for lxrs which assume nl at bos; EX: "*a"
-			if (Canceled(popup_itm, cur_tab)) return null;
-			parser.Parse_to_src_end(wtxt_root, wtxt_ctx, tkn_mkr, wtxt_bry, wtxt_trie, wtxt_bgn, wtxt_len);
-			if (	wtxt_ctx.Stack_len() > 0									// dangling lnki / hdr / tblw
-				&&	(tmpl_bgn + tmpl_read_len_cur) < data.Tmpl_max()			// too much read; stop and give whatever's available; PAGE:en.w:List_of_air_forces; DATE:2014-06-18
-				&&	tmpl_read_len_cur < tmpl_len								// only reparse if tmpl_read_len_cur is < entire page; needed for pages which have dangling items; EX:"<i>a"
-				) {	
-				new_tmpl_bgn = tmpl_bgn;
-				tmpl_read_len_cur = Xow_popup_parser_.Calc_read_len(wtxt_ctx, tmpl_read_len_cur, cfg.Tmpl_read_len(), tmpl_src, tmpl_bgn, tmpl_end);
-				wtxt_ctx.Clear();
-			}
-			else {
-				wrdx_mkr.Process_tkn(cfg, data, data.Wrdx_bfr(), wtxt_root, wtxt_bry, wtxt_len);
-				tmpl_read_len_cur = cfg.Tmpl_read_len();
-			}
-			tmpl_bgn = new_tmpl_bgn;
-			data.Tmpl_loop_count_add();
-			if (	tmpl_bgn == tmpl_len								// end of template
-				||	tmpl_bgn - tmpl_bgn_orig >	data.Tmpl_max()			// too much read; stop and give whatever's available
-				)
-				break;
+		if (Bry_.Eq(popup_itm.Wiki_domain(), Xow_wiki_domain_.Url_wikidata)) {
+			data.Wrdx_bfr().Add(app.Wiki_mgr().Wdata_mgr().Popup_text(page));
 		}
-		if (Canceled(popup_itm, cur_tab)) return null;
-		Parse_wrdx_to_html(popup_itm, data.Wrdx_bfr());
+		else {
+			byte[] tmpl_src = page.Data_raw(); int tmpl_len = tmpl_src.length; if (tmpl_len == 0) return Bry_.Empty;
+			int tmpl_bgn_orig = Xow_popup_parser_.Tmpl_bgn_get_(app, popup_itm, page.Ttl(), hdr_finder, tmpl_src, tmpl_len);
+			int tmpl_bgn = tmpl_bgn_orig;
+			int tmpl_read_len_cur = cfg.Tmpl_read_len();
+			wrdx_mkr.Init();
+			data.Init(cfg, popup_itm, tmpl_len);
+			Init_ctxs(tmpl_src, page.Ttl());
+			while (data.Words_needed_chk()) {
+				if (Canceled(popup_itm, cur_tab)) return null;
+				tmpl_root.Clear();
+				int tmpl_end = tmpl_bgn + tmpl_read_len_cur; if (tmpl_end > tmpl_len) tmpl_end = tmpl_len; // limit to tmpl_len; EX: page is 16 bytes, but block is 1024
+				int new_tmpl_bgn = parser.Parse_to_stack_end(tmpl_root, tmpl_ctx, tkn_mkr, tmpl_src, tmpl_len, tmpl_trie, tmpl_bgn, tmpl_end);
+				if (Canceled(popup_itm, cur_tab)) return null;
+				byte[] wtxt_bry = Parse_to_wtxt(tmpl_src);
+				int wtxt_len = wtxt_bry.length;
+				wtxt_root.Clear();
+				int wtxt_bgn = (tmpl_bgn == Xop_parser_.Doc_bgn_bos) ? Xop_parser_.Doc_bgn_bos : 0;	// if first pass, parse from -1; needed for lxrs which assume nl at bos; EX: "*a"
+				if (Canceled(popup_itm, cur_tab)) return null;
+				parser.Parse_to_src_end(wtxt_root, wtxt_ctx, tkn_mkr, wtxt_bry, wtxt_trie, wtxt_bgn, wtxt_len);
+				if (	wtxt_ctx.Stack_len() > 0									// dangling lnki / hdr / tblw
+					&&	(tmpl_bgn + tmpl_read_len_cur) < data.Tmpl_max()			// too much read; stop and give whatever's available; PAGE:en.w:List_of_air_forces; DATE:2014-06-18
+					&&	tmpl_read_len_cur < tmpl_len								// only reparse if tmpl_read_len_cur is < entire page; needed for pages which have dangling items; EX:"<i>a"
+					) {	
+					new_tmpl_bgn = tmpl_bgn;
+					tmpl_read_len_cur = Xow_popup_parser_.Calc_read_len(wtxt_ctx, tmpl_read_len_cur, cfg.Tmpl_read_len(), tmpl_src, tmpl_bgn, tmpl_end);
+					wtxt_ctx.Clear();
+				}
+				else {
+					wrdx_mkr.Process_tkn(cfg, data, data.Wrdx_bfr(), wtxt_root, wtxt_bry, wtxt_len);
+					tmpl_read_len_cur = cfg.Tmpl_read_len();
+				}
+				tmpl_bgn = new_tmpl_bgn;
+				data.Tmpl_loop_count_add();
+				if (	tmpl_bgn == tmpl_len								// end of template
+					||	tmpl_bgn - tmpl_bgn_orig >	data.Tmpl_max()			// too much read; stop and give whatever's available
+					)
+					break;
+			}
+			if (Canceled(popup_itm, cur_tab)) return null;
+			Parse_wrdx_to_html(popup_itm, data.Wrdx_bfr());
+		}
 		byte[] rv = html_mkr.Bld(cur_wiki, page, popup_itm, data.Wrdx_bfr());
 		return (Canceled(popup_itm, cur_tab)) ? null : rv;
 	}

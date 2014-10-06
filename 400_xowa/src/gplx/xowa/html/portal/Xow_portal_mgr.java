@@ -19,16 +19,17 @@ package gplx.xowa.html.portal; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.xowa.wikis.*; import gplx.xowa.gui.*; import gplx.xowa.html.sidebar.*; import gplx.xowa.pages.*;
 import gplx.xowa.apis.xowa.html.*; import gplx.xowa.apis.xowa.html.skins.*;
 public class Xow_portal_mgr implements GfoInvkAble {
+	private Xow_wiki wiki; private boolean lang_is_rtl; private Xoapi_toggle_itm toggle_itm;
 	public Xow_portal_mgr(Xow_wiki wiki) {
 		this.wiki = wiki;
 		this.sidebar_mgr = new Xowh_sidebar_mgr(wiki);
 		this.missing_ns_cls = Bry_.Eq(wiki.Domain_bry(), Xow_wiki_domain_.Key_home_bry) ? Missing_ns_cls_hide : null;	// if home wiki, set missing_ns to application default; if any other wiki, set to null; will be overriden during init
-	}	private Xow_wiki wiki; private boolean lang_is_rtl;
+	}
 	public void Init_by_lang(Xol_lang lang) {
 		lang_is_rtl = !lang.Dir_ltr();
 	}
 	private Xoapi_skin_app_base api_skin;
-	public void Init_by_wiki(Xow_wiki wiki) {
+	public void Init_by_kit(Xow_wiki wiki) {
 		Xoa_app app = wiki.App();
 		Xoapi_skins skins = app.Api_root().Html().Skins();
 		api_skin = app.Mode() == Xoa_app_.Mode_gui ? skins.Desktop() : skins.Server();
@@ -59,9 +60,7 @@ public class Xow_portal_mgr implements GfoInvkAble {
 	private byte[] Init_fmtr(Bry_bfr tmp_bfr, Bry_fmtr_eval_mgr eval_mgr, Bry_fmtr fmtr, Object... fmt_args) {
 		fmtr.Eval_mgr_(eval_mgr);
 		fmtr.Bld_bfr_many(tmp_bfr, fmt_args);
-		byte[] rv = tmp_bfr.XtoAryAndClear();
-		// fmtr.Fmt_(rv);
-		return rv;
+		return tmp_bfr.XtoAryAndClear();
 	}
 	public byte[] Div_personal_bry() {return div_personal_bry;} private byte[] div_personal_bry = Bry_.Empty;
 	public byte[] Div_ns_bry(Bry_bfr_mkr bfr_mkr, Xoa_ttl ttl, Xow_ns_mgr ns_mgr) {
@@ -97,9 +96,10 @@ public class Xow_portal_mgr implements GfoInvkAble {
 	public byte[] Div_logo_bry() {return div_logo_bry;} private byte[] div_logo_bry = Bry_.Empty;
 	public byte[] Div_home_bry() {return api_skin != null && api_skin.Sidebar_home_enabled() ? div_home_bry : Bry_.Empty;} private byte[] div_home_bry = Bry_.Empty;
 	public byte[] Div_wikis_bry(Bry_bfr_mkr bfr_mkr) {
-		gplx.xowa.apis.xowa.html.Xoapi_toggle_itm itm = wiki.App().Api_root().Html().Page().Toggle_mgr().Itm_offline_wikis().Init(wiki.App().User().Wiki());
+		if (toggle_itm == null)	// TEST:lazy-new b/c Init_by_wiki
+			toggle_itm = wiki.App().Api_root().Html().Page().Toggle_mgr().Get_or_new("offline-wikis").Init(wiki.App().User().Wiki());
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();
-		div_wikis_fmtr.Bld_bfr_many(tmp_bfr, itm.Icon_src(), itm.Icon_title(), itm.Elem_display());
+		div_wikis_fmtr.Bld_bfr_many(tmp_bfr, toggle_itm.Html_toggle_btn(), toggle_itm.Html_toggle_hdr());
 		return tmp_bfr.Mkr_rls().XtoAryAndClear();
 	}
 	public byte[] Missing_ns_cls() {return missing_ns_cls;} public Xow_portal_mgr Missing_ns_cls_(byte[] v) {missing_ns_cls = v; return this;} private byte[] missing_ns_cls;	// NOTE: must be null due to Init check above
@@ -107,7 +107,7 @@ public class Xow_portal_mgr implements GfoInvkAble {
 	private Bry_fmtr div_ns_fmtr = Bry_fmtr.new_("~{portal_ns_subj_href};~{portal_ns_subj_cls};~{portal_ns_talk_href};~{portal_ns_talk_cls}", "portal_ns_subj_href", "portal_ns_subj_cls", "portal_ns_talk_href", "portal_ns_talk_cls");
 	private Bry_fmtr div_view_fmtr = Bry_fmtr.new_("", "portal_view_read_cls", "portal_view_edit_cls", "portal_view_html_cls", "search_text");
 	private Bry_fmtr div_logo_fmtr = Bry_fmtr.new_("", "portal_nav_main_href", "portal_logo_url");
-	private Bry_fmtr div_wikis_fmtr = Bry_fmtr.new_("", "icon_src", "icon_title", "elem_display");
+	private Bry_fmtr div_wikis_fmtr = Bry_fmtr.new_("", "toggle_btn", "toggle_hdr");
 	private byte[] Reverse_li(byte[] bry) {
 		return lang_is_rtl ? Xoh_rtl_utl.Reverse_li(bry) : bry;
 	}

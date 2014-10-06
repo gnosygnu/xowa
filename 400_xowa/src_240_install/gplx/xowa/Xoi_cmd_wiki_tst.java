@@ -30,7 +30,7 @@ public class Xoi_cmd_wiki_tst {
 		Xob_dump_file dump_file = new Xob_dump_file();
 		for (int i = 0; i < ary_len; i++) {
 			String itm = ary[i];
-			dump_file.Ctor(itm, "latest", Xob_bz2_file.Key_pages_articles);
+			dump_file.Ctor(itm, "latest", Xow_wiki_alias.Key_pages_articles);
 			int count = 0;
 			while (count++ < 10) {
 				dump_file.Server_url_(Xob_dump_file_.Server_wmf);
@@ -46,7 +46,7 @@ public class Xoi_cmd_wiki_tst {
 				Tfds.WriteText(String_.Format("passed: {0}\n", itm));
 			bfr.Add_str(itm).Add_byte_pipe();
 			bfr.Add_str(dump_file.File_url()).Add_byte_pipe();
-			bfr.Add(Xow_wiki_domain_.Key_by_tid(dump_file.Wiki_type().Tid())).Add_byte_pipe();
+			bfr.Add(Xow_wiki_domain_.Key_by_tid(dump_file.Wiki_type().Wiki_tid())).Add_byte_pipe();
 //				Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key(wiki_type.Lang_key());
 //				if (lang_itm == null) lang_itm = Xol_lang_itm_.Get_by_key(Xol_lang_.Key_en);	// commons, species, meta, etc will have no lang
 //				bfr.Add(lang_itm.Local_name()).Add_byte_pipe();

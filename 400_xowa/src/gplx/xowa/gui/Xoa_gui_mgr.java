@@ -16,10 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui; import gplx.*; import gplx.xowa.*;
-import gplx.gfui.*; import gplx.xowa.specials.search.*; import gplx.xowa.gui.menus.*; import gplx.xowa.gui.cmds.*; import gplx.xowa.cfgs.gui.*;
+import gplx.gfui.*; import gplx.xowa.specials.search.*; import gplx.xowa.gui.menus.*; import gplx.xowa.gui.cmds.*; import gplx.xowa.cfgs.gui.*; import gplx.xowa.users.*;
 import gplx.xowa.gui.bnds.*; import gplx.xowa.gui.views.*; import gplx.xowa.gui.urls.url_macros.*;
-public class Xoa_gui_mgr implements GfoInvkAble {
+public class Xoa_gui_mgr implements GfoEvObj, GfoInvkAble {
 	public Xoa_gui_mgr(Xoa_app app) {
+		evMgr = GfoEvMgr.new_(this);
 		this.app = app;
 		browser_win = new Xog_win_itm(app, this);
 		bnd_mgr = new Xog_bnd_mgr(browser_win);
@@ -28,6 +29,7 @@ public class Xoa_gui_mgr implements GfoInvkAble {
 		menu_mgr = new Xog_menu_mgr(this);
 		search_suggest_mgr = new Xog_search_suggest_mgr(this);
 	}
+	public GfoEvMgr EvMgr() {return evMgr;} private GfoEvMgr evMgr;
 	public Xoa_app App() {return app;} private Xoa_app app;
 	public Xog_win_itm Browser_win() {return browser_win;} private Xog_win_itm browser_win;
 	public IptCfgRegy Ipt_cfgs() {return ipt_cfgs;} IptCfgRegy ipt_cfgs = new IptCfgRegy();
@@ -66,28 +68,31 @@ public class Xoa_gui_mgr implements GfoInvkAble {
 		menu_mgr.Menu_bldr().Init_by_kit(app, kit, app.User().Fsys_mgr().App_img_dir().GenSubDir_nest("window", "menu"));
 		menu_mgr.Init_by_kit();
 		bnd_mgr.Init_by_kit(app);
+		app.User().Wiki().Html_mgr().Init_by_kit();
+		GfoEvMgr_.SubSame_many(app.User(), this, Xou_user.Evt_lang_changed);
+		app.Sys_cfg().Lang_(app.Sys_cfg().Lang());	// NOTE: force refresh of lang. must occur after after gui_mgr init, else menu lbls will break
 	}
 	public void Lang_changed(Xol_lang lang) {
 		menu_mgr.Lang_changed(lang);
 		browser_win.Lang_changed(lang);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_kit))				return kit;
-		else if	(ctx.Match(k, Invk_kit_))				this.kit = Gfui_kit_.Get_by_key(m.ReadStrOr("v", Gfui_kit_.Swt().Key()));
-		else if	(ctx.Match(k, Invk_run))				Run();
-		else if	(ctx.Match(k, Invk_browser_type))		kit.Cfg_set("HtmlBox", "BrowserType", gplx.gfui.Swt_kit.Cfg_Html_BrowserType_parse(m.ReadStr("v")));
-		else if	(ctx.Match(k, Invk_xul_runner_path_))	kit.Cfg_set("HtmlBox", "XulRunnerPath", Bry_fmtr_eval_mgr_.Eval_url(app.Url_cmd_eval(), m.ReadBry("v")).Xto_api());
-		else if	(ctx.Match(k, Invk_bnds))				return bnd_mgr;
-		else if	(ctx.Match(k, Invk_bindings))			return ipt_cfgs;
-		else if	(ctx.MatchIn(k, Invk_main_win, Invk_browser_win))
-														return browser_win;
-		else if	(ctx.Match(k, Invk_win_opts))			return win_cfg;
-		else if	(ctx.Match(k, Invk_layout))				return layout;
-		else if	(ctx.Match(k, Invk_html))				return html_mgr;
-		else if	(ctx.Match(k, Invk_search_suggest))		return search_suggest_mgr;
-		else if	(ctx.Match(k, Invk_menus))				return menu_mgr;
-		else if	(ctx.Match(k, Invk_cmds))				return cmd_mgr;
-		else if	(ctx.Match(k, Invk_url_macros))			return url_macro_mgr;
+		if		(ctx.Match(k, Invk_kit))							return kit;
+		else if	(ctx.Match(k, Invk_kit_))							this.kit = Gfui_kit_.Get_by_key(m.ReadStrOr("v", Gfui_kit_.Swt().Key()));
+		else if	(ctx.Match(k, Invk_run))							Run();
+		else if	(ctx.Match(k, Invk_browser_type))					kit.Cfg_set("HtmlBox", "BrowserType", gplx.gfui.Swt_kit.Cfg_Html_BrowserType_parse(m.ReadStr("v")));
+		else if	(ctx.Match(k, Invk_xul_runner_path_))				kit.Cfg_set("HtmlBox", "XulRunnerPath", Bry_fmtr_eval_mgr_.Eval_url(app.Url_cmd_eval(), m.ReadBry("v")).Xto_api());
+		else if	(ctx.Match(k, Invk_bnds))							return bnd_mgr;
+		else if	(ctx.Match(k, Invk_bindings))						return ipt_cfgs;
+		else if	(ctx.MatchIn(k, Invk_main_win, Invk_browser_win))	return browser_win;
+		else if	(ctx.Match(k, Invk_win_opts))						return win_cfg;
+		else if	(ctx.Match(k, Invk_layout))							return layout;
+		else if	(ctx.Match(k, Invk_html))							return html_mgr;
+		else if	(ctx.Match(k, Invk_search_suggest))					return search_suggest_mgr;
+		else if	(ctx.Match(k, Invk_menus))							return menu_mgr;
+		else if	(ctx.Match(k, Invk_cmds))							return cmd_mgr;
+		else if	(ctx.Match(k, Invk_url_macros))						return url_macro_mgr;
+		else if	(ctx.Match(k, Xou_user.Evt_lang_changed))			Lang_changed((Xol_lang)m.ReadObj("v", ParseAble_.Null));
 		else throw Err_mgr._.unhandled_(k);
 		return this;
 	}

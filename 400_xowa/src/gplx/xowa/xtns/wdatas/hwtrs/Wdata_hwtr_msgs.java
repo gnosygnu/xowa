@@ -16,40 +16,28 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
-import gplx.xowa.langs.msgs.*;
+import gplx.xowa.langs.msgs.*; import gplx.xowa.wikis.*;
 public class Wdata_hwtr_msgs {
 	public Wdata_hwtr_msgs(byte[][] brys) {							 int offset = 0; // String[] strs = String_.Ary(brys); // TEST
-		toc_tbl_hdr								= brys[offset +  0];
-		label_tbl_hdr							= brys[offset +  1];
-		label_col_hdr_lang						= brys[offset +  2];
-		label_col_hdr_text						= brys[offset +  3];
-		alias_tbl_hdr							= brys[offset +  4];
-		alias_col_hdr_lang						= brys[offset +  5];
-		alias_col_hdr_text						= brys[offset +  6];
-		descr_tbl_hdr							= brys[offset +  7];
-		descr_col_hdr_lang						= brys[offset +  8];
-		descr_col_hdr_text						= brys[offset +  9]; offset += 10;
-		slink_tbl_hdr							= brys[offset +  0]; 
-		slink_tbl_hdr_w							= brys[offset +  1];
-		slink_tbl_hdr_d							= brys[offset +  2];
-		slink_tbl_hdr_s							= brys[offset +  3];
-		slink_tbl_hdr_v							= brys[offset +  4];
-		slink_tbl_hdr_q							= brys[offset +  5];
-		slink_tbl_hdr_b							= brys[offset +  6];
-		slink_tbl_hdr_u							= brys[offset +  7];
-		slink_tbl_hdr_n							= brys[offset +  8];
-		slink_tbl_hdr_x							= brys[offset +  9]; offset += 10;
-		slink_col_hdr_site						= brys[offset +  0];
-		slink_col_hdr_text						= brys[offset +  1];
-		slink_col_hdr_bdgs						= brys[offset +  2];
-		claim_tbl_hdr							= brys[offset +  3];
-		claim_col_hdr_prop_id					= brys[offset +  4];
-		claim_col_hdr_prop_name					= brys[offset +  5];
-		claim_col_hdr_val						= brys[offset +  6];
-		claim_col_hdr_ref						= brys[offset +  7];
-		claim_col_hdr_qual						= brys[offset +  8];
-		claim_col_hdr_rank						= brys[offset +  9];
-		json_tbl_hdr							= brys[offset + 10]; offset += 11;
+		this.ary = brys;
+		toggle_title_n							= brys[offset +  0];
+		toggle_title_y							= brys[offset +  1];
+		toc_tbl_hdr								= brys[offset +  2];
+		oview_alias_y							= brys[offset +  3];
+		oview_alias_n							= brys[offset +  4]; offset += 5;
+		langtext_col_lang_name					= brys[offset +  0];
+		langtext_col_lang_code					= brys[offset +  1];
+		slink_tbl_hdr_fmt						= brys[offset +  2];
+		slink_tbl_hdr_fmt_other					= brys[offset +  3];
+		slink_col_hdr_text						= brys[offset +  4]; offset += 5;
+		label_tbl_hdr							= brys[offset +  0];
+		label_col_hdr							= brys[offset +  1];
+		alias_tbl_hdr							= brys[offset +  2];
+		alias_col_hdr							= brys[offset +  3];
+		descr_tbl_hdr							= brys[offset +  4];
+		descr_col_hdr							= brys[offset +  5];
+		claim_tbl_hdr							= brys[offset +  6];
+		json_div_hdr							= brys[offset +  7]; offset += 8;
 		sym_list_comma							= brys[offset +  0];
 		sym_list_word							= brys[offset +  1];
 		sym_fmt_parentheses						= brys[offset +  2];
@@ -57,10 +45,8 @@ public class Wdata_hwtr_msgs {
 		sym_minus								= brys[offset +  4];
 		sym_plusminus							= brys[offset +  5]; offset += 6;
 		val_tid_novalue							= brys[offset +  0];
-		val_tid_somevalue						= brys[offset +  1];
-		rank_preferred							= brys[offset +  2];
-		rank_normal								= brys[offset +  3];
-		rank_deprecated							= brys[offset +  4]; offset += 5;
+		val_tid_somevalue						= brys[offset +  1]; offset += 2;
+		this.month_bgn_idx = offset;
 		time_month_01							= brys[offset +  0];
 		time_month_02							= brys[offset +  1];
 		time_month_03							= brys[offset +  2];
@@ -94,23 +80,34 @@ public class Wdata_hwtr_msgs {
 		geo_unit_minute							= brys[offset +  5];
 		geo_unit_second							= brys[offset +  6];
 		geo_meters								= brys[offset +  7];
+		Bry_fmtr fmtr = Bry_fmtr.new_( slink_tbl_hdr_fmt, "wiki_type");
+		Bry_bfr bfr = Bry_bfr.new_(64);
+		slink_tbl_hdr_w = fmtr.Bld_bry_many(bfr, Xow_wiki_domain_.Name_wikipedia_bry);
+		slink_tbl_hdr_d = fmtr.Bld_bry_many(bfr, Xow_wiki_domain_.Name_wiktionary_bry);
+		slink_tbl_hdr_s = fmtr.Bld_bry_many(bfr, Xow_wiki_domain_.Name_wikisource_bry);
+		slink_tbl_hdr_v = fmtr.Bld_bry_many(bfr, Xow_wiki_domain_.Name_wikivoyage_bry);
+		slink_tbl_hdr_q = fmtr.Bld_bry_many(bfr, Xow_wiki_domain_.Name_wikiquote_bry);
+		slink_tbl_hdr_b = fmtr.Bld_bry_many(bfr, Xow_wiki_domain_.Name_wikibooks_bry);
+		slink_tbl_hdr_u = fmtr.Bld_bry_many(bfr, Xow_wiki_domain_.Name_wikiversity_bry);
+		slink_tbl_hdr_n = fmtr.Bld_bry_many(bfr, Xow_wiki_domain_.Name_wikinews_bry);
+		slink_tbl_hdr_x = fmtr.Bld_bry_many(bfr, slink_tbl_hdr_fmt_other);
 	}
-	public static Wdata_hwtr_msgs new_(Xow_wiki wiki) {
-		byte[][] brys = new_brys(wiki
-		, "toc"
-		, "xowa-wikidata-labels"			, "xowa-wikidata-language"				, "xowa-wikidata-label"
-		, "xowa-wikidata-aliasesHead"		, "xowa-wikidata-language"				, "xowa-wikidata-aliases"
-		, "xowa-wikidata-descriptions"		, "xowa-wikidata-language"				, "xowa-wikidata-description"
-		, "xowa-wikidata-links"
-		, "xowa-wikidata-links-wiki"		, "xowa-wikidata-links-wiktionary"		, "xowa-wikidata-links-wikisource", "xowa-wikidata-links-wikivoyage"
-		, "xowa-wikidata-links-wikiquote"	, "xowa-wikidata-links-wikibooks"		, "xowa-wikidata-links-wikiversity", "xowa-wikidata-links-wikinews", "xowa-wikidata-links-special"
-		, "xowa-wikidata-wiki"				, "xowa-wikidata-link"					, "xowa-wikidata-badges"
-		, "xowa-wikidata-claims"			, "xowa-wikidata-property-id"			, "xowa-wikidata-property", "xowa-wikidata-value", "xowa-wikidata-references", "xowa-wikidata-qualifiers", "Wikibase-diffview-rank"
+	public byte[][] Ary() {return ary;} private final byte[][] ary;
+	public int Month_bgn_idx() {return month_bgn_idx;} private final int month_bgn_idx;
+	public static Wdata_hwtr_msgs new_(Xow_msg_mgr msg_mgr) {
+		byte[][] brys = new_brys(msg_mgr
+		, "hide", "show", "toc"
+		, "wikibase-aliases-label"						, "wikibase-aliases-empty"
+		, "wikibase-sitelinks-sitename-columnheading"	, "wikibase-sitelinks-siteid-columnheading"
+		, "xowa-wikidata-sitelinks-hdr"					, "xowa-wikidata-sitelinks-hdr-special", "wikibase-sitelinks-link-columnheading"
+		, "xowa-wikidata-labels-hdr"					, "xowa-wikidata-labels-col"
+		, "xowa-wikidata-aliases-hdr"					, "xowa-wikidata-aliases-col"
+		, "xowa-wikidata-descriptions-hdr"				, "xowa-wikidata-descriptions-col"
+		, "wikibase-statements"						
 		, "xowa-wikidata-json"
 		, "comma-separator", "word-separator", "parentheses"
 		, "xowa-wikidata-plus", "xowa-wikidata-minus", "xowa-wikidata-plusminus"
 		, "xowa-wikidata-novalue", "xowa-wikidata-somevalue"
-		, "xowa-wikidata-preferred", "xowa-wikidata-normal", "xowa-wikidata-deprecated"
 		, "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"
 		, "xowa-wikidata-decade", "xowa-wikidata-century", "xowa-wikidata-millenium", "xowa-wikidata-years1e4", "xowa-wikidata-years1e5", "xowa-wikidata-years1e6", "xowa-wikidata-years1e7", "xowa-wikidata-years1e8", "xowa-wikidata-years1e9"
 		, "ago", "xowa-wikidata-bc", "xowa-wikidata-inTime"
@@ -121,24 +118,28 @@ public class Wdata_hwtr_msgs {
 		);
 		return new Wdata_hwtr_msgs(brys);
 	}
-	private static byte[][] new_brys(Xow_wiki wiki, String... ids) {
+	private static byte[][] new_brys(Xow_msg_mgr msg_mgr, String... ids) {
 		int len = ids.length;
 		byte[][] rv = new byte[len][];
 		for (int i = 0; i < len; ++i)
-			rv[i] = gplx.html.Html_utl.Escape_html_as_bry(wiki.Msg_mgr().Val_by_key_obj(ids[i]));
+			rv[i] = gplx.html.Html_utl.Escape_html_as_bry(msg_mgr.Val_by_key_obj(ids[i]));
 		return rv;
 	}
+	public byte[] Toggle_title_y() {return toggle_title_y;} private byte[] toggle_title_y;
+	public byte[] Toggle_title_n() {return toggle_title_n;} private byte[] toggle_title_n;
 	public byte[] Toc_tbl_hdr() {return toc_tbl_hdr;} private final byte[] toc_tbl_hdr;
+	public byte[] Oview_alias_y() {return oview_alias_y;} private final byte[] oview_alias_y;
+	public byte[] Oview_alias_n() {return oview_alias_n;} private final byte[] oview_alias_n;
+	public byte[] Langtext_col_lang_name() {return langtext_col_lang_name;} private final byte[] langtext_col_lang_name;
+	public byte[] Langtext_col_lang_code() {return langtext_col_lang_code;} private final byte[] langtext_col_lang_code;
 	public byte[] Label_tbl_hdr() {return label_tbl_hdr;} private final byte[] label_tbl_hdr;
-	public byte[] Label_col_hdr_lang() {return label_col_hdr_lang;} private final byte[] label_col_hdr_lang;
-	public byte[] Label_col_hdr_text() {return label_col_hdr_text;} private final byte[] label_col_hdr_text;
+	public byte[] Label_col_hdr() {return label_col_hdr;} private final byte[] label_col_hdr;
 	public byte[] Alias_tbl_hdr() {return alias_tbl_hdr;} private final byte[] alias_tbl_hdr;
-	public byte[] Alias_col_hdr_lang() {return alias_col_hdr_lang;} private final byte[] alias_col_hdr_lang;
-	public byte[] Alias_col_hdr_text() {return alias_col_hdr_text;} private final byte[] alias_col_hdr_text;
+	public byte[] Alias_col_hdr() {return alias_col_hdr;} private final byte[] alias_col_hdr;
 	public byte[] Descr_tbl_hdr() {return descr_tbl_hdr;} private final byte[] descr_tbl_hdr;
-	public byte[] Descr_col_hdr_lang() {return descr_col_hdr_lang;} private final byte[] descr_col_hdr_lang;
-	public byte[] Descr_col_hdr_text() {return descr_col_hdr_text;} private final byte[] descr_col_hdr_text;
-	public byte[] Slink_tbl_hdr() {return slink_tbl_hdr;} private final byte[] slink_tbl_hdr;
+	public byte[] Descr_col_hdr() {return descr_col_hdr;} private final byte[] descr_col_hdr;
+	public byte[] Slink_tbl_hdr_fmt()		{return slink_tbl_hdr_fmt;} private final byte[] slink_tbl_hdr_fmt;
+	public byte[] Slink_tbl_hdr_fmt_other() {return slink_tbl_hdr_fmt_other;} private final byte[] slink_tbl_hdr_fmt_other;
 	public byte[] Slink_tbl_hdr_w() {return slink_tbl_hdr_w;} private final byte[] slink_tbl_hdr_w;
 	public byte[] Slink_tbl_hdr_d() {return slink_tbl_hdr_d;} private final byte[] slink_tbl_hdr_d;
 	public byte[] Slink_tbl_hdr_s() {return slink_tbl_hdr_s;} private final byte[] slink_tbl_hdr_s;
@@ -148,22 +149,11 @@ public class Wdata_hwtr_msgs {
 	public byte[] Slink_tbl_hdr_u() {return slink_tbl_hdr_u;} private final byte[] slink_tbl_hdr_u;
 	public byte[] Slink_tbl_hdr_n() {return slink_tbl_hdr_n;} private final byte[] slink_tbl_hdr_n;
 	public byte[] Slink_tbl_hdr_x() {return slink_tbl_hdr_x;} private final byte[] slink_tbl_hdr_x;
-	public byte[] Slink_col_hdr_site() {return slink_col_hdr_site;} private final byte[] slink_col_hdr_site;
 	public byte[] Slink_col_hdr_text() {return slink_col_hdr_text;} private final byte[] slink_col_hdr_text;
-	public byte[] Slink_col_hdr_bdgs() {return slink_col_hdr_bdgs;} private final byte[] slink_col_hdr_bdgs;
 	public byte[] Claim_tbl_hdr() {return claim_tbl_hdr;} private final byte[] claim_tbl_hdr;
-	public byte[] Claim_col_hdr_prop_id() {return claim_col_hdr_prop_id;} private final byte[] claim_col_hdr_prop_id;
-	public byte[] Claim_col_hdr_prop_name() {return claim_col_hdr_prop_name;} private final byte[] claim_col_hdr_prop_name;
-	public byte[] Claim_col_hdr_val() {return claim_col_hdr_val;} private final byte[] claim_col_hdr_val;
-	public byte[] Claim_col_hdr_ref() {return claim_col_hdr_ref;} private final byte[] claim_col_hdr_ref;
-	public byte[] Claim_col_hdr_qual() {return claim_col_hdr_qual;} private final byte[] claim_col_hdr_qual;
-	public byte[] Claim_col_hdr_rank() {return claim_col_hdr_rank;} private final byte[] claim_col_hdr_rank;
-	public byte[] Json_tbl_hdr() {return json_tbl_hdr;} private final byte[] json_tbl_hdr;
+	public byte[] Json_div_hdr() {return json_div_hdr;} private final byte[] json_div_hdr;
 	public byte[] Val_tid_novalue() {return val_tid_novalue;} private final byte[] val_tid_novalue;
 	public byte[] Val_tid_somevalue() {return val_tid_somevalue;} private final byte[] val_tid_somevalue;
-	public byte[] Rank_preferred() {return rank_preferred;} private final byte[] rank_preferred;
-	public byte[] Rank_normal() {return rank_normal;} private final byte[] rank_normal;
-	public byte[] Rank_deprecated() {return rank_deprecated;} private final byte[] rank_deprecated;
 	public byte[] Sym_list_comma() {return sym_list_comma;} private final byte[] sym_list_comma;
 	public byte[] Sym_list_word() {return sym_list_word;} private final byte[] sym_list_word;
 	public byte[] Sym_fmt_parentheses() {return sym_fmt_parentheses;} private final byte[] sym_fmt_parentheses;

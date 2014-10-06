@@ -41,7 +41,7 @@ public class Wmf_dump_list_parser_tst {
 		,	fxt.itm("zh-classicalwiki", "20131128", Wmf_dump_itm.Status_tid_complete, "Dump complete", "2013-11-28 06:08:56")
 		);
 	}
-//		@Test  public void Update() {	// 2014-07-06
+//		@Test  public void Update() {	// MAINT:QUARTERLY:2014-10-05
 //			Hash_adp_bry excluded_domains = Hash_adp_bry.cs_().Add_many_str
 //			( "advisory.wikipedia.org", "beta.wikiversity.org", "donate.wikipedia.org", "login.wikipedia.org"
 //			, "nostalgia.wikipedia.org", "outreach.wikipedia.org", "quality.wikipedia.org", "sources.wikipedia.org"
@@ -57,12 +57,12 @@ public class Wmf_dump_list_parser_tst {
 //				Wmf_dump_itm itm = itms[i];
 //				byte[] abrv = itm.Wiki_abrv();
 //				if (Bry_.Eq(abrv, Bry_.new_ascii_("testwikidatawiki"))) continue;
-//				byte[] domain_bry = Xob_bz2_file.Parse__domain_name(abrv, 0, abrv.length);
+//				byte[] domain_bry = Xow_wiki_alias.Parse__domain_name(abrv, 0, abrv.length);
 //				if (domain_bry == null) continue;			// not a standard WMF wiki; ignore
 //				if (Bry_finder.Find_fwd(domain_bry, Bry_.new_ascii_("wikimania")) != Bry_.NotFound) continue;
 //				if (excluded_domains.Has(domain_bry)) continue;
 //				Xow_wiki_domain domain_itm = Xow_wiki_domain_.parse_by_domain(domain_bry);
-//				byte[] tid_name = Xto_display_name(Xow_wiki_domain_.Key_by_tid(domain_itm.Tid()));
+//				byte[] tid_name = Xto_display_name(Xow_wiki_domain_.Key_by_tid(domain_itm.Wiki_tid()));
 //				sql_bfr
 //					.Add_byte(Byte_ascii.Paren_bgn)
 //					.Add_int_variable(counter++)
@@ -70,7 +70,7 @@ public class Wmf_dump_list_parser_tst {
 //					.Add_int_variable(1)
 //					.Add_byte(Byte_ascii.Comma)
 //					.Add_byte(Byte_ascii.Apos)
-//					.Add(domain_itm.Lang_orig())
+//					.Add(domain_itm.Lang_orig_key())
 //					.Add_byte(Byte_ascii.Apos)
 //					.Add_byte(Byte_ascii.Comma)
 //					.Add_byte(Byte_ascii.Apos)

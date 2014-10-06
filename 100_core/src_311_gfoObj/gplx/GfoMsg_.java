@@ -169,6 +169,7 @@ class GfoMsg_base implements GfoMsg {
 	public Object	ReadObj(String k, ParseAble parseAble)				{Object rv = ReadOr(k, null); if (rv == Nil) ThrowNotFound(k); return parse ? parseAble.ParseAsObj((String)rv) : rv;}
 	public Object	ReadObjOr(String k, ParseAble parseAble, Object or) {Object rv = ReadOr(k, or)	; if (rv == Nil) return or		; return parse ? parseAble.ParseAsObj((String)rv) : rv;}
 	public String[]	ReadStrAry(String k, String spr)		{return String_.Split(ReadStr(k), spr);}
+	public byte[][] ReadBryAry(String k, byte spr)			{return Bry_.Split(ReadBry(k), spr);}
 	public String[] ReadStrAryIgnore(String k, String spr, String ignore) {return String_.Split(String_.Replace(ReadStr(k), ignore, ""), spr);}
 	public Object   ReadValAt(int i) {return Args_getAt(i).Val();}
 	@gplx.Virtual protected Object ReadOr(String k, Object defaultOr) {

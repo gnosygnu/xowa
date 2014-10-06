@@ -16,24 +16,31 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
-import gplx.json.*;
+import gplx.json.*; import gplx.xowa.html.*; import gplx.xowa.apis.xowa.html.*;
 class Wdata_fmtr__json implements Bry_fmtr_arg {
-	private byte[] tbl_hdr; private Json_doc jdoc; private Json_parser jdoc_parser; private Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
-	public void Init_by_ctor(Json_parser jdoc_parser) {this.jdoc_parser = jdoc_parser;}
-	public void Init_by_lang(byte[] tbl_hdr) {this.tbl_hdr = tbl_hdr;}
-	public void Init_by_wdoc(Wdata_fmtr__toc_div fmtr_toc, Json_doc jdoc) {
-		fmtr_toc.Add(tbl_hdr);
+	private final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+	private Xoapi_toggle_itm toggle_itm; private Wdata_toc_data toc_data; private Json_doc jdoc;
+	public void Init_by_ctor(Wdata_toc_data toc_data, Xoapi_toggle_mgr toggle_mgr) {
+		this.toc_data = toc_data.Itms_len_enable_n_();
+		this.toggle_itm = toggle_mgr.Get_or_new("wikidatawiki-json").Html_toggle_hdr_cls_(Bry_.new_ascii_("overflow:auto;"));
+	}
+	public void Init_by_lang(Wdata_hwtr_msgs msgs) {
+		toc_data.Orig_(msgs.Json_div_hdr());
+		toggle_itm.Init_msgs(msgs.Toggle_title_y(), msgs.Toggle_title_n());
+	}
+	public void Init_by_wdoc(Json_doc jdoc) {			
 		this.jdoc = jdoc;
+		toc_data.Make(0);
 	}
 	public void XferAry(Bry_bfr bfr, int idx) {
-		if (jdoc == null) return;
-		Wdata_wiki_mgr.Write_json_as_html(jdoc_parser, tmp_bfr, jdoc.Src());
-		fmtr.Bld_bfr_many(bfr, tbl_hdr, tmp_bfr.XtoAryAndClear());
+		if (jdoc == null) return;	// TEST: wdoc doesn't have jdoc
+		jdoc.Root().Print_as_json(tmp_bfr, 0);
+		fmtr.Bld_bfr_many(bfr, toc_data.Href(), toc_data.Text(), toggle_itm.Html_toggle_btn(), toggle_itm.Html_toggle_hdr(), tmp_bfr.XtoAryAndClear());
 	}
-	private Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
-	, "<h2>~{hdr}</h2>"
-	, ""
-	, "~{json}"
-	), "hdr", "json");
+	, "  <h2 class='wb-section-heading' id='~{hdr_href}'>~{hdr_text}~{toggle_btn}</h2>"
+	, "  <pre~{toggle_hdr}>~{json}"
+	, "  </pre>"
+	), "hdr_href", "hdr_text", "toggle_btn", "toggle_hdr", "json");
 }

@@ -74,6 +74,7 @@ public class Xoa_app implements GfoInvkAble {
 		setup_mgr.Init_by_app(this);
 		thread_mgr.Usr_dlg_(usr_dlg);
 		html_mgr.Init_by_app(this);
+		api_root.Init_by_app(this);
 	}
 	public boolean Launch_done() {return stage == Xoa_stage_.Tid_launch;}
 	public void Launch() {
@@ -81,6 +82,7 @@ public class Xoa_app implements GfoInvkAble {
 		stage = Xoa_stage_.Tid_launch;
 		user.Cfg_mgr().Setup_mgr().Setup_run_check(this); log_bfr.Add("app.upgrade.done");
 		gplx.xowa.users.prefs.Prefs_converter._.Check(this);
+		user.Wiki().Init_assert();	// NOTE: must assert wiki and load langs first, else will be asserted during Portal_mgr().Init(), which will cause IndexOutOfBounds; DATE:2014-10-04
 	}
 	public byte Stage() {return stage;} public Xoa_app Stage_(byte v) {stage = v; return this;} private byte stage = Xoa_stage_.Tid_ctor;
 	public boolean Term_cbk() {

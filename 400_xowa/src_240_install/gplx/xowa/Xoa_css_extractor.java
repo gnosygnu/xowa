@@ -167,11 +167,14 @@ public class Xoa_css_extractor {
 		return mainpage_html != null;
 	}
 	private byte[] Mainpage_download_html() {
-		String log_msg = usr_dlg.Prog_many("", "main_page.download", "downloading main page for '~{0}'", wiki_domain);
-		byte[] main_page_html = download_xrg.Prog_fmt_hdr_(log_msg).Exec_as_bry(mainpage_url);
-		if (main_page_html == null) usr_dlg.Warn_many("", "", "failed to download main_page: src_url=~{0};", mainpage_url);
+		String main_page_url_temp = mainpage_url;
+		if (Bry_.Eq(wiki_domain, Xow_wiki_domain_.Url_wikidata))	// if wikidata, download css for a Q* page; Main_Page has less css; DATE:2014-09-30
+			main_page_url_temp = main_page_url_temp + "/wiki/Q2";
+		String log_msg = usr_dlg.Prog_many("", "main_page.download", "downloading main page for '~{0}'", main_page_url_temp);
+		byte[] main_page_html = download_xrg.Prog_fmt_hdr_(log_msg).Exec_as_bry(main_page_url_temp);
+		if (main_page_html == null) usr_dlg.Warn_many("", "", "failed to download main_page: src_url=~{0};", main_page_url_temp);
 		return main_page_html;
-	}
+	}	
 	private void Failover(Io_url trg_fil) {
 		usr_dlg.Note_many("", "", "copying failover file: trg_fil=~{0};", trg_fil.Raw());
 		Io_mgr._.CopyFil(failover_dir.GenSubFil(trg_fil.NameAndExt()), trg_fil, true);		

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.setup.maints; import gplx.*; import gplx.xowa.*; import gplx.xowa.setup.*;
-import gplx.ios.*;
+import gplx.ios.*; import gplx.xowa.wikis.*;
 public class Xoa_maint_mgr implements GfoInvkAble {
 	public Xoa_maint_mgr(Xoa_app app) {
 		this.app = app;
@@ -55,8 +55,8 @@ public class Xoa_maint_mgr implements GfoInvkAble {
 		for (int i = 0; i < len; i++) {
 			Wmf_dump_itm itm = itms[i];
 			byte[] wiki_abrv = itm.Wiki_abrv();
-			byte[] wiki_domain = Xob_bz2_file.Parse__domain_name(wiki_abrv, 0, wiki_abrv.length);
-			if (wiki_domain == Xob_bz2_file.Parse__domain_name_null) continue;	// invalid wiki-name; ex: nycwikimedia
+			byte[] wiki_domain = Xow_wiki_alias.Parse__domain_name(wiki_abrv, 0, wiki_abrv.length);
+			if (wiki_domain == Xow_wiki_alias.Parse__domain_name_null) continue;	// invalid wiki-name; ex: nycwikimedia
 			itms_hash.Add(wiki_domain, itm);
 		}
 		len = app.Wiki_mgr().Count();

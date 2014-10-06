@@ -16,11 +16,29 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.portal; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
+import gplx.xowa.wikis.*; import gplx.xowa.xtns.wdatas.*;
 public class Xoh_page_body_cls {	// REF.MW:Skin.php|getPageClasses
-	public static byte[] Calc(Bry_bfr tmp_bfr, Xoa_ttl ttl) {
+	public static byte[] Calc(Bry_bfr tmp_bfr, Xoa_ttl ttl, int page_tid) {
 		tmp_bfr.Add(Bry_id_prefix).Add_int_variable(ttl.Ns().Id());						// ns-0; note that special is ns--1 DATE:2014-09-24
 		Add_type(tmp_bfr, ttl);															// ns-special || ns-talk || ns-subject
 		tmp_bfr.Add_byte_space().Add(Bry_page_prefix).Add(Escape_cls(ttl.Full_db()));	// page-Page_title
+		if (page_tid == Xow_page_tid.Tid_json) {
+			switch (ttl.Ns().Id()) {
+				case Xow_ns_.Id_main:
+					tmp_bfr.Add_byte_space().Add(Bry_wb_entitypage);
+					tmp_bfr.Add_byte_space().Add(Bry_wb_itempage);
+					tmp_bfr.Add_byte_space().Add(Bry_wb_itempage).Add_byte(Byte_ascii.Dash).Add(ttl.Page_db());
+					break;
+				case Wdata_wiki_mgr.Ns_property:
+					tmp_bfr.Add_byte_space().Add(Bry_wb_entitypage);
+					tmp_bfr.Add_byte_space().Add(Bry_wb_propertypage);
+					tmp_bfr.Add_byte_space().Add(Bry_wb_propertypage).Add_byte(Byte_ascii.Dash).Add(ttl.Page_db());
+					break;
+				default:
+					Gfo_usr_dlg_._.Warn_many("", "", "unexpected ns for page_body_cls; ttl=~{0}", String_.new_utf8_(ttl.Raw()));
+					break;
+			}
+		}
 		return tmp_bfr.XtoAryAndClear();
 	}
 	private static void Add_type(Bry_bfr tmp_bfr, Xoa_ttl ttl) {
@@ -105,5 +123,9 @@ public class Xoh_page_body_cls {	// REF.MW:Skin.php|getPageClasses
 	, Bry_type_talk			= Bry_.new_ascii_("ns-talk")
 	, Bry_type_subject		= Bry_.new_ascii_("ns-subject")
 	, Bry_page_prefix		= Bry_.new_ascii_("page-")
+	, Bry_wb_entitypage		= Bry_.new_ascii_("wb-entitypage")
+	, Bry_wb_itempage		= Bry_.new_ascii_("wb-itempage")
+	, Bry_wb_propertypage	= Bry_.new_ascii_("wb-propertypage")
 	;
+	public static int Page_tid_wikitext = 0, Page_tid_wikidata_qid = 1, Page_tid_wikidata_pid = 2;
 }

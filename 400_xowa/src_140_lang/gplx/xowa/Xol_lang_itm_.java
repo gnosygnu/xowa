@@ -868,6 +868,7 @@ Regy_add(regy, Id_zu, "zu", "isiZulu");
 		return lang_itm;
 	}
 	public static Xol_lang_itm Get_by_key(byte[] key) {if (regy == null) Regy(); return (Xol_lang_itm)regy.Get_by_bry(key);}
+	public static Xol_lang_itm Get_by_key_or_intl(byte[] key) {return Get_by_key_or_intl(key, 0, key.length);}
 	public static Xol_lang_itm Get_by_key_or_intl(byte[] key, int bgn, int end) {
 		if (regy == null) Regy();
 		Xol_lang_itm rv = (Xol_lang_itm)regy.Get_by_mid(key, bgn, end);

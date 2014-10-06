@@ -233,7 +233,7 @@ public class Scrib_lib_wikibase_srl_tst {
 		);
 	}
 	@Test   public void Claims_globecoordinate() {
-		fxt.Init_prop(fxt.Wdata_fxt().Make_claim_geo(2, "1.2345", "6.789"));
+		fxt.Init_prop(fxt.Wdata_fxt().Make_claim_geo(2, "6.789", "1.2345"));
 		fxt.Test
 		(	"claims:"
 		,	"  P2:"

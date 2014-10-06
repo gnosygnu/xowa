@@ -30,7 +30,10 @@ public class Wdata_doc_bldr {
 	}		
 	public Wdata_doc_bldr Add_description(String lang, String text) {byte[] key = Bry_.new_utf8_(lang); descr_list.Add(key, new Wdata_langtext_itm(key, Bry_.new_utf8_(text))); return this;}
 	public Wdata_doc_bldr Add_label(String lang, String text)		{byte[] key = Bry_.new_utf8_(lang); label_list.Add(key, new Wdata_langtext_itm(key, Bry_.new_utf8_(text))); return this;}
-	public Wdata_doc_bldr Add_sitelink(String site, String ttl)		{byte[] key = Bry_.new_utf8_(site); slink_list.Add(key, new Wdata_sitelink_itm(key, Bry_.new_utf8_(ttl), Bry_.Ary_empty)); return this;}
+	public Wdata_doc_bldr Add_sitelink(String site, String link, String... bdgs) {
+		byte[] key = Bry_.new_utf8_(site); slink_list.Add(key, new Wdata_sitelink_itm(key, Bry_.new_utf8_(link), Bry_.Ary(bdgs)));
+		return this;
+	}
 	public Wdata_doc_bldr Add_alias(String lang, String... ary){byte[] key = Bry_.new_utf8_(lang); alias_list.Add(key, new Wdata_alias_itm	  (key, Bry_.Ary(ary))); return this;}
 	public Wdata_doc Xto_wdoc() {
 		Wdata_doc rv = new Wdata_doc(qid, slink_list, label_list, descr_list, alias_list, claim_list);

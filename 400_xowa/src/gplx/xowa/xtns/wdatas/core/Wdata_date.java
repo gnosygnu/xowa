@@ -40,4 +40,82 @@ public class Wdata_date {
 		int second	= Bry_.Xto_int_or(bry, year_end + 13, year_end + 15, -1);
 		return new Wdata_date(year * year_sign, month, day, hour, minute, second);
 	}
+	public static Wdata_date Xto_julian(Wdata_date date) {
+		int a = (int)Math_.Floor((14 - date.Month() / 12));
+		int y = (int)date.Year() + 4800 - a;
+		int m = date.Month() + 12 * a - 3;
+		int julian = date.Day() + (int)Math_.Floor((153 * m + 2) / 5) + 365 * y + (int)Math_.Floor(y / 4) - (int)Math_.Floor(y / 100) + (int)Math_.Floor(y / 400) - 32045;
+		int c = julian + 32082;
+		int d = (int)Math_.Floor((4 * c + 3) / 1461);
+		int e = c - (int)Math_.Floor((1461 * d) / 4);
+		int n = (int)Math_.Floor((5 * e + 2) / 153);
+		int new_y = d - 4800 + (int)Math_.Floor(n / 10);
+		int new_m = n + 3 - 12 * (int)Math_.Floor(n / 10);
+		int new_d = e - (int)Math_.Floor((153 * n + 2) / 5) + 1;
+		return new Wdata_date(new_y, new_m, new_d, date.Hour(), date.Minute(), date.Second());
+	}
+	public static void Xto_str(Bry_bfr bfr, Wdata_date date, int precision, byte[][] months, int months_bgn, byte[] dt_spr, byte[] time_spr) {
+		long year = date.Year();
+		switch (precision) {
+			case Wdata_date.Fmt_ym:					// EX: "Feb 2001"
+				bfr.Add(months[months_bgn + date.Month() - ListAdp_.Base1]);
+				bfr.Add_byte_space();
+				bfr.Add_long_variable(year);
+				break;
+			case Wdata_date.Fmt_ymd: 				// EX: "3 Feb 2001"
+				bfr.Add_int_variable(date.Day());
+				bfr.Add_byte_space();
+				bfr.Add(months[months_bgn + date.Month() - ListAdp_.Base1]);
+				bfr.Add_byte_space();
+				bfr.Add_long_variable(date.Year());
+				break;
+			case Wdata_date.Fmt_ymdh:				// EX: "4:00 3 Feb 2011"
+				bfr.Add_int_variable(date.Hour());
+				bfr.Add(time_spr);
+				bfr.Add_int_fixed(0, 2);
+				bfr.Add_byte_space();
+				bfr.Add_int_variable(date.Day());
+				bfr.Add_byte_space();
+				bfr.Add(months[months_bgn + date.Month() - ListAdp_.Base1]);
+				bfr.Add_byte_space();
+				bfr.Add_long_variable(date.Year());
+				break;
+			case Wdata_date.Fmt_ymdhn:				// EX: "4:05 3 Feb 2011"
+				bfr.Add_int_variable(date.Hour());
+				bfr.Add(time_spr);
+				bfr.Add_int_fixed(date.Minute(), 2);
+				bfr.Add_byte_space();
+				bfr.Add_int_variable(date.Day());
+				bfr.Add_byte_space();
+				bfr.Add(months[months_bgn + date.Month() - ListAdp_.Base1]);
+				bfr.Add_byte_space();
+				bfr.Add_long_variable(date.Year());
+				break;
+			default: 
+				if (precision <= 9)		// y, round to (9 - prec)
+					bfr.Add_long_variable(date.Year());
+				else {									// EX: "4:05:06 3 Feb 2011"
+					bfr.Add_int_variable(date.Hour());
+					bfr.Add(time_spr);
+					bfr.Add_int_fixed(date.Minute(), 2);
+					bfr.Add(time_spr);
+					bfr.Add_int_fixed(date.Second(), 2);
+					bfr.Add_byte_space();
+					bfr.Add_int_variable(date.Day());
+					bfr.Add_byte_space();
+					bfr.Add(months[months_bgn + date.Month() - ListAdp_.Base1]);
+					bfr.Add_byte_space();
+					bfr.Add_long_variable(date.Year());
+				}
+				break;
+		}
+	}
+	public static final int
+	  Fmt_y				=  9
+	, Fmt_ym			= 10
+	, Fmt_ymd			= 11
+	, Fmt_ymdh			= 12
+	, Fmt_ymdhn			= 13
+	, Fmt_ymdhns		= 14	// anything >13 ?
+	;
 }

@@ -17,8 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.users.dbs.*; import gplx.xowa.users.history.*; import gplx.xowa.xtns.scribunto.*;
-public class Xou_user implements GfoInvkAble {
+public class Xou_user implements GfoEvMgrOwner, GfoInvkAble {
 	public Xou_user(Xoa_app app, Io_url user_dir) {
+		this.evMgr = GfoEvMgr.new_(this);
 		this.app = app; this.key_str = user_dir.NameOnly(); key_bry = Bry_.new_utf8_(key_str);
 		fsys_mgr = new Xou_fsys_mgr(app, this, user_dir);
 		prefs_mgr = new gplx.xowa.users.prefs.Prefs_mgr(app);
@@ -31,11 +32,13 @@ public class Xou_user implements GfoInvkAble {
 	public String Key_str() {return key_str;} private String key_str;
 	public byte[] Key_bry() {return key_bry;} private byte[] key_bry;
 	public void Key_str_(String v) {this.key_str = v; this.key_bry = Bry_.new_utf8_(v);}
+	public GfoEvMgr EvMgr() {return evMgr;} private final GfoEvMgr evMgr;
 	public Xol_lang Lang() {if (lang == null) {lang = app.Lang_mgr().Get_by_key_or_new(app.Sys_cfg().Lang()); lang.Init_by_load();} return lang;} private Xol_lang lang;		
 	public void Lang_(Xol_lang v) {
 		lang = v;
 		this.Msg_mgr().Lang_(v);
 		wiki.Msg_mgr().Clear();	// clear home wiki msgs whenever lang changes; else messages cached from old lang will not be replaced; EX:Read/Edit; DATE:2014-05-26
+		GfoEvMgr_.PubVal(this, Evt_lang_changed, lang);
 	}
 	public Xou_fsys_mgr Fsys_mgr() {return fsys_mgr;} private Xou_fsys_mgr fsys_mgr;
 	public Xow_wiki Wiki() {if (wiki == null) wiki = Xou_user_.new_or_create_(this, app); return wiki;} private Xow_wiki wiki;
@@ -92,6 +95,7 @@ public class Xou_user implements GfoInvkAble {
 	public static final String Invk_available_from_fsys = "available_from_fsys", Invk_available_from_bulk = "available_from_bulk", Invk_bookmarks_add_fmt_ = "bookmarks_add_fmt_"
 		, Invk_name = "name", Invk_wiki = "wiki", Invk_history = "history", Invk_fsys = "fsys", Invk_lang = "lang", Invk_msgs = "msgs", Invk_prefs = "prefs", Invk_cfg = "cfg", Invk_session = "session";
 	public static final String Key_xowa_user = "anonymous";
+	public static final String Evt_lang_changed = "lang_changed";
 	public void Available_from_fsys() {
 		Io_url bookmarks_dir = fsys_mgr.Home_wiki_dir().GenSubDir_nest("wiki", "home", "ns", "730");	// NOTE: putting bookmark check here (instead of at init) b/c Init runs before xowa.gfs, and Bookmarks needs xowa.gfs to run first
 		if (!Io_mgr._.ExistsDir(bookmarks_dir)) Xou_user_.Bookmarks_make(app, this.Wiki());

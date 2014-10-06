@@ -23,11 +23,11 @@ public class Xow_hdr_mgr {
 	private HashAdp hdrs_hash = HashAdp_.new_(); private Bry_bfr hdrs_bfr = Bry_bfr.reset_(255); private Bry_obj_ref hdrs_ref = Bry_obj_ref.null_();
 	public Xow_hdr_mgr(Xow_wiki wiki, Xoa_page page) {this.wiki = wiki; this.page = page;}
 	public boolean Toc_enabled() {
-		return	!toc_hide			// check for __NOTOC__
-			&&	hdrs_len != 0		// never show TOC if 0 headers, even when __FORCETOC__
-			&&	(	hdrs_len > 3	// show TOC automatically if 4 or more headers
-				||	toc_manual		// or when __TOC__ specified (EX: 2 headers)
-				||	toc_force		// or when __FORCETOC__ specified; presumably to (a) show TOC when < 4 headers and (b) let TOC show at default position; __TOC__ would force TOC to show at __TOC__; __FORCETOC__ can be placed at bottom of page
+		return	!toc_hide				// check for __NOTOC__
+			&&	hdrs_len != 0			// never show TOC if 0 headers, even when __FORCETOC__
+			&&	(	hdrs_len > Toc_min 	// show TOC automatically if 4 or more headers
+				||	toc_manual			// or when __TOC__ specified (EX: 2 headers)
+				||	toc_force			// or when __FORCETOC__ specified; presumably to (a) show TOC when < 4 headers and (b) let TOC show at default position; __TOC__ would force TOC to show at __TOC__; __FORCETOC__ can be placed at bottom of page
 				)
 			;
 	}
@@ -124,4 +124,5 @@ public class Xow_hdr_mgr {
 			}
 		}
 	}
+	public static final int Toc_min = 3;
 }

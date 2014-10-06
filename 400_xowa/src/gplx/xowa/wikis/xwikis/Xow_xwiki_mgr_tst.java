@@ -55,7 +55,7 @@ class Xow_xwiki_mgr_fxt {
 	public Xow_xwiki_itm xwiki_null_(String key) {return new Xow_xwiki_itm(Bry_.new_utf8_(key), Bry_.Empty, Xow_wiki_domain_.Tid_other, Xol_lang_itm_.Id__unknown, Bry_.Empty);}
 	public Xow_xwiki_itm xwiki_(String key, String domain, String fmt) {
 		Xow_wiki_domain domain_itm = Xow_wiki_domain_.parse_by_domain(Bry_.new_utf8_(domain));
-		return new Xow_xwiki_itm(Bry_.new_utf8_(key), Bry_.new_utf8_(fmt), domain_itm.Tid(), Xol_lang_itm_.Id__unknown, Bry_.new_utf8_(domain));
+		return new Xow_xwiki_itm(Bry_.new_utf8_(key), Bry_.new_utf8_(fmt), domain_itm.Wiki_tid(), Xol_lang_itm_.Id__unknown, Bry_.new_utf8_(domain));
 	}
 	public Xow_xwiki_mgr_fxt Test_add_bulk(String raw, int lang_tid, byte wiki_tid, String alias, String fmt, String domain) {
 		Xow_xwiki_itm itm = xwiki_mgr.Add_bulk_row(Xol_lang_itm_.Regy(), Bry_.new_ascii_(raw));

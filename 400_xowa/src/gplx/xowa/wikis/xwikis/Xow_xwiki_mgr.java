@@ -33,9 +33,9 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 		byte wiki_tid = Byte_.Zero;
 		int lang_tid = -1;
 		Xow_wiki_domain wiki_type = Xow_wiki_domain_.parse_by_domain(domain);
-		wiki_tid = wiki_type.Tid();
-		if (Bry_.Len_gt_0(wiki_type.Lang())) {	// domain has lang (EX: "en.")
-			Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key(wiki_type.Lang());
+		wiki_tid = wiki_type.Wiki_tid();
+		if (Bry_.Len_gt_0(wiki_type.Lang_key())) {	// domain has lang (EX: "en.")
+			Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key(wiki_type.Lang_key());
 			if (lang_itm == null) return null;	// unknown lang: do not add to wiki collection; EX: en1.wikipedia.org
 			lang_tid = lang_itm.Id();
 		}
@@ -70,13 +70,13 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 		}
 		Xow_wiki_domain wiki_type = Xow_wiki_domain_.parse_by_domain(wiki_type_bry);
 		int lang_tid = Xol_lang_itm_.Id__unknown;
-		if (Bry_.Len_gt_0(wiki_type.Lang())) {
-			Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key(wiki_type.Lang());
+		if (Bry_.Len_gt_0(wiki_type.Lang_key())) {
+			Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key(wiki_type.Lang_key());
 			if (lang_itm != null						// lang exists
 				&& Bry_.Eq(alias, lang_itm.Key()))	// alias == lang.key; only assign langs to aliases that have lang key; EX: w|en.wikipedia.org; "w" alias should not be registered for "en"; DATE:2013-07-25
 				lang_tid = lang_itm.Id();
 		}				
-		return new Xow_xwiki_itm(alias, Bry_.Add(Xoh_href_parser.Href_http_bry, wiki_type_bry, Xoh_href_parser.Href_wiki_bry, Arg_0), wiki_type.Tid(), lang_tid, wiki_type_bry);
+		return new Xow_xwiki_itm(alias, Bry_.Add(Xoh_href_parser.Href_http_bry, wiki_type_bry, Xoh_href_parser.Href_wiki_bry, Arg_0), wiki_type.Wiki_tid(), lang_tid, wiki_type_bry);
 	}	static final byte[] Arg_0 = Bry_.new_ascii_("~{0}");
 	String Exec_itms_print(byte[] raw) {
 		Bry_fmtr fmtr = Bry_fmtr.new_bry_(raw, "wiki_key");//, "wiki_type_url", "wiki_lang", "wiki_name", "wiki_logo_url");

@@ -26,6 +26,7 @@ public class Wdata_doc {
 	}
 	public Json_doc Jdoc() {return jdoc;} private Json_doc jdoc;
 	public byte[] Qid() {return qid;} private byte[] qid;
+	public byte[][] Sort_langs() {return sort_langs;} public void Sort_langs_(byte[][] v) {sort_langs = v;} private byte[][] sort_langs = Bry_.Ary_empty;
 	public OrderedHash Slink_list()	{if (slink_list == null) slink_list = mgr.Wdoc_parser(jdoc).Parse_sitelinks(qid, jdoc);			return slink_list;} private OrderedHash slink_list;
 	public OrderedHash Label_list()	{if (label_list == null) label_list = mgr.Wdoc_parser(jdoc).Parse_langvals(qid, jdoc, Bool_.Y); return label_list;} private OrderedHash label_list;
 	public OrderedHash Descr_list()	{if (descr_list == null) descr_list = mgr.Wdoc_parser(jdoc).Parse_langvals(qid, jdoc, Bool_.N); return descr_list;} private OrderedHash descr_list;

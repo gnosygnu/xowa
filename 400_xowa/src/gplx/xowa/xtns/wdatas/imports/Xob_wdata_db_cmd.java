@@ -246,7 +246,10 @@ class Wdata_claim_tbl extends Wdata_tbl_base {
 	}
 	@Override public String[] Fld_ary() {return new String[] {Fld_claim_id, Fld_page_id, Fld_prop_id, Fld_val_tid, Fld_entity_tid, Fld_entity_id, Fld_val_text, Fld_guid, Fld_rank, Fld_ref_count, Fld_qual_count};}
 	private int next_claim_id = 0;
+	private Xob_wdata_db_visitor visitor;
 	@Override public void Exec_insert_by_wdoc(byte[] lang_key, Wdata_wiki_mgr wdata_mgr, int page_id, Wdata_doc wdoc) {
+		if (visitor == null) visitor = new Xob_wdata_db_visitor(wdata_mgr);
+		visitor.Init(lang_key);
 		OrderedHash list = wdoc.Claim_list();
 		int list_len = list.Count();
 		for (int i = 0; i < list_len; i++) {
@@ -256,45 +259,9 @@ class Wdata_claim_tbl extends Wdata_tbl_base {
 			byte[] claim_val = Bry_.Empty;
 			for (int j = 0; j < itms_len; j++) {
 				Wdata_claim_itm_core claim = claim_grp.Get_at(j);
-				byte val_tid = claim.Val_tid();
-				switch (val_tid) {
-					case Wdata_dict_val_tid.Tid_string:
-						Wdata_claim_itm_str claim_str = (Wdata_claim_itm_str)claim;
-						claim_val = claim_str.Val_str();
-						break;
-					case Wdata_dict_val_tid.Tid_time:
-						Wdata_claim_itm_time claim_time = (Wdata_claim_itm_time)claim;
-						claim_val = claim_time.Time();
-						break;
-					case Wdata_dict_val_tid.Tid_quantity:
-						Wdata_claim_itm_quantity claim_quantity = (Wdata_claim_itm_quantity)claim;
-						claim_val = claim_quantity.Amount();
-						break;
-					case Wdata_dict_val_tid.Tid_monolingualtext:
-						Wdata_claim_itm_monolingualtext claim_monolingualtext = (Wdata_claim_itm_monolingualtext)claim;
-						claim_val = Bry_.Add_w_dlm(Byte_ascii.Pipe, claim_monolingualtext.Lang(), claim_monolingualtext.Text());
-						break;
-					case Wdata_dict_val_tid.Tid_entity:
-						Wdata_claim_itm_entity claim_entity = (Wdata_claim_itm_entity)claim;
-						entity_id = claim_entity.Entity_id();
-						Wdata_doc entity_doc = wdata_mgr.Pages_get(Bry_.Add(Wdata_wiki_mgr.Bry_q, claim_entity.Entity_id_bry()));
-						if (entity_doc != null)	// NOTE: invalid document could be cited; EX: Q3235 cites prop p832 as Q14916523
-							claim_val = entity_doc.Label_list_get(lang_key);
-						break;
-					case Wdata_dict_val_tid.Tid_globecoordinate:
-					case Wdata_dict_val_tid.Tid_bad: {
-						Wdata_claim_itm_globecoordinate claim_globecoordinate = (Wdata_claim_itm_globecoordinate)claim;
-						claim_val = Bry_.Add_w_dlm(Byte_ascii.Comma, claim_globecoordinate.Lat(), claim_globecoordinate.Lng());
-						break;
-					}
-					default: 
-						if (   claim.Snak_tid() == Wdata_dict_snak_tid.Tid_somevalue		// somevalue has no val_tid; not sure why; see Q17 and prop 138
-							|| claim.Snak_tid() == Wdata_dict_snak_tid.Tid_novalue) {}	// novalue has no val_tid; see q30 and official language
-						else
-							throw Err_.unhandled(val_tid);
-						break;
-				}
-				Exec_insert(++next_claim_id, page_id, claim_grp.Id(), val_tid, claim.Snak_tid(), entity_id, claim_val, claim.Wguid(), claim.Rank_tid(), 0, 0);
+				claim.Welcome(visitor);
+				claim_val = visitor.Rv();
+				Exec_insert(++next_claim_id, page_id, claim_grp.Id(), claim.Val_tid(), claim.Snak_tid(), entity_id, claim_val, claim.Wguid(), claim.Rank_tid(), 0, 0);
 			}
 		}
 	}
@@ -433,4 +400,20 @@ class Wdata_qual_tbl extends Wdata_tbl_base {
 		.Exec_insert();
 	}
 	private static final String Fld_qual_id = "qual_id", Fld_page_id = "page_id", Fld_val_text = "val_text";
+}
+class Xob_wdata_db_visitor implements Wdata_claim_visitor {
+	private final  Wdata_wiki_mgr wdata_mgr; private byte[] lang_key;
+	public Xob_wdata_db_visitor(Wdata_wiki_mgr wdata_mgr) {this.wdata_mgr = wdata_mgr;}
+	public void Init(byte[] lang_key) {this.lang_key = lang_key;}
+	public byte[] Rv() {return rv;} private byte[] rv;
+	public void Visit_str(Wdata_claim_itm_str itm)							{rv = itm.Val_str();}
+	public void Visit_monolingualtext(Wdata_claim_itm_monolingualtext itm)	{rv = Bry_.Add_w_dlm(Byte_ascii.Pipe, itm.Lang(), itm.Text());}
+	public void Visit_quantity(Wdata_claim_itm_quantity itm)				{rv = itm.Amount();}
+	public void Visit_time(Wdata_claim_itm_time itm)						{rv = itm.Time();}
+	public void Visit_globecoordinate(Wdata_claim_itm_globecoordinate itm)	{rv = Bry_.Add_w_dlm(Byte_ascii.Comma, itm.Lat(), itm.Lng());}
+	public void Visit_system(Wdata_claim_itm_system itm)					{rv = Bry_.Empty;}
+	public void Visit_entity(Wdata_claim_itm_entity itm) {
+		Wdata_doc entity_doc = wdata_mgr.Pages_get(Bry_.Add(Wdata_wiki_mgr.Bry_q, itm.Entity_id_bry()));
+		rv = entity_doc == null ? Bry_.Empty : entity_doc.Label_list_get(lang_key);
+	}
 }

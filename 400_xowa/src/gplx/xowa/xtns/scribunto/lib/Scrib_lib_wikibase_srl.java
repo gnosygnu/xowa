@@ -135,104 +135,17 @@ class Scrib_lib_wikibase_srl {
 		rv[2] = KeyVal_.new_("snaktype", Wdata_dict_snak_tid.Xto_str(itm.Snak_tid()));
 		return rv;
 	}
+	private static final Scrib_lib_wikibase_srl_visitor visitor = new Scrib_lib_wikibase_srl_visitor();
 	private static KeyVal[] Srl_claims_prop_itm_core_val(Wdata_claim_itm_core itm) {
 		switch (itm.Snak_tid()) {
 			case Wdata_dict_snak_tid.Tid_somevalue:
 			case Wdata_dict_snak_tid.Tid_novalue:	// NOTE: not sure about this logic, but can't find somevalue snaktid formattercode in wikibase; DATE:2014-04-07
 				return DataValue_nil;
 			default:
-				switch (itm.Val_tid()) {
-					case Wdata_dict_val_tid.Tid_string				: return Srl_claims_prop_itm_core_str(itm);
-					case Wdata_dict_val_tid.Tid_entity				: return Srl_claims_prop_itm_core_entity(itm);
-					case Wdata_dict_val_tid.Tid_time				: return Srl_claims_prop_itm_core_time(itm);
-					case Wdata_dict_val_tid.Tid_globecoordinate		: return Srl_claims_prop_itm_core_globecoordinate(itm);
-					case Wdata_dict_val_tid.Tid_quantity			: return Srl_claims_prop_itm_core_quantity(itm);
-					case Wdata_dict_val_tid.Tid_monolingualtext		: return Srl_claims_prop_itm_core_monolingualtext(itm);
-					default: return KeyVal_.Ary_empty;
-				}
+				itm.Welcome(visitor);
+				return visitor.Rv();
 			}
 	}
-	private static KeyVal[] Srl_claims_prop_itm_core_str(Wdata_claim_itm_core itm) {
-		Wdata_claim_itm_str claim_str = (Wdata_claim_itm_str)itm;
-		KeyVal[] rv = new KeyVal[2];
-		rv[0] = KeyVal_.new_(Key_type, Wdata_dict_val_tid.Xto_str(itm.Val_tid()));
-		rv[1] = KeyVal_.new_(Key_value, String_.new_utf8_(claim_str.Val_str()));
-		return rv;
-	}
-	private static KeyVal[] Srl_claims_prop_itm_core_entity(Wdata_claim_itm_core itm) {
-		KeyVal[] rv = new KeyVal[2];
-		rv[0] = KeyVal_.new_(Key_type, Wdata_dict_val_tid.Str_entity);
-		rv[1] = KeyVal_.new_(Key_value, Srl_claims_prop_itm_core_entity_value(itm));
-		return rv;
-	}
-	private static KeyVal[] Srl_claims_prop_itm_core_entity_value(Wdata_claim_itm_core itm) {
-		Wdata_claim_itm_entity claim_entity = (Wdata_claim_itm_entity)itm;
-		KeyVal[] rv = new KeyVal[2];
-		rv[0] = KeyVal_.new_(Wdata_dict_value_entity.Str_entity_type, Wdata_dict_value_entity.Val_entity_type_item_str);
-		rv[1] = KeyVal_.new_(Wdata_dict_value_entity.Str_numeric_id, Int_.Xto_str(claim_entity.Entity_id()));
-		return rv;
-	}
-	private static KeyVal[] Srl_claims_prop_itm_core_time(Wdata_claim_itm_core itm) {
-		KeyVal[] rv = new KeyVal[2];
-		rv[0] = KeyVal_.new_(Key_type, Wdata_dict_val_tid.Str_time);
-		rv[1] = KeyVal_.new_(Key_value, Srl_claims_prop_itm_core_time_value(itm));
-		return rv;
-	}
-	private static KeyVal[] Srl_claims_prop_itm_core_time_value(Wdata_claim_itm_core itm) {
-		Wdata_claim_itm_time claim_time = (Wdata_claim_itm_time)itm;
-		KeyVal[] rv = new KeyVal[6];
-		rv[0] = KeyVal_.new_(Wdata_dict_value_time.Str_time				, String_.new_ascii_(claim_time.Time()));
-		rv[1] = KeyVal_.new_(Wdata_dict_value_time.Str_precision		, Wdata_dict_value_time.Val_precision_int);	// NOTE: must return int, not str; DATE:2014-02-18
-		rv[2] = KeyVal_.new_(Wdata_dict_value_time.Str_before			, Wdata_dict_value_time.Val_before_int);
-		rv[3] = KeyVal_.new_(Wdata_dict_value_time.Str_after			, Wdata_dict_value_time.Val_after_int);
-		rv[4] = KeyVal_.new_(Wdata_dict_value_time.Str_timezone			, Wdata_dict_value_time.Val_timezone_str);
-		rv[5] = KeyVal_.new_(Wdata_dict_value_time.Str_calendarmodel	, Wdata_dict_value_time.Val_calendarmodel_str);
-		return rv;
-	}
-	private static KeyVal[] Srl_claims_prop_itm_core_globecoordinate(Wdata_claim_itm_core itm) {
-		KeyVal[] rv = new KeyVal[2];
-		rv[0] = KeyVal_.new_(Key_type, Wdata_dict_val_tid.Str_globecoordinate);
-		rv[1] = KeyVal_.new_(Key_value, Srl_claims_prop_itm_core_globecoordinate_value(itm));
-		return rv;
-	}
-	private static KeyVal[] Srl_claims_prop_itm_core_globecoordinate_value(Wdata_claim_itm_core itm) {
-		Wdata_claim_itm_globecoordinate claim_globecoordinate = (Wdata_claim_itm_globecoordinate)itm;
-		KeyVal[] rv = new KeyVal[5];
-		rv[0] = KeyVal_.new_(Wdata_dict_value_globecoordinate.Str_latitude			, Double_.parse_(String_.new_ascii_(claim_globecoordinate.Lat())));
-		rv[1] = KeyVal_.new_(Wdata_dict_value_globecoordinate.Str_longitude			, Double_.parse_(String_.new_ascii_(claim_globecoordinate.Lng())));
-		rv[2] = KeyVal_.new_(Wdata_dict_value_globecoordinate.Str_altitude			, null);
-		rv[3] = KeyVal_.new_(Wdata_dict_value_globecoordinate.Str_globe				, Wdata_dict_value_globecoordinate.Val_globe_dflt_str);
-		rv[4] = KeyVal_.new_(Wdata_dict_value_globecoordinate.Str_precision			, .00001d);
-		return rv;
-	}
-	private static KeyVal[] Srl_claims_prop_itm_core_quantity(Wdata_claim_itm_core itm) {
-		KeyVal[] rv = new KeyVal[2];
-		rv[0] = KeyVal_.new_(Key_type, Wdata_dict_val_tid.Str_quantity);
-		rv[1] = KeyVal_.new_(Key_value, Srl_claims_prop_itm_core_quantity_value(itm));
-		return rv;
-	}
-	private static KeyVal[] Srl_claims_prop_itm_core_quantity_value(Wdata_claim_itm_core itm) {
-		Wdata_claim_itm_quantity claim_quantity = (Wdata_claim_itm_quantity)itm;
-		KeyVal[] rv = new KeyVal[4];
-		rv[0] = KeyVal_.new_(Wdata_dict_value_quantity.Str_amount			, String_.new_utf8_(claim_quantity.Amount()));
-		rv[1] = KeyVal_.new_(Wdata_dict_value_quantity.Str_unit				, String_.new_utf8_(claim_quantity.Unit()));
-		rv[2] = KeyVal_.new_(Wdata_dict_value_quantity.Str_upperbound		, String_.new_utf8_(claim_quantity.Ubound()));
-		rv[3] = KeyVal_.new_(Wdata_dict_value_quantity.Str_lowerbound		, String_.new_utf8_(claim_quantity.Lbound()));
-		return rv;
-	}
-	private static KeyVal[] Srl_claims_prop_itm_core_monolingualtext(Wdata_claim_itm_core itm) {
-		KeyVal[] rv = new KeyVal[2];
-		rv[0] = KeyVal_.new_(Key_type, Wdata_dict_value_monolingualtext.Str_language);
-		rv[1] = KeyVal_.new_(Key_value, Srl_claims_prop_itm_core_monolingualtext_value(itm));
-		return rv;
-	}
-	private static KeyVal[] Srl_claims_prop_itm_core_monolingualtext_value(Wdata_claim_itm_core itm) {
-		Wdata_claim_itm_monolingualtext claim_monolingualtext = (Wdata_claim_itm_monolingualtext)itm;
-		KeyVal[] rv = new KeyVal[2];
-		rv[0] = KeyVal_.new_(Wdata_dict_value_monolingualtext.Str_text			, String_.new_utf8_(claim_monolingualtext.Text()));
-		rv[1] = KeyVal_.new_(Wdata_dict_value_monolingualtext.Str_language		, String_.new_utf8_(claim_monolingualtext.Lang()));
-		return rv;
-	}
-	private static final String Key_type = "type", Key_value = "value";
+	public static final String Key_type = "type", Key_value = "value";
 	private static final KeyVal[] DataValue_nil = new KeyVal[] {KeyVal_.new_(Key_type, ""), KeyVal_.new_(Key_value, "")};	// NOTE: must return ""; null fails; EX:w:Joseph-Fran�ois_Malgaigne; DATE:2014-04-07
 }

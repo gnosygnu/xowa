@@ -46,6 +46,14 @@ public class Map_dd2dms_func extends Pf_func_base {
 		else
 			map_math.Fail(ctx, src, self, bfr, this.Name());
 	}
+	public static void Deg_to_dms(Bry_bfr bfr, boolean coord_is_lng, byte[] coord, int prec) {
+		Map_math map_math = Map_math._;
+		if (map_math.Ctor(coord, prec, Bry_.Empty, 2)) {
+			bfr.Add(map_math.Get_dms(Bry_.Empty, Bry_.Empty));
+			byte[] dir = coord_is_lng ? map_math.Coord_dir_ns() : map_math.Coord_dir_ew();
+			bfr.Add_byte_space().Add(dir);
+		}
+	}
 	public static final Map_dd2dms_func _ = new Map_dd2dms_func(); Map_dd2dms_func() {}
 	private static final byte Key_tid_plus = 1, Key_tid_minus = 2, Key_tid_precision = 3;
 	private static final Hash_adp_bry Key_hash = Hash_adp_bry.cs_()

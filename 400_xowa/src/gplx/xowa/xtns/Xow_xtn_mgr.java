@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns; import gplx.*; import gplx.xowa.*;
 import gplx.core.btries.*;
-import gplx.xowa.xtns.cite.*; import gplx.xowa.xtns.imaps.*; import gplx.xowa.xtns.relatedSites.*; import gplx.xowa.xtns.insiders.*; import gplx.xowa.xtns.proofreadPage.*;
+import gplx.xowa.xtns.cite.*; import gplx.xowa.xtns.imaps.*; import gplx.xowa.xtns.relatedSites.*; import gplx.xowa.xtns.insiders.*; import gplx.xowa.xtns.proofreadPage.*; import gplx.xowa.xtns.wdatas.*;
 public class Xow_xtn_mgr implements GfoInvkAble {
 	private OrderedHash regy = OrderedHash_.new_bry_();
 	public int Count() {return regy.Count();}
@@ -26,12 +26,14 @@ public class Xow_xtn_mgr implements GfoInvkAble {
 	public Sites_xtn_mgr Xtn_sites() {return xtn_sites;} private Sites_xtn_mgr xtn_sites;
 	public Insider_xtn_mgr Xtn_insider() {return xtn_insider;} private Insider_xtn_mgr xtn_insider;
 	public Pp_xtn_mgr Xtn_proofread() {return xtn_proofread;} private Pp_xtn_mgr xtn_proofread;
+	public Wdata_xtn_mgr Xtn_wikibase() {return xtn_wikibase;} private Wdata_xtn_mgr xtn_wikibase;
 	public Xow_xtn_mgr Ctor_by_app(Xoa_app app) {	// NOTE: needed for options
 		Add(app, new Cite_xtn_mgr());
 		Add(app, new Imap_xtn_mgr());
 		Add(app, new Sites_xtn_mgr());
 		Add(app, new Insider_xtn_mgr());
 		Add(app, new Pp_xtn_mgr());
+		Add(app, new Wdata_xtn_mgr());
 		Add(app, new gplx.xowa.xtns.scribunto.Scrib_xtn_mgr());
 		Add(app, new gplx.xowa.xtns.gallery.Gallery_xtn_mgr());
 		Add(app, new gplx.xowa.xtns.poems.Poem_xtn_mgr());
@@ -87,15 +89,17 @@ public class Xow_xtn_mgr implements GfoInvkAble {
 			case Tid_insider:		xtn_insider = (Insider_xtn_mgr)mgr; break;
 			case Tid_imap:			xtn_imap = (Imap_xtn_mgr)mgr; break;
 			case Tid_proofread:		xtn_proofread = (Pp_xtn_mgr)mgr; break;
+			case Tid_wikibase:		xtn_wikibase = (Wdata_xtn_mgr)mgr; break;
 		}
 	}
-	private static final byte Tid_cite = 0, Tid_sites = 1, Tid_insider = 2, Tid_imap = 3, Tid_proofread = 4;
+	private static final byte Tid_cite = 0, Tid_sites = 1, Tid_insider = 2, Tid_imap = 3, Tid_proofread = 4, Tid_wikibase = 5;
 	private static final Btrie_slim_mgr xtn_tid_trie = Btrie_slim_mgr.cs_()
 	.Add_bry_bval(Cite_xtn_mgr.XTN_KEY		, Tid_cite)
 	.Add_bry_bval(Sites_xtn_mgr.XTN_KEY		, Tid_sites)
 	.Add_bry_bval(Insider_xtn_mgr.XTN_KEY	, Tid_insider)
 	.Add_bry_bval(Imap_xtn_mgr.XTN_KEY		, Tid_imap)
 	.Add_bry_bval(Pp_xtn_mgr.XTN_KEY		, Tid_proofread)
+	.Add_bry_bval(Wdata_xtn_mgr.XTN_KEY		, Tid_wikibase)
 	;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_get))				return Get_or_fail(m.ReadBry("v"));

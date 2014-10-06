@@ -100,15 +100,25 @@ public class Xow_wiki_domain_ {
 	private static final byte Tid_wikimedia = Tid_by_key_null;	// NOTE: wikimedia isn't a type, but for PERF, it will be placed in the key_hash
 	public static final String Key_home_str = "home";
 	private static final byte[] Key_other_bry = Bry_.new_ascii_("other");
+	private static final String 
+	  Str_wikipedia = "wikipedia", Str_wiktionary = "wiktionary", Str_wikisource = "wikisource", Str_wikivoyage = "wikivoyage"
+	, Str_wikiquote = "wikiquote", Str_wikibooks = "wikibooks", Str_wikiversity = "wikiversity", Str_wikinews = "wikinews"
+	; 
 	public static final byte[] 
-		  Key_home_bry = Bry_.new_ascii_(Key_home_str)
-		, Key_wikipedia_bry = Bry_.new_ascii_("wikipedia"), Key_wiktionary_bry = Bry_.new_ascii_("wiktionary"), Key_wikisource_bry = Bry_.new_ascii_("wikisource")
-		, Key_wikibooks_bry = Bry_.new_ascii_("wikibooks"), Key_wikiversity_bry = Bry_.new_ascii_("wikiversity"), Key_wikiquote_bry = Bry_.new_ascii_("wikiquote")
-		, Key_wikinews_bry = Bry_.new_ascii_("wikinews"), Key_wikivoyage_bry = Bry_.new_ascii_("wikivoyage")
-		, Key_commons_bry = Bry_.new_ascii_("commons"), Key_species_bry = Bry_.new_ascii_("species"), Key_meta_bry = Bry_.new_ascii_("meta")
-		, Key_incubator_bry = Bry_.new_ascii_("incubator"), Key_wikidata_bry = Bry_.new_ascii_("wikidata"), Key_mediawiki_bry = Bry_.new_ascii_("mediawiki")
-		, Key_wikimediafoundation_bry = Bry_.new_ascii_("wikimediafoundation")			
-		;
+	  Key_home_bry = Bry_.new_ascii_(Key_home_str)
+	, Key_wikipedia_bry = Bry_.new_ascii_(Str_wikipedia), Key_wiktionary_bry = Bry_.new_ascii_(Str_wiktionary), Key_wikisource_bry = Bry_.new_ascii_(Str_wikisource)
+	, Key_wikibooks_bry = Bry_.new_ascii_(Str_wikibooks), Key_wikiversity_bry = Bry_.new_ascii_(Str_wikiversity), Key_wikiquote_bry = Bry_.new_ascii_(Str_wikiquote)
+	, Key_wikinews_bry = Bry_.new_ascii_(Str_wikinews), Key_wikivoyage_bry = Bry_.new_ascii_(Str_wikivoyage)
+	, Key_commons_bry = Bry_.new_ascii_("commons"), Key_species_bry = Bry_.new_ascii_("species"), Key_meta_bry = Bry_.new_ascii_("meta")
+	, Key_incubator_bry = Bry_.new_ascii_("incubator"), Key_wikidata_bry = Bry_.new_ascii_("wikidata"), Key_mediawiki_bry = Bry_.new_ascii_("mediawiki")
+	, Key_wikimediafoundation_bry = Bry_.new_ascii_("wikimediafoundation")			
+	;
+	public static final byte[]
+	  Name_wikipedia_bry = Name_(Key_wikipedia_bry), Name_wiktionary_bry = Name_(Key_wiktionary_bry), Name_wikisource_bry = Name_(Key_wikisource_bry)
+	, Name_wikibooks_bry = Name_(Key_wikibooks_bry), Name_wikiversity_bry = Name_(Key_wikiversity_bry), Name_wikiquote_bry = Name_(Key_wikiquote_bry)
+	, Name_wikinews_bry = Name_(Key_wikinews_bry), Name_wikivoyage_bry = Name_(Key_wikivoyage_bry)
+	;
+	private static byte[] Name_(byte[] v) {return Bry_.Upper_1st(Bry_.Copy(v));}
 	private static byte[][] Key__ary = new byte[][]
 		{ Key_other_bry, Key_home_bry
 		, Key_wikipedia_bry, Key_wiktionary_bry, Key_wikisource_bry, Key_wikibooks_bry, Key_wikiversity_bry, Key_wikiquote_bry, Key_wikinews_bry, Key_wikivoyage_bry
@@ -136,9 +146,12 @@ public class Xow_wiki_domain_ {
 	.Add_bry_byte(Key_wikivoyage_bry, Tid_wikivoyage)
 	.Add_bry_byte(Key_other_bry, Tid_other)
 	;
+	public static final String
+	  Str_wikidata								= "www.wikidata.org"
+	;
 	public static final byte[]
 	  Url_commons								= Bry_.new_ascii_("commons.wikimedia.org")
-	, Url_wikidata								= Bry_.new_ascii_("www.wikidata.org")
+	, Url_wikidata								= Bry_.new_ascii_(Str_wikidata)
 	, Url_species								= Bry_.new_ascii_("species.wikimedia.org")
 	, Url_mediawiki								= Bry_.new_ascii_("www.mediawiki.org")
 	, Url_meta									= Bry_.new_ascii_("meta.wikimedia.org")

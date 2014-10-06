@@ -30,6 +30,10 @@ public class Xoapi_root implements GfoInvkAble {
 		usr_api.Init_by_kit(app);
 		xtns_api.Init_by_kit(app);
 	}
+	public void Init_by_app(Xoa_app app) {
+		Io_url img_dir = app.User().Fsys_mgr().App_img_dir().GenSubDir_nest("window", "portal");
+		html_api.Page().Toggle_mgr().Img_dir_(img_dir);
+	}
 	public Xoapi_app	App()	{return app_api;} private Xoapi_app app_api = new Xoapi_app();
 	public Xoapi_nav	Nav()	{return nav;} private Xoapi_nav nav = new Xoapi_nav();
 	public Xoapi_gui	Gui()	{return gui_api;} private Xoapi_gui gui_api = new Xoapi_gui();

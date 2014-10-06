@@ -142,6 +142,14 @@ public class Bry_ {
 		}
 		return rv;
 	}
+	public static boolean Ary_eq(byte[][] lhs, byte[][] rhs) {
+		int lhs_len = lhs.length;
+		int rhs_len = rhs.length;
+		if (lhs_len != rhs_len) return false;
+		for (int i = 0; i < lhs_len; ++i)
+			if (!Bry_.Eq(lhs[i], rhs[i])) return false;
+		return true;
+	}
 	public static byte[] Repeat_space(int len) {return Repeat(Byte_ascii.Space, len);}
 	public static byte[] Repeat(byte b, int len) {
 		byte[] rv = new byte[len];
@@ -689,6 +697,7 @@ public class Bry_ {
 		return Xto_int_or(ary, bgn, end_num, or);
 	}
 	public static float XtoFloatByPos(byte[] ary, int bgn, int end) {return Float_.parse_(String_.new_utf8_(ary, bgn, end));}
+	public static double Xto_double(byte[] bry) {return Double_.parse_(String_.new_utf8_(bry, 0, bry.length));}
 	public static double XtoDoubleByPosOr(byte[] ary, int bgn, int end, double or) {return Double_.parseOr_(String_.new_utf8_(ary, bgn, end), or);}
 	public static double XtoDoubleByPos(byte[] ary, int bgn, int end) {return Double_.parse_(String_.new_utf8_(ary, bgn, end));}
 	public static DecimalAdp XtoDecimalByPos(byte[] ary, int bgn, int end) {return DecimalAdp_.parse_(String_.new_utf8_(ary, bgn, end));}
@@ -1003,5 +1012,5 @@ public class Bry_ {
 	public static byte Get_at_end(byte[] v) {
 		int v_len = v.length;
 		return v_len == 0 ? Byte_ascii.Nil : v[v_len - 1];
-	}
+	}		
 }

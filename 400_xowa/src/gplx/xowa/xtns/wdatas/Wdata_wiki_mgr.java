@@ -16,21 +16,26 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.json.*; import gplx.xowa.wikis.*;
-import gplx.xowa.html.*;
-import gplx.xowa.parsers.logs.*; import gplx.xowa.xtns.wdatas.parsers.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.pfuncs.*;
-public class Wdata_wiki_mgr implements GfoInvkAble {
-	private Wdata_doc_parser wdoc_parser_v1, wdoc_parser_v2;
+import gplx.json.*; import gplx.xowa.wikis.*; import gplx.xowa.html.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.apis.xowa.xtns.*; import gplx.xowa.apis.xowa.html.*; import gplx.xowa.users.*;
+import gplx.xowa.xtns.wdatas.parsers.*; import gplx.xowa.xtns.wdatas.pfuncs.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.hwtrs.*;
+public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
+	private final Wdata_doc_parser wdoc_parser_v1, wdoc_parser_v2;
+	private final Wdata_prop_val_visitor prop_val_visitor;
+	private Wdata_hwtr_mgr hwtr_mgr;
 	public Wdata_wiki_mgr(Xoa_app app) {
 		this.app = app;
+		this.evMgr = GfoEvMgr.new_(this);
 		wdoc_parser_v1 = new Wdata_doc_parser_v1();
 		wdoc_parser_v2 = new Wdata_doc_parser_v2();
 		doc_cache = app.Cache_mgr().Doc_cache();
+		prop_val_visitor = new Wdata_prop_val_visitor(app, this);
 	}	private Xoa_app app; gplx.xowa.apps.caches.Wdata_doc_cache doc_cache;
+	public GfoEvMgr EvMgr() {return evMgr;} private GfoEvMgr evMgr;
 	public boolean Enabled() {return enabled;} public void Enabled_(boolean v) {enabled = v;} private boolean enabled = true;
 	public byte[] Domain() {return domain;} public void Domain_(byte[] v) {domain = v;} private byte[] domain = Bry_.new_ascii_("www.wikidata.org");
 	public Xow_wiki Wdata_wiki() {if (wdata_wiki == null) wdata_wiki = app.Wiki_mgr().Get_by_key_or_make(domain).Init_assert(); return wdata_wiki;} private Xow_wiki wdata_wiki;
 	public Json_parser Jdoc_parser() {return jdoc_parser;} private Json_parser jdoc_parser = new Json_parser();
+	public void Init_by_app() {}
 	public Wdata_doc_parser Wdoc_parser(Json_doc jdoc) {
 		Json_itm_kv itm_0 = Json_itm_kv.cast_(jdoc.Root().Subs_get_at(0));										// get 1st node
 		return Bry_.Eq(itm_0.Key().Data_bry(), Wdata_doc_parser_v2.Bry_type) ? wdoc_parser_v2 : wdoc_parser_v1;	// if "type", must be v2
@@ -43,7 +48,7 @@ public class Wdata_wiki_mgr implements GfoInvkAble {
 		doc_cache.Clear();
 	}	private Hash_adp_bry qids_cache = Hash_adp_bry.cs_(), pids_cache = Hash_adp_bry.cs_();
 	public void Qids_add(Bry_bfr bfr, byte[] lang_key, byte wiki_tid, byte[] ns_num, byte[] ttl, byte[] qid) {
-		Xob_bz2_file.Build_alias_by_lang_tid(bfr, lang_key, wiki_tid_ref.Val_(wiki_tid));
+		Xow_wiki_alias.Build_alias_by_lang_tid(bfr, lang_key, wiki_tid_ref.Val_(wiki_tid));
 		byte[] qids_key = bfr.Add_byte(Byte_ascii.Pipe).Add(ns_num).Add_byte(Byte_ascii.Pipe).Add(ttl).XtoAry();
 		qids_cache.Add(qids_key, qid);
 	}
@@ -129,58 +134,42 @@ public class Wdata_wiki_mgr implements GfoInvkAble {
 				case Wdata_dict_snak_tid.Tid_novalue	: bfr.Add(Wdata_dict_snak_tid.Bry_novalue); break;
 				case Wdata_dict_snak_tid.Tid_somevalue	: bfr.Add(Wdata_dict_snak_tid.Bry_somevalue); break;
 				default: {
-					switch (prop.Val_tid()) {
-						case Wdata_dict_val_tid.Tid_string:
-							Wdata_claim_itm_str claim_str = (Wdata_claim_itm_str)prop;
-							bfr.Add(claim_str.Val_str());
-							break;
-						case Wdata_dict_val_tid.Tid_time:
-							Wdata_claim_itm_time claim_time = (Wdata_claim_itm_time)prop;
-							bfr.Add(claim_time.Time());
-							break;
-						case Wdata_dict_val_tid.Tid_entity:
-							Wdata_claim_itm_entity claim_entity = (Wdata_claim_itm_entity)prop;
-							Wdata_doc entity_doc = Pages_get(Bry_.Add(Bry_q, claim_entity.Entity_id_bry()));
-							if (entity_doc == null) return;	// NOTE: wiki may refer to entity that no longer exists; EX: {{#property:p1}} which links to Q1, but p1 links to Q2 and Q2 was deleted; DATE:2014-02-01
-							byte[] label = entity_doc.Label_list_get(lang_key);
-							if (label == null && !Bry_.Eq(lang_key, Xol_lang_.Key_en))	// NOTE: some properties may not exist in language of wiki; default to english; DATE:2013-12-19
-								label = entity_doc.Label_list_get(Xol_lang_.Key_en);
-							if (label != null)	// if label is still not found, don't add null reference
-								bfr.Add(label);
-							break;
-						case Wdata_dict_val_tid.Tid_globecoordinate: {
-							Wdata_claim_itm_globecoordinate claim_globecoordinate = (Wdata_claim_itm_globecoordinate)prop;
-							bfr.Add(claim_globecoordinate.Lat());
-							bfr.Add_byte(Byte_ascii.Comma).Add_byte(Byte_ascii.Space);
-							bfr.Add(claim_globecoordinate.Lng());
-							break;
-						}
-						case Wdata_dict_val_tid.Tid_quantity: {
-							Wdata_claim_itm_quantity claim_quantity = (Wdata_claim_itm_quantity)prop;
-							byte[] amount_bry = claim_quantity.Amount();
-							int val = Bry_.Xto_int_or(amount_bry, Ignore_comma, 0, amount_bry.length, 0);
-							Xol_lang lang = app.Lang_mgr().Get_by_key(lang_key);
-							bfr.Add(lang.Num_mgr().Format_num(val));	// amount; EX: 1,234
-							bfr.Add(Bry_quantity_margin_of_error);		// symbol: EX: ±
-							bfr.Add(claim_quantity.Unit());				// unit;   EX: 1
-							break;
-						}
-						case Wdata_dict_val_tid.Tid_monolingualtext: {	// {{#property:monolingualprop}} -> some phrase (la)
-							Wdata_claim_itm_monolingualtext claim_monolingualtext = (Wdata_claim_itm_monolingualtext)prop;
-							bfr.Add(claim_monolingualtext.Text());		// phrase only; PAGE:en.w:Alberta; EX: {{#property:motto}} -> "Fortis et libre"; DATE:2014-08-28
-							break;
-						}
-						default: throw Err_.unhandled(prop.Val_tid());
-					}
+					prop_val_visitor.Init(bfr, lang_key);
+					prop.Welcome(prop_val_visitor);
 					break;
 				}
 			}
 		}
 	}
-	private static final byte[] Ignore_comma = new byte[]{Byte_ascii.Comma};
-	private static final byte[] Bry_quantity_margin_of_error = Bry_.new_utf8_("±");
 	public static final byte[] Bry_q = Bry_.new_ascii_("q"), Prop_tmpl_val_dlm = Bry_.new_ascii_(", ");
-	public void Write_json_as_html(Bry_bfr bfr, byte[] data_raw) {Write_json_as_html(jdoc_parser, bfr, data_raw);}
+	public byte[] Popup_text(Xoa_page page) {
+		Hwtr_mgr_assert();
+		Wdata_doc wdoc = this.Pages_get_by_ttl_name(page.Ttl().Page_db());			 
+		return hwtr_mgr.Popup(wdoc);
+	}
+	public void Write_json_as_html(Bry_bfr bfr, byte[] ttl_bry, byte[] data_raw) {
+		Hwtr_mgr_assert();
+		Wdata_doc wdoc = this.Pages_get_by_ttl_name(ttl_bry);
+		hwtr_mgr.Init_by_wdoc(wdoc);
+		bfr.Add(hwtr_mgr.Write(wdoc));
+	}
+	private void Hwtr_mgr_assert() {
+		if (hwtr_mgr != null) return;
+		Xoapi_toggle_mgr toggle_mgr = app.Api_root().Html().Page().Toggle_mgr();
+		Xoapi_wikibase wikibase_api = app.Api_root().Xtns().Wikibase();
+		hwtr_mgr = new Wdata_hwtr_mgr();
+		hwtr_mgr.Init_by_ctor(wikibase_api, new Wdata_lbl_wkr_wiki(wikibase_api, this), app.Encoder_mgr().Href(), toggle_mgr, app.User().Wiki().Xwiki_mgr());
+		this.Hwtr_msgs_make();
+		GfoEvMgr_.SubSame_many(app.User(), this, Xou_user.Evt_lang_changed);
+	}
+	private void Hwtr_msgs_make() {
+		if (!app.Wiki_mgr().Wiki_regy().Has(Xow_wiki_domain_.Url_wikidata)) return;
+		Xol_lang new_lang = app.User().Lang();
+		Xow_wiki cur_wiki = this.Wdata_wiki();			
+		cur_wiki.Xtn_mgr().Xtn_wikibase().Load_msgs(cur_wiki, new_lang);
+		Wdata_hwtr_msgs hwtr_msgs = Wdata_hwtr_msgs.new_(cur_wiki.Msg_mgr());
+		hwtr_mgr.Init_by_lang(hwtr_msgs);
+	}
 	public static void Write_json_as_html(Json_parser jdoc_parser, Bry_bfr bfr, byte[] data_raw) {
 		bfr.Add(Xoh_consts.Span_bgn_open).Add(Xoh_consts.Id_atr).Add(Html_json_id).Add(Xoh_consts.__end_quote);	// <span id="xowa-wikidata-json">
 		Json_doc json = jdoc_parser.Parse(data_raw);
@@ -195,11 +184,12 @@ public class Wdata_wiki_mgr implements GfoInvkAble {
 		return jdoc_parser.Parse(src);
 	}	
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_enabled))			return Yn.Xto_str(enabled);
-		else if	(ctx.Match(k, Invk_enabled_))			enabled = m.ReadYn("v");
-		else if	(ctx.Match(k, Invk_domain))				return String_.new_utf8_(domain);
-		else if	(ctx.Match(k, Invk_domain_))			domain = m.ReadBry("v");
-		else if	(ctx.Match(k, Invk_property_wkr))		return m.ReadYnOrY("v") ? Property_wkr_or_new() : GfoInvkAble_.Null;
+		if		(ctx.Match(k, Invk_enabled))					return Yn.Xto_str(enabled);
+		else if	(ctx.Match(k, Invk_enabled_))					enabled = m.ReadYn("v");
+		else if	(ctx.Match(k, Invk_domain))						return String_.new_utf8_(domain);
+		else if	(ctx.Match(k, Invk_domain_))					domain = m.ReadBry("v");
+		else if	(ctx.Match(k, Invk_property_wkr))				return m.ReadYnOrY("v") ? Property_wkr_or_new() : GfoInvkAble_.Null;
+		else if	(ctx.Match(k, Xou_user.Evt_lang_changed))		Hwtr_msgs_make();
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}

@@ -32,6 +32,7 @@ public class Xoa_wiki_mgr implements GfoInvkAble {
 	public Xoa_css_extractor Css_installer() {return css_installer;} private Xoa_css_extractor css_installer = new Xoa_css_extractor();
 	public void Init_by_app() {
 		css_installer.Init_by_app(app);
+		wdata_mgr.Init_by_app();
 	}
 	public int Count() {return hash.Count();}
 	public void Del(byte[] key) {hash.Del(key);}
@@ -87,7 +88,7 @@ public class Xoa_wiki_mgr implements GfoInvkAble {
 	private static final String Invk_len = "len", Invk_get_at = "get_at";
 	private Xow_wiki New_wiki(byte[] key) {
 		Xow_wiki_domain wiki_type = Xow_wiki_domain_.parse_by_domain(key);
-		byte[] lang_key = wiki_type.Lang(); if (lang_key == Xol_lang_itm_.Key__unknown) lang_key = Xol_lang_.Key_en;
+		byte[] lang_key = wiki_type.Lang_key(); if (lang_key == Xol_lang_itm_.Key__unknown) lang_key = Xol_lang_.Key_en;
 		Xol_lang lang = app.Lang_mgr().Get_by_key_or_new(lang_key);
 		Xow_ns_mgr ns_mgr = Xow_ns_mgr_.default_(lang.Case_mgr());
 		Io_url wiki_dir = app.Fsys_mgr().Wiki_dir().GenSubDir(String_.new_utf8_(key));

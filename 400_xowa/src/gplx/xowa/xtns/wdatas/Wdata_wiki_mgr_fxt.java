@@ -42,9 +42,12 @@ public class Wdata_wiki_mgr_fxt {
 	public Wdata_claim_itm_core Make_claim_str(int pid, byte[] val) {return new Wdata_claim_itm_str(pid, Wdata_dict_snak_tid.Tid_value, val);}
 	public Wdata_claim_itm_core Make_claim_time(int pid, String val) {return new Wdata_claim_itm_time(pid, Wdata_dict_snak_tid.Tid_value, Wdata_dict_value_time.Xto_time(val), Bry_.Empty, Bry_.Empty, Bry_.Empty, Bry_.Empty, Bry_.Empty);}
 	public Wdata_claim_itm_core Make_claim_monolingual(int pid, String lang, String text) {return new Wdata_claim_itm_monolingualtext(pid, Wdata_dict_snak_tid.Tid_value, Bry_.new_utf8_(lang), Bry_.new_utf8_(text));}
-	public Wdata_claim_itm_core Make_claim_geo(int pid, String lat, String lon) {return new Wdata_claim_itm_globecoordinate(pid, Wdata_dict_snak_tid.Tid_value, Bry_.new_ascii_(lat), Bry_.new_ascii_(lon), Bry_.Empty, Bry_.Empty, Bry_.Empty);}
 	public Wdata_claim_itm_core Make_claim_quantity(int pid, String amount, String unit, String ubound, String lbound) {return new Wdata_claim_itm_quantity(pid, Wdata_dict_snak_tid.Tid_value, Bry_.new_ascii_(amount), Bry_.new_ascii_(unit), Bry_.new_ascii_(ubound), Bry_.new_ascii_(lbound));}
 	public Wdata_claim_itm_core Make_claim_entity(int pid, int val) {return new Wdata_claim_itm_entity(pid, Wdata_dict_snak_tid.Tid_value, Int_.Xto_bry(val));}
+	public Wdata_claim_itm_core Make_claim_geo(int pid, String lon, String lat) {return Make_claim_geo(pid, lon, lat, ".000277777", null, "Q2");}
+	public Wdata_claim_itm_core Make_claim_geo(int pid, String lon, String lat, String prc, String alt, String glb) {
+		return new Wdata_claim_itm_globecoordinate(pid, Wdata_dict_snak_tid.Tid_value, Bry_.new_ascii_(lat), Bry_.new_ascii_(lon), Bry_.new_ascii_(alt), Bry_.new_ascii_(prc), Bry_.new_ascii_(glb));
+	}
 	public Wdata_claim_grp Make_qualifiers_grp(int pid, Wdata_claim_itm_core... ary) {return new Wdata_claim_grp(Int_obj_ref.new_(pid), ary);}
 	public Wdata_claim_grp_list Make_qualifiers(Wdata_claim_grp... ary) {
 		Wdata_claim_grp_list rv = new Wdata_claim_grp_list();
@@ -168,7 +171,7 @@ public class Wdata_wiki_mgr_fxt {
 		byte[] raw_bry = Bry_.new_ascii_(raw_str);
 		raw_bry = gplx.json.Json_parser_tst.Replace_apos(raw_bry);
 		Bry_bfr bfr = app.Utl_bry_bfr_mkr().Get_b512();
-		wdata_mgr.Write_json_as_html(bfr, raw_bry);
+		Wdata_wiki_mgr.Write_json_as_html(wdata_mgr.Jdoc_parser(), bfr, raw_bry);
 		Tfds.Eq(expd, bfr.Mkr_rls().XtoStrAndClear());
 	}
 }

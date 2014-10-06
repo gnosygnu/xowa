@@ -21,15 +21,14 @@ public class Xow_lang_mgr {
 	Xow_lang_mgr() {
 		int len = Xol_lang_itm_.Id__max;
 		itms = new Xow_lang_itm[len];
-		
 	}
 	public Bry_fmtr Html_div() {return html_div;} Bry_fmtr html_div = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<div id=\"xowa-lang\">"
-	, "  <h5>~{langs_hdr}~{wikidata_link}<a href='javascript:xowa_toggle_visible(\"wikidata-langs\");'><img id='wikidata-langs-toggle-icon' src='~{icon_src}' title='~{icon_title}' /></a></h5>"
-	, "  <div id='wikidata-langs-toggle-elem' style='~{elem_display}'>~{grps}"
+	, "  <h5>~{langs_hdr}~{wikidata_link}~{toggle_btn}</h5>"
+	, "  <div~{toggle_hdr}>~{grps}"
 	, "  </div>"
 	, "</div>"
-	), "langs_hdr", "wikidata_link", "icon_src", "icon_title", "elem_display", "grps");
+	), "langs_hdr", "wikidata_link", "toggle_btn", "toggle_hdr", "grps");
 	public Bry_fmtr Html_wikidata_link() {return html_wikidata_link;} Bry_fmtr html_wikidata_link = Bry_fmtr.new_(" (<a href=\"/site/www.wikidata.org/wiki/~{qid}\">wikidata</a>)", "qid");
 	public void Clear() {hash.Clear();}
 	public void Itms_reg(Xow_xwiki_itm xwiki, Xoac_lang_itm lang) {
@@ -96,11 +95,14 @@ public class Xow_lang_mgr {
 	}
 }
 class Xow_lang_html implements Bry_fmtr_arg {
-	int stage = 0;
+	private Xow_lang_mgr lang_mgr; Xow_wiki wiki; ListAdp ttl_list; private byte[] qid;
+	private Xoapi_toggle_itm toggle_itm;
+	private int stage = 0;
 	public Xow_lang_html Init(Xow_lang_mgr lang_mgr, Xow_wiki wiki, ListAdp ttl_list, int ttl_list_len, byte[] qid) {
-		this.lang_mgr = lang_mgr; this.wiki = wiki; this.ttl_list = ttl_list; this.ttl_list_len = ttl_list_len; this.qid = qid;
+		this.lang_mgr = lang_mgr; this.wiki = wiki; this.ttl_list = ttl_list; this.qid = qid;
+		toggle_itm = wiki.App().Api_root().Html().Page().Toggle_mgr().Get_or_new("wikidata-langs");
 		return this;
-	}	private Xow_lang_mgr lang_mgr; Xow_wiki wiki; ListAdp ttl_list; int ttl_list_len; byte[] qid;
+	}
 	public void XferAry(Bry_bfr bfr, int idx) {
 		switch (stage) {
 			case 0: {
@@ -108,8 +110,8 @@ class Xow_lang_html implements Bry_fmtr_arg {
 				Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b128().Mkr_rls();
 				byte[] msg_lang = wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_page_lang_header);
 				byte[] wikidata_link = Bry_.Len_eq_0(qid) ? Bry_.Empty : lang_mgr.Html_wikidata_link().Bld_bry_many(tmp_bfr, qid);
-				Xoapi_toggle_itm visible_data = wiki.App().Api_root().Html().Page().Toggle_mgr().Itm_wikidata_langs().Init(wiki);
-				lang_mgr.Html_div().Bld_bfr_many(bfr, msg_lang, wikidata_link, visible_data.Icon_src(), visible_data.Icon_title(), visible_data.Elem_display(), this);
+				toggle_itm.Init(wiki);
+				lang_mgr.Html_div().Bld_bfr_many(bfr, msg_lang, wikidata_link, toggle_itm.Html_toggle_btn(), toggle_itm.Html_toggle_hdr(), this);
 				stage = 0;
 				break;
 			}

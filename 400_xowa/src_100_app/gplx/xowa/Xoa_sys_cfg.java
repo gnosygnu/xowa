@@ -26,7 +26,6 @@ public class Xoa_sys_cfg implements GfoInvkAble {
 			Xol_lang lang = app.Lang_mgr().Get_by_key_or_load(lang_key);
 			app.User().Lang_(lang);
 			app.User().Wiki().Html_mgr().Portal_mgr().Init();
-			app.Gui_mgr().Lang_changed(lang);
 		}
 		return this;
 	}	private byte[] lang_key = Xol_lang_.Key_en;
