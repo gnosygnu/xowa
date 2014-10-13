@@ -69,7 +69,7 @@ public class Xof_img_wkr_api_size_base_wmf extends Xof_img_wkr_api_size_base {
 			bfr.Add(Bry_width).Add_int_variable(width);		// "&iiurlwidth=800"
 		if (height > 0 && width > 0)						// NOTE: height cannot be used alone; width must also exist; "iiurlheight cannot be used without iiurlwidth"
 			bfr.Add(Bry_height).Add_int_variable(height);	// "&iiurlheight=600"
-		return bfr.XtoStrAndClear();
+		return bfr.Xto_str_and_clear();
 	}
 	private static Url_encoder encoder = Url_encoder.new_http_url_().Itms_raw_diff(Byte_ascii.Space, Byte_ascii.Underline);
 	Io_url trg = Io_url_.mem_fil_("mem/temp/api.txt");

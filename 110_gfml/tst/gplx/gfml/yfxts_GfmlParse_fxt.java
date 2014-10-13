@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfml; import gplx.*;
 class GfmlParse_fxt {
 	public GfmlNde_mok nde_() {return GfmlNde_mok.new_();}
-	public GfmlTkn_mok tkn_grp_ary_(String... ary) {return GfmlTkn_mok.new_().Subs_(GfmlTkn_mok.XtoAry(ary));}
+	public GfmlTkn_mok tkn_grp_ary_(String... ary) {return GfmlTkn_mok.new_().Subs_(GfmlTkn_mok.Xto_bry(ary));}
 	public GfmlTkn_mok tkn_grp_(GfmlTkn_mok... ary) {return GfmlTkn_mok.new_().Subs_(ary);}
 	public GfmlTkn_mok tkn_itm_(String r) {return GfmlTkn_mok.new_().Raw_(r);}
 	public void ini_RootLxr_Add(GfmlLxr... ary) {rootLxr.SubLxr_Add(ary);}

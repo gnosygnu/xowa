@@ -99,7 +99,7 @@ public class Xoh_lnki_wtr {
 			app.Href_parser().Build_to_bfr(bfr, wiki, lnki_ttl, hctx.Mode_is_popup());	// '/wiki/A'
 			if (cfg.Lnki_id()) {
 				int lnki_html_id = lnki.Html_id();
-				if (lnki_html_id > 0)								// html_id=0 for skipped lnkis; EX:anchors and interwiki
+				if (lnki_html_id > Lnki_id_ignore)					// html_id=0 for skipped lnkis; EX:anchors and interwiki
 					bfr	.Add(Xoh_consts.A_mid_id)					// '" id=\"xowa_lnki_'
 						.Add_int_variable(lnki_html_id);			// '1234'
 			}
@@ -169,6 +169,7 @@ public class Xoh_lnki_wtr {
 		return history_mgr.Has(wiki_key, page_ttl) ? Lnki_cls_visited_bry : Bry_.Empty;
 	}	private static final byte[] Lnki_cls_visited_bry = Bry_.new_ascii_(" class=\"xowa-visited\"");
 	private static final byte[] Bry_xowa_visited = Bry_.new_ascii_("\" class=\"xowa-visited"); 
+	public static final int Lnki_id_ignore = 0, Lnki_id_min	= 1;
 }
 interface Xop_lnki_caption_wtr {
 	void Write_tkn(Xop_ctx ctx, Xoh_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Xop_tkn_grp grp, int sub_idx, Xop_tkn_itm tkn);

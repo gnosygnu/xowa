@@ -22,9 +22,9 @@ public class Xodb_page_tbl {
 	, Fld_page_id = "page_id", Fld_page_ns = "page_namespace", Fld_page_title = "page_title"
 	, Fld_page_is_redirect = "page_is_redirect", Fld_page_touched = "page_touched", Fld_page_len = "page_len"
 	, Fld_page_random_int = "page_random_int", Fld_page_file_idx = "page_file_idx"
-	, Fld_page_html_db_id = "page_html_db_id";
+	, Fld_page_html_db_id = "page_html_db_id", Fld_page_redirect_id = "page_redirect_id";
 	private static final String[] Select_by_id_flds__basic = new String[] {Fld_page_id, Fld_page_ns, Fld_page_title, Fld_page_touched, Fld_page_is_redirect, Fld_page_len, Fld_page_file_idx};
-	private static final String[] Select_by_id_flds__hdump = new String[] {Fld_page_id, Fld_page_ns, Fld_page_title, Fld_page_touched, Fld_page_is_redirect, Fld_page_len, Fld_page_file_idx, Fld_page_html_db_id};
+	private static final String[] Select_by_id_flds__hdump = new String[] {Fld_page_id, Fld_page_ns, Fld_page_title, Fld_page_touched, Fld_page_is_redirect, Fld_page_len, Fld_page_file_idx, Fld_page_html_db_id, Fld_page_redirect_id};
 //		public boolean Select_by_id(Xodb_page rv, int page_id) {
 //			Db_rdr rdr = Db_rdr_.Null; 
 //			Db_stmt stmt = Db_stmt_.Null;
@@ -37,7 +37,14 @@ public class Xodb_page_tbl {
 //				}
 //			} finally {rdr.Close(); stmt.Rls();}
 //			return false;		
-//		}
+//		}		
+	private final Xow_ns_mgr ns_mgr; private final Xodb_ctx db_ctx;
+	public Xodb_page_tbl(Xow_wiki wiki) {
+		this.ns_mgr = wiki.Ns_mgr();
+		this.db_ctx = wiki.Db_mgr().Db_ctx();
+	}
+	public void Html_db_enabled_(boolean v) {html_db_enabled = v;} private boolean html_db_enabled;
+	public Db_provider Provider() {return provider;} public void Provider_(Db_provider provider) {this.provider = provider;} private Db_provider provider;
 	public boolean Select_by_ttl(Xodb_page rv, Xow_ns ns, byte[] ttl) {
 		Db_rdr rdr = Db_rdr_.Null; Db_stmt stmt = Db_stmt_.Null;
 		try {
@@ -57,9 +64,11 @@ public class Xodb_page_tbl {
 		page.Modified_on_	(DateAdp_.parse_fmt(rdr.Read_str(3), Page_touched_fmt));
 		page.Type_redirect_	(rdr.Read_byte(4) == 1);
 		page.Text_len_		(rdr.Read_int(5));
-		page.Db_file_idx_	(rdr.Read_int(6));
-		if (html_db_enabled)
+		page.Text_db_id_	(rdr.Read_int(6));
+		if (html_db_enabled) {
 			page.Html_db_id_(rdr.Read_int(7));
+			page.Redirect_id_(rdr.Read_int(8));
+		}
 	}
 	public boolean Select_by_id(Xodb_page rv, int page_id) {
 		DataRdr rdr = DataRdr_.Null; 
@@ -76,10 +85,6 @@ public class Xodb_page_tbl {
 		} finally {rdr.Rls(); stmt.Rls();}
 		return false;		
 	}
-	private Xow_wiki wiki;
-	public Xodb_page_tbl(Xow_wiki wiki) {this.wiki = wiki;}
-	public void Html_db_enabled_(boolean v) {html_db_enabled = v;} private boolean html_db_enabled;
-	public Db_provider Provider() {return provider;} public void Provider_(Db_provider provider) {this.provider = provider;} private Db_provider provider;
 	public void Delete_all() {provider.Exec_qry(Db_qry_.delete_tbl_(Tbl_name));}		
 	public Db_stmt Insert_stmt(Db_provider p) {
 		return Db_stmt_.new_insert_(p, Tbl_name, html_db_enabled ? Flds_insert__html_y : Flds_insert__html_n);
@@ -188,7 +193,7 @@ public class Xodb_page_tbl {
 	public boolean Select_by_id_list(Cancelable cancelable, ListAdp rv)						{return Select_by_id_list(cancelable, false, rv, 0, rv.Count());}
 	public boolean Select_by_id_list(Cancelable cancelable, boolean skip_table_read, ListAdp rv)	{return Select_by_id_list(cancelable, skip_table_read, rv, 0, rv.Count());}
 	public boolean Select_by_id_list(Cancelable cancelable, boolean skip_table_read, ListAdp rv, int bgn, int end) {
-		Xodb_page[] page_ary = (Xodb_page[])rv.XtoAry(Xodb_page.class);
+		Xodb_page[] page_ary = (Xodb_page[])rv.Xto_ary(Xodb_page.class);
 		int len = page_ary.length; if (len == 0) return false;
 		OrderedHash hash = OrderedHash_.new_();
 		for (int i = 0; i < len; i++) {
@@ -199,7 +204,7 @@ public class Xodb_page_tbl {
 		}
 		Xodb_in_wkr_page_id wkr = new Xodb_in_wkr_page_id();
 		wkr.Init(rv, hash);
-		wkr.Select_in(provider, cancelable, wiki, bgn, end);
+		wkr.Select_in(provider, cancelable, db_ctx, bgn, end);
 		return true;		
 	}
 	public byte[] Select_random(Xow_ns ns) {// ns should be ns_main
@@ -270,16 +275,16 @@ public class Xodb_page_tbl {
 			}
 		}	finally {rdr.Rls();}
 	}
-	public void Select_by_ttl_in(Cancelable cancelable, OrderedHash rv, Xow_wiki wiki, boolean fill_idx_fields_only, int bgn, int end) {
+	public void Select_by_ttl_in(Cancelable cancelable, OrderedHash rv, Xodb_ctx db_ctx, boolean fill_idx_fields_only, int bgn, int end) {
 		Xodb_in_wkr_page_title_ns wkr = new Xodb_in_wkr_page_title_ns();
 		wkr.Fill_idx_fields_only_(fill_idx_fields_only);
-		wkr.Init(wiki, rv);
-		wkr.Select_in(provider, cancelable, wiki, bgn, end);
+		wkr.Init(ns_mgr, rv);
+		wkr.Select_in(provider, cancelable, db_ctx, bgn, end);
 	}
 	public void Select_by_ttl_in(Cancelable cancelable, OrderedHash rv, int ns_id, int bgn, int end) {
 		Xodb_in_wkr_page_title wkr = new Xodb_in_wkr_page_title();
 		wkr.Init(rv, ns_id);
-		wkr.Select_in(provider, cancelable, wiki, bgn, end);
+		wkr.Select_in(provider, cancelable, db_ctx, bgn, end);
 	}
 	public void Update_html_db_id(int page_id, int html_db_id) {
 		if (!html_db_enabled) throw Err_.new_("html_db not enabled");
@@ -290,9 +295,9 @@ public class Xodb_page_tbl {
 	private static String Xto_touched_str(DateAdp v) {return v.XtoStr_fmt(Page_touched_fmt);}
 	public static final String[] 
 	  Flds_insert__html_n		= String_.Ary(Fld_page_id, Fld_page_ns, Fld_page_title, Fld_page_is_redirect, Fld_page_touched, Fld_page_len, Fld_page_random_int, Fld_page_file_idx)
-	, Flds_insert__html_y		= String_.Ary(Fld_page_id, Fld_page_ns, Fld_page_title, Fld_page_is_redirect, Fld_page_touched, Fld_page_len, Fld_page_random_int, Fld_page_file_idx, Fld_page_html_db_id) 
+	, Flds_insert__html_y		= String_.Ary(Fld_page_id, Fld_page_ns, Fld_page_title, Fld_page_is_redirect, Fld_page_touched, Fld_page_len, Fld_page_random_int, Fld_page_file_idx, Fld_page_html_db_id, Fld_page_redirect_id) 
 	, Flds_select_all__html_n	= String_.Ary(Fld_page_id, Fld_page_ns, Fld_page_title, Fld_page_touched, Fld_page_is_redirect, Fld_page_len, Fld_page_file_idx)
-	, Flds_select_all__html_y	= String_.Ary(Fld_page_id, Fld_page_ns, Fld_page_title, Fld_page_touched, Fld_page_is_redirect, Fld_page_len, Fld_page_file_idx, Fld_page_html_db_id)
+	, Flds_select_all__html_y	= String_.Ary(Fld_page_id, Fld_page_ns, Fld_page_title, Fld_page_touched, Fld_page_is_redirect, Fld_page_len, Fld_page_file_idx, Fld_page_html_db_id, Fld_page_redirect_id)
 	, Flds_select_idx			= String_.Ary(Fld_page_id, Fld_page_ns, Fld_page_title, Fld_page_len)
 	;
 	public static final boolean Load_idx_flds_only_y = true;
@@ -303,9 +308,11 @@ public class Xodb_page_tbl {
 		page.Modified_on_	(DateAdp_.parse_fmt(rdr.ReadStr(Fld_page_touched), Page_touched_fmt));
 		page.Type_redirect_	(rdr.ReadByte(Fld_page_is_redirect) == 1);
 		page.Text_len_		(rdr.ReadInt(Fld_page_len));
-		page.Db_file_idx_	(rdr.ReadInt(Fld_page_file_idx));
-		if (html_db_enabled)
+		page.Text_db_id_	(rdr.ReadInt(Fld_page_file_idx));
+		if (html_db_enabled) {
 			page.Html_db_id_(rdr.ReadInt(Fld_page_html_db_id));
+			page.Redirect_id_(rdr.ReadInt(Fld_page_redirect_id));
+		}
 	}
 	public static void Read_page__idx(Xodb_page page, DataRdr rdr) {
 		page.Id_			(rdr.ReadInt(Fld_page_id));

@@ -81,7 +81,7 @@ public class Pfunc_switch extends Pf_func_base {
 			return Bry_.Trim(src, itm.Dat_bgn(), itm.Dat_end());
 		else {
 			itm.Tmpl_evaluate(ctx, src, caller, tmp);
-			return tmp.XtoAryAndClearAndTrim();
+			return tmp.Xto_bry_and_clear_and_trim();
 		}
 	}
 	public static final byte[] Dflt_keyword = Bry_.new_utf8_("#default");	// NOTE: technically should pull from messages, but would need to cache Dflt_keyword on wiki level; checked all Messages files, and no one overrides it; DATE:2014-05-29

@@ -78,7 +78,7 @@ class Xou_history_mgr_fxt {
 		return this;
 	}
 	public Xou_history_mgr_fxt List_tst(String... expd) {
-		int actl_len = under.Count();
+		int actl_len = under.Len();
 		String[] actl = new String[actl_len];
 		for (int i = 0; i < actl_len; i++) {
 			Xou_history_itm itm = under.Get_at(i);

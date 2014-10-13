@@ -33,7 +33,7 @@ class Redlink_regy_mgr {
 			Save();
 	}
 	private Redlink_regy_itm Get_or_new(int ns_id, byte[] ttl) {
-		byte[] hash_key = tmp_bfr.Add_int_variable(ns_id).Add_byte_pipe().Add(ttl).XtoAryAndClear();
+		byte[] hash_key = tmp_bfr.Add_int_variable(ns_id).Add_byte_pipe().Add(ttl).Xto_bry_and_clear();
 		Redlink_regy_itm rv = (Redlink_regy_itm)hash.Fetch(hash_key);
 		if (rv == null) {
 			rv = new Redlink_regy_itm(hash_key, ns_id, ttl);
@@ -61,7 +61,7 @@ class Redlink_regy_itm {
 			Redlink_page_itm page_itm = (Redlink_page_itm)pages.FetchAt(i);
 			page_itm.Write_to_bfr(bfr);
 		}
-		return bfr.XtoAryAndClear();
+		return bfr.Xto_bry_and_clear();
 	}
 }
 class Redlink_page_itm {
@@ -82,13 +82,13 @@ class Redlink_wkr {
 		while (rdr.Move_next()) {
 			int lnki_page_id			= rdr.Read_int(0);
 			if (lnki_page_id != cur_page_id) {
-				Save(cur_page_id, bfr.XtoAryAndClear());
+				Save(cur_page_id, bfr.Xto_bry_and_clear());
 				cur_page_id = lnki_page_id;
 			}
 			int html_uid			= rdr.Read_int(1);
 			bfr.Add_int_variable(html_uid).Add_byte_pipe();
 		}
-		Save(cur_page_id, bfr.XtoAryAndClear());;
+		Save(cur_page_id, bfr.Xto_bry_and_clear());;
 	}
 	private void Save(int page_id, byte[] data) {
 		if (page_id == -1 || data.length == 0) return;

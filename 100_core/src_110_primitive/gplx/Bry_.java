@@ -747,7 +747,7 @@ public class Bry_ {
 					}
 					else if (next == lkp) {
 						posRef.Val_(pos + 2);	// 1=endQuote;1=lkp;
-						return make ? bb.XtoAry() : Bry_.Empty;
+						return make ? bb.Xto_bry() : Bry_.Empty;
 					}
 					else throw Err_.new_("quote found, but not doubled").Add("txt", String_.new_utf8_len_safe_(ary, bgn, pos + 1));
 				}
@@ -840,7 +840,12 @@ public class Bry_ {
 			if (last) break;
 			++src_pos;
 		}
-		return (byte[][])rv.XtoAry(byte[].class);
+		return (byte[][])rv.Xto_ary(byte[].class);
+	}
+	public static byte[] Replace_create(byte[] src, byte find, byte replace) {
+		byte[] rv = Bry_.Copy(src);
+		Replace_reuse(rv, find, replace);
+		return rv;
 	}
 	public static void Replace_reuse(byte[] src, byte find, byte replace) {
 		int src_len = src.length;
@@ -878,7 +883,7 @@ public class Bry_ {
 		}
 		if (dirty)
 			bfr.Add_mid(src, bfr_bgn, src_end);
-		return dirty ? bfr.XtoAryAndClear() : src;
+		return dirty ? bfr.Xto_bry_and_clear() : src;
 	}
 	public static byte[] Replace(byte[] src, byte[] find, byte[] replace) {return Replace_between(src, find, null, replace);}
 	public static byte[] Replace_between(byte[] src, byte[] bgn, byte[] end, byte[] replace) {
@@ -907,7 +912,7 @@ public class Bry_ {
 				}
 			}
 		}
-		return bfr.XtoAryAndClear();
+		return bfr.Xto_bry_and_clear();
 	}
 	public static int Trim_end_pos(byte[] src, int end) {
 		for (int i = end - 1; i > -1; i--) {
@@ -934,7 +939,7 @@ public class Bry_ {
 			if (find_pos == src_len) break;
 			cur_pos = find_pos + dlm_len;
 		}
-		return (byte[][])rv.XtoAry(byte[].class);
+		return (byte[][])rv.Xto_ary(byte[].class);
 	}
 	public static byte[][] Split_lines(byte[] src) {
 		if (Bry_.Len_eq_0(src)) return Bry_.Ary_empty;
@@ -960,7 +965,7 @@ public class Bry_ {
 			if (last) break;
 			src_pos = nxt_bgn;
 		}
-		return (byte[][])rv.XtoAry(byte[].class);
+		return (byte[][])rv.Xto_ary(byte[].class);
 	}
 	public static byte[] Increment_last(byte[] ary) {return Increment_last(ary, ary.length - 1);}
 	public static byte[] Increment_last(byte[] ary, int end_idx) {

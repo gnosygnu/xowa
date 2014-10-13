@@ -28,7 +28,6 @@ public class Xol_lang implements GfoInvkAble {
 		ns_names = new Xol_ns_grp(this); ns_aliases = new Xol_ns_grp(this);
 		keyword_mgr = new Xol_kwd_mgr(this);
 		message_mgr = new Xol_msg_mgr(this, true);
-		fragment_mgr = new Xol_fragment_mgr(this);
 		specials_mgr = new Xol_specials_mgr(this);
 		case_mgr = Env_.Mode_testing() ? Xol_case_mgr_.Ascii() : Xol_case_mgr_.Utf8(); // NOTE: if test load ascii b/c utf8 is large; NOTE: placed here b/c tests do not call load; DATE:2014-07-04
 		if (lang_id != Xol_lang_itm_.Id_en) fallback_bry_ary = Fallback_bry_ary__en;	// NOTE: do not set fallback_ary for en to en, else recursive loop
@@ -66,7 +65,6 @@ public class Xol_lang implements GfoInvkAble {
 	public byte[][] Fallback_bry_ary() {return fallback_bry_ary;} private byte[][] fallback_bry_ary = Bry_.Ary_empty;
 	public Xol_vnt_mgr Vnt_mgr() {return vnt_mgr;} private Xol_vnt_mgr vnt_mgr;
 	public Xol_cnv_mgr Cnv_mgr() {return cnv_mgr;} private Xol_cnv_mgr cnv_mgr;
-	public Xol_fragment_mgr Fragment_mgr() {return fragment_mgr;} private Xol_fragment_mgr fragment_mgr;
 	public Xol_num_mgr Num_mgr() {return num_mgr;} private Xol_num_mgr num_mgr;
 	public Xol_grammar Grammar() {return grammar;} private Xol_grammar grammar;
 	public Xol_plural Plural() {return plural;} private Xol_plural plural;

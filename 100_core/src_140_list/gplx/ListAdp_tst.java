@@ -150,14 +150,14 @@ public class ListAdp_tst {
 		tst_Enumerator("0", "1", "2");
 	}
 	@Test  public void Sort_empty() {list.Sort();}
-	@Test  public void XtoAry() {
+	@Test  public void Xto_bry() {
 		list_AddMany("0", "1");
-		String[] ary = (String[])list.XtoAry(String.class);
+		String[] ary = (String[])list.Xto_ary(String.class);
 		Tfds.Eq_nullNot(ary);
 		Tfds.Eq(2, Array_.Len(ary));
 	}
 	@Test  public void XtoAry_empty() {
-		String[] ary = (String[])list.XtoAry(String.class);
+		String[] ary = (String[])list.Xto_ary(String.class);
 		Tfds.Eq_nullNot(ary);
 		Tfds.Eq(0, Array_.Len(ary));
 	}
@@ -214,7 +214,7 @@ public class ListAdp_tst {
 	}
 	ListAdp_tst run_MoveTo(int elemPos, int newPos) {list.MoveTo(elemPos, newPos); return this;}
 	ListAdp_tst tst_Order(String... expd) {
-		String[] actl = (String[])list.XtoAry(String.class);
+		String[] actl = (String[])list.Xto_ary(String.class);
 		Tfds.Eq_ary(expd, actl);
 		return this;
 	}

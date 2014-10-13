@@ -32,7 +32,7 @@ class Imap_link_owner_ {
 				Xop_lnki_tkn lnki_tkn = (Xop_lnki_tkn)tkn;
 				link_owner.Link_href_(app.Href_parser().Build_to_bry(wiki, lnki_tkn.Ttl()));
 				wiki.Html_mgr().Html_wtr().Lnki_wtr().Write_caption(bfr, Xoh_wtr_ctx.Alt, src, lnki_tkn, lnki_tkn.Ttl());
-				link_owner.Link_text_(bfr.XtoAryAndClear());
+				link_owner.Link_text_(bfr.Xto_bry_and_clear());
 				break;
 			}
 			case Xop_tkn_itm_.Tid_lnke: {
@@ -41,9 +41,9 @@ class Imap_link_owner_ {
 				int lnke_bgn = lnke.Lnke_bgn(), lnke_end = lnke.Lnke_end(); boolean proto_is_xowa = lnke.Proto_tid() == Xoo_protocol_itm.Tid_xowa;
 				Xoh_lnke_wtr lnke_wtr = wiki.Html_mgr().Html_wtr().Lnke_wtr();
 				lnke_wtr.Write_href(bfr, ctx, src, lnke, lnke_bgn, lnke_end, proto_is_xowa);
-				link_owner.Link_href_(bfr.XtoAryAndClear());
+				link_owner.Link_href_(bfr.Xto_bry_and_clear());
 				lnke_wtr.Write_caption(bfr, wiki.Html_mgr().Html_wtr(), Xoh_wtr_ctx.Basic, ctx, src, lnke, lnke_bgn, lnke_end, proto_is_xowa);
-				link_owner.Link_text_(bfr.XtoAryAndClear());
+				link_owner.Link_text_(bfr.Xto_bry_and_clear());
 				break;
 			}
 		}

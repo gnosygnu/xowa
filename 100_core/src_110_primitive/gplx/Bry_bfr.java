@@ -417,29 +417,28 @@ public class Bry_bfr {
 		return this;
 	}
 	public boolean Eq(byte b) {return bfr_len == 1 && bfr[0] == b;}
-	public byte[] XtoAry() {return bfr_len == 0 ? Bry_.Empty : Bry_.Mid(bfr, 0, bfr_len);}
-	public byte[] XtoAryAndReset(int v) {
-		byte[] rv = XtoAry();
+	public byte[] Xto_bry() {return bfr_len == 0 ? Bry_.Empty : Bry_.Mid(bfr, 0, bfr_len);}
+	public byte[] Xto_bry_and_reset(int v) {
+		byte[] rv = Xto_bry();
 		this.Clear().Reset_if_gt(v);
 		return rv;
 	}
-	public byte[] XtoAryAndClearAndTrim() {return XtoAryAndClearAndTrim(true, true, Bry_.Trim_ary_ws);}
-	public byte[] XtoAryAndClearAndTrim(boolean trim_bgn, boolean trim_end, byte[] trim_bry) {
+	public byte[] Xto_bry_and_clear_and_trim() {return Xto_bry_and_clear_and_trim(true, true, Bry_.Trim_ary_ws);}
+	public byte[] Xto_bry_and_clear_and_trim(boolean trim_bgn, boolean trim_end, byte[] trim_bry) {
 		byte[] rv = Bry_.Trim(bfr, 0, bfr_len, trim_bgn, trim_end, trim_bry);
 		this.Clear();
 		return rv;
 	}
-	public byte[] XtoAryAndClear() {
-		byte[] rv = XtoAry();
+	public byte[] Xto_bry_and_clear() {
+		byte[] rv = Xto_bry();
 		this.Clear();
 		if (reset > 0) Reset_if_gt(reset);
 		return rv;
 	}
-	public String XtoStr()							{return String_.new_utf8_(XtoAry());}
-	public String XtoStrByPos(int bgn, int end)		{return String_.new_utf8_(XtoAry(), bgn, end);}
-	public String XtoStrAndClear()					{return String_.new_utf8_(XtoAryAndClear());}
-	public String XtoStrAndClearAndTrim()			{return String_.new_utf8_(XtoAryAndClearAndTrim());}
-	public String XtoStrAndReset(int v)				{return String_.new_utf8_(XtoAryAndReset(v));}
+	public String Xto_str()								{return String_.new_utf8_(Xto_bry());}
+	public String Xto_str_by_pos(int bgn, int end)		{return String_.new_utf8_(Xto_bry(), bgn, end);}
+	public String Xto_str_and_clear()					{return String_.new_utf8_(Xto_bry_and_clear());}
+	public String Xto_str_and_clear_and_trim()			{return String_.new_utf8_(Xto_bry_and_clear_and_trim());}
 	public int XtoIntAndClear(int or) {int rv = XtoInt(or); this.Clear(); return rv;}
 	public int XtoInt(int or) {
 		switch (bfr_len) {

@@ -56,7 +56,7 @@ public class Xodb_hdump_mgr {
 		page.File_queue().Clear();	// need to reset uid to 0, else xowa_file_# will resume from last
 		Xoh_page_wtr_wkr wkr = wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_view_mode.Tid_read);
 		wkr.Write_body(bfr, Xoh_wtr_ctx.Hdump, page);
-		page.Hdump_data().Body_(bfr.XtoAryAndClear());
+		page.Hdump_data().Body_(bfr.Xto_bry_and_clear());
 	}
 	public void Load(Xow_wiki wiki, Xoa_page page, int html_db_id) {
 		if (!Enabled_chk()) return;
@@ -68,7 +68,7 @@ public class Xodb_hdump_mgr {
 	private void Load_page(Xow_wiki wiki, Xoa_page page, Hdump_page hpg) {
 		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_m001();
 		html_mgr.Init_by_page(wiki.Domain_bry(), hpg).Write(tmp_bfr);
-		page.Hdump_data().Body_(tmp_bfr.XtoAryAndClear());
+		page.Hdump_data().Body_(tmp_bfr.Xto_bry_and_clear());
 		Xopg_html_data html_data = page.Html_data();
 		html_data.Display_ttl_(hpg.Display_ttl());
 		html_data.Content_sub_(hpg.Content_sub());

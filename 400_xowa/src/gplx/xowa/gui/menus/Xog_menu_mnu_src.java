@@ -202,7 +202,7 @@ class Xog_menu_mgr_src {
 class Xog_menu_bldr {
 	private int indent = 0;
 	private Bry_bfr bfr = Bry_bfr.reset_(0);
-	public String Gen_str() {return bfr.XtoStrAndClear();}
+	public String Gen_str() {return bfr.Xto_str_and_clear();}
 	private Xog_menu_bldr Indent_add() {indent += 2; return this;}
 	private Xog_menu_bldr Indent_del() {indent -= 2; return this;}
 	private void Indent() {

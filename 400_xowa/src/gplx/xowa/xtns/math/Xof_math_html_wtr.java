@@ -79,6 +79,6 @@ public class Xof_math_html_wtr {
 		if (write_to_bfr)
 			return null;
 		else
-			return dirty ? bfr.XtoAryAndClear() : bry;
+			return dirty ? bfr.Xto_bry_and_clear() : bry;
 	}
 }

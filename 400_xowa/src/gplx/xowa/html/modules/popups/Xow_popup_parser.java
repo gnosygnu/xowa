@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html.modules.popups; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.modules.*;
 import gplx.core.btries.*; import gplx.xowa.wikis.*;
 import gplx.xowa.apis.xowa.html.modules.*; import gplx.xowa.html.modules.popups.keeplists.*;
-import gplx.xowa.gui.views.*; import gplx.xowa.parsers.hdrs.*;
+import gplx.xowa.gui.views.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.tblws.*;
 public class Xow_popup_parser {
 	private Xoa_app app; private Xow_wiki wiki; private Xop_parser parser;
 	private Btrie_fast_mgr tmpl_trie, wtxt_trie; private Xop_tkn_mkr tkn_mkr;
@@ -119,7 +119,7 @@ public class Xow_popup_parser {
 	private void Parse_wrdx_to_html(Xow_popup_itm popup_itm, Bry_bfr wrdx_bfr) {
 		Adjust_wrdx_end(popup_itm, wrdx_bfr);
 		wrdx_bfr.Add(cfg.Notoc());	// always add notoc at end
-		byte[] wrdx_bry = wrdx_bfr.XtoAryAndClear();
+		byte[] wrdx_bry = wrdx_bfr.Xto_bry_and_clear();
 		wtxt_root.Clear();			// now start parsing wrdx_bry from wtxt to html
 		Wtxt_ctx_init(false, wrdx_bry);
 		parser.Parse_to_src_end(wtxt_root, wtxt_ctx, tkn_mkr, wrdx_bry, wtxt_trie, Xop_parser_.Doc_bgn_bos, wrdx_bry.length);

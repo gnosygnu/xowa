@@ -48,6 +48,6 @@ class Php_text_itm_fxt {
 			Php_text_itm itm = (Php_text_itm)list.FetchAt(i);
 			itm.Bld(bfr, raw);
 		}
-		Tfds.Eq(expd, bfr.XtoStrAndClear());
+		Tfds.Eq(expd, bfr.Xto_str_and_clear());
 	}
 }

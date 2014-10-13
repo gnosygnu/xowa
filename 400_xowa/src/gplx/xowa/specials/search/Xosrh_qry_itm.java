@@ -29,7 +29,7 @@ class Xosrh_qry_itm {
 	public String Xto_str(byte[] src) {
 		Bry_bfr bfr = Bry_bfr.new_();
 		Xto_str_bld(src, bfr);
-		return bfr.XtoStrAndClear();
+		return bfr.Xto_str_and_clear();
 	}
 	public Xosrh_qry_ids Matches(byte[] src) {
 		switch (tid) {

@@ -25,7 +25,12 @@ public class Xoh_module_itm__toc implements Xoh_module_itm {
 	public void Write_css_script(Xoa_app app, Xow_wiki wiki, Xoa_page page, Xoh_module_wtr wtr) {}
 	public void Write_js_include(Xoa_app app, Xow_wiki wiki, Xoa_page page, Xoh_module_wtr wtr) {}
 	public void Write_js_head_script(Xoa_app app, Xow_wiki wiki, Xoa_page page, Xoh_module_wtr wtr) {}
-	public void Write_js_tail_script(Xoa_app app, Xow_wiki wiki, Xoa_page page, Xoh_module_wtr wtr) {}
+	public void Write_js_tail_script(Xoa_app app, Xow_wiki wiki, Xoa_page page, Xoh_module_wtr wtr) {
+//			if (!enabled) return;
+//			wtr.Write_js_line(Xoh_module_itm__popups.Jquery_init);
+//			wtr.Write_js_line(Xoh_module_itm__popups.Mw_init);
+//			wtr.Write_js_tail_load_lib(app.Fsys_mgr().Bin_any_dir().GenSubFil_nest("xowa", "html", "modules", "mw.toc", "mw.toc.js"));
+	}
 	public void Write_js_head_global(Xoa_app app, Xow_wiki wiki, Xoa_page page, Xoh_module_wtr wtr) {
 		if (!enabled) return;
 		wtr.Write_js_global_ini_atr_val(Key_exists		, true);

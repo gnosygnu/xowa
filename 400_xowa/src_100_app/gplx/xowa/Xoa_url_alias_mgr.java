@@ -24,7 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //			byte[] fmt = (byte[])hash.Get_by_mid(raw, 0, colon_pos); if (fmt == null) return null;
 //			Bry_bfr tmp_bfr = app.Utl_bry_bfr_mkr().Get_b512();
 //			fmtr.Fmt_(fmt).Bld_bfr_many(tmp_bfr, Bry_.Mid(raw, colon_pos + Int_.Const_dlm_len, raw.length));
-//			return tmp_bfr.Mkr_rls().XtoAryAndClear();
+//			return tmp_bfr.Mkr_rls().Xto_bry_and_clear();
 //		}
 //		public void Clear() {hash.Clear();}
 //		public void Add_one(byte[] alias, byte[] wiki_key) {hash.Add_bry_obj(alias, wiki_key);}

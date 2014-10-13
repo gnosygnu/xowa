@@ -133,7 +133,7 @@ public abstract class Xob_ctg_v1_base extends Xob_itm_dump_base implements Xobd_
 	}
 	private void wkr_hooks_add(Bry_bfr tmp_bfr, byte[] word) {
 		tmp_bfr.Add_byte(Byte_ascii.Brack_bgn).Add_byte(Byte_ascii.Brack_bgn).Add(word).Add_byte(Byte_ascii.Colon);
-		byte[] key = tmp_bfr.XtoAryAndClear();
+		byte[] key = tmp_bfr.Xto_bry_and_clear();
 		if (!wkr_hooks.Has(key)) wkr_hooks.Add(key, key);
 	}	
 	static final String GRP_KEY = "xowa.bldr.make_ctg";

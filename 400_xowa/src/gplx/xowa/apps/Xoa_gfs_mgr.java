@@ -79,11 +79,11 @@ public class Xoa_gfs_mgr implements GfoInvkAble, GfoInvkRootWkr {
 			cur_msg = cur_msg.Subs_getAt(0);
 		}
 	}
-	public byte[] Build_prop_set_to_bry(Bry_bfr bfr, byte[] prop, byte[] val) {Build_prop_set(bfr, prop, val); return bfr.XtoAryAndClear();}
+	public byte[] Build_prop_set_to_bry(Bry_bfr bfr, byte[] prop, byte[] val) {Build_prop_set(bfr, prop, val); return bfr.Xto_bry_and_clear();}
 	public void Build_prop_set(Bry_bfr bfr, byte[] prop, byte[] val) {
 		fmtr_eval_set.Bld_bfr_many(bfr, prop, Xoa_gfs_mgr.Cfg_save_escape(val));
 	}	private Bry_fmtr fmtr_eval_set = Bry_fmtr.new_("~{prop}_('~{val}');\n", "prop", "val");
-	public byte[] Build_prop_get_to_bry(Bry_bfr bfr, byte[] prop) {Build_prop_get(bfr, prop); return bfr.XtoAryAndClear();}
+	public byte[] Build_prop_get_to_bry(Bry_bfr bfr, byte[] prop) {Build_prop_get(bfr, prop); return bfr.Xto_bry_and_clear();}
 	public void Build_prop_get(Bry_bfr bfr, byte[] prop) {
 		fmtr_eval_get.Bld_bfr_many(bfr, prop);
 	}	private Bry_fmtr fmtr_eval_get = Bry_fmtr.new_("~{prop};\n", "prop");
@@ -108,7 +108,7 @@ public class Xoa_gfs_mgr implements GfoInvkAble, GfoInvkRootWkr {
 			if (i != 0) Build_code_bfr.Add_byte(Byte_ascii.Dot);
 			Build_code_bfr.Add_str(ary[i]);				
 		}
-		return Build_code_bfr.XtoStrAndClear();
+		return Build_code_bfr.Xto_str_and_clear();
 	}	static final Bry_bfr Build_code_bfr = Bry_bfr.new_();
 	public static final String Cfg_user_file = "xowa_user_cfg.gfs", Cfg_user_custom_file = "user_custom_cfg.gfs", Cfg_os = "xowa_cfg_os.gfs";
 	public static boolean Fail_if_unhandled = false;

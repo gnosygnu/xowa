@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.xtns.*;
+import gplx.xowa.xtns.*; import gplx.xowa.parsers.tblws.*;
 public class Xop_xnde_tkn extends Xop_tkn_itm_base implements Xop_tblw_tkn {
 	@Override public byte Tkn_tid() {return Xop_tkn_itm_.Tid_xnde;}
 	public int Tblw_tid() {return tag.Id();}	// NOTE: tblw tkns actually return xnde as Tblw_tid

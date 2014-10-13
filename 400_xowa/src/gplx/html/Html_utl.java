@@ -25,7 +25,7 @@ public class Html_utl {
 	public static byte[] Escape_for_atr_val_as_bry(Bry_bfr tmp_bfr, byte quote_byte, byte[] bry) {
 		if (bry == null) return null;
 		boolean dirty = Escape_for_atr_val_as_bry(tmp_bfr, quote_byte, bry, 0, bry.length);
-		return dirty ? tmp_bfr.XtoAryAndClear() : bry;
+		return dirty ? tmp_bfr.Xto_bry_and_clear() : bry;
 	}
 	public static boolean Escape_for_atr_val_as_bry(Bry_bfr tmp_bfr, byte quote_byte, byte[] src, int bgn, int end) {
 		boolean dirty = false;
@@ -92,7 +92,7 @@ public class Html_utl {
 		if (write_to_bfr)
 			return null;
 		else
-			return dirty ? bfr.XtoAryAndClear() : bry;
+			return dirty ? bfr.Xto_bry_and_clear() : bry;
 	}
 
 	private static final Btrie_slim_mgr unescape_trie = Btrie_slim_mgr.ci_ascii_()
@@ -106,7 +106,7 @@ public class Html_utl {
 		Bry_bfr bfr = Bry_bfr.reset_(255);
 		byte[] bry = Bry_.new_utf8_(src);
 		Unescape(Bool_.Y, bfr, bry, 0, bry.length, Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y);
-		return bfr.XtoStrAndClear();
+		return bfr.Xto_str_and_clear();
 	}
 	public static byte[] Unescape(boolean write_to_bfr, Bry_bfr bfr, byte[] bry, int bgn, int end, boolean escape_lt, boolean escape_gt, boolean escape_amp, boolean escape_quote, boolean escape_apos) {
 		if (bry == null) return null;
@@ -148,7 +148,7 @@ public class Html_utl {
 		if (write_to_bfr)
 			return null;
 		else
-			return dirty ? bfr.XtoAryAndClear() : bry;
+			return dirty ? bfr.Xto_bry_and_clear() : bry;
 	}
 	public static byte[] Del_comments(Bry_bfr bfr, byte[] src) {return Del_comments(bfr, src, 0, src.length);}
 	public static byte[] Del_comments(Bry_bfr bfr, byte[] src, int pos, int end) {
@@ -167,6 +167,6 @@ public class Html_utl {
 			bfr.Add_mid(src, pos, comm_bgn);																					// add everything between pos and comm_bgn
 			pos = comm_end + Html_tag_.Comm_end_len;																			// reposition pos after comm_end
 		}
-		return bfr.XtoAryAndClear();
+		return bfr.Xto_bry_and_clear();
 	}
 }

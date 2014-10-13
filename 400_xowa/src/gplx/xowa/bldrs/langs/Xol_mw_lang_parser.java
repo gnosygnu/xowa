@@ -114,7 +114,7 @@ public class Xol_mw_lang_parser {
 	public void Parse_core(String text, Xol_lang lang, Bry_bfr bfr, Xol_lang_transform lang_transform) {
 		evaluator.Clear();
 		parser.Parse_tkns(text, evaluator);
-		Php_line[] lines = (Php_line[])evaluator.List().XtoAry(Php_line.class);
+		Php_line[] lines = (Php_line[])evaluator.List().Xto_ary(Php_line.class);
 		int lines_len = lines.length;
 		ListAdp bry_list = ListAdp_.new_();
 		for (int i = 0; i < lines_len; i++) {
@@ -173,7 +173,7 @@ public class Xol_mw_lang_parser {
 		evaluator.Clear();
 		parser.Parse_tkns(text, evaluator);
 		ListAdp bry_list = ListAdp_.new_();
-		Php_line[] lines = (Php_line[])evaluator.List().XtoAry(Php_line.class);
+		Php_line[] lines = (Php_line[])evaluator.List().Xto_ary(Php_line.class);
 		int lines_len = lines.length;
 		for (int i = 0; i < lines_len; i++) {
 			Php_line_assign line = (Php_line_assign)lines[i];
@@ -216,7 +216,7 @@ public class Xol_mw_lang_parser {
 		}		
 	}
 	public Xow_ns[] Parse_namespace_strings(ListAdp list, boolean ns_names) {
-		byte[][] brys = (byte[][])list.XtoAry(byte[].class);
+		byte[][] brys = (byte[][])list.Xto_ary(byte[].class);
 		int brys_len = brys.length;
 		Xow_ns[] rv = new Xow_ns[brys_len / 2];
 		int key_dif = ns_names ? 0 : 1;
@@ -232,7 +232,7 @@ public class Xol_mw_lang_parser {
 		return rv;
 	}
 	private void Parse_messages(ListAdp rv, Xol_lang lang, Bry_bfr bfr) {
-		byte[][] brys = (byte[][])rv.XtoAry(byte[].class);
+		byte[][] brys = (byte[][])rv.Xto_ary(byte[].class);
 		int brys_len = brys.length;
 		Xol_msg_mgr mgr = lang.Msg_mgr();
 		ListAdp quote_itm_list = ListAdp_.new_(); Byte_obj_ref quote_parse_result = Byte_obj_ref.zero_(); 
@@ -308,7 +308,7 @@ public class Xol_mw_lang_parser {
 			byte[] key_bry = Php_itm_.Parse_bry(kv.Key()), val_bry = Php_itm_.Parse_bry(kv.Val());
 			val_bry = php_quote_parser.Parse_as_bry(tmp_list, val_bry, tmp_result, tmp_bfr);
 			Xol_csv_parser._.Load(tmp_bfr, val_bry);
-			val_bry = tmp_bfr.XtoAryAndClear();
+			val_bry = tmp_bfr.Xto_bry_and_clear();
 			if 	(	Bry_.Eq(key_bry, Bry_separatorTransformTable_dot)
 				||	Bry_.Eq(key_bry, Bry_separatorTransformTable_comma)
 				)

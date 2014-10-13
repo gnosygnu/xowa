@@ -69,6 +69,6 @@ public class Xob_wdata_pid_base_tst {
 		}			
 		bfr.Add_str("  }").Add_byte_nl();
 		bfr.Add_str("}").Add_byte_nl();
-		return String_.Replace(bfr.XtoStrAndClear(), "'", "\""); 
+		return String_.Replace(bfr.Xto_str_and_clear(), "'", "\""); 
 	}
 }

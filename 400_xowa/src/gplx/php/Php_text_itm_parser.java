@@ -32,7 +32,7 @@ public class Php_text_itm_parser {
 					Php_text_itm itm = (Php_text_itm)tmp_list.FetchAt(i);
 					itm.Bld(tmp_bfr, raw);
 				}
-				rv = tmp_bfr.XtoAryAndClear();
+				rv = tmp_bfr.Xto_bry_and_clear();
 				break;
 		}
 		return rv;

@@ -25,7 +25,7 @@ class Hiero_html_wtr {
 	public void Hr(Bry_bfr bfr)			{bfr.Add(Html_tag_.Hr_inl).Add_byte_nl();}
 	public void Tbl_eol(Bry_bfr bfr)	{bfr.Add(Tbl_eol_bry);}	
 	public byte[] Td_height(int height) {
-		return temp_bfr.Add(Option_bgn_bry).Add_int_variable(height).Add(Option_end_bry).XtoAryAndClear();
+		return temp_bfr.Add(Option_bgn_bry).Add_int_variable(height).Add(Option_end_bry).Xto_bry_and_clear();
 	}
 	private static final byte[] 
 	  Option_bgn_bry = Bry_.new_ascii_("height: ")
@@ -130,7 +130,7 @@ class Hiero_html_wtr {
 	;
 	public byte[] Img_phoneme(byte[] img_cls, byte[] td_height, byte[] glyph_esc, byte[] code) {
 		byte[] code_esc = Html_utl.Escape_html_as_bry(temp_bfr, code);
-		byte[] img_title = temp_bfr.Add(code_esc).Add_byte_space().Add_byte(Byte_ascii.Brack_bgn).Add(glyph_esc).Add_byte(Byte_ascii.Brack_end).XtoAryAndClear(); // "~{code} [~{glyph}]"
+		byte[] img_title = temp_bfr.Add(code_esc).Add_byte_space().Add_byte(Byte_ascii.Brack_bgn).Add(glyph_esc).Add_byte(Byte_ascii.Brack_end).Xto_bry_and_clear(); // "~{code} [~{glyph}]"
 		return Img(img_cls, td_height, glyph_esc, code_esc, img_title);
 	}
 	public byte[] Img_file(byte[] img_cls, byte[] td_height, byte[] glyph_esc) {return Img(img_cls, td_height, glyph_esc, glyph_esc, glyph_esc);}

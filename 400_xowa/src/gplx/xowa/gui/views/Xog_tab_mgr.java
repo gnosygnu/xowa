@@ -192,7 +192,7 @@ public class Xog_tab_mgr implements GfoEvObj {
 	public void Tabs_new_link(boolean focus, String link) {
 		if (String_.Len_eq_0(link)) {
 			if (this.Active_tab_is_null()) return;
-			link = active_tab.Html_itm().Html_selected_get_text_or_href();
+			link = active_tab.Html_itm().Html_selected_get_active_or_selection();
 		}
 		if (String_.Len_eq_0(link)) {win.App().Usr_dlg().Prog_many("", "", "no link or text selected"); return;}
 		Tabs_new_link(link, focus);

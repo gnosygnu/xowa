@@ -30,7 +30,7 @@ public class KeyValHash_tst {
 		}
 		catch (Exception e) {Err_.Noop(e);}
 	}
-	void tst_AryVals(String[] ary, KeyVal... expd) {Tfds.Eq_ary_str(expd, KeyValHash.strAry_(ary).XtoAry());}
+	void tst_AryVals(String[] ary, KeyVal... expd) {Tfds.Eq_ary_str(expd, KeyValHash.strAry_(ary).Xto_bry());}
 	KeyVal kv_(String key, Object val) {return KeyVal_.new_(key, val);}
 	String[] ary_(String... ary) {return ary;}
 }

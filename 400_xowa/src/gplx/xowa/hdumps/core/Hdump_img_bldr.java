@@ -35,7 +35,7 @@ class Hdump_img_bldr_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		while (rdr.Move_next()) {
 			int lnki_page_id		= rdr.Read_int(0);
 			if (lnki_page_id != cur_page_id) {
-				Save(cur_page_id, bfr.XtoAryAndClear());
+				Save(cur_page_id, bfr.Xto_bry_and_clear());
 				cur_page_id = lnki_page_id;
 			}
 			int html_uid			= rdr.Read_int(1);
@@ -49,7 +49,7 @@ class Hdump_img_bldr_cmd extends Xob_itm_basic_base implements Xob_cmd {
 			int file_page			= rdr.Read_int(9);
 			Hdump_data_img__base.Data_write_static(bfr, 0, lnki_ttl, html_uid, html_w, html_h, file_repo_id, file_ext_id, file_is_orig, html_w, file_time, file_page);
 		}
-		Save(cur_page_id, bfr.XtoAryAndClear());;
+		Save(cur_page_id, bfr.Xto_bry_and_clear());;
 	}
 	private void Save(int page_id, byte[] data) {
 		if (page_id == -1 || data.length == 0) return;

@@ -37,7 +37,7 @@ public class Xow_cache_mgr {
 				Cfg_nde_obj nde = root.Root_get_at(i);
 				Scrib_lang_names_grps(list, nde);
 			}
-			scrib_lang_names = (KeyVal[])list.XtoAry(KeyVal.class);
+			scrib_lang_names = (KeyVal[])list.Xto_ary(KeyVal.class);
 		}
 		return scrib_lang_names;
 	}	private static KeyVal[] scrib_lang_names;

@@ -53,7 +53,7 @@ public class Xol_msg_mgr_ {
 			Bry_fmtr tmp_fmtr = Bry_fmtr.tmp_().Missing_bgn_(Missing_bry).Missing_end_(Bry_.Empty).Missing_adj_(1);
 			tmp_fmtr.Fmt_(msg_val);
 			tmp_fmtr.Bld_bfr(tmp_bfr, fmt_args);
-			msg_val = tmp_bfr.XtoAryAndClear();
+			msg_val = tmp_bfr.Xto_bry_and_clear();
 		}
 		if (has_tmpl) {
 			Xop_ctx sub_ctx = Xop_ctx.new_sub_(wiki); Xop_tkn_mkr tkn_mkr = sub_ctx.Tkn_mkr();
@@ -84,7 +84,7 @@ public class Xol_msg_mgr_ {
 		if (msg_page.Missing()) {															// [[MediaWiki:key/fallback]] still not found; search "lang.gfs";
 			Xol_msg_itm msg_in_lang = Get_msg_itm_from_gfs(wiki, lang, msg_key_sub_root);
 			if (msg_in_lang == null) {
-				msg_val = tmp_bfr.Add_byte(Byte_ascii.Lt).Add(msg_key).Add_byte(Byte_ascii.Gt).XtoAryAndClear();	// set val to <msg_key>
+				msg_val = tmp_bfr.Add_byte(Byte_ascii.Lt).Add(msg_key).Add_byte(Byte_ascii.Gt).Xto_bry_and_clear();	// set val to <msg_key>
 				msg_in_wiki.Src_(Xol_msg_itm.Src_missing);
 			}
 			else {

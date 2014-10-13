@@ -96,13 +96,13 @@ class Prefs_html_wtr {
 		if (cmd == null) 
 			cmd = hnde.Atrs_val_by_key_bry(Prefs_mgr.Bry_prop_get);
 		tmp_bfr.Add(cmd).Add_byte(Byte_ascii.Semic);
-		try {return prefs_mgr.Eval(tmp_bfr.XtoAryAndClear());}
+		try {return prefs_mgr.Eval(tmp_bfr.Xto_bry_and_clear());}
 		catch (Exception e) {return Err_.Message_gplx_brief(e);}
 	}
 	KeyVal[] Get_select_options(Html_nde hnde) {
 		byte[] options_list_key = hnde.Atrs_val_by_key_bry(Atr_key_xowa_prop_list);
 		tmp_bfr.Add(options_list_key).Add_byte(Byte_ascii.Semic);
-		try {return (KeyVal[])prefs_mgr.Eval(tmp_bfr.XtoAryAndClear());}
+		try {return (KeyVal[])prefs_mgr.Eval(tmp_bfr.Xto_bry_and_clear());}
 		catch (Exception e) {Err_.Noop(e); return KeyVal_.Ary_empty;}
 	}
 	private void Write__nde_end(Bry_bfr bfr) {bfr.Add_byte(Byte_ascii.Gt);}

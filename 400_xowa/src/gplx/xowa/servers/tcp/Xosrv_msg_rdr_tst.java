@@ -60,6 +60,6 @@ class Xosrv_msg_rdr_fxt {
 	public void Test_print(Xosrv_msg msg, String expd) {
 		Bry_bfr bfr = Bry_bfr.new_();
 		msg.Print(bfr);
-		Tfds.Eq(expd, bfr.XtoStrAndClear());
+		Tfds.Eq(expd, bfr.Xto_str_and_clear());
 	}
 }

@@ -97,7 +97,7 @@ class Gfs_err_mgr {
 			tmp_fail_bfr.Add_byte(Byte_ascii.Eq).Add_byte(Byte_ascii.Apos);
 			tmp_fail_bfr.Add_str(kv.Val_to_str_or_empty()).Add_byte(Byte_ascii.Apos);
 		}
-		return tmp_fail_bfr.XtoStrAndClear();
+		return tmp_fail_bfr.Xto_str_and_clear();
 	}
 	Bry_bfr tmp_fail_bfr = Bry_bfr.reset_(255);
 	KeyValList tmp_fail_args = new KeyValList();
@@ -105,12 +105,12 @@ class Gfs_err_mgr {
 	String Fail_excerpt_bgn(byte[] src, int src_len, int pos) {
 		int bgn = pos - excerpt_len; if (bgn < 0) bgn = 0;
 		Fail_excerpt_rng(tmp_fail_bfr, src, bgn, pos);
-		return tmp_fail_bfr.XtoStrAndClear();
+		return tmp_fail_bfr.Xto_str_and_clear();
 	}
 	String Fail_excerpt_end(byte[] src, int src_len, int pos) {
 		int end = pos + excerpt_len; if (end > src_len) end = src_len;
 		Fail_excerpt_rng(tmp_fail_bfr, src, pos, end);
-		return tmp_fail_bfr.XtoStrAndClear();
+		return tmp_fail_bfr.Xto_str_and_clear();
 	}
 	private static void Fail_excerpt_rng(Bry_bfr bfr, byte[] src, int bgn, int end) {
 		for (int i = bgn; i < end; i++) {

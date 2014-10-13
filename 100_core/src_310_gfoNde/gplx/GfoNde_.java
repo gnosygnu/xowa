@@ -38,7 +38,7 @@ public class GfoNde_ {
 					valAry[i] = rdr.ReadAt(i);
 				rows.Add(GfoNde_.vals_(flds, valAry));
 			}
-			return GfoNde_.tbl_("", flds, (GfoNde[])rows.XtoAry(GfoNde.class));
+			return GfoNde_.tbl_("", flds, (GfoNde[])rows.Xto_ary(GfoNde.class));
 		}
 		finally {rdr.Rls();}
 	}

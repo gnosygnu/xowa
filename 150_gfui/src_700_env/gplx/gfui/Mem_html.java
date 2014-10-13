@@ -24,6 +24,7 @@ class Mem_html extends GxwTextMemo_lang implements Gxw_html {		public String Htm
 	public String Html_doc_selected_get_text_or_href() {return "";}
 	public String Html_doc_selected_get_href_or_text() {return "";}
 	public String Html_doc_selected_get_src_or_empty() {return "";}
+	public String Html_doc_selected_get_active_or_selection() {return "";}
 	public boolean Html_window_print_preview() {return false;}
 	public void Html_invk_src_(GfoEvObj v) {}
 	public String Html_elem_atr_get_str(String elem_id, String atr_key) {

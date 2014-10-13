@@ -49,7 +49,7 @@ public class Scrib_lib_uri implements Scrib_lib {
 		Pfunc_anchorencode.Func_init(core.Ctx());
 		Pfunc_anchorencode.Anchor_encode(raw_bry, bfr, tmp_bfr);
 		tmp_bfr.Mkr_rls().Clear();
-		return rslt.Init_obj(bfr.Mkr_rls().XtoStrAndClear());
+		return rslt.Init_obj(bfr.Mkr_rls().Xto_str_and_clear());
 	}
 	public boolean Url_func(Scrib_proc_args args, Scrib_proc_rslt rslt, byte url_tid) {
 		Xow_wiki wiki = core.Wiki();
@@ -61,16 +61,16 @@ public class Scrib_lib_uri implements Scrib_lib {
 		if (ttl.Ns().Id() == Xow_ns_.Id_media) {	// change "Media:" -> "File:"
 			bfr.Add(wiki.Ns_mgr().Ns_file().Name_db_w_colon());
 			bfr.Add(ttl.Page_db());
-			ttl_bry = bfr.XtoAryAndClear();
+			ttl_bry = bfr.Xto_bry_and_clear();
 		}				
 		Pfunc_urlfunc.UrlString(core.Ctx(), url_tid, false, ttl_bry, bfr, qry_bry);
-		return rslt.Init_obj(bfr.Mkr_rls().XtoStrAndClear());
+		return rslt.Init_obj(bfr.Mkr_rls().Xto_str_and_clear());
 	}
 	private boolean Init_uri_for_page(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		Xop_ctx ctx = core.Ctx();
 		byte[] ttl_bry = ctx.Cur_page().Ttl().Raw();
 		Bry_bfr tmp_bfr = ctx.Wiki().Utl_bry_bfr_mkr().Get_b512();
 		Pfunc_urlfunc.UrlString(ctx, Pfunc_urlfunc.Tid_full, false, ttl_bry, tmp_bfr, Bry_.Empty);
-		return rslt.Init_obj(tmp_bfr.Mkr_rls().XtoAryAndClear());
+		return rslt.Init_obj(tmp_bfr.Mkr_rls().Xto_bry_and_clear());
 	}
 }

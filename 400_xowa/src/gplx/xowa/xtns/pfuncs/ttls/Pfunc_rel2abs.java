@@ -162,7 +162,7 @@ public class Pfunc_rel2abs extends Pf_func_base {
 			}
 			tmp_bfr.Add_mid(tmp, seg_ary[j] - tmp_adj, seg_ary[j+1] - tmp_adj);
 		}
-		return tmp_bfr.XtoAryAndClear();
+		return tmp_bfr.Xto_bry_and_clear();
 	}
 	private static int[] seg_ary = new int[Xoa_ttl.Max_len];
 	@Override public int Id() {return Xol_kwd_grp_.Id_xtn_rel2abs;}

@@ -55,7 +55,7 @@ public class Xoa_gfs_php_mgr {
 					break;
 			}
 		}
-		return dirty ? bfr.XtoAryAndClear() : src;
+		return dirty ? bfr.Xto_bry_and_clear() : src;
 	}
 	private static int Xto_php_swap(Bry_bfr bfr, byte[] src, int len, int pos) {
 		if (pos >= len) throw Err_.new_("invalid gfs: tilde is last char; src={0}", String_.new_utf8_(src));
@@ -112,6 +112,6 @@ public class Xoa_gfs_php_mgr {
 					break;
 			}
 		}
-		return bfr.XtoAryAndClear();
+		return bfr.Xto_bry_and_clear();
 	}
 }

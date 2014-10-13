@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import org.junit.*;
-import gplx.xowa.langs.cases.*;
+import gplx.xowa.langs.cases.*; import gplx.xowa.parsers.paras.*;
 public class Xop_lnki_wkr__basic_tst {
 	@Before public void init() {fxt.Reset(); fxt.Init_para_n_();} private Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Basic() {

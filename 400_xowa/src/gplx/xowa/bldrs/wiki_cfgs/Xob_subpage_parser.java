@@ -25,7 +25,7 @@ class Xob_subpage_parser {
 			Php_parser php_parser = new Php_parser();
 			Php_evaluator eval = new Php_evaluator(new Gfo_msg_log("test"));
 			php_parser.Parse_tkns(src, eval);
-			Php_line[] lines = (Php_line[])eval.List().XtoAry(Php_line.class);
+			Php_line[] lines = (Php_line[])eval.List().Xto_ary(Php_line.class);
 			Php_line_assign line = (Php_line_assign)lines[0];
 			Php_itm_ary root_ary = (Php_itm_ary)line.Val();
 			Php_itm_kv root_kv = (Php_itm_kv)root_ary.Subs_get(0);
@@ -41,7 +41,7 @@ class Xob_subpage_parser {
 		catch (Exception e) {
 			throw Err_.new_fmt_("parse failed; src={0} err={1}", String_.new_utf8_(src), Err_.Message_gplx(e));
 		}
-		return (Xob_subpage_wiki[])wikis_list.XtoAry(Xob_subpage_wiki.class);
+		return (Xob_subpage_wiki[])wikis_list.Xto_ary(Xob_subpage_wiki.class);
 	}
 	private void Parse_wiki(Php_itm_kv wiki_tkn, Xob_subpage_wiki wiki_itm) {
 		wiki_itm.Name_(wiki_tkn.Key().Val_obj_bry());

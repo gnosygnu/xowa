@@ -42,10 +42,10 @@ public class Xou_history_html implements Bry_fmtr_arg, Xows_page {
 		mgr.Sort();
 		Bry_bfr bfr = app.Utl_bry_bfr_mkr().Get_m001(); 
 		html_grp.Bld_bfr_many(bfr, this);
-		page.Data_raw_(bfr.Mkr_rls().XtoAryAndClear());
+		page.Data_raw_(bfr.Mkr_rls().Xto_bry_and_clear());
 	}
 	public void XferAry(Bry_bfr bfr, int idx) {
-		int len = mgr.Count();
+		int len = mgr.Len();
 		for (int i = 0; i < len; i++) {
 			Xou_history_itm itm = mgr.Get_at(i);
 			html_itm.Bld_bfr_many(bfr, itm.Wiki(), itm.Page(), itm.View_count(), itm.View_end().XtoStr_fmt_yyyy_MM_dd_HH_mm());

@@ -23,7 +23,7 @@ public class Xob_categorylinks_sql extends Xob_categorylinks_base {
 	@Override public String Cmd_key() {return KEY;} public static final String KEY = "import.sql.categorylinks";
 	@Override public Io_sort_cmd Make_sort_cmd(Sql_file_parser sql_parser) {return new Xob_categorylinks_sql_make(sql_parser, wiki, idx_mode);}
 	public static final String Tbl_categorylinks = String_.Concat_lines_nl
-	(	"CREATE TABLE `categorylinks` ("
+	( "CREATE TABLE `categorylinks` ("
 	, "  `cl_from` int(10) unsigned NOT NULL DEFAULT '0',"
 	, "  `cl_to` varbinary(255) NOT NULL DEFAULT '',"
 	, "  `cl_sortkey` varbinary(230) NOT NULL DEFAULT '',"

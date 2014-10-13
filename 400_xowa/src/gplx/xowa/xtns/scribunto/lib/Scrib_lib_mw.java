@@ -108,13 +108,13 @@ public class Scrib_lib_mw implements Scrib_lib {
 			//frame.Args_eval_by_idx(core.Ctx().Src(), idx_int); // NOTE: arg[0] is always MW function name; EX: {{#invoke:Mod_0|Func_0|Arg_1}}; arg_x = "Mod_0"; args[0] = "Func_0"; args[1] = "Arg_1"
 			if (nde == null) return rslt.Init_ary_empty();
 			nde.Val_tkn().Tmpl_evaluate(ctx, src, core.Frame_parent(), tmp_bfr);
-			return rslt.Init_obj(tmp_bfr.XtoStrAndClear());
+			return rslt.Init_obj(tmp_bfr.Xto_str_and_clear());
 		}
 		else {
 			Arg_nde_tkn nde = frame.Args_get_by_key(src, Bry_.new_utf8_(idx_str));
 			if (nde == null) return rslt.Init_ary_empty();	// idx_str does not exist;
 			nde.Val_tkn().Tmpl_evaluate(ctx, src, core.Frame_parent(), tmp_bfr);
-			return rslt.Init_obj(tmp_bfr.XtoStrAndClearAndTrim());	// NOTE: must trim if key_exists; DUPE:TRIM_IF_KEY
+			return rslt.Init_obj(tmp_bfr.Xto_str_and_clear_and_trim());	// NOTE: must trim if key_exists; DUPE:TRIM_IF_KEY
 		}
 	}
 	private Arg_nde_tkn Get_arg(Xot_invk invk, int idx, int frame_arg_adj) {	// DUPE:MW_ARG_RETRIEVE
@@ -182,7 +182,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 			else {				// key exists; EX:{{a|key=val}}
 				key_as_int = Bry_.Xto_int_or(tmp_bfr.Bfr(), 0, tmp_bfr.Len(), Int_.MinValue);
 				if (key_as_int == Int_.MinValue) {		// key is not int; create str
-					key_as_str = tmp_bfr.XtoStrAndClear();
+					key_as_str = tmp_bfr.Xto_str_and_clear();
 					key_is_str = true;
 				}
 				else {									// key is int; must return int for key b/c lua treats table[1] different than table["1"]; DATE:2014-02-13
@@ -190,12 +190,12 @@ public class Scrib_lib_mw implements Scrib_lib {
 				}
 			}
 			nde.Val_tkn().Tmpl_evaluate(ctx, src, parent_frame, tmp_bfr);
-			String val = key_missing ? tmp_bfr.XtoStrAndClear() : tmp_bfr.XtoStrAndClearAndTrim(); // NOTE: must trim if key_exists; DUPE:TRIM_IF_KEY
+			String val = key_missing ? tmp_bfr.Xto_str_and_clear() : tmp_bfr.Xto_str_and_clear_and_trim(); // NOTE: must trim if key_exists; DUPE:TRIM_IF_KEY
 			KeyVal kv = key_is_str ? KeyVal_.new_(key_as_str, val) : KeyVal_.int_(key_as_int, val);
 			rv.Add(kv);
 		}
 		tmp_bfr.Mkr_rls();
-		return rslt.Init_obj((KeyVal[])rv.XtoAry(KeyVal.class));
+		return rslt.Init_obj((KeyVal[])rv.Xto_ary(KeyVal.class));
 	}
 	public boolean FrameExists(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		String frame_id = args.Pull_str(0);
@@ -221,17 +221,17 @@ public class Scrib_lib_mw implements Scrib_lib {
 		for (int i = 0; i < args_len; i++) {
 			Arg_nde_tkn arg = frame.Args_get_by_idx(i + args_adj);
 			arg.Key_tkn().Tmpl_evaluate(ctx, src, frame, tmp_bfr);
-			String key = tmp_bfr.XtoStrAndClear();
+			String key = tmp_bfr.Xto_str_and_clear();
 			if (String_.Eq(key, "")) key = Int_.Xto_str(i);
 			arg.Val_tkn().Tmpl_evaluate(ctx, src, parent_frame, tmp_bfr);	// NOTE: must evaluate against parent_frame; evaluating against current frame may cause stack-overflow; DATE:2013-04-04
-			String val = tmp_bfr.XtoStrAndClear();
+			String val = tmp_bfr.Xto_str_and_clear();
 			kv_args[i] = KeyVal_.new_(key, val);
 		}
 		Xot_invk_mock mock_frame = Xot_invk_mock.new_(Bry_.new_utf8_(frame_id), kv_args);	// use frame_id for Frame_ttl; in lieu of a better candidate; DATE:2014-09-21
 		tmp_ctx.Parse_tid_(Xop_parser_.Parse_tid_page_tmpl);	// default xnde names to template; needed for test, but should be in place; DATE:2014-06-27
 		cur_wiki.Parser().Parse_text_to_wtxt(tmp_root, tmp_ctx, tmp_ctx.Tkn_mkr(), text_bry);
 		tmp_root.Tmpl_evaluate(tmp_ctx, text_bry, mock_frame, tmp_bfr);
-		return rslt.Init_obj(tmp_bfr.Mkr_rls().XtoStrAndClear());
+		return rslt.Init_obj(tmp_bfr.Mkr_rls().Xto_str_and_clear());
 	}
 	public boolean CallParserFunction(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		String frame_id = args.Pull_str(0);
@@ -251,7 +251,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		fnc_ctx.Parse_tid_(Xop_parser_.Parse_tid_page_tmpl);	// default xnde names to template; needed for test, but should be in place; DATE:2014-06-27
 		Xot_invk_tkn.Eval_func(fnc_ctx, src, parent_frame, frame, bfr, defn, argx_ref.Val());
 		bfr.Mkr_rls();
-		return rslt.Init_obj(bfr.XtoStrAndClear());
+		return rslt.Init_obj(bfr.Xto_str_and_clear());
 	}
 	private KeyVal[] CallParserFunction_parse_args(NumberParser num_parser, Bry_obj_ref argx_ref, Bry_obj_ref fnc_name_ref, KeyVal[] args) {
 		ListAdp rv = ListAdp_.new_();
@@ -285,7 +285,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 			fnc_name = Bry_.Mid(fnc_name, 0, fnc_name_colon_pos);
 			fnc_name_ref.Val_(fnc_name);
 		}
-		return (KeyVal[])rv.XtoAry(KeyVal.class);
+		return (KeyVal[])rv.Xto_ary(KeyVal.class);
 	}
 	private static boolean Is_kv_ary(KeyVal kv) {return ClassAdp_.Eq_typeSafe(kv.Val(), KeyVal[].class);}
 	public boolean ExpandTemplate(Scrib_proc_args args, Scrib_proc_rslt rslt) {
@@ -309,7 +309,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 			Xot_defn_tmpl transclude_tmpl = ctx.Wiki().Parser().Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), ttl.Ns(), ttl.Page_db(), sub_src);
 			Bry_bfr sub_bfr = cur_wiki.Utl_bry_bfr_mkr().Get_k004();
 			transclude_tmpl.Tmpl_evaluate(ctx, sub_frame, sub_bfr);
-			return rslt.Init_obj(sub_bfr.Mkr_rls().XtoStrAndClear());
+			return rslt.Init_obj(sub_bfr.Mkr_rls().Xto_str_and_clear());
 		}
 		else {
 //				String err_msg = "expand_template failed; ttl=" + ttl_str;

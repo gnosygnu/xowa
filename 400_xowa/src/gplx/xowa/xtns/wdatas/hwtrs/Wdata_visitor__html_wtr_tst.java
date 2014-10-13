@@ -30,7 +30,7 @@ public class Wdata_visitor__html_wtr_tst {
 	@Test   public void Time() {
 		fxt
 		.Test_claim_val
-		( fxt.Wdata_fxt().Make_claim_time(1, "2001-02-03 04:05:06")
+		( fxt.Wdata_fxt().Make_claim_time(1, "2001-02-03 04:05:06", Wdata_date.Fmt_ymdhns)
 		, "4:05:06 3 Feb 2001"
 		);
 	}

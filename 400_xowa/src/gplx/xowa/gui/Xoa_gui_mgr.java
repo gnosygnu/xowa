@@ -68,7 +68,6 @@ public class Xoa_gui_mgr implements GfoEvObj, GfoInvkAble {
 		menu_mgr.Menu_bldr().Init_by_kit(app, kit, app.User().Fsys_mgr().App_img_dir().GenSubDir_nest("window", "menu"));
 		menu_mgr.Init_by_kit();
 		bnd_mgr.Init_by_kit(app);
-		app.User().Wiki().Html_mgr().Init_by_kit();
 		GfoEvMgr_.SubSame_many(app.User(), this, Xou_user.Evt_lang_changed);
 		app.Sys_cfg().Lang_(app.Sys_cfg().Lang());	// NOTE: force refresh of lang. must occur after after gui_mgr init, else menu lbls will break
 	}

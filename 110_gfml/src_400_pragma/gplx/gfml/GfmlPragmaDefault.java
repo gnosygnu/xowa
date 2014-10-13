@@ -48,7 +48,7 @@ class GfmlPragmaDefault implements GfmlPragma {
 		makr.MakeSubTypeAsOwner(	"_default");
 		makr.MakeSubTypeAsOwner(		"type", "typeKey");
 		makr.MakeSubTypeAsOwner(			"atr", "key", "val");
-		return makr.XtoAry();
+		return makr.Xto_bry();
 	}
 	public static GfmlPragmaDefault new_() {return new GfmlPragmaDefault();} GfmlPragmaDefault() {}
 	public static final GfmlTkn Default_none = GfmlTkn_.raw_("DEFAULT NONE");

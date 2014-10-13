@@ -20,8 +20,8 @@ public class Js_wtr {
 	private Bry_bfr bfr = Bry_bfr.reset_(255);
 	public byte Quote_char() {return quote_char;} public Js_wtr Quote_char_(byte v) {quote_char = v; return this;} private byte quote_char = Byte_ascii.Quote;
 	public void Clear() {bfr.Clear();}
-	public String Xto_str()						{return bfr.XtoStr();}
-	public String Xto_str_and_clear()			{return bfr.XtoStrAndClear();}
+	public String Xto_str()						{return bfr.Xto_str();}
+	public String Xto_str_and_clear()			{return bfr.Xto_str_and_clear();}
 	public Js_wtr Add_comma()					{bfr.Add_byte(Byte_ascii.Comma); return this;}
 	public Js_wtr Add_paren_bgn()				{bfr.Add_byte(Byte_ascii.Paren_bgn); return this;}
 	public Js_wtr Add_paren_end()				{bfr.Add_byte(Byte_ascii.Paren_end); return this;}

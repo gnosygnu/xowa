@@ -50,6 +50,7 @@ public class Xoh_module_mgr_tst {
 		fxt.Mgr().Itm_globals().Enabled_y_();
 		fxt.Test_write(String_.Concat_lines_nl_skip_last
 		( ""
+		, "  <link rel=\"stylesheet\" href=\"file:///mem/xowa/bin/any/xowa/html/res/src/xowa/core/core.css\" type='text/css'>"
 		, "  <script type='text/javascript'>"
 		, "    var xowa_root_dir = 'file:///mem/xowa/';"
 		, "    var xowa_mode_is_server = false;"
@@ -67,7 +68,8 @@ public class Xoh_module_mgr_tst {
 		, "      'wgMonthNamesShort' : ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],"
 		, "    }"
 		, "  </script>"
-		, "  <script src=\"file:///mem/xowa/bin/any/xowa/html/modules/xowa.core/xowa.core.js\" type='text/javascript'></script>"
+		, "  <script src=\"file:///mem/xowa/bin/any/xowa/html/res/src/xowa/core/core.js\" type='text/javascript'></script>"
+		, "  <script src=\"file:///mem/xowa/bin/any/xowa/html/res/src/xowa/core/DOMContentLoaded.js\" type='text/javascript'></script>"
 		));
 		fxt.Init_msg(Xol_msg_itm_.Id_dte_month_name_january, "January" );	// set it back
 	}
@@ -79,6 +81,7 @@ public class Xoh_module_mgr_tst {
 		fxt.Mgr().Itm_globals().Enabled_y_();
 		fxt.Test_write(String_.Concat_lines_nl_skip_last
 		( ""
+		, "  <link rel=\"stylesheet\" href=\"file:///mem/xowa/bin/any/xowa/html/res/src/xowa/core/core.css\" type='text/css'>"
 		, "  <script type='text/javascript'>"
 		, "    var xowa_root_dir = 'file:///mem/xowa/';"
 		, "    var xowa_mode_is_server = false;"
@@ -96,7 +99,8 @@ public class Xoh_module_mgr_tst {
 		, "      'wgMonthNamesShort' : ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],"
 		, "    }"
 		, "  </script>"
-		, "  <script src=\"file:///mem/xowa/bin/any/xowa/html/modules/xowa.core/xowa.core.js\" type='text/javascript'></script>"
+		, "  <script src=\"file:///mem/xowa/bin/any/xowa/html/res/src/xowa/core/core.js\" type='text/javascript'></script>"
+		, "  <script src=\"file:///mem/xowa/bin/any/xowa/html/res/src/xowa/core/DOMContentLoaded.js\" type='text/javascript'></script>"
 		));
 	}
 }
@@ -121,6 +125,6 @@ class Xoh_module_mgr_fxt {
 	}
 	public void Test_write(String expd) {
 		mgr.Write(bfr, fxt.App(), wiki, fxt.Page());
-		Tfds.Eq_str_lines(expd, bfr.XtoStrAndClear());
+		Tfds.Eq_str_lines(expd, bfr.Xto_str_and_clear());
 	}
 }

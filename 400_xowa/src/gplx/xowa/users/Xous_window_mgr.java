@@ -47,7 +47,7 @@ public class Xous_window_mgr implements GfoInvkAble {
 			Xog_tab_itm tab = tab_mgr.Tabs_get_at(i);
 			bfr.Add_str(tab.Page().Url().Xto_full_str_safe());
 		}
-		return bfr.XtoStrAndClear();
+		return bfr.Xto_str_and_clear();
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_rect))					return rect;

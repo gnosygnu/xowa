@@ -64,7 +64,7 @@ public class Xow_wiki_domain_ {
 			case Tid_wikipedia: case Tid_wiktionary: case Tid_wikisource: case Tid_wikibooks:
 			case Tid_wikiversity: case Tid_wikiquote: case Tid_wikinews: case Tid_wikivoyage:	// ~{lang}.~{type}.org
 				byte[] lang_orig = Bry_.Mid(raw, 0, dot_0);
-				byte[] lang_actl = parse_lang(lang_orig);
+				byte[] lang_actl = X_lang_to_gfs(lang_orig);
 				return new Xow_wiki_domain(raw, seg_1_tid, lang_actl, lang_orig);				// NOTE: seg_tids must match wiki_tids
 			case Tid_wikidata: case Tid_mediawiki:												// ~www.~{type}.org
 				return new Xow_wiki_domain(raw, seg_1_tid, Xol_lang_itm_.Key__unknown);
@@ -82,15 +82,15 @@ public class Xow_wiki_domain_ {
 				return Xow_wiki_domain_.new_other_(raw);
 		}
 	}
-	private static byte[] parse_lang(byte[] v) {
-		Object o = lang_map_hash.Get_by_bry(v);
+	private static final Hash_adp_bry lang_to_gfs_hash = Hash_adp_bry.ci_ascii_()	// ASCII:lang_code
+	.Add_str_obj("simple"			, Bry_.new_ascii_("en"))
+	.Add_str_obj("zh-classical"		, Bry_.new_ascii_("lzh"))
+	.Add_str_obj("no"				, Bry_.new_ascii_("nb"))
+	;
+	private static byte[] X_lang_to_gfs(byte[] v) {
+		Object o = lang_to_gfs_hash.Get_by_bry(v);
 		return o == null ? v : (byte[])o;
 	}
-	private static final Hash_adp_bry lang_map_hash = Hash_adp_bry.ci_ascii_()	// ASCII:lang_code
-	.Add_str_obj("simple"		, Bry_.new_ascii_("en"))
-	.Add_str_obj("zh-classical"	, Bry_.new_ascii_("lzh"))
-	.Add_str_obj("no"			, Bry_.new_ascii_("nb"))
-	;
 	public static final byte 
 	  Tid_other		=  0, Tid_home       =  1
 	, Tid_wikipedia =  2, Tid_wiktionary =  3, Tid_wikisource =  4, Tid_wikibooks =  5, Tid_wikiversity =  6, Tid_wikiquote = 7, Tid_wikinews = 8, Tid_wikivoyage = 9

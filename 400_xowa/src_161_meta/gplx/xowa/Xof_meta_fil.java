@@ -55,6 +55,6 @@ public class Xof_meta_fil {
 		for (int i = 0; i < depth; i++)
 			Bld_url_bfr.Add_byte(md5[i]);
 		Bld_url_bfr.Add(Bry_url_ext);
-		return Io_url_.new_fil_(Bld_url_bfr.XtoStrAndClear());
+		return Io_url_.new_fil_(Bld_url_bfr.Xto_str_and_clear());
 	}	static final byte[] Bry_url_ext = Bry_.new_ascii_(".csv"); static Bry_bfr Bld_url_bfr = Bry_bfr.new_(260);	// 260 is max path of url
 }

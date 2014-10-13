@@ -81,7 +81,7 @@ public class Xob_fxt {
 	}
 	private void tst_fils(Io_url[] ary) {
 		Io_fil[] actls = Get_actl(ary);
-		Io_fil_chkr[] expds = (Io_fil_chkr[])expd_list.XtoAry(Io_fil_chkr.class);
+		Io_fil_chkr[] expds = (Io_fil_chkr[])expd_list.Xto_ary(Io_fil_chkr.class);
 		tst_mgr.Tst_ary("all", expds, actls);		
 	}
 	Io_fil[] Get_actl(Io_url[] ary) {
@@ -135,7 +135,7 @@ public class Xob_fxt {
 	}
 	private void Test_expd_files() {
 		if (expd_list.Count() > 0) {
-			Io_fil_chkr[] expd = (Io_fil_chkr[])expd_list.XtoAry(Io_fil_chkr.class);
+			Io_fil_chkr[] expd = (Io_fil_chkr[])expd_list.Xto_ary(Io_fil_chkr.class);
 			Io_fil[] actl = wiki_();
 			tst_mgr.Tst_ary("all", expd, actl);
 		}
@@ -145,7 +145,7 @@ public class Xob_fxt {
 		wiki_fil_add(rv, wiki.Fsys_mgr().Ns_dir());
 		wiki_fil_add(rv, wiki.Fsys_mgr().Site_dir());
 		rv.Sort();
-		return (Io_fil[])rv.XtoAry(Io_fil.class);
+		return (Io_fil[])rv.Xto_ary(Io_fil.class);
 	}
 	private void wiki_fil_add(ListAdp list, Io_url root_dir) {
 		Io_url[] ary = Io_mgr._.QueryDir_args(root_dir).Recur_().ExecAsUrlAry();

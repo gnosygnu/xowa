@@ -61,7 +61,7 @@ public class z091_GfmlLxr_basic_tst {
 			if (tkn == GfmlTkn_.EndOfStream) break;
 			list.Add(tkn.Raw());
 		}
-		String[] actl = (String[])list.XtoAry(String.class);
+		String[] actl = (String[])list.Xto_ary(String.class);
 		Tfds.Eq_ary(expd, actl);
 		return tkn;
 	}

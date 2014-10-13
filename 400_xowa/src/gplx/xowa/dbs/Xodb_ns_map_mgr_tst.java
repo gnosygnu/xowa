@@ -52,6 +52,6 @@ class Xodb_ns_map_mgr_fxt {
 			}
 			bfr.Add_byte_nl();
 		}
-		return bfr.XtoStrAndClear();
+		return bfr.Xto_str_and_clear();
 	}
 }

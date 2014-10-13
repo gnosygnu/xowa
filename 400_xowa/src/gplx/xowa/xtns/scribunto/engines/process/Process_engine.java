@@ -51,8 +51,8 @@ public class Process_engine implements Scrib_engine {
 		while (true) {
 			Dispatch_bld_send(bfr, ary);
 			boolean log_enabled = scrib_opts.Lua_log_enabled();
-			if (log_enabled) app.Usr_dlg().Log_direct("sent:" + bfr.XtoStr() + "\n");
-			byte[] rsp_bry = server.Server_comm(bfr.XtoAryAndClear(), ary);
+			if (log_enabled) app.Usr_dlg().Log_direct("sent:" + bfr.Xto_str() + "\n");
+			byte[] rsp_bry = server.Server_comm(bfr.Xto_bry_and_clear(), ary);
 			if (log_enabled) app.Usr_dlg().Log_direct("rcvd:" + String_.new_utf8_(rsp_bry) + "\n\n");
 			String op = rsp.Extract(rsp_bry);
 			if		(String_.Eq(op, "return")) {

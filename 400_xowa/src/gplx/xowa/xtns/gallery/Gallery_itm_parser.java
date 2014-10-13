@@ -48,7 +48,7 @@ public class Gallery_itm_parser {
 			byte cur_mode = Parse_itm();
 			if (cur_itm.Ttl() != null) {
 				if (caption_bfr.Len() > 0)
-					cur_itm.Caption_bry_(caption_bfr.XtoAryAndClearAndTrim());
+					cur_itm.Caption_bry_(caption_bfr.Xto_bry_and_clear_and_trim());
 				Make_lnki_tkn(mgr, xnde, src);
 				rv.Add(cur_itm);
 				cur_itm = new Gallery_itm();

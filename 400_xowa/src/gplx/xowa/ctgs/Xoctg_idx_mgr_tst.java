@@ -85,7 +85,7 @@ class Xoctg_idx_mgr_fxt {
 			if (i < 10) bfr.Add_byte(Byte_ascii.Num_0);
 			bfr.Add_int_variable(i).Add_byte_pipe();
 		}
-		return bfr.XtoAryAndClear();
+		return bfr.Xto_bry_and_clear();
 	}
 	public Xoctg_idx_mgr_fxt Init_itms(int block_len, byte[] src) {idx_mgr.Block_len_(block_len); idx_mgr.Index(Gfo_usr_dlg_base.test_(), Ctg_name, src); return this;}
 	public Xoctg_idx_mgr_fxt Init_block_len(int block_len) {idx_mgr.Block_len_(block_len); return this;}

@@ -151,7 +151,7 @@ public class Int_ implements GfoInvkAble {
 			bfr.Add_int_fixed(val, len);
 		bfr.Add_byte_repeat(pad_chr, pad_len);
 		if (bgn) bfr.Add_int_fixed(val, len);	// NOTE: neg handled above
-		return bfr.XtoStr();
+		return bfr.Xto_str();
 	}
 	public static int read_(Object o) {String s = String_.as_(o); return s != null ? Int_.parse_(s) : Int_.cast_(o);}
 	public static int parse_(String raw) {try {return Integer.parseInt(raw);} catch(Exception e) {throw Err_.parse_type_exc_(e, int.class, raw);}}

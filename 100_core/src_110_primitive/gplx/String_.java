@@ -343,13 +343,13 @@ public class String_ implements GfoInvkAble {
 			c = String_.CharAt(raw, i);
 			if (c == dlm) {
 				if (!addEmptyIfDlmIsLast && sb.Count() == 0 && i == rawLen - 1) {}
-				else list.Add(sb.XtoStrAndClear());
+				else list.Add(sb.Xto_str_and_clear());
 			}
 			else
 				sb.Add(c);
 		}
 		if (sb.Count() > 0)
-			list.Add(sb.XtoStrAndClear());
+			list.Add(sb.Xto_str_and_clear());
 		return list.XtoStrAry();
 	}
 	public static String[] Split(String s, String separator) {return Split_do(s, separator, false);}
@@ -418,7 +418,7 @@ public class String_ implements GfoInvkAble {
 		while (true) {
 			if (sprMatched
 				|| i == textLength) {	// last pass; add whatever's in sb to list
-				list.Add(sb.XtoStrAndClear());
+				list.Add(sb.Xto_str_and_clear());
 				if (sprMatched && i == textLength) list.Add(""); // if s ends with spr and last pass, add emptyString as last
 				sprMatched = false;
 			}
@@ -445,7 +445,7 @@ public class String_ implements GfoInvkAble {
 				i++;
 			}
 		}		
-		return (String[])list.XtoAry(String.class);
+		return (String[])list.Xto_ary(String.class);
 	}
 	static String Mid_lang(String s, int bgn, int len) {return s.substring(bgn, bgn + len);}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

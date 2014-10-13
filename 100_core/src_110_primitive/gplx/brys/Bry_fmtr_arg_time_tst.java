@@ -37,6 +37,6 @@ class Time_fmtr_arg_fxt {
 		Bry_bfr bfr = Bry_bfr.reset_(255);
 		arg.Seconds_(seconds);
 		arg.XferAry(bfr, 0);
-		Tfds.Eq(expd, bfr.XtoStr());
+		Tfds.Eq(expd, bfr.Xto_str());
 	}
 }

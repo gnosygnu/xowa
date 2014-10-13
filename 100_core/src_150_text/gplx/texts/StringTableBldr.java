@@ -46,7 +46,7 @@ public class StringTableBldr {
 			}
 			sb.Add(String_.CrLf);
 		}
-		return sb.XtoStrAndClear();
+		return sb.Xto_str_and_clear();
 	}
 	
 	public static StringTableBldr new_() {return new StringTableBldr();} StringTableBldr() {}

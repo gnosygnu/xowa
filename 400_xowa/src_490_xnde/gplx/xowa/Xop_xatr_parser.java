@@ -347,7 +347,7 @@ public class Xop_xatr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_AT
 			++i;
 		}
 		repeated_atrs_hash.Clear();
-		return (Xop_xatr_itm[])xatrs.XtoAry(Xop_xatr_itm.class);
+		return (Xop_xatr_itm[])xatrs.Xto_ary(Xop_xatr_itm.class);
 	}
 	private void Make(Gfo_msg_log log_mgr, byte[] src, int atr_end) {
 		Xop_xatr_itm xatr = null;
@@ -366,11 +366,11 @@ public class Xop_xatr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_AT
 			log_mgr.Add_itm_none(Log_invalid_atr, src, atr_bgn, atr_end);
 		}
 		if (valid) {	// note that invalid will have no key_bgn / key_end
-			byte[] key_bry = key_bfr_on ? key_bfr.XtoAryAndClear() : Bry_.Mid(src, xatr.Key_bgn(), xatr.Key_end());
+			byte[] key_bry = key_bfr_on ? key_bfr.Xto_bry_and_clear() : Bry_.Mid(src, xatr.Key_bgn(), xatr.Key_end());
 			xatr.Key_bry_(key_bry);
 			Invalidate_repeated_atr(xatr, key_bry);
 		}
-		if (val_bfr_on) xatr.Val_bry_(val_bfr.XtoAryAndClear());
+		if (val_bfr_on) xatr.Val_bry_(val_bfr.Xto_bry_and_clear());
 		xatrs.Add(xatr);
 		mode = Mode_atr_bgn; quote_byte = Byte_ascii.Nil; valid = true;
 		atr_bgn = key_bgn = val_bgn = key_end = val_end = eq_pos = -1;

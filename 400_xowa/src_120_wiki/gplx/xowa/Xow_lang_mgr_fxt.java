@@ -60,6 +60,6 @@ public class Xow_lang_mgr_fxt {
 
 		Bry_bfr html_bfr = Bry_bfr.new_();
 		wiki.Xwiki_mgr().Lang_mgr().Html_bld(html_bfr, wiki, ctx.Cur_page().Xwiki_langs(), gplx.xowa.xtns.wdatas.Wdata_xwiki_link_wtr.Qid_null);
-	    Tfds.Eq_str_lines(expd, html_bfr.XtoStrAndClear());
+	    Tfds.Eq_str_lines(expd, html_bfr.Xto_str_and_clear());
 	}
 }

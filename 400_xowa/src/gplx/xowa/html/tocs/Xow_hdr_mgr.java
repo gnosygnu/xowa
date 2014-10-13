@@ -63,12 +63,12 @@ public class Xow_hdr_mgr {
 		Id_bld_recurse(raw_bfr, src, hdr);
 		Url_encoder encoder = wiki.App().Encoder_mgr().Id();
 		encoder.Encode(enc_bfr, raw_bfr.Bfr(), 0, raw_bfr.Len());
-		byte[] hdrs_id = enc_bfr.XtoAry();
+		byte[] hdrs_id = enc_bfr.Xto_bry();
 		Object o = hdrs_hash.Fetch(hdrs_ref.Val_(hdrs_id));
 		if (o != null) {
 			Xop_hdr_tkn hdr_0 = (Xop_hdr_tkn)o;
 			enc_bfr.Add_byte(Byte_ascii.Underline).Add_int_variable(hdr_0.Hdr_html_dupe_idx_next());
-			hdrs_id = enc_bfr.XtoAryAndClear();
+			hdrs_id = enc_bfr.Xto_bry_and_clear();
 		}
 		else {
 			hdrs_bfr.Clear();

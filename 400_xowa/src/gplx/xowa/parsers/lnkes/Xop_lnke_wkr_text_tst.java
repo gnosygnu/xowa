@@ -16,8 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import org.junit.*;
-import gplx.xowa.langs.cases.*;
+import org.junit.*; import gplx.xowa.langs.cases.*;
 public class Xop_lnke_wkr_text_tst {
 	@Before public void init() {fxt.Reset();} private Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Text_obj() {
@@ -67,5 +66,24 @@ public class Xop_lnke_wkr_text_tst {
 		,String_.Concat_lines_nl_skip_last
 		( "<a href=\"http://a.org\" class=\"external text\" rel=\"nofollow\">http://a.org</a><a href=\"/wiki/B\">B</a>"
 		));
+	}
+	@Test   public void Protocol_only() {	// PURPOSE: protocol only should return text; DATE:2014-10-09
+		fxt.Test_parse_page_wiki_str("http://"		, "http://");
+		fxt.Test_parse_page_wiki_str("http:"		, "http:");
+		fxt.Test_parse_page_wiki_str("[http://]"	, "[http://]");
+		fxt.Test_parse_page_wiki_str("[http:]"		, "[http:]");
+	}
+	@Test   public void Ignore_punctuation_at_end() {	// PURPOSE: ignore "," and related punctuation at end; DATE:2014-10-09
+		fxt.Test_parse_page_wiki_str("http://a.org,"	, "<a href=\"http://a.org\" class=\"external text\" rel=\"nofollow\">http://a.org</a>,");			// basic
+		fxt.Test_parse_page_wiki_str("http://a.org,,"	, "<a href=\"http://a.org\" class=\"external text\" rel=\"nofollow\">http://a.org</a>,,");			// many
+		fxt.Test_parse_page_wiki_str("http://a.org/b,c"	, "<a href=\"http://a.org/b,c\" class=\"external text\" rel=\"nofollow\">http://a.org/b,c</a>");	// do not ignore if in middle
+		fxt.Test_parse_page_wiki_str("http://a.org:"	, "<a href=\"http://a.org\" class=\"external text\" rel=\"nofollow\">http://a.org</a>:");			// colon at end; compare to "http:"
+	}
+	@Test   public void Ignore_punctuation_at_end__paren_end() {	// PURPOSE: end parent has special rules; DATE:2014-10-10
+		fxt.Test_parse_page_wiki_str("(http://a.org)"	, "(<a href=\"http://a.org\" class=\"external text\" rel=\"nofollow\">http://a.org</a>)");			// trim=y
+		fxt.Test_parse_page_wiki_str("http://a.org/b(c)", "<a href=\"http://a.org/b(c)\" class=\"external text\" rel=\"nofollow\">http://a.org/b(c)</a>");	// trim=n
+	}
+	@Test   public void Sym_quote() {	// PURPOSE: quote should interrupt lnke; DATE:2014-10-10
+		fxt.Test_parse_page_wiki_str("http://a.org/b\"c", "<a href=\"http://a.org/b\" class=\"external text\" rel=\"nofollow\">http://a.org/b</a>&quot;c");
 	}
 }

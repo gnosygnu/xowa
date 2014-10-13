@@ -110,7 +110,7 @@ class Xoctg_fmtr_itm_subc extends Xoctg_fmtr_itm_base {
 		Bld_contains_text_itm(bfr, Xol_msg_itm_.Id_ctgtree_subc_counts_page, sub_pages);
 		Bld_contains_text_itm(bfr, Xol_msg_itm_.Id_ctgtree_subc_counts_file, sub_files);
 		bfr.Add_byte(Byte_ascii.Paren_end);
-		return bfr.Mkr_rls().XtoAryAndClear();
+		return bfr.Mkr_rls().Xto_bry_and_clear();
 	}
 	private void Bld_contains_text_itm(Bry_bfr bfr, int msg_id, int val) {
 		if (val == 0) return;

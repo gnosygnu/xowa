@@ -53,7 +53,7 @@ public class Html_parser {
 					break;
 			}
 		}
-		return (Html_nde[])rv.XtoAry(Html_nde.class);
+		return (Html_nde[])rv.Xto_ary(Html_nde.class);
 	}
 	int cur_lhs_bgn, cur_lhs_end, cur_name_bgn, cur_name_end, cur_rhs_bgn; boolean xnde_init = true, tag_tid_is_inline = false;
 	private boolean Parse_xnde_rhs() {

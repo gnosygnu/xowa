@@ -65,7 +65,7 @@ class Db_stmt_sql implements Db_stmt {
 		try {
 			Bry_bfr bfr = Bry_bfr.new_();
 			gplx.ios.Io_stream_rdr_.Load_all_to_bfr(bfr, v);
-			Add(++val_idx, bfr.XtoStrAndClear());
+			Add(++val_idx, bfr.Xto_str_and_clear());
 		} catch (Exception e) {throw Err_.err_(e, "failed to add value: type={0} val={1}", "rdr", v);} 
 		return this;
 	}
@@ -99,8 +99,8 @@ class Db_stmt_sql implements Db_stmt {
 	public void Add(String v) {Add(-1, v);}
 	public void Add(int idx, String v) {args.Add(v);} ListAdp args = ListAdp_.new_();
 	public String Xto_sql() {
-		tmp_fmtr.Bld_bfr_many(tmp_bfr, (Object[])args.XtoAryAndClear(Object.class));
-		return tmp_bfr.XtoStrAndClear();
+		tmp_fmtr.Bld_bfr_many(tmp_bfr, (Object[])args.Xto_ary_and_clear(Object.class));
+		return tmp_bfr.Xto_str_and_clear();
 	}
 	String sql_orig; 
 	public Db_stmt Parse(String sql_str) {
@@ -119,7 +119,7 @@ class Db_stmt_sql implements Db_stmt {
 			pos_prv = pos_cur + 1;
 		}
 		tmp_bfr.Add_mid(src, pos_prv, src.length);
-		tmp_fmtr.Fmt_(tmp_bfr.XtoAryAndClear());
+		tmp_fmtr.Fmt_(tmp_bfr.Xto_bry_and_clear());
 		return this;
 	} 
 }

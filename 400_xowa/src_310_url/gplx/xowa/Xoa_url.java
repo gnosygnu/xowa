@@ -86,7 +86,7 @@ public class Xoa_url {
 			bfr.Add_byte(Byte_ascii.Eq);
 			bfr.Add(arg.Val_bry());
 		}
-		return bfr.XtoAryAndClear();
+		return bfr.Xto_bry_and_clear();
 	}
 	private int Page_bgn(int raw_len) {
 		int wiki_pos = Bry_finder.Find_fwd(raw, Xoh_href_parser.Href_wiki_bry, 0, raw_len);	 // look for /wiki/

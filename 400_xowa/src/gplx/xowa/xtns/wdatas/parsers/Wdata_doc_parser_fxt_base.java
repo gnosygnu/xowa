@@ -36,22 +36,22 @@ abstract class Wdata_doc_parser_fxt_base {
 	public void Test_entity(String raw, String expd)		{Tfds.Eq(expd, String_.new_utf8_(parser.Parse_qid(Json_doc.new_apos_(raw))));}
 	public void Test_sitelinks(String raw, Wdata_sitelink_itm... expd) {
 		OrderedHash actl_hash = parser.Parse_sitelinks(Q1_bry, Json_doc.new_apos_(raw));
-		Tfds.Eq_ary_str((Wdata_sitelink_itm[])actl_hash.XtoAry(Wdata_sitelink_itm.class), expd);
+		Tfds.Eq_ary_str((Wdata_sitelink_itm[])actl_hash.Xto_ary(Wdata_sitelink_itm.class), expd);
 	}
 	public void Test_labels(String raw, Wdata_langtext_itm... expd)		{Test_langvals(raw, Bool_.Y, expd);}
 	public void Test_descriptions(String raw, Wdata_langtext_itm... expd)	{Test_langvals(raw, Bool_.N, expd);}
 	private void Test_langvals(String raw, boolean labels_or_descriptions, Wdata_langtext_itm... expd) {
 		OrderedHash actl_hash = parser.Parse_langvals(Q1_bry, Json_doc.new_apos_(raw), labels_or_descriptions);
-		Tfds.Eq_ary_str((Wdata_langtext_itm[])actl_hash.XtoAry(Wdata_langtext_itm.class), expd);
+		Tfds.Eq_ary_str((Wdata_langtext_itm[])actl_hash.Xto_ary(Wdata_langtext_itm.class), expd);
 	}
 	public void Test_aliases(String raw, Wdata_alias_itm... expd) {
 		OrderedHash actl_hash = parser.Parse_aliases(Q1_bry, Json_doc.new_apos_(raw));
-		Tfds.Eq_ary_str((Wdata_alias_itm[])actl_hash.XtoAry(Wdata_alias_itm.class), expd);
+		Tfds.Eq_ary_str((Wdata_alias_itm[])actl_hash.Xto_ary(Wdata_alias_itm.class), expd);
 	}
 	public void Test_claims(String raw, Wdata_claim_itm_core... expd) {
 		OrderedHash actl_hash = parser.Parse_claims(Q1_bry, Json_doc.new_apos_(raw));
 		ListAdp actl_list = Wdata_claim_grp.Xto_list(actl_hash);
-		Tfds.Eq_ary_str((Wdata_claim_itm_core[])actl_list.XtoAry(Wdata_claim_itm_core.class), expd);
+		Tfds.Eq_ary_str((Wdata_claim_itm_core[])actl_list.Xto_ary(Wdata_claim_itm_core.class), expd);
 	}
 	public void Test_claims_data(String raw, Wdata_claim_itm_core expd) {
 		Json_doc jdoc = Json_doc.new_apos_(raw);
@@ -89,7 +89,7 @@ abstract class Wdata_doc_parser_fxt_base {
 				rv.Add(itm);
 			}
 		}
-		return (Wdata_claim_itm_base[])rv.XtoAryAndClear(Wdata_claim_itm_base.class);
+		return (Wdata_claim_itm_base[])rv.Xto_ary_and_clear(Wdata_claim_itm_base.class);
 	}
 	private static final byte[] Q1_bry = Bry_.new_ascii_("Q1");
 }

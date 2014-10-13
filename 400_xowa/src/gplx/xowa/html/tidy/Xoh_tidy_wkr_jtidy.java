@@ -57,7 +57,7 @@ class Xoh_tidy_wkr_jtidy implements Xoh_tidy_wkr {
 				if (tidy == null) tidy_init();			// lazy create to skip tests
 		int bfr_len = bfr.Len();
 		long bgn = Env_.TickCount();
-		byte[] orig = bfr.XtoAryAndClear();
+		byte[] orig = bfr.Xto_bry_and_clear();
 		ByteArrayInputStream rdr = new ByteArrayInputStream(orig);
 		try {
 			tidy.parse(rdr, wtr);

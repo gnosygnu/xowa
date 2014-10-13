@@ -40,7 +40,11 @@ public class Wdata_wiki_mgr_fxt {
 	public Wdata_claim_itm_core Make_claim_somevalue(int pid)		{return Wdata_claim_itm_system.new_somevalue(pid);}
 	public Wdata_claim_itm_core Make_claim_str(int pid, String val) {return Make_claim_str(pid, Bry_.new_utf8_(val));}
 	public Wdata_claim_itm_core Make_claim_str(int pid, byte[] val) {return new Wdata_claim_itm_str(pid, Wdata_dict_snak_tid.Tid_value, val);}
-	public Wdata_claim_itm_core Make_claim_time(int pid, String val) {return new Wdata_claim_itm_time(pid, Wdata_dict_snak_tid.Tid_value, Wdata_dict_value_time.Xto_time(val), Bry_.Empty, Bry_.Empty, Bry_.Empty, Bry_.Empty, Bry_.Empty);}
+	public Wdata_claim_itm_core Make_claim_time(int pid, String val) {return Make_claim_time(pid, val, Bry_.Empty, Bry_.Empty);}
+	public Wdata_claim_itm_core Make_claim_time(int pid, String val, int precision) {return Make_claim_time(pid, val, Int_.Xto_bry(precision), Bry_.Empty);}
+	public Wdata_claim_itm_core Make_claim_time(int pid, String val, byte[] precision, byte[] calendar) {
+		return new Wdata_claim_itm_time(pid, Wdata_dict_snak_tid.Tid_value, Wdata_dict_value_time.Xto_time(val), Bry_.Empty, Bry_.Empty, Bry_.Empty, precision, calendar);
+	}
 	public Wdata_claim_itm_core Make_claim_monolingual(int pid, String lang, String text) {return new Wdata_claim_itm_monolingualtext(pid, Wdata_dict_snak_tid.Tid_value, Bry_.new_utf8_(lang), Bry_.new_utf8_(text));}
 	public Wdata_claim_itm_core Make_claim_quantity(int pid, String amount, String unit, String ubound, String lbound) {return new Wdata_claim_itm_quantity(pid, Wdata_dict_snak_tid.Tid_value, Bry_.new_ascii_(amount), Bry_.new_ascii_(unit), Bry_.new_ascii_(ubound), Bry_.new_ascii_(lbound));}
 	public Wdata_claim_itm_core Make_claim_entity(int pid, int val) {return new Wdata_claim_itm_entity(pid, Wdata_dict_snak_tid.Tid_value, Int_.Xto_bry(val));}
@@ -81,7 +85,7 @@ public class Wdata_wiki_mgr_fxt {
 		regy_mgr.Save();
 
 		Bry_bfr bfr = app.Utl_bry_bfr_mkr().Get_b512().Mkr_rls();
-		byte[] itm = bfr.Add(ttl_bry).Add_byte(Byte_ascii.Pipe).Add(Bry_.new_ascii_(qid)).Add_byte_nl().XtoAryAndClear();
+		byte[] itm = bfr.Add(ttl_bry).Add_byte(Byte_ascii.Pipe).Add(Bry_.new_ascii_(qid)).Add_byte_nl().Xto_bry_and_clear();
 		Xob_xdat_file xdat_file = new Xob_xdat_file();
 		xdat_file.Insert(bfr, itm);
 		Io_url file_orig = Xob_wdata_qid_base_tst.ttl_(app.Wiki_mgr().Wdata_mgr().Wdata_wiki(), wiki, ns_num, 0);
@@ -150,7 +154,7 @@ public class Wdata_wiki_mgr_fxt {
 		parser_fxt.Exec_parse_page_all_as_str(raw);
 		Bry_bfr tmp_bfr = wiki.App().Utl_bry_bfr_mkr().Get_b512();
 		wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_view_mode.Tid_read).Wdata_lang_wtr().Page_(page).XferAry(tmp_bfr, 0);
-	    Tfds.Eq_str_lines(expd, tmp_bfr.Mkr_rls().XtoStrAndClear());
+	    Tfds.Eq_str_lines(expd, tmp_bfr.Mkr_rls().Xto_str_and_clear());
 	}
 	public void Test_xwiki_links(String ttl, String... expd) {
 		tmp_langs.Clear();
@@ -172,6 +176,6 @@ public class Wdata_wiki_mgr_fxt {
 		raw_bry = gplx.json.Json_parser_tst.Replace_apos(raw_bry);
 		Bry_bfr bfr = app.Utl_bry_bfr_mkr().Get_b512();
 		Wdata_wiki_mgr.Write_json_as_html(wdata_mgr.Jdoc_parser(), bfr, raw_bry);
-		Tfds.Eq(expd, bfr.Mkr_rls().XtoStrAndClear());
+		Tfds.Eq(expd, bfr.Mkr_rls().Xto_str_and_clear());
 	}
 }

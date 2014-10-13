@@ -40,10 +40,11 @@ public class Wdata_hwtr_msgs {
 		json_div_hdr							= brys[offset +  7]; offset += 8;
 		sym_list_comma							= brys[offset +  0];
 		sym_list_word							= brys[offset +  1];
-		sym_fmt_parentheses						= brys[offset +  2];
+		sym_time_spr							= brys[offset +  2];
 		sym_plus								= brys[offset +  3];
 		sym_minus								= brys[offset +  4];
-		sym_plusminus							= brys[offset +  5]; offset += 6;
+		sym_plusminus							= brys[offset +  5]; 
+		sym_fmt_parentheses						= brys[offset +  6]; offset += 7;
 		val_tid_novalue							= brys[offset +  0];
 		val_tid_somevalue						= brys[offset +  1]; offset += 2;
 		this.month_bgn_idx = offset;
@@ -59,15 +60,17 @@ public class Wdata_hwtr_msgs {
 		time_month_10							= brys[offset +  9];
 		time_month_11							= brys[offset + 10];
 		time_month_12							= brys[offset + 11]; offset += 12;
-		time_year_1e10_01						= brys[offset +  0];
-		time_year_1e10_02						= brys[offset +  1];
-		time_year_1e10_03						= brys[offset +  2];
-		time_year_1e10_04						= brys[offset +  3];
-		time_year_1e10_05						= brys[offset +  4];
-		time_year_1e10_06						= brys[offset +  5];
-		time_year_1e10_07						= brys[offset +  6];
-		time_year_1e10_08						= brys[offset +  7];
-		time_year_1e10_09						= brys[offset +  8]; offset += 9;
+		time_year_idx = offset;
+		time_year_1e10_00						= brys[offset +  0];
+		time_year_1e10_01						= brys[offset +  1];
+		time_year_1e10_02						= brys[offset +  2];
+		time_year_1e10_03						= brys[offset +  3];
+		time_year_1e10_04						= brys[offset +  4];
+		time_year_1e10_05						= brys[offset +  5];
+		time_year_1e10_06						= brys[offset +  6];
+		time_year_1e10_07						= brys[offset +  7];
+		time_year_1e10_08						= brys[offset +  8];
+		time_year_1e10_09						= brys[offset +  9]; offset += 10;
 		time_relative_bc						= brys[offset +  0];
 		time_relative_ago						= brys[offset +  1];
 		time_relative_in						= brys[offset +  2];
@@ -94,37 +97,6 @@ public class Wdata_hwtr_msgs {
 	}
 	public byte[][] Ary() {return ary;} private final byte[][] ary;
 	public int Month_bgn_idx() {return month_bgn_idx;} private final int month_bgn_idx;
-	public static Wdata_hwtr_msgs new_(Xow_msg_mgr msg_mgr) {
-		byte[][] brys = new_brys(msg_mgr
-		, "hide", "show", "toc"
-		, "wikibase-aliases-label"						, "wikibase-aliases-empty"
-		, "wikibase-sitelinks-sitename-columnheading"	, "wikibase-sitelinks-siteid-columnheading"
-		, "xowa-wikidata-sitelinks-hdr"					, "xowa-wikidata-sitelinks-hdr-special", "wikibase-sitelinks-link-columnheading"
-		, "xowa-wikidata-labels-hdr"					, "xowa-wikidata-labels-col"
-		, "xowa-wikidata-aliases-hdr"					, "xowa-wikidata-aliases-col"
-		, "xowa-wikidata-descriptions-hdr"				, "xowa-wikidata-descriptions-col"
-		, "wikibase-statements"						
-		, "xowa-wikidata-json"
-		, "comma-separator", "word-separator", "parentheses"
-		, "xowa-wikidata-plus", "xowa-wikidata-minus", "xowa-wikidata-plusminus"
-		, "xowa-wikidata-novalue", "xowa-wikidata-somevalue"
-		, "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"
-		, "xowa-wikidata-decade", "xowa-wikidata-century", "xowa-wikidata-millenium", "xowa-wikidata-years1e4", "xowa-wikidata-years1e5", "xowa-wikidata-years1e6", "xowa-wikidata-years1e7", "xowa-wikidata-years1e8", "xowa-wikidata-years1e9"
-		, "ago", "xowa-wikidata-bc", "xowa-wikidata-inTime"
-		, "xowa-wikidata-julian"
-		, "xowa-wikidata-north", "xowa-wikidata-south", "xowa-wikidata-east", "xowa-wikidata-west"
-		, "xowa-wikidata-degree", "xowa-wikidata-minute", "xowa-wikidata-second"
-		, "xowa-wikidata-meters"
-		);
-		return new Wdata_hwtr_msgs(brys);
-	}
-	private static byte[][] new_brys(Xow_msg_mgr msg_mgr, String... ids) {
-		int len = ids.length;
-		byte[][] rv = new byte[len][];
-		for (int i = 0; i < len; ++i)
-			rv[i] = gplx.html.Html_utl.Escape_html_as_bry(msg_mgr.Val_by_key_obj(ids[i]));
-		return rv;
-	}
 	public byte[] Toggle_title_y() {return toggle_title_y;} private byte[] toggle_title_y;
 	public byte[] Toggle_title_n() {return toggle_title_n;} private byte[] toggle_title_n;
 	public byte[] Toc_tbl_hdr() {return toc_tbl_hdr;} private final byte[] toc_tbl_hdr;
@@ -156,10 +128,11 @@ public class Wdata_hwtr_msgs {
 	public byte[] Val_tid_somevalue() {return val_tid_somevalue;} private final byte[] val_tid_somevalue;
 	public byte[] Sym_list_comma() {return sym_list_comma;} private final byte[] sym_list_comma;
 	public byte[] Sym_list_word() {return sym_list_word;} private final byte[] sym_list_word;
-	public byte[] Sym_fmt_parentheses() {return sym_fmt_parentheses;} private final byte[] sym_fmt_parentheses;
+	public byte[] Sym_time_spr() {return sym_time_spr;} private final byte[] sym_time_spr;
 	public byte[] Sym_plus() {return sym_plus;} private final byte[] sym_plus;
 	public byte[] Sym_minus() {return sym_minus;} private final byte[] sym_minus;
 	public byte[] Sym_plusminus() {return sym_plusminus;} private final byte[] sym_plusminus;
+	public byte[] Sym_fmt_parentheses() {return sym_fmt_parentheses;} private final byte[] sym_fmt_parentheses;
 	public byte[] Time_month_01() {return time_month_01;} private final byte[] time_month_01;
 	public byte[] Time_month_02() {return time_month_02;} private final byte[] time_month_02;
 	public byte[] Time_month_03() {return time_month_03;} private final byte[] time_month_03;
@@ -172,6 +145,8 @@ public class Wdata_hwtr_msgs {
 	public byte[] Time_month_10() {return time_month_10;} private final byte[] time_month_10;
 	public byte[] Time_month_11() {return time_month_11;} private final byte[] time_month_11;
 	public byte[] Time_month_12() {return time_month_12;} private final byte[] time_month_12;
+	public int Time_year_idx() {return time_year_idx;} private final int time_year_idx;
+	public byte[] Time_year_1e10_00() {return time_year_1e10_00;} private final byte[] time_year_1e10_00;
 	public byte[] Time_year_1e10_01() {return time_year_1e10_01;} private final byte[] time_year_1e10_01;
 	public byte[] Time_year_1e10_02() {return time_year_1e10_02;} private final byte[] time_year_1e10_02;
 	public byte[] Time_year_1e10_03() {return time_year_1e10_03;} private final byte[] time_year_1e10_03;
@@ -193,4 +168,59 @@ public class Wdata_hwtr_msgs {
 	public byte[] Geo_unit_minute() {return geo_unit_minute;} private final byte[] geo_unit_minute;
 	public byte[] Geo_unit_second() {return geo_unit_second;} private final byte[] geo_unit_second;
 	public byte[] Geo_meters() {return geo_meters;} private final byte[] geo_meters;
+	public static Wdata_hwtr_msgs new_en_() {
+		byte[][] brys = Bry_.Ary
+		( "hide", "show", "Contents"
+		, "Also known as:", "No aliases defined."
+		, "Language", "Code"
+		, "Links (~{wiki_type})", "other sites", "Linked page"
+		, "Labels", "Label"
+		, "Aliases", "Alias"
+		, "Descriptions", "Description"
+		, "Statements"
+		, "JSON"
+		, ",&#32;", "&#32;", ":"
+		, "+", "-", "±", "(~{0})"
+		, "—", "?"
+		, "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+		, "~{0}", "~{0}0s", "~{0}. century", "~{0}. millenium", "~{0}0,000 years", "~{0}00,000 years", "~{0} million years", "~{0}0 million years", "~{0}00 million years", "~{0} billion years"
+		, "~{0} BC", "~{0} ago", "in ~{0}", "<sup>jul</sup>"
+		, "N", "S", "E", "W"
+		, "°", "′", "″"
+		, "&nbsp;m"
+		);
+		return new Wdata_hwtr_msgs(brys);
+	}
+	public static Wdata_hwtr_msgs new_(Xow_msg_mgr msg_mgr) {
+		byte[][] brys = new_brys(msg_mgr
+		, "hide", "show", "toc"
+		, "wikibase-aliases-label"						, "wikibase-aliases-empty"
+		, "wikibase-sitelinks-sitename-columnheading"	, "wikibase-sitelinks-siteid-columnheading"
+		, "xowa-wikidata-sitelinks-hdr"					, "xowa-wikidata-sitelinks-hdr-special", "wikibase-sitelinks-link-columnheading"
+		, "xowa-wikidata-labels-hdr"					, "xowa-wikidata-labels-col"
+		, "xowa-wikidata-aliases-hdr"					, "xowa-wikidata-aliases-col"
+		, "xowa-wikidata-descriptions-hdr"				, "xowa-wikidata-descriptions-col"
+		, "wikibase-statements"						
+		, "xowa-wikidata-json"
+		, "comma-separator", "word-separator", "xowa-wikidata-time-spr"
+		, "xowa-wikidata-plus", "xowa-wikidata-minus", "xowa-wikidata-plusminus"
+		, "parentheses"
+		, "xowa-wikidata-novalue", "xowa-wikidata-somevalue"
+		, "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"
+		, "xowa-wikidata-year", "xowa-wikidata-decade", "xowa-wikidata-century", "xowa-wikidata-millenium", "xowa-wikidata-years1e4", "xowa-wikidata-years1e5", "xowa-wikidata-years1e6", "xowa-wikidata-years1e7", "xowa-wikidata-years1e8", "xowa-wikidata-years1e9"
+		, "ago", "xowa-wikidata-bc", "xowa-wikidata-inTime"
+		, "xowa-wikidata-julian"
+		, "xowa-wikidata-north", "xowa-wikidata-south", "xowa-wikidata-east", "xowa-wikidata-west"
+		, "xowa-wikidata-degree", "xowa-wikidata-minute", "xowa-wikidata-second"
+		, "xowa-wikidata-meters"
+		);
+		return new Wdata_hwtr_msgs(brys);
+	}
+	private static byte[][] new_brys(Xow_msg_mgr msg_mgr, String... ids) {
+		int len = ids.length;
+		byte[][] rv = new byte[len][];
+		for (int i = 0; i < len; ++i)
+			rv[i] = gplx.html.Html_utl.Escape_html_as_bry(msg_mgr.Val_by_key_obj(ids[i]));
+		return rv;
+	}
 }

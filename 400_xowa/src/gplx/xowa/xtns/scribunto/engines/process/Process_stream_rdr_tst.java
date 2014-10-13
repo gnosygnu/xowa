@@ -65,7 +65,7 @@ class Process_stream_rdr_fxt {
 					break;
 			}
 		}
-		expd_str = bfr.XtoStrAndClear();
+		expd_str = bfr.Xto_str_and_clear();
 		return this;
 	} 	Bry_bfr bfr = Bry_bfr.reset_(128);
 	public void Test_read_body() {

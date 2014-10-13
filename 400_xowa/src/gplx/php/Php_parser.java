@@ -49,7 +49,7 @@ public class Php_parser {
 		Init_lxr(list, new Php_lxr_num());
 		Init_lxr(list, new Php_lxr_quote(Byte_ascii.Apos));
 		Init_lxr(list, new Php_lxr_quote(Byte_ascii.Quote));
-		lxrs = (Php_lxr[])list.XtoAry(Php_lxr.class);
+		lxrs = (Php_lxr[])list.Xto_ary(Php_lxr.class);
 		lxrs_len = list.Count();
 	}
 	private void Init_lxr(ListAdp list, Php_lxr lxr) {

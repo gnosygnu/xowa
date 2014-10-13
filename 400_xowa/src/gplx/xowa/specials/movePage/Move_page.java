@@ -73,7 +73,7 @@ public class Move_page implements Xows_page {
 		, msg_mgr.Val_by_key_obj("move-leave-redirect")
 		, msg_mgr.Val_by_key_obj("movepagebtn")
 		);
-		return tmp_bfr.Mkr_rls().XtoAryAndClear();
+		return tmp_bfr.Mkr_rls().Xto_bry_and_clear();
 	}
 	private Bry_fmtr fmtr_all = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<form action='/wiki/Special:MovePage' id='movepage'>"

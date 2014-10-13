@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.xowa.parsers.tblws.*;
 public class Xop_tblw_td_tkn_chkr extends Xop_tkn_chkr_base {
 	@Override public Class<?> TypeOf() {return Xop_tblw_td_tkn.class;}
 	@Override public byte Tkn_tid() {return Xop_tkn_itm_.Tid_tblw_td;}

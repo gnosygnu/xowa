@@ -102,7 +102,7 @@ public class Listing_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 		}
 		bfr.Add(Xoa_consts.Invk_end);			// "}}"
 		Xop_ctx sub_ctx = Xop_ctx.new_sub_(wiki);
-		html_output = wiki.Parser().Parse_text_to_html(sub_ctx, bfr.Mkr_rls().XtoAryAndClear());			
+		html_output = wiki.Parser().Parse_text_to_html(sub_ctx, bfr.Mkr_rls().Xto_bry_and_clear());			
 		return true;
 	}
 	private void Bld_by_args(Listing_xtn_mgr xtn_mgr, Html_wtr wtr, Xop_xnde_tkn xnde, byte[] src) {
@@ -202,7 +202,7 @@ public class Listing_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 		tmp_bfr.Add(rv);							// rv is not message, but actually template precursor
 		tmp_bfr.Add(Xoa_consts.Invk_end);			// "}}"
 		Xop_ctx sub_ctx = Xop_ctx.new_sub_(wiki);
-		rv = wiki.Parser().Parse_text_to_html(sub_ctx, tmp_bfr.XtoAryAndClear());
+		rv = wiki.Parser().Parse_text_to_html(sub_ctx, tmp_bfr.Xto_bry_and_clear());
 		Xol_msg_itm position_text = xtn_mgr.Position_text();
 		if (Bry_.Len_eq_0(position_text.Val())) return rv;
 		return position_text.Fmt(tmp_bfr, rv);

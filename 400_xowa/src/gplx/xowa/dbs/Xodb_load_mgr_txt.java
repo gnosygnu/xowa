@@ -24,7 +24,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 	}	private Xow_wiki wiki; Xow_fsys_mgr fsys_mgr;
 	Xob_xdat_file tmp_xdat_file = new Xob_xdat_file(); Xob_xdat_itm tmp_xdat_itm = new Xob_xdat_itm(); 
 	public void Load_init			(Xow_wiki wiki) {}
-	public void Load_page(Xodb_page rv, Xow_ns ns, boolean timestamp_enabled) {Load_page(rv, rv.Db_file_idx(), rv.Db_row_idx(), ns, timestamp_enabled, tmp_xdat_file, tmp_xdat_itm);}
+	public void Load_page(Xodb_page rv, Xow_ns ns, boolean timestamp_enabled) {Load_page(rv, rv.Text_db_id(), rv.Db_row_idx(), ns, timestamp_enabled, tmp_xdat_file, tmp_xdat_itm);}
 	public void Load_page(Xodb_page rv, int txtdb_fil_idx, int txtdb_row_idx, Xow_ns ns, boolean timestamp_enabled, Xob_xdat_file xdat_file, Xob_xdat_itm xdat_itm) {
 		Io_url file = fsys_mgr.Url_ns_fil(Xow_dir_info_.Tid_page, ns.Id(), txtdb_fil_idx);
 		byte[] bry = gplx.ios.Io_stream_rdr_.Load_all(file); int bry_len = bry.length;
@@ -526,7 +526,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 			this.Load_by_ttl(page, ns, ttl);
 
 			Load_ctg_v2_main(ctg_temp, page.Ttl_wo_ns());
-			Xodb_category_itm ctg_itm = Xodb_category_itm.load_(page.Id(), page.Db_file_idx(), ctg_temp.Hidden(), ctg_temp.Total_by_tid(Xoa_ctg_mgr.Tid_subc), ctg_temp.Total_by_tid(Xoa_ctg_mgr.Tid_file), ctg_temp.Total_by_tid(Xoa_ctg_mgr.Tid_page)); 
+			Xodb_category_itm ctg_itm = Xodb_category_itm.load_(page.Id(), page.Text_db_id(), ctg_temp.Hidden(), ctg_temp.Total_by_tid(Xoa_ctg_mgr.Tid_subc), ctg_temp.Total_by_tid(Xoa_ctg_mgr.Tid_file), ctg_temp.Total_by_tid(Xoa_ctg_mgr.Tid_page)); 
 			page.Xtn_(ctg_itm);
 			rv[i] = page;
 		}

@@ -55,6 +55,10 @@ public class Xow_wiki_alias_tst {
 	@Test  public void Build_alias_by_lang_tid() {
 		fxt.Build_alias_by_lang_tid("en", Xow_wiki_domain_.Tid_wikipedia, "enwiki");
 	}
+	@Test   public void Parse_by_wmf_key() {
+		fxt.Test_parse_by_wmf_key("enwiki", "en", "en.wikipedia.org");
+		fxt.Test_parse_by_wmf_key("zh_yuewiki", "zh-yue", "zh-yue.wikipedia.org");
+	}
 }
 class Xow_wiki_alias_fxt {
 	Xow_wiki_alias file = new Xow_wiki_alias();
@@ -82,6 +86,11 @@ class Xow_wiki_alias_fxt {
 	}
 	public void Build_alias_by_lang_tid(String lang_key, byte wiki_tid, String expd) {
 		Xow_wiki_alias.Build_alias_by_lang_tid(tmp_bfr, Bry_.new_ascii_(lang_key), wiki_tid_ref.Val_(wiki_tid));
-		Tfds.Eq_bry(Bry_.new_utf8_(expd), tmp_bfr.XtoAryAndClear());
+		Tfds.Eq_bry(Bry_.new_utf8_(expd), tmp_bfr.Xto_bry_and_clear());
 	}	static final Byte_obj_ref wiki_tid_ref = Byte_obj_ref.zero_();
+	public void Test_parse_by_wmf_key(String wmf_key, String expd_lang_key, String expd_domain) {
+		Xow_wiki_domain domain = Xow_wiki_alias.parse_by_wmf_key(Bry_.new_ascii_(wmf_key));
+		Tfds.Eq(expd_lang_key	, String_.new_ascii_(domain.Lang_key()));
+		Tfds.Eq(expd_domain		, String_.new_ascii_(domain.Domain_bry()));
+	}
 }

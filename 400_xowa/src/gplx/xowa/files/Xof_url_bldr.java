@@ -55,9 +55,9 @@ public class Xof_url_bldr {
 		this.md5_dir_depth = repo.Dir_depth();
 		return this;
 	}
-	public byte[] Xto_bry() {Bld(); byte[] rv = bfr.XtoAryAndClear(); Clear(); return rv;}
-	public String Xto_str() {Bld(); String rv = bfr.XtoStr(); Clear(); return rv;}
-	public Io_url Xto_url() {Bld(); Io_url rv = Io_url_.new_fil_(bfr.XtoStr()); Clear(); return rv;}
+	public byte[] Xto_bry() {Bld(); byte[] rv = bfr.Xto_bry_and_clear(); Clear(); return rv;}
+	public String Xto_str() {Bld(); String rv = bfr.Xto_str(); Clear(); return rv;}
+	public Io_url Xto_url() {Bld(); Io_url rv = Io_url_.new_fil_(bfr.Xto_str()); Clear(); return rv;}
 	private void Bld() {
 		Add_core();
 		if (file_is_thumb) {

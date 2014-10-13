@@ -35,6 +35,6 @@ public class Xop_tkn_print_tst {
 		Xot_fmtr_prm raw_fmtr = new Xot_fmtr_prm();
 		defn.Root().Tmpl_fmt(ctx, raw_bry, raw_fmtr);
 		raw_fmtr.Print(tst_Print_bb);
-		Tfds.Eq(raw, tst_Print_bb.XtoStrAndClear());
+		Tfds.Eq(raw, tst_Print_bb.Xto_str_and_clear());
 	}	private Bry_bfr tst_Print_bb = Bry_bfr.new_();
 }

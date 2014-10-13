@@ -222,7 +222,7 @@ class Xowh_sidebar_mgr_fxt {
 	}
 	public void Test_html(String expd) {
 		sidebar_mgr.Bld_html(bfr);
-		Tfds.Eq_str_lines(expd, bfr.XtoStrAndClear());
+		Tfds.Eq_str_lines(expd, bfr.Xto_str_and_clear());
 	}
 	String Xto_str_grps(Xowh_sidebar_mgr mgr) {
 		int len = mgr.Grps_len();
@@ -237,7 +237,7 @@ class Xowh_sidebar_mgr_fxt {
 		String_bldr sb = String_bldr_.new_();
 		for (int i = 0; i < ary_len; i++)
 			sb.Add(Xto_str(ary[i]));
-		return sb.XtoStrAndClear();
+		return sb.Xto_str_and_clear();
 	}
 	String Xto_str(Xowh_sidebar_itm cur) {
 		String_bldr sb = String_bldr_.new_();
@@ -253,6 +253,6 @@ class Xowh_sidebar_mgr_fxt {
 		int itms_len = cur.Itms_len();
 		for (int i = 0; i< itms_len; i++)
 			sb.Add(Xto_str(cur.Itms_get_at(i)));
-		return sb.XtoStrAndClear();
+		return sb.Xto_str_and_clear();
 	}
 }

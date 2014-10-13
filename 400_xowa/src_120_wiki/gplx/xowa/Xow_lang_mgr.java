@@ -144,7 +144,7 @@ class Xow_lang_html implements Bry_fmtr_arg {
 					else
 						tmp_bfr.Add(Xoh_href_parser.Href_site_bry).Add(domain).Add(Xoh_href_parser.Href_wiki_bry);
 					if (!itm.Empty_xwiki()) tmp_bfr.Add(page_name);
-					grp.Html_itm().Bld_bfr_many(bfr, lang_key, domain, local_name, tmp_bfr.XtoAryAndClear(), page_name);
+					grp.Html_itm().Bld_bfr_many(bfr, lang_key, domain, local_name, tmp_bfr.Xto_bry_and_clear(), page_name);
 					++grp_counter;
 					if (grp_counter == 3) {
 						row_opened = false;

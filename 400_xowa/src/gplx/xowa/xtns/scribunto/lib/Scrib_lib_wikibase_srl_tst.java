@@ -354,7 +354,7 @@ class Scrib_lib_wikibase_srl_fxt {
 	private String Xto_str(KeyVal[] ary) {
 		Bry_bfr bfr = Bry_bfr.new_();
 		Xto_str(bfr, ary, 0);
-		return bfr.XtoStrAndClear();
+		return bfr.Xto_str_and_clear();
 	}
 	private void Xto_str(Bry_bfr bfr, KeyVal[] ary, int depth) {
 		int len = ary.length;

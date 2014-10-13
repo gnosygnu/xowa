@@ -43,7 +43,7 @@ public class Xodbv_page_tbl {
 		page.Modified_on_	(DateAdp_.parse_fmt(rdr.Read_str(3), Page_touched_fmt));
 		page.Type_redirect_	(rdr.Read_byte(4) == 1);
 		page.Text_len_		(rdr.Read_int(5));
-		page.Db_file_idx_	(rdr.Read_int(6));
+		page.Text_db_id_	(rdr.Read_int(6));
 		page.Html_db_id_	(rdr.Read_int(7));
 	}
 	private static final String Page_touched_fmt = "yyyyMMddHHmmss";

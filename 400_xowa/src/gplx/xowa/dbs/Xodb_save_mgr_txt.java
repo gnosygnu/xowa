@@ -45,14 +45,14 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 		if (Bry_.Len_gt_0(page_rdr_bry)) page_rdr.Parse(page_rdr_bry, page_rdr_bry.length, page_rdr_url);
 		int row_idx = page_rdr.Count();
 		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
-		page_rdr.Insert(tmp_bfr, tmp.XtoAryAndClear());
+		page_rdr.Insert(tmp_bfr, tmp.Xto_bry_and_clear());
 		this.Data_save(Xow_dir_info_.Tid_page, page_rdr, page_rdr_url, tmp_bfr);
 		tmp_bfr.Mkr_rls();
 		
 		Xoa_ttl redirect_ttl = redirect_mgr.Extract_redirect(text, text_len);
 		db_page.Set_all_(page_id, fil_idx, row_idx, redirect_ttl != null, text_len, ttl.Page_db());
 		Xodb_page_.Txt_ttl_save(tmp, db_page);
-		byte[] ttl_row_bry = tmp.Mkr_rls().XtoAryAndClear();
+		byte[] ttl_row_bry = tmp.Mkr_rls().Xto_bry_and_clear();
 		Xowd_hive_mgr ttl_hive = new Xowd_hive_mgr(wiki, Xow_dir_info_.Tid_ttl);
 		ttl_hive.Create(ttl.Ns(), ttl.Page_db(), ttl_row_bry, Bry_comparer_fld_last._);
 		wiki.Db_mgr().Load_mgr().Clear();	// NOTE: need to clear cached regy_ary in load_mgr
@@ -77,7 +77,7 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 		}
 		// update page
 		Xob_xdat_file page_rdr = new Xob_xdat_file(); Xob_xdat_itm page_itm = new Xob_xdat_itm();
-		load_mgr.Load_page(tmp_page, db_page.Db_file_idx(), db_page.Db_row_idx(), ns, true, page_rdr, page_itm);
+		load_mgr.Load_page(tmp_page, db_page.Text_db_id(), db_page.Db_row_idx(), ns, true, page_rdr, page_itm);
 		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
 		if (text == null) text = tmp_page.Text(); 
 		int text_len = text.length;
@@ -87,8 +87,8 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 			page.Revision_data().Modified_on_(modified_on);
 		}
 		Xodb_page_.Txt_page_save(tmp_bfr, db_page.Id(), modified_on, ttl_bry, text, true);
-		page_rdr.Update(tmp_bfr, page_itm, tmp_bfr.XtoAryAndClear());
-		Io_url page_rdr_url = fsys_mgr.Url_ns_fil(Xow_dir_info_.Tid_page, ttl.Ns().Id(), db_page.Db_file_idx());
+		page_rdr.Update(tmp_bfr, page_itm, tmp_bfr.Xto_bry_and_clear());
+		Io_url page_rdr_url = fsys_mgr.Url_ns_fil(Xow_dir_info_.Tid_page, ttl.Ns().Id(), db_page.Text_db_id());
 		this.Data_save(Xow_dir_info_.Tid_page, page_rdr, page_rdr_url, tmp_bfr);
 		tmp_bfr.Mkr_rls();
 		// update ttl
@@ -97,7 +97,7 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 		db_page.Type_redirect_(redirect_ttl != null);
 		Bry_bfr tmp = wiki.Utl_bry_bfr_mkr().Get_b512();
 		Xodb_page_.Txt_ttl_save(tmp, db_page);
-		byte[] ttl_row_bry = tmp.XtoAryAndClear();
+		byte[] ttl_row_bry = tmp.Xto_bry_and_clear();
 		tmp.Mkr_rls();
 		Xowd_hive_mgr ttl_hive = new Xowd_hive_mgr(wiki, Xow_dir_info_.Tid_ttl);
 		ttl_hive.Update(ns, old_ttl, new_ttl, ttl_row_bry, Xodb_page_.Txt_ttl_pos, Byte_ascii.Pipe, true, true);

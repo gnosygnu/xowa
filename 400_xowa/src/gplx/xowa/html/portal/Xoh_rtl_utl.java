@@ -33,7 +33,7 @@ public class Xoh_rtl_utl {
 			pos = ul_end;
 		}
 		bfr.Add_mid(src, pos, src_len);			// add rest of String
-		return bfr.XtoAryAndClear();			// exit
+		return bfr.Xto_bry_and_clear();			// exit
 	}
 	private static void Reverse_li_src(Bry_bfr bfr, byte[] src, int ul_bgn, int ul_end, int[] tmp_ary) {
 		int pos = ul_bgn;

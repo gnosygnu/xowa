@@ -33,10 +33,10 @@ class Db_obj_ary_fxt {
 	public Db_obj_ary_fxt Test_sql(String expd) {
 		Sql_cmd_wtr_ansi cmd_wtr = (Sql_cmd_wtr_ansi)Sql_cmd_wtr_ansi_.default_();
 		String_bldr sb = String_bldr_.new_();
-		crt.Flds_((Db_fld[])flds_list.XtoAryAndClear(Db_fld.class));
-		crt.Vals_((Object[][])vals_list.XtoAryAndClear(Object[].class));
+		crt.Flds_((Db_fld[])flds_list.Xto_ary_and_clear(Db_fld.class));
+		crt.Vals_((Object[][])vals_list.Xto_ary_and_clear(Object[].class));
 		cmd_wtr.Append_db_obj_ary(sb, crt);
-		Tfds.Eq(expd, sb.XtoStrAndClear());
+		Tfds.Eq(expd, sb.Xto_str_and_clear());
 		return this;
 	}
 }

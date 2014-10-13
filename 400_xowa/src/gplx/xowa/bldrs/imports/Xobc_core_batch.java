@@ -30,7 +30,7 @@ public class Xobc_core_batch implements GfoInvkAble {
 			bz2_fil.Fil_(bz2_fil_url).Parse(bz2_fil_url.NameOnly());
 			fmtr.Bld_bfr_many(bfr, bz2_fil_url.Raw(), bz2_fil.Domain());
 			bldr.Usr_dlg().Note_many(GRP_KEY, "bgn", "starting script for ~{0}", String_.new_utf8_(bz2_fil.Domain()));
-			bldr.App().Gfs_mgr().Run_str(bfr.XtoStrAndClear());
+			bldr.App().Gfs_mgr().Run_str(bfr.Xto_str_and_clear());
 		}
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

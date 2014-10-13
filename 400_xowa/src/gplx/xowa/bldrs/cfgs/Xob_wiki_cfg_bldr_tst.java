@@ -89,7 +89,7 @@ public class Xob_wiki_cfg_bldr_tst {
 //				String[] terms = String_.Split(line, '|');
 //				sb.Add(lang_code).Add("|").Add(String_.Trim(terms[0])).Add("|").Add(String_.Trim(terms[1])).Add("\n");
 //			}
-//			Tfds.Write(sb.XtoStrAndClear());
+//			Tfds.Write(sb.Xto_str_and_clear());
 //		}
 	@Test  public void Ns_aliases() {
 		Io_mgr._.InitEngine_mem();
@@ -144,7 +144,7 @@ public class Xob_wiki_cfg_bldr_tst {
 			}
 			catch(Exception e) {sb.Add("// fail: " + wiki + " " + Err_.Message_gplx_brief(e)).Add_char_nl();}
 		}
-		return sb.XtoStrAndClear();
+		return sb.Xto_str_and_clear();
 	}
 }
 class Xob_wiki_cfg_bldr_fxt {

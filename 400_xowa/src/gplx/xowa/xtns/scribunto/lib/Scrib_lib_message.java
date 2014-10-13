@@ -131,7 +131,7 @@ class Scrib_lib_message_data {
 		if (Bry_.Len_eq_0(msg_val)) {
 			Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
 			bfr.Add(gplx.html.Html_entity_.Lt_bry).Add(msg_key).Add(gplx.html.Html_entity_.Gt_bry);	// NOTE: Message.php has logic that says: if plain, "< >", else "&lt; &gt;"; for now, always use escaped
-			return bfr.Mkr_rls().XtoAryAndClear();
+			return bfr.Mkr_rls().Xto_bry_and_clear();
 		}
 		switch (fmt_tid) {
 			case Fmt_tid_parse:
@@ -139,7 +139,7 @@ class Scrib_lib_message_data {
 				break;
 			case Fmt_tid_parseAsBlock:	// NOTE: MW passes msg_val through parser and strips <p> if tid==parse; XOWA does the opposite, so add <p> if parseAsBlock requested
 				Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
-				msg_val = bfr.Add(Html_tag_.P_lhs).Add(msg_val).Add(Html_tag_.P_rhs).Mkr_rls().XtoAryAndClear();
+				msg_val = bfr.Add(Html_tag_.P_lhs).Add(msg_val).Add(Html_tag_.P_rhs).Mkr_rls().Xto_bry_and_clear();
 				break;
 			case Fmt_tid_escaped:
 				msg_val = gplx.html.Html_utl.Escape_html_as_bry(msg_val);

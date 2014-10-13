@@ -30,7 +30,7 @@ public class Fsdb_db_atr_tbl {
 				rv.Add(itm);
 			}
 		} finally {rdr.Rls();}
-		return (Fsdb_db_atr_fil[])rv.XtoAry(Fsdb_db_atr_fil.class);
+		return (Fsdb_db_atr_fil[])rv.Xto_ary(Fsdb_db_atr_fil.class);
 	}
 	public static void Commit_all(Db_provider provider, Fsdb_db_atr_fil[] ary) {
 		stmt_bldr.Init(provider);

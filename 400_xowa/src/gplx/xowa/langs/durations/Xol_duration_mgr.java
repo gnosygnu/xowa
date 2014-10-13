@@ -37,7 +37,7 @@ public class Xol_duration_mgr {
 				rv.Add(new Xol_interval_itm(itm, val));
 			}
 		}
-		return (Xol_interval_itm[])rv.XtoAry(Xol_interval_itm.class);
+		return (Xol_interval_itm[])rv.Xto_ary(Xol_interval_itm.class);
 	}
 	public byte[] Format_durations(Xop_ctx ctx, long seconds, Xol_duration_itm[] ary) {
 		if (interval_msgs == null) Format_durations_init();
@@ -84,7 +84,7 @@ public class Xol_duration_mgr {
 					tmp_bfr.Add(segs_ary[i]);
 				}
 				tmp_bfr.Add(Msg_and).Add(Msg_word_separator).Add(segs_ary[last_idx]);
-				return tmp_bfr.XtoAryAndClear();
+				return tmp_bfr.Xto_bry_and_clear();
 		}
 	}
 }

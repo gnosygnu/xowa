@@ -51,7 +51,7 @@ public class Insider_html_bldr implements Bry_fmtr_arg {
 			if (hash.Has(user_ttl_bry)) continue;
 			hash.Add(user_ttl_bry, user_ttl_bry);
 			href_parser.Encoder().Encode(tmp_ttl, user_ttl_bry);
-			user_ttl_bry = tmp_ttl.XtoAryAndClear();
+			user_ttl_bry = tmp_ttl.Xto_bry_and_clear();
 			fmtr_itm.Bld_bfr(bfr, user_ttl_bry, user_ttl.Page_txt());
 		}
 	}

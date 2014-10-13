@@ -61,7 +61,7 @@ public class Xob_stat_mgr {
 					nsRegy.AddKeyVal(itm.Ns());
 			}
 		}
-		return (String[])nsRegy.XtoAry(String.class);
+		return (String[])nsRegy.Xto_ary(String.class);
 	}
 	OrderedHash regy = OrderedHash_.new_();
 }

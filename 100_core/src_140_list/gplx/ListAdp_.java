@@ -73,8 +73,8 @@ class ListAdp_null implements ListAdp {
 	public void MoveTo(int elemPos, int newPos) {}
 	public boolean RangeCheck(int v) {return false;}
 	public void ResizeBounds(int i) {}
-	public Object XtoAry(Class<?> memberType) {return Object_.Ary_empty;}
-	public Object XtoAryAndClear(Class<?> memberType) {return Object_.Ary_empty;}
+	public Object Xto_ary(Class<?> memberType) {return Object_.Ary_empty;}
+	public Object Xto_ary_and_clear(Class<?> memberType) {return Object_.Ary_empty;}
 	public String XtoStr() {return "< NULL LIST >";}
 	public String[] XtoStrAry() {return new String[0];}
 	public java.util.Iterator iterator() {return Iterator_null._;}

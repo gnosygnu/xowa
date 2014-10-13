@@ -25,7 +25,7 @@ public class Xoh_module_itm__mathjax implements Xoh_module_itm {
 	public void Write_css_script(Xoa_app app, Xow_wiki wiki, Xoa_page page, Xoh_module_wtr wtr) {}
 	public void Write_js_include(Xoa_app app, Xow_wiki wiki, Xoa_page page, Xoh_module_wtr wtr) {
 		if (!enabled) return;
-		if (Url_mathjax == null) Url_mathjax = app.Fsys_mgr().Bin_any_dir().GenSubFil_nest("javascript", "xowa", "mathjax", "xowa_mathjax.js").To_http_file_bry();
+		if (Url_mathjax == null) Url_mathjax = app.Fsys_mgr().Bin_any_dir().GenSubFil_nest("xowa", "xtns", "Math", "modules", "mathjax", "xowa_mathjax.js").To_http_file_bry();
 		wtr.Write_js_include(Url_mathjax);
 	}
 	public void Write_js_head_script(Xoa_app app, Xow_wiki wiki, Xoa_page page, Xoh_module_wtr wtr) {}

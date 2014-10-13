@@ -56,7 +56,7 @@ public class z400_GfmlTypeMakr_tst {
 		Tfds.Eq(expdKey, typeMakr.Owner().Key());
 	}
 	void tst_XtoAry(GfmlTypeMakr typeMakr, String... expdAry) {
-		GfmlType[] actlTypeAry = typeMakr.XtoAry();
+		GfmlType[] actlTypeAry = typeMakr.Xto_bry();
 		String[] actlAry = new String[actlTypeAry.length];
 		for (int i = 0; i < actlAry.length; i++) {
 			actlAry[i] = actlTypeAry[i].Key();

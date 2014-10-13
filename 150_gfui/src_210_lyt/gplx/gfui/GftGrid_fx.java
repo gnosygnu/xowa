@@ -51,7 +51,7 @@ class GftGrid_fx {
 	public GftGrid_fx ini_Set(int idx, GftBand orig) {return ini_Set(idx, idx, orig);}
 	public GftGrid_fx ini_Set(int bgn, int end, GftBand orig) {curGrid.Bands_set(bgn, end, orig); return this;}
 	public GftGrid_fx run() {
-		GftItem[] ary = (GftItem[])itms.XtoAry(GftItem.class);
+		GftItem[] ary = (GftItem[])itms.Xto_ary(GftItem.class);
 		grid.Exec(owner, ary);
 		return this;
 	}

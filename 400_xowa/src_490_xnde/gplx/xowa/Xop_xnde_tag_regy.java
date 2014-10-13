@@ -38,7 +38,7 @@ public class Xop_xnde_tag_regy {
 			if (itm.Xtn()) rv.Add(itm);
 		for (Xop_xnde_tag itm : more)
 			rv.Add(itm);
-		return (Xop_xnde_tag[])rv.XtoAry(Xop_xnde_tag.class);
+		return (Xop_xnde_tag[])rv.Xto_ary(Xop_xnde_tag.class);
 	}
 	private void Init_reg(Btrie_slim_mgr tag_regy, Xop_xnde_tag... ary) {
 		for (Xop_xnde_tag tag : ary) {

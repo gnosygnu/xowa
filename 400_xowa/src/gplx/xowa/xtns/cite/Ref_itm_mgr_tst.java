@@ -70,10 +70,10 @@ class Xtn_ref_nde_chkr implements Tst_chkr {
 		rv += mgr.Tst_val(idx_minor == -1, path, "idx_minor", idx_minor, actl.Idx_minor());
 		rv += mgr.Tst_val(uid == -1, path, "uid", uid, actl.Uid());
 		if (related != null)
-			rv += mgr.Tst_sub_ary(related, XtoAry(actl), "related", rv);
+			rv += mgr.Tst_sub_ary(related, Xto_bry(actl), "related", rv);
 		return rv;
 	}
-	Ref_nde[] XtoAry(Ref_nde itm) {
+	Ref_nde[] Xto_bry(Ref_nde itm) {
 		int len = itm.Related_len();
 		Ref_nde[] rv = new Ref_nde[len];
 		for (int i = 0; i < len; i++)

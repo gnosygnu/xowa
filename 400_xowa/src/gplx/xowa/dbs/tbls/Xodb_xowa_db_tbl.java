@@ -30,6 +30,7 @@ public class Xodb_xowa_db_tbl {
 				;
 		} finally {stmt.Rls();}
 	}
+	public void Commit_all(Xodb_fsys_mgr db_fs) {this.Commit_all(db_fs.Provider_core(), db_fs.Files_ary());}
 	public void Commit_all(Db_provider provider, Xodb_file[] ary) {
 		stmt_bldr.Init(provider);
 		try {
@@ -61,7 +62,7 @@ public class Xodb_xowa_db_tbl {
 				list.Add(db);
 			}
 		} finally {rdr.Rls();}
-		Xodb_file[] rv = (Xodb_file[])list.XtoAry(Xodb_file.class);
+		Xodb_file[] rv = (Xodb_file[])list.Xto_ary(Xodb_file.class);
 		Chk_sequential(rv);
 		return rv;
 	}

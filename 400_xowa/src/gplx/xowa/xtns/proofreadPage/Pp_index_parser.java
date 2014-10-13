@@ -108,7 +108,7 @@ class Pp_index_page {
 		if (bgn_page_ref.Val() == -1) bgn_page_ref.Val_(0);				// NOTE: set "from" which will be passed to {{MediaWiki:Proofreadpage_header_template}}; DATE:2014-05-21
 		if (end_page_ref.Val() == -1) end_page_ref.Val_(list_len - 1);  // NOTE: set "to"   which will be passed to {{MediaWiki:Proofreadpage_header_template}}; DATE:2014-05-21
 		if (rv.Count() == 0) return Pp_pages_nde.Ttls_null;
-		return (Xoa_ttl[])rv.XtoAry(Xoa_ttl.class);
+		return (Xoa_ttl[])rv.Xto_ary(Xoa_ttl.class);
 	}
 	private static Xoa_ttl new_ttl_(Xow_wiki wiki, int ns_page_id, byte[] bry) {return bry == null ? Xoa_ttl.Null : Xoa_ttl.parse_(wiki, ns_page_id, bry);}
 	public static final Pp_index_page Null = new Pp_index_page();

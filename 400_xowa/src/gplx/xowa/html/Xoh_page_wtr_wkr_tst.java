@@ -60,7 +60,7 @@ class Xoh_page_wtr_wkr_fxt {
 		Xoh_page_wtr_mgr mgr = wiki.Html_mgr().Page_wtr_mgr();
 		Xoh_page_wtr_wkr wkr = mgr.Wkr(Xopg_view_mode.Tid_edit).Page_(page).Mgr_(mgr);
 		wkr.XferAry(tmp_bfr, 0);
-		Tfds.Eq(expd, tmp_bfr.XtoStrAndClear());
+		Tfds.Eq(expd, tmp_bfr.Xto_str_and_clear());
 	}
 	public void Test_read(String page_name, String page_text, String expd) {
 		wiki.Html_mgr().Page_wtr_mgr().Html_capable_(true);
@@ -70,6 +70,6 @@ class Xoh_page_wtr_wkr_fxt {
 		Xoh_page_wtr_mgr mgr = wiki.Html_mgr().Page_wtr_mgr();
 		Xoh_page_wtr_wkr wkr = mgr.Wkr(Xopg_view_mode.Tid_read).Page_(page).Mgr_(mgr);
 		wkr.XferAry(tmp_bfr, 0);
-		Tfds.Eq(expd, tmp_bfr.XtoStrAndClear());
+		Tfds.Eq(expd, tmp_bfr.Xto_str_and_clear());
 	}
 }

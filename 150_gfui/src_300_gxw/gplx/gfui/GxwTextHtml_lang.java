@@ -215,7 +215,7 @@ class GxwTextHtml_editor extends JEditorPane implements GxwTextHtml {
 		Element elm = Html_sel_elm(); if (elm == null) return KeyVal_.Ary_empty;
 		ListAdp sel_atrs_list = ListAdp_.new_();
 		Html_sel_atrs(elm.getAttributes(), sel_atrs_list, null, ".");
-		return (KeyVal[])sel_atrs_list.XtoAry(KeyVal.class);
+		return (KeyVal[])sel_atrs_list.Xto_ary(KeyVal.class);
 	}
 
 	@Override public void processKeyEvent(KeyEvent e) 					{

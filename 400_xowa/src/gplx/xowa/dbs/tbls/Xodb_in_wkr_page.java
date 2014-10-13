@@ -57,10 +57,10 @@ class Xodb_in_wkr_page_title extends Xodb_in_wkr_page_base {
 	@Override public Xodb_page Eval_rslts_key(Xodb_page rdr_page) {return (Xodb_page)hash.Fetch(rdr_page.Ttl_wo_ns());}
 }
 class Xodb_in_wkr_page_title_ns extends Xodb_in_wkr_page_base {
-	private Xow_wiki wiki;
+	private Xow_ns_mgr ns_mgr;
 	private OrderedHash hash;
-	@Override public int Interval() {return 64;}	// NOTE: 96+ overflows; EX: w:Space_Liability_Convention; DATE:2013-10-24
-	public void Init(Xow_wiki wiki, OrderedHash hash) {this.wiki = wiki; this.hash = hash;}
+	@Override public int Interval() {return 64;}	// NOTE: 96+ overflows; PAGE:en.w:Space_Liability_Convention; DATE:2013-10-24
+	public void Init(Xow_ns_mgr ns_mgr, OrderedHash hash) {this.ns_mgr = ns_mgr; this.hash = hash;}
 	@Override public String In_fld_name() {return Xodb_page_tbl.Fld_page_title;}
 	@Override public Criteria In_filter(Object[] part_ary) {
 		int len = part_ary.length;
@@ -77,7 +77,7 @@ class Xodb_in_wkr_page_title_ns extends Xodb_in_wkr_page_base {
 		}
 	}
 	@Override public Xodb_page Eval_rslts_key(Xodb_page rdr_page) {
-		Xow_ns ns = wiki.Ns_mgr().Ids_get_or_null(rdr_page.Ns_id());
+		Xow_ns ns = ns_mgr.Ids_get_or_null(rdr_page.Ns_id());
 		if (ns == null) return null;	// NOTE: ns seems to "randomly" be null when threading during redlinks; guard against null; DATE:2014-01-03
 		byte[] ttl_wo_ns = rdr_page.Ttl_wo_ns();
 		rdr_page.Ttl_(ns, ttl_wo_ns);
@@ -99,9 +99,9 @@ abstract class Xodb_in_wkr_page_base extends Xodb_in_wkr_base {
 		)
 		;
 	}
-	@Override public void Eval_rslts(Cancelable cancelable, Xow_wiki wiki, DataRdr rdr) {
+	@Override public void Eval_rslts(Cancelable cancelable, Xodb_ctx db_ctx, DataRdr rdr) {
 		Xodb_page temp = new Xodb_page();
-		boolean html_db_enabled = wiki.Db_mgr().Hdump_mgr().Enabled();
+		boolean html_db_enabled = db_ctx.Html_db_enabled();
 		while (rdr.MoveNextPeer()) {
 			if (cancelable.Canceled()) return;
 			if (fill_idx_fields_only)
@@ -134,7 +134,7 @@ class Xodb_in_wkr_category_id extends Xodb_in_wkr_base {
 			stmt.Val_int_(page.Id());		
 		}
 	}
-	@Override public void Eval_rslts(Cancelable cancelable, Xow_wiki wiki, DataRdr rdr) {
+	@Override public void Eval_rslts(Cancelable cancelable, Xodb_ctx db_ctx, DataRdr rdr) {
 		while (rdr.MoveNextPeer()) {
 			if (cancelable.Canceled()) return;
 			Xodb_category_itm ctg_data = Xodb_category_tbl.Read_ctg(rdr);

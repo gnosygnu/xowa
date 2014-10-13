@@ -85,7 +85,7 @@ public class Xop_redirect_mgr {
 		Bry_bfr fmt_bfr = app.Utl_bry_bfr_mkr().Get_b512();
 		app.Tmp_fmtr().Fmt_(msg_itm.Val()).Bld_bfr_one(fmt_bfr, redirect_bfr);
 		redirect_bfr.Clear().Mkr_rls(); fmt_bfr.Mkr_rls();
-		return fmt_bfr.XtoAryAndClear();
+		return fmt_bfr.Xto_bry_and_clear();
 	}	private static byte[] Bry_redirect_dlm = Bry_.new_ascii_(" <--- "), Bry_redirect_arg = Bry_.new_ascii_("?redirect=no");		
 }
 class Xop_redirect_mgr_ {

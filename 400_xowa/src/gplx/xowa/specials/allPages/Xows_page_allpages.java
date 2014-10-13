@@ -119,7 +119,7 @@ public class Xows_page_allpages implements GfoInvkAble, Bry_fmtr_arg, Xows_page 
 		byte[] anchor_prv = Build_html_end(tmp_bfr, rslt_prv, false);
 		byte[] anchor_nxt = Build_html_end(tmp_bfr, rslt_nxt, true);
 		html_all.Bld_bfr_many(tmp_bfr, this, anchor_prv, anchor_nxt);
-		page.Data_raw_(tmp_bfr.XtoAryAndClear());
+		page.Data_raw_(tmp_bfr.Xto_bry_and_clear());
 		tmp_bfr.Mkr_rls();
 		page.Html_data().Html_restricted_n_();
 	}

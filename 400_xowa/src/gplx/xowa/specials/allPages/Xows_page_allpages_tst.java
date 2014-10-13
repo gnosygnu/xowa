@@ -183,7 +183,7 @@ class Xows_page_allpages_fxt {
 		if (expd_nxt != null) Tfds.Eq(expd_nxt, Xto_str(wiki, allpages.Rslt_nxt()));
 		if (expd_prv != null) Tfds.Eq(expd_prv, Xto_str(wiki, allpages.Rslt_prv()));
 		if (expd_args.Count() > 0) {
-			Gfo_url_arg[] expd_args_ary = (Gfo_url_arg[])expd_args.XtoAry(Gfo_url_arg.class); 
+			Gfo_url_arg[] expd_args_ary = (Gfo_url_arg[])expd_args.Xto_ary(Gfo_url_arg.class); 
 			Tfds.Eq_ary_str(Xto_str_ary(init_url.Args()), Xto_str_ary(expd_args_ary));
 		}
 		return this;
@@ -196,7 +196,7 @@ class Xows_page_allpages_fxt {
 	}
 	private void Exec_build() {
 		if (allpages.Itms_per_page() != init_itms_per_page) allpages.Itms_per_page_(init_itms_per_page);
-		init_url.Args_((Gfo_url_arg[])init_args.XtoAry(Gfo_url_arg.class));
+		init_url.Args_((Gfo_url_arg[])init_args.Xto_ary(Gfo_url_arg.class));
 		init_args.Clear();
 		Xoa_ttl init_ttl = Make_init_ttl();
 		allpages.Build_data(init_url, init_ttl);

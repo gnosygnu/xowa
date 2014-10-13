@@ -35,7 +35,7 @@ public class Xob_xdat_file {
 		bfr.Add_mid(src, itm_0_bgn, itm.Itm_bgn());
 		bfr.Add(v);
 		bfr.Add_mid(src, itm.Itm_end() + 1, src.length);	// NOTE: + 1 to skip nl
-		src = bfr.XtoAryAndClear();
+		src = bfr.Xto_bry_and_clear();
 		return this;
 	}
 	byte[][] Src_extract_brys(int ary_len) {
@@ -63,7 +63,7 @@ public class Xob_xdat_file {
 			itm_bgn = itm_end;
 			bfr.Add(bry);
 		}
-		src = bfr.XtoAryAndClear(); 		
+		src = bfr.Xto_bry_and_clear(); 		
 	}
 	public void Insert(Bry_bfr bfr, byte[] itm) {
 		int ary_len = itm_ends.length;
@@ -97,7 +97,7 @@ public class Xob_xdat_file {
 		}
 		if (insert) bfr.Add(new_itm);
 		itm_0_bgn = (ary_len * Len_idx_itm) + Len_itm_dlm;
-		src = bfr.XtoAryAndClear(); 
+		src = bfr.Xto_bry_and_clear(); 
 	}	static final byte Dlm_hdr_fld = Byte_ascii.Pipe, Dlm_row = Byte_ascii.NewLine;		
 	public void Save(Io_url url) {
 		Bry_bfr bfr = Bry_bfr.new_();
@@ -192,7 +192,7 @@ public class Xob_xdat_file {
 			bfr.Add(row);
 			bfr.Add(dlm);
 		}
-		return bfr.XtoAryAndClear();
+		return bfr.Xto_bry_and_clear();
 	}
 }
 class Xob_xdat_file_ {

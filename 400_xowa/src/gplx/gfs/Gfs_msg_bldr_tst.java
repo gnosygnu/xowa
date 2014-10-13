@@ -71,6 +71,6 @@ class Gfs_msg_bldr_fxt {
 			if (i != 0) sb.Add_char_crlf();
 			sb.Add(ary[i].XtoStr());
 		}
-		return sb.XtoStrAndClear();
+		return sb.Xto_str_and_clear();
 	}
 }

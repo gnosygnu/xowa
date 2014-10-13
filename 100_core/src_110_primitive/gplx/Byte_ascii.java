@@ -42,7 +42,23 @@ public class Byte_ascii {
 		, Curly_end		= 125, Tilde			= 126
 		;
 	public static final byte Max_7_bit = (byte)127, Ascii_min = 0, Ascii_max = 127;
-	public static final byte[] Space_len2 = new byte[] {Space, Space}, Space_len4 = new byte[] {Space, Space, Space, Space};
+	public static boolean Is_sym(byte b) {
+		switch (b) {
+			case Byte_ascii.Bang: case Byte_ascii.Quote:
+			case Byte_ascii.Hash: case Byte_ascii.Dollar: case Byte_ascii.Percent: case Byte_ascii.Amp: case Byte_ascii.Apos:
+			case Byte_ascii.Paren_bgn: case Byte_ascii.Paren_end: case Byte_ascii.Asterisk: case Byte_ascii.Plus: case Byte_ascii.Comma:
+			case Byte_ascii.Dash: case Byte_ascii.Dot: case Byte_ascii.Slash:
+			case Byte_ascii.Colon: case Byte_ascii.Semic:
+			case Byte_ascii.Lt: case Byte_ascii.Eq: case Byte_ascii.Gt: case Byte_ascii.Question: case Byte_ascii.At:
+			case Byte_ascii.Brack_bgn: case Byte_ascii.Backslash: case Byte_ascii.Brack_end: case Byte_ascii.Pow:								
+			case Byte_ascii.Underline: case Byte_ascii.Tick:
+			case Byte_ascii.Curly_bgn: case Byte_ascii.Pipe:
+			case Byte_ascii.Curly_end: case Byte_ascii.Tilde:
+				return true;
+			default:
+				return false;
+		}
+	}
 	public static boolean Is_ltr(byte b) {
 		return (	b >= Byte_ascii.Ltr_a && b <= Byte_ascii.Ltr_z
 				||	b >= Byte_ascii.Ltr_A && b <= Byte_ascii.Ltr_Z);
@@ -69,6 +85,7 @@ public class Byte_ascii {
 			: b
 		  ;
 	}
+	public static final byte[] Space_len2 = new byte[] {Space, Space}, Space_len4 = new byte[] {Space, Space, Space, Space};
 	public static final byte[]
 	  Tab_bry				= new byte[] {Byte_ascii.Tab}
 	, NewLine_bry			= new byte[] {Byte_ascii.NewLine}

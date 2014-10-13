@@ -63,7 +63,7 @@ public class Map_geolink_func extends Pf_func_base {
 	private static final Xol_msg_itm tmp_msg_itm = new Xol_msg_itm(-1, Bry_.Empty);
 	private static byte[] Xto_coord(Bry_bfr bfr, Map_math math, boolean pass, byte[] dir, byte[] or) {
 		return pass
-			? bfr.Add_double(Math_.Abs_double(math.Dec())).Add_byte(Byte_ascii.Underline).Add(dir).XtoAryAndClear()
+			? bfr.Add_double(Math_.Abs_double(math.Dec())).Add_byte(Byte_ascii.Underline).Add(dir).Xto_bry_and_clear()
 			: or
 			;
 	}
@@ -75,7 +75,7 @@ public class Map_geolink_func extends Pf_func_base {
 	}
 	private static byte[] Xto_dec(Bry_bfr bfr, Map_math math, boolean pass) {
 		return pass
-			? bfr.Add_double(math.Dec()).XtoAryAndClear()
+			? bfr.Add_double(math.Dec()).Xto_bry_and_clear()
 			: Bry_arg_5_fail
 			;
 	}

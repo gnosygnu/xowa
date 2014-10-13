@@ -163,7 +163,7 @@ class Php_parser_fxt {
 	public void tst_tkns(String raw, Php_tkn_chkr_base... expd) {
 		byte[] raw_bry = Bry_.new_utf8_(raw);
 		parser.Parse_tkns(raw_bry, tkn_wkr);
-		Php_tkn[] actl = (Php_tkn[])tkn_wkr.List().XtoAry(Php_tkn.class);
+		Php_tkn[] actl = (Php_tkn[])tkn_wkr.List().Xto_ary(Php_tkn.class);
 		tst_mgr.Vars().Clear().Add("raw_bry", raw_bry);
 		tst_mgr.Tst_ary("", expd, actl);
 		log_mgr_chkr.tst(tst_mgr, tkn_wkr.Msg_log());
@@ -171,7 +171,7 @@ class Php_parser_fxt {
 	public void tst_lines(String raw, Php_line_assign_chkr... expd) {
 		byte[] raw_bry = Bry_.new_utf8_(raw);
 		parser.Parse_tkns(raw_bry, line_wkr);
-		Php_line[] actl = (Php_line[])line_wkr.List().XtoAry(Php_line.class);
+		Php_line[] actl = (Php_line[])line_wkr.List().Xto_ary(Php_line.class);
 		tst_mgr.Vars().Clear().Add("raw_bry", raw_bry);
 		tst_mgr.Tst_ary("", expd, actl);
 		log_mgr_chkr.tst(tst_mgr, line_wkr.Msg_log());
@@ -380,7 +380,7 @@ class Gfo_msg_log_chkr implements Tst_chkr {
 		Gfo_msg_data[] actl_itms = new Gfo_msg_data[actl_itms_len];		
 		for (int i = 0; i < actl_itms_len; i++)
 			actl_itms[i] = actl.Ary_get(i);
-		mgr.Tst_ary("itms", (Gfo_msg_data_chkr[])itms.XtoAry(Gfo_msg_data_chkr.class), actl_itms);
+		mgr.Tst_ary("itms", (Gfo_msg_data_chkr[])itms.Xto_ary(Gfo_msg_data_chkr.class), actl_itms);
 	}
 }
 class Gfo_msg_data_chkr implements Tst_chkr {

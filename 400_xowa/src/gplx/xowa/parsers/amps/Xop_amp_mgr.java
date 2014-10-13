@@ -77,7 +77,7 @@ public class Xop_amp_mgr {
 				tmp_bfr.Add_byte(b);
 			++pos;
 		}
-		return dirty ? tmp_bfr.XtoAryAndClear() : src;
+		return dirty ? tmp_bfr.Xto_bry_and_clear() : src;
 	}
 	public boolean Parse_as_int(boolean ncr_is_hex, byte[] src, int src_len, int amp_pos, int int_bgn) {
 		rslt_pos = amp_pos + 1;	// default to fail pos; after amp;

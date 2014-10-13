@@ -80,7 +80,7 @@ public class Gfo_url_parser {
 			while (loop) {
 				if (pos == end) {
 					encoder.Decode(src, bgn, end, tmp_bfr, false);
-					url.Site_(tmp_bfr.XtoAryAndClear());
+					url.Site_(tmp_bfr.Xto_bry_and_clear());
 					url.Err_(Gfo_url.Err_protocol_missing); pass = false;
 					break;
 				}
@@ -109,7 +109,7 @@ public class Gfo_url_parser {
 					case Byte_ascii.Slash:
 						if (pos == 0 && pos + 1 < end && src[pos + 1] == Byte_ascii.Slash) {	// starts with "//"
 							encoder.Decode(src, bgn, pos, tmp_bfr, false);
-							url.Site_(tmp_bfr.XtoAryAndClear());
+							url.Site_(tmp_bfr.Xto_bry_and_clear());
 							url.Protocol_is_relative_(true);
 							url.Protocol_tid_(relative_url_protocol);
 							byte[] protocol_bry = Xoo_protocol_itm.Ary()[relative_url_protocol].Key_w_colon_bry();
@@ -119,7 +119,7 @@ public class Gfo_url_parser {
 						}
 						else {																	// has "/"
 							encoder.Decode(src, bgn, pos, tmp_bfr, false);
-							url.Site_(tmp_bfr.XtoAryAndClear());
+							url.Site_(tmp_bfr.Xto_bry_and_clear());
 							Parse_segs(src, pos + 1, end);
 							loop = false;
 							url.Err_(Gfo_url.Err_protocol_missing); pass = false;
@@ -208,7 +208,7 @@ public class Gfo_url_parser {
 			}			
 			++pos;
 		}
-		url.Segs_((byte[][])segs.XtoAry(byte[].class));
+		url.Segs_((byte[][])segs.Xto_ary(byte[].class));
 	}
 	private void Parse_anchor(byte[] src, int bgn, int end) {		
 		if (bgn == end) return;
@@ -263,32 +263,32 @@ public class Gfo_url_parser {
 			++pos;
 		}
 		url.Args_bgn_(bgn - 1);	// NOTE: bgn is 1st char after ?; -1 to place at ?
-		url.Args_((Gfo_url_arg[])args.XtoAry(Gfo_url_arg.class));
+		url.Args_((Gfo_url_arg[])args.Xto_ary(Gfo_url_arg.class));
 	}
 	private void Site_set(byte[] src, int bgn, int end, int dot_count, int dot_pos_0, int dot_pos_1) {
 		encoder.Decode(src, bgn, end, tmp_bfr, false);
-		url.Site_(tmp_bfr.XtoAryAndClear());
+		url.Site_(tmp_bfr.Xto_bry_and_clear());
 		switch (dot_count) {
 			default:
 			case 2:
 				encoder.Decode(src, bgn, dot_pos_0, tmp_bfr, false);
-				url.Site_sub_(tmp_bfr.XtoAryAndClear());
+				url.Site_sub_(tmp_bfr.Xto_bry_and_clear());
 				encoder.Decode(src, dot_pos_0 + 1, dot_pos_1, tmp_bfr, false);
-				url.Site_name_(tmp_bfr.XtoAryAndClear());
+				url.Site_name_(tmp_bfr.Xto_bry_and_clear());
 				encoder.Decode(src, dot_pos_1 + 1, end, tmp_bfr, false);
-				url.Site_domain_(tmp_bfr.XtoAryAndClear());
+				url.Site_domain_(tmp_bfr.Xto_bry_and_clear());
 				break;
 			case 1:
 				encoder.Decode(src, bgn, dot_pos_0, tmp_bfr, false);
-				url.Site_name_(tmp_bfr.XtoAryAndClear());
+				url.Site_name_(tmp_bfr.Xto_bry_and_clear());
 				encoder.Decode(src, dot_pos_0 + 1, end, tmp_bfr, false);
-				url.Site_domain_(tmp_bfr.XtoAryAndClear());
+				url.Site_domain_(tmp_bfr.Xto_bry_and_clear());
 				break;
 		}
 	}
 	private void Segs_add(byte[] src, int bgn, int end) {
 		encoder.Decode(src, bgn, end, tmp_bfr, false);
-		byte[] seg = tmp_bfr.XtoAryAndClear();
+		byte[] seg = tmp_bfr.Xto_bry_and_clear();
 		if (url.Page() != null)
 			segs.Add(url.Page());
 		url.Page_(seg);
@@ -296,13 +296,13 @@ public class Gfo_url_parser {
 	}
 	private void Anchor_set(byte[] src, int bgn, int end) {
 		encoder.Decode(src, bgn, end, tmp_bfr, false);
-		url.Anchor_(tmp_bfr.XtoAryAndClear());
+		url.Anchor_(tmp_bfr.Xto_bry_and_clear());
 	}
 	private void Args_add(byte[] src, int key_bgn, int key_end, int val_bgn, int val_end) {
 		encoder.Decode(src, key_bgn, key_end, tmp_bfr, false);
-		byte[] key = tmp_bfr.XtoAryAndClear();
+		byte[] key = tmp_bfr.Xto_bry_and_clear();
 		encoder.Decode(src, val_bgn, val_end, tmp_bfr, false);
-		byte[] val = tmp_bfr.XtoAryAndClear();
+		byte[] val = tmp_bfr.Xto_bry_and_clear();
 		Gfo_url_arg arg = new Gfo_url_arg(key, val);
 		args.Add(arg);
 	}

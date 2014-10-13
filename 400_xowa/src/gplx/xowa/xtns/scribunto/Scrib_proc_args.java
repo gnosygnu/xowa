@@ -98,7 +98,7 @@ public class Scrib_proc_args {
 				bfr.Add_byte(Byte_ascii.Eq);
 				bfr.Add_str(kv.Val_to_str_or_empty());
 			}
-			return bfr.Mkr_rls().XtoAryAndClear();
+			return bfr.Mkr_rls().Xto_bry_and_clear();
 		}
 		else {
 			wiki.App().Gui_wtr().Warn_many("", "", "unknown type for GetUrl query args: ~{0}", ClassAdp_.NameOf_type(qry_args_cls));

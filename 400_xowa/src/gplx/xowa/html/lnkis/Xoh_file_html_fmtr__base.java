@@ -43,7 +43,7 @@ public class Xoh_file_html_fmtr__base implements Xoh_file_img_wkr {
 		scratch_bfr.Add(Bry_style_bgn);
 		scratch_bfr.Add_int_variable(div2_width);
 		scratch_bfr.Add(Bry_style_end);
-		fmtr_thumb_core.Bld_bfr_many(tmp_bfr, uid, div1_halign, scratch_bfr.XtoAryAndClear(), div2_content);
+		fmtr_thumb_core.Bld_bfr_many(tmp_bfr, uid, div1_halign, scratch_bfr.Xto_bry_and_clear(), div2_content);
 	}	private static final byte[] Bry_style_bgn = Bry_.new_ascii_("style=\"width:"), Bry_style_end = Bry_.new_ascii_("px;\"");
 	protected Bry_fmtr fmtr_thumb_core = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last	// REF.MW: Linker.php|makeImageLink2
 	( "<div class=\"thumb t~{div1_halign}\">"
@@ -56,7 +56,7 @@ public class Xoh_file_html_fmtr__base implements Xoh_file_img_wkr {
 	);
 	public byte[] Html_thumb_part_img(Bry_bfr tmp_bfr, Xoa_page page, Xof_xfer_itm xfer_itm, Xop_lnki_tkn lnki, int uid, byte[] a_href, byte[] img_src, byte[] img_alt) {
 		Html_thumb_part_img(tmp_bfr, page, xfer_itm, uid, a_href, lnki.Ttl().Page_txt(), xfer_itm.Html_w(), xfer_itm.Html_h(), img_src, img_alt);
-		return tmp_bfr.XtoAryAndClear();
+		return tmp_bfr.Xto_bry_and_clear();
 	}
 	public void Html_thumb_part_img(Bry_bfr tmp_bfr, Xoa_page page, Xof_xfer_itm xfer_itm, int uid, byte[] a_href, byte[] a_title, int img_w, int img_h, byte[] img_src, byte[] img_alt) {
 		fmtr_thumb_part_img.Bld_bfr_many(tmp_bfr, uid, a_href, a_title, arg_img_core.Init(uid, img_src, img_w, img_h), img_alt);

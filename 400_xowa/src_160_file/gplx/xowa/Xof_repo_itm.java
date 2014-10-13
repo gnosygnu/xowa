@@ -61,7 +61,7 @@ public class Xof_repo_itm implements GfoInvkAble {
 			if (o == null)		wnt_tmp_bfr.Add_byte(b);		// regular char; add orig byte
 			else				wnt_tmp_bfr.Add((byte[])o);		// invalid char; add swap byte(s)
 		}
-		return wnt_tmp_bfr.XtoAryAndClear();
+		return wnt_tmp_bfr.Xto_bry_and_clear();
 	}	private static final Bry_bfr wnt_tmp_bfr = Bry_bfr.reset_(255); private static final Btrie_slim_mgr wnt_trie = trie_make();
 	public static byte[] Ttl_shorten_ttl(int ttl_max, byte[] ttl, byte[] md5, Xof_ext ext) {
 		byte[] rv = ttl;
@@ -72,7 +72,7 @@ public class Xof_repo_itm implements GfoInvkAble {
 			wnt_tmp_bfr.Add(md5);												// add md5;					EX: "abcdefghijklmnopqrstuvwxyz0123456"
 			wnt_tmp_bfr.Add_byte(Byte_ascii.Dot);								// add dot;					EX: "."
 			wnt_tmp_bfr.Add(ext.Ext());											// add ext;					EX: ".png"
-			rv = wnt_tmp_bfr.XtoAryAndClear();
+			rv = wnt_tmp_bfr.Xto_bry_and_clear();
 		}
 		return rv;
 	}
@@ -85,9 +85,9 @@ public class Xof_repo_itm implements GfoInvkAble {
 			if (o == null)		tmp_bfr.Add_byte(b);
 			else				tmp_bfr.Add((byte[])o);
 		}
-		byte[] rv = tmp_bfr.XtoAryAndReset(300);
+		byte[] rv = tmp_bfr.Xto_bry_and_clear();
 		return rv;
-	}	private Bry_bfr tmp_bfr = Bry_bfr.new_(); Btrie_slim_mgr trie = trie_make();
+	}	private Bry_bfr tmp_bfr = Bry_bfr.reset_(300); Btrie_slim_mgr trie = trie_make();
 	private static Btrie_slim_mgr trie_make() {
 		Btrie_slim_mgr rv = Btrie_slim_mgr.cs_();
 		byte[] invalid = Op_sys.Wnt.Fsys_invalid_chars();
@@ -107,7 +107,7 @@ public class Xof_repo_itm implements GfoInvkAble {
 			tmp_bfr.Add(md5);												// add md5;					EX: "abcdefghijklmnopqrstuvwxyz0123456"
 			tmp_bfr.Add_byte(Byte_ascii.Dot);
 			tmp_bfr.Add(ext_bry);
-			rv = tmp_bfr.XtoAryAndReset(300);
+			rv = tmp_bfr.Xto_bry_and_clear();
 		}
 		return rv;
 	}

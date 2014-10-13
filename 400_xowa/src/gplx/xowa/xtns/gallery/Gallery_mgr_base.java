@@ -62,7 +62,7 @@ public abstract class Gallery_mgr_base {
 			page.Hdump_data().Data_add(new Hdump_data_gallery(gallery_uid, max_width));
 		}
 		byte[] box_cls = Fmt_and_add(tmp_bfr, box_cls_fmtr, xnde.Atr_cls(), this.Tid_bry());
-		byte[] gallery_ul_id = tmp_bfr.Add(box_id_prefix_bry).Add_int_variable(gallery_uid).XtoAryAndClear();
+		byte[] gallery_ul_id = tmp_bfr.Add(box_id_prefix_bry).Add_int_variable(gallery_uid).Xto_bry_and_clear();
 		Box_hdr_write(bfr, wiki.App().Html_mgr().Whitelist_mgr(), src, gallery_ul_id, box_cls, box_style, xnde.Atrs_other(), hctx_is_hdump, gallery_uid);
 		byte[] box_caption = xnde.Atr_caption();
 		if (Bry_.Len_gt_0(box_caption)) box_caption_fmtr.Bld_bfr_many(bfr, box_caption);
@@ -91,7 +91,7 @@ public abstract class Gallery_mgr_base {
 			;
 		}
 		int img_uid = xfer_itm.Html_uid();
-		byte[] gallery_li_id = tmp_bfr.Add(itm_id_prefix_bry).Add_int_variable(img_uid).XtoAryAndClear();
+		byte[] gallery_li_id = tmp_bfr.Add(itm_id_prefix_bry).Add_int_variable(img_uid).Xto_bry_and_clear();
 		byte[] itm_html = Bry_.Empty;
 		int html_w_expand = xfer_itm.Html_w();
 		int html_h_expand = xfer_itm.Html_h();
@@ -129,7 +129,7 @@ public abstract class Gallery_mgr_base {
 			itm_div1_fmtr.Bld_bfr_many(tmp_bfr, vpad_fmtr.Init(img_uid, vpad));	// <div style="margin:~{vpad}px auto;">
 			wiki.Html_mgr().Html_wtr().Lnki_wtr().Write_file(tmp_bfr, ctx, hctx, src, lnki, xfer_itm, alt);
 			tmp_bfr.Add(itm_divs_end_bry);
-			itm_html = tmp_bfr.XtoAryAndClear();
+			itm_html = tmp_bfr.Xto_bry_and_clear();
 		}
 
 		byte[] show_filenames_link = Bry_.Empty;
@@ -144,8 +144,8 @@ public abstract class Gallery_mgr_base {
 		itm_li_bgn_fmtr.Bld_bfr_many(bfr, gallery_li_id, box_w_fmtr_arg.Init(img_uid, itm_div_width));
 		bfr.Add(itm_html);
 		wiki.Parser().Parse_text_to_html(tmp_bfr, page, true, itm_caption);
-		itm_caption = tmp_bfr.XtoAryAndClear();
-		itm_caption = tmp_bfr.Add(show_filenames_link).Add(itm_caption).XtoAryAndClear();
+		itm_caption = tmp_bfr.Xto_bry_and_clear();
+		itm_caption = tmp_bfr.Add(show_filenames_link).Add(itm_caption).Xto_bry_and_clear();
 		Wrap_gallery_text(bfr, itm_caption, html_w_expand, html_h_expand);
 		bfr.Add(itm_li_end_bry);
 		if (hctx_is_hdump)
@@ -187,7 +187,7 @@ public abstract class Gallery_mgr_base {
 			tmp_bfr.Add_byte_space();
 			tmp_bfr.Add(trailer);
 		}
-		return tmp_bfr.XtoAryAndClear();
+		return tmp_bfr.Xto_bry_and_clear();
 	}
 	private static void Box_hdr_write(Bry_bfr bfr, Xop_xatr_whitelist_mgr whitelist_mgr, byte[] src, byte[] gallery_ul_uid, byte[] cls, byte[] style, ListAdp xatr_list, boolean hctx_is_hdump, int uid) {
 		bfr.Add_byte(Byte_ascii.Lt).Add(Html_tag_.Ul_name_bry);

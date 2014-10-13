@@ -19,6 +19,7 @@ package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import g
 import gplx.xowa.xtns.wdatas.core.*;
 class Wdata_visitor__html_wtr implements Wdata_claim_visitor {
 	private byte[] ttl; private Bry_bfr tmp_bfr; private Wdata_hwtr_msgs msgs; private Wdata_lbl_mgr lbl_mgr;
+	private final Bry_fmtr tmp_time_fmtr = Bry_fmtr.new_(); private final Bry_bfr tmp_time_bfr = Bry_bfr.new_(32);
 	public Wdata_visitor__html_wtr Init(byte[] ttl, Bry_bfr tmp_bfr, Wdata_hwtr_msgs msgs, Wdata_lbl_mgr lbl_mgr) {
 		this.ttl = ttl; this.tmp_bfr = tmp_bfr; this.msgs = msgs; this.lbl_mgr = lbl_mgr;
 		return this;
@@ -73,13 +74,7 @@ class Wdata_visitor__html_wtr implements Wdata_claim_visitor {
 				date = Wdata_date.Xto_julian(date);
 				calendar_display = msgs.Time_julian();
 			}
-			Wdata_date.Xto_str(tmp_bfr, date, itm.Precision_int(), msgs.Ary(), msgs.Month_bgn_idx(), Byte_ascii.Space_bry, Byte_ascii.Colon_bry);
-//				tmp_bfr.Add_long_variable(date.Year());
-//				tmp_bfr.Add_byte(Byte_ascii.Dash)	.Add_int_fixed(date.Month()	, 2);
-//				tmp_bfr.Add_byte(Byte_ascii.Dash)	.Add_int_fixed(date.Day()	, 2);
-//				tmp_bfr.Add_byte(Byte_ascii.Space)	.Add_int_fixed(date.Hour()	, 2);
-//				tmp_bfr.Add_byte(Byte_ascii.Colon)	.Add_int_fixed(date.Minute(), 2);
-//				tmp_bfr.Add_byte(Byte_ascii.Colon)	.Add_int_fixed(date.Second(), 2);
+			Wdata_date.Xto_str(tmp_bfr, tmp_time_fmtr, tmp_time_bfr, msgs, date);
 			if (calendar_display != null)
 				tmp_bfr.Add_byte_space().Add(calendar_display);
 		} catch (Exception e) {

@@ -87,7 +87,7 @@ public class Xodb_fsys_mgr {
 		int file_idx = files_ary_len;
 		Io_url url = Create_sqlite3(src_dir, trg_dir, wiki_name, file_idx);
 		Xodb_file rv = Xodb_file.make_(file_idx, file_tid, url.NameAndExt()).Connect_(Db_conn_info_.sqlite_(url));
-		Xodb_xowa_cfg_tbl.Insert_str(rv.Provider(), "db.meta", "type_name", Xodb_file_tid.Xto_key(file_tid));
+		Xodb_xowa_cfg_tbl.Insert_str(rv.Provider(), Cfg_grp_db_meta, "type_name", Xodb_file_tid.Xto_key(file_tid));
 		files_ary = (Xodb_file[])Array_.Resize(files_ary, files_ary_len + 1);
 		files_ary[files_ary_len++] = rv;
 		return rv;
@@ -104,4 +104,5 @@ public class Xodb_fsys_mgr {
 	}
 	private static final int File_id_core = 0;
 	public static final int Heap_max_infinite = 0;
+	public static final String Cfg_grp_db_meta = "db.meta";
 }

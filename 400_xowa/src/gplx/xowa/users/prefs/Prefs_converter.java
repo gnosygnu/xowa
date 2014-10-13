@@ -58,7 +58,7 @@ public class Prefs_converter {
 			Write_escaped_str(bfr, itm.Val());
 			bfr.Add_str("';\n");
 		}
-		return bfr.XtoStrAndClear();
+		return bfr.Xto_str_and_clear();
 	} 
 	private void Write_escaped_str(Bry_bfr bfr, String str) {
 		byte[] bry = Bry_.new_utf8_(str);
@@ -81,7 +81,7 @@ public class Prefs_converter {
 			if (prop_set_key[prop_set_key_len - 1] != Byte_ascii.Underline) return; // doesn't end with _
 			bfr.Add_mid(prop_set_key, 0, prop_set_key_len - 1);
 			Prefs_converter_itm itm = new Prefs_converter_itm();
-			itm.Key_(bfr.XtoStrAndClear());
+			itm.Key_(bfr.Xto_str_and_clear());
 			String prop_val = m.Args_getAt(0).Val_to_str_or_empty();
 			itm.Val_(prop_val);
 			list.Add(itm);

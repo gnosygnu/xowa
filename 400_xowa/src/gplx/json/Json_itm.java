@@ -111,6 +111,6 @@ class Json_itm_str extends Json_itm_base {
 					break;
 			}		
 		}
-		return bfr.XtoAryAndClear();
+		return bfr.Xto_bry_and_clear();
 	}
 }

@@ -282,7 +282,7 @@ class Xob_rate_mgr {
 			.Add_int_variable(count).Add_byte_pipe()
 			.Add_int_variable(dif).Add_byte_nl()
 			;
-		Io_mgr._.AppendFilByt(log_file, save_bfr.XtoAryAndClear());
+		Io_mgr._.AppendFilByt(log_file, save_bfr.Xto_bry_and_clear());
 	}
 	public String Rate_as_str() {return Int_.Xto_str(Rate());}
 	public int Rate() {

@@ -50,7 +50,7 @@ public class Xodb_xowa_cfg_tbl {
 				KeyVal kv = KeyVal_.new_(key, val);
 				tmp_list.Add(kv);
 			}
-			return (KeyVal[])tmp_list.XtoAry(KeyVal.class);
+			return (KeyVal[])tmp_list.Xto_ary(KeyVal.class);
 		}
 		finally {rdr.Rls(); tmp_list.Clear();}		
 	}	ListAdp tmp_list = ListAdp_.new_();

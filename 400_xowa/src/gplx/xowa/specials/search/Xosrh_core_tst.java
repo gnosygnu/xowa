@@ -102,7 +102,7 @@ class Xos_search_mgr_fxt {
 	public Xodb_page 	data_ttl_(int id, String ttl) {return data_ttl_(id, 0, 0, false, 0, ttl);}
 	public Xodb_page 	data_ttl_(int id, int fil, int row, boolean redirect, int len, String ttl) {return new Xodb_page().Set_all_(id, fil, row, redirect, len, Bry_.new_utf8_(ttl));}
 	public Xodb_page 		data_id_(int id, String ttl) {return data_id_(id, Xow_ns_.Id_main, ttl);} 
-	public Xodb_page 		data_id_(int id, int ns, String ttl) {return new Xodb_page().Id_(id).Ns_id_(ns).Ttl_wo_ns_(Bry_.new_utf8_(ttl)).Db_file_idx_(0).Text_len_(0);}
+	public Xodb_page 		data_id_(int id, int ns, String ttl) {return new Xodb_page().Id_(id).Ns_id_(ns).Ttl_wo_ns_(Bry_.new_utf8_(ttl)).Text_db_id_(0).Text_len_(0);}
 	public Xobl_search_ttl 	data_sttl_(String word, int... ids) {return new Xobl_search_ttl(Bry_.new_utf8_(word), data_ttl_word_page_ary_(ids));}
 	public Xobl_search_ttl_page[] data_ttl_word_page_ary_(int... ids) {
 		int ids_len = ids.length;
@@ -129,7 +129,7 @@ class Xos_search_mgr_fxt {
 		for (int i = 0; i < ary_len; i++) {
 			Xobl_data_itm itm = ary[i];
 			itm.Srl_save(tmp_bfr);
-			xdat_file.Insert(bfr, tmp_bfr.XtoAryAndClear());
+			xdat_file.Insert(bfr, tmp_bfr.Xto_bry_and_clear());
 		}
 		xdat_file.Save(fil);
 	}

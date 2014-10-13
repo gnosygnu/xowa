@@ -60,7 +60,7 @@ public class Xow_wiki implements GfoInvkAble {
 		}
 		else {
 			wdata_wiki_tid	= domain_tid;
-			wdata_wiki_lang = lang.Key_bry();
+			wdata_wiki_lang = domain_itm.Lang_orig_key();	// NOTE: must use orig_key for nowiki; "no" not "nb" DATE:2014-10-07
 		}
 		Wdata_wiki_abrv_();
 		db_mgr = new gplx.xowa.dbs.Xodb_mgr_txt(this, data_mgr);
@@ -102,7 +102,7 @@ public class Xow_wiki implements GfoInvkAble {
 	private void Wdata_wiki_abrv_() {
 		Bry_bfr bfr = app.Utl_bry_bfr_mkr().Get_b128();
 		Xow_wiki_alias.Build_alias_by_lang_tid(bfr, wdata_wiki_lang, Byte_obj_ref.new_(wdata_wiki_tid));
-		wdata_wiki_abrv = bfr.Mkr_rls().XtoAryAndClear();
+		wdata_wiki_abrv = bfr.Mkr_rls().Xto_bry_and_clear();
 	}
 
 	public boolean Init_needed() {return init_needed;} public Xow_wiki Init_needed_(boolean v) {init_needed = v; return this;} private boolean init_needed = true;

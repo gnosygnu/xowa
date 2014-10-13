@@ -72,7 +72,7 @@ class Scrib_lib_text_ {
 			}
 		}
 		bfr.Mkr_rls();
-		return (KeyVal[])rv.XtoAry(KeyVal.class);
+		return (KeyVal[])rv.Xto_ary(KeyVal.class);
 	}
 	private static KeyVal Init_nowiki_protocols_itm(Bry_bfr bfr, Xoo_protocol_itm itm) {
 		byte[] key = itm.Key_wo_colon_bry();
@@ -103,6 +103,6 @@ class Scrib_lib_text_ {
 			}
 		}
 		bfr.Add(Colon_encoded);
-		return KeyVal_.new_(itm.Key_wo_colon_str(), bfr.XtoStrAndClear());
+		return KeyVal_.new_(itm.Key_wo_colon_str(), bfr.Xto_str_and_clear());
 	}	private static final byte[] Colon_encoded = Bry_.new_ascii_("&#58;");
 }

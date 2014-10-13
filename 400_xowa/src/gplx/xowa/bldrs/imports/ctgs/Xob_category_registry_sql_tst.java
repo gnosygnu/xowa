@@ -58,6 +58,6 @@ class Xob_category_registry_sql_fxt {
 			String[] flds = String_.Split(line, '|');
 			list.Add(Base85_utl.XtoIntByStr(flds[1]));
 		}
-		return (int[])list.XtoAryAndClear(int.class);
+		return (int[])list.Xto_ary_and_clear(int.class);
 	}
 }

@@ -79,7 +79,7 @@ class Xosearch_searcher_fxt {
 			tmp_bfr.Add_byte(Byte_ascii.Semic);
 			tmp_bfr.Add_base85_len_5(0);
 		}
-		mgr.Create(wiki.Ns_mgr().Ns_main(), ttl_bry, tmp_bfr.XtoAryAndClear(), null);
+		mgr.Create(wiki.Ns_mgr().Ns_main(), ttl_bry, tmp_bfr.Xto_bry_and_clear(), null);
 	}
 	public void Test_search(String ttl_str, int... expd) {
 		byte[] ttl_bry = Bry_.new_ascii_(ttl_str);

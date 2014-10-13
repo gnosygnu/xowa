@@ -78,7 +78,7 @@ class Json_parser_fxt {
 		byte[] raw = Json_parser_tst.Replace_apos(Bry_.new_utf8_(raw_str));
 		Json_doc doc = parser.Parse(raw);
 		doc.Root().Print_as_json(tmp_bfr, 0);
-		String actl = tmp_bfr.XtoStrAndClear();
+		String actl = tmp_bfr.Xto_str_and_clear();
 		String expd = Xto_str(raw, doc, expd_ary, 0, expd_ary.length);
 		Tfds.Eq_str_lines(expd, actl, actl);
 	}
@@ -94,6 +94,6 @@ class Json_parser_fxt {
 			Json_itm itm = ary[i];
 			itm.Print_as_json(tmp_bfr, 0);
 		}
-		return tmp_bfr.XtoStrAndClear();
+		return tmp_bfr.Xto_str_and_clear();
 	}
 }

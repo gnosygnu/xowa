@@ -72,7 +72,7 @@ public class Xoh_href_parser {
 			}
 		}
 	}
-	public byte[] Build_to_bry(Xow_wiki wiki, Xoa_ttl ttl)				{Build_to_bfr(tmp_bfr, wiki, ttl, Bool_.N); return tmp_bfr.XtoAryAndClear();}
+	public byte[] Build_to_bry(Xow_wiki wiki, Xoa_ttl ttl)				{Build_to_bfr(tmp_bfr, wiki, ttl, Bool_.N); return tmp_bfr.Xto_bry_and_clear();}
 	public void Build_to_bfr(Bry_bfr bfr, Xow_wiki wiki, byte[] raw)	{Build_to_bfr(bfr, wiki, Xoa_ttl.parse_(wiki, raw), Bool_.N);}
 	public void Build_to_bfr(Bry_bfr bfr, Xow_wiki wiki, Xoa_ttl ttl)	{Build_to_bfr(bfr, wiki, ttl, Bool_.N);}
 	public void Build_to_bfr(Bry_bfr bfr, Xow_wiki wiki, Xoa_ttl ttl, boolean force_site) {

@@ -53,7 +53,7 @@ public abstract class Xob_categorylinks_base extends Xob_sql_dump_base implement
 					trie.Init();
 				}
 				trie.Decode(uca_bfr, cur_sortkey, 0, cur_sortkey.length);
-				cur_sortkey = uca_bfr.Len() == 0 ? Sortkey_space : uca_bfr.XtoAryAndClear();
+				cur_sortkey = uca_bfr.Len() == 0 ? Sortkey_space : uca_bfr.Xto_bry_and_clear();
 			}
 			fld_wtr.Bfr_(file_bfr);
 			fld_wtr.Write_bry_escape_fld(cur_ctg);

@@ -128,13 +128,13 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 		full_bfr.Add_byte_pipe()
 			.Add(caption)
 			.Add(Xop_tkn_.Lnki_end);
-		return full_bfr.XtoAryAndClear();
+		return full_bfr.Xto_bry_and_clear();
 	}
 	private byte[] Get_caption(Bry_bfr full_bfr, byte[] index_page_src, Xop_lnki_tkn lnki) {
 		byte[] rv = Bry_.Empty;
 		try {
 			wiki.Html_mgr().Html_wtr().Write_tkn(full_bfr, ctx, Xoh_wtr_ctx.Basic, index_page_src, null, -1, lnki.Caption_tkn());
-			rv = full_bfr.XtoAryAndClear();
+			rv = full_bfr.Xto_bry_and_clear();
 		}
 		catch (Exception e) {
 			wiki.App().Usr_dlg().Warn_many("", "", "failed to write caption: page=~{0} lnki=~{1} err=~{2}", String_.new_utf8_(ctx.Cur_page().Ttl().Full_db()), String_.new_utf8_mid_safe_(index_page_src, lnki.Src_bgn(), lnki.Src_end()), Err_.Message_gplx_brief(e));
@@ -201,7 +201,7 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 		}
 		full_bfr.Add(Xoa_consts.Invk_end);
 		full_bfr.Add(rv);
-		return full_bfr.XtoAryAndClear();
+		return full_bfr.Xto_bry_and_clear();
 	}
 	private Xoa_ttl[] Get_ttls_from_xnde_args() {
 		if (!Chk_step()) return Ttls_null;
@@ -301,7 +301,7 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 				.Add(index_ttl_bry)						// EX: 'File.djvu'
 				.Add_byte(Byte_ascii.Slash)				// EX: '/'
 				.Add_int_variable(page.Val());			// EX: '123'
-			rv[rv_idx++] = Xoa_ttl.parse_(wiki, ttl_bfr.XtoAryAndClear());
+			rv[rv_idx++] = Xoa_ttl.parse_(wiki, ttl_bfr.Xto_bry_and_clear());
 		}
 		ttl_bfr.Mkr_rls(); 
 		return rv;
@@ -354,7 +354,7 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 		}			
 		page_bfr.Mkr_rls();
 		ctx.Tmpl_output_(null);
-		return full_bfr.XtoAryAndClear();
+		return full_bfr.Xto_bry_and_clear();
 	}
 	private Xop_root_tkn Bld_root_nde(Bry_bfr page_bfr, Hash_adp_bry lst_page_regy, byte[] wikitext) {
 		Xop_ctx tmp_ctx = Xop_ctx.new_sub_page_(wiki, ctx, lst_page_regy);

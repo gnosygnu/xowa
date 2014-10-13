@@ -51,7 +51,7 @@ public class Io_stream_rdr_ {
 	public static byte[] Load_all_as_bry(Io_stream_rdr rdr) {return Load_all_as_bry(Bry_bfr.new_(), rdr);}
 	public static byte[] Load_all_as_bry(Bry_bfr rv, Io_stream_rdr rdr) {
 		Load_all_to_bfr(rv, rdr);
-		return rv.XtoAryAndClear();
+		return rv.Xto_bry_and_clear();
 	}
 	public static void Load_all_to_bfr(Bry_bfr rv, Io_stream_rdr rdr) {
 		try {

@@ -93,7 +93,7 @@ public class Xoa_css_img_downloader {
 				if (!quoted) bfr.Add_byte(Byte_ascii.Quote);
 				prv_pos = end_pos;
 			}
-			return bfr.XtoAryAndClear();
+			return bfr.Xto_bry_and_clear();
 		}
 		catch (Exception e) {
 			usr_dlg.Warn_many("", "", "failed to convert local_urls: ~{0} ~{1}", String_.new_utf8_(rel_url_prefix), Err_.Message_gplx(e));

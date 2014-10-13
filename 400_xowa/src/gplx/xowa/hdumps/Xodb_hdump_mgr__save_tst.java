@@ -88,7 +88,7 @@ class Xodb_hdump_mgr__save_fxt extends Xodb_hdump_mgr__base_fxt {
 		page.Hdump_data().Body_(Bry_.new_utf8_(body));
 		page.Hdump_data().Data_count_imgs_(imgs_count);
 		Hdump_page_body_srl.Save(tmp_bfr, page);
-		return new Hdump_text_row(page_id, Hdump_text_row_tid.Tid_body, tmp_bfr.XtoAryAndClear());
+		return new Hdump_text_row(page_id, Hdump_text_row_tid.Tid_body, tmp_bfr.Xto_bry_and_clear());
 	}
 	public Hdump_text_row Make_row_img(Hdump_data_img__base... itms) {
 		ListAdp tmp_list = ListAdp_.new_();
@@ -116,13 +116,13 @@ class Xodb_hdump_mgr__save_fxt extends Xodb_hdump_mgr__base_fxt {
 	public void Test_write(String raw, String expd) {
 		this.Exec_write(raw);
 		Hdump_page_body_srl.Save(tmp_bfr, page);
-		Tfds.Eq(expd, tmp_bfr.XtoStrAndClear());
+		Tfds.Eq(expd, tmp_bfr.Xto_str_and_clear());
 	}
 	public void Test_save(String raw, Hdump_text_row... expd) {
 		this.Exec_write(raw);
 		hdump_mgr.Save_mgr().Update(page);
 		hdump_mgr.Text_tbl().Select_by_page(expd_rows, 0);
-		Hdump_text_row[] actl = (Hdump_text_row[])expd_rows.XtoAryAndClear(Hdump_text_row.class);
+		Hdump_text_row[] actl = (Hdump_text_row[])expd_rows.Xto_ary_and_clear(Hdump_text_row.class);
 		Tfds.Eq_ary_str(Xto_str_ary(tmp_bfr, expd), Xto_str_ary(tmp_bfr, actl));
 	}
 	private static String[] Xto_str_ary(Bry_bfr bfr, Hdump_text_row[] ary) {
@@ -134,7 +134,7 @@ class Xodb_hdump_mgr__save_fxt extends Xodb_hdump_mgr__base_fxt {
 				.Add_byte_pipe().Add_int_variable(itm.Tid())
 				.Add_byte_pipe().Add(itm.Data())
 				;
-			rv[i] = bfr.XtoStrAndClear();
+			rv[i] = bfr.Xto_str_and_clear();
 		}
 		return rv;
 	}

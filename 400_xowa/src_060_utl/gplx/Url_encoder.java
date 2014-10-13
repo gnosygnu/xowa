@@ -75,20 +75,20 @@ public class Url_encoder implements Url_encoder_interface {
 		synchronized (thread_guard) {
 			tmp_bfr.Add(Io_url.Http_file_bry);
 			Encode(tmp_bfr, url.RawBry());
-			return tmp_bfr.XtoAryAndClear();
+			return tmp_bfr.Xto_bry_and_clear();
 		}
 	}
 	public String Encode_str(String str)					{
 		synchronized (thread_guard) {
-			byte[] bry = Bry_.new_utf8_(str); Encode(tmp_bfr, bry, 0, bry.length); return tmp_bfr.XtoStrAndClear();
+			byte[] bry = Bry_.new_utf8_(str); Encode(tmp_bfr, bry, 0, bry.length); return tmp_bfr.Xto_str_and_clear();
 		}
 	}
 	public byte[] Encode_bry(String str)					{
 		synchronized (thread_guard) {
-			byte[] bry = Bry_.new_utf8_(str); Encode(tmp_bfr, bry, 0, bry.length); return tmp_bfr.XtoAryAndClear();
+			byte[] bry = Bry_.new_utf8_(str); Encode(tmp_bfr, bry, 0, bry.length); return tmp_bfr.Xto_bry_and_clear();
 		}
 	}
-	public byte[] Encode(byte[]	bry)						{Encode(tmp_bfr, bry, 0, bry.length); return tmp_bfr.XtoAryAndClear();}
+	public byte[] Encode(byte[]	bry)						{Encode(tmp_bfr, bry, 0, bry.length); return tmp_bfr.Xto_bry_and_clear();}
 	public Bry_bfr Encode(Bry_bfr bfr, byte[] bry)	{Encode(bfr,	 bry, 0, bry.length); return bfr;}
 	public void Encode(Bry_bfr bfr, byte[] bry, int bgn, int end) {
 		synchronized (thread_guard) {
@@ -106,17 +106,17 @@ public class Url_encoder implements Url_encoder_interface {
 	}
 	public String Decode_str(String str) {
 		synchronized (thread_guard) {
-			byte[] bry = Bry_.new_utf8_(str); Decode(bry, 0, bry.length, tmp_bfr, true); return tmp_bfr.XtoStrAndClear();
+			byte[] bry = Bry_.new_utf8_(str); Decode(bry, 0, bry.length, tmp_bfr, true); return tmp_bfr.Xto_str_and_clear();
 		}
 	}
 	public byte[] Decode(byte[] bry) {
 		synchronized (thread_guard) {
-			Decode(bry, 0, bry.length, tmp_bfr, false); return tmp_bfr.XtoAryAndClear();
+			Decode(bry, 0, bry.length, tmp_bfr, false); return tmp_bfr.Xto_bry_and_clear();
 		}
 	}
 	public byte[] Decode_lax(byte[] bry) {
 		synchronized (thread_guard) {
-			Decode(bry, 0, bry.length, tmp_bfr, false); return tmp_bfr.XtoAryAndClear();
+			Decode(bry, 0, bry.length, tmp_bfr, false); return tmp_bfr.Xto_bry_and_clear();
 		}
 	}
 	public void Decode(byte[] bry, int bgn, int end, Bry_bfr bfr, boolean fail_when_invalid) {

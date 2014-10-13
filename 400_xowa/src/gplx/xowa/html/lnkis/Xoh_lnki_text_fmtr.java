@@ -29,7 +29,7 @@ public class Xoh_lnki_text_fmtr implements Bry_fmtr_arg {	// formats alt or capt
 		html_wtr.Write_tkn(tmp_bfr, ctx, hctx, src, null, Xoh_html_wtr.Sub_idx_null, text_tkn);
 		tmp_bfr.Mkr_rls();
 		if (tmp_bfr.Len() == 0) return;
-		byte[] bry = tmp_bfr.XtoAryAndClear();
+		byte[] bry = tmp_bfr.Xto_bry_and_clear();
 		if (fmtr == Null_fmtr)
 			trg.Add(bry);
 		else

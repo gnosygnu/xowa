@@ -71,6 +71,6 @@ class Xob_ctg_v1_sql_make implements Io_make_cmd {
 			}
 		}
 		bfr.Mkr_rls();
-		return dirty ? bfr.XtoAryAndClear() : bry;
+		return dirty ? bfr.Xto_bry_and_clear() : bry;
 	}
 }

@@ -220,18 +220,18 @@ class Xoh_href_parser_fxt {
 		if (expd_anch != null) 				Tfds.Eq(expd_anch, String_.new_utf8_(href.Anchor()));
 		if (expd_full != null) {
 			href.Print_to_bfr(tmp_bfr, true);
-			Tfds.Eq(expd_full, tmp_bfr.XtoStrAndClear());
+			Tfds.Eq(expd_full, tmp_bfr.Xto_str_and_clear());
 		}
 	}
 	public void Test_parse(String raw, String expd) {
 		href_parser.Parse(href, raw, wiki, Page_1_ttl);
 		href.Print_to_bfr(tmp_bfr, wiki.Gui_mgr().Cfg_browser().Link_hover_full());
-		Tfds.Eq(expd, tmp_bfr.XtoStrAndClear());
+		Tfds.Eq(expd, tmp_bfr.Xto_str_and_clear());
 	}
 	public void Test_build(String raw, String expd) {
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_utf8_(raw));
 		href_parser.Build_to_bfr(tmp_bfr, wiki, ttl);
-		Tfds.Eq(expd, tmp_bfr.XtoStrAndClear());
+		Tfds.Eq(expd, tmp_bfr.Xto_str_and_clear());
 	}
 	public void Test_parse_protocol(String raw, byte expd_tid) {
 		href_parser.Parse(href, raw, wiki, Page_1_ttl);

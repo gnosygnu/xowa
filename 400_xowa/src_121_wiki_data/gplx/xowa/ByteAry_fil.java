@@ -28,7 +28,7 @@ public class ByteAry_fil {
 		return this;
 	}
 	public Object Xto_itms(Class<?> itm_type) {
-		Object rv = itms.XtoAry(itm_type);
+		Object rv = itms.Xto_ary(itm_type);
 		itms.Clear();
 		if (raw_bry.length > raw_max) raw_bry = Bry_.Empty;
 		raw_len.Val_zero_();

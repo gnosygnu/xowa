@@ -70,14 +70,14 @@ public class Xol_case_itm_ {
 			if (last) break;
 			++src_pos;
 		}
-		return (Xol_case_itm[])list.XtoAry(Xol_case_itm.class);
+		return (Xol_case_itm[])list.Xto_ary(Xol_case_itm.class);
 	}
 	public static Xol_case_itm[] parse_mw_(byte[] raw) {
 		OrderedHash hash = OrderedHash_.new_bry_();
 		int pos = 0;
 		pos = parse_mw_grp(hash, raw, Bool_.Y, pos);
 		pos = parse_mw_grp(hash, raw, Bool_.N, pos);
-		return (Xol_case_itm[])hash.XtoAry(Xol_case_itm.class);
+		return (Xol_case_itm[])hash.Xto_ary(Xol_case_itm.class);
 	}
 	private static int parse_mw_grp(OrderedHash hash, byte[] raw, boolean section_is_upper, int find_bgn) {
 		byte[] find = section_is_upper ? parse_mw_upper : parse_mw_lower;

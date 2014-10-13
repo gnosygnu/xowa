@@ -33,7 +33,7 @@ public class Luaj_server_func_dbg extends VarArgFunction {
 			bfr.Add_str(gplx.html.Html_utl.Escape_html_as_str(s) + "&nbsp;");
 		}
 		bfr.Add_str("</span><br/>");
-		core.Page().Html_data().Xtn_scribunto_dbg_(bfr.XtoAryAndClear());
+		core.Page().Html_data().Xtn_scribunto_dbg_(bfr.Xto_bry_and_clear());
 		return NONE;
 	}
 	public static Luaj_server_func_dbg _ = new Luaj_server_func_dbg();

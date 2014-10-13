@@ -223,7 +223,7 @@ class Dpl_xnde_fxt {
 			bfr.Add(">").Add(page).Add("</a></li>").Add_char_nl();
 		}
 		bfr.Add("</ul>").Add_char_nl();
-		return bfr.XtoStrAndClear();
+		return bfr.Xto_str_and_clear();
 	}
 	public void Ul_pages(String raw, String expd) {
 		fxt.Test_parse_page_wiki_str(raw, expd);

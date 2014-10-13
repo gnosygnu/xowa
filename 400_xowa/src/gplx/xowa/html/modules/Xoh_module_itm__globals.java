@@ -22,12 +22,21 @@ public class Xoh_module_itm__globals implements Xoh_module_itm {
 	public byte[] Key() {return Key_const;} private static final byte[] Key_const = Bry_.new_ascii_("globals");
 	public boolean Enabled() {return enabled;} public void Enabled_n_() {enabled = false;} public void Enabled_y_() {enabled = true;} public void Enabled_(boolean v) {enabled = v;} private boolean enabled;
 	public void Clear() {enabled = false;}
-	public void Write_css_include(Xoa_app app, Xow_wiki wiki, Xoa_page page, Xoh_module_wtr wtr) {}
+	public void Write_css_include(Xoa_app app, Xow_wiki wiki, Xoa_page page, Xoh_module_wtr wtr) {
+		if (!enabled) return;
+		if (Url_core_css == null) Url_core_css = app.Fsys_mgr().Bin_any_dir().GenSubFil_nest("xowa", "html", "res", "src", "xowa", "core", "core.css").To_http_file_bry();
+		wtr.Write_css_include(Url_core_css);
+	}
 	public void Write_css_script(Xoa_app app, Xow_wiki wiki, Xoa_page page, Xoh_module_wtr wtr) {}
 	public void Write_js_include(Xoa_app app, Xow_wiki wiki, Xoa_page page, Xoh_module_wtr wtr) {
 		if (!enabled) return;
-		if (Url_core == null) Url_core = app.Fsys_mgr().Bin_any_dir().GenSubFil_nest("xowa", "html", "modules", "xowa.core", "xowa.core.js").To_http_file_bry();
-		wtr.Write_js_include(Url_core);
+		if (Url_core_js == null) {
+			Io_url core_dir = app.Fsys_mgr().Bin_any_dir().GenSubDir_nest("xowa", "html", "res", "src", "xowa", "core");
+			Url_core_js				= core_dir.GenSubFil("core.js").To_http_file_bry();
+			Url_DOMContentLoaded_js = core_dir.GenSubFil("DOMContentLoaded.js").To_http_file_bry();
+		}
+		wtr.Write_js_include(Url_core_js);
+		wtr.Write_js_include(Url_DOMContentLoaded_js);
 	}
 	public void Write_js_head_script(Xoa_app app, Xow_wiki wiki, Xoa_page page, Xoh_module_wtr wtr) {
 		if (!enabled) return;
@@ -56,7 +65,7 @@ public class Xoh_module_itm__globals implements Xoh_module_itm {
 		wtr.Write_js_global_ini_atr_obj(Key_wgMonthNames				, months_long);
 		wtr.Write_js_global_ini_atr_obj(Key_wgMonthNamesShort			, months_short);
 	}
-	public static final byte[] 
+	public static final byte[]	// NOTE: most of these are for the table-sorter
 	  Key_mode_is_gui					= Bry_.new_ascii_("mode_is_gui")
 	, Key_mode_is_http					= Bry_.new_ascii_("mode_is_http")
 	, Key_http_port						= Bry_.new_ascii_("http-port")
@@ -75,7 +84,7 @@ public class Xoh_module_itm__globals implements Xoh_module_itm {
 		for (int i = january_id; i <= december_id; i++)
 			tmp_wtr.Write_js_ary_itm(msg_mgr.Val_by_id(i));
 		tmp_wtr.Write_js_ary_end();
-		return tmp_wtr.Bfr().XtoAryAndClear();
+		return tmp_wtr.Bfr().Xto_bry_and_clear();
 	}
 	private static byte[] Html_js_table_num_format_separators(Xoh_module_wtr tmp_wtr, Xol_transform_mgr separator_mgr) {
 		byte[] dec_spr = separator_mgr.Get_val_or_self(Xol_num_mgr.Separators_key__dec);
@@ -84,7 +93,7 @@ public class Xoh_module_itm__globals implements Xoh_module_itm {
 		tmp_wtr.Write_js_ary_itm(Bry_.Add(dec_spr, Byte_ascii.Tab_bry, Byte_ascii.Dot_bry));
 		tmp_wtr.Write_js_ary_itm(Bry_.Add(grp_spr, Byte_ascii.Tab_bry, Byte_ascii.Comma_bry));
 		tmp_wtr.Write_js_ary_end();
-		return tmp_wtr.Bfr().XtoAryAndClear();
+		return tmp_wtr.Bfr().Xto_bry_and_clear();
 	}
 	private static final byte[]
 	  Date_format_default			= Bry_.new_ascii_("dmy")
@@ -92,5 +101,5 @@ public class Xoh_module_itm__globals implements Xoh_module_itm {
 	, Var_xowa_root_dir				= Bry_.new_ascii_("xowa_root_dir")
 	, Var_xowa_mode_is_server		= Bry_.new_ascii_("xowa_mode_is_server")
 	;
-	private static byte[] Url_core;
+	private static byte[] Url_core_css, Url_core_js, Url_DOMContentLoaded_js;
 }

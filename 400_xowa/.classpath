@@ -19,8 +19,6 @@
 	<classpathentry kind="src" path="src_405_tkn"/>
 	<classpathentry kind="src" path="src_409_tkn_misc"/>
 	<classpathentry kind="src" path="src_440_lnki"/>
-	<classpathentry kind="src" path="src_460_para"/>
-	<classpathentry kind="src" path="src_480_tblw"/>
 	<classpathentry kind="src" path="src_490_xnde"/>
 	<classpathentry kind="src" path="src_500_tmpl"/>
 	<classpathentry kind="src" path="xtn"/>
@@ -30,6 +28,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/140_dbs"/>
 	<classpathentry kind="lib" path="lib/luaj_xowa.jar"/>
 	<classpathentry kind="lib" path="lib/jtidy_xowa.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

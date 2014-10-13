@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.poems; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.btries.*;
+import gplx.core.btries.*; import gplx.xowa.parsers.paras.*;
 public class Poem_lxr_pre implements Xop_lxr {
 	public byte Lxr_tid() {return Xop_lxr_.Tid_poem;}
 	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Hook_ary, this);}

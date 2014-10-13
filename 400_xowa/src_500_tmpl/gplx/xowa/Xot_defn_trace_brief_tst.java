@@ -42,7 +42,7 @@ class Xot_defn_trace_fxt {
 		Xop_root_tkn root = ctx.Tkn_mkr().Root(src);
 		fxt.Parser().Parse_page_all_clear(root, ctx, ctx.Tkn_mkr(), src);
 		ctx.Defn_trace().Print(src, tmp);
-		String[] actl_ary = String_.Split(tmp.XtoStrAndClear(), (char)Byte_ascii.NewLine);
+		String[] actl_ary = String_.Split(tmp.Xto_str_and_clear(), (char)Byte_ascii.NewLine);
 		Tfds.Eq_ary(expd_ary, actl_ary);
 	}	private Bry_bfr tmp = Bry_bfr.new_();
 	String[] XtoStr(Xot_defn_trace_itm_brief[] ary) {
@@ -50,7 +50,7 @@ class Xot_defn_trace_fxt {
 		for (int i = 0; i < rv.length; i++) {
 			Xot_defn_trace_itm_brief itm = ary[i];
 			sb.Add(String_.new_utf8_(itm.Name())).Add("|").Add(itm.Count());
-			rv[i] = sb.XtoStrAndClear();
+			rv[i] = sb.Xto_str_and_clear();
 		}
 		return rv;
 	}

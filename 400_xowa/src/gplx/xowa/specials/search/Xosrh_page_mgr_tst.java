@@ -48,7 +48,7 @@ class Xosrh_page_mgr_fxt {
 			Base85_utl.XtoStrByAry(i, id_bry, 0, 5);
 			tmp_itm.Ns_id_(Xow_ns_.Id_main).Set_all_(i, 0, i - bgn, false, 10, Bry_.XtoStrBytesByInt(i, 0));
 			Xodb_page_.Txt_id_save(tmp_bfr, tmp_itm);
-			hive_mgr.Create(id_bry, tmp_bfr.XtoAryAndClear(), null);
+			hive_mgr.Create(id_bry, tmp_bfr.Xto_bry_and_clear(), null);
 		}
 		return this;
 	}

@@ -64,6 +64,6 @@ class Sites_html_bldr_fxt {
 		Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 		Sites_xtn_skin_itm skin_itm = (Sites_xtn_skin_itm)page.Html_data().Xtn_skin_mgr().Get_or_null(Sites_xtn_skin_itm.KEY);
 		skin_itm.Write(tmp_bfr, page);
-		Tfds.Eq_str_lines(expd, tmp_bfr.XtoStrAndClear());
+		Tfds.Eq_str_lines(expd, tmp_bfr.Xto_str_and_clear());
 	}
 }

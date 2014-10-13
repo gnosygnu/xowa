@@ -25,7 +25,7 @@ class Wdata_fmtr__toc_div implements Bry_fmtr_arg {
 	public void XferAry(Bry_bfr bfr, int idx) {
 		int itms_len = itms.Count();
 		if (itms_len <= gplx.xowa.html.tocs.Xow_hdr_mgr.Toc_min) return;
-		fmtr_itm.Init_by_itm((Wdata_toc_data[])itms.XtoAryAndClear(Wdata_toc_data.class));
+		fmtr_itm.Init_by_itm((Wdata_toc_data[])itms.Xto_ary_and_clear(Wdata_toc_data.class));
 		fmtr.Bld_bfr_many(bfr, tbl_hdr, fmtr_itm);
 	}
 	private final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last

@@ -58,7 +58,7 @@ public class RegxAdp {
 				: find_bgn + find_len		// otherwise search after find_end
 				;
 		}
-		return (RegxMatch[])rv.XtoAry(RegxMatch.class);
+		return (RegxMatch[])rv.Xto_ary(RegxMatch.class);
 	}
 	@gplx.Internal protected RegxAdp(String regx) {Pattern_(regx);}
 }

@@ -54,7 +54,7 @@ public class Fsdb_mnt_tbl {
 			}
 		}
 		finally {rdr.Rls();}
-		return (Fsdb_mnt_itm[])list.XtoAryAndClear(Fsdb_mnt_itm.class);
+		return (Fsdb_mnt_itm[])list.Xto_ary_and_clear(Fsdb_mnt_itm.class);
 	}
 	public static final String Tbl_name = "fsdb_mnt", Fld_mnt_id = "mnt_id", Fld_mnt_name = "mnt_name", Fld_mnt_url = "mnt_url";
 	private static final String Tbl_sql = String_.Concat_lines_nl

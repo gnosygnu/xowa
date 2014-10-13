@@ -33,8 +33,8 @@ public class Hdump_html_body {
 	}
 	public Hdump_html_body Init_by_page(byte[] domain_bry, Hdump_page hpg) {
 		this.hpg = hpg;
-		file_dir_comm = tmp_bfr.Add(file_dir).Add(Xow_wiki_.Domain_commons_bry).Add_byte_slash().XtoAryAndClear();
-		file_dir_wiki  = tmp_bfr.Add(file_dir).Add(domain_bry).Add_byte_slash().XtoAryAndClear();
+		file_dir_comm = tmp_bfr.Add(file_dir).Add(Xow_wiki_.Domain_commons_bry).Add_byte_slash().Xto_bry_and_clear();
+		file_dir_wiki  = tmp_bfr.Add(file_dir).Add(domain_bry).Add_byte_slash().Xto_bry_and_clear();
 		return this;
 	}
 	public void Write(Bry_bfr bfr) {

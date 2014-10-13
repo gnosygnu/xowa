@@ -74,13 +74,13 @@ public class Wdata_hwtr_mgr {
 		bfr.Add_str("<div id='wb-item' class='wikibase-entityview wb-item' lang='en' dir='ltr'>");
 		fmtr_main.Bld_bfr_many(bfr, fmtr_oview, "", "", "", "", "", "", "");
 		bfr.Add_str("</div>");
-		return bfr.XtoAryAndClear();
+		return bfr.Xto_bry_and_clear();
 	}
 	public byte[] Write(Wdata_doc wdoc) {
 		bfr.Add_str("<div id='wb-item' class='wikibase-entityview wb-item' lang='en' dir='ltr'>");
 		fmtr_main.Bld_bfr_many(bfr, fmtr_oview, fmtr_toc, fmtr_claim, fmtr_slink, fmtr_label, fmtr_descr, fmtr_alias, fmtr_json);
 		bfr.Add_str("</div>");
-		return bfr.XtoAryAndClear();
+		return bfr.Xto_bry_and_clear();
 	}
 	public static void Write_link_wikidata(Bry_bfr bfr, byte[] href, byte[] text) {
 		text = gplx.html.Html_utl.Escape_html_as_bry(text);

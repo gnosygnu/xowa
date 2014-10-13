@@ -42,7 +42,7 @@ public class Xos_url_gen implements Io_url_gen {
 		}
 		tmp_bfr.Add_int_fixed(idx, 10);
 		tmp_bfr.Add(ext);
-		return Io_url_.new_fil_(tmp_bfr.XtoStrAndClear());
+		return Io_url_.new_fil_(tmp_bfr.Xto_str_and_clear());
 	}
 	private static Bry_bfr tmp_bfr = Bry_bfr.reset_(256);
 }

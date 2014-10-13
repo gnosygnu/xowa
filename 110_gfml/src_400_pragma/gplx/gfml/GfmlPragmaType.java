@@ -45,7 +45,7 @@ class GfmlPragmaType implements GfmlPragma {
 		makr.MakeSubTypeAsOwner(							"type", "name", "key");
 		makr.MakeSubTypeAsOwner(								"fld", "name", "default", "type");
 		makr.AddSubFld(GfmlFld.new_(false,						"fld", "_type/type/fld"));
-		return makr.XtoAry();
+		return makr.Xto_bry();
 	}
 	public static final String CacheLog_key = "log:type";
 	@gplx.Internal protected static void ExecList(GfmlTypRegy regy, OrderedHash list, ListAdp replaced) {

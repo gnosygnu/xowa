@@ -50,7 +50,7 @@ public class Xodb_text_tbl {
 			ListAdp pages = ListAdp_.new_();
 			for (int i = 0; i < len; i++) {
 				Xodb_page page = (Xodb_page)hash.FetchAt(i);
-				if (page.Db_file_idx() == file.Id())
+				if (page.Text_db_id() == file.Id())
 					pages.Add(page);
 			}
 			len = pages.Count();

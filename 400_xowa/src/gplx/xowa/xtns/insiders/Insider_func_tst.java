@@ -32,7 +32,7 @@ class Insider_func_fxt {
 		fxt.Test_parse_tmpl_str_test(raw, "{{test}}", expd);
 		Insider_xtn_skin_itm skin_itm = (Insider_xtn_skin_itm)fxt.Page().Html_data().Xtn_skin_mgr().Get_or_null(Insider_xtn_skin_itm.KEY);
 		ListAdp list = skin_itm.Itms();
-		byte[][] brys = (byte[][])list.XtoAry(byte[].class);
+		byte[][] brys = (byte[][])list.Xto_ary(byte[].class);
 		Tfds.Eq_ary_str(insiders, String_.Ary(brys));
 	}
 }

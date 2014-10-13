@@ -26,7 +26,7 @@ public class Xop_keeplist_wiki {
 	public Xop_keeplist_wiki_srl Srl() {return srl;} private Xop_keeplist_wiki_srl srl;
 	public void Rules_add(Xop_keeplist_rule rule) {rules_list.Add(rule);} private ListAdp rules_list = ListAdp_.new_();
 	public void Rules_seal() {
-		this.rules = (Xop_keeplist_rule[])rules_list.XtoAryAndClear(Xop_keeplist_rule.class);
+		this.rules = (Xop_keeplist_rule[])rules_list.Xto_ary_and_clear(Xop_keeplist_rule.class);
 		this.rules_len = rules.length;
 		if (rules_len == 0) return;
 		if (rules_len == 1) {

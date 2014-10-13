@@ -167,7 +167,7 @@ class Gfs_lxr_quote implements Gfs_lxr {
 					break;				
 				}
 			}
-			ctx.Make_atr_by_bry(lxr_bgn + bgn_bry_len, end_pos, bfr.XtoAryAndClear());
+			ctx.Make_atr_by_bry(lxr_bgn + bgn_bry_len, end_pos, bfr.Xto_bry_and_clear());
 		}
 		else
 			ctx.Make_atr(lxr_bgn + bgn_bry_len, end_pos);

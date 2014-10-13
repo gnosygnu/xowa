@@ -98,7 +98,7 @@ public class Db_mgr_fxt {
 				list.Add(itm.Id());
 			}
 		}
-		return (int[])list.XtoAryAndClear(int.class);
+		return (int[])list.Xto_ary_and_clear(int.class);
 	}
 	public void Test_category_v2(String ctg_name_str, int... expd) {
 		Xow_wiki wiki = bldr_fxt.Wiki();
@@ -122,7 +122,7 @@ public class Db_mgr_fxt {
 				list.Add(itm.Id());
 			}
 		}
-		return (int[])list.XtoAryAndClear(int.class);
+		return (int[])list.Xto_ary_and_clear(int.class);
 	}
 	public void Init_db_sqlite() {Init_db_sqlite(Xoa_test_.Url_wiki_enwiki().GenSubFil_nest("en.wikipedia.org.sqlite3"));}
 	public void Init_db_sqlite(Io_url url) {
@@ -163,7 +163,7 @@ public class Db_mgr_fxt {
 		dsv_tbl_text(sb);
 		dsv_tbl_category(sb);
 		dsv_tbl_categorylinks(sb);
-		return sb.XtoStrAndClear();
+		return sb.Xto_str_and_clear();
 	}
 	private static void Add_lines_w_crlf(String_bldr sb, String... ary) {
 		int len = ary.length;

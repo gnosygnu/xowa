@@ -22,7 +22,7 @@ public class z424_types_apply_ndes_nest_tst {
 		GfmlTypeMakr makr = GfmlTypeMakr.new_();
 		makr.MakeRootType("gfml.item", "item");
 		makr.MakeSubType("pos", "x", "y");
-		fx.Regy().Add_ary(makr.XtoAry());
+		fx.Regy().Add_ary(makr.Xto_bry());
 	}	GfmlTypeCompiler_fxt fx = GfmlTypeCompiler_fxt.new_();
 	@Test  public void InvokeByHnd() {
 		fx.tst_Resolve
@@ -52,7 +52,7 @@ public class z424_types_apply_ndes_nest_tst {
 		GfmlTypeMakr makr = GfmlTypeMakr.new_();
 		makr.MakeRootType("font", "size");
 		makr.MakeSubType("color", "name");
-		fx.Regy().Add_ary(makr.XtoAry());
+		fx.Regy().Add_ary(makr.Xto_bry());
 		fx.tst_Resolve
 			(	fx.nde_().Hnd_("color").Atru_("blue")
 			,	fx.nde_().Typ_(GfmlType_.AnyKey).Atru_("blue")// confirm that subFlds in other types are not selectable by name; i.e.: must be font/color, not just color

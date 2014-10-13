@@ -64,7 +64,7 @@ class Hiero_parser {
 			}
 		}			
 		this.New_block();// flush remaining items
-		return (Hiero_block[])blocks.XtoAryAndClear(Hiero_block.class);
+		return (Hiero_block[])blocks.Xto_ary_and_clear(Hiero_block.class);
 	}
 	private void New_block() {
 		this.New_token(null);
@@ -75,7 +75,7 @@ class Hiero_parser {
 	}
 	private void New_token(Hiero_parser_itm itm) {
 		if (cur_tkn.Len_gt_0())
-			cur_block.Add(cur_tkn.XtoAryAndClear());
+			cur_block.Add(cur_tkn.Xto_bry_and_clear());
 		if (itm != null)
 			cur_block.Add(itm.Key());
 	}

@@ -49,7 +49,7 @@ class GfmlPragmaLxrSym implements GfmlPragma {
 		makr.MakeRootType("_lxr_sym", "_lxr_sym", "key", "raw");
 		GfmlFld fld = GfmlFld.new_(true, "cmd", GfmlType_.StringKey).DefaultTkn_(GfmlTkn_.val_("gfml.elm_data"));
 		makr.AddSubFld(fld);
-		return makr.XtoAry();
+		return makr.Xto_bry();
 	}
 	public static GfmlPragmaLxrSym new_() {return new GfmlPragmaLxrSym();} GfmlPragmaLxrSym() {}
 	public static final String CacheLog_key = "log:var";

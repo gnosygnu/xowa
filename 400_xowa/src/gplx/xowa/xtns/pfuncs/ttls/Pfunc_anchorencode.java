@@ -45,7 +45,7 @@ public class Pfunc_anchorencode extends Pf_func_base {	// EX: {{anchorencode:a b
 			Xop_tkn_itm sub = root.Subs_get(i);
 			Tkn(src, sub, root, i, tmp_bfr);
 		}
-		byte[] unencoded = tmp_bfr.XtoAryAndClear();
+		byte[] unencoded = tmp_bfr.Xto_bry_and_clear();
 		encoder.Encode(tmp_bfr, unencoded);
 		bfr.Add_bfr_and_clear(tmp_bfr);
 	}

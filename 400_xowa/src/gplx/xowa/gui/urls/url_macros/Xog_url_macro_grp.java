@@ -39,6 +39,6 @@ class Xog_url_macro_itm {
 	public byte[] Fmtr_exec(Bry_bfr bfr, Object... args) {
 		if (fmtr == null) fmtr = new Bry_fmtr().Fmt_(fmt).Compile();
 		fmtr.Bld_bfr_many(bfr, args);
-		return bfr.XtoAryAndClear();
+		return bfr.Xto_bry_and_clear();
 	}
 }

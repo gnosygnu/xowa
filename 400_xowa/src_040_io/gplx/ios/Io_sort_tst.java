@@ -56,11 +56,11 @@ class Io_sort_fxt {
 			String itm = (String)list.FetchAt(i);
 			sb.Add(itm).Add_char_nl();
 		}		
-		return sb.XtoStrAndClear();
+		return sb.Xto_str_and_clear();
 	}
 	public String GenOrdered(int rows, int pad) {
 		for (int i = 0; i < rows; i++)
 			sb.Add(Int_.Xto_str_pad_bgn(i, pad) + "|" + "\n");
-		return sb.XtoStrAndClear();
+		return sb.Xto_str_and_clear();
 	}	
 }

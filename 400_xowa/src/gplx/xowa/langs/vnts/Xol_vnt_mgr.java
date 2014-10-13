@@ -72,7 +72,7 @@ public class Xol_vnt_mgr implements GfoInvkAble {
 			Xol_vnt_converter converter = converter_ary[i];
 			tmp_bfr.Clear();
 			if (!converter.Convert_text(tmp_bfr, ttl_bry)) continue;	// ttl is not converted for variant; ignore
-			Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ns.Id(), tmp_bfr.XtoAryAndClear());	// NOTE: must convert to ttl in order to upper 1st letter; EX:{{jez-eng|sense}} -> Jez-eng; PAGE:sr.w:ДНК DATE:2014-07-06
+			Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ns.Id(), tmp_bfr.Xto_bry_and_clear());	// NOTE: must convert to ttl in order to upper 1st letter; EX:{{jez-eng|sense}} -> Jez-eng; PAGE:sr.w:ДНК DATE:2014-07-06
 			if (ttl == null) continue;
 			Xodb_page page = new Xodb_page();
 			page.Ttl_(ns, ttl.Page_db());

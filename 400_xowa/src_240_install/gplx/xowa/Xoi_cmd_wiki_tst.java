@@ -63,7 +63,7 @@ public class Xoi_cmd_wiki_tst {
 			bfr.Add_str(dump_file.Dump_date());
 			bfr.Add_byte_nl();
 		}
-		Io_mgr._.SaveFilStr("C:\\temp.txt", bfr.XtoStr());
+		Io_mgr._.SaveFilStr("C:\\temp.txt", bfr.Xto_str());
 	}
 	public void Bld_cfg_files(String... ary) {
 		Bry_bfr bfr = Bry_bfr.reset_(255);
@@ -83,7 +83,7 @@ public class Xoi_cmd_wiki_tst {
 			}
 		}
 		bfr.Add_str("app.bldr.wiki_cfg_bldr.run;").Add_byte_nl();
-		Io_mgr._.SaveFilStr("C:\\xowa_build_cfg.gfs", bfr.XtoStr());
+		Io_mgr._.SaveFilStr("C:\\xowa_build_cfg.gfs", bfr.Xto_str());
 	}
 	public static String[] Wikis = new String[]
 { "simple.wikipedia.org"

@@ -116,7 +116,7 @@ public class Btrie_slim_mgr implements Btrie_mgr {
 				pos = match_pos;
 			}
 		}
-		return dirty ? tmp_bfr.XtoAryAndClear() : src;
+		return dirty ? tmp_bfr.Xto_bry_and_clear() : src;
 	}
 	public void Clear() {root.Clear(); count = 0;}
 	public static Btrie_slim_mgr cs_()				{return new Btrie_slim_mgr(true);}

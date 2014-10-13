@@ -29,11 +29,11 @@ public class Pfunc_displaytitle extends Pf_func_base {
 		boolean restrict = wiki.Cfg_parser().Display_title_restrict();
 		Xoh_wtr_ctx hctx = restrict ? Xoh_wtr_ctx.Display_title : Xoh_wtr_ctx.Basic;	// restrict removes certain HTML (display:none)
 		wiki.Html_mgr().Html_wtr().Write_tkn(tmp_bfr, display_ttl_ctx, hctx, display_ttl_root.Data_mid(), display_ttl_root, 0, display_ttl_root);
-		byte[] val_html = tmp_bfr.XtoAryAndClear();
+		byte[] val_html = tmp_bfr.Xto_bry_and_clear();
 		if (restrict) {	// restrict only allows displayTitles which have text similar to the pageTitle; PAGE:de.b:Kochbuch/_Druckversion; DATE:2014-08-18
 			Xoa_page page = ctx.Cur_page();
 			wiki.Html_mgr().Html_wtr().Write_tkn(tmp_bfr, display_ttl_ctx, Xoh_wtr_ctx.Alt, display_ttl_root.Data_mid(), display_ttl_root, 0, display_ttl_root);
-			byte[] val_html_as_text_only = tmp_bfr.XtoAryAndClear();
+			byte[] val_html_as_text_only = tmp_bfr.Xto_bry_and_clear();
 			gplx.xowa.langs.cases.Xol_case_mgr case_mgr = wiki.Lang().Case_mgr();
 			val_html_as_text_only = case_mgr.Case_build_lower(val_html_as_text_only);
 			byte[] page_ttl_lc = case_mgr.Case_build_lower(page.Ttl().Page_txt());

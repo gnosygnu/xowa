@@ -77,7 +77,7 @@ class Hdump_load_mgr_fxt {
 		if (sidebar_div != null) page.Html_data().Xtn_skin_mgr().Add(new Xopg_xtn_skin_itm_mock(Bry_.new_utf8_(sidebar_div)));
 		page.Hdump_data().Body_(Bry_.new_utf8_(body));
 		Hdump_page_body_srl.Save(tmp_bfr, page);
-		init_rows.Add(new Hdump_text_row(page_id, Hdump_text_row_tid.Tid_body, tmp_bfr.XtoAryAndClear()));
+		init_rows.Add(new Hdump_text_row(page_id, Hdump_text_row_tid.Tid_body, tmp_bfr.Xto_bry_and_clear()));
 		return this;
 	}
 	public Hdump_load_mgr_fxt Init_row_img (String data)	{init_rows.Add(new Hdump_text_row(page_id, Hdump_text_row_tid.Tid_data, Bry_.new_utf8_(data))); return this;}
@@ -92,7 +92,7 @@ class Hdump_load_mgr_fxt {
 		if (expd_display_ttl != null)	Tfds.Eq(expd_display_ttl, String_.new_utf8_(hpg.Display_ttl()));
 		if (expd_content_sub != null)	Tfds.Eq(expd_content_sub, String_.new_utf8_(hpg.Content_sub()));
 		if (expd_sidebar_div != null)	Tfds.Eq(expd_sidebar_div, String_.new_utf8_(hpg.Sidebar_div()));
-		if (expd_imgs.Count() != 0)		Tfds.Eq_ary_str((Hdump_data_img__base[])expd_imgs.XtoAryAndClear(Hdump_data_img__base.class), hpg.Img_itms());
+		if (expd_imgs.Count() != 0)		Tfds.Eq_ary_str((Hdump_data_img__base[])expd_imgs.Xto_ary_and_clear(Hdump_data_img__base.class), hpg.Img_itms());
 		return this;
 	}
 }

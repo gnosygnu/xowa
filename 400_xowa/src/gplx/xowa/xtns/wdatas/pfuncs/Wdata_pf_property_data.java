@@ -42,7 +42,7 @@ public class Wdata_pf_property_data {
 				continue;
 			}
 			nde.Val_tkn().Tmpl_evaluate(ctx, src, self, tmp_bfr);
-			byte[] val = tmp_bfr.XtoAryAndClear();
+			byte[] val = tmp_bfr.Xto_bry_and_clear();
 			byte key_tid = ((Byte_obj_val)o).Val(); 
 			switch (key_tid) {
 				case Atr_of_id: of = val; break;

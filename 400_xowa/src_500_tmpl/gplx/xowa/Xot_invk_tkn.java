@@ -58,7 +58,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 				if (defn_tid == Xot_defn_.Tid_subst)
 					name_tkn_bfr.Add(Get_first_subst_itm(lang.Kwd_mgr()));
 				name_tkn.Tmpl_evaluate(ctx, src, caller, name_tkn_bfr);
-				name_ary = name_tkn_bfr.XtoAryAndClear();
+				name_ary = name_tkn_bfr.Xto_bry_and_clear();
 			}
 			else													// tmpl is static; note that dat_ary is still valid but rest of name may not be; EX: {{subst:name{{{1}}}}}
 				name_ary = Bry_.Mid(src, name_key_tkn.Dat_bgn(), name_key_tkn.Dat_end());
@@ -251,7 +251,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 				Bry_bfr rslt_bfr = wiki.Utl_bry_bfr_mkr().Get_k004();
 				try {
 					Bld_key(invk_tmpl, name_ary, rslt_bfr);
-					byte[] rslt_key = rslt_bfr.XtoAryAndClear();
+					byte[] rslt_key = rslt_bfr.Xto_bry_and_clear();
 					Object o = wiki.Cache_mgr().Tmpl_result_cache().Fetch(rslt_key);
 					Xopg_tmpl_prepend_mgr prepend_mgr = ctx.Cur_page().Tmpl_prepend_mgr().Bgn(bfr);
 					if (o != null) {
@@ -263,11 +263,11 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 						rv = defn_tmpl.Tmpl_evaluate(ctx, invk_tmpl, rslt_bfr);
 						prepend_mgr.End(ctx, bfr, rslt_bfr.Bfr(), rslt_bfr.Len(), Bool_.Y);
 						if (name_had_subst) {	// current invk had "subst:"; parse incoming invk again to remove effects of subst; PAGE:pt.w:Argentina DATE:2014-09-24
-							byte[] tmp_src = rslt_bfr.XtoAryAndClear();
+							byte[] tmp_src = rslt_bfr.Xto_bry_and_clear();
 							rslt_bfr.Add(wiki.Parser().Parse_text_to_wtxt(tmp_src));	// this could be cleaner / more optimized
 						}
 						if (Cache_enabled) {
-							byte[] rslt_val = rslt_bfr.XtoAryAndClear();
+							byte[] rslt_val = rslt_bfr.Xto_bry_and_clear();
 							bfr.Add(rslt_val);
 							HashAdp cache = wiki.Cache_mgr().Tmpl_result_cache();
 							cache.Del(rslt_key);

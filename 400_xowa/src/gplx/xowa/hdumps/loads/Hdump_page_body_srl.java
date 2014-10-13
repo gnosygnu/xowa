@@ -37,7 +37,7 @@ public class Hdump_page_body_srl {
 		Save_html_modules__itm(tmp_bfr, module_mgr.Itm_popups().Bind_hover_area());
 		Save_html_modules__itm(tmp_bfr, module_mgr.Itm_gallery().Enabled());
 		Save_html_modules__itm(tmp_bfr, module_mgr.Itm_hiero().Enabled());
-		Save_data(bfr, Tid_html_module, tmp_bfr.XtoAryAndClear());
+		Save_data(bfr, Tid_html_module, tmp_bfr.Xto_bry_and_clear());
 	}
 	public static void Load_html_modules(Hdump_page hpg, byte[] src, int bgn, int end) {
 		Hdump_module_mgr module_mgr = hpg.Module_mgr();
@@ -69,7 +69,7 @@ public class Hdump_page_body_srl {
 			}
 		}
 		if (sidebar_exists)
-			Save_data(bfr, Tid_sidebar_div, tmp_bfr.XtoAryAndClear());
+			Save_data(bfr, Tid_sidebar_div, tmp_bfr.Xto_bry_and_clear());
 	}
 	private static void Save_data(Bry_bfr bfr, int tid, byte[] data) {
 		if (data != null) {

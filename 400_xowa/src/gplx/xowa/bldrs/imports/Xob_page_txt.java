@@ -47,7 +47,7 @@ public class Xob_page_txt extends Xob_itm_dump_base implements Xobd_wkr, GfoInvk
 		// idx: EX: 00100|aB64|Ttl;
 		Xob_tmp_wtr ttl_wtr = ttl_wtr_mgr.Get_or_new(ns);
 		int file_idx = page_wtr.Fil_idx(), row_idx = page_wtr.Idx_pos() - ListAdp_.LastIdxOffset;
-		page.Db_file_idx_(file_idx).Db_row_idx_(row_idx);
+		page.Text_db_id_(file_idx).Db_row_idx_(row_idx);
 		if (ttl_wtr.FlushNeeded(Xodb_page_.Txt_ttl_len__fixed + ttl_len)) ttl_wtr.Flush(bldr.Usr_dlg());
 		Xodb_page_.Txt_ttl_save(ttl_wtr.Bfr(), id, file_idx, row_idx, redirect, text_len, ttl_wo_ns);
 	}

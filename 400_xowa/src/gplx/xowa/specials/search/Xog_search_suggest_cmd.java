@@ -65,7 +65,7 @@ class Xog_search_suggest_cmd implements GfoInvkAble, Cancelable {
 		byte[] search_ttl_bry = search_ttl.Page_db();
 		ListAdp page_list = ListAdp_.new_();
 		wiki.Db_mgr().Load_mgr().Load_ttls_for_all_pages(this, page_list, rslt_nxt, rslt_prv, Int_obj_ref.zero_(), wiki.Ns_mgr().Ns_main(), search_ttl_bry, max_results, all_pages_min, all_pages_extend, true, false);
-		Xodb_page[] page_ary = (Xodb_page[])page_list.XtoAryAndClear(Xodb_page.class);
+		Xodb_page[] page_ary = (Xodb_page[])page_list.Xto_ary_and_clear(Xodb_page.class);
 		int idx = 0, page_ary_len = page_ary.length;
 		for (int i = 0; i < page_ary_len; i++) {
 			Xodb_page page = page_ary[i];

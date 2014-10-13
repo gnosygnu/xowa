@@ -174,6 +174,6 @@ class Xobc_utl_make_lang_fxt {
 			}
 			sb.Add_char_nl();
 		}
-		return sb.XtoStrAndClear();
+		return sb.Xto_str_and_clear();
 	}
 }

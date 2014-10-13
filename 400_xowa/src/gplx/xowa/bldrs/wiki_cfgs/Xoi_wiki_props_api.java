@@ -69,7 +69,7 @@ public class Xoi_wiki_props_api {
 			sub_itm.Init_by_xml(sub_nde);
 			list.Add(sub_itm);
 		}
-		return (Xoi_wiki_props_alias[])list.XtoAryAndClear(Xoi_wiki_props_alias.class);
+		return (Xoi_wiki_props_alias[])list.Xto_ary_and_clear(Xoi_wiki_props_alias.class);
 	}
 	private Xoi_wiki_props_ns[] Parse_ns_ary(XmlNde xnde) {
 		int xndes_len = xnde.SubNdes().Count();
@@ -81,6 +81,6 @@ public class Xoi_wiki_props_api {
 			sub_itm.Init_by_xml(sub_nde);
 			list.Add(sub_itm);
 		}
-		return (Xoi_wiki_props_ns[])list.XtoAryAndClear(Xoi_wiki_props_ns.class);
+		return (Xoi_wiki_props_ns[])list.Xto_ary_and_clear(Xoi_wiki_props_ns.class);
 	}
 }

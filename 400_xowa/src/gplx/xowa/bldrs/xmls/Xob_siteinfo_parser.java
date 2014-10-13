@@ -51,7 +51,7 @@ public class Xob_siteinfo_parser {
 			else if (	String_.Eq(sub_nde.Name(), "#text")) {}	// NOTE: JAVA has node names for "#text"
 			// else throw Err_mgr._.fmt_(GRP_KEY, "siteinfo.root.unknown_sub", "unknown sub for root nde: ~{0}", sub_nde.Name());	// NOTE: do not fail if MW introduces something odd in future (or if JAVA starts picking up other elements)
 		}
-		wiki.Props().Siteinfo_misc_(siteinfo_misc_bfr.XtoAryAndClear());
+		wiki.Props().Siteinfo_misc_(siteinfo_misc_bfr.Xto_bry_and_clear());
 		wiki.Props().Bldr_version_(Bry_.new_ascii_(Xoa_app_.Version));
 	}
 	private static byte[] Siteinfo_parse_mainpage(byte[] url) {			

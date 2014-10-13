@@ -36,6 +36,6 @@ public class Xog_win_itm__prog_href_mgr {
 		Xow_wiki wiki = page.Wiki();
 		app.Href_parser().Parse(tmp_href, href, wiki, page.Ttl().Page_url());
 		tmp_href.Print_to_bfr(tmp_bfr, wiki.Gui_mgr().Cfg_browser().Link_hover_full());
-		usr_dlg.Prog_direct(tmp_bfr.XtoStrAndClear());
+		usr_dlg.Prog_direct(tmp_bfr.Xto_str_and_clear());
 	}
 }

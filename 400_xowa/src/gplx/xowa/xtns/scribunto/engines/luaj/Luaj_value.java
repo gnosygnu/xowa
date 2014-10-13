@@ -65,7 +65,7 @@ class Luaj_value_ {
 			++len;
 		}
 		if (len == 0) return KeyVal_.Ary_empty;
-		return (KeyVal[])temp.XtoAry(KeyVal.class);
+		return (KeyVal[])temp.Xto_ary(KeyVal.class);
 	}
 	private static Object X_val_to_obj(Luaj_server server, LuaValue v) {
 		switch (v.type()) {

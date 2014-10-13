@@ -62,7 +62,7 @@ class Xosrh_html_mgr implements GfoInvkAble {
 				tmp_ttl_bfr.Add_byte(Byte_ascii.Colon)	// NOTE: need to add : to literalize ns; EX: [[Category:A]] will get thrown into category list; [[:Category:A]] will print
 					.Add(itm_ns.Name_db_w_colon())
 					.Add(itm_ttl);
-				itm_ttl = tmp_ttl_bfr.XtoAryAndClear();
+				itm_ttl = tmp_ttl_bfr.Xto_bry_and_clear();
 			}
 			html_itm.Bld_bfr_many(bfr, itm_ttl, itm.Text_len());
 		}

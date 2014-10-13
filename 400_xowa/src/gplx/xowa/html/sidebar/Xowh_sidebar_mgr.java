@@ -37,7 +37,7 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 			Bry_bfr comment_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
 			Parse(bfr, comment_bfr, sidebar_msg.Val());
 			Bld_html(bfr);
-			html_bry = bfr.Mkr_rls().XtoAryAndClear();
+			html_bry = bfr.Mkr_rls().Xto_bry_and_clear();
 			comment_bfr = comment_bfr.Mkr_rls().Clear();
 		} catch (Exception e) {
 			wiki.App().Usr_dlg().Warn_many(GRP_KEY, "sidebar.init", "sidebar init failed: ~{0} ~{1}", wiki.Domain_str(), Err_.Message_gplx_brief(e));
@@ -67,7 +67,7 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 			int pipe_pos = Bry_finder.Find_fwd(bry, Byte_ascii.Pipe);
 			byte[] text_key = tid == Xowh_sidebar_itm.Tid_grp ? bry : Bry_.Mid(bry, pipe_pos + 1, bry.length);	// get text_key; note that grp is entire bry, while itm is after |
 			byte[] text_val = Resolve_key(text_key);
-			byte[] id = id_encoder.Encode(bfr.Add(CONST_id_prefix), text_key).XtoAryAndClear();	// build id; "n-encoded_id"
+			byte[] id = id_encoder.Encode(bfr.Add(CONST_id_prefix), text_key).Xto_bry_and_clear();	// build id; "n-encoded_id"
 			Xowh_sidebar_itm cur_itm = new Xowh_sidebar_itm(tid).Id_(id).Text_(text_val);
 			wiki.Msg_mgr().Val_html_accesskey_and_title(id, bfr, cur_itm);
 			if (tid == Xowh_sidebar_itm.Tid_grp) {

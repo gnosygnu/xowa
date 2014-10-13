@@ -47,7 +47,7 @@ public class Xoa_url_arg_hash {
 			Gfo_url_arg itm = Get_arg(key); if (itm == null) continue;
 			bfr.Add_byte(Byte_ascii.Amp).Add(itm.Key_bry()).Add_byte(Byte_ascii.Eq).Add(itm.Val_bry());
 		}
-		return bfr.XtoAryAndClear();
+		return bfr.Xto_bry_and_clear();
 	}
 	public Xoa_url_arg_hash Load(Xoa_url url) {
 		hash.Clear();
@@ -60,7 +60,7 @@ public class Xoa_url_arg_hash {
 		return this;
 	}
 	public void Save(Xoa_url url) {
-		Gfo_url_arg[] ary = (Gfo_url_arg[])hash.XtoAry(Gfo_url_arg.class);
+		Gfo_url_arg[] ary = (Gfo_url_arg[])hash.Xto_ary(Gfo_url_arg.class);
 		url.Args_(ary);
 	}
 	public static void Concat_bfr(Bry_bfr bfr, Url_encoder href_encoder, Gfo_url_arg[] ary) {

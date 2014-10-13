@@ -39,7 +39,7 @@ public class Xop_link_parser {
 					else												// regular url
 						tmp_bfr.Add(raw);								//   dump everything									
 				}
-				raw = tmp_bfr.XtoAryAndClear();
+				raw = tmp_bfr.Xto_bry_and_clear();
 				html_anchor_cls = Xow_html_mgr.Bry_anchor_class_blank;
 				html_anchor_rel = Xow_html_mgr.Bry_anchor_rel_nofollow;
 				break;
@@ -51,7 +51,7 @@ public class Xop_link_parser {
 						html_xowa_ttl = Bry_.Mid(raw, slash_pos + Int_.Const_dlm_len, raw.length);
 				}
 				else // next char is not slash; assume xfer_itm refers to ns; EX:File:A.png
-					raw = tmp_bfr.Add(Xoh_href_parser.Href_wiki_bry).Add(raw).XtoAryAndClear();
+					raw = tmp_bfr.Add(Xoh_href_parser.Href_wiki_bry).Add(raw).Xto_bry_and_clear();
 				break;
 			default:	// is page only; EX: Abc
 				if (Bry_.Len_eq_0(raw))		// NOTE: handle blank link; EX: [[File:Loudspeaker.svg|11px|link=|alt=play]]
@@ -62,7 +62,7 @@ public class Xop_link_parser {
 						tmp_bfr.Clear();
 						return null;
 					}
-					raw = tmp_bfr.XtoAryAndClear();
+					raw = tmp_bfr.Xto_bry_and_clear();
 				}
 				break;
 		}

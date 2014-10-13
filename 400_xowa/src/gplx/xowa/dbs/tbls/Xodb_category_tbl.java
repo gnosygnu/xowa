@@ -57,10 +57,10 @@ public class Xodb_category_tbl {
 		}	finally {stmt.Rls(); rdr.Rls();}
 		return Xodb_category_itm.Null;
 	}
-	public void Select_by_cat_id_in(Cancelable cancelable, OrderedHash rv, Db_provider p, Xow_wiki wiki, int bgn, int end) {
+	public void Select_by_cat_id_in(Cancelable cancelable, OrderedHash rv, Db_provider p, Xodb_ctx db_ctx, int bgn, int end) {
 		Xodb_in_wkr_category_id wkr = new Xodb_in_wkr_category_id();
 		wkr.Init(rv);
-		wkr.Select_in(p, cancelable, wiki, bgn, end);
+		wkr.Select_in(p, cancelable, db_ctx, bgn, end);
 	}
 	public static Xodb_category_itm Read_ctg(DataRdr rdr) {
 		return Xodb_category_itm.load_

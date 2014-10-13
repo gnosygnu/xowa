@@ -50,7 +50,7 @@ public class Xow_hive_mgr_fxt {
 		for (int fil_idx = 0; fil_idx < files; fil_idx++) {
 			for (int ttl_idx = 0; ttl_idx < ttls_per_file; ttl_idx++) {
 				tmp_bfr.Add_byte(ltr).Add_int_fixed(ttl_idx, ttl_bry_len);
-				byte[] ttl_bry = tmp_bfr.XtoAryAndClear(); 
+				byte[] ttl_bry = tmp_bfr.Xto_bry_and_clear(); 
 				if 		(ttl_idx == 0) 					ttl_0 = ttl_bry;
 				else if (ttl_idx == ttls_per_file - 1) 	ttl_n = ttl_bry;
 				Xodb_page_.Txt_ttl_save(xdat_wtr.Bfr(), id++, 0, ttl_idx, ttl_idx % 2 == 1, 1, ttl_bry);
@@ -71,7 +71,7 @@ public class Xow_hive_mgr_fxt {
 		for (int i = 0; i < pages_len; i++)				
 			bfr.Add_byte_pipe().Add_base85_len_5(pages[i]);
 		bfr.Add_byte_nl();
-		byte[] row = bfr.Mkr_rls().XtoAryAndClear();
+		byte[] row = bfr.Mkr_rls().Xto_bry_and_clear();
 		hive_mgr.Create(Xow_dir_info_.Tid_category, key_bry, row);
 	}
 	public Xow_hive_mgr_fxt Create_id(int id, int fil_idx, int row_idx, boolean type_redirect, int itm_len, int ns_id, String ttl) {Create_id(app, hive_mgr, id, fil_idx, row_idx, type_redirect, itm_len, ns_id, ttl); return this;}
@@ -85,7 +85,7 @@ public class Xow_hive_mgr_fxt {
 			.Add_base85_len_5(itm_len)			.Add_byte_pipe()
 			.Add_base85_len_5(ns_id)			.Add_byte_pipe()
 			.Add_str(ttl)						.Add_byte_nl();
-		byte[] row = bfr.XtoAryAndClear();
+		byte[] row = bfr.Xto_bry_and_clear();
 		bfr.Mkr_rls();
 		hive_mgr.Create(Xow_dir_info_.Tid_id, key_bry, row);
 	}

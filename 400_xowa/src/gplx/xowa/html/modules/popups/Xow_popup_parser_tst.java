@@ -508,6 +508,6 @@ class Xop_popup_parser_fxt {
 		if (test_bfr == null) test_bfr = Bry_bfr.new_();
 		test_bfr.Clear().Add_str(raw);
 		Bry_bfr_.Assert_at_end(test_bfr, Byte_ascii.NewLine);
-		Tfds.Eq(expd, test_bfr.XtoStrAndClear());
+		Tfds.Eq(expd, test_bfr.Xto_str_and_clear());
 	}	private Bry_bfr test_bfr;
 }

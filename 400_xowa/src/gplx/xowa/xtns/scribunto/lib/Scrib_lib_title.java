@@ -61,7 +61,7 @@ public class Scrib_lib_title implements Scrib_lib {
 		}
 		if (ns_bry != null) {
 			Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
-			ttl_bry = bfr.Add(ns_bry).Add_byte(Byte_ascii.Colon).Add(ttl_bry).Mkr_rls().XtoAryAndClear();
+			ttl_bry = bfr.Add(ns_bry).Add_byte(Byte_ascii.Colon).Add(ttl_bry).Mkr_rls().Xto_bry_and_clear();
 		}
 		Xoa_ttl ttl = Xoa_ttl.parse_(core.Wiki(), ttl_bry);
 		if (ttl == null) return rslt.Init_obj(null);	// invalid title; exit; matches MW logic
@@ -87,7 +87,7 @@ public class Scrib_lib_title implements Scrib_lib {
 		//	bfr.Add();
 		//}
 		Pfunc_urlfunc.UrlString(core.Ctx(), url_func_tid, false, ttl_bry, bfr, qry_bry);
-		return rslt.Init_obj(bfr.Mkr_rls().XtoStrAndClear());
+		return rslt.Init_obj(bfr.Mkr_rls().Xto_str_and_clear());
 	}
 	private static final Hash_adp_bry url_func_hash = Hash_adp_bry.ci_ascii_()
 	.Add_str_byte("fullUrl", Pfunc_urlfunc.Tid_full)
@@ -116,7 +116,7 @@ public class Scrib_lib_title implements Scrib_lib {
 		if (xwiki_str != null) tmp_bfr.Add_str(xwiki_str).Add_byte(Byte_ascii.Colon);		
 		tmp_bfr.Add(ns_bry).Add_byte(Byte_ascii.Colon).Add_str(ttl_str);
 		if (anchor_str != null) tmp_bfr.Add_byte(Byte_ascii.Hash).Add_str(anchor_str);
-		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, tmp_bfr.Mkr_rls().XtoAryAndClear());
+		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, tmp_bfr.Mkr_rls().Xto_bry_and_clear());
 		if (ttl == null) return rslt.Init_obj(null);	// invalid title; exit;
 		return rslt.Init_obj(Xto_kv_ary(ttl));
 	}

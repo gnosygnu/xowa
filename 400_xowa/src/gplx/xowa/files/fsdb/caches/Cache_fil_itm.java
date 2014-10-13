@@ -78,7 +78,7 @@ public class Cache_fil_itm implements CompareAble {
 			.Add_int_variable(fil_h).Add_byte_pipe()
 			.Add_int_variable(Xof_doc_thumb.X_int(fil_thumbtime))
 			;
-		return bfr.XtoAryAndClear();
+		return bfr.Xto_bry_and_clear();
 	}
 	public int compareTo(Object obj) {Cache_fil_itm comp = (Cache_fil_itm)obj; return -Long_.Compare(cache_time, comp.cache_time);}	// - for DESC sort
 	public static final Cache_fil_itm Null = new Cache_fil_itm(); public Cache_fil_itm() {}

@@ -31,7 +31,7 @@ public class Xol_csv_parser {
 			}
 		}
 	}
-	public byte[] Load(byte[] src, int bgn, int end) {Load(tmp_bfr, src, bgn, end); return tmp_bfr.XtoAryAndClear();}
+	public byte[] Load(byte[] src, int bgn, int end) {Load(tmp_bfr, src, bgn, end); return tmp_bfr.Xto_bry_and_clear();}
 	public void Load(Bry_bfr bfr, byte[] src) {Load(bfr, src, 0, src.length);}
 	public void Load(Bry_bfr bfr, byte[] src, int bgn, int end) {
 		for (int i = bgn; i < end; i++) {

@@ -28,16 +28,18 @@ public class Xodb_hdump_mgr_setup {
 	}
 	private static Xodb_file Setup(Xodb_mgr_sql db_mgr) {
 		Xodb_fsys_mgr fsys_mgr = db_mgr.Fsys_mgr();
-		Update_core(fsys_mgr);
+		Assert_col__page_html_db_id(fsys_mgr.Provider_core(), db_mgr.Tbl_xowa_cfg());
 		Xodb_file html_db_file = Create_db(db_mgr, fsys_mgr);
 		Create_idx(html_db_file);
 		return html_db_file;
 	}
-	private static void Update_core(Xodb_fsys_mgr fsys_mgr) {
-		Db_provider core_provider = fsys_mgr.Provider_core();
+	public static void Assert_col__page_html_db_id(Db_provider core_provider, Xodb_xowa_cfg_tbl cfg_tbl) {
+		String val = cfg_tbl.Select_val_or(Xodb_fsys_mgr.Cfg_grp_db_meta, Cfg_itm_html_db_exists, "n");
+		if (String_.Eq(val, "y")) return;
 		try {
-			Xodb_xowa_cfg_tbl.Insert_str(core_provider, "db.meta", "html_db.exists", "y");
-			core_provider.Exec_sql("ALTER TABLE page ADD COLUMN page_html_db_id integer NOT NULL DEFAULT '-1'");
+			core_provider.Exec_sql(Sql_ddl__page_html_db_id);
+			core_provider.Exec_sql(Sql_ddl__page_redirect_id);
+			cfg_tbl.Insert_str(Xodb_fsys_mgr.Cfg_grp_db_meta, Cfg_itm_html_db_exists, "y");
 		}	catch (Exception e) {Gfo_usr_dlg_._.Warn_many("", "", "failed to update core: db=~{0} err=~{1}", core_provider.Conn_info().Str_raw(), Err_.Message_gplx(e));}
 	}
 	private static Xodb_file Create_db(Xodb_mgr_sql db_mgr, Xodb_fsys_mgr fsys_mgr) {
@@ -49,4 +51,9 @@ public class Xodb_hdump_mgr_setup {
 	private static void Create_idx(Xodb_file html_db_file) {
 		Sqlite_engine_.Idx_create(html_db_file.Provider(), Hdump_text_tbl.Idx_core);
 	}
+	private static final String Cfg_itm_html_db_exists = "html_db.exists";
+	private static final String 
+	  Sql_ddl__page_html_db_id		= "ALTER TABLE page ADD COLUMN page_html_db_id integer NOT NULL DEFAULT '-1'"
+	, Sql_ddl__page_redirect_id		= "ALTER TABLE page ADD COLUMN page_redirect_id integer NOT NULL DEFAULT '-1'"
+	;
 }

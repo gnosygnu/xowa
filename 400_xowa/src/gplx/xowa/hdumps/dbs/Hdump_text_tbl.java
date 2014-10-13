@@ -52,7 +52,7 @@ public class Hdump_text_tbl {
 			rdr.Close();
 		}
 		catch (Exception exc) {stmt_select = null; throw Err_.err_(exc, "stmt failed");} // must reset stmt, else next call will fail
-		finally {stmt_select.Rls();}
+		finally {if (stmt_select != null) stmt_select.Rls();}
 	}
 	public void Rls_all() {
 		if (stmt_select != null) {stmt_select.Rls(); stmt_select = null;}

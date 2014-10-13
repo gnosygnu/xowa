@@ -20,12 +20,13 @@ import gplx.core.btries.*; import gplx.core.flds.*; import gplx.ios.*; import gp
 import gplx.xowa.apps.*; import gplx.xowa.apps.caches.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apis.*; import gplx.xowa.urls.encoders.*;
 import gplx.xowa.langs.*; import gplx.xowa.specials.*; import gplx.xowa.cfgs2.*;
 import gplx.xowa.wikis.*; import gplx.xowa.users.*; import gplx.xowa.gui.*; import gplx.xowa.cfgs.*; import gplx.xowa.ctgs.*; import gplx.xowa.html.tocs.*; import gplx.xowa.fmtrs.*; import gplx.xowa.html.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.tblws.*;
 import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.math.*;
 import gplx.xowa.parsers.logs.*; import gplx.xowa.servers.tcp.*; import gplx.xowa.servers.http.*;
 public class Xoa_app implements GfoInvkAble {
 	public Xoa_app(Gfo_usr_dlg usr_dlg, Io_url root_dir, Io_url user_dir, String bin_dir_name) {
 		this.usr_dlg = usr_dlg;
+		Io_url.Http_file_str_encoder = encoder_mgr.Fsys();
 		log_wtr = usr_dlg.Log_wtr();
 		cfg_mgr = new Xoa_cfg_mgr(this);
 		api_root = new Xoapi_root(this);
@@ -50,7 +51,6 @@ public class Xoa_app implements GfoInvkAble {
 		gfs_mgr = new Xoa_gfs_mgr(this);
 		xtn_mgr = new Xow_xtn_mgr().Ctor_by_app(this);
 		hive_mgr = new Xoa_hive_mgr(this);
-		Io_url.Http_file_str_encoder = encoder_mgr.Fsys();
 		tcp_server.App_ctor(this);
 		fmtr_mgr = new Xoa_fmtr_mgr(this);
 		log_mgr = new Xop_log_mgr(this);
@@ -112,6 +112,7 @@ public class Xoa_app implements GfoInvkAble {
 	public Gfo_log_wtr			Log_wtr() {return log_wtr;} private Gfo_log_wtr log_wtr;
 	public Xoa_gfs_mgr			Gfs_mgr() {return gfs_mgr;} private Xoa_gfs_mgr gfs_mgr;
 	public Xoa_special_mgr		Special_mgr() {return special_mgr;} private Xoa_special_mgr special_mgr = new gplx.xowa.specials.Xoa_special_mgr();
+	public Xoh_html_mgr			Html_mgr() {return html_mgr;} private Xoh_html_mgr html_mgr;
 	public Xop_log_mgr			Log_mgr() {return log_mgr;} private Xop_log_mgr log_mgr;
 	public Xoa_shell			Shell() {return shell;} private Xoa_shell shell;
 	public byte					Mode() {return mode;} public Xoa_app Mode_(byte v) {mode = v; return this;} private byte mode = Xoa_app_.Mode_console;
@@ -143,12 +144,11 @@ public class Xoa_app implements GfoInvkAble {
 	public boolean					Xwiki_missing(byte[] wiki_key)	{return user.Wiki().Xwiki_mgr().Get_by_key(wiki_key) == null;} // NOTE: only the user_wiki has a full list of all wikis b/c it has xwiki objects; wiki_mgr does not, b/c it has heavier wiki objects which are loaded dynamically;
 	public boolean					Xwiki_exists(byte[] wiki_key)	{return user.Wiki().Xwiki_mgr().Get_by_key(wiki_key) != null;}
 	public Xoa_ctg_mgr			Ctg_mgr() {return ctg_mgr;} private Xoa_ctg_mgr ctg_mgr = new Xoa_ctg_mgr();
-	public Xoa_fsys_eval Url_cmd_eval() {return url_cmd_eval;} Xoa_fsys_eval url_cmd_eval;
+	public Xoa_fsys_eval		Url_cmd_eval() {return url_cmd_eval;} Xoa_fsys_eval url_cmd_eval;
 	public Xoa_cur Cur_redirect() {return cur_redirect;} private Xoa_cur cur_redirect;
 	public Xoa_cfg_mgr			Cfg_mgr() {return cfg_mgr;} private Xoa_cfg_mgr cfg_mgr;
 	public Xocfg_regy			Cfg_regy() {return cfg_regy;} private Xocfg_regy cfg_regy;
 	public Io_stream_zip_mgr	Zip_mgr() {return zip_mgr;} Io_stream_zip_mgr zip_mgr = new Io_stream_zip_mgr();
-	public gplx.xowa.html.Xoh_html_mgr Html_mgr() {return html_mgr;} private Xoh_html_mgr html_mgr;
 	public Xoa_cache_mgr Cache_mgr() {return cache_mgr;} private Xoa_cache_mgr cache_mgr = new Xoa_cache_mgr();
 
 	public Xosrv_server			Tcp_server() {return tcp_server;} private Xosrv_server tcp_server = new Xosrv_server();

@@ -73,7 +73,7 @@ public class Xol_kwd_parse_data {
 					break;
 			}
 		}
-		return dirty ? tmp.XtoAryAndClear() : raw;
+		return dirty ? tmp.Xto_bry_and_clear() : raw;
 	}
 	public static final byte Strip_none = 0, Strip_bgn = 1, Strip_end = 2;
 }

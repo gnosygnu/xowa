@@ -18,16 +18,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.xmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.ios.*;
 public class Xob_xml_page_bldr {
-	public byte[] Xto_bry() {return bfr.XtoAryAndClear();}
+	public byte[] Xto_bry() {return bfr.Xto_bry_and_clear();}
 	public Io_buffer_rdr XtoByteStreamRdr() {return XtoByteStreamRdr(Io_mgr.Len_kb);}
 	public Io_buffer_rdr XtoByteStreamRdr(int bfr_len) {
 		Io_url url = Io_url_.mem_fil_("mem/byteStreamRdr.txt");
-		Io_mgr._.SaveFilBry(url, bfr.XtoAryAndClear());
+		Io_mgr._.SaveFilBry(url, bfr.Xto_bry_and_clear());
 		return Io_buffer_rdr.new_(gplx.ios.Io_stream_rdr_.file_(url), bfr_len);
 	}
 	public Bry_bfr Bfr() {return bfr;} Bry_bfr bfr = Bry_bfr.new_();
 	public Xob_xml_page_bldr Upd(String find, String repl) {
-		String all = bfr.XtoStrAndClear();
+		String all = bfr.Xto_str_and_clear();
 		all = String_.Replace(all, find, repl);
 		bfr.Add_str(all);
 		return this;

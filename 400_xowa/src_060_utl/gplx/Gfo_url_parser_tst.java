@@ -122,7 +122,7 @@ class Gfo_url_parser_chkr implements Tst_chkr {
 		rv += bry_ary_chkr.Chk(mgr, "segs", actl.Segs());
 		rv += mgr.Tst_val(page == null, path, "page", page, String_.new_utf8_(actl.Page()));
 		rv += mgr.Tst_val(anchor == null, path, "anchor", anchor, String_.new_utf8_(actl.Anchor()));
-		mgr.Tst_sub_ary((Gfo_url_arg_chkr[])args.XtoAry(Gfo_url_arg_chkr.class), actl.Args(), "args", rv);
+		mgr.Tst_sub_ary((Gfo_url_arg_chkr[])args.Xto_ary(Gfo_url_arg_chkr.class), actl.Args(), "args", rv);
 		return rv;
 	}
 	public Gfo_url_parser_chkr Raw_(String v) 				{this.raw = v; return this;} private String raw;

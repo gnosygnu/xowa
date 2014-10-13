@@ -55,7 +55,7 @@ public class Hdump_load_mgr {
 				case Hdump_data_tid.Tid_redlink	: Load_data_redlink(hpg); break;		// 2|2|0|1
 			}
 		}
-		if (img_itms.Count() > 0) hpg.Img_itms_((Hdump_data_img__base[])img_itms.XtoAryAndClear(Hdump_data_img__base.class));
+		if (img_itms.Count() > 0) hpg.Img_itms_((Hdump_data_img__base[])img_itms.Xto_ary_and_clear(Hdump_data_img__base.class));
 	}
 	private void Load_data_img() {
 		int tid = rdr.Read_int_to_pipe();

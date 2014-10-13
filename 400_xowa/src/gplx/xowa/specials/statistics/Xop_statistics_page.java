@@ -32,7 +32,7 @@ public class Xop_statistics_page implements Xows_page {
 //			stats_wiki.Wiki_(wiki);
 		stats_ns.Wiki_(wiki);
 		fmtr_all.Bld_bfr_many(tmp_bfr, stats_page, stats_ns);
-		return tmp_bfr.Mkr_rls().XtoAryAndClear();
+		return tmp_bfr.Mkr_rls().Xto_bry_and_clear();
 	}
 	private Bry_fmtr fmtr_all = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	(	"<div id=\"mw-content-text\">"

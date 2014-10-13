@@ -67,7 +67,7 @@ public class Xol_duration_itm_ {
 			if (itm != null)
 				rv.Add(itm);
 		}
-		return (Xol_duration_itm[])rv.XtoAry(Xol_duration_itm.class);
+		return (Xol_duration_itm[])rv.Xto_ary(Xol_duration_itm.class);
 	}
 }
 class Xol_duration_itm_sorter implements gplx.lists.ComparerAble {

@@ -29,7 +29,7 @@ public class KeyValHash {
 	public KeyValHash Add(String key, Object val) {hash.Add(key, KeyVal_.new_(key, val)); return this;}
 	public KeyValHash AddReplace(String key, Object val) {hash.AddReplace(key, KeyVal_.new_(key, val)); return this;}
 	public void Del(String key) {hash.Del(key);}
-	public KeyVal[] XtoAry() {
+	public KeyVal[] Xto_bry() {
 		KeyVal[] rv = new KeyVal[this.Count()];
 		for (int i = 0; i < rv.length; i++)
 			rv[i] = this.FetchAt(i);

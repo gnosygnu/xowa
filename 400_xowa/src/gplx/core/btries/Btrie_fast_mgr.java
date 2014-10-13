@@ -106,7 +106,7 @@ public class Btrie_fast_mgr {
 				pos = match_pos;
 			}
 		}
-		return dirty ? tmp_bfr.XtoAryAndClear() : src;
+		return dirty ? tmp_bfr.Xto_bry_and_clear() : src;
 	}
 	public static Btrie_fast_mgr cs_()		{return new Btrie_fast_mgr(false);}
 	public static Btrie_fast_mgr ci_ascii_()	{return new Btrie_fast_mgr(true);}

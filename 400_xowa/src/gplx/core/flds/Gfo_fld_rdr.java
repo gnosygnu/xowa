@@ -80,8 +80,8 @@ public class Gfo_fld_rdr extends Gfo_fld_base {
 		}
 		throw Err_.new_("fld_dlm failed").Add("fld_dlm", (char)fld_dlm).Add("bgn", fld_bgn);
 	}
-	public String Read_str_escape()	{Move_next_escaped(bfr); return String_.new_utf8_(bfr.XtoAryAndClear());}
-	public byte[] Read_bry_escape()	{Move_next_escaped(bfr); return bfr.XtoAryAndClear();}
+	public String Read_str_escape()	{Move_next_escaped(bfr); return String_.new_utf8_(bfr.Xto_bry_and_clear());}
+	public byte[] Read_bry_escape()	{Move_next_escaped(bfr); return bfr.Xto_bry_and_clear();}
 	public void Move_1() {++pos;}
 	public void Move_next_escaped() {Move_next_escaped(bfr); bfr.Clear();}
 	public int Move_next_simple_fld() {

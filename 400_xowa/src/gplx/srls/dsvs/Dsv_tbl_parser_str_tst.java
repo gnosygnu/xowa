@@ -83,7 +83,7 @@ class Mok_str_mgr extends Mok_mgr_base {
 		this.flds_len = flds_len;
 	}
 	public void Clear() {itms.Clear();}
-	@Override public XtoStrAble[] Itms() {return (XtoStrAble[])itms.XtoAry(XtoStrAble.class);} private ListAdp itms = ListAdp_.new_();
+	@Override public XtoStrAble[] Itms() {return (XtoStrAble[])itms.Xto_ary(XtoStrAble.class);} private ListAdp itms = ListAdp_.new_();
 	private ListAdp flds = ListAdp_.new_();
 	@Override public boolean Write_bry(Dsv_tbl_parser parser, int fld_idx, byte[] src, int bgn, int end) {
 		flds.Add(String_.new_utf8_(src, bgn, end));
@@ -96,7 +96,7 @@ class Mok_str_mgr extends Mok_mgr_base {
 		return rv;
 	}
 	@Override public void Commit_itm(Dsv_tbl_parser parser, int pos) {
-		Mok_str_itm itm = new Mok_str_itm((String[])flds.XtoAryAndClear(String.class));
+		Mok_str_itm itm = new Mok_str_itm((String[])flds.Xto_ary_and_clear(String.class));
 		itms.Add(itm);
 	}
 }

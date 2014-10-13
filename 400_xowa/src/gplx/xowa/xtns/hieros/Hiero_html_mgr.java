@@ -102,7 +102,7 @@ class Hiero_html_mgr {
 			else
 				temp_bfr.Add(v);
 		}
-		byte[] prefab_bry = temp_bfr.XtoAryAndClear();
+		byte[] prefab_bry = temp_bfr.Xto_bry_and_clear();
 		Hiero_prefab_itm prefab_itm = prefab_mgr.Get_by_key(prefab_bry);
 		if (prefab_itm != null) {
 			byte[] td_height = wtr.Td_height(Resize_glyph(prefab_bry, cartouche_opened));
@@ -159,7 +159,7 @@ class Hiero_html_mgr {
 				byte[] td_height = wtr.Td_height(Resize_glyph(v, cartouche_opened, total));
 				temp_bfr.Add(Render_glyph(v, td_height));
 			}
-			wtr.Td(content_bfr, temp_bfr.XtoAryAndClear());
+			wtr.Td(content_bfr, temp_bfr.Xto_bry_and_clear());
 		}
 	}
 	private byte[] Render_glyph(byte[] src)						{return Render_glyph(src, Bry_.Empty);}

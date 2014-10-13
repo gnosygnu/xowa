@@ -51,20 +51,26 @@ public class Xog_tab_itm_edit_mgr {
 		Xoa_page new_page = Xoa_page.new_(wiki, page.Ttl());
 		new_page.Revision_data().Id_(page.Revision_data().Id());	// NOTE: page_id needed for sqlite (was not needed for xdat)
 		new_page.Data_raw_(new_text);
-		wiki.ParsePage_root(new_page, true);		// refresh html
-		tab.Page_(new_page);
+		wiki.ParsePage_root(new_page, true);						// refresh html
+		tab.Page_(new_page); new_page.Tab_(tab);					// replace old page with new_page; DATE:2014-10-09
 
 		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_m001();
 		Xoh_page_wtr_wkr wkr = wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_view_mode.Tid_read);
 		wkr.Page_(new_page);
 		wkr.XferAry(tmp_bfr, 0);
-		byte[] new_html = tmp_bfr.Mkr_rls().XtoAryAndClear();
+		byte[] new_html = tmp_bfr.Mkr_rls().Xto_bry_and_clear();
 		new_page.Html_data().Edit_preview_(new_html);
 
 		Invalidate(wiki);
 		win_itm.Page__mode_(Xopg_view_mode.Tid_edit);
 		html_itm.Scroll_page_by_id_gui(Xog_html_itm.Elem_id__first_heading);// NOTE: was originally directly; changed to call on thread; DATE:2014-05-03
 		win_itm.Page__async__bgn(tab);	// NOTE: needed to show images during preview; DATE:2014-06-21
+		try {
+			tab.Async();
+		}
+		catch (Exception e) {
+			tab.Tab_mgr().Win().App().Usr_dlg().Warn_many("error while running file wkr; page=~{0} err=~{1}", tab.Page().Url().Xto_full_str(), Err_.Message_gplx_brief(e));
+		}
 	}
 	public static void Rename(Xog_tab_itm tab) {
 		if (tab.View_mode() != Xopg_view_mode.Tid_edit) return;	// exit if not edit; handles ctrl+r being pressed
@@ -105,7 +111,7 @@ public class Xog_tab_itm_edit_mgr {
 		Bry_bfr bfr = win.App().Utl_bry_bfr_mkr().Get_m001();
 		bfr.Add(new_page.Root().Root_src());
 		wiki.Ctx().Defn_trace().Print(data, bfr);
-		new_page.Data_raw_(bfr.Mkr_rls().XtoAryAndClear());
+		new_page.Data_raw_(bfr.Mkr_rls().Xto_bry_and_clear());
 		byte old = tab.View_mode();
 		tab.View_mode_(view_tid);
 		Xog_tab_itm_read_mgr.Show_page(tab, new_page, false);

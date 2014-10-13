@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.core.btries.*;
-class Xop_eq_lxr implements Xop_lxr {//20111222
+import gplx.core.btries.*; import gplx.xowa.parsers.paras.*;
+class Xop_eq_lxr implements Xop_lxr {
 	public Xop_eq_lxr(boolean tmpl_mode) {this.tmpl_mode = tmpl_mode;}	boolean tmpl_mode;
 	public byte Lxr_tid() {return Xop_lxr_.Tid_eq;}
 	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Byte_ascii.Eq, this);}

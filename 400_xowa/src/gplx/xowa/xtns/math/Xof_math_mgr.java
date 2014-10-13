@@ -48,7 +48,7 @@ public class Xof_math_mgr implements GfoInvkAble {
 			.Add(String_.CharAt(hash, 2)).Add(Math_dir_spr)
 			.Add(hash).Add(".png")
 			;
-		return Io_url_.new_fil_(tmp_sb.XtoStrAndClear());
+		return Io_url_.new_fil_(tmp_sb.Xto_str_and_clear());
 	}
 	public boolean MakePng(byte[] math, String hash, Io_url png_url, String prog_fmt) {
 		if (!enabled) return false;

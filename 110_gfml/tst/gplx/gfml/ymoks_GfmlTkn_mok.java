@@ -55,7 +55,7 @@ class GfmlTkn_mok {
 			}
 		}
 	}
-	public static GfmlTkn_mok[] XtoAry(String... ary) {
+	public static GfmlTkn_mok[] Xto_bry(String... ary) {
 		GfmlTkn_mok[] rv = new GfmlTkn_mok[ary.length];
 		for (int i = 0; i < rv.length; i++) 
 			rv[i] = GfmlTkn_mok.new_().Raw_(ary[i]);

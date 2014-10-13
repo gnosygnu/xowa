@@ -80,7 +80,7 @@ public class Xodb_save_mgr_sql implements Xodb_save_mgr {
 		Xodb_page db_page = new Xodb_page();
 		db_mgr.Load_mgr().Load_by_id(db_page, page.Revision_data().Id());
 		text = zip_mgr.Zip(db_mgr.Data_storage_format(), text);
-		db_mgr.Tbl_text().Update(db_page.Db_file_idx(), page.Revision_data().Id(), text);
+		db_mgr.Tbl_text().Update(db_page.Text_db_id(), page.Revision_data().Id(), text);
 	}
 	public void Data_rename(Xoa_page page, int trg_ns, byte[] trg_ttl) {
 		Db_qry qry = Db_qry_.update_common_("page", Db_crt_.eq_("page_id", page.Revision_data().Id())

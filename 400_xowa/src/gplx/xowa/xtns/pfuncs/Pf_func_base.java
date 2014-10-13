@@ -36,7 +36,7 @@ public abstract class Pf_func_base implements Pf_func {
 				Bry_bfr tmp = Bry_bfr.new_();
 				for (int i = 0; i < subs_len; i++)
 					name_val_tkn.Subs_get(i).Tmpl_evaluate(ctx, src, caller, tmp);
-				argx_dat = tmp.XtoAryAndClearAndTrim();
+				argx_dat = tmp.Xto_bry_and_clear_and_trim();
 			}
 		}
 		return argx_dat;
@@ -62,7 +62,7 @@ public abstract class Pf_func_base implements Pf_func {
 				Bry_bfr tmp = Bry_bfr.new_();
 				for (int i = 0; i < subs_len; i++)
 					name_val_tkn.Subs_get(i).Tmpl_evaluate(ctx, src, caller, tmp);
-				argx_dat = tmp.XtoAryAndClearAndTrim();
+				argx_dat = tmp.Xto_bry_and_clear_and_trim();
 			}
 		}
 		return argx_dat;

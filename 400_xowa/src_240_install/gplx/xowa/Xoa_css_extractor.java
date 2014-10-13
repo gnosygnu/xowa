@@ -117,7 +117,7 @@ public class Xoa_css_extractor {
 		Bry_bfr bfr = Bry_bfr.new_();
 		Css_wiki_generate_section(bfr, Ttl_common_css);
 		Css_wiki_generate_section(bfr, Ttl_vector_css);
-		byte[] bry = bfr.XtoAryAndClear();
+		byte[] bry = bfr.Xto_bry_and_clear();
 		bry = Bry_.Replace(bry, gplx.xowa.bldrs.xmls.Xob_xml_parser_.Bry_tab_ent, gplx.xowa.bldrs.xmls.Xob_xml_parser_.Bry_tab);
 		Io_mgr._.SaveFilBry(trg_fil, bry);
 		return true;
@@ -228,7 +228,7 @@ public class Xoa_css_extractor {
 			tmp_bfr.Add(Xoa_css_img_downloader.Bry_comment_bgn).Add_str(css_url).Add(Xoa_css_img_downloader.Bry_comment_end).Add_byte_nl();
 			tmp_bfr.Add(css_bry).Add_byte_nl().Add_byte_nl();
 		}
-		return tmp_bfr.XtoAryAndClear();
+		return tmp_bfr.Xto_bry_and_clear();
 	}
 	public static final String Css_common_name = "xowa_common.css", Css_wiki_name = "xowa_wiki.css"
 	, Css_common_name_ltr = "xowa_common_ltr.css", Css_common_name_rtl = "xowa_common_rtl.css";

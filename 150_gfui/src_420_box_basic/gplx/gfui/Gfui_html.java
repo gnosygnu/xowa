@@ -26,6 +26,7 @@ public class Gfui_html extends GfuiElemBase {
 	public String				Html_doc_selected_get_text_or_href() {return under.Html_doc_selected_get_text_or_href();}
 	public String				Html_doc_selected_get_href_or_text() {return under.Html_doc_selected_get_href_or_text();}
 	public String				Html_doc_selected_get_src_or_empty() {return under.Html_doc_selected_get_src_or_empty();}
+	public String				Html_doc_selected_get_active_or_selection() {return under.Html_doc_selected_get_active_or_selection();}		
 	public boolean				Html_doc_find(String elem_id, String find, boolean dir_fwd, boolean case_match, boolean wrap_find) {return under.Html_doc_find(elem_id, find, dir_fwd, case_match, wrap_find);}
 	public void					Html_doc_body_focus() {under.Html_doc_body_focus();}
 	public void					Html_doc_selection_focus_toggle() {under.Html_doc_selection_focus_toggle();}

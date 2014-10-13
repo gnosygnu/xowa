@@ -50,7 +50,7 @@ public class Nearby_mgr implements Xows_page {
 			tmp_bfr.Add_str("</tr>");
 		}
 		tmp_bfr.Add_str("</table>");
-		return tmp_bfr.XtoAryAndClear();
+		return tmp_bfr.Xto_bry_and_clear();
 	}
 	Bry_fmtr form_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl
 		(	"<form id='xowa_nearby_form' action='/wiki/Special:XowaNearby'>"

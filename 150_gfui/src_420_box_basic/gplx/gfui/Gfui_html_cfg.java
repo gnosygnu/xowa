@@ -23,6 +23,7 @@ public class Gfui_html_cfg implements GfoInvkAble {
 	public String Doc_selected_get_text_or_href()								{return Exec_fmt(fmtr_doc_selected_get_text_or_href);}				private Bry_fmtr fmtr_doc_selected_get_text_or_href = Bry_fmtr.keys_();
 	public String Doc_selected_get_href_or_text()								{return Exec_fmt(fmtr_doc_selected_get_href_or_text);}				private Bry_fmtr fmtr_doc_selected_get_href_or_text = Bry_fmtr.keys_();
 	public String Doc_selected_get_src_or_empty()								{return Exec_fmt(fmtr_doc_selected_get_src_or_empty);}				private Bry_fmtr fmtr_doc_selected_get_src_or_empty = Bry_fmtr.keys_();
+	public String Doc_selected_get_active_or_selection()						{return Exec_fmt(fmtr_doc_selected_get_active_or_selection);}		private Bry_fmtr fmtr_doc_selected_get_active_or_selection = Bry_fmtr.keys_();
 	public String Doc_find_html(String find, boolean dir_fwd, boolean case_match, boolean wrap_find, boolean search_text_is_diff, int prv_find_bgn) {
 		return Exec_fmt(fmtr_doc_find_html, find, Bool_.Xto_str_lower(dir_fwd), Bool_.Xto_str_lower(case_match), Bool_.Xto_str_lower(wrap_find), Bool_.Xto_str_lower(search_text_is_diff), Int_.Xto_str(prv_find_bgn));
 	}	private Bry_fmtr fmtr_doc_find_html = Bry_fmtr.keys_("find_text", "dir_fwd", "case_match", "wrap_find", "find_text_is_diff", "prv_find_bgn");
@@ -62,30 +63,31 @@ public class Gfui_html_cfg implements GfoInvkAble {
 		return rv;
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_doc_html_))							fmtr_doc_html.Fmt_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_doc_body_focus_))					fmtr_doc_body_focus.Fmt_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_doc_selection_focus_toggle_))		fmtr_doc_selection_focus_toggle.Fmt_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_doc_selected_get_text_or_href_))		fmtr_doc_selected_get_text_or_href.Fmt_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_doc_selected_get_href_or_text_))		fmtr_doc_selected_get_href_or_text.Fmt_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_doc_selected_get_src_or_empty_))		fmtr_doc_selected_get_src_or_empty.Fmt_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_doc_find_html_))						fmtr_doc_find_html.Fmt_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_doc_find_edit_))						fmtr_doc_find_edit.Fmt_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_elem_atr_get_))						fmtr_elem_atr_get.Fmt_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_elem_atr_get_toString_))				fmtr_elem_atr_get_toString.Fmt_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_elem_atr_set_))						fmtr_elem_atr_set.Fmt_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_elem_atr_set_append_))				fmtr_elem_atr_set_append.Fmt_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_elem_delete_))						fmtr_elem_delete.Fmt_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_elem_replace_html_))					fmtr_elem_replace_html.Fmt_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_gallery_packed_exec_))				fmtr_gallery_packed_exec.Fmt_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_elem_focus_))						fmtr_elem_focus.Fmt_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_elem_scroll_into_view_))				fmtr_elem_scroll_into_view.Fmt_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_elem_img_update_))					fmtr_elem_img_update.Fmt_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_elem_path_get_))						fmtr_window_vpos.Fmt_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_win_print_preview_))					fmtr_window_print_preview.Fmt_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_elem_path_set_))						fmtr_window_vpos_.Fmt_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_doc_active_atr_get_))				fmtr_active_atr_get.Fmt_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_js_scripts_add))						Js_scripts_add(m.ReadStr("name"), m.ReadStr("text"));
-		else if	(ctx.Match(k, Invk_debug_file_))						debug_file = m.ReadIoUrl("v");
+		if		(ctx.Match(k, Invk_doc_html_))									fmtr_doc_html.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_doc_body_focus_))							fmtr_doc_body_focus.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_doc_selection_focus_toggle_))				fmtr_doc_selection_focus_toggle.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_doc_selected_get_text_or_href_))				fmtr_doc_selected_get_text_or_href.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_doc_selected_get_href_or_text_))				fmtr_doc_selected_get_href_or_text.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_doc_selected_get_src_or_empty_))				fmtr_doc_selected_get_src_or_empty.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_doc_selected_get_active_or_selection_))		fmtr_doc_selected_get_active_or_selection.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_doc_find_html_))								fmtr_doc_find_html.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_doc_find_edit_))								fmtr_doc_find_edit.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_elem_atr_get_))								fmtr_elem_atr_get.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_elem_atr_get_toString_))						fmtr_elem_atr_get_toString.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_elem_atr_set_))								fmtr_elem_atr_set.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_elem_atr_set_append_))						fmtr_elem_atr_set_append.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_elem_delete_))								fmtr_elem_delete.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_elem_replace_html_))							fmtr_elem_replace_html.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_gallery_packed_exec_))						fmtr_gallery_packed_exec.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_elem_focus_))								fmtr_elem_focus.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_elem_scroll_into_view_))						fmtr_elem_scroll_into_view.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_elem_img_update_))							fmtr_elem_img_update.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_elem_path_get_))								fmtr_window_vpos.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_win_print_preview_))							fmtr_window_print_preview.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_elem_path_set_))								fmtr_window_vpos_.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_doc_active_atr_get_))						fmtr_active_atr_get.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_js_scripts_add))								Js_scripts_add(m.ReadStr("name"), m.ReadStr("text"));
+		else if	(ctx.Match(k, Invk_debug_file_))								debug_file = m.ReadIoUrl("v");
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}
@@ -99,7 +101,7 @@ public class Gfui_html_cfg implements GfoInvkAble {
 	public static final String Invk_debug_file_ = "debug_file_"
 	, Invk_doc_html_ = "doc_html_", Invk_doc_body_focus_ = "doc_body_focus_", Invk_doc_selection_focus_toggle_ = "doc_selection_focus_toggle_"
 	, Invk_doc_active_atr_get_ = "doc_active_atr_get_", Invk_doc_find_html_ = "doc_find_html_", Invk_doc_find_edit_ = "doc_find_edit_"
-	, Invk_doc_selected_get_text_or_href_ = "doc_selected_get_text_or_href_", Invk_doc_selected_get_href_or_text_ = "doc_selected_get_href_or_text_", Invk_doc_selected_get_src_or_empty_ = "doc_selected_get_src_or_empty_"
+	, Invk_doc_selected_get_text_or_href_ = "doc_selected_get_text_or_href_", Invk_doc_selected_get_href_or_text_ = "doc_selected_get_href_or_text_", Invk_doc_selected_get_src_or_empty_ = "doc_selected_get_src_or_empty_", Invk_doc_selected_get_active_or_selection_ = "doc_selected_get_active_or_selection_"
 	, Invk_win_print_preview_ = "win_print_preview_"
 	, Invk_elem_atr_get_ = "elem_atr_get_", Invk_elem_atr_get_toString_ = "elem_atr_get_toString_", Invk_elem_atr_set_ = "elem_atr_set_", Invk_elem_atr_set_append_ = "elem_atr_set_append_"
 	, Invk_elem_path_get_ = "elem_path_get_", Invk_elem_path_set_ = "elem_path_set_"

@@ -54,7 +54,7 @@ public class IptKey_ {
 		IptKeyStrMgr._.XtoIptKeyAry(list);
 		for (IptKey key : del)
 			list.Del(key);
-		return (IptKey[])list.XtoAry(IptKey.class);
+		return (IptKey[])list.Xto_ary(IptKey.class);
 	}
 	static IptKey getOrNew_(int val) {
 		IptKey rv = (IptKey)enmMgr.Get(val);

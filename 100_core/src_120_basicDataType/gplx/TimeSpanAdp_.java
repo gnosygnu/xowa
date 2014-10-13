@@ -94,7 +94,7 @@ public class TimeSpanAdp_ {
 					sb.Add("0");
 				sb.Add(Int_.Xto_str(val));
 			}
-			return sb.XtoStrAndClear();
+			return sb.Xto_str_and_clear();
 		}
 		boolean fmt_fracs = !String_.Eq(fmt, TimeSpanAdp_.Fmt_NoFractionals);
 		boolean fmt_padZeros = String_.Eq(fmt, TimeSpanAdp_.Fmt_PadZeros);

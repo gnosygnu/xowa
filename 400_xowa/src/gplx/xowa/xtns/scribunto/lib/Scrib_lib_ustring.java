@@ -230,7 +230,7 @@ class Scrib_lib_ustring_gsub_mgr {
 		int text_len = String_.Len(text);
 		if (pos < text_len)
 			tmp_bfr.Add_str(String_.Mid(text, pos, text_len));			// NOTE: regx returns char pos (not bry); must add as String, not bry; DATE:2013-07-17
-		return tmp_bfr.XtoStrAndClear();
+		return tmp_bfr.Xto_str_and_clear();
 	}
 	private void Exec_repl_itm(Bry_bfr tmp_bfr, byte repl_tid, byte[] repl_bry, String text, RegxMatch match) {
 		switch (repl_tid) {

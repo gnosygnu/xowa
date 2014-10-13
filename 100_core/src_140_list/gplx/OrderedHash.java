@@ -25,7 +25,7 @@ public interface OrderedHash extends HashAdp {
 	void Sort();
 	void SortBy(ComparerAble comparer);
 	void ResizeBounds(int i);
-	Object XtoAry(Class<?> t);
+	Object Xto_ary(Class<?> t);
 	String XtoStr_ui();
 	void MoveTo(int src, int trg);
 	void Lock();

@@ -116,6 +116,6 @@ public class Ref_html_wtr_cfg {
 			if (last) break;
 			++pos;
 		}
-		return (byte[][])list.XtoAryAndClear(byte[].class);
+		return (byte[][])list.Xto_ary_and_clear(byte[].class);
 	}
 }

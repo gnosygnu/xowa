@@ -41,7 +41,7 @@ class GfmlPragmaVar implements GfmlPragma {
 	public GfmlType[] MakePragmaTypes(GfmlTypeMakr makr) {
 		makr.MakeSubTypeAsOwner	(pragmaKey);
 		makr.MakeSubType		(	"text", "key", "val", "ctx");
-		return makr.XtoAry();
+		return makr.Xto_bry();
 	}
 	void ExecList(HashAdp cache, ListAdp list) {
 		GfmlVarCtx ctx = null;

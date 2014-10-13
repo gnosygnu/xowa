@@ -176,7 +176,7 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 			Int_obj_ref ns_id_itm = Int_obj_ref.new_(ns.Id());
 			rv.Add(ns_id_itm);
 		}
-		return (Int_obj_ref[])rv.XtoAry(Int_obj_ref.class);
+		return (Int_obj_ref[])rv.Xto_ary(Int_obj_ref.class);
 	}	private HashAdp ns_allowed_regy = HashAdp_.new_(); private Int_obj_ref ns_allowed_regy_key = Int_obj_ref.zero_();
 	private Xoa_page Cur_page() {return app.Gui_mgr().Browser_win().Active_page();}
 	private Xow_popup_itm Itms_get_or_null(Xoa_page page, String popup_id) {return (Xow_popup_itm)page.Popup_mgr().Itms().Fetch(popup_id);}

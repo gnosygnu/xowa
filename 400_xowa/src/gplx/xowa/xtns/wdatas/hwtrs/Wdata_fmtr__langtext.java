@@ -104,7 +104,7 @@ class Wdata_fmtr__alias_row implements Wdata_fmtr__langtext_row {
 				tmp_bfr.Add(Html_utl.Escape_html_as_bry(val));
 			}
 			Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key_or_intl(itm.Lang());
-			row_fmtr.Bld_bfr_many(bfr, lang_itm.Key(), Html_utl.Escape_html_as_bry(lang_itm.Local_name()), tmp_bfr.XtoAryAndClear());
+			row_fmtr.Bld_bfr_many(bfr, lang_itm.Key(), Html_utl.Escape_html_as_bry(lang_itm.Local_name()), tmp_bfr.Xto_bry_and_clear());
 		}
 	}
 	private final Bry_fmtr row_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last

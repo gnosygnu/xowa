@@ -84,7 +84,7 @@ class Imap_parser {
 			} catch (Exception e) {usr_dlg.Warn_many("", "", "imap.parse:skipping line; page=~{0} line=~{1} err=~{2}", page_url.Xto_full_str_safe(), Bry_.Mid_safe(src, itm_bgn, itm_end), Err_.Message_gplx(e));}
 			++itm_idx;
 		}
-		rv.Init(xtn_mgr, imap_img_src, imap_img, imap_dflt, imap_desc, (Imap_itm_shape[])shapes.XtoAryAndClear(Imap_itm_shape.class), (Imap_err[])errs.XtoAryAndClear(Imap_err.class));
+		rv.Init(xtn_mgr, imap_img_src, imap_img, imap_dflt, imap_desc, (Imap_itm_shape[])shapes.Xto_ary_and_clear(Imap_itm_shape.class), (Imap_err[])errs.Xto_ary_and_clear(Imap_err.class));
 	}
 	private void Parse_comment(int itm_bgn, int itm_end) {}	// noop comments; EX: "# comment\n"
 	private void Parse_invalid(int itm_bgn, int itm_end) {usr_dlg.Warn_many("", "", "imap has invalid line: page=~{0} line=~{1}", page_url.Xto_full_str_safe(), String_.new_utf8_(src, itm_bgn, itm_end));}
@@ -149,7 +149,7 @@ class Imap_parser {
 			else if (pts_len > reqd_pts)	pts.Del_range(reqd_pts, pts_len - 1);	// NOTE: MW allows more points, but doesn't show them; EX: rect 1 2 3 4 5 -> rect 1 2 3 4; PAGE:en.w:Kilauea DATE:2014-07-28
 		}
 		pos = Bry_finder.Trim_fwd_space_tab(src, pos, itm_end);
-		Imap_itm_shape shape_itm = new Imap_itm_shape(shape_tid, (Double_obj_val[])pts.XtoAryAndClear(Double_obj_val.class));
+		Imap_itm_shape shape_itm = new Imap_itm_shape(shape_tid, (Double_obj_val[])pts.Xto_ary_and_clear(Double_obj_val.class));
 		Init_link_owner(shape_itm, src, pos, itm_end);
 		shapes.Add(shape_itm);
 		return true;

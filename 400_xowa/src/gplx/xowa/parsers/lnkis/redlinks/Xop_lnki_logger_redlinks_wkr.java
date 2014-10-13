@@ -103,7 +103,7 @@ public class Xop_lnki_logger_redlinks_wkr implements GfoInvkAble {
 				}
 			}
 			if (log_enabled)
-				usr_dlg.Log_many("", "", "redlink.redlink_end: redlinks_run=~{0} links=~{1}", redlink_count, bfr == null ? String_.Empty : bfr.XtoStrAndClear());
+				usr_dlg.Log_many("", "", "redlink.redlink_end: redlinks_run=~{0} links=~{1}", redlink_count, bfr == null ? String_.Empty : bfr.Xto_str_and_clear());
 		}
 	}
 	public static final Xop_lnki_logger_redlinks_wkr Null = new Xop_lnki_logger_redlinks_wkr();  Xop_lnki_logger_redlinks_wkr() {}

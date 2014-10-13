@@ -33,7 +33,7 @@ public class Xodbv_dbs_tbl {
 				list.Add(db);
 			}
 		}	finally {rdr.Close();}
-		Xodb_file[] rv = (Xodb_file[])list.XtoAry(Xodb_file.class);
+		Xodb_file[] rv = (Xodb_file[])list.Xto_ary(Xodb_file.class);
 		Chk_sequential(rv);
 		return rv;
 	}

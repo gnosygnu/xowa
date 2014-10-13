@@ -49,7 +49,7 @@ public class Gallery_itm implements Js_img_wkr {
 		try {
 			xfer_itm.Init_for_gallery_update(html_w, html_h, html_src, orig_src);
 			gallery_mgr.Write_html_itm(bfr, tmp_bfr, wiki.App(), wiki, ctx.Cur_page(), ctx, wiki.Html_mgr().Html_wtr(), Xoh_wtr_ctx.Basic, src, xnde, Bry_.Empty, gallery_itm_idx, xfer_itm, false);
-			String itm_html = bfr.XtoStrAndClear();
+			String itm_html = bfr.Xto_str_and_clear();
 			html_itm.Html_elem_replace_html(String_.new_utf8_(gallery_li_id_bry), itm_html);
 			if (gallery_itm_idx == xnde.Itms_len() - 1 && Gallery_mgr_base_.Mode_is_packed(xnde.Mode()))
 				page.Html_data().Xtn_gallery_packed_exists_y_();	// set flag for packed_gallery; don't fire multiple times; PAGE:en.html_w:National_Sculpture_Museum_(Valladolid); DATE:2014-07-21

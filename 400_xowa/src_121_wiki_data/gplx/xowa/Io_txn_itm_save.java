@@ -48,7 +48,7 @@ class Io_txn_mgr {
 	}
 	public boolean Commit() {
 		int len = list.Count();
-		Io_txn_itm[] itms = (Io_txn_itm[])list.XtoAry(Io_txn_itm.class);
+		Io_txn_itm[] itms = (Io_txn_itm[])list.Xto_ary(Io_txn_itm.class);
 		for (int i = 0; i < len; i++) {
 			Io_txn_itm itm = itms[i];
 			itm.Txn_init(tmp_dir);

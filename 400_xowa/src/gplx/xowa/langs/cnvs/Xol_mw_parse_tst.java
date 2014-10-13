@@ -80,7 +80,7 @@ class Xol_mw_parse_fxt {
 		Xol_mw_parse_grp[] actl_ary = Parse(Bry_.new_utf8_(mw));
 		Bry_bfr bfr = Bry_bfr.new_();
 		actl_ary[0].Write_as_gfs(bfr);
-		Tfds.Eq_str_lines(expd, bfr.XtoStr());
+		Tfds.Eq_str_lines(expd, bfr.Xto_str());
 	}
 	public void Test_run(Io_url src_dir, Io_url trg_dir) {
 		Bry_bfr bfr = Bry_bfr.new_();
@@ -97,7 +97,7 @@ class Xol_mw_parse_fxt {
 				itm.Write_as_gfs(bfr);
 			}
 			Io_url trg_fil = Xol_cnv_mgr.Bld_url(trg_dir, lang_name);
-			Io_mgr._.SaveFilBry(trg_fil, bfr.XtoAryAndClear());
+			Io_mgr._.SaveFilBry(trg_fil, bfr.Xto_bry_and_clear());
 		}
 	}
 	public Xol_mw_parse_grp[] Parse(byte[] src) {
@@ -106,14 +106,14 @@ class Xol_mw_parse_fxt {
 		Gfo_msg_log msg_log = new Gfo_msg_log("xowa");
 		Php_evaluator evaluator = new Php_evaluator(msg_log);
 		parser.Parse_tkns(src, evaluator);
-		Php_line[] lines = (Php_line[])evaluator.List().XtoAry(Php_line.class);
+		Php_line[] lines = (Php_line[])evaluator.List().Xto_ary(Php_line.class);
 		int lines_len = lines.length;
 		for (int i = 0; i < lines_len; i++) {
 			Php_line_assign line = (Php_line_assign)lines[i];
 			Xol_mw_parse_grp grp = Parse_grp(line);
 			list.Add(grp);
 		}
-		return (Xol_mw_parse_grp[])list.XtoAry(Xol_mw_parse_grp.class);
+		return (Xol_mw_parse_grp[])list.Xto_ary(Xol_mw_parse_grp.class);
 	}
 	private ListAdp tmp_itm_list = ListAdp_.new_();
 	private Xol_mw_parse_grp Parse_grp(Php_line_assign line) {
@@ -136,6 +136,6 @@ class Xol_mw_parse_fxt {
 			Xol_mw_parse_itm itm = new Xol_mw_parse_itm(kv.Key().Val_obj_bry(), kv.Val().Val_obj_bry());
 			tmp_itm_list.Add(itm);
 		}
-		grp.Itms_((Xol_mw_parse_itm[])tmp_itm_list.XtoAry(Xol_mw_parse_itm.class));
+		grp.Itms_((Xol_mw_parse_itm[])tmp_itm_list.Xto_ary(Xol_mw_parse_itm.class));
 	}
 }

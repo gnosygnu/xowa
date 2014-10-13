@@ -39,7 +39,7 @@ public class Xoh_page_body_cls {	// REF.MW:Skin.php|getPageClasses
 					break;
 			}
 		}
-		return tmp_bfr.XtoAryAndClear();
+		return tmp_bfr.Xto_bry_and_clear();
 	}
 	private static void Add_type(Bry_bfr tmp_bfr, Xoa_ttl ttl) {
 		tmp_bfr.Add_byte_space();
@@ -115,7 +115,7 @@ public class Xoh_page_body_cls {	// REF.MW:Skin.php|getPageClasses
 			}
 		}
 		if (bgn != -1) trg_bfr.Add_mid(src, bgn, src_len);
-		return trg_bfr == null ? src : trg_bfr.XtoAryAndClear();
+		return trg_bfr == null ? src : trg_bfr.Xto_bry_and_clear();
 	}
 	private static final byte[]
 	  Bry_id_prefix			= Bry_.new_ascii_("ns-")

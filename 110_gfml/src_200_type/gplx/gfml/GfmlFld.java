@@ -27,7 +27,7 @@ public class GfmlFld {
 		rv.defaultTkn = defaultTkn;	// FIXME: defaultTkn.clone_()
 		return rv;
 	}
-	public String XtoStr() {String_bldr sb = String_bldr_.new_(); this.XtoStr(sb); return sb.XtoStrAndClear();}
+	public String XtoStr() {String_bldr sb = String_bldr_.new_(); this.XtoStr(sb); return sb.Xto_str_and_clear();}
 	public void XtoStr(String_bldr sb) {sb.Add_fmt("name={0} typeKey={1}", name, typeKey);}
 
 	public static final GfmlFld Null = new_(false, GfmlItmKeys.NullKey, GfmlType_.AnyKey);

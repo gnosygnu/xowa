@@ -45,7 +45,7 @@ class ErrProcData {
 			if (String_.HasAtBgn(md.signatureRaw, "gplx.Err_") || String_.HasAtBgn(md.signatureRaw, "gplx.Err.")) continue;	// java includes entire stackTrace from point of creation; only care about point of throw
 			list.Add(md);
 		}			
-		return (ErrProcData[])list.XtoAry(ErrProcData.class);
+		return (ErrProcData[])list.Xto_ary(ErrProcData.class);
 			}
 	public static ErrProcData parse_(String raw) {
 		ErrProcData rv = new ErrProcData().Raw_(raw);

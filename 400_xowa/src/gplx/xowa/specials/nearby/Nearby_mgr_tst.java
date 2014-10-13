@@ -72,6 +72,6 @@ class Nearby_mgr_fxt {
 				tmp_bfr.Add(ttl.Page_db());
 			}
 		}
-		return tmp_bfr.XtoStrAndClear();
+		return tmp_bfr.Xto_str_and_clear();
 	}
 }

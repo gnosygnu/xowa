@@ -46,6 +46,7 @@ public class Xog_html_itm implements GfoInvkAble, GfoEvObj {
 	public String Html_selected_get_src_or_empty() {return html_box.Html_doc_selected_get_src_or_empty();}
 	public String Html_selected_get_href_or_text() {return Html_extract_text(html_box.Html_doc_selected_get_href_or_text());}
 	public String Html_selected_get_text_or_href() {return Html_extract_text(html_box.Html_doc_selected_get_text_or_href());}
+	public String Html_selected_get_active_or_selection() {return Html_extract_text(html_box.Html_doc_selected_get_active_or_selection());}		
 	private String Html_extract_text(String v) {
 		Xoa_page page = owner_tab.Page();
 		String site = page.Wiki().Domain_str();

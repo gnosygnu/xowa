@@ -54,7 +54,7 @@ public class Sites_html_bldr implements Bry_fmtr_arg {
 	}
 	private static byte[] Xto_href(Bry_bfr tmp_bfr, Bry_fmtr url_fmtr, Xoh_href_parser href_parser, Xow_wiki wiki, Xow_xwiki_itm xwiki_itm, byte[] ttl_page_db) {
 		href_parser.Encoder().Encode(tmp_bfr, ttl_page_db);
-		byte[] rv = url_fmtr.Fmt_(xwiki_itm.Fmt()).Bld_bry_many(tmp_bfr, tmp_bfr.XtoAryAndClear());			
+		byte[] rv = url_fmtr.Fmt_(xwiki_itm.Fmt()).Bld_bry_many(tmp_bfr, tmp_bfr.Xto_bry_and_clear());			
 		if (xwiki_itm.Wiki_tid() != Xow_wiki_domain_.Tid_other)
 			rv = Bry_.Add(Xoh_href_parser.Href_site_bry, rv);
 		return rv;

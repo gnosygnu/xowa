@@ -32,7 +32,7 @@ public class Wmf_dump_list_parser {
 				itm.Status_msg_(Parse_status_msg(src, a_pos));
 			} catch (Exception e) {Err_.Noop(e);}
 		}
-		return (Wmf_dump_itm[])itms.XtoAry(Wmf_dump_itm.class);
+		return (Wmf_dump_itm[])itms.Xto_ary(Wmf_dump_itm.class);
 	}
 	private boolean Parse_href(Wmf_dump_itm itm, byte[] src, int a_pos) {	// EX: http://dumps.wikimedia.org/enwiki/20130807
 		int href_pos = Bry_finder.Find_fwd(src, Find_href, a_pos); if (href_pos == Bry_.NotFound) return false;	// no <li>; something bad happened

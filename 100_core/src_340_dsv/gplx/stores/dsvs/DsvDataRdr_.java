@@ -71,7 +71,7 @@ class DsvParser {
 				qteOn = false;
 			}
 			else
-				throw Err_.new_("invalid quote in quoted field; quote must be followed by quote, fieldSpr, or recordSpr").Add("sym", strm.Cur()).Add("text", strm.XtoStrByPos(strm.Pos() - 10, strm.Pos() + 10));
+				throw Err_.new_("invalid quote in quoted field; quote must be followed by quote, fieldSpr, or recordSpr").Add("sym", strm.Cur()).Add("text", strm.Xto_str_by_pos(strm.Pos() - 10, strm.Pos() + 10));
 		}
 		else {																// regular char; append and continue
 			sb.Add(strm.Cur());
@@ -79,7 +79,7 @@ class DsvParser {
 		}
 	}
 	void ProcessFld(CharStream strm) {
-		String val = sb.XtoStrAndClear();
+		String val = sb.Xto_str_and_clear();
 		if (cmdSeqOn) {
 			cmdSeqOn = false;
 			if (String_.Eq(val, sym.CmdDlm()) && qteOn) {		// 2 cmdDlms in a row; cmdSeq encountered; next fld must be cmdName

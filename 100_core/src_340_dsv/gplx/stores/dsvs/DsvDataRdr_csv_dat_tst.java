@@ -161,7 +161,7 @@ class DsvDataRdr_fxt {
 		for (int i = 0; i < flds.Count(); i++) {
 			GfoFld fld = flds.FetchAt(i);
 			sb.Add(fld.Key()).Add(",").Add(fld.Type().Key());
-			list.Add(sb.XtoStrAndClear());
+			list.Add(sb.Xto_str_and_clear());
 		}
 	}
 	public DsvDataRdr_fxt tst_Tbls(String... expdNames) {
@@ -192,7 +192,7 @@ class DsvDataRdr_fxt {
 				if (j != 0) sb.Add("~");
 				sb.Add_obj(Object_.Xto_str_strict_or_null_mark(row.ReadAt(j)));
 			}
-			expdList.Add(sb.XtoStrAndClear());
+			expdList.Add(sb.Xto_str_and_clear());
 		}
 		for (Object[] expdRow : expdRows) {
 			if (expdRow == null) {
@@ -203,7 +203,7 @@ class DsvDataRdr_fxt {
 				if (j != 0) sb.Add("~");
 				sb.Add_obj(Object_.Xto_str_strict_or_null_mark(expdRow[j]));
 			}
-			actlList.Add(sb.XtoStrAndClear());
+			actlList.Add(sb.Xto_str_and_clear());
 		}
 		Tfds.Eq_list(expdList, actlList);
 		return this;

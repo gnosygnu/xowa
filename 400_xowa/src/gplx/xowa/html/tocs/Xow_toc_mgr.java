@@ -106,7 +106,7 @@ public class Xow_toc_mgr implements Bry_fmtr_arg {
 			Xoh_html_wtr html_wtr = wiki.Html_mgr().Html_wtr(); html_wtr.Init_by_page(ctx, hctx, src, page);
 			Toc_text_recurse(ctx, page, bfr, src, html_wtr, hctx, hdr, 0);
 			bfr.Mkr_rls();
-			return bfr.XtoAryAndClear();
+			return bfr.Xto_bry_and_clear();
 		} catch (Exception e) {
 			page.App().Usr_dlg().Warn_many("", "", "failed to write toc: url=~{0} err=~{1}", page.Url().Xto_full_str_safe(), Err_.Message_gplx_brief(e));
 			return Bry_.Empty;

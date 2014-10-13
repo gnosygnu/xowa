@@ -80,7 +80,7 @@ public class Gfo_log_wtr_base implements Gfo_log_wtr {
 		} 
 		catch (Exception e) {Err_.Noop(e);}			// java.lang.StringBuilder can throw exceptions in some situations when called on a different thread; ignore errors
 	}	private String_bldr sb = String_bldr_.new_thread();	// NOTE: use java.lang.StringBuffer to try to avoid random exceptions when called on a different thread
-	private String Bld_msg(String s) {return sb.Add(DateAdp_.Now().XtoUtc().XtoStr_fmt_yyyyMMdd_HHmmss_fff()).Add(" ").Add(s).Add_char_nl().XtoStrAndClear();}
+	private String Bld_msg(String s) {return sb.Add(DateAdp_.Now().XtoUtc().XtoStr_fmt_yyyyMMdd_HHmmss_fff()).Add(" ").Add(s).Add_char_nl().Xto_str_and_clear();}
 	private void Log_msg(Io_url url, String txt) {
 		if (queue_enabled) {
 			String url_raw = url == null ? "mem" : url.Raw();
@@ -111,7 +111,7 @@ class Usr_log_fil {
 	public void Flush() {
 		if (sb.Count() == 0) return;
 		try {
-			Io_mgr._.AppendFilStr(url, sb.XtoStrAndClear());
+			Io_mgr._.AppendFilStr(url, sb.Xto_str_and_clear());
 		}
 		catch (Exception e) {
 			ConsoleAdp._.WriteLine(Err_.Message_gplx_brief(e));

@@ -58,7 +58,7 @@ class GfmlPragmaLxrFrm implements GfmlPragma {
 	}
 	public GfmlType[] MakePragmaTypes(GfmlTypeMakr makr) {
 		makr.MakeRootType("_lxr_frame", "_lxr_frame", "key", "type", "bgn", "end");
-		return makr.XtoAry();
+		return makr.Xto_bry();
 	}
 	public static GfmlPragmaLxrFrm new_() {return new GfmlPragmaLxrFrm();} GfmlPragmaLxrFrm() {}
 }

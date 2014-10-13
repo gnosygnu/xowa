@@ -39,7 +39,7 @@ public class Xocfg_bnd_itm_srl implements GfoInvkAble {
 		Gfs_wtr wtr = app.Gfs_mgr().Wtr();
 		wtr.Add_set_eq(Key_box, Bry_.new_ascii_(Xog_bnd_box_.Xto_sys_str(box)));
 		wtr.Add_set_eq(Key_ipt, Bry_.new_ascii_(ipt.Key()));
-		return wtr.Bfr().XtoStrAndClear();			
+		return wtr.Bfr().Xto_str_and_clear();			
 	}	private static final byte[] Key_box = Bry_.new_ascii_("box"), Key_ipt = Bry_.new_ascii_("ipt");
 	public static void Src_(Xoa_app app, Xocfg_bnd_itm_srl itm, String v) {
 		Xoa_gfs_mgr gfs_mgr = app.Gfs_mgr();

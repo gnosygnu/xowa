@@ -65,7 +65,7 @@ public class KeyVal_ {
 	public static String Ary_xto_str_nested(KeyVal... ary) {
 		Bry_bfr bfr = Bry_bfr.new_();
 		Ary_xto_str_nested(bfr, 0, ary);
-		return bfr.XtoStrAndClear();
+		return bfr.Xto_str_and_clear();
 	}
 	private static void Ary_xto_str_nested(Bry_bfr bfr, int indent, KeyVal[] ary) {
 		int len = ary.length;

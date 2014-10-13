@@ -16,16 +16,16 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.wiki_orig; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.dbs.*; import gplx.xowa.files.fsdb.*;
+import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.files.fsdb.*;
 public class Xof_wiki_orig_tbl {
 	public static void Create_table(Db_provider p) {
 		Sqlite_engine_.Tbl_create(p, Tbl_name, Tbl_sql);
 		Sqlite_engine_.Idx_create(p, Idx_key);
 	}
-	public static void Select_list(Cancelable cancelable, Db_provider p, Xow_wiki wiki, byte exec_tid, ListAdp itms, OrderedHash hash, Xof_url_bldr url_bldr, Xow_repo_mgr repo_mgr) {
+	public static void Select_list(Cancelable cancelable, Db_provider p, Xodb_ctx db_ctx, byte exec_tid, ListAdp itms, OrderedHash hash, Xof_url_bldr url_bldr, Xow_repo_mgr repo_mgr) {
 		Xof_wiki_orig_tbl_in_wkr in_wkr = new Xof_wiki_orig_tbl_in_wkr();
 		in_wkr.Init(itms, hash);
-		in_wkr.Select_in(p, cancelable, wiki, 0, itms.Count());
+		in_wkr.Select_in(p, cancelable, db_ctx, 0, itms.Count());
 		Xof_wiki_orig_tbl_evaluator.Rdr_done(exec_tid, itms, hash, url_bldr, repo_mgr);
 	}
 	public static Xof_wiki_orig_itm Select_itm(Db_provider p, byte[] ttl) {

@@ -51,13 +51,13 @@ class Xoh_module_wtr_fxt {
 	}
 	public void Exec_Write_js_global_ini_atr_val(String key, String val) {wtr.Write_js_global_ini_atr_val(Bry_.new_utf8_(key), Bry_.new_utf8_(val));}
 	public void Test(String expd) {
-		Tfds.Eq_str_lines(expd, bfr.XtoStrAndClear());
+		Tfds.Eq_str_lines(expd, bfr.Xto_str_and_clear());
 	}
 //		public void Init_msg(byte[] key, String val) {
 //			wiki.Msg_mgr().Get_or_make(key).Atrs_set(Bry_.new_ascii_(val), false, false);
 //		}
 //		public void Test_write(String expd) {
 //			mgr.Write(bfr, fxt.App(), wiki, fxt.Page());
-//			Tfds.Eq_str_lines(expd, bfr.XtoStrAndClear());
+//			Tfds.Eq_str_lines(expd, bfr.Xto_str_and_clear());
 //		}
 }

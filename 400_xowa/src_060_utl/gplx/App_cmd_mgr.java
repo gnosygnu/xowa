@@ -23,7 +23,7 @@ public class App_cmd_mgr {
 	public String Arg_prefix() {return arg_prefix;} public App_cmd_mgr Arg_prefix_(String v) {arg_prefix = v; prefix_len = String_.Len(v); return this;} private String arg_prefix = "--"; int prefix_len = 2;
 	public void Clear() {expd_args.Clear(); actl_args.Clear(); errs.Clear(); key_help = key_header = null;}
 	public int Actl_len() {return actl_args.Count();}
-	public App_cmd_arg[] Actl_ary() {return (App_cmd_arg[])actl_args.XtoAry(App_cmd_arg.class);}
+	public App_cmd_arg[] Actl_ary() {return (App_cmd_arg[])actl_args.Xto_ary(App_cmd_arg.class);}
 	public App_cmd_mgr Expd_add_many(App_cmd_arg... ary) {for (App_cmd_arg o : ary) Expd_add(o); return this;}
 	public App_cmd_mgr Expd_add(App_cmd_arg prm) {
 		expd_args.Add(prm.Key(), prm);
@@ -99,7 +99,7 @@ public class App_cmd_mgr {
 			for (int i = 0; i < len; i++)
 				sb.Add_fmt_line("  [{0}] = '{1}'", i, orig_ary[i]);			
 		}
-		usr_dlg.Note_none(GRP_KEY, "print.args", sb.XtoStrAndClear());
+		usr_dlg.Note_none(GRP_KEY, "print.args", sb.Xto_str_and_clear());
 	}	String_bldr sb = String_bldr_.new_();
 	public void Print_fail(Gfo_usr_dlg usr_dlg) {
 		sb.Add("** error: ").Add_char_crlf();
@@ -110,7 +110,7 @@ public class App_cmd_mgr {
 		}
 		sb.Add_char_crlf();
 		sb.Add_str_w_crlf(String_.Repeat("-", 80));
-		usr_dlg.Note_none(GRP_KEY, "print.fail", sb.XtoStrAndClear());
+		usr_dlg.Note_none(GRP_KEY, "print.fail", sb.Xto_str_and_clear());
 	}
 	public void Print_help(Gfo_usr_dlg usr_dlg, String app_name) {
 		sb.Add_str_w_crlf("example:");
@@ -140,7 +140,7 @@ public class App_cmd_mgr {
 //					sb.Add("    ").Add(String_.PadEnd(expdInf.Key(), key_max + 1, " ")).Add_str_w_crlf(expdInf.Descrip());
 //				}
 		}
-		usr_dlg.Note_gui_none(GRP_KEY, "print.info", sb.XtoStrAndClear());
+		usr_dlg.Note_gui_none(GRP_KEY, "print.info", sb.Xto_str_and_clear());
 	}
 	private OrderedHash Expd_copy() {
 		OrderedHash rv = OrderedHash_.new_();

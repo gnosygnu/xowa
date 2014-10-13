@@ -20,7 +20,7 @@ import gplx.core.btries.*; import gplx.html.*; import gplx.xowa.parsers.amps.*;
 public class Xoh_html_wtr_escaper {
 	public static byte[] Escape(Xoa_app app, Bry_bfr tmp_bfr, byte[] src) {
 		Escape(app, tmp_bfr, src, 0, src.length, true, false);
-		return tmp_bfr.XtoAryAndClear();
+		return tmp_bfr.Xto_bry_and_clear();
 	}
 	public static void Escape(Xoa_app app, Bry_bfr bfr, byte[] src, int bgn, int end, boolean interpret_amp, boolean nowiki_skip) {
 		Xop_amp_mgr amp_mgr = app.Parser_amp_mgr();

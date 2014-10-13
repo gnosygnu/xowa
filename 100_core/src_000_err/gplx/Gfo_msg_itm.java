@@ -38,7 +38,7 @@ public class Gfo_msg_itm implements Gfo_msg_obj {
 		if (fmtr == null) fmtr = Bry_fmtr.new_bry_(fmt).Compile(); 
 		if (fmtr.Fmt_args_exist()) {
 			fmtr.Bld_bfr_many(tmp_bfr, vals);
-			return tmp_bfr.XtoStrAndClear();
+			return tmp_bfr.Xto_str_and_clear();
 		}
 		else
 			return String_.new_utf8_(fmt);
@@ -47,7 +47,7 @@ public class Gfo_msg_itm implements Gfo_msg_obj {
 		if (fmtr == null) fmtr = Bry_fmtr.new_bry_(fmt).Compile(); 
 		if (fmtr.Fmt_args_exist()) {
 			fmtr.Bld_bfr_one(tmp_bfr, val);
-			return tmp_bfr.XtoStrAndClear();
+			return tmp_bfr.Xto_str_and_clear();
 		}
 		else
 			return String_.new_utf8_(fmt);

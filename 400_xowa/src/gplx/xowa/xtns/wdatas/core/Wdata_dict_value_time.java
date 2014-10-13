@@ -87,7 +87,7 @@ public class Wdata_dict_value_time {
 		.Add_int_fixed(date.Second(), 2)
 		.Add_byte(Byte_ascii.Ltr_Z)
 		;
-		return tmp_bfr.XtoAryAndClear();
+		return tmp_bfr.Xto_bry_and_clear();
 	}
 	private static Bry_bfr tmp_bfr = Bry_bfr.new_(); private static byte[] Bry_year_prefix = Bry_.new_ascii_("+0000000");
 }

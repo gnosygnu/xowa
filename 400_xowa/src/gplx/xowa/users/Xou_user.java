@@ -25,7 +25,7 @@ public class Xou_user implements GfoEvMgrOwner, GfoInvkAble {
 		prefs_mgr = new gplx.xowa.users.prefs.Prefs_mgr(app);
 		cfg_mgr = new Xou_cfg(this);
 		session_mgr = new Xou_session(this);
-		history_mgr = new Xou_history_mgr(this);
+		history_mgr = new Xou_history_mgr(fsys_mgr.App_data_history_fil());
 		db_mgr = new Xou_db_mgr(app);
 	}
 	public Xoa_app App() {return app;} private Xoa_app app;
@@ -70,7 +70,7 @@ public class Xou_user implements GfoEvMgrOwner, GfoInvkAble {
 	public void Bookmarks_add(byte[] wiki_domain, byte[] ttl_full_txt) {
 		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_k004();
 		bookmarks_add_fmtr.Bld_bfr_many(tmp_bfr, wiki_domain, ttl_full_txt);
-		byte[] new_entry = tmp_bfr.Mkr_rls().XtoAryAndClear();
+		byte[] new_entry = tmp_bfr.Mkr_rls().Xto_bry_and_clear();
 		Xoa_ttl bookmarks_ttl = Xoa_ttl.parse_(wiki, Bry_data_bookmarks);
 		Xoa_page bookmarks_page = wiki.Data_mgr().Get_page(bookmarks_ttl, false);
 		byte[] new_data = Bry_.Add(bookmarks_page.Data_raw(), new_entry);

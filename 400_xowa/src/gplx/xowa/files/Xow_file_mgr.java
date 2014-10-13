@@ -105,7 +105,7 @@ public class Xow_file_mgr implements GfoInvkAble {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_repos))					return repo_mgr;
 		else if	(ctx.Match(k, Invk_metas))					return meta_mgr;
-		else if	(ctx.Match(k, Invk_cfg_download))			return cfg_download;
+		else if	(ctx.Match(k, Invk_cfg_download))			return cfg_download;	// NOTE: documented for Schnark; https://sourceforge.net/p/xowa/tickets/344/
 		else if	(ctx.Match(k, Invk_fsdb))					return fsdb_mgr;
 		else if	(ctx.Match(k, Invk_wkrs))					return wkr_mgr;
 		else	return GfoInvkAble_.Rv_unhandled;

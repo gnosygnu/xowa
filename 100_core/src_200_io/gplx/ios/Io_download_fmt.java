@@ -77,7 +77,7 @@ public class Io_download_fmt {
 		,	rate_fmtr_arg.Val_(prog_rate)
 		,	prog_left_fmtr_arg.Seconds_(prog_left / 1000)
 		);
-		prog_msg = prog_bfr.XtoStrAndClear();
+		prog_msg = prog_bfr.Xto_str_and_clear();
 		if (usr_dlg != null)
 			usr_dlg.Prog_none(GRP_KEY, "prog", prog_msg);
 	}	private Bry_bfr prog_bfr = Bry_bfr.new_(); Bry_fmtr prog_fmtr = Bry_fmtr.new_().Fail_when_invalid_escapes_(false); // NOTE: prog_fmtr can be passed file_names with ~ which are not easy to escape; DATE:2013-02-19

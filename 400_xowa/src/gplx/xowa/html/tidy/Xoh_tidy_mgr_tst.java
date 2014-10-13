@@ -79,14 +79,14 @@ class Xoh_tidy_mgr_fxt {
 	public void Test_wrap(String val, String expd) {
 		bfr.Add_str(val);
 		Xoh_tidy_mgr.Tidy_wrap(bfr);
-		Tfds.Eq(expd, bfr.XtoStrAndClear());
+		Tfds.Eq(expd, bfr.Xto_str_and_clear());
 	}
 	public void Test_unwrap(String val, boolean expd_pass, String expd) {
 		bfr.Add_str(val);
 		boolean actl_pass = Xoh_tidy_mgr.Tidy_unwrap(bfr);
 		if (actl_pass != expd_pass) Tfds.Fail("expd={0} actl={1}", expd_pass, actl_pass);
 		else if (expd_pass) {
-			Tfds.Eq(expd, bfr.XtoStrAndClear());
+			Tfds.Eq(expd, bfr.Xto_str_and_clear());
 		}
 	}
 }

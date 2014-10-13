@@ -41,7 +41,7 @@ class Xop_vnt_flag_parser {
 					flag_bfr.Add_mid(src, sub.Src_bgn(), sub.Src_end());
 					break;
 				case Xop_tkn_itm_.Tid_pipe:
-					rslt_flags[rv_idx++] = Parse_flag_bry(flag_bfr.XtoAryAndClear());
+					rslt_flags[rv_idx++] = Parse_flag_bry(flag_bfr.Xto_bry_and_clear());
 					if (rv_idx == pipe_tkn_count) {
 						loop = false;
 						rslt_pipe_last = sub.Src_end();

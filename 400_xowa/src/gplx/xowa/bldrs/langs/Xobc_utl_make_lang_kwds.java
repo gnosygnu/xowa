@@ -70,7 +70,7 @@ public class Xobc_utl_make_lang_kwds implements GfoInvkAble, Xol_lang_transform 
 						if (!tmp.Has(itm)) tmp.Add(itm, itm);
 					}
 				}
-				byte[][] words = (byte[][])tmp.XtoAry(byte[].class);
+				byte[][] words = (byte[][])tmp.Xto_ary(byte[].class);
 				kwd_grp.Srl_load(kwd_grp.Case_match(), words);
 			}
 		}
@@ -138,7 +138,7 @@ public class Xobc_utl_make_lang_kwds implements GfoInvkAble, Xol_lang_transform 
 			if (last) break;
 			++pos;
 		}		
-		return (Xobcl_kwd_row[])rv.XtoAry(Xobcl_kwd_row.class);
+		return (Xobcl_kwd_row[])rv.Xto_ary(Xobcl_kwd_row.class);
 	}
 }
 class Xobcl_kwd_lang {

@@ -97,7 +97,7 @@ public class Xow_msg_mgr implements GfoInvkAble {
 		if (accesskey_found)
 			bfr.Add_byte(Byte_ascii.Space).Add_byte(Byte_ascii.Brack_bgn).Add(accesskey_val).Add_byte(Byte_ascii.Brack_end);
 		bfr.Add_byte(Byte_ascii.Quote);
-		byte[] rv = bfr.XtoAryAndClear();
+		byte[] rv = bfr.Xto_bry_and_clear();
 		if (itm == null)
 			return rv;
 		else {

@@ -87,14 +87,14 @@ public class Bry_fmtr {
 				bfr.Add(itm.Dat);
 		}
 	}
-	public byte[] Bld_bry_none(Bry_bfr bfr) {Bld_bfr_ary(bfr, Object_.Ary_empty); return bfr.XtoAryAndClear();}
+	public byte[] Bld_bry_none(Bry_bfr bfr) {Bld_bfr_ary(bfr, Object_.Ary_empty); return bfr.Xto_bry_and_clear();}
 	public byte[] Bld_bry_many(Bry_bfr bfr, Object... args) {
 		Bld_bfr_ary(bfr, args);
-		return bfr.XtoAryAndClear();
+		return bfr.Xto_bry_and_clear();
 	}
 	public String Bld_str_many(Bry_bfr bfr, String fmt, Object... args) {
 		this.Fmt_(fmt).Bld_bfr_many(bfr, args);
-		return bfr.XtoStrAndClear();
+		return bfr.Xto_str_and_clear();
 	}
 
 	public String Bld_str_many(String... args) {
@@ -135,7 +135,7 @@ public class Bry_fmtr {
 					if (lkp_is_numeric)
 						list.Add(Bry_fmtr_itm.arg_(lkp_bfr.XtoInt(0) - baseInt));
 					else {
-						byte[] key_fmt = lkp_bfr.XtoAry();
+						byte[] key_fmt = lkp_bfr.Xto_bry();
 						Object idx_ref = keys.Fetch(Bry_obj_ref.new_(key_fmt));
 						if (idx_ref == null) {
 							int lkp_bfr_len = lkp_bfr.Len();
@@ -209,7 +209,7 @@ public class Bry_fmtr {
 		}
 		if (lkp_is_active) throw Err_.new_("idx mode not closed");
 		if (trg_pos > 0) {list.Add(Bry_fmtr_itm.dat_(trg_bry, trg_pos)); trg_pos = 0;}
-		itms = (Bry_fmtr_itm[])list.XtoAry(Bry_fmtr_itm.class);
+		itms = (Bry_fmtr_itm[])list.Xto_ary(Bry_fmtr_itm.class);
 		itms_len = itms.length;
 		return this;
 	}
@@ -252,12 +252,12 @@ public class Bry_fmtr {
 			tmp_bfr.Add_byte(Byte_ascii.Curly_end);
 			tmp_bfr.Add_byte(Byte_ascii.Apos);
 		}
-		return tmp_bfr.XtoStrAndClear();
+		return tmp_bfr.Xto_str_and_clear();
 	}	static Bry_bfr tmp_bfr = Bry_bfr.reset_(255); 
 	public void Bld_bfr_many_and_set_fmt(Object... args) {
 		Bry_bfr bfr = Bry_bfr.new_();
 		this.Bld_bfr_many(bfr, args);
-		byte[] bry = bfr.XtoAryAndClear();
+		byte[] bry = bfr.Xto_bry_and_clear();
 		this.Fmt_(bry).Compile();
 	}
 	public static String Escape_tilde(String v) {return String_.Replace(v, "~", "~~");}

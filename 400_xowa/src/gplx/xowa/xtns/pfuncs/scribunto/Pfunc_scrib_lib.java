@@ -43,7 +43,7 @@ public class Pfunc_scrib_lib implements Scrib_lib {
 		byte[] expr_bry = args.Pull_bry(0);
 		Bry_bfr tmp_bfr = core.Wiki().Utl_bry_bfr_mkr().Get_b128();
 		boolean pass = Pfunc_expr.Evaluate(tmp_bfr, core.Ctx(), expr_bry);
-		String expr_rslt = tmp_bfr.Mkr_rls().XtoStrAndClear();
+		String expr_rslt = tmp_bfr.Mkr_rls().Xto_str_and_clear();
 		if (pass)
 			return rslt.Init_obj(expr_rslt);
 		else

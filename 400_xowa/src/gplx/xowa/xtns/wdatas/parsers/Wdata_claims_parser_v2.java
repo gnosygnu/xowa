@@ -107,7 +107,7 @@ class Wdata_claims_parser_v2 {
 			Wdata_claim_itm_core qualifier_itm = Parse_mainsnak(qid, qualifier_nde, pid);
 			list.Add(qualifier_itm);
 		}
-		return new Wdata_claim_grp(Int_obj_ref.new_(pid), (Wdata_claim_itm_core[])list.XtoAryAndClear(Wdata_claim_itm_core.class));
+		return new Wdata_claim_grp(Int_obj_ref.new_(pid), (Wdata_claim_itm_core[])list.Xto_ary_and_clear(Wdata_claim_itm_core.class));
 	}
 	public Wdata_claim_itm_core Parse_mainsnak(byte[] qid, Json_itm_nde nde, int pid) {
 		int len = nde.Subs_len();

@@ -30,7 +30,7 @@ class Xodb_ns_map_mgr {
 			Xodb_ns_map_itm itm = Parse_itm(src, line, canonical_ns_mgr);
 			itms.Add(itm);
 		}
-		rv.itms = (Xodb_ns_map_itm[])itms.XtoAryAndClear(Xodb_ns_map_itm.class);
+		rv.itms = (Xodb_ns_map_itm[])itms.Xto_ary_and_clear(Xodb_ns_map_itm.class);
 		return rv;
 	}
 	private static Xodb_ns_map_itm Parse_itm(byte[] src, byte[] line, Xow_ns_mgr ns_mgr) {

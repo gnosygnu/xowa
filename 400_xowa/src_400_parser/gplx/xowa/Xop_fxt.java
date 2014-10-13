@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.html.*; import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.lists.*;
+import gplx.xowa.html.*; import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.lists.*; import gplx.xowa.parsers.paras.*;
 public class Xop_fxt {
 	public Xop_fxt() {
 		Xoa_app app = Xoa_app_fxt.app_();
@@ -98,7 +98,7 @@ public class Xop_fxt {
 	public Xop_tblw_th_tkn_chkr tkn_tblw_th_(int bgn, int end) 		{return (Xop_tblw_th_tkn_chkr)new Xop_tblw_th_tkn_chkr().Src_rng_(bgn, end);}
 	public Xop_tblw_tr_tkn_chkr tkn_tblw_tr_(int bgn, int end) 		{return (Xop_tblw_tr_tkn_chkr)new Xop_tblw_tr_tkn_chkr().Src_rng_(bgn, end);}
 	public Xop_hdr_tkn_chkr tkn_hdr_(int bgn, int end, int hdr_len)	{return (Xop_hdr_tkn_chkr)new Xop_hdr_tkn_chkr().Hdr_len_(hdr_len).Src_rng_(bgn, end);}
-	@gplx.Internal protected Xop_xnde_tkn_chkr tkn_xnde_br_(int pos)					{return tkn_xnde_(pos, pos).Xnde_tagId_(Xop_xnde_tag_.Tid_br);}
+	public Xop_xnde_tkn_chkr tkn_xnde_br_(int pos)					{return tkn_xnde_(pos, pos).Xnde_tagId_(Xop_xnde_tag_.Tid_br);}
 	public Xop_xnde_tkn_chkr tkn_xnde_()							{return tkn_xnde_(String_.Pos_neg1, String_.Pos_neg1);}
 	public Xop_xnde_tkn_chkr tkn_xnde_(int bgn, int end)			{return (Xop_xnde_tkn_chkr)new Xop_xnde_tkn_chkr().Src_rng_(bgn, end);}
 	public Xop_tkn_chkr_base tkn_curly_bgn_(int bgn)				{return new Xop_tkn_chkr_base().TypeId_dynamic(Xop_tkn_itm_.Tid_tmpl_curly_bgn).Src_rng_(bgn, bgn + 2);}
@@ -118,8 +118,8 @@ public class Xop_fxt {
 	public Xop_list_tkn_chkr tkn_list_bgn_(int bgn, int end, byte listType) {return (Xop_list_tkn_chkr)new Xop_list_tkn_chkr().List_itmTyp_(listType).Src_rng_(bgn, end);}
 	public Xop_list_tkn_chkr tkn_list_end_(int pos)					{return (Xop_list_tkn_chkr)new Xop_list_tkn_chkr().Src_rng_(pos, pos);}
 	public Xop_tkn_chkr_lnke tkn_lnke_(int bgn, int end)			{return new Xop_tkn_chkr_lnke(bgn, end);}
-	@gplx.Internal protected Xop_lnki_tkn_chkr tkn_lnki_()							{return tkn_lnki_(-1, -1);}
-	@gplx.Internal protected Xop_lnki_tkn_chkr tkn_lnki_(int bgn, int end)			{return (Xop_lnki_tkn_chkr)new Xop_lnki_tkn_chkr().Src_rng_(bgn, end);}
+	public Xop_lnki_tkn_chkr tkn_lnki_()							{return tkn_lnki_(-1, -1);}
+	public Xop_lnki_tkn_chkr tkn_lnki_(int bgn, int end)			{return (Xop_lnki_tkn_chkr)new Xop_lnki_tkn_chkr().Src_rng_(bgn, end);}
 	@gplx.Internal protected Xop_arg_itm_tkn_chkr	tkn_arg_itm_(Xop_tkn_chkr_base... subs) {return (Xop_arg_itm_tkn_chkr)new Xop_arg_itm_tkn_chkr().Subs_(subs);}
 	@gplx.Internal protected Xop_arg_nde_tkn_chkr	tkn_arg_nde_()						{return tkn_arg_nde_(String_.Pos_neg1, String_.Pos_neg1);}
 	@gplx.Internal protected Xop_arg_nde_tkn_chkr	tkn_arg_nde_(int bgn, int end)		{return (Xop_arg_nde_tkn_chkr)new Xop_arg_nde_tkn_chkr().Src_rng_(bgn, end);}
@@ -274,7 +274,7 @@ public class Xop_fxt {
 		Xop_root_tkn root = Exec_parse_page_all_as_root(Bry_.new_utf8_(raw));
 		Bry_bfr actl_bfr = Bry_bfr.new_();
 		hdom_wtr.Write_all(actl_bfr, ctx, root.Root_src(), root);
-		return actl_bfr.XtoStrAndClear();
+		return actl_bfr.Xto_str_and_clear();
 	}
 	public String Exec_parse_page_wiki_as_str(String raw) {
 		byte[] raw_bry = Bry_.new_utf8_(raw);
@@ -282,7 +282,7 @@ public class Xop_fxt {
 		parser.Parse_wtxt_to_wdom(root, ctx, tkn_mkr, raw_bry, Xop_parser_.Doc_bgn_bos);
 		Bry_bfr actl_bfr = Bry_bfr.new_();
 		hdom_wtr.Write_all(actl_bfr, ctx, raw_bry, root);
-		return actl_bfr.XtoStrAndClear();
+		return actl_bfr.Xto_str_and_clear();
 	}
 	private void Parse_chk(byte[] raw_bry, Xop_root_tkn root, Tst_chkr[] expd_ary) {
 		int subs_len = root.Subs_len();
@@ -380,7 +380,7 @@ public class Xop_fxt {
 		this.Page().Html_data().Module_mgr().Init(app, wiki, this.Page());
 		this.Page().Html_data().Module_mgr().XferAry(bfr, 0);
 		bfr.Mkr_rls();
-		Tfds.Eq_str_lines(expd, bfr.XtoStrAndClear());
+		Tfds.Eq_str_lines(expd, bfr.Xto_str_and_clear());
 	}
 
 	private Tst_mgr tst_mgr = new Tst_mgr(); private Xop_tkn_mkr tkn_mkr;

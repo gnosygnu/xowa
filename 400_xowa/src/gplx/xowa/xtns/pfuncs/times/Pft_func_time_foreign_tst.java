@@ -71,7 +71,7 @@ class Pft_func_time_foreign_fxt {
 	public void Test_Roman(int v, String expd) {
 		Bry_bfr bfr = Bry_bfr.new_(16);
 		Pfxtp_roman.ToRoman(v, bfr);
-		String actl = bfr.XtoStrAndClear();
+		String actl = bfr.Xto_str_and_clear();
 		Tfds.Eq(expd, actl);
 	}
 }

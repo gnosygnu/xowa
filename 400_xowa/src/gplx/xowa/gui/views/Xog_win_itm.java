@@ -74,7 +74,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 		else if	(ctx.Match(k, Invk_page_dbg_html))							Xog_tab_itm_edit_mgr.Debug(this, Xopg_view_mode.Tid_html);
 		else if	(ctx.Match(k, Invk_page_dbg_wiki))							Xog_tab_itm_edit_mgr.Debug(this, Xopg_view_mode.Tid_edit);
 		else if	(ctx.Match(k, Invk_page_goto))								Page__navigate_by_url_bar(m.ReadStr("v"));
-		else if	(ctx.Match(k, Invk_page_goto_recent))						Page__navigate_by_url_bar(app.User().History_mgr().Get_at_last(app));
+		else if	(ctx.Match(k, Invk_page_goto_recent))						Page__navigate_by_url_bar(app.User().History_mgr().Get_at_last());
 		else if	(ctx.Match(k, Invk_history_bwd))							{Page__navigate_by_history(Bool_.N);}
 		else if	(ctx.Match(k, Invk_history_fwd))							{Page__navigate_by_history(Bool_.Y);}
 		else if	(ctx.Match(k, Invk_eval))									App__eval(m.ReadStr("cmd"));

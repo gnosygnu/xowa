@@ -46,12 +46,12 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 				KeyVal kv = kv_ary[i];
 				gfs_mgr.Build_prop_set(bfr, Bry_.new_utf8_(kv.Key()), Bry_.new_utf8_(kv.Val_to_str_or_empty()));
 			}
-			gfs_mgr.Run_str_for(wiki, bfr.XtoStrAndClear());
+			gfs_mgr.Run_str_for(wiki, bfr.Xto_str_and_clear());
 		}	finally {bfr.Mkr_rls();}
 	}
 	public boolean Load_by_ttl(Xodb_page rv, Xow_ns ns, byte[] ttl) {return db_mgr.Tbl_page().Select_by_ttl(rv, ns, ttl);}
-	public void Load_by_ttls(Cancelable cancelable, OrderedHash rv, boolean fill_idx_fields_only, int bgn, int end) {db_mgr.Tbl_page().Select_by_ttl_in(cancelable, rv, db_mgr.Wiki(), fill_idx_fields_only, bgn, end);}
-	public void Load_page(Xodb_page rv, Xow_ns ns, boolean timestamp_enabled) {rv.Text_(db_mgr.Tbl_text().Select(rv.Db_file_idx(), rv.Id()));}
+	public void Load_by_ttls(Cancelable cancelable, OrderedHash rv, boolean fill_idx_fields_only, int bgn, int end) {db_mgr.Tbl_page().Select_by_ttl_in(cancelable, rv, db_mgr.Db_ctx(), fill_idx_fields_only, bgn, end);}
+	public void Load_page(Xodb_page rv, Xow_ns ns, boolean timestamp_enabled) {rv.Text_(db_mgr.Tbl_text().Select(rv.Text_db_id(), rv.Id()));}
 	public boolean Load_by_id	(Xodb_page rv, int id) {return db_mgr.Tbl_page().Select_by_id(rv, id);}
 	public void Load_by_ids(Cancelable cancelable, ListAdp rv, int bgn, int end) {db_mgr.Tbl_page().Select_by_id_list(cancelable, false, rv, bgn, end);}
 	public boolean Load_ctg_v1(Xoctg_view_ctg rv, byte[] ctg_bry) {
@@ -128,7 +128,7 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 		if (search_version == gplx.xowa.specials.search.Xosrh_core.Version_1)
 			db_mgr.Tbl_page().Select_by_search(cancelable, rv, search, results_max);
 		else {
-			Xodb_search_title_word_tbl.Select_by_word(cancelable, rv, db_mgr.Wiki(), search, results_max, db_mgr.Fsys_mgr().Get_tid_root(Xodb_file_tid.Tid_search).Provider());
+			Xodb_search_title_word_tbl.Select_by_word(cancelable, rv, db_mgr.Db_ctx(), search, results_max, db_mgr.Fsys_mgr().Get_tid_root(Xodb_file_tid.Tid_search).Provider());
 			db_mgr.Tbl_page().Select_by_id_list(cancelable, true, rv);
 		}
 	}
@@ -166,7 +166,7 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 				hash2.Add(page.Id_val(), page);
 		}
 		len = hash2.Count();	// must update len (!hash2.Has() may have skipped titles)
-		db_mgr.Tbl_category().Select_by_cat_id_in(Cancelable_.Never, hash2, fsys_mgr.Provider_ctg(), db_mgr.Wiki(), 0, len);
-		return (Xodb_page[])hash.XtoAry(Xodb_page.class);
+		db_mgr.Tbl_category().Select_by_cat_id_in(Cancelable_.Never, hash2, fsys_mgr.Provider_ctg(), db_mgr.Db_ctx(), 0, len);
+		return (Xodb_page[])hash.Xto_ary(Xodb_page.class);
 	}
 }

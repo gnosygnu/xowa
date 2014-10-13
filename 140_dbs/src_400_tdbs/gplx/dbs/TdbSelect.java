@@ -28,7 +28,7 @@ class TdbSelectWkr implements Db_qryWkr {
 		if (cmd.GroupBy() != null)
 			rv = TdbGroupByWkr.GroupByExec(cmd, rv, tbl);
 		if (cmd.OrderBy() != null) {	// don't use null pattern here; if null ORDER BY, then don't call .Sort on GfoNdeList
-			ComparerAble comparer = Sql_order_by_sorter.new_((Sql_order_by_itm[])cmd.OrderBy().Flds().XtoAry(Sql_order_by_itm.class));
+			ComparerAble comparer = Sql_order_by_sorter.new_((Sql_order_by_itm[])cmd.OrderBy().Flds().Xto_ary(Sql_order_by_itm.class));
 			rv.SortBy(comparer);
 		}
 		return GfoNdeRdr_.peers_(rv, false);

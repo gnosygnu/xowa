@@ -87,7 +87,7 @@ public class Xof_fsdb_mgr_sql implements Xof_fsdb_mgr, GfoInvkAble {
 	}	private boolean init = false;
 	public boolean Reg_select_itm_exists(byte[] ttl) {return Xof_wiki_orig_tbl.Select_itm_exists(img_regy_provider, ttl);}
 	public void Reg_select_only(Xoa_page page, byte exec_tid, ListAdp itms, OrderedHash hash) {
-		Xof_wiki_orig_tbl.Select_list(wiki.App().Usr_dlg(), img_regy_provider, wiki, exec_tid, itms, hash, url_bldr, bin_mgr.Repo_mgr());
+		Xof_wiki_orig_tbl.Select_list(wiki.App().Usr_dlg(), img_regy_provider, wiki.Db_mgr().Db_ctx(), exec_tid, itms, hash, url_bldr, bin_mgr.Repo_mgr());
 	}
 	public void Reg_select(Xoa_page page, byte exec_tid, ListAdp itms) {
 		OrderedHash hash = OrderedHash_.new_bry_();

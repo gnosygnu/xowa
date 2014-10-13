@@ -67,7 +67,7 @@ public class Xoh_js_cleaner {
 				}
 			}
 		}	finally {if (bfr != null) bfr.Mkr_rls();}
-		return dirty ? bfr.XtoAryAndClear() : null;
+		return dirty ? bfr.Xto_bry_and_clear() : null;
 	}
 	private int Get_pos_eq(byte[] src, int pos, int end, int frag_len) {
 		if (	pos > 0								// bounds check

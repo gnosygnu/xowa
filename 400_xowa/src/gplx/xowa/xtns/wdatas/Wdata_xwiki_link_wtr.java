@@ -54,7 +54,7 @@ public class Wdata_xwiki_link_wtr implements Bry_fmtr_arg {
 				tmp_bfr.Add(lang_key);
 				tmp_bfr.Add_byte(Byte_ascii.Colon);
 				tmp_bfr.Add(sitelink.Name());
-				Xoa_ttl lang_ttl = Xoa_ttl.parse_(wiki, tmp_bfr.XtoAryAndClear());
+				Xoa_ttl lang_ttl = Xoa_ttl.parse_(wiki, tmp_bfr.Xto_bry_and_clear());
 				if (lang_ttl == null) continue;								// invalid ttl
 				Xow_xwiki_itm xwiki_itm = lang_ttl.Wik_itm();
 				if (	xwiki_itm == null									// not a known xwiki; EX: [[zzz:abc]]

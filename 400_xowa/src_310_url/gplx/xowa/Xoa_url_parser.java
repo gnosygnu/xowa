@@ -35,7 +35,7 @@ public class Xoa_url_parser {
 		}
 		if (url.Anchor_bry() != null)
 			tmp_bfr.Add_byte(Byte_ascii.Hash).Add(url.Anchor_bry());		// add anchor;		EX: "#B"
-		return tmp_bfr.XtoStrAndClear();
+		return tmp_bfr.Xto_str_and_clear();
 	}
 	public Xoa_url Parse(byte[] src) {
 		Xoa_url rv = Xoa_url.blank_();
@@ -72,10 +72,10 @@ public class Xoa_url_parser {
 				.Add(domain_bry).Add(Bry_dot_org);					// add type + .org;		EX: "wikipedia.org"; "wikimedia.org";
 			url.Segs_ary_(Xoa_url_parser.Bry_wiki_name_bry);		// NOTE: add "wiki" as seg else will have "/site/commons.wikimedia.org/File:A" which will be invalid (needs to be "/site/commons.wikimedia.org/wiki/File:A")
 			url.Lang_bry_(lang_bry);
-			url.Wiki_bry_(tmp_bfr.XtoAryAndClear());
+			url.Wiki_bry_(tmp_bfr.Xto_bry_and_clear());
 			byte[][] segs = gfo_url.Segs();
 			byte[] page_bry = segs.length > 5 && Bry_.Eq(segs[2], Xof_url_bldr.Bry_thumb) ? segs[5] : gfo_url.Page();
-			url.Page_bry_(tmp_bfr.Add(Bry_file).Add(page_bry).XtoAryAndClear());
+			url.Page_bry_(tmp_bfr.Add(Bry_file).Add(page_bry).Xto_bry_and_clear());
 			url.Anchor_bry_(Bry_.Empty);
 		}
 		else {
@@ -249,7 +249,7 @@ public class Xoa_url_parser {
 			if (bfr.Len() > 0) bfr.Add_byte(Byte_ascii.Slash);
 			bfr.Add(page);
 		}
-		return bfr.Mkr_rls().XtoAryAndClear();
+		return bfr.Mkr_rls().Xto_bry_and_clear();
 	}
 	public static Xoa_url Parse_from_url_bar(Xoa_app app, Xow_wiki wiki, String s) {
 		byte[] bry = Bry_.new_utf8_(s);

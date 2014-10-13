@@ -44,7 +44,7 @@ public class Xol_lang_srl {
 			if (last) break;
 			++pos;
 		}
-		return (Xow_ns[])rv.XtoAry(Xow_ns.class);
+		return (Xow_ns[])rv.Xto_ary(Xow_ns.class);
 	}	private static final String GRP_KEY = "xowa.lang.srl";
 	public static void Load_keywords(Xol_kwd_mgr keyword_mgr, byte[] src) {
 		int src_len = src.length, pos = 0, fld_bgn = 0, fld_idx = 0;
@@ -81,7 +81,7 @@ public class Xol_lang_srl {
 					if (cur_words.Count() > 0) {	// guard against blank line wiping out entries; EX: "toc|0|toc1\n\n"; 2nd \n will get last grp and make 0 entries
 						int cur_id = Xol_kwd_grp_.Id_by_bry(cur_key); if (cur_id == -1) throw Err_mgr._.fmt_(GRP_KEY, "invalid_keyword", "key does not have id: ~{0}", cur_id);
 						Xol_kwd_grp grp = keyword_mgr.Get_or_new(cur_id);
-						grp.Srl_load(cur_cs, (byte[][])cur_words.XtoAry(byte[].class));
+						grp.Srl_load(cur_cs, (byte[][])cur_words.Xto_ary(byte[].class));
 					}
 					fld_bgn = pos + 1;
 					fld_idx = 0;
@@ -93,7 +93,7 @@ public class Xol_lang_srl {
 			if (last) break;
 			++pos;
 		}
-//			return (Xol_kwd_grp[])rv.XtoAry(typeof(Xol_kwd_grp));
+//			return (Xol_kwd_grp[])rv.Xto_ary(typeof(Xol_kwd_grp));
 	}
 	public static void Load_messages(Xol_msg_mgr msg_mgr, byte[] src) {
 		int src_len = src.length, pos = 0, fld_bgn = 0;

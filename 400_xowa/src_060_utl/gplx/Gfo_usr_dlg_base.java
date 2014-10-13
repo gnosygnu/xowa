@@ -43,11 +43,11 @@ public class Gfo_usr_dlg_base implements Gfo_usr_dlg {
 	}
 	String Bld_msg_many(String grp_key, String msg_key, String fmt, Object[] args) {
 		tmp_fmtr.Fmt_(fmt).Bld_bfr_many(tmp_bfr, args);
-		return tmp_bfr.XtoStrAndClear();
+		return tmp_bfr.Xto_str_and_clear();
 	}	private Bry_fmtr tmp_fmtr = Bry_fmtr.tmp_(); Bry_bfr tmp_bfr = Bry_bfr.new_();
 	String Bld_msg_one(String grp_key, String msg_key, String fmt, Object val) {
 		tmp_fmtr.Fmt_(fmt).Bld_bfr_one(tmp_bfr, val);
-		return tmp_bfr.XtoStrAndClear();
+		return tmp_bfr.Xto_str_and_clear();
 	}
 	String Bld_msg_none(String grp_key, String msg_key, String fmt) {
 		return fmt;

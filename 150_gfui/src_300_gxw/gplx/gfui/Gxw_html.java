@@ -24,6 +24,7 @@ public interface Gxw_html extends GxwElem {
 	String		Html_doc_selected_get_text_or_href();
 	String		Html_doc_selected_get_href_or_text();
 	String		Html_doc_selected_get_src_or_empty();
+	String		Html_doc_selected_get_active_or_selection();	// gets selected anchor or highlighted text for opening a new page
 	boolean		Html_doc_find(String id, String find, boolean dir_fwd, boolean case_match, boolean wrap_find);
 	void		Html_doc_body_focus();
 	void		Html_doc_selection_focus_toggle();

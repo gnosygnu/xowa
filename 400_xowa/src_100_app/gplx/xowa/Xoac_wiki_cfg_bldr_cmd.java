@@ -21,9 +21,9 @@ public class Xoac_wiki_cfg_bldr_cmd {
 	public String Key() {return key;} private String key;
 	public String Text() {return text;} private String text;
 	public String Exec(String_bldr sb, String wiki, String src) {
-		String sect_txt_bgn = sb.Add("// ").Add(key).Add(".bgn\n").XtoStrAndClear();
-		String sect_txt_end = sb.Add("// ").Add(key).Add(".end\n").XtoStrAndClear();
-		String sect_txt_all = sb.Add(sect_txt_bgn).Add(text + "\n").Add(sect_txt_end).XtoStrAndClear();	// NOTE: always add \n; convenience for single line cmds
+		String sect_txt_bgn = sb.Add("// ").Add(key).Add(".bgn\n").Xto_str_and_clear();
+		String sect_txt_end = sb.Add("// ").Add(key).Add(".end\n").Xto_str_and_clear();
+		String sect_txt_all = sb.Add(sect_txt_bgn).Add(text + "\n").Add(sect_txt_end).Xto_str_and_clear();	// NOTE: always add \n; convenience for single line cmds
 //			int sect_pos_bgn = String_.FindFwd(src, sect_txt_bgn);
 //			if (sect_pos_bgn == String_.Find_none)	// new cmd; add to end of file
 			return src + sect_txt_all;
@@ -31,7 +31,7 @@ public class Xoac_wiki_cfg_bldr_cmd {
 //			if (sect_pos_end == String_.Find_none)
 //				throw Err_.new_("section_fail: " + wiki + " " + key);
 //			try {
-//				return sb.Add(String_.Mid(src, 0, sect_pos_bgn)).Add(sect_txt_all).Add(String_.Mid(src, sect_pos_end + String_.Len(sect_txt_end), String_.Len(text))).XtoStrAndClear();
+//				return sb.Add(String_.Mid(src, 0, sect_pos_bgn)).Add(sect_txt_all).Add(String_.Mid(src, sect_pos_end + String_.Len(sect_txt_end), String_.Len(text))).Xto_str_and_clear();
 //			} catch (Exception e) {Err_.Noop(e); throw Err_.new_("section_fail: " + wiki + " " + key);}
 	}
 }

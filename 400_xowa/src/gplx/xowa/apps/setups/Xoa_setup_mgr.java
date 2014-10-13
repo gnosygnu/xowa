@@ -21,8 +21,11 @@ public class Xoa_setup_mgr {
 	public static void Delete_old_files(Xoa_app app) {
 		String version_previous = app.Api_root().App().Env().Version_previous();
 		Gfo_usr_dlg usr_dlg = app.Usr_dlg();
-		Delete_old_dir(usr_dlg, version_previous, "1.8.2.1", app.Fsys_mgr().Root_dir().GenSubDir_nest("user", "anonymous", "lang"));
-		Delete_old_dir(usr_dlg, version_previous, "1.8.2.1", app.Fsys_mgr().Root_dir().GenSubDir_nest("user", "anonymous", "wiki", "#cfg"));
+		Io_url root_dir = app.Fsys_mgr().Root_dir();
+		Delete_old_dir(usr_dlg, version_previous, "1.8.2.1"		, root_dir.GenSubDir_nest("user", "anonymous", "lang"));
+		Delete_old_dir(usr_dlg, version_previous, "1.8.2.1"		, root_dir.GenSubDir_nest("user", "anonymous", "wiki", "#cfg"));
+		Delete_old_dir(usr_dlg, version_previous, "1.10.2.1"	, root_dir.GenSubDir_nest("bin", "any", "javascript"));
+		Delete_old_dir(usr_dlg, version_previous, "1.10.2.1"	, root_dir.GenSubDir_nest("bin", "any", "xowa", "html", "modules"));
 	}
 	@gplx.Internal protected static void Delete_old_dir(Gfo_usr_dlg usr_dlg, String version_prv, String version_del, Io_url dir) {
 		if (Xoa_version_.Compare(version_prv, version_del) != CompareAble_.Less) return;

@@ -44,7 +44,7 @@ class Xob_dump_src_ttl implements Xob_parse_all_db {
 			if (file.Tid() == Xodb_file_tid.Tid_text)
 				text_files_list.Add(file);
 		}
-		return (Xodb_file[])text_files_list.XtoAryAndClear(Xodb_file.class);
+		return (Xodb_file[])text_files_list.Xto_ary_and_clear(Xodb_file.class);
 	}
 }
 class Xob_dump_src_id {

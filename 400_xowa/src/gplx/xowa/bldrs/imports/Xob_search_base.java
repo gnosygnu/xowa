@@ -73,7 +73,7 @@ public abstract class Xob_search_base extends Xob_itm_dump_base implements Xobd_
 		while (true) {
 			if (word_done || i == ttl_len) {
 				if (bfr.Len() > 0) {
-					byte[] word = bfr.XtoAry();
+					byte[] word = bfr.Xto_bry();
 					word_ref.Val_(word);
 					if (!list.Has(word_ref)) list.Add(word_ref, word);
 					bfr.ClearAndReset();
@@ -104,7 +104,7 @@ public abstract class Xob_search_base extends Xob_itm_dump_base implements Xobd_
 			}
 		}
 		bfr.ClearAndReset();
-		byte[][] rv = (byte[][])list.XtoAry(byte[].class);
+		byte[][] rv = (byte[][])list.Xto_ary(byte[].class);
 		list.Clear(); list.ResizeBounds(16);
 		return rv;
 	}

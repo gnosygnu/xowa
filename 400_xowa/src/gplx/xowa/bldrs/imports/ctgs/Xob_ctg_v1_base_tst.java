@@ -44,7 +44,7 @@ class Xodb_page_wkr_ctg_fxt {
 		Xodb_page page = new Xodb_page().Text_(src);//.Ttl_(Bry_.new_utf8_("Test"), new Xow_ns_mgr());
 		mgr.Wkr_bgn(bldr);
 		mgr.Wkr_run(page);
-		byte[][] ttl = (byte[][])wkr.Found().XtoAry(byte[].class);
+		byte[][] ttl = (byte[][])wkr.Found().Xto_ary(byte[].class);
 		String[] actl = new String[ttl.length];
 		for (int i = 0; i < actl.length; i++) {
 			actl[i] = String_.new_utf8_(ttl[i]);

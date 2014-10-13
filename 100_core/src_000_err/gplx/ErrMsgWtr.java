@@ -105,7 +105,7 @@ public class ErrMsgWtr {
 			errAry.Add(cur);
 			cur = cur.Inner();
 		}
-		return (Err[])errAry.XtoAry(Err.class);
+		return (Err[])errAry.Xto_ary(Err.class);
 	}
 	public static final ErrMsgWtr _ = new ErrMsgWtr(); ErrMsgWtr() {}
 }

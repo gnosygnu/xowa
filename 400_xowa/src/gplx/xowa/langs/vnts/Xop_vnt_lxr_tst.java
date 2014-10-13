@@ -65,7 +65,7 @@ class Xop_vnt_tkn_mok {
 	private ListAdp rules_list = ListAdp_.new_();
 	private ListAdp flags_list = ListAdp_.new_();
 	public Xop_vnt_flag[] Flags() {
-		if (flags == null) flags = (Xop_vnt_flag[])flags_list.XtoAry(Xop_vnt_flag.class);
+		if (flags == null) flags = (Xop_vnt_flag[])flags_list.Xto_ary(Xop_vnt_flag.class);
 		return flags;
 	}	private Xop_vnt_flag[] flags;
 	public Xop_vnt_tkn_mok Flags_none_()					{flags_list.Clear(); return this;}
@@ -81,7 +81,7 @@ class Xop_vnt_tkn_mok {
 		return this;
 	}
 	public Xop_vnt_rule[] Rules() {
-		if (rules == null) rules = (Xop_vnt_rule[])rules_list.XtoAry(Xop_vnt_rule.class);
+		if (rules == null) rules = (Xop_vnt_rule[])rules_list.Xto_ary(Xop_vnt_rule.class);
 		return rules;
 	}	private Xop_vnt_rule[] rules;
 	public Xop_vnt_tkn_mok Rule_(String rule)											{return Rule_(Xop_vnt_rule.Null_lang, rule);}
@@ -130,7 +130,7 @@ class Xop_vnt_lxr_fxt {
 			else
 				bfr.Add_str(Xop_vnt_flag_.Xto_name(itm_tid)).Add_byte(Byte_ascii.Semic);
 		}
-		return bfr.XtoStrAndClear();
+		return bfr.Xto_str_and_clear();
 	}
 	private void Vnt_flag_lang_to_bfr(Bry_bfr bfr, Xop_vnt_flag itm) {
 		byte[][] ary = itm.Langs();
@@ -158,6 +158,6 @@ class Xop_vnt_lxr_fxt {
 			}
 			bfr.Add_byte(Byte_ascii.Semic);
 		}
-		return bfr.XtoStrAndClear();
+		return bfr.Xto_str_and_clear();
 	}
 }

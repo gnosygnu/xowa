@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.core.btries.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.wikis.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.strings.*; import gplx.html.*;
-import gplx.xowa.parsers.logs.*;
+import gplx.xowa.parsers.logs.*; import gplx.xowa.parsers.tblws.*;
 public class Xop_xnde_wkr implements Xop_ctx_wkr {
 	public void Ctor_ctx(Xop_ctx ctx) {}
 	public boolean Pre_at_bos() {return pre_at_bos;} public void Pre_at_bos_(boolean v) {pre_at_bos = v;} private boolean pre_at_bos;
@@ -559,7 +559,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		if (tag_id == -1) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not extract int: page=~{0}", ctx.Cur_page().Url().Xto_full_str_safe()); return Bry_finder.Not_found;}
 		Bry_bfr tmp = ctx.Wiki().Utl_bry_bfr_mkr().Get_b128();
 		tmp.Add(Pfunc_tag.Xtag_end_lhs).Add_int_pad_bgn(Byte_ascii.Num_0, 10, tag_id).Add(Pfunc_tag.Xtag_rhs);
-		byte[] tag_end = tmp.Mkr_rls().XtoAryAndClear();
+		byte[] tag_end = tmp.Mkr_rls().Xto_bry_and_clear();
 		int rv = Bry_finder.Find_fwd(src, tag_end, open_end + Pfunc_tag.Xtag_rhs.length);
 		if (rv == Bry_finder.Not_found) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not find end: page=~{0}", ctx.Cur_page().Url().Xto_full_str_safe()); return Bry_finder.Not_found;}
 		rv = Bry_finder.Find_bwd(src, Byte_ascii.Lt, rv - 1);
@@ -664,6 +664,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 					case Xop_xnde_tag_.Tid_listing_sleep:			xnde_xtn = tkn_mkr.Xnde_listing(tag_id); break;
 					case Xop_xnde_tag_.Tid_timeline:
 						boolean log_wkr_enabled = Timeline_log_wkr != Xop_log_basic_wkr.Null; if (log_wkr_enabled) Timeline_log_wkr.Log_end_xnde(ctx.Cur_page(), Xop_log_basic_wkr.Tid_timeline, src, xnde);
+						ctx.Cur_page().Html_data().Module_mgr().Itm_timeline().Enabled_y_();
 						break;
 					case Xop_xnde_tag_.Tid_xowa_tag_bgn:
 					case Xop_xnde_tag_.Tid_xowa_tag_end:

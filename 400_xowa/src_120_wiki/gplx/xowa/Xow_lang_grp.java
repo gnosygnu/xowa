@@ -22,7 +22,7 @@ public class Xow_lang_grp implements GfoInvkAble {
 	public byte[] Name() {return name;} public Xow_lang_grp Name_(byte[] v) {name = v; return this;} private byte[] name;
 	public int Sort_idx() {return sort_idx;} public Xow_lang_grp Sort_idx_(int v) {sort_idx = v; return this;} private int sort_idx = 0;
 	public byte Sort_mode() {return sort_mode;} public Xow_lang_grp Sort_mode_(byte v) {sort_mode = v; return this;} private byte sort_mode = Sort_mode_page_name;
-	public Xow_lang_itm[] Itms() {if (itms == null) itms = (Xow_lang_itm[])itm_list.XtoAry(Xow_lang_itm.class); return itms;} private Xow_lang_itm[] itms;
+	public Xow_lang_itm[] Itms() {if (itms == null) itms = (Xow_lang_itm[])itm_list.Xto_ary(Xow_lang_itm.class); return itms;} private Xow_lang_itm[] itms;
 	public int Itms_len() {return this.Itms().length;}
 	public Xow_lang_itm Itms_get(int i) {return this.Itms()[i];}
 	public void Itms_add(Xow_lang_itm itm) {itms = null; itm_list.Add(itm);} ListAdp itm_list = ListAdp_.new_();

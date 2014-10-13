@@ -78,6 +78,6 @@ class Gfo_pattern_itm_fxt {
 			Gfo_pattern_itm itm = ary[i];
 			itm.Xto_str(sb);
 		}
-		return sb.XtoStrAndClear();
+		return sb.Xto_str_and_clear();
 	}
 }

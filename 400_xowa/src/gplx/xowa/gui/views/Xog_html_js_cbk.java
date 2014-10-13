@@ -29,7 +29,7 @@ public class Xog_html_js_cbk implements GfoInvkAble {
 		int len = m.Args_count();
 		for (int i = 0; i < len; i++)
 			bfr.Add_str("|").Add_str(m.Args_getAt(i).Val_to_str_or_empty());
-		return bfr.XtoStrAndClear();
+		return bfr.Xto_str_and_clear();
 	}
 	private String[] Xowa_exec_test_as_array(GfoMsg m) {// return args as array; EX: xowa_exec('proc', 'arg0', 'arg1'); -> proc,arg0,arg1
 		bfr.Clear();
@@ -52,7 +52,7 @@ public class Xog_html_js_cbk implements GfoInvkAble {
 			wiki.Parser().Parse_text_to_wdom(root, wiki.Ctx(), wiki.Ctx().Tkn_mkr(), raw, 0);
 			byte[] data = root.Data_mid();
 			wiki.Html_mgr().Html_wtr().Write_all(bfr, wiki.Ctx(), data, root);
-			return bfr.XtoStrAndClear();
+			return bfr.Xto_str_and_clear();
 		}
 		finally {
 			wiki.Ctx().Para().Enabled_(old_para_enabled);

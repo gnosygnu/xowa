@@ -516,7 +516,7 @@ class Xow_toc_mgr_fxt {
 		Xop_root_tkn root = fxt.Ctx().Tkn_mkr().Root(raw_bry);
 		fxt.Parser().Parse_page_all_clear(root, fxt.Ctx(), fxt.Ctx().Tkn_mkr(), raw_bry);
 		toc_mgr.Html(fxt.Page(), raw_bry, tmp);
-		Tfds.Eq_ary(String_.SplitLines_nl(expd), String_.SplitLines_nl(tmp.XtoStrAndClear()), raw);
+		Tfds.Eq_ary(String_.SplitLines_nl(expd), String_.SplitLines_nl(tmp.Xto_str_and_clear()), raw);
 	}
 	public void Test_html_all(String raw, String expd) {
 		fxt.Wtr_cfg().Toc_show_(true);

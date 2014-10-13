@@ -91,7 +91,7 @@ class Xodb_load_mgr_sql_fxt {
 			bfr.Add(page.Ttl_wo_ns()).Add_byte_pipe();
 			bfr.Add_byte(Bool_.Xto_byte(ctg_itm.Hidden())).Add_byte_nl();
 		}
-		return bfr.XtoStrAndClear();
+		return bfr.Xto_str_and_clear();
 	}
 
 	public Xoctg_url_mok ctg_url_() {return new Xoctg_url_mok();}

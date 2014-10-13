@@ -32,12 +32,12 @@ public class Xol_msg_itm {
 	public byte[] Fmt(Bry_bfr bfr, Object... args) {
 		tmp_fmtr.Fmt_(val);
 		tmp_fmtr.Bld_bfr_many(bfr, args);
-		return bfr.XtoAryAndClear();
+		return bfr.Xto_bry_and_clear();
 	}	static Bry_fmtr tmp_fmtr = Bry_fmtr.tmp_();
 	public byte[] Fmt_tmp(Bry_bfr bfr, byte[] tmp_val, Object... args) {
 		tmp_fmtr.Fmt_(tmp_val);
 		tmp_fmtr.Bld_bfr_many(bfr, args);
-		return bfr.XtoAryAndClear();
+		return bfr.Xto_bry_and_clear();
 	}
 	public static final byte Src_null = 0, Src_lang = 1, Src_wiki = 2, Src_missing = 3;
 }

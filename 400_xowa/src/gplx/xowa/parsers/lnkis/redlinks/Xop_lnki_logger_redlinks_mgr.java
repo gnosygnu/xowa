@@ -19,7 +19,7 @@ package gplx.xowa.parsers.lnkis.redlinks; import gplx.*; import gplx.xowa.*; imp
 import gplx.xowa.dbs.tbls.*;
 public class Xop_lnki_logger_redlinks_mgr {
 	private Xoa_page page;
-	private int lnki_idx;
+	private int lnki_idx = gplx.xowa.html.lnkis.Xoh_lnki_wtr.Lnki_id_min;	// NOTE: default to 1, not 0, b/c 0 is ignored by wtr; DATE:2014-10-09
 	private boolean disabled = false;
 	public Xop_lnki_logger_redlinks_mgr(Xoa_page page) {this.page = page;}
 	public int Request_idx() {return request_idx;} private int request_idx = 1;

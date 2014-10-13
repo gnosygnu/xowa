@@ -24,7 +24,7 @@ public class Xoh_file_html_fmtr__hdump extends Xoh_file_html_fmtr__base {
 		tmp_bfr.Add(Hdump_html_consts.Key_img_style);
 		tmp_bfr.Add_int_variable(uid);
 		tmp_bfr.Add_byte_apos();
-		byte[] div2_width_repl = tmp_bfr.XtoAryAndClear();
+		byte[] div2_width_repl = tmp_bfr.Xto_bry_and_clear();
 		fmtr_thumb_core.Bld_bfr_many(bfr, uid, div1_halign, div2_width_repl, div2_content);
 	}
 	@Override public void Html_thumb_part_magnify(Bry_bfr bfr, int uid, byte[] a_href, byte[] a_title, byte[] img_src)									{Write_xnde(bfr, Hdump_html_consts.Key_file_mgnf, uid);}

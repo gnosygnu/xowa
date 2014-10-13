@@ -74,13 +74,13 @@ public class Xow_wiki_alias {
 		byte domain_tid = ((Byte_obj_ref)o).Val();
 		Bry_bfr bfr = Bry_bfr.reset_(255);
 		switch (domain_tid) {
-			case Domain_wikimediafoundation:	return bfr.Add(Xow_wiki_domain_.Key_wikimediafoundation_bry).Add_byte(Byte_ascii.Dot).Add(Xow_wiki_domain_.Seg_org_bry).XtoAryAndClear();
+			case Domain_wikimediafoundation:	return bfr.Add(Xow_wiki_domain_.Key_wikimediafoundation_bry).Add_byte(Byte_ascii.Dot).Add(Xow_wiki_domain_.Seg_org_bry).Xto_bry_and_clear();
 			case Domain_wikidata:
-			case Domain_mediawiki:				return bfr.Add(Xow_wiki_domain_.Seg_www_bry).Add_byte(Byte_ascii.Dot).Add(Xow_wiki_domain_.Key_by_tid(domain_tid)).Add_byte(Byte_ascii.Dot).Add(Xow_wiki_domain_.Seg_org_bry).XtoAryAndClear();
+			case Domain_mediawiki:				return bfr.Add(Xow_wiki_domain_.Seg_www_bry).Add_byte(Byte_ascii.Dot).Add(Xow_wiki_domain_.Key_by_tid(domain_tid)).Add_byte(Byte_ascii.Dot).Add(Xow_wiki_domain_.Seg_org_bry).Xto_bry_and_clear();
 			case Domain_commons:
 			case Domain_species:
 			case Domain_meta:
-			case Domain_incubator:				return bfr.Add(Xow_wiki_domain_.Key_by_tid(domain_tid)).Add_byte(Byte_ascii.Dot).Add(Xow_wiki_domain_.Seg_wikimedia_bry).Add_byte(Byte_ascii.Dot).Add(Xow_wiki_domain_.Seg_org_bry).XtoAryAndClear();
+			case Domain_incubator:				return bfr.Add(Xow_wiki_domain_.Key_by_tid(domain_tid)).Add_byte(Byte_ascii.Dot).Add(Xow_wiki_domain_.Seg_wikimedia_bry).Add_byte(Byte_ascii.Dot).Add(Xow_wiki_domain_.Seg_org_bry).Xto_bry_and_clear();
 			case Domain_wikipedia:
 			case Domain_wiktionary:
 			case Domain_wikisource:
@@ -91,7 +91,7 @@ public class Xow_wiki_alias {
 			case Domain_wikivoyage:
 				bfr.Add_mid(src, 0, alias_bry_trie.Match_pos() + 1);
 				bfr.Add_byte(Byte_ascii.Dot);
-				return bfr.Add(Xow_wiki_domain_.Key_by_tid(domain_tid)).Add_byte(Byte_ascii.Dot).Add(Xow_wiki_domain_.Seg_org_bry).XtoAryAndClear();
+				return bfr.Add(Xow_wiki_domain_.Key_by_tid(domain_tid)).Add_byte(Byte_ascii.Dot).Add(Xow_wiki_domain_.Seg_org_bry).Xto_bry_and_clear();
 		}
 		return null;
 	}
@@ -154,6 +154,8 @@ public class Xow_wiki_alias {
 		}
 	}
 	public static Xow_wiki_domain parse_by_wmf_key(byte[] wmf_key) {
+		if (Bry_.Has(wmf_key, Byte_ascii.Underline))	// convert "_" to "-"; note that wmf_keys have a strict format of langtype; EX: "zh_yuewiki"; DATE:2014-10-06
+			wmf_key = Bry_.Replace_create(wmf_key, Byte_ascii.Underline, Byte_ascii.Dash);
 		byte[] domain_bry = Parse__domain_name(wmf_key, 0, wmf_key.length);
 		Xow_wiki_domain rv = Xow_wiki_domain_.parse_by_domain(domain_bry);
 		rv.Wmf_key_(wmf_key);

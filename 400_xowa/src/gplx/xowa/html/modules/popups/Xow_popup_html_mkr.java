@@ -32,10 +32,10 @@ public class Xow_popup_html_mkr {
 	public byte[] Bld(Xow_wiki cur_wiki, Xoa_page page, Xow_popup_itm popup_itm, Bry_bfr wrdx_bfr) {
 		if (output_js_clean)	app.Html_mgr().Js_cleaner().Clean_bfr(wiki, page.Ttl(), wrdx_bfr, 0);
 		if (output_tidy)		app.Html_mgr().Tidy_mgr().Run_tidy_html(page, wrdx_bfr);
-		byte[] hdom_bry = wrdx_bfr.XtoAryAndClear();
+		byte[] hdom_bry = wrdx_bfr.Xto_bry_and_clear();
 		String page_url = wrdx_bfr.Add(page.Wiki().Domain_bry()).Add(Xoa_consts.Url_wiki_intermediary).Add(app.Encoder_mgr().Href()
 			.Encode(page.Ttl().Full_db()))	// NOTE: was page.Url().Raw(), but that doesn't work for Special:Search; PAGE:en.w:Earth and "Quotations"; DATE:2014-06-29
-			.XtoStrAndClear()
+			.Xto_str_and_clear()
 		;
 		fmtr_popup.Bld_bfr_many
 		( wrdx_bfr
@@ -50,7 +50,7 @@ public class Xow_popup_html_mkr {
 		, Xow_popup_html_bldr_.Bld_fmtr_viewed(fmtr_viewed, app, wiki, wrdx_bfr, page.Ttl())
 		, app.Fsys_mgr().Root_dir().To_http_file_bry()
 		);
-		return wrdx_bfr.XtoAryAndClear();
+		return wrdx_bfr.Xto_bry_and_clear();
 	}
 }
 class Xow_popup_html_bldr_ {

@@ -31,7 +31,7 @@ class Scrib_lib_wikibase_srl {
 		Srl_root(rv, Wdata_doc_parser_v2.Str_sitelinks		, Srl_sitelinks	(Wdata_dict_sitelink.Str_site		, Wdata_dict_sitelink.Str_title, wdoc.Slink_list()));
 		Srl_root(rv, Wdata_doc_parser_v2.Str_aliases		, Srl_aliases	(base_adj, wdoc.Alias_list()));
 		Srl_root(rv, Wdata_doc_parser_v2.Str_claims			, Srl_claims	(base_adj, legacy_style, wdoc.Claim_list()));
-		return (KeyVal[])rv.XtoAry(KeyVal.class);
+		return (KeyVal[])rv.Xto_ary(KeyVal.class);
 	}
 	private static void Srl_root(ListAdp rv, String label, KeyVal[] ary) {
 		if (ary == null) return;	// don't add node if empty; EX: labels:{} should not add "labels" kv
@@ -108,7 +108,7 @@ class Scrib_lib_wikibase_srl {
 		list.Add(KeyVal_.new_(Wdata_dict_claim_v1.Str_rank, Wdata_dict_rank.Xto_str(itm.Rank_tid())));
 		list.Add(KeyVal_.new_("type", itm.Prop_type()));
 		Srl_root(list, Wdata_dict_claim.Str_qualifiers, Srl_qualifiers(itm.Qualifiers()));
-		return (KeyVal[])list.XtoAryAndClear(KeyVal.class);
+		return (KeyVal[])list.Xto_ary_and_clear(KeyVal.class);
 	}
 	private static KeyVal[] Srl_qualifiers(Wdata_claim_grp_list list) {
 		if (list == null) return null;
@@ -124,9 +124,9 @@ class Scrib_lib_wikibase_srl {
 				Wdata_claim_itm_core itm = grp.Get_at(j);
 				pid_list.Add(KeyVal_.int_(j + ListAdp_.Base1, Srl_claims_prop_itm_core(itm_pid, itm)));
 			}
-			rv.Add(KeyVal_.new_(itm_pid, (KeyVal[])pid_list.XtoAryAndClear(KeyVal.class)));
+			rv.Add(KeyVal_.new_(itm_pid, (KeyVal[])pid_list.Xto_ary_and_clear(KeyVal.class)));
 		}
-		return (KeyVal[])rv.XtoAryAndClear(KeyVal.class);
+		return (KeyVal[])rv.Xto_ary_and_clear(KeyVal.class);
 	}
 	private static KeyVal[] Srl_claims_prop_itm_core(String pid, Wdata_claim_itm_core itm) {
 		KeyVal[] rv = new KeyVal[3];

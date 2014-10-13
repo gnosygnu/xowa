@@ -24,7 +24,7 @@ public class Xosrv_socket_wtr {
 	public void Write(Xosrv_msg msg) {
 		wtr.Open();
 		msg.Print(msg_bfr);
-		byte[] msg_bry = msg_bfr.XtoAryAndClear();
+		byte[] msg_bry = msg_bfr.Xto_bry_and_clear();
 		wtr.Write(msg_bry);
 		wtr.Close();
 	}

@@ -85,7 +85,7 @@ public class Scrib_invoke_func_fxt {
 	}
 	public void Test_parse_err(String raw, String expd_err_type) {
 		Scrib_invoke_func.Error(tmp_bfr, fxt.Wiki().Msg_mgr(), expd_err_type);
-		byte[] expd_err = tmp_bfr.XtoAryAndClear();
+		byte[] expd_err = tmp_bfr.Xto_bry_and_clear();
 		fxt.Test_parse_page_tmpl_str(raw, String_.new_utf8_(expd_err));
 	}
 	public void Test_lib_proc(Scrib_lib lib, String func_name, Object[] args, String expd) {Test_lib_proc_kv(lib, func_name, Scrib_kv_utl_.base1_many_(args), expd);}
@@ -135,7 +135,7 @@ public class Scrib_invoke_func_fxt {
 			KeyVal kv = ary[i];
 			bfr.Add_str(Object_.Xto_str_strict_or_null_mark(kv.Val()));
 		}
-		return bfr.XtoStrAndClear();
+		return bfr.Xto_str_and_clear();
 	}
 	public void Test_scrib_proc_bool(Scrib_lib lib, String proc_name, Object[] args, boolean expd) {Test_scrib_proc_obj(lib, proc_name, Scrib_kv_utl_.base1_many_(args), expd);}
 	public void Test_scrib_proc_int(Scrib_lib lib, String proc_name, Object[] args, int expd) {Test_scrib_proc_obj(lib, proc_name, Scrib_kv_utl_.base1_many_(args), expd);}
@@ -177,7 +177,7 @@ class Scrib_lua_rsp_bldr {
 		bfr.Add_str("s:2:\"op\";s:4:\"call\";s:5:\"nargs\";i:3;s:4:\"args\";");
 		Bld_kv_ary(bfr, ary);
 		bfr.Add_str("}");
-		return bfr.XtoStrAndClear();
+		return bfr.Xto_str_and_clear();
 	}
 	private void Bld_obj(Bry_bfr bfr, Object v) {
 		Class<?> v_type = v.getClass();

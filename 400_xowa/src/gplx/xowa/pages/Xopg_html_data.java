@@ -79,7 +79,7 @@ public class Xopg_html_data {
 		custom_html = custom_html_end = custom_head_end = custom_name = null;
 		if (ctg_hash != null) ctg_hash.Clear();
 	}
-	public byte[][] Ctgs_to_ary() {return ctg_hash == null ? Bry_.Ary_empty : (byte[][])ctg_hash.XtoAry(byte[].class);}
+	public byte[][] Ctgs_to_ary() {return ctg_hash == null ? Bry_.Ary_empty : (byte[][])ctg_hash.Xto_ary(byte[].class);}
 	public void Ctgs_add(Xoa_ttl ttl) {
 		if (ctg_hash == null) ctg_hash = OrderedHash_.new_bry_();
 		byte[] ttl_bry = ttl.Page_txt();

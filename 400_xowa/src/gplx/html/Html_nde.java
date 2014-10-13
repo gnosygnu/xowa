@@ -77,7 +77,7 @@ public class Html_nde {
 					break;
 			}
 		}
-		return dirty ? tmp_bfr.XtoAryAndClear() : Bry_.Mid(src, bgn, end);
+		return dirty ? tmp_bfr.Xto_bry_and_clear() : Bry_.Mid(src, bgn, end);
 	}
 	public byte[] Data(byte[] src) {
 		return Bry_.Mid(src, tag_lhs_end, tag_rhs_bgn);

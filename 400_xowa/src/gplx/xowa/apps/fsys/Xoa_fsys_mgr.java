@@ -19,6 +19,7 @@ package gplx.xowa.apps.fsys; import gplx.*; import gplx.xowa.*; import gplx.xowa
 public class Xoa_fsys_mgr implements GfoInvkAble {
 	public Xoa_fsys_mgr(Io_url root_dir, String plat_name) {
 		this.root_dir			= root_dir;
+		root_dir_bry			= root_dir.To_http_file_bry();
 		file_dir				= root_dir.GenSubDir("file");
 		wiki_dir				= root_dir.GenSubDir("wiki");
 		bin_plat_dir			= root_dir.GenSubDir("bin").GenSubDir(plat_name);
@@ -28,6 +29,7 @@ public class Xoa_fsys_mgr implements GfoInvkAble {
 		cfg_wiki_core_dir		= bin_any_dir.GenSubDir_nest("xowa", "cfg", "wiki", "core");
 	}
 	public Io_url Root_dir()				{return root_dir;} private final Io_url root_dir;
+	public byte[] Root_dir_bry()			{return root_dir_bry;} private final byte[] root_dir_bry;
 	public Io_url File_dir()				{return file_dir;} private final Io_url file_dir;
 	public Io_url Wiki_dir()				{return wiki_dir;} public Xoa_fsys_mgr Wiki_dir_(Io_url v) {wiki_dir = v; return this;} private Io_url wiki_dir;
 	public Io_url Bin_plat_dir()			{return bin_plat_dir;} private final Io_url bin_plat_dir;

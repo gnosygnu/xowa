@@ -138,9 +138,9 @@ class Hdump_html_mgr_fxt {
 		return this;
 	}
 	public Hdump_html_mgr_fxt Test_html(String expd) {
-		if (img_list.Count() > 0) hpg.Img_itms_((Hdump_data_img__base[])img_list.XtoAryAndClear(Hdump_data_img__base.class));
+		if (img_list.Count() > 0) hpg.Img_itms_((Hdump_data_img__base[])img_list.Xto_ary_and_clear(Hdump_data_img__base.class));
 		html_mgr.Init_by_page(wiki.Domain_bry(), hpg).Write(bfr);
-		Tfds.Eq_str_lines(expd, bfr.XtoStrAndClear());
+		Tfds.Eq_str_lines(expd, bfr.Xto_str_and_clear());
 		return this;
 	}
 }

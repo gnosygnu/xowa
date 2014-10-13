@@ -159,7 +159,7 @@ class Gfs_parser_fxt {
 			path_bfr.Clear().Add_int_variable(i);
 			To_str(tmp_bfr, path_bfr, src, expd[i]);
 		}	
-		return tmp_bfr.XtoStrAndClear();
+		return tmp_bfr.Xto_str_and_clear();
 	}
 	public void To_str(Bry_bfr bfr, Bry_bfr path, byte[] src, Gfs_nde nde) {
 		To_str_atr(bfr, path, src, Atr_name, nde.Name(), nde.Name_bgn(), nde.Name_end());

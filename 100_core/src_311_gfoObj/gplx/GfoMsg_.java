@@ -222,7 +222,7 @@ class GfoMsg_base implements GfoMsg {
 	public String XtoStr() {
 		String_bldr sb = String_bldr_.new_();
 		XtoStr(sb, new XtoStrWkr_gplx(), this);
-		return sb.XtoStrAndClear();
+		return sb.Xto_str_and_clear();
 	}
 	void XtoStr(String_bldr sb, XtoStrWkr wkr, GfoMsg m) {
 		sb.Add(m.Key());

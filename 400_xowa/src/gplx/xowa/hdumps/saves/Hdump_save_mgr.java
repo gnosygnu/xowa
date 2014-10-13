@@ -36,7 +36,7 @@ public class Hdump_save_mgr {
 	}
 	public int Insert_body(Xoa_page page, int page_id) {
 		Hdump_page_body_srl.Save(tmp_bfr, page);
-		byte[] body_bry = tmp_bfr.XtoAryAndClear();
+		byte[] body_bry = tmp_bfr.Xto_bry_and_clear();
 		text_tbl.Insert(page_id, Hdump_text_row_tid.Tid_body, body_bry);
 		return body_bry.length;
 	}
@@ -46,7 +46,7 @@ public class Hdump_save_mgr {
 			Hdump_data_itm itm = (Hdump_data_itm)imgs.FetchAt(i);
 			itm.Data_write(bfr);
 		}
-		return bfr.XtoAryAndClear();
+		return bfr.Xto_bry_and_clear();
 	}
 	public static byte[] Write_redlinks(Bry_bfr bfr, Xopg_redlink_mgr redlink_mgr) {
 		int len = redlink_mgr.Len(); if (len == 0) return null;
@@ -54,6 +54,6 @@ public class Hdump_save_mgr {
 		for (int i = 0; i < len; ++i) {
 			bfr.Add_byte_pipe().Add_int_variable(redlink_mgr.Get_at(i));
 		}
-		return bfr.XtoAryAndClear();
+		return bfr.Xto_bry_and_clear();
 	}
 }

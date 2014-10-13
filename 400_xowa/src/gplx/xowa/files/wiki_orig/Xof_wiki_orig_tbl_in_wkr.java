@@ -37,7 +37,7 @@ class Xof_wiki_orig_tbl_in_wkr extends gplx.xowa.dbs.tbls.Xodb_in_wkr_base {
 			stmt.Val_str_by_bry_(itm.Lnki_ttl());
 		}
 	}
-	@Override public void Eval_rslts(Cancelable cancelable, Xow_wiki wiki, DataRdr rdr) {
+	@Override public void Eval_rslts(Cancelable cancelable, Xodb_ctx db_ctx, DataRdr rdr) {
 		while (rdr.MoveNextPeer()) {
 			if (cancelable.Canceled()) return;
 			Xof_wiki_orig_itm itm = Xof_wiki_orig_itm.load_(rdr);

@@ -43,7 +43,7 @@ public class Io_sort {
 			size_cur = size_new;
 		}
 		rdr.Rls(); bfr.Rls(); Env_.GarbageCollect();
-		return (Io_url[])rv.XtoAry(Io_url.class);
+		return (Io_url[])rv.Xto_ary(Io_url.class);
 	}
 	public void Merge(Gfo_usr_dlg usr_dlg, Io_url[] src_ary, ComparerAble comparer, Io_line_rdr_key_gen key_gen, Io_sort_cmd cmd) {
 		BinaryHeap_Io_line_rdr heap = load_(usr_dlg, src_ary, comparer, key_gen, memory_max); if (heap.Len() == 0) return;//throw Err_.new_(Array_.XtoStr(src_ary));

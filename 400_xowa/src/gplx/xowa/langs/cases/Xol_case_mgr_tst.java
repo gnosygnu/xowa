@@ -48,7 +48,7 @@ public class Xol_case_mgr_tst {
 //				bfr.Add_bry_comma(itm.Src_ary()).Add_byte_pipe();
 //				bfr.Add_bry_comma(itm.Trg_ary()).Add_byte_nl();
 //			}
-//			Io_mgr._.SaveFilStr("C:\\test1.txt", bfr.XtoStrAndClear());
+//			Io_mgr._.SaveFilStr("C:\\test1.txt", bfr.Xto_str_and_clear());
 //		}
 }
 class Xol_case_mgr_fxt {
@@ -95,7 +95,7 @@ class Xol_case_mgr_fxt {
 			Xol_case_itm itm = ary[i];
 			sb.Add(Byte_.Xto_str(itm.Tid())).Add_char_pipe().Add(String_.new_utf8_(itm.Src_ary())).Add_char_pipe().Add(String_.new_utf8_(itm.Trg_ary())).Add_char_nl();
 		}
-		return sb.XtoStrAndClear();
+		return sb.Xto_str_and_clear();
 	}
 	public String raw_(Xol_case_itm_bry[] itms) {
 		int itms_len = itms.length;
@@ -120,7 +120,7 @@ class Xol_case_mgr_fxt {
 		sb.Add("s:14:\"wikiLowerChars\";a:1038:{");
 		raw_ary(sb, lowers);
 		sb.Add("}}");
-		return sb.XtoStrAndClear();
+		return sb.Xto_str_and_clear();
 	}
 	private void raw_ary(String_bldr sb, String[] ary) {
 		int ary_len = ary.length;

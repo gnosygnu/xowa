@@ -75,7 +75,7 @@ public class Xosrh_ns_mgr {
 				Int_obj_ref ns_id_ref = (Int_obj_ref)ns_hash.FetchAt(i);
 				tmp_bfr.Add_int_variable(ns_id_ref.Val());
 			}
-			return tmp_bfr.XtoAryAndClear();
+			return tmp_bfr.Xto_bry_and_clear();
 		}
 	}
 	private static final byte[] Hash_key_all = new byte[] {Byte_ascii.Asterisk}, Hash_key_main = new byte[] {Byte_ascii.Num_0};

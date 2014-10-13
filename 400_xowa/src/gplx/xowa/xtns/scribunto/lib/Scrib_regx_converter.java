@@ -21,7 +21,7 @@ public class Scrib_regx_converter {
 	public Scrib_regx_converter() {Init();}
 	public String Regx() {return regx;} private String regx;
 	public ListAdp Capt_list() {return capt_list;}
-	public KeyVal[] Capt_ary() {return capt_list.Count() == 0 ? null : (KeyVal[])capt_list.XtoAry(KeyVal.class);}
+	public KeyVal[] Capt_ary() {return capt_list.Count() == 0 ? null : (KeyVal[])capt_list.Xto_ary(KeyVal.class);}
 	public String Parse(byte[] src, byte[] anchor) {
 		int len = src.length;
 		boolean q_flag = false;
@@ -188,7 +188,7 @@ public class Scrib_regx_converter {
 		}
 		if (grps_open.Count() > 0) throw Err_.new_("Unclosed capture beginning at pattern character " + Int_.cast_(grps_open.FetchAt(0)));
 //			bfr.Add(Bry_regx_end);	// NOTE: do not add PHP /us at end; u=PCRE_UTF8 which is not needed for Java; s=PCRE_DOTALL which will be specified elsewhere
-		regx = bfr.XtoStrAndClear();
+		regx = bfr.Xto_str_and_clear();
 		return regx;
 	}	private Bry_bfr bfr = Bry_bfr.new_();
 	boolean grps_open_Has(ListAdp list, int v) {

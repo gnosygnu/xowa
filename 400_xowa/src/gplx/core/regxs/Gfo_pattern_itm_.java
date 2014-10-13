@@ -46,6 +46,6 @@ public class Gfo_pattern_itm_ {
 			++pos;
 			if (last) break;
 		}
-		return (Gfo_pattern_itm[])rv.XtoAryAndClear(Gfo_pattern_itm.class);
+		return (Gfo_pattern_itm[])rv.Xto_ary_and_clear(Gfo_pattern_itm.class);
 	}
 }

@@ -51,6 +51,6 @@ class Xoh_ctg_mgr_fxt {
 		Xoa_page page = wiki.Ctx().Cur_page();
 		page.Category_list_(ctgs_bry_ary);
 		ctg_grp_mgr.Bld(tmp_bfr, page, ctgs_bry_ary.length);
-		Tfds.Eq_str_lines(expd, tmp_bfr.XtoStrAndClear());
+		Tfds.Eq_str_lines(expd, tmp_bfr.Xto_str_and_clear());
 	}
 }

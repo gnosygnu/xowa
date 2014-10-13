@@ -26,10 +26,10 @@ class Xofo_file {
 	public int Bits() {return bits;} private int bits;
 	public int Repo_id() {return repo_id;} public Xofo_file Repo_id_(int v) {this.repo_id = v; return this;} private int repo_id = -1;
 	public byte[] Status_msg() {return status_msg;} public Xofo_file Status_msg_(byte[] v) {status_msg = v; return this;} private byte[] status_msg = Bry_.Empty;
-	public int[] Thumbs() {return (int[])thumbs.XtoAry(int.class);} private OrderedHash thumbs = OrderedHash_.new_();
+	public int[] Thumbs() {return (int[])thumbs.Xto_ary(int.class);} private OrderedHash thumbs = OrderedHash_.new_();
 	public Xofo_lnki[] Links() {return lnkis;} private Xofo_lnki[] lnkis = Xofo_lnki.Ary_empty; int links_len;
 	public void Links_(ListAdp list) {
-		lnkis = (Xofo_lnki[])list.XtoAry(Xofo_lnki.class);
+		lnkis = (Xofo_lnki[])list.Xto_ary(Xofo_lnki.class);
 		links_len = lnkis.length;
 		list.Clear();
 	}

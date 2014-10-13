@@ -96,6 +96,7 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 						lnke_end_tid = End_tid_invalid;
 					break;
 				case Byte_ascii.Brack_bgn:	// NOTE: always stop lnke at "[" regardless of brack_type; EX: [http:a.org[[B]]] and http:a.org[[B]]; DATE:2014-07-11
+				case Byte_ascii.Quote:		// NOTE: quote should also stop lnke; DATE:2014-10-10
 					lnke_end_tid = End_tid_symbol;
 					break;
 			}
@@ -139,16 +140,24 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 					root.Subs_del_after(prv_tkn.Tkn_sub_idx());				// delete [[ tkn and replace with [ tkn
 					root.Subs_add(tkn_mkr.Txt(prv_tkn.Src_bgn(), prv_tkn.Src_bgn() + 1));
 					ctx.Stack_pop_last();									// don't forget to remove from stack
-					lnke_type = Xop_lnke_tkn.Lnke_typ_brack;			// change lnke_typee to brack
+					lnke_type = Xop_lnke_tkn.Lnke_typ_brack;				// change lnke_typee to brack
 					--bgn_pos;
 				}
 			}
 		}
 		if (proto_tid == Xoo_protocol_itm.Tid_relative_2)	// for "[[//", add "["; rest of code handles "[//" normally, but still want to include literal "["; DATE:2013-02-02
 			ctx.Subs_add(root, tkn_mkr.Txt(lnke_bgn - 1, lnke_bgn));
-		Xop_lnke_tkn tkn = tkn_mkr.Lnke(bgn_pos, brack_end_pos, protocol, proto_tid, lnke_type, lnke_bgn, lnke_end);
 		url_parser.Parse_site_fast(site_data, src, lnke_bgn, lnke_end);
-		int site_bgn = site_data.Site_bgn(), site_end = site_data.Site_end(); tkn.Lnke_relative_(site_data.Rel());
+		int site_bgn = site_data.Site_bgn(), site_end = site_data.Site_end();
+		if (site_bgn == site_end) return ctx.Lxr_make_txt_(cur_pos); // empty proto should return text, not lnke; EX: "http:", "http://", "[http://]"; DATE:2014-10-09
+		int adj = Ignore_punctuation_at_end(src, site_bgn, lnke_end);
+		if (adj != 0) {
+			lnke_end -= adj;
+			brack_end_pos -= adj;
+			cur_pos -= adj;
+		}
+		Xop_lnke_tkn tkn = tkn_mkr.Lnke(bgn_pos, brack_end_pos, protocol, proto_tid, lnke_type, lnke_bgn, lnke_end);
+		tkn.Lnke_relative_(site_data.Rel());
 		Xow_xwiki_itm xwiki = ctx.App().User().Wiki().Xwiki_mgr().Get_by_mid(src, site_bgn, site_end);	// NOTE: check User_wiki.Xwiki_mgr, not App.Wiki_mgr() b/c only it is guaranteed to know all wikis on system
 		if (xwiki != null) {	// lnke is to an xwiki; EX: [http://en.wikipedia.org/A a]
 			Xow_wiki wiki = ctx.Wiki();
@@ -187,6 +196,36 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 			}
 		}
 		return cur_pos;
+	}
+	private static int Ignore_punctuation_at_end(byte[] src, int proto_end, int lnke_end) {	// DATE:2014-10-09
+		int rv = 0;
+		int pos = lnke_end - 1; // -1 b/c pos is after char; EX: "abc" has pos of 3; need --pos to start at src[2] = 'c'
+		byte paren_bgn_chk = Bool_.__byte;
+		while (pos >= proto_end) {
+			byte b = src[pos];
+			switch (b) {	// REF.MW: $sep = ',;\.:!?';
+				case Byte_ascii.Comma: case Byte_ascii.Semic: case Byte_ascii.Backslash: case Byte_ascii.Dot:
+				case Byte_ascii.Bang: case Byte_ascii.Question: 
+					break;
+				case Byte_ascii.Colon:	// differentiate between "http:" (don't trim) and "http://a.org:" (trim)
+					if (pos == proto_end -1) return rv;
+					break;
+				case Byte_ascii.Paren_end:	// differentiate between "(http://a.org)" (trim) and "http://a.org/b(c)" (don't trim)
+					if (paren_bgn_chk == Bool_.__byte) {
+						int paren_bgn_pos = Bry_finder.Find_fwd(src, Byte_ascii.Paren_bgn, proto_end, lnke_end);
+						paren_bgn_chk = paren_bgn_pos == Bry_finder.Not_found ? Bool_.N_byte : Bool_.Y_byte;
+					}
+					if (paren_bgn_chk == Bool_.Y_byte)	// "(" found; do not ignore ")"
+						return rv;
+					else
+						break;
+				default:
+					return rv;
+			}
+			--pos;
+			++rv;
+		}
+		return rv;
 	}
 	private static final byte Lnki_linkMode_init = 0, Lnki_linkMode_eq = 1, Lnki_linkMode_text = 2;
 	private static final byte End_tid_null = 0, End_tid_eos = 1, End_tid_brack = 2, End_tid_space = 3, End_tid_nl = 4, End_tid_symbol = 5, End_tid_invalid = 6;
@@ -241,7 +280,7 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 		byte[] rhs_dlm_bry = Bry_quote;
 		if (lhs_dlm_pos - proto_end_pos > 0) {
 			Bry_bfr bfr = ctx.App().Utl_bry_bfr_mkr().Get_k004();
-			rhs_dlm_bry = bfr.Add(Bry_quote).Add_mid(src, proto_end_pos, lhs_dlm_pos).XtoAryAndClear();
+			rhs_dlm_bry = bfr.Add(Bry_quote).Add_mid(src, proto_end_pos, lhs_dlm_pos).Xto_bry_and_clear();
 			bfr.Mkr_rls();
 		}
 		int rhs_dlm_pos = Bry_finder.Find_fwd(src, rhs_dlm_bry, lnke_bgn_pos, src_len); if (rhs_dlm_pos == Bry_.NotFound) return ctx.Lxr_make_txt_(cur_pos);

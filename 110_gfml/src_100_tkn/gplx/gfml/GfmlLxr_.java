@@ -89,7 +89,7 @@ class GfmlLxr_group implements GfmlLxr {
 			hookLength = trie.LastMatchCount;
 		}
 		if (ignoreOutput) return GfmlTkn_.IgnoreOutput;
-		String raw = sb.XtoStrAndClear();
+		String raw = sb.Xto_str_and_clear();
 		return outputTkn.MakeNew(raw, raw);
 	}
 	public GfmlLxr SubLxr() {throw Err_sublxr();}

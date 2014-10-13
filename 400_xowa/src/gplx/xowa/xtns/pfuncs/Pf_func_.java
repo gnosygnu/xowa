@@ -27,18 +27,18 @@ public class Pf_func_ {
 		nde.Key_tkn().Tmpl_evaluate(ctx, src, caller, bfr);	// NOTE: must add key b/c parser functions do not have keys and some usages pass in xml_tkns; EX: {{#if|<a href='{{{1}}}'|}}; "<a href" should not be interpreted as key
 		if (nde.KeyTkn_exists()) bfr.Add_byte(Byte_ascii.Eq);
 		nde.Val_tkn().Tmpl_evaluate(ctx, src, caller, bfr);
-		return bfr.XtoAryAndClearAndTrim();
+		return bfr.Xto_bry_and_clear_and_trim();
 	}
 	public static byte[] Eval_val_or(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, int self_args_len, int i, byte[] or) {
 		if (i >= self_args_len) return or;
 		Bry_bfr bfr = Bry_bfr.new_();
 		Arg_nde_tkn nde = self.Args_get_by_idx(i);
 		nde.Val_tkn().Tmpl_evaluate(ctx, src, caller, bfr);
-		return bfr.XtoAryAndClearAndTrim();
+		return bfr.Xto_bry_and_clear_and_trim();
 	}
 	public static byte[] Eval_tkn(Bry_bfr bfr, Xop_ctx ctx, byte[] src, Xot_invk caller, Xop_tkn_itm tkn) {
 		tkn.Tmpl_evaluate(ctx, src, caller, bfr);
-		return bfr.XtoAryAndClear();
+		return bfr.Xto_bry_and_clear();
 	}
 	private static final NumberParser lhs_parser = new NumberParser().Hex_enabled_(true), rhs_parser = new NumberParser().Hex_enabled_(true);
 	public static boolean Eq_(byte[] lhs, byte[] rhs) {	// PATCH.PHP: php allows "003" == "3.0"; ASSUME: numbers are either int or int-like decimal; long, float, decimal not supported

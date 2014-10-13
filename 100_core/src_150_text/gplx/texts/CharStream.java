@@ -53,7 +53,7 @@ public class CharStream {
 		length = (pos + length > len) ? len - pos : length;
 		return Char_.XtoStr(ary, pos, length);
 	}
-	public String XtoStrByPos(int bgn, int end) {
+	public String Xto_str_by_pos(int bgn, int end) {
 		if (bgn < 0) bgn = 0; if (end > len - 1) end = len - 1;
 		return Char_.XtoStr(ary, bgn, end - bgn + 1);
 	}

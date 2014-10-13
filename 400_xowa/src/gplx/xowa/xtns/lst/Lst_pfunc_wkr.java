@@ -44,7 +44,7 @@ public class Lst_pfunc_wkr {
 			Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_m001();
 			page.Tmpl_stack_del();									// take template off stack; evaluate will never recurse, and will fail if ttl is still on stack; DATE:2014-03-10
 			defn_tmpl.Tmpl_evaluate(sub_ctx, Xot_invk_temp.Page_is_caller, tmp_bfr);
-			src = tmp_bfr.Mkr_rls().XtoAryAndClear();
+			src = tmp_bfr.Mkr_rls().Xto_bry_and_clear();
 			if (!page.Tmpl_stack_add(src_ttl.Full_db())) return;	// put template back on stack; 
 			Xop_root_tkn root = wiki.Parser().Parse_text_to_wdom(sub_ctx, src, true);	// NOTE: pass sub_ctx as old_ctx b/c entire document will be parsed, and references outside the section should be ignored;
 			src = root.Data_mid();	// NOTE: must set src to root.Data_mid() which is result of parse; else <nowiki> will break text; DATE:2013-07-11

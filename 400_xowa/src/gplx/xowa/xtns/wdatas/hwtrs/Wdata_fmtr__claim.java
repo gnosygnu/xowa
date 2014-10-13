@@ -111,7 +111,7 @@ class Wdata_fmtr__claim_row implements Bry_fmtr_arg {
 		for (int i = 0; i < len; ++i) {
 			Wdata_claim_itm_core itm = claim_grp.Get_at(i);
 			itm.Welcome(claim_html_wtr);
-			byte[] val = tmp_bfr.XtoAryAndClear();
+			byte[] val = tmp_bfr.Xto_bry_and_clear();
 			fmtr_qual.Init_by_claim(ttl, itm);
 			fmtr_ref.Init_by_claim(ttl, itm);
 			row_fmtr.Bld_bfr_many(bfr, Wdata_dict_rank.Xto_str(itm.Rank_tid()), val, fmtr_qual, fmtr_ref);
@@ -181,7 +181,7 @@ class Wdata_fmtr__qual_row implements Bry_fmtr_arg {
 			for (int j = 0; j < grp_len; ++j) {
 				Wdata_claim_itm_core itm = grp.Get_at(j);
 				itm.Welcome(claim_html_wtr);
-				byte[] val = tmp_bfr.XtoAryAndClear();
+				byte[] val = tmp_bfr.Xto_bry_and_clear();
 				row_fmtr.Bld_bfr_many(bfr, grp.Id(), lbl_mgr.Get_text__pid(grp.Id()), val);
 			}
 		}
@@ -260,7 +260,7 @@ class Wdata_fmtr__ref_row implements Bry_fmtr_arg {
 				for (int k = 0; k < grp2_len; ++k) {
 					Wdata_claim_itm_core itm = grp2.Get_at(k);
 					itm.Welcome(claim_html_wtr);
-					byte[] val = tmp_bfr.XtoAryAndClear();
+					byte[] val = tmp_bfr.Xto_bry_and_clear();
 					row_fmtr.Bld_bfr_many(bfr, grp2.Id(), lbl_mgr.Get_text__pid(grp2.Id()), val);
 				}
 			}

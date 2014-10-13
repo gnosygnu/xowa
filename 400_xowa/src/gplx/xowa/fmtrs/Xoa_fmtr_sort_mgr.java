@@ -30,7 +30,7 @@ public class Xoa_fmtr_sort_mgr implements GfoInvkAble {
 		}
 	}
 	public void Exec() {
-		wkr.Itms_((Xoa_fmtr_sort_itm[])itms.XtoAry(Xoa_fmtr_sort_itm.class));
+		wkr.Itms_((Xoa_fmtr_sort_itm[])itms.Xto_ary(Xoa_fmtr_sort_itm.class));
 		sort_able.Sort(wkr);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

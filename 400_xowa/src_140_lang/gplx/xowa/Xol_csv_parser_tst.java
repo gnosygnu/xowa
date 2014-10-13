@@ -31,11 +31,11 @@ class Xol_csv_parser_fxt {
 	public void Clear() {}
 	public void Tst_save(String raw, String expd) {		
 		parser.Save(tmp_bfr, Bry_.new_utf8_(raw));
-		Tfds.Eq(expd, tmp_bfr.XtoStrAndClear());
+		Tfds.Eq(expd, tmp_bfr.Xto_str_and_clear());
 	}
 	public void Tst_load(String expd, String raw_str) {
 		byte[] raw = Bry_.new_utf8_(raw_str);
 		parser.Load(tmp_bfr, raw, 0, raw.length);
-		Tfds.Eq(expd, tmp_bfr.XtoStrAndClear());
+		Tfds.Eq(expd, tmp_bfr.Xto_str_and_clear());
 	}
 }

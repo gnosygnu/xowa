@@ -286,34 +286,12 @@ class Wdata_hwtr_mgr_fxt {
 	public void init() {
 		if (doc_hwtr == null) {
 			doc_hwtr = new Wdata_hwtr_mgr();
-			Wdata_hwtr_msgs msgs = new Wdata_hwtr_msgs(Make_msgs());
+			Wdata_hwtr_msgs msgs = Wdata_hwtr_msgs.new_en_();
 			doc_hwtr.Init_by_ctor(new Xoapi_wikibase(), new Wdata_lbl_wkr__test(resolved_ttls), Url_encoder.new_html_href_mw_(), new Xoapi_toggle_mgr(), new Xow_xwiki_mgr());
 			doc_hwtr.Init_by_lang(msgs);				
 		}
 		resolved_ttls.Clear();
 		doc_hwtr.Lbl_mgr().Clear();
-	}
-	private byte[][] Make_msgs() {
-		return Bry_.Ary
-		( "hide", "show", "Contents"
-		, "Also known as:", "No aliases defined."
-		, "Language", "Code"
-		, "Links (~{wiki_type})", "other sites", "Linked page"
-		, "Labels", "Label"
-		, "Aliases", "Alias"
-		, "Descriptions", "Description"
-		, "Statements"
-		, "JSON"
-		, ",&#32;", "&#32;", "(~{0})"
-		, "+", "-", "±"
-		, "—", "?"
-		, "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-		, "~{0}0s", "~{0}. century", "~{0}. millenium", "~{0}0,000 years", "~{0}00,000 years", "~{0} million years", "~{0}0 million years", "~{0}00 million years", "~{0} billion years"
-		, "~{0} BC", "~{0} ago", "in ~{0}", "<sup>jul</sup>"
-		, "N", "S", "E", "W"
-		, "°", "′", "″"
-		, "&nbsp;m"
-		);
 	}
 	public Wdata_doc_bldr Wdoc_bldr() {return wdoc_bldr;} private Wdata_doc_bldr wdoc_bldr = new Wdata_doc_bldr();
 	public Wdata_hwtr_mgr_fxt Init_resolved_pid(int pid, String lbl) {resolved_ttls.Add(Wdata_lbl_itm.Make_ttl(Bool_.Y, pid), new Wdata_langtext_itm(Bry_.new_ascii_("en"), Bry_.new_ascii_(lbl))); return this;}
@@ -328,7 +306,7 @@ class Wdata_hwtr_mgr_fxt {
 		Bry_bfr tmp_bfr = Bry_bfr.new_();
 		Wdata_visitor__html_wtr html_wtr = new Wdata_visitor__html_wtr().Init(Bry_.Empty, tmp_bfr, doc_hwtr.Msgs(), doc_hwtr.Lbl_mgr());
 		claim.Welcome(html_wtr);
-		byte[] actl = tmp_bfr.XtoAryAndClear();
+		byte[] actl = tmp_bfr.Xto_bry_and_clear();
 		Tfds.Eq(expd, String_.new_utf8_(actl));
 	}
 	public void Test_json(Wdata_doc wdoc, String expd) {
@@ -336,7 +314,7 @@ class Wdata_hwtr_mgr_fxt {
 		fmtr_json.Init_by_wdoc(wdoc.Jdoc());
 		Bry_bfr tmp_bfr = Bry_bfr.new_();
 		fmtr_json.XferAry(tmp_bfr, 0);
-		Tfds.Eq_str_lines(expd, tmp_bfr.XtoStrAndClear());
+		Tfds.Eq_str_lines(expd, tmp_bfr.Xto_str_and_clear());
 	}
 }
 class Wdata_lbl_wkr__test implements Wdata_lbl_wkr {

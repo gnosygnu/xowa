@@ -123,7 +123,7 @@ public class Xof_fsdb_mgr_mem implements Xof_fsdb_mgr, Xof_bin_wkr {
 		bin_key_bfr	.Add_byte(Byte_ascii.Ltr_f).Add_byte_pipe()
 			.Add(wiki).Add_byte_pipe()
 			.Add(ttl);
-		return bin_key_bfr.XtoAryAndClear();
+		return bin_key_bfr.Xto_bry_and_clear();
 	}
 	private byte[] Key_bld_thm(byte[] wiki, byte[] ttl, int w, double thumbtime) {
 		bin_key_bfr	.Add_byte(Byte_ascii.Ltr_t).Add_byte_pipe()
@@ -132,7 +132,7 @@ public class Xof_fsdb_mgr_mem implements Xof_fsdb_mgr, Xof_bin_wkr {
 			.Add_int_variable(w).Add_byte_pipe()
 			.Add_int_variable(Xof_doc_thumb.X_int(thumbtime));
 		;
-		return bin_key_bfr.XtoAryAndClear();
+		return bin_key_bfr.Xto_bry_and_clear();
 	}
 	public void Rls() {bin_hash.Clear(); reg_hash.Clear();}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

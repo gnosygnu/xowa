@@ -97,8 +97,7 @@ public class Xop_languages_xnde implements Xox_xnde {
 	,	"         <span class=\"mw-pt-languages-selected\">~{anchor_text}</span>&#160;•"
 	), "anchor_href", "anchor_title", "anchor_text")
 	;
-	// "<img src=\"//bits.wikimedia.org/static-1.22wmf9/extensions/Translate/resources/images/prog-1.png\" alt=\"~{img_alt}\" title=\"~{img_title}\" width=\"9\" height=\"9\" />&#160;•&#160;‎"
-	// , "img_alt", "img_title"
+	// "<img src=\"//bits.wikimedia.org/static-1.22wmf9/extensions/Translate/res/images/prog-1.png\" alt=\"~{img_alt}\" title=\"~{img_title}\" width=\"9\" height=\"9\" />&#160;•&#160;‎"
 }
 class Xop_languages_fmtr implements Bry_fmtr_arg {
 	public void Init(ListAdp langs, Xow_wiki wiki, Xoa_ttl root_ttl, byte[] cur_lang) {

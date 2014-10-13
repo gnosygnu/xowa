@@ -32,7 +32,7 @@ public class Xow_script_mgr implements GfoInvkAble {
 			if (Byte_.In(wiki_tid, itm.Wiki_tids()))	// wiki_tid matches itm
 				itm.Fmtr().Bld_bfr_many(bfr, wiki.Domain_bry(), Xow_wiki_domain_.Key_by_tid(wiki_tid), wiki.Lang().Key_bry());
 		}
-		String gfs_script = String_.Replace(bfr.XtoStrAndClear(), Op_sys.Wnt.Nl_str(), Op_sys.Lnx.Nl_str());
+		String gfs_script = String_.Replace(bfr.Xto_str_and_clear(), Op_sys.Wnt.Nl_str(), Op_sys.Lnx.Nl_str());
 		wiki.App().Gfs_mgr().Run_str(gfs_script);
 		bfr.Mkr_rls();
 	}

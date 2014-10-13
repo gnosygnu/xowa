@@ -50,7 +50,7 @@ class Gfo_fld_rdr_fxt {
 		byte[] bry = Bry_.new_utf8_(val);
 		wtr.Bfr_(bfr);
 		wtr.Write_bry_escape_fld(bry);
-		Tfds.Eq(expd, bfr.XtoStr());
+		Tfds.Eq(expd, bfr.Xto_str());
 		return this;
 	}	private Bry_bfr bfr = Bry_bfr.new_();
 }

@@ -71,7 +71,7 @@ class Xol_cnv_mgr_fxt {
 //			Xol_cnv_grp convert_grp = app.Lang_mgr().Get_by_key_or_new(Bry_.new_ascii_(lang)).Cnv_mgr().Get_or_new(Bry_.new_ascii_(vnt));
 //			Bry_bfr bfr = Bry_bfr.new_();
 //			boolean converted = convert_grp.Convert_to_bfr(bfr, Bry_.new_utf8_(raw));
-//			String actl = converted ? bfr.XtoStrAndClear() : raw;
+//			String actl = converted ? bfr.Xto_str_and_clear() : raw;
 //			Tfds.Eq(expd, actl);
 //		}
 	public void Test_parse(String raw, String expd) {

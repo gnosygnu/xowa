@@ -28,7 +28,7 @@ public class Xoh_page_wtr_wkr_ {
 		if (display_ttl != null) return display_ttl;	// display_ttl explicitly set; use it
 		if (ttl.Ns().Id() == Xow_ns_.Id_special) {		// special: omit query args, else excessively long titles: EX:"Special:Search/earth?fulltext=y&xowa page index=1"
 			tmp_bfr.Add(ttl.Ns().Name_txt_w_colon()).Add(ttl.Page_txt_wo_qargs());
-			return tmp_bfr.XtoAryAndClear();
+			return tmp_bfr.Xto_bry_and_clear();
 		}
 		else
 			return ttl.Full_txt();						// NOTE: include ns with ttl as per defect d88a87b3

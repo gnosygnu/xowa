@@ -50,7 +50,7 @@ public class Fsdb_db_bin_tbl {
 				rv.Add(itm);
 			}
 		} finally {rdr.Rls();}
-		return (Fsdb_db_bin_fil[])rv.XtoAry(Fsdb_db_bin_fil.class);
+		return (Fsdb_db_bin_fil[])rv.Xto_ary(Fsdb_db_bin_fil.class);
 	}
 	public static final String Tbl_name = "fsdb_db_bin", Fld_uid = "uid", Fld_url = "url", Fld_bin_len = "bin_len", Fld_bin_max = "bin_max";
 	private static final String Tbl_sql = String_.Concat_lines_nl

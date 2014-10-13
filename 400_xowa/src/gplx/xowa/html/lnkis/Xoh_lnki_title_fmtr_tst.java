@@ -37,6 +37,6 @@ class Xoh_lnki_title_fmtr_fxt {
 		Xop_root_tkn root = fxt.Ctx().Tkn_mkr().Root(raw_bry);
 		fxt.Parser().Parse_page_all_clear(root, fxt.Ctx(), fxt.Ctx().Tkn_mkr(), raw_bry);
 		title_wkr.Set(raw_bry, root).Bld_recurse(bfr, root);
-		Tfds.Eq(expd, bfr.XtoStrAndClear());
+		Tfds.Eq(expd, bfr.Xto_str_and_clear());
 	}
 }

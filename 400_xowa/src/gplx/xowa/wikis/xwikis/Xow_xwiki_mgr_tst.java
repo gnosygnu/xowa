@@ -118,7 +118,7 @@ class Xow_xwiki_mgr_fxt {
 			if (itm == null) itm = xwiki_null_(String_.new_utf8_(alias)); // "null", ignore
 			rv.Add(itm);
 		}
-		return (Xow_xwiki_itm[])rv.XtoAry(Xow_xwiki_itm.class);
+		return (Xow_xwiki_itm[])rv.Xto_ary(Xow_xwiki_itm.class);
 	}
 	String Xto_str(Xow_xwiki_itm[] itms) {
 		int len = itms.length;
@@ -130,6 +130,6 @@ class Xow_xwiki_mgr_fxt {
 				sb.Add(itm.Key_bry()).Add_char_pipe().Add(itm.Domain()).Add_char_pipe().Add(itm.Fmt()).Add_char_pipe().Add(itm.Wiki_tid()).Add_char_nl();
 			}
 		}
-		return sb.XtoStrAndClear();
+		return sb.Xto_str_and_clear();
 	}
 }

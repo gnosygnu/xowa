@@ -273,7 +273,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 							anchor_encoder_bfr = Bry_bfr.reset_(32);
 						}
 						anchor_encoder.Encode(anchor_encoder_bfr, src, cur, cur + 1);
-						b_ary = anchor_encoder_bfr.XtoAryAndClear();
+						b_ary = anchor_encoder_bfr.Xto_bry_and_clear();
 						match_pos = cur + 1;
 					}
 					break;
@@ -286,7 +286,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 							anchor_encoder_bfr = Bry_bfr.reset_(32);
 						}
 						anchor_encoder.Encode(anchor_encoder_bfr, src, cur, cur + 1);
-						b_ary = anchor_encoder_bfr.XtoAryAndClear();
+						b_ary = anchor_encoder_bfr.Xto_bry_and_clear();
 						match_pos = cur + 1;
 					}
 					else {
@@ -328,7 +328,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 			msg_log.Add_itm_none(Xop_ttl_log.Ttl_is_ns_only, src, bgn, end);
 			return false;
 		}
-		full_txt = bfr.XtoAryAndClear();
+		full_txt = bfr.Xto_bry_and_clear();
 		if (	ns.Case_match() == Xow_ns_case_.Id_1st
 			&&	wik_bgn == -1 ) {	// do not check case if xwiki; EX: "fr:" would have a wik_bgn of 0 (and a wik_end of 3); "A" (and any non-xwiki ttl) would have a wik_bgn == -1
 			byte char_1st = full_txt[page_bgn];
@@ -392,7 +392,7 @@ class Xoa_url_encoder {
 				// FUTURE: html_entities, etc:
 			}
 		}
-		return bb.XtoAryAndClear();
+		return bb.Xto_bry_and_clear();
 	}
 	private static final byte[] Bry_amp = Bry_.new_ascii_("%26"), Bry_eq = Bry_.new_ascii_("%3D")
 		, Bry_plus = Bry_.new_ascii_("%2B"), Bry_apos = Bry_.new_ascii_("%27")

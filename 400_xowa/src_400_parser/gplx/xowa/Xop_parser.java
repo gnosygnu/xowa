@@ -39,7 +39,7 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 	public byte[] Parse_text_to_html(Xop_ctx ctx, byte[] src) {
 		Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
 		Parse_text_to_html(bfr, ctx.Cur_page(), false, src);
-		return bfr.Mkr_rls().XtoAryAndClear();
+		return bfr.Mkr_rls().Xto_bry_and_clear();
 	}
 	public void Parse_text_to_html(Bry_bfr trg, Xoa_page page, boolean para_enabled, byte[] src) {
 		Xop_ctx ctx = Xop_ctx.new_sub_(wiki, page);

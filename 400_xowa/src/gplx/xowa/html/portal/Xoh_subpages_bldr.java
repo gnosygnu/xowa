@@ -31,7 +31,7 @@ public class Xoh_subpages_bldr implements Bry_fmtr_arg {
 		byte[] raw = ttl.Raw();
 		this.segs = Bry_.Split(raw, Byte_ascii.Slash);
 		fmtr_grp.Bld_bfr(tmp_bfr, this);
-		return tmp_bfr.XtoAryAndClear();
+		return tmp_bfr.Xto_bry_and_clear();
 	}
 	public void XferAry(Bry_bfr bfr, int idx) {
 		int segs_len = segs.length - 1;	// last seg is current page; do not print
@@ -45,8 +45,8 @@ public class Xoh_subpages_bldr implements Bry_fmtr_arg {
 			}
 			byte[] seg = segs[i];
 			ttl_bfr.Add(seg);
-			byte[] seg_ttl = ttl_bfr.XtoAry();															
-			byte[] seg_ttl_enc = app.Href_parser().Encoder().Encode(ttl_bfr.XtoAry());
+			byte[] seg_ttl = ttl_bfr.Xto_bry();															
+			byte[] seg_ttl_enc = app.Href_parser().Encoder().Encode(ttl_bfr.Xto_bry());
 			byte[] href = Bry_.Add(Xoh_href_parser.Href_wiki_bry, seg_ttl_enc);		// EX: /wiki/Help:A
 			fmtr_itm.Bld_bfr(bfr, dlm, href, seg_ttl, seg);
 		}

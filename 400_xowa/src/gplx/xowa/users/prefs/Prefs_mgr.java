@@ -47,7 +47,7 @@ public class Prefs_mgr implements GfoInvkAble {
 			pos = hnde.Tag_rhs_end();
 		}
 		bfr.Add_mid(src, pos, src.length);
-		return bfr.XtoAryAndClear();
+		return bfr.Xto_bry_and_clear();
 	}	private Bry_fmtr props_get_fmtr; 
 	private void Props_set_and_reload() {
 		Xoa_page page = app.Gui_mgr().Browser_win().Active_page();

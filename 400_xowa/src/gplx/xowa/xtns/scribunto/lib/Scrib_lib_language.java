@@ -189,7 +189,7 @@ public class Scrib_lib_language implements Scrib_lib {
 			;	// NOTE: MW is actually more strict about date; however, not sure about PHP's date parse, so using more lax version
 		if (date == null || tmp_bfr.Len() > 0) {tmp_bfr.Mkr_rls(); return rslt.Init_fail("bad argument #2 to 'formatDate' (not a valid timestamp)");}
 		Pft_func_formatdate.Date_bldr().Format(tmp_bfr, core.Wiki(), lang, date, fmt_ary);
-		byte[] rv = tmp_bfr.Mkr_rls().XtoAryAndClear();
+		byte[] rv = tmp_bfr.Mkr_rls().Xto_bry_and_clear();
 		return rslt.Init_obj(rv);
 	}
 	public boolean ParseFormattedNumber(Scrib_proc_args args, Scrib_proc_rslt rslt) {
@@ -228,7 +228,7 @@ public class Scrib_lib_language implements Scrib_lib {
 		byte[] type = args.Pull_bry(2);
 		Bry_bfr bfr = core.Wiki().Utl_bry_bfr_mkr().Get_b512();
 		lang.Grammar().Grammar_eval(bfr, lang, word, type);
-		return rslt.Init_obj(bfr.Mkr_rls().XtoStrAndClear());
+		return rslt.Init_obj(bfr.Mkr_rls().Xto_str_and_clear());
 	}
 	public boolean gender(Scrib_proc_args args, Scrib_proc_rslt rslt) {throw Err_.not_implemented_();}
 	public boolean IsRTL(Scrib_proc_args args, Scrib_proc_rslt rslt) {

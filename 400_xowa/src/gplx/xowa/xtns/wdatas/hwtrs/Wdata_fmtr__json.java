@@ -35,7 +35,7 @@ class Wdata_fmtr__json implements Bry_fmtr_arg {
 	public void XferAry(Bry_bfr bfr, int idx) {
 		if (jdoc == null) return;	// TEST: wdoc doesn't have jdoc
 		jdoc.Root().Print_as_json(tmp_bfr, 0);
-		fmtr.Bld_bfr_many(bfr, toc_data.Href(), toc_data.Text(), toggle_itm.Html_toggle_btn(), toggle_itm.Html_toggle_hdr(), tmp_bfr.XtoAryAndClear());
+		fmtr.Bld_bfr_many(bfr, toc_data.Href(), toc_data.Text(), toggle_itm.Html_toggle_btn(), toggle_itm.Html_toggle_hdr(), tmp_bfr.Xto_bry_and_clear());
 	}
 	private final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""

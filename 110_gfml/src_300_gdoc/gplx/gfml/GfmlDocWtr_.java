@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfml; import gplx.*;
 public class GfmlDocWtr_ {
-	public String XtoStrAndClear()			{return sb.XtoStrAndClear();}
+	public String Xto_str_and_clear()			{return sb.Xto_str_and_clear();}
 	public void BuildAttrib(GfmlAtr atr)	{Build(atr);}
 	public void BuildNode(GfmlNde nde)		{Build(nde);}
 	void Build(GfmlItm owner) {
@@ -34,6 +34,6 @@ public class GfmlDocWtr_ {
         public static String xtoStr_(GfmlNde nde) {
 		GfmlDocWtr_ wtr = new GfmlDocWtr_();
 		wtr.BuildNode(nde);
-		return wtr.XtoStrAndClear();
+		return wtr.Xto_str_and_clear();
 	}
 }

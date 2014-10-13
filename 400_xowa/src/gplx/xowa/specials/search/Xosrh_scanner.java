@@ -65,7 +65,7 @@ class Xosrh_scanner {
 			Tkns_add_word(Xosrh_qry_tkn.Tid_word, txt_bgn, pos);
 			txt_bgn = -1;
 		}
-		return (Xosrh_qry_tkn[])tkns.XtoAryAndClear(Xosrh_qry_tkn.class);
+		return (Xosrh_qry_tkn[])tkns.Xto_ary_and_clear(Xosrh_qry_tkn.class);
 	}
 	boolean Cur_join_is_word(byte cur_tid, int pos_end) {	// extra logic to handle and / or occuring in unquoted strings; EX: random; for
 		switch (cur_tid) {

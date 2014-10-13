@@ -30,7 +30,7 @@ public class Hiero_mw_tables_parser {
 	public void Load_data(Hiero_xtn_mgr xtn_mgr, Io_url load_fil) {// NOTE: parsing tables.php instead of tables.ser b/c latter is too difficult to read / debug
 		evaluator.Clear();
 		parser.Parse_tkns(Io_mgr._.LoadFilBry(load_fil), evaluator);
-		Php_line[] lines = (Php_line[])evaluator.List().XtoAry(Php_line.class);
+		Php_line[] lines = (Php_line[])evaluator.List().Xto_ary(Php_line.class);
 		int lines_len = lines.length;
 		for (int i = 0; i < lines_len; i++) {
 			Php_line_assign line = (Php_line_assign)lines[i];

@@ -33,7 +33,7 @@ public class Html_selecter {
 				}
 			}
 		}
-		Html_nde[] rv = (Html_nde[])list.XtoAry(Html_nde.class);
+		Html_nde[] rv = (Html_nde[])list.Xto_ary(Html_nde.class);
 		list.Clear();
 		return rv;
 	}
