@@ -61,8 +61,8 @@ public class Xodb_hdump_mgr {
 	public void Load(Xow_wiki wiki, Xoa_page page, int html_db_id) {
 		if (!Enabled_chk()) return;
 		page.Root_(new Xop_root_tkn());
-		Hdump_page hpg = new Hdump_page().Init(page.Revision_data().Id(), page.Url());
-		load_mgr.Load(hpg, wiki.Db_mgr_as_sql().Fsys_mgr(), html_db_id, page.Revision_data().Id());
+		Hdump_page hpg = new Hdump_page().Init(page.Revision_data().Id(), page.Url(), page.Ttl());
+		load_mgr.Load(hpg, wiki.Db_mgr_as_sql().Fsys_mgr(), html_db_id, page.Revision_data().Id(), page.Ttl());
 		Load_page(wiki, page, hpg);
 	}
 	private void Load_page(Xow_wiki wiki, Xoa_page page, Hdump_page hpg) {

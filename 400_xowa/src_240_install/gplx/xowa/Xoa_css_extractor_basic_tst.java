@@ -25,6 +25,13 @@ public class Xoa_css_extractor_basic_tst {
 		fxt.Exec_logo_setup();
 		fxt.Test_fil("mem/xowa/user/anonymous/wiki/en.wikipedia.org/html/logo.png", "download");
 	}
+	@Test   public void Logo_download_mw_wiki_logo() {
+		fxt.Init_fil("mem/http/en.wikipedia.org"											, "");
+		fxt.Init_fil("mem/xowa/user/anonymous/wiki/en.wikipedia.org/html/wiki.png"			, "download");
+		fxt.Init_fil("mem/xowa/user/anonymous/wiki/en.wikipedia.org/html/xowa_common.css"	, ".mw-wiki-logo{background-image:url(\"wiki.png\");");
+		fxt.Exec_logo_setup();
+		fxt.Test_fil("mem/xowa/user/anonymous/wiki/en.wikipedia.org/html/logo.png"			, "download");
+	}
 	@Test   public void Logo_failover() {
 		fxt.Init_fil("mem/xowa/bin/any/html/xowa/import/logo.png"			, "failover");
 		fxt.Exec_logo_setup();

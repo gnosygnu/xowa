@@ -67,16 +67,17 @@ public class Xob_hdump_bldr {
 	}
 	private static void Db_init(Db_provider p) {p.Exec_sql(Hdump_text_tbl.Tbl_sql);}
 	private static void Db_term(Xodb_file core_db_file, Db_provider hdump_db_provider, int hdump_db_id) {
-		hdump_db_provider.Txn_mgr().Txn_end();
+		hdump_db_provider.Txn_mgr().Txn_end_all();
 		Sqlite_engine_.Idx_create(hdump_db_provider, Hdump_text_tbl.Idx_core);
 		Sqlite_engine_.Db_attach(hdump_db_provider, "page_db", core_db_file.Url().Raw());
+		hdump_db_provider.Txn_mgr().Txn_bgn();
 		hdump_db_provider.Exec_sql(String_.Format(Sql_update_page, hdump_db_id));	// update all page_html_db_id entries in page_db
+		hdump_db_provider.Txn_mgr().Txn_end();
 		Sqlite_engine_.Db_detach(hdump_db_provider, "page_db");
-		hdump_db_provider.Txn_mgr().Txn_end_all();
 	}
 	private static final String Cfg_grp_hdump_make = "hdump.make", Cfg_itm_hdump_size = "hdump.size";
 	private static final String Sql_update_page = String_.Concat_lines_nl_skip_last
-	( "REPLACE INTO page_db.page"
+	( "REPLACE INTO page_db.page (page_id, page_namespace, page_title, page_is_redirect, page_touched, page_len, page_random_int, page_file_idx, page_redirect_id, page_html_db_id)"
 	, "SELECT   p.page_id"
 	, ",        p.page_namespace"
 	, ",        p.page_title"
@@ -85,6 +86,7 @@ public class Xob_hdump_bldr {
 	, ",        p.page_len"
 	, ",        p.page_random_int"
 	, ",        p.page_file_idx"
+	, ",        p.page_redirect_id"
 	, ",        {0}"
 	, "FROM     page_db.page p"
 	, "         JOIN html_text h ON p.page_id = h.page_id"

@@ -28,10 +28,13 @@ public class Hdump_text_tbl {
 		try {stmt_delete.Clear().Val_int_(page_id).Exec_delete();}
 		catch (Exception exc) {stmt_delete = null; throw Err_.err_(exc, "stmt failed");} // must reset stmt, else next call will fail
 	}
-	@gplx.Virtual public void Insert(int page_id, int tid, byte[] data) {
+	@gplx.Virtual public int Insert(int page_id, int tid, byte[] data) {
 		if (stmt_insert == null) stmt_insert = Db_stmt_.new_insert_(provider, Tbl_name, Flds_all);
 		if (zip_mgr != null) data = zip_mgr.Zip(db_mgr.Data_storage_format(), data);
-		try {stmt_insert.Clear().Val_int_(page_id).Val_int_(tid).Val_str_by_bry_(data).Exec_insert();}
+		try {
+			stmt_insert.Clear().Val_int_(page_id).Val_int_(tid).Val_str_by_bry_(data).Exec_insert();
+			return data.length;
+		}
 		catch (Exception exc) {stmt_insert = null; throw Err_.err_(exc, "stmt failed");} // must reset stmt, else next call will fail
 	}
 	private static final String[] Select_by_page_flds = new String[] {Fld_page_id, Fld_text_tid, Fld_text_data};

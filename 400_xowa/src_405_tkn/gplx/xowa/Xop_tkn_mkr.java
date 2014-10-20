@@ -60,8 +60,8 @@ public class Xop_tkn_mkr {
 	public Xop_pre_tkn Para_pre_bgn(int pos)												{return new Xop_pre_tkn(pos, pos, Xop_pre_tkn.Pre_tid_bgn, null);}
 	public Xop_pre_tkn Para_pre_end(int pos, Xop_tkn_itm bgn)								{return new Xop_pre_tkn(pos, pos, Xop_pre_tkn.Pre_tid_end, bgn);}
 	public Xop_ignore_tkn Ignore(int bgn, int end, byte ignore_type)						{return new Xop_ignore_tkn(bgn, end, ignore_type);}
-	public Xop_bry_tkn Bry(int bgn, int end, byte[] bry)									{return new Xop_bry_tkn(bgn, end, bry);}
-	public Xop_bry_tkn Bry(byte[] src, int bgn, int end)									{return new Xop_bry_tkn(bgn, end, Bry_.Mid(src, bgn, end));}
+	public Xop_bry_tkn Bry_raw(int bgn, int end, byte[] bry)								{return new Xop_bry_tkn(bgn, end, bry);}
+	public Xop_bry_tkn Bry_mid(byte[] src, int bgn, int end)								{return new Xop_bry_tkn(bgn, end, Bry_.Mid(src, bgn, end));}
 	public Xop_under_tkn Under(int bgn, int end, int v)										{return new Xop_under_tkn(bgn, end, v);}
 	public gplx.xowa.xtns.xowa_cmds.Xop_xowa_cmd Xnde_xowa_cmd()							{return new gplx.xowa.xtns.xowa_cmds.Xop_xowa_cmd();}
 	public gplx.xowa.xtns.poems.Poem_nde Xnde_poem()										{return new gplx.xowa.xtns.poems.Poem_nde();}

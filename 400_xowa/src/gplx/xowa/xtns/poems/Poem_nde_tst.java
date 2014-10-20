@@ -38,7 +38,7 @@ public class Poem_nde_tst {
 		, "</div>"
 		));
 	}
-	@Test  public void Indent() {
+	@Test  public void Nbsp_basic() {
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "<poem>"
 		, "a 1"
@@ -57,7 +57,7 @@ public class Poem_nde_tst {
 		, "</div>"
 		));
 	}
-	@Test  public void Indent_2() {	// PURPOSE: indent on 1st line caused page_break
+	@Test  public void Nbsp_line_0() {// PURPOSE: indent on 1st line caused page_break
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "<poem>"
 		, "  a"
@@ -76,22 +76,30 @@ public class Poem_nde_tst {
 		, "</div>"
 		));
 	}
-	@Test  public void List() {
+	@Test  public void Nbsp_blank_lines() {// PURPOSE: check blank lines; PAGE:none
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "<poem>"
-		, ":a"
-		, ":b"
+		, "  a"
+		, "  "
+		, "  "
+		, "  b"
 		, "</poem>"
 		), String_.Concat_lines_nl_skip_last
 		( "<div class=\"poem\">"
 		, "<p>"
-		, ""
-		, "<dl>"
-		, "  <dd>a"
-		, "  </dd>"
-		, "  <dd>b"
-		, "  </dd>"
-		, "</dl>"
+		, "&#160;&#160;a<br/>"
+		, "&#160;&#160;<br/>"
+		, "&#160;&#160;<br/>"
+		, "&#160;&#160;b"
+		, "</p>"
+		, "</div>"
+		));
+	}
+	@Test  public void Comment() {
+		fxt.Test_parse_page_wiki_str("<poem>a<!-- b --> c</poem>", String_.Concat_lines_nl_skip_last
+		( "<div class=\"poem\">"
+		, "<p>"
+		, "a c"
 		, "</p>"
 		, "</div>"
 		));
@@ -104,7 +112,6 @@ public class Poem_nde_tst {
 		));
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 		( "{{test_outer}}"
-//			( "{{test_print|a <poem>b}}c</poem>}}"
 		), String_.Concat_lines_nl_skip_last
 		( "a <div class=\"poem\">"
 		, "<p>"
@@ -114,16 +121,7 @@ public class Poem_nde_tst {
 		));
 		fxt.Init_defn_clear();
 	}
-	@Test  public void Comment() {
-		fxt.Test_parse_page_wiki_str("<poem>a<!-- b --> c</poem>", String_.Concat_lines_nl_skip_last
-		( "<div class=\"poem\">"
-		, "<p>"
-		, "a c"
-		, "</p>"
-		, "</div>"
-		));
-	}
-	@Test  public void Err_empty_line() {
+	@Test  public void Err_empty_line() {// PURPOSE: one \n caused poem to fail
 		fxt.Test_parse_page_wiki_str("<poem>\n</poem>", String_.Concat_lines_nl_skip_last
 		( "<div class=\"poem\">"
 		, "<p>"
@@ -133,8 +131,7 @@ public class Poem_nde_tst {
 		));
 	}
 	@Test  public void Ref() {	// PURPOSE: <ref> inside poem was not showing up; DATE:2014-01-17
-		fxt.Test_parse_page_all_str
-		(	String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 		( "<poem>a<ref>b</ref></poem>"
 		, "<references/>"), String_.Concat_lines_nl_skip_last
 		( "<div class=\"poem\">"
@@ -151,7 +148,7 @@ public class Poem_nde_tst {
 	@Test  public void Template_tkn() {	// PURPOSE: make sure {{{1}}} is interpreted as invk_prm, not as text; DATE:2014-03-03
 		fxt.Test_parse_tmpl("<poem>{{{1}}}</poem>"
 		, fxt.tkn_xnde_(0, 20).Subs_
-		(	fxt.tkn_tmpl_prm_find_(fxt.tkn_txt_(9, 10))
+		( fxt.tkn_tmpl_prm_find_(fxt.tkn_txt_(9, 10))
 		)
 		);
 	}
@@ -176,6 +173,101 @@ public class Poem_nde_tst {
 		, "</div>"
 		, "</p>"
 		, "</div>de"
+		));
+	}
+	@Test  public void Indent_line_0() {	// PURPOSE: handle colon on 1st line; PAGE:en.w:Mary_Wollstonecraft DATE:2014-10-19
+		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		( "<poem>"
+		, ":a"
+		, ":b"
+		, "</poem>"
+		), String_.Concat_lines_nl_skip_last
+		( "<div class=\"poem\">"
+		, "<p>"
+		, "<span class='mw-poem-indented' style='display: inline-block; margin-left: 1em;'>a</span><br/>"
+		, "<span class='mw-poem-indented' style='display: inline-block; margin-left: 1em;'>b</span>"
+		, "</p>"
+		, "</div>"
+		));
+	}
+	@Test  public void Indent_many() {	// PURPOSE: handle colon on 2nd line; PAGE:vi.s:Văn_Côi_thánh_nguyệt_tán_tụng_thi_ca DATE:2014-10-15
+		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		( "<poem>"
+		, "a"
+		, ":b"
+		, "::c"
+		, "</poem>"
+		), String_.Concat_lines_nl_skip_last
+		( "<div class=\"poem\">"
+		, "<p>"
+		, "a<br/>"
+		, "<span class='mw-poem-indented' style='display: inline-block; margin-left: 1em;'>b</span><br/>"
+		, "<span class='mw-poem-indented' style='display: inline-block; margin-left: 2em;'>c</span>"
+		, "</p>"
+		, "</div>"
+		));
+	}
+	@Test  public void Indent_blank() {	// PURPOSE: check blank lines; PAGE:none DATE:2014-10-19
+		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		( "<poem>"
+		, ":a"
+		, ":"
+		, ":b"
+		, "</poem>"
+		), String_.Concat_lines_nl_skip_last
+		( "<div class=\"poem\">"
+		, "<p>"
+		, "<span class='mw-poem-indented' style='display: inline-block; margin-left: 1em;'>a</span><br/>"
+		, "<span class='mw-poem-indented' style='display: inline-block; margin-left: 1em;'></span><br/>"
+		, "<span class='mw-poem-indented' style='display: inline-block; margin-left: 1em;'>b</span>"
+		, "</p>"
+		, "</div>"
+		));
+	}
+	@Test  public void List_does_not_end() {// PURPOSE: list does not end with "\ntext"; PAGE:vi.s:Dương_Từ_Hà_Mậu_(dị_bản_mới); li.s:Sint_Servaes_legende/Nuuj_fergmènter DATE:2014-10-19
+		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		( "<poem>"
+		, "a"
+		, "*b"
+		, "**c"
+		, "d"
+		, "</poem>"
+		), String_.Concat_lines_nl_skip_last
+		( "<div class=\"poem\">"
+		, "<p>"
+		, "a<br/>"
+		, "<ul>"
+		, "  <li>b<br/>"
+		, "    <ul>"
+		, "      <li>c<br/>"
+		, "      </li>"
+		, "    </ul>"
+		, "  </li>"
+		, "</ul>"
+		, "d"			// was being embedded directly after <li>c
+		, "</p>"
+		, "</div>"
+		));
+	}
+	@Test  public void Page() {	// PURPOSE: handled dangling poems across pages; PAGE:ca.s:Llibre_de_Disputació_de_l'Ase DATE:2014-10-19
+		fxt.Init_xtn_pages();
+		fxt.Init_page_create("Page:A/1", "<poem>a\nb\n");
+		fxt.Init_page_create("Page:A/2", "<poem>c\nd\n");
+		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to=2 />", String_.Concat_lines_nl_skip_last
+		( "<p><div class=\"poem\">"
+		, "<p>"
+		, "a<br/>"
+		, "b<br/>"
+		, " <div class=\"poem\">"
+		, "<p>"
+		, "c<br/>"	// NOTE: 1 <br/> not 2
+		, "d<br/>"
+		, " "
+		, "</p>"
+		, "</div>"
+		, "</p>"
+		, "</div>"
+		, "</p>"
 		));
 	}
 }

@@ -27,10 +27,10 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xop_lnki_log
 	private Xop_log_invoke_wkr invoke_wkr; private Xop_log_property_wkr property_wkr;
 	private int[] ns_ids = Int_.Ary(Xow_ns_.Id_main);// , Xow_ns_.Id_category, Xow_ns_.Id_template
 	private boolean wiki_ns_file_is_case_match_all = true; private Xow_wiki commons_wiki;
-	private Xob_hdump_bldr hdump_bldr; private long hdump_max = Io_mgr.Len_gb;
+	private Xob_hdump_bldr hdump_bldr; private long hdump_max = Io_mgr.Len_gb;		
 	public Xob_lnki_temp_wkr(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	@Override public String Cmd_key() {return KEY_oimg;} public static final String KEY_oimg = "file.lnki_temp";
-	@Override public byte Init_redirect() {return Bool_.N_byte;}	// lnki will never be found in a redirect
+	@Override public byte Init_redirect() {return Bool_.N_byte;}
 	@Override public int[] Init_ns_ary() {return ns_ids;}
 	@Override protected void Init_reset(Db_provider p) {
 		p.Exec_sql("DELETE FROM " + Xodb_xowa_cfg_tbl.Tbl_name);
@@ -40,8 +40,8 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xop_lnki_log
 	}
 	@Override protected Db_provider Init_db_file() {
 		ctx.Lnki().File_wkr_(this);
-		Xodb_db_file db_file = Xodb_db_file.init__file_make(wiki.Fsys_mgr().Root_dir());
-		provider = db_file.Provider();
+		Xodb_db_file make_db_file = Xodb_db_file.init__file_make(wiki.Fsys_mgr().Root_dir());
+		provider = make_db_file.Provider();
 		Xob_lnki_temp_tbl.Create_table(provider);
 		stmt = Xob_lnki_temp_tbl.Insert_stmt(provider);
 		return provider;
@@ -68,7 +68,9 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xop_lnki_log
 		Fsdb_mnt_mgr trg_mnt_mgr = trg_fsdb_mgr.Mnt_mgr();
 		trg_mnt_mgr.Insert_to_mnt_(Fsdb_mnt_mgr.Mnt_idx_main);
 		Fsdb_mnt_mgr.Patch(trg_mnt_mgr);	// NOTE: see fsdb_make; DATE:2014-04-26
-		if (gen_hdump) hdump_bldr = new Xob_hdump_bldr(wiki, provider, hdump_max);
+		if (gen_hdump) {
+			hdump_bldr = new Xob_hdump_bldr(wiki, provider, hdump_max);
+		}
 		provider.Txn_mgr().Txn_bgn_if_none();
 		log_mgr.Txn_bgn();
 	}
@@ -88,7 +90,8 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xop_lnki_log
 			parser.Parse_page_all_clear(root, ctx, ctx.Tkn_mkr(), page_src);
 			if (gen_html) {
 				page.Root_(root);
-				wiki.Html_mgr().Page_wtr_mgr().Gen(ctx.Cur_page(), Xopg_view_mode.Tid_read);
+				if (!page.Redirected())
+					wiki.Html_mgr().Page_wtr_mgr().Gen(ctx.Cur_page(), Xopg_view_mode.Tid_read);
 			}
 			if (gen_hdump) {
 				page.Root_(root);

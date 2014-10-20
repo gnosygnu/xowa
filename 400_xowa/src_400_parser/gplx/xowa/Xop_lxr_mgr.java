@@ -64,20 +64,6 @@ public class Xop_lxr_mgr {
 		, Xop_under_lxr._
 		});
 	}
-	public static final Xop_lxr_mgr Poem_lxr_mgr	// NOTE: can't go into gplx.xowa.xtn.poems b/c lxrs below are not public
-		= new Xop_lxr_mgr(new Xop_lxr[] 
-		{ Xop_pipe_lxr._, new Xop_eq_lxr(false), Xop_space_lxr._, Xop_tab_lxr._
-		, Xop_amp_lxr._, Xop_apos_lxr._, Xop_colon_lxr._
-		, Xop_lnki_lxr_bgn._, Xop_lnki_lxr_end._
-		, Xop_list_lxr._
-		, Xop_hdr_lxr._
-		, Xop_hr_lxr._
-		, Xop_xnde_lxr._
-		, Xop_lnke_lxr._, Xop_lnke_end_lxr._
-		, Xop_tblw_lxr._
-		, gplx.xowa.xtns.poems.Poem_lxr_nl._
-		, gplx.xowa.xtns.poems.Poem_lxr_pre._
-		});
 	public static final Xop_lxr_mgr Popup_lxr_mgr	// same as orig_page, except apos_lxr added
 		= new Xop_lxr_mgr(new Xop_lxr[] 
 		{ Xop_pipe_lxr._, new Xop_eq_lxr(true), Xop_colon_lxr._, Xop_space_lxr._, Xop_tab_lxr._, Xop_nl_lxr._
@@ -89,5 +75,5 @@ public class Xop_lxr_mgr {
 		, gplx.xowa.xtns.translates.Xop_tvar_lxr._
 		, Xop_cr_lxr._		// always ignore \r; DATE:2014-03-02
 		, gplx.xowa.parsers.apos.Xop_apos_lxr._	// needed else multiple apos may be split across blocks;
-		});		
+		});
 }

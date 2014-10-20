@@ -41,6 +41,7 @@ public class Xoa_page {
 	public boolean					Missing() {return missing;} public Xoa_page Missing_() {return Missing_(true);} public Xoa_page Missing_(boolean v) {missing = v; return this;}  private boolean missing;
 	public boolean					Redirected() {return redirected;} public Xoa_page Redirected_(boolean v) {redirected = v; return this;} private boolean redirected;
 	public ListAdp				Redirected_ttls() {return redirected_ttls;} private ListAdp redirected_ttls = ListAdp_.new_();
+	public byte[]				Redirected_ttls__itm_0() {return (byte[])redirected_ttls.FetchAt(0);}
 	public byte[]				Redirected_src() {return redirected_src;} public void Redirected_src_(byte[] v) {this.redirected_src = v;}  private byte[] redirected_src;
 	public byte					Edit_mode() {return edit_mode;} private byte edit_mode; public void	Edit_mode_update_() {edit_mode = Xoa_page_.Edit_mode_update;}
 	public Xop_root_tkn			Root() {return root;} public Xoa_page Root_(Xop_root_tkn v) {root = v; return this;} private Xop_root_tkn root;

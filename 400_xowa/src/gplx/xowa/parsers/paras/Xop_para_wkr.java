@@ -105,7 +105,7 @@ public class Xop_para_wkr implements Xop_ctx_wkr {
 						if (	next_char_pos < src.length									// bounds check
 							&&	src[next_char_pos] == Byte_ascii.NewLine					// is "\n\s\n"; i.e.: "\n" only
 							) {
-							ctx.Subs_add(root, ctx.Tkn_mkr().Bry(bgn_pos, bgn_pos, Byte_ascii.NewLine_bry));	// add a "\n" tkn; note that adding a NewLine tkn doesn't work, b/c Xoh_html_wtr has code to remove consecutive \n; PAGE:en.w:Preferred_numbers DATE:2014-06-24
+							ctx.Subs_add(root, ctx.Tkn_mkr().Bry_raw(bgn_pos, bgn_pos, Byte_ascii.NewLine_bry));	// add a "\n" tkn; note that adding a NewLine tkn doesn't work, b/c Xoh_html_wtr has code to remove consecutive \n; PAGE:en.w:Preferred_numbers DATE:2014-06-24
 							prv_nl_pos = bgn_pos;
 						}
 					}

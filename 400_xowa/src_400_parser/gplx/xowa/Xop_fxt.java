@@ -400,5 +400,11 @@ public class Xop_fxt {
 		Xol_kwd_grp kwd_grp = kwd_mgr.Get_or_new(kwd_id);
 		kwd_grp.Srl_load(case_match, Bry_.Ary(kwds));
 	}
+	public void Init_xtn_pages() {
+		Io_mgr._.InitEngine_mem();
+		wiki.Xtn_mgr().Xtn_proofread().Enabled_y_();
+		wiki.Db_mgr().Load_mgr().Clear(); // must clear; otherwise fails b/c files get deleted, but wiki.data_mgr caches the Xowd_regy_mgr (the .reg file) in memory;
+		wiki.Ns_mgr().Add_new(Xowc_xtn_pages.Ns_page_id_default, "Page").Add_new(Xowc_xtn_pages.Ns_index_id_default, "Index").Init();
+	}
 	public void Clear_ref_mgr() {this.Page().Ref_mgr().Grps_clear();}			// clear to reset count
 }

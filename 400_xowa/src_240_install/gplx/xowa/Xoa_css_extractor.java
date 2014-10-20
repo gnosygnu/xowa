@@ -66,9 +66,9 @@ public class Xoa_css_extractor {
 		this.lang_is_ltr = wiki.Lang().Dir_ltr();
 		this.wiki_code = wiki.Domain_abrv();
 		mainpage_html = Mainpage_download_html();
-		Logo_setup();
 		Css_common_setup();
 		Css_wiki_setup();
+		Logo_setup();
 	}
 	public void Css_common_setup() {
 		if (opt_download_css_common)
@@ -95,14 +95,6 @@ public class Xoa_css_extractor {
 		if (Io_mgr._.ExistsFil(css_commons_url)) return css_commons_url;	// specific css exists for wiki; use it; EX: xowa_common_wiki_mediawikiwiki.css
 		return failover_dir.GenSubFil(lang_is_ltr ? Css_common_name_ltr : Css_common_name_rtl);
 	}
-//		private boolean Css_common_download(Io_url trg_fil) {	// DELETE: replaced with Css_scrape; DATE:2014-02-11
-//			String src_fil = String_.Format(css_stylesheet_common_src_fmt, String_.new_utf8_(wiki_domain));
-//			String log_msg = usr_dlg.Prog_many("", "", "downloading css common: '~{0}'", src_fil);
-//			boolean rv = download_xrg.Prog_fmt_hdr_(log_msg).Src_(src_fil).Trg_(trg_fil).Exec();
-//			if (!rv)
-//				usr_dlg.Warn_many("", "", "failed to download css_common: src_url=~{0};", src_fil);
-//			return rv;
-//		}
 	public void Css_wiki_setup() {
 		boolean css_stylesheet_wiki_missing = true;
 		Io_url trg_fil = wiki_html_dir.GenSubFil(Css_wiki_name);
@@ -141,6 +133,7 @@ public class Xoa_css_extractor {
 	private boolean Logo_download(Io_url trg_fil) {
 		String src_fil = Logo_find_src();
 		if (src_fil == null) {
+			if (Logo_copy_from_css(trg_fil)) return true;
 			usr_dlg.Warn_many("", "", "failed to extract logo: trg_fil=~{0};", trg_fil.Raw());
 			return false;
 		}
@@ -150,6 +143,19 @@ public class Xoa_css_extractor {
 			usr_dlg.Warn_many("", "", "failed to download logo: src_url=~{0};", src_fil);
 		return rv;
 	}
+	private boolean Logo_copy_from_css(Io_url trg_fil) {
+		Io_url commons_file = wiki_html_dir.GenSubFil(Css_common_name);
+		byte[] commons_src = Io_mgr._.LoadFilBry(commons_file);
+		int bgn_pos = Bry_finder.Find_fwd(commons_src, Bry_mw_wiki_logo);				if (bgn_pos == Bry_finder.Not_found) return false;
+		bgn_pos += Bry_mw_wiki_logo.length;
+		int end_pos = Bry_finder.Find_fwd(commons_src, Byte_ascii.Quote, bgn_pos + 1);	if (end_pos == Bry_finder.Not_found) return false;
+		byte[] src_bry = Bry_.Mid(commons_src, bgn_pos, end_pos);
+		if (Op_sys.Cur().Tid_is_wnt())
+			src_bry = Bry_.Replace(src_bry, Byte_ascii.Slash, Byte_ascii.Backslash);
+		Io_url src_fil = wiki_html_dir.GenSubFil(String_.new_utf8_(src_bry));
+		Io_mgr._.CopyFil(src_fil, trg_fil, true);
+		return true;
+	}	private static final byte[] Bry_mw_wiki_logo = Bry_.new_ascii_(".mw-wiki-logo{background-image:url(\"");
 	private String Logo_find_src() {
 		if (mainpage_html == null) return null;
 		int main_page_html_len = mainpage_html.length;

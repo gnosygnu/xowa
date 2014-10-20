@@ -148,11 +148,12 @@ public class Xoa_url_parser {
 		}
 		else {												// parse failed; url doesn't have protocol
 			byte[] wiki_bry = rv.Wiki_bry();
-			if (Bry_.Len_gt_0(wiki_bry)) {				// NOTE: wiki_bry null when passing in Category:A from home_wiki
-				Xow_xwiki_itm xwiki_itm = app.User().Wiki().Xwiki_mgr().Get_by_key(wiki_bry);	// see if url.Wiki_bry is actually wiki; 
-				if (	xwiki_itm != null											// null-check
-					&&	!xwiki_itm.Type_is_xwiki_lang(cur_wiki.Lang().Lang_id()))	// in xwiki, but not lang; EX: "fr.wikipedia.org" vs "fr"; ca.s:So/Natura_del_so; DATE:2014-04-26
-						wiki =  app.Wiki_mgr().Get_by_key_or_make(xwiki_itm.Domain());
+			if (Bry_.Len_gt_0(wiki_bry)) {					// NOTE: wiki_bry is null when passing in Category:A from home_wiki
+				Xow_xwiki_itm xwiki_itm = app.User().Wiki().Xwiki_mgr().Get_by_key(wiki_bry);	// check if url.Wiki_bry is actually wiki; note that checking User().Wiki().Xwiki_mgr() to find "offline" wikis
+				if (	xwiki_itm != null						// null-check
+					&&	Bry_.Eq(xwiki_itm.Domain(), wiki_bry)	// check that xwiki.domain == wiki; avoids false lang matches like "so/page" or "C/page"; EX: "fr.wikipedia.org" vs "fr"; ca.s:So/Natura_del_so; DATE:2014-04-26; PAGE:no.b:C/Variabler; DATE:2014-10-14
+					)
+					wiki =  app.Wiki_mgr().Get_by_key_or_make(xwiki_itm.Domain());
 			}
 			if (rv.Page_bry() == null) {					// 1 seg; EX: "Earth"; "fr.wikipedia.org"
 				if (wiki != null) {							// wiki_bry is known wiki; EX: "fr.wikipedia.org"

@@ -155,7 +155,7 @@ class Xop_vnt_rules_parser {
 					case Xop_vnt_rule_trie_itm.Tid_semic:
 						switch (mode) {
 							case Mode_text:
-								text_tkns_list.Add(tkn_mkr.Bry(src_bgn, pos, Bry_.Trim(Bry_.Mid(src, src_bgn, pos))));
+								text_tkns_list.Add(tkn_mkr.Bry_raw(src_bgn, pos, Bry_.Trim(Bry_.Mid(src, src_bgn, pos))));
 								Make_rule();
 								cur_lang_bry = null;
 								mode = Mode_key;

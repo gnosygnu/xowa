@@ -87,7 +87,7 @@ class Hdump_load_mgr_fxt {
 	public Hdump_load_mgr_fxt Expd_sidebar_div(String v) {this.expd_sidebar_div = v; return this;}
 	public Hdump_load_mgr_fxt Expd_img(Hdump_data_img__base img) {expd_imgs.Add(img); return this;}
 	public Hdump_load_mgr_fxt Test_load(int page_id) {
-		load_mgr.Load_rows(hpg, page_id, page_url, init_rows);
+		load_mgr.Load_rows(hpg, page_id, page_url, Xoa_ttl.Null, init_rows);
 		if (expd_body != null)			Tfds.Eq(expd_body, String_.new_utf8_(hpg.Page_body()));
 		if (expd_display_ttl != null)	Tfds.Eq(expd_display_ttl, String_.new_utf8_(hpg.Display_ttl()));
 		if (expd_content_sub != null)	Tfds.Eq(expd_content_sub, String_.new_utf8_(hpg.Content_sub()));

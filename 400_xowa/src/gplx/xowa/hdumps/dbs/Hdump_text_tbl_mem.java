@@ -18,10 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.hdumps.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
 import gplx.dbs.*;
 public class Hdump_text_tbl_mem extends Hdump_text_tbl { 	private HashAdp pages = HashAdp_.new_();
-	@Override public void Insert(int page_id, int tid, byte[] data) {
+	@Override public int Insert(int page_id, int tid, byte[] data) {
 		Hdump_text_row row = new Hdump_text_row(page_id, tid, data);
 		ListAdp rows = Get_or_new(pages, page_id);
 		rows.Add(row);
+		return data.length;
 	}
 	@Override public void Select_by_page(ListAdp rv, int page_id) {
 		ListAdp rows = Get_or_new(pages, page_id);

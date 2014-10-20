@@ -16,13 +16,14 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.dbs.tbls.*; import gplx.ios.*;
+import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.dbs.tbls.*; import gplx.ios.*; import gplx.xowa.bldrs.wikis.redirects.*;
 public class Xob_page_sql extends Xob_itm_basic_base implements Xobd_wkr, GfoInvkAble {
 	private Db_idx_mode idx_mode = Db_idx_mode.Itm_end;
-	private Xop_redirect_mgr redirect_mgr; private Io_stream_zip_mgr zip_mgr; private byte data_storage_format; 
+	private Io_stream_zip_mgr zip_mgr; private byte data_storage_format; private boolean redirect_id_enabled;
 	private Xodb_mgr_sql db_mgr; private Xodb_fsys_mgr fsys_mgr; private Db_provider page_provider; private Db_stmt page_stmt; private Xob_text_stmts_mgr text_stmts_mgr;
 	private int page_count_all, page_count_main = 0; private int txn_commit_interval = 100000;	// 100 k
 	private DateAdp modified_latest = DateAdp_.MinValue;
+	private Xop_redirect_mgr redirect_mgr; private Xob_redirect_tbl redirect_tbl;
 	public Xob_page_sql(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Wkr_key() {return KEY;} public static final String KEY = "import.sql.page";
 	public void Wkr_bgn(Xob_bldr bldr) {
@@ -42,6 +43,11 @@ public class Xob_page_sql extends Xob_itm_basic_base implements Xobd_wkr, GfoInv
 		page_provider.Txn_mgr().Txn_bgn_if_none();
 		text_stmts_mgr = new Xob_text_stmts_mgr(db_mgr, fsys_mgr);
 		if (idx_mode.Tid_is_bgn()) Idx_create();
+
+		if (redirect_id_enabled) {
+			redirect_tbl = new Xob_redirect_tbl(wiki.Fsys_mgr().Root_dir(), app.Encoder_mgr().Url_ttl()).Create_table();
+			redirect_tbl.Provider().Txn_mgr().Txn_bgn_if_none();
+		}
 	}
 	public void Wkr_run(Xodb_page page) {
 		int page_id = page.Id();
@@ -66,6 +72,9 @@ public class Xob_page_sql extends Xob_itm_basic_base implements Xobd_wkr, GfoInv
 			page_stmt.New();	// must new stmt variable, else java.sql.SQLException: "statement is not executing"
 			text_stmt.New();	// must new stmt variable, else java.sql.SQLException: "statement is not executing"
 		}
+		if (redirect && redirect_id_enabled) {
+			redirect_tbl.Insert(page_id, page.Ttl_wo_ns(), redirect_ttl);
+		}
 		++page_count_all;
 		if (ns.Id_main() && !page.Type_redirect()) ++page_count_main;
 		if (page_count_all % txn_commit_interval == 0) text_stmt.Provider().Txn_mgr().Txn_end_all_bgn_if_none();
@@ -82,6 +91,12 @@ public class Xob_page_sql extends Xob_itm_basic_base implements Xobd_wkr, GfoInv
 		db_mgr.Tbl_xowa_db().Commit_all(page_provider, db_mgr.Fsys_mgr().Files_ary());				// save dbs; note that dbs can be saved again later
 		db_mgr.Tbl_xowa_cfg().Insert_str(Xodb_mgr_sql.Grp_wiki_init, "props.modified_latest", modified_latest.XtoStr_fmt(DateAdp_.Fmt_iso8561_date_time));
 		if (idx_mode.Tid_is_end()) Idx_create();
+		if (redirect_id_enabled) {
+			redirect_tbl.Provider().Txn_mgr().Txn_end_all();
+			Xodb_file core_file = fsys_mgr.Get_tid_root(Xodb_file_tid.Tid_core);
+			redirect_tbl.Update_trg_redirect_id(core_file.Url(), 1);
+			redirect_tbl.Update_src_redirect_id(core_file.Url(), page_provider);
+		}
 	}
 	private void Idx_create() {
 		fsys_mgr.Index_create(usr_dlg, Byte_.Ary(Xodb_file_tid.Tid_core, Xodb_file_tid.Tid_text), Idx_page_title, Idx_page_random);
@@ -89,10 +104,11 @@ public class Xob_page_sql extends Xob_itm_basic_base implements Xobd_wkr, GfoInv
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_txn_commit_interval_))		txn_commit_interval = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk_idx_mode_))					idx_mode = Db_idx_mode.Xto_itm(m.ReadStr("v"));
+		else if	(ctx.Match(k, Invk_redirect_id_enabled_))		redirect_id_enabled = m.ReadYn("v");
 		else													return super.Invk(ctx, ikey, k, m);
 		return this;
 	}
-	private static final String Invk_txn_commit_interval_ = "txn_commit_interval_", Invk_idx_mode_ = "idx_mode_";
+	private static final String Invk_txn_commit_interval_ = "txn_commit_interval_", Invk_idx_mode_ = "idx_mode_", Invk_redirect_id_enabled_ = "redirect_id_enabled_";
 	public void Wkr_ini(Xob_bldr bldr) {}
 	public void Wkr_print() {}
 	private static final Db_idx_itm
@@ -155,5 +171,5 @@ class Xob_text_stmts_mgr {
 		}
 		text_stmts[stmt_idx] = stmt;
 		text_stmts_len = new_len;
-	}	Db_stmt[] text_stmts = new Db_stmt[0]; int text_stmts_len, text_stmts_max = 0;
+	}	private Db_stmt[] text_stmts = new Db_stmt[0]; int text_stmts_len, text_stmts_max = 0;
 }

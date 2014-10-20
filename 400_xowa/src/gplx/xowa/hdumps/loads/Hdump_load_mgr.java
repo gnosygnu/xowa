@@ -23,17 +23,17 @@ public class Hdump_load_mgr {
 	private ListAdp tmp_rows = ListAdp_.new_(), img_itms = ListAdp_.new_();
 	public Hdump_load_mgr() {}
 	public byte Zip_tid() {return zip_tid;} public void Zip_tid_(byte v) {zip_tid = v;} private byte zip_tid = gplx.ios.Io_stream_.Tid_file;
-	public void Load2(Hdump_page hpg, Db_provider provider, int page_id) {
+	public void Load2(Hdump_page hpg, Db_provider provider, int page_id, Xoa_ttl page_ttl) {
 		text_tbl.Provider_(provider).Select_by_page(tmp_rows, page_id);
-		Load_rows(hpg, page_id, Xoa_url.blank_(), tmp_rows);
+		Load_rows(hpg, page_id, Xoa_url.blank_(), page_ttl, tmp_rows);
 	}
-	public void Load(Hdump_page hpg, Xodb_fsys_mgr db_fsys_mgr, int html_db_id, int page_id) {
+	public void Load(Hdump_page hpg, Xodb_fsys_mgr db_fsys_mgr, int html_db_id, int page_id, Xoa_ttl page_ttl) {
 		Db_provider provider = db_fsys_mgr.Get_by_idx(html_db_id).Provider();
 		text_tbl.Provider_(provider).Select_by_page(tmp_rows, page_id);
-		Load_rows(hpg, page_id, hpg.Page_url(), tmp_rows);
+		Load_rows(hpg, page_id, hpg.Page_url(), page_ttl, tmp_rows);
 	}
-	public void Load_rows(Hdump_page hpg, int page_id, Xoa_url page_url, ListAdp rows) {
-		hpg.Init(page_id, page_url);
+	public void Load_rows(Hdump_page hpg, int page_id, Xoa_url page_url, Xoa_ttl page_ttl, ListAdp rows) {
+		hpg.Init(page_id, page_url, page_ttl);
 		img_itms.Clear();
 		int len = rows.Count();
 		for (int i = 0; i < len; ++i) {

@@ -21,7 +21,7 @@ public class Xoapi_net implements GfoInvkAble, GfoEvObj {
 	public GfoEvMgr EvMgr() {return ev_mgr;} private GfoEvMgr ev_mgr;
 	public void Init_by_kit(Xoa_app app) {
 	}
-	public boolean Enabled() {return enabled;} private boolean enabled;
+	public boolean Enabled() {return enabled;} private boolean enabled = true;
 	public void Enabled_(boolean v) {
 		this.enabled = v;
 		gplx.ios.IoEngine_system.Web_access_enabled = v;

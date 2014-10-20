@@ -222,7 +222,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		else if	(len == 2	&& src[cur_pos]		== Byte_ascii.Lt
 							&& src[cur_pos + 1]	== Byte_ascii.Slash)	bry = Bry_escape_lt_slash;
 		else															bry = Bry_.Add(Html_entity_.Lt_bry, Bry_.Mid(src, bgn_pos + 1, cur_pos));	// +1 to skip <
-		return tkn_mkr.Bry(bgn_pos, cur_pos, bry);
+		return tkn_mkr.Bry_raw(bgn_pos, cur_pos, bry);
 	}
 	private int Make_noinclude(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int gtPos, Xop_xnde_tag tag, int tag_end_pos, boolean tag_is_closing) {
 		tag_end_pos = Bry_finder.Find_fwd_while(src, tag_end_pos, src_len, Byte_ascii.Space);// NOTE: must skip spaces else "<noinclude />" will not work with safesubst; PAGE:en.w:Wikipedia:Featured_picture_candidates; DATE:2014-06-24
@@ -312,7 +312,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			if (	page.Html_data().Html_restricted() 
 				&&	page.Wiki().Domain_tid() != Xow_wiki_domain_.Tid_home) {
 				int end_pos = gtPos + 1;
-				ctx.Subs_add(root, tkn_mkr.Bry(bgn_pos, end_pos, Bry_.Add(gplx.html.Html_entity_.Lt_bry, Bry_.Mid(src, bgn_pos + 1, end_pos)))); // +1 to skip <
+				ctx.Subs_add(root, tkn_mkr.Bry_raw(bgn_pos, end_pos, Bry_.Add(gplx.html.Html_entity_.Lt_bry, Bry_.Mid(src, bgn_pos + 1, end_pos)))); // +1 to skip <
 				return end_pos;
 			}
 		}
@@ -472,7 +472,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			}
 		}
 		if (end_tag.Restricted())	// restricted tags (like <script>) are not placed on stack; for now, just write it out
-			ctx.Subs_add(root, tkn_mkr.Bry(bgn_pos, cur_pos, Bry_.Add(gplx.html.Html_entity_.Lt_bry, Bry_.Mid(src, bgn_pos + 1, cur_pos)))); // +1 to skip <
+			ctx.Subs_add(root, tkn_mkr.Bry_raw(bgn_pos, cur_pos, Bry_.Add(gplx.html.Html_entity_.Lt_bry, Bry_.Mid(src, bgn_pos + 1, cur_pos)))); // +1 to skip <
 		else {                
 			if (pre2_pending) {
 				pre2_pending = false;
@@ -482,7 +482,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 				if (end_tag.Xtn())	// if xtn end tag, ignore it; tidy / browser doesn't know about xtn_tags like "</poem>" so these need to be hidden, else they will show; DATE:2014-07-22
 					ctx.Subs_add(root, tkn_mkr.Ignore(bgn_pos, cur_pos, Xop_ignore_tkn.Ignore_tid_xnde_dangling));
 				else				// regular tag; show it; depend on tidy to clean up; DATE:2014-07-22
-					ctx.Subs_add(root, tkn_mkr.Bry(src, bgn_pos, cur_pos));
+					ctx.Subs_add(root, tkn_mkr.Bry_mid(src, bgn_pos, cur_pos));
 			}
 		}
 		ctx.Para().Process_block__xnde(end_tag, end_tag.Block_close());

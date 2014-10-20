@@ -31,7 +31,7 @@ public class Xop_tblw_lxr implements Xop_lxr {
 		// standalone "!" should be ignored if no tblw present; EX: "a b! c" should not trigger ! for header
 		switch (wlxr_type) {
 			case Xop_tblw_wkr.Tblw_type_th:		// \n!
-			case Xop_tblw_wkr.Tblw_type_th2:	// !!	
+			case Xop_tblw_wkr.Tblw_type_th2:	// !!
 			case Xop_tblw_wkr.Tblw_type_td:		// \n|
 				Xop_tkn_itm owner_tblw_tb = ctx.Stack_get_typ(Xop_tkn_itm_.Tid_tblw_tb);		// check entire stack for tblw; DATE:2014-03-11
 				if (	owner_tblw_tb == null													// no tblw in stack; highly probably that current sequence is not tblw tkn
@@ -52,6 +52,20 @@ public class Xop_tblw_lxr implements Xop_lxr {
 						else											// handle "!!" only
 							return ctx.Lxr_make_txt_(cur_pos);
 					}
+				}
+				if (wlxr_type == Xop_tblw_wkr.Tblw_type_th2) {											// !!; extra check to make sure \n! exists; DATE:2014-10-19
+					int prv_th_pos = Bry_finder.Find_bwd(src, Byte_ascii.NewLine, bgn_pos);				// search for previous \n
+					boolean invalid = prv_th_pos == Bry_finder.Not_found;									// no \n; invalid
+					if (!invalid) {
+						++prv_th_pos;																	// skip \n
+						prv_th_pos = Bry_finder.Find_fwd_while_space_or_tab(src, prv_th_pos, src_len);	// skip \s; needed for "\n\s!" which is still a tblw
+						if (prv_th_pos == bgn_pos)														// invalid: "\n" is directly in front of "!!"
+							invalid = true;
+						else
+							invalid = src[prv_th_pos] != Byte_ascii.Bang;								// invalid if not "\n!"
+					}
+					if (invalid)
+						return Xop_tblw_wkr.Handle_false_tblw_match(ctx, root, src, bgn_pos, cur_pos, tkn_mkr.Txt(bgn_pos, cur_pos), false);
 				}
 				break;
 		}

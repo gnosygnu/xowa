@@ -27,7 +27,7 @@ public class Xop_tblw_wkr__double_pipe_tst {
 		, ""
 		));
 	}
-	@Test  public void Tblw_lnki_nth() {	// PURPOSE: if || is nth pipe, then treat as lnki; PAGE:en.w:Main_Page;de.w:Main_Page; DATE:2014-05-06
+	@Test  public void Lnki_nth() {	// PURPOSE: if || is nth pipe, then treat as lnki; PAGE:en.w:Main_Page;de.w:Main_Page; DATE:2014-05-06
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "{|"
 		, "|[[File:A.png|b||c]]"
@@ -43,7 +43,7 @@ public class Xop_tblw_wkr__double_pipe_tst {
 		)
 		);
 	}
-	@Test  public void Tblw_lnki_list_1st() {	// PURPOSE: if || is 1st pipe, but inside list, then treat as lnki; EX:w:Second_Boer_War; DATE:2014-05-05
+	@Test  public void Lnki_list_1st() {	// PURPOSE: if || is 1st pipe, but inside list, then treat as lnki; EX:w:Second_Boer_War; DATE:2014-05-05
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "{|"
 		, "|"
@@ -65,7 +65,7 @@ public class Xop_tblw_wkr__double_pipe_tst {
 		)
 		);
 	}
-	@Test  public void Tblw_lnki_double_bang() {	// PURPOSE: do not treat !! as tblw; PAGE:en.w:Pink_(singer); DATE:2014-06-25
+	@Test  public void Double_bang_lnki() {	// PURPOSE: do not treat !! as tblw; PAGE:en.w:Pink_(singer); DATE:2014-06-25
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "{|"
 		, "|"
@@ -82,6 +82,26 @@ public class Xop_tblw_wkr__double_pipe_tst {
 		, "  </tr>"
 		, "</table>"
 		, ""
+		)
+		);
+	}
+	@Test  public void Double_bang_list() {	// PURPOSE: do not treat !! as tblw; PAGE:en.w:Wikipedia:Featured_picture_candidates; DATE:2014-10-19
+		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		( "{|"
+		, "* a !! b"
+		, "|}"
+		) , String_.Concat_lines_nl_skip_last
+		( "<table>"
+		, "  <ul>"
+		, "    <li> a !! b"
+		, "    </li>"
+		, "  </ul>"
+		, "  <tr>"
+		, "    <td>"
+		, "    </td>"
+		, "  </tr>"
+		, "</table>"
+		, "</p>"	// NOTE: </p> is incorrect, but benign
 		)
 		);
 	}

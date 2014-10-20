@@ -37,8 +37,7 @@ public class Hdump_save_mgr {
 	public int Insert_body(Xoa_page page, int page_id) {
 		Hdump_page_body_srl.Save(tmp_bfr, page);
 		byte[] body_bry = tmp_bfr.Xto_bry_and_clear();
-		text_tbl.Insert(page_id, Hdump_text_row_tid.Tid_body, body_bry);
-		return body_bry.length;
+		return text_tbl.Insert(page_id, Hdump_text_row_tid.Tid_body, body_bry);
 	}
 	public static byte[] Write_imgs(Bry_bfr bfr, ListAdp imgs) {
 		int len = imgs.Count(); if (len == 0) return null; // no images; exit early, else will write blank String

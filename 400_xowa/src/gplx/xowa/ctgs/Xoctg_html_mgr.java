@@ -19,14 +19,14 @@ package gplx.xowa.ctgs; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.dbs.*;
 public class Xoctg_html_mgr implements GfoInvkAble {
 	@gplx.Internal protected Xoctg_fmtr_grp Fmtr_grp() {return fmtr_grp;} private Xoctg_fmtr_grp fmtr_grp = new Xoctg_fmtr_grp();
-	Xoctg_fmtr_all mgr_subcs = new Xoctg_fmtr_all(Xoa_ctg_mgr.Tid_subc);
-	Xoctg_fmtr_all mgr_pages = new Xoctg_fmtr_all(Xoa_ctg_mgr.Tid_page);
-	Xoctg_fmtr_all mgr_files = new Xoctg_fmtr_all(Xoa_ctg_mgr.Tid_file);
+	private final Xoctg_fmtr_all mgr_subcs = new Xoctg_fmtr_all(Xoa_ctg_mgr.Tid_subc);
+	private final Xoctg_fmtr_all mgr_pages = new Xoctg_fmtr_all(Xoa_ctg_mgr.Tid_page);
+	private final Xoctg_fmtr_all mgr_files = new Xoctg_fmtr_all(Xoa_ctg_mgr.Tid_file);
 	public Xoctg_data_cache Data_cache() {return data_cache;} private Xoctg_data_cache data_cache = new Xoctg_data_cache(); 
 	public void Bld_html(Xoa_page page, Bry_bfr bfr) {
-		Bry_bfr tmp_bfr = page.Wiki().Utl_bry_bfr_mkr().Get_m001();
+		Xow_wiki wiki = page.Wiki();			
+		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_m001();
 		try {
-			Xow_wiki wiki = page.Wiki();
 			if (wiki.Db_mgr().Category_version() == Xoa_ctg_mgr.Version_2)
 				Bld_html_v2(wiki, page, tmp_bfr);
 			else

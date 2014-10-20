@@ -41,6 +41,7 @@ public class Html_tag_ {
 	, Script_lhs				= Bry_.new_ascii_("<script>")
 	, Script_lhs_w_type			= Bry_.new_ascii_("<script type='text/javascript'>")
 	, Script_rhs				= Bry_.new_ascii_("</script>")
+	, Span_rhs					= Bry_.new_ascii_("</span>")
 	;
 
 	public static final String 

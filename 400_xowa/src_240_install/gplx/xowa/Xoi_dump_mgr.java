@@ -27,7 +27,7 @@ public class Xoi_dump_mgr implements GfoInvkAble {
 	public boolean Wiki_storage_type_is_sql()	{return wiki_storage_type == Wiki_storage_type_sqlite;}
 	public String Db_ns_map() {return db_ns_map;} private String db_ns_map = "Template~Module";
 	public boolean Css_wiki_update() {return css_wiki_update;} private boolean css_wiki_update = true;
-	public boolean Css_commons_download() {return css_commons_download;} private boolean css_commons_download = false;
+	public boolean Css_commons_download() {return css_commons_download;} private boolean css_commons_download = true; // changed from false to true; DATE:2014-10-19
 	public boolean Delete_xml_file() {return delete_xml_file;} private boolean delete_xml_file = true;
 	public byte Search_version() {return search_version;} private byte search_version = gplx.xowa.specials.search.Xosrh_core.Version_2;
 	public boolean Import_bz2_by_stdout() {return import_bz2_by_stdout;} private boolean import_bz2_by_stdout = true;

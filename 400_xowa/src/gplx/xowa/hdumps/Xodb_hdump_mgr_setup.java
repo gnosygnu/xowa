@@ -38,7 +38,6 @@ public class Xodb_hdump_mgr_setup {
 		if (String_.Eq(val, "y")) return;
 		try {
 			core_provider.Exec_sql(Sql_ddl__page_html_db_id);
-			core_provider.Exec_sql(Sql_ddl__page_redirect_id);
 			cfg_tbl.Insert_str(Xodb_fsys_mgr.Cfg_grp_db_meta, Cfg_itm_html_db_exists, "y");
 		}	catch (Exception e) {Gfo_usr_dlg_._.Warn_many("", "", "failed to update core: db=~{0} err=~{1}", core_provider.Conn_info().Str_raw(), Err_.Message_gplx(e));}
 	}
@@ -52,8 +51,7 @@ public class Xodb_hdump_mgr_setup {
 		Sqlite_engine_.Idx_create(html_db_file.Provider(), Hdump_text_tbl.Idx_core);
 	}
 	private static final String Cfg_itm_html_db_exists = "html_db.exists";
-	private static final String 
+	public static final String 
 	  Sql_ddl__page_html_db_id		= "ALTER TABLE page ADD COLUMN page_html_db_id integer NOT NULL DEFAULT '-1'"
-	, Sql_ddl__page_redirect_id		= "ALTER TABLE page ADD COLUMN page_redirect_id integer NOT NULL DEFAULT '-1'"
 	;
 }

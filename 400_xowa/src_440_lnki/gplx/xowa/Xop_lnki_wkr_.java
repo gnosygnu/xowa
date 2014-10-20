@@ -127,7 +127,7 @@ public class Xop_lnki_wkr_ {
 					&&	lnki.Ttl() != null								// only change "]]]" to "]" + "]]" if lnki is not title; otherwise [[A]]] -> "A]" which will be invalid; PAGE:en.w:Tall_poppy_syndrome DATE:2014-07-23
 					) {
 					Xop_tkn_itm caption_val_tkn = lnki.Caption_val_tkn();
-					caption_val_tkn.Subs_add(tkn_mkr.Bry(cur_pos, cur_pos + 1, Byte_ascii.Brack_end_bry));	// add "]" as bry
+					caption_val_tkn.Subs_add(tkn_mkr.Bry_raw(cur_pos, cur_pos + 1, Byte_ascii.Brack_end_bry));	// add "]" as bry
 					caption_val_tkn.Src_end_(caption_val_tkn.Src_end() + 1);
 					return true;
 				}

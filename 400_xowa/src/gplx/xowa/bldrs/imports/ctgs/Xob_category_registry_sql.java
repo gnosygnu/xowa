@@ -24,6 +24,7 @@ public class Xob_category_registry_sql implements Xob_cmd {
 	public void Cmd_bgn(Xob_bldr bldr) {}
 	public void Cmd_run() {}
 	public void Cmd_end() {	// NOTE: placing in end, b/c must run *after* page_sql
+		wiki.Html_mgr().Importing_ctgs_(Bool_.Y);
 		Io_url rslt_dir = Xob_category_registry_sql.Get_dir_output(wiki);
 		Io_mgr._.DeleteDirDeep(rslt_dir);
 		Xob_tmp_wtr rslt_wtr = Xob_tmp_wtr.new_wo_ns_(Io_url_gen_.dir_(rslt_dir), Io_mgr.Len_mb);
@@ -47,6 +48,7 @@ public class Xob_category_registry_sql implements Xob_cmd {
 			}
 		}	finally {rdr.Rls();}
 		rslt_wtr.Flush(usr_dlg);
+		wiki.Html_mgr().Importing_ctgs_(Bool_.N);
 	}
 	public void Cmd_print() {}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

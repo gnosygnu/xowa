@@ -50,13 +50,13 @@ class Xog_history_stack_fxt {
 	}	private Xoa_app app; private Xow_wiki wiki; private Xog_history_stack stack = new Xog_history_stack(); private Xoa_url_parser url_parser;
 	public Xog_history_stack_fxt Test_cur(String expd) {
 		Xog_history_itm page = stack.Cur_itm();
-		String actl = page == null ? null : String_.new_utf8_(page.Page_key());
+		String actl = page == null ? null : String_.new_utf8_(page.Page());
 		Tfds.Eq(expd, actl, "cur");
 		return this;
 	}
 	public Xog_history_stack_fxt Test_cur_qargs(String expd) {
 		Xog_history_itm page = stack.Cur_itm();
-		String actl = page == null ? null : String_.new_utf8_(page.Qarg_key());
+		String actl = page == null ? null : String_.new_utf8_(page.Qarg());
 		Tfds.Eq(expd, actl, "cur_qargs");
 		return this;
 	}
@@ -78,9 +78,9 @@ class Xog_history_stack_fxt {
 		if (arg_str != null) url_bry = Bry_.Add(url_bry, Bry_.new_utf8_(arg_str));
 		Xoa_url url = url_parser.Parse(url_bry);
 		page.Url_(url);  // set url b/c history_mgr.Add uses url
-		stack.Add(page);
+		stack.Add(Xog_history_mgr.new_(page));
 		return this;
 	}
-	public Xog_history_stack_fxt Test_pos(int expd) {Tfds.Eq(expd, stack.Stack_pos(), "pos"); return this;}
-	public Xog_history_stack_fxt Test_len(int expd) {Tfds.Eq(expd, stack.Count(), "len"); return this;}
+	public Xog_history_stack_fxt Test_pos(int expd) {Tfds.Eq(expd, stack.Cur_pos(), "pos"); return this;}
+	public Xog_history_stack_fxt Test_len(int expd) {Tfds.Eq(expd, stack.Len(), "len"); return this;}
 }

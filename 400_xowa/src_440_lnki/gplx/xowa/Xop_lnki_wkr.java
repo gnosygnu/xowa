@@ -140,7 +140,7 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 							int subs_len = val_tkn.Subs_len();
 							Xop_tkn_itm caption_val_tkn = ((Arg_nde_tkn)cur_caption_tkn).Val_tkn();
 							int pipe_bgn = caption_val_tkn.Src_bgn(); // for bookeeping purposes, assign | pos to same pos as val_tkn; note that pos really shouldn't be used; DATE:2014-05-05
-							caption_val_tkn.Subs_add(ctx.Tkn_mkr().Bry(pipe_bgn, pipe_bgn + 1, Const_pipe));	// NOTE: add pipe once for entire caption tkn; used to add for every val tkn; DATE:2014-06-08
+							caption_val_tkn.Subs_add(ctx.Tkn_mkr().Bry_raw(pipe_bgn, pipe_bgn + 1, Const_pipe));	// NOTE: add pipe once for entire caption tkn; used to add for every val tkn; DATE:2014-06-08
 							for (int i = 0 ; i < subs_len; i++) {
 								Xop_tkn_itm sub_itm = val_tkn.Subs_get(i);
 								caption_val_tkn.Subs_add(sub_itm);

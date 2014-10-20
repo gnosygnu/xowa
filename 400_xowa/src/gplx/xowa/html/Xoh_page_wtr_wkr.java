@@ -129,7 +129,11 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 		if (ns_id == Xow_ns_.Id_category)		// if Category, render rest of html (Subcategories; Pages; Files); note that a category may have other html which requires wikitext processing
 			wiki.Html_mgr().Ns_ctg().Bld_html(page, bfr);
 		int ctgs_len = page.Category_list().length;	// add Categories
-		if (ctgs_enabled && ctgs_len > 0) {
+
+		if (	ctgs_enabled
+			&&	ctgs_len > 0
+			&&	!wiki.Html_mgr().Importing_ctgs()	// do not show categories if importing categories, page will wait for category import to be done; DATE:2014-10-15
+			) {
 			app.Usr_dlg().Prog_many("", "", "loading categories: count=~{0}", ctgs_len);
 			if (app.Ctg_mgr().Pagecats_grouping_enabled())
 				app.Ctg_mgr().Pagectgs_wtr().Write(bfr, wiki, page);

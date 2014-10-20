@@ -25,14 +25,8 @@ public class Xob_import_marker {
 		if (!Io_mgr._.ExistsFil(url)) return true;
 		Xoa_app app = wiki.App();
 		app.Usr_dlg().Log_many("", "", "import.marker: marker found: url=~{0}", url.Raw());
-		int rslt = app.Gui_mgr().Kit().Ask_yes_no_cancel("", "", String_.Concat_lines_nl
-		( "~{0} was not completely imported."
-		, "Please choose one of the following:"
-		, ""
-		, "* Yes\t: Delete the wiki. You will need to reimport again."
-		, "* No\t: Delete the warning. XOWA will continue, but may run into unexpected issues."
-		, "* Cancel\t: Do nothing and continue. This message will show whenever you restart the app and reopen this wiki."
-		), wiki.Domain_str());
+		byte[] incompete_msg_bry = app.User().Msg_mgr().Val_by_key_args(Bry_.new_ascii_("api-xowa.import.core.incomplete"), wiki.Domain_str());
+		int rslt = app.Gui_mgr().Kit().Ask_yes_no_cancel("", "", String_.new_utf8_(incompete_msg_bry));
 		switch (rslt) {
 			case Gfui_dlg_msg_.Btn_yes:		Xobc_core_cleanup.Delete_wiki_sql(wiki); Import_end(wiki); return false;	// delete wiki
 			case Gfui_dlg_msg_.Btn_no:		Import_end(wiki); return true;	// delete marker

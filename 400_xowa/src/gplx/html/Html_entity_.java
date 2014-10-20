@@ -30,6 +30,6 @@ public class Html_entity_ {
 	, Pipe_bry = Bry_.new_ascii_("&#124;")
 	, Colon_bry = Bry_.new_ascii_("&#58;"), Underline_bry = Bry_.new_ascii_("&#95;"), Asterisk_bry = Bry_.new_ascii_("&#42;")
 	, Brack_bgn_bry = Bry_.new_ascii_("&#91;"), Brack_end_bry = Bry_.new_ascii_("&#93;")
-	, Nbsp_bry = Bry_.new_ascii_("&nbsp;")
+	, Nbsp_num_bry = Bry_.new_ascii_("&#160;")
 	;
 }

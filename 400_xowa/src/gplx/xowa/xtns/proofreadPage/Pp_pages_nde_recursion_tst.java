@@ -19,21 +19,16 @@ package gplx.xowa.xtns.proofreadPage; import gplx.*; import gplx.xowa.*; import 
 import org.junit.*;
 public class Pp_pages_nde_recursion_tst {
 	private Xop_fxt fxt = new Xop_fxt();
-	@Before public void Init() {
-		Io_mgr._.InitEngine_mem();
-		fxt.Wiki().Xtn_mgr().Xtn_proofread().Enabled_y_();
-		fxt.Wiki().Db_mgr().Load_mgr().Clear(); // must clear; otherwise fails b/c files get deleted, but wiki.data_mgr caches the Xowd_regy_mgr (the .reg file) in memory;
-		fxt.Wiki().Ns_mgr().Add_new(Xowc_xtn_pages.Ns_page_id_default, "Page").Add_new(Xowc_xtn_pages.Ns_index_id_default, "Index").Init();
-	}
+	@Before public void Init() {fxt.Init_xtn_pages();}
 	@After public void term() {
 		fxt.Wiki().Cache_mgr().Free_mem_all();
 	}
 	@Test  public void Page() {	// PURPOSE: handle recursive calls on page; EX: fr.s:Page:NRF_19.djvu/19; DATE:2014-01-01
 		fxt.Init_page_create("Page:A/1", "<pages index=\"A\" from=1 to=1 />abc");	// NOTE: recursive call to self
 		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to=1 />", String_.Concat_lines_nl
-		(	"<p>abc "
-		,	"</p>"
-		,	""
+		( "<p>abc "
+		, "</p>"
+		, ""
 		));
 	}
 	@Test  public void Index() {	// PURPOSE: handle recursive calls on index; EX: en.s:Poems_of_Italy:_selections_from_the_Odes_of_Giosue_Carducci/Before_the_Old_Castle_of_Verona; DATE:2014-01-19

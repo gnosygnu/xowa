@@ -25,6 +25,10 @@ public class Xoa_url_parser_basic_tst {
 	@Test  public void Abrv() {	// deprecate; no longer needed with shortcuts
 		fxt.Expd_wiki("en.wikipedia.org").Expd_page("A").Test_parse_w_wiki("en.wikipedia.org/A");
 	}
+	@Test  public void Commons() {	// PURPOSE: "C" was being picked up as an xwiki to commons; PAGE:no.b:C/Variabler; DATE:2014-10-14
+		fxt.Init_xwiki("c", "commons.wikimedia.org");	// add alias of "C"
+		fxt.Expd_wiki("en.wikipedia.org").Expd_page("C/D").Test_parse_w_wiki("C/D");	// should use default wiki of enwiki, not commons; also, page should be "C/D", not "D"
+	}
 	@Test  public void Http_basic() {
 		fxt.Expd_wiki("en.wikipedia.org").Expd_page("A").Test_parse_w_wiki("http://en.wikipedia.org/wiki/A");
 	}
@@ -144,6 +148,7 @@ class Xoa_url_parser_chkr implements Tst_chkr {
 	public Xoa_url_parser_chkr Expd_anchor(String v) 			{this.expd_anchor = v; return this;} private String expd_anchor;
 	public Xoa_url_parser_chkr Expd_action_is_edit_y() 			{this.expd_anchor_is_edit = Bool_.Y_byte; return this;} private byte expd_anchor_is_edit = Bool_.__byte;
 	public Xoa_url_parser_chkr Expd_action_is_edit_n() 			{this.expd_anchor_is_edit = Bool_.N_byte; return this;}
+	public void Init_xwiki(String alias, String domain) {app.User().Wiki().Xwiki_mgr().Add_full(alias, domain);}
 	public int Chk(Tst_mgr mgr, String path, Object actl_obj) {
 		Xoa_url actl = (Xoa_url)actl_obj;
 		int rv = 0;
