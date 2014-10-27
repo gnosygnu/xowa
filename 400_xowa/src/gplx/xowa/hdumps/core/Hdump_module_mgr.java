@@ -21,6 +21,12 @@ public class Hdump_module_mgr {
 	public boolean Imap_exists() {return imap_exists;} public void Imap_exists_(boolean v) {imap_exists = v;} private boolean imap_exists;
 	public boolean Gallery_packed_exists() {return gallery_packed_exists;} public void Gallery_packed_exists_(boolean v) {gallery_packed_exists = v;} private boolean gallery_packed_exists;
 	public boolean Hiero_exists() {return hiero_exists;} public void Hiero_exists_(boolean v) {hiero_exists = v;} private boolean hiero_exists;
+	public void Init(boolean math, boolean imap, boolean packed, boolean hiero) {
+		this.math_exists = math;
+		this.imap_exists = imap;
+		this.gallery_packed_exists = packed;
+		this.hiero_exists = hiero;
+	}
 	public void Clear() {
 		math_exists = imap_exists = gallery_packed_exists = hiero_exists = false;
 	}

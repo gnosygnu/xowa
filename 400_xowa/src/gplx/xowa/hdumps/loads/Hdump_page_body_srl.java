@@ -21,14 +21,14 @@ import gplx.xowa.html.modules.*;
 public class Hdump_page_body_srl {
 	private static final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	public static void Save(Bry_bfr bfr, Xoa_page page) {
-		bfr.Add_int_fixed(0, 1).Add_byte_pipe();	// version
+		bfr.Add_int_fixed(0, 1).Add_byte_pipe();			// version
 		Xopg_hdump_data hdump_data = page.Hdump_data();
 		bfr.Add_int_variable(hdump_data.Data_count_imgs());	// imgs_count
 		Xopg_html_data html_data = page.Html_data();
 		Save_html_modules(bfr, html_data);
 		Save_data(bfr, Tid_display_ttl	, html_data.Display_ttl());
 		Save_data(bfr, Tid_content_sub	, html_data.Content_sub());
-		Save_sidebars(bfr, page, html_data);
+		Save_sidebars(bfr, page			, html_data);
 		Save_data(bfr, Tid_body			, hdump_data.Body());
 	}
 	private static void Save_html_modules(Bry_bfr bfr, Xopg_html_data html_data) {
@@ -106,7 +106,7 @@ public class Hdump_page_body_srl {
 		hpg.Version_id_(rdr.Read_int_to_pipe());
 		hpg.Img_count_(rdr.Read_int_to_nl());
 	}
-	private static final int
+	private static final int	// SERIALIZED
 	  Tid_html_module			= 1
 	, Tid_display_ttl			= 2
 	, Tid_content_sub			= 3

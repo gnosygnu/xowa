@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.wikis.xwikis.*; import gplx.xowa.apis.xowa.html.*;
+import gplx.xowa.wikis.xwikis.*; import gplx.xowa.apis.xowa.html.*; import gplx.xowa.xtns.wdatas.core.*;
 public class Xow_lang_mgr {
 	Xow_lang_mgr() {
 		int len = Xol_lang_itm_.Id__max;
@@ -67,15 +67,16 @@ public class Xow_lang_mgr {
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_get = "get", Invk_sort = "sort";
-	public void Html_bld(Bry_bfr bfr, Xow_wiki wiki, ListAdp ttl_list, byte[] qid) {
+	public void Html_bld(Bry_bfr bfr, Xow_wiki wiki, ListAdp slink_list, byte[] qid) {
 		int grp_len = hash.Count();
 		for (int i = 0; i < grp_len; i++) {
 			Xow_lang_grp grp = (Xow_lang_grp)hash.FetchAt(i);
 			grp.Itms_reset();
 		}
-		int ttl_list_len = ttl_list.Count();
-		for (int i = 0; i < ttl_list_len; i++) {
-			Xoa_ttl ttl = (Xoa_ttl)ttl_list.FetchAt(i);
+		int slink_len = slink_list.Count();
+		for (int i = 0; i < slink_len; i++) {
+			Wdata_sitelink_itm slink = (Wdata_sitelink_itm)slink_list.FetchAt(i);
+			Xoa_ttl ttl = slink.Page_ttl();
 			Xow_xwiki_itm xwiki = ttl.Wik_itm();
 			int lang_id = xwiki.Lang_id();
 			Xow_lang_itm itm = itms[lang_id];	// NOTE: handles ttls like [[fr:]] and [[:fr;]] which have an empty Page_txt, but a valued Full_txt_raw
@@ -85,9 +86,9 @@ public class Xow_lang_mgr {
 				ttl_bry = wiki.Ctx().Cur_page().Ttl().Page_txt();
 				empty_xwiki = true;
 			}			
-			itm.Atrs_set(ttl_bry, empty_xwiki);
+			itm.Atrs_set(ttl_bry, empty_xwiki, slink.Badges());
 		}
-		html_bldr.Init(this, wiki, ttl_list, ttl_list_len, qid);
+		html_bldr.Init(this, wiki, slink_list, slink_len, qid);
 		html_bldr.XferAry(bfr, -1);
 	}	private Xow_lang_itm[] itms = null; Xow_lang_html html_bldr = new Xow_lang_html();
 	public static Xow_lang_mgr dflt_() {
@@ -139,12 +140,13 @@ class Xow_lang_html implements Bry_fmtr_arg {
 					byte[] domain = itm.Lang_domain();
 					byte[] page_name = itm.Page_name();
 					byte[] local_name = itm.Lang_name();
+					byte[] badge_cls = Badge_cls(tmp_bfr, itm.Page_badges());
 					if (wiki.App().User().Wiki().Xwiki_mgr().Get_by_key(domain) == null)
 						tmp_bfr.Add(Xoh_href_parser.Href_http_bry).Add(domain).Add(Xoh_href_parser.Href_wiki_bry);
 					else
 						tmp_bfr.Add(Xoh_href_parser.Href_site_bry).Add(domain).Add(Xoh_href_parser.Href_wiki_bry);
 					if (!itm.Empty_xwiki()) tmp_bfr.Add(page_name);
-					grp.Html_itm().Bld_bfr_many(bfr, lang_key, domain, local_name, tmp_bfr.Xto_bry_and_clear(), page_name);
+					grp.Html_itm().Bld_bfr_many(bfr, lang_key, domain, local_name, tmp_bfr.Xto_bry_and_clear(), page_name, badge_cls);
 					++grp_counter;
 					if (grp_counter == 3) {
 						row_opened = false;
@@ -160,4 +162,30 @@ class Xow_lang_html implements Bry_fmtr_arg {
 				break;
 		}
 	}	private Xow_lang_grp grp; Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+	private static byte[] Badge_cls(Bry_bfr bfr, byte[][] badges) {
+		if (badges == null) badges = Bry_.Ary_empty;
+		int badges_len = badges.length;
+		bfr.Add(Cls_bgn);
+		if (badges_len == 0)
+			bfr.Add(Badge_none_cls);
+		else {
+			for (int i = 0; i < badges_len; ++i) {
+				if (i != 0) bfr.Add_byte_comma();
+				byte[] badge = badges[i];
+				if		(Bry_.Eq(badge, Badge_good_qid))	bfr.Add(Badge_good_cls);
+				else if (Bry_.Eq(badge, Badge_feat_qid))	bfr.Add(Badge_feat_cls);
+				else										Gfo_usr_dlg_._.Warn_many("", "", "unknown badge: badge~{0}", String_.new_utf8_(badge));
+			}
+		}
+		bfr.Add_byte_apos();
+		return bfr.Xto_bry_and_clear();
+	}
+	private static final byte[]
+	  Badge_good_qid	= Bry_.new_ascii_("Q17437798")
+	, Badge_good_cls	= Bry_.new_ascii_("badge-goodarticle")
+	, Badge_feat_qid	= Bry_.new_ascii_("Q17437796")
+	, Badge_feat_cls	= Bry_.new_ascii_("badge-featuredarticle")
+	, Badge_none_cls	= Bry_.new_ascii_("badge-none")
+	, Cls_bgn			= Bry_.new_ascii_(" class='")
+	;
 }

@@ -208,7 +208,8 @@ public class Scrib_core {
 			||	core_invalidate_when_page_changes	// core marked invalidated b/c of error in {{#invoke}} but won't be regen'd until page changes; invalidate now; PAGE:th.d:all; DATE:2014-10-03
 			) {
 			core_invalidate_when_page_changes = false;
-			if (Bry_.Eq(page.Wiki().Domain_bry(), core.Cur_wiki()))	// current page is in same wiki as last page
+			if (	core != null										// null check
+				&&	Bry_.Eq(page.Wiki().Domain_bry(), core.Cur_wiki()))	// current page is in same wiki as last page
 				core.When_page_changed(page);
 			else														// current page is in different wiki
 				Core_invalidate();										// invalidate scrib engine; note that lua will cache chunks by Module name and two modules in two different wikis can have the same name, but different data: EX:Module:Citation/CS1/Configuration and enwiki / zhwiki; DATE:2014-03-21

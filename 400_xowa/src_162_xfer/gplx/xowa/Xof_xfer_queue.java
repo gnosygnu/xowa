@@ -81,6 +81,7 @@ public class Xof_xfer_queue {
 			fsdb_itm.Html_img_wkr_(xfer_itm.Html_img_wkr());
 			rv.Add(fsdb_itm);
 		}
+		this.Clear();
 		return rv;
 	}
 	private static final String GRP_KEY = "xowa.xfer.queue";

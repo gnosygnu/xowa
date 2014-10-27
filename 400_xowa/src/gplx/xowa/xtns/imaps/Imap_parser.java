@@ -104,40 +104,35 @@ class Imap_parser {
 		imap_dflt = new Imap_itm_dflt();
 		Init_link_owner(imap_dflt, src, itm_bgn, itm_end);
 	}
-	private boolean Parse_shape(byte shape_tid, int tid_end_pos, int itm_bgn, int itm_end, int reqd_pts) {			
-		int num_bgn = -1; // differs from MW parser which looks for link via regx, and then chops off rest; regx is difficult due to lnke; doing opposite approach which is eat numbers until something else
-		int pos = Bry_finder.Trim_fwd_space_tab(src, tid_end_pos, itm_end);
-		boolean reading_numbers = true;
-		int comma_pos_0 = -1;
-		while (reading_numbers) {
-			boolean last = pos == itm_end;
+	private boolean Parse_shape(byte shape_tid, int tid_end_pos, int itm_bgn, int itm_end, int reqd_pts) {
+		boolean shape_is_poly = shape_tid == Imap_itm_.Tid_shape_poly;
+		int pos = Bry_finder.Trim_fwd_space_tab(src, tid_end_pos, itm_end);				// gobble any leading spaces
+		int grp_end = Bry_finder.Find_fwd(src, Byte_ascii.Brack_bgn, pos, itm_end);		// find first "["; note that this is a lazy way of detecting start of lnki / lnke; MW has complicated regex, but hopefully this will be enough; DATE:2014-10-22
+		if (grp_end == -1) {return Add_err(Bool_.Y, itm_bgn, itm_end, "No valid link was found");}
+		int num_bgn = -1, comma_pos = -1;
+		while (true) {
+			boolean last = pos == grp_end;
 			byte b = last ? Byte_ascii.Space : src[pos];
 			switch (b) {
-				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-				case Byte_ascii.Dash: case Byte_ascii.Dot:
-					if (num_bgn == -1)
-						num_bgn = pos;
-					++pos;
-					break;
-				case Byte_ascii.Comma:
-					if (comma_pos_0 == -1) comma_pos_0 = pos;
-					if (num_bgn == -1)
-						num_bgn = pos;
-					++pos;
-					break;
-				default:
-					int new_pos = Parse_shape_num(shape_tid, b, pos, num_bgn, pos, itm_end, comma_pos_0);
-					if (new_pos == -1) return Add_err(Bool_.Y, itm_bgn, itm_end, "imagemap_invalid_coord");
-					if (new_pos == pos)				// occurs when char is text
-						reading_numbers = false;
-					else
-						pos = Bry_finder.Trim_fwd_space_tab(src, new_pos, itm_end);
-					num_bgn = -1;
-					comma_pos_0 = -1;
+				case Byte_ascii.Comma:	if (comma_pos == -1) comma_pos = pos; break;
+				default:				if (num_bgn == -1) num_bgn = pos; break;
+				case Byte_ascii.Space: case Byte_ascii.Tab:
+					if (num_bgn != -1) {
+						byte[] num_bry = comma_pos == -1 ? Bry_.Mid(src, num_bgn, pos) : Bry_.Mid(src, num_bgn, comma_pos);	// if commas exist, treat first as decimal; echo(intval(round('1,2,3,4' * 1))) -> 1; PAGE:fr.w:Gouesnou; DATE:2014-08-12
+						double num = Bry_.Xto_double_or(num_bry, Double_.NaN);
+						if (Double_.IsNaN(num)) { 
+							if (shape_is_poly)	// poly code in ImageMap_body.php accepts invalid words and converts to 0; EX:"word1"; PAGE:uk.w:Стратосфера; DATE:2014-07-26
+								num = 0;
+							else
+								return Add_err(Bool_.Y, itm_bgn, itm_end, "imagemap_invalid_coord");								
+						}
+						num_bgn = -1; comma_pos = -1;
+						pts.Add(Double_obj_val.new_(num));
+					}
 					break;
 			}
-			if (last) reading_numbers = false;
+			if (last) break;
+			++pos;
 		}
 		int pts_len = pts.Count();
 		if (reqd_pts == Reqd_poly) {
@@ -180,33 +175,6 @@ class Imap_parser {
 			}
 		}
 		return null;
-	}
-	private int Parse_shape_num(byte shape_tid, byte b, int pos, int num_bgn, int num_end, int itm_end, int comma_pos_0) {
-		double num = 0;
-		boolean shape_is_poly = shape_tid == Imap_itm_.Tid_shape_poly;
-		if (num_bgn == -1) {								// 1st char is non-numeric; EX: "poly a"
-			if (	shape_is_poly							// poly code in ImageMap_body.php accepts invalid words and converts to 0; EX:"poly1"; PAGE:uk.w:Стратосфера; DATE:2014-07-26
-				&&	b != Byte_ascii.Brack_bgn				// skip logic if "[" which may be beginning of lnki / lnke
-				) {
-				num_end = Bry_finder.Find_fwd_until_space_or_tab(src, pos, itm_end);	// gobble up rest of word and search forward for space / tab to 
-				if (num_end == Bry_finder.Not_found) return -1;							// space / tab not found; return -1 (fail)
-				num = 0;
-			}
-			else
-				return num_end;
-		}
-		else {
-			int parse_end = comma_pos_0 == -1 ? num_end : comma_pos_0;	// if commas exist, treat first as decimal; echo(intval(round('1,2,3,4' * 1))) -> 1; PAGE:fr.w:Gouesnou; DATE:2014-08-12
-			num = Bry_.XtoDoubleByPosOr(src, num_bgn, parse_end, Double_.NaN);
-		}
-		if (Double_.IsNaN(num)) { 
-			if (shape_is_poly)								// poly code in ImageMap_body.php accepts invalid words and converts to 0; EX:"poly 1a"
-				num = 0;
-			else
-				return -1;	// invalid number; EX: "1.2.3"
-		}
-		pts.Add(Double_obj_val.new_(num));
-		return Bry_finder.Trim_fwd_space_tab(src, num_end, itm_end);
 	}
 	private int Parse_img(Imap_map imap, int itm_bgn, int itm_end, int src_end) {
 		int img_bgn = Bry_finder.Trim_fwd_space_tab(src, itm_bgn, itm_end);	// trim ws

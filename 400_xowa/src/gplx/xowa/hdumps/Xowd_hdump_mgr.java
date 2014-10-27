@@ -30,10 +30,19 @@ public class Xowd_hdump_mgr {
 	public void Load(Hdump_page rv, byte[] ttl_bry) {
 		Xoa_ttl ttl = wiki.Ttl_parse(ttl_bry);
 		wiki_db_mgr.Tbl_mgr().Tbl__page().Select_by_ttl(dbpg, app.Db_mgr().Get(wiki_db_mgr.Key__core()), ttl.Ns(), ttl.Page_db());
+		if (dbpg.Redirect_id() != -1) Select_by_id(rv, dbpg);
 		if (dbpg.Html_db_id() == -1) return;	// should return "not found" message
 		load_mgr.Load2(rv, app.Db_mgr().Get(wiki_db_mgr.Key_by_idx(dbpg.Html_db_id())), dbpg.Id(), ttl);
 		Bry_bfr bfr = app.Utl_bfr_mkr().Get_m001();
 		html_body.Init_by_page(wiki.Domain_bry(), rv).Write(bfr);
 		rv.Page_body_(bfr.Mkr_rls().Xto_bry_and_clear());
+	}
+	private void Select_by_id(Hdump_page hpg, Xodb_page dbpg) {
+		int redirect_count = 0;
+		while (redirect_count < 5) {
+			int redirect_id = dbpg.Redirect_id();
+			wiki_db_mgr.Tbl_mgr().Tbl__page().Select_by_id(dbpg, app.Db_mgr().Get(wiki_db_mgr.Key__core()), redirect_id);
+			if (redirect_id == -1) break;
+		}
 	}
 }

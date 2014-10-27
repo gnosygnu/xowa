@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import org.junit.*;
 public class Xow_lang_mgr_tst {
-	Xow_lang_mgr_fxt fxt = new Xow_lang_mgr_fxt();
+	private Xow_lang_mgr_fxt fxt = new Xow_lang_mgr_fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test  public void Basic() {
 		fxt.tst("[[simple:Earth]] [[fr:Terre]] [[es:Tierra]] [[de:Erde]] [[it:Terre]]", String_.Concat_lines_nl_skip_last
@@ -28,16 +28,16 @@ public class Xow_lang_mgr_tst {
 		, "  <h4>grp1</h4>"
 		, "  <table style='width: 100%;'>"
 		, "    <tr>"
-		, "      <td style='width: 10%; padding-bottom: 5px;'>Simple</td><td style='width: 20%; padding-bottom: 5px;'><a hreflang=\"simple\" title=\"Earth\" href=\"/site/simple.wikipedia.org/wiki/Earth\">Earth</a></td><td style='width: 3%; padding-bottom: 5px;'></td>"
-		, "      <td style='width: 10%; padding-bottom: 5px;'>Spanish</td><td style='width: 20%; padding-bottom: 5px;'><a hreflang=\"es\" title=\"Tierra\" href=\"/site/es.wikipedia.org/wiki/Tierra\">Tierra</a></td><td style='width: 3%; padding-bottom: 5px;'></td>"
-		, "      <td style='width: 10%; padding-bottom: 5px;'>Italian</td><td style='width: 20%; padding-bottom: 5px;'><a hreflang=\"it\" title=\"Terre\" href=\"/site/it.wikipedia.org/wiki/Terre\">Terre</a></td><td style='width: 3%; padding-bottom: 5px;'></td>"
+		, "      <td style='width: 10%; padding-bottom: 5px;'>Simple</td><td style='width: 20%; padding-bottom: 5px;'><li class='badge-none'><a hreflang=\"simple\" title=\"Earth\" href=\"/site/simple.wikipedia.org/wiki/Earth\">Earth</a></li></td><td style='width: 3%; padding-bottom: 5px;'></td>"
+		, "      <td style='width: 10%; padding-bottom: 5px;'>Spanish</td><td style='width: 20%; padding-bottom: 5px;'><li class='badge-none'><a hreflang=\"es\" title=\"Tierra\" href=\"/site/es.wikipedia.org/wiki/Tierra\">Tierra</a></li></td><td style='width: 3%; padding-bottom: 5px;'></td>"
+		, "      <td style='width: 10%; padding-bottom: 5px;'>Italian</td><td style='width: 20%; padding-bottom: 5px;'><li class='badge-none'><a hreflang=\"it\" title=\"Terre\" href=\"/site/it.wikipedia.org/wiki/Terre\">Terre</a></li></td><td style='width: 3%; padding-bottom: 5px;'></td>"
 		, "    </tr>"
 		, "  </table>"
 		, "  <h4>grp2</h4>"
 		, "  <table style='width: 100%;'>"
 		, "    <tr>"
-		, "      <td style='width: 10%; padding-bottom: 5px;'>French</td><td style='width: 20%; padding-bottom: 5px;'><a hreflang=\"fr\" title=\"Terre\" href=\"/site/fr.wikipedia.org/wiki/Terre\">Terre</a></td><td style='width: 3%; padding-bottom: 5px;'></td>"
-		, "      <td style='width: 10%; padding-bottom: 5px;'>German</td><td style='width: 20%; padding-bottom: 5px;'><a hreflang=\"de\" title=\"Erde\" href=\"/site/de.wikipedia.org/wiki/Erde\">Erde</a></td><td style='width: 3%; padding-bottom: 5px;'></td>"
+		, "      <td style='width: 10%; padding-bottom: 5px;'>French</td><td style='width: 20%; padding-bottom: 5px;'><li class='badge-none'><a hreflang=\"fr\" title=\"Terre\" href=\"/site/fr.wikipedia.org/wiki/Terre\">Terre</a></li></td><td style='width: 3%; padding-bottom: 5px;'></td>"
+		, "      <td style='width: 10%; padding-bottom: 5px;'>German</td><td style='width: 20%; padding-bottom: 5px;'><li class='badge-none'><a hreflang=\"de\" title=\"Erde\" href=\"/site/de.wikipedia.org/wiki/Erde\">Erde</a></li></td><td style='width: 3%; padding-bottom: 5px;'></td>"
 		, "    </tr>"
 		, "  </table>"
 		, "  </div>"
@@ -52,7 +52,7 @@ public class Xow_lang_mgr_tst {
 		, "  <h4>grp1</h4>"
 		, "  <table style='width: 100%;'>"
 		, "    <tr>"
-		, "      <td style='width: 10%; padding-bottom: 5px;'>Simple</td><td style='width: 20%; padding-bottom: 5px;'><a hreflang=\"simple\" title=\"Test page\" href=\"/site/simple.wikipedia.org/wiki/\">Test page</a></td><td style='width: 3%; padding-bottom: 5px;'></td>"
+		, "      <td style='width: 10%; padding-bottom: 5px;'>Simple</td><td style='width: 20%; padding-bottom: 5px;'><li class='badge-none'><a hreflang=\"simple\" title=\"Test page\" href=\"/site/simple.wikipedia.org/wiki/\">Test page</a></li></td><td style='width: 3%; padding-bottom: 5px;'></td>"
 		, "    </tr>"
 		, "  </table>"
 		, "  </div>"
@@ -68,7 +68,7 @@ public class Xow_lang_mgr_tst {
 		, "  <h4>grp1</h4>"
 		, "  <table style='width: 100%;'>"
 		, "    <tr>"
-		, "      <td style='width: 10%; padding-bottom: 5px;'>Chinese</td><td style='width: 20%; padding-bottom: 5px;'><a hreflang=\"zh\" title=\"Earth\" href=\"http://zh.wikipedia.org/wiki/Earth\">Earth</a></td><td style='width: 3%; padding-bottom: 5px;'></td>"
+		, "      <td style='width: 10%; padding-bottom: 5px;'>Chinese</td><td style='width: 20%; padding-bottom: 5px;'><li class='badge-none'><a hreflang=\"zh\" title=\"Earth\" href=\"http://zh.wikipedia.org/wiki/Earth\">Earth</a></li></td><td style='width: 3%; padding-bottom: 5px;'></td>"
 		, "    </tr>"
 		, "  </table>"
 		, "  </div>"
@@ -83,7 +83,7 @@ public class Xow_lang_mgr_tst {
 		, "  <h4>grp1</h4>"
 		, "  <table style='width: 100%;'>"
 		, "    <tr>"
-		, "      <td style='width: 10%; padding-bottom: 5px;'>Simple</td><td style='width: 20%; padding-bottom: 5px;'><a hreflang=\"simple\" title=\"A#b\" href=\"/site/simple.wikipedia.org/wiki/A#b\">A#b</a></td><td style='width: 3%; padding-bottom: 5px;'></td>"
+		, "      <td style='width: 10%; padding-bottom: 5px;'>Simple</td><td style='width: 20%; padding-bottom: 5px;'><li class='badge-none'><a hreflang=\"simple\" title=\"A#b\" href=\"/site/simple.wikipedia.org/wiki/A#b\">A#b</a></li></td><td style='width: 3%; padding-bottom: 5px;'></td>"
 		, "    </tr>"
 		, "  </table>"
 		, "  </div>"

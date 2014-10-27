@@ -32,13 +32,13 @@ public class Xow_lang_grp implements GfoInvkAble {
 		Xow_lang_itm[] itms_ary = this.Itms();
 		int itms_len = itms_ary.length;
 		for (int i = 0; i < itms_len; i++)
-			itms_ary[i].Atrs_set(null, false);	// clear out pre-existing page names; needed b/c this struct is a singleton for entire wiki
+			itms_ary[i].Atrs_set(null, false, null);	// clear out pre-existing page names; needed b/c this struct is a singleton for entire wiki
 		itms_active_len = 0;
 	}
 	public Bry_fmtr Html_all() {return html_all;} Bry_fmtr html_all; public Xow_lang_grp Html_all_(String s) {html_all = Bry_fmtr.new_(s, "all_name", "grps"); return this;}
 	public byte[] Html_grp_bgn() {return html_grp_bgn;} private byte[] html_grp_bgn = Bry_.new_ascii_("\n    <tr>");
 	public byte[] Html_grp_end() {return html_grp_end;} private byte[] html_grp_end = Bry_.new_ascii_("\n    </tr>");
-	public Bry_fmtr Html_itm() {return html_itm;} Bry_fmtr html_itm; public Xow_lang_grp Html_itm_(String s) {html_itm = Bry_fmtr.new_(s, "lang_code", "lang_domain", "lang_name", "lang_href", "pagename_translation"); return this;}
+	public Bry_fmtr Html_itm() {return html_itm;} Bry_fmtr html_itm; public Xow_lang_grp Html_itm_(String s) {html_itm = Bry_fmtr.new_(s, "lang_code", "lang_domain", "lang_name", "lang_href", "pagename_translation", "page_badge"); return this;}
 	public void Html_bld(Bry_bfr bfr, Xow_wiki wiki) {
 		Xow_lang_itm[] itms_ary = this.Itms();
 		if (sort_mode == Xow_lang_grp.Sort_mode_page_name)
@@ -62,15 +62,15 @@ public class Xow_lang_grp implements GfoInvkAble {
 		Xow_lang_grp rv = new Xow_lang_grp();
 		rv.lang_mgr = lang_mgr; rv.id = id; rv.key = key; rv.name = key;
 		rv.Html_all_(String_.Concat_lines_nl_skip_last
-			(	""
-			,	"  <h4>~{all_name}</h4>"
-			,	"  <table style='width: 100%;'>~{grps}"
-			,	"  </table>"
-			));
+		( ""
+		, "  <h4>~{all_name}</h4>"
+		, "  <table style='width: 100%;'>~{grps}"
+		, "  </table>"
+		));
 		rv.Html_itm_(String_.Concat_lines_nl_skip_last
-			(	""
-			,	"      <td style='width: 10%; padding-bottom: 5px;'>~{lang_name}</td><td style='width: 20%; padding-bottom: 5px;'><a hreflang=\"~{lang_code}\" title=\"~{pagename_translation}\" href=\"~{lang_href}\">~{pagename_translation}</a></td><td style='width: 3%; padding-bottom: 5px;'></td>"
-			));
+		( ""
+		, "      <td style='width: 10%; padding-bottom: 5px;'>~{lang_name}</td><td style='width: 20%; padding-bottom: 5px;'><li~{page_badge}><a hreflang=\"~{lang_code}\" title=\"~{pagename_translation}\" href=\"~{lang_href}\">~{pagename_translation}</a></li></td><td style='width: 3%; padding-bottom: 5px;'></td>"
+		));
 		return rv;
 	}	private Xow_lang_grp() {}
 	Xow_lang_mgr lang_mgr;

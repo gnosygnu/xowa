@@ -26,7 +26,7 @@ public class Xop_lnki_logger_redlinks_mgr {
 	public ListAdp Lnki_list() {return lnki_list;} private ListAdp lnki_list = ListAdp_.new_();
 	public boolean Log_enabled() {return log_enabled;} private boolean log_enabled = false;
 	public Gfo_usr_dlg Usr_dlg() {return usr_dlg;} private Gfo_usr_dlg usr_dlg = null;
-	public void Page_bgn() {
+	public void Clear() {
 		request_idx++;
 		Xoa_app app = page.App();
 		log_enabled = app.User().Cfg_mgr().Log_mgr().Log_redlinks();

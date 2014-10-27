@@ -37,7 +37,7 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 				case Xopg_view_mode.Tid_edit:	fmtr = mgr.Page_edit_fmtr(); break;
 				case Xopg_view_mode.Tid_html:	fmtr = mgr.Page_read_fmtr(); view_mode = Xopg_view_mode.Tid_read; break; // set view_mode to read, so that "read" is highlighted in HTML
 				case Xopg_view_mode.Tid_read:	fmtr = mgr.Page_read_fmtr(); 
-					ctx.Cur_page().Lnki_redlinks_mgr().Page_bgn();	// not sure if this is the best place to put it, but redlinks (a) must only fire once; (b) must fire before html generation; (c) cannot fire during edit (preview will handle separately)
+					ctx.Cur_page().Lnki_redlinks_mgr().Clear();	// not sure if this is the best place to put it, but redlinks (a) must only fire once; (b) must fire before html generation; (c) cannot fire during edit (preview will handle separately)
 					break;
 			}
 			Write_page(html_bfr, app, wiki, mgr, page, view_mode, fmtr, this);

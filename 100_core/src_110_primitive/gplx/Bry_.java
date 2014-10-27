@@ -698,6 +698,7 @@ public class Bry_ {
 	}
 	public static float XtoFloatByPos(byte[] ary, int bgn, int end) {return Float_.parse_(String_.new_utf8_(ary, bgn, end));}
 	public static double Xto_double(byte[] bry) {return Double_.parse_(String_.new_utf8_(bry, 0, bry.length));}
+	public static double Xto_double_or(byte[] bry, double or) {return Double_.parseOr_(String_.new_utf8_(bry, 0, bry.length), or);}
 	public static double XtoDoubleByPosOr(byte[] ary, int bgn, int end, double or) {return Double_.parseOr_(String_.new_utf8_(ary, bgn, end), or);}
 	public static double XtoDoubleByPos(byte[] ary, int bgn, int end) {return Double_.parse_(String_.new_utf8_(ary, bgn, end));}
 	public static DecimalAdp XtoDecimalByPos(byte[] ary, int bgn, int end) {return DecimalAdp_.parse_(String_.new_utf8_(ary, bgn, end));}

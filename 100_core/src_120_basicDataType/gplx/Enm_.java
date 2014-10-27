@@ -24,5 +24,7 @@ public class Enm_ {
 		boolean has = find == (val & find);
 		return (has ^ enable) ? val ^ find : val;
 	}
+	public static boolean Has_byte(byte val, byte find)	{return find == (val & find);}
+	public static byte Add_byte(byte flag, byte itm)	{return (byte)(flag | itm);}
 	static int Ordinal_lang(Object v) {return ((Enum)v).ordinal();}	
 }

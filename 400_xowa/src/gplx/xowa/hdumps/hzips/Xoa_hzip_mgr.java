@@ -1,0 +1,93 @@
+/*
+XOWA: the XOWA Offline Wiki Application
+Copyright (C) 2012 gnosygnu@gmail.com
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+package gplx.xowa.hdumps.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
+import gplx.core.btries.*;
+public class Xoa_hzip_mgr {		
+	private Gfo_usr_dlg usr_dlg;
+	private byte[] page_url; private byte[] src; private int src_len;
+	public Xoa_hzip_mgr(Gfo_usr_dlg usr_dlg, Xow_wiki wiki) {
+		this.usr_dlg = usr_dlg;
+		itm__lnki = new Xoa_hzip_itm__lnki(this, wiki);
+	}
+	public Xoa_hzip_itm__lnki Itm__lnki() {return itm__lnki;} private Xoa_hzip_itm__lnki itm__lnki;
+	public void Save(Bry_bfr bfr, byte[] page_url, byte[] src) {
+		this.page_url = page_url; this.src = src;
+		this.src_len = src.length;			
+		int pos = 0, add_bgn = -1;
+		bfr.Clear();
+		while (pos < src_len) {
+			byte b = src[pos];
+			Object o = save_trie.Match_bgn_w_byte(b, src, pos, src_len);
+			if (o == null) {
+				if (add_bgn == -1) add_bgn = pos;
+				++pos;
+			}
+			else {
+				if (add_bgn != -1) {bfr.Add_mid(src, add_bgn, pos); add_bgn = -1;}
+				byte tid = ((Byte_obj_val)o).Val();
+				int match_bgn = pos;
+				int match_end = save_trie.Match_pos();
+				switch (tid) {
+					case Tid_a: pos = itm__lnki.Save(bfr, src, src_len, match_bgn, match_end); break;
+					default:	Warn_by_pos("save.tid.unknown", match_bgn, match_end); pos = match_end; continue;
+				}
+				if (pos == Unhandled) {
+					bfr.Add_mid(src, match_bgn, match_end);
+					pos = match_end;
+				}
+			}
+		}
+		if (add_bgn != -1) bfr.Add_mid(src, add_bgn, src_len);
+	}
+	public void Load(Bry_bfr bfr, byte[] page_url, byte[] src) {
+		this.page_url = page_url; this.src = src;
+		this.src_len = src.length;			
+		int pos = 0, add_bgn = -1;
+		bfr.Clear();
+		while (pos < src_len) {
+			byte b = src[pos];
+			if (b == Xoa_hzip_dict.Escape) {
+				if (add_bgn != -1) {bfr.Add_mid(src, add_bgn, pos); add_bgn = -1;}
+				int itm_pos = pos + 2;		if (itm_pos >= src_len) {Warn_by_pos("load.eos", pos, itm_pos); break;}
+				int tid_pos = pos + 1;
+				byte tid = src[tid_pos];
+				switch (tid) {
+					case Xoa_hzip_dict.Tid_lnki_ttl	:
+					case Xoa_hzip_dict.Tid_lnki_capt: pos = itm__lnki.Load_ttl(bfr, src, src_len, itm_pos, tid); break;
+				}
+			}
+			else {
+				if (add_bgn == -1) add_bgn = pos;
+				++pos;
+			}
+		}
+		if (add_bgn != -1) bfr.Add_mid(src, add_bgn, src_len);
+	}
+	public int Warn_by_pos_add_dflt(String err, int bgn, int end)	{return Warn_by_pos(err, bgn, end, 32);}
+	public int Warn_by_pos(String err, int bgn, int end)			{return Warn_by_pos(err, bgn, end, 0);}
+	private int Warn_by_pos(String err, int bgn, int end, int end_adj) {
+		end += end_adj; if (end > src_len) end = src_len;
+		usr_dlg.Warn_many("", "", "hzip failed: page=~{0} err=~{1} mid=~{2}", String_.new_utf8_(page_url), err, String_.new_utf8_(src, bgn, end));
+		return bgn;
+	}
+	public static final int Unhandled = -1;
+	private static final byte Tid_a = 0;
+	private Btrie_slim_mgr save_trie = Btrie_slim_mgr.cs_()
+	.Add_str_byte("<a ", Tid_a)
+	;
+}

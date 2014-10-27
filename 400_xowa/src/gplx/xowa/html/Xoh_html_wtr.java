@@ -42,7 +42,7 @@ public class Xoh_html_wtr {
 	public void Write_all(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_root_tkn root) {			
 		try {
 			indent_level = 0; this.page = ctx.Cur_page();
-			page.Xwiki_langs().Clear();	// HACK: always clear langs; necessary for reload
+			page.Slink_list().Clear();	// HACK: always clear langs; necessary for reload
 			lnki_wtr.Init_by_page(ctx, hctx, src, ctx.Cur_page());				
 			Write_tkn(bfr, ctx, hctx, src, null, -1, root);
 		}
@@ -106,7 +106,7 @@ public class Xoh_html_wtr {
 	@gplx.Virtual public void Hdr(Xop_ctx ctx, Xoh_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Xop_hdr_tkn hdr) {
 //			page.Hdrs_id_bld(hdr, src);
 		if (hdr.Hdr_html_first() && cfg.Toc_show() && !page.Hdr_mgr().Toc_manual()) {	// __TOC__ not specified; place at top; NOTE: if __TOC__ was specified, then it would be placed wherever __TOC__ appears
-			wiki.Html_mgr().Toc_mgr().Html(ctx.Cur_page(), src, bfr);
+			wiki.Html_mgr().Toc_mgr().Html(ctx.Cur_page(), hctx, src, bfr);
 		}
 		int hdr_len = hdr.Hdr_len();
 		if (hdr_len > 0) {	// NOTE: need to check hdr_len b/c it could be dangling
@@ -289,7 +289,7 @@ public class Xoh_html_wtr {
 		if (hctx.Mode_is_alt()) return;
 		switch (under.Under_tid()) {
 			case Xol_kwd_grp_.Id_toc:
-				wiki.Html_mgr().Toc_mgr().Html(page, src, bfr);
+				wiki.Html_mgr().Toc_mgr().Html(page, hctx, src, bfr);
 				break;
 			case Xol_kwd_grp_.Id_notoc:	case Xol_kwd_grp_.Id_forcetoc:	// NOTE: skip output; changes flag on page only
 				break;

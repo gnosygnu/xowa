@@ -93,6 +93,8 @@ class Swt_lnr_key implements KeyListener {
 			case 16777235:	val = IptKey_.F10.Val(); break;
 			case 16777236:	val = IptKey_.F11.Val(); break;
 			case 16777237:	val = IptKey_.F12.Val(); break;
+			case 16777259:  val = IptKey_.Equal.Val(); break;
+			case 16777261:  val = IptKey_.Minus.Val(); break;
 			case 16777300:	val = IptKey_.ScrollLock.Val(); break;
 			case 16777301:	val = IptKey_.Pause.Val(); break;
 			case 327680: 	val = IptKey_.Insert.Val(); break;

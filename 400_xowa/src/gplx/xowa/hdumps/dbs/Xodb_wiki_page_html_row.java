@@ -16,6 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
-public class Hdump_text_row_tid {	// NOTE: SERIALIZED
-	public static final int Tid_body = 0, Tid_data = 1;
+public class Xodb_wiki_page_html_row {
+	public Xodb_wiki_page_html_row(int page_id, int tid, byte[] data) {this.page_id = page_id; this.tid = tid; this.data = data;}
+	public int		Page_id()	{return page_id;} private final int page_id;
+	public int		Tid()		{return tid;} private final int tid;
+	public byte[]	Data()		{return data;} private final byte[] data;
+	public static final int Tid_page = 0, Tid_data = 1;	// SERIALIZED
 }

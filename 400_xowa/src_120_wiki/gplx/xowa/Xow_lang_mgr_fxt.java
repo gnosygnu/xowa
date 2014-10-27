@@ -59,7 +59,7 @@ public class Xow_lang_mgr_fxt {
 		wiki.Html_mgr().Html_wtr().Write_all(bfr, ctx, raw_bry, root);
 
 		Bry_bfr html_bfr = Bry_bfr.new_();
-		wiki.Xwiki_mgr().Lang_mgr().Html_bld(html_bfr, wiki, ctx.Cur_page().Xwiki_langs(), gplx.xowa.xtns.wdatas.Wdata_xwiki_link_wtr.Qid_null);
+		wiki.Xwiki_mgr().Lang_mgr().Html_bld(html_bfr, wiki, ctx.Cur_page().Slink_list(), gplx.xowa.xtns.wdatas.Wdata_xwiki_link_wtr.Qid_null);
 	    Tfds.Eq_str_lines(expd, html_bfr.Xto_str_and_clear());
 	}
 }

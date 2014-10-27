@@ -43,10 +43,10 @@ public class Poem_nde implements Xox_xnde {
 			boolean indent_enabled = false;
 			if (line_is_1st)	line_is_1st = false;
 			else {
-				if (Bry_.Match(src, line_bgn, line_bgn + Comment_marker.length, Comment_marker))
+				if (Bry_.Match(src, line_bgn, line_bgn + Xowa_br_mark.length, Xowa_br_mark))					// "<br/>\n" already inserted by XOWA; do not insert again; DATE:2014-10-20
 					bfr.Add_byte_nl();
 				else
-					bfr.Add(Html_tag_.Br_inl).Add_byte_nl().Add(Comment_marker);										// add "<br/>\n" unless 1st line; EX: "<poem>\n\s" should not add leading "<br/>\n"
+					bfr.Add(Html_tag_.Br_inl).Add_byte_nl().Add(Xowa_br_mark);									// add "<br/>\n" unless 1st line; EX: "<poem>\n\s" should not add leading "<br/>\n"
 			}
 			switch (src[line_bgn]) {
 				case Byte_ascii.Space:																			// "\n\s" -> "\n&#160;"
@@ -78,6 +78,6 @@ public class Poem_nde implements Xox_xnde {
 	, Div_poem_end = Bry_.new_ascii_("\n</p>\n</div>")
 	, Indent_bgn = Bry_.new_ascii_("\n<span class='mw-poem-indented' style='display: inline-block; margin-left: ")
 	, Indent_end = Bry_.new_ascii_("em;'>")
-	, Comment_marker = Bry_.new_ascii_("<!--xowa-->")
+	, Xowa_br_mark = Bry_.new_ascii_("<!--xowa.br-->")
 	;
 }

@@ -103,9 +103,9 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		}
 		if (tag_obj == null) {	// not a known xml tag; EX: "<abcd>"; "if 5 < 7 then"
 			if (ctx.Parse_tid() == Xop_parser_.Parse_tid_page_wiki) {
-				if (ctx_cur_tid_is_tblw_atr_owner)			// <unknown_tag is occurring inside tblw element (EX: {| style='margin:1em<f'); just add to txt tkn
+				if (ctx_cur_tid_is_tblw_atr_owner)			// unknown_tag is occurring inside tblw element (EX: {| style='margin:1em<f'); just add to txt tkn
 					return ctx.Lxr_make_txt_(cur_pos);
-				else {										// <unknown_tag is occurring anyhwere else; escape < to &lt; and resume from character just after it;
+				else {										// unknown_tag is occurring anyhwere else; escape < to &lt; and resume from character just after it;
 					ctx.Subs_add(root, Make_bry_tkn(tkn_mkr, src, bgn_pos, cur_pos));
 					return cur_pos;
 				}
@@ -218,9 +218,9 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 	private static Xop_tkn_itm Make_bry_tkn(Xop_tkn_mkr tkn_mkr, byte[] src, int bgn_pos, int cur_pos) {
 		int len = cur_pos - bgn_pos;
 		byte[] bry = null;
-		if		(len == 1	&& src[cur_pos]		== Byte_ascii.Lt)		bry = Html_entity_.Lt_bry;
-		else if	(len == 2	&& src[cur_pos]		== Byte_ascii.Lt
-							&& src[cur_pos + 1]	== Byte_ascii.Slash)	bry = Bry_escape_lt_slash;
+		if		(len == 1	&& src[bgn_pos]		== Byte_ascii.Lt)		bry = Html_entity_.Lt_bry;
+		else if	(len == 2	&& src[bgn_pos]		== Byte_ascii.Lt
+							&& src[bgn_pos + 1]	== Byte_ascii.Slash)	bry = Bry_escape_lt_slash;	// NOTE: should use bgn_pos, not cur_pos; DATE:2014-10-22
 		else															bry = Bry_.Add(Html_entity_.Lt_bry, Bry_.Mid(src, bgn_pos + 1, cur_pos));	// +1 to skip <
 		return tkn_mkr.Bry_raw(bgn_pos, cur_pos, bry);
 	}

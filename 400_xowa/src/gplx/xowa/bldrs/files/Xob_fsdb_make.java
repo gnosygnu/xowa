@@ -22,7 +22,7 @@ public class Xob_fsdb_make extends Xob_itm_basic_base implements Xob_cmd {
 	private int select_interval = 2500, progress_interval = 1, commit_interval = 1, delete_interval = 5000;
 	private int exec_count, exec_count_max = Int_.MaxValue;
 	private int exec_fail, exec_fail_max = 2000; // 115 over 900k
-	private boolean exec_done;
+	private boolean exec_done, resume_enabled = false;
 	private int page_id_bmk = -1, lnki_id_bmk = -1;
 	private int page_id_val = -1, lnki_id_val = -1;
 	private int page_id_end = Int_.MaxValue;
@@ -128,6 +128,10 @@ public class Xob_fsdb_make extends Xob_itm_basic_base implements Xob_cmd {
 		db_select_stmt = Xob_xfer_regy_tbl.Select_by_page_id_stmt(provider);
 	}
 	private boolean Init_bmk(Xodb_xowa_cfg_tbl tbl_cfg) {
+		if (!resume_enabled) {	// clear cfg entries if resume disabled; note that disabled by default; DATE:2014-10-24
+			tbl_cfg.Delete(Cfg_fsdb_make, Cfg_page_id_bmk);
+			tbl_cfg.Delete(Cfg_fsdb_make, Cfg_lnki_id_bmk);
+		}
 		String page_id_str = tbl_cfg.Select_val(Cfg_fsdb_make, Cfg_page_id_bmk);
 		if (page_id_str == null) {	// bmks not found; new db; insert;
 			tbl_cfg.Insert_str(Cfg_fsdb_make, Cfg_page_id_bmk	, Int_.Xto_str(page_id_bmk));
@@ -286,6 +290,7 @@ public class Xob_fsdb_make extends Xob_itm_basic_base implements Xob_cmd {
 		else if	(ctx.Match(k, Invk_app_restart_enabled_))	app_restart_enabled = m.ReadBool("v");
 		else if	(ctx.Match(k, Invk_db_restart_tries_max_))	db_reset_tries_max = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk_trg_fsdb_mgr))			return trg_fsdb_mgr;
+		else if	(ctx.Match(k, Invk_resume_enabled_))		resume_enabled = m.ReadYn("v");
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}
@@ -298,7 +303,8 @@ public class Xob_fsdb_make extends Xob_itm_basic_base implements Xob_cmd {
 	, Invk_delete_interval_ = "delete_interval_"
 	, Invk_app_restart_enabled_ = "app_restart_enabled_"
 	, Invk_db_restart_tries_max_ = "db_restart_tries_max_"		
-	, Invk_trg_fsdb_mgr = "trg_fsdb_mgr"	
+	, Invk_trg_fsdb_mgr = "trg_fsdb_mgr"
+	, Invk_resume_enabled_ = "resume_enabled_"
 	;
 	public static byte Status_null = 0, Status_pass = 1, Status_fail = 2;
 }

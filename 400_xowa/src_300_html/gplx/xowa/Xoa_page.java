@@ -32,7 +32,7 @@ public class Xoa_page {
 	public Xoa_app				App() {return app;} private Xoa_app app;
 	public Xow_wiki				Wiki() {return wiki;} private Xow_wiki wiki;
 	public Xol_lang				Lang() {return lang;} public Xoa_page Lang_(Xol_lang v) {lang = v; return this;} private Xol_lang lang;
-	public Xoa_revision_data	Revision_data() {return revision_data;} private Xoa_revision_data revision_data = new Xoa_revision_data();
+	public Xopg_revision_data	Revision_data() {return rev_data;} private Xopg_revision_data rev_data = new Xopg_revision_data();
 	public Xopg_html_data		Html_data() {return html_data;} private Xopg_html_data html_data = new Xopg_html_data();
 	public Xoa_ttl				Ttl() {return ttl;} public Xoa_page Ttl_(Xoa_ttl v) {ttl = v; url.Wiki_bry_(wiki.Domain_bry()).Page_bry_(v.Full_url()); return this;} private Xoa_ttl ttl;
 	public Xoa_url				Url() {return url;} public Xoa_page Url_(Xoa_url v) {url = v; return this;} private Xoa_url url = Xoa_url.blank_();
@@ -56,7 +56,7 @@ public class Xoa_page {
 	public Xop_lnki_logger_redlinks_mgr Lnki_redlinks_mgr() {return lnki_redlinks_mgr;} private Xop_lnki_logger_redlinks_mgr lnki_redlinks_mgr;
 	public Ref_itm_mgr			Ref_mgr() {return ref_mgr;} private Ref_itm_mgr ref_mgr = new Ref_itm_mgr();
 	public Xopg_popup_mgr		Popup_mgr() {return popup_mgr;} private Xopg_popup_mgr popup_mgr = new Xopg_popup_mgr();
-	public ListAdp				Xwiki_langs() {return xwiki_langs;} private ListAdp xwiki_langs = ListAdp_.new_();
+	public ListAdp				Slink_list() {return slink_list;} private ListAdp slink_list = ListAdp_.new_();
 	public Wdata_external_lang_links_data Wdata_external_lang_links() {return wdata_external_lang_links;} private Wdata_external_lang_links_data wdata_external_lang_links = new Wdata_external_lang_links_data();
 	public boolean					Pages_recursed() {return pages_recursed;} public void Pages_recursed_(boolean v) {pages_recursed = v; } private boolean pages_recursed;
 	public Xopg_tmpl_prepend_mgr Tmpl_prepend_mgr() {return tmpl_prepend_mgr;} private Xopg_tmpl_prepend_mgr tmpl_prepend_mgr = new Xopg_tmpl_prepend_mgr();
@@ -84,14 +84,14 @@ public class Xoa_page {
 		hdump_data.Clear();
 		wdata_external_lang_links.Reset();
 		gplx.xowa.xtns.scribunto.Scrib_core.Core_page_changed(this);
-		xwiki_langs.Clear();
+		slink_list.Clear();
 		html_data.Clear();
 		lnki_file_mgr.Clear();
 		pages_recursed = false;
 		tmpl_stack_ary = Bry_.Ary_empty;
 		tmpl_stack_ary_len = tmpl_stack_ary_max = 0;
 		popup_mgr.Clear();
-		revision_data.Clear();
+		rev_data.Clear();
 		tmpl_prepend_mgr.Clear();
 	}
 	public static final Xoa_page Empty = new Xoa_page().Missing_();

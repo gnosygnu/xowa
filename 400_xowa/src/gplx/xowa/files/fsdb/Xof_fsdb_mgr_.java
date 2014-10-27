@@ -27,7 +27,7 @@ public class Xof_fsdb_mgr_ {
 		for (int i = 0; i < itms_len; i++) {
 			if (usr_dlg.Canceled()) return;
 			Xof_fsdb_itm itm = (Xof_fsdb_itm)itms.FetchAt(i);
-			Itm_process(fsdb_mgr, file_dir, usr_dlg, itm, fsdb_list, repo_mgr, url_bldr, exec_tid);
+			Itm_process(fsdb_mgr, page, file_dir, usr_dlg, itm, fsdb_list, repo_mgr, url_bldr, exec_tid);
 		}
 		itms_len = fsdb_list.Count(); if (itms_len == 0) return;	// all items found; return;
 		Reg_search(fsdb_mgr, file_dir, usr_dlg, page, exec_tid, fsdb_list, itms_len, repo_mgr);
@@ -89,11 +89,11 @@ public class Xof_fsdb_mgr_ {
 					);
 	}
 	private Xof_img_size img_size = new Xof_img_size();
-	private void Itm_process(Xof_fsdb_mgr fsdb_mgr, Io_url file_dir, Gfo_usr_dlg usr_dlg, Xof_fsdb_itm itm, ListAdp fsdb_list, Xow_repo_mgr repo_mgr, Xof_url_bldr url_bldr, byte exec_tid) {
+	private void Itm_process(Xof_fsdb_mgr fsdb_mgr, Xoa_page page, Io_url file_dir, Gfo_usr_dlg usr_dlg, Xof_fsdb_itm itm, ListAdp fsdb_list, Xow_repo_mgr repo_mgr, Xof_url_bldr url_bldr, byte exec_tid) {
 		switch (itm.Rslt_reg()) {
 			case Xof_wiki_orig_wkr_.Tid_found_orig:
 				itm.Html__init(repo_mgr, url_bldr, img_size, exec_tid);
-				//	Js_img_mgr.Update_img(usr_dlg, itm);		// DELETE: DATE:2014-02-01
+				Js_img_mgr.Update_img(page, itm);			// NOTE: needed when opening 2+ tabs and missing image is on 2+ pages; 2nd page will have img as Xof_wiki_orig_wkr_.Tid_found_orig; DATE:2014-10-20
 				if (!Env_.Mode_testing()) {
 					Cache_fil_itm cache_fil_itm = fsdb_mgr.Cache_mgr().Reg(fsdb_mgr.Wiki(), itm, 0);
 					if (cache_fil_itm.Fil_size() == 0) {

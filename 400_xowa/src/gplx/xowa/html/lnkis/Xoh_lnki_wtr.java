@@ -17,14 +17,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import gplx.html.*; import gplx.xowa.files.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.users.history.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.xtns.relatedSites.*;
-import gplx.xowa.wikis.xwikis.*;
+import gplx.xowa.wikis.xwikis.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.hdumps.hzips.*;
 public class Xoh_lnki_wtr {
 	private Xoa_app app; private Xow_wiki wiki; private Xoa_page page; private Xop_ctx ctx;
 	private Xoh_html_wtr_cfg cfg;
-	private Xou_history_mgr history_mgr;		
+	private Xou_history_mgr history_mgr;
 	private Xop_lnki_caption_wtr_tkn caption_tkn_wtr;
 	private Xop_lnki_caption_wtr_bry caption_bry_wtr;
 	private Xop_lnki_logger_redlinks_mgr redlinks_mgr;
+	private Xoa_hzip_mgr hzip_mgr;
 	public Xoh_lnki_wtr(Xoh_html_wtr html_wtr, Xow_wiki wiki, Xow_html_mgr html_mgr, Xoh_html_wtr_cfg cfg) {
 		caption_tkn_wtr = new Xop_lnki_caption_wtr_tkn(html_wtr);
 		caption_bry_wtr = new Xop_lnki_caption_wtr_bry();
@@ -52,7 +53,8 @@ public class Xoh_lnki_wtr {
 			&&	xwiki_lang.Type_is_xwiki_lang(wiki.Domain_itm().Lang_orig_uid())// NOTE: use Lang_orig_id to handle xwikis between s.w and en.w; PAGE:s.q:Anonymous DATE:2014-09-10
 			&&	!lnki_ttl.ForceLiteralLink()									// not literal; [[:en:A]]
 			) {
-			page.Xwiki_langs().Add(lnki_ttl);
+			Wdata_sitelink_itm slink = new Wdata_sitelink_itm(null, null, null).Page_ttl_(lnki_ttl);
+			page.Slink_list().Add(slink);
 			return;
 		}
 		boolean literal_link = lnki_ttl.ForceLiteralLink();	// NOTE: if literal link, then override ns behavior; for File, do not show image; for Ctg, do not display at bottom of page
@@ -91,11 +93,16 @@ public class Xoh_lnki_wtr {
 				return;
 			}
 		}
-		if (lnki.Xtn_sites_link()) return;	// lnki marked for relatedSites; don't write to page
+		if (lnki.Xtn_sites_link()) return;									// lnki marked for relatedSites; don't write to page
 		if (hctx.Mode_is_alt())
 			Write_caption(bfr, ctx, hctx, src, lnki, ttl_bry, true, caption_wkr);
 		else {
-			bfr.Add(Xoh_consts.A_bgn);								// '<a href="'
+			if (hctx.Mode_is_hdump()) {
+				if (hzip_mgr == null) hzip_mgr = new Xoa_hzip_mgr(wiki.App().Usr_dlg(), wiki);
+				hzip_mgr.Itm__lnki().Html(bfr, lnki.Caption_exists());
+			}
+			else
+				bfr.Add(Xoh_consts.A_bgn);							// '<a href="'
 			app.Href_parser().Build_to_bfr(bfr, wiki, lnki_ttl, hctx.Mode_is_popup());	// '/wiki/A'
 			if (cfg.Lnki_id()) {
 				int lnki_html_id = lnki.Html_id();

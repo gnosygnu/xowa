@@ -38,7 +38,7 @@ class Scrib_lib_wikibase_srl_visitor implements Wdata_claim_visitor {
 	}
 	public void Visit_monolingualtext(Wdata_claim_itm_monolingualtext itm) {
 		rv = new KeyVal[2];
-		rv[0] = KeyVal_.new_(Scrib_lib_wikibase_srl.Key_type, Wdata_dict_value_monolingualtext.Str_language);
+		rv[0] = KeyVal_.new_(Scrib_lib_wikibase_srl.Key_type, Wdata_dict_val_tid.Str_monolingualtext);
 		rv[1] = KeyVal_.new_(Scrib_lib_wikibase_srl.Key_value, Monolingualtext_value(itm));
 	}
 	private static KeyVal[] Monolingualtext_value(Wdata_claim_itm_monolingualtext itm) {

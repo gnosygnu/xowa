@@ -165,8 +165,8 @@ public class Wdata_wiki_mgr_fxt {
 		int len = list.Count();
 		String[] rv = new String[len];
 		for (int i = 0; i < len; i++) {
-			Xoa_ttl itm = (Xoa_ttl)list.FetchAt(i);
-			rv[i] = String_.new_ascii_(itm.Page_db());
+			Wdata_sitelink_itm itm = (Wdata_sitelink_itm)list.FetchAt(i);
+			rv[i] = String_.new_ascii_(itm.Page_ttl().Page_db());
 		}
 		tmp_langs.Clear();
 		return rv;

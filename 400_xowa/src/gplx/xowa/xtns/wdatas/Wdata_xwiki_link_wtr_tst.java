@@ -39,7 +39,7 @@ public class Wdata_xwiki_link_wtr_tst {
 		, "  <h4>grp1</h4>"
 		, "  <table style='width: 100%;'>"
 		, "    <tr>"
-		, "      <td style='width: 10%; padding-bottom: 5px;'>German</td><td style='width: 20%; padding-bottom: 5px;'><a hreflang=\"de\" title=\"Q1 de\" href=\"/site/de.wikipedia.org/wiki/Q1 de\">Q1 de</a></td><td style='width: 3%; padding-bottom: 5px;'></td>"
+		, "      <td style='width: 10%; padding-bottom: 5px;'>German</td><td style='width: 20%; padding-bottom: 5px;'><li class='badge-none'><a hreflang=\"de\" title=\"Q1 de\" href=\"/site/de.wikipedia.org/wiki/Q1 de\">Q1 de</a></li></td><td style='width: 3%; padding-bottom: 5px;'></td>"
 		, "    </tr>"
 		, "  </table>"
 		, "  </div>"
@@ -77,6 +77,26 @@ public class Wdata_xwiki_link_wtr_tst {
 		fxt.Init_pages_add(wdata_doc);
 		fxt.Test_xwiki_links("Q1_en", "q1_de", "q1_fr");
 	}
+	@Test   public void Badges() {
+		fxt.Init_xwikis_add("de", "fr");
+		fxt.Init_qids_add("en", Xow_wiki_domain_.Tid_wikipedia, "Q1_en", "Q1");
+		fxt.Init_pages_add(fxt.Wdoc_bldr("Q1").Add_sitelink("enwiki", "Q1_en").Add_sitelink("dewiki", "Q1_de", "Q17437796").Add_sitelink("frwiki", "Q1_fr", "Q17437798").Xto_wdoc());
+		fxt.Test_parse_langs("", String_.Concat_lines_nl
+		( "<div id=\"xowa-lang\">"
+		, "  <h5>In other languages (<a href=\"/site/www.wikidata.org/wiki/Q1\">wikidata</a>)<a href='javascript:xowa_toggle_visible(\"wikidata-langs\");'><img id='wikidata-langs-toggle-icon' src='file:///mem/xowa/user/test_user/app/img/window/portal/twisty_right.png' title='' /></a></h5>"
+		, "  <div id='wikidata-langs-toggle-elem' style='display:none;'>"
+		, "  <h4>grp1</h4>"
+		, "  <table style='width: 100%;'>"
+		, "    <tr>"
+		, "      <td style='width: 10%; padding-bottom: 5px;'>French</td><td style='width: 20%; padding-bottom: 5px;'><li class='badge-goodarticle'><a hreflang=\"fr\" title=\"Q1 fr\" href=\"/site/fr.wikipedia.org/wiki/Q1 fr\">Q1 fr</a></li></td><td style='width: 3%; padding-bottom: 5px;'></td>"
+		, "      <td style='width: 10%; padding-bottom: 5px;'>German</td><td style='width: 20%; padding-bottom: 5px;'><li class='badge-featuredarticle'><a hreflang=\"de\" title=\"Q1 de\" href=\"/site/de.wikipedia.org/wiki/Q1 de\">Q1 de</a></li></td><td style='width: 3%; padding-bottom: 5px;'></td>"
+		, "    </tr>"
+		, "  </table>"
+		, "  </div>"
+		, "</div>"
+		));
+	}
+
 //		@Test   public void No_wikidata_link() {
 //			fxt.Init_xwikis_add("fr", "de");
 //			fxt.Test_parse_langs("[[fr:A]]", String_.Concat_lines_nl

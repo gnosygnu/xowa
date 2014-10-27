@@ -15,10 +15,10 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.hdumps.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
-public class Hdump_text_row {
-	public Hdump_text_row(int page_id, int tid, byte[] data) {this.page_id = page_id; this.tid = tid; this.data = data;}
-	public int Page_id() {return page_id;} private int page_id;
-	public int Tid() {return tid;} private int tid;
-	public byte[] Data() {return data;} private byte[] data;
+package gplx;
+public class Base64_utl {
+	public static void Encode(Bry_bfr bfr, byte[] bry, int bgn, int end) {
+		for (int i = bgn; i < end; ++i) {
+		}
+	}
 }

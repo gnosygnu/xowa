@@ -21,8 +21,8 @@ public class Pfunc_rev_props_tst {
 	private Xop_fxt fxt = new Xop_fxt();
 	@Before	public void setup()						{fxt.Reset(); fxt.Page().Revision_data().User_(Bry_.new_ascii_("user")).Protection_level_(Bry_.new_ascii_("normal"));}
 	@After public void teardown()				{}
-	@Test  public void RevisionID()					{fxt.Page().Revision_data().Id_(1); fxt.Test_parse_tmpl_str_test("{{REVISIONID}}"				, "{{test}}", "1");}
-	@Test  public void PageID()						{fxt.Page().Revision_data().Id_(1); fxt.Test_parse_tmpl_str_test("{{PAGEID}}"					, "{{test}}", "1");}
+	@Test  public void RevisionID()					{fxt.Page().Revision_data().Id_(1); fxt.Test_parse_tmpl_str_test("{{REVISIONID}}"		, "{{test}}", "1");}
+	@Test  public void PageID()						{fxt.Page().Revision_data().Id_(1); fxt.Test_parse_tmpl_str_test("{{PAGEID}}"			, "{{test}}", "1");}
 	@Test  public void RevisionUser()				{fxt.Test_parse_tmpl_str_test("{{REVISIONUSER}}"									, "{{test}}", "user");}
 	@Test  public void PageSize()					{fxt.Test_parse_tmpl_str_test("{{PAGESIZE:Test page}}"								, "{{test}}", "0");}
 	@Test  public void ProtectionLevel()			{fxt.Test_parse_tmpl_str_test("{{PROTECTIONLEVEL}}"									, "{{test}}", "normal");}

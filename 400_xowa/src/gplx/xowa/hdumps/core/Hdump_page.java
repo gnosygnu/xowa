@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
+import gplx.xowa.pages.*; import gplx.xowa.pages.skins.*;
 public class Hdump_page {
 	public int				Page_id() {return page_id;} private int page_id;
 	public Xoa_url			Page_url() {return page_url;} private Xoa_url page_url;
@@ -38,5 +39,28 @@ public class Hdump_page {
 		module_mgr.Clear();
 		gly_itms.Clear();
 		return this;
+	}
+	public void Init(Bry_bfr tmp_bfr, Xoa_page page) {
+		page_id			= page.Revision_data().Id();
+		page_body		= page.Hdump_data().Body();
+		Xopg_html_data html_data = page.Html_data();
+		gplx.xowa.html.modules.Xoh_module_mgr mod_mgr = html_data.Module_mgr();	
+		module_mgr.Init(mod_mgr.Itm_mathjax().Enabled(), mod_mgr.Itm_popups().Bind_hover_area(), mod_mgr.Itm_gallery().Enabled(), mod_mgr.Itm_hiero().Enabled());
+		display_ttl = html_data.Display_ttl();
+		content_sub = html_data.Content_sub();
+		sidebar_div = Save_sidebars(tmp_bfr, page, html_data);
+	}
+	private static byte[] Save_sidebars(Bry_bfr tmp_bfr, Xoa_page page, Xopg_html_data html_data) {
+		Xopg_xtn_skin_mgr mgr = html_data.Xtn_skin_mgr();
+		int len = mgr.Count();
+		boolean sidebar_exists = false;
+		for (int i = 0; i < len; ++i) {
+			Xopg_xtn_skin_itm itm = mgr.Get_at(i);
+			if (itm.Tid() == Xopg_xtn_skin_itm_tid.Tid_sidebar) {
+				sidebar_exists = true;
+				itm.Write(tmp_bfr, page);
+			}
+		}
+		return sidebar_exists ? tmp_bfr.Xto_bry_and_clear() : null;
 	}
 }

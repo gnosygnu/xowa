@@ -69,21 +69,21 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xop_lnki_log
 		trg_mnt_mgr.Insert_to_mnt_(Fsdb_mnt_mgr.Mnt_idx_main);
 		Fsdb_mnt_mgr.Patch(trg_mnt_mgr);	// NOTE: see fsdb_make; DATE:2014-04-26
 		if (gen_hdump) {
-			hdump_bldr = new Xob_hdump_bldr(wiki, provider, hdump_max);
+			hdump_bldr = new Xob_hdump_bldr(wiki.Db_mgr_as_sql(), provider, hdump_max);
+			hdump_bldr.Bld_init();
 		}
 		provider.Txn_mgr().Txn_bgn_if_none();
 		log_mgr.Txn_bgn();
 	}
 	@Override public void Exec_pg_itm_hook(Xow_ns ns, Xodb_page db_page, byte[] page_src) {
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ns.Gen_ttl(db_page.Ttl_wo_ns()));
-		// Io_mgr._.AppendFilStr("C:\\debug.txt", String_.new_utf8_(ttl.Full_txt()) + "\n");
 		byte[] ttl_bry = ttl.Page_db();
 		byte page_tid = Xow_page_tid.Identify(wiki.Domain_tid(), ns.Id(), ttl_bry);
 		if (page_tid != Xow_page_tid.Tid_wikitext) return; // ignore js, css, lua, json
 		Xoa_page page = ctx.Cur_page();
 		page.Clear();
 		page.Ttl_(ttl).Revision_data().Id_(db_page.Id());
-		page.Lnki_redlinks_mgr().Page_bgn();
+		page.Lnki_redlinks_mgr().Clear();
 		if (ns.Id_tmpl())
 			parser.Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), wiki.Ns_mgr().Ns_template(), ttl_bry, page_src);
 		else {

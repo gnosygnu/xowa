@@ -260,7 +260,7 @@ public class Poem_nde_tst {
 		, "b<br/>"
 		, " <div class=\"poem\">"
 		, "<p>"
-		, "c<br/>"	// NOTE: 1 <br/> not 2
+		, "c<br/>"	// NOTE: "<br/>" not "<br/><br/>"
 		, "d<br/>"
 		, " "
 		, "</p>"

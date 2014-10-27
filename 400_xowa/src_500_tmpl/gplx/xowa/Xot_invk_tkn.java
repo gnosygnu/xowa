@@ -67,7 +67,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 			name_ary_len = name_ary.length;
 			name_bgn = Bry_finder.Find_fwd_while_not_ws(name_ary, 0, name_ary_len);
 			if (	name_ary_len == 0			// name is blank; can occur with failed inner tmpl; EX: {{ {{does not exist}} }}
-				||	name_bgn == name_ary_len	// name is ws; EX: {{test| }} -> {{{{{1}}}}}is whitespace String; PAGE:en.d:wear_one's_heart_on_one's_sleeve; EX:{{t+|fr|avoir le c�ur sur la main| }}
+				||	name_bgn == name_ary_len	// name is ws; EX: {{test| }} -> {{{{{1}}}}}is whitespace String; PAGE:en.d:wear_one's_heart_on_one's_sleeve; EX:{{t+|fr|avoir le cœur sur la main| }}
 				) {								
 				bfr.Add(Ary_unknown_bgn).Add(Ary_dynamic_is_blank).Add(Ary_unknown_end);	// FUTURE: excerpt actual String; WHEN: add raw to defn
 				return false;
@@ -104,9 +104,8 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 					bfr.Add(Xop_curly_bgn_lxr.Hook).Add(name_ary);
 					for (int i = 0; i < args_len; i++) {
 						Arg_nde_tkn nde = args[i];
-						// bfr.Add_byte(Byte_ascii.Pipe);
-						Xot_fmtr_prm._.Write(Byte_ascii.Pipe);
-						nde.Tmpl_fmt(ctx, src, Xot_fmtr_prm._);
+						bfr.Add_byte(Byte_ascii.Pipe);						// add |
+						bfr.Add_mid(src, nde.Src_bgn(), nde.Src_end());		// add entire arg; "k=v"; note that src must be added, not evaluated, else <nowiki> may be dropped and cause stack overflow; PAGE:ru.w:Близкие_друзья_(Сезон_2) DATE:2014-10-21
 					}
 					Xot_fmtr_prm._.Print(bfr);
 					bfr.Add(Xop_curly_end_lxr.Hook);

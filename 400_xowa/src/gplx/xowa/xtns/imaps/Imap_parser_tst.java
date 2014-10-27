@@ -24,6 +24,7 @@ public class Imap_parser_tst {
 	@Test  public void Circle_pass()			{fxt.Test_shape("circle 1 2 3 [[A]]"								, fxt.itm_circle_("[[A]]", 1, 2, 3));}
 	@Test  public void Poly_pass()				{fxt.Test_shape("poly 1 2 3 4 5 6 [[A]]"							, fxt.itm_poly_("[[A]]", 1, 2, 3, 4, 5, 6));}
 	@Test  public void Poly_pass_chars()		{fxt.Test_shape("poly a b [[A]]"									, fxt.itm_poly_("[[A]]", 0, 0));}		// PURPOSE: non-numeric should be converted to 0; PAGE:uk.w:Стратосфера; DATE:2014-07-26
+	@Test  public void Poly_pass_chars_2()		{fxt.Test_shape("poly 1a 2a [[A]]"									, fxt.itm_poly_("[[A]]", 0, 0));}		// PURPOSE: non-numeric should be converted to 0; PAGE:ru.w:Системный_блок; DATE:2014-10-22
 	@Test  public void Poly_pass_dots()			{fxt.Test_shape("poly 1.2 3.4 [[A]]"								, fxt.itm_poly_("[[A]]", 1.2d, 3.4d));}	// PURPOSE: make sure decimals are handled correctly
 	@Test  public void Poly_pass_commas()		{fxt.Test_shape("poly 1, 2, 3, 4 [[A]]"								, fxt.itm_poly_("[[A]]", 1, 2, 3, 4));}	// PURPOSE: commas should be ignored; PAGE:de.w:Kaimnitz; DATE:2014-08-05
 	@Test  public void Poly_pass_commas_2()		{fxt.Test_shape("poly 1,2 3,4 [[A]]"								, fxt.itm_poly_("[[A]]", 1, 3));}		// PURPOSE: commas should be ignored for purpose of parse; PAGE:fr.w:Gouesnou; DATE:2014-08-12

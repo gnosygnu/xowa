@@ -164,7 +164,7 @@ public class Xop_xnde_wkr__include_uncommon_tst {
 			);
 		fxt.Init_defn_clear();
 	}
-	@Test  public void Pre_and_includeonly() {
+	@Test  public void Pre_and_includeonly() {	// PAGE:https://en.wikipedia.org/wiki/BSD_licenses DATE:2014-05-23
 		fxt.Init_defn_add("pre2", "<pre<includeonly></includeonly>>{{{1}}}</pre>");
 		fxt.Test_parse_page_all_str
 			(	"{{pre2|a}}"

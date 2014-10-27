@@ -22,13 +22,25 @@ public class Xodbv_page_tbl {
 	, Fld_page_id = "page_id", Fld_page_ns = "page_namespace", Fld_page_title = "page_title"
 	, Fld_page_is_redirect = "page_is_redirect", Fld_page_touched = "page_touched", Fld_page_len = "page_len"
 	, Fld_page_random_int = "page_random_int", Fld_page_file_idx = "page_file_idx"
-	, Fld_page_html_db_id = "page_html_db_id";
-	private static final String[] Select_by_id_flds__hdump = new String[] {Fld_page_id, Fld_page_ns, Fld_page_title, Fld_page_touched, Fld_page_is_redirect, Fld_page_len, Fld_page_file_idx, Fld_page_html_db_id};
+	, Fld_page_html_db_id = "page_html_db_id", Fld_page_redirect_id = "page_redirect_id";
+	private static final String[] Select_by_id_flds__hdump = new String[] {Fld_page_id, Fld_page_ns, Fld_page_title, Fld_page_touched, Fld_page_is_redirect, Fld_page_len, Fld_page_file_idx, Fld_page_html_db_id, Fld_page_redirect_id};
 	public boolean Select_by_ttl(Xodb_page rv, Db_provider provider, Xow_ns ns, byte[] ttl) {
 		Db_rdr rdr = Db_rdr_.Null; Db_stmt stmt = Db_stmt_.Null;
 		try {
 			stmt = Db_stmt_.new_select_as_rdr(provider, Db_qry__select_in_tbl.new_(Tbl_name, String_.Ary(Fld_page_ns, Fld_page_title), Select_by_id_flds__hdump));
 			rdr = stmt.Val_int_(ns.Id()).Val_str_(String_.new_utf8_(ttl)).Exec_select_as_rdr();
+			if (rdr.Move_next()) {
+				Read_page__all(rv, rdr);
+				return true;
+			}
+		} finally {rdr.Close(); stmt.Rls();}
+		return false;
+	}
+	public boolean Select_by_id(Xodb_page rv, Db_provider provider, int page_id) {
+		Db_rdr rdr = Db_rdr_.Null; Db_stmt stmt = Db_stmt_.Null;
+		try {
+			stmt = Db_stmt_.new_select_as_rdr(provider, Db_qry__select_in_tbl.new_(Tbl_name, String_.Ary(Fld_page_id), Select_by_id_flds__hdump));
+			rdr = stmt.Val_int_(page_id).Exec_select_as_rdr();
 			if (rdr.Move_next()) {
 				Read_page__all(rv, rdr);
 				return true;
@@ -45,6 +57,7 @@ public class Xodbv_page_tbl {
 		page.Text_len_		(rdr.Read_int(5));
 		page.Text_db_id_	(rdr.Read_int(6));
 		page.Html_db_id_	(rdr.Read_int(7));
+		page.Redirect_id_	(rdr.Read_int(8));
 	}
 	private static final String Page_touched_fmt = "yyyyMMddHHmmss";
 }

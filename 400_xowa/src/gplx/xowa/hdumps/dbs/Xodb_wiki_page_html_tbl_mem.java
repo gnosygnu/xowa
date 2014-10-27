@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
 import gplx.dbs.*;
-public class Hdump_text_tbl_mem extends Hdump_text_tbl { 	private HashAdp pages = HashAdp_.new_();
+public class Xodb_wiki_page_html_tbl_mem extends Xodb_wiki_page_html_tbl { 	private HashAdp pages = HashAdp_.new_();
 	@Override public int Insert(int page_id, int tid, byte[] data) {
-		Hdump_text_row row = new Hdump_text_row(page_id, tid, data);
+		Xodb_wiki_page_html_row row = new Xodb_wiki_page_html_row(page_id, tid, data);
 		ListAdp rows = Get_or_new(pages, page_id);
 		rows.Add(row);
 		return data.length;
@@ -28,11 +28,11 @@ public class Hdump_text_tbl_mem extends Hdump_text_tbl { 	private HashAdp pages 
 		ListAdp rows = Get_or_new(pages, page_id);
 		int len = rows.Count();
 		for (int i = 0; i < len; ++i) {
-			Hdump_text_row row = (Hdump_text_row)rows.FetchAt(i);
+			Xodb_wiki_page_html_row row = (Xodb_wiki_page_html_row)rows.FetchAt(i);
 			rv.Add(row);
 		}
 	}
-	@Override public void Delete_by_page(int page_id) {pages.Del(page_id);}
+	@Override public void Delete(int page_id) {pages.Del(page_id);}
 	private static ListAdp Get_or_new(HashAdp pages, int page_id) {
 		ListAdp rv = (ListAdp)pages.Fetch(page_id);
 		if (rv == null) {

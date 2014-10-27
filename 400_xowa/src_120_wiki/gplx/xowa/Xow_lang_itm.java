@@ -27,11 +27,12 @@ public class Xow_lang_itm {
 	public byte[] Page_name() {return page_name;} private byte[] page_name;
 	public boolean Page_name_has() {return Bry_.Len_gt_0(page_name);}
 	public boolean Empty_xwiki() {return empty_xwiki;} private boolean empty_xwiki;
+	public byte[][] Page_badges() {return page_badges;} private byte[][] page_badges;
 	public void Html_bld(Bry_bfr bfr, Xow_wiki wiki) {
 		html_grp.Html_itm().Bld_bfr(bfr, lang.Key_bry(), xwiki.Domain(), lang.Local_name_bry(), page_name);
 	}
-	public void Atrs_set(byte[] page_name, boolean empty_xwiki) {
-		this.page_name = page_name; this.empty_xwiki = empty_xwiki;
+	public void Atrs_set(byte[] page_name, boolean empty_xwiki, byte[][] page_badges) {
+		this.page_name = page_name; this.empty_xwiki = empty_xwiki; this.page_badges = page_badges;
 		html_grp.Itms_active_len_add_one_();
 	}
 }

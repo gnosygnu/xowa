@@ -63,7 +63,7 @@ public class Xop_lnki_wkr__xwiki_tst {
 		( "[[:fr:A]]", String_.Concat_lines_nl_skip_last
 		( "<a href=\"/site/fr.wikipedia.org/wiki/A\">A</a>"
 		));
-		Tfds.Eq(0, fxt.Page().Xwiki_langs().Count());
+		Tfds.Eq(0, fxt.Page().Slink_list().Count());
 	}
 	@Test  public void Simple_and_english() {	// PURPOSE: s.w xwiki links to en were not working b/c s.w and en had same super lang of English; PAGE:s.q:Anonymous DATE:2014-09-10
 		Xoa_app app = Xoa_app_fxt.app_();
@@ -74,7 +74,7 @@ public class Xop_lnki_wkr__xwiki_tst {
 		( "[[en:A]]"
 		, ""
 		);
-		Tfds.Eq(1, fxt.Page().Xwiki_langs().Count());		// test 1 xwiki lang
+		Tfds.Eq(1, fxt.Page().Slink_list().Count());		// test 1 xwiki lang
 	}
 	@Test  public void Species_and_commons() {	// PURPOSE: species xwiki links to commons should not put link in wikidata langs; PAGE:species:Scarabaeidae DATE:2014-09-10
 		Xoa_app app = Xoa_app_fxt.app_();
@@ -85,7 +85,7 @@ public class Xop_lnki_wkr__xwiki_tst {
 		( "[[commons:A]]"
 		, "<a href=\"/site/commons.wikimedia.org/wiki/A\">commons:A</a>"
 		);
-		Tfds.Eq(0, fxt.Page().Xwiki_langs().Count());			// no xwiki langs
+		Tfds.Eq(0, fxt.Page().Slink_list().Count());			// no xwiki langs
 	}
 	@Test  public void Wiktionary_and_wikipedia() {	// PURPOSE: do not create xwiki links if same lang and differet type; PAGE:s.d:water DATE:2014-09-14
 		Xoa_app app = Xoa_app_fxt.app_();
@@ -96,7 +96,7 @@ public class Xop_lnki_wkr__xwiki_tst {
 		( "[[w:A]]"
 		, "<a href=\"/site/simple.wikipedia.org/wiki/A\">w:A</a>"
 		);
-		Tfds.Eq(0, fxt.Page().Xwiki_langs().Count());		// test 0 xwiki lang
+		Tfds.Eq(0, fxt.Page().Slink_list().Count());		// test 0 xwiki lang
 	}
 	@Test  public void Species_and_wikipedia() {	// PURPOSE: species creates xwiki links to wikipedia; PAGE:species:Puccinia DATE:2014-09-14
 		Xoa_app app = Xoa_app_fxt.app_();
@@ -107,7 +107,7 @@ public class Xop_lnki_wkr__xwiki_tst {
 		( "[[fr:A]]"
 		, ""
 		);
-		Tfds.Eq(1, fxt.Page().Xwiki_langs().Count());		// 1 xwiki lang
+		Tfds.Eq(1, fxt.Page().Slink_list().Count());		// 1 xwiki lang
 	}
 	private void Reg_xwiki_alias(String alias, String domain) {
 		Xop_fxt.Reg_xwiki_alias(fxt.Wiki(), alias, domain);

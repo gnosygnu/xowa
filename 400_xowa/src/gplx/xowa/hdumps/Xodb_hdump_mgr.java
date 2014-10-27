@@ -17,24 +17,25 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.html.*; import gplx.xowa.gui.*; 
-import gplx.xowa.hdumps.core.*; import gplx.xowa.hdumps.saves.*; import gplx.xowa.pages.*; import gplx.xowa.hdumps.loads.*; import gplx.xowa.hdumps.htmls.*; import gplx.xowa.hdumps.dbs.*;
+import gplx.xowa.hdumps.core.*; import gplx.xowa.hdumps.saves.*; import gplx.xowa.pages.*; import gplx.xowa.hdumps.loads.*; import gplx.xowa.hdumps.htmls.*; import gplx.xowa.hdumps.dbs.*; import gplx.xowa.hdumps.hzips.*;
 public class Xodb_hdump_mgr {
-	private Xodb_file hdump_db_file;
+	private Xodb_file hdump_db_file; private Xoa_hzip_mgr hzip_mgr;
 	public Xodb_hdump_mgr(Xow_wiki wiki) {
 		this.wiki = wiki;
 		load_mgr = new Hdump_load_mgr();
-		Tbl_(new Hdump_text_tbl());
+		Tbl_(new Xodb_wiki_page_html_tbl());
 		text_tbl.Init_by_wiki(wiki);
 		Xoa_app app = wiki.App();
 		html_mgr.Init_by_app(app.Usr_dlg(), app.Fsys_mgr(), app.Encoder_mgr().Fsys());
+		hzip_mgr = new Xoa_hzip_mgr(app.Usr_dlg(), wiki);
 	}
 	public Xow_wiki Wiki() {return wiki;} private final Xow_wiki wiki; 
 	@gplx.Internal protected Hdump_load_mgr Load_mgr() {return load_mgr;} private Hdump_load_mgr load_mgr;
 	@gplx.Internal protected Hdump_save_mgr Save_mgr() {return save_mgr;} private Hdump_save_mgr save_mgr = new Hdump_save_mgr();
 	public Hdump_html_body Html_mgr() {return html_mgr;} private Hdump_html_body html_mgr = new Hdump_html_body();
-	public Hdump_text_tbl Text_tbl() {return text_tbl;} private Hdump_text_tbl text_tbl;
+	public Xodb_wiki_page_html_tbl Text_tbl() {return text_tbl;} private Xodb_wiki_page_html_tbl text_tbl;
 	public boolean Enabled() {return enabled;} public void Enabled_(boolean v) {enabled = v;}	private boolean enabled;
-	@gplx.Internal protected void Tbl_mem_() {Tbl_(new Hdump_text_tbl_mem());}
+	@gplx.Internal protected void Tbl_mem_() {Tbl_(new Xodb_wiki_page_html_tbl_mem());}
 	public int Html_db_id_default(int page_len) {
 		return -1;
 	}
@@ -58,11 +59,22 @@ public class Xodb_hdump_mgr {
 		wkr.Write_body(bfr, Xoh_wtr_ctx.Hdump, page);
 		page.Hdump_data().Body_(bfr.Xto_bry_and_clear());
 	}
+	public void Write2(Bry_bfr tmp_bfr, Xoa_page page) {
+		page.File_queue().Clear();	// need to reset uid to 0, else xowa_file_# will resume from last
+		Xoh_page_wtr_wkr wkr = wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_view_mode.Tid_read);
+		wkr.Write_body(tmp_bfr, Xoh_wtr_ctx.Hdump, page);
+		hzip_mgr.Save(tmp_bfr, page.Url().Xto_full_bry(), tmp_bfr.Xto_bry_and_clear());
+		page.Hdump_data().Body_(tmp_bfr.Xto_bry_and_clear());
+		hpg.Init(tmp_bfr, page);
+	}	private Hdump_page hpg = new Hdump_page();
 	public void Load(Xow_wiki wiki, Xoa_page page, int html_db_id) {
 		if (!Enabled_chk()) return;
 		page.Root_(new Xop_root_tkn());
 		Hdump_page hpg = new Hdump_page().Init(page.Revision_data().Id(), page.Url(), page.Ttl());
 		load_mgr.Load(hpg, wiki.Db_mgr_as_sql().Fsys_mgr(), html_db_id, page.Revision_data().Id(), page.Ttl());
+		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
+		hzip_mgr.Load(tmp_bfr, page.Url().Xto_full_bry(), hpg.Page_body());
+		hpg.Page_body_(tmp_bfr.Mkr_rls().Xto_bry_and_clear());
 		Load_page(wiki, page, hpg);
 	}
 	private void Load_page(Xow_wiki wiki, Xoa_page page, Hdump_page hpg) {
@@ -76,7 +88,7 @@ public class Xodb_hdump_mgr {
 		Hdump_page_body_srl.Load_html_modules(html_data.Module_mgr(), hpg);
 		tmp_bfr.Mkr_rls();
 	}
-	private void Tbl_(Hdump_text_tbl v) {
+	private void Tbl_(Xodb_wiki_page_html_tbl v) {
 		text_tbl = v;
 		save_mgr.Tbl_(text_tbl);
 //			load_mgr.Tbl_(text_tbl);

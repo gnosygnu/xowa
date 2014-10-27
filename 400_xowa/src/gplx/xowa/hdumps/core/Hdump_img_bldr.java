@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.hdumps.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
 import gplx.dbs.*; import gplx.xowa.hdumps.dbs.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.oimgs.*;
 class Hdump_img_bldr_cmd extends Xob_itm_basic_base implements Xob_cmd {
-	private Hdump_text_tbl text_tbl = new Hdump_text_tbl();
+	private Xodb_wiki_page_html_tbl text_tbl = new Xodb_wiki_page_html_tbl();
 	public Hdump_img_bldr_cmd(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Cmd_key() {return Key_const;} public static final String Key_const = "hdump.make.imgs";
 	public void Cmd_ini(Xob_bldr bldr) {}

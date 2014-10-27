@@ -20,13 +20,13 @@ import gplx.json.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; i
 public class Wdata_xwiki_link_wtr implements Bry_fmtr_arg {
 	public Wdata_xwiki_link_wtr Page_(Xoa_page page) {this.page = page; return this;} private Xoa_page page;
 	public void XferAry(Bry_bfr bfr, int idx) {
-		ListAdp langs = page.Xwiki_langs();
-		byte[] qid = Write_wdata_links(langs, page.Wiki(), page.Ttl(), page.Wdata_external_lang_links());
-		int langs_len = langs.Count();
-		if (langs_len > 0)
-			page.Wiki().Xwiki_mgr().Lang_mgr().Html_bld(bfr, page.Wiki(), langs, qid);
+		ListAdp slink_list = page.Slink_list();
+		byte[] qid = Write_wdata_links(slink_list, page.Wiki(), page.Ttl(), page.Wdata_external_lang_links());
+		int slink_list_len = slink_list.Count();
+		if (slink_list_len > 0)
+			page.Wiki().Xwiki_mgr().Lang_mgr().Html_bld(bfr, page.Wiki(), slink_list, qid);
 	}
-	public static byte[] Write_wdata_links(ListAdp langs, Xow_wiki wiki, Xoa_ttl ttl, Wdata_external_lang_links_data external_links_mgr) {
+	public static byte[] Write_wdata_links(ListAdp slink_list, Xow_wiki wiki, Xoa_ttl ttl, Wdata_external_lang_links_data external_links_mgr) {
 		try {
 			switch (wiki.Domain_tid()) {
 				case Xow_wiki_domain_.Tid_home:		// home will never be in wikidata
@@ -41,8 +41,8 @@ public class Wdata_xwiki_link_wtr implements Bry_fmtr_arg {
 			Xow_wiki_abrv wiki_abrv = new Xow_wiki_abrv();
 			int len = links.Count();
 			for (int i = 0; i < len; i++) {
-				Wdata_sitelink_itm sitelink = (Wdata_sitelink_itm)links.FetchAt(i);
-				byte[] xwiki_key = sitelink.Site();
+				Wdata_sitelink_itm slink = (Wdata_sitelink_itm)links.FetchAt(i);
+				byte[] xwiki_key = slink.Site();
 				Xow_wiki_abrv_.parse_(wiki_abrv, xwiki_key, 0, xwiki_key.length);
 				if (wiki_abrv.Domain_tid() == Xow_wiki_abrv_.Tid_null) {
 					wiki.App().Usr_dlg().Warn_many("", "", "unknown wiki in wikidata: ttl=~{0} wiki=~{1}", ttl.Page_db_as_str(), String_.new_utf8_(xwiki_key));
@@ -53,18 +53,19 @@ public class Wdata_xwiki_link_wtr implements Bry_fmtr_arg {
 				if (external_links_mgr_enabled && external_links_mgr.Langs_hide(lang_key, 0, lang_key.length)) continue;
 				tmp_bfr.Add(lang_key);
 				tmp_bfr.Add_byte(Byte_ascii.Colon);
-				tmp_bfr.Add(sitelink.Name());
-				Xoa_ttl lang_ttl = Xoa_ttl.parse_(wiki, tmp_bfr.Xto_bry_and_clear());
-				if (lang_ttl == null) continue;								// invalid ttl
-				Xow_xwiki_itm xwiki_itm = lang_ttl.Wik_itm();
+				tmp_bfr.Add(slink.Name());
+				Xoa_ttl slink_ttl = Xoa_ttl.parse_(wiki, tmp_bfr.Xto_bry_and_clear());
+				if (slink_ttl == null) continue;								// invalid ttl
+				Xow_xwiki_itm xwiki_itm = slink_ttl.Wik_itm();
 				if (	xwiki_itm == null									// not a known xwiki; EX: [[zzz:abc]]
 					||	Bry_.Eq(xwiki_itm.Domain(), wiki.Domain_bry())	// skip if same as self; i.e.: do not include links to enwiki if already in enwiki
 					) continue;
-				langs.Add(lang_ttl);
+				slink.Page_ttl_(slink_ttl);
+				slink_list.Add(slink);
 			}
 			tmp_bfr.Mkr_rls();
 			if (external_links_mgr_enabled && external_links_mgr.Sort())
-				langs.SortBy(Xoa_ttl_sorter._);
+				slink_list.SortBy(Xoa_ttl_sorter._);
 			return doc.Qid();
 		} catch (Exception e) {Err_.Noop(e); return Qid_null;}
 	}

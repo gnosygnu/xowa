@@ -97,20 +97,20 @@ class Scrib_lib_wikibase_srl {
 		KeyVal[] rv = new KeyVal[len];
 		for (int i = 0; i < len; i++) {
 			Wdata_claim_itm_core itm = grp.Get_at(i);
-			rv[i] = KeyVal_.int_(i + base_adj, Srl_claims_prop_itm(pid, itm));	// NOTE: must be super 0 or super 1; DATE:2014-05-09
+			rv[i] = KeyVal_.int_(i + base_adj, Srl_claims_prop_itm(pid, itm, base_adj));	// NOTE: must be super 0 or super 1; DATE:2014-05-09
 		}
 		return rv;
 	}
-	private static KeyVal[] Srl_claims_prop_itm(String pid, Wdata_claim_itm_core itm) {
+	private static KeyVal[] Srl_claims_prop_itm(String pid, Wdata_claim_itm_core itm, int base_adj) {
 		ListAdp list = ListAdp_.new_();
-		list.Add(KeyVal_.new_("id", String_.new_utf8_(itm.Wguid())));
+		list.Add(KeyVal_.new_("id", pid));
 		list.Add(KeyVal_.new_("mainsnak", Srl_claims_prop_itm_core(pid, itm)));
 		list.Add(KeyVal_.new_(Wdata_dict_claim_v1.Str_rank, Wdata_dict_rank.Xto_str(itm.Rank_tid())));
 		list.Add(KeyVal_.new_("type", itm.Prop_type()));
-		Srl_root(list, Wdata_dict_claim.Str_qualifiers, Srl_qualifiers(itm.Qualifiers()));
+		Srl_root(list, Wdata_dict_claim.Str_qualifiers, Srl_qualifiers(itm.Qualifiers(), base_adj));
 		return (KeyVal[])list.Xto_ary_and_clear(KeyVal.class);
 	}
-	private static KeyVal[] Srl_qualifiers(Wdata_claim_grp_list list) {
+	private static KeyVal[] Srl_qualifiers(Wdata_claim_grp_list list, int base_adj) {
 		if (list == null) return null;
 		int list_len = list.Len(); if (list_len == 0) return KeyVal_.Ary_empty;
 		ListAdp rv = ListAdp_.new_();
@@ -122,7 +122,7 @@ class Scrib_lib_wikibase_srl {
 			String itm_pid = grp.Id_str();
 			for (int j = 0; j < grp_len; ++j) {
 				Wdata_claim_itm_core itm = grp.Get_at(j);
-				pid_list.Add(KeyVal_.int_(j + ListAdp_.Base1, Srl_claims_prop_itm_core(itm_pid, itm)));
+				pid_list.Add(KeyVal_.int_(j + base_adj, Srl_claims_prop_itm_core(itm_pid, itm)));	// NOTE: was originally "+ 1"; changed to base_adj; PAGE:ru.w:Tor ru.w:Кактусовые DATE:2014-10-25
 			}
 			rv.Add(KeyVal_.new_(itm_pid, (KeyVal[])pid_list.Xto_ary_and_clear(KeyVal.class)));
 		}
@@ -147,5 +147,5 @@ class Scrib_lib_wikibase_srl {
 			}
 	}
 	public static final String Key_type = "type", Key_value = "value";
-	private static final KeyVal[] DataValue_nil = new KeyVal[] {KeyVal_.new_(Key_type, ""), KeyVal_.new_(Key_value, "")};	// NOTE: must return ""; null fails; EX:w:Joseph-Fran�ois_Malgaigne; DATE:2014-04-07
+	private static final KeyVal[] DataValue_nil = new KeyVal[] {KeyVal_.new_(Key_type, ""), KeyVal_.new_(Key_value, "")};	// NOTE: must return ""; null fails; EX:w:Joseph-François_Malgaigne; DATE:2014-04-07
 }

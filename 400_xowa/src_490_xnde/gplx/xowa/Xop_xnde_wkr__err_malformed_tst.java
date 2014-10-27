@@ -41,7 +41,7 @@ public class Xop_xnde_wkr__err_malformed_tst {
 	}
 	@Test  public void Incomplete_tag_ref() {// PURPOSE: invalid tag shouldn't break parser; EX:w:Cullen_(surname); "http://www.surnamedb.com/Surname/Cullen<ref"
 		fxt.Test_parse_page_all_str("a<ref", "a&lt;ref");
-	}	
+	}
 	@Test  public void Inline_tag_fix() {	// PURPOSE: force <b/> to be <b></b>; EX: w:Exchange_value
 		fxt.Init_log_(Xop_xnde_log.No_inline);
 		fxt.Test_parse_page_all_str("<b/>", "<b></b>");
@@ -65,5 +65,10 @@ public class Xop_xnde_wkr__err_malformed_tst {
 		, "</table>"
 		, "</div>"
 		));
+	}
+	@Test   public void Incomplete_tag() {	// PURPOSE: handle incomplete tag sequences; DATE:2014-10-22
+		fxt.Test_parse_page_all_str("<", "&lt;");
+		fxt.Test_parse_page_all_str("</", "&lt;/");
+		fxt.Test_parse_page_all_str("</<", "&lt;/&lt;");	// this used to fail
 	}
 }

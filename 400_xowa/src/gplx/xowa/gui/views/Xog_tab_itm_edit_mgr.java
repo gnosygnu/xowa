@@ -49,7 +49,7 @@ public class Xog_tab_itm_edit_mgr {
 
 		byte[] new_text = Get_new_text(tab);
 		Xoa_page new_page = Xoa_page.new_(wiki, page.Ttl());
-		new_page.Revision_data().Id_(page.Revision_data().Id());	// NOTE: page_id needed for sqlite (was not needed for xdat)
+		new_page.Revision_data().Id_(page.Revision_data().Id());				// NOTE: page_id needed for sqlite (was not needed for xdat)
 		new_page.Data_raw_(new_text);
 		wiki.ParsePage_root(new_page, true);						// refresh html
 		tab.Page_(new_page); new_page.Tab_(tab);					// replace old page with new_page; DATE:2014-10-09
@@ -77,6 +77,7 @@ public class Xog_tab_itm_edit_mgr {
 		Xoa_page page = tab.Page(); Xow_wiki wiki = page.Wiki(); Xog_win_itm win_itm = tab.Tab_mgr().Win();
 		if (Bry_.Eq(page.Ttl().Page_db(), wiki.Props().Main_page())) {
 			win_itm.Usr_dlg().Warn_many("", "", "The Main Page cannot be renamed");
+			win_itm.Kit().Ask_ok("", "", "The Main Page cannot be renamed");
 			return;
 		}
 		byte[] new_text = Bry_.new_utf8_(tab.Html_itm().Get_elem_value(Xog_html_itm.Elem_id__xowa_edit_rename_box));

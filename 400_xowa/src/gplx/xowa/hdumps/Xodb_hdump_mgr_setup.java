@@ -39,16 +39,17 @@ public class Xodb_hdump_mgr_setup {
 		try {
 			core_provider.Exec_sql(Sql_ddl__page_html_db_id);
 			cfg_tbl.Insert_str(Xodb_fsys_mgr.Cfg_grp_db_meta, Cfg_itm_html_db_exists, "y");
+			cfg_tbl.Provider().Txn_mgr().Txn_end_all_bgn_if_none();
 		}	catch (Exception e) {Gfo_usr_dlg_._.Warn_many("", "", "failed to update core: db=~{0} err=~{1}", core_provider.Conn_info().Str_raw(), Err_.Message_gplx(e));}
 	}
 	private static Xodb_file Create_db(Xodb_mgr_sql db_mgr, Xodb_fsys_mgr fsys_mgr) {
 		Xodb_file html_db_file = fsys_mgr.Make(Xodb_file_tid.Tid_html);
-		html_db_file.Provider().Exec_sql(Hdump_text_tbl.Tbl_sql);
+		html_db_file.Provider().Exec_sql(Xodb_wiki_page_html_tbl.Tbl_sql);
 		db_mgr.Tbl_xowa_db().Commit_all(fsys_mgr.Provider_core(), db_mgr.Fsys_mgr().Files_ary());
 		return html_db_file;
 	}
 	private static void Create_idx(Xodb_file html_db_file) {
-		Sqlite_engine_.Idx_create(html_db_file.Provider(), Hdump_text_tbl.Idx_core);
+		Sqlite_engine_.Idx_create(html_db_file.Provider(), Xodb_wiki_page_html_tbl.Idx_core);
 	}
 	private static final String Cfg_itm_html_db_exists = "html_db.exists";
 	public static final String 
