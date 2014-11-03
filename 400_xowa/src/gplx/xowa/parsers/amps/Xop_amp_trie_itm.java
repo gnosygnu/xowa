@@ -36,7 +36,7 @@ public class Xop_amp_trie_itm {
 				bfr.Add(xml_name_bry);	// NOTE: never write actual char; EX: "&lt;" should be written as "&lt;", not "<"
 				break;
 			default:
-				bfr.Add(Xoh_lnki_title_fmtr.Escape_bgn);					// &#
+				bfr.Add(Xoh_lnki_title_fmtr.Escape_bgn);				// &#
 				bfr.Add_int_variable(char_int);							// 160
 				bfr.Add_byte(Byte_ascii.Semic);							// ;
 				break;

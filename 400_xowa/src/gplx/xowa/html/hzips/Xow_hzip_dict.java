@@ -15,20 +15,28 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.hdumps.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
-class Xoa_hzip_dict {// SERIALIZED
+package gplx.xowa.html.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
+class Xow_hzip_dict {// SERIALIZED
 	public static final byte Escape = Byte_.int_(255);
 	public static final byte[] Escape_bry = Bry_.ints_(255);
 	public static final byte
-	  Tid_a_end				= 0
-	, Tid_lnki_ttl			= 1
-	, Tid_lnki_capt			= 2
-	, Tid_lnke				= 3	// <a href="http://xowa.sourceforge.net/blog.html" class="external text" rel="nofollow">blog</a> ->  255,4,h,xowa.sourceforge/blog.html,255,blog,255,0
+	  Tid_a_rhs					= 0
+	, Tid_lnki_text_n			= 1
+	, Tid_lnki_text_y			= 2
+	, Tid_lnke_txt				= 3
+	, Tid_lnke_brk_text_n		= 4
+	, Tid_lnke_brk_text_y		= 5
+	, Tid_hdr_lhs				= 6
+	, Tid_hdr_rhs				= 7
 	;
 	public static final byte[]
-	  Bry_a_end				= Bry_.ints_(Escape, Tid_a_end)
-	, Bry_lnki_ttl			= Bry_.ints_(Escape, Tid_lnki_ttl)
-	, Bry_lnki_capt			= Bry_.ints_(Escape, Tid_lnki_capt)
-	, Bry_lnke				= Bry_.ints_(Escape, Tid_lnke)	// <a href="http://xowa.sourceforge.net/blog.html" class="external text" rel="nofollow">blog</a> ->  255,4,h,xowa.sourceforge/blog.html,255,blog,255,0
+	  Bry_a_rhs					= Bry_.ints_(Escape, Tid_a_rhs)
+	, Bry_lnki_text_n			= Bry_.ints_(Escape, Tid_lnki_text_n)
+	, Bry_lnki_text_y			= Bry_.ints_(Escape, Tid_lnki_text_y)
+	, Bry_lnke_txt				= Bry_.ints_(Escape, Tid_lnke_txt)
+	, Bry_lnke_brk_text_n		= Bry_.ints_(Escape, Tid_lnke_brk_text_n)
+	, Bry_lnke_brk_text_y		= Bry_.ints_(Escape, Tid_lnke_brk_text_y)
+	, Bry_hdr_lhs				= Bry_.ints_(Escape, Tid_hdr_lhs)
+	, Bry_hdr_rhs				= Bry_.ints_(Escape, Tid_hdr_rhs)
 	;
 }

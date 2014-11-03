@@ -49,8 +49,3 @@ public class Xodbv_dbs_tbl {
 	}
 	//Db_stmt_bldr stmt_bldr = new Db_stmt_bldr(Tbl_name, String_.Ary(Fld_db_id), Fld_db_type, Fld_db_url);
 }
-//	class Xod_db_fil {
-//		public Xod_db_fil(int idx, Io_url url) {this.idx = idx; this.url = url;}
-//		public int Idx() {return idx;} private int idx;
-//		public Io_url Url() {return url;} private Io_url url;
-//	}

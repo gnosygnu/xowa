@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import gplx.html.*; import gplx.xowa.files.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.users.history.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.xtns.relatedSites.*;
-import gplx.xowa.wikis.xwikis.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.hdumps.hzips.*;
+import gplx.xowa.wikis.xwikis.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.html.hzips.*;
 public class Xoh_lnki_wtr {
 	private Xoa_app app; private Xow_wiki wiki; private Xoa_page page; private Xop_ctx ctx;
 	private Xoh_html_wtr_cfg cfg;
@@ -25,7 +25,6 @@ public class Xoh_lnki_wtr {
 	private Xop_lnki_caption_wtr_tkn caption_tkn_wtr;
 	private Xop_lnki_caption_wtr_bry caption_bry_wtr;
 	private Xop_lnki_logger_redlinks_mgr redlinks_mgr;
-	private Xoa_hzip_mgr hzip_mgr;
 	public Xoh_lnki_wtr(Xoh_html_wtr html_wtr, Xow_wiki wiki, Xow_html_mgr html_mgr, Xoh_html_wtr_cfg cfg) {
 		caption_tkn_wtr = new Xop_lnki_caption_wtr_tkn(html_wtr);
 		caption_bry_wtr = new Xop_lnki_caption_wtr_bry();
@@ -97,10 +96,8 @@ public class Xoh_lnki_wtr {
 		if (hctx.Mode_is_alt())
 			Write_caption(bfr, ctx, hctx, src, lnki, ttl_bry, true, caption_wkr);
 		else {
-			if (hctx.Mode_is_hdump()) {
-				if (hzip_mgr == null) hzip_mgr = new Xoa_hzip_mgr(wiki.App().Usr_dlg(), wiki);
-				hzip_mgr.Itm__lnki().Html(bfr, lnki.Caption_exists());
-			}
+			if (hctx.Mode_is_hdump())
+				wiki.Html_mgr().Hzip_mgr().Itm__anchor().Html_plain(bfr, lnki);
 			else
 				bfr.Add(Xoh_consts.A_bgn);							// '<a href="'
 			app.Href_parser().Build_to_bfr(bfr, wiki, lnki_ttl, hctx.Mode_is_popup());	// '/wiki/A'
@@ -110,9 +107,11 @@ public class Xoh_lnki_wtr {
 					bfr	.Add(Xoh_consts.A_mid_id)					// '" id=\"xowa_lnki_'
 						.Add_int_variable(lnki_html_id);			// '1234'
 			}
-			if (cfg.Lnki_title())
-				bfr	.Add(Xoh_consts.A_bgn_lnki_0)					// '" title=\"'
-					.Add(lnki_ttl.Page_txt());						// 'Abcd'		NOTE: use Page_txt to (a) replace underscores with spaces; (b) get title casing; EX:[[roman_empire]] -> Roman empire
+			if (cfg.Lnki_title()) {
+				bfr	.Add(Xoh_consts.A_bgn_lnki_0);					// '" title=\"'
+				byte[] lnki_title_bry = lnki_ttl.Page_txt();		// 'Abcd'		NOTE: use Page_txt to (a) replace underscores with spaces; (b) get title casing; EX:[[roman_empire]] -> Roman empire
+				Html_utl.Escape_html_to_bfr(bfr, lnki_title_bry, 0, lnki_title_bry.length, Bool_.N, Bool_.N, Bool_.N, Bool_.Y, Bool_.N);	// escape title; DATE:2014-10-27
+			}
 			if (hctx.Mode_is_hdump()) {
 				bfr.Add(gplx.xowa.hdumps.htmls.Hdump_html_consts.Html_redlink_bgn);
 				bfr.Add_int_variable(lnki.Html_id());

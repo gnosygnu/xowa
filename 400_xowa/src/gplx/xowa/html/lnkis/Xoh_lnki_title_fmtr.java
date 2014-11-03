@@ -23,10 +23,10 @@ public class Xoh_lnki_title_fmtr implements Bry_fmtr_arg {
 	}
 	public void Bld_recurse(Bry_bfr bfr, Xop_tkn_itm tkn) {
 		switch (tkn.Tkn_tid()) {
-			case Xop_tkn_itm_.Tid_newLine: case Xop_tkn_itm_.Tid_space: case Xop_tkn_itm_.Tid_txt:	// NOTE: atomic tkns which will have no subs
+			case Xop_tkn_itm_.Tid_newLine: case Xop_tkn_itm_.Tid_space: case Xop_tkn_itm_.Tid_txt:	// leaf tkns which will have no subs
 				Write_atr_text(bfr, src, tkn.Src_bgn(), tkn.Src_end());
 				break;
-			case Xop_tkn_itm_.Tid_arg_nde:		// caption tkns have no subs; just a key and a val; write val
+			case Xop_tkn_itm_.Tid_arg_nde:															// caption tkns have no subs; just a key and a val; recurse val
 				Arg_nde_tkn arg_nde = (Arg_nde_tkn)tkn;
 				Bld_recurse(bfr, arg_nde.Val_tkn());
 				break;

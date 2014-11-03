@@ -147,6 +147,11 @@ public class Xoh_file_wtr_basic_tst {
 		Tst_img_title("[[File:A.png|thumb|a b]]", "Enlarge");	// caption should not replace text
 		fxt.Wtr_cfg().Lnki_title_(false);
 	}
+	@Test   public void Title_escape() {	// PURPOSE: escape quotes in title; PAGE:none; DATE:2014-10-27
+		fxt.Wtr_cfg().Lnki_title_(true);
+		fxt.Test_parse_page_wiki_str("[[A\"B]]", "<a href=\"/wiki/A%22B\" title=\"A&quot;B\">A\"B</a>");
+		fxt.Wtr_cfg().Lnki_title_(false);
+	}
 	@Test  public void Img_title__caption_has_lnki() {	// PURPOSE: caption with lnki should show in title; PAGE:en.w:Earth; DATE:2014-08-06
 		fxt.Wtr_cfg().Lnki_title_(true);
 		Tst_img_title("[[File:A.png|frameless|[[A]]]]"		, "A");		// ttl only

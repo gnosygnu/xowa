@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps; import gplx.*; import gplx.xowa.*;
-import gplx.intl.*; import gplx.dbs.*;
+import gplx.intl.*; import gplx.dbs.*; import gplx.xowa.html.hzips.*;
 import gplx.xowa.hdumps.core.*; import gplx.xowa.hdumps.loads.*; import gplx.xowa.hdumps.htmls.*; import gplx.xowa.apps.fsys.*;
 public class Xowd_hdump_mgr {
 	private final Xoav_app app; private final Xowv_wiki wiki; private final Xowv_db_mgr wiki_db_mgr;
@@ -35,6 +35,7 @@ public class Xowd_hdump_mgr {
 		load_mgr.Load2(rv, app.Db_mgr().Get(wiki_db_mgr.Key_by_idx(dbpg.Html_db_id())), dbpg.Id(), ttl);
 		Bry_bfr bfr = app.Utl_bfr_mkr().Get_m001();
 		html_body.Init_by_page(wiki.Domain_bry(), rv).Write(bfr);
+		wiki.Hzip_mgr().Load(bfr, ttl_bry, bfr.Xto_bry_and_clear());
 		rv.Page_body_(bfr.Mkr_rls().Xto_bry_and_clear());
 	}
 	private void Select_by_id(Hdump_page hpg, Xodb_page dbpg) {

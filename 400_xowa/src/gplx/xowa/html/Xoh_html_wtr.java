@@ -104,7 +104,6 @@ public class Xoh_html_wtr {
 	private static final byte[] Bry_hdr_bgn = Bry_.new_ascii_("<span class='mw-headline' id='"), Bry_hdr_end = Bry_.new_ascii_("</span>");
 	@gplx.Virtual public void Hr(Xop_ctx ctx, Xoh_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Xop_hr_tkn tkn)				{bfr.Add(Tag_hr);}
 	@gplx.Virtual public void Hdr(Xop_ctx ctx, Xoh_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Xop_hdr_tkn hdr) {
-//			page.Hdrs_id_bld(hdr, src);
 		if (hdr.Hdr_html_first() && cfg.Toc_show() && !page.Hdr_mgr().Toc_manual()) {	// __TOC__ not specified; place at top; NOTE: if __TOC__ was specified, then it would be placed wherever __TOC__ appears
 			wiki.Html_mgr().Toc_mgr().Html(ctx.Cur_page(), hctx, src, bfr);
 		}

@@ -23,7 +23,18 @@ public class Xoh_lnke_wtr {
 	public void Write_all(Bry_bfr bfr, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_ctx ctx, byte[] src, Xop_lnke_tkn lnke) {
 		int lnke_bgn = lnke.Lnke_bgn(), lnke_end = lnke.Lnke_end(); boolean proto_is_xowa = lnke.Proto_tid() == Xoo_protocol_itm.Tid_xowa;
 		if (!hctx.Mode_is_alt()) {		// write href, unless mode is alt
-			bfr.Add(Xoh_consts.A_bgn);
+			if (hctx.Mode_is_hdump()) {
+				if (lnke.Lnke_typ() == Xop_lnke_tkn.Lnke_typ_text)
+					bfr.Add_str("<a xtid='a_lnke_txt' href=\"");
+				else {
+					if (lnke.Subs_len() == 0)
+						bfr.Add_str("<a xtid='a_lnke_brk_n' href=\"");
+					else
+						bfr.Add_str("<a xtid='a_lnke_brk_y' href=\"");
+				}
+			}
+			else
+				bfr.Add(Xoh_consts.A_bgn);
 			if (Write_href(bfr, ctx, src, lnke, lnke_bgn, lnke_end, proto_is_xowa))
 				bfr.Add(A_lhs_end_external);
 			else

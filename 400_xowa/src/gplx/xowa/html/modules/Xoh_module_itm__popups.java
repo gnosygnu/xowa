@@ -21,7 +21,7 @@ import gplx.xowa.apis.xowa.html.modules.*;
 public class Xoh_module_itm__popups implements Xoh_module_itm {
 	public boolean Enabled() {return enabled;} public void Enabled_y_() {enabled = true;} public void Enabled_(boolean v) {enabled = v;} private boolean enabled;
 	public boolean Bind_hover_area() {return bind_hover_area;} public void Bind_hover_area_(boolean v) {bind_hover_area = v;} private boolean bind_hover_area;
-	public void Clear() {enabled = false;}
+	public void Clear() {enabled = false; bind_hover_area = false;}
 	public byte[] Key() {return Key_const;} private static final byte[] Key_const = Bry_.new_ascii_("popups");
 	public void Write_css_script(Xoa_app app, Xow_wiki wiki, Xoa_page page, Xoh_module_wtr wtr) {}
 	public void Write_js_include(Xoa_app app, Xow_wiki wiki, Xoa_page page, Xoh_module_wtr wtr) {}

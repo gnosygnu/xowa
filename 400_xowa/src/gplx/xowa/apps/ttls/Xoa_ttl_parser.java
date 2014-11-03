@@ -15,10 +15,9 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.hdumps.srls; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
-import gplx.xowa.hdumps.core.*;
-public interface Hpg_srl_itm {
-	byte Tid();
-	int Load(Hdump_page hpg, byte[] bry, int bry_len, int itm_bgn, Int_obj_ref count_ref);
-	void Save(Hdump_page hpg, Bry_bfr bfr);
+package gplx.xowa.apps.ttls; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
+public interface Xoa_ttl_parser {
+	Xoa_ttl Ttl_parse(byte[] ttl);
+	Xoa_ttl Ttl_parse(int ns_id, byte[] ttl);
+	Xow_ns_mgr Ns_mgr();
 }

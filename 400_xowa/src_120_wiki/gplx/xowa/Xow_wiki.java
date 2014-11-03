@@ -17,11 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.xowa.apps.*;
-import gplx.xowa.wikis.*; import gplx.xowa.users.*; import gplx.xowa.html.*; import gplx.xowa.users.history.*; import gplx.xowa.specials.*; import gplx.xowa.xtns.*; import gplx.xowa.dbs.*; import gplx.xowa.files.*;
+import gplx.xowa.wikis.*; import gplx.xowa.users.*; import gplx.xowa.html.*; import gplx.xowa.users.history.*; import gplx.xowa.specials.*; import gplx.xowa.xtns.*; import gplx.xowa.dbs.*; import gplx.xowa.files.*; import gplx.xowa.apps.ttls.*;
 import gplx.xowa.langs.vnts.*; import gplx.xowa.gui.views.*; import gplx.xowa.wikis.xwikis.*;
 import gplx.xowa.setup.maints.*; import gplx.xowa.wikis.caches.*;
 import gplx.xowa.bldrs.imports.*;  import gplx.xowa.xtns.pfuncs.*;
-public class Xow_wiki implements GfoInvkAble {
+public class Xow_wiki implements GfoInvkAble, Xoa_ttl_parser {
 	private Xow_html_util util; private boolean hdump_enabled;
 	public Xow_wiki(Xoa_app app, Io_url wiki_dir, Xow_ns_mgr ns_mgr, Xol_lang lang) {
 		this.app = app; this.ns_mgr = ns_mgr; this.lang = lang;
@@ -104,6 +104,8 @@ public class Xow_wiki implements GfoInvkAble {
 		Xow_wiki_alias.Build_alias_by_lang_tid(bfr, wdata_wiki_lang, Byte_obj_ref.new_(wdata_wiki_tid));
 		wdata_wiki_abrv = bfr.Mkr_rls().Xto_bry_and_clear();
 	}
+	public Xoa_ttl Ttl_parse(byte[] ttl)			{return Xoa_ttl.parse_(this, ttl);}
+	public Xoa_ttl Ttl_parse(int ns_id, byte[] ttl) {return Xoa_ttl.parse_(this, ns_id, ttl);}
 
 	public boolean Init_needed() {return init_needed;} public Xow_wiki Init_needed_(boolean v) {init_needed = v; return this;} private boolean init_needed = true;
 

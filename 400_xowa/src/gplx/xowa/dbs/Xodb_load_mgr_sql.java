@@ -31,7 +31,7 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 	public void Load_init(Xow_wiki wiki) {
 		Load_init_cfg(wiki);
 		db_mgr.Tbl_site_stats().Select(wiki);
-		db_mgr.Tbl_xowa_ns().Load(wiki.Ns_mgr());
+		db_mgr.Tbl_xowa_ns().Select_all(wiki.Ns_mgr());
 	}
 	private void Load_init_cfg(Xow_wiki wiki) {
 		String_obj_ref version_val = String_obj_ref.null_();

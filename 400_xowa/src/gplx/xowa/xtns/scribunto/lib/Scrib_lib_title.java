@@ -114,7 +114,9 @@ public class Scrib_lib_title implements Scrib_lib {
 		String xwiki_str = args.Cast_str_or_null(3);
 		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_k004();
 		if (xwiki_str != null) tmp_bfr.Add_str(xwiki_str).Add_byte(Byte_ascii.Colon);		
-		tmp_bfr.Add(ns_bry).Add_byte(Byte_ascii.Colon).Add_str(ttl_str);
+		if (Bry_.Len_gt_0(ns_bry))	// only prefix ns if available; EX:"Template:Title"; else will get ":Title"; DATE:2014-10-30
+			tmp_bfr.Add(ns_bry).Add_byte(Byte_ascii.Colon);
+		tmp_bfr.Add_str(ttl_str);
 		if (anchor_str != null) tmp_bfr.Add_byte(Byte_ascii.Hash).Add_str(anchor_str);
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, tmp_bfr.Mkr_rls().Xto_bry_and_clear());
 		if (ttl == null) return rslt.Init_obj(null);	// invalid title; exit;

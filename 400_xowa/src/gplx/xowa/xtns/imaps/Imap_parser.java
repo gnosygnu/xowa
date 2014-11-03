@@ -109,7 +109,7 @@ class Imap_parser {
 		int pos = Bry_finder.Trim_fwd_space_tab(src, tid_end_pos, itm_end);				// gobble any leading spaces
 		int grp_end = Bry_finder.Find_fwd(src, Byte_ascii.Brack_bgn, pos, itm_end);		// find first "["; note that this is a lazy way of detecting start of lnki / lnke; MW has complicated regex, but hopefully this will be enough; DATE:2014-10-22
 		if (grp_end == -1) {return Add_err(Bool_.Y, itm_bgn, itm_end, "No valid link was found");}
-		int num_bgn = -1, comma_pos = -1;
+		int num_bgn = -1, comma_pos = -1, pts_len = 0;
 		while (true) {
 			boolean last = pos == grp_end;
 			byte b = last ? Byte_ascii.Space : src[pos];
@@ -128,20 +128,21 @@ class Imap_parser {
 						}
 						num_bgn = -1; comma_pos = -1;
 						pts.Add(Double_obj_val.new_(num));
+						++pts_len;
+						if (pts_len == reqd_pts) // NOTE: MW allows more points, but doesn't show them; EX: rect 1 2 3 4 5 -> rect 1 2 3 4; PAGE:en.w:Kilauea DATE:2014-07-28; EX:1 2 3 4 <!-- --> de.w:Wilhelm_Angele DATE:2014-10-30
+							last = true;
 					}
 					break;
 			}
 			if (last) break;
 			++pos;
 		}
-		int pts_len = pts.Count();
 		if (reqd_pts == Reqd_poly) {
 			if		(pts_len == 0)			return Add_err(Bool_.Y, itm_bgn, itm_end, "imagemap_missing_coord");
 			else if (pts_len % 2 != 0)		return Add_err(Bool_.Y, itm_bgn, itm_end, "imagemap_poly_odd");
 		}
 		else {
 			if		(pts_len < reqd_pts)	return Add_err(Bool_.Y, itm_bgn, itm_end, "imagemap_missing_coord");
-			else if (pts_len > reqd_pts)	pts.Del_range(reqd_pts, pts_len - 1);	// NOTE: MW allows more points, but doesn't show them; EX: rect 1 2 3 4 5 -> rect 1 2 3 4; PAGE:en.w:Kilauea DATE:2014-07-28
 		}
 		pos = Bry_finder.Trim_fwd_space_tab(src, pos, itm_end);
 		Imap_itm_shape shape_itm = new Imap_itm_shape(shape_tid, (Double_obj_val[])pts.Xto_ary_and_clear(Double_obj_val.class));

@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.html.*; import gplx.xowa.gui.*; 
-import gplx.xowa.hdumps.core.*; import gplx.xowa.hdumps.saves.*; import gplx.xowa.pages.*; import gplx.xowa.hdumps.loads.*; import gplx.xowa.hdumps.htmls.*; import gplx.xowa.hdumps.dbs.*; import gplx.xowa.hdumps.hzips.*;
+import gplx.xowa.hdumps.core.*; import gplx.xowa.hdumps.saves.*; import gplx.xowa.pages.*; import gplx.xowa.hdumps.loads.*; import gplx.xowa.hdumps.htmls.*; import gplx.xowa.hdumps.dbs.*; import gplx.xowa.html.hzips.*;
 public class Xodb_hdump_mgr {
-	private Xodb_file hdump_db_file; private Xoa_hzip_mgr hzip_mgr;
+	private Xodb_file hdump_db_file; private Xow_hzip_mgr hzip_mgr;
 	public Xodb_hdump_mgr(Xow_wiki wiki) {
 		this.wiki = wiki;
 		load_mgr = new Hdump_load_mgr();
@@ -27,7 +27,7 @@ public class Xodb_hdump_mgr {
 		text_tbl.Init_by_wiki(wiki);
 		Xoa_app app = wiki.App();
 		html_mgr.Init_by_app(app.Usr_dlg(), app.Fsys_mgr(), app.Encoder_mgr().Fsys());
-		hzip_mgr = new Xoa_hzip_mgr(app.Usr_dlg(), wiki);
+		hzip_mgr = wiki.Html_mgr().Hzip_mgr();
 	}
 	public Xow_wiki Wiki() {return wiki;} private final Xow_wiki wiki; 
 	@gplx.Internal protected Hdump_load_mgr Load_mgr() {return load_mgr;} private Hdump_load_mgr load_mgr;
@@ -59,11 +59,11 @@ public class Xodb_hdump_mgr {
 		wkr.Write_body(bfr, Xoh_wtr_ctx.Hdump, page);
 		page.Hdump_data().Body_(bfr.Xto_bry_and_clear());
 	}
-	public void Write2(Bry_bfr tmp_bfr, Xoa_page page) {
+	public void Write2(Bry_bfr tmp_bfr, Xoa_page page, Xow_hzip_stats stats) {
 		page.File_queue().Clear();	// need to reset uid to 0, else xowa_file_# will resume from last
 		Xoh_page_wtr_wkr wkr = wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_view_mode.Tid_read);
 		wkr.Write_body(tmp_bfr, Xoh_wtr_ctx.Hdump, page);
-		hzip_mgr.Save(tmp_bfr, page.Url().Xto_full_bry(), tmp_bfr.Xto_bry_and_clear());
+		hzip_mgr.Save(tmp_bfr, stats, page.Url().Xto_full_bry(), tmp_bfr.Xto_bry_and_clear());
 		page.Hdump_data().Body_(tmp_bfr.Xto_bry_and_clear());
 		hpg.Init(tmp_bfr, page);
 	}	private Hdump_page hpg = new Hdump_page();
