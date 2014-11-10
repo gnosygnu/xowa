@@ -50,7 +50,7 @@ public class Pp_pages_nde_hdr_tst {
 		fxt.Init_page_create("Page:A/1", "A/1");
 		// from specified; don't add toc
 		fxt.Test_parse_page_wiki_str("<pages index='A' from='1'/>", String_.Concat_lines_nl
-		(	"<p>A/1 "
+		(	"<p>A/1&#32;"
 		,	"</p>"
 		));
 	}
@@ -63,7 +63,7 @@ public class Pp_pages_nde_hdr_tst {
 		(	"<p>value=toc;from=2;to=2;"
 		,	"</p>"
 		,	""
-		,	"<p>a2 "
+		,	"<p>a2&#32;"
 		,	"</p>"
 		));
 	}

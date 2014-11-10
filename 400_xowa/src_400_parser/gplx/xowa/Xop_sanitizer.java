@@ -74,7 +74,8 @@ public class Xop_sanitizer {
 							Xop_amp_trie_itm itm = (Xop_amp_trie_itm)amp_obj;
 							byte itm_tid = itm.Tid();
 							switch (itm_tid) {
-								case Xop_amp_trie_itm.Tid_name:
+								case Xop_amp_trie_itm.Tid_name_std:
+								case Xop_amp_trie_itm.Tid_name_xowa:
 									bfr.Add(itm.Utf8_bry());
 									pos += itm.Key_name_len() + 1;	// 1 for trailing ";"; EX: for "&nbsp; ", (a) pos is at "&", (b) "nbsp" is Key_name_len, (c) ";" needs + 1 
 									break;

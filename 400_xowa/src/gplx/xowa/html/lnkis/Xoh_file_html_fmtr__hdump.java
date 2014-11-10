@@ -16,10 +16,25 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
+import gplx.html.*;
 import gplx.xowa.files.*; import gplx.xowa.hdumps.htmls.*;
 public class Xoh_file_html_fmtr__hdump extends Xoh_file_html_fmtr__base {
 	private Bry_bfr tmp_bfr = Bry_bfr.reset_(128);
 	@gplx.Internal @Override protected Xoh_arg_img_core New_arg_img_core() {return new Xoh_arg_img_core__hdump();}
+//		public override void Html_full_media(Bry_bfr tmp_bfr, byte[] a_href, byte[] a_title, Bry_fmtr_arg html) {
+//			fmtr_full_media.Bld_bfr_many(tmp_bfr, a_href, a_title, html);
+//		}
+	@Override public void Html_full_img(Bry_bfr tmp_bfr, Xoh_wtr_ctx hctx, Xoa_page page, Xof_xfer_itm xfer_itm, int uid
+		, byte[] a_href, byte a_cls, byte a_rel, byte[] a_title, byte[] a_xowa_title
+		, int img_w, int img_h, byte[] img_src, byte[] img_alt, byte img_cls, byte[] img_cls_other) {
+		tmp_bfr.Add_str_ascii("<a xtid='a_img_full' xatrs='");
+		tmp_bfr.Add_str_ascii(a_cls == Xoh_lnki_consts.Tid_a_cls_none ? "0|" : "1|");	// "" || "cls=image"
+		tmp_bfr.Add_str_ascii(a_rel == Xoh_lnki_consts.Tid_a_rel_none ? "0|" : "1|");	// "" || "rel=nofollow"
+		tmp_bfr.Add_int_variable(uid).Add_byte_pipe();
+		tmp_bfr.Add(Xoh_lnki_consts.Img_cls_to_bry(img_cls, img_cls_other));			// "" || "cls=thumbborder || thumbimage || other"
+		Html_utl.Escape_html_to_bfr(tmp_bfr, img_alt, 0, img_alt.length, Bool_.N, Bool_.N, Bool_.N, Bool_.N, Bool_.Y);
+		tmp_bfr.Add_str_ascii("'/>");
+	}
 	@Override public void Html_thumb_core(Bry_bfr bfr, int uid, byte[] div1_halign, int div2_width, byte[] div2_content) {
 		tmp_bfr.Add(Hdump_html_consts.Key_img_style);
 		tmp_bfr.Add_int_variable(uid);

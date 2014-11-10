@@ -36,6 +36,7 @@ class Xow_hzip_xtid {
 	, Bry_lnke_txt			= Bry_.new_ascii_("a_lnke_txt")
 	, Bry_lnke_brk_n		= Bry_.new_ascii_("a_lnke_brk_n")
 	, Bry_lnke_brk_y		= Bry_.new_ascii_("a_lnke_brk_y")
+	, Bry_img_full			= Bry_.new_ascii_("a_img_full")
 	, Bry_hdr				= Bry_.new_ascii_("hdr")
 	;
 	private static final Hash_adp_bry Xtids = Hash_adp_bry.cs_()
@@ -44,6 +45,7 @@ class Xow_hzip_xtid {
 	.Add_bry_byte(Bry_lnke_txt			, Xow_hzip_dict.Tid_lnke_txt)
 	.Add_bry_byte(Bry_lnke_brk_n		, Xow_hzip_dict.Tid_lnke_brk_text_n)
 	.Add_bry_byte(Bry_lnke_brk_y		, Xow_hzip_dict.Tid_lnke_brk_text_y)
+	.Add_bry_byte(Bry_img_full			, Xow_hzip_dict.Tid_img_full)
 	.Add_bry_byte(Bry_hdr				, Xow_hzip_dict.Tid_hdr_lhs)
 	;
 }

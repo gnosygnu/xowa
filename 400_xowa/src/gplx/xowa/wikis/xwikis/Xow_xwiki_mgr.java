@@ -169,12 +169,17 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 	}	private static final String GRP_KEY = "xowa.wiki.xwikis";
 	public void Add_itm(Xow_xwiki_itm itm) {Add_itm(itm, null);}
 	private void Add_itm(Xow_xwiki_itm xwiki, Xoac_lang_itm lang) {
+		byte[] xwiki_key = xwiki.Key_bry();
 		if (	!hash.Has(xwiki.Key_bry())		// only register xwiki / lang pair once
 			&&	lang != null)					// null lang should not be registered
 			lang_mgr.Itms_reg(xwiki, lang);
-		hash.AddReplace(xwiki.Key_bry(), xwiki);
-		list.AddReplace(xwiki.Key_bry(), xwiki);
-	}
+		byte[] xwiki_domain = xwiki.Domain();
+		if (!domain_hash.Has(xwiki_domain)) {	// domain is new
+			domain_hash.Add(xwiki_domain, xwiki_key);
+			list.AddReplace(xwiki_key, xwiki);	// only add to list if domain is new; some wikis like commons will be added multiple times under different aliases (commons, c, commons.wikimedia.org); need to check domain and add only once DATE:2014-11-07
+		}
+		hash.AddReplace(xwiki_key, xwiki);
+	}	private final Hash_adp_bry domain_hash = Hash_adp_bry.ci_ascii_(); 
 	public void Add_many(byte[] v) {srl.Load_by_bry(v);}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_count))						return list.Count();

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.core.btries.*; import gplx.html.*;
+import gplx.core.btries.*; import gplx.html.*; import gplx.xowa.parsers.amps.*;
 public class Nowiki_escape_itm {
 	public Nowiki_escape_itm(byte[] src, byte[] trg) {this.src = src; this.trg = trg; this.src_adj = src.length - 1;}
 	private int src_adj;
@@ -47,19 +47,19 @@ public class Nowiki_escape_itm {
 	private static final Btrie_slim_mgr trie = trie_new();
 	private static Btrie_slim_mgr trie_new() {
 		Btrie_slim_mgr rv = Btrie_slim_mgr.cs_();
-		trie_new_itm(rv, Byte_ascii.Lt_bry				, Html_entity_.Lt_bry);
-		trie_new_itm(rv, Byte_ascii.Brack_bgn_bry		, Html_entity_.Brack_bgn_bry);
-		trie_new_itm(rv, Byte_ascii.Brack_end_bry		, Html_entity_.Brack_end_bry);	// PAGE:en.w: Tall_poppy_syndrome DATE:2014-07-23
-		trie_new_itm(rv, Byte_ascii.Pipe_bry			, Html_entity_.Pipe_bry);
-		trie_new_itm(rv, Byte_ascii.Apos_bry			, Html_entity_.Apos_key_bry);	// NOTE: for backward compatibility, use &apos; note that amp_wkr will turn &apos; -> &#39 but &#39 -> '; DATE:2014-07-03
-		trie_new_itm(rv, Byte_ascii.Colon_bry			, Html_entity_.Colon_bry);
-		trie_new_itm(rv, Byte_ascii.Underline_bry		, Html_entity_.Underline_bry);
-		trie_new_itm(rv, Byte_ascii.Asterisk_bry		, Html_entity_.Asterisk_bry);
-		trie_new_itm(rv, Byte_ascii.Space_bry			, Html_entity_.Space_bry);
-		trie_new_itm(rv, Byte_ascii.NewLine_bry			, Html_entity_.Nl_bry);
+		trie_new_itm(rv, Byte_ascii.Lt_bry				, Xop_amp_trie.Bry_xowa_lt);
+		trie_new_itm(rv, Byte_ascii.Brack_bgn_bry		, Xop_amp_trie.Bry_xowa_brack_bgn);
+		trie_new_itm(rv, Byte_ascii.Brack_end_bry		, Xop_amp_trie.Bry_xowa_brack_end);	// PAGE:en.w: Tall_poppy_syndrome DATE:2014-07-23
+		trie_new_itm(rv, Byte_ascii.Pipe_bry			, Xop_amp_trie.Bry_xowa_pipe);
+		trie_new_itm(rv, Byte_ascii.Apos_bry			, Xop_amp_trie.Bry_xowa_apos);	// NOTE: for backward compatibility, use &apos; note that amp_wkr will turn &apos; -> &#39 but &#39 -> '; DATE:2014-07-03
+		trie_new_itm(rv, Byte_ascii.Colon_bry			, Xop_amp_trie.Bry_xowa_colon);
+		trie_new_itm(rv, Byte_ascii.Underline_bry		, Xop_amp_trie.Bry_xowa_underline);
+		trie_new_itm(rv, Byte_ascii.Asterisk_bry		, Xop_amp_trie.Bry_xowa_asterisk);
+		trie_new_itm(rv, Byte_ascii.Space_bry			, Xop_amp_trie.Bry_xowa_space);
+		trie_new_itm(rv, Byte_ascii.NewLine_bry			, Xop_amp_trie.Bry_xowa_nl);
 		trie_new_itm(rv, Pre_bry						, Pre_bry);
 		return rv;
-	}
+	}		
 	private static void trie_new_itm(Btrie_slim_mgr rv, byte[] src, byte[] trg) {
 		Nowiki_escape_itm itm = new Nowiki_escape_itm(src, trg);
 		rv.Add_obj(src, itm);			

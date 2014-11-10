@@ -50,7 +50,7 @@ public class References_nde implements Xox_xnde, Xop_xnde_atr_parser {
 	public void Xtn_write(Bry_bfr bfr, Xoa_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
 		html_wtr.Ref_wtr().Xnde_references(html_wtr, ctx, hctx, bfr, src, xnde);
 	}
-	public static final byte Xatr_id_group = 0;
+	private static final byte Xatr_id_group = 0;
 	public static boolean Enabled = true;
 	private static final Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_ascii_()
 	.Add_str_obj("group", Byte_obj_val.new_(References_nde.Xatr_id_group));

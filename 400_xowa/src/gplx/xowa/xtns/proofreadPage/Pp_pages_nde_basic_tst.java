@@ -31,7 +31,7 @@ public class Pp_pages_nde_basic_tst {
 	@Test  public void Basic() {
 		fxt.Init_page_create("Page:A/1", "abc");
 		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to=1 />", String_.Concat_lines_nl
-		(	"<p>abc "
+		(	"<p>abc&#32;"
 		,	"</p>"
 		,	""
 		));
@@ -41,7 +41,7 @@ public class Pp_pages_nde_basic_tst {
 		fxt.Init_page_create("Page:A/2", "b");
 		fxt.Init_page_create("Page:A/3", "c");
 		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to=3 />", String_.Concat_lines_nl
-		(	"<p>a b c "
+		(	"<p>a&#32;b&#32;c&#32;"
 		,	"</p>"
 		,	""
 		));
@@ -51,21 +51,21 @@ public class Pp_pages_nde_basic_tst {
 		fxt.Init_page_create("Page:A/2", "cd");
 		fxt.Init_page_create("Page:A/3", "e<section end=\"sect_2\"/>f");
 		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to=3 fromsection='sect_0' tosection='sect_2' />", String_.Concat_lines_nl
-		(	"<p>b cd e "
+		(	"<p>b&#32;cd&#32;e&#32;"
 		,	"</p>"
 		));
 	}
 	@Test  public void Section__onlyinclude() {
 		fxt.Init_page_create("Page:A/1", "a<section begin='sect_0'/>b<section end='sect_0'/>c");
 		fxt.Test_parse_page_wiki_str("<pages index='A' from=1 to=1 onlysection='sect_0' />", String_.Concat_lines_nl
-		(	"<p>b "
+		(	"<p>b&#32;"
 		,	"</p>"
 		));
 	}
 	@Test  public void Section__onlyinclude_ignores_from_to() {
 		fxt.Init_page_create("Page:A/1", "<section begin='sect_a'/>a<section end='sect_a'/><section begin='sect_b'/>b<section end='sect_b'/><section begin='sect_c'/>c<section end='sect_c'/>");
 		fxt.Test_parse_page_wiki_str("<pages from=1 index='A' onlysection='sect_b' fromsection='sect_a' tosection='sect_c' />", String_.Concat_lines_nl
-		(	"<p>b "
+		(	"<p>b&#32;"
 		,	"</p>"
 		));
 	}
@@ -80,7 +80,7 @@ public class Pp_pages_nde_basic_tst {
 		,	"    </td>"
 		,	"  </tr>"
 		,	"</table>"
-		,	" <i>d</i> f "
+		,	"&#32;<i>d</i>&#32;f&#32;"
 		));
 	}
 	@Test  public void Err_page_ns_doesnt_exist() {
@@ -92,7 +92,7 @@ public class Pp_pages_nde_basic_tst {
 	@Test  public void Subpage() {	// PURPOSE: [[/Page]] should be relative to current page; EX: Flatland and [[/First World]]; DATE:2013-04-29
 		fxt.Init_page_create("Page:A/1", "[[/Sub1|Sub 1]]");
 		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to=1 />", String_.Concat_lines_nl
-		(	"<p><a href=\"/wiki/Test_page/Sub1\">Sub 1</a> "	// NOTE: / is relative to Page_name (in this case Test_page)
+		(	"<p><a href=\"/wiki/Test_page/Sub1\">Sub 1</a>&#32;"	// NOTE: / is relative to Page_name (in this case Test_page)
 		,	"</p>"
 		));
 	}

@@ -16,13 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.wikis.xwikis.*; import gplx.xowa.html.*; import gplx.xowa.net.*;
+import gplx.xowa.net.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.html.*; import gplx.xowa.html.lnkis.*;
 public class Xop_link_parser {
 	public byte[] Html_xowa_ttl()	{return html_xowa_ttl;} private byte[] html_xowa_ttl;
-	public byte[] Html_anchor_cls()	{return html_anchor_cls;} private byte[] html_anchor_cls;
-	public byte[] Html_anchor_rel()	{return html_anchor_rel;} private byte[] html_anchor_rel;
+	public byte Html_anchor_cls()	{return html_anchor_cls;} private byte html_anchor_cls;
+	public byte Html_anchor_rel()	{return html_anchor_rel;} private byte html_anchor_rel;
 	public byte[] Parse(Bry_bfr tmp_bfr, Xoa_url tmp_url, Xow_wiki wiki, byte[] raw, byte[] or) {
-		html_xowa_ttl = null; html_anchor_cls = Xow_html_mgr.Bry_anchor_class_image; html_anchor_rel = Xow_html_mgr.Bry_anchor_rel_blank;	// default member variables for html
+		html_xowa_ttl = null; html_anchor_cls = Xoh_lnki_consts.Tid_a_cls_image; html_anchor_rel = Xoh_lnki_consts.Tid_a_rel_none;	// default member variables for html
 		Xoa_app app = wiki.App(); int raw_len = raw.length;
 		app.Url_parser().Parse(tmp_url, raw);							
 		switch (tmp_url.Protocol_tid()) {
@@ -40,8 +40,8 @@ public class Xop_link_parser {
 						tmp_bfr.Add(raw);								//   dump everything									
 				}
 				raw = tmp_bfr.Xto_bry_and_clear();
-				html_anchor_cls = Xow_html_mgr.Bry_anchor_class_blank;
-				html_anchor_rel = Xow_html_mgr.Bry_anchor_rel_nofollow;
+				html_anchor_cls = Xoh_lnki_consts.Tid_a_cls_none;
+				html_anchor_rel = Xoh_lnki_consts.Tid_a_rel_nofollow;
 				break;
 			case Xoo_protocol_itm.Tid_file:		// "file:///" or "File:A.png"
 				int proto_len = tmp_url.Protocol_bry().length;

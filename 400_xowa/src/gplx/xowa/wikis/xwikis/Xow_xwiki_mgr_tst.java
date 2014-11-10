@@ -38,6 +38,9 @@ public class Xow_xwiki_mgr_tst {
 	@Test   public void Add_bulk_peers_tid() { // PURPOSE:wikt should generate wiki_tid of wiktionary, not wikipedia; PAGE:en.s:Main_Page DATE:2014-09-14
 		fxt.Init_wikt ().Test_add_bulk_peers("peer", fxt.xwiki_("wikt", "en.wiktionary.org", "http://en.wiktionary.org/wiki/~{0}"));
 	}
+	@Test   public void Multiple_aliases_should_only_add_once() {	// PURPOSE.FIX: multiple aliases for same domain should only be added once to Get_at's list; DATE:2014-11-07
+		fxt.Exec_add_bulk("a1|a.org\na2|a.org").Test_len(1);
+	}
 }
 class Xow_xwiki_mgr_fxt {
 	Xow_xwiki_mgr xwiki_mgr; Xoa_lang_mgr lang_mgr; String_bldr sb = String_bldr_.new_(); Xoa_app app; Xow_wiki wiki;
@@ -109,6 +112,8 @@ class Xow_xwiki_mgr_fxt {
 		Tfds.Eq_str_lines(Xto_str(itms), Xto_str(Xto_ary(itms)));
 		return this;
 	}
+	public Xow_xwiki_mgr_fxt Exec_add_bulk(String raw)	{xwiki_mgr.Add_bulk(Bry_.new_utf8_(raw)); return this;}
+	public Xow_xwiki_mgr_fxt Test_len(int expd)			{Tfds.Eq(expd, xwiki_mgr.Len()); return this;}
 	Xow_xwiki_itm[] Xto_ary(Xow_xwiki_itm[] itms) {
 		int len = itms.length;
 		ListAdp rv = ListAdp_.new_();

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
 import gplx.core.btries.*; import gplx.html.*; import gplx.xowa.wikis.*; import gplx.xowa.net.*;
 import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.lists.*; import gplx.xowa.html.lnkis.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.paras.*;
-import gplx.xowa.xtns.*; import gplx.xowa.xtns.dynamicPageList.*; import gplx.xowa.xtns.math.*; import gplx.xowa.langs.vnts.*; import gplx.xowa.xtns.cite.*;
+import gplx.xowa.xtns.*; import gplx.xowa.xtns.dynamicPageList.*; import gplx.xowa.xtns.math.*; import gplx.xowa.langs.vnts.*; import gplx.xowa.xtns.cite.*; import gplx.xowa.html.hzips.*;
 public class Xoh_html_wtr {
 	private Xow_wiki wiki; private Xoa_app app; private Xoa_page page; private Xop_xatr_whitelist_mgr whitelist_mgr;
 	public Xoh_html_wtr(Xow_wiki wiki, Xow_html_mgr html_mgr) {
@@ -95,12 +95,14 @@ public class Xoh_html_wtr {
 		}
 	}
 	@gplx.Virtual public void Html_ncr(Xop_ctx ctx, Xoh_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Xop_amp_tkn_num tkn)	{
-		if (tkn.Val() < Byte_ascii.Max_7_bit)		// NOTE: must "literalize"; <nowiki> converts wiki chars to ncrs, which must be "literalized: EX: <nowiki>[[A]]</nowiki> -> &#92;&#92;A&#93;&#93; which must be converted back to [[A]]
-			bfr.Add(tkn.Str_as_bry());
-		else
-			bfr.Add_byte(Byte_ascii.Amp).Add_byte(Byte_ascii.Hash).Add_int_variable(tkn.Val()).Add_byte(Byte_ascii.Semic);	// NOTE: do not literalize, else browser may not display multi-char bytes properly; EX: &#160; gets added as &#160; not as {192,160}; DATE:2013-12-09
+		bfr.Add_byte(Byte_ascii.Amp).Add_byte(Byte_ascii.Hash).Add_int_variable(tkn.Val()).Add_byte(Byte_ascii.Semic);	// NOTE: do not literalize, else browser may not display multi-char bytes properly; EX: &#160; gets added as &#160; not as {192,160}; DATE:2013-12-09
 	}
-	@gplx.Virtual public void Html_ref(Xop_ctx ctx, Xoh_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Xop_amp_tkn_txt tkn)	{tkn.Print_to_html(bfr);}
+	@gplx.Virtual public void Html_ref(Xop_ctx ctx, Xoh_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Xop_amp_tkn_txt tkn) {
+		if (tkn.Itm_is_custom())	// used by <nowiki>; EX:<nowiki>&#60;</nowiki> -> &xowa_lt; DATE:2014-11-07
+			tkn.Print_literal(bfr);
+		else
+			tkn.Print_ncr(bfr);
+	}
 	private static final byte[] Bry_hdr_bgn = Bry_.new_ascii_("<span class='mw-headline' id='"), Bry_hdr_end = Bry_.new_ascii_("</span>");
 	@gplx.Virtual public void Hr(Xop_ctx ctx, Xoh_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Xop_hr_tkn tkn)				{bfr.Add(Tag_hr);}
 	@gplx.Virtual public void Hdr(Xop_ctx ctx, Xoh_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Xop_hdr_tkn hdr) {
@@ -126,6 +128,8 @@ public class Xoh_html_wtr {
 		if (hdr_len > 0) {	// NOTE: need to check hdr_len b/c it could be dangling
 			if (hdr.Hdr_end_manual() > 0) bfr.Add_byte_repeat(Byte_ascii.Eq, hdr.Hdr_end_manual());
 			if (cfg.Toc_show()) {
+				if (hctx.Mode_is_hdump())
+					bfr.Add(Xow_hzip_itm__header.Hdr_end);
 				bfr.Add(Bry_hdr_end);
 			}
 			bfr.Add(Tag_hdr_end).Add_int(hdr_len, 1, 1).Add_byte(Tag__end).Add_byte_nl();// NOTE: do not need to check hdr_len b/c it is impossible for end to occur without bgn
@@ -402,6 +406,7 @@ public class Xoh_html_wtr {
 			case Xop_xnde_tag_.Tid_rss:
 			case Xop_xnde_tag_.Tid_quiz:
 			case Xop_xnde_tag_.Tid_math:
+			case Xop_xnde_tag_.Tid_indicator:
 			case Xop_xnde_tag_.Tid_xowa_html:
 				Xox_xnde xtn = xnde.Xnde_xtn();
 				xtn.Xtn_write(bfr, app, ctx, this, hctx, xnde, src);
@@ -605,7 +610,6 @@ public class Xoh_html_wtr {
 	, Tag_tblw_tc_bgn = Bry_.new_ascii_("<caption>"), Tag_tblw_tc_bgn_atr = Bry_.new_ascii_("<caption"), Tag_tblw_tc_end = Bry_.new_ascii_("</caption>")
 	, Ary_escape_bgn = Bry_.new_ascii_("&lt;"), Ary_escape_end = Bry_.new_ascii_("&gt;"), Ary_escape_end_bgn = Bry_.new_ascii_("&lt;/")
 	, Tag_para_bgn = Bry_.new_ascii_("<p>"), Tag_para_end = Bry_.new_ascii_("</p>"), Tag_para_mid = Bry_.new_ascii_("</p>\n\n<p>")
-	, Tag_image_end = Bry_.new_ascii_("</img>")
 	, Tag_pre_bgn = Bry_.new_ascii_("<pre>"), Tag_pre_end = Bry_.new_ascii_("</pre>")
 	;
 	public static final byte Tag__bgn = Byte_ascii.Lt, Tag__end = Byte_ascii.Gt;

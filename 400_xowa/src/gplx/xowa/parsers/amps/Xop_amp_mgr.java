@@ -28,14 +28,17 @@ public class Xop_amp_mgr {
 		cur_pos = amp_trie.Match_pos();
 		if (o == null) return null;
 		Xop_amp_trie_itm itm = (Xop_amp_trie_itm)o;
-		if (itm.Tid() == Xop_amp_trie_itm.Tid_name) {
-			rslt_pos = cur_pos;
-			return tkn_mkr.Amp_txt(amp_pos, cur_pos, itm);
-		}
-		else {
-			boolean ncr_is_hex = itm.Tid() == Xop_amp_trie_itm.Tid_num_hex;
-			boolean pass = Parse_as_int(ncr_is_hex, src, src_len, amp_pos, cur_pos);
-			return pass ? tkn_mkr.Amp_num(amp_pos, rslt_pos, rslt_val) : null;
+		switch (itm.Tid()) {
+			case Xop_amp_trie_itm.Tid_name_std:
+			case Xop_amp_trie_itm.Tid_name_xowa:
+				rslt_pos = cur_pos;
+				return tkn_mkr.Amp_txt(amp_pos, cur_pos, itm);
+			case Xop_amp_trie_itm.Tid_num_hex:
+			case Xop_amp_trie_itm.Tid_num_dec:
+				boolean ncr_is_hex = itm.Tid() == Xop_amp_trie_itm.Tid_num_hex;
+				boolean pass = Parse_as_int(ncr_is_hex, src, src_len, amp_pos, cur_pos);
+				return pass ? tkn_mkr.Amp_num(amp_pos, rslt_pos, rslt_val) : null;
+			default: throw Err_.unhandled(itm.Tid());
 		}
 	}
 	public byte[] Decode_as_bry(byte[] src) {
@@ -56,18 +59,24 @@ public class Xop_amp_mgr {
 							dirty = true;
 						}
 						Xop_amp_trie_itm amp_itm = (Xop_amp_trie_itm)amp_obj;
-						if (amp_itm.Tid() == Xop_amp_trie_itm.Tid_name) {
-							tmp_bfr.Add(amp_itm.Utf8_bry());
-							pos = amp_trie.Match_pos();
-						}
-						else {
-							boolean ncr_is_hex = amp_itm.Tid() == Xop_amp_trie_itm.Tid_num_hex;
-							int int_bgn = amp_trie.Match_pos();
-							if (Parse_as_int(ncr_is_hex, src, src_len, pos, int_bgn))
-								tmp_bfr.Add_utf8_int(rslt_val);
-							else 
-								tmp_bfr.Add_mid(src, pos, nxt_pos);
-							pos = rslt_pos;
+						switch (amp_itm.Tid()) {
+							case Xop_amp_trie_itm.Tid_name_std:
+							case Xop_amp_trie_itm.Tid_name_xowa:
+								tmp_bfr.Add(amp_itm.Utf8_bry());
+								pos = amp_trie.Match_pos();
+								break;
+							case Xop_amp_trie_itm.Tid_num_hex:
+							case Xop_amp_trie_itm.Tid_num_dec:
+								boolean ncr_is_hex = amp_itm.Tid() == Xop_amp_trie_itm.Tid_num_hex;
+								int int_bgn = amp_trie.Match_pos();
+								if (Parse_as_int(ncr_is_hex, src, src_len, pos, int_bgn))
+									tmp_bfr.Add_utf8_int(rslt_val);
+								else 
+									tmp_bfr.Add_mid(src, pos, nxt_pos);
+								pos = rslt_pos;
+								break;
+							default:
+								throw Err_.unhandled(amp_itm.Tid());
 						}
 						continue;
 					}

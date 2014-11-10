@@ -248,7 +248,32 @@ public class Bry_bfr {
 			Add(val);
 		return this;
 	}
-	public Bry_bfr Add_str(String v) {return Add(Bry_.new_utf8_(v));}
+	public Bry_bfr Add_str(String v) {return Add_str_utf8(v);}
+	public Bry_bfr Add_str_utf8(String str) {
+		try {
+			int str_len = str.length();							
+			int bry_len = Bry_.new_utf8_len(str, str_len);
+			if (bfr_len + bry_len > bfr_max) Resize((bfr_max + bry_len) * 2);
+			Bry_.new_utf8_write(str, str_len, bfr, bfr_len);
+			bfr_len += bry_len;
+			return this;
+		}
+		catch (Exception e) {throw Err_.err_(e, "invalid UTF-8 sequence; str={0}", str);}
+	}
+	public Bry_bfr Add_str_ascii(String str) {
+		try {
+			int bry_len = str.length();							
+			if (bfr_len + bry_len > bfr_max) Resize((bfr_max + bry_len) * 2);
+			for (int i = 0; i < bry_len; ++i) {
+				char c = str.charAt(i);							
+				if (c > 128) c = '?';
+				bfr[i + bfr_len] = (byte)c;
+			}
+			bfr_len += bry_len;
+			return this;
+		}
+		catch (Exception e) {throw Err_.err_(e, "invalid UTF-8 sequence; str={0}", str);}
+	}
 	public Bry_bfr Add_float(float f) {Add_str(Float_.Xto_str(f)); return this;}
 	public Bry_bfr Add_double(double v) {Add_str(Double_.Xto_str(v)); return this;}
 	public Bry_bfr Add_dte(DateAdp val) {return Add_dte_segs(val.Year(), val.Month(),val.Day(), val.Hour(), val.Minute(), val.Second(), val.Frac());}

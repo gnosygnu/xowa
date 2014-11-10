@@ -72,6 +72,4 @@ public class Xow_html_mgr implements GfoInvkAble {
 	, Invk_portal = "portal", Invk_imgs = "imgs", Invk_ns_ctg = "ns_ctg"
 	, Invk_modules = "modules"
 	;
-	public static final String Str_img_class_thumbimage = "thumbimage";
-	public static final byte[] Bry_anchor_class_image = Bry_.new_ascii_(" class=\"image\""), Bry_anchor_class_blank = Bry_.Empty, Bry_anchor_rel_nofollow = Bry_.new_ascii_(" rel=\"nofollow\""), Bry_anchor_rel_blank = Bry_.Empty, Bry_img_cls_thumbimage = Bry_.new_ascii_(" class=\"thumbimage\""), Bry_img_cls_none = Bry_.Empty;
 }

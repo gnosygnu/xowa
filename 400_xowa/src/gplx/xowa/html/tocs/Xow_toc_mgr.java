@@ -188,6 +188,7 @@ public class Xow_toc_mgr implements Bry_fmtr_arg {
 	}
 	public void Html(Xoa_page page, Xoh_wtr_ctx hctx, byte[] src, Bry_bfr bfr) {
 		if (!page.Hdr_mgr().Toc_enabled()) return;	// REF.MW: Parser.php|formatHeadings
+		if (hctx.Mode_is_hdump()) return;
 		this.page = page;
 		byte[] bry_contents = page.Wiki().Msg_mgr().Val_by_id(Xol_msg_itm_.Id_toc);
 		bfmtr_main.Bld_bfr_many(bfr, Bry_fmtr_arg_.bry_(bry_contents), this);

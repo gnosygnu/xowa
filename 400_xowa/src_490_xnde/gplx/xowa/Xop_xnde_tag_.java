@@ -134,8 +134,9 @@ public class Xop_xnde_tag_ {
 , Tid_xowa_tag_bgn = 109
 , Tid_xowa_tag_end = 110
 , Tid_quiz = 111
+, Tid_indicator = 112
 	;
-	public static final int _MaxLen = 112;
+	public static final int _MaxLen = 113;
 	public static final Xop_xnde_tag[] Ary = new Xop_xnde_tag[_MaxLen];
 	private static Xop_xnde_tag new_(int id, String name) {
 		Xop_xnde_tag rv = new Xop_xnde_tag(id, name);
@@ -196,7 +197,7 @@ public class Xop_xnde_tag_ {
 , Tag_colgroup = new_(Tid_colgroup, "colgroup")
 , Tag_col = new_(Tid_col, "col")
 , Tag_a = new_(Tid_a, "a").Restricted_()
-, Tag_img = new_(Tid_img, "img").Xtn_().Restricted_()
+, Tag_img = new_(Tid_img, "img").Restricted_()	// NOTE: was .Xtn() DATE:2014-11-06
 , Tag_ruby = new_(Tid_ruby, "ruby").NoInline_()
 , Tag_rt = new_(Tid_rt, "rt").NoInline_()
 , Tag_rb = new_(Tid_rb, "rb").NoInline_()
@@ -255,5 +256,6 @@ public class Xop_xnde_tag_ {
 , Tag_xowa_tag_bgn = new_(Tid_xowa_tag_bgn, "xtag_bgn").Xtn_()
 , Tag_xowa_tag_end = new_(Tid_xowa_tag_end, "xtag_end").Xtn_()
 , Tag_quiz = new_(Tid_quiz, "quiz").Xtn_()
+, Tag_indicator = new_(Tid_indicator, "indicator").Xtn_()
 	;
 }

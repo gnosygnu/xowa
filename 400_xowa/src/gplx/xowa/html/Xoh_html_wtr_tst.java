@@ -56,7 +56,7 @@ public class Xoh_html_wtr_tst {
 	@Test  public void Apos_i()						{fxt.Test_parse_page_wiki_str("''a''"						, "<i>a</i>");}
 	@Test  public void Apos_b()						{fxt.Test_parse_page_wiki_str("'''a'''"						, "<b>a</b>");}
 	@Test  public void Apos_ib()					{fxt.Test_parse_page_wiki_str("'''''a'''''"					, "<i><b>a</b></i>");}
-	@Test  public void Html_ent()					{fxt.Test_parse_page_wiki_str("&#33;"						, "!");}
+	@Test  public void Html_ent()					{fxt.Test_parse_page_wiki_str("&#33;"						, "&#33;");}	// PURPOSE:ncrs should be literal, not decoded (!);  DATE:2014-11-06
 	@Test  public void Html_ref()					{fxt.Test_parse_page_wiki_str("&gt;"						, "&gt;");}
 	@Test  public void List_1_itm()	{
 		fxt.Test_parse_page_wiki_str("*a", String_.Concat_lines_nl_skip_last

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import org.junit.*; import gplx.xowa.html.*; import gplx.xowa.hdumps.srls.*;
 public class Xow_hzip_itm__anchor_tst {
-	@Before public void init() {fxt.Clear();} private Xow_hzip_itm__anchor_fxt fxt = new Xow_hzip_itm__anchor_fxt();
+	@Before public void init() {fxt.Clear();} private Xow_hzip_mgr_fxt fxt = new Xow_hzip_mgr_fxt();
 	@Test   public void Srl_lnki_text_n() {
 		byte[][] brys = Bry_.Ary(Xow_hzip_dict.Bry_lnki_text_n, Bry_.ints_(2), Bry_.new_ascii_("A"), Xow_hzip_dict.Escape_bry);
 		fxt.Test_save(brys, "<a xtid='a_lnki_text_n' href=\"/wiki/A\" id='xowa_lnki_0' title='A'>A</a>");
@@ -72,10 +72,6 @@ public class Xow_hzip_itm__anchor_tst {
 		fxt.Test_save(brys, "<a xtid='a_lnke_brk_n' class=\"external autonumber\"  rel=\"nofollow\" href=\"http://a.org\">[123]</a>");
 		fxt.Test_load(brys, "<a rel=\"nofollow\" class=\"external autonumber\" href=\"http://a.org\">[123]</a>");
 	}
-//		@Test   public void Srl_hdr() {
-//			byte[][] brys = Bry_.Ary(Xow_hzip_dict.Bry_hdr_lhs, Bry_.new_ascii_("A</h2>"));
-//			fxt.Test_save(brys, "<h2><span class='mw-headline' id='A'>A</span></h2>");
-//		}
 	@Test   public void Html_ttl() {
 		fxt.Test_html("[[A]]", "<a xtid='a_lnki_text_n' href=\"/wiki/A\" xowa_redlink='1'>A</a>");
 	}
@@ -90,39 +86,5 @@ public class Xow_hzip_itm__anchor_tst {
 	}
 	@Test   public void Html_lnke_brk_y() {
 		fxt.Test_html("[http://a.org A]", "<a xtid='a_lnke_brk_y' href=\"http://a.org\" class=\"external text\" rel=\"nofollow\">A</a>");
-	}
-}
-class Xow_hzip_itm__anchor_fxt {
-	private Bry_bfr bfr = Bry_bfr.reset_(Io_mgr.Len_mb); private Xow_hzip_mgr hzip_mgr; private Xow_wiki wiki;
-	private Xow_hzip_stats stats = new Xow_hzip_stats();
-	public void Clear() {
-		if (hzip_mgr == null) {
-			Xoa_app app = Xoa_app_fxt.app_();
-			wiki = Xoa_app_fxt.wiki_tst_(app);
-			hzip_mgr = new Xow_hzip_mgr(Gfo_usr_dlg_._, wiki);
-		}
-	}
-	public void Test_save(byte[][] expd_brys, String html) {Test_save(html, expd_brys);}
-	public void Test_save(String html, byte[]... expd_brys) {
-		byte[] expd = Bry_.Add(expd_brys);
-		hzip_mgr.Save(bfr, stats, Bry_.Empty, Bry_.new_utf8_(html));
-		Tfds.Eq_ary(expd, bfr.Xto_bry_and_clear());
-	}
-	public void Test_load(byte[][] src_brys, String expd) {
-		byte[] src = Bry_.Add(src_brys);
-		hzip_mgr.Load(bfr, Bry_.Empty, src);
-		Tfds.Eq(expd, bfr.Xto_str_and_clear());
-	}
-	public void Test_html(String html, String expd) {
-		Xop_ctx ctx = wiki.Ctx(); Xop_parser parser = wiki.Parser(); Xop_tkn_mkr tkn_mkr = ctx.Tkn_mkr();
-		ctx.Para().Enabled_n_();
-		ctx.Cur_page().Lnki_redlinks_mgr().Clear();
-		byte[] html_bry = Bry_.new_utf8_(html);
-		Xop_root_tkn root = ctx.Tkn_mkr().Root(html_bry);
-		parser.Parse_page_all_clear(root, ctx, tkn_mkr, html_bry);
-		Xoh_wtr_ctx hctx = Xoh_wtr_ctx.Hdump;
-		Xoh_html_wtr html_wtr = wiki.Html_mgr().Html_wtr();
-		html_wtr.Write_all(bfr, ctx, hctx, html_bry, root);
-		Tfds.Eq(expd, bfr.Xto_str_and_clear());
 	}
 }

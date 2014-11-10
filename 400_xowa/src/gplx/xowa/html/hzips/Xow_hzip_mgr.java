@@ -46,7 +46,7 @@ public class Xow_hzip_mgr {
 				switch (tid) {
 					case Tid_a_lhs: pos = itm__anchor.Save(bfr, stats, src, src_len, match_bgn, match_end); break;
 					case Tid_a_rhs: pos = itm__anchor.Save_a_rhs(bfr, stats, src, src_len, match_bgn, match_end); break;
-//						case Tid_h_lhs: pos = itm__header.Save(bfr, stats, src, src_len, match_bgn, match_end); break;
+					case Tid_h_lhs: pos = itm__header.Save(bfr, stats, src, src_len, match_bgn, match_end); break;
 					default:		Warn_by_pos("save.tid.unknown", match_bgn, match_end); pos = match_end; continue;
 				}
 				if (pos == Unhandled) {
@@ -76,6 +76,7 @@ public class Xow_hzip_mgr {
 					case Xow_hzip_dict.Tid_lnke_brk_text_n:
 					case Xow_hzip_dict.Tid_lnke_brk_text_y:		pos = itm__anchor.Load_lnke(bfr, src, src_len, itm_pos, tid); break;
 					case Xow_hzip_dict.Tid_a_rhs:				pos = itm_pos; bfr.Add_str("</a>"); break;
+					case Xow_hzip_dict.Tid_hdr_lhs:				pos = itm__header.Load(bfr, src, src_len, itm_pos); break;
 				}
 			}
 			else {

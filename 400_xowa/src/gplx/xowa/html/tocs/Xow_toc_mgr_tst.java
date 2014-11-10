@@ -359,11 +359,11 @@ public class Xow_toc_mgr_tst {
 		, String_.Concat_lines_nl
 		( fxt.toc_tbl_nl_n
 		( "  <ul>"
-		, "    <li class=\"toclevel-1 tocsection-1\"><a href=\"#.5Ba.5D\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">[a]</span></a>"
+		, "    <li class=\"toclevel-1 tocsection-1\"><a href=\"#.5Ba.5D\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">&#91;a&#93;</span></a>"
 		, "    </li>"
 		, "  </ul>"
 		)
-		, "<h2><span class='mw-headline' id='.5Ba.5D'>[a]</span></h2>"
+		, "<h2><span class='mw-headline' id='.5Ba.5D'>&#91;a&#93;</span></h2>"
 		));
 	}
 	@Test    public void Fix_large_before_small() {	// PURPOSE.fix: "===a===\n===b===\n" followed by "==c==" causes improper formatting; DATE:2013-05-16

@@ -40,7 +40,7 @@ public class Js_img_mgr {
 		String html_id = "xowa_file_img_" + uid;
 		html_itm.Html_img_update(html_id, html_src, html_w, html_h);
 		if (Xop_lnki_type.Id_is_thumbable(lnki_type)) {	// thumb needs to set cls and width
-			html_itm.Html_atr_set(html_id, "class", gplx.xowa.html.Xow_html_mgr.Str_img_class_thumbimage);
+			html_itm.Html_atr_set(html_id, "class", gplx.xowa.html.lnkis.Xoh_lnki_consts.Str_img_cls_thumbimage);
 			html_itm.Html_atr_set("xowa_file_div_" + uid, "style", "width:" + html_w + "px;");
 		}
 		switch (elem_tid) {

@@ -81,6 +81,7 @@ public class Xop_tkn_mkr {
 	public gplx.xowa.xtns.templateData.Xtn_templateData_nde Xnde_templateData()				{return new gplx.xowa.xtns.templateData.Xtn_templateData_nde();}
 	public gplx.xowa.xtns.rss.Rss_xnde Xnde_rss()											{return new gplx.xowa.xtns.rss.Rss_xnde();}
 	public gplx.xowa.xtns.quiz.Quiz_xnde Xnde_quiz()										{return new gplx.xowa.xtns.quiz.Quiz_xnde();}
+	public gplx.xowa.xtns.indicators.Indicator_xnde Xnde_indicator()						{return new gplx.xowa.xtns.indicators.Indicator_xnde();}
 	public gplx.xowa.xtns.xowa_cmds.Xox_xowa_html_cmd Xnde_xowa_html()						{return new gplx.xowa.xtns.xowa_cmds.Xox_xowa_html_cmd();}
 	public gplx.xowa.xtns.listings.Listing_xnde Xnde_listing(int tag_id)					{return new gplx.xowa.xtns.listings.Listing_xnde(tag_id);}
 	public gplx.xowa.xtns.scores.Score_xnde Xnde_score()									{return new gplx.xowa.xtns.scores.Score_xnde();}

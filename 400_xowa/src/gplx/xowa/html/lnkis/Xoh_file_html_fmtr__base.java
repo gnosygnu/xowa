@@ -24,14 +24,19 @@ public class Xoh_file_html_fmtr__base implements Xoh_file_img_wkr {
 		arg_img_core = New_arg_img_core();
 	}
 	@gplx.Internal @gplx.Virtual protected Xoh_arg_img_core New_arg_img_core() {return new Xoh_arg_img_core__basic();}
-	public void Html_full_media(Bry_bfr tmp_bfr, byte[] a_href, byte[] a_title, Bry_fmtr_arg html) {fmtr_full_media.Bld_bfr_many(tmp_bfr, a_href, a_title, html);}
-	private Bry_fmtr fmtr_full_media = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	@gplx.Virtual public void Html_full_media(Bry_bfr tmp_bfr, byte[] a_href, byte[] a_title, Bry_fmtr_arg html) {fmtr_full_media.Bld_bfr_many(tmp_bfr, a_href, a_title, html);}
+	private final Bry_fmtr fmtr_full_media = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<a href=\"~{a_href}\" xowa_title=\"~{a_xowa_title}\">~{html}"
 	, "</a>"
 	), "a_href", "a_xowa_title", "html"
 	);
-	public void Html_full_img(Bry_bfr tmp_bfr, Xoh_wtr_ctx hctx, Xoa_page page, Xof_xfer_itm xfer_itm, int uid, byte[] a_href, byte[] a_class, byte[] a_rel, byte[] a_title, byte[] a_xowa_title, int img_w, int img_h, byte[] img_src, byte[] img_alt, byte[] img_class) {
-		fmtr_full_img.Bld_bfr_many(tmp_bfr, uid, a_href, a_class, a_rel, a_title, a_xowa_title, arg_img_core.Init(uid, img_src, img_w, img_h), img_alt, img_class);
+	@gplx.Virtual public void Html_full_img(Bry_bfr tmp_bfr, Xoh_wtr_ctx hctx, Xoa_page page, Xof_xfer_itm xfer_itm, int uid
+	, byte[] a_href, byte a_cls, byte a_rel, byte[] a_title, byte[] a_xowa_title
+	, int img_w, int img_h, byte[] img_src, byte[] img_alt, byte img_cls, byte[] img_cls_other
+	) {
+		fmtr_full_img.Bld_bfr_many(tmp_bfr, uid
+		, a_href, Xoh_lnki_consts.A_cls_to_bry(a_cls), Xoh_lnki_consts.A_rel_to_bry(a_rel), a_title, a_xowa_title
+		, arg_img_core.Init(uid, img_src, img_w, img_h), img_alt, Xoh_lnki_consts.Img_cls_to_bry(img_cls, img_cls_other));
 	}
 	private Bry_fmtr fmtr_full_img = Bry_fmtr.new_
 	( "<a href=\"~{a_href}\"~{a_class}~{a_rel}~{a_title} xowa_title=\"~{a_xowa_title}\">"

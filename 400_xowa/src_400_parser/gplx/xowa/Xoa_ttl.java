@@ -210,7 +210,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 						if (html_ent_obj != null) {									
 							Xop_amp_trie_itm amp_itm = (Xop_amp_trie_itm)html_ent_obj;
 							match_pos = amp_trie.Match_pos();
-							if (amp_itm.Tid() == Xop_amp_trie_itm.Tid_name) {
+							if (amp_itm.Tid() == Xop_amp_trie_itm.Tid_name_std) {
 								switch (amp_itm.Char_int()) {
 									case 160:	// NOTE: &nbsp must convert to space; EX:w:United States [[Image:Dust Bowl&nbsp;- Dallas, South Dakota 1936.jpg|220px|alt=]]
 										if (ltr_bgn != -1) add_ws = true;	// apply same ws rules as Space, NewLine; needed for converting multiple ws into one; EX:" &nbsp; " -> " " x> "   "; PAGEen.w:Greek_government-debt_crisis; DATE:2014-09-25

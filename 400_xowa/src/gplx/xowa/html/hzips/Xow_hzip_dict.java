@@ -26,8 +26,9 @@ class Xow_hzip_dict {// SERIALIZED
 	, Tid_lnke_txt				= 3
 	, Tid_lnke_brk_text_n		= 4
 	, Tid_lnke_brk_text_y		= 5
-	, Tid_hdr_lhs				= 6
-	, Tid_hdr_rhs				= 7
+	, Tid_img_full				= 6
+	, Tid_hdr_lhs				= 7
+	, Tid_hdr_rhs				= 8
 	;
 	public static final byte[]
 	  Bry_a_rhs					= Bry_.ints_(Escape, Tid_a_rhs)
@@ -36,6 +37,7 @@ class Xow_hzip_dict {// SERIALIZED
 	, Bry_lnke_txt				= Bry_.ints_(Escape, Tid_lnke_txt)
 	, Bry_lnke_brk_text_n		= Bry_.ints_(Escape, Tid_lnke_brk_text_n)
 	, Bry_lnke_brk_text_y		= Bry_.ints_(Escape, Tid_lnke_brk_text_y)
+	, Bry_img_full				= Bry_.ints_(Escape, Tid_img_full)
 	, Bry_hdr_lhs				= Bry_.ints_(Escape, Tid_hdr_lhs)
 	, Bry_hdr_rhs				= Bry_.ints_(Escape, Tid_hdr_rhs)
 	;

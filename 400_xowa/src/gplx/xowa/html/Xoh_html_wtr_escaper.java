@@ -55,19 +55,24 @@ public class Xoh_html_wtr_escaper {
 							Xop_amp_trie_itm itm = (Xop_amp_trie_itm)o;
 							int match_pos = amp_trie.Match_pos();
 							int itm_tid = itm.Tid();
-							if (itm_tid == Xop_amp_trie_itm.Tid_name) {		// name
-								bfr.Add_mid(src, i, match_pos);				// embed entire name
-								i = match_pos - 1;
-							}
-							else {											// ncr: dec/hex
-								boolean pass = amp_mgr.Parse_as_int(itm_tid == Xop_amp_trie_itm.Tid_num_hex, src, end, i, match_pos);
-								int end_pos = amp_mgr.Rslt_pos();
-								if (pass) {									// parse worked; embed entire ncr
-									bfr.Add_mid(src, i, end_pos);
-									i = end_pos - 1;
-								}
-								else										// parse failed; escape and continue
-									bfr.Add(Html_entity_.Amp_bry);
+							switch (itm_tid) {
+								case Xop_amp_trie_itm.Tid_name_std:
+								case Xop_amp_trie_itm.Tid_name_xowa:		// name
+									bfr.Add_mid(src, i, match_pos);			// embed entire name
+									i = match_pos - 1;
+									break;
+								case Xop_amp_trie_itm.Tid_num_dec:
+								case Xop_amp_trie_itm.Tid_num_hex:			// ncr: dec/hex
+									boolean pass = amp_mgr.Parse_as_int(itm_tid == Xop_amp_trie_itm.Tid_num_hex, src, end, i, match_pos);
+									int end_pos = amp_mgr.Rslt_pos();
+									if (pass) {								// parse worked; embed entire ncr
+										bfr.Add_mid(src, i, end_pos);
+										i = end_pos - 1;
+									}
+									else									// parse failed; escape and continue
+										bfr.Add(Html_entity_.Amp_bry);
+									break;
+								default: throw Err_.unhandled(itm_tid);
 							}
 						}
 					}

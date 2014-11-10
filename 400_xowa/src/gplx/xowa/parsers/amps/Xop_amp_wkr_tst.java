@@ -32,4 +32,10 @@ public class Xop_amp_wkr_tst {
 		, "<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"&#10;\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
 		);
 	}
+	@Test  public void Ignore_ncr() {	// PURPOSE: check that ncr is unescaped; PAGE:de.w:Cross-Site-Scripting; DATE:2014-07-23
+		fxt.Test_parse_page_all_str
+		( "a <code>&#60;iframe&#62;</code>) b"
+		, "a <code>&#60;iframe&#62;</code>) b"	// &#60; should not become <
+		);
+	}
 }

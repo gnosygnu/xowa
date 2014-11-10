@@ -111,7 +111,7 @@ public class Xoh_file_wtr_basic_tst {
 	@Test  public void Cls_border_custom() {
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.png|border|class=abc]]"
-		, "<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" class=\"thumbborder;abc\" /></a>");
+		, "<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" class=\"thumbborder abc\" /></a>");
 	}
 	@Test  public void Lnki_full_svg() {
 		fxt.Test_parse_page_wiki_str

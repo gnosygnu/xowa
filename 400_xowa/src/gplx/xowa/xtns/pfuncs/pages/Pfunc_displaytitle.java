@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.xowa.html.*;
+import gplx.xowa.html.*; import gplx.xowa.langs.cases.*;
 public class Pfunc_displaytitle extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_page_displaytitle;}
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_displaytitle().Name_(name);}
@@ -33,15 +33,19 @@ public class Pfunc_displaytitle extends Pf_func_base {
 		if (restrict) {	// restrict only allows displayTitles which have text similar to the pageTitle; PAGE:de.b:Kochbuch/_Druckversion; DATE:2014-08-18
 			Xoa_page page = ctx.Cur_page();
 			wiki.Html_mgr().Html_wtr().Write_tkn(tmp_bfr, display_ttl_ctx, Xoh_wtr_ctx.Alt, display_ttl_root.Data_mid(), display_ttl_root, 0, display_ttl_root);
-			byte[] val_html_as_text_only = tmp_bfr.Xto_bry_and_clear();
-			gplx.xowa.langs.cases.Xol_case_mgr case_mgr = wiki.Lang().Case_mgr();
-			val_html_as_text_only = case_mgr.Case_build_lower(val_html_as_text_only);
-			byte[] page_ttl_lc = case_mgr.Case_build_lower(page.Ttl().Page_txt());
-			if (!Bry_.Eq(val_html_as_text_only, page_ttl_lc))
+			byte[] val_html_lc = tmp_bfr.Xto_bry_and_clear();
+			Xol_case_mgr case_mgr = wiki.Lang().Case_mgr();
+			val_html_lc = Standardize_displaytitle_text(case_mgr, val_html_lc);
+			byte[] page_ttl_lc = Standardize_displaytitle_text(case_mgr, page.Ttl().Page_db());
+			if (!Bry_.Eq(val_html_lc, page_ttl_lc))
 				val_html = null;
 		}
 		ctx.Cur_page().Html_data().Display_ttl_(val_html);
 		tmp_bfr.Mkr_rls();
+	}
+	private static byte[] Standardize_displaytitle_text(Xol_case_mgr case_mgr, byte[] val) {
+		byte[] rv = case_mgr.Case_build_lower(val);							// lower-case
+		return Bry_.Replace(rv, Byte_ascii.Space, Byte_ascii.Underline);	// force underline; PAGE:de.w:Mod_qos DATE:2014-11-06
 	}
 	public static final Pfunc_displaytitle _ = new Pfunc_displaytitle(); Pfunc_displaytitle() {}
 }	

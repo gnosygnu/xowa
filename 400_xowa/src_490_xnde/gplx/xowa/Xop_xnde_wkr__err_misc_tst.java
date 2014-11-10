@@ -184,4 +184,7 @@ public class Xop_xnde_wkr__err_misc_tst {
 	@Test   public void Anchor_nested() {
 		fxt.Test_parse_page_all_str("b<a>c<a>d [[e]] f", "b&lt;a>c&lt;a>d <a href=\"/wiki/E\">e</a> f");
 	}
+	@Test   public void Img_should_not_be_xtn() {	// PURPOSE:<img> marked as .xtn; unclosed <img> was escaping rest of text; PAGE:de.w:Wikipedia:Technik/Archiv/2014 DATE:2014-11-06
+		fxt.Test_parse_page_all_str("<img>''a''", "&lt;img><i>a</i>");
+	}
 }
