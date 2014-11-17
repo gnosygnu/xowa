@@ -172,20 +172,22 @@ class Xow_lang_html implements Bry_fmtr_arg {
 			for (int i = 0; i < badges_len; ++i) {
 				if (i != 0) bfr.Add_byte_comma();
 				byte[] badge = badges[i];
-				if		(Bry_.Eq(badge, Badge_good_qid))	bfr.Add(Badge_good_cls);
-				else if (Bry_.Eq(badge, Badge_feat_qid))	bfr.Add(Badge_feat_cls);
-				else										Gfo_usr_dlg_._.Warn_many("", "", "unknown badge: badge~{0}", String_.new_utf8_(badge));
+				byte[] badge_cls = (byte[])badges_hash.Get_by_bry(badge);
+				if (badge_cls == null) Gfo_usr_dlg_._.Warn_many("", "", "unknown badge: badge~{0}", String_.new_utf8_(badge));
+				else bfr.Add(badge_cls);
 			}
 		}
 		bfr.Add_byte_apos();
 		return bfr.Xto_bry_and_clear();
 	}
 	private static final byte[]
-	  Badge_good_qid	= Bry_.new_ascii_("Q17437798")
-	, Badge_good_cls	= Bry_.new_ascii_("badge-goodarticle")
-	, Badge_feat_qid	= Bry_.new_ascii_("Q17437796")
-	, Badge_feat_cls	= Bry_.new_ascii_("badge-featuredarticle")
-	, Badge_none_cls	= Bry_.new_ascii_("badge-none")
+	  Badge_none_cls	= Bry_.new_ascii_("badge-none")
 	, Cls_bgn			= Bry_.new_ascii_(" class='")
+	;
+	private static Hash_adp_bry badges_hash = Hash_adp_bry.ci_ascii_()
+	.Add_str_obj("Q17437798", Bry_.new_ascii_("badge-goodarticle"))
+	.Add_str_obj("Q17437796", Bry_.new_ascii_("badge-featuredarticle"))
+	.Add_str_obj("Q17559452", Bry_.new_ascii_("badge-recommendedarticle"))
+	.Add_str_obj("Q17506997", Bry_.new_ascii_("badge-featuredlist"))
 	;
 }

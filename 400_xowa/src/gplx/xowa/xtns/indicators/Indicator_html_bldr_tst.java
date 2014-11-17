@@ -20,11 +20,13 @@ import org.junit.*; import gplx.xowa.xtns.indicators.*;
 public class Indicator_html_bldr_tst {
 	@Before public void init() {fxt.Clear();} private Indicator_html_bldr_fxt fxt = new Indicator_html_bldr_fxt();
 	@Test  public void Basic() {
-		fxt.Init_indicator("a", "b");
+		fxt.Init_indicator("a", "a1");
+		fxt.Init_indicator("b", "b1");
 		fxt.Test_bld(String_.Concat_lines_nl_skip_last
 		( ""
 		, "  <div class='mw-indicators'>"
-		, "    <div class='mw-indicator-a' class='mw-indicator'>b</div>"
+		, "    <div id='mw-indicator-b' class='mw-indicator'>b1</div>"
+		, "    <div id='mw-indicator-a' class='mw-indicator'>a1</div>"
 		, "  </div>"
 		));
 	}
@@ -42,10 +44,9 @@ class Indicator_html_bldr_fxt {
 	}
 	public void Init_indicator(String name, String html) {
 		Indicator_xnde xnde = new Indicator_xnde();
-		xnde.Init_for_test(Bry_.new_utf8_(name), Bry_.new_utf8_(html));
-		Indicator_html_bldr indicators = new Indicator_html_bldr();
+		xnde.Init_for_test(Bry_.new_utf8_(name), Bry_.new_utf8_(html));			
+		Indicator_html_bldr indicators = page.Html_data().Indicators_or_new();
 		indicators.Add(xnde);
-		page.Html_data().Indicators_(indicators);
 	}
 	public void Test_bld(String expd) {
 		Bry_bfr tmp_bfr = Bry_bfr.reset_(255);

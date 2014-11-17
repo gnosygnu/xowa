@@ -65,12 +65,6 @@ public class Xog_tab_itm_edit_mgr {
 		win_itm.Page__mode_(Xopg_view_mode.Tid_edit);
 		html_itm.Scroll_page_by_id_gui(Xog_html_itm.Elem_id__first_heading);// NOTE: was originally directly; changed to call on thread; DATE:2014-05-03
 		win_itm.Page__async__bgn(tab);	// NOTE: needed to show images during preview; DATE:2014-06-21
-		try {
-			tab.Async();
-		}
-		catch (Exception e) {
-			tab.Tab_mgr().Win().App().Usr_dlg().Warn_many("error while running file wkr; page=~{0} err=~{1}", tab.Page().Url().Xto_full_str(), Err_.Message_gplx_brief(e));
-		}
 	}
 	public static void Rename(Xog_tab_itm tab) {
 		if (tab.View_mode() != Xopg_view_mode.Tid_edit) return;	// exit if not edit; handles ctrl+r being pressed

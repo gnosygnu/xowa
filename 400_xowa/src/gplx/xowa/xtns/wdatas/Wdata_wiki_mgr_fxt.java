@@ -131,12 +131,14 @@ public class Wdata_wiki_mgr_fxt {
 			,	"+|grp1|itm|en|English"
 			,	"+|grp1|itm|fr|French"
 			,	"+|grp1|itm|de|German"
+			,	"+|grp1|itm|pl|Polish"
 			)));
 		wiki.Xwiki_mgr().Add_bulk_langs(Bry_.new_ascii_("wiki"));
 		String bulk = String_.Concat_lines_nl
 			(	"en.wikipedia.org|en.wikipedia.org"
 			,	"fr.wikipedia.org|fr.wikipedia.org"
 			,	"de.wikipedia.org|de.wikipedia.org"
+			,	"pl.wikipedia.org|pl.wikipedia.org"
 			);
 		wiki.App().User().Wiki().Xwiki_mgr().Add_bulk(Bry_.new_ascii_(bulk));
 

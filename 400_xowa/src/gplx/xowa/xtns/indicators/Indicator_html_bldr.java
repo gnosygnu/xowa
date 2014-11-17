@@ -37,7 +37,7 @@ class Indicator_html_bldr_itm implements Bry_fmtr_arg {
 	public void Init(ListAdp list) {this.list = list;}
 	public void XferAry(Bry_bfr bfr, int idx) {
 		int list_len = list.Count();
-		for (int i = 0; i < list_len; ++i) {
+		for (int i = list_len - 1; i > -1; --i) {	// reverse order
 			Indicator_xnde xnde = (Indicator_xnde)list.FetchAt(i);
 			fmtr_itm.Bld_bfr(bfr, xnde.Name(), xnde.Html());
 		}
@@ -45,7 +45,7 @@ class Indicator_html_bldr_itm implements Bry_fmtr_arg {
 	private static final Bry_fmtr
 	 fmtr_itm = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
-	, "    <div class='mw-indicator-~{name}' class='mw-indicator'>~{html}</div>"
+	, "    <div id='mw-indicator-~{name}' class='mw-indicator'>~{html}</div>"
 	), "name", "html")
 	;
 }

@@ -16,9 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import gplx.html.*; import gplx.xowa.apps.ttls.*; import gplx.xowa.hdumps.srls.*;
+import gplx.core.brys.*; import gplx.html.*; import gplx.xowa.apps.ttls.*; import gplx.xowa.hdumps.srls.*;
 public class Xow_hzip_itm__anchor {
 	private Xow_hzip_mgr hzip_mgr; private Xoa_ttl_parser ttl_parser; private Byte_obj_ref xtid_ref = Byte_obj_ref.zero_();
+	// private Bry_rdr bry_rdr = new Bry_rdr();
 	public Xow_hzip_itm__anchor(Xow_hzip_mgr hzip_mgr, Xoa_ttl_parser ttl_parser) {this.hzip_mgr = hzip_mgr; this.ttl_parser = ttl_parser;}
 	public int Save_a_rhs(Bry_bfr bfr, Xow_hzip_stats stats, byte[] src, int src_len, int bgn, int pos) {
 		bfr.Add(Xow_hzip_dict.Bry_a_rhs);
@@ -34,10 +35,24 @@ public class Xow_hzip_itm__anchor {
 			case Xow_hzip_dict.Tid_lnke_txt:
 			case Xow_hzip_dict.Tid_lnke_brk_text_n:
 			case Xow_hzip_dict.Tid_lnke_brk_text_y:		return Save_lnke(bfr, stats, src, src_len, bgn, xtid_end, xtid_val);
+			case Xow_hzip_dict.Tid_img_full:			return Save_img_full(bfr, stats, src, src_len, bgn, xtid_end);
 			default:									return hzip_mgr.Warn_by_pos("a.xtid_unknown", bgn, pos);
 		}
 	}
-	// // <a href="/wiki/File:The_Earth_seen_from_Apollo_17.jpg" class="image" xowa_title="The Earth seen from Apollo 17.jpg">
+	private int Save_img_full(Bry_bfr bfr, Xow_hzip_stats stats, byte[] src, int src_len, int bgn, int pos) {
+//			tmp_bfr.Add_str_ascii(a_cls == Xoh_lnki_consts.Tid_a_cls_none ? "0|" : "1|");	// a_cls			: "" || image
+//			tmp_bfr.Add_str_ascii(a_rel == Xoh_lnki_consts.Tid_a_rel_none ? "0|" : "1|");	// a_rel			: "" || nofollow
+//			tmp_bfr.Add_int_fixed(img_cls, 1).Add_byte_pipe();								// img_cls			: "" || thumbborder || thumbimage || other
+//			tmp_bfr.Add_safe(img_cls_other).Add_byte_pipe();								// img_cls_other	: "" || {other}
+//			tmp_bfr.Add_int_variable(uid).Add_byte_pipe();
+//			Html_utl.Escape_html_to_bfr(tmp_bfr, img_alt, 0, img_alt.length, Bool_.N, Bool_.N, Bool_.N, Bool_.N, Bool_.Y);
+		return Xow_hzip_mgr.Unhandled;
+//			int xatrs_bgn = Bry_finder.Move_fwd(src, Find_img_xatrs, pos, src_len);				if (xatrs_bgn == Bry_finder.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("a.img_xatrs_missing", bgn, pos);
+//			byte a_cls		= src[xatrs_bgn    ] - Byte_ascii.Num_0;
+//			byte a_rel		= src[xatrs_bgn + 2] - Byte_ascii.Num_0;
+//			byte img_rel	= src[xatrs_bgn + 4] - Byte_ascii.Num_0;
+//			byte meta = img_cls + Enm_.Add_byte(2, img_rel);
+	}
 	public int Save_lnki(Bry_bfr bfr, Xow_hzip_stats stats, byte[] src, int src_len, int bgn, int pos, boolean caption) {
 		int ttl_bgn = Bry_finder.Find_fwd(src, Find_href_wiki_bry, pos, src_len);			if (ttl_bgn == Bry_finder.Not_found) return Xow_hzip_mgr.Unhandled;//hzip_mgr.Warn_by_pos_add_dflt("a.ttl_bgn_missing", bgn, pos);
 		ttl_bgn += Find_href_wiki_len;
@@ -143,13 +158,11 @@ public class Xow_hzip_itm__anchor {
 	public void Html_plain(Bry_bfr bfr, Xop_lnki_tkn lnki) {
 		bfr.Add_str(lnki.Caption_exists() ? "<a xtid='a_lnki_text_y' href=\"" : "<a xtid='a_lnki_text_n' href=\"");
 	}
-	public void Html_file(Bry_bfr bfr, Xop_lnki_tkn lnki) {
-//			bfr.Add_str("<a xtid='a_lnki_file'");
-	}
 	private static final byte[]
 	  Find_href_wiki_bry	= Bry_.new_ascii_("href=\"/wiki/")
 	, Find_href_bry			= Bry_.new_ascii_("href=\"")
 	, Find_a_rhs_bgn_bry	= Bry_.new_ascii_("</a>")
+//		, Find_img_xatrs		= Bry_.new_ascii_("xatrs='")
 	;
 	private static final int 
 	  Find_href_wiki_len	= Find_href_wiki_bry.length

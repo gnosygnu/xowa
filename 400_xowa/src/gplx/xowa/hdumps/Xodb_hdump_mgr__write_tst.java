@@ -24,7 +24,7 @@ public class Xodb_hdump_mgr__write_tst {
 		fxt.Expd_itms_xfers(fxt.Make_xfer("A.png", 0, 0, 0, Bool_.Y, Xof_ext_.Id_png));
 		fxt.Test_write_all
 		( "[[File:A.png|test_caption]]"
-		, "<a xtid='a_img_full' xatrs='1|0|0|test_caption'/>"
+		, "<a xtid='a_img_full' xatrs='1|0|0||0|test_caption'/>"
 		);
 	}
 	@Test   public void Image_thumb() {

@@ -28,7 +28,7 @@ class Scrib_lib_wikibase_srl {
 		}
 		Srl_root(rv, Wdata_doc_parser_v2.Str_labels			, Srl_langtexts	(Wdata_dict_langtext.Str_language	, Wdata_dict_langtext.Str_value, wdoc.Label_list()));
 		Srl_root(rv, Wdata_doc_parser_v2.Str_descriptions	, Srl_langtexts	(Wdata_dict_langtext.Str_language	, Wdata_dict_langtext.Str_value, wdoc.Descr_list()));
-		Srl_root(rv, Wdata_doc_parser_v2.Str_sitelinks		, Srl_sitelinks	(Wdata_dict_sitelink.Str_site		, Wdata_dict_sitelink.Str_title, wdoc.Slink_list()));
+		Srl_root(rv, Wdata_doc_parser_v2.Str_sitelinks		, Srl_sitelinks	(Wdata_dict_sitelink.Str_site		, Wdata_dict_sitelink.Str_title, wdoc.Slink_list(), base_adj));
 		Srl_root(rv, Wdata_doc_parser_v2.Str_aliases		, Srl_aliases	(base_adj, wdoc.Alias_list()));
 		Srl_root(rv, Wdata_doc_parser_v2.Str_claims			, Srl_claims	(base_adj, legacy_style, wdoc.Claim_list()));
 		return (KeyVal[])rv.Xto_ary(KeyVal.class);
@@ -48,16 +48,26 @@ class Scrib_lib_wikibase_srl {
 		}
 		return rv;
 	}
-	private static KeyVal[] Srl_sitelinks(String key_label, String val_label, OrderedHash list) {
+	private static KeyVal[] Srl_sitelinks(String key_label, String val_label, OrderedHash list, int base_adj) {
 		int len = list.Count(); if (len == 0) return null;
 		KeyVal[] rv = new KeyVal[len];
 		for (int i = 0; i < len; i++) {
 			Wdata_sitelink_itm itm = (Wdata_sitelink_itm)list.FetchAt(i);
 			String site = String_.new_utf8_(itm.Site());
 			String name = String_.new_utf8_(itm.Name());
-			rv[i] = KeyVal_.new_(site, KeyVal_.Ary(KeyVal_.new_(key_label, site), KeyVal_.new_(val_label, name)));
+			rv[i] = KeyVal_.new_(site, KeyVal_.Ary(KeyVal_.new_(key_label, site), KeyVal_.new_(val_label, name), Srl_sitelinks_badges(itm.Badges(), base_adj)));
 		}
 		return rv;
+	}
+	private static KeyVal Srl_sitelinks_badges(byte[][] badges, int base_adj) {
+		if (badges == null) badges = Bry_.Ary_empty;	// null badges -> badges:[]
+		int len = badges.length;
+		KeyVal[] kvs = len == 0 ? KeyVal_.Ary_empty : new KeyVal[len];
+		for (int i = 0; i < len; i++) {
+			byte[] badge = badges[i];
+			kvs[i] = KeyVal_.int_(i + base_adj, String_.new_utf8_(badge));
+		}
+		return KeyVal_.new_("badges", kvs);
 	}
 	private static KeyVal[] Srl_aliases(int base_adj, OrderedHash list) {
 		int len = list.Count(); if (len == 0) return null;

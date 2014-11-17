@@ -59,12 +59,15 @@ public class Scrib_lib_wikibase_srl_tst {
 		,	"  enwiki:"
 		,	"    site:'enwiki'"
 		,	"    title:'Earth'"
+		,	"    badges:"
 		,	"  frwiki:"
 		,	"    site:'frwiki'"
 		,	"    title:'Terre'"
+		,	"    badges:"
 		,	"  dewiki:"
 		,	"    site:'dewiki'"
 		,	"    title:'Erde'"
+		,	"    badges:"
 		,	""
 		);
 	}
@@ -74,7 +77,7 @@ public class Scrib_lib_wikibase_srl_tst {
 		,	", 'links':"
 		,	"  {"
 		,	"    'enwiki':'Earth'"							// old format
-		,	"  , 'frwiki':{'name':'Terre','badges':[]}"		// new format
+		,	"  , 'frwiki':{'name':'Terre','badges':['Q3']}"	// new format
 		,	"  }"
 		,	"}"
 		);
@@ -85,9 +88,12 @@ public class Scrib_lib_wikibase_srl_tst {
 		,	"  enwiki:"
 		,	"    site:'enwiki'"
 		,	"    title:'Earth'"
+		,	"    badges:"
 		,	"  frwiki:"
 		,	"    site:'frwiki'"
 		,	"    title:'Terre'"
+		,	"    badges:"
+		,	"      1:'Q3'"
 		,	""
 		);
 	}

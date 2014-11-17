@@ -40,7 +40,7 @@ public class Xow_hzip_itm__header {
 		bfr.Add_mid(src, span_lhs_end, hdr_end);
 		hdr_end += Hdr_end.length;
 		bfr.Add(Xow_hzip_dict.Escape_bry);
-		stats.Hdr_add();
+		stats.Hdr_add(hdr_num);
 		return hdr_end + 12;			// +12 = "</span></h2>"
 	}
 	public int Load(Bry_bfr bfr, byte[] src, int src_len, int bgn) {

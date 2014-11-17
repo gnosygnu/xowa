@@ -29,6 +29,8 @@ class Hdump_stats_tbl {
 		, js_mgr.Math_exists(), js_mgr.Imap_exists(), js_mgr.Gallery_packed_exists(), js_mgr.Hiero_exists()
 		, hzip.A_rhs(), hzip.Lnki_text_n(), hzip.Lnki_text_y()
 		, hzip.Lnke_txt(), hzip.Lnke_brk_text_n(), hzip.Lnke_brk_text_y()
+		, hzip.Hdr_1(), hzip.Hdr_2(), hzip.Hdr_3(), hzip.Hdr_4(), hzip.Hdr_5(), hzip.Hdr_6()
+		, hzip.Img_full()
 		);
 	}
 	private int Len_or_0(byte[] bry) {return bry == null ? 0 : bry.length;}
@@ -38,6 +40,8 @@ class Hdump_stats_tbl {
 	, boolean js_math, boolean js_imap, boolean js_packed, boolean js_hiero
 	, int a_rhs, int lnki_text_n, int lnki_text_y
 	, int lnke_txt, int lnke_brk_text_n, int lnke_brk_text_y
+	, int hdr_1, int hdr_2, int hdr_3, int hdr_4, int hdr_5, int hdr_6
+	, int img_full
 	) {
 		if (stmt_insert == null) stmt_insert = Db_stmt_.new_insert_(provider, Tbl_name, Flds__all);
 		try {
@@ -47,6 +51,8 @@ class Hdump_stats_tbl {
 			.Val_byte_by_bool_(js_math).Val_byte_by_bool_(js_imap).Val_byte_by_bool_(js_packed).Val_byte_by_bool_(js_hiero)
 			.Val_int_(a_rhs).Val_int_(lnki_text_n).Val_int_(lnki_text_y)
 			.Val_int_(lnke_txt).Val_int_(lnke_brk_text_n).Val_int_(lnke_brk_text_y)
+			.Val_int_(hdr_1).Val_int_(hdr_2).Val_int_(hdr_3).Val_int_(hdr_4).Val_int_(hdr_5).Val_int_(hdr_6)
+			.Val_int_(img_full)
 			.Exec_insert();
 		}
 		catch (Exception exc) {stmt_insert = null; throw Err_.err_(exc, "stmt failed");} // must reset stmt, else next call will fail
@@ -61,6 +67,8 @@ class Hdump_stats_tbl {
 	, Fld_js_math = "js_math", Fld_js_imap = "js_imap", Fld_js_packed = "js_packed", Fld_js_hiero = "js_hiero"
 	, Fld_a_rhs = "a_rhs", Fld_lnki_text_n = "lnki_text_n", Fld_lnki_text_y = "lnki_text_y"
 	, Fld_lnke_txt = "lnke_txt", Fld_lnke_brk_text_n = "lnke_brk_text_n", Fld_lnke_brk_text_y = "lnke_brk_text_y"
+	, Fld_hdr_1 = "hdr_1", Fld_hdr_2 = "hdr_2", Fld_hdr_3 = "hdr_3", Fld_hdr_4 = "hdr_", Fld_hdr_5 = "hdr_", Fld_hdr_6 = "hdr_6"
+	, Fld_img_full = "img_full"
 	;
 	private static final String[] Flds__all = new String[] 
 	{ Fld_page_id, Fld_wtxt_len, Fld_row_orig_len, Fld_row_zip_len
@@ -68,6 +76,8 @@ class Hdump_stats_tbl {
 	, Fld_js_math, Fld_js_imap, Fld_js_packed, Fld_js_hiero
 	, Fld_a_rhs, Fld_lnki_text_n, Fld_lnki_text_y
 	, Fld_lnke_txt, Fld_lnke_brk_text_n, Fld_lnke_brk_text_y
+	, Fld_hdr_1, Fld_hdr_2, Fld_hdr_3, Fld_hdr_4, Fld_hdr_5, Fld_hdr_6
+	, Fld_img_full
 	};
 	public static final String Tbl_sql = String_.Concat_lines_nl
 	( "CREATE TABLE IF NOT EXISTS hdump_stats"
@@ -89,6 +99,13 @@ class Hdump_stats_tbl {
 	, ", lnke_txt                       integer             NOT NULL"
 	, ", lnke_brk_text_n                integer             NOT NULL"
 	, ", lnke_brk_text_y                integer             NOT NULL"
+	, ", hdr_1							integer             NOT NULL"
+	, ", hdr_2							integer             NOT NULL"
+	, ", hdr_3							integer             NOT NULL"
+	, ", hdr_4							integer             NOT NULL"
+	, ", hdr_5							integer             NOT NULL"
+	, ", hdr_6							integer             NOT NULL"
+	, ", img_full						integer             NOT NULL"
 	, ");"
 	);
 }

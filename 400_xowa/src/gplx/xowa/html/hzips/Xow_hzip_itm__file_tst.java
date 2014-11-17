@@ -21,7 +21,7 @@ public class Xow_hzip_itm__file_tst {
 	@Before public void init() {fxt.Clear();} private Xow_hzip_mgr_fxt fxt = new Xow_hzip_mgr_fxt();
 	@Test   public void Srl_img_full() {
 //			byte[][] brys = Bry_.Ary(Xow_hzip_dict.Bry_img_full, Bry_.ints_(2), Bry_.new_ascii_("A"), Xow_hzip_dict.Escape_bry);
-//			fxt.Test_save(brys, "<a xtid='a_lnki_text_n' href=\"/wiki/A\" id='xowa_lnki_0' title='A'>A</a>");
+//			fxt.Test_save(brys, "<a xtid='a_img_full' href=\"/wiki/A\" id='xowa_lnki_0' title='A'>A</a>");
 //			fxt.Test_load(brys, "<a href='/wiki/A' title='A'>A</a>");
 	}
 }

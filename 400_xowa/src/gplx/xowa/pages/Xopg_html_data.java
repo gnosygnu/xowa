@@ -41,7 +41,12 @@ public class Xopg_html_data {
 	public boolean					Lang_convert_content() {return lang_convert_content;} public void Lang_convert_content_(boolean v) {lang_convert_content = v;} private boolean lang_convert_content = true;
 	public boolean					Lang_convert_title() {return lang_convert_title;} public void Lang_convert_title_(boolean v) {lang_convert_title = v;} private boolean lang_convert_title = true;
 	public Xopg_xtn_skin_mgr	Xtn_skin_mgr() {return xtn_skin_mgr;} private Xopg_xtn_skin_mgr xtn_skin_mgr = new Xopg_xtn_skin_mgr();
-	public Indicator_html_bldr	Indicators() {return indicators;} public void Indicators_(Indicator_html_bldr v) {indicators = v;} private Indicator_html_bldr indicators;
+	public Indicator_html_bldr	Indicators() {return indicators;}
+	public Indicator_html_bldr Indicators_or_new() {
+		if (indicators == null)
+			indicators = new Indicator_html_bldr();
+		return indicators;
+	}	private Indicator_html_bldr indicators;
 	public int					Xtn_gallery_next_id() {return ++xtn_gallery_next_id;} private int xtn_gallery_next_id = -1;
 	public boolean					Xtn_gallery_packed_exists() {return xtn_gallery_packed_exists;} public void Xtn_gallery_packed_exists_y_() {xtn_gallery_packed_exists = true;} private boolean xtn_gallery_packed_exists;
 	public boolean					Xtn_imap_exists() {return xtn_imap_exists;} public void Xtn_imap_exists_y_() {xtn_imap_exists = true;} private boolean xtn_imap_exists;

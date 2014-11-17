@@ -28,10 +28,11 @@ public class Xoh_file_html_fmtr__hdump extends Xoh_file_html_fmtr__base {
 		, byte[] a_href, byte a_cls, byte a_rel, byte[] a_title, byte[] a_xowa_title
 		, int img_w, int img_h, byte[] img_src, byte[] img_alt, byte img_cls, byte[] img_cls_other) {
 		tmp_bfr.Add_str_ascii("<a xtid='a_img_full' xatrs='");
-		tmp_bfr.Add_str_ascii(a_cls == Xoh_lnki_consts.Tid_a_cls_none ? "0|" : "1|");	// "" || "cls=image"
-		tmp_bfr.Add_str_ascii(a_rel == Xoh_lnki_consts.Tid_a_rel_none ? "0|" : "1|");	// "" || "rel=nofollow"
+		tmp_bfr.Add_str_ascii(a_cls == Xoh_lnki_consts.Tid_a_cls_none ? "0|" : "1|");	// a_cls			: "" || image
+		tmp_bfr.Add_str_ascii(a_rel == Xoh_lnki_consts.Tid_a_rel_none ? "0|" : "1|");	// a_rel			: "" || nofollow
+		tmp_bfr.Add_int_fixed(img_cls, 1).Add_byte_pipe();								// img_cls			: "" || thumbborder || thumbimage || other
+		tmp_bfr.Add_safe(img_cls_other).Add_byte_pipe();								// img_cls_other	: "" || {other}
 		tmp_bfr.Add_int_variable(uid).Add_byte_pipe();
-		tmp_bfr.Add(Xoh_lnki_consts.Img_cls_to_bry(img_cls, img_cls_other));			// "" || "cls=thumbborder || thumbimage || other"
 		Html_utl.Escape_html_to_bfr(tmp_bfr, img_alt, 0, img_alt.length, Bool_.N, Bool_.N, Bool_.N, Bool_.N, Bool_.Y);
 		tmp_bfr.Add_str_ascii("'/>");
 	}
