@@ -20,24 +20,24 @@ import org.junit.*;
 public class db_CrudOps_tst {
 	CrudOpsFxt fx = new CrudOpsFxt();
 	@Test  public void Mysql() {if (Tfds.SkipDb) return;
-		fx.RunAll(Db_provider_fxt.Mysql());
+		fx.RunAll(Db_conn_fxt.Mysql());
 	}
 	@Test  public void Tdb() {if (Tfds.SkipDb) return;
-		fx.RunAll(Db_provider_fxt.Tdb("100_dbs_crud_ops.dsv"));
+		fx.RunAll(Db_conn_fxt.Tdb("100_dbs_crud_ops.dsv"));
 	}
-	@Test  public void Postgres() {if (Db_provider_fxt.SkipPostgres) return;
-		fx.RunAll(Db_provider_fxt.Postgres());
+	@Test  public void Postgres() {if (Db_conn_fxt.SkipPostgres) return;
+		fx.RunAll(Db_conn_fxt.Postgres());
 	}
 	@Test  public void Sqlite() {if (Tfds.SkipDb) return;
 		fx.Fx().DmlAffectedAvailable_(false);
-		fx.RunAll(Db_provider_fxt.Sqlite());
+		fx.RunAll(Db_conn_fxt.Sqlite());
 	}
 }
 class CrudOpsFxt {
-	public Db_provider_fxt Fx() {return fx;} Db_provider_fxt fx = new Db_provider_fxt();
+	public Db_conn_fxt Fx() {return fx;} Db_conn_fxt fx = new Db_conn_fxt();
 	void Init() {fx.ini_DeleteAll("dbs_crud_ops");}
-	public void RunAll(Db_provider provider) {
-		fx.Provider_(provider);
+	public void RunAll(Db_conn conn) {
+		fx.Conn_(conn);
 		Insert_hook();
 		UpdateOne_hook();
 		UpdateMany_hook();
@@ -125,5 +125,5 @@ class CrudOpsFxt {
 		Tfds.Eq(val, ExecRdr_val(Db_qry_.select_val_("dbs_crud_ops", "name", Db_crt_.eq_("id", 3))));
 		Tfds.Eq(val, ExecRdr_val(Db_qry_.select_val_("dbs_crud_ops", "name", Db_crt_.eq_("name", "\\"))));
 	}
-	String ExecRdr_val(Db_qry_select select) {return (String)select.ExecRdr_val(fx.Provider());}
+	String ExecRdr_val(Db_qry_select select) {return (String)select.ExecRdr_val(fx.Conn());}
 }

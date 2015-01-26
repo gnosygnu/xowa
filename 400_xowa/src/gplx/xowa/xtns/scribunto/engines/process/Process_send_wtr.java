@@ -82,9 +82,9 @@ public class Process_send_wtr {
 	public boolean Encode_obj(Bry_bfr bfr, Object o) {
 		if (o == null) {bfr.Add(CONST_nil); return true;}
 		Class<?> c = ClassAdp_.ClassOf_obj(o);
-		if		(Object_.Eq(c, Bool_.ClassOf))				Encode_bool(bfr, Bool_.cast_(o));
-		else if	(Object_.Eq(c, Int_.ClassOf))				Encode_int(bfr, Int_.cast_(o));
-		else if	(Object_.Eq(c, Double_.ClassOf))			{if (!Encode_double(bfr, Double_.cast_(o))) return false;}	
+		if		(Object_.Eq(c, Bool_.Cls_ref_type))				Encode_bool(bfr, Bool_.cast_(o));
+		else if	(Object_.Eq(c, Int_.Cls_ref_type))				Encode_int(bfr, Int_.cast_(o));
+		else if	(Object_.Eq(c, Double_.Cls_ref_type))			{if (!Encode_double(bfr, Double_.cast_(o))) return false;}	
 		else if	(Object_.Eq(c, String.class))				{if (!Encode_str(bfr, (String)o)) return false;}
 		else if	(Object_.Eq(c, byte[].class))				{if (!Encode_str(bfr, (byte[])o)) return false;}	// NOTE: not in Scribunto; added here for PERF of not re-creating a String Object
 		else if	(Object_.Eq(c, Scrib_lua_proc.class))		{if (!Encode_prc(bfr, (Scrib_lua_proc)o)) return false;}

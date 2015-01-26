@@ -83,4 +83,7 @@ public class Scrib_lib_mw__lib_tst {
 		fxt.Test_scrib_proc_empty(lib, Scrib_lib_mw.Invk_setTTL, Object_.Ary(123));
 		Tfds.Eq(123, fxt.Core().Frame_current().Frame_lifetime());
 	}
+	@Test  public void LoadPHPLibrary() {
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_mw.Invk_loadPHPLibrary, Object_.Ary("mock_library")	, Scrib_invoke_func_fxt.Null_rslt);
+	}
 }

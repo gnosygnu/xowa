@@ -18,16 +18,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.imports.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.imports.*;
 import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.dbs.tbls.*;
 public class Xoctg_hiddencat_parser_sql extends Xoctg_hiddencat_parser_base {
-	public Xoctg_hiddencat_parser_sql(Xob_bldr bldr, Xow_wiki wiki) {this.Ctor(bldr, wiki);}
+	public Xoctg_hiddencat_parser_sql(Xob_bldr bldr, Xow_wiki wiki) {this.Ctor(bldr, wiki);} private Db_conn conn;
 	@Override public String Cmd_key() {return KEY;} public static final String KEY = "import.sql.hiddencat";
 	@Override public void Cmd_bgn_hook(Xob_bldr bldr, Sql_file_parser parser) {
 		super.Cmd_bgn_hook(bldr, parser);
 		Xodb_mgr_sql db_mgr = wiki.Db_mgr_as_sql();
 		Xodb_fsys_mgr fsys_mgr = db_mgr.Fsys_mgr();
-		Db_provider provider = fsys_mgr.Provider_ctg();
-		provider.Txn_mgr().Txn_bgn_if_none();
+		conn = fsys_mgr.Conn_ctg();
+		conn.Txn_mgr().Txn_bgn_if_none();
 		tbl = db_mgr.Tbl_category();
-		stmt = tbl.Update_stmt(provider);
+		stmt = tbl.Update_stmt(conn);
 	}
 	private Xodb_category_tbl tbl; private Db_stmt stmt;
 	@Override public void Exec_hook(Bry_bfr file_bfr, int cur_id, boolean cur_is_hiddencat) {
@@ -36,7 +36,7 @@ public class Xoctg_hiddencat_parser_sql extends Xoctg_hiddencat_parser_base {
 	}
 	@Override public void Cmd_end() {
 		if (stmt == null) return;	// stmt is null when ctg fails (for example, category files not downloaded); DATE:2013-12-20
-		stmt.Provider().Txn_mgr().Txn_end_all();
+		conn.Txn_mgr().Txn_end_all();
 		if (!Env_.Mode_testing())	// NOTE: do not delete when testing
 			Io_mgr._.DeleteDirDeep(wiki.Fsys_mgr().Tmp_dir());	// delete /wiki/wiki_name/tmp
 		Io_url[] sql_files = Io_mgr._.QueryDir_args(wiki.Fsys_mgr().Root_dir()).FilPath_("*.sql.gz").ExecAsUrlAry();

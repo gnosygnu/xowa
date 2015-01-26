@@ -27,20 +27,19 @@ public class Object_ {
 	public static String Xto_str_strict_or_null(Object v)		{return v == null ? null				: ToString_lang(v);}
 	public static String Xto_str_strict_or_null_mark(Object v)	{return v == null ? String_.Null_mark	: ToString_lang(v);}
 	public static String Xto_str_strict_or_empty(Object v)		{return v == null ? String_.Empty		: ToString_lang(v);}
-	static String ToString_lang(Object v) {
-		if (v == null) return null;
+	private static String ToString_lang(Object v) {
 		Class<?> c = v.getClass();
-		if		(ClassAdp_.Eq(c, Bry_.ClassOf))	return String_.new_utf8_((byte[])v);
-		else if (ClassAdp_.Eq(c, String_.ClassOf))	return (String)v;
+		if		(ClassAdp_.Eq(c, String_.Cls_ref_type))	return (String)v;
+		else if	(ClassAdp_.Eq(c, Bry_.Cls_ref_type))		return String_.new_utf8_((byte[])v);
 		else										return v.toString();	
 	}
 	public static String Xto_str_loose_or(Object v, String or) {	// tries to pretty-print doubles; also standardizes true/false; DATE:2014-07-14
 		if (v == null) return null;
 		Class<?> c = ClassAdp_.ClassOf_obj(v);
-		if		(ClassAdp_.Eq(c, Bry_.ClassOf))			return String_.new_utf8_((byte[])v);
-		else if (ClassAdp_.Eq(c, String_.ClassOf))		return (String)v;
-		else if (ClassAdp_.Eq(c, Bool_.ClassOf))		return Bool_.cast_(v) ? Bool_.True_str : Bool_.False_str;	// always return true / false
-		else if	(ClassAdp_.Eq(c, Double_.ClassOf))		return Double_.Xto_str_loose(Double_.cast_(v));
+		if		(ClassAdp_.Eq(c, String_.Cls_ref_type))		return (String)v;
+		else if	(ClassAdp_.Eq(c, Bry_.Cls_ref_type))			return String_.new_utf8_((byte[])v);
+		else if (ClassAdp_.Eq(c, Bool_.Cls_ref_type))		return Bool_.cast_(v) ? Bool_.True_str : Bool_.False_str;	// always return "true" / "false"
+		else if	(ClassAdp_.Eq(c, Double_.Cls_ref_type))		return Double_.Xto_str_loose(Double_.cast_(v));
 		else											return v.toString();	
 	}
 }

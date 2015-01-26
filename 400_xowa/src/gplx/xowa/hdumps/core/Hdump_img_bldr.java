@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
 import gplx.dbs.*; import gplx.xowa.hdumps.dbs.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.oimgs.*;
+import gplx.xowa2.gui.*;
 class Hdump_img_bldr_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	private Xodb_wiki_page_html_tbl text_tbl = new Xodb_wiki_page_html_tbl();
 	public Hdump_img_bldr_cmd(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
@@ -28,8 +29,8 @@ class Hdump_img_bldr_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	public void Cmd_print() {}
 	private void Exec_main() {
 		Bry_bfr bfr = Bry_bfr.reset_(Io_mgr.Len_mb);
-		Db_provider provider = Xodb_db_file.init__file_make(wiki.Fsys_mgr().Root_dir()).Provider();
-		Db_stmt stmt = Db_stmt_.new_select_as_rdr(provider, Sql_select);
+		Db_conn conn = Xodb_db_file.init__file_make(wiki.Fsys_mgr().Root_dir()).Conn();
+		Db_stmt stmt = Db_stmt_.new_select_as_rdr(conn, Sql_select);
 		Db_rdr rdr = stmt.Exec_select_as_rdr();
 		int cur_page_id = -1;
 		while (rdr.Move_next()) {
@@ -80,9 +81,9 @@ interface Page_async_cmd {
 	void Exec();
 }
 class Page_async_cmd__img implements Page_async_cmd {
-	private Hdump_page hpg;
+	private Xog_page hpg;
 	private ListAdp missing = ListAdp_.new_();
-	public Page_async_cmd__img(Hdump_page hpg) {this.hpg = hpg;}
+	public Page_async_cmd__img(Xog_page hpg) {this.hpg = hpg;}
 	public void Prep() {
 		int len = hpg.Img_count();
 		Hdump_data_img__base[] ary = hpg.Img_itms();

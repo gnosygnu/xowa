@@ -25,6 +25,12 @@ public abstract class ListAdp_base implements ListAdp, GfoInvkAble {
 			Array_.Set(rv, i, list[i]);
 		return rv;
 	}
+	public Object[] Xto_obj_ary() {
+		Object[] rv = new Object[count];
+		for (int i = 0; i < count; ++i)
+			rv[i] = list[i];
+		return rv;
+	}
 	public java.util.Iterator iterator() {
 		if (count == 0)
 			return Iterator_null._;

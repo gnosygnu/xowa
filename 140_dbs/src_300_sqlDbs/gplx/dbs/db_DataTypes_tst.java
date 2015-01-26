@@ -21,19 +21,19 @@ public class db_DataTypes_tst {
 	DataTypes_base_fxt fx = new DataTypes_base_fxt();
 	@Test  public void Mysql() {if (Tfds.SkipDb) return;
 		fx.Select_FloatStr_("0.333333");
-		fx.RunAll(Db_provider_fxt.Mysql());
+		fx.RunAll(Db_conn_fxt.Mysql());
 	}
 	@Test  public void Tdb() {if (Tfds.SkipDb) return;
 		fx.Select_FloatStr_(Float_.Xto_str(Float_.Div(1, 3)));
-		fx.RunAll(Db_provider_fxt.Tdb("110_dbs_multiple_data_types.dsv"));
+		fx.RunAll(Db_conn_fxt.Tdb("110_dbs_multiple_data_types.dsv"));
 	}
-	@Test  public void Postgres() {if (Db_provider_fxt.SkipPostgres) return;
+	@Test  public void Postgres() {if (Db_conn_fxt.SkipPostgres) return;
 		fx.Select_FloatStr_("0.33333334");
-		fx.RunAll(Db_provider_fxt.Postgres());
+		fx.RunAll(Db_conn_fxt.Postgres());
 	}
 	@Test  public void Sqlite() {if (Tfds.SkipDb) return;
 		fx.Select_FloatStr_("0.33333334");
-		fx.RunAll(Db_provider_fxt.Sqlite());
+		fx.RunAll(Db_conn_fxt.Sqlite());
 	}
 	/*
 DROP TABLE dbs_multiple_data_types;
@@ -49,17 +49,17 @@ INSERT INTO dbs_multiple_data_types VALUES (1, 'John Doe', B'1', '3/30/2006 10:2
 	*/
 }
 class DataTypes_base_fxt {
-	public Db_provider Provider() {return provider;} Db_provider provider;
+	public Db_conn Conn() {return conn;} Db_conn conn;
 	public DataTypes_base_fxt() {}
-	public void Rls() {provider.Conn_term();}
+	public void Rls() {conn.Conn_term();}
 	public String Select_FloatStr() {return select_FloatStr;} public DataTypes_base_fxt Select_FloatStr_(String v) {select_FloatStr = v; return this;} private String select_FloatStr;
-	public void RunAll(Db_provider provider) {
-		this.provider = provider;
+	public void RunAll(Db_conn conn) {
+		this.conn = conn;
 		this.Select_hook(select_FloatStr);
-		provider.Conn_term();
+		conn.Conn_term();
 	}
 	public void Select_hook(String floatStr) {
-		DataRdr rdr = Db_qry_.select_tbl_("dbs_multiple_data_types").Exec_qry_as_rdr(provider);
+		DataRdr rdr = Db_qry_.select_tbl_("dbs_multiple_data_types").Exec_qry_as_rdr(conn);
 
 		rdr.MoveNextPeer();
 		Tfds.Eq(rdr.ReadInt("unique_id"), 1);
@@ -70,9 +70,9 @@ class DataTypes_base_fxt {
 		Tfds.Eq_decimal(rdr.ReadDecimal("amount"), DecimalAdp_.parts_(12, 345));
 	}
 	public void UpdateDate_hook() {
-		provider.Exec_qry(Db_qry_.update_("dbs_multiple_data_types", Db_crt_.eq_("unique_id", 1)).Arg_obj_("last_update", DateAdpClassXtn._.XtoDb(DateAdp_.parse_gplx("20091115 220000.000"))));
+		conn.Exec_qry(Db_qry_.update_("dbs_multiple_data_types", Db_crt_.eq_("unique_id", 1)).Arg_obj_("last_update", DateAdpClassXtn._.XtoDb(DateAdp_.parse_gplx("20091115 220000.000"))));
 
-		DataRdr rdr = Db_qry_.select_tbl_("dbs_multiple_data_types").Exec_qry_as_rdr(provider);
+		DataRdr rdr = Db_qry_.select_tbl_("dbs_multiple_data_types").Exec_qry_as_rdr(conn);
 		rdr.MoveNextPeer();
 		Tfds.Eq_date(rdr.ReadDate("last_update"), DateAdp_.parse_gplx("20091115 220000.000"));
 	}

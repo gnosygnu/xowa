@@ -22,10 +22,10 @@ class Fs_root_dir {
 	private Gfo_usr_dlg usr_dlg; private Xof_img_wkr_query_img_size img_size_wkr;
 	private Io_url url; private boolean recurse = true;
 	private Orig_fil_mgr cache = new Orig_fil_mgr(), fs_fil_mgr;
-	private Db_provider_mkr provider_mkr;
-	private Db_provider provider; private Fsdb_cfg_tbl cfg_tbl; private Orig_fil_tbl fil_tbl;
+	private Db_conn_mkr provider_mkr;
+	private Db_conn conn; private Fsdb_cfg_tbl cfg_tbl; private Orig_fil_tbl fil_tbl;
 	private int fil_id_next = 0;
-	public void Init(Io_url url, Db_provider_mkr provider_mkr, Fsdb_cfg_tbl cfg_tbl, Orig_fil_tbl fil_tbl, Gfo_usr_dlg usr_dlg, Xof_img_wkr_query_img_size img_size_wkr) {
+	public void Init(Io_url url, Db_conn_mkr provider_mkr, Fsdb_cfg_tbl cfg_tbl, Orig_fil_tbl fil_tbl, Gfo_usr_dlg usr_dlg, Xof_img_wkr_query_img_size img_size_wkr) {
 		this.url = url; this.provider_mkr = provider_mkr;
 		this.cfg_tbl = cfg_tbl; this.fil_tbl = fil_tbl; this.usr_dlg = usr_dlg; this.img_size_wkr = img_size_wkr;
 	}
@@ -42,7 +42,7 @@ class Fs_root_dir {
 		return rv;
 	}
 	private Orig_fil_itm Get_from_db(byte[] lnki_ttl) {
-		if (provider == null) provider = Init_db_fil_mgr();
+		if (conn == null) conn = Init_db_fil_mgr();
 		Orig_fil_itm rv = fil_tbl.Select_itm(lnki_ttl);
 		if (rv == null) return Orig_fil_itm.Null;		// not in db
 		return rv;
@@ -77,19 +77,19 @@ class Fs_root_dir {
 		}
 		return rv;
 	}
-	private Db_provider Init_db_fil_mgr() {
+	private Db_conn Init_db_fil_mgr() {
 		Io_url db_url = url.GenSubFil("^orig_regy.sqlite3");
 		Bool_obj_ref created_ref = Bool_obj_ref.n_();
-		provider = provider_mkr.Load_or_make_(db_url, created_ref);
+		conn = provider_mkr.Load_or_make_(db_url, created_ref);
 		boolean created = created_ref.Val();
-		cfg_tbl.Ctor(provider, created);
-		fil_tbl.Ctor(provider, created);
+		cfg_tbl.Ctor(conn, created);
+		fil_tbl.Ctor(conn, created);
 		if (created)
 			cfg_tbl.Insert(Cfg_grp_root_dir, Cfg_key_fil_id_next, Int_.Xto_str(fil_id_next));
 		else {
 			fil_id_next = cfg_tbl.Select_as_int_or_fail(Cfg_grp_root_dir, Cfg_key_fil_id_next);
 		}
-		return provider;
+		return conn;
 	}
 	public void Rls() {
 		cfg_tbl.Rls();

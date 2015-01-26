@@ -19,15 +19,15 @@ package gplx.dbs.orderBys; import gplx.*; import gplx.dbs.*;
 import org.junit.*;
 public abstract class OrderBys_base_tst {
 	@Before public void setup() {
-		provider = provider_();
-		fx.Provider_(provider);
-		Db_qry_delete.new_().BaseTable_("dbs_crud_ops").Exec_qry(provider);
-	}	protected Db_provider_fxt fx = new Db_provider_fxt();
-	@After public void teardown() {provider.Conn_term();}
-	protected abstract Db_provider provider_(); protected Db_provider provider;		
+		conn = provider_();
+		fx.Conn_(conn);
+		Db_qry_delete.new_("dbs_crud_ops").Exec_qry(conn);
+	}	protected Db_conn_fxt fx = new Db_conn_fxt();
+	@After public void teardown() {conn.Conn_term();}
+	protected abstract Db_conn provider_(); protected Db_conn conn;		
 	protected void Basic_hook() {
-		fx.tst_ExecDml(1, Db_qry_insert.new_().BaseTable_("dbs_crud_ops").Arg_("id", 1).Arg_("name", "you"));
-		fx.tst_ExecDml(1, Db_qry_insert.new_().BaseTable_("dbs_crud_ops").Arg_("id", 0).Arg_("name", "me"));
+		fx.tst_ExecDml(1, new Db_qry_insert("dbs_crud_ops").Arg_("id", 1).Arg_("name", "you"));
+		fx.tst_ExecDml(1, new Db_qry_insert("dbs_crud_ops").Arg_("id", 0).Arg_("name", "me"));
 
 		fx.tst_ExecRdr(2, Db_qry_select.new_().From_("dbs_crud_ops").OrderBy_("id", true));
 		fx.tst_RowAry(0, 0, "me");
@@ -38,8 +38,8 @@ public abstract class OrderBys_base_tst {
 		fx.tst_RowAry(1, 0, "me");
 	}
 	protected void SameVals_hook() {
-		fx.tst_ExecDml(1, Db_qry_insert.new_().BaseTable_("dbs_crud_ops").Arg_("id", 0).Arg_("name", "me"));
-		fx.tst_ExecDml(1, Db_qry_insert.new_().BaseTable_("dbs_crud_ops").Arg_("id", 0).Arg_("name", "you"));
+		fx.tst_ExecDml(1, new Db_qry_insert("dbs_crud_ops").Arg_("id", 0).Arg_("name", "me"));
+		fx.tst_ExecDml(1, new Db_qry_insert("dbs_crud_ops").Arg_("id", 0).Arg_("name", "you"));
 
 		fx.tst_ExecRdr(2, Db_qry_select.new_().From_("dbs_crud_ops").OrderBy_("id", true));
 		fx.tst_RowAry(0, 0, "me");

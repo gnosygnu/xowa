@@ -28,6 +28,7 @@ public class Xof_url_bldr_tst {
 	@Test 	public void Pdf_page_2() 					{fxt.Dir_spr_http_().Root_("http://test/").Md5_("ef").Ttl_("A.pdf").Page_(2).Expd_src_("http://test/thumb/e/ef/A.pdf/page2-0px-A.pdf.jpg").tst();}
 }
 class Xof_url_bldr_fxt {
+	private final Xof_url_bldr url_bldr = new Xof_url_bldr();
 	public Xof_url_bldr_fxt ini() {this.Clear(); return this;}
 	public Xof_url_bldr_fxt Dir_spr_http_() {return Dir_spr_(Byte_ascii.Slash);}
 	public Xof_url_bldr_fxt Dir_spr_fsys_wnt_() {return Dir_spr_(Byte_ascii.Backslash);}
@@ -38,7 +39,6 @@ class Xof_url_bldr_fxt {
 	public Xof_url_bldr_fxt Page_(int v) {page = v; return this;} private int page = Xof_doc_page.Null;
 	public Xof_url_bldr_fxt Seek_(int v) {seek = v; return this;} private double seek = Xof_doc_thumb.Null;
 	public Xof_url_bldr_fxt Expd_src_(String v) {expd_src = v; return this;} private String expd_src;
-	Xof_url_bldr url_bldr = new Xof_url_bldr();
 	private void Clear() {
 		dir_spr = Byte_.Zero; ext = null; root = md5 = ttl = expd_src = null;
 		seek = Xof_doc_thumb.Null;

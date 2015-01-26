@@ -623,7 +623,7 @@ class Xoh_display_ttl_wtr {
 	, Msg_style_restricted = Bry_.new_ascii_(" style='/* attempt to bypass $wgRestrictDisplayTitle */'")
 	;
 	private Btrie_slim_mgr style_trie = Btrie_slim_mgr.ci_ascii_()
-	.Add_str_byte__many(Byte_.int_(0), "display", "user-select", "visibility");  // if ( preg_match( '/(display|user-select|visibility)\s*:/i', $decoded['style'] ) ) {
+	.Add_str_byte__many(Byte_.By_int(0), "display", "user-select", "visibility");  // if ( preg_match( '/(display|user-select|visibility)\s*:/i', $decoded['style'] ) ) {
 	public boolean Is_style_restricted(Bry_bfr bfr, Xoh_wtr_ctx hctx, byte[] src, Xop_xatr_itm atr, byte[] atr_key) {
 		if (atr_key != null 
 			&& Bry_.Eq(atr_key, Atr_key_style)

@@ -59,7 +59,7 @@ class Xodb_load_mgr_sql_fxt {
 	public void Init_save_ctgs(Xodb_page[] ary) {
 		int len = ary.length;
 		Xodb_mgr_sql db_mgr = wiki.Db_mgr_as_sql();
-		Db_provider p = db_mgr.Fsys_mgr().Provider_core(); 
+		Db_conn p = db_mgr.Fsys_mgr().Conn_core(); 
 		p.Txn_mgr().Txn_bgn_if_none();
 		Db_stmt page_stmt = db_mgr.Tbl_page().Insert_stmt(p);
 		Db_stmt category_stmt = db_mgr.Tbl_category().Insert_stmt(p);
@@ -98,7 +98,7 @@ class Xodb_load_mgr_sql_fxt {
 	public Xodb_load_mgr_sql_fxt Init_limit_(int v) {limit = v; return this;} private int limit = 3;
 //		public void Init_ctg_insert(Xoctg_mok_ctg ctg) {
 //			Xodb_mgr_sql db_mgr = wiki.Db_mgr_as_sql();
-//			Db_provider p = db_mgr.Fsys_mgr().Core_provider();
+//			Db_conn p = db_mgr.Fsys_mgr().Core_provider();
 //			p.Txn_mgr().Txn_bgn_if_none();
 //			Xodb_categorylinks_tbl ctg_tbl = db_mgr.Tbl_categorylinks(); 
 //			Db_stmt ctg_stmt = ctg_tbl.Insert_stmt(p);

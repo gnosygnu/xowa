@@ -18,16 +18,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.users.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.dbs.*;
 class Xou_db_xtn_tbl {
-	private Db_provider provider;
+	private Db_conn conn;
 	private Db_stmt_bldr stmt_bldr;
-	public void Db_init(Db_provider provider) {this.provider = provider;}
+	public void Db_init(Db_conn conn) {this.conn = conn;}
 	public void Db_save(Xou_db_xtn_itm itm) {
-		if (stmt_bldr == null) stmt_bldr = new Db_stmt_bldr(Tbl_name, String_.Ary(Fld_xtn_key), Fld_xtn_version).Init(provider);
+		if (stmt_bldr == null) stmt_bldr = new Db_stmt_bldr(Tbl_name, String_.Ary(Fld_xtn_key), Fld_xtn_version).Init(conn);
 		Db_stmt stmt = stmt_bldr.Get(itm.Cmd_mode());
 		switch (itm.Cmd_mode()) {
-			case Db_cmd_mode.Create:	stmt.Clear().Val_str_(itm.Key()).Val_str_(itm.Version()).Exec_insert(); break;
-			case Db_cmd_mode.Update:	stmt.Clear()					.Val_str_(itm.Version()).Val_str_(itm.Key()).Exec_update(); break;
-			case Db_cmd_mode.Delete:	stmt.Clear().Val_str_(itm.Key()).Exec_delete();	break;
+			case Db_cmd_mode.Create:	stmt.Clear().Val_str(itm.Key()).Val_str(itm.Version()).Exec_insert(); break;
+			case Db_cmd_mode.Update:	stmt.Clear()					.Val_str(itm.Version()).Val_str(itm.Key()).Exec_update(); break;
+			case Db_cmd_mode.Delete:	stmt.Clear().Val_str(itm.Key()).Exec_delete();	break;
 			case Db_cmd_mode.Ignore:	break;
 			default:					throw Err_.unhandled(itm.Cmd_mode());
 		}
@@ -36,15 +36,15 @@ class Xou_db_xtn_tbl {
 	public void Db_term() {
 		if (stmt_bldr != null) stmt_bldr.Rls();
 	}
-	public void Db_when_new(Db_provider provider) {
-		Sqlite_engine_.Tbl_create(provider, Tbl_name, Tbl_sql);
-		Sqlite_engine_.Idx_create(provider, Idx_key);
+	public void Db_when_new(Db_conn conn) {
+		Sqlite_engine_.Tbl_create(conn, Tbl_name, Tbl_sql);
+		Sqlite_engine_.Idx_create(conn, Idx_key);
 	}
 	public void Select_all(OrderedHash list) {
 		list.Clear();
 		DataRdr rdr = DataRdr_.Null;
 		try {
-			rdr = Db_qry_.select_tbl_(Tbl_name).Exec_qry_as_rdr(provider);
+			rdr = Db_qry_.select_tbl_(Tbl_name).Exec_qry_as_rdr(conn);
 			while (rdr.MoveNextPeer()) {
 				Xou_db_xtn_itm itm = new Xou_db_xtn_itm();
 				itm.Init_by_load(rdr);

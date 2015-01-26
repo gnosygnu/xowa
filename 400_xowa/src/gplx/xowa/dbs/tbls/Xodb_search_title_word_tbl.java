@@ -18,16 +18,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.dbs.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.dbs.*;
 import gplx.dbs.*;
 public class Xodb_search_title_word_tbl {
-	public static void Create_table(Db_provider p)						{Sqlite_engine_.Tbl_create(p, Tbl_name, Tbl_sql);}
-	public static void Create_index(Gfo_usr_dlg usr_dlg, Db_provider p)	{Sqlite_engine_.Idx_create(usr_dlg, p, "search", Indexes_main);}
-	public static Db_stmt Insert_stmt(Db_provider p) {return Db_stmt_.new_insert_(p, Tbl_name, Fld_stw_word_id, Fld_stw_word);}
+	public static void Create_table(Db_conn p)						{Sqlite_engine_.Tbl_create(p, Tbl_name, Tbl_sql);}
+	public static void Create_index(Gfo_usr_dlg usr_dlg, Db_conn p)	{Sqlite_engine_.Idx_create(usr_dlg, p, "search", Indexes_main);}
+	public static Db_stmt Insert_stmt(Db_conn p) {return Db_stmt_.new_insert_(p, Tbl_name, Fld_stw_word_id, Fld_stw_word);}
 	public static void Insert(Db_stmt stmt, int word_id, byte[] word) {
 		stmt.Clear()
-		.Val_int_(word_id)
-		.Val_str_by_bry_(word)
+		.Val_int(word_id)
+		.Val_bry_as_str(word)
 		.Exec_insert();
 	}	
-	public static void Select_by_word(Cancelable cancelable, ListAdp rv, Xodb_ctx db_ctx, byte[] search, int results_max, Db_provider p) {
+	public static void Select_by_word(Cancelable cancelable, ListAdp rv, Xodb_ctx db_ctx, byte[] search, int results_max, Db_conn p) {
 		Db_qry_select qry = Db_qry_.select_()
 			.Cols_(Xodb_search_title_word_tbl.Fld_stw_word_id)
 			.From_(Xodb_search_title_word_tbl.Tbl_name, "w")
@@ -82,7 +82,7 @@ class Xodb_in_wkr_search_title_id extends Xodb_in_wkr_base {
 	@Override public void Fill_stmt(Db_stmt stmt, int bgn, int end) {
 		for (int i = bgn; i < end; i++) {
 			Int_obj_val word_id = (Int_obj_val)words.FetchAt(i);
-			stmt.Val_int_(word_id.Val());		
+			stmt.Val_int(word_id.Val());		
 		}
 	}
 	@Override public void Eval_rslts(Cancelable cancelable, Xodb_ctx db_ctx, DataRdr rdr) {

@@ -17,6 +17,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui;
 import java.security.acl.Owner;
+import gplx.*;
+import gplx.threads.ThreadAdp_;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.browser.*;
+import org.eclipse.swt.events.*;
+import org.eclipse.swt.graphics.*;
+import org.eclipse.swt.widgets.*;
+import java.security.acl.Owner;
 
 import gplx.*;
 import gplx.threads.ThreadAdp_;
@@ -151,16 +159,8 @@ class Swt_html implements Gxw_html, Swt_control, FocusListener {
 		}
 		catch (Exception e) {eval_rslt.Error_set(e.getMessage()); 				return eval_rslt.Error();}
 	}	private Swt_html_eval_rslt eval_rslt = new Swt_html_eval_rslt();
-	@Override public void focusGained(FocusEvent arg0) {
-//		if (!focus_acquired && Swt_kit.Html_box_focus_automatically) {
-//			browser.forceFocus();
-//			focus_acquired = true;
-//			HtmlBox_focus();
-//		}
-	}	//boolean focus_acquired = false;
-	@Override public void focusLost(FocusEvent arg0) {
-//		focus_acquired = false;
-	}
+	@Override public void focusGained(FocusEvent arg0) {}
+	@Override public void focusLost(FocusEvent arg0) {}
 	public static final int
 	  Browser_tid_none 		= SWT.NONE
 	, Browser_tid_mozilla 	= SWT.MOZILLA
@@ -168,7 +168,7 @@ class Swt_html implements Gxw_html, Swt_control, FocusListener {
 	;	
 }
 class Swt_core_cmds_html extends Swt_core_cmds {
-	public Swt_core_cmds_html(Swt_html html_box, Control control) {super(control); this.html_box = html_box;} Swt_html html_box;
+	public Swt_core_cmds_html(Swt_html html_box, Control control) {super(control);}
 	@Override public void Focus() {
 		if (Focus_able())
 			control.forceFocus();
@@ -180,26 +180,27 @@ class Swt_core_cmds_html extends Swt_core_cmds {
 class Swt_html_eval_rslt {
 	public void Clear() {error = null; result = null;}
 	public boolean Result_pass() {return error == null;}
-	public Object Result() {return result;} public void Result_set(Object v) 	{result = v; error = null;} Object result;
-	public String Error () {return error;} 	public void Error_set(String v) 	{error = v; result = null;} String error;
+	public Object Result() {return result;} public void Result_set(Object v) 	{result = v; error = null;} private Object result;
+	public String Error () {return error;} 	public void Error_set(String v) 	{error = v; result = null;} private String error;
 }
 class Swt_html_lnr_Traverse implements TraverseListener {
-	public Swt_html_lnr_Traverse(Swt_html html_box) {this.html_box = html_box;} Swt_html html_box;
+	public Swt_html_lnr_Traverse(Swt_html html_box) {}
 	@Override public void keyTraversed(TraverseEvent arg0) {}
 }
 class Swt_html_lnr_title implements TitleListener {
-	public Swt_html_lnr_title(Swt_html html_box) {this.html_box = html_box;} Swt_html html_box;
+	private Swt_html html_box;
+	public Swt_html_lnr_title(Swt_html html_box) {this.html_box = html_box;}
 	@Override public void changed(TitleEvent ev) {
 		try {UsrDlg_._.Note(ev.title);}		
 		catch (Exception e) {html_box.Kit().Ask_ok("xowa.swt.html_box", "title.fail", Err_.Message_gplx_brief(e));}	// NOTE: must catch error or will cause app to lock; currently called inside displaySync 
 	}
 }
 class Swt_html_func extends BrowserFunction {    
+	private GfoInvkAble invk;
     public Swt_html_func(Browser browser, String name, GfoInvkAble invk) {
         super (browser, name);
-        this.browser = browser;
         this.invk = invk;
-    }	Browser browser; GfoInvkAble invk;
+    }
     public Object function (Object[] args) {
     	try {
     		return gplx.gfui.Gfui_html.Js_args_exec(invk, args);
@@ -210,7 +211,7 @@ class Swt_html_func extends BrowserFunction {
     }
 }
 class Swt_html_lnr_status implements StatusTextListener {
-	public Swt_html_lnr_status(Swt_html html_box) {this.html_box = html_box;} Swt_html html_box;
+	public Swt_html_lnr_status(Swt_html html_box) {this.html_box = html_box;} private Swt_html html_box;
 	public void Host_set(GfoEvObj host) {this.host = host;} GfoEvObj host;
 	@Override public void changed(StatusTextEvent ev) {
 		if (html_box.Kit().Mode_is_shutdown())
@@ -222,18 +223,18 @@ class Swt_html_lnr_status implements StatusTextListener {
 	}
 }
 class Swt_html_lnr_progress implements ProgressListener {
-	public Swt_html_lnr_progress(Swt_html html_box) {this.html_box = html_box;} Swt_html html_box;
+	public Swt_html_lnr_progress(Swt_html html_box) {}
 	@Override public void changed(ProgressEvent arg0) {}
 	@Override public void completed(ProgressEvent arg0) {
 //		UsrDlg_._.Note("done");
 	}
 }
 class Swt_html_lnr_location implements LocationListener {
-	public Swt_html_lnr_location(Swt_html html_box) {this.html_box = html_box;} Swt_html html_box;
-	public void Host_set(GfoEvObj host) {this.host = host;} GfoEvObj host;
+	public Swt_html_lnr_location(Swt_html html_box) {this.html_box = html_box;} private Swt_html html_box;
+	public void Host_set(GfoEvObj host) {this.host = host;} private GfoEvObj host;
 	@Override public void changed(LocationEvent arg) 	{Pub_evt(arg, Gfui_html.Evt_location_changed);}
 	@Override public void changing(LocationEvent arg) 	{Pub_evt(arg, Gfui_html.Evt_location_changing);}
-	void Pub_evt(LocationEvent arg, String evt) {		
+	private void Pub_evt(LocationEvent arg, String evt) {		
 		String location = arg.location;
 		if (String_.Eq(location, "about:blank")) return;	// location changing event fires once when page is loaded; ignore
 		if (	html_box.Html_doc_html_load_tid() == Gxw_html_load_tid_.Tid_url	// navigating to file://page.html will fire location event; ignore if url mode
@@ -249,7 +250,8 @@ class Swt_html_lnr_location implements LocationListener {
 	}
 }
 class Swt_html_lnr_mouse implements MouseListener {
-	public Swt_html_lnr_mouse(GxwElem elem, Browser browser, Swt_kit kit) {this.elem = elem; this.browser = browser; this.kit = kit;} GxwElem elem; Browser browser; Swt_kit kit;
+	private GxwElem elem; private Browser browser; private Swt_kit kit;
+	public Swt_html_lnr_mouse(GxwElem elem, Browser browser, Swt_kit kit) {this.elem = elem; this.browser = browser; this.kit = kit;}
 	@Override public void mouseDown(MouseEvent ev) {
 		if (Is_at_scrollbar_area()) return;
 		elem.Host().MouseDownCbk(XtoMouseData(ev));
@@ -258,7 +260,7 @@ class Swt_html_lnr_mouse implements MouseListener {
 		if (Is_at_scrollbar_area()) return;
 		elem.Host().MouseUpCbk(XtoMouseData(ev));
 	}
-	boolean Is_at_scrollbar_area() {
+	private boolean Is_at_scrollbar_area() {
 		// WORKAROUND.SWT: SEE:NOTE_1:browser scrollbar and click  
 		Point browser_size = browser.getSize();
 		Point click_pos = kit.Swt_display().getCursorLocation();

@@ -37,6 +37,16 @@ public class Xog_history_itm {
 			&&	redirect_force == comp.redirect_force
 			;
 	}
+	public void Srl_save(Bry_bfr bfr) {
+		byte[] bmk_bry = Bry_.Replace(Bry_.new_utf8_(bmk_pos), Byte_ascii.Pipe, Byte_ascii.Tilde);	// replace | with ~; EX: "0|1|2" -> "0~1~2"
+		bfr.Add(key).Add_byte_pipe().Add(bmk_bry).Add_byte_nl();
+	}
+	public static Xog_history_itm Srl_load(byte[] raw) {
+		byte[][] atrs = Bry_.Split(raw, Byte_ascii.Pipe);
+		byte[] bmk_bry = atrs.length == 6 ? atrs[5] : Bry_.Empty;
+		bmk_bry = Bry_.Replace(bmk_bry, Byte_ascii.Tilde, Byte_ascii.Pipe);
+		return new Xog_history_itm(atrs[0], atrs[1], atrs[2], atrs[3], atrs[4] == Bool_.Y_bry, String_.new_ascii_(bmk_bry));
+	}
 	public static final String Html_doc_pos_toc = "top";
 	public static final Xog_history_itm Null = new Xog_history_itm(null, null, null, null, false, null);
 }

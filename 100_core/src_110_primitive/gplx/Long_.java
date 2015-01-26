@@ -17,9 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public class Long_ {
+	public static final Class<?> Cls_ref_type = Long.class; 
 	public static final long MinValue = Long.MIN_VALUE;		
 	public static final long MaxValue = Long.MAX_VALUE;		
-	public static final String Cls_name = "long";
+	public static final String Cls_val_name = "long";
 	public static final long Neg1 = -1;
 	public static final int Log10Ary_len = 21;
 	public static long[] Log10Ary = new long[] 

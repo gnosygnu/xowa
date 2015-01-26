@@ -17,68 +17,65 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
 import java.sql.*; 
+import gplx.dbs.sqls.*;
 abstract class Db_engine_sql_base implements Db_engine {
-	public abstract String Key();
-	public abstract String Conn_info_tid();
-	public Db_conn_info Conn_info() {return conn_info;} protected Db_conn_info conn_info;
-	@gplx.Virtual public void Txn_bgn() {Execute(Db_qry_sql.xtn_("BEGIN TRANSACTION;"));}
-	@gplx.Virtual public void Txn_end() {Execute(Db_qry_sql.xtn_("COMMIT TRANSACTION;"));}
-	public abstract Db_engine Make_new(Db_conn_info conn_info);
-	@gplx.Virtual public Sql_cmd_wtr SqlWtr() {return Sql_cmd_wtr_.Ansi;}
-	public Object Execute(Db_qry cmd) {
-		Db_qryWkr wkr = (Db_qryWkr)wkrs.FetchOrFail(cmd.KeyOfDb_qry());
-		return wkr.Exec(this, cmd);
+	@gplx.Internal protected void Ctor(Db_url url) {this.url = url;}
+	public abstract String Tid();
+	public Db_url Url() {return url;} protected Db_url url;
+	public abstract		Db_engine New_clone(Db_url url);
+	public Db_rdr		New_rdr_by_obj(Object rdr, String sql) {
+		Db_rdr__basic rv = New_rdr_clone();	
+		rv.Ctor((ResultSet)rdr, sql);	
+		return rv;
 	}
-	@gplx.Internal protected void ctor_SqlEngineBase(Db_conn_info conn_info) {
-		this.conn_info = conn_info;
-		wkrs.Add(Db_qry_select.KeyConst, new ExecSqlWkr());
-		wkrs.Add(Db_qry_insert.KeyConst, new ExecSqlWkr());
-		wkrs.Add(Db_qry_update.KeyConst, new ExecSqlWkr());
-		wkrs.Add(Db_qry_delete.KeyConst, new ExecSqlWkr());
-		wkrs.Add(Db_qry_sql.KeyConst, new ExecSqlWkr());
-		wkrs.Add(Db_qry_flush.KeyConst, Db_qryWkr_.Null);
-	}	HashAdp wkrs = HashAdp_.new_();
-	@gplx.Internal @gplx.Virtual protected int ExecuteNonQuery(String sql) {
+	@gplx.Virtual public Db_rdr__basic New_rdr_clone() {return new Db_rdr__basic();}
+	public Db_stmt		New_stmt_prep(Db_qry qry) {return new Db_stmt_cmd(this, qry);}
+	public void			Txn_bgn() {Exec_as_obj(Db_qry_sql.xtn_("BEGIN TRANSACTION;"));}
+	public void			Txn_end() {Exec_as_obj(Db_qry_sql.xtn_("COMMIT TRANSACTION;"));}
+	public Object		Exec_as_obj(Db_qry qry) {
+		if (qry.Tid() == Db_qry_.Tid_flush) return null;	// ignore flush (delete-db) statements
+		String sql = this.SqlWtr().Xto_str(qry, false); // DBG: Tfds.Write(sql);
+		return qry.Exec_is_rdr() ? (Object)this.Exec_as_rdr(sql) : this.Exec_as_int(sql);
+	}
+	private int Exec_as_int(String sql) {
 		try {
-			Statement cmd = NewDbCmd(sql);	
-			return cmd.executeUpdate(sql);	
+			Statement cmd = New_stmt_exec(sql);	
+			return cmd.executeUpdate(sql);			
 		}
 		catch (Exception exc) {throw Err_.err_(exc, "exec nonQuery failed").Add("sql", sql).Add("err", Err_.Message_gplx_brief(exc));}
 	}
-	@gplx.Internal @gplx.Virtual protected DataRdr ExecuteReader(String sql) {
+	private DataRdr Exec_as_rdr(String sql) {
 		try {
-			Statement cmd = NewDbCmd(sql);			
+			Statement cmd = New_stmt_exec(sql);	
 			cmd.execute(sql);										
 			ResultSet rdr = cmd.getResultSet();	
-			return NewDataRdr(rdr, sql);
+			return New_rdr(rdr, sql);
 		}
 		catch (Exception exc) {throw Err_.err_(exc, "exec reader failed").Add("sql", sql).Add("err", Err_.Message_gplx_brief(exc));}
 	}
+	@gplx.Virtual public DataRdr New_rdr(ResultSet rdr, String sql) {return gplx.stores.Db_data_rdr_.new_(rdr, sql);}
+	@gplx.Virtual public Sql_qry_wtr SqlWtr() {return Sql_qry_wtr_.new_ansi();}
 	@gplx.Internal protected abstract Connection Conn_new();	
-	@gplx.Virtual public DataRdr NewDataRdr(ResultSet rdr, String sql) {return gplx.stores.Db_data_rdr_.new_(rdr, sql);}
-	public Db_rdr	New_db_rdr(Object rdr, String sql) {return new Db_rdr__basic((ResultSet)rdr, sql);}
-	public Db_stmt	New_db_stmt(Db_provider provider, Db_qry qry) {return new Db_stmt_cmd(provider, qry);}
-		public Object New_db_cmd(String sql) {
-		try {return connection.prepareStatement(sql);}
-		catch (Exception e) {
-			throw Err_.err_(e, "failed to prepare sql; sql={0}", sql);}
-	}
-	public void Conn_open() {
-		connection = Conn_new();
-	}	private Connection connection;
+		private Connection connection;
+	public void Conn_open() {connection = Conn_new();}
 	public void Conn_term() {
-//		if (Env_.Mode_testing()) return;	// WORKAROUND:MYSQL:else errors randomly when running all tests. possible connection pooling issue (?); // commented out 2013-08-22
+		if (connection == null) return;	// connection never opened; just exit
 		try 	{connection.close();}
-		catch 	(SQLException e) {throw Err_.err_(e, "close connection failed").Add("ConnectInfo", conn_info.Str_raw());}
+		catch 	(Exception e) {throw Err_.err_(e, "Conn_term.fail; url={0} err={1}", url.Xto_raw(), Err_.Message_lang(e));}
+		connection = null;
 	}
-	Statement NewDbCmd(String commandText) {
-		Statement cmd = null;
-		try 	{cmd = connection.createStatement();}
-		catch 	(SQLException e) {throw Err_.err_(e, "could not create statement").Add("commandText", commandText).Add("e", Err_.Message_lang(e));}
-		return cmd;
+	public Object New_stmt_prep_as_obj(String sql) {
+		if (connection == null) connection = Conn_new();	// auto-open connection
+		try 	{return connection.prepareStatement(sql);}
+		catch 	(Exception e) {throw Err_.err_(e, "New_stmt_prep.fail; sql={0} err={1}", sql, Err_.Message_lang(e));}
 	}
-	protected Connection NewDbCon(String url, String uid, String pwd) {
+	private Statement New_stmt_exec(String sql) {
+		if (connection == null) connection = Conn_new();	// auto-open connection
+		try 	{return connection.createStatement();}
+		catch 	(Exception e) {throw Err_.err_(e, "New_stmt_exec.fail; sql={0} err={1}", sql, Err_.Message_lang(e));}
+	}
+	protected Connection Conn_make_by_url(String url, String uid, String pwd) {
 		try {return DriverManager.getConnection(url, uid, pwd);}
-		catch (SQLException e) {throw Err_.err_(e, "connection open failed").Add("ConnectInfo", Conn_info().Str_raw());}
+		catch (SQLException e) {throw Err_.err_(e, "connection open failed").Add("ConnectInfo", Url().Xto_raw());}
 	}
 	}

@@ -31,15 +31,19 @@ public class Scrib_lib_text implements Scrib_lib {
 	public boolean Procs_exec(int key, Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		switch (key) {
 			case Proc_unstrip:							return Unstrip(args, rslt);
+			case Proc_unstripNoWiki:					return UnstripNoWiki(args, rslt);
+			case Proc_killMarkers:						return KillMarkers(args, rslt);
 			case Proc_getEntityTable:					return GetEntityTable(args, rslt);
 			case Proc_init_text_for_wiki:				return Init_text_for_wiki(args, rslt);
 			default: throw Err_.unhandled(key);
 		}
 	}
-	private static final int Proc_unstrip = 0, Proc_getEntityTable = 1, Proc_init_text_for_wiki = 2;
-	public static final String Invk_unstrip = "unstrip", Invk_getEntityTable = "getEntityTable", Invk_init_text_for_wiki = "init_text_for_wiki";
-	private static final String[] Proc_names = String_.Ary(Invk_unstrip, Invk_getEntityTable, Invk_init_text_for_wiki);
-	public boolean Unstrip(Scrib_proc_args args, Scrib_proc_rslt rslt) {return rslt.Init_obj(args.Pull_str(0));}
+	private static final int Proc_unstrip = 0, Proc_unstripNoWiki = 1, Proc_killMarkers = 2, Proc_getEntityTable = 3, Proc_init_text_for_wiki = 4;
+	public static final String Invk_unstrip = "unstrip", Invk_unstripNoWiki = "unstripNoWiki", Invk_killMarkers = "killMarkers", Invk_getEntityTable = "getEntityTable", Invk_init_text_for_wiki = "init_text_for_wiki";
+	private static final String[] Proc_names = String_.Ary(Invk_unstrip, Invk_unstripNoWiki, Invk_killMarkers, Invk_getEntityTable, Invk_init_text_for_wiki);
+	public boolean Unstrip(Scrib_proc_args args, Scrib_proc_rslt rslt)			{return rslt.Init_obj(args.Pull_str(0));}	// NOTE: XOWA does not use MediaWiki strip markers; just return original; DATE:2015-01-20
+	public boolean UnstripNoWiki(Scrib_proc_args args, Scrib_proc_rslt rslt)	{return rslt.Init_obj(args.Pull_str(0));}	// NOTE: XOWA does not use MediaWiki strip markers; just return original; DATE:2015-01-20
+	public boolean KillMarkers(Scrib_proc_args args, Scrib_proc_rslt rslt)		{return rslt.Init_obj(args.Pull_str(0));}	// NOTE: XOWA does not use MediaWiki strip markers; just return original; DATE:2015-01-20
 	public boolean GetEntityTable(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		if (Html_entity_ == null) Html_entity_ = Scrib_lib_text_html_entities.new_();
 		return rslt.Init_obj(Html_entity_);

@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public class Int_ implements GfoInvkAble {
-	public static final Class<?> ClassOf = Integer.class; 
-	public static final String Cls_name = "int";
+	public static final String Cls_val_name = "int";
+	public static final Class<?> Cls_ref_type = Integer.class; 
 	public static final int Base1 = 1;
 	public static final int Const_dlm_len = 1;
 	public static final int Const_position_after_char = 1;

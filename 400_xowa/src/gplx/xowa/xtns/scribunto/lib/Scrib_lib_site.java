@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.lib; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
+import gplx.xowa.wikis.xwikis.*;
 public class Scrib_lib_site implements Scrib_lib {
 	public Scrib_lib_site(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
@@ -33,13 +34,14 @@ public class Scrib_lib_site implements Scrib_lib {
 			case Proc_pagesInCategory:					return PagesInCategory(args, rslt);
 			case Proc_pagesInNs:						return PagesInNs(args, rslt);
 			case Proc_usersInGroup:						return UsersInGroup(args, rslt);
+			case Proc_interwikiMap:						return InterwikiMap(args, rslt);
 			case Proc_init_site_for_wiki:				return Init_site_for_wiki(args, rslt);
 			default: throw Err_.unhandled(key);
 		}
 	}
-	private static final int Proc_getNsIndex = 0, Proc_pagesInCategory = 1, Proc_pagesInNs = 2, Proc_usersInGroup = 3, Proc_init_site_for_wiki = 4;
-	public static final String Invk_getNsIndex = "getNsIndex", Invk_pagesInCategory = "pagesInCategory", Invk_pagesInNs = "pagesInName"+"space", Invk_usersInGroup = "usersInGroup", Invk_init_site_for_wiki = "init_site_for_wiki";
-	private static final String[] Proc_names = String_.Ary(Invk_getNsIndex, Invk_pagesInCategory, Invk_pagesInNs, Invk_usersInGroup, Invk_init_site_for_wiki);
+	private static final int Proc_getNsIndex = 0, Proc_pagesInCategory = 1, Proc_pagesInNs = 2, Proc_usersInGroup = 3, Proc_interwikiMap = 4, Proc_init_site_for_wiki = 5;
+	public static final String Invk_getNsIndex = "getNsIndex", Invk_pagesInCategory = "pagesInCategory", Invk_pagesInNs = "pagesInName"+"space", Invk_usersInGroup = "usersInGroup", Invk_interwikiMap = "interwikiMap", Invk_init_site_for_wiki = "init_site_for_wiki";
+	private static final String[] Proc_names = String_.Ary(Invk_getNsIndex, Invk_pagesInCategory, Invk_pagesInNs, Invk_usersInGroup, Invk_interwikiMap, Invk_init_site_for_wiki);
 	public boolean GetNsIndex(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] ns_name = args.Pull_bry(0);
 		Object ns_obj = core.Wiki().Ns_mgr().Names_get_or_null(ns_name, 0, ns_name.length);
@@ -60,6 +62,49 @@ public class Scrib_lib_site implements Scrib_lib {
 	public boolean UsersInGroup(Scrib_proc_args args, Scrib_proc_rslt rslt) {	// TODO.9: get user_groups table
 		// byte[] grp_name = args.Pull_bry(0);
 		return rslt.Init_obj(0);
+	}
+	public boolean InterwikiMap(Scrib_proc_args args, Scrib_proc_rslt rslt) {			
+		String filter = args.Cast_str_or_null(0);
+		int local = -1;
+		if		(String_.Eq(filter, "local"))
+			local = 1;
+		else if (String_.Eq(filter, "!local"))
+			local = 0;
+		else if (filter != null)
+			throw Err_.new_fmt_("bad argument #1 to 'interwikiMap' (unknown filter '$filter')");
+		// TODO: cache interwikimap results
+		Xow_xwiki_mgr xwiki_mgr = core.Wiki().Xwiki_mgr();
+		int xwiki_len = xwiki_mgr.Len();
+		KeyVal[][] rv = new KeyVal[xwiki_len][];
+		for (int i = 0; i < xwiki_len; ++i) {
+			Xow_xwiki_itm itm = xwiki_mgr.Get_at(i);
+			boolean itm_is_local = itm.Offline();
+			if (local == 1 && !itm_is_local) continue;
+			if (local == 0 &&  itm_is_local) continue;
+			String prefix = itm.Key_str();
+			rv[i] = InterwikiMap_itm(itm, prefix, itm_is_local);
+		}
+		return rslt.Init_obj(rv);
+	}
+	private KeyVal[] InterwikiMap_itm(Xow_xwiki_itm itm, String prefix, boolean itm_is_local) {
+		boolean is_extralanguage_link = false;
+		int rv_len = 7;
+		if (is_extralanguage_link) rv_len += 2;
+		String url = String_.new_utf8_(itm.Domain());
+		boolean url_is_relative = String_.HasAtBgn(url, "//");
+		KeyVal[] rv = new KeyVal[rv_len];
+		rv[ 0] = KeyVal_.new_("prefix"					, prefix);
+		rv[ 1] = KeyVal_.new_("url"						, url);								// wfExpandUrl( $row['iw_url'], PROTO_RELATIVE ),
+		rv[ 2] = KeyVal_.new_("isProtocolRelative"		, url_is_relative);					// substr( $row['iw_url'], 0, 2 ) === '//',
+		rv[ 3] = KeyVal_.new_("isLocal"					, itm_is_local);					// isset( $row['iw_local'] ) && $row['iw_local'] == '1',
+		rv[ 4] = KeyVal_.new_("isTranscludable"			, Bool_.N);							// isset( $row['iw_trans'] ) && $row['iw_trans'] == '1',
+		rv[ 5] = KeyVal_.new_("isCurrentWiki"			, Bool_.N);							// in_array( $prefix, $wgLocalInterwikis ),
+		rv[ 6] = KeyVal_.new_("isExtraLanguageLink"		, is_extralanguage_link);			// in_array( $prefix, $wgExtraInterlanguageLinkPrefixes ),
+		if (is_extralanguage_link) {
+			rv[7] = KeyVal_.new_("displayText"			, "displayText_TODO");				// $displayText = wfMessage( "interlanguage-link-$prefix" ); if ( !$displayText->isDisabled() ) ...
+			rv[7] = KeyVal_.new_("tooltip"				, "tooltip_TODO");					// $tooltip = wfMessage( "interlanguage-link-sitename-$prefix" );
+		}
+		return rv;
 	}
 	public void Notify_wiki_changed() {if (notify_wiki_changed_fnc != null) core.Interpreter().CallFunction(notify_wiki_changed_fnc.Id(), KeyVal_.Ary_empty);}
 	public boolean Init_site_for_wiki(Scrib_proc_args args, Scrib_proc_rslt rslt) {

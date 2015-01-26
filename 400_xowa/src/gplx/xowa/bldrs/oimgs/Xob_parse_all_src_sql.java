@@ -21,7 +21,7 @@ class Xob_dump_src_ttl implements Xob_parse_all_db {
 	private Xodb_mgr_sql db_mgr; private Db_stmt page_stmt; private Xodb_file[] text_files_ary; private int text_files_len; private byte redirect;
 	public Xob_dump_src_ttl Init(Xow_wiki wiki, int limit, byte redirect) {
 		this.db_mgr = wiki.Db_mgr_as_sql(); this.redirect = redirect;
-		page_stmt = db_mgr.Tbl_page().Select_for_parse_all_stmt(db_mgr.Fsys_mgr().Provider_core(), limit, redirect);
+		page_stmt = db_mgr.Tbl_page().Select_for_parse_all_stmt(db_mgr.Fsys_mgr().Conn_core(), limit, redirect);
 		text_files_ary = Init_text_files_ary(db_mgr.Fsys_mgr());
 		text_files_len = text_files_ary.length;
 		return this;
@@ -77,11 +77,11 @@ class Xob_dump_src_id {
 		if (cur_text_db_idx != text_db_idx) {
 			cur_text_db_idx = text_db_idx;
 			Xodb_file text_db = db_mgr.Fsys_mgr().Get_by_idx(text_db_idx);
-			Db_provider provider = text_db.Provider();
+			Db_conn conn = text_db.Conn();
 			String sql = String_.Format(Sql_select, New_rdr__redirect_clause(redirect));
-			text_stmt = provider.Prepare(Db_qry_sql.rdr_(sql));
+			text_stmt = conn.New_stmt(Db_qry_sql.rdr_(sql));
 		}
-		return text_stmt.Clear().Val_int_(prv_id).Val_int_(cur_ns).Exec_select();
+		return text_stmt.Clear().Val_int(prv_id).Val_int(cur_ns).Exec_select();
 	}
 	private static Xodb_page New_page(Xodb_mgr_sql db_mgr, int ns_id, DataRdr rdr) {
 		Xodb_page rv = new Xodb_page();

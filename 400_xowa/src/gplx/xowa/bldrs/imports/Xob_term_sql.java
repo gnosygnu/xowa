@@ -23,10 +23,10 @@ public class Xob_term_sql extends Xob_term_base {
 	@Override public void Cmd_end_hook() {
 		Io_mgr._.DeleteDirDeep(wiki.Fsys_mgr().Tmp_dir());
 		Xodb_mgr_sql db_mgr = wiki.Db_mgr_as_sql();
-		db_mgr.Tbl_xowa_cfg().Insert_str_by_bry	(Xodb_mgr_sql.Grp_wiki_init, "props.bldr_version", wiki.Props().Bldr_version());
-		db_mgr.Tbl_xowa_cfg().Insert_str_by_bry	(Xodb_mgr_sql.Grp_wiki_init, "props.main_page", wiki.Props().Main_page());
-		db_mgr.Tbl_xowa_cfg().Insert_str_by_bry	(Xodb_mgr_sql.Grp_wiki_init, "props.siteinfo_misc", wiki.Props().Siteinfo_misc());
-		db_mgr.Tbl_xowa_cfg().Insert_str_by_bry	(Xodb_mgr_sql.Grp_wiki_init, "props.siteinfo_mainpage", wiki.Props().Siteinfo_mainpage());
+		db_mgr.Tbl_xowa_cfg().Insert_bry_as_str	(Xodb_mgr_sql.Grp_wiki_init, "props.bldr_version", wiki.Props().Bldr_version());
+		db_mgr.Tbl_xowa_cfg().Insert_bry_as_str	(Xodb_mgr_sql.Grp_wiki_init, "props.main_page", wiki.Props().Main_page());
+		db_mgr.Tbl_xowa_cfg().Insert_bry_as_str	(Xodb_mgr_sql.Grp_wiki_init, "props.siteinfo_misc", wiki.Props().Siteinfo_misc());
+		db_mgr.Tbl_xowa_cfg().Insert_bry_as_str	(Xodb_mgr_sql.Grp_wiki_init, "props.siteinfo_mainpage", wiki.Props().Siteinfo_mainpage());
 		wiki.Db_mgr_as_sql().Fsys_mgr().Rls();
 	}
 }

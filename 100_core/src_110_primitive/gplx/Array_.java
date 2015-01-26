@@ -47,8 +47,6 @@ public class Array_ {
 			rv[i + curReplacePos] = add[i];
 		for (int i = curReplacePos + addInsertPos; i < curLen; i++)		// copy old after curReplacePos
 			rv[i + newLen] = cur[i];
-//			tst_ReplaceInsert(ary_obj(0, 1, 4, 5)   , ary_obj(1, 2, 3), 1, 1, ary_obj(0, 1, 2, 3, 4, 5));
-//			tst_ReplaceInsert(ary_obj(0, 1, 2, 4, 5), ary_obj(1, 2, 3), 1, 2, ary_obj(0, 1, 2, 3, 4, 5));//3,4 -> 4,5
 		return rv;
 	}
 	public static Object Resize(Object src, int trgLen) {		

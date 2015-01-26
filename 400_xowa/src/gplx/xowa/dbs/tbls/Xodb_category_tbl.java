@@ -18,32 +18,32 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.dbs.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.dbs.*;
 import gplx.dbs.*;
 public class Xodb_category_tbl {
-	public Db_stmt Update_stmt(Db_provider p) {return Db_stmt_.new_update_(p, Tbl_name, String_.Ary(Fld_cat_id), Fld_cat_hidden);}
+	public Db_stmt Update_stmt(Db_conn p) {return Db_stmt_.new_update_(p, Tbl_name, String_.Ary(Fld_cat_id), Fld_cat_hidden);}
 	public void Update(Db_stmt stmt, int cat_id, byte cat_hidden) {
 		stmt.Clear()
-			.Val_byte_(cat_hidden)
-			.Val_int_(cat_id)
+			.Val_byte(cat_hidden)
+			.Val_int(cat_id)
 			.Exec_update()
 			;
 	}
-	public Db_stmt Insert_stmt(Db_provider p) {return Db_stmt_.new_insert_(p, Tbl_name, Fld_cat_id, Fld_cat_pages, Fld_cat_subcats, Fld_cat_files, Fld_cat_hidden, Fld_cat_file_idx);}
+	public Db_stmt Insert_stmt(Db_conn p) {return Db_stmt_.new_insert_(p, Tbl_name, Fld_cat_id, Fld_cat_pages, Fld_cat_subcats, Fld_cat_files, Fld_cat_hidden, Fld_cat_file_idx);}
 	public void Insert(Db_stmt stmt, int cat_id, int cat_pages, int cat_subcats, int cat_files, byte cat_hidden, int cat_file_idx) {
 		stmt.Clear()
-			.Val_int_(cat_id)
-			.Val_int_(cat_pages)
-			.Val_int_(cat_subcats)
-			.Val_int_(cat_files)
-			.Val_byte_(cat_hidden)
-			.Val_int_(cat_file_idx)
+			.Val_int(cat_id)
+			.Val_int(cat_pages)
+			.Val_int(cat_subcats)
+			.Val_int(cat_files)
+			.Val_byte(cat_hidden)
+			.Val_int(cat_file_idx)
 			.Exec_insert()
 			;
 	}
-	public Xodb_category_itm Select(Db_provider p, int cat_page_id) {
+	public Xodb_category_itm Select(Db_conn p, int cat_page_id) {
 		Db_stmt stmt = Db_stmt_.Null;
 		DataRdr rdr = DataRdr_.Null;
 		try {
 			stmt = Db_stmt_.new_select_(p, Tbl_name, String_.Ary(Fld_cat_id));
-			rdr = stmt.Val_int_(cat_page_id).Exec_select();
+			rdr = stmt.Val_int(cat_page_id).Exec_select();
 			if (rdr.MoveNextPeer()) {
 				return	Xodb_category_itm.load_
 					(	cat_page_id
@@ -57,7 +57,7 @@ public class Xodb_category_tbl {
 		}	finally {stmt.Rls(); rdr.Rls();}
 		return Xodb_category_itm.Null;
 	}
-	public void Select_by_cat_id_in(Cancelable cancelable, OrderedHash rv, Db_provider p, Xodb_ctx db_ctx, int bgn, int end) {
+	public void Select_by_cat_id_in(Cancelable cancelable, OrderedHash rv, Db_conn p, Xodb_ctx db_ctx, int bgn, int end) {
 		Xodb_in_wkr_category_id wkr = new Xodb_in_wkr_category_id();
 		wkr.Init(rv);
 		wkr.Select_in(p, cancelable, db_ctx, bgn, end);

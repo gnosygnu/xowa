@@ -181,4 +181,18 @@ public class Xop_xnde_wkr__err_dangling_tst {
 	@Test  public void Underline() {	// PURPOSE: 2nd <u> should auto-close; PAGE:en.b:Textbook_of_Psychiatry/Alcoholism_and_Psychoactive_Substance_Use_Disorders DATE:2014-09-05
 		fxt.Test_html_full_str("a<u>b<u>c", "a<u>b</u>c");
 	}
+	@Test   public void Xtn_template() {	// PURPOSE: dangling xtns within templates should be auto-closed inside template, not in calling page; PAGE:en.w:Provinces_and_territories_of_Canada DATE:2014-11-13
+		fxt.Init_page_create("Template:A", "<poem>A");
+		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		( "{{A}}"
+		, " b"		// poem should not extend to " b"
+		), String_.Concat_lines_nl_skip_last
+		( "<div class=\"poem\">"
+		, "<p>"
+		, "A"
+		, "</p>"
+		, "</div>"	// poem ends here
+		, " b"
+		));
+	}
 }

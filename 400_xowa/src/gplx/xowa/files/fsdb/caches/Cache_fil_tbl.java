@@ -20,20 +20,20 @@ import gplx.dbs.*;
 class Cache_fil_tbl {		
 	private Db_stmt select_itm_stmt;
 	private Db_stmt_bldr stmt_bldr;
-	public void Db_init(Db_provider p) {this.provider = p;}
-	public Db_provider Provider() {return provider;} private Db_provider provider;
-	public void Db_when_new(Db_provider p) {
+	public void Db_init(Db_conn p) {this.conn = p;}
+	public Db_conn Conn() {return conn;} private Db_conn conn;
+	public void Db_when_new(Db_conn p) {
 		Sqlite_engine_.Tbl_create(p, Tbl_name, Tbl_sql);
 		Sqlite_engine_.Idx_create(p, Idx_ttl);
 	}
 	public String Db_save(Cache_fil_itm itm) {
 		try {
-			if (stmt_bldr == null) stmt_bldr = new Db_stmt_bldr(Tbl_name, String_.Ary(Fld_uid), Fld_dir_id, Fld_fil_name, Fld_fil_is_orig, Fld_fil_w, Fld_fil_h, Fld_fil_thumbtime, Fld_fil_ext, Fld_fil_size, Fld_cache_time).Init(provider);
+			if (stmt_bldr == null) stmt_bldr = new Db_stmt_bldr(Tbl_name, String_.Ary(Fld_uid), Fld_dir_id, Fld_fil_name, Fld_fil_is_orig, Fld_fil_w, Fld_fil_h, Fld_fil_thumbtime, Fld_fil_ext, Fld_fil_size, Fld_cache_time).Init(conn);
 			Db_stmt stmt = stmt_bldr.Get(itm.Cmd_mode());
 			switch (itm.Cmd_mode()) {
-				case Db_cmd_mode.Create:	stmt.Clear().Val_int_(itm.Uid()); Db_save_modify(stmt, itm); stmt.Exec_insert(); break;
-				case Db_cmd_mode.Update:	stmt.Clear();					  Db_save_modify(stmt, itm); stmt.Val_int_(itm.Uid()).Exec_update(); break;
-				case Db_cmd_mode.Delete:	stmt.Clear().Val_int_(itm.Uid()); stmt.Exec_delete();	break;
+				case Db_cmd_mode.Create:	stmt.Clear().Val_int(itm.Uid()); Db_save_modify(stmt, itm); stmt.Exec_insert(); break;
+				case Db_cmd_mode.Update:	stmt.Clear();					  Db_save_modify(stmt, itm); stmt.Val_int(itm.Uid()).Exec_update(); break;
+				case Db_cmd_mode.Delete:	stmt.Clear().Val_int(itm.Uid()); stmt.Exec_delete();	break;
 				case Db_cmd_mode.Ignore:	break;
 				default:					throw Err_.unhandled(itm.Cmd_mode());
 			}
@@ -45,33 +45,33 @@ class Cache_fil_tbl {
 		}
 	}
 	private void Db_save_modify(Db_stmt stmt, Cache_fil_itm itm) {
-		stmt.Val_int_(itm.Dir_id())
-			.Val_str_by_bry_(itm.Fil_name())
-			.Val_byte_by_bool_(itm.Fil_is_orig())
-			.Val_int_(itm.Fil_w())
-			.Val_int_(itm.Fil_h())
-			.Val_int_(Xof_doc_thumb.Db_save_int(itm.Fil_thumbtime()))
-			.Val_int_(itm.Fil_ext().Id())
-			.Val_long_(itm.Fil_size())
-			.Val_long_(itm.Cache_time())
+		stmt.Val_int(itm.Dir_id())
+			.Val_bry_as_str(itm.Fil_name())
+			.Val_bool_as_byte(itm.Fil_is_orig())
+			.Val_int(itm.Fil_w())
+			.Val_int(itm.Fil_h())
+			.Val_int(Xof_doc_thumb.Db_save_int(itm.Fil_thumbtime()))
+			.Val_int(itm.Fil_ext().Id())
+			.Val_long(itm.Fil_size())
+			.Val_long(itm.Cache_time())
 			;
 	}
 	public void Db_term() {
 		if (select_itm_stmt != null) select_itm_stmt.Rls();
 		if (stmt_bldr != null) stmt_bldr.Rls();
 	}
-	public int Select_max_uid() {return Db_provider_.Select_fld0_as_int_or(provider, "SELECT Max(uid) AS MaxId FROM cache_fil;", -1);}
+	public int Select_max_uid() {return Db_conn_.Select_fld0_as_int_or(conn, "SELECT Max(uid) AS MaxId FROM cache_fil;", -1);}
 	public Cache_fil_itm Select(int dir_id, byte[] fil_name, boolean fil_is_orig, int fil_w, int fil_h, double fil_thumbtime) {
-		if (select_itm_stmt == null) select_itm_stmt = Db_stmt_.new_select_(provider, Tbl_name, String_.Ary(Fld_dir_id, Fld_fil_name, Fld_fil_is_orig, Fld_fil_w, Fld_fil_h, Fld_fil_thumbtime));
+		if (select_itm_stmt == null) select_itm_stmt = Db_stmt_.new_select_(conn, Tbl_name, String_.Ary(Fld_dir_id, Fld_fil_name, Fld_fil_is_orig, Fld_fil_w, Fld_fil_h, Fld_fil_thumbtime));
 		DataRdr rdr = DataRdr_.Null;
 		try {
 			rdr = select_itm_stmt.Clear()
-			.Val_int_(dir_id)
-			.Val_str_by_bry_(fil_name)
-			.Val_byte_by_bool_(fil_is_orig)
-			.Val_int_(fil_w)
-			.Val_int_(fil_h)
-			.Val_int_(Xof_doc_thumb.Db_save_int(fil_thumbtime))
+			.Val_int(dir_id)
+			.Val_bry_as_str(fil_name)
+			.Val_bool_as_byte(fil_is_orig)
+			.Val_int(fil_w)
+			.Val_int(fil_h)
+			.Val_int(Xof_doc_thumb.Db_save_int(fil_thumbtime))
 			.Exec_select();
 			if (rdr.MoveNextPeer())
 				return new Cache_fil_itm().Init_by_load(rdr);
@@ -83,7 +83,7 @@ class Cache_fil_tbl {
 	}
 	public void Db_load(Bry_bfr fil_key_bldr, OrderedHash hash) {
 		hash.Clear();
-		Db_stmt select_all_stmt = Db_stmt_.new_select_all_(provider, Tbl_name);
+		Db_stmt select_all_stmt = Db_stmt_.new_select_all_(conn, Tbl_name);
 		DataRdr rdr = DataRdr_.Null;
 		try {
 			rdr = select_all_stmt.Exec_select();

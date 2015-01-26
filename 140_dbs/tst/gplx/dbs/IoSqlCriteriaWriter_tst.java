@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs; import gplx.*;
 import org.junit.*;
 import gplx.criterias.*; /*Criteria_base*/
-import gplx.ios.*;
+import gplx.ios.*; import gplx.dbs.sqls.*;
 public class IoSqlCriteriaWriter_tst {
 	@Test  public void Type() {
 		fld = IoItm_base_.Prop_Type;
@@ -53,8 +53,8 @@ public class IoSqlCriteriaWriter_tst {
 	String fld;
 	void tst_Write(String expd, Criteria crt) {
 		String_bldr sb = String_bldr_.new_();
-		Sql_cmd_wtr whereWtr = Sql_cmd_wtr_ansi_.default_();
-		whereWtr.BldWhere(sb, crt);
+		Sql_qry_wtr_ansi whereWtr = (Sql_qry_wtr_ansi)Sql_qry_wtr_.new_ansi();
+		whereWtr.Bld_where(sb, crt);
 		Tfds.Eq(expd, sb.XtoStr());
 	}
 }

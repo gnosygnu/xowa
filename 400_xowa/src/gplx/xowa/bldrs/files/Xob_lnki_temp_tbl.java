@@ -18,21 +18,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.dbs.*;
 class Xob_lnki_temp_tbl {
-	public static void Create_table(Db_provider p) {Sqlite_engine_.Tbl_create(p, Tbl_name, Tbl_sql);}
-	public static Db_stmt Insert_stmt(Db_provider p) {return Db_stmt_.new_insert_(p, Tbl_name, Fld_lnki_page_id, Fld_lnki_ttl, Fld_lnki_commons_ttl, Fld_lnki_ext, Fld_lnki_type, Fld_lnki_src_tid, Fld_lnki_w, Fld_lnki_h, Fld_lnki_upright, Fld_lnki_time, Fld_lnki_page);}
+	public static void Create_table(Db_conn p) {Sqlite_engine_.Tbl_create(p, Tbl_name, Tbl_sql);}
+	public static Db_stmt Insert_stmt(Db_conn p) {return Db_stmt_.new_insert_(p, Tbl_name, Fld_lnki_page_id, Fld_lnki_ttl, Fld_lnki_commons_ttl, Fld_lnki_ext, Fld_lnki_type, Fld_lnki_src_tid, Fld_lnki_w, Fld_lnki_h, Fld_lnki_upright, Fld_lnki_time, Fld_lnki_page);}
 	public static void Insert(Db_stmt stmt, int page_id, byte[] ttl, byte[] ttl_commons, byte ext_id, byte img_type, byte lnki_src_tid, int w, int h, double upright, double thumbtime, int page) {
 		stmt.Clear()
-		.Val_int_(page_id)
-		.Val_str_by_bry_(ttl)
-		.Val_str_by_bry_(ttl_commons)
-		.Val_byte_(ext_id)
-		.Val_byte_(img_type)
-		.Val_int_(lnki_src_tid)
-		.Val_int_(w)
-		.Val_int_(h)
-		.Val_double_(upright)
-		.Val_double_(gplx.xowa.files.Xof_doc_thumb.Db_save_double(thumbtime))
-		.Val_int_(page)
+		.Val_int(page_id)
+		.Val_bry_as_str(ttl)
+		.Val_bry_as_str(ttl_commons)
+		.Val_byte(ext_id)
+		.Val_byte(img_type)
+		.Val_int(lnki_src_tid)
+		.Val_int(w)
+		.Val_int(h)
+		.Val_double(upright)
+		.Val_double(gplx.xowa.files.Xof_doc_thumb.Db_save_double(thumbtime))
+		.Val_int(page)
 		.Exec_insert();
 	}
 	public static final String Tbl_name = "lnki_temp"

@@ -21,31 +21,31 @@ public class Xob_redirect_tbl {
 	private Url_encoder encoder; private Db_stmt insert_stmt;
 	public Xob_redirect_tbl(Io_url root_dir, Url_encoder encoder) {
 		this.db_file = Xodb_db_file.init__wiki_redirect(root_dir);
-		this.provider = db_file.Provider();
+		this.conn = db_file.Conn();
 		this.encoder = encoder;
 	}
 	public Xodb_db_file Db_file() {return db_file;} private Xodb_db_file db_file;
-	public Db_provider Provider() {return provider;} private Db_provider provider;
-	public Xob_redirect_tbl Create_table() {Sqlite_engine_.Tbl_create(provider, Tbl_name, Tbl_sql); return this;}
+	public Db_conn Conn() {return conn;} private Db_conn conn;
+	public Xob_redirect_tbl Create_table() {Sqlite_engine_.Tbl_create(conn, Tbl_name, Tbl_sql); return this;}
 	public void Create_indexes(Gfo_usr_dlg usr_dlg) {
-		Sqlite_engine_.Idx_create(usr_dlg, provider, Xodb_db_file.Name__wiki_redirect, Idx_trg_id, Idx_trg_ttl);
+		Sqlite_engine_.Idx_create(usr_dlg, conn, Xodb_db_file.Name__wiki_redirect, Idx_trg_id, Idx_trg_ttl);
 	}
 	public void Update_trg_redirect_id(Io_url core_url, int max_redirected_depth) {
-		Sqlite_engine_.Db_attach(provider, "page_db", core_url.Raw());		// link database with page table 
-		provider.Exec_sql(Sql_get_page_data);								// fill in page_id, page_ns, page_is_redirect for trg_ttl; EX: Page_A has "#REDIRECT Page_B"; Page_B is in redirect tbl; find its id, ttl, redirect status
+		Sqlite_engine_.Db_attach(conn, "page_db", core_url.Raw());		// link database with page table 
+		conn.Exec_sql(Sql_get_page_data);								// fill in page_id, page_ns, page_is_redirect for trg_ttl; EX: Page_A has "#REDIRECT Page_B"; Page_B is in redirect tbl; find its id, ttl, redirect status
 		for (int i = 0; i < max_redirected_depth; i++) {					// loop to find redirected redirects; note that it is bounded by depth (to guard against circular redirects)
-			int affected = provider.Exec_sql(Sql_get_redirect_redirects);	// find redirects that are also redirects
+			int affected = conn.Exec_sql(Sql_get_redirect_redirects);	// find redirects that are also redirects
 			if (affected == 0) break;										// no more redirected redirects; stop
-			provider.Exec_sql(Sql_get_redirect_page_data);					// get page data for redirects
+			conn.Exec_sql(Sql_get_redirect_page_data);					// get page data for redirects
 		}
-		Sqlite_engine_.Db_detach(provider, "page_db");
+		Sqlite_engine_.Db_detach(conn, "page_db");
 	}
-	public void Update_src_redirect_id(Io_url core_url, Db_provider core_provider) {
+	public void Update_src_redirect_id(Io_url core_url, Db_conn core_provider) {
 		core_provider.Exec_sql(Sql_ddl__page_redirect_id);					// create page.page_redirect_id
-		Sqlite_engine_.Idx_create(provider, Idx_trg_src);
-		Sqlite_engine_.Db_attach(provider, "page_db", core_url.Raw());		// link database with page table 
-		provider.Exec_sql(Sql_update_redirect_id);							// update page_redirect_id
-		Sqlite_engine_.Db_detach(provider, "page_db");
+		Sqlite_engine_.Idx_create(conn, Idx_trg_src);
+		Sqlite_engine_.Db_attach(conn, "page_db", core_url.Raw());		// link database with page table 
+		conn.Exec_sql(Sql_update_redirect_id);							// update page_redirect_id
+		Sqlite_engine_.Db_detach(conn, "page_db");
 	}
 	public void Insert(int src_id, byte[] src_bry, Xoa_ttl trg_ttl) {
 		byte[] redirect_ttl_bry = Xoa_ttl.Replace_spaces(trg_ttl.Page_db());	// NOTE: spaces can still exist b/c redirect is scraped from #REDIRECT which sometimes has a mix; EX: "A_b c"
@@ -53,21 +53,21 @@ public class Xob_redirect_tbl {
 		this.Insert(src_id, Xoa_ttl.Replace_spaces(src_bry), -1, trg_ttl.Ns().Id(), redirect_ttl_bry, trg_ttl.Anch_txt(), 1);
 	}
 	public void Insert(int src_id, byte[] src_ttl, int trg_id, int trg_ns, byte[] trg_ttl, byte[] trg_anchor, int count) {
-		if (insert_stmt == null) insert_stmt = Db_stmt_.new_insert_(provider, Tbl_name, Fld_src_id, Fld_src_ttl, Fld_trg_id, Fld_trg_ns, Fld_trg_ttl, Fld_trg_anchor, Fld_trg_is_redirect, Fld_redirect_count);
+		if (insert_stmt == null) insert_stmt = Db_stmt_.new_insert_(conn, Tbl_name, Fld_src_id, Fld_src_ttl, Fld_trg_id, Fld_trg_ns, Fld_trg_ttl, Fld_trg_anchor, Fld_trg_is_redirect, Fld_redirect_count);
 		insert_stmt.Clear()
-		.Val_int_(src_id)
-		.Val_str_by_bry_(src_ttl)
-		.Val_int_(trg_id)
-		.Val_int_(trg_ns)
-		.Val_str_by_bry_(trg_ttl)
-		.Val_str_by_bry_(trg_anchor)
-		.Val_byte_((byte)1)
-		.Val_int_(count)
+		.Val_int(src_id)
+		.Val_bry_as_str(src_ttl)
+		.Val_int(trg_id)
+		.Val_int(trg_ns)
+		.Val_bry_as_str(trg_ttl)
+		.Val_bry_as_str(trg_anchor)
+		.Val_byte((byte)1)
+		.Val_int(count)
 		.Exec_insert();
 	}
 	public void Rls_all() {
 		insert_stmt.Rls();
-		provider.Conn_term();
+		conn.Conn_term();
 	}
 	public static final String Tbl_name = "redirect";
 	private static final String 

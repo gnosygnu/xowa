@@ -18,15 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.dbs.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.dbs.*;
 import gplx.dbs.*; import gplx.xowa.ctgs.*; 
 public class Xodb_categorylinks_tbl {
-	public void Delete_all(Db_provider p) {p.Exec_qry(Db_qry_.delete_tbl_(Tbl_name));}
-	public Db_stmt Insert_stmt(Db_provider p) {return Db_stmt_.new_insert_(p, Tbl_name, Fld_cl_from, Fld_cl_to_id, Fld_cl_sortkey, Fld_cl_timestamp, Fld_cl_type_id);}
+	public void Delete_all(Db_conn p) {p.Exec_qry(Db_qry_.delete_tbl_(Tbl_name));}
+	public Db_stmt Insert_stmt(Db_conn p) {return Db_stmt_.new_insert_(p, Tbl_name, Fld_cl_from, Fld_cl_to_id, Fld_cl_sortkey, Fld_cl_timestamp, Fld_cl_type_id);}
 	public void Insert(Db_stmt stmt, int page_id, int ctg_page_id, byte[] sortkey, int timestamp, byte ctg_tid) {
 		stmt.Clear()
-			.Val_int_(page_id)
-			.Val_int_(ctg_page_id)
-			.Val_str_(String_.new_utf8_(sortkey))
-			.Val_int_(timestamp)
-			.Val_byte_(ctg_tid)
+			.Val_int(page_id)
+			.Val_int(ctg_page_id)
+			.Val_str(String_.new_utf8_(sortkey))
+			.Val_int(timestamp)
+			.Val_byte(ctg_tid)
 			.Exec_insert()
 			;
 	}
@@ -38,7 +38,7 @@ public class Xodb_categorylinks_tbl {
 		}
 		return ctg_grp;
 	}
-	public int Select_by_type(Db_provider p, ListAdp list, int cat_page_id, byte arg_tid, byte[] arg_sortkey, boolean arg_is_from, int limit) {
+	public int Select_by_type(Db_conn p, ListAdp list, int cat_page_id, byte arg_tid, byte[] arg_sortkey, boolean arg_is_from, int limit) {
 		String arg_sortkey_str = arg_sortkey == null ? "" : String_.new_utf8_(arg_sortkey);
 		gplx.criterias.Criteria comp_crt = !arg_is_from 
 			? Db_crt_.mte_(Fld_cl_sortkey, arg_sortkey_str)		// from:  sortkey >= 'val'
@@ -51,8 +51,8 @@ public class Xodb_categorylinks_tbl {
 		DataRdr rdr = DataRdr_.Null;
 		int count = 0;
 		try {
-			stmt = p.Prepare(qry);
-			rdr = stmt.Val_int_(cat_page_id).Val_byte_(arg_tid).Val_str_(arg_sortkey_str).Exec_select();
+			stmt = p.New_stmt(qry);
+			rdr = stmt.Val_int(cat_page_id).Val_byte(arg_tid).Val_str(arg_sortkey_str).Exec_select();
 			while (rdr.MoveNextPeer()) {
 				int itm_page_id = rdr.ReadInt(Fld_cl_from);
 				byte[] itm_sortkey = rdr.ReadBryByStr(Fld_cl_sortkey);				

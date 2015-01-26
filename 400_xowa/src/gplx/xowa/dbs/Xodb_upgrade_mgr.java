@@ -31,11 +31,11 @@ class Xodb_upgrade_mgr {
 }
 //	class Xodb_upgrade_mgr_v0_6_2_0 {
 //		public static void Upgrade(Xodb_mgr_sql db_mgr, KeyVal[] kv_ary) {
-//			Db_provider p = db_mgr.Fsys_mgr().Core_provider();
+//			Db_conn p = db_mgr.Fsys_mgr().Core_provider();
 //			Fix_storage_format(p, db_mgr, kv_ary);
 //			Fix_category_version(p, db_mgr);
 //		}
-//		private static void Fix_storage_format(Db_provider p, Xodb_mgr_sql db_mgr, KeyVal[] kv_ary) {	// storage_format saved incorrectly as int
+//		private static void Fix_storage_format(Db_conn p, Xodb_mgr_sql db_mgr, KeyVal[] kv_ary) {	// storage_format saved incorrectly as int
 //			int len = kv_ary.length;
 //			String gfs_data_storage_format = Xoa_gfs_mgr.Build_code(Xow_wiki.Invk_db_mgr, Xodb_mgr_sql.Invk_data_storage_format);
 //			for (int i = 0; i < len; i++) {
@@ -50,7 +50,7 @@ class Xodb_upgrade_mgr {
 //				}
 //			}			
 //		}
-//		private static void Fix_category_version(Db_provider p, Xodb_mgr_sql db_mgr) {
+//		private static void Fix_category_version(Db_conn p, Xodb_mgr_sql db_mgr) {
 //			Db_qry qry = Db_qry_.select_().From_(Xodb_categorylinks_tbl.Tbl_name).Cols_(Xodb_categorylinks_tbl.Fld_cl_type_id).Where_(Db_crt_.eq_(Xodb_categorylinks_tbl.Fld_cl_type_id, ));
 //			Db_stmt stmt = Db_stmt_.Null;
 //			DataRdr rdr = DataRdr_.Null; 

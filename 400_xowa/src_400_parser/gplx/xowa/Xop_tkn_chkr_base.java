@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 public class Xop_tkn_chkr_base implements Tst_chkr {
 	@gplx.Virtual public Class<?> TypeOf() {return Xop_tkn_itm.class;}
-	@gplx.Virtual public byte Tkn_tid() {return Byte_.MaxValue_127;}
+	@gplx.Virtual public byte Tkn_tid() {return Byte_.Max_value_127;}
 	public Xop_tkn_chkr_base TypeId_dynamic(int v) {typeId = Xop_tkn_itm_.Tid__names[v]; return this;} private String typeId = null;
 	public int Src_bgn() {return src_bgn;} private int src_bgn = -1;
 	public int Src_end() {return src_end;} private int src_end = -1;

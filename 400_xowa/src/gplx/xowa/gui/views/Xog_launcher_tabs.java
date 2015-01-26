@@ -58,8 +58,9 @@ class Xog_launcher_tabs {
 		}
 	}
 	private void Launch_tab(Xog_win_itm win, Xow_wiki home_wiki, String launch_str) {
-		Xoa_url launch_url = Xoa_url_parser.Parse_from_url_bar(win.App(), home_wiki, launch_str);
-		Xow_wiki launch_wiki = launch_url.Wiki();
+		Xoa_app app = win.App();
+		Xoa_url launch_url = Xoa_url_parser.Parse_from_url_bar(app, home_wiki, launch_str);
+		Xow_wiki launch_wiki = app.Wiki_mgr().Get_by_key_or_null(launch_url.Wiki_bry());
 		Xoa_ttl launch_ttl = Xoa_ttl.parse_(launch_wiki, launch_url.Page_bry());
 		Xog_tab_itm tab = win.Tab_mgr().Tabs_new_init(Xoa_page.new_(launch_wiki, launch_ttl)); // WORKAROUND: set the tab to an empty page, else null ref later; DATE:2014-07-23
 		tab.Show_url_bgn(launch_url);

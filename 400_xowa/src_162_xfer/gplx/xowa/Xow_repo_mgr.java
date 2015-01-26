@@ -139,7 +139,7 @@ public class Xow_repo_mgr implements GfoInvkAble {
 	}
 	public Xofw_file_finder_rslt Page_finder_locate(byte[] ttl_bry) {page_finder.Locate(tmp_rslt, repos, ttl_bry); return tmp_rslt;}
 	byte Xfer_by_meta__find_file(byte[] ttl_bry, Xof_meta_itm meta_itm, byte[] cur_wiki_key) {
-		byte new_tid = Byte_.MaxValue_127;
+		byte new_tid = Byte_.Max_value_127;
 		boolean found = page_finder.Locate(tmp_rslt, repos, ttl_bry);
 		if (found) {
 			if (Bry_.Eq(cur_wiki_key, tmp_rslt.Repo_wiki_key())) {	// itm is in same repo as cur wiki

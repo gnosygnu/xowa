@@ -32,21 +32,38 @@ public class Xog_history_stack {
 	}
 	public Xog_history_itm Go_bwd() {
 		if (list.Count() == 0) return Xog_history_itm.Null;
+		if (cur_pos == 0) return Xog_history_itm.Null;
 		--cur_pos;
-		if (cur_pos < 0) cur_pos = 0; 
 		return this.Cur_itm();
 	}
 	public Xog_history_itm Go_fwd() {
 		int list_count = list.Count();
 		if (list_count == 0) return Xog_history_itm.Null;
+		if (cur_pos == list_count - 1) return Xog_history_itm.Null;
 		++cur_pos;
-		if (cur_pos == list_count) cur_pos = list_count - 1;
 		return this.Cur_itm();
 	}
 	private void Del_from(int from) {
 		int len = list.Count();
 		if (from <= len - 1)
 			list.Del_range(from, len - 1);
+	}
+	public void Srl_save(Bry_bfr bfr) {
+		int len = list.Count();
+		for (int i = 0; i < len; ++i) {
+			Xog_history_itm itm = (Xog_history_itm)list.FetchAt(i);
+			itm.Srl_save(bfr);
+		}
+	}
+	public void Srl_load(byte[] bry) {
+		list.Clear();
+		byte[][] lines = Bry_.Split_lines(bry);
+		int len = lines.length;
+		for (int i = 0; i < len; ++i) {
+			byte[] line = lines[i];
+			Xog_history_itm itm = Xog_history_itm.Srl_load(line);
+			this.Add(itm);
+		}
 	}
 	public static final byte Nav_fwd = 1, Nav_bwd = 2, Nav_by_anchor = 3;
 }

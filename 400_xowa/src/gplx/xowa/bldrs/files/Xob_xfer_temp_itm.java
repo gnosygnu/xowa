@@ -41,7 +41,7 @@ class Xob_xfer_temp_itm {
 	public int Lnki_page() {return lnki_page;} private int lnki_page;
 	public void Clear() {		
 		lnki_ext = lnki_type = lnki_src_tid
-				= orig_repo = orig_media_type_tid = Byte_.MaxValue_127;
+				= orig_repo = orig_media_type_tid = Byte_.Max_value_127;
 		chk_tid = Chk_tid_none;
 		lnki_id = lnki_w = lnki_h = lnki_count =  lnki_page_id
 				= orig_w = orig_h = orig_page_id = Int_.Neg1;

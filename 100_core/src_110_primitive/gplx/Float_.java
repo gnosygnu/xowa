@@ -17,7 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public class Float_ {
-	public static final String Cls_name = "float";
+	public static final Class<?> Cls_ref_type = Float.class;
+	public static final String Cls_val_name = "float";
 	public static final float NaN = Float.NaN;;					
 	public static boolean IsNaN(float v) {return Float.isNaN(v);}		
 	public static int RoundUp(float val) {

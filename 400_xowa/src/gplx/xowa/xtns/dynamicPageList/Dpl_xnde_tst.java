@@ -167,6 +167,12 @@ public class Dpl_xnde_tst {
 		,	"</DynamicPageList>"
 		), fxt.Ul(Itm_html_null, "B", "A"));
 	}
+	@Test  public void Err_page_ns_doesnt_exist() {// PURPOSE: check that <dpl> is not enabled if wiki does not have Page / Index ns; PAGE:fr.w:Wikipedia:Le_Bistro/novembre_2006 DATE:2014-11-28
+		fxt.Wiki().Ns_mgr_(Xow_ns_mgr_.default_(gplx.xowa.langs.cases.Xol_case_mgr_.Ascii()));
+		fxt.Wiki().Cfg_parser().Xtns().Itm_pages().Reset();	// must reset to clear cached valid ns_page from previous tests
+		fxt.Fxt().Test_parse_page_wiki_str("<dynamicpagelist>category=a</dynamicpagelist>", "No pages meet these criteria.");
+		fxt.Wiki().Cfg_parser().Xtns().Itm_pages().Reset();	// must reset to clear cached invalid ns_page for next tests
+	}
 	private static final String Itm_html_null = null;
 }
 class Dpl_page_mok {
@@ -185,8 +191,13 @@ class Dpl_xnde_fxt {
 		fxt.App().Usr_dlg().Ui_wkr().Clear();
 		fxt.Wiki().Hive_mgr().Clear();
 		fxt.Wiki().Db_mgr().Save_mgr().Clear();	// NOTE: must clear to reset next_id to 0; Ctg_create assumes clean slate from 0
+		fxt.Wiki().Xtn_mgr().Xtn_proofread().Enabled_y_();
+		fxt.Wiki().Db_mgr().Load_mgr().Clear(); // must clear; otherwise fails b/c files get deleted, but wiki.data_mgr caches the Xowd_regy_mgr (the .reg file) in memory;
+		fxt.Wiki().Ns_mgr().Add_new(Xowc_xtn_pages.Ns_page_id_default, "Page").Add_new(Xowc_xtn_pages.Ns_index_id_default, "Index").Init();
 		Io_mgr._.InitEngine_mem();
 	}
+	public Xow_wiki Wiki() {return fxt.Wiki();}
+	public Xop_fxt Fxt() {return fxt;}
 	public void Warns(String... v) {warns = v;} private String[] warns;
 	public void Page_create(String page) {fxt.Init_page_create(page);}
 	public void Ctg_create(String ctg, String... ttls) {

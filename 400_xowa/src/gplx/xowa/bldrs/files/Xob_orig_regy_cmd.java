@@ -23,8 +23,8 @@ public class Xob_orig_regy_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	public String Cmd_key() {return KEY_oimg;} public static final String KEY_oimg = "file.orig_regy";
 	public void Cmd_ini(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {
-		Db_provider provider = Xodb_db_file.init__file_make(wiki.Fsys_mgr().Root_dir()).Provider();
-		Xob_orig_regy_tbl.Create_table(provider);
+		Db_conn conn = Xodb_db_file.init__file_make(wiki.Fsys_mgr().Root_dir()).Conn();
+		Xob_orig_regy_tbl.Create_table(conn);
 		Xow_wiki commons_wiki = bldr.App().Wiki_mgr().Get_by_key_or_make(Xow_wiki_.Domain_commons_bry).Init_assert();
 		Xow_wiki repo_0 = wiki, repo_1 = commons_wiki;
 		if (repo_0_is_remote) {	// NOTE: default is false; local_wiki will be preferred over commons_wiki
@@ -33,7 +33,7 @@ public class Xob_orig_regy_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		}
 		repo_0.Init_assert(); repo_1.Init_assert();
 		Xodb_db_file file_registry_db = Xodb_db_file.init__page_regy(commons_wiki.Fsys_mgr().Root_dir());
-		Xob_orig_regy_tbl.Create_data(bldr.Usr_dlg(), provider, file_registry_db, repo_0_is_remote, repo_0, repo_1, Xob_lnki_temp_wkr.Wiki_ns_for_file_is_case_match_all(wiki));
+		Xob_orig_regy_tbl.Create_data(bldr.Usr_dlg(), conn, file_registry_db, repo_0_is_remote, repo_0, repo_1, Xob_lnki_temp_wkr.Wiki_ns_for_file_is_case_match_all(wiki));
 	}
 	public void Cmd_run() {}
 	public void Cmd_end() {}

@@ -28,6 +28,13 @@ public class Io_size_ {
 		String[] unit = Io_size_.Units[pow];
 		return valDecimal.Xto_str("#,###.000") + " " + String_.PadBgn(unit[0], 2, " ");
 	}
+	public static String Xto_str(long val, int exp_1024, String val_fmt, String unit_pad, boolean round_0_to_1) {
+		long exp_val = (long)Math_.Pow(1024, exp_1024);
+		DecimalAdp val_as_decimal = DecimalAdp_.divide_(val, exp_val);
+		if (round_0_to_1 && val_as_decimal.Comp_lt(1)) val_as_decimal = DecimalAdp_.One;
+		String[] unit = Io_size_.Units[exp_1024];
+		return val_as_decimal.Xto_str(val_fmt) + " " + String_.PadBgn(unit[0], 2, unit_pad);
+	}
 	public static long parse_or_(String raw, long or) {
 		if (raw == null || raw == String_.Empty) return or;
 		String[] terms = String_.Split(raw, " ");
@@ -46,11 +53,12 @@ public class Io_size_ {
 			val = val.Op_mult(1024);
 			curPow--;
 		}
-		DecimalAdp comp = val.Op_truncate_decimal();
-		if (!val.Eq(comp)) return or;
+		// DELETED:do not check for fractional bytes; EX: 10.7 GB DATE:2015-01-06
+		// DecimalAdp comp = val.Op_truncate_decimal();
+		// if (!val.Eq(comp)) return or;
 		return val.Xto_long();
 	}
-	static int parse_unitPow_(String unitStr) {
+	private static int parse_unitPow_(String unitStr) {
 		int unitLen = Array_.Len(Units);
 		int unitPow = -1;
 		for (int i = 0; i < unitLen; i++) {
@@ -59,16 +67,7 @@ public class Io_size_ {
 		}
 		return unitPow;
 	}
-	static String UnitsXtoStr() {
-		String_bldr sb = String_bldr_.new_();
-		int len = Array_.Len(Units);
-		for (int i = 0; i < len; i++) {
-			String[] eny = Units[i];
-			sb.Add_fmt("{0},{1};", eny[0], eny[1]);
-		}
-		return sb.XtoStr();
-	}
-	static final String[][] Units = new String[][]
+	private static final String[][] Units = new String[][]
 	{	String_.Ary("B", "BYTE")
 	,	String_.Ary("KB", "KILOBYTE")
 	,	String_.Ary("MB", "MEGABYTE")

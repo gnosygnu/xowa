@@ -37,17 +37,17 @@ class Xou_user_ {
 		home_wiki.Db_mgr().Save_mgr().Data_create(Xoa_ttl.parse_(home_wiki, Bry_.new_ascii_("Data:Bookmarks")), Bry_.new_ascii_(Bookmarks_text));
 	}
 	public static final String User_system_cfg_text = String_.Concat_lines_nl
-		(	"app.scripts.txns.get('user.prefs.general').version_('" + Xoa_app_.Version + "').bgn();"
-		,	"app.files.download.enabled_('n');"
-		,	"app.files.math.enabled_('y');"
-		,	"app.files.math.renderer_('mathjax');"
-		,	"app.scripts.txns.get('user.prefs.general').end();\n"
-		);
+	( "app.scripts.txns.get('user.prefs.general').version_('" + Xoa_app_.Version + "').bgn();"
+	, "app.files.download.enabled_('y');"	// default to true; DATE:2015-01-05
+	, "app.files.math.enabled_('y');"
+	, "app.files.math.renderer_('mathjax');"
+	, "app.scripts.txns.get('user.prefs.general').end();\n"
+	);
 	public static final String Bookmarks_text = String_.Concat_lines_nl
-		(	"Bookmarks are added automatically to the bottom of the page. All other text is not modified."
-		,	""
-		,	"Please delete bookmarks by editing this page."
-		);
+	( "Bookmarks are added automatically to the bottom of the page. All other text is not modified."
+	, ""
+	, "Please delete bookmarks by editing this page."
+	);
 	private static Xow_ns_mgr ns_home_(Xol_case_mgr case_mgr) {
 		Xow_ns_mgr rv = new Xow_ns_mgr(case_mgr);
 		rv = rv.Add_new(-2, "Media").Add_new(-1, "Special").Add_new(0, "").Add_new(1, "Talk").Add_new(2, "User").Add_new(3, "User talk").Add_new(4, "Wikipedia").Add_new(5, "Wikipedia talk")

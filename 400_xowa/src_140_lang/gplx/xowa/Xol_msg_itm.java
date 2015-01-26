@@ -30,14 +30,19 @@ public class Xol_msg_itm {
 	}
 	public boolean Dirty() {return dirty;} public Xol_msg_itm Dirty_(boolean v) {dirty = v; return this;} private boolean dirty;
 	public byte[] Fmt(Bry_bfr bfr, Object... args) {
-		tmp_fmtr.Fmt_(val);
-		tmp_fmtr.Bld_bfr_many(bfr, args);
-		return bfr.Xto_bry_and_clear();
-	}	static Bry_fmtr tmp_fmtr = Bry_fmtr.tmp_();
+		synchronized (tmp_fmtr) {
+			tmp_fmtr.Fmt_(val);
+			tmp_fmtr.Bld_bfr_many(bfr, args);
+			return bfr.Xto_bry_and_clear();
+		}
+	}
 	public byte[] Fmt_tmp(Bry_bfr bfr, byte[] tmp_val, Object... args) {
-		tmp_fmtr.Fmt_(tmp_val);
-		tmp_fmtr.Bld_bfr_many(bfr, args);
-		return bfr.Xto_bry_and_clear();
+		synchronized (tmp_fmtr) {
+			tmp_fmtr.Fmt_(tmp_val);
+			tmp_fmtr.Bld_bfr_many(bfr, args);
+			return bfr.Xto_bry_and_clear();
+		}
 	}
 	public static final byte Src_null = 0, Src_lang = 1, Src_wiki = 2, Src_missing = 3;
+	private static Bry_fmtr tmp_fmtr = Bry_fmtr.tmp_();
 }

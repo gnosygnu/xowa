@@ -61,18 +61,18 @@ class Xob_diff_regy_sql_runner {
 	public void Run_sql(Xoa_app app) {
 		Xow_wiki wiki = app.Wiki_mgr().Get_by_key_or_null(Bry_.new_utf8_(wiki_domain));
 		app.Usr_dlg().Prog_many("", "", "running sql: url=~{0}", url.NameAndExt());
-		Db_provider provider = Get_provider(wiki, fsdb_db_id, fsdb_db_tid);
-		provider.Exec_sql(Io_mgr._.LoadFilStr(url));
+		Db_conn conn = Get_provider(wiki, fsdb_db_id, fsdb_db_tid);
+		conn.Exec_sql(Io_mgr._.LoadFilStr(url));
 		if (fsdb_db_tid == Fsdb_db_tid_.Tid_bin)
-			provider.Exec_sql("VACUUM;");
+			conn.Exec_sql("VACUUM;");
 	}
-	public static Db_provider Get_provider(Xow_wiki wiki, int fsdb_db_id, byte fsdb_db_tid) {
+	public static Db_conn Get_provider(Xow_wiki wiki, int fsdb_db_id, byte fsdb_db_tid) {
 		wiki.File_mgr().Fsdb_mgr().Init_by_wiki(wiki);
 		Fsdb_db_abc_mgr abc_mgr = wiki.File_mgr().Fsdb_mgr().Mnt_mgr().Abc_mgr_at(0);
 		if		(fsdb_db_tid == Fsdb_db_tid_.Tid_bin)
-			return abc_mgr.Bin_mgr().Get_at(fsdb_db_id).Provider();
+			return abc_mgr.Bin_mgr().Get_at(fsdb_db_id).Conn();
 		else if (fsdb_db_tid == Fsdb_db_tid_.Tid_atr)
-			return abc_mgr.Atr_mgr().Get_at(0).Provider();
+			return abc_mgr.Atr_mgr().Get_at(0).Conn();
 		else
 			throw Err_.unhandled(fsdb_db_tid);
 	}

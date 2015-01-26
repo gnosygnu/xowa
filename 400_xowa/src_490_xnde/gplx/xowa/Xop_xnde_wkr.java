@@ -105,7 +105,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			if (ctx.Parse_tid() == Xop_parser_.Parse_tid_page_wiki) {
 				if (ctx_cur_tid_is_tblw_atr_owner)			// unknown_tag is occurring inside tblw element (EX: {| style='margin:1em<f'); just add to txt tkn
 					return ctx.Lxr_make_txt_(cur_pos);
-				else {										// unknown_tag is occurring anyhwere else; escape < to &lt; and resume from character just after it;
+				else {										// unknown_tag is occurring anywhere else; escape < to &lt; and resume from character just after it;
 					ctx.Subs_add(root, Make_bry_tkn(tkn_mkr, src, bgn_pos, cur_pos));
 					return cur_pos;
 				}
@@ -634,19 +634,23 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 					case Xop_xnde_tag_.Tid_imageMap:				xnde_xtn = tkn_mkr.Xnde_imageMap(); break;
 					case Xop_xnde_tag_.Tid_hiero:					xnde_xtn = tkn_mkr.Xnde_hiero(); break;
 					case Xop_xnde_tag_.Tid_inputBox:				xnde_xtn = tkn_mkr.Xnde_inputbox(); break;
-					case Xop_xnde_tag_.Tid_pages:					{
+					case Xop_xnde_tag_.Tid_dynamicPageList:
+					case Xop_xnde_tag_.Tid_pages: {
+						switch (tag_id) {
+							case Xop_xnde_tag_.Tid_pages:			xnde_xtn = tkn_mkr.Xnde_pages(); break;
+							case Xop_xnde_tag_.Tid_dynamicPageList: xnde_xtn = tkn_mkr.Xnde_dynamicPageList(); break;
+						}
 						boolean enabled = ctx.Wiki().Xtn_mgr().Xtn_proofread().Enabled();
-						if (enabled)
-							xnde_xtn = tkn_mkr.Xnde_pages();
-						else
+						if (!enabled) {	// if Page / Index ns does not exist, disable xtn and escape content; DATE:2014-11-28
 							escaped = true;
+							xnde_xtn = null;
+						}
 						break;
 					}
 					case Xop_xnde_tag_.Tid_pagequality:				xnde_xtn = tkn_mkr.Xnde_pagequality(); break;
 					case Xop_xnde_tag_.Tid_pagelist:				xnde_xtn = tkn_mkr.Xnde_pagelist(); break;
 					case Xop_xnde_tag_.Tid_section:					xnde_xtn = tkn_mkr.Xnde_section(); break;
 					case Xop_xnde_tag_.Tid_categoryList:			xnde_xtn = tkn_mkr.Xnde_categoryList(); break;
-					case Xop_xnde_tag_.Tid_dynamicPageList:			xnde_xtn = tkn_mkr.Xnde_dynamicPageList(); break;
 					case Xop_xnde_tag_.Tid_syntaxHighlight:			xnde_xtn = tkn_mkr.Xnde_syntaxHighlight(); break;
 					case Xop_xnde_tag_.Tid_score:					xnde_xtn = tkn_mkr.Xnde_score(); break;
 					case Xop_xnde_tag_.Tid_translate:				xnde_xtn = tkn_mkr.Xnde_translate(); break;

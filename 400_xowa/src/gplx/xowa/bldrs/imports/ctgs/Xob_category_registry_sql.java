@@ -30,7 +30,7 @@ public class Xob_category_registry_sql implements Xob_cmd {
 		Xob_tmp_wtr rslt_wtr = Xob_tmp_wtr.new_wo_ns_(Io_url_gen_.dir_(rslt_dir), Io_mgr.Len_mb);
 		
 		Xodb_mgr_sql db_mgr = Xodb_mgr_sql.Get_or_load(wiki);
-		Db_provider provider = db_mgr.Fsys_mgr().Provider_core();
+		Db_conn conn = db_mgr.Fsys_mgr().Conn_core();
 		Db_qry_select qry = Db_qry_select.new_()
 			.Cols_(Xodb_page_tbl.Fld_page_title, Xodb_page_tbl.Fld_page_id)
 			.From_(Xodb_page_tbl.Tbl_name)
@@ -39,7 +39,7 @@ public class Xob_category_registry_sql implements Xob_cmd {
 		DataRdr rdr = DataRdr_.Null;
 		Gfo_usr_dlg usr_dlg = wiki.App().Usr_dlg();
 		try {
-			rdr = qry.Exec_qry_as_rdr(provider);
+			rdr = qry.Exec_qry_as_rdr(conn);
 			while (rdr.MoveNextPeer()) {
 				byte[] page_ttl = rdr.ReadBryByStr(Xodb_page_tbl.Fld_page_title);
 				int page_id = rdr.ReadInt(Xodb_page_tbl.Fld_page_id);

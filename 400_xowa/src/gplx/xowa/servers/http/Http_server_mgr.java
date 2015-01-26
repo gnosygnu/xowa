@@ -78,8 +78,7 @@ public class Http_server_mgr implements GfoInvkAble {
 		Xoa_url page_url = app.Url_parser().Parse(page_ttl);									// get the url (needed for query args)
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, page_ttl);											// get the ttl
 		Xoa_page page = wiki.GetPageByTtl(page_url, ttl);										// get page and parse it
-		if (app.Gui_mgr().Browser_win().Active_tab() == null)									// no active tab
-			app.Gui_mgr().Browser_win().Tab_mgr().Tabs_new_init(page);							// create at least one active tab; DATE:2014-07-30
+		Gxw_html_server.Assert_tab(app, page);													// HACK: assert at least 1 tab
 		app.Gui_mgr().Browser_win().Active_page_(page);											// HACK: init gui_mgr's page for output (which server ordinarily doesn't need)
 		if (page.Missing()) {																	// if page does not exist, replace with message; else null_ref error; DATE:2014-03-08
 			page.Data_raw_(Bry_.new_ascii_("'''Page not found.'''"));

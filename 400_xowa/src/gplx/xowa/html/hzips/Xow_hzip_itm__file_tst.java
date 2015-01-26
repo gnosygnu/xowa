@@ -19,9 +19,9 @@ package gplx.xowa.html.hzips; import gplx.*; import gplx.xowa.*; import gplx.xow
 import org.junit.*; import gplx.xowa.html.*; import gplx.xowa.hdumps.srls.*;
 public class Xow_hzip_itm__file_tst {
 	@Before public void init() {fxt.Clear();} private Xow_hzip_mgr_fxt fxt = new Xow_hzip_mgr_fxt();
-	@Test   public void Srl_img_full() {
-//			byte[][] brys = Bry_.Ary(Xow_hzip_dict.Bry_img_full, Bry_.ints_(2), Bry_.new_ascii_("A"), Xow_hzip_dict.Escape_bry);
-//			fxt.Test_save(brys, "<a xtid='a_img_full' href=\"/wiki/A\" id='xowa_lnki_0' title='A'>A</a>");
-//			fxt.Test_load(brys, "<a href='/wiki/A' title='A'>A</a>");
+	@Test   public void Srl_lnki_img_full() {
+		byte[][] brys = Bry_.Ary(Xow_hzip_dict.Bry_img_full, Bry_.ints_(7), Bry_.ints_(12, 0), Bry_.new_ascii_("cls_other"), Bry_.new_ascii_("|caption_other"), Xow_hzip_dict.Escape_bry);
+		fxt.Test_save(brys, "<a xtid='a_img_full' xatrs='1|1|1|12|cls_other|caption_other'/>");
+//			fxt.Test_load(brys, "a_1<a href='/wiki/A' title='A'>A</a>a_2");
 	}
 }

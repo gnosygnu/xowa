@@ -17,27 +17,27 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
 public class Db_qry_fxt {
-	public static void Insert_kvo(Db_provider provider, String tblName, KeyValList kvList) {
+	public static void Insert_kvo(Db_conn conn, String tblName, KeyValList kvList) {
 		Db_qry_insert qry = Db_qry_.insert_(tblName);
 		for (int i = 0; i < kvList.Count(); i++) {
 			KeyVal kv = kvList.GetAt(i);
 			qry.Arg_obj_(kv.Key(), kv.Val());
 		}
-		qry.Exec_qry(provider);
+		qry.Exec_qry(conn);
 	}
-	public static GfoNde SelectAll(Db_provider provider, String tblName) {
-		return Db_qry_.select_tbl_(tblName).ExecRdr_nde(provider);
+	public static GfoNde SelectAll(Db_conn conn, String tblName) {
+		return Db_qry_.select_tbl_(tblName).ExecRdr_nde(conn);
 	}
-	public static int SelectAll_count(Db_provider provider, String tblName) {
-		GfoNde nde = Db_qry_fxt.SelectAll(provider, tblName);
+	public static int SelectAll_count(Db_conn conn, String tblName) {
+		GfoNde nde = Db_qry_fxt.SelectAll(conn, tblName);
 		return nde.Subs().Count();
 	}
-	public static void DeleteAll(Db_provider provider, String... ary) {
+	public static void DeleteAll(Db_conn conn, String... ary) {
 		for (String s : ary)
-			Db_qry_.delete_tbl_(s).Exec_qry(provider);
+			Db_qry_.delete_tbl_(s).Exec_qry(conn);
 	}
-	public static void tst_Select(Db_provider provider, String tblName, DbTstRow... expdAry) {
-		GfoNde nde = Db_qry_fxt.SelectAll(provider, tblName);
+	public static void tst_Select(Db_conn conn, String tblName, DbTstRow... expdAry) {
+		GfoNde nde = Db_qry_fxt.SelectAll(conn, tblName);
 		int len = Array_.Len(expdAry);
 		for (int i = 0; i < len; i++) {
 			DbTstRow expdRow = expdAry[i];

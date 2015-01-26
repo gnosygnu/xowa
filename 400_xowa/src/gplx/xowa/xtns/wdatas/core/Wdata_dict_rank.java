@@ -21,7 +21,7 @@ public class Wdata_dict_rank {
 	  Tid_preferred								= 2
 	, Tid_normal								= 1
 	, Tid_deprecated							= 0
-	, Tid_unknown								= Byte_.MaxValue_127
+	, Tid_unknown								= Byte_.Max_value_127
 	;
 	public static final String
 	  Str_preferred								= "preferred"

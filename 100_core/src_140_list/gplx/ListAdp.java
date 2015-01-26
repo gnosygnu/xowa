@@ -42,6 +42,7 @@ public interface ListAdp extends EnumerAble {
 	String[] XtoStrAry();
 	Object Xto_ary(Class<?> memberType);
 	Object Xto_ary_and_clear(Class<?> memberType);
+	Object[] Xto_obj_ary();
 
 	void Reverse();
 	void Sort();

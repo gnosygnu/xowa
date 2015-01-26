@@ -37,7 +37,7 @@ public class Db_mgr_fxt {
 		Xodb_page_tbl tbl_page = wiki.Db_mgr_as_sql().Tbl_page();
 		Db_stmt stmt = Db_stmt_.Null;
 		try {
-			stmt = tbl_page.Insert_stmt(wiki.Db_mgr_as_sql().Fsys_mgr().Provider_page());
+			stmt = tbl_page.Insert_stmt(wiki.Db_mgr_as_sql().Fsys_mgr().Conn_page());
 			int len = ttls.length;
 			DateAdp modified_on = Tfds.Now_time0_add_min(0);
 			for (int i = 0; i < len; i++) {
@@ -127,18 +127,18 @@ public class Db_mgr_fxt {
 	public void Init_db_sqlite() {Init_db_sqlite(Xoa_test_.Url_wiki_enwiki().GenSubFil_nest("en.wikipedia.org.sqlite3"));}
 	public void Init_db_sqlite(Io_url url) {
 		Xow_wiki wiki = this.Wiki();
-		Db_provider_pool._.Clear();
+		Db_conn_pool_old._.Clear();
 		Xodb_mgr_sql db_mgr = wiki.Db_mgr_create_as_sql();
 		db_mgr.Data_storage_format_(gplx.ios.Io_stream_.Tid_file);
 		db_mgr.Init_by_ns_map("");
-		Db_provider provider = db_mgr.Fsys_mgr().Provider_core();
-		provider.Exec_qry(Db_qry_delete.new_all_("xowa_cfg"));
-		provider.Exec_qry(Db_qry_delete.new_all_("xowa_db"));
-		provider.Exec_qry(Db_qry_delete.new_all_("xowa_ns"));
-		provider.Exec_qry(Db_qry_delete.new_all_("page"));
-		provider.Exec_qry(Db_qry_delete.new_all_("text"));
-		provider.Exec_qry(Db_qry_delete.new_all_("category"));
-		provider.Exec_qry(Db_qry_delete.new_all_("categorylinks"));
+		Db_conn conn = db_mgr.Fsys_mgr().Conn_core();
+		conn.Exec_qry(Db_qry_delete.new_all_("xowa_cfg"));
+		conn.Exec_qry(Db_qry_delete.new_all_("xowa_db"));
+		conn.Exec_qry(Db_qry_delete.new_all_("xowa_ns"));
+		conn.Exec_qry(Db_qry_delete.new_all_("page"));
+		conn.Exec_qry(Db_qry_delete.new_all_("text"));
+		conn.Exec_qry(Db_qry_delete.new_all_("category"));
+		conn.Exec_qry(Db_qry_delete.new_all_("categorylinks"));
 	}	String dsv_db;
 	public void Init_db_tdb() {
 		Io_mgr._.InitEngine_mem();

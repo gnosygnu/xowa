@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.xowa.xtns.math.*;
 import gplx.xowa.files.fsdb.caches.*;
+import gplx.dbs.*; import gplx.xowa2.files.commons.*;
 public class Xof_file_mgr implements GfoInvkAble {
 	public void Init_app(Xoa_app app, Gfo_usr_dlg usr_dlg) {
 		this.app = app;

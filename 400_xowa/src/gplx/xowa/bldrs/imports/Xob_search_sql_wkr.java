@@ -30,15 +30,15 @@ public class Xob_search_sql_wkr extends Xob_search_base implements Io_make_cmd {
 			search_db = db_mgr.Fsys_mgr().Make(Xodb_file_tid.Tid_search);
 			created = true;
 		}
-		provider = search_db.Provider();
+		conn = search_db.Conn();
 		if (created) {
-			Xodb_search_title_word_tbl.Create_table(provider);
-			Xodb_search_title_page_tbl.Create_table(provider);
+			Xodb_search_title_word_tbl.Create_table(conn);
+			Xodb_search_title_page_tbl.Create_table(conn);
 		}
-		provider.Txn_mgr().Txn_bgn_if_none();
-		stmt_word = Xodb_search_title_word_tbl.Insert_stmt(provider);
-		stmt_page = Xodb_search_title_page_tbl.Insert_stmt(provider);
-	}	private Db_provider provider; private int search_id = 0; private Db_stmt stmt_word, stmt_page;
+		conn.Txn_mgr().Txn_bgn_if_none();
+		stmt_word = Xodb_search_title_word_tbl.Insert_stmt(conn);
+		stmt_page = Xodb_search_title_page_tbl.Insert_stmt(conn);
+	}	private Db_conn conn; private int search_id = 0; private Db_stmt stmt_word, stmt_page;
 	public byte Line_dlm() {return line_dlm;} public Xob_search_sql_wkr Line_dlm_(byte v) {line_dlm = v; return this;} private byte line_dlm = Byte_ascii.Nil;
 	private byte[] prv_word = Bry_.Empty;
 	public void Sort_do(Io_line_rdr rdr) {
@@ -52,13 +52,13 @@ public class Xob_search_sql_wkr extends Xob_search_base implements Io_make_cmd {
 		Xodb_search_title_page_tbl.Insert(stmt_page, search_id, Base85_utl.XtoIntByAry(bry, rdr.Key_pos_end() + 1, rdr.Key_pos_end() +  5)); // -1: ignore rdr_dlm
 	}
 	public void Sort_end() {
-		provider.Txn_mgr().Txn_end_all();
-		Xodb_tbl_search_title_temp.Cleanup(usr_dlg, provider);
+		conn.Txn_mgr().Txn_end_all();
+		Xodb_tbl_search_title_temp.Cleanup(usr_dlg, conn);
 	}
 }
 class Xodb_tbl_search_title_temp {
-	public Xodb_tbl_search_title_temp Create_table(Db_provider p) {Sqlite_engine_.Tbl_create(p, Tbl_name, Tbl_sql); return this;}
-	public void Make_data(Gfo_usr_dlg usr_dlg, Db_provider p) {
+	public Xodb_tbl_search_title_temp Create_table(Db_conn p) {Sqlite_engine_.Tbl_create(p, Tbl_name, Tbl_sql); return this;}
+	public void Make_data(Gfo_usr_dlg usr_dlg, Db_conn p) {
 		Xodb_search_title_word_tbl.Create_table(p);
 		Xodb_search_title_page_tbl.Create_table(p);
 		p.Txn_mgr().Txn_end_all_bgn_if_none();
@@ -73,7 +73,7 @@ class Xodb_tbl_search_title_temp {
 		p.Txn_mgr().Txn_end();	// must end all transactions before vacuum
 		p.Exec_sql("VACUUM;");
 	}
-	public static void Cleanup(Gfo_usr_dlg usr_dlg, Db_provider p) {
+	public static void Cleanup(Gfo_usr_dlg usr_dlg, Db_conn p) {
 		p.Exec_sql("DROP TABLE IF EXISTS search_title_temp;");
 		try {
 			Xodb_search_title_word_tbl.Create_index(usr_dlg, p);
@@ -87,11 +87,11 @@ class Xodb_tbl_search_title_temp {
 			Xodb_search_title_page_tbl.Create_index_non_unique(usr_dlg, p);
 		}
 	}
-	public Db_stmt Insert_stmt(Db_provider p) {return Db_stmt_.new_insert_(p, Tbl_name, Fld_stt_page_id, Fld_stt_word);}
+	public Db_stmt Insert_stmt(Db_conn p) {return Db_stmt_.new_insert_(p, Tbl_name, Fld_stt_page_id, Fld_stt_word);}
 	public void Insert(Db_stmt stmt, int page_id, byte[] word) {
 		stmt.Clear()
-		.Val_int_(page_id)
-		.Val_str_by_bry_(word)
+		.Val_int(page_id)
+		.Val_bry_as_str(word)
 		.Exec_insert();
 	}	
 	public static final String Tbl_name = "search_title_temp", Fld_stt_page_id = "stt_page_id", Fld_stt_word = "stt_word";

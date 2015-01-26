@@ -17,5 +17,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public class Short_ {
+	public static final Class<?> Cls_ref_type = Short.class; 
 	public static short cast_(Object obj) {try {return (Short)obj;} catch(Exception exc) {throw Err_.type_mismatch_exc_(exc, short.class, obj);}}
 }

@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.fsdb; import gplx.*;
 import gplx.dbs.*; import gplx.ios.*;
 public class Fsdb_bin_tbl {
-	public static void Create_table(Db_provider p) {Sqlite_engine_.Tbl_create(p, Tbl_name, Tbl_sql);}
-	public static Db_stmt Insert_stmt(Db_provider p) {return Db_stmt_.new_insert_(p, Tbl_name, Fld_bin_owner_id, Fld_bin_owner_tid, Fld_bin_part_id, Fld_bin_data_url, Fld_bin_data);}
-	public static void Insert_rdr(Db_provider p, int id, byte tid, long bin_len, Io_stream_rdr bin_rdr) {
+	public static void Create_table(Db_conn p) {Sqlite_engine_.Tbl_create(p, Tbl_name, Tbl_sql);}
+	public static Db_stmt Insert_stmt(Db_conn p) {return Db_stmt_.new_insert_(p, Tbl_name, Fld_bin_owner_id, Fld_bin_owner_tid, Fld_bin_part_id, Fld_bin_data_url, Fld_bin_data);}
+	public static void Insert_rdr(Db_conn p, int id, byte tid, long bin_len, Io_stream_rdr bin_rdr) {
 		Db_stmt stmt = Insert_stmt(p);
 		try {Insert_rdr(stmt, id, tid, bin_len, bin_rdr);}
 		finally {stmt.Rls();}
@@ -28,33 +28,33 @@ public class Fsdb_bin_tbl {
 	public static long Insert_rdr(Db_stmt stmt, int id, byte tid, long bin_len, Io_stream_rdr bin_rdr) {
 		long rv = bin_len;
 		stmt.Clear()
-		.Val_int_(id)
-		.Val_byte_(tid)
-		.Val_int_(Null_part_id)
-		.Val_str_(Null_data_url)
+		.Val_int(id)
+		.Val_byte(tid)
+		.Val_int(Null_part_id)
+		.Val_str(Null_data_url)
 		;
 		if (Sqlite_engine_.Supports_read_binary_stream)
 			stmt.Val_rdr_(bin_rdr, bin_len);
 		else {
 			byte[] bin_ary = Io_stream_rdr_.Load_all_as_bry(Bry_bfr.new_(), bin_rdr);
-			stmt.Val_bry_(bin_ary);
+			stmt.Val_bry(bin_ary);
 			rv = bin_ary.length;
 		}
 		stmt.Exec_insert();
 		return rv;
 	}	
-	public static void Delete(Db_provider p, int id) {
+	public static void Delete(Db_conn p, int id) {
 		Db_stmt stmt = Delete_stmt(p);
 		try {Delete(stmt, id);}
 		finally {stmt.Rls();}
 	}
-	private static Db_stmt Delete_stmt(Db_provider p) {return Db_stmt_.new_delete_(p, Tbl_name, Fld_bin_owner_id);}
+	private static Db_stmt Delete_stmt(Db_conn p) {return Db_stmt_.new_delete_(p, Tbl_name, Fld_bin_owner_id);}
 	private static void Delete(Db_stmt stmt, int id) {
 		stmt.Clear()
-		.Val_int_(id)
+		.Val_int(id)
 		.Exec_delete();
 	}	
-	public static Io_stream_rdr Select_as_rdr(Db_provider p, int owner) {
+	public static Io_stream_rdr Select_as_rdr(Db_conn p, int owner) {
 		Db_qry qry = Db_qry_.select_().From_(Tbl_name).Cols_(Fld_bin_data).Where_(Db_crt_.eq_(Fld_bin_owner_id, owner));
 		DataRdr rdr = DataRdr_.Null;
 		try {
@@ -70,7 +70,7 @@ public class Fsdb_bin_tbl {
 		}
 		finally {rdr.Rls();}
 	}
-	public static boolean Select_to_url(Db_provider p, int owner, Io_url url, byte[] bin_bfr, int bin_flush_when) {
+	public static boolean Select_to_url(Db_conn p, int owner, Io_url url, byte[] bin_bfr, int bin_flush_when) {
 		Db_qry qry = Db_qry_.select_().From_(Tbl_name).Cols_(Fld_bin_data).Where_(Db_crt_.eq_(Fld_bin_owner_id, owner));
 		DataRdr rdr = DataRdr_.Null;
 		try {

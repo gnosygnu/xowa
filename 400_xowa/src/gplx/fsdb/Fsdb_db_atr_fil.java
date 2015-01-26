@@ -22,15 +22,15 @@ public class Fsdb_db_atr_fil implements RlsAble {
 	private Fsdb_dir_tbl tbl_dir; private Fsdb_fil_tbl tbl_fil; private Fsdb_xtn_thm_tbl tbl_thm;
 	public Fsdb_db_atr_fil(Fsdb_db_abc_mgr abc_mgr, Io_url url, boolean create) {
 		this.abc_mgr = abc_mgr;
-		Db_conn_info connect = create ? Db_conn_info__sqlite.make_(url) : Db_conn_info__sqlite.load_(url);
-		provider = Db_provider_.new_and_open_(connect);
-		Sqlite_engine_.Pragma_page_size_4096(provider);
-		tbl_dir = new Fsdb_dir_tbl(provider, create);
-		tbl_fil = new Fsdb_fil_tbl(provider, create);
-		tbl_thm = new Fsdb_xtn_thm_tbl(this, provider, create);
+		Db_url connect = create ? Db_url__sqlite.make_(url) : Db_url__sqlite.load_(url);
+		conn = Db_conn_.new_and_open_(connect);
+		Sqlite_engine_.Pragma_page_size_4096(conn);
+		tbl_dir = new Fsdb_dir_tbl(conn, create);
+		tbl_fil = new Fsdb_fil_tbl(conn, create);
+		tbl_thm = new Fsdb_xtn_thm_tbl(this, conn, create);
 	}
 	public Fsdb_db_abc_mgr Abc_mgr() {return abc_mgr;} private Fsdb_db_abc_mgr abc_mgr;
-	public Db_provider Provider() {return provider;} private Db_provider provider;
+	public Db_conn Conn() {return conn;} private Db_conn conn;
 	public int Id() {return id;} private int id;
 	public Io_url Url() {return url;} private Io_url url;
 	public String Path_bgn() {return path_bgn;} private String path_bgn;
@@ -39,14 +39,14 @@ public class Fsdb_db_atr_fil implements RlsAble {
 		tbl_dir.Rls();
 		tbl_fil.Rls();
 		tbl_thm.Rls();
-		provider.Txn_mgr().Txn_end_all();
-		provider.Conn_term();
+		conn.Txn_mgr().Txn_end_all();
+		conn.Conn_term();
 	}
 	public void Txn_open() {
-		provider.Txn_mgr().Txn_bgn_if_none();
+		conn.Txn_mgr().Txn_bgn_if_none();
 	}
 	public void Txn_save() {
-		provider.Txn_mgr().Txn_end_all();
+		conn.Txn_mgr().Txn_end_all();
 	}
 	public Fsdb_fil_itm Fil_select(byte[] dir, byte[] fil) {
 		Int_obj_ref dir_id_obj = (Int_obj_ref)dir_cache.Get_or_null(dir);

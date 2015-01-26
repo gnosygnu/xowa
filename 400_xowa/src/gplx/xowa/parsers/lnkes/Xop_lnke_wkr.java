@@ -33,7 +33,10 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 	public static final byte[] Bry_xowa_protocol = Bry_.new_ascii_(Str_xowa_protocol);
 	public int MakeTkn_bgn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos, byte[] protocol, byte proto_tid, byte lnke_type) {
 		boolean lnke_type_brack = (lnke_type == Xop_lnke_tkn.Lnke_typ_brack);
-		if (!lnke_type_brack && !Valid_text_lnke(ctx, src, src_len, bgn_pos, cur_pos)) return ctx.Lxr_make_txt_(cur_pos);
+		if (	!lnke_type_brack										// lnke doesn't have "["; EX: "ttl:"
+			&&	!Valid_text_lnke(ctx, src, src_len, bgn_pos, cur_pos)	// tkn is part of work; EX: " ttl:" vs "attl:"
+			)
+			return ctx.Lxr_make_txt_(cur_pos - 1);						// -1 to ignore ":" in making text colon; needed to process ":" for list like "; attl: b" PAGE:de.w:Mord_(Deutschland)#Besonders_verwerfliche_Begehungsweise; DATE:2015-01-09
 		if (ctx.Stack_get_typ(Xop_tkn_itm_.Tid_lnke) != null) return ctx.Lxr_make_txt_(cur_pos); // no nested lnke; return cur lnke as text; EX: "[irc://a irc://b]" -> "<a href='irc:a'>irc:b</a>"
 		if (proto_tid == Xoo_protocol_itm.Tid_xowa) return Make_tkn_xowa(ctx, tkn_mkr, root, src, src_len, bgn_pos, cur_pos, protocol, proto_tid, lnke_type);
 

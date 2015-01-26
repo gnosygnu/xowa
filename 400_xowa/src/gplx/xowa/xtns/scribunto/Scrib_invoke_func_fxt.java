@@ -181,10 +181,10 @@ class Scrib_lua_rsp_bldr {
 	}
 	private void Bld_obj(Bry_bfr bfr, Object v) {
 		Class<?> v_type = v.getClass();
-		if		(Object_.Eq(v_type, Int_.ClassOf))				Bld_int(bfr, Int_.cast_(v));
-		else if	(Object_.Eq(v_type, String_.ClassOf))			Bld_str(bfr, String_.cast_(v));
-		else if	(Object_.Eq(v_type, Bool_.ClassOf))				Bld_bool(bfr, Bool_.cast_(v));
-		else if	(Object_.Eq(v_type, Double_.ClassOf))			Bld_double(bfr, Double_.cast_(v));
+		if		(Object_.Eq(v_type, Int_.Cls_ref_type))				Bld_int(bfr, Int_.cast_(v));
+		else if	(Object_.Eq(v_type, String_.Cls_ref_type))			Bld_str(bfr, String_.cast_(v));
+		else if	(Object_.Eq(v_type, Bool_.Cls_ref_type))				Bld_bool(bfr, Bool_.cast_(v));
+		else if	(Object_.Eq(v_type, Double_.Cls_ref_type))			Bld_double(bfr, Double_.cast_(v));
 		else if	(Object_.Eq(v_type, KeyVal[].class))			Bld_kv_ary(bfr, (KeyVal[])v);
 		else if	(Object_.Eq(v_type, Scrib_lua_proc.class))	Bld_fnc(bfr, (Scrib_lua_proc)v);
 		else													throw Err_.unhandled(ClassAdp_.NameOf_obj(v));

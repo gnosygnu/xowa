@@ -28,9 +28,9 @@ public class Xot_defn_ {
 	, Tid_msg = Xol_kwd_grp_.Id_msg
 	, Tid_msgnw = Xol_kwd_grp_.Id_msgnw
 	;
-	public static boolean Tid_is_subst(byte v) {
+	public static boolean Tid_is_substing(byte v) {
 		switch (v) {
-			case Tid_subst: case Tid_safesubst: return true;
+			case Tid_subst: return true; // NOTE: safesubst should not return true, else stack overflow; PAGE:en.w:Wikipedia:WikiProject_Celtic_history_and_culture DATE:2015-01-02
 			default: return false;
 		}
 	}

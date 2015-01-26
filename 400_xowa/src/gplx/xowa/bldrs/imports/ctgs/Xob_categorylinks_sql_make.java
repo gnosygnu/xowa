@@ -35,15 +35,15 @@ public class Xob_categorylinks_sql_make implements Io_make_cmd {
 		Xodb_file category_file = fsys_mgr.Get_tid_root(Xodb_file_tid.Tid_core);
 		if (cur_cat_file_max > 0) {
 			category_file = fsys_mgr.Make(Xodb_file_tid.Tid_category);
-			fsys_mgr.Provider_ctg_(category_file);
+			fsys_mgr.Conn_ctg_(category_file);
 		}
 
-		cat_provider = db_mgr.Fsys_mgr().Provider_ctg();
+		cat_provider = db_mgr.Fsys_mgr().Conn_ctg();
 		ctg_stmt = db_mgr.Tbl_category().Insert_stmt(cat_provider);
 		File_open(category_file);
 		first_provider = true;
 		if (idx_mode.Tid_is_bgn()) Idx_create(fsys_mgr);
-	}	Db_provider cl_provider, cat_provider; Gfo_fld_rdr fld_rdr = Gfo_fld_rdr.xowa_(); Db_stmt cl_stmt = Db_stmt_.Null, ctg_stmt = Db_stmt_.Null; int row_count = 0; Gfo_usr_dlg usr_dlg; boolean first_provider;
+	}	Db_conn cl_provider, cat_provider; Gfo_fld_rdr fld_rdr = Gfo_fld_rdr.xowa_(); Db_stmt cl_stmt = Db_stmt_.Null, ctg_stmt = Db_stmt_.Null; int row_count = 0; Gfo_usr_dlg usr_dlg; boolean first_provider;
 	int[] cur_cat_counts = new int[Xoa_ctg_mgr.Tid__max]; long cur_cat_file_size, cur_cat_file_max; byte[] cur_cat_ttl = Ttl_first; int cur_cat_id; int cur_cat_file_idx;
 	public byte Line_dlm() {return line_dlm;} public Xob_categorylinks_sql_make Line_dlm_(byte v) {line_dlm = v; return this;} private byte line_dlm = Byte_ascii.Nil;
 	public void Sort_do(Io_line_rdr rdr) {
@@ -70,7 +70,7 @@ public class Xob_categorylinks_sql_make implements Io_make_cmd {
 		Xodb_fsys_mgr fsys_mgr = db_mgr.Fsys_mgr();
 		Ctg_grp_end(Ttl_last);
 		File_close();
-		db_mgr.Tbl_xowa_db().Commit_all(fsys_mgr.Provider_core(), fsys_mgr.Files_ary());
+		db_mgr.Tbl_xowa_db().Commit_all(fsys_mgr.Conn_core(), fsys_mgr.Files_ary());
 		if (db_mgr.Category_version() == Xoa_ctg_mgr.Version_null)	// NOTE: ctg_v1 wkr will set this to v1; only set to v2 if null  
 			db_mgr.Category_version_update(false);
 		usr_dlg.Log_many("", "", "import.category.v2: insert done; committing; rows=~{0}", row_count);
@@ -96,7 +96,7 @@ public class Xob_categorylinks_sql_make implements Io_make_cmd {
 		return cur_cat_id;
 	}
 	private void File_open(Xodb_file file) {
-		cl_provider = file.Provider();
+		cl_provider = file.Conn();
 		cl_stmt = db_mgr.Tbl_categorylinks().Insert_stmt(cl_provider);
 		cl_provider.Txn_mgr().Txn_bgn_if_none();
 		cur_cat_file_idx = file.Id();

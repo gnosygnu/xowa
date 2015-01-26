@@ -31,32 +31,32 @@ public class Fsdb_db_bin_fil implements RlsAble {
 		if (cmd_mode == Db_cmd_mode.Ignore) cmd_mode = Db_cmd_mode.Update;
 	}
 	public byte Cmd_mode() {return cmd_mode;} public Fsdb_db_bin_fil Cmd_mode_(byte v) {cmd_mode = v; return this;} private byte cmd_mode;
-	public Db_provider Provider() {
-		if (provider == null) {
+	public Db_conn Conn() {
+		if (conn == null) {
 			if (cmd_mode == Db_cmd_mode.Create) {
-				provider = Db_provider_.new_and_open_(Db_conn_info__sqlite.make_(url));
-				Sqlite_engine_.Pragma_page_size_4096(provider);
-				Fsdb_bin_tbl.Create_table(provider);
+				conn = Db_conn_.new_and_open_(Db_url__sqlite.make_(url));
+				Sqlite_engine_.Pragma_page_size_4096(conn);
+				Fsdb_bin_tbl.Create_table(conn);
 			}
 			else
-				provider = Db_provider_.new_and_open_(Db_conn_info__sqlite.load_(url));
+				conn = Db_conn_.new_and_open_(Db_url__sqlite.load_(url));
 		}
-		return provider;
-	} 	private Db_provider provider;
-	public void Rls() {if (provider != null) provider.Conn_term();}
+		return conn;
+	} 	private Db_conn conn;
+	public void Rls() {if (conn != null) conn.Conn_term();}
 	public long Insert(int bin_id, byte owner_tid, long bin_len, gplx.ios.Io_stream_rdr bin_rdr) {
 		Db_stmt stmt = Db_stmt_.Null;
 		try {
-			stmt = Fsdb_bin_tbl.Insert_stmt(this.Provider());
+			stmt = Fsdb_bin_tbl.Insert_stmt(this.Conn());
 			return Fsdb_bin_tbl.Insert_rdr(stmt, bin_id, owner_tid, bin_len, bin_rdr);
 		}
 		finally {stmt.Rls();}
 	}
 	public boolean Get_to_url(int id, Io_url url, byte[] bin_bfr, int bin_flush_when) {
-		return Fsdb_bin_tbl.Select_to_url(this.Provider(), id, url, bin_bfr, bin_flush_when);
+		return Fsdb_bin_tbl.Select_to_url(this.Conn(), id, url, bin_bfr, bin_flush_when);
 	}
 	public Io_stream_rdr Get_as_rdr(int id) {
-		return Fsdb_bin_tbl.Select_as_rdr(this.Provider(), id);
+		return Fsdb_bin_tbl.Select_as_rdr(this.Conn(), id);
 	}
 	public static Fsdb_db_bin_fil load_(DataRdr rdr, Io_url dir) {
 		return new_
@@ -69,7 +69,7 @@ public class Fsdb_db_bin_fil implements RlsAble {
 	}
 	public static Fsdb_db_bin_fil make_(int id, Io_url url, long bin_len, long bin_max) {
 		Fsdb_db_bin_fil rv = new_(id, url, bin_len, bin_max, Db_cmd_mode.Create);
-		rv.Provider(); // force table create
+		rv.Conn(); // force table create
 		return rv;
 	}
 	private static Fsdb_db_bin_fil new_(int id, Io_url url, long bin_len, long bin_max, byte cmd_mode) {

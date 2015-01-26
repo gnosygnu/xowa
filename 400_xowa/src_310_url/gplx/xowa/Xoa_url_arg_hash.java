@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 public class Xoa_url_arg_hash {
-	OrderedHash hash = OrderedHash_.new_bry_();
+	private OrderedHash hash = OrderedHash_.new_bry_();
 	public Gfo_url_arg Get_arg(byte[] key) {return (Gfo_url_arg)hash.Fetch(key);}
 	public int Get_val_int_or(byte[] key, int or) {
 		byte[] val_bry = Get_val_bry_or(key, null); if (val_bry == null) return or;		

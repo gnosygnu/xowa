@@ -22,8 +22,8 @@ class Cache_dir_mgr {
 	private OrderedHash name_hash = OrderedHash_.new_bry_(); private HashAdp id_hash = HashAdp_.new_();
 	private Cache_dir_tbl dir_tbl = new Cache_dir_tbl();
 	public Cache_dir_mgr(Cache_mgr v) {this.cache_mgr = v;}
-	public void Db_init(Db_provider p) {dir_tbl.Db_init(p);}
-	public void Db_when_new(Db_provider p) {dir_tbl.Db_when_new(p);}
+	public void Db_init(Db_conn p) {dir_tbl.Db_init(p);}
+	public void Db_when_new(Db_conn p) {dir_tbl.Db_when_new(p);}
 	public void Db_save() {
 		int len = name_hash.Count();
 		boolean err_seen = false;

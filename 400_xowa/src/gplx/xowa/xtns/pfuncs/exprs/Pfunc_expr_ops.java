@@ -60,7 +60,7 @@ class Num_tkn implements Expr_tkn {
 	public String Val_str()	{return String_.new_utf8_(val_ary);}
 	public Num_tkn(int val_int) {
 		this.val_int = val_int;
-		this.val_ary = new byte[] {Byte_.int_(val_int + Byte_ascii.Num_0)};
+		this.val_ary = new byte[] {Byte_.By_int(val_int + Byte_ascii.Num_0)};
 	}	int val_int;
 }
 class Dot_tkn implements Expr_tkn {

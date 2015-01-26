@@ -65,7 +65,7 @@ public class Pfunc_ifexist_mgr {
 		}
 		else {
 			if (!env_is_testing)
-				wiki.File_mgr().Fsdb_mgr().Init_by_wiki__add_bin_wkrs(wiki);				// NOTE: must init Fsdb_mgr (else provider == null), and with bin_wkrs (else no images will ever load); DATE:2014-09-21
+				wiki.File_mgr().Fsdb_mgr().Init_by_wiki__add_bin_wkrs(wiki);				// NOTE: must init Fsdb_mgr (else conn == null), and with bin_wkrs (else no images will ever load); DATE:2014-09-21
 			return wiki.File_mgr().Exists(ttl_bry);											// less-accurate test using either (1) orig_wiki table in local wiki (v2) or (2) meta_db_mgr (v1)
 		}
 	}

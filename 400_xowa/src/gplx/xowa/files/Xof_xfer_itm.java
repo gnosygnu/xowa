@@ -55,10 +55,11 @@ public class Xof_xfer_itm implements Xof_file_itm {
 	public byte[]		Trg_repo_root() {return trg_repo_root;} private byte[] trg_repo_root = Bry_.Empty;	// HACK: needed for hdump
 	private byte[]		Trg_html(byte mode_id, int width)	{return url_bldr.Init_for_trg_html(mode_id, trg_repo, lnki_ttl, lnki_md5, lnki_ext, width, lnki_thumbtime, lnki_page).Xto_bry();}
 	public Io_url		Trg_file(byte mode_id, int width)	{return url_bldr.Init_for_trg_file(mode_id, trg_repo, lnki_ttl, lnki_md5, lnki_ext, width, lnki_thumbtime, lnki_page).Xto_url();}
+	public byte			Lnki_exec_tid() {return lnki_exec_tid;} public void Lnki_exec_tid_(byte v) {lnki_exec_tid = v;} private byte lnki_exec_tid = Xof_exec_tid.Tid_wiki_page;
 	public Xof_url_bldr Url_bldr(){ return url_bldr;}
 	public Xof_xfer_itm Url_bldr_(Xof_url_bldr v) {url_bldr = v; return this;} private Xof_url_bldr url_bldr = Xof_url_bldr.Temp;
 	public Xof_xfer_itm Clear() {
-		lnki_type = Byte_.MaxValue_127;
+		lnki_type = Byte_.Max_value_127;
 		lnki_w = lnki_h = file_w = orig_w = orig_h = html_w = html_h = gallery_mgr_h = Int_.Neg1;
 		lnki_upright = Int_.Neg1; lnki_thumbtime = Xof_doc_thumb.Null; lnki_page = Xof_doc_page.Null;
 		img_is_thumbable = false;

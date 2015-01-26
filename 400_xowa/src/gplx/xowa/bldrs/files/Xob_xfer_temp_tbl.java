@@ -18,29 +18,29 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.files.*;
 class Xob_xfer_temp_tbl {
-	public static void Create_table(Db_provider p)		{Sqlite_engine_.Tbl_create_and_delete(p, Tbl_name, Tbl_sql);}
-	public static Db_stmt Insert_stmt(Db_provider p) {return Db_stmt_.new_insert_(p, Tbl_name, Fld_lnki_id, Fld_lnki_page_id, Fld_orig_repo, Fld_orig_page_id, Fld_lnki_ttl, Fld_orig_redirect_src, Fld_lnki_ext, Fld_lnki_type, Fld_orig_media_type, Fld_file_is_orig, Fld_orig_w, Fld_orig_h, Fld_file_w, Fld_file_h, Fld_html_w, Fld_html_h, Fld_lnki_time, Fld_lnki_page, Fld_lnki_count);}
+	public static void Create_table(Db_conn p)		{Sqlite_engine_.Tbl_create_and_delete(p, Tbl_name, Tbl_sql);}
+	public static Db_stmt Insert_stmt(Db_conn p) {return Db_stmt_.new_insert_(p, Tbl_name, Fld_lnki_id, Fld_lnki_page_id, Fld_orig_repo, Fld_orig_page_id, Fld_lnki_ttl, Fld_orig_redirect_src, Fld_lnki_ext, Fld_lnki_type, Fld_orig_media_type, Fld_file_is_orig, Fld_orig_w, Fld_orig_h, Fld_file_w, Fld_file_h, Fld_html_w, Fld_html_h, Fld_lnki_time, Fld_lnki_page, Fld_lnki_count);}
 	public static void Insert(Db_stmt stmt, int lnki_id, int lnki_page_id, byte repo_id, int page_id, String ttl, String redirect_src, int ext_id, byte lnki_type, String orig_media_type, boolean file_is_orig, int orig_w, int orig_h, int html_w, int html_h, int file_w, int file_h, double thumbtime, int page, int count) {
 		stmt.Clear()
-		.Val_int_(lnki_id)
-		.Val_int_(lnki_page_id)
-		.Val_byte_(repo_id)
-		.Val_int_(page_id)
-		.Val_str_(ttl)
-		.Val_str_(redirect_src)
-		.Val_int_(ext_id)
-		.Val_byte_(lnki_type)
-		.Val_str_(orig_media_type)
-		.Val_byte_by_bool_(file_is_orig)
-		.Val_int_(orig_w)
-		.Val_int_(orig_h)
-		.Val_int_(file_w)
-		.Val_int_(file_h)
-		.Val_int_(html_w)
-		.Val_int_(html_h)
-		.Val_double_(Xof_doc_thumb.Db_save_double(thumbtime))
-		.Val_int_(page)
-		.Val_int_(count)
+		.Val_int(lnki_id)
+		.Val_int(lnki_page_id)
+		.Val_byte(repo_id)
+		.Val_int(page_id)
+		.Val_str(ttl)
+		.Val_str(redirect_src)
+		.Val_int(ext_id)
+		.Val_byte(lnki_type)
+		.Val_str(orig_media_type)
+		.Val_bool_as_byte(file_is_orig)
+		.Val_int(orig_w)
+		.Val_int(orig_h)
+		.Val_int(file_w)
+		.Val_int(file_h)
+		.Val_int(html_w)
+		.Val_int(html_h)
+		.Val_double(Xof_doc_thumb.Db_save_double(thumbtime))
+		.Val_int(page)
+		.Val_int(count)
 		.Exec_insert();
 	}
 	public static final String Tbl_name = "xfer_temp"		

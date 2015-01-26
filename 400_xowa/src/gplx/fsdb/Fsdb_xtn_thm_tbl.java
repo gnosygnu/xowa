@@ -18,15 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.fsdb; import gplx.*;
 import gplx.dbs.*;
 public class Fsdb_xtn_thm_tbl {
-	private Fsdb_db_atr_fil atr_fil; private Db_provider provider;
+	private Fsdb_db_atr_fil atr_fil; private Db_conn conn;
 	private Db_stmt stmt_insert, stmt_select_by_fil_w;
-	public Fsdb_xtn_thm_tbl(Fsdb_db_atr_fil atr_fil, Db_provider provider, boolean created) {
-		this.atr_fil = atr_fil; this.provider = provider;
+	public Fsdb_xtn_thm_tbl(Fsdb_db_atr_fil atr_fil, Db_conn conn, boolean created) {
+		this.atr_fil = atr_fil; this.conn = conn;
 		if (created) Create_table();
 	}
 	private void Create_table() {
-		Sqlite_engine_.Tbl_create(provider, Tbl_name, Tbl_sql);
-		Sqlite_engine_.Idx_create(provider, Idx_name);
+		Sqlite_engine_.Tbl_create(conn, Tbl_name, Tbl_sql);
+		Sqlite_engine_.Idx_create(conn, Idx_name);
 	}
 	public void Rls() {
 		if (stmt_insert != null)			{stmt_insert.Rls(); stmt_insert = null;}
@@ -41,28 +41,28 @@ public class Fsdb_xtn_thm_tbl {
 	}	private boolean schema_thm_page, schema_thm_page_init = true;
 	private Db_stmt Make_stmt_insert() {
 		return	this.Schema_thm_page()
-			?	Db_stmt_.new_insert_(provider, Tbl_name, Fld_thm_id, Fld_thm_owner_id, Fld_thm_w, Fld_thm_h, Fld_thm_bin_db_id, Fld_thm_size, Fld_thm_modified, Fld_thm_hash, Fld_thm_time, Fld_thm_page)
-			:	Db_stmt_.new_insert_(provider, Tbl_name, Fld_thm_id, Fld_thm_owner_id, Fld_thm_w, Fld_thm_h, Fld_thm_bin_db_id, Fld_thm_size, Fld_thm_modified, Fld_thm_hash, Fld_thm_thumbtime)
+			?	Db_stmt_.new_insert_(conn, Tbl_name, Fld_thm_id, Fld_thm_owner_id, Fld_thm_w, Fld_thm_h, Fld_thm_bin_db_id, Fld_thm_size, Fld_thm_modified, Fld_thm_hash, Fld_thm_time, Fld_thm_page)
+			:	Db_stmt_.new_insert_(conn, Tbl_name, Fld_thm_id, Fld_thm_owner_id, Fld_thm_w, Fld_thm_h, Fld_thm_bin_db_id, Fld_thm_size, Fld_thm_modified, Fld_thm_hash, Fld_thm_thumbtime)
 			;
 	}
 	public void Insert(int id, int thm_owner_id, int width, int height, double thumbtime, int page, int bin_db_id, long size, DateAdp modified, String hash) {
 		if (stmt_insert == null) stmt_insert = Make_stmt_insert();
 		try {
 			stmt_insert.Clear()
-			.Val_int_(id)
-			.Val_int_(thm_owner_id)
-			.Val_int_(width)
-			.Val_int_(height)
-			.Val_int_(bin_db_id)
-			.Val_long_(size)
-			.Val_str_(Sqlite_engine_.X_date_to_str(modified))
-			.Val_str_(hash);
+			.Val_int(id)
+			.Val_int(thm_owner_id)
+			.Val_int(width)
+			.Val_int(height)
+			.Val_int(bin_db_id)
+			.Val_long(size)
+			.Val_str(Sqlite_engine_.X_date_to_str(modified))
+			.Val_str(hash);
 			if (this.Schema_thm_page()) {
-				stmt_insert.Val_double_	(gplx.xowa.files.Xof_doc_thumb.Db_save_double(thumbtime));
-				stmt_insert.Val_int_	(gplx.xowa.files.Xof_doc_page.Db_save_int(page));
+				stmt_insert.Val_double	(gplx.xowa.files.Xof_doc_thumb.Db_save_double(thumbtime));
+				stmt_insert.Val_int	(gplx.xowa.files.Xof_doc_page.Db_save_int(page));
 			}
 			else
-				stmt_insert.Val_int_(gplx.xowa.files.Xof_doc_thumb.Db_save_int(thumbtime));
+				stmt_insert.Val_int(gplx.xowa.files.Xof_doc_thumb.Db_save_int(thumbtime));
 			stmt_insert.Exec_insert();
 		}	catch (Exception exc) {stmt_insert = null; throw Err_.err_(exc, "stmt failed");} // must reset stmt, else next call will fail
 	}
@@ -74,22 +74,22 @@ public class Fsdb_xtn_thm_tbl {
 			: gplx.criterias.Criteria_.And_many(Db_crt_.eq_(Fld_thm_owner_id, Int_.MinValue), Db_crt_.eq_(Fld_thm_w, Int_.MinValue), Db_crt_.eq_(Fld_thm_thumbtime, Int_.MinValue))
 			;
 		qry.Where_(crt);
-		return provider.Prepare(qry);
+		return conn.New_stmt(qry);
 	}
 	public boolean Select_itm_by_fil_width(int owner_id, Fsdb_xtn_thm_itm thm) {
 		if (stmt_select_by_fil_w == null) stmt_select_by_fil_w = Select_by_fil_w_stmt();
 		DataRdr rdr = DataRdr_.Null;
 		try {
 			stmt_select_by_fil_w.Clear()
-				.Val_int_(owner_id)
-				.Val_int_(thm.Width())
+				.Val_int(owner_id)
+				.Val_int(thm.Width())
 				;
 			if (this.Schema_thm_page())  {
-				stmt_select_by_fil_w.Val_double_(gplx.xowa.files.Xof_doc_thumb.Db_save_double(thm.Thumbtime()));
-				stmt_select_by_fil_w.Val_int_(gplx.xowa.files.Xof_doc_page.Db_save_int(thm.Page()));
+				stmt_select_by_fil_w.Val_double(gplx.xowa.files.Xof_doc_thumb.Db_save_double(thm.Thumbtime()));
+				stmt_select_by_fil_w.Val_int(gplx.xowa.files.Xof_doc_page.Db_save_int(thm.Page()));
 			}
 			else {
-				stmt_select_by_fil_w.Val_int_(gplx.xowa.files.Xof_doc_thumb.Db_save_int(thm.Thumbtime()));
+				stmt_select_by_fil_w.Val_int(gplx.xowa.files.Xof_doc_thumb.Db_save_int(thm.Thumbtime()));
 			}
 			rdr = stmt_select_by_fil_w.Exec_select();
 			if (rdr.MoveNextPeer()) {

@@ -261,7 +261,7 @@ class XtoStrWkr_gplx implements XtoStrWkr {
 		String rv = null;
 		if		(type == String.class)	rv = String_.cast_(o);
 		else if (Int_.TypeMatch(type))		return Int_.Xto_str(Int_.cast_(o));
-		else if (Bool_.TypeMatch(type))		return Yn.Xto_str(Bool_.cast_(o));
+		else if (ClassAdp_.Eq(type, Bool_.Cls_ref_type))		return Yn.Xto_str(Bool_.cast_(o));
 		else if (type == DateAdp.class)	return DateAdp_.cast_(o).XtoStr_gplx();
 		else								rv = Object_.Xto_str_strict_or_empty(o);
 		return String_.Replace(rv, "'", "''");

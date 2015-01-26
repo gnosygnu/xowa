@@ -23,12 +23,12 @@ public class Xob_xfer_regy_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	public void Cmd_ini(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {}
 	public void Cmd_run() {
-		Db_provider provider = Xodb_db_file.init__file_make(wiki.Fsys_mgr().Root_dir()).Provider();
-		Xob_xfer_regy_tbl.Create_table(provider);
-		Xob_xfer_regy_tbl.Create_data(usr_dlg, provider);
-		Xob_xfer_regy_tbl.Create_index(usr_dlg, provider);
-		Xob_xfer_regy_log_tbl.Create_table(provider);
-		provider.Txn_mgr().Txn_end_all();
+		Db_conn conn = Xodb_db_file.init__file_make(wiki.Fsys_mgr().Root_dir()).Conn();
+		Xob_xfer_regy_tbl.Create_table(conn);
+		Xob_xfer_regy_tbl.Create_data(usr_dlg, conn);
+		Xob_xfer_regy_tbl.Create_index(usr_dlg, conn);
+		Xob_xfer_regy_log_tbl.Create_table(conn);
+		conn.Txn_mgr().Txn_end_all();
 	}
 	public void Cmd_end() {}
 	public void Cmd_print() {}

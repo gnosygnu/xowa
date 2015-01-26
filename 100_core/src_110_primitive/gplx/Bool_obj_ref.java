@@ -18,6 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 public class Bool_obj_ref {
 	public boolean Val() {return val;} private boolean val;
+	public boolean Val_y() {return val;}
+	public boolean Val_n() {return !val;}
 	public Bool_obj_ref Val_y_() {val = true; return this;}
 	public Bool_obj_ref Val_n_() {val = false; return this;}
 	public Bool_obj_ref Val_(boolean v) {val = v; return this;}

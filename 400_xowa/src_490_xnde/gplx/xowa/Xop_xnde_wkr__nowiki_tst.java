@@ -122,4 +122,23 @@ public class Xop_xnde_wkr__nowiki_tst {
 		( "<nowiki>[</nowiki>[[A]]<nowiki>]</nowiki>"
 		, "[<a href=\"/wiki/A\">A</a>]");			// was showing up as [[[A]]]
 	}
+	@Test   public void Tblw_tr() { // PURPOSE: dash should be escaped in nowiki PAGE:de.w:Liste_von_Vereinen_und_Vereinigungen_von_Gläubigen_(römisch-katholische_Kirche) DATE:2015-01-08
+		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		( "{|"
+		, "|-"
+		, "|a"
+		, "|<nowiki>-</nowiki>"		// do not treat as "|-"
+		, "|}"
+		), String_.Concat_lines_nl_skip_last
+		( "<table>"
+		, "  <tr>"
+		, "    <td>a"
+		, "    </td>"
+		, "    <td>-"				// "|" creates <td>; "-" is rendered literally
+		, "    </td>"
+		, "  </tr>"
+		, "</table>"
+		, ""
+		));
+	}
 }

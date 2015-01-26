@@ -19,8 +19,8 @@ package gplx.dbs; import gplx.*;
 import org.junit.*;
 public class PoolIds_tst {
 	@Before public void setup() {
-		provider = Db_provider_pool._.Get_or_new(Db_conn_info_.Test);
-		Db_qry_fxt.DeleteAll(provider, PoolIds.Tbl_Name);
+		conn = Db_conn_pool_old._.Get_or_new(Db_url_.Test);
+		Db_qry_fxt.DeleteAll(conn, PoolIds.Tbl_Name);
 		mgr = PoolIds._;
 	}
 	@Test  public void FetchNextId() {
@@ -45,12 +45,12 @@ public class PoolIds_tst {
 		tst_Fetch("/test1", 1);
 	}
 	void run_Change(String url, int expd) {
-		mgr.Commit(provider, url, expd);
+		mgr.Commit(conn, url, expd);
 	}
 	void tst_Fetch(String url, int expd) {
-		int actl = mgr.FetchNext(provider, url);
+		int actl = mgr.FetchNext(conn, url);
 		Tfds.Eq(expd, actl);
 	}
-	Db_provider provider;
+	Db_conn conn;
 	PoolIds mgr;
 }

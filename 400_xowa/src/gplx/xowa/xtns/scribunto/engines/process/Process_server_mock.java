@@ -74,7 +74,7 @@ class Process_server_mock_rcvd_val implements Process_server_mock_rcvd {
 			boolean kv_val_is_array = ClassAdp_.Eq(kv_val_type, KeyVal[].class);
 			if (print_key && !kv_val_is_array)
 				bfr.Add_str(kv.Key()).Add_byte(Byte_ascii.Colon);
-			if		(ClassAdp_.Eq(kv_val_type, Bool_.ClassOf))
+			if		(ClassAdp_.Eq(kv_val_type, Bool_.Cls_ref_type))
 				bfr.Add(Bool_.cast_(kv_val) ? gplx.json.Json_itm_.Const_true : gplx.json.Json_itm_.Const_false);
 			else if	(kv_val_is_array) {
 				KeyVal[] sub = (KeyVal[])kv_val;

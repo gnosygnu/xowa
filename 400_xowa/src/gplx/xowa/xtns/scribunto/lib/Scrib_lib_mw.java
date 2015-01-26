@@ -45,6 +45,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 	public boolean Procs_exec(int key, Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		switch (key) {
 			case Proc_loadPackage:							return LoadPackage(args, rslt);
+			case Proc_loadPHPLibrary:						return LoadPHPLibrary(args, rslt);
 			case Proc_frameExists:							return FrameExists(args, rslt);
 			case Proc_parentFrameExists:					return ParentFrameExists(args, rslt);
 			case Proc_getExpandedArgument:					return GetExpandedArgument(args, rslt);
@@ -61,15 +62,15 @@ public class Scrib_lib_mw implements Scrib_lib {
 		}
 	}
 	public static final int
-	  Proc_loadPackage = 0
-	, Proc_frameExists = 1, Proc_parentFrameExists = 2
-	, Proc_getExpandedArgument = 3, Proc_getAllExpandedArguments = 4
-	, Proc_expandTemplate = 5, Proc_preprocess = 6, Proc_callParserFunction = 7
-	, Proc_incrementExpensiveFunctionCount = 8, Proc_isSubsting = 9
-	, Proc_newChildFrame = 10, Proc_getFrameTitle = 11, Proc_setTTL = 12
+	  Proc_loadPackage = 0, Proc_loadPHPLibrary = 1
+	, Proc_frameExists = 2, Proc_parentFrameExists = 3
+	, Proc_getExpandedArgument = 4, Proc_getAllExpandedArguments = 5
+	, Proc_expandTemplate = 6, Proc_preprocess = 7, Proc_callParserFunction = 8
+	, Proc_incrementExpensiveFunctionCount = 9, Proc_isSubsting = 10
+	, Proc_newChildFrame = 11, Proc_getFrameTitle = 12, Proc_setTTL = 13
 	;
 	public static final String 
-	  Invk_loadPackage = "loadPackage"
+	  Invk_loadPackage = "loadPackage", Invk_loadPHPLibrary = "loadPHPLibrary"
 	, Invk_frameExists = "frameExists", Invk_parentFrameExists = "parentFrameExists"
 	, Invk_getExpandedArgument = "getExpandedArgument", Invk_getAllExpandedArguments = "getAllExpandedArguments"
 	, Invk_expandTemplate = "expandTemplate", Invk_preprocess = "preprocess", Invk_callParserFunction = "callParserFunction"
@@ -77,7 +78,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 	, Invk_newChildFrame = "newChildFrame", Invk_getFrameTitle = "getFrameTitle", Invk_setTTL = "setTTL"
 	;
 	private static final String[] Proc_names = String_.Ary
-	( Invk_loadPackage
+	( Invk_loadPackage, Invk_loadPHPLibrary
 	, Invk_frameExists, Invk_parentFrameExists
 	, Invk_getExpandedArgument, Invk_getAllExpandedArguments
 	, Invk_expandTemplate, Invk_preprocess, Invk_callParserFunction
@@ -95,6 +96,9 @@ public class Scrib_lib_mw implements Scrib_lib {
 		if (page.Missing()) return rslt.Init_ary_empty();
 		Scrib_lua_mod mod = new Scrib_lua_mod(core, mod_name);
 		return rslt.Init_obj(mod.LoadString(String_.new_utf8_(page.Data_raw())));
+	}
+	public boolean LoadPHPLibrary(Scrib_proc_args args, Scrib_proc_rslt rslt) { // NOTE: noop; Scribunto uses this to load the Scribunto_*Library classses (EX: Scribunto_TitleLibrary); DATE:2015-01-21
+		return rslt.Init_obj(null);
 	}
 	public boolean GetExpandedArgument(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		String frame_id = args.Pull_str(0);
@@ -323,11 +327,11 @@ public class Scrib_lib_mw implements Scrib_lib {
 	public boolean IsSubsting(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		boolean is_substing = false;
 		Xot_invk current_frame = core.Frame_current();
-		if	(current_frame != null && Xot_defn_.Tid_is_subst(current_frame.Defn_tid()))		// check current frame first
+		if	(current_frame != null && Xot_defn_.Tid_is_substing(current_frame.Defn_tid()))		// check current frame first
 			is_substing = true;
 		else {																				// check owner frame next
 			Xot_invk parent_frame = core.Frame_parent();
-			if (parent_frame != null && Xot_defn_.Tid_is_subst(parent_frame.Defn_tid()))
+			if (parent_frame != null && Xot_defn_.Tid_is_substing(parent_frame.Defn_tid()))
 				is_substing = true;
 		}			
 		return rslt.Init_obj(is_substing);

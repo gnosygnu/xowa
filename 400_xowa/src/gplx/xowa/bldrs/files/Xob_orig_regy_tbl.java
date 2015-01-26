@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.bldrs.oimgs.*;
 class Xob_orig_regy_tbl {
-	public static void Create_table(Db_provider p) {Sqlite_engine_.Tbl_create_and_delete(p, Tbl_name, Tbl_sql);}
-	public static void Create_data(Gfo_usr_dlg usr_dlg, Db_provider p, Xodb_db_file file_registry_db, boolean repo_0_is_remote, Xow_wiki repo_0_wiki, Xow_wiki repo_1_wiki, boolean wiki_ns_for_file_is_case_match_all) {
+	public static void Create_table(Db_conn p) {Sqlite_engine_.Tbl_create_and_delete(p, Tbl_name, Tbl_sql);}
+	public static void Create_data(Gfo_usr_dlg usr_dlg, Db_conn p, Xodb_db_file file_registry_db, boolean repo_0_is_remote, Xow_wiki repo_0_wiki, Xow_wiki repo_1_wiki, boolean wiki_ns_for_file_is_case_match_all) {
 		usr_dlg.Prog_many("", "", "inserting lnki_regy");
 		p.Exec_sql(Sql_create_data);
 		Sqlite_engine_.Idx_create(usr_dlg, p, "orig_regy", Idx_ttl_local);
@@ -37,9 +37,9 @@ class Xob_orig_regy_tbl {
 			repo_1_tid = Xof_repo_itm.Repo_local;
 			local_wiki = repo_1_wiki;
 		}
-		Create_data_for_repo(usr_dlg, p, local_wiki, Byte_.int_(repo_0_tid), repo_0_dir.GenSubFil(Xodb_db_file.Name__wiki_image));
+		Create_data_for_repo(usr_dlg, p, local_wiki, Byte_.By_int(repo_0_tid), repo_0_dir.GenSubFil(Xodb_db_file.Name__wiki_image));
 		if (!local_is_remote) {	// only run for repo_1 if local != remote; only affects commons
-			Create_data_for_repo(usr_dlg, p, local_wiki, Byte_.int_(repo_1_tid), repo_1_dir.GenSubFil(Xodb_db_file.Name__wiki_image));
+			Create_data_for_repo(usr_dlg, p, local_wiki, Byte_.By_int(repo_1_tid), repo_1_dir.GenSubFil(Xodb_db_file.Name__wiki_image));
 			if (wiki_ns_for_file_is_case_match_all) {
 				Io_url repo_remote_dir = repo_0_is_remote ? repo_0_dir : repo_1_dir;
 				Create_data_for_cs(usr_dlg, p, local_wiki, repo_remote_dir);
@@ -48,7 +48,7 @@ class Xob_orig_regy_tbl {
 		Sqlite_engine_.Db_detach(p, "page_db");
 		Sqlite_engine_.Idx_create(usr_dlg, p, "orig_regy", Idx_xfer_temp);
 	}
-	private static void Create_data_for_repo(Gfo_usr_dlg usr_dlg, Db_provider cur, Xow_wiki local_wiki, byte repo_tid, Io_url join) {
+	private static void Create_data_for_repo(Gfo_usr_dlg usr_dlg, Db_conn cur, Xow_wiki local_wiki, byte repo_tid, Io_url join) {
 		usr_dlg.Note_many("", "", "inserting page for xowa.wiki.image: ~{0}", join.OwnerDir().NameOnly());
 		boolean wiki_has_cs_file = repo_tid == Xof_repo_itm.Repo_remote && local_wiki.Ns_mgr().Ns_file().Case_match() == Xow_ns_case_.Id_all;
 		String lnki_ttl_fld = wiki_has_cs_file ? "Coalesce(o.lnki_commons_ttl, o.lnki_ttl)" : "o.lnki_ttl";	// NOTE: use lnki_commons_ttl if [[File]] is cs PAGE:en.d:water EX:[[image:wikiquote-logo.png|50px|none|alt=]]; DATE:2014-09-05
@@ -59,7 +59,7 @@ class Xob_orig_regy_tbl {
 		cur.Exec_sql(String_.Format(Sql_update_repo_redirect, repo_tid, lnki_ttl_fld));
 		Sqlite_engine_.Db_detach(cur, "image_db");
 	}
-	private static void Create_data_for_cs(Gfo_usr_dlg usr_dlg, Db_provider p, Xow_wiki local_wiki, Io_url repo_remote_dir) {
+	private static void Create_data_for_cs(Gfo_usr_dlg usr_dlg, Db_conn p, Xow_wiki local_wiki, Io_url repo_remote_dir) {
 		p.Exec_sql(Xob_orig_regy_tbl.Sql_cs_mark_dupes);	// orig_regy: find dupes; see note in SQL
 		p.Exec_sql(Xob_orig_regy_tbl.Sql_cs_update_ttls);	// orig_regy: update lnki_ttl with lnki_commons_ttl
 		Create_data_for_repo(usr_dlg, p, local_wiki, Xof_repo_itm.Repo_remote, repo_remote_dir.GenSubFil(Xodb_db_file.Name__wiki_image));

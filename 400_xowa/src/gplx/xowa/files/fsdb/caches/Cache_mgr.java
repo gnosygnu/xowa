@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.fsdb.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
 import gplx.dbs.*; import gplx.xowa.users.dbs.*;
+import gplx.xowa2.files.*;
 public class Cache_mgr implements Xou_db_wkr, GfoInvkAble {
 	private Cache_cfg_mgr cfg_mgr;
 	private Cache_dir_mgr dir_mgr;
@@ -34,18 +35,18 @@ public class Cache_mgr implements Xou_db_wkr, GfoInvkAble {
 	public int Next_id() {return cfg_mgr.Next_id();} public void Next_id_(int v) {cfg_mgr.Next_id_(v);}
 	public void Db_init(Xou_db_mgr data_mgr) {
 		try {
-		Db_provider provider = data_mgr.Provider();
+		Db_conn conn = data_mgr.Conn();
 		data_mgr.Wkr_reg(this);
-		cfg_mgr.Db_init(provider);
-		dir_mgr.Db_init(provider);
-		fil_mgr.Db_init(provider);
+		cfg_mgr.Db_init(conn);
+		dir_mgr.Db_init(conn);
+		fil_mgr.Db_init(conn);
 		} catch (Exception e) {app.Usr_dlg().Warn_many("", "", "cache_mgr.init:fatal error: err=~{0}", Err_.Message_gplx_brief(e));}
 	}
 	public void Db_when_new(Xou_db_mgr data_mgr) {
-		Db_provider provider = data_mgr.Provider();
-		cfg_mgr.Db_when_new(provider);
-		dir_mgr.Db_when_new(provider);
-		fil_mgr.Db_when_new(provider);
+		Db_conn conn = data_mgr.Conn();
+		cfg_mgr.Db_when_new(conn);
+		dir_mgr.Db_when_new(conn);
+		fil_mgr.Db_when_new(conn);
 		this.Db_save(data_mgr);
 	}
 	public void Db_save(Xou_db_mgr data_mgr) {
@@ -71,6 +72,15 @@ public class Cache_mgr implements Xou_db_wkr, GfoInvkAble {
 			cfg_mgr.Cache_len_add(bin_len);
 		return fil_itm;
 	}
+//		public Xou_cache_fil Get_or_new(byte[] dir, byte[] ttl, boolean is_orig, int w, double time, int page) {
+//			int dir_id = dir_mgr.Get_itm_by_name(dir).Uid();
+//			Xou_cache_fil fil_itm = fil_mgr.Get_or_new(dir_id, ttl, is_orig, w, -1, time, ext, 0, created.Val_n_());
+//			fil_itm.Cache_time_now_();
+//			if (created.Val())	// increase cache_size if item is new; (don't increase if update); NOTE: not same as Db_cmd_mode.Created, b/c itm could be created, but not saved to db yet; EX: Page_1 has A.png; A.png marked Created; Page_2 has A.png; A.png still Created, but should increase cache_size
+//				cfg_mgr.Cache_len_add(bin_len);
+////			return fil_itm;
+//			return null;
+//		}
 	public void Compress_check() {
 		if (cfg_mgr.Cache_len() > cfg_mgr.Cache_max())
 			fil_mgr.Compress(app, dir_mgr, cfg_mgr);

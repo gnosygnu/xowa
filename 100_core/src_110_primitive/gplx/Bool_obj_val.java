@@ -17,12 +17,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public class Bool_obj_val {
+	Bool_obj_val(int v) {val = v;} private final int val;
 	public boolean Val() {return val == 1;}
-	Bool_obj_val(int v) {val = v;} int val;
 	public static final Bool_obj_val
-		  Null	= new Bool_obj_val(-1)
-		, False = new Bool_obj_val(0)
-		, True	= new Bool_obj_val(1);
+	  Null	= new Bool_obj_val(-1)
+	, False = new Bool_obj_val(0)
+	, True	= new Bool_obj_val(1)
+	;
 	public static Bool_obj_val read_(Object o) {String s = String_.as_(o); return s == null ? (Bool_obj_val)o : parse_(s);}
 	public static Bool_obj_val parse_(String raw) {
 		if		(String_.Eq(raw, "y"))	return Bool_obj_val.True;

@@ -48,6 +48,7 @@ public class Scrib_lib_ustring__lib_tst {
 		Exec_match("aaa"	, "a"				, 1, "a");							// should return 1st match not many
 		Exec_match("aaa"	, "(a)"				, 1, "a;a;a");						// should return all matches
 		Exec_match("a b"	, "%S"				, 1, "a");							// %S was returning every match instead of 1st; PAGE:en.w:Bertrand_Russell; DATE:2014-04-02
+		Exec_match(1		, "a"				, 1, String_.Null_mark);			// Module can pass raw ints; PAGE:en.w:Budget_of_the_European_Union; DATE:2015-01-22
 	}
 	@Test  public void Match_args_out_of_order() {
 		fxt.Test_scrib_proc_empty(lib, Scrib_lib_ustring.Invk_match, KeyVal_.Ary(KeyVal_.int_(2, "[a]")));
@@ -119,7 +120,7 @@ public class Scrib_lib_ustring__lib_tst {
 	private void Exec_find(String text, String regx, int bgn, boolean plain, String expd) {
 		fxt.Test_scrib_proc_kv_vals(lib, Scrib_lib_ustring.Invk_find, Scrib_kv_utl_.base1_many_(text, regx, bgn, plain), expd);
 	}
-	private void Exec_match(String text, String regx, int bgn, String expd) {
+	private void Exec_match(Object text, String regx, int bgn, String expd) {
 		fxt.Test_scrib_proc_kv_vals(lib, Scrib_lib_ustring.Invk_match, Scrib_kv_utl_.base1_many_(text, regx, bgn), expd);
 	}
 	private void Exec_gsub_regx(String text, Object regx, int limit, Object repl, String expd) {Exec_gsub(text, regx, limit, repl, expd);}

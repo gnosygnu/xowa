@@ -21,7 +21,7 @@ import gplx.lists.*; /*GfoNde*/
 class TdbDeleteWkr implements Db_qryWkr {
 	public Object Exec(Db_engine engineObj, Db_qry cmdObj) {
 		TdbEngine engine = TdbEngine.cast_(engineObj); Db_qry_delete cmd = (Db_qry_delete)cmdObj;
-		TdbTable tbl = engine.FetchTbl(cmd.BaseTable());
+		TdbTable tbl = engine.FetchTbl(cmd.Base_table());
 		ListAdp deleted = ListAdp_.new_();
 		int rv = 0;
 		if (cmd.Where() == Db_qry_.WhereAll) {
@@ -29,7 +29,7 @@ class TdbDeleteWkr implements Db_qryWkr {
 			tbl.Rows().Clear();
 		}
 		else {
-			Criteria crt = cmd.Where().Crt();
+			Criteria crt = cmd.Where();
 			for (int i = 0; i < tbl.Rows().Count(); i++) {
 				GfoNde row = tbl.Rows().FetchAt_asGfoNde(i);
 				if (crt.Matches(row))

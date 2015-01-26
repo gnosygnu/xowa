@@ -16,48 +16,73 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-class Db_stmt_sql implements Db_stmt {
+public class Db_stmt_sql implements Db_stmt {// used for formatting SQL statements; not used for actual insert into database
 	private Bry_bfr tmp_bfr = Bry_bfr.new_();
 	private Bry_fmtr tmp_fmtr = Bry_fmtr.new_();
 	private int val_idx = 0;
-	public Db_provider Provider() {return provider;} public void Provider_(Db_provider v) {this.provider = v;} Db_provider provider;
-	public Db_stmt New() {return this;}
-	public Db_stmt Val_bool_(boolean v) {
-		try {Add(++val_idx, v ? "true" : "false");} catch (Exception e) {throw Err_.err_(e, "failed to add value: type={0} val={1}", "int", v);}
-		return this;
-	}
-	public Db_stmt Val_byte_by_bool_(boolean v) {return Val_byte_(v ? Bool_.Y_byte : Bool_.N_byte);}
-	public Db_stmt Val_byte_(byte v) {
+	public Db_conn Conn() {return conn;} public void Conn_(Db_conn v) {this.conn = v;} Db_conn conn;
+	public Db_stmt Reset_stmt() {return this;}
+	public Db_stmt Crt_bool_as_byte(String k, boolean v)	{return Add_byte_by_bool(Bool_.Y, k, v);}
+	public Db_stmt Val_bool_as_byte(String k, boolean v)	{return Add_byte_by_bool(Bool_.N, k, v);}
+	public Db_stmt Val_bool_as_byte(boolean v)			{return Add_byte_by_bool(Bool_.N, null, v);}
+	private Db_stmt Add_byte_by_bool(boolean where, String k, boolean v) {return Add_byte(where, k, v ? Bool_.Y_byte : Bool_.N_byte);}
+	public Db_stmt Crt_byte(String k, byte v)	{return Add_byte(Bool_.Y, k, v);}
+	public Db_stmt Val_byte(String k, byte v)	{return Add_byte(Bool_.N, k, v);}
+	public Db_stmt Val_byte(byte v)			{return Add_byte(Bool_.N, null, v);}
+	private Db_stmt Add_byte(boolean where, String k, byte v) {
 		try {Add(++val_idx, Byte_.Xto_str(v));} catch (Exception e) {throw Err_.err_(e, "failed to add value: type={0} val={1}", "byte", v);}
 		return this;
 	}
-	public Db_stmt Val_int_(int v) {
+	public Db_stmt Crt_int(String k, int v)	{return Add_int(Bool_.Y, k, v);}
+	public Db_stmt Val_int(String k, int v)	{return Add_int(Bool_.N, k, v);}
+	public Db_stmt Val_int(int v)			{return Add_int(Bool_.N, null, v);}
+	private Db_stmt Add_int(boolean where, String k, int v) {
 		try {Add(++val_idx, Int_.Xto_str(v));} catch (Exception e) {throw Err_.err_(e, "failed to add value: type={0} val={1}", "int", v);}
 		return this;
 	}
-	public Db_stmt Val_long_(long v) {
+	public Db_stmt Crt_long(String k, long v)	{return Add_long(Bool_.Y, k, v);}
+	public Db_stmt Val_long(String k, long v)	{return Add_long(Bool_.N, k, v);}
+	public Db_stmt Val_long(long v)			{return Add_long(Bool_.N, null, v);}
+	private Db_stmt Add_long(boolean where, String k, long v) {
 		try {Add(++val_idx, Long_.Xto_str(v));} catch (Exception e) {throw Err_.err_(e, "failed to add value: type={0} val={1}", "long", v);} 
 		return this;
 	}
-	public Db_stmt Val_float_(float v) {
+	public Db_stmt Crt_float(String k, float v)	{return Add_float(Bool_.Y, k, v);}
+	public Db_stmt Val_float(String k, float v)	{return Add_float(Bool_.N, k, v);}
+	public Db_stmt Val_float(float v)			{return Add_float(Bool_.N, null, v);}
+	private Db_stmt Add_float(boolean where, String k, float v) {
 		try {Add(++val_idx, Float_.Xto_str(v));} catch (Exception e) {throw Err_.err_(e, "failed to add value: type={0} val={1}", "float", v);}
 		return this;
 	}
-	public Db_stmt Val_double_(double v) {
+	public Db_stmt Crt_double(String k, double v)	{return Add_double(Bool_.Y, k, v);}
+	public Db_stmt Val_double(String k, double v)	{return Add_double(Bool_.N, k, v);}
+	public Db_stmt Val_double(double v)			{return Add_double(Bool_.N, null, v);}
+	private Db_stmt Add_double(boolean where, String k, double v) {
 		try {Add(++val_idx, Double_.Xto_str(v));} catch (Exception e) {throw Err_.err_(e, "failed to add value: type={0} val={1}", "double", v);} 
 		return this;
 	}
-	public Db_stmt Val_decimal_(DecimalAdp v) {
+	public Db_stmt Crt_decimal(String k, DecimalAdp v)	{return Add_decimal(Bool_.Y, k, v);}
+	public Db_stmt Val_decimal(String k, DecimalAdp v)	{return Add_decimal(Bool_.N, k, v);}
+	public Db_stmt Val_decimal(DecimalAdp v)			{return Add_decimal(Bool_.N, null, v);}
+	private Db_stmt Add_decimal(boolean where, String k, DecimalAdp v) {
 		try {Add(++val_idx, v.Xto_str());} catch (Exception e) {throw Err_.err_(e, "failed to add value: type={0} val={1}", "decimal", v);} 
 		return this;
 	}
-	public Db_stmt Val_bry_by_str_(String v) {return Val_bry_(Bry_.new_utf8_(v));}
-	public Db_stmt Val_bry_(byte[] v) {	// HACK: convert to String b/c tdb does not support byte[]
+	public Db_stmt Crt_bry(String k, byte[] v)	{return Add_bry(Bool_.Y, k, v);}
+	public Db_stmt Val_bry(String k, byte[] v)	{return Add_bry(Bool_.N, k, v);}
+	public Db_stmt Val_bry(byte[] v)			{return Add_bry(Bool_.N, null, v);}
+	private Db_stmt Add_bry(boolean where, String k, byte[] v) {// HACK: convert to String b/c tdb does not support byte[]
 		try {Add(++val_idx, Val_str_wrap(String_.new_utf8_(v)));} catch (Exception e) {throw Err_.err_(e, "failed to add value: type={0} val={1}", "byte[]", v.length);} 
 		return this;
 	}
-	public Db_stmt Val_str_by_bry_(byte[] v) {return Val_str_(String_.new_utf8_(v));}
-	public Db_stmt Val_str_(String v) {
+	public Db_stmt Crt_bry_as_str(String k, byte[] v)	{return Add_bry_as_str(Bool_.Y, k, v);}
+	public Db_stmt Val_bry_as_str(String k, byte[] v)	{return Add_bry_as_str(Bool_.N, k, v);}
+	public Db_stmt Val_bry_as_str(byte[] v)			{return Add_bry_as_str(Bool_.N, null, v);}
+	private Db_stmt Add_bry_as_str(boolean where, String k, byte[] v) {return Add_str(where, k, String_.new_utf8_(v));}
+	public Db_stmt Crt_str(String k, String v)	{return Add_str(Bool_.Y, k, v);}
+	public Db_stmt Val_str(String k, String v)	{return Add_str(Bool_.N, k, v);}
+	public Db_stmt Val_str(String v)			{return Add_str(Bool_.N, null, v);}
+	private Db_stmt Add_str(boolean where, String k, String v) {
 		try {Add(++val_idx, Val_str_wrap(v));} catch (Exception e) {throw Err_.err_(e, "failed to add value: type={0} val={1}", "String", v);} 
 		return this;
 	}
@@ -69,20 +94,20 @@ class Db_stmt_sql implements Db_stmt {
 		} catch (Exception e) {throw Err_.err_(e, "failed to add value: type={0} val={1}", "rdr", v);} 
 		return this;
 	}
-	String Val_str_wrap(String v) {
+	private String Val_str_wrap(String v) {
 		return "'" + String_.Replace(v, "'", "\\'") + "'";
 	}
 	public boolean Exec_insert() {
-		try {boolean rv = provider.Exec_qry(Db_qry_sql.dml_(this.Xto_sql())) != 0; return rv;} catch (Exception e) {throw Err_.err_(e, "failed to exec prepared statement: sql={0}", sql_orig);}
+		try {boolean rv = conn.Exec_qry(Db_qry_sql.dml_(this.Xto_sql())) != 0; return rv;} catch (Exception e) {throw Err_.err_(e, "failed to exec prepared statement: sql={0}", sql_orig);}
 	}
 	public int Exec_update() {
-		try {int rv = provider.Exec_qry(Db_qry_sql.dml_(this.Xto_sql())); return rv;} catch (Exception e) {throw Err_.err_(e, "failed to exec prepared statement: sql={0}", sql_orig);}
+		try {int rv = conn.Exec_qry(Db_qry_sql.dml_(this.Xto_sql())); return rv;} catch (Exception e) {throw Err_.err_(e, "failed to exec prepared statement: sql={0}", sql_orig);}
 	}
 	public int Exec_delete() {
-		try {int rv = provider.Exec_qry(Db_qry_sql.dml_(this.Xto_sql())); return rv;} catch (Exception e) {throw Err_.err_(e, "failed to exec prepared statement: sql={0}", sql_orig);}
+		try {int rv = conn.Exec_qry(Db_qry_sql.dml_(this.Xto_sql())); return rv;} catch (Exception e) {throw Err_.err_(e, "failed to exec prepared statement: sql={0}", sql_orig);}
 	}
 	public DataRdr Exec_select() {
-		try {DataRdr rv = provider.Exec_qry_as_rdr(Db_qry_sql.rdr_(this.Xto_sql())); return rv;} catch (Exception e) {throw Err_.err_(e, "failed to exec prepared statement: sql={0}", sql_orig);}
+		try {DataRdr rv = conn.Exec_qry_as_rdr(Db_qry_sql.rdr_(this.Xto_sql())); return rv;} catch (Exception e) {throw Err_.err_(e, "failed to exec prepared statement: sql={0}", sql_orig);}
 	}	
 	public Db_rdr Exec_select_as_rdr() {throw Err_.not_implemented_();}	
 	public Object Exec_select_val() {
@@ -97,13 +122,17 @@ class Db_stmt_sql implements Db_stmt {
 		this.Clear();
 	}
 	public void Add(String v) {Add(-1, v);}
-	public void Add(int idx, String v) {args.Add(v);} ListAdp args = ListAdp_.new_();
+	public void Add(int idx, String v) {args.Add(v);} private ListAdp args = ListAdp_.new_();
 	public String Xto_sql() {
 		tmp_fmtr.Bld_bfr_many(tmp_bfr, (Object[])args.Xto_ary_and_clear(Object.class));
 		return tmp_bfr.Xto_str_and_clear();
 	}
-	String sql_orig; 
-	public Db_stmt Parse(String sql_str) {
+	public int Args_len() {return args.Count();}
+	public String Args_get_at(int i) {return (String)args.FetchAt(i);}
+	private String sql_orig; 
+	public Db_qry Qry() {return qry;} private Db_qry qry;
+	public Db_stmt Parse(Db_qry qry, String sql_str) {
+		this.qry = qry;
 		this.sql_orig = sql_str;
 		int arg_idx = 0;
 		byte[] src = Bry_.new_utf8_(sql_str);

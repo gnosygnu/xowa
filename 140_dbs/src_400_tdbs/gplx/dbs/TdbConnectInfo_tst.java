@@ -19,14 +19,14 @@ package gplx.dbs; import gplx.*;
 import org.junit.*;
 public class TdbConnectInfo_tst {
 	@Test  public void Full() {
-		Db_conn_info connectInfo = Db_conn_info_.parse_("gplx_key=tdb;url=C:\\dir\\xmpl.tdb;format=dsv;");
+		Db_url connectInfo = Db_url_.parse_("gplx_key=tdb;url=C:\\dir\\xmpl.tdb;format=dsv;");
 		tst_Parse(connectInfo, Io_url_.new_any_("C:\\dir\\xmpl.tdb"), "dsv");
 	}
 	@Test  public void DefaultFormat() {
-		Db_conn_info connectInfo = Db_conn_info_.parse_("gplx_key=tdb;url=C:\\dir\\xmpl.tdb");	// dsv Format inferred
+		Db_url connectInfo = Db_url_.parse_("gplx_key=tdb;url=C:\\dir\\xmpl.tdb");	// dsv Format inferred
 		tst_Parse(connectInfo, Io_url_.new_any_("C:\\dir\\xmpl.tdb"), "dsv");
 	}
-	void tst_Parse(Db_conn_info connectInfo, Io_url url, String format) {
-		Tfds.Eq(((Db_conn_info__tdb)connectInfo).Url(), url);
+	void tst_Parse(Db_url connectInfo, Io_url url, String format) {
+		Tfds.Eq(((Db_url__tdb)connectInfo).Url(), url);
 	}
 }

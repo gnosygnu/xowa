@@ -22,7 +22,7 @@ public abstract class Xodb_in_wkr_base {
 	public abstract void Fill_stmt(Db_stmt stmt, int bgn, int end);
 	public abstract Db_qry Build_qry(Xodb_ctx tbl_ctx, int bgn, int end);
 	public abstract void Eval_rslts(Cancelable cancelable, Xodb_ctx db_ctx, DataRdr rdr);
-	public void Select_in(Db_provider provider, Cancelable cancelable, Xodb_ctx db_ctx, int full_bgn, int full_end) {
+	public void Select_in(Db_conn conn, Cancelable cancelable, Xodb_ctx db_ctx, int full_bgn, int full_end) {
 		DataRdr rdr = DataRdr_.Null; 
 		Db_stmt stmt = Db_stmt_.Null;
 		int interval = Interval();
@@ -30,7 +30,7 @@ public abstract class Xodb_in_wkr_base {
 			int part_end = i + interval;
 			if (part_end > full_end) part_end = full_end;
 			try {
-				stmt = provider.Prepare(Build_qry(db_ctx, i, part_end));
+				stmt = conn.New_stmt(Build_qry(db_ctx, i, part_end));
 				Fill_stmt(stmt, i, part_end);
 				rdr = stmt.Exec_select();
 				Eval_rslts(cancelable, db_ctx, rdr);

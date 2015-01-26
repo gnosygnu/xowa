@@ -50,7 +50,7 @@ public class SqliteDbMain {
 //	}
 	private void CreateMany(int number, int base_val) {
 		long time_bgn = Env_.TickCount();
-		Db_provider provider = Sqlite_engine_.Provider_load_or_make_(Io_url_.new_fil_("E:\\test.sqlite3"));		
+		Db_conn provider = Sqlite_engine_.Conn_load_or_make_(Io_url_.new_fil_("E:\\test.sqlite3"));		
 		String tbl_sql = String_.Concat_lines_nl
 		( "CREATE TABLE fsdb_xtn_thm"
 		, "( thm_id            integer             NOT NULL    PRIMARY KEY"
@@ -69,15 +69,15 @@ public class SqliteDbMain {
 		Db_stmt stmt = Db_stmt_.new_insert_(provider, "fsdb_xtn_thm", "thm_id", "thm_owner_id", "thm_w", "thm_h", "thm_thumbtime", "thm_bin_db_id", "thm_size", "thm_modified", "thm_hash");
 		for (int i = 0; i < number; i++) {
 			stmt.Clear()
-				.Val_int_(base_val + i)
-				.Val_int_(base_val + i)
-				.Val_int_(220)
-				.Val_int_(200)
-				.Val_int_(-1)
-				.Val_int_(15)
-				.Val_long_(23456)
-				.Val_str_("")
-				.Val_str_("")
+				.Val_int(base_val + i)
+				.Val_int(base_val + i)
+				.Val_int(220)
+				.Val_int(200)
+				.Val_int(-1)
+				.Val_int(15)
+				.Val_long(23456)
+				.Val_str("")
+				.Val_str("")
 				.Exec_insert();
 		}
 		long time_elapsed = (Env_.TickCount() - time_bgn);	

@@ -29,8 +29,8 @@ public class Xodb_page_tbl {
 //			Db_rdr rdr = Db_rdr_.Null; 
 //			Db_stmt stmt = Db_stmt_.Null;
 //			try {
-//				stmt = Db_stmt_.new_select_as_rdr(provider, Db_qry__select_in_tbl.new_(Tbl_name, String_.Ary(Fld_page_id), html_db_enabled ? Select_by_id_flds__hdump : Select_by_id_flds__basic));
-//				rdr = stmt.Val_int_(page_id).Exec_select_as_rdr();
+//				stmt = Db_stmt_.new_select_as_rdr(conn, Db_qry__select_in_tbl.new_(Tbl_name, String_.Ary(Fld_page_id), html_db_enabled ? Select_by_id_flds__hdump : Select_by_id_flds__basic));
+//				rdr = stmt.Val_int(page_id).Exec_select_as_rdr();
 //				while (rdr.Move_next()) {
 //					Read_page__all2(rv, rdr, html_db_enabled);
 //					return true;
@@ -44,17 +44,17 @@ public class Xodb_page_tbl {
 		this.db_ctx = wiki.Db_mgr().Db_ctx();
 	}
 	public void Html_db_enabled_(boolean v) {html_db_enabled = v;} private boolean html_db_enabled;
-	public Db_provider Provider() {return provider;} public void Provider_(Db_provider provider) {this.provider = provider;} private Db_provider provider;
+	public Db_conn Conn() {return conn;} public void Conn_(Db_conn conn) {this.conn = conn;} private Db_conn conn;
 	public boolean Select_by_ttl(Xodb_page rv, Xow_ns ns, byte[] ttl) {
 		Db_rdr rdr = Db_rdr_.Null; Db_stmt stmt = Db_stmt_.Null;
 		try {
-			stmt = Db_stmt_.new_select_as_rdr(provider, Db_qry__select_in_tbl.new_(Tbl_name, String_.Ary(Fld_page_ns, Fld_page_title), html_db_enabled ? Select_by_id_flds__hdump : Select_by_id_flds__basic));
-			rdr = stmt.Val_int_(ns.Id()).Val_str_(String_.new_utf8_(ttl)).Exec_select_as_rdr();
+			stmt = Db_stmt_.new_select_as_rdr(conn, Db_qry__select_in_tbl.new_(Tbl_name, String_.Ary(Fld_page_ns, Fld_page_title), html_db_enabled ? Select_by_id_flds__hdump : Select_by_id_flds__basic));
+			rdr = stmt.Val_int(ns.Id()).Val_str(String_.new_utf8_(ttl)).Exec_select_as_rdr();
 			if (rdr.Move_next()) {
 				Read_page__all2(rv, rdr, html_db_enabled);
 				return true;
 			}
-		} finally {rdr.Close(); stmt.Rls();}
+		} finally {rdr.Rls(); stmt.Rls();}
 		return false;
 	}
 	public static void Read_page__all2(Xodb_page page, Db_rdr rdr, boolean html_db_enabled) {
@@ -74,9 +74,9 @@ public class Xodb_page_tbl {
 		DataRdr rdr = DataRdr_.Null; 
 		Db_stmt stmt = Db_stmt_.Null;
 		try {
-			stmt = Db_stmt_.new_select_(provider, Tbl_name, String_.Ary(Fld_page_id));
+			stmt = Db_stmt_.new_select_(conn, Tbl_name, String_.Ary(Fld_page_id));
 			rdr = stmt
-			.Val_int_(page_id)
+			.Val_int(page_id)
 			.Exec_select();
 			while (rdr.MoveNextPeer()) {
 				Read_page__all(rv, rdr, html_db_enabled);
@@ -85,32 +85,32 @@ public class Xodb_page_tbl {
 		} finally {rdr.Rls(); stmt.Rls();}
 		return false;		
 	}
-	public void Delete_all() {provider.Exec_qry(Db_qry_.delete_tbl_(Tbl_name));}		
-	public Db_stmt Insert_stmt(Db_provider p) {
+	public void Delete_all() {conn.Exec_qry(Db_qry_.delete_tbl_(Tbl_name));}		
+	public Db_stmt Insert_stmt(Db_conn p) {
 		return Db_stmt_.new_insert_(p, Tbl_name, html_db_enabled ? Flds_insert__html_y : Flds_insert__html_n);
 	}
 	public void Insert(Db_stmt stmt, int page_id, int ns_id, byte[] ttl_wo_ns, boolean redirect, DateAdp modified_on, int page_len, int random_int, int file_idx, int html_db_id) {
 		stmt.Clear()
-		.Val_int_(page_id)
-		.Val_int_(ns_id)
-		.Val_str_(String_.new_utf8_(ttl_wo_ns))
-		.Val_byte_((byte)(redirect ? 1 : 0))
-		.Val_str_(Xto_touched_str(modified_on))
-		.Val_int_(page_len)
-		.Val_int_(random_int)
-		.Val_int_(file_idx);
+		.Val_int(page_id)
+		.Val_int(ns_id)
+		.Val_str(String_.new_utf8_(ttl_wo_ns))
+		.Val_byte((byte)(redirect ? 1 : 0))
+		.Val_str(Xto_touched_str(modified_on))
+		.Val_int(page_len)
+		.Val_int(random_int)
+		.Val_int(file_idx);
 		if (html_db_enabled)
-			stmt.Val_int_(html_db_id);
+			stmt.Val_int(html_db_id);
 		stmt.Exec_insert();
 	}
 	public int Select_id(int ns_id, byte[] ttl) {
 		DataRdr rdr = DataRdr_.Null; 
 		Db_stmt stmt = Db_stmt_.Null;
 		try {
-			stmt = Db_stmt_.new_select_(provider, Tbl_name, String_.Ary(Fld_page_ns, Fld_page_title), Fld_page_id);
+			stmt = Db_stmt_.new_select_(conn, Tbl_name, String_.Ary(Fld_page_ns, Fld_page_title), Fld_page_id);
 			rdr = stmt
-			.Val_int_(ns_id)
-			.Val_str_by_bry_(ttl)
+			.Val_int(ns_id)
+			.Val_bry_as_str(ttl)
 			.Exec_select();
 			while (rdr.MoveNextPeer()) {
 				return rdr.ReadInt(Fld_page_id);
@@ -118,7 +118,7 @@ public class Xodb_page_tbl {
 		} finally {rdr.Rls(); stmt.Rls();}
 		return Xodb_mgr_sql.Page_id_null;
 	}
-	public DataRdr Select_all(Db_provider p) {
+	public DataRdr Select_all(Db_conn p) {
 		Db_qry_select qry = Db_qry_select.new_().From_(Tbl_name).Cols_(Fld_page_id, Fld_page_title).OrderBy_asc_(Fld_page_id);
 		return p.Exec_qry_as_rdr(qry);
 	}
@@ -130,7 +130,7 @@ public class Xodb_page_tbl {
 		String[] cols = search_suggest ? Flds_select_idx : html_db_enabled ? Flds_select_all__html_y : Flds_select_all__html_n;
 		int limit = fwd ? max_results + 1 : max_results; // + 1 to get next item
 		Db_qry_select select = Db_qry_.select_cols_(Tbl_name, crt, cols).Limit_(limit).OrderBy_(Fld_page_title, fwd);
-		return select.Exec_qry_as_rdr(provider);
+		return select.Exec_qry_as_rdr(conn);
 	}
 	public void Load_ttls_for_all_pages(Cancelable cancelable, ListAdp rslt_list, Xodb_page rslt_nxt, Xodb_page rslt_prv, Int_obj_ref rslt_count, Xow_ns ns, byte[] key, int max_results, int min_page_len, int browse_len, boolean include_redirects, boolean fetch_prv_item) {
 		DataRdr rdr = DataRdr_.Null;
@@ -179,7 +179,7 @@ public class Xodb_page_tbl {
 		Db_qry qry = Db_qry_sql.rdr_("SELECT page_id, page_namespace, page_title, page_len FROM page INDEXED BY page__title WHERE page_namespace = " + Int_.Xto_str(ns.Id()) + " AND page_title BETWEEN '" + search_bgn + "' AND '" + search_end + "' ORDER BY page_len DESC LIMIT " + Int_.Xto_str(max_results) + ";");
 		DataRdr rdr = DataRdr_.Null;
 		try {
-			rdr = provider.Exec_qry_as_rdr(qry);
+			rdr = conn.Exec_qry_as_rdr(qry);
 			while (rdr.MoveNextPeer()) {
 				if (cancelable.Canceled()) return;
 				Xodb_page page = new Xodb_page();
@@ -204,7 +204,7 @@ public class Xodb_page_tbl {
 		}
 		Xodb_in_wkr_page_id wkr = new Xodb_in_wkr_page_id();
 		wkr.Init(rv, hash);
-		wkr.Select_in(provider, cancelable, db_ctx, bgn, end);
+		wkr.Select_in(conn, cancelable, db_ctx, bgn, end);
 		return true;		
 	}
 	public byte[] Select_random(Xow_ns ns) {// ns should be ns_main
@@ -213,10 +213,10 @@ public class Xodb_page_tbl {
 		Db_stmt stmt = Db_stmt_.Null;
 		byte[] rv = null;
 		try {
-			stmt = Db_stmt_.new_select_(provider, Tbl_name, String_.Ary(Fld_page_ns, Fld_page_random_int), Fld_page_title);
+			stmt = Db_stmt_.new_select_(conn, Tbl_name, String_.Ary(Fld_page_ns, Fld_page_random_int), Fld_page_title);
 			rdr = stmt
-			.Val_int_(ns.Id())
-			.Val_int_(random_int)
+			.Val_int(ns.Id())
+			.Val_int(random_int)
 			.Exec_select();
 			if (rdr.MoveNextPeer()) {
 				rv = rdr.ReadBryByStr(Fld_page_title);
@@ -232,8 +232,8 @@ public class Xodb_page_tbl {
 		Db_stmt stmt = Db_stmt_.Null;
 		search = Bry_.Replace(search, Byte_ascii.Asterisk, Byte_ascii.Percent);
 		try {
-			stmt = provider.Prepare(qry);				
-			rdr = stmt.Clear().Val_int_(Xow_ns_.Id_main).Val_str_by_bry_(search).Exec_select();
+			stmt = conn.New_stmt(qry);				
+			rdr = stmt.Clear().Val_int(Xow_ns_.Id_main).Val_bry_as_str(search).Exec_select();
 			while (rdr.MoveNextPeer()) {
 				if (cancelable.Canceled()) return;
 				Xodb_page page = new Xodb_page();
@@ -251,21 +251,21 @@ public class Xodb_page_tbl {
 		int increment_pos = rv[rv_len - 1] == Byte_ascii.Percent ? rv_len - 2 : rv_len - 1;	// increment last char, unless it is %; if %, increment one before it
 		return Bry_.Increment_last(rv, increment_pos);
 	}
-	public Db_stmt Select_for_parse_all_stmt(Db_provider p, int limit, byte redirect) {
+	public Db_stmt Select_for_parse_all_stmt(Db_conn p, int limit, byte redirect) {
 		Criteria crt = gplx.criterias.Criteria_.And_many(Db_crt_.eq_(Fld_page_ns, -1), Db_crt_.mt_(Fld_page_title, ""));
 		if (redirect != Bool_.__byte)
 			crt = gplx.criterias.Criteria_.And(crt, Db_crt_.eq_(Fld_page_is_redirect, redirect));
 		Db_qry_select qry = Db_qry_.select_().From_(Tbl_name).Cols_(html_db_enabled ? Flds_select_all__html_y : Flds_select_all__html_n)
 			.Where_(crt)
 			.Limit_(limit);
-		return p.Prepare(qry);
+		return p.New_stmt(qry);
 	}
 	public void Select_for_parse_all(Cancelable cancelable, OrderedHash rv, Db_stmt stmt, int ns, byte[] ttl, byte redirect) {
 		String ttl_str = String_.new_utf8_(ttl);
 		DataRdr rdr = DataRdr_.Null; 
 		try {
-			stmt.Clear().Val_int_(ns).Val_str_(ttl_str);
-			if (redirect != Bool_.__byte) stmt.Val_byte_(redirect);
+			stmt.Clear().Val_int(ns).Val_str(ttl_str);
+			if (redirect != Bool_.__byte) stmt.Val_byte(redirect);
 			rdr = stmt.Exec_select();
 			while (rdr.MoveNextPeer()) {
 				if (cancelable.Canceled()) return;
@@ -279,17 +279,17 @@ public class Xodb_page_tbl {
 		Xodb_in_wkr_page_title_ns wkr = new Xodb_in_wkr_page_title_ns();
 		wkr.Fill_idx_fields_only_(fill_idx_fields_only);
 		wkr.Init(ns_mgr, rv);
-		wkr.Select_in(provider, cancelable, db_ctx, bgn, end);
+		wkr.Select_in(conn, cancelable, db_ctx, bgn, end);
 	}
 	public void Select_by_ttl_in(Cancelable cancelable, OrderedHash rv, int ns_id, int bgn, int end) {
 		Xodb_in_wkr_page_title wkr = new Xodb_in_wkr_page_title();
 		wkr.Init(rv, ns_id);
-		wkr.Select_in(provider, cancelable, db_ctx, bgn, end);
+		wkr.Select_in(conn, cancelable, db_ctx, bgn, end);
 	}
 	public void Update_html_db_id(int page_id, int html_db_id) {
 		if (!html_db_enabled) throw Err_.new_("html_db not enabled");
-		Db_stmt stmt = Db_stmt_.new_update_(provider, Tbl_name, String_.Ary(Fld_page_id), Fld_page_html_db_id);
-		stmt.Val_int_(html_db_id).Val_int_(page_id).Exec_update();
+		Db_stmt stmt = Db_stmt_.new_update_(conn, Tbl_name, String_.Ary(Fld_page_id), Fld_page_html_db_id);
+		stmt.Val_int(html_db_id).Val_int(page_id).Exec_update();
 	}
 	private static final String Page_touched_fmt = "yyyyMMddHHmmss";
 	private static String Xto_touched_str(DateAdp v) {return v.XtoStr_fmt(Page_touched_fmt);}

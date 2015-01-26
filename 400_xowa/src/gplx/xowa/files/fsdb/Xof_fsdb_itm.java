@@ -101,4 +101,14 @@ public class Xof_fsdb_itm {
 	public byte Rslt_bin() {return rslt_bin;} public Xof_fsdb_itm Rslt_bin_(byte v) {this.rslt_bin = v; return this;} private byte rslt_bin;
 	public byte Rslt_cnv() {return rslt_cnv;} public Xof_fsdb_itm Rslt_cnv_(byte v) {this.rslt_cnv = v; return this;} private byte rslt_cnv;
 	public boolean Rslt_fil_created() {return rslt_fil_created;} public Xof_fsdb_itm Rslt_fil_created_(boolean v) {rslt_fil_created = v; return this;} private boolean rslt_fil_created;
+	public static byte[] Bld_key_to_bry(Bry_bfr bfr, byte[] dir_name, byte[] fil_name, boolean fil_is_orig, int fil_w, double fil_thumbtime, int fil_page) {
+		bfr	.Add(dir_name).Add_byte_pipe()
+			.Add(fil_name).Add_byte_pipe()
+			.Add_int_bool(fil_is_orig).Add_byte_pipe()
+			.Add_int_variable(fil_w).Add_byte_pipe()
+			.Add_double(fil_thumbtime).Add_byte_pipe()
+			.Add_int_variable(fil_page).Add_byte_pipe()
+			;
+		return bfr.Xto_bry_and_clear();
+	}
 }

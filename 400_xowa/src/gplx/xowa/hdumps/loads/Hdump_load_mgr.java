@@ -18,21 +18,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.hdumps.loads; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
 import gplx.core.brys.*; import gplx.core.btries.*; import gplx.dbs.*; import gplx.ios.*;
 import gplx.xowa.dbs.*; import gplx.xowa.pages.*; import gplx.xowa.hdumps.core.*; import gplx.xowa.hdumps.dbs.*; import gplx.xowa.hdumps.pages.*; import gplx.xowa.pages.skins.*; import gplx.xowa.hdumps.srls.*;
+import gplx.xowa2.gui.*;
 public class Hdump_load_mgr {
 	private Xodb_wiki_page_html_tbl text_tbl = new Xodb_wiki_page_html_tbl(); private Bry_rdr rdr = new Bry_rdr();
 	private ListAdp tmp_rows = ListAdp_.new_(), img_itms = ListAdp_.new_();
 	public Hdump_load_mgr() {}
 	public void Zip_tid_(byte v) {text_tbl.Zip_tid_(v);}
-	public void Load2(Hdump_page hpg, Db_provider provider, int page_id, Xoa_ttl page_ttl) {
-		text_tbl.Provider_(provider).Select_by_page(tmp_rows, page_id);
+	public void Load2(Xog_page hpg, Db_conn conn, int page_id, Xoa_ttl page_ttl) {
+		text_tbl.Conn_(conn).Select_by_page(tmp_rows, page_id);
 		Load_rows(hpg, page_id, Xoa_url.blank_(), page_ttl, tmp_rows);
 	}
-	public void Load(Hdump_page hpg, Xodb_fsys_mgr db_fsys_mgr, int html_db_id, int page_id, Xoa_ttl page_ttl) {
-		Db_provider provider = db_fsys_mgr.Get_by_idx(html_db_id).Provider();
-		text_tbl.Provider_(provider).Select_by_page(tmp_rows, page_id);
+	public void Load(Xog_page hpg, Xodb_fsys_mgr db_fsys_mgr, int html_db_id, int page_id, Xoa_ttl page_ttl) {
+		Db_conn conn = db_fsys_mgr.Get_by_idx(html_db_id).Conn();
+		text_tbl.Conn_(conn).Select_by_page(tmp_rows, page_id);
 		Load_rows(hpg, page_id, hpg.Page_url(), page_ttl, tmp_rows);
 	}
-	public void Load_rows(Hdump_page hpg, int page_id, Xoa_url page_url, Xoa_ttl page_ttl, ListAdp rows) {
+	public void Load_rows(Xog_page hpg, int page_id, Xoa_url page_url, Xoa_ttl page_ttl, ListAdp rows) {
 		hpg.Init(page_id, page_url, page_ttl);
 		img_itms.Clear();
 		int len = rows.Count();
@@ -45,7 +46,7 @@ public class Hdump_load_mgr {
 		}
 		rows.Clear();
 	}	private Hpg_srl_mgr srl_mgr = Hpg_srl_mgr._i_;
-	public void Load_data(Hdump_page hpg, Xodb_wiki_page_html_row row) {
+	public void Load_data(Xog_page hpg, Xodb_wiki_page_html_row row) {
 		rdr.Src_(row.Data());
 		while (!rdr.Pos_is_eos()) {
 			int tid = rdr.Read_int_to_pipe();
@@ -78,14 +79,14 @@ public class Hdump_load_mgr {
 		rdr.Pos_add_one();
 		img_itms.Add(img_itm);
 	}
-	public void Load_data_redlink(Hdump_page hpg) {
+	public void Load_data_redlink(Xog_page hpg) {
 		int len = rdr.Read_int_to_pipe();
 		int[] redlink_uids = new int[len];
 		for (int i = 0; i < len; ++i)
 			redlink_uids[i] = rdr.Read_int_to_pipe();
 		hpg.Redlink_uids_(redlink_uids);
 	}
-	public void Load_data_gallery(Hdump_page hpg) {
+	public void Load_data_gallery(Xog_page hpg) {
 		int uid = rdr.Read_int_to_pipe();
 		int box_max = rdr.Read_int_to_pipe();
 		hpg.Gly_itms().Add(uid, new Hdump_data_gallery(uid, box_max));

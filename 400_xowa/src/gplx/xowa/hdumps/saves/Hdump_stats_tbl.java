@@ -17,11 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps.saves; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
 import gplx.dbs.*; import gplx.xowa.hdumps.core.*; import gplx.xowa.html.hzips.*;
+import gplx.xowa2.gui.*;
 class Hdump_stats_tbl {
 	private Db_stmt stmt_insert;
-	public Db_provider Provider() {return provider;} public Hdump_stats_tbl Provider_(Db_provider v) {this.Rls_all(); provider = v; return this;} private Db_provider provider;
-	public Hdump_stats_tbl Create_tbl() {Sqlite_engine_.Tbl_create_and_delete(provider, Tbl_name, Tbl_sql); return this;}
-	public void Insert(Hdump_page hpg, Xow_hzip_stats hzip, int wtxt_len, int row_orig_len, int row_zip_len) {
+	public Db_conn Conn() {return conn;} public Hdump_stats_tbl Conn_(Db_conn v) {this.Rls_all(); conn = v; return this;} private Db_conn conn;
+	public Hdump_stats_tbl Create_tbl() {Sqlite_engine_.Tbl_create_and_delete(conn, Tbl_name, Tbl_sql); return this;}
+	public void Insert(Xog_page hpg, Xow_hzip_stats hzip, int wtxt_len, int row_orig_len, int row_zip_len) {
 		Hdump_module_mgr js_mgr = hpg.Module_mgr();
 		Insert
 		( hpg.Page_id(), wtxt_len, row_orig_len, row_zip_len
@@ -43,23 +44,23 @@ class Hdump_stats_tbl {
 	, int hdr_1, int hdr_2, int hdr_3, int hdr_4, int hdr_5, int hdr_6
 	, int img_full
 	) {
-		if (stmt_insert == null) stmt_insert = Db_stmt_.new_insert_(provider, Tbl_name, Flds__all);
+		if (stmt_insert == null) stmt_insert = Db_stmt_.new_insert_(conn, Tbl_name, Flds__all);
 		try {
 			stmt_insert.Clear()
-			.Val_int_(page_id).Val_int_(wtxt_len).Val_int_(row_orig_len).Val_int_(row_zip_len)
-			.Val_int_(body_len).Val_int_(display_ttl_len).Val_int_(content_sub_len).Val_int_(sidebar_div_len)
-			.Val_byte_by_bool_(js_math).Val_byte_by_bool_(js_imap).Val_byte_by_bool_(js_packed).Val_byte_by_bool_(js_hiero)
-			.Val_int_(a_rhs).Val_int_(lnki_text_n).Val_int_(lnki_text_y)
-			.Val_int_(lnke_txt).Val_int_(lnke_brk_text_n).Val_int_(lnke_brk_text_y)
-			.Val_int_(hdr_1).Val_int_(hdr_2).Val_int_(hdr_3).Val_int_(hdr_4).Val_int_(hdr_5).Val_int_(hdr_6)
-			.Val_int_(img_full)
+			.Val_int(page_id).Val_int(wtxt_len).Val_int(row_orig_len).Val_int(row_zip_len)
+			.Val_int(body_len).Val_int(display_ttl_len).Val_int(content_sub_len).Val_int(sidebar_div_len)
+			.Val_bool_as_byte(js_math).Val_bool_as_byte(js_imap).Val_bool_as_byte(js_packed).Val_bool_as_byte(js_hiero)
+			.Val_int(a_rhs).Val_int(lnki_text_n).Val_int(lnki_text_y)
+			.Val_int(lnke_txt).Val_int(lnke_brk_text_n).Val_int(lnke_brk_text_y)
+			.Val_int(hdr_1).Val_int(hdr_2).Val_int(hdr_3).Val_int(hdr_4).Val_int(hdr_5).Val_int(hdr_6)
+			.Val_int(img_full)
 			.Exec_insert();
 		}
 		catch (Exception exc) {stmt_insert = null; throw Err_.err_(exc, "stmt failed");} // must reset stmt, else next call will fail
 	}
 	public void Rls_all() {
 		if (stmt_insert != null) {stmt_insert.Rls(); stmt_insert = null;}
-		provider = null;
+		conn = null;
 	}
 	public static final String Tbl_name = "hdump_stats"
 	, Fld_page_id = "page_id", Fld_wtxt_len = "wtxt_len", Fld_row_orig_len = "row_orig_len", Fld_row_zip_len = "row_zip_len"
@@ -67,7 +68,7 @@ class Hdump_stats_tbl {
 	, Fld_js_math = "js_math", Fld_js_imap = "js_imap", Fld_js_packed = "js_packed", Fld_js_hiero = "js_hiero"
 	, Fld_a_rhs = "a_rhs", Fld_lnki_text_n = "lnki_text_n", Fld_lnki_text_y = "lnki_text_y"
 	, Fld_lnke_txt = "lnke_txt", Fld_lnke_brk_text_n = "lnke_brk_text_n", Fld_lnke_brk_text_y = "lnke_brk_text_y"
-	, Fld_hdr_1 = "hdr_1", Fld_hdr_2 = "hdr_2", Fld_hdr_3 = "hdr_3", Fld_hdr_4 = "hdr_", Fld_hdr_5 = "hdr_", Fld_hdr_6 = "hdr_6"
+	, Fld_hdr_1 = "hdr_1", Fld_hdr_2 = "hdr_2", Fld_hdr_3 = "hdr_3", Fld_hdr_4 = "hdr_4", Fld_hdr_5 = "hdr_5", Fld_hdr_6 = "hdr_6"
 	, Fld_img_full = "img_full"
 	;
 	private static final String[] Flds__all = new String[] 

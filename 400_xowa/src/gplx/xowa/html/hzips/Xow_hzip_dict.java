@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 class Xow_hzip_dict {// SERIALIZED
-	public static final byte Escape = Byte_.int_(255);
+	public static final byte Escape = Byte_.By_int(255);
 	public static final byte[] Escape_bry = Bry_.ints_(255);
 	public static final byte
 	  Tid_a_rhs					= 0

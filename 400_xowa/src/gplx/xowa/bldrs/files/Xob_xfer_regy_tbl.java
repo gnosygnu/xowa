@@ -18,13 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.dbs.*; import gplx.xowa.bldrs.oimgs.*;
 public class Xob_xfer_regy_tbl {
-	public static void Create_table(Db_provider p) {Sqlite_engine_.Tbl_create_and_delete(p, Tbl_name, Tbl_sql);}
-	public static void Create_data(Gfo_usr_dlg usr_dlg, Db_provider p) {
+	public static void Create_table(Db_conn p) {Sqlite_engine_.Tbl_create_and_delete(p, Tbl_name, Tbl_sql);}
+	public static void Create_data(Gfo_usr_dlg usr_dlg, Db_conn p) {
 		p.Exec_sql(Sql_create_data_orig);
 		p.Exec_sql(Sql_create_data_thumb);
 	}
-	public static void Create_index(Gfo_usr_dlg usr_dlg, Db_provider p)	{Sqlite_engine_.Idx_create(usr_dlg, p, Xodb_db_file.Name__file_make, Idx_lnki_page_id, Idx_lnki_ttl);}
-	public static DataRdr Select(Db_provider p, byte repo_id, byte[] ttl, int limit) {
+	public static void Create_index(Gfo_usr_dlg usr_dlg, Db_conn p)	{Sqlite_engine_.Idx_create(usr_dlg, p, Xodb_db_file.Name__file_make, Idx_lnki_page_id, Idx_lnki_ttl);}
+	public static DataRdr Select(Db_conn p, byte repo_id, byte[] ttl, int limit) {
 		Db_qry qry = Db_qry_.select_().Cols_all_()
 			.From_(Tbl_name)
 			.Where_(gplx.criterias.Criteria_.And_many(Db_crt_.mte_(Fld_orig_repo, repo_id), Db_crt_.mt_(Fld_lnki_ttl, String_.new_utf8_(ttl)), Db_crt_.eq_(Fld_xfer_status, 0)))
@@ -33,8 +33,8 @@ public class Xob_xfer_regy_tbl {
 			;
 		return p.Exec_qry_as_rdr(qry);
 	}
-	public static Db_stmt Select_by_page_id_stmt(Db_provider p) {return p.Prepare(Db_qry_sql.rdr_(Sql_select));}
-	public static DataRdr Select_by_page_id(Db_stmt stmt, int page_id, int limit) {return stmt.Val_int_(page_id).Val_int_(limit).Exec_select();}
+	public static Db_stmt Select_by_page_id_stmt(Db_conn p) {return p.New_stmt(Db_qry_sql.rdr_(Sql_select));}
+	public static DataRdr Select_by_page_id(Db_stmt stmt, int page_id, int limit) {return stmt.Val_int(page_id).Val_int(limit).Exec_select();}
 	private static final String
 	  Sql_select = String_.Concat_lines_nl
 		( "SELECT   *"
@@ -50,7 +50,7 @@ public class Xob_xfer_regy_tbl {
 		, "WHERE    xfer_status  =  0"
 		)
 	;
-	public static DataRdr Select_by_lnki_page_id(Db_provider p, int lnki_page_id, int select_interval) {
+	public static DataRdr Select_by_lnki_page_id(Db_conn p, int lnki_page_id, int select_interval) {
 		Db_qry qry = Db_qry_.select_().Cols_all_()
 			.From_(Tbl_name)
 			.Where_(gplx.criterias.Criteria_.And_many(Db_crt_.eq_(Fld_xfer_status, 0), Db_crt_.mte_(Fld_lnki_page_id, lnki_page_id)))
@@ -59,7 +59,7 @@ public class Xob_xfer_regy_tbl {
 			;
 		return p.Exec_qry_as_rdr(qry);
 	}
-	public static int Select_total_pending(Db_provider p) {
+	public static int Select_total_pending(Db_conn p) {
 		DataRdr rdr = p.Exec_sql_as_rdr(Sql_select_total_pending);
 		int rv = 0;
 		if (rdr.MoveNextPeer())
@@ -132,14 +132,14 @@ public class Xob_xfer_regy_tbl {
 	public static byte Status_todo = 0, Status_pass = 1, Status_fail = 2, Status_ignore_processed = 3;
 }
 class Xob_xfer_regy_log_tbl {
-	public static void Create_table(Db_provider p) {Sqlite_engine_.Tbl_create_and_delete(p, Tbl_name, Tbl_sql);}
-	public static Db_stmt Insert_stmt(Db_provider p) {return Db_stmt_.new_insert_(p, Tbl_name, Fld_lnki_id, Fld_xfer_status, Fld_xfer_bin_tid, Fld_xfer_bin_msg);}
+	public static void Create_table(Db_conn p) {Sqlite_engine_.Tbl_create_and_delete(p, Tbl_name, Tbl_sql);}
+	public static Db_stmt Insert_stmt(Db_conn p) {return Db_stmt_.new_insert_(p, Tbl_name, Fld_lnki_id, Fld_xfer_status, Fld_xfer_bin_tid, Fld_xfer_bin_msg);}
 	public static void Insert(Db_stmt stmt, byte status, int id, byte wkr_tid, String wkr_msg) {
 		stmt.Clear()
-		.Val_int_(id)
-		.Val_byte_(status)
-		.Val_byte_(wkr_tid)
-		.Val_str_(wkr_msg)
+		.Val_int(id)
+		.Val_byte(status)
+		.Val_byte(wkr_tid)
+		.Val_str(wkr_msg)
 		.Exec_insert();
 	}
 	private static final String Tbl_sql = String_.Concat_lines_nl

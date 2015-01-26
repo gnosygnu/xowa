@@ -20,11 +20,11 @@ import org.junit.*;
 import gplx.criterias.*;
 public class Db_qry_dml_tst {
 	@Test  public void Delete_basic() {
-		tst_XtoSql(Db_qry_delete.new_().BaseTable_("tbl0").Where_(Db_crt_.eq_("fld0", "val0"))
+		tst_XtoSql(Db_qry_delete.new_("tbl0", Db_crt_.eq_("fld0", "val0"))
 				, "DELETE FROM tbl0 WHERE fld0='val0'");
 	}
 	@Test  public void Insert_basic() {
-		tst_XtoSql(Db_qry_insert.new_().BaseTable_("tbl0").Arg_("id", 0).Arg_("name", "me").Arg_("time", DateAdp_.parse_gplx("2007-12-23"))
+		tst_XtoSql(new Db_qry_insert("tbl0").Arg_("id", 0).Arg_("name", "me").Arg_("time", DateAdp_.parse_gplx("2007-12-23"))
 				, "INSERT INTO tbl0 (id, name, time) VALUES (0, 'me', '2007-12-23 00:00:00.000')");
 	}
 	@Test  public void Update_basic() {
@@ -40,5 +40,5 @@ public class Db_qry_dml_tst {
 		qry.Where_(Criteria_.And(Db_crt_.eq_("id", 0), Db_crt_.mt_("startTime", DateAdp_.parse_gplx("2005-01-01"))));
 		tst_XtoSql(qry, "UPDATE tbl0 SET id=1, name='me', startTime='2007-12-23 00:00:00.000' WHERE (id=0 AND startTime>'2005-01-01 00:00:00.000')");
 	}		
-	void tst_XtoSql(Db_qry qry, String expd) {Tfds.Eq(expd, qry.XtoSql());}
+	void tst_XtoSql(Db_qry qry, String expd) {Tfds.Eq(expd, qry.Xto_sql());}
 }

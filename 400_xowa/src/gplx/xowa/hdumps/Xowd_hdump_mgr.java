@@ -18,8 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.hdumps; import gplx.*; import gplx.xowa.*;
 import gplx.intl.*; import gplx.dbs.*; import gplx.xowa.html.hzips.*;
 import gplx.xowa.hdumps.core.*; import gplx.xowa.hdumps.loads.*; import gplx.xowa.hdumps.htmls.*; import gplx.xowa.apps.fsys.*;
+import gplx.xowa2.apps.*; import gplx.xowa2.wikis.*; import gplx.xowa2.wikis.data.*; import gplx.xowa2.gui.*;
 public class Xowd_hdump_mgr {
-	private final Xoav_app app; private final Xowv_wiki wiki; private final Xowv_db_mgr wiki_db_mgr;
+	private final Xoav_app app; private final Xowv_wiki wiki; private final Xodata_db_mgr wiki_db_mgr;
 	private Xodb_page dbpg = new Xodb_page();
 	private Hdump_load_mgr load_mgr = new Hdump_load_mgr();
 	private Hdump_html_body html_body = new Hdump_html_body();
@@ -27,22 +28,21 @@ public class Xowd_hdump_mgr {
 		this.app = app; this.wiki = wiki; this.wiki_db_mgr = wiki.Db_mgr();
 		html_body.Init_by_app(app.Usr_dlg(), app.Fsys_mgr(), app.Utl_encoder_fsys());
 	}	
-	public void Load(Hdump_page rv, byte[] ttl_bry) {
-		Xoa_ttl ttl = wiki.Ttl_parse(ttl_bry);
-		wiki_db_mgr.Tbl_mgr().Tbl__page().Select_by_ttl(dbpg, app.Db_mgr().Get(wiki_db_mgr.Key__core()), ttl.Ns(), ttl.Page_db());
+	public void Get_by_ttl(Xog_page rv, Gfo_url url, Xoa_ttl ttl) {
+		wiki_db_mgr.Tbl_page_regy().Select_by_ttl(dbpg, ttl.Ns(), ttl.Page_db());
 		if (dbpg.Redirect_id() != -1) Select_by_id(rv, dbpg);
 		if (dbpg.Html_db_id() == -1) return;	// should return "not found" message
-		load_mgr.Load2(rv, app.Db_mgr().Get(wiki_db_mgr.Key_by_idx(dbpg.Html_db_id())), dbpg.Id(), ttl);
+		load_mgr.Load2(rv, Db_conn_pool.I.Get_or_new(wiki_db_mgr.Key_by_idx(dbpg.Html_db_id())), dbpg.Id(), ttl);
 		Bry_bfr bfr = app.Utl_bfr_mkr().Get_m001();
 		html_body.Init_by_page(wiki.Domain_bry(), rv).Write(bfr);
-		wiki.Hzip_mgr().Load(bfr, ttl_bry, bfr.Xto_bry_and_clear());
+		wiki.Hzip_mgr().Load(bfr, ttl.Page_db(), bfr.Xto_bry_and_clear());
 		rv.Page_body_(bfr.Mkr_rls().Xto_bry_and_clear());
 	}
-	private void Select_by_id(Hdump_page hpg, Xodb_page dbpg) {
+	private void Select_by_id(Xog_page hpg, Xodb_page dbpg) {
 		int redirect_count = 0;
 		while (redirect_count < 5) {
 			int redirect_id = dbpg.Redirect_id();
-			wiki_db_mgr.Tbl_mgr().Tbl__page().Select_by_id(dbpg, app.Db_mgr().Get(wiki_db_mgr.Key__core()), redirect_id);
+			wiki_db_mgr.Tbl_page_regy().Select_by_id(dbpg, redirect_id);
 			if (redirect_id == -1) break;
 		}
 	}

@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 import java.math.BigDecimal;import java.math.MathContext;import java.math.RoundingMode;public class DecimalAdp_ {
+	public static final Class<?> Cls_ref_type = DecimalAdp.class;
 	public static DecimalAdp as_(Object obj) {return obj instanceof DecimalAdp ? (DecimalAdp)obj : null;}
 	public static final DecimalAdp Zero = new DecimalAdp(0);
 	public static final DecimalAdp One = new DecimalAdp(1);

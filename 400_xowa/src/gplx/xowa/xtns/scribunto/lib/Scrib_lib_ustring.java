@@ -95,7 +95,8 @@ public class Scrib_lib_ustring implements Scrib_lib {
 		return bgn;
 	}
 	public boolean Match(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		String text = args.Cast_str_or_null(0); if (text == null) return rslt.Init_many_list(ListAdp_.Null); // if no text is passed, do not fail; return empty; EX:d:changed; DATE:2014-02-06 
+		String text = args.Xstr_str_or_null(0);		// Module can pass raw ints; PAGE:en.w:Budget_of_the_European_Union; DATE:2015-01-22
+		if (text == null) return rslt.Init_many_list(ListAdp_.Null); // if no text is passed, do not fail; return empty; EX:d:changed; DATE:2014-02-06 
 		String regx = regx_converter.Parse(args.Cast_bry_or_null(1), Scrib_regx_converter.Anchor_G);
 		int bgn = args.Cast_int_or(2, 1);
 		bgn = Bgn_adjust(text, bgn);
@@ -182,9 +183,13 @@ class Scrib_lib_ustring_gsub_mgr {
 	}
 	private void Identify_repl(Object repl_obj) {
 		Class<?> repl_type = repl_obj.getClass();
-		if		(Object_.Eq(repl_type, String.class)) {
+		if		(Object_.Eq(repl_type, String_.Cls_ref_type)) {
 			tmp_repl_tid = Repl_tid_string;
 			tmp_repl_bry = Bry_.new_utf8_((String)repl_obj);
+		}
+		else if	(Object_.Eq(repl_type, Int_.Cls_ref_type)) {	// NOTE:@replace sometimes int; PAGE:en.d:λύω; DATE:2014-09-02
+			tmp_repl_tid = Repl_tid_string;
+			tmp_repl_bry = Bry_.new_utf8_(Int_.Xto_str(Int_.cast_(repl_obj)));
 		}
 		else if	(Object_.Eq(repl_type, KeyVal[].class)) {
 			tmp_repl_tid = Repl_tid_table;
@@ -203,10 +208,6 @@ class Scrib_lib_ustring_gsub_mgr {
 		else if	(Object_.Eq(repl_type, Scrib_lua_proc.class)) {
 			tmp_repl_tid = Repl_tid_luacbk;
 			repl_func = (Scrib_lua_proc)repl_obj;
-		}
-		else if	(Object_.Eq(repl_type, Int_.ClassOf)) {	// NOTE:@replace sometimes int; PAGE:en.d:λύω; DATE:2014-09-02
-			tmp_repl_tid = Repl_tid_string;
-			tmp_repl_bry = Bry_.new_utf8_(Int_.Xto_str(Int_.cast_(repl_obj)));
 		}
 		else throw Err_.unhandled(ClassAdp_.NameOf_type(repl_type));
 	}

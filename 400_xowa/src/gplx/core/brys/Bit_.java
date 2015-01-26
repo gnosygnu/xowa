@@ -62,6 +62,44 @@ public class Bit_ {
 			v = factor == 0 ? v : (v % factor);	// NOTE: if 0, do not do modulus or else div by zero
 		}
 	}
+	public static byte Xto_byte(byte[] pow_ary, byte... val_ary) {
+		int pow_ary_last = pow_ary.length - 1;
+		int val = 0;
+		for (int i = pow_ary_last; i > -1; --i)
+			val += pow_ary[i] * val_ary[i];
+		return (byte)val;
+	}
+	public static void Xto_bry(byte[] rv, byte[] pow_ary, byte val) {
+		int pow_ary_len = pow_ary.length;
+		int rv_len = rv.length;
+		for (int i = 0; i < pow_ary_len; i++) {
+			if (i >= rv_len) break;
+			rv[i] = (byte)(val / pow_ary[i]);
+			int factor = pow_ary[i] * rv[i];
+			val = (byte)(factor == 0 ? val : (val % factor));	// NOTE: if 0, do not do modulus or else div by zero
+		}
+	}
+	public static int Shift_lhs(int val, int shift) {return val << shift;}
+	public static int Shift_rhs(int val, int shift) {return val >> shift;}
+	public static int Shift_lhs_to_int(int[] shift_ary, int... val_ary) {
+		int val_len = val_ary.length; if (val_len > shift_ary.length) throw Err_.new_("vals must be less than shifts; vals={0} shifts=~{1}");
+		int rv = 0;
+		for (int i = 0; i < val_len; ++i) {
+			int val = val_ary[i];
+			int shift = shift_ary[i];
+			rv += val << shift;
+		}
+		return rv;
+	}
+	public static void Shift_rhs_to_ary(int[] rv, int[] shift_ary, int val) {
+		int shift_len = shift_ary.length;
+		for (int i = shift_len - 1; i > - 1; --i) {
+			int shift = shift_ary[i];
+			int itm = val >> shift;				
+			rv[i] = itm;
+			val -= (itm << shift);
+		}
+	}
 	public static int Xto_int_date_short(int[] val_ary) {
 		val_ary[0] -= 1900;
 		return Xto_int(Pow_ary_date_short, val_ary);

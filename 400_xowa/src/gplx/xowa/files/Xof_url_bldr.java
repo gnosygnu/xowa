@@ -35,24 +35,42 @@ public class Xof_url_bldr {
 		return this;
 	}
 	public Xof_url_bldr Init_for_src_file(byte mode, Xof_repo_itm repo, byte[] ttl, byte[] md5, Xof_ext ext, int file_w, double time, int page) {
-		this.wmf_dir_hive = Bool_.Y; this.file_is_thumb = mode == Xof_repo_itm.Mode_thumb;
-		this.dir_spr = repo.Dir_spr(); this.root = repo.Root(); this.ttl = repo.Gen_name_src(ttl); this.area = repo.Mode_names()[mode];
-		this.md5 = md5; this.ext = ext; this.file_w = file_w; this.time = time; this.page = page;
-		this.wmf_protocol_is_file = repo.Tarball();
+		this.wmf_dir_hive = Bool_.Y; this.wmf_protocol_is_file = repo.Tarball();
+		this.dir_spr = repo.Dir_spr(); this.root = repo.Root(); this.area = repo.Mode_names()[mode];
+		this.ttl = repo.Gen_name_src(ttl); this.md5 = md5; this.ext = ext;
+		this.file_is_thumb = mode == Xof_repo_itm.Mode_thumb; this.file_w = file_w; this.time = time; this.page = page;
 		return this;
 	}
+//		public Xof_url_bldr Init_for_trg_file(byte mode, Xof_repo_itm repo, byte[] ttl, byte[] md5, Xof_ext ext, int file_w, double time, int page) {
+//			this.dir_spr = repo.Dir_spr(); this.root = repo.Root(); this.wmf_dir_hive = Bool_.N;
+//			this.area = repo.Mode_names()[mode]; this.md5_dir_depth = repo.Dir_depth();
+//			this.ttl = repo.Gen_name_trg(ttl, md5, ext); this.md5 = md5; this.ext = ext;
+//			this.file_is_thumb = mode == Xof_repo_itm.Mode_thumb; this.file_w = file_w; this.time = time; this.page = page;
+//			return this;
+//		}
+//		public Xof_url_bldr Init_for_trg_html(byte mode, Xof_repo_itm repo, byte[] ttl, byte[] md5, Xof_ext ext, int file_w, double time, int page) {
+//			this.dir_spr = Byte_ascii.Slash; this.root = repo.Root_http(); this.wmf_dir_hive = Bool_.N;
+//			this.area = repo.Mode_names()[mode]; this.md5_dir_depth = repo.Dir_depth();
+//			this.ttl = repo.Gen_name_trg(ttl, md5, ext); this.md5 = md5; this.ext = ext;
+//			this.file_is_thumb = mode == Xof_repo_itm.Mode_thumb; this.file_w = file_w; this.time = time; this.page = page;
+//			return this;
+//		}
 	public Xof_url_bldr Init_for_trg_file(byte mode, Xof_repo_itm repo, byte[] ttl, byte[] md5, Xof_ext ext, int file_w, double time, int page) {
-		this.wmf_dir_hive = Bool_.N; this.file_is_thumb = mode == Xof_repo_itm.Mode_thumb;
-		this.dir_spr = repo.Dir_spr(); this.root = repo.Root(); this.ttl = repo.Gen_name_trg(ttl, md5, ext); this.area = repo.Mode_names()[mode];
-		this.md5 = md5; this.ext = ext; this.file_w = file_w; this.time = time; this.page = page;
-		this.md5_dir_depth = repo.Dir_depth();
-		return this;
+		return Init(Bool_.N, Bool_.N, repo.Dir_spr(), repo.Root()
+			, repo.Mode_names()[mode], repo.Dir_depth(), repo.Gen_name_trg(ttl, md5, ext), md5, ext, mode, file_w, time, page);
 	}
 	public Xof_url_bldr Init_for_trg_html(byte mode, Xof_repo_itm repo, byte[] ttl, byte[] md5, Xof_ext ext, int file_w, double time, int page) {
-		this.wmf_dir_hive = Bool_.N; this.file_is_thumb = mode == Xof_repo_itm.Mode_thumb;
-		this.dir_spr = Byte_ascii.Slash; this.root = repo.Root_http(); this.ttl = repo.Gen_name_trg(ttl, md5, ext); this.area = repo.Mode_names()[mode];
-		this.md5 = md5; this.ext = ext; this.file_w = file_w; this.time = time; this.page = page;
-		this.md5_dir_depth = repo.Dir_depth();
+		return Init(Bool_.N, Bool_.N, Byte_ascii.Slash, repo.Root_http()
+			, repo.Mode_names()[mode], repo.Dir_depth(), repo.Gen_name_trg(ttl, md5, ext), md5, ext, mode, file_w, time, page);
+	}
+	public Xof_url_bldr Init(boolean wmf_dir_hive, boolean wmf_protocol_is_file, byte dir_spr
+		, byte[] root, byte[] area, int md5_dir_depth
+		, byte[] ttl, byte[] md5, Xof_ext ext
+		, byte file_mode, int file_w, double time, int page) {
+		this.wmf_dir_hive = wmf_dir_hive; this.wmf_protocol_is_file = wmf_protocol_is_file; this.dir_spr = dir_spr;
+		this.root = root;  this.area = area; this.md5_dir_depth = md5_dir_depth;
+		this.ttl = ttl; this.md5 = md5; this.ext = ext;
+		this.file_is_thumb = file_mode == Xof_repo_itm.Mode_thumb; this.file_w = file_w; this.time = time; this.page = page;			
 		return this;
 	}
 	public byte[] Xto_bry() {Bld(); byte[] rv = bfr.Xto_bry_and_clear(); Clear(); return rv;}
@@ -181,4 +199,5 @@ public class Xof_url_bldr {
 		rv.time_dlm = Byte_ascii.Dash;
 		return rv;
 	}
+	public static final int Md5_dir_depth_2 = 2;
 }

@@ -63,7 +63,7 @@ public abstract class Xob_categorylinks_base extends Xob_sql_dump_base implement
 			fld_wtr.Write_int_base85_len5_fld(cur_id);
 			fld_wtr.Write_int_base85_len5_fld(cur_date);
 		}
-	}	int cur_id = -1, cur_date = -1; byte[] cur_ctg = null, cur_sortkey = null; byte cur_tid = Byte_.MaxValue_127; boolean cur_collation_is_uca; int[] cur_modified_on = new int[7];
+	}	int cur_id = -1, cur_date = -1; byte[] cur_ctg = null, cur_sortkey = null; byte cur_tid = Byte_.Max_value_127; boolean cur_collation_is_uca; int[] cur_modified_on = new int[7];
 	@Override public void Cmd_end() {
 		Xobdc_merger.Basic(bldr.Usr_dlg(), dump_url_gen, temp_dir.GenSubDir("sort"), sort_mem_len, Xoctg_link_sql_sorter._, Io_line_rdr_key_gen_.noop, Make_sort_cmd(sql_parser));
 		wiki.Html_mgr().Importing_ctgs_(Bool_.N);

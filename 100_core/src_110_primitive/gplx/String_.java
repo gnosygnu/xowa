@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 import java.lang.*;
 public class String_ implements GfoInvkAble {
-	public static final Class<?> ClassOf = String.class;
-	public static final String Cls_name = "str" + "ing";
+	public static final Class<?> Cls_ref_type = String.class;
+	public static final String Cls_val_name = "str" + "ing";
 	public static final int Find_none = -1, Pos_neg1 = -1;
 	public static final String Null = null, Empty = "", Null_mark = "<<NULL>>", Tab = "\t", Lf = "\n", CrLf = "\r\n";
 	public static String cast_(Object v) {return (String)v;}

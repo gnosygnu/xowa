@@ -102,7 +102,9 @@ public class Byte_ascii {
 	, Quote_bry				= new byte[] {Byte_ascii.Quote}
 	, Pipe_bry				= new byte[] {Byte_ascii.Pipe}
 	, Underline_bry			= new byte[] {Byte_ascii.Underline}
+	, Slash_bry				= new byte[] {Byte_ascii.Slash}
 	, Asterisk_bry			= new byte[] {Byte_ascii.Asterisk}
+	, Dash_bry				= new byte[] {Byte_ascii.Dash}
 	, Space_bry				= new byte[] {Byte_ascii.Space}
 	;
 }

@@ -17,5 +17,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.wiki_orig; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 public class Xof_wiki_orig_wkr_ {
-	public static final byte Tid_null = Byte_.MaxValue_127, Tid_noop = 0, Tid_found_orig = 1, Tid_missing_reg = 2, Tid_missing_qry = 3, Tid_missing_bin = 4;
+	public static final byte Tid_null = Byte_.Max_value_127, Tid_noop = 0, Tid_found_orig = 1, Tid_missing_reg = 2, Tid_missing_qry = 3, Tid_missing_bin = 4;
 }

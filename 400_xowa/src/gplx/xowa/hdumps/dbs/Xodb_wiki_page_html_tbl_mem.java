@@ -41,5 +41,5 @@ public class Xodb_wiki_page_html_tbl_mem extends Xodb_wiki_page_html_tbl { 	priv
 		}
 		return rv;
 	}
-	public static final Db_provider Null_provider = null;
+	public static final Db_conn Null_provider = null;
 }

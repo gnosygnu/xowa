@@ -59,7 +59,7 @@ public abstract class Xob_search_base extends Xob_itm_dump_base implements Xobd_
 		if (delete_temp) Io_mgr._.DeleteDirDeep(temp_dir);
 		if (wiki.Db_mgr().Tid() == Xodb_mgr_sql.Tid_sql) {
 			Xodb_fsys_mgr db_fs = wiki.Db_mgr_as_sql().Fsys_mgr();
-			wiki.Db_mgr_as_sql().Tbl_xowa_db().Commit_all(db_fs.Provider_core(), db_fs.Files_ary());	// always save files now; need to commit created search_db_idx to xowa_db, else will be reused by ctg v2; DATE:2014-02-07
+			wiki.Db_mgr_as_sql().Tbl_xowa_db().Commit_all(db_fs.Conn_core(), db_fs.Files_ary());	// always save files now; need to commit created search_db_idx to xowa_db, else will be reused by ctg v2; DATE:2014-02-07
 		}
 	}
 	public void Wkr_print() {}

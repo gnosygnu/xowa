@@ -72,11 +72,14 @@ public class Xow_hzip_itm__anchor_tst {
 		fxt.Test_save(brys, "<a xtid='a_lnke_brk_n' class=\"external autonumber\"  rel=\"nofollow\" href=\"http://a.org\">[123]</a>");
 		fxt.Test_load(brys, "<a rel=\"nofollow\" class=\"external autonumber\" href=\"http://a.org\">[123]</a>");
 	}
-	@Test   public void Html_ttl() {
+	@Test   public void Html_lnki_ttl() {
 		fxt.Test_html("[[A]]", "<a xtid='a_lnki_text_n' href=\"/wiki/A\" xowa_redlink='1'>A</a>");
 	}
-	@Test   public void Html_capt() {
+	@Test   public void Html_lnki_capt() {
 		fxt.Test_html("[[A|a]]", "<a xtid='a_lnki_text_y' href=\"/wiki/A\" xowa_redlink='1'>a</a>");
+	}
+	@Test   public void Html_lnki_trail() {
+		fxt.Test_html("[[A]]b", "<a xtid='a_lnki_text_y' href=\"/wiki/A\" xowa_redlink='1'>Ab</a>");
 	}
 	@Test   public void Html_lnke_txt() {
 		fxt.Test_html("http://a.org", "<a xtid='a_lnke_txt' href=\"http://a.org\" class=\"external text\" rel=\"nofollow\">http://a.org</a>");

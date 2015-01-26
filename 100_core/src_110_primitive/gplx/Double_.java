@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public class Double_ {
-	public static final Class<?> ClassOf = Double.class; 
-	public static final String Cls_name = "double";
+	public static final Class<?> Cls_ref_type = Double.class; 
+	public static final String Cls_val_name = "double";
 	public static final double Inf_pos = Double.POSITIVE_INFINITY;;
 	public static final double NaN = Double.NaN;;					
 	public static final byte[] NaN_bry = Bry_.new_ascii_("NaN");

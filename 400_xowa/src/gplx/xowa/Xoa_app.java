@@ -31,7 +31,7 @@ public class Xoa_app implements GfoInvkAble {
 		cfg_mgr = new Xoa_cfg_mgr(this);
 		api_root = new Xoapi_root(this);
 		url_cmd_eval = new Xoa_fsys_eval(this);
-		fsys_mgr = new Xoa_fsys_mgr(root_dir, bin_dir_name);
+		fsys_mgr = new Xoa_fsys_mgr(bin_dir_name, root_dir);
 		launcher = new Launcher_app_mgr(this);
 		fsys_mgr.Init_by_app(launcher);
 		user = new Xou_user(this, user_dir);
@@ -129,6 +129,7 @@ public class Xoa_app implements GfoInvkAble {
 	public Xof_math_subst_regy	Math_subst_regy() {return math_subst_regy;} private Xof_math_subst_regy math_subst_regy = new Xof_math_subst_regy();
 	public Gfo_usr_dlg			Gui_wtr() {return gui_mgr.Browser_win().Usr_dlg();}
 	public Launcher_app_mgr		Launcher() {return launcher;} private Launcher_app_mgr launcher;
+	public Gfo_async_mgr		Async_mgr() {return async_mgr;} private Gfo_async_mgr async_mgr = new Gfo_async_mgr();
 
 	public Xoi_setup_mgr		Setup_mgr() {return setup_mgr;} private Xoi_setup_mgr setup_mgr;
 	public Gfo_msg_log			Msg_log() {return msg_log;} private Gfo_msg_log msg_log = new Gfo_msg_log(Xoa_app_.Name);

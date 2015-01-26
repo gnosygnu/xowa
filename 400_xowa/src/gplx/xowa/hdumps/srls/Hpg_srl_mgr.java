@@ -17,12 +17,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps.srls; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
 import gplx.xowa.hdumps.core.*; 
+import gplx.xowa2.gui.*;
 public class Hpg_srl_mgr {
 	private Int_obj_ref count_ref = Int_obj_ref.zero_();
 	public Hpg_srl_mgr(Hpg_srl_itm[] itm_ary) {this.itm_ary = itm_ary;}
 	public Hpg_srl_itm		Itm_body()	{return itm_body;} private final Hpg_srl_itm itm_body = new Hpg_srl_itm__body();
 	public Hpg_srl_itm[]	Itm_ary()	{return itm_ary;} private final Hpg_srl_itm[] itm_ary;
-	public void Load(Hdump_page hpg, byte[] bry) {
+	public void Load(Xog_page hpg, byte[] bry) {
 		if (bry == null) return;
 		int bry_len = bry.length; if (bry_len == 0) return;
 		int pos = itm_body.Load(hpg, bry, bry_len, 0, count_ref);				// assume every page has a body; saves 1 byte by not specifying tid for body
@@ -32,7 +33,7 @@ public class Hpg_srl_mgr {
 			pos += itm_parser.Load(hpg, bry, bry_len, pos + 1, count_ref) + 1;	// +1 to skip tid
 		}
 	}
-	public void Save(Hdump_page hpg, Bry_bfr bfr) {
+	public void Save(Xog_page hpg, Bry_bfr bfr) {
 		for (Hpg_srl_itm itm : itm_ary)
 			itm.Save(hpg, bfr);
 	}

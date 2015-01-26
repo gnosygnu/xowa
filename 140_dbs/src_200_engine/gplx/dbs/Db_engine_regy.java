@@ -27,7 +27,7 @@ public class Db_engine_regy {
 			.Add(Sqlite_engine._)
 			;
 	}
-	public Db_engine_regy	Add(Db_engine engine) {hash.Add(engine.Key(), engine); return this;}
+	public Db_engine_regy	Add(Db_engine engine) {hash.Add(engine.Tid(), engine); return this;}
 	public Db_engine		Get(String key) {return (Db_engine)hash.FetchOrFail(key);}
 	public static final Db_engine_regy _ = new Db_engine_regy(1);
 }

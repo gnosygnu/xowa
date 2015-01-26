@@ -107,7 +107,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 		app.Gui_mgr().Search_suggest_mgr().Cancel();	// cancel pending search_suggest calls
 		app.Log_wtr().Queue_enabled_(true);
 		usr_dlg.Clear();
-		Xow_wiki wiki = url.Wiki();
+		Xow_wiki wiki = app.Wiki_mgr().Get_by_key_or_null(url.Wiki_bry());
 		wiki.Init_assert();	// NOTE: assert wiki.Init before parsing; needed b/c lang (with lang-specific ns) is only loaded on init, and parse Xoa_ttl.parse_ will fail below; EX:pt.wikipedia.org/wiki/Wikipedia:P�gina principal
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, url.Page_bry());
 		if (ttl == null) {usr_dlg.Prog_one("", "", "title is invalid: ~{0}", String_.new_utf8_(url.Raw())); return;}
@@ -145,7 +145,10 @@ public class Xog_tab_itm implements GfoInvkAble {
 			if (page.Ttl().Anch_bgn() != Bry_.NotFound) page.Url().Anchor_bry_(page.Ttl().Anch_txt());	// NOTE: occurs when page is a redirect to an anchor; EX: w:Duck race -> Rubber duck#Races
 			history_mgr.Add(page);
 			Xog_tab_itm_read_mgr.Show_page(this, page, true);
-			if (app.Api_root().Usr().History().Enabled()) app.User().History_mgr().Add(page);
+			if (app.Api_root().Usr().History().Enabled()) {
+				app.User().History_mgr().Add(page);
+				app.User().Data_mgr().History_mgr().Update_async(app.Async_mgr(), ttl, url);
+			}
 			usr_dlg.Prog_none("", "", "rendering html");
 			//	win.Page__async__bgn(this);
 			app.Thread_mgr().File_load_mgr().Add_at_end(new Load_files_wkr(this)).Run();

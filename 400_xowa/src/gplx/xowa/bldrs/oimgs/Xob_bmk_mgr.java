@@ -25,9 +25,9 @@ public class Xob_bmk_mgr implements GfoInvkAble {
 	public byte[] Ttl_prv() {return ttl_prv;} private byte[] ttl_prv;
 	private boolean repo_enable, ns_enable, ttl_enable;
 	private boolean repo_dirty, ns_dirty, ttl_dirty;
-	public Xob_bmk_mgr Init(Db_provider p, String grp, boolean repo_enable, boolean ns_enable, boolean ttl_enable) {
+	public Xob_bmk_mgr Init(Db_conn p, String grp, boolean repo_enable, boolean ns_enable, boolean ttl_enable) {
 		this.cfg_grp = grp;
-		cfg_tbl = new Xodb_xowa_cfg_tbl().Provider_(p);
+		cfg_tbl = new Xodb_xowa_cfg_tbl().Conn_(p);
 		cfg_stmt = cfg_tbl.Update_stmt();
 		this.repo_enable = repo_enable;
 		this.ns_enable = ns_enable;
@@ -96,6 +96,6 @@ public class Xob_bmk_mgr implements GfoInvkAble {
 	private static final String Invk_repo_prv_ = "repo_prv_", Invk_ns_prv_ = "ns_prv_", Invk_ttl_prv_ = "ttl_prv_";
 	private static final String Cfg_repo_prv = "repo_prv", Cfg_ns_prv = "ns_prv", Cfg_ttl_prv = "ttl_prv";
 	private static final int Null_ns = -1;
-//		public static final byte Null_repo = Byte_.MaxValue_127;
+//		public static final byte Null_repo = Byte_.Max_value_127;
 //		public static final byte[ Null_ttl = null;
 }

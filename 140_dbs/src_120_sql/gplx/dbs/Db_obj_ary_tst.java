@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-import org.junit.*;
+import org.junit.*; import gplx.dbs.sqls.*;
 public class Db_obj_ary_tst {
 	@Before public void init() {} private Db_obj_ary_fxt fxt = new Db_obj_ary_fxt();
 	@Test  public void Int() {
@@ -31,7 +31,7 @@ class Db_obj_ary_fxt {
 	public Db_obj_ary_fxt Init_fld(String name, byte tid) {flds_list.Add(new Db_fld(name, tid)); return this;} private ListAdp flds_list = ListAdp_.new_();
 	public Db_obj_ary_fxt Init_vals(Object... ary) {vals_list.Add(ary); return this;} private ListAdp vals_list = ListAdp_.new_();
 	public Db_obj_ary_fxt Test_sql(String expd) {
-		Sql_cmd_wtr_ansi cmd_wtr = (Sql_cmd_wtr_ansi)Sql_cmd_wtr_ansi_.default_();
+		Sql_qry_wtr_ansi cmd_wtr = (Sql_qry_wtr_ansi)Sql_qry_wtr_.I;
 		String_bldr sb = String_bldr_.new_();
 		crt.Flds_((Db_fld[])flds_list.Xto_ary_and_clear(Db_fld.class));
 		crt.Vals_((Object[][])vals_list.Xto_ary_and_clear(Object[].class));

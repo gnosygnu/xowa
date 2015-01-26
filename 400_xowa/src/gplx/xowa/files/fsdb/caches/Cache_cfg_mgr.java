@@ -27,14 +27,14 @@ class Cache_cfg_mgr {
 	public void Cache_len_add(long v) {cache_len += v;}
 	public long Cache_min() {return cache_min;} public Cache_cfg_mgr Cache_min_(long v) {cache_min = v; return this;} private long cache_min = Io_mgr.Len_mb * 75;
 	public long Cache_max() {return cache_max;} public Cache_cfg_mgr Cache_max_(long v) {cache_max = v; return this;} private long cache_max = Io_mgr.Len_mb * 100;
-	public void Db_init(Db_provider provider) {
-		cfg_tbl.Provider_(provider);
+	public void Db_init(Db_conn conn) {
+		cfg_tbl.Conn_(conn);
 		next_id = cfg_tbl.Select_val_as_int(Cfg_grp, Cfg_key__next_id);
 		cache_len = cfg_tbl.Select_val_as_int(Cfg_grp, Cfg_key__cache_len);
 		cache_max = cfg_tbl.Select_val_as_int(Cfg_grp, Cfg_key__cache_max);
 	}
-	public void Db_when_new(Db_provider provider) {
-		cfg_tbl.Provider_(provider);
+	public void Db_when_new(Db_conn conn) {
+		cfg_tbl.Conn_(conn);
 		cfg_tbl.Insert_str(Cfg_grp, Cfg_key__next_id, Int_.Xto_str(1));
 		cfg_tbl.Insert_str(Cfg_grp, Cfg_key__cache_len, Long_.Xto_str(0));
 		cfg_tbl.Insert_str(Cfg_grp, Cfg_key__cache_min, Long_.Xto_str(cache_min));

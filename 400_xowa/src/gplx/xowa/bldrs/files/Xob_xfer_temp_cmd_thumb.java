@@ -22,11 +22,11 @@ public class Xob_xfer_temp_cmd_thumb extends Xob_itm_basic_base implements Xob_c
 	public String Cmd_key() {return KEY_oimg;} public static final String KEY_oimg = "file.xfer_temp.thumb";
 	public void Cmd_ini(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {
-		Db_provider provider = Xodb_db_file.init__file_make(wiki.Fsys_mgr().Root_dir()).Provider();
-		Xob_xfer_temp_tbl.Create_table(provider);
-		Db_stmt trg_stmt = Xob_xfer_temp_tbl.Insert_stmt(provider);
-		provider.Txn_mgr().Txn_bgn_if_none();
-		DataRdr rdr = provider.Exec_sql_as_rdr(Sql_select);
+		Db_conn conn = Xodb_db_file.init__file_make(wiki.Fsys_mgr().Root_dir()).Conn();
+		Xob_xfer_temp_tbl.Create_table(conn);
+		Db_stmt trg_stmt = Xob_xfer_temp_tbl.Insert_stmt(conn);
+		conn.Txn_mgr().Txn_bgn_if_none();
+		DataRdr rdr = conn.Exec_sql_as_rdr(Sql_select);
 		Xob_xfer_temp_itm temp_itm = new Xob_xfer_temp_itm();
 		Xof_img_size img_size = new Xof_img_size();
 		while (rdr.MoveNextPeer()) {
@@ -35,7 +35,7 @@ public class Xob_xfer_temp_cmd_thumb extends Xob_itm_basic_base implements Xob_c
 			if (temp_itm.Chk(img_size))
 				temp_itm.Insert(trg_stmt, img_size);
 		}
-		provider.Txn_mgr().Txn_end_all();
+		conn.Txn_mgr().Txn_end_all();
 	}
 	public void Cmd_run() {}
 	public void Cmd_end() {}

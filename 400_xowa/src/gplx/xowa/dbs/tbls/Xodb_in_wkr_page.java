@@ -29,7 +29,7 @@ class Xodb_in_wkr_page_id extends Xodb_in_wkr_page_base {
 	@Override public void Fill_stmt(Db_stmt stmt, int bgn, int end) {
 		for (int i = bgn; i < end; i++) {
 			Xodb_page page = (Xodb_page)list.FetchAt(i);
-			stmt.Val_int_(page.Id());		
+			stmt.Val_int(page.Id());		
 		}
 	}
 	@Override public Xodb_page Eval_rslts_key(Xodb_page rdr_page) {return (Xodb_page)hash.Fetch(rdr_page.Id_val());}
@@ -50,8 +50,8 @@ class Xodb_in_wkr_page_title extends Xodb_in_wkr_page_base {
 	@Override public void Fill_stmt(Db_stmt stmt, int bgn, int end) {
 		for (int i = bgn; i < end; i++) {
 			Xodb_page page = (Xodb_page)hash.FetchAt(i);
-			stmt.Val_int_(in_ns);
-			stmt.Val_str_by_bry_(page.Ttl_wo_ns());
+			stmt.Val_int(in_ns);
+			stmt.Val_bry_as_str(page.Ttl_wo_ns());
 		}
 	}
 	@Override public Xodb_page Eval_rslts_key(Xodb_page rdr_page) {return (Xodb_page)hash.Fetch(rdr_page.Ttl_wo_ns());}
@@ -72,8 +72,8 @@ class Xodb_in_wkr_page_title_ns extends Xodb_in_wkr_page_base {
 	@Override public void Fill_stmt(Db_stmt stmt, int bgn, int end) {
 		for (int i = bgn; i < end; i++) {
 			Xodb_page page = (Xodb_page)hash.FetchAt(i);
-			stmt.Val_int_(page.Ns_id());
-			stmt.Val_str_by_bry_(page.Ttl_wo_ns());
+			stmt.Val_int(page.Ns_id());
+			stmt.Val_bry_as_str(page.Ttl_wo_ns());
 		}
 	}
 	@Override public Xodb_page Eval_rslts_key(Xodb_page rdr_page) {
@@ -131,7 +131,7 @@ class Xodb_in_wkr_category_id extends Xodb_in_wkr_base {
 	@Override public void Fill_stmt(Db_stmt stmt, int bgn, int end) {
 		for (int i = bgn; i < end; i++) {
 			Xodb_page page = (Xodb_page)hash.FetchAt(i);
-			stmt.Val_int_(page.Id());		
+			stmt.Val_int(page.Id());		
 		}
 	}
 	@Override public void Eval_rslts(Cancelable cancelable, Xodb_ctx db_ctx, DataRdr rdr) {

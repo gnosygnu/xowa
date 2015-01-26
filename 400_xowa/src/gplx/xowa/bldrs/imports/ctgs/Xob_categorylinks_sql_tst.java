@@ -34,18 +34,18 @@ public class Xob_categorylinks_sql_tst {
 		));
 		fxt.Exec_run(new Xob_category_registry_sql(fxt.Bldr(), fxt.Wiki()));
 		fxt.Exec_run(new Xob_categorylinks_sql(fxt.Bldr(), fxt.Wiki()));
-		Db_provider provider = fxt.Wiki().Db_mgr_as_sql().Fsys_mgr().Provider_ctg();
+		Db_conn conn = fxt.Wiki().Db_mgr_as_sql().Fsys_mgr().Conn_ctg();
 		Db_tst_qry.tbl_(Xodb_category_tbl.Tbl_name, Xodb_category_tbl.Fld_cat_id)
 			.Cols_(Xodb_category_tbl.Fld_cat_id, Xodb_category_tbl.Fld_cat_subcats, Xodb_category_tbl.Fld_cat_files, Xodb_category_tbl.Fld_cat_pages)
 			.Rows_add_vals(1, 0, 0, 2)
 			.Rows_add_vals(2, 0, 1, 0)
-			.Test(provider);
+			.Test(conn);
 		Db_tst_qry.tbl_(Xodb_categorylinks_tbl.Tbl_name, Xodb_categorylinks_tbl.Fld_cl_from)
 			.Cols_(Xodb_categorylinks_tbl.Fld_cl_from, Xodb_categorylinks_tbl.Fld_cl_to_id, Xodb_categorylinks_tbl.Fld_cl_sortkey, Xodb_categorylinks_tbl.Fld_cl_type_id)
 			.Rows_add_vals(3, 2, "File:2a"	, Xoa_ctg_mgr.Tid_file)
 			.Rows_add_vals(4, 1, "1b"		, Xoa_ctg_mgr.Tid_page)
 			.Rows_add_vals(5, 1, "1a"		, Xoa_ctg_mgr.Tid_page)
-			.Test(provider);		
+			.Test(conn);		
 	}
 }
 class Db_tst_val {
@@ -92,11 +92,11 @@ class Db_tst_qry {
 		rows.Add(row);
 		return this;
 	}
-	public void Test(Db_provider provider) {
+	public void Test(Db_conn conn) {
 		DataRdr rdr = DataRdr_.Null;
 		Bry_bfr bfr = Bry_bfr.new_();
 		try {
-			rdr = provider.Exec_qry_as_rdr(qry);
+			rdr = conn.Exec_qry_as_rdr(qry);
 			int expd_row_idx = 0, expd_row_max = rows.Count();
 			while (rdr.MoveNextPeer()) {
 				if (expd_row_idx == expd_row_max) break;
@@ -127,7 +127,7 @@ class Db_tst_qry {
 		}
 		if (!pass) {
 			bfr.Add(Lbl_row_hdr).Add_int_variable(expd_row_idx).Add_byte_nl();
-			bfr.Add_str(qry.XtoSql()).Add_byte(Byte_ascii.Semic);
+			bfr.Add_str(qry.Xto_sql()).Add_byte(Byte_ascii.Semic);
 			throw Err_.new_(bfr.Xto_str_and_clear());
 		}
 	}	static final byte[] Lbl_row_hdr = Bry_.new_ascii_("row: "), Lbl_eq_y = Bry_.new_ascii_(" == "), Lbl_eq_n = Bry_.new_ascii_(" != ");

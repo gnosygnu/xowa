@@ -27,7 +27,7 @@ public class Xoaf_download_mgr implements GfoInvkAble {
 		enabled = v;
 		File_download_enable(app, v);
 		return this;
-	} 	private boolean enabled;
+	} 	private boolean enabled = true; // default to true; DATE:2015-01-05
 	public Xof_download_wkr Download_wkr() {return download_wkr;} public Xoaf_download_mgr Download_wkr_(Xof_download_wkr v) {download_wkr = v; return this;} private Xof_download_wkr download_wkr;
 	public Xof_img_wkr_api_size_base	Api_size_wkr() {return api_size_wkr;} public Xoaf_download_mgr Api_size_wkr_(Xof_img_wkr_api_size_base v) {api_size_wkr = v; return this;} private Xof_img_wkr_api_size_base api_size_wkr = new Xof_img_wkr_api_size_base_wmf();
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

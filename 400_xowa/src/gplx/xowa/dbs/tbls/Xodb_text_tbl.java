@@ -19,25 +19,25 @@ package gplx.xowa.dbs.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.
 import gplx.dbs.*; import gplx.ios.*;
 public class Xodb_text_tbl {
 	public Xodb_text_tbl(Xodb_mgr_sql db_mgr) {this.db_mgr = db_mgr; zip_mgr = db_mgr.Wiki().App().Zip_mgr();} private Xodb_mgr_sql db_mgr; private Io_stream_zip_mgr zip_mgr;
-	public void Delete_all(Db_provider provider) {provider.Exec_qry(Db_qry_.delete_tbl_(Tbl_name));}
-	public Db_stmt Insert_stmt(Db_provider prov) {return Db_stmt_.new_insert_(prov, Tbl_name, Fld_page_id, Fld_old_text);}
+	public void Delete_all(Db_conn conn) {conn.Exec_qry(Db_qry_.delete_tbl_(Tbl_name));}
+	public Db_stmt Insert_stmt(Db_conn prov) {return Db_stmt_.new_insert_(prov, Tbl_name, Fld_page_id, Fld_old_text);}
 	public void Insert(Db_stmt stmt, int page_id, byte[] text, byte storage_type) {
-		stmt.Clear().Val_int_(page_id).Val_bry_(text).Exec_insert();
+		stmt.Clear().Val_int(page_id).Val_bry(text).Exec_insert();
 	}
 	public void Update(int file_id, int page_id, byte[] text) {
 		Db_stmt stmt = Db_stmt_.Null;
 		try {
-			Db_provider provider = db_mgr.Fsys_mgr().Get_by_idx(file_id).Provider();
-			stmt = Db_stmt_.new_update_(provider, Tbl_name, String_.Ary(Fld_page_id), Fld_old_text);
-			stmt.Val_bry_(text).Val_int_(page_id).Exec_update();
+			Db_conn conn = db_mgr.Fsys_mgr().Get_by_idx(file_id).Conn();
+			stmt = Db_stmt_.new_update_(conn, Tbl_name, String_.Ary(Fld_page_id), Fld_old_text);
+			stmt.Val_bry(text).Val_int(page_id).Exec_update();
 		}	finally {stmt.Rls();}		
 	}
 	public byte[] Select(int file_id, int page_id) {
 		Db_stmt stmt = Db_stmt_.Null;
 		try {
-			Db_provider provider = db_mgr.Fsys_mgr().Get_by_idx(file_id).Provider();
-			stmt = Db_stmt_.new_select_(provider, Tbl_name, String_.Ary(Fld_page_id), Fld_old_text);
-			byte[] rv = (byte[])stmt.Val_int_(page_id).Exec_select_val();
+			Db_conn conn = db_mgr.Fsys_mgr().Get_by_idx(file_id).Conn();
+			stmt = Db_stmt_.new_select_(conn, Tbl_name, String_.Ary(Fld_page_id), Fld_old_text);
+			byte[] rv = (byte[])stmt.Val_int(page_id).Exec_select_val();
 			rv = zip_mgr.Unzip(db_mgr.Data_storage_format(), rv);
 			return rv;
 		}	finally {stmt.Rls();}
@@ -60,11 +60,11 @@ public class Xodb_text_tbl {
 				if (cancelable.Canceled()) return;
 				args_ary[i] = 0;
 			}
-			stmt = Db_stmt_.new_select_in_(file.Provider(), Tbl_name, Fld_page_id, args_ary);
+			stmt = Db_stmt_.new_select_in_(file.Conn(), Tbl_name, Fld_page_id, args_ary);
 			for (int i = 0; i < len; i++) {
 				if (cancelable.Canceled()) return;
 				Xodb_page page = (Xodb_page)pages.FetchAt(i);
-				stmt.Val_int_(page.Id());
+				stmt.Val_int(page.Id());
 			}
 			rdr = stmt.Exec_select();
 			while (rdr.MoveNextPeer()) {

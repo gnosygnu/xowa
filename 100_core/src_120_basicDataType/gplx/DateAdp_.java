@@ -25,6 +25,7 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 public class DateAdp_ implements GfoInvkAble {
+	public static final Class<?> Cls_ref_type = DateAdp.class;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_Now))		return Now();
 		else									return GfoInvkAble_.Rv_unhandled;			

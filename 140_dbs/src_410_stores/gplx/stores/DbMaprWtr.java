@@ -21,7 +21,7 @@ public class DbMaprWtr extends DataWtr_base implements DataWtr {
 	public void InitWtr(String key, Object val) {}
 	@Override public Object StoreRoot(SrlObj root, String key) {
 		mgr = (DbMaprMgr)this.EnvVars().FetchOrFail(DbMaprWtr.Key_Mgr);
-		DbMaprWtrUtl.PurgeObjTree(root, mgr, provider);
+		DbMaprWtrUtl.PurgeObjTree(root, mgr, conn);
 		WriteGfoObj(root, mgr.Root());
 		mgr.Clear();
 		return null;
@@ -56,7 +56,7 @@ public class DbMaprWtr extends DataWtr_base implements DataWtr {
 		}
 	}
 	@Override public void WriteNodeBgn(String v) {
-		if (insertCmd != null) insertCmd.Exec_qry(provider);		// occurs for nodes; ex: new title starts; commit changes for own disc
+		if (insertCmd != null) insertCmd.Exec_qry(conn);		// occurs for nodes; ex: new title starts; commit changes for own disc
 		curTableName = v;
 		insertCmd = null;
 	}
@@ -73,7 +73,7 @@ public class DbMaprWtr extends DataWtr_base implements DataWtr {
 			insertCmd.Arg_obj_(fld, val);
 	}
 	@Override public void WriteNodeEnd() {
-		if (insertCmd != null) insertCmd.Exec_qry(provider);		// occurs for nodes and leaves; for nodes, insertCmd will be null (committed by last leaf)
+		if (insertCmd != null) insertCmd.Exec_qry(conn);		// occurs for nodes and leaves; for nodes, insertCmd will be null (committed by last leaf)
 		insertCmd = null;
 	}
 	public void WriteTableBgn(String name, GfoFldList fields) {}
@@ -82,18 +82,18 @@ public class DbMaprWtr extends DataWtr_base implements DataWtr {
 	public void Clear() {}
 	public String XtoStr() {return "";}
 	@Override public SrlMgr SrlMgr_new(Object o) {return new DbMaprWtr();}
-	DbMaprMgr mgr; Db_provider provider; String curTableName; Db_qry_insert insertCmd;		
-	public static DbMaprWtr new_by_url_(Db_conn_info url) {
+	DbMaprMgr mgr; Db_conn conn; String curTableName; Db_qry_insert insertCmd;		
+	public static DbMaprWtr new_by_url_(Db_url url) {
 		DbMaprWtr rv = new DbMaprWtr();
-		rv.provider = Db_provider_pool._.Get_or_new(url);
+		rv.conn = Db_conn_pool_old._.Get_or_new(url);
 		return rv;
 	}	DbMaprWtr() {}
 	public static final String Key_Mgr = "DbMapr.mgr";
 }
 class DbMaprWtrUtl {
-	public static void PurgeObjTree(SrlObj root, DbMaprMgr mgr, Db_provider provider) {
+	public static void PurgeObjTree(SrlObj root, DbMaprMgr mgr, Db_conn conn) {
 		Criteria crt = MakeCriteria(root, mgr.RootIndexFlds());
-		PurgeObj(mgr.Root(), crt, provider);
+		PurgeObj(mgr.Root(), crt, conn);
 	}
 	static Criteria MakeCriteria(SrlObj root, DbMaprArg[] objRootIdxFlds) {
 		Criteria rv = null;
@@ -104,11 +104,11 @@ class DbMaprWtrUtl {
 		}
 		return rv;
 	}
-	static void PurgeObj(DbMaprItm mapr, Criteria crt, Db_provider provider) {
-		Db_qry_.delete_(mapr.TableName(), crt).Exec_qry(provider);
+	static void PurgeObj(DbMaprItm mapr, Criteria crt, Db_conn conn) {
+		Db_qry_.delete_(mapr.TableName(), crt).Exec_qry(conn);
 		for (Object subObj : mapr.Subs()) {
 			DbMaprItm sub = (DbMaprItm)subObj;
-			PurgeObj(sub, crt, provider);
+			PurgeObj(sub, crt, conn);
 		}
 	}
 }

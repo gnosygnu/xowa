@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.hdumps; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.html.*; import gplx.xowa.gui.*; 
 import gplx.xowa.hdumps.core.*; import gplx.xowa.hdumps.saves.*; import gplx.xowa.pages.*; import gplx.xowa.hdumps.loads.*; import gplx.xowa.hdumps.htmls.*; import gplx.xowa.hdumps.dbs.*; import gplx.xowa.html.hzips.*;
+import gplx.xowa2.gui.*;
 public class Xodb_hdump_mgr {
 	private Xodb_file hdump_db_file; private Xow_hzip_mgr hzip_mgr;
 	public Xodb_hdump_mgr(Xow_wiki wiki) {
@@ -39,8 +40,8 @@ public class Xodb_hdump_mgr {
 	public int Html_db_id_default(int page_len) {
 		return -1;
 	}
-	public Db_provider Db_provider_by_page(int page_id) {
-		return text_tbl.Provider();
+	public Db_conn Db_conn_by_page(int page_id) {
+		return text_tbl.Conn();
 	}
 	public void Save_if_missing(Xoa_page page) {
 		if (page.Revision_data().Html_db_id() == -1) Save(page);
@@ -66,18 +67,18 @@ public class Xodb_hdump_mgr {
 		hzip_mgr.Save(tmp_bfr, stats, page.Url().Xto_full_bry(), tmp_bfr.Xto_bry_and_clear());
 		page.Hdump_data().Body_(tmp_bfr.Xto_bry_and_clear());
 		hpg.Init(tmp_bfr, page);
-	}	private Hdump_page hpg = new Hdump_page();
+	}	private Xog_page hpg = new Xog_page();
 	public void Load(Xow_wiki wiki, Xoa_page page, int html_db_id) {
 		if (!Enabled_chk()) return;
 		page.Root_(new Xop_root_tkn());
-		Hdump_page hpg = new Hdump_page().Init(page.Revision_data().Id(), page.Url(), page.Ttl());
+		Xog_page hpg = new Xog_page().Init(page.Revision_data().Id(), page.Url(), page.Ttl());
 		load_mgr.Load(hpg, wiki.Db_mgr_as_sql().Fsys_mgr(), html_db_id, page.Revision_data().Id(), page.Ttl());
 		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
 		hzip_mgr.Load(tmp_bfr, page.Url().Xto_full_bry(), hpg.Page_body());
 		hpg.Page_body_(tmp_bfr.Mkr_rls().Xto_bry_and_clear());
 		Load_page(wiki, page, hpg);
 	}
-	private void Load_page(Xow_wiki wiki, Xoa_page page, Hdump_page hpg) {
+	private void Load_page(Xow_wiki wiki, Xoa_page page, Xog_page hpg) {
 		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_m001();
 		html_mgr.Init_by_page(wiki.Domain_bry(), hpg).Write(tmp_bfr);
 		page.Hdump_data().Body_(tmp_bfr.Xto_bry_and_clear());

@@ -16,21 +16,20 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-import gplx.stores.*;
+import gplx.stores.*; import gplx.dbs.sqls.*;
 import java.sql.*; 
 class Postgres_engine extends Db_engine_sql_base {
-	@Override public String Key() {return Db_conn_info__postgres.Key_const;}
-	@Override public String Conn_info_tid() {return this.Key();}
-	@Override public Sql_cmd_wtr SqlWtr() {return Sql_cmd_wtr_.BackslashSensitive;}
-	@Override public Db_engine Make_new(Db_conn_info connectInfo) {
+	@Override public String Tid() {return Db_url__postgres.Tid_const;}
+	@Override public Sql_qry_wtr SqlWtr() {return Sql_qry_wtr_.new_escape_backslash();}
+	@Override public Db_engine New_clone(Db_url connectInfo) {
 		Postgres_engine rv = new Postgres_engine();
-		rv.ctor_SqlEngineBase(connectInfo);
+		rv.Ctor(connectInfo);
 		return rv;
 	}
-	@Override public DataRdr NewDataRdr(ResultSet rdr, String commandText) {return Db_data_rdr_.new_(rdr, commandText);}
+	@Override public DataRdr New_rdr(ResultSet rdr, String commandText) {return Db_data_rdr_.new_(rdr, commandText);}
 		@gplx.Internal @Override protected Connection Conn_new() {
-		Db_conn_info__postgres connUrl = (Db_conn_info__postgres)conn_info; 
-		return NewDbCon("jdbc:" + connUrl.Key() + "://localhost/" + connUrl.Database(), connUrl.Uid(), connUrl.Pwd());
+		Db_url__postgres url_as_postgres = (Db_url__postgres)url; 
+		return Conn_make_by_url("jdbc:" + url_as_postgres.Tid() + "://localhost/" + url_as_postgres.Database(), url_as_postgres.Uid(), url_as_postgres.Pwd());
 	}
 		@gplx.Internal protected static final Postgres_engine _ = new Postgres_engine(); Postgres_engine() {}
 }

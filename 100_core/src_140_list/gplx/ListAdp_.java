@@ -77,6 +77,7 @@ class ListAdp_null implements ListAdp {
 	public Object Xto_ary_and_clear(Class<?> memberType) {return Object_.Ary_empty;}
 	public String XtoStr() {return "< NULL LIST >";}
 	public String[] XtoStrAry() {return new String[0];}
+	public Object[] Xto_obj_ary() {return Object_.Ary_empty;}
 	public java.util.Iterator iterator() {return Iterator_null._;}
 	public void Reverse() {}
 	public void SetAt(int i, Object o) {}

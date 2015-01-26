@@ -24,7 +24,7 @@ public class Byte__tst {
 		tst_int_( 128,  128);	// NOTE: JAVA defines byte as -128 -> 127
 		tst_int_( 255,  255);
 		tst_int_( 256,    0);	// NOTE: 256 will cast to 1; (byte)256 works same in both JAVA/.NET
-	}	void tst_int_(int v, int expd) {Tfds.Eq((byte)expd, Byte_.int_(v));}	// WORKAROUND/JAVA: expd is of type int b/c java promotes numbers to ints
+	}	void tst_int_(int v, int expd) {Tfds.Eq((byte)expd, Byte_.By_int(v));}	// WORKAROUND/JAVA: expd is of type int b/c java promotes numbers to ints
 	@Test  public void XtoInt() {
 		tst_XtoInt(   0,    0);
 		tst_XtoInt( 127,  127);

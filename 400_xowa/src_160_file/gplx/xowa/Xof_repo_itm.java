@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.core.btries.*;
 public class Xof_repo_itm implements GfoInvkAble {
-	public Xof_repo_itm(Xoa_repo_mgr mgr, byte[] key) {this.mgr = mgr; this.key = key;} private Xoa_repo_mgr mgr;
-	public byte[] Key() {return key;} private byte[] key;
+	public Xof_repo_itm(Xoa_repo_mgr mgr, byte[] key) {this.mgr = mgr; this.key = key;} private final Xoa_repo_mgr mgr;
+	public byte[] Key() {return key;} private final byte[] key;
 	public boolean Wmf_fsys() {return wmf_fsys;} public Xof_repo_itm Wmf_fsys_(boolean v) {wmf_fsys = v; return this;} private boolean wmf_fsys;
 	public boolean Wmf_api() {return wmf_api;} public Xof_repo_itm Wmf_api_(boolean v) {wmf_api = v; return this;} private boolean wmf_api;
 	public boolean Tarball() {return tarball;} public Xof_repo_itm Tarball_(boolean v) {tarball = v; return this;} private boolean tarball;
@@ -87,16 +87,7 @@ public class Xof_repo_itm implements GfoInvkAble {
 		}
 		byte[] rv = tmp_bfr.Xto_bry_and_clear();
 		return rv;
-	}	private Bry_bfr tmp_bfr = Bry_bfr.reset_(300); Btrie_slim_mgr trie = trie_make();
-	private static Btrie_slim_mgr trie_make() {
-		Btrie_slim_mgr rv = Btrie_slim_mgr.cs_();
-		byte[] invalid = Op_sys.Wnt.Fsys_invalid_chars();
-		byte[] underline = new byte[] {Byte_ascii.Underline};
-		int len = invalid.length;
-		for (int i = 0; i < len; i++)
-			rv.Add_obj(new byte[] {invalid[i]}, underline);
-		return rv;
-	}
+	}	private final Bry_bfr tmp_bfr = Bry_bfr.reset_(300);
 	public byte[] Gen_name_trg(byte[] bry, byte[] md5, Xof_ext ext) {
 		byte[] rv = Gen_name_src(bry);
 		byte[] ext_bry = ext.Ext();
@@ -123,7 +114,17 @@ public class Xof_repo_itm implements GfoInvkAble {
 	}	private static final String Invk_owner = "owner", Invk_fsys_ = "fsys_", Invk_ext_rules_ = "ext_rules_", Invk_primary_ = "primary_", Invk_wmf_api_ = "wmf_api_", Invk_tarball_ = "tarball_";
 	public Xof_repo_itm Ext_rules_(byte[] ext_rules_key) {ext_rules = mgr.App().File_mgr().Ext_rules().Get_or_new(ext_rules_key); return this;}
 	public static final int Thumb_default_null = -1;
-	public static final byte Mode_orig = 0, Mode_thumb = 1, Mode_nil = Byte_.MaxValue_127;
-	public static final byte Repo_remote = 0, Repo_local = 1, Repo_unknown = 126, Repo_null = Byte_.MaxValue_127;
+	public static final byte Mode_orig = 0, Mode_thumb = 1, Mode_nil = Byte_.Max_value_127;
+	public static final byte Repo_remote = 0, Repo_local = 1, Repo_unknown = 126, Repo_null = Byte_.Max_value_127;
 	public static final int Dir_depth_null = -1, Dir_depth_wmf = 2, Dir_depth_xowa = 4;
+	private static final Btrie_slim_mgr trie = trie_make();
+	private static Btrie_slim_mgr trie_make() {
+		Btrie_slim_mgr rv = Btrie_slim_mgr.cs_();
+		byte[] invalid = Op_sys.Wnt.Fsys_invalid_chars();
+		byte[] underline = new byte[] {Byte_ascii.Underline};
+		int len = invalid.length;
+		for (int i = 0; i < len; i++)
+			rv.Add_obj(new byte[] {invalid[i]}, underline);
+		return rv;
+	}
 }

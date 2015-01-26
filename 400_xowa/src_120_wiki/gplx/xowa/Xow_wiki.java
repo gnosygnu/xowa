@@ -42,7 +42,7 @@ public class Xow_wiki implements GfoInvkAble, Xoa_ttl_parser {
 		Pf_func_.Reg(lang.Func_regy(), lang);
 		special_mgr = new Xows_mgr(this, lang);
 		stats = new Xow_wiki_stats(this);
-		xwiki_mgr = new Xow_xwiki_mgr(this);
+		xwiki_mgr = new Xow_xwiki_mgr(this, app.Url_parser().Url_parser(), domain_tid);
 		xwiki_mgr.Add_full(domain_bry, domain_bry);	// add full name to xwiki_mgr; needed for lookup in home ns; EX: [[en.wikipedia.org:Earth]]
 		html_mgr = new Xow_html_mgr(this);
 		sys_cfg = new Xow_sys_cfg(this);
@@ -227,7 +227,7 @@ public class Xow_wiki implements GfoInvkAble, Xoa_ttl_parser {
 		Io_url sqlite_url = Xodb_mgr_sql.Find_core_url(this);
 		if (sqlite_url != null) {
 			Xodb_mgr_sql db_mgr_sql = this.Db_mgr_create_as_sql();
-			db_mgr_sql.Init_load(gplx.dbs.Db_conn_info_.sqlite_(sqlite_url));
+			db_mgr_sql.Init_load(gplx.dbs.Db_url_.sqlite_(sqlite_url));
 			db_mgr_sql.Html_db_enabled_(hdump_enabled);
 		}
 		if (!Xob_import_marker.Check(this)) {app.Wiki_mgr().Del(domain_bry); init_needed = false; return;}	// NOTE: must call after Db_mgr_create_as_sql(); also, must delete wiki from mgr; DATE:2014-08-24

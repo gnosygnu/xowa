@@ -23,7 +23,7 @@ class Redlink_regy_mgr {
 	private Rl_dump_tbl dump_tbl = new Rl_dump_tbl(); private Db_stmt dump_insert;
 	private int itm_count, itm_max = 10000000;
 	public void Init_by_wiki(Xodb_db_file make) {
-		dump_insert = dump_tbl.Insert_stmt(make.Provider());
+		dump_insert = dump_tbl.Insert_stmt(make.Conn());
 	}
 	public void Page_bgn(int page_id) {this.page_id = page_id;} private int page_id;
 	public void Add(int uid, int ns_id, byte[] ttl) {
@@ -108,7 +108,7 @@ class Redlink_wkr {
 		while (!rdr.Pos_is_eos()) {
 			int page_id = rdr.Read_int_to_comma();
 			int html_uid = rdr.Read_int_to_semic();
-			stmt.Val_int_(page_id).Val_int_(html_uid).Val_int_(lnki_id).Exec_insert();
+			stmt.Val_int(page_id).Val_int(html_uid).Val_int(lnki_id).Exec_insert();
 		}
 	}
 }
@@ -181,9 +181,9 @@ ORDER BY page_id, html_uid
 ;
 */
 class Rl_dump_tbl {
-	public Db_stmt Insert_stmt(Db_provider provider) {return Db_stmt_.new_insert_(provider, Tbl_name, Fld_lnki_ns, Fld_lnki_ttl, Fld_page_ids);}
+	public Db_stmt Insert_stmt(Db_conn conn) {return Db_stmt_.new_insert_(conn, Tbl_name, Fld_lnki_ns, Fld_lnki_ttl, Fld_page_ids);}
 	public void Insert(Db_stmt stmt, int lnki_ns, byte[] lnki_ttl, byte[] page_ids) {
-		stmt.Val_int_(lnki_ns).Val_str_by_bry_(lnki_ttl).Val_bry_(page_ids).Exec_insert();
+		stmt.Val_int(lnki_ns).Val_bry_as_str(lnki_ttl).Val_bry(page_ids).Exec_insert();
 	}
 	public static final String Tbl_name = "rl_dump", Fld_lnki_ns = "lnki_ns", Fld_lnki_ttl = "lnki_ttl", Fld_page_ids = "page_ids";
 	public static final String Tbl_sql = String_.Concat_lines_crlf_skipLast

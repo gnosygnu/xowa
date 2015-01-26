@@ -39,8 +39,8 @@ public class Fsdb_db_atr_mgr implements RlsAble {
 			itm.Txn_open();
 		}
 	}
-	public void Txn_save(Db_provider provider) {
-		Fsdb_db_atr_tbl.Commit_all(provider, itms);
+	public void Txn_save(Db_conn conn) {
+		Fsdb_db_atr_tbl.Commit_all(conn, itms);
 		int len = itms.length;
 		for (int i = 0; i < len; i++) {
 			Fsdb_db_atr_fil itm = itms[i];
@@ -54,13 +54,13 @@ public class Fsdb_db_atr_mgr implements RlsAble {
 			itm.Rls();
 		}
 	}
-	public static Fsdb_db_atr_mgr load_(Fsdb_db_abc_mgr abc_mgr, Db_provider p, Io_url dir) {
+	public static Fsdb_db_atr_mgr load_(Fsdb_db_abc_mgr abc_mgr, Db_conn p, Io_url dir) {
 		Fsdb_db_atr_mgr rv = new Fsdb_db_atr_mgr();
 		rv.itms = Fsdb_db_atr_tbl.Select_all(abc_mgr, p, dir);
 		rv.itms_0 = rv.itms[0];
 		return rv;
 	}
-	public static Fsdb_db_atr_mgr make_(Fsdb_db_abc_mgr abc_mgr, Db_provider p, Io_url dir) {
+	public static Fsdb_db_atr_mgr make_(Fsdb_db_abc_mgr abc_mgr, Db_conn p, Io_url dir) {
 		Fsdb_db_atr_tbl.Create_table(p);
 		Fsdb_db_atr_mgr rv = new Fsdb_db_atr_mgr();
 		Fsdb_db_atr_fil itm = Fsdb_db_atr_fil.make_(abc_mgr, Id_0, url_(dir, Id_0), Path_bgn_0);

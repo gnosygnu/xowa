@@ -21,23 +21,23 @@ public class Xodb_fsys_mgr {
 	private final Io_url src_dir; private final Io_url trg_dir; private final String wiki_name;
 	public Xodb_fsys_mgr(Io_url src_dir, Io_url trg_dir, String wiki_name) {this.src_dir = src_dir; this.trg_dir = trg_dir; this.wiki_name = wiki_name;}
 	public Xodb_file[] Files_ary() {return files_ary;}
-	public Db_provider Provider_core()	{return provider_core;} private Db_provider provider_core;
-	public Db_provider Provider_page()	{return provider_page;} private Db_provider provider_page;
-	public Db_provider Provider_ctg()	{return provider_ctg;}	public void Provider_ctg_(Xodb_file file) {provider_ctg = file.Provider();} private Db_provider provider_ctg;
-	public Db_provider Provider_wdata() {return provider_wdata;}public void Provider_wdata_(Xodb_file file)	{provider_wdata = file.Provider();} private Db_provider provider_wdata;		
+	public Db_conn Conn_core()	{return provider_core;} private Db_conn provider_core;
+	public Db_conn Conn_page()	{return provider_page;} private Db_conn provider_page;
+	public Db_conn Conn_ctg()	{return provider_ctg;}	public void Conn_ctg_(Xodb_file file) {provider_ctg = file.Conn();} private Db_conn provider_ctg;
+	public Db_conn Conn_wdata() {return provider_wdata;}public void Conn_wdata_(Xodb_file file)	{provider_wdata = file.Conn();} private Db_conn provider_wdata;		
 	public int Tid_text_idx() {return tid_text_idx;} public Xodb_fsys_mgr Tid_text_idx_(int v) {tid_text_idx = v; return this;} private int tid_text_idx = File_id_core;
 	public long Tid_text_max() {return tid_text_max;} private long tid_text_max = Heap_max_infinite;
-	public void Init_by_files(Db_provider p, Xodb_file[] v) {
+	public void Init_by_files(Db_conn p, Xodb_file[] v) {
 		files_ary = v; files_ary_len = v.length;
 		boolean category_provider_core_null = true;
 		for (int i = 0; i < files_ary_len; i++) {
 			Xodb_file file = files_ary[i];
 			Io_url url = trg_dir.GenSubFil(file.Url_rel());	// relative name only
-			file.Connect_(Db_conn_info_.sqlite_(url)).Url_(url);
+			file.Connect_(Db_url_.sqlite_(url)).Url_(url);
 			switch (file.Tid()) {
-				case Xodb_file_tid.Tid_core					: file.Provider_(p); Set_file_core(file); break;
-				case Xodb_file_tid.Tid_category				: if (category_provider_core_null) {Provider_ctg_(file); category_provider_core_null = false;} break;
-				case Xodb_file_tid.Tid_wikidata				: Provider_wdata_(file); break;
+				case Xodb_file_tid.Tid_core					: file.Conn_(p); Set_file_core(file); break;
+				case Xodb_file_tid.Tid_category				: if (category_provider_core_null) {Conn_ctg_(file); category_provider_core_null = false;} break;
+				case Xodb_file_tid.Tid_wikidata				: Conn_wdata_(file); break;
 				case Xodb_file_tid.Tid_text					: Set_file_text(file); break;
 			}
 		}
@@ -61,7 +61,7 @@ public class Xodb_fsys_mgr {
 		if (text_max > 0)
 			Set_file_text(Make(Xodb_file_tid.Tid_text).File_max_(text_max));		
 	}
-	private void Set_file_core(Xodb_file file)	{provider_core = provider_page = provider_ctg = provider_wdata = file.Provider();}
+	private void Set_file_core(Xodb_file file)	{provider_core = provider_page = provider_ctg = provider_wdata = file.Conn();}
 	private void Set_file_text(Xodb_file file)	{tid_text_idx = file.Id(); tid_text_max = file.File_max();}
 	public Io_url Get_url(byte file_tid) {
 		Xodb_file file = Get_tid_root(file_tid);
@@ -80,15 +80,15 @@ public class Xodb_fsys_mgr {
 		for (int i = 0; i < files_ary_len; i++) {
 			Xodb_file file = files_ary[i];
 			if (Byte_.In(file.Tid(), tids))
-				Sqlite_engine_.Idx_create(usr_dlg, file.Provider(), Int_.Xto_str(file.Id()), idxs);
+				Sqlite_engine_.Idx_create(usr_dlg, file.Conn(), Int_.Xto_str(file.Id()), idxs);
 		}
 	}
 	public Xodb_file Make(byte file_tid) {
 		int file_idx = files_ary_len;
 		Io_url url = Create_sqlite3(src_dir, trg_dir, wiki_name, file_idx);
-		Xodb_file rv = Xodb_file.make_(file_idx, file_tid, url.NameAndExt()).Connect_(Db_conn_info_.sqlite_(url));
+		Xodb_file rv = Xodb_file.make_(file_idx, file_tid, url.NameAndExt()).Connect_(Db_url_.sqlite_(url));
 		rv.Url_(url);
-		Xodb_xowa_cfg_tbl.Insert_str(rv.Provider(), Cfg_grp_db_meta, "type_name", Xodb_file_tid.Xto_key(file_tid));
+		Xodb_xowa_cfg_tbl.Insert_str(rv.Conn(), Cfg_grp_db_meta, "type_name", Xodb_file_tid.Xto_key(file_tid));
 		files_ary = (Xodb_file[])Array_.Resize(files_ary, files_ary_len + 1);
 		files_ary[files_ary_len++] = rv;
 		return rv;

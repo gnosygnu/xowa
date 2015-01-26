@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
 import org.junit.*;
-import gplx.criterias.*;
+import gplx.criterias.*; import gplx.dbs.sqls.*;
 public class AnsiSqlWtr_tst {
-	Sql_cmd_wtr sqlWtr = Sql_cmd_wtr_ansi_.default_();
+	Sql_qry_wtr sqlWtr = Sql_qry_wtr_.new_ansi();
 	@Test  public void Insert() {
 		tst_XtoSql
 			(	Db_qry_.insert_("people").Arg_("id", 1).Arg_("name", "me")
@@ -95,5 +95,5 @@ public class AnsiSqlWtr_tst {
 			);
 	}
 	void tst_XtoSql(Db_qry cmd, String expd)				{tst_XtoSql(cmd, expd, false);}
-	void tst_XtoSql(Db_qry cmd, String expd, boolean prepare)	{Tfds.Eq(expd, sqlWtr.XtoSqlQry(cmd, prepare));}
+	void tst_XtoSql(Db_qry cmd, String expd, boolean prepare)	{Tfds.Eq(expd, sqlWtr.Xto_str(cmd, prepare));}
 }

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-import org.junit.*;
+import org.junit.*; import gplx.dbs.sqls.*;
 public class Db_qry_select_tst {
 	@Before public void setup() {
 		cmd = Db_qry_select.new_();
@@ -85,5 +85,5 @@ public class Db_qry_select_tst {
 //			expd = "SELECT fld0, fld1 FROM tbl0 GROUP BY fld0, fld1 HAVING Count(fld0) > 1";
 //			Tfds.Eq(cmd.XtoStr(), expd);
 //		}
-	void tst_XtoStr(Db_qry qry, String expd) {Tfds.Eq(expd, cmd.XtoSql());}
+	void tst_XtoStr(Db_qry qry, String expd) {Tfds.Eq(expd, cmd.Xto_sql());}
 }

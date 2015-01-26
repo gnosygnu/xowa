@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.fsdb; import gplx.*;
 import gplx.dbs.*;
 public interface Fsdb_cfg_tbl extends RlsAble {
-	Fsdb_cfg_tbl Ctor(Db_provider provider, boolean created);
+	Fsdb_cfg_tbl Ctor(Db_conn conn, boolean created);
 	void Insert(String grp, String key, String val);
 	void Update(String grp, String key, String val);
 	int Select_as_int_or(String grp, String key, int or);
@@ -36,7 +36,7 @@ abstract class Fsdb_cfg_tbl_base {
 }
 class Fsdb_cfg_tbl_mem extends Fsdb_cfg_tbl_base implements Fsdb_cfg_tbl {
 	private HashAdp grps = HashAdp_.new_();
-	public Fsdb_cfg_tbl Ctor(Db_provider provider, boolean created) {return this;}
+	public Fsdb_cfg_tbl Ctor(Db_conn conn, boolean created) {return this;}
 	public void Insert(String grp, String key, String val) {
 		Fsdb_cfg_grp grp_itm = Grps_get_or_make(grp);
 		grp_itm.Insert(key, val);
@@ -66,45 +66,45 @@ class Fsdb_cfg_tbl_mem extends Fsdb_cfg_tbl_base implements Fsdb_cfg_tbl {
 	public Fsdb_cfg_grp Grps_get_or_null(String grp) {return (Fsdb_cfg_grp)grps.Fetch(grp);}
 }
 class Fsdb_cfg_tbl_sql extends Fsdb_cfg_tbl_base implements Fsdb_cfg_tbl {
-	private Db_provider provider;
+	private Db_conn conn;
 	private Db_stmt stmt_insert, stmt_update, stmt_select;
-	public Fsdb_cfg_tbl Ctor(Db_provider provider, boolean created) {
-		this.provider = provider;
+	public Fsdb_cfg_tbl Ctor(Db_conn conn, boolean created) {
+		this.conn = conn;
 		if (created) Create_table();
 		return this;
 	}
 	private void Create_table() {
-		Sqlite_engine_.Tbl_create(provider, Tbl_name, Tbl_sql);
-		Sqlite_engine_.Idx_create(provider, Idx_main);
+		Sqlite_engine_.Tbl_create(conn, Tbl_name, Tbl_sql);
+		Sqlite_engine_.Idx_create(conn, Idx_main);
 	}
-	private Db_stmt Insert_stmt() {return Db_stmt_.new_insert_(provider, Tbl_name, Fld_cfg_grp, Fld_cfg_key, Fld_cfg_val);}
+	private Db_stmt Insert_stmt() {return Db_stmt_.new_insert_(conn, Tbl_name, Fld_cfg_grp, Fld_cfg_key, Fld_cfg_val);}
 	public void Insert(String grp, String key, String val) {
 		if (stmt_insert == null) stmt_insert = Insert_stmt();
 		stmt_insert.Clear()
-		.Val_str_(grp)
-		.Val_str_(key)
-		.Val_str_(val)
+		.Val_str(grp)
+		.Val_str(key)
+		.Val_str(val)
 		.Exec_insert();
 	}	
-	private Db_stmt Update_stmt() {return Db_stmt_.new_update_(provider, Tbl_name, String_.Ary(Fld_cfg_grp, Fld_cfg_key), Fld_cfg_val);}
+	private Db_stmt Update_stmt() {return Db_stmt_.new_update_(conn, Tbl_name, String_.Ary(Fld_cfg_grp, Fld_cfg_key), Fld_cfg_val);}
 	public void Update(String grp, String key, String val) {
 		if (stmt_update == null) stmt_update = Update_stmt();
 		stmt_update.Clear()
-		.Val_str_(val)
-		.Val_str_(grp)
-		.Val_str_(key)
+		.Val_str(val)
+		.Val_str(grp)
+		.Val_str(key)
 		.Exec_update();
 	}
 	private Db_stmt Select_stmt() {
 		Db_qry_select qry = Db_qry_.select_val_(Tbl_name, Fld_cfg_val, gplx.criterias.Criteria_.And_many(Db_crt_.eq_(Fld_cfg_grp, ""), Db_crt_.eq_(Fld_cfg_key, "")));
-		return provider.Prepare(qry);
+		return conn.New_stmt(qry);
 	}
 	@Override public int Select_as_int_or(String grp, String key, int or) {return Int_.parse_or_(Select_as_str_or(grp, key, null), or);}
 	public String Select_as_str_or(String grp, String key, String or) {
 		if (stmt_select == null) stmt_select = Select_stmt();
 		Object rv = (String)stmt_select.Clear()
-			.Val_str_(grp)
-			.Val_str_(key)
+			.Val_str(grp)
+			.Val_str(key)
 			.Exec_select_val();
 		return rv == null ? or : (String)rv;
 	}
@@ -113,7 +113,7 @@ class Fsdb_cfg_tbl_sql extends Fsdb_cfg_tbl_base implements Fsdb_cfg_tbl {
 		Db_qry_select qry = Db_qry_.select_cols_(Tbl_name, gplx.criterias.Criteria_.And_many(Db_crt_.eq_(Fld_cfg_grp, "")), Fld_cfg_key, Fld_cfg_val);
 		DataRdr rdr = DataRdr_.Null;
 		try {
-			rdr = provider.Prepare(qry).Clear().Val_str_(grp).Exec_select();
+			rdr = conn.New_stmt(qry).Clear().Val_str(grp).Exec_select();
 			while (rdr.MoveNextPeer()) {
 				if (rv == null) rv = new Fsdb_cfg_grp(grp);
 				String key = rdr.ReadStr(Fld_cfg_key);

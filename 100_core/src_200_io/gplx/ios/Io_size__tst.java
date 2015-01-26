@@ -18,39 +18,52 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.ios; import gplx.*;
 import org.junit.*;
 public class Io_size__tst {
-	@Test  public void XtoLong() {
-		tst_XtoLong("1", 1);
-		tst_XtoLong("1 KB", 1024);
-		tst_XtoLong("1 MB", 1024 * 1024);
-		tst_XtoLong("1 GB", 1024 * 1024 * 1024);
-		tst_XtoLong("12 kb", 12 * 1024);
-		tst_XtoLong("1.5 kb", 1024 + 512);	// 1536
-		tst_XtoLong("1.5 mb", (long)(1024 * 1024 * 1.5));
-		tst_XtoLong("-1", -1);	// NOTE: negative bytes allowed
+	private Io_size__fxt fxt = new Io_size__fxt();
+	@Test    public void XtoLong() {
+		fxt.Test_XtoLong("1", 1);
+		fxt.Test_XtoLong("1 KB", 1024);
+		fxt.Test_XtoLong("1 MB", 1024 * 1024);
+		fxt.Test_XtoLong("1 GB", 1024 * 1024 * 1024);
+		fxt.Test_XtoLong("12 kb", 12 * 1024);
+		fxt.Test_XtoLong("1.5 kb", 1024 + 512);	// 1536
+		fxt.Test_XtoLong("1.5 mb", (long)(1024 * 1024 * 1.5));
+		fxt.Test_XtoLong("-1", -1);	// NOTE: negative bytes allowed
 
-		tst_XtoLongFail("1 kilobite");
-		tst_XtoLongFail("1 BB");
-		tst_XtoLongFail("1.1");
-		tst_XtoLongFail("1.51 kb");
+		fxt.Test_XtoLongFail("1 kilobite");
+		fxt.Test_XtoLongFail("1 BB");
+		// fxt.Test_XtoLongFail("1.1");	// DELETED:do not check for fractional bytes; EX: 10.7 GB DATE:2015-01-06
+		// fxt.Test_XtoLongFail("1.51 kb");
 	}
-	void tst_XtoLong(String raw, long expd) {Tfds.Eq(expd, Io_size_.parse_or_(raw, Long_.MinValue));}
-	void tst_XtoLongFail(String raw) {
+	@Test    public void XtoStr() {
+		fxt.Test_XtoStr(1, "1.000  B");
+		fxt.Test_XtoStr(1024, "1.000 KB");
+		fxt.Test_XtoStr(1536, "1.500 KB");
+		fxt.Test_XtoStr(1024 * 1024, "1.000 MB");
+		fxt.Test_XtoStr(1016, "1,016.000  B");	// NOTE: 1016 is not 1.016 KB
+	}
+	@Test    public void Xto_str_full() {
+		fxt.Test_Xto_str(       500, 1, "#,###", " ", Bool_.Y,             "1 KB");
+		fxt.Test_Xto_str(      1000, 1, "#,###", " ", Bool_.Y,             "1 KB");
+		fxt.Test_Xto_str(      2000, 1, "#,###", " ", Bool_.Y,             "2 KB");
+		fxt.Test_Xto_str(   1234567, 1, "#,###", " ", Bool_.Y,         "1,206 KB");
+		fxt.Test_Xto_str(1234567890, 1, "#,###", " ", Bool_.Y,     "1,205,633 KB");
+	}
+	@Test    public void EqualsTest() {
+		fxt.Test_Equals("1", "1");
+		fxt.Test_Equals("1 kb", "1 kb");
+		fxt.Test_Equals("1024", "1 kb");
+		fxt.Test_Equals("1048576", "1 mb");
+		fxt.Test_Equals("1024 kb", "1 mb");
+		fxt.Test_Equals("1.5 kb", "1536 b");
+	}
+}
+class Io_size__fxt {
+	public void Test_XtoLong(String raw, long expd) {Tfds.Eq(expd, Io_size_.parse_or_(raw, Long_.MinValue));}
+	public void Test_XtoLongFail(String raw) {
 		long val = Io_size_.parse_or_(raw, Long_.MinValue);
 		if (val != Long_.MinValue) Tfds.Fail("expd parse failure; raw=" + raw);
 	}
-	@Test  public void XtoStr() {
-		tst_XtoStr(1, "1.000  B");
-		tst_XtoStr(1024, "1.000 KB");
-		tst_XtoStr(1536, "1.500 KB");
-		tst_XtoStr(1024 * 1024, "1.000 MB");
-		tst_XtoStr(1016, "1,016.000  B");	// NOTE: 1016 is not 1.016 KB
-	}	void tst_XtoStr(long val, String expd) {Tfds.Eq(expd, Io_size_.Xto_str(val));}
-	@Test  public void EqualsTest() {
-		tst_Equals("1", "1");
-		tst_Equals("1 kb", "1 kb");
-		tst_Equals("1024", "1 kb");
-		tst_Equals("1048576", "1 mb");
-		tst_Equals("1024 kb", "1 mb");
-		tst_Equals("1.5 kb", "1536 b");
-	}	void tst_Equals(String lhs, String rhs) {Tfds.Eq(Io_size_.parse_or_(lhs, Long_.MinValue), Io_size_.parse_or_(rhs, Long_.MinValue));}
+	public void Test_Equals(String lhs, String rhs) {Tfds.Eq(Io_size_.parse_or_(lhs, Long_.MinValue), Io_size_.parse_or_(rhs, Long_.MinValue));}
+	public void Test_XtoStr(long val, String expd) {Tfds.Eq(expd, Io_size_.Xto_str(val));}
+	public void Test_Xto_str(long val, int exp_1024, String val_fmt, String unit_pad, boolean round_0_to_1, String expd) {Tfds.Eq(expd, Io_size_.Xto_str(val, exp_1024, val_fmt, unit_pad, round_0_to_1));}
 }

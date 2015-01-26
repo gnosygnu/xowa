@@ -56,7 +56,7 @@ class Gfo_msg_root_fxt {
 	public void Tst_data_new_many(String path, String key, String fmt, Object... vals) {
 		Gfo_msg_data data = root.Data_new_many(Gfo_msg_itm_.Cmd_note, path, key, fmt, vals);
 		if (expd_item_uid != -1)	Tfds.Eq(expd_item_uid, data.Item().Uid());;
-		if (expd_item_fmtr_arg_exists != Bool_.__byte) Tfds.Eq(Bool_.int_(expd_item_fmtr_arg_exists), data.Item().Fmtr().Fmt_args_exist());
+		if (expd_item_fmtr_arg_exists != Bool_.__byte) Tfds.Eq(Bool_.By_int(expd_item_fmtr_arg_exists), data.Item().Fmtr().Fmt_args_exist());
 		if (expd_data_str != null)	Tfds.Eq(expd_data_str, data.Item().Gen_str_many(data.Vals()));
 	}
 }

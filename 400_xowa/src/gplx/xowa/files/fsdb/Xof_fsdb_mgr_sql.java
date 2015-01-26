@@ -18,8 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files.fsdb; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.dbs.*; import gplx.fsdb.*; import gplx.xowa.files.wiki_orig.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.qrys.*; import gplx.xowa.files.fsdb.caches.*;
 import gplx.xowa.files.fsdb.fs_roots.*;
+import gplx.xowa2.files.*;
 public class Xof_fsdb_mgr_sql implements Xof_fsdb_mgr, GfoInvkAble {
-	private Db_provider img_regy_provider = null;		
+	private Db_conn img_regy_provider = null;		
 	private Io_url app_file_dir;
 	private Xof_url_bldr url_bldr = Xof_url_bldr.new_v2_();
 	public boolean Tid_is_mem() {return false;}
@@ -94,6 +95,11 @@ public class Xof_fsdb_mgr_sql implements Xof_fsdb_mgr, GfoInvkAble {
 		Reg_select_only(page, exec_tid, itms, hash);
 		Xof_fsdb_mgr_._.Fsdb_search(this, app_file_dir, page, exec_tid, itms, bin_mgr.Repo_mgr(), url_bldr);
 	}
+	public boolean Download(Xofv_file_itm itm) {
+//			if (qry_mgr.Find(itm.Lnki_exec_tid(), itm)) {
+//			bin_mgr.Find_to_url_as_bool
+		return true;
+	}
 	public Fsdb_db_bin_fil Bin_db_get(int mnt_id, int bin_db_id) {
 		return mnt_mgr.Bin_db_get(mnt_id, bin_db_id);
 	}
@@ -127,9 +133,9 @@ public class Xof_fsdb_mgr_sql implements Xof_fsdb_mgr, GfoInvkAble {
 		img_regy_provider.Conn_term();
 	}
 	public static Io_url Wiki_orig_url(Io_url root_dir) {return root_dir.GenSubFil("wiki.orig#00.sqlite3");}
-	public static Db_provider Wiki_orig_provider(Io_url root_dir) {
+	public static Db_conn Wiki_orig_provider(Io_url root_dir) {
 		Bool_obj_ref created = Bool_obj_ref.n_();
-		Db_provider rv = Sqlite_engine_.Provider_load_or_make_(Wiki_orig_url(root_dir), created);
+		Db_conn rv = Sqlite_engine_.Conn_load_or_make_(Wiki_orig_url(root_dir), created);
 		if (created.Val())
 			Xof_wiki_orig_tbl.Create_table(rv);
 		return rv;

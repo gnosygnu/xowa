@@ -18,20 +18,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.wikis.images; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wikis.*;
 import gplx.dbs.*;
 public class Xob_wiki_image_tbl {
-	public Xob_wiki_image_tbl Create_table(Db_provider p) {Sqlite_engine_.Tbl_create_and_delete(p, Tbl_name, Tbl_sql); return this;}
-	public Xob_wiki_image_tbl Create_index(Db_provider p) {Sqlite_engine_.Idx_create(p, Idx_img_name); return this;}
-	public Db_stmt Insert_stmt(Db_provider p) {return Db_stmt_.new_insert_(p, Tbl_name, Fld_img_name, Fld_img_media_type, Fld_img_minor_mime, Fld_img_size, Fld_img_width, Fld_img_height, Fld_img_bits, Fld_img_ext_id, Fld_img_timestamp);}
+	public Xob_wiki_image_tbl Create_table(Db_conn p) {Sqlite_engine_.Tbl_create_and_delete(p, Tbl_name, Tbl_sql); return this;}
+	public Xob_wiki_image_tbl Create_index(Db_conn p) {Sqlite_engine_.Idx_create(p, Idx_img_name); return this;}
+	public Db_stmt Insert_stmt(Db_conn p) {return Db_stmt_.new_insert_(p, Tbl_name, Fld_img_name, Fld_img_media_type, Fld_img_minor_mime, Fld_img_size, Fld_img_width, Fld_img_height, Fld_img_bits, Fld_img_ext_id, Fld_img_timestamp);}
 	public void Insert(Db_stmt stmt, byte[] ttl, byte[] media_type, byte[] minor_mime, int size, int w, int h, int bits, int ext_id, byte[] img_timestamp) {
 		stmt.Clear()
-		.Val_str_by_bry_(ttl)
-		.Val_str_by_bry_(media_type)
-		.Val_str_by_bry_(minor_mime)
-		.Val_int_(size)
-		.Val_int_(w)
-		.Val_int_(h)
-		.Val_int_(bits)
-		.Val_int_(ext_id)
-		.Val_str_by_bry_(img_timestamp)
+		.Val_bry_as_str(ttl)
+		.Val_bry_as_str(media_type)
+		.Val_bry_as_str(minor_mime)
+		.Val_int(size)
+		.Val_int(w)
+		.Val_int(h)
+		.Val_int(bits)
+		.Val_int(ext_id)
+		.Val_bry_as_str(img_timestamp)
 		.Exec_insert();
 	}
 	public static final String Tbl_name = "image"

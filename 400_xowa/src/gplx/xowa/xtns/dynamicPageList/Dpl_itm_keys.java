@@ -35,7 +35,7 @@ class Dpl_itm_keys {
 		}
 	}
 	public static final byte
-	  Key_null = Byte_.MaxValue_127
+	  Key_null = Byte_.Max_value_127
 	, Key_category = 1
 	, Key_notcategory = 2
 	, Key_ns = 3

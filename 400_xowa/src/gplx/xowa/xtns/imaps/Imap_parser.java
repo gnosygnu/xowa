@@ -181,12 +181,15 @@ class Imap_parser {
 		int img_bgn = Bry_finder.Trim_fwd_space_tab(src, itm_bgn, itm_end);	// trim ws
 		int img_end = Parse_img__get_img_end(itm_end, src_end);
 		imap_img_src = Bry_.Add(Xop_tkn_.Lnki_bgn, Bry_.Mid(src, img_bgn, img_end), Xop_tkn_.Lnki_end);
-		Xop_lnki_tkn lnki_tkn = (Xop_lnki_tkn)Parse_link(imap_img_src);
+		Xop_tkn_itm tkn_itm = Parse_link(imap_img_src);			// NOTE: need to parse before imap_root.Data_mid() below
 		imap_img_src = imap_root.Data_mid();					// need to re-set src to pick up templates; EX: <imagemap>File:A.png|thumb|{{Test_template}}\n</imagemap>; PAGE:en.w:Kilauea; DATE:2014-07-27
 		Xop_lnki_logger file_wkr = wiki_ctx.Lnki().File_wkr();	// NOTE: do not do imap_ctx.Lnki(); imap_ctx is brand new
-		if (lnki_tkn == null)
+		if (	tkn_itm == null									// no lnki or lnke
+			||	tkn_itm.Tkn_tid() != Xop_tkn_itm_.Tid_lnki		// no lnki; occurs with badly constructed maps; PAGE:en.w:Demography_of_the_United_Kingdom DATE:2015-01-22
+			)
 			imap_ctx.Wiki().App().Usr_dlg().Warn_many("", "", "image_map failed to find lnki; page=~{0} imageMap=~{1}", String_.new_utf8_(imap_ctx.Cur_page().Ttl().Full_txt()), String_.new_utf8_(imap_img_src));
 		else {
+			Xop_lnki_tkn lnki_tkn = (Xop_lnki_tkn)tkn_itm;
 			imap_img = new Imap_itm_img(lnki_tkn);
 			lnki_tkn.Lnki_file_wkr_(imap);
 			wiki_ctx.Cur_page().Lnki_list().Add(lnki_tkn);

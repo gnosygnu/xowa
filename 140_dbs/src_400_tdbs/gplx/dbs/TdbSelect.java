@@ -16,12 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-import gplx.criterias.*;
+import gplx.criterias.*; import gplx.dbs.sqls.*;
 import gplx.lists.*; /*ComparerAble*/ import gplx.stores.*; /*GfoNdeRdr*/
 class TdbSelectWkr implements Db_qryWkr {
 	public Object Exec(Db_engine engineObj, Db_qry cmdObj) {
 		TdbEngine engine = TdbEngine.cast_(engineObj); Db_qry_select cmd = (Db_qry_select)cmdObj;
-		if (cmd.From().Tbls().Count() > 1) throw Err_.new_key_("gplx.tdbs", "joins not supported for tdbs").Add("sql", cmd.XtoSql());
+		if (cmd.From().Tbls().Count() > 1) throw Err_.new_key_("gplx.tdbs", "joins not supported for tdbs").Add("sql", cmd.Xto_sql());
 
 		TdbTable tbl = engine.FetchTbl(cmd.From().BaseTable().TblName());
 		GfoNdeList rv = (cmd.Where() == Db_qry_.WhereAll && cmd.Limit() == Db_qry_select.Limit_disabled) ? rv = tbl.Rows() : FilterRecords(tbl, cmd.Where().Crt(), cmd.Limit());

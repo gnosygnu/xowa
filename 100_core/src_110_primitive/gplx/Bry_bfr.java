@@ -170,6 +170,7 @@ public class Bry_bfr {
 		Add_int_fixed(val, digit_len);
 		return this;
 	}
+	public Bry_bfr Add_int_digits(int digits, int val)	{return Add_int(val, Int_.Log10(val), digits);}
 	public Bry_bfr Add_int_fixed(int val, int digits) {return Add_int(val, Int_.Log10(val), digits);}
 	public Bry_bfr Add_int(int val, int valLog, int arySlots) {
 		int aryBgn = bfr_len, aryEnd = bfr_len + arySlots;

@@ -17,32 +17,32 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
 public class Db_stmt_bldr implements RlsAble {
-	private Db_provider provider;
+	private Db_conn conn;
 	private Db_stmt create, update, delete;
 	private String tbl_name; private String[] flds_keys, flds_vals, flds_all;
 	public Db_stmt_bldr(String tbl_name, String[] flds_keys, String... flds_vals) {
 		this.tbl_name = tbl_name; this.flds_keys = flds_keys; this.flds_vals = flds_vals;
 		flds_all = String_.Ary_add(flds_keys, flds_vals);
 	}
-	public Db_stmt_bldr Init(Db_provider v) {
-		this.provider = v;
-		provider.Txn_mgr().Txn_bgn_if_none();
+	public Db_stmt_bldr Init(Db_conn v) {
+		this.conn = v;
+		conn.Txn_mgr().Txn_bgn_if_none();
 		return this;
 	}
 	public Db_stmt Get(byte cmd_mode) {
 		switch (cmd_mode) {
-			case Db_cmd_mode.Create:	if (create == null) create = Db_stmt_.new_insert_(provider, tbl_name, flds_all);				return create;
-			case Db_cmd_mode.Update:	if (update == null) update = Db_stmt_.new_update_(provider, tbl_name, flds_keys, flds_vals);	return update;
-			case Db_cmd_mode.Delete:	if (delete == null) delete = Db_stmt_.new_delete_(provider, tbl_name, flds_keys);				return delete;
+			case Db_cmd_mode.Create:	if (create == null) create = Db_stmt_.new_insert_(conn, tbl_name, flds_all);				return create;
+			case Db_cmd_mode.Update:	if (update == null) update = Db_stmt_.new_update_(conn, tbl_name, flds_keys, flds_vals);	return update;
+			case Db_cmd_mode.Delete:	if (delete == null) delete = Db_stmt_.new_delete_(conn, tbl_name, flds_keys);				return delete;
 			case Db_cmd_mode.Ignore:	return Db_stmt_.Null;
 			default:					throw Err_.unhandled(cmd_mode);
 		}
 	}
 	public void Commit() {
-		provider.Txn_mgr().Txn_end_all();
+		conn.Txn_mgr().Txn_end_all();
 	}
 	public void Rls() {
-		provider = null;
+		conn = null;
 		create = Rls(create);
 		update = Rls(update);
 		delete = Rls(delete);

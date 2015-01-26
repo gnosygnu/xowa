@@ -18,20 +18,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.dbs.tbls.*;
 public class Xob_wdata_pid_sql extends Xob_wdata_pid_base {
-	Xodb_mgr_sql db_mgr; Xodb_wdata_pids_tbl tbl; Db_stmt stmt; Db_provider provider;
+	Xodb_mgr_sql db_mgr; Xodb_wdata_pids_tbl tbl; Db_stmt stmt; Db_conn conn;
 	@Override public String Wkr_key() {return KEY;} public static final String KEY = "import.sql.wdata.pid";	
 	@Override public void Pid_bgn() {
 		db_mgr = wiki.Db_mgr_as_sql();
 		tbl = db_mgr.Tbl_wdata_pids();			
-		provider = db_mgr.Fsys_mgr().Provider_wdata();
-		stmt = tbl.Insert_stmt(provider);
-		provider.Txn_mgr().Txn_bgn_if_none();
+		conn = db_mgr.Fsys_mgr().Conn_wdata();
+		stmt = tbl.Insert_stmt(conn);
+		conn.Txn_mgr().Txn_bgn_if_none();
 	}
 	@Override public void Pid_add(byte[] lang_key, byte[] ttl, byte[] pid) {
 		tbl.Insert(stmt, lang_key, ttl, pid);
 	}
 	@Override public void Pid_end() {
-		provider.Txn_mgr().Txn_end_all();
+		conn.Txn_mgr().Txn_end_all();
 		stmt.Rls();
 		db_mgr.Fsys_mgr().Index_create(wiki.App().Usr_dlg(), Byte_.Ary(Xodb_file_tid.Tid_core, Xodb_file_tid.Tid_wikidata), Index_wdata_pids);
 	}

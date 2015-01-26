@@ -112,7 +112,7 @@ class Wdata_claims_parser_v2 {
 	public Wdata_claim_itm_core Parse_mainsnak(byte[] qid, Json_itm_nde nde, int pid) {
 		int len = nde.Subs_len();
 		Hash_adp_bry dict = Wdata_dict_mainsnak.Dict;
-		byte snak_tid = Byte_.MaxValue_127;
+		byte snak_tid = Byte_.Max_value_127;
 		for (int i = 0; i < len; ++i) {
 			Json_itm_kv sub = Json_itm_kv.cast_(nde.Subs_get_at(i));
 			byte tid = Wdata_dict_utl.Get_tid_or_invalid(qid, dict, sub.Key().Data_bry()); if (tid == Wdata_dict_utl.Tid_invalid) continue;

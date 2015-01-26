@@ -18,31 +18,31 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.fsdb; import gplx.*;
 import gplx.dbs.*;
 public class Fsdb_mnt_tbl {
-	public static void Create_table(Db_provider p) {
+	public static void Create_table(Db_conn p) {
 		Sqlite_engine_.Tbl_create(p, Tbl_name, Tbl_sql);
 	}
-	public static void Insert(Db_provider p, int id, String name, String url) {
+	public static void Insert(Db_conn p, int id, String name, String url) {
 		Db_stmt stmt = Insert_stmt(p);
 		try {Insert(stmt, id, name, url);}
 		finally {stmt.Rls();}
 	}
-	private static Db_stmt Insert_stmt(Db_provider p) {return Db_stmt_.new_insert_(p, Tbl_name, Fld_mnt_id, Fld_mnt_name, Fld_mnt_url);}
+	private static Db_stmt Insert_stmt(Db_conn p) {return Db_stmt_.new_insert_(p, Tbl_name, Fld_mnt_id, Fld_mnt_name, Fld_mnt_url);}
 	private static void Insert(Db_stmt stmt, int id, String name, String url) {
 		stmt.Clear()
-		.Val_int_(id)
-		.Val_str_(name)
-		.Val_str_(url)
+		.Val_int(id)
+		.Val_str(name)
+		.Val_str(url)
 		.Exec_insert();
 	}	
-	public static Db_stmt Update_stmt(Db_provider p) {return Db_stmt_.new_update_(p, Tbl_name, String_.Ary(Fld_mnt_id), Fld_mnt_name, Fld_mnt_url);}
+	public static Db_stmt Update_stmt(Db_conn p) {return Db_stmt_.new_update_(p, Tbl_name, String_.Ary(Fld_mnt_id), Fld_mnt_name, Fld_mnt_url);}
 	public static void Update(Db_stmt stmt, int id, String name, String url) {
 		stmt.Clear()
-		.Val_str_(name)
-		.Val_str_(url)
-		.Val_int_(id)
+		.Val_str(name)
+		.Val_str(url)
+		.Val_int(id)
 		.Exec_update();
 	}	
-	public static Fsdb_mnt_itm[] Select_all(Db_provider p) {
+	public static Fsdb_mnt_itm[] Select_all(Db_conn p) {
 		Db_qry qry = Db_qry_.select_().From_(Tbl_name);
 		DataRdr rdr = DataRdr_.Null;
 		ListAdp list = ListAdp_.new_();

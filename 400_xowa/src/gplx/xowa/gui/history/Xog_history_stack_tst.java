@@ -28,7 +28,7 @@ public class Xog_history_stack_tst {
 	@Test  public void Add_3_bwd_add()		{fxt.Exec_add_many("A", "B", "C").Exec_go_bwd().Exec_add_many("D").Test_len(3).Test_cur("D").Test_pos(2);}
 	@Test  public void Add_3_bwd_bwd_add()	{fxt.Exec_add_many("A", "B", "C").Exec_go_bwd().Exec_go_bwd().Exec_add_many("D").Test_len(2).Test_cur("D").Test_pos(1);}
 	@Test  public void Add_dif_ns()			{fxt.Exec_add_many("A", "Help:A").Test_cur("Help:A");}	// PURPOSE.fix: page_stack was only differtiating by Page_db, not Full; EX: Unicode -> Category:Unicode
-	@Test  public void Add_qargs() {// PURPOSE.fix: page_stack was only differtiating by qtxt args
+	@Test  public void Add_qargs() {// PURPOSE.fix: page_stack was only differentiating by qtxt args
 		fxt	.Exec_add_one("Special:AllPages", "?from=A")
 			.Exec_add_one("Special:AllPages", "?from=B")
 			.Exec_add_many("B")

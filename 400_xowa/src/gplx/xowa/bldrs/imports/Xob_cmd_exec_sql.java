@@ -29,7 +29,7 @@ public class Xob_cmd_exec_sql implements Xob_cmd {
 		Xodb_fsys_mgr fsys_mgr = db_mgr.Fsys_mgr();
 		Xodb_file file = fsys_mgr.Get_by_idx(file_idx);
 		app.Usr_dlg().Plog_many("", "", "exec_sql: running sql; file_idx=~{0} sql=~{1}", file_idx, sql);
-		file.Provider().Exec_sql(sql);
+		file.Conn().Exec_sql(sql);
 	}
 	public void Cmd_run() {}
 	public void Cmd_end() {}

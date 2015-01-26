@@ -22,7 +22,7 @@ import gplx.xowa.bldrs.oimgs.*; import gplx.fsdb.*; import gplx.xowa.files.*; im
 import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.hdumps.*;
 import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.wdatas.*;
 public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xop_lnki_logger {
-	private Db_provider provider; private Db_stmt stmt;
+	private Db_conn conn; private Db_stmt stmt;
 	private boolean wdata_enabled = true, xtn_ref_enabled = true, gen_html, gen_hdump;
 	private Xop_log_invoke_wkr invoke_wkr; private Xop_log_property_wkr property_wkr;
 	private int[] ns_ids = Int_.Ary(Xow_ns_.Id_main);// , Xow_ns_.Id_category, Xow_ns_.Id_template
@@ -32,19 +32,19 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xop_lnki_log
 	@Override public String Cmd_key() {return KEY_oimg;} public static final String KEY_oimg = "file.lnki_temp";
 	@Override public byte Init_redirect() {return Bool_.N_byte;}
 	@Override public int[] Init_ns_ary() {return ns_ids;}
-	@Override protected void Init_reset(Db_provider p) {
+	@Override protected void Init_reset(Db_conn p) {
 		p.Exec_sql("DELETE FROM " + Xodb_xowa_cfg_tbl.Tbl_name);
 		p.Exec_sql("DELETE FROM " + Xob_lnki_temp_tbl.Tbl_name);
 		invoke_wkr.Init_reset();
 		property_wkr.Init_reset();
 	}
-	@Override protected Db_provider Init_db_file() {
+	@Override protected Db_conn Init_db_file() {
 		ctx.Lnki().File_wkr_(this);
 		Xodb_db_file make_db_file = Xodb_db_file.init__file_make(wiki.Fsys_mgr().Root_dir());
-		provider = make_db_file.Provider();
-		Xob_lnki_temp_tbl.Create_table(provider);
-		stmt = Xob_lnki_temp_tbl.Insert_stmt(provider);
-		return provider;
+		conn = make_db_file.Conn();
+		Xob_lnki_temp_tbl.Create_table(conn);
+		stmt = Xob_lnki_temp_tbl.Insert_stmt(conn);
+		return conn;
 	}
 	@Override protected void Cmd_bgn_end() {
 		wiki_ns_file_is_case_match_all = Wiki_ns_for_file_is_case_match_all(wiki);	// NOTE: must call after wiki.init
@@ -69,10 +69,10 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xop_lnki_log
 		trg_mnt_mgr.Insert_to_mnt_(Fsdb_mnt_mgr.Mnt_idx_main);
 		Fsdb_mnt_mgr.Patch(trg_mnt_mgr);	// NOTE: see fsdb_make; DATE:2014-04-26
 		if (gen_hdump) {
-			hdump_bldr = new Xob_hdump_bldr(wiki.Db_mgr_as_sql(), provider, hdump_max);
+			hdump_bldr = new Xob_hdump_bldr(wiki.Db_mgr_as_sql(), conn, hdump_max);
 			hdump_bldr.Bld_init();
 		}
-		provider.Txn_mgr().Txn_bgn_if_none();
+		conn.Txn_mgr().Txn_bgn_if_none();
 		log_mgr.Txn_bgn();
 	}
 	@Override public void Exec_pg_itm_hook(Xow_ns ns, Xodb_page db_page, byte[] page_src) {
@@ -101,13 +101,13 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xop_lnki_log
 		}
 	}
 	@Override public void Exec_commit_hook() {
-		provider.Txn_mgr().Txn_end_all_bgn_if_none();	// save lnki_temp
+		conn.Txn_mgr().Txn_end_all_bgn_if_none();	// save lnki_temp
 		if (gen_hdump) hdump_bldr.Commit();
 	}
 	@Override public void Exec_end_hook() {
 		if (gen_hdump) hdump_bldr.Bld_term();
 		wiki.App().Log_mgr().Txn_end();
-		provider.Txn_mgr().Txn_end();
+		conn.Txn_mgr().Txn_end();
 	}
 	public void Wkr_exec(Xop_ctx ctx, byte[] src, Xop_lnki_tkn lnki, byte lnki_src_tid) {
 		if (lnki.Ttl().ForceLiteralLink()) return; // ignore literal links which creat a link to file, but do not show the image; EX: [[:File:A.png|thumb|120px]] creates a link to File:A.png, regardless of other display-oriented args
@@ -121,7 +121,7 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xop_lnki_log
 				usr_dlg.Warn_many("", "", "page and thumbtime both set; this may be an issue with fsdb: page=~{0} ttl=~{1}", ctx.Cur_page().Ttl().Page_db_as_str(), String_.new_utf8_(ttl));
 		if (lnki.Ns_id() == Xow_ns_.Id_media)
 			lnki_src_tid = Xob_lnki_src_tid.Tid_media;
-		Xob_lnki_temp_tbl.Insert(stmt, ctx.Cur_page().Revision_data().Id(), ttl, ttl_commons, Byte_.int_(ext.Id()), lnki.Lnki_type(), lnki_src_tid, lnki.Lnki_w(), lnki.Lnki_h(), lnki.Upright(), lnki_thumbtime, lnki_page);
+		Xob_lnki_temp_tbl.Insert(stmt, ctx.Cur_page().Revision_data().Id(), ttl, ttl_commons, Byte_.By_int(ext.Id()), lnki.Lnki_type(), lnki_src_tid, lnki.Lnki_w(), lnki.Lnki_h(), lnki.Upright(), lnki_thumbtime, lnki_page);
 	}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_wdata_enabled_))				wdata_enabled = m.ReadYn("v");

@@ -55,7 +55,7 @@ public class Cache_fil_itm implements CompareAble {
 		cache_time = rdr.ReadLong(Cache_fil_tbl.Fld_cache_time);
 		return this;
 	}
-	public Cache_fil_itm Init_by_make(int uid, int dir_id, byte[] fil_name, boolean fil_is_orig, int fil_w, int fil_h, double fil_thumbtime, Xof_ext fil_ext, long fil_size) {
+	public Cache_fil_itm Init_by_make(int uid, int dir_id, byte[] fil_name, boolean fil_is_orig, int fil_w, int fil_h, double fil_thumbtime, Xof_ext fil_ext, long fil_size, int fil_page) {
 		cmd_mode = Db_cmd_mode.Create;
 		this.uid = uid;
 		this.dir_id = dir_id;
@@ -77,6 +77,16 @@ public class Cache_fil_itm implements CompareAble {
 			.Add_int_variable(fil_w).Add_byte_pipe()
 			.Add_int_variable(fil_h).Add_byte_pipe()
 			.Add_int_variable(Xof_doc_thumb.X_int(fil_thumbtime))
+			;
+		return bfr.Xto_bry_and_clear();
+	}
+	public static byte[] Gen_hash_key_v2(Bry_bfr bfr, byte[] dir, byte[] ttl, boolean fil_is_orig, int fil_w, double thumbtime, int page) {
+		bfr	.Add(dir).Add_byte_pipe()
+			.Add(ttl).Add_byte_pipe()
+			.Add_yn(fil_is_orig).Add_byte_pipe()
+			.Add_int_variable(fil_w).Add_byte_pipe()
+			.Add_double(Xof_doc_thumb.Db_save_double(thumbtime))
+			.Add_int_variable(Xof_doc_page.Db_save_int(page))
 			;
 		return bfr.Xto_bry_and_clear();
 	}

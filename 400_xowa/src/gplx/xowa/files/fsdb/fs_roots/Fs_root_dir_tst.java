@@ -47,7 +47,7 @@ class Fs_root_dir_fxt {
 		Fsdb_cfg_tbl cfg_tbl = Fsdb_cfg_tbl_.new_mem_();
 		orig_fil_tbl = new Orig_fil_tbl_mem();
 		Xof_img_wkr_query_img_size img_size_wkr = new Xof_img_wkr_query_img_size_test();
-		root_dir.Init(url, Db_provider_mkr_.Mem_create_y, cfg_tbl, orig_fil_tbl, Gfo_usr_dlg_.Null, img_size_wkr);
+		root_dir.Init(url, Db_conn_mkr_.Mem_create_y, cfg_tbl, orig_fil_tbl, Gfo_usr_dlg_.Null, img_size_wkr);
 	}
 	public Orig_fil_mok itm_() {return new Orig_fil_mok();}
 	public void Init_fs(String url, int w, int h) {Save_img(url, w, h);}

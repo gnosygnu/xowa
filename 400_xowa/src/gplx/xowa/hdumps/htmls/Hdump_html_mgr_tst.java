@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
 import org.junit.*; import gplx.xowa.hdumps.core.*; import gplx.xowa.hdumps.dbs.*; import gplx.xowa.files.*;
+import gplx.xowa2.gui.*;
 public class Hdump_html_mgr_tst {
 	@Before public void init() {
 		fxt.Clear();
@@ -105,7 +106,7 @@ class Hdump_html_mgr_fxt {
 	private Bry_bfr bfr = Bry_bfr.reset_(255);
 	private ListAdp img_list = ListAdp_.new_();
 	private Xow_wiki wiki;
-	public Hdump_page Hpg() {return hpg;} private Hdump_page hpg = new Hdump_page();
+	public Xog_page Hpg() {return hpg;} private Xog_page hpg = new Xog_page();
 	public void Clear() {
 		Xoa_app app = Xoa_app_fxt.app_();
 		wiki = Xoa_app_fxt.wiki_tst_(app);

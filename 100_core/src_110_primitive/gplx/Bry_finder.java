@@ -35,7 +35,7 @@ public class Bry_finder {
 		return Bry_finder.Not_found;
 	}
 	public static int Move_fwd(byte[] src, byte[] lkp, int cur, int end) {
-		int rv = Find_fwd(src, lkp, 0, src.length);
+		int rv = Find_fwd(src, lkp, cur, src.length);
 		return rv == Bry_finder.Not_found ? rv : rv + lkp.length;
 	}
 	public static int Find_fwd(byte[] src, byte[] lkp)								{return Find(src, lkp, 0	, src.length, true);}

@@ -80,7 +80,7 @@ public class DbMaprRdr extends DataRdr_base implements SrlMgr {
 		if (tblByRootCrt == null) {
 			DataRdr dbRdr = null;
 			try {
-				dbRdr = Db_qry_.select_().From_(mapr.TableName()).Where_(rootCrt).Exec_qry_as_rdr(provider);
+				dbRdr = Db_qry_.select_().From_(mapr.TableName()).Where_(rootCrt).Exec_qry_as_rdr(conn);
 				tblByRootCrt = GfoNde_.rdr_(dbRdr);
 			}
 			finally {dbRdr.Rls();}
@@ -112,11 +112,11 @@ public class DbMaprRdr extends DataRdr_base implements SrlMgr {
 	@Override public KeyVal KeyValAt(int i) {throw Err_.not_implemented_();}
 	@Override public SrlMgr SrlMgr_new(Object o) {return new DbMaprRdr();}
 	HashAdp tables = HashAdp_.new_();
-	Db_provider provider; Criteria rootCrt;
+	Db_conn conn; Criteria rootCrt;
 	DbMaprMgr mgr; ListAdp rowStack = ListAdp_.new_();
-	public static DbMaprRdr new_(Db_conn_info dbInfo, Criteria rootCrt) {
+	public static DbMaprRdr new_(Db_url dbInfo, Criteria rootCrt) {
 		DbMaprRdr rv = new DbMaprRdr();
-		rv.provider = Db_provider_pool._.Get_or_new(dbInfo); rv.rootCrt = rootCrt;
+		rv.conn = Db_conn_pool_old._.Get_or_new(dbInfo); rv.rootCrt = rootCrt;
 		return rv;
 	}	DbMaprRdr() {}
 }

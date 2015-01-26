@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps.loads; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
 import org.junit.*; import gplx.xowa.files.*; import gplx.xowa.hdumps.dbs.*; import gplx.xowa.hdumps.core.*; import gplx.xowa.hdumps.saves.*; import gplx.xowa.hdumps.pages.*; import gplx.xowa.dbs.*;
+import gplx.xowa2.gui.*;
 public class Hdump_load_mgr_tst {
 	@Before public void init() {fxt.Clear();} private Hdump_load_mgr_fxt fxt = new Hdump_load_mgr_fxt();
 //		@Test  public void Body() {
@@ -44,7 +45,7 @@ public class Hdump_load_mgr_tst {
 }
 class Hdump_load_mgr_fxt {
 	private Hdump_load_mgr load_mgr;
-	private Hdump_page hpg = new Hdump_page();
+	private Xog_page hpg = new Xog_page();
 	private ListAdp init_rows = ListAdp_.new_();
 	private String expd_body, expd_display_ttl, expd_content_sub, expd_sidebar_div;
 	private ListAdp expd_imgs = ListAdp_.new_();

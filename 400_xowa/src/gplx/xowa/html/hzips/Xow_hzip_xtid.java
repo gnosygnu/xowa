@@ -21,7 +21,7 @@ class Xow_hzip_xtid {
 		int xtid_bgn = pos + Len_xtid;											if (!Bry_.Match(src, pos, xtid_bgn, Bry_xtid)) return Xow_hzip_mgr.Unhandled; // next atr should be "xtid='"
 		int xtid_end = Bry_finder.Find_fwd(src, Byte_ascii.Apos, xtid_bgn);		if (xtid_end == Bry_finder.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("xtid_end_missing", bgn, xtid_bgn);
 		Object xtid_obj = Xtids.Get_by_mid(src, xtid_bgn, xtid_end);			if (xtid_obj == null) return hzip_mgr.Warn_by_pos("a.xtid_invalid", xtid_bgn, xtid_end);
-		xtid_ref.Val_(xtid_obj == null ? Byte_.MinValue : ((Byte_obj_val)xtid_obj).Val());
+		xtid_ref.Val_(xtid_obj == null ? Byte_.Min_value : ((Byte_obj_val)xtid_obj).Val());
 		return xtid_end;
 	}
 	private static final byte[]

@@ -59,7 +59,7 @@ class Scrib_lib_wikibase_srl {
 		}
 		return rv;
 	}
-	private static KeyVal Srl_sitelinks_badges(byte[][] badges, int base_adj) {
+	private static KeyVal Srl_sitelinks_badges(byte[][] badges, int base_adj) {	// DATE:2014-11-13
 		if (badges == null) badges = Bry_.Ary_empty;	// null badges -> badges:[]
 		int len = badges.length;
 		KeyVal[] kvs = len == 0 ? KeyVal_.Ary_empty : new KeyVal[len];

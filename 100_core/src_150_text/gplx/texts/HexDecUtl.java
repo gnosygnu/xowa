@@ -30,16 +30,16 @@ public class HexDecUtl {
 	public static int parse_or_(byte[] raw, int or) {return parse_or_(raw, 0, raw.length, or);}
 	public static int parse_or_(byte[] raw, int bgn, int end, int or) {
 		int rv = 0; int factor = 1;
-		byte b = Byte_.MaxValue_127;
+		byte b = Byte_.Max_value_127;
 		for (int i = end - 1; i >= bgn; i--) {
 			switch (raw[i]) {
 				case Byte_ascii.Num_0: b =  0; break; case Byte_ascii.Num_1: b =  1; break; case Byte_ascii.Num_2: b =  2; break; case Byte_ascii.Num_3: b =  3; break; case Byte_ascii.Num_4: b =  4; break;
 				case Byte_ascii.Num_5: b =  5; break; case Byte_ascii.Num_6: b =  6; break; case Byte_ascii.Num_7: b =  7; break; case Byte_ascii.Num_8: b =  8; break; case Byte_ascii.Num_9: b =  9; break;
 				case Byte_ascii.Ltr_A: b = 10; break; case Byte_ascii.Ltr_B: b = 11; break; case Byte_ascii.Ltr_C: b = 12; break; case Byte_ascii.Ltr_D: b = 13; break; case Byte_ascii.Ltr_E: b = 14; break; case Byte_ascii.Ltr_F: b = 15; break;
 				case Byte_ascii.Ltr_a: b = 10; break; case Byte_ascii.Ltr_b: b = 11; break; case Byte_ascii.Ltr_c: b = 12; break; case Byte_ascii.Ltr_d: b = 13; break; case Byte_ascii.Ltr_e: b = 14; break; case Byte_ascii.Ltr_f: b = 15; break;
-				default: b = Byte_.MaxValue_127; break;
+				default: b = Byte_.Max_value_127; break;
 			}
-			if (b == Byte_.MaxValue_127) return or;
+			if (b == Byte_.Max_value_127) return or;
 			rv += b * factor;
 			factor *= 16;
 		}

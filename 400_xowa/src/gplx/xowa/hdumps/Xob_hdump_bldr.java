@@ -19,15 +19,15 @@ package gplx.xowa.hdumps; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*; import gplx.ios.*; import gplx.xowa.dbs.*; import gplx.xowa.dbs.tbls.*; import gplx.xowa.hdumps.saves.*; import gplx.xowa.hdumps.dbs.*; import gplx.xowa.hdumps.core.*; import gplx.xowa.html.hzips.*;
 public class Xob_hdump_bldr {
 	private Xodb_fsys_mgr fsys_mgr; private Xodb_file core_db; private Xodb_xowa_db_tbl db_tbl; private Xodb_xowa_cfg_tbl cfg_tbl; private Db_stmt cfg_update_stmt;
-	private int hdump_db_id; private long hdump_db_size, hdump_db_max; private Db_provider hdump_db_provider;
+	private int hdump_db_id; private long hdump_db_size, hdump_db_max; private Db_conn hdump_db_provider;
 	private Xodb_hdump_mgr hdump_mgr; private Hdump_save_mgr hdump_save_mgr;
-	public Xob_hdump_bldr(Xodb_mgr_sql db_mgr, Db_provider make_provider, long hdump_db_max) {
+	public Xob_hdump_bldr(Xodb_mgr_sql db_mgr, Db_conn make_provider, long hdump_db_max) {
 		this.hdump_db_max = hdump_db_max;
 		this.fsys_mgr = db_mgr.Fsys_mgr();
 		core_db = fsys_mgr.Get_tid_root(Xodb_file_tid.Tid_core);
 		db_tbl = db_mgr.Tbl_xowa_db();
-		cfg_tbl = new Xodb_xowa_cfg_tbl().Provider_(make_provider); cfg_update_stmt = cfg_tbl.Update_stmt();
-		Xodb_hdump_mgr_setup.Assert_col__page_html_db_id(core_db.Provider(), cfg_tbl);
+		cfg_tbl = new Xodb_xowa_cfg_tbl().Conn_(make_provider); cfg_update_stmt = cfg_tbl.Update_stmt();
+		Xodb_hdump_mgr_setup.Assert_col__page_html_db_id(core_db.Conn(), cfg_tbl);
 		hdump_mgr = db_mgr.Hdump_mgr(); hdump_save_mgr = hdump_mgr.Save_mgr();
 		hdump_save_mgr.Hdump_stats_enable_y_(make_provider);
 	}
@@ -61,15 +61,15 @@ public class Xob_hdump_bldr {
 	private void Db_init(Xodb_file db_file, long hdump_db_size) {
 		this.hdump_db_id = db_file.Id();
 		this.hdump_db_size = hdump_db_size;
-		this.hdump_db_provider = db_file.Provider();
-		this.hdump_save_mgr.Tbl().Provider_(hdump_db_provider);
+		this.hdump_db_provider = db_file.Conn();
+		this.hdump_save_mgr.Tbl().Conn_(hdump_db_provider);
 	}
 	private static Xodb_file Db_make(Xodb_fsys_mgr fsys_mgr) {
 		Xodb_file rv = fsys_mgr.Make(Xodb_file_tid.Tid_html);
-		rv.Provider().Exec_sql(Xodb_wiki_page_html_tbl.Tbl_sql);
+		rv.Conn().Exec_sql(Xodb_wiki_page_html_tbl.Tbl_sql);
 		return rv;
 	}
-	private static void Db_term(Xodb_file core_db_file, Db_provider hdump_db_provider, int hdump_db_id) {
+	private static void Db_term(Xodb_file core_db_file, Db_conn hdump_db_provider, int hdump_db_id) {
 		hdump_db_provider.Txn_mgr().Txn_end_all();											// commit transactions
 		Sqlite_engine_.Idx_create(hdump_db_provider, Xodb_wiki_page_html_tbl.Idx_core);		// create index
 		Sqlite_engine_.Db_attach(hdump_db_provider, "page_db", core_db_file.Url().Raw());	// update page_db.page with page_html_db_id
@@ -77,7 +77,7 @@ public class Xob_hdump_bldr {
 		hdump_db_provider.Exec_sql(String_.Format(Sql_update_page_html_db_id, hdump_db_id));
 		hdump_db_provider.Txn_mgr().Txn_end();
 		Sqlite_engine_.Db_detach(hdump_db_provider, "page_db");
-		hdump_db_provider.Conn_term();														// release provider
+		hdump_db_provider.Conn_term();														// release conn
 	}
 	private static final String Cfg_grp_hdump_make = "hdump.make", Cfg_itm_hdump_size = "hdump.size";
 	private static final String Sql_update_page_html_db_id = String_.Concat_lines_nl_skip_last

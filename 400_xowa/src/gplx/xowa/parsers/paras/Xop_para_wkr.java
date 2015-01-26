@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.paras; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.xowa.parsers.tblws.*;
+import gplx.xowa.parsers.tblws.*; import gplx.core.btries.*;
 public class Xop_para_wkr implements Xop_ctx_wkr {
 	private boolean para_enabled;
 	private byte cur_mode;
@@ -157,7 +157,8 @@ public class Xop_para_wkr implements Xop_ctx_wkr {
 	}
 	public int Process_pre(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos, int txt_pos) {
 		Dd_clear(ctx);
-		Object o = ctx.App().Utl_trie_tblw_ws().Match_bgn(src, txt_pos, src_len);
+		Btrie_slim_mgr tblw_ws_trie = ctx.App().Utl_trie_tblw_ws();
+		Object o = tblw_ws_trie.Match_bgn(src, txt_pos, src_len);
 		if (o != null) {	// tblw_ws found
 			Xop_tblw_ws_itm ws_itm = (Xop_tblw_ws_itm)o;
 			byte tblw_type = ws_itm.Tblw_type();
@@ -170,9 +171,18 @@ public class Xop_para_wkr implements Xop_ctx_wkr {
 					}
 					break;
 				case Xop_tblw_ws_itm.Type_xnde:
-					if (bgn_pos != Xop_parser_.Doc_bgn_bos)
-						ctx.Para().Process_nl(ctx, root, src, bgn_pos, cur_pos);
-					return ctx.Xnde().Make_tkn(ctx, tkn_mkr, root, src, src_len, txt_pos, txt_pos + 1);
+					int nxt_pos = tblw_ws_trie.Match_pos();
+					if (nxt_pos < src_len) {	// bounds check
+						switch (src[nxt_pos]) {	// check that next char is "end" of xnde name; guard against false matches like "<trk" PAGE:de.v:Via_Jutlandica/Gpx DATE:2014-11-29
+							case Byte_ascii.Space: case Byte_ascii.NewLine: case Byte_ascii.Tab:		// whitespace
+							case Byte_ascii.Slash: case Byte_ascii.Gt:									// end node
+							case Byte_ascii.Quote: case Byte_ascii.Apos:								// quotes
+								if (bgn_pos != Xop_parser_.Doc_bgn_bos)
+									ctx.Para().Process_nl(ctx, root, src, bgn_pos, cur_pos);
+								return ctx.Xnde().Make_tkn(ctx, tkn_mkr, root, src, src_len, txt_pos, txt_pos + 1);
+						}
+					}
+					break;
 				default: {
 					int tblw_rv = ctx.Tblw().Make_tkn_bgn(ctx, tkn_mkr, root, src, src_len, bgn_pos, txt_pos + ws_itm.Hook_len(), false, tblw_type, Xop_tblw_wkr.Called_from_pre, -1, -1);
 					if (tblw_rv != -1)	// \n\s| is valid tblw tkn and processed; otherwise process pre-code below; EX:w:Wikipedia:WikiProject_History/CategoryExample; DATE:2014-04-14

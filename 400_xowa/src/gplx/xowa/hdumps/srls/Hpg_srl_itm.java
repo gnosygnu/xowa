@@ -17,8 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps.srls; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
 import gplx.xowa.hdumps.core.*;
+import gplx.xowa2.gui.*;
 public interface Hpg_srl_itm {
 	byte Tid();
-	int Load(Hdump_page hpg, byte[] bry, int bry_len, int itm_bgn, Int_obj_ref count_ref);
-	void Save(Hdump_page hpg, Bry_bfr bfr);
+	int Load(Xog_page hpg, byte[] bry, int bry_len, int itm_bgn, Int_obj_ref count_ref);
+	void Save(Xog_page hpg, Bry_bfr bfr);
 }

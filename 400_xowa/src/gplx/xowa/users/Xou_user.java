@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.users.dbs.*; import gplx.xowa.users.history.*; import gplx.xowa.xtns.scribunto.*;
+import gplx.xowa.users.data.*;
 public class Xou_user implements GfoEvMgrOwner, GfoInvkAble {
 	public Xou_user(Xoa_app app, Io_url user_dir) {
 		this.evMgr = GfoEvMgr.new_(this);
@@ -33,6 +34,7 @@ public class Xou_user implements GfoEvMgrOwner, GfoInvkAble {
 	public byte[] Key_bry() {return key_bry;} private byte[] key_bry;
 	public void Key_str_(String v) {this.key_str = v; this.key_bry = Bry_.new_utf8_(v);}
 	public GfoEvMgr EvMgr() {return evMgr;} private final GfoEvMgr evMgr;
+	public Xoud_data_mgr Data_mgr() {return data_mgr;} private Xoud_data_mgr data_mgr = new Xoud_data_mgr();
 	public Xol_lang Lang() {if (lang == null) {lang = app.Lang_mgr().Get_by_key_or_new(app.Sys_cfg().Lang()); lang.Init_by_load();} return lang;} private Xol_lang lang;		
 	public void Lang_(Xol_lang v) {
 		lang = v;
@@ -58,6 +60,7 @@ public class Xou_user implements GfoEvMgrOwner, GfoInvkAble {
 		if (!Env_.Mode_testing()) {
 			db_mgr.App_init();
 			this.Available_from_fsys();
+			// data_mgr.Init_by_app(app);
 		}
 	}
 	public void App_term() {

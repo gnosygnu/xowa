@@ -26,7 +26,7 @@ public class Xop_lnki_tkn extends Xop_tkn_itm_base {
 	public int				Tail_end() {return tail_end;} public Xop_lnki_tkn Tail_end_(int v) {tail_end = v; return this;} private int tail_end = -1;
 	public byte				Border() {return border;} public Xop_lnki_tkn Border_(byte v) {border = v; return this;} private byte border = Bool_.__byte;
 	public byte				Align_h() {return align_h;} public Xop_lnki_tkn Align_h_(byte v) {if (align_h == Xop_lnki_align_h.Null) align_h = v; return this;} private byte align_h = Xop_lnki_align_h.Null;
-	public byte				Align_v() {return align_v;} public Xop_lnki_tkn Align_v_(byte v) {align_v = v; return this;} private byte align_v = Byte_.MaxValue_127;
+	public byte				Align_v() {return align_v;} public Xop_lnki_tkn Align_v_(byte v) {align_v = v; return this;} private byte align_v = Byte_.Max_value_127;
 	public int				Lnki_w() {return lnki_w;} public Xop_lnki_tkn Lnki_w_(int v) {lnki_w = v; return this;} int lnki_w = Width_null;
 	public int				Lnki_h() {return lnki_h;} public Xop_lnki_tkn Lnki_h_(int v) {lnki_h = v; return this;} int lnki_h = Height_null;
 	public byte[]			Lnki_cls() {return lnki_cls;} public void Lnki_cls_(byte[] v) {lnki_cls = v;} private byte[] lnki_cls;

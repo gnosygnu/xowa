@@ -20,7 +20,8 @@ public class Xoa_url {
 	public byte[] Raw() {return raw;} public Xoa_url Raw_(byte[] v) {raw = v; return this;} private byte[] raw = Bry_.Empty;
 	public byte[] Wiki_bry() {return wiki_bry;} public Xoa_url Wiki_bry_(byte[] v) {wiki_bry = v; return this;} private byte[] wiki_bry;
 	public byte[] Page_bry() {return page_bry;} public Xoa_url Page_bry_(byte[] v) {page_bry = v; return this;} private byte[] page_bry;
-	public Xow_wiki Wiki() {return wiki;} public Xoa_url Wiki_(Xow_wiki v) {wiki = v; return this;} private Xow_wiki wiki;
+	public byte[] Anchor_bry() {return anchor_bry;} public Xoa_url Anchor_bry_(byte[] v) {anchor_bry = v; return this;} private byte[] anchor_bry = null;
+	public String Anchor_str() {return anchor_bry == null ? null : String_.new_utf8_(anchor_bry);}
 	public Gfo_url_arg[] Args() {return args;} public Xoa_url Args_(Gfo_url_arg[] v) {args = v; return this;} private Gfo_url_arg[] args = Gfo_url_arg.Ary_empty;
 	public byte Protocol_tid() {return protocol_tid;} public Xoa_url Protocol_tid_(byte v) {protocol_tid = v; return this;} private byte protocol_tid;
 	public byte[] Protocol_bry() {return protocol_bry;} public Xoa_url Protocol_bry_(byte[] v) {protocol_bry = v; return this;} private byte[] protocol_bry;
@@ -34,8 +35,6 @@ public class Xoa_url {
 		else
 			return Bry_.Mid(raw, page_bgn, raw_len);// else take everything after "/wiki/";
 	}
-	public byte[] Anchor_bry() {return anchor_bry;} public Xoa_url Anchor_bry_(byte[] v) {anchor_bry = v; return this;} private byte[] anchor_bry = null;
-	public String Anchor_str() {return anchor_bry == null ? null : String_.new_utf8_(anchor_bry);}
 	public byte[] Use_lang() {return use_lang;} public Xoa_url Use_lang_(byte[] v) {use_lang = v; return this;} private byte[] use_lang;
 	public boolean Redirect_force() {return redirect_force;} public Xoa_url Redirect_force_(boolean v) {redirect_force = v; return this;} private boolean redirect_force;
 	public boolean Search_fulltext() {return search_fulltext;} public Xoa_url Search_fulltext_(boolean v) {search_fulltext = v; return this;} private boolean search_fulltext;
@@ -61,19 +60,6 @@ public class Xoa_url {
 				return true;
 		}
 		return false;
-	}
-	public void Args_fill(OrderedHash trg_args) {
-		int trg_len = trg_args.Count();
-		for (int i = 0; i < trg_len; i++) {
-			Gfo_url_arg trg_arg = (Gfo_url_arg)trg_args.FetchAt(i);
-			trg_arg.Val_bry_(null);
-		}
-		int src_len = args.length;
-		for (int i = 0; i < src_len; i++) {
-			Gfo_url_arg src_arg = args[i];
-			Gfo_url_arg trg_arg = (Gfo_url_arg)trg_args.Fetch(src_arg.Key_bry());
-			if (trg_arg != null) trg_arg.Val_bry_(src_arg.Val_bry());
-		}
 	}
 	public byte[] Args_all_as_bry() {
 		int args_len = args.length;

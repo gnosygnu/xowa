@@ -27,8 +27,11 @@ public abstract class Xof_bin_wkr_fsys_base implements Xof_bin_wkr, GfoInvkAble 
 		return (src_url == Io_url_.Null) ? gplx.ios.Io_stream_rdr_.Null : gplx.ios.Io_stream_rdr_.file_(src_url);
 	}
 	public boolean Bin_wkr_get_to_url(ListAdp temp_files, Xof_fsdb_itm itm, boolean is_thumb, int w, Io_url bin_url) {
-		byte mode = is_thumb ? Xof_repo_itm.Mode_thumb : Xof_repo_itm.Mode_orig;
-		Io_url src_url = this.Get_src_url(mode, String_.new_utf8_(itm.Orig_wiki()), itm.Lnki_ttl(), itm.Lnki_md5(), itm.Lnki_ext(), w, itm.Lnki_thumbtime(), itm.Lnki_page());
+		return Save_to_url(itm.Orig_wiki(), itm.Lnki_ttl(), itm.Lnki_md5(), itm.Lnki_ext(), is_thumb, w, itm.Lnki_thumbtime(), itm.Lnki_page(), bin_url);
+	}
+	public boolean Save_to_url(byte[] orig_repo, byte[] orig_ttl, byte[] orig_md5, Xof_ext orig_ext, boolean lnki_is_thumb, int file_w, double lnki_time, int lnki_page, Io_url file_url) {
+		byte mode = lnki_is_thumb ? Xof_repo_itm.Mode_thumb : Xof_repo_itm.Mode_orig;
+		Io_url src_url = this.Get_src_url(mode, String_.new_utf8_(orig_repo), orig_ttl, orig_md5, orig_ext, file_w, lnki_time, lnki_page);
 		if (src_url == Io_url_.Null) return false;
 		byte[] bin = Io_mgr._.LoadFilBry(src_url);
 		return bin != Io_mgr.LoadFilBry_fail;

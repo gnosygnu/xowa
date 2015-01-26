@@ -18,28 +18,28 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.hdumps; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*;
 public class Xodbv_page_tbl {
-	public boolean Select_by_ttl(Xodb_page rv, Db_provider provider, Xow_ns ns, byte[] ttl) {
+	public boolean Select_by_ttl(Xodb_page rv, Db_conn conn, Xow_ns ns, byte[] ttl) {
 		Db_rdr rdr = Db_rdr_.Null; Db_stmt stmt = Db_stmt_.Null;
 		try {
-			stmt = Db_stmt_.new_select_as_rdr(provider, Db_qry__select_in_tbl.new_(Tbl_name, String_.Ary(Fld_page_ns, Fld_page_title), Select_by_id_flds__hdump));
-			rdr = stmt.Val_int_(ns.Id()).Val_str_(String_.new_utf8_(ttl)).Exec_select_as_rdr();
+			stmt = Db_stmt_.new_select_as_rdr(conn, Db_qry__select_in_tbl.new_(Tbl_name, String_.Ary(Fld_page_ns, Fld_page_title), Select_by_id_flds__hdump));
+			rdr = stmt.Val_int(ns.Id()).Val_str(String_.new_utf8_(ttl)).Exec_select_as_rdr();
 			if (rdr.Move_next()) {
 				Read_page__all(rv, rdr);
 				return true;
 			}
-		} finally {rdr.Close(); stmt.Rls();}
+		} finally {rdr.Rls(); stmt.Rls();}
 		return false;
 	}
-	public boolean Select_by_id(Xodb_page rv, Db_provider provider, int page_id) {
+	public boolean Select_by_id(Xodb_page rv, Db_conn conn, int page_id) {
 		Db_rdr rdr = Db_rdr_.Null; Db_stmt stmt = Db_stmt_.Null;
 		try {
-			stmt = Db_stmt_.new_select_as_rdr(provider, Db_qry__select_in_tbl.new_(Tbl_name, String_.Ary(Fld_page_id), Select_by_id_flds__hdump));
-			rdr = stmt.Val_int_(page_id).Exec_select_as_rdr();
+			stmt = Db_stmt_.new_select_as_rdr(conn, Db_qry__select_in_tbl.new_(Tbl_name, String_.Ary(Fld_page_id), Select_by_id_flds__hdump));
+			rdr = stmt.Val_int(page_id).Exec_select_as_rdr();
 			if (rdr.Move_next()) {
 				Read_page__all(rv, rdr);
 				return true;
 			}
-		} finally {rdr.Close(); stmt.Rls();}
+		} finally {rdr.Rls(); stmt.Rls();}
 		return false;
 	}
 	public static void Read_page__all(Xodb_page page, Db_rdr rdr) {

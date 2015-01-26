@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps.srls; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
 import org.junit.*; import gplx.xowa.hdumps.core.*;
+import gplx.xowa2.gui.*;
 public class Hpg_srl_itm_tst {
 	@Before public void init() {fxt.Clear();} private Hpg_srl_itm_fxt fxt = new Hpg_srl_itm_fxt();
 	@Test   public void Body() {
@@ -48,11 +49,11 @@ class Hpg_srl_itm_fxt {
 		return new Hpg_srl_itm_mok(Hpg_srl_itm_.Tid_html_module, new byte[] {Hpg_srl_itm__html_module.Calc_flag(v[0], v[1], v[2], v[3])});
 	}
 	public void Test_page(Hdump_page_mok hpg_mok, Hpg_srl_itm_mok... expd_itms) {
-		Hdump_page hpg = hpg_mok.Xto_hdump_page();
+		Xog_page hpg = hpg_mok.Xto_hdump_page();
 		Hpg_srl_mgr._i_.Save(hpg, bfr);
 		byte[] actl = bfr.Xto_bry_and_clear();
 		Tfds.Eq_ary(Hpg_srl_itm_mok.Xto_bry(bfr, expd_itms), actl);
-		Hdump_page actl_hpg = new Hdump_page();
+		Xog_page actl_hpg = new Xog_page();
 		Hpg_srl_mgr._i_.Load(actl_hpg, actl);
 		Hpg_srl_mgr._i_.Save(hpg, bfr);
 		Tfds.Eq_ary(actl, bfr.Xto_bry_and_clear());
@@ -64,8 +65,8 @@ class Hdump_page_mok {
 	public byte[] Display_ttl() {return display_ttl;} public Hdump_page_mok Display_ttl_(String v) {display_ttl = Bry_.new_utf8_(v); return this;} private byte[] display_ttl;
 	public byte[] Content_sub() {return content_sub;} public Hdump_page_mok Content_sub_(String v) {content_sub = Bry_.new_utf8_(v); return this;} private byte[] content_sub;
 	public byte[] Sidebar_div() {return sidebar_div;} public Hdump_page_mok Sidebar_div_(String v) {sidebar_div = Bry_.new_utf8_(v); return this;} private byte[] sidebar_div;
-	public Hdump_page Xto_hdump_page() {
-		Hdump_page rv = new Hdump_page();
+	public Xog_page Xto_hdump_page() {
+		Xog_page rv = new Xog_page();
 		rv.Page_body_(body);
 		Hdump_module_mgr mod_mgr = rv.Module_mgr();
 		if (html_modules != null) {

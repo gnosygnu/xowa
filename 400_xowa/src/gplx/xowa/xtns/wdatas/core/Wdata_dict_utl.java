@@ -25,5 +25,5 @@ public class Wdata_dict_utl {
 		}
 		return ((Byte_obj_val)rv_obj).Val();
 	}
-	public static final byte Tid_invalid = Byte_.MaxValue_127;
+	public static final byte Tid_invalid = Byte_.Max_value_127;
 }

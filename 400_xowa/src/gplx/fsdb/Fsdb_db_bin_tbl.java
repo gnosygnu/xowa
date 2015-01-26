@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.fsdb; import gplx.*;
 import gplx.dbs.*;
 public class Fsdb_db_bin_tbl {
-	public static void Create_table(Db_provider p) {Sqlite_engine_.Tbl_create(p, Tbl_name, Tbl_sql);}
-	public static void Commit_all(Db_provider provider, Fsdb_db_bin_fil[] ary) {
-		stmt_bldr.Init(provider);
+	public static void Create_table(Db_conn p) {Sqlite_engine_.Tbl_create(p, Tbl_name, Tbl_sql);}
+	public static void Commit_all(Db_conn conn, Fsdb_db_bin_fil[] ary) {
+		stmt_bldr.Init(conn);
 		try {
 			int len = ary.length;
 			for (int i = 0; i < len; i++)
@@ -31,15 +31,15 @@ public class Fsdb_db_bin_tbl {
 	private static void Commit_itm(Fsdb_db_bin_fil itm) {
 		Db_stmt stmt = stmt_bldr.Get(itm.Cmd_mode());
 		switch (itm.Cmd_mode()) {
-			case Db_cmd_mode.Create:	stmt.Clear().Val_int_(itm.Id())	.Val_str_(itm.Url().NameAndExt()).Val_long_(itm.Bin_len()).Val_long_(itm.Bin_max()).Exec_insert(); break;
-			case Db_cmd_mode.Update:	stmt.Clear()					.Val_str_(itm.Url().NameAndExt()).Val_long_(itm.Bin_len()).Val_long_(itm.Bin_max()).Val_int_(itm.Id()).Exec_update(); break;
-			case Db_cmd_mode.Delete:	stmt.Clear().Val_int_(itm.Id()).Exec_delete();	break;
+			case Db_cmd_mode.Create:	stmt.Clear().Val_int(itm.Id())	.Val_str(itm.Url().NameAndExt()).Val_long(itm.Bin_len()).Val_long(itm.Bin_max()).Exec_insert(); break;
+			case Db_cmd_mode.Update:	stmt.Clear()					.Val_str(itm.Url().NameAndExt()).Val_long(itm.Bin_len()).Val_long(itm.Bin_max()).Val_int(itm.Id()).Exec_update(); break;
+			case Db_cmd_mode.Delete:	stmt.Clear().Val_int(itm.Id()).Exec_delete();	break;
 			case Db_cmd_mode.Ignore:	break;
 			default:					throw Err_.unhandled(itm.Cmd_mode());
 		}
 		itm.Cmd_mode_(Db_cmd_mode.Ignore);
 	}
-	public static Fsdb_db_bin_fil[] Select_all(Db_provider p, Io_url dir) {
+	public static Fsdb_db_bin_fil[] Select_all(Db_conn p, Io_url dir) {
 		ListAdp rv = ListAdp_.new_();
 		Db_qry qry = Db_qry_select.new_().From_(Tbl_name).Cols_all_().OrderBy_asc_(Fld_uid);
 		DataRdr rdr = DataRdr_.Null;

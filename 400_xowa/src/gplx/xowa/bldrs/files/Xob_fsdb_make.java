@@ -30,7 +30,7 @@ public class Xob_fsdb_make extends Xob_itm_basic_base implements Xob_cmd {
 	private byte[] wiki_key;
 	private Xobu_poll_mgr poll_mgr; private int poll_interval;
 	private long time_bgn;
-	private Xodb_xowa_cfg_tbl tbl_cfg; private Db_provider provider; private Db_stmt db_select_stmt;
+	private Xodb_xowa_cfg_tbl tbl_cfg; private Db_conn conn; private Db_stmt db_select_stmt;
 	private Xof_bin_mgr src_mgr;
 	private Xof_fsdb_mgr_sql trg_fsdb_mgr; private Fsdb_mnt_mgr trg_mnt_mgr;
 	private ListAdp temp_files = ListAdp_.new_();
@@ -69,7 +69,7 @@ public class Xob_fsdb_make extends Xob_itm_basic_base implements Xob_cmd {
 		trg_fsdb_mgr.Txn_save();
 		trg_fsdb_mgr.Rls();	// save changes and rls all connections
 		db_select_stmt.Rls();
-		provider.Conn_term();
+		conn.Conn_term();
 	}
 	public void Cmd_print() {}
 	private int db_reset_tries_count = 0, db_reset_tries_max = 5;
@@ -79,7 +79,7 @@ public class Xob_fsdb_make extends Xob_itm_basic_base implements Xob_cmd {
 		ListAdp list = ListAdp_.new_();
 		boolean loop = true;
 		time_bgn = Env_.TickCount();
-		usr_dlg.Note_many("", "", "total pending: ~{0}", Xob_xfer_regy_tbl.Select_total_pending(provider));
+		usr_dlg.Note_many("", "", "total pending: ~{0}", Xob_xfer_regy_tbl.Select_total_pending(conn));
 		this.Txn_open();
 		while (loop) {
 			byte rslt = Select_ttls(list);
@@ -120,12 +120,12 @@ public class Xob_fsdb_make extends Xob_itm_basic_base implements Xob_cmd {
 	}
 	private void Init_db(boolean chk_reset) {
 		Xodb_db_file db_file = Xodb_db_file.init__file_make(wiki.Fsys_mgr().Root_dir());
-		provider = db_file.Provider();
-		tbl_cfg = new Xodb_xowa_cfg_tbl().Provider_(provider);
+		conn = db_file.Conn();
+		tbl_cfg = new Xodb_xowa_cfg_tbl().Conn_(conn);
 		if (reset_db && chk_reset) {
-			provider.Exec_qry(Db_qry_.delete_tbl_(Xodb_xowa_cfg_tbl.Tbl_name));
+			conn.Exec_qry(Db_qry_.delete_tbl_(Xodb_xowa_cfg_tbl.Tbl_name));
 		}
-		db_select_stmt = Xob_xfer_regy_tbl.Select_by_page_id_stmt(provider);
+		db_select_stmt = Xob_xfer_regy_tbl.Select_by_page_id_stmt(conn);
 	}
 	private boolean Init_bmk(Xodb_xowa_cfg_tbl tbl_cfg) {
 		if (!resume_enabled) {	// clear cfg entries if resume disabled; note that disabled by default; DATE:2014-10-24
@@ -162,7 +162,7 @@ public class Xob_fsdb_make extends Xob_itm_basic_base implements Xob_cmd {
 		DataRdr rdr = DataRdr_.Null;
 		boolean pages_found = false, links_found = false;
 		try {
-			rdr = Xob_xfer_regy_tbl.Select_by_lnki_page_id(provider, page_id_val, select_interval);
+			rdr = Xob_xfer_regy_tbl.Select_by_lnki_page_id(conn, page_id_val, select_interval);
 			while (rdr.MoveNextPeer()) {
 				pages_found = true;	// at least one page found; set true
 				Xodb_tbl_oimg_xfer_itm itm = Xodb_tbl_oimg_xfer_itm.new_rdr_(rdr);
@@ -250,14 +250,14 @@ public class Xob_fsdb_make extends Xob_itm_basic_base implements Xob_cmd {
 		this.Txn_open();
 	}
 	private void Txn_open() {
-		tbl_cfg.Provider().Txn_mgr().Txn_bgn_if_none();
+		tbl_cfg.Conn().Txn_mgr().Txn_bgn_if_none();
 		trg_mnt_mgr.Txn_open();
 	}
 	private void Txn_save() {
 		usr_dlg.Prog_many("", "", "committing data: count=~{0} failed=~{1}", exec_count, exec_fail);
 		tbl_cfg.Update(Cfg_fsdb_make, Cfg_page_id_bmk, page_id_val);
 		tbl_cfg.Update(Cfg_fsdb_make, Cfg_lnki_id_bmk, lnki_id_val);
-		tbl_cfg.Provider().Txn_mgr().Txn_end_all();
+		tbl_cfg.Conn().Txn_mgr().Txn_end_all();
 		trg_mnt_mgr.Txn_save();
 		if (exit_after_commit)
 			exit_now = true;

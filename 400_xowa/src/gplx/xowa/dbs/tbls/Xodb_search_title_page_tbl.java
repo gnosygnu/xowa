@@ -18,14 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.dbs.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.dbs.*;
 import gplx.dbs.*;
 public class Xodb_search_title_page_tbl {
-	public static void Create_table(Db_provider p)								{Sqlite_engine_.Tbl_create(p, Tbl_name, Tbl_sql);}
-	public static void Create_index_unique(Gfo_usr_dlg usr_dlg, Db_provider p)	{Sqlite_engine_.Idx_create(usr_dlg, p, "search", Idx_main_unique);}
-	public static void Create_index_non_unique(Gfo_usr_dlg usr_dlg, Db_provider p)	{Sqlite_engine_.Idx_create(usr_dlg, p, "search", Idx_main_non_unique);}
-	public static Db_stmt Insert_stmt(Db_provider p) {return Db_stmt_.new_insert_(p, Tbl_name, Fld_stp_word_id, Fld_stp_page_id);}
+	public static void Create_table(Db_conn p)								{Sqlite_engine_.Tbl_create(p, Tbl_name, Tbl_sql);}
+	public static void Create_index_unique(Gfo_usr_dlg usr_dlg, Db_conn p)	{Sqlite_engine_.Idx_create(usr_dlg, p, "search", Idx_main_unique);}
+	public static void Create_index_non_unique(Gfo_usr_dlg usr_dlg, Db_conn p)	{Sqlite_engine_.Idx_create(usr_dlg, p, "search", Idx_main_non_unique);}
+	public static Db_stmt Insert_stmt(Db_conn p) {return Db_stmt_.new_insert_(p, Tbl_name, Fld_stp_word_id, Fld_stp_page_id);}
 	public static void Insert(Db_stmt stmt, int word_id, int page_id) {
 		stmt.Clear()
-		.Val_int_(word_id)
-		.Val_int_(page_id)
+		.Val_int(word_id)
+		.Val_int(page_id)
 		.Exec_insert();
 	}	
 	public static final String Tbl_name = "search_title_page", Fld_stp_word_id = "stp_word_id", Fld_stp_page_id = "stp_page_id";

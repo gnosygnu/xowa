@@ -17,10 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
 import gplx.core.brys.*; import gplx.core.btries.*; import gplx.html.*; import gplx.xowa.html.*; import gplx.xowa.files.*;
-import gplx.xowa.apps.fsys.*; import gplx.xowa.hdumps.core.*; import gplx.xowa.html.lnkis.*; import gplx.xowa.xtns.gallery.*;	
+import gplx.xowa.apps.fsys.*; import gplx.xowa.hdumps.core.*; import gplx.xowa.html.lnkis.*; import gplx.xowa.xtns.gallery.*;
+import gplx.xowa2.gui.*;
 public class Hdump_html_body {
 	private Bry_bfr tmp_bfr = Bry_bfr.reset_(255); private Bry_rdr bry_rdr = new Bry_rdr(); private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_._;
-	private Hdump_page hpg; private Xoh_cfg_file cfg_file; private Xof_url_bldr url_bldr = Xof_url_bldr.new_v2_(); private Xoh_file_html_fmtr__base html_fmtr;
+	private Xog_page hpg; private Xoh_cfg_file cfg_file; private Xof_url_bldr url_bldr = Xof_url_bldr.new_v2_(); private Xoh_file_html_fmtr__base html_fmtr;
 	private byte[] root_dir, file_dir, file_dir_comm, file_dir_wiki, hiero_img_dir;
 	public Hdump_html_body Init_by_app(Gfo_usr_dlg usr_dlg, Xoa_fsys_mgr fsys_mgr, Url_encoder fsys_encoder) {
 		this.usr_dlg = usr_dlg;
@@ -31,7 +32,7 @@ public class Hdump_html_body {
 		this.html_fmtr = Xoh_file_html_fmtr__hdump.Base;
 		return this;
 	}
-	public Hdump_html_body Init_by_page(byte[] domain_bry, Hdump_page hpg) {
+	public Hdump_html_body Init_by_page(byte[] domain_bry, Xog_page hpg) {
 		this.hpg = hpg;
 		file_dir_comm = tmp_bfr.Add(file_dir).Add(Xow_wiki_.Domain_commons_bry).Add_byte_slash().Xto_bry_and_clear();
 		file_dir_wiki  = tmp_bfr.Add(file_dir).Add(domain_bry).Add_byte_slash().Xto_bry_and_clear();
@@ -61,7 +62,7 @@ public class Hdump_html_body {
 		}
 		if (rng_bgn != -1) bfr.Add_mid(src, rng_bgn, len);
 	}
-	private int Write_data(Bry_bfr bfr, Xoh_file_html_fmtr__base fmtr, Hdump_page hpg, byte[] src, Hdump_data_img__base[] imgs, int imgs_len, int uid_bgn, Hdump_html_fmtr_itm itm) {
+	private int Write_data(Bry_bfr bfr, Xoh_file_html_fmtr__base fmtr, Xog_page hpg, byte[] src, Hdump_data_img__base[] imgs, int imgs_len, int uid_bgn, Hdump_html_fmtr_itm itm) {
 		bry_rdr.Pos_(uid_bgn);
 		int uid = itm.Subst_end_byte() == Byte_ascii.Nil ? -1 : bry_rdr.Read_int_to(itm.Subst_end_byte());
 		int uid_end = bry_rdr.Pos();			// set uid_end after subst_end
@@ -126,7 +127,7 @@ public class Hdump_html_body {
 		}
 		return rv;
 	}
-	private int Write_redlink(Bry_bfr bfr, Hdump_page hpg, int uid, int rv) {
+	private int Write_redlink(Bry_bfr bfr, Xog_page hpg, int uid, int rv) {
 		int[] redlink_uids = hpg.Redlink_uids(); if (redlink_uids == null) return rv;
 		int redlink_uid_max = redlink_uids.length;
 		if (uid < redlink_uid_max && redlink_uids[uid] == 1)

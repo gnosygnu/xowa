@@ -81,8 +81,8 @@ public class TdbFlush_tst {
 }
 class TdbEngineFxt {
 	public TdbEngine run_MakeEngine(Io_url url) {
-		Db_conn_info connectInfo = Db_conn_info_.tdb_(url);
-		TdbEngine engine = (TdbEngine)TdbEngine._.Make_new(connectInfo);
+		Db_url connectInfo = Db_url_.tdb_(url);
+		TdbEngine engine = (TdbEngine)TdbEngine._.New_clone(connectInfo);
 		engine.Conn_open();
 		return engine;
 	}
@@ -93,9 +93,9 @@ class TdbEngineFxt {
 		return rv;
 	}
 	public void run_InsertRow(TdbEngine engine, String tblName, int idVal) {
-		Db_qry_insert cmd = Db_qry_insert.new_().BaseTable_(tblName);
+		Db_qry_insert cmd = new Db_qry_insert(tblName);
 		cmd.Arg_("id", idVal);
-		engine.Execute(cmd);
+		engine.Exec_as_obj(cmd);
 	}
 
 	public void tst_FilesCount(TdbEngine engine, int count) {Tfds.Eq(engine.Db().Files().Count(), count);}

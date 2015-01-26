@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.hdumps.loads; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
 import gplx.core.brys.*; import gplx.xowa.pages.*; import gplx.xowa.hdumps.core.*; import gplx.xowa.hdumps.pages.*; import gplx.xowa.pages.skins.*;
 import gplx.xowa.html.modules.*;
+import gplx.xowa2.gui.*;
 public class Hdump_page_body_srl {
 	private static final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	public static void Save(Bry_bfr bfr, Xoa_page page) {
@@ -39,14 +40,14 @@ public class Hdump_page_body_srl {
 		Save_html_modules__itm(tmp_bfr, module_mgr.Itm_hiero().Enabled());
 		Save_data(bfr, Tid_html_module, tmp_bfr.Xto_bry_and_clear());
 	}
-	public static void Load_html_modules(Hdump_page hpg, byte[] src, int bgn, int end) {
+	public static void Load_html_modules(Xog_page hpg, byte[] src, int bgn, int end) {
 		Hdump_module_mgr module_mgr = hpg.Module_mgr();
 		module_mgr.Math_exists_				(src[bgn + 0] == Byte_ascii.Ltr_y);
 		module_mgr.Imap_exists_				(src[bgn + 2] == Byte_ascii.Ltr_y);
 		module_mgr.Gallery_packed_exists_	(src[bgn + 4] == Byte_ascii.Ltr_y);
 		module_mgr.Hiero_exists_			(src[bgn + 6] == Byte_ascii.Ltr_y);
 	}
-	public static void Load_html_modules(Xoh_module_mgr page_module_mgr, Hdump_page hpg) {
+	public static void Load_html_modules(Xoh_module_mgr page_module_mgr, Xog_page hpg) {
 		Hdump_module_mgr dump_module_mgr = hpg.Module_mgr();
 		page_module_mgr.Itm_mathjax().Enabled_			(dump_module_mgr.Math_exists());
 		page_module_mgr.Itm_popups().Bind_hover_area_	(dump_module_mgr.Imap_exists());
@@ -80,7 +81,7 @@ public class Hdump_page_body_srl {
 			bfr.Add(data);
 		}
 	}
-	public static void Load(Hdump_page hpg, Bry_rdr rdr, byte[] src) {
+	public static void Load(Xog_page hpg, Bry_rdr rdr, byte[] src) {
 		rdr.Src_(src);
 		Load_body_meta(hpg, rdr);
 		while (!rdr.Pos_is_eos()) {
@@ -102,7 +103,7 @@ public class Hdump_page_body_srl {
 			}
 		}
 	}	private static final byte[] Sect_lhs = Bry_.new_ascii_("<xo_"), Sect_rhs = Bry_.new_ascii_("/>");
-	private static void Load_body_meta(Hdump_page hpg, Bry_rdr rdr) {
+	private static void Load_body_meta(Xog_page hpg, Bry_rdr rdr) {
 		hpg.Version_id_(rdr.Read_int_to_pipe());
 		hpg.Img_count_(rdr.Read_int_to_nl());
 	}

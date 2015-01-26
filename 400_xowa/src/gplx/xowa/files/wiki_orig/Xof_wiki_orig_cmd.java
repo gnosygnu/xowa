@@ -18,25 +18,25 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files.wiki_orig; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.dbs.*; import gplx.xowa.bldrs.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.qrys.*; import gplx.xowa.bldrs.oimgs.*;
 public class Xof_wiki_orig_cmd extends Xob_itm_basic_base implements Xob_cmd {
-	private Db_provider provider;
+	private Db_conn conn;
 	public Xof_wiki_orig_cmd(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Cmd_key() {return KEY_oimg;} public static final String KEY_oimg = "file.wiki_orig";
 	public void Cmd_ini(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {
 		wiki.Init_assert();
-		provider = Xof_fsdb_mgr_sql.Wiki_orig_provider(wiki.App().Fsys_mgr().File_dir().GenSubDir(wiki.Domain_str())); 
+		conn = Xof_fsdb_mgr_sql.Wiki_orig_provider(wiki.App().Fsys_mgr().File_dir().GenSubDir(wiki.Domain_str())); 
 		Io_url make_db_url = Xodb_db_file.init__file_make(wiki.Fsys_mgr().Root_dir()).Url();
-		Sqlite_engine_.Db_attach(provider, "make_db", make_db_url.Raw());
+		Sqlite_engine_.Db_attach(conn, "make_db", make_db_url.Raw());
 	}
 	public void Cmd_run() {Exec();}
 	public void Cmd_end() {}
 	public void Cmd_print() {}
 	private void Exec() {
-		usr_dlg.Prog_many("", "", "deleting wiki_orig");		provider.Exec_sql(Sql_delete_wiki_orig);	// always delete wiki_orig, else will not pick up changed sizes / moved repos; DATE:2014-07-21
-		usr_dlg.Prog_many("", "", "inserting xfer direct");		provider.Exec_sql(Sql_create_xfer_direct);
-		usr_dlg.Prog_many("", "", "inserting xfer redirect");	provider.Exec_sql(Sql_create_xfer_redirect);
-		usr_dlg.Prog_many("", "", "inserting orig direct");		provider.Exec_sql(Sql_create_orig_direct);
-		usr_dlg.Prog_many("", "", "inserting orig redirect");	provider.Exec_sql(Sql_create_orig_redirect);
+		usr_dlg.Prog_many("", "", "deleting wiki_orig");		conn.Exec_sql(Sql_delete_wiki_orig);	// always delete wiki_orig, else will not pick up changed sizes / moved repos; DATE:2014-07-21
+		usr_dlg.Prog_many("", "", "inserting xfer direct");		conn.Exec_sql(Sql_create_xfer_direct);
+		usr_dlg.Prog_many("", "", "inserting xfer redirect");	conn.Exec_sql(Sql_create_xfer_redirect);
+		usr_dlg.Prog_many("", "", "inserting orig direct");		conn.Exec_sql(Sql_create_orig_direct);
+		usr_dlg.Prog_many("", "", "inserting orig redirect");	conn.Exec_sql(Sql_create_orig_redirect);
 	}
 	private static final String 
 		Sql_delete_wiki_orig = "DELETE FROM wiki_orig;"

@@ -23,11 +23,11 @@ public class Xob_xfer_temp_cmd_orig extends Xob_itm_basic_base implements Xob_cm
 	public String Cmd_key() {return KEY_oimg;} public static final String KEY_oimg = "file.xfer_temp.orig";
 	public void Cmd_ini(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {
-		Db_provider provider = Xodb_db_file.init__file_make(wiki.Fsys_mgr().Root_dir()).Provider();
-		Xob_xfer_temp_tbl.Create_table(provider);
-		Db_stmt trg_stmt = Xob_xfer_temp_tbl.Insert_stmt(provider);
-		provider.Txn_mgr().Txn_bgn_if_none();
-		DataRdr rdr = provider.Exec_sql_as_rdr(Sql_select);
+		Db_conn conn = Xodb_db_file.init__file_make(wiki.Fsys_mgr().Root_dir()).Conn();
+		Xob_xfer_temp_tbl.Create_table(conn);
+		Db_stmt trg_stmt = Xob_xfer_temp_tbl.Insert_stmt(conn);
+		conn.Txn_mgr().Txn_bgn_if_none();
+		DataRdr rdr = conn.Exec_sql_as_rdr(Sql_select);
 		long[] ext_maxs = Calc_ext_max();
 		while (rdr.MoveNextPeer()) {
 			int lnki_ext = rdr.ReadByte(Xob_lnki_regy_tbl.Fld_lnki_ext);
@@ -55,7 +55,7 @@ public class Xob_xfer_temp_cmd_orig extends Xob_itm_basic_base implements Xob_cm
 			, Xof_doc_page.Null
 			, 0);
 		}
-		provider.Txn_mgr().Txn_end_all();
+		conn.Txn_mgr().Txn_end_all();
 	}
 	private long[] Calc_ext_max() {
 		Xoft_rule_grp ext_rules = wiki.App().File_mgr().Ext_rules().Get_or_new(ext_rules_key);

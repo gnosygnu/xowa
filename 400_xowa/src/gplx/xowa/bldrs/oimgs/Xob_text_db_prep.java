@@ -48,13 +48,13 @@ public class Xob_text_db_prep extends Xob_itm_basic_base implements Xob_cmd {
 	public void Cmd_print() {}
 	private void Prep_db(String page_db_url, Xodb_file text_db) {
 		usr_dlg.Note_many("", "", "copying page_rows to text_db: ~{0}", text_db.Url().NameOnly());
-		Db_provider provider = text_db.Provider();
-		Sqlite_engine_.Tbl_create_and_delete(provider, "page_dump", Sql_create_tbl);
-		Sqlite_engine_.Db_attach(provider, "page_db", page_db_url);
-		provider.Txn_mgr().Txn_bgn_if_none();
-		provider.Exec_sql(String_.Format(Sql_insert_data, text_db.Id()));
-		provider.Txn_mgr().Txn_end_all();
-		Sqlite_engine_.Idx_create(provider, Idx_create);
+		Db_conn conn = text_db.Conn();
+		Sqlite_engine_.Tbl_create_and_delete(conn, "page_dump", Sql_create_tbl);
+		Sqlite_engine_.Db_attach(conn, "page_db", page_db_url);
+		conn.Txn_mgr().Txn_bgn_if_none();
+		conn.Exec_sql(String_.Format(Sql_insert_data, text_db.Id()));
+		conn.Txn_mgr().Txn_end_all();
+		Sqlite_engine_.Idx_create(conn, Idx_create);
 	}
 	private static final String Sql_create_tbl = String_.Concat_lines_nl
 	( "CREATE TABLE IF NOT EXISTS page_dump"

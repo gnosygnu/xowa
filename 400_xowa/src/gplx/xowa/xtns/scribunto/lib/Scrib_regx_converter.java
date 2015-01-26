@@ -22,6 +22,7 @@ public class Scrib_regx_converter {
 	public String Regx() {return regx;} private String regx;
 	public ListAdp Capt_list() {return capt_list;}
 	public KeyVal[] Capt_ary() {return capt_list.Count() == 0 ? null : (KeyVal[])capt_list.Xto_ary(KeyVal.class);}
+	private Bry_fmtr fmtr_balanced; private Bry_bfr bfr_balanced;
 	public String Parse(byte[] src, byte[] anchor) {
 		int len = src.length;
 		boolean q_flag = false;
@@ -68,33 +69,29 @@ public class Scrib_regx_converter {
 					else {
 						byte nxt = src[i];
 						switch (nxt) {
-							case Byte_ascii.Ltr_b:
+							case Byte_ascii.Ltr_b:	// EX: "%b()"
 								i += 2;
 								if (i >= len) throw Err_.new_("malformed pattern (missing arguments to \'%b\')");
-								byte digit_0 = src[i - 1];
-								byte digit_1 = src[i];
-								if (digit_0 == digit_1) {	// $bfr .= "{$d1}[^$d1]*$d1";
+								byte char_0 = src[i - 1];
+								byte char_1 = src[i];
+								if (char_0 == char_1) {		// same char: easier regex; REF.MW: $bfr .= "{$d1}[^$d1]*$d1";
 									bfr.Add(Bry_bf0_seg_0);
-									Regx_quote(bfr, digit_0);
+									Regx_quote(bfr, char_0);
 									bfr.Add(Bry_bf0_seg_1);
-									Regx_quote(bfr, digit_0);
+									Regx_quote(bfr, char_0);
 									bfr.Add(Bry_bf0_seg_2);
-									Regx_quote(bfr, digit_0);
+									Regx_quote(bfr, char_0);
 								}
-								else {						// $bfr .= "(?<b$bct>$d1(?:(?>[^$d1$d2]+)|(?>b$bct))*$d2)";
-									++bct;
-									bfr.Add(Bry_bf1_seg_0);
-									bfr.Add_int_variable(bct);
-									bfr.Add(Bry_bf1_seg_1);
-									Regx_quote(bfr, digit_0);
-									bfr.Add(Bry_bf1_seg_2);
-									Regx_quote(bfr, digit_0);
-									Regx_quote(bfr, digit_1);
-									bfr.Add(Bry_bf1_seg_3);
-									bfr.Add_int_variable(bct);
-									bfr.Add(Bry_bf1_seg_4);
-									Regx_quote(bfr, digit_1);
-									bfr.Add(Bry_bf1_seg_5);
+								else {						// diff char: harder regex; REF.MW: $bfr .= "(?<b$bct>$d1(?:(?>[^$d1$d2]+)|(?P>b$bct))*$d2)";
+									if (fmtr_balanced == null) {
+										fmtr_balanced = Bry_fmtr.new_("(?<b~{0}>\\~{1}(?:(?>[^\\~{1}\\~{2}]*)|\\~{1}([^\\~{1}\\~{2}]*|\\~{1}[^\\~{1}\\~{2}]*\\~{2})*\\~{2})*\\~{2})", "0", "1", "2");	// NOTE: complicated regex; represents 3 level depth of balanced parens; 4+ won't work; EX:(3(2(1)2)3) PAGE:en.w:Electricity_sector_in_Switzerland DATE:2015-01-23
+										bfr_balanced = Bry_bfr.reset_(255);
+									}
+									synchronized (fmtr_balanced) {
+										++bct;
+										fmtr_balanced.Bld_bfr(bfr_balanced, Int_.Xto_bry(bct), Byte_.Ary(char_0), Byte_.Ary(char_1));
+										bfr.Add(bfr_balanced.Xto_bry_and_clear());
+									}
 								}
 								break;
 							case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
@@ -219,13 +216,8 @@ public class Scrib_regx_converter {
 	private static final byte[] Bry_pow_escaped = Bry_.new_ascii_("\\^")
 	, Bry_dollar_literal = Bry_.new_ascii_("$"), Bry_dollar_escaped = Bry_.new_ascii_("\\$")
 	, Bry_bf0_seg_0 = Bry_.new_ascii_("{"), Bry_bf0_seg_1 = Bry_.new_ascii_("}[^"), Bry_bf0_seg_2 = Bry_.new_ascii_("]*")
-	, Bry_bf1_seg_0 = Bry_.new_ascii_("(?<b"), Bry_bf1_seg_1 = Bry_.new_ascii_(">")
-	, Bry_bf1_seg_2 = Bry_.new_ascii_("(?:(?>[^"), Bry_bf1_seg_3 = Bry_.new_ascii_("]+)|(?>b")	// NOTE: PHP uses "]+)|(?P>b", but Java does not support P (named pattern); DATE:2013-12-20
-	, Bry_bf1_seg_4 = Bry_.new_ascii_("))*"), Bry_bf1_seg_5 = Bry_.new_ascii_(")")
 	, Bry_bf2_seg_0 = Bry_.new_ascii_("\\")//, Bry_bf2_seg_1 = Bry_.new_ascii_("")
 	, Bry_regx_dash = Bry_.new_ascii_("*?")	// was *?
-	//, Bry_grp_bgn = Bry_.new_ascii_("(?<m")
-	//, Bry_regx_end = Bry_.new_ascii_("/us")
 	;
 	public static final byte[] Anchor_null = null, Anchor_G = Bry_.new_ascii_("\\G"), Anchor_pow = Bry_.new_ascii_("^");
 	private void Init() {

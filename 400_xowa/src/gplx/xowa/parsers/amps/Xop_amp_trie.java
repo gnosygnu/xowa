@@ -29,6 +29,7 @@ public class Xop_amp_trie {
 	, Bry_xowa_asterisk		= Bry_.new_ascii_("&xowa_asterisk;")
 	, Bry_xowa_space		= Bry_.new_ascii_("&xowa_space;")
 	, Bry_xowa_nl			= Bry_.new_ascii_("&xowa_nl;")
+	, Bry_xowa_dash			= Bry_.new_ascii_("&xowa_dash;")
 	;
 	public static final Btrie_slim_mgr _ = new_(); Xop_amp_trie() {}
 	private static Btrie_slim_mgr new_() {// REF.MW: Sanitizer|$wgHtmlEntities; NOTE:added apos
@@ -43,6 +44,7 @@ public class Xop_amp_trie {
 		Reg_name(rv, Bool_.Y,   42, Bry_xowa_asterisk);
 		Reg_name(rv, Bool_.Y,   32, Bry_xowa_space);
 		Reg_name(rv, Bool_.Y,   10, Bry_xowa_nl);
+		Reg_name(rv, Bool_.Y,   45, Bry_xowa_dash);
 		Reg_name(rv, Bool_.N,   39, "&apos;");
 		Reg_name(rv, Bool_.N,  193, "&Aacute;");
 		Reg_name(rv, Bool_.N,  225, "&aacute;");

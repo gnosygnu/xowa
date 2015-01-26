@@ -172,7 +172,7 @@ public class Bry__tst {
 	byte[] ary_(int... ary) {
 		byte[] rv = new byte[ary.length];
 		for (int i = 0; i < ary.length; i++)
-			rv[i] = Byte_.int_(ary[i]);
+			rv[i] = Byte_.By_int(ary[i]);
 		return rv;
 	}
 	void tst_IncrementLast(byte[] ary, byte[] expd) {Tfds.Eq_ary(expd, Bry_.Increment_last(Bry_.Copy(ary)));}

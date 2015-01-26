@@ -17,10 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 public class Xow_xwiki_mgr implements GfoInvkAble {
-	private Xow_xwiki_mgr_srl srl;
+	private Xow_wiki wiki; private Xow_xwiki_mgr_srl srl;
 	public Xow_xwiki_mgr() {}	// FIXME: current placeholder for viewer
-	public Xow_xwiki_mgr(Xow_wiki wiki) {this.wiki = wiki; srl = new Xow_xwiki_mgr_srl(this);} 
-	public Xow_wiki Wiki() {return wiki;} private Xow_wiki wiki;
+	public Xow_xwiki_mgr(Xow_wiki wiki, Gfo_url_parser url_parser, byte cur_wiki_tid) {
+		this.wiki = wiki;
+		srl = new Xow_xwiki_mgr_srl(this, url_parser, cur_wiki_tid);
+	}		
 	public Xow_lang_mgr Lang_mgr() {return lang_mgr;} private Xow_lang_mgr lang_mgr = Xow_lang_mgr.dflt_();
 	public int Len() {return list.Count();} private OrderedHash list = OrderedHash_.new_bry_(); private Hash_adp_bry hash = Hash_adp_bry.ci_ascii_();	// ASCII:lang_code
 	public void Clear() {hash.Clear(); list.Clear();}

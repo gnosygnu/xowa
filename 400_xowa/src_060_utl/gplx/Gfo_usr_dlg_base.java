@@ -17,6 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public class Gfo_usr_dlg_base implements Gfo_usr_dlg {
+	private Bry_fmtr tmp_fmtr = Bry_fmtr.tmp_().Fail_when_invalid_escapes_(false);	// do not fail b/c msgs may contain excerpt of random text; EX:[[User:A|~A~]] DATE:2014-11-28
+	private Bry_bfr tmp_bfr = Bry_bfr.new_();
 	public Gfo_usr_dlg_ui Ui_wkr() {return ui_wkr;} public void Ui_wkr_(Gfo_usr_dlg_ui v) {ui_wkr = v;} Gfo_usr_dlg_ui ui_wkr = Gfo_usr_dlg_ui_.Null;
 	public Gfo_log_wtr Log_wtr() {return log_wtr;} public void Log_wtr_(Gfo_log_wtr v) {log_wtr = v;} Gfo_log_wtr log_wtr;
 	@gplx.Virtual public void Clear() {ui_wkr.Clear();}
@@ -41,15 +43,15 @@ public class Gfo_usr_dlg_base implements Gfo_usr_dlg {
 		log_wtr.Log_err(Err_.Message_gplx(rv));
 		return rv;
 	}
-	String Bld_msg_many(String grp_key, String msg_key, String fmt, Object[] args) {
+	private String Bld_msg_many(String grp_key, String msg_key, String fmt, Object[] args) {
 		tmp_fmtr.Fmt_(fmt).Bld_bfr_many(tmp_bfr, args);
 		return tmp_bfr.Xto_str_and_clear();
-	}	private Bry_fmtr tmp_fmtr = Bry_fmtr.tmp_(); Bry_bfr tmp_bfr = Bry_bfr.new_();
-	String Bld_msg_one(String grp_key, String msg_key, String fmt, Object val) {
+	}
+	private String Bld_msg_one(String grp_key, String msg_key, String fmt, Object val) {
 		tmp_fmtr.Fmt_(fmt).Bld_bfr_one(tmp_bfr, val);
 		return tmp_bfr.Xto_str_and_clear();
 	}
-	String Bld_msg_none(String grp_key, String msg_key, String fmt) {
+	private String Bld_msg_none(String grp_key, String msg_key, String fmt) {
 		return fmt;
 	}
 	private void Ui_wkr_parse(String s) {

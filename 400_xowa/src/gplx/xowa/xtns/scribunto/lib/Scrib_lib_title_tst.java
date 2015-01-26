@@ -17,14 +17,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.lib; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import org.junit.*;
+import gplx.dbs.*; import gplx.xowa2.files.commons.*; import gplx.xowa2.wikis.data.tbls.*; import gplx.xowa2.files.metas.*; import gplx.xowa.files.wiki_orig.*;
 public class Scrib_lib_title_tst {
 	@Before public void init() {
 		fxt.Clear_for_lib();
 		lib = fxt.Core().Lib_title().Init();
 	}	private Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt(); private Scrib_lib lib;
 	@Test  public void NewTitle() {
-		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_newTitle, Object_.Ary("Page_0")				, ttl_data_(0	, "", "Page 0", "", "", "Page_0"));
-		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_newTitle, Object_.Ary("A", "Template")		, ttl_data_(10	, "Template", "A"));
+		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_newTitle, Object_.Ary("Page_0")				, ttl_fast(0	, "", "Page 0", "", "", "Page_0"));
+		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_newTitle, Object_.Ary("A", "Template")		, ttl_fast(10	, "Template", "A"));
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_newTitle, Object_.Ary("a[b")					, Scrib_invoke_func_fxt.Null_rslt_ary);	// invalid
 	}
 	@Test   public void GetUrl() {
@@ -38,29 +39,39 @@ public class Scrib_lib_title_tst {
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_title.Invk_getUrl, Object_.Ary("Main_Page", "canonicalUrl", KeyVal_.Ary(KeyVal_.new_("action", "edit"), KeyVal_.new_("preload", "b"))), "http://en.wikipedia.org/wiki/Main_Page?action=edit&preload=b");
 	}
 	@Test   public void MakeTitle() {
-		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_makeTitle, Object_.Ary("Module", "A")									, ttl_data_(828, "Module", "A"));
-		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_makeTitle, Object_.Ary(828, "A")										, ttl_data_(828, "Module", "A"));
-		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_makeTitle, Object_.Ary("Template", "A", "b")							, ttl_data_(10, "Template", "A", "b"));
+		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_makeTitle, Object_.Ary("Module", "A")									, ttl_fast(828, "Module", "A"));
+		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_makeTitle, Object_.Ary(828, "A")										, ttl_fast(828, "Module", "A"));
+		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_makeTitle, Object_.Ary("Template", "A", "b")							, ttl_fast(10, "Template", "A", "b"));
 		fxt.Parser_fxt().Wiki().Xwiki_mgr().Add_full("fr", "fr.wikipedia.org");
-		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_makeTitle, Object_.Ary("Template", "A", "b", "fr")					, ttl_data_(0, "", "Template:A", "b", "fr"));
+		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_makeTitle, Object_.Ary("Template", "A", "b", "fr")					, ttl_fast(0, "", "Template:A", "b", "fr"));
 		fxt.Parser_fxt().Init_log_(Xop_ttl_log.Invalid_char);
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_makeTitle, Object_.Ary("Template", "a[b"), Scrib_invoke_func_fxt.Null_rslt_ary);	// PURPOSE: handle bad MakeTitle cmds; PAGE:en.w:Disney; DATE:2013-10-15
 	}
-	@Test   public void FileExists() {
-		fxt.Test_scrib_proc_bool(lib, Scrib_lib_title.Invk_fileExists, Object_.Ary("A")											, false);
-		fxt.Test_scrib_proc_bool(lib, Scrib_lib_title.Invk_fileExists, Object_.Ary("Template:A")								, false);
-		fxt.Test_scrib_proc_bool(lib, Scrib_lib_title.Invk_fileExists, Object_.Ary("File:A.png")								, false);
-		fxt.Parser_fxt().Init_page_create("File:A.png");
-		fxt.Test_scrib_proc_bool(lib, Scrib_lib_title.Invk_fileExists, Object_.Ary("File:A.png")								, true);
+	@Test   public void GetExpensiveData_absent() {
+		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_getExpensiveData, Object_.Ary("A")									, ttl_slow(Bool_.N, 0, Bool_.N));
 	}
-	@Test   public void FileExists_commons() {	// PURPOSE: check that Scribunto FileExists calls filepath.FileExists; DATE:2014-01-07
+	@Test   public void GetExpensiveData_exists() {
+		fxt.Parser_fxt().Init_page_create("A");
+		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_getExpensiveData, Object_.Ary("A")									, ttl_slow(Bool_.Y, 0, Bool_.N));
+	}
+	@Test   public void GetFileInfo() {
+		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_getFileInfo, Object_.Ary("A")											, file_info_absent());
+		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_getFileInfo, Object_.Ary("Template:A")								, file_info_absent());
+		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_getFileInfo, Object_.Ary("File:A.png")								, file_info_absent());
+		fxt.Parser_fxt().Init_page_create("File:A.png");
+		Init_file_wiki_orig(fxt.Core().Wiki(), "A.png", 220, 200);
+		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_getFileInfo, Object_.Ary("File:A.png")								, file_info_exists("A.png", 220, 200));
+	}
+	@Test   public void GetFileInfo_commons() {	// PURPOSE: check that Scribunto GetFileInfo calls filepath.FileExists; DATE:2014-01-07
 		Xow_wiki commons_wiki = fxt.Parser_fxt().Wiki().App().Wiki_mgr().Get_by_key_or_make(Xow_wiki_.Domain_commons_bry).Init_assert();
+		Init_file_wiki_orig(fxt.Core().Wiki(), "A.png", 220, 200);
 		fxt.Parser_fxt().Init_page_create(commons_wiki, "File:A.png", "text_is_blank");
-		fxt.Test_scrib_proc_bool(lib, Scrib_lib_title.Invk_fileExists, Object_.Ary("File:A.png")								, true);
+		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_getFileInfo, Object_.Ary("File:A.png")							, file_info_exists("A.png", 220, 200));
 	}
-	@Test   public void FileExists_media() {	// PURPOSE: [[Media:]] ns should find entries in [[File:]]; DATE:2014-01-07
+	@Test   public void GetFileInfo_media() {	// PURPOSE: [[Media:]] ns should find entries in [[File:]]; DATE:2014-01-07
+		Init_file_wiki_orig(fxt.Core().Wiki(), "A.png", 220, 200);
 		fxt.Parser_fxt().Init_page_create("File:A.png");
-		fxt.Test_scrib_proc_bool(lib, Scrib_lib_title.Invk_fileExists, Object_.Ary("Media:A.png")								, true);
+		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_getFileInfo, Object_.Ary("Media:A.png")							, file_info_exists("A.png", 220, 200));
 	}
 	@Test   public void GetContent() {
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_title.Invk_getContent, Object_.Ary("A")											, Scrib_invoke_func_fxt.Null_rslt);
@@ -78,24 +89,62 @@ public class Scrib_lib_title_tst {
 	@Test   public void CascadingProtection() {
 		fxt.Test_scrib_proc_obj(lib, Scrib_lib_title.Invk_cascadingProtection, Object_.Ary("A")									, Scrib_lib_title.CascadingProtection_rv);
 	}
-	private static String ttl_data_(int ns_id, String ns_str, String ttl) {return ttl_data_(ns_id, ns_str, ttl, "", "", ttl);}
-	private static String ttl_data_(int ns_id, String ns_str, String ttl, String anchor) {return ttl_data_(ns_id, ns_str, ttl, anchor, "", ttl);}
-	private static String ttl_data_(int ns_id, String ns_str, String ttl, String anchor, String xwiki) {return ttl_data_(ns_id, ns_str, ttl, anchor, xwiki, ttl);}
-	private static String ttl_data_(int ns_id, String ns_str, String ttl, String anchor, String xwiki, String partial_url) {
+	private static void Init_file_wiki_orig(Xow_wiki wiki, String ttl_str, int w, int h) {
+		String url_str = "test/file/en.wikipedia.org/orig_regy";
+		Db_conn_pool.I.Set_mem(url_str, new Xof_orig_regy_tbl().new_meta());
+		Db_url db_url = Db_url_.mem_(url_str);
+		Xof_file_meta_wkr__db_orig wkr = (Xof_file_meta_wkr__db_orig)wiki.File_mgr().File_meta_wkr();
+		Xof_orig_regy_tbl tbl = wkr.Tbl();
+		tbl.Conn_(Db_conn_pool.I.Get_or_new(db_url));
+		byte[] ttl_bry = Bry_.new_utf8_(ttl_str);
+		tbl.Insert(Xof_repo_itm.Repo_remote, ttl_bry, Xof_ext_.new_by_ttl_(ttl_bry).Id(), w, h, Bry_.Empty);
+	}
+//		private static void Init_page_regy(Xow_wiki wiki, String ttl, int id, boolean is_redirect) {
+//			String url_str = "test/en.wikipedia.org/wiki_page_regy";
+//			Db_meta_tbl meta = new Xow_page_regy_tbl().new_meta();
+//			Db_conn_pool.I.Set_mem(url_str, meta);
+//			Db_url url = Db_url_.mem_(url_str);
+//			Xow_page_regy_tbl tbl = new Xow_page_regy_tbl(Bool_.N, url);
+//			tbl.Insert(id, ns_id, Bry_.new_utf8_(ttl), is_redirect, modified_on, page_len, random_int, text_db_id, html_db_id);
+//		}
+	private static String ttl_fast(int ns_id, String ns_str, String ttl) {return ttl_fast(ns_id, ns_str, ttl, "", "", ttl);}
+	private static String ttl_fast(int ns_id, String ns_str, String ttl, String anchor) {return ttl_fast(ns_id, ns_str, ttl, anchor, "", ttl);}
+	private static String ttl_fast(int ns_id, String ns_str, String ttl, String anchor, String xwiki) {return ttl_fast(ns_id, ns_str, ttl, anchor, xwiki, ttl);}
+	private static String ttl_fast(int ns_id, String ns_str, String ttl, String anchor, String xwiki, String partial_url) {
 		return String_.Concat_lines_nl_skip_last
 		( "1="
 		, "  isLocal=true"
-		, "  isRedirect=false"
 		, "  interwiki=" + xwiki
 		, "  namespace=" + Int_.Xto_str(ns_id)
 		, "  nsText=" + ns_str
 		, "  text=" + ttl
-		, "  id=0"
 		, "  fragment=" + anchor
-		, "  contentModel=wikitext"
 		, "  thePartialUrl=" + partial_url
+		, "  file=false"
+		);
+	}
+	private static String ttl_slow(boolean exists, int ttl_id, boolean redirect) {
+		return String_.Concat_lines_nl_skip_last
+		( "1="
+		, "  isRedirect=" + Bool_.Xto_str_lower(redirect)
+		, "  id=" + Int_.Xto_str(ttl_id)
+		, "  contentModel=" + Scrib_lib_title.Key_wikitexet
+		, "  exists=" + Bool_.Xto_str_lower(exists)
+		);
+	}
+	private static String file_info_absent() {
+		return String_.Concat_lines_nl_skip_last
+		( "1="
 		, "  exists=false"
-		, "  fileExists=false"
+		);
+	}
+	private static String file_info_exists(String ttl, int w, int h) {
+		return String_.Concat_lines_nl_skip_last
+		( "1="
+		, "  exists=true"
+		, "  width=" + Int_.Xto_str(w)
+		, "  height=" + Int_.Xto_str(h)
+		, "  pages=<<NULL>>"
 		);
 	}
 }	

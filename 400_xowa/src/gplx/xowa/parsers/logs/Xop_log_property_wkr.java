@@ -18,20 +18,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.logs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.dbs.*; import gplx.xowa.bldrs.oimgs.*;
 public class Xop_log_property_wkr implements GfoInvkAble {
-	private Xop_log_mgr log_mgr; private Db_provider provider; private Db_stmt stmt;
+	private Xop_log_mgr log_mgr; private Db_conn conn; private Db_stmt stmt;
 	private boolean log_enabled = true;
 	private boolean include_all = true;
 	private Hash_adp_bry include_props = Hash_adp_bry.cs_();
-	public Xop_log_property_wkr(Xop_log_mgr log_mgr, Db_provider provider) {
+	public Xop_log_property_wkr(Xop_log_mgr log_mgr, Db_conn conn) {
 		this.log_mgr = log_mgr;
-		this.provider = provider;
+		this.conn = conn;
 		if (log_enabled) {
-			Xob_log_property_temp_tbl.Create_table(provider);
-			stmt = Xob_log_property_temp_tbl.Insert_stmt(provider);
+			Xob_log_property_temp_tbl.Create_table(conn);
+			stmt = Xob_log_property_temp_tbl.Insert_stmt(conn);
 		}
 	}
 	public void Init_reset() {
-		Xob_log_property_temp_tbl.Delete(provider);
+		Xob_log_property_temp_tbl.Delete(conn);
 	}
 	public boolean Eval_bgn(Xoa_page page, byte[] prop) {return include_all || include_props.Has(prop);}
 	public void Eval_end(Xoa_page page, byte[] prop, long invoke_time_bgn) {
@@ -57,14 +57,14 @@ public class Xop_log_property_wkr implements GfoInvkAble {
 	}	private static final String Invk_include_props_add = "include_props_add", Invk_log_enabled_ = "log_enabled_";
 }
 class Xob_log_property_temp_tbl {
-	public static void Create_table(Db_provider provider)		{Sqlite_engine_.Tbl_create(provider, Tbl_name, Tbl_sql);}
-	public static void Delete(Db_provider provider) {provider.Exec_qry(Db_qry_delete.new_all_(Tbl_name));}
-	public static Db_stmt Insert_stmt(Db_provider provider) {return Db_stmt_.new_insert_(provider, Tbl_name, Fld_prop_page_ttl, Fld_prop_prop_name, Fld_prop_eval_time);}
+	public static void Create_table(Db_conn conn)		{Sqlite_engine_.Tbl_create(conn, Tbl_name, Tbl_sql);}
+	public static void Delete(Db_conn conn) {conn.Exec_qry(Db_qry_delete.new_all_(Tbl_name));}
+	public static Db_stmt Insert_stmt(Db_conn conn) {return Db_stmt_.new_insert_(conn, Tbl_name, Fld_prop_page_ttl, Fld_prop_prop_name, Fld_prop_eval_time);}
 	public static void Insert(Db_stmt stmt, byte[] page_ttl, byte[] prop_name, int eval_time) {
 		stmt.Clear()
-		.Val_str_by_bry_(page_ttl)
-		.Val_str_by_bry_(prop_name)
-		.Val_int_(eval_time)
+		.Val_bry_as_str(page_ttl)
+		.Val_bry_as_str(prop_name)
+		.Val_int(eval_time)
 		.Exec_insert();
 	}
 	public static final String Tbl_name = "log_property_temp", Fld_prop_page_ttl = "prop_page_ttl", Fld_prop_prop_name = "prop_prop_name", Fld_prop_eval_time = "prop_eval_time";

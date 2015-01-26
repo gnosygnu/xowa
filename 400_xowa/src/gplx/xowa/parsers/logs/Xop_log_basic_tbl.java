@@ -19,23 +19,23 @@ package gplx.xowa.parsers.logs; import gplx.*; import gplx.xowa.*; import gplx.x
 import gplx.dbs.*;
 public class Xop_log_basic_tbl {
 	private Db_stmt stmt_insert;
-	public Xop_log_basic_tbl(Db_provider provider){this.provider = provider; this.Create_table();} 
-	public Db_provider Provider() {return provider;} private Db_provider provider; 
-	private void Create_table()				{Sqlite_engine_.Tbl_create(provider, Tbl_name, Tbl_sql);}
-	public void Delete()					{provider.Exec_qry(Db_qry_delete.new_all_(Tbl_name));}
+	public Xop_log_basic_tbl(Db_conn conn){this.conn = conn; this.Create_table();} 
+	public Db_conn Conn() {return conn;} private Db_conn conn; 
+	private void Create_table()				{Sqlite_engine_.Tbl_create(conn, Tbl_name, Tbl_sql);}
+	public void Delete()					{conn.Exec_qry(Db_qry_delete.new_all_(Tbl_name));}
 	public void Insert(int log_tid, String log_msg, int log_time, int page_id, String page_ttl, int args_len, String args_str, int src_len, String src_str) {
-		if (stmt_insert == null) stmt_insert = Db_stmt_.new_insert_(provider, Tbl_name, Fld_log_tid, Fld_log_msg, Fld_log_time, Fld_page_id, Fld_page_ttl, Fld_args_len, Fld_args_str, Fld_src_len, Fld_src_str);
+		if (stmt_insert == null) stmt_insert = Db_stmt_.new_insert_(conn, Tbl_name, Fld_log_tid, Fld_log_msg, Fld_log_time, Fld_page_id, Fld_page_ttl, Fld_args_len, Fld_args_str, Fld_src_len, Fld_src_str);
 		try {
 			stmt_insert.Clear()
-			.Val_int_(log_tid)
-			.Val_str_(log_msg)
-			.Val_int_(log_time)
-			.Val_int_(page_id)
-			.Val_str_(page_ttl)
-			.Val_int_(args_len)
-			.Val_str_(args_str)
-			.Val_int_(src_len)
-			.Val_str_(src_str)
+			.Val_int(log_tid)
+			.Val_str(log_msg)
+			.Val_int(log_time)
+			.Val_int(page_id)
+			.Val_str(page_ttl)
+			.Val_int(args_len)
+			.Val_str(args_str)
+			.Val_int(src_len)
+			.Val_str(src_str)
 			.Exec_insert();
 		}	catch (Exception exc) {stmt_insert = null; throw Err_.err_(exc, "stmt failed");} // must reset stmt, else next call will fail
 	}

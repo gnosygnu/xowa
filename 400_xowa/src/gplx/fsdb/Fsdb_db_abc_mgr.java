@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.fsdb; import gplx.*;
 import gplx.dbs.*;
 public class Fsdb_db_abc_mgr implements RlsAble {
-	private Db_provider boot_provider;
+	private Db_conn boot_provider;
 	public int Next_id() {return cfg_mgr.Next_id();}
 	public Fsdb_mnt_mgr Mnt_mgr() {return mnt_mgr;} private Fsdb_mnt_mgr mnt_mgr;
 	public Fsdb_db_abc_mgr(Fsdb_mnt_mgr mnt_mgr) {this.mnt_mgr = mnt_mgr;}
@@ -78,16 +78,16 @@ public class Fsdb_db_abc_mgr implements RlsAble {
 		boot_provider.Conn_term();
 	}
 	private void Init_load(Io_url dir, Io_url boot_url) {
-		Db_conn_info connect = Db_conn_info__sqlite.load_(boot_url);
-		boot_provider = Db_provider_.new_and_open_(connect);
+		Db_url connect = Db_url__sqlite.load_(boot_url);
+		boot_provider = Db_conn_.new_and_open_(connect);
 		atr_mgr = Fsdb_db_atr_mgr.load_(this, boot_provider, dir);
 		bin_mgr = Fsdb_db_bin_mgr.load_(boot_provider, dir);
 		cfg_mgr = Fsdb_cfg_mgr.load_(this, boot_provider);
 		if (!cfg_mgr.Patch_next_id()) Fsdb_db_abc_mgr_.Patch_next_id(this, dir);
 	}
 	private void Init_make(Io_url dir, Io_url boot_url) {
-		Db_conn_info connect = Db_conn_info__sqlite.make_(boot_url);
-		boot_provider = Db_provider_.new_and_open_(connect);
+		Db_url connect = Db_url__sqlite.make_(boot_url);
+		boot_provider = Db_conn_.new_and_open_(connect);
 		Sqlite_engine_.Pragma_page_size_4096(boot_provider);
 		atr_mgr = Fsdb_db_atr_mgr.make_(this, boot_provider, dir);
 		bin_mgr = Fsdb_db_bin_mgr.make_(boot_provider, dir);
@@ -103,8 +103,8 @@ class Fsdb_db_abc_mgr_ {
 		int last_id = -1;
 		if (atr_mgr.Len() > 0) {
 			Fsdb_db_atr_fil atr_fil = atr_mgr.Get_at(0);
-			int max_fil_id = Db_provider_.Select_fld0_as_int_or(atr_fil.Provider(), "SELECT Max(fil_id) AS MaxId FROM fsdb_fil;", -1);
-			int max_thm_id = Db_provider_.Select_fld0_as_int_or(atr_fil.Provider(), "SELECT Max(thm_id) AS MaxId FROM fsdb_xtn_thm;", -1);
+			int max_fil_id = Db_conn_.Select_fld0_as_int_or(atr_fil.Conn(), "SELECT Max(fil_id) AS MaxId FROM fsdb_fil;", -1);
+			int max_thm_id = Db_conn_.Select_fld0_as_int_or(atr_fil.Conn(), "SELECT Max(thm_id) AS MaxId FROM fsdb_xtn_thm;", -1);
 			last_id = max_fil_id > max_thm_id ? max_fil_id : max_thm_id;
 		}
 		cfg_mgr.Patch_next_id_exec(last_id);

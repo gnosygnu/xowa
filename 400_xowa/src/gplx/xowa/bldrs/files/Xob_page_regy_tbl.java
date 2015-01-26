@@ -18,21 +18,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.bldrs.oimgs.*;
 class Xob_page_regy_tbl {
-	public static void Reset_table(Db_provider p) {Sqlite_engine_.Tbl_create_and_delete(p, Tbl_name, Tbl_sql);}
-	public static void Create_data(Gfo_usr_dlg usr_dlg, Db_provider p, byte repo_tid, Xow_wiki wiki) {
+	public static void Reset_table(Db_conn p) {Sqlite_engine_.Tbl_create_and_delete(p, Tbl_name, Tbl_sql);}
+	public static void Create_data(Gfo_usr_dlg usr_dlg, Db_conn p, byte repo_tid, Xow_wiki wiki) {
 		Create_data__insert_page(usr_dlg, p, repo_tid, wiki.Db_mgr_as_sql().Fsys_mgr().Get_url(Xodb_file_tid.Tid_core));
 		Create_data__insert_redirect(usr_dlg, p, repo_tid, wiki.Fsys_mgr().Root_dir().GenSubFil(Xodb_db_file.Name__wiki_redirect));
 	}
-	public static void Delete_local(Db_provider p) {
+	public static void Delete_local(Db_conn p) {
 		p.Exec_sql("DELETE FROM page_regy WHERE repo_id = " + Xof_repo_itm.Repo_local);
 	}
-	private static void Create_data__insert_page(Gfo_usr_dlg usr_dlg, Db_provider cur, byte repo_tid, Io_url join) {
+	private static void Create_data__insert_page(Gfo_usr_dlg usr_dlg, Db_conn cur, byte repo_tid, Io_url join) {
 		usr_dlg.Note_many("", "", "inserting page: ~{0}", join.NameOnly());
 		Sqlite_engine_.Db_attach(cur, "page_db", join.Raw());
 		cur.Exec_sql(String_.Format(Sql_create_page, repo_tid));
 		Sqlite_engine_.Db_detach(cur, "page_db");
 	}
-	private static void Create_data__insert_redirect(Gfo_usr_dlg usr_dlg, Db_provider cur, byte repo_tid, Io_url join) {
+	private static void Create_data__insert_redirect(Gfo_usr_dlg usr_dlg, Db_conn cur, byte repo_tid, Io_url join) {
 		usr_dlg.Note_many("", "", "inserting redirect: ~{0}", join.OwnerDir().NameOnly());
 		Sqlite_engine_.Db_attach(cur, "redirect_db", join.Raw());
 		cur.Exec_sql(String_.Format(Sql_create_redirect, repo_tid));

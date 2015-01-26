@@ -18,15 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.dbs.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.dbs.*;
 import gplx.dbs.*;
 public class Xodb_site_stats_tbl {
-	public void Provider_(Db_provider provider) {this.provider = provider;} Db_provider provider;
+	public void Conn_(Db_conn conn) {this.conn = conn;} Db_conn conn;
 	public void Update(int num_articles, int num_pages, int num_files) {
 		Db_stmt stmt = Db_stmt_.Null;
 		try {
-			stmt = Db_stmt_.new_update_(provider, Tbl_name, String_.Ary(Fld_ss_row_id), Fld_ss_good_articles, Fld_ss_total_pages, Fld_ss_images);
-			stmt.Val_int_(num_articles)
-				.Val_int_(num_pages)
-				.Val_int_(num_files)
-				.Val_int_(1)
+			stmt = Db_stmt_.new_update_(conn, Tbl_name, String_.Ary(Fld_ss_row_id), Fld_ss_good_articles, Fld_ss_total_pages, Fld_ss_images);
+			stmt.Val_int(num_articles)
+				.Val_int(num_pages)
+				.Val_int(num_files)
+				.Val_int(1)
 				.Exec_update();
 				;
 		} finally {stmt.Rls();}
@@ -36,7 +36,7 @@ public class Xodb_site_stats_tbl {
 		DataRdr rdr = DataRdr_.Null;
 		Db_stmt stmt = Db_stmt_.Null;
 		try {
-			stmt = Db_stmt_.new_select_all_(provider, Tbl_name);
+			stmt = Db_stmt_.new_select_all_(conn, Tbl_name);
 			rdr = stmt.Exec_select();
 			if (rdr.MoveNextPeer()) {
 				stats.NumArticles_	(rdr.ReadInt(Fld_ss_good_articles));	

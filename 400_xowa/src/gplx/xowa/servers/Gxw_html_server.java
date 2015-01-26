@@ -92,4 +92,8 @@ public class Gxw_html_server implements Gxw_html {
 		mem_kit.New_html_impl_prototype_(new Gxw_html_server(app.Usr_dlg(), wtr));	// NOTE: set prototype before calling Kit_
 		app.Gui_mgr().Kit_(mem_kit);
 	}
+	public static void Assert_tab(Xoa_app app, Xoa_page page) {
+		if (app.Gui_mgr().Browser_win().Active_tab() == null)									// no active tab
+			app.Gui_mgr().Browser_win().Tab_mgr().Tabs_new_init(page);							// create at least one active tab; DATE:2014-07-30
+	}
 }

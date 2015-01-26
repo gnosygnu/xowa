@@ -244,4 +244,15 @@ public class Xop_para_wkr_pre_tst {
 		, "</p>"
 		));	
 	}
+	@Test   public void False_match_xnde() {	// PURPOSE: "\s<trk>" being evaluted as "\s<tr>"; PAGE:de.v:Via_Jutlandica/Gpx DATE:2014-11-29
+		fxt.Init_para_y_();
+		fxt.Test_html_wiki_str(String_.Concat_lines_nl
+		( ""
+		, " <trk>"
+		), String_.Concat_lines_nl
+		( ""
+		, "<pre>&lt;trk&gt;"
+		, "</pre>"
+		));
+	}
 }

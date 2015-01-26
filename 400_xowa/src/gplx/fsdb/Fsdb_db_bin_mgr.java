@@ -21,7 +21,7 @@ public class Fsdb_db_bin_mgr implements RlsAble {
 	private Io_url dir;
 	private Fsdb_db_bin_fil[] itms = Fsdb_db_bin_fil.Ary_empty; private int itms_len = 0;
 	private Fsdb_db_bin_fil itms_n;
-	private Db_provider provider;
+	private Db_conn conn;
 	private Fsdb_db_bin_mgr(Io_url dir) {this.dir = dir;}
 	public int Len() {return itms.length;}
 	public long Db_bin_max() {return db_bin_max;}
@@ -35,11 +35,11 @@ public class Fsdb_db_bin_mgr implements RlsAble {
 	public Fsdb_db_bin_fil Get_at(int i) {return itms[i];}
 	private Fsdb_db_bin_fil Get_cur() {return itms_len == 0 ? null : itms[itms_len - 1];}
 	public void Txn_open() {		
-		Get_cur().Provider().Txn_mgr().Txn_bgn_if_none();
+		Get_cur().Conn().Txn_mgr().Txn_bgn_if_none();
 	}
 	public void Txn_save() {		
-		Fsdb_db_bin_tbl.Commit_all(provider, itms);
-		Get_cur().Provider().Txn_mgr().Txn_end_all();
+		Fsdb_db_bin_tbl.Commit_all(conn, itms);
+		Get_cur().Conn().Txn_mgr().Txn_end_all();
 	}
 	public void Rls() {
 		int len = itms.length;
@@ -62,26 +62,26 @@ public class Fsdb_db_bin_mgr implements RlsAble {
 		Fsdb_db_bin_fil bin_fil = itms[db_id];
 		return bin_fil.Insert(bin_id, owner_tid, bin_len, bin_rdr);
 	}
-	public static Fsdb_db_bin_mgr load_(Db_provider p, Io_url dir) {
+	public static Fsdb_db_bin_mgr load_(Db_conn p, Io_url dir) {
 		Fsdb_db_bin_mgr rv = new Fsdb_db_bin_mgr(dir);
-		rv.provider = p;
+		rv.conn = p;
 		rv.itms = Fsdb_db_bin_tbl.Select_all(p, dir);
 		rv.itms_len = rv.itms.length;
 		rv.itms_n = rv.itms[rv.itms_len - 1];
 		return rv;
 	}
-	public static Fsdb_db_bin_mgr make_(Db_provider p, Io_url dir) {
+	public static Fsdb_db_bin_mgr make_(Db_conn p, Io_url dir) {
 		Fsdb_db_bin_tbl.Create_table(p);
 		Fsdb_db_bin_mgr rv = new Fsdb_db_bin_mgr(dir);
-		rv.provider = p;
+		rv.conn = p;
 		rv.Itms_add(0);
 		return rv;
 	}
 	private void Itms_add(long bin_len) {
 		Fsdb_db_bin_fil cur = Get_cur();
 		if (cur != null) {
-			cur.Provider().Txn_mgr().Txn_end_all();
-			cur.Provider().Conn_term();
+			cur.Conn().Txn_mgr().Txn_end_all();
+			cur.Conn().Conn_term();
 		}
 		int new_itms_len = itms_len + 1;
 		Fsdb_db_bin_fil[] new_itms = new Fsdb_db_bin_fil[new_itms_len];

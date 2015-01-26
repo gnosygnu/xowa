@@ -20,12 +20,12 @@ import gplx.dbs.*;
 class Xou_db_xtn_mgr {
 	private Xou_db_xtn_tbl xtn_tbl = new Xou_db_xtn_tbl();
 	private OrderedHash xtn_hash = OrderedHash_.new_();
-	public void Db_init(Db_provider provider) {
-		xtn_tbl.Db_init(provider);
+	public void Db_init(Db_conn conn) {
+		xtn_tbl.Db_init(conn);
 		xtn_tbl.Select_all(xtn_hash);
 	}
-	public void Db_when_new(Db_provider provider) {
-		xtn_tbl.Db_when_new(provider);
+	public void Db_when_new(Db_conn conn) {
+		xtn_tbl.Db_when_new(conn);
 	}
 	public void Db_save() {
 		int len = xtn_hash.Count();

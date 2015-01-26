@@ -24,8 +24,8 @@ class Cache_fil_mgr {
 	private Cache_fil_tbl fil_tbl = new Cache_fil_tbl();
 	private Bry_bfr fil_key_bldr = Bry_bfr.reset_(255);
 	public Cache_fil_mgr(Cache_mgr v) {this.cache_mgr = v;}
-	public void Db_init(Db_provider p) {fil_tbl.Db_init(p);}
-	public void Db_when_new(Db_provider p) {fil_tbl.Db_when_new(p);}
+	public void Db_init(Db_conn p) {fil_tbl.Db_init(p);}
+	public void Db_when_new(Db_conn p) {fil_tbl.Db_when_new(p);}
 	public void Db_save() {
 		int len = fil_hash.Count();
 		boolean err_seen = false;
@@ -67,7 +67,7 @@ class Cache_fil_mgr {
 			fil_itm = fil_tbl.Select(dir_id, fil_name, fil_is_orig, fil_w, fil_h, fil_thumbtime);
 			if (fil_itm == Cache_fil_itm.Null) {						// not in db
 				int fil_id = cache_mgr.Next_id();
-				fil_itm = new Cache_fil_itm().Init_by_make(fil_id, dir_id, fil_name, fil_is_orig, fil_w, fil_h, fil_thumbtime, fil_ext, fil_size);
+				fil_itm = new Cache_fil_itm().Init_by_make(fil_id, dir_id, fil_name, fil_is_orig, fil_w, fil_h, fil_thumbtime, fil_ext, fil_size, Xof_doc_page.Null);
 				created.Val_(true);
 			}
 			fil_hash.Add(fil_key, fil_itm);
@@ -86,7 +86,7 @@ class Cache_fil_mgr {
 			long cur_size = 0, actl_size = 0;
 			Xof_url_bldr url_bldr = new Xof_url_bldr();
 			ListAdp deleted = ListAdp_.new_();
-			fil_tbl.Provider().Txn_mgr().Txn_bgn_if_none();
+			fil_tbl.Conn().Txn_mgr().Txn_bgn_if_none();
 			long compress_to = cfg_mgr.Cache_min();
 			for (int i = 0; i < len; i++) {
 				Cache_fil_itm itm = (Cache_fil_itm)fil_hash.FetchAt(i);
@@ -116,7 +116,7 @@ class Cache_fil_mgr {
 		catch (Exception e) {
 			app.Usr_dlg().Warn_many("", "", "failed to compress cache: err=~{0}", Err_.Message_gplx_brief(e));
 		}
-		finally {fil_tbl.Provider().Txn_mgr().Txn_end_all();}
+		finally {fil_tbl.Conn().Txn_mgr().Txn_end_all();}
 	}
 	private void Fsys_delete(Xof_url_bldr url_bldr, Xoa_repo_mgr repo_mgr, Cache_dir_mgr dir_mgr, Cache_fil_itm itm) {
 		byte mode_id = itm.Fil_is_orig() ? Xof_repo_itm.Mode_orig : Xof_repo_itm.Mode_thumb;

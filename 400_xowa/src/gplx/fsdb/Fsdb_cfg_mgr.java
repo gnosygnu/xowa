@@ -57,9 +57,9 @@ public class Fsdb_cfg_mgr {
 		}
 		return grp;
 	}
-	public static Fsdb_cfg_mgr load_(Fsdb_db_abc_mgr abc_mgr, Db_provider p) {return new Fsdb_cfg_mgr().Init_by_load(p);}
-	public static Fsdb_cfg_mgr make_(Fsdb_db_abc_mgr abc_mgr, Db_provider p) {return new Fsdb_cfg_mgr().Init_by_make(p);}
-	private Fsdb_cfg_mgr Init_by_load(Db_provider p) {
+	public static Fsdb_cfg_mgr load_(Fsdb_db_abc_mgr abc_mgr, Db_conn p) {return new Fsdb_cfg_mgr().Init_by_load(p);}
+	public static Fsdb_cfg_mgr make_(Fsdb_db_abc_mgr abc_mgr, Db_conn p) {return new Fsdb_cfg_mgr().Init_by_make(p);}
+	private Fsdb_cfg_mgr Init_by_load(Db_conn p) {
 		this.cfg_tbl = new Fsdb_cfg_tbl_sql().Ctor(p, false);
 		Fsdb_cfg_grp core_grp = Grps_get_or_load(Grp_core);
 		this.next_id			= core_grp.Get_int_or(Key_next_id, -1); if (next_id == -1) throw Err_.new_("next_id not found in fsdb_cfg");
@@ -67,7 +67,7 @@ public class Fsdb_cfg_mgr {
 		this.patch_next_id		= core_grp.Get_yn_or_n(Key_patch_next_id);
 		return this;
 	}
-	private Fsdb_cfg_mgr Init_by_make(Db_provider p) {
+	private Fsdb_cfg_mgr Init_by_make(Db_conn p) {
 		this.cfg_tbl = new Fsdb_cfg_tbl_sql().Ctor(p, true);
 		this.cfg_tbl.Insert(Grp_core, Key_next_id				, "1");	// start next_id at 1
 		this.cfg_tbl.Insert(Grp_core, Key_schema_thm_page		, "y");	// new dbs automatically have page and time in fsdb_xtn_tm

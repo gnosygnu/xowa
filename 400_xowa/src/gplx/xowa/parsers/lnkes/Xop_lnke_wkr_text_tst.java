@@ -37,6 +37,16 @@ public class Xop_lnke_wkr_text_tst {
 		fxt.Test_parse_page_wiki_str("ätel:a"		, "ätel:a");
 		fxt.Test_parse_page_wiki_str("€tel:a"		, "€" + expd_lnke_html);
 	}
+	@Test  public void Invalid_lnki_and_list_dt_dd() {	// PURPOSE: invalid lnke should still allow processing of ":" in list <dd>; PAGE:de.w:Mord_(Deutschland)#Besonders_verwerfliche_Begehungsweise DATE:2015-01-08
+		fxt.Test_parse_page_wiki_str("; atel: b"		, String_.Concat_lines_nl_skip_last
+		( "<dl>"
+		, "  <dt> atel"
+		, "  </dt>"
+		, "  <dd> b"
+		, "  </dd>"
+		, "</dl>"
+		));
+	}
 	@Test  public void Xnde() {// NOTE: compare to Brace_lt
 		fxt.Test_parse_page_wiki("<span>irc://a</span>"
 		,	fxt.tkn_xnde_(0, 20).Subs_

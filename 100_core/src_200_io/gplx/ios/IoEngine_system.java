@@ -455,6 +455,7 @@ public class IoEngine_system extends IoEngine_base {
     		try {
     			if (src_stream != null) src_stream.close();
     			if (src_conn != null) src_conn.disconnect();
+    			src_conn.getInputStream().close();
     		} 	catch (Exception exc) {
     			Err_.Noop(exc);
     		}

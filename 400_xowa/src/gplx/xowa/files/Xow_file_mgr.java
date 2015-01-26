@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-import gplx.fsdb.*; import gplx.xowa.files.fsdb.*;
+import gplx.dbs.*; import gplx.fsdb.*; import gplx.xowa.files.fsdb.*;
+import gplx.xowa2.files.metas.*;
 public class Xow_file_mgr implements GfoInvkAble {
 	private Xof_wkr_mgr wkr_mgr;
 	public Xow_file_mgr(Xow_wiki wiki) {
@@ -25,8 +26,12 @@ public class Xow_file_mgr implements GfoInvkAble {
 		meta_mgr = new Xof_meta_mgr(wiki);
 		fsdb_mgr = new Xof_fsdb_mgr_sql(wiki);
 		wkr_mgr = new Xof_wkr_mgr(this);
+		Xof_file_meta_wkr__db_orig file_meta_wkr_as_db_orig = new Xof_file_meta_wkr__db_orig();
+		file_meta_wkr_as_db_orig.Tbl().Conn_(Db_conn_pool.I.Get_or_new__sqlite(wiki.Fsys_mgr().File_dir().GenSubFil_nest("wiki.orig#00.sqlite3")));
+		file_meta_wkr = file_meta_wkr_as_db_orig;
 	}
 	public Xow_wiki Wiki() {return wiki;} private Xow_wiki wiki;
+	public Xof_file_meta_wkr File_meta_wkr() {return file_meta_wkr;} public void File_meta_wkr_(Xof_file_meta_wkr v) {file_meta_wkr = v;} private Xof_file_meta_wkr file_meta_wkr;
 	public byte Version() {
 		if (version == Bool_.__byte) {
 			Io_url file_dir = wiki.Fsys_mgr().File_dir();
@@ -52,7 +57,7 @@ public class Xow_file_mgr implements GfoInvkAble {
 			: fsdb_mgr.Patch_upright()
 			;
 	}
-	public static final byte Version_null = Byte_.MaxValue_127, Version_1 = 1, Version_2 = 2;
+	public static final byte Version_null = Byte_.Max_value_127, Version_1 = 1, Version_2 = 2;
 	public Xow_repo_mgr Repo_mgr() {return repo_mgr;} private Xow_repo_mgr repo_mgr;
 	public Xof_meta_mgr  Meta_mgr() {return meta_mgr;} private Xof_meta_mgr meta_mgr;
 	public Xof_cfg_download Cfg_download() {return cfg_download;} private Xof_cfg_download cfg_download = new Xof_cfg_download();

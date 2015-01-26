@@ -21,7 +21,7 @@ public class Db_stmt_sql_tst {
 	@Before public void init() {}
 	@Test    public void Basic() {
 		Db_stmt_sql stmt = new Db_stmt_sql();
-		stmt.Parse("UPDATE tbl_0 SET col_0 = ? WHERE col_1 = ?");
+		stmt.Parse(null, "UPDATE tbl_0 SET col_0 = ? WHERE col_1 = ?");
 		stmt.Add("1");
 		stmt.Add("2");
 		Tfds.Eq("UPDATE tbl_0 SET col_0 = 1 WHERE col_1 = 2", stmt.Xto_sql());

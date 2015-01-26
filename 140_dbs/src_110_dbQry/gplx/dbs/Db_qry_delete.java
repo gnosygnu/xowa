@@ -16,24 +16,26 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-import gplx.criterias.*;
+import gplx.criterias.*; import gplx.dbs.sqls.*;
 public class Db_qry_delete implements Db_qry {
-	public int Tid() {return Db_qry_.Tid_basic;}
-	public String KeyOfDb_qry() {return KeyConst;} public static final String KeyConst = "DELETE";
-	public boolean ExecRdrAble() {return false;}
-	public String XtoSql() {return Sql_cmd_wtr_.Ansi.XtoSqlQry(this, false);}		
-	public int Exec_qry(Db_provider provider) {return provider.Exec_qry(this);}
-	public Db_qry_delete Where_add_(String key, int val) {
-		Criteria crt = Db_crt_.eq_(key, val);
-		where = Sql_where.merge_or_new_(where, crt);
-		return this;
-	}
-	@gplx.Internal protected String BaseTable() {return baseTable;} public Db_qry_delete BaseTable_(String baseTable_) {baseTable = baseTable_; return this;} private String baseTable;
-	@gplx.Internal protected Sql_where Where() {return where;} public Db_qry_delete Where_(Criteria crt) {where = Sql_where.new_(crt); return this;} Sql_where where;
-	public static Db_qry_delete new_() {return new Db_qry_delete();} Db_qry_delete() {}
+	Db_qry_delete(String base_table, Criteria where) {this.base_table = base_table; this.where = where;}
+	public int			Tid()					{return Db_qry_.Tid_delete;}
+	public boolean			Exec_is_rdr()			{return false;}
+	public String		Base_table()			{return base_table;} private final String base_table;
+	public String		Xto_sql()				{return Sql_qry_wtr_.I.Xto_str(this, false);}
+	public Criteria		Where()					{return where;} private final Criteria where;
+	public int			Exec_qry(Db_conn conn)	{return conn.Exec_qry(this);}
+
+	public String[]		Where_cols() {return where_cols;} private String[] where_cols;
 	public static Db_qry_delete new_all_(String tbl) {
-		Db_qry_delete rv = new Db_qry_delete();
-		rv.baseTable = tbl;
+		Db_qry_delete rv = new_(tbl, Criteria_.All);
+		rv.where_cols = String_.Ary_empty;
 		return rv;
 	}
+	public static Db_qry_delete new_(String tbl, String... where) {
+		Db_qry_delete rv = Db_qry_delete.new_(tbl, Db_crt_.eq_many_(where));
+		rv.where_cols = where;
+		return rv;
+	}
+	public static Db_qry_delete new_(String tbl, Criteria where) {return new Db_qry_delete(tbl, where);}
 }

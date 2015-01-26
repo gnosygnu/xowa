@@ -140,7 +140,6 @@ public class Xog_url_wkr {
 			if (tmp_ttl != null)
 				page_bry = tmp_ttl.Full_db();
 		}
-		rv.Wiki_(wiki);
 		rv.Wiki_bry_(wiki.Domain_bry());	// needed b/c url_parser.Parse(href) will result in wiki of "wiki" for "/wiki/Page"
 		rv.Page_bry_(page_bry);
 		rv.Anchor_bry_(anchor_bry);

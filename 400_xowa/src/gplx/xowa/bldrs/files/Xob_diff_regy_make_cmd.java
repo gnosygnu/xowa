@@ -26,12 +26,12 @@ public class Xob_diff_regy_make_cmd extends Xob_itm_basic_base implements Xob_cm
 	public void Cmd_end() {}
 	public void Cmd_print() {}
 	private void Exec_main() {
-		Db_provider make_db_provider = Xodb_db_file.init__file_make(wiki.Fsys_mgr().Root_dir()).Provider();
+		Db_conn make_db_provider = Xodb_db_file.init__file_make(wiki.Fsys_mgr().Root_dir()).Conn();
 		this.Make_join_indexes(make_db_provider);
 		this.Make_diff_regy(make_db_provider);
 		this.Make_delete_sql(make_db_provider);
 	}
-	private void Make_join_indexes(Db_provider make_db_provider) {
+	private void Make_join_indexes(Db_conn make_db_provider) {
 		try {
 			Sqlite_engine_.Idx_create(make_db_provider, Xob_diff_regy_tbl.Idx_fsdb_regy__join);
 			Sqlite_engine_.Idx_create(make_db_provider, Xob_diff_regy_tbl.Idx_xfer_regy__join);
@@ -40,12 +40,12 @@ public class Xob_diff_regy_make_cmd extends Xob_itm_basic_base implements Xob_cm
 			app.Usr_dlg().Warn_many("", "", "error while making indexes: err=~{0}", Err_.Message_gplx(exc));
 		}
 	}
-	private void Make_diff_regy(Db_provider make_db_provider) {
+	private void Make_diff_regy(Db_conn make_db_provider) {
 		Sqlite_engine_.Tbl_create_and_delete(make_db_provider, Xob_diff_regy_tbl.Tbl_name, Xob_diff_regy_tbl.Tbl_sql);
 		make_db_provider.Exec_sql(Xob_diff_regy_tbl.Make_diff_regy);
 		Sqlite_engine_.Idx_create(make_db_provider, Xob_diff_regy_tbl.Idx_diff_regy__load);
 	}
-	private void Make_delete_sql(Db_provider make_db_provider) {
+	private void Make_delete_sql(Db_conn make_db_provider) {
 		DataRdr rdr = make_db_provider.Exec_sql_as_rdr(Xob_diff_regy_tbl.Make_deletes);
 		int cur_db_id = -1, cur_count = 0;
 		Bry_bfr atr_bfr = Bry_bfr.new_(), bin_bfr = Bry_bfr.new_();

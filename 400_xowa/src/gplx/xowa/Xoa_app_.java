@@ -24,7 +24,7 @@ public class Xoa_app_ {
 		boot_mgr.Run(args);
 	}
 	public static final String Name = "xowa";
-	public static final String Version = "1.11.3.1";
+	public static final String Version = "2.1.4.1";
 	public static String Build_date = "2012-12-30 00:00:00";
 	public static String Op_sys;
 	public static String User_agent = "";
@@ -35,18 +35,6 @@ public class Xoa_app_ {
 		rv.Log_wtr_(new Gfo_log_wtr_base());
 		rv.Log_wtr().Queue_enabled_(true);
 		return rv;
-	}
-	public static void Run_viewer() {
-		Io_url root_dir = Io_url_.new_dir_("J:\\gplx\\xowa\\");
-		Xoav_app app = new Xoav_app(Gfo_usr_dlg_._, root_dir, "drd");
-		app.Wiki_mgr().Load_default();
-
-		Xowv_wiki wiki = app.Wiki_mgr().Get_by_domain(Bry_.new_ascii_("simple.wikibooks.org"));
-		Hdump_page hpg = new Hdump_page();
-		wiki.Hdump_mgr().Load(hpg, Bry_.new_utf8_("Main_Page"));
-		String html = String_.new_utf8_(hpg.Page_body());
-		ConsoleAdp._.WriteLine(html);
-		ConsoleAdp._.ReadLine("");
 	}
 	public static final byte Mode_console = 0, Mode_gui = 1, Mode_http = 2;
 }	

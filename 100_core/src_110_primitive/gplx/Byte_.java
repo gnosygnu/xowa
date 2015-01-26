@@ -17,18 +17,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public class Byte_ {
-	public static final byte MinValue = Byte.MIN_VALUE;	
-	public static final String Cls_name = "byte";
-	public static byte[] Ary(byte... ary) {return ary;}
-	public static byte[] Ary_by_ints(int... ary) {
-		int ary_len = ary.length;
-		byte[] rv = new byte[ary_len];
-		for (int i = 0; i < ary_len; i++)
-			rv[i] = int_(ary[i]);
-		return rv;
-	}
-	public static String Xto_str(byte v) {return new Byte(v).toString();} 
-	public static int Xto_int(byte v) {return v < 0 ? (int)v + 256 : v;}
+	public static final String Cls_val_name = "byte";
+	public static final Class<?> Cls_ref_type = Byte.class; 
+	public static final byte
+	  Zero			= 0
+	, Min_value		= Byte.MIN_VALUE		
+	, Max_value_127	= 127
+	; 
+	public static byte		cast_(Object o)		{try {return (Byte)o;} catch (Exception e) {throw Err_.type_mismatch_exc_(e, byte.class, o);}}
+	public static byte		parse_(String raw)	{return Byte.parseByte(raw);}	
+	public static byte		By_int(int v)	{return v > 127 ? (byte)(v - 256) : (byte)v;} // PERF?: (byte)(v & 0xff)
+	public static int		Xto_int(byte v) {return v < 0 ? (int)v + 256 : v;}
+	public static String	Xto_str(byte v)	{return new Byte(v).toString();} 
 	public static boolean In(byte v, byte... ary) {
 		for (byte itm : ary)
 			if (v == itm) return true;
@@ -39,11 +39,12 @@ public class Byte_ {
 		else if (lhs < rhs)		return CompareAble_.Less;
 		else 					return CompareAble_.More;
 	}
-	public static byte cast_(Object o) {try {return (Byte)o;} catch (Exception e) {throw Err_.type_mismatch_exc_(e, byte.class, o);}}
-	public static byte parse_(String raw) {return Byte.parseByte(raw);}	
-	public static byte int_(int v) {return v > 127 ? (byte)(v - 256) : (byte)v;} // PERF?: (byte)(v & 0xff)
-	public static byte Xto_boolean_byte(boolean v) {
-		return v ? Bool_.Y_byte : Bool_.N_byte;
+	public static byte[] Ary(byte... ary) {return ary;}
+	public static byte[] Ary_by_ints(int... ary) {
+		int ary_len = ary.length;
+		byte[] rv = new byte[ary_len];
+		for (int i = 0; i < ary_len; i++)
+			rv[i] = By_int(ary[i]);
+		return rv;
 	}
-	public static final byte Zero = 0, MaxValue_127 = 127;
 }

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.qrys; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.xowa.files.fsdb.*;
+import gplx.xowa.files.fsdb.*; import gplx.xowa.files.wiki_orig.*;
 public interface Xof_qry_wkr {
 	byte Tid();
 	boolean Qry_file(Xof_fsdb_itm itm);

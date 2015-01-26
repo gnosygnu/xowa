@@ -36,6 +36,7 @@ public class Bry_rdr {
 	public int Read_int_to_comma()	{return Read_int_to(Byte_ascii.Comma);}
 	public int Read_int_to_pipe()	{return Read_int_to(Byte_ascii.Pipe);}
 	public int Read_int_to_nl()		{return Read_int_to(Byte_ascii.NewLine);}
+	public int Read_int_to_quote()	{return Read_int_to(Byte_ascii.Quote);}
 	public int Read_int_to(byte to_char) {
 		int bgn = pos;
 		int rv = 0;
@@ -61,6 +62,8 @@ public class Bry_rdr {
 	}
 	public byte[] Read_bry_to_nl()		{return Read_bry_to(Byte_ascii.NewLine);}
 	public byte[] Read_bry_to_pipe()	{return Read_bry_to(Byte_ascii.Pipe);}
+	public byte[] Read_bry_to_quote()	{return Read_bry_to(Byte_ascii.Quote);}
+	public byte[] Read_bry_to_apos()	{return Read_bry_to(Byte_ascii.Apos);}
 	public byte[] Read_bry_to(byte to_char) {
 		int bgn = pos;
 		while (pos < src_len) {

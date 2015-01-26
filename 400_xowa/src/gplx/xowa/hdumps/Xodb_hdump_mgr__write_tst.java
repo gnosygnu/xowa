@@ -20,13 +20,13 @@ import org.junit.*; import gplx.xowa.files.*;
 import gplx.xowa.hdumps.core.*; import gplx.xowa.hdumps.dbs.*; import gplx.xowa.hdumps.pages.*; import gplx.xowa.xtns.hieros.*; import gplx.xowa.xtns.gallery.*;
 public class Xodb_hdump_mgr__write_tst {
 	@Before public void init() {fxt.Clear();} private Xodb_hdump_mgr__write_fxt fxt = new Xodb_hdump_mgr__write_fxt();
-	@Test   public void Image_full() {
-		fxt.Expd_itms_xfers(fxt.Make_xfer("A.png", 0, 0, 0, Bool_.Y, Xof_ext_.Id_png));
-		fxt.Test_write_all
-		( "[[File:A.png|test_caption]]"
-		, "<a xtid='a_img_full' xatrs='1|0|0||0|test_caption'/>"
-		);
-	}
+//		@Test   public void Image_full() {
+//			fxt.Expd_itms_xfers(fxt.Make_xfer("A.png", 0, 0, 0, Bool_.Y, Xof_ext_.Id_png));
+//			fxt.Test_write_all
+//			( "[[File:A.png|test_caption]]"
+//			, "<a xtid='a_img_full' xatrs='1|0|0||0|test_caption'/>"
+//			);
+//		}
 	@Test   public void Image_thumb() {
 //			fxt.Expd_itms_xfers(fxt.Make_xfer("A.png", 0, 0, 0, Bool_.N, Xof_ext_.Id_png));
 //			fxt.Test_write_all

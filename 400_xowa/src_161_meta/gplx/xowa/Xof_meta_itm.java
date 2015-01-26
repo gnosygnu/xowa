@@ -124,7 +124,7 @@ public class Xof_meta_itm {
 	private void Dirty() {if (owner_fil != null) owner_fil.Dirty_();}
 	public void Save(Gfo_fld_wtr wtr) {
 		wtr.Write_bry_escape_fld(ttl);
-		byte vrtl_repo_byte = Byte_.MaxValue_127;
+		byte vrtl_repo_byte = Byte_.Max_value_127;
 		switch (vrtl_repo) {
 			case Repo_unknown:		vrtl_repo_byte = Byte_ascii.Ltr_z; break;
 			case Repo_same:			vrtl_repo_byte = Byte_ascii.Ltr_y; break;
@@ -177,7 +177,7 @@ public class Xof_meta_itm {
 		  Tid_main		= 0
 		, Tid_ptr		= 1
 		, Tid_vrtl		= 2
-		, Tid_null		= Byte_.MaxValue_127
+		, Tid_null		= Byte_.Max_value_127
 		;
 	public static final byte[] Ptr_ttl_null = Bry_.Empty;
 }

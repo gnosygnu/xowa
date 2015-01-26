@@ -67,26 +67,25 @@ public class Xof_fsdb_mgr_mem implements Xof_fsdb_mgr, Xof_bin_wkr {
 	public void Reg_insert(Xof_fsdb_itm fsdb_itm, byte repo_id, byte status) {
 		byte[] fsdb_itm_ttl = fsdb_itm.Orig_ttl();
 		if (reg_hash.Has(fsdb_itm_ttl)) return;
-		Xof_wiki_orig_itm regy_itm = new Xof_wiki_orig_itm();
-		regy_itm.Ttl_(fsdb_itm_ttl).Status_(status).Orig_repo_(repo_id).Orig_redirect_(fsdb_itm.Orig_redirect()).Orig_ext_(fsdb_itm.Lnki_ext().Id()).Orig_w_(fsdb_itm.Orig_w()).Orig_h_(fsdb_itm.Orig_h());
+		Xof_orig_regy_itm regy_itm = new Xof_orig_regy_itm(fsdb_itm_ttl, status, repo_id, fsdb_itm.Orig_w(), fsdb_itm.Orig_h(), fsdb_itm.Lnki_ext().Id(), fsdb_itm.Orig_redirect());
 		reg_hash.Add(fsdb_itm_ttl, regy_itm);
 	}
 	public void Reg_select(Xoa_page page, byte exec_tid, ListAdp itms) {
 		int itms_len = itms.Count();
 		for (int i = 0; i < itms_len; i++) {
 			Xof_fsdb_itm itm = (Xof_fsdb_itm)itms.FetchAt(i);
-			Xof_wiki_orig_itm reg_itm = (Xof_wiki_orig_itm)reg_hash.Get_by_bry(itm.Lnki_ttl());
+			Xof_orig_regy_itm reg_itm = (Xof_orig_regy_itm)reg_hash.Get_by_bry(itm.Lnki_ttl());
 			if (reg_itm == null) {
 				itm.Rslt_reg_(Xof_wiki_orig_wkr_.Tid_missing_reg);
 				continue;
 			}
-			byte repo_id = reg_itm.Orig_repo();
+			byte repo_id = reg_itm.Repo_tid();
 			if (repo_id <= Xof_repo_itm.Repo_local) {
 				byte[] wiki = bin_mgr.Repo_mgr().Repos_get_at(repo_id).Trg().Wiki_key();
 				itm.Orig_wiki_(wiki);
 			}
 			itm.Orig_size_(reg_itm.Orig_w(), reg_itm.Orig_h());
-			itm.Orig_repo_(reg_itm.Orig_repo());
+			itm.Orig_repo_(reg_itm.Repo_tid());
 			if (Bry_.Len_gt_0(reg_itm.Orig_redirect()))
 				itm.Init_by_redirect(reg_itm.Orig_redirect());
 			itm.Rslt_reg_(reg_itm.Status());
@@ -110,13 +109,13 @@ public class Xof_fsdb_mgr_mem implements Xof_fsdb_mgr, Xof_bin_wkr {
 			;
 	}
 	public boolean Bin_wkr_get_to_url(ListAdp temp_files, Xof_fsdb_itm itm, boolean is_thumb, int w, Io_url bin_url) {
-		byte[] wiki = itm.Orig_wiki();
-		byte[] ttl = itm.Lnki_ttl();
-		double thumbtime = itm.Lnki_thumbtime(); 
-		byte[] key = Gen_key(is_thumb, itm.Lnki_ext(), wiki, ttl, w, thumbtime);
+		return Save_to_url(itm.Orig_wiki(), itm.Lnki_ttl(), itm.Lnki_md5(), itm.Lnki_ext(), is_thumb, w, itm.Lnki_thumbtime(), itm.Lnki_page(), bin_url);
+	}
+	public boolean Save_to_url(byte[] orig_repo, byte[] orig_ttl, byte[] orig_md5, Xof_ext orig_ext, boolean lnki_is_thumb, int file_w, double lnki_time, int lnki_page, Io_url file_url) {
+		byte[] key = Gen_key(lnki_is_thumb, orig_ext, orig_repo, orig_ttl, file_w, lnki_time);
 		Fsdb_mem_itm mem_itm = (Fsdb_mem_itm)bin_hash.Get_by_bry(key);
 		if (mem_itm == null) return false;
-		Io_mgr._.SaveFilBry(bin_url, mem_itm.Bin());
+		Io_mgr._.SaveFilBry(file_url, mem_itm.Bin());
 		return true;
 	}
 	private byte[] Key_bld_fil(byte[] wiki, byte[] ttl) {

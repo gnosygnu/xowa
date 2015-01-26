@@ -77,7 +77,7 @@ class Xodb_hdump_mgr__save_fxt extends Xodb_hdump_mgr__base_fxt {
 	private ListAdp expd_rows = ListAdp_.new_();
 	@Override public void Clear_end() {
 		hdump_mgr.Tbl_mem_();
-		hdump_mgr.Text_tbl().Provider_(Xodb_wiki_page_html_tbl_mem.Null_provider);
+		hdump_mgr.Text_tbl().Conn_(Xodb_wiki_page_html_tbl_mem.Null_provider);
 		init_redlinks = null;
 	}
 	public void Init_redlinks(int... uids) {

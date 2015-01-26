@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src_100_core"/>
+	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="src_110_dbQry"/>
 	<classpathentry kind="src" path="src_120_sql"/>
 	<classpathentry kind="src" path="src_130_misc"/>

@@ -19,14 +19,14 @@ package gplx.dbs; import gplx.*;
 import gplx.stores.*;
 import java.sql.*; 
 class Sqlite_engine extends Db_engine_sql_base {
-	@Override public String Key() {return Db_conn_info__sqlite.Key_const;}
-	@Override public String Conn_info_tid() {return this.Key();}
-	@Override public Db_engine Make_new(Db_conn_info connectInfo) {
+	@Override public String Tid() {return Db_url__sqlite.Tid_const;}
+	@Override public Db_engine New_clone(Db_url connectInfo) {
 		Sqlite_engine rv = new Sqlite_engine();
-		rv.ctor_SqlEngineBase(connectInfo);
+		rv.Ctor(connectInfo);
 		return rv;
 	}
-	@Override public DataRdr NewDataRdr(ResultSet rdr, String commandText) {return Sqlite_rdr.new_(rdr, commandText);}
+	@Override public DataRdr New_rdr(ResultSet rdr, String commandText) {return Sqlite_rdr.new_(rdr, commandText);}
+	@Override public Db_rdr__basic New_rdr_clone() {return new Db_rdr__sqlite();}
 		static boolean loaded = false; 
 	@gplx.Internal @Override protected Connection Conn_new() {
 		if (!loaded) {
@@ -36,8 +36,8 @@ class Sqlite_engine extends Db_engine_sql_base {
 			catch (ClassNotFoundException e) {throw Err_.new_("could not load sqlite jdbc driver");}
 			loaded = true;					
 		}
-		Db_conn_info__sqlite connUrl = (Db_conn_info__sqlite)conn_info;
-		return NewDbCon("jdbc:sqlite://" + String_.Replace(connUrl.Database(), "\\", "/"), "", "");
+		Db_url__sqlite url_as_sqlite = (Db_url__sqlite)url;
+		return Conn_make_by_url("jdbc:sqlite://" + String_.Replace(url_as_sqlite.Database(), "\\", "/"), "", "");
 	}
 	private boolean pragma_needed = true; 
 	@Override public void Txn_bgn() {
@@ -45,15 +45,18 @@ class Sqlite_engine extends Db_engine_sql_base {
 //		Execute(Db_qry_sql.xtn_("PRAGMA journal_mode = OFF;"));	// will cause out of memory
 //		Execute(Db_qry_sql.xtn_("PRAGMA journal_mode = MEMORY;"));
 		if (pragma_needed) {
-			Execute(Db_qry_sql.xtn_("PRAGMA synchronous = OFF;"));
+			Exec_as_obj(Db_qry_sql.xtn_("PRAGMA synchronous = OFF;"));
 			pragma_needed = false;
 		}
 //		Execute(Db_qry_sql.xtn_("PRAGMA temp_store = MEMORY;"));
 //		Execute(Db_qry_sql.xtn_("PRAGMA locking_mode = EXCLUSIVE;"));
 //		Execute(Db_qry_sql.xtn_("PRAGMA cache_size=4000;"));	// too many will also cause out of memory		
-		Execute(Db_qry_sql.xtn_("BEGIN TRANSACTION;"));
+		Exec_as_obj(Db_qry_sql.xtn_("BEGIN TRANSACTION;"));
 	}
 		@gplx.Internal protected static final Sqlite_engine _ = new Sqlite_engine(); Sqlite_engine() {}
+}
+class Db_rdr__sqlite extends Db_rdr__basic {	@Override public byte Read_byte(int i)			{try {return (byte)rdr.getInt(i + 1);} catch (Exception e) {throw Err_.new_("read failed: i={0} type={1} err={2}", i, Byte_.Cls_val_name, Err_.Message_lang(e));}} 
+	@Override public byte Read_byte(String k)		{try {return (byte)Int_.cast_(rdr.getObject(k));} catch (Exception e) {throw Err_.new_("read failed: k={0} type={1} err={2}", k, Byte_.Cls_val_name, Err_.Message_lang(e));}} 
 }
 class Sqlite_rdr extends Db_data_rdr {		@Override public float ReadFloat(String key) {return ReadFloatOr(key, Float.NaN);}
 	@Override public float ReadFloatOr(String key, float or) {

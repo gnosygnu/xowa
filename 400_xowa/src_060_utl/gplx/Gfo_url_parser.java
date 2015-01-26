@@ -60,6 +60,7 @@ public class Gfo_url_parser {
 		slash_pos = Bry_.Trim_end_pos(src, slash_pos);
 		site_data.Atrs_set(rel, pos, slash_pos);
 	}
+	public Gfo_url Parse(byte[] src) {Gfo_url rv = new Gfo_url(); this.Parse(rv, src, 0, src.length); return rv;}
 	public boolean Parse(Gfo_url url, byte[] src, int bgn, int end) {
 		this.url = url;
 		url.Ini_(src);
@@ -265,6 +266,14 @@ public class Gfo_url_parser {
 		url.Args_bgn_(bgn - 1);	// NOTE: bgn is 1st char after ?; -1 to place at ?
 		url.Args_((Gfo_url_arg[])args.Xto_ary(Gfo_url_arg.class));
 	}
+	private void Args_add(byte[] src, int key_bgn, int key_end, int val_bgn, int val_end) {
+		encoder.Decode(src, key_bgn, key_end, tmp_bfr, false);
+		byte[] key = tmp_bfr.Xto_bry_and_clear();
+		encoder.Decode(src, val_bgn, val_end, tmp_bfr, false);
+		byte[] val = tmp_bfr.Xto_bry_and_clear();
+		Gfo_url_arg arg = new Gfo_url_arg(key, val);
+		args.Add(arg);
+	}
 	private void Site_set(byte[] src, int bgn, int end, int dot_count, int dot_pos_0, int dot_pos_1) {
 		encoder.Decode(src, bgn, end, tmp_bfr, false);
 		url.Site_(tmp_bfr.Xto_bry_and_clear());
@@ -297,14 +306,6 @@ public class Gfo_url_parser {
 	private void Anchor_set(byte[] src, int bgn, int end) {
 		encoder.Decode(src, bgn, end, tmp_bfr, false);
 		url.Anchor_(tmp_bfr.Xto_bry_and_clear());
-	}
-	private void Args_add(byte[] src, int key_bgn, int key_end, int val_bgn, int val_end) {
-		encoder.Decode(src, key_bgn, key_end, tmp_bfr, false);
-		byte[] key = tmp_bfr.Xto_bry_and_clear();
-		encoder.Decode(src, val_bgn, val_end, tmp_bfr, false);
-		byte[] val = tmp_bfr.Xto_bry_and_clear();
-		Gfo_url_arg arg = new Gfo_url_arg(key, val);
-		args.Add(arg);
 	}
 	private static final Bry_bfr tmp_bfr = Bry_bfr.reset_(500);
 	public static final byte[] Bry_double_slash = new byte[] {Byte_ascii.Slash, Byte_ascii.Slash};

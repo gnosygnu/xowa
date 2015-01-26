@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.dbs; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*;
 import gplx.xowa.apps.*; import gplx.xowa.dbs.tbls.*; import gplx.xowa.ctgs.*; import gplx.xowa.hdumps.*;
+import gplx.xowa2.wikis.data.tbls.*;
 public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 	private boolean html_db_enabled;
 	public Xodb_mgr_sql(Xow_wiki wiki) {
@@ -49,7 +50,7 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 	public Xodb_save_mgr Save_mgr() {return save_mgr;} private Xodb_save_mgr_sql save_mgr;
 	public Xodb_hdump_mgr Hdump_mgr() {return hdump_mgr;} private Xodb_hdump_mgr hdump_mgr;
 	public Xodb_xowa_cfg_tbl Tbl_xowa_cfg() {return tbl_cfg;} private Xodb_xowa_cfg_tbl tbl_cfg = new Xodb_xowa_cfg_tbl();
-	public Xodb_xowa_ns_tbl Tbl_xowa_ns() {return tbl_ns;} private Xodb_xowa_ns_tbl tbl_ns = new Xodb_xowa_ns_tbl();
+	public Xodata_ns_regy_tbl Tbl_xowa_ns() {return tbl_ns;} private Xodata_ns_regy_tbl tbl_ns = new Xodata_ns_regy_tbl();
 	public Xodb_xowa_db_tbl Tbl_xowa_db() {return tbl_db;} private Xodb_xowa_db_tbl tbl_db = new Xodb_xowa_db_tbl();
 	public Xodb_page_tbl Tbl_page() {return tbl_page;} private Xodb_page_tbl tbl_page;
 	public Xodb_text_tbl Tbl_text() {return tbl_text;} private Xodb_text_tbl tbl_text;
@@ -71,22 +72,22 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 		Xoi_dump_mgr dump_mgr = wiki.App().Setup_mgr().Dump_mgr();
 		data_storage_format = dump_mgr.Data_storage_format();
 		fsys_mgr.Init_by_ns_map(wiki.Ns_mgr(), ns_map, dump_mgr.Db_text_max());
-		Core_provider_(fsys_mgr.Provider_core());
+		Core_provider_(fsys_mgr.Conn_core());
 		state = State_make;
 	}
-	public void Init_load(Db_conn_info connect) {
-		Db_provider provider = Db_provider_pool._.Get_or_new(connect);
-		Xodb_file[] files = tbl_db.Select_all(provider);
-		fsys_mgr.Init_by_files(provider, files);
-		Core_provider_(provider);
+	public void Init_load(Db_url connect) {
+		Db_conn conn = Db_conn_pool_old._.Get_or_new(connect);
+		Xodb_file[] files = tbl_db.Select_all(conn);
+		fsys_mgr.Init_by_files(conn, files);
+		Core_provider_(conn);
 		state = State_load;
 	}
-	private void Core_provider_(Db_provider provider) {
-		tbl_cfg.Provider_(provider);
-		tbl_ns.Provider_(provider);
-		tbl_db.Provider_(provider);
-		tbl_page.Provider_(provider);
-		tbl_site_stats.Provider_(provider);
+	private void Core_provider_(Db_conn conn) {
+		tbl_cfg.Conn_(conn);
+		tbl_ns.Conn_(conn);
+		tbl_db.Conn_(conn);
+		tbl_page.Conn_(conn);
+		tbl_site_stats.Conn_(conn);
 	}
 	public void Page_create(Db_stmt page_stmt, Db_stmt text_stmt, int page_id, int ns_id, byte[] ttl_wo_ns, boolean redirect, DateAdp modified_on, byte[] text, int random_int, int file_idx) {
 		int text_len = text.length;
@@ -94,7 +95,7 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 		tbl_page.Insert(page_stmt, page_id, ns_id, ttl_wo_ns, redirect, modified_on, text_len, random_int, file_idx, html_db_id);
 		tbl_text.Insert(text_stmt, page_id, text, data_storage_format);
 	}
-	public boolean Ctg_select_v1(Xoctg_view_ctg view_ctg, Db_provider ctg_provider, Xodb_category_itm ctg) {
+	public boolean Ctg_select_v1(Xoctg_view_ctg view_ctg, Db_conn ctg_provider, Xodb_category_itm ctg) {
 		Db_qry_select qry = Db_qry_.select_().Cols_(Xodb_categorylinks_tbl.Fld_cl_from)
 			.From_(Xodb_categorylinks_tbl.Tbl_name)
 			.Where_(Db_crt_.eq_(Xodb_categorylinks_tbl.Fld_cl_to_id, ctg.Id()))
@@ -167,12 +168,12 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 			Xodb_file file = ary[i] ;
 			if (file.Tid() != tid) continue;
 			file.Rls();
-			gplx.dbs.Db_conn_info__sqlite sqlite = (gplx.dbs.Db_conn_info__sqlite)file.Connect();
+			gplx.dbs.Db_url__sqlite sqlite = (gplx.dbs.Db_url__sqlite)file.Connect();
 			Io_mgr._.DeleteFil_args(sqlite.Url()).MissingFails_off().Exec();
 			file.Cmd_mode_(Db_cmd_mode.Delete);
 		}
-		tbl_db.Commit_all(fsys_mgr.Provider_core(), ary);
-		this.Init_load(fsys_mgr.Provider_core().Conn_info());
+		tbl_db.Commit_all(fsys_mgr.Conn_core(), ary);
+		this.Init_load(fsys_mgr.Conn_core().Url());
 	}
 
 	public static final String Grp_wiki_init = "wiki.init";
@@ -195,7 +196,7 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 		Xodb_mgr_sql rv = db_mgr.Tid() == Xodb_mgr_txt.Tid_txt ? wiki.Db_mgr_create_as_sql() : wiki.Db_mgr_as_sql();
 		byte state = rv.State();
 		switch (state) {
-			case Xodb_mgr_sql.State_init: rv.Init_load(Db_conn_info_.sqlite_(Xodb_mgr_sql.Find_core_url(wiki))); break; // load
+			case Xodb_mgr_sql.State_init: rv.Init_load(Db_url_.sqlite_(Xodb_mgr_sql.Find_core_url(wiki))); break; // load
 			case Xodb_mgr_sql.State_make: break;	// noop; being made; don't load from db;
 			case Xodb_mgr_sql.State_load: break;	// noop; already loaded;
 			default: throw Err_.unhandled(state);

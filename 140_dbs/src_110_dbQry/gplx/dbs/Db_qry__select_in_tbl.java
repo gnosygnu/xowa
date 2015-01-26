@@ -20,8 +20,10 @@ public class Db_qry__select_in_tbl implements Db_qry {
 	public Db_qry__select_in_tbl(String tbl_name, String[] select_flds, String[] where_flds, String group_by_sql, String having_sql, String order_by_sql, String limit_sql) {
 		this.tbl_name = tbl_name; this.select_flds = select_flds; this.where_flds = where_flds; this.group_by_sql = group_by_sql; this.having_sql = having_sql; this.order_by_sql = order_by_sql; this.limit_sql = limit_sql;
 	}
-	public int Tid() {return Db_qry_.Tid_select_in_tbl;}
-	public String Tbl_name() {return tbl_name;} private final String tbl_name;
+	public int			Tid() {return Db_qry_.Tid_select_in_tbl;}
+	public boolean			Exec_is_rdr() {return true;}
+	public String		Base_table() {return tbl_name;} private final String tbl_name;
+	public String	From() {return tbl_name;}
 	public String[] Select_flds() {return select_flds;} private final String[] select_flds;
 	public String[] Where_flds() {return where_flds;} private final String[] where_flds;
 	public void Where_sql(String_bldr sb) {
@@ -37,9 +39,6 @@ public class Db_qry__select_in_tbl implements Db_qry {
 	public String Having_sql() {return having_sql;} private final String having_sql;
 	public String Order_by_sql() {return order_by_sql;} public Db_qry__select_in_tbl Order_by_sql_(String v) {order_by_sql = v; return this;} private String order_by_sql;
 	public String Limit_sql() {return limit_sql;} private final String limit_sql;
-	public static Db_qry__select_in_tbl new_(String tbl_name, String[] where_flds, String[] select_flds) {return new Db_qry__select_in_tbl(tbl_name, select_flds, where_flds, null, null, null, null);}
-	public String KeyOfDb_qry() {return "select_in_tbl";}
-	public boolean ExecRdrAble() {return true;}
 	public String XtoSql() {return Xto_sql();}
 	public String Xto_sql() {
 		String_bldr sb = String_bldr_.new_();
@@ -56,6 +55,10 @@ public class Db_qry__select_in_tbl implements Db_qry {
 		if (order_by_sql	!= null) {sb.Add(" ORDER BY "); sb.Add(order_by_sql);}
 		if (limit_sql		!= null) sb.Add(limit_sql);
 		return sb.XtoStr();
+	}
+	public static Db_qry__select_in_tbl new_(String tbl_name, String[] where_flds, String[] select_flds) {
+		Db_qry__select_in_tbl rv = new Db_qry__select_in_tbl(tbl_name, select_flds, where_flds, null, null, null, null);
+		return rv;
 	}
 	public static final String[] Where_flds__all = null;
 }

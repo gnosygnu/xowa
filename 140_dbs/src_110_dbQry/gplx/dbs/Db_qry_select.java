@@ -16,18 +16,19 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-import gplx.criterias.*;
+import gplx.criterias.*; import gplx.dbs.sqls.*;
 public class Db_qry_select implements Db_qry {
-	public int Tid() {return Db_qry_.Tid_basic;}
-	public String KeyOfDb_qry() {return KeyConst;} public static final String KeyConst = "SELECT";
-	public boolean ExecRdrAble() {return true;}
-	public DataRdr Exec_qry_as_rdr(Db_provider provider) {return provider.Exec_qry_as_rdr(this);}
-	public GfoNde ExecRdr_nde(Db_provider provider) {
+	public int			Tid() {return Db_qry_.Tid_select;}
+	public boolean			Exec_is_rdr() {return true;}
+	public String		Base_table() {return from.BaseTable().TblName();}
+	public String		Xto_sql() {return Sql_qry_wtr_.I.Xto_str(this, false);}		
+	public DataRdr Exec_qry_as_rdr(Db_conn conn) {return conn.Exec_qry_as_rdr(this);}
+	public GfoNde ExecRdr_nde(Db_conn conn) {
 		DataRdr rdr = DataRdr_.Null;
-		try {return GfoNde_.rdr_(Exec_qry_as_rdr(provider));} finally {rdr.Rls();}
+		try {return GfoNde_.rdr_(Exec_qry_as_rdr(conn));} finally {rdr.Rls();}
 	}
-	public Object ExecRdr_val(Db_provider provider) {
-		DataRdr rdr = Exec_qry_as_rdr(provider);
+	public Object ExecRdr_val(Db_conn conn) {
+		DataRdr rdr = Exec_qry_as_rdr(conn);
 		try {
 			Object rv = null;
 			if (rdr.MoveNextPeer()) {
@@ -46,7 +47,6 @@ public class Db_qry_select implements Db_qry {
 		}	finally {rdr.Rls();}
 	}
 
-	public String XtoSql() {return Sql_cmd_wtr_.Ansi.XtoSqlQry(this, false);}		
 
 	@gplx.Internal protected Sql_from From() {return from;} Sql_from from;
 	public Db_qry_select From_(String tblName) {return From_(tblName, null);}

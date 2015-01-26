@@ -34,13 +34,13 @@ class Xof_wiki_orig_tbl_in_wkr extends gplx.xowa.dbs.tbls.Xodb_in_wkr_base {
 	@Override public void Fill_stmt(Db_stmt stmt, int bgn, int end) {
 		for (int i = bgn; i < end; i++) {
 			Xof_fsdb_itm itm = (Xof_fsdb_itm)itms_all.FetchAt(i);
-			stmt.Val_str_by_bry_(itm.Lnki_ttl());
+			stmt.Val_bry_as_str(itm.Lnki_ttl());
 		}
 	}
 	@Override public void Eval_rslts(Cancelable cancelable, Xodb_ctx db_ctx, DataRdr rdr) {
 		while (rdr.MoveNextPeer()) {
 			if (cancelable.Canceled()) return;
-			Xof_wiki_orig_itm itm = Xof_wiki_orig_itm.load_(rdr);
+			Xof_orig_regy_itm itm = Xof_orig_regy_itm.load_(rdr);
 			byte[] itm_ttl = itm.Ttl();
 			if (!itms_by_ttl.Has(itm_ttl))	// guard against dupes (shouldn't happen)
 				itms_by_ttl.Add(itm_ttl, itm);
@@ -55,12 +55,12 @@ class Xof_wiki_orig_tbl_evaluator {
 			Xof_fsdb_itm fsdb_itm = (Xof_fsdb_itm)itms_all.FetchAt(i);
 			byte[] fsdb_itm_ttl = fsdb_itm.Lnki_ttl();
 			fsdb_itm.Rslt_reg_(Xof_wiki_orig_wkr_.Tid_missing_reg);
-			Xof_wiki_orig_itm regy_itm = (Xof_wiki_orig_itm)itms_by_ttl.Fetch(fsdb_itm_ttl); if (regy_itm == null) continue; // not in reg; do full search
+			Xof_orig_regy_itm regy_itm = (Xof_orig_regy_itm)itms_by_ttl.Fetch(fsdb_itm_ttl); if (regy_itm == null) continue; // not in reg; do full search
 			byte regy_itm_status = regy_itm.Status();
 			fsdb_itm.Lnki_ext_(Xof_ext_.new_by_id_(regy_itm.Orig_ext()));	// overwrite ext_id with whatever's in file_orig; needed for ogg -> oga / ogv
 			fsdb_itm.Rslt_reg_(regy_itm_status);
 			if (regy_itm_status > Xof_wiki_orig_wkr_.Tid_found_orig) continue;	// only ignore if marked missing; DATE:2014-02-01
-			byte repo_id = regy_itm.Orig_repo();
+			byte repo_id = regy_itm.Repo_tid();
 			Xof_repo_itm repo = null;
 			if (repo_id <= Xof_repo_itm.Repo_local) { // bounds check
 				fsdb_itm.Orig_repo_(repo_id);

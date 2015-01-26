@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.fsdb; import gplx.*;
 import gplx.dbs.*; import gplx.xowa.files.fsdb.*;
 public class Fsdb_mnt_mgr implements GfoInvkAble {
-	private Db_provider provider;
+	private Db_conn conn;
 	private Fsdb_cfg_tbl tbl_cfg;
 	private Fsdb_db_abc_mgr[] ary; int ary_len = 0;
 	public Gfo_usr_dlg Usr_dlg() {return usr_dlg;} public Fsdb_mnt_mgr Usr_dlg_(Gfo_usr_dlg v) {usr_dlg = v; return this;} private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Null;
@@ -38,15 +38,15 @@ public class Fsdb_mnt_mgr implements GfoInvkAble {
 	public Fsdb_db_abc_mgr Abc_mgr_at(int i) {return ary[i];}
 	private Fsdb_mnt_itm[] Db_load_or_make(Io_url cur_dir) {
 		Bool_obj_ref created = Bool_obj_ref.n_();
-		provider = Sqlite_engine_.Provider_load_or_make_(cur_dir.GenSubFil("wiki.mnt.sqlite3"), created);
-		tbl_cfg = new Fsdb_cfg_tbl_sql().Ctor(provider, created.Val());
+		conn = Sqlite_engine_.Conn_load_or_make_(cur_dir.GenSubFil("wiki.mnt.sqlite3"), created);
+		tbl_cfg = new Fsdb_cfg_tbl_sql().Ctor(conn, created.Val());
 		if (created.Val()) {
-			Fsdb_mnt_tbl.Create_table(provider);
-			Fsdb_mnt_tbl.Insert(provider, Mnt_idx_main, "fsdb.main", "fsdb.main");
-			Fsdb_mnt_tbl.Insert(provider, Mnt_idx_user, "fsdb.user", "fsdb.user");
+			Fsdb_mnt_tbl.Create_table(conn);
+			Fsdb_mnt_tbl.Insert(conn, Mnt_idx_main, "fsdb.main", "fsdb.main");
+			Fsdb_mnt_tbl.Insert(conn, Mnt_idx_user, "fsdb.user", "fsdb.user");
 			tbl_cfg.Insert("core", "mnt.insert_idx", Int_.Xto_str(Mnt_idx_user));
 		}
-		return Fsdb_mnt_tbl.Select_all(provider);
+		return Fsdb_mnt_tbl.Select_all(conn);
 	}
 	public Fsdb_db_bin_fil Bin_db_get(int mnt_id, int bin_db_id) {
 		return ary[mnt_id].Bin_mgr().Get_at(bin_db_id);

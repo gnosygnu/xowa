@@ -27,14 +27,17 @@ public class Xof_bin_wkr_http_wmf implements Xof_bin_wkr {
 	}
 	public byte Bin_wkr_tid() {return Xof_bin_wkr_.Tid_http_wmf;}
 	public Io_stream_rdr Bin_wkr_get_as_rdr(ListAdp temp_files, Xof_fsdb_itm itm, boolean is_thumb, int w) {
-		Bin_wkr_get(itm, is_thumb, w, Io_url_.Null);
+		Bin_wkr_get(itm.Orig_wiki(), itm.Lnki_ttl(), itm.Lnki_md5(), itm.Lnki_ext(), is_thumb, w, itm.Lnki_thumbtime(), itm.Lnki_page(), Io_url_.Null);
 		Io_stream_rdr rdr = download.Exec_as_rdr();
 		boolean rv = rdr.Len() != IoItmFil.Size_Invalid;	// NOTE: use IoItmFil.Size_Invalid, not Io_stream_rdr_.Read_done; DATE:2014-06-21
 		if (!rv) Handle_error();
 		return rv ? rdr : Io_stream_rdr_.Null;
 	}
 	public boolean Bin_wkr_get_to_url(ListAdp temp_files, Xof_fsdb_itm itm, boolean is_thumb, int w, Io_url bin_url) {
-		Bin_wkr_get(itm, is_thumb, w, bin_url);
+		return Save_to_url(itm.Orig_wiki(), itm.Lnki_ttl(), itm.Lnki_md5(), itm.Lnki_ext(), is_thumb, w, itm.Lnki_thumbtime(), itm.Lnki_page(), bin_url);
+	}
+	public boolean Save_to_url(byte[] orig_repo, byte[] orig_ttl, byte[] orig_md5, Xof_ext orig_ext, boolean lnki_is_thumb, int file_w, double lnki_time, int lnki_page, Io_url file_url) {
+		Bin_wkr_get(orig_repo, orig_ttl, orig_md5, orig_ext, lnki_is_thumb, file_w, lnki_time, lnki_page, file_url);
 		boolean rv = download.Exec();
 		if (!rv) Handle_error();
 		return rv;
@@ -43,13 +46,13 @@ public class Xof_bin_wkr_http_wmf implements Xof_bin_wkr {
 		if (fail_timeout > 0)
 			ThreadAdp_.Sleep(fail_timeout);	// as per WMF policy, pause 1 second for every cache miss; http://lists.wikimedia.org/pipermail/wikitech-l/2013-September/071948.html
 	}
-	private void Bin_wkr_get(Xof_fsdb_itm itm, boolean is_thumb, int w, Io_url bin_url) {
-		byte mode = is_thumb ? Xof_repo_itm.Mode_thumb : Xof_repo_itm.Mode_orig;
-		Xof_repo_pair repo_itm = repo_mgr.Repos_get_by_wiki(itm.Orig_wiki());
-		String queue_msg = String_.Format("downloading ~{0} of ~{1}: ~{2};", 0, 0, String_.new_utf8_(itm.Lnki_ttl()));
+	private void Bin_wkr_get(byte[] orig_repo, byte[] orig_ttl, byte[] orig_md5, Xof_ext orig_ext, boolean lnki_is_thumb, int file_w, double lnki_time, int lnki_page, Io_url file_url) {
+		byte mode = lnki_is_thumb ? Xof_repo_itm.Mode_thumb : Xof_repo_itm.Mode_orig;
+		Xof_repo_pair repo_itm = repo_mgr.Repos_get_by_wiki(orig_repo);
+		String queue_msg = String_.Format("downloading ~{0} of ~{1}: ~{2};", 0, 0, String_.new_utf8_(orig_ttl));
 		download.Prog_fmt_hdr_(queue_msg);
-		String src = url_bldr.Init_for_src_file(mode, repo_itm.Src(), itm.Lnki_ttl(), itm.Lnki_md5(), itm.Lnki_ext(), w, itm.Lnki_thumbtime(), itm.Lnki_page()).Xto_str();
-		download.Init(src, bin_url);
+		String src = url_bldr.Init_for_src_file(mode, repo_itm.Src(), orig_ttl, orig_md5, orig_ext, file_w, lnki_time, lnki_page).Xto_str();
+		download.Init(src, file_url);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_fail_timeout_))		fail_timeout = m.ReadInt("v");

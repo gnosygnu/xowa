@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
 public class Xow_wiki_domain_ {
 	public static byte[] Key_by_tid(byte tid) {return Key__ary[tid];}
-	public static final byte Tid_by_key_null = Byte_.MaxValue_127;
+	public static final byte Tid_by_key_null = Byte_.Max_value_127;
 	public static byte Tid_by_key(byte[] key) {
 		Object o = key_hash.Get_by_bry(key);
 		return o == null ? Tid_by_key_null : ((Byte_obj_val)o).Val();

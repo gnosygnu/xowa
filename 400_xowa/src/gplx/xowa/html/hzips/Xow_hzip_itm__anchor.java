@@ -19,7 +19,7 @@ package gplx.xowa.html.hzips; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.core.brys.*; import gplx.html.*; import gplx.xowa.apps.ttls.*; import gplx.xowa.hdumps.srls.*;
 public class Xow_hzip_itm__anchor {
 	private Xow_hzip_mgr hzip_mgr; private Xoa_ttl_parser ttl_parser; private Byte_obj_ref xtid_ref = Byte_obj_ref.zero_();
-	// private Bry_rdr bry_rdr = new Bry_rdr();
+	private Bry_rdr bry_rdr = new Bry_rdr();
 	public Xow_hzip_itm__anchor(Xow_hzip_mgr hzip_mgr, Xoa_ttl_parser ttl_parser) {this.hzip_mgr = hzip_mgr; this.ttl_parser = ttl_parser;}
 	public int Save_a_rhs(Bry_bfr bfr, Xow_hzip_stats stats, byte[] src, int src_len, int bgn, int pos) {
 		bfr.Add(Xow_hzip_dict.Bry_a_rhs);
@@ -39,19 +39,21 @@ public class Xow_hzip_itm__anchor {
 			default:									return hzip_mgr.Warn_by_pos("a.xtid_unknown", bgn, pos);
 		}
 	}
+	private static int[] Save_img_full_pow = new int[] {0, 1, 2};
 	private int Save_img_full(Bry_bfr bfr, Xow_hzip_stats stats, byte[] src, int src_len, int bgn, int pos) {
-//			tmp_bfr.Add_str_ascii(a_cls == Xoh_lnki_consts.Tid_a_cls_none ? "0|" : "1|");	// a_cls			: "" || image
-//			tmp_bfr.Add_str_ascii(a_rel == Xoh_lnki_consts.Tid_a_rel_none ? "0|" : "1|");	// a_rel			: "" || nofollow
-//			tmp_bfr.Add_int_fixed(img_cls, 1).Add_byte_pipe();								// img_cls			: "" || thumbborder || thumbimage || other
-//			tmp_bfr.Add_safe(img_cls_other).Add_byte_pipe();								// img_cls_other	: "" || {other}
-//			tmp_bfr.Add_int_variable(uid).Add_byte_pipe();
-//			Html_utl.Escape_html_to_bfr(tmp_bfr, img_alt, 0, img_alt.length, Bool_.N, Bool_.N, Bool_.N, Bool_.N, Bool_.Y);
-		return Xow_hzip_mgr.Unhandled;
-//			int xatrs_bgn = Bry_finder.Move_fwd(src, Find_img_xatrs, pos, src_len);				if (xatrs_bgn == Bry_finder.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("a.img_xatrs_missing", bgn, pos);
-//			byte a_cls		= src[xatrs_bgn    ] - Byte_ascii.Num_0;
-//			byte a_rel		= src[xatrs_bgn + 2] - Byte_ascii.Num_0;
-//			byte img_rel	= src[xatrs_bgn + 4] - Byte_ascii.Num_0;
-//			byte meta = img_cls + Enm_.Add_byte(2, img_rel);
+		bfr.Add(Xow_hzip_dict.Bry_img_full);
+		int xatrs_bgn = Bry_finder.Move_fwd(src, Find_img_xatrs, pos, src_len);				if (xatrs_bgn == Bry_finder.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("a.img_xatrs_missing", bgn, pos);
+		bry_rdr.Src_(src).Pos_(xatrs_bgn);
+		int a_cls		= bry_rdr.Read_int_to_pipe();
+		int a_rel		= bry_rdr.Read_int_to_pipe();
+		int img_rel		= bry_rdr.Read_int_to_pipe();
+		byte meta		= (byte)Bit_.Shift_lhs_to_int(Save_img_full_pow, a_cls, a_rel, img_rel);
+		bfr.Add_byte(meta);														// meta
+		Hpg_srl_itm_.Save_bin_int_abrv(bfr, bry_rdr.Read_int_to_pipe());		// uid
+		bfr.Add(bry_rdr.Read_bry_to_pipe()).Add_byte_pipe();					// img_cls_other
+		bfr.Add(bry_rdr.Read_bry_to_apos());									// alt
+		bfr.Add_byte(Xow_hzip_dict.Escape);
+		return bry_rdr.Pos() + 2;												// +2=/>
 	}
 	public int Save_lnki(Bry_bfr bfr, Xow_hzip_stats stats, byte[] src, int src_len, int bgn, int pos, boolean caption) {
 		int ttl_bgn = Bry_finder.Find_fwd(src, Find_href_wiki_bry, pos, src_len);			if (ttl_bgn == Bry_finder.Not_found) return Xow_hzip_mgr.Unhandled;//hzip_mgr.Warn_by_pos_add_dflt("a.ttl_bgn_missing", bgn, pos);
@@ -156,17 +158,22 @@ public class Xow_hzip_itm__anchor {
 		return rv;
 	}
 	public void Html_plain(Bry_bfr bfr, Xop_lnki_tkn lnki) {
-		bfr.Add_str(lnki.Caption_exists() ? "<a xtid='a_lnki_text_y' href=\"" : "<a xtid='a_lnki_text_n' href=\"");
+		bfr.Add_str
+			(  lnki.Caption_exists()				// caption exists; EX: [[A|b]]
+			|| lnki.Tail_bgn() != -1				// trailing chars; EX: [[A]]b
+			? "<a xtid='a_lnki_text_y' href=\""		// embed caption
+			: "<a xtid='a_lnki_text_n' href=\""		// use link only
+			);
 	}
 	private static final byte[]
 	  Find_href_wiki_bry	= Bry_.new_ascii_("href=\"/wiki/")
 	, Find_href_bry			= Bry_.new_ascii_("href=\"")
 	, Find_a_rhs_bgn_bry	= Bry_.new_ascii_("</a>")
-//		, Find_img_xatrs		= Bry_.new_ascii_("xatrs='")
+	, Find_img_xatrs		= Bry_.new_ascii_("xatrs='")
 	;
 	private static final int 
 	  Find_href_wiki_len	= Find_href_wiki_bry.length
 	, Find_href_len			= Find_href_bry.length
 	, Find_a_rhs_bgn_len	= Find_a_rhs_bgn_bry.length
 	;
-}
+}	

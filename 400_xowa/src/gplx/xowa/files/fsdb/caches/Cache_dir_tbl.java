@@ -18,18 +18,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files.fsdb.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
 import gplx.dbs.*;
 class Cache_dir_tbl {
-	private Db_provider provider;
+	private Db_conn conn;
 	private Db_stmt select_stmt;
 	private Db_stmt_bldr stmt_bldr;
-	public void Db_init(Db_provider provider) {this.provider = provider;}
+	public void Db_init(Db_conn conn) {this.conn = conn;}
 	public String Db_save(Cache_dir_itm itm) {
 		try {
-			if (stmt_bldr == null) stmt_bldr = new Db_stmt_bldr(Tbl_name, String_.Ary(Fld_dir_id), Fld_dir_name).Init(provider);
+			if (stmt_bldr == null) stmt_bldr = new Db_stmt_bldr(Tbl_name, String_.Ary(Fld_dir_id), Fld_dir_name).Init(conn);
 			Db_stmt stmt = stmt_bldr.Get(itm.Cmd_mode());
 			switch (itm.Cmd_mode()) {
-				case Db_cmd_mode.Create:	stmt.Clear().Val_int_(itm.Uid()).Val_str_by_bry_(itm.Dir_bry()).Exec_insert(); break;
-				case Db_cmd_mode.Update:	stmt.Clear()					.Val_str_by_bry_(itm.Dir_bry()).Val_int_(itm.Uid()).Exec_update(); break;
-				case Db_cmd_mode.Delete:	stmt.Clear().Val_int_(itm.Uid()).Exec_delete();	break;
+				case Db_cmd_mode.Create:	stmt.Clear().Val_int(itm.Uid()).Val_bry_as_str(itm.Dir_bry()).Exec_insert(); break;
+				case Db_cmd_mode.Update:	stmt.Clear()					.Val_bry_as_str(itm.Dir_bry()).Val_int(itm.Uid()).Exec_update(); break;
+				case Db_cmd_mode.Delete:	stmt.Clear().Val_int(itm.Uid()).Exec_delete();	break;
 				case Db_cmd_mode.Ignore:	break;
 				default:					throw Err_.unhandled(itm.Cmd_mode());
 			}
@@ -44,17 +44,17 @@ class Cache_dir_tbl {
 		if (select_stmt != null) select_stmt.Rls();
 		if (stmt_bldr != null) stmt_bldr.Rls();
 	}
-	public void Db_when_new(Db_provider p) {
+	public void Db_when_new(Db_conn p) {
 		Sqlite_engine_.Tbl_create(p, Tbl_name, Tbl_sql);
 		Sqlite_engine_.Idx_create(p, Idx_name);
 	}
-	public int Select_max_uid() {return Db_provider_.Select_fld0_as_int_or(provider, "SELECT Max(uid) AS MaxId FROM cache_dir;", -1);}
+	public int Select_max_uid() {return Db_conn_.Select_fld0_as_int_or(conn, "SELECT Max(uid) AS MaxId FROM cache_dir;", -1);}
 	public Cache_dir_itm Select(byte[] name) {
-		if (select_stmt == null) select_stmt = Db_stmt_.new_select_(provider, Tbl_name, String_.Ary(Fld_dir_name));
+		if (select_stmt == null) select_stmt = Db_stmt_.new_select_(conn, Tbl_name, String_.Ary(Fld_dir_name));
 		DataRdr rdr = DataRdr_.Null;
 		try {
 			rdr = select_stmt.Clear()
-			.Val_str_by_bry_(name)
+			.Val_bry_as_str(name)
 			.Exec_select();
 			if (rdr.MoveNextPeer()) {
 				return new Cache_dir_itm().Init_by_load(rdr);
@@ -67,7 +67,7 @@ class Cache_dir_tbl {
 	}		
 	public void Select_all(ListAdp list) {
 		list.Clear();
-		Db_stmt select_all_stmt = Db_stmt_.new_select_all_(provider, Tbl_name);
+		Db_stmt select_all_stmt = Db_stmt_.new_select_all_(conn, Tbl_name);
 		DataRdr rdr = DataRdr_.Null;
 		try {
 			rdr = select_all_stmt.Exec_select();

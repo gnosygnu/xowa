@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.wikis.images; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wikis.*;
 import gplx.ios.*; import gplx.xowa.bldrs.*; import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.dbs.tbls.*; import gplx.xowa.bldrs.oimgs.*;
 public class Xob_wiki_image_sql extends Xob_itm_dump_base implements Xob_cmd, GfoInvkAble, Sql_file_parser_cmd {
-	private Db_provider provider = null; private Db_stmt stmt = null;
+	private Db_conn conn = null; private Db_stmt stmt = null;
 	private Xob_wiki_image_tbl tbl_image = new Xob_wiki_image_tbl();
 	private byte[] cur_ttl, cur_media_type, cur_minor_mime, cur_timestamp; private int cur_size, cur_width, cur_height, cur_bits, cur_ext_id;
 	private int commit_count = 10000;
@@ -36,16 +36,16 @@ public class Xob_wiki_image_sql extends Xob_itm_dump_base implements Xob_cmd, Gf
 		}
 		parser.Src_fil_(src_fil).Trg_fil_gen_(dump_url_gen).Fld_cmd_(this).Flds_req_idx_(20, Fld_img_name, Fld_img_size, Fld_img_width, Fld_img_height, Fld_img_bits, Fld_img_media_type, Fld_img_minor_mime, Fld_img_timestamp);
 
-		provider = Xodb_db_file.init__wiki_image(wiki.Fsys_mgr().Root_dir()).Provider();
-		provider.Txn_mgr().Txn_bgn_if_none();
+		conn = Xodb_db_file.init__wiki_image(wiki.Fsys_mgr().Root_dir()).Conn();
+		conn.Txn_mgr().Txn_bgn_if_none();
 		tbl_image = new Xob_wiki_image_tbl();
-		tbl_image.Create_table(provider);
-		stmt = tbl_image.Insert_stmt(provider);		
+		tbl_image.Create_table(conn);
+		stmt = tbl_image.Insert_stmt(conn);		
 	}
 	public void Cmd_run() {
 		parser.Parse(bldr.Usr_dlg());
-		tbl_image.Create_index(provider);
-		provider.Txn_mgr().Txn_end_all();
+		tbl_image.Create_index(conn);
+		conn.Txn_mgr().Txn_end_all();
 	}
 	public void Exec(byte[] src, byte[] fld_key, int fld_idx, int fld_bgn, int fld_end, Bry_bfr file_bfr, Sql_file_parser_data data) {
 		switch (fld_idx) {
@@ -62,7 +62,7 @@ public class Xob_wiki_image_sql extends Xob_itm_dump_base implements Xob_cmd, Gf
 				++commit_count;
 				if ((commit_count % 10000) == 0) {
 					usr_dlg.Prog_many("", "", "committing: count=~{0} last=~{1}", commit_count, String_.new_utf8_(cur_ttl));
-					provider.Txn_mgr().Txn_end_all_bgn_if_none();
+					conn.Txn_mgr().Txn_end_all_bgn_if_none();
 				}
 				break;
 		}

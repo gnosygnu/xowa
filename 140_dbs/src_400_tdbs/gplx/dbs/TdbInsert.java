@@ -16,12 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-import gplx.lists.*; /*GfoNde*/
+import gplx.lists.*; import gplx.dbs.sqls.*;
 class TdbInsertWkr implements Db_qryWkr {
 	public Object Exec(Db_engine engineObj, Db_qry cmdObj) {
 		TdbEngine engine = TdbEngine.cast_(engineObj); Db_qry_insert cmd = (Db_qry_insert)cmdObj;
 
-		TdbTable tbl = engine.FetchTbl(cmd.BaseTable());
+		TdbTable tbl = engine.FetchTbl(cmd.Base_table());
 		tbl.IsDirty_set(true);
 		return cmd.Select() == null
 			? InsertRowsByVals(engine, tbl, cmd)

@@ -51,4 +51,3 @@ public abstract class IoItm_base implements GfoInvkAble, CompareAble {
 	@gplx.Internal protected void ctor_IoItmBase_url(Io_url url) {this.url = url; this.name = url.NameAndExt();}
 	@gplx.Internal protected void ctor_IoItmBase_name(String name) {this.name = name;}
 }
-

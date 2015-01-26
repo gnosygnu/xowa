@@ -220,7 +220,6 @@ public class Xoa_url_parser {
 				page_bry = ttl.Page_txt();
 			}
 		}
-		rv.Wiki_(wiki);
 		rv.Wiki_bry_(wiki.Domain_bry());
 		rv.Page_bry_(page_bry);
 		return rv;
@@ -260,7 +259,6 @@ public class Xoa_url_parser {
 		Xoa_url rv = Xoa_url_parser.Parse_url(app, wiki, bry, 0, bry.length, true);
 		if (app.Wiki_mgr().Wiki_regy().Url_is_invalid_domain(rv)) {	// handle lang_code entered; EX: "war" should redirect to "war" article in current wiki, not war.wikipedia.org; DATE:2014-02-07
 			rv.Page_bry_(rv.Wiki_bry());
-			rv.Wiki_(wiki);
 			rv.Wiki_bry_(wiki.Domain_bry());
 		}
 		return rv;

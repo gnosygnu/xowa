@@ -18,21 +18,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.dbs.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.dbs.*;
 import gplx.dbs.*;
 public class Xodb_xowa_db_tbl {
-	public void Provider_(Db_provider provider) {this.provider = provider;} Db_provider provider;
-	public void Update_url(Db_provider provider, int db_id, String db_url) {
+	public void Conn_(Db_conn conn) {this.conn = conn;} Db_conn conn;
+	public void Update_url(Db_conn conn, int db_id, String db_url) {
 		Db_stmt stmt = Db_stmt_.Null;
 		try {
-			stmt = Db_stmt_.new_update_(provider, Tbl_name, String_.Ary(Fld_db_id), Fld_db_url);
+			stmt = Db_stmt_.new_update_(conn, Tbl_name, String_.Ary(Fld_db_id), Fld_db_url);
 			stmt.Clear()
-				.Val_str_(db_url)
-				.Val_int_(db_id)
+				.Val_str(db_url)
+				.Val_int(db_id)
 				.Exec_update();
 				;
 		} finally {stmt.Rls();}
 	}
-	public void Commit_all(Xodb_fsys_mgr db_fs) {this.Commit_all(db_fs.Provider_core(), db_fs.Files_ary());}
-	public void Commit_all(Db_provider provider, Xodb_file[] ary) {
-		stmt_bldr.Init(provider);
+	public void Commit_all(Xodb_fsys_mgr db_fs) {this.Commit_all(db_fs.Conn_core(), db_fs.Files_ary());}
+	public void Commit_all(Db_conn conn, Xodb_file[] ary) {
+		stmt_bldr.Init(conn);
 		try {
 			int len = ary.length;
 			for (int i = 0; i < len; i++)
@@ -43,20 +43,20 @@ public class Xodb_xowa_db_tbl {
 	private void Commit_itm(Xodb_file itm) {
 		Db_stmt stmt = stmt_bldr.Get(itm.Cmd_mode());
 		switch (itm.Cmd_mode()) {
-			case Db_cmd_mode.Create:	stmt.Clear().Val_int_(itm.Id())	.Val_byte_(itm.Tid()).Val_str_(itm.Url_rel()).Exec_insert(); break;
-			case Db_cmd_mode.Update:	stmt.Clear()					.Val_byte_(itm.Tid()).Val_str_(itm.Url_rel()).Val_int_(itm.Id()).Exec_update(); break;
-			case Db_cmd_mode.Delete:	stmt.Clear().Val_int_(itm.Id()).Exec_delete();	break;
+			case Db_cmd_mode.Create:	stmt.Clear().Val_int(itm.Id())	.Val_byte(itm.Tid()).Val_str(itm.Url_rel()).Exec_insert(); break;
+			case Db_cmd_mode.Update:	stmt.Clear()					.Val_byte(itm.Tid()).Val_str(itm.Url_rel()).Val_int(itm.Id()).Exec_update(); break;
+			case Db_cmd_mode.Delete:	stmt.Clear().Val_int(itm.Id()).Exec_delete();	break;
 			case Db_cmd_mode.Ignore:	break;
 			default:					throw Err_.unhandled(itm.Cmd_mode());
 		}
 		itm.Cmd_mode_(Db_cmd_mode.Ignore);
 	}
-	public Xodb_file[] Select_all(Db_provider provider) {
+	public Xodb_file[] Select_all(Db_conn conn) {
 		DataRdr rdr = DataRdr_.Null;
 		ListAdp list = ListAdp_.new_();
 		try {
 			Db_qry qry = Db_qry_.select_tbl_(Tbl_name).OrderBy_asc_(Fld_db_id);
-			rdr = provider.Exec_qry_as_rdr(qry);
+			rdr = conn.Exec_qry_as_rdr(qry);
 			while (rdr.MoveNextPeer()) {
 				Xodb_file db = Xodb_file.load_(rdr.ReadInt(Fld_db_id), rdr.ReadByte(Fld_db_type), rdr.ReadStr(Fld_db_url));
 				list.Add(db);

@@ -92,7 +92,7 @@ public class Xof_lnki_file_mgr {
 		}
 	}
 	private void Hash_xfer_itms_add(byte[] key, Xof_fsdb_itm itm) {
-		if (	Bry_.Len_gt_0(key)	// ignore null / empty itms; needed for redirects
+		if (	Bry_.Len_gt_0(key)		// ignore null / empty itms; needed for redirects
 			&&	!xfer_list.Has(key)		// don't add if already there
 			&&	orig_regy.Has(key)		// add if found in orig_regy
 			)

@@ -39,20 +39,20 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 		ctx = wiki.Ctx();
 		root = ctx.Tkn_mkr().Root(Bry_.Empty);			
 		wiki.Init_assert();	// NOTE: must init wiki for db_mgr_as_sql
-		wiki.Db_mgr_as_sql().Init_load(Db_conn_info_.sqlite_(Xodb_mgr_sql.Find_core_url(wiki)));	// NOTE: must reinit providers as previous steps may have rls'd (and left member variable provider which is closed)
+		wiki.Db_mgr_as_sql().Init_load(Db_url_.sqlite_(Xodb_mgr_sql.Find_core_url(wiki)));	// NOTE: must reinit providers as previous steps may have rls'd (and left member variable conn which is closed)
 		db_fsys_mgr = wiki.Db_mgr_as_sql().Fsys_mgr();
 		db_ary = Xob_dump_src_ttl.Init_text_files_ary(db_fsys_mgr);
 		poll_interval = poll_mgr.Poll_interval();
 
 		page_src = new Xob_dump_src_id().Init(wiki, this.Init_redirect(), select_size);
 		ns_ary = Init_ns_ary();						
-		Db_provider provider = Init_db_file();
+		Db_conn conn = Init_db_file();
 		Io_url wiki_dir = wiki.Fsys_mgr().Root_dir();
 		bmk_mgr.Cfg_url_(wiki_dir.GenSubFil("xowa.file.make.cfg.gfs"));
 		rate_mgr.Log_file_(wiki_dir.GenSubFil("xowa.file.make.log.csv"));
 		if (reset_db) {
 			bmk_mgr.Reset();
-			Init_reset(provider);
+			Init_reset(conn);
 		}
 		bmk_mgr.Load(wiki.App(), this);
 		Cmd_bgn_end();
@@ -60,8 +60,8 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 	protected abstract void Cmd_bgn_end();
 	public abstract byte Init_redirect();
 	public abstract int[] Init_ns_ary();
-	protected abstract void Init_reset(Db_provider p);
-	protected abstract Db_provider Init_db_file();
+	protected abstract void Init_reset(Db_conn p);
+	protected abstract Db_conn Init_db_file();
 	private long time_bgn;
 	public void Cmd_run() {Exec_ns_ary();}
 	private void Exec_ns_ary() {

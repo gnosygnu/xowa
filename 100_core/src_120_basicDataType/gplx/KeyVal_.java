@@ -84,7 +84,7 @@ public class KeyVal_ {
 					Ary_xto_str_nested(bfr, indent + 1, (KeyVal[])val);
 					continue;														// don't add \n below
 				}
-				else if (ClassAdp_.Eq(val_type, Bool_.ClassOf)) {					// val is boolean
+				else if (ClassAdp_.Eq(val_type, Bool_.Cls_ref_type)) {					// val is boolean
 					boolean val_as_bool = Bool_.cast_(val);
 					bfr.Add(val_as_bool ? Bool_.True_bry : Bool_.False_bry);		// add "true" or "false"; don't call toString
 				}

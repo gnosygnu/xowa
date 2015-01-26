@@ -17,19 +17,36 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
 public interface Db_stmt extends RlsAble {
-	Db_provider Provider();
-	Db_stmt Val_bool_(boolean v);
-	Db_stmt Val_byte_(byte v);
-	Db_stmt Val_byte_by_bool_(boolean v);
-	Db_stmt Val_int_(int v);
-	Db_stmt Val_long_(long v);
-	Db_stmt Val_float_(float v);
-	Db_stmt Val_double_(double v);
-	Db_stmt Val_decimal_(DecimalAdp v);
-	Db_stmt Val_bry_(byte[] v);
-	Db_stmt Val_bry_by_str_(String v);
-	Db_stmt Val_str_by_bry_(byte[] v);
-	Db_stmt Val_str_(String v);
+	Db_stmt Crt_bool_as_byte(String k, boolean v);
+	Db_stmt Val_bool_as_byte(String k, boolean v);
+	Db_stmt Val_bool_as_byte(boolean v);
+	Db_stmt Crt_byte(String k, byte v);
+	Db_stmt Val_byte(String k, byte v);
+	Db_stmt Val_byte(byte v);
+	Db_stmt Crt_int(String k, int v);
+	Db_stmt Val_int(String k, int v);
+	Db_stmt Val_int(int v);
+	Db_stmt Crt_long(String k, long v);
+	Db_stmt Val_long(String k, long v);
+	Db_stmt Val_long(long v);
+	Db_stmt Crt_float(String k, float v);
+	Db_stmt Val_float(String k, float v);
+	Db_stmt Val_float(float v);
+	Db_stmt Crt_double(String k, double v);
+	Db_stmt Val_double(String k, double v);
+	Db_stmt Val_double(double v);
+	Db_stmt Crt_decimal(String k, DecimalAdp v);
+	Db_stmt Val_decimal(String k, DecimalAdp v);
+	Db_stmt Val_decimal(DecimalAdp v);
+	Db_stmt Crt_bry(String k, byte[] v);
+	Db_stmt Val_bry(String k, byte[] v);
+	Db_stmt Val_bry(byte[] v);
+	Db_stmt Crt_str(String k, String v);
+	Db_stmt Val_str(String k, String v);
+	Db_stmt Val_str(String v);
+	Db_stmt Crt_bry_as_str(String k, byte[] v);
+	Db_stmt Val_bry_as_str(String k, byte[] v);
+	Db_stmt Val_bry_as_str(byte[] v);
 	Db_stmt Val_rdr_(gplx.ios.Io_stream_rdr rdr, long rdr_len);
 	boolean Exec_insert();
 	int Exec_update();
@@ -38,5 +55,5 @@ public interface Db_stmt extends RlsAble {
 	Db_rdr Exec_select_as_rdr();
 	Object Exec_select_val();
 	Db_stmt Clear();
-	Db_stmt New();
+	Db_stmt Reset_stmt();
 }

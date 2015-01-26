@@ -17,42 +17,31 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
 public interface Db_engine {
-	String			Key();
-	String			Conn_info_tid();
-	Db_conn_info	Conn_info();
-	void			Conn_open();
-	void			Conn_term();
+	String			Tid();
+	Db_url	Url();
+	Db_engine		New_clone(Db_url url);
+	Db_rdr			New_rdr_by_obj(Object o, String sql);		// Object o:ResultSet if desktop; Cursor if android
+	Db_stmt			New_stmt_prep(Db_qry qry);
+	Object			New_stmt_prep_as_obj(String sql);
+	DataRdr			New_rdr(java.sql.ResultSet rdr, String sql); 
 	void			Txn_bgn();
 	void			Txn_end();
-	Db_engine		Make_new(Db_conn_info conn_info);
-
-	Db_rdr			New_db_rdr(Object o, String sql);		// ResultSet if desktop; Cursor if android
-	Db_stmt			New_db_stmt(Db_provider provider, Db_qry sql);
-	Object			Execute(Db_qry cmd);
-	DataRdr			NewDataRdr(java.sql.ResultSet rdr, String sql); 
-	Object			New_db_cmd(String sql);
+	void			Conn_open();
+	void			Conn_term();
+	Object			Exec_as_obj(Db_qry qry);
 }
 class Db_engine_null implements Db_engine {
-	public String			Key() {return Db_conn_info_.Null.Key();}
-	public String			Conn_info_tid() {return Db_conn_info_.Null.Key();}
-	public Db_conn_info		Conn_info() {return Db_conn_info_.Null;}
+	public String			Tid() {return Db_url__null.Tid_const;}
+	public Db_url			Url() {return Db_url_.Null;}
 	public void				Conn_open() {}
 	public void				Conn_term() {}
+	public Db_engine		New_clone(Db_url url) {return this;}
+	public Db_rdr			New_rdr_by_obj(Object o, String sql) {return Db_rdr_.Null;}
+	public Db_stmt			New_stmt_prep(Db_qry qry) {return Db_stmt_.Null;}
+	public Object			New_stmt_prep_as_obj(String sql) {throw Err_.not_implemented_();}
+	public DataRdr			New_rdr(java.sql.ResultSet rdr, String sql) {return DataRdr_.Null;} 
 	public void				Txn_bgn() {}
 	public void				Txn_end() {}
-	public Db_engine		Make_new(Db_conn_info conn_info) {return this;}
-
-	public Object Execute(Db_qry cmd) {return cmd.ExecRdrAble() ? (Object)DataRdr_.Null : -1;}
-	public Object	New_db_cmd(String sql) {throw Err_.not_implemented_();}
-	public DataRdr	NewDataRdr(java.sql.ResultSet rdr, String sql) {return DataRdr_.Null;} 
-	public Db_rdr	New_db_rdr(Object o, String sql) {return Db_rdr_.Null;}
-	public Db_stmt	New_db_stmt(Db_provider provider, Db_qry qry) {return Db_stmt_.Null;}
+	public Object			Exec_as_obj(Db_qry cmd) {return cmd.Exec_is_rdr() ? (Object)DataRdr_.Null : -1;}
         public static final Db_engine_null _ = new Db_engine_null(); Db_engine_null() {}
-}
-class ExecSqlWkr implements Db_qryWkr {
-	public Object Exec(Db_engine engineObj, Db_qry cmd) {
-		Db_engine_sql_base engine = (Db_engine_sql_base)engineObj;
-		String sql = engine.SqlWtr().XtoSqlQry(cmd, false); // Tfds.Write(sql);
-		return cmd.ExecRdrAble() ? (Object)engine.ExecuteReader(sql) : engine.ExecuteNonQuery(sql);
-	}
 }

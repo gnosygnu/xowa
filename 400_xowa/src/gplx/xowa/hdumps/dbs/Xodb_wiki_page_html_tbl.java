@@ -24,25 +24,25 @@ public class Xodb_wiki_page_html_tbl {
 		this.zip_mgr = wiki.App().Zip_mgr();
 	}
 	public byte Zip_tid() {return zip_tid;} public void Zip_tid_(byte v) {zip_tid = v;} private byte zip_tid = Io_stream_.Tid_gzip;
-	public Db_provider Provider() {return provider;} public Xodb_wiki_page_html_tbl Provider_(Db_provider v) {this.Rls_all(); provider = v; return this;} private Db_provider provider;
+	public Db_conn Conn() {return conn;} public Xodb_wiki_page_html_tbl Conn_(Db_conn v) {this.Rls_all(); conn = v; return this;} private Db_conn conn;
 	@gplx.Virtual public int Insert(int page_id, int tid, byte[] data) {
-		if (stmt_insert == null) stmt_insert = Db_stmt_.new_insert_(provider, Tbl_name, Flds__all);
+		if (stmt_insert == null) stmt_insert = Db_stmt_.new_insert_(conn, Tbl_name, Flds__all);
 		try {
 			data = zip_mgr.Zip(zip_tid, data);
-			stmt_insert.Clear().Val_int_(page_id).Val_int_(tid).Val_bry_(data).Exec_insert();
+			stmt_insert.Clear().Val_int(page_id).Val_int(tid).Val_bry(data).Exec_insert();
 			return data.length;
 		}
 		catch (Exception exc) {stmt_insert = null; throw Err_.err_(exc, "stmt failed");} // must reset stmt, else next call will fail
 	}
 	@gplx.Virtual public void Delete(int page_id) {
-		if (stmt_delete == null) stmt_delete = Db_stmt_.new_delete_(provider, Tbl_name, Fld_page_id);
-		try {stmt_delete.Clear().Val_int_(page_id).Exec_delete();}
+		if (stmt_delete == null) stmt_delete = Db_stmt_.new_delete_(conn, Tbl_name, Fld_page_id);
+		try {stmt_delete.Clear().Val_int(page_id).Exec_delete();}
 		catch (Exception exc) {stmt_delete = null; throw Err_.err_(exc, "stmt failed");} // must reset stmt, else next call will fail
 	}
 	@gplx.Virtual public void Select_by_page(ListAdp rv, int page_id) {
-		if (stmt_select == null) stmt_select = Db_stmt_.new_select_as_rdr(provider, Db_qry__select_in_tbl.new_(Tbl_name, String_.Ary(Fld_page_id), Flds__all));
+		if (stmt_select == null) stmt_select = Db_stmt_.new_select_as_rdr(conn, Db_qry__select_in_tbl.new_(Tbl_name, String_.Ary(Fld_page_id), Flds__all));
 		try {
-			Db_rdr rdr = stmt_select.Clear().Val_int_(page_id).Exec_select_as_rdr();
+			Db_rdr rdr = stmt_select.Clear().Val_int(page_id).Exec_select_as_rdr();
 			while (rdr.Move_next()) {
 				Xodb_wiki_page_html_row row = new Xodb_wiki_page_html_row
 				( rdr.Read_int(0)
@@ -51,7 +51,7 @@ public class Xodb_wiki_page_html_tbl {
 				);
 				rv.Add(row);
 			}
-			rdr.Close();
+			rdr.Rls();
 		}
 		catch (Exception exc) {stmt_select = null; throw Err_.err_(exc, "stmt failed");} // must reset stmt, else next call will fail
 	}
@@ -59,7 +59,7 @@ public class Xodb_wiki_page_html_tbl {
 		if (stmt_select != null) {stmt_select.Rls(); stmt_select = null;}
 		if (stmt_insert != null) {stmt_insert.Rls(); stmt_insert = null;}
 		if (stmt_delete != null) {stmt_delete.Rls(); stmt_delete = null;}
-		provider = null;
+		conn = null;
 	}
 	public static final String Tbl_name = "wiki_page_html", Fld_page_id = "page_id", Fld_html_tid = "html_tid", Fld_html_data = "html_data";
 	private static final String[] Flds__all = new String[] {Fld_page_id, Fld_html_tid, Fld_html_data};

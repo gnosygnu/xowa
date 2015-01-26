@@ -16,21 +16,20 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-import gplx.stores.*;
+import gplx.stores.*; import gplx.dbs.sqls.*;
 import java.sql.*; 
 class Mysql_engine extends Db_engine_sql_base {
-	@Override public String Key() {return Db_conn_info__mysql.Key_const;}
-	@Override public String Conn_info_tid() {return this.Key();}
-	@Override public Sql_cmd_wtr SqlWtr() {return Sql_cmd_wtr_.BackslashSensitive;}
-	@Override public Db_engine Make_new(Db_conn_info connectInfo) {
+	@Override public String Tid() {return Db_url__mysql.Tid_const;}
+	@Override public Sql_qry_wtr SqlWtr() {return Sql_qry_wtr_.new_escape_backslash();}
+	@Override public Db_engine New_clone(Db_url connectInfo) {
 		Mysql_engine rv = new Mysql_engine();
-		rv.ctor_SqlEngineBase(connectInfo);
+		rv.Ctor(connectInfo);
 		return rv;
 	}
-	@Override public DataRdr NewDataRdr(ResultSet rdr, String commandText) {return Mysql_rdr.new_(rdr, commandText);}
+	@Override public DataRdr New_rdr(ResultSet rdr, String commandText) {return Mysql_rdr.new_(rdr, commandText);}
 		@gplx.Internal @Override protected Connection Conn_new() {
-		Db_conn_info__mysql connUrl = (Db_conn_info__mysql)conn_info; 
-		return NewDbCon("jdbc:mysql://localhost/" + connUrl.Database() + "?characterEncoding=UTF8", connUrl.Uid(), connUrl.Pwd());
+		Db_url__mysql url_as_mysql = (Db_url__mysql)url; 
+		return Conn_make_by_url("jdbc:mysql://localhost/" + url_as_mysql.Database() + "?characterEncoding=UTF8", url_as_mysql.Uid(), url_as_mysql.Pwd());
 	}
 		@gplx.Internal protected static final Mysql_engine _ = new Mysql_engine(); Mysql_engine() {}
 }

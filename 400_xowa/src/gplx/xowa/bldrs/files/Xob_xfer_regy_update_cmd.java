@@ -26,11 +26,11 @@ public class Xob_xfer_regy_update_cmd extends Xob_itm_basic_base implements Xob_
 	public void Cmd_end() {}
 	public void Cmd_print() {}
 	private void Exec_main() {
-		Db_provider make_db_provider = Xodb_db_file.init__file_make(wiki.Fsys_mgr().Root_dir()).Provider();
+		Db_conn make_db_provider = Xodb_db_file.init__file_make(wiki.Fsys_mgr().Root_dir()).Conn();
 		this.Copy_atrs_to_make_db(make_db_provider);
 		this.Update_status(make_db_provider);
 	}
-	private void Copy_atrs_to_make_db(Db_provider make_db_provider) {
+	private void Copy_atrs_to_make_db(Db_conn make_db_provider) {
 		wiki.File_mgr().Fsdb_mgr().Init_by_wiki(wiki);
 		Fsdb_db_abc_mgr fsdb_abc_mgr = wiki.File_mgr().Fsdb_mgr().Mnt_mgr().Abc_mgr_at(0);	// 0 = fsdb.main
 		Io_url fsdb_atr_url = fsdb_abc_mgr.Atr_mgr().Get_at(0).Url();						// 0 = fsdb.atr.00
@@ -47,7 +47,7 @@ public class Xob_xfer_regy_update_cmd extends Xob_itm_basic_base implements Xob_
 		Sqlite_engine_.Idx_create(make_db_provider, Xob_fsdb_regy_tbl.Idx_main);
 		Sqlite_engine_.Db_detach(make_db_provider, "fsdb_db");
 	}
-	private void Update_status(Db_provider make_db_provider) {
+	private void Update_status(Db_conn make_db_provider) {
 		make_db_provider.Txn_mgr().Txn_bgn();
 		make_db_provider.Exec_sql(Xob_fsdb_regy_tbl.Update_regy_fil);
 		make_db_provider.Exec_sql(Xob_fsdb_regy_tbl.Update_regy_thm);
