@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa2.files; import gplx.*; import gplx.xowa2.*;
-import gplx.xowa.files.wiki_orig.*;
+import gplx.xowa2.files.orig_regy.*;
 public interface Xof_orig_mgr {
 	Xof_orig_regy_itm Get_by_ttl(byte[] ttl);
 }

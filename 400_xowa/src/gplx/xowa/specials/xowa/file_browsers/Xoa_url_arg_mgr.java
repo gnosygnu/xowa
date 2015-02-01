@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.xowa.file_browsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*; import gplx.xowa.specials.xowa.*;
+import gplx.core.primitives.*;
 class Xoa_url_arg_mgr {
 	private final Hash_adp_bry hash = Hash_adp_bry.cs_();
 	private final Xoa_url_enum_mgr enm_mgr;

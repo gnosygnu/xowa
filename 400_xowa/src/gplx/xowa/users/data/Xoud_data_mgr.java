@@ -23,17 +23,17 @@ public class Xoud_data_mgr {
 	public Xoud_regy_mgr Regy_mgr() {return regy_mgr;} private final Xoud_regy_mgr regy_mgr = new Xoud_regy_mgr();
 	public Xoud_history_mgr History_mgr() {return history_mgr;} private final Xoud_history_mgr history_mgr = new Xoud_history_mgr();
 	public Xoud_site_mgr Site_mgr() {return site_mgr;} private final Xoud_site_mgr site_mgr = new Xoud_site_mgr();
-	public void Init_by_boot(Db_conn user_db_provider) {
+	public void Init_by_boot(Db_conn user_conn) {
 		user_db.Schema().Loader_(Schema_loader_mgr_.Sqlite);
 		Init_user_db_changes(user_db.Schema().Updater());
-		user_db.Init(user_db_provider);
-		regy_mgr.Init(user_db_provider);
-		site_mgr.Init(user_db_provider);
-		history_mgr.History_tbl().Conn_(user_db_provider);
+		user_db.Init(user_conn);
+		regy_mgr.Init(user_conn);
+		site_mgr.Init(user_conn);
+		history_mgr.History_tbl().Conn_(user_conn);
 	}
 	private void Init_user_db_changes(Schema_update_mgr updater) {
 		updater.Add(Schema_update_cmd_.Make_tbl_create(Xoud_regy_tbl.Tbl_name	, Xoud_regy_tbl.Tbl_sql		, Xoud_regy_tbl.Idx_core));
 		updater.Add(Schema_update_cmd_.Make_tbl_create(Xoud_history_tbl.Tbl_name, Xoud_history_tbl.Tbl_sql	, Xoud_history_tbl.Idx_core));
-		updater.Add(Schema_update_cmd_.Make_tbl_create(Xoud_site_tbl.Tbl_name	, Xoud_site_tbl.Tbl_sql));
+//			updater.Add(Schema_update_cmd_.Make_tbl_create(Xoud_site_tbl.Tbl_name	, Xoud_site_tbl.Tbl_sql));
 	}
 }

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.ios; import gplx.*;
+import gplx.core.strings.*;
 public class IoRecycleBin {
 	public void							Send(Io_url url) {Send_xrg(url).Exec();}
 	public IoEngine_xrg_recycleFil			Send_xrg(Io_url url) {return IoEngine_xrg_recycleFil.gplx_(url);}

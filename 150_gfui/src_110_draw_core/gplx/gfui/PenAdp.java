@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfui; import gplx.*;
 import java.awt.BasicStroke;
 import java.awt.Stroke;
+import gplx.core.strings.*;
 public class PenAdp implements GfoInvkAble {
 	public float Width() {return width;} public void Width_set(float v) {width = v; InitUnder();} float width;
 	public ColorAdp Color() {return color;} public void Color_set(ColorAdp v) {color = v; InitUnder();} ColorAdp color;

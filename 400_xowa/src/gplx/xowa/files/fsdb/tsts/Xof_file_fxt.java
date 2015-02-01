@@ -68,7 +68,7 @@ class Xof_file_fxt {
 		Xof_fsdb_itm itm = itm_(String_.new_utf8_(arg.Ttl()), arg.Lnki_type(), arg.Lnki_w(), arg.Lnki_h(), arg.Lnki_upright(), arg.Lnki_thumbtime());
 		ListAdp itms_list = ListAdp_.new_();
 		itms_list.Add(itm);
-		fsdb_mgr.Reg_select(Xoa_page.Empty, arg.Exec_tid(), itms_list);
+		fsdb_mgr.Fsdb_search_by_list(Xoa_page.Empty, arg.Exec_tid(), itms_list);
 		if (arg.Rslt_reg() != Xof_wiki_orig_wkr_.Tid_null) Tfds.Eq(arg.Rslt_reg(), itm.Rslt_reg(), "rslt_reg");
 		if (arg.Rslt_qry() != Xof_qry_wkr_.Tid_null) Tfds.Eq(arg.Rslt_qry(), itm.Rslt_qry(), "rslt_qry");
 		if (arg.Rslt_bin() != Xof_bin_wkr_.Tid_null) Tfds.Eq(arg.Rslt_bin(), itm.Rslt_bin(), "rslt_bin");
@@ -104,7 +104,7 @@ class Xof_file_fxt {
 		Xof_fsdb_itm itm = itm_(ttl, Xop_lnki_type.Id_null, Xop_lnki_tkn.Width_null, Xop_lnki_tkn.Height_null, Xop_lnki_tkn.Upright_null, Xof_doc_thumb.Null_as_int);
 		ListAdp list = ListAdp_.new_();
 		list.Add(itm);
-		fsdb_mgr.Reg_select(Xoa_page.Empty, Xof_exec_tid.Tid_wiki_page, list);
+		fsdb_mgr.Fsdb_search_by_list(Xoa_page.Empty, Xof_exec_tid.Tid_wiki_page, list);
 		return itm;
 	}
 	public static String file_img_(int w, int h) {return String_.Format("{0},{1}", w, h);}

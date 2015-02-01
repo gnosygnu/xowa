@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
+import gplx.core.primitives.*;
 public class OrderedHash_ {
 	public static OrderedHash new_()			{return new OrderedHash_base();}
 	public static OrderedHash new_bry_()		{return new OrderedHash_bry();}

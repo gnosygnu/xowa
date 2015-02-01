@@ -17,7 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.lib; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import org.junit.*;
-import gplx.dbs.*; import gplx.xowa2.files.commons.*; import gplx.xowa2.wikis.data.tbls.*; import gplx.xowa2.files.metas.*; import gplx.xowa.files.wiki_orig.*;
+import gplx.dbs.*; import gplx.xowa2.files.commons.*; import gplx.xowa2.wikis.data.*; import gplx.xowa2.files.metas.*; import gplx.xowa.files.wiki_orig.*;
+import gplx.xowa2.files.orig_regy.*;
 public class Scrib_lib_title_tst {
 	@Before public void init() {
 		fxt.Clear_for_lib();
@@ -91,7 +92,7 @@ public class Scrib_lib_title_tst {
 	}
 	private static void Init_file_wiki_orig(Xow_wiki wiki, String ttl_str, int w, int h) {
 		String url_str = "test/file/en.wikipedia.org/orig_regy";
-		Db_conn_pool.I.Set_mem(url_str, new Xof_orig_regy_tbl().new_meta());
+		Db_conn_pool.I.Set_mem(url_str, new Xof_orig_regy_tbl().Meta());
 		Db_url db_url = Db_url_.mem_(url_str);
 		Xof_file_meta_wkr__db_orig wkr = (Xof_file_meta_wkr__db_orig)wiki.File_mgr().File_meta_wkr();
 		Xof_orig_regy_tbl tbl = wkr.Tbl();
@@ -101,10 +102,10 @@ public class Scrib_lib_title_tst {
 	}
 //		private static void Init_page_regy(Xow_wiki wiki, String ttl, int id, boolean is_redirect) {
 //			String url_str = "test/en.wikipedia.org/wiki_page_regy";
-//			Db_meta_tbl meta = new Xow_page_regy_tbl().new_meta();
+//			Db_meta_tbl meta = new Xowd_page_regy_tbl().new_meta();
 //			Db_conn_pool.I.Set_mem(url_str, meta);
 //			Db_url url = Db_url_.mem_(url_str);
-//			Xow_page_regy_tbl tbl = new Xow_page_regy_tbl(Bool_.N, url);
+//			Xowd_page_regy_tbl tbl = new Xowd_page_regy_tbl(Bool_.N, url);
 //			tbl.Insert(id, ns_id, Bry_.new_utf8_(ttl), is_redirect, modified_on, page_len, random_int, text_db_id, html_db_id);
 //		}
 	private static String ttl_fast(int ns_id, String ns_str, String ttl) {return ttl_fast(ns_id, ns_str, ttl, "", "", ttl);}

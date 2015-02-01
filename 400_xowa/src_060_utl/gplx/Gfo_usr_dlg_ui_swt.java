@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
-import gplx.gfui.*;
+import gplx.core.strings.*; import gplx.gfui.*;
 public class Gfo_usr_dlg_ui_swt implements Gfo_usr_dlg_ui, GfoInvkAble {
 	Gfui_kit kit; GfuiInvkCmd cmd_sync; GfuiTextBox prog_box, info_box, warn_box;
 	public Gfo_usr_dlg_ui_swt(Gfui_kit kit, GfuiTextBox prog_box, GfuiTextBox info_box, GfuiTextBox warn_box, Gfo_usr_dlg_ui_opt opt) {

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.mapSources; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+import gplx.core.primitives.*;
 import gplx.xowa.xtns.pfuncs.*;
 public class Map_dd2dms_func extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_mapSources_dd2dms;}

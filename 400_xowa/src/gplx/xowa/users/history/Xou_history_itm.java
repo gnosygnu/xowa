@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.history; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
+import gplx.core.primitives.*;
 public class Xou_history_itm {
 	public Xou_history_itm(byte[] wiki, byte[] page) {
 		this.wiki = wiki;

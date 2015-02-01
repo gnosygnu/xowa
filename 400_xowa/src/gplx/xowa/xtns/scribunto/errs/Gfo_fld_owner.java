@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.errs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import gplx.criterias.*;
+import gplx.core.criterias.*;
 public interface Gfo_fld_owner {
 	int		Fld_val_as_int(int fld_idx);
 	String	Fld_val_as_str(int fld_idx);
@@ -49,7 +49,7 @@ class Gfo_match_obj implements Gfo_match {
 	}
 }
 class Gfo_fld_crt implements Criteria {
-	public byte Crt_tid() {return Criteria_.Tid_wrapper;}
+	public byte Tid() {return Criteria_.Tid_wrapper;}
 	public byte Fld_idx() {return fld_idx;} private byte fld_idx;
 	public Criteria Crt() {return crt;} private Criteria crt;
 	public boolean Matches(Object o) {			
@@ -57,6 +57,8 @@ class Gfo_fld_crt implements Criteria {
 		Object comp = owner.Fld_val_as_obj(fld_idx);
 		return crt.Matches(comp);
 	}
+	public void				Val_from_args(HashAdp args) {throw Err_.not_implemented_();}
+	public void				Val_as_obj_(Object v) {throw Err_.not_implemented_();}
 	public String XtoStr() {return String_.Concat(Byte_.Xto_str(fld_idx), " ", crt.XtoStr());}
 	public static Gfo_fld_crt new_(byte fld_idx, Criteria crt) {
 		Gfo_fld_crt rv = new Gfo_fld_crt();

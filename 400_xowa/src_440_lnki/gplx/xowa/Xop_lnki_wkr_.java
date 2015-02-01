@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.core.btries.*;
+import gplx.core.primitives.*; import gplx.core.btries.*;
 import gplx.xowa.wikis.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.xtns.relatedSites.*;
 public class Xop_lnki_wkr_ {
 	private static final Int_obj_ref rel2abs_tid = Int_obj_ref.zero_();

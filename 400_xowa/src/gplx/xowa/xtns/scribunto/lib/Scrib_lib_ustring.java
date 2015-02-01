@@ -103,7 +103,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 		RegxAdp regx_adp = Scrib_lib_ustring.RegxAdp_new_(core.Ctx(), regx);
 		RegxMatch[] regx_rslts = regx_adp.Match_all(text, bgn);
 		int len = regx_rslts.length;
-		if (len == 0) return rslt.Init_null();	// return null if no matches found; EX:w:Mount_Gambier_(volcano); DATE:2014-04-02
+		if (len == 0) return rslt.Init_null();	// return null if no matches found; EX:w:Mount_Gambier_(volcano); DATE:2014-04-02; confirmed with en.d:民; DATE:2015-01-30
 		ListAdp tmp_list = ListAdp_.new_();
 		for (int i = 0; i < len; i++) {
 			RegxMatch match = regx_rslts[i];

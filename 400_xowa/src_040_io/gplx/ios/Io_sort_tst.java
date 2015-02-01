@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.ios; import gplx.*;
-import org.junit.*;
+import org.junit.*; import gplx.core.strings.*;
 public class Io_sort_tst {
 	Io_sort_fxt fxt = new Io_sort_fxt();
 	@Test  public void ExternalSort() {

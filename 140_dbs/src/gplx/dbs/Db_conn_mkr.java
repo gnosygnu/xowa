@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
+import gplx.core.primitives.*;
 public interface Db_conn_mkr {
 	Db_conn Load_or_make_(Io_url db_url, Bool_obj_ref created_ref);
 }

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa2.files; import gplx.*; import gplx.xowa2.*;
+import gplx.core.primitives.*;
 public class Xofv_repo_mgr {
 	private final Hash_adp_bry key_regy = Hash_adp_bry.cs_();
 	private final HashAdp tid_regy = HashAdp_.new_(); private final Byte_obj_ref tid_key = Byte_obj_ref.zero_();

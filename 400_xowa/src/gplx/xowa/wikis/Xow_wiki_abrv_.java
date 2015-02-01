@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
-import gplx.core.btries.*;
+import gplx.core.primitives.*; import gplx.core.btries.*;
 public class Xow_wiki_abrv_ {
 	public static boolean parse_(Xow_wiki_abrv rv, byte[] src, int bgn, int end) {
 		rv.Clear();

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa2.files; import gplx.*; import gplx.xowa2.*;
+import gplx.core.primitives.*;
 import gplx.dbs.*; import gplx.xowa.files.fsdb.caches.*;
 public interface Xou_cache_mgr {
 	Xou_cache_fil Fil__get_or_null(byte[] dir_name, byte[] fil_name, boolean fil_is_orig, int fil_w, double fil_time, int fil_page);

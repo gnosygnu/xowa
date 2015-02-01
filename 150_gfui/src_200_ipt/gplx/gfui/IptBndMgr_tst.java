@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
-import org.junit.*;
+import org.junit.*; import gplx.core.strings.*;
 public class IptBndMgr_tst {
 	@Before public void setup() {
 		fx = new IptBndMgr_fx();

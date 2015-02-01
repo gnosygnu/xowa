@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.strings.*;
 public class Xob_stat_itm implements NewAble {
 	public String Ns() {return ns;} private String ns;
 	public int  Fils;

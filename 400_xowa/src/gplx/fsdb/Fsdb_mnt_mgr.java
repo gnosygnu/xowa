@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.fsdb; import gplx.*;
+import gplx.core.primitives.*;
 import gplx.dbs.*; import gplx.xowa.files.fsdb.*;
 public class Fsdb_mnt_mgr implements GfoInvkAble {
 	private Db_conn conn;

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
+import gplx.core.primitives.*;
 class Xow_hzip_xtid {
 	public static int Find_xtid(Xow_hzip_mgr hzip_mgr, byte[] src, int src_len, int bgn, int pos, Byte_obj_ref xtid_ref) {
 		int xtid_bgn = pos + Len_xtid;											if (!Bry_.Match(src, pos, xtid_bgn, Bry_xtid)) return Xow_hzip_mgr.Unhandled; // next atr should be "xtid='"

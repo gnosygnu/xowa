@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfs; import gplx.*;
-import org.junit.*;
+import org.junit.*; import gplx.core.strings.*;
 public class Gfs_msg_bldr_tst {
 	@Before public void init() {fxt.Clear();} Gfs_msg_bldr_fxt fxt = new Gfs_msg_bldr_fxt();
 	@Test  public void Basic() {

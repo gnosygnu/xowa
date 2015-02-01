@@ -16,8 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.mapSources; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*;
-import gplx.core.btries.*;
+import org.junit.*; import gplx.core.primitives.*; import gplx.core.btries.*;
 class Map_math {// REF.MW:MapSources_math.php
 	private int word_idx_nsew;
 	private double[] rv = new double[4];

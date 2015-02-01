@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.primitives.*;
 public class Xodb_page implements Xobl_data_itm {
 	public Xodb_page() {this.Clear();}
 	public int			Id() {return id;} public Xodb_page Id_(int v) {id = v; id_val = null; return this;} private int id;

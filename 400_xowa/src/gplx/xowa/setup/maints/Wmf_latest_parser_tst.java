@@ -21,15 +21,15 @@ public class Wmf_latest_parser_tst {
 	@Before public void init() {fxt.Clear();} private Wmf_latest_parser_fxt fxt = new Wmf_latest_parser_fxt();
 	@Test  public void Parse() {
 		fxt.Test_parse
-		( "<tr><td class=\"n\"><a href=\"enwiki-latest-pages-articles.xml.bz2\">enwiki-latest-pages-articles.xml.bz2</a></td><td class=\"m\">2014-Dec-10 06:53:20</td><td class=\"s\">10.7G</td><td class=\"t\">application/x-bzip</td></tr>"
-		, fxt.itm("enwiki-latest-pages-articles.xml.bz2", "2014-12-10 06:53:20", "10.7 GB")
+		( "\n<a href=\"enwiki-latest-pages-articles.xml.bz2\">enwiki-latest-pages-articles.xml.bz2</a>               15-Jan-2015 05:43         11575640561\r\n"
+		, fxt.itm("enwiki-latest-pages-articles.xml.bz2", "2015-01-15 05:43", "10.781 GB")
 		);
 	}
-//		@Test   public void Smoke() {
-//			Wmf_latest_parser parser = new Wmf_latest_parser();
-//			parser.Parse(Io_mgr._.LoadFilBry("C:\\wmf_latest.html"));
-//			Tfds.Write(String_.Concat_lines_nl(Wmf_latest_parser_fxt.Xto_str_ary(parser.Xto_ary())));
-//		}
+	@Test   public void Smoke() {
+		Wmf_latest_parser parser = new Wmf_latest_parser();
+		parser.Parse(Io_mgr._.LoadFilBry("C:\\wmf_latest.html"));
+		Tfds.Write(String_.Concat_lines_nl(Wmf_latest_parser_fxt.Xto_str_ary(parser.Xto_ary())));
+	}
 }
 class Wmf_latest_parser_fxt {
 	public void Clear() {}

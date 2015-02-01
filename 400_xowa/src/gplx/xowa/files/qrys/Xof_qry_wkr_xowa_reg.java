@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.qrys; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.dbs.*; import gplx.xowa.dbs.tbls.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.wiki_orig.*;
+import gplx.xowa2.files.orig_regy.*;
 public class Xof_qry_wkr_xowa_reg implements Xof_qry_wkr {
 	private Db_conn conn;
 	public Xof_qry_wkr_xowa_reg(Db_conn p) {this.conn = p;}

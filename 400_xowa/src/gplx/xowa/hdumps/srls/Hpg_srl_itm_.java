@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps.srls; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
-import gplx.xowa.hdumps.core.*;
+import gplx.core.primitives.*; import gplx.xowa.hdumps.core.*;
 import gplx.xowa2.gui.*;
 public class Hpg_srl_itm_ {
 	public static final byte	// SERIALIZED

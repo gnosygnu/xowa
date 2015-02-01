@@ -21,10 +21,7 @@ import gplx.xowa2.wikis.*; import gplx.xowa2.users.data.*;
 public class Xoav_wiki_mgr implements GfoInvkAble {
 	private final Xoav_app app; private final OrderedHash hash = OrderedHash_.new_bry_();		
 	public Xoav_wiki_mgr(Xoav_app app, Xol_case_mgr case_mgr) {this.app = app;}
-	public Xowv_wiki Get_by_domain(byte[] domain) {
-		Xowv_wiki rv = (Xowv_wiki)hash.Fetch(domain);
-		return rv.Init_assert();
-	}
+	public Xowv_wiki Get_by_domain(byte[] domain) {return (Xowv_wiki)hash.Fetch(domain);}
 	public Xowv_wiki Import_by_fil(Io_url fil) {
 		Io_url wiki_dir = fil.OwnerDir();
 		Xowv_wiki rv = Load(String_.Replace(fil.NameOnly(), ".000", ""), wiki_dir);

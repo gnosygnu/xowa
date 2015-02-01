@@ -16,15 +16,15 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-import gplx.criterias.*;
+import gplx.core.criterias.*;
 import gplx.lists.*; /*GfoNde*/
 class TdbUpdateWkr implements Db_qryWkr {
 	public Object Exec(Db_engine engineObj, Db_qry cmdObj) {
 		TdbEngine engine = TdbEngine.cast_(engineObj); Db_qry_update cmd = (Db_qry_update)cmdObj;
 
 		int rv = 0;
-		TdbTable tbl = engine.FetchTbl(cmd.BaseTable());
-		Criteria crt = cmd.Where().Crt();
+		TdbTable tbl = engine.FetchTbl(cmd.Base_table());
+		Criteria crt = cmd.Where();
 		for (int i = 0; i < tbl.Rows().Count(); i++) {
 			GfoNde row = (GfoNde)tbl.Rows().FetchAt_asGfoNde(i);
 			if (crt.Matches(row)) {

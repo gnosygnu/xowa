@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
 import org.junit.*;
-import gplx.criterias.*;
+import gplx.core.criterias.*;
 public class Db_qry_dml_tst {
 	@Test  public void Delete_basic() {
 		tst_XtoSql(Db_qry_delete.new_("tbl0", Db_crt_.eq_("fld0", "val0"))

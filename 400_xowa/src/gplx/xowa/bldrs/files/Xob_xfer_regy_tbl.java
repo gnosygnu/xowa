@@ -27,7 +27,7 @@ public class Xob_xfer_regy_tbl {
 	public static DataRdr Select(Db_conn p, byte repo_id, byte[] ttl, int limit) {
 		Db_qry qry = Db_qry_.select_().Cols_all_()
 			.From_(Tbl_name)
-			.Where_(gplx.criterias.Criteria_.And_many(Db_crt_.mte_(Fld_orig_repo, repo_id), Db_crt_.mt_(Fld_lnki_ttl, String_.new_utf8_(ttl)), Db_crt_.eq_(Fld_xfer_status, 0)))
+			.Where_(gplx.core.criterias.Criteria_.And_many(Db_crt_.mte_(Fld_orig_repo, repo_id), Db_crt_.mt_(Fld_lnki_ttl, String_.new_utf8_(ttl)), Db_crt_.eq_(Fld_xfer_status, 0)))
 			.OrderBy_many_(Fld_xfer_status, Fld_orig_repo, Fld_lnki_ttl, Fld_file_w)
 			.Limit_(limit)
 			;
@@ -53,7 +53,7 @@ public class Xob_xfer_regy_tbl {
 	public static DataRdr Select_by_lnki_page_id(Db_conn p, int lnki_page_id, int select_interval) {
 		Db_qry qry = Db_qry_.select_().Cols_all_()
 			.From_(Tbl_name)
-			.Where_(gplx.criterias.Criteria_.And_many(Db_crt_.eq_(Fld_xfer_status, 0), Db_crt_.mte_(Fld_lnki_page_id, lnki_page_id)))
+			.Where_(gplx.core.criterias.Criteria_.And_many(Db_crt_.eq_(Fld_xfer_status, 0), Db_crt_.mte_(Fld_lnki_page_id, lnki_page_id)))
 			.OrderBy_many_(Fld_lnki_page_id, Fld_lnki_id)
 			.Limit_(select_interval)
 			;

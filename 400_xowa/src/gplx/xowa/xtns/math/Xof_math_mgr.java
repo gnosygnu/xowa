@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.math; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.apps.fsys.*;
+import gplx.core.strings.*; import gplx.xowa.apps.fsys.*;
 public class Xof_math_mgr implements GfoInvkAble {
 	public Xof_math_mgr(Xoa_app app) {this.app = app; html_wtr = new Xof_math_html_wtr();} private Xoa_app app;
 	public ProcessAdp Cmd_convert_tex_to_dvi() {return cmd_convert_tex_to_dvi;} private ProcessAdp cmd_convert_tex_to_dvi = new ProcessAdp();

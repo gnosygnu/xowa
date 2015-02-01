@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.fsdb; import gplx.*;
-import gplx.dbs.*; import gplx.cache.*;
+import gplx.core.primitives.*; import gplx.cache.*;
+import gplx.dbs.*; import gplx.dbs.engines.sqlite.*;
 public class Fsdb_db_atr_fil implements RlsAble {
 	private Gfo_cache_mgr_bry dir_cache = new Gfo_cache_mgr_bry();		
 	private Fsdb_dir_tbl tbl_dir; private Fsdb_fil_tbl tbl_fil; private Fsdb_xtn_thm_tbl tbl_thm;

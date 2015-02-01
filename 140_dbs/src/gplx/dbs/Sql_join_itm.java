@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
+import gplx.core.strings.*;
 public class Sql_join_itm {
 	public String SrcTbl() {return srcTbl;} public Sql_join_itm SrcTbl_(String v) {srcTbl = v; return this;} private String srcTbl;
 	public String SrcFld() {return srcFld;} public Sql_join_itm SrcFld_(String v) {srcFld = v; return this;} private String srcFld;
@@ -35,7 +36,6 @@ public class Sql_join_itm {
 class Sql_from {
 	public ListAdp Tbls() {return tbls;} ListAdp tbls = ListAdp_.new_();
 	public Sql_tbl_src BaseTable() {return (Sql_tbl_src)tbls.FetchAt(0);}
-
 	public static Sql_from new_(Sql_tbl_src baseTable) {
 		Sql_from rv = new Sql_from();
 		rv.tbls.Add(baseTable);
@@ -57,11 +57,11 @@ class Sql_join_itmType {
 	public String Name() {return name;} private String name;
 	Sql_join_itmType(int v, String name) {this.val = v; this.name = name;}
 	public static final Sql_join_itmType
-		    From	= new Sql_join_itmType(0, "FROM")
-		,	Inner	= new Sql_join_itmType(1, "INNER JOIN")
-		,	Left	= new Sql_join_itmType(2, "LEFT JOIN")
-		,	Right	= new Sql_join_itmType(3, "RIGHT JOIN")
-		,	Outer	= new Sql_join_itmType(4, "OUTER JOIN")
-		,	Cross	= new Sql_join_itmType(5, "CROSS JOIN")
-		;
+	  From	= new Sql_join_itmType(0, "FROM")
+	, Inner	= new Sql_join_itmType(1, "INNER JOIN")
+	, Left	= new Sql_join_itmType(2, "LEFT JOIN")
+	, Right	= new Sql_join_itmType(3, "RIGHT JOIN")
+	, Outer	= new Sql_join_itmType(4, "OUTER JOIN")
+	, Cross	= new Sql_join_itmType(5, "CROSS JOIN")
+	;
 }

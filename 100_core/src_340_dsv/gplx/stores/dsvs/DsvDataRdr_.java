@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.stores.dsvs; import gplx.*; import gplx.stores.*;
+import gplx.core.strings.*;
 import gplx.texts.*; /*CharStream*/
 public class DsvDataRdr_ {
 	public static DataRdr dsv_(String text)										{return DsvParser.dsv_().ParseAsRdr(text);}

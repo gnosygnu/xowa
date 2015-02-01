@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.ios; import gplx.*;
+import gplx.core.strings.*;
 public class IoEngine_xrg_recycleFil extends IoEngine_xrg_fil_affects1_base {
 	public IoEngine_xrg_recycleFil MissingFails_off() {return MissingFails_(false);} public IoEngine_xrg_recycleFil MissingFails_(boolean v) {MissingFails_set(v); return this;}
 

@@ -62,3 +62,20 @@ public class Fsdb_db_atr_tbl {
 	);	
 	private static Db_stmt_bldr stmt_bldr = new Db_stmt_bldr(Tbl_name, String_.Ary(Fld_uid), Fld_url, Fld_path_bgn);
 }
+//	class tmptbl {
+//		private String Tbl_name = "file_url_atr";
+//		private String Fld_wiki_id
+//		, Fld_uid, Fld_url, Fld_path_bgn
+//		;
+//		private Db_meta_tbl meta;
+//		private Db_meta_fld_list Flds = Db_meta_fld_list.new_();
+//		private void Conn_() {
+//			Fld_wiki_id			= Flds.Add_int("wiki_id");
+//			Fld_uid				= Flds.Add_int("uid");
+//			Fld_url				= Flds.Add_str("url", 255);
+//			Fld_path_bgn		= Flds.Add_str("path_bgn", 255);
+//			meta = Db_meta_tbl.new_(Tbl_name, Flds
+//			, Db_meta_idx.new_unique(Tbl_name, "pkey", Fld_wiki_id, Fld_uid)
+//			);
+//		}
+//	}

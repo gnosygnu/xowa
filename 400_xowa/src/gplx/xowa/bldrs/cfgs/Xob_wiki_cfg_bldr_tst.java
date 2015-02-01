@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import org.junit.*;
+import org.junit.*; import gplx.core.strings.*;
 public class Xob_wiki_cfg_bldr_tst {
 	Xob_wiki_cfg_bldr_fxt fxt = new Xob_wiki_cfg_bldr_fxt();
 	@Before public void init() {fxt.Clear();}

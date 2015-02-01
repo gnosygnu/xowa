@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
+import gplx.core.strings.*;
 class GfsCoreHelp implements GfoInvkAble {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		String path = m.ReadStrOr("path", "");

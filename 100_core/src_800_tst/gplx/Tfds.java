@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
+import gplx.core.strings.*;
 public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	public static boolean SkipDb = false;
 	public static void Eq(Object expd, Object actl)											{Eq_wkr(expd, actl, true, EmptyStr);}

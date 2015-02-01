@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.intl; import gplx.*;
+import gplx.core.primitives.*;
 public class Utf16_ {		
 	public static int Surrogate_merge(int hi, int lo) { // REF: http://perldoc.perl.org/Encode/Unicode.html
 		return 0x10000 + (hi - 0xD800) * 0x400 + (lo - 0xDC00);

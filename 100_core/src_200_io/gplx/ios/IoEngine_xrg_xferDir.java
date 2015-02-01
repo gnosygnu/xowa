@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.ios; import gplx.*;
-import gplx.criterias.*;
+import gplx.core.criterias.*;
 public class IoEngine_xrg_xferDir {
 	public boolean Type_move() {return move;} public boolean Type_copy() {return !move;} private boolean move = false;
 	public Io_url Src() {return src;} public IoEngine_xrg_xferDir Src_(Io_url val) {src = val; return this;} Io_url src;

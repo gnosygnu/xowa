@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.primitives.*;
 import gplx.ios.*; import gplx.xowa.files.*;
 public class Xof_xfer_queue_html_fxt extends Xof_xfer_queue_base_fxt {
 	@Override public void Clear(boolean src_repo_is_wmf) {

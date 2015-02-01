@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files.fsdb; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.fsdb.*; import gplx.xowa.files.wiki_orig.*; import gplx.xowa.files.qrys.*; import gplx.xowa.files.bins.*;
 import gplx.xowa.files.fsdb.caches.*;
+import gplx.xowa2.files.orig_regy.*;
 public class Xof_fsdb_mgr_mem implements Xof_fsdb_mgr, Xof_bin_wkr {
 	private Hash_adp_bry bin_hash = Hash_adp_bry.cs_(); private Bry_bfr bin_key_bfr = Bry_bfr.new_();
 	private Hash_adp_bry reg_hash = Hash_adp_bry.cs_();		
@@ -28,7 +29,6 @@ public class Xof_fsdb_mgr_mem implements Xof_fsdb_mgr, Xof_bin_wkr {
 	public Xof_bin_wkr Bin_wkr_fsdb() {return this;}
 	public boolean Bin_wkr_resize() {return bin_wkr_resize;} public void Bin_wkr_resize_(boolean v) {bin_wkr_resize = v;} private boolean bin_wkr_resize = false;
 	public void Db_bin_max_(long v) {}
-	public Gfo_usr_dlg Usr_dlg() {return usr_dlg;} Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Null;
 	private Io_url fs_dir;
 	private Xof_url_bldr url_bldr = new Xof_url_bldr();
 	public Cache_mgr Cache_mgr() {return cache_mgr;} private Cache_mgr cache_mgr = new Cache_mgr(null);
@@ -36,7 +36,7 @@ public class Xof_fsdb_mgr_mem implements Xof_fsdb_mgr, Xof_bin_wkr {
 	public Fsdb_mnt_mgr Mnt_mgr() {throw Err_.not_implemented_();}
 	public boolean Init_by_wiki(Xow_wiki wiki) {throw Err_.not_implemented_();}
 	public boolean Init_by_wiki__add_bin_wkrs(Xow_wiki wiki) {throw Err_.not_implemented_();}
-	public void Reg_select_only(Xoa_page page, byte exec_tid, ListAdp itms, OrderedHash hash) {throw Err_.not_implemented_();}
+	public void Orig_select_by_list(Xoa_page page, byte exec_tid, ListAdp itms, OrderedHash hash) {throw Err_.not_implemented_();}
 	public void Init_by_wiki(Xow_wiki wiki, Io_url db_dir, Io_url fs_dir, Xow_repo_mgr repo_mgr) {
 		this.fs_dir = fs_dir;
 		this.wiki = wiki;
@@ -64,13 +64,13 @@ public class Xof_fsdb_mgr_mem implements Xof_fsdb_mgr, Xof_bin_wkr {
 		itm.Init(key, dir, fil, img_w, img_h, bin);
 		bin_hash.Add(key, itm);
 	}
-	public void Reg_insert(Xof_fsdb_itm fsdb_itm, byte repo_id, byte status) {
+	public void Orig_insert(Xof_fsdb_itm fsdb_itm, byte repo_id, byte status) {
 		byte[] fsdb_itm_ttl = fsdb_itm.Orig_ttl();
 		if (reg_hash.Has(fsdb_itm_ttl)) return;
 		Xof_orig_regy_itm regy_itm = new Xof_orig_regy_itm(fsdb_itm_ttl, status, repo_id, fsdb_itm.Orig_w(), fsdb_itm.Orig_h(), fsdb_itm.Lnki_ext().Id(), fsdb_itm.Orig_redirect());
 		reg_hash.Add(fsdb_itm_ttl, regy_itm);
 	}
-	public void Reg_select(Xoa_page page, byte exec_tid, ListAdp itms) {
+	public void Fsdb_search_by_list(Xoa_page page, byte exec_tid, ListAdp itms) {
 		int itms_len = itms.Count();
 		for (int i = 0; i < itms_len; i++) {
 			Xof_fsdb_itm itm = (Xof_fsdb_itm)itms.FetchAt(i);
@@ -92,7 +92,7 @@ public class Xof_fsdb_mgr_mem implements Xof_fsdb_mgr, Xof_bin_wkr {
 		}
 		Xof_fsdb_mgr_._.Fsdb_search(this, fs_dir, page, exec_tid, itms, bin_mgr.Repo_mgr(), url_bldr);
 	}
-	public boolean Reg_select_itm_exists(byte[] ttl) {return reg_hash.Has(ttl);}
+	public boolean Orig_exists_by_ttl(byte[] ttl) {return reg_hash.Has(ttl);}
 	public byte Bin_wkr_tid() {return Xof_bin_wkr_.Tid_fsdb_wiki;}
 	public gplx.ios.Io_stream_rdr Bin_wkr_get_as_rdr(ListAdp temp_files, Xof_fsdb_itm itm, boolean is_thumb, int w) {
 		byte[] wiki = itm.Orig_wiki();

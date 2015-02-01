@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.ios; import gplx.*;
-import gplx.criterias.*;
+import gplx.core.criterias.*;
 public interface IoEngine {
 	String		Key();
 	boolean		ExistsFil_api(Io_url url);

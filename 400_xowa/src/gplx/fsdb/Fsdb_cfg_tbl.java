@@ -96,7 +96,7 @@ class Fsdb_cfg_tbl_sql extends Fsdb_cfg_tbl_base implements Fsdb_cfg_tbl {
 		.Exec_update();
 	}
 	private Db_stmt Select_stmt() {
-		Db_qry_select qry = Db_qry_.select_val_(Tbl_name, Fld_cfg_val, gplx.criterias.Criteria_.And_many(Db_crt_.eq_(Fld_cfg_grp, ""), Db_crt_.eq_(Fld_cfg_key, "")));
+		Db_qry_select qry = Db_qry_.select_val_(Tbl_name, Fld_cfg_val, gplx.core.criterias.Criteria_.And_many(Db_crt_.eq_(Fld_cfg_grp, ""), Db_crt_.eq_(Fld_cfg_key, "")));
 		return conn.New_stmt(qry);
 	}
 	@Override public int Select_as_int_or(String grp, String key, int or) {return Int_.parse_or_(Select_as_str_or(grp, key, null), or);}
@@ -110,7 +110,7 @@ class Fsdb_cfg_tbl_sql extends Fsdb_cfg_tbl_base implements Fsdb_cfg_tbl {
 	}
 	public Fsdb_cfg_grp Select_as_grp(String grp) {
 		Fsdb_cfg_grp rv = null;
-		Db_qry_select qry = Db_qry_.select_cols_(Tbl_name, gplx.criterias.Criteria_.And_many(Db_crt_.eq_(Fld_cfg_grp, "")), Fld_cfg_key, Fld_cfg_val);
+		Db_qry_select qry = Db_qry_.select_cols_(Tbl_name, gplx.core.criterias.Criteria_.And_many(Db_crt_.eq_(Fld_cfg_grp, "")), Fld_cfg_key, Fld_cfg_val);
 		DataRdr rdr = DataRdr_.Null;
 		try {
 			rdr = conn.New_stmt(qry).Clear().Val_str(grp).Exec_select();

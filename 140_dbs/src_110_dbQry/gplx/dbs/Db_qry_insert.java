@@ -21,10 +21,12 @@ public class Db_qry_insert implements Db_qry_arg_owner {
 	public Db_qry_insert(String base_table) {this.base_table = base_table;}
 	public int			Tid()					{return Db_qry_.Tid_insert;}
 	public boolean			Exec_is_rdr()			{return false;}
-	public String		Base_table()			{return base_table;} private String base_table;
 	public String		Xto_sql()				{return Sql_qry_wtr_.I.Xto_str(this, false);}		
 	public int			Exec_qry(Db_conn conn)	{return conn.Exec_qry(this);}
+	public String		Base_table()			{return base_table;} private String base_table;
+	public String[]		Cols_for_insert() {return cols_for_insert;} private String[] cols_for_insert;
 	public Db_qry_arg_owner From_(String tbl) {base_table = tbl; return this;}
+	public KeyValHash	Args() {return args;} private final KeyValHash args = KeyValHash.new_();
 	public Db_qry_arg_owner Arg_(String k, DecimalAdp v)	{return Arg_obj_type_(k, v.Xto_decimal(), Db_val_type.Tid_decimal);}
 	public Db_qry_arg_owner Arg_(String k, DateAdp v)		{return Arg_obj_type_(k, v, Db_val_type.Tid_date);}
 	public Db_qry_arg_owner Arg_byte_(String k, byte v)		{return Arg_obj_type_(k, v, Db_val_type.Tid_byte);}
@@ -49,10 +51,8 @@ public class Db_qry_insert implements Db_qry_arg_owner {
 			cols.Add(Sql_select_fld_fld.new_(Sql_select_fld_base.Tbl_null, fld, fld));
 		return this;
 	}
-	public KeyValHash Args() {return args;} private final KeyValHash args = KeyValHash.new_();
 	@gplx.Internal protected Sql_select_fld_list Cols() {return cols;} private Sql_select_fld_list cols;
 
-	public String[] Cols_for_insert() {return cols_for_insert;} private String[] cols_for_insert;
 	public static Db_qry_insert new_() {return new Db_qry_insert();} Db_qry_insert() {}
 	public static Db_qry_insert new_(String tbl, String... keys) {
 		Db_qry_insert rv = Db_qry_insert.new_();

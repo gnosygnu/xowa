@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfml; import gplx.*;
-import gplx.criterias.*;
+import gplx.core.strings.*; import gplx.core.criterias.*;
 public class SqlDoc {
 	public static GfmlDoc XtoDoc(String raw) {
 		GfmlBldr bldr = GfmlBldr_.new_();

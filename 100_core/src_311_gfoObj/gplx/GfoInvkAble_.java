@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
+import gplx.core.primitives.*;
 public class GfoInvkAble_ {
 	public static GfoInvkAble as_(Object obj) {return obj instanceof GfoInvkAble ? (GfoInvkAble)obj : null;}
 	public static GfoInvkAble cast_(Object obj) {try {return (GfoInvkAble)obj;} catch(Exception exc) {throw Err_.type_mismatch_exc_(exc, GfoInvkAble.class, obj);}}

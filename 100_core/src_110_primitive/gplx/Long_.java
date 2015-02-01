@@ -17,11 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public class Long_ {
-	public static final Class<?> Cls_ref_type = Long.class; 
-	public static final long MinValue = Long.MIN_VALUE;		
-	public static final long MaxValue = Long.MAX_VALUE;		
 	public static final String Cls_val_name = "long";
-	public static final long Neg1 = -1;
+	public static final Class<?> Cls_ref_type = Long.class; 
+	public static final long
+	  MinValue	= Long.MIN_VALUE		
+	, MaxValue	= Long.MAX_VALUE		
+	;
 	public static final int Log10Ary_len = 21;
 	public static long[] Log10Ary = new long[] 
   			{ 1, 10, 100, 1000, 10000
@@ -30,6 +31,13 @@ public class Long_ {
   			, Long_.Pow(10, 15), Long_.Pow(10, 16), Long_.Pow(10, 17), Long_.Pow(10, 18), Long_.Pow(10, 19)
   			, Long_.MaxValue
   			};
+	public static long parse_(String raw)			{try {return Long.parseLong(raw);} catch(Exception e) {throw Err_.parse_type_exc_(e, long.class, raw);}} 
+	public static long cast_(Object obj) {try {return (Long)obj;} catch(Exception e) {throw Err_.type_mismatch_exc_(e, long.class, obj);}}
+	public static long coerce_(Object v) {
+		try {String s = String_.as_(v); return s == null ? Long_.cast_(v) : Long_.parse_(s);}
+		catch (Exception e) {throw Err_.cast_(e, long.class, v);}
+	}
+	public static long Xby_int(int v) {return (long)v;}
 	public static String Xto_str(long v) {return Long.toString(v);}	
 	public static String Xto_str_PadBgn(long v, int reqdPlaces) {return String_.Pad(Xto_str(v), reqdPlaces, "0", true);}	// ex: 1, 3 returns 001
 	public static long parse_or_(String raw, long or) {
@@ -51,12 +59,6 @@ public class Long_ {
 		if		(lhs == rhs) 	return CompareAble_.Same;
 		else if (lhs < rhs)		return CompareAble_.Less;
 		else 					return CompareAble_.More;
-	}
-	public static long parse_(String raw)			{try {return Long.parseLong(raw);} catch(Exception e) {throw Err_.parse_type_exc_(e, long.class, raw);}} 
-	public static long cast_(Object obj) {try {return (Long)obj;} catch(Exception e) {throw Err_.type_mismatch_exc_(e, long.class, obj);}}
-	public static long coerce_(Object v) {
-		try {String s = String_.as_(v); return s == null ? Long_.cast_(v) : Long_.parse_(s);}
-		catch (Exception e) {throw Err_.cast_(e, long.class, v);}
 	}
  		public static int FindIdx(long[] ary, long find_val) {
 		int ary_len = ary.length;
@@ -103,9 +105,8 @@ public class Long_ {
 	public static long Int_merge(int hi, int lo)	{return (long)hi << 32 | (lo & 0xFFFFFFFFL);}
 	public static int  Int_split_lo(long v)			{return (int)(v);}
 	public static int  Int_split_hi(long v)			{return (int)(v >> 32);}
-	public static long Xby_int(int v) {return (long)v;}
 }
-/* alternate for Int_merge does not work in java
+/* alternate for Int_merge; does not work in java
 		public static long MergeInts(int lo, int hi)	{return (uint)(hi << 32) | (lo & 0xffffffff);}
 		public static int  SplitLo(long v)				{return (int)(((ulong)v & 0x00000000ffffffff));}
 		public static int  SplitHi(long v)				{return (int)(((ulong)v & 0xffffffff00000000)) >> 32;}

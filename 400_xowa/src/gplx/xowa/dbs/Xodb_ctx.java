@@ -18,4 +18,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.dbs; import gplx.*; import gplx.xowa.*;
 public class Xodb_ctx {
 	public boolean Html_db_enabled() {return html_db_enabled;} public void Html_db_enabled_(boolean v) {html_db_enabled = v;} private boolean html_db_enabled;
+        public static final Xodb_ctx Null = null;
 }

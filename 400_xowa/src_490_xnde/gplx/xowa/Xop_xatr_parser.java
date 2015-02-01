@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.primitives.*;
 public class Xop_xatr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATTRIBS_REGEX
 	private ListAdp xatrs = ListAdp_.new_();
 	private static final byte Mode_atr_bgn = 1, Mode_invalid = 2, Mode_key = 3, Mode_eq = 4, Mode_val_bgn = 5, Mode_val_quote = 6, Mode_val_raw = 7;
@@ -89,8 +90,10 @@ public class Xop_xatr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_AT
 					}
 					else
 						break;
-				}					
+				}
 				else {
+					if (mode == Mode_val_bgn)		// NOTE: handle dangling "k=" else will be "k"; EX: <a b=> x> <a b>; PAGE:en.s:Notes_by_the_Way/Chapter_2; DATE:2015-01-31
+						valid = false;
 					if (atr_bgn != -1) {			// atr_bgn will be -1 if atrs ends on quoted (EX:"a='b'"); else, pending atr that needs to be processed; EX: "a=b" b wil be in bfr
 						val_end = end;
 						Make(log_mgr, src, end);

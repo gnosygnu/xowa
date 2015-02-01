@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.primitives.*;
 public class Xoft_rule_grp implements GfoInvkAble {
 	public Xoft_rule_grp(Xoft_rule_mgr owner, byte[] key) {this.owner = owner; this.key = key;}
 	public Xoft_rule_mgr Owner() {return owner;} private Xoft_rule_mgr owner;

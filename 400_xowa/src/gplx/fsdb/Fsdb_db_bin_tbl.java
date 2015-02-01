@@ -61,5 +61,30 @@ public class Fsdb_db_bin_tbl {
 	,	", bin_max               bigint              NOT NULL"
 	,	");"
 	);	
+//		public void Conn_(boolean version_is_1) {
+//			this.version_is_1 = version_is_1;
+//			if (version_is_1) {
+//				where_cols = String_.Ary(Fld_ns_id);
+//			}
+//			else {
+//				where_cols = String_.Ary(Fld_wiki_id, Fld_ns_id);
+//				Tbl_name			= "wiki_ns_regy";
+//				Fld_wiki_id			= Flds.Add_int("wiki_id");
+//			}
+//			Fld_ns_id				= Flds.Add_int("ns_id");
+//			Fld_ns_name				= Flds.Add_str("ns_name", 255);
+//			Fld_ns_case				= Flds.Add_byte("ns_case");
+//			Fld_ns_is_alias			= Flds.Add_bool("ns_is_alias");
+//			Fld_ns_count			= Flds.Add_int("ns_count");
+//		}
 	private static Db_stmt_bldr stmt_bldr = new Db_stmt_bldr(Tbl_name, String_.Ary(Fld_uid), Fld_url, Fld_bin_len, Fld_bin_max);
+//		private String tbl_name = "file_fsdb_bin";
+//		private static final Db_meta_fld_list Flds = Db_meta_fld_list.new_();
+//		private static final String
+//		  Fld_wiki_id			= Flds.Add_int("wiki_id")
+//		, Fld_uid				= Flds.Add_int("uid")
+//		, Fld_url				= Flds.Add_str("url", 255)
+//		, Fld_bin_len			= Flds.Add_long("bin_len")
+//		, Fld_bin_max			= Flds.Add_long("bin_max")
+//		;
 }

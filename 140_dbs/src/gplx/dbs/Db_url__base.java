@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
+import gplx.core.strings.*;
 public abstract class Db_url__base implements Db_url {
 	public abstract String Tid();
 	public String Xto_raw() {return raw;} private String raw = "";

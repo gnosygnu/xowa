@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.primitives.*;
 public class ByteAry_fil {
 	public ListAdp Itms() {return itms;} ListAdp itms = ListAdp_.new_();
 	public Io_url Fil() {return fil;} Io_url fil;

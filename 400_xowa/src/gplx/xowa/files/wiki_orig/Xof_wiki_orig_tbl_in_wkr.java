@@ -16,7 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.wiki_orig; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
+import gplx.core.primitives.*;
 import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.files.fsdb.*;
+import gplx.xowa2.files.orig_regy.*;
 class Xof_wiki_orig_tbl_in_wkr extends gplx.xowa.dbs.tbls.Xodb_in_wkr_base {
 	private ListAdp itms_all;
 	@Override public int Interval() {return Sqlite_engine_.Stmt_arg_max;}

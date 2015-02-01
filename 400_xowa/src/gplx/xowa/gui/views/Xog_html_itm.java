@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
-import gplx.core.btries.*; import gplx.gfui.*; import gplx.html.*; import gplx.xowa.gui.menus.*; import gplx.xowa.gui.menus.dom.*; import gplx.xowa.html.modules.*; import gplx.xowa.pages.*;
+import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.gfui.*; import gplx.html.*; import gplx.xowa.gui.menus.*; import gplx.xowa.gui.menus.dom.*; import gplx.xowa.html.modules.*; import gplx.xowa.pages.*;
 public class Xog_html_itm implements GfoInvkAble, GfoEvObj {
 	private Xoa_app app;
 	public Xog_html_itm(Xog_tab_itm owner_tab) {

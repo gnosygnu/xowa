@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
+import gplx.core.primitives.*;
 class Xog_search_suggest_cmd implements GfoInvkAble, Cancelable {
 	public Xog_search_suggest_cmd(Xoa_app app, Xog_search_suggest_mgr mgr) {
 		this.app = app; this.mgr = mgr;

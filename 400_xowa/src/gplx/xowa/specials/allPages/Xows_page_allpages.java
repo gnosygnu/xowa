@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.allPages; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.xowa.html.*; import gplx.xowa.html.lnkis.*;
+import gplx.core.primitives.*; import gplx.xowa.html.*; import gplx.xowa.html.lnkis.*;
 import gplx.xowa.wikis.*;
 public class Xows_page_allpages implements GfoInvkAble, Bry_fmtr_arg, Xows_page {
 	public Xows_page_allpages(Xow_wiki wiki) {

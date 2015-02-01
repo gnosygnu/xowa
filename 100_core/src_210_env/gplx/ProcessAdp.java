@@ -24,6 +24,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import javax.management.RuntimeErrorException;
+import gplx.core.strings.*;
 public class ProcessAdp implements GfoInvkAble, RlsAble {
 	public boolean Enabled() {return enabled;} public ProcessAdp Enabled_(boolean v) {enabled = v; return this;} private boolean enabled = true;
 	public byte Exe_exists() {return exe_exists;} public ProcessAdp Exe_exists_(byte v) {exe_exists = v; return this;} private byte exe_exists = Bool_.__byte;

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+import gplx.core.primitives.*;
 import gplx.json.*; import gplx.xowa.wikis.*; import gplx.xowa.html.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.apis.xowa.xtns.*; import gplx.xowa.apis.xowa.html.*; import gplx.xowa.users.*;
 import gplx.xowa.xtns.wdatas.parsers.*; import gplx.xowa.xtns.wdatas.pfuncs.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.hwtrs.*;
 public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {

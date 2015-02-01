@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.primitives.*;
 public class Xop_xnde_tag_lang {
 	public Xop_xnde_tag_lang(int lang_code_int, String name_str) {
 		lang_code = Int_obj_ref.new_(lang_code_int);

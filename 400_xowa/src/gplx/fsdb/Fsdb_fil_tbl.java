@@ -71,7 +71,7 @@ public class Fsdb_fil_tbl {
 	private Db_stmt Select_by_name_stmt() {
 		Db_qry qry = Sqlite_engine_.Supports_indexed_by
 			? (Db_qry)Db_qry_sql.rdr_("SELECT * FROM fsdb_fil INDEXED BY fsdb_fil__owner WHERE fil_owner_id = ? AND fil_name = ?;") 
-			: Db_qry_.select_().From_(Tbl_name).Cols_all_().Where_(gplx.criterias.Criteria_.And_many(Db_crt_.eq_(Fld_fil_owner_id, Int_.MinValue), Db_crt_.eq_(Fld_fil_name, "")))
+			: Db_qry_.select_().From_(Tbl_name).Cols_all_().Where_(gplx.core.criterias.Criteria_.And_many(Db_crt_.eq_(Fld_fil_owner_id, Int_.MinValue), Db_crt_.eq_(Fld_fil_name, "")))
 			;
 		return conn.New_stmt(qry);
 	}
@@ -132,3 +132,27 @@ public class Fsdb_fil_tbl {
 	  Idx_owner = Db_idx_itm.sql_	("CREATE INDEX IF NOT EXISTS fsdb_fil__owner      ON fsdb_fil (fil_owner_id, fil_name, fil_id);")
 	;
 }
+//	class tmptbl {
+//		private String Tbl_name = "file_fsdb_fil";
+//		private String Fld_wiki_id, Fld_fil_id, Fld_fil_owner_id, Fld_fil_name, Fld_fil_xtn_id, Fld_fil_ext_id
+//		, Fld_fil_size, Fld_fil_modified, Fld_fil_hash, Fld_fil_bin_db_id
+//		;
+//		private Db_meta_tbl meta;
+//		private Db_meta_fld_list Flds = Db_meta_fld_list.new_();
+//		private void Conn_() {
+//			Fld_wiki_id				= Flds.Add_int("wiki_id");
+//			Fld_fil_id				= Flds.Add_int("fil_id");
+//			Fld_fil_owner_id		= Flds.Add_int("fil_owner_id");
+//			Fld_fil_xtn_id			= Flds.Add_int("fil_xtn_id");
+//			Fld_fil_ext_id			= Flds.Add_int("fil_ext_id");
+//			Fld_fil_bin_db_id		= Flds.Add_int("fil_bin_db_id");		// group ints at beginning of table
+//			Fld_fil_name			= Flds.Add_str("fil_name", 255);
+//			Fld_fil_size			= Flds.Add_long("fil_size");
+//			Fld_fil_modified		= Flds.Add_str("fil_modified", 14);		// stored as yyyyMMddHHmmss
+//			Fld_fil_hash			= Flds.Add_str("fil_hash", 40);
+//			meta = Db_meta_tbl.new_(Tbl_name, Flds
+//			, Db_meta_idx.new_unique(Tbl_name, "pkey", Fld_wiki_id, Fld_fil_id)
+//			, Db_meta_idx.new_unique(Tbl_name, "fil_owner", Fld_wiki_id, Fld_fil_owner_id, Fld_fil_name, Fld_fil_id)
+//			);
+//		}
+//	}

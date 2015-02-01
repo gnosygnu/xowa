@@ -36,7 +36,7 @@ public class Db_sqlbldr_tst {
 		flds.Add_str("fld_str", 123);
 		flds.Add_text("fld_text");
 		flds.Add_bry("fld_bry");
-		fxt.Test_create_tbl(Db_meta_tbl.new_("tbl_name", flds.Xto_fld_ary())
+		fxt.Test_create_tbl(Db_meta_tbl.new_("tbl_name", flds.To_fld_ary())
 		, String_.Concat_lines_nl_skip_last
 		( "CREATE TABLE tbl_name"
 		, "( fld_int_pkey int NOT NULL PRIMARY KEY"

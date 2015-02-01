@@ -65,3 +65,20 @@ public class Fsdb_mnt_tbl {
 	,	");"
 	);
 }
+//	class tmptbl {
+//		private String Tbl_name = "file_url_mnt";
+//		private String Fld_wiki_id
+//		, Fld_id, Fld_name, Fld_url
+//		;
+//		private Db_meta_tbl meta;
+//		private Db_meta_fld_list Flds = Db_meta_fld_list.new_();
+//		private void Conn_() {
+//			Fld_wiki_id			= Flds.Add_int("wiki_id");
+//			Fld_id				= Flds.Add_int("id");
+//			Fld_name			= Flds.Add_str("name", 255);
+//			Fld_url				= Flds.Add_str("url", 255);
+//			meta = Db_meta_tbl.new_(Tbl_name, Flds
+//			, Db_meta_idx.new_unique(Tbl_name, "pkey", Fld_wiki_id, Fld_id)
+//			);
+//		}
+//	}

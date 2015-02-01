@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.dbs.*;
-import gplx.dbs.*; import gplx.criterias.*; 
+import gplx.core.primitives.*; import gplx.dbs.*; import gplx.core.criterias.*; 
 public class Xodb_page_tbl {
 	public static final String Tbl_name = "page"
 	, Fld_page_id = "page_id", Fld_page_ns = "page_namespace", Fld_page_title = "page_title"
@@ -226,7 +226,7 @@ public class Xodb_page_tbl {
 	}
 	public void Select_by_search(Cancelable cancelable, ListAdp rv, byte[] search, int results_max) {
 		if (Bry_.Len_eq_0(search)) return;	// do not allow empty search
-		Criteria crt = gplx.criterias.Criteria_.And_many(Db_crt_.eq_(Fld_page_ns, Xow_ns_.Id_main), Db_crt_.like_(Fld_page_title, ""));
+		Criteria crt = gplx.core.criterias.Criteria_.And_many(Db_crt_.eq_(Fld_page_ns, Xow_ns_.Id_main), Db_crt_.like_(Fld_page_title, ""));
 		Db_qry_select qry = Db_qry_.select_().From_(Tbl_name).Cols_(Fld_page_id, Fld_page_len, Fld_page_ns, Fld_page_title).Where_(crt);	// NOTE: use fields from main index only
 		DataRdr rdr = DataRdr_.Null; 
 		Db_stmt stmt = Db_stmt_.Null;
@@ -252,9 +252,9 @@ public class Xodb_page_tbl {
 		return Bry_.Increment_last(rv, increment_pos);
 	}
 	public Db_stmt Select_for_parse_all_stmt(Db_conn p, int limit, byte redirect) {
-		Criteria crt = gplx.criterias.Criteria_.And_many(Db_crt_.eq_(Fld_page_ns, -1), Db_crt_.mt_(Fld_page_title, ""));
+		Criteria crt = gplx.core.criterias.Criteria_.And_many(Db_crt_.eq_(Fld_page_ns, -1), Db_crt_.mt_(Fld_page_title, ""));
 		if (redirect != Bool_.__byte)
-			crt = gplx.criterias.Criteria_.And(crt, Db_crt_.eq_(Fld_page_is_redirect, redirect));
+			crt = gplx.core.criterias.Criteria_.And(crt, Db_crt_.eq_(Fld_page_is_redirect, redirect));
 		Db_qry_select qry = Db_qry_.select_().From_(Tbl_name).Cols_(html_db_enabled ? Flds_select_all__html_y : Flds_select_all__html_n)
 			.Where_(crt)
 			.Limit_(limit);

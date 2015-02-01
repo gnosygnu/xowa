@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 import java.lang.*;
-import gplx.ios.*;
+import gplx.core.primitives.*; import gplx.ios.*;
 public class Bry_ {
 	public static final String Cls_val_name = "byte[]";
 	public static final int NotFound = -1;
@@ -493,6 +493,8 @@ public class Bry_ {
 	public static boolean Match(byte[] src, int src_bgn, byte[] find) {return Match(src, src_bgn, src.length, find, 0, find.length);}
 	public static boolean Match(byte[] src, int src_bgn, int src_end, byte[] find) {return Match(src, src_bgn, src_end, find, 0, find.length);}
 	public static boolean Match(byte[] src, int src_bgn, int src_end, byte[] find, int find_bgn, int find_end) {
+		int src_len = src.length;
+		if (src_end > src_len) src_end = src_len;			// must limit src_end to src_len, else ArrayIndexOutOfBounds below; DATE:2015-01-31
 		int find_len = find_end - find_bgn;
 		if (find_len != src_end - src_bgn) return false;
 		if (find_len == 0) return src_end - src_bgn == 0; // "" only matches ""
@@ -705,8 +707,8 @@ public class Bry_ {
 	}
 	public static float XtoFloatByPos(byte[] ary, int bgn, int end) {return Float_.parse_(String_.new_utf8_(ary, bgn, end));}
 	public static double Xto_double(byte[] bry) {return Double_.parse_(String_.new_utf8_(bry, 0, bry.length));}
-	public static double Xto_double_or(byte[] bry, double or) {return Double_.parseOr_(String_.new_utf8_(bry, 0, bry.length), or);}
-	public static double XtoDoubleByPosOr(byte[] ary, int bgn, int end, double or) {return Double_.parseOr_(String_.new_utf8_(ary, bgn, end), or);}
+	public static double Xto_double_or(byte[] bry, double or) {return Double_.parse_or(String_.new_utf8_(bry, 0, bry.length), or);}
+	public static double XtoDoubleByPosOr(byte[] ary, int bgn, int end, double or) {return Double_.parse_or(String_.new_utf8_(ary, bgn, end), or);}
 	public static double XtoDoubleByPos(byte[] ary, int bgn, int end) {return Double_.parse_(String_.new_utf8_(ary, bgn, end));}
 	public static DecimalAdp XtoDecimalByPos(byte[] ary, int bgn, int end) {return DecimalAdp_.parse_(String_.new_utf8_(ary, bgn, end));}
 	public static final byte Dlm_fld = (byte)'|', Dlm_row = (byte)'\n', Dlm_quote = (byte)'"', Dlm_null = 0, Ascii_zero = 48;

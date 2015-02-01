@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.lib; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
+import gplx.core.primitives.*;
 import gplx.xowa.langs.*;
 public class Scrib_lib_mw implements Scrib_lib {
 	private Scrib_core core; private Scrib_fsys_mgr fsys_mgr;

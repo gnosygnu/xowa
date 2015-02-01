@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.servers.tcp; import gplx.*; import gplx.xowa.*; import gplx.xowa.servers.*;
+import gplx.core.primitives.*;
 import gplx.ios.*; import gplx.texts.*;
 public class Xosrv_msg_rdr {
 	public Xosrv_msg_rdr(byte[] default_body_bry, IoStream rdr) {this.default_body_bry = default_body_bry; default_body_bry_len = default_body_bry.length; this.rdr = rdr;} private byte[] header_bry = new byte[24], default_body_bry; int default_body_bry_len;

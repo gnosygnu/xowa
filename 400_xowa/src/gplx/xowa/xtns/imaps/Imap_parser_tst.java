@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*;
+import org.junit.*; import gplx.core.primitives.*;
 public class Imap_parser_tst {		
 	@Before public void init() {fxt.Reset();} private Imap_parser_fxt fxt = new Imap_parser_fxt();
 	@Test  public void Rect_pass()				{fxt.Test_shape("rect 1 2 3 4 [[A]]"								, fxt.itm_rect_("[[A]]", 1, 2, 3, 4));}

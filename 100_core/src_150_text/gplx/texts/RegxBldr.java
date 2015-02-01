@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.texts; import gplx.*;
+import gplx.core.strings.*;
 public class RegxBldr {
 	public static String Includes(String characters) {return String_.Concat_any(RegxBldr.Tkn_CharSetBegin, characters, RegxBldr.Tkn_CharSetEnd);}
 	public static String Excludes(String characters) {return String_.Concat_any(RegxBldr.Tkn_CharSetBegin, RegxBldr.Tkn_Not, characters, RegxBldr.Tkn_CharSetEnd);}

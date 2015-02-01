@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
+import gplx.core.strings.*;
 public class EnmMgr {
 	public String BitRngSpr() {return bitRngSpr;} public EnmMgr BitRngSpr_(String val) {bitRngSpr = val; return this;} private String bitRngSpr = "+";
 	public String Prefix() {return prefix;} public EnmMgr Prefix_(String val) {prefix = val; return this;} private String prefix;

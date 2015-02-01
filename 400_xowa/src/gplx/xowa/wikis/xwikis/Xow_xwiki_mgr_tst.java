@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import org.junit.*; import gplx.xowa.wikis.*; import gplx.xowa.langs.*;
+import org.junit.*; import gplx.core.strings.*; import gplx.xowa.wikis.*; import gplx.xowa.langs.*;
 public class Xow_xwiki_mgr_tst {		
 	@Before public void init() {fxt.Clear();} private Xow_xwiki_mgr_fxt fxt = new Xow_xwiki_mgr_fxt();
 	@Test   public void Add_bulk_wiki_en() 			{fxt.Test_add_bulk("w|en.wikipedia.org"				, Xol_lang_itm_.Id__unknown		, Xow_wiki_domain_.Tid_wikipedia	, "w"			, "http://en.wikipedia.org/wiki/~{0}", "en.wikipedia.org");}

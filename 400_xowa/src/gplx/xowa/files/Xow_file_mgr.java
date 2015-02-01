@@ -104,7 +104,7 @@ public class Xow_file_mgr implements GfoInvkAble {
 			return meta.Orig_exists() == Bool_.Y_byte || meta.Thumbs().length != 0;
 		}
 		else
-			return fsdb_mgr.Reg_select_itm_exists(ttl_bry);
+			return fsdb_mgr.Orig_exists_by_ttl(ttl_bry);
 	}
 
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

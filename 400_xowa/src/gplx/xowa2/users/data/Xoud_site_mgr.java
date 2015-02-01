@@ -19,12 +19,13 @@ package gplx.xowa2.users.data; import gplx.*; import gplx.xowa2.*; import gplx.x
 import gplx.dbs.*;
 public class Xoud_site_mgr {
 	private Xoud_site_tbl regy_tbl = new Xoud_site_tbl();
+	private int user_id = 1;
 	public void Init(Db_conn conn) {
 		regy_tbl.Conn_(conn);
 	}
-	public Xoud_site_row[] Get_all() {return regy_tbl.Select_all();}
+	public Xoud_site_row[] Get_all() {return regy_tbl.Select_all(user_id);}
 	public void Import(String domain, String name, String path, String xtn) {	// insert or update wiki
-		Xoud_site_row[] ary = regy_tbl.Select_by_domain(domain);
+		Xoud_site_row[] ary = regy_tbl.Select_by_domain(user_id, domain);
 		int len = ary.length, update_id = -1, priority = 0;
 		for (int i = 0; i < len; ++i) {
 			Xoud_site_row itm = ary[i];
@@ -35,8 +36,8 @@ public class Xoud_site_mgr {
 			}
 		}
 		if (update_id == -1)
-			regy_tbl.Insert(priority, domain, name, path, xtn);
+			regy_tbl.Insert(user_id, 1, priority, domain, name, path, xtn);
 		else
-			regy_tbl.Update(update_id, priority, domain, name, path, xtn);			
+			regy_tbl.Update(user_id, update_id, priority, domain, name, path, xtn);			
 	}
 }

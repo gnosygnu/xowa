@@ -43,7 +43,9 @@ public class Poem_nde implements Xox_xnde {
 			boolean indent_enabled = false;
 			if (line_is_1st)	line_is_1st = false;
 			else {
-				if (Bry_.Match(src, line_bgn, line_bgn + Xowa_br_mark.length, Xowa_br_mark))					// "<br/>\n" already inserted by XOWA; do not insert again; DATE:2014-10-20
+				int line_end_w_br = line_bgn + Xowa_br_mark.length;
+				if (	line_end_w_br < src_end																	// check for out of bounds; PAGE:en.s:The Hebrew Nation did not write it; DATE:2015-01-31
+					&&	Bry_.Match(src, line_bgn, line_end_w_br, Xowa_br_mark))									// "<br/>\n" already inserted by XOWA; do not insert again; DATE:2014-10-20
 					bfr.Add_byte_nl();
 				else
 					bfr.Add(Html_tag_.Br_inl).Add_byte_nl().Add(Xowa_br_mark);									// add "<br/>\n" unless 1st line; EX: "<poem>\n\s" should not add leading "<br/>\n"

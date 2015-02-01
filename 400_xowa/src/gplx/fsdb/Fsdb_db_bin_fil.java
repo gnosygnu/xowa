@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.fsdb; import gplx.*;
-import gplx.dbs.*; import gplx.ios.*;
+import gplx.ios.*; import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; 
 public class Fsdb_db_bin_fil implements RlsAble {
 	public int Id() {return id;} private int id;
 	public Io_url Url() {return url;} private Io_url url;

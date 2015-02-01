@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-import gplx.criterias.*;
+import gplx.core.criterias.*;
 import gplx.lists.*; /*GfoNde*/
 class TdbDeleteWkr implements Db_qryWkr {
 	public Object Exec(Db_engine engineObj, Db_qry cmdObj) {

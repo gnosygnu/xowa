@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.bldrs.imports.ctgs.*; import gplx.xowa.ctgs.*; import gplx.xowa.specials.search.*;
+import gplx.core.primitives.*; import gplx.xowa.bldrs.imports.ctgs.*; import gplx.xowa.ctgs.*; import gplx.xowa.specials.search.*;
 public interface Xodb_load_mgr {
 	void Load_init				(Xow_wiki wiki);
 	void Load_page				(Xodb_page rv, Xow_ns ns, boolean timestamp_enabled);

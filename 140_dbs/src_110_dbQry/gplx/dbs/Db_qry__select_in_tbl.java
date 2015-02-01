@@ -16,16 +16,17 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
+import gplx.core.strings.*; import gplx.core.criterias.*;
 public class Db_qry__select_in_tbl implements Db_qry {
-	public Db_qry__select_in_tbl(String tbl_name, String[] select_flds, String[] where_flds, String group_by_sql, String having_sql, String order_by_sql, String limit_sql) {
-		this.tbl_name = tbl_name; this.select_flds = select_flds; this.where_flds = where_flds; this.group_by_sql = group_by_sql; this.having_sql = having_sql; this.order_by_sql = order_by_sql; this.limit_sql = limit_sql;
+	public Db_qry__select_in_tbl(String base_table, String[] select_flds, String[] where_flds, String group_by_sql, String having_sql, String order_by_sql, String limit_sql) {
+		this.base_table = base_table; this.select_flds = select_flds; this.where_flds = where_flds; this.group_by_sql = group_by_sql; this.having_sql = having_sql; this.order_by_sql = order_by_sql; this.limit_sql = limit_sql;
 	}
 	public int			Tid() {return Db_qry_.Tid_select_in_tbl;}
 	public boolean			Exec_is_rdr() {return true;}
-	public String		Base_table() {return tbl_name;} private final String tbl_name;
-	public String	From() {return tbl_name;}
-	public String[] Select_flds() {return select_flds;} private final String[] select_flds;
-	public String[] Where_flds() {return where_flds;} private final String[] where_flds;
+	public String		Base_table() {return base_table;} private final String base_table;
+	public Criteria		Where() {return where;} private Criteria where;
+	public String[]		Select_flds() {return select_flds;} private final String[] select_flds;
+	private final String[] where_flds;
 	public void Where_sql(String_bldr sb) {
 		if (where_flds == null) return;
 		int where_flds_len = where_flds.length;
@@ -48,17 +49,19 @@ public class Db_qry__select_in_tbl implements Db_qry {
 			if (i != 0) sb.Add(",");
 			sb.Add(select_flds[i]);
 		}
-		sb.Add(" FROM ").Add(tbl_name);
-		if (where_flds		!= null) {sb.Add(" WHERE "); Where_sql(sb);}
+		sb.Add(" FROM ").Add(base_table);
+		if (where_flds		!= null && where_flds.length != 0) {sb.Add(" WHERE "); Where_sql(sb);}
 		if (group_by_sql	!= null) sb.Add(group_by_sql);
 		if (having_sql		!= null) sb.Add(having_sql);
 		if (order_by_sql	!= null) {sb.Add(" ORDER BY "); sb.Add(order_by_sql);}
 		if (limit_sql		!= null) sb.Add(limit_sql);
 		return sb.XtoStr();
 	}
-	public static Db_qry__select_in_tbl new_(String tbl_name, String[] where_flds, String[] select_flds) {
-		Db_qry__select_in_tbl rv = new Db_qry__select_in_tbl(tbl_name, select_flds, where_flds, null, null, null, null);
+	public static Db_qry__select_in_tbl new_(String base_table, String[] where_flds, String[] select_flds) {
+		Db_qry__select_in_tbl rv = new Db_qry__select_in_tbl(base_table, select_flds, where_flds, null, null, null, null);
+		rv.where = Db_crt_.eq_many_(where_flds);
 		return rv;
 	}
-	public static final String[] Where_flds__all = null;
+	public static Db_qry__select_in_tbl as_(Object obj) {return obj instanceof Db_qry__select_in_tbl ? (Db_qry__select_in_tbl)obj : null;}
+	public static final String[] Where_flds__all = String_.Ary_empty;
 }

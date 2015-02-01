@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-import org.junit.*; import gplx.dbs.sqls.*;
+import org.junit.*; import gplx.core.strings.*; import gplx.dbs.sqls.*;
 public class Db_obj_ary_tst {
 	@Before public void init() {} private Db_obj_ary_fxt fxt = new Db_obj_ary_fxt();
 	@Test  public void Int() {

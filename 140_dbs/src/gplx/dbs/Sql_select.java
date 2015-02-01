@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
+import gplx.core.strings.*;
 class Sql_select {
 	public Sql_select_fld_list Flds() {return flds;} Sql_select_fld_list flds = Sql_select_fld_list.new_();
 	public boolean Distinct() {return distinct;} public void Distinct_set(boolean v) {distinct = v;} private boolean distinct;
@@ -127,6 +128,15 @@ class Sql_select_fld_list {
 			if (rv.Has(selectFld.Alias())) throw Err_.new_("alias is not unique").Add("fldName", selectFld.Fld()).Add("flds", rv.XtoStr());
 			selectFld.GroupBy_type(fld);
 			rv.Add(selectFld.Alias(), selectFld.ValType());
+		}
+		return rv;
+	}
+	public String[] To_str_ary() {
+		int len = this.Count();
+		String[] rv = new String[len];
+		for (int i = 0; i < len; i++) {
+			Sql_select_fld_base fld = this.FetchAt(i);
+			rv[i] = fld.Fld();
 		}
 		return rv;
 	}

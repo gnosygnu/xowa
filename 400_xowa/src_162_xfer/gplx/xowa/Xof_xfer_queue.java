@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.primitives.*;
 import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.bins.*;
 import gplx.xowa.files.gui.*;
 public class Xof_xfer_queue {
@@ -66,7 +67,7 @@ public class Xof_xfer_queue {
 	}
 	private void Exec_v2(byte exec_tid, Gfo_usr_dlg wtr, Xow_wiki wiki, Xoa_page page) {
 		wiki.File_mgr().Fsdb_mgr().Init_by_wiki__add_bin_wkrs(wiki);
-		wiki.File_mgr().Fsdb_mgr().Reg_select(page, exec_tid, Xfer_itms_to_fsdb_itms(list, wiki.File_mgr().Fsdb_mgr().Patch_upright()));
+		wiki.File_mgr().Fsdb_mgr().Fsdb_search_by_list(page, exec_tid, Xfer_itms_to_fsdb_itms(list, wiki.File_mgr().Fsdb_mgr().Patch_upright()));
 	}
 	private ListAdp Xfer_itms_to_fsdb_itms(ListAdp list, int upright_patch) {
 		ListAdp rv = ListAdp_.new_();

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
+import gplx.core.primitives.*;
 public class Bry_cache {
 	public byte[] Get_or_new(String v) {return Get_or_new(Bry_.new_utf8_(v));}
 	public byte[] Get_or_new(byte[] v) {

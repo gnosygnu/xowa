@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.wiki_orig; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.files.fsdb.*;
+import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.files.fsdb.*; import gplx.xowa2.files.orig_regy.*;
 public class Xof_wiki_orig_tbl {
 	public static void Create_table(Db_conn p) {
 		Sqlite_engine_.Tbl_create(p, Tbl_name, Tbl_sql);

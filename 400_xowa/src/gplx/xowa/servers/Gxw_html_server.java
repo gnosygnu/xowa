@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.servers; import gplx.*; import gplx.xowa.*;
-import gplx.gfui.*;
+import gplx.core.primitives.*; import gplx.gfui.*;
 import gplx.xowa.servers.tcp.*;
 import gplx.xowa.servers.http.*;
 public class Gxw_html_server implements Gxw_html {

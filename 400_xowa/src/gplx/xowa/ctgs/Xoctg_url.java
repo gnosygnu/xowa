@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.ctgs; import gplx.*; import gplx.xowa.*;
+import gplx.core.primitives.*;
 public class Xoctg_url {
 	public byte[][]		Grp_idxs() {return grp_idxs;} private byte[][] grp_idxs = new byte[3][];
 	public byte[]		Grp_fwds() {return grp_fwds;} private byte[] grp_fwds = new byte[3];

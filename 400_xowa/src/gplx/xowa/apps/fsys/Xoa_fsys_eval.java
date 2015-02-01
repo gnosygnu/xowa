@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.fsys; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
+import gplx.core.primitives.*;
 public class Xoa_fsys_eval implements Bry_fmtr_eval_mgr {
 	public Xoa_fsys_eval(Xoa_app app) {this.app = app;} private Xoa_app app;
 	public boolean Enabled() {return enabled;} public void Enabled_(boolean v) {enabled = v;} private boolean enabled = true;

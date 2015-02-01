@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import gplx.core.brys.*; import gplx.html.*; import gplx.xowa.apps.ttls.*; import gplx.xowa.hdumps.srls.*;
+import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.html.*; import gplx.xowa.apps.ttls.*; import gplx.xowa.hdumps.srls.*;
 public class Xow_hzip_itm__anchor {
 	private Xow_hzip_mgr hzip_mgr; private Xoa_ttl_parser ttl_parser; private Byte_obj_ref xtid_ref = Byte_obj_ref.zero_();
 	private Bry_rdr bry_rdr = new Bry_rdr();

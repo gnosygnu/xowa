@@ -16,20 +16,33 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-import gplx.criterias.*;
+import gplx.core.criterias.*;
 public class Db_crt_ {
 	public static final Criteria Wildcard = Criteria_.All;
-	public static Criteria eq_(String name, Object val) {return Criteria_wrapper.new_(name, Criteria_.eq_(val));}
-	public static Criteria eqn_(String name, Object val) {return Criteria_wrapper.new_(name, Criteria_.eqn_(val));}
-	public static Criteria lt_(String name, Comparable val) {return Criteria_wrapper.new_(name, Criteria_.lt_(val));}
-	public static Criteria lte_(String name, Comparable val) {return Criteria_wrapper.new_(name, Criteria_.lte_(val));}
-	public static Criteria mt_(String name, Comparable val) {return Criteria_wrapper.new_(name, Criteria_.mt_(val));}
-	public static Criteria mte_(String name, Comparable val) {return Criteria_wrapper.new_(name, Criteria_.mte_(val));}
-	public static Criteria between_(String name, Comparable lhs, Comparable rhs) {return Criteria_wrapper.new_(name, Criteria_.between_(lhs, rhs));}
-	public static Criteria in_(String name, Object... vals) {return Criteria_wrapper.new_(name, Criteria_.in_(vals));}
-	public static Criteria like_(String name, String pattern) {return Criteria_wrapper.new_(name, Criteria_.like_(pattern));}
-	public static Criteria liken_(String name, String pattern) {return Criteria_wrapper.new_(name, Criteria_.liken_(pattern));}
-	public static Criteria eqMany_(KeyVal... array) {
+	public static Criteria_fld eq_(String key, Object val)				{return Criteria_fld.new_(key, Criteria_.eq_(val));}
+	public static Criteria_fld eqn_(String key, Object val)				{return Criteria_fld.new_(key, Criteria_.eqn_(val));}
+	public static Criteria_fld lt_(String key, Comparable val)			{return Criteria_fld.new_(key, Criteria_.lt_(val));}
+	public static Criteria_fld lte_(String key, Comparable val)		{return Criteria_fld.new_(key, Criteria_.lte_(val));}
+	public static Criteria_fld mt_(String key, Comparable val)			{return Criteria_fld.new_(key, Criteria_.mt_(val));}
+	public static Criteria_fld mte_(String key, Comparable val)		{return Criteria_fld.new_(key, Criteria_.mte_(val));}
+	public static Criteria_fld between_(String key, Comparable lhs, Comparable rhs) {return Criteria_fld.new_(key, Criteria_.between_(lhs, rhs));}
+	public static Criteria_fld in_(String key, Object... vals)	{return Criteria_fld.new_(key, Criteria_.in_(vals));}
+	public static Criteria_fld like_(String key, String pattern)		{return Criteria_fld.new_(key, Criteria_.like_(pattern));}
+	public static Criteria_fld liken_(String key, String pattern)		{return Criteria_fld.new_(key, Criteria_.liken_(pattern));}
+	public static Criteria_fld eq_(String key)							{return Criteria_fld.new_(key, Criteria_.eq_(null));}
+	public static Criteria eq_many_(String... ary) {
+		Criteria rv = null;
+		int len = ary.length;
+		for (int i = 0; i < len; i++) {
+			Criteria crt = Db_crt_.eq_(ary[i], null);
+			rv = (i == 0)? crt : Criteria_.And(rv, crt);
+		}
+//			if (rv == null) return Wildcard;
+//			return rv.Tid() == Criteria_.Tid_wrapper ? (Criteria_fld)rv : Criteria_fld.new_(Criteria_fld.Key_null, rv);
+		return rv;
+	}
+//		public static Criteria_fld and(Criteria and) {return Criteria_fld.new_(Criteria_fld.Key_null, and);}
+	public static Criteria eq_many_(KeyVal... array) {
 		Criteria rv = null;
 		for (int i = 0; i < array.length; i++) {
 			KeyVal pair = array[i];
@@ -38,15 +51,5 @@ public class Db_crt_ {
 		}
 		return rv;
 	}
-	public static Criteria eq_(String name) {return Criteria_wrapper.new_(name, Criteria_.eq_(null));}
-	public static Criteria eq_many_(String... ary) {
-		Criteria rv = null;
-		int len = ary.length;
-		for (int i = 0; i < len; i++) {
-			Criteria crt = Db_crt_.eq_(ary[i], null);
-			rv = (i == 0)? crt : Criteria_.And(rv, crt);
-		}
-		return rv;
-	}
-	public static Criteria wrap_(String name, Criteria crt) {return Criteria_wrapper.new_(name, crt);}
+	public static Criteria_fld wrap_(String key, Criteria crt) {return Criteria_fld.new_(key, crt);}
 }

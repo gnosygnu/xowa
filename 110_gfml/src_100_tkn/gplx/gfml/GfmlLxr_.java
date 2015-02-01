@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfml; import gplx.*;
+import gplx.core.strings.*;
 import gplx.texts.*; /*CharStream*/	
 public class GfmlLxr_ {
 	public static GfmlLxr general_(String key, GfmlTkn protoTkn) {return GfmlLxr_general.new_(key, protoTkn);}

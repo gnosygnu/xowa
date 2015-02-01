@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.stores; import gplx.*;
-import gplx.criterias.*; import gplx.dbs.*;
+import gplx.core.criterias.*; import gplx.dbs.*;
 public class DbMaprWtr extends DataWtr_base implements DataWtr {
 	public void InitWtr(String key, Object val) {}
 	@Override public Object StoreRoot(SrlObj root, String key) {

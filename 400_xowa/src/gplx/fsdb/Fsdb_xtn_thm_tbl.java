@@ -68,10 +68,10 @@ public class Fsdb_xtn_thm_tbl {
 	}
 	private Db_stmt Select_by_fil_w_stmt() {
 		Db_qry_select qry = Db_qry_.select_().From_(Tbl_name).Cols_all_();
-		gplx.criterias.Criteria crt 
+		gplx.core.criterias.Criteria crt 
 			= this.Schema_thm_page()
-			? gplx.criterias.Criteria_.And_many(Db_crt_.eq_(Fld_thm_owner_id, Int_.MinValue), Db_crt_.eq_(Fld_thm_w, Int_.MinValue), Db_crt_.eq_(Fld_thm_time, Int_.MinValue), Db_crt_.eq_(Fld_thm_page, Int_.MinValue))
-			: gplx.criterias.Criteria_.And_many(Db_crt_.eq_(Fld_thm_owner_id, Int_.MinValue), Db_crt_.eq_(Fld_thm_w, Int_.MinValue), Db_crt_.eq_(Fld_thm_thumbtime, Int_.MinValue))
+			? gplx.core.criterias.Criteria_.And_many(Db_crt_.eq_(Fld_thm_owner_id, Int_.MinValue), Db_crt_.eq_(Fld_thm_w, Int_.MinValue), Db_crt_.eq_(Fld_thm_time, Int_.MinValue), Db_crt_.eq_(Fld_thm_page, Int_.MinValue))
+			: gplx.core.criterias.Criteria_.And_many(Db_crt_.eq_(Fld_thm_owner_id, Int_.MinValue), Db_crt_.eq_(Fld_thm_w, Int_.MinValue), Db_crt_.eq_(Fld_thm_thumbtime, Int_.MinValue))
 			;
 		qry.Where_(crt);
 		return conn.New_stmt(qry);
@@ -126,3 +126,30 @@ public class Fsdb_xtn_thm_tbl {
 	public static final DateAdp Modified_null = null;
 	public static final String Hash_null = "";
 }
+//	class tmptbl {
+//		private String Tbl_name = "file_data_thm";
+//		private String Fld_wiki_id
+//		, Fld_id, Fld_owner_id, Fld_w, Fld_h
+//		, Fld_time, Fld_page
+//		, Fld_bin_db_id, Fld_size, Fld_modified, Fld_hash
+//		;
+//		private Db_meta_tbl meta;
+//		private Db_meta_fld_list Flds = Db_meta_fld_list.new_();
+//		private void Conn_() {
+//			Fld_wiki_id			= Flds.Add_int("wiki_id");
+//			Fld_id				= Flds.Add_int("id");
+//			Fld_owner_id		= Flds.Add_int("owner_id");
+//			Fld_w				= Flds.Add_int("w");
+//			Fld_h				= Flds.Add_int("h");
+//			Fld_time			= Flds.Add_double("time");
+//			Fld_page			= Flds.Add_int("page");
+//			Fld_bin_db_id		= Flds.Add_int("bin_db_id");
+//			Fld_size			= Flds.Add_long("size");
+//			Fld_modified		= Flds.Add_str("modified", 14);		// stored as yyyyMMddHHmmss
+//			Fld_hash			= Flds.Add_str("hash", 40);
+//			meta = Db_meta_tbl.new_(Tbl_name, Flds
+//			, Db_meta_idx.new_unique(Tbl_name, "pkey", Fld_wiki_id, Fld_id)
+//			, Db_meta_idx.new_unique(Tbl_name, "owner", Fld_wiki_id, Fld_owner_id, Fld_id, Fld_w, Fld_time, Fld_page)
+//			);
+//		}
+//	}

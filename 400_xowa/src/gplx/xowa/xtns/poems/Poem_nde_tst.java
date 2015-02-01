@@ -130,6 +130,20 @@ public class Poem_nde_tst {
 		, "</div>"
 		));
 	}
+	@Test  public void Err_dangling_comment() {// PURPOSE: ArrayIndexOutOfBoundsError if poem has <references/> and ends with <!--; PAGE:en.s:The Hebrew Nation did not write it; DATE:2015-01-31
+		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		( "<poem>"
+		, "<references/>"
+		, "<!--"
+		), String_.Concat_lines_nl_skip_last
+		( "<div class=\"poem\">"
+		, "<p>"
+		, "<br/>"
+		, ""
+		, "</p>"
+		, "</div>"
+		));
+	}
 	@Test  public void Ref() {	// PURPOSE: <ref> inside poem was not showing up; DATE:2014-01-17
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 		( "<poem>a<ref>b</ref></poem>"

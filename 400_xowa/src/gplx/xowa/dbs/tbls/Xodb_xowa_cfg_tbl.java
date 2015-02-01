@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.dbs.*;
-import gplx.dbs.*;
+import gplx.dbs.*; import gplx.core.primitives.*;
 public class Xodb_xowa_cfg_tbl {
 	public Db_conn Conn() {return conn;} public Xodb_xowa_cfg_tbl Conn_(Db_conn conn) {this.conn = conn; return this;} Db_conn conn;
 	private DataRdr Select(String grp) {
@@ -88,7 +88,7 @@ public class Xodb_xowa_cfg_tbl {
 		Db_qry qry = Db_qry_.update_common_(Tbl_name, Where_grp_key(grp, key), KeyVal_.new_(Fld_cfg_val, val));
 		conn.Exec_qry(qry);
 	}
-	private gplx.criterias.Criteria Where_grp_key(String grp, String key) {return Db_crt_.eqMany_(KeyVal_.new_(Fld_cfg_grp, grp), KeyVal_.new_(Fld_cfg_key, key));}
+	private gplx.core.criterias.Criteria Where_grp_key(String grp, String key) {return Db_crt_.eq_many_(KeyVal_.new_(Fld_cfg_grp, grp), KeyVal_.new_(Fld_cfg_key, key));}
 	public static final String Tbl_name = "xowa_cfg", Fld_cfg_grp = "cfg_grp", Fld_cfg_key = "cfg_key", Fld_cfg_val = "cfg_val";
 	public static void Create_table(Db_conn p) {Sqlite_engine_.Tbl_create(p, Tbl_name, Tbl_sql);}
 	public static void Create_index(Db_conn p)	{Sqlite_engine_.Idx_create(p, Idx_select);}

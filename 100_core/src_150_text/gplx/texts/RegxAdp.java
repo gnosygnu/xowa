@@ -47,7 +47,7 @@ public class RegxAdp {
 		int idx = bgn;
 		ListAdp rv = ListAdp_.new_();
 		int len = String_.Len(text);
-		while (idx < len)  {
+		while (idx <= len) {				// NOTE: must be <= not < else "a?" will return null instead of ""; PAGE:en.d:民; DATE:2015-01-30
 			RegxMatch match = this.Match(text, idx);
 			if (match.Rslt_none()) break;
 			rv.Add(match);

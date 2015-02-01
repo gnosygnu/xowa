@@ -69,7 +69,7 @@ class Scrib_err_cmd implements GfoInvkAble {
 		// compile
 	}
 	public boolean Warn_disabled(Scrib_err_data err) {
-		// gplx.criterias.Criteria c;
+		// gplx.core.criterias.Criteria c;
 		// c.Matches(err);
 		return false;
 	}

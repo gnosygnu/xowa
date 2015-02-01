@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import org.junit.*;
+import org.junit.*; import gplx.core.strings.*;
 public class Xof_meta_thumb_parser_tst {
 	Xof_meta_thumb_parser parser = new Xof_meta_thumb_parser();
 	@Test  public void Exists_y()		{Tst_parse("1?45,40", itm_y_(45, 40));}

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns; import gplx.*; import gplx.xowa.*;
-import gplx.core.btries.*;
+import gplx.core.primitives.*; import gplx.core.btries.*;
 import gplx.xowa.xtns.cite.*; import gplx.xowa.xtns.imaps.*; import gplx.xowa.xtns.relatedSites.*; import gplx.xowa.xtns.proofreadPage.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.xowa.xtns.insiders.*; import gplx.xowa.xtns.indicators.*;
 public class Xow_xtn_mgr implements GfoInvkAble {

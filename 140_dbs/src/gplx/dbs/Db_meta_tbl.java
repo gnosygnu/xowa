@@ -23,6 +23,7 @@ public class Db_meta_tbl {
 	public String Name() {return name;} private final String name;		
 	public Db_meta_fld[] Flds() {return flds;} private final Db_meta_fld[] flds;
 	public Db_meta_idx[] Idxs() {return idxs;} private final Db_meta_idx[] idxs;
+	public static Db_meta_tbl new_(String name, Db_meta_fld_list flds, Db_meta_idx... idxs) {return new Db_meta_tbl(name, flds.To_fld_ary(), idxs);}
 	public static Db_meta_tbl new_(String name, Db_meta_fld[] flds, Db_meta_idx... idxs) {return new Db_meta_tbl(name, flds, idxs);}
 	public static Db_meta_tbl new_(String name, Db_meta_fld... flds) {return new Db_meta_tbl(name, flds, null);}
 }

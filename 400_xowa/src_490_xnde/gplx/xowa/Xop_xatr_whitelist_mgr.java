@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.core.btries.*;
+import gplx.core.primitives.*; import gplx.core.btries.*;
 public class Xop_xatr_whitelist_mgr {
 	public boolean Chk(int tag_id, byte[] src, Xop_xatr_itm xatr) {
 		byte[] key_bry = xatr.Key_bry();

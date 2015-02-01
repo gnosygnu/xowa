@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.btries; import gplx.*; import gplx.core.*;
+import gplx.core.primitives.*;
 public class Btrie_bwd_mgr {
 	public int Match_pos() {return match_pos;} private int match_pos;
 	public Object Match_exact(byte[] src, int bgn_pos, int end_pos) {

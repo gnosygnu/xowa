@@ -26,18 +26,19 @@ public interface Xof_fsdb_mgr extends RlsAble {
 	Xof_qry_mgr Qry_mgr();
 	Xof_bin_mgr Bin_mgr();
 	Xof_bin_wkr Bin_wkr_fsdb();
-	Gfo_usr_dlg Usr_dlg();
 	Fsdb_mnt_mgr Mnt_mgr();
 	Cache_mgr Cache_mgr();
 	void Db_bin_max_(long v);
 	void Init_by_wiki(Xow_wiki wiki, Io_url db_dir, Io_url fs_dir, Xow_repo_mgr repo_mgr);
 	boolean Init_by_wiki(Xow_wiki wiki);
 	boolean Init_by_wiki__add_bin_wkrs(Xow_wiki wiki);
+
+	boolean Orig_exists_by_ttl(byte[] ttl);
+	void Orig_select_by_list(Xoa_page page, byte exec_tid, ListAdp itms, OrderedHash hash);
+	void Fsdb_search_by_list(Xoa_page page, byte exec_tid, ListAdp itms);
+
 	void Img_insert(Fsdb_xtn_img_itm rv, byte[] dir, byte[] fil, int ext_id, int img_w, int img_h, DateAdp modified, String hash, long bin_len, gplx.ios.Io_stream_rdr bin_rdr);
 	void Thm_insert(Fsdb_xtn_thm_itm rv, byte[] dir, byte[] fil, int ext_id, int thm_w, int thm_h, double thumbtime, int page, DateAdp modified, String hash, long bin_len, gplx.ios.Io_stream_rdr bin_rdr);
 	void Fil_insert(Fsdb_fil_itm rv    , byte[] dir, byte[] fil, int ext_id, DateAdp modified, String hash, long bin_len, gplx.ios.Io_stream_rdr bin_rdr);
-	void Reg_insert(Xof_fsdb_itm itm, byte repo_id, byte status);
-	void Reg_select(Xoa_page page, byte exec_tid, ListAdp itms);
-	void Reg_select_only(Xoa_page page, byte exec_tid, ListAdp itms, OrderedHash hash);
-	boolean Reg_select_itm_exists(byte[] ttl);
+	void Orig_insert(Xof_fsdb_itm itm, byte repo_id, byte status);
 }

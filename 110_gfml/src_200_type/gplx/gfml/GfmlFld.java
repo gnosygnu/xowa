@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfml; import gplx.*;
+import gplx.core.strings.*;
 public class GfmlFld {
 	public String Name() {return name;} private String name;
 	public boolean Name_isKey() {return name_isKey;} private boolean name_isKey;

@@ -25,14 +25,14 @@ public class Xof_commons_image_tbl implements Db_conn_itm {
 		stmt_select_itm = Db_stmt_.Rls(stmt_select_itm);
 	}
 	public void Insert(String ttl, String media_type, String minor_mime, int size, int w, int h, int bits, int ext_id, String img_timestamp) {
-		if (stmt_insert == null) stmt_insert = conn.New_stmt_insert(Tbl_name, Flds.Xto_str_ary());
+		if (stmt_insert == null) stmt_insert = conn.New_stmt_insert(Tbl_name, Flds.To_str_ary());
 		stmt_insert.Clear()
 		.Val_str(ttl).Val_str(media_type).Val_str(minor_mime)
 		.Val_int(size).Val_int(w).Val_int(h).Val_int(bits).Val_int(ext_id).Val_str(img_timestamp)
 		.Exec_insert();
 	}
 	public Xof_commons_image_itm Select(byte[] ttl) {
-		Db_stmt stmt = conn.New_stmt_select_all_where(Tbl_name, Flds.Xto_str_ary(), Fld_img_name);
+		Db_stmt stmt = conn.New_stmt_select_all_where(Tbl_name, Flds.To_str_ary(), Fld_img_name);
 		Db_rdr rdr = Db_rdr_.Null;
 		try {
 			rdr = stmt.Clear().Val_bry_as_str(ttl).Exec_select_as_rdr();
@@ -64,7 +64,7 @@ public class Xof_commons_image_tbl implements Db_conn_itm {
 	, Fld_img_timestamp			= Flds.Add_str("img_timestamp", 255)	// 20140101155749
 	;
 	public static Db_meta_tbl new_meta() {
-		return Db_meta_tbl.new_(Tbl_name, Flds.Xto_fld_ary()
+		return Db_meta_tbl.new_(Tbl_name, Flds.To_fld_ary()
 		, Db_meta_idx.new_normal(Tbl_name, "name", Fld_img_name, Fld_img_timestamp)
 		);
 	} 

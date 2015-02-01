@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfml; import gplx.*;
+import gplx.core.strings.*;
 class GfmlStringHighlighter {
 	public String Raw() {return raw;} public GfmlStringHighlighter Raw_(String v) {raw = v; return this;} private String raw;
 	public int ExcerptLen() {return excerptLen;} public GfmlStringHighlighter ExcerptLen_(int v) {excerptLen = v; return this;} int excerptLen = 40;

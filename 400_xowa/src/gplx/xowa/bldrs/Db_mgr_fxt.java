@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
+import gplx.core.primitives.*; import gplx.core.strings.*;
 import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.specials.search.*; import gplx.xowa.ctgs.*; import gplx.xowa.dbs.tbls.*;
 public class Db_mgr_fxt {
 	public Db_mgr_fxt Ctor_fsys()	{bldr_fxt = new Xob_fxt().Ctor(Xoa_test_.Url_root().GenSubDir("root")); return this;} 

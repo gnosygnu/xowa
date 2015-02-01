@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.strings.*;
 public class Xoac_wiki_cfg_bldr_cmd {
 	public Xoac_wiki_cfg_bldr_cmd(String key, String text) {this.key = key; this.text = text;}
 	public String Key() {return key;} private String key;

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
-import gplx.core.btries.*; import gplx.xowa.wikis.*;
+import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.xowa.wikis.*;
 public class Xow_wiki_alias {
 	public Io_url Fil() {return fil;} public Xow_wiki_alias Fil_(Io_url v) {fil = v; return this;} Io_url fil;
 	public byte Tid() {return tid;} private byte tid;

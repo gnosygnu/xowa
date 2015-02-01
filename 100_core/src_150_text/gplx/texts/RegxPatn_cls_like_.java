@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.texts; import gplx.*;
+import gplx.core.strings.*;
 public class RegxPatn_cls_like_ {
 	public static RegxPatn_cls_like parse_(String regxRaw, char escape) {
 		String regx = Compile(regxRaw, escape);

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
+import gplx.core.primitives.*; import gplx.dbs.engines.sqlite.*;
 public class Sqlite_engine_ {
 	public static void Db_attach(Db_conn p, String alias, String url) {
 		String s = String_.Format("ATTACH '{0}' AS {1};", url, alias);

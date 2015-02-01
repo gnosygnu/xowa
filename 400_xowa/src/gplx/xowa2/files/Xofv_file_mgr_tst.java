@@ -16,9 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa2.files; import gplx.*; import gplx.xowa2.*;
-import org.junit.*;
+import org.junit.*; import gplx.core.primitives.*;
 import gplx.xowa.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.fsdb.caches.*; import gplx.xowa.files.wiki_orig.*;
-import gplx.xowa2.apps.*; import gplx.xowa2.wikis.*;
+import gplx.xowa2.apps.*; import gplx.xowa2.wikis.*; import gplx.xowa2.files.orig_regy.*;
 public class Xofv_file_mgr_tst {
 	@Before public void init() {fxt.Clear();} private Xofv_file_mgr_fxt fxt = new Xofv_file_mgr_fxt();
 	@Test   public void Thumb() {

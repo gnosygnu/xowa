@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.lst; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+import gplx.core.primitives.*;
 import gplx.xowa.html.*;
 public class Lst_section_nde implements Xox_xnde, Xop_xnde_atr_parser {
 	public byte[] Section_name() {return section_name;} private byte[] section_name;

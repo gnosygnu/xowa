@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.grammars; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-import gplx.core.btries.*;
+import gplx.core.primitives.*; import gplx.core.btries.*;
 public class Xol_grammar_ {
 	public static final byte Tid__max = 9; 
 	public static final byte Tid_genitive = 0, Tid_elative = 1, Tid_partitive = 2, Tid_illative = 3, Tid_inessive = 4, Tid_accusative = 5, Tid_instrumental = 6, Tid_prepositional = 7, Tid_dative = 8, Tid_unknown = Byte_.Max_value_127;

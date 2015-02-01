@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
+import gplx.core.strings.*;
 public class GfxRectItm extends GfxItm_base {
 	public float Width() {return width;} float width;
 	public ColorAdp Color() {return color;} ColorAdp color;

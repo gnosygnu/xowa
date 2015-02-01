@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.bins; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
+import gplx.core.primitives.*;
 import gplx.xowa.files.fsdb.*; import gplx.xowa.files.cnvs.*; import gplx.ios.*;
 public class Xof_bin_mgr implements GfoInvkAble {
 	private Xof_bin_wkr[] wkrs; private int wkrs_len;

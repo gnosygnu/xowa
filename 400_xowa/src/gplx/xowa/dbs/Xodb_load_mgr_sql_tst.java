@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs; import gplx.*; import gplx.xowa.*;
-import org.junit.*; import gplx.xowa.bldrs.*; import gplx.xowa.ctgs.*; import gplx.dbs.*; import gplx.xowa.dbs.tbls.*;
+import org.junit.*; import gplx.core.primitives.*; import gplx.xowa.bldrs.*; import gplx.xowa.ctgs.*; import gplx.dbs.*; import gplx.xowa.dbs.tbls.*;
 public class Xodb_load_mgr_sql_tst {
 	@Before public void init() {if (Xoa_test_.Db_skip()) return; fxt.Clear();} private Xodb_load_mgr_sql_fxt fxt = new Xodb_load_mgr_sql_fxt();
 	@Test  public void Load_ctg_ttls() {

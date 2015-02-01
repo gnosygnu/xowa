@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps.srls; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
-import org.junit.*;
+import org.junit.*; import gplx.core.primitives.*;
 public class Hpg_srl_itm__tst {
 	@Before public void init() {fxt.Clear();} private Hpg_srl_itm__fxt fxt = new Hpg_srl_itm__fxt();
 	@Test  public void Srl() {

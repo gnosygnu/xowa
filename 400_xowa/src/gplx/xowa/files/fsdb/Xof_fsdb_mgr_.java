@@ -53,32 +53,32 @@ public class Xof_fsdb_mgr_ {
 		if (fsdb_mgr.Qry_mgr().Find(exec_tid, itm)) {
 			Xof_repo_pair repo_pair = repo_mgr.Repos_get_by_wiki(itm.Orig_wiki());
 			if (repo_pair == null) {
-				fsdb_mgr.Reg_insert(itm, Xof_repo_itm.Repo_unknown, Xof_wiki_orig_wkr_.Tid_missing_qry);
+				fsdb_mgr.Orig_insert(itm, Xof_repo_itm.Repo_unknown, Xof_wiki_orig_wkr_.Tid_missing_qry);
 				return;
 			}
 			byte orig_wiki = repo_pair.Repo_id();	// NOTE: should be itm.Orig_repo, but throws null refs
 			if (Is_not_viewable(exec_tid, itm.Lnki_ext())) {
 				itm.Rslt_qry_(Xof_qry_wkr_.Tid_mock);
 				itm.Rslt_bin_(Xof_bin_wkr_.Tid_noop);
-				fsdb_mgr.Reg_insert(itm, orig_wiki, Xof_wiki_orig_wkr_.Tid_noop);
+				fsdb_mgr.Orig_insert(itm, orig_wiki, Xof_wiki_orig_wkr_.Tid_noop);
 				return;
 			}
 			if (fsdb_mgr.Bin_mgr().Find_to_url_as_bool(ListAdp_.Null, exec_tid, itm)) {
-				fsdb_mgr.Reg_insert(itm, orig_wiki, Xof_wiki_orig_wkr_.Tid_found_orig);
+				fsdb_mgr.Orig_insert(itm, orig_wiki, Xof_wiki_orig_wkr_.Tid_found_orig);
 				// TODO: this "breaks" tests b/c mock bin_wkr is fsdb; 
 				if (itm.Rslt_bin() != Xof_bin_wkr_.Tid_fsdb_wiki)	// if bin is from fsdb, don't save it; occurs when page has new file listed twice; 1st file inserts into fsdb; 2nd file should find in fsdb and not save again
-					Fsdb_save(fsdb_mgr, itm);
+					Fsdb_save(usr_dlg, fsdb_mgr, itm);
 				Js_img_mgr.Update_img(page, itm);
 			}
 			else {
 				usr_dlg.Warn_many("", "", "file not found: page=~{0} file=~{1} width=~{2}", page.Url().Xto_full_str_safe(), String_.new_utf8_(itm.Lnki_ttl()), itm.Lnki_w());
 				itm.Rslt_bin_(Xof_bin_wkr_.Tid_not_found);
-				fsdb_mgr.Reg_insert(itm, orig_wiki, Xof_wiki_orig_wkr_.Tid_missing_bin);
+				fsdb_mgr.Orig_insert(itm, orig_wiki, Xof_wiki_orig_wkr_.Tid_missing_bin);
 				// gplx.xowa.files.gui.Js_img_mgr.Update_img_missing(usr_dlg, itm.Html_uid());	// TODO: update caption with "" if image is missing
 			}
 		}
 		else {
-			fsdb_mgr.Reg_insert(itm, Xof_repo_itm.Repo_unknown, Xof_wiki_orig_wkr_.Tid_missing_qry);
+			fsdb_mgr.Orig_insert(itm, Xof_repo_itm.Repo_unknown, Xof_wiki_orig_wkr_.Tid_missing_qry);
 				// gplx.xowa.files.gui.Js_img_mgr.Update_img_missing(usr_dlg, itm.Html_uid());	// TODO: update caption with "" if image is missing
 		}
 	}
@@ -110,7 +110,7 @@ public class Xof_fsdb_mgr_ {
 			default:									throw Err_.unhandled(itm.Rslt_reg());
 		}
 	}
-	private void Fsdb_save(Xof_fsdb_mgr fsdb_mgr, Xof_fsdb_itm itm) {
+	private void Fsdb_save(Gfo_usr_dlg usr_dlg, Xof_fsdb_mgr fsdb_mgr, Xof_fsdb_itm itm) {
 		Io_url html_url = itm.Html_url();
 		long bin_len = Io_mgr._.QueryFil(html_url).Size();
 		gplx.ios.Io_stream_rdr bin_rdr = gplx.ios.Io_stream_rdr_.file_(html_url);
@@ -140,7 +140,7 @@ public class Xof_fsdb_mgr_ {
 				fsdb_mgr.Cache_mgr().Reg(fsdb_mgr.Wiki(), itm, bin_len);
 		}
 		catch (Exception e) {
-			fsdb_mgr.Usr_dlg().Warn_many("", "", "failed to save file: ttl=~{0} url=~{1} err=~{2}", String_.new_utf8_(itm.Lnki_ttl()), html_url.Raw(), Err_.Message_gplx(e));
+			usr_dlg.Warn_many("", "", "failed to save file: ttl=~{0} url=~{1} err=~{2}", String_.new_utf8_(itm.Lnki_ttl()), html_url.Raw(), Err_.Message_gplx(e));
 		}
 		finally {bin_rdr.Rls();}
 	}

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.ios; import gplx.*;
-import gplx.criterias.*;
+import gplx.core.criterias.*;
 public class IoItmDir extends IoItm_base {
 	public boolean Exists() {return exists;} public void Exists_set(boolean v) {exists = v;} private boolean exists = true;
 	@Override public int TypeId() {return Type_Dir;} @Override public boolean Type_dir() {return true;} @Override public boolean Type_fil() {return false;} public static final int Type_Dir = 1;

@@ -30,9 +30,9 @@ public class Db_sys_regy_mgr_tst {
 	}
 	@Test   public void Delete() {
 		fxt	.Exec_set("grp", "key_0", "val_0")
-			.Exec_set("grp", "key_1", "val_0")
+			.Exec_set("grp", "key_1", "val_1")
 			.Exec_del("grp", "key_1")
-			.Test_get("grp", "key_0", null)
+			.Test_get("grp", "key_0", "val_0")
 			.Test_get("grp", "key_1", null)
 			;
 	}

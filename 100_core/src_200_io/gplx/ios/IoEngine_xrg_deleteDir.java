@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.ios; import gplx.*;
-import gplx.criterias.*;
+import gplx.core.criterias.*;
 public class IoEngine_xrg_deleteDir {
 	public Io_url Url() {return url;} public IoEngine_xrg_deleteDir Url_(Io_url val) {url = val; return this;} Io_url url;
 	public boolean Recur() {return recur;} public IoEngine_xrg_deleteDir Recur_() {return Recur_(true);} public IoEngine_xrg_deleteDir Recur_(boolean v) {recur = v; return this;} private boolean recur = false;

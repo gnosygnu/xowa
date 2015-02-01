@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.ctgs; import gplx.*; import gplx.xowa.*;
-import org.junit.*;
+import org.junit.*; import gplx.core.primitives.*;
 public class Xoctg_idx_mgr_tst {
 	@Before public void init() {fxt.Clear();} private Xoctg_idx_mgr_fxt fxt = new Xoctg_idx_mgr_fxt();
 	@Test   public void Index() {

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.dbs.*;
-import gplx.dbs.*; import gplx.criterias.*;
+import gplx.dbs.*; import gplx.core.criterias.*;
 class Xodb_in_wkr_page_id extends Xodb_in_wkr_page_base {
 	private ListAdp list;		// list is original list of ids which may have dupes; needed to fill statement (which takes range of bgn - end); DATE:2013-12-08
 	private OrderedHash hash;	// hash is unique list of ids; needed for fetch from rdr (which indexes by id)

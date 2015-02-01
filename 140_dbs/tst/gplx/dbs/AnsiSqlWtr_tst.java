@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
 import org.junit.*;
-import gplx.criterias.*; import gplx.dbs.sqls.*;
+import gplx.core.criterias.*; import gplx.dbs.sqls.*;
 public class AnsiSqlWtr_tst {
 	Sql_qry_wtr sqlWtr = Sql_qry_wtr_.new_ansi();
 	@Test  public void Insert() {

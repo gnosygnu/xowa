@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
+import gplx.core.primitives.*;
 public class Gfui_html_cfg implements GfoInvkAble {
 	public String Doc_html()													{return Exec_fmt(fmtr_doc_html);}									private Bry_fmtr fmtr_doc_html = Bry_fmtr.new_();
 	public String Doc_body_focus()												{return Exec_fmt(fmtr_doc_body_focus);}								private Bry_fmtr fmtr_doc_body_focus = Bry_fmtr.new_();

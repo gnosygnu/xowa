@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.texts; import gplx.*;
+import gplx.core.strings.*;
 public class RegxPatn_cls_ioMatch_ {
 	public static final String Wildcard			= "*";
 	public static final String OrDelimiter		= "|";

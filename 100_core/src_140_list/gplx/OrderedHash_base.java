@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
+import gplx.core.strings.*;
 import gplx.lists.*; /*EnumerAble,ComparerAble*/
 public class OrderedHash_base extends HashAdp_base implements OrderedHash, GfoInvkAble {
 	@Override protected void Add_base(Object key, Object val) {

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
+import gplx.core.strings.*;
 public class KeyValList {//20101217
 	public int Count() {return list.Count();} ListAdp list = ListAdp_.new_();
 	public void Clear() {list.Clear();}

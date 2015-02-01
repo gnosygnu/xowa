@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-import gplx.criterias.*;
+import gplx.core.criterias.*;
 public class Db_qry_ {
 	public static Db_qry_select select_cols_(String tbl, Criteria crt, String... cols){return select_().From_(tbl).Where_(crt).Cols_(cols);}
 	public static Db_qry_select select_val_(String tbl, String col, Criteria crt)			{return select_().From_(tbl).Where_(crt).Cols_(col);}

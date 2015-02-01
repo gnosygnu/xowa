@@ -17,9 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa2.users.data; import gplx.*; import gplx.xowa2.*; import gplx.xowa2.users.*;
 public class Xoud_site_row {
-	public Xoud_site_row(int id, int priority, String domain, String name, String path, String xtn) {
-		this.id = id; this.priority = priority; this.domain = domain; this.name = name; this.path = path; this.xtn = xtn;
+	public Xoud_site_row(int user_id, int id, int priority, String domain, String name, String path, String xtn) {
+		this.user_id = user_id; this.id = id; this.priority = priority; this.domain = domain; this.name = name; this.path = path; this.xtn = xtn;
 	}
+	public int User_id() {return user_id;} private int user_id;
 	public int Id() {return id;} private final int id;
 	public int Priority() {return priority;} private final int priority;
 	public String Domain() {return domain;} private final String domain;

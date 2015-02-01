@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
+import gplx.core.strings.*;
 public class Int_ implements GfoInvkAble {
 	public static final String Cls_val_name = "int";
 	public static final Class<?> Cls_ref_type = Integer.class; 

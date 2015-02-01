@@ -16,13 +16,15 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-import gplx.criterias.*;
-public class Db_obj_ary_crt implements gplx.criterias.Criteria {
-	public byte Crt_tid() {return Criteria_.Tid_db_obj_ary;}
+import gplx.core.criterias.*;
+public class Db_obj_ary_crt implements gplx.core.criterias.Criteria {
+	public byte Tid() {return Criteria_.Tid_db_obj_ary;}
 	public Db_fld[] Flds() {return flds;} public Db_obj_ary_crt Flds_(Db_fld[] v) {this.flds = v; return this;} private Db_fld[] flds;
-	public Object[][] Vals() {return vals;} public void Vals_(Object[][] v) {this.vals = v;} private Object[][] vals;
-	public boolean Matches(Object obj) {return false;}
-	public String XtoStr() {return "";}
+	public Object[][]		Vals() {return vals;} public void Vals_(Object[][] v) {this.vals = v;} private Object[][] vals;
+	public void				Val_from_args(HashAdp args) {throw Err_.not_implemented_();}
+	public void				Val_as_obj_(Object v) {throw Err_.not_implemented_();}
+	public boolean				Matches(Object obj) {return false;}
+	public String			XtoStr() {return "";}
 	public static Db_obj_ary_crt new_(Db_fld... flds) {return new Db_obj_ary_crt().Flds_(flds);}
 	public static Db_obj_ary_crt new_by_type(byte type_tid, String... names) {
 		int len = names.length;

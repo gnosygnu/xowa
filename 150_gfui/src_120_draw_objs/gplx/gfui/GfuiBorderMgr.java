@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
+import gplx.core.strings.*;
 public class GfuiBorderMgr {
 	public PenAdp All() {return all;}		public GfuiBorderMgr All_(PenAdp v) {SyncPens(true); all = v; return this;} PenAdp all;
 	public PenAdp Left() {return left;}		public GfuiBorderMgr Left_(PenAdp v) {SyncPens(false); left = v; return this;} PenAdp left;

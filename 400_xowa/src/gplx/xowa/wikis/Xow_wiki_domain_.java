@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
+import gplx.core.primitives.*;
 public class Xow_wiki_domain_ {
 	public static byte[] Key_by_tid(byte tid) {return Key__ary[tid];}
 	public static final byte Tid_by_key_null = Byte_.Max_value_127;

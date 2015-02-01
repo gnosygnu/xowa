@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.primitives.*;
 public class Xof_ext_ {		
 	public static final int Id_unknown = 0	// SERIALIZED; ids are saved to fsdb;
 	, Id_png = 1, Id_jpg = 2, Id_jpeg = 3, Id_gif = 4, Id_tif = 5, Id_tiff = 6

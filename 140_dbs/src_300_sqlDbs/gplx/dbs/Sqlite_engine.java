@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-import gplx.stores.*;
 import java.sql.*; 
+import gplx.stores.*; import gplx.dbs.engines.sqlite.*;
 class Sqlite_engine extends Db_engine_sql_base {
 	@Override public String Tid() {return Db_url__sqlite.Tid_const;}
 	@Override public Db_engine New_clone(Db_url connectInfo) {

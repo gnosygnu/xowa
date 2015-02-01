@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
+import gplx.core.primitives.*;
 import gplx.xowa.wikis.*; import gplx.xowa.xtns.wdatas.imports.*; import gplx.xowa.bldrs.imports.ctgs.*; import gplx.xowa.bldrs.imports.*; import gplx.xowa.bldrs.oimgs.*;
 import gplx.xowa.bldrs.wikis.redirects.*; import gplx.xowa.bldrs.wikis.images.*; import gplx.xowa.files.wiki_orig.*;
 import gplx.xowa.bldrs.files.*;

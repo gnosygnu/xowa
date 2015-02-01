@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.dbs.*;
-import gplx.dbs.*; import gplx.ios.*;
+import gplx.core.primitives.*; import gplx.dbs.*; import gplx.ios.*;
 public class Xodb_text_tbl {
 	public Xodb_text_tbl(Xodb_mgr_sql db_mgr) {this.db_mgr = db_mgr; zip_mgr = db_mgr.Wiki().App().Zip_mgr();} private Xodb_mgr_sql db_mgr; private Io_stream_zip_mgr zip_mgr;
 	public void Delete_all(Db_conn conn) {conn.Exec_qry(Db_qry_.delete_tbl_(Tbl_name));}

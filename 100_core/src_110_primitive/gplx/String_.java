@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 import java.lang.*;
+import gplx.core.strings.*;
 public class String_ implements GfoInvkAble {
 	public static final Class<?> Cls_ref_type = String.class;
 	public static final String Cls_val_name = "str" + "ing";

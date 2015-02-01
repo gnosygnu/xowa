@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.gfui.*; import gplx.xowa.files.*;
+import gplx.core.primitives.*; import gplx.gfui.*; import gplx.xowa.files.*;
 public class Xof_xfer_mgr {
 	public Xof_xfer_mgr(Xof_file_mgr file_mgr) {this.file_mgr = file_mgr;} private Xof_file_mgr file_mgr;
 	public Xof_xfer_rslt Rslt() {return rslt;} private Xof_xfer_rslt rslt = new Xof_xfer_rslt();

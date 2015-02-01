@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.ios; import gplx.*;
+import gplx.core.strings.*;
 public class IoUrlTypeRegy implements GfoInvkAble {
 	public String[] FetchAryOr(String key, String... or) {
 		IoUrlTypeGrp itm = (IoUrlTypeGrp)hash.Fetch(key);

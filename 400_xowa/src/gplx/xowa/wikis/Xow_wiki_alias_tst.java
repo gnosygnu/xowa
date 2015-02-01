@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
-import org.junit.*; import gplx.xowa.wikis.*;
+import org.junit.*; import gplx.core.primitives.*; import gplx.xowa.wikis.*;
 public class Xow_wiki_alias_tst {
 	Xow_wiki_alias_fxt fxt = new Xow_wiki_alias_fxt();
 	@Test  public void Parse()	{fxt.Parse("enwiki-20121201-pages-articles.xml.bz2", "en.wikipedia.org", "20121201", Xow_wiki_alias.Tid_pages_articles);}

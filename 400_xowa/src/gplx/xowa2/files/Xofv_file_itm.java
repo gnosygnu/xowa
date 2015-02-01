@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa2.files; import gplx.*; import gplx.xowa2.*;
-import gplx.xowa.*; import gplx.xowa.files.*; import gplx.xowa.files.wiki_orig.*;
+import gplx.xowa.*; import gplx.xowa.files.*; import gplx.xowa2.files.orig_regy.*;
 public class Xofv_file_itm {
 	Xofv_file_itm(byte[] file_repo, byte[] file_ttl, byte[] file_md5, Xof_ext file_ext, Io_url file_url, int html_uid, int html_w, int html_h, byte lnki_exec_tid, boolean lnki_is_orig, double lnki_time, int lnki_page) {
 		this.file_repo = file_repo; this.file_ttl = file_ttl; this.file_md5 = file_md5; this.file_ext = file_ext; this.file_url = file_url;

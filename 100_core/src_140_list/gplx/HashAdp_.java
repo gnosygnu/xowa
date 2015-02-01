@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
+import gplx.core.primitives.*;
 public class HashAdp_ {
 	public static HashAdp new_() {return new HashAdp_obj();}
 	public static HashAdp new_bry_() {return new HashAdp_bry();}

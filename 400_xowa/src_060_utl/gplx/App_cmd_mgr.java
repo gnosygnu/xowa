@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
+import gplx.core.strings.*;
 public class App_cmd_mgr {
 	private OrderedHash expd_args = OrderedHash_.new_(), actl_args = OrderedHash_.new_(); 
 	private ListAdp tmp_vals = ListAdp_.new_(); private String[] orig_ary;

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.ios; import gplx.*;
-import gplx.criterias.*;
+import gplx.core.criterias.*;
 public class IoEngine_xrg_queryDir {
 	public Io_url Url() {return url;} public IoEngine_xrg_queryDir Url_(Io_url val) {url = val; return this;} Io_url url;
 	public boolean Recur() {return recur;} public IoEngine_xrg_queryDir Recur_() {return Recur_(true);} public IoEngine_xrg_queryDir Recur_(boolean val) {recur = val; return this;} private boolean recur = false;
@@ -33,13 +33,13 @@ public class IoEngine_xrg_queryDir {
 	public ConsoleDlg UsrDlg() {return usrDlg;} public IoEngine_xrg_queryDir UsrDlg_(ConsoleDlg val) {usrDlg = val; return this;} ConsoleDlg usrDlg = ConsoleDlg_.Null;
 	public IoEngine_xrg_queryDir FilPath_(String val) {
 		Criteria_ioMatch crt = Criteria_ioMatch.parse_(true, val, url.Info().CaseSensitive());
-		filCrt = Criteria_wrapper.new_(IoItm_base_.Prop_Path, crt);
+		filCrt = Criteria_fld.new_(IoItm_base_.Prop_Path, crt);
 		return this;
 	}
 	public IoItmDir ExecAsDir() {return IoEnginePool._.Fetch(url.Info().EngineKey()).QueryDirDeep(this);}
 	public Io_url[] ExecAsUrlAry() {return ExecAsItmHash().XtoIoUrlAry();}
 	public IoItmHash ExecAsItmHash() {
-		Criteria crt = dirInclude ? Criteria_.All : Criteria_wrapper.new_(IoItm_base_.Prop_Type, Criteria_.eq_(IoItmFil.Type_Fil));
+		Criteria crt = dirInclude ? Criteria_.All : Criteria_fld.new_(IoItm_base_.Prop_Type, Criteria_.eq_(IoItmFil.Type_Fil));
 		IoItmHash list = ExecAsDir().XtoIoItmList(crt);
 		list.SortBy(IoItmBase_comparer_nest._);
 		return list;
@@ -47,9 +47,9 @@ public class IoEngine_xrg_queryDir {
 	public static IoEngine_xrg_queryDir new_(Io_url url) {
 		IoEngine_xrg_queryDir rv = new IoEngine_xrg_queryDir();
 		rv.url = url;
-		rv.filCrt = Criteria_wrapper.new_(IoItm_base_.Prop_Path, Criteria_.All);
-		rv.dirCrt = Criteria_wrapper.new_(IoItm_base_.Prop_Path, Criteria_.All);
-		rv.subDirScanCrt = Criteria_wrapper.new_(IoItm_base_.Prop_Path, Criteria_.All);
+		rv.filCrt = Criteria_fld.new_(IoItm_base_.Prop_Path, Criteria_.All);
+		rv.dirCrt = Criteria_fld.new_(IoItm_base_.Prop_Path, Criteria_.All);
+		rv.subDirScanCrt = Criteria_fld.new_(IoItm_base_.Prop_Path, Criteria_.All);
 		return rv;
 	}	IoEngine_xrg_queryDir() {}
 }

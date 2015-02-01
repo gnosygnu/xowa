@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
-import org.junit.*;
+import org.junit.*; import gplx.core.primitives.*;
 public class Gfui_html_cfg_tst {
 	private Gfui_html_cfg_fxt fxt = new Gfui_html_cfg_fxt();
 	@Before public void init() {fxt.Reset();}

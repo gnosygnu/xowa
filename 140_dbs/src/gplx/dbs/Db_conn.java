@@ -25,10 +25,15 @@ public class Db_conn {
 	}
 	public Db_url			Url()						{return engine.Url();}
 	public Db_txn_mgr		Txn_mgr()					{return txn_mgr;} private final Db_txn_mgr txn_mgr;
+	public Db_stmt			New_stmt_insert(String tbl, Db_meta_fld_list flds)					{return engine.New_stmt_prep(Db_qry_insert.new_(tbl, flds.To_str_ary()));}
 	public Db_stmt			New_stmt_insert(String tbl, String... cols)					{return engine.New_stmt_prep(Db_qry_insert.new_(tbl, cols));}
 	public Db_stmt			New_stmt_update(String tbl, String[] where, String... cols)	{return engine.New_stmt_prep(Db_qry_update.new_(tbl, where, cols));}
 	public Db_stmt			New_stmt_delete(String tbl, String... where)					{return engine.New_stmt_prep(Db_qry_delete.new_(tbl, where));}
 	public Db_stmt			New_stmt_select_all_where(String tbl, String[] cols, String... where) {return engine.New_stmt_prep(Db_qry__select_in_tbl.new_(tbl, where, cols));}
+	public Db_stmt			New_stmt_select_all_where(String tbl, Db_meta_fld_list flds, String... where) {return engine.New_stmt_prep(Db_qry__select_in_tbl.new_(tbl, where, flds.To_str_ary()));}
+	public Db_stmt			New_stmt_update_by_meta(String tbl, Db_meta_fld_list flds, String... where) {
+		return engine.New_stmt_prep(Db_qry_update.new_(tbl, where, flds.To_str_ary_exclude(where)));
+	}
 	public void				Itms_add(Db_conn_itm itm) {itm_list.Add(itm);}
 	public void				Itms_del(Db_conn_itm itm) {itm_list.Del(itm);}
 	public void				Conn_term() {

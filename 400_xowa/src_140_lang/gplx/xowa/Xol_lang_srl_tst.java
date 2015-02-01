@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import org.junit.*;
+import org.junit.*; import gplx.core.strings.*;
 import gplx.intl.*; import gplx.xowa.apps.*; import gplx.xowa.langs.numbers.*;
 public class Xol_lang_srl_tst {
 	private Xol_lang_srl_fxt fxt = new Xol_lang_srl_fxt();

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
+import gplx.core.strings.*;
 public class Gfo_usr_dlg_ui_ {
 	public static final Gfo_usr_dlg_ui Null		= new Gfo_usr_dlg_ui_null();
 	public static final Gfo_usr_dlg_ui Console	= new Gfo_usr_dlg_ui_console();

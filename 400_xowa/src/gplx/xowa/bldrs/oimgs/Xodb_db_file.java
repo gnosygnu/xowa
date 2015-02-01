@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.oimgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+import gplx.core.primitives.*;
 import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.dbs.tbls.*;
 public class Xodb_db_file {
 	Xodb_db_file(Io_url url, Db_conn conn, boolean created) {this.url = url; this.conn = conn; this.created = created;}

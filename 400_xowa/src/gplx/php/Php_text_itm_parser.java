@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.php; import gplx.*;
+import gplx.core.primitives.*;
 public class Php_text_itm_parser {
 	public static final byte Rslt_orig = 0, Rslt_dirty = 1, Rslt_fmt = 2;
 	public boolean Quote_is_single() {return quote_is_single;} public Php_text_itm_parser Quote_is_single_(boolean v) {quote_is_single = v; return this;} private boolean quote_is_single;

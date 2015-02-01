@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa2.files; import gplx.*; import gplx.xowa2.*;
 import gplx.xowa.*; import gplx.xowa.files.*; import gplx.xowa.files.wiki_orig.*;
+import gplx.xowa2.files.orig_regy.*;
 public class Xofv_file_mgr {
 	private final Xop_xfer_itm_hash lnki_hash = new Xop_xfer_itm_hash();
 	private final Xofv_file_itm_list html_list = new Xofv_file_itm_list();

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import org.junit.*;
+import org.junit.*; import gplx.core.strings.*;
 public class Xob_xdat_file_tst {
 	@Test  public void Find() {
 		Xob_xdat_file rdr = rdr_("!!!!%|!!!!%|!!!!%|!!!!%|!!!!%|", "0|b", "1|d", "2|f", "3|h", "4|j");

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa2.files.metas; import gplx.*; import gplx.xowa2.*; import gplx.xowa2.files.*;
 import gplx.dbs.*;
-import gplx.xowa.*; import gplx.xowa.files.wiki_orig.*;
+import gplx.xowa.*; import gplx.xowa2.files.orig_regy.*;
 public class Xof_file_meta_wkr__db_orig implements Xof_file_meta_wkr {
 	public Xof_orig_regy_tbl Tbl() {return tbl;} private final Xof_orig_regy_tbl tbl = new Xof_orig_regy_tbl();
 	public Xof_file_meta_itm Get_or_null(byte[] ttl) {

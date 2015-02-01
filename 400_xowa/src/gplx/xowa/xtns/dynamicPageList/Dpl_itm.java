@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.dynamicPageList; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.html.*;
-import gplx.xowa.html.*;
+import gplx.core.primitives.*;
+import gplx.html.*; import gplx.xowa.html.*;
 class Dpl_itm {
 	public ListAdp Ctg_includes() {return ctg_includes;} private ListAdp ctg_includes;
 	public ListAdp Ctg_excludes() {return ctg_excludes;} private ListAdp ctg_excludes;

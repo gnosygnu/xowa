@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
+import gplx.core.primitives.*;
 import gplx.xowa.xtns.wdatas.core.*;
 public class Wdata_lbl_mgr {
 	private Hash_adp_bry ttl_hash = Hash_adp_bry.ci_ascii_();

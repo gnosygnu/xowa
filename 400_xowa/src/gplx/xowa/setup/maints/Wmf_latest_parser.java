@@ -26,30 +26,32 @@ public class Wmf_latest_parser {
 	public void Parse(byte[] src) {
 		hash.Clear();
 		Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
-		byte[] name_bgn_bry = Bry_.new_ascii_("<tr><td class=\"n\"><a href=\"");
-		byte[] date_bgn_bry = Bry_.new_ascii_("</a></td><td class=\"m\">");
-		byte[] size_bgn_bry = Bry_.new_ascii_("</td><td class=\"s\">");
+		byte[] name_bgn_bry = Bry_.new_ascii_("\n<a href=\"");
+		byte[] date_bgn_bry = Bry_.new_ascii_("</a>");
+		byte[] date_end_bry = Bry_.new_ascii_("  ");
+//			byte[] size_bgn_bry = Bry_.new_ascii_("</td><td class=\"s\">");
 		Btrie_slim_mgr date_trie = Btrie_slim_mgr.cs_()
 			.Add_bry("Jan", "01").Add_bry("Feb", "02").Add_bry("Mar", "03").Add_bry("Apr", "04").Add_bry("May", "05").Add_bry("Jun", "06")
 			.Add_bry("Jul", "07").Add_bry("Aug", "08").Add_bry("Sep", "09").Add_bry("Oct", "10").Add_bry("Nov", "11").Add_bry("Dec", "12")
 			;
-		Btrie_slim_mgr size_trie = Btrie_slim_mgr.cs_()
-			.Add_bry("B", "  B").Add_bry("K", " KB").Add_bry("M", " MB").Add_bry("G", " GB");
-		byte[] date_or = Bry_.new_ascii_("1970-01-01");
-		byte[] size_or = Bry_.new_ascii_("0 B");
+//			Btrie_slim_mgr size_trie = Btrie_slim_mgr.cs_()
+//				.Add_bry("B", "  B").Add_bry("K", " KB").Add_bry("M", " MB").Add_bry("G", " GB");
+		byte[] date_or = Bry_.new_ascii_("1970-01-01 00:00:00");
+//			byte[] size_or = Bry_.new_ascii_("0 B");
 		int size_end = 0; int src_len = src.length;
 		while (true) {
 			int name_bgn = Bry_finder.Move_fwd(src, name_bgn_bry, size_end, src_len); if (name_bgn == Bry_finder.Not_found) break;
 			int name_end = Bry_finder.Find_fwd(src, Byte_ascii.Quote, name_bgn, src_len);
 			byte[] name = Bry_.Mid(src, name_bgn, name_end);
 			int date_bgn = Bry_finder.Move_fwd(src, date_bgn_bry, name_end, src_len); if (date_bgn == Bry_finder.Not_found) {Gfo_usr_dlg_._.Warn_many("", "", "date_bgn not found"); break;}
-			int date_end = Bry_finder.Find_fwd(src, Byte_ascii.Lt, date_bgn, src_len);
+			date_bgn = Bry_finder.Find_fwd_while_space_or_tab(src, date_bgn, src_len); if (date_bgn == Bry_finder.Not_found) {Gfo_usr_dlg_._.Warn_many("", "", "date_bgn not found"); break;}
+			int date_end = Bry_finder.Find_fwd(src, date_end_bry, date_bgn, src_len);
 			byte[] date_bry = Bry_.Mid(src, date_bgn, date_end);
-			DateAdp date = DateAdp_.parse_fmt(String_.new_ascii_(Replace_or(tmp_bfr, date_trie, date_bry, 5, date_or)), "yyyy-MM-dd hh:mm:ss");
-			int size_bgn = Bry_finder.Move_fwd(src, size_bgn_bry, date_end, src_len); if (size_bgn == Bry_finder.Not_found) {Gfo_usr_dlg_._.Warn_many("", "", "size_bgn not found"); break;}
-			size_end = Bry_finder.Find_fwd(src, Byte_ascii.Lt, size_bgn, src_len);
+			DateAdp date = DateAdp_.parse_fmt(String_.new_ascii_(Replace_or(tmp_bfr, date_trie, date_bry, 3, date_or)), "dd-MM-yyyy HH:mm");
+			int size_bgn = Bry_finder.Find_fwd_while_space_or_tab(src, date_end, src_len); if (size_bgn == Bry_finder.Not_found) {Gfo_usr_dlg_._.Warn_many("", "", "size_bgn not found"); break;}
+			size_end = Bry_finder.Find_fwd(src, Byte_ascii.CarriageReturn, size_bgn, src_len);
 			byte[] size_bry = Bry_.Mid(src, size_bgn, size_end);
-			long size = Io_size_.parse_or_(String_.new_ascii_(Replace_or(tmp_bfr, size_trie, size_bry, size_bry.length - 1, size_or)), 0);
+			long size = Long_.parse_or_(String_.new_utf8_(size_bry), -1);
 			Wmf_latest_itm itm = new Wmf_latest_itm(name, date, size);
 			hash.Add(name, itm);
 		}

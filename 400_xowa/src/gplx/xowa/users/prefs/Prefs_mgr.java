@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.prefs; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
-import gplx.html.*; import gplx.gfui.*;
+import gplx.core.primitives.*; import gplx.html.*; import gplx.gfui.*;
 public class Prefs_mgr implements GfoInvkAble {
 	public Prefs_mgr(Xoa_app app) {
 		this.app = app;

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.intl; import gplx.*;
-import org.junit.*;
+import org.junit.*; import gplx.core.primitives.*;
 public class Utf16__tst {
 	private Utf16__fxt fxt = new Utf16__fxt();
 	@Test  public void Encode_decode() {

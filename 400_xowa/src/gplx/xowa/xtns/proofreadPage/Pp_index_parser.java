@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.proofreadPage; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.parsers.logs.*;
+import gplx.core.primitives.*; import gplx.xowa.parsers.logs.*;
 class Pp_index_parser {
 	public static Pp_index_page Parse(Xow_wiki wiki, Xop_ctx ctx, Xoa_ttl index_ttl, int ns_page_id) {
 		byte[] src = wiki.Cache_mgr().Page_cache().Get_or_load_as_src(index_ttl);

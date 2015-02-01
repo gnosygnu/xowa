@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
+import gplx.core.primitives.*;
 public class Bry_bfr {
 	public byte[] Bfr() {return bfr;} private byte[] bfr;
 	@gplx.Internal protected int Bfr_max() {return bfr_max;} private int bfr_max;

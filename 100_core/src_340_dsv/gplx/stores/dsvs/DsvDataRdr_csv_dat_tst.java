@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.stores.dsvs; import gplx.*; import gplx.stores.*;
-import org.junit.*;
+import org.junit.*; import gplx.core.strings.*;
 public class DsvDataRdr_csv_dat_tst {
 	@Before public void setup() {
 		fx.Parser_(DsvParser.csv_(false, GfoFldList_.Null));

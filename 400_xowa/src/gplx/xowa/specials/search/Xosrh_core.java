@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.xowa.wikis.*;
+import gplx.core.primitives.*; import gplx.xowa.wikis.*;
 public class Xosrh_core implements GfoInvkAble, Xows_page {
 	public Xosrh_core(Xow_wiki wiki) {this.wiki = wiki;} 
 	public Xow_wiki Wiki() {return wiki;} private Xow_wiki wiki;

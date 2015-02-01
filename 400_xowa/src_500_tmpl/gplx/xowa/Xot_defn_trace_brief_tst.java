@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import org.junit.*;
+import org.junit.*; import gplx.core.strings.*;
 public class Xot_defn_trace_brief_tst {
 	Xot_defn_trace_fxt fxt = new Xot_defn_trace_fxt();
 	@Before public void init() {

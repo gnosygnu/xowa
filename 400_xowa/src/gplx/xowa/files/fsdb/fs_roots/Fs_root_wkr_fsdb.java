@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.fsdb.fs_roots; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
-import gplx.dbs.*;
+import gplx.core.primitives.*; import gplx.dbs.*;
 import gplx.fsdb.*;
 public class Fs_root_wkr_fsdb {
 	private Xow_wiki wiki;

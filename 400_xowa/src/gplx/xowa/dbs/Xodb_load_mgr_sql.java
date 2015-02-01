@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs; import gplx.*; import gplx.xowa.*;
-import gplx.dbs.*;
+import gplx.core.primitives.*; import gplx.dbs.*;
 import gplx.xowa.apps.*; import gplx.xowa.bldrs.imports.ctgs.*; import gplx.xowa.ctgs.*; import gplx.xowa.specials.search.*; import gplx.xowa.dbs.tbls.*;
 public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 	public Xodb_load_mgr_sql(Xodb_mgr_sql db_mgr, Xodb_fsys_mgr fsys_mgr) {this.db_mgr = db_mgr; this.fsys_mgr = fsys_mgr;} private Xodb_mgr_sql db_mgr; Xodb_fsys_mgr fsys_mgr;

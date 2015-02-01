@@ -16,13 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-import gplx.criterias.*; import gplx.dbs.sqls.*;
+import gplx.core.criterias.*; import gplx.dbs.sqls.*;
 public class Db_qry_select implements Db_qry {
 	public int			Tid() {return Db_qry_.Tid_select;}
 	public boolean			Exec_is_rdr() {return true;}
 	public String		Base_table() {return from.BaseTable().TblName();}
 	public String		Xto_sql() {return Sql_qry_wtr_.I.Xto_str(this, false);}		
-	public DataRdr Exec_qry_as_rdr(Db_conn conn) {return conn.Exec_qry_as_rdr(this);}
+	public DataRdr		Exec_qry_as_rdr(Db_conn conn) {return conn.Exec_qry_as_rdr(this);}
 	public GfoNde ExecRdr_nde(Db_conn conn) {
 		DataRdr rdr = DataRdr_.Null;
 		try {return GfoNde_.rdr_(Exec_qry_as_rdr(conn));} finally {rdr.Rls();}
@@ -65,6 +65,7 @@ public class Db_qry_select implements Db_qry {
 	}
 
 	@gplx.Internal protected Sql_select Cols() {return cols;} Sql_select cols = Sql_select.All;
+	public String[] Cols_ary() {return cols.Flds().To_str_ary();}
 	public Db_qry_select Cols_all_() {return this;}
 	public Db_qry_select Cols_alias_(String expr, String alias) {
 		if (cols == Sql_select.All) cols = Sql_select.new_();
@@ -100,7 +101,7 @@ public class Db_qry_select implements Db_qry {
 		return this;
 	}
 
-	@gplx.Internal protected Sql_where Where() {return where;} public Db_qry_select Where_(Criteria crt) {where = Sql_where.new_(crt); return this;} Sql_where where;
+	public Criteria Where() {return where;} public Db_qry_select Where_(Criteria crt) {where = crt; return this;} Criteria where;
 	@gplx.Internal protected Sql_order_by OrderBy() {return orderBy;} Sql_order_by orderBy = null;
 	public Db_qry_select OrderBy_(String fieldName, boolean ascending) {
 		Sql_order_by_itm item = Sql_order_by_itm.new_(fieldName, ascending);

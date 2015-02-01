@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.core.btries.*;
+import gplx.core.primitives.*; import gplx.core.btries.*;
 class Xoi_css_offline_itm {
 	public Xoi_css_offline_itm(byte[] http_url) {this.http_url = http_url;}
 	public byte[] Http_url() {return http_url;} private byte[] http_url;

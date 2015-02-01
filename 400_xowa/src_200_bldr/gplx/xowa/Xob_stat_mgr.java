@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.strings.*;
 public class Xob_stat_mgr {
 	public Xob_stat_type GetOrNew(byte tid) {
 		Xob_stat_type rv = (Xob_stat_type)regy.Fetch(tid);

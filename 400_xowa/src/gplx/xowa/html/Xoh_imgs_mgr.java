@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
+import gplx.core.primitives.*;
 import gplx.xowa.wikis.*;
 public class Xoh_imgs_mgr implements GfoInvkAble {
 	public Xoh_imgs_mgr(Xow_html_mgr html_mgr) {wiki_is_default = html_mgr.Wiki().Domain_tid() == Xow_wiki_domain_.Tid_home;} private boolean wiki_is_default;

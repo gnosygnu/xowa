@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.html; import gplx.*;
-import gplx.core.btries.*;
+import gplx.core.primitives.*; import gplx.core.btries.*;
 public class Html_utl {
 	public static byte[] Escape_for_atr_val_as_bry(Bry_bfr tmp_bfr, byte quote_byte, String s) {
 		if (s == null) return null;

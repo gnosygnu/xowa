@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
+import gplx.core.primitives.*;
 import gplx.intl.*;
 public class Hash_adp_bry extends gplx.lists.HashAdp_base implements HashAdp {
 	private final Hash_adp_bry_itm_base proto, key_ref;

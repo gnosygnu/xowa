@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.stores.xmls; import gplx.*; import gplx.stores.*;
+import gplx.core.strings.*;
 public class XmlDataWtr_ {
 	public static DataWtr new_() {return XmlDataWtr.new_();}
 }

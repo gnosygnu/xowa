@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.imports.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.imports.*;
-import gplx.core.btries.*; import gplx.core.flds.*; import gplx.ios.*;
+import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.core.flds.*; import gplx.ios.*;
 public abstract class Xob_ctg_v1_base extends Xob_itm_dump_base implements Xobd_parser_wkr, GfoInvkAble {
 	protected Xob_ctg_v1_base() {}	// TEST:needed for fxt
 	public Xob_ctg_v1_base Ctor(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki); return this;}

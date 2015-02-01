@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
-import gplx.lists.*;
+import gplx.core.strings.*; import gplx.lists.*;
 public abstract class ListAdp_base implements ListAdp, GfoInvkAble {
 	public Object Xto_ary_and_clear(Class<?> memberType) {Object rv = Xto_ary(memberType); this.Clear(); return rv;}
 	public Object Xto_ary(Class<?> memberType) {

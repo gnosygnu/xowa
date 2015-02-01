@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.core.btries.*;
+import gplx.core.primitives.*; import gplx.core.btries.*;
 class Xosrh_scanner {
 	ListAdp tkns = ListAdp_.new_(); byte[] src; int src_len; int pos; int txt_bgn;
 	public Xosrh_qry_tkn[] Scan(byte[] src) {			

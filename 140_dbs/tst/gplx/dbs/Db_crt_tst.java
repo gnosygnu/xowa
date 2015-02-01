@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
 import org.junit.*;
-import gplx.criterias.*;
+import gplx.core.criterias.*;
 public class Db_crt_tst {
 	@Before public void setup() {
 		row = GfoNde_.vals_(GfoFldList_.new_().Add("id", IntClassXtn._).Add("name", StringClassXtn._), Object_.Ary(1, "me"));

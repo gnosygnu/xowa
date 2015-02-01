@@ -16,9 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs; import gplx.*; import gplx.xowa.*;
-import gplx.dbs.*;
+import gplx.dbs.*; import gplx.dbs.engines.sqlite.*;
 import gplx.xowa.apps.*; import gplx.xowa.dbs.tbls.*; import gplx.xowa.ctgs.*; import gplx.xowa.hdumps.*;
-import gplx.xowa2.wikis.data.tbls.*;
+import gplx.xowa2.wikis.data.*;
 public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 	private boolean html_db_enabled;
 	public Xodb_mgr_sql(Xow_wiki wiki) {
@@ -50,7 +50,7 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 	public Xodb_save_mgr Save_mgr() {return save_mgr;} private Xodb_save_mgr_sql save_mgr;
 	public Xodb_hdump_mgr Hdump_mgr() {return hdump_mgr;} private Xodb_hdump_mgr hdump_mgr;
 	public Xodb_xowa_cfg_tbl Tbl_xowa_cfg() {return tbl_cfg;} private Xodb_xowa_cfg_tbl tbl_cfg = new Xodb_xowa_cfg_tbl();
-	public Xodata_ns_regy_tbl Tbl_xowa_ns() {return tbl_ns;} private Xodata_ns_regy_tbl tbl_ns = new Xodata_ns_regy_tbl();
+	public Xodb_xowa_ns_tbl Tbl_xowa_ns() {return tbl_ns;} private Xodb_xowa_ns_tbl tbl_ns = new Xodb_xowa_ns_tbl();
 	public Xodb_xowa_db_tbl Tbl_xowa_db() {return tbl_db;} private Xodb_xowa_db_tbl tbl_db = new Xodb_xowa_db_tbl();
 	public Xodb_page_tbl Tbl_page() {return tbl_page;} private Xodb_page_tbl tbl_page;
 	public Xodb_text_tbl Tbl_text() {return tbl_text;} private Xodb_text_tbl tbl_text;
@@ -168,7 +168,7 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 			Xodb_file file = ary[i] ;
 			if (file.Tid() != tid) continue;
 			file.Rls();
-			gplx.dbs.Db_url__sqlite sqlite = (gplx.dbs.Db_url__sqlite)file.Connect();
+			Db_url__sqlite sqlite = (Db_url__sqlite)file.Connect();
 			Io_mgr._.DeleteFil_args(sqlite.Url()).MissingFails_off().Exec();
 			file.Cmd_mode_(Db_cmd_mode.Delete);
 		}

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
-import gplx.ios.*; /*IoUrlInfo*/
+import gplx.core.strings.*; import gplx.ios.*; /*IoUrlInfo*/
 public class Io_url implements CompareAble, EqAble, ParseAble, GfoInvkAble {	//_20101005 URL:doc/Io_url.txt
 	public IoUrlInfo Info() {return info;} IoUrlInfo info;
 	public String Raw() {return raw;} final String raw;

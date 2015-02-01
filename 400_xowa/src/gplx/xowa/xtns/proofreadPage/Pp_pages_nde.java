@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.proofreadPage; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+import gplx.core.primitives.*;
 import gplx.xowa.html.*; import gplx.xowa.parsers.amps.*;
 import gplx.xowa.xtns.lst.*; import gplx.xowa.pages.*;
 public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
@@ -223,7 +224,7 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 		return list;
 	}
 	private ListAdp Get_ttls_from_xnde_args__rng(ListAdp list) {
-		if (bgn_page_bry == null && end_page_bry == null) return list;	// from and to are blank; exit early
+		if (Bry_.Len_eq_0(bgn_page_bry) && Bry_.Len_eq_0(end_page_bry)) return list;	// from and to are blank; exit early
 		NumberParser num_parser = wiki.App().Utl_num_parser();
 		bgn_page_int = 0;	// NOTE: default to 0 (1st page)
 		if (Bry_.Len_gt_0(bgn_page_bry)) {

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
+import gplx.core.strings.*;
 public class KeyVal_ {
 	public static final KeyVal[] Ary_empty = new KeyVal[0];
 	public static KeyVal[] Ary(KeyVal... ary) {return ary;}

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.fsdb; import gplx.*;
-import gplx.dbs.*;
+import gplx.dbs.*; import gplx.dbs.engines.sqlite.*;
 public class Fsdb_db_abc_mgr implements RlsAble {
 	private Db_conn boot_provider;
 	public int Next_id() {return cfg_mgr.Next_id();}

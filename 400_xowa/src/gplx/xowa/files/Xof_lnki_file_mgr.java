@@ -37,7 +37,7 @@ public class Xof_lnki_file_mgr {
 				page_init_needed = false;					
 				wiki.File_mgr().Fsdb_mgr().Init_by_wiki__add_bin_wkrs(wiki);	// NOTE: fsdb_mgr may not be init'd for wiki; assert that that it is
 				Create_xfer_itms(page.Lnki_list(), wiki.File_mgr().Fsdb_mgr().Patch_upright());	// NOTE: Patch_upright check must occur after Init_by_wiki; DATE:2014-05-31
-				wiki.File_mgr().Fsdb_mgr().Reg_select_only(page, exec_tid, fsdb_list, orig_regy);
+				wiki.File_mgr().Fsdb_mgr().Orig_select_by_list(page, exec_tid, fsdb_list, orig_regy);
 				Hash_xfer_itms();
 			}
 			Xof_fsdb_itm fsdb_itm = (Xof_fsdb_itm)xfer_list.Fetch(xfer_itm.Lnki_ttl());

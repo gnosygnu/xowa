@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.core.btries.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.langs.cases.*;
+import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.langs.cases.*;
 public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.MW: Ttl.php|secureAndSplit;
 	public Xow_ns Ns() {return ns;} private Xow_ns ns;
 	public boolean ForceLiteralLink() {return forceLiteralLink;} private boolean forceLiteralLink;

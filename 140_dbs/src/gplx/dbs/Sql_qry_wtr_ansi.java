@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-import gplx.criterias.*;
+import gplx.core.strings.*; import gplx.core.criterias.*;
 class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 	private final String_bldr sb = String_bldr_.new_();
 	private boolean prepare = false;
@@ -34,7 +34,7 @@ class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 	}
 	private String Bld_qry_delete(Db_qry_delete cmd) {
 		sb.Add_many("DELETE FROM ", cmd.Base_table());
-		Bld_where2(sb, cmd.Where());
+		Bld_where(sb, cmd.Where());
 		return sb.Xto_str_and_clear();
 	}
 	private String Bld_qry_insert(Db_qry_insert cmd) {
@@ -53,14 +53,14 @@ class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 		sb.Add_many("INSERT INTO ", cmd.Base_table(), " (");
 		for (int i = 0; i < arg_count; i++) {
 			KeyVal pair = cmd.Args().FetchAt(i);
-			this.XtoSqlCol(sb, pair.Key_as_obj());
+			this.Xto_sql_col(sb, pair.Key_as_obj());
 			sb.Add(i == last ? ")" : ", ");
 		}
 		sb.Add(" VALUES (");
 		for (int i = 0; i < arg_count; i++) {
 			KeyVal pair = cmd.Args().FetchAt(i);
-			Db_arg prm = (Db_arg)pair.Val();
-			this.Bld_val(sb, prm);
+			Db_arg arg = (Db_arg)pair.Val();
+			this.Bld_val(sb, arg);
 			sb.Add(i == last ? ")" : ", ");
 		}
 		return sb.Xto_str_and_clear();
@@ -71,7 +71,7 @@ class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 		for (int i = 0; i < arg_count; i++) {
 			KeyVal pair = cmd.Args().FetchAt(i);
 			if (i > 0) sb.Add(", ");
-			this.XtoSqlCol(sb, pair.Key_as_obj());
+			this.Xto_sql_col(sb, pair.Key_as_obj());
 			sb.Add("=");
 			this.Bld_val(sb, (Db_arg)pair.Val());
 		}
@@ -86,7 +86,7 @@ class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 		for (int i = 0; i < flds.Count(); i++) {
 			Sql_select_fld_base fld = (Sql_select_fld_base)flds.FetchAt(i);
 			if (i > 0) sb.Add(", ");
-			this.XtoSqlCol(sb, fld.XtoSql());
+			this.Xto_sql_col(sb, fld.XtoSql());
 		}
 		Bld_clause_from(sb, cmd.From());
 		Bld_where(sb, cmd.Where());
@@ -127,13 +127,11 @@ class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 			for (int i = 0; i < tbl.JoinLinks().Count(); i++) {
 				Sql_join_itm joinLink = (Sql_join_itm)tbl.JoinLinks().FetchAt(i);
 				String conjunction = i == 0 ? " ON " : " AND ";
-				sb.Add_many
-					(	conjunction, joinLink.SrcTbl(), ".", joinLink.SrcFld(), "=", tblAliasForJoin, ".", joinLink.TrgFldOrSrcFld()
-					);
+				sb.Add_many(conjunction, joinLink.SrcTbl(), ".", joinLink.SrcFld(), "=", tblAliasForJoin, ".", joinLink.TrgFldOrSrcFld());
 			}
 		}
 	}
-	private void XtoSqlCol(String_bldr sb, Object obj) {
+	private void Xto_sql_col(String_bldr sb, Object obj) {
 		if (obj == null) throw Err_.null_("ColName");
 		sb.Add_obj(obj);	// FIXME: options for bracketing; ex: [name]
 	}
@@ -167,43 +165,50 @@ class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 			Bld_val_str(sb, arg, valString);
 		}
 	}
-	@gplx.Virtual public void Bld_val_str(String_bldr sb, Db_arg prm, String s) {
+	@gplx.Virtual public void Bld_val_str(String_bldr sb, Db_arg arg, String s) {
 		sb.Add_many("'", String_.Replace(s, "'", "''"), "'");	// stupid escaping of '
 	}
-	@gplx.Virtual public void Bld_val_date(String_bldr sb, Db_arg prm, DateAdp s) {
+	@gplx.Virtual public void Bld_val_date(String_bldr sb, Db_arg arg, DateAdp s) {
 		sb.Add_many("'", s.XtoStr_gplx_long(), "'");
 	}
-	private void Bld_where(String_bldr sb, Sql_where where) {
-		if (where == null || where.Crt() == Db_crt_.Wildcard) return;
-		sb.Add(" WHERE ");
-		this.Bld_where(sb, where.Crt());
-	}
-	private void Bld_where2(String_bldr sb, Criteria crt) {
-		if (crt == null || crt == Db_crt_.Wildcard) return;
-		sb.Add(" WHERE ");
-		this.Bld_where(sb, crt);
-	}
 	public void Bld_where(String_bldr sb, Criteria crt) {
+		if (crt == null) return;
+		if (crt.Tid() == Criteria_.Tid_wrapper) {
+			Criteria_fld crt_fld = (Criteria_fld)crt;
+			Criteria crt_inner = crt_fld.Crt();
+			switch (crt_inner.Tid()) {
+				case Criteria_.Tid_const:
+				case Criteria_.Tid_not:
+				case Criteria_.Tid_and:
+				case Criteria_.Tid_or:		crt = crt_inner; break;
+				default:					break;
+			}
+		}
+		if (crt.Tid() == Criteria_.Tid_const) return;
+		sb.Add(" WHERE ");
+		this.Bld_where_val(sb, crt);
+	}
+	public void Bld_where_val(String_bldr sb, Criteria crt) {
 		Criteria_bool_base crt_bool = Criteria_bool_base.as_(crt);
 		if (crt_bool != null) {
 			sb.Add("(");
-			Bld_where(sb, crt_bool.Lhs());
-			sb.Add_many(" ", crt_bool.OpLiteral(), " ");
-			Bld_where(sb, crt_bool.Rhs());
+			Bld_where_val(sb, crt_bool.Lhs());
+			sb.Add_many(" ", crt_bool.Op_literal(), " ");
+			Bld_where_val(sb, crt_bool.Rhs());
 			sb.Add(")");
 			return;
 		}
-		if (crt.Crt_tid() == Criteria_.Tid_db_obj_ary) {
+		if (crt.Tid() == Criteria_.Tid_db_obj_ary) {
 			Append_db_obj_ary(sb, (Db_obj_ary_crt)crt);
 		}
 		else {
-			Criteria_wrapper leaf = Criteria_wrapper.as_(crt); if (leaf == null) throw Err_.invalid_op_(crt.XtoStr());
-			sb.Add(leaf.Name_of_GfoFldCrt());
-			Bld_where_crt(sb, leaf.Crt_of_GfoFldCrt());
+			Criteria_fld leaf = Criteria_fld.as_(crt); if (leaf == null) throw Err_.invalid_op_(crt.XtoStr());
+			sb.Add(leaf.Key());
+			Bld_where_crt(sb, leaf.Crt());
 		}
 	}
 	private void Bld_where_crt(String_bldr sb, Criteria crt) {
-		switch (crt.Crt_tid()) {
+		switch (crt.Tid()) {
 			case Criteria_.Tid_eq:			Bld_where_eq(sb, Criteria_eq.as_(crt)); break;
 			case Criteria_.Tid_comp:		Bld_where_comp(sb, Criteria_comp.as_(crt)); break;
 			case Criteria_.Tid_between:		Bld_where_between(sb, Criteria_between.as_(crt)); break;
@@ -215,11 +220,11 @@ class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 	}
 	private void Bld_where_eq(String_bldr sb, Criteria_eq crt) {
 		sb.Add(crt.Negated() ? "!=" : "=");
-		this.Bld_val(sb, Wrap(crt.Value()));
+		this.Bld_val(sb, Wrap(crt.Val()));
 	}
 	private void Bld_where_comp(String_bldr sb, Criteria_comp crt) {
 		sb.Add_many(crt.XtoSymbol());
-		this.Bld_val(sb, Wrap(crt.Value()));
+		this.Bld_val(sb, Wrap(crt.Val()));
 	}
 	private void Bld_where_between(String_bldr sb, Criteria_between crt) {
 		sb.Add(crt.Negated() ? " NOT BETWEEN " : " BETWEEN ");
@@ -234,7 +239,7 @@ class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 	}
 	private void Bld_where_in(String_bldr sb, Criteria_in crt) {
 		sb.Add(crt.Negated() ? " NOT IN (" : " IN (");
-		Object[] crt_vals = crt.Values();
+		Object[] crt_vals = crt.Val_as_obj_ary();
 		int len = crt_vals.length;
 		int last = len - 1;
 		for (int i = 0; i < len; i++) {
@@ -279,8 +284,8 @@ class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 	}
 	private Db_arg Wrap(Object val) {return new Db_arg("unknown", val);}
 }
-class Sql_qry_wtr_ansi_escape_backslash extends Sql_qry_wtr_ansi {		@Override public void Bld_val_str(String_bldr sb, Db_arg prm, String s) {
+class Sql_qry_wtr_ansi_escape_backslash extends Sql_qry_wtr_ansi {		@Override public void Bld_val_str(String_bldr sb, Db_arg arg, String s) {
 		if (String_.Has(s, "\\")) s = String_.Replace(s, "\\", "\\\\");
-		super.Bld_val_str(sb, prm, s);
+		super.Bld_val_str(sb, arg, s);
 	}
 }

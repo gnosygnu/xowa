@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.core.btries.*; import gplx.xowa.langs.cases.*;
+import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.xowa.langs.cases.*;
 import gplx.xowa.xtns.scribunto.*;
 public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 	private OrderedHash id_hash = OrderedHash_.new_();		// hash for retrieval by id

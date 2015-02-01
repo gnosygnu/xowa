@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-import org.junit.*;
-import gplx.criterias.*;
+import org.junit.*; import gplx.core.strings.*;
+import gplx.core.criterias.*;
 public class Sql_qry_wtr_tst {
 	private final Sql_qry_wtr_fxt fxt = new Sql_qry_wtr_fxt();
 	@Test  public void Val() {
@@ -55,7 +55,7 @@ class Sql_qry_wtr_fxt {
 	}
 	public void Test_where(Criteria crt, String expd) {
 		String_bldr sb = String_bldr_.new_();
-		sql_wtr.Bld_where(sb, crt);
+		sql_wtr.Bld_where_val(sb, crt);
 		Tfds.Eq(expd, sb.XtoStr());
 	}
 }

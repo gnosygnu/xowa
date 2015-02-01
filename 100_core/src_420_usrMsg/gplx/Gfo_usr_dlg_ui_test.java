@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
+import gplx.core.strings.*;
 public class Gfo_usr_dlg_ui_test implements Gfo_usr_dlg_ui {
 	public String[] Xto_str_ary() {return msgs.XtoStrAry();}
 	public ListAdp Warns() {return warns;}

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
+import gplx.core.strings.*;
 public interface IptArg {
 	String Key();
 	boolean Eq(IptArg comp);	// NOTE: this relies on unique key across all IptArgs; EX: .Key() cannot be just "left"; would have issues with key.left and mouse.left

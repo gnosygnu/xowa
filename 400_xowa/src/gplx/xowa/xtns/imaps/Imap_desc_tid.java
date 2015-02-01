@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.btries.*;
+import gplx.core.primitives.*; import gplx.core.btries.*;
 class Imap_desc_tid {
 	public static final byte Tid_tr = 0, Tid_br = 1, Tid_bl = 2, Tid_tl = 3, Tid_none = 4, Tid_null = 5;
 	public static final byte[] 

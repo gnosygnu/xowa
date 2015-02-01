@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.primitives.*;
 public class Xof_mime_minor_ {
 	public static Xof_ext ext_(byte[] minor_mime) {
 		Int_obj_val id_obj = (Int_obj_val)mime_hash.Fetch(minor_mime);

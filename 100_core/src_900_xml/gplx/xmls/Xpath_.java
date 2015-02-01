@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xmls; import gplx.*;
+import gplx.core.primitives.*;
 public class Xpath_ {
 	public static XmlNdeList SelectAll(XmlNde owner, String xpath) {return Select(owner, xpath, Xpath_Args.all_());}
 	public static XmlNde SelectFirst(XmlNde owner, String xpath) {

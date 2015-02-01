@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.primitives.*;
 public class Xow_ns_ {
 	public static final int	// PAGE:en.w:http://www.mediawiki.org/wiki/Help:Namespaces
 		  Id_media				=  -2

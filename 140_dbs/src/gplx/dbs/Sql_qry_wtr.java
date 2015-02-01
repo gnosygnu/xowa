@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-import gplx.criterias.*;
+import gplx.core.criterias.*;
 public interface Sql_qry_wtr {
 	String Xto_str(Db_qry qry, boolean prepare);
 }

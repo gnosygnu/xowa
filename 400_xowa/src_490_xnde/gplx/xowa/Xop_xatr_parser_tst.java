@@ -50,6 +50,7 @@ public class Xop_xatr_parser_tst {
 	@Test  public void Dangling_bos() 			{fxt.tst_("a='b c=d", fxt.new_invalid_(0, 4), fxt.new_atr_("c", "d"));}	// PURPOSE: handle dangling quote at bos; resume at next valid atr; PAGE:en.w:Aubervilliers DATE:2014-06-25
 	@Test  public void Invalid_incomplete() 	{fxt.tst_("a= c=d", fxt.new_invalid_(0, 3), fxt.new_atr_("c", "d"));}	// PURPOSE: discard xatr if incomplete and followed by valid atr; PAGE:en.w:2013_in_American_television DATE:2014-09-25
 	@Test  public void Invalid_incomplete_2() 	{fxt.tst_("a=c=d", fxt.new_invalid_(0, 5));}	// PURPOSE: variation of above; per MW regex, missing space invalidates entire attribute; DATE:2014-09-25
+	@Test  public void Invalid_incomplete_pair(){fxt.tst_("a= b=", fxt.new_invalid_(0, 3), fxt.new_invalid_(3, 5));}	// PURPOSE: "b=" should be invalid not a kv of "b" = "b"; PAGE:en.s:Notes_by_the_Way/Chapter_2; DATE:2015-01-31
 /*
 TODO:
 change ws to be end; EX: "a=b c=d" atr1 ends at 4 (not 3)

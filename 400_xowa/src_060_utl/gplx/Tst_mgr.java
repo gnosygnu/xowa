@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
+import gplx.core.strings.*;
 public class Tst_mgr {
 	public Tst_mgr ThrowError_n_() {throwError = false; return this;} private boolean throwError = true;
 	public ListAdp Results() {return results;} ListAdp results = ListAdp_.new_();

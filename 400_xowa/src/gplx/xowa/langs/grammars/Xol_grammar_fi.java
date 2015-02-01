@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.grammars; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-import gplx.core.btries.*;
+import gplx.core.primitives.*; import gplx.core.btries.*;
 public class Xol_grammar_fi implements Xol_grammar {
 	public boolean Vowel_harmony(byte[] word, int word_len) {
 		// $aou = preg_match( '/[aou][^äöy]*$/i', $word );

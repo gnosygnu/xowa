@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.xowa_cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.html.*;
+import gplx.core.primitives.*; import gplx.xowa.html.*;
 public class Xox_xowa_html_cmd implements Xox_xnde, Xop_xnde_atr_parser {
 	private byte pos_val = Pos_head_end;
 	public Xop_root_tkn Xtn_root() {throw Err_.not_implemented_msg_("xowa_html_cmd.xtn_root should not be called");}

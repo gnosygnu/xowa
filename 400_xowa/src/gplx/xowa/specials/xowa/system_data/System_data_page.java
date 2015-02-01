@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.xowa.system_data; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*; import gplx.xowa.specials.xowa.*;
+import gplx.core.primitives.*;
 public class System_data_page implements Xows_page {
 	private Xoa_url_arg_hash arg_hash = new Xoa_url_arg_hash();
 	public void Special_gen(Xoa_url url, Xoa_page page, Xow_wiki wiki, Xoa_ttl ttl) {

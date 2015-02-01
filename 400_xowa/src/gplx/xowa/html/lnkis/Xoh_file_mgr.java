@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
+import gplx.core.primitives.*;
 import gplx.xowa.files.*; import gplx.xowa.parsers.lnkis.*;
 public class Xoh_file_mgr {
 	private final Xow_wiki wiki; private final Bool_obj_ref queue_add_ref = Bool_obj_ref.n_();

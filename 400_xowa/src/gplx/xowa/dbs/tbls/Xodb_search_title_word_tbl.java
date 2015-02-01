@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.dbs.*;
-import gplx.dbs.*;
+import gplx.core.primitives.*; import gplx.dbs.*;
 public class Xodb_search_title_word_tbl {
 	public static void Create_table(Db_conn p)						{Sqlite_engine_.Tbl_create(p, Tbl_name, Tbl_sql);}
 	public static void Create_index(Gfo_usr_dlg usr_dlg, Db_conn p)	{Sqlite_engine_.Idx_create(usr_dlg, p, "search", Indexes_main);}
@@ -32,7 +32,7 @@ public class Xodb_search_title_word_tbl {
 			.Cols_(Xodb_search_title_word_tbl.Fld_stw_word_id)
 			.From_(Xodb_search_title_word_tbl.Tbl_name, "w")
 			;
-		gplx.criterias.Criteria crt = null; 
+		gplx.core.criterias.Criteria crt = null; 
 		if (Bry_.Has(search, Byte_ascii.Asterisk)) {
 			search = Bry_.Replace(search, Byte_ascii.Asterisk, Byte_ascii.Percent);
 			crt = Db_crt_.like_	(Xodb_search_title_word_tbl.Fld_stw_word, String_.new_utf8_(search));

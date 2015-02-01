@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.xowa.bldrs.*; 
-import gplx.criterias.*;
+import gplx.core.criterias.*;
 public class Xobc_core_cleanup extends Xob_itm_basic_base implements Xob_cmd {
 	private String bz2_cmd;
 	private boolean delete_all, delete_tmp;

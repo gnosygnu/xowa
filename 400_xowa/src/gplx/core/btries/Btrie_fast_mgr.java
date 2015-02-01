@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.btries; import gplx.*; import gplx.core.*;
+import gplx.core.primitives.*;
 public class Btrie_fast_mgr {
 	private ByteTrieItm_fast root;
 	public boolean CaseAny() {return root.CaseAny();} public Btrie_fast_mgr CaseAny_(boolean v) {root.CaseAny_(v); return this;}

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.stores; import gplx.*;
+import gplx.core.strings.*;
 public abstract class DataRdr_base implements SrlMgr {
 	public boolean Parse() {return parse;} public void Parse_set(boolean v) {parse = v;} private boolean parse;
 	public Io_url Uri() {return uri;} public void Uri_set(Io_url s) {uri = s;} Io_url uri = Io_url_.Null;

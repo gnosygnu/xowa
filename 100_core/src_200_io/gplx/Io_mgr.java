@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
-import gplx.ios.*; /*IoItmFil, IoItmDir..*/
+import gplx.core.primitives.*; import gplx.ios.*; /*IoItmFil, IoItmDir..*/
 public class Io_mgr {	// exists primarily to gather all cmds under gplx namespace; otherwise need to use gplx.ios whenever copying/deleting file
 	public boolean							Exists(Io_url url) {return url.Type_dir() ? ExistsDir(url) : ExistsFil(url);}
 	public boolean							ExistsFil(Io_url url) {return IoEnginePool._.Fetch(url.Info().EngineKey()).ExistsFil_api(url);}

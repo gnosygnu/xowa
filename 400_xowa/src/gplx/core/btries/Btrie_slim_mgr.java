@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.btries; import gplx.*; import gplx.core.*;
+import gplx.core.primitives.*;
 public class Btrie_slim_mgr implements Btrie_mgr {
 	Btrie_slim_mgr(boolean case_match) {root = new Btrie_slim_itm(Byte_.Zero, null, !case_match);}	private Btrie_slim_itm root;
 	public int Count() {return count;} private int count;

@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.listings; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.html.*;
-import gplx.xowa.html.*;
+import gplx.core.primitives.*;
+import gplx.html.*; import gplx.xowa.html.*;
 public class Listing_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 	public Listing_xnde(int tag_id) {}
 	private byte[] xatr_name, xatr_alt, xatr_address, xatr_directions, xatr_phone, xatr_tollfree, xatr_email, xatr_fax, xatr_url, xatr_hours, xatr_price, xatr_checkin, xatr_checkout;
