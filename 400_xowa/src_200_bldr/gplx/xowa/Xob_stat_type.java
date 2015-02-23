@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.core.strings.*;
+import gplx.core.strings.*; import gplx.xowa.tdbs.*;
 public class Xob_stat_type {
 	public byte Tid() {return tid;} private byte tid;
 	public Xob_stat_type(byte tid) {this.tid = tid;}
@@ -26,7 +26,7 @@ public class Xob_stat_type {
 	public void XtoStr(String_bldr sb) {
 		for (int i = 0; i < regy.Count(); i++) {
 			Xob_stat_itm itm = (Xob_stat_itm)regy.FetchAt(i);
-			sb.Add(Xow_dir_info_.Tid_name(tid)).Add(Xob_stat_itm.Dlm);
+			sb.Add(Xotdb_dir_info_.Tid_name(tid)).Add(Xob_stat_itm.Dlm);
 			itm.XtoStr(sb);
 			sb.Add(Byte_ascii.NewLine);
 		}

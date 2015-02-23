@@ -32,7 +32,7 @@ public class Indicator_html_bldr_tst {
 	}
 }
 class Indicator_html_bldr_fxt {
-	private Xoa_app app; private Xow_wiki wiki; private Xoa_page page;
+	private Xoae_app app; private Xowe_wiki wiki; private Xoae_page page;
 	private Indicator_xtn_mgr xtn_mgr;
 	public void Clear() {
 		this.app = Xoa_app_fxt.app_();

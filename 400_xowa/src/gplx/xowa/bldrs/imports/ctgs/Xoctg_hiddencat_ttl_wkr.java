@@ -16,9 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.imports.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.imports.*;
-import gplx.ios.*;
+import gplx.ios.*; import gplx.xowa.tdbs.*;
 public class Xoctg_hiddencat_ttl_wkr extends Xob_itm_dump_base implements Xob_cmd, GfoInvkAble {
-	public Xoctg_hiddencat_ttl_wkr(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki); this.make_fil_len = Io_mgr.Len_mb;} private Xob_sql_join_wkr_ctg_hidden join_wkr;
+	public Xoctg_hiddencat_ttl_wkr(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki); this.make_fil_len = Io_mgr.Len_mb;} private Xob_sql_join_wkr_ctg_hidden join_wkr;
 	public String Cmd_key() {return KEY;} public static final String KEY = "ctg.hiddencat_ttl";
 	public void Cmd_ini(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {
@@ -38,18 +38,18 @@ public class Xoctg_hiddencat_ttl_wkr extends Xob_itm_dump_base implements Xob_cm
 	public void Cmd_print() {}
 }
 class Xob_sql_join_wkr_ctg_hidden implements Xob_sql_join_wkr {
-	public Xob_sql_join_wkr_ctg_hidden(Xoa_app app, Xow_wiki wiki, Io_url temp_dir, Io_url src_sql_dir) {
+	public Xob_sql_join_wkr_ctg_hidden(Xoae_app app, Xowe_wiki wiki, Io_url temp_dir, Io_url src_sql_dir) {
 		this.app = app; this.wiki = wiki;
 		this.dump_url_gen = Io_url_gen_.dir_(temp_dir.GenSubDir("dump"));
 		this.src_sql_dir = src_sql_dir;
-	}	private Xoa_app app = null; Xow_wiki wiki = null; Io_url src_sql_dir;
+	}	private Xoae_app app = null; Xowe_wiki wiki = null; Io_url src_sql_dir;
 	public Io_url_gen Dump_url_gen() {return dump_url_gen;} Io_url_gen dump_url_gen;
 	public Io_line_rdr New_main_rdr() {
 		Io_url[] urls = Io_mgr._.QueryDir_fils(src_sql_dir);
 		return new Io_line_rdr(app.Usr_dlg(), urls).Key_gen_(Io_line_rdr_key_gen_.first_pipe);
 	} 
 	public Io_line_rdr New_join_rdr() {
-		Io_url make_dir = wiki.Fsys_mgr().Url_site_dir(Xow_dir_info_.Tid_id);
+		Io_url make_dir = wiki.Tdb_fsys_mgr().Url_site_dir(Xotdb_dir_info_.Tid_id);
 		app.Usr_dlg().Prog_many("", "", "getting id files: ~{0}", make_dir.Raw());
 		Io_url[] urls = Io_mgr._.QueryDir_args(make_dir).Recur_().FilPath_("*.xdat").ExecAsUrlAry();
 		return new Io_line_rdr(app.Usr_dlg(), urls).Key_gen_(Io_line_rdr_key_gen_.first_pipe).File_skip_line0_(true);

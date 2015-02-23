@@ -22,7 +22,7 @@ class Imap_img_fmtr_arg implements Bry_fmtr_arg {
 	private int img_elem_id, img_w, img_h;
 	private byte[] img_alt, img_src, img_cls, img_href;
 	private Int_2_ref margin_calc = new Int_2_ref();
-	public void Init(Xoa_page page, Xoh_wtr_ctx hctx, Imap_xtn_mgr xtn_mgr, Imap_map map, int img_elem_id, byte[] img_alt, byte[] img_src, int img_w, int img_h, byte[] img_cls, byte[] img_href, byte[] lnki_ttl) {
+	public void Init(Xoae_page page, Xoh_wtr_ctx hctx, Imap_xtn_mgr xtn_mgr, Imap_map map, int img_elem_id, byte[] img_alt, byte[] img_src, int img_w, int img_h, byte[] img_cls, byte[] img_href, byte[] lnki_ttl) {
 		this.hctx = hctx; this.map = map; this.xtn_mgr = xtn_mgr;
 		this.img_elem_id = img_elem_id; this.img_w = img_w; this.img_h = img_h;
 		this.img_alt = img_alt;

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps; import gplx.*; import gplx.xowa.*;
 public class Xoa_shell implements GfoInvkAble {
-	public Xoa_shell(Xoa_app app) {this.app = app;} private Xoa_app app;
+	public Xoa_shell(Xoae_app app) {this.app = app;} private Xoae_app app;
 	public boolean Fetch_page_exec_async() {return fetch_page_exec_async;} private boolean fetch_page_exec_async = true;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_fetch_page))				return Fetch_page(m);

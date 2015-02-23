@@ -23,7 +23,7 @@ public class Xop_xowa_func_tst {
 		Xoa_gfs_mgr.Msg_parser_init();
 	} private Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Template() {
-		GfsCore._.AddCmd(fxt.App(), Xoa_app.Invk_app);
+		GfsCore._.AddCmd(fxt.App(), Xoae_app.Invk_app);
 		fxt.Wiki().Sys_cfg().Xowa_cmd_enabled_(true);
 		fxt.Init_defn_add("A", "{{#xowa|{{{1}}}}}");
 		fxt.Test_parse_page_all_str("{{A|app.users.get('anonymous').name;}}", "anonymous");

@@ -21,7 +21,7 @@ public class Pfunc_pagesincategory extends Pf_func_base {
 	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bb) {
 		byte[] val_dat_ary = Eval_argx(ctx, src, caller, self); if (Bry_.Len_eq_0(val_dat_ary)) {bb.Add_int_fixed(0, 1); return;}
 		val_dat_ary = Xoa_ttl.Replace_spaces(val_dat_ary);
-		Xow_wiki wiki = ctx.Wiki();
+		Xowe_wiki wiki = ctx.Wiki();
 		int ctg_len = wiki.Db_mgr().Load_mgr().Load_ctg_count(val_dat_ary);
 		if (ctg_len == 0) {bb.Add_int_fixed(0, 1); return;}
 

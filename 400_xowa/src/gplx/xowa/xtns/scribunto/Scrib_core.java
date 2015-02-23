@@ -16,11 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.xtns.scribunto.lib.*;
+import gplx.xowa.xtns.scribunto.libs.*;
 import gplx.xowa.xtns.scribunto.engines.*;
 public class Scrib_core {
 	private Hash_adp_bry mods = Hash_adp_bry.cs_();
-	public Scrib_core(Xoa_app app, Xop_ctx ctx) {// NOTE: ctx needed for language reg
+	public Scrib_core(Xoae_app app, Xop_ctx ctx) {// NOTE: ctx needed for language reg
 		this.app = app; this.ctx = ctx;
 		this.wiki = ctx.Wiki(); this.page = ctx.Cur_page();	// NOTE: wiki / page needed for title reg; DATE:2014-02-05
 		this.Engine_(Scrib_engine_type.Type_lua, false);	// TEST: default to lua
@@ -37,10 +37,10 @@ public class Scrib_core {
 		lib_wikibase = new Scrib_lib_wikibase(this);
 		lib_wikibase_entity = new Scrib_lib_wikibase_entity(this);
 	}
-	public Xoa_app App() {return app;} private Xoa_app app;
-	public Xow_wiki Wiki() {return wiki;} private Xow_wiki wiki;
-	@gplx.Internal protected void Wiki_(Xow_wiki v) {this.wiki = v;} // TEST:
-	public Xoa_page Page() {return page;} private Xoa_page page;
+	public Xoae_app App() {return app;} private Xoae_app app;
+	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
+	@gplx.Internal protected void Wiki_(Xowe_wiki v) {this.wiki = v;} // TEST:
+	public Xoae_page Page() {return page;} private Xoae_page page;
 	public boolean Enabled() {return enabled;} private boolean enabled = true;
 	private void Engine_(byte type, boolean luaj_debug_enabled) {
 		if		(type == Scrib_engine_type.Type_lua)
@@ -69,7 +69,7 @@ public class Scrib_core {
 		enabled = xtn_mgr.Enabled();
 		Io_url root_dir = fsys_mgr.Root_dir(), script_dir = fsys_mgr.Script_dir();
 		engine.Server().Init
-		(	app.Launcher().App_lua().Exe_url().Raw()
+		(	app.Prog_mgr().App_lua().Exe_url().Raw()
 		,	root_dir.GenSubFil_nest("engines", "LuaStandalone", "mw_main.lua").Raw()
 		,	root_dir.Raw()
 		);
@@ -83,7 +83,7 @@ public class Scrib_core {
 			ary[i].Register(this, script_dir);
 	}
 	public void Term() {engine.Server().Term(); mods.Clear();}
-	public void When_page_changed(Xoa_page page) {
+	public void When_page_changed(Xoae_page page) {
 		mods.Clear();	// clear any loaded modules
 		Xow_wiki wiki = page.Wiki();
 		this.page = page;
@@ -146,12 +146,12 @@ public class Scrib_core {
 	@gplx.Internal protected void Frame_parent_(Xot_invk v) {frame_parent = v;}	// TEST:
 	public Xop_ctx Ctx() {return ctx;} private Xop_ctx ctx;
 	public byte[] Cur_src() {return cur_src;} private byte[] cur_src; // only used for error reporting
-	public void Invoke_init(Xow_wiki wiki, Xop_ctx ctx, byte[] src, Xot_invk parent_frame, Xot_invk current_frame) {	// TEST
+	public void Invoke_init(Xowe_wiki wiki, Xop_ctx ctx, byte[] src, Xot_invk parent_frame, Xot_invk current_frame) {	// TEST
 		this.wiki = wiki; this.ctx = ctx; this.cur_src = src;
 		lib_mw.Invoke_bgn(wiki, ctx, src);
 		this.frame_parent = parent_frame; this.frame_current = current_frame;
 	}
-	public void Invoke(Xow_wiki wiki, Xop_ctx ctx, byte[] src, Xot_invk parent_frame, Xot_invk current_frame, Bry_bfr bfr, byte[] mod_name, byte[] mod_text, byte[] fnc_name) {
+	public void Invoke(Xowe_wiki wiki, Xop_ctx ctx, byte[] src, Xot_invk parent_frame, Xot_invk current_frame, Bry_bfr bfr, byte[] mod_name, byte[] mod_text, byte[] fnc_name) {
 		this.wiki = wiki; this.ctx = ctx; this.cur_src = src;
 		lib_mw.Invoke_bgn(wiki, ctx, src);
 		Xot_invk old_frame_parent = this.frame_parent; Xot_invk old_frame_current = this.frame_current;
@@ -188,7 +188,7 @@ public class Scrib_core {
 		return rv;
 	}
 	public static Scrib_core Core() {return core;}
-	public static Scrib_core Core_new_(Xoa_app app, Xop_ctx ctx) {
+	public static Scrib_core Core_new_(Xoae_app app, Xop_ctx ctx) {
 		core = new Scrib_core(app, ctx);
 		core_invalidate_when_page_changes = false;
 		return core;
@@ -203,7 +203,7 @@ public class Scrib_core {
 		throw Err_.new_(err, page.Ttl().Page_db_as_str(), excerpt, traceback);
 	}
 	public static void Core_invalidate_when_page_changes() {core_invalidate_when_page_changes = true;} private static boolean core_invalidate_when_page_changes;
-	public static void Core_page_changed(Xoa_page page) {
+	public static void Core_page_changed(Xoae_page page) {
 		if (	core != null						// core explicitly invalidated
 			||	core_invalidate_when_page_changes	// core marked invalidated b/c of error in {{#invoke}} but won't be regen'd until page changes; invalidate now; PAGE:th.d:all; DATE:2014-10-03
 			) {

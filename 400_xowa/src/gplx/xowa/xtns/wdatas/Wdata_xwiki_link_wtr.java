@@ -18,26 +18,26 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.wdatas; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.json.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.pfuncs.*;
 public class Wdata_xwiki_link_wtr implements Bry_fmtr_arg {
-	public Wdata_xwiki_link_wtr Page_(Xoa_page page) {this.page = page; return this;} private Xoa_page page;
+	public Wdata_xwiki_link_wtr Page_(Xoae_page page) {this.page = page; return this;} private Xoae_page page;
 	public void XferAry(Bry_bfr bfr, int idx) {
 		ListAdp slink_list = page.Slink_list();
-		byte[] qid = Write_wdata_links(slink_list, page.Wiki(), page.Ttl(), page.Wdata_external_lang_links());
+		byte[] qid = Write_wdata_links(slink_list, page.Wikie(), page.Ttl(), page.Wdata_external_lang_links());
 		int slink_list_len = slink_list.Count();
 		if (slink_list_len > 0)
-			page.Wiki().Xwiki_mgr().Lang_mgr().Html_bld(bfr, page.Wiki(), slink_list, qid);
+			page.Wikie().Xwiki_mgr().Lang_mgr().Html_bld(bfr, page.Wikie(), slink_list, qid);
 	}
-	public static byte[] Write_wdata_links(ListAdp slink_list, Xow_wiki wiki, Xoa_ttl ttl, Wdata_external_lang_links_data external_links_mgr) {
+	public static byte[] Write_wdata_links(ListAdp slink_list, Xowe_wiki wiki, Xoa_ttl ttl, Wdata_external_lang_links_data external_links_mgr) {
 		try {
 			switch (wiki.Domain_tid()) {
-				case Xow_wiki_domain_.Tid_home:		// home will never be in wikidata
-				case Xow_wiki_domain_.Tid_wikidata:	// wikidata will never be in wikidata
+				case Xow_domain_.Tid_int_home:		// home will never be in wikidata
+				case Xow_domain_.Tid_int_wikidata:	// wikidata will never be in wikidata
 					return Qid_null;
 			}
-			Wdata_wiki_mgr wdata_mgr = wiki.App().Wiki_mgr().Wdata_mgr();
+			Wdata_wiki_mgr wdata_mgr = wiki.Appe().Wiki_mgr().Wdata_mgr();
 			Wdata_doc doc = wdata_mgr.Pages_get(wiki, ttl); if (doc == null) return Qid_null;	// no links
 			boolean external_links_mgr_enabled = external_links_mgr.Enabled();
 			OrderedHash links = doc.Slink_list();
-			Bry_bfr tmp_bfr = wiki.App().Utl_bry_bfr_mkr().Get_k004();
+			Bry_bfr tmp_bfr = wiki.Appe().Utl_bry_bfr_mkr().Get_k004();
 			Xow_wiki_abrv wiki_abrv = new Xow_wiki_abrv();
 			int len = links.Count();
 			for (int i = 0; i < len; i++) {
@@ -45,7 +45,7 @@ public class Wdata_xwiki_link_wtr implements Bry_fmtr_arg {
 				byte[] xwiki_key = slink.Site();
 				Xow_wiki_abrv_.parse_(wiki_abrv, xwiki_key, 0, xwiki_key.length);
 				if (wiki_abrv.Domain_tid() == Xow_wiki_abrv_.Tid_null) {
-					wiki.App().Usr_dlg().Warn_many("", "", "unknown wiki in wikidata: ttl=~{0} wiki=~{1}", ttl.Page_db_as_str(), String_.new_utf8_(xwiki_key));
+					wiki.Appe().Usr_dlg().Warn_many("", "", "unknown wiki in wikidata: ttl=~{0} wiki=~{1}", ttl.Page_db_as_str(), String_.new_utf8_(xwiki_key));
 					continue;
 				}
 				if (wiki_abrv.Domain_tid() != wiki.Domain_tid()) continue;	// ignore wikis in a different domain; EX: looking at enwiki:Earth, and wikidata has dewikiquote; ignore dewikiquote; DATE:2014-06-21
@@ -58,7 +58,7 @@ public class Wdata_xwiki_link_wtr implements Bry_fmtr_arg {
 				if (slink_ttl == null) continue;								// invalid ttl
 				Xow_xwiki_itm xwiki_itm = slink_ttl.Wik_itm();
 				if (	xwiki_itm == null									// not a known xwiki; EX: [[zzz:abc]]
-					||	Bry_.Eq(xwiki_itm.Domain(), wiki.Domain_bry())	// skip if same as self; i.e.: do not include links to enwiki if already in enwiki
+					||	Bry_.Eq(xwiki_itm.Domain_bry(), wiki.Domain_bry())	// skip if same as self; i.e.: do not include links to enwiki if already in enwiki
 					) continue;
 				slink.Page_ttl_(slink_ttl);
 				slink_list.Add(slink);

@@ -26,7 +26,7 @@ class Imap_desc_tid {
 	, Key_tl		= Bry_.new_ascii_("top-left")
 	, Key_none		= Bry_.new_ascii_("none")
 	;
-	public static Btrie_slim_mgr trie_(Xow_wiki wiki) {
+	public static Btrie_slim_mgr trie_(Xowe_wiki wiki) {
 		Btrie_slim_mgr rv = Btrie_slim_mgr.ci_utf_8_();
 		trie_add(rv, Key_tr, Key_br, Key_bl, Key_tl, Key_none);
 		byte[][] lang_types = Parse_lang_types(wiki);
@@ -41,12 +41,12 @@ class Imap_desc_tid {
 		trie.Add_bry_bval(ary[3]	,Tid_tl);
 		trie.Add_bry_bval(ary[4]	,Tid_none);
 	}
-	private static byte[][] Parse_lang_types(Xow_wiki wiki) {
+	private static byte[][] Parse_lang_types(Xowe_wiki wiki) {
 		byte[] val = wiki.Msg_mgr().Val_by_key_obj("imagemap_desc_types");
 		if (Bry_.Len_eq_0(val)) return null;					// no msg in lang; return;
 		byte[][] ary = Bry_.Split(val, Byte_ascii.Comma);		// msg is 5 words concatenated by comma: EX:top-right,bottom-right-bottom-left,top-left,none
 		int ary_len = ary.length;
-		if (ary_len != 5) wiki.App().Usr_dlg().Warn_many("", "", "imap_desc does not have 5 items; wiki=~{0} val=~{1}", wiki.Domain_bry(), val);
+		if (ary_len != 5) wiki.Appe().Usr_dlg().Warn_many("", "", "imap_desc does not have 5 items; wiki=~{0} val=~{1}", wiki.Domain_bry(), val);
 		for (int i = 0; i < 5; ++i)
 			ary[i] = Bry_.Trim(ary[i]);							// note that items will have trailing ws; EX: "top-right, bottom-right, bottom-left, top-left, none"
 		return ary;

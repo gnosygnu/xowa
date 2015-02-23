@@ -20,12 +20,12 @@ import gplx.core.primitives.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.gui.*; import gplx.xowa.xtns.wdatas.imports.*; import gplx.xowa.pages.*;
 import gplx.xowa.langs.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.pfuncs.*;
 public class Wdata_wiki_mgr_fxt {
-	public Xow_wiki Wiki() {return parser_fxt.Wiki();}
+	public Xowe_wiki Wiki() {return parser_fxt.Wiki();}
 	public Wdata_wiki_mgr_fxt Init() {return Init(new Xop_fxt(), true);}
 	public Wdata_wiki_mgr_fxt Init(Xop_fxt parser_fxt, boolean reset) {
 		this.parser_fxt = parser_fxt;
 		this.wiki = parser_fxt.Wiki();
-		app = wiki.App();
+		app = wiki.Appe();
 		wdoc_bldr = new Wdata_doc_bldr();
 		wdata_mgr = app.Wiki_mgr().Wdata_mgr();
 		wdata_mgr.Clear();
@@ -34,8 +34,8 @@ public class Wdata_wiki_mgr_fxt {
 			parser_fxt.Reset();
 		}
 		return this;
-	}	private Xoa_app app; private Xow_wiki wiki; private Wdata_wiki_mgr wdata_mgr; private Wdata_doc_bldr wdoc_bldr; private Xop_fxt parser_fxt;
-	public Xoa_app App() {return app;}
+	}	private Xoae_app app; private Xowe_wiki wiki; private Wdata_wiki_mgr wdata_mgr; private Wdata_doc_bldr wdoc_bldr; private Xop_fxt parser_fxt;
+	public Xoae_app App() {return app;}
 	public Wdata_doc_bldr Wdoc_bldr(String qid) {return wdoc_bldr.Qid_(qid);}
 	public Wdata_claim_itm_core Make_claim_novalue(int pid)			{return Wdata_claim_itm_system.new_novalue(pid);}
 	public Wdata_claim_itm_core Make_claim_somevalue(int pid)		{return Wdata_claim_itm_system.new_somevalue(pid);}
@@ -70,7 +70,7 @@ public class Wdata_wiki_mgr_fxt {
 			wiki.Xwiki_mgr().Add_full(prefix, prefix + ".wikipedia.org");
 		}
 	}
-	public void Init_qids_add(String lang_key, byte wiki_tid, String ttl, String qid) {
+	public void Init_qids_add(String lang_key, int wiki_tid, String ttl, String qid) {
 		Bry_bfr tmp_bfr = app.Utl_bry_bfr_mkr().Get_b512();
 		wdata_mgr.Qids_add(tmp_bfr, Bry_.new_ascii_(lang_key), wiki_tid, Bry_.new_ascii_("000"), Bry_.new_ascii_(ttl), Bry_.new_ascii_(qid));
 		tmp_bfr.Mkr_rls();
@@ -80,7 +80,7 @@ public class Wdata_wiki_mgr_fxt {
 	public void Init_links_add(String wiki, String ns_num, String ttl, String qid) {
 		byte[] ttl_bry = Bry_.new_utf8_(ttl);
 		Xowd_regy_mgr regy_mgr = app.Hive_mgr().Regy_mgr();
-		Io_url regy_fil = wdata_mgr.Wdata_wiki().Fsys_mgr().Site_dir().GenSubDir_nest("data", "qid").GenSubFil_nest(wiki, ns_num, "reg.csv");
+		Io_url regy_fil = wdata_mgr.Wdata_wiki().Tdb_fsys_mgr().Site_dir().GenSubDir_nest("data", "qid").GenSubFil_nest(wiki, ns_num, "reg.csv");
 		regy_mgr.Init(regy_fil);
 		regy_mgr.Create(ttl_bry);
 		regy_mgr.Save();
@@ -124,7 +124,7 @@ public class Wdata_wiki_mgr_fxt {
 		wiki.Xwiki_mgr().Lang_mgr().Clear();
 
 		// setup langs
-		Xoa_page page = wiki.Ctx().Cur_page();
+		Xoae_page page = wiki.Ctx().Cur_page();
 		Xoa_lang_mgr lang_mgr = app.Lang_mgr();
 		lang_mgr.Groups().Set_bulk(Bry_.new_ascii_(String_.Concat_lines_nl
 			(	"+||grp|wiki"
@@ -141,7 +141,7 @@ public class Wdata_wiki_mgr_fxt {
 			,	"de.wikipedia.org|de.wikipedia.org"
 			,	"pl.wikipedia.org|pl.wikipedia.org"
 			);
-		wiki.App().User().Wiki().Xwiki_mgr().Add_bulk(Bry_.new_ascii_(bulk));
+		wiki.Appe().User().Wiki().Xwiki_mgr().Add_bulk(Bry_.new_ascii_(bulk));
 
 		// register lang itms (needed for perf)
 		Xow_xwiki_mgr xwiki_mgr = wiki.Xwiki_mgr();
@@ -155,7 +155,7 @@ public class Wdata_wiki_mgr_fxt {
 
 		parser_fxt.Page_ttl_("Q1_en");
 		parser_fxt.Exec_parse_page_all_as_str(raw);
-		Bry_bfr tmp_bfr = wiki.App().Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr tmp_bfr = wiki.Appe().Utl_bry_bfr_mkr().Get_b512();
 		wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_view_mode.Tid_read).Wdata_lang_wtr().Page_(page).XferAry(tmp_bfr, 0);
 	    Tfds.Eq_str_lines(expd, tmp_bfr.Mkr_rls().Xto_str_and_clear());
 	}

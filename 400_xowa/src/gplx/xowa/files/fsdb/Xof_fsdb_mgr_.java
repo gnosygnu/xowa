@@ -16,133 +16,132 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.fsdb; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.fsdb.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.qrys.*; import gplx.xowa.files.wiki_orig.*;
-import gplx.xowa.files.fsdb.caches.*;
-import gplx.xowa.files.gui.*;
-public class Xof_fsdb_mgr_ {
-	public void Fsdb_search(Xof_fsdb_mgr fsdb_mgr, Io_url file_dir, Xoa_page page, byte exec_tid, ListAdp itms, Xow_repo_mgr repo_mgr, Xof_url_bldr url_bldr) {
-		ListAdp fsdb_list = ListAdp_.new_();
-		int itms_len = itms.Count();
-		Gfo_usr_dlg usr_dlg = fsdb_mgr.Wiki().App().Usr_dlg();
-		for (int i = 0; i < itms_len; i++) {
-			if (usr_dlg.Canceled()) return;
-			Xof_fsdb_itm itm = (Xof_fsdb_itm)itms.FetchAt(i);
-			Itm_process(fsdb_mgr, page, file_dir, usr_dlg, itm, fsdb_list, repo_mgr, url_bldr, exec_tid);
-		}
-		itms_len = fsdb_list.Count(); if (itms_len == 0) return;	// all items found; return;
-		Reg_search(fsdb_mgr, file_dir, usr_dlg, page, exec_tid, fsdb_list, itms_len, repo_mgr);
+import gplx.fsdb.*; import gplx.fsdb.data.*; import gplx.xowa.files.caches.*;
+import gplx.xowa.files.repos.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.gui.*; import gplx.xowa.wmfs.apis.*;
+class Xof_fsdb_wkr {
+	private final Gfo_usr_dlg usr_dlg; private final Xof_fsdb_mgr fsdb_mgr; private final Xof_cache_mgr cache_mgr; private final Xow_repo_mgr repo_mgr; private final Xof_url_bldr url_bldr;
+	private final Xof_img_size img_size = new Xof_img_size(); private final ListAdp get_list = ListAdp_.new_();
+	public Xof_fsdb_wkr(Xof_fsdb_mgr fsdb_mgr, Gfo_usr_dlg usr_dlg, Xof_cache_mgr cache_mgr, Xow_repo_mgr repo_mgr, Xof_url_bldr url_bldr) {
+		this.fsdb_mgr = fsdb_mgr; this.usr_dlg = usr_dlg; this.cache_mgr = cache_mgr; this.repo_mgr = repo_mgr; this.url_bldr = url_bldr;
 	}
-	private void Reg_search(Xof_fsdb_mgr fsdb_mgr, Io_url file_dir, Gfo_usr_dlg usr_dlg, Xoa_page page, byte exec_tid, ListAdp itms_list, int itms_len, Xow_repo_mgr repo_mgr) {
-		for (int i = 0; i < itms_len; i++) {
-			if (usr_dlg.Canceled()) return;
-			Xof_fsdb_itm itm = (Xof_fsdb_itm)itms_list.FetchAt(i);
-			try {
-				Reg_search_itm(fsdb_mgr, file_dir, usr_dlg, page, exec_tid, itms_list, itms_len, repo_mgr, itm );
-			} catch (Exception e) {usr_dlg.Warn_many("", "", "file.search.error: page=~{0} img=~{1} err=~{2}", String_.new_utf8_(fsdb_mgr.Wiki().Ctx().Cur_page().Ttl().Raw()), String_.new_utf8_(itm.Lnki_ttl()), Err_.Message_gplx_brief(e));}
+	public void Fsdb_search(byte exec_tid, ListAdp itms, Xoae_page page) {
+		synchronized (get_list) {
+			get_list.Clear();
+			int itms_len = itms.Count();
+			for (int i = 0; i < itms_len; i++) {
+				if (usr_dlg.Canceled()) return;
+				Xof_fsdb_itm itm = (Xof_fsdb_itm)itms.FetchAt(i);
+				switch (itm.Orig_status()) {
+					case Xof_orig_wkr_.Status_found:			// item is on disk and in orig_regy; just update data, html_view and cache_mgr;
+						Xof_repo_itm repo_itm = repo_mgr.Repos_get_by_wiki(itm.Orig_repo_name()).Trg();
+						itm.Ctor_by_html(repo_itm, url_bldr, img_size, exec_tid);
+						Js_img_mgr.Update_img(page, itm);		// NOTE: needed when opening 2+ tabs and missing image is on 2+ pages; 2nd page will have img as Xof_orig_wkr_.Status_found; DATE:2014-10-20
+						cache_mgr.Reg_and_check_for_size_0(itm);
+						break;
+					case Xof_orig_wkr_.Status_missing_orig:	
+					case Xof_orig_wkr_.Status_noop:				// NOTE: previous attempt was noop; only occurs if oga and exec_tid != viewer
+					case Xof_orig_wkr_.Status_null:				get_list.Add(itm); break;	// item is either not on disk, or not in orig_regy; add to list and try to get from fsdb_mgr
+					case Xof_orig_wkr_.Status_missing_qry:		
+					case Xof_orig_wkr_.Status_missing_bin:		break;						// item is missing; just exit
+					default:									throw Err_.unhandled(itm.Orig_status());
+				}
+			}
+			int get_len = get_list.Count();
+			for (int i = 0; i < get_len; i++) {
+				if (usr_dlg.Canceled()) return;
+				Xof_fsdb_itm itm = (Xof_fsdb_itm)get_list.FetchAt(i);
+				try {
+					Get_itm(exec_tid, itm, page);
+				} catch (Exception e) {usr_dlg.Warn_many("", "", "file.search.error: page=~{0} img=~{1} err=~{2}", String_.new_utf8_(page.Ttl().Raw()), String_.new_utf8_(itm.Lnki_ttl()), Err_.Message_gplx_brief(e));}
+			}
 		}
 	}
-	private void Reg_search_itm(Xof_fsdb_mgr fsdb_mgr, Io_url file_dir, Gfo_usr_dlg usr_dlg, Xoa_page page, byte exec_tid, ListAdp itms_list, int itms_len, Xow_repo_mgr repo_mgr, Xof_fsdb_itm itm) {
-		switch (itm.Rslt_reg()) {
-			case Xof_wiki_orig_wkr_.Tid_missing_qry:
-			case Xof_wiki_orig_wkr_.Tid_missing_bin:	return;	// already missing; do not try to find again
-		}
-		if (Is_not_viewable(exec_tid, itm.Lnki_ext())) {	// NOTE: was audio_strict, but v2 always redefines .ogg as .ogv; DATE:2014-02-02
-			itm.Rslt_qry_(Xof_qry_wkr_.Tid_noop);
-			return;
-		}
-		if (fsdb_mgr.Qry_mgr().Find(exec_tid, itm)) {
-			Xof_repo_pair repo_pair = repo_mgr.Repos_get_by_wiki(itm.Orig_wiki());
+	private void Get_itm(byte exec_tid, Xof_fsdb_itm itm, Xoae_page page) {
+		if (Ext_is_not_viewable_in_exec_tid(exec_tid, itm.Lnki_ext())) return;	// do not get if not needed; EX: exec_tid = page and itm is audio
+		if (Find_by_itm(exec_tid, itm, fsdb_mgr.Orig_mgr(), img_size)) {		// itm exists in orig_regy
+			Xof_repo_pair repo_pair = repo_mgr.Repos_get_by_wiki(itm.Orig_repo_name());
 			if (repo_pair == null) {
-				fsdb_mgr.Orig_insert(itm, Xof_repo_itm.Repo_unknown, Xof_wiki_orig_wkr_.Tid_missing_qry);
+				fsdb_mgr.Orig_mgr().Insert(Xof_repo_itm.Repo_unknown, itm.Orig_ttl(), itm.Lnki_ext().Id(), itm.Orig_w(), itm.Orig_h(), itm.Orig_redirect(), Xof_orig_wkr_.Status_missing_qry);
 				return;
 			}
-			byte orig_wiki = repo_pair.Repo_id();	// NOTE: should be itm.Orig_repo, but throws null refs
-			if (Is_not_viewable(exec_tid, itm.Lnki_ext())) {
-				itm.Rslt_qry_(Xof_qry_wkr_.Tid_mock);
+			byte repo_tid = repo_pair.Repo_idx();								// NOTE: should be itm.Orig_repo, but throws null refs
+			if (Ext_is_not_viewable_in_exec_tid(exec_tid, itm.Lnki_ext())) {	// check viewable again b/c orig_mgr may have changed ext; EX: ogg -> oga
 				itm.Rslt_bin_(Xof_bin_wkr_.Tid_noop);
-				fsdb_mgr.Orig_insert(itm, orig_wiki, Xof_wiki_orig_wkr_.Tid_noop);
+				fsdb_mgr.Orig_mgr().Insert(repo_tid, itm.Orig_ttl(), itm.Lnki_ext().Id(), itm.Orig_w(), itm.Orig_h(), itm.Orig_redirect(), Xof_orig_wkr_.Status_noop);
 				return;
 			}
-			if (fsdb_mgr.Bin_mgr().Find_to_url_as_bool(ListAdp_.Null, exec_tid, itm)) {
-				fsdb_mgr.Orig_insert(itm, orig_wiki, Xof_wiki_orig_wkr_.Tid_found_orig);
+			if (fsdb_mgr.Bin_mgr().Find_to_url_as_bool(exec_tid, itm)) {
+				fsdb_mgr.Orig_mgr().Insert(repo_tid, itm.Orig_ttl(), itm.Lnki_ext().Id(), itm.Orig_w(), itm.Orig_h(), itm.Orig_redirect(), Xof_orig_wkr_.Status_found);
 				// TODO: this "breaks" tests b/c mock bin_wkr is fsdb; 
-				if (itm.Rslt_bin() != Xof_bin_wkr_.Tid_fsdb_wiki)	// if bin is from fsdb, don't save it; occurs when page has new file listed twice; 1st file inserts into fsdb; 2nd file should find in fsdb and not save again
-					Fsdb_save(usr_dlg, fsdb_mgr, itm);
+				if (itm.Rslt_bin() != Xof_bin_wkr_.Tid_fsdb_xowa)	// if bin is from fsdb, don't save it; occurs when page has new file listed twice; 1st file inserts into fsdb; 2nd file should find in fsdb and not save again
+					Save_itm(itm);
 				Js_img_mgr.Update_img(page, itm);
 			}
 			else {
 				usr_dlg.Warn_many("", "", "file not found: page=~{0} file=~{1} width=~{2}", page.Url().Xto_full_str_safe(), String_.new_utf8_(itm.Lnki_ttl()), itm.Lnki_w());
 				itm.Rslt_bin_(Xof_bin_wkr_.Tid_not_found);
-				fsdb_mgr.Orig_insert(itm, orig_wiki, Xof_wiki_orig_wkr_.Tid_missing_bin);
+				fsdb_mgr.Orig_mgr().Insert(repo_tid, itm.Orig_ttl(), itm.Lnki_ext().Id(), itm.Orig_w(), itm.Orig_h(), itm.Orig_redirect(), Xof_orig_wkr_.Status_missing_bin);
 				// gplx.xowa.files.gui.Js_img_mgr.Update_img_missing(usr_dlg, itm.Html_uid());	// TODO: update caption with "" if image is missing
 			}
 		}
 		else {
-			fsdb_mgr.Orig_insert(itm, Xof_repo_itm.Repo_unknown, Xof_wiki_orig_wkr_.Tid_missing_qry);
+			fsdb_mgr.Orig_mgr().Insert(Xof_repo_itm.Repo_unknown, itm.Orig_ttl(), itm.Lnki_ext().Id(), itm.Orig_w(), itm.Orig_h(), itm.Orig_redirect(), Xof_orig_wkr_.Status_missing_qry);
 				// gplx.xowa.files.gui.Js_img_mgr.Update_img_missing(usr_dlg, itm.Html_uid());	// TODO: update caption with "" if image is missing
 		}
 	}
-	private static boolean Is_not_viewable(byte exec_tid, Xof_ext ext) {
-		return	exec_tid != Xof_exec_tid.Tid_viewer_app		// only apply logic if !Tid_viewer_app; note that if Tid_viewer_app, then user clicked on file, so return true;
-				&&	(	ext.Id_is_audio()					// NOTE: was audio_strict, but v2 always redefines .ogg as .ogv; DATE:2014-02-02
-					||	ext.Id() == Xof_ext_.Id_unknown		// ignore unknown exts, else will download needlessly when viewing page; EX: .wav before .wav was registered; PAGE:pl.s:Śpiąca_królewna_(Oppman); DATE:2014-08-17
-					);
-	}
-	private Xof_img_size img_size = new Xof_img_size();
-	private void Itm_process(Xof_fsdb_mgr fsdb_mgr, Xoa_page page, Io_url file_dir, Gfo_usr_dlg usr_dlg, Xof_fsdb_itm itm, ListAdp fsdb_list, Xow_repo_mgr repo_mgr, Xof_url_bldr url_bldr, byte exec_tid) {
-		switch (itm.Rslt_reg()) {
-			case Xof_wiki_orig_wkr_.Tid_found_orig:
-				itm.Html__init(repo_mgr, url_bldr, img_size, exec_tid);
-				Js_img_mgr.Update_img(page, itm);			// NOTE: needed when opening 2+ tabs and missing image is on 2+ pages; 2nd page will have img as Xof_wiki_orig_wkr_.Tid_found_orig; DATE:2014-10-20
-				if (!Env_.Mode_testing()) {
-					Cache_fil_itm cache_fil_itm = fsdb_mgr.Cache_mgr().Reg(fsdb_mgr.Wiki(), itm, 0);
-					if (cache_fil_itm.Fil_size() == 0) {
-						long fil_size = Io_mgr._.QueryFil(itm.Html_url()).Size();
-						cache_fil_itm.Fil_size_(fil_size);
-					}
-				}
-				break;
-			case Xof_wiki_orig_wkr_.Tid_missing_qry:
-			case Xof_wiki_orig_wkr_.Tid_missing_bin:		break;
-			case Xof_wiki_orig_wkr_.Tid_missing_reg:
-			case Xof_wiki_orig_wkr_.Tid_noop:			// previous attempt was noop; only occurs if oga and exec_tid != viewer
-			case Xof_wiki_orig_wkr_.Tid_null:			fsdb_list.Add(itm); break;
-			default:									throw Err_.unhandled(itm.Rslt_reg());
-		}
-	}
-	private void Fsdb_save(Gfo_usr_dlg usr_dlg, Xof_fsdb_mgr fsdb_mgr, Xof_fsdb_itm itm) {
-		Io_url html_url = itm.Html_url();
+	private void Save_itm(Xof_fsdb_itm itm) {
+		Io_url html_url = itm.Html_view_url();
 		long bin_len = Io_mgr._.QueryFil(html_url).Size();
 		gplx.ios.Io_stream_rdr bin_rdr = gplx.ios.Io_stream_rdr_.file_(html_url);
 		try {
 			bin_rdr.Open();
 			if (itm.Lnki_ext().Id_is_thumbable_img()) {
 				if (itm.File_is_orig()) {
-					Fsdb_xtn_img_itm img_itm = new Fsdb_xtn_img_itm();
-					fsdb_mgr.Img_insert(img_itm, itm.Orig_wiki(), itm.Lnki_ttl(), itm.Lnki_ext().Id(), itm.Html_w(), itm.Html_h(), Fsdb_xtn_thm_tbl.Modified_null, Fsdb_xtn_thm_tbl.Hash_null, bin_len, bin_rdr);
+					Fsd_img_itm img_itm = new Fsd_img_itm();
+					fsdb_mgr.Mnt_mgr().Img_insert(img_itm, itm.Orig_repo_name(), itm.Lnki_ttl(), itm.Lnki_ext().Id(), itm.Html_w(), itm.Html_h(), Fsd_thm_tbl.Modified_null, Fsd_thm_tbl.Hash_null, bin_len, bin_rdr);
 				}
 				else {
-					Fsdb_xtn_thm_itm thm_itm = Fsdb_xtn_thm_itm.new_();
-					fsdb_mgr.Thm_insert(thm_itm, itm.Orig_wiki(), itm.Lnki_ttl(), itm.Lnki_ext().Id(), itm.Html_w(), itm.Html_h(), itm.Lnki_thumbtime(), itm.Lnki_page(), Fsdb_xtn_thm_tbl.Modified_null, Fsdb_xtn_thm_tbl.Hash_null, bin_len, bin_rdr);
+					Fsd_thm_itm thm_itm = Fsd_thm_itm.new_();
+					fsdb_mgr.Mnt_mgr().Thm_insert(thm_itm, itm.Orig_repo_name(), itm.Lnki_ttl(), itm.Lnki_ext().Id(), itm.Html_w(), itm.Html_h(), itm.Lnki_time(), itm.Lnki_page(), Fsd_thm_tbl.Modified_null, Fsd_thm_tbl.Hash_null, bin_len, bin_rdr);
 				}
 			}
 			else {
 				if (itm.Lnki_ext().Id_is_video() && !itm.File_is_orig()) {	// insert as thumbnail
-					Fsdb_xtn_thm_itm thm_itm = Fsdb_xtn_thm_itm.new_();
-					fsdb_mgr.Thm_insert(thm_itm, itm.Orig_wiki(), itm.Lnki_ttl(), itm.Lnki_ext().Id(), itm.Html_w(), itm.Html_h(), itm.Lnki_thumbtime(), itm.Lnki_page(), Fsdb_xtn_thm_tbl.Modified_null, Fsdb_xtn_thm_tbl.Hash_null, bin_len, bin_rdr);
+					Fsd_thm_itm thm_itm = Fsd_thm_itm.new_();
+					fsdb_mgr.Mnt_mgr().Thm_insert(thm_itm, itm.Orig_repo_name(), itm.Lnki_ttl(), itm.Lnki_ext().Id(), itm.Html_w(), itm.Html_h(), itm.Lnki_time(), itm.Lnki_page(), Fsd_thm_tbl.Modified_null, Fsd_thm_tbl.Hash_null, bin_len, bin_rdr);
 				}
 				else {
-					Fsdb_fil_itm fil_itm = new Fsdb_fil_itm();
-					fsdb_mgr.Fil_insert(fil_itm, itm.Orig_wiki(), itm.Lnki_ttl(), itm.Lnki_ext().Id(), Fsdb_xtn_thm_tbl.Modified_null, Fsdb_xtn_thm_tbl.Hash_null, bin_len, bin_rdr);
+					Fsd_fil_itm fil_itm = new Fsd_fil_itm();
+					fsdb_mgr.Mnt_mgr().Fil_insert(fil_itm, itm.Orig_repo_name(), itm.Lnki_ttl(), itm.Lnki_ext().Id(), Fsd_thm_tbl.Modified_null, Fsd_thm_tbl.Hash_null, bin_len, bin_rdr);
 				}
 			}
 			if (!Env_.Mode_testing())
-				fsdb_mgr.Cache_mgr().Reg(fsdb_mgr.Wiki(), itm, bin_len);
+				cache_mgr.Reg(itm, bin_len);
 		}
 		catch (Exception e) {
 			usr_dlg.Warn_many("", "", "failed to save file: ttl=~{0} url=~{1} err=~{2}", String_.new_utf8_(itm.Lnki_ttl()), html_url.Raw(), Err_.Message_gplx(e));
 		}
 		finally {bin_rdr.Rls();}
 	}
-	public static final Xof_fsdb_mgr_ _ = new Xof_fsdb_mgr_(); Xof_fsdb_mgr_() {}
+	private static boolean Ext_is_not_viewable_in_exec_tid(byte exec_tid, Xof_ext ext) {
+		return	exec_tid != Xof_exec_tid.Tid_viewer_app		// only apply logic if !Tid_viewer_app; note that if Tid_viewer_app, then user clicked on file, so return true;
+				&&	(	ext.Id_is_audio()					// NOTE: was audio_strict, but v2 always redefines .ogg as .ogv; DATE:2014-02-02
+					||	ext.Id() == Xof_ext_.Id_unknown		// ignore unknown exts, else will download needlessly when viewing page; EX: .wav before .wav was registered; PAGE:pl.s:Śpiąca_królewna_(Oppman); DATE:2014-08-17
+					);
+	}
+	private static boolean Find_by_itm(byte get_exec_tid, Xof_fsdb_itm itm, Xof_orig_mgr orig_mgr, Xof_img_size img_size) {
+		byte[] itm_ttl = itm.Lnki_ttl();
+		Xof_orig_itm orig = orig_mgr.Find_by_ttl_or_null(itm_ttl);
+		if (orig == Xof_orig_itm.Null) {		// not found in any wkr
+			itm.Orig_status_(Xof_orig_wkr_.Status_missing_orig);
+			return false;						// exit now
+		}
+		itm.Orig_status_(Xof_orig_wkr_.Status_found);
+		byte[] orig_redirect = orig.Redirect();
+		if (Bry_.Len_gt_0(orig_redirect))		// redirect found
+			itm.Ctor_by_orig_redirect(orig_redirect);
+		itm.Orig_size_(orig.W(), orig.H());
+		itm.Html_size_calc(img_size, get_exec_tid);	// orig found; recalc size
+		return true;
+	}
 }

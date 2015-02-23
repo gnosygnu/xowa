@@ -63,7 +63,7 @@ class Xoctg_pagelist_mgr_fxt {
 		hidden_wtr = new Xoctg_pagelist_wtr();
 		hidden_wtr.Init_by_app(app);
 		init_ctgs.Clear();
-	}	private Xop_fxt fxt; private Xoa_app app; private Xoctg_pagelist_wtr hidden_wtr;
+	}	private Xop_fxt fxt; private Xoae_app app; private Xoctg_pagelist_wtr hidden_wtr;
 	public void Init_ctg_normal(String... ary) {Init_ctg(Bool_.N, ary);}
 	public void Init_ctg_hidden(String... ary) {Init_ctg(Bool_.Y, ary);}
 	public void Init_ctg(boolean hidden, String[] ary) {

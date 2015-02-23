@@ -93,14 +93,14 @@ public class ProcessAdp implements GfoInvkAble, RlsAble {
 	}
 	static final String Invk_cmd = "cmd", Invk_cmd_ = "cmd_", Invk_args = "args", Invk_args_ = "args_", Invk_cmd_args_ = "cmd_args_", Invk_enabled = "enabled", Invk_enabled_ = "enabled_", Invk_mode_ = "mode_", Invk_timeout_ = "timeout_", Invk_tmp_dir_ = "tmp_dir_", Invk_owner = "owner";
 	Bry_fmtr_eval_mgr cmd_url_eval;
-	public static ProcessAdp ini_(GfoInvkAble owner, Gfo_usr_dlg gui_wtr, ProcessAdp process, Bry_fmtr_eval_mgr cmd_url_eval, byte run_mode, int timeout, String cmd_url_fmt, String args_fmt, String... args_keys) {
+	public static ProcessAdp ini_(GfoInvkAble owner, Gfo_usr_dlg usr_dlg, ProcessAdp process, Bry_fmtr_eval_mgr cmd_url_eval, byte run_mode, int timeout, String cmd_url_fmt, String args_fmt, String... args_keys) {
 		process.Run_mode_(run_mode).Thread_timeout_seconds_(timeout);
 		process.cmd_url_eval = cmd_url_eval;
 		Io_url cmd_url = Bry_fmtr_eval_mgr_.Eval_url(cmd_url_eval, Bry_.new_utf8_(cmd_url_fmt));
 		process.Exe_url_(cmd_url).Tmp_dir_(cmd_url.OwnerDir());
 		process.Args_fmtr().Fmt_(args_fmt).Keys_(args_keys);
 		process.owner = owner;
-		process.Prog_dlg_(gui_wtr);
+		process.Prog_dlg_(usr_dlg);
 		return process;	// return process for chaining
 	}
 	public static String Escape_ampersands_if_process_is_cmd(boolean os_is_wnt, String exe_url, String exe_args) {

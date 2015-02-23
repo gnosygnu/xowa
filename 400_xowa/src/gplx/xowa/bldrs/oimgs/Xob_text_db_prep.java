@@ -16,10 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.oimgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.dbs.*; import gplx.xowa.dbs.*;
+import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.dbs.*;
 public class Xob_text_db_prep extends Xob_itm_basic_base implements Xob_cmd {
 	private Xodb_file[] db_files;
-	public Xob_text_db_prep(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
+	public Xob_text_db_prep(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Cmd_key() {return KEY_oimg;} public static final String KEY_oimg = "wiki.text_db_prep";
 	public void Cmd_ini(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {

@@ -21,20 +21,20 @@ public class Indicator_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 	public byte[] Name() {return name;} private byte[] name;
 	public byte[] Html() {return html;} private byte[] html;
 	public void Init_for_test(byte[] name, byte[] html) {this.name = name; this.html = html;}	// TEST
-	public void Xatr_parse(Xow_wiki wiki, byte[] src, Xop_xatr_itm xatr, Object xatr_key_obj) {
+	public void Xatr_parse(Xowe_wiki wiki, byte[] src, Xop_xatr_itm xatr, Object xatr_key_obj) {
 		if (xatr_key_obj == null) return;
 		Byte_obj_val xatr_key = (Byte_obj_val)xatr_key_obj;
 		switch (xatr_key.Val()) {
 			case Xatr_name:		name = xatr.Val_as_bry(src); break;
 		}
 	}
-	public void Xtn_parse(Xow_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
-		Xop_xatr_itm.Xatr_parse(wiki.App(), this, xatrs_hash, wiki, src, xnde);
-		html = Xop_parser_.Parse_text_to_html(wiki, ctx.Cur_page().Ttl(), Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn()), false);
+	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
+		Xop_xatr_itm.Xatr_parse(wiki.Appe(), this, xatrs_hash, wiki, src, xnde);
+		html = Xop_parser_.Parse_text_to_html(wiki, ctx.Cur_page(), ctx.Cur_page().Ttl(), Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn()), false);
 		Indicator_html_bldr html_bldr = ctx.Cur_page().Html_data().Indicators_or_new();
 		html_bldr.Add(this);
 	}
-	public void Xtn_write(Bry_bfr bfr, Xoa_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
+	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
 	}
 	private static final byte Xatr_name = 0;
 	private static final Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_ascii_()

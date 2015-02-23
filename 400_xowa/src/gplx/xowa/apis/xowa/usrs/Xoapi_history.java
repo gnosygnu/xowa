@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.apis.xowa.usrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apis.*; import gplx.xowa.apis.xowa.*;
 import gplx.xowa.gui.views.*;
 public class Xoapi_history implements GfoInvkAble {
-	private Xoa_app app; private Xog_win_itm win;
-	public void Ctor_by_app(Xoa_app app) {this.app = app;}
-	public void Init_by_kit(Xoa_app app) {this.win = app.Gui_mgr().Browser_win();}
+	private Xoae_app app; private Xog_win_itm win;
+	public void Ctor_by_app(Xoae_app app) {this.app = app;}
+	public void Init_by_kit(Xoae_app app) {this.win = app.Gui_mgr().Browser_win();}
 	public boolean Enabled() {return enabled;} private boolean enabled = true;
 	public void Enabled_(boolean v) {enabled = v;}
 	public void Goto_recent()		{win.Page__navigate_by_url_bar(app.User().History_mgr().Get_at_last());}

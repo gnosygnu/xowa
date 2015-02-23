@@ -31,7 +31,7 @@ public class Xodb_site_stats_tbl {
 				;
 		} finally {stmt.Rls();}
 	}
-	public void Select(Xow_wiki wiki) {
+	public void Select(Xowe_wiki wiki) {
 		Xow_wiki_stats stats = wiki.Stats();		
 		DataRdr rdr = DataRdr_.Null;
 		Db_stmt stmt = Db_stmt_.Null;

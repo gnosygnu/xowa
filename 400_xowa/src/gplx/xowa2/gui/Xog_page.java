@@ -42,7 +42,7 @@ public class Xog_page {
 		gly_itms.Clear();
 		return this;
 	}
-	public void Init(Bry_bfr tmp_bfr, Xoa_page page) {
+	public void Init(Bry_bfr tmp_bfr, Xoae_page page) {
 		page_id			= page.Revision_data().Id();
 		page_body		= page.Hdump_data().Body();
 		Xopg_html_data html_data = page.Html_data();
@@ -52,7 +52,7 @@ public class Xog_page {
 		content_sub = html_data.Content_sub();
 		sidebar_div = Save_sidebars(tmp_bfr, page, html_data);
 	}
-	private static byte[] Save_sidebars(Bry_bfr tmp_bfr, Xoa_page page, Xopg_html_data html_data) {
+	private static byte[] Save_sidebars(Bry_bfr tmp_bfr, Xoae_page page, Xopg_html_data html_data) {
 		Xopg_xtn_skin_mgr mgr = html_data.Xtn_skin_mgr();
 		int len = mgr.Count();
 		boolean sidebar_exists = false;

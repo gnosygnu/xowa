@@ -20,7 +20,7 @@ import gplx.xowa.html.*;
 public class Xop_xowa_cmd implements Xox_xnde {
 	public Xop_root_tkn Xtn_root() {throw Err_.not_implemented_msg_("xowa_cmd.xtn_root should not be called");}
 	public byte[] Xtn_html() {return xtn_html;} private byte[] xtn_html;
-	public void Xtn_parse(Xow_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
+	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
 		int itm_bgn = xnde.Tag_open_end(), itm_end = xnde.Tag_close_bgn();
 		if (itm_bgn == src.length)	return;  // NOTE: handle inline where there is no content to parse; EX: <xowa_cmd/>
 		if (src[itm_bgn] 		== Byte_ascii.NewLine) ++itm_bgn;	// ignore 1st \n; 
@@ -28,7 +28,7 @@ public class Xop_xowa_cmd implements Xox_xnde {
 		byte[] raw = Bry_.Mid(src, itm_bgn, itm_end);
 		byte[] xtn_src = raw;
 		if (wiki.Sys_cfg().Xowa_cmd_enabled()) {	// only exec if enabled for wiki
-			Object rslt = wiki.App().Gfs_mgr().Run_str(String_.new_utf8_(raw));
+			Object rslt = wiki.Appe().Gfs_mgr().Run_str(String_.new_utf8_(raw));
 			xtn_src = Bry_.new_utf8_(Object_.Xto_str_strict_or_null_mark(rslt));
 		}
 		Xop_tkn_mkr tkn_mkr = ctx.Tkn_mkr();
@@ -36,7 +36,7 @@ public class Xop_xowa_cmd implements Xox_xnde {
 		Xop_root_tkn sub_root = tkn_mkr.Root(xtn_src);
 		xtn_html = wiki.Parser().Parse_text_to_wtxt(sub_root, sub_ctx, ctx.Tkn_mkr(), xtn_src);
 	}
-	public void Xtn_write(Bry_bfr bfr, Xoa_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
+	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
 		throw Err_.not_implemented_msg_("xowa_cmd.xtn_write should not be called");
 	}
 }

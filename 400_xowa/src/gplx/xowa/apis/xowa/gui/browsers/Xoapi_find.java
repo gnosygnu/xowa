@@ -19,7 +19,7 @@ package gplx.xowa.apis.xowa.gui.browsers; import gplx.*; import gplx.xowa.*; imp
 import gplx.gfui.*; import gplx.xowa.pages.*; import gplx.xowa.gui.*; import gplx.xowa.gui.views.*;
 public class Xoapi_find implements GfoInvkAble {
 	private Xog_find_box find_box;
-	public void Init_by_kit(Xoa_app app) {
+	public void Init_by_kit(Xoae_app app) {
 		find_box = new Xog_find_box(app);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
@@ -39,9 +39,9 @@ public class Xoapi_find implements GfoInvkAble {
 	, Invk_find_bwd = "find_bwd", Invk_find_fwd = "find_fwd", Invk_case_toggle = "case_toggle", Invk_wrap_toggle = "wrap_toggle";
 }
 class Xog_find_box {
-	private Xoa_app app; private Xog_win_itm win; private GfuiTextBox find_box;
+	private Xoae_app app; private Xog_win_itm win; private GfuiTextBox find_box;
 	private boolean dir_fwd = true, case_match = false, wrap_search = true;
-	public Xog_find_box(Xoa_app app) {
+	public Xog_find_box(Xoae_app app) {
 		this.app = app;
 		this.win = app.Gui_mgr().Browser_win();
 		this.find_box = win.Find_box();

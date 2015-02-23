@@ -25,7 +25,7 @@ public class Pfunc_urlfunc extends Pf_func_base {	// EX: {{lc:A}} -> a
 		UrlString(ctx, tid, encode, val_dat_ary, bb, qry_arg);
 	}
 	public static void UrlString(Xop_ctx ctx, byte tid, boolean encode, byte[] src, Bry_bfr trg, byte[] qry_arg) {
-		Xow_wiki wiki = ctx.Wiki();
+		Xowe_wiki wiki = ctx.Wiki();
 		Xoa_ttl ttl = Xoa_ttl.new_(wiki, ctx.Msg_log(), src, 0, src.length);
 		if (ttl == null) return; // NOTE: guard against null ttl; EX: {{fullurl:{{transclude|{{{1}}}}}|action=edit}} ->  {{fullurl:Template:{{{1}}}|action=edit}} -> Template:{{{1}}} will be a null ttl
 		byte[] ttl_ary = ttl.Full_url();// NOTE: Full_url does encoding; don't encode again
@@ -35,7 +35,7 @@ public class Pfunc_urlfunc extends Pf_func_base {	// EX: {{lc:A}} -> a
 				trg.Add(Xoh_href_parser.Href_http_bry);							//	"http://"
 			else
 				trg.Add(Xoa_consts.Url_relative_prefix);						//	"//"
-			trg.Add(xwiki.Domain())												//  "commons.wikimedia.org"
+			trg.Add(xwiki.Domain_bry())											//  "commons.wikimedia.org"
 				.Add(Xoh_href_parser.Href_wiki_bry)								//	"/wiki/"
 				.Add_mid(ttl_ary, xwiki.Key_bry().length + 1, ttl_ary.length);	//	"A#b?c=d"; +1 for colon after "commons:"; NOTE: ugly way of getting rest of url, but ttl currently does not have Full_wo_wiki
 		}

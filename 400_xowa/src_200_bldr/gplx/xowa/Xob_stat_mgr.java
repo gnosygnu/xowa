@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.core.strings.*;
+import gplx.core.strings.*; import gplx.xowa.tdbs.*;
 public class Xob_stat_mgr {
 	public Xob_stat_type GetOrNew(byte tid) {
 		Xob_stat_type rv = (Xob_stat_type)regy.Fetch(tid);
@@ -30,7 +30,7 @@ public class Xob_stat_mgr {
 		String_bldr sb = String_bldr_.new_();
 		for (int i = 0; i < regy.Count(); i++) {
 			Xob_stat_type typ = (Xob_stat_type)regy.FetchAt(i);
-			sb.Add(String_.PadEnd(Xow_dir_info_.Tid_name(typ.Tid()), 6, " "));
+			sb.Add(String_.PadEnd(Xotdb_dir_info_.Tid_name(typ.Tid()), 6, " "));
 		}
 		sb.Add_str_w_crlf("ns");
 		String[] nsAry = GetNmsAry(nsMgr);

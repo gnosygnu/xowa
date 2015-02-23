@@ -22,9 +22,9 @@ public class OrderedHash_ {
 	public static OrderedHash new_bry_()		{return new OrderedHash_bry();}
 }
 class OrderedHash_bry extends OrderedHash_base {
-	private Bry_obj_ref lkp = Bry_obj_ref.null_();
+	private final Bry_obj_ref tmp_ref = Bry_obj_ref.null_();
 	@Override protected void Add_base(Object key, Object val)	{super.Add_base(Bry_obj_ref.new_((byte[])key), val);}
-	@Override protected void Del_base(Object key)				{super.Del_base(lkp.Val_((byte[])key));}
-	@Override protected boolean Has_base(Object key)				{return super.Has_base(lkp.Val_((byte[])key));}
-	@Override protected Object Fetch_base(Object key)			{return super.Fetch_base(lkp.Val_((byte[])key));}
+	@Override protected void Del_base(Object key)				{synchronized (tmp_ref) {super.Del_base(tmp_ref.Val_((byte[])key));}}
+	@Override protected boolean Has_base(Object key)				{synchronized (tmp_ref) {return super.Has_base(tmp_ref.Val_((byte[])key));}}
+	@Override protected Object Fetch_base(Object key)			{synchronized (tmp_ref) {return super.Fetch_base(tmp_ref.Val_((byte[])key));}}
 }

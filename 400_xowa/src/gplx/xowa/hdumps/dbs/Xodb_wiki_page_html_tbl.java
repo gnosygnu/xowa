@@ -16,12 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
-import gplx.ios.*; import gplx.dbs.*; import gplx.xowa.dbs.*;
+import gplx.ios.*; import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.dbs.*;
 public class Xodb_wiki_page_html_tbl {
 	private Io_stream_zip_mgr zip_mgr = new Io_stream_zip_mgr();
 	private Db_stmt stmt_select, stmt_insert, stmt_delete;
-	public void Init_by_wiki(Xow_wiki wiki) {
-		this.zip_mgr = wiki.App().Zip_mgr();
+	public void Init_by_wiki(Xowe_wiki wiki) {
+		this.zip_mgr = wiki.Appe().Zip_mgr();
 	}
 	public byte Zip_tid() {return zip_tid;} public void Zip_tid_(byte v) {zip_tid = v;} private byte zip_tid = Io_stream_.Tid_gzip;
 	public Db_conn Conn() {return conn;} public Xodb_wiki_page_html_tbl Conn_(Db_conn v) {this.Rls_all(); conn = v; return this;} private Db_conn conn;

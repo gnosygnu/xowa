@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.ios.*;
 public class Xobc_parse_dump_templates extends Xob_itm_dump_base implements Xobd_wkr, GfoInvkAble {
-	public Xobc_parse_dump_templates(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
+	public Xobc_parse_dump_templates(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Wkr_key() {return KEY;} public static final String KEY = "parse.dump_templates";
 	public static final int FixedLen_page = 1 + 5 + 1 + 5 + 1 + 1 + 1;	// \tid|date|title|text\n
 	public void Wkr_ini(Xob_bldr bldr) {}

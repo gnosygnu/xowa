@@ -19,12 +19,12 @@ package gplx.xowa.ctgs; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.users.history.*; import gplx.xowa.dbs.tbls.*;
 public class Xoctg_pagelist_wtr {
 	private Xoctg_pagelist_mgr pagelist_mgr = new Xoctg_pagelist_mgr();
-	public Xoctg_pagelist_wtr Init_by_app(Xoa_app app) {pagelist_mgr.Init_by_app(app, this); return this;}
-	public void Write(Bry_bfr bfr, Xow_wiki wiki, Xoa_page page) {
+	public Xoctg_pagelist_wtr Init_by_app(Xoae_app app) {pagelist_mgr.Init_by_app(app, this); return this;}
+	public void Write(Bry_bfr bfr, Xowe_wiki wiki, Xoae_page page) {
 		Xodb_page[] page_ary = wiki.Db_mgr().Load_mgr().Load_ctg_list(page.Category_list());
 		Print_hidden(bfr, wiki, page_ary);
 	}
-	public void Print_hidden(Bry_bfr bfr, Xow_wiki wiki, Xodb_page[] page_ary) {
+	public void Print_hidden(Bry_bfr bfr, Xowe_wiki wiki, Xodb_page[] page_ary) {
 		int len = page_ary.length;
 		for (int i = 0; i < len; i++) {
 			Xodb_page page = page_ary[i];

@@ -19,7 +19,7 @@ package gplx.xowa.html.portal; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*;
 public class Xoa_available_wikis_mgr implements GfoInvkAble {
 	private Bry_fmtr itms_as_html_fmtr = Bry_fmtr.new_("\n        <li><a href=\"/site/~{domain}/\"~{itm_cls}>~{domain}</a></li>", "domain", "itm_cls");
-	public Xoa_available_wikis_mgr(Xoa_app app) {this.app = app;} private Xoa_app app;
+	public Xoa_available_wikis_mgr(Xoae_app app) {this.app = app;} private Xoae_app app;
 	public String Itms_as_html() {
 		if (itms_as_html == null) {
 			String itm_cls = app.Api_root().Html().Modules().Popups().Enabled() ? " class='xowa-hover-off'" : "";
@@ -29,9 +29,9 @@ public class Xoa_available_wikis_mgr implements GfoInvkAble {
 			int len = xwiki_mgr.Len();
 			for (int i = 0; i < len; i++) {
 				Xow_xwiki_itm itm = xwiki_mgr.Get_at(i);
-				if (itm.Wiki_tid() == Xow_wiki_domain_.Tid_home) continue;// don't show home wiki
+				if (itm.Domain_tid() == Xow_domain_.Tid_int_home) continue;// don't show home wiki
 				if (!itm.Offline()) continue;	// only show items marked Offline (added by Available_from_fsys); DATE:2014-09-21
-				itms_as_html_fmtr.Bld_bfr_many(tmp_bfr, itm.Domain(), itm_cls);
+				itms_as_html_fmtr.Bld_bfr_many(tmp_bfr, itm.Domain_bry(), itm_cls);
 			}
 			itms_as_html = tmp_bfr.Xto_str();
 		}

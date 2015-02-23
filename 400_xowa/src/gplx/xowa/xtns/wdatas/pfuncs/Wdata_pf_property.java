@@ -29,10 +29,10 @@ public class Wdata_pf_property extends Pf_func_base {
 			if (!property_wkr.Eval_bgn(ctx.Cur_page(), id)) return;
 		}
 
-		Xoa_app app = ctx.App();
+		Xoae_app app = ctx.App();
 		Wdata_wiki_mgr wdata_mgr = app.Wiki_mgr().Wdata_mgr();
 		if (!wdata_mgr.Enabled()) return;
-		Xow_wiki wiki = ctx.Wiki();
+		Xowe_wiki wiki = ctx.Wiki();
 		Xoa_ttl ttl = ctx.Cur_page().Ttl();
 
 		Wdata_pf_property_data data = new Wdata_pf_property_data();

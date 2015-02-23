@@ -18,50 +18,62 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa2.users.data; import gplx.*; import gplx.xowa2.*; import gplx.xowa2.users.*;
 import gplx.dbs.*;
 public class Xoud_site_tbl {
-	public Db_conn Conn() {return conn;} public Xoud_site_tbl Conn_(Db_conn v) {this.Rls_all(); conn = v; return this;} private Db_conn conn;
-	@gplx.Virtual public void Insert(int user_id, int site_id, int priority, String domain, String name, String path, String xtn) {
-		Db_stmt stmt = conn.New_stmt_insert(Tbl_name, Flds);
-		try {
-			stmt .Val_int(Fld_user_id, user_id)
-				 .Val_int(Fld_site_id, site_id).Val_int(Fld_site_priority, priority).Val_str(Fld_site_domain, domain).Val_str(Fld_site_name, name).Val_str(Fld_site_path, path).Val_str(Fld_site_xtn, xtn)
-				 .Exec_insert();
+	private String tbl_name = "user_site_regy"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private String fld_user_id, fld_site_id, fld_site_priority, fld_site_domain, fld_site_name, fld_site_path, fld_site_xtn;
+	private Db_conn conn; private int user_id;
+	public void Conn_(Db_conn new_conn, boolean created, int user_id) {
+		this.conn = new_conn; flds.Clear(); this.user_id = user_id;
+		fld_user_id				= flds.Add_int("user_id");
+		fld_site_id				= flds.Add_int("site_id");
+		fld_site_priority		= flds.Add_int("site_priority");			// EX: 0=default; 1+ is order if 0 is unavailable
+		fld_site_domain			= flds.Add_str("site_domain", 255);			// EX: en.wikipedia.org; NOTE: no protocol (https:)
+		fld_site_name			= flds.Add_str("site_name", 255);			// EX: English Wikipedia
+		fld_site_path			= flds.Add_str("site_path", 255);			// EX: ~{xowa_root}/wiki/en.wikipedia.org/
+		fld_site_xtn			= flds.Add_text("site_xtn");
+		if (created) {
+			Db_meta_tbl meta = Db_meta_tbl.new_(tbl_name, flds
+			, Db_meta_idx.new_unique_by_tbl(tbl_name, "pkey", fld_user_id, fld_site_id)
+			);
+			conn.Exec_create_tbl_and_idx(meta);
 		}
-		catch (Exception exc) {throw Db_stmt_.err_(exc, stmt, "Insert");}
 	}
-	@gplx.Virtual public void Update(int user_id, int site_id, int priority, String domain, String name, String path, String xtn) {
-		Db_stmt stmt = conn.New_stmt_update_by_meta(Tbl_name, Flds, Fld_user_id, Fld_site_id);
-		try {
-			stmt .Val_int(Fld_site_priority, priority).Val_str(Fld_site_domain, domain).Val_str(Fld_site_name, name).Val_str(Fld_site_path, path).Val_str(Fld_site_xtn, xtn)
-				 .Crt_int(Fld_user_id, user_id).Crt_int(Fld_site_id, site_id)
-				 .Exec_update();
-		}
-		catch (Exception exc) {throw Db_stmt_.err_(exc, stmt, "Update");}
+	@gplx.Virtual public void Insert(int site_id, int priority, String domain, String name, String path, String xtn) {
+		Db_stmt stmt = conn.Stmt_insert(tbl_name, flds);
+		stmt.Val_int(fld_user_id, user_id).Val_int(fld_site_id, site_id)
+			.Val_int(fld_site_priority, priority).Val_str(fld_site_domain, domain).Val_str(fld_site_name, name).Val_str(fld_site_path, path).Val_str(fld_site_xtn, xtn)
+			.Exec_insert();
 	}
-	@gplx.Virtual public void Delete(int user_id, int site_id) {
-		Db_stmt stmt = conn.New_stmt_delete(Tbl_name, Fld_user_id, Fld_site_id);
-		try {stmt.Crt_int(Fld_user_id, user_id).Crt_int(Fld_site_id, site_id).Exec_delete();}
-		catch (Exception exc) {throw Db_stmt_.err_(exc, stmt, "Delete");}
+	@gplx.Virtual public void Update(int site_id, int priority, String domain, String name, String path, String xtn) {
+		Db_stmt stmt = conn.Stmt_update_exclude(tbl_name, flds, fld_user_id, fld_site_id);
+		stmt.Val_int(fld_site_priority, priority).Val_str(fld_site_domain, domain).Val_str(fld_site_name, name).Val_str(fld_site_path, path).Val_str(fld_site_xtn, xtn)
+			.Crt_int(fld_user_id, user_id).Crt_int(fld_site_id, site_id)
+			.Exec_update();
 	}
-	@gplx.Virtual public Xoud_site_row[] Select_all(int user_id) {
-		ListAdp rv = ListAdp_.new_();
-		Db_stmt stmt = conn.New_stmt_select_all_where(Tbl_name, Flds, Fld_user_id);
-		try {
-			Db_rdr rdr = stmt.Crt_int(Fld_user_id, user_id).Exec_select_as_rdr();
-			while (rdr.Move_next()) {
-				Xoud_site_row row = Make_row(rdr);
-				rv.Add(row);
-			}
-			rdr.Rls();
-			return (Xoud_site_row[])rv.Xto_ary_and_clear(Xoud_site_row.class);
-		}
-		catch (Exception exc) {throw Db_stmt_.err_(exc, stmt, "Select_all");}
+	@gplx.Virtual public void Delete(int site_id) {
+		Db_stmt stmt = conn.Stmt_delete(tbl_name, fld_user_id, fld_site_id);
+		stmt.Crt_int(fld_user_id, user_id).Crt_int(fld_site_id, site_id)
+			.Exec_delete();
 	}
-	public Xoud_site_row[] Select_by_domain(int user_id, String domain) {
+	public Xoud_site_row[] Select_all() {
 		ListAdp rv = ListAdp_.new_();
 		Db_stmt stmt = Db_stmt_.Null; Db_rdr rdr = Db_rdr_.Null;
 		try {
-			stmt = conn.New_stmt_select_all_where(Tbl_name, Flds, Fld_user_id, Fld_site_domain);
-			rdr = stmt.Crt_int(Fld_user_id, user_id).Crt_str(Fld_site_domain, domain).Exec_select_as_rdr();
+			stmt = conn.Stmt_select(tbl_name, flds, fld_user_id);
+			rdr = stmt.Crt_int(fld_user_id, user_id).Exec_select_as_rdr();
+			while (rdr.Move_next()) {
+				Xoud_site_row row = Make_row(rdr);
+				rv.Add(row);
+			}
+			return (Xoud_site_row[])rv.Xto_ary_and_clear(Xoud_site_row.class);
+		}
+		finally {rdr.Rls();}
+	}
+	public Xoud_site_row[] Select_by_domain(String domain) {
+		ListAdp rv = ListAdp_.new_();
+		Db_stmt stmt = Db_stmt_.Null; Db_rdr rdr = Db_rdr_.Null;
+		try {
+			stmt = conn.Stmt_select(tbl_name, flds, fld_user_id, fld_site_domain);
+			rdr = stmt.Crt_int(fld_user_id, user_id).Crt_str(fld_site_domain, domain).Exec_select_as_rdr();
 			while (rdr.Move_next()) {
 				Xoud_site_row row = Make_row(rdr);
 				rv.Add(row);
@@ -69,33 +81,17 @@ public class Xoud_site_tbl {
 			rdr.Rls();
 			return (Xoud_site_row[])rv.Xto_ary_and_clear(Xoud_site_row.class);
 		}
-		catch (Exception exc) {throw Db_stmt_.err_(exc, stmt, "Select_by_domain");}
-		finally {rdr.Rls(); stmt.Rls();}
+		finally {rdr.Rls();}
 	}
 	private Xoud_site_row Make_row(Db_rdr rdr) {
 		return new Xoud_site_row
-		( rdr.Read_int(Fld_user_id)
-		, rdr.Read_int(Fld_site_id)
-		, rdr.Read_int(Fld_site_priority)
-		, rdr.Read_str(Fld_site_domain)
-		, rdr.Read_str(Fld_site_name)
-		, rdr.Read_str(Fld_site_path)
-		, rdr.Read_str(Fld_site_xtn)
+		( rdr.Read_int(fld_user_id)
+		, rdr.Read_int(fld_site_id)
+		, rdr.Read_int(fld_site_priority)
+		, rdr.Read_str(fld_site_domain)
+		, rdr.Read_str(fld_site_name)
+		, rdr.Read_str(fld_site_path)
+		, rdr.Read_str(fld_site_xtn)
 		);
 	}
-	public void Rls_all() {}
-	private static final String Tbl_name = "user_site_regy";
-	private static final Db_meta_fld_list Flds = Db_meta_fld_list.new_();
-	private static final String
-	  Fld_user_id				= Flds.Add_int("user_id")
-	, Fld_site_id				= Flds.Add_int("site_id")
-	, Fld_site_priority			= Flds.Add_int("site_priority")				// EX: 0=default; 1+ is order if 0 is unavailable
-	, Fld_site_domain			= Flds.Add_str("site_domain", 255)			// EX: en.wikipedia.org; NOTE: no protocol (https:)
-	, Fld_site_name				= Flds.Add_str("site_name", 255)			// EX: English Wikipedia
-	, Fld_site_path				= Flds.Add_str("site_path", 255)			// EX: ~{xowa_root}/wiki/en.wikipedia.org/
-	, Fld_site_xtn				= Flds.Add_text("site_xtn")
-	;
-//		private static final Db_meta_tbl meta = Db_meta_tbl.new_(Tbl_name, Flds.To_fld_ary()
-//		, Db_meta_idx.new_unique(Tbl_name, "pkey", Fld_user_id, Fld_site_id)
-//		);
 }

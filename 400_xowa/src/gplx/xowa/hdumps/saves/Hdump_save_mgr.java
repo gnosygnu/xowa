@@ -16,19 +16,19 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps.saves; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
-import gplx.dbs.*; import gplx.xowa.files.*; import gplx.xowa.hdumps.dbs.*; import gplx.xowa.hdumps.srls.*; import gplx.xowa.html.hzips.*;
+import gplx.dbs.*; import gplx.xowa.files.*; import gplx.xowa.hdumps.dbs.*; import gplx.xowa.hdumps.srls.*; import gplx.xowa.html.hzips.*; import gplx.xowa.parsers.lnkis.redlinks.*;
 import gplx.xowa.hdumps.core.*; import gplx.xowa.hdumps.pages.*; import gplx.xowa.pages.*; import gplx.xowa.pages.skins.*; import gplx.xowa.hdumps.loads.*;
 import gplx.xowa2.gui.*;
 public class Hdump_save_mgr {
 	private Bry_bfr tmp_bfr = Bry_bfr.reset_(1 * Io_mgr.Len_mb); private Xow_hzip_stats hzip_stats = new Xow_hzip_stats();
 	public Xodb_wiki_page_html_tbl Tbl() {return text_tbl;} public void Tbl_(Xodb_wiki_page_html_tbl v) {text_tbl = v;} private Xodb_wiki_page_html_tbl text_tbl;
-	public void Update(Xoa_page page) {
+	public void Update(Xoae_page page) {
 		int page_id = page.Revision_data().Id();
 		text_tbl.Delete(page_id);
 		this.Insert(page, hzip_stats);
 	}
 	public void Hdump_stats_enable_y_(Db_conn p) {hdump_stats_tbl = new Hdump_stats_tbl().Conn_(p).Create_tbl();} private Hdump_stats_tbl hdump_stats_tbl;
-	public void Insert(Xoa_page page, Xow_hzip_stats hzip_stats) {
+	public void Insert(Xoae_page page, Xow_hzip_stats hzip_stats) {
 		int page_id = page.Revision_data().Id();
 		Insert_body(page, hzip_stats, page_id);
 		byte[] redlinks_bry = Write_redlinks(tmp_bfr, page.Hdump_data().Redlink_mgr());
@@ -36,7 +36,7 @@ public class Hdump_save_mgr {
 		byte[] imgs_bry = Write_imgs(tmp_bfr, page.Hdump_data().Data());
 		if (imgs_bry != null)		text_tbl.Insert(page_id, Hdump_data_tid.Tid_img, imgs_bry);
 	}
-	public int Insert_body(Xoa_page page, Xow_hzip_stats hzip_stats, int page_id) {
+	public int Insert_body(Xoae_page page, Xow_hzip_stats hzip_stats, int page_id) {
 		hpg.Init(tmp_bfr, page);
 		srl_mgr.Save(hpg, tmp_bfr);
 		byte[] body_bry = tmp_bfr.Xto_bry_and_clear();
@@ -52,7 +52,7 @@ public class Hdump_save_mgr {
 		}
 		return bfr.Xto_bry_and_clear();
 	}
-	public static byte[] Write_redlinks(Bry_bfr bfr, Xopg_redlink_mgr redlink_mgr) {
+	public static byte[] Write_redlinks(Bry_bfr bfr, Xopg_redlink_idx_list redlink_mgr) {
 		int len = redlink_mgr.Len(); if (len == 0) return null;
 		bfr.Add_int_variable(redlink_mgr.Max());
 		for (int i = 0; i < len; ++i) {

@@ -29,7 +29,7 @@ public class Xow_xtn_mgr implements GfoInvkAble {
 	public Indicator_xtn_mgr Xtn_indicator() {return xtn_indicator;} private Indicator_xtn_mgr xtn_indicator;
 	public Pp_xtn_mgr Xtn_proofread() {return xtn_proofread;} private Pp_xtn_mgr xtn_proofread;
 	public Wdata_xtn_mgr Xtn_wikibase() {return xtn_wikibase;} private Wdata_xtn_mgr xtn_wikibase;
-	public Xow_xtn_mgr Ctor_by_app(Xoa_app app) {	// NOTE: needed for options
+	public Xow_xtn_mgr Ctor_by_app(Xoae_app app) {	// NOTE: needed for options
 		Add(app, new Cite_xtn_mgr());
 		Add(app, new Imap_xtn_mgr());
 		Add(app, new Sites_xtn_mgr());
@@ -47,8 +47,8 @@ public class Xow_xtn_mgr implements GfoInvkAble {
 		Add(app, new gplx.xowa.xtns.pfuncs.scribunto.Pfunc_xtn_mgr());
 		return this;
 	}
-	public Xow_xtn_mgr Ctor_by_wiki(Xow_wiki wiki) {
-		Xoa_app app = wiki.App();
+	public Xow_xtn_mgr Ctor_by_wiki(Xowe_wiki wiki) {
+		Xoae_app app = wiki.Appe();
 		Xow_xtn_mgr app_xtn_mgr = app.Xtn_mgr();
 		int regy_len = app_xtn_mgr.Count();
 		for (int i = 0; i < regy_len; i++) {
@@ -60,14 +60,14 @@ public class Xow_xtn_mgr implements GfoInvkAble {
 		}
 		return this;
 	}
-	public void Init_by_app(Xoa_app app) {
+	public void Init_by_app(Xoae_app app) {
 		int regy_len = regy.Count();
 		for (int i = 0; i < regy_len; i++) {
 			Xox_mgr mgr = (Xox_mgr)regy.FetchAt(i);
 			mgr.Xtn_init_by_app(app);
 		}
 	}
-	public Xow_xtn_mgr Init_by_wiki(Xow_wiki wiki) {
+	public Xow_xtn_mgr Init_by_wiki(Xowe_wiki wiki) {
 		int regy_len = regy.Count();
 		for (int i = 0; i < regy_len; i++) {
 			Xox_mgr mgr = (Xox_mgr)regy.FetchAt(i);
@@ -77,7 +77,7 @@ public class Xow_xtn_mgr implements GfoInvkAble {
 	}
 	public Xox_mgr Get_at(int i) {return (Xox_mgr)regy.FetchAt(i);}
 	public Xox_mgr Get_or_fail(byte[] key) {Object rv = regy.Fetch(key); if (rv == null) throw Err_.new_fmt_("unknown xtn: {0}", String_.new_utf8_(key)); return (Xox_mgr)rv;}
-	private Xox_mgr Add(Xoa_app app, Xox_mgr xtn) {
+	private Xox_mgr Add(Xoae_app app, Xox_mgr xtn) {
 		xtn.Xtn_ctor_by_app(app);
 		regy.Add(xtn.Xtn_key(), xtn);
 		Set_members(xtn);

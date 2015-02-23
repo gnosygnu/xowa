@@ -19,9 +19,9 @@ package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import
 import gplx.json.*; import gplx.ios.*;
 import gplx.xowa.xtns.wdatas.imports.*;
 abstract class Wdata_idx_mgr_base {
-	public void Ctor(Xob_itm_dump_base wkr, Xob_bldr bldr, Xow_wiki wiki, int dump_fil_len) {
+	public void Ctor(Xob_itm_dump_base wkr, Xob_bldr bldr, Xowe_wiki wiki, int dump_fil_len) {
 		this.wkr = wkr; this.wiki = wiki; this.bldr = bldr; this.dump_fil_len = dump_fil_len;
-	} 	Xob_itm_dump_base wkr; protected Xow_wiki wiki; Xob_bldr bldr; Xol_csv_parser csv_parser = Xol_csv_parser._; protected OrderedHash hash = OrderedHash_.new_(); protected int dump_fil_len;
+	} 	Xob_itm_dump_base wkr; protected Xowe_wiki wiki; Xob_bldr bldr; Xol_csv_parser csv_parser = Xol_csv_parser._; protected OrderedHash hash = OrderedHash_.new_(); protected int dump_fil_len;
 	public void Flush() {
 		int len = hash.Count();
 		for (int i = 0; i < len; i++) {

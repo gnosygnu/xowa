@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.gui; import gplx.*; import gplx.xowa.*;
 import gplx.gfui.*; import gplx.xowa.users.*; import gplx.xowa.gui.views.*;
 public class Xog_resizer {
-	public void Exec_win_resize(Xoa_app app, int main_w, int main_h) {
+	public void Exec_win_resize(Xoae_app app, int main_w, int main_h) {
 		Xog_layout layout = app.Gui_mgr().Layout();
 		Xog_win_itm main_win = app.Gui_mgr().Browser_win();
 		GfuiBtn go_bwd_btn = main_win.Go_bwd_btn(), go_fwd_btn = main_win.Go_fwd_btn(), url_exec_btn = main_win.Url_exec_btn(), search_exec_btn = main_win.Search_exec_btn(), find_fwd_btn = main_win.Find_fwd_btn(), find_bwd_btn = main_win.Find_bwd_btn(), find_close_btn = main_win.Find_close_btn();

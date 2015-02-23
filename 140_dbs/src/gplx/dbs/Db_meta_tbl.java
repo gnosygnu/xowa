@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
+import gplx.dbs.sqls.*;
 public class Db_meta_tbl {
 	public Db_meta_tbl(String name, Db_meta_fld[] flds, Db_meta_idx[] idxs) {
 		this.name = name; this.flds = flds; this.idxs = idxs;
@@ -23,6 +24,7 @@ public class Db_meta_tbl {
 	public String Name() {return name;} private final String name;		
 	public Db_meta_fld[] Flds() {return flds;} private final Db_meta_fld[] flds;
 	public Db_meta_idx[] Idxs() {return idxs;} private final Db_meta_idx[] idxs;
+	public String To_sql_create() {return Db_sqlbldr__sqlite.I.Bld_create_tbl(this);}
 	public static Db_meta_tbl new_(String name, Db_meta_fld_list flds, Db_meta_idx... idxs) {return new Db_meta_tbl(name, flds.To_fld_ary(), idxs);}
 	public static Db_meta_tbl new_(String name, Db_meta_fld[] flds, Db_meta_idx... idxs) {return new Db_meta_tbl(name, flds, idxs);}
 	public static Db_meta_tbl new_(String name, Db_meta_fld... flds) {return new Db_meta_tbl(name, flds, null);}

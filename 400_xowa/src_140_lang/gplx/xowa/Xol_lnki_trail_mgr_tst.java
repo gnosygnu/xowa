@@ -24,11 +24,12 @@ public class Xol_lnki_trail_mgr_tst {
 	}
 }
 class Xol_lnki_trail_mgr_fxt {
+	Xol_lang lang; Xol_lnki_trail_mgr lnki_trail_mgr;
 	public void Clear() {
-		app = Xoa_app_fxt.app_();
-		lang = new Xol_lang(app, Bry_.new_utf8_("fr"));
+		Xoae_app app = Xoa_app_fxt.app_();
+		lang = new Xol_lang(app.Lang_mgr(), Bry_.new_utf8_("fr"));
 		lnki_trail_mgr = lang.Lnki_trail_mgr();
-	}	private Xoa_app app; Xol_lang lang; Xol_lnki_trail_mgr lnki_trail_mgr;
+	}
 	public void Test_add_bulk(String raw, String... expd_ary) {
 		lnki_trail_mgr.Add_bulk(Bry_.new_utf8_(raw));
 		int expd_len = expd_ary.length;

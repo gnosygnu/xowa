@@ -74,7 +74,7 @@ class Xoctg_idx_mgr_fxt {
 			idx_mgr = new Xoctg_idx_mgr();
 		}
 		return this;
-	}	private Xoa_app app; Xow_wiki wiki; Xoctg_idx_mgr idx_mgr; static final byte[] Ctg_name = Bry_.new_ascii_("Ctg_test");
+	}	private Xoae_app app; Xowe_wiki wiki; Xoctg_idx_mgr idx_mgr; static final byte[] Ctg_name = Bry_.new_ascii_("Ctg_test");
 	public byte[] Make_src(int len) {
 		Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_k004().Mkr_rls();
 		bfr.Add_byte_pipe(); // always have leading pipe

@@ -20,7 +20,7 @@ import gplx.xowa.gui.views.*;
 import gplx.xowa.apis.xowa.navs.*;
 public class Xoapi_nav implements GfoInvkAble {
 	private Xog_win_itm win;
-	public void Init_by_kit(Xoa_app app) {
+	public void Init_by_kit(Xoae_app app) {
 		win = app.Gui_mgr().Browser_win();
 		wiki.Init_by_kit(app);
 	}

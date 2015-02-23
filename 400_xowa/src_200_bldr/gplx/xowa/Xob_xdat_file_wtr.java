@@ -16,14 +16,14 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.ios.*;
+import gplx.ios.*; import gplx.xowa.tdbs.*;
 public class Xob_xdat_file_wtr {
 	public static Xob_xdat_file_wtr new_file_(int fil_max, Io_url root_dir)				{return new Xob_xdat_file_wtr(fil_max, root_dir, Io_stream_.Tid_file);}
-	public static Xob_xdat_file_wtr new_by_tid_(int fil_max, Io_url root_dir, byte dir_tid, byte tid) {return new Xob_xdat_file_wtr(fil_max, root_dir.GenSubDir(Xow_dir_info_.Tid_name(dir_tid) + Xow_fsys_mgr.Wtr_dir(tid)), tid);}
+	public static Xob_xdat_file_wtr new_by_tid_(int fil_max, Io_url root_dir, byte dir_tid, byte tid) {return new Xob_xdat_file_wtr(fil_max, root_dir.GenSubDir(Xotdb_dir_info_.Tid_name(dir_tid) + Xotdb_dir_info.Wtr_dir(tid)), tid);}
 	Xob_xdat_file_wtr(int fil_max, Io_url root_dir, byte wtr_tid) {
 		this.fil_max = fil_max; 
 		this.root_dir = root_dir;
-		fil_ext = Xow_fsys_mgr.Wtr_ext(wtr_tid);
+		fil_ext = Xotdb_dir_info.Wtr_ext(wtr_tid);
 		bfr = Bry_bfr.new_(fil_max);
 		idx = new int[fil_max / 8];	// ASSUME: any given row must at least be 8 bytes long
 		Url_gen(fil_idx);	// set 1st url
@@ -109,7 +109,7 @@ public class Xob_xdat_file_wtr {
 	public void Clear() {idx_pos = 0; bfr.Clear();}
 	public void Rls() {bfr.Rls(); idx = null;}
 	public void Url_gen_add() {Url_gen(++fil_idx);}
-	private void Url_gen(int newIdx) {fil_url = Xow_fsys_mgr.Url_fil(root_dir, newIdx, fil_ext);} Io_url fil_url; Io_url root_dir;
+	private void Url_gen(int newIdx) {fil_url = Xotdb_fsys_mgr.Url_fil(root_dir, newIdx, fil_ext);} Io_url fil_url; Io_url root_dir;
 	private void Idx_resize(int newLen) {idx = (int[])Array_.Resize(idx, newLen);}
 	static final String GRP_KEY = "xowa.bldr.xdat_wtr";
 	private static final byte Dlm_fld = Byte_ascii.Pipe;		

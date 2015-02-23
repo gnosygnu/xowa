@@ -16,11 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.xowa.apps.ttls.*;
+import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.xowa.wikis.ttls.*;
 public class Xow_hzip_mgr {		
 	private Gfo_usr_dlg usr_dlg;
 	private byte[] page_url; private byte[] src; private int src_len;
-	public Xow_hzip_mgr(Gfo_usr_dlg usr_dlg, Xoa_ttl_parser ttl_parser) {
+	public Xow_hzip_mgr(Gfo_usr_dlg usr_dlg, Xow_ttl_parser ttl_parser) {
 		this.usr_dlg = usr_dlg;
 		itm__anchor = new Xow_hzip_itm__anchor(this, ttl_parser);
 		itm__header = new Xow_hzip_itm__header(this);

@@ -45,7 +45,7 @@ class Xoi_cmd_dumpfile {
 		return this;
 	}
 	public Gfo_thread_cmd Exec(Xoi_cmd_mgr cmd_mgr) {
-		Xow_wiki wiki = cmd_mgr.App().Wiki_mgr().Get_by_key_or_make(domain);
+		Xowe_wiki wiki = cmd_mgr.App().Wiki_mgr().Get_by_key_or_make(domain);
 		if (bz2_unzip) {	// unzip requested; add unzip cmd
 			GfoMsg unzip_msg = GfoMsg_.new_parse_(Gfo_thread_cmd_unzip.KEY).Add("v", Gfo_thread_cmd_unzip.KEY).Add("src", bz2_url.Raw()).Add("trg", xml_url.Raw());
 			Gfo_thread_cmd_unzip unzip_cmd = (Gfo_thread_cmd_unzip)cmd_mgr.Cmd_add(unzip_msg);

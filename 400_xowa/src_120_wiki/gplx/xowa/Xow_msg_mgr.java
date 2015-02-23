@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.xowa.html.sidebar.*; import gplx.xowa.langs.msgs.*;
 public class Xow_msg_mgr implements GfoInvkAble {
-	private Xow_wiki wiki; private Xol_lang lang; private Xol_msg_mgr msg_mgr;
-	public Xow_msg_mgr(Xow_wiki wiki, Xol_lang lang) {
+	private final Xowe_wiki wiki; private Xol_lang lang; private final Xol_msg_mgr msg_mgr;
+	public Xow_msg_mgr(Xowe_wiki wiki, Xol_lang lang) {
 		this.wiki = wiki;
 		this.lang = lang;
 		this.msg_mgr = new Xol_msg_mgr(wiki, false);
@@ -35,7 +35,7 @@ public class Xow_msg_mgr implements GfoInvkAble {
 		Xol_msg_itm itm = msg_mgr.Itm_by_id_or_null(id);
 		if (itm == null)
 			itm = lang.Msg_mgr().Itm_by_id_or_null(id);
-		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr tmp_bfr = Xoa_app_.Utl_bry_bfr_mkr().Get_b512();
 		byte[] rv = Val_by_itm(tmp_bfr, itm, args);
 		tmp_bfr.Mkr_rls();
 		return rv;
@@ -45,7 +45,7 @@ public class Xow_msg_mgr implements GfoInvkAble {
 	public Xol_msg_itm Find_or_null(byte[] key) {
 		Xol_msg_itm itm = msg_mgr.Itm_by_key_or_null(key);
 		if (itm == null) {
-			Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
+			Bry_bfr tmp_bfr = Xoa_app_.Utl_bry_bfr_mkr().Get_b512();
 			itm = Xol_msg_mgr_.Get_msg_itm(tmp_bfr, wiki, lang, key);
 			if (itm.Src_is_missing()) itm = null;
 			tmp_bfr.Mkr_rls();
@@ -57,7 +57,7 @@ public class Xow_msg_mgr implements GfoInvkAble {
 	public byte[] Val_by_key_obj(byte[] key) {return Val_by_key(key, null);}
 	private byte[] Val_by_key(byte[] key, Object[] args) {
 		Xol_msg_itm itm = msg_mgr.Itm_by_key_or_null(key);
-		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr tmp_bfr = Xoa_app_.Utl_bry_bfr_mkr().Get_b512();
 		if (itm == null)
 			itm = Xol_msg_mgr_.Get_msg_itm(tmp_bfr, wiki, lang, key);
 		if (itm.Src_is_missing()) {
@@ -75,7 +75,7 @@ public class Xow_msg_mgr implements GfoInvkAble {
 		return rv;
 	}
 	public byte[] Val_html_accesskey_and_title(byte[] id) {
-		Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr bfr = Xoa_app_.Utl_bry_bfr_mkr().Get_b512();
 		byte[] rv = Val_html_accesskey_and_title(id, bfr, null);
 		bfr.Mkr_rls();
 		return rv;

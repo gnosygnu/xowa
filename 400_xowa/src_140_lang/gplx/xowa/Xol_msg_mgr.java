@@ -17,10 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 public class Xol_msg_mgr implements GfoInvkAble {
+	private final GfoInvkAble owner; private final boolean owner_is_lang;
 	public Xol_msg_mgr(GfoInvkAble owner, boolean owner_is_lang) {
 		this.owner = owner; this.owner_is_lang = owner_is_lang;
 		this.Clear();
-	}	GfoInvkAble owner; boolean owner_is_lang;
+	}
 	public void Clear() {
 		if (owner_is_lang)
 			itms = Ary_new();
@@ -59,7 +60,7 @@ public class Xol_msg_mgr implements GfoInvkAble {
 		Xol_msg_itm itm = Itm_by_id_or_null(id);
 		return itm == null ? null : itm.Val();
 	}
-	public byte[] Val_by_id(Xow_wiki wiki, int id) {	// NOTE: Val_by_id needs to exist on lang (not wiki_msg_mgr); {{#time}} can pass in lang, and will need to call lang's msg_mgr directly
+	public byte[] Val_by_id(Xowe_wiki wiki, int id) {	// NOTE: Val_by_id needs to exist on lang (not wiki_msg_mgr); {{#time}} can pass in lang, and will need to call lang's msg_mgr directly
 		Xol_msg_itm itm = Itm_by_id_or_null(id);
 		if (itm == null) return null;
 		byte[] rv = itm.Val();

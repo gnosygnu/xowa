@@ -43,11 +43,11 @@ public class Xow_fragment_mgr_tst {
 class Xow_fragment_mgr_fxt {
 	public void Clear() {
 		if (wiki == null) {
-			Xoa_app app = Xoa_app_fxt.app_();
+			Xoae_app app = Xoa_app_fxt.app_();
 			wiki = Xoa_app_fxt.wiki_tst_(app);
 		}
-	}	private Xow_wiki wiki;
-	public Xol_lang Make_lang(String key) {return wiki.App().Lang_mgr().Get_by_key_or_new(Bry_.new_ascii_(key));}
+	}	private Xowe_wiki wiki;
+	public Xol_lang Make_lang(String key) {return wiki.Appe().Lang_mgr().Get_by_key_or_new(Bry_.new_ascii_(key));}
 	public void Test_fragment(String key, String expd) {Test_fragment(wiki.Lang(), key, expd);}
 	public void Test_fragment(Xol_lang lang, String key, String expd) {
 		wiki.Fragment_mgr().Evt_lang_changed(lang);

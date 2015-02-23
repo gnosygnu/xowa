@@ -103,7 +103,7 @@ class Xob_subpage_tst_fxt {
 		mgr.Clear();
 		hash.Clear();
 		return this;
-	}	private Xoa_app app; Xob_wiki_cfg_bldr mgr; OrderedHash hash = OrderedHash_.new_();
+	}	private Xoae_app app; Xob_wiki_cfg_bldr mgr; OrderedHash hash = OrderedHash_.new_();
 	private Xob_subpage_parser parser = new Xob_subpage_parser();
 	public Xob_subpage_tst_fxt Init_cmd(String wiki, String key, String text) {
 //		mgr.Itms_get_or_new(wiki).Itms_add(key, text);

@@ -18,9 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.langs; import gplx.*; import gplx.xowa.*;
 import gplx.core.btries.*; import gplx.intl.*; import gplx.xowa.xtns.pfuncs.*;
 public class Xol_func_name_regy {
+	private Xoa_lang_mgr lang_mgr;
 	private Xol_func_name_itm finder = new Xol_func_name_itm();
 	private Btrie_slim_mgr cs_trie = Btrie_slim_mgr.cs_(), ci_trie = Btrie_slim_mgr.ci_utf_8_();
-	public Xol_func_name_regy(Xol_lang lang) {this.lang = lang;} private Xol_lang lang;
+	public Xol_func_name_regy(Xoa_lang_mgr lang_mgr, Xol_lang lang) {this.lang_mgr = lang_mgr; this.lang = lang;} private Xol_lang lang;
 	public void Evt_lang_changed(Xol_lang lang) {
 		Xol_kwd_mgr kwd_mgr = lang.Kwd_mgr();
 		ci_trie.Clear(); cs_trie.Clear();
@@ -32,7 +33,7 @@ public class Xol_func_name_regy {
 				if (Env_.Mode_testing())
 					continue;		// TEST: allows partial parsing of $magicWords
 				else
-					 list = lang.App().Lang_mgr().Lang_en().Kwd_mgr().Get_at(id);	// get from fallback language; TODO: allow other fallback langs besides "English"
+					 list = lang_mgr.Lang_en().Kwd_mgr().Get_at(id);	// get from fallback language; TODO: allow other fallback langs besides "English"
 			}
 			Reg_defn(kwd_mgr, id, Pf_func_.Get_prototype(id));
 		}

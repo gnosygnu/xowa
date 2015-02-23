@@ -32,9 +32,9 @@ class Xob_category_registry_sql_fxt {
 			fxt = new Db_mgr_fxt().Ctor_fsys();
 			fxt.Init_db_sqlite();
 			wiki = fxt.Wiki();
-			app = wiki.App();
+			app = wiki.Appe();
 		}
-	}	Db_mgr_fxt fxt; Xow_wiki wiki; Xoa_app app; Int_obj_ref page_id_next = Int_obj_ref.new_(1);
+	}	Db_mgr_fxt fxt; Xowe_wiki wiki; Xoae_app app; Int_obj_ref page_id_next = Int_obj_ref.new_(1);
 	public void Init_page_insert(String[] ttls) {
 		fxt.Init_page_insert(page_id_next, Xow_ns_.Id_category, ttls);
 	}

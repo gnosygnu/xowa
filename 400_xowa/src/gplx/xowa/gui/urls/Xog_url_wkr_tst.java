@@ -67,11 +67,11 @@ public class Xog_url_wkr_tst {
 	}
 }
 class Xog_url_wkr_fxt {
-	private Xoa_app app; private Xow_wiki wiki;
+	private Xoae_app app; private Xowe_wiki wiki;
 	private Xog_win_itm win;
 	private Xog_url_wkr url_wkr = new Xog_url_wkr();
 	private String init_raw;
-	public Xoa_app App() {return app;}
+	public Xoae_app App() {return app;}
 	public Xog_url_wkr_fxt Expd_tid_(byte v) {expd_tid = v; return this;} private byte expd_tid;
 	public Xog_url_wkr_fxt Expd_wiki_(String v) {expd_wiki = v; return this;} private String expd_wiki;
 	public Xog_url_wkr_fxt Expd_page_(String v) {expd_page = v; return this;} private String expd_page;
@@ -80,9 +80,9 @@ class Xog_url_wkr_fxt {
 	public void Clear() {
 		app = Xoa_app_fxt.app_();
 		wiki = Xoa_app_fxt.wiki_tst_(app);
-		Xoa_app_fxt.Init_gui(app);
+		Xoa_app_fxt.Init_gui(app, wiki);
 		win = app.Gui_mgr().Browser_win();
-		win.Active_page_(Xoa_page.test_(wiki, Xoa_ttl.parse_(wiki, Bry_.new_utf8_("test"))));	// TODO: remove unnecessary page init
+		win.Active_page_(Xoae_page.test_(wiki, Xoa_ttl.parse_(wiki, Bry_.new_utf8_("test"))));	// TODO: remove unnecessary page init
 		expd_wiki = expd_page = expd_qargs = expd_anchor = null;
 	}
 	public Xog_url_wkr_fxt Init_exec(String raw) {

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps; import gplx.*; import gplx.xowa.*;
-import gplx.dbs.*; import gplx.ios.*; import gplx.xowa.dbs.*; import gplx.xowa.dbs.tbls.*; import gplx.xowa.hdumps.saves.*; import gplx.xowa.hdumps.dbs.*; import gplx.xowa.hdumps.core.*; import gplx.xowa.html.hzips.*;
+import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.ios.*; import gplx.xowa.dbs.*; import gplx.xowa.dbs.tbls.*; import gplx.xowa.hdumps.saves.*; import gplx.xowa.hdumps.dbs.*; import gplx.xowa.hdumps.core.*; import gplx.xowa.html.hzips.*;
 public class Xob_hdump_bldr {
 	private Xodb_fsys_mgr fsys_mgr; private Xodb_file core_db; private Xodb_xowa_db_tbl db_tbl; private Xodb_xowa_cfg_tbl cfg_tbl; private Db_stmt cfg_update_stmt;
 	private int hdump_db_id; private long hdump_db_size, hdump_db_max; private Db_conn hdump_db_provider;
@@ -40,7 +40,7 @@ public class Xob_hdump_bldr {
 		Db_term(core_db, hdump_db_provider, hdump_db_id);
 	}
 	private Bry_bfr tmp_bfr = Bry_bfr.reset_(Io_mgr.Len_mb); private Xow_hzip_stats hzip_stats = new Xow_hzip_stats();
-	public void Insert_page(Xoa_page page) {
+	public void Insert_page(Xoae_page page) {
 		hdump_mgr.Write2(tmp_bfr, page, hzip_stats);
 		hdump_db_size += hdump_save_mgr.Insert_body(page, hzip_stats, page.Revision_data().Id());
 		if (hdump_db_size > hdump_db_max) {

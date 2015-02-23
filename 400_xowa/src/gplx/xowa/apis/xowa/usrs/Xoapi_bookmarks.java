@@ -18,22 +18,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.apis.xowa.usrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apis.*; import gplx.xowa.apis.xowa.*;
 import gplx.xowa.gui.history.*; import gplx.xowa.gui.views.*;
 public class Xoapi_bookmarks implements GfoInvkAble {
-	private Xoa_app app; private Xog_win_itm win;
-	public void Ctor_by_app(Xoa_app app) {this.app = app;}
-	public void Init_by_kit(Xoa_app app) {this.win = app.Gui_mgr().Browser_win();}
+	private Xoae_app app; private Xog_win_itm win;
+	public void Ctor_by_app(Xoae_app app) {this.app = app;}
+	public void Init_by_kit(Xoae_app app) {this.win = app.Gui_mgr().Browser_win();}
 	public boolean Enabled() {return enabled;} private boolean enabled = true;
 	public void Enabled_(boolean v) {enabled = v;}
 	public void Add(String url_str) {
 		if (!enabled) return;
 		Xog_tab_itm tab = win.Active_tab(); if (tab == Xog_tab_itm_.Null) return;
-		Xoa_page page = tab.Page();
+		Xowe_wiki wiki = tab.Wiki(); Xoae_page page = tab.Page();
 		byte[] wiki_domain = null, ttl_full_txt = null;
 		if (url_str == null) {
-			wiki_domain = page.Wiki().Domain_bry();
+			wiki_domain = wiki.Domain_bry();
 			ttl_full_txt = page.Ttl().Full_txt();
 		}
 		else {
-			Xoa_url url = Xoa_url_parser.Parse_from_url_bar(app, page.Wiki(), url_str);
+			Xoa_url url = Xoa_url_parser.Parse_from_url_bar(app, wiki, url_str);
 			wiki_domain = url.Wiki_bry();
 			ttl_full_txt = url.Page_bry();
 		}

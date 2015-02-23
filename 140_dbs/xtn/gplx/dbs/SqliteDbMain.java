@@ -16,8 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs;
-import gplx.*;
-
+import gplx.*; import gplx.dbs.engines.sqlite.*;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
@@ -50,7 +49,7 @@ public class SqliteDbMain {
 //	}
 	private void CreateMany(int number, int base_val) {
 		long time_bgn = Env_.TickCount();
-		Db_conn provider = Sqlite_engine_.Conn_load_or_make_(Io_url_.new_fil_("E:\\test.sqlite3"));		
+		Db_conn provider = Db_conn_pool.I.Get_or_new__sqlite(Io_url_.new_fil_("E:\\test.sqlite3"));		
 		String tbl_sql = String_.Concat_lines_nl
 		( "CREATE TABLE fsdb_xtn_thm"
 		, "( thm_id            integer             NOT NULL    PRIMARY KEY"

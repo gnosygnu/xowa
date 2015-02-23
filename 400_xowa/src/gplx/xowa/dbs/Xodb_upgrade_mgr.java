@@ -37,7 +37,7 @@ class Xodb_upgrade_mgr {
 //		}
 //		private static void Fix_storage_format(Db_conn p, Xodb_mgr_sql db_mgr, KeyVal[] kv_ary) {	// storage_format saved incorrectly as int
 //			int len = kv_ary.length;
-//			String gfs_data_storage_format = Xoa_gfs_mgr.Build_code(Xow_wiki.Invk_db_mgr, Xodb_mgr_sql.Invk_data_storage_format);
+//			String gfs_data_storage_format = Xoa_gfs_mgr.Build_code(Xowe_wiki.Invk_db_mgr, Xodb_mgr_sql.Invk_data_storage_format);
 //			for (int i = 0; i < len; i++) {
 //				KeyVal kv = kv_ary[i];
 //				String kv_key = kv.Key();

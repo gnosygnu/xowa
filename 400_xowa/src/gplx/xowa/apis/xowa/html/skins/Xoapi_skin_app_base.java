@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apis.xowa.html.skins; import gplx.*; import gplx.xowa.*; import gplx.xowa.apis.*; import gplx.xowa.apis.xowa.*; import gplx.xowa.apis.xowa.html.*;
 public class Xoapi_skin_app_base implements GfoInvkAble {
-	public void Init_by_kit(Xoa_app app) {
+	public void Init_by_kit(Xoae_app app) {
 	}
 	public boolean Sidebar_home_enabled() {return sidebar_home_enabled;} public void Sidebar_home_enabled_(boolean v) {sidebar_home_enabled = v;} private boolean sidebar_home_enabled;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import org.junit.*;
-import gplx.stores.*; import gplx.xowa.files.*;
+import gplx.stores.*; import gplx.xowa.files.*; import gplx.xowa.files.repos.*;
 public class Xob_xfer_temp_itm_tst {
 	private Xob_xfer_temp_itm_fxt fxt = new Xob_xfer_temp_itm_fxt();
 	@Before public void init() {fxt.Reset();}

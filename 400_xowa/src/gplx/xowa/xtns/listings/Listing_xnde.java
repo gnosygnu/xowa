@@ -22,7 +22,7 @@ public class Listing_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 	public Listing_xnde(int tag_id) {}
 	private byte[] xatr_name, xatr_alt, xatr_address, xatr_directions, xatr_phone, xatr_tollfree, xatr_email, xatr_fax, xatr_url, xatr_hours, xatr_price, xatr_checkin, xatr_checkout;
 	private int xatr_lat = Xatr_meridian_null, xatr_long = Xatr_meridian_null;
-	public void Xatr_parse(Xow_wiki wiki, byte[] src, Xop_xatr_itm xatr, Object xatr_obj) {
+	public void Xatr_parse(Xowe_wiki wiki, byte[] src, Xop_xatr_itm xatr, Object xatr_obj) {
 		if (xatr_obj == null) return;
 		byte xatr_tid = ((Byte_obj_val)xatr_obj).Val();
 		switch (xatr_tid) {
@@ -51,7 +51,7 @@ public class Listing_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 		xatr_address = Parse_wikitext(xatr_address);
 		xatr_directions = Parse_wikitext(xatr_directions);
 	}		
-	private Xow_wiki wiki; private Xop_parser parser; private Xop_ctx sub_ctx; private Xol_msg_mgr msg_mgr;
+	private Xowe_wiki wiki; private Xop_parser parser; private Xop_ctx sub_ctx; private Xol_msg_mgr msg_mgr;
 	private void Init_sub_ctx() {
 		sub_ctx = Xop_ctx.new_sub_(wiki);
 	}
@@ -62,11 +62,11 @@ public class Listing_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 	}
 	private Listing_xtn_mgr xtn_mgr;
 	private byte[] html_output = Bry_.Empty;
-	public void Xtn_parse(Xow_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
+	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
 		this.wiki = wiki; this.parser = wiki.Parser(); this.msg_mgr = wiki.Lang().Msg_mgr();
 		xtn_mgr = (Listing_xtn_mgr)wiki.Xtn_mgr().Get_or_fail(Listing_xtn_mgr.Xtn_key_static);
 		if (xtn_mgr == null || !xtn_mgr.Enabled()) return;
-		Xoa_app app = wiki.App();
+		Xoae_app app = wiki.Appe();
 		Xop_xatr_itm[] atrs = Xop_xatr_itm.Xatr_parse(app, this, Listing_xatrs.Key_hash, wiki, src, xnde);
 		Init_args();
 		Html_wtr hwtr = xtn_mgr.Hwtr();
@@ -75,7 +75,7 @@ public class Listing_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 			html_output = hwtr.Xto_bry_and_clear();
 		}
 	}
-	public void Xtn_write(Bry_bfr bfr, Xoa_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
+	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
 		if (xtn_mgr == null || !xtn_mgr.Enabled()) 
 			Xox_mgr_base.Xtn_write_escape(app, bfr, src, xnde);
 		else

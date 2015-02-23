@@ -19,7 +19,7 @@ package gplx.xowa.apis.xowa.gui.browsers; import gplx.*; import gplx.xowa.*; imp
 import gplx.xowa.gui.views.*;
 public class Xoapi_tabs implements GfoInvkAble {
 	private Xog_tab_mgr tab_mgr;
-	public void Init_by_kit(Xoa_app app) {
+	public void Init_by_kit(Xoae_app app) {
 		this.tab_mgr = app.Gui_mgr().Browser_win().Tab_mgr();
 	}
 	private boolean Active_tab_is_null() {return tab_mgr.Active_tab_is_null();}

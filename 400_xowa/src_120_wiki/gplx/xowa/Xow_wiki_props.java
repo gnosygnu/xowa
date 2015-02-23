@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.xowa.wikis.*;
 public class Xow_wiki_props implements GfoInvkAble {
-	public byte[] SiteName() {return siteName;} public Xow_wiki_props SiteName_(byte v) {siteName = Bry_.new_ascii_(String_.UpperFirst(String_.new_ascii_(Xow_wiki_domain_.Key_by_tid(v)))); return this;} private byte[] siteName = Bry_.Empty;
+	public byte[] SiteName() {return siteName;} public Xow_wiki_props SiteName_(int v) {siteName = Bry_.new_ascii_(String_.UpperFirst(String_.new_ascii_(Xow_domain_.Tid__get_bry(v)))); return this;} private byte[] siteName = Bry_.Empty;
 	public byte[] ServerName() {return serverName;} public Xow_wiki_props ServerName_(byte[] v) {serverName = v; server = Bry_.Add(bry_http, v); return this;} private byte[] serverName = Bry_.new_ascii_("localhost");
 	public byte[] Server() {return server;} private byte[] server = Bry_.new_ascii_("http://localhost"); static final byte[] bry_http = Bry_.new_ascii_("http://");
 	public byte[] ArticlePath() {return articlePath;} public Xow_wiki_props ArticlePath_(byte[] v) {articlePath = v; return this;} private byte[] articlePath = Xoh_href_parser.Href_wiki_bry;
@@ -34,7 +34,7 @@ public class Xow_wiki_props implements GfoInvkAble {
 	public byte[] Siteinfo_misc() {return siteinfo_misc;}
 	public byte[] Siteinfo_mainpage() {return siteinfo_mainpage;} private byte[] siteinfo_mainpage = Bry_.Empty;
 	public DateAdp Modified_latest() {return modified_latest;} private DateAdp modified_latest;
-	public void Main_page_update(Xow_wiki wiki) {
+	public void Main_page_update(Xowe_wiki wiki) {
 		siteinfo_mainpage = main_page;										// note that main_page came from <siteinfo>; store old value for record's sake
 		main_page = Xow_mainpage_finder.Find_or(wiki, siteinfo_mainpage);	// get new main_page from mainpage_finder
 	}

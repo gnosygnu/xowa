@@ -17,37 +17,38 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps; import gplx.*; import gplx.xowa.*;
 import gplx.gfs.*;
-import gplx.xowa.users.*;
+import gplx.xowa.users.*; import gplx.xowa.apps.fsys.*;
 public class Xoa_gfs_mgr implements GfoInvkAble, GfoInvkRootWkr {
-	public Xoa_gfs_mgr(Xoa_app app) {
-		this.app = app;
-		GfsCore._.AddCmd(app, Xoa_app.Invk_app);
-		GfsCore._.AddCmd(app, Xoa_app.Invk_xowa);
-		eval_mgr = new Xoa_app_eval(app);
-	}	private Xoa_app app;
-	public Xoa_app_eval Eval_mgr() {return eval_mgr;} private Xoa_app_eval eval_mgr;
+	private final GfoInvkAble root_invk; private final Xoa_fsys_mgr app_fsys_mgr; private final Xou_fsys_mgr usr_fsys_mgr;
+	public Xoa_gfs_mgr(GfoInvkAble root_invk, Xoa_fsys_mgr app_fsys_mgr, Xou_fsys_mgr usr_fsys_mgr) {
+		this.root_invk = root_invk; this.app_fsys_mgr = app_fsys_mgr; this.usr_fsys_mgr = usr_fsys_mgr;
+		GfsCore._.AddCmd(root_invk, Xoae_app.Invk_app);
+		GfsCore._.AddCmd(root_invk, Xoae_app.Invk_xowa);
+	}
+	public GfoInvkAble Root_invk() {return root_invk;}
+	public Xoa_fsys_mgr App_fsys_mgr() {return app_fsys_mgr;}
+	public Xoa_app_eval Eval_mgr() {return eval_mgr;} private final Xoa_app_eval eval_mgr = new Xoa_app_eval();
 	private void Run_url_by_type(String type) {
-		Xou_fsys_mgr fsys_mgr = app.User().Fsys_mgr();
-		Io_url app_data_dir = fsys_mgr.App_data_dir();
+		Io_url app_data_dir = usr_fsys_mgr.App_data_dir();
 		Io_url url = null;
 		if		(String_.Eq(type, "user_system_cfg"))	url = app_data_dir.GenSubFil_nest("cfg", "user_system_cfg.gfs");
-		else if	(String_.Eq(type, "xowa_cfg_custom"))	url = fsys_mgr.App_data_cfg_custom_fil();
-		else if	(String_.Eq(type, "xowa_cfg_user"))		url = fsys_mgr.App_data_cfg_user_fil();
-		else if	(String_.Eq(type, "xowa_cfg_os"))		{url = app.Fsys_mgr().Bin_data_os_cfg_fil(); Xoa_gfs_mgr_.Cfg_os_assert(url);}
-		else if	(String_.Eq(type, "xowa_cfg_app"))		url = app.Fsys_mgr().Root_dir().GenSubFil("xowa.gfs");
+		else if	(String_.Eq(type, "xowa_cfg_custom"))	url = usr_fsys_mgr.App_data_cfg_custom_fil();
+		else if	(String_.Eq(type, "xowa_cfg_user"))		url = usr_fsys_mgr.App_data_cfg_user_fil();
+		else if	(String_.Eq(type, "xowa_cfg_os"))		{url = app_fsys_mgr.Bin_data_os_cfg_fil(); Xoa_gfs_mgr_.Cfg_os_assert(url);}
+		else if	(String_.Eq(type, "xowa_cfg_app"))		url = app_fsys_mgr.Root_dir().GenSubFil("xowa.gfs");
 		else											throw Err_mgr._.fmt_(GRP_KEY, "invalid_gfs_type", "invalid gfs type: ~{0}", type);
 		try {Run_url(url);}
 		catch (Exception e) {				// gfs is corrupt; may happen if multiple XOWAs opened, and "Close all" chosen in OS; DATE:2014-07-01
 			if	(!String_.Eq(type, "xowa"))			// check if user.gfs
 				Io_mgr._.MoveFil(url, url.GenNewNameOnly(url.NameOnly() + "-" + DateAdp_.Now().XtoStr_fmt_yyyyMMdd_HHmmss()));	// move file
-			app.Usr_dlg().Warn_many("", "", "invalid gfs; obsoleting: src=~{0} err=~{1}", url.Raw(), Err_.Message_gplx(e));
+			Gfo_usr_dlg_._.Warn_many("", "", "invalid gfs; obsoleting: src=~{0} err=~{1}", url.Raw(), Err_.Message_gplx(e));
 		}
 	}
 	public GfoMsg Parse_root_msg(String v) {return gplx.gfs.Gfs_msg_bldr._.ParseToMsg(v);}
 	public Gfs_wtr Wtr() {return wtr;} private Gfs_wtr wtr = new Gfs_wtr();
 	public void Run_url(Io_url url) {
 		Run_url_for(GfsCore._.Root(), url);
-		app.Log_wtr().Log_msg_to_session_fmt("gfs.done: ~{0}", url.Raw());
+		Gfo_usr_dlg_._.Log_wtr().Log_msg_to_session_fmt("gfs.done: ~{0}", url.Raw());
 	}
 	public void Run_url_for(GfoInvkAble invk, Io_url url) {
 		String raw = Io_mgr._.LoadFilStr_args(url).MissingIgnored_().Exec(); if (String_.Len_eq_0(raw)) return;
@@ -58,7 +59,7 @@ public class Xoa_gfs_mgr implements GfoInvkAble, GfoInvkRootWkr {
 	public Object Run_str_for(GfoInvkAble invk, GfoMsg root_msg) {
 		try {
 			int sub_msgs_len = root_msg.Subs_count();
-			GfsCtx ctx = GfsCtx.new_().Fail_if_unhandled_(Fail_if_unhandled).Usr_dlg_(app.Usr_dlg());
+			GfsCtx ctx = GfsCtx.new_().Fail_if_unhandled_(Fail_if_unhandled).Usr_dlg_(Gfo_usr_dlg_._);
 			Object rv = null;
 			for (int i = 0; i < sub_msgs_len; i++) {
 				GfoMsg sub_msg = root_msg.Subs_getAt(i);
@@ -66,13 +67,13 @@ public class Xoa_gfs_mgr implements GfoInvkAble, GfoInvkRootWkr {
 			}
 			return rv;
 		} catch (Exception e) {
-			app.Usr_dlg().Warn_many("", "", "error while executing script: err=~{0}", Err_.Message_gplx(e));
+			Gfo_usr_dlg_._.Warn_many("", "", "error while executing script: err=~{0}", Err_.Message_gplx(e));
 			return GfoInvkAble_.Rv_error;
 		}
 	}
 	public GfoEvObj Get_owner_as_event_obj(String cmd) {
 		GfoMsg cur_msg = Parse_root_msg(cmd).Subs_getAt(0);	// ignore root_msg which is ""
-		GfoInvkAble cur_invk = app;
+		GfoInvkAble cur_invk = root_invk;
 		while (true) {
 			if (cur_msg.Subs_count() == 0) return (GfoEvObj)cur_invk;	// terminal msg; return cur_invk
 			cur_invk = (GfoInvkAble)GfoInvkAble_.InvkCmd(cur_invk, cur_msg.Key());

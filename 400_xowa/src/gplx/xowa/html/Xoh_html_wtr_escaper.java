@@ -18,12 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
 import gplx.core.btries.*; import gplx.html.*; import gplx.xowa.parsers.amps.*;
 public class Xoh_html_wtr_escaper {
-	public static byte[] Escape(Xoa_app app, Bry_bfr tmp_bfr, byte[] src) {
-		Escape(app, tmp_bfr, src, 0, src.length, true, false);
+	public static byte[] Escape(Xop_amp_mgr amp_mgr, Bry_bfr tmp_bfr, byte[] src) {
+		Escape(amp_mgr, tmp_bfr, src, 0, src.length, true, false);
 		return tmp_bfr.Xto_bry_and_clear();
 	}
-	public static void Escape(Xoa_app app, Bry_bfr bfr, byte[] src, int bgn, int end, boolean interpret_amp, boolean nowiki_skip) {
-		Xop_amp_mgr amp_mgr = app.Parser_amp_mgr();
+	public static void Escape(Xop_amp_mgr amp_mgr, Bry_bfr bfr, byte[] src, int bgn, int end, boolean interpret_amp, boolean nowiki_skip) {
 		Btrie_slim_mgr amp_trie = amp_mgr.Amp_trie();
 		for (int i = bgn; i < end; i++) {
 			byte b = src[i];
@@ -33,7 +32,7 @@ public class Xoh_html_wtr_escaper {
 						byte[] nowiki_name = Xop_xnde_tag_.Tag_nowiki.Name_bry();
 						int nowiki_name_len = nowiki_name.length;
 						if (Bry_.Eq(nowiki_name, src, i + 1, i + 1 + nowiki_name_len)) {	// <nowiki found;
-							int end_gt = Escape_nowiki_skip(app, bfr, src, i, end, nowiki_name, nowiki_name_len);
+							int end_gt = Escape_nowiki_skip(bfr, src, i, end, nowiki_name, nowiki_name_len);
 							if (end_gt != Bry_.NotFound) {
 								i = end_gt;
 								continue;
@@ -88,7 +87,7 @@ public class Xoh_html_wtr_escaper {
 			}
 		}
 	}
-	private static int Escape_nowiki_skip(Xoa_app app, Bry_bfr bfr, byte[] src, int bgn, int end, byte[] nowiki_name, int nowiki_name_len) {
+	private static int Escape_nowiki_skip(Bry_bfr bfr, byte[] src, int bgn, int end, byte[] nowiki_name, int nowiki_name_len) {
 		try {
 			boolean tag_is_bgn = true;
 			int bgn_gt = -1, end_lt = -1, end_gt = -1;
@@ -117,7 +116,7 @@ public class Xoh_html_wtr_escaper {
 			return end_gt;
 		}
 		catch (Exception e) {
-			app.Usr_dlg().Warn_many("", "", "unknown error in escape.nowiki: ~{0} ~{1}", Err_.Message_gplx_brief(e), String_.new_utf8_(src, bgn, end));
+			Xoa_app_.Usr_dlg().Warn_many("", "", "unknown error in escape.nowiki: ~{0} ~{1}", Err_.Message_gplx_brief(e), String_.new_utf8_(src, bgn, end));
 			return Bry_.NotFound;
 		}
 	}

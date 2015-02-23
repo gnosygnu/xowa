@@ -22,10 +22,10 @@ public class Xob_ctg_v1_sql extends Xob_ctg_v1_base {
 	@Override public Io_sort_cmd Make_sort_cmd() {return new Xob_ctg_v1_sql_make(wiki);}
 }
 class Xob_ctg_v1_sql_make implements Io_make_cmd {
-	public Xob_ctg_v1_sql_make(Xow_wiki wiki) {this.wiki = wiki; db_mgr = wiki.Db_mgr_as_sql();} private Xow_wiki wiki; Xodb_mgr_sql db_mgr;
+	public Xob_ctg_v1_sql_make(Xowe_wiki wiki) {this.wiki = wiki; db_mgr = wiki.Db_mgr_as_sql();} private Xowe_wiki wiki; Xodb_mgr_sql db_mgr;
 	public Io_sort_cmd Make_dir_(Io_url v) {return this;}	// ignore
 	public void Sort_bgn() {
-		usr_dlg = wiki.App().Usr_dlg();
+		usr_dlg = wiki.Appe().Usr_dlg();
 		Io_url sql_url = wiki.Fsys_mgr().Root_dir().GenSubFil(Url_sql);
 		Io_mgr._.DeleteFil_args(sql_url).MissingFails_off().Exec();
 		sql_wtr = Xob_tmp_wtr.new_wo_ns_(Io_url_gen_.fil_(sql_url), Io_mgr.Len_mb);
@@ -56,8 +56,8 @@ class Xob_ctg_v1_sql_make implements Io_make_cmd {
 	private static final byte[] Sql_hdr = Bry_.new_ascii_("INSERT INTO 'categorylinks' VALUES");	
 	Bry_fmtr fmtr = Bry_fmtr.new_("(~{page_id},'~{cat_name}','','','','','~{cat_type}')\n", "page_id", "cat_name", "cat_type");
 	public static final String Url_sql = "xowa_categorylinks.sql";
-	private static byte[] Escape_for_sql(Xow_wiki wiki, byte[] bry) {
-		Bry_bfr bfr = wiki.App().Utl_bry_bfr_mkr().Get_b512();
+	private static byte[] Escape_for_sql(Xowe_wiki wiki, byte[] bry) {
+		Bry_bfr bfr = wiki.Appe().Utl_bry_bfr_mkr().Get_b512();
 		int len = bry.length;
 		boolean dirty = false;
 		for (int i = 0; i < len; i++) {

@@ -46,7 +46,7 @@ class Xoa_cfg_mgr_fxt {
 			app = Xoa_app_fxt.app_();
 			cfg_mgr = app.Cfg_mgr();
 //			}
-	}	private Xoa_app app; Xoa_cfg_mgr cfg_mgr;
+	}	private Xoae_app app; Xoa_cfg_mgr cfg_mgr;
 	public void Init_cfg_all(String key, String val) {Init_cfg(key, val, Xoa_cfg_grp_tid.Key_all_bry);}
 	public void Init_cfg_app(String key, String val) {Init_cfg(key, val, Xoa_cfg_grp_tid.Key_app_bry);}
 	private void Init_cfg(String key, String val, byte[] tid) {
@@ -54,18 +54,18 @@ class Xoa_cfg_mgr_fxt {
 		itm.Val_(val);
 		itm.Db_customized_(false);
 	}
-	public Xow_wiki Exec_make_wiki(String wiki_key_str) {return Exec_make_wiki(Bry_.new_ascii_(wiki_key_str));} 
-	public Xow_wiki Exec_make_wiki(byte[] wiki_key_bry) {return app.Wiki_mgr().Get_by_key_or_make(wiki_key_bry);}
+	public Xowe_wiki Exec_make_wiki(String wiki_key_str) {return Exec_make_wiki(Bry_.new_ascii_(wiki_key_str));} 
+	public Xowe_wiki Exec_make_wiki(byte[] wiki_key_bry) {return app.Wiki_mgr().Get_by_key_or_make(wiki_key_bry);}
 	public void Test_init_wiki(String wiki_key_str, String itm_key_str, String expd_val) {
 		byte[] wiki_key_bry = Bry_.new_ascii_(wiki_key_str);
-		Xow_wiki wiki = Exec_make_wiki(wiki_key_bry);
+		Xowe_wiki wiki = Exec_make_wiki(wiki_key_bry);
 		wiki.Init_assert();
 		Test_cfg_get(wiki, itm_key_str, expd_val);
 	}	
 	public void Test_cfg_set(String cfg_msg, String wiki_key_str, String prop_key, String expd_val) {
 		byte[] wiki_key_bry = Bry_.new_ascii_(wiki_key_str);
 		app.Gfs_mgr().Run_str_for(app, cfg_msg);
-		Xow_wiki wiki = Exec_make_wiki(wiki_key_bry);
+		Xowe_wiki wiki = Exec_make_wiki(wiki_key_bry);
 		Test_cfg_get(wiki, prop_key, expd_val);
 	}
 	private void Test_cfg_get(GfoInvkAble invk, String prop, String expd) {

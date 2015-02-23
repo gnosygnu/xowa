@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.langs.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import gplx.core.btries.*;
 public class Xop_vnt_lxr_ {
-	public static void set_(Xow_wiki wiki) {
+	public static void set_(Xowe_wiki wiki) {
 		Btrie_fast_mgr wiki_trie = wiki.Parser().Wtxt_trie();
 		Object exists = wiki_trie.Match_bgn(Xop_vnt_lxr_.Hook_bgn, 0, Xop_vnt_lxr_.Hook_bgn.length);
 		if (exists == null) {
@@ -33,7 +33,7 @@ public class Xop_vnt_lxr_ {
 }
 class Xop_vnt_lxr_eqgt implements Xop_lxr {
 	public byte Lxr_tid() {return Xop_lxr_.Tid_vnt_eqgt;}
-	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Hook, this);}
+	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Hook, this);}
 	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		ctx.Subs_add_and_stack(root, tkn_mkr.Vnt_eqgt(bgn_pos, cur_pos));
@@ -44,7 +44,7 @@ class Xop_vnt_lxr_eqgt implements Xop_lxr {
 }
 class Xop_vnt_lxr_bgn implements Xop_lxr {
 	public byte Lxr_tid() {return Xop_lxr_.Tid_vnt_bgn;}
-	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Xop_vnt_lxr_.Hook_bgn, this);}
+	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Xop_vnt_lxr_.Hook_bgn, this);}
 	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		ctx.Subs_add_and_stack(root, tkn_mkr.Vnt(bgn_pos, cur_pos));
@@ -56,7 +56,7 @@ class Xop_vnt_lxr_end implements Xop_lxr {
 	private Xop_vnt_flag_parser flag_parser;
 	private Xop_vnt_rules_parser rule_parser;
 	public byte Lxr_tid() {return Xop_lxr_.Tid_vnt_end;}
-	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr core_trie) {
+	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {
 		core_trie.Add(Xop_vnt_lxr_.Hook_end, this);
 		Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();
 		flag_parser = new Xop_vnt_flag_parser(vnt_mgr);
@@ -67,7 +67,7 @@ class Xop_vnt_lxr_end implements Xop_lxr {
 		int stack_pos = ctx.Stack_idx_typ(Xop_tkn_itm_.Tid_vnt);
 		if (stack_pos == Xop_ctx.Stack_not_found) return ctx.Lxr_make_txt_(cur_pos);	// "}-" found but no "-{" in stack;
 		Xop_vnt_tkn vnt_tkn = (Xop_vnt_tkn)ctx.Stack_pop_til(root, src, stack_pos, false, bgn_pos, cur_pos, Xop_tkn_itm_.Tid_vnt);
-		Xow_wiki wiki = ctx.Wiki();
+		Xowe_wiki wiki = ctx.Wiki();
 		try {
 			vnt_tkn.Src_end_(cur_pos);
 			vnt_tkn.Subs_move(root);

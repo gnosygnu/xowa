@@ -40,6 +40,7 @@ public class Err_ {	//_20110415
 	public static Err find_failed_(String find)					{return Err.hdr_("find failed").Add("find", find);}
 
 	public static Err null_(String obj)							{return Err.hdr_("null obj").Add("obj", obj);}
+	public static Err deprecated(String s)						{return Err.hdr_("deprecated:" + s);}
 	public static Err not_implemented_()						{return not_implemented_msg_("method not implemented");}
 	public static Err not_implemented_msg_(String hdr)			{return Err.hdr_(hdr);}
 	public static Err type_mismatch_exc_(Exception e, Class<?> t, Object o) {return type_mismatch_(t, o);} // NOTE: e passed to "soak" up variable for IDE

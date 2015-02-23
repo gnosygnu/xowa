@@ -16,18 +16,6 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.wikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
-//	class Xou_wiki_mgr : Xou_db_wkr {
-//		public String Xtn_key() {return "xowa.wiki_regy";}
-//		public String Xtn_version() {return "0.1.0.0";}
-//		public void Db_init(Xou_db_mgr data_mgr) {
-//		}
-//		public void Db_when_new(Xou_db_mgr data_mgr) {
-//		}
-//		public void Db_save(Xou_db_mgr data_mgr) {
-//		}
-//		public void Db_term(Xou_db_mgr data_mgr) {
-//		}
-//	}
 class Xow_wiki_loader {
 	public void Load(String mount) {
 		/*

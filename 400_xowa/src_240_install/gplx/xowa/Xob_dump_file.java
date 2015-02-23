@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.xowa.wikis.*;
 public class Xob_dump_file {
-	public Xow_wiki_domain Wiki_type()	{return wiki_type;} private Xow_wiki_domain wiki_type;
+	public Xow_domain Wiki_type()	{return wiki_type;} private Xow_domain wiki_type;
 	public String Dump_date()			{return dump_date;} public void Dump_date_(String v) {dump_date = v;}  String dump_date;
 	public String Dump_file_type()		{return dump_file_type;} private String dump_file_type;
 	public String Server_url()			{return server_url;} private String server_url;
@@ -29,7 +29,7 @@ public class Xob_dump_file {
 	public byte[] Wiki_alias()			{return wiki_alias;} private byte[] wiki_alias;
 	public Xob_dump_file Ctor(String wiki_domain, String dump_date, String dump_file_type) {
 		this.dump_date = dump_date; this.dump_file_type = dump_file_type;
-		this.wiki_type = Xow_wiki_domain_.parse_by_domain(Bry_.new_ascii_(wiki_domain));
+		this.wiki_type = Xow_domain_.parse(Bry_.new_ascii_(wiki_domain));
 		this.wiki_alias = Xow_wiki_alias.Build_alias(wiki_type);
 		byte[] dump_file_bry = Bry_.new_utf8_(dump_file_type);
 		byte dump_file_tid = Xow_wiki_alias.Parse__tid(dump_file_bry);

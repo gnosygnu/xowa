@@ -20,9 +20,8 @@ import gplx.xowa.langs.vnts.*;
 public class Xop_parser_ {
 	public static final byte Parse_tid_null = 0, Parse_tid_tmpl = 1, Parse_tid_page_tmpl = 2, Parse_tid_page_wiki = 3;
 	public static final int Doc_bgn_bos = -1, Doc_bgn_char_0 = 0;
-	public static byte[] Parse_text_to_html(Xow_wiki wiki, Xoa_ttl ttl, byte[] src, boolean para_enabled) {
+	public static byte[] Parse_text_to_html(Xowe_wiki wiki, Xoae_page page, Xoa_ttl ttl, byte[] src, boolean para_enabled) {	// NOTE: must pass in same page instance; do not do Xoa_page_.new_(), else img_idx will get reset to 0; DATE:2015-02-08
 		Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
-		Xoa_page page = Xoa_page.new_(wiki, ttl);
 		Xop_ctx ctx = Xop_ctx.new_sub_(wiki, page);
 		Xop_tkn_mkr tkn_mkr = ctx.Tkn_mkr();
 		Xop_root_tkn root = tkn_mkr.Root(src);

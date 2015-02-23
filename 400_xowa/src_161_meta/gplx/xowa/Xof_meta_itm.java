@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.core.flds.*;
-import gplx.xowa.files.*;
+import gplx.xowa.files.*; import gplx.xowa.files.repos.*;
 public class Xof_meta_itm {
 	public Xof_meta_itm(Xof_meta_fil owner_fil, byte[] ttl) {this.owner_fil = owner_fil; this.ttl = ttl;}
 	public Xof_meta_fil Owner_fil() {return owner_fil;} private Xof_meta_fil owner_fil;
@@ -32,11 +32,11 @@ public class Xof_meta_itm {
 			Dirty();
 //			}
 	} 
-	public Xof_repo_itm Repo_itm(Xow_wiki wiki) {
+	public Xof_repo_itm Repo_itm(Xowe_wiki wiki) {
 		switch (vrtl_repo) {
 			case Xof_meta_itm.Repo_missing  : //return null;	// DELETE: used to return null, but this caused Redownload_missing to fail; no reason why missing shouldn't return a default repo; DATE:2013-01-26
 			case Xof_meta_itm.Repo_unknown	:
-			case Xof_meta_itm.Repo_same		: return wiki.App().File_mgr().Repo_mgr().Get_primary(wiki.Domain_bry());
+			case Xof_meta_itm.Repo_same		: return wiki.Appe().File_mgr().Repo_mgr().Get_by_primary(wiki.Domain_bry());
 			default							: return wiki.File_mgr().Repo_mgr().Repos_get_at(vrtl_repo).Trg();
 		}
 	}

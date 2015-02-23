@@ -182,7 +182,7 @@ public class Xowh_sidebar_mgr_tst {
 	}
 }
 class Xowh_sidebar_mgr_fxt {
-	private Xoa_app app; private Xow_wiki wiki; private Xowh_sidebar_mgr sidebar_mgr; private Bry_bfr bfr, comment_bfr;
+	private Xoae_app app; private Xowe_wiki wiki; private Xowh_sidebar_mgr sidebar_mgr; private Bry_bfr bfr, comment_bfr;
 	public Xowh_sidebar_mgr_fxt Clear() {
 //			if (app == null) {
 			app = Xoa_app_fxt.app_();
@@ -194,7 +194,7 @@ class Xowh_sidebar_mgr_fxt {
 //			}
 		return this;
 	}
-	public Xow_wiki Wiki() {return wiki;}
+	public Xowe_wiki Wiki() {return wiki;}
 	public Xowh_sidebar_itm nav_grp_(String text, String title, Xowh_sidebar_itm... itms) {return new Xowh_sidebar_itm(Xowh_sidebar_itm.Tid_grp).Text_(Bry_.new_ascii_(text)).Title_(Bry_.new_ascii_(title));}
 	public Xowh_sidebar_itm nav_itm_(String text, String title, String accesskey, String href) {return new Xowh_sidebar_itm(Xowh_sidebar_itm.Tid_itm).Text_(Bry_.new_ascii_(text)).Title_(Bry_.new_ascii_(title)).Accesskey_(Bry_.new_ascii_(accesskey)).Href_(Bry_.new_ascii_(href));}
 	public Xowh_sidebar_mgr_fxt Init_popups_enabled_(boolean v) {app.Api_root().Html().Modules().Popups().Enabled_(v); return this;}

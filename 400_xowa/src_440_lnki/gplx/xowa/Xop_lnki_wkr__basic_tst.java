@@ -339,9 +339,9 @@ public class Xop_lnki_wkr__basic_tst {
 		fxt.Test_parse_page_wiki("[[File:A.pdf|page=12]]"		, fxt.tkn_lnki_().Page_(12));
 	}
 	@Test  public void Visited() { // PURPOSE: show redirected titles as visited; EX:fr.w:Alpes_Pennines; DATE:2014-02-28
-		Xow_wiki wiki = fxt.Wiki();
+		Xowe_wiki wiki = fxt.Wiki();
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_ascii_("Src"));		// simulate requrest for "Src" page
-		Xoa_page previous_page = Xoa_page.test_(wiki, ttl);
+		Xoae_page previous_page = Xoae_page.test_(wiki, ttl);
 		previous_page.Redirected_ttls().Add(Bry_.new_ascii_("Src"));		// simulate redirect from "Src"
 		fxt.App().User().History_mgr().Add(previous_page);					// simulate "Src" already being clicked once; this is the key call
 		fxt.Wtr_cfg().Lnki_visited_(true);

@@ -85,14 +85,14 @@ public class Wdata_hwtr_msgs {
 		geo_meters								= brys[offset +  7];
 		Bry_fmtr fmtr = Bry_fmtr.new_( slink_tbl_hdr_fmt, "wiki_type");
 		Bry_bfr bfr = Bry_bfr.new_(64);
-		slink_tbl_hdr_w = fmtr.Bld_bry_many(bfr, Xow_wiki_domain_.Name_wikipedia_bry);
-		slink_tbl_hdr_d = fmtr.Bld_bry_many(bfr, Xow_wiki_domain_.Name_wiktionary_bry);
-		slink_tbl_hdr_s = fmtr.Bld_bry_many(bfr, Xow_wiki_domain_.Name_wikisource_bry);
-		slink_tbl_hdr_v = fmtr.Bld_bry_many(bfr, Xow_wiki_domain_.Name_wikivoyage_bry);
-		slink_tbl_hdr_q = fmtr.Bld_bry_many(bfr, Xow_wiki_domain_.Name_wikiquote_bry);
-		slink_tbl_hdr_b = fmtr.Bld_bry_many(bfr, Xow_wiki_domain_.Name_wikibooks_bry);
-		slink_tbl_hdr_u = fmtr.Bld_bry_many(bfr, Xow_wiki_domain_.Name_wikiversity_bry);
-		slink_tbl_hdr_n = fmtr.Bld_bry_many(bfr, Xow_wiki_domain_.Name_wikinews_bry);
+		slink_tbl_hdr_w = fmtr.Bld_bry_many(bfr, Name_(Xow_domain_.Tid_bry_wikipedia));
+		slink_tbl_hdr_d = fmtr.Bld_bry_many(bfr, Name_(Xow_domain_.Tid_bry_wiktionary));
+		slink_tbl_hdr_s = fmtr.Bld_bry_many(bfr, Name_(Xow_domain_.Tid_bry_wikisource));
+		slink_tbl_hdr_v = fmtr.Bld_bry_many(bfr, Name_(Xow_domain_.Tid_bry_wikivoyage));
+		slink_tbl_hdr_q = fmtr.Bld_bry_many(bfr, Name_(Xow_domain_.Tid_bry_wikiquote));
+		slink_tbl_hdr_b = fmtr.Bld_bry_many(bfr, Name_(Xow_domain_.Tid_bry_wikibooks));
+		slink_tbl_hdr_u = fmtr.Bld_bry_many(bfr, Name_(Xow_domain_.Tid_bry_wikiversity));
+		slink_tbl_hdr_n = fmtr.Bld_bry_many(bfr, Name_(Xow_domain_.Tid_bry_wikinews));
 		slink_tbl_hdr_x = fmtr.Bld_bry_many(bfr, slink_tbl_hdr_fmt_other);
 	}
 	public byte[][] Ary() {return ary;} private final byte[][] ary;
@@ -223,4 +223,5 @@ public class Wdata_hwtr_msgs {
 			rv[i] = gplx.html.Html_utl.Escape_html_as_bry(msg_mgr.Val_by_key_obj(ids[i]));
 		return rv;
 	}
+	private static byte[] Name_(byte[] v) {return Bry_.Upper_1st(Bry_.Copy(v));}
 }

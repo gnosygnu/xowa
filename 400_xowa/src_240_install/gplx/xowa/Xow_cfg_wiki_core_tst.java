@@ -81,8 +81,8 @@ public class Xow_cfg_wiki_core_tst {
 	);
 }
 class Xow_cfg_wiki_core_fxt {
-	Xoa_app app; Xow_wiki wiki;
-	public Xow_wiki Wiki() {return wiki;}
+	Xoae_app app; Xowe_wiki wiki;
+	public Xowe_wiki Wiki() {return wiki;}
 	public void Clear() {
 		app = Xoa_app_fxt.app_();
 		wiki = Xoa_app_fxt.wiki_tst_(app);

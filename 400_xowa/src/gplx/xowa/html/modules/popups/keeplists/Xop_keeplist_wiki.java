@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html.modules.popups.keeplists; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.modules.*; import gplx.xowa.html.modules.popups.*;
 import gplx.core.regxs.*;
 public class Xop_keeplist_wiki {
-	public Xop_keeplist_wiki(Xow_wiki wiki) {
+	public Xop_keeplist_wiki(Xowe_wiki wiki) {
 		srl = new Xop_keeplist_wiki_srl(wiki);
 	}
 	public boolean Enabled() {return enabled;} public void Enabled_(boolean v) {enabled = v;} private boolean enabled = false;	// NOTE: default to false, b/c wikis that are not listed in cfg will not call Rules_seal

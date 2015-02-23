@@ -36,7 +36,7 @@ public class Xox_xowa_html_cmd_tst {
 class Xox_xowa_html_cmd_fxt {
 	private Bry_bfr bfr = Bry_bfr.reset_(16);
 	private Xop_fxt fxt = new Xop_fxt();
-	private Xow_wiki wiki; private Xow_html_mgr html_mgr;
+	private Xowe_wiki wiki; private Xow_html_mgr html_mgr;
 	public void Clear() {
 		this.wiki = fxt.Wiki();
 		html_mgr = wiki.Html_mgr();			

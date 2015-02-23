@@ -16,9 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.core.primitives.*; import gplx.gfui.*; import gplx.xowa.files.*;
+import gplx.core.primitives.*; import gplx.gfui.*; import gplx.xowa.files.*; import gplx.xowa.files.repos.*;
+import gplx.xowa.wmfs.*; import gplx.xowa.wmfs.apis.*; import gplx.xowa.files.exts.*;	
 public class Xof_xfer_mgr {
-	public Xof_xfer_mgr(Xof_file_mgr file_mgr) {this.file_mgr = file_mgr;} private Xof_file_mgr file_mgr;
+	public Xof_xfer_mgr(Xof_file_mgr file_mgr, Xowmf_mgr wmf_mgr) {this.file_mgr = file_mgr; this.wmf_mgr = wmf_mgr;} private final Xof_file_mgr file_mgr; private final Xowmf_mgr wmf_mgr;
 	public Xof_xfer_rslt Rslt() {return rslt;} private Xof_xfer_rslt rslt = new Xof_xfer_rslt();
 	public boolean Force_orig() {return force_orig;} public Xof_xfer_mgr Force_orig_(boolean v) {force_orig = v; return this;} private boolean force_orig;
 	public Xof_xfer_mgr Force_orig_y_() {return Force_orig_(Bool_.Y);} public Xof_xfer_mgr Force_orig_n_() {return Force_orig_(Bool_.N);}
@@ -36,12 +37,12 @@ public class Xof_xfer_mgr {
 		orig_w = 0; orig_h = 0; file_w = 0; file_h = 0;
 	}	private byte lnki_type;
 	private Xof_xfer_itm xfer_itm; private double lnki_thumbtime = Xof_doc_thumb.Null; private boolean lnki_thumbable; private int lnki_w, lnki_h, file_w, file_h; private double lnki_upright;
-	private Xof_ext ext; private Xoft_rule_itm ext_rule; private Xof_repo_itm src_repo, trg_repo; private boolean src_repo_is_wmf; private byte[] ttl, md5; private int orig_w, orig_h, orig_file_len; 
+	private Xof_ext ext; private Xof_rule_itm ext_rule; private Xof_repo_itm src_repo, trg_repo; private boolean src_repo_is_wmf; private byte[] ttl, md5; private int orig_w, orig_h, orig_file_len; 
 	private int lnki_page = Xof_doc_page.Null;
 	public Xof_meta_itm Meta_itm() {return meta_itm;} private Xof_meta_itm meta_itm;
 	public boolean Download_allowed_by_ext() {return orig_file_len < ext_rule.Make_max();}
 	public Xof_xfer_mgr Check_file_exists_before_xfer_n_() {check_file_exists_before_xfer = false; return this;} private boolean check_file_exists_before_xfer = true;
-	public boolean Make_file(Xow_wiki wiki) {
+	public boolean Make_file(Xowe_wiki wiki) {
 		rslt.Clear(); this.wiki = wiki;
 		if		(	src_repo.Wmf_api()												// make sure wmf_api enabled
 					&&	(	(	ext.Id() == Xof_ext_.Id_ogg							// file is ogg; could be audio; DATE:2013-08-03
@@ -54,13 +55,14 @@ public class Xof_xfer_mgr {
 		else if (ext.Id_is_video()&& !meta_itm.Thumbs_indicates_oga())	Make_vid();
 		else															Make_other();
 		return rslt.Pass();
-	}	private Xow_wiki wiki; Xof_img_wkr_api_size_base_rslts rslts = new Xof_img_wkr_api_size_base_rslts();
+	}	private Xowe_wiki wiki; Xoapi_orig_rslts rslts = new Xoapi_orig_rslts();
 	private boolean Make_img() {
 		String src_str; Io_url trg_url;
 		// BLOCK: thumb
 		if (lnki_thumbable) {									// lnki is thumb with known width >>> try to do thumb
 			if (lnki_w < 1 && lnki_h < 1) {						// NOTE: only give default thumb if both w and h are < 1; if h > 0, then skip; EX:Paris;[[File:IMA-Ile-St-Louis.jpg|thumb|x220]]
-				lnki_w = Xof_img_size.Upright_calc(wiki.File_mgr().Fsdb_mgr().Patch_upright(), lnki_upright, lnki_w, lnki_w, lnki_h, lnki_type);
+				wiki.File_mgr().Fsdb_mgr().Init_by_wiki(wiki);
+				lnki_w = Xof_img_size.Upright_calc(wiki.File_mgr().Patch_upright(), lnki_upright, lnki_w, lnki_w, lnki_h, lnki_type);
 				if (lnki_w < 1)
 					lnki_w = wiki.Html_mgr().Img_thumb_width();		// NOTE: used to be src_repo.Thumb_w()
 			}
@@ -81,7 +83,7 @@ public class Xof_xfer_mgr {
 			Io_url src_url = trg_url;
 			if (ext.Id_is_djvu()) {	// NOTE: this block converts djvu -> tiff b/c vanilla imageMagick cannot do djvu -> jpeg
 				trg_url = this.Trg_url(trg_repo, Xof_repo_itm.Mode_thumb, lnki_w).GenNewExt(".tiff");	// NOTE: manually change ext to tiff; note that djvu has view type of jpeg
-				wiki.App().File_mgr().Img_mgr().Wkr_convert_djvu_to_tiff().Exec(src_url, trg_url);
+				wiki.Appe().File_mgr().Img_mgr().Wkr_convert_djvu_to_tiff().Exec(src_url, trg_url);
 				if (!Cmd_query_size(trg_url)) return false;
 //						meta_itm.Update_orig_size(file_w, file_h);	// NOTE that thumb size is always orig size
 				src_url = trg_url;
@@ -96,20 +98,21 @@ public class Xof_xfer_mgr {
 		return true;
 	}	Int_2_ref calc_size = new Int_2_ref();
 	boolean Call_wmf_api() {
-		boolean found = wiki.App().File_mgr().Download_mgr().Api_size_wkr().Api_query_size(rslts, wiki, ttl, lnki_w, lnki_h);
+		Xof_download_wkr download_wkr = wiki.App().Wmf_mgr().Download_wkr(); Xowe_repo_mgr repo_mgr = wiki.File_mgr().Repo_mgr();
+		boolean found = wiki.App().Wmf_mgr().Api_mgr().Api_orig().Api_query_size(rslts, download_wkr, repo_mgr, ttl, lnki_w, lnki_h);
 		if (found) {
-			if (rslts.Reg_wiki() != null) {
-				src_repo = wiki.App().File_mgr().Repo_mgr().Get_by_wmf(rslts.Reg_wiki());
-				trg_repo = wiki.App().File_mgr().Repo_mgr().Get_primary(rslts.Reg_wiki());
-				if (Bry_.Eq(rslts.Reg_wiki(), wiki.Domain_bry()))	// wmf returned same wiki as current
+			if (rslts.Orig_wiki() != null) {
+				src_repo = wiki.Appe().File_mgr().Repo_mgr().Get_by_wmf_fsys(rslts.Orig_wiki());
+				trg_repo = wiki.Appe().File_mgr().Repo_mgr().Get_by_primary(rslts.Orig_wiki());
+				if (Bry_.Eq(rslts.Orig_wiki(), wiki.Domain_bry()))	// wmf returned same wiki as current
 					xfer_itm.Trg_repo_idx_(Xof_meta_itm.Repo_same);	// set repo to "same"
 				else {												// wmf returned other wiki (which is 99% likely to be commons)
-					Xof_repo_pair trg_repo_pair = wiki.File_mgr().Repo_mgr().Repos_get_by_wiki(rslts.Reg_wiki());	// need to do this b/c commons is not always first; see wikinews; DATE:2013-12-04					
-					int trg_repo_idx = trg_repo_pair == null ? 0 : (int)trg_repo_pair.Id();	// 0=commons
+					Xof_repo_pair trg_repo_pair = wiki.File_mgr().Repo_mgr().Repos_get_by_wiki(rslts.Orig_wiki());	// need to do this b/c commons is not always first; see wikinews; DATE:2013-12-04					
+					int trg_repo_idx = trg_repo_pair == null ? 0 : (int)trg_repo_pair.Repo_idx();	// 0=commons
 					xfer_itm.Trg_repo_idx_(trg_repo_idx);
 				}
-				if (!Bry_.Eq(rslts.Reg_page(), ttl)) {
-					ttl = rslts.Reg_page();
+				if (!Bry_.Eq(rslts.Orig_page(), ttl)) {
+					ttl = rslts.Orig_page();
 					md5 = Xof_xfer_itm_.Md5_(ttl);
 					meta_itm.Ptr_ttl_(ttl);
 				}
@@ -259,8 +262,8 @@ public class Xof_xfer_mgr {
 	boolean Orig_max_download() {
 		long ext_max = ext_rule.View_max();
 		return (orig_file_len < ext_max)				// file_len is less than defined max
-			|| (ext_max == Xoft_rule_itm.Max_wildcard);	// max is defined as wildcard
-//			return !(orig_file_len < ext_max || (ext_max == Xoft_rule_itm.Max_wildcard && orig_file_len < 1));
+			|| (ext_max == Xof_rule_itm.Max_wildcard);	// max is defined as wildcard
+//			return !(orig_file_len < ext_max || (ext_max == Xof_rule_itm.Max_wildcard && orig_file_len < 1));
 	}
 	boolean Img_download(String src_str, Io_url trg_url, boolean cur_is_thumb) {
 		rslt.Atrs_src_trg_(src_str, trg_url);	// NOTE: must be set at start; Img_rename_by_size may overwrite trg
@@ -324,7 +327,7 @@ public class Xof_xfer_mgr {
 		if (exists) 
 			pass = true;
 		else {
-			byte download_rslt = file_mgr.Download_mgr().Download_wkr().Download(src_repo_is_wmf, src_str, trg_url, file_mgr.Download_mgr().Download_wkr().Download_xrg().Prog_fmt_hdr());
+			byte download_rslt = wmf_mgr.Download_wkr().Download(src_repo_is_wmf, src_str, trg_url, wmf_mgr.Download_wkr().Download_xrg().Prog_fmt_hdr());
 			if (download_rslt == gplx.ios.IoEngine_xrg_downloadFil.Rslt_fail_host_not_found) {
 				wiki.File_mgr().Cfg_download().Enabled_(false);
 				throw Err_mgr._.fmt_("xowa.xfer_mgr", "download_failed", "download_failed: host not found");

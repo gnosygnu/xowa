@@ -16,11 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.ifs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+import gplx.xowa.wmfs.apis.*;
 public class Pfunc_ifexist_mgr {
 	private Xodb_page db_page = Xodb_page.tmp_();
 	private HashAdp regy = HashAdp_.new_bry_();
 	public void Clear() {regy.Clear();}
-	public boolean Exists(Xow_wiki wiki, byte[] raw_bry) {
+	public boolean Exists(Xowe_wiki wiki, byte[] raw_bry) {
 		if (Bry_.Len_eq_0(raw_bry)) return false;	// return early; NOTE: {{autolink}} can pass in "" (see test)
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, raw_bry); if (ttl == null) return false;
 		byte[] ttl_bry = ttl.Page_db();	// NOTE: must use Page_db; EX: {{#ifexist:File:Peter & Paul fortress in SPB 03.jpg|y|n}}
@@ -39,7 +40,7 @@ public class Pfunc_ifexist_mgr {
 		exists_itm.Exists_(rv);
 		return rv;
 	}
-	private boolean Find_ttl_in_db(Pfunc_ifexist_itm itm, Xow_wiki wiki, Xow_ns ns, byte[] ttl_bry) {
+	private boolean Find_ttl_in_db(Pfunc_ifexist_itm itm, Xowe_wiki wiki, Xow_ns ns, byte[] ttl_bry) {
 		boolean rv = wiki.Db_mgr().Load_mgr().Load_by_ttl(db_page, ns, ttl_bry);
 		if (	!rv
 			&&	wiki.Lang().Vnt_mgr().Enabled()) {
@@ -50,10 +51,10 @@ public class Pfunc_ifexist_mgr {
 		itm.Exists_(rv);
 		return rv;
 	}
-	private boolean Find_ttl_for_media_ns(Pfunc_ifexist_itm itm, Xow_wiki wiki, Xow_ns ns, byte[] ttl_bry) {
+	private boolean Find_ttl_for_media_ns(Pfunc_ifexist_itm itm, Xowe_wiki wiki, Xow_ns ns, byte[] ttl_bry) {
 		Xow_ns file_ns = wiki.Ns_mgr().Ns_file();
 		boolean rv = Find_ttl_in_db(itm, wiki, file_ns, ttl_bry); if (rv) return true;		// rarely true, but check local wiki's [[File:]] table anyway
-		Xow_wiki commons_wiki = wiki.App().Wiki_mgr().Wiki_commons();
+		Xowe_wiki commons_wiki = wiki.Appe().Wiki_mgr().Wiki_commons();
 		boolean env_is_testing = Env_.Mode_testing();
 		if (	commons_wiki != null														// null check
 			&&	(	commons_wiki.Init_assert().Db_mgr().Tid() == gplx.xowa.dbs.Xodb_mgr_sql.Tid_sql	// make sure tid=sql; tid=txt automatically created for online images; DATE:2014-09-21
@@ -65,7 +66,7 @@ public class Pfunc_ifexist_mgr {
 		}
 		else {
 			if (!env_is_testing)
-				wiki.File_mgr().Fsdb_mgr().Init_by_wiki__add_bin_wkrs(wiki);				// NOTE: must init Fsdb_mgr (else conn == null), and with bin_wkrs (else no images will ever load); DATE:2014-09-21
+				wiki.File_mgr().Fsdb_mgr().Init_by_wiki(wiki);								// NOTE: must init Fsdb_mgr (else conn == null), and with bin_wkrs (else no images will ever load); DATE:2014-09-21
 			return wiki.File_mgr().Exists(ttl_bry);											// less-accurate test using either (1) orig_wiki table in local wiki (v2) or (2) meta_db_mgr (v1)
 		}
 	}

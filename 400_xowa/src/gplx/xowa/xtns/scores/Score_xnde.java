@@ -28,7 +28,7 @@ public class Score_xnde implements Xox_xnde, Xop_xnde_atr_parser, Xoh_cmd_itm {
 	public byte[] File_ogg() {return file_ogg;} private byte[] file_ogg;
 	public Xop_root_tkn Body() {return body;} public Score_xnde Body_(Xop_root_tkn v) {body = v; return this;} private Xop_root_tkn body;
 	public Xop_xnde_tkn Xnde() {return xnde;} private Xop_xnde_tkn xnde = null;
-	public void Xatr_parse(Xow_wiki wiki, byte[] src, Xop_xatr_itm xatr, Object xatr_key_obj) {
+	public void Xatr_parse(Xowe_wiki wiki, byte[] src, Xop_xatr_itm xatr, Object xatr_key_obj) {
 		if (xatr_key_obj == null) return;
 		Byte_obj_val xatr_key = (Byte_obj_val)xatr_key_obj;
 		switch (xatr_key.Val()) {
@@ -41,8 +41,8 @@ public class Score_xnde implements Xox_xnde, Xop_xnde_atr_parser, Xoh_cmd_itm {
 			default:					throw Err_.unhandled(xatr_key.Val());
 		}
 	}
-	public void Xtn_parse(Xow_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
-		Xop_xatr_itm.Xatr_parse(wiki.App(), this, atr_hash, wiki, src, xnde);
+	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
+		Xop_xatr_itm.Xatr_parse(wiki.Appe(), this, atr_hash, wiki, src, xnde);
 		this.xnde = xnde;
 		code = Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
 		code = Bry_.Replace(code, gplx.xowa.bldrs.xmls.Xob_xml_parser_.Bry_tab_ent, gplx.xowa.bldrs.xmls.Xob_xml_parser_.Bry_tab);
@@ -50,16 +50,16 @@ public class Score_xnde implements Xox_xnde, Xop_xnde_atr_parser, Xoh_cmd_itm {
 	}	public static Xop_log_basic_wkr Log_wkr = Xop_log_basic_wkr.Null;
 	private byte[] code;
 	public String Hcmd_id() {return hcmd_id;} private String hcmd_id;
-	private void Html_write_code_as_pre(Bry_bfr bfr, Xoa_app app) {
+	private void Html_write_code_as_pre(Bry_bfr bfr, Xoae_app app) {
 		bfr.Add(Xoh_consts.Pre_bgn_overflow);
 		Xox_mgr_base.Xtn_write_escape(app, bfr, code);
 		bfr.Add(Xoh_consts.Pre_end);
 	}
-	public void Xtn_write(Bry_bfr bfr, Xoa_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
-		Xow_wiki wiki = ctx.Wiki(); Xoa_page page = ctx.Cur_page();
+	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
+		Xowe_wiki wiki = ctx.Wiki(); Xoae_page page = ctx.Cur_page();
 		Score_xtn_mgr score_xtn = (Score_xtn_mgr)wiki.Xtn_mgr().Get_or_fail(Score_xtn_mgr.XTN_KEY);
 		if (!score_xtn.Enabled()) {Html_write_code_as_pre(bfr, app); return;}
-		ProcessAdp ly_process = app.Launcher().App_lilypond();
+		ProcessAdp ly_process = app.Prog_mgr().App_lilypond();
 		if (ly_process.Exe_exists() == Bool_.__byte && ly_process.Exe_url() != null) {	// TEST: ly_process.Exe_url() is null
 			boolean exists = Io_mgr._.ExistsFil(ly_process.Exe_url());
 			ly_process.Exe_exists_(exists ? Bool_.Y_byte : Bool_.N_byte);
@@ -102,24 +102,24 @@ public class Score_xnde implements Xox_xnde, Xop_xnde_atr_parser, Xoh_cmd_itm {
 		}
 		score_xtn.Html_img().Bld_bfr_many(bfr, html_id_a, html_a_href_tmp, html_a_xowa_ttl, html_id_img, html_img_src_tmp, html_img_alt_tmp);
 	}	private byte[] sha1; private String sha1_prefix; private Io_url output_dir, png_file, aud_file; private String html_id_pre, html_id_img, html_id_a, html_a_href, html_img_src, html_img_alt;
-	private String Fill_xfer(Xow_wiki wiki, Xop_ctx ctx, Xoa_page page, byte[] ttl) {
+	private String Fill_xfer(Xowe_wiki wiki, Xop_ctx ctx, Xoae_page page, byte[] ttl) {
 		Xof_xfer_itm xfer_itm = wiki.Html_mgr().Html_wtr().Lnki_wtr().File_wtr().Lnki_eval(ctx, page.File_queue(), ttl, Xop_lnki_type.Id_none, -1, -1, -1, Xof_doc_thumb.Null, Xof_doc_page.Null, false, Fill_xfer_ref);
 		return String_.new_utf8_(xfer_itm.Html_orig_src());
 	}	private Bool_obj_ref Fill_xfer_ref = Bool_obj_ref.n_();
-	public void Hcmd_exec(Xoa_app app, Gfo_usr_dlg usr_dlg, Xoa_page page) {
+	public void Hcmd_exec(Xoae_app app, Gfo_usr_dlg usr_dlg, Xoae_page page) {
 		fail_msg = "unknown failure";
 		usr_dlg.Prog_many(GRP_KEY, "exec.msg", "generating lilypond: ~{0}", String_.new_utf8_(code));
 		usr_dlg.Prog_many(GRP_KEY, "exec.msg", "generating lilypond: ~{0}", String_.new_utf8_(code));
-		Xow_wiki wiki = page.Wiki();
+		Xowe_wiki wiki = page.Wikie();
 		Score_xtn_mgr score_xtn = (Score_xtn_mgr)wiki.Xtn_mgr().Get_or_fail(Score_xtn_mgr.XTN_KEY);
 		Io_url ly_file = output_dir.GenSubFil(sha1_prefix + ".ly");
 		byte[] ly_text = null;
-		ProcessAdp ly_process = app.Launcher().App_lilypond();
+		ProcessAdp ly_process = app.Prog_mgr().App_lilypond();
 		if (Score_xtn_mgr.Lilypond_version == null) Score_xtn_mgr.Lilypond_version = Get_lilypond_version(ly_process);
 		if	(lang_is_abc) {
 			Io_url abc_file = output_dir.GenSubFil(sha1_prefix + ".abc");
 			Io_mgr._.SaveFilBry(abc_file, code);
-			ProcessAdp abc2ly_process = app.Launcher().App_abc2ly();
+			ProcessAdp abc2ly_process = app.Prog_mgr().App_abc2ly();
 			if (!abc2ly_process.Run(abc_file, ly_file).Exit_code_pass()) {
 				fail_msg = abc2ly_process.Rslt_out();
 				app.Usr_dlg().Warn_many("", "", "abc2ly failed: ~{0}", fail_msg);
@@ -142,7 +142,7 @@ public class Score_xnde implements Xox_xnde, Xop_xnde_atr_parser, Xoh_cmd_itm {
 			return;
 		}
 		if (output_ogg) {
-			ProcessAdp timidity_process = app.Launcher().App_convert_midi_to_ogg();
+			ProcessAdp timidity_process = app.Prog_mgr().App_convert_midi_to_ogg();
 			Io_url ogg_file = ly_file.GenNewExt(".ogg");
 			if (!timidity_process.Run(ly_file.GenNewExt(".midi"), ogg_file).Exit_code_pass()) {	// NOTE: do not exit; timidity currently not working for windows
 				fail_msg = timidity_process.Rslt_out();
@@ -153,11 +153,11 @@ public class Score_xnde implements Xox_xnde, Xop_xnde_atr_parser, Xoh_cmd_itm {
 		Io_mgr._.DeleteFil(ly_file);
 		Io_url png_file_untrimmed = png_file.GenNewNameOnly("untrimmed");
 		Io_mgr._.MoveFil(png_file, png_file_untrimmed);
-		app.Launcher().App_trim_img().Run(png_file_untrimmed, png_file);
+		app.Prog_mgr().App_trim_img().Run(png_file_untrimmed, png_file);
 		Io_mgr._.DeleteFil(png_file_untrimmed);
 		fail_msg = null;		
 	}	private String fail_msg = null;
-	public void Hcmd_write(Xoa_app app, Gfo_usr_dlg usr_dlg, Xoa_page page) {
+	public void Hcmd_write(Xoae_app app, Gfo_usr_dlg usr_dlg, Xoae_page page) {
 		Xog_html_itm html_itm = page.Tab().Html_itm();
 		if (fail_msg == null) {	// fill in png/midi;			
 			html_itm.Html_atr_set(html_id_a, "href", html_a_href);

@@ -16,22 +16,22 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.bldrs.*; 
+import gplx.xowa.bldrs.*; import gplx.xowa.tdbs.*;
 public class Xobc_deploy_copy extends Xob_itm_basic_base implements Xob_cmd, GfoInvkAble {
-	public Xobc_deploy_copy(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
+	public Xobc_deploy_copy(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Cmd_key() {return KEY;} public static final String KEY = "deploy.copy";
 	public void Cmd_ini(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {}
 	public void Cmd_end() {}
 	public void Cmd_run() {
 		Io_url src_root_dir = wiki.Fsys_mgr().Root_dir();
-		Xow_fsys_mgr url_mgr = wiki.Fsys_mgr();
-		Copy_dir_root(src_root_dir, Xow_dir_info_.Name_cfg);
-		Copy_dir_ns(url_mgr.Ns_dir(), Xow_dir_info_.Name_page);
-		Copy_dir_ns(url_mgr.Ns_dir(), Xow_dir_info_.Name_title);
-		Copy_dir_root(src_root_dir, Xow_dir_info_.Name_site, Xow_dir_info_.Name_category);
-		Copy_dir_root(src_root_dir, Xow_dir_info_.Name_site, Xow_dir_info_.Name_id);
-		Copy_dir_root(src_root_dir, Xow_dir_info_.Name_site, Xow_dir_info_.Name_search_ttl);
+		Xotdb_fsys_mgr url_mgr = wiki.Tdb_fsys_mgr();
+		Copy_dir_root(src_root_dir, Xotdb_dir_info_.Name_cfg);
+		Copy_dir_ns(url_mgr.Ns_dir(), Xotdb_dir_info_.Name_page);
+		Copy_dir_ns(url_mgr.Ns_dir(), Xotdb_dir_info_.Name_title);
+		Copy_dir_root(src_root_dir, Xotdb_dir_info_.Name_site, Xotdb_dir_info_.Name_category);
+		Copy_dir_root(src_root_dir, Xotdb_dir_info_.Name_site, Xotdb_dir_info_.Name_id);
+		Copy_dir_root(src_root_dir, Xotdb_dir_info_.Name_site, Xotdb_dir_info_.Name_search_ttl);
 	}
 	public void Cmd_print() {}
 	private void Copy_dir_ns(Io_url root, String name) {
@@ -47,7 +47,7 @@ public class Xobc_deploy_copy extends Xob_itm_basic_base implements Xob_cmd, Gfo
 					dir_name = name + Xobc_deploy_zip.Dir_zip_suffix;
 				}
 			}
-			Copy_dir(src_sub_dir, trg_root_dir.GenSubDir_nest(Xow_dir_info_.Name_ns, ns_dir.NameOnly(), dir_name));
+			Copy_dir(src_sub_dir, trg_root_dir.GenSubDir_nest(Xotdb_dir_info_.Name_ns, ns_dir.NameOnly(), dir_name));
 		}
 	}
 	private void Copy_dir_root(Io_url src_root_dir, String... sub_dirs) {

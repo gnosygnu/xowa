@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import org.junit.*;
-import gplx.xowa.wikis.*;
+import gplx.xowa.wikis.*; import gplx.xowa.tdbs.*;
 public class Xob_wdata_qid_base_tst {		
 	@Before public void init() {fxt = new gplx.xowa.bldrs.Xob_fxt().Ctor_mem();} gplx.xowa.bldrs.Xob_fxt fxt; // NOTE: reset memory instance (don't just call clear)
 	@Test  public void Basic() {	
@@ -123,11 +123,11 @@ public class Xob_wdata_qid_base_tst {
 		.Run(new Xob_wdata_qid_txt().Ctor(fxt.Bldr(), this.fxt.Wiki()))
 		;
 	}
-	public static Io_url reg_(Xow_wiki wdata, String wiki, String ns_id) {
-		return Wdata_idx_wtr.dir_qid_(wdata, wiki, ns_id).GenSubFil(Xow_dir_info_.Name_reg_fil);
+	public static Io_url reg_(Xowe_wiki wdata, String wiki, String ns_id) {
+		return Wdata_idx_wtr.dir_qid_(wdata, wiki, ns_id).GenSubFil(Xotdb_dir_info_.Name_reg_fil);
 	}
-	public static Io_url ttl_(Xow_wiki wdata, String wiki, String ns_id, int fil_id) {
+	public static Io_url ttl_(Xowe_wiki wdata, String wiki, String ns_id, int fil_id) {
 		Io_url root = Wdata_idx_wtr.dir_qid_(wdata, wiki, ns_id);
-		return Xow_fsys_mgr.Url_fil(root, fil_id, Xow_dir_info_.Bry_xdat);
+		return Xotdb_fsys_mgr.Url_fil(root, fil_id, Xotdb_dir_info_.Bry_xdat);
 	}
 }

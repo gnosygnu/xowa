@@ -29,7 +29,7 @@ public class Xop_vnt_tkn extends Xop_tkn_itm_base {
 	public Xop_vnt_flag[] Vnt_flags() {return vnt_flags;} public Xop_vnt_tkn Vnt_flags_(Xop_vnt_flag[] v) {vnt_flags = v; return this;} private Xop_vnt_flag[] vnt_flags;
 	public Xop_vnt_rule[] Vnt_rules() {return vnt_rules;} public Xop_vnt_tkn Vnt_rules_(Xop_vnt_rule[] v) {vnt_rules = v; return this;} private Xop_vnt_rule[] vnt_rules;
 	public byte Vnt_cmd() {return vnt_cmd;} private byte vnt_cmd;
-	public void Vnt_cmd_calc(Xow_wiki wiki, Xoa_page page, Xop_ctx ctx, byte[] src) {
+	public void Vnt_cmd_calc(Xowe_wiki wiki, Xoae_page page, Xop_ctx ctx, byte[] src) {
 		int flags_len = vnt_flags.length;
 		int rules_len = vnt_rules.length;
 		if		(flags_len == 0) {	// no flags; either literal ("-{A}-") or bidi ("-{zh-hans:A;zh-hant:B}-");

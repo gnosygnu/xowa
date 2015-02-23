@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.cfgs2; import gplx.*; import gplx.xowa.*;
 public class Xocfg_gui_mgr implements GfoInvkAble {
-	public Xocfg_gui_mgr(Xoa_app app) {bnd_mgr = new Xocfg_bnd_mgr(app);}
+	public Xocfg_gui_mgr(Xoae_app app) {bnd_mgr = new Xocfg_bnd_mgr(app);}
 	public Xocfg_tab_mgr Tab_mgr() {return tab_mgr;} private Xocfg_tab_mgr tab_mgr = new Xocfg_tab_mgr();
 	public Xocfg_bnd_mgr Bnd_mgr() {return bnd_mgr;} private Xocfg_bnd_mgr bnd_mgr;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

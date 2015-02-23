@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import org.junit.*;
+import org.junit.*; import gplx.xowa.tdbs.*;
 public class Xosrh_core_tst {
 	@Before public void Init() {fxt.Clear();} private Xos_search_mgr_fxt fxt = new Xos_search_mgr_fxt();
 	@Test   public void Basic() {
@@ -95,9 +95,9 @@ public class Xosrh_core_tst {
 	}
 }
 class Xos_search_mgr_fxt {
-	Xoa_app app; Xow_wiki wiki; Bry_bfr bfr = Bry_bfr.reset_(500); Xosrh_core search_mgr;
-	public Xoa_app App() {return app;}
-	public Xow_wiki Wiki() {return wiki;}
+	Xoae_app app; Xowe_wiki wiki; Bry_bfr bfr = Bry_bfr.reset_(500); Xosrh_core search_mgr;
+	public Xoae_app App() {return app;}
+	public Xowe_wiki Wiki() {return wiki;}
 	public Xobl_regy_itm 	regy_itm_(int id, String bgn, String end, int count) {return new Xobl_regy_itm(id, Bry_.new_utf8_(bgn), Bry_.new_utf8_(end), count);}
 	public Xodb_page 	data_ttl_(int id, String ttl) {return data_ttl_(id, 0, 0, false, 0, ttl);}
 	public Xodb_page 	data_ttl_(int id, int fil, int row, boolean redirect, int len, String ttl) {return new Xodb_page().Set_all_(id, fil, row, redirect, len, Bry_.new_utf8_(ttl));}
@@ -113,8 +113,8 @@ class Xos_search_mgr_fxt {
 		}
 		return rv;
 	}
-	public void Init_regy_site(byte dir_info, Xobl_regy_itm... ary) 	{Init_regy(wiki.Fsys_mgr().Url_site_reg(dir_info), ary);}	
-	public void Init_regy_ns  (String ns_num, byte tid, Xobl_regy_itm... ary) 	{Init_regy(wiki.Fsys_mgr().Url_ns_reg(ns_num, tid), ary);}
+	public void Init_regy_site(byte dir_info, Xobl_regy_itm... ary) 	{Init_regy(wiki.Tdb_fsys_mgr().Url_site_reg(dir_info), ary);}	
+	public void Init_regy_ns  (String ns_num, byte tid, Xobl_regy_itm... ary) 	{Init_regy(wiki.Tdb_fsys_mgr().Url_ns_reg(ns_num, tid), ary);}
 	public void Init_regy(Io_url url, Xobl_regy_itm[] ary) {		
 		int ary_len = ary.length;
 		for (int i = 0; i < ary_len; i++) {
@@ -134,16 +134,16 @@ class Xos_search_mgr_fxt {
 		xdat_file.Save(fil);
 	}
 	public void Init_basic() {
-		this.Init_regy_ns(wiki.Ns_mgr().Ns_main().Num_str(), Xow_dir_info_.Tid_search_ttl, this.regy_itm_(0, "A", "C", 5));
-		this.Init_data(wiki.Fsys_mgr().Url_ns_fil(Xow_dir_info_.Tid_search_ttl, Xow_ns_.Id_main, 0)
+		this.Init_regy_ns(wiki.Ns_mgr().Ns_main().Num_str(), Xotdb_dir_info_.Tid_search_ttl, this.regy_itm_(0, "A", "C", 5));
+		this.Init_data(wiki.Tdb_fsys_mgr().Url_ns_fil(Xotdb_dir_info_.Tid_search_ttl, Xow_ns_.Id_main, 0)
 			, this.data_sttl_("a"	,  0)
 			, this.data_sttl_("b1"	,  1, 11, 21)
 			, this.data_sttl_("b2"	,  2, 12, 22)
 			, this.data_sttl_("b3"	,  3, 13, 23)
 			, this.data_sttl_("c"	,  4)
 			);
-		this.Init_regy_site(Xow_dir_info_.Tid_id, this.regy_itm_(0, "A", "C", 11));
-		this.Init_data(wiki.Fsys_mgr().Url_site_fil(Xow_dir_info_.Tid_id, 0)
+		this.Init_regy_site(Xotdb_dir_info_.Tid_id, this.regy_itm_(0, "A", "C", 11));
+		this.Init_data(wiki.Tdb_fsys_mgr().Url_site_fil(Xotdb_dir_info_.Tid_id, 0)
 			, this.data_id_( 0, "A___0")
 			, this.data_id_( 1, "B1__1")
 			, this.data_id_( 2, "B2__2")
@@ -163,7 +163,7 @@ class Xos_search_mgr_fxt {
 		app = Xoa_app_fxt.app_();
 		wiki = Xoa_app_fxt.wiki_tst_(app);
 		search_mgr = wiki.Special_mgr().Page_search();
-		wiki.App().Gui_mgr().Search_suggest_mgr().Args_default_str_("ns*=1"); // WORKAROUND: xdat fmt does not store ns with search data; pages will be retrieved with ns_id = null; force ns_all (instead of allowing ns_main default);
+		wiki.Appe().Gui_mgr().Search_suggest_mgr().Args_default_str_("ns*=1"); // WORKAROUND: xdat fmt does not store ns with search data; pages will be retrieved with ns_id = null; force ns_all (instead of allowing ns_main default);
 	}
 	public Xosrh_core Search_mgr() {return search_mgr;}
 	public void Test_url_search_bry(String url_str, String expd) {
@@ -189,9 +189,9 @@ class Xos_search_mgr_fxt {
 		wiki.Init_needed_(false);
 		byte[] ttl_bry = Bry_.new_ascii_(ttl_str);
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry);
-		Xoa_page page = Xoa_page.test_(wiki, ttl);
+		Xoae_page page = Xoae_page.test_(wiki, ttl);
 		byte[] url_bry = Bry_.new_utf8_("http://en.wikipedia.org/wiki/Special:Search/" + ttl_str + args_str);
-		Xoa_url url = wiki.App().Url_parser().Parse(url_bry);
+		Xoa_url url = wiki.Appe().Url_parser().Parse(url_bry);
 		search_mgr.Special_gen(url, page, wiki, ttl);
 		Tfds.Eq_str_lines(expd_html, String_.new_utf8_(page.Root().Data_htm()));
 	}
@@ -201,7 +201,7 @@ class Xos_search_mgr_fxt {
 		byte[] url_raw = Bry_.new_ascii_("Special:Search/" + ttl_str + ((match_tid == Xosrh_core.Match_tid_all) ? "" : "*")  + "?fulltext=y" + Xosrh_rslt_itm_sorter.Xto_url_arg(sort_tid) + "&xowa_page_size=1&xowa_page_index=" + page_idx);
 		Xoa_url url = url_parser.Parse(url_raw);
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, url_raw);
-		Xoa_page page = wiki.Ctx().Cur_page();
+		Xoae_page page = wiki.Ctx().Cur_page();
 		search_mgr.Special_gen(url, page, wiki, ttl);
 		Xosrh_rslt_grp cur_grp = search_mgr.Cur_grp();
 		bfr.Mkr_rls();

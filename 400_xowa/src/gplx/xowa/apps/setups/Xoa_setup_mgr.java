@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.apps.setups; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
 import gplx.xowa.apps.versions.*;
 public class Xoa_setup_mgr {
-	public static void Delete_old_files(Xoa_app app) {
+	public static void Delete_old_files(Xoae_app app) {
 		String version_previous = app.Api_root().App().Env().Version_previous();
 		Gfo_usr_dlg usr_dlg = app.Usr_dlg();
 		Io_url root_dir = app.Fsys_mgr().Root_dir();

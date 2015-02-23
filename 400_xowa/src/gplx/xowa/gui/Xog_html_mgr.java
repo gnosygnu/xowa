@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.gui; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.html.portal.*;
 public class Xog_html_mgr implements GfoInvkAble {
-	public Xog_html_mgr(Xoa_app app) {this.app = app; portal_mgr = new Xoa_portal_mgr(app);} private Xoa_app app;
+	public Xog_html_mgr(Xoae_app app) {this.app = app; portal_mgr = new Xoa_portal_mgr(app);} private Xoae_app app;
 	public Xoa_portal_mgr Portal_mgr() {return portal_mgr;} private Xoa_portal_mgr portal_mgr;
 	public boolean Javascript_enabled() {return javascript_enabled;} private boolean javascript_enabled = true;
 	private void Javascript_enabled_(boolean v) {

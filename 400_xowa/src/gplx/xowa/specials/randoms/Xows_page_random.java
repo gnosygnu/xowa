@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.randoms; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
 public class Xows_page_random implements Xows_page {
-	public Xows_page_random(Xow_wiki wiki) {}
-	public void Special_gen(Xoa_url calling_url, Xoa_page page, Xow_wiki wiki, Xoa_ttl ttl) {
+	public Xows_page_random(Xowe_wiki wiki) {}
+	public void Special_gen(Xoa_url calling_url, Xoae_page page, Xowe_wiki wiki, Xoa_ttl ttl) {
 		Xow_ns ns = wiki.Ns_mgr().Names_get_or_main(ttl.Rest_txt());
 		byte[] random_ttl_bry = wiki.Db_mgr().Load_mgr().Find_random_ttl(ns);
 		wiki.Data_mgr().Redirect(page, ns.Gen_ttl(random_ttl_bry));

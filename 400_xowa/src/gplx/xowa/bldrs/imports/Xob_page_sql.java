@@ -17,18 +17,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.dbs.tbls.*; import gplx.ios.*; import gplx.xowa.bldrs.wikis.redirects.*;
+import gplx.xowa.bldrs.filters.dansguardians.*;
 public class Xob_page_sql extends Xob_itm_basic_base implements Xobd_wkr, GfoInvkAble {
 	private Db_idx_mode idx_mode = Db_idx_mode.Itm_end;
 	private Io_stream_zip_mgr zip_mgr; private byte data_storage_format; private boolean redirect_id_enabled;
-	private Xodb_mgr_sql db_mgr; private Xodb_fsys_mgr fsys_mgr; private Db_conn page_provider; private Db_stmt page_stmt; private Xob_text_stmts_mgr text_stmts_mgr;
+	private Xodb_mgr_sql db_mgr; private Xodb_fsys_mgr fsys_mgr; private Db_conn page_conn; private Db_stmt page_stmt; private Xob_text_stmts_mgr text_stmts_mgr;
 	private int page_count_all, page_count_main = 0; private int txn_commit_interval = 100000;	// 100 k
 	private DateAdp modified_latest = DateAdp_.MinValue;
 	private Xop_redirect_mgr redirect_mgr; private Xob_redirect_tbl redirect_tbl;
-	public Xob_page_sql(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
+	private boolean dg_enabled = Bool_.N; private Dg_match_mgr dg_match_mgr; // private Xob_ttl_filter_mgr ttl_filter_mgr;
+	public Xob_page_sql(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Wkr_key() {return KEY;} public static final String KEY = "import.sql.page";
 	public void Wkr_bgn(Xob_bldr bldr) {
 		// init local variables
-		Xoa_app app = wiki.App();
+		Xoae_app app = wiki.Appe();
 		app.Bldr().Parser().Trie_tab_del_();	// disable swapping &#09; for \t
 		zip_mgr = app.Zip_mgr();
 		redirect_mgr = wiki.Redirect_mgr(); 
@@ -38,16 +40,20 @@ public class Xob_page_sql extends Xob_itm_basic_base implements Xobd_wkr, GfoInv
 		db_mgr = wiki.Db_mgr_as_sql();
 		db_mgr.Data_storage_format_(data_storage_format);
 		fsys_mgr = db_mgr.Fsys_mgr();
-		page_provider = fsys_mgr.Conn_page();
-		page_stmt = db_mgr.Tbl_page().Insert_stmt(page_provider);
-		page_provider.Txn_mgr().Txn_bgn_if_none();
+		page_conn = fsys_mgr.Conn_page();
+		page_stmt = db_mgr.Tbl_page().Insert_stmt(page_conn);
+		page_conn.Txn_mgr().Txn_bgn_if_none();
 		text_stmts_mgr = new Xob_text_stmts_mgr(db_mgr, fsys_mgr);
 		if (idx_mode.Tid_is_bgn()) Idx_create();
 
 		if (redirect_id_enabled) {
-			redirect_tbl = new Xob_redirect_tbl(wiki.Fsys_mgr().Root_dir(), app.Encoder_mgr().Url_ttl()).Create_table();
+			redirect_tbl = new Xob_redirect_tbl(wiki.Fsys_mgr().Root_dir(), Xoa_app_.Utl_encoder_mgr().Url_ttl()).Create_table();
 			redirect_tbl.Conn().Txn_mgr().Txn_bgn_if_none();
 		}
+		
+		// dansguardian
+		dg_match_mgr = app.Api_root().Bldr().Wikis().Filters().Dansguardians().New_mgr(wiki.Domain_str(), wiki.Fsys_mgr().Root_dir());
+		dg_enabled = dg_match_mgr != null;
 	}
 	public void Wkr_run(Xodb_page page) {
 		int page_id = page.Id();
@@ -61,6 +67,9 @@ public class Xob_page_sql extends Xob_itm_basic_base implements Xobd_wkr, GfoInv
 		Xow_ns ns = page.Ns();
 		int random_int = ns.Count() + 1;
 		ns.Count_(random_int);		
+		if (dg_enabled) {
+			if (dg_match_mgr.Match(1, page_id, ns.Id(), page.Ttl_wo_ns(), page.Ttl_w_ns(), wiki.Lang(), text)) return;
+		}
 		text = zip_mgr.Zip(data_storage_format, text);
 		int text_stmt_idx = text_stmts_mgr.Stmt_by_ns(ns.Bldr_file_idx(), text.length);	// NOTE: was text.length, but want text_len which is original page_len, not compressed; DATE:2014-08-04
 		Db_stmt text_stmt = text_stmts_mgr.Stmt_at(text_stmt_idx);
@@ -80,25 +89,27 @@ public class Xob_page_sql extends Xob_itm_basic_base implements Xobd_wkr, GfoInv
 		if (page_count_all % txn_commit_interval == 0) {
 			Db_conn conn = text_stmts_mgr.Conn_at(text_stmt_idx);
 			conn.Txn_mgr().Txn_end_all_bgn_if_none();
+			if (dg_enabled) dg_match_mgr.Commit();
 		}
 	}
 	public void Wkr_end() {
+		if (dg_enabled) dg_match_mgr.Rls();
 		usr_dlg.Log_many("", "", "import.page: insert done; committing pages; pages=~{0}", page_count_all);
-		page_provider.Txn_mgr().Txn_end_all();
+		page_conn.Txn_mgr().Txn_end_all();
 		page_stmt.Rls();
 		text_stmts_mgr.Rls();
 		usr_dlg.Log_many("", "", "import.page: updating core stats");
 		Xow_ns_mgr ns_mgr = wiki.Ns_mgr();
 		db_mgr.Tbl_site_stats().Update(page_count_main, page_count_all, ns_mgr.Ns_file().Count());	// save page stats
 		db_mgr.Tbl_xowa_ns().Insert(ns_mgr);														// save ns
-		db_mgr.Tbl_xowa_db().Commit_all(page_provider, db_mgr.Fsys_mgr().Files_ary());				// save dbs; note that dbs can be saved again later
+		db_mgr.Tbl_xowa_db().Commit_all(db_mgr.Fsys_mgr().Files_ary());								// save dbs; note that dbs can be saved again later
 		db_mgr.Tbl_xowa_cfg().Insert_str(Xodb_mgr_sql.Grp_wiki_init, "props.modified_latest", modified_latest.XtoStr_fmt(DateAdp_.Fmt_iso8561_date_time));
 		if (idx_mode.Tid_is_end()) Idx_create();
 		if (redirect_id_enabled) {
 			redirect_tbl.Conn().Txn_mgr().Txn_end_all();
 			Xodb_file core_file = fsys_mgr.Get_tid_root(Xodb_file_tid.Tid_core);
 			redirect_tbl.Update_trg_redirect_id(core_file.Url(), 1);
-			redirect_tbl.Update_src_redirect_id(core_file.Url(), page_provider);
+			redirect_tbl.Update_src_redirect_id(core_file.Url(), page_conn);
 		}
 	}
 	private void Idx_create() {

@@ -16,20 +16,21 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-import gplx.dbs.engines.mems.*; import gplx.dbs.engines.sqlite.*;
+import gplx.dbs.engines.nulls.*; import gplx.dbs.engines.mems.*; import gplx.dbs.engines.sqlite.*; import gplx.dbs.engines.tdbs.*;
+import gplx.dbs.engines.mysql.*; import gplx.dbs.engines.postgres.*;
 public class Db_url_ {
-	public static final Db_url Null			= Db_url__null._;
-	public static final Db_url Test			= Db_url__mysql.new_("127.0.0.1", "unit_tests", "root", "mysql7760");
+	public static final Db_url Null			= Null_url._;
+	public static final Db_url Test			= Mysql_url.new_("127.0.0.1", "unit_tests", "root", "mysql7760");
 	public static Db_url parse_(String raw)			{return Db_url_pool._.Parse(raw);}
-	public static Db_url sqlite_(Io_url url)		{return Db_url__sqlite.load_(url);}
-	public static Db_url tdb_(Io_url url)			{return Db_url__tdb.new_(url);}
+	public static Db_url sqlite_(Io_url url)		{return Sqlite_url.load_(url);}
+	public static Db_url tdb_(Io_url url)			{return Tdb_url.new_(url);}
 	public static Db_url mem_(String db)			{return Db_url__mem.new_(db);}
-	public static final String Key_tdb = Db_url__tdb.Tid_const;
+	public static final String Key_tdb = Tdb_url.Tid_const;
 }
 class Db_url_pool {
 	private OrderedHash regy = OrderedHash_.new_();
 	public Db_url_pool() {
-		this.Add(Db_url__null._).Add(Db_url__tdb._).Add(Db_url__mysql._).Add(Db_url__postgres._).Add(Db_url__sqlite._);
+		this.Add(Null_url._).Add(Tdb_url._).Add(Mysql_url._).Add(Postgres_url._).Add(Sqlite_url._);
 		this.Add(Db_url__mem.I);
 	}
 	public Db_url_pool Add(Db_url itm) {regy.AddReplace(itm.Tid(), itm); return this;}

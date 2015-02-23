@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
-import org.junit.*;
+import org.junit.*; import gplx.xowa.langs.*;
 public class Xow_wiki_abrv_tst {
 	@Before public void init() {fxt.Clear();} private Xow_wiki_abrv_fxt fxt = new Xow_wiki_abrv_fxt();
 	@Test  public void Parse() {

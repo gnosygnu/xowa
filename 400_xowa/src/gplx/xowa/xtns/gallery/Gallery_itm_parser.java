@@ -20,7 +20,7 @@ import gplx.core.primitives.*; import gplx.core.btries.*;
 import gplx.xowa.parsers.lnkis.redlinks.*;
 import gplx.xowa.files.*;
 public class Gallery_itm_parser {		
-	private Xow_wiki wiki; private Btrie_slim_mgr trie = Btrie_slim_mgr.ci_utf_8_();
+	private Xowe_wiki wiki; private Btrie_slim_mgr trie = Btrie_slim_mgr.ci_utf_8_();
 	private Gallery_itm cur_itm;
 	private byte[] src; private int end_pos;
 	private int cur_pos; private byte cur_byte;
@@ -28,7 +28,7 @@ public class Gallery_itm_parser {
 	private int itm_bgn;
 	private Bry_bfr caption_bfr = Bry_bfr.reset_(255); private int caption_bgn;
 	private Xop_ctx ctx;
-	public Gallery_itm_parser Init_by_wiki(Xow_wiki wiki) {
+	public Gallery_itm_parser Init_by_wiki(Xowe_wiki wiki) {
 		this.wiki = wiki; Xol_lang lang = wiki.Lang();
 		this.ctx = wiki.Ctx();
 		trie.Clear();
@@ -67,7 +67,7 @@ public class Gallery_itm_parser {
 			Xop_root_tkn caption_tkn = wiki.Parser().Parse_text_to_wdom_old_ctx(ctx, lnki_caption, true);
 			cur_itm.Caption_tkn_(caption_tkn);
 		}
-		Xop_lnki_logger file_wkr = ctx.Lnki().File_wkr();	// NOTE: do not set file_wkr ref early (as member var); parse_all sets late
+		Xopg_redlink_logger file_wkr = ctx.Lnki().File_wkr();	// NOTE: do not set file_wkr ref early (as member var); parse_all sets late
 		ctx.Cur_page().Lnki_list().Add(lnki_tkn);
 		mgr.Get_thumb_size(lnki_tkn, cur_itm.Ext());		// NOTE: set thumb size, so that lnki.temp parse picks it up
 		if (file_wkr != null) file_wkr.Wkr_exec(ctx, src, lnki_tkn, gplx.xowa.bldrs.files.Xob_lnki_src_tid.Tid_gallery);
@@ -162,7 +162,7 @@ public class Gallery_itm_parser {
 			case Fld_ttl:
 				cur_itm.Ttl_end_(fld_end);
 				byte[] ttl_bry = Bry_.Mid(src, cur_itm.Ttl_bgn(), fld_end);
-				ttl_bry = ctx.App().Encoder_mgr().Url_ttl().Decode(ttl_bry);	// NOTE: must decode url-encoded entries; EX: "A%28b%29.png" -> "A(b).png"; DATE:2014-01-01
+				ttl_bry = Xoa_app_.Utl_encoder_mgr().Url_ttl().Decode(ttl_bry);	// NOTE: must decode url-encoded entries; EX: "A%28b%29.png" -> "A(b).png"; DATE:2014-01-01
 				Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry);
 				if (	ttl == null				// invalid ttl; EX:	"<invalid>"
 					||	ttl.Anch_bgn() == 1		// anchor-only ttl; EX: "#invalid"; DATE:2014-03-18
@@ -218,7 +218,7 @@ public class Gallery_itm_parser {
 	private static final byte Mode_eos = 1, Mode_nl = 2, Mode_pipe = 3, Mode_text = 4;
 	private void Init_keyword(Byte_obj_ref tmp_bref, Xol_lang lang, int kwd_id, byte trie_key) {
 		Xol_kwd_grp grp = lang.Kwd_mgr().Get_at(kwd_id);
-		if (grp == null) {lang.App().Usr_dlg().Warn_many("", "", "could not find gallery keyword: ~{0}", String_.new_utf8_(Xol_kwd_grp_.Bry_by_id(kwd_id))); return;}
+		if (grp == null) {Gfo_usr_dlg_._.Warn_many("", "", "could not find gallery keyword: ~{0}", String_.new_utf8_(Xol_kwd_grp_.Bry_by_id(kwd_id))); return;}
 		Xol_kwd_itm[] itms = grp.Itms();
 		int len = itms.length;
 		Byte_obj_val trie_ref = Byte_obj_val.new_(trie_key);

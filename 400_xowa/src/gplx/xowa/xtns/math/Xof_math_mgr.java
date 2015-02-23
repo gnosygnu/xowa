@@ -16,18 +16,19 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.math; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.strings.*; import gplx.xowa.apps.fsys.*;
+import gplx.core.strings.*; import gplx.xowa.apps.progs.*;
 public class Xof_math_mgr implements GfoInvkAble {
-	public Xof_math_mgr(Xoa_app app) {this.app = app; html_wtr = new Xof_math_html_wtr();} private Xoa_app app;
+	private Xoae_app app;
 	public ProcessAdp Cmd_convert_tex_to_dvi() {return cmd_convert_tex_to_dvi;} private ProcessAdp cmd_convert_tex_to_dvi = new ProcessAdp();
 	public ProcessAdp Cmd_convert_dvi_to_png() {return cmd_convert_dvi_to_png;} private ProcessAdp cmd_convert_dvi_to_png = new ProcessAdp();
-	public void Init(Xoa_app app) {
-		Launcher_app_mgr app_mgr = app.Launcher();
+	public void Init_by_app(Xoae_app app) {
+		this.app = app;
+		Xoa_prog_mgr app_mgr = app.Prog_mgr();
 		cmd_convert_tex_to_dvi = app_mgr.App_convert_tex_to_dvi();
 		cmd_convert_dvi_to_png = app_mgr.App_convert_dvi_to_png();
 	}
 	private Io_url Make_math_dir(String wiki_key) {return app.Fsys_mgr().Root_dir().GenSubDir_nest("file", wiki_key, "math");}
-	public Xof_math_html_wtr Html_wtr() {return html_wtr;} private Xof_math_html_wtr html_wtr;
+	public Xof_math_html_wtr Html_wtr() {return html_wtr;} private final Xof_math_html_wtr html_wtr = new Xof_math_html_wtr();
 	public void Make_itm(Xof_math_itm rv, String wiki_key, byte[] math_bry) {
 		Io_url math_dir = Make_math_dir(wiki_key);
 		math_bry = app.Math_subst_regy().Subst(math_bry);
@@ -60,14 +61,14 @@ public class Xof_math_mgr implements GfoInvkAble {
 		cmd_convert_tex_to_dvi.Prog_fmt_(prog_fmt + " tex_to_dvi: ~{process_seconds} second(s); ~{process_exe_name} ~{process_exe_args}");
 		boolean pass = cmd_convert_tex_to_dvi.Run(tex_url.Raw(), tmp_dir.Xto_api()).Exit_code_pass();
 		if (!pass) {
-			app.Gui_wtr().Warn_many(GRP_KEY, "tex_to_dvi.fail", "fail: tex_to_dvi: error=~{0} latex=~{1}", cmd_convert_tex_to_dvi.Rslt_out(), latex);
+			app.Usr_dlg().Warn_many(GRP_KEY, "tex_to_dvi.fail", "fail: tex_to_dvi: error=~{0} latex=~{1}", cmd_convert_tex_to_dvi.Rslt_out(), latex);
 		}
 		// NOTE: latex sometimes throws errors, but will generate .dvi; for sake of simplicity; always try to run dvipng
 		Io_mgr._.CreateDirIfAbsent(png_url.OwnerDir());
 		cmd_convert_dvi_to_png.Prog_fmt_(prog_fmt + " dvi_to_png: ~{process_seconds} second(s); ~{process_exe_name} ~{process_exe_args}");
 		pass = cmd_convert_dvi_to_png.Run(tex_url.GenNewExt(".dvi"), png_url, tmp_dir.Xto_api()).Exit_code_pass();
 		if (!pass) {
-			app.Gui_wtr().Warn_many(GRP_KEY, "dvi_to_png.fail", "fail: dvi_to_png: error=~{0} latex=~{1}", cmd_convert_tex_to_dvi.Rslt_out(), latex);
+			app.Usr_dlg().Warn_many(GRP_KEY, "dvi_to_png.fail", "fail: dvi_to_png: error=~{0} latex=~{1}", cmd_convert_tex_to_dvi.Rslt_out(), latex);
 		}
 		return pass;
 	}

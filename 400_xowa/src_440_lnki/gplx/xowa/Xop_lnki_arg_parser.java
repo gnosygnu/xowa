@@ -35,7 +35,7 @@ public class Xop_lnki_arg_parser {
 				 if (Env_.Mode_testing())
 					continue;		// TEST: allows partial parsing of $magicWords
 				else
-					 list = lang.App().Lang_mgr().Lang_en().Kwd_mgr().Get_at(val[0]);
+					 list = lang.Lang_mgr().Lang_en().Kwd_mgr().Get_at(val[0]);
 			}
 			Xol_kwd_itm[] words = list.Itms();
 			int words_len = words.length;
@@ -47,7 +47,7 @@ public class Xop_lnki_arg_parser {
 		}
 		list = mgr.Get_at(Xol_kwd_grp_.Id_img_width);
 		if (list == null)
-			list = lang.App().Lang_mgr().Lang_en().Kwd_mgr().Get_at(Xol_kwd_grp_.Id_img_width);
+			list = lang.Lang_mgr().Lang_en().Kwd_mgr().Get_at(Xol_kwd_grp_.Id_img_width);
 		Init_size_trie(tmp_bfr, list);
 	}
 	public byte Identify_tid(byte[] src, int bgn, int end, Xop_lnki_tkn lnki) {

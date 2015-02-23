@@ -21,9 +21,9 @@ import gplx.intl.*; import gplx.xowa.langs.numbers.*;
 public class Pf_formatnum_es_tst {
 	private Xop_fxt fxt;
 	@Before public void init() {
-		Xoa_app app = Xoa_app_fxt.app_();
-		Xol_lang lang = new Xol_lang(app, Bry_.new_ascii_("es")).Init_by_load_assert();
-		Xow_wiki wiki = Xoa_app_fxt.wiki_(app, "es.wikipedia.org", lang);
+		Xoae_app app = Xoa_app_fxt.app_();
+		Xol_lang lang = new Xol_lang(app.Lang_mgr(), Bry_.new_ascii_("es")).Init_by_load_assert();
+		Xowe_wiki wiki = Xoa_app_fxt.wiki_(app, "es.wikipedia.org", lang);
 		fxt = new Xop_fxt(app, wiki);
 	}
 	@Test  public void Basic()	{

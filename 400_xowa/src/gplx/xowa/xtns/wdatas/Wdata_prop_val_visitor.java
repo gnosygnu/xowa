@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.wdatas; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.xtns.wdatas.core.*;
 class Wdata_prop_val_visitor implements Wdata_claim_visitor {
-	private Wdata_wiki_mgr wdata_mgr; private Xoa_app app; private Bry_bfr bfr; private byte[] lang_key;
-	public Wdata_prop_val_visitor(Xoa_app app, Wdata_wiki_mgr wdata_mgr) {this.app = app; this.wdata_mgr = wdata_mgr;}
+	private Wdata_wiki_mgr wdata_mgr; private Xoae_app app; private Bry_bfr bfr; private byte[] lang_key;
+	public Wdata_prop_val_visitor(Xoae_app app, Wdata_wiki_mgr wdata_mgr) {this.app = app; this.wdata_mgr = wdata_mgr;}
 	public void Init(Bry_bfr bfr, byte[] lang_key) {this.bfr = bfr; this.lang_key = lang_key;}
 	public void Visit_str(Wdata_claim_itm_str itm)							{bfr.Add(itm.Val_str());}
 	public void Visit_time(Wdata_claim_itm_time itm)						{bfr.Add(itm.Time());}

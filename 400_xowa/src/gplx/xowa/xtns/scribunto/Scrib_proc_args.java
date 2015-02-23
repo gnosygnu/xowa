@@ -81,7 +81,7 @@ public class Scrib_proc_args {
 			return rv;
 		}
 	}
-	public byte[] Extract_qry_args(Xow_wiki wiki, int idx) {
+	public byte[] Extract_qry_args(Xowe_wiki wiki, int idx) {
 		Object qry_args_obj = Cast_obj_or_null(idx);
 		if (qry_args_obj == null) return Bry_.Empty;
 		Class<?> qry_args_cls = ClassAdp_.ClassOf_obj(qry_args_obj);
@@ -101,7 +101,7 @@ public class Scrib_proc_args {
 			return bfr.Mkr_rls().Xto_bry_and_clear();
 		}
 		else {
-			wiki.App().Gui_wtr().Warn_many("", "", "unknown type for GetUrl query args: ~{0}", ClassAdp_.NameOf_type(qry_args_cls));
+			wiki.Appe().Usr_dlg().Warn_many("", "", "unknown type for GetUrl query args: ~{0}", ClassAdp_.NameOf_type(qry_args_cls));
 			return Bry_.Empty;
 		}
 	}

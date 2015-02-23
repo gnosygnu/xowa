@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.cfgs.gui; import gplx.*; import gplx.xowa.*; import gplx.xowa.cfgs.*;
 public class Xocfg_gui_mgr implements GfoInvkAble {
-	public Xocfg_gui_mgr(Xoa_app app) {
+	public Xocfg_gui_mgr(Xoae_app app) {
 		win_cfg = new Xocfg_win(app);
 	}
 	public Xocfg_win Win() {return win_cfg;} private Xocfg_win win_cfg;

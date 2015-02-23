@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.gfui.*; import gplx.html.*; import gplx.xowa.gui.menus.*; import gplx.xowa.gui.menus.dom.*; import gplx.xowa.html.modules.*; import gplx.xowa.pages.*;
 public class Xog_html_itm implements GfoInvkAble, GfoEvObj {
-	private Xoa_app app;
+	private Xoae_app app;
 	public Xog_html_itm(Xog_tab_itm owner_tab) {
 		this.owner_tab = owner_tab;
 		app = owner_tab.Tab_mgr().Win().App();
@@ -48,21 +48,21 @@ public class Xog_html_itm implements GfoInvkAble, GfoEvObj {
 	public String Html_selected_get_text_or_href() {return Html_extract_text(html_box.Html_doc_selected_get_text_or_href());}
 	public String Html_selected_get_active_or_selection() {return Html_extract_text(html_box.Html_doc_selected_get_active_or_selection());}		
 	private String Html_extract_text(String v) {
-		Xoa_page page = owner_tab.Page();
-		String site = page.Wiki().Domain_str();
+		Xoae_page page = owner_tab.Page();
+		String site = owner_tab.Wiki().Domain_str();
 		String ttl = String_.new_utf8_(page.Ttl().Full_db());
 		return Xog_html_itm__href_extractor.Html_extract_text(site, ttl, v);
 	}
-	public void Show(Xoa_page page) {
+	public void Show(Xoae_page page) {
 		byte view_mode = owner_tab.View_mode();			
-		byte[] html_src = page.Wiki().Html_mgr().Page_wtr_mgr().Gen(page, view_mode);
+		byte[] html_src = owner_tab.Wiki().Html_mgr().Page_wtr_mgr().Gen(page, view_mode);
 		Html_src_(page, html_src);
 		if (view_mode == Xopg_view_mode.Tid_read){			// used only for Xosrh test; DATE:2014-01-29
 			html_box.Html_doc_body_focus();					// NOTE: only focus if read so up / down will scroll box; edit / html should focus edit-box; DATE:2014-06-05
 			page.Root().Data_htm_(html_src);
 		}
 	}
-	private void Html_src_(Xoa_page page, byte[] html_bry) {
+	private void Html_src_(Xoae_page page, byte[] html_bry) {
 		String html_str = String_.new_utf8_(html_bry);
 		if (owner_tab.Tab_mgr().Html_load_tid__url()) {
 			Io_url html_url = app.User().Fsys_mgr().App_temp_html_dir().GenSubFil_ary(owner_tab.Tab_key(), ".html");
@@ -122,7 +122,7 @@ public class Xog_html_itm implements GfoInvkAble, GfoEvObj {
 		module_popups_done = true;
 	}
 	private boolean module_packed_done = false, module_popups_done = false;
-	public void Tab_selected(Xoa_page page) {
+	public void Tab_selected(Xoae_page page) {
 		Xoh_module_mgr module_mgr = page.Html_data().Module_mgr();
 		if (module_mgr.Itm_gallery().Enabled() && !module_packed_done)
 			this.Html_gallery_packed_exec();
@@ -150,7 +150,7 @@ public class Xog_html_itm implements GfoInvkAble, GfoEvObj {
 	private boolean Scroll_page_by_id(String id) {
 		return (id == null) 
 			? false
-			: html_box.Html_elem_scroll_into_view(app.Encoder_mgr().Id().Encode_str(id));
+			: html_box.Html_elem_scroll_into_view(Xoa_app_.Utl_encoder_mgr().Id().Encode_str(id));
 	}
 	public void Js_enabled_(boolean v) {
 		html_box.Html_js_enabled_(v);

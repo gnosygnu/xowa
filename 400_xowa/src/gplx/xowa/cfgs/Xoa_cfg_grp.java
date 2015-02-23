@@ -35,10 +35,10 @@ public class Xoa_cfg_grp {
 		}
 		return rv;
 	}
-	public Xoa_cfg_itm Get_itm_by_wiki(byte[] domain, byte wiki_tid) {
+	public Xoa_cfg_itm Get_itm_by_wiki(byte[] domain, int wiki_tid) {
 		Xoa_cfg_itm rv = (Xoa_cfg_itm)hash.Fetch(domain);
 		if (rv == null) { 		// match by domain failed; try type
-			rv = (Xoa_cfg_itm)hash.Fetch(Xow_wiki_domain_.Key_by_tid(wiki_tid));
+			rv = (Xoa_cfg_itm)hash.Fetch(Xow_domain_.Tid__get_bry(wiki_tid));
 			if (rv == null)		// match by type failed; try all
 				rv = (Xoa_cfg_itm)hash.Fetch(Xoa_cfg_grp_tid.Key_all_bry);	
 				if (rv == null)		// match by type failed; try app

@@ -20,9 +20,9 @@ import gplx.srls.dsvs.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis
 class Xow_xwiki_mgr_srl extends Dsv_wkr_base {
 	private byte[] key, url_fmt, name;
 	private final Xow_xwiki_mgr mgr;
-	private final Gfo_url_parser url_parser; private final byte cur_wiki_tid; private final Gfo_url tmp_url = new Gfo_url(); private final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
-	public Xow_xwiki_mgr_srl(Xow_xwiki_mgr mgr, Gfo_url_parser url_parser, byte cur_wiki_tid) {
-		this.mgr = mgr; this.url_parser = url_parser; this.cur_wiki_tid = cur_wiki_tid;
+	private final Gfo_url_parser url_parser; private final Gfo_url tmp_url = new Gfo_url(); private final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+	public Xow_xwiki_mgr_srl(Xow_xwiki_mgr mgr, Gfo_url_parser url_parser) {
+		this.mgr = mgr; this.url_parser = url_parser;
 	}
 	@Override public Dsv_fld_parser[] Fld_parsers() {return new Dsv_fld_parser[] {Dsv_fld_parser_.Bry_parser, Dsv_fld_parser_.Bry_parser, Dsv_fld_parser_.Bry_parser};}
 	@Override public boolean Write_bry(Dsv_tbl_parser parser, int fld_idx, byte[] src, int bgn, int end) {
@@ -34,7 +34,7 @@ class Xow_xwiki_mgr_srl extends Dsv_wkr_base {
 		}
 	}
 	@Override public void Commit_itm(Dsv_tbl_parser parser, int pos) {
-		Xow_xwiki_itm itm = Xow_xwiki_itm_.new_mw_(tmp_bfr, url_parser, tmp_url, key, url_fmt, name, cur_wiki_tid);
+		Xow_xwiki_itm itm = Xow_xwiki_itm.new_by_mw(tmp_bfr, url_parser, tmp_url, key, url_fmt, name);
 		mgr.Add_itm(itm);
 	}
 }

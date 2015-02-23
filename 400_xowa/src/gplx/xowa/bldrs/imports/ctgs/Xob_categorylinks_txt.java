@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.imports.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.imports.*;
 import gplx.ios.*;
 public class Xob_categorylinks_txt extends Xob_categorylinks_base {
-	public Xob_categorylinks_txt(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki); this.make_fil_len = Io_mgr.Len_mb;}
+	public Xob_categorylinks_txt(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki); this.make_fil_len = Io_mgr.Len_mb;}
 	@Override public String Cmd_key() {return KEY;} public static final String KEY = "ctg.link_sql";
 	@Override public Io_sort_cmd Make_sort_cmd(Sql_file_parser sql_parser) {return new Io_sort_fil_basic(bldr.Usr_dlg(), this.Make_url_gen(), make_fil_len);}
 }

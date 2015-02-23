@@ -118,7 +118,7 @@ public class Xop_tblw_lxr implements Xop_lxr {
 	}
 	public Xop_tblw_lxr(byte wlxr_type) {this.wlxr_type = wlxr_type;} private byte wlxr_type;
 	public static final Xop_tblw_lxr _ = new Xop_tblw_lxr(); Xop_tblw_lxr() {}
-	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr core_trie) {
+	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {
 		core_trie.Add(Hook_tb,	new Xop_tblw_lxr(Xop_tblw_wkr.Tblw_type_tb));
 		core_trie.Add(Hook_te,	new Xop_tblw_lxr(Xop_tblw_wkr.Tblw_type_te));
 		core_trie.Add(Hook_tr,	new Xop_tblw_lxr(Xop_tblw_wkr.Tblw_type_tr));

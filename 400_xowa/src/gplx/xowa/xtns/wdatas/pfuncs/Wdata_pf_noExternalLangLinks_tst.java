@@ -42,7 +42,7 @@ class Wdata_pf_noExternalLangLinks_fxt {
 		expd_langs = null;
 		data.Reset();
 		return this;
-	}	private Xop_fxt parser_fxt; Xoa_app app; Xow_wiki wiki; Wdata_external_lang_links_data data;
+	}	private Xop_fxt parser_fxt; Xoae_app app; Xowe_wiki wiki; Wdata_external_lang_links_data data;
 	public Wdata_pf_noExternalLangLinks_fxt Expd_enabled_(boolean v) {expd_enabled = v ? Bool_.Y_byte : Bool_.N_byte; return this;} private byte expd_enabled;
 	public Wdata_pf_noExternalLangLinks_fxt Expd_sort_(boolean v) {expd_sort = v ? Bool_.Y_byte : Bool_.N_byte; return this;} private byte expd_sort;
 	public Wdata_pf_noExternalLangLinks_fxt Expd_langs_(String... v) {expd_langs = v; return this;} private String[] expd_langs;

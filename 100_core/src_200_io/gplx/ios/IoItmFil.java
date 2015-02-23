@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.ios; import gplx.*;
 public class IoItmFil extends IoItm_base {
 	@Override public int TypeId() {return IoItmFil.Type_Fil;} @Override public boolean Type_dir() {return false;} @Override public boolean Type_fil() {return true;} public static final int Type_Fil = 2;
-	public boolean Exists() {return size != Size_Invalid;}	// NOTE: questionable logic, but preserved for historical reasons; requires that length be set to -1 if !.exists
+	public boolean Exists() {return size != Size_invalid;}	// NOTE: questionable logic, but preserved for historical reasons; requires that length be set to -1 if !.exists
 	public DateAdp ModifiedTime() {return modifiedTime;}
 	public IoItmFil ModifiedTime_(DateAdp val) {modifiedTime = val; return this;} DateAdp modifiedTime;
 	public IoItmFil ModifiedTime_(String val) {return ModifiedTime_(DateAdp_.parse_gplx(val));}
@@ -37,6 +37,6 @@ public class IoItmFil extends IoItm_base {
 		else return super.Invk(ctx, ikey, k, m);
 	}
 	@gplx.Internal protected IoItmFil() {}
-	public static final long Size_Invalid		= -1;
-	public static final int  Size_Invalid_int	= -1;
+	public static final long Size_invalid		= -1;
+	public static final int Size_invalid_int	= -1;
 }

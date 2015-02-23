@@ -19,15 +19,15 @@ package gplx.xowa; import gplx.*;
 import gplx.gfui.*; import gplx.xowa.setup.addons.*;
 import gplx.xowa.setup.maints.*;
 public class Xoi_setup_mgr implements GfoInvkAble {
-	public Xoi_setup_mgr(Xoa_app app) {
+	public Xoi_setup_mgr(Xoae_app app) {
 		this.app = app;
 		cmd_mgr = new Xoi_cmd_mgr(this);
 		maint_mgr = new Xoa_maint_mgr(app);
 	}
-	public void Init_by_app(Xoa_app app) {
+	public void Init_by_app(Xoae_app app) {
 		addon_mgr.Init_by_app(app);
 	}
-	public Xoa_app App() {return app;} private Xoa_app app;
+	public Xoae_app App() {return app;} private Xoae_app app;
 	public Xoi_cmd_mgr Cmd_mgr() {return cmd_mgr;} private Xoi_cmd_mgr cmd_mgr;
 	public Xoi_dump_mgr Dump_mgr() {return dump_mgr;} private Xoi_dump_mgr dump_mgr = new Xoi_dump_mgr();
 	public Xoi_addon_mgr Addon_mgr() {return addon_mgr;} private Xoi_addon_mgr addon_mgr = new Xoi_addon_mgr();

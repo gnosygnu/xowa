@@ -24,7 +24,7 @@ public class Insider_xtn_mgr extends Xox_mgr_base {
 	@Override public boolean Enabled_default() {return false;}
 	@Override public byte[] Xtn_key() {return XTN_KEY;} public static final byte[] XTN_KEY = Bry_.new_ascii_("Insider");
 	@Override public Xox_mgr Clone_new() {return new Insider_xtn_mgr();}
-	@Override public void Xtn_init_by_wiki(Xow_wiki wiki) {
+	@Override public void Xtn_init_by_wiki(Xowe_wiki wiki) {
 		this.wiki = wiki;
 		if (!Enabled()) return;
 		Xox_mgr_base.Xtn_load_i18n(wiki, XTN_KEY);
@@ -32,7 +32,7 @@ public class Insider_xtn_mgr extends Xox_mgr_base {
 		msg_about_ttl = wiki.Msg_mgr().Val_by_key_obj("insider-about");
 		msg_about_page = wiki.Msg_mgr().Val_by_key_obj("insider-about-page");
 	}
-	public Xow_wiki Wiki() {return wiki;} private Xow_wiki wiki;
+	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public Insider_html_bldr Html_bldr() {return html_bldr;} private Insider_html_bldr html_bldr;
 	public byte[] Msg_sidebar_ttl() {return msg_sidebar_ttl;} private byte[] msg_sidebar_ttl;
 	public byte[] Msg_about_ttl() {return msg_about_ttl;} private byte[] msg_about_ttl;

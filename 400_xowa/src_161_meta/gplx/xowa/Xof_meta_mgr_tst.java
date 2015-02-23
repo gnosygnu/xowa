@@ -62,8 +62,8 @@ class Xof_file_regy_fxt {
 	byte[] md5_(byte[] name) {return Xof_xfer_itm_.Md5_(name);}
 	public void Ini() {
 		Io_mgr._.InitEngine_mem();
-		Xoa_app app = Xoa_app_fxt.app_();
-		Xow_wiki wiki = Xoa_app_fxt.wiki_tst_(app);
+		Xoae_app app = Xoa_app_fxt.app_();
+		Xowe_wiki wiki = Xoa_app_fxt.wiki_tst_(app);
 		regy_mgr = new Xof_meta_mgr(wiki);
 		regy_mgr.Clear();
 		regy_mgr.Depth_(2);

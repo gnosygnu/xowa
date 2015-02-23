@@ -53,9 +53,9 @@ public class Xop_vnt_lxr_tst {
 //			fxt.Test_parse_page_all_str("a-{b}-c", "a-{b}-c");
 //		}
 //		@Test  public void Enabled() {
-//			Xoa_app app = Xoa_app_fxt.app_();
+//			Xoae_app app = Xoa_app_fxt.app_();
 //			Xol_lang lang = new Xol_lang(app, Bry_.new_ascii_("zh"));
-//			Xow_wiki wiki = Xoa_app_fxt.wiki_(app, "zh.wikipedia.org", lang);
+//			Xowe_wiki wiki = Xoa_app_fxt.wiki_(app, "zh.wikipedia.org", lang);
 //			Xop_fxt fxt = new Xop_fxt(app, wiki);
 //			fxt.Test_parse_page_all_str("a-{b}-c", "ac");
 //			fxt.Wiki().Vnt_mgr().Set(null, null);	// set it back to null for other tests
@@ -94,8 +94,8 @@ class Xop_vnt_lxr_fxt {
 	private Xop_fxt fxt;
 	private Bry_bfr tmp_bfr = Bry_bfr.new_();
 	public Xop_vnt_lxr_fxt Clear() {
-		Xoa_app app = Xoa_app_fxt.app_();
-		Xow_wiki wiki = Xoa_app_fxt.wiki_(app, "zh.wikipedia.org");
+		Xoae_app app = Xoa_app_fxt.app_();
+		Xowe_wiki wiki = Xoa_app_fxt.wiki_(app, "zh.wikipedia.org");
 		fxt = new Xop_fxt(app, wiki);
 		Xop_vnt_lxr_fxt.Init_vnt_mgr(wiki.Lang().Vnt_mgr(), "zh-hans", "zh-hant");
 		Xop_vnt_lxr_.set_(wiki);

@@ -103,7 +103,7 @@ public class Xodb_hdump_mgr__write_tst {
 class Xodb_hdump_mgr__base_fxt {
 	protected Xodb_hdump_mgr hdump_mgr;
 	protected Bry_bfr bfr = Bry_bfr.reset_(255);
-	protected Xow_wiki wiki; protected Xoa_page page;
+	protected Xowe_wiki wiki; protected Xoae_page page;
 	public Xop_fxt Fxt() {return fxt;} protected Xop_fxt fxt;
 	public void Clear() {
 		if (fxt == null) {

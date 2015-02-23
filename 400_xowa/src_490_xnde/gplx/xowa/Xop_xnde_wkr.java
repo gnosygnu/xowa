@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.core.btries.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.wikis.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.strings.*; import gplx.html.*;
+import gplx.core.btries.*; import gplx.xowa.apps.progs.*; import gplx.xowa.wikis.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.strings.*; import gplx.html.*;
 import gplx.xowa.parsers.logs.*; import gplx.xowa.parsers.tblws.*;
 public class Xop_xnde_wkr implements Xop_ctx_wkr {
 	public void Ctor_ctx(Xop_ctx ctx) {}
@@ -238,7 +238,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			}
 			if (valid) {
 				ctx.Subs_add(root, tkn_mkr.Ignore(bgn_pos, gtPos, Xop_ignore_tkn.Ignore_tid_include_tmpl));
-				return gtPos + Launcher_app_mgr.Adj_next_char;
+				return gtPos + Xoa_prog_mgr.Adj_next_char;
 			}
 			else {
 				return ctx.Lxr_make_txt_(gtPos);
@@ -272,7 +272,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 	private boolean pre2_pending = false;
 	private int Make_xtag_bgn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int gtPos, int name_bgn, int name_end, Xop_xnde_tag tag, int tag_end_pos, byte tag_end_byte, boolean force_xtn_for_nowiki, boolean pre2_hack) {
 		boolean inline = false;
-		int open_tag_end = gtPos + Launcher_app_mgr.Adj_next_char, atrs_bgn = -1, atrs_end = -1;
+		int open_tag_end = gtPos + Xoa_prog_mgr.Adj_next_char, atrs_bgn = -1, atrs_end = -1;
 		// calc (a) inline; (b) atrs
 		switch (tag_end_byte) {	// look at last char of tag; EX: for b, following are registered: "b/","b>","b\s","b\n","b\t"
 			case Byte_ascii.Slash:	// "/" EX: "<br/"; // NOTE: <pre/a>, <pre//> are allowed
@@ -308,9 +308,9 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			return Make_xnde_xtn(ctx, tkn_mkr, root, src, src_len, tag, bgn_pos, gtPos + 1, name_bgn, name_end, atrs_bgn, atrs_end, atrs, inline, pre2_hack);	// find end tag and do not parse anything inbetween
 		}
 		if (tag.Restricted()) {
-			Xoa_page page = ctx.Cur_page();
+			Xoae_page page = ctx.Cur_page();
 			if (	page.Html_data().Html_restricted() 
-				&&	page.Wiki().Domain_tid() != Xow_wiki_domain_.Tid_home) {
+				&&	page.Wiki().Domain_tid() != Xow_domain_.Tid_int_home) {
 				int end_pos = gtPos + 1;
 				ctx.Subs_add(root, tkn_mkr.Bry_raw(bgn_pos, end_pos, Bry_.Add(gplx.html.Html_entity_.Lt_bry, Bry_.Mid(src, bgn_pos + 1, end_pos)))); // +1 to skip <
 				return end_pos;
@@ -698,7 +698,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 						if (Env_.Mode_testing()) 
 							throw Err_.err_(e, err_msg);
 						else
-							ctx.Wiki().App().Usr_dlg().Warn_many("", "", err_msg);
+							ctx.Wiki().Appe().Usr_dlg().Warn_many("", "", err_msg);
 					}
 				}
 				break;

@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="src_110_dbQry"/>
-	<classpathentry kind="src" path="src_120_sql"/>
-	<classpathentry kind="src" path="src_130_misc"/>
-	<classpathentry kind="src" path="src_200_engine"/>
-	<classpathentry kind="src" path="src_300_sqlDbs"/>
-	<classpathentry kind="src" path="src_400_tdbs"/>
-	<classpathentry kind="src" path="src_410_stores"/>
 	<classpathentry kind="src" path="tst"/>
 	<classpathentry kind="src" path="xtn"/>
 	<classpathentry kind="src" path="/100_core"/>

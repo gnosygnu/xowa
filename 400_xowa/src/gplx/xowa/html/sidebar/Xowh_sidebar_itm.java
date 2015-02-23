@@ -36,11 +36,11 @@ public class Xowh_sidebar_itm {
 	public static final byte Tid_grp = 1, Tid_itm = 2;	// NOTE: values are used by parse to indicate # of asterisks
 }
 class Xowh_sidebar_grp_fmtr_arg implements Bry_fmtr_arg {
-	private Xow_wiki wiki; private Xowh_sidebar_itm grp; private Bry_fmtr fmtr;
-	public void Grp_(Xow_wiki wiki, Xowh_sidebar_itm grp, Bry_fmtr fmtr) {this.wiki = wiki; this.grp = grp; this.fmtr = fmtr;}
+	private Xowe_wiki wiki; private Xowh_sidebar_itm grp; private Bry_fmtr fmtr;
+	public void Grp_(Xowe_wiki wiki, Xowh_sidebar_itm grp, Bry_fmtr fmtr) {this.wiki = wiki; this.grp = grp; this.fmtr = fmtr;}
 	public void XferAry(Bry_bfr bfr, int idx) {
 		int len = grp.Itms_len();
-		boolean popups_enabled = wiki.App().Api_root().Html().Modules().Popups().Enabled();
+		boolean popups_enabled = wiki.Appe().Api_root().Html().Modules().Popups().Enabled();
 		String itm_cls = popups_enabled ? " class='xowa-hover-off'" : "";
 		for (int i = 0; i < len; i++) {
 			Xowh_sidebar_itm itm = (Xowh_sidebar_itm )grp.Itms_get_at(i);

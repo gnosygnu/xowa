@@ -35,10 +35,10 @@ public class Xosrh_page_mgr implements Xosrh_page_mgr_searcher {
 	}
 	private Xosrh_rslt_grp[] pages_ary; ListAdp cur_ids = ListAdp_.new_();
 	private Xosrh_rslt_itm_sorter sorter = new Xosrh_rslt_itm_sorter();		
-	private Xow_wiki wiki;
+	private Xowe_wiki wiki;
 	public Xosrh_ns_mgr Ns_mgr() {return ns_mgr;} public void Ns_mgr_(Xosrh_ns_mgr v) {ns_mgr = v;} private Xosrh_ns_mgr ns_mgr = new Xosrh_ns_mgr();
-	public Xosrh_rslt_grp Search(Bry_bfr bfr, Xow_wiki wiki, byte[] search, int page_idx, Xosrh_page_mgr_searcher searcher) {return Search(bfr, wiki, search, page_idx, searcher, Cancelable_.Never);}
-	public Xosrh_rslt_grp Search(Bry_bfr bfr, Xow_wiki wiki, byte[] search, int page_idx, Xosrh_page_mgr_searcher searcher, Cancelable cancelable) {
+	public Xosrh_rslt_grp Search(Bry_bfr bfr, Xowe_wiki wiki, byte[] search, int page_idx, Xosrh_page_mgr_searcher searcher) {return Search(bfr, wiki, search, page_idx, searcher, Cancelable_.Never);}
+	public Xosrh_rslt_grp Search(Bry_bfr bfr, Xowe_wiki wiki, byte[] search, int page_idx, Xosrh_page_mgr_searcher searcher, Cancelable cancelable) {
 		this.wiki = wiki;
 		Xosrh_rslt_grp rv = null;
 		itms_bgn = page_idx * itms_per_page;
@@ -77,7 +77,7 @@ public class Xosrh_page_mgr implements Xosrh_page_mgr_searcher {
 		cur_root.Search(cancelable, bfr, search, wiki, itms_per_page, ns_mgr);
 		return cur_root.Matches(search).Ids();
 	}
-	private void Rebuild(Cancelable cancelable, Xow_wiki wiki, ListAdp ids) {
+	private void Rebuild(Cancelable cancelable, Xowe_wiki wiki, ListAdp ids) {
 		int ids_len = ids.Count();
 		int pages_len = ((ids_len - 1) / itms_per_page) + 1; if (pages_len == 0) pages_len = 1;
 		pages_ary = new Xosrh_rslt_grp[pages_len];

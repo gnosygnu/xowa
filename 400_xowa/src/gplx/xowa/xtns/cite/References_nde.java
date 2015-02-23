@@ -21,19 +21,19 @@ import gplx.xowa.html.*;
 public class References_nde implements Xox_xnde, Xop_xnde_atr_parser {
 	public byte[] Group() {return group;} public References_nde Group_(byte[] v) {group = v; return this;} private byte[] group = Bry_.Empty;
 	public int List_idx() {return list_idx;} public References_nde List_idx_(int v) {list_idx = v; return this;} private int list_idx;
-	public void Xatr_parse(Xow_wiki wiki, byte[] src, Xop_xatr_itm xatr, Object xatr_key_obj) {
+	public void Xatr_parse(Xowe_wiki wiki, byte[] src, Xop_xatr_itm xatr, Object xatr_key_obj) {
 		if (xatr_key_obj == null) return;
 		Byte_obj_val xatr_key = (Byte_obj_val)xatr_key_obj;
 		switch (xatr_key.Val()) {
 			case Xatr_id_group:		group = xatr.Val_as_bry(src); break;
 		}
 	}
-	public void Xtn_parse(Xow_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
+	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
 		if (ctx.Tid_is_popup()) return;
 		Ref_itm_mgr ref_mgr = ctx.Cur_page().Ref_mgr();
 		if (ref_mgr.References__recursing()) return;	// skip nested <references> else refs will be lost; EX:"<references><references/></references>"; PAGE:en.w:Hwair; DATE:2014-06-27
 		ctx.Para().Process_block__bgn_n__end_y(Xop_xnde_tag_.Tag_div);	// xnde generates <block_node>; <references> -> <ol>; close any blocks; PAGE:fr.w:Heidi_(roman); DATE:2014-02-17
-		Xop_xatr_itm.Xatr_parse(wiki.App(), this, xatrs_hash, wiki, src, xnde);
+		Xop_xatr_itm.Xatr_parse(wiki.Appe(), this, xatrs_hash, wiki, src, xnde);
 		if (xnde.CloseMode() == Xop_xnde_tkn.CloseMode_pair) {	// "<references>", "</references>"; parse anything in between but only to pick up <ref> tags; discard everything else; DATE:2014-06-27
 			int itm_bgn = xnde.Tag_open_end(), itm_end = xnde.Tag_close_bgn();
 			Xop_ctx references_ctx = Xop_ctx.new_sub_(wiki).References_group_(group);
@@ -48,7 +48,7 @@ public class References_nde implements Xox_xnde, Xop_xnde_atr_parser {
 		}
 		list_idx = ref_mgr.Grps_get(group).Grp_seal();	// NOTE: needs to be sealed at end; else inner refs will end up in new group; EX: <references><ref>don't seal prematurely</ref></references>
 	}
-	public void Xtn_write(Bry_bfr bfr, Xoa_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
+	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
 		html_wtr.Ref_wtr().Xnde_references(html_wtr, ctx, hctx, bfr, src, xnde);
 	}
 	private static final byte Xatr_id_group = 0;

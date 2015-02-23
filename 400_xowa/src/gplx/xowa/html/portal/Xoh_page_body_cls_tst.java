@@ -37,7 +37,7 @@ public class Xoh_page_body_cls_tst {
 	}
 }
 class Xoh_page_body_cls_fxt {
-	private Bry_bfr tmp_bfr; private Xoa_app app; private Xow_wiki wiki;
+	private Bry_bfr tmp_bfr; private Xoae_app app; private Xowe_wiki wiki;
 	public void Test_escape_cls(String raw, String expd) {
 		Tfds.Eq(expd, String_.new_utf8_(Xoh_page_body_cls.Escape_cls(Bry_.new_utf8_(raw))));
 	}

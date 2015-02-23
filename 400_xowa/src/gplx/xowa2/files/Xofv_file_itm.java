@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa2.files; import gplx.*; import gplx.xowa2.*;
-import gplx.xowa.*; import gplx.xowa.files.*; import gplx.xowa2.files.orig_regy.*;
+import gplx.xowa.*; import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*;
 public class Xofv_file_itm {
 	Xofv_file_itm(byte[] file_repo, byte[] file_ttl, byte[] file_md5, Xof_ext file_ext, Io_url file_url, int html_uid, int html_w, int html_h, byte lnki_exec_tid, boolean lnki_is_orig, double lnki_time, int lnki_page) {
 		this.file_repo = file_repo; this.file_ttl = file_ttl; this.file_md5 = file_md5; this.file_ext = file_ext; this.file_url = file_url;
@@ -36,10 +36,10 @@ public class Xofv_file_itm {
 	public boolean Lnki_is_orig() {return lnki_is_orig;} private final boolean lnki_is_orig;
 	public double Lnki_time() {return lnki_time;} private final double lnki_time;
 	public int Lnki_page() {return lnki_page;} private final int lnki_page;
-	public static Xofv_file_itm new_(Xof_xfer_itm xfer, Xof_orig_regy_itm orig, Xofv_repo_mgr repo_mgr, Xof_img_size img_size, Xof_url_bldr url_bldr) {
-		Xofv_repo_itm repo = repo_mgr.Get_by_tid(orig.Repo_tid());
+	public static Xofv_file_itm new_(Xof_xfer_itm xfer, Xof_orig_itm orig, Xofv_repo_mgr repo_mgr, Xof_img_size img_size, Xof_url_bldr url_bldr) {
+		Xofv_repo_itm repo = repo_mgr.Get_by_tid(orig.Repo());
 		byte[] file_repo = repo.Key();
-		byte[] file_ttl = orig.Orig_redirect(); if (file_ttl == null) file_ttl = orig.Ttl();
+		byte[] file_ttl = orig.Redirect(); if (Bry_.Len_eq_0(file_ttl)) file_ttl = orig.Page();
 		byte[] file_md5 = Xof_xfer_itm_.Md5_(file_ttl);
 		Xof_ext file_ext = Xof_ext_.new_by_ttl_(file_ttl);
 		byte lnki_exec_tid = xfer.Lnki_exec_tid();
@@ -49,7 +49,7 @@ public class Xofv_file_itm {
 		int html_uid = xfer.Html_uid();
 		img_size.Html_size_calc
 			( xfer.Lnki_exec_tid(), xfer.Lnki_w(), xfer.Lnki_h(), xfer.Lnki_type(), Xof_patch_upright_tid_.Tid_all, xfer.Lnki_upright()
-			, file_ext.Id(), orig.Orig_w(), orig.Orig_h(), Xof_img_size.Thumb_width_img);
+			, file_ext.Id(), orig.W(), orig.H(), Xof_img_size.Thumb_width_img);
 		int html_w = img_size.Html_w();
 		int html_h = img_size.Html_h();
 		byte repo_mode = 0; byte[] repo_dir_sub = null;

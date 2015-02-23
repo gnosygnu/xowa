@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.imports.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.imports.*;
 import gplx.ios.*;
 public abstract class Xoctg_hiddencat_parser_base extends Xob_sql_dump_base implements Sql_file_parser_cmd {
-	public Xoctg_hiddencat_parser_base Ctor(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki); this.make_fil_len = Io_mgr.Len_mb; return this;}
+	public Xoctg_hiddencat_parser_base Ctor(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki); this.make_fil_len = Io_mgr.Len_mb; return this;}
 	@Override public String Sql_file_name() {return "page_props";}
 	private static final byte Fld_id = 0, Fld_key = 1, Fld_val = 2;
 	private int cur_id = -1;

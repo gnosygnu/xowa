@@ -18,5 +18,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html.tidy; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 public interface Xoh_tidy_wkr {
 	byte Tid();
-	void Exec_tidy(Xoa_page page, Bry_bfr bfr);
+	void Exec_tidy(Xoae_page page, Bry_bfr bfr);
 }

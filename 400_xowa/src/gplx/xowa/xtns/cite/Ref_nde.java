@@ -31,18 +31,18 @@ public class Ref_nde implements Xox_xnde, Xop_xnde_atr_parser {
 	public Xop_xnde_tkn Xnde() {return xnde;} private Xop_xnde_tkn xnde;
 	public Xop_root_tkn Body() {return body;} private Xop_root_tkn body;
 	public boolean Exists_in_lnki_title() {return exists_in_lnki_title;} public Ref_nde Exists_in_lnki_title_(boolean v) {exists_in_lnki_title = v; return this;} private boolean exists_in_lnki_title;
-	public void Xatr_parse(Xow_wiki wiki, byte[] src, Xop_xatr_itm xatr, Object xatr_key_obj) {
+	public void Xatr_parse(Xowe_wiki wiki, byte[] src, Xop_xatr_itm xatr, Object xatr_key_obj) {
 		if (xatr_key_obj == null) return;
 		Byte_obj_val xatr_key = (Byte_obj_val)xatr_key_obj;
 		switch (xatr_key.Val()) {
-			case Xatr_id_name:		name = wiki.App().Sanitizer().Escape_id(xatr.Val_as_bry(src)); break;
+			case Xatr_id_name:		name = wiki.Appe().Sanitizer().Escape_id(xatr.Val_as_bry(src)); break;
 			case Xatr_id_follow:	follow = xatr.Val_as_bry(src); break;
 			case Xatr_id_group:		group = xatr.Val_as_bry(src); break;
 		}
 	}
-	public void Xtn_parse(Xow_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
+	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
 		if (ctx.Tid_is_popup()) return;
-		Xop_xatr_itm.Xatr_parse(wiki.App(), this, xatrs_hash, wiki, src, xnde);
+		Xop_xatr_itm.Xatr_parse(wiki.Appe(), this, xatrs_hash, wiki, src, xnde);
 		if (xnde.CloseMode() == Xop_xnde_tkn.CloseMode_pair)
 			body = wiki.Parser().Parse_text_to_wdom_old_ctx(ctx, Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn()), false);
 		byte[] references_group = ctx.References_group();	// set by <references>
@@ -55,7 +55,7 @@ public class Ref_nde implements Xox_xnde, Xop_xnde_atr_parser {
 			ctx.Cur_page().Ref_mgr().Grps_add(group, name, follow, this);
 		this.xnde = xnde;
 	}
-	public void Xtn_write(Bry_bfr bfr, Xoa_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
+	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
 		html_wtr.Ref_wtr().Xnde_ref(hctx, bfr, src, xnde);
 	}
 	private static final Ref_nde[] Ary_empty = new Ref_nde[0];

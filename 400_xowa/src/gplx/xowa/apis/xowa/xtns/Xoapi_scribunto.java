@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.apis.xowa.xtns; import gplx.*; import gplx.xowa.*; import gplx.xowa.apis.*; import gplx.xowa.apis.xowa.*;
 import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
 public class Xoapi_scribunto implements GfoInvkAble {
-	private Xoa_app app;
-	public void Init_by_kit(Xoa_app app) {
+	private Xoae_app app;
+	public void Init_by_kit(Xoae_app app) {
 		this.app = app;
 	}
 	public void Engine_(byte v)	{

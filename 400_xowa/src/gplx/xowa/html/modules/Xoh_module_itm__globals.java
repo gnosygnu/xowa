@@ -22,13 +22,13 @@ public class Xoh_module_itm__globals implements Xoh_module_itm {
 	public byte[] Key() {return Key_const;} private static final byte[] Key_const = Bry_.new_ascii_("globals");
 	public boolean Enabled() {return enabled;} public void Enabled_n_() {enabled = false;} public void Enabled_y_() {enabled = true;} public void Enabled_(boolean v) {enabled = v;} private boolean enabled;
 	public void Clear() {enabled = false;}
-	public void Write_css_include(Xoa_app app, Xow_wiki wiki, Xoa_page page, Xoh_module_wtr wtr) {
+	public void Write_css_include(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_module_wtr wtr) {
 		if (!enabled) return;
 		if (Url_core_css == null) Url_core_css = app.Fsys_mgr().Bin_any_dir().GenSubFil_nest("xowa", "html", "res", "src", "xowa", "core", "core.css").To_http_file_bry();
 		wtr.Write_css_include(Url_core_css);
 	}
-	public void Write_css_script(Xoa_app app, Xow_wiki wiki, Xoa_page page, Xoh_module_wtr wtr) {}
-	public void Write_js_include(Xoa_app app, Xow_wiki wiki, Xoa_page page, Xoh_module_wtr wtr) {
+	public void Write_css_script(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_module_wtr wtr) {}
+	public void Write_js_include(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_module_wtr wtr) {
 		if (!enabled) return;
 		if (Url_core_js == null) {
 			Io_url core_dir = app.Fsys_mgr().Bin_any_dir().GenSubDir_nest("xowa", "html", "res", "src", "xowa", "core");
@@ -38,13 +38,13 @@ public class Xoh_module_itm__globals implements Xoh_module_itm {
 		wtr.Write_js_include(Url_core_js);
 		wtr.Write_js_include(Url_DOMContentLoaded_js);
 	}
-	public void Write_js_head_script(Xoa_app app, Xow_wiki wiki, Xoa_page page, Xoh_module_wtr wtr) {
+	public void Write_js_head_script(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_module_wtr wtr) {
 		if (!enabled) return;
 		wtr.Write_js_var(Var_xowa_root_dir			, Bool_.Y, app.Fsys_mgr().Root_dir().To_http_file_bry());
 		wtr.Write_js_var(Var_xowa_mode_is_server	, Bool_.N, app.Tcp_server().Running() ? Bool_.True_bry : Bool_.False_bry);
 	}
-	public void Write_js_tail_script(Xoa_app app, Xow_wiki wiki, Xoa_page page, Xoh_module_wtr wtr) {}
-	public void Write_js_head_global(Xoa_app app, Xow_wiki wiki, Xoa_page page, Xoh_module_wtr wtr) {
+	public void Write_js_tail_script(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_module_wtr wtr) {}
+	public void Write_js_head_global(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_module_wtr wtr) {
 		if (!enabled) return;
 		wtr.Write_js_global_ini_atr_val(Key_mode_is_gui			, app.Mode() == Xoa_app_.Mode_gui);
 		wtr.Write_js_global_ini_atr_val(Key_mode_is_http		, app.Mode() == Xoa_app_.Mode_http);
@@ -52,7 +52,7 @@ public class Xoh_module_itm__globals implements Xoh_module_itm {
 		wtr.Write_js_global_ini_atr_msg(wiki, Key_sort_ascending);
 		wtr.Write_js_global_ini_atr_msg(wiki, Key_sort_descending);
 		Xol_lang lang = wiki.Lang(); Xow_msg_mgr msg_mgr = wiki.Msg_mgr();
-		Bry_bfr tmp_bfr = lang.App().Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr tmp_bfr = app.Utl_bry_bfr_mkr().Get_b512();
 		tmp_wtr.Init(tmp_bfr);
 		byte[] months_long = Html_js_table_months(tmp_wtr, msg_mgr, Xol_msg_itm_.Id_dte_month_name_january, Xol_msg_itm_.Id_dte_month_name_december);
 		byte[] months_short = Html_js_table_months(tmp_wtr, msg_mgr, Xol_msg_itm_.Id_dte_month_abrv_jan, Xol_msg_itm_.Id_dte_month_abrv_dec);

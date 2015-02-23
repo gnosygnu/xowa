@@ -23,7 +23,7 @@ public class Xop_cr_tkn extends Xop_tkn_itm_base {
 }
 class Xop_cr_lxr implements Xop_lxr {
 	public byte Lxr_tid() {return Xop_lxr_.Tid_cr;}
-	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr core_trie) {
+	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {
 		core_trie.Add(Byte_ascii.CarriageReturn, this);
 	}	
 	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}

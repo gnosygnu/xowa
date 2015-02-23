@@ -16,16 +16,16 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.dbs.tbls.*;
+import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.dbs.*; import gplx.xowa.dbs.tbls.*;
 public class Xob_search_sql_cmd extends Xob_itm_basic_base implements Xob_cmd {
-	public Xob_search_sql_cmd(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
+	public Xob_search_sql_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Cmd_key() {return KEY_search_sql;} public static final String KEY_search_sql = "import.sql.search_title.cmd";
 	public void Cmd_ini(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {}
 	public void Cmd_run() {this.Exec(wiki);}
 	public void Cmd_end() {}
 	public void Cmd_print() {}
-	public void Exec(Xow_wiki wiki) {
+	public void Exec(Xowe_wiki wiki) {
 		usr_dlg.Log_many("", "", "search_title.cmd: initing wiki");
 		if (!Env_.Mode_testing()) wiki.Init_assert();
 		Xodb_fsys_mgr db_fs = wiki.Db_mgr_as_sql().Fsys_mgr();
@@ -76,7 +76,7 @@ public class Xob_search_sql_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		search_provider.Txn_mgr().Txn_end_all_bgn_if_none();
 		search_temp_tbl.Make_data(usr_dlg, search_provider);
 		search_provider.Txn_mgr().Txn_bgn_if_none();
-		wiki.Db_mgr_as_sql().Tbl_xowa_db().Commit_all(db_fs.Conn_core(), db_fs.Files_ary());
+		wiki.Db_mgr_as_sql().Tbl_xowa_db().Commit_all(db_fs.Files_ary());
 		search_provider.Txn_mgr().Txn_end_all();
 	}	private int commit_interval = 100000, progress_interval = 10000;
 	private void Commit(Db_conn search_provider) {

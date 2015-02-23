@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.cite; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.html.*;
 public class Ref_html_wtr {
-	public Ref_html_wtr(Xow_wiki wiki) {
+	public Ref_html_wtr(Xowe_wiki wiki) {
 		cfg = Ref_html_wtr_cfg.new_();
 	}
 	public void Xnde_ref(Xoh_wtr_ctx opts, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {
@@ -36,7 +36,7 @@ public class Ref_html_wtr {
 			);
 	}	private Bry_fmtr_arg_fmtr_objs grp_key_fmtr = Bry_fmtr_arg_.fmtr_null_();
 	public Ref_html_wtr_cfg Cfg() {return cfg;} private Ref_html_wtr_cfg cfg;
-	public void Init_by_wiki(Xow_wiki wiki) {
+	public void Init_by_wiki(Xowe_wiki wiki) {
 		cfg.Init_by_wiki(wiki);
 	}
 	private Bry_fmtr_arg Itm_id(Ref_nde itm, boolean caller_is_ref) {
@@ -109,9 +109,9 @@ public class Ref_html_wtr {
 	private static Xoh_ref_list_fmtr grp_list_fmtr = new Xoh_ref_list_fmtr();
 }
 class Xoh_ref_list_fmtr implements Bry_fmtr_arg {
-	public void Init(Xow_wiki wiki, Ref_html_wtr_cfg cfg, Ref_nde itm) {
+	public void Init(Xowe_wiki wiki, Ref_html_wtr_cfg cfg, Ref_nde itm) {
 		this.wiki = wiki; this.cfg = cfg; this.itm = itm;
-	} private Xow_wiki wiki; private Ref_nde itm; private Ref_html_wtr_cfg cfg;
+	} private Xowe_wiki wiki; private Ref_nde itm; private Ref_html_wtr_cfg cfg;
 	public Ref_nde IdentifyTxt() {
 		if (HasTxt(itm)) return itm;
 		int itm_related_len = itm.Related_len();
@@ -132,7 +132,7 @@ class Xoh_ref_list_fmtr implements Bry_fmtr_arg {
 			Fmt(itm_fmtr, wiki, trg, link_itm);
 		}
 	}
-	private void Fmt(Bry_fmtr itm_fmtr, Xow_wiki wiki, Bry_bfr trg, Ref_nde itm) {
+	private void Fmt(Bry_fmtr itm_fmtr, Xowe_wiki wiki, Bry_bfr trg, Ref_nde itm) {
 		int itm_idx_minor = itm.Idx_minor();
 		if (itm_idx_minor < 0) return;	// HACK: <ref follow created a negative index; ignore these references for now; de.wikisource.org/wiki/Seite:Die Trunksucht.pdf/63; DATE:2013-06-22
 		byte[] backlabel 

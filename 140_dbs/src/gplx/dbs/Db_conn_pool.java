@@ -16,11 +16,15 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-import gplx.dbs.engines.mems.*;
+import gplx.dbs.engines.*; import gplx.dbs.engines.nulls.*; import gplx.dbs.engines.mems.*; import gplx.dbs.engines.tdbs.*;
+import gplx.dbs.engines.sqlite.*; import gplx.dbs.engines.mysql.*; import gplx.dbs.engines.postgres.*;
 public class Db_conn_pool {
-	private final HashAdp conn_hash = HashAdp_.new_(); private final HashAdp engine_hash = HashAdp_.new_();
-	Db_conn_pool() {this.Init();}
-	public Db_conn Get_or_new__sqlite(Io_url url) {return Get_or_new(Db_url_.sqlite_(url));}
+	private final HashAdp conn_hash = HashAdp_.new_(); private final HashAdp engine_hash = HashAdp_.new_();		
+	public void Clear() {conn_hash.Clear();}
+	public void Del(Db_url url) {conn_hash.Del(url.Xto_api());}
+	public Db_conn Get_or_new__mem(String db)		{return Get_or_new(Db_url__mem.new_(db));}
+	public Db_conn Get_or_new__sqlite(Io_url url)	{return Get_or_new(Db_url_.sqlite_(url));}
+	public Db_conn Get_or_new(String s)				{return Get_or_new(Db_url_.parse_(s));}
 	public Db_conn Get_or_new(Db_url url) {
 		Db_conn rv = (Db_conn)conn_hash.Fetch(url.Xto_api());
 		if (rv == null) {
@@ -31,19 +35,12 @@ public class Db_conn_pool {
 		}
 		return rv;
 	}
-	public Db_conn Set_mem(String db, Db_meta_tbl... tbls) {
-		Db_url url = Db_url__mem.new_(db);
-		Db_engine__mem engine = new Db_engine__mem(url, tbls);
-		Db_conn conn = new Db_conn(engine);
-		conn_hash.AddReplace(url.Xto_api(), conn);
-		return conn;
-	}
-	private void Init() {
-		this.Engines__add(Db_engine_null._, TdbEngine._, Mysql_engine._, Postgres_engine._, Sqlite_engine._, Db_engine__mem._);
-	}
 	public void Engines__add(Db_engine... ary) {
 		for (Db_engine itm : ary)
 			engine_hash.Add(itm.Tid(), itm);
 	}
-        public static final Db_conn_pool I = new Db_conn_pool();
+        public static final Db_conn_pool I = new Db_conn_pool(); Db_conn_pool() {this.Init();}
+	private void Init() {
+		this.Engines__add(Null_engine._, TdbEngine._, Mysql_engine._, Postgres_engine._, Sqlite_engine._, Db_engine__mem._);
+	}
 }

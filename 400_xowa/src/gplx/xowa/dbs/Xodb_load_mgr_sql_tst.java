@@ -45,9 +45,9 @@ class Xodb_load_mgr_sql_fxt {
 			fxt.Ctor_fsys();
 			fxt.Init_db_sqlite();
 			wiki = fxt.Wiki();
-			app = wiki.App();
+			app = wiki.Appe();
 		}
-	}	Db_mgr_fxt fxt; Int_obj_ref next_id = Int_obj_ref.new_(1); Xoa_app app; Xow_wiki wiki;
+	}	Db_mgr_fxt fxt; Int_obj_ref next_id = Int_obj_ref.new_(1); Xoae_app app; Xowe_wiki wiki;
 
 	public Xodb_page[] pages_(Xodb_page... ary) {return ary;}
 	public Xodb_page ctg_(int id, String ttl, boolean hidden, int count_subcs, int count_files, int count_pages) {

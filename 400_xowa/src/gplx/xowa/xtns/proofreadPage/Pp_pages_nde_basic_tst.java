@@ -84,7 +84,7 @@ public class Pp_pages_nde_basic_tst {
 		));
 	}
 	@Test  public void Err_page_ns_doesnt_exist() {
-		fxt.Wiki().Ns_mgr_(Xow_ns_mgr_.default_(gplx.xowa.langs.cases.Xol_case_mgr_.Ascii()));
+		fxt.Wiki().Ns_mgr().Init().Clear();	// call .Clear() to remove ns for Page / Index
 		fxt.Wiki().Cfg_parser().Xtns().Itm_pages().Reset();	// must reset to clear cached valid ns_page from previous tests
 		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to=3 />", "&lt;pages index=&quot;A&quot; from=1 to=3 /&gt;");
 		fxt.Wiki().Cfg_parser().Xtns().Itm_pages().Reset();	// must reset to clear cached invalid ns_page for next tests

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-import gplx.core.criterias.*;
+import gplx.core.criterias.*; import gplx.dbs.qrys.*;
 public class Mem_tbl {
 	private final ListAdp rows = ListAdp_.new_(); private final ListAdp where_rows = ListAdp_.new_();
 	public int Insert(Db_stmt__mem stmt) {

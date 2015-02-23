@@ -42,7 +42,7 @@ public class Xoac_wiki_grp_tst {
 class Xoac_wiki_grp_fxt {
 	Xoa_wiki_mgr wiki_mgr; Tst_mgr tst_mgr = new Tst_mgr();
 	public void Clear() {
-		Xoa_app app = Xoa_app_fxt.app_();
+		Xoae_app app = Xoa_app_fxt.app_();
 		wiki_mgr = app.Wiki_mgr();			
 	}
 	public Xoac_wiki_itm_chkr itm_(String key) {return new Xoac_wiki_itm_chkr(key);}

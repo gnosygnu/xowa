@@ -36,7 +36,7 @@ public class Imap_parser_tst {
 	@Test  public void Circle_fail_invalid()	{fxt.Test_shape_err("rect 1 2..3 4 [[A]]"							, "imagemap_invalid_coord");}
 }
 class Imap_fxt_base {
-	protected Xoa_app app; protected Xow_wiki wiki;
+	protected Xoae_app app; protected Xowe_wiki wiki;
 	@gplx.Virtual public void Reset() {
 		app = Xoa_app_fxt.app_();
 		wiki = Xoa_app_fxt.wiki_tst_(app);

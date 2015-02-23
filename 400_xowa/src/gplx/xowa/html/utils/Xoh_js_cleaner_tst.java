@@ -32,7 +32,7 @@ class Xoh_js_cleaner_fxt {
 			wiki = Xoa_app_fxt.wiki_tst_(app);
 			mgr = app.Html_mgr().Js_cleaner();
 		}
-	}	private Xoa_app app; Xow_wiki wiki; Xoh_js_cleaner mgr;
+	}	private Xoae_app app; Xowe_wiki wiki; Xoh_js_cleaner mgr;
 	public void Test_clean(String raw_str, String expd) {
 		byte[] raw = Bry_.new_ascii_(raw_str);
 		byte[] actl = mgr.Clean(wiki, raw, 0, raw.length);

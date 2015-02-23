@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns; import gplx.*; import gplx.xowa.*;
 public interface Xox_mgr extends GfoInvkAble {
 	byte[] Xtn_key();
-	void Xtn_ctor_by_app(Xoa_app app);
-	void Xtn_ctor_by_wiki(Xow_wiki wiki);
-	void Xtn_init_by_app(Xoa_app app);
-	void Xtn_init_by_wiki(Xow_wiki wiki);
+	void Xtn_ctor_by_app(Xoae_app app);
+	void Xtn_ctor_by_wiki(Xowe_wiki wiki);
+	void Xtn_init_by_app(Xoae_app app);
+	void Xtn_init_by_wiki(Xowe_wiki wiki);
 	Xox_mgr Clone_new();
 }

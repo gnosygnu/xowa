@@ -21,7 +21,7 @@ public class Move_page implements Xows_page {
 	private Move_trg_ns_list_fmtr ns_list_fmtr = new Move_trg_ns_list_fmtr();
 	private Move_url_args args = new Move_url_args();
 	private Xoa_ttl src_ttl;
-	public void Special_gen(Xoa_url calling_url, Xoa_page page, Xow_wiki wiki, Xoa_ttl ttl) {
+	public void Special_gen(Xoa_url calling_url, Xoae_page page, Xowe_wiki wiki, Xoa_ttl ttl) {
 		args.Parse(calling_url);
 		byte[] src_ttl_bry = args.Src_ttl();
 		src_ttl = Xoa_ttl.parse_(wiki, src_ttl_bry);
@@ -33,7 +33,7 @@ public class Move_page implements Xows_page {
 		page.Html_data().Html_restricted_n_();	// [[Special:]] pages allow all HTML
 		page.Data_raw_(html);
 	}
-	private void Exec_rename(Xow_wiki wiki, Xoa_page page) {
+	private void Exec_rename(Xowe_wiki wiki, Xoae_page page) {
 		gplx.xowa.dbs.Xodb_save_mgr save_mgr = wiki.Db_mgr().Save_mgr();
 		int trg_ns_id = args.Trg_ns();
 		Xow_ns trg_ns = wiki.Ns_mgr().Ids_get_or_null(trg_ns_id); if (trg_ns == null) throw Err_.new_fmt_("unknown ns: ns={0}", trg_ns_id);
@@ -57,8 +57,8 @@ public class Move_page implements Xows_page {
 			save_mgr.Data_rename(page, trg_ns_id, trg_ttl_bry);
 		wiki.Data_mgr().Redirect(page, trg_ns.Gen_ttl(trg_ttl_bry));
 	}
-	private byte[] Bld_html(Xoa_page page) {
-		Xow_wiki wiki = page.Wiki(); Xow_msg_mgr msg_mgr = wiki.Msg_mgr();
+	private byte[] Bld_html(Xoae_page page) {
+		Xowe_wiki wiki = page.Wikie(); Xow_msg_mgr msg_mgr = wiki.Msg_mgr();
 		if (src_ttl == null) return Bry_.Empty;
 		ns_list_fmtr.Init_by_page(wiki, page, src_ttl);
 		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_m001();
@@ -116,8 +116,8 @@ public class Move_page implements Xows_page {
 	), "move-page-legend", "src_href", "src_title", "src_text", "newtitle", "trg_ns_list", "trg_title", "move-leave-redirect", "movepagebtn");
 }
 class Move_trg_ns_list_fmtr implements Bry_fmtr_arg {
-	private Xow_wiki wiki; private Xoa_ttl ttl;
-	public void Init_by_page(Xow_wiki wiki, Xoa_page page, Xoa_ttl ttl) {
+	private Xowe_wiki wiki; private Xoa_ttl ttl;
+	public void Init_by_page(Xowe_wiki wiki, Xoae_page page, Xoa_ttl ttl) {
 		this.wiki = wiki;
 		this.ttl = ttl;
 	}

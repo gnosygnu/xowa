@@ -18,11 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.langs.cases.*; import gplx.xowa.wikis.*; import gplx.xowa.xtns.scribunto.*;
 class Xou_user_ {
-	public static Xow_wiki new_or_create_(Xou_user user, Xoa_app app) {
-		Io_url wiki_dir = user.Fsys_mgr().Home_wiki_dir().GenSubDir_nest("wiki", Xow_wiki_domain_.Key_home_str);
+	public static Xowe_wiki new_or_create_(Xou_user user, Xoae_app app) {
+		Io_url wiki_dir = user.Fsys_mgr().Home_wiki_dir().GenSubDir_nest("wiki", Xow_domain_.Tid_str_home);
 		Xol_lang lang = app.Lang_mgr().Get_by_key_or_new(app.Lang_mgr().Default_lang());
-		lang.Init_by_load();	// NOTE: lang.Load() must occur before new Xow_wiki b/c wiki will create parsers based on lang
-		Xow_wiki rv = new Xow_wiki(app, wiki_dir, ns_home_(lang.Case_mgr()), lang);
+		lang.Init_by_load();	// NOTE: lang.Load() must occur before new Xowe_wiki b/c wiki will create parsers based on lang
+		Xowe_wiki rv = new Xowe_wiki(app, wiki_dir, ns_home_(lang.Case_mgr()), lang);
 		app.Wiki_mgr().Add(rv);
 		rv.Sys_cfg().Xowa_cmd_enabled_(true);
 		rv.Sys_cfg().Xowa_proto_enabled_(true);
@@ -32,7 +32,7 @@ class Xou_user_ {
 		usr_dlg.Log_many(GRP_KEY, "user_system_cfg.create", "creating user_system_cfg.gfs: ~{0}", cfg_fil.Raw());
 		Io_mgr._.SaveFilStr(cfg_fil, User_system_cfg_text);
 	}
-	public static void Bookmarks_make(Xoa_app app, Xow_wiki home_wiki) {
+	public static void Bookmarks_make(Xoae_app app, Xowe_wiki home_wiki) {
 		app.Usr_dlg().Log_many(GRP_KEY, "bookmarks.create", "creating bookmarks page");
 		home_wiki.Db_mgr().Save_mgr().Data_create(Xoa_ttl.parse_(home_wiki, Bry_.new_ascii_("Data:Bookmarks")), Bry_.new_ascii_(Bookmarks_text));
 	}

@@ -30,7 +30,7 @@ public class Xob_wdata_pid_txt extends Xob_wdata_pid_base {
 	}
 }
 class Wdata_idx_bldr_pid extends Wdata_idx_mgr_base {
-	public Wdata_idx_bldr_pid(Xob_itm_dump_base wkr, Xob_bldr bldr, Xow_wiki wiki, int dump_fil_len) {this.Ctor(wkr, bldr, wiki, dump_fil_len);}
+	public Wdata_idx_bldr_pid(Xob_itm_dump_base wkr, Xob_bldr bldr, Xowe_wiki wiki, int dump_fil_len) {this.Ctor(wkr, bldr, wiki, dump_fil_len);}
 	public void Add(byte[] lang, byte[] prop_key, byte[] pid) {
 		Wdata_idx_wtr wtr = Get_or_new(lang);
 		wtr.Write(prop_key, pid);

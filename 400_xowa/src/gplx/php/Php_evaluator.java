@@ -249,8 +249,7 @@ public class Php_evaluator implements Php_tkn_wkr {
 		msg_log.Add_itm_many(itm, src, bgn, end, args);
 	}
 	public static final Gfo_msg_itm Expecting_itm_failed = Gfo_msg_itm_.new_warn_(Php_parser.Log_nde, "expecting_itm_failed", "expecting_itm ~{0} but got ~{1} instead");
-	static final byte Mode_key_bgn = 1, Mode_key_end = 2, Mode_expect = 3, Mode_suspend = 4, Mode_val = 5, Mode_ary_subs = 6, Mode_ary_dlm = 7, Mode_ary_term = 8, Mode_brack_itm = 9;
-	
+	private static final byte Mode_key_bgn = 1, Mode_key_end = 2, Mode_expect = 3, Mode_suspend = 4, Mode_val = 5, Mode_ary_subs = 6, Mode_ary_dlm = 7, Mode_ary_term = 8, Mode_brack_itm = 9;		
 }
 class Php_scanner_frame {
 	public Php_scanner_frame(Php_itm_ary ary) {this.ary = ary;}

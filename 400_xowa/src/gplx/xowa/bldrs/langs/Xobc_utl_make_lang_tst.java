@@ -145,9 +145,9 @@ class Xobc_utl_make_lang_fxt {
 	public Xobc_utl_make_lang_kwds Kwd_mgr() {return mgr.Kwd_mgr();}
 	public Xobc_utl_make_lang_fxt Clear() {
 		app = Xoa_app_fxt.app_();
-		mgr = new Xobc_utl_make_lang(app);
+		mgr = new Xobc_utl_make_lang(app.Lang_mgr(), app.Fsys_mgr(), app.Msg_log());
 		return this;
-	}	private String_bldr sb = String_bldr_.new_(); private Xoa_app app;
+	}	private String_bldr sb = String_bldr_.new_(); private Xoae_app app;
 	public Xobcl_kwd_row row_(String key, String... itms) {return new Xobcl_kwd_row(Bry_.new_ascii_(key), Bry_.Ary(itms));} 
 	public void Parse_rows(String raw, Xobcl_kwd_row... expd) {Tfds.Eq_str_lines(Xto_str(expd), Xto_str(Xobc_utl_make_lang_kwds.Parse(Bry_.new_ascii_(raw))));}
 	public void Ini_file_mw_core(String lang, String raw) {
@@ -155,7 +155,7 @@ class Xobc_utl_make_lang_fxt {
 		Io_mgr._.SaveFilStr(fil, raw);
 	}
 	public void Tst_file_xo(String lang, String expd) {
-		Io_url fil = Xol_lang_.xo_lang_fil_(app, lang);
+		Io_url fil = Xol_lang_.xo_lang_fil_(app.Fsys_mgr(), lang);
 		Tfds.Eq_str_lines(expd, Io_mgr._.LoadFilStr(fil));
 	}
 	private String Xto_str(Xobcl_kwd_row[] expd) {

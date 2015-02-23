@@ -66,7 +66,7 @@ public class Gallery_itm_parser_tst {
 	}
 }
 class Gallery_itm_parser_fxt {
-	private Xoa_app app; private Xow_wiki wiki;
+	private Xoae_app app; private Xowe_wiki wiki;
 	private Gallery_itm_parser parser;
 	public Gallery_itm_parser_fxt Init() {
 		this.app = Xoa_app_fxt.app_();

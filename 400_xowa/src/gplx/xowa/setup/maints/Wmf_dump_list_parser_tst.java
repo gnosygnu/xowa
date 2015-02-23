@@ -61,8 +61,8 @@ public class Wmf_dump_list_parser_tst {
 //				if (domain_bry == null) continue;			// not a standard WMF wiki; ignore
 //				if (Bry_finder.Find_fwd(domain_bry, Bry_.new_ascii_("wikimania")) != Bry_.NotFound) continue;
 //				if (excluded_domains.Has(domain_bry)) continue;
-//				Xow_wiki_domain domain_itm = Xow_wiki_domain_.parse_by_domain(domain_bry);
-//				byte[] tid_name = Xto_display_name(Xow_wiki_domain_.Key_by_tid(domain_itm.Wiki_tid()));
+//				Xow_domain domain_itm = Xow_domain_.parse(domain_bry);
+//				byte[] tid_name = Xto_display_name(Xow_domain_.Tid__get_bry(domain_itm.Wiki_tid()));
 //				sql_bfr
 //					.Add_byte(Byte_ascii.Paren_bgn)
 //					.Add_int_variable(counter++)
@@ -95,9 +95,9 @@ public class Wmf_dump_list_parser_tst {
 ////			Io_mgr._.AppendFilBfr(temp, bld_bfr);
 //		}
 //		private static byte[] Xto_display_name(byte[] v) {
-//			if		(Bry_.Eq(v, Xow_wiki_domain_.Key_wikimediafoundation_bry))	return Bry_.new_ascii_("Wikimedia Foundation");
-//			else if	(Bry_.Eq(v, Xow_wiki_domain_.Key_species_bry))				return Bry_.new_ascii_("Wikispecies");
-//			else if	(Bry_.Eq(v, Xow_wiki_domain_.Key_mediawiki_bry))			return Bry_.new_ascii_("MediaWiki");
+//			if		(Bry_.Eq(v, Xow_domain_.Tid_bry_wikimediafoundation_bry))	return Bry_.new_ascii_("Wikimedia Foundation");
+//			else if	(Bry_.Eq(v, Xow_domain_.Tid_bry_species_bry))				return Bry_.new_ascii_("Wikispecies");
+//			else if	(Bry_.Eq(v, Xow_domain_.Tid_bry_mediawiki_bry))			return Bry_.new_ascii_("MediaWiki");
 //			else																	return Bry_.Add(Byte_ascii.Case_upper(v[0]), Bry_.Mid(v, 1, v.length));
 //		}
 }

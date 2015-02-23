@@ -18,17 +18,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.imports.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.imports.*;
 import gplx.core.flds.*; import gplx.ios.*; import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.ctgs.*; 
 public class Xob_categorylinks_sql_make implements Io_make_cmd {
-	private Xow_wiki wiki; private Sql_file_parser sql_parser; private Db_idx_mode idx_mode;
+	private Xowe_wiki wiki; private Sql_file_parser sql_parser; private Db_idx_mode idx_mode;
 	private Xodb_mgr_sql db_mgr;
-	public Xob_categorylinks_sql_make(Sql_file_parser sql_parser, Xow_wiki wiki, Db_idx_mode idx_mode) {
+	public Xob_categorylinks_sql_make(Sql_file_parser sql_parser, Xowe_wiki wiki, Db_idx_mode idx_mode) {
 		this.wiki = wiki; this.sql_parser = sql_parser; this.idx_mode = idx_mode;
 	}
 	public Io_sort_cmd Make_dir_(Io_url v) {return this;}
 	public void Sort_bgn() {
-		usr_dlg = wiki.App().Usr_dlg();
+		usr_dlg = wiki.Appe().Usr_dlg();
 		db_mgr = Xodb_mgr_sql.Get_or_load(wiki);
 		name_id_rdr = New_registry_rdr(wiki, usr_dlg);
-		cur_cat_file_max = wiki.App().Setup_mgr().Dump_mgr().Db_categorylinks_max();
+		cur_cat_file_max = wiki.Appe().Setup_mgr().Dump_mgr().Db_categorylinks_max();
 
 		db_mgr.Delete_by_tid(Xodb_file_tid.Tid_category);
 		Xodb_fsys_mgr fsys_mgr = db_mgr.Fsys_mgr();
@@ -70,7 +70,7 @@ public class Xob_categorylinks_sql_make implements Io_make_cmd {
 		Xodb_fsys_mgr fsys_mgr = db_mgr.Fsys_mgr();
 		Ctg_grp_end(Ttl_last);
 		File_close();
-		db_mgr.Tbl_xowa_db().Commit_all(fsys_mgr.Conn_core(), fsys_mgr.Files_ary());
+		db_mgr.Tbl_xowa_db().Commit_all(fsys_mgr.Files_ary());
 		if (db_mgr.Category_version() == Xoa_ctg_mgr.Version_null)	// NOTE: ctg_v1 wkr will set this to v1; only set to v2 if null  
 			db_mgr.Category_version_update(false);
 		usr_dlg.Log_many("", "", "import.category.v2: insert done; committing; rows=~{0}", row_count);
@@ -132,7 +132,7 @@ public class Xob_categorylinks_sql_make implements Io_make_cmd {
 			}
 		}
 	}
-	private static Io_line_rdr New_registry_rdr(Xow_wiki wiki, Gfo_usr_dlg usr_dlg) {
+	private static Io_line_rdr New_registry_rdr(Xowe_wiki wiki, Gfo_usr_dlg usr_dlg) {
 		Io_url make_dir = Xob_category_registry_sql.Get_dir_output(wiki);
 		usr_dlg.Prog_many("", "", "loading category_registry files: ~{0}", make_dir.Raw());
 		Io_url[] urls = Io_mgr._.QueryDir_args(make_dir).ExecAsUrlAry();

@@ -21,8 +21,8 @@ import gplx.intl.*; import gplx.xowa.langs.numbers.*;
 public class Pf_formatnum_fa_tst {
 	private Xop_fxt fxt;
 	@Before public void init() {
-		Xoa_app app = Xoa_app_fxt.app_();
-		Xol_lang lang = new Xol_lang(app, Bry_.new_ascii_("fa")).Init_by_load_assert();
+		Xoae_app app = Xoa_app_fxt.app_();
+		Xol_lang lang = new Xol_lang(app.Lang_mgr(), Bry_.new_ascii_("fa")).Init_by_load_assert();
 		String gfs = String_.Concat_lines_nl
 		( "numbers {"
 		, "  digits {"
@@ -44,7 +44,7 @@ public class Pf_formatnum_fa_tst {
 		, "}"
 		);
 		app.Gfs_mgr().Run_str_for(lang, gfs);
-		Xow_wiki wiki = Xoa_app_fxt.wiki_(app, "fa.wikipedia.org", lang);
+		Xowe_wiki wiki = Xoa_app_fxt.wiki_(app, "fa.wikipedia.org", lang);
 		fxt = new Xop_fxt(app, wiki);
 	}
 	@Test  public void Basic()	{

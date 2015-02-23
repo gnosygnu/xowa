@@ -24,7 +24,7 @@ public class Scrib_invoke_func extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_invoke;}
 	@Override public Pf_func New(int id, byte[] name) {return new Scrib_invoke_func().Name_(name);}
 	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {// {{#invoke:mod_name|prc_name|prc_args...}}
-		Xow_wiki wiki = ctx.Wiki();
+		Xowe_wiki wiki = ctx.Wiki();
 		byte[] mod_name = Eval_argx(ctx, src, caller, self);
 		if (Bry_.Len_eq_0(mod_name)) {Error(bfr, wiki.Msg_mgr(), Err_mod_missing); return;}		// EX: "{{#invoke:}}"
 		int args_len = self.Args_len();
@@ -57,11 +57,19 @@ public class Scrib_invoke_func extends Pf_func_base {
 				invoke_wkr.Eval_end(ctx.Cur_page(), mod_name, fnc_name, log_time_bgn);
 		}
 		catch (Exception e) {
-			Error(bfr, wiki.Msg_mgr(), "");
+			String invoke_error = Err_msg_make(e);
+			Error(bfr, wiki.Msg_mgr(), invoke_error);
 			bfr.Add(Html_tag_.Comm_bgn).Add_str(Err_.Message_gplx_brief(e)).Add(Html_tag_.Comm_end);
-			ctx.App().Usr_dlg().Warn_many("", "", "invoke failed: ~{0} ~{1} ~{2}", String_.new_utf8_(ctx.Cur_page().Ttl().Raw()), String_.new_utf8_(src, self.Src_bgn(), self.Src_end()), Err_.Message_gplx_brief(e));
+			Scrib_err_filter_mgr err_filter_mgr = invoke_wkr.Err_filter_mgr();
+			if (err_filter_mgr.Count_gt_0() && err_filter_mgr.Match(String_.new_utf8_(mod_name), String_.new_utf8_(fnc_name), invoke_error))
+				ctx.App().Usr_dlg().Warn_many("", "", "invoke failed: ~{0} ~{1} ~{2}", String_.new_utf8_(ctx.Cur_page().Ttl().Raw()), String_.new_utf8_(src, self.Src_bgn(), self.Src_end()), Err_.Message_gplx_brief(e));
 			Scrib_core.Core_invalidate_when_page_changes();	// NOTE: invalidate core when page changes, not for rest of page, else page with many errors will be very slow due to multiple invalidations; PAGE:th.d:all; DATE:2014-10-03
 		}
+	}
+	private static String Err_msg_make(Exception e) {// DATE:2015-02-03
+		String rv = Err_.Message_lang(e);	// EX: class gplx.Err 	=Module:testBK:16 The title of the template is missing ':'\n[STACK]
+		int nl_pos = String_.FindFwd(rv, "\n",0); if (nl_pos == Bry_.NotFound) nl_pos = String_.Len(rv); rv = String_.Mid(rv, 0, nl_pos);	// gplx errors include message stack which should be removed
+		return String_.Trim(String_.Replace(rv, "class gplx.Err", ""));	// remove leading "gplx.Err" and trim
 	}
 	public static void Error(Bry_bfr bfr, Xow_msg_mgr msg_mgr, String error) {Error(bfr, msg_mgr, Bry_.new_utf8_(error));}
 	public static void Error(Bry_bfr bfr, Xow_msg_mgr msg_mgr, byte[] error) {

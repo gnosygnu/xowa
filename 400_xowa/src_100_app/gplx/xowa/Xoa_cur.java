@@ -18,11 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.xowa.gui.views.*;
 public class Xoa_cur implements GfoInvkAble {
-	public Xoa_cur(Xoa_app app) {this.app = app;} private Xoa_app app;
+	public Xoa_cur(Xoae_app app) {this.app = app;} private Xoae_app app;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_wiki)) {
 			Xog_win_itm win = app.Gui_mgr().Browser_win();
-			return win.Active_tab() == null ? GfoInvkAble_.Null : win.Active_page().Wiki(); // null check when called from mass html gen; DATE:2014-06-04
+			return win.Active_tab() == null ? GfoInvkAble_.Null : win.Active_page().Wikie(); // null check when called from mass html gen; DATE:2014-06-04
 		}
 		else if	(ctx.Match(k, Invk_win))			return app.Gui_mgr().Browser_win();
 		else if	(ctx.Match(k, Invk_user))			return app.User();

@@ -22,7 +22,7 @@ public class Xobc_core_cleanup extends Xob_itm_basic_base implements Xob_cmd {
 	private String bz2_cmd;
 	private boolean delete_all, delete_tmp;
 	private Criteria_ioMatch[] delete_by_match_ary;
-	public Xobc_core_cleanup(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
+	public Xobc_core_cleanup(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Cmd_key() {return KEY;} public static final String KEY = "core.cleanup";
 	public Xobc_core_cleanup Delete_sqlite3_(boolean v){delete_sqlite3 = v; return this;} private boolean delete_sqlite3;
 	public Xobc_core_cleanup Delete_xml_(boolean v)	{delete_xml = v; return this;} private boolean delete_xml;
@@ -103,8 +103,8 @@ public class Xobc_core_cleanup extends Xob_itm_basic_base implements Xob_cmd {
 		for (int i = 0; i < dirs_len; i++)
 			Io_mgr._.DeleteDirDeep(dirs[i]);
 	}
-	public static void Delete_wiki_sql(Xow_wiki wiki) {
-		Gfo_usr_dlg usr_dlg = wiki.App().Usr_dlg(); Io_url wiki_root_dir = wiki.Fsys_mgr().Root_dir();
+	public static void Delete_wiki_sql(Xowe_wiki wiki) {
+		Gfo_usr_dlg usr_dlg = wiki.Appe().Usr_dlg(); Io_url wiki_root_dir = wiki.Fsys_mgr().Root_dir();
 		if (wiki.Db_mgr().Tid() == gplx.xowa.dbs.Xodb_mgr_sql.Tid_sql)		// NOTE: must check; if empty dir (or text db) than db_mgr will be txt
 			wiki.Db_mgr_as_sql().Fsys_mgr().Rls();							// NOTE: if sqlite files, must rls;
 		Io_url[] sqlite3_files = Io_mgr._.QueryDir_args(wiki_root_dir).FilPath_("*.sqlite3").ExecAsUrlAry();

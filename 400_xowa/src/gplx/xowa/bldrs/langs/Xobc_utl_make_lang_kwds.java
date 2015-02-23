@@ -16,9 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.langs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+import gplx.xowa.langs.*;
 public class Xobc_utl_make_lang_kwds implements GfoInvkAble, Xol_lang_transform {
-	public Xobc_utl_make_lang_kwds(Xoa_app app) {this.app = app;} private Xoa_app app;
-	
+	private final Xoa_lang_mgr lang_mgr;
+	public Xobc_utl_make_lang_kwds(Xoa_lang_mgr lang_mgr) {this.lang_mgr = lang_mgr;}		
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_set))					Set(m.ReadBry("langs"), m.ReadBry("text"));
 		else if	(ctx.Match(k, Invk_keep_trailing_colon))	Parse_keep_trailing_colon(m.ReadBry("langs"), m.ReadBry("text"));
@@ -47,7 +48,7 @@ public class Xobc_utl_make_lang_kwds implements GfoInvkAble, Xol_lang_transform 
 		int hash_len = hash.Count();
 		for (int i = 0; i < hash_len; i++) {
 			Xobcl_kwd_lang cfg_lang = (Xobcl_kwd_lang)hash.FetchAt(i); 
-			Xol_lang lang = app.Lang_mgr().Get_by_key(cfg_lang.Key_bry()); if (lang == null) continue;
+			Xol_lang lang = lang_mgr.Get_by_key(cfg_lang.Key_bry()); if (lang == null) continue;
 			int cfg_grp_len = cfg_lang.Grps().length;
 			for (int j = 0; j < cfg_grp_len; j++) {					
 				Xobcl_kwd_row cfg_grp = cfg_lang.Grps()[j];
@@ -81,9 +82,9 @@ public class Xobc_utl_make_lang_kwds implements GfoInvkAble, Xol_lang_transform 
 		return cfg_grp.Itms().length == 0 || cfg_grp.Itms_has(kwd_word);
 	}
 	public void Set(byte[] langs_bry, byte[] kwds) {
-		OrderedHash langs = app.Lang_mgr().Xto_hash(langs_bry);
+		OrderedHash langs = lang_mgr.Xto_hash(langs_bry);
 		int langs_len = langs.Count();
-		Xol_kwd_mgr kwd_mgr = new Xol_kwd_mgr(app.Lang_mgr().Lang_en());
+		Xol_kwd_mgr kwd_mgr = new Xol_kwd_mgr(lang_mgr.Lang_en());
 		for (int i = 0; i < langs_len; i++) {
 //				Xol_lang_itm lang = (Xol_lang_itm)langs.FetchAt(i);
 			Xol_lang_srl.Load_keywords(kwd_mgr, kwds);
@@ -94,7 +95,7 @@ public class Xobc_utl_make_lang_kwds implements GfoInvkAble, Xol_lang_transform 
 	public void Parse_keep_trailing_colon(byte[] langs_bry, byte[] kwds) {Parse(langs_bry, kwds, trailing_colons);}	private OrderedHash trailing_colons = OrderedHash_.new_bry_();
 	private void Parse(byte[] langs_bry, byte[] kwds, OrderedHash hash) {
 		Xobcl_kwd_row[] itms = Parse(kwds);
-		OrderedHash langs = app.Lang_mgr().Xto_hash(langs_bry);
+		OrderedHash langs = lang_mgr.Xto_hash(langs_bry);
 		int langs_len = langs.Count();
 		for (int i = 0; i < langs_len; i++) {
 			Xoac_lang_itm itm = (Xoac_lang_itm)langs.FetchAt(i);

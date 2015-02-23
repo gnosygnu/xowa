@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.schemas; import gplx.*; import gplx.dbs.*;
+import gplx.dbs.qrys.*;
 public class Schema_loader_mgr_ {
         public static final Schema_loader_mgr Null = new Schema_loader_mgr__null();
         public static final Schema_loader_mgr Sqlite = new Schema_loader_mgr__sqlite();

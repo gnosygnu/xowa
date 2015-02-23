@@ -127,14 +127,14 @@ class Wdata_pf_property_data_fxt {
 		expd_id_int = -1;
 		expd_q = expd_of = null;
 		return this;
-	}	private Xoa_app app; private Wdata_wiki_mgr wdata_mgr; private Xop_fxt parser_fxt;
+	}	private Xoae_app app; private Wdata_wiki_mgr wdata_mgr; private Xop_fxt parser_fxt;
 	public Wdata_pf_property_data_fxt Expd_id_int_(int v) {expd_id_int = v; return this;} private int expd_id_int;
 	public Wdata_pf_property_data_fxt Expd_q_(String v) {expd_q = Bry_.new_ascii_(v); return this;} private byte[] expd_q;
 	public Wdata_pf_property_data_fxt Expd_of_(String v) {expd_of = Bry_.new_ascii_(v); return this;} private byte[] expd_of;
 	public void Test_parse(String raw) {
 		Wdata_pf_property_data actl = new Wdata_pf_property_data();
 		byte[] raw_bry = Bry_.new_utf8_(raw);
-		Xow_wiki wiki = parser_fxt.Wiki(); Xop_ctx ctx = wiki.Ctx();
+		Xowe_wiki wiki = parser_fxt.Wiki(); Xop_ctx ctx = wiki.Ctx();
 		Xop_tkn_mkr tkn_mkr = app.Tkn_mkr();
 		Wdata_pf_property pfunc = new Wdata_pf_property();
 		Xop_root_tkn root = tkn_mkr.Root(raw_bry);

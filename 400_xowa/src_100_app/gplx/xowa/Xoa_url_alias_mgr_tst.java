@@ -26,7 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //			), 	KeyVal_.new_("w:Earth", "en.wikipedia.org/wiki/Earth"), KeyVal_.new_("d:Earth", "en.wiktionary.org/wiki/Earth"), KeyVal_.new_("x:Earth", null));
 //		}
 //		private void Add_bulk_tst(String raw_str, params KeyVal[] expd_ary) {
-//			Xoa_app app = Xoa_app_fxt.app_();
+//			Xoae_app app = Xoa_app_fxt.app_();
 //			Xoa_url_alias_mgr mgr = new Xoa_url_alias_mgr(app);
 //			byte[] raw_bry = Bry_.new_ascii_(raw_str);
 //			mgr.Add_bulk(raw_bry);

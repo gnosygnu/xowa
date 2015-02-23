@@ -24,42 +24,42 @@ public class Xoa_css_extractor {
 	public Xoa_css_extractor Failover_dir_(Io_url v) {failover_dir = v; return this;} private Io_url failover_dir;
 	public Xoa_css_extractor Wiki_html_dir_(Io_url v) {wiki_html_dir = v; return this;} private Io_url wiki_html_dir;
 	public Xoa_css_extractor Mainpage_url_(String v) {mainpage_url = v; return this;} private String mainpage_url;
-	public Xoa_css_extractor Protocol_prefix_(String v) {protocol_prefix = v; return this;} private String protocol_prefix = "http:";
+	public Xoa_css_extractor Protocol_prefix_(String v) {protocol_prefix = v; return this;} private String protocol_prefix = "https:";// NOTE: changed from http to https; DATE:2015-02-17
 	public Xoa_css_extractor Page_fetcher_(Xow_page_fetcher v) {page_fetcher = v; return this;} private Xow_page_fetcher page_fetcher;
 	public Xoa_css_extractor Css_img_downloader_(Xoa_css_img_downloader v) {this.css_img_downloader = v; return this;} private Xoa_css_img_downloader css_img_downloader;
 	public Xoa_css_extractor Opt_download_css_common_(boolean v) {opt_download_css_common = v; return this;} private boolean opt_download_css_common;
 	public Xoa_css_extractor Url_encoder_(Url_encoder v) {url_encoder = v; return this;} private Url_encoder url_encoder;
 	public Xoa_css_extractor Wiki_code_(byte[] v) {this.wiki_code = v; return this;} private byte[] wiki_code = null;
 	private byte[] mainpage_html; private boolean lang_is_ltr = true;
-	public void Init_by_app(Xoa_app app) {
+	public void Init_by_app(Xoae_app app) {
 		this.usr_dlg = app.Usr_dlg();
-		Xof_download_wkr download_wkr = app.File_mgr().Download_mgr().Download_wkr();
+		Xof_download_wkr download_wkr = app.Wmf_mgr().Download_wkr();
 		this.download_xrg = download_wkr.Download_xrg();
 		css_img_downloader = new Xoa_css_img_downloader().Ctor(usr_dlg, download_wkr, Bry_.new_utf8_(protocol_prefix));
 		failover_dir = app.Fsys_mgr().Bin_any_dir().GenSubDir_nest("html", "xowa", "import");
-		url_encoder = app.Encoder_mgr().Url();
+		url_encoder = Xoa_app_.Utl_encoder_mgr().Url();
 	}
-	public void Install_assert(Xow_wiki wiki, Io_url wiki_html_dir) {
+	public void Install_assert(Xowe_wiki wiki, Io_url wiki_html_dir) {
 		try {
 			Io_url css_common_url = wiki_html_dir.GenSubFil(Css_common_name);
 			Io_url css_wiki_url   = wiki_html_dir.GenSubFil(Css_wiki_name);
 			Xoh_page_wtr_mgr wiki_article = wiki.Html_mgr().Page_wtr_mgr();
 			wiki_article.Css_common_bry_(css_common_url).Css_wiki_bry_(css_wiki_url);
-			if (wiki.Domain_tid() == Xow_wiki_domain_.Tid_home || Env_.Mode_testing()) return;		// NOTE: do not download if home_wiki; also needed for TEST
+			if (wiki.Domain_tid() == Xow_domain_.Tid_int_home || Env_.Mode_testing()) return;		// NOTE: do not download if home_wiki; also needed for TEST
 			if (Io_mgr._.ExistsFil(css_wiki_url)) return;											// css file exists; nothing to generate
-			wiki.App().Usr_dlg().Log_many("", "", "generating css for '~{0}'", wiki.Domain_str());
+			wiki.Appe().Usr_dlg().Log_many("", "", "generating css for '~{0}'", wiki.Domain_str());
 			this.Install(wiki, wiki_html_dir);
 		}
 		catch (Exception e) {	// if error, failover; paranoia catch for outliers like bad network connectivity fail, or MediaWiki: message not existing; DATE:2013-11-21
-			wiki.App().Usr_dlg().Warn_many("", "", "failed while trying to generate css; failing over; wiki='~{0}' err=~{1}", wiki.Domain_str(), Err_.Message_gplx(e));
+			wiki.Appe().Usr_dlg().Warn_many("", "", "failed while trying to generate css; failing over; wiki='~{0}' err=~{1}", wiki.Domain_str(), Err_.Message_gplx(e));
 			Css_common_failover();	// only failover xowa_common.css; xowa_wiki.css comes from MediaWiki:Common.css / Vector.css
 		}
 	}
-	public void Install(Xow_wiki wiki, Io_url wiki_html_dir) {
-		opt_download_css_common = wiki.App().Setup_mgr().Dump_mgr().Css_commons_download();
-		if (!wiki.App().User().Cfg_mgr().Security_mgr().Web_access_enabled()) opt_download_css_common = false;	// if !web_access_enabled, don't download
+	public void Install(Xowe_wiki wiki, Io_url wiki_html_dir) {
+		opt_download_css_common = wiki.Appe().Setup_mgr().Dump_mgr().Css_commons_download();
+		if (!wiki.Appe().User().Cfg_mgr().Security_mgr().Web_access_enabled()) opt_download_css_common = false;	// if !web_access_enabled, don't download
 		this.wiki_domain = wiki.Domain_bry();
-		mainpage_url = "http://" + wiki.Domain_str();	// NOTE: cannot reuse protocol_prefix b/c "//" needs to be added manually; protocol_prefix is used for logo and images which have form of "//domain/image.png"
+		mainpage_url = "https://" + wiki.Domain_str();	// NOTE: cannot reuse protocol_prefix b/c "//" needs to be added manually; protocol_prefix is used for logo and images which have form of "//domain/image.png"; changed to https; DATE:2015-02-17
 		if (page_fetcher == null) page_fetcher = new Xow_page_fetcher_wiki();
 		page_fetcher.Wiki_(wiki);
 		this.wiki_html_dir = wiki_html_dir;
@@ -174,7 +174,7 @@ public class Xoa_css_extractor {
 	}
 	private byte[] Mainpage_download_html() {
 		String main_page_url_temp = mainpage_url;
-		if (Bry_.Eq(wiki_domain, Xow_wiki_domain_.Url_wikidata))	// if wikidata, download css for a Q* page; Main_Page has less css; DATE:2014-09-30
+		if (Bry_.Eq(wiki_domain, Xow_domain_.Domain_bry_wikidata))	// if wikidata, download css for a Q* page; Main_Page has less css; DATE:2014-09-30
 			main_page_url_temp = main_page_url_temp + "/wiki/Q2";
 		String log_msg = usr_dlg.Prog_many("", "main_page.download", "downloading main page for '~{0}'", main_page_url_temp);
 		byte[] main_page_html = download_xrg.Prog_fmt_hdr_(log_msg).Exec_as_bry(main_page_url_temp);

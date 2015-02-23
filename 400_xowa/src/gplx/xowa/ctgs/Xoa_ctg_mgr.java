@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.ctgs; import gplx.*; import gplx.xowa.*;
 public class Xoa_ctg_mgr implements GfoInvkAble {
-	public void Init_by_app(Xoa_app app) {
+	public void Init_by_app(Xoae_app app) {
 		pagectgs_wtr = new Xoctg_pagelist_wtr().Init_by_app(app);
 	}
 	public boolean Pagecats_grouping_enabled() {return pagecats_grouping_enabled;} private boolean pagecats_grouping_enabled = false;

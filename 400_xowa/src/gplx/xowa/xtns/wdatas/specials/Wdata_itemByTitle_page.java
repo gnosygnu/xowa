@@ -22,10 +22,10 @@ public class Wdata_itemByTitle_page implements Xows_page {
 	private static final byte[] Arg_site = Bry_.new_ascii_("site"), Arg_page = Bry_.new_ascii_("page");
 	public Bry_fmtr Html_fmtr() {return html_fmtr;}
 	private Wdata_itemByTitle_cfg cfg;
-	public void Special_gen(Xoa_url calling_url, Xoa_page page, Xow_wiki wiki, Xoa_ttl ttl) {
-		if (cfg == null) cfg = (Wdata_itemByTitle_cfg)wiki.App().Special_mgr().Get_or_null(Wdata_itemByTitle_cfg.Key);
+	public void Special_gen(Xoa_url calling_url, Xoae_page page, Xowe_wiki wiki, Xoa_ttl ttl) {
+		if (cfg == null) cfg = (Wdata_itemByTitle_cfg)wiki.Appe().Special_mgr().Get_or_null(Wdata_itemByTitle_cfg.Key);
 		// Special:ItemByTitle/enwiki/Earth -> www.wikidata.org/wiki/Q2
-		Gfo_usr_dlg usr_dlg = wiki.App().Usr_dlg();
+		Gfo_usr_dlg usr_dlg = wiki.Appe().Usr_dlg();
 		byte[] site_bry = cfg.Site_default();
 		byte[] page_bry = Bry_.Empty;
 		byte[] raw_bry = ttl.Full_txt_wo_qarg(); 					// EX: enwiki/Earth
@@ -44,7 +44,7 @@ public class Wdata_itemByTitle_page implements Xows_page {
 				page_bry = Bry_.Mid(raw_bry, page_bgn + 1, raw_bry_len);
 			}
 		}
-		Xoa_app app = wiki.App();
+		Xoae_app app = wiki.Appe();
 		if (Bry_.Len_gt_0(site_bry) && Bry_.Len_gt_0(page_bry))
 			if (Navigate(usr_dlg, app, app.Wiki_mgr().Wdata_mgr(), page, site_bry, page_bry)) return;
 		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_k004();
@@ -52,14 +52,14 @@ public class Wdata_itemByTitle_page implements Xows_page {
 		page.Data_raw_(tmp_bfr.Mkr_rls().Xto_bry_and_clear());
 		page.Html_data().Html_restricted_n_();		// [[Special:]] pages allow all HTML
 	}
-	private static boolean Navigate(Gfo_usr_dlg usr_dlg, Xoa_app app, Wdata_wiki_mgr wdata_mgr, Xoa_page page, byte[] site_bry, byte[] page_bry) {
-		page_bry = app.Encoder_mgr().Url().Decode(page_bry);				// NOTE: space is converted to + on postback to url; decode
+	private static boolean Navigate(Gfo_usr_dlg usr_dlg, Xoae_app app, Wdata_wiki_mgr wdata_mgr, Xoae_page page, byte[] site_bry, byte[] page_bry) {
+		page_bry = Xoa_app_.Utl_encoder_mgr().Url().Decode(page_bry);				// NOTE: space is converted to + on postback to url; decode
 		byte[] wiki_domain = Xow_wiki_alias.Parse_wmf_key(site_bry); 			if (wiki_domain == null) {usr_dlg.Warn_many("", "", "site_bry parse failed; site_bry:~{0}", String_.new_utf8_(site_bry)); return false;}
-		Xow_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(wiki_domain);		if (wiki == null) {usr_dlg.Warn_many("", "", "wiki_domain does not exist; wiki_domain:~{0}", String_.new_utf8_(wiki_domain)); return false;}
+		Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(wiki_domain);		if (wiki == null) {usr_dlg.Warn_many("", "", "wiki_domain does not exist; wiki_domain:~{0}", String_.new_utf8_(wiki_domain)); return false;}
 		Xoa_ttl wdata_ttl = Xoa_ttl.parse_(wiki, page_bry);					if (wdata_ttl == null) {usr_dlg.Warn_many("", "", "ttl is invalid; ttl:~{0}", String_.new_utf8_(page_bry)); return false;}
 		Wdata_doc doc = wdata_mgr.Pages_get(wiki, wdata_ttl); 				if (doc == null) {usr_dlg.Warn_many("", "", "ttl cannot be found in wikidata; ttl:~{0}", String_.new_utf8_(wdata_ttl.Raw())); return false;}		
 		byte[] qid_bry = doc.Qid();
-		Xoa_page qid_page = wdata_mgr.Wdata_wiki().Data_mgr().Redirect(page, qid_bry); 	if (qid_page.Missing()) {usr_dlg.Warn_many("", "", "qid cannot be found in wikidata; qid:~{0}", String_.new_utf8_(qid_bry)); return false;}
+		Xoae_page qid_page = wdata_mgr.Wdata_wiki().Data_mgr().Redirect(page, qid_bry); 	if (qid_page.Missing()) {usr_dlg.Warn_many("", "", "qid cannot be found in wikidata; qid:~{0}", String_.new_utf8_(qid_bry)); return false;}
 		return true;
 	}
 	private static Bry_fmtr html_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl

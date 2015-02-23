@@ -19,7 +19,7 @@ package gplx.xowa.specials.xowa.system_data; import gplx.*; import gplx.xowa.*; 
 import gplx.core.primitives.*;
 public class System_data_page implements Xows_page {
 	private Xoa_url_arg_hash arg_hash = new Xoa_url_arg_hash();
-	public void Special_gen(Xoa_url url, Xoa_page page, Xow_wiki wiki, Xoa_ttl ttl) {
+	public void Special_gen(Xoa_url url, Xoae_page page, Xowe_wiki wiki, Xoa_ttl ttl) {
 		arg_hash.Load(url);
 		byte[] file_type = arg_hash.Get_val_bry_or(Arg_type, null); if (file_type == null) return;
 		Byte_obj_val type_val = (Byte_obj_val)type_hash.Get_by_bry(file_type); if (type_val == null) return; 
@@ -30,12 +30,12 @@ public class System_data_page implements Xows_page {
 		fmtr_all.Bld_bfr_many(tmp_bfr, file_url.Raw(), file_txt);
 		page.Data_raw_(tmp_bfr.Mkr_rls().Xto_bry_and_clear());
 	}
-	private static Io_url Path_from_type(Xow_wiki wiki, byte type) {
-		Xoa_app app = wiki.App();
+	private static Io_url Path_from_type(Xowe_wiki wiki, byte type) {
+		Xoae_app app = wiki.Appe();
 		switch (type) {
 			case Type_log_session:			return app.Log_wtr().Session_fil();
 			case Type_cfg_app:				return app.Fsys_mgr().Root_dir().GenSubFil("xowa.gfs");
-			case Type_cfg_lang:				return Xol_lang_.xo_lang_fil_(app, wiki.Lang().Key_str());
+			case Type_cfg_lang:				return Xol_lang_.xo_lang_fil_(app.Fsys_mgr(), wiki.Lang().Key_str());
 			case Type_cfg_user:				return app.User().Fsys_mgr().App_data_cfg_user_fil();
 			case Type_cfg_custom:			return app.User().Fsys_mgr().App_data_cfg_custom_fil();
 			case Type_usr_history:			return app.User().Fsys_mgr().App_data_history_fil();

@@ -19,14 +19,14 @@ package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.apps.*; import gplx.xowa.wikis.*;
 public class Xou_fsys_mgr implements GfoInvkAble {
 	private Io_url app_root_dir; private Io_url wiki_root_dir; private Io_url cur_root;
-	public Xou_fsys_mgr(Xoa_app app, Xou_user usr, Io_url user_dir) {
+	public Xou_fsys_mgr(Xoae_app app, Xou_user usr, Io_url user_dir) {
 		this.cur_root = user_dir;
 		app_root_dir = cur_root.GenSubDir("app");
 		app_temp_dir = app_root_dir.GenSubDir("tmp");
 		app_temp_html_dir = app_temp_dir.GenSubDir("html");
 		app_data_history_fil = app_root_dir.GenSubFil_nest("data", "history", "page_history.csv");
 		wiki_root_dir = cur_root.GenSubDir("wiki");
-		home_wiki_dir = wiki_root_dir.GenSubDir_nest(Xow_wiki_domain_.Key_home_str);
+		home_wiki_dir = wiki_root_dir.GenSubDir_nest(Xow_domain_.Tid_str_home);
 	}
 	public Io_url Root_dir()				{return cur_root;}
 	public Io_url Wiki_root_dir()			{return wiki_root_dir;}

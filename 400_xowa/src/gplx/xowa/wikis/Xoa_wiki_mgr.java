@@ -16,11 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.xtns.wdatas.*;
+import gplx.xowa.langs.*; import gplx.xowa.xtns.wdatas.*;
 public class Xoa_wiki_mgr implements GfoInvkAble {
-	private Xoa_app app;
+	private Xoae_app app;
 	private ListAdp list = ListAdp_.new_(); private Hash_adp_bry hash = Hash_adp_bry.ci_ascii_();	// ASCII:url_domain; EX:en.wikipedia.org
-	public Xoa_wiki_mgr(Xoa_app app) {
+	public Xoa_wiki_mgr(Xoae_app app) {
 		this.app = app;
 		wiki_regy = new Xoa_wiki_regy(app);
 		wdata_mgr = new Wdata_wiki_mgr(app);
@@ -36,21 +36,21 @@ public class Xoa_wiki_mgr implements GfoInvkAble {
 	}
 	public int Count() {return hash.Count();}
 	public void Del(byte[] key) {hash.Del(key);}
-	public Xow_wiki Get_at(int i) {return Int_.Between(i, 0, this.Count() - 1) ? (Xow_wiki)list.FetchAt(i) : null;}
-	public Xow_wiki Get_by_key_or_null(byte[] key) {return Bry_.Len_eq_0(key) ? null : (Xow_wiki)hash.Fetch(key);}
-	public Xow_wiki Get_by_key_or_null(byte[] src, int bgn, int end) {return (Xow_wiki)hash.Get_by_mid(src, bgn, end);}
-	public Xow_wiki Get_by_key_or_make(byte[] key) {
-		Xow_wiki rv = this.Get_by_key_or_null(key);
+	public Xowe_wiki Get_at(int i) {return Int_.Between(i, 0, this.Count() - 1) ? (Xowe_wiki)list.FetchAt(i) : null;}
+	public Xowe_wiki Get_by_key_or_null(byte[] key) {return Bry_.Len_eq_0(key) ? null : (Xowe_wiki)hash.Fetch(key);}
+	public Xowe_wiki Get_by_key_or_null(byte[] src, int bgn, int end) {return (Xowe_wiki)hash.Get_by_mid(src, bgn, end);}
+	public Xowe_wiki Get_by_key_or_make(byte[] key) {
+		Xowe_wiki rv = this.Get_by_key_or_null(key);
 		if (rv == null) rv = New_wiki(key);
 		return rv;
 	}
-	public Xow_wiki Wiki_commons() {
-		Xow_wiki rv = this.Get_by_key_or_null(Xow_wiki_domain_.Url_commons);
+	public Xowe_wiki Wiki_commons() {
+		Xowe_wiki rv = this.Get_by_key_or_null(Xow_domain_.Domain_bry_commons);
 		if (rv != null) rv.Init_assert();
 		return rv;
 	}
-	public Xow_wiki Add(Xow_wiki wiki) {
-		Xow_wiki rv = (Xow_wiki)hash.Get_by_bry(wiki.Domain_bry());
+	public Xowe_wiki Add(Xowe_wiki wiki) {
+		Xowe_wiki rv = (Xowe_wiki)hash.Get_by_bry(wiki.Domain_bry());
 		if (rv == null) {
 			hash.Add(wiki.Domain_bry(), wiki);
 			list.Add(wiki);
@@ -61,7 +61,7 @@ public class Xoa_wiki_mgr implements GfoInvkAble {
 	public void Free_mem(boolean clear_ctx) {
 		int list_len = list.Count();
 		for (int i = 0; i < list_len; i++) {
-			Xow_wiki wiki = (Xow_wiki)list.FetchAt(i);
+			Xowe_wiki wiki = (Xowe_wiki)list.FetchAt(i);
 //				wiki.Defn_cache().ReduceCache();
 			if (clear_ctx) wiki.Ctx().Clear();	// NOTE: clear_ctx will reset toc and refs
 			wiki.Cache_mgr().Page_cache().Free_mem_all();
@@ -72,7 +72,7 @@ public class Xoa_wiki_mgr implements GfoInvkAble {
 	public void Rls() {
 		int len = list.Count();
 		for (int i = 0; i < len; i++) {
-			Xow_wiki wiki = (Xow_wiki)list.FetchAt(i);
+			Xowe_wiki wiki = (Xowe_wiki)list.FetchAt(i);
 			wiki.Rls();
 		}
 	}
@@ -86,13 +86,13 @@ public class Xoa_wiki_mgr implements GfoInvkAble {
 		else	return GfoInvkAble_.Rv_unhandled;
 	}	private static final String Invk_get = "get", Invk_groups = "groups", Invk_scripts = "scripts", Invk_wdata = "wdata";
 	private static final String Invk_len = "len", Invk_get_at = "get_at";
-	private Xow_wiki New_wiki(byte[] key) {
-		Xow_wiki_domain wiki_type = Xow_wiki_domain_.parse_by_domain(key);
+	private Xowe_wiki New_wiki(byte[] key) {
+		Xow_domain wiki_type = Xow_domain_.parse(key);
 		byte[] lang_key = wiki_type.Lang_key(); if (lang_key == Xol_lang_itm_.Key__unknown) lang_key = Xol_lang_.Key_en;
 		Xol_lang lang = app.Lang_mgr().Get_by_key_or_new(lang_key);
 		Xow_ns_mgr ns_mgr = Xow_ns_mgr_.default_(lang.Case_mgr());
 		Io_url wiki_dir = app.Fsys_mgr().Wiki_dir().GenSubDir(String_.new_utf8_(key));
-		Xow_wiki rv = new Xow_wiki(app, wiki_dir, ns_mgr, lang);
+		Xowe_wiki rv = new Xowe_wiki(app, wiki_dir, ns_mgr, lang);
 		Add(rv);
 //			rv.Init_assert();	// FUTURE: reinstate; WHEN: move download css (and anything similiar) to another proc call
 		return rv;

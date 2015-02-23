@@ -18,11 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.xowa.xtns.wdatas.imports.*;
 public class Xob_init_txt extends Xob_init_base {
-	public Xob_init_txt(Xob_bldr bldr, Xow_wiki wiki) {this.Ctor(bldr, wiki);}
+	public Xob_init_txt(Xob_bldr bldr, Xowe_wiki wiki) {this.Ctor(bldr, wiki);}
 	@Override public String Cmd_key() {return KEY;} public static final String KEY = "core.init";
-	@Override public void Cmd_ini_wdata(Xob_bldr bldr, Xow_wiki wiki) {
+	@Override public void Cmd_ini_wdata(Xob_bldr bldr, Xowe_wiki wiki) {
 		bldr.Cmd_mgr().Add_cmd(wiki, Xob_wdata_qid_txt.KEY);
 		bldr.Cmd_mgr().Add_cmd(wiki, Xob_wdata_pid_txt.KEY);
 	}
-	@Override public void Cmd_run_end(Xow_wiki wiki) {}
+	@Override public void Cmd_run_end(Xowe_wiki wiki) {}
 }

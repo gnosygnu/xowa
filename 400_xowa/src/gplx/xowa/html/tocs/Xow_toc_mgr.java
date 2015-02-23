@@ -19,7 +19,7 @@ package gplx.xowa.html.tocs; import gplx.*; import gplx.xowa.*; import gplx.xowa
 import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.hdrs.*;
 public class Xow_toc_mgr implements Bry_fmtr_arg {
 	private static final int Toc_levels = 32; // assume 6 max levels * 5 max heading (9999.); add 2 for good measure
-	private Xoa_page page; private Xop_toc_itm[] path_ary; private Bry_bfr path_bfr = Bry_bfr.reset_(Toc_levels);
+	private Xoae_page page; private Xop_toc_itm[] path_ary; private Bry_bfr path_bfr = Bry_bfr.reset_(Toc_levels);
 	public Xow_toc_mgr() {
 		path_ary = new Xop_toc_itm[Toc_levels];
 		for (int i = 0; i < Toc_levels; i++)
@@ -98,21 +98,21 @@ public class Xow_toc_mgr implements Bry_fmtr_arg {
 			trg.Add(Bry_list_end);
 		}
 	}
-	public static byte[] Toc_text(Xop_ctx ctx, Xoa_page page, byte[] src, Xop_tkn_itm hdr) {
+	public static byte[] Toc_text(Xop_ctx ctx, Xoae_page page, byte[] src, Xop_tkn_itm hdr) {
 		try {
-			Xow_wiki wiki = page.Wiki();
-			Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_b128();
+			Xowe_wiki wiki = page.Wikie();
+			Bry_bfr bfr = Xoa_app_.Utl_bry_bfr_mkr().Get_b128();
 			Xoh_wtr_ctx hctx = Xoh_wtr_ctx.Basic;
 			Xoh_html_wtr html_wtr = wiki.Html_mgr().Html_wtr(); html_wtr.Init_by_page(ctx, hctx, src, page);
-			Toc_text_recurse(ctx, page, bfr, src, html_wtr, hctx, hdr, 0);
+			Toc_text_recurse(ctx, bfr, src, html_wtr, hctx, hdr, 0);
 			bfr.Mkr_rls();
 			return bfr.Xto_bry_and_clear();
 		} catch (Exception e) {
-			page.App().Usr_dlg().Warn_many("", "", "failed to write toc: url=~{0} err=~{1}", page.Url().Xto_full_str_safe(), Err_.Message_gplx_brief(e));
+			Gfo_usr_dlg_._.Warn_many("", "", "failed to write toc: url=~{0} err=~{1}", page.Url().Xto_full_str_safe(), Err_.Message_gplx_brief(e));
 			return Bry_.Empty;
 		}
 	}
-	private static void Toc_text_recurse(Xop_ctx ctx, Xoa_page page, Bry_bfr bfr, byte[] src, Xoh_html_wtr html_wtr, Xoh_wtr_ctx html_wtr_opts, Xop_tkn_itm tkn, int depth) {
+	private static void Toc_text_recurse(Xop_ctx ctx, Bry_bfr bfr, byte[] src, Xoh_html_wtr html_wtr, Xoh_wtr_ctx html_wtr_opts, Xop_tkn_itm tkn, int depth) {
 		int subs_len = tkn.Subs_len();
 		boolean txt_seen = false; int ws_pending = 0;
 		for (int i = 0; i < subs_len; i++) {
@@ -135,7 +135,7 @@ public class Xow_toc_mgr implements Bry_fmtr_arg {
 						&& !lnki.Ttl().ForceLiteralLink())		{}	// Category text should not print; DATE:2013-12-09
 					else {
 						if (lnki.Caption_exists())
-							Toc_text_recurse(ctx, page, bfr, src, html_wtr, html_wtr_opts, lnki.Caption_val_tkn(), depth);
+							Toc_text_recurse(ctx, bfr, src, html_wtr, html_wtr_opts, lnki.Caption_val_tkn(), depth);
 						else {
 							if (lnki.Ns_id() == Xow_ns_.Id_file) {}	// do not print lnk_ttl in TOC; if file; tr.w:Dünya_Mirasları; DATE:2014-06-06
 							else
@@ -165,7 +165,7 @@ public class Xow_toc_mgr implements Bry_fmtr_arg {
 						default:
 							if (depth > 0 && (xnde.CloseMode() == Xop_xnde_tkn.CloseMode_pair || xnde.CloseMode() == Xop_xnde_tkn.CloseMode_inline))	// do not render dangling xndes; EX: Casualties_of_the_Iraq_War; ===<small>Iraqi Health Ministry<small>===
 								bfr.Add_mid(src, xnde.Tag_open_bgn(), xnde.Tag_open_end());
-							Toc_text_recurse(ctx, page, bfr, src, html_wtr, html_wtr_opts, xnde, depth + 1);
+							Toc_text_recurse(ctx, bfr, src, html_wtr, html_wtr_opts, xnde, depth + 1);
 							if (depth > 0 && xnde.CloseMode() == Xop_xnde_tkn.CloseMode_pair)	// do not render (a) dangling xndes or (b) inline (which will have negative bgn)
 								bfr.Add_mid(src, xnde.Tag_close_bgn(), xnde.Tag_close_end());
 							break;
@@ -181,16 +181,16 @@ public class Xow_toc_mgr implements Bry_fmtr_arg {
 					if (sub.Subs_len() == 0)	// NOTE: never call html_wtr directly unless leaf elem; DATE:2014-06-22
 						html_wtr.Write_tkn(bfr, ctx, html_wtr_opts, src, tkn, Xoh_html_wtr.Sub_idx_null, sub);
 					else
-						Toc_text_recurse(ctx, page, bfr, src, html_wtr, html_wtr_opts, sub, depth + 1);
+						Toc_text_recurse(ctx, bfr, src, html_wtr, html_wtr_opts, sub, depth + 1);
 					break;
 			}
 		}
 	}
-	public void Html(Xoa_page page, Xoh_wtr_ctx hctx, byte[] src, Bry_bfr bfr) {
+	public void Html(Xoae_page page, Xoh_wtr_ctx hctx, byte[] src, Bry_bfr bfr) {
 		if (!page.Hdr_mgr().Toc_enabled()) return;	// REF.MW: Parser.php|formatHeadings
 		if (hctx.Mode_is_hdump()) return;
 		this.page = page;
-		byte[] bry_contents = page.Wiki().Msg_mgr().Val_by_id(Xol_msg_itm_.Id_toc);
+		byte[] bry_contents = page.Wikie().Msg_mgr().Val_by_id(Xol_msg_itm_.Id_toc);
 		bfmtr_main.Bld_bfr_many(bfr, Bry_fmtr_arg_.bry_(bry_contents), this);
 	}
 	private static final byte[]

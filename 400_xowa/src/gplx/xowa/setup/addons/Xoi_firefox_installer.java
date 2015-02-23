@@ -21,12 +21,12 @@ public class Xoi_firefox_installer implements GfoInvkAble {
 	private Io_url src_xpi, trg_xpi;
 	private Io_url trg_xpi_package;
 	private ProcessAdp program = new ProcessAdp();
-	public void Init_by_app(Xoa_app app) {
+	public void Init_by_app(Xoae_app app) {
 		src_xpi = app.Fsys_mgr().Bin_any_dir().GenSubFil_nest("firefox", "xowa_viewer", "default", "xowa_viewer@piotrex.xpi");
 		trg_xpi = app.Fsys_mgr().Bin_any_dir().GenSubFil_nest("firefox", "xowa_viewer", "install", "xowa_viewer@piotrex.xpi");
 		trg_xpi_package = trg_xpi.OwnerDir().GenSubDir("package");
 		Xoa_fsys_eval cmd_eval = app.Url_cmd_eval();
-		ProcessAdp.ini_(this, app.Gui_wtr(), program, cmd_eval, ProcessAdp.Run_mode_async,  0, "firefox", "\"~{url}\"", "url");
+		ProcessAdp.ini_(this, app.Usr_dlg(), program, cmd_eval, ProcessAdp.Run_mode_async,  0, "firefox", "\"~{url}\"", "url");
 	}
 	public void Install_via_process() {
 		Generate();

@@ -37,8 +37,8 @@ public class Xou_history_html implements Bry_fmtr_arg, Xows_page {
 		,	"    <td>~{itm_last}</td>"
 		,	"  </tr>"
 		), "itm_wiki", "itm_page", "itm_count", "itm_last");
-	public void Special_gen(Xoa_url calling_url, Xoa_page page, Xow_wiki wiki, Xoa_ttl ttl) {
-		this.app = wiki.App(); this.mgr = app.User().History_mgr();
+	public void Special_gen(Xoa_url calling_url, Xoae_page page, Xowe_wiki wiki, Xoa_ttl ttl) {
+		this.app = wiki.Appe(); this.mgr = app.User().History_mgr();
 		mgr.Sort();
 		Bry_bfr bfr = app.Utl_bry_bfr_mkr().Get_m001(); 
 		html_grp.Bld_bfr_many(bfr, this);
@@ -50,5 +50,5 @@ public class Xou_history_html implements Bry_fmtr_arg, Xows_page {
 			Xou_history_itm itm = mgr.Get_at(i);
 			html_itm.Bld_bfr_many(bfr, itm.Wiki(), itm.Page(), itm.View_count(), itm.View_end().XtoStr_fmt_yyyy_MM_dd_HH_mm());
 		}		
-	}	private Xou_history_mgr mgr; Xoa_app app;
+	}	private Xou_history_mgr mgr; Xoae_app app;
 }

@@ -22,7 +22,7 @@ public class Geoc_isin_func extends Pf_func_base {
 	@Override public Pf_func New(int id, byte[] name) {return new Geoc_isin_func().Name_(name);}
 	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {
 		byte[] ttl_bry = Eval_argx(ctx, src, caller, self);
-		Xow_wiki wiki = ctx.Wiki();
+		Xowe_wiki wiki = ctx.Wiki();
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry); if (ttl == null) return;
 		byte[] lnki_ttl = Bry_.Add(Xop_tkn_.Lnki_bgn, ttl_bry, Xop_tkn_.Lnki_end);		// make "[[ttl]]"
 		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b128();

@@ -21,12 +21,12 @@ import gplx.xowa.fmtrs.*;
 public class Xocfg_bnd_mgr implements GfoInvkAble, Gfo_sort_able {
 	private Xog_bnd_mgr_srl bnd_mgr_srl; private Xog_cmd_mgr cmd_mgr;
 	private Xoa_fmtr_sort_mgr sorter;
-	public Xocfg_bnd_mgr(Xoa_app app) {
+	public Xocfg_bnd_mgr(Xoae_app app) {
 		this.app = app; this.bnd_mgr = app.Gui_mgr().Bnd_mgr(); this.cmd_mgr = app.Gui_mgr().Cmd_mgr();
 		bnd_mgr_srl = new Xog_bnd_mgr_srl(app, bnd_mgr);
 		sorter = new Xoa_fmtr_sort_mgr(this);
 	}
-	public Xoa_app App() {return app;} private Xoa_app app;
+	public Xoae_app App() {return app;} private Xoae_app app;
 	public Xog_bnd_mgr Bnd_mgr() {return bnd_mgr;} private Xog_bnd_mgr bnd_mgr;
 	private OrderedHash regy;
 	public void Init() {

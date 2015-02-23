@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html.sidebar; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import gplx.xowa.langs.msgs.*;
 public class Xowh_sidebar_mgr implements GfoInvkAble {
-	public Xowh_sidebar_mgr(Xow_wiki wiki) {this.wiki = wiki;} private Xow_wiki wiki;		
+	public Xowh_sidebar_mgr(Xowe_wiki wiki) {this.wiki = wiki;} private Xowe_wiki wiki;		
 	public int Grps_len() {return grps.Count();} ListAdp grps = ListAdp_.new_();
 	public Xowh_sidebar_itm Grps_get_at(int i) {return (Xowh_sidebar_itm)grps.FetchAt(i);}
 	public byte[] Html_bry() {return html_bry;} private byte[] html_bry;
@@ -28,7 +28,7 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 			Xol_msg_itm sidebar_msg = Xol_msg_mgr_.Get_msg_itm(bfr, wiki, wiki.Lang(), CONST_sidebar_ttl);
 			if (	sidebar_msg.Src() == Xol_msg_itm.Src_missing
 				||	(	sidebar_msg.Src() == Xol_msg_itm.Src_lang
-					&&	wiki.Domain_tid() == gplx.xowa.wikis.Xow_wiki_domain_.Tid_home
+					&&	wiki.Domain_tid() == gplx.xowa.wikis.Xow_domain_.Tid_int_home
 				)) {
 				html_bry = Bry_.Empty;
 				bfr.Mkr_rls();
@@ -40,7 +40,7 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 			html_bry = bfr.Mkr_rls().Xto_bry_and_clear();
 			comment_bfr = comment_bfr.Mkr_rls().Clear();
 		} catch (Exception e) {
-			wiki.App().Usr_dlg().Warn_many(GRP_KEY, "sidebar.init", "sidebar init failed: ~{0} ~{1}", wiki.Domain_str(), Err_.Message_gplx_brief(e));
+			wiki.Appe().Usr_dlg().Warn_many(GRP_KEY, "sidebar.init", "sidebar init failed: ~{0} ~{1}", wiki.Domain_str(), Err_.Message_gplx_brief(e));
 			html_bry = Bry_.Empty;
 		}
 	}
@@ -53,7 +53,7 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 	public void Parse(Bry_bfr bfr, Bry_bfr comment_bfr, byte[] src) {
 		byte[][] lines = Bry_.Split(src, Byte_ascii.NewLine);
 		int lines_len = lines.length;
-		Xoa_app app = wiki.App(); Url_encoder id_encoder = app.Encoder_mgr().Id();
+		Url_encoder id_encoder = Xoa_app_.Utl_encoder_mgr().Id();
 		Xowh_sidebar_itm cur_grp = null;
 		Xop_link_parser link_parser = new Xop_link_parser();
 		for (int i = 0; i < lines_len; i++) {
@@ -77,7 +77,7 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 			else {
 				if (pipe_pos == Bry_.NotFound) {		// not of format of "href|main"; (EX: "href_only")
 					if (!Ignore(wiki.Domain_bry(), bry))	// suppress warning if ignored; DATE:2014-02-11
-						wiki.App().Usr_dlg().Warn_many(GRP_KEY, "parse.line.missing_text", "sidebar item is missing pipe; only href is available; item will be hidden: item=~{0}", String_.new_utf8_(bry));
+						wiki.Appe().Usr_dlg().Warn_many(GRP_KEY, "parse.line.missing_text", "sidebar item is missing pipe; only href is available; item will be hidden: item=~{0}", String_.new_utf8_(bry));
 					continue;
 				}
 				byte[] href_key = Bry_.Mid(bry, 0, pipe_pos);

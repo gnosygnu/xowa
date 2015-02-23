@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.xowa.html.*;
 public class Xop_redirect_mgr {		
-	private final Xow_wiki wiki; private final Url_encoder url_decoder; private Hash_adp_bry redirect_hash;
-	public Xop_redirect_mgr(Xow_wiki wiki) {this.wiki = wiki; this.url_decoder = wiki.App().Encoder_mgr().Url_ttl();}	// NOTE: must be Url_ttl, not Url; PAGE:en.w:Template:Positionskarte+ -> Template:Location_map+, not Template:Location_map DATE:2014-08-21
+	private final Xowe_wiki wiki; private final Url_encoder url_decoder; private Hash_adp_bry redirect_hash;
+	public Xop_redirect_mgr(Xowe_wiki wiki) {this.wiki = wiki; this.url_decoder = Xoa_app_.Utl_encoder_mgr().Url_ttl();}	// NOTE: must be Url_ttl, not Url; PAGE:en.w:Template:Positionskarte+ -> Template:Location_map+, not Template:Location_map DATE:2014-08-21
 	public void Clear() {redirect_hash = null;}	// TEST:
 	public boolean Is_redirect(byte[] text, int text_len) {return this.Extract_redirect(text, text_len) != null;}
 	public Xoa_ttl Extract_redirect_loop(byte[] src) {
@@ -62,7 +62,7 @@ public class Xop_redirect_mgr {
 			,	Xop_tkn_.Lnki_end			// "]]"
 			);
 	}
-	public static byte[] Bld_redirect_msg(Xoa_app app, Xow_wiki wiki, Xoa_page page) {
+	public static byte[] Bld_redirect_msg(Xoae_app app, Xowe_wiki wiki, Xoae_page page) {
 		ListAdp list = page.Redirected_ttls();
 		int list_len = list.Count();
 		if (list_len == 0) return Bry_.Empty;

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.proofreadPage; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*; import gplx.xowa.parsers.logs.*;
 class Pp_index_parser {
-	public static Pp_index_page Parse(Xow_wiki wiki, Xop_ctx ctx, Xoa_ttl index_ttl, int ns_page_id) {
+	public static Pp_index_page Parse(Xowe_wiki wiki, Xop_ctx ctx, Xoa_ttl index_ttl, int ns_page_id) {
 		byte[] src = wiki.Cache_mgr().Page_cache().Get_or_load_as_src(index_ttl);
 		if (src == null) return Pp_index_page.Null;
 		Xop_parser sub_parser = new Xop_parser(wiki, wiki.Parser().Tmpl_lxr_mgr(), wiki.Parser().Wtxt_lxr_mgr());
@@ -92,7 +92,7 @@ class Pp_index_page {
 	public ListAdp		Page_ttls()			{return page_ttls;} private ListAdp page_ttls = ListAdp_.new_();
 	public ListAdp		Main_lnkis()		{return main_lnkis;} private ListAdp main_lnkis = ListAdp_.new_();
 	public ListAdp		Invk_args()			{return invk_args;} private ListAdp invk_args = ListAdp_.new_();
-	public Xoa_ttl[] Get_ttls_rng(Xow_wiki wiki, int ns_page_id, byte[] bgn_page_bry, byte[] end_page_bry, Int_obj_ref bgn_page_ref, Int_obj_ref end_page_ref) {
+	public Xoa_ttl[] Get_ttls_rng(Xowe_wiki wiki, int ns_page_id, byte[] bgn_page_bry, byte[] end_page_bry, Int_obj_ref bgn_page_ref, Int_obj_ref end_page_ref) {
 		int list_len = page_ttls.Count(); if (list_len == 0) return Pp_pages_nde.Ttls_null;
 		ListAdp rv = ListAdp_.new_();
 		Xoa_ttl bgn_page_ttl = new_ttl_(wiki, ns_page_id, bgn_page_bry), end_page_ttl = new_ttl_(wiki, ns_page_id, end_page_bry);
@@ -110,7 +110,7 @@ class Pp_index_page {
 		if (rv.Count() == 0) return Pp_pages_nde.Ttls_null;
 		return (Xoa_ttl[])rv.Xto_ary(Xoa_ttl.class);
 	}
-	private static Xoa_ttl new_ttl_(Xow_wiki wiki, int ns_page_id, byte[] bry) {return bry == null ? Xoa_ttl.Null : Xoa_ttl.parse_(wiki, ns_page_id, bry);}
+	private static Xoa_ttl new_ttl_(Xowe_wiki wiki, int ns_page_id, byte[] bry) {return bry == null ? Xoa_ttl.Null : Xoa_ttl.parse_(wiki, ns_page_id, bry);}
 	public static final Pp_index_page Null = new Pp_index_page();
 }
 class Pp_index_arg {

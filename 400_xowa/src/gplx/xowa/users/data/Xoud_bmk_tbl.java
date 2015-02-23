@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
-import gplx.dbs.*;
+import gplx.dbs.*; import gplx.dbs.qrys.*;
 public class Xoud_bmk_tbl {
 	private Db_stmt stmt_select, stmt_insert, stmt_delete;
 	public Db_conn Conn() {return conn;} public Xoud_bmk_tbl Conn_(Db_conn v) {this.Rls_all(); conn = v; return this;} private Db_conn conn;

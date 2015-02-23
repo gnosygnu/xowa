@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.utls.upgrades; import gplx.*; import gplx.xowa.*; import gplx.xowa.utls.*;
 import gplx.xowa.bldrs.*;
 class Upgrader_v00_02_01 {
-	public void Run(Xow_wiki wiki) {
+	public void Run(Xowe_wiki wiki) {
 		Io_url cfg_dir = wiki.Fsys_mgr().Root_dir().GenSubDir("cfg");
 		if (!Io_mgr._.ExistsDir(cfg_dir)) return;	// brand-new wiki; nothing to migrate
-		Gfo_usr_dlg usr_dlg = wiki.App().Usr_dlg();
+		Gfo_usr_dlg usr_dlg = wiki.Appe().Usr_dlg();
 		usr_dlg.Note_many(GRP_KEY, "run.bgn", "migrate.bgn for ~{0}", wiki.Domain_str());
 		Io_url siteinfo_url = cfg_dir.GenSubFil_nest("siteInfo.xml");
 		usr_dlg.Note_many(GRP_KEY, "siteinfo.bgn", "siteinfo.bgn for ~{0}", siteinfo_url.Raw());
@@ -30,11 +30,11 @@ class Upgrader_v00_02_01 {
 		gplx.xowa.bldrs.xmls.Xob_siteinfo_parser.Siteinfo_parse(wiki, usr_dlg, siteinfo_str);	// NOTE: this also resets the namespaces on the wiki; not necessary, but is benign
 		usr_dlg.Note_many(GRP_KEY, "siteinfo.save", "saving siteinfo");
 		byte[] wiki_core_bry = wiki.Cfg_wiki_core().Build_gfs();
-		Io_mgr._.SaveFilBry(wiki.Fsys_mgr().Cfg_wiki_core_fil(), wiki_core_bry);
+		Io_mgr._.SaveFilBry(wiki.Tdb_fsys_mgr().Cfg_wiki_core_fil(), wiki_core_bry);
 		usr_dlg.Note_many(GRP_KEY, "siteinfo.end", "siteinfo.end for ~{0}", wiki.Domain_str());
 
 		Io_url old_wikistats_url = wiki.Fsys_mgr().Root_dir().GenSubFil_nest("cfg", "wiki.gfs");
-		Io_url new_wikistats_url = wiki.Fsys_mgr().Cfg_wiki_stats_fil();
+		Io_url new_wikistats_url = wiki.Tdb_fsys_mgr().Cfg_wiki_stats_fil();
 		if		(Io_mgr._.ExistsFil(new_wikistats_url))		// noop; should not happen, but perhaps results from merging directories; 
 			usr_dlg.Note_many(GRP_KEY, "wiki_stats.new_exists", "new wiki stats already exists for ~{0}", new_wikistats_url.Raw());
 		else if (!Io_mgr._.ExistsFil(old_wikistats_url))	// noop; should not happen;

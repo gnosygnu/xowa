@@ -21,7 +21,7 @@ import gplx.xowa.html.modules.*;
 import gplx.xowa2.gui.*;
 public class Hdump_page_body_srl {
 	private static final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
-	public static void Save(Bry_bfr bfr, Xoa_page page) {
+	public static void Save(Bry_bfr bfr, Xoae_page page) {
 		bfr.Add_int_fixed(0, 1).Add_byte_pipe();			// version
 		Xopg_hdump_data hdump_data = page.Hdump_data();
 		bfr.Add_int_variable(hdump_data.Data_count_imgs());	// imgs_count
@@ -58,7 +58,7 @@ public class Hdump_page_body_srl {
 		tmp_bfr.Add_yn(v);
 		tmp_bfr.Add_byte_pipe();
 	}
-	private static void Save_sidebars(Bry_bfr bfr, Xoa_page page, Xopg_html_data html_data) {
+	private static void Save_sidebars(Bry_bfr bfr, Xoae_page page, Xopg_html_data html_data) {
 		Xopg_xtn_skin_mgr mgr = html_data.Xtn_skin_mgr();
 		int len = mgr.Count();
 		boolean sidebar_exists = false;

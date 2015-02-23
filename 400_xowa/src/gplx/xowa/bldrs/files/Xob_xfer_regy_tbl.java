@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.dbs.*; import gplx.xowa.bldrs.oimgs.*;
+import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.bldrs.oimgs.*;
 public class Xob_xfer_regy_tbl {
 	public static void Create_table(Db_conn p) {Sqlite_engine_.Tbl_create_and_delete(p, Tbl_name, Tbl_sql);}
 	public static void Create_data(Gfo_usr_dlg usr_dlg, Db_conn p) {
@@ -33,7 +33,7 @@ public class Xob_xfer_regy_tbl {
 			;
 		return p.Exec_qry_as_rdr(qry);
 	}
-	public static Db_stmt Select_by_page_id_stmt(Db_conn p) {return p.New_stmt(Db_qry_sql.rdr_(Sql_select));}
+	public static Db_stmt Select_by_page_id_stmt(Db_conn p) {return p.Stmt_new(Db_qry_sql.rdr_(Sql_select));}
 	public static DataRdr Select_by_page_id(Db_stmt stmt, int page_id, int limit) {return stmt.Val_int(page_id).Val_int(limit).Exec_select();}
 	private static final String
 	  Sql_select = String_.Concat_lines_nl

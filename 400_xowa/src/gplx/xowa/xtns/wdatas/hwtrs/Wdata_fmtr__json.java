@@ -40,7 +40,9 @@ class Wdata_fmtr__json implements Bry_fmtr_arg {
 	private final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "  <h2 class='wb-section-heading' id='~{hdr_href}'>~{hdr_text}~{toggle_btn}</h2>"
+	, "  <div class='visualClear'></div>"
 	, "  <pre~{toggle_hdr}>~{json}"
 	, "  </pre>"
+	, "  </div>"
 	), "hdr_href", "hdr_text", "toggle_btn", "toggle_hdr", "json");
 }

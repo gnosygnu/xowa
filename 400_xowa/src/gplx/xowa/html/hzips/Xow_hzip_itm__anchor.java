@@ -16,11 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.html.*; import gplx.xowa.apps.ttls.*; import gplx.xowa.hdumps.srls.*;
+import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.html.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.hdumps.srls.*;
 public class Xow_hzip_itm__anchor {
-	private Xow_hzip_mgr hzip_mgr; private Xoa_ttl_parser ttl_parser; private Byte_obj_ref xtid_ref = Byte_obj_ref.zero_();
+	private Xow_hzip_mgr hzip_mgr; private Xow_ttl_parser ttl_parser; private Byte_obj_ref xtid_ref = Byte_obj_ref.zero_();
 	private Bry_rdr bry_rdr = new Bry_rdr();
-	public Xow_hzip_itm__anchor(Xow_hzip_mgr hzip_mgr, Xoa_ttl_parser ttl_parser) {this.hzip_mgr = hzip_mgr; this.ttl_parser = ttl_parser;}
+	public Xow_hzip_itm__anchor(Xow_hzip_mgr hzip_mgr, Xow_ttl_parser ttl_parser) {this.hzip_mgr = hzip_mgr; this.ttl_parser = ttl_parser;}
 	public int Save_a_rhs(Bry_bfr bfr, Xow_hzip_stats stats, byte[] src, int src_len, int bgn, int pos) {
 		bfr.Add(Xow_hzip_dict.Bry_a_rhs);
 		stats.A_rhs_add();

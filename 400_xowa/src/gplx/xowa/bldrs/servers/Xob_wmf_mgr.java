@@ -19,7 +19,7 @@ package gplx.xowa.bldrs.servers; import gplx.*; import gplx.xowa.*; import gplx.
 import gplx.xowa.setup.maints.*;
 public class Xob_wmf_mgr {
 	private Xoa_maint_mgr maint_mgr;
-	public Xob_wmf_mgr(Xoa_app app) {
+	public Xob_wmf_mgr(Xoae_app app) {
 		maint_mgr = new Xoa_maint_mgr(app);
 	}
 	public int Sync_interval() {return sync_interval;} public Xob_wmf_mgr Sync_interval_(int v) {sync_interval = v; return this;} private int sync_interval = 60 * 24; // in minutes

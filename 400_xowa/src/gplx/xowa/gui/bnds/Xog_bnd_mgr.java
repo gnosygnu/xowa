@@ -28,7 +28,7 @@ public class Xog_bnd_mgr {
 	public int Len() {return regy.Count();}
 	public Xog_bnd_itm Get_at(int i)			{return (Xog_bnd_itm)regy.FetchAt(i);}
 	public Xog_bnd_itm Get_or_null(String v)	{return (Xog_bnd_itm)regy.Fetch(v);}
-	public void Init_by_kit(Xoa_app app) {
+	public void Init_by_kit(Xoae_app app) {
 		Add_system_bnds();
 		Add_custom_bnds();	// NOTE: should go after Add_system_bnds in case user overrides any;
 		Bind_all();

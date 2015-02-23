@@ -18,15 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
 import gplx.core.primitives.*; import gplx.xowa.wikis.*;
 public class Xosrh_core implements GfoInvkAble, Xows_page {
-	public Xosrh_core(Xow_wiki wiki) {this.wiki = wiki;} 
-	public Xow_wiki Wiki() {return wiki;} private Xow_wiki wiki;
+	public Xosrh_core(Xowe_wiki wiki) {this.wiki = wiki;} 
+	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	@gplx.Internal protected Xosrh_args_mgr Args_mgr() {return args_mgr;} private Xosrh_args_mgr args_mgr = new Xosrh_args_mgr();
 	@gplx.Internal protected Xosrh_html_mgr Html_mgr() {return html_mgr;} private Xosrh_html_mgr html_mgr = new Xosrh_html_mgr();
 	public Xosrh_page_mgr Page_mgr() {return page_mgr;} private Xosrh_page_mgr page_mgr = new Xosrh_page_mgr();
 	public Xosrh_rslt_grp Cur_grp() {return cur_grp;} private Xosrh_rslt_grp cur_grp;
-	public void Special_gen(Xoa_url url, Xoa_page page, Xow_wiki wiki, Xoa_ttl ttl) {
-		if (wiki.Domain_tid() == Xow_wiki_domain_.Tid_home) return;	// do not allow search in home wiki; will throw null ref error b/c no search_ttl dirs
-		Xog_search_suggest_mgr search_suggest_mgr = wiki.App().Gui_mgr().Search_suggest_mgr();
+	public void Special_gen(Xoa_url url, Xoae_page page, Xowe_wiki wiki, Xoa_ttl ttl) {
+		if (wiki.Domain_tid() == Xow_domain_.Tid_int_home) return;	// do not allow search in home wiki; will throw null ref error b/c no search_ttl dirs
+		Xog_search_suggest_mgr search_suggest_mgr = wiki.Appe().Gui_mgr().Search_suggest_mgr();
 		args_mgr.Clear();
 		Gfo_url_arg[] args_default = search_suggest_mgr.Args_default();
 		if (args_default.length > 0) args_mgr.Parse(args_default);
@@ -43,7 +43,7 @@ public class Xosrh_core implements GfoInvkAble, Xows_page {
 			search_bry = Bry_.Add_w_dlm(Byte_ascii.Asterisk, search_bry, Bry_.Empty);
 		url.Page_bry_(Bry_.Add(Bry_.new_ascii_("Special:Search/"), search_bry));	// HACK: need to re-set Page b/c href_parser does not eliminate qargs; DATE:2013-02-08
 		Xoa_ttl page_ttl = Xoa_ttl.parse_(wiki, search_bry); 
-		Xoa_page find_page = page;
+		Xoae_page find_page = page;
 		if (!Bry_.Eq(search_bry, Bry_page_name))				// do not lookup page else stack overflow; happens when going directly to Special:Search (from history)
 			find_page = wiki.Data_mgr().Get_page(page_ttl, false);	// lookup page
 		if (find_page.Missing() || url.Search_fulltext()) {	// page not found, or explicit_search invoked

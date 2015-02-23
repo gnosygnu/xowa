@@ -16,20 +16,20 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.ios.*;
+import gplx.ios.*; import gplx.xowa.tdbs.*;
 public class Xob_page_txt extends Xob_itm_dump_base implements Xobd_wkr, GfoInvkAble {
-	public Xob_page_txt(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
+	public Xob_page_txt(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Wkr_key() {return KEY;} public static final String KEY = "core.make_page";
 	public void Wkr_ini(Xob_bldr bldr) {}
 	public void Wkr_bgn(Xob_bldr bldr) {
-		redirect_mgr = wiki.Redirect_mgr(); page_storage_type = wiki.App().Setup_mgr().Dump_mgr().Data_storage_format();
-		fsys_mgr = wiki.Fsys_mgr();			
+		redirect_mgr = wiki.Redirect_mgr(); page_storage_type = wiki.Appe().Setup_mgr().Dump_mgr().Data_storage_format();
+		fsys_mgr = wiki.Tdb_fsys_mgr();			
 		make_dir = fsys_mgr.Ns_dir();
 		if (Io_mgr._.QueryDir_args(make_dir).DirOnly_().ExecAsUrlAry().length > 0) throw bldr.Usr_dlg().Fail_many("xowa.bldr.itm", "dir_empty", "dir_must_be_empty: ~{0}", make_dir.Raw());
 		this.Init_dump(KEY, make_dir);
-		this.data_rpt_typ = stat_mgr.GetOrNew(Xow_dir_info_.Tid_page);
+		this.data_rpt_typ = stat_mgr.GetOrNew(Xotdb_dir_info_.Tid_page);
 		ttl_wtr_mgr = new Xob_tmp_wtr_mgr(new Xob_tmp_wtr_wkr__ttl(temp_dir, dump_fil_len));			
-	}	private Xow_fsys_mgr fsys_mgr; Xop_redirect_mgr redirect_mgr;
+	}	private Xotdb_fsys_mgr fsys_mgr; Xop_redirect_mgr redirect_mgr;
 	int page_file_len = 512 * Io_mgr.Len_kb, title_file_len = 64 * Io_mgr.Len_kb; Xob_tmp_wtr_mgr ttl_wtr_mgr;
 	Xob_xdat_file_wtr[] page_wtr_regy = new Xob_xdat_file_wtr[Ns_ordinal_max]; static final int Ns_ordinal_max = Xow_ns_mgr_.Ordinal_max;	// ASSUME: no more than 128 ns in a wiki
 	Xob_stat_type data_rpt_typ; Xob_stat_mgr stat_mgr = new Xob_stat_mgr(); byte page_storage_type;		
@@ -54,7 +54,7 @@ public class Xob_page_txt extends Xob_itm_dump_base implements Xobd_wkr, GfoInvk
 	public void Wkr_end() {
 		Flush_page(page_wtr_regy);
 		ttl_wtr_mgr.Flush_all(bldr.Usr_dlg());
-		Xobdc_merger.Ns(bldr.Usr_dlg(), ttl_wtr_mgr.Regy(), Xow_dir_info_.Name_title, temp_dir, make_dir, sort_mem_len, Io_line_rdr_key_gen_.last_pipe, new Io_sort_cmd_ns(bldr.Usr_dlg()));
+		Xobdc_merger.Ns(bldr.Usr_dlg(), ttl_wtr_mgr.Regy(), Xotdb_dir_info_.Name_title, temp_dir, make_dir, sort_mem_len, Io_line_rdr_key_gen_.last_pipe, new Io_sort_cmd_ns(bldr.Usr_dlg()));
 		ttl_wtr_mgr.Rls_all();
 		if (delete_temp) Io_mgr._.DeleteDirDeep(temp_dir);
 	}
@@ -62,7 +62,7 @@ public class Xob_page_txt extends Xob_itm_dump_base implements Xobd_wkr, GfoInvk
 	Xob_xdat_file_wtr Page_wtr_get(Xow_ns ns) {
 		Xob_xdat_file_wtr rv = page_wtr_regy[ns.Ord()];
 		if (rv == null) {
-			rv = Xob_xdat_file_wtr.new_by_tid_(page_file_len, fsys_mgr.Ns_dir().GenSubDir_nest(ns.Num_str()), Xow_dir_info_.Tid_page, page_storage_type).Ns_ord_idx_(ns.Ord());
+			rv = Xob_xdat_file_wtr.new_by_tid_(page_file_len, fsys_mgr.Ns_dir().GenSubDir_nest(ns.Num_str()), Xotdb_dir_info_.Tid_page, page_storage_type).Ns_ord_idx_(ns.Ord());
 			page_wtr_regy[ns.Ord()] = rv;
 		}
 		return rv;

@@ -19,9 +19,9 @@ package gplx.xowa.bldrs.aria2; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.xowa.apps.fsys.*;
 public class Aria2_lib_mgr implements GfoInvkAble {
 	public ProcessAdp Lib() {return lib;} private ProcessAdp lib = new ProcessAdp();
-	public void Init_by_app(Xoa_app app) {
+	public void Init_by_app(Xoae_app app) {
 		Xoa_fsys_eval cmd_eval = app.Url_cmd_eval();
-		ProcessAdp.ini_(this, app.Gui_wtr(), lib, cmd_eval, ProcessAdp.Run_mode_sync_block, Int_.MaxValue
+		ProcessAdp.ini_(this, app.Usr_dlg(), lib, cmd_eval, ProcessAdp.Run_mode_sync_block, Int_.MaxValue
 		, "~{<>bin_plat_dir<>}aria2" + Op_sys.Cur().Fsys_dir_spr_str() +  "aria2c"
 		, Lib_args_fmt
 		, "wiki_abrv", "wiki_date", "wiki_type");

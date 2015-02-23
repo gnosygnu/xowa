@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.fmtrs; import gplx.*; import gplx.xowa.*;
 import gplx.ios.*;
 public class Xoa_fmtr_mgr implements GfoInvkAble {
-	public Xoa_fmtr_mgr(Xoa_app app) {this.app = app;} private Xoa_app app;
+	public Xoa_fmtr_mgr(Xoae_app app) {this.app = app;} private Xoae_app app;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_new_grp))		return new Xoa_fmtr_itm(app);
 		else return GfoInvkAble_.Rv_unhandled;

@@ -24,9 +24,9 @@ public class Xoapi_toggle_itm implements GfoInvkAble {
 	public byte[] Elem_display() {return elem_display;} private byte[] elem_display = Bry_.Empty;
 	public byte[] Html_toggle_hdr_cls() {return html_toggle_hdr_cls;} public Xoapi_toggle_itm Html_toggle_hdr_cls_(byte[] v) {html_toggle_hdr_cls = v; return this;} private byte[] html_toggle_hdr_cls = Bry_.Empty;
 	public boolean Visible() {return visible;} private boolean visible;
-	public Xoapi_toggle_itm Init(Xow_wiki wiki) {
+	public Xoapi_toggle_itm Init(Xowe_wiki wiki) {
 		if (Img_src_y == null) {
-			Io_url img_dir = wiki.App().User().Fsys_mgr().App_img_dir().GenSubDir_nest("window", "portal");
+			Io_url img_dir = wiki.Appe().User().Fsys_mgr().App_img_dir().GenSubDir_nest("window", "portal");
 			Img_src_y = img_dir.GenSubFil("twisty_down.png").To_http_file_bry();
 			Img_src_n = img_dir.GenSubFil("twisty_right.png").To_http_file_bry();
 		}

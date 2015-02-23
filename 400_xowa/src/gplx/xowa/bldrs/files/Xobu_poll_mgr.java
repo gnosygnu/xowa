@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 public class Xobu_poll_mgr implements GfoInvkAble {
-	public Xobu_poll_mgr(Xoa_app app) {this.app = app;} private Xoa_app app;
+	public Xobu_poll_mgr(Xoae_app app) {this.app = app;} private Xoae_app app;
 	public int Poll_interval() {return poll_interval;} private int poll_interval = 1000;
 	private Io_url poll_file;
 	public void Poll() {

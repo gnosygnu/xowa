@@ -21,7 +21,7 @@ public class Sites_regy_mgr implements GfoInvkAble {
 	private Hash_adp_bry hash = Hash_adp_bry.cs_();
 	private Xow_xwiki_mgr xwiki_mgr;
 	public Sites_regy_mgr(Sites_xtn_mgr xtn_mgr) {this.xtn_mgr = xtn_mgr;}
-	public void Init_by_wiki(Xow_wiki wiki) {this.xwiki_mgr = wiki.Xwiki_mgr();}
+	public void Init_by_wiki(Xowe_wiki wiki) {this.xwiki_mgr = wiki.Xwiki_mgr();}
 	public Sites_xtn_mgr Xtn_mgr() {return xtn_mgr;} private Sites_xtn_mgr xtn_mgr;
 	public void Set_many(String[] keys)	{
 		int len = keys.length;
@@ -30,7 +30,7 @@ public class Sites_regy_mgr implements GfoInvkAble {
 			hash.AddReplace(key, key);
 		}
 	}
-	public boolean Match(Xoa_page page, Xoa_ttl lnki_ttl) {
+	public boolean Match(Xoae_page page, Xoa_ttl lnki_ttl) {
 		byte[] xwiki_key = lnki_ttl.Wik_txt();
 		Xow_xwiki_itm xwiki_itm = xwiki_mgr.Get_by_key(xwiki_key); if (xwiki_itm == null) return false;
 		if (!hash.Has(xwiki_itm.Key_bry())) return false;

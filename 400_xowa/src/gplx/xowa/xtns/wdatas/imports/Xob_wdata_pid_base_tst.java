@@ -17,13 +17,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import org.junit.*;
-import gplx.xowa.wikis.*;
+import gplx.xowa.wikis.*; import gplx.xowa.tdbs.*;
 public class Xob_wdata_pid_base_tst {
 	gplx.xowa.bldrs.Xob_fxt fxt = new gplx.xowa.bldrs.Xob_fxt().Ctor_mem();
-	Io_url reg_(Xow_wiki wdata, String wiki) {return Wdata_idx_wtr.dir_pid_(wdata, wiki).GenSubFil(Xow_dir_info_.Name_reg_fil);}
-	Io_url ttl_(Xow_wiki wdata, String wiki, int fil_id) {
+	Io_url reg_(Xowe_wiki wdata, String wiki) {return Wdata_idx_wtr.dir_pid_(wdata, wiki).GenSubFil(Xotdb_dir_info_.Name_reg_fil);}
+	Io_url ttl_(Xowe_wiki wdata, String wiki, int fil_id) {
 		Io_url root = Wdata_idx_wtr.dir_pid_(wdata, wiki);
-		return Xow_fsys_mgr.Url_fil(root, fil_id, Xow_dir_info_.Bry_xdat);
+		return Xotdb_fsys_mgr.Url_fil(root, fil_id, Xotdb_dir_info_.Bry_xdat);
 	}
 	@Test   public void Basic() {
 		fxt.Wiki().Ns_mgr().Add_new(Wdata_wiki_mgr.Ns_property, "Property");

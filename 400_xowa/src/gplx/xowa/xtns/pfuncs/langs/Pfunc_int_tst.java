@@ -72,7 +72,7 @@ public class Pfunc_int_tst {
 		fxt.Test_parse_en("{{MediaWiki:january/en}}", "January");	// NOTE: no page exists called "MediaWiki:january/en", but returns "{{int:january/en}}" value
 	}
 	@Test  public void Create_msg_in_wiki_not_lang() {	// PURPOSE: if two wikis share same language and msg is missing from one, do not mark it missing in the other; EX: home/wiki/Main_Page and en.w:Main_Page; DATE:2014-05-13
-		Xow_wiki enwiktionary = fxt.Make_wiki("en.wiktionary.org");
+		Xowe_wiki enwiktionary = fxt.Make_wiki("en.wiktionary.org");
 		fxt.Init_msg_db(enwiktionary, "wiki_only_msg", "enwiktionary_msg");
 		fxt.Init_msg_gfs("wiki_only_msg", "en_gfs_msg", false, false);
 		fxt.Test_parse_en("{{int:wiki_only_msg}}", "en_gfs_msg");
@@ -82,7 +82,7 @@ public class Pfunc_int_tst {
 class Pf_msg_mgr_fxt {
 	private Xop_fxt fxt;
 	private Xol_lang en_lang;
-	private Xow_wiki en_wiki;
+	private Xowe_wiki en_wiki;
 	public void Reset() {
 		fxt = new Xop_fxt();	// new fxt, else transclude tests will fail
 		en_wiki = fxt.Wiki();
@@ -94,14 +94,14 @@ class Pf_msg_mgr_fxt {
 		msg_itm.Atrs_set(Bry_.new_utf8_(val), fmt, tmpl);
 	}
 	public void Init_msg_db(String ttl, String val) {Init_msg_db(en_wiki, ttl, val);}
-	public void Init_msg_db(Xow_wiki wiki, String ttl, String val) {
+	public void Init_msg_db(Xowe_wiki wiki, String ttl, String val) {
 		fxt.Init_page_create(wiki, "MediaWiki:" + ttl, val);
 	}
-	public Xow_wiki Make_wiki(String domain) {return fxt.App().Wiki_mgr().Get_by_key_or_make(Bry_.new_utf8_(domain));}
+	public Xowe_wiki Make_wiki(String domain) {return fxt.App().Wiki_mgr().Get_by_key_or_make(Bry_.new_utf8_(domain));}
 	public void Test_parse_en(String raw, String expd) {
 		fxt.Test_parse_tmpl_str_test(raw, "{{test}}"	, expd);
 	}
-	public void Test_parse_wiki(Xow_wiki alt_wiki, String raw, String expd) {
+	public void Test_parse_wiki(Xowe_wiki alt_wiki, String raw, String expd) {
 		Xop_fxt alt_fxt = new Xop_fxt(fxt.App(), alt_wiki);
 		alt_fxt.Test_parse_tmpl_str_test(raw, "{{test}}"	, expd);
 	}

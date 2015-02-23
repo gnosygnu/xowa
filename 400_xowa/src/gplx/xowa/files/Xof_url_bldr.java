@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.files.repos.*;
 public class Xof_url_bldr {
 	private final Bry_bfr bfr = Bry_bfr.reset_(400);
 	private byte[] ttl; private byte[] md5; private Xof_ext ext; private boolean file_is_thumb; private int file_w;
@@ -41,20 +42,6 @@ public class Xof_url_bldr {
 		this.file_is_thumb = mode == Xof_repo_itm.Mode_thumb; this.file_w = file_w; this.time = time; this.page = page;
 		return this;
 	}
-//		public Xof_url_bldr Init_for_trg_file(byte mode, Xof_repo_itm repo, byte[] ttl, byte[] md5, Xof_ext ext, int file_w, double time, int page) {
-//			this.dir_spr = repo.Dir_spr(); this.root = repo.Root(); this.wmf_dir_hive = Bool_.N;
-//			this.area = repo.Mode_names()[mode]; this.md5_dir_depth = repo.Dir_depth();
-//			this.ttl = repo.Gen_name_trg(ttl, md5, ext); this.md5 = md5; this.ext = ext;
-//			this.file_is_thumb = mode == Xof_repo_itm.Mode_thumb; this.file_w = file_w; this.time = time; this.page = page;
-//			return this;
-//		}
-//		public Xof_url_bldr Init_for_trg_html(byte mode, Xof_repo_itm repo, byte[] ttl, byte[] md5, Xof_ext ext, int file_w, double time, int page) {
-//			this.dir_spr = Byte_ascii.Slash; this.root = repo.Root_http(); this.wmf_dir_hive = Bool_.N;
-//			this.area = repo.Mode_names()[mode]; this.md5_dir_depth = repo.Dir_depth();
-//			this.ttl = repo.Gen_name_trg(ttl, md5, ext); this.md5 = md5; this.ext = ext;
-//			this.file_is_thumb = mode == Xof_repo_itm.Mode_thumb; this.file_w = file_w; this.time = time; this.page = page;
-//			return this;
-//		}
 	public Xof_url_bldr Init_for_trg_file(byte mode, Xof_repo_itm repo, byte[] ttl, byte[] md5, Xof_ext ext, int file_w, double time, int page) {
 		return Init(Bool_.N, Bool_.N, repo.Dir_spr(), repo.Root()
 			, repo.Mode_names()[mode], repo.Dir_depth(), repo.Gen_name_trg(ttl, md5, ext), md5, ext, mode, file_w, time, page);

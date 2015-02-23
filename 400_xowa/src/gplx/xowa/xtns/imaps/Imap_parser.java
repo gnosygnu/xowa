@@ -26,10 +26,10 @@ class Imap_parser {
 	private ListAdp shapes = ListAdp_.new_(), pts = ListAdp_.new_(), errs = ListAdp_.new_();
 	private byte[] src;
 	private int itm_idx; private int itm_bgn, itm_end;
-	private Xoa_app app; private Xow_wiki wiki; private Xop_ctx wiki_ctx, imap_ctx; private Xop_root_tkn imap_root;
+	private Xoae_app app; private Xowe_wiki wiki; private Xop_ctx wiki_ctx, imap_ctx; private Xop_root_tkn imap_root;
 	public Imap_parser(Imap_xtn_mgr xtn_mgr) {this.xtn_mgr = xtn_mgr;}
-	public void Init(Xow_wiki wiki, Xoa_url page_url, Gfo_usr_dlg usr_dlg) {
-		this.app = wiki.App(); this.wiki = wiki; this.page_url = page_url; this.usr_dlg = usr_dlg;
+	public void Init(Xowe_wiki wiki, Xoa_url page_url, Gfo_usr_dlg usr_dlg) {
+		this.app = wiki.Appe(); this.wiki = wiki; this.page_url = page_url; this.usr_dlg = usr_dlg;
 		this.wiki_ctx = wiki.Ctx();
 		if (imap_ctx == null) {
 			imap_ctx = Xop_ctx.new_(wiki);
@@ -41,9 +41,9 @@ class Imap_parser {
 		imap_img = null; imap_img_src = null; imap_desc = null; imap_dflt = null;
 		shapes.Clear(); pts.Clear(); errs.Clear();
 	}
-	public Imap_map Parse(Xow_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
+	public Imap_map Parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
 		Imap_map rv = new Imap_map(ctx.Cur_page().Html_data().Xtn_imap_next_id());
-		Init(wiki, ctx.Cur_page().Url(), wiki.App().Usr_dlg());
+		Init(wiki, ctx.Cur_page().Url(), wiki.Appe().Usr_dlg());
 		this.Parse(rv, src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
 		return rv;
 	}
@@ -159,13 +159,14 @@ class Imap_parser {
 	private void Init_link_owner(Imap_link_owner link_owner, byte[] src, int bgn, int end) {
 		byte[] link_tkn_src = Bry_.Mid(src, bgn, end);
 		Xop_tkn_itm link_tkn = Parse_link(link_tkn_src);
+		if (link_tkn == null) {Add_err(Bool_.N, bgn, end, "imap.invalid link_owner"); return;}	// exit early if invalid; PAGE:de.u:PPA/Raster/TK25/51/18/12/20; DATE:2015-02-02
 		link_tkn_src = imap_root.Data_mid();	// NOTE:must re-set link_tkn_src since link_tkn is expanded wikitext; i.e.: not "{{A}}" but "expanded"; PAGE:fr.w:Arrondissements_de_Lyon DATE:2014-08-12
 		Imap_link_owner_.Init(link_owner, app, wiki, link_tkn_src, link_tkn);
 	}
 	private Xop_tkn_itm Parse_link(byte[] raw) {
 		imap_root.Clear();
 		imap_ctx.Clear();			
-		wiki.Parser().Parse_text_to_wdom(imap_root, imap_ctx, wiki.App().Tkn_mkr(), raw, 0);
+		wiki.Parser().Parse_text_to_wdom(imap_root, imap_ctx, wiki.Appe().Tkn_mkr(), raw, 0);
 		int subs_len = imap_root.Subs_len();
 		for (int i = 0; i < subs_len; ++i) {
 			Xop_tkn_itm sub = imap_root.Subs_get(i);
@@ -183,11 +184,11 @@ class Imap_parser {
 		imap_img_src = Bry_.Add(Xop_tkn_.Lnki_bgn, Bry_.Mid(src, img_bgn, img_end), Xop_tkn_.Lnki_end);
 		Xop_tkn_itm tkn_itm = Parse_link(imap_img_src);			// NOTE: need to parse before imap_root.Data_mid() below
 		imap_img_src = imap_root.Data_mid();					// need to re-set src to pick up templates; EX: <imagemap>File:A.png|thumb|{{Test_template}}\n</imagemap>; PAGE:en.w:Kilauea; DATE:2014-07-27
-		Xop_lnki_logger file_wkr = wiki_ctx.Lnki().File_wkr();	// NOTE: do not do imap_ctx.Lnki(); imap_ctx is brand new
+		Xopg_redlink_logger file_wkr = wiki_ctx.Lnki().File_wkr();	// NOTE: do not do imap_ctx.Lnki(); imap_ctx is brand new
 		if (	tkn_itm == null									// no lnki or lnke
 			||	tkn_itm.Tkn_tid() != Xop_tkn_itm_.Tid_lnki		// no lnki; occurs with badly constructed maps; PAGE:en.w:Demography_of_the_United_Kingdom DATE:2015-01-22
 			)
-			imap_ctx.Wiki().App().Usr_dlg().Warn_many("", "", "image_map failed to find lnki; page=~{0} imageMap=~{1}", String_.new_utf8_(imap_ctx.Cur_page().Ttl().Full_txt()), String_.new_utf8_(imap_img_src));
+			imap_ctx.Wiki().Appe().Usr_dlg().Warn_many("", "", "image_map failed to find lnki; page=~{0} imageMap=~{1}", String_.new_utf8_(imap_ctx.Cur_page().Ttl().Full_txt()), String_.new_utf8_(imap_img_src));
 		else {
 			Xop_lnki_tkn lnki_tkn = (Xop_lnki_tkn)tkn_itm;
 			imap_img = new Imap_itm_img(lnki_tkn);
@@ -209,7 +210,7 @@ class Imap_parser {
 			else {
 				Object tid_obj = tid_trie.Match_bgn_w_byte(b, src, pos, src_end);
 				if (tid_obj == null) {		// not a known imap line; assume continuation of img line and skip to next line
-					imap_ctx.Wiki().App().Usr_dlg().Note_many("", "", "image_map extending image over multiple lines; page=~{0} imageMap=~{1}", String_.new_utf8_(imap_ctx.Cur_page().Ttl().Full_txt()), String_.new_utf8_(imap_img_src));
+					imap_ctx.Wiki().Appe().Usr_dlg().Note_many("", "", "image_map extending image over multiple lines; page=~{0} imageMap=~{1}", String_.new_utf8_(imap_ctx.Cur_page().Ttl().Full_txt()), String_.new_utf8_(imap_img_src));
 					int next_line = Bry_finder.Find_fwd(src, Byte_ascii.NewLine, pos);
 					if (next_line == Bry_finder.Not_found) next_line = src_end;
 					rv = next_line;

@@ -20,7 +20,7 @@ import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.dbs.tbls.*; import g
 public class Xob_redirect_cmd extends Xob_dump_mgr_base {		
 	private Db_conn conn; private Xob_redirect_tbl redirect_tbl;
 	private Xodb_mgr_sql db_mgr; private Xop_redirect_mgr redirect_mgr; private Url_encoder encoder;
-	public Xob_redirect_cmd(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
+	public Xob_redirect_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	@Override public String Cmd_key() {return KEY_redirect;} public static final String KEY_redirect = "wiki.redirect";
 	@Override public int[] Init_ns_ary() {return Int_.Ary(Xow_ns_.Id_file);}	// restrict to file ns
 	@Override public byte Init_redirect() {return Bool_.Y_byte;}				// restrict to redirects
@@ -30,10 +30,9 @@ public class Xob_redirect_cmd extends Xob_dump_mgr_base {
 	}
 	@Override protected Db_conn Init_db_file() {
 		this.db_mgr = wiki.Db_mgr_as_sql();
-		Xoa_app app = bldr.App();
 		redirect_mgr = wiki.Redirect_mgr();
-		encoder = app.Encoder_mgr().Url_ttl();
-		redirect_tbl = new Xob_redirect_tbl(wiki.Fsys_mgr().Root_dir(), app.Encoder_mgr().Url_ttl()).Create_table();
+		encoder = Xoa_app_.Utl_encoder_mgr().Url_ttl();
+		redirect_tbl = new Xob_redirect_tbl(wiki.Fsys_mgr().Root_dir(), Xoa_app_.Utl_encoder_mgr().Url_ttl()).Create_table();
 		conn = redirect_tbl.Conn();
 		conn.Txn_mgr().Txn_bgn_if_none();
 		return conn;

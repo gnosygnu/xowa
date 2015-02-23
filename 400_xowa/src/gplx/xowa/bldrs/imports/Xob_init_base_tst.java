@@ -20,7 +20,7 @@ import org.junit.*; import gplx.xowa.html.portal.*; import gplx.xowa.wikis.xwiki
 public class Xob_init_base_tst {
 	@Before public void init() {fxt.Clear();} private Xob_init_base_fxt fxt = new Xob_init_base_fxt();
 	@Test  public void Dirty_wiki_itms() {
-		Xoa_app app = fxt.App(); Xow_wiki wiki = fxt.Wiki();
+		Xoae_app app = fxt.App(); Xowe_wiki wiki = fxt.Wiki();
 		Xoa_available_wikis_mgr wikis_list = fxt.App().Gui_mgr().Html_mgr().Portal_mgr().Wikis();
 		Tfds.Eq("", wikis_list.Itms_as_html());			// assert
 		Xow_xwiki_itm xwiki_itm = app.User().Wiki().Xwiki_mgr().Add_full("en.wikipedia.org", "en.wikipedia.org");
@@ -38,6 +38,6 @@ class Xob_init_base_fxt {
 		}
 		Io_mgr._.InitEngine_mem();
 	}
-	public Xoa_app App() {return app;} private Xoa_app app;
-	public Xow_wiki Wiki() {return wiki;} private Xow_wiki wiki;
+	public Xoae_app App() {return app;} private Xoae_app app;
+	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 } 

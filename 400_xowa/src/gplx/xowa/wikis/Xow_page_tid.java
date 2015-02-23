@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.xtns.wdatas.*;
 public class Xow_page_tid {
-	public static byte Identify(byte wiki_tid, int ns_id, byte[] ttl) {
+	public static byte Identify(int wiki_tid, int ns_id, byte[] ttl) {
 		switch (ns_id) {
 			case Xow_ns_.Id_mediawiki:
 			case Xow_ns_.Id_user:

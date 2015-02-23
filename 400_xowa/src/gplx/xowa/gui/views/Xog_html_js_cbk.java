@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 import gplx.threads.*; import gplx.xowa.xtns.pfuncs.ifs.*;
 public class Xog_html_js_cbk implements GfoInvkAble {
-	private Xoa_app app;
+	private Xoae_app app;
 	private Xog_html_itm html_itm;
 	private Xop_root_tkn root = new Xop_root_tkn();
 	private Bry_bfr bfr = Bry_bfr.reset_(255);
@@ -41,8 +41,7 @@ public class Xog_html_js_cbk implements GfoInvkAble {
 		return rv;
 	}
 	private String Parse_to_html(GfoMsg m) {
-		Xoa_page page = html_itm.Owner_tab().Page();
-		Xow_wiki wiki = page.Wiki();
+		Xowe_wiki wiki = html_itm.Owner_tab().Wiki();
 		Xop_ctx ctx = wiki.Ctx();
 		boolean old_para_enabled = ctx.Para().Enabled();
 		byte[] raw = Bry_.new_utf8_(m.Args_getAt(0).Val_to_str_or_empty());
@@ -59,10 +58,10 @@ public class Xog_html_js_cbk implements GfoInvkAble {
 		}
 	}
 	private String Get_page(GfoMsg m) {
-		Xow_wiki wiki = html_itm.Owner_tab().Page().Wiki();
+		Xowe_wiki wiki = html_itm.Owner_tab().Wiki();
 		try {
 			Xoa_ttl ttl = Xoa_ttl.parse_(wiki, m.Args_getAt(0).Val_to_bry());
-			Xoa_page page = wiki.Data_mgr().Get_page(ttl, false);
+			Xoae_page page = wiki.Data_mgr().Get_page(ttl, false);
 			return String_.new_utf8_(page.Data_raw());
 		} catch (Exception e) {Err_.Noop(e); return null;}
 	}
@@ -70,7 +69,7 @@ public class Xog_html_js_cbk implements GfoInvkAble {
 		try {
 			byte[] js_cbk	= m.Args_getAt(0).Val_to_bry();
 			byte[] href_bry = m.Args_getAt(1).Val_to_bry();
-			return html_itm.Owner_tab().Page().Wiki().Html_mgr().Module_mgr().Popup_mgr().Get_async_bgn(js_cbk, href_bry);
+			return html_itm.Owner_tab().Wiki().Html_mgr().Module_mgr().Popup_mgr().Get_async_bgn(js_cbk, href_bry);
 		} catch (Exception e) {Err_.Noop(e); return null;}
 	}
 	private String Popups_get_html(GfoMsg m) {
@@ -78,10 +77,10 @@ public class Xog_html_js_cbk implements GfoInvkAble {
 			int	   popups_id	= Int_.Xby_double_(Double_.cast_(m.Args_getAt(0).Val()));
 			byte[] href_bry		= m.Args_getAt(1).Val_to_bry();
 			byte[] tooltip_bry	= m.Args_getAt(2).Val_to_bry();
-			return html_itm.Owner_tab().Page().Wiki().Html_mgr().Module_mgr().Popup_mgr().Show_init(popups_id, href_bry, tooltip_bry);
+			return html_itm.Owner_tab().Wiki().Html_mgr().Module_mgr().Popup_mgr().Show_init(popups_id, href_bry, tooltip_bry);
 		} catch (Exception e) {Err_.Noop(e); return null;}
 	}
-	private String[] Get_title_meta(Xow_wiki wiki, byte[] ttl_bry) {
+	private String[] Get_title_meta(Xowe_wiki wiki, byte[] ttl_bry) {
 		synchronized (tmp_page) {
 			tmp_page.Clear();
 			Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry);
@@ -90,7 +89,7 @@ public class Xog_html_js_cbk implements GfoInvkAble {
 		return String_.Ary(tmp_page.Exists() ? "1" : "0", Int_.Xto_str(tmp_page.Id()), Int_.Xto_str(tmp_page.Ns_id()), String_.new_utf8_(tmp_page.Ttl_wo_ns()), Bool_.Xto_str_lower(tmp_page.Type_redirect()), tmp_page.Modified_on().XtoStr_fmt("yyyy-MM-dd HH:mm:ss"), Int_.Xto_str(tmp_page.Text_len()));
 	}	private static final Xodb_page tmp_page = Xodb_page.tmp_();
 	private String[][] Get_titles_meta(GfoMsg m) {
-		Xow_wiki wiki = html_itm.Owner_tab().Page().Wiki();
+		Xowe_wiki wiki = html_itm.Owner_tab().Wiki();
 		try {
 			byte[][] ttls = Bry_.Split(Bry_.new_utf8_((String)m.ReadValAt(0)), Byte_ascii.NewLine);
 			int ttls_len = ttls.length;
@@ -102,11 +101,11 @@ public class Xog_html_js_cbk implements GfoInvkAble {
 			return rv;
 		} catch (Exception e) {Err_.Noop(e); return null;}
 	}
-	private boolean Get_title_exists(Xow_wiki wiki, byte[] ttl) {
+	private boolean Get_title_exists(Xowe_wiki wiki, byte[] ttl) {
 		return Pfunc_ifexist.Exists(wiki, ttl);
 	}		
 	private String[] Get_titles_exists(GfoMsg m) {
-		Xow_wiki wiki = html_itm.Owner_tab().Page().Wiki();
+		Xowe_wiki wiki = html_itm.Owner_tab().Wiki();
 		try {
 			byte[][] ttls = Bry_.Ary_obj((Object[])m.ReadValAt(0));
 			int ttls_len = ttls.length;
@@ -119,7 +118,7 @@ public class Xog_html_js_cbk implements GfoInvkAble {
 		} catch (Exception e) {Err_.Noop(e); return null;}
 	}		
 	private String Get_search_suggestions(GfoMsg m) {
-		Xow_wiki wiki = html_itm.Owner_tab().Page().Wiki();
+		Xowe_wiki wiki = html_itm.Owner_tab().Wiki();
 		byte[] search_str = Bry_.new_utf8_((String)m.ReadValAt(0));
 		byte[] cbk_func = Bry_.new_utf8_((String)m.ReadValAt(1));
 		app.Gui_mgr().Search_suggest_mgr().Search(wiki, search_str, cbk_func);

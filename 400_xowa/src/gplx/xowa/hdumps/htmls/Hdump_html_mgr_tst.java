@@ -105,10 +105,10 @@ class Hdump_html_mgr_fxt {
 	private Hdump_html_body html_mgr;
 	private Bry_bfr bfr = Bry_bfr.reset_(255);
 	private ListAdp img_list = ListAdp_.new_();
-	private Xow_wiki wiki;
+	private Xowe_wiki wiki;
 	public Xog_page Hpg() {return hpg;} private Xog_page hpg = new Xog_page();
 	public void Clear() {
-		Xoa_app app = Xoa_app_fxt.app_();
+		Xoae_app app = Xoa_app_fxt.app_();
 		wiki = Xoa_app_fxt.wiki_tst_(app);
 		html_mgr = wiki.Db_mgr().Hdump_mgr().Html_mgr();
 	}

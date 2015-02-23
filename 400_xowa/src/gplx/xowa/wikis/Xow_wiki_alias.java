@@ -37,28 +37,28 @@ public class Xow_wiki_alias {
 		Object o = alias_bry_trie.Match_bgn(src, src.length - 1, 0 - 1);
 		return (o == null) ? -1 : alias_bry_trie.Match_pos();
 	}
-	public static byte[] Build_alias(Xow_wiki_domain wiki_type) {
+	public static byte[] Build_alias(Xow_domain wiki_type) {
 		if (alias_bry_trie == null) Init_aliases();
-		byte tid = wiki_type.Wiki_tid();
-		byte[] alias = (byte[])alias_val_hash.Fetch(Byte_obj_ref.new_(tid));
+		int tid = wiki_type.Domain_tid();
+		byte[] alias = (byte[])alias_val_hash.Fetch(Int_obj_ref.new_(tid));
 		if (alias == null) return null;	
 		switch (tid) {
-			case Xow_wiki_domain_.Tid_commons:
-			case Xow_wiki_domain_.Tid_species:
-			case Xow_wiki_domain_.Tid_meta:
-			case Xow_wiki_domain_.Tid_incubator:
-			case Xow_wiki_domain_.Tid_wikidata:
-			case Xow_wiki_domain_.Tid_mediawiki:
-			case Xow_wiki_domain_.Tid_wikimediafoundation:
+			case Xow_domain_.Tid_int_commons:
+			case Xow_domain_.Tid_int_species:
+			case Xow_domain_.Tid_int_meta:
+			case Xow_domain_.Tid_int_incubator:
+			case Xow_domain_.Tid_int_wikidata:
+			case Xow_domain_.Tid_int_mediawiki:
+			case Xow_domain_.Tid_int_wikimediafoundation:
 				return alias;
-			case Xow_wiki_domain_.Tid_wikipedia:
-			case Xow_wiki_domain_.Tid_wiktionary:
-			case Xow_wiki_domain_.Tid_wikisource:
-			case Xow_wiki_domain_.Tid_wikibooks:
-			case Xow_wiki_domain_.Tid_wikiversity:
-			case Xow_wiki_domain_.Tid_wikiquote:
-			case Xow_wiki_domain_.Tid_wikinews:
-			case Xow_wiki_domain_.Tid_wikivoyage:
+			case Xow_domain_.Tid_int_wikipedia:
+			case Xow_domain_.Tid_int_wiktionary:
+			case Xow_domain_.Tid_int_wikisource:
+			case Xow_domain_.Tid_int_wikibooks:
+			case Xow_domain_.Tid_int_wikiversity:
+			case Xow_domain_.Tid_int_wikiquote:
+			case Xow_domain_.Tid_int_wikinews:
+			case Xow_domain_.Tid_int_wikivoyage:
 				return Bry_.Add(wiki_type.Lang_orig_key(), alias);
 			default:
 				throw Err_mgr._.unhandled_(tid);
@@ -71,16 +71,16 @@ public class Xow_wiki_alias {
 		if (alias_bry_trie == null) Init_aliases();
 		Object o = alias_bry_trie.Match_bgn(src, end - 1, bgn - 1); if (o == null) return Parse__domain_name_null;
 //																			 throw Err_mgr._.parse_(typeof(Xow_wiki_alias), src);
-		byte domain_tid = ((Byte_obj_ref)o).Val();
+		int domain_tid = ((Int_obj_ref)o).Val();
 		Bry_bfr bfr = Bry_bfr.reset_(255);
 		switch (domain_tid) {
-			case Domain_wikimediafoundation:	return bfr.Add(Xow_wiki_domain_.Key_wikimediafoundation_bry).Add_byte(Byte_ascii.Dot).Add(Xow_wiki_domain_.Seg_org_bry).Xto_bry_and_clear();
+			case Domain_wikimediafoundation:	return bfr.Add(Xow_domain_.Tid_bry_wikimediafoundation).Add_byte(Byte_ascii.Dot).Add(Xow_domain_.Seg_bry_org).Xto_bry_and_clear();
 			case Domain_wikidata:
-			case Domain_mediawiki:				return bfr.Add(Xow_wiki_domain_.Seg_www_bry).Add_byte(Byte_ascii.Dot).Add(Xow_wiki_domain_.Key_by_tid(domain_tid)).Add_byte(Byte_ascii.Dot).Add(Xow_wiki_domain_.Seg_org_bry).Xto_bry_and_clear();
+			case Domain_mediawiki:				return bfr.Add(Xow_domain_.Seg_bry_www).Add_byte(Byte_ascii.Dot).Add(Xow_domain_.Tid__get_bry(domain_tid)).Add_byte(Byte_ascii.Dot).Add(Xow_domain_.Seg_bry_org).Xto_bry_and_clear();
 			case Domain_commons:
 			case Domain_species:
 			case Domain_meta:
-			case Domain_incubator:				return bfr.Add(Xow_wiki_domain_.Key_by_tid(domain_tid)).Add_byte(Byte_ascii.Dot).Add(Xow_wiki_domain_.Seg_wikimedia_bry).Add_byte(Byte_ascii.Dot).Add(Xow_wiki_domain_.Seg_org_bry).Xto_bry_and_clear();
+			case Domain_incubator:				return bfr.Add(Xow_domain_.Tid__get_bry(domain_tid)).Add_byte(Byte_ascii.Dot).Add(Xow_domain_.Seg_bry_wikimedia).Add_byte(Byte_ascii.Dot).Add(Xow_domain_.Seg_bry_org).Xto_bry_and_clear();
 			case Domain_wikipedia:
 			case Domain_wiktionary:
 			case Domain_wikisource:
@@ -91,7 +91,7 @@ public class Xow_wiki_alias {
 			case Domain_wikivoyage:
 				bfr.Add_mid(src, 0, alias_bry_trie.Match_pos() + 1);
 				bfr.Add_byte(Byte_ascii.Dot);
-				return bfr.Add(Xow_wiki_domain_.Key_by_tid(domain_tid)).Add_byte(Byte_ascii.Dot).Add(Xow_wiki_domain_.Seg_org_bry).Xto_bry_and_clear();
+				return bfr.Add(Xow_domain_.Tid__get_bry(domain_tid)).Add_byte(Byte_ascii.Dot).Add(Xow_domain_.Seg_bry_org).Xto_bry_and_clear();
 		}
 		return null;
 	}
@@ -99,13 +99,13 @@ public class Xow_wiki_alias {
 //		public byte[] Domain() {if (domain == null) domain = Domain_init(lang_itm, domain_tid); return domain;} private byte[] domain;
 //		private static byte[] Domain_init(Xol_lang_itm lang_itm, byte domain_tid) {
 //			switch (domain_tid) {
-//				case Xow_wiki_abrv_.Tid_wikimediafoundation:	return Xow_wiki_domain_.Url_wikimediafoundation;
-//				case Xow_wiki_abrv_.Tid_wikidata:				return Xow_wiki_domain_.Url_wikidata;
-//				case Xow_wiki_abrv_.Tid_mediawiki:				return Xow_wiki_domain_.Url_mediawiki;
-//				case Xow_wiki_abrv_.Tid_commons:				return Xow_wiki_domain_.Url_commons;
-//				case Xow_wiki_abrv_.Tid_species:				return Xow_wiki_domain_.Url_species;
-//				case Xow_wiki_abrv_.Tid_meta:					return Xow_wiki_domain_.Url_meta;
-//				case Xow_wiki_abrv_.Tid_incubator:				return Xow_wiki_domain_.Url_incubator;
+//				case Xow_wiki_abrv_.Tid_wikimediafoundation:	return Xow_domain_.Bry_wikimediafoundation;
+//				case Xow_wiki_abrv_.Tid_wikidata:				return Xow_domain_.Domain_bry_wikidata;
+//				case Xow_wiki_abrv_.Tid_mediawiki:				return Xow_domain_.Bry_mediawiki;
+//				case Xow_wiki_abrv_.Tid_commons:				return Xow_domain_.Domain_bry_commons;
+//				case Xow_wiki_abrv_.Tid_species:				return Xow_domain_.Bry_species;
+//				case Xow_wiki_abrv_.Tid_meta:					return Xow_domain_.Bry_meta;
+//				case Xow_wiki_abrv_.Tid_incubator:				return Xow_domain_.Bry_incubator;
 //				case Xow_wiki_abrv_.Tid_wikipedia:
 //				case Xow_wiki_abrv_.Tid_wiktionary:
 //				case Xow_wiki_abrv_.Tid_wikisource:
@@ -117,9 +117,9 @@ public class Xow_wiki_alias {
 //					return Bry_.Add
 //					( lang_itm.Key()								// en
 //					, Byte_ascii.Dot_bry							// .
-//					, Xow_wiki_domain_.Key_by_tid(domain_tid)		// wikipedia
+//					, Xow_domain_.Tid__get_bry(domain_tid)		// wikipedia
 //					, Byte_ascii.Dot_bry							// .
-//					, Xow_wiki_domain_.Seg_org_bry					// org
+//					, Xow_domain_.Seg_bry_org					// org
 //					);
 //				default:
 //					return Bry_.Empty;
@@ -132,32 +132,32 @@ public class Xow_wiki_alias {
 		Object o = tid_bry_trie.Match_bgn(src, bgn, end); if (o == null) throw Err_mgr._.parse_(Xow_wiki_alias.class, src);
 		return ((Byte_obj_ref)o).Val();
 	}
-	public static void Build_alias_by_lang_tid(Bry_bfr bfr, byte[] lang_key, Byte_obj_ref wiki_tid) {
+	public static void Build_alias_by_lang_tid(Bry_bfr bfr, byte[] lang_key, Int_obj_ref wiki_tid) {
 		if (alias_bry_trie == null) Init_aliases();
 		byte[] domain_suffix = (byte[])alias_val_hash.Fetch(wiki_tid);
 		if (domain_suffix == null) return;
 		switch (wiki_tid.Val()) {
-			case Xow_wiki_domain_.Tid_commons:
-			case Xow_wiki_domain_.Tid_species:
-			case Xow_wiki_domain_.Tid_meta:
-			case Xow_wiki_domain_.Tid_incubator:
-			case Xow_wiki_domain_.Tid_wikidata:
-			case Xow_wiki_domain_.Tid_mediawiki:
-			case Xow_wiki_domain_.Tid_wikimediafoundation:
+			case Xow_domain_.Tid_int_commons:
+			case Xow_domain_.Tid_int_species:
+			case Xow_domain_.Tid_int_meta:
+			case Xow_domain_.Tid_int_incubator:
+			case Xow_domain_.Tid_int_wikidata:
+			case Xow_domain_.Tid_int_mediawiki:
+			case Xow_domain_.Tid_int_wikimediafoundation:
 				bfr.Add(domain_suffix);
 				break;
-			case Xow_wiki_domain_.Tid_other:
+			case Xow_domain_.Tid_int_other:
 				break;
 			default:
 				bfr.Add(lang_key).Add(domain_suffix);
 				break;
 		}
 	}
-	public static Xow_wiki_domain parse_by_wmf_key(byte[] wmf_key) {
+	public static Xow_domain parse_by_wmf_key(byte[] wmf_key) {
 		if (Bry_.Has(wmf_key, Byte_ascii.Underline))	// convert "_" to "-"; note that wmf_keys have a strict format of langtype; EX: "zh_yuewiki"; DATE:2014-10-06
 			wmf_key = Bry_.Replace_create(wmf_key, Byte_ascii.Underline, Byte_ascii.Dash);
 		byte[] domain_bry = Parse__domain_name(wmf_key, 0, wmf_key.length);
-		Xow_wiki_domain rv = Xow_wiki_domain_.parse_by_domain(domain_bry);
+		Xow_domain rv = Xow_domain_.parse(domain_bry);
 		rv.Wmf_key_(wmf_key);
 		return rv;
 	}
@@ -168,21 +168,21 @@ public class Xow_wiki_alias {
 	, Key_image = "image"
 	;
 	private static final byte 
-	  Domain_wikipedia = Xow_wiki_domain_.Tid_wikipedia
-	, Domain_wiktionary = Xow_wiki_domain_.Tid_wiktionary
-	, Domain_wikisource = Xow_wiki_domain_.Tid_wikisource
-	, Domain_wikibooks = Xow_wiki_domain_.Tid_wikibooks
-	, Domain_wikiversity = Xow_wiki_domain_.Tid_wikiversity
-	, Domain_wikiquote = Xow_wiki_domain_.Tid_wikiquote
-	, Domain_wikinews = Xow_wiki_domain_.Tid_wikinews
-	, Domain_wikivoyage = Xow_wiki_domain_.Tid_wikivoyage
-	, Domain_commons = Xow_wiki_domain_.Tid_commons
-	, Domain_species = Xow_wiki_domain_.Tid_species
-	, Domain_meta = Xow_wiki_domain_.Tid_meta
-	, Domain_incubator = Xow_wiki_domain_.Tid_incubator
-	, Domain_wikidata = Xow_wiki_domain_.Tid_wikidata
-	, Domain_mediawiki = Xow_wiki_domain_.Tid_mediawiki
-	, Domain_wikimediafoundation = Xow_wiki_domain_.Tid_wikimediafoundation;
+	  Domain_wikipedia = Xow_domain_.Tid_int_wikipedia
+	, Domain_wiktionary = Xow_domain_.Tid_int_wiktionary
+	, Domain_wikisource = Xow_domain_.Tid_int_wikisource
+	, Domain_wikibooks = Xow_domain_.Tid_int_wikibooks
+	, Domain_wikiversity = Xow_domain_.Tid_int_wikiversity
+	, Domain_wikiquote = Xow_domain_.Tid_int_wikiquote
+	, Domain_wikinews = Xow_domain_.Tid_int_wikinews
+	, Domain_wikivoyage = Xow_domain_.Tid_int_wikivoyage
+	, Domain_commons = Xow_domain_.Tid_int_commons
+	, Domain_species = Xow_domain_.Tid_int_species
+	, Domain_meta = Xow_domain_.Tid_int_meta
+	, Domain_incubator = Xow_domain_.Tid_int_incubator
+	, Domain_wikidata = Xow_domain_.Tid_int_wikidata
+	, Domain_mediawiki = Xow_domain_.Tid_int_mediawiki
+	, Domain_wikimediafoundation = Xow_domain_.Tid_int_wikimediafoundation;
 	private static void Init_aliases() {
 		alias_bry_trie = new Btrie_bwd_mgr(false);
 		alias_val_hash = HashAdp_.new_();
@@ -204,7 +204,7 @@ public class Xow_wiki_alias {
 	}
 	private static void Init_alias(String alias_str, byte domain) {
 		byte[] alias_bry = Bry_.new_ascii_(alias_str);
-		Byte_obj_ref domain_bval = Byte_obj_ref.new_(domain);
+		Int_obj_ref domain_bval = Int_obj_ref.new_(domain);
 		alias_bry_trie.Add(alias_bry, domain_bval);
 		alias_val_hash.Add(domain_bval, alias_bry);
 	}

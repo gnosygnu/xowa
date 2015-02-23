@@ -20,7 +20,7 @@ import gplx.dbs.*; import gplx.xowa.hdumps.dbs.*; import gplx.xowa.bldrs.*; impo
 import gplx.xowa2.gui.*;
 class Hdump_img_bldr_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	private Xodb_wiki_page_html_tbl text_tbl = new Xodb_wiki_page_html_tbl();
-	public Hdump_img_bldr_cmd(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
+	public Hdump_img_bldr_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Cmd_key() {return Key_const;} public static final String Key_const = "hdump.make.imgs";
 	public void Cmd_ini(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {}

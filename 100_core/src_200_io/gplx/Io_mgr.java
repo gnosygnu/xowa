@@ -94,6 +94,13 @@ public class Io_mgr {	// exists primarily to gather all cmds under gplx namespac
 		catch (Exception e) {throw Err_.new_("failed to load file").Add("url", url.Xto_api()).Add("e", Err_.Message_lang(e));}
 		finally {stream.Rls();}
 	}
+	public byte[]						LoadFilBry_loose(Io_url url) {return Bry_.new_utf8_(LoadFilStr_loose(url));}
+	public String						LoadFilStr_loose(Io_url url) {
+		String rv = LoadFilStr_args(url).BomUtf8Convert_(Bool_.Y).MissingIgnored_(Bool_.Y).Exec();
+		if (String_.Has(rv, "\r\n"))
+			rv = String_.Replace(rv, "\r\n", "\n");
+		return rv;
+	}
 	public void AppendFilBfr(Io_url url, Bry_bfr bfr) {AppendFilByt(url, bfr.Bfr(), 0, bfr.Len()); bfr.ClearAndReset();}
 	public void AppendFilByt(Io_url url, byte[] val) {AppendFilByt(url, val, 0, val.length);}
 	public void AppendFilByt(Io_url url, byte[] val, int len) {AppendFilByt(url, val, 0, len);}

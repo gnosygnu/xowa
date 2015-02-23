@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.orderBys; import gplx.*; import gplx.dbs.*;
-import org.junit.*;
+import org.junit.*; import gplx.dbs.qrys.*;
 public abstract class OrderBys_base_tst {
 	@Before public void setup() {
 		conn = provider_();

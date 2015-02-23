@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.core.flds.*; import gplx.ios.*; import gplx.xowa.bldrs.*; 
+import gplx.core.flds.*; import gplx.ios.*; import gplx.xowa.bldrs.*; import gplx.xowa.tdbs.*;
 public abstract class Xob_sql_dump_base extends Xob_itm_dump_base implements Xob_cmd, GfoInvkAble {
 	public abstract String Cmd_key();
 	public Io_url Src_fil() {return src_fil;} Io_url src_fil;
@@ -29,10 +29,10 @@ public abstract class Xob_sql_dump_base extends Xob_itm_dump_base implements Xob
 		this.Init_dump(this.Cmd_key());
 		make_url_gen = Io_url_gen_.dir_(temp_dir.GenSubDir("make"));
 		if (src_fil == null) {
-			src_fil = Xow_fsys_mgr.Find_file_or_null(wiki.Fsys_mgr().Root_dir(), "*" + Sql_file_name() + "*", ".gz", ".sql");
+			src_fil = Xotdb_fsys_mgr.Find_file_or_null(wiki.Fsys_mgr().Root_dir(), "*" + Sql_file_name() + "*", ".gz", ".sql");
 			if (src_fil == null) {
 				String msg = String_.Format(".sql file not found in dir: {0} {1}", Sql_file_name(), wiki.Fsys_mgr().Root_dir());
-				app.Gui_wtr().Warn_many("", "", msg);
+				app.Usr_dlg().Warn_many("", "", msg);
 				app.Gui_mgr().Kit().Ask_ok("", "", msg);
 				fail = true;
 				return;

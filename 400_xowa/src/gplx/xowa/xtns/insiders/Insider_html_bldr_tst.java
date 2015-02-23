@@ -35,7 +35,7 @@ public class Insider_html_bldr_tst {
 	}
 }
 class Insider_html_bldr_fxt {
-	private Xoa_app app; private Xow_wiki wiki; private Xoa_page page;
+	private Xoae_app app; private Xowe_wiki wiki; private Xoae_page page;
 	private Insider_xtn_mgr xtn_mgr;
 	private Insider_xtn_skin_itm skin_itm;
 	public void Clear() {

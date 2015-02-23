@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.primitives.*;
-import gplx.fsdb.*;
+import gplx.core.primitives.*; import gplx.dbs.cfgs.*;
+import gplx.fsdb.meta.*;
 import gplx.xowa.parsers.logs.*;
 import gplx.xowa.html.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
 public class Gallery_xnde implements Xox_xnde, Xop_xnde_atr_parser {
@@ -37,7 +37,7 @@ public class Gallery_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 	public Gallery_itm Itms_get_at(int i)	{return (Gallery_itm)itms.FetchAt(i);}
 	public Gallery_mgr_base Gallery_mgr()	{return gallery_mgr;} private Gallery_mgr_base gallery_mgr;
 	private boolean html_wtr_v1 = false;
-	public void Xatr_parse(Xow_wiki wiki, byte[] src, Xop_xatr_itm xatr, Object xatr_key_obj) {
+	public void Xatr_parse(Xowe_wiki wiki, byte[] src, Xop_xatr_itm xatr, Object xatr_key_obj) {
 		if (xatr_key_obj != null) {
 			Byte_obj_val xatr_key = (Byte_obj_val)xatr_key_obj;
 			switch (xatr_key.Val()) {
@@ -56,10 +56,10 @@ public class Gallery_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 			atrs_other.Add(xatr);
 		}
 	}
-	public void Xtn_parse(Xow_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
+	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
 		try {
 			ctx.Para().Process_block__xnde(xnde.Tag(), Xop_xnde_tag.Block_bgn);			// cancel pre for <gallery>; DATE:2014-03-11
-			Xop_xatr_itm.Xatr_parse(wiki.App(), this, Gallery_xnde_atrs.Key_hash, wiki, src, xnde);
+			Xop_xatr_itm.Xatr_parse(wiki.Appe(), this, Gallery_xnde_atrs.Key_hash, wiki, src, xnde);
 			xtn_mgr = (Gallery_xtn_mgr)wiki.Xtn_mgr().Get_or_fail(Gallery_xtn_mgr.XTN_KEY);
 			Init_atrs(wiki);
 			gallery_mgr.Get_modules(ctx.Cur_page());
@@ -67,11 +67,11 @@ public class Gallery_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 			boolean log_wkr_enabled = Log_wkr != Xop_log_basic_wkr.Null; if (log_wkr_enabled) Log_wkr.Log_end_xnde(ctx.Cur_page(), Xop_log_basic_wkr.Tid_gallery, src, xnde);
 			ctx.Para().Process_block__xnde(xnde.Tag(), Xop_xnde_tag.Block_end);			// cancel pre for <gallery>; DATE:2014-03-11
 		} catch (Exception exc) {
-			wiki.App().Usr_dlg().Warn_many("", "", "failed to write gallery; src=~{0} err=~{1}", String_.new_utf8_(src, xnde.Src_bgn(), xnde.Src_end()), Err_.Message_gplx(exc));
+			wiki.Appe().Usr_dlg().Warn_many("", "", "failed to write gallery; src=~{0} err=~{1}", String_.new_utf8_(src, xnde.Src_bgn(), xnde.Src_end()), Err_.Message_gplx(exc));
 		}
 	}	public static Xop_log_basic_wkr Log_wkr = Xop_log_basic_wkr.Null;
-	public void Xtn_write(Bry_bfr bfr, Xoa_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
-		Xow_wiki wiki = ctx.Wiki();
+	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
+		Xowe_wiki wiki = ctx.Wiki();
 		try {
 			if (html_wtr_v1)
 				xtn_mgr.Html_wtr().Write_html(bfr, app, wiki, ctx, html_wtr, hctx, ctx.Cur_page(), this, src);
@@ -79,11 +79,11 @@ public class Gallery_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 				gallery_mgr.Write_html(bfr, wiki, ctx.Cur_page(), ctx, hctx, src, this);
 			}
 		} catch (Exception exc) {
-			wiki.App().Usr_dlg().Warn_many("", "", "failed to write gallery; src=~{0} err=~{1}", String_.new_utf8_(src, xnde.Src_bgn(), xnde.Src_end()), Err_.Message_gplx(exc));
+			wiki.Appe().Usr_dlg().Warn_many("", "", "failed to write gallery; src=~{0} err=~{1}", String_.new_utf8_(src, xnde.Src_bgn(), xnde.Src_end()), Err_.Message_gplx(exc));
 		}
 	}
-	private void Init_atrs(Xow_wiki wiki) {
-		Fsdb_cfg_grp cfg_grp = wiki.File_mgr().Cfg_get(Xof_fsdb_mgr_cfg.Grp_xowa);
+	private void Init_atrs(Xowe_wiki wiki) {
+		Db_cfg_grp cfg_grp = wiki.File_mgr().Cfg_get(Xof_fsdb_mgr_cfg.Grp_xowa);
 		if (cfg_grp.Get_yn_or_n(Xof_fsdb_mgr_cfg.Key_gallery_fix_defaults)) {
 			if (itm_w == Gallery_xnde.Null && itm_h == Gallery_xnde.Null)	// if no w/h specified, set both to default (just like v1)
 				itm_w = itm_h = Gallery_xnde.Default;

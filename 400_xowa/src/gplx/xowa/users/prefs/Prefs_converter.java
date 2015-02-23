@@ -20,7 +20,7 @@ import gplx.xowa.cfgs.*;
 public class Prefs_converter {
 	private Bry_bfr bfr = Bry_bfr.new_();
 	private ListAdp list = ListAdp_.new_();
-	public void Check(Xoa_app app) {
+	public void Check(Xoae_app app) {
 		int options_version = app.Sys_cfg().Options_version();
 		if (options_version == 1) {
 			Io_url cfg_dir = app.User().Fsys_mgr().App_data_cfg_dir();

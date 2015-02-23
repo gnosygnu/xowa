@@ -21,9 +21,9 @@ public class Xop_link_parser {
 	public byte[] Html_xowa_ttl()	{return html_xowa_ttl;} private byte[] html_xowa_ttl;
 	public byte Html_anchor_cls()	{return html_anchor_cls;} private byte html_anchor_cls;
 	public byte Html_anchor_rel()	{return html_anchor_rel;} private byte html_anchor_rel;
-	public byte[] Parse(Bry_bfr tmp_bfr, Xoa_url tmp_url, Xow_wiki wiki, byte[] raw, byte[] or) {
+	public byte[] Parse(Bry_bfr tmp_bfr, Xoa_url tmp_url, Xowe_wiki wiki, byte[] raw, byte[] or) {
 		html_xowa_ttl = null; html_anchor_cls = Xoh_lnki_consts.Tid_a_cls_image; html_anchor_rel = Xoh_lnki_consts.Tid_a_rel_none;	// default member variables for html
-		Xoa_app app = wiki.App(); int raw_len = raw.length;
+		Xoae_app app = wiki.Appe(); int raw_len = raw.length;
 		app.Url_parser().Parse(tmp_url, raw);							
 		switch (tmp_url.Protocol_tid()) {
 			case Xoo_protocol_itm.Tid_http: case Xoo_protocol_itm.Tid_https:	// "http:" or "https:"; check if to offline wiki and redirect 
@@ -68,13 +68,13 @@ public class Xop_link_parser {
 		}
 		return raw;
 	}
-	private static boolean Parse__ttl(Bry_bfr tmp_bfr, Xow_wiki wiki, byte[] wiki_bry, byte[] page_bry) {
+	private static boolean Parse__ttl(Bry_bfr tmp_bfr, Xowe_wiki wiki, byte[] wiki_bry, byte[] page_bry) {
 		Xoa_ttl page_ttl = Xoa_ttl.parse_(wiki, page_bry);
 		boolean page_ttl_is_valid = page_ttl != null;
 		if (page_ttl_is_valid) {
 			Xow_xwiki_itm xwiki_itm = page_ttl.Wik_itm();
 			if (xwiki_itm != null) {				// is alias; set wiki, page
-				wiki_bry = xwiki_itm.Domain();
+				wiki_bry = xwiki_itm.Domain_bry();
 				page_bry = Bry_.Mid(page_bry, xwiki_itm.Key_bry().length + 1, page_bry.length);	// +1 for ":"
 			}
 			else									// is regular page; use ttl.Full_db() to normalize; EX: &nbsp; -> _

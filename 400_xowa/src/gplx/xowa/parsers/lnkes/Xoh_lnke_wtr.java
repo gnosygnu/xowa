@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.xowa.html.*; import gplx.xowa.net.*;
 public class Xoh_lnke_wtr {
-	private Xoa_app app;
-	public Xoh_lnke_wtr(Xow_wiki wiki) {this.app = wiki.App();}
+	private Xoae_app app;
+	public Xoh_lnke_wtr(Xowe_wiki wiki) {this.app = wiki.Appe();}
 	public void Write_all(Bry_bfr bfr, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_ctx ctx, byte[] src, Xop_lnke_tkn lnke) {
 		int lnke_bgn = lnke.Lnke_bgn(), lnke_end = lnke.Lnke_end(); boolean proto_is_xowa = lnke.Proto_tid() == Xoo_protocol_itm.Tid_xowa;
 		if (!hctx.Mode_is_alt()) {		// write href, unless mode is alt
@@ -57,7 +57,7 @@ public class Xoh_lnke_wtr {
 			else {							// xowa or regular; EX: http://a.org
 				if (proto_is_xowa) {
 					bfr.Add(Xop_lnke_wkr.Bry_xowa_protocol);
-					ctx.App().Encoder_mgr().Gfs().Encode(bfr, src, lnke_bgn, lnke_end);
+					Xoa_app_.Utl_encoder_mgr().Gfs().Encode(bfr, src, lnke_bgn, lnke_end);
 					return false;
 				}
 				else {						// regular; add href
@@ -67,7 +67,7 @@ public class Xoh_lnke_wtr {
 			}
 		}
 		else {	// xwiki
-			Url_encoder href_encoder = ctx.App().Encoder_mgr().Href_quotes();
+			Url_encoder href_encoder = Xoa_app_.Utl_encoder_mgr().Href_quotes();
 			bfr.Add(Xoh_href_parser.Href_site_bry).Add(lnke_xwiki_wiki).Add(Xoh_href_parser.Href_wiki_bry)
 				.Add(href_encoder.Encode(lnke.Lnke_xwiki_page()));	// NOTE: must encode page; EX:%22%3D -> '">' which will end attribute; PAGE:en.w:List_of_Category_A_listed_buildings_in_West_Lothian DATE:2014-07-15
 			if (lnke.Lnke_xwiki_qargs() != null)

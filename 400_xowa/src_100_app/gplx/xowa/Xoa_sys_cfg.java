@@ -16,9 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.xowa.langs.*;
 public class Xoa_sys_cfg implements GfoInvkAble {
-	private Xoa_app app;
-	public Xoa_sys_cfg(Xoa_app app) {this.app = app;}
+	private Xoae_app app;
+	public Xoa_sys_cfg(Xoae_app app) {this.app = app;}
 	public byte[] Lang() {return lang_key;}
 	public Xoa_sys_cfg Lang_(byte[] v) {
 		lang_key = Xol_lang_itm_.Get_by_key_or_en(v).Key();
@@ -58,7 +59,7 @@ class Options_list_lang_ {
 			if (translated.Has(itm.Key())) continue;
 			untranslated.Add(itm);
 		}
-		untranslated.SortBy(Xol_lang_itm_.Comparer_code);
+		untranslated.SortBy(Xol_lang_itm_.Comparer_key);
 
 		KeyVal[] rv = new KeyVal[len];
 		int translated_max = translated.Count();
@@ -71,7 +72,7 @@ class Options_list_lang_ {
 	}
 	private static KeyVal new_itm(Xol_lang_itm itm) {
 		String key_str = String_.new_utf8_(itm.Key());
-		String name_str = String_.new_utf8_(itm.Local_name());
+		String name_str = String_.new_utf8_(itm.Localized_name());
 		return KeyVal_.new_(key_str, name_str + " [" + key_str + "]");
 	}
 	private static void Add_itm_many(OrderedHash translated, int... langs) {

@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.lnkis.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*;
 public class Xoc_xwiki_repo_mgr implements GfoInvkAble {
 	private OrderedHash hash = OrderedHash_.new_bry_();
-	private Xow_wiki wiki;
-	public Xoc_xwiki_repo_mgr(Xow_wiki wiki) {this.wiki = wiki;}
+	private Xowe_wiki wiki;
+	public Xoc_xwiki_repo_mgr(Xowe_wiki wiki) {this.wiki = wiki;}
 	public boolean Has(byte[] abrv) {
 		Xoc_xwiki_repo_itm itm = (Xoc_xwiki_repo_itm)hash.Fetch(abrv);
 		return itm != null;

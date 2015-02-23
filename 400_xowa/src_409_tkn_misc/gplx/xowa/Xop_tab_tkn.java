@@ -24,7 +24,7 @@ public class Xop_tab_tkn extends Xop_tkn_itm_base {
 }
 class Xop_tab_lxr implements Xop_lxr {
 	public byte Lxr_tid() {return Xop_lxr_.Tid_tab;}
-	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr core_trie) {
+	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {
 		core_trie.Add(Byte_ascii.Tab, this);
 		core_trie.Add(Xop_tab_tkn.Bry_tab_ent, this);
 	}	

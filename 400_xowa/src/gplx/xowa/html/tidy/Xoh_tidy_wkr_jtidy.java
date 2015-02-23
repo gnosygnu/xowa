@@ -48,12 +48,12 @@ class Xoh_tidy_wkr_jtidy implements Xoh_tidy_wkr {
 		tidy.setShowErrors(0);					// NOTE: otherwise errors printed to output window; EX: Error: <time> is not recognized!
 		app.Usr_dlg().Log_many("", "", "jtidy.init; elapsed=~{0}", Env_.TickCount_elapsed_in_frac(bgn));
 	}
-		private Xoa_app app;
+		private Xoae_app app;
 	public byte Tid() {return Xoh_tidy_wkr_.Tid_jtidy;}
-	public void Init_by_app(Xoa_app app) {
+	public void Init_by_app(Xoae_app app) {
 		this.app = app;
 	}
-	public void Exec_tidy(Xoa_page page, Bry_bfr bfr) {
+	public void Exec_tidy(Xoae_page page, Bry_bfr bfr) {
 				if (tidy == null) tidy_init();			// lazy create to skip tests
 		int bfr_len = bfr.Len();
 		long bgn = Env_.TickCount();

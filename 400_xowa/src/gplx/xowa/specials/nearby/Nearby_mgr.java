@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.nearby; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
 public class Nearby_mgr implements Xows_page {
-	Xow_wiki wiki; byte[] trg;
+	Xowe_wiki wiki; byte[] trg;
 	private Hash_adp_bry excluded = Hash_adp_bry.ci_ascii_();
 	private Hash_adp_bry visited = Hash_adp_bry.ci_ascii_();
 	ListAdp trail = ListAdp_.new_();
@@ -27,12 +27,12 @@ public class Nearby_mgr implements Xows_page {
 //		int pages_count = 0;
 	Bry_bfr tmp_bfr = Bry_bfr.new_();
 	public int Results_max() {return results_max;} public Nearby_mgr Results_max_(int v) {results_max = v; return this;} private int results_max = 1;
-	public void Special_gen(Xoa_url calling_url, Xoa_page page, Xow_wiki wiki, Xoa_ttl ttl) {
+	public void Special_gen(Xoa_url calling_url, Xoae_page page, Xowe_wiki wiki, Xoa_ttl ttl) {
 		page.Data_raw_(Bld_html(wiki));
 		page.Html_data().Html_restricted_n_();		// [[Special:]] pages allow all HTML
 //			wiki.ParsePage(page, false);	// do not clear else previous Search_text will be lost		
 	}
-	byte[] Bld_html(Xow_wiki wiki) {
+	byte[] Bld_html(Xowe_wiki wiki) {
 		form_fmtr.Bld_bfr_many(tmp_bfr);
 		ListAdp list = Find_from_to(wiki, Bry_.new_ascii_("Earth"), Bry_.new_ascii_("Atom"), excluded);
 		tmp_bfr.Add_str("<table>");
@@ -65,7 +65,7 @@ public class Nearby_mgr implements Xows_page {
 		));
 	Xoa_ttl trg_ttl;
 	OrderedHash src_pool = OrderedHash_.new_bry_();
-	public ListAdp Find_from_to(Xow_wiki wiki, byte[] src_bry, byte[] trg_bry, Hash_adp_bry excluded) {
+	public ListAdp Find_from_to(Xowe_wiki wiki, byte[] src_bry, byte[] trg_bry, Hash_adp_bry excluded) {
 		this.wiki = wiki; this.excluded = excluded;
 		Xoa_ttl src_ttl = Xoa_ttl.parse_(wiki, src_bry); if (src_ttl == null) return ListAdp_.Null;
 		trg_ttl = Xoa_ttl.parse_(wiki, trg_bry); if (trg_ttl == null) return ListAdp_.Null;
@@ -90,7 +90,7 @@ public class Nearby_mgr implements Xows_page {
 			if (excluded.Has(ttl_bry)) continue;
 			if (visited.Has(ttl_bry)) continue;
 			visited.Add_bry_bry(ttl_bry);
-			Xoa_page page = wiki.Data_mgr().Get_page(ttl, false);
+			Xoae_page page = wiki.Data_mgr().Get_page(ttl, false);
 			if (page.Missing()) continue;
 			wiki.ParsePage(page, true);
 			OrderedHash lnkis = OrderedHash_.new_bry_();
@@ -124,12 +124,12 @@ public class Nearby_mgr implements Xows_page {
 //				if (results_cur == results_max) return;
 //			}
 	}
-//		private void Examine_page(Xow_wiki wiki, Xoa_ttl ttl, ListAdp trail){
+//		private void Examine_page(Xowe_wiki wiki, Xoa_ttl ttl, ListAdp trail){
 //			byte[] ttl_bry = ttl.Page_db();
 //			if (excluded.Has(ttl_bry)) return;
 //			if (visited.Has(ttl_bry)) return;
 //			visited.Add_bry_bry(ttl_bry);
-//			Xoa_page page = wiki.Data_mgr().Get_page(ttl, false);
+//			Xoae_page page = wiki.Data_mgr().Get_page(ttl, false);
 //			if (page.Missing()) return;
 //			++pages_count;
 //			wiki.ParsePage(page, true);

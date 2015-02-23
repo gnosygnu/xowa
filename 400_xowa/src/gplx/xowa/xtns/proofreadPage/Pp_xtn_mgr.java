@@ -21,8 +21,8 @@ public class Pp_xtn_mgr extends Xox_mgr_base {
 	@Override public boolean Enabled_default() {return false;}
 	@Override public byte[] Xtn_key() {return XTN_KEY;} public static final byte[] XTN_KEY = Bry_.new_ascii_("ProofreadPages");
 	@Override public Xox_mgr Clone_new() {return new Pp_xtn_mgr();}
-	@Override public void Xtn_init_by_wiki(Xow_wiki wiki) {
+	@Override public void Xtn_init_by_wiki(Xowe_wiki wiki) {
 		if (!this.Enabled_manually())
-			this.Enabled_(wiki.Domain_tid() == Xow_wiki_domain_.Tid_wikisource);	// only enable for wikisource
+			this.Enabled_(wiki.Domain_tid() == Xow_domain_.Tid_int_wikisource);	// only enable for wikisource
 	}
 }

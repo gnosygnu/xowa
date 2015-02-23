@@ -16,8 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
-import gplx.core.brys.*; import gplx.core.btries.*; import gplx.html.*; import gplx.xowa.html.*; import gplx.xowa.files.*;
-import gplx.xowa.apps.fsys.*; import gplx.xowa.hdumps.core.*; import gplx.xowa.html.lnkis.*; import gplx.xowa.xtns.gallery.*;
+import gplx.core.brys.*; import gplx.core.btries.*; import gplx.html.*; import gplx.xowa.html.*;
+import gplx.xowa.files.*; import gplx.xowa.files.repos.*;
+import gplx.xowa.wikis.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.hdumps.core.*; import gplx.xowa.html.lnkis.*; import gplx.xowa.xtns.gallery.*;
 import gplx.xowa2.gui.*;
 public class Hdump_html_body {
 	private Bry_bfr tmp_bfr = Bry_bfr.reset_(255); private Bry_rdr bry_rdr = new Bry_rdr(); private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_._;
@@ -34,7 +35,7 @@ public class Hdump_html_body {
 	}
 	public Hdump_html_body Init_by_page(byte[] domain_bry, Xog_page hpg) {
 		this.hpg = hpg;
-		file_dir_comm = tmp_bfr.Add(file_dir).Add(Xow_wiki_.Domain_commons_bry).Add_byte_slash().Xto_bry_and_clear();
+		file_dir_comm = tmp_bfr.Add(file_dir).Add(Xow_domain_.Domain_bry_commons).Add_byte_slash().Xto_bry_and_clear();
 		file_dir_wiki  = tmp_bfr.Add(file_dir).Add(domain_bry).Add_byte_slash().Xto_bry_and_clear();
 		return this;
 	}

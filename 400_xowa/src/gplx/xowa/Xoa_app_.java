@@ -16,15 +16,17 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.gfui.*; import gplx.xowa.users.*;
+import gplx.dbs.*; import gplx.gfui.*; 
+import gplx.xowa.apps.*; import gplx.xowa.langs.*; import gplx.xowa.users.*;
 import gplx.xowa.hdumps.*; import gplx.xowa.hdumps.core.*;
+import gplx.xowa.urls.encoders.*;
 public class Xoa_app_ {
 	public static void Run(String... args) {
 		Xoa_app_boot_mgr boot_mgr = new Xoa_app_boot_mgr();
 		boot_mgr.Run(args);
 	}
 	public static final String Name = "xowa";
-	public static final String Version = "2.2.1.1";
+	public static final String Version = "2.2.4.1";
 	public static String Build_date = "2012-12-30 00:00:00";
 	public static String Op_sys;
 	public static String User_agent = "";
@@ -36,6 +38,15 @@ public class Xoa_app_ {
 		rv.Log_wtr().Queue_enabled_(true);
 		return rv;
 	}
+
+	public static byte Mode = Xoa_app_.Mode_console;
+	public static Gfo_usr_dlg		Usr_dlg()			{return usr_dlg;}			public static void Usr_dlg_(Gfo_usr_dlg v) {usr_dlg = v;} private static Gfo_usr_dlg usr_dlg;
+	public static Bry_bfr_mkr		Utl_bry_bfr_mkr()	{return utl_bry_bfr_mkr;}	private static final Bry_bfr_mkr utl_bry_bfr_mkr = new Bry_bfr_mkr();
+	public static Url_encoder_mgr	Utl_encoder_mgr()	{return encoder_mgr;}		private static final Url_encoder_mgr encoder_mgr = new Url_encoder_mgr();
+
+	public static Xoa_gfs_mgr		Gfs_mgr() {return gfs_mgr;}		public static void Gfs_mgr_(Xoa_gfs_mgr v) {gfs_mgr = v;} private static Xoa_gfs_mgr gfs_mgr;
+//		public static Xoa_lang_mgr		Lang_mgr() {return lang_mgr;}	public static void Lang_mgr_(Xoa_lang_mgr v) {lang_mgr = v;} private static Xoa_lang_mgr lang_mgr;
+
 	public static final byte Mode_console = 0, Mode_gui = 1, Mode_http = 2;
 }	
 class Xoa_app_boot_mgr {
@@ -113,7 +124,7 @@ class Xoa_app_boot_mgr {
 	}
 	private void Run_app(App_cmd_mgr args_mgr) {
 		boolean app_mode_gui = false;
-		Xoa_app app = null;
+		Xoae_app app = null;
 		try {
 			// init vars
 			Io_url jar_dir = Env_.AppUrl().OwnerDir();
@@ -133,7 +144,8 @@ class Xoa_app_boot_mgr {
 			app_mode_gui = String_.Eq(app_mode, "gui");
 
 			// init app
-			app = new Xoa_app(usr_dlg, root_dir, user_dir, Xoa_app_.Op_sys); usr_dlg.Log_wtr().Queue_enabled_(false); log_wtr.Log_msg_to_session_fmt("app.init");
+			Db_conn_bldr.I.Reg_default_sqlite();
+			app = new Xoae_app(usr_dlg, root_dir, user_dir, Xoa_app_.Op_sys); usr_dlg.Log_wtr().Queue_enabled_(false); log_wtr.Log_msg_to_session_fmt("app.init");
 			app.Fsys_mgr().Wiki_dir_(wiki_dir);
 			try {
 				app.Sys_cfg().Lang_(System_lang());
@@ -142,10 +154,10 @@ class Xoa_app_boot_mgr {
 				app.Tcp_server().Rdr_port_(server_port_recv).Wtr_port_(server_port_send);
 				app.Http_server().Port_(http_server_port);
 				app.Http_server().Home_(http_server_home);
-				app.Init(); chkpoint = "init_gfs";
+				app.Init_by_app(); chkpoint = "init_gfs";
 			}
 			catch (Exception e) {usr_dlg.Warn_many("", "", "app init failed: ~{0} ~{1}", chkpoint, Err_.Message_gplx(e));}
-			app.Gui_wtr().Log_wtr_(app.Log_wtr());	// NOTE: log_wtr must be set for cmd-line (else process will fail);
+			app.Usr_dlg().Log_wtr_(app.Log_wtr());	// NOTE: log_wtr must be set for cmd-line (else process will fail);
 
 			// run gfs
 			gplx.xowa.users.prefs.Prefs_rename_mgr._.Check(app.User().Fsys_mgr().App_data_cfg_user_fil());
@@ -162,14 +174,14 @@ class Xoa_app_boot_mgr {
 			if		(String_.Eq(app_mode, "server"))
 				app.Tcp_server().Run();
 			else if	(String_.Eq(app_mode, "http_server")) {
-				app.Mode_(Xoa_app_.Mode_http);
+				Xoa_app_.Mode = Xoa_app_.Mode_http;
 				app.Http_server().Run();
 			}
 			else {
 				if (cmd_text != null)
 					ConsoleAdp._.WriteLine_utf8(Object_.Xto_str_strict_or_empty(app.Gfs_mgr().Run_str(cmd_text)));
 				if (app_mode_gui) {
-					app.Mode_(Xoa_app_.Mode_gui);
+					Xoa_app_.Mode = Xoa_app_.Mode_gui;
 					app.Gui_mgr().Run(); chkpoint = "run";
 				}
 				else	// teardown app, else lua will keep process running

@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*; import gplx.gfui.*;
 public class Xoc_layout_mgr implements GfoInvkAble {
-	public Xoc_layout_mgr(Xoa_app app) {
+	public Xoc_layout_mgr(Xoae_app app) {
 		this.app = app;
 		Ctor_by_os();
-	}	private Xoa_app app;
+	}	private Xoae_app app;
 	public byte Html_box_adj_type() {return html_box_adj_type;} private byte html_box_adj_type;
 	public RectAdp Html_box_adj_rect() {return html_box_adj_rect;} private RectAdp html_box_adj_rect = RectAdp_.Zero;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

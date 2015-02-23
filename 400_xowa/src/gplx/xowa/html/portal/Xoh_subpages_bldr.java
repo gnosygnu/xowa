@@ -17,10 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.portal; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 public class Xoh_subpages_bldr implements Bry_fmtr_arg {
-	private Xoa_app app;
+	private Xoae_app app;
 	private Bry_bfr tmp_bfr = Bry_bfr.reset_(255), ttl_bfr = Bry_bfr.reset_(255);
 	private byte[][] segs;
-	public Xoh_subpages_bldr(Xoa_app app) {this.app = app;}
+	public Xoh_subpages_bldr(Xoae_app app) {this.app = app;}
 	public byte[] Bld(Xow_ns_mgr ns_mgr, Xoa_ttl ttl) {
 		Xow_ns ns = ttl.Ns();
 		if (!	(	ns.Subpages_enabled()				// ns has subpages

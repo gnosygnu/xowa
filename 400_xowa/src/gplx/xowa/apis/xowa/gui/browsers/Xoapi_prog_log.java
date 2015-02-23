@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.apis.xowa.gui.browsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.apis.*; import gplx.xowa.apis.xowa.*; import gplx.xowa.apis.xowa.gui.*;
 import gplx.gfui.*; import gplx.xowa.gui.views.*;
 public class Xoapi_prog_log implements GfoInvkAble {
-	public void Init_by_kit(Xoa_app app) {this.app = app;} private Xoa_app app;
+	public void Init_by_kit(Xoae_app app) {this.app = app;} private Xoae_app app;
 	public void Show()									{app.Gui_mgr().Show_prog();}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_show)) 						this.Show();

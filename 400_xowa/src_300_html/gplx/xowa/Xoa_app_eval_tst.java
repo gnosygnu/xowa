@@ -30,11 +30,11 @@ class Xoa_app_eval_fxt {
 		if (app == null) {
 			app = Xoa_app_fxt.app_();
 			fmtr = Bry_fmtr.new_();
-			eval = new Xoa_app_eval(app);
+			eval = new Xoa_app_eval();
 			fmtr.Eval_mgr_(eval);
 			Xoa_gfs_mgr.Msg_parser_init();
 		}
-	}	private Xoa_app app; Bry_fmtr fmtr; Xoa_app_eval eval;
+	}	private Xoae_app app; Bry_fmtr fmtr; Xoa_app_eval eval;
 	public void Eval_test(String raw, String expd) {
 		Tfds.Eq(fmtr.Fmt_(raw).Bld_str_many(), expd);
 	}

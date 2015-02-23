@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.ios.*; import gplx.threads.*; import gplx.xowa.bldrs.*; 
 public class Xobc_core_decompress_bz extends Xob_itm_basic_base implements Xob_cmd {
-	public Xobc_core_decompress_bz(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki);}		
+	public Xobc_core_decompress_bz(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}		
 	public String Cmd_key() {return KEY;} public static final String KEY = "core.decompress_bz2";
 	public void Cmd_ini(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {}
@@ -39,14 +39,14 @@ public class Xobc_core_decompress_bz extends Xob_itm_basic_base implements Xob_c
 		trg = bldr.App().Fsys_mgr().Wiki_dir().GenSubFil_nest(wiki.Domain_str(), v.NameOnly());	// NOTE: NameOnly() will take "enwiki.xml.bz2" and make it "enwiki.xml"
 	}	Io_url src, trg;
 	static final String GRP_KEY = "xowa.bldr.cmd.decompress_bz2";
-	public static boolean Decompress(Xoa_app app, String src_fil, Io_url trg_fil) {
+	public static boolean Decompress(Xoae_app app, String src_fil, Io_url trg_fil) {
 		Io_mgr._.CreateDirIfAbsent(trg_fil.OwnerDir());	// 7zip will fail if dir does not exist
-		ProcessAdp decompress = app.Launcher().App_decompress_bz2();
+		ProcessAdp decompress = app.Prog_mgr().App_decompress_bz2();
 		decompress.Prog_dlg_(app.Usr_dlg()).Run_mode_(ProcessAdp.Run_mode_async);
 		decompress.Run(src_fil, trg_fil, trg_fil.OwnerDir().Xto_api());
 		while (decompress.Exit_code() == ProcessAdp.Exit_init) {
 			String size = gplx.ios.Io_size_.Xto_str(Io_mgr._.QueryFil(trg_fil).Size());
-			app.Gui_wtr().Prog_many(GRP_KEY, "decompress", "decompressing: ~{0}", size);
+			app.Usr_dlg().Prog_many(GRP_KEY, "decompress", "decompressing: ~{0}", size);
 			ThreadAdp_.Sleep(1000);
 		}
 		return true;

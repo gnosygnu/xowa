@@ -66,8 +66,8 @@ public class Xop_lnki_wkr__xwiki_tst {
 		Tfds.Eq(0, fxt.Page().Slink_list().Count());
 	}
 	@Test  public void Simple_and_english() {	// PURPOSE: s.w xwiki links to en were not working b/c s.w and en had same super lang of English; PAGE:s.q:Anonymous DATE:2014-09-10
-		Xoa_app app = Xoa_app_fxt.app_();
-		Xow_wiki wiki = Xoa_app_fxt.wiki_(app, "simple.wikipedia.org");
+		Xoae_app app = Xoa_app_fxt.app_();
+		Xowe_wiki wiki = Xoa_app_fxt.wiki_(app, "simple.wikipedia.org");
 		fxt = new Xop_fxt(app, wiki);						// change fxt to simple.wikipedia.org
 		Reg_xwiki_alias("en", "en.wikipedia.org");			// register "en" alias
 		fxt.Test_parse_page_wiki_str						// test nothing printed
@@ -77,8 +77,8 @@ public class Xop_lnki_wkr__xwiki_tst {
 		Tfds.Eq(1, fxt.Page().Slink_list().Count());		// test 1 xwiki lang
 	}
 	@Test  public void Species_and_commons() {	// PURPOSE: species xwiki links to commons should not put link in wikidata langs; PAGE:species:Scarabaeidae DATE:2014-09-10
-		Xoa_app app = Xoa_app_fxt.app_();
-		Xow_wiki wiki = Xoa_app_fxt.wiki_(app, "species.wikimedia.org");
+		Xoae_app app = Xoa_app_fxt.app_();
+		Xowe_wiki wiki = Xoa_app_fxt.wiki_(app, "species.wikimedia.org");
 		fxt = new Xop_fxt(app, wiki);							// change fxt to species.wikimedia.org
 		Reg_xwiki_alias("commons", "commons.wikimedia.org");	// register "en" alias
 		fxt.Test_parse_page_wiki_str							// test something printed
@@ -88,8 +88,8 @@ public class Xop_lnki_wkr__xwiki_tst {
 		Tfds.Eq(0, fxt.Page().Slink_list().Count());			// no xwiki langs
 	}
 	@Test  public void Wiktionary_and_wikipedia() {	// PURPOSE: do not create xwiki links if same lang and differet type; PAGE:s.d:water DATE:2014-09-14
-		Xoa_app app = Xoa_app_fxt.app_();
-		Xow_wiki wiki = Xoa_app_fxt.wiki_(app, "simple.wiktionary.org");
+		Xoae_app app = Xoa_app_fxt.app_();
+		Xowe_wiki wiki = Xoa_app_fxt.wiki_(app, "simple.wiktionary.org");
 		fxt = new Xop_fxt(app, wiki);						// change fxt to simple.wiktionary.org
 		Reg_xwiki_alias("w", "simple.wikipedia.org");		// register "w" alias
 		fxt.Test_parse_page_wiki_str						// test something printed
@@ -99,8 +99,8 @@ public class Xop_lnki_wkr__xwiki_tst {
 		Tfds.Eq(0, fxt.Page().Slink_list().Count());		// test 0 xwiki lang
 	}
 	@Test  public void Species_and_wikipedia() {	// PURPOSE: species creates xwiki links to wikipedia; PAGE:species:Puccinia DATE:2014-09-14
-		Xoa_app app = Xoa_app_fxt.app_();
-		Xow_wiki wiki = Xoa_app_fxt.wiki_(app, "species.wikimedia.org");
+		Xoae_app app = Xoa_app_fxt.app_();
+		Xowe_wiki wiki = Xoa_app_fxt.wiki_(app, "species.wikimedia.org");
 		fxt = new Xop_fxt(app, wiki);						// change fxt to species.wikimedia.org
 		Reg_xwiki_alias("fr", "fr.wikipedia.org");			// register "fr" alias
 		fxt.Test_parse_page_wiki_str						// nothing printed

@@ -16,8 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.fsdb.*; import gplx.ios.*; import gplx.xowa.files.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.dbs.tbls.*;
+import gplx.dbs.*; import gplx.dbs.engines.sqlite.*;
+import gplx.xowa.wikis.*; import gplx.xowa.dbs.*; import gplx.fsdb.*; import gplx.ios.*; import gplx.xowa.dbs.tbls.*;
+import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.fsdb.*;
 import gplx.xowa.bldrs.oimgs.*;
+import gplx.fsdb.data.*; import gplx.fsdb.meta.*;
 public class Xob_fsdb_make extends Xob_itm_basic_base implements Xob_cmd {
 	private int select_interval = 2500, progress_interval = 1, commit_interval = 1, delete_interval = 5000;
 	private int exec_count, exec_count_max = Int_.MaxValue;
@@ -32,27 +35,26 @@ public class Xob_fsdb_make extends Xob_itm_basic_base implements Xob_cmd {
 	private long time_bgn;
 	private Xodb_xowa_cfg_tbl tbl_cfg; private Db_conn conn; private Db_stmt db_select_stmt;
 	private Xof_bin_mgr src_mgr;
-	private Xof_fsdb_mgr_sql trg_fsdb_mgr; private Fsdb_mnt_mgr trg_mnt_mgr;
-	private ListAdp temp_files = ListAdp_.new_();
-	private Fsdb_xtn_img_itm tmp_img_itm = new Fsdb_xtn_img_itm(); private Fsdb_xtn_thm_itm tmp_thm_itm = Fsdb_xtn_thm_itm.new_(); private Fsdb_fil_itm tmp_fil_itm = new Fsdb_fil_itm();
+	private Xof_fsdb_mgr__sql trg_fsdb_mgr; private Fsm_mnt_mgr trg_mnt_mgr;
+	private Fsd_img_itm tmp_img_itm = new Fsd_img_itm(); private Fsd_thm_itm tmp_thm_itm = Fsd_thm_itm.new_(); private Fsd_fil_itm tmp_fil_itm = new Fsd_fil_itm();
 	private boolean app_restart_enabled = false;
-	private Xof_fsdb_mgr_sql src_fsdb_mgr;
-	public Xob_fsdb_make(Xob_bldr bldr, Xow_wiki wiki) {
+	private Xof_fsdb_mgr__sql src_fsdb_mgr;
+	public Xob_fsdb_make(Xob_bldr bldr, Xowe_wiki wiki) {
 		this.Cmd_ctor(bldr, wiki);
-		trg_fsdb_mgr = new Xof_fsdb_mgr_sql(wiki);
+		trg_fsdb_mgr = new Xof_fsdb_mgr__sql();
 		trg_fsdb_mgr.Init_by_wiki(wiki);
-		src_fsdb_mgr = new Xof_fsdb_mgr_sql(wiki);
+		src_fsdb_mgr = new Xof_fsdb_mgr__sql();
 		src_fsdb_mgr.Init_by_wiki(wiki);
 		src_mgr = src_fsdb_mgr.Bin_mgr();			
 		trg_mnt_mgr = trg_fsdb_mgr.Mnt_mgr();
-		trg_mnt_mgr.Insert_to_mnt_(Fsdb_mnt_mgr.Mnt_idx_main);	// NOTE: do not delete; mnt_mgr default to Mnt_idx_user; DATE:2014-04-25
-		Fsdb_mnt_mgr.Patch(trg_mnt_mgr);	// NOTE: always patch again; fsdb_make may be run separately without lnki_temp; DATE:2014-04-26
+		trg_mnt_mgr.Insert_to_mnt_(Fsm_mnt_mgr.Mnt_idx_main);	// NOTE: do not delete; mnt_mgr default to Mnt_idx_user; DATE:2014-04-25
+		Fsm_mnt_mgr.Patch(trg_mnt_mgr);	// NOTE: always patch again; fsdb_make may be run separately without lnki_temp; DATE:2014-04-26
 		poll_mgr = new Xobu_poll_mgr(bldr.App());
 	}
 	public String Cmd_key() {return KEY_oimg;} public static final String KEY_oimg = "file.fsdb_make";
 	public void Cmd_ini(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {
-		((Xof_bin_wkr_http_wmf)src_fsdb_mgr.Bin_mgr().Get_or_new(Xof_bin_wkr_.Key_http_wmf)).Fail_timeout_(1000);	// NOTE: set Fail_timeout here; DATE:2014-06-21; NOTE: do not put in ctor, or else will be 1st wkr; DATE:2014-06-28
+		((Xof_bin_wkr__http_wmf)src_fsdb_mgr.Bin_mgr().Wkrs__get_or_new(Xof_bin_wkr_.Key_http_wmf)).Fail_timeout_(1000);	// NOTE: set Fail_timeout here; DATE:2014-06-21; NOTE: do not put in ctor, or else will be 1st wkr; DATE:2014-06-28
 		this.wiki_key = wiki.Domain_bry();
 		wiki.Init_assert();
 		poll_interval = poll_mgr.Poll_interval();
@@ -201,15 +203,15 @@ public class Xob_fsdb_make extends Xob_itm_basic_base implements Xob_cmd {
 		}
 	}
 	private void Download(Xodb_tbl_oimg_xfer_itm itm) {
-		byte[] wiki = itm.Orig_repo() == Xof_repo_itm.Repo_local ? wiki_key : Xow_wiki_.Domain_commons_bry;
-		itm.Orig_wiki_(wiki);
+		byte[] wiki = itm.Orig_repo_id() == Xof_repo_itm.Repo_local ? wiki_key : Xow_domain_.Domain_bry_commons;
+		itm.Orig_repo_name_(wiki);
 		Io_stream_rdr bin_rdr = Io_stream_rdr_.Null;
 		if ((exec_count % progress_interval) == 0) {
 			int time_elapsed = Env_.TickCount_elapsed_in_sec(time_bgn);
 			usr_dlg.Prog_many("", "", "prog: num=~{0} err=~{1} time=~{2} rate=~{3} page=~{4} lnki=~{5} ttl=~{6}", exec_count, exec_fail, time_elapsed,  Math_.Div_safe_as_int(exec_count, time_elapsed), page_id_val, lnki_id_val, String_.new_utf8_(itm.Orig_ttl()));
 		}
 		try {
-			bin_rdr = src_mgr.Find_as_rdr(temp_files, Xof_exec_tid.Tid_wiki_page, itm);
+			bin_rdr = src_mgr.Find_as_rdr(Xof_exec_tid.Tid_wiki_page, itm);
 			if (bin_rdr == Io_stream_rdr_.Null)
 				Download_fail(itm);
 			else {
@@ -230,16 +232,16 @@ public class Xob_fsdb_make extends Xob_itm_basic_base implements Xob_cmd {
 		int db_uid = -1;
 		if (itm.File_is_orig()) {
 			if (itm.Lnki_ext().Id_is_image()) {
-				trg_fsdb_mgr.Img_insert(tmp_img_itm, itm.Orig_wiki(), itm.Lnki_ttl(), itm.Lnki_ext_id(), itm.Orig_w(), itm.Orig_h(), Sqlite_engine_.Date_null, Fsdb_xtn_thm_tbl.Hash_null, rdr.Len(), rdr);
+				trg_fsdb_mgr.Mnt_mgr().Img_insert(tmp_img_itm, itm.Orig_repo_name(), itm.Lnki_ttl(), itm.Lnki_ext_id(), itm.Orig_w(), itm.Orig_h(), Sqlite_engine_.Date_null, Fsd_thm_tbl.Hash_null, rdr.Len(), rdr);
 				db_uid = tmp_img_itm.Id();
 			}
 			else {
-				trg_fsdb_mgr.Fil_insert(tmp_fil_itm, itm.Orig_wiki(), itm.Lnki_ttl(), itm.Lnki_ext_id(), Sqlite_engine_.Date_null, Fsdb_xtn_thm_tbl.Hash_null, rdr.Len(), rdr);
+				trg_fsdb_mgr.Mnt_mgr().Fil_insert(tmp_fil_itm, itm.Orig_repo_name(), itm.Lnki_ttl(), itm.Lnki_ext_id(), Sqlite_engine_.Date_null, Fsd_thm_tbl.Hash_null, rdr.Len(), rdr);
 				db_uid = tmp_fil_itm.Id();
 			}
 		}
 		else {
-			trg_fsdb_mgr.Thm_insert(tmp_thm_itm, itm.Orig_wiki(), itm.Lnki_ttl(), itm.Lnki_ext_id(), itm.Html_w(), itm.Html_h(), itm.Lnki_thumbtime(), itm.Lnki_page(), Sqlite_engine_.Date_null, Fsdb_xtn_thm_tbl.Hash_null, rdr.Len(), rdr);
+			trg_fsdb_mgr.Mnt_mgr().Thm_insert(tmp_thm_itm, itm.Orig_repo_name(), itm.Lnki_ttl(), itm.Lnki_ext_id(), itm.Html_w(), itm.Html_h(), itm.Lnki_time(), itm.Lnki_page(), Sqlite_engine_.Date_null, Fsd_thm_tbl.Hash_null, rdr.Len(), rdr);
 			db_uid = tmp_thm_itm.Id();
 		}
 		if (app.Mode() == Xoa_app_.Mode_gui)
@@ -262,16 +264,7 @@ public class Xob_fsdb_make extends Xob_itm_basic_base implements Xob_cmd {
 		if (exit_after_commit)
 			exit_now = true;
 	}
-	private void Delete_files() {
-		int len = temp_files.Count();
-		for (int i = 0;i < len; i++) {
-			Io_url url = (Io_url)temp_files.FetchAt(i);
-			try		{Io_mgr._.DeleteFil(url);}
-			catch	(Exception e)  {
-				usr_dlg.Warn_many("", "", "failed to delete temp file: idx=~{0} url=~{1} exc=~{2}", i, url.Raw(), Err_.Message_gplx(e));
-			}
-		}
-		temp_files.Clear();
+	private void Delete_files() {// TODO: purge /xowa/file/ dir to free up hard disk space
 	}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_progress_interval_))		progress_interval = m.ReadInt("v");
@@ -316,16 +309,20 @@ class Xodb_tbl_oimg_xfer_itm extends Xof_fsdb_itm {	public int 			Lnki_id() {ret
 		rv.lnki_id			= rdr.ReadInt(Xob_xfer_regy_tbl.Fld_lnki_id);
 		rv.lnki_page_id		= rdr.ReadInt(Xob_xfer_regy_tbl.Fld_lnki_page_id);
 		rv.lnki_ext_id		= rdr.ReadInt(Xob_xfer_regy_tbl.Fld_lnki_ext);
-		rv.Orig_repo_		 (rdr.ReadByte(Xob_xfer_regy_tbl.Fld_orig_repo));
-		rv.File_is_orig_	 (rdr.ReadByte(Xob_xfer_regy_tbl.Fld_file_is_orig) == Bool_.Y_byte);
+		rv.File_is_orig_		(rdr.ReadByte(Xob_xfer_regy_tbl.Fld_file_is_orig) == Bool_.Y_byte);
 		byte[] ttl = rdr.ReadBryByStr(Xob_xfer_regy_tbl.Fld_lnki_ttl);
-		rv.Orig_ttl_(ttl);
+		rv.Ctor_by_orig
+		( rdr.ReadByte(Xob_xfer_regy_tbl.Fld_orig_repo)
+		, ttl
+		, rdr.ReadInt(Xob_xfer_regy_tbl.Fld_orig_w)
+		, rdr.ReadInt(Xob_xfer_regy_tbl.Fld_orig_h)
+		, Bry_.Empty
+		);
 		rv.Lnki_ttl_(ttl);
-		rv.Orig_size_(rdr.ReadInt(Xob_xfer_regy_tbl.Fld_orig_w), rdr.ReadInt(Xob_xfer_regy_tbl.Fld_orig_h));
 		rv.Html_size_(rdr.ReadInt(Xob_xfer_regy_tbl.Fld_file_w), rdr.ReadInt(Xob_xfer_regy_tbl.Fld_file_h));	// set html_size as file_size (may try to optimize later by removing similar thumbs (EX: 220,221 -> 220))
 		rv.Lnki_size_(rdr.ReadInt(Xob_xfer_regy_tbl.Fld_file_w), rdr.ReadInt(Xob_xfer_regy_tbl.Fld_file_h));	// set lnki_size; Xof_bin_mgr uses lnki_size;			
 		rv.Lnki_page_			(Xof_doc_page.Db_load_int(rdr, Xob_xfer_regy_tbl.Fld_lnki_page));
-		rv.Lnki_thumbtime_		(Xof_doc_thumb.Db_load_double(rdr, Xob_xfer_regy_tbl.Fld_lnki_time));
+		rv.Lnki_time_			(Xof_doc_thumb.Db_load_double(rdr, Xob_xfer_regy_tbl.Fld_lnki_time));
 		return rv;
 	}
 }

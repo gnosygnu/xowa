@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.core.primitives.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.net.*; import gplx.xowa.files.*;
+import gplx.xowa.langs.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.net.*; import gplx.xowa.files.*;
 public class Xoa_url_parser {
 	private Url_encoder encoder = Url_encoder.new_html_href_mw_().Itms_raw_same_many(Byte_ascii.Underline); private Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	public Gfo_url_parser Url_parser() {return url_parser;} private Gfo_url_parser url_parser = new Gfo_url_parser(); private Gfo_url gfo_url = new Gfo_url();
@@ -66,7 +66,7 @@ public class Xoa_url_parser {
 			byte[] sub_bry = segs_ary[1];							// lang/type seems to be 2nd seg; EX: "en", "fr"; "commons"
 			byte[] lang_bry = sub_bry;
 			if (upload_segs_hash.Has(sub_bry)) {					// wikimedia links will have fmt of "/wikipedia/commons"; must change to wikimedia
-				domain_bry = Xow_wiki_domain_.Seg_wikimedia_bry;
+				domain_bry = Xow_domain_.Seg_bry_wikimedia;
 				lang_bry = Xol_lang_itm_.Key__unknown;
 			}
 			tmp_bfr.Clear().Add(sub_bry).Add_byte(Byte_ascii.Dot)	// add lang/type + .;	EX: "en."; "fr."; "commons."
@@ -130,13 +130,13 @@ public class Xoa_url_parser {
 			: ary
 			;
 	}
-	public static Xoa_url Parse_url(Xoa_app app, Xow_wiki cur_wiki, String raw) {
+	public static Xoa_url Parse_url(Xoae_app app, Xowe_wiki cur_wiki, String raw) {
 		byte[] raw_bry = Bry_.new_utf8_(raw);
 		return Parse_url(Xoa_url.blank_(), app, cur_wiki, raw_bry, 0, raw_bry.length, false);
 	}
-	public static Xoa_url Parse_url(Xoa_app app, Xow_wiki cur_wiki, byte[] raw, int bgn, int end, boolean from_url_bar) {return Parse_url(Xoa_url.blank_(), app, cur_wiki, raw, bgn, end, from_url_bar);}
-	public static Xoa_url Parse_url(Xoa_url rv, Xoa_app app, Xow_wiki cur_wiki, byte[] raw, int bgn, int end, boolean from_url_bar) {
-		Xow_wiki wiki = null; Bry_bfr_mkr bfr_mkr = app.Utl_bry_bfr_mkr();
+	public static Xoa_url Parse_url(Xoae_app app, Xowe_wiki cur_wiki, byte[] raw, int bgn, int end, boolean from_url_bar) {return Parse_url(Xoa_url.blank_(), app, cur_wiki, raw, bgn, end, from_url_bar);}
+	public static Xoa_url Parse_url(Xoa_url rv, Xoae_app app, Xowe_wiki cur_wiki, byte[] raw, int bgn, int end, boolean from_url_bar) {
+		Xowe_wiki wiki = null; Bry_bfr_mkr bfr_mkr = app.Utl_bry_bfr_mkr();
 		byte[] cur_wiki_key = cur_wiki.Domain_bry();
 		byte[] page_bry = Bry_.Empty;
 		boolean page_is_main_page = false;
@@ -152,9 +152,9 @@ public class Xoa_url_parser {
 			if (Bry_.Len_gt_0(wiki_bry)) {					// NOTE: wiki_bry is null when passing in Category:A from home_wiki
 				Xow_xwiki_itm xwiki_itm = app.User().Wiki().Xwiki_mgr().Get_by_key(wiki_bry);	// check if url.Wiki_bry is actually wiki; note that checking User().Wiki().Xwiki_mgr() to find "offline" wikis
 				if (	xwiki_itm != null						// null-check
-					&&	Bry_.Eq(xwiki_itm.Domain(), wiki_bry)	// check that xwiki.domain == wiki; avoids false lang matches like "so/page" or "C/page"; EX: "fr.wikipedia.org" vs "fr"; ca.s:So/Natura_del_so; DATE:2014-04-26; PAGE:no.b:C/Variabler; DATE:2014-10-14
+					&&	Bry_.Eq(xwiki_itm.Domain_bry(), wiki_bry)// check that xwiki.domain == wiki; avoids false lang matches like "so/page" or "C/page"; EX: "fr.wikipedia.org" vs "fr"; ca.s:So/Natura_del_so; DATE:2014-04-26; PAGE:no.b:C/Variabler; DATE:2014-10-14
 					)
-					wiki =  app.Wiki_mgr().Get_by_key_or_make(xwiki_itm.Domain());
+					wiki =  app.Wiki_mgr().Get_by_key_or_make(xwiki_itm.Domain_bry());
 			}
 			if (rv.Page_bry() == null) {					// 1 seg; EX: "Earth"; "fr.wikipedia.org"
 				if (wiki != null) {							// wiki_bry is known wiki; EX: "fr.wikipedia.org"
@@ -183,7 +183,7 @@ public class Xoa_url_parser {
 					if (colon_pos != Bry_.NotFound) {							// alias found
 						Xow_xwiki_itm xwiki = cur_wiki.Xwiki_mgr().Get_by_mid(page_bry, 0, colon_pos);
 						if (xwiki != null) {
-							wiki = app.Wiki_mgr().Get_by_key_or_make(xwiki.Domain());
+							wiki = app.Wiki_mgr().Get_by_key_or_make(xwiki.Domain_bry());
 							page_bry = Bry_.Mid(page_bry, colon_pos + 1, page_bry.length); 
 							if (rv.Segs_ary().length == 0)		// handle xwiki without segs; EX: commons:Commons:Media_of_the_day; DATE:2014-02-19
 								rv.Segs_ary_(new byte[][] {Bry_wiki_name, page_bry});	// create segs of "/wiki/Page"
@@ -210,14 +210,14 @@ public class Xoa_url_parser {
 				page_bry = Xoa_page_.Main_page_bry_empty;
 		}
 		if (rv.Anchor_bry() != null) {
-			byte[] anchor_bry = app.Encoder_mgr().Id().Encode(rv.Anchor_bry());	// reencode for anchors (which use . encoding, not % encoding); PAGE:en.w:Enlightenment_Spain#Enlightened_despotism_.281759%E2%80%931788.29
+			byte[] anchor_bry = Xoa_app_.Utl_encoder_mgr().Id().Encode(rv.Anchor_bry());	// reencode for anchors (which use . encoding, not % encoding); PAGE:en.w:Enlightenment_Spain#Enlightened_despotism_.281759%E2%80%931788.29
 			rv.Anchor_bry_(anchor_bry);
 		}
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, page_bry);
 		if (ttl != null) {	// can still be empty; EX: "en.wikipedia.org"
 			Xow_xwiki_itm lang_xwiki = ttl.Wik_itm();
 			if (lang_xwiki != null && lang_xwiki.Type_is_xwiki_lang(wiki.Lang().Lang_id())) {	// format of http://en.wikipedia.org/wiki/fr:A
-				wiki = app.Wiki_mgr().Get_by_key_or_make(lang_xwiki.Domain());
+				wiki = app.Wiki_mgr().Get_by_key_or_make(lang_xwiki.Domain_bry());
 				page_bry = ttl.Page_txt();
 			}
 		}
@@ -225,13 +225,13 @@ public class Xoa_url_parser {
 		rv.Page_bry_(page_bry);
 		return rv;
 	}
-	private static Xow_wiki Parse_url__wiki(Xoa_app app, byte[] key) {
-		Xow_wiki rv = null;
+	private static Xowe_wiki Parse_url__wiki(Xoae_app app, byte[] key) {
+		Xowe_wiki rv = null;
 		Xow_xwiki_itm xwiki = app.User().Wiki().Xwiki_mgr().Get_by_key(key);
  			if (xwiki == null)
 			rv = app.User().Wiki();
 		else
-			rv = app.Wiki_mgr().Get_by_key_or_make(xwiki.Domain());
+			rv = app.Wiki_mgr().Get_by_key_or_make(xwiki.Domain_bry());
 		return rv;			
 	}
 	private static byte[] Parse_url__combine(Bry_bfr_mkr bry_bfr_mkr, byte[] wiki, byte[][] segs, byte[] page) {
@@ -252,7 +252,7 @@ public class Xoa_url_parser {
 		}
 		return bfr.Mkr_rls().Xto_bry_and_clear();
 	}
-	public static Xoa_url Parse_from_url_bar(Xoa_app app, Xow_wiki wiki, String s) {
+	public static Xoa_url Parse_from_url_bar(Xoae_app app, Xowe_wiki wiki, String s) {
 		byte[] bry = Bry_.new_utf8_(s);
 		bry = Parse_from_url_bar__strip_mobile(bry);
 		byte[] fmt = app.Gui_mgr().Url_macro_mgr().Fmt_or_null(bry);
@@ -299,5 +299,5 @@ public class Xoa_url_parser {
 	.Add_bry_byte(Bry_arg_fulltext, Id_arg_fulltext)
 	;
 	private static final Hash_adp_bry upload_segs_hash = Hash_adp_bry.ci_ascii_()
-	.Add_bry_bry(Xow_wiki_domain_.Key_commons_bry);//.Add_bry_bry(Xow_wiki_domain_.Key_species_bry).Add_bry_bry(Xow_wiki_domain_.Key_meta_bry);
+	.Add_bry_bry(Xow_domain_.Tid_bry_commons);//.Add_bry_bry(Xow_domain_.Tid_bry_species_bry).Add_bry_bry(Xow_domain_.Tid_bry_meta_bry);
 }

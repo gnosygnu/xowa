@@ -87,7 +87,7 @@ public class Listing_xnde_basic_tst {
 		,	"<strong>name_0</strong>. content_0"
 		);
 	}
-	public static void Add_listing_msgs(Xow_wiki wiki) {
+	public static void Add_listing_msgs(Xowe_wiki wiki) {
 		Xol_msg_mgr msg_mgr = wiki.Lang().Msg_mgr();
 		msg_mgr.Itm_by_key_or_new("listings-unknown", "Unknown destination");
 		msg_mgr.Itm_by_key_or_new("listings-desc", "Add tags for listing locations");

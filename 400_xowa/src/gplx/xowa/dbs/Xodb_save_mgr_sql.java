@@ -19,7 +19,7 @@ package gplx.xowa.dbs; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*; import gplx.ios.*;
 public class Xodb_save_mgr_sql implements Xodb_save_mgr {
 	public Xodb_save_mgr_sql(Xodb_mgr_sql db_mgr) {
-		this.db_mgr = db_mgr; zip_mgr = db_mgr.Wiki().App().Zip_mgr();
+		this.db_mgr = db_mgr; zip_mgr = db_mgr.Wiki().Appe().Zip_mgr();
 	} 	private Xodb_mgr_sql db_mgr; private Io_stream_zip_mgr zip_mgr;
 	public boolean Create_enabled() {return create_enabled;} public void Create_enabled_(boolean v) {create_enabled = v;} private boolean create_enabled;
 	public boolean Update_modified_on_enabled() {return update_modified_on_enabled;} public void Update_modified_on_enabled_(boolean v) {update_modified_on_enabled = v;} private boolean update_modified_on_enabled;
@@ -57,7 +57,7 @@ public class Xodb_save_mgr_sql implements Xodb_save_mgr {
 			text_stmt.Rls();
 		}
 	}
-	public void Data_update(Xoa_page page, byte[] text) {
+	public void Data_update(Xoae_page page, byte[] text) {
 		boolean redirect = db_mgr.Wiki().Redirect_mgr().Is_redirect(text, text.length);
 		DateAdp modified = update_modified_on_enabled ? DateAdp_.Now() : page.Revision_data().Modified_on();
 		boolean redirect_changed = redirect != db_mgr.Wiki().Redirect_mgr().Is_redirect(page.Data_raw(), page.Data_raw().length);
@@ -82,7 +82,7 @@ public class Xodb_save_mgr_sql implements Xodb_save_mgr {
 		text = zip_mgr.Zip(db_mgr.Data_storage_format(), text);
 		db_mgr.Tbl_text().Update(db_page.Text_db_id(), page.Revision_data().Id(), text);
 	}
-	public void Data_rename(Xoa_page page, int trg_ns, byte[] trg_ttl) {
+	public void Data_rename(Xoae_page page, int trg_ns, byte[] trg_ttl) {
 		Db_qry qry = Db_qry_.update_common_("page", Db_crt_.eq_("page_id", page.Revision_data().Id())
 		, KeyVal_.new_("page_namespace", trg_ns)
 		, KeyVal_.new_("page_title", String_.new_utf8_(trg_ttl))

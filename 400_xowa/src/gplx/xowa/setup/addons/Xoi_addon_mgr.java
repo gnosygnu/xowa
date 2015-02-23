@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.setup.addons; import gplx.*; import gplx.xowa.*; import gplx.xowa.setup.*;
 public class Xoi_addon_mgr implements GfoInvkAble {
 	public Xoi_firefox_installer Firefox() {return firefox;} private Xoi_firefox_installer firefox = new Xoi_firefox_installer();
-	public void Init_by_app(Xoa_app app) {
+	public void Init_by_app(Xoae_app app) {
 		firefox.Init_by_app(app);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

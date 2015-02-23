@@ -19,8 +19,37 @@ package gplx.srls.dsvs; import gplx.*; import gplx.srls.*;
 public class Dsv_fld_parser_ {
 	public static final Dsv_fld_parser Bry_parser = Dsv_fld_parser_bry._;
 	public static final Dsv_fld_parser Int_parser = Dsv_fld_parser_int._;
+	public static final Dsv_fld_parser Line_parser__comment_is_pipe = new Dsv_fld_parser_line(Byte_ascii.Pipe);
 	public static Err err_fld_unhandled(Dsv_fld_parser parser, Dsv_wkr_base wkr, int fld_idx, byte[] src, int bgn, int end) {
 		throw Err_.new_fmt_("fld unhandled; parser={0} wkr={1} fld_idx={2} val={3}", ClassAdp_.NameOf_obj(parser), ClassAdp_.NameOf_obj(wkr), fld_idx, String_.new_utf8_(src, bgn, end));
+	}
+}
+class Dsv_fld_parser_line implements Dsv_fld_parser {
+	private byte row_dlm = Byte_ascii.NewLine; private final byte comment_dlm;
+	public Dsv_fld_parser_line(byte comment_dlm) {this.comment_dlm = comment_dlm;}
+	public void Init(byte fld_dlm, byte row_dlm) {
+		this.row_dlm = row_dlm;
+	}
+	public int Parse(Dsv_tbl_parser parser, Dsv_wkr_base wkr, byte[] src, int pos, int src_len, int fld_idx, int fld_bgn) {
+		while (true) {
+			boolean pos_is_last = pos == src_len;				
+			byte b = pos_is_last ? row_dlm : src[pos];
+			if		(b == comment_dlm) {
+				pos = Bry_finder.Find_fwd_until(src, pos, src_len, row_dlm);
+				if (pos == Bry_finder.Not_found)
+					pos = src_len;
+			}
+			else if (b == row_dlm) {
+				boolean pass = wkr.Write_bry(parser, fld_idx, src, fld_bgn, pos);
+				if (!pass) throw Dsv_fld_parser_.err_fld_unhandled(this, wkr, fld_idx, src, fld_bgn, pos);
+				wkr.Commit_itm(parser, pos);
+				int rv = pos + 1; // row_dlm is always 1 byte
+				parser.Update_by_row(rv);
+				return rv; 
+			}
+			else
+				++pos;
+		}
 	}
 }
 class Dsv_fld_parser_bry implements Dsv_fld_parser {

@@ -20,7 +20,7 @@ public class Xoh_cmd_mgr {
 	public int Count() {return cmds.Count();}
 	public void Clear() {cmds.Clear();}
 	public void Add(Xoh_cmd_itm itm) {cmds.Add(itm);} ListAdp cmds = ListAdp_.new_();
-	public void Exec(Xoa_app app, Xoa_page page) {
+	public void Exec(Xoae_app app, Xoae_page page) {
 		int len = cmds.Count();
 		if (len == 0) return;
 		Gfo_usr_dlg usr_dlg = app.Usr_dlg();

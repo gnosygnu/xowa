@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.dbs.*;
-import gplx.dbs.*;
+import gplx.dbs.*; import gplx.dbs.qrys.*;
 public class Xodb_xowa_ns_tbl {
 	public void Conn_(Db_conn conn) {this.conn = conn;} private Db_conn conn;
 	public void Insert(Xow_ns_mgr ns_mgr) {

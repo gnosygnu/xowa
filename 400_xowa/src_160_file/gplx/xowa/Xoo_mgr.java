@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 class Xoo_mgr implements GfoInvkAble {
-	public Xoo_mgr(Xoa_app app) {this.app = app;} private Xoa_app app;
+	public Xoo_mgr(Xoae_app app) {this.app = app;} private Xoae_app app;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_owner)) return app;
 		else	return GfoInvkAble_.Rv_unhandled;

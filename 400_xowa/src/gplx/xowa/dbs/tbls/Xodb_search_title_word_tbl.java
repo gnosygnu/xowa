@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.dbs.*;
-import gplx.core.primitives.*; import gplx.dbs.*;
+import gplx.core.primitives.*; import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.engines.sqlite.*;
 public class Xodb_search_title_word_tbl {
 	public static void Create_table(Db_conn p)						{Sqlite_engine_.Tbl_create(p, Tbl_name, Tbl_sql);}
 	public static void Create_index(Gfo_usr_dlg usr_dlg, Db_conn p)	{Sqlite_engine_.Idx_create(usr_dlg, p, "search", Indexes_main);}

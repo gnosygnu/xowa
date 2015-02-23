@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.fmtrs; import gplx.*; import gplx.xowa.*;
 public class Xoa_fmtr_itm implements GfoInvkAble {
-	public Xoa_fmtr_itm(Xoa_app app) {this.app = app;} private Xoa_app app;
+	public Xoa_fmtr_itm(Xoae_app app) {this.app = app;} private Xoae_app app;
 	public String Src() {return src;} public Xoa_fmtr_itm Src_(String v) {this.src = v; return this;} private String src;
 	public byte[] Fmt() {return fmt;} public Xoa_fmtr_itm Fmt_(byte[] v) {this.fmt = v; return this;} private byte[] fmt;
 	public Object Sorter() {
@@ -55,7 +55,7 @@ public class Xoa_fmtr_itm implements GfoInvkAble {
 	;
 }
 class Bfmtr_eval_invk implements Bry_fmtr_eval_mgr {
-	public Bfmtr_eval_invk(Xoa_app app) {this.app = app;} private Xoa_app app;
+	public Bfmtr_eval_invk(Xoae_app app) {this.app = app;} private Xoae_app app;
 	public Bfmtr_eval_invk Invk_(GfoInvkAble invk) {this.invk = invk; return this;} private GfoInvkAble invk;
 	public boolean Enabled() {return enabled;} public void Enabled_(boolean v) {enabled = v;} private boolean enabled = true;
 	public byte[] Eval(byte[] cmd) {

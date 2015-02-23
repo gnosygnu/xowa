@@ -119,14 +119,14 @@ class Wdata_fmtr__claim_row implements Bry_fmtr_arg {
 	}
 	private Bry_fmtr row_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
-	, "              <div class='wb-statement wb-statementview wb-claimview'>"
-	, "                <div class='wb-statement-rank'>"
-	, "                  <div class='wb-rankselector ui-state-disabled'>"
-	, "                    <span class='ui-icon ui-icon-rankselector wb-rankselector-~{rank_name}' title='~{rank_name} rank'/>"
+	, "              <div class='wikibase-statement wikibase-statementview wb-claimview'>"
+	, "                <div class='wikibase-statementview-rankselector'>"
+	, "                  <div class='wikibase-rankselector ui-state-disabled'>"
+	, "                    <span class='ui-icon ui-icon-rankselector wikibase-rankselector-~{rank_name}' title='~{rank_name} rank'/>"
 	, "                  </div>"
 	, "                </div>"
-	, "                <div class='wb-claim wb-claim'>"	// omit -Q2$e8ba1188-4aec-9e37-a75e-f79466c1913e
-	, "                  <div class='wb-claim-mainsnak' dir='auto'>"
+	, "                <div class='wikibase-statementview-mainsnak-container'>"	// omit -Q2$e8ba1188-4aec-9e37-a75e-f79466c1913e
+	, "                  <div class='wikibase-statementview-mainsnak' dir='auto'>"
 	, "                    <div class='wb-snak wb-snakview'>"
 	, "                      <div class='wb-snak-property-container'>"
 	, "                        <div class='wb-snak-property' dir='auto'></div>"
@@ -159,7 +159,7 @@ class Wdata_fmtr__qual_tbl implements Bry_fmtr_arg {
 	}
 	private Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
-	, "                  <div class='wb-claim-qualifiers wb-statement-qualifiers'>"
+	, "                  <div class='wikibase-statementview-qualifiers'>"
 	, "                    <div class='wb-listview'>~{itms}"
 	, "                    </div>"
 	, "                  </div>"
@@ -224,7 +224,7 @@ class Wdata_fmtr__ref_tbl implements Bry_fmtr_arg {
 	private Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 //		, "                <div class='wb-statement-references-heading'>1 reference</div>"
-	, "                <div class='wb-statement-references'>"
+	, "                <div class='wikibase-statementview-references'>"
 	, "                  <div class='wb-listview'>"
 	, "                    <div class='wb-referenceview'>"	// OMIT: wb-referenceview-8e7d51e38606193465d2a1e9d41ba490e06682a6
 	, "                      <div class='wb-referenceview-heading'></div>"

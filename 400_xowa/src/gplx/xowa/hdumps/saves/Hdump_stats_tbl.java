@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps.saves; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
-import gplx.dbs.*; import gplx.xowa.hdumps.core.*; import gplx.xowa.html.hzips.*;
+import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.hdumps.core.*; import gplx.xowa.html.hzips.*;
 import gplx.xowa2.gui.*;
 class Hdump_stats_tbl {
 	private Db_stmt stmt_insert;

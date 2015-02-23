@@ -164,7 +164,7 @@ public class Xoh_href_parser_tst {
 	@Test   public void Parse_xwiki_cases_correctly() {	// PURPOSE: xwiki links should use case_match of xwiki (en.wiktionary.org) not cur_wiki (en.wikipedia.org); EX:w:Alphabet
 		fxt	.Prep_raw_("/site/en.wiktionary.org/wiki/alphabet")
 			.Init_xwiki_alias("en.wiktionary.org", "en.wiktionary.org");
-		Xow_wiki en_wiktionary_org = fxt.App().Wiki_mgr().Get_by_key_or_make(Bry_.new_ascii_("en.wiktionary.org"));
+		Xowe_wiki en_wiktionary_org = fxt.App().Wiki_mgr().Get_by_key_or_make(Bry_.new_ascii_("en.wiktionary.org"));
 		en_wiktionary_org.Ns_mgr().Ns_main().Case_match_(Xow_ns_case_.Id_all);
 		fxt	.Expd_tid_(Xoh_href.Tid_site)
 			.Expd_full_("en.wiktionary.org/wiki/alphabet")
@@ -186,7 +186,7 @@ public class Xoh_href_parser_tst {
 //		@Test   public void Parse_question_w_arg()			{fxt.Prep_raw_("/wiki/A%3F?action=edit").Expd_tid_(Xoh_href.Tid_wiki).Expd_full_("en.wikipedia.org/wiki/A??action=edit").Expd_page_("A??action=edit").Test_parse();}
 }
 class Xoh_href_parser_fxt {
-	private Xow_wiki wiki; private Xoh_href_parser href_parser; private Bry_bfr tmp_bfr = Bry_bfr.reset_(255); private Xoh_href href = new Xoh_href();
+	private Xowe_wiki wiki; private Xoh_href_parser href_parser; private Bry_bfr tmp_bfr = Bry_bfr.reset_(255); private Xoh_href href = new Xoh_href();
 	private static final byte[] Page_1_ttl = Bry_.new_ascii_("Page 1");
 	public void Clear() {
 		expd_tid = Xoh_href.Tid_null;
@@ -196,9 +196,9 @@ class Xoh_href_parser_fxt {
 		wiki = Xoa_app_fxt.wiki_tst_(app);
 		wiki.Xwiki_mgr().Add_bulk(Bry_.new_ascii_("wikt|en.wiktionary.org"));
 		app.User().Wiki().Xwiki_mgr().Add_bulk(Bry_.new_ascii_("en.wiktionary.org|en.wiktionary.org"));
-		href_parser = new Xoh_href_parser(app.Encoder_mgr().Href(), app.Url_parser().Url_parser());
+		href_parser = new Xoh_href_parser(Xoa_app_.Utl_encoder_mgr().Href(), app.Url_parser().Url_parser());
 	}
-	public Xoa_app App() {return app;} private Xoa_app app;
+	public Xoae_app App() {return app;} private Xoae_app app;
 	public Xoh_href_parser_fxt Init_xwiki_alias(String alias, String domain) {
 		app.User().Wiki().Xwiki_mgr().Add_full(alias, domain);
 		return this;

@@ -21,7 +21,7 @@ import gplx.ios.*;
 public class Xob_xml_parser_tst {
 	@Before public void init() {
 		Io_mgr._.InitEngine_mem();
-		Xoa_app app = Xoa_app_fxt.app_();
+		Xoae_app app = Xoa_app_fxt.app_();
 		bldr = new Xob_bldr(app);
 	}	private Xow_ns_mgr ns_mgr = Xow_ns_mgr_.default_(gplx.xowa.langs.cases.Xol_case_mgr_.Ascii());
 	@Test  public void Basic_docs_1() {

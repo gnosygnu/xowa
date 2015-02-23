@@ -27,11 +27,11 @@ public class Xob_init_sql_tst {
 class Xob_init_sql_fxt {		
 	public void Clear() {
 		fxt.Ctor_fsys();
-		app = fxt.Wiki().App();
+		app = fxt.Wiki().Appe();
 		wiki = fxt.Wiki();
 	}	Db_mgr_fxt fxt = new Db_mgr_fxt();
-	public Xoa_app App() {return app;} private Xoa_app app;
-	public Xow_wiki Wiki() {return wiki;} private Xow_wiki wiki;
+	public Xoae_app App() {return app;} private Xoae_app app;
+	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public void Init_fsys() {
 		Io_url wiki_dir = wiki.Fsys_mgr().Root_dir();
 		Io_url[] fils = Io_mgr._.QueryDir_fils(wiki_dir);

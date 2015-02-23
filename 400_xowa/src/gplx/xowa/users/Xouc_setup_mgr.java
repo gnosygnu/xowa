@@ -25,7 +25,7 @@ public class Xouc_setup_mgr implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_setup_completed_))			setup_completed = m.ReadStr("v");
 		return this;
 	}	private static final String Invk_setup_completed = "setup_completed", Invk_setup_completed_ = "setup_completed_";
-	public void Setup_run_check(Xoa_app app) {
+	public void Setup_run_check(Xoae_app app) {
 		byte op_sys_tid = Op_sys.Cur().Tid();
 		switch (op_sys_tid) {
 			case Op_sys.Tid_drd: 

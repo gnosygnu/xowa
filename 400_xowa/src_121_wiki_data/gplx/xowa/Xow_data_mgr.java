@@ -21,13 +21,14 @@ import gplx.xowa.dbs.*; import gplx.xowa.wikis.*; import gplx.xowa.langs.msgs.*;
 public class Xow_data_mgr implements GfoInvkAble {
 	private Xop_redirect_mgr redirect_mgr;
 	private Xoa_url tmp_url = Xoa_url.blank_();
-	public Xow_data_mgr(Xow_wiki wiki) {this.wiki = wiki; this.redirect_mgr = wiki.Redirect_mgr();}
-	public Xow_wiki Wiki() {return wiki;} private Xow_wiki wiki;
-	public Xoa_page Get_page(Xoa_ttl ttl, boolean called_from_tmpl) {wiki.App().Url_parser().Parse(tmp_url, ttl.Raw()); return Get_page(tmp_url, ttl, called_from_tmpl, false);}
-	public Xoa_page Get_page_from_msg(Xoa_ttl ttl) {wiki.App().Url_parser().Parse(tmp_url, ttl.Raw()); return Get_page(tmp_url, ttl, false, true);}
-	public Xoa_page Get_page(Xoa_url url, Xoa_ttl ttl, boolean called_from_tmpl, boolean called_from_msg) {
+	public Xow_data_mgr(Xowe_wiki wiki) {this.wiki = wiki; this.redirect_mgr = wiki.Redirect_mgr();}
+	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
+	public boolean Version_is_1() {return Bool_.Y;}
+	public Xoae_page Get_page(Xoa_ttl ttl, boolean called_from_tmpl) {wiki.Appe().Url_parser().Parse(tmp_url, ttl.Raw()); return Get_page(tmp_url, ttl, called_from_tmpl, false);}
+	public Xoae_page Get_page_from_msg(Xoa_ttl ttl) {wiki.Appe().Url_parser().Parse(tmp_url, ttl.Raw()); return Get_page(tmp_url, ttl, false, true);}
+	public Xoae_page Get_page(Xoa_url url, Xoa_ttl ttl, boolean called_from_tmpl, boolean called_from_msg) {
 		Xow_ns ns = ttl.Ns();
-		Xoa_page rv = Xoa_page.new_(wiki, ttl); rv.Url_(url);	// NOTE: must update page.Url(); should combine with Xoa_page.new_()
+		Xoae_page rv = Xoae_page.new_(wiki, ttl); rv.Url_(url);	// NOTE: must update page.Url(); should combine with Xoae_page.new_()
 		switch (ns.Id()) {
 			case Xow_ns_.Id_special:
 				wiki.Special_mgr().Special_gen(url, rv, wiki, ttl);
@@ -49,14 +50,14 @@ public class Xow_data_mgr implements GfoInvkAble {
 		}
 		return Get_page(rv, ns, ttl, called_from_tmpl, url.Redirect_force());
 	}
-	public Xoa_page Get_page(Xoa_page rv, Xow_ns ns, Xoa_ttl ttl, boolean called_from_tmpl, boolean redirect_force) {
+	public Xoae_page Get_page(Xoae_page rv, Xow_ns ns, Xoa_ttl ttl, boolean called_from_tmpl, boolean redirect_force) {
 		int redirects = 0;
 		Xodb_page db_page = Xodb_page.tmp_();
 		while (true) {
 			boolean exists = wiki.Db_mgr().Load_mgr().Load_by_ttl(db_page, ns, ttl.Page_db());
 			if (!exists) return rv.Missing_();
-			if (wiki.App().Mode() == Xoa_app_.Mode_gui)	// NOTE: must check if gui, else will write during mass build; DATE:2014-05-03
-				wiki.App().Gui_wtr().Prog_many(GRP_KEY, "file_load", "loading page for ~{0}", String_.new_utf8_(ttl.Raw()));
+			if (wiki.Appe().Mode() == Xoa_app_.Mode_gui)	// NOTE: must check if gui, else will write during mass build; DATE:2014-05-03
+				wiki.Appe().Usr_dlg().Prog_many(GRP_KEY, "file_load", "loading page for ~{0}", String_.new_utf8_(ttl.Raw()));
 			wiki.Db_mgr().Load_mgr().Load_page(db_page, ns, !called_from_tmpl);
 			byte[] bry = db_page.Text();
 			rv.Data_raw_(bry).Revision_data().Modified_on_(db_page.Modified_on()).Id_(db_page.Id()).Html_db_id_(db_page.Html_db_id());
@@ -73,7 +74,7 @@ public class Xow_data_mgr implements GfoInvkAble {
 		}
 		return rv;
 	}
-	public Xoa_page Redirect(Xoa_page page, byte[] page_bry) {
+	public Xoae_page Redirect(Xoae_page page, byte[] page_bry) {
 		Xoa_ttl trg_ttl = Xoa_ttl.parse_(wiki, page_bry);
 		Xoa_url trg_url = Xoa_url.new_(wiki.Domain_bry(), page_bry);
 		page.Ttl_(trg_ttl).Url_(trg_url).Redirected_(true);

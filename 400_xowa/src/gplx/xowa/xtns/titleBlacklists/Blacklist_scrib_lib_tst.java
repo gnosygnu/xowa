@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.titleBlacklists; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
-import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.lib.*;
+import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.libs.*;
 public class Blacklist_scrib_lib_tst {
 	@Before public void init() {
 		fxt.Clear_for_lib();

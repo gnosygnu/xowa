@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.cache; import gplx.*;
+import gplx.core.primitives.*;
 public class Gfo_cache_mgr_bry extends Gfo_cache_mgr_base {
 	public Object Get_or_null(byte[] key) {return Base_get_or_null(key);}
 	public void Add(byte[] key, Object val) {Base_add(key, val);}
@@ -35,4 +36,18 @@ class Gfo_cache_itm_comparer implements gplx.lists.ComparerAble {
 		return Long_.Compare(lhs.Touched(), rhs.Touched());
 	}
 	public static final Gfo_cache_itm_comparer Touched_asc = new Gfo_cache_itm_comparer(); 
+}
+class Io_url_exists_mgr {
+	private gplx.cache.Gfo_cache_mgr_bry cache_mgr = new gplx.cache.Gfo_cache_mgr_bry();
+	public Io_url_exists_mgr() {
+		cache_mgr.Compress_max_(Int_.MaxValue);
+	}
+	public boolean Has(Io_url url) {
+		byte[] url_key = url.RawBry();
+		Object rv_obj = cache_mgr.Get_or_null(url_key);
+		if (rv_obj != null) return ((Bool_obj_ref)rv_obj).Val(); // cached val exists; use it
+		boolean exists = Io_mgr._.ExistsFil(url);
+		cache_mgr.Add(url_key, Bool_obj_ref.new_(exists));
+		return exists;
+	}
 }

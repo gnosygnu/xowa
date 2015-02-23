@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.menus.dom; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*; import gplx.xowa.gui.menus.*;
-import gplx.gfui.*; import gplx.xowa.gui.cmds.*;
+import gplx.gfui.*; import gplx.xowa.langs.*; import gplx.xowa.gui.cmds.*;
 public abstract class Xog_mnu_base implements GfoInvkAble {
 	private ListAdp list = ListAdp_.new_();
 	public Xog_mnu_base() {evt_mgr = new Xog_mnu_evt_mgr(this);}

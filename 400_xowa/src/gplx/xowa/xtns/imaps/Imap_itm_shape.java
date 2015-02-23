@@ -24,32 +24,34 @@ interface Imap_link_owner {
 	void Link_text_(byte[] v);
 }
 class Imap_link_owner_ {
-	public static void Init(Imap_link_owner link_owner, Xoa_app app, Xow_wiki wiki, byte[] src, Xop_tkn_itm tkn) {
+	public static void Init(Imap_link_owner link_owner, Xoae_app app, Xowe_wiki wiki, byte[] src, Xop_tkn_itm tkn) {
 		Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
-		int tkn_tid = tkn.Tkn_tid();
-		link_owner.Link_tid_(tkn_tid);
-		switch (tkn_tid) {
-			case Xop_tkn_itm_.Tid_lnki: {
-				Xop_lnki_tkn lnki_tkn = (Xop_lnki_tkn)tkn;
-				link_owner.Link_href_(app.Href_parser().Build_to_bry(wiki, lnki_tkn.Ttl()));
-				wiki.Html_mgr().Html_wtr().Lnki_wtr().Write_caption(bfr, Xoh_wtr_ctx.Alt, src, lnki_tkn, lnki_tkn.Ttl());
-				link_owner.Link_text_(bfr.Xto_bry_and_clear());
-				break;
-			}
-			case Xop_tkn_itm_.Tid_lnke: {
-				Xop_lnke_tkn lnke = (Xop_lnke_tkn)tkn;
-				Xop_ctx ctx = wiki.Ctx();
-				int lnke_bgn = lnke.Lnke_bgn(), lnke_end = lnke.Lnke_end(); boolean proto_is_xowa = lnke.Proto_tid() == Xoo_protocol_itm.Tid_xowa;
-				Xoh_lnke_wtr lnke_wtr = wiki.Html_mgr().Html_wtr().Lnke_wtr();
-				lnke_wtr.Write_href(bfr, ctx, src, lnke, lnke_bgn, lnke_end, proto_is_xowa);
-				link_owner.Link_href_(bfr.Xto_bry_and_clear());
-				lnke_wtr.Write_caption(bfr, wiki.Html_mgr().Html_wtr(), Xoh_wtr_ctx.Basic, ctx, src, lnke, lnke_bgn, lnke_end, proto_is_xowa);
-				link_owner.Link_text_(bfr.Xto_bry_and_clear());
-				break;
+		try {
+			int tkn_tid = tkn.Tkn_tid();
+			link_owner.Link_tid_(tkn_tid);
+			switch (tkn_tid) {
+				case Xop_tkn_itm_.Tid_lnki: {
+					Xop_lnki_tkn lnki_tkn = (Xop_lnki_tkn)tkn;
+					link_owner.Link_href_(app.Href_parser().Build_to_bry(wiki, lnki_tkn.Ttl()));
+					wiki.Html_mgr().Html_wtr().Lnki_wtr().Write_caption(bfr, Xoh_wtr_ctx.Alt, src, lnki_tkn, lnki_tkn.Ttl());
+					link_owner.Link_text_(bfr.Xto_bry_and_clear());
+					break;
+				}
+				case Xop_tkn_itm_.Tid_lnke: {
+					Xop_lnke_tkn lnke = (Xop_lnke_tkn)tkn;
+					Xop_ctx ctx = wiki.Ctx();
+					int lnke_bgn = lnke.Lnke_bgn(), lnke_end = lnke.Lnke_end(); boolean proto_is_xowa = lnke.Proto_tid() == Xoo_protocol_itm.Tid_xowa;
+					Xoh_lnke_wtr lnke_wtr = wiki.Html_mgr().Html_wtr().Lnke_wtr();
+					lnke_wtr.Write_href(bfr, ctx, src, lnke, lnke_bgn, lnke_end, proto_is_xowa);
+					link_owner.Link_href_(bfr.Xto_bry_and_clear());
+					lnke_wtr.Write_caption(bfr, wiki.Html_mgr().Html_wtr(), Xoh_wtr_ctx.Basic, ctx, src, lnke, lnke_bgn, lnke_end, proto_is_xowa);
+					link_owner.Link_text_(bfr.Xto_bry_and_clear());
+					break;
+				}
 			}
 		}
-		bfr.Mkr_rls();
- 		}
+		finally {bfr.Mkr_rls();}	// release buffer in case of null error; PAGE:de.u:PPA/Raster/TK25/51/18/12/20; DATE:2015-02-02
+	}
 }
 class Imap_itm_shape implements Imap_itm, Imap_link_owner {
 	public Imap_itm_shape(byte shape_tid, Double_obj_val[] shape_pts) {

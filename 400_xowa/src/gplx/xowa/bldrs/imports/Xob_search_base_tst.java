@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import org.junit.*;
+import org.junit.*; import gplx.xowa.tdbs.*;
 public class Xob_search_base_tst {
 	@Test  public void Split() {
 		tst_Split("a", "a");
@@ -38,7 +38,7 @@ public class Xob_search_base_tst {
 		,	"b|!!!!#;!!!!%|!!!!$;!!!!%"
 		,	""
 		)
-		.Fil_expd(fxt.fil_reg(Xow_ns_.Id_main, Xow_dir_info_.Tid_search_ttl)
+		.Fil_expd(fxt.fil_reg(Xow_ns_.Id_main, Xotdb_dir_info_.Tid_search_ttl)
 		,	"0|a|b|2"
 		,	""
 		)

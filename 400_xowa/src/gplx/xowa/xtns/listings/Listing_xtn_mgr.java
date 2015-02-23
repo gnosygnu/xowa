@@ -22,7 +22,7 @@ public class Listing_xtn_mgr extends Xox_mgr_base {
 	@Override public boolean Enabled_default() {return false;}
 	@Override public byte[] Xtn_key() {return Xtn_key_static;} public static final byte[] Xtn_key_static = Bry_.new_ascii_("Listings");
 	@Override public Xox_mgr Clone_new() {return new Listing_xtn_mgr();}
-	@Override public void Xtn_init_by_wiki(Xow_wiki wiki) {
+	@Override public void Xtn_init_by_wiki(Xowe_wiki wiki) {
 		if (!Enabled()) return;
 		this.Reset(wiki);
 	}
@@ -31,7 +31,7 @@ public class Listing_xtn_mgr extends Xox_mgr_base {
 		listings_template = phone_symbol = tollfree_symbol = fax_symbol = email_symbol = null;
 		checkin_msg = checkout_msg = position_template = position_text = null;
 	}
-	private void Reset(Xow_wiki wiki) {
+	private void Reset(Xowe_wiki wiki) {
 		hwtr = new Html_wtr();
 		Xop_ctx sub_ctx = Xop_ctx.new_sub_(wiki);
 		listings_template		= Load_txt(wiki, sub_ctx, "listings-template");
@@ -53,7 +53,7 @@ public class Listing_xtn_mgr extends Xox_mgr_base {
 	public Xol_msg_itm Checkout_msg() {return checkout_msg;} private Xol_msg_itm checkout_msg;
 	public Xol_msg_itm Position_template() {return position_template;} private Xol_msg_itm position_template;
 	public Xol_msg_itm Position_text() {return position_text;} private Xol_msg_itm position_text;
-	private byte[] Load_txt(Xow_wiki wiki, Xop_ctx sub_ctx, String symbol_ttl, String template_ttl) {
+	private byte[] Load_txt(Xowe_wiki wiki, Xop_ctx sub_ctx, String symbol_ttl, String template_ttl) {
 		byte[] symbol_text = Load_txt(wiki, sub_ctx, symbol_ttl);
 		byte[] template_text = Load_txt(wiki, sub_ctx, template_ttl);
 		byte[] rv = null;
@@ -68,13 +68,13 @@ public class Listing_xtn_mgr extends Xox_mgr_base {
 		}
 		return rv;
 	}
-	private byte[] Load_txt(Xow_wiki wiki, Xop_ctx sub_ctx, String ttl) {
+	private byte[] Load_txt(Xowe_wiki wiki, Xop_ctx sub_ctx, String ttl) {
 		byte[] rv = wiki.Msg_mgr().Val_by_key_obj(Bry_.new_utf8_(ttl)); if (Bry_.Len_eq_0(rv)) return null;	// ttl does not exist; note that msg_mgr returns "" for missing values
 		rv = wiki.Parser().Parse_text_to_html(sub_ctx, rv);
 		rv = Html_utl.Escape_html_as_bry(rv);
 		return rv;
 	}
-	private Xol_msg_itm Load_msg(Xow_wiki wiki, Xop_ctx sub_ctx, String ttl) {
+	private Xol_msg_itm Load_msg(Xowe_wiki wiki, Xop_ctx sub_ctx, String ttl) {
 		return wiki.Msg_mgr().Find_or_null(Bry_.new_utf8_(ttl)); 
 	}
 }

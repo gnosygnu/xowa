@@ -19,7 +19,7 @@ package gplx.xowa; import gplx.*;
 import org.junit.*;
 import gplx.xowa.files.*;
 public class Xof_xfer_queue_html_wmf_api_tst {
-	Xof_xfer_queue_html_fxt fxt = new Xof_xfer_queue_html_fxt();
+	private final Xof_xfer_queue_html_fxt fxt = new Xof_xfer_queue_html_fxt();
 	@Before public void init()		{fxt.Clear(true); fxt.Src_commons_repo().Wmf_api_(true); fxt.Src_en_wiki_repo().Wmf_api_(true);}
 	@Test  public void Thumb() {
 		fxt	.ini_page_api("en_wiki", "A.png", "", 2200, 2000);

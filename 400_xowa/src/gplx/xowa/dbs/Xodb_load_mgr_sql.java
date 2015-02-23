@@ -28,18 +28,18 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 		search_provider = null;
 		Search_version_init();
 	}
-	public void Load_init(Xow_wiki wiki) {
+	public void Load_init(Xowe_wiki wiki) {
 		Load_init_cfg(wiki);
 		db_mgr.Tbl_site_stats().Select(wiki);
 		db_mgr.Tbl_xowa_ns().Select_all(wiki.Ns_mgr());
 	}
-	private void Load_init_cfg(Xow_wiki wiki) {
+	private void Load_init_cfg(Xowe_wiki wiki) {
 		String_obj_ref version_val = String_obj_ref.null_();
-		String version_key = Xoa_gfs_mgr.Build_code(Xow_wiki.Invk_props, Xow_wiki_props.Invk_bldr_version);
+		String version_key = Xoa_gfs_mgr.Build_code(Xowe_wiki.Invk_props, Xow_wiki_props.Invk_bldr_version);
 		KeyVal[] kv_ary = db_mgr.Tbl_xowa_cfg().Select_kvs(Xodb_mgr_sql.Grp_wiki_init, version_key, version_val);
 		Xodb_upgrade_mgr.Upgrade(db_mgr, kv_ary, version_key, version_val.Val());
 		Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_k004();
-		Xoa_gfs_mgr gfs_mgr = wiki.App().Gfs_mgr();
+		Xoa_gfs_mgr gfs_mgr = wiki.Appe().Gfs_mgr();
 		try {
 			int len = kv_ary.length;
 			for (int i = 0; i < len; i++) {
@@ -85,7 +85,7 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 	}
 	private void Load_ctg_v2a_ui_sift(Xoctg_view_ctg rv, Xodb_category_itm ctg, ListAdp list) {
 		int len = list.Count();
-		Xow_wiki wiki = this.db_mgr.Wiki();
+		Xowe_wiki wiki = this.db_mgr.Wiki();
 		byte prv_tid = Byte_.Max_value_127;
 		Xoctg_view_grp view_grp = null;
 		for (int i = 0; i < len; i++) {

@@ -41,7 +41,7 @@ class Xol_msg_mgr_fxt {
 		mgr.Clear();
 		wiki.Lang().Msg_mgr().Clear();
 		return this;
-	}	private Xoa_app app; Xow_wiki wiki; Xow_msg_mgr mgr;
+	}	private Xoae_app app; Xowe_wiki wiki; Xow_msg_mgr mgr;
 	public void Test_val_by_key(String val, String expd) {
 		Xol_msg_itm itm = wiki.Lang().Msg_mgr().Itm_by_key_or_new(Bry_.new_ascii_("test"));
 		itm.Atrs_set(Bry_.new_ascii_(val), false, true);			

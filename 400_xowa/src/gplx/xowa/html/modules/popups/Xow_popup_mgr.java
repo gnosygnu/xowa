@@ -21,17 +21,17 @@ import gplx.xowa.gui.views.*;
 import gplx.xowa.specials.search.*;
 import gplx.xowa.apis.xowa.html.modules.*;
 public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
-	private Xoa_app app; private Xow_wiki wiki; private Js_wtr js_wtr = new Js_wtr();
+	private Xoae_app app; private Xowe_wiki wiki; private Js_wtr js_wtr = new Js_wtr();
 	private int show_init_word_count = Xoapi_popups.Dflt_show_init_word_count, show_more_word_count = Xoapi_popups.Dflt_show_more_word_count;
 	private Xoh_href temp_href = new Xoh_href(); 
 	private Object async_thread_guard = new Object(); private Xow_popup_itm async_itm; private GfoInvkAble async_cmd_show; private int async_id_next = 1;
-	public Xow_popup_mgr(Xow_wiki wiki) {
-		this.wiki = wiki; this.app = wiki.App();
+	public Xow_popup_mgr(Xowe_wiki wiki) {
+		this.wiki = wiki; this.app = wiki.Appe();
 		ev_mgr = GfoEvMgr.new_(this);
 	}
 	public GfoEvMgr EvMgr() {return ev_mgr;} private GfoEvMgr ev_mgr;
 	public Xow_popup_parser Parser() {return parser;} private Xow_popup_parser parser = new Xow_popup_parser();
-	public void Init_by_wiki(Xow_wiki wiki) {
+	public void Init_by_wiki(Xowe_wiki wiki) {
 		parser.Init_by_wiki(wiki);
 		Xoapi_popups api_popups = app.Api_root().Html().Modules().Popups();
 		show_init_word_count = api_popups.Show_init_word_count();
@@ -61,23 +61,23 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 		);
 	}
 	public String Show_init(int id, byte[] href, byte[] tooltip) {
-		Xoa_page cur_page = Cur_page();
+		Xoae_page cur_page = Cur_page();
 		Xog_tab_itm tab = cur_page.Tab();
 		if (tab != null && tab.Tab_is_loading()) return "";	// NOTE: tab is null when previewing
 		Xow_popup_itm itm = new Xow_popup_itm(id, href, tooltip, show_init_word_count);
-		String rv = String_.new_utf8_(Get_popup_html(cur_page, itm));
+		String rv = String_.new_utf8_(Get_popup_html(Cur_wiki(), cur_page, itm));
 		return tab != null && tab.Tab_is_loading() ? "" : rv;
 	}
 	public void Show_more(String popup_id) {
-		Xoa_page cur_page = Cur_page();
+		Xoae_page cur_page = Cur_page();
 		Xow_popup_itm popup_itm = Itms_get_or_null(cur_page, popup_id).Mode_more_(show_more_word_count);
-		popup_itm.Popup_html_(Get_popup_html(cur_page, popup_itm));
+		popup_itm.Popup_html_(Get_popup_html(Cur_wiki(), cur_page, popup_itm));
 		Show_popup_html(Cbk_xowa_popups_show_update, Mode_show_more, popup_itm);
 	}
 	public void Show_all(String popup_id) {
-		Xoa_page cur_page = Cur_page();
+		Xoae_page cur_page = Cur_page();
 		Xow_popup_itm popup_itm = Itms_get_or_null(cur_page, popup_id).Mode_all_();
-		popup_itm.Popup_html_(Get_popup_html(cur_page, popup_itm));
+		popup_itm.Popup_html_(Get_popup_html(Cur_wiki(), cur_page, popup_itm));
 		Show_popup_html(Cbk_xowa_popups_show_update, Mode_show_all, popup_itm);
 	}
 	public String Get_async_bgn(byte[] js_cbk, byte[] href) {
@@ -90,7 +90,7 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 			return id_str;
 		}
 	}
-	private byte[] Get_popup_html(Xoa_page cur_page, Xow_popup_itm itm) {
+	private byte[] Get_popup_html(Xowe_wiki cur_wiki, Xoae_page cur_page, Xow_popup_itm itm) {
 		try {
 			synchronized (async_thread_guard) {	// queue popups to reduce contention with Load_page_wkr; DATE:2014-08-24
 //					Load_popup_wkr load_popup_wkr = new Load_popup_wkr(wiki, cur_page, itm, temp_href, ns_allowed_regy, ns_allowed_regy_key);
@@ -103,14 +103,14 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 				if (itm.Canceled()) return null;
 				cur_page.Popup_mgr().Itms().AddReplace(itm.Popup_id(), itm);
 				app.Href_parser().Parse(temp_href, itm.Page_href(), wiki, cur_page.Ttl().Full_url());	// NOTE: use Full_url, not Page_url, else anchors won't work for non-main ns; PAGE:en.w:Project:Sandbox; DATE:2014-08-07
-				Xow_wiki popup_wiki = app.Wiki_mgr().Get_by_key_or_null(temp_href.Wiki());
+				Xowe_wiki popup_wiki = app.Wiki_mgr().Get_by_key_or_null(temp_href.Wiki());
 				popup_wiki.Init_assert();
 				Xoa_ttl popup_ttl = Xoa_ttl.parse_(popup_wiki, temp_href.Page_and_anchor());
 				if (ns_allowed_regy.Count() > 0 && !ns_allowed_regy.Has(ns_allowed_regy_key.Val_(popup_ttl.Ns().Id()))) return Bry_.Empty;
 				itm.Init(popup_wiki.Domain_bry(), popup_ttl);
-				Xoa_page popup_page = popup_wiki.Data_mgr().Get_page(popup_ttl, false);
+				Xoae_page popup_page = popup_wiki.Data_mgr().Get_page(popup_ttl, false);
 				byte[] rv = popup_wiki.Html_mgr().Module_mgr().Popup_mgr().Parser().Parse(wiki, popup_page, cur_page.Tab(), itm);
-				Update_progress_bar(app, cur_page, itm);
+				Update_progress_bar(app, cur_wiki, cur_page, itm);
 				return rv;
 			}
 		}
@@ -119,12 +119,12 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 			return null;
 		}
 	}
-	public static void Update_progress_bar(Xoa_app app, Xoa_page cur_page, Xow_popup_itm itm) {
+	public static void Update_progress_bar(Xoae_app app, Xowe_wiki cur_wiki, Xoae_page cur_page, Xow_popup_itm itm) {
 		byte[] href = itm.Page_href();
 		byte[] tooltip = itm.Tooltip();
 		if (Bry_.Len_gt_0(tooltip))
 			href = Bry_.Add(tooltip);
-		Xog_win_itm__prog_href_mgr.Hover(app, cur_page, String_.new_utf8_(href)); // set page ttl again in prog bar; DATE:2014-06-28
+		Xog_win_itm__prog_href_mgr.Hover(app, cur_wiki, cur_page, String_.new_utf8_(href)); // set page ttl again in prog bar; DATE:2014-06-28
 	}
 	public void Show_popup_html(String cbk, byte[] mode, Xow_popup_itm popup_itm) {
 		Xog_tab_itm cur_tab = app.Gui_mgr().Browser_win().Active_tab();
@@ -133,8 +133,8 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 	private void Show_popup_async() {
 		try {
 			synchronized (async_thread_guard) {
-				Xoa_page cur_page = app.Gui_mgr().Browser_win().Active_page();
-				async_itm.Popup_html_(Get_popup_html(cur_page, async_itm));
+				Xoae_page cur_page = app.Gui_mgr().Browser_win().Active_page();
+				async_itm.Popup_html_(Get_popup_html(app.Gui_mgr().Browser_win().Active_wiki(), cur_page, async_itm));
 			}
 			if (async_cmd_show == null)
 				async_cmd_show = app.Gui_mgr().Kit().New_cmd_sync(this);
@@ -157,7 +157,7 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 			ns_allowed_regy.Add(ns_id, ns_id);
 		}
 	}
-	public static Int_obj_ref[] Ns_allowed_parse(Xow_wiki wiki, byte[] raw) {
+	public static Int_obj_ref[] Ns_allowed_parse(Xowe_wiki wiki, byte[] raw) {
 		ListAdp rv = ListAdp_.new_();
 		byte[][] ary = Bry_.Split(raw, Byte_ascii.Pipe);
 		int ary_len = ary.length;
@@ -170,7 +170,7 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 				: ns_mgr.Names_get_or_null(bry)
 				;
 			if (ns == null) {
-				wiki.App().Usr_dlg().Log_many("", "", "popup.ns_allowed: ns not in wiki: ns=~{0} wiki=~{1}", String_.new_utf8_(bry), wiki.Domain_str());	// ns may not be in wiki; EX: Portal and www.wikidata.org
+				wiki.Appe().Usr_dlg().Log_many("", "", "popup.ns_allowed: ns not in wiki: ns=~{0} wiki=~{1}", String_.new_utf8_(bry), wiki.Domain_str());	// ns may not be in wiki; EX: Portal and www.wikidata.org
 				continue;
 			}
 			Int_obj_ref ns_id_itm = Int_obj_ref.new_(ns.Id());
@@ -178,8 +178,9 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 		}
 		return (Int_obj_ref[])rv.Xto_ary(Int_obj_ref.class);
 	}	private HashAdp ns_allowed_regy = HashAdp_.new_(); private Int_obj_ref ns_allowed_regy_key = Int_obj_ref.zero_();
-	private Xoa_page Cur_page() {return app.Gui_mgr().Browser_win().Active_page();}
-	private Xow_popup_itm Itms_get_or_null(Xoa_page page, String popup_id) {return (Xow_popup_itm)page.Popup_mgr().Itms().Fetch(popup_id);}
+	private Xoae_page Cur_page() {return app.Gui_mgr().Browser_win().Active_page();}
+	private Xowe_wiki Cur_wiki() {return app.Gui_mgr().Browser_win().Active_tab().Wiki();}
+	private Xow_popup_itm Itms_get_or_null(Xoae_page page, String popup_id) {return (Xow_popup_itm)page.Popup_mgr().Itms().Fetch(popup_id);}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_show_popup_async))								Show_popup_async();
 		else if	(ctx.Match(k, Invk_show_popup))										Show_popup();
@@ -224,32 +225,32 @@ class Xow_popup_mgr_ {
 	}
 }
 class Load_popup_wkr implements Gfo_thread_wkr {
-	private Xow_popup_itm itm; private Xoa_page cur_page; private Xoh_href temp_href;
+	private Xow_popup_itm itm; private Xoae_page cur_page; private Xoh_href temp_href;
 	private HashAdp ns_allowed_regy; 
 	private Int_obj_ref ns_allowed_regy_key = Int_obj_ref.zero_();
-	public Load_popup_wkr(Xow_wiki wiki, Xoa_page cur_page, Xow_popup_itm itm, Xoh_href temp_href, HashAdp ns_allowed_regy, Int_obj_ref ns_allowed_regy_key) {
+	public Load_popup_wkr(Xowe_wiki wiki, Xoae_page cur_page, Xow_popup_itm itm, Xoh_href temp_href, HashAdp ns_allowed_regy, Int_obj_ref ns_allowed_regy_key) {
 		this.wiki = wiki; this.cur_page = cur_page; this.itm = itm; this.temp_href = temp_href; this.ns_allowed_regy = ns_allowed_regy; this.ns_allowed_regy_key = ns_allowed_regy_key;
 	}
 	public String Name() {return "xowa.load_popup_wkr";}
 	public boolean Resume() {return false;}
-	public Xow_wiki Wiki() {return wiki;} private Xow_wiki wiki;
+	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public byte[] Rslt_bry() {return rslt_bry;} private byte[] rslt_bry;
 	public boolean Rslt_done() {return rslt_done;} private boolean rslt_done;
 	public void Rslt_(byte[] bry) {this.rslt_done = true; rslt_bry = bry;}
 	public void Exec() {
-		Xoa_app app = wiki.App();
+		Xoae_app app = wiki.Appe();
 		try {
 			if (itm.Canceled()) {Rslt_(null); return;}
 			cur_page.Popup_mgr().Itms().AddReplace(itm.Popup_id(), itm);
 			app.Href_parser().Parse(temp_href, itm.Page_href(), wiki, cur_page.Ttl().Full_url());	// NOTE: use Full_url, not Page_url, else anchors won't work for non-main ns; PAGE:en.w:Project:Sandbox; DATE:2014-08-07
-			Xow_wiki popup_wiki = app.Wiki_mgr().Get_by_key_or_null(temp_href.Wiki());
+			Xowe_wiki popup_wiki = app.Wiki_mgr().Get_by_key_or_null(temp_href.Wiki());
 			popup_wiki.Init_assert();
 			Xoa_ttl popup_ttl = Xoa_ttl.parse_(popup_wiki, temp_href.Page_and_anchor());
 			if (ns_allowed_regy.Count() > 0 && !ns_allowed_regy.Has(ns_allowed_regy_key.Val_(popup_ttl.Ns().Id()))) {Rslt_(Bry_.Empty); return;}
 			itm.Init(popup_wiki.Domain_bry(), popup_ttl);
-			Xoa_page popup_page = popup_wiki.Data_mgr().Get_page(popup_ttl, false);
+			Xoae_page popup_page = popup_wiki.Data_mgr().Get_page(popup_ttl, false);
 			byte[] rv = popup_wiki.Html_mgr().Module_mgr().Popup_mgr().Parser().Parse(wiki, popup_page, cur_page.Tab(), itm);
-			Xow_popup_mgr.Update_progress_bar(app, cur_page, itm);
+			Xow_popup_mgr.Update_progress_bar(app, popup_wiki, cur_page, itm);
 			Rslt_(rv);
 		}
 		catch(Exception e) {

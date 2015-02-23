@@ -21,7 +21,7 @@ public abstract class Db_url__base implements Db_url {
 	public abstract String Tid();
 	public String Xto_raw() {return raw;} private String raw = "";
 	public String Xto_api() {return api;} private String api = "";
-	public String Database() {return database;} private String database = "";
+	public String Database() {return database;} protected String database = "";
 	public String Server() {return server;} private String server = "";
 	public abstract Db_url New_self(String raw, GfoMsg m);
 	protected void Ctor(String server, String database, String raw, String api) {this.server = server; this.database = database; this.raw = raw; this.api = api;}

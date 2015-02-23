@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
 import gplx.html.*; import gplx.xowa.xtns.relatedSites.*;
 public class Xoh_page_wtr_wkr_ {
-	public static byte[] Bld_page_content_sub(Xoa_app app, Xow_wiki wiki, Xoa_page page, Bry_bfr tmp_bfr) {
+	public static byte[] Bld_page_content_sub(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Bry_bfr tmp_bfr) {
 		byte[] subpages = app.Html_mgr().Page_mgr().Subpages_bldr().Bld(wiki.Ns_mgr(), page.Ttl());
 		byte[] page_content_sub = page.Html_data().Content_sub();		// contentSub exists; SEE: {{#isin}}
 		byte[] redirect_msg = Xop_redirect_mgr.Bld_redirect_msg(app, wiki, page);			
@@ -33,22 +33,22 @@ public class Xoh_page_wtr_wkr_ {
 		else
 			return ttl.Full_txt();						// NOTE: include ns with ttl as per defect d88a87b3
 	}
-	public static void Bld_head_end(Bry_bfr html_bfr, Xoa_page page) {
+	public static void Bld_head_end(Bry_bfr html_bfr, Xoae_page page) {
 		byte[] head_end = page.Html_data().Custom_head_end();
 		if (head_end == null) return;
 		int insert_pos = Bry_finder.Find_fwd(html_bfr.Bfr(), Html_tag_.Head_rhs);
 		if (insert_pos == Bry_finder.Not_found) {
-			page.App().Usr_dlg().Warn_many("", "", "could not find </head>");
+			Gfo_usr_dlg_._.Warn_many("", "", "could not find </head>");
 			return;
 		}
 		html_bfr.Insert_at(insert_pos, head_end);
 	}
-	public static void Bld_html_end(Bry_bfr html_bfr, Xoa_page page) {
+	public static void Bld_html_end(Bry_bfr html_bfr, Xoae_page page) {
 		byte[] html_end = page.Html_data().Custom_html_end();
 		if (html_end == null) return;
 		int insert_pos = Bry_finder.Find_bwd(html_bfr.Bfr(), Html_tag_.Html_rhs, html_bfr.Len());
 		if (insert_pos == Bry_finder.Not_found) {
-			page.App().Usr_dlg().Warn_many("", "", "could not find </html>");
+			Gfo_usr_dlg_._.Warn_many("", "", "could not find </html>");
 			return;
 		}
 		html_bfr.Insert_at(insert_pos, html_end);

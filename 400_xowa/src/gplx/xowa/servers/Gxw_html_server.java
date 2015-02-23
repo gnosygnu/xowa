@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.servers; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*; import gplx.gfui.*;
 import gplx.xowa.servers.tcp.*;
-import gplx.xowa.servers.http.*;
+import gplx.xowa.servers.http.*; import gplx.xowa.gui.views.*;
 public class Gxw_html_server implements Gxw_html {
 	private Xosrv_socket_wtr wtr; private Gfo_usr_dlg usr_dlg;
 	private Gfui_html_cfg cfg;
@@ -87,13 +87,16 @@ public class Gxw_html_server implements Gxw_html {
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_set = "set";
-	public static void Init_gui_for_server(Xoa_app app, Xosrv_socket_wtr wtr) {
+	public static void Init_gui_for_server(Xoae_app app, Xosrv_socket_wtr wtr) {
 		Mem_kit mem_kit = (Mem_kit)gplx.gfui.Gfui_kit_.Mem();
 		mem_kit.New_html_impl_prototype_(new Gxw_html_server(app.Usr_dlg(), wtr));	// NOTE: set prototype before calling Kit_
 		app.Gui_mgr().Kit_(mem_kit);
 	}
-	public static void Assert_tab(Xoa_app app, Xoa_page page) {
-		if (app.Gui_mgr().Browser_win().Active_tab() == null)									// no active tab
-			app.Gui_mgr().Browser_win().Tab_mgr().Tabs_new_init(page);							// create at least one active tab; DATE:2014-07-30
+	public static void Assert_tab(Xoae_app app, Xoae_page page) {
+		Xog_win_itm browser_win = app.Gui_mgr().Browser_win();
+		if (browser_win.Active_tab() == null) {									// no active tab
+			Xowe_wiki wiki = browser_win.Active_tab().Wiki();
+			browser_win.Tab_mgr().Tabs_new_init(wiki, page);					// create at least one active tab; DATE:2014-07-30
+		}
 	}
 }

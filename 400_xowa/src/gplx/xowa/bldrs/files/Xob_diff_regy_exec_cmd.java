@@ -16,10 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.dbs.*; import gplx.fsdb.*; import gplx.xowa.bldrs.oimgs.*;
+import gplx.dbs.*; import gplx.xowa.bldrs.oimgs.*;
+import gplx.fsdb.*; import gplx.fsdb.meta.*;
 public class Xob_diff_regy_exec_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	private Io_url sql_dir;
-	public Xob_diff_regy_exec_cmd(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
+	public Xob_diff_regy_exec_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Cmd_key() {return KEY_oimg;} public static final String KEY_oimg = "file.diff_regy.exec";
 	public void Cmd_ini(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {}
@@ -47,7 +48,7 @@ class Xob_diff_regy_sql_runner {
 	public String Wiki_domain() {return wiki_domain;} private String wiki_domain;
 	public int Fsdb_db_id() {return fsdb_db_id;} private int fsdb_db_id;
 	public byte Fsdb_db_tid() {return fsdb_db_tid;} private byte fsdb_db_tid;
-	public void Exec(Xoa_app app, Io_url url) {
+	public void Exec(Xoae_app app, Io_url url) {
 		Parse_url(url);
 		Run_sql(app);
 	}
@@ -58,17 +59,17 @@ class Xob_diff_regy_sql_runner {
 		fsdb_db_id = Int_.parse_(parts[1]);
 		fsdb_db_tid = Fsdb_db_tid_.Xto_tid(parts[2]);
 	}
-	public void Run_sql(Xoa_app app) {
-		Xow_wiki wiki = app.Wiki_mgr().Get_by_key_or_null(Bry_.new_utf8_(wiki_domain));
+	public void Run_sql(Xoae_app app) {
+		Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_null(Bry_.new_utf8_(wiki_domain));
 		app.Usr_dlg().Prog_many("", "", "running sql: url=~{0}", url.NameAndExt());
 		Db_conn conn = Get_provider(wiki, fsdb_db_id, fsdb_db_tid);
 		conn.Exec_sql(Io_mgr._.LoadFilStr(url));
 		if (fsdb_db_tid == Fsdb_db_tid_.Tid_bin)
 			conn.Exec_sql("VACUUM;");
 	}
-	public static Db_conn Get_provider(Xow_wiki wiki, int fsdb_db_id, byte fsdb_db_tid) {
+	public static Db_conn Get_provider(Xowe_wiki wiki, int fsdb_db_id, byte fsdb_db_tid) {
 		wiki.File_mgr().Fsdb_mgr().Init_by_wiki(wiki);
-		Fsdb_db_abc_mgr abc_mgr = wiki.File_mgr().Fsdb_mgr().Mnt_mgr().Abc_mgr_at(0);
+		Fsm_abc_mgr abc_mgr = wiki.File_mgr().Fsdb_mgr().Mnt_mgr().Mnts__at(0);
 		if		(fsdb_db_tid == Fsdb_db_tid_.Tid_bin)
 			return abc_mgr.Bin_mgr().Get_at(fsdb_db_id).Conn();
 		else if (fsdb_db_tid == Fsdb_db_tid_.Tid_atr)
@@ -78,5 +79,23 @@ class Xob_diff_regy_sql_runner {
 	}
 	public static String Build_url(String wiki_domain, int fsdb_db_id, String fsdb_db_type) {
 		return String_.Format("{0}-{1}-{2}.sql", wiki_domain, Int_.Xto_str_pad_bgn(fsdb_db_id, 3), fsdb_db_type);
+	}
+}
+class Fsdb_db_tid_ {
+	public static final byte Tid_cfg = 0, Tid_atr = 1, Tid_bin = 2;
+	public static final String Key_cfg = "cfg", Key_atr = "atr", Key_bin = "bin";
+	public static byte Xto_tid(String s) {
+		if		(String_.Eq(s, Key_cfg))		return Tid_cfg;
+		else if	(String_.Eq(s, Key_atr))		return Tid_atr;
+		else if	(String_.Eq(s, Key_bin))		return Tid_bin;
+		else									throw Err_.unhandled(s);
+	}
+	public static String Xto_key(byte v) {
+		switch (v) {
+			case Tid_cfg:	return Key_cfg;
+			case Tid_atr:	return Key_atr;
+			case Tid_bin:	return Key_bin;
+			default:		throw Err_.unhandled(v);
+		}
 	}
 }

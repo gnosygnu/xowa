@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.gui.bnds; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 import gplx.core.primitives.*; import gplx.srls.dsvs.*; import gplx.gfui.*; import gplx.xowa.cfgs2.*;
 public class Xog_bnd_mgr_srl extends Dsv_wkr_base {
-	private Xoa_app app;
+	private Xoae_app app;
 	private Xog_bnd_mgr bnd_mgr;
 	private int uid; private byte[] box_bry, ipt_bry;
-	public Xog_bnd_mgr_srl(Xoa_app app, Xog_bnd_mgr bnd_mgr) {
+	public Xog_bnd_mgr_srl(Xoae_app app, Xog_bnd_mgr bnd_mgr) {
 		this.app = app;
 		this.bnd_mgr = bnd_mgr;
 	}
@@ -61,7 +61,7 @@ public class Xog_bnd_mgr_srl extends Dsv_wkr_base {
 		Xog_bnd_mgr_srl.Update_cfg(app, bnd, box, ipt);
 		uid = -1; box_bry = ipt_bry = null;
 	}
-	public static void Update_cfg(Xoa_app app, Xog_bnd_itm bnd, int box, IptArg ipt) {
+	public static void Update_cfg(Xoae_app app, Xog_bnd_itm bnd, int box, IptArg ipt) {
 		String src = Xocfg_bnd_itm_srl.Src(app, box, ipt);
 		String cfg_key = String_.Concat("app.cfg.get.gui.bnds.init('", bnd.Key(), "').src");
 		app.Cfg_mgr().Set_by_app(cfg_key, src);

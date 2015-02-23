@@ -18,15 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.core.primitives.*;
 import gplx.ios.*;
-import gplx.xowa.dbs.*;
+import gplx.xowa.dbs.*; import gplx.xowa.tdbs.*;
 public abstract class Xob_search_base extends Xob_itm_dump_base implements Xobd_wkr, GfoInvkAble {
 	public abstract String Wkr_key();
 	public abstract Io_make_cmd Make_cmd_site();
 	public void Wkr_ini(Xob_bldr bldr) {}
 	public void Wkr_bgn(Xob_bldr bldr) {
-		make_dir = wiki.Fsys_mgr().Ns_dir();
+		make_dir = wiki.Tdb_fsys_mgr().Ns_dir();
 		this.Init_dump(this.Wkr_key(), make_dir);
-		lang = wiki.Lang(); // wiki.App().Lang_mgr().Lang_en();	// NOTE: was .Lang_en which is wrong (should match lang of wiki); DATE:2013-05-11
+		lang = wiki.Lang(); // wiki.Appe().Lang_mgr().Lang_en();	// NOTE: was .Lang_en which is wrong (should match lang of wiki); DATE:2013-05-11
 		tmp_wtr_mgr = new Xob_tmp_wtr_mgr(new Xob_tmp_wtr_wkr__ttl(temp_dir, dump_fil_len));
 		if (wiki.Db_mgr().Tid() == Xodb_mgr_sql.Tid_sql)	// if sqlite, hard-code to ns_main; aggregates all ns into one
 			ns_main = wiki.Ns_mgr().Ns_main();
@@ -55,12 +55,12 @@ public abstract class Xob_search_base extends Xob_itm_dump_base implements Xobd_
 	public void Wkr_end() {
 		tmp_wtr_mgr.Flush_all(bldr.Usr_dlg());
 		dump_bfr.ClearAndReset();
-		Xobdc_merger.Ns(bldr.Usr_dlg(), tmp_wtr_mgr.Regy(), Xow_dir_info_.Name_search_ttl, temp_dir, make_dir, sort_mem_len, Io_line_rdr_key_gen_.first_pipe, this.Make_cmd_site());
+		Xobdc_merger.Ns(bldr.Usr_dlg(), tmp_wtr_mgr.Regy(), Xotdb_dir_info_.Name_search_ttl, temp_dir, make_dir, sort_mem_len, Io_line_rdr_key_gen_.first_pipe, this.Make_cmd_site());
 		tmp_wtr_mgr.Rls_all();
 		if (delete_temp) Io_mgr._.DeleteDirDeep(temp_dir);
 		if (wiki.Db_mgr().Tid() == Xodb_mgr_sql.Tid_sql) {
 			Xodb_fsys_mgr db_fs = wiki.Db_mgr_as_sql().Fsys_mgr();
-			wiki.Db_mgr_as_sql().Tbl_xowa_db().Commit_all(db_fs.Conn_core(), db_fs.Files_ary());	// always save files now; need to commit created search_db_idx to xowa_db, else will be reused by ctg v2; DATE:2014-02-07
+			wiki.Db_mgr_as_sql().Tbl_xowa_db().Commit_all(db_fs.Files_ary());	// always save files now; need to commit created search_db_idx to xowa_db, else will be reused by ctg v2; DATE:2014-02-07
 		}
 	}
 	public void Wkr_print() {}

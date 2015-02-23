@@ -19,26 +19,24 @@ package gplx.dbs; import gplx.*;
 public class Db_meta_fld_list {
 	private final OrderedHash flds = OrderedHash_.new_();
 	private final ListAdp keys = ListAdp_.new_();
+	public void Clear() {flds.Clear(); keys.Clear();}
 	public Db_meta_fld Get_by(String name) {return (Db_meta_fld)flds.Fetch(name);}
 	public String[] To_str_ary()			{if (str_ary == null) str_ary = (String[])keys.Xto_ary(String.class); return str_ary;} private String[] str_ary;
 	public Db_meta_fld[] To_fld_ary()		{if (fld_ary == null) fld_ary = (Db_meta_fld[])flds.Xto_ary(Db_meta_fld.class); return fld_ary;} private Db_meta_fld[] fld_ary;
 	public String[] To_str_ary_exclude(String[] ary) {
+		HashAdp ary_hash = HashAdp_.new_();
 		ListAdp rv = ListAdp_.new_();
 		int ary_len = ary.length;
+		for (int i = 0; i < ary_len; ++i) {
+			String ary_itm = ary[i];
+			ary_hash.Add(ary_itm, ary_itm);
+		}
 		int fld_len = flds.Count();
 		for (int i = 0; i < fld_len; ++i) {
 			Db_meta_fld fld = (Db_meta_fld)flds.FetchAt(i);
 			String fld_key = fld.Name();
-			boolean include = true;
-			for (int j = 0; j < ary_len; ++j) {
-				String itm_key = ary[j];
-				if (String_.Eq(fld_key, itm_key)) {
-					include = false;
-					break;
-				}
-				if (include)
-					rv.Add(itm_key);
-			}
+			if (ary_hash.Has(fld_key)) continue;
+			rv.Add(fld_key);
 		}
 		return rv.XtoStrAry();
 	}

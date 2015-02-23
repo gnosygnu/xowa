@@ -20,12 +20,12 @@ import gplx.srls.dsvs.*;
 import gplx.core.regxs.*;
 import gplx.xowa.langs.cases.*;
 public class Xop_keeplist_wiki_srl extends Dsv_wkr_base {
-	private Xol_case_mgr case_mgr; private Xow_wiki wiki;
+	private Xol_case_mgr case_mgr; private Xowe_wiki wiki;
 	private byte[] wiki_bry;
 	private byte[] keeps_bry;
 	private byte[] skips_bry;
 	private int rules_count;
-	public Xop_keeplist_wiki_srl(Xow_wiki wiki) {this.wiki = wiki; this.case_mgr = wiki.Lang().Case_mgr();}
+	public Xop_keeplist_wiki_srl(Xowe_wiki wiki) {this.wiki = wiki; this.case_mgr = wiki.Lang().Case_mgr();}
 	@Override public Dsv_fld_parser[] Fld_parsers() {return new Dsv_fld_parser[] {Dsv_fld_parser_.Bry_parser, Dsv_fld_parser_.Bry_parser, Dsv_fld_parser_.Bry_parser};}
 	@Override public boolean Write_bry(Dsv_tbl_parser parser, int fld_idx, byte[] src, int bgn, int end) {
 		switch (fld_idx) {

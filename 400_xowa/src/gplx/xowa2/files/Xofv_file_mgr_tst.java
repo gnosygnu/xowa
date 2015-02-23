@@ -16,11 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa2.files; import gplx.*; import gplx.xowa2.*;
-import org.junit.*; import gplx.core.primitives.*;
-import gplx.xowa.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.fsdb.caches.*; import gplx.xowa.files.wiki_orig.*;
-import gplx.xowa2.apps.*; import gplx.xowa2.wikis.*; import gplx.xowa2.files.orig_regy.*;
+import org.junit.*; import gplx.core.primitives.*; import gplx.dbs.*;
+import gplx.xowa.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.caches.*;
+import gplx.xowa2.apps.*; import gplx.xowa2.wikis.*; import gplx.xowa.files.origs.*;
 public class Xofv_file_mgr_tst {
-	@Before public void init() {fxt.Clear();} private Xofv_file_mgr_fxt fxt = new Xofv_file_mgr_fxt();
+	@Before public void init() {fxt.Clear();} private final Xofv_file_mgr_fxt fxt = new Xofv_file_mgr_fxt();
+	@After  public void term() {Gfo_usr_dlg_._ = Gfo_usr_dlg_.Null;}
 	@Test   public void Thumb() {
 		fxt	.Init_orig_add(fxt.Mkr_orig().Init_comm("A.png", 440, 400))
 			.Init_fsdb_add(fxt.Mkr_fsdb().Init_comm_thum("A.png", 220, 200))
@@ -83,20 +84,21 @@ public class Xofv_file_mgr_tst {
 }
 class Xofv_file_mgr_fxt {
 	private Xofv_file_mgr file_mgr;
-	private final Xof_orig_mgr__test orig_mgr = new Xof_orig_mgr__test(); private final Xou_cache_mgr__test cache_mgr = new Xou_cache_mgr__test();
 	private final Xof_fsdb_mgr__test fsdb_mgr = new Xof_fsdb_mgr__test(); private final Xog_html_gui__test html_gui = new Xog_html_gui__test();
 	public Xof_xfer_mkr Mkr_xfer() {return mkr_xfer;} private final Xof_xfer_mkr mkr_xfer = new Xof_xfer_mkr();
-	public Xofv_orig_mkr Mkr_orig() {return mkr_orig;} private final Xofv_orig_mkr mkr_orig = new Xofv_orig_mkr();
+	public Xof_orig_itm_mkr Mkr_orig() {return mkr_orig;} private final Xof_orig_itm_mkr mkr_orig = new Xof_orig_itm_mkr();
 	public Xof_fsdb_mkr Mkr_fsdb() {return mkr_fsdb;} private final Xof_fsdb_mkr mkr_fsdb = new Xof_fsdb_mkr();		
 	public Xog_html_rsc_mkr Mkr_html() {return mkr_html;} private final Xog_html_rsc_mkr mkr_html = new Xog_html_rsc_mkr();
-	public Xou_cache_mgr_itm_mkr Mkr_cache() {return mkr_cache;} private final Xou_cache_mgr_itm_mkr mkr_cache = new Xou_cache_mgr_itm_mkr();
+	public Xou_cache_itm_mkr Mkr_cache() {return mkr_cache;} private final Xou_cache_itm_mkr mkr_cache = new Xou_cache_itm_mkr();
 	public void Clear() {
 		file_mgr = new Xofv_file_mgr(Bry_.new_ascii_("enwiki"));
-		orig_mgr.Clear();
-		cache_mgr.Clear();
+		Db_conn_bldr.I.Reg_default_mem();
+		Db_conn conn = Db_conn_bldr.I.New("", Io_url_.mem_fil_("mem/file/cache.db")); boolean created = Bool_.Y; boolean version_is_1 = Bool_.N;
+		file_mgr.Cache_mgr().Init_for_db(conn, created, version_is_1);
+		file_mgr.Orig_wkr().Conn_(conn, created, version_is_1);
 		fsdb_mgr.Clear();
 		html_gui.Clear();
-		file_mgr.Orig_mgr_(orig_mgr).Cache_mgr_(cache_mgr).Fsdb_mgr_(fsdb_mgr);
+		file_mgr.Fsdb_mgr_(fsdb_mgr);
 		Clear_repos();
 	}
 	private void Clear_repos() {
@@ -109,9 +111,9 @@ class Xofv_file_mgr_fxt {
 		mkr_fsdb.Setup_repos(Bry_.new_ascii_("comm"), Bry_.new_ascii_("wiki"));
 	}
 	public Xofv_file_mgr_fxt Init_xfer_add(Xof_xfer_mkr mkr)	{file_mgr.Reg(mkr.Make()); return this;}
-	public Xofv_file_mgr_fxt Init_orig_add(Xofv_orig_mkr mkr)	{orig_mgr.Add(mkr.Make()); return this;}
+	public Xofv_file_mgr_fxt Init_orig_add(Xof_orig_itm_mkr mkr)	{mkr.Make(file_mgr.Orig_wkr()); return this;}
 	public Xofv_file_mgr_fxt Init_fsdb_add(Xof_fsdb_mkr mkr)	{fsdb_mgr.Add(mkr.Make()); return this;}
-	public Xofv_file_mgr_fxt Init_cache_add(Xou_cache_mgr_itm_mkr mkr)	{cache_mgr.Fil__update(mkr.Make()); return this;}
+	public Xofv_file_mgr_fxt Init_cache_add(Xou_cache_itm_mkr mkr)	{mkr.Make(file_mgr.Cache_mgr()); return this;}
 	public Xofv_file_mgr_fxt Init_fsys_add(String s) {Io_mgr._.SaveFilStr(s, ""); return this;}
 	public Xofv_file_mgr_fxt Exec_process_lnki() {file_mgr.Process_lnki(); return this;}
 	public Xofv_file_mgr_fxt Test_fsys_get(String path) {
@@ -179,29 +181,28 @@ class Xof_xfer_mkr {
 		return rv;
 	}
 }
-class Xofv_orig_mkr {
+class Xof_orig_itm_mkr {
 	private byte[] ttl_bry; private int ext, orig_w, orig_h; private Xofv_repo_itm repo;
 	private byte[] redirect_bry;
 	private Xofv_repo_itm repo_comm, repo_wiki;
-	public Xofv_orig_mkr() {this.Reset();}
+	public Xof_orig_itm_mkr() {this.Reset();}
 	private void Reset() {
-		redirect_bry = null;
+		redirect_bry = Bry_.Empty;
 	}
 	public void Setup_repos(Xofv_repo_itm repo_comm, Xofv_repo_itm repo_wiki) {this.repo_comm = repo_comm; this.repo_wiki = repo_wiki;}
-	public Xofv_orig_mkr Init_comm_redirect(String src, String trg, int orig_w, int orig_h) {return Init(Bool_.Y, src, trg, orig_w, orig_h);}
-	public Xofv_orig_mkr Init_comm(String ttl_str, int orig_w, int orig_h) {return Init(Bool_.Y, ttl_str, null, orig_w, orig_h);}
-	public Xofv_orig_mkr Init_wiki(String ttl_str, int orig_w, int orig_h) {return Init(Bool_.N, ttl_str, null, orig_w, orig_h);}
-	private Xofv_orig_mkr Init(boolean repo_is_comm, String ttl_str, String redirect_str, int orig_w, int orig_h) {
+	public Xof_orig_itm_mkr Init_comm_redirect(String src, String trg, int orig_w, int orig_h) {return Init(Bool_.Y, src, trg, orig_w, orig_h);}
+	public Xof_orig_itm_mkr Init_comm(String ttl_str, int orig_w, int orig_h) {return Init(Bool_.Y, ttl_str, null, orig_w, orig_h);}
+	public Xof_orig_itm_mkr Init_wiki(String ttl_str, int orig_w, int orig_h) {return Init(Bool_.N, ttl_str, null, orig_w, orig_h);}
+	private Xof_orig_itm_mkr Init(boolean repo_is_comm, String ttl_str, String redirect_str, int orig_w, int orig_h) {
 		repo = repo_is_comm ? repo_comm : repo_wiki;
 		this.ttl_bry = Bry_.new_utf8_(ttl_str); this.orig_w = orig_w; this.orig_h = orig_h;
-		this.redirect_bry = redirect_str == null ? null : Bry_.new_utf8_(redirect_str);
+		this.redirect_bry = redirect_str == null ? Bry_.Empty : Bry_.new_utf8_(redirect_str);
 		this.ext = Xof_ext_.new_by_ttl_(ttl_bry).Id();
 		return this;
 	}
-	public Xof_orig_regy_itm Make() {
-		Xof_orig_regy_itm rv = new Xof_orig_regy_itm(ttl_bry, Xof_wiki_orig_wkr_.Tid_null, repo.Tid(), orig_w, orig_h, ext, redirect_bry);
+	public void Make(Xof_orig_wkr wkr) {
+		wkr.Add_orig(repo.Tid(), ttl_bry, ext, orig_w, orig_h, redirect_bry);
 		this.Reset();
-		return rv;
 	}
 }
 class Xof_fsdb_mkr {
@@ -227,54 +228,32 @@ class Xof_fsdb_mkr {
 	}
 	public Xof_fsdb_itm Make() {
 		Xof_fsdb_itm rv = new Xof_fsdb_itm();
-		rv.Init_by_lnki(ttl_bry, ext, md5, lnki_type, file_w, file_h, Xof_patch_upright_tid_.Tid_all, upright, thumbtime, page);
-		rv.Orig_wiki_(repo);
+		rv.Ctor_by_lnki(ttl_bry, ext, md5, lnki_type, file_w, file_h, Xof_patch_upright_tid_.Tid_all, upright, thumbtime, page);
+		rv.Orig_repo_name_(repo);
 		rv.File_is_orig_(file_is_orig);
 		this.Reset();
 		return rv;
 	}
 }
-class Xou_cache_mgr_itm_mkr {
-	private byte[] dir; private byte[] ttl; private boolean is_orig; private int w; private double time; private int page;
-	public Xou_cache_mgr_itm_mkr() {this.Reset();}
+class Xou_cache_itm_mkr {
+	private byte[] dir; private byte[] ttl; private boolean is_orig; private int w, h; private double time; private int page; private long size;
+	public Xou_cache_itm_mkr() {this.Reset();}
 	private void Reset() {
 		this.time = Xof_doc_thumb.Null;
 		this.page = Xof_doc_page.Null;
+		this.h = 200;
+		this.size = 1;
 	}
-	public Xou_cache_mgr_itm_mkr Init(String dir_str, String ttl_str, boolean is_orig, int w) {
+	public Xou_cache_itm_mkr Init(String dir_str, String ttl_str, boolean is_orig, int w) {
 		this.dir = Bry_.new_utf8_(dir_str);
 		this.ttl = Bry_.new_utf8_(ttl_str);
 		this.is_orig = is_orig;
 		this.w = w;
 		return this;
 	}
-	public Xou_cache_fil Make() {
-		Xou_cache_fil rv = new Xou_cache_fil(1, 1, dir, ttl, Xof_ext_.new_by_ttl_(ttl).Id(), is_orig, w, 200, time, page, 1, 0);
+	public void Make(Xof_cache_mgr cache_mgr) {
+		cache_mgr.Fil__make(dir, ttl, is_orig, w, h, time, page, size);
 		this.Reset();
-		return rv;
-	}
-}
-class Xof_orig_mgr__test implements Xof_orig_mgr {
-	private Hash_adp_bry hash = Hash_adp_bry.cs_();
-	public void Add(Xof_orig_regy_itm itm) {
-		hash.Add_bry_obj(itm.Ttl(), itm);
-	}
-	public void Clear() {hash.Clear();}
-	public Xof_orig_regy_itm Get_by_ttl(byte[] ttl) {return (Xof_orig_regy_itm)hash.Get_by_bry(ttl);}
-}
-class Xou_cache_mgr__test implements Xou_cache_mgr {
-	private Hash_adp_bry hash = Hash_adp_bry.cs_(); private Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
-	public void Clear() {hash.Clear();}
-	public Xou_cache_fil Fil__get_or_null(byte[] dir_name, byte[] fil_name, boolean doc_is_orig, int doc_w, double doc_time, int doc_page) {
-		byte[] key = Xou_cache_fil.Key_bld(tmp_bfr, dir_name, fil_name, doc_is_orig, doc_w, doc_time, doc_page);
-		return (Xou_cache_fil)hash.Get_by_bry(key);
-	}
-	public void Dir__clear() {}
-	public void Dir__add(Xou_cache_dir dir) {}
-	public byte[] Dir__get_by_id(int id) {return null;}
-	public void Fil__update(Xou_cache_fil fil) {
-		byte[] key = fil.Key(tmp_bfr);
-		hash.AddReplace(key, fil);
 	}
 }
 class Xof_fsdb_mgr__test implements Xof_fsdb_mgr {
@@ -284,7 +263,7 @@ class Xof_fsdb_mgr__test implements Xof_fsdb_mgr {
 	public Xof_fsdb_mgr__test() {this.Clear();}
 	public int Download_count() {return download_count;}
 	public void Add(Xof_fsdb_itm itm) {
-		byte[] key = Xof_fsdb_itm.Bld_key_to_bry(tmp_bfr, itm.Orig_wiki(), itm.Lnki_ttl(), itm.File_is_orig(), itm.Lnki_w(), itm.Lnki_thumbtime(), itm.Lnki_page());
+		byte[] key = Bld_key_to_bry(tmp_bfr, itm.Orig_repo_name(), itm.Lnki_ttl(), itm.File_is_orig(), itm.Lnki_w(), itm.Lnki_time(), itm.Lnki_page());
 //			Tfds.Write("add:" + String_.new_utf8_(key));
 		hash.Add(key, itm);
 	}
@@ -294,7 +273,7 @@ class Xof_fsdb_mgr__test implements Xof_fsdb_mgr {
 		hash.Clear();
 	}
 	public boolean Download(Xofv_file_itm itm) {
-		byte[] key = Xof_fsdb_itm.Bld_key_to_bry(tmp_bfr, itm.File_repo(), itm.File_ttl(), itm.Lnki_is_orig(), itm.Html_w(), itm.Lnki_time(), itm.Lnki_page());
+		byte[] key = Bld_key_to_bry(tmp_bfr, itm.File_repo(), itm.File_ttl(), itm.Lnki_is_orig(), itm.Html_w(), itm.Lnki_time(), itm.Lnki_page());
 //			Tfds.Write("down:" + String_.new_utf8_(key));
 		if (!hash.Has(key)) {
 			return false;
@@ -302,6 +281,16 @@ class Xof_fsdb_mgr__test implements Xof_fsdb_mgr {
 		Io_mgr._.SaveFilStr(itm.File_url(), "");
 		++download_count;
 		return true;
+	}
+	private static byte[] Bld_key_to_bry(Bry_bfr bfr, byte[] dir, byte[] name, boolean is_orig, int w, double time, int page) {
+		bfr	.Add(dir).Add_byte_pipe()
+			.Add(name).Add_byte_pipe()
+			.Add_int_bool(is_orig).Add_byte_pipe()
+			.Add_int_variable(w).Add_byte_pipe()
+			.Add_double(time).Add_byte_pipe()
+			.Add_int_variable(page).Add_byte_pipe()
+			;
+		return bfr.Xto_bry_and_clear();
 	}
 }
 class Xog_html_gui__test implements Xog_html_gui {

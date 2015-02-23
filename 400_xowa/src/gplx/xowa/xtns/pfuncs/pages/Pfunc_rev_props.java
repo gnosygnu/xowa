@@ -32,7 +32,7 @@ public class Pfunc_rev_props extends Pf_func_base {
 						bfr.Add_byte(Byte_ascii.Num_0);
 						return;
 					}
-					Xoa_page argx_page = ctx.Wiki().Data_mgr().Get_page(argx_ttl, false);
+					Xoae_page argx_page = ctx.Wiki().Data_mgr().Get_page(argx_ttl, false);
 					if (!argx_page.Missing()) {
 						bfr.Add_int_variable(argx_page.Data_raw().length);
 						return;

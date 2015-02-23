@@ -21,7 +21,7 @@ public class Xox_xowa_html_cmd implements Xox_xnde, Xop_xnde_atr_parser {
 	private byte pos_val = Pos_head_end;
 	public Xop_root_tkn Xtn_root() {throw Err_.not_implemented_msg_("xowa_html_cmd.xtn_root should not be called");}
 	public byte[] Xtn_html() {throw Err_.not_implemented_msg_("xowa_html_cmd.xtn_html should not be called");}
-	public void Xatr_parse(Xow_wiki wiki, byte[] src, Xop_xatr_itm xatr, Object xatr_key_obj) {
+	public void Xatr_parse(Xowe_wiki wiki, byte[] src, Xop_xatr_itm xatr, Object xatr_key_obj) {
 		if (xatr_key_obj == null) return;
 		Byte_obj_val xatr_key = (Byte_obj_val)xatr_key_obj;
 		switch (xatr_key.Val()) {
@@ -29,12 +29,12 @@ public class Xox_xowa_html_cmd implements Xox_xnde, Xop_xnde_atr_parser {
 			default:					throw Err_.unhandled(xatr_key.Val());
 		}
 	}
-	public void Xtn_parse(Xow_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
+	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
 		if (!wiki.Sys_cfg().Xowa_cmd_enabled()) {	// not allowed; warn and exit
-			wiki.App().Usr_dlg().Warn_many("", "", "xowa_html command only allowed in xowa_home");
+			wiki.Appe().Usr_dlg().Warn_many("", "", "xowa_html command only allowed in xowa_home");
 			return;
 		}
-		Xop_xatr_itm.Xatr_parse(wiki.App(), this, atr_hash, wiki, src, xnde);
+		Xop_xatr_itm.Xatr_parse(wiki.Appe(), this, atr_hash, wiki, src, xnde);
 		int itm_bgn = xnde.Tag_open_end(), itm_end = xnde.Tag_close_bgn();
 		if (src[itm_bgn] 		== Byte_ascii.NewLine) ++itm_bgn;	// ignore 1st \n; 
 		// if (src[itm_end - 1] 	== Byte_ascii.NewLine) --itm_end;	// ignore last \n;
@@ -44,7 +44,7 @@ public class Xox_xowa_html_cmd implements Xox_xnde, Xop_xnde_atr_parser {
 		else
 			ctx.Cur_page().Html_data().Custom_html_end_concat(raw);
 	}
-	public void Xtn_write(Bry_bfr bfr, Xoa_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {}
+	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {}
 	private static byte Pos_val(byte[] bry) {
 		Object o = pos_val_hash.Get_by_bry(bry);
 		if (o == null) throw Err_.new_("unknown pos:{0}", String_.new_utf8_(bry));

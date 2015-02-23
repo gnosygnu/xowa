@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 public class Xow_wiki_stats implements GfoInvkAble {
-	public Xow_wiki_stats(Xow_wiki wiki) {this.wiki = wiki;} private Xow_wiki wiki;
+	public Xow_wiki_stats(Xowe_wiki wiki) {this.wiki = wiki;} private Xowe_wiki wiki;
 	public int NumPages() {return num_pages;} public Xow_wiki_stats NumPages_(int v) {num_pages = v; return this;} private int num_pages;					// in entire wiki: 28,433,596
 	public int NumArticles() {return num_articles;} public Xow_wiki_stats NumArticles_(int v) {num_articles = v; return this;} private int num_articles;	// in main ns: 4,074,996
 	public int NumFiles() {return num_files;} public Xow_wiki_stats NumFiles_(int v) {num_files = v; return this;} private int num_files;

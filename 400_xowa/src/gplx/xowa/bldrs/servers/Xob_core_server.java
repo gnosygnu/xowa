@@ -20,7 +20,7 @@ import gplx.xowa.setup.maints.*;
 import gplx.xowa.bldrs.servers.jobs.*;
 public class Xob_core_server {
 	private Xob_wmf_mgr wmf_mgr;
-	public Xob_core_server(Xoa_app app) {
+	public Xob_core_server(Xoae_app app) {
 		wmf_mgr = new Xob_wmf_mgr(app);
 	}
 	public void Server_init() {

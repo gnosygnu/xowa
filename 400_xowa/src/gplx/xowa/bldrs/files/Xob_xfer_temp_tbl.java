@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.files.*;
+import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.dbs.*; import gplx.xowa.files.*;
 class Xob_xfer_temp_tbl {
 	public static void Create_table(Db_conn p)		{Sqlite_engine_.Tbl_create_and_delete(p, Tbl_name, Tbl_sql);}
 	public static Db_stmt Insert_stmt(Db_conn p) {return Db_stmt_.new_insert_(p, Tbl_name, Fld_lnki_id, Fld_lnki_page_id, Fld_orig_repo, Fld_orig_page_id, Fld_lnki_ttl, Fld_orig_redirect_src, Fld_lnki_ext, Fld_lnki_type, Fld_orig_media_type, Fld_file_is_orig, Fld_orig_w, Fld_orig_h, Fld_file_w, Fld_file_h, Fld_html_w, Fld_html_h, Fld_lnki_time, Fld_lnki_page, Fld_lnki_count);}

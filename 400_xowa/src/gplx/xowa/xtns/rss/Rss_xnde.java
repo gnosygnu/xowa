@@ -19,8 +19,8 @@ package gplx.xowa.xtns.rss; import gplx.*; import gplx.xowa.*; import gplx.xowa.
 import gplx.xowa.html.*;
 import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.logs.*;
 public class Rss_xnde implements Xox_xnde {
-	public void Xtn_parse(Xow_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {}
-	public void Xtn_write(Bry_bfr bfr, Xoa_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
+	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {}
+	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
 		Xox_mgr_base.Xtn_write_unsupported(app, ctx, bfr, src, xnde, Xox_mgr_base.Parse_content_tid_html);
 	}
 }

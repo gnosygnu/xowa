@@ -22,10 +22,10 @@ public class Xou_user_tst {
 	@Test   public void Run() {
 		Io_url user_system_cfg_url = Io_url_.mem_fil_("mem/xowa/user/test_user/app/data/cfg/user_system_cfg.gfs");
 		fxt.Test_fil(user_system_cfg_url, "");								// check that it is blank
-		fxt.App().Init();													// run Init
+		fxt.App().Init_by_app();											// run Init_by_app
 		fxt.Test_fil(user_system_cfg_url, Xou_user_.User_system_cfg_text);	// check that it is created
 		Io_mgr._.SaveFilStr(user_system_cfg_url, "");						// simulate edit by blanking out file
-		fxt.App().Init();													// run Init again
+		fxt.App().Init_by_app();											// run Init_by_app again
 		fxt.Test_fil(user_system_cfg_url, "");								// check that it is still blank
 	}
 	@Test   public void Available_from_fsys() {
@@ -38,7 +38,7 @@ public class Xou_user_tst {
 	}
 }
 class Xou_user_fxt {
-	public Xoa_app App() {return app;} private Xoa_app app = Xoa_app_fxt.app_();
+	public Xoae_app App() {return app;} private Xoae_app app = Xoa_app_fxt.app_();
 	public String Make_xwiki(boolean offline, String name) {return String_.Concat_with_str("|", Yn.Xto_str(offline), name);}
 	public void Test_fil(Io_url url, String expd) {
 		Tfds.Eq_str_lines(expd, Io_mgr._.LoadFilStr(url));
@@ -49,7 +49,7 @@ class Xou_user_fxt {
 		String[] actl = new String[len];
 		for (int i = 0; i < len; ++i) {
 			Xow_xwiki_itm xwiki_itm = xwiki_mgr.Get_at(i);
-			actl[i] = Make_xwiki(xwiki_itm.Offline(), String_.new_utf8_(xwiki_itm.Name()));
+			actl[i] = Make_xwiki(xwiki_itm.Offline(), String_.new_utf8_(xwiki_itm.Domain_name()));
 		}
             Tfds.Eq_ary_str(expd, actl);
 	}

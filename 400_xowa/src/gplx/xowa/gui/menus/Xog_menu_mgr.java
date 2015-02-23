@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.gui.menus; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 import gplx.xowa.gui.menus.dom.*;
 public class Xog_menu_mgr implements GfoInvkAble {
-	private Xoa_app app;
+	private Xoae_app app;
 	public Xog_menu_mgr(Xoa_gui_mgr gui_mgr) {
 		menu_bldr = new Xog_mnu_bldr();
 		regy = new Xog_mnu_regy(gui_mgr);
@@ -29,7 +29,7 @@ public class Xog_menu_mgr implements GfoInvkAble {
 	public Xog_popup_mnu_mgr Popup() {return popup_mnu_mgr;} private Xog_popup_mnu_mgr popup_mnu_mgr;
 	public Xog_window_mnu_mgr Window() {return window_mnu_mgr;} private Xog_window_mnu_mgr window_mnu_mgr;
 	public Xog_mnu_bldr Menu_bldr() {return menu_bldr;} private Xog_mnu_bldr menu_bldr;
-	public void Init_by_app(Xoa_app app) {
+	public void Init_by_app(Xoae_app app) {
 		this.app = app;
 		regy.Init_by_app(app);
 	}

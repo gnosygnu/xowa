@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.dbs.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.dbs.*;
 import gplx.core.primitives.*; import gplx.dbs.*; import gplx.ios.*;
 public class Xodb_text_tbl {
-	public Xodb_text_tbl(Xodb_mgr_sql db_mgr) {this.db_mgr = db_mgr; zip_mgr = db_mgr.Wiki().App().Zip_mgr();} private Xodb_mgr_sql db_mgr; private Io_stream_zip_mgr zip_mgr;
+	public Xodb_text_tbl(Xodb_mgr_sql db_mgr) {this.db_mgr = db_mgr; zip_mgr = db_mgr.Wiki().Appe().Zip_mgr();} private Xodb_mgr_sql db_mgr; private Io_stream_zip_mgr zip_mgr;
 	public void Delete_all(Db_conn conn) {conn.Exec_qry(Db_qry_.delete_tbl_(Tbl_name));}
 	public Db_stmt Insert_stmt(Db_conn prov) {return Db_stmt_.new_insert_(prov, Tbl_name, Fld_page_id, Fld_old_text);}
 	public void Insert(Db_stmt stmt, int page_id, byte[] text, byte storage_type) {

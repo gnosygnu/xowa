@@ -21,12 +21,12 @@ public class Xop_statistics_page implements Xows_page {
 	private Xop_statistics_stats_page_grp stats_page = new Xop_statistics_stats_page_grp();
 //		private Xop_statistics_stats_wiki_grp stats_wiki = new Xop_statistics_stats_wiki_grp();
 	private Xop_statistics_stats_ns_grp stats_ns = new Xop_statistics_stats_ns_grp();
-	public void Special_gen(Xoa_url calling_url, Xoa_page page, Xow_wiki wiki, Xoa_ttl ttl) {
+	public void Special_gen(Xoa_url calling_url, Xoae_page page, Xowe_wiki wiki, Xoa_ttl ttl) {
 		byte[] html = Build_html(wiki);
 		page.Html_data().Html_restricted_n_();	// [[Special:]] pages allow all HTML
 		page.Data_raw_(html);
 	}
-	public byte[] Build_html(Xow_wiki wiki) {
+	public byte[] Build_html(Xowe_wiki wiki) {
 		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_m001();
 		stats_page.Wiki_(wiki);
 //			stats_wiki.Wiki_(wiki);
@@ -42,7 +42,7 @@ public class Xop_statistics_page implements Xows_page {
 	), "page_stats", "ns_stats");
 }
 class Xop_statistics_stats_page_grp implements Bry_fmtr_arg {
-	public void Wiki_(Xow_wiki v) {this.wiki = v;} private Xow_wiki wiki;
+	public void Wiki_(Xowe_wiki v) {this.wiki = v;} private Xowe_wiki wiki;
 	public void XferAry(Bry_bfr bfr, int idx) {			
 		byte[] lbl_header_pages = wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_statistics_header_pages);
 		byte[] lbl_articles = wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_statistics_articles);
@@ -68,7 +68,7 @@ class Xop_statistics_stats_page_grp implements Bry_fmtr_arg {
 }
 class Xop_statistics_stats_ns_grp implements Bry_fmtr_arg {
 	private Xop_statistics_stats_ns_itm ns_itm_fmtr = new Xop_statistics_stats_ns_itm();
-	public void Wiki_(Xow_wiki v) {this.wiki = v; ns_itm_fmtr.Wiki_(v);} private Xow_wiki wiki;
+	public void Wiki_(Xowe_wiki v) {this.wiki = v; ns_itm_fmtr.Wiki_(v);} private Xowe_wiki wiki;
 	public void XferAry(Bry_bfr bfr, int idx) {
 		byte[] lbl_header_ns = wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_statistics_header_ns);
 		fmtr_ns_grp.Bld_bfr_many(bfr, lbl_header_ns, ns_itm_fmtr);
@@ -81,7 +81,7 @@ class Xop_statistics_stats_ns_grp implements Bry_fmtr_arg {
 	), "lbl_header_ns", "ns_itms");
 }
 class Xop_statistics_stats_ns_itm implements Bry_fmtr_arg {
-	public void Wiki_(Xow_wiki v) {this.wiki = v;} private Xow_wiki wiki;
+	public void Wiki_(Xowe_wiki v) {this.wiki = v;} private Xowe_wiki wiki;
 	public void XferAry(Bry_bfr bfr, int idx) {
 		Xow_ns_mgr ns_mgr = wiki.Ns_mgr();
 		int ns_len = ns_mgr.Count();
@@ -102,7 +102,7 @@ class Xop_statistics_stats_ns_itm implements Bry_fmtr_arg {
 	), "ns_name", "ns_count");
 }
 class Xop_statistics_stats_wiki_grp implements Bry_fmtr_arg {
-	public void Wiki_(Xow_wiki v) {this.wiki = v;} private Xow_wiki wiki;
+	public void Wiki_(Xowe_wiki v) {this.wiki = v;} private Xowe_wiki wiki;
 	public void XferAry(Bry_bfr bfr, int idx) {
 		fmtr_wiki.Bld_bfr_many(bfr, wiki.Db_mgr().Tid_name(), wiki.Fsys_mgr().Root_dir().Raw(), Byte_.Xto_str(wiki.Db_mgr().Category_version()), wiki.Maint_mgr().Wiki_dump_date().XtoStr_fmt_iso_8561());
 	}

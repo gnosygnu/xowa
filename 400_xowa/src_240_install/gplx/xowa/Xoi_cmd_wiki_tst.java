@@ -36,7 +36,7 @@ public class Xoi_cmd_wiki_tst {
 	private void Bld_import_list_itm2(Bry_bfr bfr, Wmf_latest_parser parser, Xob_dump_file dump_file, Bry_fmtr_arg_time time_fmtr, String[] ary, int i) {
 		String domain_str = ary[i];
 		byte[] domain_bry = Bry_.new_ascii_(domain_str);
-		Xow_wiki_domain domain_itm = Xow_wiki_domain_.parse_by_domain(domain_bry);
+		Xow_domain domain_itm = Xow_domain_.parse(domain_bry);
 		byte[] wmf_key_bry = Bry_.Replace(Xow_wiki_alias.Build_alias(domain_itm), Byte_ascii.Dash, Byte_ascii.Underline);
 		String wmf_key = String_.new_utf8_(wmf_key_bry);
 		String url = "http://dumps.wikimedia.org/" + wmf_key + "/latest";
@@ -55,7 +55,7 @@ public class Xoi_cmd_wiki_tst {
 		Wmf_latest_itm latest_itm = parser.Get_by(pages_articles_key);
 		bfr.Add(domain_bry).Add_byte_pipe();
 		bfr.Add_str(dump_file.File_url()).Add_byte_pipe();
-		bfr.Add(Xow_wiki_domain_.Key_by_tid(domain_itm.Wiki_tid())).Add_byte_pipe();
+		bfr.Add(Xow_domain_.Tid__get_bry(domain_itm.Domain_tid())).Add_byte_pipe();
 		long src_size = latest_itm.Size();
 		bfr.Add_long_variable(src_size).Add_byte_pipe();
 		bfr.Add_str(gplx.ios.Io_size_.Xto_str(src_size)).Add_byte_pipe();
@@ -85,7 +85,7 @@ public class Xoi_cmd_wiki_tst {
 			Tfds.WriteText(String_.Format("passed: {0}\n", itm));
 		bfr.Add_str(itm).Add_byte_pipe();
 		bfr.Add_str(dump_file.File_url()).Add_byte_pipe();
-		bfr.Add(Xow_wiki_domain_.Key_by_tid(dump_file.Wiki_type().Wiki_tid())).Add_byte_pipe();
+		bfr.Add(Xow_domain_.Tid__get_bry(dump_file.Wiki_type().Wiki_tid())).Add_byte_pipe();
 //			Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key(wiki_type.Lang_key());
 //			if (lang_itm == null) lang_itm = Xol_lang_itm_.Get_by_key(Xol_lang_.Key_en);	// commons, species, meta, etc will have no lang
 //			bfr.Add(lang_itm.Local_name()).Add_byte_pipe();

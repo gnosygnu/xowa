@@ -38,5 +38,5 @@ public class Xoh_tidy_wkr_ {
 }
 class Xoh_tidy_wkr_null implements Xoh_tidy_wkr {
 	public byte Tid() {return Xoh_tidy_wkr_.Tid_null;}
-	public void Exec_tidy(Xoa_page page, Bry_bfr bfr) {}
+	public void Exec_tidy(Xoae_page page, Bry_bfr bfr) {}
 }

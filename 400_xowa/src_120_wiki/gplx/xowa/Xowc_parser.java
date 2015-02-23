@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.xowa.parsers.lnkis.cfgs.*;
 public class Xowc_parser implements GfoInvkAble {
-	public Xowc_parser(Xow_wiki wiki) {
+	public Xowc_parser(Xowe_wiki wiki) {
 		lnki_cfg = new Xoc_lnki_cfg(wiki);
 	}
 	public Xoc_lnki_cfg Lnki_cfg() {return lnki_cfg;} private Xoc_lnki_cfg lnki_cfg;

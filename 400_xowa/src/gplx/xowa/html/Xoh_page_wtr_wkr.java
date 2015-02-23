@@ -19,16 +19,16 @@ package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
 import gplx.html.*; import gplx.xowa.html.portal.*; import gplx.xowa.pages.skins.*; import gplx.xowa.pages.*;
 import gplx.xowa.wikis.*; import gplx.xowa.gui.*; import gplx.xowa.xtns.wdatas.*;
 public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
-	private Xop_ctx ctx; private Xoa_page page; private Bry_bfr tmp_bfr = Bry_bfr.reset_(255); 
+	private Xop_ctx ctx; private Xoae_page page; private Bry_bfr tmp_bfr = Bry_bfr.reset_(255); 
 	public Xoh_page_wtr_wkr(byte page_mode) {this.page_mode = page_mode;} private byte page_mode;
 	public Wdata_xwiki_link_wtr Wdata_lang_wtr() {return wtr_page_lang;} private Wdata_xwiki_link_wtr wtr_page_lang = new Wdata_xwiki_link_wtr();
-	public Xoh_page_wtr_wkr Page_(Xoa_page v) {this.page = v; return this;} 
+	public Xoh_page_wtr_wkr Page_(Xoae_page v) {this.page = v; return this;} 
 	public Xoh_page_wtr_wkr Mgr_(Xoh_page_wtr_mgr v) {this.mgr = v; return this;} private Xoh_page_wtr_mgr mgr;
 	public boolean Ctgs_enabled() {return ctgs_enabled;} public Xoh_page_wtr_wkr Ctgs_enabled_(boolean v) {ctgs_enabled = v; return this;} private boolean ctgs_enabled = true;
-	public byte[] Write(Xoh_page_wtr_mgr mgr, Xoa_page page, Xop_ctx ctx, Bry_bfr html_bfr) {
+	public byte[] Write(Xoh_page_wtr_mgr mgr, Xoae_page page, Xop_ctx ctx, Bry_bfr html_bfr) {
 		this.mgr = mgr; this.page = page; this.ctx = ctx; 
-		Xow_wiki wiki = page.Wiki(); Xoa_app app = wiki.App();
-		ctx.Cur_page_(page); // HACK: must update page for toc_mgr; WHEN: Xoa_page rewrite
+		Xowe_wiki wiki = page.Wikie(); Xoae_app app = wiki.Appe();
+		ctx.Cur_page_(page); // HACK: must update page for toc_mgr; WHEN: Xoae_page rewrite
 		Bry_fmtr fmtr = null;
 		if (mgr.Html_capable()) {
 			wtr_page_lang.Page_(page);
@@ -37,7 +37,7 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 				case Xopg_view_mode.Tid_edit:	fmtr = mgr.Page_edit_fmtr(); break;
 				case Xopg_view_mode.Tid_html:	fmtr = mgr.Page_read_fmtr(); view_mode = Xopg_view_mode.Tid_read; break; // set view_mode to read, so that "read" is highlighted in HTML
 				case Xopg_view_mode.Tid_read:	fmtr = mgr.Page_read_fmtr(); 
-					ctx.Cur_page().Lnki_redlinks_mgr().Clear();	// not sure if this is the best place to put it, but redlinks (a) must only fire once; (b) must fire before html generation; (c) cannot fire during edit (preview will handle separately)
+					ctx.Cur_page().Redlink_lnki_list().Clear();	// not sure if this is the best place to put it, but redlinks (a) must only fire once; (b) must fire before html generation; (c) cannot fire during edit (preview will handle separately)
 					break;
 			}
 			Write_page(html_bfr, app, wiki, mgr, page, view_mode, fmtr, this);
@@ -50,7 +50,7 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 		this.page = null;
 		return html_bfr.Xto_bry_and_clear();
 	}
-	private void Write_page(Bry_bfr html_bfr, Xoa_app app, Xow_wiki wiki, Xoh_page_wtr_mgr mgr, Xoa_page page, byte view_tid, Bry_fmtr fmtr, Object page_data) {
+	private void Write_page(Bry_bfr html_bfr, Xoae_app app, Xowe_wiki wiki, Xoh_page_wtr_mgr mgr, Xoae_page page, byte view_tid, Bry_fmtr fmtr, Object page_data) {
 		byte[] custom_html = page.Html_data().Custom_html();
 		if (custom_html != null) {
 			html_bfr.Add(custom_html);
@@ -72,7 +72,7 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 		, Xoh_page_wtr_wkr_.Bld_page_name(tmp_bfr, page_ttl, page.Html_data().Display_ttl())
 		, page_modified_on_msg
 		, mgr.Css_common_bry(), mgr.Css_wiki_bry(), page.Html_data().Module_mgr().Init(app, wiki, page).Init_dflts()
-		, page.Lang().Dir_bry(), page.Html_data().Indicators(), page_content_sub, wiki.Html_mgr().Portal_mgr().Div_jump_to(), page_body_class, html_content_editable
+		, page.Lang().Dir_ltr_bry(), page.Html_data().Indicators(), page_content_sub, wiki.Html_mgr().Portal_mgr().Div_jump_to(), page_body_class, html_content_editable
 		, page_data, wtr_page_lang			
 		, portal_mgr.Div_personal_bry(), portal_mgr.Div_ns_bry(app.Utl_bry_bfr_mkr(), page_ttl, wiki.Ns_mgr()), portal_mgr.Div_view_bry(app.Utl_bry_bfr_mkr(), view_tid, page.Html_data().Xtn_search_text())
 		, portal_mgr.Div_logo_bry(), portal_mgr.Div_home_bry(), new Xopg_xtn_skin_fmtr_arg(page, Xopg_xtn_skin_itm_tid.Tid_sidebar), portal_mgr.Div_wikis_bry(app.Utl_bry_bfr_mkr()), portal_mgr.Sidebar_mgr().Html_bry()
@@ -82,8 +82,8 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 		Xoh_page_wtr_wkr_.Bld_html_end(html_bfr, page);
 	}
 	public void XferAry(Bry_bfr bfr, int idx) {Write_body(bfr, Xoh_wtr_ctx.Basic, page);}
-	public void Write_body(Bry_bfr bfr, Xoh_wtr_ctx hctx, Xoa_page page) {
-		Xow_wiki wiki = page.Wiki(); Xoa_app app = wiki.App();
+	public void Write_body(Bry_bfr bfr, Xoh_wtr_ctx hctx, Xoae_page page) {
+		Xowe_wiki wiki = page.Wikie(); Xoae_app app = wiki.Appe();
 		Xoa_ttl page_ttl = page.Ttl(); int page_ns_id = page_ttl.Ns().Id();
 		byte page_tid = Xow_page_tid.Identify(wiki.Domain_tid(), page_ns_id, page_ttl.Page_db());	// NOTE: can't cache page_tid b/c Write_body is called directly; DATE:2014-10-02
 		byte[] data_raw = page.Data_raw();
@@ -100,12 +100,12 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 				case Xow_page_tid.Tid_json:		app.Wiki_mgr().Wdata_mgr().Write_json_as_html(bfr, page_ttl.Page_db(), data_raw); break;
 			}
 		}
-		if (	wiki.Domain_tid() != Xow_wiki_domain_.Tid_home	// allow home wiki to use javascript
+		if (	wiki.Domain_tid() != Xow_domain_.Tid_int_home	// allow home wiki to use javascript
 			&&  !page_tid_uses_pre) {							// if .js, .css or .lua, skip test; may have js fragments, but entire text is escaped and put in pre; don't show spurious warning; DATE:2013-11-21
 			app.Html_mgr().Js_cleaner().Clean_bfr(wiki, page_ttl, bfr, bfr_page_bgn);
 		}
 	}
-	private void Write_body_wikitext(Bry_bfr bfr, Xoa_app app, Xow_wiki wiki, byte[] data_raw, Xoh_wtr_ctx hctx, Xoa_page page, byte page_tid, int ns_id) {
+	private void Write_body_wikitext(Bry_bfr bfr, Xoae_app app, Xowe_wiki wiki, byte[] data_raw, Xoh_wtr_ctx hctx, Xoae_page page, byte page_tid, int ns_id) {
 		byte[] hdump_data = page.Hdump_data().Body();
 		if (Bry_.Len_gt_0(hdump_data)) {
 			bfr.Add(hdump_data);
@@ -120,14 +120,14 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 		gplx.xowa.html.tidy.Xoh_tidy_mgr tidy_mgr = app.Html_mgr().Tidy_mgr();
 		boolean tidy_enabled = tidy_mgr.Enabled();
 		Bry_bfr hdom_bfr = tidy_enabled ? app.Utl_bry_bfr_mkr().Get_m001() : bfr;	// if tidy, then write to tidy_bfr; note that bfr already has <html> and <head> written to it, so this can't be passed to tidy; DATE:2014-06-11
-		wiki.Html_mgr().Html_wtr().Write_all(hdom_bfr, page.Wiki().Ctx(), hctx, page.Root().Data_mid(), page.Root());
+		wiki.Html_mgr().Html_wtr().Write_all(hdom_bfr, page.Wikie().Ctx(), hctx, page.Root().Data_mid(), page.Root());
 		if (tidy_enabled) {
 			tidy_mgr.Run_tidy_html(page, hdom_bfr);
 			bfr.Add_bfr_and_clear(hdom_bfr);
 			hdom_bfr.Mkr_rls();
 		}
 		if (ns_id == Xow_ns_.Id_category)		// if Category, render rest of html (Subcategories; Pages; Files); note that a category may have other html which requires wikitext processing
-			wiki.Html_mgr().Ns_ctg().Bld_html(page, bfr);
+			wiki.Html_mgr().Ns_ctg().Bld_html(wiki, page, bfr);
 		int ctgs_len = page.Category_list().length;	// add Categories
 
 		if (	ctgs_enabled
@@ -141,8 +141,8 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 				wiki.Html_mgr().Ctg_mgr().Bld(bfr, page, ctgs_len);
 		}
 	}
-	private void Write_body_pre(Bry_bfr bfr, Xoa_app app, Xow_wiki wiki, byte[] data_raw, Bry_bfr tmp_bfr) {
-		Xoh_html_wtr_escaper.Escape(app, tmp_bfr, data_raw, 0, data_raw.length, false, false);
+	private void Write_body_pre(Bry_bfr bfr, Xoae_app app, Xowe_wiki wiki, byte[] data_raw, Bry_bfr tmp_bfr) {
+		Xoh_html_wtr_escaper.Escape(app.Parser_amp_mgr(), tmp_bfr, data_raw, 0, data_raw.length, false, false);
 		app.Html_mgr().Page_mgr().Content_code_fmtr().Bld_bfr_many(bfr, tmp_bfr);
 		tmp_bfr.Clear();
 	}
@@ -153,7 +153,7 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 			data_raw = gplx.xowa.apps.Xoa_gfs_php_mgr.Xto_php(tmp_bfr, Bool_.N, data_raw);
 		int data_raw_len = data_raw.length;
 		if (mgr.Html_capable())
-			Xoh_html_wtr_escaper.Escape(page.Wiki().App(), bfr, data_raw, 0, data_raw_len, false, false);	// NOTE: must escape; assume that browser will automatically escape (&lt;) (which Mozilla does)
+			Xoh_html_wtr_escaper.Escape(page.Wikie().Appe().Parser_amp_mgr(), bfr, data_raw, 0, data_raw_len, false, false);	// NOTE: must escape; assume that browser will automatically escape (&lt;) (which Mozilla does)
 		else
 			bfr.Add(data_raw);
 		if (data_raw_len > 0)		// do not add nl if empty String

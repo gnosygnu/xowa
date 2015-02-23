@@ -16,50 +16,60 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.dbs.*;
-import gplx.dbs.*;
+import gplx.dbs.*; import gplx.dbs.qrys.*;
 public class Xodb_xowa_db_tbl {
-	public void Conn_(Db_conn conn) {this.conn = conn;} Db_conn conn;
-	public void Update_url(Db_conn conn, int db_id, String db_url) {
-		Db_stmt stmt = Db_stmt_.Null;
-		try {
-			stmt = Db_stmt_.new_update_(conn, Tbl_name, String_.Ary(Fld_db_id), Fld_db_url);
-			stmt.Clear()
-				.Val_str(db_url)
-				.Val_int(db_id)
-				.Exec_update();
-				;
-		} finally {stmt.Rls();}
+	private String tbl_name = "wiki_db_regy"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private String fld_id, fld_type, fld_url;
+	private Db_conn conn; private final Db_stmt_bldr stmt_bldr = new Db_stmt_bldr();
+	public void Conn_(Db_conn new_conn, boolean created, boolean version_is_1) {
+		this.conn = new_conn; flds.Clear();
+		String fld_prefix = "";
+		if (version_is_1) {
+			tbl_name		= "xowa_db";
+			fld_prefix		= "db_";
+		}
+		fld_id				= flds.Add_int_pkey(fld_prefix + "id");
+		fld_type			= flds.Add_byte(fld_prefix + "type");			// 1=core;2=wikidata;3=data
+		fld_url				= flds.Add_str(fld_prefix + "url", 512);
+		if (created) {
+			Db_meta_tbl meta = Db_meta_tbl.new_(tbl_name, flds);
+			conn.Exec_create_tbl_and_idx(meta);
+		}
+		stmt_bldr.Conn_(conn, tbl_name, flds, fld_id);
 	}
-	public void Commit_all(Xodb_fsys_mgr db_fs) {this.Commit_all(db_fs.Conn_core(), db_fs.Files_ary());}
-	public void Commit_all(Db_conn conn, Xodb_file[] ary) {
-		stmt_bldr.Init(conn);
+	public void Update_url(int id, String url) {
+		Db_stmt stmt = conn.Stmt_update(tbl_name, String_.Ary(fld_id), fld_url);
+		stmt.Clear().Val_str(fld_url, url).Crt_int(fld_id, id).Exec_update();
+	}
+	public void Commit_all(Xodb_fsys_mgr db_fs) {this.Commit_all(db_fs.Files_ary());}
+	public void Commit_all(Xodb_file[] ary) {
+		stmt_bldr.Batch_bgn();
 		try {
 			int len = ary.length;
 			for (int i = 0; i < len; i++)
 				Commit_itm(ary[i]);
-			stmt_bldr.Commit();
-		}	finally {stmt_bldr.Rls();}
+		}	finally {stmt_bldr.Batch_end();}
 	}
 	private void Commit_itm(Xodb_file itm) {
 		Db_stmt stmt = stmt_bldr.Get(itm.Cmd_mode());
 		switch (itm.Cmd_mode()) {
-			case Db_cmd_mode.Create:	stmt.Clear().Val_int(itm.Id())	.Val_byte(itm.Tid()).Val_str(itm.Url_rel()).Exec_insert(); break;
-			case Db_cmd_mode.Update:	stmt.Clear()					.Val_byte(itm.Tid()).Val_str(itm.Url_rel()).Val_int(itm.Id()).Exec_update(); break;
-			case Db_cmd_mode.Delete:	stmt.Clear().Val_int(itm.Id()).Exec_delete();	break;
-			case Db_cmd_mode.Ignore:	break;
-			default:					throw Err_.unhandled(itm.Cmd_mode());
+			case Db_cmd_mode.Tid_create:	stmt.Clear().Val_int(fld_id, itm.Id())	.Val_byte(fld_type, itm.Tid()).Val_str(fld_url, itm.Url_rel()).Exec_insert(); break;
+			case Db_cmd_mode.Tid_update:	stmt.Clear()							.Val_byte(fld_type, itm.Tid()).Val_str(fld_url, itm.Url_rel()).Crt_int(fld_id, itm.Id()).Exec_update(); break;
+			case Db_cmd_mode.Tid_delete:	stmt.Clear().Crt_int(fld_id, itm.Id()).Exec_delete();	break;
+			case Db_cmd_mode.Tid_ignore:	break;
+			default:						throw Err_.unhandled(itm.Cmd_mode());
 		}
-		itm.Cmd_mode_(Db_cmd_mode.Ignore);
+		itm.Cmd_mode_(Db_cmd_mode.Tid_ignore);
 	}
-	public Xodb_file[] Select_all(Db_conn conn) {
-		DataRdr rdr = DataRdr_.Null;
+	public Xodb_file[] Select_all() {
+		Db_rdr rdr = Db_rdr_.Null;
 		ListAdp list = ListAdp_.new_();
 		try {
-			Db_qry qry = Db_qry_.select_tbl_(Tbl_name).OrderBy_asc_(Fld_db_id);
-			rdr = conn.Exec_qry_as_rdr(qry);
-			while (rdr.MoveNextPeer()) {
-				Xodb_file db = Xodb_file.load_(rdr.ReadInt(Fld_db_id), rdr.ReadByte(Fld_db_type), rdr.ReadStr(Fld_db_url));
-				list.Add(db);
+			Db_qry qry = Db_qry_.select_tbl_(tbl_name).OrderBy_asc_(fld_id);
+			rdr = conn.Stmt_new(qry).Exec_select_as_rdr();
+			while (rdr.Move_next()) {
+				Xodb_file itm = Xodb_file.load_(rdr.Read_int(fld_id), rdr.Read_byte(fld_type), rdr.Read_str(fld_url));
+				list.Add(itm);
 			}
 		} finally {rdr.Rls();}
 		Xodb_file[] rv = (Xodb_file[])list.Xto_ary(Xodb_file.class);
@@ -69,15 +79,13 @@ public class Xodb_xowa_db_tbl {
 	private void Chk_sequential(Xodb_file[] ary) {
 		int len = ary.length;
 		int expd_id = 0;
-		for (int i = 0; i < len; i++) {
+		for (int i = 0; i < len; ++i) {
 			Xodb_file itm = ary[i];
 			int actl_id = itm.Id();
 			if (expd_id != actl_id) throw Err_.new_fmt_("database ids are not sequential; expd={0} actl={1}", expd_id, actl_id);
 			++expd_id;
 		}
 	}
-	public static final String Tbl_name = "xowa_db", Fld_db_id = "db_id", Fld_db_type = "db_type", Fld_db_url = "db_url";
-	Db_stmt_bldr stmt_bldr = new Db_stmt_bldr(Tbl_name, String_.Ary(Fld_db_id), Fld_db_type, Fld_db_url);
 }
 class Xodb_db_sorter implements gplx.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {

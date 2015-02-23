@@ -16,14 +16,14 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs; import gplx.*; import gplx.xowa.*;
-import gplx.dbs.*; import gplx.dbs.engines.sqlite.*;
+import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.engines.sqlite.*;
 import gplx.xowa.apps.*; import gplx.xowa.dbs.tbls.*; import gplx.xowa.ctgs.*; import gplx.xowa.hdumps.*;
 import gplx.xowa2.wikis.data.*;
 public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 	private boolean html_db_enabled;
-	public Xodb_mgr_sql(Xow_wiki wiki) {
+	public Xodb_mgr_sql(Xowe_wiki wiki) {
 		this.wiki = wiki;
-		Io_url bin_db_dir = wiki.App().Fsys_mgr().Bin_any_dir().GenSubDir_nest("sql", "xowa");
+		Io_url bin_db_dir = wiki.Appe().Fsys_mgr().Bin_any_dir().GenSubDir_nest("sql", "xowa");
 		fsys_mgr = new Xodb_fsys_mgr(bin_db_dir, wiki.Fsys_mgr().Root_dir(), wiki.Domain_str());
 		load_mgr = new Xodb_load_mgr_sql(this, fsys_mgr);
 		save_mgr = new Xodb_save_mgr_sql(this);
@@ -33,7 +33,7 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 	}
 	public byte Tid() {return Tid_sql;} public static final byte Tid_sql = 1;
 	public String Tid_name() {return "sqlite3";}
-	public Xow_wiki Wiki() {return wiki;} private Xow_wiki wiki;
+	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public byte Data_storage_format() {return data_storage_format;} public void Data_storage_format_(byte v) {data_storage_format = v;} private byte data_storage_format = gplx.ios.Io_stream_.Tid_gzip;		
 	public byte Category_version() {return category_version;} private byte category_version = Xoa_ctg_mgr.Version_null;
 	public byte Search_version() {return load_mgr.Search_version();}
@@ -69,23 +69,23 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 		return Io_mgr._.QueryFil(url).ModifiedTime();
 	}
 	public void Init_by_ns_map(String ns_map) {
-		Xoi_dump_mgr dump_mgr = wiki.App().Setup_mgr().Dump_mgr();
+		Xoi_dump_mgr dump_mgr = wiki.Appe().Setup_mgr().Dump_mgr();
 		data_storage_format = dump_mgr.Data_storage_format();
 		fsys_mgr.Init_by_ns_map(wiki.Ns_mgr(), ns_map, dump_mgr.Db_text_max());
 		Core_provider_(fsys_mgr.Conn_core());
 		state = State_make;
 	}
-	public void Init_load(Db_url connect) {
-		Db_conn conn = Db_conn_pool_old._.Get_or_new(connect);
-		Xodb_file[] files = tbl_db.Select_all(conn);
-		fsys_mgr.Init_by_files(conn, files);
+	public void Init_load(Db_url url) {
+		Db_conn conn = Db_conn_pool.I.Get_or_new(url);
 		Core_provider_(conn);
+		Xodb_file[] files = tbl_db.Select_all();
+		fsys_mgr.Init_by_files(conn, files);
 		state = State_load;
 	}
 	private void Core_provider_(Db_conn conn) {
 		tbl_cfg.Conn_(conn);
 		tbl_ns.Conn_(conn);
-		tbl_db.Conn_(conn);
+		tbl_db.Conn_(conn, Bool_.N, Bool_.Y);	// version_is_1 always has pre-created xowa_db tbl
 		tbl_page.Conn_(conn);
 		tbl_site_stats.Conn_(conn);
 	}
@@ -155,7 +155,7 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 	;
 	public void Category_version_update(boolean version_is_1) {
 		String grp = Xodb_mgr_sql.Grp_wiki_init;
-		String key = Xoa_gfs_mgr.Build_code(Xow_wiki.Invk_db_mgr, Xodb_mgr_sql.Invk_category_version);
+		String key = Xoa_gfs_mgr.Build_code(Xowe_wiki.Invk_db_mgr, Xodb_mgr_sql.Invk_category_version);
 //			if (category_version != Xoa_ctg_mgr.Version_null)
 			tbl_cfg.Delete(grp, key);// always delete ctg version
 		category_version = version_is_1 ? Xoa_ctg_mgr.Version_1 : Xoa_ctg_mgr.Version_2;
@@ -168,17 +168,17 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 			Xodb_file file = ary[i] ;
 			if (file.Tid() != tid) continue;
 			file.Rls();
-			Db_url__sqlite sqlite = (Db_url__sqlite)file.Connect();
+			Sqlite_url sqlite = (Sqlite_url)file.Connect();
 			Io_mgr._.DeleteFil_args(sqlite.Url()).MissingFails_off().Exec();
-			file.Cmd_mode_(Db_cmd_mode.Delete);
+			file.Cmd_mode_(Db_cmd_mode.Tid_delete);
 		}
-		tbl_db.Commit_all(fsys_mgr.Conn_core(), ary);
+		tbl_db.Commit_all(ary);
 		this.Init_load(fsys_mgr.Conn_core().Url());
 	}
 
 	public static final String Grp_wiki_init = "wiki.init";
 	public static final int Page_id_null = -1;
-	public static Io_url Find_core_url(Xow_wiki wiki) {
+	public static Io_url Find_core_url(Xowe_wiki wiki) {
 		Io_url[] ary = Io_mgr._.QueryDir_args(wiki.Fsys_mgr().Root_dir()).FilPath_("*.sqlite3").ExecAsUrlAry();
 		int ary_len = ary.length; if (ary_len == 0) return null;
 		if (ary_len == 1) return ary[0];							// only 1 file; assume it is core
@@ -191,7 +191,7 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 		}
 		return null;
 	}
-	public static Xodb_mgr_sql Get_or_load(Xow_wiki wiki) {
+	public static Xodb_mgr_sql Get_or_load(Xowe_wiki wiki) {
 		Xodb_mgr db_mgr = wiki.Db_mgr();
 		Xodb_mgr_sql rv = db_mgr.Tid() == Xodb_mgr_txt.Tid_txt ? wiki.Db_mgr_create_as_sql() : wiki.Db_mgr_as_sql();
 		byte state = rv.State();

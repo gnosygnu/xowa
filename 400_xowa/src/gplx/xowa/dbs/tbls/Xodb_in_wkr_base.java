@@ -30,7 +30,7 @@ public abstract class Xodb_in_wkr_base {
 			int part_end = i + interval;
 			if (part_end > full_end) part_end = full_end;
 			try {
-				stmt = conn.New_stmt(Build_qry(db_ctx, i, part_end));
+				stmt = conn.Stmt_new(Build_qry(db_ctx, i, part_end));
 				Fill_stmt(stmt, i, part_end);
 				rdr = stmt.Exec_select();
 				Eval_rslts(cancelable, db_ctx, rdr);

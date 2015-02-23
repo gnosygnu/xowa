@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.xowa.apps.fsys.*; import gplx.xowa.net.*; import gplx.xowa.wikis.xwikis.*;
+import gplx.xowa.apps.progs.*; import gplx.xowa.net.*; import gplx.xowa.wikis.xwikis.*;
 public class Xop_lnke_wkr implements Xop_ctx_wkr {
 	public void Ctor_ctx(Xop_ctx ctx) {url_parser = ctx.App().Url_parser().Url_parser();} Gfo_url_parser url_parser; Gfo_url_site_data site_data = new Gfo_url_site_data(); Xoa_url_parser xo_url_parser = new Xoa_url_parser(); Xoa_url xo_url_parser_url = Xoa_url.blank_();
 	public void Page_bgn(Xop_ctx ctx, Xop_root_tkn root) {}
@@ -83,7 +83,7 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 			switch (src[cur_pos]) {
 				case Byte_ascii.Brack_end:
 					if (lnke_type_brack) {	// NOTE: check that frame begins with [ in order to end with ] 
-						lnke_end_tid = End_tid_brack; brack_end_pos = cur_pos + Launcher_app_mgr.Adj_next_char;
+						lnke_end_tid = End_tid_brack; brack_end_pos = cur_pos + Xoa_prog_mgr.Adj_next_char;
 					}
 					else {					// NOTE: frame does not begin with [ but ] encountered. mark "invalid" in order to force parser to stop before "]"
 						lnke_end_tid = End_tid_invalid;
@@ -163,14 +163,14 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 		tkn.Lnke_relative_(site_data.Rel());
 		Xow_xwiki_itm xwiki = ctx.App().User().Wiki().Xwiki_mgr().Get_by_mid(src, site_bgn, site_end);	// NOTE: check User_wiki.Xwiki_mgr, not App.Wiki_mgr() b/c only it is guaranteed to know all wikis on system
 		if (xwiki != null) {	// lnke is to an xwiki; EX: [http://en.wikipedia.org/A a]
-			Xow_wiki wiki = ctx.Wiki();
+			Xowe_wiki wiki = ctx.Wiki();
 			Xoa_url_parser.Parse_url(xo_url_parser_url, ctx.App(), wiki, src, lnke_bgn, lnke_end, false);
 			byte[] xwiki_wiki = xo_url_parser_url.Wiki_bry();
 			byte[] xwiki_page = xo_url_parser_url.Page_bry();
 			byte[] ttl_bry = xo_url_parser_url.Page_bry();
 			Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry);
 			if (ttl != null && ttl.Wik_itm() != null) {
-				xwiki_wiki = ttl.Wik_itm().Domain();
+				xwiki_wiki = ttl.Wik_itm().Domain_bry();
 				xwiki_page = ttl.Page_url();
 			}
 			tkn.Lnke_xwiki_(xwiki_wiki, xwiki_page, xo_url_parser_url.Args());

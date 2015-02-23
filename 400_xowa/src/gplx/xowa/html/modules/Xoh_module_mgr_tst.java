@@ -108,9 +108,9 @@ class Xoh_module_mgr_fxt {
 	private Xop_fxt fxt = new Xop_fxt();
 	private Xoh_module_mgr mgr;
 	private Bry_bfr bfr = Bry_bfr.reset_(255);
-	public Xow_wiki Wiki() {return wiki;} private Xow_wiki wiki;
+	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public Xoh_module_mgr Mgr() {return mgr;}
-	public Xol_lang Make_lang(String key) {return wiki.App().Lang_mgr().Get_by_key_or_new(Bry_.new_ascii_(key));}
+	public Xol_lang Make_lang(String key) {return wiki.Appe().Lang_mgr().Get_by_key_or_new(Bry_.new_ascii_(key));}
 	public void Clear() {
 		fxt.Reset();
 		mgr = fxt.Page().Html_data().Module_mgr();

@@ -22,17 +22,17 @@ import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xo
 import gplx.xowa.parsers.logs.*; import gplx.xowa.html.modules.popups.keeplists.*;
 public class Xop_ctx {
 	private Xop_ctx_wkr[] wkrs = new Xop_ctx_wkr[] {};
-	Xop_ctx(Xow_wiki wiki, Xoa_page page) {
-		this.app = wiki.App(); this.msg_log = app.Msg_log();
+	Xop_ctx(Xowe_wiki wiki, Xoae_page page) {
+		this.app = wiki.Appe(); this.msg_log = app.Msg_log();
 		this.wiki = wiki; this.cur_page = page;
 		wkrs = new Xop_ctx_wkr[] {para, apos, xnde, list, lnki, hdr, amp, lnke, tblw, invk};
 		for (Xop_ctx_wkr wkr : wkrs) wkr.Ctor_ctx(this);
 	}
-	public Xoa_app				App()				{return app;} private Xoa_app app;
-	public Xow_wiki				Wiki()				{return wiki;} private Xow_wiki wiki;
+	public Xoae_app				App()				{return app;} private Xoae_app app;
+	public Xowe_wiki				Wiki()				{return wiki;} private Xowe_wiki wiki;
 	public Xol_lang				Lang()				{return wiki.Lang();}
 	public Xop_tkn_mkr			Tkn_mkr()			{return app.Tkn_mkr();}
-	public Xoa_page				Cur_page()			{return cur_page;} public void Cur_page_(Xoa_page v) {cur_page = v;} private Xoa_page cur_page;
+	public Xoae_page				Cur_page()			{return cur_page;} public void Cur_page_(Xoae_page v) {cur_page = v;} private Xoae_page cur_page;
 	public byte					Parse_tid()			{return parse_tid;} public Xop_ctx Parse_tid_(byte v) {parse_tid = v; xnde_names_tid = v; return this;} private byte parse_tid = Xop_parser_.Parse_tid_null;
 	public byte					Xnde_names_tid()	{return xnde_names_tid;} public Xop_ctx Xnde_names_tid_(byte v) {xnde_names_tid = v; return this;} private byte xnde_names_tid = Xop_parser_.Parse_tid_null;
 	public Xop_amp_wkr			Amp()				{return amp;}	private Xop_amp_wkr  amp  = new Xop_amp_wkr();
@@ -298,18 +298,18 @@ public class Xop_ctx {
 		if (stack_pos == -1) return;
 		ctx.Stack_pop_til(root, src, stack_pos, true, bgn_pos, cur_pos, Xop_tkn_itm_.Tid_txt);
 	}
-	public static Xop_ctx new_(Xow_wiki wiki) {
-		Xop_ctx rv = new Xop_ctx(wiki, Xoa_page.new_(wiki, Xoa_ttl.parse_(wiki, Xoa_page_.Main_page_bry)));	// HACK: use "Main_Page" to put in valid page title
+	public static Xop_ctx new_(Xowe_wiki wiki) {
+		Xop_ctx rv = new Xop_ctx(wiki, Xoae_page.new_(wiki, Xoa_ttl.parse_(wiki, Xoa_page_.Main_page_bry)));	// HACK: use "Main_Page" to put in valid page title
 		return rv;
 	}
-	public static Xop_ctx new_sub_(Xow_wiki wiki) {return new_sub_(wiki, wiki.Ctx().cur_page);}
-	public static Xop_ctx new_sub_(Xow_wiki wiki, Xoa_page page) {	// TODO: new_sub_ should reuse ctx's page; callers who want new_page should call new_sub_page_; DATE:2014-04-10
+	public static Xop_ctx new_sub_(Xowe_wiki wiki) {return new_sub_(wiki, wiki.Ctx().cur_page);}
+	public static Xop_ctx new_sub_(Xowe_wiki wiki, Xoae_page page) {	// TODO: new_sub_ should reuse ctx's page; callers who want new_page should call new_sub_page_; DATE:2014-04-10
 		Xop_ctx ctx = wiki.Ctx();
 		Xop_ctx rv = new Xop_ctx(wiki, page);
 		new_copy(ctx, rv);
 		return rv;
 	}
-	public static Xop_ctx new_sub_page_(Xow_wiki wiki, Xop_ctx ctx, Hash_adp_bry lst_page_regy) {
+	public static Xop_ctx new_sub_page_(Xowe_wiki wiki, Xop_ctx ctx, Hash_adp_bry lst_page_regy) {
 		Xop_ctx rv = new Xop_ctx(wiki, ctx.cur_page);
 		new_copy(ctx, rv);
 		rv.lst_page_regy = lst_page_regy;				// NOTE: must share ref for lst only (do not share for sub_(), else stack overflow)

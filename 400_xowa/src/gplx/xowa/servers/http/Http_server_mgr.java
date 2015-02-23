@@ -57,11 +57,11 @@ public class Http_server_mgr implements GfoInvkAble {
 	private byte retrieve_mode = File_retrieve_mode.Mode_wait;
 	private boolean running;
 	private Http_server_wkr wkr;
-	public Http_server_mgr(Xoa_app app) {
+	public Http_server_mgr(Xoae_app app) {
 		this.app = app;
 		usr_dlg = app.Usr_dlg();
 	}
-	public Xoa_app App() {return app;} private Xoa_app app;
+	public Xoae_app App() {return app;} private Xoae_app app;
 	public int Port() {return port;} public Http_server_mgr Port_(int v) {port = v; return this;} private int port = 8080;
 	public String Home() {return home;} public void Home_(String v) {home = v;} private String home = "home/wiki/Main_Page";
 	private boolean init_gui_done = false;
@@ -70,14 +70,14 @@ public class Http_server_mgr implements GfoInvkAble {
 		init_gui_done = true;
 		Gxw_html_server.Init_gui_for_server(app, null);
 	}
-	public String Parse_page_to_html(Xoa_app app, String wiki_domain_str, String page_ttl_str) {
+	public String Parse_page_to_html(Xoae_app app, String wiki_domain_str, String page_ttl_str) {
 		Init_gui();
 		byte[] wiki_domain = Bry_.new_utf8_(wiki_domain_str);
 		byte[] page_ttl = Bry_.new_utf8_(page_ttl_str);
-		Xow_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(wiki_domain);							// get the wiki
+		Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(wiki_domain);							// get the wiki
 		Xoa_url page_url = app.Url_parser().Parse(page_ttl);									// get the url (needed for query args)
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, page_ttl);											// get the ttl
-		Xoa_page page = wiki.GetPageByTtl(page_url, ttl);										// get page and parse it
+		Xoae_page page = wiki.GetPageByTtl(page_url, ttl);										// get page and parse it
 		Gxw_html_server.Assert_tab(app, page);													// HACK: assert at least 1 tab
 		app.Gui_mgr().Browser_win().Active_page_(page);											// HACK: init gui_mgr's page for output (which server ordinarily doesn't need)
 		if (page.Missing()) {																	// if page does not exist, replace with message; else null_ref error; DATE:2014-03-08
@@ -120,7 +120,7 @@ public class Http_server_mgr implements GfoInvkAble {
 		}
 		running = val;
 	}
-	public void Run_xowa_cmd(Xoa_app app, String url_encoded_str) {
+	public void Run_xowa_cmd(Xoae_app app, String url_encoded_str) {
 		Url_encoder url_converter = Url_encoder.new_http_url_();	// create instance for each call
 		String cmd = url_converter.Decode_str(url_encoded_str);
 		app.Gfs_mgr().Run_str(cmd);
@@ -200,9 +200,9 @@ class Http_server_wkr implements Runnable {
 class HttpRequest implements Runnable{
 	private static final String CRLF = "\r\n";
 	private Socket socket;
-	private Xoa_app app;
+	private Xoae_app app;
 	private String app_root_dir;
-	public HttpRequest(Socket socket, Xoa_app app){
+	public HttpRequest(Socket socket, Xoae_app app){
 		this.socket = socket;
 		this.app = app;
 		this.app_root_dir = app.Fsys_mgr().Root_dir().To_http_file_str();

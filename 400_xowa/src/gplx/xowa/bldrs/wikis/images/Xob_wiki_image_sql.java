@@ -22,7 +22,7 @@ public class Xob_wiki_image_sql extends Xob_itm_dump_base implements Xob_cmd, Gf
 	private Xob_wiki_image_tbl tbl_image = new Xob_wiki_image_tbl();
 	private byte[] cur_ttl, cur_media_type, cur_minor_mime, cur_timestamp; private int cur_size, cur_width, cur_height, cur_bits, cur_ext_id;
 	private int commit_count = 10000;
-	public Xob_wiki_image_sql(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
+	public Xob_wiki_image_sql(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Cmd_key() {return KEY;} public static final String KEY = "wiki.image";
 	public Io_url Src_fil() {return src_fil;} public Xob_wiki_image_sql Src_fil_(Io_url v) {src_fil = v; return this;} private Io_url src_fil;
 	public Sql_file_parser Parser() {return parser;} private Sql_file_parser parser = new Sql_file_parser();

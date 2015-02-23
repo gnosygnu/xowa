@@ -22,8 +22,8 @@ public class Xop_log_basic_wkr implements GfoInvkAble {
 	private boolean save_page_ttl, save_log_time, save_args_len, save_args_str;
 	public boolean Save_src_str() {return save_src_str;} public Xop_log_basic_wkr Save_src_str_(boolean v) {save_src_str = v; return this;} private boolean save_src_str;
 	public Xop_log_basic_wkr(Xop_log_mgr log_mgr, Xop_log_basic_tbl log_tbl) {this.log_mgr = log_mgr; this.log_tbl = log_tbl;}
-	public boolean Log_bgn(Xoa_page page, byte[] src, Xop_xnde_tkn xnde) {return true;}
-	public void Log_end_xnde(Xoa_page page, int log_tid, byte[] src, Xop_xnde_tkn xnde_tkn) {
+	public boolean Log_bgn(Xoae_page page, byte[] src, Xop_xnde_tkn xnde) {return true;}
+	public void Log_end_xnde(Xoae_page page, int log_tid, byte[] src, Xop_xnde_tkn xnde_tkn) {
 		Xop_xatr_itm[] atrs_ary = xnde_tkn.Atrs_ary();
 		Log_end(page, Null_log_bgn, log_tid, Null_log_msg, src
 			, xnde_tkn.Src_bgn(), xnde_tkn.Src_end()
@@ -31,7 +31,7 @@ public class Xop_log_basic_wkr implements GfoInvkAble {
 			, xnde_tkn.Atrs_bgn(), xnde_tkn.Atrs_end()
 			);
 	}
-	public void Log_end(Xoa_page page, long log_bgn, int log_tid, byte[] log_msg, byte[] src, int src_bgn, int src_end, int args_len, int args_bgn, int args_end) {
+	public void Log_end(Xoae_page page, long log_bgn, int log_tid, byte[] log_msg, byte[] src, int src_bgn, int src_end, int args_len, int args_bgn, int args_end) {
 		log_tbl.Insert
 			( log_tid
 			, log_msg == Xop_log_basic_wkr.Null_log_msg ? "" : String_.new_utf8_(log_msg)

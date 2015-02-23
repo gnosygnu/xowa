@@ -20,7 +20,7 @@ import gplx.core.btries.*; import gplx.xowa.wikis.*;
 import gplx.xowa.apis.xowa.html.modules.*; import gplx.xowa.html.modules.popups.keeplists.*;
 import gplx.xowa.gui.views.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.tblws.*;
 public class Xow_popup_parser {
-	private Xoa_app app; private Xow_wiki wiki; private Xop_parser parser;
+	private Xoae_app app; private Xowe_wiki wiki; private Xop_parser parser;
 	private Btrie_fast_mgr tmpl_trie, wtxt_trie; private Xop_tkn_mkr tkn_mkr;
 	private Xop_ctx tmpl_ctx; private Xop_root_tkn tmpl_root, wtxt_root; private Xot_compile_data tmpl_props = new Xot_compile_data();		
 	private Xoh_wtr_ctx hctx = Xoh_wtr_ctx.Popup;
@@ -36,8 +36,8 @@ public class Xow_popup_parser {
 		tmpl_ctx.Tmpl_tkn_max_(v);
 		wtxt_ctx.Tmpl_tkn_max_(v);
 	}
-	public void Init_by_wiki(Xow_wiki wiki) {
-		this.wiki = wiki; this.app = wiki.App(); this.parser = wiki.Parser(); this.tkn_mkr = app.Tkn_mkr();
+	public void Init_by_wiki(Xowe_wiki wiki) {
+		this.wiki = wiki; this.app = wiki.Appe(); this.parser = wiki.Parser(); this.tkn_mkr = app.Tkn_mkr();
 		this.tmpl_ctx = Xop_ctx.new_(wiki); this.wtxt_ctx = Xop_ctx.new_(wiki);
 		Xop_lxr_mgr tmpl_lxr_mgr = Xop_lxr_mgr.Popup_lxr_mgr;
 		tmpl_lxr_mgr.Init_by_wiki(wiki);
@@ -67,8 +67,8 @@ public class Xow_popup_parser {
 		Wtxt_ctx_init(true, tmpl_src);
 		wtxt_ctx.Cur_page().Ttl_(ttl);	// NOTE: must set cur_page, or rel lnkis won't work; EX: [[../A]]
 	}
-	public byte[] Parse(Xow_wiki cur_wiki, Xoa_page page, Xog_tab_itm cur_tab, Xow_popup_itm popup_itm) {	// NOTE: must pass cur_wiki for xwiki label; DATE:2014-07-02
-		if (Bry_.Eq(popup_itm.Wiki_domain(), Xow_wiki_domain_.Url_wikidata)) {
+	public byte[] Parse(Xowe_wiki cur_wiki, Xoae_page page, Xog_tab_itm cur_tab, Xow_popup_itm popup_itm) {	// NOTE: must pass cur_wiki for xwiki label; DATE:2014-07-02
+		if (Bry_.Eq(popup_itm.Wiki_domain(), Xow_domain_.Domain_bry_wikidata)) {
 			data.Wrdx_bfr().Add(app.Wiki_mgr().Wdata_mgr().Popup_text(page));
 		}
 		else {
@@ -206,9 +206,9 @@ public class Xow_popup_parser {
 	}
 }
 class Xow_popup_parser_ {
-	public static int Tmpl_bgn_get_(Xoa_app app, Xow_popup_itm itm, Xoa_ttl page_ttl, Xow_popup_anchor_finder hdr_finder, byte[] src, int src_len) {
+	public static int Tmpl_bgn_get_(Xoae_app app, Xow_popup_itm itm, Xoa_ttl page_ttl, Xow_popup_anchor_finder hdr_finder, byte[] src, int src_len) {
 		int rv = Xop_parser_.Doc_bgn_bos; if (itm.Mode_all()) return rv;
-		byte[] anch = itm.Page_href()[0] == Byte_ascii.Hash ? Bry_.Mid(app.Encoder_mgr().Href().Decode(itm.Page_href()), 1) : page_ttl.Anch_txt();
+		byte[] anch = itm.Page_href()[0] == Byte_ascii.Hash ? Bry_.Mid(Xoa_app_.Utl_encoder_mgr().Href().Decode(itm.Page_href()), 1) : page_ttl.Anch_txt();
 		if (anch == null) return rv;
 		int hdr_bgn = hdr_finder.Find(src, src_len, anch, rv);	// NOTE: starting search from Xop_parser_.Doc_bgn_bos
 		return hdr_bgn == Bry_finder.Not_found ? rv : hdr_bgn;

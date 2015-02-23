@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
-import gplx.html.*; import gplx.xowa.wikis.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.apis.xowa.html.*;
+import gplx.html.*;
+import gplx.xowa.langs.*; import gplx.xowa.wikis.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.apis.xowa.html.*;
 class Wdata_fmtr__langtext_tbl implements Bry_fmtr_arg {
 	private Wdata_toc_data toc_data; private Wdata_lang_sorter lang_sorter; private Xoapi_toggle_itm toggle_itm; private Wdata_fmtr__langtext_row fmtr_row;
 	private byte[] col_hdr_lang_name, col_hdr_lang_code, col_hdr_text; private int list_len;
@@ -45,22 +46,10 @@ class Wdata_fmtr__langtext_tbl implements Bry_fmtr_arg {
 	, "    <div class='wikibase-sitelinkgroupview-heading-container'>"
 	, "      <h2 class='wb-section-heading wikibase-sitelinkgroupview-heading' dir='auto' id='~{hdr_href}'>~{hdr_text}~{toggle_btn}</h2>"
 	, "    </div>"
-	, "    <table class='wikibase-sitelinklistview'~{toggle_hdr}>"
-	, "      <colgroup>"
-	, "        <col class='wikibase-sitelinklistview-sitename' />"
-	, "        <col class='wikibase-sitelinklistview-siteid' />"
-	, "        <col class='wikibase-sitelinklistview-link' />"
-	, "      </colgroup>"
-	, "      <thead>"
-	, "        <tr class='wikibase-sitelinklistview-columnheaders'>"
-	, "          <th class='wikibase-sitelinkview-sitename'>~{hdr_lang_name}</th>"
-	, "          <th class='wikibase-sitelinkview-siteid'>~{hdr_lang_code}</th>"
-	, "          <th class='wikibase-sitelinkview-link'>~{hdr_page}</th>"
-	, "        </tr>"
-	, "      </thead>"
-	, "      <tbody>~{rows}"
-	, "      </tbody>"
-	, "    </table>"
+	, "    <div class='wikibase-sitelinklistview'~{toggle_hdr}>"			
+	, "      <ul class='wikibase-sitelinklistview-listview'>~{rows}"
+	, "      </ul>"
+	, "    </div>"
 	, "  </div>"
 	), "hdr_href", "hdr_text", "hdr_lang_name", "hdr_lang_code", "hdr_page", "toggle_btn", "toggle_hdr", "rows"
 	);
@@ -76,21 +65,35 @@ class Wdata_fmtr__langtext_row_base implements Wdata_fmtr__langtext_row {
 		for (int i = 0; i < len; ++i) {
 			Wdata_langtext_itm itm = (Wdata_langtext_itm)list.FetchAt(i);
 			Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key_or_intl(itm.Lang());
-			row_fmtr.Bld_bfr_many(bfr, itm.Lang(), Html_utl.Escape_html_as_bry(lang_itm.Local_name()), Html_utl.Escape_html_as_bry(itm.Text()));
+			row_fmtr.Bld_bfr_many(bfr, itm.Lang(), Html_utl.Escape_html_as_bry(lang_itm.Localized_name()), Html_utl.Escape_html_as_bry(itm.Text()));
 		}
 	}
 	private final Bry_fmtr row_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
-	, "        <tr class='wikibase-sitelinkview'>"
-	, "          <td class='wikibase-sitelinkview-sitename' lang='~{lang_code}' dir='auto'>~{lang_name}</td>"
-	, "          <td class='wikibase-sitelinkview-siteid'>~{lang_code}</td>"
-	, "          <td class='wikibase-sitelinkview-link' lang='~{lang_code}' dir='auto'>~{text}</td>"
-	, "        </tr>"
+	, "        <li class='wikibase-sitelinkview'>"
+	, "          <span class='wikibase-sitelinkview-siteid-container'>"
+	, "            <span class='wikibase-sitelinkview-siteid'>~{lang_code}</span>"
+	, "          </span>"
+	, "          <span class='wikibase-sitelinkview-link' lang='~{lang_code}' dir='auto'>~{text}</span>"
+	, "        </li>"
 	), "lang_code", "lang_name", "text"
 	);
+//		, "            <li class='wikibase-sitelinkview'>"																// wikibase-sitelinkview-~{wmf_key} data-wb-siteid='~{wmf_key}'
+//		, "              <span class='wikibase-sitelinkview-siteid-container'>"
+//		, "                <span class='wikibase-sitelinkview-siteid'>~{wmf_key}"
+//		, "                </span>"
+//		, "              </span>"
+//		, "              <span class='wikibase-sitelinkview-link' lang='~{lang_code}' dir='auto'>"						// wikibase-sitelinkview-link-~{wmf_key}
+//		, "                <span class='wikibase-sitelinkview-page'>"
+//		, "                  <a href='~{href_site}~{href_domain}/wiki/~{href_page}' hreflang='~{lang_code}' dir='auto'>~{page_name}</a>"
+//		, "                </span>"
+//		, "                <span class='wikibase-badgeselector wikibase-sitelinkview-badges'>~{badges}"
+//		, "                </span>"
+//		, "              </span>"
+//		, "            </li>"
 }
 class Wdata_fmtr__alias_row implements Wdata_fmtr__langtext_row {
-	private final Bry_bfr tmp_bfr = Bry_bfr.reset_(255); private OrderedHash list;
+	private OrderedHash list;
 	public void Init_by_page(OrderedHash list) {this.list = list;}
 	public void XferAry(Bry_bfr bfr, int idx) {
 		int len = list.Count();
@@ -100,20 +103,26 @@ class Wdata_fmtr__alias_row implements Wdata_fmtr__langtext_row {
 			int vals_len = vals_ary.length;
 			for (int j = 0; j < vals_len; ++j) {
 				byte[] val = vals_ary[j];
-				if (j != 0) tmp_bfr.Add(Html_tag_.Br_inl);
-				tmp_bfr.Add(Html_utl.Escape_html_as_bry(val));
+				Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key_or_intl(itm.Lang());
+				byte[] lang_code = Byte_ascii.Dash_bry;
+				byte[] lang_code_style = lang_code_style_n;
+				if (j == 0) {
+					lang_code = lang_itm.Key();
+					lang_code_style = Bry_.Empty;
+				}
+				row_fmtr.Bld_bfr_many(bfr, lang_code, lang_code_style, Html_utl.Escape_html_as_bry(val));
 			}
-			Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key_or_intl(itm.Lang());
-			row_fmtr.Bld_bfr_many(bfr, lang_itm.Key(), Html_utl.Escape_html_as_bry(lang_itm.Local_name()), tmp_bfr.Xto_bry_and_clear());
 		}
 	}
+	private static final byte[] lang_code_style_n = Bry_.new_ascii_("border:1px solid white;background:none;");
 	private final Bry_fmtr row_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
-	, "        <tr class='wikibase-sitelinkview'>"
-	, "          <td class='wikibase-sitelinkview-sitename' lang='~{lang_code}' dir='auto'>~{lang_name}</td>"
-	, "          <td class='wikibase-sitelinkview-siteid'>~{lang_code}</td>"
-	, "          <td class='wikibase-sitelinkview-link' lang='~{lang_code}' dir='auto'>~{text}</td>"
-	, "        </tr>"
-	), "lang_code", "lang_name", "text"
+	, "        <li class='wikibase-sitelinkview'>"
+	, "          <span class='wikibase-sitelinkview-siteid-container' style='~{lang_code_style}>"
+	, "            <span class='wikibase-sitelinkview-siteid''>~{lang_code}</span>"
+	, "          </span>"
+	, "          <span class='wikibase-sitelinkview-link' lang='~{lang_code}' dir='auto'>~{text}</span>"
+	, "        </li>"
+	), "lang_code", "lang_code_style", "text"
 	);
 }

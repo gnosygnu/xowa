@@ -16,10 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.oimgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.xowa.dbs.*; import gplx.dbs.*; import gplx.xowa.dbs.tbls.*;
+import gplx.xowa.dbs.*; import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.dbs.tbls.*;
 class Xob_dump_src_ttl implements Xob_parse_all_db {
 	private Xodb_mgr_sql db_mgr; private Db_stmt page_stmt; private Xodb_file[] text_files_ary; private int text_files_len; private byte redirect;
-	public Xob_dump_src_ttl Init(Xow_wiki wiki, int limit, byte redirect) {
+	public Xob_dump_src_ttl Init(Xowe_wiki wiki, int limit, byte redirect) {
 		this.db_mgr = wiki.Db_mgr_as_sql(); this.redirect = redirect;
 		page_stmt = db_mgr.Tbl_page().Select_for_parse_all_stmt(db_mgr.Fsys_mgr().Conn_core(), limit, redirect);
 		text_files_ary = Init_text_files_ary(db_mgr.Fsys_mgr());
@@ -51,7 +51,7 @@ class Xob_dump_src_id {
 	private Xodb_mgr_sql db_mgr; private byte redirect;
 	private String page_db_url; private int size_max;
 	private Db_stmt text_stmt; int cur_text_db_idx = -1;
-	public Xob_dump_src_id Init(Xow_wiki wiki, byte redirect, int size_max) {
+	public Xob_dump_src_id Init(Xowe_wiki wiki, byte redirect, int size_max) {
 		this.db_mgr = wiki.Db_mgr_as_sql(); this.redirect = redirect;
 		this.size_max = size_max;
 		page_db_url = db_mgr.Fsys_mgr().Get_tid_root(Xodb_file_tid.Tid_core).Url().Raw();
@@ -79,7 +79,7 @@ class Xob_dump_src_id {
 			Xodb_file text_db = db_mgr.Fsys_mgr().Get_by_idx(text_db_idx);
 			Db_conn conn = text_db.Conn();
 			String sql = String_.Format(Sql_select, New_rdr__redirect_clause(redirect));
-			text_stmt = conn.New_stmt(Db_qry_sql.rdr_(sql));
+			text_stmt = conn.Stmt_new(Db_qry_sql.rdr_(sql));
 		}
 		return text_stmt.Clear().Val_int(prv_id).Val_int(cur_ns).Exec_select();
 	}
@@ -89,7 +89,7 @@ class Xob_dump_src_id {
 		rv.Id_(rdr.ReadInt(Xodb_page_tbl.Fld_page_id));
 		rv.Ttl_wo_ns_(rdr.ReadBryByStr(Xodb_page_tbl.Fld_page_title));
 		byte[] old_text = rdr.ReadBry(Xodb_text_tbl.Fld_old_text);
-		old_text = db_mgr.Wiki().App().Zip_mgr().Unzip(db_mgr.Data_storage_format(), old_text);
+		old_text = db_mgr.Wiki().Appe().Zip_mgr().Unzip(db_mgr.Data_storage_format(), old_text);
 		rv.Text_(old_text);
 		return rv;
 	}

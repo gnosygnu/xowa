@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+import gplx.xowa.langs.*;
 public class Pft_func_time extends Pf_func_base {
 	Pft_func_time(boolean utc) {this.utc = utc;} private boolean utc;
 	@Override public int Id() {return Xol_kwd_grp_.Id_xtn_time;}
@@ -35,7 +36,7 @@ public class Pft_func_time extends Pf_func_base {
 			if (Bry_.Len_gt_0(arg_lang)) {
 				Xol_lang_itm specified_lang_itm = Xol_lang_itm_.Get_by_key(arg_lang);
 				if (specified_lang_itm != null) {	// NOTE: if lang_code is bad, then ignore (EX:bad_code)
-					Xol_lang specified_lang = ctx.Wiki().App().Lang_mgr().Get_by_key_or_new(arg_lang);
+					Xol_lang specified_lang = ctx.Wiki().Appe().Lang_mgr().Get_by_key_or_new(arg_lang);
 					lang = specified_lang;	
 				}
 			}
@@ -57,7 +58,7 @@ public class Pft_func_time extends Pf_func_base {
 	public static final Pft_func_time _Lcl = new Pft_func_time(false), _Utc = new Pft_func_time(true);
 }
 class DateAdpTranslator_xapp {
-	public static void Translate(Xow_wiki wiki, Xol_lang lang, int type, int val, Bry_bfr bb) {
+	public static void Translate(Xowe_wiki wiki, Xol_lang lang, int type, int val, Bry_bfr bb) {
 		lang.Init_by_load_assert();
 		byte[] itm_val = lang.Msg_mgr().Val_by_id(type + val); if (itm_val == null) return;
 		bb.Add(itm_val);

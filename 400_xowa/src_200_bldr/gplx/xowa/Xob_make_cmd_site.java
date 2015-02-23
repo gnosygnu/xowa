@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.ios.*;
+import gplx.ios.*; import gplx.xowa.tdbs.*;
 public class Xob_make_cmd_site implements Io_make_cmd {
 	Xob_xdat_file_wtr fil_wtr; Bry_bfr cur_bfr = Bry_bfr.new_(), reg_bfr = Bry_bfr.new_(), reg_key_0 = Bry_bfr.new_(512), reg_key_n = Bry_bfr.new_(512);
 	int make_fil_max = 65 * Io_mgr.Len_kb, fil_count = 0, itm_count = 0, itm_key_end = 0; Io_url reg_url;
@@ -25,7 +25,7 @@ public class Xob_make_cmd_site implements Io_make_cmd {
 	public byte Line_dlm() {return line_dlm;} public Xob_make_cmd_site Line_dlm_(byte v) {line_dlm = v; return this;} private byte line_dlm = Byte_ascii.Nil;
 	public void Sort_bgn() {
 		fil_count = itm_count = itm_key_end = 0;
-		reg_url = make_dir.GenSubFil(Xow_dir_info_.Name_reg_fil);
+		reg_url = make_dir.GenSubFil(Xotdb_dir_info_.Name_reg_fil);
 		fil_wtr = Xob_xdat_file_wtr.new_file_(make_fil_max, make_dir);
 	}
 	public void Sort_do(Io_line_rdr rdr) {

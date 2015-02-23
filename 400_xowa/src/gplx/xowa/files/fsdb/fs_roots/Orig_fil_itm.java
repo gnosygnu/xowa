@@ -17,6 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.fsdb.fs_roots; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
 public class Orig_fil_itm {
+	public Orig_fil_itm() {}
+	public Orig_fil_itm(int uid, byte[] name, int ext_id, int w, int h, byte[] dir_url) {
+		this.fil_uid = uid; this.fil_name = name; this.fil_ext_id = ext_id; this.fil_w = w; this.fil_h = h; this.fil_dir_url = dir_url;
+	}
 	public int Fil_uid() {return fil_uid;} private int fil_uid;
 	public byte[] Fil_name() {return fil_name;} private byte[] fil_name;
 	public int Fil_ext_id() {return fil_ext_id;} private int fil_ext_id;
@@ -35,15 +39,6 @@ public class Orig_fil_itm {
 		this.fil_name = name_bry;
 		this.fil_dir_url = Bry_.new_utf8_(url.OwnerDir().Raw());
 		this.fil_ext_id = ext_id;
-		return this;
-	}
-	public Orig_fil_itm Init_by_load(DataRdr rdr) {
-		fil_uid = rdr.ReadInt("fil_uid");
-		fil_name = rdr.ReadBryByStr("fil_name");
-		fil_ext_id = rdr.ReadInt("fil_ext_id");
-		fil_w = rdr.ReadInt("fil_w");
-		fil_h = rdr.ReadInt("fil_h");
-		fil_dir_url = rdr.ReadBryByStr("fil_dir_url");
 		return this;
 	}
 	public Orig_fil_itm Init_by_size(int uid, int w, int h) {this.fil_uid = uid; this.fil_w = w; this.fil_h = h; return this;}

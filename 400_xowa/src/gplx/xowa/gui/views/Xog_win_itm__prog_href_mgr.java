@@ -22,18 +22,17 @@ public class Xog_win_itm__prog_href_mgr {
 	private static Bry_bfr	tmp_bfr		= Bry_bfr.reset_(512);
 	public static void Print(Xog_win_itm win) {	// PURPOSE: print href in prog box when in content editable mode
 		String href = win.Active_html_box().Html_active_atr_get_str(Gfui_html.Atr_href, "");// get selected href from html_box
-		href = win.App().Encoder_mgr().Href().Decode_str(href);								// remove url encodings
+		href = Xoa_app_.Utl_encoder_mgr().Href().Decode_str(href);								// remove url encodings
 		if (!String_.Eq(href, win.Prog_box().Text()))
 			win.Usr_dlg().Prog_direct(href);
 	}
-	public static void Hover(Xoa_app app, Xoa_page page, String href) {
+	public static void Hover(Xoae_app app, Xowe_wiki wiki, Xoae_page page, String href) {
 		Gfo_usr_dlg usr_dlg = app.Usr_dlg();
 		if (	String_.Len_eq_0(href)			// href is null / empty; occurs when hovering over empty space
 			||	String_.Eq(href, "file:///")) {
 			usr_dlg.Prog_direct("");			// clear out previous entry
 			return;
 		}
-		Xow_wiki wiki = page.Wiki();
 		app.Href_parser().Parse(tmp_href, href, wiki, page.Ttl().Page_url());
 		tmp_href.Print_to_bfr(tmp_bfr, wiki.Gui_mgr().Cfg_browser().Link_hover_full());
 		usr_dlg.Prog_direct(tmp_bfr.Xto_str_and_clear());

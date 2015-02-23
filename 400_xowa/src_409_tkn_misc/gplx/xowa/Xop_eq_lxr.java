@@ -20,7 +20,7 @@ import gplx.core.btries.*; import gplx.xowa.parsers.paras.*;
 class Xop_eq_lxr implements Xop_lxr {
 	public Xop_eq_lxr(boolean tmpl_mode) {this.tmpl_mode = tmpl_mode;}	boolean tmpl_mode;
 	public byte Lxr_tid() {return Xop_lxr_.Tid_eq;}
-	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Byte_ascii.Eq, this);}
+	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Byte_ascii.Eq, this);}
 	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		cur_pos = Bry_finder.Find_fwd_while(src, cur_pos, src_len, Byte_ascii.Eq); // gobble up eq; "==" should produce 1 eq_tkn with len of 2, not 2 eq_tkn with len of 1; DATE:2014-04-17

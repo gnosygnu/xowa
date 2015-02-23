@@ -22,7 +22,7 @@ public class Xtn_syntaxHighlight_nde implements Xox_xnde, Xop_xnde_atr_parser {
 	private byte[] lang = Bry_.Empty; private byte[] style = null; private byte[] enclose = Bry_.Empty;
 	private boolean line_enabled = false; private int start = 1; private Int_rng_mgr highlight_idxs = Int_rng_mgr_null._;
 	public Xop_xnde_tkn Xnde() {throw Err_.not_implemented_();}
-	public void Xatr_parse(Xow_wiki wiki, byte[] src, Xop_xatr_itm xatr, Object xatr_obj) {
+	public void Xatr_parse(Xowe_wiki wiki, byte[] src, Xop_xatr_itm xatr, Object xatr_obj) {
 		if (xatr_obj == null) return;
 		byte xatr_tid = ((Byte_obj_val)xatr_obj).Val();
 		switch (xatr_tid) {
@@ -34,13 +34,13 @@ public class Xtn_syntaxHighlight_nde implements Xox_xnde, Xop_xnde_atr_parser {
 			case Xatr_highlight:	highlight_idxs = new Int_rng_mgr_base(); highlight_idxs.Parse(xatr.Val_as_bry(src)); break;
 		}
 	}
-	public void Xtn_parse(Xow_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
-		Xoa_app app = ctx.App(); Xop_xnde_tag tag = xnde.Tag();
+	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
+		Xoae_app app = ctx.App(); Xop_xnde_tag tag = xnde.Tag();
 		ctx.Para().Process_block__xnde(tag, tag.Block_open());	// deactivate pre; pre; PAGE:en.w:Comment_(computer_programming); DATE:2014-06-24
 		Xop_xatr_itm.Xatr_parse(app, this, xatrs_syntaxHighlight, wiki, src, xnde);
 		ctx.Para().Process_block__xnde(tag, tag.Block_close());	// deactivate pre; pre; PAGE:en.w:Comment_(computer_programming); DATE:2014-06-24
 	}
-	public void Xtn_write(Bry_bfr bfr, Xoa_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
+	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
 		boolean lang_is_text = Bry_.Eq(lang, Lang_text);
 		boolean enclose_is_none = Bry_.Eq(enclose, Enclose_none);
 		if 		(enclose_is_none) {

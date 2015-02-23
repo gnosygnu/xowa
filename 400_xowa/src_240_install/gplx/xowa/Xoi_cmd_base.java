@@ -41,9 +41,9 @@ abstract class Xoi_cmd_base implements Gfo_thread_cmd {
 	}
 	public boolean Async_running() {return running;} private boolean running;
 	public void Process_async() {
-		Xoa_app app = install_mgr.App();
+		Xoae_app app = install_mgr.App();
 		Xob_bldr bldr = app.Bldr();
-		Xow_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(Bry_.new_ascii_(wiki_key));
+		Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(Bry_.new_ascii_(wiki_key));
 		wiki.Init_assert();
 		bldr.Cmd_mgr().Clear();
 		Process_async_init(app, wiki, bldr);
@@ -54,13 +54,13 @@ abstract class Xoi_cmd_base implements Gfo_thread_cmd {
 			install_mgr.Cmd_mgr().Working_n_();
 			throw Err_.err_(e, "error during import: ~{0}", Err_.Message_hdr_or_message(e));
 		}
-		app.Gui_wtr().Prog_none("", "clear", "");
-		app.Gui_wtr().Note_none("", "clear", "");
+		app.Usr_dlg().Prog_none("", "clear", "");
+		app.Usr_dlg().Note_none("", "clear", "");
 		Process_async_done(app, wiki, bldr);
 		running = false;
 	}
-	public abstract void Process_async_init(Xoa_app app, Xow_wiki wiki, Xob_bldr bldr);
-	public abstract void Process_async_done(Xoa_app app, Xow_wiki wiki, Xob_bldr bldr);
+	public abstract void Process_async_init(Xoae_app app, Xowe_wiki wiki, Xob_bldr bldr);
+	public abstract void Process_async_done(Xoae_app app, Xowe_wiki wiki, Xob_bldr bldr);
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_process_async))			Process_async();
 		else if	(ctx.Match(k, Invk_owner))					return owner;
@@ -77,13 +77,13 @@ class Xoi_cmd_category2_categorylinks extends Xoi_cmd_wiki_download {	public Xoi
 	public static final String KEY_category2 = "wiki.category2.download.categorylinks";
 }
 class Xoi_cmd_category2_build extends Xoi_cmd_base {
-	public Xoi_cmd_category2_build(Xoi_setup_mgr install_mgr, String wiki_key) {this.Ctor(install_mgr, wiki_key); this.app = install_mgr.App(); this.wiki_key = wiki_key;} private Xoa_app app; private String wiki_key;
+	public Xoi_cmd_category2_build(Xoi_setup_mgr install_mgr, String wiki_key) {this.Ctor(install_mgr, wiki_key); this.app = install_mgr.App(); this.wiki_key = wiki_key;} private Xoae_app app; private String wiki_key;
 	@Override public void Cmd_ctor() {
-		Xow_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(Bry_.new_utf8_(wiki_key));
+		Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(Bry_.new_utf8_(wiki_key));
 		wiki.Import_cfg().Category_version_(gplx.xowa.ctgs.Xoa_ctg_mgr.Version_2);
 	}
 	@Override public String Async_key() {return KEY;} public static final String KEY = "wiki.category2.build";
-	@Override public void Process_async_init(Xoa_app app, Xow_wiki wiki, Xob_bldr bldr) {
+	@Override public void Process_async_init(Xoae_app app, Xowe_wiki wiki, Xob_bldr bldr) {
 		if (app.Setup_mgr().Dump_mgr().Wiki_storage_type_is_sql()) {
 			wiki.Db_mgr_as_sql().Category_version_update(false);
 			bldr.Cmd_mgr().Add_many(wiki, "import.sql.category_registry", "import.sql.categorylinks", "import.sql.hiddencat");
@@ -91,21 +91,21 @@ class Xoi_cmd_category2_build extends Xoi_cmd_base {
 		else
 			bldr.Cmd_mgr().Add_many(wiki, "ctg.hiddencat_sql", "ctg.hiddencat_ttl", "ctg.link_sql", "ctg.link_idx");
 	}
-	@Override public void Process_async_done(Xoa_app app, Xow_wiki wiki, Xob_bldr bldr) {
-		app.Gui_wtr().Prog_many("", "", "category2 setup done");
+	@Override public void Process_async_done(Xoae_app app, Xowe_wiki wiki, Xob_bldr bldr) {
+		app.Usr_dlg().Prog_many("", "", "category2 setup done");
 	}
 }
 class Xoi_cmd_search2_build extends Xoi_cmd_base {
 	public Xoi_cmd_search2_build(Xoi_setup_mgr install_mgr, String wiki_key) {this.Ctor(install_mgr, wiki_key);}
 	@Override public String Async_key() {return KEY;} public static final String KEY = "wiki.search2.build";
-	@Override public void Process_async_init(Xoa_app app, Xow_wiki wiki, Xob_bldr bldr) {
+	@Override public void Process_async_init(Xoae_app app, Xowe_wiki wiki, Xob_bldr bldr) {
 		if (app.Setup_mgr().Dump_mgr().Wiki_storage_type_is_sql()) {
 			wiki.Db_mgr_as_sql().Category_version_update(false);
 			bldr.Cmd_mgr().Add_many(wiki, "import.sql.search_title.cmd");
 		}
 	}
-	@Override public void Process_async_done(Xoa_app app, Xow_wiki wiki, Xob_bldr bldr) {
-		app.Gui_wtr().Prog_many("", "", "search2 setup done");
+	@Override public void Process_async_done(Xoae_app app, Xowe_wiki wiki, Xob_bldr bldr) {
+		app.Usr_dlg().Prog_many("", "", "search2 setup done");
 		wiki.Db_mgr().Search_version_refresh();
 	}
 }

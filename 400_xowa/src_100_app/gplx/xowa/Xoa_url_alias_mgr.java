@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //namespace gplx.xowa {
 //	public class Xoa_url_alias_mgr : GfoInvkAble {
 //		private Hash_adp_bry hash = Hash_adp_bry.cs_(); private Bry_fmtr fmtr = Bry_fmtr.new_("", "");
-//		public Xoa_url_alias_mgr(Xoa_app app) {this.app = app;} private Xoa_app app;
+//		public Xoa_url_alias_mgr(Xoae_app app) {this.app = app;} private Xoae_app app;
 //		public byte[] Fmt_or_null(byte[] raw) {
 //			int colon_pos = Bry_finder.Find_fwd(raw, Byte_ascii.Colon); if (colon_pos == Bry_.NotFound) return null;
 //			byte[] fmt = (byte[])hash.Get_by_mid(raw, 0, colon_pos); if (fmt == null) return null;

@@ -27,7 +27,7 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 		sites_regy_mgr = ctx.Wiki().Xtn_mgr().Xtn_sites().Regy_mgr(); if (!sites_regy_mgr.Xtn_mgr().Enabled()) sites_regy_mgr = null;	// sets sites_xtn_mgr status for page; see below
 	}
 	public void Page_end(Xop_ctx ctx, Xop_root_tkn root, byte[] src, int src_len) {}
-	public Xop_lnki_logger File_wkr() {return file_wkr;} public Xop_lnki_wkr File_wkr_(Xop_lnki_logger v) {file_wkr = v; return this;} private Xop_lnki_logger file_wkr;
+	public Xopg_redlink_logger File_wkr() {return file_wkr;} public Xop_lnki_wkr File_wkr_(Xopg_redlink_logger v) {file_wkr = v; return this;} private Xopg_redlink_logger file_wkr;
 	public void Auto_close(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos, Xop_tkn_itm tkn) {
 		Xop_lnki_tkn lnki = (Xop_lnki_tkn)tkn;
 		lnki.Tkn_tid_to_txt();
@@ -151,10 +151,12 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 					case Xop_lnki_arg_parser.Tid_dim:			break;// NOOP: Identify_tid does actual setting
 					case Xop_lnki_arg_parser.Tid_upright:
 						if (arg.KeyTkn_exists()) {
-							int valTknBgn = arg.Val_tkn().Src_bgn(), valTknEnd = arg.Val_tkn().Src_end();
-							number_parser.Parse(src, valTknBgn, valTknEnd);
+							int val_tkn_bgn = arg.Val_tkn().Src_bgn(), val_tkn_end = arg.Val_tkn().Src_end();
+							val_tkn_bgn = Bry_finder.Find_fwd_while_space_or_tab(src, val_tkn_bgn, val_tkn_end);	// trim ws at bgn; needed for next step
+							if (val_tkn_end - val_tkn_bgn > 19) val_tkn_end = val_tkn_bgn + 19;	// HACK: limit upright tkn to 19 digits; 20 or more will overflow long; WHEN: rewrite number_parser to handle doubles; PAGE:de.w:Feuerland DATE:2015-02-03
+							number_parser.Parse(src, val_tkn_bgn, val_tkn_end);
 							if (number_parser.HasErr())
-								ctx.Msg_log().Add_itm_none(Xop_lnki_log.Upright_val_is_invalid, src, valTknBgn, valTknEnd);
+								ctx.Msg_log().Add_itm_none(Xop_lnki_log.Upright_val_is_invalid, src, val_tkn_bgn, val_tkn_end);
 							else
 								lnki.Upright_(number_parser.AsDec().Xto_double());
 						}

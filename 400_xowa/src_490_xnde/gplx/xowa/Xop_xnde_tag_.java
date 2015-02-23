@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.xowa.langs.*;
 public class Xop_xnde_tag_ {
 	public static final int EndNdeMode_normal = 0, EndNdeMode_inline = 1, EndNdeMode_escape = 2; // escape is for hr which does not support </hr>
 	public static final int BgnNdeMode_normal = 0, BgnNdeMode_inline = 1;

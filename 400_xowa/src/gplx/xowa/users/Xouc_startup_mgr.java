@@ -52,7 +52,7 @@ public class Xouc_startup_mgr implements GfoInvkAble {
 		return custom_config;
 	}	private String custom_config;
 	private void Custom_config_(String v) {
-		Xoa_app app = config.User().App();
+		Xoae_app app = config.User().App();
 		Object rslt = app.Gfs_mgr().Run_str(v);
 		if (rslt == GfoInvkAble_.Rv_error) {
 			app.Usr_dlg().Warn_many("", "", "custom script failed: ~{0}", v);

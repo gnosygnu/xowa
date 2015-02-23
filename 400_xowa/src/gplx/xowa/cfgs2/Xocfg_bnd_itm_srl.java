@@ -19,8 +19,8 @@ package gplx.xowa.cfgs2; import gplx.*; import gplx.xowa.*;
 import gplx.gfui.*; import gplx.xowa.gui.bnds.*;
 import gplx.gfs.*; import gplx.xowa.apps.*;
 public class Xocfg_bnd_itm_srl implements GfoInvkAble {
-	private Xoa_app app;
-	public Xocfg_bnd_itm_srl(Xoa_app app, String key) {
+	private Xoae_app app;
+	public Xocfg_bnd_itm_srl(Xoae_app app, String key) {
 		this.app = app;
 		this.key = key;
 	}
@@ -35,13 +35,13 @@ public class Xocfg_bnd_itm_srl implements GfoInvkAble {
 		return this;
 	}
 	private static final String Invk_src_ = "src_", Invk_box_ = "box_", Invk_ipt_ = "ipt_";
-	public static String Src(Xoa_app app, int box, IptArg ipt) {	// box_('browser').ipt_('mod.c+key.q');
+	public static String Src(Xoae_app app, int box, IptArg ipt) {	// box_('browser').ipt_('mod.c+key.q');
 		Gfs_wtr wtr = app.Gfs_mgr().Wtr();
 		wtr.Add_set_eq(Key_box, Bry_.new_ascii_(Xog_bnd_box_.Xto_sys_str(box)));
 		wtr.Add_set_eq(Key_ipt, Bry_.new_ascii_(ipt.Key()));
 		return wtr.Bfr().Xto_str_and_clear();			
 	}	private static final byte[] Key_box = Bry_.new_ascii_("box"), Key_ipt = Bry_.new_ascii_("ipt");
-	public static void Src_(Xoa_app app, Xocfg_bnd_itm_srl itm, String v) {
+	public static void Src_(Xoae_app app, Xocfg_bnd_itm_srl itm, String v) {
 		Xoa_gfs_mgr gfs_mgr = app.Gfs_mgr();
 		gfs_mgr.Run_str_for(itm, v);
 		Xog_bnd_itm bnd = app.Gui_mgr().Bnd_mgr().Get_or_null(itm.Key());

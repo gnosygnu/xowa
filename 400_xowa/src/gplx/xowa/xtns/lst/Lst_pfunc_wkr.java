@@ -29,7 +29,7 @@ public class Lst_pfunc_wkr {
 	}
 	
 	public void Exec(Bry_bfr bfr, Xop_ctx ctx) {
-		Xow_wiki wiki = ctx.Wiki();
+		Xowe_wiki wiki = ctx.Wiki();
 		Xoa_ttl src_ttl = Xoa_ttl.parse_(wiki, src_ttl_bry); if (src_ttl == null) return;						// {{#lst:<>}} -> ""
 		Xot_defn_tmpl defn_tmpl = (Xot_defn_tmpl)wiki.Cache_mgr().Lst_cache().Get_by_key(src_ttl_bry);
 		Xop_ctx sub_ctx = null;
@@ -38,7 +38,7 @@ public class Lst_pfunc_wkr {
 			sub_ctx = Xop_ctx.new_sub_(wiki).Ref_ignore_(true);
 			byte[] src_page_bry = wiki.Cache_mgr().Page_cache().Get_or_load_as_src(src_ttl);
 			if (src_page_bry == null) return; // {{#lst:missing}} -> ""
-			Xoa_page page = ctx.Cur_page();
+			Xoae_page page = ctx.Cur_page();
 			if (!page.Tmpl_stack_add(src_ttl.Full_db())) return;
 			defn_tmpl = wiki.Parser().Parse_text_to_defn_obj(sub_ctx, sub_ctx.Tkn_mkr(), src_ttl.Ns(), src_ttl_bry, src_page_bry);	// NOTE: parse as tmpl to ignore <noinclude>
 			Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_m001();

@@ -139,9 +139,9 @@ class Xoa_url_parser_chkr implements Tst_chkr {
 		expd_anchor_is_edit = Bool_.__byte;
 		return this;
 	}
-	public Xoa_app App() {return app;} private Xoa_app app;
-	public Xow_wiki Wiki() {return wiki;} private Xow_wiki wiki;
-	public Xow_wiki Wiki_wikisource() {return wiki_wikisource;} private Xow_wiki wiki_wikisource;
+	public Xoae_app App() {return app;} private Xoae_app app;
+	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
+	public Xowe_wiki Wiki_wikisource() {return wiki_wikisource;} private Xowe_wiki wiki_wikisource;
 	public Class<?> TypeOf() {return Xoa_url.class;}
 	public Xoa_url_parser_chkr Expd_wiki(String v) 				{this.expd_wiki_str = v; return this;} private String expd_wiki_str;
 	public Xoa_url_parser_chkr Expd_page(String v) 				{this.expd_page = v; return this;} private String expd_page;
@@ -164,7 +164,7 @@ class Xoa_url_parser_chkr implements Tst_chkr {
 		return this;
 	}
 	public void Test_parse_w_wiki(String raw) {Test_parse_w_wiki(wiki, raw);}
-	public void Test_parse_w_wiki(Xow_wiki w, String raw) {
+	public void Test_parse_w_wiki(Xowe_wiki w, String raw) {
 		Xoa_url url = Xoa_url_parser.Parse_url(app, w, raw);
 		Tst_mgr tst_mgr = new Tst_mgr();
 		tst_mgr.Tst_obj(this, url);

@@ -46,12 +46,12 @@ public class Xog_html_js_cbk_wdata_labels_tst {
 	}
 	private Wdata_doc doc_(String qid, String src) {
 		gplx.json.Json_doc doc = gplx.json.Json_doc.new_apos_(src);
-		Xoa_app app = Xoa_app_fxt.app_();
+		Xoae_app app = Xoa_app_fxt.app_();
 		Wdata_doc rv = new Wdata_doc(Bry_.new_ascii_(qid), app.Wiki_mgr().Wdata_mgr(), doc);
 		return rv;
 	}
 	private void Tst_wikidata_label_get(String[] args, String[] expd) {
-		Xoa_app_fxt.Init_gui(fxt.App());
+		Xoa_app_fxt.Init_gui(fxt.App(), fxt.Wiki());
 		Xog_html_js_cbk exec = fxt.App().Gui_mgr().Browser_win().Active_html_itm().Js_cbk();
 		GfoMsg msg = GfoMsg_.new_cast_(Xog_html_js_cbk.Invk_wikidata_get_label);
 		int args_len = args.length;

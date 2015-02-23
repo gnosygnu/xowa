@@ -17,12 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.engines.process; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
 import gplx.texts.*;
-import gplx.xowa.xtns.scribunto.lib.*;
+import gplx.xowa.xtns.scribunto.libs.*;
 public class Process_engine implements Scrib_engine {
-	private Scrib_core core; private Xoa_app app; private Scrib_xtn_mgr scrib_opts;
+	private Scrib_core core; private Xoae_app app; private Scrib_xtn_mgr scrib_opts;
 	private Process_recv_msg rsp = new Process_recv_msg(); private Process_send_wtr msg_encoder;
 	private Scrib_proc_mgr proc_mgr;
-	public Process_engine(Xoa_app app, Scrib_core core) {
+	public Process_engine(Xoae_app app, Scrib_core core) {
 		this.app = app; this.core = core; this.proc_mgr = core.Proc_mgr();
 		msg_encoder = new Process_send_wtr(app.Usr_dlg()); 
 		server = new Process_server();

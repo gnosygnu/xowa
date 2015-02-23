@@ -20,10 +20,10 @@ public class Pft_func_formatdate_bldr {
 	public int Idx_cur() {return idx_cur;} private int idx_cur;
 	public Pft_func_formatdate_bldr Idx_nxt_(int v) {idx_nxt = v; return this;} private int idx_nxt;
 	public Pft_fmt_itm[] Fmt_itms() {return fmt_itms;} Pft_fmt_itm[] fmt_itms;
-	public void Format(Bry_bfr bfr, Xow_wiki wiki, Xol_lang lang, DateAdp date, Pft_fmt_itm fmt_itm) {
+	public void Format(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang lang, DateAdp date, Pft_fmt_itm fmt_itm) {
 		fmt_itm.Fmt(bfr, wiki, lang, date, this);
 	}
-	public void Format(Bry_bfr bfr, Xow_wiki wiki, Xol_lang lang, DateAdp date, Pft_fmt_itm[] fmt_itms) {
+	public void Format(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang lang, DateAdp date, Pft_fmt_itm[] fmt_itms) {
 		this.fmt_itms = fmt_itms;
 		int len = fmt_itms.length;
 		idx_cur = 0; idx_nxt = -1;

@@ -26,9 +26,9 @@ public class Xodb_file {
 	public long		File_len()	{return file_len;}		public Xodb_file File_len_add(int v) {file_len += v; return this;}	private long file_len;
 	public long		File_max()	{return file_max;}		public Xodb_file File_max_(long v) {file_max = v; return this;}		private long file_max;
 	public byte		Cmd_mode()	{return cmd_mode;}		public Xodb_file Cmd_mode_(byte v) {cmd_mode = v; return this;}		private byte cmd_mode;
-	public Db_url Connect() {return connect;}		public Xodb_file Connect_(Db_url v) {connect = v; return this;} private Db_url connect;
-	public Db_conn Conn() {
-		if (conn == null) conn = Db_conn_pool_old._.Get_or_new(connect);
+	public Db_url	Connect()	{return connect;}		public Xodb_file Connect_(Db_url v) {connect = v; return this;}		private Db_url connect;
+	public Db_conn	Conn() {
+		if (conn == null) conn = Db_conn_pool.I.Get_or_new(connect);
 		return conn;
 	}	private Db_conn conn;
 	public void Conn_(Db_conn p) {conn = p;}
@@ -39,6 +39,6 @@ public class Xodb_file {
 			conn.Conn_term();
 		}	finally {conn = null;}
 	}
-	public static Xodb_file load_(int id, byte tid, String url) {return new Xodb_file(id, tid).Url_rel_(url).Cmd_mode_(Db_cmd_mode.Ignore);}
-	public static Xodb_file make_(int id, byte tid, String url) {return new Xodb_file(id, tid).Url_rel_(url).Cmd_mode_(Db_cmd_mode.Create);}
+	public static Xodb_file load_(int id, byte tid, String url) {return new Xodb_file(id, tid).Url_rel_(url).Cmd_mode_(Db_cmd_mode.Tid_ignore);}
+	public static Xodb_file make_(int id, byte tid, String url) {return new Xodb_file(id, tid).Url_rel_(url).Cmd_mode_(Db_cmd_mode.Tid_create);}
 }

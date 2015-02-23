@@ -16,9 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.dbs.*; import gplx.fsdb.*; import gplx.xowa.bldrs.oimgs.*;
+import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.bldrs.oimgs.*;
+import gplx.fsdb.*; import gplx.fsdb.meta.*;
 public class Xob_xfer_regy_update_cmd extends Xob_itm_basic_base implements Xob_cmd {
-	public Xob_xfer_regy_update_cmd(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
+	public Xob_xfer_regy_update_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Cmd_key() {return KEY_oimg;} public static final String KEY_oimg = "file.xfer_regy_update";
 	public void Cmd_ini(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {}
@@ -32,13 +33,13 @@ public class Xob_xfer_regy_update_cmd extends Xob_itm_basic_base implements Xob_
 	}
 	private void Copy_atrs_to_make_db(Db_conn make_db_provider) {
 		wiki.File_mgr().Fsdb_mgr().Init_by_wiki(wiki);
-		Fsdb_db_abc_mgr fsdb_abc_mgr = wiki.File_mgr().Fsdb_mgr().Mnt_mgr().Abc_mgr_at(0);	// 0 = fsdb.main
+		Fsm_abc_mgr fsdb_abc_mgr = wiki.File_mgr().Fsdb_mgr().Mnt_mgr().Mnts__at(0);			// 0 = fsdb.main
 		Io_url fsdb_atr_url = fsdb_abc_mgr.Atr_mgr().Get_at(0).Url();						// 0 = fsdb.atr.00
 		Sqlite_engine_.Tbl_create_and_delete(make_db_provider, Xob_fsdb_regy_tbl.Tbl_name, Xob_fsdb_regy_tbl.Tbl_sql);
 		Sqlite_engine_.Db_attach(make_db_provider, "fsdb_db", fsdb_atr_url.Raw());
 		make_db_provider.Txn_mgr().Txn_bgn();
 		make_db_provider.Exec_sql(Xob_fsdb_regy_tbl.Insert_fsdb_fil);
-		String insert_sql_fsdb_thm = wiki.File_mgr().Fsdb_mgr().Mnt_mgr().Abc_mgr_at(0).Cfg_mgr().Schema_thm_page()	// Cfg_get(Fsdb_cfg_mgr.Grp_core).Get_yn_or_n(Fsdb_cfg_mgr.Key_schema_thm_page)
+		String insert_sql_fsdb_thm = wiki.File_mgr().Fsdb_mgr().Mnt_mgr().Mnts__at(0).Cfg_mgr().Schema_thm_page()	// Cfg_get(Fsm_cfg_mgr.Grp_core).Get_yn_or_n(Fsm_cfg_mgr.Key_schema_thm_page)
 			? Xob_fsdb_regy_tbl.Insert_fsdb_thm
 			: Xob_fsdb_regy_tbl.Insert_fsdb_thm_v0
 			;

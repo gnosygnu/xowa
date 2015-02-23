@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import org.junit.*;
-import gplx.ios.*;
+import gplx.ios.*; import gplx.xowa.tdbs.*;
 public class Xobc_tst {		
 	@Before public void init() {fxt = new Xob_fxt().Ctor_mem();} private Xob_fxt fxt;
 	// @After public void term() {fxt.Wiki().Ctx().Sys_load_tmpls_(true);} // commented during wiki.Ctx() removal; DATE:2014-04-22
@@ -40,7 +40,7 @@ public class Xobc_tst {
 		,	"!!!!$|!!!!!|!!!!!|0|!!!!)|Title 2a"
 		,	""
 		)
-		.Fil_expd(fxt.fil_reg(Xow_ns_.Id_main, Xow_dir_info_.Tid_ttl)
+		.Fil_expd(fxt.fil_reg(Xow_ns_.Id_main, Xotdb_dir_info_.Tid_ttl)
 		,	"0|Title 1|Title 2a|2"
 		,	""
 		)
@@ -64,7 +64,7 @@ public class Xobc_tst {
 		,	"!!!!$|!!!!!|!!!!!|0|!!!!#|↑"
 		,	""
 		)
-		.Fil_expd(fxt.fil_reg(Xow_ns_.Id_main, Xow_dir_info_.Tid_ttl)
+		.Fil_expd(fxt.fil_reg(Xow_ns_.Id_main, Xotdb_dir_info_.Tid_ttl)
 		,	"0|!|↑|2"
 		,	""
 		)
@@ -85,7 +85,7 @@ public class Xobc_tst {
 		,	"!!!!#|!!!!!|!!!!!|0|!!!!'|A"
 		,	""
 		)
-		.Fil_expd(fxt.fil_reg(Xow_ns_.Id_template, Xow_dir_info_.Tid_ttl)
+		.Fil_expd(fxt.fil_reg(Xow_ns_.Id_template, Xotdb_dir_info_.Tid_ttl)
 		,	"0|A|A|1"
 		,	""
 		)
@@ -103,7 +103,7 @@ public class Xobc_tst {
 		,	"!!!!$|!!!!!|!!!!!|0|!!!!\"|!!!!+|B"
 		,	""
 		)
-		.Fil_expd(fxt.fil_reg(Xow_dir_info_.Tid_id)
+		.Fil_expd(fxt.fil_reg(Xotdb_dir_info_.Tid_id)
 		,	"0|!!!!#|!!!!$|2"
 		,	""
 		)
@@ -121,7 +121,7 @@ public class Xobc_tst {
 		,	"Z|!!!!#"
 		,	""
 		)
-		.Fil_expd(fxt.fil_reg(Xow_dir_info_.Tid_category)
+		.Fil_expd(fxt.fil_reg(Xotdb_dir_info_.Tid_category)
 		,	"0|Y|Z|2"
 		,	""
 		)
@@ -139,7 +139,7 @@ public class Xobc_tst {
 		,	"Y|!!!!#|!!!!$"
 		,	""
 		)
-		.Fil_expd(fxt.fil_reg(Xow_dir_info_.Tid_category)
+		.Fil_expd(fxt.fil_reg(Xotdb_dir_info_.Tid_category)
 		,	"0|X|Y|2"
 		,	""
 		)
@@ -169,11 +169,11 @@ public class Xobc_tst {
 			,	"a", "b", "c");
 	}
 	private void tst_Parse(String raw, String... expd) {
-		Xoa_app app = Xoa_app_fxt.app_();	// NOTE: resets mem file system, so must happen first
+		Xoae_app app = Xoa_app_fxt.app_();	// NOTE: resets mem file system, so must happen first
 		Io_url url = Io_url_.mem_fil_("mem/raw_page.csv");
 		Io_mgr._.SaveFilStr(url, raw);
 		Xodb_page_raw_parser parser = new Xodb_page_raw_parser();
-		Xow_wiki wiki = Xoa_app_fxt.wiki_tst_(app);
+		Xowe_wiki wiki = Xoa_app_fxt.wiki_tst_(app);
 		parser.Load(Gfo_usr_dlg_base.test_(), wiki, new Xow_ns(Xow_ns_.Id_template, Xow_ns_case_.Id_1st, Bry_.new_utf8_("Template"), false), new Io_url[] {url}, 1 * Io_mgr.Len_kb);
 		ListAdp actl = ListAdp_.new_();
 		Xodb_page page = new Xodb_page();

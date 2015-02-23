@@ -456,10 +456,10 @@ public class Xow_popup_parser_tst {
 	}
 }
 class Xop_popup_parser_fxt {
-	private Xow_popup_parser parser; private Xow_wiki wiki;
+	private Xow_popup_parser parser; private Xowe_wiki wiki;
 	private int word_min = 2;
 	public void Clear() {
-		Xoa_app app = Xoa_app_fxt.app_();
+		Xoae_app app = Xoa_app_fxt.app_();
 		this.wiki = Xoa_app_fxt.wiki_(app, "en.wiki");
 		parser = wiki.Html_mgr().Module_mgr().Popup_mgr().Parser();
 		parser.Init_by_wiki(wiki);
@@ -497,7 +497,7 @@ class Xop_popup_parser_fxt {
 	}
 	public void Test_parse(String raw, String expd)				{Test_parse(raw, "Test_1", expd);}
 	public void Test_parse(String raw, String ttl, String expd)	{
-		Xoa_page page = Xoa_page.create_(wiki, Xoa_ttl.parse_(wiki, Bry_.new_ascii_(ttl)));
+		Xoae_page page = Xoae_page.create_(wiki, Xoa_ttl.parse_(wiki, Bry_.new_ascii_(ttl)));
 		page.Data_raw_(Bry_.new_utf8_(raw));
 		Xow_popup_itm itm = new Xow_popup_itm(1, Bry_.new_utf8_(raw), Bry_.Empty, word_min);
 		itm.Init(wiki.Domain_bry(), page.Ttl());

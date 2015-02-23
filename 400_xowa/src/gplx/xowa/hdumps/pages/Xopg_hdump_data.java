@@ -17,8 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
 import gplx.xowa.hdumps.core.*; import gplx.xowa.files.*;
+import gplx.xowa.parsers.lnkis.redlinks.*;
 public class Xopg_hdump_data {
-	public Xopg_redlink_mgr	Redlink_mgr() {return redlink_mgr;} private Xopg_redlink_mgr redlink_mgr = new Xopg_redlink_mgr();
+	public Xopg_redlink_idx_list	Redlink_mgr() {return redlink_mgr;} private Xopg_redlink_idx_list redlink_mgr = new Xopg_redlink_idx_list();
 	public int Data_count_imgs() {return data_count_imgs;} public void Data_count_imgs_(int v) {data_count_imgs = v;} private int data_count_imgs;
 	public ListAdp Data() {return data;} private final ListAdp data = ListAdp_.new_();
 	public void Data_add(Hdump_data_itm itm) {data.Add(itm);}

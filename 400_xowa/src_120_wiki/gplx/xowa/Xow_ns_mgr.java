@@ -27,7 +27,7 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 		name_hash = Hash_adp_bry.ci_utf8_(case_mgr);
 		tmpl_hash = Hash_adp_bry.ci_utf8_(case_mgr);
 	}
-	public void Clear() {
+	public Xow_ns_mgr Clear() {
 		name_hash.Clear();
 		id_hash.Clear();
 		tmpl_hash.Clear();
@@ -36,6 +36,7 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 		ords_len = 0;
 		ns_count = 0;
 		ns_file = null;
+		return this;
 	}
 	public Btrie_slim_mgr Category_trie() {return category_trie;}		private Btrie_slim_mgr category_trie;
 	public Xow_ns		Ns_main()				{return ns_main;}		private Xow_ns ns_main;

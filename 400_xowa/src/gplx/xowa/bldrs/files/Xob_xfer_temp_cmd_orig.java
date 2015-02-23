@@ -16,10 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.files.*; import gplx.xowa.bldrs.oimgs.*;
+import gplx.dbs.*; import gplx.xowa.dbs.*;
+import gplx.xowa.files.*; import gplx.xowa.files.exts.*;
+import gplx.xowa.bldrs.oimgs.*;
 public class Xob_xfer_temp_cmd_orig extends Xob_itm_basic_base implements Xob_cmd {
 	private byte[] ext_rules_key = Bry_.Empty;
-	public Xob_xfer_temp_cmd_orig(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
+	public Xob_xfer_temp_cmd_orig(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Cmd_key() {return KEY_oimg;} public static final String KEY_oimg = "file.xfer_temp.orig";
 	public void Cmd_ini(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {
@@ -58,11 +60,11 @@ public class Xob_xfer_temp_cmd_orig extends Xob_itm_basic_base implements Xob_cm
 		conn.Txn_mgr().Txn_end_all();
 	}
 	private long[] Calc_ext_max() {
-		Xoft_rule_grp ext_rules = wiki.App().File_mgr().Ext_rules().Get_or_new(ext_rules_key);
+		Xof_rule_grp ext_rules = wiki.Appe().File_mgr().Ext_rules().Get_or_new(ext_rules_key);
 		long[] rv = new long[Xof_ext_.Id__max];
 		for (int i = 0; i < Xof_ext_.Id__max; i++) {
 			byte[] ext = Xof_ext_.Get_ext_by_id_(i);
-			Xoft_rule_itm ext_rule = ext_rules.Get_or_null(ext);
+			Xof_rule_itm ext_rule = ext_rules.Get_or_null(ext);
 			long max = ext_rule == null ? 0 : ext_rule.Make_max();
 			rv[i] = max;
 		}

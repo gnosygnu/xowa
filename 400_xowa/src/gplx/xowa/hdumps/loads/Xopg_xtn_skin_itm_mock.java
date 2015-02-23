@@ -22,7 +22,7 @@ public class Xopg_xtn_skin_itm_mock implements Xopg_xtn_skin_itm {
 	public Xopg_xtn_skin_itm_mock(byte[] val) {this.val = val;}
 	public byte Tid() {return Xopg_xtn_skin_itm_tid.Tid_sidebar;}
 	public byte[] Key() {return Bry_.Empty;}
-	public void Write(Bry_bfr bfr, Xoa_page page) {
+	public void Write(Bry_bfr bfr, Xoae_page page) {
 		bfr.Add(val);
 	}
 }

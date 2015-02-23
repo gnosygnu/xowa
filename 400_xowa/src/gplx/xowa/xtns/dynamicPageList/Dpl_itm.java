@@ -39,7 +39,7 @@ class Dpl_itm {
 	public byte Quality_pages() {return quality_pages;} private byte quality_pages;
 	public byte Stable_pages() {return stable_pages;} private byte stable_pages;
 	private Xop_ctx sub_ctx; private Xop_tkn_mkr sub_tkn_mkr; private Xop_root_tkn sub_root;
-	public void Parse(Xow_wiki wiki, Xop_ctx ctx, byte[] page_ttl, byte[] src, Xop_xnde_tkn xnde) {	// parse kvs in node; EX:<dpl>category=abc\nredirects=y\n</dpl>
+	public void Parse(Xowe_wiki wiki, Xop_ctx ctx, byte[] page_ttl, byte[] src, Xop_xnde_tkn xnde) {	// parse kvs in node; EX:<dpl>category=abc\nredirects=y\n</dpl>
 		sub_ctx = Xop_ctx.new_sub_(wiki);
 		sub_tkn_mkr = sub_ctx.Tkn_mkr();
 		sub_root = sub_tkn_mkr.Root(Bry_.Empty);
@@ -47,7 +47,7 @@ class Dpl_itm {
 		int pos = content_bgn;
 		int fld_bgn = content_bgn;
 		byte key_id = 0;
-		Gfo_usr_dlg usr_dlg = wiki.App().Usr_dlg();
+		Gfo_usr_dlg usr_dlg = wiki.Appe().Usr_dlg();
 		boolean ws_bgn_chk = true; int ws_bgn_idx = -1, ws_end_idx = -1;
 		boolean loop = true;
 		while (loop) {										// iterate over content
@@ -93,7 +93,7 @@ class Dpl_itm {
 		}
 	}
 	private static final byte Dlm_fld = Byte_ascii.Eq, Dlm_row = Byte_ascii.NewLine;
-	public void Parse_cmd(Xow_wiki wiki, byte key_id, byte[] val) {
+	public void Parse_cmd(Xowe_wiki wiki, byte key_id, byte[] val) {
 		sub_root.Clear();
 		val = wiki.Parser().Parse_text_to_wtxt(sub_root, sub_ctx, sub_tkn_mkr, val);
 		switch (key_id) {

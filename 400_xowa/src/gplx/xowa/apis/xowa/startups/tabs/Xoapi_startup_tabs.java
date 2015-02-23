@@ -41,7 +41,7 @@ public class Xoapi_startup_tabs implements GfoInvkAble {
 	, Invk_previous = "previous", Invk_previous_ = "previous_"
 	, Invk_custom_is_expr = "custom_is_expr", Invk_custom_is_expr_ = "custom_is_expr_"
 	;
-	public String[] Calc_startup_strs(Xoa_app app) {
+	public String[] Calc_startup_strs(Xoae_app app) {
 		ListAdp rv = ListAdp_.new_();
 		String xowa_home = gplx.xowa.users.Xouc_pages_mgr.Page_xowa;
 		if (manual == null) {
@@ -68,7 +68,7 @@ public class Xoapi_startup_tabs implements GfoInvkAble {
 			list.Add(itm);
 		}
 	}
-	private static void Add_xowa_home_if_new_version(ListAdp rv, Xoa_app app, String xowa_home) {
+	private static void Add_xowa_home_if_new_version(ListAdp rv, Xoae_app app, String xowa_home) {
 		if (gplx.xowa.apps.versions.Xoa_version_.Compare(app.Api_root().App().Env().Version_previous(), Xoa_app_.Version) == CompareAble_.Less) {
 			boolean xowa_home_exists = false;
 			int len = rv.Count();

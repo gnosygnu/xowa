@@ -16,10 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps; import gplx.*; import gplx.xowa.*;
-import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.dbs.tbls.*; import gplx.xowa.hdumps.dbs.*;
+import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.dbs.*; import gplx.xowa.dbs.tbls.*; import gplx.xowa.hdumps.dbs.*;
 public class Xodb_hdump_mgr_setup {
 	public static Xodb_file Hdump_db_file_init(Xodb_hdump_mgr hdump_mgr) {
-		Xow_wiki wiki = hdump_mgr.Wiki();
+		Xowe_wiki wiki = hdump_mgr.Wiki();
 		Xodb_mgr_sql db_mgr_as_sql = wiki.Db_mgr_as_sql();
 		Xodb_file rv = db_mgr_as_sql.Fsys_mgr().Get_tid_root(Xodb_file_tid.Tid_html);
 		if (rv == null) rv = Setup(db_mgr_as_sql);
@@ -45,7 +45,7 @@ public class Xodb_hdump_mgr_setup {
 	private static Xodb_file Create_db(Xodb_mgr_sql db_mgr, Xodb_fsys_mgr fsys_mgr) {
 		Xodb_file html_db_file = fsys_mgr.Make(Xodb_file_tid.Tid_html);
 		html_db_file.Conn().Exec_sql(Xodb_wiki_page_html_tbl.Tbl_sql);
-		db_mgr.Tbl_xowa_db().Commit_all(fsys_mgr.Conn_core(), db_mgr.Fsys_mgr().Files_ary());
+		db_mgr.Tbl_xowa_db().Commit_all(db_mgr.Fsys_mgr().Files_ary());
 		return html_db_file;
 	}
 	private static void Create_idx(Xodb_file html_db_file) {

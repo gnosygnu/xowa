@@ -23,7 +23,7 @@ public class Xog_mnu_regy {
 	public Xog_mnu_regy(Xoa_gui_mgr gui_mgr) {
 		this.gui_mgr = gui_mgr;
 	}
-	public void Init_by_app(Xoa_app app) {
+	public void Init_by_app(Xoae_app app) {
 		hash = OrderedHash_.new_();
 		Xog_cmd_mgr cmd_mgr = app.Gui_mgr().Cmd_mgr();
 		int len = cmd_mgr.Len();

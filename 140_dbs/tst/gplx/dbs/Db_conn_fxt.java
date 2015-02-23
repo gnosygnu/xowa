@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
-import gplx.dbs.engines.sqlite.*;
+import gplx.dbs.engines.sqlite.*; import gplx.dbs.engines.mysql.*; import gplx.dbs.engines.postgres.*;
 public class Db_conn_fxt implements RlsAble {
 	public Db_conn Conn() {return conn;} public Db_conn_fxt Conn_(Db_conn v) {conn = v; return this;} Db_conn conn;
 	public void DmlAffectedAvailable_(boolean v) {dmlAffectedAvailable = v;} private boolean dmlAffectedAvailable = true;
@@ -46,10 +46,9 @@ public class Db_conn_fxt implements RlsAble {
 	}
 	public void Rls() {conn.Conn_term();}
 
-	public static Db_conn Mysql()				{return Db_conn_.new_and_open_(Db_url__mysql.new_("127.0.0.1", "unit_tests", "gplx_user", "gplx_password"));}
-	public static Db_conn Tdb(String fileName)	{return Db_conn_.new_and_open_(Db_url_.tdb_(Tfds.RscDir.GenSubDir_nest("140_dbs", "tdbs").GenSubFil(fileName)));}
-	public static Db_conn Postgres()			{return Db_conn_.new_and_open_(Db_url__postgres.new_("127.0.0.1", "unit_tests", "gplx_user", "gplx_password"));}
-	public static Db_conn Sqlite()				{return Db_conn_.new_and_open_(Db_url__sqlite.load_(Tfds.RscDir.GenSubFil_nest("140_dbs", "sqlite", "unit_tests.db")));}
-//		public static Db_conn Mssql() {return MssqlConnectUrl.WindowsAuth(".", "unit_tests");
+	public static Db_conn Mysql()				{return Db_conn_pool.I.Get_or_new(Mysql_url.new_("127.0.0.1", "unit_tests", "gplx_user", "gplx_password"));}
+	public static Db_conn Tdb(String fileName)	{return Db_conn_pool.I.Get_or_new(Db_url_.tdb_(Tfds.RscDir.GenSubDir_nest("140_dbs", "tdbs").GenSubFil(fileName)));}
+	public static Db_conn Postgres()			{return Db_conn_pool.I.Get_or_new(Postgres_url.new_("127.0.0.1", "unit_tests", "gplx_user", "gplx_password"));}
+	public static Db_conn Sqlite()				{return Db_conn_pool.I.Get_or_new(Sqlite_url.load_(Tfds.RscDir.GenSubFil_nest("140_dbs", "sqlite", "unit_tests.db")));}
 	public static final boolean SkipPostgres = Tfds.SkipDb || true;
 }

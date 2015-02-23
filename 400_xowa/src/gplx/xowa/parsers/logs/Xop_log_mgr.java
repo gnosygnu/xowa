@@ -19,9 +19,9 @@ package gplx.xowa.parsers.logs; import gplx.*; import gplx.xowa.*; import gplx.x
 import gplx.dbs.*; import gplx.xowa.bldrs.oimgs.*;
 public class Xop_log_mgr implements GfoInvkAble {
 	private Db_conn conn;
-	private Xoa_app app; private Xop_log_basic_tbl log_tbl;
+	private Xoae_app app; private Xop_log_basic_tbl log_tbl;
 	private int exec_count = 0, commit_interval = 1000;
-	public Xop_log_mgr(Xoa_app app) {this.app = app;}
+	public Xop_log_mgr(Xoae_app app) {this.app = app;}
 	public Io_url Log_dir() {return log_dir;}
 	public Xop_log_mgr Log_dir_(Io_url v) {
 		log_dir = v;

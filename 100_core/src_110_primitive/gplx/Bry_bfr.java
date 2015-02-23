@@ -131,6 +131,7 @@ public class Bry_bfr {
 	public Bry_bfr Add_byte_quote()			{return Add_byte(Byte_ascii.Quote);}
 	public Bry_bfr Add_byte_space()			{return Add_byte(Byte_ascii.Space);}
 	public Bry_bfr Add_byte_nl()			{return Add_byte(Byte_ascii.NewLine);}
+	public Bry_bfr Add_byte_dot()			{return Add_byte(Byte_ascii.Dot);}
 	public Bry_bfr Add_byte(byte val) {
 		int newPos = bfr_len + 1;
 		if (newPos > bfr_max) Resize(bfr_len * 2);

@@ -16,9 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.tidy; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-public class Xoh_tidy_wkr_tidy extends ProcessAdp implements Xoh_tidy_wkr { 	private Xoa_app app; private Io_url tidy_source, tidy_target;
+public class Xoh_tidy_wkr_tidy extends ProcessAdp implements Xoh_tidy_wkr { 	private Xoae_app app; private Io_url tidy_source, tidy_target;
 	public byte Tid() {return Xoh_tidy_wkr_.Tid_tidy;}
-	public void Init_by_app(Xoa_app app) {
+	public void Init_by_app(Xoae_app app) {
 		this.app = app;
 	}
 	@Override public ProcessAdp Tmp_dir_(Io_url v) {
@@ -26,7 +26,7 @@ public class Xoh_tidy_wkr_tidy extends ProcessAdp implements Xoh_tidy_wkr { 	pri
 		tidy_target = v.GenSubFil("tidy_target.html");
 		return super.Tmp_dir_(v);
 	}
-	public void Exec_tidy(Xoa_page page, Bry_bfr bfr) {
+	public void Exec_tidy(Xoae_page page, Bry_bfr bfr) {
 		int bfr_len = bfr.Len();
 		long bgn = Env_.TickCount();
 		Io_mgr._.SaveFilBfr(tidy_source, bfr);			// saves bfr to source; clears bfr

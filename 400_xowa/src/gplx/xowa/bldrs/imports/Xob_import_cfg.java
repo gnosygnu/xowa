@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.ios.*;
-import gplx.xowa.ctgs.*;
+import gplx.xowa.ctgs.*; import gplx.xowa.tdbs.*;
 public class Xob_import_cfg {
-	public Xob_import_cfg(Xow_wiki wiki) {this.wiki = wiki;} private Xow_wiki wiki; private boolean src_fil_is_bz2 = true;
+	public Xob_import_cfg(Xowe_wiki wiki) {this.wiki = wiki;} private Xowe_wiki wiki; private boolean src_fil_is_bz2 = true;
 	public byte Category_version() {return category_version;} public Xob_import_cfg Category_version_(byte v) {category_version = v; return this;} private byte category_version = Xoa_ctg_mgr.Version_1;
 	public Io_url Src_fil_xml() {return src_fil_xml;}
 	public Xob_import_cfg Src_fil_xml_(Io_url v) {src_fil_xml = v; src_fil_is_bz2 = Bool_.N; return this;} private Io_url src_fil_xml;
@@ -32,26 +32,26 @@ public class Xob_import_cfg {
 	}
 	public gplx.ios.Io_stream_rdr Src_rdr() {
 		if (src_fil_xml == null && src_fil_bz2 == null) {	// will usually be null; non-null when user specifies src through command-line
-			Io_url url = Xow_fsys_mgr.Find_file_or_fail(wiki.Fsys_mgr().Root_dir(), "*", ".xml", ".bz2");
+			Io_url url = Xotdb_fsys_mgr.Find_file_or_fail(wiki.Fsys_mgr().Root_dir(), "*", ".xml", ".bz2");
 			if (String_.Eq(url.Ext(), ".xml"))	Src_fil_xml_(url);
 			else								Src_fil_bz2_(url);
 		}
 		if (src_fil_is_bz2) {
-			Chk_file_ext(wiki.App(), src_fil_bz2, ".bz2", "xml");
-			Xoa_app app = wiki.App();
+			Chk_file_ext(wiki.Appe(), src_fil_bz2, ".bz2", "xml");
+			Xoae_app app = wiki.Appe();
 			if (app.Setup_mgr().Dump_mgr().Import_bz2_by_stdout()) {
-				ProcessAdp process = app.Launcher().App_decompress_bz2_by_stdout();
+				ProcessAdp process = app.Prog_mgr().App_decompress_bz2_by_stdout();
 				return Io_stream_rdr_process.new_(process.Exe_url(), src_fil_bz2, process.Xto_process_bldr_args(src_fil_bz2.Raw()));
 			}
 			else
 				return gplx.ios.Io_stream_rdr_.bzip2_(src_fil_bz2);
 		}
 		else {
-			Chk_file_ext(wiki.App(), src_fil_xml, ".xml", "bz2");
+			Chk_file_ext(wiki.Appe(), src_fil_xml, ".xml", "bz2");
 			return gplx.ios.Io_stream_rdr_.file_(src_fil_xml);
 		}
 	}
-	private static void Chk_file_ext(Xoa_app app, Io_url fil, String expd_ext, String alt_ext) {
+	private static void Chk_file_ext(Xoae_app app, Io_url fil, String expd_ext, String alt_ext) {
 		if (!String_.Eq(fil.Ext(), expd_ext))
 			app.Usr_dlg().Warn_many("", "", "File extension is not " + expd_ext + ". Please use '.src_" + alt_ext + "_fil_' instead; file=~{0}", fil.Raw());
 	}

@@ -18,12 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.ctgs; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.langs.msgs.*;
 public class Xoctg_pagelist_grp implements Bry_fmtr_arg {
-	public void Init_app(Xoa_app app, boolean type_is_normal, Bry_fmtr fmtr_grp, Bry_fmtr fmtr_itm) {
+	public void Init_app(Xoae_app app, boolean type_is_normal, Bry_fmtr fmtr_grp, Bry_fmtr fmtr_itm) {
 		this.type_is_normal = type_is_normal;
 		this.fmtr_grp = fmtr_grp;
 		itms.Init_app(app, fmtr_itm);
 	}	private Bry_fmtr fmtr_grp;
-	public void Init_by_wiki(Xow_wiki wiki) {
+	public void Init_by_wiki(Xowe_wiki wiki) {
 		lbl_ctg_text	= wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_ctg_tbl_hdr);
 		lbl_ctg_help	= Xol_msg_mgr_.Get_msg_val(wiki, wiki.Lang(), Key_pagecategorieslink, Bry_.Ary_empty);
 		lbl_hidden		= wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_ctg_tbl_hidden);

@@ -20,7 +20,6 @@ public class Ref_itm_mgr {
 	private Hash_adp_bry grps = Hash_adp_bry.cs_();	// CASE_MATCH:changed from ci; DATE:2014-07-07
 	private Ref_itm_grp grp_default = new Ref_itm_grp(Bry_.Empty);
 	private int uid_last;		
-	public int Tag__next_id() {return ++tag__next_id;} private int tag__next_id = 0;
 	public boolean References__recursing() {return references__recursing;} public void References__recursing_(boolean v) {references__recursing = v;} private boolean references__recursing;
 	public Ref_itm_lst Lst_get(byte[] grp_name, int lst_idx) {
 		return Bry_.Len_eq_0(grp_name) ? grp_default.Lsts_get_at(lst_idx) : ((Ref_itm_grp)grps.Fetch(grp_name)).Lsts_get_at(lst_idx);	// NOTE: must be Bry_.Len_eq_0 else <references group=""/> not same as <references/>; DATE:2013-02-06
@@ -38,7 +37,6 @@ public class Ref_itm_mgr {
 		grps.Clear();
 		grp_default.Lsts_clear();
 		uid_last = 0;
-		tag__next_id = 0;
 		references__recursing = false;
 	}
 	public Ref_itm_grp Grps_get(byte[] grp_name) {

@@ -16,9 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.imports.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.imports.*;
-import gplx.ios.*; import gplx.dbs.*; import gplx.xowa.dbs.tbls.*; import gplx.xowa.dbs.*;
+import gplx.ios.*; import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.dbs.tbls.*; import gplx.xowa.dbs.*;
 public class Xob_category_registry_sql implements Xob_cmd {
-	public Xob_category_registry_sql(Xob_bldr bldr, Xow_wiki wiki) {this.wiki = wiki;} private Xow_wiki wiki;
+	public Xob_category_registry_sql(Xob_bldr bldr, Xowe_wiki wiki) {this.wiki = wiki;} private Xowe_wiki wiki;
 	public String Cmd_key() {return KEY;} public static final String KEY = "import.sql.category_registry";
 	public void Cmd_ini(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {}
@@ -37,7 +37,7 @@ public class Xob_category_registry_sql implements Xob_cmd {
 			.Where_(Db_crt_.eq_(Xodb_page_tbl.Fld_page_ns, Xow_ns_.Id_category))
 			.OrderBy_asc_(Xodb_page_tbl.Fld_page_title);
 		DataRdr rdr = DataRdr_.Null;
-		Gfo_usr_dlg usr_dlg = wiki.App().Usr_dlg();
+		Gfo_usr_dlg usr_dlg = wiki.Appe().Usr_dlg();
 		try {
 			rdr = qry.Exec_qry_as_rdr(conn);
 			while (rdr.MoveNextPeer()) {
@@ -54,5 +54,5 @@ public class Xob_category_registry_sql implements Xob_cmd {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		return GfoInvkAble_.Rv_unhandled;
 	}
-	public static Io_url Get_dir_output(Xow_wiki wiki) {return wiki.Fsys_mgr().Tmp_dir().GenSubDir(KEY);}
+	public static Io_url Get_dir_output(Xowe_wiki wiki) {return wiki.Fsys_mgr().Tmp_dir().GenSubDir(KEY);}
 }

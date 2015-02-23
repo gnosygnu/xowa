@@ -18,17 +18,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.dbs.tbls.*; import gplx.xowa.pages.*;
 import gplx.xowa.wikis.*;
-import gplx.xowa.bldrs.oimgs.*; import gplx.fsdb.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.gui.*;
+import gplx.xowa.bldrs.oimgs.*; import gplx.xowa.files.*; import gplx.xowa.gui.*;
 import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.hdumps.*;
 import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.wdatas.*;
-public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xop_lnki_logger {
+import gplx.xowa.files.fsdb.*; import gplx.fsdb.meta.*;
+public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink_logger {
 	private Db_conn conn; private Db_stmt stmt;
 	private boolean wdata_enabled = true, xtn_ref_enabled = true, gen_html, gen_hdump;
 	private Xop_log_invoke_wkr invoke_wkr; private Xop_log_property_wkr property_wkr;
 	private int[] ns_ids = Int_.Ary(Xow_ns_.Id_main);// , Xow_ns_.Id_category, Xow_ns_.Id_template
-	private boolean wiki_ns_file_is_case_match_all = true; private Xow_wiki commons_wiki;
+	private boolean wiki_ns_file_is_case_match_all = true; private Xowe_wiki commons_wiki;
 	private Xob_hdump_bldr hdump_bldr; private long hdump_max = Io_mgr.Len_gb;		
-	public Xob_lnki_temp_wkr(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
+	public Xob_lnki_temp_wkr(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	@Override public String Cmd_key() {return KEY_oimg;} public static final String KEY_oimg = "file.lnki_temp";
 	@Override public byte Init_redirect() {return Bool_.N_byte;}
 	@Override public int[] Init_ns_ary() {return ns_ids;}
@@ -49,25 +50,25 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xop_lnki_log
 	@Override protected void Cmd_bgn_end() {
 		wiki_ns_file_is_case_match_all = Wiki_ns_for_file_is_case_match_all(wiki);	// NOTE: must call after wiki.init
 		wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_view_mode.Tid_read).Ctgs_enabled_(false);	// disable categories else progress messages written (also for PERF)
-		commons_wiki = app.Wiki_mgr().Get_by_key_or_make(Xow_wiki_.Domain_commons_bry);
+		commons_wiki = app.Wiki_mgr().Get_by_key_or_make(Xow_domain_.Domain_bry_commons);
 		Xop_log_mgr log_mgr = ctx.App().Log_mgr();
 		log_mgr.Log_dir_(wiki.Fsys_mgr().Root_dir());	// put log in wiki dir, instead of user.temp
 		invoke_wkr = this.Invoke_wkr();					// set member reference
 		invoke_wkr = log_mgr.Make_wkr_invoke();
 		property_wkr = this.Property_wkr();				// set member reference
 		property_wkr = log_mgr.Make_wkr_property();
-		wiki.App().Wiki_mgr().Wdata_mgr().Enabled_(wdata_enabled);
+		wiki.Appe().Wiki_mgr().Wdata_mgr().Enabled_(wdata_enabled);
 		if (!xtn_ref_enabled) gplx.xowa.xtns.cite.References_nde.Enabled = false;
 		gplx.xowa.xtns.gallery.Gallery_xnde.Log_wkr = log_mgr.Make_wkr().Save_src_str_(Bool_.Y);
 		gplx.xowa.xtns.imaps.Imap_xnde.Log_wkr = log_mgr.Make_wkr();
 		gplx.xowa.Xop_xnde_wkr.Timeline_log_wkr = log_mgr.Make_wkr();
 		gplx.xowa.xtns.scores.Score_xnde.Log_wkr = log_mgr.Make_wkr();
 		gplx.xowa.xtns.hieros.Hiero_xnde.Log_wkr = log_mgr.Make_wkr();
-		Xof_fsdb_mgr_sql trg_fsdb_mgr = new Xof_fsdb_mgr_sql(wiki);
+		Xof_fsdb_mgr__sql trg_fsdb_mgr = new Xof_fsdb_mgr__sql();
 		trg_fsdb_mgr.Init_by_wiki(wiki);
-		Fsdb_mnt_mgr trg_mnt_mgr = trg_fsdb_mgr.Mnt_mgr();
-		trg_mnt_mgr.Insert_to_mnt_(Fsdb_mnt_mgr.Mnt_idx_main);
-		Fsdb_mnt_mgr.Patch(trg_mnt_mgr);	// NOTE: see fsdb_make; DATE:2014-04-26
+		Fsm_mnt_mgr trg_mnt_mgr = trg_fsdb_mgr.Mnt_mgr();
+		trg_mnt_mgr.Insert_to_mnt_(Fsm_mnt_mgr.Mnt_idx_main);
+		Fsm_mnt_mgr.Patch(trg_mnt_mgr);	// NOTE: see fsdb_make; DATE:2014-04-26
 		if (gen_hdump) {
 			hdump_bldr = new Xob_hdump_bldr(wiki.Db_mgr_as_sql(), conn, hdump_max);
 			hdump_bldr.Bld_init();
@@ -80,10 +81,10 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xop_lnki_log
 		byte[] ttl_bry = ttl.Page_db();
 		byte page_tid = Xow_page_tid.Identify(wiki.Domain_tid(), ns.Id(), ttl_bry);
 		if (page_tid != Xow_page_tid.Tid_wikitext) return; // ignore js, css, lua, json
-		Xoa_page page = ctx.Cur_page();
+		Xoae_page page = ctx.Cur_page();
 		page.Clear();
 		page.Ttl_(ttl).Revision_data().Id_(db_page.Id());
-		page.Lnki_redlinks_mgr().Clear();
+		page.Redlink_lnki_list().Clear();
 		if (ns.Id_tmpl())
 			parser.Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), wiki.Ns_mgr().Ns_template(), ttl_bry, page_src);
 		else {
@@ -106,7 +107,8 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xop_lnki_log
 	}
 	@Override public void Exec_end_hook() {
 		if (gen_hdump) hdump_bldr.Bld_term();
-		wiki.App().Log_mgr().Txn_end();
+		Gfo_usr_dlg_._.Warn_many("", "", invoke_wkr.Err_filter_mgr().Print());
+		wiki.Appe().Log_mgr().Txn_end();
 		conn.Txn_mgr().Txn_end();
 	}
 	public void Wkr_exec(Xop_ctx ctx, byte[] src, Xop_lnki_tkn lnki, byte lnki_src_tid) {
@@ -148,25 +150,25 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xop_lnki_log
 		if (property_wkr == null) property_wkr = bldr.App().Wiki_mgr().Wdata_mgr().Property_wkr_or_new();
 		return property_wkr;
 	}
-	public static byte[] Xto_commons(boolean wiki_ns_file_is_case_match_all, Xow_wiki commons_wiki, byte[] ttl_bry) {
+	public static byte[] Xto_commons(boolean wiki_ns_file_is_case_match_all, Xowe_wiki commons_wiki, byte[] ttl_bry) {
 		if (!wiki_ns_file_is_case_match_all) return null;	// return "" if wiki matches common
 		Xoa_ttl ttl = Xoa_ttl.parse_(commons_wiki, Xow_ns_.Id_file, ttl_bry);
 		byte[] rv = ttl.Page_db();
 		return Bry_.Eq(rv, ttl_bry) ? null : rv;
 	}
-	public static boolean Wiki_ns_for_file_is_case_match_all(Xow_wiki wiki) {
+	public static boolean Wiki_ns_for_file_is_case_match_all(Xowe_wiki wiki) {
 		return wiki.Ns_mgr().Ns_file().Case_match() == Xow_ns_case_.Id_all;
 	}
 }
 class Xob_lnki_temp_wkr_ {
-	public static int[] Ns_ids_by_aliases(Xow_wiki wiki, String[] aliases) {
+	public static int[] Ns_ids_by_aliases(Xowe_wiki wiki, String[] aliases) {
 		int[] rv = Xob_lnki_temp_wkr_.Ids_by_aliases(wiki.Ns_mgr(), aliases);
 		int aliases_len = aliases.length;
 		int ids_len = rv.length;
 		for (int i = 0; i < aliases_len; i++) {
 			String alias = aliases[i];
 			int id = i < ids_len ? rv[i] : -1;
-			wiki.App().Usr_dlg().Note_many("", "", "ns: ~{0} <- ~{1}", Int_.Xto_str_fmt(id, "0000"), alias);
+			wiki.Appe().Usr_dlg().Note_many("", "", "ns: ~{0} <- ~{1}", Int_.Xto_str_fmt(id, "0000"), alias);
 		}
 		if (aliases_len != ids_len) throw Err_.new_fmt_("mismatch in aliases and ids: {0} vs {1}", aliases_len, ids_len);
 		return rv;

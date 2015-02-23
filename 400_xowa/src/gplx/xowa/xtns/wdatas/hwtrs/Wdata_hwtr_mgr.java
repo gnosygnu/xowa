@@ -72,13 +72,17 @@ public class Wdata_hwtr_mgr {
 		fmtr_descr.Init_by_wdoc(wdoc.Descr_list());
 		fmtr_alias.Init_by_wdoc(wdoc.Alias_list());
 		bfr.Add_str("<div id='wb-item' class='wikibase-entityview wb-item' lang='en' dir='ltr'>");
+		bfr.Add_str("<div class='wikibase-entityview-main'>");
 		fmtr_main.Bld_bfr_many(bfr, fmtr_oview, "", "", "", "", "", "", "");
+		bfr.Add_str("</div>");
 		bfr.Add_str("</div>");
 		return bfr.Xto_bry_and_clear();
 	}
 	public byte[] Write(Wdata_doc wdoc) {
 		bfr.Add_str("<div id='wb-item' class='wikibase-entityview wb-item' lang='en' dir='ltr'>");
+		bfr.Add_str("<div class='wikibase-entityview-main'>");
 		fmtr_main.Bld_bfr_many(bfr, fmtr_oview, fmtr_toc, fmtr_claim, fmtr_slink, fmtr_label, fmtr_descr, fmtr_alias, fmtr_json);
+		bfr.Add_str("</div>");
 		bfr.Add_str("</div>");
 		return bfr.Xto_bry_and_clear();
 	}

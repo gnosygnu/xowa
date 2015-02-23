@@ -20,7 +20,7 @@ public class Xob_unzip_wkr {
 	private ProcessAdp decompress_bz2, decompress_zip, decompress_gz, process;
 	public int Process_exit_code() {return process.Exit_code();}
 	public byte Process_run_mode() {return process_run_mode;} public Xob_unzip_wkr Process_run_mode_(byte v) {process_run_mode = v; return this;} private byte process_run_mode = ProcessAdp.Run_mode_async;
-	public Xob_unzip_wkr Init(Xoa_app app) {return Init(app.Launcher().App_decompress_bz2(), app.Launcher().App_decompress_zip(), app.Launcher().App_decompress_gz());}
+	public Xob_unzip_wkr Init(Xoae_app app) {return Init(app.Prog_mgr().App_decompress_bz2(), app.Prog_mgr().App_decompress_zip(), app.Prog_mgr().App_decompress_gz());}
 	public Xob_unzip_wkr Init(ProcessAdp decompress_bz2, ProcessAdp decompress_zip, ProcessAdp decompress_gz) {
 		this.decompress_bz2 = decompress_bz2;
 		this.decompress_zip = decompress_zip;

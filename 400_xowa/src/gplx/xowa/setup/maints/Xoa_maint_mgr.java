@@ -18,11 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.setup.maints; import gplx.*; import gplx.xowa.*; import gplx.xowa.setup.*;
 import gplx.ios.*; import gplx.xowa.wikis.*;
 public class Xoa_maint_mgr implements GfoInvkAble {
-	public Xoa_maint_mgr(Xoa_app app) {
+	public Xoa_maint_mgr(Xoae_app app) {
 		this.app = app;
 		wmf_dump_status_url = Wmf_dump_status_url(app);
 		wiki_mgr = new Xoa_maint_wikis_mgr(app);
-	}	private Xoa_app app; private Io_url wmf_dump_status_url;
+	}	private Xoae_app app; private Io_url wmf_dump_status_url;
 	public Xoa_maint_wikis_mgr Wiki_mgr() {return wiki_mgr;} private Xoa_maint_wikis_mgr wiki_mgr;
 	public boolean Wmf_dump_status_loaded() {return wmf_dump_status_loaded;} private boolean wmf_dump_status_loaded;
 	public void Wmf_dump_status_loaded_assert() {
@@ -38,7 +38,7 @@ public class Xoa_maint_mgr implements GfoInvkAble {
 	public boolean Wmf_status_download() {
 		String[] server_urls = app.Setup_mgr().Dump_mgr().Server_urls();
 		int len = server_urls.length;
-		Xof_download_wkr download_wkr = app.File_mgr().Download_mgr().Download_wkr();
+		Xof_download_wkr download_wkr = app.Wmf_mgr().Download_wkr();
 		for (int i = 0; i < len; i++) {
 			String server_url = server_urls[i] + "backup-index.html";
 			byte rslt = download_wkr.Download(true, server_url, wmf_dump_status_url, "downloading wmf status");
@@ -61,7 +61,7 @@ public class Xoa_maint_mgr implements GfoInvkAble {
 		}
 		len = app.Wiki_mgr().Count();
 		for (int i = 0; i < len; i++) {
-			Xow_wiki wiki = app.Wiki_mgr().Get_at(i);
+			Xowe_wiki wiki = app.Wiki_mgr().Get_at(i);
 			Wmf_dump_itm itm = (Wmf_dump_itm)itms_hash.Get_by_bry(wiki.Domain_bry());
 			if (itm == null) continue;
 			wiki.Maint_mgr().Wmf_dump_date_(itm.Dump_date()).Wmf_dump_done_(itm.Status_tid() == Wmf_dump_itm.Status_tid_complete).Wmf_dump_status_(itm.Status_msg());
@@ -74,5 +74,5 @@ public class Xoa_maint_mgr implements GfoInvkAble {
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_wmf_status_update = "wmf_status_update", Invk_wikis = "wikis";
-	public static Io_url Wmf_dump_status_url(Xoa_app app) {return app.Fsys_mgr().Bin_any_dir().GenSubDir_nest("html", "xowa", "maint", "backup-index.html");}
+	public static Io_url Wmf_dump_status_url(Xoae_app app) {return app.Fsys_mgr().Bin_any_dir().GenSubDir_nest("html", "xowa", "maint", "backup-index.html");}
 }

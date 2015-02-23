@@ -20,7 +20,7 @@ import gplx.gfui.*; import gplx.xowa.html.*; import gplx.xowa.pages.*;
 public class Xog_tab_itm_edit_mgr {
 	public static void Save(Xog_tab_itm tab, boolean quick_save) {
 		if (tab.View_mode() != Xopg_view_mode.Tid_edit) return;	// exit if not edit; handles ctrl+s being pressed in read/html modes
-		Xoa_page page = tab.Page(); Xow_wiki wiki = page.Wiki(); Xog_win_itm win_itm = tab.Tab_mgr().Win();
+		Xoae_page page = tab.Page(); Xowe_wiki wiki = tab.Wiki(); Xog_win_itm win_itm = tab.Tab_mgr().Win();
 		byte[] new_text = Get_new_text(tab);
 		if (page.Edit_mode() == Xoa_page_.Edit_mode_create) {
 			wiki.Db_mgr().Save_mgr().Data_create(page.Ttl(), new_text);
@@ -34,9 +34,9 @@ public class Xog_tab_itm_edit_mgr {
 		win_itm.Usr_dlg().Prog_one("", "", "saved page ~{0}", String_.new_utf8_(page.Ttl().Full_txt_raw()));	// NOTE: show message after ParsePage_root, b/c ParsePage_root will flash "Loading page"; DATE:2014-05-17
 		if (!quick_save) {							// full_save; save page and go to read mode
 			page.Html_data().Edit_preview_(Bry_.Empty);
-			Xoa_page stack_page = tab.History_mgr().Cur_page(wiki);			// NOTE: must be to CurPage() else changes will be lost when going Bwd,Fwd
+			Xoae_page stack_page = tab.History_mgr().Cur_page(wiki);			// NOTE: must be to CurPage() else changes will be lost when going Bwd,Fwd
 			stack_page.Data_raw_(page.Data_raw());							// NOTE: overwrite with "saved" changes
-			stack_page.Wiki().ParsePage_root(page, true);					// NOTE: must reparse page if (a) Edit -> Read; or (b) "Options" save
+			stack_page.Wikie().ParsePage_root(page, true);					// NOTE: must reparse page if (a) Edit -> Read; or (b) "Options" save
 			win_itm.Page__mode_(Xopg_view_mode.Tid_read);
 			win_itm.Page__async__bgn(tab);
 		}
@@ -44,11 +44,11 @@ public class Xog_tab_itm_edit_mgr {
 	}
 	public static void Preview(Xog_tab_itm tab) {
 		if (tab.View_mode() != Xopg_view_mode.Tid_edit) return;	// exit if not edit; handles preview somehow being called?
-		Xoa_page page = tab.Page(); Xow_wiki wiki = page.Wiki(); Xog_win_itm win_itm = tab.Tab_mgr().Win();
+		Xoae_page page = tab.Page(); Xowe_wiki wiki = tab.Wiki(); Xog_win_itm win_itm = tab.Tab_mgr().Win();
 		Xog_html_itm html_itm = tab.Html_itm();
 
 		byte[] new_text = Get_new_text(tab);
-		Xoa_page new_page = Xoa_page.new_(wiki, page.Ttl());
+		Xoae_page new_page = Xoae_page.new_(wiki, page.Ttl());
 		new_page.Revision_data().Id_(page.Revision_data().Id());				// NOTE: page_id needed for sqlite (was not needed for xdat)
 		new_page.Data_raw_(new_text);
 		wiki.ParsePage_root(new_page, true);						// refresh html
@@ -68,7 +68,7 @@ public class Xog_tab_itm_edit_mgr {
 	}
 	public static void Rename(Xog_tab_itm tab) {
 		if (tab.View_mode() != Xopg_view_mode.Tid_edit) return;	// exit if not edit; handles ctrl+r being pressed
-		Xoa_page page = tab.Page(); Xow_wiki wiki = page.Wiki(); Xog_win_itm win_itm = tab.Tab_mgr().Win();
+		Xoae_page page = tab.Page(); Xowe_wiki wiki = tab.Wiki(); Xog_win_itm win_itm = tab.Tab_mgr().Win();
 		if (Bry_.Eq(page.Ttl().Page_db(), wiki.Props().Main_page())) {
 			win_itm.Usr_dlg().Warn_many("", "", "The Main Page cannot be renamed");
 			win_itm.Kit().Ask_ok("", "", "The Main Page cannot be renamed");
@@ -94,12 +94,12 @@ public class Xog_tab_itm_edit_mgr {
 		html_box.Html_elem_focus(elem_focus_id);
 	}
 	public static void Debug(Xog_win_itm win, byte view_tid) {
-		Xog_tab_itm tab = win.Tab_mgr().Active_tab(); Xoa_page page = tab.Page();
-		Xow_wiki wiki = page.Wiki(); Xop_ctx ctx = wiki.Ctx();
+		Xog_tab_itm tab = win.Tab_mgr().Active_tab(); Xoae_page page = tab.Page();
+		Xowe_wiki wiki = tab.Wiki(); Xop_ctx ctx = wiki.Ctx();
 		ctx.Defn_trace().Clear(); // TODO: move_me
 		ctx.Defn_trace_(Xot_defn_trace_dbg._);
 		Xoa_ttl ttl = page.Ttl();
-		Xoa_page new_page = Xoa_page.new_(page.Wiki(), ttl);
+		Xoae_page new_page = Xoae_page.new_(wiki, ttl);
 		byte[] data = tab.Html_itm().Get_elem_value_for_edit_box_as_bry();
 		new_page.Data_raw_(data);
 		wiki.ParsePage_root(new_page, true);
@@ -113,7 +113,7 @@ public class Xog_tab_itm_edit_mgr {
 		tab.History_mgr().Add(new_page);
 		tab.View_mode_(old);
 	}
-	private static void Invalidate(Xow_wiki wiki) {// invalidate everything on updates; especially needed for page transclusion; {{/my_subpage}} DATE:2014-04-10
+	private static void Invalidate(Xowe_wiki wiki) {// invalidate everything on updates; especially needed for page transclusion; {{/my_subpage}} DATE:2014-04-10
 		gplx.xowa.xtns.scribunto.Scrib_core.Core_invalidate();
 		wiki.Cache_mgr().Free_mem_all();
 	}

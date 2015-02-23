@@ -30,7 +30,7 @@ public class Xob_siteinfo_parser {
 		catch (Exception e) {Err_.Noop(e); return null;}
 		finally {rdr.Rls();}
 	}
-	public static void Siteinfo_parse(Xow_wiki wiki, Gfo_usr_dlg usr_dlg, String siteinfo_str) {
+	public static void Siteinfo_parse(Xowe_wiki wiki, Gfo_usr_dlg usr_dlg, String siteinfo_str) {
 		XmlDoc xdoc = XmlDoc_.parse_(siteinfo_str);
 		XmlNde root = xdoc.Root();
 		int root_subs_len = root.SubNdes().Count();
@@ -66,7 +66,7 @@ public class Xob_siteinfo_parser {
 			bgn_pos += wiki_bry.length;								// position bgn after "/wiki/"
 		return Bry_.Mid(url, bgn_pos, url.length);
 	}
-	private static void Siteinfo_parse_ns(Xow_wiki wiki, Gfo_usr_dlg usr_dlg, XmlNde ns_nde) {
+	private static void Siteinfo_parse_ns(Xowe_wiki wiki, Gfo_usr_dlg usr_dlg, XmlNde ns_nde) {
 		int subs_len = ns_nde.SubNdes().Count();
 		Xow_ns_mgr ns_mgr = wiki.Ns_mgr();
 		ns_mgr.Clear();	// NOTE: wipe out any preexisting ns; use siteinfo.xml as definitive list

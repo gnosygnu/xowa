@@ -365,4 +365,17 @@ public class Wdata_doc_parser_v2_tst {
 		), Int_.Ary(2, 3), fxt.Make_claim_entity(2, 21), fxt.Make_claim_entity(3, 31))
 		;
 	}
+	@Test   public void References_empty() { // PURPOSE:sometimes references can have 0 snaks; return back an empty Wdata_claim_grp_list, not null; PAGE:Птичкин,_Евгений_Николаевич; DATE:2015-02-16
+		fxt.Test_references(String_.Concat_lines_nl_skip_last
+		( "{ 'references':"
+		, "  [ "
+		, "    { 'hash':'8e7d51e38606193465d2a1e9d41ba490e06682a6'"
+		, "    , 'snaks':[]"
+		, "    , 'snaks-order':[]"
+		, "    }"
+		, "  ]"
+		, "}"
+		), Int_.Ary_empty)
+		;
+	}
 }

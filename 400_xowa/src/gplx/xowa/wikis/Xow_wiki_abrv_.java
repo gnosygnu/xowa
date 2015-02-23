@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
+import gplx.xowa.langs.*;
 public class Xow_wiki_abrv_ {
 	public static boolean parse_(Xow_wiki_abrv rv, byte[] src, int bgn, int end) {
 		rv.Clear();
@@ -28,22 +29,22 @@ public class Xow_wiki_abrv_ {
 		return true;
 	}
 	public static final byte 
-	  Tid_null						= Xow_wiki_domain_.Tid_other
-	, Tid_wikipedia					= Xow_wiki_domain_.Tid_wikipedia
-	, Tid_wiktionary				= Xow_wiki_domain_.Tid_wiktionary
-	, Tid_wikisource				= Xow_wiki_domain_.Tid_wikisource
-	, Tid_wikibooks					= Xow_wiki_domain_.Tid_wikibooks
-	, Tid_wikiversity				= Xow_wiki_domain_.Tid_wikiversity
-	, Tid_wikiquote					= Xow_wiki_domain_.Tid_wikiquote
-	, Tid_wikinews					= Xow_wiki_domain_.Tid_wikinews
-	, Tid_wikivoyage				= Xow_wiki_domain_.Tid_wikivoyage
-	, Tid_commons					= Xow_wiki_domain_.Tid_commons
-	, Tid_species					= Xow_wiki_domain_.Tid_species
-	, Tid_meta						= Xow_wiki_domain_.Tid_meta
-	, Tid_incubator					= Xow_wiki_domain_.Tid_incubator
-	, Tid_wikidata					= Xow_wiki_domain_.Tid_wikidata
-	, Tid_mediawiki					= Xow_wiki_domain_.Tid_mediawiki
-	, Tid_wikimediafoundation		= Xow_wiki_domain_.Tid_wikimediafoundation
+	  Tid_null						= Xow_domain_.Tid_int_other
+	, Tid_wikipedia					= Xow_domain_.Tid_int_wikipedia
+	, Tid_wiktionary				= Xow_domain_.Tid_int_wiktionary
+	, Tid_wikisource				= Xow_domain_.Tid_int_wikisource
+	, Tid_wikibooks					= Xow_domain_.Tid_int_wikibooks
+	, Tid_wikiversity				= Xow_domain_.Tid_int_wikiversity
+	, Tid_wikiquote					= Xow_domain_.Tid_int_wikiquote
+	, Tid_wikinews					= Xow_domain_.Tid_int_wikinews
+	, Tid_wikivoyage				= Xow_domain_.Tid_int_wikivoyage
+	, Tid_commons					= Xow_domain_.Tid_int_commons
+	, Tid_species					= Xow_domain_.Tid_int_species
+	, Tid_meta						= Xow_domain_.Tid_int_meta
+	, Tid_incubator					= Xow_domain_.Tid_int_incubator
+	, Tid_wikidata					= Xow_domain_.Tid_int_wikidata
+	, Tid_mediawiki					= Xow_domain_.Tid_int_mediawiki
+	, Tid_wikimediafoundation		= Xow_domain_.Tid_int_wikimediafoundation
 	;
 	private static final Btrie_bwd_mgr trie = Init_trie();
 	private static Btrie_bwd_mgr Init_trie() {

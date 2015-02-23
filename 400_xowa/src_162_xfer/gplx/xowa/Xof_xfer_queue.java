@@ -34,22 +34,22 @@ public class Xof_xfer_queue {
 		if (!dirty.Has(dirty_key.Val_(meta_mgr_key)))
 			dirty.AddReplace(meta_mgr_key, meta_mgr);	// only add if new
 	}
-	public void Exec(byte exec_tid, Gfo_usr_dlg wtr, Xow_wiki wiki, Xoa_page page) {
+	public void Exec(byte exec_tid, Gfo_usr_dlg wtr, Xowe_wiki wiki, Xoae_page page) {
 		if (wiki.File_mgr().Version() == Xow_file_mgr.Version_2)
 			Exec_v2(exec_tid, wtr, wiki, page);
 		else
 			Exec_v1(exec_tid, wtr, wiki, page);
 	}
-	private void Exec_v1(byte exec_tid, Gfo_usr_dlg wtr, Xow_wiki wiki, Xoa_page page) {
+	private void Exec_v1(byte exec_tid, Gfo_usr_dlg wtr, Xowe_wiki wiki, Xoae_page page) {
 		Xof_meta_mgr meta_mgr = null;
 		int xfer_len = list.Count();
 		for (int i = 0; i < xfer_len; i++) {
-			if (wiki.App().Gui_wtr().Canceled()) break;
+			if (wiki.Appe().Usr_dlg().Canceled()) break;
 			Xof_xfer_itm xfer_itm = (Xof_xfer_itm)list.FetchAt(i);
 			meta_mgr = xfer_itm.Meta_itm().Owner_fil().Owner_mgr();
 			Add_dirty_if_new(meta_mgr); // only add if new
 			String queue_msg = wtr.Prog_many(GRP_KEY, "download.bgn", "downloading ~{0} of ~{1}: ~{2};", i + ListAdp_.Base1, xfer_len, xfer_itm.Lnki_ttl());
-			wiki.App().File_mgr().Download_mgr().Download_wkr().Download_xrg().Prog_fmt_hdr_(queue_msg);
+			wiki.App().Wmf_mgr().Download_wkr().Download_xrg().Prog_fmt_hdr_(queue_msg);
 			wiki.File_mgr().Repo_mgr().Xfer_by_meta(xfer_itm, this);
 			xfer_itm.Set__meta(xfer_itm.Meta_itm(), xfer_itm.Meta_itm().Repo_itm(wiki), wiki.Html_mgr().Img_thumb_width());
 			xfer_itm.Calc_by_meta();
@@ -65,9 +65,9 @@ public class Xof_xfer_queue {
 		}
 		this.Clear();
 	}
-	private void Exec_v2(byte exec_tid, Gfo_usr_dlg wtr, Xow_wiki wiki, Xoa_page page) {
-		wiki.File_mgr().Fsdb_mgr().Init_by_wiki__add_bin_wkrs(wiki);
-		wiki.File_mgr().Fsdb_mgr().Fsdb_search_by_list(page, exec_tid, Xfer_itms_to_fsdb_itms(list, wiki.File_mgr().Fsdb_mgr().Patch_upright()));
+	private void Exec_v2(byte exec_tid, Gfo_usr_dlg wtr, Xowe_wiki wiki, Xoae_page page) {
+		wiki.File_mgr().Fsdb_mgr().Init_by_wiki(wiki);
+		wiki.File_mgr().Fsdb_mgr().Fsdb_search_by_list(exec_tid, Xfer_itms_to_fsdb_itms(list, wiki.File_mgr().Patch_upright()), page);
 	}
 	private ListAdp Xfer_itms_to_fsdb_itms(ListAdp list, int upright_patch) {
 		ListAdp rv = ListAdp_.new_();
@@ -75,7 +75,7 @@ public class Xof_xfer_queue {
 		for (int i = 0; i < list_len; i++) {
 			Xof_xfer_itm xfer_itm = (Xof_xfer_itm)list.FetchAt(i);
 			Xof_fsdb_itm fsdb_itm = new Xof_fsdb_itm();
-			fsdb_itm.Init_by_lnki(xfer_itm.Lnki_ttl(), xfer_itm.Lnki_ext(), xfer_itm.Lnki_md5(), xfer_itm.Lnki_type(), xfer_itm.Lnki_w(), xfer_itm.Lnki_h(), upright_patch, xfer_itm.Lnki_upright(), xfer_itm.Lnki_thumbtime(), xfer_itm.Lnki_page());
+			fsdb_itm.Ctor_by_lnki(xfer_itm.Lnki_ttl(), xfer_itm.Lnki_ext(), xfer_itm.Lnki_md5(), xfer_itm.Lnki_type(), xfer_itm.Lnki_w(), xfer_itm.Lnki_h(), upright_patch, xfer_itm.Lnki_upright(), xfer_itm.Lnki_thumbtime(), xfer_itm.Lnki_page());
 			fsdb_itm.Html_uid_(xfer_itm.Html_uid());
 			fsdb_itm.Html_elem_tid_(xfer_itm.Html_elem_tid());
 			fsdb_itm.Gallery_mgr_h_(xfer_itm.Gallery_mgr_h());

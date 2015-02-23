@@ -19,7 +19,7 @@ package gplx.xowa.apis.xowa.gui.pages; import gplx.*; import gplx.xowa.*; import
 import gplx.xowa.gui.*; import gplx.xowa.gui.views.*; import gplx.xowa.pages.*;
 public class Xoapi_edit implements GfoInvkAble {
 	private Xog_win_itm win;
-	public void Init_by_kit(Xoa_app app) {
+	public void Init_by_kit(Xoae_app app) {
 		win = app.Gui_mgr().Browser_win();
 	}
 	private boolean Active_tab_is_null() {return win.Tab_mgr().Active_tab_is_null();}

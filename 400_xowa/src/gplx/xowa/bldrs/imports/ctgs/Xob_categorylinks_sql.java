@@ -19,7 +19,7 @@ package gplx.xowa.bldrs.imports.ctgs; import gplx.*; import gplx.xowa.*; import 
 import gplx.ios.*;
 public class Xob_categorylinks_sql extends Xob_categorylinks_base {
 	private Db_idx_mode idx_mode = Db_idx_mode.Itm_end;
-	public Xob_categorylinks_sql(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki); this.make_fil_len = Io_mgr.Len_mb;}
+	public Xob_categorylinks_sql(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki); this.make_fil_len = Io_mgr.Len_mb;}
 	@Override public String Cmd_key() {return KEY;} public static final String KEY = "import.sql.categorylinks";
 	@Override public Io_sort_cmd Make_sort_cmd(Sql_file_parser sql_parser) {return new Xob_categorylinks_sql_make(sql_parser, wiki, idx_mode);}
 	public static final String Tbl_categorylinks = String_.Concat_lines_nl

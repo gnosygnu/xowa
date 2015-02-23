@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.apis.xowa; import gplx.*; import gplx.xowa.*; import gplx.xowa.apis.*;
 import gplx.xowa.apis.xowa.html.*;
 public class Xoapi_html implements GfoInvkAble {
-	public void Init_by_kit(Xoa_app app) {
+	public void Init_by_kit(Xoae_app app) {
 		tidy.Init_by_kit(app);
 		modules.Init_by_kit(app);
 	}

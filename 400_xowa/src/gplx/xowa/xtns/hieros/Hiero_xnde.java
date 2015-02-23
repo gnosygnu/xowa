@@ -21,8 +21,8 @@ import gplx.xowa.html.*;
 public class Hiero_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 	private Hiero_xtn_mgr xtn_mgr;
 	private Hiero_block[] blocks;
-	public void Xatr_parse(Xow_wiki wiki, byte[] src, Xop_xatr_itm xatr, Object xatr_key_obj) {}
-	public void Xtn_parse(Xow_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
+	public void Xatr_parse(Xowe_wiki wiki, byte[] src, Xop_xatr_itm xatr, Object xatr_key_obj) {}
+	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
 		ctx.Para().Process_block__xnde(xnde.Tag(), Xop_xnde_tag.Block_bgn);
 		xtn_mgr = (Hiero_xtn_mgr)wiki.Xtn_mgr().Get_or_fail(Hiero_xtn_mgr.Xtn_key_static);
 		xtn_mgr.Xtn_init_assert(wiki);
@@ -38,7 +38,7 @@ public class Hiero_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 				break;
 		}
 	}	public static Xop_log_basic_wkr Log_wkr = Xop_log_basic_wkr.Null;
-	public void Xtn_write(Bry_bfr bfr, Xoa_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
+	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
 		xtn_mgr.Html_wtr().Render_blocks(bfr, hctx, blocks, Hiero_html_mgr.scale, false);
 	}
 }

@@ -23,7 +23,7 @@ public class Xob_wdata_qid_sql extends Xob_wdata_qid_base {
 	@Override public void Qid_bgn() {
 		db_mgr = wiki.Db_mgr_as_sql();
 		tbl = db_mgr.Tbl_wdata_qids();
-		long wikidata_max = wiki.App().Setup_mgr().Dump_mgr().Db_wikidata_max();
+		long wikidata_max = wiki.Appe().Setup_mgr().Dump_mgr().Db_wikidata_max();
 		if (wikidata_max > 0) {
 			Xodb_file wdata_file = db_mgr.Fsys_mgr().Make(Xodb_file_tid.Tid_wikidata);
 			db_mgr.Fsys_mgr().Conn_wdata_(wdata_file);
@@ -38,7 +38,7 @@ public class Xob_wdata_qid_sql extends Xob_wdata_qid_base {
 	@Override public void Qid_end() {
 		conn.Txn_mgr().Txn_end_all();
 		stmt.Rls();
-		db_mgr.Fsys_mgr().Index_create(wiki.App().Usr_dlg(), Byte_.Ary(Xodb_file_tid.Tid_core, Xodb_file_tid.Tid_wikidata), Index_wdata_qids);
+		db_mgr.Fsys_mgr().Index_create(wiki.Appe().Usr_dlg(), Byte_.Ary(Xodb_file_tid.Tid_core, Xodb_file_tid.Tid_wikidata), Index_wdata_qids);
 	}
 	private static final Db_idx_itm Index_wdata_qids	= Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS wdata_qids__src ON wdata_qids (wq_src_wiki, wq_src_ns, wq_src_ttl);");
 }

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.modules; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 public class Xoh_module_mgr implements Bry_fmtr_arg {
-	private Xoa_app app; private Xow_wiki wiki; private Xoa_page page; private Xoh_module_itm[] itms; private int itms_len;
+	private Xoae_app app; private Xowe_wiki wiki; private Xoae_page page; private Xoh_module_itm[] itms; private int itms_len;
 	private Xoh_module_wtr wtr = new Xoh_module_wtr();
 	public Xoh_module_mgr() {
 		Itms_add(itm_css, itm_globals, itm_popups, itm_toc, itm_collapsible, itm_navframe, itm_gallery, itm_mathjax, itm_hiero, itm_top_icon, itm_search_suggest, itm_timeline);
@@ -34,7 +34,7 @@ public class Xoh_module_mgr implements Bry_fmtr_arg {
 	public Xoh_module_itm__top_icon			Itm_top_icon() {return itm_top_icon;} private Xoh_module_itm__top_icon itm_top_icon = new Xoh_module_itm__top_icon();
 	public Xoh_module_itm__search_suggest	Itm_search_suggest() {return itm_search_suggest;} private Xoh_module_itm__search_suggest itm_search_suggest = new Xoh_module_itm__search_suggest();
 	public Xoh_module_itm__timeline			Itm_timeline() {return itm_timeline;} private Xoh_module_itm__timeline itm_timeline = new Xoh_module_itm__timeline();
-	public Xoh_module_mgr Init(Xoa_app app, Xow_wiki wiki, Xoa_page page) {
+	public Xoh_module_mgr Init(Xoae_app app, Xowe_wiki wiki, Xoae_page page) {
 		this.app = app; this.wiki = wiki; this.page = page;
 		return this;
 	}
@@ -54,7 +54,7 @@ public class Xoh_module_mgr implements Bry_fmtr_arg {
 			itms[i].Clear();
 	}
 	public void XferAry(Bry_bfr bfr, int idx) {Write(bfr, app, wiki, page);}
-	public void Write(Bry_bfr bfr, Xoa_app app, Xow_wiki wiki, Xoa_page page) {
+	public void Write(Bry_bfr bfr, Xoae_app app, Xowe_wiki wiki, Xoae_page page) {
 		wtr.Init(bfr);
 		wtr.Indent_add();
 		for (int i = 0; i < itms_len; ++i) {

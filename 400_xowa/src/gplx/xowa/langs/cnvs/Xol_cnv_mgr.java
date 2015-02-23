@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.cnvs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+import gplx.xowa.apps.fsys.*;
 public class Xol_cnv_mgr implements GfoInvkAble {
 	private OrderedHash hash = OrderedHash_.new_bry_();		
 	public Xol_cnv_mgr(Xol_lang lang) {}//this.lang = lang;} private Xol_lang lang;
@@ -32,6 +33,6 @@ public class Xol_cnv_mgr implements GfoInvkAble {
 		if		(ctx.Match(k, Invk_get))				return Get_or_make(m.ReadBry("v"));
 		else	return GfoInvkAble_.Rv_unhandled;
 	}	private static final String Invk_get = "get";
-	public static Io_url Bld_url(Xoa_app app, String lang)	{return Bld_url(app.Fsys_mgr().Cfg_lang_core_dir(), lang);}
+	public static Io_url Bld_url(Xoa_fsys_mgr app_fsys_mgr, String lang)	{return Bld_url(app_fsys_mgr.Cfg_lang_core_dir(), lang);}
 	public static Io_url Bld_url(Io_url dir, String lang)	{return dir.GenSubFil_nest("variants", lang + ".gfs");}
 }

@@ -16,10 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.oimgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.files.*; import gplx.xowa.bldrs.files.*;
+import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.dbs.*; import gplx.xowa.files.*; import gplx.xowa.bldrs.files.*;
 public class Xob_xfer_update_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	private Io_url prv_url;
-	public Xob_xfer_update_cmd(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
+	public Xob_xfer_update_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Cmd_key() {return KEY_oimg;} public static final String KEY_oimg = "oimg.xfer_update";
 	public void Cmd_ini(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {}
@@ -28,7 +28,7 @@ public class Xob_xfer_update_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		Xodb_db_file cur_file = Xodb_db_file.init__file_make(wiki.Fsys_mgr().Root_dir());
 		Db_conn conn = cur_file.Conn();
 		if (prv_url == null) {
-			prv_url = wiki.App().Fsys_mgr().File_dir().GenSubFil_nest(wiki.Domain_str(), "bldr", Xodb_db_file.Name__file_make);
+			prv_url = wiki.Appe().Fsys_mgr().File_dir().GenSubFil_nest(wiki.Domain_str(), "bldr", Xodb_db_file.Name__file_make);
 		}
 
 		// run sql

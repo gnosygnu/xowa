@@ -16,11 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.bins; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
+import gplx.ios.*;
 import gplx.xowa.files.fsdb.*;
 public interface Xof_bin_wkr extends GfoInvkAble {
-	byte Bin_wkr_tid();
-	boolean Bin_wkr_resize(); void Bin_wkr_resize_(boolean v);
-	gplx.ios.Io_stream_rdr Bin_wkr_get_as_rdr(ListAdp temp_files, Xof_fsdb_itm itm, boolean is_thumb, int w);
-	boolean Bin_wkr_get_to_url(ListAdp temp_files, Xof_fsdb_itm itm, boolean is_thumb, int w, Io_url bin_url);
-	boolean Save_to_url(byte[] orig_repo, byte[] orig_ttl, byte[] orig_md5, Xof_ext orig_ext, boolean lnki_is_thumb, int file_w, double lnki_time, int lnki_page, Io_url file_url);
+	byte			Tid();
+	boolean			Resize_allowed(); void Resize_allowed_(boolean v);
+	Io_stream_rdr	Get_as_rdr	(Xof_fsdb_itm itm, boolean is_thumb, int w);
+	boolean			Get_to_fsys	(Xof_fsdb_itm itm, boolean is_thumb, int w, Io_url bin_url);
 }

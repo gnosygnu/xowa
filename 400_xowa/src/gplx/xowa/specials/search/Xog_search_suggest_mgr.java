@@ -22,7 +22,7 @@ public class Xog_search_suggest_mgr implements GfoInvkAble {
 		this.app = gui_mgr.App();
 		this.main_win = gui_mgr.Browser_win();
 		cur_cmd = new Xog_search_suggest_cmd(app, this);
-	}	private Xoa_app app; private Xog_win_itm main_win; private Js_wtr wtr = new Js_wtr();
+	}	private Xoae_app app; private Xog_win_itm main_win; private Js_wtr wtr = new Js_wtr();
 	private int results_max = 10; private boolean log_enabled = false;
 	public boolean Enabled() {return enabled;} private boolean enabled = true;
 	public byte Search_mode() {return search_mode;} public Xog_search_suggest_mgr Search_mode_(byte v) {search_mode = v; return this;} private byte search_mode = Tid_search_mode_all_pages_v2;
@@ -50,10 +50,10 @@ public class Xog_search_suggest_mgr implements GfoInvkAble {
 			}
 		}
 	}
-	public void Search(Xow_wiki wiki, byte[] search_bry, byte[] cbk_func) {
+	public void Search(Xowe_wiki wiki, byte[] search_bry, byte[] cbk_func) {
 		this.wiki = wiki; this.search_bry = search_bry; this.cbk_func = cbk_func;
 		ThreadAdp_.invk_(this, Invk_search_async).Start();
-	}	private Xow_wiki wiki; private byte[] search_bry, cbk_func;
+	}	private Xowe_wiki wiki; private byte[] search_bry, cbk_func;
 	private Object thread_guard = new Object();
 	private void Search_async() {
 		if (!enabled) return;

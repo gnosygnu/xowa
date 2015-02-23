@@ -19,7 +19,7 @@ package gplx.xowa.parsers.paras; import gplx.*; import gplx.xowa.*; import gplx.
 import gplx.core.btries.*; import gplx.xowa.parsers.lists.*; import gplx.xowa.parsers.tblws.*;
 public class Xop_pre_lxr implements Xop_lxr {
 	public byte Lxr_tid() {return Xop_lxr_.Tid_pre;}
-	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Hook_space, this);}	// NOTE: do not treat \n\t as shorthand pre; EX:pl.w:Main_Page; DATE:2014-05-06
+	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Hook_space, this);}	// NOTE: do not treat \n\t as shorthand pre; EX:pl.w:Main_Page; DATE:2014-05-06
 	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		if (!ctx.Para().Enabled()) {					// para disabled; "\n\s" should just be "\n\s"; NOTE: para disabled in <gallery>

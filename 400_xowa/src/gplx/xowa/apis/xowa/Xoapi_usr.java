@@ -18,12 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.apis.xowa; import gplx.*; import gplx.xowa.*; import gplx.xowa.apis.*;
 import gplx.xowa.apis.xowa.usrs.*;
 public class Xoapi_usr implements GfoInvkAble {
-	public void Ctor_by_app(Xoa_app app) {
+	public void Ctor_by_app(Xoae_app app) {
 		bookmarks.Ctor_by_app(app);
 		history.Ctor_by_app(app);
 		logs.Ctor_by_app(app);
 	}
-	public void Init_by_kit(Xoa_app app) {
+	public void Init_by_kit(Xoae_app app) {
 		bookmarks.Init_by_kit(app);
 		history.Init_by_kit(app);
 	}

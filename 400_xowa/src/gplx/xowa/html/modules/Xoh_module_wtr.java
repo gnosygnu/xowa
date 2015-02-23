@@ -109,7 +109,7 @@ public class Xoh_module_wtr {
 	public void Write_js_global_ini_atr_val(byte[] key, boolean val)		{Write_js_global_ini_atr(key, Bool_.N, val ? Bool_.True_bry : Bool_.False_bry);}
 	public void Write_js_global_ini_atr_val(byte[] key, byte[] val)		{Write_js_global_ini_atr(key, Bool_.Y, val);}
 	public void Write_js_global_ini_atr_obj(byte[] key, byte[] val)		{Write_js_global_ini_atr(key, Bool_.N, val);}
-	public void Write_js_global_ini_atr_msg(Xow_wiki wiki, byte[] key)	{Write_js_global_ini_atr(key, Bool_.Y, wiki.Msg_mgr().Val_by_key_obj(key));}
+	public void Write_js_global_ini_atr_msg(Xowe_wiki wiki, byte[] key)	{Write_js_global_ini_atr(key, Bool_.Y, wiki.Msg_mgr().Val_by_key_obj(key));}
 	private void Write_js_global_ini_atr(byte[] key, boolean quote_val, byte[] val) {
 		Write_js_global_ini_atr_bgn(key);
 		if (quote_val)

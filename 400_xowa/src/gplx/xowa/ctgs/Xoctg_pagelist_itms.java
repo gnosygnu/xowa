@@ -19,12 +19,12 @@ package gplx.xowa.ctgs; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.html.*; import gplx.xowa.html.lnkis.*;
 import gplx.xowa.users.history.*;
 public class Xoctg_pagelist_itms implements Bry_fmtr_arg {
-	public void Init_app(Xoa_app app, Bry_fmtr fmtr_itm) {
+	public void Init_app(Xoae_app app, Bry_fmtr fmtr_itm) {
 		this.href_parser = app.Href_parser();
 		this.history_mgr = app.User().History_mgr();
 		this.fmtr_itm = fmtr_itm;
 	} 	private Xoh_href_parser href_parser; private Xou_history_mgr history_mgr; private Bry_fmtr fmtr_itm;
-	public void Init_wiki(Xow_wiki wiki) {this.wiki = wiki;} private Xow_wiki wiki;
+	public void Init_wiki(Xowe_wiki wiki) {this.wiki = wiki;} private Xowe_wiki wiki;
 	public void Itms_clear() 				{itms.Clear();} private ListAdp itms = ListAdp_.new_();	
 	public void Itms_add(Xodb_page page) 	{itms.Add(page);}	
 	public void XferAry(Bry_bfr bfr, int idx) {

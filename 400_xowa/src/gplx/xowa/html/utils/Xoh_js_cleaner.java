@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import gplx.core.btries.*;
 public class Xoh_js_cleaner {
-	private Xoa_app app; private boolean ctor = true;
-	public Xoh_js_cleaner(Xoa_app app) {this.app = app;}
-	public void Clean_bfr(Xow_wiki wiki, Xoa_ttl ttl, Bry_bfr bfr, int bgn) {
+	private Xoae_app app; private boolean ctor = true;
+	public Xoh_js_cleaner(Xoae_app app) {this.app = app;}
+	public void Clean_bfr(Xowe_wiki wiki, Xoa_ttl ttl, Bry_bfr bfr, int bgn) {
 		int end = bfr.Len();
 		byte[] cleaned = this.Clean(wiki, bfr.Bfr(), bgn, end);
 		if (cleaned != null) {
@@ -29,7 +29,7 @@ public class Xoh_js_cleaner {
 			app.Usr_dlg().Warn_many("", "", "javascript detected: wiki=~{0} ~{1}", wiki.Domain_str(), String_.new_utf8_(ttl.Full_txt()));
 		}
 	}
-	public byte[] Clean(Xow_wiki wiki, byte[] src, int bgn, int end) {
+	public byte[] Clean(Xowe_wiki wiki, byte[] src, int bgn, int end) {
 		if (ctor) Ctor();
 		Bry_bfr bfr = null;
 		boolean dirty = false;

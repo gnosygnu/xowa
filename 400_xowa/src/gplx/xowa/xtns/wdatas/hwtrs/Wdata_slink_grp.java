@@ -32,20 +32,20 @@ class Wdata_slink_grp {
 		int list_len = list.Count();
 		for (int i = 0; i < list_len; ++i) {
 			Wdata_sitelink_itm itm = (Wdata_sitelink_itm)list.FetchAt(i);				
-			int idx = Idx_by_tid(itm.Domain_info().Wiki_tid());
+			int idx = Idx_by_tid(itm.Domain_info().Domain_tid());
 			rv[idx].Rows().Add(itm.Site(), itm);
 		}
 	}
 	public static int Idx_by_tid(int tid) {
 		switch (tid) {
-			case Xow_wiki_domain_.Tid_wikipedia:		return Idx_w;
-			case Xow_wiki_domain_.Tid_wiktionary:		return Idx_d;
-			case Xow_wiki_domain_.Tid_wikisource:		return Idx_s;
-			case Xow_wiki_domain_.Tid_wikivoyage:		return Idx_v;
-			case Xow_wiki_domain_.Tid_wikiquote:		return Idx_q;
-			case Xow_wiki_domain_.Tid_wikibooks:		return Idx_b;
-			case Xow_wiki_domain_.Tid_wikiversity:		return Idx_u;
-			case Xow_wiki_domain_.Tid_wikinews:			return Idx_n;
+			case Xow_domain_.Tid_int_wikipedia:			return Idx_w;
+			case Xow_domain_.Tid_int_wiktionary:		return Idx_d;
+			case Xow_domain_.Tid_int_wikisource:		return Idx_s;
+			case Xow_domain_.Tid_int_wikivoyage:		return Idx_v;
+			case Xow_domain_.Tid_int_wikiquote:			return Idx_q;
+			case Xow_domain_.Tid_int_wikibooks:			return Idx_b;
+			case Xow_domain_.Tid_int_wikiversity:		return Idx_u;
+			case Xow_domain_.Tid_int_wikinews:			return Idx_n;
 			default:									return Idx_x;
 		}
 	}
@@ -65,14 +65,14 @@ class Wdata_slink_grp {
 	}
 	public static byte[] Name_by_tid(int idx) {
 		switch (idx) {
-			case Idx_w: return Xow_wiki_domain_.Key_wikipedia_bry;
-			case Idx_d: return Xow_wiki_domain_.Key_wiktionary_bry;
-			case Idx_s: return Xow_wiki_domain_.Key_wikisource_bry;
-			case Idx_v: return Xow_wiki_domain_.Key_wikivoyage_bry;
-			case Idx_q: return Xow_wiki_domain_.Key_wikiquote_bry;
-			case Idx_b: return Xow_wiki_domain_.Key_wikibooks_bry;
-			case Idx_u: return Xow_wiki_domain_.Key_wikiversity_bry;
-			case Idx_n: return Xow_wiki_domain_.Key_wikinews_bry;
+			case Idx_w: return Xow_domain_.Tid_bry_wikipedia;
+			case Idx_d: return Xow_domain_.Tid_bry_wiktionary;
+			case Idx_s: return Xow_domain_.Tid_bry_wikisource;
+			case Idx_v: return Xow_domain_.Tid_bry_wikivoyage;
+			case Idx_q: return Xow_domain_.Tid_bry_wikiquote;
+			case Idx_b: return Xow_domain_.Tid_bry_wikibooks;
+			case Idx_u: return Xow_domain_.Tid_bry_wikiversity;
+			case Idx_n: return Xow_domain_.Tid_bry_wikinews;
 			case Idx_x: return Name_special;
 			default:	throw Err_.unhandled(idx);
 		}

@@ -19,7 +19,7 @@ package gplx.xowa.gui; import gplx.*; import gplx.xowa.*;
 import gplx.gfui.*; import gplx.xowa.specials.search.*; import gplx.xowa.gui.menus.*; import gplx.xowa.gui.cmds.*; import gplx.xowa.cfgs.gui.*; import gplx.xowa.users.*;
 import gplx.xowa.gui.bnds.*; import gplx.xowa.gui.views.*; import gplx.xowa.gui.urls.url_macros.*;
 public class Xoa_gui_mgr implements GfoEvObj, GfoInvkAble {
-	public Xoa_gui_mgr(Xoa_app app) {
+	public Xoa_gui_mgr(Xoae_app app) {
 		evMgr = GfoEvMgr.new_(this);
 		this.app = app;
 		browser_win = new Xog_win_itm(app, this);
@@ -30,7 +30,7 @@ public class Xoa_gui_mgr implements GfoEvObj, GfoInvkAble {
 		search_suggest_mgr = new Xog_search_suggest_mgr(this);
 	}
 	public GfoEvMgr EvMgr() {return evMgr;} private GfoEvMgr evMgr;
-	public Xoa_app App() {return app;} private Xoa_app app;
+	public Xoae_app App() {return app;} private Xoae_app app;
 	public Xog_win_itm Browser_win() {return browser_win;} private Xog_win_itm browser_win;
 	public IptCfgRegy Ipt_cfgs() {return ipt_cfgs;} IptCfgRegy ipt_cfgs = new IptCfgRegy();
 	public Xog_bnd_mgr Bnd_mgr() {return bnd_mgr;} private Xog_bnd_mgr bnd_mgr;
@@ -60,7 +60,7 @@ public class Xoa_gui_mgr implements GfoEvObj, GfoInvkAble {
 	public void Kit_(Gfui_kit kit) {
 		this.kit = kit;
 		kit.Kit_init(browser_win.Usr_dlg());
-		kit.Kit_term_cbk_(GfoInvkAbleCmd.new_(app, Xoa_app.Invk_term_cbk));
+		kit.Kit_term_cbk_(GfoInvkAbleCmd.new_(app, Xoae_app.Invk_term_cbk));
 		browser_win.Init_by_kit(kit);
 		layout.Init(browser_win);
 		cmd_mgr.Init_by_kit(app);

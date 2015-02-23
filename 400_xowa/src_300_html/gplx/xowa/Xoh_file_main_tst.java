@@ -87,7 +87,7 @@ public class Xoh_file_main_tst {
 }
 class Xoh_fil_main_fxt {
 	Xoh_file_main_wkr wkr = new Xoh_file_main_wkr();
-	Xoa_app app; Xow_wiki wiki; Xoh_file_page opt;
+	Xoae_app app; Xowe_wiki wiki; Xoh_file_page opt;
 	Xof_xfer_itm file = new Xof_xfer_itm();
 	Bry_bfr bfr = Bry_bfr.new_();	
 	public Xoh_fil_main_fxt Ttl_str_(String v) {this.ttl_str = v; return this;} private String ttl_str;

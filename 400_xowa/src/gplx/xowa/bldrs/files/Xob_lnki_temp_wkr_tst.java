@@ -31,9 +31,9 @@ public class Xob_lnki_temp_wkr_tst {
 }
 class Xob_lnki_temp_wkr_fxt {
 	private boolean wiki_ns_file_is_case_match_all;
-	private Xow_wiki commons_wiki;
+	private Xowe_wiki commons_wiki;
 	public Xob_lnki_temp_wkr_fxt Init_Xto_commons(boolean wiki_ns_file_is_case_match_all) {
-		Xoa_app app = Xoa_app_fxt.app_();
+		Xoae_app app = Xoa_app_fxt.app_();
 		this.wiki_ns_file_is_case_match_all = wiki_ns_file_is_case_match_all;
 		this.commons_wiki = Xoa_app_fxt.wiki_tst_(app);	// commons_wiki will default to Xow_ns.Id_file of case_match_1st
 		return this;

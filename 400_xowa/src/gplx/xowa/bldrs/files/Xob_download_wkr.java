@@ -23,7 +23,7 @@ public class Xob_download_wkr extends Xob_itm_basic_base implements Xob_cmd {
 	private String dump_src = null;
 	private Io_url dump_trg_zip = null, dump_trg_bin = null;
 	private boolean unzip = true;
-	public Xob_download_wkr(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
+	public Xob_download_wkr(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Cmd_key() {return KEY_oimg;} public static final String KEY_oimg = "file.download";
 	public void Cmd_ini(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {
@@ -40,7 +40,7 @@ public class Xob_download_wkr extends Xob_itm_basic_base implements Xob_cmd {
 	}
 	public void Cmd_run() {
 		usr_dlg.Note_many("", "", "downloading file: now=~{0} src=~{1} trg=~{2}", DateAdp_.Now().XtoStr_fmt_yyyyMMdd_HHmmss(), dump_src, dump_trg_zip.OwnerDir());
-		IoEngine_xrg_downloadFil download_wkr = app.File_mgr().Download_mgr().Download_wkr().Download_xrg();
+		IoEngine_xrg_downloadFil download_wkr = app.Wmf_mgr().Download_wkr().Download_xrg();
 		download_wkr.Src_last_modified_query_(false).Init(dump_src, dump_trg_zip);
 		if (!download_wkr.Exec())
 			usr_dlg.Warn_many("", "", "download failed: src=~{0} trg=~{1} err=~{2}", dump_src, dump_trg_zip.Raw(), Err_.Message_gplx_brief(download_wkr.Rslt_err()));

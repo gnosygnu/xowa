@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
 public class Xou_user_mgr implements GfoInvkAble {
-	public Xou_user_mgr(Xoa_app app, Xou_user user) {this.app = app; this.Add(user);} private Xoa_app app;
+	public Xou_user_mgr(Xoae_app app, Xou_user user) {this.app = app; this.Add(user);} private Xoae_app app;
 	public void Add(Xou_user itm) {regy.Add(itm.Key_str(), itm);}
 	Xou_user GetByKey(String key) {return (Xou_user)regy.Fetch(key);}
 	OrderedHash regy = OrderedHash_.new_();

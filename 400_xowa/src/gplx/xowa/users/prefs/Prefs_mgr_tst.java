@@ -39,19 +39,19 @@ public class Prefs_mgr_tst {
 		Tfds.Eq("abc", fxt.App().Gui_mgr().Html_mgr().Auto_focus_id());
 	}
 	@Test   public void Get_checkbox() {
-		fxt.App().File_mgr().Download_mgr().Enabled_(true);
+		fxt.App().File_mgr().Wmf_mgr().Enabled_(true);
 		fxt.Exec_get("a <input type='checkbox' xowa_prop='app.files.download.enabled'></input> b", "a <input type='checkbox' xowa_prop='app.files.download.enabled' id='xowa_prop_0' checked='checked'></input> b");
-		fxt.App().File_mgr().Download_mgr().Enabled_(false);
+		fxt.App().File_mgr().Wmf_mgr().Enabled_(false);
 		fxt.Exec_get("a <input type='checkbox' xowa_prop='app.files.download.enabled'></input> b", "a <input type='checkbox' xowa_prop='app.files.download.enabled' id='xowa_prop_0'></input> b");
 	}
 	@Test   public void Set_checkbox() {
 		fxt.Init_elem_atr_checked("xowa_prop_0", "true");
-		fxt.App().File_mgr().Download_mgr().Enabled_(false);
+		fxt.App().File_mgr().Wmf_mgr().Enabled_(false);
 		fxt.Test_set("<input type='checkbox' xowa_prop='app.files.download.enabled' checked='checked' id='xowa_prop_0'></input>");
-		Tfds.Eq(true, fxt.App().File_mgr().Download_mgr().Enabled());
+		Tfds.Eq(true, fxt.App().File_mgr().Wmf_mgr().Enabled());
 		fxt.Init_elem_atr_checked("xowa_prop_0", "false");
 		fxt.Test_set("<input type='checkbox' xowa_prop='app.files.download.enabled' id='xowa_prop_0'></input>");
-		Tfds.Eq(false, fxt.App().File_mgr().Download_mgr().Enabled());
+		Tfds.Eq(false, fxt.App().File_mgr().Wmf_mgr().Enabled());
 	}
 	@Test   public void Get_textarea() {
 		fxt.Exec_get("<textarea xowa_prop='app.user.name'></textarea>", "<textarea xowa_prop='app.user.name' id='xowa_prop_0'>test_user</textarea>");
@@ -105,7 +105,7 @@ public class Prefs_mgr_tst {
 	}
 }
 class Prefs_mgr_fxt {
-	public Xoa_app App() {return app;} private Xoa_app app; 
+	public Xoae_app App() {return app;} private Xoae_app app; 
 	public void Clear() {
 		if (app == null) {
 			GfsCore._.Clear();	// NOTE: clear GfsCore, else Props test will fail for mass run

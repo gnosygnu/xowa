@@ -21,11 +21,11 @@ import gplx.xowa.apps.fsys.*;
 public class Xoh_tidy_mgr implements GfoInvkAble {
 	private Xoh_tidy_wkr wkr = Xoh_tidy_wkr_.Wkr_null; // TEST: set default wkr to null
 	private Xoh_tidy_wkr_tidy wkr_tidy = new Xoh_tidy_wkr_tidy(); private Xoh_tidy_wkr_jtidy wkr_jtidy = new Xoh_tidy_wkr_jtidy();
-	public void Init_by_app(Xoa_app app) {
+	public void Init_by_app(Xoae_app app) {
 		wkr_tidy.Init_by_app(app);
 		wkr_jtidy.Init_by_app(app);
 		Xoa_fsys_eval cmd_eval = app.Url_cmd_eval();
-		ProcessAdp.ini_(this, app.Gui_wtr(), wkr_tidy, cmd_eval, ProcessAdp.Run_mode_sync_timeout, 1 * 60, "~{<>bin_plat_dir<>}tidy" + Op_sys.Cur().Fsys_dir_spr_str() +  "tidy", Xoh_tidy_wkr_tidy.Args_fmt, "source", "target");
+		ProcessAdp.ini_(this, app.Usr_dlg(), wkr_tidy, cmd_eval, ProcessAdp.Run_mode_sync_timeout, 1 * 60, "~{<>bin_plat_dir<>}tidy" + Op_sys.Cur().Fsys_dir_spr_str() +  "tidy", Xoh_tidy_wkr_tidy.Args_fmt, "source", "target");
 		Wkr_tid_(Xoh_tidy_wkr_.Tid_jtidy);
 	}
 	public boolean Enabled() {return enabled;} private boolean enabled = true;
@@ -36,7 +36,7 @@ public class Xoh_tidy_mgr implements GfoInvkAble {
 			: (Xoh_tidy_wkr)wkr_tidy
 			;
 	}
-	public void Run_tidy_html(Xoa_page page, Bry_bfr bfr) {
+	public void Run_tidy_html(Xoae_page page, Bry_bfr bfr) {
 		if (bfr.Len_eq_0()) return;						// document is empty; do not exec b/c tidy will never generate files for 0 len files, and previous file will remain; DATE:2014-06-04
 		Tidy_wrap(bfr);
 		wkr.Exec_tidy(page, bfr);

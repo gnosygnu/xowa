@@ -22,7 +22,7 @@ public class Pfunc_displaytitle extends Pf_func_base {
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_displaytitle().Name_(name);}
 	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {
 		byte[] val_dat_ary = Eval_argx(ctx, src, caller, self);
-		Xow_wiki wiki = ctx.Wiki(); Xop_parser parser = wiki.Parser();
+		Xowe_wiki wiki = ctx.Wiki(); Xop_parser parser = wiki.Parser();
 		Xop_ctx display_ttl_ctx = Xop_ctx.new_sub_(wiki);
 		Xop_root_tkn display_ttl_root = parser.Parse_text_to_wdom(display_ttl_ctx, val_dat_ary, false);
 		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
@@ -31,7 +31,7 @@ public class Pfunc_displaytitle extends Pf_func_base {
 		wiki.Html_mgr().Html_wtr().Write_tkn(tmp_bfr, display_ttl_ctx, hctx, display_ttl_root.Data_mid(), display_ttl_root, 0, display_ttl_root);
 		byte[] val_html = tmp_bfr.Xto_bry_and_clear();
 		if (restrict) {	// restrict only allows displayTitles which have text similar to the pageTitle; PAGE:de.b:Kochbuch/_Druckversion; DATE:2014-08-18
-			Xoa_page page = ctx.Cur_page();
+			Xoae_page page = ctx.Cur_page();
 			wiki.Html_mgr().Html_wtr().Write_tkn(tmp_bfr, display_ttl_ctx, Xoh_wtr_ctx.Alt, display_ttl_root.Data_mid(), display_ttl_root, 0, display_ttl_root);
 			byte[] val_html_lc = tmp_bfr.Xto_bry_and_clear();
 			Xol_case_mgr case_mgr = wiki.Lang().Case_mgr();

@@ -28,7 +28,7 @@ public class Pfunc_ifexist extends Pf_func_base {
 		else
 			rslt_bfr.Add(Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, args_len, 1));
 	}
-	public static boolean Exists(Xow_wiki wiki, byte[] ttl_bry) {
+	public static boolean Exists(Xowe_wiki wiki, byte[] ttl_bry) {
 		synchronized (Mgr) {return Mgr.Exists(wiki, ttl_bry);}
 	}
 	public static final Pfunc_ifexist_mgr Mgr = new Pfunc_ifexist_mgr();

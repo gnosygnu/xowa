@@ -18,15 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.translates; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.specials.*;
 public class Xop_mylanguage_page implements Xows_page {
-	public void Special_gen(Xoa_url calling_url, Xoa_page page, Xow_wiki wiki, Xoa_ttl ttl) {
+	public void Special_gen(Xoa_url calling_url, Xoae_page page, Xowe_wiki wiki, Xoa_ttl ttl) {
 		// Special:MyLanguage/Help:A -> Help:A/fr
 		byte[] page_bry = ttl.Leaf_txt_wo_qarg(); 					// EX: Help:A
-		byte[] lang_key = wiki.App().User().Lang().Key_bry();		// EX: fr
+		byte[] lang_key = wiki.Appe().User().Lang().Key_bry();		// EX: fr
 		byte[] trg_bry = page_bry;
 		boolean lang_is_english = Bry_.Eq(lang_key, Xol_lang_.Key_en); 
 		if (!lang_is_english)
 			trg_bry = Bry_.Add_w_dlm(Xoa_ttl.Subpage_spr, page_bry, lang_key);
-		Xoa_page found_page = wiki.Data_mgr().Redirect(page, trg_bry);
+		Xoae_page found_page = wiki.Data_mgr().Redirect(page, trg_bry);
 		if (found_page.Missing() && !lang_is_english)	// foreign lang does not exist; default to english
 			wiki.Data_mgr().Redirect(page, page_bry);
 	}

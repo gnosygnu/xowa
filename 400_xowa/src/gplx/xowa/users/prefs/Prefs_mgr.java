@@ -18,14 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.users.prefs; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.core.primitives.*; import gplx.html.*; import gplx.gfui.*;
 public class Prefs_mgr implements GfoInvkAble {
-	public Prefs_mgr(Xoa_app app) {
+	public Prefs_mgr(Xoae_app app) {
 		this.app = app;
 		atrs_hash = Hash_adp_bry.cs_();
 		atrs_hash.Add(Bry_prop, Byte_obj_val.new_(Tid_prop));
 		atrs_hash.Add(Bry_prop_get, Byte_obj_val.new_(Tid_prop_get));
 		atrs_hash.Add(Bry_prop_set, Byte_obj_val.new_(Tid_prop_set));
 		html_wtr = new Prefs_html_wtr(this);
-	}	private Xoa_app app; private Hash_adp_bry atrs_hash; private Html_parser html_rdr = new Html_parser(); private Prefs_html_wtr html_wtr;
+	}	private Xoae_app app; private Hash_adp_bry atrs_hash; private Html_parser html_rdr = new Html_parser(); private Prefs_html_wtr html_wtr;
 	private Prefs_trg_mgr option_trgs_mgr = new Prefs_trg_mgr();
 	public void Html_box_mok_(Gfui_html v) {this.html_box_mok = v;} private Gfui_html html_box_mok;
 	public byte[] Props_get(byte[] src) {
@@ -50,9 +50,9 @@ public class Prefs_mgr implements GfoInvkAble {
 		return bfr.Xto_bry_and_clear();
 	}	private Bry_fmtr props_get_fmtr; 
 	private void Props_set_and_reload() {
-		Xoa_page page = app.Gui_mgr().Browser_win().Active_page();
+		Xoae_page page = app.Gui_mgr().Browser_win().Active_page();
 		Props_set(page.Data_raw());
-		page.Wiki().ParsePage_root(page, true);	// reparse in order to save new values to root; needed for history and going back / fwd; DATE:2014-02-07
+		page.Wikie().ParsePage_root(page, true);	// reparse in order to save new values to root; needed for history and going back / fwd; DATE:2014-02-07
 		app.Api_root().Gui().Page().View().Reload();	// force reload to update page; needed for language; DATE:2014-05-26
 		app.Usr_dlg().Prog_direct("options saved (" + DateAdp_.Now().XtoStr_fmt("HH:mm:ss") + ")");
 	}
@@ -99,7 +99,7 @@ public class Prefs_mgr implements GfoInvkAble {
 		catch (Exception e) {Err_.Noop(e); return null;}		
 	}
 	byte[] Parse_wikitext_to_html(byte[] src) {
-		Xow_wiki wiki = app.User().Wiki();		
+		Xowe_wiki wiki = app.User().Wiki();		
 		Xop_root_tkn root = new Xop_root_tkn();
 		Xop_ctx ctx = wiki.Ctx();
 		ctx.Cur_page().Clear();

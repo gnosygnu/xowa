@@ -29,7 +29,7 @@ public class Xol_cnv_mgr_tst {
 		fxt.Parser_fxt().Init_page_create("Template:X1", "val");
 		fxt.Parser_fxt().Test_parse_tmpl_str_test("{{x0}}", "{{test}}", "val");
 	}
-	@Test  public void Redlink() {		// PURPOSE: check redlink's Convert_ttl(Xow_wiki wiki, Xoa_ttl ttl); DATE:2014-07-06
+	@Test  public void Redlink() {		// PURPOSE: check redlink's Convert_ttl(Xowe_wiki wiki, Xoa_ttl ttl); DATE:2014-07-06
 		fxt.Parser_fxt().Init_page_create("Template:Test_x1", "val");
 		fxt.Test_convert_by_ttl("zh", "Template:Test_x0", Bool_.Y);	// Template:Test_xo should not be parsed to Template:Template:Test_x0; EX:Шаблон:Šablon:Jez-eng; PAGE:sr.w:ДНК DATE:2014-07-06
 		fxt.Test_convert_by_ttl("zh", "Template:Test_x1", Bool_.N);	// note that convert of trg should not find title;
@@ -42,8 +42,8 @@ public class Xol_cnv_mgr_tst {
 	}
 }
 class Xol_cnv_mgr_fxt {
-	public Xoa_app App() {return app;} private Xoa_app app;
-	public Xow_wiki Wiki() {return wiki;} private Xow_wiki wiki;
+	public Xoae_app App() {return app;} private Xoae_app app;
+	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public Xop_fxt Parser_fxt() {return parser_fxt;} private Xop_fxt parser_fxt;
 	public void Clear() {
 		app = Xoa_app_fxt.app_();
@@ -55,7 +55,7 @@ class Xol_cnv_mgr_fxt {
 		wiki = Xoa_app_fxt.wiki_(app, "zh.wikipedia.org", lang);
 		parser_fxt = new Xop_fxt(app, wiki);
 	}
-	public static void Init_cnv(Xoa_app app, String lang_key, String vnt_key, KeyVal... ary) {
+	public static void Init_cnv(Xoae_app app, String lang_key, String vnt_key, KeyVal... ary) {
 		Xol_lang lang = app.Lang_mgr().Get_by_key_or_new(Bry_.new_ascii_(lang_key));
 		Xol_cnv_grp grp = lang.Cnv_mgr().Get_or_make(Bry_.new_ascii_(vnt_key));
 		int ary_len = ary.length;

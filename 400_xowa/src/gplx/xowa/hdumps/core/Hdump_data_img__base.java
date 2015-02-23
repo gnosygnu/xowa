@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.hdumps.*;
-import gplx.xowa.hdumps.dbs.*;
+import gplx.xowa.hdumps.dbs.*; import gplx.xowa.files.repos.*;
 public abstract class Hdump_data_img__base implements Hdump_data_itm {
 	public Hdump_data_img__base Init_by_base(byte[] lnki_ttl, int html_uid, int html_w, int html_h, int file_repo_id, int file_ext_id, boolean file_is_orig, int file_w, double file_time, int file_page) {
 		this.lnki_ttl = lnki_ttl;

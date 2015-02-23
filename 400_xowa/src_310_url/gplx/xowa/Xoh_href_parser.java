@@ -28,8 +28,8 @@ public class Xoh_href_parser {
 		segs.Add_stubs(Seg__ary);
 	}
 	public Url_encoder Encoder() {return encoder;} private Url_encoder encoder; 
-	public void Parse(Xoh_href rv, String raw, Xow_wiki wiki, byte[] cur_page) {Parse(rv, Bry_.new_utf8_(raw), wiki, cur_page);}
-	public void Parse(Xoh_href rv, byte[] raw, Xow_wiki wiki, byte[] cur_page) {
+	public void Parse(Xoh_href rv, String raw, Xowe_wiki wiki, byte[] cur_page) {Parse(rv, Bry_.new_utf8_(raw), wiki, cur_page);}
+	public void Parse(Xoh_href rv, byte[] raw, Xowe_wiki wiki, byte[] cur_page) {
 		int bgn = 0, raw_len = raw.length; int file_slash_end = 0;
 		url_parser.Parse(tmp_url, raw, 0, raw_len);		// parse as regular tmp_url to get protocol
 		rv.Init(raw, tmp_url.Protocol_tid());
@@ -48,7 +48,7 @@ public class Xoh_href_parser {
 				bgn = file_slash_end = Bry_.While_fwd(raw, Byte_ascii.Slash, tmp_url.Protocol_bry().length, raw_len);
 				rv.Tid_(Xoh_href.Tid_xowa);
 				rv.Wiki_(wiki.Domain_bry());										// wiki is always the current wiki
-				byte[] page = wiki.App().Encoder_mgr().Gfs().Decode(Bry_.Mid(raw, bgn, raw_len));
+				byte[] page = Xoa_app_.Utl_encoder_mgr().Gfs().Decode(Bry_.Mid(raw, bgn, raw_len));
 				rv.Page_(page);														// page is everything after "/xcmd/"; individual cmds will do further parsing; note that it should be decoded; EX: %20 -> " "; also note that anchor (#) or query params (?) are not parsed; the entire String will be reparsed later
 				return;
 		}
@@ -72,10 +72,10 @@ public class Xoh_href_parser {
 			}
 		}
 	}
-	public byte[] Build_to_bry(Xow_wiki wiki, Xoa_ttl ttl)				{Build_to_bfr(tmp_bfr, wiki, ttl, Bool_.N); return tmp_bfr.Xto_bry_and_clear();}
-	public void Build_to_bfr(Bry_bfr bfr, Xow_wiki wiki, byte[] raw)	{Build_to_bfr(bfr, wiki, Xoa_ttl.parse_(wiki, raw), Bool_.N);}
-	public void Build_to_bfr(Bry_bfr bfr, Xow_wiki wiki, Xoa_ttl ttl)	{Build_to_bfr(bfr, wiki, ttl, Bool_.N);}
-	public void Build_to_bfr(Bry_bfr bfr, Xow_wiki wiki, Xoa_ttl ttl, boolean force_site) {
+	public byte[] Build_to_bry(Xowe_wiki wiki, Xoa_ttl ttl)				{Build_to_bfr(tmp_bfr, wiki, ttl, Bool_.N); return tmp_bfr.Xto_bry_and_clear();}
+	public void Build_to_bfr(Bry_bfr bfr, Xowe_wiki wiki, byte[] raw)	{Build_to_bfr(bfr, wiki, Xoa_ttl.parse_(wiki, raw), Bool_.N);}
+	public void Build_to_bfr(Bry_bfr bfr, Xowe_wiki wiki, Xoa_ttl ttl)	{Build_to_bfr(bfr, wiki, ttl, Bool_.N);}
+	public void Build_to_bfr(Bry_bfr bfr, Xowe_wiki wiki, Xoa_ttl ttl, boolean force_site) {
 		byte[] page = ttl.Full_txt_raw();
 		Xow_xwiki_itm xwiki = ttl.Wik_itm();
 		if (xwiki == null)																		// not an xwiki; EX: [[wikt:Word]]
@@ -97,14 +97,14 @@ public class Xoh_href_parser {
 			else {}																				// anchor: noop
 		}
 		else {																					// xwiki
-			if (wiki.App().Xwiki_missing(xwiki.Domain())) {										// xwiki is not offline; use http:
+			if (wiki.Appe().Xwiki_missing(xwiki.Domain_bry())) {									// xwiki is not offline; use http:
 				bfr.Add(Href_http_bry);															// add "http://";	EX: http://
-				bfr.Add(xwiki.Domain());														// add xwiki;		EX: en_dict	 
+				bfr.Add(xwiki.Domain_bry());													// add xwiki;		EX: en_dict	 
 				bfr.Add(Href_wiki_bry);															// add "/wiki/";	EX: /wiki/
 			}
 			else {																				// xwiki is avaiable; use /site/
 				bfr.Add(Href_site_bry);															// add "/site/";	EX: /site/
-				bfr.Add(xwiki.Domain());														// add xwiki;		EX: en_dict	 
+				bfr.Add(xwiki.Domain_bry());													// add xwiki;		EX: en_dict	 
 				bfr.Add(Href_wiki_bry);															// add "/wiki/";	EX: /wiki/
 			}
 		}
@@ -128,20 +128,20 @@ public class Xoh_href_parser {
 	static final byte Seg_null_tid = 0, Seg_wiki_tid = 1, Seg_site_tid = 2, Seg_xcmd_tid = 3;
 	private static final byte[] Seg_null_bry = Bry_.new_ascii_("/null/"), Seg_wiki_bry = Bry_.new_ascii_(Href_wiki_str), Seg_site_bry = Bry_.new_ascii_(Href_site_str), Seg_xcmd_bry = Bry_.new_ascii_(Href_xcmd_str);
 	private static final byte[][] Seg__ary = new byte[][] {Seg_null_bry, Seg_wiki_bry, Seg_site_bry, Seg_xcmd_bry};
-	private static void Parse_wiki(Xoh_href rv, Url_encoder encoder, Xow_wiki wiki, byte[] raw, int bgn, int len) {
+	private static void Parse_wiki(Xoh_href rv, Url_encoder encoder, Xowe_wiki wiki, byte[] raw, int bgn, int len) {
 		byte[] ttl_raw = Bry_.Mid(raw, bgn, len);
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_raw);
 		if (ttl == null) {
-			wiki.App().Gui_wtr().Warn_many("xowa.href.parser", "invalid_wiki", "wiki href does not have valid title: ~{0}", String_.new_utf8_(raw, bgn, len));
+			wiki.Appe().Usr_dlg().Warn_many("xowa.href.parser", "invalid_wiki", "wiki href does not have valid title: ~{0}", String_.new_utf8_(raw, bgn, len));
 			return;
 		}
 		if (ttl.Wik_itm() == null) {										// standard href; EX: "/wiki/A"
 			rv.Tid_(Xoh_href.Tid_wiki);
-			rv.Wiki_(wiki.Domain_bry());										// wiki is always the current wiki
+			rv.Wiki_(wiki.Domain_bry());									// wiki is always the current wiki
 		}
 		else {																// embedded xwiki prefix; EX: "/wiki/fr:A"
 			rv.Tid_(Xoh_href.Tid_site);
-			rv.Wiki_(ttl.Wik_itm().Domain());								// wiki is the xwiki prefix; EX: "en.wikpedia.org//wiki/fr:A" -> "fr.wikpedia.org/wiki/A"
+			rv.Wiki_(ttl.Wik_itm().Domain_bry());							// wiki is the xwiki prefix; EX: "en.wikpedia.org//wiki/fr:A" -> "fr.wikpedia.org/wiki/A"
 		}
 		byte[] page_bry = encoder.Decode(ttl.Full_txt());					// note that Full is everything except for ns, so it handles "fr:A" ("fr:" being treated as ns, so only "A" will be Full_txt)
 		if (Bry_.Len_eq_0(page_bry))										// handle xwiki hrefs like "fr:"; EX: "/wiki/wikipedia:" on en.wikisource.org/Main Page
@@ -151,14 +151,14 @@ public class Xoh_href_parser {
 		rv.Page_(page_bry);							// add page; note that it should be decoded; EX: %20 -> " "; also note that anchor (#) or query params (?) are not parsed; the entire String will be reparsed later
 		if (ttl.Anch_bgn() != Bry_.NotFound) rv.Anchor_(ttl.Anch_txt());
 	}
-	private static void Parse_site(Xoh_href rv, Url_encoder encoder, Xow_wiki wiki, byte[] raw, int bgn, int len) {	// /site/; EX: /site/fr.wikipedia.org/wiki/A
+	private static void Parse_site(Xoh_href rv, Url_encoder encoder, Xowe_wiki wiki, byte[] raw, int bgn, int len) {	// /site/; EX: /site/fr.wikipedia.org/wiki/A
 		int slash = Bry_finder.Find_fwd(raw, Byte_ascii.Slash, bgn, len); if (slash == Bry_.NotFound) throw Err_mgr._.fmt_("xowa.href.parser", "invalid_site", "site href is missing slash: ~{0}", String_.new_utf8_(raw, bgn, len));
 		rv.Tid_(Xoh_href.Tid_site);
 		byte[] wiki_bry = Bry_.Mid(raw, bgn, slash);					// wiki is text between "/site/" and next "/"
-		Xow_xwiki_itm xwiki = wiki.App().User().Wiki().Xwiki_mgr().Get_by_key(wiki_bry);	// NOTE: site may refer to alias in user_wiki; ex: /site/wikisource.org which points to en.wikisource.org; this occurs during lnke substitution; EX: [//wikisource.org Wikisource]
+		Xow_xwiki_itm xwiki = wiki.Appe().User().Wiki().Xwiki_mgr().Get_by_key(wiki_bry);	// NOTE: site may refer to alias in user_wiki; ex: /site/wikisource.org which points to en.wikisource.org; this occurs during lnke substitution; EX: [//wikisource.org Wikisource]
 		if (xwiki != null) {
-			wiki_bry = xwiki.Domain();
-			wiki = wiki.App().Wiki_mgr().Get_by_key_or_make(wiki_bry);		// NOTE: xwiki links should use case_match of xwiki (en.wiktionary.org) not cur_wiki (en.wikipedia.org); EX:w:alphabet
+			wiki_bry = xwiki.Domain_bry();
+			wiki = wiki.Appe().Wiki_mgr().Get_by_key_or_make(wiki_bry);		// NOTE: xwiki links should use case_match of xwiki (en.wiktionary.org) not cur_wiki (en.wikipedia.org); EX:w:alphabet
 		}
 		rv.Wiki_(wiki_bry);
 		int page_pos = slash + Href_wiki_len;
@@ -174,9 +174,9 @@ public class Xoh_href_parser {
 //				rv.Qarg_(qarg_bry);
 //				page_bry = Bry_.Mid(page_bry, 0, qarg_pos);
 //			}
-		Parse_ttl_and_resolve_xwiki(wiki.App().Usr_dlg(), rv, wiki, encoder, page_bry, raw, bgn, len);
+		Parse_ttl_and_resolve_xwiki(wiki.Appe().Usr_dlg(), rv, wiki, encoder, page_bry, raw, bgn, len);
 	}
-	private static void Parse_ttl_and_resolve_xwiki(Gfo_usr_dlg usr_dlg, Xoh_href rv, Xow_wiki wiki, Url_encoder encoder, byte[] page_bry, byte[] raw, int bgn, int len) {
+	private static void Parse_ttl_and_resolve_xwiki(Gfo_usr_dlg usr_dlg, Xoh_href rv, Xowe_wiki wiki, Url_encoder encoder, byte[] page_bry, byte[] raw, int bgn, int len) {
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, page_bry);
 		if (ttl == null) {
 			usr_dlg.Warn_many("xowa.href.parser", "invalid_wiki", "wiki href does not have valid title: ~{0}", String_.new_utf8_(raw, bgn, len));
@@ -184,7 +184,7 @@ public class Xoh_href_parser {
 			return;
 		}
 		if (ttl.Wik_itm() != null) {				// page_bry has xwiki; EX: "wikt:A"; note that since this is called by "/site/", there may be two xwikis; EX: "w:wikt:"; Note that more than 2 is not being handled 
-			wiki = wiki.App().Wiki_mgr().Get_by_key_or_make(ttl.Wik_itm().Domain());
+			wiki = wiki.Appe().Wiki_mgr().Get_by_key_or_make(ttl.Wik_itm().Domain_bry());
 			rv.Wiki_(wiki.Domain_bry());
 			if (Bry_.Len_eq_0(ttl.Page_txt()))	// page_bry is just alias; EX: "wikt:"
 				page_bry = wiki.Props().Main_page();
@@ -196,7 +196,7 @@ public class Xoh_href_parser {
 		if (ttl.Anch_bgn() != Bry_.NotFound)	// add anchor if it exists
 			rv.Anchor_(ttl.Anch_txt());
 	}
-	private static void Parse_xcmd(Xoh_href rv, Url_encoder encoder, Xow_wiki wiki, byte[] raw, int bgn, int len) {	// /xcmd/; note encoder is passed, but don't decode for now; most invk commands have an _ which will get changed to a " ";
+	private static void Parse_xcmd(Xoh_href rv, Url_encoder encoder, Xowe_wiki wiki, byte[] raw, int bgn, int len) {	// /xcmd/; note encoder is passed, but don't decode for now; most invk commands have an _ which will get changed to a " ";
 		rv.Tid_(Xoh_href.Tid_xcmd);
 		rv.Wiki_(wiki.Domain_bry());										// wiki is always the current wiki
 		rv.Page_(Bry_.Mid(raw, bgn, len));								// page is everything after "/xcmd/"; individual cmds will do further parsing; note that it should be decoded; EX: %20 -> " "; also note that anchor (#) or query params (?) are not parsed; the entire String will be reparsed later

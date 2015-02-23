@@ -23,18 +23,18 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 	private final Wdata_doc_parser wdoc_parser_v1, wdoc_parser_v2;
 	private final Wdata_prop_val_visitor prop_val_visitor;
 	private Wdata_hwtr_mgr hwtr_mgr;
-	public Wdata_wiki_mgr(Xoa_app app) {
+	public Wdata_wiki_mgr(Xoae_app app) {
 		this.app = app;
 		this.evMgr = GfoEvMgr.new_(this);
 		wdoc_parser_v1 = new Wdata_doc_parser_v1();
 		wdoc_parser_v2 = new Wdata_doc_parser_v2();
 		doc_cache = app.Cache_mgr().Doc_cache();
 		prop_val_visitor = new Wdata_prop_val_visitor(app, this);
-	}	private Xoa_app app; gplx.xowa.apps.caches.Wdata_doc_cache doc_cache;
+	}	private Xoae_app app; gplx.xowa.apps.caches.Wdata_doc_cache doc_cache;
 	public GfoEvMgr EvMgr() {return evMgr;} private GfoEvMgr evMgr;
 	public boolean Enabled() {return enabled;} public void Enabled_(boolean v) {enabled = v;} private boolean enabled = true;
 	public byte[] Domain() {return domain;} public void Domain_(byte[] v) {domain = v;} private byte[] domain = Bry_.new_ascii_("www.wikidata.org");
-	public Xow_wiki Wdata_wiki() {if (wdata_wiki == null) wdata_wiki = app.Wiki_mgr().Get_by_key_or_make(domain).Init_assert(); return wdata_wiki;} private Xow_wiki wdata_wiki;
+	public Xowe_wiki Wdata_wiki() {if (wdata_wiki == null) wdata_wiki = app.Wiki_mgr().Get_by_key_or_make(domain).Init_assert(); return wdata_wiki;} private Xowe_wiki wdata_wiki;
 	public Json_parser Jdoc_parser() {return jdoc_parser;} private Json_parser jdoc_parser = new Json_parser();
 	public void Init_by_app() {}
 	public Wdata_doc_parser Wdoc_parser(Json_doc jdoc) {
@@ -48,12 +48,12 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 		pids_cache.Clear();
 		doc_cache.Clear();
 	}	private Hash_adp_bry qids_cache = Hash_adp_bry.cs_(), pids_cache = Hash_adp_bry.cs_();
-	public void Qids_add(Bry_bfr bfr, byte[] lang_key, byte wiki_tid, byte[] ns_num, byte[] ttl, byte[] qid) {
+	public void Qids_add(Bry_bfr bfr, byte[] lang_key, int wiki_tid, byte[] ns_num, byte[] ttl, byte[] qid) {
 		Xow_wiki_alias.Build_alias_by_lang_tid(bfr, lang_key, wiki_tid_ref.Val_(wiki_tid));
 		byte[] qids_key = bfr.Add_byte(Byte_ascii.Pipe).Add(ns_num).Add_byte(Byte_ascii.Pipe).Add(ttl).Xto_bry();
 		qids_cache.Add(qids_key, qid);
 	}
-	public byte[] Qids_get(Xow_wiki wiki, Xoa_ttl ttl) {return Qids_get(wiki.Wdata_wiki_abrv(), ttl);}
+	public byte[] Qids_get(Xowe_wiki wiki, Xoa_ttl ttl) {return Qids_get(wiki.Wdata_wiki_abrv(), ttl);}
 	private byte[] Qids_get(byte[] wiki_abrv, Xoa_ttl ttl) {
 		if (!enabled) return null;
 		if (Bry_.Len_eq_0(wiki_abrv)) return null;	// "other" wikis will never call wikidata
@@ -67,7 +67,7 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 			}
 			return Bry_.Len_eq_0(rv) ? null : rv;				// JAVA: convert Bry_.Empty to null
 		}
-	}	private Byte_obj_ref wiki_tid_ref = Byte_obj_ref.zero_(); private Wdata_qid_key qid_key = new Wdata_qid_key();
+	}	private Int_obj_ref wiki_tid_ref = Int_obj_ref.zero_(); private Wdata_qid_key qid_key = new Wdata_qid_key();
 	public Int_obj_val Pids_add(byte[] pids_key, int pid_id) {Int_obj_val rv = Int_obj_val.new_(pid_id); pids_cache.Add(pids_key, rv); return rv;}
 	public int Pids_get(byte[] lang_key, byte[] pid_name) {
 		if (!enabled) return Pid_null;
@@ -82,7 +82,7 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 	public void Pages_add(byte[] qid, Wdata_doc page) {
 		doc_cache.Add(qid, page);
 	}
-	public Wdata_doc Pages_get(Xow_wiki wiki, Xoa_ttl ttl, Wdata_pf_property_data data) {
+	public Wdata_doc Pages_get(Xowe_wiki wiki, Xoa_ttl ttl, Wdata_pf_property_data data) {
 		if		(data.Q()	!= null)	return Pages_get(data.Q());
 		else if (data.Of()	!= null) {
 			Xoa_ttl of_ttl = Xoa_ttl.parse_(wiki, data.Of()); if (of_ttl == null) return null;
@@ -91,7 +91,7 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 		}
 		else							return Pages_get(wiki, ttl);
 	}
-	public Wdata_doc Pages_get(Xow_wiki wiki, Xoa_ttl ttl) {byte[] qid_bry = Qids_get(wiki, ttl); return qid_bry == null? null : Pages_get(qid_bry);}
+	public Wdata_doc Pages_get(Xowe_wiki wiki, Xoa_ttl ttl) {byte[] qid_bry = Qids_get(wiki, ttl); return qid_bry == null? null : Pages_get(qid_bry);}
 	public Wdata_doc Pages_get_by_ttl_name(byte[] ttl_bry) {
 		if (Byte_ascii.Case_lower(ttl_bry[0]) == Byte_ascii.Ltr_p)	// if ttl starts with "p", change title to "Property:" ns; DATE:2014-02-18
 			ttl_bry = Bry_.Add_w_dlm(Byte_ascii.Colon, Wdata_wiki_mgr.Ns_property_name_bry, ttl_bry);
@@ -143,7 +143,7 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 		}
 	}
 	public static final byte[] Bry_q = Bry_.new_ascii_("q"), Prop_tmpl_val_dlm = Bry_.new_ascii_(", ");
-	public byte[] Popup_text(Xoa_page page) {
+	public byte[] Popup_text(Xoae_page page) {
 		Hwtr_mgr_assert();
 		Wdata_doc wdoc = this.Pages_get_by_ttl_name(page.Ttl().Page_db());			 
 		return hwtr_mgr.Popup(wdoc);
@@ -159,14 +159,14 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 		Xoapi_toggle_mgr toggle_mgr = app.Api_root().Html().Page().Toggle_mgr();
 		Xoapi_wikibase wikibase_api = app.Api_root().Xtns().Wikibase();
 		hwtr_mgr = new Wdata_hwtr_mgr();
-		hwtr_mgr.Init_by_ctor(wikibase_api, new Wdata_lbl_wkr_wiki(wikibase_api, this), app.Encoder_mgr().Href(), toggle_mgr, app.User().Wiki().Xwiki_mgr());
+		hwtr_mgr.Init_by_ctor(wikibase_api, new Wdata_lbl_wkr_wiki(wikibase_api, this), Xoa_app_.Utl_encoder_mgr().Href(), toggle_mgr, app.User().Wiki().Xwiki_mgr());
 		this.Hwtr_msgs_make();
 		GfoEvMgr_.SubSame_many(app.User(), this, Xou_user.Evt_lang_changed);
 	}
 	private void Hwtr_msgs_make() {
-		if (!app.Wiki_mgr().Wiki_regy().Has(Xow_wiki_domain_.Url_wikidata)) return;
+		if (!app.Wiki_mgr().Wiki_regy().Has(Xow_domain_.Domain_bry_wikidata)) return;
 		Xol_lang new_lang = app.User().Lang();
-		Xow_wiki cur_wiki = this.Wdata_wiki();			
+		Xowe_wiki cur_wiki = this.Wdata_wiki();			
 		cur_wiki.Xtn_mgr().Xtn_wikibase().Load_msgs(cur_wiki, new_lang);
 		Wdata_hwtr_msgs hwtr_msgs = Wdata_hwtr_msgs.new_(cur_wiki.Msg_mgr());
 		hwtr_mgr.Init_by_lang(hwtr_msgs);
@@ -180,7 +180,7 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 	private Json_doc Get_json(byte[] qid_bry) {
 		if (!enabled) return null;
 		Xoa_ttl qid_ttl = Xoa_ttl.parse_(this.Wdata_wiki(), qid_bry); if (qid_ttl == null) {app.Usr_dlg().Warn_many("", "", "invalid qid for ttl: qid=~{0}", String_.new_utf8_(qid_bry)); return null;}
-		Xoa_page qid_page = this.Wdata_wiki().Data_mgr().Get_page(qid_ttl, false); if (qid_page.Missing()) return null;
+		Xoae_page qid_page = this.Wdata_wiki().Data_mgr().Get_page(qid_ttl, false); if (qid_page.Missing()) return null;
 		byte[] src = qid_page.Data_raw();
 		return jdoc_parser.Parse(src);
 	}	
@@ -204,13 +204,13 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 	public static final byte[] Ns_property_name_bry = Bry_.new_ascii_(Ns_property_name);
 	public static final int Pid_null = -1;
 	public static final byte[] Html_json_id = Bry_.new_ascii_("xowa-wikidata-json");
-	public static boolean Wiki_page_is_json(byte wiki_tid, int ns_id) {
+	public static boolean Wiki_page_is_json(int wiki_tid, int ns_id) {
 		switch (wiki_tid) {
-			case Xow_wiki_domain_.Tid_wikidata:
+			case Xow_domain_.Tid_int_wikidata:
 				if (ns_id == Xow_ns_.Id_main || ns_id == gplx.xowa.xtns.wdatas.Wdata_wiki_mgr.Ns_property)
 					return true;
 				break;
-			case Xow_wiki_domain_.Tid_home:
+			case Xow_domain_.Tid_int_home:
 				if (ns_id == gplx.xowa.xtns.wdatas.Wdata_wiki_mgr.Ns_property)
 					return true;
 				break;
@@ -218,7 +218,7 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 		return false;
 	}
 	public static void Log_missing_qid(Xop_ctx ctx, byte[] qid) {
-		ctx.Wiki().App().Usr_dlg().Log_many("", "", "qid not found in wikidata; qid=~{0} page=~{1}", String_.new_utf8_(qid), String_.new_utf8_(ctx.Cur_page().Ttl().Page_db()));
+		ctx.Wiki().Appe().Usr_dlg().Log_many("", "", "qid not found in wikidata; qid=~{0} page=~{1}", String_.new_utf8_(qid), String_.new_utf8_(ctx.Cur_page().Ttl().Page_db()));
 	}
 }
 class Wdata_qid_key {

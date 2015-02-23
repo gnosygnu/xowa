@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.apis.xowa; import gplx.*; import gplx.xowa.*; import gplx.xowa.apis.*;
 import gplx.xowa.apis.xowa.xtns.*;
 public class Xoapi_xtns implements GfoInvkAble {
-	public void Init_by_kit(Xoa_app app) {
+	public void Init_by_kit(Xoae_app app) {
 		scribunto.Init_by_kit(app);
 	}
 	public Xoapi_scribunto		Scribunto()		{return scribunto;} private final Xoapi_scribunto scribunto = new Xoapi_scribunto();

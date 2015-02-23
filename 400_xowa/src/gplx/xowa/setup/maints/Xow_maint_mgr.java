@@ -17,10 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.setup.maints; import gplx.*; import gplx.xowa.*; import gplx.xowa.setup.*;
 public class Xow_maint_mgr implements GfoInvkAble {
-	public Xow_maint_mgr(Xow_wiki wiki) {
+	public Xow_maint_mgr(Xowe_wiki wiki) {
 		this.wiki = wiki;
-		maint_mgr = wiki.App().Setup_mgr().Maint_mgr();
-	}	private Xow_wiki wiki; private Xoa_maint_mgr maint_mgr;
+		maint_mgr = wiki.Appe().Setup_mgr().Maint_mgr();
+	}	private Xowe_wiki wiki; private Xoa_maint_mgr maint_mgr;
 	public DateAdp Wmf_dump_date() {
 		maint_mgr.Wmf_dump_status_loaded_assert();
 		return wmf_dump_date;

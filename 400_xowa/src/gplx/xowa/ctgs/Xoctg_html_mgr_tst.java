@@ -33,7 +33,7 @@ public class Xoctg_html_mgr_tst {
 		byte[] page_bry = Bry_.new_ascii_("A 1");
 		Xoa_url url = Xoa_url.new_(Bry_.new_ascii_("en.wikipedia.org"), page_bry);
 		Xoa_ttl ttl = Xoa_ttl.parse_(fxt.Wiki(), page_bry);
-		fxt.Wiki().App().User().History_mgr().Add(url, ttl, page_bry);
+		fxt.Wiki().Appe().User().History_mgr().Add(url, ttl, page_bry);
 		fxt	.Init_itm_page("A_1").Init_ctg_name_("Ctg_1").Init_ctg_pages_(0, 1)
 			.Test_html_all(Xoa_ctg_mgr.Tid_page, String_.Concat_lines_nl_skip_last
 			(	""
@@ -219,8 +219,8 @@ class Xoh_ctg_page_fxt {
 			ctg = new Xoctg_view_ctg();
 		}
 		return this;
-	}	private Xoa_app app; private Xoctg_html_mgr ctg_html;
-	public Xow_wiki Wiki() {return wiki;} private Xow_wiki wiki; 
+	}	private Xoae_app app; private Xoctg_html_mgr ctg_html;
+	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki; 
 	public Xoctg_view_ctg Ctg() {return ctg;} private Xoctg_view_ctg ctg;
 	public void Test_bld_rslts_lnk(boolean next, String ctg_str, String expd) {			
 		byte[] actl = ctg_html.Fmtr(Xoa_ctg_mgr.Tid_page).Grp_max_(0).Bld_bwd_fwd(wiki, Xoa_ttl.parse_(wiki, Bry_.new_ascii_(ctg_str)), ctg.Grp_by_tid(Xoa_ctg_mgr.Tid_page));

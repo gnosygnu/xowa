@@ -50,5 +50,8 @@ public class Xop_lnki_wkr__uncommon_tst {
 	@Test  public void Large_size() {	// PURPOSE: size larger than int should be discard, not be Int_.MaxValue: PAGE:id.w:Baho; DATE:2014-06-10
 		fxt.Test_html_wiki_frag("[[File:A.png|9999999999x30px]]", " width=\"0\" height=\"30\"");	// width should not be Int_.MaxValue
 	}
+	@Test  public void Upright_is_large() {	// PURPOSE: handle large upright which overflows int; PAGE:de.w:Feuerland DATE:2015-02-03
+		fxt.Test_html_wiki_frag("[[File:A.png|upright=1.333333333333333333333333333333333333333333333333333333333333333333333]]", " width=\"0\" height=\"0\"");	// failure would print out original lnki
+	}
 }
 

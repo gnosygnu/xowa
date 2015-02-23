@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.xowa.langs.numbers.*;
 public class Xow_fragment_mgr implements GfoInvkAble {
-	public Xow_fragment_mgr(Xow_wiki wiki) {this.wiki = wiki;} private Xow_wiki wiki;
+	public Xow_fragment_mgr(Xowe_wiki wiki) {this.wiki = wiki;} private Xowe_wiki wiki;
 	public byte[] Html_js_edit_toolbar() {return html_js_edit_toolbar;} private byte[] html_js_edit_toolbar;
 	private Bry_fmtr html_js_edit_toolbar_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl
 		(	"  var xowa_edit_i18n = {"
@@ -44,8 +44,8 @@ public class Xow_fragment_mgr implements GfoInvkAble {
 	}
 	public static final String Invk_html_js_edit_toolbar_fmt_ = "html_js_edit_toolbar_fmt_", Invk_html_js_edit_toolbar = "html_js_edit_toolbar";
 	public void Evt_lang_changed(Xol_lang lang) {
-		Bry_bfr bfr = lang.App().Utl_bry_bfr_mkr().Get_b512();
-		Xow_msg_mgr msg_mgr = wiki.App().User().Msg_mgr();
+		Bry_bfr bfr = Xoa_app_.Utl_bry_bfr_mkr().Get_b512();
+		Xow_msg_mgr msg_mgr = wiki.Appe().User().Msg_mgr();
 		html_js_edit_toolbar = html_js_edit_toolbar_fmtr.Bld_bry_many(bfr
 			, msg_mgr.Val_by_id(Xol_msg_itm_.Id_edit_toolbar_bold_tip)
 			, msg_mgr.Val_by_id(Xol_msg_itm_.Id_edit_toolbar_bold_sample)

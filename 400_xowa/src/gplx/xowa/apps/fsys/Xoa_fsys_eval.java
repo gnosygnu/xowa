@@ -16,27 +16,27 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.fsys; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
-import gplx.core.primitives.*;
+import gplx.core.primitives.*; import gplx.xowa.users.*;
 public class Xoa_fsys_eval implements Bry_fmtr_eval_mgr {
-	public Xoa_fsys_eval(Xoa_app app) {this.app = app;} private Xoa_app app;
+	private final Xoa_fsys_mgr app_fsys_mgr; private final Xou_fsys_mgr usr_fsys_mgr;
+	public Xoa_fsys_eval(Xoa_fsys_mgr app_fsys_mgr, Xou_fsys_mgr usr_fsys_mgr) {this.app_fsys_mgr = app_fsys_mgr; this.usr_fsys_mgr = usr_fsys_mgr;}
 	public boolean Enabled() {return enabled;} public void Enabled_(boolean v) {enabled = v;} private boolean enabled = true;
 	public byte[] Eval(byte[] cmd) {
-		Object o = hash.Get_by_bry(cmd);
-		if (o == null) return null;
+		Object o = hash.Get_by_bry(cmd); if (o == null) return null;
 		byte val = ((Byte_obj_val)o).Val();
 		switch (val) {
-			case Tid_bin_plat_dir:		return app.Fsys_mgr().Bin_plat_dir().RawBry();
-			case Tid_user_temp_dir:		return app.User().Fsys_mgr().App_temp_dir().RawBry();
-			case Tid_xowa_root_dir:		return app.Fsys_mgr().Root_dir().RawBry();
-			case Tid_user_cfg_dir:		return app.User().Fsys_mgr().App_data_cfg_dir().RawBry();
+			case Tid_xowa_root_dir:		return app_fsys_mgr.Root_dir().RawBry();
+			case Tid_bin_plat_dir:		return app_fsys_mgr.Bin_plat_dir().RawBry();
+			case Tid_user_temp_dir:		return usr_fsys_mgr.App_temp_dir().RawBry();
+			case Tid_user_cfg_dir:		return usr_fsys_mgr.App_data_cfg_dir().RawBry();
 			default:					throw Err_mgr._.unhandled_(val);
 		}
 	}
 	private static final byte Tid_bin_plat_dir = 0, Tid_user_temp_dir = 1, Tid_xowa_root_dir = 2, Tid_user_cfg_dir = 3;
 	private static final Hash_adp_bry hash = Hash_adp_bry.ci_ascii_()
-	.Add_str_byte("bin_plat_dir", Tid_bin_plat_dir)
-	.Add_str_byte("user_temp_dir", Tid_user_temp_dir)
-	.Add_str_byte("xowa_root_dir", Tid_xowa_root_dir)
-	.Add_str_byte("user_cfg_dir", Tid_user_cfg_dir)
+	.Add_str_byte("bin_plat_dir"	, Tid_bin_plat_dir)
+	.Add_str_byte("user_temp_dir"	, Tid_user_temp_dir)
+	.Add_str_byte("xowa_root_dir"	, Tid_xowa_root_dir)
+	.Add_str_byte("user_cfg_dir"	, Tid_user_cfg_dir)
 	;
 }

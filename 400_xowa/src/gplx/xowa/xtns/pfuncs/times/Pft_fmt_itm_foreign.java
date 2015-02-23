@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 class Pft_fmt_itm_roman implements Pft_fmt_itm {
 	public int TypeId() {return Pft_fmt_itm_.Tid_roman;}
-	public void Fmt(Bry_bfr bfr, Xow_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
+	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
 		int nxt_idx = bldr.Idx_cur() + 1;
 		Pft_fmt_itm[] ary = bldr.Fmt_itms();
 		if (nxt_idx < ary.length) {
@@ -36,59 +36,59 @@ class Pft_fmt_itm_roman implements Pft_fmt_itm {
 }
 class Pft_fmt_itm_thai implements Pft_fmt_itm {
 	public int TypeId() {return Pft_fmt_itm_.Tid_thai;}
-	public void Fmt(Bry_bfr bfr, Xow_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
+	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
 		bfr.Add_int_variable(date.Year() + 543);
 	}
 }
 class Pft_fmt_itm_minguo implements Pft_fmt_itm {
 	public int TypeId() {return Pft_fmt_itm_.Tid_minguo;}
-	public void Fmt(Bry_bfr bfr, Xow_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
+	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
 		bfr.Add_int_variable(date.Year() - 1911);
 	}
 }
 class Pft_fmt_itm_hebrew_year_num implements Pft_fmt_itm {
 	public int TypeId() {return Pft_fmt_itm_.Tid_hebrew_year_num;}
-	public void Fmt(Bry_bfr bfr, Xow_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
+	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
 		int[] hebrew_date = Pft_fmt_itm_hebrew_.Calc_hebrew_date(date);
 		bfr.Add_int_variable(hebrew_date[Pft_fmt_itm_hebrew_.Rslt_year_num]);
 	}
 }
 class Pft_fmt_itm_hebrew_month_num implements Pft_fmt_itm {
 	public int TypeId() {return Pft_fmt_itm_.Tid_hebrew_month_num;}
-	public void Fmt(Bry_bfr bfr, Xow_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
+	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
 		int[] hebrew_date = Pft_fmt_itm_hebrew_.Calc_hebrew_date(date);
 		bfr.Add_int_variable(hebrew_date[Pft_fmt_itm_hebrew_.Rslt_month_num]);
 	}
 }
 class Pft_fmt_itm_hebrew_day_num implements Pft_fmt_itm {
 	public int TypeId() {return Pft_fmt_itm_.Tid_hebrew_day_num;}
-	public void Fmt(Bry_bfr bfr, Xow_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
+	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
 		int[] hebrew_date = Pft_fmt_itm_hebrew_.Calc_hebrew_date(date);
 		bfr.Add_int_variable(hebrew_date[Pft_fmt_itm_hebrew_.Rslt_day_num]);
 	}
 }
 class Pft_fmt_itm_hebrew_month_days_count implements Pft_fmt_itm {
 	public int TypeId() {return Pft_fmt_itm_.Tid_hebrew_month_days_count;}
-	public void Fmt(Bry_bfr bfr, Xow_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
+	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
 		int[] hebrew_date = Pft_fmt_itm_hebrew_.Calc_hebrew_date(date);
 		bfr.Add_int_variable(hebrew_date[Pft_fmt_itm_hebrew_.Rslt_month_days_count]);
 	}
 }
 class Pft_fmt_itm_hebrew_month_name_full implements Pft_fmt_itm {
 	public int TypeId() {return Pft_fmt_itm_.Tid_hebrew_month_name_full;}
-	public void Fmt(Bry_bfr bfr, Xow_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
+	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
 		bfr.Add(Pft_fmt_itm_hebrew_.Get_hebrew_month_name_full(wiki, date));
 	}
 }
 class Pft_fmt_itm_hebrew_month_name_gen implements Pft_fmt_itm {
 	public int TypeId() {return Pft_fmt_itm_.Tid_hebrew_month_name_gen;}
-	public void Fmt(Bry_bfr bfr, Xow_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
+	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
 		bfr.Add(Pft_fmt_itm_hebrew_.Get_hebrew_month_name_gen(wiki, date));
 	}
 }
 class Pft_fmt_itm_hebrew_numeral implements Pft_fmt_itm {
 	public int TypeId() {return Pft_fmt_itm_.Tid_hebrew_numeral;}
-	public void Fmt(Bry_bfr bfr, Xow_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
+	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
 		bfr.Add_str(Pft_fmt_itm_hebrew_.Calc_hebrew_numeral(date.Year()));
 	}
 }
@@ -253,9 +253,9 @@ class Pft_fmt_itm_hebrew_ {
 		rv[3] = days;
 		return true;
 	}
-	public static byte[] Get_hebrew_month_name_full(Xow_wiki wiki, DateAdp date) {return Get_hebrew_month_name(wiki, date, Month_name_full_ary);}
-	public static byte[] Get_hebrew_month_name_gen(Xow_wiki wiki, DateAdp date) {return Get_hebrew_month_name(wiki, date, Month_name_gen_ary);}
-	private static byte[] Get_hebrew_month_name(Xow_wiki wiki, DateAdp date, byte[][] name_ary) {
+	public static byte[] Get_hebrew_month_name_full(Xowe_wiki wiki, DateAdp date) {return Get_hebrew_month_name(wiki, date, Month_name_full_ary);}
+	public static byte[] Get_hebrew_month_name_gen(Xowe_wiki wiki, DateAdp date) {return Get_hebrew_month_name(wiki, date, Month_name_gen_ary);}
+	private static byte[] Get_hebrew_month_name(Xowe_wiki wiki, DateAdp date, byte[][] name_ary) {
 		int[] hebrew_date = Pft_fmt_itm_hebrew_.Calc_hebrew_date(date);
 		int hebrew_month = hebrew_date[Pft_fmt_itm_hebrew_.Rslt_month_num] - ListAdp_.Base1;
 		byte[] msg_key = name_ary[hebrew_month];

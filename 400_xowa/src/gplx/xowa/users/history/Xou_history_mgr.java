@@ -42,7 +42,7 @@ public class Xou_history_mgr implements GfoInvkAble {
 		byte[] key = Xou_history_itm.key_(wiki, page);
 		return itms.Has(key);
 	}
-	public void Add(Xoa_page page) {
+	public void Add(Xoae_page page) {
 		Xoa_url url = page.Url();
 		Xoa_ttl ttl = page.Ttl();
 		byte[] page_ttl = null;
@@ -75,7 +75,7 @@ public class Xou_history_mgr implements GfoInvkAble {
 		Xou_history_itm_srl.Load(Io_mgr._.LoadFilBry(history_fil), itms);
 		itms.SortBy(sorter);
 	}
-	public void Save(Xoa_app app) {
+	public void Save(Xoae_app app) {
 		if (!load_chk) return; // nothing loaded; nothing to save
 		int itms_len = itms.Count();
 		if (itms_len == 0) return;	// no items; occurs when history disable;
@@ -84,7 +84,7 @@ public class Xou_history_mgr implements GfoInvkAble {
 		byte[] ary = Xou_history_itm_srl.Save(itms);
 		Io_mgr._.SaveFilBry(app.User().Fsys_mgr().App_data_history_fil(), ary);
 	}
-	public OrderedHash Archive(Xoa_app app) {
+	public OrderedHash Archive(Xoae_app app) {
 		itms.SortBy(sorter);
 		int itms_len = itms.Count();
 		OrderedHash current_itms = OrderedHash_.new_bry_();

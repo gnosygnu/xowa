@@ -70,9 +70,9 @@ class Hdump_load_mgr_fxt {
 	}
 	public Hdump_load_mgr_fxt Init_row_body(String body, String display_ttl, String content_sub, String sidebar_div)	{
 		Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
-		Xoa_app app = Xoa_app_fxt.app_();
-		Xow_wiki wiki = Xoa_app_fxt.wiki_tst_(app);
-		Xoa_page page = Xoa_page.new_(wiki, Xoa_ttl.parse_(wiki, Bry_.new_ascii_("Page_1")));
+		Xoae_app app = Xoa_app_fxt.app_();
+		Xowe_wiki wiki = Xoa_app_fxt.wiki_tst_(app);
+		Xoae_page page = Xoae_page.new_(wiki, Xoa_ttl.parse_(wiki, Bry_.new_ascii_("Page_1")));
 		if (display_ttl != null) page.Html_data().Display_ttl_(Bry_.new_utf8_(display_ttl));
 		if (content_sub != null) page.Html_data().Content_sub_(Bry_.new_utf8_(content_sub));
 		if (sidebar_div != null) page.Html_data().Xtn_skin_mgr().Add(new Xopg_xtn_skin_itm_mock(Bry_.new_utf8_(sidebar_div)));

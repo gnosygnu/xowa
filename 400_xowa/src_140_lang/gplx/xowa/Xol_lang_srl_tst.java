@@ -112,7 +112,7 @@ public class Xol_lang_srl_tst {
 		fxt.Run_save_msg_mgr(msg_mgr, Xol_lang.Invk_messages, raw);
 	}
 	@Test  public void Fallback() {
-		Io_mgr._.SaveFilStr(Xol_lang_.xo_lang_fil_(fxt.App(), "zh-hans"), String_.Concat_lines_nl
+		Io_mgr._.SaveFilStr(Xol_lang_.xo_lang_fil_(fxt.App().Fsys_mgr(), "zh-hans"), String_.Concat_lines_nl
 			(	"this"
 			,	".keywords"
 			,	"  .load_text("
@@ -162,9 +162,9 @@ public class Xol_lang_srl_tst {
 		fxt.Tst_messages(fxt.Lang().Msg_mgr(), fxt.msg_("sunday", "sunday1"), fxt.msg_("monday", "monday1"));
 	}
 	@Test  public void Fallback_circular() {	// PURPOSE: pt and pt-br cite each other as fallback in Messages*.php; DATE:2013-02-18
-		Io_mgr._.SaveFilStr(Xol_lang_.xo_lang_fil_(fxt.App(), "pt")		, "fallback_load('pt-br');");
-		Io_mgr._.SaveFilStr(Xol_lang_.xo_lang_fil_(fxt.App(), "pt-br")	, "fallback_load('pt');");
-		Xol_lang lang = new Xol_lang(fxt.App(), Bry_.new_ascii_("pt"));
+		Io_mgr._.SaveFilStr(Xol_lang_.xo_lang_fil_(fxt.App().Fsys_mgr(), "pt")		, "fallback_load('pt-br');");
+		Io_mgr._.SaveFilStr(Xol_lang_.xo_lang_fil_(fxt.App().Fsys_mgr(), "pt-br")	, "fallback_load('pt');");
+		Xol_lang lang = new Xol_lang(fxt.App().Lang_mgr(), Bry_.new_ascii_("pt"));
 		lang.Init_by_load();
 	}
 	@Test  public void Num_fmt() {
@@ -200,10 +200,10 @@ public class Xol_lang_srl_tst {
 class Xol_lang_srl_fxt {
 	public void Clear() {
 		app = Xoa_app_fxt.app_();
-		lang = new Xol_lang(app, Bry_.new_utf8_("fr"));
+		lang = new Xol_lang(app.Lang_mgr(), Bry_.new_utf8_("fr"));
 		Xoa_gfs_mgr.Msg_parser_init();	// required by fallback_load
 	}	GfsCtx ctx = GfsCtx.new_(); Gfs_bldr bldr = new Gfs_bldr(); //Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
-	public Xoa_app App() {return app;} private Xoa_app app;
+	public Xoae_app App() {return app;} private Xoae_app app;
 	public Xol_lang Lang() {return lang;} private Xol_lang lang;
 	public Xow_ns ns_(int id, String s) {return new Xow_ns(id, Xow_ns_case_.Id_1st, Bry_.new_utf8_(s), false);}
 	public Xol_specials_itm special_(String key, String... words) {return new Xol_specials_itm(Bry_.new_utf8_(key), Bry_.Ary(words));}

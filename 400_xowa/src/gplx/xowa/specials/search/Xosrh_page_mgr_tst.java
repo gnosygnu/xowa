@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import org.junit.*;
+import org.junit.*; import gplx.xowa.tdbs.*;
 public class Xosrh_page_mgr_tst {
 	@Before public void init() {fxt.Clear();} private Xosrh_page_mgr_fxt fxt = new Xosrh_page_mgr_fxt();
 	@Test   public void Basic() {
@@ -37,10 +37,10 @@ class Xosrh_page_mgr_fxt {
 			wiki = Xoa_app_fxt.wiki_tst_(app);
 			tmp_bfr = Bry_bfr.reset_(255);
 			page_mgr = new Xosrh_page_mgr();
-			hive_mgr = new Xowd_hive_mgr(wiki, Xow_dir_info_.Tid_id);
+			hive_mgr = new Xowd_hive_mgr(wiki, Xotdb_dir_info_.Tid_id);
 		}
 		return this;
-	}	private Xoa_app app; Xow_wiki wiki; Bry_bfr tmp_bfr; Xosrh_page_mgr page_mgr; Xowd_hive_mgr hive_mgr;
+	}	private Xoae_app app; Xowe_wiki wiki; Bry_bfr tmp_bfr; Xosrh_page_mgr page_mgr; Xowd_hive_mgr hive_mgr;
 	public Xosrh_page_mgr_fxt Init_site_ids(int bgn, int end) {
 		Xodb_page tmp_itm = new Xodb_page();
 		for (int i = bgn; i < end; i++) {

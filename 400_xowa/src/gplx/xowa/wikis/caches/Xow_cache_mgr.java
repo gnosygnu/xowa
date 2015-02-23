@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 public class Xow_cache_mgr {
-	private Xow_wiki wiki;
-	public Xow_cache_mgr(Xow_wiki wiki) {
+	private Xowe_wiki wiki;
+	public Xow_cache_mgr(Xowe_wiki wiki) {
 		this.wiki = wiki;
 		page_cache = new Xow_page_cache(wiki);
 		defn_cache = new Xow_defn_cache(wiki.Lang());
@@ -31,7 +31,7 @@ public class Xow_cache_mgr {
 	public KeyVal[] Scrib_lang_names() {
 		if (scrib_lang_names == null) {
 			ListAdp list = ListAdp_.new_();
-			Cfg_nde_root root = wiki.App().Lang_mgr().Groups();
+			Cfg_nde_root root = wiki.Appe().Lang_mgr().Groups();
 			int len = root.Root_len();
 			for (int i = 0; i < len; i++) {
 				Cfg_nde_obj nde = root.Root_get_at(i);

@@ -53,7 +53,7 @@ public class Xow_wiki_alias_tst {
 		fxt.Build_wmf_src_name("simplewiki", "latest", Xow_wiki_alias.Key_pages_articles, "simplewiki-latest-pages-articles.xml.bz2");
 	}
 	@Test  public void Build_alias_by_lang_tid() {
-		fxt.Build_alias_by_lang_tid("en", Xow_wiki_domain_.Tid_wikipedia, "enwiki");
+		fxt.Build_alias_by_lang_tid("en", Xow_domain_.Tid_int_wikipedia, "enwiki");
 	}
 	@Test   public void Parse_by_wmf_key() {
 		fxt.Test_parse_by_wmf_key("enwiki", "en", "en.wikipedia.org");
@@ -72,7 +72,7 @@ class Xow_wiki_alias_fxt {
 	public void Parse__domain_name(String raw_str, String expd) {byte[] raw = Bry_.new_ascii_(raw_str); Tfds.Eq(expd, String_.new_ascii_(Xow_wiki_alias.Parse__domain_name(raw, 0, raw.length)));}
 	public void Parse__tid(String raw_str, byte expd) {Tfds.Eq(expd, Xow_wiki_alias.Parse__tid(raw_str));}
 	public void Build_alias(String domain_str, String expd) {
-		Xow_wiki_domain domain = Xow_wiki_domain_.parse_by_domain(Bry_.new_ascii_(domain_str));
+		Xow_domain domain = Xow_domain_.parse(Bry_.new_ascii_(domain_str));
 		byte[] actl = Xow_wiki_alias.Build_alias(domain);
 		Tfds.Eq(expd, String_.new_ascii_(actl));
 	}	private Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
@@ -84,12 +84,12 @@ class Xow_wiki_alias_fxt {
 		byte[] actl = Xob_dump_file_.Bld_dump_file_name(Bry_.new_ascii_(alias), Bry_.new_ascii_(date), Bry_.new_ascii_(dump_type), Xob_dump_file_.Ext_xml_bz2);
 		Tfds.Eq(expd, String_.new_ascii_(actl));
 	}
-	public void Build_alias_by_lang_tid(String lang_key, byte wiki_tid, String expd) {
+	public void Build_alias_by_lang_tid(String lang_key, int wiki_tid, String expd) {
 		Xow_wiki_alias.Build_alias_by_lang_tid(tmp_bfr, Bry_.new_ascii_(lang_key), wiki_tid_ref.Val_(wiki_tid));
 		Tfds.Eq_bry(Bry_.new_utf8_(expd), tmp_bfr.Xto_bry_and_clear());
-	}	static final Byte_obj_ref wiki_tid_ref = Byte_obj_ref.zero_();
+	}	static final Int_obj_ref wiki_tid_ref = Int_obj_ref.zero_();
 	public void Test_parse_by_wmf_key(String wmf_key, String expd_lang_key, String expd_domain) {
-		Xow_wiki_domain domain = Xow_wiki_alias.parse_by_wmf_key(Bry_.new_ascii_(wmf_key));
+		Xow_domain domain = Xow_wiki_alias.parse_by_wmf_key(Bry_.new_ascii_(wmf_key));
 		Tfds.Eq(expd_lang_key	, String_.new_ascii_(domain.Lang_key()));
 		Tfds.Eq(expd_domain		, String_.new_ascii_(domain.Domain_bry()));
 	}

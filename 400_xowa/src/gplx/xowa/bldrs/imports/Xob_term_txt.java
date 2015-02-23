@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 public class Xob_term_txt extends Xob_term_base {
-	public Xob_term_txt(Xob_bldr bldr, Xow_wiki wiki) {this.Ctor(bldr, wiki); this.wiki = wiki;} private Xow_wiki wiki;
+	public Xob_term_txt(Xob_bldr bldr, Xowe_wiki wiki) {this.Ctor(bldr, wiki); this.wiki = wiki;} private Xowe_wiki wiki;
 	@Override public String Cmd_key() {return KEY;} public static final String KEY = "core.term";
 	@Override public void Cmd_end_hook() {
-		Io_mgr._.SaveFilBry(wiki.Fsys_mgr().Cfg_wiki_core_fil(), wiki.Cfg_wiki_core().Build_gfs());
+		Io_mgr._.SaveFilBry(wiki.Tdb_fsys_mgr().Cfg_wiki_core_fil(), wiki.Cfg_wiki_core().Build_gfs());
 	}
 }

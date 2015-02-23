@@ -18,34 +18,33 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa2.wikis.data; import gplx.*; import gplx.xowa2.*; import gplx.xowa2.wikis.*;
 import gplx.lists.*;
 import gplx.dbs.*; import gplx.xowa.dbs.*;
-public class Xowd_db_regy_tbl implements Db_conn_itm {
-	private String Tbl_name = "wiki_db_regy";
-	private final Db_meta_fld_list Flds = Db_meta_fld_list.new_();
-	private String Fld_id, Fld_type, Fld_url;
+public class Xowd_db_regy_tbl {
+	private String tbl_name = "wiki_db_regy";
+	private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private String fld_id, fld_type, fld_url;
 	private Db_conn conn;
 	public void Conn_(Db_conn new_conn, boolean version_is_1) {
-		this.conn = Db_conn_.Reg_itm(this, conn, new_conn);
+		this.conn = new_conn; flds.Clear();
 		String name_prefix = "";
 		if (version_is_1) {
-			Tbl_name			= "xowa_db";
+			tbl_name			= "xowa_db";
 			name_prefix			= "db_";
 		}
 		else {
-			//Fld_wiki_id			= Flds.Add_int("wiki_id");
+			//fld_db_id			= flds.Add_int("db_id");
 		}
-		Fld_id					= Flds.Add_int	(name_prefix + "id");
-		Fld_type				= Flds.Add_byte	(name_prefix + "type");
-		Fld_url					= Flds.Add_str	(name_prefix + "url", 512);
+		fld_id					= flds.Add_int	(name_prefix + "id");
+		fld_type				= flds.Add_byte	(name_prefix + "type");
+		fld_url					= flds.Add_str	(name_prefix + "url", 512);
 	}
-	public void Conn_term() {}
 	public Xodb_file[] Select_all(Io_url wiki_root_dir) {
 		Db_rdr rdr = Db_rdr_.Null;
 		ListAdp list = ListAdp_.new_();
 		try {
-			Db_stmt stmt = conn.New_stmt_select_all_where(Tbl_name, Flds, Db_meta_fld.Ary_empy);
+			Db_stmt stmt = conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empy);
 			rdr = stmt.Exec_select_as_rdr();
 			while (rdr.Move_next()) {
-				Xodb_file db = Xodb_file.load_(rdr.Read_int(Fld_id), rdr.Read_byte(Fld_type), rdr.Read_str(Fld_url));
+				Xodb_file db = Xodb_file.load_(rdr.Read_int(fld_id), rdr.Read_byte(fld_type), rdr.Read_str(fld_url));
 				db.Url_(wiki_root_dir.GenSubFil(db.Url_rel()));
 				list.Add(db);
 			}

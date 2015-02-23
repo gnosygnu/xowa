@@ -16,9 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.xowa.bldrs.*;
+import gplx.xowa.bldrs.*; import gplx.xowa.tdbs.*;
 public class Xobc_core_calc_stats extends Xob_itm_basic_base implements Xob_cmd {
-	public Xobc_core_calc_stats(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
+	public Xobc_core_calc_stats(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Cmd_key() {return KEY;} public static final String KEY = "core.calc_stats";
 	public void Cmd_ini(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {}
@@ -37,7 +37,7 @@ public class Xobc_core_calc_stats extends Xob_itm_basic_base implements Xob_cmd 
 		int count_main = Calc_count_articles(wiki.Ns_mgr().Ns_main());
 		int count_file = Calc_count_articles(wiki.Ns_mgr().Ns_file());
 		Bry_bfr bfr = Bry_bfr.new_();
-		Gen_call(Bool_.Y, bfr, Xow_wiki.Invk_stats);
+		Gen_call(Bool_.Y, bfr, Xowe_wiki.Invk_stats);
 		Gen_call(Bool_.N, bfr, Xow_wiki_stats.Invk_number_of_articles_, count_main);
 		Gen_call(Bool_.N, bfr, Xow_wiki_stats.Invk_number_of_files_, count_file);
 		Gen_call(Bool_.N, bfr, Xow_wiki_stats.Invk_number_of_pages_, total);
@@ -66,7 +66,7 @@ public class Xobc_core_calc_stats extends Xob_itm_basic_base implements Xob_cmd 
 		}
 	}
 	int Calc_counts(Xow_ns ns) {
-		Io_url reg_url = wiki.Fsys_mgr().Url_ns_reg(ns.Num_str(), Xow_dir_info_.Tid_ttl);
+		Io_url reg_url = wiki.Tdb_fsys_mgr().Url_ns_reg(ns.Num_str(), Xotdb_dir_info_.Tid_ttl);
 		Xowd_regy_mgr reg_mgr = new Xowd_regy_mgr(reg_url);
 		int files_ary_len = reg_mgr.Files_ary().length;
 		int count = 0;
@@ -76,7 +76,7 @@ public class Xobc_core_calc_stats extends Xob_itm_basic_base implements Xob_cmd 
 		return count;
 	}
 	int Calc_count_articles(Xow_ns ns) {
-		Io_url hive_dir = wiki.Fsys_mgr().Root_dir().GenSubDir_nest(Xow_dir_info_.Name_ns, ns.Num_str(), Xow_dir_info_.Name_title);
+		Io_url hive_dir = wiki.Fsys_mgr().Root_dir().GenSubDir_nest(Xotdb_dir_info_.Name_ns, ns.Num_str(), Xotdb_dir_info_.Name_title);
 		return Calc_count_articles_dir(ns, hive_dir);
 	}
 	int Calc_count_articles_dir(Xow_ns ns, Io_url dir) {
@@ -94,7 +94,7 @@ public class Xobc_core_calc_stats extends Xob_itm_basic_base implements Xob_cmd 
 		return count;
 	}
 	int Calc_count_articles_fil(Xow_ns ns, Io_url fil) {
-		if (String_.Eq(fil.NameAndExt(), Xow_dir_info_.Name_reg_fil)) return 0;
+		if (String_.Eq(fil.NameAndExt(), Xotdb_dir_info_.Name_reg_fil)) return 0;
 		int rv = 0;
 		byte[] bry = Io_mgr._.LoadFilBry(fil);
 		Xob_xdat_file xdat_file = new Xob_xdat_file().Parse(bry, bry.length, fil);
@@ -108,5 +108,5 @@ public class Xobc_core_calc_stats extends Xob_itm_basic_base implements Xob_cmd 
 		return rv;
 	}
 	static final String GRP_KEY = "xowa.bldr.calc_stats";
-	public static Io_url Wiki_gfs_url(Xow_wiki wiki) {return wiki.Fsys_mgr().Root_dir().GenSubFil_nest("cfg", "wiki_stats.gfs");}
+	public static Io_url Wiki_gfs_url(Xowe_wiki wiki) {return wiki.Fsys_mgr().Root_dir().GenSubFil_nest("cfg", "wiki_stats.gfs");}
 }

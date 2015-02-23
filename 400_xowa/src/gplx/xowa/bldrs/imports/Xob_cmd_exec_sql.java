@@ -18,12 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.xowa.dbs.*;
 public class Xob_cmd_exec_sql implements Xob_cmd {
-	private Xow_wiki wiki; private int file_idx = -1; private String sql;
-	public Xob_cmd_exec_sql(Xob_bldr bldr, Xow_wiki wiki) {this.wiki = wiki;}
+	private Xowe_wiki wiki; private int file_idx = -1; private String sql;
+	public Xob_cmd_exec_sql(Xob_bldr bldr, Xowe_wiki wiki) {this.wiki = wiki;}
 	public String Cmd_key() {return KEY;} public static final String KEY = "import.sql.exec_sql";
 	public void Cmd_ini(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {
-		Xoa_app app = wiki.App();
+		Xoae_app app = wiki.Appe();
 		wiki.Init_assert();	// force load; needed to pick up MediaWiki ns for MediaWiki:mainpage
 		Xodb_mgr_sql db_mgr = wiki.Db_mgr_as_sql();
 		Xodb_fsys_mgr fsys_mgr = db_mgr.Fsys_mgr();

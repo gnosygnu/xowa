@@ -16,35 +16,35 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.xtns.math.*;
-import gplx.xowa.files.fsdb.caches.*;
-import gplx.dbs.*; import gplx.xowa2.files.commons.*;
+import gplx.dbs.*; import gplx.xowa2.files.commons.*; import gplx.xowa.xtns.math.*;
+import gplx.xowa.wmfs.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.caches.*; import gplx.xowa.files.imgs.*;
 public class Xof_file_mgr implements GfoInvkAble {
-	public void Init_app(Xoa_app app, Gfo_usr_dlg usr_dlg) {
-		this.app = app;
-		img_mgr.Init_app(app); repo_mgr = new Xoa_repo_mgr(app); 
-		math_mgr = new Xof_math_mgr(app);
-		math_mgr.Init(app);
-		download_mgr = new Xoaf_download_mgr(app);
-		cache_mgr = new Cache_mgr(app);
+	public Xoa_repo_mgr			Repo_mgr() {return repo_mgr;} private Xoa_repo_mgr repo_mgr;
+	public Xof_img_mgr			Img_mgr() {return img_mgr;} private final Xof_img_mgr img_mgr = new Xof_img_mgr();
+	public Xof_cache_mgr		Cache_mgr() {return cache_mgr;} private Xof_cache_mgr cache_mgr;
+	public Xof_math_mgr			Math_mgr() {return math_mgr;} private final Xof_math_mgr math_mgr = new Xof_math_mgr();
+	public Xof_rule_mgr			Ext_rules() {return ext_rules;} private final Xof_rule_mgr ext_rules = new Xof_rule_mgr();
+	public Xoa_wmf_mgr			Wmf_mgr() {return wmf_mgr;} private Xoa_wmf_mgr wmf_mgr;
+	public void Ctor_by_app(Xoae_app app) {
+		Gfo_usr_dlg usr_dlg = app.Usr_dlg();
+		this.cache_mgr = new Xof_cache_mgr(usr_dlg, app.Wiki_mgr(), repo_mgr);
+		this.repo_mgr = new Xoa_repo_mgr(app.Fsys_mgr(), ext_rules); 
+		this.wmf_mgr = new Xoa_wmf_mgr(usr_dlg, app.Wiki_mgr());
+		img_mgr.Init_by_app(app.Wmf_mgr(), app.Prog_mgr());
+		math_mgr.Init_by_app(app);
 	}
-	public Xoa_app App() {return app;} private Xoa_app app;
-	public Xoa_repo_mgr	Repo_mgr() {return repo_mgr;} private Xoa_repo_mgr repo_mgr;
-	public Xof_img_mgr Img_mgr() {return img_mgr;} private Xof_img_mgr img_mgr = new Xof_img_mgr();
-	public Xof_math_mgr Math_mgr() {return math_mgr;} private Xof_math_mgr math_mgr;
-	public Xoft_rule_mgr Ext_rules() {return ext_rules;} private Xoft_rule_mgr ext_rules = new Xoft_rule_mgr();
-	public Xoaf_download_mgr Download_mgr() {return download_mgr;} private Xoaf_download_mgr download_mgr;
-	public Cache_mgr Cache_mgr() {return cache_mgr;} private Cache_mgr cache_mgr;
-	public void Init_by_app() {
-		if (!Env_.Mode_testing())
-			cache_mgr.Db_init(app.User().Db_mgr());
+	public void Init_by_app(Xoae_app app) {
+		Io_url db_url = app.User().Fsys_mgr().Root_dir().OwnerDir().GenSubFil_ary("xowa.user.", app.User().Key_str(), ".sqlite3");
+		Db_conn_bldr_data conn_data = Db_conn_bldr.I.Get_or_new("xowa.user_db", db_url);
+		boolean version_is_1 = Bool_.Y;
+		cache_mgr.Init_for_db(conn_data.Conn(), conn_data.Created(), version_is_1);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_repos))				return repo_mgr;
 		else if	(ctx.Match(k, Invk_img_mgr))			return img_mgr;
 		else if	(ctx.Match(k, Invk_ext_rules))			return ext_rules;
 		else if	(ctx.Match(k, Invk_math))				return math_mgr;
-		else if	(ctx.Match(k, Invk_download))			return download_mgr;
+		else if	(ctx.Match(k, Invk_download))			return wmf_mgr;	// NOTE: do not rename "download" to wmf_mgr
 		else if	(ctx.Match(k, Invk_cache_mgr))			return cache_mgr;
 		else											return GfoInvkAble_.Rv_unhandled;
 	}	private static final String Invk_repos = "repos", Invk_img_mgr= "img_mgr", Invk_ext_rules = "ext_rules", Invk_math = "math", Invk_download = "download", Invk_cache_mgr = "cache_mgr";

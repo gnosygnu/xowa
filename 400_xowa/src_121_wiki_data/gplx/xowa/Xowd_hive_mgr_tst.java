@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import org.junit.*;
+import org.junit.*; import gplx.xowa.tdbs.*;
 public class Xowd_hive_mgr_tst {
 	Xowd_hive_mgr_fxt fxt = new Xowd_hive_mgr_fxt();
 	@Before public void init() {fxt.Clear();}
@@ -62,11 +62,11 @@ public class Xowd_hive_mgr_tst {
 	}
 }
 class Xowd_hive_mgr_fxt {
-	Xoa_app app; Xow_wiki wiki; Xowd_hive_mgr mgr;
+	Xoae_app app; Xowe_wiki wiki; Xowd_hive_mgr mgr;
 	public void Clear() {
 		app = Xoa_app_fxt.app_();
 		wiki = Xoa_app_fxt.wiki_tst_(app);
-		mgr = new Xowd_hive_mgr(wiki, Xow_dir_info_.Tid_page);
+		mgr = new Xowd_hive_mgr(wiki, Xotdb_dir_info_.Tid_page);
 	}
 	public Xowd_hive_mgr_fxt Tst_reg(String expd) {
 		Io_url file_orig = Io_url_.mem_fil_("mem/xowa/wiki/en.wikipedia.org/ns/000/title/reg.csv");
@@ -74,7 +74,7 @@ class Xowd_hive_mgr_fxt {
 		return this;
 	}
 	public Xowd_hive_mgr_fxt Tst_fil(int fil, String expd) {
-		Io_url url = wiki.Fsys_mgr().Url_ns_fil(Xow_dir_info_.Tid_page, Xow_ns_.Id_main, fil);
+		Io_url url = wiki.Tdb_fsys_mgr().Url_ns_fil(Xotdb_dir_info_.Tid_page, Xow_ns_.Id_main, fil);
 		Tfds.Eq_str_lines(expd, Io_mgr._.LoadFilStr(url));
 		return this;
 	}

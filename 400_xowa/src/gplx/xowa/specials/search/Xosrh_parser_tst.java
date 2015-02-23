@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import org.junit.*;
+import org.junit.*; import gplx.xowa.tdbs.*;
 public class Xosrh_parser_tst {
 	@Before public void init() {fxt.Clear();} private Xosearch_parser_fxt fxt = new Xosearch_parser_fxt();
 	@Test   public void Scan_word() 			{fxt.Test_scan("abc", "abc");}
@@ -60,13 +60,13 @@ class Xosearch_searcher_fxt {
 		if (app == null) {
 			app = Xoa_app_fxt.app_();
 			wiki = Xoa_app_fxt.wiki_tst_(app);
-			mgr = new Xowd_hive_mgr(wiki, Xow_dir_info_.Tid_search_ttl);
+			mgr = new Xowd_hive_mgr(wiki, Xotdb_dir_info_.Tid_search_ttl);
 			tmp_bfr = Bry_bfr.reset_(255);
 			parser = Xosrh_parser._;
 		}
 		return this;
 	}
-	Xoa_app app; Xow_wiki wiki; Xowd_hive_mgr mgr; Bry_bfr tmp_bfr;
+	Xoae_app app; Xowe_wiki wiki; Xowd_hive_mgr mgr; Bry_bfr tmp_bfr;
 	Xosrh_parser parser;
 	public void Init_search(String ttl_str, int... ids) {		
 		byte[] ttl_bry = Bry_.new_ascii_(ttl_str);		

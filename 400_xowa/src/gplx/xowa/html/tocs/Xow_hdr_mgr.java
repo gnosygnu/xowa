@@ -16,13 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.tocs; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import gplx.core.primitives.*;
+import gplx.core.primitives.*; import gplx.xowa.urls.encoders.*;
 import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.hdrs.*;
 public class Xow_hdr_mgr {
-	private Xow_wiki wiki; private Xoa_page page;
+	private final Url_encoder_mgr encoder_mgr; private final Xoae_page page;
+	private final HashAdp hdrs_hash = HashAdp_.new_(); private final Bry_bfr hdrs_bfr = Bry_bfr.reset_(255); private final Bry_obj_ref hdrs_ref = Bry_obj_ref.null_();
 	private Xop_hdr_tkn[] hdrs_ary = new Xop_hdr_tkn[0]; private int hdrs_max, hdrs_len;
-	private HashAdp hdrs_hash = HashAdp_.new_(); private Bry_bfr hdrs_bfr = Bry_bfr.reset_(255); private Bry_obj_ref hdrs_ref = Bry_obj_ref.null_();
-	public Xow_hdr_mgr(Xow_wiki wiki, Xoa_page page) {this.wiki = wiki; this.page = page;}
+	public Xow_hdr_mgr(Xoae_page page, Url_encoder_mgr encoder_mgr) {this.page = page; this.encoder_mgr = encoder_mgr;}
 	public boolean Toc_enabled() {
 		return	!toc_hide				// check for __NOTOC__
 			&&	hdrs_len != 0			// never show TOC if 0 headers, even when __FORCETOC__
@@ -59,10 +59,10 @@ public class Xow_hdr_mgr {
 	}
 	private void Reg(Xop_ctx ctx, Xop_hdr_tkn hdr, byte[] src) {
 		if (hdrs_len == 0) hdr.Hdr_html_first_y_();
-		Xoa_app app = wiki.App();
-		Bry_bfr raw_bfr = app.Utl_bry_bfr_mkr().Get_b128(), enc_bfr = app.Utl_bry_bfr_mkr().Get_b128();
+		Bry_bfr_mkr bfr_mkr = Xoa_app_.Utl_bry_bfr_mkr();
+		Bry_bfr raw_bfr = bfr_mkr.Get_b128(), enc_bfr = bfr_mkr.Get_b128();
 		Id_bld_recurse(raw_bfr, src, hdr);
-		Url_encoder encoder = wiki.App().Encoder_mgr().Id();
+		Url_encoder encoder = encoder_mgr.Id();
 		encoder.Encode(enc_bfr, raw_bfr.Bfr(), 0, raw_bfr.Len());
 		byte[] hdrs_id = enc_bfr.Xto_bry();
 		Object o = hdrs_hash.Fetch(hdrs_ref.Val_(hdrs_id));

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.lnkis.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*;
 public class Xoc_lnki_cfg implements GfoInvkAble {
-	public Xoc_lnki_cfg(Xow_wiki wiki) {xwiki_repo_mgr = new Xoc_xwiki_repo_mgr(wiki);}
+	public Xoc_lnki_cfg(Xowe_wiki wiki) {xwiki_repo_mgr = new Xoc_xwiki_repo_mgr(wiki);}
 	public Xoc_xwiki_repo_mgr Xwiki_repo_mgr() {return xwiki_repo_mgr;} private Xoc_xwiki_repo_mgr xwiki_repo_mgr;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_xwiki_repos))			return xwiki_repo_mgr;

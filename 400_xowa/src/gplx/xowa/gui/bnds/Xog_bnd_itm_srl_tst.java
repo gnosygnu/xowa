@@ -28,7 +28,7 @@ public class Xog_bnd_itm_srl_tst {
 	}
 }
 class Xog_bnd_itm_srl_fxt {
-	private Xoa_app app;
+	private Xoae_app app;
 	public void Reset() {
 		app = Xoa_app_fxt.app_();
 	}

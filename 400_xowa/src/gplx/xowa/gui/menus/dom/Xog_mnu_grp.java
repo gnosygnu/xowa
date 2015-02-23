@@ -22,7 +22,7 @@ public class Xog_mnu_grp extends Xog_mnu_base {
 	public Xog_mnu_grp(Xoa_gui_mgr gui_mgr, boolean mnu_is_popup, String key) {
 		this.app = gui_mgr.App(); this.mnu_is_popup = mnu_is_popup; this.key = key;
 		this.Ctor(gui_mgr);
-	}	private Xoa_app app;
+	}	private Xoae_app app;
 	public String Key() {return key;} private String key; private boolean mnu_is_popup;
 	public Gfui_mnu_grp Under_mnu() {
 		if (under_mnu.Disposed()) Build();	// NOTE: menu may be disposed when calling .dispose on Swt_html; rebuild if needed; DATE:2014-07-09

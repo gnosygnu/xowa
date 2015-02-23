@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.cfgs2; import gplx.*; import gplx.xowa.*;
 public class Xocfg_root implements GfoInvkAble {
-	public Xocfg_root(Xoa_app app, byte tid) {
+	public Xocfg_root(Xoae_app app, byte tid) {
 		this.tid = tid;
 		this.gui_mgr = new Xocfg_gui_mgr(app);
 	}

@@ -17,13 +17,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.setup.maints; import gplx.*; import gplx.xowa.*; import gplx.xowa.setup.*;
 public class Xoa_maint_wikis_mgr implements GfoInvkAble {
-	public Xoa_maint_wikis_mgr(Xoa_app app) {this.app = app;} private Xoa_app app;
+	public Xoa_maint_wikis_mgr(Xoae_app app) {this.app = app;} private Xoae_app app;
 	private OrderedHash hash = OrderedHash_.new_bry_();
 	public int Len() {return hash.Count();}
-	public Xow_wiki Get_at(int i) {
+	public Xowe_wiki Get_at(int i) {
 		if (init) Init();
 		byte[] domain = (byte[])hash.FetchAt(i);
-		Xow_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(domain);
+		Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(domain);
 		wiki.Init_assert();
 		return wiki;
 	}
@@ -32,7 +32,7 @@ public class Xoa_maint_wikis_mgr implements GfoInvkAble {
 		int len = this.Len();
 		for (int i = 0; i < len; i++) {
 			byte[] domain = (byte[])hash.FetchAt(i);
-			Xow_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(domain);
+			Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(domain);
 			wiki.Init_assert();
 		}
 		init = false;

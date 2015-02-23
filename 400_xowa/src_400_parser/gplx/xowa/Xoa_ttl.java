@@ -87,15 +87,15 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 		int ques_pos = Bry_finder.Find_bwd(full_txt, Byte_ascii.Question, full_txt_len, page_bgn);
 		return Bry_.Mid(full_txt, page_bgn, ques_pos == Bry_.NotFound ? full_txt_len : ques_pos);
 	}
-	public static Xoa_ttl parse_(Xow_wiki wiki, int ns_id, byte[] ttl) {
+	public static Xoa_ttl parse_(Xowe_wiki wiki, int ns_id, byte[] ttl) {
 		Xow_ns ns = wiki.Ns_mgr().Ids_get_or_null(ns_id);
 		byte[] raw = Bry_.Add(ns.Name_db_w_colon(), ttl);
-		return new_(wiki, wiki.App().Msg_log(), raw, 0, raw.length);
+		return new_(wiki, wiki.Appe().Msg_log(), raw, 0, raw.length);
 	}
-	public static Xoa_ttl parse_(Xow_wiki wiki, byte[] raw) {return new_(wiki, wiki.App().Msg_log(), raw, 0, raw.length);}
+	public static Xoa_ttl parse_(Xowe_wiki wiki, byte[] raw) {return new_(wiki, wiki.Appe().Msg_log(), raw, 0, raw.length);}
 	private static final Object thread_lock = new Object();
-	public static Xoa_ttl new_(Xow_wiki wiki, Gfo_msg_log msg_log, byte[] src, int bgn, int end) {
-		Xoa_app app = wiki.App();
+	public static Xoa_ttl new_(Xowe_wiki wiki, Gfo_msg_log msg_log, byte[] src, int bgn, int end) {
+		Xoae_app app = wiki.Appe();
 		Bry_bfr_mkr bry_mkr = app.Utl_bry_bfr_mkr();
 		return parse(bry_mkr, app.Parser_amp_mgr(), wiki.Lang().Case_mgr(), wiki.Xwiki_mgr(), wiki.Ns_mgr(), msg_log, src, bgn, end);
 	}	private Xoa_ttl() {}

@@ -156,7 +156,7 @@ class Xob_wiki_cfg_bldr_fxt {
 		wiki_cfg_bldr.Clear();
 		hash.Clear();
 		return this;
-	}	private Xoa_app app; Xob_wiki_cfg_bldr wiki_cfg_bldr; OrderedHash hash = OrderedHash_.new_();
+	}	private Xoae_app app; Xob_wiki_cfg_bldr wiki_cfg_bldr; OrderedHash hash = OrderedHash_.new_();
 	public Xob_wiki_cfg_bldr_fxt Init_cmd(String wiki, String key, String text) {
 		wiki_cfg_bldr.Itms_get_or_new(wiki).Itms_add(key, text);
 		return this;

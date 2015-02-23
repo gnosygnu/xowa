@@ -140,20 +140,20 @@ public class Xop_under_lxr_tst {
 		fxt.Init_para_n_();
 	}
 	@Test  public void Hook_alt() {	// PURPOSE: ja wikis use alternate __; DATE:2014-03-04
-		Xow_wiki wiki = fxt.Wiki(); Xol_lang lang = wiki.Lang();
+		Xowe_wiki wiki = fxt.Wiki(); Xol_lang lang = wiki.Lang();
 		fxt.Init_lang_kwds(lang, Xol_kwd_grp_.Id_toc, true, "＿＿TOC＿＿");
 		wiki.Parser().Init_by_lang(lang);
 		fxt.Test_parse_page_all_str("a＿＿TOC＿＿b", "ab");
 	}
 	@Test  public void Ascii_ci() {	// PURPOSE: case-insensitive ascii; DATE:2014-07-10
-		Xow_wiki wiki = fxt.Wiki(); Xol_lang lang = wiki.Lang();
+		Xowe_wiki wiki = fxt.Wiki(); Xol_lang lang = wiki.Lang();
 		fxt.Init_lang_kwds(lang, Xol_kwd_grp_.Id_toc, false, "__TOC__");
 		wiki.Parser().Init_by_lang(lang);
 		fxt.Test_parse_page_all_str("a__TOC__b", "ab");
 		fxt.Test_parse_page_all_str("a__toc__b", "ab");
 	}
 	@Test  public void Utf8_ci() {	// PURPOSE: case-insensitive UTF8; DATE:2014-07-10
-		Xow_wiki wiki = fxt.Wiki(); Xol_lang lang = wiki.Lang();
+		Xowe_wiki wiki = fxt.Wiki(); Xol_lang lang = wiki.Lang();
 		lang.Case_mgr_utf8_();
 		fxt.Init_lang_kwds(lang, Xol_kwd_grp_.Id_toc, false, "__AÉI__");
 		wiki.Parser().Init_by_lang(lang);
@@ -161,21 +161,21 @@ public class Xop_under_lxr_tst {
 		fxt.Test_parse_page_all_str("a__aéi__b", "ab");
 	}
 	@Test  public void Utf8_ci_asymmetric() {	// PURPOSE: case-insensitive UTF8; asymmetric; DATE:2014-07-10
-		Xow_wiki wiki = fxt.Wiki(); Xol_lang lang = wiki.Lang();
+		Xowe_wiki wiki = fxt.Wiki(); Xol_lang lang = wiki.Lang();
 		lang.Case_mgr_utf8_();
 		fxt.Init_lang_kwds(lang, Xol_kwd_grp_.Id_toc, false, "__İÇİNDEKİLER__");	// __TOC__ for tr.w
 		wiki.Parser().Init_by_lang(lang);
 		fxt.Test_parse_page_all_str("a__İçindekiler__b", "ab");
 	}
 	@Test  public void Cs() {	// PURPOSE: cs (ascii / utf8 doesn't matter); DATE:2014-07-11
-		Xow_wiki wiki = fxt.Wiki(); Xol_lang lang = wiki.Lang();
+		Xowe_wiki wiki = fxt.Wiki(); Xol_lang lang = wiki.Lang();
 		fxt.Init_lang_kwds(lang, Xol_kwd_grp_.Id_toc	, Bool_.Y, "__TOC__");
 		wiki.Parser().Init_by_lang(lang);
 		fxt.Test_parse_page_all_str("a__TOC__b"		, "ab");			// ci.pass
 		fxt.Test_parse_page_all_str("a__toc__b"		, "a__toc__b");		// ci.pass
 	}
 	@Test  public void Ascii_cs_ci() {	// PURPOSE: test simultaneous cs and ci; DATE:2014-07-11
-		Xow_wiki wiki = fxt.Wiki(); Xol_lang lang = wiki.Lang();
+		Xowe_wiki wiki = fxt.Wiki(); Xol_lang lang = wiki.Lang();
 		fxt.Init_lang_kwds(lang, Xol_kwd_grp_.Id_toc	, Bool_.N, "__TOC__");
 		fxt.Init_lang_kwds(lang, Xol_kwd_grp_.Id_notoc	, Bool_.Y, "__NOTOC__");
 		wiki.Parser().Init_by_lang(lang);

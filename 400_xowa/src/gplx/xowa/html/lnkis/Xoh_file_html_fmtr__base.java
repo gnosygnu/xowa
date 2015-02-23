@@ -30,7 +30,7 @@ public class Xoh_file_html_fmtr__base implements Xoh_file_img_wkr {
 	, "</a>"
 	), "a_href", "a_xowa_title", "html"
 	);
-	@gplx.Virtual public void Html_full_img(Bry_bfr tmp_bfr, Xoh_wtr_ctx hctx, Xoa_page page, Xof_xfer_itm xfer_itm, int uid
+	@gplx.Virtual public void Html_full_img(Bry_bfr tmp_bfr, Xoh_wtr_ctx hctx, Xoae_page page, Xof_xfer_itm xfer_itm, int uid
 	, byte[] a_href, byte a_cls, byte a_rel, byte[] a_title, byte[] a_xowa_title
 	, int img_w, int img_h, byte[] img_src, byte[] img_alt, byte img_cls, byte[] img_cls_other
 	) {
@@ -59,11 +59,11 @@ public class Xoh_file_html_fmtr__base implements Xoh_file_img_wkr {
 	, ""
 	), "uid", "div1_halign", "style", "div2_content"
 	);
-	public byte[] Html_thumb_part_img(Bry_bfr tmp_bfr, Xoa_page page, Xof_xfer_itm xfer_itm, Xop_lnki_tkn lnki, int uid, byte[] a_href, byte[] img_src, byte[] img_alt) {
+	public byte[] Html_thumb_part_img(Bry_bfr tmp_bfr, Xoae_page page, Xof_xfer_itm xfer_itm, Xop_lnki_tkn lnki, int uid, byte[] a_href, byte[] img_src, byte[] img_alt) {
 		Html_thumb_part_img(tmp_bfr, page, xfer_itm, uid, a_href, lnki.Ttl().Page_txt(), xfer_itm.Html_w(), xfer_itm.Html_h(), img_src, img_alt);
 		return tmp_bfr.Xto_bry_and_clear();
 	}
-	public void Html_thumb_part_img(Bry_bfr tmp_bfr, Xoa_page page, Xof_xfer_itm xfer_itm, int uid, byte[] a_href, byte[] a_title, int img_w, int img_h, byte[] img_src, byte[] img_alt) {
+	public void Html_thumb_part_img(Bry_bfr tmp_bfr, Xoae_page page, Xof_xfer_itm xfer_itm, int uid, byte[] a_href, byte[] a_title, int img_w, int img_h, byte[] img_src, byte[] img_alt) {
 		fmtr_thumb_part_img.Bld_bfr_many(tmp_bfr, uid, a_href, a_title, arg_img_core.Init(uid, img_src, img_w, img_h), img_alt);
 	}
 	private Bry_fmtr fmtr_thumb_part_img = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last

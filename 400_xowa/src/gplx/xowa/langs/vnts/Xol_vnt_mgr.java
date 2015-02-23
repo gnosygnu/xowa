@@ -25,7 +25,7 @@ public class Xol_vnt_mgr implements GfoInvkAble {
 	public byte[] Cur_vnt() {return cur_vnt;} public Xol_vnt_mgr Cur_vnt_(byte[] v) {cur_vnt = v; return this;} private byte[] cur_vnt = Bry_.Empty;
 	public boolean Enabled() {return enabled;} public void Enabled_(boolean v) {this.enabled = v;} private boolean enabled = false;
 	public String Html_style() {return html_style;} private String html_style = "";
-	public void Init_by_wiki(Xow_wiki wiki) {
+	public void Init_by_wiki(Xowe_wiki wiki) {
 		if (!enabled) return;
 		Xop_vnt_lxr_.set_(wiki);
 	}
@@ -48,14 +48,14 @@ public class Xol_vnt_mgr implements GfoInvkAble {
 			if (i == 0) cur_vnt = itm.Key();	// default to 1st item
 		}
 	}
-	public Xodb_page Convert_ttl(Xow_wiki wiki, Xoa_ttl ttl) {return Convert_ttl(wiki, ttl.Ns(), ttl.Page_db());}	// NOTE: not Full_db as ttl.Ns is passed; EX:Шаблон:Šablon:Jez-eng; PAGE:sr.w:ДНК DATE:2014-07-06
-	public Xodb_page Convert_ttl(Xow_wiki wiki, Xow_ns ns, byte[] ttl_bry) {
+	public Xodb_page Convert_ttl(Xowe_wiki wiki, Xoa_ttl ttl) {return Convert_ttl(wiki, ttl.Ns(), ttl.Page_db());}	// NOTE: not Full_db as ttl.Ns is passed; EX:Шаблон:Šablon:Jez-eng; PAGE:sr.w:ДНК DATE:2014-07-06
+	public Xodb_page Convert_ttl(Xowe_wiki wiki, Xow_ns ns, byte[] ttl_bry) {
 		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
 		Xodb_page rv = Convert_ttl(wiki, tmp_bfr, ns, ttl_bry);
 		tmp_bfr.Mkr_rls();
 		return rv;
 	}
-	public Xodb_page Convert_ttl(Xow_wiki wiki, Bry_bfr tmp_bfr, Xow_ns ns, byte[] ttl_bry) {	// REF.MW:LanguageConverter.php|findVariantLink
+	public Xodb_page Convert_ttl(Xowe_wiki wiki, Bry_bfr tmp_bfr, Xow_ns ns, byte[] ttl_bry) {	// REF.MW:LanguageConverter.php|findVariantLink
 		int converted = Convert_ttl_convert(wiki, tmp_bfr, ns, ttl_bry);	// convert ttl for each vnt
 		if (converted == 0) return Xodb_page.Null;							// ttl_bry has no conversions; exit;
 		wiki.Db_mgr().Load_mgr().Load_by_ttls(Cancelable_.Never, tmp_page_list, true, 0, converted);
@@ -65,7 +65,7 @@ public class Xol_vnt_mgr implements GfoInvkAble {
 		}
 		return Xodb_page.Null;
 	}
-	private int Convert_ttl_convert(Xow_wiki wiki, Bry_bfr tmp_bfr, Xow_ns ns, byte[] ttl_bry) {
+	private int Convert_ttl_convert(Xowe_wiki wiki, Bry_bfr tmp_bfr, Xow_ns ns, byte[] ttl_bry) {
 		tmp_page_list.Clear();
 		int rv = 0;
 		for (int i = 0; i < converter_ary_len; i++) {					// convert ttl for each variant

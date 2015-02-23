@@ -34,8 +34,8 @@ class Xodb_page_wkr_ctg_fxt {
 	public Xodb_page_wkr_ctg_fxt ini_(String s) {src = Bry_.new_utf8_(s); return this;}
 	public Xodb_page_wkr_ctg_fxt tst_(String... expd) {
 		Xobd_parser mgr = new Xobd_parser();
-		Xoa_app app = Xoa_app_fxt.app_();
-		Xow_wiki wiki = Xoa_app_fxt.wiki_tst_(app);
+		Xoae_app app = Xoa_app_fxt.app_();
+		Xowe_wiki wiki = Xoa_app_fxt.wiki_tst_(app);
 		Xob_bldr bldr = Xoa_app_fxt.bldr_(app);
 		Xobd_parser_wkr_ctg_tstr wkr = (Xobd_parser_wkr_ctg_tstr)new Xobd_parser_wkr_ctg_tstr().Ctor(bldr, wiki);
 		byte[] bry = Bry_.new_utf8_("[[Category:");

@@ -16,13 +16,14 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.xowa.apps.fsys.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.repos.*;
 public class Xoa_repo_mgr implements GfoInvkAble {
-	public Xoa_repo_mgr(Xoa_app app) {this.app = app;}
-	public Xoa_app App() {return app;} private Xoa_app app;
+	private final Xoa_fsys_mgr app_fsys; private final Xof_rule_mgr ext_rule_mgr;
+	public Xoa_repo_mgr(Xoa_fsys_mgr app_fsys, Xof_rule_mgr ext_rule_mgr) {this.app_fsys = app_fsys; this.ext_rule_mgr = ext_rule_mgr;}
 	public int Count() {return hash.Count();}
 	public Xof_repo_itm Get_at(int i)		{return (Xof_repo_itm)hash.FetchAt(i);}
 	public Xof_repo_itm Get_by(byte[] key)	{return (Xof_repo_itm)hash.Fetch(key);}
-	public Xof_repo_itm Get_primary(byte[] key)	{
+	public Xof_repo_itm Get_by_primary(byte[] key)	{
 		int len = hash.Count();
 		for (int i = 0; i < len; i++) {
 			Xof_repo_itm repo = (Xof_repo_itm)hash.FetchAt(i);
@@ -30,7 +31,7 @@ public class Xoa_repo_mgr implements GfoInvkAble {
 		}
 		return null;
 	}
-	public Xof_repo_itm Get_by_wmf(byte[] key)	{
+	public Xof_repo_itm Get_by_wmf_fsys(byte[] key) {
 		int len = hash.Count();
 		for (int i = 0; i < len; i++) {
 			Xof_repo_itm repo = (Xof_repo_itm)hash.FetchAt(i);
@@ -55,7 +56,7 @@ public class Xoa_repo_mgr implements GfoInvkAble {
 		byte[] key_bry = Bry_.new_utf8_(key);
 		Xof_repo_itm itm = (Xof_repo_itm)hash.Fetch(key_bry);
 		if (itm == null) {
-			itm = new Xof_repo_itm(this, key_bry);
+			itm = new Xof_repo_itm(key_bry, app_fsys, ext_rule_mgr);
 			this.Add(itm);
 		}
 		itm.Root_str_(url_str).Wiki_key_(Bry_.new_utf8_(wiki));

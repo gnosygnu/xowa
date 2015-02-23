@@ -17,19 +17,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 public class Xow_cfg_wiki_core {
-	public Xow_cfg_wiki_core(Xow_wiki wiki) {this.wiki = wiki;} private Xow_wiki wiki;
+	public Xow_cfg_wiki_core(Xowe_wiki wiki) {this.wiki = wiki;} private Xowe_wiki wiki;
 	public void Save() {
 	}
 	public byte[] Build_gfs() {
 		Gfs_bldr wtr = new Gfs_bldr();
 		Xow_wiki_props props = wiki.Props();
-		wtr.Add_proc_init_many(Xow_wiki.Invk_props).Add_nl();
+		wtr.Add_proc_init_many(Xowe_wiki.Invk_props).Add_nl();
 		wtr.Add_proc_cont_one(Xow_wiki_props.Invk_bldr_version_).Add_parens_str(props.Bldr_version()).Add_nl();
 		wtr.Add_proc_cont_one(Xow_wiki_props.Invk_main_page_).Add_parens_str(props.Main_page()).Add_nl();
 		wtr.Add_proc_cont_one(Xow_wiki_props.Invk_siteinfo_misc_).Add_parens_str(props.Siteinfo_misc()).Add_nl();
 		wtr.Add_proc_cont_one(Xow_wiki_props.Invk_siteinfo_mainpage_).Add_parens_str(props.Siteinfo_mainpage()).Add_nl();
 		wtr.Add_term_nl();
-		wtr.Add_proc_init_many(Xow_wiki.Invk_ns_mgr).Add_nl();
+		wtr.Add_proc_init_many(Xowe_wiki.Invk_ns_mgr).Add_nl();
 		wtr.Add_proc_cont_one(Xow_ns_mgr.Invk_clear).Add_nl();
 		wtr.Add_proc_cont_one(Xow_ns_mgr.Invk_load).Add_paren_bgn().Add_nl();
 		wtr.Add_quote_xtn_bgn();
@@ -46,7 +46,7 @@ public class Xow_cfg_wiki_core {
 		return wtr.Xto_bry();
 	}
 	public void Load(String raw) {
-		wiki.App().Gfs_mgr().Run_str_for(wiki, raw);
+		wiki.Appe().Gfs_mgr().Run_str_for(wiki, raw);
 	}
 	public static void Load_ns_(Xow_ns_mgr ns_mgr, byte[] src) {// 10|1|Template
 		int len = src.length; int pos = 0, fld_bgn = 0, fld_idx = 0, row_bgn = 0;

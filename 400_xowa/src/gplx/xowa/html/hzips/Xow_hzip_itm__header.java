@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import gplx.html.*; import gplx.xowa.apps.ttls.*; import gplx.xowa.hdumps.srls.*;
+import gplx.html.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.hdumps.srls.*;
 public class Xow_hzip_itm__header {
 	private Xow_hzip_mgr hzip_mgr;
 	public Xow_hzip_itm__header(Xow_hzip_mgr hzip_mgr) {this.hzip_mgr = hzip_mgr;}

@@ -19,7 +19,7 @@ package gplx.xowa; import gplx.*;
 import gplx.core.btries.*; import gplx.xowa.parsers.paras.*;
 public class Xop_comm_lxr implements Xop_lxr {
 	public byte Lxr_tid() {return Xop_lxr_.Tid_comment;}
-	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Bgn_ary, this);}
+	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Bgn_ary, this);}
 	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		int lhs_end = cur_pos;

@@ -16,12 +16,19 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
+import gplx.dbs.sqls.*;
 public class Db_meta_idx {
-	public Db_meta_idx(String tbl, String name, boolean unique, String[] flds) {this.tbl = tbl; this.name = name; this.unique = unique; this.flds = flds;}
+	Db_meta_idx(String tbl, String name, boolean unique, String[] flds) {this.tbl = tbl; this.name = name; this.unique = unique; this.flds = flds;}
+	public String Tbl() {return tbl;} private final String tbl;
 	public String Name() {return name;} private final String name;		
 	public boolean Unique() {return unique;} private final boolean unique;
 	public String[] Flds() {return flds;} private final String[] flds;
-	public String Tbl() {return tbl;} private final String tbl;
-	public static Db_meta_idx new_unique(String tbl, String name, String... flds) {return new Db_meta_idx(tbl, name, Bool_.Y, flds);}
-	public static Db_meta_idx new_normal(String tbl, String name, String... flds) {return new Db_meta_idx(tbl, name, Bool_.N, flds);}
+	public String To_sql_create() {return Db_sqlbldr__sqlite.I.Bld_create_idx(this);}
+	public static Db_meta_idx new_unique_by_name(String tbl, String idx_name, String... flds)			{return new Db_meta_idx(tbl, idx_name, Bool_.Y, flds);}
+	public static Db_meta_idx new_normal_by_name(String tbl, String idx_name, String... flds)			{return new Db_meta_idx(tbl, idx_name, Bool_.N, flds);}
+	public static Db_meta_idx new_unique_by_tbl(String tbl, String name, String... flds)	{return new Db_meta_idx(tbl, Bld_idx_name(tbl, name), Bool_.Y, flds);}
+	public static Db_meta_idx new_normal_by_tbl(String tbl, String name, String... flds)	{return new Db_meta_idx(tbl, Bld_idx_name(tbl, name), Bool_.N, flds);}
+	public static Db_meta_idx new_unique_by_tbl_wo_null(String tbl, String name, String... flds)	{return new Db_meta_idx(tbl, Bld_idx_name(tbl, name), Bool_.Y, String_.Ary_wo_null(flds));}
+	public static Db_meta_idx new_normal_by_tbl_wo_null(String tbl, String name, String... flds)	{return new Db_meta_idx(tbl, Bld_idx_name(tbl, name), Bool_.N, String_.Ary_wo_null(flds));}
+	public static String Bld_idx_name(String tbl, String suffix) {return String_.Concat(tbl, "__", suffix);}
 }

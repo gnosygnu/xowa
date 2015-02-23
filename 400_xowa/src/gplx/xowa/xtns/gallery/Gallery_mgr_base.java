@@ -39,7 +39,7 @@ public abstract class Gallery_mgr_base {
 	@gplx.Virtual public int Get_gb_width(int thm_w, int thm_h) {// REF.MW: getGBWidth; Width of gallerybox <li>. Generally is the width of the image, plus padding on image plus padding on gallerybox.s
 		return itm_default_w + this.Get_thumb_padding() + this.Get_gb_padding();
 	}
-	@gplx.Virtual public void Get_modules(Xoa_page page) {} // REF.MW: getModules; Get a list of modules to include in the page.
+	@gplx.Virtual public void Get_modules(Xoae_page page) {} // REF.MW: getModules; Get a list of modules to include in the page.
 	@gplx.Virtual public void Init(int itms_per_row, int itm_default_w, int itm_default_h) {
 		this.itms_per_row = itms_per_row;
 		this.itm_default_w = itm_default_w;
@@ -51,7 +51,7 @@ public abstract class Gallery_mgr_base {
 			.Add(Wrap_gallery_text_end)
 			;
 	}
-	public void Write_html(Bry_bfr bfr, Xow_wiki wiki, Xoa_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Gallery_xnde xnde) {
+	public void Write_html(Bry_bfr bfr, Xowe_wiki wiki, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Gallery_xnde xnde) {
 		boolean hctx_is_hdump = hctx.Mode_is_hdump();
 		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();			
 		byte[] box_style = xnde.Atr_style();
@@ -63,11 +63,11 @@ public abstract class Gallery_mgr_base {
 		}
 		byte[] box_cls = Fmt_and_add(tmp_bfr, box_cls_fmtr, xnde.Atr_cls(), this.Tid_bry());
 		byte[] gallery_ul_id = tmp_bfr.Add(box_id_prefix_bry).Add_int_variable(gallery_uid).Xto_bry_and_clear();
-		Box_hdr_write(bfr, wiki.App().Html_mgr().Whitelist_mgr(), src, gallery_ul_id, box_cls, box_style, xnde.Atrs_other(), hctx_is_hdump, gallery_uid);
+		Box_hdr_write(bfr, wiki.Appe().Html_mgr().Whitelist_mgr(), src, gallery_ul_id, box_cls, box_style, xnde.Atrs_other(), hctx_is_hdump, gallery_uid);
 		byte[] box_caption = xnde.Atr_caption();
 		if (Bry_.Len_gt_0(box_caption)) box_caption_fmtr.Bld_bfr_many(bfr, box_caption);
 
-		Xoa_app app = wiki.App(); Xoh_html_wtr html_wtr = wiki.Html_mgr().Html_wtr();
+		Xoae_app app = wiki.Appe(); Xoh_html_wtr html_wtr = wiki.Html_mgr().Html_wtr();
 		int itm_len = xnde.Itms_len();
 		for (int i = 0; i < itm_len; i++) {
 			Write_html_itm(bfr, tmp_bfr, app, wiki, page, ctx, html_wtr, hctx, src, xnde, gallery_ul_id, i, null, hctx_is_hdump);
@@ -76,7 +76,7 @@ public abstract class Gallery_mgr_base {
 		tmp_bfr.Mkr_rls();
 	}	private static final byte[] box_id_prefix_bry = Bry_.new_ascii_("xowa_gallery_ul_"), itm_id_prefix_bry = Bry_.new_ascii_("xowa_gallery_li_");
 	public static byte File_found_mode = Bool_.__byte;
-	public void Write_html_itm(Bry_bfr bfr, Bry_bfr tmp_bfr, Xoa_app app, Xow_wiki wiki, Xoa_page page, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, byte[] src, Gallery_xnde xnde, byte[] gallery_ul_id, int i, Xof_xfer_itm xfer_itm, boolean hctx_is_hdump) {
+	public void Write_html_itm(Bry_bfr bfr, Bry_bfr tmp_bfr, Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, byte[] src, Gallery_xnde xnde, byte[] gallery_ul_id, int i, Xof_xfer_itm xfer_itm, boolean hctx_is_hdump) {
 		Gallery_itm itm = (Gallery_itm)xnde.Itms_get_at(i);
 		Xoa_ttl ttl = itm.Ttl();
 		byte[] itm_caption = itm.Caption_bry(); if (itm_caption == null) itm_caption = Bry_.Empty;
@@ -111,7 +111,7 @@ public abstract class Gallery_mgr_base {
 		else {
 			byte[] alt = itm.Alt_bgn() == Bry_.NotFound && Bry_.Len_eq_0(itm_caption)	//	if ( $alt == '' && $text == '' )  $imageParameters['alt'] = $nt->getText();
 				? itm.Ttl().Page_txt()
-				: Xoh_html_wtr_escaper.Escape(app, tmp_bfr, Bry_.Mid(src, itm.Alt_bgn(), itm.Alt_end()))
+				: Xoh_html_wtr_escaper.Escape(app.Parser_amp_mgr(), tmp_bfr, Bry_.Mid(src, itm.Alt_bgn(), itm.Alt_end()))
 				;
 			Xoa_ttl href_ttl = itm.Link_bgn() == Bry_.NotFound
 				? ttl

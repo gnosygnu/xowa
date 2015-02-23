@@ -92,7 +92,7 @@ public class Scrib_core_tst {
 	}
 //		@Test  public void Invoke() {
 //			fxt	.Init_lib_mw();
-//			fxt	.Init_cbks_add("getExpandedArgument", gplx.xowa.xtns.scribunto.lib.Scrib_lib_mw.Proc_getExpandedArgument);
+//			fxt	.Init_cbks_add("getExpandedArgument", gplx.xowa.xtns.scribunto.libs.Scrib_lib_mw.Proc_getExpandedArgument);
 //			fxt	.Expd_server_rcvd_add("0000004900000091{[\"op\"]=\"loadString\",[\"text\"]=\"Mod_0_code\",[\"chunkName\"]=\"=Module:Mod_0\"}")
 //				.Init_server_prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:1;s:6:\"values\";a:1:{i:1;i:13;}}")			// NOTE: 13=id of "Module:Mod_0"
 //				.Expd_server_rcvd_add("0000003E0000007B{[\"op\"]=\"call\",[\"id\"]=8,[\"nargs\"]=1,[\"args\"]={[1]=chunks[13]}}")	// NOTE: 8=executeModule; 13=id of "Module:Mod_0"

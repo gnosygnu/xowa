@@ -16,15 +16,15 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.imports.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.imports.*;
-import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.core.flds.*; import gplx.ios.*;
+import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.core.flds.*; import gplx.ios.*; import gplx.xowa.tdbs.*;
 public abstract class Xob_ctg_v1_base extends Xob_itm_dump_base implements Xobd_parser_wkr, GfoInvkAble {
 	protected Xob_ctg_v1_base() {}	// TEST:needed for fxt
-	public Xob_ctg_v1_base Ctor(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki); return this;}
+	public Xob_ctg_v1_base Ctor(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki); return this;}
 	public abstract String Wkr_key();
 	public abstract Io_sort_cmd Make_sort_cmd();
 	public OrderedHash Wkr_hooks() {return wkr_hooks;} private OrderedHash wkr_hooks = OrderedHash_.new_bry_();
 	public void Wkr_bgn(Xob_bldr bldr) {
-		this.Init_dump(this.Wkr_key(), wiki.Fsys_mgr().Site_dir().GenSubDir(Xow_dir_info_.Name_category));
+		this.Init_dump(this.Wkr_key(), wiki.Tdb_fsys_mgr().Site_dir().GenSubDir(Xotdb_dir_info_.Name_category));
 		Bry_bfr tmp_bfr = bldr.App().Utl_bry_bfr_mkr().Get_b512();
 		Xol_lang lang = wiki.Lang();
 		wkr_hooks_add(tmp_bfr, lang.Ns_names());

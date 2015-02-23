@@ -16,12 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.specials.*; import gplx.xowa.specials.allPages.*;
+import gplx.xowa.specials.*; import gplx.xowa.specials.allPages.*; import gplx.xowa.tdbs.*;
 public class Xob_hive_mgr {
-	public Xob_hive_mgr(Xow_wiki wiki) {this.wiki = wiki; this.fsys_mgr = wiki.Fsys_mgr();} private Xow_wiki wiki; Xow_fsys_mgr fsys_mgr;
+	public Xob_hive_mgr(Xowe_wiki wiki) {this.wiki = wiki; this.fsys_mgr = wiki.Tdb_fsys_mgr();} private Xowe_wiki wiki; Xotdb_fsys_mgr fsys_mgr;
 	public void Clear() {regy.Clear(); xdat.Clear();}
 	public void Special_allpages_query(Xows_page_allpages mgr, Xow_ns ns, byte[] key, int count, boolean include_redirects) {
-		byte dir_tid = Xow_dir_info_.Tid_ttl;
+		byte dir_tid = Xotdb_dir_info_.Tid_ttl;
 		int xdat_idx = Regy__find_file_ns(key, dir_tid, ns.Num_str());
 		Xob_xdat_file xdat_main = new Xob_xdat_file();
 		xdat_main = xdat_load_(xdat_main, dir_tid, ns, xdat_idx);
@@ -107,7 +107,7 @@ public class Xob_hive_mgr {
 		mgr.Rslt_prv_(prv_itm);			
 	}
 	public void Find_bgn(ListAdp list, Xow_ns ns, byte[] key, int count, boolean include_redirects) {
-		byte dir_tid = Xow_dir_info_.Tid_ttl;
+		byte dir_tid = Xotdb_dir_info_.Tid_ttl;
 		int xdat_idx = Regy__find_file_ns(key, dir_tid, ns.Num_str());
 		Io_url xdat_url = fsys_mgr.Url_ns_fil(dir_tid, ns.Id(), xdat_idx);
 		byte[] xdat_bry = gplx.ios.Io_stream_rdr_.Load_all(xdat_url);
@@ -177,7 +177,7 @@ public class Xob_hive_mgr {
 		Xdat__create_row(dir_tid, key, row, xdat_idx);
 	}
 	int Regy__find_file(byte[] key, byte dir_tid)					{return Regy__find_file_by_url(key, fsys_mgr.Url_site_reg(dir_tid));}
-	int Regy__find_file_ns(byte[] key, byte dir_tid, String ns_num) {return Regy__find_file_by_url(key, fsys_mgr.Url_ns_reg(ns_num, Xow_dir_info_.Tid_ttl));}
+	int Regy__find_file_ns(byte[] key, byte dir_tid, String ns_num) {return Regy__find_file_by_url(key, fsys_mgr.Url_ns_reg(ns_num, Xotdb_dir_info_.Tid_ttl));}
 	int Regy__find_file_by_url(byte[] key, Io_url regy_url) {regy.Init(regy_url); return regy.Files_find(key);} private Xowd_regy_mgr regy = new Xowd_regy_mgr();
 	private void Xdat__create_row(byte dir_tid, byte[] key, byte[] row, int xdat_idx) {
 		Io_url xdat_url = fsys_mgr.Url_site_fil(dir_tid, xdat_idx);

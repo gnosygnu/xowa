@@ -27,14 +27,14 @@ class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 	public void Async_prog_run(int async_sleep_sum) {}
 	public byte Async_init() {return Gfo_thread_cmd_.Init_ok;}
 	public boolean Async_term() {
-		install_mgr.App().Gui_wtr().Log_many(GRP_KEY, "import.end", "import.end ~{0} ~{1} ~{2}", wiki_key, wiki_date, dump_type);
+		install_mgr.App().Usr_dlg().Log_many(GRP_KEY, "import.end", "import.end ~{0} ~{1} ~{2}", wiki_key, wiki_date, dump_type);
 		return true;
 	}
 	public GfoInvkAble Owner() {return owner;} public Xoi_cmd_wiki_import Owner_(GfoInvkAble v) {owner = v; return this;} GfoInvkAble owner;
 	public Gfo_thread_cmd Async_next_cmd() {return next_cmd;} public void Async_next_cmd_(Gfo_thread_cmd v) {next_cmd = v;} Gfo_thread_cmd next_cmd;
 	public void Async_run() {
 		running = true;
-		install_mgr.App().Gui_wtr().Log_many(GRP_KEY, "import.bgn", "import.bgn ~{0} ~{1} ~{2}", wiki_key, wiki_date, dump_type);
+		install_mgr.App().Usr_dlg().Log_many(GRP_KEY, "import.bgn", "import.bgn ~{0} ~{1} ~{2}", wiki_key, wiki_date, dump_type);
 		ThreadAdp_.invk_(this, Invk_process_async).Start();			
 	}
 	public boolean Async_running() {
@@ -62,12 +62,12 @@ class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 			bldr.Cmd_mgr().Add_cmd(wiki, "import.sql.category_registry");
 			bldr.Cmd_mgr().Add_cmd(wiki, "import.sql.categorylinks");
 		}
-		if (wiki.App().Setup_mgr().Dump_mgr().Search_version() == gplx.xowa.specials.search.Xosrh_core.Version_2)
+		if (wiki.Appe().Setup_mgr().Dump_mgr().Search_version() == gplx.xowa.specials.search.Xosrh_core.Version_2)
 			bldr.Cmd_mgr().Add_cmd(wiki, "import.sql.search_title.wkr");
 		bldr.Cmd_mgr().Add_cmd(wiki, "import.sql.term");	
 	}	
 	private void Process_async() {
-		Xoa_app app = install_mgr.App();
+		Xoae_app app = install_mgr.App();
 		app.Usr_dlg().Prog_one("", "", "preparing import: ~{0}", wiki_key);
 		Xob_bldr bldr = app.Bldr();
 		wiki = app.Wiki_mgr().Get_by_key_or_make(Bry_.new_ascii_(wiki_key));
@@ -80,8 +80,8 @@ class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 		else
 			Process_txt(bldr);
 		bldr.Run();
-		app.Gui_wtr().Prog_none(GRP_KEY, "clear", "");
-		app.Gui_wtr().Note_none(GRP_KEY, "clear", "");
+		app.Usr_dlg().Prog_none(GRP_KEY, "clear", "");
+		app.Usr_dlg().Note_none(GRP_KEY, "clear", "");
 		app.User().Available_from_fsys();
 		wiki.Init_needed_(true);
 		wiki.Html_mgr().Page_wtr_mgr().Init_(true);
@@ -98,7 +98,7 @@ class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 		running = false;
 		wiki.Import_cfg().Src_fil_xml_(null).Src_fil_bz2_(null);	// reset file else error when going from Import/Script to Import/List
 		app.Gui_mgr().Kit().New_cmd_sync(this).Invk(GfsCtx.new_(), 0, Invk_open_wiki, GfoMsg_.Null);
-	}	private Xow_wiki wiki;
+	}	private Xowe_wiki wiki;
 	private void Open_wiki(String wiki_key) {
 		Xog_win_itm main_win = install_mgr.App().Gui_mgr().Browser_win();
 		if (main_win.Active_page() == null) return; // will be null when invoked through cmd-line

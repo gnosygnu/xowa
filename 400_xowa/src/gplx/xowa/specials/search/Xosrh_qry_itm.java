@@ -45,11 +45,11 @@ class Xosrh_qry_itm {
 			default: throw Err_.unhandled(tid);
 		}
 	}
-	private static ListAdp Search_word(Xow_wiki wiki, Cancelable cancelable, Bry_bfr tmp_bfr, Xosrh_ns_mgr ns_mgr, byte[] search_word, int results_max) {
+	private static ListAdp Search_word(Xowe_wiki wiki, Cancelable cancelable, Bry_bfr tmp_bfr, Xosrh_ns_mgr ns_mgr, byte[] search_word, int results_max) {
 		ListAdp found = ListAdp_.new_();
 		byte wiki_db_tid = wiki.Db_mgr().Tid();
 		if (wiki_db_tid == Xodb_mgr_sql.Tid_sql
-			&& wiki.App().Gui_mgr().Search_suggest_mgr().Auto_wildcard()) {	// HACK: auto-asterisk words for sqlite; DATE:2013-09-05
+			&& wiki.Appe().Gui_mgr().Search_suggest_mgr().Auto_wildcard()) {	// HACK: auto-asterisk words for sqlite; DATE:2013-09-05
 			if (!Bry_.HasAtEnd(search_word, new byte[] {Byte_ascii.Asterisk}))
 				search_word = Bry_.Add(search_word, Byte_ascii.Asterisk);
 			if (!Bry_.HasAtBgn(search_word, new byte[] {Byte_ascii.Asterisk}))
@@ -66,7 +66,7 @@ class Xosrh_qry_itm {
 		}
 		return rv;
 	}
-	public void Search(Cancelable cancelable, Bry_bfr tmp_bfr, byte[] src, Xow_wiki wiki, int results_max, Xosrh_ns_mgr ns_mgr) {
+	public void Search(Cancelable cancelable, Bry_bfr tmp_bfr, byte[] src, Xowe_wiki wiki, int results_max, Xosrh_ns_mgr ns_mgr) {
 		if (cancelable.Canceled()) return;
 		switch (tid) {
 			case Xosrh_qry_itm.Tid_null: return;

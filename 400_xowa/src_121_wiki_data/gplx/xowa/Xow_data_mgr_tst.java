@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import org.junit.*;
+import org.junit.*; import gplx.xowa.tdbs.*;
 public class Xow_data_mgr_tst {
 	Xow_data_mgr_fxt fxt = new Xow_data_mgr_fxt();
 	@Before public void init() {fxt.Clear(); Tfds.Now_enabled_y_();}
@@ -123,8 +123,8 @@ public class Xow_data_mgr_tst {
 	}
 }
 class Xow_data_mgr_fxt {
-	Xoa_app app;
-	public Xow_wiki Wiki() {return wiki;} private Xow_wiki wiki;
+	Xoae_app app;
+	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public void Clear() {
 		app = Xoa_app_fxt.app_();
 		wiki = Xoa_app_fxt.wiki_tst_(app);
@@ -137,26 +137,26 @@ class Xow_data_mgr_fxt {
 	}
 	public Xow_data_mgr_fxt Update(String ttl_str, String data) {
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_utf8_(ttl_str));
-		Xoa_page page = Xoa_page.test_(wiki, ttl);
+		Xoae_page page = Xoae_page.test_(wiki, ttl);
 		wiki.Db_mgr().Save_mgr().Data_update(page, Bry_.new_utf8_(data));
 		return this;
 	}
 	public Xow_data_mgr_fxt Rename(String old_ttl, String new_ttl) {
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_utf8_(old_ttl));
-		Xoa_page page = Xoa_page.test_(wiki, ttl);
+		Xoae_page page = Xoae_page.test_(wiki, ttl);
 		wiki.Db_mgr().Save_mgr().Data_rename(page, ttl.Ns().Id(), Bry_.new_utf8_(new_ttl));
 		return this;
 	}
-	public Xow_data_mgr_fxt Tst_regy_title(String expd) {return Tst_regy(Xow_dir_info_.Name_title, expd);}
+	public Xow_data_mgr_fxt Tst_regy_title(String expd) {return Tst_regy(Xotdb_dir_info_.Name_title, expd);}
 	Xow_data_mgr_fxt Tst_regy(String name, String expd) {
 		Io_url file_orig = Io_url_.mem_fil_("mem/xowa/wiki/en.wikipedia.org/ns/000/" + name + "/reg.csv");
 		Tfds.Eq_str_lines(expd, Io_mgr._.LoadFilStr(file_orig));
 		return this;
 	}
-	public Xow_data_mgr_fxt Tst_data_page(String expd) {return Tst_data(Xow_dir_info_.Tid_page , Xow_ns_.Id_main, 0, expd);}
-	public Xow_data_mgr_fxt Tst_data_title(String expd) {return Tst_data(Xow_dir_info_.Tid_ttl, Xow_ns_.Id_main, 0, expd);}
+	public Xow_data_mgr_fxt Tst_data_page(String expd) {return Tst_data(Xotdb_dir_info_.Tid_page , Xow_ns_.Id_main, 0, expd);}
+	public Xow_data_mgr_fxt Tst_data_title(String expd) {return Tst_data(Xotdb_dir_info_.Tid_ttl, Xow_ns_.Id_main, 0, expd);}
 	public Xow_data_mgr_fxt Tst_data(byte dir_tid, int ns_id, int fil, String expd) {
-		Io_url url = wiki.Fsys_mgr().Url_ns_fil(dir_tid, ns_id, fil);
+		Io_url url = wiki.Tdb_fsys_mgr().Url_ns_fil(dir_tid, ns_id, fil);
 		Tfds.Eq_str_lines(expd, Io_mgr._.LoadFilStr(url));
 		return this;
 	}

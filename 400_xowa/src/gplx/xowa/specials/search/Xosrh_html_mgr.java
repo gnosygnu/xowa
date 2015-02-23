@@ -45,14 +45,14 @@ class Xosrh_html_mgr implements GfoInvkAble {
 		int itms_len = grp.Itms_len();
 		int xowa_idx_bwd = (page_idx == 0) 			? 0 			: page_idx - 1;
 		int xowa_idx_fwd = (page_idx >= pages_len) 	? pages_len - 1 : page_idx + 1;
-		Xow_wiki wiki = core.Wiki();
+		Xowe_wiki wiki = core.Wiki();
 		Xol_num_mgr num_mgr = wiki.Lang().Num_mgr();
 		int itms_bgn = core.Page_mgr().Itms_bgn() + 1;
 		if (itms_len == 0) itms_bgn = 0;
 		byte[] search_results_header = wiki.Msg_mgr().Val_by_id_args(Xol_msg_itm_.Id_search_results_header, num_mgr.Format_num(itms_bgn), num_mgr.Format_num(core.Page_mgr().Itms_end()), num_mgr.Format_num(grp.Itms_total()), search_bry, pages_len);
 		html_all_bgn.Bld_bfr_many(bfr, search_results_header, search_bry, xowa_idx_bwd, xowa_idx_fwd);
 		Xow_ns_mgr ns_mgr = wiki.Ns_mgr();
-		Bry_bfr tmp_ttl_bfr = core.Wiki().App().Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr tmp_ttl_bfr = core.Wiki().Appe().Utl_bry_bfr_mkr().Get_b512();
 		for (int i = 0; i < itms_len; i++) {
 			Xodb_page itm = grp.Itms_get_at(i);
 			byte[] itm_ttl = Xoa_ttl.Replace_unders(itm.Ttl_wo_ns());

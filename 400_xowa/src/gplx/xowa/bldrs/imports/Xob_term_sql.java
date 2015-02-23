@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.xowa.dbs.*;
 public class Xob_term_sql extends Xob_term_base {
-	public Xob_term_sql(Xob_bldr bldr, Xow_wiki wiki) {this.Ctor(bldr, wiki); this.wiki = wiki;} private Xow_wiki wiki;
+	public Xob_term_sql(Xob_bldr bldr, Xowe_wiki wiki) {this.Ctor(bldr, wiki); this.wiki = wiki;} private Xowe_wiki wiki;
 	@Override public String Cmd_key() {return KEY;} public static final String KEY = "import.sql.term";
 	@Override public void Cmd_end_hook() {
 		Io_mgr._.DeleteDirDeep(wiki.Fsys_mgr().Tmp_dir());

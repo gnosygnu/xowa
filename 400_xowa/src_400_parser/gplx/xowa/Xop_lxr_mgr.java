@@ -22,7 +22,7 @@ public class Xop_lxr_mgr {
 	private Xop_lxr[] ary;
 	public Xop_lxr_mgr(Xop_lxr[] ary) {this.ary = ary;}
 	public Btrie_fast_mgr Trie() {return trie;} private Btrie_fast_mgr trie = Btrie_fast_mgr.cs_();
-	public void Init_by_wiki(Xow_wiki wiki) {
+	public void Init_by_wiki(Xowe_wiki wiki) {
 		int ary_len = ary.length;
 		for (int i = 0; i < ary_len; i++) {
 			Xop_lxr lxr = ary[i];

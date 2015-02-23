@@ -21,7 +21,7 @@ import gplx.xowa.html.tocs.*;
 class Xop_under_lxr implements Xop_lxr {
 	private Btrie_mgr words_trie_ci, words_trie_cs;
 	public byte Lxr_tid() {return Xop_lxr_.Tid_under;}
-	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr core_trie) {}
+	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {}
 	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {
 		Xol_kwd_mgr kwd_mgr = lang.Kwd_mgr();
 		int under_kwds_len = under_kwds.length;
@@ -56,7 +56,7 @@ class Xop_under_lxr implements Xop_lxr {
 					if (kwd_case_match)					// cs; add word directly to trie
 						core_trie.Add(kwd_bry, word_lxr);
 					else {								// NOTE: next part is imprecise; XOWA parser is cs, but kwd is ci; for now, just add all upper and all lower
-						lang.App().Usr_dlg().Warn_many("", "", "under keyword does not start with __; id=~{0} key=~{1} word=~{2}", kwd_id, String_.new_utf8_(kwd_grp.Key()), String_.new_utf8_(kwd_bry));
+						Gfo_usr_dlg_._.Warn_many("", "", "under keyword does not start with __; id=~{0} key=~{1} word=~{2}", kwd_id, String_.new_utf8_(kwd_grp.Key()), String_.new_utf8_(kwd_bry));
 						core_trie.Add(lang.Case_mgr().Case_build_lower(kwd_bry), word_lxr);
 						core_trie.Add(lang.Case_mgr().Case_build_upper(kwd_bry), word_lxr);	
 					}
@@ -93,7 +93,7 @@ class Xop_under_lxr implements Xop_lxr {
 		return rv;
 	}
 	public static void Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos, int kwd_id) {
-		Xoa_page page = ctx.Cur_page();
+		Xoae_page page = ctx.Cur_page();
 		Xow_hdr_mgr hdr_mgr = page.Hdr_mgr();
 		switch (kwd_id) {
 			case Xol_kwd_grp_.Id_toc:
@@ -115,7 +115,7 @@ class Xop_word_lxr implements Xop_lxr {
 	private int kwd_id;
 	public Xop_word_lxr(int kwd_id) {this.kwd_id = kwd_id;}
 	public byte Lxr_tid() {return Xop_lxr_.Tid_word;}
-	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr core_trie) {}
+	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {}
 	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		Xop_under_lxr.Make_tkn(ctx, tkn_mkr, root, src, src_len, bgn_pos, cur_pos, kwd_id);	// for now, all word_lxrs only call the under_lxr; DATE:2014-02-14

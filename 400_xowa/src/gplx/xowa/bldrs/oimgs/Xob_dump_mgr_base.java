@@ -31,7 +31,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 	private Xobu_poll_mgr poll_mgr; private int poll_interval = 5000;
 	private Xob_rate_mgr rate_mgr = new Xob_rate_mgr();
 	public abstract String Cmd_key();
-	@Override protected void Cmd_ctor_end(Xob_bldr bldr, Xow_wiki wiki) {
+	@Override protected void Cmd_ctor_end(Xob_bldr bldr, Xowe_wiki wiki) {
 		poll_mgr = new Xobu_poll_mgr(bldr.App());	// init in ctor so gfs can invoke methods
 	}
 	public void Cmd_bgn(Xob_bldr bldr) {
@@ -54,7 +54,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 			bmk_mgr.Reset();
 			Init_reset(conn);
 		}
-		bmk_mgr.Load(wiki.App(), this);
+		bmk_mgr.Load(wiki.Appe(), this);
 		Cmd_bgn_end();
 	}
 	protected abstract void Cmd_bgn_end();
@@ -214,7 +214,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 	private static final String GRP_KEY = "xowa.bldr.parse";
 }
 class Xob_dump_mgr_base_ {
-	public static void Load_all_tmpls(Gfo_usr_dlg usr_dlg, Xow_wiki wiki, Xob_dump_src_id page_src) {
+	public static void Load_all_tmpls(Gfo_usr_dlg usr_dlg, Xowe_wiki wiki, Xob_dump_src_id page_src) {
 		ListAdp pages = ListAdp_.new_();
 		Xow_ns ns_tmpl = wiki.Ns_mgr().Ns_template();
 		Xow_defn_cache defn_cache = wiki.Cache_mgr().Defn_cache();
@@ -243,7 +243,7 @@ class Xob_dump_bmk_mgr {
 	private Bry_bfr save_bfr = Bry_bfr.reset_(1024);
 	public Io_url Cfg_url() {return cfg_url;} public Xob_dump_bmk_mgr Cfg_url_(Io_url v) {cfg_url = v; return this;} private Io_url cfg_url;
 	public void Reset() {Io_mgr._.DeleteFil(cfg_url);}
-	public void Load(Xoa_app app, Xob_dump_mgr_base dump_mgr) {
+	public void Load(Xoae_app app, Xob_dump_mgr_base dump_mgr) {
 		app.Gfs_mgr().Run_url_for(dump_mgr, cfg_url);
 	}
 	public void Save(int ns_id, int db_id, int pg_id) {

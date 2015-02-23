@@ -46,7 +46,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 	}
 	@Override public boolean Tmpl_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Bry_bfr bfr) {	// this="{{t|{{{0}}}}}" caller="{{t|1}}"
 		boolean rv = false;
-		Xot_defn defn = tmpl_defn; Xow_wiki wiki = ctx.Wiki(); Xol_lang lang = wiki.Lang();
+		Xot_defn defn = tmpl_defn; Xowe_wiki wiki = ctx.Wiki(); Xol_lang lang = wiki.Lang();
 		byte[] name_ary = defn.Name(), argx_ary = Bry_.Empty; Arg_itm_tkn name_key_tkn = name_tkn.Key_tkn();
 		byte[] name_ary_orig = Bry_.Empty;
 		int name_bgn = 0, name_ary_len = 0; 
@@ -235,7 +235,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 					if (Env_.Mode_testing()) 
 						throw Err_.err_(e, "failed to evaluate function: page={0} defn={1} src={2} err={3}", String_.new_utf8_(ctx.Cur_page().Ttl().Full_txt()), String_.new_utf8_(defn.Name()), String_.new_utf8_(src, this.Src_bgn(), this.Src_end()), Err_.Message_gplx_brief(e));
 					else {
-						wiki.App().Usr_dlg().Warn_many("", "", "failed to evaluate function: page=~{0} defn=~{1} src=~{2} err=~{3}", String_.new_utf8_(ctx.Cur_page().Ttl().Full_txt()), String_.new_utf8_(defn.Name()), String_.new_utf8_(src, this.Src_bgn(), this.Src_end()), Err_.Message_gplx_brief(e));
+						wiki.Appe().Usr_dlg().Warn_many("", "", "failed to evaluate function: page=~{0} defn=~{1} src=~{2} err=~{3}", String_.new_utf8_(ctx.Cur_page().Ttl().Full_txt()), String_.new_utf8_(defn.Name()), String_.new_utf8_(src, this.Src_bgn(), this.Src_end()), Err_.Message_gplx_brief(e));
 						rv = false;
 					}
 				}
@@ -331,7 +331,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 			bfr.Add(nde.Val_tkn().Dat_ary());
 		}
 	}
-	private boolean Transclude(Xop_ctx ctx, Xow_wiki wiki, Bry_bfr bfr, byte[] name_ary, Xot_invk caller, byte[] src) {
+	private boolean Transclude(Xop_ctx ctx, Xowe_wiki wiki, Bry_bfr bfr, byte[] name_ary, Xot_invk caller, byte[] src) {
 		Xoa_ttl page_ttl = Xoa_ttl.parse_(wiki, name_ary); if (page_ttl == null) return false;	// ttl not valid; EX: {{:[[abc]]}}
 		byte[] transclude_src = null;
 		if (page_ttl.Ns().Id_tmpl()) {					// ttl is template; check tmpl_regy first before going to data_mgr
@@ -366,7 +366,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		doc.Add_bfr_and_clear(tmp_bfr);
 		return rv;
 	}
-	public static Xot_defn_tmpl Load_defn(Xow_wiki wiki, Xop_ctx ctx, Xot_invk_tkn invk_tkn, Xoa_ttl ttl, byte[] name_ary) {
+	public static Xot_defn_tmpl Load_defn(Xowe_wiki wiki, Xop_ctx ctx, Xot_invk_tkn invk_tkn, Xoa_ttl ttl, byte[] name_ary) {
 		Xow_page_cache_itm tmpl_page_itm = wiki.Cache_mgr().Page_cache().Get_or_load_as_itm(ttl);
 		byte[] tmpl_page_bry = tmpl_page_itm == null ? null : tmpl_page_itm.Wtxt();
 		Xot_defn_tmpl rv = null;
@@ -385,7 +385,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		byte[] template_ns_name = ns_mgr.Ns_template().Name_bry();
 		bfr.Add(Xop_tkn_.Lnki_bgn).Add_byte(Byte_ascii.Colon).Add(template_ns_name).Add_byte(Byte_ascii.Colon).Add(name_ary).Add(Xop_tkn_.Lnki_end);
 	}
-	private boolean SubEval(Xop_ctx ctx, Xow_wiki wiki, Bry_bfr bfr, byte[] name_ary, Xot_invk caller, byte[] src_for_tkn) {
+	private boolean SubEval(Xop_ctx ctx, Xowe_wiki wiki, Bry_bfr bfr, byte[] name_ary, Xot_invk caller, byte[] src_for_tkn) {
 		Xoa_ttl page_ttl = Xoa_ttl.parse_(wiki, name_ary); if (page_ttl == null) return false;	// ttl not valid; EX: {{:[[abc]]}}
 		Xot_defn_tmpl transclude_tmpl = null;
 		switch (page_ttl.Ns().Id()) {

@@ -19,23 +19,23 @@ package gplx.xowa.html.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.html.*; import gplx.xowa.files.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.users.history.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.xtns.relatedSites.*;
 import gplx.xowa.wikis.xwikis.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.html.hzips.*;
 public class Xoh_lnki_wtr {
-	private Xoa_app app; private Xow_wiki wiki; private Xoa_page page; private Xop_ctx ctx;
+	private Xoae_app app; private Xowe_wiki wiki; private Xoae_page page; private Xop_ctx ctx;
 	private Xoh_html_wtr_cfg cfg;
 	private Xou_history_mgr history_mgr;
 	private Xop_lnki_caption_wtr_tkn caption_tkn_wtr;
 	private Xop_lnki_caption_wtr_bry caption_bry_wtr;
-	private Xop_lnki_logger_redlinks_mgr redlinks_mgr;
-	public Xoh_lnki_wtr(Xoh_html_wtr html_wtr, Xow_wiki wiki, Xow_html_mgr html_mgr, Xoh_html_wtr_cfg cfg) {
+	private Xopg_redlink_lnki_list redlinks_mgr;
+	public Xoh_lnki_wtr(Xoh_html_wtr html_wtr, Xowe_wiki wiki, Xow_html_mgr html_mgr, Xoh_html_wtr_cfg cfg) {
 		caption_tkn_wtr = new Xop_lnki_caption_wtr_tkn(html_wtr);
 		caption_bry_wtr = new Xop_lnki_caption_wtr_bry();
-		this.wiki = wiki; this.app = wiki.App(); this.cfg = cfg;
+		this.wiki = wiki; this.app = wiki.Appe(); this.cfg = cfg;
 		file_wtr = new Xoh_file_mgr(wiki, html_mgr, html_wtr);
 	}
 	public Xoh_file_mgr File_wtr() {return file_wtr;} private Xoh_file_mgr file_wtr;
-	public void Init_by_page(Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xoa_page page) {
+	public void Init_by_page(Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xoae_page page) {
 		this.ctx = ctx; this.page = page;			// NOTE: must set ctx for file.v2; DATE:2014-06-22
 		this.wiki = ctx.Wiki();
-		redlinks_mgr = page.Lnki_redlinks_mgr();	// NOTE: need to set redlinks_mgr, else toc parse may fail; EX:pl.d:head_sth_off;DATE:2014-05-07
+		redlinks_mgr = page.Redlink_lnki_list();		// NOTE: need to set redlinks_mgr, else toc parse may fail; EX:pl.d:head_sth_off;DATE:2014-05-07
 		file_wtr.Init_by_page(hctx, page);
 		this.history_mgr = app.User().History_mgr();
 	}
@@ -43,12 +43,12 @@ public class Xoh_lnki_wtr {
 		Xoa_ttl lnki_ttl = lnki.Ttl();
 		if (lnki_ttl == null) {// NOTE: parser failed to properly invalidate lnki; escape tkn now and warn; DATE:2014-06-06
 			app.Usr_dlg().Warn_many("", "", "invalid lnki evaded parser; page=~{0} ex=~{1}", ctx.Cur_page().Url().Xto_full_str(), String_.new_utf8_(src, lnki.Src_bgn(), lnki.Src_end()));
-			Xoh_html_wtr_escaper.Escape(app, bfr, src, lnki.Src_bgn(), lnki.Src_end(), true, false);
+			Xoh_html_wtr_escaper.Escape(app.Parser_amp_mgr(), bfr, src, lnki.Src_bgn(), lnki.Src_end(), true, false);
 			return;
 		}
 		Xow_xwiki_itm xwiki_lang = lnki_ttl.Wik_itm();
 		if (	xwiki_lang != null												// lnki is xwiki; EX: [[commons:]] [[en:]] [[wikt:]]
-			&&	xwiki_lang.Wiki_tid() == wiki.Xwiki_domain_tid()				// xwiki is same type as cur wiki; EX: cur=w xwiki=w -> add to xwiki_langs; cur=w xwikid=d -> don't add to xwiki_langs; DATE:2014-09-14
+			&&	xwiki_lang.Domain_tid() == wiki.Xwiki_domain_tid()				// xwiki is same type as cur wiki; EX: cur=w xwiki=w -> add to xwiki_langs; cur=w xwikid=d -> don't add to xwiki_langs; DATE:2014-09-14
 			&&	xwiki_lang.Type_is_xwiki_lang(wiki.Domain_itm().Lang_orig_uid())// NOTE: use Lang_orig_id to handle xwikis between s.w and en.w; PAGE:s.q:Anonymous DATE:2014-09-10
 			&&	!lnki_ttl.ForceLiteralLink()									// not literal; [[:en:A]]
 			) {
@@ -66,7 +66,7 @@ public class Xoh_lnki_wtr {
 		}
 		Write_plain_by_tkn(bfr, hctx, src, lnki, lnki_ttl);
 	}
-	public void Write_file(Bry_bfr bfr, Xoa_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, byte[] alt) {
+	public void Write_file(Bry_bfr bfr, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, byte[] alt) {
 		file_wtr.Write_or_queue(bfr, page, ctx, hctx, src, lnki, alt);
 	}
 	public void Write_file(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xof_xfer_itm xfer, byte[] alt) {

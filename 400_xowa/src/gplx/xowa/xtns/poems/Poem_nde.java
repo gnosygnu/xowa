@@ -19,7 +19,7 @@ package gplx.xowa.xtns.poems; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.html.*; import gplx.xowa.html.*;
 public class Poem_nde implements Xox_xnde {
 	private Xop_root_tkn xtn_root;
-	public void Xtn_parse(Xow_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {// REF.MW: Poem.php|wfRenderPoemTag
+	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {// REF.MW: Poem.php|wfRenderPoemTag
 		int itm_bgn = xnde.Tag_open_end(), itm_end = xnde.Tag_close_bgn();
 		if (itm_bgn == src.length)	return;  // NOTE: handle inline where there is no content to parse; EX: <poem/>
 		if (itm_bgn >= itm_end)		return;  // NOTE: handle inline where there is no content to parse; EX: a<poem/>b
@@ -30,7 +30,7 @@ public class Poem_nde implements Xox_xnde {
 		byte[] poem_bry = Parse_lines(wiki.Utl_bry_bfr_mkr(), src, itm_bgn, itm_end);
 		xtn_root = xtn_mgr.Parser().Parse_text_to_wdom_old_ctx(ctx, poem_bry, true); // NOTE: ignoring paragraph mode; technically MW enables para mode, but by replacing "\n" with "<br/>\n" all the logic with para/pre mode is skipped
 	}
-	public void Xtn_write(Bry_bfr bfr, Xoa_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
+	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
 		if (xtn_root == null) return;	// inline poem; write nothing; EX: <poem/>
 		bfr.Add(Div_poem_bgn);
 		html_wtr.Write_tkn(bfr, ctx, hctx, xtn_root.Root_src(), xnde, Xoh_html_wtr.Sub_idx_null, xtn_root);

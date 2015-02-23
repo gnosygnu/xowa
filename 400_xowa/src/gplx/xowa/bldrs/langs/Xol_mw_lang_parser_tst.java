@@ -236,21 +236,21 @@ public class Xol_mw_lang_parser_tst {
 	}
 }
 class Xol_mw_lang_parser_fxt {
-	Xoa_app app; Xow_wiki wiki; private Xop_fxt fxt;
+	Xoae_app app; Xowe_wiki wiki; private Xop_fxt fxt;
 	Xol_mw_lang_parser parser = new Xol_mw_lang_parser(Gfo_msg_log.Test()); Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	public void Clear() {
 		if (app == null) {
 			app = Xoa_app_fxt.app_();
-			wiki = Xoa_app_fxt.wiki_tst_(app);
-			fxt = new Xop_fxt(app, wiki);
 		}
 		app.Lang_mgr().Clear();// NOTE: always clear the lang
 		lang = app.Lang_mgr().Get_by_key_or_new(Bry_.new_ascii_("fr"));
-		GfoInvkAble_.InvkCmd_val(wiki, Xow_wiki.Invk_lang_, Bry_.new_ascii_("fr"));
+		wiki = Xoa_app_fxt.wiki_(app, "en.wikipedia.org", lang);
+		fxt = new Xop_fxt(app, wiki);
+		lang.Kwd_mgr().Clear(); lang.Msg_mgr().Clear();	// NOTE: clear kwds and msgs else they will be printed to file; this line must go last b/c various xtns will fill in kwds dynamically
 	}
 	public Xol_lang Lang() {return lang;} private Xol_lang lang;
 	public void Num_fmt_tst(String raw, String expd) {Tfds.Eq(expd, String_.new_utf8_(lang.Num_mgr().Format_num(Bry_.new_utf8_(raw))));}
-	public void Run_bld_all() {parser.Bld_all(app);}
+	public void Run_bld_all() {parser.Bld_all(app.Lang_mgr(), app.Fsys_mgr());}
 	public void Save_file(String path, String... lines) {
 		Io_mgr._.SaveFilStr(Io_url_.mem_fil_(path), String_.Concat_lines_nl(lines));
 	}
@@ -260,7 +260,7 @@ class Xol_mw_lang_parser_fxt {
 		Tfds.Eq_str_lines(expd, actl);
 	}
 	public Xol_mw_lang_parser_fxt Parse_core(String raw)				{parser.Parse_core(raw, lang, tmp_bfr, Xol_lang_transform_null._); return this;}
-	public Xol_mw_lang_parser_fxt Parse_xtn (String raw)				{parser.Parse_xtn(raw, Io_url_.Null, app, tmp_bfr, false, Xol_lang_transform_null._); lang.Evt_lang_changed(); return this;}
+	public Xol_mw_lang_parser_fxt Parse_xtn (String raw)				{parser.Parse_xtn(raw, Io_url_.Null, app.Lang_mgr(), tmp_bfr, false, Xol_lang_transform_null._); lang.Evt_lang_changed(); return this;}
 	public Xol_mw_lang_parser_fxt Tst_keyword(int id, boolean case_sensitive, String... words) {
 		Xol_kwd_grp lst = lang.Kwd_mgr().Get_at(id); if (lst == null) throw Err_.new_("list should not be null");
 		Tfds.Eq(case_sensitive, lst.Case_match());

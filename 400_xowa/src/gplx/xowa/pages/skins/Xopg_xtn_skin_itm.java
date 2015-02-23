@@ -19,5 +19,5 @@ package gplx.xowa.pages.skins; import gplx.*; import gplx.xowa.*; import gplx.xo
 public interface Xopg_xtn_skin_itm {
 	byte Tid();
 	byte[] Key();
-	void Write(Bry_bfr bfr, Xoa_page page);
+	void Write(Bry_bfr bfr, Xoae_page page);
 }

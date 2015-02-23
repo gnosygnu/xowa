@@ -66,8 +66,8 @@ public class Xop_vnt_parser_tst {	// uses zh-hant as cur_vnt
 class Xop_vnt_parser_fxt {
 	public Xop_fxt Parser_fxt() {return fxt;} private Xop_fxt fxt;
 	public Xop_vnt_parser_fxt Clear() {
-		Xoa_app app = Xoa_app_fxt.app_();
-		Xow_wiki wiki = Xoa_app_fxt.wiki_(app, "zh.wikipedia.org");
+		Xoae_app app = Xoa_app_fxt.app_();
+		Xowe_wiki wiki = Xoa_app_fxt.wiki_(app, "zh.wikipedia.org");
 		fxt = new Xop_fxt(app, wiki);
 		Init_vnt_mgr(wiki.Lang().Vnt_mgr(), "zh-hans", "zh-hant");
 		Xop_vnt_lxr_.set_(wiki);

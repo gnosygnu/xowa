@@ -20,6 +20,11 @@ import gplx.core.btries.*;
 public class Xol_kwd_mgr implements GfoInvkAble {
 	public Xol_kwd_mgr(Xol_lang lang) {this.lang = lang;} private Xol_lang lang; Xol_kwd_grp[] grps = new Xol_kwd_grp[Xol_kwd_grp_.Id__max];
 	public int Len() {return grps.length;}
+	public void Clear() {
+		int len = grps.length;
+		for (int i = 0; i < len; ++i)
+			grps[i] = null;
+	}
 	public Btrie_slim_mgr Trie_raw() {if (trie_raw == null) trie_raw = Xol_kwd_mgr.trie_(this, Xol_kwd_grp_.Id_str_rawsuffix); return trie_raw;} private Btrie_slim_mgr trie_raw;
 	public Btrie_slim_mgr Trie_nosep() {if (trie_nosep == null) trie_nosep = Xol_kwd_mgr.trie_(this, Xol_kwd_grp_.Id_nocommafysuffix); return trie_nosep;} private Btrie_slim_mgr trie_nosep;
 	public void Kwd_default_match_reset() {kwd_default_init_needed = true;}	// TEST:

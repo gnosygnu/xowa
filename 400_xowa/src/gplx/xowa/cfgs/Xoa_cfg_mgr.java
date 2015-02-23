@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.cfgs; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.wikis.*;
 public class Xoa_cfg_mgr implements GfoInvkAble {
-	public Xoa_cfg_mgr(Xoa_app app) {this.app = app;} private OrderedHash hash = OrderedHash_.new_bry_();
-	public Xoa_app App() {return app;} private Xoa_app app;
+	public Xoa_cfg_mgr(Xoae_app app) {this.app = app;} private OrderedHash hash = OrderedHash_.new_bry_();
+	public Xoae_app App() {return app;} private Xoae_app app;
 	public Xoa_cfg_itm Get_itm_or_null(byte[] grp_key, byte[] itm_key) {
 		Xoa_cfg_grp grp = (Xoa_cfg_grp)hash.Fetch(grp_key); 
 		return grp == null ? null : grp.Get_itm_or_null(itm_key);
@@ -38,12 +38,12 @@ public class Xoa_cfg_mgr implements GfoInvkAble {
 	}
 	public void Set_by_app(String grp_key, String val)				{Set(Bry_.new_utf8_(grp_key), Xoa_cfg_grp_tid.Key_app_bry, val);}
 	public void Set_by_all(String grp_key, String val)				{Set(Bry_.new_utf8_(grp_key), Xoa_cfg_grp_tid.Key_all_bry, val);}
-	public void Set_by_type(String grp_key, byte tid, String val)	{Set(Bry_.new_utf8_(grp_key), Xow_wiki_domain_.Key_by_tid(tid), val);}
+	public void Set_by_type(String grp_key, byte tid, String val)	{Set(Bry_.new_utf8_(grp_key), Xow_domain_.Tid__get_bry(tid), val);}
 	private void Set(byte[] grp_key, byte[] tid_key, String val) {
 		Xoa_cfg_itm itm = Get_itm_or_make(grp_key, tid_key);
 		itm.Val_(val);
 	}
-	public void Init(Xow_wiki wiki) {
+	public void Init(Xowe_wiki wiki) {
 		int len = hash.Count();
 		for (int i = 0; i < len; i++) {
 			Xoa_cfg_grp grp = (Xoa_cfg_grp)hash.FetchAt(i);
@@ -65,7 +65,7 @@ public class Xoa_cfg_mgr implements GfoInvkAble {
 				int wiki_count = app.Wiki_mgr().Count();
 				boolean rv = true;
 				for (int i = 0; i < wiki_count; i++) {
-					Xow_wiki wiki = app.Wiki_mgr().Get_at(i);
+					Xowe_wiki wiki = app.Wiki_mgr().Get_at(i);
 					if (all || wiki.Domain_tid() == grp_tid.Wiki_tid()) {
 						if (!Eval_set(wiki, grp.Key_str(), itm.Val()))
 							rv = false;
@@ -73,7 +73,7 @@ public class Xoa_cfg_mgr implements GfoInvkAble {
 				}
 				return rv;
 			case Xoa_cfg_grp_tid.Tid_wiki: {
-				Xow_wiki wiki = app.Wiki_mgr().Get_by_key_or_null(itm.Key());
+				Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_null(itm.Key());
 				if (wiki == null) return true; // wiki not installed; return true (no error)
 				return Eval_set(wiki, grp.Key_str(), itm.Val());					
 			}

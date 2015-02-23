@@ -18,14 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.json.*; import gplx.ios.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.parsers.*;
 public abstract class Xob_wdata_qid_base extends Xob_itm_dump_base implements Xobd_wkr, GfoInvkAble {
-	public Xob_wdata_qid_base Ctor(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki); return this;}
+	public Xob_wdata_qid_base Ctor(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki); return this;}
 	public abstract String Wkr_key();
 	public abstract void Qid_bgn();
 	public abstract void Qid_add(byte[] wiki_key, Xow_ns ns, byte[] ttl, byte[] qid);
 	public abstract void Qid_end();
 	public void Wkr_ini(Xob_bldr bldr) {}
 	public void Wkr_bgn(Xob_bldr bldr) {
-		this.Init_dump(this.Wkr_key(), wiki.Fsys_mgr().Site_dir().GenSubDir_nest("data", "qid"));	// NOTE: must pass in correct make_dir in order to delete earlier version (else make_dirs will append)
+		this.Init_dump(this.Wkr_key(), wiki.Tdb_fsys_mgr().Site_dir().GenSubDir_nest("data", "qid"));	// NOTE: must pass in correct make_dir in order to delete earlier version (else make_dirs will append)
 		parser = bldr.App().Wiki_mgr().Wdata_mgr().Jdoc_parser();
 		this.Qid_bgn();
 	}	private Json_parser parser;
@@ -83,7 +83,7 @@ public abstract class Xob_wdata_qid_base extends Xob_itm_dump_base implements Xo
 	private static final String GRP_KEY = "xowa.wdata.qid_wkr";
 }
 class Wdata_idx_bldr_qid extends Wdata_idx_mgr_base {
-	public Wdata_idx_bldr_qid Ctor(Xob_wdata_qid_base wkr, Xob_bldr bldr, Xow_wiki wiki, int dump_fil_len) {super.Ctor(wkr, bldr, wiki, dump_fil_len); return this;}
+	public Wdata_idx_bldr_qid Ctor(Xob_wdata_qid_base wkr, Xob_bldr bldr, Xowe_wiki wiki, int dump_fil_len) {super.Ctor(wkr, bldr, wiki, dump_fil_len); return this;}
 	public void Add(String wiki_key, Xow_ns ns, byte[] ttl, byte[] qid) {
 		Wdata_idx_wtr wtr = Get_or_new(wiki_key, ns);
 		wtr.Write(ttl, qid);

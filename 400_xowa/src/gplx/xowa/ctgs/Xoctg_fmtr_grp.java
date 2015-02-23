@@ -17,10 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.ctgs; import gplx.*; import gplx.xowa.*;
 class Xoctg_fmtr_grp implements Bry_fmtr_arg {
-	public void Init_from_all(Xow_wiki wiki, Xol_lang lang, Xoctg_view_ctg ctg, Xoctg_fmtr_all mgr, Xoctg_view_grp itms_list) {
+	public void Init_from_all(Xowe_wiki wiki, Xol_lang lang, Xoctg_view_ctg ctg, Xoctg_fmtr_all mgr, Xoctg_view_grp itms_list) {
 		this.wiki = wiki; this.mgr = mgr; this.itms_fmtr = mgr.Fmtr_itm(); this.itms_list = itms_list; len = itms_list.Len();
 		itms_fmtr.Init_from_all(wiki, lang, ctg, mgr, itms_list, len);
-	}	private Xow_wiki wiki; Xoctg_fmtr_itm itms_fmtr; Xoctg_view_grp itms_list; int len; Xoctg_fmtr_all mgr;
+	}	private Xowe_wiki wiki; Xoctg_fmtr_itm itms_fmtr; Xoctg_view_grp itms_list; int len; Xoctg_fmtr_all mgr;
 	public void XferAry(Bry_bfr bfr, int xfer_idx) {
 		if (mgr.Grps_enabled()) {
 			if (len == 0) return;

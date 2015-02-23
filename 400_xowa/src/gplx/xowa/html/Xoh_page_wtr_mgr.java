@@ -18,9 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.gui.*; import gplx.xowa.pages.*;
 public class Xoh_page_wtr_mgr implements GfoInvkAble {
-	private Xoh_page_wtr_wkr edit_wtr, html_wtr, read_wtr; private Xoa_app app;
-	public Xoh_page_wtr_mgr(Xoa_app app, boolean html_capable) {
-		this.app = app;
+	private Xoh_page_wtr_wkr edit_wtr, html_wtr, read_wtr;
+	public Xoh_page_wtr_mgr(boolean html_capable) {
 		page_edit_fmtr.Fmt_(String_.Concat_lines_nl_skip_last
 		(	"<html>"
 		,	"<head>"
@@ -47,8 +46,8 @@ public class Xoh_page_wtr_mgr implements GfoInvkAble {
 	}
 	public boolean Html_capable() {return html_capable;} public Xoh_page_wtr_mgr Html_capable_(boolean v) {html_capable = v; return this;} private boolean html_capable;
 	public Bry_fmtr Page_read_fmtr() {return page_read_fmtr;}
-	public byte[] Css_common_bry() {return css_common_bry;} public Xoh_page_wtr_mgr Css_common_bry_(Io_url v) {css_common_bry = app.Encoder_mgr().Fsys().Encode_http(v); return this;} private byte[] css_common_bry;
-	public byte[] Css_wiki_bry() {return css_wiki_bry;} public Xoh_page_wtr_mgr Css_wiki_bry_(Io_url v) {css_wiki_bry = app.Encoder_mgr().Fsys().Encode_http(v); return this;} private byte[] css_wiki_bry;
+	public byte[] Css_common_bry() {return css_common_bry;} public Xoh_page_wtr_mgr Css_common_bry_(Io_url v) {css_common_bry = Xoa_app_.Utl_encoder_mgr().Fsys().Encode_http(v); return this;} private byte[] css_common_bry;
+	public byte[] Css_wiki_bry() {return css_wiki_bry;} public Xoh_page_wtr_mgr Css_wiki_bry_(Io_url v) {css_wiki_bry = Xoa_app_.Utl_encoder_mgr().Fsys().Encode_http(v); return this;} private byte[] css_wiki_bry;
 	private static final String[] Fmtr_keys = new String[] 
 	{ "app_root_dir", "app_version", "app_build_date", "xowa_mode_is_server"
 	, "page_id", "page_name", "page_title", "page_modified_on_msg"
@@ -76,16 +75,16 @@ public class Xoh_page_wtr_mgr implements GfoInvkAble {
 	,	"  </a>"
 	),	"src_full_db");
 	public void Init_(boolean v) {init = v;} private boolean init = true;
-	public byte[] Gen(Xoa_page page, byte output_tid) {
+	public byte[] Gen(Xoae_page page, byte output_tid) {
 		Xoh_page_wtr_wkr wtr = Wkr(output_tid);
-		Xow_wiki wiki = page.Wiki();
+		Xowe_wiki wiki = page.Wikie();
 		if (init) {
 			init = false;
 			page_read_fmtr.Eval_mgr_(wiki.Eval_mgr());
 			page_edit_fmtr.Eval_mgr_(wiki.Eval_mgr());
 			page_html_fmtr.Eval_mgr_(wiki.Eval_mgr());
 		}
-		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_m001();
+		Bry_bfr tmp_bfr = Xoa_app_.Utl_bry_bfr_mkr().Get_m001();
 		byte[] bry = wtr.Write(this, page, wiki.Ctx(), tmp_bfr);
 		tmp_bfr.Mkr_rls();
 		return bry;

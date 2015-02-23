@@ -24,10 +24,10 @@ public class Pfunc_tag extends Pf_func_base {
 	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {
 		byte[] tag_name = Eval_argx(ctx, src, caller, self); if (tag_name.length == 0) return;
 		int args_len = self.Args_len();
-		Xoa_app app = ctx.App();
+		Xoae_app app = ctx.App();
 		Bry_bfr tmp = app.Utl_bry_bfr_mkr().Get_b512();			
 		try {
-			int tag_idx = ctx.Cur_page().Ref_mgr().Tag__next_id();
+			int tag_idx = ++tag__next_id;
 			Xop_xnde_tag tag = (Xop_xnde_tag)app.Xnde_tag_regy().XndeNames(ctx.Xnde_names_tid()).Match_exact(tag_name, 0, tag_name.length);
 			boolean tag_is_ref = tag != null && tag.Id() == Xop_xnde_tag_.Tid_ref;
 			if (tag_is_ref)	// <ref>; add <xtag_bgn> to handle nested refs; PAGE:en.w:Battle_of_Midway; DATE:2014-06-27
@@ -60,6 +60,7 @@ public class Pfunc_tag extends Pf_func_base {
 	, Xtag_end_lhs = Bry_.new_ascii_("<xtag_end id='")
 	, Xtag_rhs = Bry_.new_ascii_("'/>")
 	;
+	private static int tag__next_id = 0;	// NOTE:must be app-level variable, not page-level, b/c pre-compiled templates can reserve tag #s; PAGE:de.s:Seite:NewtonPrincipien.djvu/465 DATE:2015-02-03
 }
 class Pfunc_tag_kv_bldr {
 	public int Key_bgn() {return key_bgn;} private int key_bgn;

@@ -16,22 +16,23 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.html.*; import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.lists.*; import gplx.xowa.parsers.paras.*;
+import gplx.xowa.langs.*; import gplx.xowa.html.*; import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.lists.*; import gplx.xowa.parsers.paras.*;
+import gplx.xowa.files.exts.*;
 public class Xop_fxt {
 	public Xop_fxt() {
-		Xoa_app app = Xoa_app_fxt.app_();
+		Xoae_app app = Xoa_app_fxt.app_();
 		wiki = Xoa_app_fxt.wiki_tst_(app);
 		ctor(app, wiki);
 	}
-	public Xop_fxt(Xoa_app app, Xow_wiki wiki) {
+	public Xop_fxt(Xoae_app app, Xowe_wiki wiki) {
 		this.ctor(app, wiki);
 	}
-	private void ctor(Xoa_app app, Xow_wiki wiki) {
+	private void ctor(Xoae_app app, Xowe_wiki wiki) {
 		this.app = app;
 		this.wiki = wiki;
 		app.Wiki_mgr().Add(wiki);
-		app.File_mgr().Repo_mgr().Set("src:wiki", "mem/wiki/repo/src/", wiki.Domain_str()).Ext_rules_(Xoft_rule_grp.Grp_app_default).Dir_depth_(2);
-		app.File_mgr().Repo_mgr().Set("trg:wiki", "mem/wiki/repo/trg/", wiki.Domain_str()).Ext_rules_(Xoft_rule_grp.Grp_app_default).Dir_depth_(2).Primary_(true);
+		app.File_mgr().Repo_mgr().Set("src:wiki", "mem/wiki/repo/src/", wiki.Domain_str()).Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2);
+		app.File_mgr().Repo_mgr().Set("trg:wiki", "mem/wiki/repo/trg/", wiki.Domain_str()).Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2).Primary_(true);
 		wiki.File_mgr().Repo_mgr().Add_repo(Bry_.new_utf8_("src:wiki"), Bry_.new_utf8_("trg:wiki"));
 		ctx = wiki.Ctx();
 		mock_wkr.Clear_commons();	// assume all files are in repo 0
@@ -46,12 +47,12 @@ public class Xop_fxt {
 		Xot_invk_tkn.Cache_enabled = false;// always disable cache for tests; can cause strange behavior when running entire suite and lnki_temp test turns on;
 	}
 	private Xofw_wiki_wkr_mock mock_wkr = new Xofw_wiki_wkr_mock();
-	public Xoa_app App() {return app;} private Xoa_app app;
-	public Xow_wiki Wiki() {return wiki;} private Xow_wiki wiki;
+	public Xoae_app App() {return app;} private Xoae_app app;
+	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public Xop_ctx Ctx() {return ctx;} private Xop_ctx ctx;
 	public Xop_parser Parser() {return parser;} private Xop_parser parser; 
-	public Xoa_page Page() {return ctx.Cur_page();}
-	public void Lang_by_id_(int id) {ctx.Cur_page().Lang_(wiki.App().Lang_mgr().Get_by_key_or_new(Xol_lang_itm_.Get_by_id(id).Key()));}
+	public Xoae_page Page() {return ctx.Cur_page();}
+	public void Lang_by_id_(int id) {ctx.Cur_page().Lang_(wiki.Appe().Lang_mgr().Get_by_key_or_new(Xol_lang_itm_.Get_by_id(id).Key()));}
 	public Xoh_html_wtr_cfg Wtr_cfg() {return hdom_wtr.Cfg();} private Xoh_html_wtr hdom_wtr;
 	public Xop_fxt Reset() {
 		ctx.Clear();
@@ -169,20 +170,20 @@ public class Xop_fxt {
 	public Xop_fxt	Init_ctg_create(String ctg, int... pages) {Xow_hive_mgr_fxt.Create_ctg(app, wiki.Hive_mgr(), ctg, pages); return this;}
 	public Xop_fxt	Init_page_create(String ttl) {return Init_page_create(wiki, ttl, "");}
 	public Xop_fxt	Init_page_create(String ttl, String txt) {return Init_page_create(wiki, ttl, txt);}
-	public Xop_fxt	Init_page_create(Xow_wiki wiki, String ttl, String txt) {Init_page_create_static(wiki, ttl, txt);return this;}
-	public static void Init_page_create_static(Xow_wiki wiki, String ttl_str, String text_str) {
+	public Xop_fxt	Init_page_create(Xowe_wiki wiki, String ttl, String txt) {Init_page_create_static(wiki, ttl, txt);return this;}
+	public static void Init_page_create_static(Xowe_wiki wiki, String ttl_str, String text_str) {
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_utf8_(ttl_str));
 		byte[] text = Bry_.new_utf8_(text_str);
 		wiki.Db_mgr().Save_mgr().Data_create(ttl, text);
 	}
-	public static void Init_msg(Xow_wiki wiki, String key, String val) {
+	public static void Init_msg(Xowe_wiki wiki, String key, String val) {
 		wiki.Lang().Msg_mgr().Itm_by_key_or_new(key, val);
 	}
 	public Xop_fxt	Init_page_update(String ttl, String txt) {return Init_page_update(wiki, ttl, txt);}
-	public Xop_fxt	Init_page_update(Xow_wiki wiki, String ttl, String txt) {
+	public Xop_fxt	Init_page_update(Xowe_wiki wiki, String ttl, String txt) {
 		Xoa_ttl page_ttl = Xoa_ttl.parse_(wiki, Bry_.new_utf8_(ttl));
 		byte[] page_raw = Bry_.new_utf8_(txt);
-		Xoa_page page = wiki.Data_mgr().Get_page(page_ttl, false);
+		Xoae_page page = wiki.Data_mgr().Get_page(page_ttl, false);
 		wiki.Db_mgr().Save_mgr().Data_update(page, page_raw);
 		return this;
 	}
@@ -334,16 +335,16 @@ public class Xop_fxt {
 		byte[] actl = Load_page(wiki, ttl);
 		Tfds.Eq(expd, String_.new_utf8_(actl));
 	}
-	public static byte[] Load_page(Xow_wiki wiki, String ttl_str) {
+	public static byte[] Load_page(Xowe_wiki wiki, String ttl_str) {
 		byte[] ttl_bry = Bry_.new_utf8_(ttl_str);
 		Xoa_url page_url = Xoa_url.new_(wiki.Domain_bry(), ttl_bry);
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry);
 		return wiki.GetPageByTtl(page_url, ttl).Data_raw();
 	}
-	public static void Reg_xwiki_alias(Xow_wiki wiki, String alias, String domain) {
+	public static void Reg_xwiki_alias(Xowe_wiki wiki, String alias, String domain) {
 		byte[] domain_bry = Bry_.new_ascii_(domain);
 		wiki.Xwiki_mgr().Add_full(Bry_.new_ascii_(alias), domain_bry, Bry_.Add(domain_bry, Bry_.new_ascii_("/wiki/~{0}")));
-		wiki.App().User().Wiki().Xwiki_mgr().Add_full(domain_bry, domain_bry);
+		wiki.Appe().User().Wiki().Xwiki_mgr().Add_full(domain_bry, domain_bry);
 	}
 	public static String html_img_none(String trg, String alt, String src, String ttl) {
 		return String_.Format(String_.Concat_lines_nl_skip_last("<a href=\"/wiki/{0}\" class=\"image\" xowa_title=\"{3}\"><img id=\"xowa_file_img_0\" alt=\"{1}\" src=\"{2}\" width=\"9\" height=\"8\" /></a>"), trg, alt, src, ttl);

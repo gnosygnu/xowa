@@ -82,6 +82,7 @@ class Wdata_claims_parser_v2 {
 	}
 	public Wdata_claim_grp_list Parse_qualifiers(byte[] qid, Json_itm_nde qualifiers_nde) {
 		Wdata_claim_grp_list rv = new Wdata_claim_grp_list();
+		if (qualifiers_nde == null) return rv;	// NOTE:sometimes references can have 0 snaks; return back an empty Wdata_claim_grp_list, not null; PAGE:Птичкин,_Евгений_Николаевич; DATE:2015-02-16
 		int len = qualifiers_nde.Subs_len();
 		for (int i = 0; i < len; ++i) {
 			Json_itm_kv qualifier_kv = Json_itm_kv.cast_(qualifiers_nde.Subs_get_at(i));

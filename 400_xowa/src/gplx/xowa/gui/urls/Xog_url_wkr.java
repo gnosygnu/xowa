@@ -19,35 +19,37 @@ package gplx.xowa.gui.urls; import gplx.*; import gplx.xowa.*; import gplx.xowa.
 import gplx.xowa.files.*; import gplx.xowa.gui.views.*;
 public class Xog_url_wkr {
 	private Xoh_href href = new Xoh_href();
-	private Xoa_app app; private Xog_win_itm win; private Xoa_page page;
+	private Xoae_app app; private Xog_win_itm win; private Xowe_wiki wiki; private Xoae_page page;
 	public byte Href_tid() {return href.Tid();}
 	public Xog_url_wkr Parse(Xog_win_itm win, String href_str) {
 		if (href_str == null) return this;	// text is not link; return;
 		byte[] href_bry = Bry_.new_utf8_(href_str);
-		this.win = win; this.app = win.App(); this.page = win.Active_page();
-		app.Href_parser().Parse(href, href_bry, page.Wiki(), page.Ttl().Page_url());
+		this.win = win; this.app = win.App(); 
+		this.page = win.Active_page();
+		this.wiki = win.Active_tab().Wiki();
+		app.Href_parser().Parse(href, href_bry, wiki, page.Ttl().Page_url());
 		return this;
 	}
 	public Xoa_url Exec() {
 		byte[] href_bry = href.Raw();
 		switch (href.Tid()) {
-			case Xoh_href.Tid_null:			return Rslt_handled;								// url is invalid; return handled (which effectively ignores)
-			case Xoh_href.Tid_xowa:			return Exec_url_xowa(app);							// xowa:app.version
-			case Xoh_href.Tid_http:			return Exec_url_http(app);							// http://site.org
-			case Xoh_href.Tid_anchor:		return Exec_url_anchor(win);						// #anchor
-			case Xoh_href.Tid_xcmd:			return Exec_url_xcmd(win);							// /xcmd/app.version
-			case Xoh_href.Tid_file:			return Exec_url_file(app, page, win, href_bry);		// file:///xowa/A.png
-			default:						return Exec_url_page(app, page, win, href_bry);		// Page /wiki/Page
+			case Xoh_href.Tid_null:			return Rslt_handled;									// url is invalid; return handled (which effectively ignores)
+			case Xoh_href.Tid_xowa:			return Exec_url_xowa(app);								// xowa:app.version
+			case Xoh_href.Tid_http:			return Exec_url_http(app);								// http://site.org
+			case Xoh_href.Tid_anchor:		return Exec_url_anchor(win);							// #anchor
+			case Xoh_href.Tid_xcmd:			return Exec_url_xcmd(win);								// /xcmd/app.version
+			case Xoh_href.Tid_file:			return Exec_url_file(app, wiki, page, win, href_bry);	// file:///xowa/A.png
+			default:						return Exec_url_page(app, wiki, page, win, href_bry);	// Page /wiki/Page
 		}
 	}
-	private Xoa_url Exec_url_xowa(Xoa_app app) {		// EX: xowa:app.version
+	private Xoa_url Exec_url_xowa(Xoae_app app) {		// EX: xowa:app.version
 		// NOTE: must catch exception else it will bubble to SWT browser and raise secondary exception of xowa is not a registered protocol
 		try {app.Gfs_mgr().Run_str(String_.new_utf8_(href.Page()));}
 		catch (Exception e) {app.Gui_mgr().Kit().Ask_ok("", "", Err_.Message_gplx_brief(e));}
 		return Rslt_handled;
 	}
-	private Xoa_url Exec_url_http(Xoa_app app) {		// EX: http:a.org
-		app.Launcher().Exec_view_web(href.Raw());
+	private Xoa_url Exec_url_http(Xoae_app app) {		// EX: http:a.org
+		app.Prog_mgr().Exec_view_web(href.Raw());
 		return Rslt_handled;
 	}
 	private Xoa_url Exec_url_anchor(Xog_win_itm win) {	// EX: #anchor
@@ -66,32 +68,31 @@ public class Xog_url_wkr {
 		win.Invk(GfsCtx.new_(), 0, xowa_cmd_str, m);
 		return Rslt_handled;
 	}
-	private Xoa_url Exec_url_file(Xoa_app app, Xoa_page page, Xog_win_itm win, byte[] href_bry) {	// EX: file:///xowa/A.png
-		href_bry = app.Encoder_mgr().Url().Decode(href_bry);
+	private Xoa_url Exec_url_file(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xog_win_itm win, byte[] href_bry) {	// EX: file:///xowa/A.png
+		href_bry = Xoa_app_.Utl_encoder_mgr().Url().Decode(href_bry);
 		Io_url href_url = Io_url_.http_any_(String_.new_utf8_(href_bry), Op_sys.Cur().Tid_is_wnt());
 		gplx.gfui.Gfui_html html_box = win.Active_html_box();
-		String xowa_ttl = page.Wiki().Gui_mgr().Cfg_browser().Content_editable()
+		String xowa_ttl = wiki.Gui_mgr().Cfg_browser().Content_editable()
 			? html_box.Html_active_atr_get_str(gplx.xowa.html.Xoh_consts.Atr_xowa_title_str, null)
-			: Xoh_dom_.Title_by_href(app.Encoder_mgr().Comma(), app.Utl_bry_bfr_mkr().Get_b512().Mkr_rls(), href_bry, Bry_.new_utf8_(html_box.Html_doc_html()));
+			: Xoh_dom_.Title_by_href(Xoa_app_.Utl_encoder_mgr().Comma(), app.Utl_bry_bfr_mkr().Get_b512().Mkr_rls(), href_bry, Bry_.new_utf8_(html_box.Html_doc_html()));
 		if (!Io_mgr._.ExistsFil(href_url)) {
 			Xof_xfer_itm xfer_itm = new Xof_xfer_itm();
-			byte[] title = app.Encoder_mgr().Url().Decode(Bry_.new_utf8_(xowa_ttl));
+			byte[] title = Xoa_app_.Utl_encoder_mgr().Url().Decode(Bry_.new_utf8_(xowa_ttl));
 			xfer_itm.Init_by_lnki(title, Bry_.Empty, Xop_lnki_type.Id_none, -1, -1, -1, Xof_doc_thumb.Null, Xof_doc_page.Null);
-			page.Wiki().File_mgr().Find_meta(xfer_itm);
+			wiki.File_mgr().Find_meta(xfer_itm);
 			page.File_queue().Clear();
 			page.File_queue().Add(xfer_itm);	// NOTE: set elem_id to "impossible" number, otherwise it will auto-update an image on the page with a super-large size; [[File:Alfred Sisley 062.jpg]]
-			page.Wiki().File_mgr().Repo_mgr().Xfer_mgr().Force_orig_y_();
-			page.File_queue().Exec(Xof_exec_tid.Tid_viewer_app, win.Usr_dlg(), page.Wiki(), page);
-			page.Wiki().File_mgr().Repo_mgr().Xfer_mgr().Force_orig_n_();
+			wiki.File_mgr().Repo_mgr().Xfer_mgr().Force_orig_y_();
+			page.File_queue().Exec(Xof_exec_tid.Tid_viewer_app, win.Usr_dlg(), wiki, page);
+			wiki.File_mgr().Repo_mgr().Xfer_mgr().Force_orig_n_();
 		}
 		if (Io_mgr._.ExistsFil(href_url)) {
-			ProcessAdp media_player = app.Launcher().App_by_ext(href_url.Ext());
+			ProcessAdp media_player = app.Prog_mgr().App_by_ext(href_url.Ext());
 			media_player.Run(href_url);
 		}
 		return Rslt_handled;
 	}
-	private Xoa_url Exec_url_page(Xoa_app app, Xoa_page page, Xog_win_itm win, byte[] href_bry) {	// EX: "Page"; "/wiki/Page"; // rewritten; DATE:2014-01-19
-		Xow_wiki wiki = page.Wiki();
+	private Xoa_url Exec_url_page(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xog_win_itm win, byte[] href_bry) {	// EX: "Page"; "/wiki/Page"; // rewritten; DATE:2014-01-19
 		Xoa_url rv = app.Url_parser().Parse(href_bry);	// needed for query_args
 		byte[] anchor_bry = href.Anchor();
 		byte[] page_bry = rv.Page_bry();

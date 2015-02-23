@@ -329,6 +329,16 @@ public class String_ implements GfoInvkAble {
 	}
 
 	public static String[] Ary(String... ary) {return ary;}
+	public static String[] Ary_wo_null(String... ary) {
+		ListAdp list = ListAdp_.new_();
+		int len = ary.length;
+		for (int i = 0; i < len; ++i) {
+			String itm = ary[i];
+			if (itm == null) continue;
+			list.Add(itm);
+		}
+		return list.XtoStrAry();
+	}
 	public static String AryXtoStr(String... ary) {
 		String_bldr sb = String_bldr_.new_();
 		for (String s : ary)

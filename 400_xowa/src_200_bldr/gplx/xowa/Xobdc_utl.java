@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.ios.*;
-import gplx.lists.*;
+import gplx.ios.*; import gplx.lists.*;
+import gplx.xowa.tdbs.*;
 class Io_sort_filCmd_reg implements Io_sort_filCmd { // 123|bgn|end|1
 	public Io_sort_filCmd_reg() {}
 	public void Bfr_add(Io_line_rdr stream) {
@@ -40,11 +40,11 @@ class Io_sort_filCmd_reg implements Io_sort_filCmd { // 123|bgn|end|1
 }
 class Io_url_gen_nest implements gplx.ios.Io_url_gen {
 	public Io_url Cur_url() {return cur_url;} Io_url cur_url;
-	public Io_url Nxt_url() {cur_url = Xow_fsys_mgr.Url_fil(root_dir, fil_idx++, ext); return cur_url;}
+	public Io_url Nxt_url() {cur_url = Xotdb_fsys_mgr.Url_fil(root_dir, fil_idx++, ext); return cur_url;}
 	public Io_url[] Prv_urls() {
 		Io_url[] rv = new Io_url[fil_idx];
 		for (int i = 0; i < fil_idx; i++) {
-			rv[i] = Xow_fsys_mgr.Url_fil(root_dir, fil_idx++, ext);
+			rv[i] = Xotdb_fsys_mgr.Url_fil(root_dir, fil_idx++, ext);
 		}
 		return rv;
 	}

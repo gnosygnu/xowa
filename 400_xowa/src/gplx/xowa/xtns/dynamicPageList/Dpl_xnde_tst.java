@@ -168,7 +168,7 @@ public class Dpl_xnde_tst {
 		), fxt.Ul(Itm_html_null, "B", "A"));
 	}
 	@Test  public void Err_page_ns_doesnt_exist() {// PURPOSE: check that <dpl> is not enabled if wiki does not have Page / Index ns; PAGE:fr.w:Wikipedia:Le_Bistro/novembre_2006 DATE:2014-11-28
-		fxt.Wiki().Ns_mgr_(Xow_ns_mgr_.default_(gplx.xowa.langs.cases.Xol_case_mgr_.Ascii()));
+		fxt.Wiki().Ns_mgr().Clear().Init();	// call .Clear() to remove ns for Page / Index
 		fxt.Wiki().Cfg_parser().Xtns().Itm_pages().Reset();	// must reset to clear cached valid ns_page from previous tests
 		fxt.Fxt().Test_parse_page_wiki_str("<dynamicpagelist>category=a</dynamicpagelist>", "No pages meet these criteria.");
 		fxt.Wiki().Cfg_parser().Xtns().Itm_pages().Reset();	// must reset to clear cached invalid ns_page for next tests
@@ -196,7 +196,7 @@ class Dpl_xnde_fxt {
 		fxt.Wiki().Ns_mgr().Add_new(Xowc_xtn_pages.Ns_page_id_default, "Page").Add_new(Xowc_xtn_pages.Ns_index_id_default, "Index").Init();
 		Io_mgr._.InitEngine_mem();
 	}
-	public Xow_wiki Wiki() {return fxt.Wiki();}
+	public Xowe_wiki Wiki() {return fxt.Wiki();}
 	public Xop_fxt Fxt() {return fxt;}
 	public void Warns(String... v) {warns = v;} private String[] warns;
 	public void Page_create(String page) {fxt.Init_page_create(page);}
@@ -215,7 +215,7 @@ class Dpl_xnde_fxt {
 			int id = page.Id();
 			String ttl = page.Ttl();
 			Xoa_ttl page_ttl = Xoa_ttl.parse_(fxt.Wiki(), Bry_.new_utf8_(ttl));
-			Xoa_page page_obj = fxt.Wiki().Data_mgr().Get_page(page_ttl, false);
+			Xoae_page page_obj = fxt.Wiki().Data_mgr().Get_page(page_ttl, false);
 			if (page_obj.Missing()) {
 				fxt.Init_page_create(ttl);
 				fxt.Init_id_create (id, 0, 0, false, 5, Xow_ns_.Id_main, ttl);

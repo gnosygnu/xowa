@@ -19,18 +19,18 @@ package gplx.xowa.files.gui; import gplx.*; import gplx.xowa.*; import gplx.xowa
 import gplx.xowa.xtns.gallery.*;
 import gplx.xowa.files.fsdb.*; import gplx.xowa.gui.views.*;
 public class Js_img_mgr {
-	public static void Update_img(Xoa_page page, Xof_xfer_itm itm) {
+	public static void Update_img(Xoae_page page, Xof_xfer_itm itm) {
 		Js_img_mgr.Update_img(page, itm.Html_uid(), itm.Lnki_type(), itm.Html_elem_tid(), itm.Html_w(), itm.Html_h(), String_.new_utf8_(itm.Html_view_src()), itm.Orig_w(), itm.Orig_h(), String_.new_utf8_(itm.Html_orig_src()), itm.Lnki_ttl(), itm.Gallery_mgr_h(), itm.Html_img_wkr());
 	}
-	public static void Update_img(Xoa_page page, Xof_fsdb_itm itm) {
-		Js_img_mgr.Update_img(page, itm.Html_uid(), itm.Lnki_type(), itm.Html_elem_tid(), itm.Html_w(), itm.Html_h(), itm.Html_url().To_http_file_str(), itm.Orig_w(), itm.Orig_h(), itm.Html_orig_url().To_http_file_str(), itm.Lnki_ttl(), itm.Gallery_mgr_h(), itm.Html_img_wkr());
+	public static void Update_img(Xoae_page page, Xof_fsdb_itm itm) {
+		Js_img_mgr.Update_img(page, itm.Html_uid(), itm.Lnki_type(), itm.Html_elem_tid(), itm.Html_w(), itm.Html_h(), itm.Html_view_url().To_http_file_str(), itm.Orig_w(), itm.Orig_h(), itm.Html_orig_url().To_http_file_str(), itm.Lnki_ttl(), itm.Gallery_mgr_h(), itm.Html_img_wkr());
 	}
 	public static void Update_link_missing(Xog_html_itm html_itm, String html_id) {
 		html_itm.Html_elem_atr_set_append(html_id, "class", " new");
 	}
-	private static void Update_img(Xoa_page page, int uid, byte lnki_type, byte elem_tid, int html_w, int html_h, String html_src, int orig_w, int orig_h, String orig_src, byte[] lnki_ttl, int gallery_mgr_h, Js_img_wkr img_wkr) {
+	private static void Update_img(Xoae_page page, int uid, byte lnki_type, byte elem_tid, int html_w, int html_h, String html_src, int orig_w, int orig_h, String orig_src, byte[] lnki_ttl, int gallery_mgr_h, Js_img_wkr img_wkr) {
 		if (Env_.Mode_testing()) return;
-		if (page.App().Mode() != Xoa_app_.Mode_gui) return;	// do not update html widget unless app is gui; null ref on http server; DATE:2014-09-17
+		if (Xoa_app_.Mode != Xoa_app_.Mode_gui) return;	// do not update html widget unless app is gui; null ref on http server; DATE:2014-09-17
 		Xog_html_itm html_itm = page.Tab().Html_itm();
 		switch (elem_tid) {
 			case Xof_html_elem.Tid_gallery_v2:

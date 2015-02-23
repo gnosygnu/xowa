@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.core.btries.*;
 public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-write state
-	private Xow_wiki wiki;
-	public Xop_parser(Xow_wiki wiki, Xop_lxr_mgr tmpl_lxr_mgr, Xop_lxr_mgr wtxt_lxr_mgr) {
+	private Xowe_wiki wiki;
+	public Xop_parser(Xowe_wiki wiki, Xop_lxr_mgr tmpl_lxr_mgr, Xop_lxr_mgr wtxt_lxr_mgr) {
 		this.wiki = wiki;
 		this.tmpl_lxr_mgr = tmpl_lxr_mgr; this.tmpl_trie = tmpl_lxr_mgr.Trie();
 		this.wtxt_lxr_mgr = wtxt_lxr_mgr; this.wtxt_trie = wtxt_lxr_mgr.Trie();
@@ -28,7 +28,7 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 	public Xop_lxr_mgr Wtxt_lxr_mgr() {return wtxt_lxr_mgr;} private Xop_lxr_mgr wtxt_lxr_mgr;
 	public Btrie_fast_mgr Tmpl_trie() {return tmpl_trie;} private Btrie_fast_mgr tmpl_trie;
 	public Btrie_fast_mgr Wtxt_trie() {return wtxt_trie;} private Btrie_fast_mgr wtxt_trie;
-	public void Init_by_wiki(Xow_wiki wiki) {
+	public void Init_by_wiki(Xowe_wiki wiki) {
 		tmpl_lxr_mgr.Init_by_wiki(wiki);
 		wtxt_lxr_mgr.Init_by_wiki(wiki);
 	}
@@ -41,7 +41,7 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 		Parse_text_to_html(bfr, ctx.Cur_page(), false, src);
 		return bfr.Mkr_rls().Xto_bry_and_clear();
 	}
-	public void Parse_text_to_html(Bry_bfr trg, Xoa_page page, boolean para_enabled, byte[] src) {
+	public void Parse_text_to_html(Bry_bfr trg, Xoae_page page, boolean para_enabled, byte[] src) {
 		Xop_ctx ctx = Xop_ctx.new_sub_(wiki, page);
 		Xop_tkn_mkr tkn_mkr = ctx.Tkn_mkr();
 		Xop_root_tkn root = tkn_mkr.Root(src);
@@ -190,7 +190,7 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 			tkn.Src_end_(pos);
 		return tkn;
 	}
-	public static Xop_parser new_wiki_(Xow_wiki wiki) {
+	public static Xop_parser new_wiki_(Xowe_wiki wiki) {
 		Xop_parser rv = new Xop_parser(wiki, Xop_lxr_mgr.new_tmpl_(), Xop_lxr_mgr.new_wiki_());
 		rv.Init_by_wiki(wiki);
 		rv.Init_by_lang(wiki.Lang());

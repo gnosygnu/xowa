@@ -29,4 +29,5 @@ public class Db_meta_fld {
 	public boolean Autoincrement() {return autoincrement;} private final boolean autoincrement;
 	public static final int Tid_bool = 0, Tid_byte = 1, Tid_short = 2, Tid_int = 3, Tid_long = 4, Tid_float = 5, Tid_double = 6, Tid_str = 7, Tid_text = 8, Tid_bry = 9;
 	public static final String[] Ary_empy = String_.Ary_empty;
+	public static final String Key_null = null;
 }

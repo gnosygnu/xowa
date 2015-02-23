@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.pages.skins; import gplx.*; import gplx.xowa.*; import gplx.xowa.pages.*;
 public class Xopg_xtn_skin_fmtr_arg implements Bry_fmtr_arg {
-	private Xoa_page page; private byte xtn_skin_tid;
-	public Xopg_xtn_skin_fmtr_arg(Xoa_page page, byte xtn_skin_tid) {
+	private Xoae_page page; private byte xtn_skin_tid;
+	public Xopg_xtn_skin_fmtr_arg(Xoae_page page, byte xtn_skin_tid) {
 		this.page = page; this.xtn_skin_tid = xtn_skin_tid;
 	}
 	public void XferAry(Bry_bfr bfr, int idx) {

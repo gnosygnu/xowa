@@ -21,15 +21,15 @@ import gplx.core.btries.*; import gplx.html.*; import gplx.xowa.wikis.*; import 
 import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.lists.*; import gplx.xowa.html.lnkis.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.paras.*;
 import gplx.xowa.xtns.*; import gplx.xowa.xtns.dynamicPageList.*; import gplx.xowa.xtns.math.*; import gplx.xowa.langs.vnts.*; import gplx.xowa.xtns.cite.*; import gplx.xowa.html.hzips.*;
 public class Xoh_html_wtr {
-	private Xow_wiki wiki; private Xoa_app app; private Xoa_page page; private Xop_xatr_whitelist_mgr whitelist_mgr;
-	public Xoh_html_wtr(Xow_wiki wiki, Xow_html_mgr html_mgr) {
-		this.wiki = wiki; this.app = wiki.App(); this.whitelist_mgr = app.Html_mgr().Whitelist_mgr();
+	private Xowe_wiki wiki; private Xoae_app app; private Xoae_page page; private Xop_xatr_whitelist_mgr whitelist_mgr;
+	public Xoh_html_wtr(Xowe_wiki wiki, Xow_html_mgr html_mgr) {
+		this.wiki = wiki; this.app = wiki.Appe(); this.whitelist_mgr = app.Html_mgr().Whitelist_mgr();
 		this.html_mgr = html_mgr;
 		lnki_wtr = new Xoh_lnki_wtr(this, wiki, html_mgr, cfg);
 		ref_wtr = new Ref_html_wtr(wiki);
 		lnke_wtr = new Xoh_lnke_wtr(wiki);
 	}
-	public void Init_by_wiki(Xow_wiki wiki) {
+	public void Init_by_wiki(Xowe_wiki wiki) {
 		cfg.Toc_show_(true).Lnki_title_(true).Lnki_visited_(true).Lnki_id_(true);	// NOTE: set during Init_by_wiki, b/c all tests assume these are false
 		ref_wtr.Init_by_wiki(wiki);
 	}
@@ -38,7 +38,7 @@ public class Xoh_html_wtr {
 	public Xoh_lnki_wtr Lnki_wtr() {return lnki_wtr;} private Xoh_lnki_wtr lnki_wtr;
 	public Xoh_lnke_wtr Lnke_wtr() {return lnke_wtr;} private Xoh_lnke_wtr lnke_wtr;
 	public Ref_html_wtr Ref_wtr() {return ref_wtr;} private Ref_html_wtr ref_wtr; 
-	public void Init_by_page(Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xoa_page page) {this.page = page; lnki_wtr.Init_by_page(ctx, hctx, src, page);}
+	public void Init_by_page(Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xoae_page page) {this.page = page; lnki_wtr.Init_by_page(ctx, hctx, src, page);}
 	public void Write_all(Bry_bfr bfr, Xop_ctx ctx, byte[] src, Xop_root_tkn root) {Write_all(bfr, ctx, Xoh_wtr_ctx.Basic, src, root);}
 	public void Write_all(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_root_tkn root) {			
 		try {
@@ -91,7 +91,7 @@ public class Xoh_html_wtr {
 			case Xop_tkn_itm_.Tid_vnt:				Vnt(ctx, hctx, bfr, src, (Xop_vnt_tkn)tkn); break;
 //				case Xop_tkn_itm_.Tid_tab:				bfr.Add_byte_repeat(Byte_ascii.Tab, tkn.Src_end() - tkn.Src_bgn()); break;
 			default:
-				Xoh_html_wtr_escaper.Escape(app, bfr, src, tkn.Src_bgn(), tkn.Src_end(), true, false);	// NOTE: always escape text including (a) lnki_alt text; and (b) any other text, especially failed xndes; DATE:2013-06-18
+				Xoh_html_wtr_escaper.Escape(app.Parser_amp_mgr(), bfr, src, tkn.Src_bgn(), tkn.Src_end(), true, false);	// NOTE: always escape text including (a) lnki_alt text; and (b) any other text, especially failed xndes; DATE:2013-06-18
 				break;
 		}
 	}
@@ -302,7 +302,7 @@ public class Xoh_html_wtr {
 	@gplx.Virtual public void Xnde(Xop_ctx ctx, Xoh_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {
 		if (hctx.Mode_is_alt()) {
 			if (xnde.Tag_close_bgn() > 0) // NOTE: some tags are not closed; WP.EX: France; <p>
-				Xoh_html_wtr_escaper.Escape(app, bfr, src, xnde.Tag_open_end(), xnde.Tag_close_bgn(), true, false);
+				Xoh_html_wtr_escaper.Escape(app.Parser_amp_mgr(), bfr, src, xnde.Tag_open_end(), xnde.Tag_close_bgn(), true, false);
 			else
 				Xnde_subs(ctx, hctx, bfr, src, xnde);
 			return;
@@ -375,7 +375,7 @@ public class Xoh_html_wtr {
 				if (xnde.Atrs_bgn() > Xop_tblw_wkr.Atrs_ignore_check) Xnde_atrs(tag_id, hctx, src, xnde.Atrs_bgn(), xnde.Atrs_end(), xnde.Atrs_ary(), bfr);
 				bfr.Add_byte(Tag__end);
 				int tag_close_bgn = Bry_finder.Find_bwd_while(src, xnde.Tag_close_bgn(), -1, Byte_ascii.Space) + 1;	// trim space from end; PAGE:en.w:Comment_(computer_programming) DATE:2014-06-23
-				Xoh_html_wtr_escaper.Escape(app, bfr, src, xnde.Tag_open_end(), tag_close_bgn, false, false);	// <source> is a .Xtn(); render literally everything between > and <; DATE:2014-03-11
+				Xoh_html_wtr_escaper.Escape(app.Parser_amp_mgr(), bfr, src, xnde.Tag_open_end(), tag_close_bgn, false, false);	// <source> is a .Xtn(); render literally everything between > and <; DATE:2014-03-11
 				bfr.Add(Tag__end_bgn).Add(name).Add_byte(Tag__end);
 				break;
 			}
@@ -418,7 +418,7 @@ public class Xoh_html_wtr {
 			default:	// unknown tag
 				if (tag.Restricted()) {	// a; img; script; etc..
 					if (	!page.Html_data().Html_restricted()							// page is not marked restricted (only [[Special:]])
-						||	page.Wiki().Domain_tid() == Xow_wiki_domain_.Tid_home) {	// page is in home wiki
+						||	page.Wiki().Domain_tid() == Xow_domain_.Tid_int_home) {		// page is in home wiki
 						bfr.Add_mid(src, xnde.Src_bgn(), xnde.Src_end());
 						return;
 					}
@@ -492,7 +492,7 @@ public class Xoh_html_wtr {
 		}
 	}
 
-	public static void Xnde_atr_write(Bry_bfr bfr, Xoa_app app, Xoh_wtr_ctx hctx, byte[] src, Xop_xatr_itm atr) {
+	public static void Xnde_atr_write(Bry_bfr bfr, Xoae_app app, Xoh_wtr_ctx hctx, byte[] src, Xop_xatr_itm atr) {
 		byte[] atr_key = atr.Key_bry();
 		if (	hctx.Mode_is_display_title()
 			&&	Xoh_display_ttl_wtr._.Is_style_restricted(bfr, hctx, src, atr, atr_key))
@@ -521,8 +521,8 @@ public class Xoh_html_wtr {
 		}
 		bfr.Add_byte(quote_byte);
 	}
-	private static void Xnde_atr_write_id(Bry_bfr bfr, Xoa_app app, byte[] bry, int bgn, int end) {
-		app.Encoder_mgr().Id().Encode(bfr, bry, bgn, end);
+	private static void Xnde_atr_write_id(Bry_bfr bfr, Xoae_app app, byte[] bry, int bgn, int end) {
+		Xoa_app_.Utl_encoder_mgr().Id().Encode(bfr, bry, bgn, end);
 	}
 	private void Xnde_subs(Xop_ctx ctx, Xoh_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {
 		int subs_len = xnde.Subs_len();
@@ -554,7 +554,7 @@ public class Xoh_html_wtr {
 					if (amp_enable)
 						bfr.Add_mid(src, sub.Src_bgn(), sub.Src_end());
 					else
-						Xoh_html_wtr_escaper.Escape(app, bfr, src, sub.Src_bgn(), sub.Src_end(), true, nowiki);
+						Xoh_html_wtr_escaper.Escape(app.Parser_amp_mgr(), bfr, src, sub.Src_bgn(), sub.Src_end(), true, nowiki);
 					break;
 				default:
 					Write_tkn(bfr, ctx, hctx, src, xnde, i, sub);

@@ -29,4 +29,5 @@ public class Xoud_history_row {
 	public String History_qarg() {return history_qarg;} private final String history_qarg;
 	public DateAdp History_time() {return history_time;} private final DateAdp history_time;
 	public int History_count() {return history_count;} private final int history_count;
+	public static final Xoud_history_row Null = null;
 }

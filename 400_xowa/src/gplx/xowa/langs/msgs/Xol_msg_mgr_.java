@@ -22,29 +22,29 @@ public class Xol_msg_mgr_ {
 //			String rv = Get_msg_val_gui_or_null(lang, pre, key, suf);
 //			return rv == null ? "<" + String_.new_utf8_(Bry_.Add(pre, key, suf)) + ">" : rv;
 //		}
-	public static String Get_msg_val_gui_or_empty(Xol_lang lang, byte[] pre, byte[] key, byte[] suf) {	// get from lang, else get from en; does not use get_msg_val to skip db lookups; should only be used for gui; DATE:2014-05-28
-		String rv = Get_msg_val_gui_or_null(lang, pre, key, suf);
+	public static String Get_msg_val_gui_or_empty(Xoa_lang_mgr lang_mgr, Xol_lang lang, byte[] pre, byte[] key, byte[] suf) {	// get from lang, else get from en; does not use get_msg_val to skip db lookups; should only be used for gui; DATE:2014-05-28
+		String rv = Get_msg_val_gui_or_null(lang_mgr, lang, pre, key, suf);
 		return rv == null ? "" : rv;
 	}
-	public static String Get_msg_val_gui_or(Xol_lang lang, byte[] pre, byte[] key, byte[] suf, String or) {
-		String rv = Get_msg_val_gui_or_null(lang, pre, key, suf);
+	public static String Get_msg_val_gui_or(Xoa_lang_mgr lang_mgr, Xol_lang lang, byte[] pre, byte[] key, byte[] suf, String or) {
+		String rv = Get_msg_val_gui_or_null(lang_mgr, lang, pre, key, suf);
 		return rv == null ? or : rv;
 	}
-	public static String Get_msg_val_gui_or_null(Xol_lang lang, byte[] pre, byte[] key, byte[] suf) {	// get from lang, else get from en; does not use get_msg_val to skip db lookups; should only be used for gui; DATE:2014-05-28
+	public static String Get_msg_val_gui_or_null(Xoa_lang_mgr lang_mgr, Xol_lang lang, byte[] pre, byte[] key, byte[] suf) {	// get from lang, else get from en; does not use get_msg_val to skip db lookups; should only be used for gui; DATE:2014-05-28
 		byte[] msg_key = Bry_.Add(pre, key, suf);
 		Xol_msg_itm msg_itm = lang.Msg_mgr().Itm_by_key_or_null(msg_key);
 		if (msg_itm == null)
-			msg_itm = lang.App().Lang_mgr().Lang_en().Msg_mgr().Itm_by_key_or_null(msg_key);			
+			msg_itm = lang_mgr.Lang_en().Msg_mgr().Itm_by_key_or_null(msg_key);			
 		return msg_itm == null ? null : String_.new_utf8_(msg_itm.Val());
 	}
-	public static byte[] Get_msg_val(Xow_wiki wiki, Xol_lang lang, byte[] msg_key, byte[][] fmt_args) {
+	public static byte[] Get_msg_val(Xowe_wiki wiki, Xol_lang lang, byte[] msg_key, byte[][] fmt_args) {
 		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
 		Xol_msg_itm msg_itm = Get_msg_itm(tmp_bfr, wiki, lang, msg_key);
 		byte[] rv = Get_msg_val(tmp_bfr, wiki, msg_itm, fmt_args);
 		tmp_bfr.Mkr_rls();
 		return rv;
 	}	private static final byte[] Missing_bry = Bry_.new_ascii_("$"), Slash_bry = new byte[] {Byte_ascii.Slash};
-	public static byte[] Get_msg_val(Bry_bfr tmp_bfr, Xow_wiki wiki, Xol_msg_itm msg_itm, byte[][] fmt_args) {
+	public static byte[] Get_msg_val(Bry_bfr tmp_bfr, Xowe_wiki wiki, Xol_msg_itm msg_itm, byte[][] fmt_args) {
 		byte[] msg_val = msg_itm.Val();
 		boolean has_fmt = msg_itm.Has_fmt_arg(), has_tmpl = msg_itm.Has_tmpl_txt();
 		if (!has_fmt && !has_tmpl)		// no fmt or tmpl; just add val
@@ -62,7 +62,7 @@ public class Xol_msg_mgr_ {
 		}
 		return msg_val;
 	}
-	public static Xol_msg_itm Get_msg_itm(Bry_bfr tmp_bfr, Xow_wiki wiki, Xol_lang lang, byte[] msg_key) {
+	public static Xol_msg_itm Get_msg_itm(Bry_bfr tmp_bfr, Xowe_wiki wiki, Xol_lang lang, byte[] msg_key) {
 		byte[] msg_key_sub_root = msg_key;
 		int slash_pos = Bry_finder.Find_bwd(msg_key, Byte_ascii.Slash);
 		if (slash_pos != Bry_.NotFound) {	// key is of format "key/lang"; EX: "January/en"
@@ -71,7 +71,7 @@ public class Xol_msg_mgr_ {
 				Object o = Xol_lang_itm_.Regy().Get_by_mid(msg_key, slash_pos + 1, msg_key_len);
 				if (o != null) {				// text is known lang_code;
 					Xol_lang_itm lang_itm = (Xol_lang_itm)o;
-					lang = wiki.App().Lang_mgr().Get_by_key_or_new(lang_itm.Key());		// set lang
+					lang = wiki.Appe().Lang_mgr().Get_by_key_or_new(lang_itm.Key());		// set lang
 				}
 				msg_key_sub_root = Bry_.Mid(msg_key, 0, slash_pos);					// set msg to "a" (discarding "/b")
 			}
@@ -79,7 +79,7 @@ public class Xol_msg_mgr_ {
 		Xol_msg_itm msg_in_wiki = wiki.Msg_mgr().Get_or_null(msg_key);						// check wiki; used to be check lang, but Search_mediawiki should never be toggled on lang; DATE:2014-05-13
 		if (msg_in_wiki != null) return msg_in_wiki;										// NOTE: all new msgs will Search_mediawiki once; EX: de.w:{{int:Autosumm-replace}}; DATE:2013-01-25
 		msg_in_wiki = wiki.Msg_mgr().Get_or_make(msg_key);
-		Xoa_page msg_page = Get_msg_itm_from_db(wiki, lang, msg_key, msg_key_sub_root);
+		Xoae_page msg_page = Get_msg_itm_from_db(wiki, lang, msg_key, msg_key_sub_root);
 		byte[] msg_val = Bry_.Empty;
 		if (msg_page.Missing()) {															// [[MediaWiki:key/fallback]] still not found; search "lang.gfs";
 			Xol_msg_itm msg_in_lang = Get_msg_itm_from_gfs(wiki, lang, msg_key_sub_root);
@@ -99,28 +99,28 @@ public class Xol_msg_mgr_ {
 		Xol_msg_itm_.update_val_(msg_in_wiki, msg_val);
 		return msg_in_wiki;
 	}
-	private static Xoa_page Get_msg_itm_from_db(Xow_wiki wiki, Xol_lang lang, byte[] msg_key, byte[] msg_key_sub_root) {
+	private static Xoae_page Get_msg_itm_from_db(Xowe_wiki wiki, Xol_lang lang, byte[] msg_key, byte[] msg_key_sub_root) {
 		byte[] ns_bry = wiki.Ns_mgr().Ns_mediawiki().Name_db_w_colon();
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.Add(ns_bry, msg_key)); // ttl="MediaWiki:msg_key"; note that there may be "/lang"; EX:pl.d:Wikislownik:Bar/Archiwum_6 and newarticletext/pl
-		Xoa_page rv = ttl == null ? Xoa_page.Empty : wiki.Data_mgr().Get_page_from_msg(ttl);
+		Xoae_page rv = ttl == null ? Xoae_page.Empty : wiki.Data_mgr().Get_page_from_msg(ttl);
 		if (rv.Missing()) {	// [[MediaWiki:key]] not found; search for [[MediaWiki:key/fallback]]
 			byte[][] fallback_ary = lang.Fallback_bry_ary();
 			int fallback_ary_len = fallback_ary.length;
 			for (int i = 0; i < fallback_ary_len; i++) {
 				byte[] fallback = fallback_ary[i];
 				ttl = Xoa_ttl.parse_(wiki, Bry_.Add(ns_bry, msg_key_sub_root, Slash_bry, fallback));	// ttl="MediaWiki:msg_key/fallback"
-				rv = ttl == null ? Xoa_page.Empty : wiki.Data_mgr().Get_page_from_msg(ttl);
+				rv = ttl == null ? Xoae_page.Empty : wiki.Data_mgr().Get_page_from_msg(ttl);
 				if (!rv.Missing()) break;
 			}
 		}
 		return rv;
 	}
-	private static Xol_msg_itm Get_msg_itm_from_gfs(Xow_wiki wiki, Xol_lang lang, byte[] msg_key_sub_root) {
+	private static Xol_msg_itm Get_msg_itm_from_gfs(Xowe_wiki wiki, Xol_lang lang, byte[] msg_key_sub_root) {
 		Xol_msg_itm rv = lang.Msg_mgr().Itm_by_key_or_null(msg_key_sub_root);	// NOTE: should always be msg_key_sub_root; EX: "msg/lang" will never be in lang.gfs
 		if (rv == null) {														// msg not found; check fallbacks; note that this is different from MW b/c when MW constructs a lang, it automatically adds all fallback msgs to the current lang
 			byte[][] fallback_ary = lang.Fallback_bry_ary();
 			int fallback_ary_len = fallback_ary.length;
-			Xoa_lang_mgr lang_mgr = wiki.App().Lang_mgr();
+			Xoa_lang_mgr lang_mgr = wiki.Appe().Lang_mgr();
 			for (int i = 0; i < fallback_ary_len; i++) {
 				byte[] fallback = fallback_ary[i];
 				Xol_lang fallback_lang = lang_mgr.Get_by_key(fallback);

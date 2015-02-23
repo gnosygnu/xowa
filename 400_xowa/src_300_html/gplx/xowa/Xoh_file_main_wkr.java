@@ -18,11 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.core.primitives.*;
 import gplx.xowa.html.*; import gplx.xowa.html.lnkis.*;
-import gplx.xowa.files.*;
+import gplx.xowa.files.*; import gplx.xowa.files.repos.*;
 public class Xoh_file_main_wkr implements Bry_fmtr_arg {
 	private Xof_xfer_itm xfer_itm; private Xoh_file_main_alts alts = new Xoh_file_main_alts(); private Xoh_file_page opt; 
-	byte[] file_size_bry; Xoa_ttl ttl; Xow_wiki wiki;
-	public void Bld_html(Xow_wiki wiki, Xop_ctx ctx, Bry_bfr bfr, Xoa_ttl ttl, Xoh_file_page opt, Xof_xfer_queue queue) {
+	byte[] file_size_bry; Xoa_ttl ttl; Xowe_wiki wiki;
+	public void Bld_html(Xowe_wiki wiki, Xop_ctx ctx, Bry_bfr bfr, Xoa_ttl ttl, Xoh_file_page opt, Xof_xfer_queue queue) {
 		this.opt = opt; this.ttl = ttl; this.wiki = wiki;
 		Int_2_ref size_main = opt.Size_main();
 		int main_w = size_main.Val_0();
@@ -48,7 +48,7 @@ public class Xoh_file_main_wkr implements Bry_fmtr_arg {
 		}
 		opt.Html_main().Bld_bfr_many(bfr, this);
 	}	private byte[] play_btn_icon; private Bool_obj_ref queue_add_ref = Bool_obj_ref.n_();
-	public void Bld_html(Xow_wiki wiki, Bry_bfr bfr, Xof_xfer_itm xfer_itm, Xoa_ttl ttl, Xoh_file_page opt, byte[] file_size_bry, byte[] play_btn_icon, int elem_id_val) {
+	public void Bld_html(Xowe_wiki wiki, Bry_bfr bfr, Xof_xfer_itm xfer_itm, Xoa_ttl ttl, Xoh_file_page opt, byte[] file_size_bry, byte[] play_btn_icon, int elem_id_val) {
 		this.xfer_itm = xfer_itm; 
 		this.wiki = wiki; this.ttl = ttl; this.opt = opt; this.file_size_bry = file_size_bry; this.play_btn_icon = play_btn_icon; this.elem_id_val = elem_id_val;
 		opt.Html_main().Bld_bfr_many(bfr, this);		
@@ -57,7 +57,7 @@ public class Xoh_file_main_wkr implements Bry_fmtr_arg {
 		alts.Ctor(xfer_itm, opt);
 		Xof_ext ext = xfer_itm.Lnki_ext();
 		if (ext.Id_is_thumbable_img())
-			opt.Html_main_img().Bld_bfr_many(bfr, xfer_itm.Orig_w(), xfer_itm.Orig_h(), xfer_itm.Html_orig_src(), file_size_bry, ext.Mime_type(), elem_id_val, xfer_itm.Html_w(), xfer_itm.Html_h(), xfer_itm.Html_view_src(), ttl.Full_txt(), wiki.App().Encoder_mgr().Url().Encode(ttl.Page_url()), alts);
+			opt.Html_main_img().Bld_bfr_many(bfr, xfer_itm.Orig_w(), xfer_itm.Orig_h(), xfer_itm.Html_orig_src(), file_size_bry, ext.Mime_type(), elem_id_val, xfer_itm.Html_w(), xfer_itm.Html_h(), xfer_itm.Html_view_src(), ttl.Full_txt(), Xoa_app_.Utl_encoder_mgr().Url().Encode(ttl.Page_url()), alts);
 		else if (ext.Id_is_video())	// NOTE: video must precede audio else File:***.ogg will not show thumbs
 			opt.Html_main_vid().Bld_bfr_many(bfr, elem_id_val, xfer_itm.Html_view_src(), Atr_class_image, ttl.Page_db(), xfer_itm.Html_view_src(), xfer_itm.Html_w(), xfer_itm.Html_h(), Bry_.Empty, xfer_itm.Html_orig_src(), xfer_itm.Html_w(), xfer_itm.Html_w(), play_btn_icon);
 		else if (ext.Id_is_audio())

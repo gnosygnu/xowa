@@ -18,12 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.apis.xowa.html.modules; import gplx.*; import gplx.xowa.*; import gplx.xowa.apis.*; import gplx.xowa.apis.xowa.*; import gplx.xowa.apis.xowa.html.*;
 import gplx.xowa.html.modules.popups.*;
 public class Xoapi_popups implements GfoInvkAble, GfoEvMgrOwner {
-	private Xoa_app app;
+	private Xoae_app app;
 	public Xoapi_popups() {
 		evMgr = GfoEvMgr.new_(this);
 	}
 	public GfoEvMgr EvMgr() {return evMgr;} private GfoEvMgr evMgr;
-	public void Init_by_app(Xoa_app app) {this.app = app;}
+	public void Init_by_app(Xoae_app app) {this.app = app;}
 	public boolean  Enabled() {return enabled;}			public void Enabled_(boolean v) {enabled = v;} private boolean enabled = true;
 	public int		Show_init_word_count()				{return show_init_word_count;}			private int show_init_word_count				= Dflt_show_init_word_count;
 	public int		Show_more_word_count()				{return show_more_word_count;}			private int show_more_word_count				= Dflt_show_more_word_count;
@@ -52,11 +52,11 @@ public class Xoapi_popups implements GfoInvkAble, GfoEvMgrOwner {
 	public byte[]	Html_fmtr_next_sect_fmt()			{return html_fmtr_next_sect;}			private byte[] html_fmtr_next_sect				= Dflt_html_fmtr_next_sect;
 	public byte[]	Html_fmtr_next_sect_fmt_dflt()		{return html_fmtr_next_sect_dflt;}		private byte[] html_fmtr_next_sect_dflt			= Dflt_html_fmtr_next_sect;
 	public void Show_more(String popup_id) {
-		Xow_wiki wiki = app.Gui_mgr().Browser_win().Active_tab().Page().Wiki();
+		Xowe_wiki wiki = app.Gui_mgr().Browser_win().Active_tab().Wiki();
 		wiki.Html_mgr().Module_mgr().Popup_mgr().Show_more(popup_id);
 	}
 	public void Show_all(String popup_id) {
-		Xow_wiki wiki = app.Gui_mgr().Browser_win().Active_tab().Page().Wiki();
+		Xowe_wiki wiki = app.Gui_mgr().Browser_win().Active_tab().Wiki();
 		wiki.Html_mgr().Module_mgr().Popup_mgr().Show_all(popup_id);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

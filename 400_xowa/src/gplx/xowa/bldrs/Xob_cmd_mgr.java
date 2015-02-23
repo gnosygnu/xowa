@@ -18,15 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*;
 import gplx.xowa.wikis.*; import gplx.xowa.xtns.wdatas.imports.*; import gplx.xowa.bldrs.imports.ctgs.*; import gplx.xowa.bldrs.imports.*; import gplx.xowa.bldrs.oimgs.*;
-import gplx.xowa.bldrs.wikis.redirects.*; import gplx.xowa.bldrs.wikis.images.*; import gplx.xowa.files.wiki_orig.*;
-import gplx.xowa.bldrs.files.*;
+import gplx.xowa.bldrs.wikis.redirects.*; import gplx.xowa.bldrs.wikis.images.*;
+import gplx.xowa.bldrs.files.*; import gplx.xowa.files.origs.*;
 public class Xob_cmd_mgr implements GfoInvkAble {
 	public Xob_cmd_mgr(Xob_bldr bldr) {this.bldr = bldr;} private Xob_bldr bldr;
 	public void Clear() {list.Clear(); dump_rdrs.Clear();}
 	public int Len() {return list.Count();} ListAdp list = ListAdp_.new_();
 	public Xob_cmd Get_at(int i) {return (Xob_cmd)list.FetchAt(i);} 
 	public Xob_cmd Add(Xob_cmd cmd) {list.Add(cmd); return cmd;}
-	public GfoInvkAble Add_cmd(Xow_wiki wiki, String cmd_key) {
+	public GfoInvkAble Add_cmd(Xowe_wiki wiki, String cmd_key) {
 		if		(String_.Eq(cmd_key, Xob_init_txt.KEY))						return Add(new Xob_init_txt(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_init_sql.KEY))						return Add(new Xob_init_sql(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_term_txt.KEY))						return Add(new Xob_term_txt(bldr, wiki));
@@ -56,7 +56,7 @@ public class Xob_cmd_mgr implements GfoInvkAble {
 		else if	(String_.Eq(cmd_key, Xob_xfer_update_cmd.KEY_oimg))			return Add(new Xob_xfer_update_cmd(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_diff_regy_exec_cmd.KEY_oimg))		return Add(new Xob_diff_regy_exec_cmd(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_diff_regy_make_cmd.KEY_oimg))		return Add(new Xob_diff_regy_make_cmd(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xof_wiki_orig_cmd.KEY_oimg))			return Add(new Xof_wiki_orig_cmd(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_orig_tbl_bldr.KEY_oimg))			return Add(new Xob_orig_tbl_bldr(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_download_wkr.KEY_oimg))			return Add(new Xob_download_wkr(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_page_regy_cmd.KEY_oimg))			return Add(new Xob_page_regy_cmd(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_exec_sql.KEY))					return Add(new Xob_cmd_exec_sql(bldr, wiki));
@@ -78,17 +78,17 @@ public class Xob_cmd_mgr implements GfoInvkAble {
 		else if	(String_.Eq(cmd_key, Xobc_deploy_copy.KEY))					return Add(new Xobc_deploy_copy(bldr, wiki));
 		else 																throw Err_.unhandled(cmd_key);
 	}
-	private Xobd_wkr Xml_rdr_direct_add(Xow_wiki wiki, Xobd_wkr wkr) {
+	private Xobd_wkr Xml_rdr_direct_add(Xowe_wiki wiki, Xobd_wkr wkr) {
 		Xobd_rdr dump_rdr = Xml_rdr_get(wiki);
 		dump_rdr.Wkr_add(wkr);
 		return wkr;
 	}
-	private Xobd_parser_wkr Xml_rdr_parser_add(Xow_wiki wiki, Xobd_parser_wkr wkr) {
+	private Xobd_parser_wkr Xml_rdr_parser_add(Xowe_wiki wiki, Xobd_parser_wkr wkr) {
 		Xobd_rdr dump_rdr = Xml_rdr_get(wiki);
 		dump_rdr.Page_parser_assert().Wkr_add(wkr);
 		return wkr;
 	}
-	private Xobd_rdr Xml_rdr_get(Xow_wiki wiki) {
+	private Xobd_rdr Xml_rdr_get(Xowe_wiki wiki) {
 		byte[] wiki_key = wiki.Domain_bry();
 		Xobd_rdr rv = (Xobd_rdr)dump_rdrs.Fetch(dump_rdrs_ref.Val_(wiki_key));
 		if (rv == null) {
@@ -117,7 +117,7 @@ public class Xob_cmd_mgr implements GfoInvkAble {
 		throw Err_.new_fmt_("cmd not found; key=~{0}", cmd_key);
 	}
 	private Object Add_many(GfoMsg m) {
-		Xow_wiki wiki = Wiki_get_or_make(m);
+		Xowe_wiki wiki = Wiki_get_or_make(m);
 		wiki.Lang().Init_by_load_assert();	// NOTE: must check that lang is loaded; else case_mgr will not initialize; DATE:2013-05-11
 		int args_len = m.Args_count();
 		String[] cmds = new String[args_len - 1];	// -1 b/c 1st arg is wiki
@@ -127,17 +127,17 @@ public class Xob_cmd_mgr implements GfoInvkAble {
 		}
 		return Add_many(wiki, cmds);
 	}
-	public Object Add_many(Xow_wiki wiki, String... cmds) {
+	public Object Add_many(Xowe_wiki wiki, String... cmds) {
 		int len = cmds.length; if (len == 0) throw Err_mgr._.fmt_(GRP_KEY, Invk_add_many, "add_many cannot have 0 cmds");
 		Object rv = null;
 		for (int i = 0; i < len; i++)
 			rv = Add_cmd(wiki, cmds[i]);
 		return rv;
 	}
-	private Xow_wiki Wiki_get_or_make(GfoMsg m) {
+	private Xowe_wiki Wiki_get_or_make(GfoMsg m) {
 		byte[] wiki_key = m.ReadBry("v");
 		Xoa_wiki_mgr wiki_mgr = bldr.App().Wiki_mgr();
-		Xow_wiki rv = wiki_mgr.Get_by_key_or_make(wiki_key);
+		Xowe_wiki rv = wiki_mgr.Get_by_key_or_make(wiki_key);
 		rv.Lang().Init_by_load();
 		return rv;
 	}

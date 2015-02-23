@@ -51,8 +51,8 @@ class Articles_itm {
 	public byte[] Text() {return text;} private byte[] text;
 }
 class Articles_itm_fmtr implements Bry_fmtr_arg {
-	private Xow_wiki wiki; private ListAdp itms;
-	public void Init(Xow_wiki wiki, ListAdp itms) {this.wiki = wiki; this.itms = itms;}
+	private Xowe_wiki wiki; private ListAdp itms;
+	public void Init(Xowe_wiki wiki, ListAdp itms) {this.wiki = wiki; this.itms = itms;}
 	public void XferAry(Bry_bfr bfr, int idx) {
 		int len = itms.Count();
 		for (int i = 0; i < len; i++) {
@@ -69,8 +69,8 @@ class Articles_xtn_skin_itm implements Xopg_xtn_skin_itm {
 	public byte Tid() {return Xopg_xtn_skin_itm_tid.Tid_sidebar;}
 	public byte[] Key() {return KEY;} public static final byte[] KEY = Bry_.new_utf8_("RelatedArticles");
 	public void Add(Articles_itm itm) {itms.Add(itm);}
-	public void Write(Bry_bfr bfr, Xoa_page page) {
-		Xow_wiki wiki = page.Wiki();
+	public void Write(Bry_bfr bfr, Xoae_page page) {
+		Xowe_wiki wiki = page.Wikie();
 		itms_fmtr.Init(wiki, itms);
 		html_fmtr.Bld_bfr_many(bfr, wiki.Msg_mgr().Val_by_key_obj("relatedarticles-title"), itms_fmtr);
 	}

@@ -29,7 +29,7 @@ public class Xou_cfg implements GfoInvkAble {
 	public Xouc_setup_mgr Setup_mgr() {return setup_mgr;} private Xouc_setup_mgr setup_mgr;
 	public Xoc_layout_mgr Layout_mgr() {return layout_mgr;} private Xoc_layout_mgr layout_mgr;
 	public Xou_security_mgr Security_mgr() {return security_mgr;} private Xou_security_mgr security_mgr;
-	public Xou_log_mgr Log_mgr() {return log_mgr;} private Xou_log_mgr log_mgr = new Xou_log_mgr();
+	public Xou_log_mgr Log_mgr() {return log_mgr;} private final Xou_log_mgr log_mgr = new Xou_log_mgr();
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_pages))			return pages_mgr;
 		else if	(ctx.Match(k, Invk_startup))		return startup_mgr;

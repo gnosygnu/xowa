@@ -36,16 +36,16 @@ class Xop_randomRootPage_page_fxt {
 		parser_fxt.Reset();
 		wiki = parser_fxt.Wiki();
 		special_page = wiki.Special_mgr().Page_randomRootPage();
-	}	private Xop_fxt parser_fxt; private Xop_randomRootPage_page special_page; private Xow_wiki wiki;
+	}	private Xop_fxt parser_fxt; private Xop_randomRootPage_page special_page; private Xowe_wiki wiki;
 	public void Init_create_page(String page) {parser_fxt.Init_page_create(page, page);}
 	public void Test_open(String special_url, String expd) {
-		Xoa_page page = Test_special_open(wiki, special_page, special_url);
+		Xoae_page page = Test_special_open(wiki, special_page, special_url);
 		Tfds.Eq(expd, String_.new_ascii_(page.Url().Page_bry()));
 		Tfds.Eq(expd, String_.new_ascii_(page.Data_raw()));
 	}
-	public static Xoa_page Test_special_open(Xow_wiki wiki, Xows_page special_page, String special_url) {
-		Xoa_page page = wiki.Ctx().Cur_page();
-		Xoa_url url = Xoa_url_parser.Parse_url(wiki.App(), wiki, special_url);
+	public static Xoae_page Test_special_open(Xowe_wiki wiki, Xows_page special_page, String special_url) {
+		Xoae_page page = wiki.Ctx().Cur_page();
+		Xoa_url url = Xoa_url_parser.Parse_url(wiki.Appe(), wiki, special_url);
 		page.Url_(url);
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_ascii_(special_url));
 		page.Ttl_(ttl);

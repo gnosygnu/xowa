@@ -25,7 +25,7 @@ class Insider_xtn_skin_itm implements Xopg_xtn_skin_itm {
 	public byte[] Key() {return KEY;} public static final byte[] KEY = Bry_.new_utf8_("Insider");
 	public ListAdp Itms() {return itms;}
 	public void Add(byte[] itm) {itms.Add(itm);}
-	public void Write(Bry_bfr bfr, Xoa_page page) {
+	public void Write(Bry_bfr bfr, Xoae_page page) {
 		html_bldr.Bld_all(bfr, page, itms);
 	}
 }
@@ -35,14 +35,14 @@ public class Insider_html_bldr implements Bry_fmtr_arg {
 	private ListAdp list; private int list_len;
 	private Hash_adp_bry hash = Hash_adp_bry.cs_();
 	public Insider_html_bldr(Insider_xtn_mgr xtn_mgr) {this.xtn_mgr = xtn_mgr;}
-	public void Bld_all(Bry_bfr bfr, Xoa_page page, ListAdp list) {
+	public void Bld_all(Bry_bfr bfr, Xoae_page page, ListAdp list) {
 		this.list = list; this.list_len = list.Count();
 		hash.Clear();
 		fmtr_grp.Bld_bfr_many(bfr, xtn_mgr.Msg_sidebar_ttl(), xtn_mgr.Msg_about_page(), xtn_mgr.Msg_about_ttl(), this);
 	}
 	public void XferAry(Bry_bfr bfr, int idx) {
-		Xow_wiki wiki = xtn_mgr.Wiki();
-		Xoh_href_parser href_parser = wiki.App().Href_parser();
+		Xowe_wiki wiki = xtn_mgr.Wiki();
+		Xoh_href_parser href_parser = wiki.Appe().Href_parser();
 		for (int i = 0; i < list_len; ++i) {
 			byte[] itm = (byte[])list.FetchAt(i);
 			Xoa_ttl user_ttl = Xoa_ttl.parse_(wiki, Xow_ns_.Id_user, itm);

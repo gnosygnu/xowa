@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.wikis.images; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wikis.*;
-import gplx.dbs.*;
+import gplx.dbs.*; import gplx.dbs.engines.sqlite.*;
 public class Xob_wiki_image_tbl {
 	public Xob_wiki_image_tbl Create_table(Db_conn p) {Sqlite_engine_.Tbl_create_and_delete(p, Tbl_name, Tbl_sql); return this;}
 	public Xob_wiki_image_tbl Create_index(Db_conn p) {Sqlite_engine_.Idx_create(p, Idx_img_name); return this;}

@@ -28,13 +28,13 @@ public class Xog_html_js_cbk_tst {
 class Xog_html_js_cbk_fxt {
 	public void Clear() {
 		fxt = new Xop_fxt();
-		Xoa_app_fxt.Init_gui(fxt.App());
+		Xoa_app_fxt.Init_gui(fxt.App(), fxt.Wiki());
 	}	private Xop_fxt fxt;
 	public Xop_fxt Fxt() {return fxt;}
 	public void Test_get_title(String ttl, Object... expd) {
-		Xoa_app app = fxt.App();
-		Xow_wiki wiki = fxt.Wiki();
-		Xoa_page page = Xoa_page.test_(wiki, Xoa_ttl.parse_(wiki, Bry_.new_ascii_("mock_page")));
+		Xoae_app app = fxt.App();
+		Xowe_wiki wiki = fxt.Wiki();
+		Xoae_page page = Xoae_page.test_(wiki, Xoa_ttl.parse_(wiki, Bry_.new_ascii_("mock_page")));
 		Xog_tab_itm tab = app.Gui_mgr().Browser_win().Active_tab();
 		tab.Page_(page);
 		Xog_html_js_cbk exec = tab.Html_itm().Js_cbk();

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs; import gplx.*; import gplx.xowa.*;
-import gplx.dbs.*; import gplx.xowa.dbs.tbls.*;
+import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.dbs.tbls.*;
 public class Xodb_fsys_mgr {
 	private final Io_url src_dir; private final Io_url trg_dir; private final String wiki_name;
 	public Xodb_fsys_mgr(Io_url src_dir, Io_url trg_dir, String wiki_name) {this.src_dir = src_dir; this.trg_dir = trg_dir; this.wiki_name = wiki_name;}

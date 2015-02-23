@@ -38,9 +38,9 @@ public class Xop_lnki_wkr_ {
 		return Parse_ttl(ctx, src, lnki, ttl_bgn, ttl_end);
 	}
 	public static boolean Parse_ttl(Xop_ctx ctx, byte[] src, Xop_lnki_tkn lnki, int ttl_bgn, int ttl_end) {
-		Xoa_app app = ctx.App();
+		Xoae_app app = ctx.App();
 		byte[] ttl_bry = Bry_.Mid(src, ttl_bgn, ttl_end);
-		ttl_bry = app.Encoder_mgr().Url_ttl().Decode(ttl_bry);
+		ttl_bry = Xoa_app_.Utl_encoder_mgr().Url_ttl().Decode(ttl_bry);
 		int ttl_bry_len = ttl_bry.length;
 		Xoa_ttl page_ttl = ctx.Cur_page().Ttl();
 		if (page_ttl.Ns().Subpages_enabled()
@@ -52,7 +52,7 @@ public class Xop_lnki_wkr_ {
 			ttl_bry = new_bry;
 			tmp_bfr.Mkr_rls();
 		}
-		Xow_wiki wiki = ctx.Wiki();
+		Xowe_wiki wiki = ctx.Wiki();
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry);		
 		if (ttl == null) return false;
 		if	(	wiki.Cfg_parser_lnki_xwiki_repos_enabled()			// wiki has lnki.xwiki_repos
@@ -63,7 +63,7 @@ public class Xop_lnki_wkr_ {
 		lnki.Ns_id_(ttl.Ns().Id());
 		return true;
 	}
-	private static Xoa_ttl Adj_ttl_for_file(Xow_wiki wiki, Xop_ctx ctx, Xoa_ttl ttl, byte[] ttl_bry) {	// NOTE: remove the xwiki part; EX: [[en:File:A.png]] -> [[File:A.png]]
+	private static Xoa_ttl Adj_ttl_for_file(Xowe_wiki wiki, Xop_ctx ctx, Xoa_ttl ttl, byte[] ttl_bry) {	// NOTE: remove the xwiki part; EX: [[en:File:A.png]] -> [[File:A.png]]
 		byte[] xwiki_bry = ttl.Wik_txt(); if (xwiki_bry == null) return ttl; // should not happen, but just in case
 		int xwiki_bry_len = xwiki_bry.length;
 		int ttl_bry_len = ttl_bry.length;

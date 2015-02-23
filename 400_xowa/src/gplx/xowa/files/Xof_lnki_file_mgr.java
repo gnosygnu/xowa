@@ -16,49 +16,47 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.files.fsdb.*; import gplx.xowa.files.bins.*;
+import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.bins.*;
 import gplx.xowa.parsers.lnkis.*;
 public class Xof_lnki_file_mgr {
 	private boolean page_init_needed = true;
-	private ListAdp fsdb_list = ListAdp_.new_();
-	private OrderedHash xfer_list = OrderedHash_.new_bry_();
-	private Xof_url_bldr url_bldr = Xof_url_bldr.new_v2_();
-	private Xof_img_size tmp_img_size = new Xof_img_size();
+	private final ListAdp fsdb_list = ListAdp_.new_();
+	private final OrderedHash orig_regy = OrderedHash_.new_bry_(), xfer_list = OrderedHash_.new_bry_();
+	private Xof_url_bldr url_bldr = Xof_url_bldr.new_v2_(); private Xof_img_size tmp_img_size = new Xof_img_size();
 	public void Clear() {
 		page_init_needed = true;
 		fsdb_list.Clear();
 		xfer_list.Clear();
 		orig_regy.Clear();			
 	}
-	private OrderedHash orig_regy = OrderedHash_.new_bry_();
-	public boolean Find(Xow_wiki wiki, Xoa_page page, byte exec_tid, Xof_xfer_itm xfer_itm) {
+	public boolean Find(Xowe_wiki wiki, Xoae_page page, byte exec_tid, Xof_xfer_itm xfer_itm) {
 		try {
 			if (page_init_needed) {
 				page_init_needed = false;					
-				wiki.File_mgr().Fsdb_mgr().Init_by_wiki__add_bin_wkrs(wiki);	// NOTE: fsdb_mgr may not be init'd for wiki; assert that that it is
-				Create_xfer_itms(page.Lnki_list(), wiki.File_mgr().Fsdb_mgr().Patch_upright());	// NOTE: Patch_upright check must occur after Init_by_wiki; DATE:2014-05-31
-				wiki.File_mgr().Fsdb_mgr().Orig_select_by_list(page, exec_tid, fsdb_list, orig_regy);
+				wiki.File_mgr().Fsdb_mgr().Init_by_wiki(wiki);	// NOTE: fsdb_mgr may not be init'd for wiki; assert that that it is
+				Create_xfer_itms(page.Lnki_list(), wiki.File_mgr().Patch_upright());	// NOTE: Patch_upright check must occur after Init_by_wiki; DATE:2014-05-31
+				wiki.File_mgr().Fsdb_mgr().Orig_mgr().Find_by_list(orig_regy, fsdb_list, exec_tid);
 				Hash_xfer_itms();
 			}
 			Xof_fsdb_itm fsdb_itm = (Xof_fsdb_itm)xfer_list.Fetch(xfer_itm.Lnki_ttl());
 			if (fsdb_itm == null)	// no orig_data found for the current item
 				return false;
 			else {
-				if (fsdb_itm.Orig_wiki() == null) return false;		// itm not found; return now, else null exception later;
+				if (fsdb_itm.Orig_repo_name() == null) return false;		// itm not found; return now, else null exception later;
 				xfer_itm.Lnki_ext_(fsdb_itm.Lnki_ext());			// WORKAROUND: hacky, but fsdb_itm knows when ogg is ogv whereas xfer_itm does not; so, always override xfer_itm.ext with fsdb's; DATE:2014-02-02
 				xfer_itm.Url_bldr_(url_bldr);						// default Url_bldr for xfer_itm uses @ for thumbtime; switch to -; DATE:2014-02-02
 				Init_fsdb_by_xfer(fsdb_itm, xfer_itm);				// copy xfer itm props to fsdb_itm;
 				xfer_itm.Set__orig(fsdb_itm.Orig_w(), fsdb_itm.Orig_h(), xfer_itm.Orig_file_len());	// copy orig props from orig_itm to xfer_itm
-				Xof_repo_itm repo = wiki.File_mgr().Repo_mgr().Repos_get_by_wiki(fsdb_itm.Orig_wiki()).Trg();
-				fsdb_itm.Html__init(repo, url_bldr, tmp_img_size, exec_tid);
+				Xof_repo_itm repo = wiki.File_mgr().Repo_mgr().Repos_get_by_wiki(fsdb_itm.Orig_repo_name()).Trg();
+				fsdb_itm.Ctor_by_html(repo, url_bldr, tmp_img_size, exec_tid);
 				xfer_itm.Trg_repo_(repo);
 				xfer_itm.Html_orig_src_(Bry_.new_utf8_(fsdb_itm.Html_orig_url().To_http_file_str()));	// always set orig_url; note that w,h are not necessary for orig url; orig url needed for [[Media:]] links; DATE:2014-01-19
-				gplx.ios.IoItmFil fil = Io_mgr._.QueryFil(fsdb_itm.Html_url());
+				gplx.ios.IoItmFil fil = Io_mgr._.QueryFil(fsdb_itm.Html_view_url());
 				if (fil.Exists()) {
 					if  (fil.Size() == 0)	// NOTE: fix; XOWA used to write 0 byte files if file was missing, delete them and do not return true; DATE:2014-06-21
-						Io_mgr._.DeleteFil(fsdb_itm.Html_url());
+						Io_mgr._.DeleteFil(fsdb_itm.Html_view_url());
 					else {
-						xfer_itm.Calc_by_fsdb(fsdb_itm.Html_w(), fsdb_itm.Html_h(), fsdb_itm.Html_url(), fsdb_itm.Html_orig_url());
+						xfer_itm.Calc_by_fsdb(fsdb_itm.Html_w(), fsdb_itm.Html_h(), fsdb_itm.Html_view_url(), fsdb_itm.Html_orig_url());
 						return true;
 					}
 				}
@@ -70,7 +68,7 @@ public class Xof_lnki_file_mgr {
 			}
 			return false;
 		} catch (Exception e) {
-			wiki.App().Usr_dlg().Warn_many("", "", "failed to find img: img=~{0} err=~{1}", String_.new_utf8_(xfer_itm.Lnki_ttl()), Err_.Message_gplx_brief(e));
+			wiki.Appe().Usr_dlg().Warn_many("", "", "failed to find img: img=~{0} err=~{1}", String_.new_utf8_(xfer_itm.Lnki_ttl()), Err_.Message_gplx_brief(e));
 			return false;
 		}
 	}
@@ -102,13 +100,13 @@ public class Xof_lnki_file_mgr {
 		byte[] lnki_ttl = lnki_tkn.Ttl().Page_db();
 		Xof_ext lnki_ext = Xof_ext_.new_by_ttl_(lnki_ttl);
 		byte[] lnki_md5 = Xof_xfer_itm_.Md5_(lnki_ttl);
-		fsdb_itm.Init_by_lnki(lnki_ttl, lnki_ext, lnki_md5, lnki_tkn.Lnki_type(), lnki_tkn.Lnki_w(), lnki_tkn.Lnki_h(), lnki_upright_patch, lnki_tkn.Upright(), lnki_tkn.Thumbtime(), lnki_tkn.Page());
+		fsdb_itm.Ctor_by_lnki(lnki_ttl, lnki_ext, lnki_md5, lnki_tkn.Lnki_type(), lnki_tkn.Lnki_w(), lnki_tkn.Lnki_h(), lnki_upright_patch, lnki_tkn.Upright(), lnki_tkn.Thumbtime(), lnki_tkn.Page());
 	}
 	private void Init_fsdb_by_xfer(Xof_fsdb_itm fsdb_itm, Xof_xfer_itm xfer_itm) {	// DELETE: DATE:2014-02-04
 		fsdb_itm.Lnki_size_(xfer_itm.Lnki_w(), xfer_itm.Lnki_h());	// NOTE: must overwrite fsdb_itm.size with xfer_itm.size when the same image shows up in multiple sizes on a page; (only one item in wiki_orig); EX: w:Portal:Canada; [[File:Flag of Canada.svg|300x150px]]; [[File:Flag of Canada.svg|23px]]; DATE:2014-02-14
 		fsdb_itm.Lnki_type_(xfer_itm.Lnki_type());					// NOTE: must overwrite lnki_type, else multiple images on same page with different type wont show; PAGE:en.w:History_of_painting; DATE:2014-03-06
 		fsdb_itm.Lnki_page_(xfer_itm.Lnki_page());
-		fsdb_itm.Lnki_thumbtime_(xfer_itm.Lnki_thumbtime());
+		fsdb_itm.Lnki_time_(xfer_itm.Lnki_thumbtime());
 //			byte[] lnki_ttl = xfer_itm.Lnki_ttl();
 //			Xof_ext lnki_ext = xfer_itm.Lnki_ext();
 //			byte[] lnki_md5 = Xof_xfer_itm_.Md5_(lnki_ttl);

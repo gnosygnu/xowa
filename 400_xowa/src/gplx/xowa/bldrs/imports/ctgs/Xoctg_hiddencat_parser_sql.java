@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.imports.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.imports.*;
 import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.dbs.tbls.*;
 public class Xoctg_hiddencat_parser_sql extends Xoctg_hiddencat_parser_base {
-	public Xoctg_hiddencat_parser_sql(Xob_bldr bldr, Xow_wiki wiki) {this.Ctor(bldr, wiki);} private Db_conn conn;
+	public Xoctg_hiddencat_parser_sql(Xob_bldr bldr, Xowe_wiki wiki) {this.Ctor(bldr, wiki);} private Db_conn conn;
 	@Override public String Cmd_key() {return KEY;} public static final String KEY = "import.sql.hiddencat";
 	@Override public void Cmd_bgn_hook(Xob_bldr bldr, Sql_file_parser parser) {
 		super.Cmd_bgn_hook(bldr, parser);

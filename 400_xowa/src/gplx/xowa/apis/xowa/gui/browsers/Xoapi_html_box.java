@@ -23,7 +23,7 @@ public class Xoapi_html_box implements GfoInvkAble, GfoEvMgrOwner {
 		evMgr = GfoEvMgr.new_(this);
 	}
 	public GfoEvMgr EvMgr() {return evMgr;} private GfoEvMgr evMgr;
-	public void Init_by_kit(Xoa_app app) {this.win = app.Gui_mgr().Browser_win();}
+	public void Init_by_kit(Xoae_app app) {this.win = app.Gui_mgr().Browser_win();}
 	public byte Load_tid() {return load_tid;} private byte load_tid;
 	public void Focus() {
 		Xog_tab_itm tab = win.Active_tab(); if (tab == Xog_tab_itm_.Null) return;

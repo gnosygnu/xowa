@@ -16,11 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.xowa.tdbs.*;
 public class Xowd_hive_mgr {
-	public Xowd_hive_mgr(Xow_wiki wiki, byte dir_tid) {
-		this.wiki = wiki; fsys_mgr = wiki.Fsys_mgr(); this.dir_tid = dir_tid;
-		dir_tid_reg = dir_tid == Xow_dir_info_.Tid_page ? Xow_dir_info_.Tid_ttl : dir_tid; 
-	} Xow_wiki wiki; Xow_fsys_mgr fsys_mgr; Xowd_regy_mgr reg_mgr; byte dir_tid;
+	public Xowd_hive_mgr(Xowe_wiki wiki, byte dir_tid) {
+		this.wiki = wiki; fsys_mgr = wiki.Tdb_fsys_mgr(); this.dir_tid = dir_tid;
+		dir_tid_reg = dir_tid == Xotdb_dir_info_.Tid_page ? Xotdb_dir_info_.Tid_ttl : dir_tid; 
+	} Xowe_wiki wiki; Xotdb_fsys_mgr fsys_mgr; Xowd_regy_mgr reg_mgr; byte dir_tid;
 	byte dir_tid_reg;
 	public void Create(Xow_ns ns, byte[] key, byte[] data, gplx.lists.ComparerAble comparer) {
 		if (reg_mgr == null) reg_mgr = new Xowd_regy_mgr(fsys_mgr.Url_ns_reg(ns.Num_str(), dir_tid_reg));
@@ -71,7 +72,7 @@ public class Xowd_hive_mgr {
 		reg_mgr.Save();
 	}
 	public void Update(Xow_ns ns, byte[] old_key, byte[] new_key, byte[] data, int lkp_bgn, byte lkp_dlm, boolean exact, boolean sort) {
-		if (reg_mgr == null) reg_mgr = new Xowd_regy_mgr(fsys_mgr.Url_ns_reg(ns.Num_str(), Xow_dir_info_.Tid_ttl));
+		if (reg_mgr == null) reg_mgr = new Xowd_regy_mgr(fsys_mgr.Url_ns_reg(ns.Num_str(), Xotdb_dir_info_.Tid_ttl));
 		int fil_idx = reg_mgr.Files_find(old_key);
 		boolean reg_save = false;
 		if (new_key != null)

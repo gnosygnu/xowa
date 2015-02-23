@@ -24,7 +24,7 @@ public class Xoh_file_html_fmtr__hdump extends Xoh_file_html_fmtr__base {
 //		public override void Html_full_media(Bry_bfr tmp_bfr, byte[] a_href, byte[] a_title, Bry_fmtr_arg html) {
 //			fmtr_full_media.Bld_bfr_many(tmp_bfr, a_href, a_title, html);
 //		}
-//		public override void Html_full_img(Bry_bfr tmp_bfr, Xoh_wtr_ctx hctx, Xoa_page page, Xof_xfer_itm xfer_itm, int uid
+//		public override void Html_full_img(Bry_bfr tmp_bfr, Xoh_wtr_ctx hctx, Xoae_page page, Xof_xfer_itm xfer_itm, int uid
 //			, byte[] a_href, byte a_cls, byte a_rel, byte[] a_title, byte[] a_xowa_title
 //			, int img_w, int img_h, byte[] img_src, byte[] img_alt, byte img_cls, byte[] img_cls_other) {
 //			tmp_bfr.Add_str_ascii("<a xtid='a_img_full' xatrs='");

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.logs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.dbs.*; import gplx.xowa.bldrs.oimgs.*;
+import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.bldrs.oimgs.*;
 public class Xop_log_property_wkr implements GfoInvkAble {
 	private Xop_log_mgr log_mgr; private Db_conn conn; private Db_stmt stmt;
 	private boolean log_enabled = true;
@@ -33,8 +33,8 @@ public class Xop_log_property_wkr implements GfoInvkAble {
 	public void Init_reset() {
 		Xob_log_property_temp_tbl.Delete(conn);
 	}
-	public boolean Eval_bgn(Xoa_page page, byte[] prop) {return include_all || include_props.Has(prop);}
-	public void Eval_end(Xoa_page page, byte[] prop, long invoke_time_bgn) {
+	public boolean Eval_bgn(Xoae_page page, byte[] prop) {return include_all || include_props.Has(prop);}
+	public void Eval_end(Xoae_page page, byte[] prop, long invoke_time_bgn) {
 		if (log_enabled && stmt != null) {
 			int eval_time = (int)(Env_.TickCount() - invoke_time_bgn);
 			Xob_log_property_temp_tbl.Insert(stmt, page.Ttl().Rest_txt(), prop, eval_time);

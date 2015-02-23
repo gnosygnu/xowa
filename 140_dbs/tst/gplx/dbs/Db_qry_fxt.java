@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
+import gplx.dbs.qrys.*;
 public class Db_qry_fxt {
 	public static void Insert_kvo(Db_conn conn, String tblName, KeyValList kvList) {
 		Db_qry_insert qry = Db_qry_.insert_(tblName);

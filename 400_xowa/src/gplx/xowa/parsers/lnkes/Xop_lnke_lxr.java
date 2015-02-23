@@ -20,7 +20,7 @@ import gplx.core.btries.*; import gplx.xowa.net.*;
 public class Xop_lnke_lxr implements Xop_lxr {
 	Xop_lnke_lxr(byte lnke_typ, byte[] protocol, byte tid) {this.lnke_typ = lnke_typ; this.protocol = protocol; this.tid = tid;} private byte lnke_typ; byte[] protocol; byte tid;
 	public byte Lxr_tid() {return Xop_lxr_.Tid_lnke_bgn;}
-	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr core_trie) {
+	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {
 		Xoo_protocol_itm[] ary = Xoo_protocol_itm.Ary();
 		int ary_len = ary.length;
 		for (int i = 0; i < ary_len; i++) {

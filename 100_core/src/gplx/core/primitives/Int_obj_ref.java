@@ -23,6 +23,7 @@ public class Int_obj_ref {
 	public int Val_add(int v) {val += v; return val;}		
 	public Int_obj_ref Val_zero_() {val = 0; return this;}
 	public Int_obj_ref Val_neg1_() {val = -1; return this;}
+	public String Val_as_str() {return Int_.Xto_str(val);}
 	@Override public String toString() {return Int_.Xto_str(val);}
 	@Override public int hashCode() {return val;}
 	@Override public boolean equals(Object obj) {return val == ((Int_obj_ref)obj).Val();}

@@ -18,21 +18,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 class Xog_launcher_tabs {
 	public void Launch(Xog_win_itm win) {
-		Xoa_app app = win.App(); Gfo_log_bfr log_bfr = app.Log_bfr();
+		Xoae_app app = win.App(); Gfo_log_bfr log_bfr = app.Log_bfr();
 		log_bfr.Add("app.launch.page.bgn");			
 		Io_fil_marker fil_marker = new Io_fil_marker().Usr_dlg_(app.Usr_dlg()).Url_(app.User().Fsys_mgr().App_temp_dir().GenSubFil_nest("session", "launch.tabs.marker"));
 		boolean tabs_restored = false;
-		Xow_wiki home_wiki = app.User().Wiki();
+		Xowe_wiki home_wiki = app.User().Wiki();
 		if (fil_marker.Bgn())
 			tabs_restored = Restore_tabs(app, home_wiki, win, fil_marker);
 		if (!tabs_restored)
 			Restore_tab_failover(app, home_wiki, win);
 		// tab.Html_itm().Html_box().Focus(); // focus the html_box so wheel scroll works; DATE:2013-02-08
-		app.Gui_wtr().Prog_none("", "", "");
+		app.Usr_dlg().Prog_none("", "", "");
 		log_bfr.Add("app.launch.page.end");
-		app.Gui_wtr().Log_wtr().Log_msg_to_session_direct(log_bfr.Xto_str());
+		app.Usr_dlg().Log_wtr().Log_msg_to_session_direct(log_bfr.Xto_str());
 	}
-	private boolean Restore_tabs(Xoa_app app, Xow_wiki home_wiki, Xog_win_itm win, Io_fil_marker fil_marker) {
+	private boolean Restore_tabs(Xoae_app app, Xowe_wiki home_wiki, Xog_win_itm win, Io_fil_marker fil_marker) {
 		String[] launch_urls = app.Api_root().App().Startup().Tabs().Calc_startup_strs(app);
 		try {
 			int launch_urls_len = launch_urls.length;
@@ -49,7 +49,7 @@ class Xog_launcher_tabs {
 			return false;
 		}
 	}
-	private void Restore_tab_failover(Xoa_app app, Xow_wiki home_wiki, Xog_win_itm win) {
+	private void Restore_tab_failover(Xoae_app app, Xowe_wiki home_wiki, Xog_win_itm win) {
 		try {
 			Launch_tab(win, home_wiki, gplx.xowa.users.Xouc_pages_mgr.Page_xowa);
 		}
@@ -57,12 +57,12 @@ class Xog_launcher_tabs {
 			app.Usr_dlg().Warn_many("", "", "failed to launch failover tab: err=~{0}", Err_.Message_gplx(e));
 		}
 	}
-	private void Launch_tab(Xog_win_itm win, Xow_wiki home_wiki, String launch_str) {
-		Xoa_app app = win.App();
+	private void Launch_tab(Xog_win_itm win, Xowe_wiki home_wiki, String launch_str) {
+		Xoae_app app = win.App();
 		Xoa_url launch_url = Xoa_url_parser.Parse_from_url_bar(app, home_wiki, launch_str);
-		Xow_wiki launch_wiki = app.Wiki_mgr().Get_by_key_or_null(launch_url.Wiki_bry());
+		Xowe_wiki launch_wiki = app.Wiki_mgr().Get_by_key_or_null(launch_url.Wiki_bry());
 		Xoa_ttl launch_ttl = Xoa_ttl.parse_(launch_wiki, launch_url.Page_bry());
-		Xog_tab_itm tab = win.Tab_mgr().Tabs_new_init(Xoa_page.new_(launch_wiki, launch_ttl)); // WORKAROUND: set the tab to an empty page, else null ref later; DATE:2014-07-23
+		Xog_tab_itm tab = win.Tab_mgr().Tabs_new_init(launch_wiki, Xoae_page.new_(launch_wiki, launch_ttl)); // WORKAROUND: set the tab to an empty page, else null ref later; DATE:2014-07-23
 		tab.Show_url_bgn(launch_url);
 	}
         public static final Xog_launcher_tabs _ = new Xog_launcher_tabs(); Xog_launcher_tabs() {}

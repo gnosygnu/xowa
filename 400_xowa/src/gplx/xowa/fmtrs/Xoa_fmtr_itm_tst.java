@@ -26,7 +26,7 @@ public class Xoa_fmtr_itm_tst {
 	}
 }
 class Xoa_fmtr_itm_fxt {
-	private Xoa_app app; private Xoa_fmtr_itm itm;
+	private Xoae_app app; private Xoa_fmtr_itm itm;
 	public void Clear() {
 		app = Xoa_app_fxt.app_();
 		Xoa_app_fxt.wiki_tst_(app);	// create enwiki

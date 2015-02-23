@@ -22,7 +22,7 @@ public class Luaj_engine implements Scrib_engine {
 	private Luaj_server server;
 	private Scrib_proc_mgr proc_mgr;
 	private Scrib_core core;
-	public Luaj_engine(Xoa_app app, Scrib_core core, boolean debug_enabled) {
+	public Luaj_engine(Xoae_app app, Scrib_core core, boolean debug_enabled) {
 		this.core = core;
 		server = new Luaj_server(core, debug_enabled);
 		proc_mgr = core.Proc_mgr();

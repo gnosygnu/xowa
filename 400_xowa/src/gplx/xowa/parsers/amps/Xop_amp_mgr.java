@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.amps; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.btries.*;
 public class Xop_amp_mgr {
-	private Bry_bfr tmp_bfr = Bry_bfr.reset_(32);
-	public Btrie_slim_mgr Amp_trie() {return amp_trie;} private Btrie_slim_mgr amp_trie = Xop_amp_trie._;		
+	private final Bry_bfr tmp_bfr = Bry_bfr.reset_(32);
+	public Btrie_slim_mgr Amp_trie() {return amp_trie;} private final Btrie_slim_mgr amp_trie = Xop_amp_trie._;
 	public int Rslt_pos() {return rslt_pos;} private int rslt_pos;
 	public int Rslt_val() {return rslt_val;} private int rslt_val;
 	public Xop_tkn_itm Parse_as_tkn(Xop_tkn_mkr tkn_mkr, byte[] src, int src_len, int amp_pos, int cur_pos) {
@@ -40,6 +40,36 @@ public class Xop_amp_mgr {
 				return pass ? tkn_mkr.Amp_num(amp_pos, rslt_pos, rslt_val) : null;
 			default: throw Err_.unhandled(itm.Tid());
 		}
+	}
+	public boolean Parse_as_int(boolean ncr_is_hex, byte[] src, int src_len, int amp_pos, int int_bgn) {
+		rslt_pos = amp_pos + 1;	// default to fail pos; after amp;
+		rslt_val = -1;			// clear any previous setting
+		int cur_pos = int_bgn, int_end = -1;
+		int semic_pos = Bry_finder.Find_fwd(src, Byte_ascii.Semic, cur_pos, src_len);
+		if (semic_pos == Bry_finder.Not_found) return false;
+		int_end = semic_pos - 1;	// int_end = pos before semicolon
+		int multiple = ncr_is_hex ? 16 : 10, val = 0, factor = 1, cur = 0;
+		for (int i = int_end; i >= int_bgn; i--) {
+			byte b = src[i];
+			if (ncr_is_hex) {
+				if		(b >=  48 && b <=  57)	cur = b - 48;
+				else if	(b >=  65 && b <=  70)	cur = b - 55;
+				else if	(b >=  97 && b <= 102)	cur = b - 87;
+				else if((b >=  71 && b <=  90)
+					||  (b >=  91 && b <= 122))	continue;	// NOTE: wiki discards letters G-Z; PAGE:en.w:Miscellaneous_Symbols "{{Unicode|&#xx26D0;}}"; NOTE 2nd x is discarded
+				else							return false;
+			}
+			else {
+				cur = b - Byte_ascii.Num_0;
+				if (cur < 0 || cur > 10)		return false;
+			}
+			val += cur * factor;
+			if (val > gplx.intl.Utf8_.Codepoint_max)  return false;	// fail if value > largest_unicode_codepoint
+			factor *= multiple;
+		}
+		rslt_val = val;
+		rslt_pos = semic_pos + 1;	// position after semic
+		return true;
 	}
 	public byte[] Decode_as_bry(byte[] src) {
 		if (src == null) return src;
@@ -87,35 +117,5 @@ public class Xop_amp_mgr {
 			++pos;
 		}
 		return dirty ? tmp_bfr.Xto_bry_and_clear() : src;
-	}
-	public boolean Parse_as_int(boolean ncr_is_hex, byte[] src, int src_len, int amp_pos, int int_bgn) {
-		rslt_pos = amp_pos + 1;	// default to fail pos; after amp;
-		rslt_val = -1;			// clear any previous setting
-		int cur_pos = int_bgn, int_end = -1;
-		int semic_pos = Bry_finder.Find_fwd(src, Byte_ascii.Semic, cur_pos, src_len);
-		if (semic_pos == Bry_finder.Not_found) return false;
-		int_end = semic_pos - 1;	// int_end = pos before semicolon
-		int multiple = ncr_is_hex ? 16 : 10, val = 0, factor = 1, cur = 0;
-		for (int i = int_end; i >= int_bgn; i--) {
-			byte b = src[i];
-			if (ncr_is_hex) {
-				if		(b >=  48 && b <=  57)	cur = b - 48;
-				else if	(b >=  65 && b <=  70)	cur = b - 55;
-				else if	(b >=  97 && b <= 102)	cur = b - 87;
-				else if((b >=  71 && b <=  90)
-					||  (b >=  91 && b <= 122))	continue;	// NOTE: wiki discards letters G-Z; PAGE:en.w:Miscellaneous_Symbols "{{Unicode|&#xx26D0;}}"; NOTE 2nd x is discarded
-				else							return false;
-			}
-			else {
-				cur = b - Byte_ascii.Num_0;
-				if (cur < 0 || cur > 10)		return false;
-			}
-			val += cur * factor;
-			if (val > gplx.intl.Utf8_.Codepoint_max)  return false;	// fail if value > largest_unicode_codepoint
-			factor *= multiple;
-		}
-		rslt_val = val;
-		rslt_pos = semic_pos + 1;	// position after semic
-		return true;
 	}
 }

@@ -17,10 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.lst; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
-import gplx.xowa.html.*;
+import gplx.xowa.langs.*; import gplx.xowa.html.*;
 public class Lst_section_nde implements Xox_xnde, Xop_xnde_atr_parser {
 	public byte[] Section_name() {return section_name;} private byte[] section_name;
-	public void Xatr_parse(Xow_wiki wiki, byte[] src, Xop_xatr_itm xatr, Object xatr_obj) {
+	public void Xatr_parse(Xowe_wiki wiki, byte[] src, Xop_xatr_itm xatr, Object xatr_obj) {
 		if (xatr_obj == null) return;
 		byte xatr_tid = ((Byte_obj_val)xatr_obj).Val();
 		switch (xatr_tid) {
@@ -30,14 +30,14 @@ public class Lst_section_nde implements Xox_xnde, Xop_xnde_atr_parser {
 	}
 	public Xop_xnde_tkn Xnde() {return xnde;} private Xop_xnde_tkn xnde;
 	public byte Name_tid() {return name_tid;} private byte name_tid;
-	public void Xtn_parse(Xow_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
-		Xoa_app app = ctx.App();
+	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
+		Xoae_app app = ctx.App();
 		Xop_xatr_itm[] atrs = Xop_xatr_itm.Xatr_parse(app, this, wiki.Lang().Xatrs_section(), wiki, src, xnde);
 		this.xnde = xnde;
 		xnde.Atrs_ary_(atrs);
 		ctx.Lst_section_mgr().Add(this);
 	}
-	public void Xtn_write(Bry_bfr bfr, Xoa_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {}	// NOTE: write nothing; <section> is just a bookmark
+	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {}	// NOTE: write nothing; <section> is just a bookmark
 	public static final byte Xatr_name = 0, Xatr_bgn = 1, Xatr_end = 2;
 	public static Hash_adp_bry new_xatrs_(Xol_lang lang) {
 		Hash_adp_bry rv = Hash_adp_bry.ci_utf8_(lang.Case_mgr());	// UTF8:see xatrs below

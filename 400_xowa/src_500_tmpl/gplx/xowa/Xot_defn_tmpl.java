@@ -62,14 +62,14 @@ public class Xot_defn_tmpl implements Xot_defn {
 	public void Parse_tmpl(Xop_ctx ctx) {ctx.Wiki().Parser().Parse_text_to_defn(this, ctx, ctx.Tkn_mkr(), ns, name, data_raw);}	boolean onlyinclude_parsed = false;
 	public boolean Tmpl_evaluate(Xop_ctx ctx, Xot_invk caller, Bry_bfr bfr) {
 		if (root == null) Parse_tmpl(ctx);
-		Xoa_page page = ctx.Cur_page();
+		Xoae_page page = ctx.Cur_page();
 		if (!page.Tmpl_stack_add(full_name)) {
 			bfr.Add_str("<span class=\"error\">Template loop detected:" + String_.new_utf8_(name) + "</span>");
 			return false;
 		}
 		boolean rv = true;
 		if (onlyInclude_exists) {
-			Xow_wiki wiki = ctx.Wiki();
+			Xowe_wiki wiki = ctx.Wiki();
 			if (!onlyinclude_parsed) {
 				onlyinclude_parsed = true;
 				byte[] new_data = Extract_onlyinclude(data_raw, wiki.Utl_bry_bfr_mkr());

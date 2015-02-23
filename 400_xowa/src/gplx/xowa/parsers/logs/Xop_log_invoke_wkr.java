@@ -16,12 +16,14 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.logs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.dbs.*; import gplx.xowa.bldrs.oimgs.*; import gplx.xowa.parsers.logs.*;
+import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.bldrs.oimgs.*; import gplx.xowa.parsers.logs.*;
+import gplx.xowa.xtns.scribunto.*;
 public class Xop_log_invoke_wkr implements GfoInvkAble {
 	private Xop_log_mgr log_mgr;
 	private Db_conn conn; private Db_stmt stmt;
 	private boolean log_enabled = true;
 	private Hash_adp_bry exclude_mod_names = Hash_adp_bry.cs_();
+	public Scrib_err_filter_mgr Err_filter_mgr() {return err_filter_mgr;} private final Scrib_err_filter_mgr err_filter_mgr = new Scrib_err_filter_mgr();
 	public Xop_log_invoke_wkr(Xop_log_mgr log_mgr, Db_conn conn) {
 		this.log_mgr = log_mgr;
 		this.conn = conn;
@@ -33,8 +35,8 @@ public class Xop_log_invoke_wkr implements GfoInvkAble {
 	public void Init_reset() {
 		Xop_log_invoke_tbl.Delete(conn);
 	}
-	public boolean Eval_bgn(Xoa_page page, byte[] mod_name, byte[] fnc_name) {return !exclude_mod_names.Has(mod_name);}
-	public void Eval_end(Xoa_page page, byte[] mod_name, byte[] fnc_name, long invoke_time_bgn) {
+	public boolean Eval_bgn(Xoae_page page, byte[] mod_name, byte[] fnc_name) {return !exclude_mod_names.Has(mod_name);}
+	public void Eval_end(Xoae_page page, byte[] mod_name, byte[] fnc_name, long invoke_time_bgn) {
 		if (log_enabled && stmt != null) {
 			int eval_time = (int)(Env_.TickCount() - invoke_time_bgn);
 			Xop_log_invoke_tbl.Insert(stmt, page.Ttl().Rest_txt(), mod_name, fnc_name, eval_time);
@@ -51,9 +53,11 @@ public class Xop_log_invoke_wkr implements GfoInvkAble {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_exclude_mod_names_add))	Exclude_mod_names_add(m.ReadStrAry("v", "|"));
 		else if	(ctx.Match(k, Invk_log_enabled_))			log_enabled = m.ReadYn("v");
+		else if	(ctx.Match(k, Invk_err_filter))				return err_filter_mgr;
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
-	}	private static final String Invk_exclude_mod_names_add = "exclude_mod_names_add", Invk_log_enabled_ = "log_enabled_";
+	}
+	private static final String Invk_exclude_mod_names_add = "exclude_mod_names_add", Invk_log_enabled_ = "log_enabled_", Invk_err_filter = "err_filter";
 }
 class Xop_log_invoke_tbl {
 	public static void Create_table(Db_conn conn)		{Sqlite_engine_.Tbl_create(conn, Tbl_name, Tbl_sql);}

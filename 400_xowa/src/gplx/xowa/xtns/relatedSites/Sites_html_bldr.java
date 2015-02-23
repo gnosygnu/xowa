@@ -24,7 +24,7 @@ class Sites_xtn_skin_itm implements Xopg_xtn_skin_itm {
 	public byte Tid() {return Xopg_xtn_skin_itm_tid.Tid_sidebar;}
 	public byte[] Key() {return KEY;} public static final byte[] KEY = Bry_.new_utf8_("RelatedSites");
 	public void Add(Sites_regy_itm itm) {itms.Add(itm);}
-	public void Write(Bry_bfr bfr, Xoa_page page) {
+	public void Write(Bry_bfr bfr, Xoae_page page) {
 		html_bldr.Bld_all(bfr, page, itms);
 	}
 }
@@ -35,27 +35,27 @@ public class Sites_html_bldr implements Bry_fmtr_arg {
 	private Hash_adp_bry hash = Hash_adp_bry.cs_();
 	public Sites_html_bldr(Sites_xtn_mgr xtn_mgr) {this.xtn_mgr = xtn_mgr;}
 	private Bry_fmtr url_fmtr = Bry_fmtr.keys_("title");
-	public void Bld_all(Bry_bfr bfr, Xoa_page page, ListAdp list) {
+	public void Bld_all(Bry_bfr bfr, Xoae_page page, ListAdp list) {
 		this.list = list; this.list_len = list.Count();
 		hash.Clear();
 		fmtr_grp.Bld_bfr_many(bfr, xtn_mgr.Msg_related_sites(), this);
 	}
 	public void XferAry(Bry_bfr bfr, int idx) {
-		Xow_wiki wiki = xtn_mgr.Wiki();
-		Xoh_href_parser href_parser = wiki.App().Href_parser();
+		Xowe_wiki wiki = xtn_mgr.Wiki();
+		Xoh_href_parser href_parser = wiki.Appe().Href_parser();
 		for (int i = 0; i < list_len; ++i) {
 			Sites_regy_itm itm = (Sites_regy_itm)list.FetchAt(i);
-			byte[] xwiki_itm_name = itm.Xwiki_itm().Name();
+			byte[] xwiki_itm_name = itm.Xwiki_itm().Domain_name();
 			if (hash.Has(xwiki_itm_name)) continue;
 			hash.Add(xwiki_itm_name, xwiki_itm_name);
 			byte[] href = Xto_href(tmp_ttl, url_fmtr, href_parser, wiki, itm.Xwiki_itm(), itm.Ttl().Page_db());
 			fmtr_itm.Bld_bfr(bfr, itm.Cls(), href, xwiki_itm_name);
 		}
 	}
-	private static byte[] Xto_href(Bry_bfr tmp_bfr, Bry_fmtr url_fmtr, Xoh_href_parser href_parser, Xow_wiki wiki, Xow_xwiki_itm xwiki_itm, byte[] ttl_page_db) {
+	private static byte[] Xto_href(Bry_bfr tmp_bfr, Bry_fmtr url_fmtr, Xoh_href_parser href_parser, Xowe_wiki wiki, Xow_xwiki_itm xwiki_itm, byte[] ttl_page_db) {
 		href_parser.Encoder().Encode(tmp_bfr, ttl_page_db);
-		byte[] rv = url_fmtr.Fmt_(xwiki_itm.Fmt()).Bld_bry_many(tmp_bfr, tmp_bfr.Xto_bry_and_clear());			
-		if (xwiki_itm.Wiki_tid() != Xow_wiki_domain_.Tid_other)
+		byte[] rv = url_fmtr.Fmt_(xwiki_itm.Url_fmt()).Bld_bry_many(tmp_bfr, tmp_bfr.Xto_bry_and_clear());			
+		if (xwiki_itm.Domain_tid() != Xow_domain_.Tid_int_other)
 			rv = Bry_.Add(Xoh_href_parser.Href_site_bry, rv);
 		return rv;
 	}

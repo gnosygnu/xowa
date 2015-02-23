@@ -19,7 +19,7 @@ package gplx.xowa.parsers.amps; import gplx.*; import gplx.xowa.*; import gplx.x
 import gplx.core.btries.*;
 public class Xop_amp_lxr implements Xop_lxr {
 	public byte Lxr_tid() {return Xop_lxr_.Tid_amp;}
-	public void Init_by_wiki(Xow_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Byte_ascii.Amp, this);}
+	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Byte_ascii.Amp, this);}
 	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		return ctx.Amp().Make_tkn(ctx, tkn_mkr, root, src, src_len, bgn_pos, cur_pos);

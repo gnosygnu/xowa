@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.dbs.*; import gplx.xowa.dbs.*;
+import gplx.dbs.engines.sqlite.*;
 class Xob_lnki_regy_tbl {
 	public static void Create_table(Db_conn p) {Sqlite_engine_.Tbl_create_and_delete(p, Tbl_name, Tbl_sql);}
 	public static void Create_data(Gfo_usr_dlg usr_dlg, Db_conn p, boolean wiki_ns_for_file_is_case_match_all) {

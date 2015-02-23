@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import org.junit.*;
-import gplx.xowa.files.*;
+import gplx.xowa.files.*; import gplx.xowa.files.imgs.*;
 public class Xof_xfer_queue_html_cases_tst {
 	Xof_xfer_queue_html_fxt fxt = new Xof_xfer_queue_html_fxt();
 	@Before public void init() {
@@ -73,7 +73,7 @@ public class Xof_xfer_queue_html_cases_tst {
 	}
 	@Test  public void Img_thumb_djvu() {// PURPOSE: exact djvu thumbs are not on server; always seems to retrieve 1 off;
 		fxt	.ini_page_create_commons			("File:A.djvu");
-		fxt	.App().File_mgr().Img_mgr().Wkr_convert_djvu_to_tiff_(new Xof_img_wkr_convert_djvu_to_tiff_mok(199, 299));
+		fxt	.App().File_mgr().Img_mgr().Wkr_convert_djvu_to_tiff_(Xof_img_wkr_convert_djvu_to_tiff_.new_mok(199, 299));
 		fxt	.Lnki_thumb_("A.djvu", 200)
 			.Src(	fxt.img_("mem/src/commons.wikimedia.org/7/76/A.djvu", 1990, 2990)
 				)

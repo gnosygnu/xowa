@@ -19,7 +19,7 @@ package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa
 import gplx.gfui.*; import gplx.xowa.gui.bnds.*; import gplx.xowa.gui.cmds.*;
 public class Xog_win_itm_ {
 	public static void Show_win(Xog_win_itm win) {
-		Xoa_app app = win.App(); GfuiWin win_box = win.Win_box();			
+		Xoae_app app = win.App(); GfuiWin win_box = win.Win_box();			
 
 		win_box.Focus_able_(false);
 		win_box.BackColor_(ColorAdp_.White);
@@ -31,17 +31,17 @@ public class Xog_win_itm_ {
 		IconAdp.regy_loadDir_shallow(app.User().Fsys_mgr().Root_dir().GenSubDir_nest("app", "img", "win"));
 		win_box.Icon_(IconAdp.regy_("xowa.app"));
 	}
-	public static GfuiBtn new_btn(Xoa_app app, Gfui_kit kit, GfuiWin win, Io_url img_dir, String id, String file) {
+	public static GfuiBtn new_btn(Xoae_app app, Gfui_kit kit, GfuiWin win, Io_url img_dir, String id, String file) {
 		GfuiBtn rv = kit.New_btn(id, win);
 		rv.Btn_img_(kit.New_img_load(img_dir.GenSubFil(file)));
 		return rv;
 	}
-	public static GfuiTextBox new_txt(Xoa_app app, Gfui_kit kit, GfuiWin win, FontAdp ui_font, String id, boolean border_on) {
+	public static GfuiTextBox new_txt(Xoae_app app, Gfui_kit kit, GfuiWin win, FontAdp ui_font, String id, boolean border_on) {
 		GfuiTextBox rv = kit.New_text_box(id, win, KeyVal_.new_(GfuiTextBox.CFG_border_on_, border_on));
 		rv.TextMgr().Font_(ui_font);
 		return rv;
 	}
-	public static void Update_tiptext(Xoa_app app, GfuiElem elem, int tiptext_id) {
+	public static void Update_tiptext(Xoae_app app, GfuiElem elem, int tiptext_id) {
 		elem.TipText_(Xog_win_itm_.new_tiptext(app, tiptext_id));
 	}
 	public static void Font_update(Xog_win_itm win, Xol_font_info itm_font) {
@@ -54,5 +54,5 @@ public class Xog_win_itm_ {
 			win.Tab_mgr().Tab_mgr().TextMgr().Font_(new_font);
 		}
 	}
-	public static String new_tiptext(Xoa_app app, int id) {return String_.new_utf8_(app.User().Lang().Msg_mgr().Val_by_id(app.User().Wiki(), id));}
+	public static String new_tiptext(Xoae_app app, int id) {return String_.new_utf8_(app.User().Lang().Msg_mgr().Val_by_id(app.User().Wiki(), id));}
 }

@@ -19,7 +19,7 @@ package gplx.xowa.apis.xowa; import gplx.*; import gplx.xowa.*; import gplx.xowa
 public class Xoapi_net implements GfoInvkAble, GfoEvObj {
 	public Xoapi_net() {this.ev_mgr = GfoEvMgr.new_(this);}
 	public GfoEvMgr EvMgr() {return ev_mgr;} private GfoEvMgr ev_mgr;
-	public void Init_by_kit(Xoa_app app) {
+	public void Init_by_kit(Xoae_app app) {
 	}
 	public boolean Enabled() {return enabled;} private boolean enabled = true;
 	public void Enabled_(boolean v) {

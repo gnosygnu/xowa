@@ -16,22 +16,18 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-import gplx.dbs.*; import gplx.fsdb.*; import gplx.xowa.files.fsdb.*;
-import gplx.xowa2.files.metas.*;
+import gplx.dbs.*; import gplx.dbs.cfgs.*; 
+import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*; import gplx.fsdb.meta.*; import gplx.xowa.files.origs.*;
 public class Xow_file_mgr implements GfoInvkAble {
 	private Xof_wkr_mgr wkr_mgr;
-	public Xow_file_mgr(Xow_wiki wiki) {
+	public Xow_file_mgr(Xowe_wiki wiki) {
 		this.wiki = wiki;
-		repo_mgr = new Xow_repo_mgr(wiki);
+		repo_mgr = new Xowe_repo_mgr(wiki);
 		meta_mgr = new Xof_meta_mgr(wiki);
-		fsdb_mgr = new Xof_fsdb_mgr_sql(wiki);
+		fsdb_mgr = new Xof_fsdb_mgr__sql();
 		wkr_mgr = new Xof_wkr_mgr(this);
-		Xof_file_meta_wkr__db_orig file_meta_wkr_as_db_orig = new Xof_file_meta_wkr__db_orig();
-		file_meta_wkr_as_db_orig.Tbl().Conn_(Db_conn_pool.I.Get_or_new__sqlite(wiki.Fsys_mgr().File_dir().GenSubFil_nest("wiki.orig#00.sqlite3")));
-		file_meta_wkr = file_meta_wkr_as_db_orig;
 	}
-	public Xow_wiki Wiki() {return wiki;} private Xow_wiki wiki;
-	public Xof_file_meta_wkr File_meta_wkr() {return file_meta_wkr;} public void File_meta_wkr_(Xof_file_meta_wkr v) {file_meta_wkr = v;} private Xof_file_meta_wkr file_meta_wkr;
+	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public byte Version() {
 		if (version == Bool_.__byte) {
 			Io_url file_dir = wiki.Fsys_mgr().File_dir();
@@ -54,30 +50,30 @@ public class Xow_file_mgr implements GfoInvkAble {
 	public int Patch_upright() {
 		return this.Version() == Version_1
 			? Xof_patch_upright_tid_.Tid_all
-			: fsdb_mgr.Patch_upright()
+			: fsdb_mgr.Mnt_mgr().Patch_upright()
 			;
 	}
 	public static final byte Version_null = Byte_.Max_value_127, Version_1 = 1, Version_2 = 2;
-	public Xow_repo_mgr Repo_mgr() {return repo_mgr;} private Xow_repo_mgr repo_mgr;
+	public Xowe_repo_mgr Repo_mgr() {return repo_mgr;} private Xowe_repo_mgr repo_mgr;
 	public Xof_meta_mgr  Meta_mgr() {return meta_mgr;} private Xof_meta_mgr meta_mgr;
 	public Xof_cfg_download Cfg_download() {return cfg_download;} private Xof_cfg_download cfg_download = new Xof_cfg_download();
 	public void Cfg_set(String grp, String key, String val) {	// TEST: should only be called by tests
 		if (test_grps == null) test_grps = HashAdp_.new_();
-		Fsdb_cfg_grp grp_itm = (Fsdb_cfg_grp)test_grps.Fetch(grp);
+		Db_cfg_grp grp_itm = (Db_cfg_grp)test_grps.Fetch(grp);
 		if (grp_itm == null) {
-			grp_itm = new Fsdb_cfg_grp(grp);
+			grp_itm = new Db_cfg_grp(grp);
 			test_grps.Add(grp, grp_itm);
 		}
 		grp_itm.Upsert(key, val);
 	}	private HashAdp test_grps;
-	public Fsdb_cfg_grp Cfg_get(String grp) {
+	public Db_cfg_grp Cfg_get(String grp) {
 		if (test_grps != null) {
-			Fsdb_cfg_grp rv = (Fsdb_cfg_grp)test_grps.Fetch(grp);
-			return rv == null ? Fsdb_cfg_grp.Null : rv;
+			Db_cfg_grp rv = (Db_cfg_grp)test_grps.Fetch(grp);
+			return rv == null ? Db_cfg_grp.Null : rv;
 		}
-		if (this.Version() == Version_1) return Fsdb_cfg_grp.Null;
-		fsdb_mgr.Init_by_wiki__add_bin_wkrs(wiki);	// make sure fsdb is init'd
-		return fsdb_mgr.Mnt_mgr().Abc_mgr_at(0).Cfg_mgr().Grps_get_or_load(grp);
+		if (this.Version() == Version_1) return Db_cfg_grp.Null;
+		fsdb_mgr.Init_by_wiki(wiki);	// make sure fsdb is init'd
+		return fsdb_mgr.Mnt_mgr().Mnts__at(0).Cfg_mgr().Grps_get_or_load(grp);
 	}
 	public Xof_fsdb_mgr Fsdb_mgr() {return fsdb_mgr;} private Xof_fsdb_mgr fsdb_mgr;
 	public boolean Find_meta(Xof_xfer_itm xfer_itm) {
@@ -104,7 +100,7 @@ public class Xow_file_mgr implements GfoInvkAble {
 			return meta.Orig_exists() == Bool_.Y_byte || meta.Thumbs().length != 0;
 		}
 		else
-			return fsdb_mgr.Orig_exists_by_ttl(ttl_bry);
+			return fsdb_mgr.Orig_mgr().Find_by_ttl_or_null(ttl_bry) != Xof_orig_itm.Null;
 	}
 
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
@@ -114,6 +110,5 @@ public class Xow_file_mgr implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_fsdb))					return fsdb_mgr;
 		else if	(ctx.Match(k, Invk_wkrs))					return wkr_mgr;
 		else	return GfoInvkAble_.Rv_unhandled;
-//			return this;
 	}	private static final String Invk_repos = "repos", Invk_metas = "metas", Invk_cfg_download = "cfg_download", Invk_fsdb = "fsdb", Invk_wkrs = "wkrs";
 }

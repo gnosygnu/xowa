@@ -22,7 +22,7 @@ public class Pft_func_date_int extends Pf_func_base {
 	@Override public Pf_func New(int id, byte[] name) {return new Pft_func_date_int(id, date_tid).Name_(name);}
 	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {
 		DateAdp date = DateAdp_.MinValue;
-		Xow_wiki wiki = ctx.Wiki(); Xol_lang lang = ctx.Lang();
+		Xowe_wiki wiki = ctx.Wiki(); Xol_lang lang = ctx.Lang();
 	    switch (date_tid) {
 	        case Date_tid_lcl: date = DateAdp_.Now(); break;
 	        case Date_tid_utc: date = DateAdp_.Now().XtoUtc(); break;

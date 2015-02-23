@@ -16,29 +16,29 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
-import gplx.ios.*;
+import gplx.ios.*; import gplx.xowa.tdbs.*;
 public class Xob_fxt {
 	public Xob_fxt Ctor_mem() {
 		Io_mgr._.InitEngine_mem();
 		return Ctor(Io_url_.mem_dir_("mem/xowa/"));
 	}
 	public Xob_fxt Ctor(Io_url root_dir) {
-		app = Xoa_app_fxt.app_(root_dir, "linux");
+		app = Xoa_app_fxt.app_("linux", root_dir);
 		wiki = Xoa_app_fxt.wiki_tst_(app);
 		bldr = Xoa_app_fxt.bldr_(app);
 		return this;
 	}
-	public Xoa_app App() {return app;} private Xoa_app app;
+	public Xoae_app App() {return app;} private Xoae_app app;
 	public Xob_bldr Bldr() {return bldr;} private Xob_bldr bldr;
-	public Xow_wiki Wiki() {return wiki;} private Xow_wiki wiki;
-	public Io_url fil_ns_title(int ns_id, int idx)	{return wiki.Fsys_mgr().Url_ns_fil(Xow_dir_info_.Tid_ttl, ns_id, idx);}
-	public Io_url fil_ns_page(int ns_id, int idx)	{return wiki.Fsys_mgr().Url_ns_fil(Xow_dir_info_.Tid_page, ns_id, idx);}
-	public Io_url fil_ns_sttl(int ns_id, int idx)	{return wiki.Fsys_mgr().Url_ns_fil(Xow_dir_info_.Tid_search_ttl, ns_id, idx);}
-	public Io_url fil_site(byte tid, int idx)		{return wiki.Fsys_mgr().Url_site_fil(tid, idx);}
-	public Io_url fil_site_ctg(int idx)				{return wiki.Fsys_mgr().Url_site_fil(Xow_dir_info_.Tid_category, idx);}
-	public Io_url fil_site_id(int idx)				{return wiki.Fsys_mgr().Url_site_fil(Xow_dir_info_.Tid_id, idx);}
-	public Io_url fil_reg(byte tid) 				{return wiki.Fsys_mgr().Url_site_reg(tid);}
-	public Io_url fil_reg(int ns_id, byte tid) 		{return wiki.Fsys_mgr().Url_ns_reg(Int_.Xto_str_pad_bgn(ns_id, 3), tid);}
+	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
+	public Io_url fil_ns_title(int ns_id, int idx)	{return wiki.Tdb_fsys_mgr().Url_ns_fil(Xotdb_dir_info_.Tid_ttl, ns_id, idx);}
+	public Io_url fil_ns_page(int ns_id, int idx)	{return wiki.Tdb_fsys_mgr().Url_ns_fil(Xotdb_dir_info_.Tid_page, ns_id, idx);}
+	public Io_url fil_ns_sttl(int ns_id, int idx)	{return wiki.Tdb_fsys_mgr().Url_ns_fil(Xotdb_dir_info_.Tid_search_ttl, ns_id, idx);}
+	public Io_url fil_site(byte tid, int idx)		{return wiki.Tdb_fsys_mgr().Url_site_fil(tid, idx);}
+	public Io_url fil_site_ctg(int idx)				{return wiki.Tdb_fsys_mgr().Url_site_fil(Xotdb_dir_info_.Tid_category, idx);}
+	public Io_url fil_site_id(int idx)				{return wiki.Tdb_fsys_mgr().Url_site_fil(Xotdb_dir_info_.Tid_id, idx);}
+	public Io_url fil_reg(byte tid) 				{return wiki.Tdb_fsys_mgr().Url_site_reg(tid);}
+	public Io_url fil_reg(int ns_id, byte tid) 		{return wiki.Tdb_fsys_mgr().Url_ns_reg(Int_.Xto_str_pad_bgn(ns_id, 3), tid);}
 	public Xob_fxt Fil_expd(Io_url url, String... expd) {
 		String text = String_.Concat_lines_nl_skip_last(expd);	// skipLast b/c if trailing line wanted, easier to pass in extra argument for ""
 		expd_list.Add(new Io_fil_chkr(url, text));
@@ -142,8 +142,8 @@ public class Xob_fxt {
 	}
 	Io_fil[] wiki_() {
 		ListAdp rv = ListAdp_.new_();
-		wiki_fil_add(rv, wiki.Fsys_mgr().Ns_dir());
-		wiki_fil_add(rv, wiki.Fsys_mgr().Site_dir());
+		wiki_fil_add(rv, wiki.Tdb_fsys_mgr().Ns_dir());
+		wiki_fil_add(rv, wiki.Tdb_fsys_mgr().Site_dir());
 		rv.Sort();
 		return (Io_fil[])rv.Xto_ary(Io_fil.class);
 	}

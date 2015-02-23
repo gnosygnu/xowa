@@ -16,21 +16,21 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.bldrs.*; 
+import gplx.xowa.bldrs.*; import gplx.xowa.tdbs.*;
 public class Xobc_deploy_zip extends Xob_itm_basic_base implements Xob_cmd {
-	public Xobc_deploy_zip(Xob_bldr bldr, Xow_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
+	public Xobc_deploy_zip(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Cmd_key() {return KEY;} public static final String KEY = "deploy.zip";
 	public void Cmd_ini(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {}
-	public void Cmd_run() {Exec(bldr, Xow_dir_info_.Name_page);}
+	public void Cmd_run() {Exec(bldr, Xotdb_dir_info_.Name_page);}
 	public void Cmd_end() {}
 	public void Cmd_print() {}
 	private void Exec(Xob_bldr bldr, String type_name) {
 		Log("initing wiki");
 		try {wiki.Init_assert();}
 		catch (Exception exc) {Log("failed to init wiki: ~{0}", Err_.Message_gplx_brief(exc));}
-		Log("probing ns_dirs: ~{0}", wiki.Fsys_mgr().Ns_dir().Raw());
-		Io_url[] ns_dirs = Io_mgr._.QueryDir_args(wiki.Fsys_mgr().Ns_dir()).DirOnly_().ExecAsUrlAry();
+		Log("probing ns_dirs: ~{0}", wiki.Tdb_fsys_mgr().Ns_dir().Raw());
+		Io_url[] ns_dirs = Io_mgr._.QueryDir_args(wiki.Tdb_fsys_mgr().Ns_dir()).DirOnly_().ExecAsUrlAry();
 		for (Io_url ns_dir : ns_dirs) {
 			Log("zipping dir: ~{0}", ns_dir.Raw());
 			String ns_num = ns_dir.NameOnly();
@@ -47,10 +47,10 @@ public class Xobc_deploy_zip extends Xob_itm_basic_base implements Xob_cmd {
 			Io_url fil = fils[i];
 			bldr.StatusMgr_prog_fmt(i, fils.length, -1, "zipping ~{0} ~{1} ~{2} of ~{3}", type_name, ns_name, Int_.Xto_str_pad_bgn(i, 6), fils_len_str);
 			Io_url trg_fil = Gen_trg(root_dir, fil, type_name);
-			if (String_.Eq(fil.NameAndExt(), Xow_dir_info_.Name_reg_fil))	// do not zip reg.csv
+			if (String_.Eq(fil.NameAndExt(), Xotdb_dir_info_.Name_reg_fil))	// do not zip reg.csv
 				Io_mgr._.CopyFil(fil, trg_fil, true);
 			else
-				zip_mgr.Zip_fil(fil, trg_fil.GenNewExt(Xow_dir_info_.Ext_zip));
+				zip_mgr.Zip_fil(fil, trg_fil.GenNewExt(Xotdb_dir_info_.Ext_zip));
 		}
 		if (delete_dirs_page) Io_mgr._.DeleteDirDeep(root_dir.GenSubDir(type_name));
 	}

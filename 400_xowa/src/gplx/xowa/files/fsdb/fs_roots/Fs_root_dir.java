@@ -17,17 +17,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.fsdb.fs_roots; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
 import gplx.core.primitives.*;
-import gplx.dbs.*; import gplx.gfui.*; import gplx.fsdb.*;
-import gplx.xowa.files.wiki_orig.*;
+import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.gfui.*;
+import gplx.fsdb.meta.*; import gplx.xowa.files.imgs.*;
 class Fs_root_dir {
 	private Gfo_usr_dlg usr_dlg; private Xof_img_wkr_query_img_size img_size_wkr;
 	private Io_url url; private boolean recurse = true;
 	private Orig_fil_mgr cache = new Orig_fil_mgr(), fs_fil_mgr;
-	private Db_conn_mkr provider_mkr;
-	private Db_conn conn; private Fsdb_cfg_tbl cfg_tbl; private Orig_fil_tbl fil_tbl;
+	private Db_conn conn; private Db_cfg_tbl cfg_tbl; private Orig_fil_tbl fil_tbl;
 	private int fil_id_next = 0;
-	public void Init(Io_url url, Db_conn_mkr provider_mkr, Fsdb_cfg_tbl cfg_tbl, Orig_fil_tbl fil_tbl, Gfo_usr_dlg usr_dlg, Xof_img_wkr_query_img_size img_size_wkr) {
-		this.url = url; this.provider_mkr = provider_mkr;
+	public void Init(Io_url url, Db_cfg_tbl cfg_tbl, Orig_fil_tbl fil_tbl, Gfo_usr_dlg usr_dlg, Xof_img_wkr_query_img_size img_size_wkr) {
+		this.url = url;
 		this.cfg_tbl = cfg_tbl; this.fil_tbl = fil_tbl; this.usr_dlg = usr_dlg; this.img_size_wkr = img_size_wkr;
 	}
 	public Orig_fil_itm Get_by_ttl(byte[] lnki_ttl) {
@@ -78,13 +77,17 @@ class Fs_root_dir {
 		}
 		return rv;
 	}
+	private static final String Db_conn_bldr_type = "gplx.xowa.fs_root";
 	private Db_conn Init_db_fil_mgr() {
 		Io_url db_url = url.GenSubFil("^orig_regy.sqlite3");
-		Bool_obj_ref created_ref = Bool_obj_ref.n_();
-		conn = provider_mkr.Load_or_make_(db_url, created_ref);
-		boolean created = created_ref.Val();
-		cfg_tbl.Ctor(conn, created);
-		fil_tbl.Ctor(conn, created);
+		boolean created = false; boolean version_is_1 = Bool_.Y;
+		Db_conn conn = Db_conn_bldr.I.Get(Db_conn_bldr_type, db_url);
+		if (conn == null) {
+			conn = Db_conn_bldr.I.New(Db_conn_bldr_type, db_url);
+			created = true;
+		}
+		cfg_tbl.Conn_(conn, created, version_is_1, Fsm_abc_mgr.Cfg_tbl_v1, Fsm_abc_mgr.Cfg_tbl_v2);
+		fil_tbl.Conn_(conn, created, version_is_1);
 		if (created)
 			cfg_tbl.Insert(Cfg_grp_root_dir, Cfg_key_fil_id_next, Int_.Xto_str(fil_id_next));
 		else {

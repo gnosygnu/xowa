@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.dbs.*;
+import gplx.dbs.engines.sqlite.*;
 class Xob_lnki_temp_tbl {
 	public static void Create_table(Db_conn p) {Sqlite_engine_.Tbl_create(p, Tbl_name, Tbl_sql);}
 	public static Db_stmt Insert_stmt(Db_conn p) {return Db_stmt_.new_insert_(p, Tbl_name, Fld_lnki_page_id, Fld_lnki_ttl, Fld_lnki_commons_ttl, Fld_lnki_ext, Fld_lnki_type, Fld_lnki_src_tid, Fld_lnki_w, Fld_lnki_h, Fld_lnki_upright, Fld_lnki_time, Fld_lnki_page);}

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.dbs.*;
-import gplx.dbs.*; import gplx.xowa.ctgs.*; 
+import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.ctgs.*; 
 public class Xodb_categorylinks_tbl {
 	public void Delete_all(Db_conn p) {p.Exec_qry(Db_qry_.delete_tbl_(Tbl_name));}
 	public Db_stmt Insert_stmt(Db_conn p) {return Db_stmt_.new_insert_(p, Tbl_name, Fld_cl_from, Fld_cl_to_id, Fld_cl_sortkey, Fld_cl_timestamp, Fld_cl_type_id);}
@@ -51,7 +51,7 @@ public class Xodb_categorylinks_tbl {
 		DataRdr rdr = DataRdr_.Null;
 		int count = 0;
 		try {
-			stmt = p.New_stmt(qry);
+			stmt = p.Stmt_new(qry);
 			rdr = stmt.Val_int(cat_page_id).Val_byte(arg_tid).Val_str(arg_sortkey_str).Exec_select();
 			while (rdr.MoveNextPeer()) {
 				int itm_page_id = rdr.ReadInt(Fld_cl_from);

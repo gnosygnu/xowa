@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.gui.menus.dom; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*; import gplx.xowa.gui.menus.*;
 import gplx.gfui.*; import gplx.xowa.gui.cmds.*;
 public class Xog_mnu_bldr {
-	private Xoa_app app; private Gfui_kit kit; private Io_url img_dir;
-	public void Init_by_kit(Xoa_app app, Gfui_kit kit, Io_url img_dir) {
+	private Xoae_app app; private Gfui_kit kit; private Io_url img_dir;
+	public void Init_by_kit(Xoae_app app, Gfui_kit kit, Io_url img_dir) {
 		this.app = app; this.kit = kit; this.img_dir = img_dir; 
 	}
 	public void Build(Gfui_mnu_grp grp_gui, Xog_mnu_grp grp_dom) {

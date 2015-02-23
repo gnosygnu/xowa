@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.paras.*;
 public class Xow_utl_mgr {
-	public Xow_utl_mgr(Xow_wiki wiki) {this.wiki = wiki;} private Xow_wiki wiki;
+	public Xow_utl_mgr(Xowe_wiki wiki) {this.wiki = wiki;} private Xowe_wiki wiki;
 	public Xop_parser Anchor_encode_parser() {
 		if (anchor_encode_parser == null) {
 			anchor_encode_parser = new Xop_parser(wiki, wiki.Parser().Tmpl_lxr_mgr(), Anchor_encode_lxr_mgr);

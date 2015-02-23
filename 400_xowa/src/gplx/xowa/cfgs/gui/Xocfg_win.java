@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.cfgs.gui; import gplx.*; import gplx.xowa.*; import gplx.xowa.cfgs.*;
 public class Xocfg_win implements GfoInvkAble {
-	public Xocfg_win(Xoa_app app) {}
+	public Xocfg_win(Xoae_app app) {}
 	public Xol_font_info Font() {return font;} private Xol_font_info font = new Xol_font_info("Arial", 8, gplx.gfui.FontStyleAdp_.Plain);
 	public Bry_fmtr Search_box_fmtr() {return search_box_fmtr;} private Bry_fmtr search_box_fmtr = Bry_fmtr.new_("Special:Allpages?from=", "search");
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

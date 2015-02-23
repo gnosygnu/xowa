@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.joins; import gplx.*; import gplx.dbs.*;
-import org.junit.*; import gplx.dbs.sqls.*;
+import org.junit.*; import gplx.dbs.qrys.*; import gplx.dbs.sqls.*;
 public abstract class Joins_base_tst {
 	protected Db_conn conn;
 	@Before public void setup() {

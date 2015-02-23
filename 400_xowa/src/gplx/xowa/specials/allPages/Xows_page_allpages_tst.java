@@ -132,8 +132,8 @@ class Xows_page_allpages_fxt {
 		expd_ttls = null;
 		expd_display_ttl = null;
 		return this;
-	}	private Xoa_app app;
-	public Xow_wiki Wiki() {return wiki;} private Xow_wiki wiki; Xows_page_allpages allpages;
+	}	private Xoae_app app;
+	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki; Xows_page_allpages allpages;
 	public Xows_page_allpages_fxt Init_arg(String key, String val) {init_args.Add(new Gfo_url_arg(Bry_.new_ascii_(key), Bry_.new_ascii_(val))); return this;} private ListAdp init_args = ListAdp_.new_();
 	public Xows_page_allpages_fxt Init_ttl_leaf(String val) {init_ttl_leaf = val; return this;} private String init_ttl_leaf;
 	public Xows_page_allpages_fxt Init_itms_per_page(int v) {init_itms_per_page = v; return this;} private int init_itms_per_page = 5;
@@ -144,13 +144,13 @@ class Xows_page_allpages_fxt {
 	public Xows_page_allpages_fxt Expd_display_ttl(String v) {expd_display_ttl = v; return this;} private String expd_display_ttl;
 	public Xows_page_allpages_fxt Expd_address_page(String v) {expd_address_page = v; return this;} private String expd_address_page;
 
-	public static String Xto_str(Xow_wiki wiki, Xodb_page v) {
+	public static String Xto_str(Xowe_wiki wiki, Xodb_page v) {
 		if (v == null) return null;
 		Xow_ns ns = wiki.Ns_mgr().Ids_get_or_null(v.Ns_id());
 		String ns_str = ns == null ? "" : String_.new_ascii_(ns.Name_db_w_colon());
 		return ns_str + String_.new_ascii_(v.Ttl_wo_ns());
 	}
-	public static String[] Xto_str_ary(Xow_wiki wiki, Xodb_page[] ary) {
+	public static String[] Xto_str_ary(Xowe_wiki wiki, Xodb_page[] ary) {
 		int ary_len = ary.length;
 		String[] rv = new String[ary_len];
 		for (int i = 0; i < ary_len; i++) {

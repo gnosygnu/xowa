@@ -19,7 +19,7 @@ package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.x
 import gplx.xowa.files.*; import gplx.xowa.html.*; import gplx.xowa.html.lnkis.*; import gplx.xowa.hdumps.core.*; import gplx.xowa.hdumps.pages.*;
 public class Gallery_html_wtr {
 	private final Xoh_arg_img_core img_core_fmtr_basic = new Xoh_arg_img_core__basic(), img_core_fmtr_hdump = new Xoh_arg_img_core__hdump();
-	public void Write_html(Bry_bfr bfr, Xoa_app app, Xow_wiki wiki, Xop_ctx ctx, Xoh_html_wtr wtr, Xoh_wtr_ctx hctx, Xoa_page page, Gallery_xnde mgr, byte[] src) {
+	public void Write_html(Bry_bfr bfr, Xoae_app app, Xowe_wiki wiki, Xop_ctx ctx, Xoh_html_wtr wtr, Xoh_wtr_ctx hctx, Xoae_page page, Gallery_xnde mgr, byte[] src) {
 		int itm_div_w = Gallery_html_wtr_utl.Calc_itm_div_len(mgr.Itm_w_or_default());
 		int itm_div_h = Gallery_html_wtr_utl.Calc_itm_div_len(mgr.Itm_h_or_default());
 		int itm_box_w = Gallery_html_wtr_utl.Calc_itm_box_w(itm_div_w);
@@ -92,7 +92,7 @@ public class Gallery_html_wtr {
 					)
 					lnki_link_ttl = Xoa_ttl.parse_(wiki, Bry_.Mid(src, itm.Link_bgn(), itm.Link_end()));
 				byte[] lnki_href = app.Href_parser().Build_to_bry(wiki, lnki_link_ttl);
-				byte[] lnki_alt = itm.Alt_bgn() == Bry_.NotFound ? lnki_ttl : Xoh_html_wtr_escaper.Escape(app, tmp_bfr, Bry_.Mid(src, itm.Alt_bgn(), itm.Alt_end())); 
+				byte[] lnki_alt = itm.Alt_bgn() == Bry_.NotFound ? lnki_ttl : Xoh_html_wtr_escaper.Escape(app.Parser_amp_mgr(), tmp_bfr, Bry_.Mid(src, itm.Alt_bgn(), itm.Alt_end())); 
 				img_core_fmtr.Init(itm_elem_id, html_src, html_w, html_h);
 				int itm_margin = Gallery_html_wtr_utl.Calc_vpad(mgr.Itm_h(), html_h);
 				Gallery_html_wtr_.Itm_img_fmtr.Bld_bfr_many(itm_bfr
@@ -161,7 +161,7 @@ class Gallery_html_wtr_ {
 	, "  </li>"
 	), "itm_box_width", "itm_div_height", "itm_text", "itm_caption"
 	);
-	public static byte[] Bld_caption(Xow_wiki wiki, Xop_ctx ctx, Xoh_html_wtr wtr, Xoh_wtr_ctx hctx, Gallery_itm itm) {
+	public static byte[] Bld_caption(Xowe_wiki wiki, Xop_ctx ctx, Xoh_html_wtr wtr, Xoh_wtr_ctx hctx, Gallery_itm itm) {
 		byte[] rv = itm.Caption_bry();
 		if (Bry_.Len_gt_0(rv)) {
 			Bry_bfr caption_bfr = wiki.Utl_bry_bfr_mkr().Get_k004();

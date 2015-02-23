@@ -47,7 +47,7 @@ class Xog_history_stack_fxt {
 			url_parser = app.Url_parser();
 		}
 		return this;
-	}	private Xoa_app app; private Xow_wiki wiki; private Xog_history_stack stack = new Xog_history_stack(); private Xoa_url_parser url_parser;
+	}	private Xoae_app app; private Xowe_wiki wiki; private Xog_history_stack stack = new Xog_history_stack(); private Xoa_url_parser url_parser;
 	public Xog_history_stack_fxt Test_cur(String expd) {
 		Xog_history_itm page = stack.Cur_itm();
 		String actl = page == null ? null : String_.new_utf8_(page.Page());
@@ -73,7 +73,7 @@ class Xog_history_stack_fxt {
 	public Xog_history_stack_fxt Exec_add_one(String ttl_str, String arg_str) {
 		byte[] ttl_bry = Bry_.new_utf8_(ttl_str);
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry);
-		Xoa_page page = Xoa_page.test_(wiki, ttl);
+		Xoae_page page = Xoae_page.test_(wiki, ttl);
 		byte[] url_bry = ttl_bry;
 		if (arg_str != null) url_bry = Bry_.Add(url_bry, Bry_.new_utf8_(arg_str));
 		Xoa_url url = url_parser.Parse(url_bry);

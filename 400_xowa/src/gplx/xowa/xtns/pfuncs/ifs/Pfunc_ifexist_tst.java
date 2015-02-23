@@ -37,7 +37,7 @@ public class Pfunc_ifexist_tst {
 	}
 	@Test  public void Media_y_commons() {// DATE:2014-07-04
 		Pfunc_ifexist.Mgr.Clear();
-		Xow_wiki commons_wiki = fxt.App().Wiki_mgr().Get_by_key_or_make(gplx.xowa.wikis.Xow_wiki_domain_.Url_commons);
+		Xowe_wiki commons_wiki = fxt.App().Wiki_mgr().Get_by_key_or_make(gplx.xowa.wikis.Xow_domain_.Domain_bry_commons);
 		fxt.Init_page_create(commons_wiki, "File:A.png", "");
 		fxt.Test_parse_tmpl_str_test("{{#ifexist:Media:A.png|y|n}}", "{{test}}", "y");
 	}

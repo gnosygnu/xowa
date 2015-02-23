@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.hdumps; import gplx.*; import gplx.xowa.*;
-import gplx.dbs.*; import gplx.xowa.dbs.*;
+import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.dbs.*;
 public class Xodbv_dbs_tbl {
 	public static final String Tbl_name = "xowa_db", Fld_db_id = "db_id", Fld_db_type = "db_type", Fld_db_url = "db_url";
 	private static final String[] Flds__all = new String[] {Fld_db_id, Fld_db_type, Fld_db_url};

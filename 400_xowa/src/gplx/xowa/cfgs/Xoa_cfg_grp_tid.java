@@ -20,7 +20,7 @@ import gplx.xowa.wikis.*;
 public class Xoa_cfg_grp_tid {
 	public byte Tid() {return tid;} private byte tid;
 	public byte[] Key() {return key;} private byte[] key;
-	public byte Wiki_tid() {return wiki_tid;} private byte wiki_tid;
+	public int Wiki_tid() {return wiki_tid;} private int wiki_tid;
 	public static final byte Tid_null = 0, Tid_all = 1, Tid_type = 2, Tid_wiki = 3, Tid_app = 4;
 	public static final String Key_app_str = "app";
 	public static final byte[] Key_all_bry = Bry_.new_ascii_("*"), Key_app_bry = Bry_.new_ascii_(Key_app_str);
@@ -31,12 +31,12 @@ public class Xoa_cfg_grp_tid {
 			if		(Bry_.Eq(key, Key_all_bry)) rv.tid = Tid_all;
 			else if	(Bry_.Eq(key, Key_app_bry)) rv.tid = Tid_app;
 			else {
-				Xow_wiki_domain wiki_type = Xow_wiki_domain_.parse_by_domain(key);
-				if (wiki_type.Wiki_tid() == Xow_wiki_domain_.Tid_other)
+				Xow_domain wiki_type = Xow_domain_.parse(key);
+				if (wiki_type.Domain_tid() == Xow_domain_.Tid_int_other)
 					rv.tid = Tid_wiki;
 				else {
 					rv.tid = Tid_type;
-					rv.wiki_tid = wiki_type.Wiki_tid();
+					rv.wiki_tid = wiki_type.Domain_tid();
 				}				
 			}
 			rv.key = key;

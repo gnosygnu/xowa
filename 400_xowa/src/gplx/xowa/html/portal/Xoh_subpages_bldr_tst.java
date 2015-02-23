@@ -34,9 +34,9 @@ public class Xoh_subpages_bldr_tst {
 	}
 }
 class Xoh_subpages_bldr_fxt {
-	private Xoa_app app;
+	private Xoae_app app;
 	private Xoh_subpages_bldr subpages_bldr;
-	public Xow_wiki Wiki() {return wiki;} private Xow_wiki wiki;
+	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public void Init() {
 		this.app = Xoa_app_fxt.app_();
 		this.wiki = Xoa_app_fxt.wiki_tst_(app);

@@ -17,8 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.intl.*; import gplx.xowa.xtns.cite.*; import gplx.xowa.xtns.gallery.*; import gplx.xowa.bldrs.langs.*; import gplx.xowa.langs.numbers.*;
+import gplx.xowa.apps.fsys.*;
 public class Xol_lang_ {
-	public static Io_url xo_lang_fil_(Xoa_app app, String lang_key) {return app.Fsys_mgr().Cfg_lang_core_dir().GenSubFil(lang_key + ".gfs");}
+	public static Io_url xo_lang_fil_(Xoa_fsys_mgr app_fsys_mgr, String lang_key) {return app_fsys_mgr.Cfg_lang_core_dir().GenSubFil(lang_key + ".gfs");}
 	public static final byte Char_tid_ltr_l = 0, Char_tid_ltr_u = 1, Char_tid_num = 2, Char_tid_ws = 3, Char_tid_sym = 4, Char_tid_misc = 5;
 	public static byte Char_tid(byte b) {
 		switch (b) {

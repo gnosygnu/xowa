@@ -31,7 +31,7 @@ public class Ref_html_wtr_cfg {
 	public int Backlabels_len() {return backlabels_len;} private int backlabels_len;
 	public byte[] Grp_bgn() {return grp_bgn;} private byte[] grp_bgn;
 	public byte[] Grp_end() {return grp_end;} private byte[] grp_end;
-	public void Init_by_wiki(Xow_wiki wiki) {
+	public void Init_by_wiki(Xowe_wiki wiki) {
 		byte[] backlabels_bry = wiki.Msg_mgr().Val_by_key_obj(Msg_backlabels);
 		Backlabels_(Ref_backlabels_xby_bry(backlabels_bry));
 	}
