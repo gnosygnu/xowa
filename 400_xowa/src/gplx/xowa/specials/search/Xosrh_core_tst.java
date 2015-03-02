@@ -180,7 +180,7 @@ class Xos_search_mgr_fxt {
 	public void Test_search_match_bgn(String ttl_str, String... expd_ary) {Test_search(ttl_str, 0, expd_ary);}
 	public void Test_search(String ttl_str, int page_idx, String... expd_ary) {
 		byte[] ttl_bry = Bry_.new_ascii_(ttl_str);
-		Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_b128();
+		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b128();
 		Xosrh_rslt_grp page = search_mgr.Page_mgr().Search(bfr, wiki, ttl_bry, page_idx, search_mgr.Page_mgr());
 		bfr.Mkr_rls();
 		Tfds.Eq_ary(expd_ary, Search_itms_to_int_ary(page));
@@ -196,7 +196,7 @@ class Xos_search_mgr_fxt {
 		Tfds.Eq_str_lines(expd_html, String_.new_utf8_(page.Root().Data_htm()));
 	}
 	public void Test_search2(byte match_tid, String ttl_str, int page_idx, byte sort_tid, String... expd_ary) {
-		Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_b128();
+		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b128();
 		Xoa_url_parser url_parser = new Xoa_url_parser();			
 		byte[] url_raw = Bry_.new_ascii_("Special:Search/" + ttl_str + ((match_tid == Xosrh_core.Match_tid_all) ? "" : "*")  + "?fulltext=y" + Xosrh_rslt_itm_sorter.Xto_url_arg(sort_tid) + "&xowa_page_size=1&xowa_page_index=" + page_idx);
 		Xoa_url url = url_parser.Parse(url_raw);

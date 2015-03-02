@@ -88,7 +88,7 @@ public class Scrib_proc_args {
 		if		(qry_args_cls == String.class)
 			return Bry_.new_utf8_((String)qry_args_obj);
 		else if (qry_args_cls == KeyVal[].class) {
-			Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_b128();
+			Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b128();
 			KeyVal[] kvs = (KeyVal[])qry_args_obj;
 			int len = kvs.length;
 			for (int i = 0; i < len; i++) {

@@ -64,7 +64,7 @@ public class Scrib_lib_text implements Scrib_lib {
 }
 class Scrib_lib_text_ {
 	public static KeyVal[] Init_nowiki_protocols(Xowe_wiki wiki) {
-		Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_b128();
+		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b128();
 		OrderedHash protocols = Xoo_protocol_itm.Regy;
 		int len = protocols.Count();
 		ListAdp rv = ListAdp_.new_();

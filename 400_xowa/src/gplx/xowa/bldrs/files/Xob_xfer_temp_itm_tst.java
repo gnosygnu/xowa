@@ -128,7 +128,6 @@ class Xob_xfer_temp_itm_fxt {
 	;
 	public Xob_xfer_temp_itm_fxt Reset() {
 		itm.Clear();
-		img_size.Clear();
 		return this;
 	}
 	public Xob_xfer_temp_itm_fxt Init_rdr_image() {

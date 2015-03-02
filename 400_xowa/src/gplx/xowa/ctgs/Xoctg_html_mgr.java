@@ -24,7 +24,7 @@ public class Xoctg_html_mgr implements GfoInvkAble {
 	private final Xoctg_fmtr_all mgr_files = new Xoctg_fmtr_all(Xoa_ctg_mgr.Tid_file);
 	public Xoctg_data_cache Data_cache() {return data_cache;} private Xoctg_data_cache data_cache = new Xoctg_data_cache(); 
 	public void Bld_html(Xowe_wiki wiki, Xoae_page page, Bry_bfr bfr) {
-		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_m001();
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
 		try {
 			if (wiki.Db_mgr().Category_version() == Xoa_ctg_mgr.Version_2)
 				Bld_html_v2(wiki, page, tmp_bfr);

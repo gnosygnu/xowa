@@ -35,6 +35,10 @@ public class Scrib_lib_message_tst {
 	@Test  public void Plain_rawMessage() {
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_message.Invk_plain, Object_.Ary((Object)Scrib_kv_utl_.flat_many_("rawMessage", "$1", "params", KeyVal_.Ary(KeyVal_.int_(1, "abc")))), "abc");
 	}
+	@Test  public void Plain_rawMessage_empty() {// PURPOSE:rawMessage would throw null ref if rawMessage called template that returns empty value; PAGE:it.w:L'Internazionale DATE:2015-02-25
+		fxt.Parser_fxt().Init_page_create("Template:Msg", "");
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_message.Invk_plain, Object_.Ary((Object)Scrib_kv_utl_.flat_many_("rawMessage", "{{Msg}}", "params", KeyVal_.Ary(KeyVal_.int_(1, "abc")))), "");
+	}
 	@Test   public void Check() {
 		fxt.Test_scrib_proc_bool(lib, Scrib_lib_message.Invk_check, Object_.Ary("exists"				, keys_ary("sun"))							, true);
 		fxt.Test_scrib_proc_bool(lib, Scrib_lib_message.Invk_check, Object_.Ary("exists"				, keys_ary("sunx"))							, false);

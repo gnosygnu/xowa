@@ -22,10 +22,10 @@ public class Fsd_fil_tbl {
 	private String fld_id, fld_owner_id, fld_name, fld_xtn_id, fld_ext_id, fld_size, fld_modified, fld_hash, fld_bin_db_id;
 	private String Idx_owner;		
 	private Db_conn conn; private Db_stmt stmt_insert, stmt_update, stmt_select_by_name;		
-	public void Conn_(Db_conn new_conn, boolean created, boolean version_is_1) {
+	public void Conn_(Db_conn new_conn, boolean created, boolean schema_is_1) {
 		this.conn = new_conn; flds.Clear();
 		String fld_prefix = "";
-		if (version_is_1) {
+		if (schema_is_1) {
 			tbl_name			= "fsdb_fil";
 			fld_prefix			= "fil_";
 		}

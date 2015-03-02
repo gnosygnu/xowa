@@ -27,6 +27,6 @@ public class Xob_term_sql extends Xob_term_base {
 		db_mgr.Tbl_xowa_cfg().Insert_bry_as_str	(Xodb_mgr_sql.Grp_wiki_init, "props.main_page", wiki.Props().Main_page());
 		db_mgr.Tbl_xowa_cfg().Insert_bry_as_str	(Xodb_mgr_sql.Grp_wiki_init, "props.siteinfo_misc", wiki.Props().Siteinfo_misc());
 		db_mgr.Tbl_xowa_cfg().Insert_bry_as_str	(Xodb_mgr_sql.Grp_wiki_init, "props.siteinfo_mainpage", wiki.Props().Siteinfo_mainpage());
-		wiki.Db_mgr_as_sql().Fsys_mgr().Rls();
+		wiki.Db_mgr_as_sql().Core_data_mgr().Rls();
 	}
 }

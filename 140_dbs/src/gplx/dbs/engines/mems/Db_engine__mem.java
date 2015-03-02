@@ -34,10 +34,11 @@ public class Db_engine__mem implements Db_engine {
 	public Db_rdr		New_rdr_by_obj(Object rdr, String sql) {throw Err_.not_implemented_();}
 	public DataRdr		New_rdr(java.sql.ResultSet rdr, String sql) {throw Err_.not_implemented_();} 
 	public Object		New_stmt_prep_as_obj(String sql) {throw Err_.not_implemented_();}
-	public void			Exec_create_tbl(Db_meta_tbl meta) {
+	public void			Exec_ddl_create_tbl(Db_meta_tbl meta) {
 		Mem_tbl mem_tbl = new Mem_tbl();
 		tbl_hash.AddReplace(meta.Name(), mem_tbl);
 	}
-	public void			Exec_create_idx(Gfo_usr_dlg usr_dlg, Db_meta_idx... ary) {}	// TODO: implement unique index
+	public void			Exec_ddl_create_idx(Gfo_usr_dlg usr_dlg, Db_meta_idx... ary) {}	// TODO: implement unique index
+	public void			Exec_ddl_append_fld(String tbl, Db_meta_fld fld) {}
         public static final Db_engine__mem _ = new Db_engine__mem(); Db_engine__mem() {}
 }

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import org.junit.*; import gplx.xowa.html.*; import gplx.xowa.hdumps.srls.*;
+import org.junit.*; import gplx.xowa.html.*;
 public class Xow_hzip_itm__anchor_tst {
 	@Before public void init() {fxt.Clear();} private Xow_hzip_mgr_fxt fxt = new Xow_hzip_mgr_fxt();
 	@Test   public void Srl_lnki_text_n() {
@@ -68,7 +68,7 @@ public class Xow_hzip_itm__anchor_tst {
 		fxt.Test_load(brys, "<a rel=\"nofollow\" class=\"external text\" href=\"http://a.org\">A1</a>");
 	}
 	@Test   public void Srl_lnke_brk_n() {
-		byte[][] brys = Bry_.Ary(Xow_hzip_dict.Bry_lnke_brk_text_n, Bry_.new_ascii_("http://a.org"), Xow_hzip_dict.Escape_bry, Hpg_srl_itm_.Save_bin_int_abrv(123));
+		byte[][] brys = Bry_.Ary(Xow_hzip_dict.Bry_lnke_brk_text_n, Bry_.new_ascii_("http://a.org"), Xow_hzip_dict.Escape_bry, Xow_hzip_int_.Save_bin_int_abrv(123));
 		fxt.Test_save(brys, "<a xtid='a_lnke_brk_n' class=\"external autonumber\"  rel=\"nofollow\" href=\"http://a.org\">[123]</a>");
 		fxt.Test_load(brys, "<a rel=\"nofollow\" class=\"external autonumber\" href=\"http://a.org\">[123]</a>");
 	}

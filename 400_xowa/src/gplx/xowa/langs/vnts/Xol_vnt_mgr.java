@@ -50,7 +50,7 @@ public class Xol_vnt_mgr implements GfoInvkAble {
 	}
 	public Xodb_page Convert_ttl(Xowe_wiki wiki, Xoa_ttl ttl) {return Convert_ttl(wiki, ttl.Ns(), ttl.Page_db());}	// NOTE: not Full_db as ttl.Ns is passed; EX:Шаблон:Šablon:Jez-eng; PAGE:sr.w:ДНК DATE:2014-07-06
 	public Xodb_page Convert_ttl(Xowe_wiki wiki, Xow_ns ns, byte[] ttl_bry) {
-		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
 		Xodb_page rv = Convert_ttl(wiki, tmp_bfr, ns, ttl_bry);
 		tmp_bfr.Mkr_rls();
 		return rv;

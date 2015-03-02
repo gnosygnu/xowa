@@ -185,7 +185,7 @@ public class Xob_hive_mgr {
 		Xob_xdat_file xdat_fil = new Xob_xdat_file();
 		if (xdat_bry.length > 0)	// if file is not empty, load it and parse it
 			xdat_fil.Parse(xdat_bry, xdat_bry.length, xdat_url);
-		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_m001();
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
 		xdat_fil.Insert(tmp_bfr, row);
 		xdat_fil.Save(xdat_url);
 		tmp_bfr.Mkr_rls();

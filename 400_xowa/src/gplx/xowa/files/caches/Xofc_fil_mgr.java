@@ -22,7 +22,7 @@ class Xofc_fil_mgr {
 	private Xof_cache_mgr cache_mgr;		
 	private final Xofc_fil_tbl tbl = new Xofc_fil_tbl(); private final OrderedHash hash = OrderedHash_.new_bry_(); private final Bry_bfr key_bldr = Bry_bfr.reset_(255);
 	public Xofc_fil_mgr(Xof_cache_mgr v) {this.cache_mgr = v;}
-	public void Conn_(Db_conn v, boolean created, boolean version_is_1) {tbl.Conn_(v, created, version_is_1);}
+	public void Conn_(Db_conn v, boolean created, boolean schema_is_1) {tbl.Conn_(v, created, schema_is_1);}
 	public void Save_all() {
 		int len = hash.Count();
 		boolean err_seen = false;
@@ -68,10 +68,10 @@ class Xofc_fil_mgr {
 	}
 	private Xofc_fil_itm Make_v1(int dir_id, byte[] name, boolean is_orig, int w, int h, double time, int page, Xof_ext ext, long size) {return Make(Bool_.Y, dir_id, name, is_orig, w, h, time, page, ext, size);}
 	public Xofc_fil_itm Make_v2(int dir_id, byte[] name, boolean is_orig, int w, int h, double time, int page, Xof_ext ext, long size) {return Make(Bool_.N, dir_id, name, is_orig, w, h, time, page, ext, size);}
-	private Xofc_fil_itm Make(boolean version_is_1, int dir_id, byte[] name, boolean is_orig, int w, int h, double time, int page, Xof_ext ext, long size) {
+	private Xofc_fil_itm Make(boolean schema_is_1, int dir_id, byte[] name, boolean is_orig, int w, int h, double time, int page, Xof_ext ext, long size) {
 		int id = cache_mgr.Next_id();
 		Xofc_fil_itm rv = new Xofc_fil_itm(id, dir_id, name, is_orig, w, h, time, page, ext, size, 0, Db_cmd_mode.Tid_create).Cache_time_now_();
-		byte[] key = version_is_1 ? rv.Gen_hash_key_v1(key_bldr) : rv.Gen_hash_key_v2(key_bldr);
+		byte[] key = schema_is_1 ? rv.Gen_hash_key_v1(key_bldr) : rv.Gen_hash_key_v2(key_bldr);
 		hash.Add(key, rv);
 		return rv;
 	}

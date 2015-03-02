@@ -19,7 +19,7 @@ package gplx.xowa; import gplx.*;
 import gplx.xowa.html.*;
 public class Xop_redirect_mgr {		
 	private final Xowe_wiki wiki; private final Url_encoder url_decoder; private Hash_adp_bry redirect_hash;
-	public Xop_redirect_mgr(Xowe_wiki wiki) {this.wiki = wiki; this.url_decoder = Xoa_app_.Utl_encoder_mgr().Url_ttl();}	// NOTE: must be Url_ttl, not Url; PAGE:en.w:Template:Positionskarte+ -> Template:Location_map+, not Template:Location_map DATE:2014-08-21
+	public Xop_redirect_mgr(Xowe_wiki wiki) {this.wiki = wiki; this.url_decoder = Xoa_app_.Utl__encoder_mgr().Url_ttl();}	// NOTE: must be Url_ttl, not Url; PAGE:en.w:Template:Positionskarte+ -> Template:Location_map+, not Template:Location_map DATE:2014-08-21
 	public void Clear() {redirect_hash = null;}	// TEST:
 	public boolean Is_redirect(byte[] text, int text_len) {return this.Extract_redirect(text, text_len) != null;}
 	public Xoa_ttl Extract_redirect_loop(byte[] src) {
@@ -66,7 +66,7 @@ public class Xop_redirect_mgr {
 		ListAdp list = page.Redirected_ttls();
 		int list_len = list.Count();
 		if (list_len == 0) return Bry_.Empty;
-		Bry_bfr redirect_bfr = app.Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr redirect_bfr = app.Utl__bfr_mkr().Get_b512();
 		for (int i = 0; i < list_len; i++) {
 			if (i != 0) redirect_bfr.Add(Bry_redirect_dlm);
 			byte[] redirect_ttl = (byte[])list.FetchAt(i);
@@ -82,7 +82,7 @@ public class Xop_redirect_mgr {
 				;
 		}
 		Xol_msg_itm msg_itm = wiki.Lang().Msg_mgr().Itm_by_id_or_null(Xol_msg_itm_.Id_redirectedfrom);
-		Bry_bfr fmt_bfr = app.Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr fmt_bfr = app.Utl__bfr_mkr().Get_b512();
 		app.Tmp_fmtr().Fmt_(msg_itm.Val()).Bld_bfr_one(fmt_bfr, redirect_bfr);
 		redirect_bfr.Clear().Mkr_rls(); fmt_bfr.Mkr_rls();
 		return fmt_bfr.Xto_bry_and_clear();

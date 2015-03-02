@@ -25,14 +25,14 @@ public class Fsm_abc_mgr implements RlsAble {
 	public Fsm_cfg_mgr Cfg_mgr() {return cfg_mgr;} private final Fsm_cfg_mgr cfg_mgr = new Fsm_cfg_mgr();
 	public int Next_id() {return cfg_mgr.Next_id();}		
 	private static final String Db_conn_bldr_type = "gplx.fsdb.abc";
-	public void Init_for_db(boolean version_is_1, Io_url dir) {
+	public void Init_for_db(boolean schema_is_1, Io_url dir) {
 		Io_url abc_url = dir.GenSubFil("fsdb.abc.sqlite3");
 		Db_conn_bldr_data conn_data = Db_conn_bldr.I.Get_or_new(Db_conn_bldr_type, abc_url);
 		boolean created = conn_data.Created();
 		conn = conn_data.Conn();			
-		atr_mgr.Init_for_db(conn, created, version_is_1, dir, this);
-		bin_mgr.Init_for_db(conn, created, version_is_1, dir);
-		cfg_mgr.Init_for_db(conn, created, version_is_1);
+		atr_mgr.Init_for_db(conn, created, schema_is_1, dir, this);
+		bin_mgr.Init_for_db(conn, created, schema_is_1, dir);
+		cfg_mgr.Init_for_db(conn, created, schema_is_1);
 		if (created) {
 			this.Txn_save();	// immediately save new entries in atr,cfg
 		}

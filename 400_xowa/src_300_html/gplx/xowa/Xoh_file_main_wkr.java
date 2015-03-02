@@ -57,7 +57,7 @@ public class Xoh_file_main_wkr implements Bry_fmtr_arg {
 		alts.Ctor(xfer_itm, opt);
 		Xof_ext ext = xfer_itm.Lnki_ext();
 		if (ext.Id_is_thumbable_img())
-			opt.Html_main_img().Bld_bfr_many(bfr, xfer_itm.Orig_w(), xfer_itm.Orig_h(), xfer_itm.Html_orig_src(), file_size_bry, ext.Mime_type(), elem_id_val, xfer_itm.Html_w(), xfer_itm.Html_h(), xfer_itm.Html_view_src(), ttl.Full_txt(), Xoa_app_.Utl_encoder_mgr().Url().Encode(ttl.Page_url()), alts);
+			opt.Html_main_img().Bld_bfr_many(bfr, xfer_itm.Orig_w(), xfer_itm.Orig_h(), xfer_itm.Html_orig_src(), file_size_bry, ext.Mime_type(), elem_id_val, xfer_itm.Html_w(), xfer_itm.Html_h(), xfer_itm.Html_view_src(), ttl.Full_txt(), Xoa_app_.Utl__encoder_mgr().Url().Encode(ttl.Page_url()), alts);
 		else if (ext.Id_is_video())	// NOTE: video must precede audio else File:***.ogg will not show thumbs
 			opt.Html_main_vid().Bld_bfr_many(bfr, elem_id_val, xfer_itm.Html_view_src(), Atr_class_image, ttl.Page_db(), xfer_itm.Html_view_src(), xfer_itm.Html_w(), xfer_itm.Html_h(), Bry_.Empty, xfer_itm.Html_orig_src(), xfer_itm.Html_w(), xfer_itm.Html_w(), play_btn_icon);
 		else if (ext.Id_is_audio())

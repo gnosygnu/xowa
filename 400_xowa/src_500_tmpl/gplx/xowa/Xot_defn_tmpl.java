@@ -72,7 +72,7 @@ public class Xot_defn_tmpl implements Xot_defn {
 			Xowe_wiki wiki = ctx.Wiki();
 			if (!onlyinclude_parsed) {
 				onlyinclude_parsed = true;
-				byte[] new_data = Extract_onlyinclude(data_raw, wiki.Utl_bry_bfr_mkr());
+				byte[] new_data = Extract_onlyinclude(data_raw, wiki.Utl__bfr_mkr());
 				Xop_ctx new_ctx = Xop_ctx.new_sub_(wiki);
 				Xot_defn_tmpl tmpl = wiki.Parser().Parse_text_to_defn_obj(new_ctx, new_ctx.Tkn_mkr(), wiki.Ns_mgr().Ns_template(), Bry_.Empty, new_data);
 				tmpl.Root().Tmpl_compile(new_ctx, new_data, Xot_compile_data.Null);

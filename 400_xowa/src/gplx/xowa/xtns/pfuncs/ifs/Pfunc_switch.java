@@ -27,7 +27,7 @@ public class Pfunc_switch extends Pf_func_base {
 		byte[] match = null;
 		Arg_itm_tkn dflt_val_tkn = null; byte[] dflt_val_bry = null;
 		Arg_nde_tkn last_keyless_arg = null;
-		Bry_bfr tmp = ctx.Wiki().Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr tmp = ctx.Wiki().Utl__bfr_mkr().Get_b512();
 		Xol_kwd_mgr kwd_mgr = ctx.Lang().Kwd_mgr();
 		for (int i = 0; i < self_args_len; i++) {
 			Arg_nde_tkn arg = self.Args_get_by_idx(i);

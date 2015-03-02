@@ -16,14 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-import gplx.gfui.*;
 public class Xof_img_size {
 	public int Html_w() {return html_w;} private int html_w;
 	public int Html_h() {return html_h;} private int html_h;
 	public int File_w() {return file_w;} private int file_w;	// NOTE: file_w will always equal html_w, unless rounding is implemented; EX: html_w=150,151,152 -> file_w=150
 	public int File_h() {return file_h;} private int file_h;
 	public boolean File_is_orig() {return file_is_orig;} private boolean file_is_orig;
-	public void Clear() {
+	private void Clear() {
 		html_w = html_h = file_w = file_h = 0;
 		file_is_orig = false;
 	}

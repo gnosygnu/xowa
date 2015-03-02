@@ -17,7 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 import gplx.threads.*; import gplx.gfui.*; import gplx.xowa.gui.history.*; import gplx.xowa.gui.bnds.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.cfgs2.*; import gplx.xowa.pages.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.cfgs2.*;
+import gplx.xowa.pages.*; import gplx.xowa.pages.skins.*;
 public class Xog_tab_itm implements GfoInvkAble {
 	private Xog_win_itm win; private Xocfg_tab_mgr cfg_tab_mgr;
 	public Xog_tab_itm(Xog_tab_mgr tab_mgr, Gfui_tab_itm_data tab_data, Xowe_wiki wiki, Xoae_page page) {
@@ -153,7 +154,17 @@ public class Xog_tab_itm implements GfoInvkAble {
 			}
 			usr_dlg.Prog_none("", "", "rendering html");
 			//	win.Page__async__bgn(this);
-			app.Thread_mgr().File_load_mgr().Add_at_end(new Load_files_wkr(this)).Run();
+			Gfo_thread_wkr async_wkr = null;				
+			if (wkr.Hdump_enabled()) {
+				wiki.File_mgr().Fsdb_mgr().Init_by_wiki(wiki);
+				async_wkr = new gplx.xowa2.gui.Xogv_img_wkr(wiki.File_mgr().Fsdb_mgr().Orig_mgr(), wiki.File_mgr().Fsdb_mgr().Bin_mgr(), app.File_mgr__cache_mgr(), wiki.File_mgr__repo_mgr(), html_itm, page, page.Hdump_data().Imgs(), gplx.xowa.files.Xof_exec_tid.Tid_wiki_page);
+				if (wiki.Html_mgr__hdump_enabled()) {
+					wiki.Html_mgr__hdump_wtr().Save(page);
+				}
+			}
+			else
+				async_wkr = new Load_files_wkr(this);
+			app.Thread_mgr().File_load_mgr().Add_at_end(async_wkr).Run();
 		}
 		finally {
 			app.Thread_mgr().Page_load_mgr().Resume();
@@ -182,10 +193,10 @@ public class Xog_tab_itm implements GfoInvkAble {
 				page.File_queue().Exec(gplx.xowa.files.Xof_exec_tid.Tid_wiki_page, usr_dlg, wiki, page);
 				if (page.Html_data().Xtn_gallery_packed_exists())	// packed_gallery exists; fire js once; PAGE:en.w:National_Sculpture_Museum_(Valladolid); DATE:2014-07-21
 					html_itm.Html_gallery_packed_exec();
-				if (	page.Html_data().Xtn_imap_exists()		// imap exists; DATE:2014-08-07
+				if (	page.Html_data().Xtn_imap_exists()			// imap exists; DATE:2014-08-07
 					&&	page.Html_data().Module_mgr().Itm_popups().Enabled()
 					)
-					html_itm.Html_popups_bind_hover_to_doc();	// rebind all elements to popup
+					html_itm.Html_popups_bind_hover_to_doc();		// rebind all elements to popup
 			}
 			catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.image: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_brief(e));}
 		}
@@ -219,9 +230,6 @@ public class Xog_tab_itm implements GfoInvkAble {
 		}	catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.redlinks: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_brief(e));}
 		try {app.File_mgr().Cache_mgr().Compress_check();}
 		catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.cache: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_brief(e));}
-		if (wiki.Db_mgr().Hdump_mgr().Enabled()) {
-			wiki.Db_mgr().Hdump_mgr().Save_if_missing(page);
-		}
 		app.Log_wtr().Queue_enabled_(false);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
@@ -241,6 +249,7 @@ class Load_page_wkr implements Gfo_thread_wkr {
 	public Xoae_page Page() {return page;} private Xoae_page page;
 	public Xoa_url Url() {return url;} private Xoa_url url;
 	public Xoa_ttl Ttl() {return ttl;} private Xoa_ttl ttl;
+	public boolean Hdump_enabled() {return hdump_enabled;} private boolean hdump_enabled;
 	public Exception Exc() {return exc;} private Exception exc;
 	public void Exec() {
 		try {
@@ -249,11 +258,13 @@ class Load_page_wkr implements Gfo_thread_wkr {
 			if (Env_.System_memory_free() < app.Sys_cfg().Free_mem_when())	// check if low in memory
 				app.Free_mem(false);										// clear caches (which will clear bry_bfr_mk)
 			else															// not low in memory
-				app.Utl_bry_bfr_mkr().Clear();								// clear bry_bfr_mk only; NOTE: call before page parse, not when page is first added, else threading errors; DATE:2014-05-30
+				app.Utl__bfr_mkr().Clear();									// clear bry_bfr_mk only; NOTE: call before page parse, not when page is first added, else threading errors; DATE:2014-05-30
 			this.page = wiki.GetPageByTtl(url, ttl, wiki.Lang(), tab, false);
 			int html_db_id = page.Revision_data().Html_db_id();
-			if (wiki.Db_mgr().Hdump_mgr().Enabled() && html_db_id != -1)
-				wiki.Db_mgr().Hdump_mgr().Load(wiki, page, html_db_id);
+			if (wiki.Html_mgr__hdump_enabled() && html_db_id != -1) {
+				wiki.Html_mgr__hdump_rdr().Get_by_ttl(page);
+				hdump_enabled = true;
+			}
 			else
 				wiki.ParsePage(page, false);
 			GfoInvkAble_.InvkCmd_val(tab.Cmd_sync(), Xog_tab_itm.Invk_show_url_loaded_swt, this);

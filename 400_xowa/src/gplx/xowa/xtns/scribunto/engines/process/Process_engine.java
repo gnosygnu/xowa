@@ -47,7 +47,7 @@ public class Process_engine implements Scrib_engine {
 		return this.CallFunction(core.Lib_mw().Mod().Fncs_get_id("executeModule"), Scrib_kv_utl_.base1_obj_(new Scrib_lua_proc("", mod_id)));
 	}
 	private KeyVal[] Dispatch(Object... ary) {
-		Bry_bfr bfr = app.Utl_bry_bfr_mkr().Get_k004().Clear();
+		Bry_bfr bfr = app.Utl__bfr_mkr().Get_k004().Clear();
 		while (true) {
 			Dispatch_bld_send(bfr, ary);
 			boolean log_enabled = scrib_opts.Lua_log_enabled();

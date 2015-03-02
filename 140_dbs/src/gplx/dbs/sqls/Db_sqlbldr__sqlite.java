@@ -40,24 +40,44 @@ public class Db_sqlbldr__sqlite implements Db_sqlbldr {
 		return tmp_bfr.Xto_str_and_clear();
 	}
 	public String Bld_create_tbl(Db_meta_tbl tbl) {
-		tmp_bfr.Add_str_ascii("CREATE TABLE ").Add_str_ascii(tbl.Name()).Add_byte_nl();
+		tmp_bfr.Add_str_ascii("CREATE TABLE IF NOT EXISTS ").Add_str_ascii(tbl.Name()).Add_byte_nl();
 		Db_meta_fld[] flds = tbl.Flds();
 		int flds_len = flds.length;
 		for (int i = 0; i < flds_len; ++i) {
 			Db_meta_fld fld = flds[i];
 			tmp_bfr.Add_byte(i == 0 ? Byte_ascii.Paren_bgn : Byte_ascii.Comma).Add_byte_space();
-			tmp_bfr.Add_str_ascii(fld.Name()).Add_byte_space();
-			Tid_to_sql(tmp_bfr, fld.Tid(), fld.Len()); tmp_bfr.Add_byte_space();
-			tmp_bfr.Add_str_ascii(fld.Nullable() ? "NULL " : "NOT NULL ");
-			if (fld.Primary()) tmp_bfr.Add_str_ascii("PRIMARY KEY ");
-			if (fld.Autoincrement()) tmp_bfr.Add_str_ascii("AUTOINCREMENT ");
-			tmp_bfr.Del_by_1();	// remove trailing space
+			Bld_fld(tmp_bfr, fld);
 			tmp_bfr.Add_byte_nl();
 		}
 		tmp_bfr.Add_str_ascii(");");
 		return tmp_bfr.Xto_str_and_clear();
 	}
-	public void Tid_to_sql(Bry_bfr tmp_bfr, int tid, int len) {// REF: https://www.sqlite.org/datatype3.html
+	public String Bld_alter_tbl_add(String tbl, Db_meta_fld fld) {
+		tmp_bfr.Add_str_ascii("ALTER TABLE ").Add_str_ascii(tbl).Add_str_ascii(" ADD ");
+		Bld_fld(tmp_bfr, fld);
+		tmp_bfr.Add_byte_semic();
+		return tmp_bfr.Xto_str_and_clear();
+	}
+	private void Bld_fld(Bry_bfr tmp_bfr, Db_meta_fld fld) {
+		tmp_bfr.Add_str_ascii(fld.Name()).Add_byte_space();
+		Tid_to_sql(tmp_bfr, fld.Tid(), fld.Len()); tmp_bfr.Add_byte_space();
+		tmp_bfr.Add_str_ascii(fld.Nullable() ? "NULL " : "NOT NULL ");
+		if (fld.Default_value() != Db_meta_fld.Default_value_null) {
+			tmp_bfr.Add_str_ascii("DEFAULT ");
+			boolean quote = Bool_.N;
+			switch (fld.Tid()) {
+				case Db_meta_fld.Tid_str: case Db_meta_fld.Tid_text: quote = Bool_.Y; break;
+			}
+			if (quote) tmp_bfr.Add_byte_apos();
+			tmp_bfr.Add_str_utf8(Object_.Xto_str_strict_or_null(fld.Default_value()));
+			if (quote) tmp_bfr.Add_byte_apos();
+			tmp_bfr.Add_byte_space();
+		}
+		if (fld.Primary()) tmp_bfr.Add_str_ascii("PRIMARY KEY ");
+		if (fld.Autoincrement()) tmp_bfr.Add_str_ascii("AUTOINCREMENT ");
+		tmp_bfr.Del_by_1();	// remove trailing space
+	}
+	public static void Tid_to_sql(Bry_bfr tmp_bfr, int tid, int len) {// REF: https://www.sqlite.org/datatype3.html
 		switch (tid) {
 			case Db_meta_fld.Tid_bool:		tmp_bfr.Add_str_ascii("boolean"); break;
 			case Db_meta_fld.Tid_byte:		tmp_bfr.Add_str_ascii("tinyint"); break;

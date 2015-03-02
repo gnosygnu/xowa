@@ -18,37 +18,57 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.dbs.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.dbs.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*;
 public class Xodb_xowa_ns_tbl {
-	public void Conn_(Db_conn conn) {this.conn = conn;} private Db_conn conn;
+	private String tbl_name = "wiki_ns_regy"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private String fld_db_id, fld_ns_id, fld_ns_name, fld_ns_case, fld_ns_count, fld_ns_is_alias;		
+	private Db_conn conn; private int db_id;
+	public void Conn_(Db_conn new_conn, boolean created, boolean schema_is_1, int db_id) {
+		this.conn = new_conn; flds.Clear(); this.db_id = db_id;
+		if (schema_is_1) {
+			tbl_name			= "xowa_ns";
+			fld_db_id			= Db_meta_fld.Key_null;
+		}
+		else {
+			fld_db_id			= flds.Add_int("db_id");
+		}
+		fld_ns_id				= flds.Add_int("ns_id");
+		fld_ns_name				= flds.Add_str("ns_name", 255);
+		fld_ns_case				= flds.Add_byte("ns_case");
+		fld_ns_is_alias			= flds.Add_bool("ns_is_alias");
+		fld_ns_count			= flds.Add_int("ns_count");
+		if (created) {
+			Db_meta_tbl meta_tbl = Db_meta_tbl.new_(tbl_name, flds
+			, Db_meta_idx.new_unique_by_tbl_wo_null(tbl_name, "pkey"		, fld_db_id, fld_ns_id)
+			);
+			conn.Exec_create_tbl_and_idx(meta_tbl);
+		}
+	}
 	public void Insert(Xow_ns_mgr ns_mgr) {
-		Db_stmt stmt = Db_stmt_.Null;
-		try {
-			stmt = Db_stmt_.new_insert_(conn, Tbl_name, Fld_ns_id, Fld_ns_name, Fld_ns_case, Fld_ns_is_alias, Fld_ns_count);
-			int len = ns_mgr.Ids_len();
-			for (int i = 0; i < len; i++) {
-				Xow_ns ns = ns_mgr.Ids_get_at(i);
-				stmt.Clear()
-					.Val_int(ns.Id())
-					.Val_str(ns.Name_str())
-					.Val_byte(ns.Case_match())
-					.Val_bool_as_byte(ns.Is_alias())
-					.Val_int(ns.Count())
-					.Exec_insert();
-					;
-			}
-		} finally {stmt.Rls();}
+		Db_stmt stmt = conn.Stmt_insert(tbl_name, flds);
+		int len = ns_mgr.Ids_len();
+		for (int i = 0; i < len; i++) {
+			Xow_ns ns = ns_mgr.Ids_get_at(i);
+			stmt.Clear()
+				.Val_int(fld_db_id, db_id)
+				.Val_int(fld_ns_id, ns.Id())
+				.Val_str(fld_ns_name, ns.Name_str())
+				.Val_byte(fld_ns_case, ns.Case_match())
+				.Val_bool_as_byte(fld_ns_is_alias, ns.Is_alias())
+				.Val_int(fld_ns_count, ns.Count())
+				.Exec_insert();
+				;
+		}
 	}
 	public void Select_all(Xow_ns_mgr ns_mgr) {
-		Db_rdr rdr = Db_rdr_.Null; Db_stmt stmt = Db_stmt_.Null;
+		Db_rdr rdr = Db_rdr_.Null;
 		try {
-			stmt = Db_stmt_.new_select_as_rdr(conn, Db_qry__select_in_tbl.new_(Tbl_name, Db_qry__select_in_tbl.Where_flds__all, Flds__all));
-			rdr = stmt.Exec_select_as_rdr();
+			rdr = conn.Stmt_select(tbl_name, flds, String_.Ary_wo_null(fld_db_id)).Crt_int(fld_db_id, db_id).Exec_select_as_rdr();
 			ns_mgr.Clear();
 			while (rdr.Move_next()) {
-				int ns_id			= rdr.Read_int(0);
-				byte[] ns_name		= rdr.Read_bry_by_str(1);
-				byte ns_case_match	= rdr.Read_byte(2);
-				int ns_count		= rdr.Read_int(3);
-				boolean ns_is_alias	= rdr.Read_byte(4) == Bool_.Y_byte;
+				int ns_id			= rdr.Read_int(fld_ns_id);
+				byte[] ns_name		= rdr.Read_bry_by_str(fld_ns_name);
+				byte ns_case_match	= rdr.Read_byte(fld_ns_case);
+				int ns_count		= rdr.Read_int(fld_ns_count);
+				boolean ns_is_alias	= rdr.Read_byte(fld_ns_is_alias) == Bool_.Y_byte;
 				ns_mgr.Add_new(ns_id, ns_name, ns_case_match, ns_is_alias);
 				if (ns_id < 0) continue;			// don't load counts for Special / Media					
 				Xow_ns ns = ns_mgr.Ids_get_or_null(ns_id);
@@ -56,21 +76,24 @@ public class Xodb_xowa_ns_tbl {
 				if (ns_count > 0) ns.Exists_(true);	// ns has article; mark it as exists, else Talk tab won't show; DATE:2013-12-04
 			}
 			ns_mgr.Init();
-		}	finally {rdr.Rls(); stmt.Rls();}
+		}	finally {rdr.Rls();}
 	}
 	public int Select_ns_count(int ns_id) {
-		Db_qry_select qry = Db_qry_.select_val_(Tbl_name, Fld_ns_count, Db_crt_.eq_(Fld_ns_id, ns_id));
-		return Int_.cast_(qry.ExecRdr_val(conn));
+		Db_rdr rdr = Db_rdr_.Null;
+		try {
+			rdr = conn.Stmt_select(tbl_name, flds, String_.Ary_wo_null(fld_db_id, fld_ns_id))
+				.Crt_int(fld_db_id, db_id)
+				.Crt_int(fld_ns_id, ns_id)
+				.Exec_select_as_rdr();
+			return rdr.Move_next() ? Int_.cast_(rdr.Read_int(fld_ns_count)) : 0;
+		}	finally {rdr.Rls();}
 	}
 	public void Update_ns_count(int ns_id, int ns_count) {
-		conn.Exec_qry(Db_qry_.update_common_(Tbl_name
-		, Db_crt_.eq_(Fld_ns_id, ns_id) 
-		, KeyVal_.Ary
-		(	KeyVal_.new_(Fld_ns_count, ns_count)
-		)));
+		Db_stmt stmt = conn.Stmt_update(tbl_name, String_.Ary_wo_null(fld_db_id, fld_ns_id), fld_ns_count);
+		stmt.Clear()
+			.Val_int(fld_ns_count, ns_count)
+			.Crt_int(fld_db_id, db_id)
+			.Crt_int(fld_ns_id, ns_id)
+			.Exec_update();
 	}
-	public static final String Tbl_name = "xowa_ns"
-	, Fld_ns_id = "ns_id", Fld_ns_name = "ns_name", Fld_ns_case = "ns_case", Fld_ns_count = "ns_count", Fld_ns_is_alias = "ns_is_alias"
-	;
-	private static final String[] Flds__all = new String[] {Fld_ns_id, Fld_ns_name, Fld_ns_case, Fld_ns_count, Fld_ns_is_alias};
 }

@@ -24,7 +24,7 @@ public class Map_dd2dms_func extends Pf_func_base {
 	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {
 		byte[] coord = Eval_argx(ctx, src, caller, self);
 		int args_len = self.Args_len();
-		Bry_bfr tmp_bfr = ctx.Wiki().Utl_bry_bfr_mkr().Get_b128();
+		Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b128();
 		byte[] plus = Bry_.Empty, minus = Bry_.Empty;
 		int prec = 4;
 		for (int i = 0; i < args_len; i++) {

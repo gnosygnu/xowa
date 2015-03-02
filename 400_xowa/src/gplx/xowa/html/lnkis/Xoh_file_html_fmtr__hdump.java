@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import gplx.html.*;
-import gplx.xowa.files.*; import gplx.xowa.hdumps.htmls.*;
+import gplx.xowa.files.*; import gplx.xowa.html.hdumps.abrvs.*;
 public class Xoh_file_html_fmtr__hdump extends Xoh_file_html_fmtr__base {
 	private Bry_bfr tmp_bfr = Bry_bfr.reset_(128);
 	@gplx.Internal @Override protected Xoh_arg_img_core New_arg_img_core() {return new Xoh_arg_img_core__hdump();}
@@ -37,15 +37,15 @@ public class Xoh_file_html_fmtr__hdump extends Xoh_file_html_fmtr__base {
 //			tmp_bfr.Add_str_ascii("'/>");
 //		}
 	@Override public void Html_thumb_core(Bry_bfr bfr, int uid, byte[] div1_halign, int div2_width, byte[] div2_content) {
-		tmp_bfr.Add(Hdump_html_consts.Key_img_style);
+		tmp_bfr.Add(Xohd_abrv_.Key_img_style);
 		tmp_bfr.Add_int_variable(uid);
 		tmp_bfr.Add_byte_apos();
 		byte[] div2_width_repl = tmp_bfr.Xto_bry_and_clear();
 		fmtr_thumb_core.Bld_bfr_many(bfr, uid, div1_halign, div2_width_repl, div2_content);
 	}
-	@Override public void Html_thumb_part_magnify(Bry_bfr bfr, int uid, byte[] a_href, byte[] a_title, byte[] img_src)									{Write_xnde(bfr, Hdump_html_consts.Key_file_mgnf, uid);}
-	@Override public void Html_thumb_part_info(Bry_bfr bfr, int uid, byte[] a_href, byte[] img_src)														{Write_xnde(bfr, Hdump_html_consts.Key_file_info, uid);}
-	@Override public void Html_thumb_part_play(Bry_bfr bfr, int uid, int a_width, int a_max_width, byte[] a_href, byte[] a_xowa_title, byte[] img_src)	{Write_xnde(bfr, Hdump_html_consts.Key_file_play, uid);}
+	@Override public void Html_thumb_part_magnify(Bry_bfr bfr, int uid, byte[] a_href, byte[] a_title, byte[] img_src)									{Write_xnde(bfr, Xohd_abrv_.Key_file_mgnf, uid);}
+	@Override public void Html_thumb_part_info(Bry_bfr bfr, int uid, byte[] a_href, byte[] img_src)														{Write_xnde(bfr, Xohd_abrv_.Key_file_info, uid);}
+	@Override public void Html_thumb_part_play(Bry_bfr bfr, int uid, int a_width, int a_max_width, byte[] a_href, byte[] a_xowa_title, byte[] img_src)	{Write_xnde(bfr, Xohd_abrv_.Key_file_play, uid);}
 	public static void Write_xnde(Bry_bfr bfr, byte[] key, int uid) {
 		bfr.Add(key);
 		bfr.Add_int_variable(uid);

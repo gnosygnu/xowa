@@ -16,9 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.oimgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.dbs.*;
+import gplx.xowa.wikis.data.*; import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.dbs.*;
 public class Xob_text_db_prep extends Xob_itm_basic_base implements Xob_cmd {
-	private Xodb_file[] db_files;
 	public Xob_text_db_prep(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Cmd_key() {return KEY_oimg;} public static final String KEY_oimg = "wiki.text_db_prep";
 	public void Cmd_ini(Xob_bldr bldr) {}
@@ -26,27 +25,26 @@ public class Xob_text_db_prep extends Xob_itm_basic_base implements Xob_cmd {
 		wiki.Init_assert();
 	}
 	public void Cmd_run() {
-		Xodb_fsys_mgr db_fsys_mgr = wiki.Db_mgr_as_sql().Fsys_mgr();
-		String page_db_url = db_fsys_mgr.Get_tid_root(Xodb_file_tid.Tid_core).Url().Raw();
-		db_files = db_fsys_mgr.Files_ary();
-		int len = db_files.length;
+		Xowe_core_data_mgr core_data_mgr = wiki.Db_mgr_as_sql().Core_data_mgr();
+		String page_db_url = core_data_mgr.Dbs__get_db_core().Url().Raw();
+		int len = core_data_mgr.Dbs__len();
 		for (int i = 0; i < len; i++) {
-			Xodb_file db_file = db_files[i];
-			if (db_file.Tid() == Xodb_file_tid.Tid_text)
+			Xowd_db_file db_file = core_data_mgr.Dbs__get_at(i);
+			if (db_file.Tid() == Xowd_db_file_.Tid_text)
 				Prep_db(page_db_url, db_file);
 		}
 	}
 	public void Cmd_end() {
-		int len = db_files.length;
+		Xowe_core_data_mgr core_data_mgr = wiki.Db_mgr_as_sql().Core_data_mgr();
+		int len = core_data_mgr.Dbs__len();
 		for (int i = 0; i < len; i++) {
-			Xodb_file db_file = db_files[i];
-			if (db_file.Tid() == Xodb_file_tid.Tid_text)
+			Xowd_db_file db_file = core_data_mgr.Dbs__get_at(i);
+			if (db_file.Tid() == Xowd_db_file_.Tid_text)
 				db_file.Rls();
 		}
-		db_files = null;
 	}
 	public void Cmd_print() {}
-	private void Prep_db(String page_db_url, Xodb_file text_db) {
+	private void Prep_db(String page_db_url, Xowd_db_file text_db) {
 		usr_dlg.Note_many("", "", "copying page_rows to text_db: ~{0}", text_db.Url().NameOnly());
 		Db_conn conn = text_db.Conn();
 		Sqlite_engine_.Tbl_create_and_delete(conn, "page_dump", Sql_create_tbl);

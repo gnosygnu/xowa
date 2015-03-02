@@ -59,7 +59,7 @@ class Xodb_load_mgr_sql_fxt {
 	public void Init_save_ctgs(Xodb_page[] ary) {
 		int len = ary.length;
 		Xodb_mgr_sql db_mgr = wiki.Db_mgr_as_sql();
-		Db_conn p = db_mgr.Fsys_mgr().Conn_core(); 
+		Db_conn p = db_mgr.Core_data_mgr().Conn_core(); 
 		p.Txn_mgr().Txn_bgn_if_none();
 		Db_stmt page_stmt = db_mgr.Tbl_page().Insert_stmt(p);
 		Db_stmt category_stmt = db_mgr.Tbl_category().Insert_stmt(p);

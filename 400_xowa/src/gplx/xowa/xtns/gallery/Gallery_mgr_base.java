@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.html.*; import gplx.xowa.html.*; import gplx.xowa.html.modules.*; import gplx.xowa.files.*; import gplx.xowa.hdumps.htmls.*; import gplx.xowa.hdumps.core.*;
+import gplx.html.*; import gplx.xowa.html.*; import gplx.xowa.html.modules.*; import gplx.xowa.files.*; import gplx.xowa.html.hdumps.abrvs.*; import gplx.xowa.html.hdumps.core.*;
 public abstract class Gallery_mgr_base {
 	private Gallery_box_w_fmtr_arg__basic box_w_fmtr__basic = new Gallery_box_w_fmtr_arg__basic(); private Gallery_box_w_fmtr_arg__hdump box_w_fmtr__hdump = new Gallery_box_w_fmtr_arg__hdump();
 	private Gallery_img_pad_fmtr_arg__basic img_pad_fmtr__basic = new Gallery_img_pad_fmtr_arg__basic(); private Gallery_img_pad_fmtr_arg__hdump img_pad_fmtr__hdump = new Gallery_img_pad_fmtr_arg__hdump();
@@ -53,13 +53,13 @@ public abstract class Gallery_mgr_base {
 	}
 	public void Write_html(Bry_bfr bfr, Xowe_wiki wiki, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Gallery_xnde xnde) {
 		boolean hctx_is_hdump = hctx.Mode_is_hdump();
-		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();			
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();			
 		byte[] box_style = xnde.Atr_style();
 		int gallery_uid = page.Html_data().Xtn_gallery_next_id();
 		if (itms_per_row > 0) {
 			int max_width = itms_per_row * (itm_default_w + this.Get_all_padding());
 			box_style = Fmt_and_add(tmp_bfr, box_style_max_width_fmtr, box_style, max_width);
-			page.Hdump_data().Data_add(new Hdump_data_gallery(gallery_uid, max_width));
+			page.Hdump_data().Imgs_add(new Xohd_data_itm__gallery_mgr(gallery_uid, max_width));
 		}
 		byte[] box_cls = Fmt_and_add(tmp_bfr, box_cls_fmtr, xnde.Atr_cls(), this.Tid_bry());
 		byte[] gallery_ul_id = tmp_bfr.Add(box_id_prefix_bry).Add_int_variable(gallery_uid).Xto_bry_and_clear();
@@ -149,7 +149,7 @@ public abstract class Gallery_mgr_base {
 		Wrap_gallery_text(bfr, itm_caption, html_w_expand, html_h_expand);
 		bfr.Add(itm_li_end_bry);
 		if (hctx_is_hdump)
-			page.Hdump_data().Data_add_img(new Hdump_data_img__gallery().Init_by_gallery(itm_div_width, img_div_w, vpad), xfer_itm, Hdump_data_img__gallery.Tid_gallery);
+			page.Hdump_data().Imgs_add_img(new Xohd_data_itm__gallery_itm().Init_by_gallery(itm_div_width, img_div_w, vpad), xfer_itm, Xohd_data_itm__gallery_itm.Tid_gallery);
 	}
 	private static final byte[] 
 	  Wrap_gallery_text_bgn = Bry_.new_ascii_("\n      <div class=\"gallerytext\">") // NOTE: The newline after <div class="gallerytext"> is needed to accommodate htmltidy
@@ -195,7 +195,7 @@ public abstract class Gallery_mgr_base {
 		Html_wtr.Write_atr_bry(bfr, Html_atr_.Cls_bry, cls);
 		if (hctx_is_hdump) {
 			bfr.Add_byte_space();
-			bfr.Add(Hdump_html_consts.Key_gallery_box_max);
+			bfr.Add(Xohd_abrv_.Key_gallery_box_max);
 			bfr.Add_int_variable(uid);
 			bfr.Add_byte_apos();
 		}

@@ -25,7 +25,7 @@ public class Xow_script_mgr implements GfoInvkAble {
 	}	private static final String Invk_set = "set";
 	public void Exec(Xowe_wiki wiki) {
 		int len = hash.Count();
-		Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_k004();
+		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_k004();
 		for (int i = 0; i < len; i++) {
 			Xow_script_itm itm = (Xow_script_itm)hash.FetchAt(i);
 			int wiki_tid = wiki.Domain_tid();

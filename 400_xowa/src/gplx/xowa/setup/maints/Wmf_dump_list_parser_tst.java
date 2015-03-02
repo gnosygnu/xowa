@@ -41,7 +41,7 @@ public class Wmf_dump_list_parser_tst {
 		,	fxt.itm("zh-classicalwiki", "20131128", Wmf_dump_itm.Status_tid_complete, "Dump complete", "2013-11-28 06:08:56")
 		);
 	}
-//		@Test  public void Update() {	// MAINT:QUARTERLY:2014-10-05
+//		@Test  public void Update() {	// MAINT:QUARTERLY:2015-03-01
 //			Hash_adp_bry excluded_domains = Hash_adp_bry.cs_().Add_many_str
 //			( "advisory.wikipedia.org", "beta.wikiversity.org", "donate.wikipedia.org", "login.wikipedia.org"
 //			, "nostalgia.wikipedia.org", "outreach.wikipedia.org", "quality.wikipedia.org", "sources.wikipedia.org"
@@ -62,7 +62,7 @@ public class Wmf_dump_list_parser_tst {
 //				if (Bry_finder.Find_fwd(domain_bry, Bry_.new_ascii_("wikimania")) != Bry_.NotFound) continue;
 //				if (excluded_domains.Has(domain_bry)) continue;
 //				Xow_domain domain_itm = Xow_domain_.parse(domain_bry);
-//				byte[] tid_name = Xto_display_name(Xow_domain_.Tid__get_bry(domain_itm.Wiki_tid()));
+//				byte[] tid_name = Xto_display_name(Xow_domain_.Tid__get_bry(domain_itm.Domain_tid()));
 //				sql_bfr
 //					.Add_byte(Byte_ascii.Paren_bgn)
 //					.Add_int_variable(counter++)
@@ -95,10 +95,10 @@ public class Wmf_dump_list_parser_tst {
 ////			Io_mgr._.AppendFilBfr(temp, bld_bfr);
 //		}
 //		private static byte[] Xto_display_name(byte[] v) {
-//			if		(Bry_.Eq(v, Xow_domain_.Tid_bry_wikimediafoundation_bry))	return Bry_.new_ascii_("Wikimedia Foundation");
-//			else if	(Bry_.Eq(v, Xow_domain_.Tid_bry_species_bry))				return Bry_.new_ascii_("Wikispecies");
-//			else if	(Bry_.Eq(v, Xow_domain_.Tid_bry_mediawiki_bry))			return Bry_.new_ascii_("MediaWiki");
-//			else																	return Bry_.Add(Byte_ascii.Case_upper(v[0]), Bry_.Mid(v, 1, v.length));
+//			if		(Bry_.Eq(v, Xow_domain_.Tid_bry_wikimediafoundation))	return Bry_.new_ascii_("Wikimedia Foundation");
+//			else if	(Bry_.Eq(v, Xow_domain_.Tid_bry_species))				return Bry_.new_ascii_("Wikispecies");
+//			else if	(Bry_.Eq(v, Xow_domain_.Tid_bry_mediawiki))				return Bry_.new_ascii_("MediaWiki");
+//			else															return Bry_.Add(Byte_ascii.Case_upper(v[0]), Bry_.Mid(v, 1, v.length));
 //		}
 }
 class Wmf_dump_list_parser_fxt {

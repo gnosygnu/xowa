@@ -34,7 +34,7 @@ public class Xoh_js_cleaner {
 		Bry_bfr bfr = null;
 		boolean dirty = false;
 		try {
-			bfr = wiki.Utl_bry_bfr_mkr().Get_m001();
+			bfr = wiki.Utl__bfr_mkr().Get_m001();
 			int pos = bgn;
 			while (pos < end) {
 				byte b = src[pos];

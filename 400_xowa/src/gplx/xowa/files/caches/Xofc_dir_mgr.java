@@ -22,7 +22,7 @@ class Xofc_dir_mgr {
 	private final OrderedHash hash_by_names = OrderedHash_.new_bry_(); private final HashAdp hash_by_ids = HashAdp_.new_();
 	private Xof_cache_mgr cache_mgr;
 	public Xofc_dir_mgr(Xof_cache_mgr v) {this.cache_mgr = v;}
-	public void Conn_(Db_conn v, boolean created, boolean version_is_1) {tbl.Conn_(v, created, version_is_1);}
+	public void Conn_(Db_conn v, boolean created, boolean schema_is_1) {tbl.Conn_(v, created, schema_is_1);}
 	public Xofc_dir_itm Get_by_id(int id) {return (Xofc_dir_itm)hash_by_ids.Fetch(id);}
 	public Xofc_dir_itm Get_by_name_or_make(byte[] name) {
 		Xofc_dir_itm itm = Get_by_name_or_null(name);

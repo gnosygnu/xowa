@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files.origs; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.wmfs.apis.*;
 public class Xof_orig_wkr__wmf_api implements Xof_orig_wkr {
-	private final Xoapi_orig_base orig_api; private final Xof_download_wkr download_wkr; private final Xowe_repo_mgr repo_mgr; private final byte[] wiki_domain;
+	private final Xoapi_orig_base orig_api; private final Xof_download_wkr download_wkr; private final Xow_repo_mgr repo_mgr; private final byte[] wiki_domain;
 	private final Xoapi_orig_rslts api_rv = new Xoapi_orig_rslts();		
-	public Xof_orig_wkr__wmf_api(Xoapi_orig_base orig_api, Xof_download_wkr download_wkr, Xowe_repo_mgr repo_mgr, byte[] wiki_domain) {
+	public Xof_orig_wkr__wmf_api(Xoapi_orig_base orig_api, Xof_download_wkr download_wkr, Xow_repo_mgr repo_mgr, byte[] wiki_domain) {
 		this.orig_api = orig_api; this.download_wkr = download_wkr; this.repo_mgr = repo_mgr; this.wiki_domain = wiki_domain;
 	}
 	public byte Tid() {return Xof_orig_wkr_.Tid_wmf_api;}
@@ -38,6 +38,8 @@ public class Xof_orig_wkr__wmf_api implements Xof_orig_wkr {
 		return rv;
 	}
 	public boolean Add_orig(byte repo, byte[] page, int ext_id, int w, int h, byte[] redirect) {return false;}
+	public void				Db_txn_save() {}
+	public void				Db_rls() {}
 	public static Xof_ext Ext__handle_ogg(Xof_ext ext, int w, int h) {
 		if (!ext.Id_is_ogg()) return ext;
 		boolean is_audio = w == 0 && h == 0; // wmf returns back w/h of 0 if audio; non-0 if video; DATE:2013-11-11

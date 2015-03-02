@@ -19,7 +19,7 @@ package gplx.xowa.bldrs.files; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.dbs.tbls.*; import gplx.xowa.pages.*;
 import gplx.xowa.wikis.*;
 import gplx.xowa.bldrs.oimgs.*; import gplx.xowa.files.*; import gplx.xowa.gui.*;
-import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.hdumps.*;
+import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.html.hdumps.bldrs.*;
 import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.xowa.files.fsdb.*; import gplx.fsdb.meta.*;
 public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink_logger {
@@ -65,6 +65,7 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 		gplx.xowa.xtns.scores.Score_xnde.Log_wkr = log_mgr.Make_wkr();
 		gplx.xowa.xtns.hieros.Hiero_xnde.Log_wkr = log_mgr.Make_wkr();
 		Xof_fsdb_mgr__sql trg_fsdb_mgr = new Xof_fsdb_mgr__sql();
+		wiki.File_mgr__fsdb_mode().Tid_make_y_();
 		trg_fsdb_mgr.Init_by_wiki(wiki);
 		Fsm_mnt_mgr trg_mnt_mgr = trg_fsdb_mgr.Mnt_mgr();
 		trg_mnt_mgr.Insert_to_mnt_(Fsm_mnt_mgr.Mnt_idx_main);

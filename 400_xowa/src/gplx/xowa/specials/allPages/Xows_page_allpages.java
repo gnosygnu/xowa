@@ -85,7 +85,7 @@ public class Xows_page_allpages implements GfoInvkAble, Bry_fmtr_arg, Xows_page 
 		init_ns = wiki.Ns_mgr().Ns_main();
 		arg_hash.Load(url);
 		byte[] from_val = Get_from(arg_hash, wiki, url, ttl); if (from_val == null) return false;
-		from_val = Xoa_app_.Utl_encoder_mgr().Id().Decode(from_val);
+		from_val = Xoa_app_.Utl__encoder_mgr().Id().Decode(from_val);
 		int ns_val = arg_hash.Get_val_int_or(Bry_arg_ns, init_ns.Id()); init_ns = wiki.Ns_mgr().Ids_get_or_null(ns_val);
 		boolean hide_redirects_val = arg_hash.Get_val_int_or(Bry_arg_hideredirects, 0) == 1; 
 		for (int i = 0; i < itms_per_page; i++)
@@ -115,7 +115,7 @@ public class Xows_page_allpages implements GfoInvkAble, Bry_fmtr_arg, Xows_page 
 	private static final byte[] Bry_arg_from = Bry_.new_ascii_("from"), Bry_arg_ns = Bry_.new_ascii_("namespace"), Bry_arg_hideredirects = Bry_.new_ascii_("hideredirects");
 	public Xow_ns Init_ns() {return init_ns;} private Xow_ns init_ns;
 	public void Build_html(Xoae_page page) {
-		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_m001();
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
 		byte[] anchor_prv = Build_html_end(tmp_bfr, rslt_prv, false);
 		byte[] anchor_nxt = Build_html_end(tmp_bfr, rslt_nxt, true);
 		html_all.Bld_bfr_many(tmp_bfr, this, anchor_prv, anchor_nxt);
@@ -127,10 +127,10 @@ public class Xows_page_allpages implements GfoInvkAble, Bry_fmtr_arg, Xows_page 
 		Xoa_ttl ttl = Xows_page_allpages.ttl_(wiki, init_ns, itm); if (ttl == null) return Bry_.Empty;	// occurs when range is empty; EX: Module:A in simplewikibooks
 		int msg_id = fwd ? Xol_msg_itm_.Id_sp_allpages_fwd : Xol_msg_itm_.Id_sp_allpages_bwd;
 		Xol_msg_itm msg_itm = wiki.Lang().Msg_mgr().Itm_by_id_or_null(msg_id);
-		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b512().Mkr_rls();
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512().Mkr_rls();
 		byte[] lbl_text = msg_itm.Fmt(tmp_bfr, ttl.Full_txt());
 		byte[] args__rest = arg_hash.Concat(tmp_bfr, Bry_arg_ns, Bry_arg_hideredirects);
-		byte[] arg_from = Xoa_app_.Utl_encoder_mgr().Id().Encode(ttl.Page_txt_wo_qargs());
+		byte[] arg_from = Xoa_app_.Utl__encoder_mgr().Id().Encode(ttl.Page_txt_wo_qargs());
 		return html_list_end.Bld_bry_many(bfr, arg_from, args__rest, lbl_text);
 	}
 	public static Xoa_ttl ttl_(Xowe_wiki wiki, Xow_ns ns, Xodb_page itm) {

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.fsdb.tsts; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
-import gplx.fsdb.*; import gplx.dbs.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.cnvs.*; import gplx.xowa.files.exts.*;
+import gplx.fsdb.*; import gplx.dbs.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.cnvs.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.gui.*;
 import gplx.xowa.wikis.*; import gplx.xowa.files.repos.*;
 import gplx.fsdb.data.*;
 class Xof_file_fxt {		
@@ -29,7 +29,9 @@ class Xof_file_fxt {
 		Xoa_test_.Db_init(fsys_db);
 		app = Xoa_app_fxt.app_(Op_sys.Cur().Os_name(), fsys_db);
 		Xowe_wiki wiki = Xoa_app_fxt.wiki_tst_(app);
+		wiki.File_mgr__fsdb_mode().Tid_make_y_();
 		Xof_repo_fxt.Repos_init(app.File_mgr(), true, wiki);
+		wiki.Db_mgr_create_as_sql();		// NOTE: must create as sql_db_mgr not txt_db_mgr
 		fsdb_mgr = new Xof_fsdb_mgr__sql();	// NOTE: must new Xof_fsdb_mgr__sql b/c it keeps a local init;
 		fsdb_mgr.Init_by_wiki(wiki);
 		fsdb_mgr.Bin_mgr().Wkrs__clear();
@@ -57,7 +59,7 @@ class Xof_file_fxt {
 		Xof_fsdb_itm itm = new Xof_fsdb_itm();
 		itm.Ctor_by_lnki(ttl, ext, md5, arg.Lnki_type(), arg.Lnki_w(), arg.Lnki_h(), Xof_patch_upright_tid_.Tid_all, arg.Lnki_upright(), arg.Lnki_time(), Xof_doc_page.Null);
 		ListAdp itms_list = ListAdp_.new_(); itms_list.Add(itm);
-		fsdb_mgr.Fsdb_search_by_list(arg.Exec_tid(), itms_list, Xoae_page.Empty);
+		fsdb_mgr.Fsdb_search_by_list(arg.Exec_tid(), itms_list, Xoae_page.Empty, Xog_js_wkr_.Null);
 		if (arg.Rslt_orig() != Xof_orig_wkr_.Status_null)	Tfds.Eq(arg.Rslt_orig(), itm.Orig_status(), "rslt_orig");
 		if (arg.Rslt_fsdb() != Xof_bin_wkr_.Tid_null)		Tfds.Eq(arg.Rslt_fsdb(), itm.Rslt_bin(), "rslt_fsdb");
 		if (arg.Rslt_conv() != Xof_cnv_wkr_.Tid_null)		Tfds.Eq(arg.Rslt_conv(), itm.Rslt_cnv(), "rslt_conv");

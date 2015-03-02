@@ -20,4 +20,5 @@ public interface Xow_repo_mgr {
 	Xof_repo_pair		Repos_get_at(int i);
 	Xof_repo_pair		Repos_get_by_id(int id);
 	Xof_repo_pair		Repos_get_by_wiki(byte[] wiki);
+	Xof_repo_pair[]		Repos_ary();
 }

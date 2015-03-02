@@ -16,8 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
-import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.gfui.*; import gplx.html.*; import gplx.xowa.gui.menus.*; import gplx.xowa.gui.menus.dom.*; import gplx.xowa.html.modules.*; import gplx.xowa.pages.*;
-public class Xog_html_itm implements GfoInvkAble, GfoEvObj {
+import gplx.core.primitives.*; import gplx.core.btries.*;
+import gplx.gfui.*; import gplx.xowa.gui.menus.*; import gplx.xowa.gui.menus.dom.*; import gplx.xowa.files.gui.*;
+import gplx.html.*; import gplx.xowa.html.modules.*; import gplx.xowa.pages.*;
+public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 	private Xoae_app app;
 	public Xog_html_itm(Xog_tab_itm owner_tab) {
 		this.owner_tab = owner_tab;
@@ -150,7 +152,7 @@ public class Xog_html_itm implements GfoInvkAble, GfoEvObj {
 	private boolean Scroll_page_by_id(String id) {
 		return (id == null) 
 			? false
-			: html_box.Html_elem_scroll_into_view(Xoa_app_.Utl_encoder_mgr().Id().Encode_str(id));
+			: html_box.Html_elem_scroll_into_view(Xoa_app_.Utl__encoder_mgr().Id().Encode_str(id));
 	}
 	public void Js_enabled_(boolean v) {
 		html_box.Html_js_enabled_(v);

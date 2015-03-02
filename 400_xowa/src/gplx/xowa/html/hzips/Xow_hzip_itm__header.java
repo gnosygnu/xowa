@@ -16,11 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import gplx.html.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.hdumps.srls.*;
+import gplx.html.*; import gplx.xowa.wikis.ttls.*;
 public class Xow_hzip_itm__header {
 	private Xow_hzip_mgr hzip_mgr;
 	public Xow_hzip_itm__header(Xow_hzip_mgr hzip_mgr) {this.hzip_mgr = hzip_mgr;}
-	public int Save(Bry_bfr bfr, Xow_hzip_stats stats, byte[] src, int src_len, int bgn, int pos) {// <h2><span class='mw-headline' id='A'>A<xo_hdr_end/></span></h2>
+	public int Save(Bry_bfr bfr, Xodump_stats_itm stats, byte[] src, int src_len, int bgn, int pos) {// <h2><span class='mw-headline' id='A'>A<xo_hdr_end/></span></h2>
 		if (pos >= src_len) return Xow_hzip_mgr.Unhandled;
 		byte hdr_num_byte = src[pos];
 		switch (hdr_num_byte) {

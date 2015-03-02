@@ -64,7 +64,7 @@ public class Scrib_lib_title implements Scrib_lib {
 			ns_bry = Parse_ns(wiki, ns_obj); if (ns_bry == null) throw Err_.new_fmt_("unknown ns: {0}", Object_.Xto_str_strict_or_empty(ns_bry));
 		}
 		if (ns_bry != null) {
-			Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
+			Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
 			ttl_bry = bfr.Add(ns_bry).Add_byte(Byte_ascii.Colon).Add(ttl_bry).Mkr_rls().Xto_bry_and_clear();
 		}
 		Xoa_ttl ttl = Xoa_ttl.parse_(core.Wiki(), ttl_bry);
@@ -82,7 +82,7 @@ public class Scrib_lib_title implements Scrib_lib {
 		byte[] qry_bry = args.Extract_qry_args(wiki, 2);
 		// byte[] proto = Scrib_kv_utl_.Val_to_bry_or(values, 3, null);	// NOTE: Scribunto has more conditional logic around argument 2 and setting protocols; DATE:2014-07-07
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry); if (ttl == null) return rslt.Init_obj(null);
-		Bry_bfr bfr = wiki.Appe().Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr bfr = wiki.Appe().Utl__bfr_mkr().Get_b512();
 		//if (url_func_tid == Pfunc_urlfunc.Tid_full) {
 		//	if (proto == null) proto = Proto_relative;
 		//	Object proto_obj = proto_hash.Fetch(proto); if (proto_obj == null) throw Err_.new_fmt_("protocol is not valid: {0}", proto);
@@ -116,7 +116,7 @@ public class Scrib_lib_title implements Scrib_lib {
 		String ttl_str = args.Pull_str(1);
 		String anchor_str = args.Cast_str_or_null(2);
 		String xwiki_str = args.Cast_str_or_null(3);
-		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_k004();
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_k004();
 		if (xwiki_str != null) tmp_bfr.Add_str(xwiki_str).Add_byte(Byte_ascii.Colon);		
 		if (Bry_.Len_gt_0(ns_bry))	// only prefix ns if available; EX:"Template:Title"; else will get ":Title"; DATE:2014-10-30
 			tmp_bfr.Add(ns_bry).Add_byte(Byte_ascii.Colon);
@@ -159,7 +159,7 @@ public class Scrib_lib_title implements Scrib_lib {
 		// if (!exists) return rslt.Init_obj(KeyVal_.Ary(KeyVal_.new_("exists", false)));	// NOTE: do not reinstate; will exit early if commons is not installed; DATE:2015-01-25; NOTE: Media objects are often flagged as absent in offline mode
 		// NOTE: MW registers image if deleted; XOWA doesn't register b/c needs width / height also, not just image name
 		wiki.File_mgr().Fsdb_mgr().Init_by_wiki(wiki);
-		Xof_orig_itm itm = wiki.File_mgr().Fsdb_mgr().Orig_mgr().Wkrs__get_xowa_db().Find_as_itm(ttl.Page_db());
+		Xof_orig_itm itm = wiki.File_mgr().Fsdb_mgr().Orig_mgr().Find_by_ttl_or_null(ttl.Page_db());
 		if (itm == Xof_orig_itm.Null) return rslt.Init_obj(GetFileInfo_absent);
 		KeyVal[] rv = KeyVal_.Ary
 		( KeyVal_.new_("exists"		, true)

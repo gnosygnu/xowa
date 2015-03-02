@@ -47,7 +47,8 @@ public class IoEngine_system extends IoEngine_base {
 		DeleteFil_lang(fil, url);
 	}
 		@Override public boolean ExistsFil_api(Io_url url) {
-		return new File(url.Xto_api()).exists();
+		File f = new File(url.Xto_api());
+		return f.exists();
 	}
 	@Override public void SaveFilText_api(IoEngine_xrg_saveFilStr mpo) {
 		Io_url url = mpo.Url();
@@ -85,7 +86,11 @@ public class IoEngine_system extends IoEngine_base {
 	@SuppressWarnings("resource")
 	@Override public String LoadFilStr(IoEngine_xrg_loadFilStr args) {
 		Io_url url = args.Url();
-		
+		boolean file_exists = ExistsFil_api(url);			// check if file exists first to avoid throwing exception; note that most callers pass Missing_ignored; DATE:2015-02-24
+		if (!file_exists) {
+			if (args.MissingIgnored()) 	return "";
+			else 						throw Err_Fil_NotFound(url);
+		}		
 		// get reader for file
 		InputStream stream = null;
 		try 	{stream = new FileInputStream(url.Xto_api());}
@@ -600,7 +605,8 @@ class Io_stream_rdr_http implements Io_stream_rdr {
 			if (read_failed) {
 			}
 			else {
-				prog_dlg.Log_wtr().Log_msg_to_url_fmt(session_fil, "download pass: src='~{0}' trg='~{1}'", src_str, xrg.Trg().Raw());
+				if (prog_dlg != null)
+					prog_dlg.Log_wtr().Log_msg_to_url_fmt(session_fil, "download pass: src='~{0}' trg='~{1}'", src_str, xrg.Trg().Raw());
 				xrg.Rslt_(IoEngine_xrg_downloadFil.Rslt_pass);
 			}
 			xrg.Prog_running_(false);

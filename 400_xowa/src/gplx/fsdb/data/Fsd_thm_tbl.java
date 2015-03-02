@@ -23,10 +23,10 @@ public class Fsd_thm_tbl {
 	private String fld_id, fld_owner_id, fld_w, fld_h, fld_time, fld_page, fld_bin_db_id, fld_size, fld_modified, fld_hash, fld_thumbtime;		
 	private Db_conn conn; private Db_stmt stmt_insert, stmt_select_by_fil_w;
 	private Fsm_atr_fil atr_fil;		
-	public void Conn_(Db_conn new_conn, boolean created, boolean version_is_1, Fsm_atr_fil atr_fil) {
+	public void Conn_(Db_conn new_conn, boolean created, boolean schema_is_1, Fsm_atr_fil atr_fil) {
 		this.conn = new_conn; flds.Clear(); this.atr_fil = atr_fil;
 		String fld_prefix = "";
-		if (version_is_1) {
+		if (schema_is_1) {
 			tbl_name		= "fsdb_xtn_thm";
 			fld_prefix		= "thm_";
 		}

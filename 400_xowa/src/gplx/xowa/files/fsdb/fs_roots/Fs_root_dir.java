@@ -80,14 +80,14 @@ class Fs_root_dir {
 	private static final String Db_conn_bldr_type = "gplx.xowa.fs_root";
 	private Db_conn Init_db_fil_mgr() {
 		Io_url db_url = url.GenSubFil("^orig_regy.sqlite3");
-		boolean created = false; boolean version_is_1 = Bool_.Y;
+		boolean created = false; boolean schema_is_1 = Bool_.Y;
 		Db_conn conn = Db_conn_bldr.I.Get(Db_conn_bldr_type, db_url);
 		if (conn == null) {
 			conn = Db_conn_bldr.I.New(Db_conn_bldr_type, db_url);
 			created = true;
 		}
-		cfg_tbl.Conn_(conn, created, version_is_1, Fsm_abc_mgr.Cfg_tbl_v1, Fsm_abc_mgr.Cfg_tbl_v2);
-		fil_tbl.Conn_(conn, created, version_is_1);
+		cfg_tbl.Conn_(conn, created, schema_is_1, Fsm_abc_mgr.Cfg_tbl_v1, Fsm_abc_mgr.Cfg_tbl_v2);
+		fil_tbl.Conn_(conn, created, schema_is_1);
 		if (created)
 			cfg_tbl.Insert(Cfg_grp_root_dir, Cfg_key_fil_id_next, Int_.Xto_str(fil_id_next));
 		else {

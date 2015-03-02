@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.ios.*; import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.dbs.*; import gplx.xowa.dbs.tbls.*;
+import gplx.ios.*;
+import gplx.xowa.wikis.data.*; import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.dbs.*; import gplx.xowa.dbs.tbls.*;
 public class Xob_search_sql_wkr extends Xob_search_base implements Io_make_cmd {
 	public Xob_search_sql_wkr(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);} private Xodb_mgr_sql db_mgr = null;
 	@Override public String Wkr_key() {return KEY;} public static final String KEY = "import.sql.search_title.wkr";
@@ -25,9 +26,9 @@ public class Xob_search_sql_wkr extends Xob_search_base implements Io_make_cmd {
 	public void Sort_bgn() {
 		db_mgr = wiki.Db_mgr_as_sql();
 		boolean created = false;
-		Xodb_file search_db = db_mgr.Fsys_mgr().Get_tid_root(Xodb_file_tid.Tid_search);
+		Xowd_db_file search_db = db_mgr.Core_data_mgr().Dbs__get_by_tid_1st(Xowd_db_file_.Tid_search);
 		if (search_db == null) {
-			search_db = db_mgr.Fsys_mgr().Make(Xodb_file_tid.Tid_search);
+			search_db = db_mgr.Core_data_mgr().Dbs__add_new(Xowd_db_file_.Tid_search);
 			created = true;
 		}
 		conn = search_db.Conn();

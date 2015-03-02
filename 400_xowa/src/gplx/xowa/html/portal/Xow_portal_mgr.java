@@ -40,13 +40,13 @@ public class Xow_portal_mgr implements GfoInvkAble {
 		Xoapi_skins skins = wiki.Appe().Api_root().Html().Skins();
 		api_skin = wiki.Appe().Mode() == Xoa_app_.Mode_gui ? skins.Desktop() : skins.Server();
 		Bry_fmtr_eval_mgr eval_mgr = wiki.Eval_mgr();
-		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
 		Init_fmtr(tmp_bfr, eval_mgr, div_view_fmtr);
 		Init_fmtr(tmp_bfr, eval_mgr, div_ns_fmtr);
 		byte[] wiki_user_name = wiki.User().Name();
 		div_personal_bry = Init_fmtr(tmp_bfr, eval_mgr, div_personal_fmtr, Bry_.Add(Xoh_href_parser.Href_wiki_bry, wiki.Ns_mgr().Ids_get_or_null(Xow_ns_.Id_user).Name_db_w_colon(), wiki_user_name), wiki_user_name, Ns_cls_by_id(wiki.Ns_mgr(), Xow_ns_.Id_user), Bry_.Add(Xoh_href_parser.Href_wiki_bry, wiki.Ns_mgr().Ids_get_or_null(Xow_ns_.Id_user_talk).Name_db_w_colon(), wiki_user_name), Ns_cls_by_id(wiki.Ns_mgr(), Xow_ns_.Id_user_talk));
 		byte[] main_page_href_bry = tmp_bfr.Add(Xoh_href_parser.Href_site_bry).Add(wiki.Domain_bry()).Add(Xoh_href_parser.Href_wiki_bry).Xto_bry_and_clear();	// NOTE: build /site/en.wikipedia.org/wiki/ href; no Main_Page, as that will be inserted by Xoh_href_parser
-		div_logo_bry = Init_fmtr(tmp_bfr, eval_mgr, div_logo_fmtr, main_page_href_bry, Xoa_app_.Utl_encoder_mgr().Fsys().Encode_http(wiki.Appe().User().Fsys_mgr().Wiki_root_dir().GenSubFil_nest(wiki.Domain_str(), "html", "logo.png")));
+		div_logo_bry = Init_fmtr(tmp_bfr, eval_mgr, div_logo_fmtr, main_page_href_bry, Xoa_app_.Utl__encoder_mgr().Fsys().Encode_http(wiki.Appe().User().Fsys_mgr().Wiki_root_dir().GenSubFil_nest(wiki.Domain_str(), "html", "logo.png")));
 		div_home_bry = Init_fmtr(tmp_bfr, eval_mgr, div_home_fmtr);
 		div_wikis_fmtr.Eval_mgr_(eval_mgr);
 		Xow_msg_mgr msg_mgr = wiki.Msg_mgr();

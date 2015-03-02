@@ -62,7 +62,7 @@ class Xodb_upgrade_mgr {
 //					++types;
 //				}
 //			}	finally {rdr.Rls(); stmt.Rls();}
-//			boolean version_is_1 = types <= 1;	// if 0 or 1 types assume version_1 (1=page only; 0=not set up)
+//			boolean schema_is_1 = types <= 1;	// if 0 or 1 types assume version_1 (1=page only; 0=not set up)
 //			db_mgr.Category_version_update(true);	// assume version_1; will be wrong if user actually did version_2, but currently version_1 vs version_2 has no 
 //		}
 //	}

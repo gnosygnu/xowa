@@ -52,7 +52,7 @@ class Xosrh_html_mgr implements GfoInvkAble {
 		byte[] search_results_header = wiki.Msg_mgr().Val_by_id_args(Xol_msg_itm_.Id_search_results_header, num_mgr.Format_num(itms_bgn), num_mgr.Format_num(core.Page_mgr().Itms_end()), num_mgr.Format_num(grp.Itms_total()), search_bry, pages_len);
 		html_all_bgn.Bld_bfr_many(bfr, search_results_header, search_bry, xowa_idx_bwd, xowa_idx_fwd);
 		Xow_ns_mgr ns_mgr = wiki.Ns_mgr();
-		Bry_bfr tmp_ttl_bfr = core.Wiki().Appe().Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr tmp_ttl_bfr = core.Wiki().Appe().Utl__bfr_mkr().Get_b512();
 		for (int i = 0; i < itms_len; i++) {
 			Xodb_page itm = grp.Itms_get_at(i);
 			byte[] itm_ttl = Xoa_ttl.Replace_unders(itm.Ttl_wo_ns());

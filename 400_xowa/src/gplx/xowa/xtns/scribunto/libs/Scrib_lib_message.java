@@ -100,7 +100,7 @@ class Scrib_lib_message_data {
 		}
 		if (raw_msg_key != null) {
 			Xol_msg_itm raw_msg_itm = new Xol_msg_itm(-1, Bry_.Empty);
-			Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
+			Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
 			byte[] raw_msg_val = gplx.xowa.apps.Xoa_gfs_php_mgr.Xto_gfs(tmp_bfr, raw_msg_key);
 			Xol_msg_itm_.update_val_(raw_msg_itm, raw_msg_val);
 			byte[] raw_msg_rv = wiki.Msg_mgr().Val_by_itm(tmp_bfr, raw_msg_itm, args);
@@ -128,8 +128,10 @@ class Scrib_lib_message_data {
 	}
 	public byte[] Make_msg(byte[] cur_lang, Xowe_wiki wiki, Xop_ctx ctx, boolean exec_params, byte fmt_tid) {
 		byte[] msg_val = Fetch_msg(cur_lang, wiki, ctx, exec_params);
-		if (Bry_.Len_eq_0(msg_val)) {
-			Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
+		if (	Bry_.Len_eq_0(msg_val)	// msg_key returned empty/null msg_val; assume not found 
+			&&	raw_msg_key == null		// ignore if raw_msg; note that raw_msg can generate empty String; EX:raw_msg={{empty}} -> ""; PAGE:it.w:L'Internazionale DATE:2015-02-25
+			) {	
+			Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
 			bfr.Add(gplx.html.Html_entity_.Lt_bry).Add(msg_key).Add(gplx.html.Html_entity_.Gt_bry);	// NOTE: Message.php has logic that says: if plain, "< >", else "&lt; &gt;"; for now, always use escaped
 			return bfr.Mkr_rls().Xto_bry_and_clear();
 		}
@@ -138,7 +140,7 @@ class Scrib_lib_message_data {
 			case Fmt_tid_text:			// NOTE: not sure what this does; seems to be a "lighter" parser
 				break;
 			case Fmt_tid_parseAsBlock:	// NOTE: MW passes msg_val through parser and strips <p> if tid==parse; XOWA does the opposite, so add <p> if parseAsBlock requested
-				Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
+				Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
 				msg_val = bfr.Add(Html_tag_.P_lhs).Add(msg_val).Add(Html_tag_.P_rhs).Mkr_rls().Xto_bry_and_clear();
 				break;
 			case Fmt_tid_escaped:

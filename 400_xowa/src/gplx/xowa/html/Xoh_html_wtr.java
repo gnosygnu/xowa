@@ -441,7 +441,7 @@ public class Xoh_html_wtr {
 	private void Write_xnde(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, Xop_xnde_tag tag, int tag_id, byte[] src) {
 		byte[] name = tag.Name_bry();
 		boolean at_bgn = true;
-		Bry_bfr ws_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();					// create separate ws_bfr to handle "a<b> c </b>d" -> "a <b>c</b> d"
+		Bry_bfr ws_bfr = wiki.Utl__bfr_mkr().Get_b512();					// create separate ws_bfr to handle "a<b> c </b>d" -> "a <b>c</b> d"
 		int subs_len = xnde.Subs_len();
 		for (int i = 0; i < subs_len; i++) {
 			Xop_tkn_itm sub = xnde.Subs_get(i);
@@ -522,7 +522,7 @@ public class Xoh_html_wtr {
 		bfr.Add_byte(quote_byte);
 	}
 	private static void Xnde_atr_write_id(Bry_bfr bfr, Xoae_app app, byte[] bry, int bgn, int end) {
-		Xoa_app_.Utl_encoder_mgr().Id().Encode(bfr, bry, bgn, end);
+		Xoa_app_.Utl__encoder_mgr().Id().Encode(bfr, bry, bgn, end);
 	}
 	private void Xnde_subs(Xop_ctx ctx, Xoh_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {
 		int subs_len = xnde.Subs_len();

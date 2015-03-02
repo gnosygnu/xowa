@@ -16,9 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.dbs.*; import gplx.gfui.*; 
+import gplx.dbs.*; import gplx.ios.*; import gplx.gfui.*; 
 import gplx.xowa.apps.*; import gplx.xowa.langs.*; import gplx.xowa.users.*;
-import gplx.xowa.hdumps.*; import gplx.xowa.hdumps.core.*;
+import gplx.xowa.html.hdumps.*; import gplx.xowa.html.hdumps.core.*;
 import gplx.xowa.urls.encoders.*;
 public class Xoa_app_ {
 	public static void Run(String... args) {
@@ -26,7 +26,7 @@ public class Xoa_app_ {
 		boot_mgr.Run(args);
 	}
 	public static final String Name = "xowa";
-	public static final String Version = "2.2.4.1";
+	public static final String Version = "2.3.1.1";
 	public static String Build_date = "2012-12-30 00:00:00";
 	public static String Op_sys;
 	public static String User_agent = "";
@@ -41,8 +41,9 @@ public class Xoa_app_ {
 
 	public static byte Mode = Xoa_app_.Mode_console;
 	public static Gfo_usr_dlg		Usr_dlg()			{return usr_dlg;}			public static void Usr_dlg_(Gfo_usr_dlg v) {usr_dlg = v;} private static Gfo_usr_dlg usr_dlg;
-	public static Bry_bfr_mkr		Utl_bry_bfr_mkr()	{return utl_bry_bfr_mkr;}	private static final Bry_bfr_mkr utl_bry_bfr_mkr = new Bry_bfr_mkr();
-	public static Url_encoder_mgr	Utl_encoder_mgr()	{return encoder_mgr;}		private static final Url_encoder_mgr encoder_mgr = new Url_encoder_mgr();
+	public static Bry_bfr_mkr		Utl__bfr_mkr()		{return utl__bry_bfr_mkr;}	private static final Bry_bfr_mkr utl__bry_bfr_mkr = new Bry_bfr_mkr();
+	public static Url_encoder_mgr	Utl__encoder_mgr()	{return utl__encoder_mgr;}	private static final Url_encoder_mgr utl__encoder_mgr = new Url_encoder_mgr();
+	public static Io_stream_zip_mgr Utl__zip_mgr()		{return utl__zip_mgr;}		private static final Io_stream_zip_mgr utl__zip_mgr = new Io_stream_zip_mgr();
 
 	public static Xoa_gfs_mgr		Gfs_mgr() {return gfs_mgr;}		public static void Gfs_mgr_(Xoa_gfs_mgr v) {gfs_mgr = v;} private static Xoa_gfs_mgr gfs_mgr;
 //		public static Xoa_lang_mgr		Lang_mgr() {return lang_mgr;}	public static void Lang_mgr_(Xoa_lang_mgr v) {lang_mgr = v;} private static Xoa_lang_mgr lang_mgr;

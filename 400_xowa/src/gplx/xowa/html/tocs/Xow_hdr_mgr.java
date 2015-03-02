@@ -59,7 +59,7 @@ public class Xow_hdr_mgr {
 	}
 	private void Reg(Xop_ctx ctx, Xop_hdr_tkn hdr, byte[] src) {
 		if (hdrs_len == 0) hdr.Hdr_html_first_y_();
-		Bry_bfr_mkr bfr_mkr = Xoa_app_.Utl_bry_bfr_mkr();
+		Bry_bfr_mkr bfr_mkr = Xoa_app_.Utl__bfr_mkr();
 		Bry_bfr raw_bfr = bfr_mkr.Get_b128(), enc_bfr = bfr_mkr.Get_b128();
 		Id_bld_recurse(raw_bfr, src, hdr);
 		Url_encoder encoder = encoder_mgr.Id();

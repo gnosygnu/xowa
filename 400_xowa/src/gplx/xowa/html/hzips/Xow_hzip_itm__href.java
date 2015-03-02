@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import gplx.core.btries.*;
 class Xow_hzip_itm__href {
-	public void Save(Bry_bfr bfr, Xow_hzip_stats stats, byte[] src, int src_len, int bgn, int pos, byte bgn_quote) {
+	public void Save(Bry_bfr bfr, Xodump_stats_itm stats, byte[] src, int src_len, int bgn, int pos, byte bgn_quote) {
 //			// ignore anchors; EX: "#a"
 //			int proto_bgn	= pos;
 //			int proto_end	= Bry_finder.Find_fwd(src, Byte_ascii.Colon, proto_bgn, src_len);

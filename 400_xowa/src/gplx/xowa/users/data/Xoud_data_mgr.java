@@ -19,18 +19,18 @@ package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.threads.*; import gplx.dbs.*; import gplx.dbs.schemas.updates.*; import gplx.dbs.schemas.*;
 import gplx.xowa2.users.data.*;
 public class Xoud_data_mgr {
-//		private Gfdb_db_base user_db = new Gfdb_db_base();
-	public Xoud_site_mgr		Site_mgr() {return site_mgr;} private final Xoud_site_mgr site_mgr = new Xoud_site_mgr();
-	public Xoud_regy_mgr		Regy_mgr() {return regy_mgr;} private final Xoud_regy_mgr regy_mgr = new Xoud_regy_mgr();
+	private final Xoud_id_mgr id_mgr;
+	public Xoud_data_mgr() {
+		id_mgr = new Xoud_id_mgr(cfg_mgr);
+		site_mgr = new Xoud_site_mgr(id_mgr);
+	}
+	public Xoud_cfg_mgr			Cfg_mgr() {return cfg_mgr;} private final Xoud_cfg_mgr cfg_mgr = new Xoud_cfg_mgr();
+	public Xoud_site_mgr		Site_mgr() {return site_mgr;} private final Xoud_site_mgr site_mgr;
 	public Xoud_history_mgr		History_mgr() {return history_mgr;} private final Xoud_history_mgr history_mgr = new Xoud_history_mgr();
-	public void Init_by_boot(Db_conn user_conn, boolean created) {
-//			user_db.Schema().Loader_(Schema_loader_mgr_.Sqlite);
-//			Init_user_db_changes(user_db.Schema().Updater());
-		int user_id = 1;
+	public void Init_by_boot(Db_conn user_conn, boolean created, int user_id) {
+		cfg_mgr.Conn_(user_conn, created, user_id);
 		site_mgr.Conn_(user_conn, created, user_id);
-		history_mgr.History_tbl().Conn_(user_conn, created, user_id);
-//			user_db.Init(user_conn);
-//			regy_mgr.Init(user_conn);
+		history_mgr.Conn_(user_conn, created, user_id);
 	}
 //		private void Init_user_db_changes(Schema_update_mgr updater) {
 //			updater.Add(Schema_update_cmd_.Make_tbl_create(Xoud_regy_tbl.Tbl_name	, Xoud_regy_tbl.Tbl_sql		, Xoud_regy_tbl.Idx_core));

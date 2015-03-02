@@ -377,7 +377,7 @@ public class Xop_fxt {
 		}
 	}
 	public void Test_html_modules_js(String expd) {
-		Bry_bfr bfr = app.Utl_bry_bfr_mkr().Get_k004();
+		Bry_bfr bfr = app.Utl__bfr_mkr().Get_k004();
 		this.Page().Html_data().Module_mgr().Init(app, wiki, this.Page());
 		this.Page().Html_data().Module_mgr().XferAry(bfr, 0);
 		bfr.Mkr_rls();

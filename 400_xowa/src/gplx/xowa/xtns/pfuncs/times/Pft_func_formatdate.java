@@ -33,7 +33,7 @@ public class Pft_func_formatdate extends Pf_func_base {
 			bfr.Add(date_bry);
 			return;
 		}
-		DateAdp date = Pft_func_time.ParseDate(date_bry, false, ctx.App().Utl_bry_bfr_mkr().Get_b512().Mkr_rls());
+		DateAdp date = Pft_func_time.ParseDate(date_bry, false, ctx.App().Utl__bfr_mkr().Get_b512().Mkr_rls());
 		if (date == null) {bfr.Add(date_bry); return;}	// date not parseable; return self; DATE:2014-04-13
 		date_bldr.Format(bfr, ctx.Wiki(), ctx.Lang(), date, (Pft_fmt_itm[])o);
 	}

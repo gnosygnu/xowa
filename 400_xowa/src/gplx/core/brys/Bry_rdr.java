@@ -75,9 +75,10 @@ public class Bry_rdr {
 		}
 		return bgn == pos ? or_bry : Bry_.Mid(src, bgn, src_len);
 	}
-	public boolean Read_yn_to_pipe() {
-		boolean rv = src[pos] == Byte_ascii.Ltr_y;
-		pos += 2;	// 1 for y/n; 1 for pipe
+	public boolean Read_yn_to_pipe() {return Read_byte_to_pipe() == Byte_ascii.Ltr_y;}
+	public byte Read_byte_to_pipe() {
+		byte rv = src[pos];
+		pos += 2;	// 1 for byte; 1 for pipe;
 		return rv;
 	}
 	public double Read_double_to_pipe() {return Read_double_to(Byte_ascii.Pipe);}

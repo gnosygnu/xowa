@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.files.repos.*;
+import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*;
 public class Xof_url_bldr {
 	private final Bry_bfr bfr = Bry_bfr.reset_(400);
 	private byte[] ttl; private byte[] md5; private Xof_ext ext; private boolean file_is_thumb; private int file_w;
@@ -63,6 +63,14 @@ public class Xof_url_bldr {
 	public byte[] Xto_bry() {Bld(); byte[] rv = bfr.Xto_bry_and_clear(); Clear(); return rv;}
 	public String Xto_str() {Bld(); String rv = bfr.Xto_str(); Clear(); return rv;}
 	public Io_url Xto_url() {Bld(); Io_url rv = Io_url_.new_fil_(bfr.Xto_str()); Clear(); return rv;}
+	public Io_url To_url(Xow_repo_mgr repo_mgr, Xof_fsdb_itm itm, boolean orig) {return To_url(repo_mgr.Repos_get_by_wiki(itm.Orig_repo_name()), itm, orig ? Xof_repo_itm.Mode_orig : Xof_repo_itm.Mode_thumb, Bool_.N);}
+	public Io_url To_url(Xof_repo_pair repo_pair, Xof_fsdb_itm itm, boolean orig) {return To_url(repo_pair, itm, orig ? Xof_repo_itm.Mode_orig : Xof_repo_itm.Mode_thumb, Bool_.N);}
+	public Io_url To_url(Xof_repo_pair repo_pair, Xof_fsdb_itm itm, byte mode, boolean src) {
+		return src 
+			? this.Init_for_src_file(mode, repo_pair.Src(), itm.Lnki_ttl(), itm.Lnki_md5(), itm.Lnki_ext(), itm.Html_w(), itm.Lnki_time(), itm.Lnki_page()).Xto_url()
+			: this.Init_for_trg_file(mode, repo_pair.Trg(), itm.Lnki_ttl(), itm.Lnki_md5(), itm.Lnki_ext(), itm.Html_w(), itm.Lnki_time(), itm.Lnki_page()).Xto_url()
+			;
+	}
 	private void Bld() {
 		Add_core();
 		if (file_is_thumb) {

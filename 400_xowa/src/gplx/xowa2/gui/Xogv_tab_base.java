@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa2.gui; import gplx.*; import gplx.xowa2.*;
 import gplx.xowa.*;
-import gplx.xowa.hdumps.core.*; import gplx.xowa.gui.history.*;
+import gplx.xowa.html.hdumps.core.*; import gplx.xowa.gui.history.*;
 import gplx.xowa2.apps.*; import gplx.xowa2.wikis.*; import gplx.xowa2.gui.*; import gplx.xowa2.apps.urls.*;
 public abstract class Xogv_tab_base {
 	private Xog_history_stack history_stack = new Xog_history_stack(); private Gfo_url_parser url_parser;

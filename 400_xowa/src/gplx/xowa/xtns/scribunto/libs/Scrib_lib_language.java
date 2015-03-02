@@ -150,7 +150,7 @@ public class Scrib_lib_language implements Scrib_lib {
 	private boolean Case_1st(Scrib_proc_args args, Scrib_proc_rslt rslt, boolean upper) {
 		Xol_lang lang = lang_(args);
 		byte[] word = args.Pull_bry(1);
-		Bry_bfr bfr = core.Wiki().Appe().Utl_bry_bfr_mkr().Get_b128().Mkr_rls();
+		Bry_bfr bfr = core.Wiki().Appe().Utl__bfr_mkr().Get_b128().Mkr_rls();
 		return rslt.Init_obj(lang.Case_mgr().Case_build_1st(bfr, upper, word, 0, word.length));
 	}
 	public boolean Lc(Scrib_proc_args args, Scrib_proc_rslt rslt) {return Case_all(args, rslt, Bool_.N);}
@@ -181,7 +181,7 @@ public class Scrib_lib_language implements Scrib_lib {
 		byte[] fmt_bry = args.Pull_bry(1);
 		byte[] date_bry = args.Cast_bry_or_empty(2);	// NOTE: optional empty is required b/c date is sometimes null; use Bry_.Empty b/c this is what Pft_func_time.ParseDate takes; DATE:2013-04-05
 		boolean utc = args.Cast_bool_or_n(3);
-		Bry_bfr tmp_bfr = core.App().Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr tmp_bfr = core.App().Utl__bfr_mkr().Get_b512();
 		Pft_fmt_itm[] fmt_ary = Pft_fmt_itm_.Parse(core.Ctx(), fmt_bry);
 		DateAdp date 
 			= Bry_.Len_eq_0(date_bry)
@@ -227,7 +227,7 @@ public class Scrib_lib_language implements Scrib_lib {
 		Xol_lang lang = lang_(args);
 		byte[] word = args.Pull_bry(1);
 		byte[] type = args.Pull_bry(2);
-		Bry_bfr bfr = core.Wiki().Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr bfr = core.Wiki().Utl__bfr_mkr().Get_b512();
 		lang.Grammar().Grammar_eval(bfr, lang, word, type);
 		return rslt.Init_obj(bfr.Mkr_rls().Xto_str_and_clear());
 	}

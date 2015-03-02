@@ -67,7 +67,7 @@ public class Xof_xfer_queue {
 	}
 	private void Exec_v2(byte exec_tid, Gfo_usr_dlg wtr, Xowe_wiki wiki, Xoae_page page) {
 		wiki.File_mgr().Fsdb_mgr().Init_by_wiki(wiki);
-		wiki.File_mgr().Fsdb_mgr().Fsdb_search_by_list(exec_tid, Xfer_itms_to_fsdb_itms(list, wiki.File_mgr().Patch_upright()), page);
+		wiki.File_mgr().Fsdb_mgr().Fsdb_search_by_list(exec_tid, Xfer_itms_to_fsdb_itms(list, wiki.File_mgr().Patch_upright()), page, page.Tab().Html_itm());
 	}
 	private ListAdp Xfer_itms_to_fsdb_itms(ListAdp list, int upright_patch) {
 		ListAdp rv = ListAdp_.new_();
@@ -75,7 +75,7 @@ public class Xof_xfer_queue {
 		for (int i = 0; i < list_len; i++) {
 			Xof_xfer_itm xfer_itm = (Xof_xfer_itm)list.FetchAt(i);
 			Xof_fsdb_itm fsdb_itm = new Xof_fsdb_itm();
-			fsdb_itm.Ctor_by_lnki(xfer_itm.Lnki_ttl(), xfer_itm.Lnki_ext(), xfer_itm.Lnki_md5(), xfer_itm.Lnki_type(), xfer_itm.Lnki_w(), xfer_itm.Lnki_h(), upright_patch, xfer_itm.Lnki_upright(), xfer_itm.Lnki_thumbtime(), xfer_itm.Lnki_page());
+			fsdb_itm.Ctor_by_lnki(xfer_itm.Lnki_ttl(), xfer_itm.Lnki_ext(), xfer_itm.Lnki_md5(), xfer_itm.Lnki_type(), xfer_itm.Lnki_w(), xfer_itm.Lnki_h(), upright_patch, xfer_itm.Lnki_upright(), xfer_itm.Lnki_time(), xfer_itm.Lnki_page());
 			fsdb_itm.Html_uid_(xfer_itm.Html_uid());
 			fsdb_itm.Html_elem_tid_(xfer_itm.Html_elem_tid());
 			fsdb_itm.Gallery_mgr_h_(xfer_itm.Gallery_mgr_h());

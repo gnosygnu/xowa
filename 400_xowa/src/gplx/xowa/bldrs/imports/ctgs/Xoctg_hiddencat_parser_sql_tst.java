@@ -40,7 +40,7 @@ public class Xoctg_hiddencat_parser_sql_tst {
 	private void Init_ctgs(int... ctgs) {
 		int len = ctgs.length;
 		Xodb_category_tbl tbl = fxt.Wiki().Db_mgr_as_sql().Tbl_category();
-		Db_conn conn =  fxt.Wiki().Db_mgr_as_sql().Fsys_mgr().Conn_ctg();
+		Db_conn conn =  fxt.Wiki().Db_mgr_as_sql().Core_data_mgr().Conn_ctg();
 		Db_stmt stmt = tbl.Insert_stmt(conn);
 		try {
 			for (int i = 0; i < len; i++) {
@@ -52,7 +52,7 @@ public class Xoctg_hiddencat_parser_sql_tst {
 	private void Tst_ctg_hidden(boolean expd_hidden, int... ctgs) {
 		int len = ctgs.length;
 		Xodb_category_tbl tbl = fxt.Wiki().Db_mgr_as_sql().Tbl_category();
-		Db_conn conn =  fxt.Wiki().Db_mgr_as_sql().Fsys_mgr().Conn_ctg();
+		Db_conn conn =  fxt.Wiki().Db_mgr_as_sql().Core_data_mgr().Conn_ctg();
 		for (int i = 0; i < len; i++) {
 			int ctg_id = ctgs[i];
 			Xodb_category_itm ctg_itm = tbl.Select(conn, ctg_id);

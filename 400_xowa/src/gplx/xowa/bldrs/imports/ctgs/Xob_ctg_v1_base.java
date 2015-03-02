@@ -25,7 +25,7 @@ public abstract class Xob_ctg_v1_base extends Xob_itm_dump_base implements Xobd_
 	public OrderedHash Wkr_hooks() {return wkr_hooks;} private OrderedHash wkr_hooks = OrderedHash_.new_bry_();
 	public void Wkr_bgn(Xob_bldr bldr) {
 		this.Init_dump(this.Wkr_key(), wiki.Tdb_fsys_mgr().Site_dir().GenSubDir(Xotdb_dir_info_.Name_category));
-		Bry_bfr tmp_bfr = bldr.App().Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr tmp_bfr = bldr.App().Utl__bfr_mkr().Get_b512();
 		Xol_lang lang = wiki.Lang();
 		wkr_hooks_add(tmp_bfr, lang.Ns_names());
 		wkr_hooks_add(tmp_bfr, lang.Ns_aliases());

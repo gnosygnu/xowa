@@ -48,7 +48,7 @@ public class Xoh_href_parser {
 				bgn = file_slash_end = Bry_.While_fwd(raw, Byte_ascii.Slash, tmp_url.Protocol_bry().length, raw_len);
 				rv.Tid_(Xoh_href.Tid_xowa);
 				rv.Wiki_(wiki.Domain_bry());										// wiki is always the current wiki
-				byte[] page = Xoa_app_.Utl_encoder_mgr().Gfs().Decode(Bry_.Mid(raw, bgn, raw_len));
+				byte[] page = Xoa_app_.Utl__encoder_mgr().Gfs().Decode(Bry_.Mid(raw, bgn, raw_len));
 				rv.Page_(page);														// page is everything after "/xcmd/"; individual cmds will do further parsing; note that it should be decoded; EX: %20 -> " "; also note that anchor (#) or query params (?) are not parsed; the entire String will be reparsed later
 				return;
 		}

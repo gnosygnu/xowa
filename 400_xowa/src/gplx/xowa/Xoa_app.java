@@ -18,10 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.xowa.apps.fsys.*;
 import gplx.xowa.files.caches.*; import gplx.xowa.files.imgs.*;
+import gplx.xowa.urls.encoders.*;
 import gplx.xowa.wmfs.*;
 public interface Xoa_app {
 	Xoa_fsys_mgr			Fsys_mgr();
 	Xof_cache_mgr			File_mgr__cache_mgr();
 	Xof_img_mgr				File_mgr__img_mgr();
 	Xowmf_mgr				Wmf_mgr();
+	Gfo_usr_dlg				Usr_dlg();
+	Bry_bfr_mkr				Utl__bfr_mkr();
+	Url_encoder_mgr			Utl__encoder_mgr();
 }

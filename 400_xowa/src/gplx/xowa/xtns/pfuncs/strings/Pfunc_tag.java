@@ -25,7 +25,7 @@ public class Pfunc_tag extends Pf_func_base {
 		byte[] tag_name = Eval_argx(ctx, src, caller, self); if (tag_name.length == 0) return;
 		int args_len = self.Args_len();
 		Xoae_app app = ctx.App();
-		Bry_bfr tmp = app.Utl_bry_bfr_mkr().Get_b512();			
+		Bry_bfr tmp = app.Utl__bfr_mkr().Get_b512();			
 		try {
 			int tag_idx = ++tag__next_id;
 			Xop_xnde_tag tag = (Xop_xnde_tag)app.Xnde_tag_regy().XndeNames(ctx.Xnde_names_tid()).Match_exact(tag_name, 0, tag_name.length);

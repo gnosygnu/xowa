@@ -41,23 +41,23 @@ public class Imap_map implements Xoh_file_img_wkr, Js_img_wkr {
 		xfer_itm.Html_img_wkr_(this);
 		xfer_itm.Html_elem_tid_(Xof_html_elem.Tid_imap);
 		this.a_href = a_href; this.img_alt = img_alt; this.img_cls_tid = img_cls; this.img_cls_other = img_cls_other;
-		Write_imap_div(tmp_bfr, page, hctx, uid, img_w, img_h, img_src, xfer_itm.Orig_w(), xfer_itm.Orig_h(), xfer_itm.Lnki_ttl());
+		Write_imap_div(tmp_bfr, hctx, uid, img_w, img_h, img_src, xfer_itm.Orig_w(), xfer_itm.Orig_h(), xfer_itm.Lnki_ttl());
 	}
-	public void Html_update(Xoae_page page, Xog_html_itm html_itm, int html_uid, int html_w, int html_h, String html_src, int orig_w, int orig_h, String orig_src, byte[] lnki_ttl) {
+	public void Html_update(Xoa_page page, Xog_js_wkr js_wkr, int html_uid, int html_w, int html_h, String html_src, int orig_w, int orig_h, String orig_src, byte[] lnki_ttl) {
 		Xowe_wiki wiki = xtn_mgr.Wiki();
-		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_k004();
-		Write_imap_div(tmp_bfr, page, Xoh_wtr_ctx.Basic, html_uid, html_w, html_h, Bry_.new_utf8_(html_src), orig_w, orig_h, lnki_ttl);
-		html_itm.Html_elem_replace_html("imap_div_" + Int_.Xto_str(html_uid), tmp_bfr.Mkr_rls().Xto_str_and_clear());
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_k004();
+		Write_imap_div(tmp_bfr, Xoh_wtr_ctx.Basic, html_uid, html_w, html_h, Bry_.new_utf8_(html_src), orig_w, orig_h, lnki_ttl);
+		js_wkr.Html_elem_replace_html("imap_div_" + Int_.Xto_str(html_uid), tmp_bfr.Mkr_rls().Xto_str_and_clear());
 	}
-	private void Write_imap_div(Bry_bfr bfr, Xoae_page page, Xoh_wtr_ctx hctx, int html_uid, int html_w, int html_h, byte[] html_src, int orig_w, int orig_h, byte[] lnki_ttl) {
+	private void Write_imap_div(Bry_bfr bfr, Xoh_wtr_ctx hctx, int html_uid, int html_w, int html_h, byte[] html_src, int orig_w, int orig_h, byte[] lnki_ttl) {
 		byte[] desc_style = Calc_desc_style(html_w, html_h);
 		map_fmtr_arg.Init(id, shapes, Calc_scale(orig_w, orig_h, html_w, html_h));
-		img_fmtr_arg.Init(page, hctx, xtn_mgr, this, html_uid, img_alt, html_src, html_w, html_h, Xoh_lnki_consts.Img_cls_to_bry(img_cls_tid, img_cls_other), a_href, lnki_ttl);
+		img_fmtr_arg.Init(hctx, xtn_mgr, this, html_uid, img_alt, html_src, html_w, html_h, Xoh_lnki_consts.Img_cls_to_bry(img_cls_tid, img_cls_other), a_href, lnki_ttl);
 		Imap_html_fmtrs.All.Bld_bfr_many(bfr, html_uid, desc_style, map_fmtr_arg, img_fmtr_arg);
 	}
 	private byte[] Calc_desc_style(int html_w, int html_h) {
 		if (desc == null) return Bry_.Empty;
-		Bry_bfr tmp_bfr = xtn_mgr.Wiki().Utl_bry_bfr_mkr().Get_b128().Mkr_rls();
+		Bry_bfr tmp_bfr = xtn_mgr.Wiki().Utl__bfr_mkr().Get_b128().Mkr_rls();
 		return Imap_html_fmtrs.Desc_style.Bld_bry_many(tmp_bfr, html_w, html_h);
 	}
 	private static final Imap_img_fmtr_arg img_fmtr_arg = new Imap_img_fmtr_arg();

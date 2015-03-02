@@ -557,7 +557,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 	private int Find_xtn_end_tag(Xop_ctx ctx, byte[] src, int src_len, int open_end, byte[] close_bry, int tag_bgn) {
 		int tag_id = Bry_.Xto_int_or(src, tag_bgn, tag_bgn + 10, -1);
 		if (tag_id == -1) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not extract int: page=~{0}", ctx.Cur_page().Url().Xto_full_str_safe()); return Bry_finder.Not_found;}
-		Bry_bfr tmp = ctx.Wiki().Utl_bry_bfr_mkr().Get_b128();
+		Bry_bfr tmp = ctx.Wiki().Utl__bfr_mkr().Get_b128();
 		tmp.Add(Pfunc_tag.Xtag_end_lhs).Add_int_pad_bgn(Byte_ascii.Num_0, 10, tag_id).Add(Pfunc_tag.Xtag_rhs);
 		byte[] tag_end = tmp.Mkr_rls().Xto_bry_and_clear();
 		int rv = Bry_finder.Find_fwd(src, tag_end, open_end + Pfunc_tag.Xtag_rhs.length);

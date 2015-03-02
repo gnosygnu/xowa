@@ -42,6 +42,7 @@ public class Btrie_slim_mgr implements Btrie_mgr {
 	}
 	public Btrie_slim_mgr Add_bry_tid(byte[] bry, byte tid)			{return (Btrie_slim_mgr)Add_obj(bry, Byte_obj_val.new_(tid));}
 	public Btrie_slim_mgr Add_str_byte(String key, byte val)		{return (Btrie_slim_mgr)Add_obj(Bry_.new_utf8_(key), Byte_obj_val.new_(val));}
+	public Btrie_slim_mgr Add_str_int(String key, int val)			{return (Btrie_slim_mgr)Add_obj(Bry_.new_utf8_(key), Int_obj_val.new_(val));}
 	public Btrie_slim_mgr Add_bry(String key, String val)			{return (Btrie_slim_mgr)Add_obj(Bry_.new_utf8_(key), Bry_.new_utf8_(val));}
 	public Btrie_slim_mgr Add_bry(String key, byte[] val)			{return (Btrie_slim_mgr)Add_obj(Bry_.new_utf8_(key), val);}
 	public Btrie_slim_mgr Add_bry(byte[] v)							{return (Btrie_slim_mgr)Add_obj(v, v);}

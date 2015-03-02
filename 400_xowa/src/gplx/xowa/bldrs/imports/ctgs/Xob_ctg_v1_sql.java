@@ -57,7 +57,7 @@ class Xob_ctg_v1_sql_make implements Io_make_cmd {
 	Bry_fmtr fmtr = Bry_fmtr.new_("(~{page_id},'~{cat_name}','','','','','~{cat_type}')\n", "page_id", "cat_name", "cat_type");
 	public static final String Url_sql = "xowa_categorylinks.sql";
 	private static byte[] Escape_for_sql(Xowe_wiki wiki, byte[] bry) {
-		Bry_bfr bfr = wiki.Appe().Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr bfr = wiki.Appe().Utl__bfr_mkr().Get_b512();
 		int len = bry.length;
 		boolean dirty = false;
 		for (int i = 0; i < len; i++) {

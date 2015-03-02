@@ -84,7 +84,7 @@ public class Listing_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 	private boolean Bld_by_template(Xop_xnde_tkn xnde, Xop_xatr_itm[] atrs, byte[] src) {
 		byte[] listings_template = xtn_mgr.Listings_template();
 		if (listings_template == null) return false;
-		Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
 		bfr.Add(Xoa_consts.Invk_bgn);			// "{{"
 		bfr.Add(listings_template);				// name
 		int atrs_len = atrs.length;
@@ -171,7 +171,7 @@ public class Listing_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 			wtr.Txt(xatr_hours).Txt(Txt_dot_space);
 
 		if (xatr_checkin != null || xatr_checkout != null) {
-			Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b128();
+			Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b128();
 			if (xatr_checkin != null) {
 				byte[] checkin_val = xtn_mgr.Checkin_msg().Fmt(tmp_bfr, xatr_checkin);
 				wtr.Txt_raw(checkin_val);
@@ -196,7 +196,7 @@ public class Listing_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 		if (xatr_lat >= Xatr_meridian_null || xatr_long >= Xatr_meridian_null) return null;		// check that lat and long are valid
 		Xol_msg_itm position_template = xtn_mgr.Position_template();
 		if (position_template == null) return null;
-		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b128().Mkr_rls();
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b128().Mkr_rls();
 		byte[] rv = position_template.Fmt(tmp_bfr, xatr_lat, xatr_long);
 		tmp_bfr.Add(Xoa_consts.Invk_bgn);			// "{{"
 		tmp_bfr.Add(rv);							// rv is not message, but actually template precursor

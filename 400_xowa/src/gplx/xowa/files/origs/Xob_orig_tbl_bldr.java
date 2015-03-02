@@ -23,8 +23,10 @@ public class Xob_orig_tbl_bldr extends Xob_itm_basic_base implements Xob_cmd {
 	public String Cmd_key() {return KEY_oimg;} public static final String KEY_oimg = "file.wiki_orig";
 	public void Cmd_ini(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {
+		Xof_fsdb_mode fsdb_mode = wiki.File_mgr__fsdb_mode();
+		fsdb_mode.Tid_make_y_();
 		wiki.Init_assert();
-		conn = Xof_orig_tbl.Conn__get_or_make(wiki.Fsys_mgr().File_dir(), new Xof_orig_tbl(), Bool_.Y);	// NOTE: Xof_orig_tbl needed if db doesn't exist and tbl.meta needs to be created
+		conn = Xof_orig_tbl.Conn__get_or_make(wiki.Fsys_mgr().File_dir(), new Xof_orig_tbl(), Bool_.Y, fsdb_mode);	// NOTE: Xof_orig_tbl needed if db doesn't exist and tbl.meta needs to be created
 		Io_url make_db_url = Xodb_db_file.init__file_make(wiki.Fsys_mgr().Root_dir()).Url();
 		Sqlite_engine_.Db_attach(conn, "make_db", make_db_url.Raw());
 	}

@@ -17,12 +17,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import org.junit.*;
-import gplx.dbs.*; import gplx.xowa2.files.commons.*; import gplx.xowa2.wikis.data.*;
-import gplx.xowa.wikis.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.repos.*;
+import gplx.dbs.*; import gplx.xowa2.files.commons.*; import gplx.xowa.wikis.data.*;
+import gplx.xowa.wikis.*; import gplx.xowa.files.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.repos.*;
 public class Scrib_lib_title_tst {
 	@Before public void init() {
 		Db_conn_bldr.I.Reg_default_mem();
 		fxt.Clear_for_lib();
+		fxt.Core().Wiki().File_mgr__fsdb_mode().Tid_make_y_();
 		lib = fxt.Core().Lib_title().Init();
 	}	private Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt(); private Scrib_lib lib;
 	@Test  public void NewTitle() {
@@ -57,24 +58,24 @@ public class Scrib_lib_title_tst {
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_getExpensiveData, Object_.Ary("A")									, ttl_slow(Bool_.Y, 0, Bool_.N));
 	}
 	@Test   public void GetFileInfo() {
-		Xof_orig_tbl tbl = Wiki_orig_tbl__create(fxt.Core().Wiki());
+		Wiki_orig_tbl__create(fxt.Core().Wiki());
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_getFileInfo, Object_.Ary("A")											, file_info_absent());
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_getFileInfo, Object_.Ary("Template:A")								, file_info_absent());
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_getFileInfo, Object_.Ary("File:A.png")								, file_info_absent());
 		fxt.Parser_fxt().Init_page_create("File:A.png");
-		Wiki_orig_tbl__insert(tbl, "A.png", 220, 200);
+		Wiki_orig_tbl__insert(fxt.Core().Wiki(), "A.png", 220, 200);
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_getFileInfo, Object_.Ary("File:A.png")								, file_info_exists("A.png", 220, 200));
 	}
 	@Test   public void GetFileInfo_commons() {	// PURPOSE: check that Scribunto GetFileInfo calls filepath.FileExists; DATE:2014-01-07
 		Xowe_wiki commons_wiki = fxt.Parser_fxt().Wiki().Appe().Wiki_mgr().Get_by_key_or_make(Xow_domain_.Domain_bry_commons).Init_assert();
-		Xof_orig_tbl tbl = Wiki_orig_tbl__create(fxt.Core().Wiki());
-		Wiki_orig_tbl__insert(tbl, "A.png", 220, 200);
+		Wiki_orig_tbl__create(fxt.Core().Wiki());
+		Wiki_orig_tbl__insert(fxt.Core().Wiki(), "A.png", 220, 200);
 		fxt.Parser_fxt().Init_page_create(commons_wiki, "File:A.png", "text_is_blank");
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_getFileInfo, Object_.Ary("File:A.png")							, file_info_exists("A.png", 220, 200));
 	}
 	@Test   public void GetFileInfo_media() {	// PURPOSE: [[Media:]] ns should find entries in [[File:]]; DATE:2014-01-07
-		Xof_orig_tbl tbl = Wiki_orig_tbl__create(fxt.Core().Wiki());
-		Wiki_orig_tbl__insert(tbl, "A.png", 220, 200);
+		Wiki_orig_tbl__create(fxt.Core().Wiki());
+		Wiki_orig_tbl__insert(fxt.Core().Wiki(), "A.png", 220, 200);
 		fxt.Parser_fxt().Init_page_create("File:A.png");
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_title.Invk_getFileInfo, Object_.Ary("Media:A.png")							, file_info_exists("A.png", 220, 200));
 	}
@@ -94,21 +95,19 @@ public class Scrib_lib_title_tst {
 	@Test   public void CascadingProtection() {
 		fxt.Test_scrib_proc_obj(lib, Scrib_lib_title.Invk_cascadingProtection, Object_.Ary("A")									, Scrib_lib_title.CascadingProtection_rv);
 	}
-	private static Xof_orig_tbl Wiki_orig_tbl__create(Xowe_wiki wiki) {
+	private static void Wiki_orig_tbl__create(Xowe_wiki wiki) {
 		wiki.File_mgr().Fsdb_mgr().Init_by_wiki(wiki);
-		Xof_orig_wkr__orig_db wkr = wiki.File_mgr().Fsdb_mgr().Orig_mgr().Wkrs__get_xowa_db();
-		return wkr.Tbl();
 	}
-	private static void Wiki_orig_tbl__insert(Xof_orig_tbl tbl, String ttl_str, int w, int h) {
+	private static void Wiki_orig_tbl__insert(Xowe_wiki wiki, String ttl_str, int w, int h) {
 		byte[] ttl_bry = Bry_.new_utf8_(ttl_str);
-		tbl.Insert(Xof_repo_itm.Repo_remote, ttl_bry, Xof_ext_.new_by_ttl_(ttl_bry).Id(), w, h, Bry_.Empty);
+		wiki.File_mgr().Fsdb_mgr().Orig_mgr().Insert(Xof_repo_itm.Repo_remote, ttl_bry, Xof_ext_.new_by_ttl_(ttl_bry).Id(), w, h, Bry_.Empty, Xof_orig_wkr_.Status_found);
 	}
 //		private static void Init_page_regy(Xowe_wiki wiki, String ttl, int id, boolean is_redirect) {
 //			String url_str = "test/en.wikipedia.org/wiki_page_regy";
-//			Db_meta_tbl meta = new Xowd_page_regy_tbl().new_meta();
+//			Db_meta_tbl meta = new Xowd_pg_regy_tbl().new_meta();
 //			Db_conn_pool.I.Set_mem(url_str, meta);
 //			Db_url url = Db_url_.mem_(url_str);
-//			Xowd_page_regy_tbl tbl = new Xowd_page_regy_tbl(Bool_.N, url);
+//			Xowd_pg_regy_tbl tbl = new Xowd_pg_regy_tbl(Bool_.N, url);
 //			tbl.Insert(id, ns_id, Bry_.new_utf8_(ttl), is_redirect, modified_on, page_len, random_int, text_db_id, html_db_id);
 //		}
 	private static String ttl_fast(int ns_id, String ns_str, String ttl) {return ttl_fast(ns_id, ns_str, ttl, "", "", ttl);}

@@ -25,7 +25,7 @@ interface Imap_link_owner {
 }
 class Imap_link_owner_ {
 	public static void Init(Imap_link_owner link_owner, Xoae_app app, Xowe_wiki wiki, byte[] src, Xop_tkn_itm tkn) {
-		Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
 		try {
 			int tkn_tid = tkn.Tkn_tid();
 			link_owner.Link_tid_(tkn_tid);

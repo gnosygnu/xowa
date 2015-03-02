@@ -44,8 +44,8 @@ public class Scrib_lib_uri implements Scrib_lib {
 	private static final String[] Proc_names = String_.Ary(Invk_anchorEncode, Invk_localUrl, Invk_fullUrl, Invk_canonicalUrl, Invk_init_uri_for_page);
 	public boolean AnchorEncode(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] raw_bry = args.Pull_bry(0);
-		Bry_bfr bfr = core.App().Utl_bry_bfr_mkr().Get_b512();
-		Bry_bfr tmp_bfr = core.App().Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr bfr = core.App().Utl__bfr_mkr().Get_b512();
+		Bry_bfr tmp_bfr = core.App().Utl__bfr_mkr().Get_b512();
 		Pfunc_anchorencode.Func_init(core.Ctx());
 		Pfunc_anchorencode.Anchor_encode(raw_bry, bfr, tmp_bfr);
 		tmp_bfr.Mkr_rls().Clear();
@@ -57,7 +57,7 @@ public class Scrib_lib_uri implements Scrib_lib {
 		byte[] qry_bry = args.Extract_qry_args(wiki, 1);
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry);
 		if (ttl == null) return rslt.Init_null();
-		Bry_bfr bfr = core.App().Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr bfr = core.App().Utl__bfr_mkr().Get_b512();
 		if (ttl.Ns().Id() == Xow_ns_.Id_media) {	// change "Media:" -> "File:"
 			bfr.Add(wiki.Ns_mgr().Ns_file().Name_db_w_colon());
 			bfr.Add(ttl.Page_db());
@@ -69,7 +69,7 @@ public class Scrib_lib_uri implements Scrib_lib {
 	private boolean Init_uri_for_page(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		Xop_ctx ctx = core.Ctx();
 		byte[] ttl_bry = ctx.Cur_page().Ttl().Raw();
-		Bry_bfr tmp_bfr = ctx.Wiki().Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b512();
 		Pfunc_urlfunc.UrlString(ctx, Pfunc_urlfunc.Tid_full, false, ttl_bry, tmp_bfr, Bry_.Empty);
 		return rslt.Init_obj(tmp_bfr.Mkr_rls().Xto_bry_and_clear());
 	}

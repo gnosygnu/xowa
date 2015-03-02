@@ -31,7 +31,7 @@ class Xop_vnt_flag_parser {
 		rslt_flags = new Xop_vnt_flag[pipe_tkn_count];
 		int rv_idx = 0;
 		int subs_len = vnt_tkn.Subs_len();
-		Bry_bfr flag_bfr = wiki.Utl_bry_bfr_mkr().Get_b128();
+		Bry_bfr flag_bfr = wiki.Utl__bfr_mkr().Get_b128();
 		rslt_tkn_pos = 0;
 		boolean loop = true;
 		while (true) {

@@ -93,9 +93,9 @@ class Xofv_file_mgr_fxt {
 	public void Clear() {
 		file_mgr = new Xofv_file_mgr(Bry_.new_ascii_("enwiki"));
 		Db_conn_bldr.I.Reg_default_mem();
-		Db_conn conn = Db_conn_bldr.I.New("", Io_url_.mem_fil_("mem/file/cache.db")); boolean created = Bool_.Y; boolean version_is_1 = Bool_.N;
-		file_mgr.Cache_mgr().Init_for_db(conn, created, version_is_1);
-		file_mgr.Orig_wkr().Conn_(conn, created, version_is_1);
+		Db_conn conn = Db_conn_bldr.I.New("", Io_url_.mem_fil_("mem/file/cache.db")); boolean created = Bool_.Y; boolean schema_is_1 = Bool_.N;
+		file_mgr.Cache_mgr().Init_for_db(conn, created, schema_is_1);
+		file_mgr.Orig_wkr().Conn_(conn, created, schema_is_1);
 		fsdb_mgr.Clear();
 		html_gui.Clear();
 		file_mgr.Fsdb_mgr_(fsdb_mgr);

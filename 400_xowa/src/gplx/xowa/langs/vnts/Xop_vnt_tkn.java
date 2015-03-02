@@ -57,7 +57,7 @@ public class Xop_vnt_tkn extends Xop_tkn_itm_base {
 					byte[] cur_lang_vnt = wiki.Lang().Vnt_mgr().Cur_vnt();
 					Xop_vnt_rule rule = Xop_vnt_html_wtr.Get_rule_by_key(vnt_rules, vnt_rules.length, cur_lang_vnt);
 					if (rule != null) {
-						Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
+						Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
 						wiki.Html_mgr().Html_wtr().Write_tkn_ary(tmp_bfr, ctx, Xoh_wtr_ctx.Alt, src, rule.Rule_subs());
 						byte[] display_ttl = tmp_bfr.Mkr_rls().Xto_bry_and_clear();
 						page.Html_data().Display_ttl_vnt_(display_ttl);

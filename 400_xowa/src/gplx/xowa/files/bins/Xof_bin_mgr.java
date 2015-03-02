@@ -52,7 +52,7 @@ public class Xof_bin_mgr implements GfoInvkAble {
 		Io_stream_rdr rv = Io_stream_rdr_.Null;
 		boolean file_is_orig = itm.File_is_orig();
 		if (file_is_orig || exec_tid == Xof_exec_tid.Tid_viewer_app) {			// orig or viewer_app; note that viewer_app always return orig
-			Io_url trg = Bld_url(itm, Xof_repo_itm.Mode_orig, Bool_.N);
+			Io_url trg = url_bldr.To_url(repo_mgr, itm, Bool_.Y);
 			itm.Html_view_url_(trg);
 			for (int i = 0; i < wkrs_len; i++) {
 				Xof_bin_wkr wkr = wkrs[i];
@@ -63,7 +63,7 @@ public class Xof_bin_mgr implements GfoInvkAble {
 			}
 		}
 		else {																	// thumb
-			Io_url trg = Bld_url(itm, Xof_repo_itm.Mode_thumb, Bool_.N);
+			Io_url trg = url_bldr.To_url(repo_mgr, itm, Bool_.N);
 			itm.Html_view_url_(trg);
 			for (int i = 0; i < wkrs_len; i++) {
 				Xof_bin_wkr wkr = wkrs[i];
@@ -79,7 +79,7 @@ public class Xof_bin_mgr implements GfoInvkAble {
 					continue;													// nothing found; continue;
 				}
 				if (!wkr.Resize_allowed()) continue;
-				Io_url orig = Bld_url(itm, Xof_repo_itm.Mode_orig, Bool_.N);	// get orig url
+				Io_url orig = url_bldr.To_url(repo_mgr, itm, Bool_.Y);			// get orig url
 				Io_stream_wtr_.Save_rdr(orig, rv);
 				boolean resized = Resize(exec_tid, itm, file_is_orig, orig, trg);
 				if (!resized) continue;
@@ -97,13 +97,6 @@ public class Xof_bin_mgr implements GfoInvkAble {
 		boolean rv = resizer.Exec(src, trg, tmp_size.Html_w(), tmp_size.Html_h(), itm.Lnki_ext().Id(), resize_warning);
 		itm.Rslt_cnv_(rv ? Xof_cnv_wkr_.Tid_y : Xof_cnv_wkr_.Tid_n);
 		return rv;
-	}
-	private Io_url Bld_url(Xof_fsdb_itm itm, byte mode, boolean src) {
-		Xof_repo_pair repo = repo_mgr.Repos_get_by_wiki(itm.Orig_repo_name());
-		return src 
-			? url_bldr.Init_for_src_file(mode, repo.Src(), itm.Lnki_ttl(), itm.Lnki_md5(), itm.Lnki_ext(), itm.Html_w(), itm.Lnki_time(), itm.Lnki_page()).Xto_url()
-			: url_bldr.Init_for_trg_file(mode, repo.Trg(), itm.Lnki_ttl(), itm.Lnki_md5(), itm.Lnki_ext(), itm.Html_w(), itm.Lnki_time(), itm.Lnki_page()).Xto_url()
-			;
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_add))		return Wkrs__get_or_new(m.ReadStr("type"), m.ReadStrOr("key", null));

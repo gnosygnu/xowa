@@ -16,17 +16,17 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.html.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.hdumps.srls.*;
+import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.html.*; import gplx.xowa.wikis.ttls.*;
 public class Xow_hzip_itm__anchor {
 	private Xow_hzip_mgr hzip_mgr; private Xow_ttl_parser ttl_parser; private Byte_obj_ref xtid_ref = Byte_obj_ref.zero_();
 	private Bry_rdr bry_rdr = new Bry_rdr();
 	public Xow_hzip_itm__anchor(Xow_hzip_mgr hzip_mgr, Xow_ttl_parser ttl_parser) {this.hzip_mgr = hzip_mgr; this.ttl_parser = ttl_parser;}
-	public int Save_a_rhs(Bry_bfr bfr, Xow_hzip_stats stats, byte[] src, int src_len, int bgn, int pos) {
+	public int Save_a_rhs(Bry_bfr bfr, Xodump_stats_itm stats, byte[] src, int src_len, int bgn, int pos) {
 		bfr.Add(Xow_hzip_dict.Bry_a_rhs);
 		stats.A_rhs_add();
 		return pos;
 	}
-	public int Save(Bry_bfr bfr, Xow_hzip_stats stats, byte[] src, int src_len, int bgn, int pos) {
+	public int Save(Bry_bfr bfr, Xodump_stats_itm stats, byte[] src, int src_len, int bgn, int pos) {
 		int xtid_end = Xow_hzip_xtid.Find_xtid(hzip_mgr, src, src_len, bgn, pos, xtid_ref); if (xtid_end == Xow_hzip_mgr.Unhandled) return Xow_hzip_mgr.Unhandled;
 		byte xtid_val = xtid_ref.Val();
 		switch (xtid_val) {
@@ -40,7 +40,7 @@ public class Xow_hzip_itm__anchor {
 		}
 	}
 	private static int[] Save_img_full_pow = new int[] {0, 1, 2};
-	private int Save_img_full(Bry_bfr bfr, Xow_hzip_stats stats, byte[] src, int src_len, int bgn, int pos) {
+	private int Save_img_full(Bry_bfr bfr, Xodump_stats_itm stats, byte[] src, int src_len, int bgn, int pos) {
 		bfr.Add(Xow_hzip_dict.Bry_img_full);
 		int xatrs_bgn = Bry_finder.Move_fwd(src, Find_img_xatrs, pos, src_len);				if (xatrs_bgn == Bry_finder.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("a.img_xatrs_missing", bgn, pos);
 		bry_rdr.Src_(src).Pos_(xatrs_bgn);
@@ -49,13 +49,13 @@ public class Xow_hzip_itm__anchor {
 		int img_rel		= bry_rdr.Read_int_to_pipe();
 		byte meta		= (byte)Bit_.Shift_lhs_to_int(Save_img_full_pow, a_cls, a_rel, img_rel);
 		bfr.Add_byte(meta);														// meta
-		Hpg_srl_itm_.Save_bin_int_abrv(bfr, bry_rdr.Read_int_to_pipe());		// uid
+		Xow_hzip_int_.Save_bin_int_abrv(bfr, bry_rdr.Read_int_to_pipe());		// uid
 		bfr.Add(bry_rdr.Read_bry_to_pipe()).Add_byte_pipe();					// img_cls_other
 		bfr.Add(bry_rdr.Read_bry_to_apos());									// alt
 		bfr.Add_byte(Xow_hzip_dict.Escape);
 		return bry_rdr.Pos() + 2;												// +2=/>
 	}
-	public int Save_lnki(Bry_bfr bfr, Xow_hzip_stats stats, byte[] src, int src_len, int bgn, int pos, boolean caption) {
+	public int Save_lnki(Bry_bfr bfr, Xodump_stats_itm stats, byte[] src, int src_len, int bgn, int pos, boolean caption) {
 		int ttl_bgn = Bry_finder.Find_fwd(src, Find_href_wiki_bry, pos, src_len);			if (ttl_bgn == Bry_finder.Not_found) return Xow_hzip_mgr.Unhandled;//hzip_mgr.Warn_by_pos_add_dflt("a.ttl_bgn_missing", bgn, pos);
 		ttl_bgn += Find_href_wiki_len;
 		int ttl_end = Bry_finder.Find_fwd(src, Byte_ascii.Quote, ttl_bgn , src_len);		if (ttl_end == Bry_finder.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("a.ttl_end_missing", bgn, ttl_bgn);
@@ -86,7 +86,7 @@ public class Xow_hzip_itm__anchor {
 			return a_rhs_bgn + Find_a_rhs_bgn_len;
 		}
 	}
-	public int Save_lnke(Bry_bfr bfr, Xow_hzip_stats stats, byte[] src, int src_len, int bgn, int pos, byte xtid) {// <a rel="nofollow" class="external free" href="http://a.org">http://a.org</a>
+	public int Save_lnke(Bry_bfr bfr, Xodump_stats_itm stats, byte[] src, int src_len, int bgn, int pos, byte xtid) {// <a rel="nofollow" class="external free" href="http://a.org">http://a.org</a>
 		int href_bgn = Bry_finder.Find_fwd(src, Find_href_bry, pos, src_len);				if (href_bgn == Bry_finder.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("a.href_missing", bgn, pos);
 		href_bgn += Find_href_len;
 		int href_end = Bry_finder.Find_fwd(src, Byte_ascii.Quote, href_bgn, src_len);		if (href_end == Bry_finder.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("a.href_missing", bgn, href_bgn);
@@ -104,7 +104,7 @@ public class Xow_hzip_itm__anchor {
 				int num_bgn = a_lhs_end + 2; // skip >[
 				int num_end = Bry_finder.Find_fwd(src, Byte_ascii.Brack_end, num_bgn, src_len);		if (num_end == Bry_finder.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("a.num_end_missing", bgn, href_end);
 				int num = Bry_.Xto_int_or(src, num_bgn, num_end, -1);								if (num == -1) return hzip_mgr.Warn_by_pos_add_dflt("a.num_invalid", num_bgn, num_end);
-				Hpg_srl_itm_.Save_bin_int_abrv(bfr, num);
+				Xow_hzip_int_.Save_bin_int_abrv(bfr, num);
 				int a_rhs_bgn = num_end + 1;
 				int a_rhs_end = a_rhs_bgn + Find_a_rhs_bgn_len;
 				if (!Bry_.Match(src, a_rhs_bgn, a_rhs_end, Find_a_rhs_bgn_bry)) return hzip_mgr.Warn_by_pos_add_dflt("a.rhs_missing", bgn, href_end);
@@ -128,7 +128,7 @@ public class Xow_hzip_itm__anchor {
 				bfr.Add_str("<a rel=\"nofollow\" class=\"external free\" href=\"").Add_mid(src, href_bgn, href_end).Add_str("\">").Add_mid(src, href_bgn, href_end).Add_str("</a>");
 				return href_end + 1; // +1 to skip escape
 			case Xow_hzip_dict.Tid_lnke_brk_text_n:
-				int num = Hpg_srl_itm_.Load_bin_int_abrv(src, src_len, href_end + 1, count_ref);
+				int num = Xow_hzip_int_.Load_bin_int_abrv(src, src_len, href_end + 1, count_ref);
 				bfr.Add_str("<a rel=\"nofollow\" class=\"external autonumber\" href=\"").Add_mid(src, href_bgn, href_end).Add_str("\">[").Add_int_variable(num).Add_str("]</a>");
 				return href_end + 1 + count_ref.Val(); // +1 to skip escape
 			case Xow_hzip_dict.Tid_lnke_brk_text_y:

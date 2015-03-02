@@ -37,7 +37,7 @@ public class Wdata_xwiki_link_wtr implements Bry_fmtr_arg {
 			Wdata_doc doc = wdata_mgr.Pages_get(wiki, ttl); if (doc == null) return Qid_null;	// no links
 			boolean external_links_mgr_enabled = external_links_mgr.Enabled();
 			OrderedHash links = doc.Slink_list();
-			Bry_bfr tmp_bfr = wiki.Appe().Utl_bry_bfr_mkr().Get_k004();
+			Bry_bfr tmp_bfr = wiki.Appe().Utl__bfr_mkr().Get_k004();
 			Xow_wiki_abrv wiki_abrv = new Xow_wiki_abrv();
 			int len = links.Count();
 			for (int i = 0; i < len; i++) {

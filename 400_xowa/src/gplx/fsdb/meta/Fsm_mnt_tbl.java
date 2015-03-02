@@ -21,10 +21,10 @@ public class Fsm_mnt_tbl {
 	private String tbl_name = "file_meta_mnt"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private String fld_id, fld_name, fld_url;		
 	private Db_conn conn;
-	public void Conn_(Db_conn new_conn, boolean created, boolean version_is_1) {
+	public void Conn_(Db_conn new_conn, boolean created, boolean schema_is_1) {
 		this.conn = new_conn; flds.Clear();
 		String fld_prefix = "";
-		if (version_is_1) {
+		if (schema_is_1) {
 			tbl_name		= "fsdb_mnt";
 			fld_prefix		= "mnt_";
 		}

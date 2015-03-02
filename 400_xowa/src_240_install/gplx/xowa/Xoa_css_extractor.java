@@ -37,7 +37,7 @@ public class Xoa_css_extractor {
 		this.download_xrg = download_wkr.Download_xrg();
 		css_img_downloader = new Xoa_css_img_downloader().Ctor(usr_dlg, download_wkr, Bry_.new_utf8_(protocol_prefix));
 		failover_dir = app.Fsys_mgr().Bin_any_dir().GenSubDir_nest("html", "xowa", "import");
-		url_encoder = Xoa_app_.Utl_encoder_mgr().Url();
+		url_encoder = Xoa_app_.Utl__encoder_mgr().Url();
 	}
 	public void Install_assert(Xowe_wiki wiki, Io_url wiki_html_dir) {
 		try {

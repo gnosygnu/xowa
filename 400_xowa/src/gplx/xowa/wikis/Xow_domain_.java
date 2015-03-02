@@ -40,8 +40,8 @@ public class Xow_domain_ {
 	;
 	private static final byte[]
 	  Tid_bry_other = Bry_.new_ascii_("other")
-	, Tid_bry_species = Bry_.new_ascii_("species"), Tid_bry_meta = Bry_.new_ascii_("meta")
-	, Tid_bry_incubator = Bry_.new_ascii_("incubator"), Tid_bry_wikidata = Bry_.new_ascii_("wikidata"), Tid_bry_mediawiki = Bry_.new_ascii_("mediawiki")
+	, Tid_bry_meta = Bry_.new_ascii_("meta")
+	, Tid_bry_incubator = Bry_.new_ascii_("incubator"), Tid_bry_wikidata = Bry_.new_ascii_("wikidata")
 	;
 	public static final byte[] 
 	  Tid_bry_home = Bry_.new_ascii_(Tid_str_home)
@@ -50,6 +50,7 @@ public class Xow_domain_ {
 	, Tid_bry_wikinews = Bry_.new_ascii_("wikinews"), Tid_bry_wikivoyage = Bry_.new_ascii_("wikivoyage")
 	, Tid_bry_commons = Bry_.new_ascii_("commons")
 	, Tid_bry_wikimediafoundation = Bry_.new_ascii_("wikimediafoundation")
+	, Tid_bry_species = Bry_.new_ascii_("species"), Tid_bry_mediawiki = Bry_.new_ascii_("mediawiki")
 	;
 	private static byte[][] Tid_bry__ary = new byte[][]
 	{ Tid_bry_other, Tid_bry_home

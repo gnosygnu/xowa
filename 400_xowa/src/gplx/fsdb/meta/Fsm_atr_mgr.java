@@ -56,8 +56,8 @@ public class Fsm_atr_mgr implements RlsAble {
 			itm.Rls();
 		}
 	}
-	public void Init_for_db(Db_conn conn, boolean created, boolean version_is_1, Io_url dir, Fsm_abc_mgr abc_mgr) {
-		tbl.Conn_(conn, created, version_is_1);
+	public void Init_for_db(Db_conn conn, boolean created, boolean schema_is_1, Io_url dir, Fsm_abc_mgr abc_mgr) {
+		tbl.Conn_(conn, created, schema_is_1);
 		if (created) {
 			Fsm_atr_fil itm = Fsm_atr_fil.make_(abc_mgr, Id_0, url_(dir, Id_0), Path_bgn_0);
 			this.itms = new Fsm_atr_fil[] {itm};

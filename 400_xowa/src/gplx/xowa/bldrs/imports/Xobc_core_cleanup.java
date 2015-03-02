@@ -106,7 +106,7 @@ public class Xobc_core_cleanup extends Xob_itm_basic_base implements Xob_cmd {
 	public static void Delete_wiki_sql(Xowe_wiki wiki) {
 		Gfo_usr_dlg usr_dlg = wiki.Appe().Usr_dlg(); Io_url wiki_root_dir = wiki.Fsys_mgr().Root_dir();
 		if (wiki.Db_mgr().Tid() == gplx.xowa.dbs.Xodb_mgr_sql.Tid_sql)		// NOTE: must check; if empty dir (or text db) than db_mgr will be txt
-			wiki.Db_mgr_as_sql().Fsys_mgr().Rls();							// NOTE: if sqlite files, must rls;
+			wiki.Db_mgr_as_sql().Core_data_mgr().Rls();						// NOTE: if sqlite files, must rls;
 		Io_url[] sqlite3_files = Io_mgr._.QueryDir_args(wiki_root_dir).FilPath_("*.sqlite3").ExecAsUrlAry();
 		int sqlite3_files_len = sqlite3_files.length;
 		usr_dlg.Note_many("", "delete_wiki", "deleting sqlite3 files: ~{0} ~{1}", sqlite3_files_len, wiki_root_dir.Raw());

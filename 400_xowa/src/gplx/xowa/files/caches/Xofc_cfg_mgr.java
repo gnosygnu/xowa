@@ -24,8 +24,8 @@ class Xofc_cfg_mgr {
 	public void Cache_len_add(long v) {cache_len += v;}
 	public long Cache_min() {return cache_min;} public void Cache_min_(long v) {cache_min = v;} private long cache_min = Io_mgr.Len_mb * 75;
 	public long Cache_max() {return cache_max;} public void Cache_max_(long v) {cache_max = v;} private long cache_max = Io_mgr.Len_mb * 100;
-	public void Conn_(Db_conn v, boolean created, boolean version_is_1) {
-		tbl.Conn_(v, created, version_is_1, "xowa_cfg", "file_cache_cfg");
+	public void Conn_(Db_conn v, boolean created, boolean schema_is_1) {
+		tbl.Conn_(v, created, schema_is_1, "xowa_cfg", "file_cache_cfg");
 		if (created) {
 			tbl.Insert(Cfg_grp, Cfg_key__next_id, Int_.Xto_str(1));
 			tbl.Insert(Cfg_grp, Cfg_key__cache_len, Long_.Xto_str(0));

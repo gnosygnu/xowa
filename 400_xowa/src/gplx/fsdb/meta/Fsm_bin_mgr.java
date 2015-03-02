@@ -61,9 +61,9 @@ public class Fsm_bin_mgr implements RlsAble {
 		Fsm_bin_fil bin_fil = fil_ary[db_id];
 		return bin_fil.Insert(bin_id, owner_tid, bin_len, bin_rdr);
 	}
-	public void Init_for_db(Db_conn conn, boolean created, boolean version_is_1, Io_url dir) {
+	public void Init_for_db(Db_conn conn, boolean created, boolean schema_is_1, Io_url dir) {
 		this.dir = dir;
-		tbl.Conn_(conn, created, version_is_1);
+		tbl.Conn_(conn, created, schema_is_1);
 		if (created)
 			this.Itms_add(0);
 		else {

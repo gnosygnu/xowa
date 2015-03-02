@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.dbs.*; import gplx.xowa.dbs.tbls.*;
+import gplx.xowa.wikis.data.*; import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.dbs.*; import gplx.xowa.dbs.tbls.*;
 public class Xob_search_sql_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	public Xob_search_sql_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Cmd_key() {return KEY_search_sql;} public static final String KEY_search_sql = "import.sql.search_title.cmd";
@@ -28,14 +28,14 @@ public class Xob_search_sql_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	public void Exec(Xowe_wiki wiki) {
 		usr_dlg.Log_many("", "", "search_title.cmd: initing wiki");
 		if (!Env_.Mode_testing()) wiki.Init_assert();
-		Xodb_fsys_mgr db_fs = wiki.Db_mgr_as_sql().Fsys_mgr();
+		Xowe_core_data_mgr db_fs = wiki.Db_mgr_as_sql().Core_data_mgr();
 		usr_dlg.Log_many("", "", "search_title.cmd: getting core db");
-		Xodb_file page_db = db_fs.Get_tid_root(Xodb_file_tid.Tid_core);
+		Xowd_db_file page_db = db_fs.Dbs__get_by_tid_1st(Xowd_db_file_.Tid_core);
 		usr_dlg.Log_many("", "", "search_title.cmd: getting existing searchdb");
-		Xodb_file search_db = db_fs.Get_tid_root(Xodb_file_tid.Tid_search);
+		Xowd_db_file search_db = db_fs.Dbs__get_by_tid_1st(Xowd_db_file_.Tid_search);
 		if (search_db == null) {
 			usr_dlg.Log_many("", "", "search_title.cmd: making new searchdb");
-			search_db = db_fs.Make(Xodb_file_tid.Tid_search);
+			search_db = db_fs.Dbs__add_new(Xowd_db_file_.Tid_search);
 		}
 		DataRdr page_rdr = DataRdr_.Null;
 		Db_conn search_provider = search_db.Conn();
@@ -76,7 +76,7 @@ public class Xob_search_sql_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		search_provider.Txn_mgr().Txn_end_all_bgn_if_none();
 		search_temp_tbl.Make_data(usr_dlg, search_provider);
 		search_provider.Txn_mgr().Txn_bgn_if_none();
-		wiki.Db_mgr_as_sql().Tbl_xowa_db().Commit_all(db_fs.Files_ary());
+		wiki.Db_mgr_as_sql().Core_data_mgr().Dbs__save();
 		search_provider.Txn_mgr().Txn_end_all();
 	}	private int commit_interval = 100000, progress_interval = 10000;
 	private void Commit(Db_conn search_provider) {

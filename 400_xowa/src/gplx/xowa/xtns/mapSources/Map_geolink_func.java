@@ -25,7 +25,7 @@ public class Map_geolink_func extends Pf_func_base {
 		byte[] mer_x_val = null, mer_y_val = null, mer_x_pos = null, mer_x_neg = null, mer_y_pos = null, mer_y_neg = null;
 		int prec = 4;
 		int args_len = self.Args_len();
-		Bry_bfr tmp_bfr = ctx.Wiki().Utl_bry_bfr_mkr().Get_b128();
+		Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b128();
 		try {
 			byte[] pattern = Eval_argx(ctx, src, caller, self);
 			for (int i = 0; i < args_len; i++) {

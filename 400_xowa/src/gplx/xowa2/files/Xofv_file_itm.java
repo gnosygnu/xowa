@@ -44,7 +44,7 @@ public class Xofv_file_itm {
 		Xof_ext file_ext = Xof_ext_.new_by_ttl_(file_ttl);
 		byte lnki_exec_tid = xfer.Lnki_exec_tid();
 		boolean lnki_is_orig = xfer.Img_is_orig();
-		double lnki_time = xfer.Lnki_thumbtime();
+		double lnki_time = xfer.Lnki_time();
 		int lnki_page = xfer.Lnki_page();
 		int html_uid = xfer.Html_uid();
 		img_size.Html_size_calc

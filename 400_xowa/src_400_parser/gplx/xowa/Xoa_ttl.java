@@ -96,7 +96,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 	private static final Object thread_lock = new Object();
 	public static Xoa_ttl new_(Xowe_wiki wiki, Gfo_msg_log msg_log, byte[] src, int bgn, int end) {
 		Xoae_app app = wiki.Appe();
-		Bry_bfr_mkr bry_mkr = app.Utl_bry_bfr_mkr();
+		Bry_bfr_mkr bry_mkr = app.Utl__bfr_mkr();
 		return parse(bry_mkr, app.Parser_amp_mgr(), wiki.Lang().Case_mgr(), wiki.Xwiki_mgr(), wiki.Ns_mgr(), msg_log, src, bgn, end);
 	}	private Xoa_ttl() {}
 	public static Xoa_ttl parse(Bry_bfr_mkr bry_mkr, Xop_amp_mgr amp_mgr, Xol_case_mgr case_mgr, Xow_xwiki_mgr xwiki_mgr, Xow_ns_mgr ns_mgr, Gfo_msg_log msg_log, byte[] src, int bgn, int end) {

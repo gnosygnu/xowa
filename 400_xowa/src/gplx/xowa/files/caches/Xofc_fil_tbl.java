@@ -22,10 +22,10 @@ class Xofc_fil_tbl {
 	private String fld_uid, fld_dir_id, fld_name, fld_is_orig, fld_w, fld_h, fld_time, fld_page, fld_ext, fld_size, fld_cache_time;
 	private Db_conn conn; private final Db_stmt_bldr stmt_bldr = new Db_stmt_bldr(); private Db_stmt select_itm_stmt, select_itm_v2_stmt;
 	public Db_conn Conn() {return conn;}
-	public void Conn_(Db_conn new_conn, boolean created, boolean version_is_1) {
+	public void Conn_(Db_conn new_conn, boolean created, boolean schema_is_1) {
 		this.conn = new_conn; flds.Clear();
 		String fld_prefix = "";
-		if (version_is_1) {
+		if (schema_is_1) {
 			tbl_name		= "cache_fil";
 			fld_prefix		= "fil_";
 		}
@@ -36,7 +36,7 @@ class Xofc_fil_tbl {
 		fld_w				= flds.Add_int(fld_prefix + "w");
 		fld_h				= flds.Add_int(fld_prefix + "h");
 		fld_time			= flds.Add_int(fld_prefix + "thumbtime");
-		if (version_is_1) {
+		if (schema_is_1) {
 			fld_page		= Db_meta_fld.Key_null;
 		}
 		else {

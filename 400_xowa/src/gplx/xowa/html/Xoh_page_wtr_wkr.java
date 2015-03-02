@@ -74,8 +74,8 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 		, mgr.Css_common_bry(), mgr.Css_wiki_bry(), page.Html_data().Module_mgr().Init(app, wiki, page).Init_dflts()
 		, page.Lang().Dir_ltr_bry(), page.Html_data().Indicators(), page_content_sub, wiki.Html_mgr().Portal_mgr().Div_jump_to(), page_body_class, html_content_editable
 		, page_data, wtr_page_lang			
-		, portal_mgr.Div_personal_bry(), portal_mgr.Div_ns_bry(app.Utl_bry_bfr_mkr(), page_ttl, wiki.Ns_mgr()), portal_mgr.Div_view_bry(app.Utl_bry_bfr_mkr(), view_tid, page.Html_data().Xtn_search_text())
-		, portal_mgr.Div_logo_bry(), portal_mgr.Div_home_bry(), new Xopg_xtn_skin_fmtr_arg(page, Xopg_xtn_skin_itm_tid.Tid_sidebar), portal_mgr.Div_wikis_bry(app.Utl_bry_bfr_mkr()), portal_mgr.Sidebar_mgr().Html_bry()
+		, portal_mgr.Div_personal_bry(), portal_mgr.Div_ns_bry(app.Utl__bfr_mkr(), page_ttl, wiki.Ns_mgr()), portal_mgr.Div_view_bry(app.Utl__bfr_mkr(), view_tid, page.Html_data().Xtn_search_text())
+		, portal_mgr.Div_logo_bry(), portal_mgr.Div_home_bry(), new Xopg_xtn_skin_fmtr_arg(page, Xopg_xtn_skin_itm_tid.Tid_sidebar), portal_mgr.Div_wikis_bry(app.Utl__bfr_mkr()), portal_mgr.Sidebar_mgr().Html_bry()
 		, mgr.Edit_rename_div_bry(page_ttl), page.Html_data().Edit_preview_w_dbg(), js_edit_toolbar_bry			
 		);
 		Xoh_page_wtr_wkr_.Bld_head_end(html_bfr, page);
@@ -119,7 +119,7 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 			app.File_main_wkr().Bld_html(wiki, ctx, bfr, page.Ttl(), wiki.Cfg_file_page(), page.File_queue());
 		gplx.xowa.html.tidy.Xoh_tidy_mgr tidy_mgr = app.Html_mgr().Tidy_mgr();
 		boolean tidy_enabled = tidy_mgr.Enabled();
-		Bry_bfr hdom_bfr = tidy_enabled ? app.Utl_bry_bfr_mkr().Get_m001() : bfr;	// if tidy, then write to tidy_bfr; note that bfr already has <html> and <head> written to it, so this can't be passed to tidy; DATE:2014-06-11
+		Bry_bfr hdom_bfr = tidy_enabled ? app.Utl__bfr_mkr().Get_m001() : bfr;	// if tidy, then write to tidy_bfr; note that bfr already has <html> and <head> written to it, so this can't be passed to tidy; DATE:2014-06-11
 		wiki.Html_mgr().Html_wtr().Write_all(hdom_bfr, page.Wikie().Ctx(), hctx, page.Root().Data_mid(), page.Root());
 		if (tidy_enabled) {
 			tidy_mgr.Run_tidy_html(page, hdom_bfr);

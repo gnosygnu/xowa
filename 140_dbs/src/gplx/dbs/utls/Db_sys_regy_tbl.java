@@ -18,6 +18,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs.utls; import gplx.*; import gplx.dbs.*;
 class Db_sys_regy_tbl {
 	private final String tbl_name;
+	private static final Db_meta_fld_list Flds = Db_meta_fld_list.new_();
+	private static final String
+	  Fld_regy_grp				= Flds.Add_str("regy_grp", 1024)
+	, Fld_regy_key				= Flds.Add_str("regy_key", 1024)
+	, Fld_regy_val				= Flds.Add_str("regy_val", 4096)
+	;
+	public static Db_meta_tbl new_meta(String tbl) {
+		return Db_meta_tbl.new_(tbl, Flds.To_fld_ary()
+		, Db_meta_idx.new_unique_by_tbl(tbl, "key", Flds.To_str_ary())
+		);
+	} 
 	private Db_meta_tbl meta;
 	private Db_conn conn;
 	public Db_sys_regy_tbl(Db_url url, String tbl_name) {
@@ -46,15 +57,4 @@ class Db_sys_regy_tbl {
 			return rdr.Move_next() ? rdr.Read_str(Fld_regy_val) : or;
 		}	finally {rdr.Rls();}
 	}
-	private static final Db_meta_fld_list Flds = Db_meta_fld_list.new_();
-	private static final String
-	  Fld_regy_grp				= Flds.Add_str("regy_grp", 1024)
-	, Fld_regy_key				= Flds.Add_str("regy_key", 1024)
-	, Fld_regy_val				= Flds.Add_str("regy_val", 4096)
-	;
-	public static Db_meta_tbl new_meta(String tbl) {
-		return Db_meta_tbl.new_(tbl, Flds.To_fld_ary()
-		, Db_meta_idx.new_unique_by_tbl(tbl, "key", Flds.To_str_ary())
-		);
-	} 
 }

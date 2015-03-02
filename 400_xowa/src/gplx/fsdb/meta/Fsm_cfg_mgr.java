@@ -59,8 +59,8 @@ public class Fsm_cfg_mgr {
 		return grp;
 	}
 	public static Fsm_cfg_mgr new_() {return new Fsm_cfg_mgr();}
-	public void Init_for_db(Db_conn conn, boolean created, boolean version_is_1) {
-		cfg_tbl.Conn_(conn, created, version_is_1, Fsm_abc_mgr.Cfg_tbl_v1, Fsm_abc_mgr.Cfg_tbl_v2);
+	public void Init_for_db(Db_conn conn, boolean created, boolean schema_is_1) {
+		cfg_tbl.Conn_(conn, created, schema_is_1, Fsm_abc_mgr.Cfg_tbl_v1, Fsm_abc_mgr.Cfg_tbl_v2);
 		if (created) {
 			cfg_tbl.Insert(Fsm_cfg_mgr.Grp_core, Fsm_cfg_mgr.Key_next_id				, "1");	// start next_id at 1
 			cfg_tbl.Insert(Fsm_cfg_mgr.Grp_core, Fsm_cfg_mgr.Key_schema_thm_page		, "y");	// new dbs automatically have page and time in fsdb_xtn_tm

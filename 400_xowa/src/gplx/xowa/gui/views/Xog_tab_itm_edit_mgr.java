@@ -40,7 +40,7 @@ public class Xog_tab_itm_edit_mgr {
 			win_itm.Page__mode_(Xopg_view_mode.Tid_read);
 			win_itm.Page__async__bgn(tab);
 		}
-		wiki.Db_mgr().Hdump_mgr().Save(page);
+//			wiki.Db_mgr().Hdump_mgr().Save(page);
 	}
 	public static void Preview(Xog_tab_itm tab) {
 		if (tab.View_mode() != Xopg_view_mode.Tid_edit) return;	// exit if not edit; handles preview somehow being called?
@@ -54,7 +54,7 @@ public class Xog_tab_itm_edit_mgr {
 		wiki.ParsePage_root(new_page, true);						// refresh html
 		tab.Page_(new_page); new_page.Tab_(tab);					// replace old page with new_page; DATE:2014-10-09
 
-		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_m001();
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
 		Xoh_page_wtr_wkr wkr = wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_view_mode.Tid_read);
 		wkr.Page_(new_page);
 		wkr.XferAry(tmp_bfr, 0);
@@ -103,7 +103,7 @@ public class Xog_tab_itm_edit_mgr {
 		byte[] data = tab.Html_itm().Get_elem_value_for_edit_box_as_bry();
 		new_page.Data_raw_(data);
 		wiki.ParsePage_root(new_page, true);
-		Bry_bfr bfr = win.App().Utl_bry_bfr_mkr().Get_m001();
+		Bry_bfr bfr = win.App().Utl__bfr_mkr().Get_m001();
 		bfr.Add(new_page.Root().Root_src());
 		wiki.Ctx().Defn_trace().Print(data, bfr);
 		new_page.Data_raw_(bfr.Mkr_rls().Xto_bry_and_clear());

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.files.*; import gplx.xowa.html.*; import gplx.xowa.html.lnkis.*; import gplx.xowa.hdumps.core.*; import gplx.xowa.hdumps.pages.*;
+import gplx.xowa.files.*; import gplx.xowa.html.*; import gplx.xowa.html.lnkis.*; import gplx.xowa.html.hdumps.core.*; import gplx.xowa.html.hdumps.pages.*;
 public class Gallery_html_wtr {
 	private final Xoh_arg_img_core img_core_fmtr_basic = new Xoh_arg_img_core__basic(), img_core_fmtr_hdump = new Xoh_arg_img_core__hdump();
 	public void Write_html(Bry_bfr bfr, Xoae_app app, Xowe_wiki wiki, Xop_ctx ctx, Xoh_html_wtr wtr, Xoh_wtr_ctx hctx, Xoae_page page, Gallery_xnde mgr, byte[] src) {
@@ -46,7 +46,7 @@ public class Gallery_html_wtr {
 			mgr_box_cls = Bry_.Empty;
 			mgr_box_width_all = Gallery_html_wtr_utl.Calc_itm_pad_w(itm_box_w) * row_multiplier; // 8=Gallery Box borders; REF.MW:ImageGallery.php|GB_BORDERS;
 		}
-		Bry_bfr itm_bfr = wiki.Utl_bry_bfr_mkr().Get_k004(), tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_k004();
+		Bry_bfr itm_bfr = wiki.Utl__bfr_mkr().Get_k004(), tmp_bfr = wiki.Utl__bfr_mkr().Get_k004();
 		int mgr_elem_id = -1; int gallery_w_count = 0;
 		boolean hctx_is_hdump = hctx.Mode_is_hdump();
 		Xoh_arg_img_core img_core_fmtr = hctx_is_hdump ? img_core_fmtr_hdump : img_core_fmtr_basic;
@@ -105,7 +105,7 @@ public class Gallery_html_wtr {
 					, lnki_alt
 					);
 				if (hctx_is_hdump)
-					hdump_imgs.Data_add_img(new Hdump_data_img__gallery().Init_by_gallery(itm_div_w, itm_box_w, itm_margin), xfer_itm, Hdump_data_img__gallery.Tid_gallery);
+					hdump_imgs.Imgs_add_img(new Xohd_data_itm__gallery_itm().Init_by_gallery(itm_div_w, itm_box_w, itm_margin), xfer_itm, Xohd_data_itm__gallery_itm.Tid_gallery);
 			}
 			else {
 				Gallery_html_wtr_.Itm_txt_fmtr.Bld_bfr_many(itm_bfr
@@ -164,7 +164,7 @@ class Gallery_html_wtr_ {
 	public static byte[] Bld_caption(Xowe_wiki wiki, Xop_ctx ctx, Xoh_html_wtr wtr, Xoh_wtr_ctx hctx, Gallery_itm itm) {
 		byte[] rv = itm.Caption_bry();
 		if (Bry_.Len_gt_0(rv)) {
-			Bry_bfr caption_bfr = wiki.Utl_bry_bfr_mkr().Get_k004();
+			Bry_bfr caption_bfr = wiki.Utl__bfr_mkr().Get_k004();
 			Xop_root_tkn caption_root = itm.Caption_tkn();
 			wtr.Write_tkn(caption_bfr, ctx, hctx, caption_root.Root_src(), caption_root, Xoh_html_wtr.Sub_idx_null, caption_root);
 			rv = caption_bfr.Mkr_rls().Xto_bry_and_clear();

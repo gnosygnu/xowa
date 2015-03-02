@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //		public byte[] Fmt_or_null(byte[] raw) {
 //			int colon_pos = Bry_finder.Find_fwd(raw, Byte_ascii.Colon); if (colon_pos == Bry_.NotFound) return null;
 //			byte[] fmt = (byte[])hash.Get_by_mid(raw, 0, colon_pos); if (fmt == null) return null;
-//			Bry_bfr tmp_bfr = app.Utl_bry_bfr_mkr().Get_b512();
+//			Bry_bfr tmp_bfr = app.Utl__bfr_mkr().Get_b512();
 //			fmtr.Fmt_(fmt).Bld_bfr_many(tmp_bfr, Bry_.Mid(raw, colon_pos + Int_.Const_dlm_len, raw.length));
 //			return tmp_bfr.Mkr_rls().Xto_bry_and_clear();
 //		}

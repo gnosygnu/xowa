@@ -216,7 +216,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 				}
 				if (ignore_hash.Get_by_bry(name_ary) == null) {
 					if (Pfunc_rel2abs.Rel2abs_ttl(name_ary, name_bgn, name_ary_len)) {// rel_path; EX: {{/../Peer page}}; DATE:2013-03-27
-						Bry_bfr tmp_bfr = ctx.App().Utl_bry_bfr_mkr().Get_b512();
+						Bry_bfr tmp_bfr = ctx.App().Utl__bfr_mkr().Get_b512();
 						name_ary = Pfunc_rel2abs.Rel2abs(tmp_bfr, Bry_.Mid(name_ary, name_bgn, name_ary_len), ctx.Cur_page().Ttl().Raw());
 						tmp_bfr.Mkr_rls();
 						return SubEval(ctx, wiki, bfr, name_ary, caller, src);				
@@ -247,7 +247,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 				invk_tmpl.Frame_ttl_(defn_tmpl.Frame_ttl());	// set frame_ttl; needed for redirects; PAGE:en.w:Statutory_city; DATE:2014-08-22
 				trace.Trace_bgn(ctx, src, name_ary, caller, invk_tmpl, defn);
 
-				Bry_bfr rslt_bfr = wiki.Utl_bry_bfr_mkr().Get_k004();
+				Bry_bfr rslt_bfr = wiki.Utl__bfr_mkr().Get_k004();
 				try {
 					Bld_key(invk_tmpl, name_ary, rslt_bfr);
 					byte[] rslt_key = rslt_bfr.Xto_bry_and_clear();

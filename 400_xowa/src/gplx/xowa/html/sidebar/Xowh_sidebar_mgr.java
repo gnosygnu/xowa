@@ -24,7 +24,7 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 	public byte[] Html_bry() {return html_bry;} private byte[] html_bry;
 	public void Init() {
 		try {
-			Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
+			Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
 			Xol_msg_itm sidebar_msg = Xol_msg_mgr_.Get_msg_itm(bfr, wiki, wiki.Lang(), CONST_sidebar_ttl);
 			if (	sidebar_msg.Src() == Xol_msg_itm.Src_missing
 				||	(	sidebar_msg.Src() == Xol_msg_itm.Src_lang
@@ -34,7 +34,7 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 				bfr.Mkr_rls();
 				return;
 			}
-			Bry_bfr comment_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
+			Bry_bfr comment_bfr = wiki.Utl__bfr_mkr().Get_b512();
 			Parse(bfr, comment_bfr, sidebar_msg.Val());
 			Bld_html(bfr);
 			html_bry = bfr.Mkr_rls().Xto_bry_and_clear();
@@ -53,7 +53,7 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 	public void Parse(Bry_bfr bfr, Bry_bfr comment_bfr, byte[] src) {
 		byte[][] lines = Bry_.Split(src, Byte_ascii.NewLine);
 		int lines_len = lines.length;
-		Url_encoder id_encoder = Xoa_app_.Utl_encoder_mgr().Id();
+		Url_encoder id_encoder = Xoa_app_.Utl__encoder_mgr().Id();
 		Xowh_sidebar_itm cur_grp = null;
 		Xop_link_parser link_parser = new Xop_link_parser();
 		for (int i = 0; i < lines_len; i++) {

@@ -25,7 +25,7 @@ public class Xof_math_html_wtr {
 		Xoae_app app = ctx.App(); Xowe_wiki wiki = ctx.Wiki(); Xoae_page page = ctx.Cur_page();
 		boolean renderer_is_latex = !app.File_mgr().Math_mgr().Renderer_is_mathjax();
 		byte[] math_bry = Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
-		Bry_bfr tmp_bfr = app.Utl_bry_bfr_mkr().Get_b512().Mkr_rls();
+		Bry_bfr tmp_bfr = app.Utl__bfr_mkr().Get_b512().Mkr_rls();
 		math_bry = Escape_tex(tmp_bfr, !renderer_is_latex, math_bry);
 		byte[] math_bry_clean = app.Html_mgr().Js_cleaner().Clean(wiki, math_bry, 0, math_bry.length);	// check for js; 
 		if (math_bry_clean != null) math_bry = math_bry_clean;	// js found; use clean version; DATE:2013-08-26

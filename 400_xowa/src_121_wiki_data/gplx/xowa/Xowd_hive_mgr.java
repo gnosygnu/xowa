@@ -39,7 +39,7 @@ public class Xowd_hive_mgr {
 		Xob_xdat_file xdat = new Xob_xdat_file();
 		if (bry != Bry_.Empty)
 			xdat.Parse(bry, bry.length, url);
-		Bry_bfr tmp = wiki.Utl_bry_bfr_mkr().Get_m001();
+		Bry_bfr tmp = wiki.Utl__bfr_mkr().Get_m001();
 		xdat.Insert(tmp, data);
 		if (comparer != null)
 			xdat.Sort(tmp, comparer);
@@ -63,7 +63,7 @@ public class Xowd_hive_mgr {
 		Xob_xdat_file xdat = new Xob_xdat_file();
 		if (bry != Bry_.Empty)
 			xdat.Parse(bry, bry.length, url);
-		Bry_bfr tmp = wiki.Utl_bry_bfr_mkr().Get_m001();
+		Bry_bfr tmp = wiki.Utl__bfr_mkr().Get_m001();
 		xdat.Insert(tmp, data);
 		if (comparer != null)
 			xdat.Sort(tmp, comparer);
@@ -82,7 +82,7 @@ public class Xowd_hive_mgr {
 		Xob_xdat_file xdat = new Xob_xdat_file();
 		if (bry != Bry_.Empty)
 			xdat.Parse(bry, bry.length, url);
-		Bry_bfr tmp = wiki.Utl_bry_bfr_mkr().Get_m001();
+		Bry_bfr tmp = wiki.Utl__bfr_mkr().Get_m001();
 		Xob_xdat_itm itm = new Xob_xdat_itm(); 
 		xdat.Find(itm, old_key, lkp_bgn, lkp_dlm, exact);
 		if (itm.Missing()) return;

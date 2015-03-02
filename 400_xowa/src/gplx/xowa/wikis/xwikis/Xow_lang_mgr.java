@@ -106,7 +106,7 @@ class Xow_lang_html implements Bry_fmtr_arg {
 		switch (stage) {
 			case 0: {
 				stage = 1;
-				Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b128().Mkr_rls();
+				Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b128().Mkr_rls();
 				byte[] msg_lang = wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_page_lang_header);
 				byte[] wikidata_link = Bry_.Len_eq_0(qid) ? Bry_.Empty : lang_mgr.Html_wikidata_link().Bld_bry_many(tmp_bfr, qid);
 				toggle_itm.Init(wiki);

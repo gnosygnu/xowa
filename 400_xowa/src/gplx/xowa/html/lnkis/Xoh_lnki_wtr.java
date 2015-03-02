@@ -113,9 +113,9 @@ public class Xoh_lnki_wtr {
 				Html_utl.Escape_html_to_bfr(bfr, lnki_title_bry, 0, lnki_title_bry.length, Bool_.N, Bool_.N, Bool_.N, Bool_.Y, Bool_.N);	// escape title; DATE:2014-10-27
 			}
 			if (hctx.Mode_is_hdump()) {
-				bfr.Add(gplx.xowa.hdumps.htmls.Hdump_html_consts.Html_redlink_bgn);
+				bfr.Add(gplx.xowa.html.hdumps.abrvs.Xohd_abrv_.Html_redlink_bgn);
 				bfr.Add_int_variable(lnki.Html_id());
-				bfr.Add(gplx.xowa.hdumps.htmls.Hdump_html_consts.Html_redlink_end);
+				bfr.Add(gplx.xowa.html.hdumps.abrvs.Xohd_abrv_.Html_redlink_end);
 			}
 			else {
 				if (cfg.Lnki_visited()

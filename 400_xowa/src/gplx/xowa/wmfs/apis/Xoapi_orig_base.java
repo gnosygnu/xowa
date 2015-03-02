@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wmfs.apis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wmfs.*;
 import gplx.ios.*; import gplx.xowa.files.repos.*;
 public abstract class Xoapi_orig_base {
-	public boolean Api_query_size(Xoapi_orig_rslts rv, Xof_download_wkr download_wkr, Xowe_repo_mgr repo_mgr, byte[] ttl, int width, int height) {
+	public boolean Api_query_size(Xoapi_orig_rslts rv, Xof_download_wkr download_wkr, Xow_repo_mgr repo_mgr, byte[] ttl, int width, int height) {
 		if (!gplx.ios.IoEngine_system.Web_access_enabled) return false;	// don't check api if download disabled else "download_failed" messages in log (particularly during pkg_make) DATE:2015-02-12
 		Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_._;
 		Xof_repo_pair[] repos = repo_mgr.Repos_ary();

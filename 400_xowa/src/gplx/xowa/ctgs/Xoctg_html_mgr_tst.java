@@ -250,7 +250,7 @@ class Xoh_ctg_page_fxt {
 		fmtr_itm.Init_from_all(wiki, wiki.Lang(), ctg, list_mgr, list, list.Len());
 		fmtr_itm.Init_from_grp(new byte[] {grp_char_0}, 0);
 		fmtr_itm.Col_idx_(0, 0);
-		Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
 		fmtr_itm.XferAry(bfr, 0);
 		Tfds.Eq_str_lines(expd, bfr.Mkr_rls().Xto_str_and_clear());
 	}
@@ -258,12 +258,12 @@ class Xoh_ctg_page_fxt {
 		Xoctg_fmtr_all list_mgr = ctg_html.Fmtr(tid);
 		Xoctg_fmtr_grp fmtr_grp = ctg_html.Fmtr_grp();
 		fmtr_grp.Init_from_all(wiki, wiki.Lang(), ctg, list_mgr, ctg.Grp_by_tid(tid));
-		Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
 		fmtr_grp.XferAry(bfr, 0);
 		Tfds.Eq_str_lines(expd, bfr.Mkr_rls().Xto_str_and_clear());
 	}
 	public void Test_html_all(byte tid, String expd) {
-		Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
 		ctg_html.Bld_all(bfr, wiki, wiki.Lang(), ctg, tid);
 		Tfds.Eq_str_lines(expd, bfr.Mkr_rls().Xto_str_and_clear());
 	}

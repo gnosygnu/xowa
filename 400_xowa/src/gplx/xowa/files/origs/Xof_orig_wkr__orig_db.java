@@ -20,12 +20,14 @@ import gplx.dbs.*;
 public class Xof_orig_wkr__orig_db implements Xof_orig_wkr {
 	public byte				Tid() {return Xof_orig_wkr_.Tid_xowa_reg;}
 	public Xof_orig_tbl		Tbl() {return tbl;} private final Xof_orig_tbl tbl = new Xof_orig_tbl();
-	public void				Conn_(Db_conn conn, boolean created, boolean version_is_1) {tbl.Conn_(conn, created, version_is_1);}
+	public void				Conn_(Db_conn conn, boolean created, boolean schema_is_1) {tbl.Conn_(conn, created, schema_is_1);}
 	public boolean				Find_by_list(OrderedHash rv, ListAdp itms) {tbl.Select_by_list(rv, itms); return true;}
 	public Xof_orig_itm		Find_as_itm(byte[] ttl) {return tbl.Select_itm(ttl);}
 	public boolean Add_orig(byte repo, byte[] page, int ext_id, int w, int h, byte[] redirect) {
-		if (tbl.Select_itm(page) != Xof_orig_itm.Null) return false;	// do not add if already there; probably not needed
+		if (tbl.Select_itm(page) != Xof_orig_itm.Null) return false;	// do not add if already there; needed b/c fsdb_wkr always calls Insert when itm is found;
 		tbl.Insert(repo, page, ext_id, w, h, redirect);
 		return true;
 	}
+	public void				Db_txn_save() {tbl.Conn().Txn_mgr().Txn_end_all();}
+	public void				Db_rls() {tbl.Conn().Conn_term();}
 }

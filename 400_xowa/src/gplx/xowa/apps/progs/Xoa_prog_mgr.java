@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.progs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
-import gplx.xowa.apps.fsys.*;
+import gplx.xowa.apps.fsys.*; import gplx.xowa.files.*;
 public class Xoa_prog_mgr implements GfoInvkAble {
 	public void Init_by_app(Xoa_fsys_eval cmd_eval) {
 		Gfo_usr_dlg usr_dlg = Xoa_app_.Usr_dlg();

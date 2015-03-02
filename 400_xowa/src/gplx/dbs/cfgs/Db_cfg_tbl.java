@@ -21,10 +21,11 @@ public class Db_cfg_tbl {
 	private String tbl_name; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private String fld_grp, fld_key, fld_val;
 	private Db_conn conn; private Db_stmt stmt_insert, stmt_update, stmt_select;
-	public void Conn_(Db_conn new_conn, boolean created, boolean version_is_1, String tbl_v1, String tbl_v2) {
+	public Db_conn Conn() {return conn;}
+	public void Conn_(Db_conn new_conn, boolean created, boolean schema_is_1, String tbl_v1, String tbl_v2) {
 		this.conn = new_conn; flds.Clear();
 		String fld_prefix = "";
-		if (version_is_1) {
+		if (schema_is_1) {
 			tbl_name		= tbl_v1;
 			fld_prefix		= "cfg_";
 		}
@@ -54,6 +55,8 @@ public class Db_cfg_tbl {
 		if (rv == Int_.MinValue) throw Err_.new_fmt_("dbs.cfg_tbl.Select_as_int_or_fail: tbl={0} grp={1} key={2}", tbl_name, grp, key);
 		return rv;
 	}
+	public long Select_as_long_or(String grp, String key, long or) {return Long_.parse_or_(Select_as_str_or(grp, key, null), or);}
+	public byte Select_as_byte_or(String grp, String key, byte or) {return Byte_.parse_or_(Select_as_str_or(grp, key, null), or);}
 	public int Select_as_int_or(String grp, String key, int or) {return Int_.parse_or_(Select_as_str_or(grp, key, null), or);}
 	public String Select_as_str_or(String grp, String key, String or) {
 		if (stmt_select == null) stmt_select = conn.Rls_reg(conn.Stmt_select(tbl_name, String_.Ary(fld_val), fld_grp, fld_key));

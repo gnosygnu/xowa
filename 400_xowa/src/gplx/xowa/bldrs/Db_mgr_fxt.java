@@ -38,7 +38,7 @@ public class Db_mgr_fxt {
 		Xodb_page_tbl tbl_page = wiki.Db_mgr_as_sql().Tbl_page();
 		Db_stmt stmt = Db_stmt_.Null;
 		try {
-			stmt = tbl_page.Insert_stmt(wiki.Db_mgr_as_sql().Fsys_mgr().Conn_page());
+			stmt = tbl_page.Insert_stmt(wiki.Db_mgr_as_sql().Core_data_mgr().Conn_page());
 			int len = ttls.length;
 			DateAdp modified_on = Tfds.Now_time0_add_min(0);
 			for (int i = 0; i < len; i++) {
@@ -132,7 +132,7 @@ public class Db_mgr_fxt {
 		Xodb_mgr_sql db_mgr = wiki.Db_mgr_create_as_sql();
 		db_mgr.Data_storage_format_(gplx.ios.Io_stream_.Tid_file);
 		db_mgr.Init_by_ns_map("");
-		Db_conn conn = db_mgr.Fsys_mgr().Conn_core();
+		Db_conn conn = db_mgr.Core_data_mgr().Conn_core();
 		conn.Exec_qry(Db_qry_delete.new_all_("xowa_cfg"));
 		conn.Exec_qry(Db_qry_delete.new_all_("xowa_db"));
 		conn.Exec_qry(Db_qry_delete.new_all_("xowa_ns"));

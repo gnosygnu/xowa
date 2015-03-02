@@ -27,15 +27,24 @@ public class Xow_file_mgr implements GfoInvkAble {
 		fsdb_mgr = new Xof_fsdb_mgr__sql();
 		wkr_mgr = new Xof_wkr_mgr(this);
 	}
+	public Xof_fsdb_mode	Fsdb_mode() {
+		if (fsdb_mode == null) {
+			Version();
+		}
+		return fsdb_mode;
+	} private Xof_fsdb_mode fsdb_mode = null;
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public byte Version() {
 		if (version == Bool_.__byte) {
 			Io_url file_dir = wiki.Fsys_mgr().File_dir();
-			Io_url[] sqlite_fils = Io_mgr._.QueryDir_args(file_dir).FilPath_("*.sqlite3").ExecAsUrlAry();
-			if (sqlite_fils.length == 0)
+			if (!Io_mgr._.ExistsFil(file_dir.GenSubFil(Fsm_mnt_mgr.Mnt_name))) {
 				version = Version_1;
-			else
+				fsdb_mode = Xof_fsdb_mode.new_wmf();
+			}
+			else {
 				version = Version_2;
+				fsdb_mode = Xof_fsdb_mode.new_view();
+			}
 		}
 		return version;
 	}	private byte version = Version_null;

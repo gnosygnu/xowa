@@ -95,7 +95,7 @@ public class Gxw_html_server implements Gxw_html {
 	public static void Assert_tab(Xoae_app app, Xoae_page page) {
 		Xog_win_itm browser_win = app.Gui_mgr().Browser_win();
 		if (browser_win.Active_tab() == null) {									// no active tab
-			Xowe_wiki wiki = browser_win.Active_tab().Wiki();
+			Xowe_wiki wiki = page.Wikie();										// take wiki from current page; NOTE: do not take from browser_win.Active_tab().Wiki(); DATE:2015-02-23
 			browser_win.Tab_mgr().Tabs_new_init(wiki, page);					// create at least one active tab; DATE:2014-07-30
 		}
 	}

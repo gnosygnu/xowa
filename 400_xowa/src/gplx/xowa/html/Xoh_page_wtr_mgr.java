@@ -46,8 +46,8 @@ public class Xoh_page_wtr_mgr implements GfoInvkAble {
 	}
 	public boolean Html_capable() {return html_capable;} public Xoh_page_wtr_mgr Html_capable_(boolean v) {html_capable = v; return this;} private boolean html_capable;
 	public Bry_fmtr Page_read_fmtr() {return page_read_fmtr;}
-	public byte[] Css_common_bry() {return css_common_bry;} public Xoh_page_wtr_mgr Css_common_bry_(Io_url v) {css_common_bry = Xoa_app_.Utl_encoder_mgr().Fsys().Encode_http(v); return this;} private byte[] css_common_bry;
-	public byte[] Css_wiki_bry() {return css_wiki_bry;} public Xoh_page_wtr_mgr Css_wiki_bry_(Io_url v) {css_wiki_bry = Xoa_app_.Utl_encoder_mgr().Fsys().Encode_http(v); return this;} private byte[] css_wiki_bry;
+	public byte[] Css_common_bry() {return css_common_bry;} public Xoh_page_wtr_mgr Css_common_bry_(Io_url v) {css_common_bry = Xoa_app_.Utl__encoder_mgr().Fsys().Encode_http(v); return this;} private byte[] css_common_bry;
+	public byte[] Css_wiki_bry() {return css_wiki_bry;} public Xoh_page_wtr_mgr Css_wiki_bry_(Io_url v) {css_wiki_bry = Xoa_app_.Utl__encoder_mgr().Fsys().Encode_http(v); return this;} private byte[] css_wiki_bry;
 	private static final String[] Fmtr_keys = new String[] 
 	{ "app_root_dir", "app_version", "app_build_date", "xowa_mode_is_server"
 	, "page_id", "page_name", "page_title", "page_modified_on_msg"
@@ -84,7 +84,7 @@ public class Xoh_page_wtr_mgr implements GfoInvkAble {
 			page_edit_fmtr.Eval_mgr_(wiki.Eval_mgr());
 			page_html_fmtr.Eval_mgr_(wiki.Eval_mgr());
 		}
-		Bry_bfr tmp_bfr = Xoa_app_.Utl_bry_bfr_mkr().Get_m001();
+		Bry_bfr tmp_bfr = Xoa_app_.Utl__bfr_mkr().Get_m001();
 		byte[] bry = wtr.Write(this, page, wiki.Ctx(), tmp_bfr);
 		tmp_bfr.Mkr_rls();
 		return bry;

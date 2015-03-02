@@ -40,20 +40,23 @@ public class Db_meta_fld_list {
 		}
 		return rv.XtoStrAry();
 	}
-	public String Add_bool(String name)					{return Add(name, Db_meta_fld.Tid_bool,		Len_null, Bool_.N, Bool_.N, Bool_.N);}
-	public String Add_byte(String name)					{return Add(name, Db_meta_fld.Tid_byte,		Len_null, Bool_.N, Bool_.N, Bool_.N);}
-	public String Add_short(String name)				{return Add(name, Db_meta_fld.Tid_short,	Len_null, Bool_.N, Bool_.N, Bool_.N);}
-	public String Add_int(String name)					{return Add(name, Db_meta_fld.Tid_int,		Len_null, Bool_.N, Bool_.N, Bool_.N);}
-	public String Add_int_pkey(String name)				{return Add(name, Db_meta_fld.Tid_int,		Len_null, Bool_.N, Bool_.Y, Bool_.N);}
-	public String Add_int_pkey_autonum(String name)		{return Add(name, Db_meta_fld.Tid_int,		Len_null, Bool_.N, Bool_.Y, Bool_.Y);}
-	public String Add_long(String name)					{return Add(name, Db_meta_fld.Tid_long,		Len_null, Bool_.N, Bool_.N, Bool_.N);}
-	public String Add_float(String name)				{return Add(name, Db_meta_fld.Tid_float,	Len_null, Bool_.N, Bool_.N, Bool_.N);}
-	public String Add_double(String name)				{return Add(name, Db_meta_fld.Tid_double,	Len_null, Bool_.N, Bool_.N, Bool_.N);}
-	public String Add_str(String name, int len)			{return Add(name, Db_meta_fld.Tid_str,		     len, Bool_.N, Bool_.N, Bool_.N);}
-	public String Add_text(String name)					{return Add(name, Db_meta_fld.Tid_text,		Len_null, Bool_.N, Bool_.N, Bool_.N);}
-	public String Add_bry(String name)					{return Add(name, Db_meta_fld.Tid_bry,		Len_null, Bool_.N, Bool_.N, Bool_.N);}
-	public String Add(String name, int tid, int len, boolean nullable, boolean primary, boolean autoincrement) {
-		Db_meta_fld fld = new Db_meta_fld(name, tid, len, nullable, primary, autoincrement);
+	public String Add_bool(String name)					{return Add(name, Db_meta_fld.Tid_bool,		Len_null, Bool_.N, Bool_.N, Bool_.N, Db_meta_fld.Default_value_null);}
+	public String Add_byte(String name)					{return Add(name, Db_meta_fld.Tid_byte,		Len_null, Bool_.N, Bool_.N, Bool_.N, Db_meta_fld.Default_value_null);}
+	public String Add_short(String name)				{return Add(name, Db_meta_fld.Tid_short,	Len_null, Bool_.N, Bool_.N, Bool_.N, Db_meta_fld.Default_value_null);}
+	public String Add_int(String name)					{return Add(name, Db_meta_fld.Tid_int,		Len_null, Bool_.N, Bool_.N, Bool_.N, Db_meta_fld.Default_value_null);}
+	public String Add_int_pkey(String name)				{return Add(name, Db_meta_fld.Tid_int,		Len_null, Bool_.N, Bool_.Y, Bool_.N, Db_meta_fld.Default_value_null);}
+	public String Add_int_pkey_autonum(String name)		{return Add(name, Db_meta_fld.Tid_int,		Len_null, Bool_.N, Bool_.Y, Bool_.Y, Db_meta_fld.Default_value_null);}
+	public String Add_int_dflt(String name, int dflt)	{return Add(name, Db_meta_fld.Tid_int,		Len_null, Bool_.N, Bool_.N, Bool_.N, dflt);}
+	public String Add_long(String name)					{return Add(name, Db_meta_fld.Tid_long,		Len_null, Bool_.N, Bool_.N, Bool_.N, Db_meta_fld.Default_value_null);}
+	public String Add_float(String name)				{return Add(name, Db_meta_fld.Tid_float,	Len_null, Bool_.N, Bool_.N, Bool_.N, Db_meta_fld.Default_value_null);}
+	public String Add_double(String name)				{return Add(name, Db_meta_fld.Tid_double,	Len_null, Bool_.N, Bool_.N, Bool_.N, Db_meta_fld.Default_value_null);}
+	public String Add_str(String name, int len)			{return Add(name, Db_meta_fld.Tid_str,		     len, Bool_.N, Bool_.N, Bool_.N, Db_meta_fld.Default_value_null);}
+	public String Add_str_dflt(String name, int len, String dflt)
+														{return Add(name, Db_meta_fld.Tid_str,		     len, Bool_.N, Bool_.N, Bool_.N, dflt);}
+	public String Add_text(String name)					{return Add(name, Db_meta_fld.Tid_text,		Len_null, Bool_.N, Bool_.N, Bool_.N, Db_meta_fld.Default_value_null);}
+	public String Add_bry(String name)					{return Add(name, Db_meta_fld.Tid_bry,		Len_null, Bool_.N, Bool_.N, Bool_.N, Db_meta_fld.Default_value_null);}
+	public String Add(String name, int tid, int len, boolean nullable, boolean primary, boolean autoincrement, Object default_value) {
+		Db_meta_fld fld = new Db_meta_fld(name, tid, len, nullable, primary, autoincrement, default_value);
 		flds.Add(name, fld);
 		keys.Add(name);
 		return name;

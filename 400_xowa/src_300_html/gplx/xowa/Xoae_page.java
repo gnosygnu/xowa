@@ -18,15 +18,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.xowa.gui.*; import gplx.xowa.gui.views.*; import gplx.xowa.html.*; import gplx.xowa.pages.*;
 import gplx.xowa.files.*; import gplx.xowa.xtns.cite.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.html.tocs.*;
-import gplx.xowa.html.modules.popups.*; import gplx.xowa.hdumps.pages.*; import gplx.xowa.xtns.wdatas.pfuncs.*;
-public class Xoae_page {		
+import gplx.xowa.html.modules.popups.*; import gplx.xowa.html.hdumps.pages.*; import gplx.xowa.xtns.wdatas.pfuncs.*;
+public class Xoae_page implements Xoa_page {
 	Xoae_page(Xowe_wiki wiki, Xoa_ttl ttl) {
 		this.wiki = wiki; this.ttl = ttl;
 		this.lang = wiki.Lang();	// default to wiki.lang; can be override later by wikitext
-		hdr_mgr = new Xow_hdr_mgr(this, Xoa_app_.Utl_encoder_mgr());
+		hdr_mgr = new Xow_hdr_mgr(this, Xoa_app_.Utl__encoder_mgr());
 		redlink_lnki_list = new Xopg_redlink_lnki_list(ttl.Ns().Id_module());
 		Ttl_(ttl);
 	}	Xoae_page() {}	// called by Null
+	public void						Xtn_gallery_packed_exists_y_() {html_data.Xtn_imap_exists_y_();}
 	public Xow_wiki					Wiki() {return wiki;}
 	public Xoa_ttl					Ttl() {return ttl;} public Xoae_page Ttl_(Xoa_ttl v) {ttl = v; url.Wiki_bry_(wiki.Domain_bry()).Page_bry_(v.Full_url()); return this;} private Xoa_ttl ttl;
 	public Xoa_url					Url() {return url;} public Xoae_page Url_(Xoa_url v) {url = v; return this;} private Xoa_url url = Xoa_url.blank_();

@@ -40,7 +40,7 @@ public class Pfunc_urlfunc extends Pf_func_base {	// EX: {{lc:A}} -> a
 				.Add_mid(ttl_ary, xwiki.Key_bry().length + 1, ttl_ary.length);	//	"A#b?c=d"; +1 for colon after "commons:"; NOTE: ugly way of getting rest of url, but ttl currently does not have Full_wo_wiki
 		}
 		else {
-			Bry_bfr tmp_bfr = ctx.App().Utl_bry_bfr_mkr().Get_b512().Mkr_rls();
+			Bry_bfr tmp_bfr = ctx.App().Utl__bfr_mkr().Get_b512().Mkr_rls();
 			switch (tid) {
 				case Tid_local:		tmp_bfr.Add(ctx.Wiki().Props().ArticlePath());break;
 				case Tid_full:		tmp_bfr.Add(Bry_relative_url).Add(ctx.Wiki().Props().ServerName()).Add(ctx.Wiki().Props().ArticlePath()); break;

@@ -18,8 +18,27 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.schemas.*; import gplx.dbs.schemas.updates.*;
 public class Xoud_regy_tbl {
+	public static final String Tbl_name = "user_regy", Fld_regy_grp = "regy_grp", Fld_regy_key = "regy_key", Fld_regy_val = "regy_val";
+	private static final String[] Flds__all = new String[] {Fld_regy_grp, Fld_regy_key, Fld_regy_val};
+	public static final Db_idx_itm Idx_core = Db_idx_itm.sql_("CREATE UNIQUE INDEX user_regy_core ON user_regy (regy_grp, regy_key);");
+	public static final String Tbl_sql = String_.Concat_lines_nl
+	( "CREATE TABLE user_regy"
+	, "( regy_grp           nvarchar(255)           NOT NULL           -- EX: xowa.schema.site"
+	, ", regy_key           nvarchar(255)           NOT NULL           -- EX: next_id"
+	, ", regy_val           nvarchar(255)           NOT NULL           -- EX: 1"
+	, ");"
+	);
 	private Db_stmt stmt_select_grp, stmt_select_key, stmt_insert, stmt_update, stmt_delete;
-	public Db_conn Conn() {return conn;} public Xoud_regy_tbl Conn_(Db_conn v) {this.Rls_all(); conn = v; return this;} private Db_conn conn;
+	public Db_conn Conn() {return conn;}
+	public Xoud_regy_tbl Conn_(Db_conn v, boolean created) {
+		this.Rls_all(); conn = v;
+		if (created) {
+			Schema_update_cmd cmd = Schema_update_cmd_.Make_tbl_create(Xoud_regy_tbl.Tbl_name	, Xoud_regy_tbl.Tbl_sql		, Xoud_regy_tbl.Idx_core);
+			cmd.Exec(null, conn);
+//				conn.Exec_create_tbl_and_idx(meta);
+		}
+		return this;
+	} private Db_conn conn;
 	@gplx.Virtual public void Insert(String grp, String key, String val) {
 		if (stmt_insert == null) stmt_insert = Db_stmt_.new_insert_(conn, Tbl_name, Flds__all);
 		try {stmt_insert.Clear().Val_str(grp).Val_str(key).Val_str(val).Exec_insert();}
@@ -74,14 +93,4 @@ public class Xoud_regy_tbl {
 		if (stmt_delete != null) {stmt_delete.Rls(); stmt_delete = null;}
 		conn = null;
 	}
-	public static final String Tbl_name = "user_regy", Fld_regy_grp = "regy_grp", Fld_regy_key = "regy_key", Fld_regy_val = "regy_val";
-	private static final String[] Flds__all = new String[] {Fld_regy_grp, Fld_regy_key, Fld_regy_val};
-	public static final Db_idx_itm Idx_core = Db_idx_itm.sql_("CREATE UNIQUE INDEX user_regy_core ON user_regy (regy_grp, regy_key);");
-	public static final String Tbl_sql = String_.Concat_lines_nl
-	( "CREATE TABLE user_regy"
-	, "( regy_grp           nvarchar(255)           NOT NULL           -- EX: xowa.schema.site"
-	, ", regy_key           nvarchar(255)           NOT NULL           -- EX: next_id"
-	, ", regy_val           nvarchar(255)           NOT NULL           -- EX: 1"
-	, ");"
-	);
 }

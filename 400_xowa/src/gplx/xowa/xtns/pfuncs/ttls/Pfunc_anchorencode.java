@@ -34,7 +34,7 @@ public class Pfunc_anchorencode extends Pf_func_base {	// EX: {{anchorencode:a b
 	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {
 		if (anchor_ctx == null) Func_init(ctx);
 		byte[] val_ary = Eval_argx(ctx, src, caller, self); if (val_ary == Bry_.Empty) return;
-		Anchor_encode(val_ary, bfr, ctx.App().Utl_bry_bfr_mkr().Get_b512().Mkr_rls());
+		Anchor_encode(val_ary, bfr, ctx.App().Utl__bfr_mkr().Get_b512().Mkr_rls());
 	}		
 	public static void Anchor_encode(byte[] src, Bry_bfr bfr, Bry_bfr tmp_bfr) {
 		Xop_root_tkn root = anchor_ctx.Tkn_mkr().Root(src);

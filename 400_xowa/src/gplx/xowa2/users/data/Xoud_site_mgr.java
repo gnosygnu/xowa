@@ -16,13 +16,17 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa2.users.data; import gplx.*; import gplx.xowa2.*; import gplx.xowa2.users.*;
-import gplx.dbs.*;
+import gplx.dbs.*; import gplx.xowa.users.data.*;
 public class Xoud_site_mgr {
-	private Xoud_site_tbl regy_tbl = new Xoud_site_tbl();
-	public void Conn_(Db_conn conn, boolean created, int user_id) {regy_tbl.Conn_(conn, created, user_id);}
-	public Xoud_site_row[] Get_all() {return regy_tbl.Select_all();}
+	private final Xoud_site_tbl tbl = new Xoud_site_tbl();
+	private final Xoud_id_mgr id_mgr;
+	public Xoud_site_mgr(Xoud_id_mgr id_mgr) {this.id_mgr = id_mgr;}
+	public void Conn_(Db_conn conn, boolean created, int user_id) {
+		tbl.Conn_(conn, created, user_id);
+	}
+	public Xoud_site_row[] Get_all() {return tbl.Select_all();}
 	public void Import(String domain, String name, String path, String xtn) {	// insert or update wiki
-		Xoud_site_row[] ary = regy_tbl.Select_by_domain(domain);
+		Xoud_site_row[] ary = tbl.Select_by_domain(domain);
 		int len = ary.length, update_id = -1, priority = 0;
 		for (int i = 0; i < len; ++i) {
 			Xoud_site_row itm = ary[i];
@@ -33,8 +37,8 @@ public class Xoud_site_mgr {
 			}
 		}
 		if (update_id == -1)
-			regy_tbl.Insert(1, priority, domain, name, path, xtn);
+			tbl.Insert(id_mgr.Get_next_and_save("xowa.user.site"), priority, domain, name, path, xtn);
 		else
-			regy_tbl.Update(update_id, priority, domain, name, path, xtn);			
+			tbl.Update(update_id, priority, domain, name, path, xtn);			
 	}
 }

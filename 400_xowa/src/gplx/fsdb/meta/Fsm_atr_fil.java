@@ -27,10 +27,10 @@ public class Fsm_atr_fil implements RlsAble {
 		this.abc_mgr = abc_mgr;
 		Db_conn_bldr_data conn_data = Db_conn_bldr.I.Get_or_new(Db_conn_bldr_type, io_url);
 		boolean created = conn_data.Created(); conn = conn_data.Conn();
-		boolean version_is_1 = Bool_.Y; 
-		tbl_dir.Conn_(conn, created, version_is_1);
-		tbl_fil.Conn_(conn, created, version_is_1);
-		tbl_thm.Conn_(conn, created, version_is_1, this);
+		boolean schema_is_1 = Bool_.Y; 
+		tbl_dir.Conn_(conn, created, schema_is_1);
+		tbl_fil.Conn_(conn, created, schema_is_1);
+		tbl_thm.Conn_(conn, created, schema_is_1, this);
 	}
 	public Fsm_abc_mgr Abc_mgr() {return abc_mgr;} private Fsm_abc_mgr abc_mgr;
 	public Db_conn Conn() {return conn;} private Db_conn conn;

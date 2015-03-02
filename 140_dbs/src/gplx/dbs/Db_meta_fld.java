@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
 public class Db_meta_fld {
-	public Db_meta_fld(String name, int tid, int len, boolean nullable, boolean primary, boolean autoincrement) {
+	public Db_meta_fld(String name, int tid, int len, boolean nullable, boolean primary, boolean autoincrement, Object default_value) {
 		this.name = name; this.tid = tid; this.len = len;
-		this.nullable = nullable; this.primary = primary; this.autoincrement = autoincrement;
+		this.nullable = nullable; this.primary = primary; this.autoincrement = autoincrement; this.default_value = default_value;
 	}
 	public int Tid() {return tid;} private final int tid;
 	public String Name() {return name;} private final String name;
@@ -27,7 +27,9 @@ public class Db_meta_fld {
 	public boolean Nullable() {return nullable;} private final boolean nullable;
 	public boolean Primary() {return primary;} private final boolean primary;
 	public boolean Autoincrement() {return autoincrement;} private final boolean autoincrement;
+	public Object Default_value() {return default_value;} private final Object default_value;
 	public static final int Tid_bool = 0, Tid_byte = 1, Tid_short = 2, Tid_int = 3, Tid_long = 4, Tid_float = 5, Tid_double = 6, Tid_str = 7, Tid_text = 8, Tid_bry = 9;
-	public static final String[] Ary_empy = String_.Ary_empty;
 	public static final String Key_null = null;
+	public static final String[] Ary_empy = String_.Ary_empty;
+	public static final Object Default_value_null = null;
 }

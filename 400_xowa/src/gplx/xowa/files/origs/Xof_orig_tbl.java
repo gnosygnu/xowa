@@ -16,16 +16,18 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.origs; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
+import gplx.core.primitives.*;
 import gplx.dbs.*; import gplx.dbs.utls.*; 
 import gplx.xowa.files.fsdb.*; import gplx.xowa.files.repos.*;
 public class Xof_orig_tbl {
 	private String tbl_name = "file_orig_regy"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private String fld_repo, fld_ttl, fld_status, fld_ext, fld_w, fld_h, fld_redirect;
 	private Db_conn conn; private final Xof_orig_tbl__in_wkr select_in_wkr = new Xof_orig_tbl__in_wkr();
-	public void Conn_(Db_conn new_conn, boolean created, boolean version_is_1) {
+	public Db_conn Conn() {return conn;}
+	public void Conn_(Db_conn new_conn, boolean created, boolean schema_is_1) {
 		this.conn = new_conn; flds.Clear();
 		String fld_prefix = "";
-		if (version_is_1) {
+		if (schema_is_1) {
 			tbl_name			= "wiki_orig";
 			fld_prefix			= "orig_";
 		}
@@ -78,11 +80,19 @@ public class Xof_orig_tbl {
 		return rv;
 	}
 	public static final String Db_conn_bldr_type = "xowa.file.orig_regy";
-	public static Db_conn Conn__get_or_make(Io_url root_dir, Xof_orig_tbl tbl, boolean version_is_1) {
-		Io_url conn_url = root_dir.GenSubFil("wiki.orig#00.sqlite3");
-		Db_conn_bldr_data conn_data = Db_conn_bldr.I.Get_or_new(Db_conn_bldr_type, conn_url);
-		Db_conn conn = conn_data.Conn();
-		tbl.Conn_(conn, conn_data.Created(), version_is_1);
+	public static Db_conn Conn__get_or_make(Io_url root_dir, Xof_orig_tbl tbl, boolean schema_is_1, Xof_fsdb_mode fsdb_mode) {
+		Io_url conn_url = root_dir.GenSubFil("wiki.orig#00.sqlite3");			
+//			boolean created = Bool_.N; Db_conn conn = null;
+//			if (fsdb_create.Val()) {
+			Db_conn_bldr_data conn_data = Db_conn_bldr.I.Get_or_new("", conn_url);
+			Db_conn conn = conn_data.Conn();
+			boolean created = conn_data.Created();
+//			}
+//			else {
+//				conn = Db_conn_bldr.I.Get("", conn_url);
+//				created = false;
+//			}
+		tbl.Conn_(conn, created, schema_is_1);
 		return conn;
 	}
 }

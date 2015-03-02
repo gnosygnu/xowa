@@ -22,24 +22,27 @@ import gplx.fsdb.data.*; import gplx.fsdb.meta.*;
 public class Fsm_mnt_mgr implements GfoInvkAble {
 	private final Db_cfg_tbl cfg_tbl = new Db_cfg_tbl(); private final Fsm_mnt_tbl mnt_tbl = new Fsm_mnt_tbl();
 	private Fsm_abc_mgr[] ary; private int ary_len = 0;
-	private static final String Db_conn_bldr_type_mnt = "gplx.fsdb.mnt";
-	public void Init_by_wiki(Io_url db_dir, boolean version_is_1) {
-		Db_conn_bldr_data conn_data = Db_conn_bldr.I.Get_or_new(Db_conn_bldr_type_mnt, db_dir.GenSubFil("wiki.mnt.sqlite3"));
-		Fsm_mnt_itm[] mnts = Mnts__load_or_make(conn_data, version_is_1);
+	public static final String Mnt_name = "wiki.mnt.sqlite3";
+	public void Init_by_wiki(Io_url db_dir, boolean schema_is_1) {
+		Io_url mnt_dir = db_dir.GenSubFil(Mnt_name);
+		Db_conn_bldr_data conn_data = Db_conn_bldr.I.Get_or_new("", mnt_dir);
+		Db_conn conn = conn_data.Conn();
+		boolean created = conn_data.Created();
+		Fsm_mnt_itm[] mnts = Mnts__load_or_make(conn, created, schema_is_1);
 		ary_len = mnts.length;
 		ary = new Fsm_abc_mgr[ary_len];
 		for (int i = 0; i < ary_len; i++) {
 			Fsm_mnt_itm itm = mnts[i];
 			Fsm_abc_mgr abc_mgr = new Fsm_abc_mgr();
 			ary[i] = abc_mgr;
-			if (version_is_1) {
+			if (schema_is_1) {
 				Io_url abc_url = db_dir.GenSubFil_nest(itm.Url(), "fsdb.abc.sqlite3");
-				abc_mgr.Init_for_db(version_is_1, abc_url.OwnerDir());
+				abc_mgr.Init_for_db(schema_is_1, abc_url.OwnerDir());
 			}
 			else
 				throw Err_.not_implemented_();
 		}
-		if (conn_data.Created()) Fsm_mnt_mgr.Patch(this);
+		if (created) Fsm_mnt_mgr.Patch(this);
 		insert_to_mnt = cfg_tbl.Select_as_int_or_fail("core", "mnt.insert_idx");
 		if (ary_len > 0) {
 			Db_cfg_grp cfg_grp = this.Mnts__at(0).Cfg_mgr().Grps_get_or_load(Xof_fsdb_mgr_cfg.Grp_xowa);
@@ -120,10 +123,9 @@ public class Fsm_mnt_mgr implements GfoInvkAble {
 			.Update(Xof_fsdb_mgr_cfg.Grp_xowa, Xof_fsdb_mgr_cfg.Key_upright_fix_default		, "y")
 			;
 	}
-	private Fsm_mnt_itm[] Mnts__load_or_make(Db_conn_bldr_data conn_data, boolean version_is_1) {
-		Db_conn conn = conn_data.Conn(); boolean created = conn_data.Created();
-		cfg_tbl.Conn_(conn, created, version_is_1, Fsm_abc_mgr.Cfg_tbl_v1, Fsm_abc_mgr.Cfg_tbl_v2);
-		mnt_tbl.Conn_(conn, created, version_is_1);
+	private Fsm_mnt_itm[] Mnts__load_or_make(Db_conn conn, boolean created, boolean schema_is_1) {
+		cfg_tbl.Conn_(conn, created, schema_is_1, Fsm_abc_mgr.Cfg_tbl_v1, Fsm_abc_mgr.Cfg_tbl_v2);
+		mnt_tbl.Conn_(conn, created, schema_is_1);
 		if (created) cfg_tbl.Insert("core", "mnt.insert_idx", Int_.Xto_str(Mnt_idx_user));
 		return mnt_tbl.Select_all();
 	}

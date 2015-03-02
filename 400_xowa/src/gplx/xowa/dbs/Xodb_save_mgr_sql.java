@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs; import gplx.*; import gplx.xowa.*;
-import gplx.dbs.*; import gplx.ios.*;
+import gplx.ios.*; import gplx.dbs.*; import gplx.xowa.wikis.data.*;
 public class Xodb_save_mgr_sql implements Xodb_save_mgr {
 	public Xodb_save_mgr_sql(Xodb_mgr_sql db_mgr) {
 		this.db_mgr = db_mgr; zip_mgr = db_mgr.Wiki().Appe().Zip_mgr();
@@ -41,11 +41,11 @@ public class Xodb_save_mgr_sql implements Xodb_save_mgr {
 		else
 			page_id_int = Int_.parse_(page_id);
 
-		Xodb_fsys_mgr fsys_mgr = db_mgr.Fsys_mgr();
+		Xowe_core_data_mgr fsys_mgr = db_mgr.Core_data_mgr();
 		int file_idx = fsys_mgr.Tid_text_idx();
 		boolean redirect = db_mgr.Wiki().Redirect_mgr().Is_redirect(text, text.length);
 		Db_stmt page_stmt = db_mgr.Tbl_page().Insert_stmt(fsys_mgr.Conn_page());
-		Db_conn text_provider = db_mgr.Fsys_mgr().Get_by_idx(file_idx).Conn();
+		Db_conn text_provider = db_mgr.Core_data_mgr().Dbs__get_at(file_idx).Conn();
 		Db_stmt text_stmt = db_mgr.Tbl_text().Insert_stmt(text_provider);
 		text = zip_mgr.Zip(db_mgr.Data_storage_format(), text);
 		try {
@@ -72,7 +72,7 @@ public class Xodb_save_mgr_sql implements Xodb_save_mgr {
 			if (redirect_changed) kv_ary[kv_idx++] = KeyVal_.new_("page_is_redirect", redirect_changed);
 			if (modified_changed) kv_ary[kv_idx++] = KeyVal_.new_("page_touched", Xto_touched_str(modified));
 			qry = Db_qry_.update_common_("page", Db_crt_.eq_("page_id", page.Revision_data().Id()), kv_ary);
-			Db_conn conn = db_mgr.Fsys_mgr().Conn_core();
+			Db_conn conn = db_mgr.Core_data_mgr().Conn_core();
 			conn.Txn_mgr().Txn_bgn_if_none();
 			conn.Exec_qry(qry);
 			conn.Txn_mgr().Txn_end_all();
@@ -88,12 +88,12 @@ public class Xodb_save_mgr_sql implements Xodb_save_mgr {
 		, KeyVal_.new_("page_title", String_.new_utf8_(trg_ttl))
 		);
 		try {
-			db_mgr.Fsys_mgr().Conn_core().Exec_qry(qry);
+			db_mgr.Core_data_mgr().Conn_core().Exec_qry(qry);
 		} catch (Exception exc) {
 			if (String_.Has(Err_.Message_gplx_brief(exc), "columns page_namespace, page_random_int are not unique")) {	// HACK: terrible hack, but moving pages across ns will break UNIQUE index
-				db_mgr.Fsys_mgr().Conn_core().Exec_sql("DROP INDEX page__name_random;"); // is UNIQUE by default
-				db_mgr.Fsys_mgr().Conn_core().Exec_sql("CREATE INDEX page__name_random ON page (page_namespace, page_random_int);");
-				db_mgr.Fsys_mgr().Conn_core().Exec_qry(qry);
+				db_mgr.Core_data_mgr().Conn_core().Exec_sql("DROP INDEX page__name_random;"); // is UNIQUE by default
+				db_mgr.Core_data_mgr().Conn_core().Exec_sql("CREATE INDEX page__name_random ON page (page_namespace, page_random_int);");
+				db_mgr.Core_data_mgr().Conn_core().Exec_qry(qry);
 			}
 		}
 	}

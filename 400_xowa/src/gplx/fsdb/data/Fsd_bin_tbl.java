@@ -23,10 +23,10 @@ public class Fsd_bin_tbl {
 	private String fld_owner_id, fld_owner_tid, fld_part_id, fld_data_url, fld_data;		
 	private Db_conn conn;
 	private Bry_bfr tmp_bfr = Bry_bfr.reset_(Io_mgr.Len_kb);
-	public void Conn_(Db_conn new_conn, boolean created, boolean version_is_1) {
+	public void Conn_(Db_conn new_conn, boolean created, boolean schema_is_1) {
 		this.conn = new_conn; flds.Clear();
 		String fld_prefix = "";
-		if (version_is_1) {
+		if (schema_is_1) {
 			tbl_name		= "fsdb_bin";
 			fld_prefix		= "bin_";
 		}

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.core.primitives.*;
 import gplx.ios.*;
-import gplx.xowa.dbs.*; import gplx.xowa.tdbs.*;
+import gplx.xowa.wikis.data.*; import gplx.xowa.dbs.*; import gplx.xowa.tdbs.*;
 public abstract class Xob_search_base extends Xob_itm_dump_base implements Xobd_wkr, GfoInvkAble {
 	public abstract String Wkr_key();
 	public abstract Io_make_cmd Make_cmd_site();
@@ -59,8 +59,8 @@ public abstract class Xob_search_base extends Xob_itm_dump_base implements Xobd_
 		tmp_wtr_mgr.Rls_all();
 		if (delete_temp) Io_mgr._.DeleteDirDeep(temp_dir);
 		if (wiki.Db_mgr().Tid() == Xodb_mgr_sql.Tid_sql) {
-			Xodb_fsys_mgr db_fs = wiki.Db_mgr_as_sql().Fsys_mgr();
-			wiki.Db_mgr_as_sql().Tbl_xowa_db().Commit_all(db_fs.Files_ary());	// always save files now; need to commit created search_db_idx to xowa_db, else will be reused by ctg v2; DATE:2014-02-07
+			Xowe_core_data_mgr core_data_mgr = (Xowe_core_data_mgr)wiki.Data_mgr__core_mgr();
+			core_data_mgr.Dbs__save();	// always save files now; need to commit created search_db_idx to xowa_db, else will be reused by ctg v2; DATE:2014-02-07
 		}
 	}
 	public void Wkr_print() {}

@@ -38,7 +38,7 @@ public class Db_sqlbldr_tst {
 		flds.Add_bry("fld_bry");
 		fxt.Test_create_tbl(Db_meta_tbl.new_("tbl_name", flds.To_fld_ary())
 		, String_.Concat_lines_nl_skip_last
-		( "CREATE TABLE tbl_name"
+		( "CREATE TABLE IF NOT EXISTS tbl_name"
 		, "( fld_int_pkey integer NOT NULL PRIMARY KEY"
 		, ", fld_bool boolean NOT NULL"
 		, ", fld_short smallint NOT NULL"
@@ -52,13 +52,17 @@ public class Db_sqlbldr_tst {
 		, ");"
 		));
 	}
+	@Test  public void Tbl_alter_tbl_add() {
+		Db_meta_fld_list flds = Db_meta_fld_list.new_();
+		flds.Add_int_dflt("fld_int", -1);
+		flds.Add_str_dflt("fld_str", 255, "a");
+		fxt.Test_alter_tbl_add("tbl_name", flds.Get_by("fld_int"), "ALTER TABLE tbl_name ADD fld_int integer NOT NULL DEFAULT -1;");
+		fxt.Test_alter_tbl_add("tbl_name", flds.Get_by("fld_str"), "ALTER TABLE tbl_name ADD fld_str varchar(255) NOT NULL DEFAULT 'a';");
+	}
 }
 class Db_sqlbldr_fxt {
 	private Db_sqlbldr__sqlite sqlbldr = Db_sqlbldr__sqlite.I;
-	public void Test_create_idx(Db_meta_idx idx, String expd) {
-		Tfds.Eq(expd, sqlbldr.Bld_create_idx(idx));
-	}
-	public void Test_create_tbl(Db_meta_tbl tbl, String expd) {
-		Tfds.Eq_str_lines(expd, sqlbldr.Bld_create_tbl(tbl));
-	}
+	public void Test_create_idx(Db_meta_idx idx, String expd) {Tfds.Eq(expd, sqlbldr.Bld_create_idx(idx));}
+	public void Test_create_tbl(Db_meta_tbl tbl, String expd) {Tfds.Eq_str_lines(expd, sqlbldr.Bld_create_tbl(tbl));}
+	public void Test_alter_tbl_add(String tbl, Db_meta_fld fld, String expd) {Tfds.Eq_str_lines(expd, sqlbldr.Bld_alter_tbl_add(tbl, fld));}
 }

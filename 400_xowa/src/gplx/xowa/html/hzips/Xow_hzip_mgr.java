@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.xowa.wikis.ttls.*;
 public class Xow_hzip_mgr {		
-	private Gfo_usr_dlg usr_dlg;
+	private final Gfo_usr_dlg usr_dlg;
 	private byte[] page_url; private byte[] src; private int src_len;
 	public Xow_hzip_mgr(Gfo_usr_dlg usr_dlg, Xow_ttl_parser ttl_parser) {
 		this.usr_dlg = usr_dlg;
@@ -27,13 +27,13 @@ public class Xow_hzip_mgr {
 	}
 	public Xow_hzip_itm__anchor Itm__anchor() {return itm__anchor;} private Xow_hzip_itm__anchor itm__anchor;
 	public Xow_hzip_itm__header Itm__header() {return itm__header;} private Xow_hzip_itm__header itm__header;
-	public void Save(Bry_bfr bfr, Xow_hzip_stats stats, byte[] page_url, byte[] src) {
+	public void Write(Bry_bfr bfr, Xodump_stats_itm stats, byte[] page_url, byte[] src) {
 		this.page_url = page_url; this.src = src; this.src_len = src.length;			
 		bfr.Clear(); stats.Clear();
 		int pos = 0, add_bgn = -1;
 		while (pos < src_len) {
 			byte b = src[pos];
-			Object o = save_trie.Match_bgn_w_byte(b, src, pos, src_len);
+			Object o = btrie.Match_bgn_w_byte(b, src, pos, src_len);
 			if (o == null) {
 				if (add_bgn == -1) add_bgn = pos;
 				++pos;
@@ -42,7 +42,7 @@ public class Xow_hzip_mgr {
 				if (add_bgn != -1) {bfr.Add_mid(src, add_bgn, pos); add_bgn = -1;}
 				byte tid = ((Byte_obj_val)o).Val();
 				int match_bgn = pos;
-				int match_end = save_trie.Match_pos();
+				int match_end = btrie.Match_pos();
 				switch (tid) {
 					case Tid_a_lhs: pos = itm__anchor.Save(bfr, stats, src, src_len, match_bgn, match_end); break;
 					case Tid_a_rhs: pos = itm__anchor.Save_a_rhs(bfr, stats, src, src_len, match_bgn, match_end); break;
@@ -57,26 +57,26 @@ public class Xow_hzip_mgr {
 		}
 		if (add_bgn != -1) bfr.Add_mid(src, add_bgn, src_len);
 	}
-	public void Load(Bry_bfr bfr, byte[] page_url, byte[] src) {
+	public byte[] Parse(Bry_bfr rv, byte[] page_url, byte[] src) {
 		this.page_url = page_url; this.src = src;
 		this.src_len = src.length;			
 		int pos = 0, add_bgn = -1;
-		bfr.Clear();
+		rv.Clear();
 		while (pos < src_len) {
 			byte b = src[pos];
 			if (b == Xow_hzip_dict.Escape) {
-				if (add_bgn != -1) {bfr.Add_mid(src, add_bgn, pos); add_bgn = -1;}
+				if (add_bgn != -1) {rv.Add_mid(src, add_bgn, pos); add_bgn = -1;}
 				int itm_pos = pos + 2;		
 				int tid_pos = pos + 1;							if (tid_pos >= src_len) {Warn_by_pos("load.eos", pos, itm_pos); break;}
 				byte tid = src[tid_pos];
 				switch (tid) {
 					case Xow_hzip_dict.Tid_lnki_text_n:
-					case Xow_hzip_dict.Tid_lnki_text_y:			pos = itm__anchor.Load_lnki(bfr, src, src_len, itm_pos, tid); break;
+					case Xow_hzip_dict.Tid_lnki_text_y:			pos = itm__anchor.Load_lnki(rv, src, src_len, itm_pos, tid); break;
 					case Xow_hzip_dict.Tid_lnke_txt:
 					case Xow_hzip_dict.Tid_lnke_brk_text_n:
-					case Xow_hzip_dict.Tid_lnke_brk_text_y:		pos = itm__anchor.Load_lnke(bfr, src, src_len, itm_pos, tid); break;
-					case Xow_hzip_dict.Tid_a_rhs:				pos = itm_pos; bfr.Add_str("</a>"); break;
-					case Xow_hzip_dict.Tid_hdr_lhs:				pos = itm__header.Load(bfr, src, src_len, itm_pos); break;
+					case Xow_hzip_dict.Tid_lnke_brk_text_y:		pos = itm__anchor.Load_lnke(rv, src, src_len, itm_pos, tid); break;
+					case Xow_hzip_dict.Tid_a_rhs:				pos = itm_pos; rv.Add_str("</a>"); break;
+					case Xow_hzip_dict.Tid_hdr_lhs:				pos = itm__header.Load(rv, src, src_len, itm_pos); break;
 				}
 			}
 			else {
@@ -84,7 +84,8 @@ public class Xow_hzip_mgr {
 				++pos;
 			}
 		}
-		if (add_bgn != -1) bfr.Add_mid(src, add_bgn, src_len);
+		if (add_bgn != -1) rv.Add_mid(src, add_bgn, src_len);
+		return rv.Xto_bry_and_clear();
 	}
 	public int Warn_by_pos_add_dflt(String err, int bgn, int end)	{return Warn_by_pos(err, bgn, end, 32);}
 	public int Warn_by_pos(String err, int bgn, int end)			{return Warn_by_pos(err, bgn, end, 0);}
@@ -99,7 +100,7 @@ public class Xow_hzip_mgr {
 	, Tid_a_rhs = 1
 	, Tid_h_lhs = 2
 	;
-	private Btrie_slim_mgr save_trie = Btrie_slim_mgr.cs_()
+	private Btrie_slim_mgr btrie = Btrie_slim_mgr.cs_()
 	.Add_str_byte("<a "			, Tid_a_lhs)
 	.Add_str_byte("</a>"		, Tid_a_rhs)
 	.Add_str_byte("<h"			, Tid_h_lhs)

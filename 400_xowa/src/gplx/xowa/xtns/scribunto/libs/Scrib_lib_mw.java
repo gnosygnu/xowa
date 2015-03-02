@@ -161,7 +161,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		int frame_arg_adj = Scrib_frame_.Get_arg_adj(frame_tid);
 		int args_len = frame.Args_len() - frame_arg_adj;
 		if (args_len < 1) return rslt.Init_obj(KeyVal_.Ary_empty);		// occurs when "frame:getParent().args" but no parent frame
-		Bry_bfr tmp_bfr = ctx.Wiki().Utl_bry_bfr_mkr().Get_b128();		// NOTE: do not make modular level variable, else random failures; DATE:2013-10-14
+		Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b128();		// NOTE: do not make modular level variable, else random failures; DATE:2013-10-14
 		ListAdp rv = ListAdp_.new_();
 		int arg_idx = 0;
 		for (int i = 0; i < args_len; i++) {
@@ -222,7 +222,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		int args_adj = Scrib_frame_.Get_arg_adj(frame_tid);
 		int args_len = frame.Args_len() - args_adj;
 		KeyVal[] kv_args = new KeyVal[args_len];
-		Bry_bfr tmp_bfr = core.Wiki().Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr tmp_bfr = core.Wiki().Utl__bfr_mkr().Get_b512();
 		for (int i = 0; i < args_len; i++) {
 			Arg_nde_tkn arg = frame.Args_get_by_idx(i + args_adj);
 			arg.Key_tkn().Tmpl_evaluate(ctx, src, frame, tmp_bfr);
@@ -251,7 +251,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		Xol_func_name_itm finder = cur_wiki.Lang().Func_regy().Find_defn(fnc_name, 0, fnc_name_len);
 		Xot_defn defn = finder.Func();
 		if (defn == Xot_defn_.Null) throw Err_.new_fmt_("callParserFunction: function \"{0}\" was not found", String_.new_utf8_(fnc_name));
-		Bry_bfr bfr = cur_wiki.Utl_bry_bfr_mkr().Get_k004();
+		Bry_bfr bfr = cur_wiki.Utl__bfr_mkr().Get_k004();
 		Xop_ctx fnc_ctx = Xop_ctx.new_sub_(cur_wiki);
 		fnc_ctx.Parse_tid_(Xop_parser_.Parse_tid_page_tmpl);	// default xnde names to template; needed for test, but should be in place; DATE:2014-06-27
 		Xot_invk_tkn.Eval_func(fnc_ctx, src, parent_frame, frame, bfr, defn, argx_ref.Val());
@@ -312,7 +312,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		if (sub_src !=  null) {
 			Xot_invk_mock sub_frame = Xot_invk_mock.new_(core.Frame_current().Defn_tid(), 0, ttl.Full_txt(), args_ary);	// NOTE: (1) must have ns (Full); (2) must be txt (space, not underscore); EX:Template:Location map+; DATE:2014-09-21
 			Xot_defn_tmpl transclude_tmpl = ctx.Wiki().Parser().Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), ttl.Ns(), ttl.Page_db(), sub_src);
-			Bry_bfr sub_bfr = cur_wiki.Utl_bry_bfr_mkr().Get_k004();
+			Bry_bfr sub_bfr = cur_wiki.Utl__bfr_mkr().Get_k004();
 			transclude_tmpl.Tmpl_evaluate(ctx, sub_frame, sub_bfr);
 			return rslt.Init_obj(sub_bfr.Mkr_rls().Xto_str_and_clear());
 		}

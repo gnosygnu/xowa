@@ -35,7 +35,7 @@ public class Xow_msg_mgr implements GfoInvkAble {
 		Xol_msg_itm itm = msg_mgr.Itm_by_id_or_null(id);
 		if (itm == null)
 			itm = lang.Msg_mgr().Itm_by_id_or_null(id);
-		Bry_bfr tmp_bfr = Xoa_app_.Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr tmp_bfr = Xoa_app_.Utl__bfr_mkr().Get_b512();
 		byte[] rv = Val_by_itm(tmp_bfr, itm, args);
 		tmp_bfr.Mkr_rls();
 		return rv;
@@ -45,7 +45,7 @@ public class Xow_msg_mgr implements GfoInvkAble {
 	public Xol_msg_itm Find_or_null(byte[] key) {
 		Xol_msg_itm itm = msg_mgr.Itm_by_key_or_null(key);
 		if (itm == null) {
-			Bry_bfr tmp_bfr = Xoa_app_.Utl_bry_bfr_mkr().Get_b512();
+			Bry_bfr tmp_bfr = Xoa_app_.Utl__bfr_mkr().Get_b512();
 			itm = Xol_msg_mgr_.Get_msg_itm(tmp_bfr, wiki, lang, key);
 			if (itm.Src_is_missing()) itm = null;
 			tmp_bfr.Mkr_rls();
@@ -57,7 +57,7 @@ public class Xow_msg_mgr implements GfoInvkAble {
 	public byte[] Val_by_key_obj(byte[] key) {return Val_by_key(key, null);}
 	private byte[] Val_by_key(byte[] key, Object[] args) {
 		Xol_msg_itm itm = msg_mgr.Itm_by_key_or_null(key);
-		Bry_bfr tmp_bfr = Xoa_app_.Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr tmp_bfr = Xoa_app_.Utl__bfr_mkr().Get_b512();
 		if (itm == null)
 			itm = Xol_msg_mgr_.Get_msg_itm(tmp_bfr, wiki, lang, key);
 		if (itm.Src_is_missing()) {
@@ -75,7 +75,7 @@ public class Xow_msg_mgr implements GfoInvkAble {
 		return rv;
 	}
 	public byte[] Val_html_accesskey_and_title(byte[] id) {
-		Bry_bfr bfr = Xoa_app_.Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr bfr = Xoa_app_.Utl__bfr_mkr().Get_b512();
 		byte[] rv = Val_html_accesskey_and_title(id, bfr, null);
 		bfr.Mkr_rls();
 		return rv;

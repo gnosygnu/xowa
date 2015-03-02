@@ -23,7 +23,7 @@ public class Xoa_available_wikis_mgr implements GfoInvkAble {
 	public String Itms_as_html() {
 		if (itms_as_html == null) {
 			String itm_cls = app.Api_root().Html().Modules().Popups().Enabled() ? " class='xowa-hover-off'" : "";
-			Bry_bfr tmp_bfr = Bry_bfr.new_(); // NOTE: do not use app.Utl_bry_bfr_mkr().Get_k004() as it is being used simultaneously by another caller; TODO: find call
+			Bry_bfr tmp_bfr = Bry_bfr.new_(); // NOTE: do not use app.Utl__bfr_mkr().Get_k004() as it is being used simultaneously by another caller; TODO: find call
 			Xow_xwiki_mgr xwiki_mgr = app.User().Wiki().Xwiki_mgr();
 			xwiki_mgr.Sort_by_key();
 			int len = xwiki_mgr.Len();

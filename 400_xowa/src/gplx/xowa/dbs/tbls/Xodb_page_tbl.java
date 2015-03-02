@@ -45,16 +45,16 @@ public class Xodb_page_tbl {
 		return false;
 	}
 	public static void Read_page__all2(Xodb_page page, Db_rdr rdr, boolean html_db_enabled) {
-		page.Id_			(rdr.Read_int(0));
-		page.Ns_id_			(rdr.Read_int(1));
-		page.Ttl_wo_ns_		(rdr.Read_bry_by_str(2));
-		page.Modified_on_	(DateAdp_.parse_fmt(rdr.Read_str(3), Page_touched_fmt));
-		page.Type_redirect_	(rdr.Read_byte(4) == 1);
-		page.Text_len_		(rdr.Read_int(5));
-		page.Text_db_id_	(rdr.Read_int(6));
+		page.Id_			(rdr.Read_int(Fld_page_id));
+		page.Ns_id_			(rdr.Read_int(Fld_page_ns));
+		page.Ttl_wo_ns_		(rdr.Read_bry_by_str(Fld_page_title));
+		page.Modified_on_	(DateAdp_.parse_fmt(rdr.Read_str(Fld_page_touched), Page_touched_fmt));
+		page.Type_redirect_	(rdr.Read_byte(Fld_page_is_redirect) == 1);
+		page.Text_len_		(rdr.Read_int(Fld_page_len));
+		page.Text_db_id_	(rdr.Read_int(Fld_page_file_idx));
 		if (html_db_enabled) {
-			page.Html_db_id_(rdr.Read_int(7));
-			page.Redirect_id_(rdr.Read_int(8));
+			page.Html_db_id_(rdr.Read_int(Fld_page_html_db_id));
+			page.Redirect_id_(rdr.Read_int(Fld_page_is_redirect));
 		}
 	}
 	public boolean Select_by_id(Xodb_page rv, int page_id) {

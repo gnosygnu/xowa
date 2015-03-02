@@ -28,7 +28,7 @@ public class Pfunc_case extends Pf_func_base {	// EX: {{lc:A}} -> a
 		Xol_lang lang = ctx.Wiki().Lang();
 		boolean upper = case_type == Xol_lang.Tid_upper;
 		if (first) {
-			Bry_bfr tmp_bfr = ctx.App().Utl_bry_bfr_mkr().Get_b512();
+			Bry_bfr tmp_bfr = ctx.App().Utl__bfr_mkr().Get_b512();
 			val_dat_ary = lang.Case_mgr().Case_build_1st(tmp_bfr, upper, val_dat_ary, 0, val_dat_ary_len);
 			tmp_bfr.Mkr_rls();
 		}

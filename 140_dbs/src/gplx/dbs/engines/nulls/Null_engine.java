@@ -29,7 +29,8 @@ public class Null_engine implements Db_engine {
 	public void				Txn_bgn() {}
 	public void				Txn_end() {}
 	public Object			Exec_as_obj(Db_qry cmd) {return cmd.Exec_is_rdr() ? (Object)DataRdr_.Null : -1;}
-	public void				Exec_create_tbl(Db_meta_tbl meta) {}
-	public void				Exec_create_idx(Gfo_usr_dlg usr_dlg, Db_meta_idx... ary) {}
+	public void				Exec_ddl_create_tbl(Db_meta_tbl meta) {}
+	public void				Exec_ddl_create_idx(Gfo_usr_dlg usr_dlg, Db_meta_idx... ary) {}
+	public void				Exec_ddl_append_fld(String tbl, Db_meta_fld fld) {}
         public static final Null_engine _ = new Null_engine(); Null_engine() {}
 }

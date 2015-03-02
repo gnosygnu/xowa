@@ -41,7 +41,7 @@ public class Lst_pfunc_wkr {
 			Xoae_page page = ctx.Cur_page();
 			if (!page.Tmpl_stack_add(src_ttl.Full_db())) return;
 			defn_tmpl = wiki.Parser().Parse_text_to_defn_obj(sub_ctx, sub_ctx.Tkn_mkr(), src_ttl.Ns(), src_ttl_bry, src_page_bry);	// NOTE: parse as tmpl to ignore <noinclude>
-			Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_m001();
+			Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
 			page.Tmpl_stack_del();									// take template off stack; evaluate will never recurse, and will fail if ttl is still on stack; DATE:2014-03-10
 			defn_tmpl.Tmpl_evaluate(sub_ctx, Xot_invk_temp.Page_is_caller, tmp_bfr);
 			src = tmp_bfr.Mkr_rls().Xto_bry_and_clear();

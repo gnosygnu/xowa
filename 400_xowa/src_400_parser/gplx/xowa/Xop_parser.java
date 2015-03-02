@@ -37,7 +37,7 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 		wtxt_lxr_mgr.Init_by_lang(lang);
 	}
 	public byte[] Parse_text_to_html(Xop_ctx ctx, byte[] src) {
-		Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
 		Parse_text_to_html(bfr, ctx.Cur_page(), false, src);
 		return bfr.Mkr_rls().Xto_bry_and_clear();
 	}

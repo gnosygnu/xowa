@@ -47,13 +47,13 @@ public class Wdata_itemByTitle_page implements Xows_page {
 		Xoae_app app = wiki.Appe();
 		if (Bry_.Len_gt_0(site_bry) && Bry_.Len_gt_0(page_bry))
 			if (Navigate(usr_dlg, app, app.Wiki_mgr().Wdata_mgr(), page, site_bry, page_bry)) return;
-		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_k004();
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_k004();
 		html_fmtr.Bld_bfr_many(tmp_bfr, "Search for items by site and title", "Site", site_bry, "Page", page_bry, "Search");
 		page.Data_raw_(tmp_bfr.Mkr_rls().Xto_bry_and_clear());
 		page.Html_data().Html_restricted_n_();		// [[Special:]] pages allow all HTML
 	}
 	private static boolean Navigate(Gfo_usr_dlg usr_dlg, Xoae_app app, Wdata_wiki_mgr wdata_mgr, Xoae_page page, byte[] site_bry, byte[] page_bry) {
-		page_bry = Xoa_app_.Utl_encoder_mgr().Url().Decode(page_bry);				// NOTE: space is converted to + on postback to url; decode
+		page_bry = Xoa_app_.Utl__encoder_mgr().Url().Decode(page_bry);				// NOTE: space is converted to + on postback to url; decode
 		byte[] wiki_domain = Xow_wiki_alias.Parse_wmf_key(site_bry); 			if (wiki_domain == null) {usr_dlg.Warn_many("", "", "site_bry parse failed; site_bry:~{0}", String_.new_utf8_(site_bry)); return false;}
 		Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(wiki_domain);		if (wiki == null) {usr_dlg.Warn_many("", "", "wiki_domain does not exist; wiki_domain:~{0}", String_.new_utf8_(wiki_domain)); return false;}
 		Xoa_ttl wdata_ttl = Xoa_ttl.parse_(wiki, page_bry);					if (wdata_ttl == null) {usr_dlg.Warn_many("", "", "ttl is invalid; ttl:~{0}", String_.new_utf8_(page_bry)); return false;}

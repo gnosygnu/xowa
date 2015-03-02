@@ -34,7 +34,7 @@ public class Pfunc_pagesincategory extends Pf_func_base {
 			if (arg1 != Bry_.Empty && trie.Match_exact(arg1, 0, arg1.length) != null)
 				fmt_num = false;
 		}
-		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b128().Mkr_rls();
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b128().Mkr_rls();
 		byte[] ctg_len_bry = tmp_bfr.Add_int_variable(ctg_len).Xto_bry_and_clear();			
 		byte[] rslt = fmt_num ? lang.Num_mgr().Format_num(ctg_len_bry) : lang.Num_mgr().Raw(ctg_len_bry);
 		bb.Add(rslt);

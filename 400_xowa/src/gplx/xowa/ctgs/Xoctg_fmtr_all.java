@@ -108,13 +108,13 @@ class Xoctg_fmtr_all {
 	}
 	public byte[] Bld_bwd_fwd(Xowe_wiki wiki, Xoa_ttl ttl, Xoctg_view_grp view_grp) {
 		if (view_grp.Total() < grp_max) return Bry_.Empty;
-		Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_k004();
+		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_k004();
 		Html_nav_bry(bfr, wiki, ttl, view_grp, Bool_.N);
 		Html_nav_bry(bfr, wiki, ttl, view_grp, Bool_.Y);
 		return bfr.Mkr_rls().Xto_bry_and_clear();
 	}
 	private void Html_nav_bry(Bry_bfr bfr, Xowe_wiki wiki, Xoa_ttl ttl, Xoctg_view_grp view_grp, boolean fill_at_bgn) {
-		Bry_bfr href_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr href_bfr = wiki.Utl__bfr_mkr().Get_b512();
 		wiki.Appe().Href_parser().Build_to_bfr(href_bfr, wiki, ttl);
 		byte[] arg_idx_lbl = null; byte[] arg_sortkey = null;
 		if (fill_at_bgn) {

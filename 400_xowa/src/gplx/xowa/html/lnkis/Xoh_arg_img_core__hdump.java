@@ -24,7 +24,7 @@ public class Xoh_arg_img_core__hdump implements Xoh_arg_img_core {
 	}
 	public void XferAry(Bry_bfr bfr, int idx) {
 		bfr.Add_byte_space();
-		bfr.Add(gplx.xowa.hdumps.htmls.Hdump_html_consts.Key_img);
+		bfr.Add(gplx.xowa.html.hdumps.abrvs.Xohd_abrv_.Key_img);
 		bfr.Add_int_variable(uid);
 		bfr.Add_byte_apos();
 	}

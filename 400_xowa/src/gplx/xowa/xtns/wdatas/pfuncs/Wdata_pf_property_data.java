@@ -31,7 +31,7 @@ public class Wdata_pf_property_data {
 		id_int = Wdata_pf_property.Parse_pid(ctx.App().Utl_num_parser(), id);
 		if (id_int == Wdata_wiki_mgr.Pid_null) {}	// named; TODO: get pid from pid_regy
 		int args_len = self.Args_len();
-		Bry_bfr tmp_bfr = ctx.Wiki().Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b512();
 		for (int i = 0; i < args_len; i++) {
 			Arg_nde_tkn nde = self.Args_get_by_idx(i);
 			Arg_itm_tkn nde_key = nde.Key_tkn();

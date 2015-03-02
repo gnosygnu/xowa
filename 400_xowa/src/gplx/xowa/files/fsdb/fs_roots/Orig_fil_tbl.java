@@ -21,10 +21,10 @@ public class Orig_fil_tbl {
 	private String tbl_name = "orig_fil"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private String fld_uid, fld_name, fld_ext_id, fld_w, fld_h, fld_dir_url;		
 	private Db_conn conn; private Db_stmt stmt_insert, stmt_select;
-	public void Conn_(Db_conn new_conn, boolean created, boolean version_is_1) {
+	public void Conn_(Db_conn new_conn, boolean created, boolean schema_is_1) {
 		this.conn = new_conn; flds.Clear();
 		String fld_prefix = "";
-		if (version_is_1) {
+		if (schema_is_1) {
 			fld_prefix		= "fil_";
 		}
 		fld_uid				= flds.Add_int(fld_prefix + "uid");

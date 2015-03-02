@@ -16,11 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.oimgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.dbs.tbls.*; import gplx.xowa.wikis.caches.*; import gplx.xowa.bldrs.files.*;
+import gplx.dbs.*; import gplx.xowa.wikis.caches.*; import gplx.xowa.bldrs.files.*;
+import gplx.xowa.wikis.data.*; import gplx.xowa.dbs.*; import gplx.xowa.dbs.tbls.*;
 public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xob_cmd, GfoInvkAble {
 	private Xob_dump_src_id page_src;
-	private Xodb_fsys_mgr db_fsys_mgr; protected Xop_parser parser; protected Xop_ctx ctx; protected Xop_root_tkn root;
-	private int[] ns_ary; private Xodb_file[] db_ary;
+	private Xowe_core_data_mgr db_fsys_mgr; protected Xop_parser parser; protected Xop_ctx ctx; protected Xop_root_tkn root;
+	private int[] ns_ary; private Xowd_db_file[] db_ary;
 	private int ns_bgn = -1, db_bgn = -1, pg_bgn = -1;
 	private int ns_end = -1, db_end = -1, pg_end = Int_.MaxValue;
 	private int commit_interval = 1000, progress_interval = 250, cleanup_interval = 2500, select_size = 10 * Io_mgr.Len_mb;
@@ -40,7 +41,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 		root = ctx.Tkn_mkr().Root(Bry_.Empty);			
 		wiki.Init_assert();	// NOTE: must init wiki for db_mgr_as_sql
 		wiki.Db_mgr_as_sql().Init_load(Db_url_.sqlite_(Xodb_mgr_sql.Find_core_url(wiki)));	// NOTE: must reinit providers as previous steps may have rls'd (and left member variable conn which is closed)
-		db_fsys_mgr = wiki.Db_mgr_as_sql().Fsys_mgr();
+		db_fsys_mgr = wiki.Db_mgr_as_sql().Core_data_mgr();
 		db_ary = Xob_dump_src_ttl.Init_text_files_ary(db_fsys_mgr);
 		poll_interval = poll_mgr.Poll_interval();
 
@@ -136,7 +137,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 					, Env_.TickCount_elapsed_in_sec(time_bgn), rate_mgr.Rate_as_str(), String_.new_utf8_(page.Ttl_wo_ns()));
 			ctx.Clear();
 			Exec_pg_itm_hook(ns, page, page.Text());
-			ctx.App().Utl_bry_bfr_mkr().Clear_fail_check();	// make sure all bfrs are released
+			ctx.App().Utl__bfr_mkr().Clear_fail_check();	// make sure all bfrs are released
 			if (ctx.Wiki().Cache_mgr().Tmpl_result_cache().Count() > 50000) 
 				ctx.Wiki().Cache_mgr().Tmpl_result_cache().Clear();
 			++exec_count;
@@ -150,7 +151,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 		}
 		catch (Exception exc) {
 			bldr.Usr_dlg().Warn_many(GRP_KEY, "parse", "failed to parse ~{0} error ~{1}", String_.new_utf8_(page.Ttl_wo_ns()), Err_.Message_lang(exc));
-			ctx.App().Utl_bry_bfr_mkr().Clear();
+			ctx.App().Utl__bfr_mkr().Clear();
 			this.Free();
 		}
 	}

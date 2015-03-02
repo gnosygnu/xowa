@@ -27,7 +27,7 @@ public class Xop_statistics_page implements Xows_page {
 		page.Data_raw_(html);
 	}
 	public byte[] Build_html(Xowe_wiki wiki) {
-		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_m001();
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
 		stats_page.Wiki_(wiki);
 //			stats_wiki.Wiki_(wiki);
 		stats_ns.Wiki_(wiki);

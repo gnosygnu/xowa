@@ -84,7 +84,7 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 	}	static final byte[] Arg_0 = Bry_.new_ascii_("~{0}");
 	String Exec_itms_print(byte[] raw) {
 		Bry_fmtr fmtr = Bry_fmtr.new_bry_(raw, "wiki_key");//, "wiki_type_url", "wiki_lang", "wiki_name", "wiki_logo_url");
-		Bry_bfr tmp_bfr = Xoa_app_.Utl_bry_bfr_mkr().Get_k004();
+		Bry_bfr tmp_bfr = Xoa_app_.Utl__bfr_mkr().Get_k004();
 		Hash_adp_bry seen = Hash_adp_bry.ci_ascii_();	// ASCII:url_domain; EX:en.wikipedia.org
 		int wikis_len = list.Count();
 		for (int i = 0; i < wikis_len; i++) {

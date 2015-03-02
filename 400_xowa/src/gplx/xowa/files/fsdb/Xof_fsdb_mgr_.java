@@ -24,7 +24,7 @@ class Xof_fsdb_wkr {
 	public Xof_fsdb_wkr(Xof_fsdb_mgr fsdb_mgr, Gfo_usr_dlg usr_dlg, Xof_cache_mgr cache_mgr, Xow_repo_mgr repo_mgr, Xof_url_bldr url_bldr) {
 		this.fsdb_mgr = fsdb_mgr; this.usr_dlg = usr_dlg; this.cache_mgr = cache_mgr; this.repo_mgr = repo_mgr; this.url_bldr = url_bldr;
 	}
-	public void Fsdb_search(byte exec_tid, ListAdp itms, Xoae_page page) {
+	public void Fsdb_search(byte exec_tid, ListAdp itms, Xoa_page page, Xog_js_wkr js_wkr) {
 		synchronized (get_list) {
 			get_list.Clear();
 			int itms_len = itms.Count();
@@ -35,7 +35,7 @@ class Xof_fsdb_wkr {
 					case Xof_orig_wkr_.Status_found:			// item is on disk and in orig_regy; just update data, html_view and cache_mgr;
 						Xof_repo_itm repo_itm = repo_mgr.Repos_get_by_wiki(itm.Orig_repo_name()).Trg();
 						itm.Ctor_by_html(repo_itm, url_bldr, img_size, exec_tid);
-						Js_img_mgr.Update_img(page, itm);		// NOTE: needed when opening 2+ tabs and missing image is on 2+ pages; 2nd page will have img as Xof_orig_wkr_.Status_found; DATE:2014-10-20
+						Js_img_mgr.Update_img(page, js_wkr, itm);		// NOTE: needed when opening 2+ tabs and missing image is on 2+ pages; 2nd page will have img as Xof_orig_wkr_.Status_found; DATE:2014-10-20
 						cache_mgr.Reg_and_check_for_size_0(itm);
 						break;
 					case Xof_orig_wkr_.Status_missing_orig:	
@@ -51,13 +51,13 @@ class Xof_fsdb_wkr {
 				if (usr_dlg.Canceled()) return;
 				Xof_fsdb_itm itm = (Xof_fsdb_itm)get_list.FetchAt(i);
 				try {
-					Get_itm(exec_tid, itm, page);
+					Get_itm(exec_tid, itm, page, js_wkr);
 				} catch (Exception e) {usr_dlg.Warn_many("", "", "file.search.error: page=~{0} img=~{1} err=~{2}", String_.new_utf8_(page.Ttl().Raw()), String_.new_utf8_(itm.Lnki_ttl()), Err_.Message_gplx_brief(e));}
 			}
 		}
 	}
-	private void Get_itm(byte exec_tid, Xof_fsdb_itm itm, Xoae_page page) {
-		if (Ext_is_not_viewable_in_exec_tid(exec_tid, itm.Lnki_ext())) return;	// do not get if not needed; EX: exec_tid = page and itm is audio
+	private void Get_itm(byte exec_tid, Xof_fsdb_itm itm, Xoa_page page, Xog_js_wkr js_wkr) {
+		if (itm.Lnki_ext().Is_not_viewable(exec_tid)) return;	// do not get if not needed; EX: exec_tid = page and itm is audio
 		if (Find_by_itm(exec_tid, itm, fsdb_mgr.Orig_mgr(), img_size)) {		// itm exists in orig_regy
 			Xof_repo_pair repo_pair = repo_mgr.Repos_get_by_wiki(itm.Orig_repo_name());
 			if (repo_pair == null) {
@@ -65,7 +65,7 @@ class Xof_fsdb_wkr {
 				return;
 			}
 			byte repo_tid = repo_pair.Repo_idx();								// NOTE: should be itm.Orig_repo, but throws null refs
-			if (Ext_is_not_viewable_in_exec_tid(exec_tid, itm.Lnki_ext())) {	// check viewable again b/c orig_mgr may have changed ext; EX: ogg -> oga
+			if (itm.Lnki_ext().Is_not_viewable(exec_tid)) {						// check viewable again b/c orig_mgr may have changed ext; EX: ogg -> oga
 				itm.Rslt_bin_(Xof_bin_wkr_.Tid_noop);
 				fsdb_mgr.Orig_mgr().Insert(repo_tid, itm.Orig_ttl(), itm.Lnki_ext().Id(), itm.Orig_w(), itm.Orig_h(), itm.Orig_redirect(), Xof_orig_wkr_.Status_noop);
 				return;
@@ -75,7 +75,7 @@ class Xof_fsdb_wkr {
 				// TODO: this "breaks" tests b/c mock bin_wkr is fsdb; 
 				if (itm.Rslt_bin() != Xof_bin_wkr_.Tid_fsdb_xowa)	// if bin is from fsdb, don't save it; occurs when page has new file listed twice; 1st file inserts into fsdb; 2nd file should find in fsdb and not save again
 					Save_itm(itm);
-				Js_img_mgr.Update_img(page, itm);
+				Js_img_mgr.Update_img(page, js_wkr, itm);
 			}
 			else {
 				usr_dlg.Warn_many("", "", "file not found: page=~{0} file=~{1} width=~{2}", page.Url().Xto_full_str_safe(), String_.new_utf8_(itm.Lnki_ttl()), itm.Lnki_w());
@@ -122,12 +122,6 @@ class Xof_fsdb_wkr {
 			usr_dlg.Warn_many("", "", "failed to save file: ttl=~{0} url=~{1} err=~{2}", String_.new_utf8_(itm.Lnki_ttl()), html_url.Raw(), Err_.Message_gplx(e));
 		}
 		finally {bin_rdr.Rls();}
-	}
-	private static boolean Ext_is_not_viewable_in_exec_tid(byte exec_tid, Xof_ext ext) {
-		return	exec_tid != Xof_exec_tid.Tid_viewer_app		// only apply logic if !Tid_viewer_app; note that if Tid_viewer_app, then user clicked on file, so return true;
-				&&	(	ext.Id_is_audio()					// NOTE: was audio_strict, but v2 always redefines .ogg as .ogv; DATE:2014-02-02
-					||	ext.Id() == Xof_ext_.Id_unknown		// ignore unknown exts, else will download needlessly when viewing page; EX: .wav before .wav was registered; PAGE:pl.s:Śpiąca_królewna_(Oppman); DATE:2014-08-17
-					);
 	}
 	private static boolean Find_by_itm(byte get_exec_tid, Xof_fsdb_itm itm, Xof_orig_mgr orig_mgr, Xof_img_size img_size) {
 		byte[] itm_ttl = itm.Lnki_ttl();

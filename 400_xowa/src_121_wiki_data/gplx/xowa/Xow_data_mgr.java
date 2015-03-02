@@ -39,7 +39,7 @@ public class Xow_data_mgr implements GfoInvkAble {
 					) {		
 					Xol_lang lang = wiki.Lang();
 					byte[] msg_key = ttl.Page_db();
-					Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
+					Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
 					msg_key = lang.Case_mgr().Case_build_1st_lower(tmp_bfr, msg_key, 0, msg_key.length);
 					byte[] msg_val = Xol_msg_mgr_.Get_msg_itm(tmp_bfr, wiki, wiki.Lang(), msg_key).Val();	// NOTE: do not change to Get_msg_val; Get_msg_val, also replaces $1 with values, and $1 needs to be preserved for callers;
 					rv.Data_raw_(msg_val);

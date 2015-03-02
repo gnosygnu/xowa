@@ -22,7 +22,7 @@ public class Popup_history_page implements Xows_page {
 		Xoae_page cur_page = wiki.Appe().Gui_mgr().Browser_win().Active_page(); if (cur_page == null) return;
 		OrderedHash hash = cur_page.Popup_mgr().Itms();
 		int len = hash.Count();
-		Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_k004();
+		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_k004();
 		for (int i = len - 1; i > -1; --i) {
 			Xow_popup_itm itm = (Xow_popup_itm)hash.FetchAt(i);
 			if (Ttl_chk(itm.Page_ttl())) continue;

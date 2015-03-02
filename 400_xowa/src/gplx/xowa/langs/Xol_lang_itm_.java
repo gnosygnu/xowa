@@ -870,9 +870,12 @@ Regy_add(regy, Id_zu, "zu", "isiZulu");
 	public static Xol_lang_itm Get_by_key(byte[] key) {if (regy == null) Regy(); return (Xol_lang_itm)regy.Get_by_bry(key);}
 	public static Xol_lang_itm Get_by_key_or_intl(byte[] key) {return Get_by_key_or_intl(key, 0, key.length);}
 	public static Xol_lang_itm Get_by_key_or_intl(byte[] key, int bgn, int end) {
-		if (regy == null) Regy();
-		Xol_lang_itm rv = (Xol_lang_itm)regy.Get_by_mid(key, bgn, end);
+		Xol_lang_itm rv = Get_by_key_or_null(key, bgn, end);
 		return rv == null ? Intl : rv;
+	}
+	public static Xol_lang_itm Get_by_key_or_null(byte[] key, int bgn, int end) {
+		if (regy == null) Regy();
+		return (Xol_lang_itm)regy.Get_by_mid(key, bgn, end);
 	}
 	public static Xol_lang_itm Get_by_id(int id) {if (regy == null) Regy(); return langs[id];}
 	public static boolean Exists(byte[] key) {return Get_by_key(key) != null;}	// Language.php!isSupportedLanguage

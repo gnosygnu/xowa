@@ -282,7 +282,7 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 		int lnke_bgn_pos = lhs_dlm_pos + 1;
 		byte[] rhs_dlm_bry = Bry_quote;
 		if (lhs_dlm_pos - proto_end_pos > 0) {
-			Bry_bfr bfr = ctx.App().Utl_bry_bfr_mkr().Get_k004();
+			Bry_bfr bfr = ctx.App().Utl__bfr_mkr().Get_k004();
 			rhs_dlm_bry = bfr.Add(Bry_quote).Add_mid(src, proto_end_pos, lhs_dlm_pos).Xto_bry_and_clear();
 			bfr.Mkr_rls();
 		}

@@ -41,7 +41,7 @@ public class Pfunc_scrib_lib implements Scrib_lib {
 	private static final String[] Proc_names = String_.Ary(Invk_expr);
 	public boolean Expr(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] expr_bry = args.Pull_bry(0);
-		Bry_bfr tmp_bfr = core.Wiki().Utl_bry_bfr_mkr().Get_b128();
+		Bry_bfr tmp_bfr = core.Wiki().Utl__bfr_mkr().Get_b128();
 		boolean pass = Pfunc_expr.Evaluate(tmp_bfr, core.Ctx(), expr_bry);
 		String expr_rslt = tmp_bfr.Mkr_rls().Xto_str_and_clear();
 		if (pass)

@@ -38,7 +38,7 @@ public class Xol_msg_mgr_ {
 		return msg_itm == null ? null : String_.new_utf8_(msg_itm.Val());
 	}
 	public static byte[] Get_msg_val(Xowe_wiki wiki, Xol_lang lang, byte[] msg_key, byte[][] fmt_args) {
-		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
 		Xol_msg_itm msg_itm = Get_msg_itm(tmp_bfr, wiki, lang, msg_key);
 		byte[] rv = Get_msg_val(tmp_bfr, wiki, msg_itm, fmt_args);
 		tmp_bfr.Mkr_rls();

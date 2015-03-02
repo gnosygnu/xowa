@@ -69,15 +69,15 @@ public class Xog_url_wkr {
 		return Rslt_handled;
 	}
 	private Xoa_url Exec_url_file(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xog_win_itm win, byte[] href_bry) {	// EX: file:///xowa/A.png
-		href_bry = Xoa_app_.Utl_encoder_mgr().Url().Decode(href_bry);
+		href_bry = Xoa_app_.Utl__encoder_mgr().Url().Decode(href_bry);
 		Io_url href_url = Io_url_.http_any_(String_.new_utf8_(href_bry), Op_sys.Cur().Tid_is_wnt());
 		gplx.gfui.Gfui_html html_box = win.Active_html_box();
 		String xowa_ttl = wiki.Gui_mgr().Cfg_browser().Content_editable()
 			? html_box.Html_active_atr_get_str(gplx.xowa.html.Xoh_consts.Atr_xowa_title_str, null)
-			: Xoh_dom_.Title_by_href(Xoa_app_.Utl_encoder_mgr().Comma(), app.Utl_bry_bfr_mkr().Get_b512().Mkr_rls(), href_bry, Bry_.new_utf8_(html_box.Html_doc_html()));
+			: Xoh_dom_.Title_by_href(Xoa_app_.Utl__encoder_mgr().Comma(), app.Utl__bfr_mkr().Get_b512().Mkr_rls(), href_bry, Bry_.new_utf8_(html_box.Html_doc_html()));
 		if (!Io_mgr._.ExistsFil(href_url)) {
 			Xof_xfer_itm xfer_itm = new Xof_xfer_itm();
-			byte[] title = Xoa_app_.Utl_encoder_mgr().Url().Decode(Bry_.new_utf8_(xowa_ttl));
+			byte[] title = Xoa_app_.Utl__encoder_mgr().Url().Decode(Bry_.new_utf8_(xowa_ttl));
 			xfer_itm.Init_by_lnki(title, Bry_.Empty, Xop_lnki_type.Id_none, -1, -1, -1, Xof_doc_thumb.Null, Xof_doc_page.Null);
 			wiki.File_mgr().Find_meta(xfer_itm);
 			page.File_queue().Clear();
@@ -113,7 +113,7 @@ public class Xog_url_wkr {
 					segs_bgn = 2;						// start from seg_2; seg_0="/en.wikipedia.org/" and seg_1="/wiki/"; note that > 2 segs possible; EX: "/site/en.wikipedia.org/wiki/A/B/C
 			}
 			if (segs_iterate) {
-				Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b128();
+				Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b128();
 				for (int i = segs_bgn; i < segs_ary_len; i++) {
 					tmp_bfr.Add(segs_ary[i]);
 					tmp_bfr.Add_byte(Byte_ascii.Slash);

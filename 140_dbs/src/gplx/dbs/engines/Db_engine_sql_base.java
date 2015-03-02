@@ -53,14 +53,17 @@ public abstract class Db_engine_sql_base implements Db_engine {
 		}
 		catch (Exception exc) {throw Err_.err_(exc, "exec reader failed").Add("sql", sql).Add("err", Err_.Message_gplx_brief(exc));}
 	}
-	public void Exec_create_tbl(Db_meta_tbl meta) {Exec_as_int(meta.To_sql_create());}
-	public void Exec_create_idx(Gfo_usr_dlg usr_dlg, Db_meta_idx... ary) {
+	public void Exec_ddl_create_tbl(Db_meta_tbl meta) {Exec_as_int(meta.To_sql_create());}
+	public void Exec_ddl_create_idx(Gfo_usr_dlg usr_dlg, Db_meta_idx... ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			Db_meta_idx idx = ary[i];
 			usr_dlg.Plog_many("", "", "db.idx.create; db=~{0} idx=~{1}", url.Database(), idx.Name());
 			Exec_as_int(idx.To_sql_create());
 		}
+	}
+	public void Exec_ddl_append_fld(String tbl, Db_meta_fld fld) {
+		Exec_as_int(Db_sqlbldr__sqlite.I.Bld_alter_tbl_add(tbl, fld));
 	}
 	@gplx.Virtual public DataRdr New_rdr(ResultSet rdr, String sql) {return gplx.stores.Db_data_rdr_.new_(rdr, sql);}
 	@gplx.Virtual public Sql_qry_wtr SqlWtr() {return Sql_qry_wtr_.new_ansi();}

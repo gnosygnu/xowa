@@ -17,11 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.dbs.*; import gplx.xowa.bldrs.oimgs.*;
+import gplx.xowa.wikis.data.*;
 import gplx.xowa.files.repos.*;
 class Xob_page_regy_tbl {
 	public static void Reset_table(Db_conn p) {Sqlite_engine_.Tbl_create_and_delete(p, Tbl_name, Tbl_sql);}
 	public static void Create_data(Gfo_usr_dlg usr_dlg, Db_conn p, byte repo_tid, Xowe_wiki wiki) {
-		Create_data__insert_page(usr_dlg, p, repo_tid, wiki.Db_mgr_as_sql().Fsys_mgr().Get_url(Xodb_file_tid.Tid_core));
+		Create_data__insert_page(usr_dlg, p, repo_tid, wiki.Db_mgr_as_sql().Core_data_mgr().Get_url(Xowd_db_file_.Tid_core));
 		Create_data__insert_redirect(usr_dlg, p, repo_tid, wiki.Fsys_mgr().Root_dir().GenSubFil(Xodb_db_file.Name__wiki_redirect));
 	}
 	public static void Delete_local(Db_conn p) {

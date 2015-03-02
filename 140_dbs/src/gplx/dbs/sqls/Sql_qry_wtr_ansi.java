@@ -20,7 +20,7 @@ import gplx.core.strings.*; import gplx.core.criterias.*;
 import gplx.dbs.qrys.*;
 public class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 	private final String_bldr sb = String_bldr_.new_();
-	private boolean prepare = false;
+	public boolean prepare = false;
 	public String Xto_str(Db_qry cmd, boolean prepare) {
 		synchronized (sb) {
 			this.prepare = prepare;

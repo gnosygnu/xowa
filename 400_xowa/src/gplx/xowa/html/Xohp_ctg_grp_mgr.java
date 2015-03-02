@@ -45,8 +45,8 @@ class Xoh_ctg_itm_fmtr implements Bry_fmtr_arg {
 	public void Set(Xoae_page page, Bry_fmtr itm_fmtr) {this.page = page; this.itm_fmtr = itm_fmtr;} private Xoae_page page; Bry_fmtr itm_fmtr;
 	public void XferAry(Bry_bfr bfr, int idx) {
 		int ctgs_len = page.Category_list().length;
-		Bry_bfr tmp_bfr = Xoa_app_.Utl_bry_bfr_mkr().Get_b128();
-		Bry_bfr tmp_href = Xoa_app_.Utl_bry_bfr_mkr().Get_b128();
+		Bry_bfr tmp_bfr = Xoa_app_.Utl__bfr_mkr().Get_b128();
+		Bry_bfr tmp_href = Xoa_app_.Utl__bfr_mkr().Get_b128();
 		byte[] ctg_prefix = page.Wiki().Ns_mgr().Ns_category().Name_db_w_colon();
 		for (int i = 0; i < ctgs_len; i++) {
 			byte[] page_name = page.Category_list()[i];

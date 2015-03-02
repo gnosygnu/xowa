@@ -16,17 +16,26 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.primitives.*;	
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.ttls.*;
-import gplx.xowa.files.repos.*;
+import gplx.xowa.wikis.data.*;
+import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*;
+import gplx.xowa.html.hzips.*; import gplx.xowa.html.hdumps.*;
 public interface Xow_wiki extends Xow_ttl_parser {
-	byte[]				Domain_bry();			// EX: en.wikipedia.org
-	String				Domain_str();
-	int					Domain_tid();			// Xow_domain_.Tid_int_wikipedia
-	byte[]				Domain_abrv();			// enwiki
-	Xow_domain			Domain_itm();
-	Xow_fsys_mgr		Fsys_mgr();
-	Xoa_app				App();
-	Xol_lang			Lang();
-	Xow_repo_mgr		File_mgr__repo_mgr();
-	boolean				File_mgr__version_is_1();		
+	byte[]						Domain_bry();			// EX: en.wikipedia.org
+	String						Domain_str();
+	int							Domain_tid();			// Xow_domain_.Tid_int_wikipedia
+	byte[]						Domain_abrv();			// enwiki
+	Xow_domain					Domain_itm();
+	Xow_fsys_mgr				Fsys_mgr();
+	Xoa_app						App();
+	Xol_lang					Lang();
+	Xof_fsdb_mode				File_mgr__fsdb_mode();
+	Xow_repo_mgr				File_mgr__repo_mgr();
+	Xof_orig_mgr				File_mgr__orig_mgr();
+	Xof_bin_mgr					File_mgr__bin_mgr();
+	Xow_core_data_mgr			Data_mgr__core_mgr();
+	boolean						Html_mgr__hdump_enabled();
+	Xow_hzip_mgr				Html_mgr__hzip_mgr();
+	Xohd_hdump_rdr				Html_mgr__hdump_rdr();
 }

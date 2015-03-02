@@ -16,13 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.oimgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.xowa.dbs.*; import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.dbs.tbls.*;
+import gplx.xowa.wikis.data.*; import gplx.xowa.dbs.*; import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.dbs.tbls.*;
 class Xob_dump_src_ttl implements Xob_parse_all_db {
-	private Xodb_mgr_sql db_mgr; private Db_stmt page_stmt; private Xodb_file[] text_files_ary; private int text_files_len; private byte redirect;
+	private Xodb_mgr_sql db_mgr; private Db_stmt page_stmt; private Xowd_db_file[] text_files_ary; private int text_files_len; private byte redirect;
 	public Xob_dump_src_ttl Init(Xowe_wiki wiki, int limit, byte redirect) {
 		this.db_mgr = wiki.Db_mgr_as_sql(); this.redirect = redirect;
-		page_stmt = db_mgr.Tbl_page().Select_for_parse_all_stmt(db_mgr.Fsys_mgr().Conn_core(), limit, redirect);
-		text_files_ary = Init_text_files_ary(db_mgr.Fsys_mgr());
+		page_stmt = db_mgr.Tbl_page().Select_for_parse_all_stmt(db_mgr.Core_data_mgr().Conn_core(), limit, redirect);
+		text_files_ary = Init_text_files_ary(db_mgr.Core_data_mgr());
 		text_files_len = text_files_ary.length;
 		return this;
 	}
@@ -30,21 +30,20 @@ class Xob_dump_src_ttl implements Xob_parse_all_db {
 		Cancelable cancelable = Cancelable_.Never;
 		db_mgr.Tbl_page().Select_for_parse_all(cancelable, hash, page_stmt, ns_id, ttl, redirect);
 		for (int i = 0; i < text_files_len; i++) {
-			Xodb_file text_file = text_files_ary[i];
+			Xowd_db_file text_file = text_files_ary[i];
 			db_mgr.Tbl_text().Select_in(cancelable, text_file, hash);
 		}
 	}
-	public static Xodb_file[] Init_text_files_ary(Xodb_fsys_mgr fsys_mgr) {
+	public static Xowd_db_file[] Init_text_files_ary(Xowe_core_data_mgr core_data_mgr) {
 		ListAdp text_files_list = ListAdp_.new_();
-		Xodb_file[] file_ary = fsys_mgr.Files_ary();
-		int len = file_ary.length;
-		if (len == 1) return new Xodb_file[] {file_ary[0]};	// single file: return core; note that there are no Tid = Text
+		int len = core_data_mgr.Dbs__len();
+		if (len == 1) return new Xowd_db_file[] {core_data_mgr.Dbs__get_at(0)};	// single file: return core; note that there are no Tid = Text
 		for (int i = 0; i < len; i++) {
-			Xodb_file file = file_ary[i];
-			if (file.Tid() == Xodb_file_tid.Tid_text)
+			Xowd_db_file file = core_data_mgr.Dbs__get_at(i);
+			if (file.Tid() == Xowd_db_file_.Tid_text)
 				text_files_list.Add(file);
 		}
-		return (Xodb_file[])text_files_list.Xto_ary_and_clear(Xodb_file.class);
+		return (Xowd_db_file[])text_files_list.Xto_ary_and_clear(Xowd_db_file.class);
 	}
 }
 class Xob_dump_src_id {
@@ -54,7 +53,7 @@ class Xob_dump_src_id {
 	public Xob_dump_src_id Init(Xowe_wiki wiki, byte redirect, int size_max) {
 		this.db_mgr = wiki.Db_mgr_as_sql(); this.redirect = redirect;
 		this.size_max = size_max;
-		page_db_url = db_mgr.Fsys_mgr().Get_tid_root(Xodb_file_tid.Tid_core).Url().Raw();
+		page_db_url = db_mgr.Core_data_mgr().Dbs__get_by_tid_1st(Xowd_db_file_.Tid_core).Url().Raw();
 		return this;
 	}
 	public void Get_pages(ListAdp list, int text_db_idx, int cur_ns, int prv_id) {
@@ -76,7 +75,7 @@ class Xob_dump_src_id {
 	private DataRdr New_rdr(Xodb_mgr_sql db_mgr, String page_db_url, int text_db_idx, int cur_ns, int prv_id, byte redirect) {
 		if (cur_text_db_idx != text_db_idx) {
 			cur_text_db_idx = text_db_idx;
-			Xodb_file text_db = db_mgr.Fsys_mgr().Get_by_idx(text_db_idx);
+			Xowd_db_file text_db = db_mgr.Core_data_mgr().Dbs__get_at(text_db_idx);
 			Db_conn conn = text_db.Conn();
 			String sql = String_.Format(Sql_select, New_rdr__redirect_clause(redirect));
 			text_stmt = conn.Stmt_new(Db_qry_sql.rdr_(sql));

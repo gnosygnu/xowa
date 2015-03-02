@@ -17,14 +17,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.imports.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.imports.*;
 import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.dbs.tbls.*;
+import gplx.xowa.wikis.data.*;
 public class Xoctg_hiddencat_parser_sql extends Xoctg_hiddencat_parser_base {
 	public Xoctg_hiddencat_parser_sql(Xob_bldr bldr, Xowe_wiki wiki) {this.Ctor(bldr, wiki);} private Db_conn conn;
 	@Override public String Cmd_key() {return KEY;} public static final String KEY = "import.sql.hiddencat";
 	@Override public void Cmd_bgn_hook(Xob_bldr bldr, Sql_file_parser parser) {
 		super.Cmd_bgn_hook(bldr, parser);
 		Xodb_mgr_sql db_mgr = wiki.Db_mgr_as_sql();
-		Xodb_fsys_mgr fsys_mgr = db_mgr.Fsys_mgr();
-		conn = fsys_mgr.Conn_ctg();
+		Xowe_core_data_mgr core_data_mgr = db_mgr.Core_data_mgr();
+		conn = core_data_mgr.Conn_ctg();
 		conn.Txn_mgr().Txn_bgn_if_none();
 		tbl = db_mgr.Tbl_category();
 		stmt = tbl.Update_stmt(conn);

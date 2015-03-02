@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.dbs.*;
 import gplx.core.primitives.*; import gplx.dbs.*; import gplx.ios.*;
+import gplx.xowa.wikis.data.*;
 public class Xodb_text_tbl {
 	public Xodb_text_tbl(Xodb_mgr_sql db_mgr) {this.db_mgr = db_mgr; zip_mgr = db_mgr.Wiki().Appe().Zip_mgr();} private Xodb_mgr_sql db_mgr; private Io_stream_zip_mgr zip_mgr;
 	public void Delete_all(Db_conn conn) {conn.Exec_qry(Db_qry_.delete_tbl_(Tbl_name));}
@@ -27,7 +28,7 @@ public class Xodb_text_tbl {
 	public void Update(int file_id, int page_id, byte[] text) {
 		Db_stmt stmt = Db_stmt_.Null;
 		try {
-			Db_conn conn = db_mgr.Fsys_mgr().Get_by_idx(file_id).Conn();
+			Db_conn conn = db_mgr.Core_data_mgr().Dbs__get_at(file_id).Conn();
 			stmt = Db_stmt_.new_update_(conn, Tbl_name, String_.Ary(Fld_page_id), Fld_old_text);
 			stmt.Val_bry(text).Val_int(page_id).Exec_update();
 		}	finally {stmt.Rls();}		
@@ -35,14 +36,14 @@ public class Xodb_text_tbl {
 	public byte[] Select(int file_id, int page_id) {
 		Db_stmt stmt = Db_stmt_.Null;
 		try {
-			Db_conn conn = db_mgr.Fsys_mgr().Get_by_idx(file_id).Conn();
+			Db_conn conn = db_mgr.Core_data_mgr().Dbs__get_at(file_id).Conn();
 			stmt = Db_stmt_.new_select_(conn, Tbl_name, String_.Ary(Fld_page_id), Fld_old_text);
 			byte[] rv = (byte[])stmt.Val_int(page_id).Exec_select_val();
 			rv = zip_mgr.Unzip(db_mgr.Data_storage_format(), rv);
 			return rv;
 		}	finally {stmt.Rls();}
 	}
-	public void Select_in(Cancelable cancelable, Xodb_file file, OrderedHash hash) {
+	public void Select_in(Cancelable cancelable, Xowd_db_file file, OrderedHash hash) {
 		DataRdr rdr = DataRdr_.Null; 
 		Db_stmt stmt = Db_stmt_.Null;
 		try {

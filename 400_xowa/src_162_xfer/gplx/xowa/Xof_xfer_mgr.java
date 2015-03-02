@@ -25,7 +25,7 @@ public class Xof_xfer_mgr {
 	public Xof_xfer_mgr Force_orig_y_() {return Force_orig_(Bool_.Y);} public Xof_xfer_mgr Force_orig_n_() {return Force_orig_(Bool_.N);}
 	public void Atrs_by_itm(Xof_xfer_itm xfer_itm, Xof_repo_itm src_repo, Xof_repo_itm trg_repo) {
 		this.xfer_itm = xfer_itm;
-		this.lnki_w = xfer_itm.Lnki_w(); this.lnki_h = xfer_itm.Lnki_h(); this.lnki_thumbable = xfer_itm.Img_is_thumbable(); this.lnki_thumbtime = xfer_itm.Lnki_thumbtime(); this.lnki_page = xfer_itm.Lnki_page();
+		this.lnki_w = xfer_itm.Lnki_w(); this.lnki_h = xfer_itm.Lnki_h(); this.lnki_thumbable = xfer_itm.Img_is_thumbable(); this.lnki_thumbtime = xfer_itm.Lnki_time(); this.lnki_page = xfer_itm.Lnki_page();
 		this.lnki_type = xfer_itm.Lnki_type();
 		lnki_upright = xfer_itm.Lnki_upright();
 		this.ttl = xfer_itm.Lnki_ttl(); this.md5 = xfer_itm.Lnki_md5(); this.ext = xfer_itm.Lnki_ext();

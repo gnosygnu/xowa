@@ -28,10 +28,10 @@ public class Xof_cache_mgr implements GfoInvkAble {
 		this.fil_mgr = new Xofc_fil_mgr(this);
 	}
 	public int Next_id() {return cfg_mgr.Next_id();} public void Next_id_(int v) {cfg_mgr.Next_id_(v);}
-	public void Init_for_db(Db_conn conn, boolean created, boolean version_is_1) {
-		cfg_mgr.Conn_(conn, created, version_is_1);
-		dir_mgr.Conn_(conn, created, version_is_1);
-		fil_mgr.Conn_(conn, created, version_is_1);
+	public void Init_for_db(Db_conn conn, boolean created, boolean schema_is_1) {
+		cfg_mgr.Conn_(conn, created, schema_is_1);
+		dir_mgr.Conn_(conn, created, schema_is_1);
+		fil_mgr.Conn_(conn, created, schema_is_1);
 	}
 	public void Db_save() {
 		try {

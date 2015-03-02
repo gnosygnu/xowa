@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import org.junit.*; import gplx.xowa.html.*; import gplx.xowa.hdumps.srls.*;
+import org.junit.*; import gplx.xowa.html.*;
 public class Xow_hzip_itm__header_tst {
 	@Before public void init() {fxt.Clear();} private Xow_hzip_mgr_fxt fxt = new Xow_hzip_mgr_fxt();
 	@Test   public void Srl_basic() {

@@ -25,7 +25,7 @@ public class Pfunc_displaytitle extends Pf_func_base {
 		Xowe_wiki wiki = ctx.Wiki(); Xop_parser parser = wiki.Parser();
 		Xop_ctx display_ttl_ctx = Xop_ctx.new_sub_(wiki);
 		Xop_root_tkn display_ttl_root = parser.Parse_text_to_wdom(display_ttl_ctx, val_dat_ary, false);
-		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
 		boolean restrict = wiki.Cfg_parser().Display_title_restrict();
 		Xoh_wtr_ctx hctx = restrict ? Xoh_wtr_ctx.Display_title : Xoh_wtr_ctx.Basic;	// restrict removes certain HTML (display:none)
 		wiki.Html_mgr().Html_wtr().Write_tkn(tmp_bfr, display_ttl_ctx, hctx, display_ttl_root.Data_mid(), display_ttl_root, 0, display_ttl_root);

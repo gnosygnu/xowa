@@ -50,7 +50,7 @@ public class Scrib_lib_wikibase_entity implements Scrib_lib {
 		Wdata_doc wdoc = wdata_mgr.Pages_get(qid); if (wdoc == null) {Wdata_wiki_mgr.Log_missing_qid(core.Ctx(), qid); return rslt.Init_str_empty();}	// NOTE: return empty String, not nil; PAGE:fr.s:Henri_Bergson; DATE:2014-08-13
 		int pid_int = wdata_mgr.Pids_get(lang, pid); if (pid_int == Wdata_wiki_mgr.Pid_null) return rslt.Init_str_empty();
 		Wdata_claim_grp prop_grp = wdoc.Claim_list_get(pid_int); if (prop_grp == null) return rslt.Init_str_empty();
-		Bry_bfr bfr = app.Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr bfr = app.Utl__bfr_mkr().Get_b512();
 		wdata_mgr.Resolve_to_bfr(bfr, prop_grp, lang);
 		return rslt.Init_obj(bfr.Mkr_rls().Xto_bry_and_clear());
 	}

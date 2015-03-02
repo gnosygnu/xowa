@@ -34,10 +34,11 @@ public class Db_conn {
 	public Db_stmt			Stmt_select(String tbl, String[] cols, String... where)			{return engine.New_stmt_prep(Db_qry__select_in_tbl.new_(tbl, where, cols));}
 	public Db_stmt			Stmt_select(String tbl, Db_meta_fld_list flds, String... where)	{return engine.New_stmt_prep(Db_qry__select_in_tbl.new_(tbl, where, flds.To_str_ary()));}
 	public void				Exec_create_tbl_and_idx(Db_meta_tbl meta) {
-		engine.Exec_create_tbl(meta);
-		engine.Exec_create_idx(Gfo_usr_dlg_.Null, meta.Idxs());
+		engine.Exec_ddl_create_tbl(meta);
+		engine.Exec_ddl_create_idx(Gfo_usr_dlg_.Null, meta.Idxs());
 	}
-	public void				Exec_create_idx(Gfo_usr_dlg usr_dlg, Db_meta_idx... idxs) {engine.Exec_create_idx(usr_dlg, idxs);}
+	public void				Exec_create_idx(Gfo_usr_dlg usr_dlg, Db_meta_idx... idxs)		{engine.Exec_ddl_create_idx(usr_dlg, idxs);}
+	public void				Exec_ddl_append_fld(String tbl, Db_meta_fld fld)					{engine.Exec_ddl_append_fld(tbl, fld);}
 	public Db_stmt			Rls_reg(Db_stmt stmt)		{rls_list.Add(stmt); return stmt;}
 	public void				Conn_term() {
 		int len = rls_list.Count();

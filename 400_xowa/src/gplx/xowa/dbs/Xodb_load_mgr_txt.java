@@ -211,7 +211,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 	public boolean Load_xdat_file(Cancelable cancelable, Xob_xdat_file xdat_file, Io_url url) {
 		boolean rv = false;
 		if (cancelable.Canceled()) return false;
-		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_m001();
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
 		byte[] tmp_bry = tmp_bfr.Bfr();
 		if (cancelable.Canceled()) return false;
 		tmp_bry = Io_mgr._.LoadFilBry_reuse(url, tmp_bry, tmp_len);

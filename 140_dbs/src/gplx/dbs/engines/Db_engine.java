@@ -29,6 +29,7 @@ public interface Db_engine {
 	void			Conn_open();
 	void			Conn_term();
 	Object			Exec_as_obj(Db_qry qry);
-	void			Exec_create_tbl(Db_meta_tbl meta);
-	void			Exec_create_idx(Gfo_usr_dlg usr_dlg, Db_meta_idx... ary);
+	void			Exec_ddl_create_tbl(Db_meta_tbl meta);
+	void			Exec_ddl_create_idx(Gfo_usr_dlg usr_dlg, Db_meta_idx... ary);
+	void			Exec_ddl_append_fld(String tbl, Db_meta_fld fld);
 }

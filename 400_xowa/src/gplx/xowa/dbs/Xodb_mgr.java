@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs; import gplx.*; import gplx.xowa.*;
-import gplx.dbs.*; import gplx.xowa.hdumps.*;
+import gplx.dbs.*; import gplx.xowa.html.hdumps.*;
 public interface Xodb_mgr extends GfoInvkAble, RlsAble {
 	byte Tid();
 	String Tid_name();
@@ -27,5 +27,4 @@ public interface Xodb_mgr extends GfoInvkAble, RlsAble {
 	DateAdp Dump_date_query();
 	Xodb_load_mgr Load_mgr();
 	Xodb_save_mgr Save_mgr();
-	Xodb_hdump_mgr Hdump_mgr();
 }

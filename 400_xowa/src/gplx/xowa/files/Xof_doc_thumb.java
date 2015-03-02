@@ -32,11 +32,11 @@ public class Xof_doc_thumb {
 	public static boolean		Null_n(double v) {return v != Null;}
 	public static final int		Null_as_int = -1;
 
-	public static double	Convert_to_xowa_thumbtime	(int ext, double val)	{return gplx.xowa.Xof_ext_.Id_supports_thumbtime(ext)	? val		: Null;}
-	public static int		Convert_to_xowa_page		(int ext, double val)	{return gplx.xowa.Xof_ext_.Id_supports_page(ext)		? (int)val	: Xof_doc_page.Null;}
+	public static double	Convert_to_xowa_thumbtime	(int ext, double val)	{return Xof_ext_.Id_supports_thumbtime(ext)	? val		: Null;}
+	public static int		Convert_to_xowa_page		(int ext, double val)	{return Xof_ext_.Id_supports_page(ext)		? (int)val	: Xof_doc_page.Null;}
 	public static double	Convert_to_fsdb_thumbtime	(int ext, double thumbtime, int page) {
 		return	page != Xof_doc_page.Null
-			&&	gplx.xowa.Xof_ext_.Id_supports_page(ext)		// redefine thumbtime to page if pdf
+			&&	Xof_ext_.Id_supports_page(ext)		// redefine thumbtime to page if pdf
 			?	page
 			:	thumbtime
 			;

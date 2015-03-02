@@ -101,7 +101,7 @@ public class Xow_toc_mgr implements Bry_fmtr_arg {
 	public static byte[] Toc_text(Xop_ctx ctx, Xoae_page page, byte[] src, Xop_tkn_itm hdr) {
 		try {
 			Xowe_wiki wiki = page.Wikie();
-			Bry_bfr bfr = Xoa_app_.Utl_bry_bfr_mkr().Get_b128();
+			Bry_bfr bfr = Xoa_app_.Utl__bfr_mkr().Get_b128();
 			Xoh_wtr_ctx hctx = Xoh_wtr_ctx.Basic;
 			Xoh_html_wtr html_wtr = wiki.Html_mgr().Html_wtr(); html_wtr.Init_by_page(ctx, hctx, src, page);
 			Toc_text_recurse(ctx, bfr, src, html_wtr, hctx, hdr, 0);

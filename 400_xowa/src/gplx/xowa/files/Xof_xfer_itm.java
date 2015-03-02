@@ -26,7 +26,7 @@ public class Xof_xfer_itm implements Xof_file_itm {
 	public int			Lnki_w() {return lnki_w;} private int lnki_w;
 	public int			Lnki_h() {return lnki_h;} private int lnki_h;
 	public double		Lnki_upright() {return lnki_upright;} private double lnki_upright;
-	public double		Lnki_thumbtime() {return lnki_thumbtime;} private double lnki_thumbtime = Xof_doc_thumb.Null;
+	public double		Lnki_time() {return lnki_time;} private double lnki_time = Xof_doc_thumb.Null;
 	public int			Lnki_page() {return lnki_page;} private int lnki_page = Xof_doc_page.Null;
 	public int			Orig_w() {return orig_w;} private int orig_w;
 	public int			Orig_h() {return orig_h;} private int orig_h;
@@ -53,15 +53,15 @@ public class Xof_xfer_itm implements Xof_file_itm {
 	}	private Xof_repo_itm trg_repo;
 	public int			Trg_repo_idx() {return trg_repo_idx;} public Xof_xfer_itm Trg_repo_idx_(int trg_repo_idx) {this.trg_repo_idx = trg_repo_idx; return this;} private int trg_repo_idx = Xof_meta_itm.Repo_unknown;
 	public byte[]		Trg_repo_root() {return trg_repo_root;} private byte[] trg_repo_root = Bry_.Empty;	// HACK: needed for hdump
-	private byte[]		Trg_html(byte mode_id, int width)	{return url_bldr.Init_for_trg_html(mode_id, trg_repo, lnki_ttl, lnki_md5, lnki_ext, width, lnki_thumbtime, lnki_page).Xto_bry();}
-	public Io_url		Trg_file(byte mode_id, int width)	{return url_bldr.Init_for_trg_file(mode_id, trg_repo, lnki_ttl, lnki_md5, lnki_ext, width, lnki_thumbtime, lnki_page).Xto_url();}
+	private byte[]		Trg_html(byte mode_id, int width)	{return url_bldr.Init_for_trg_html(mode_id, trg_repo, lnki_ttl, lnki_md5, lnki_ext, width, lnki_time, lnki_page).Xto_bry();}
+	public Io_url		Trg_file(byte mode_id, int width)	{return url_bldr.Init_for_trg_file(mode_id, trg_repo, lnki_ttl, lnki_md5, lnki_ext, width, lnki_time, lnki_page).Xto_url();}
 	public byte			Lnki_exec_tid() {return lnki_exec_tid;} public void Lnki_exec_tid_(byte v) {lnki_exec_tid = v;} private byte lnki_exec_tid = Xof_exec_tid.Tid_wiki_page;
 	public Xof_url_bldr Url_bldr(){ return url_bldr;}
 	public Xof_xfer_itm Url_bldr_(Xof_url_bldr v) {url_bldr = v; return this;} private Xof_url_bldr url_bldr = Xof_url_bldr.Temp;
 	public Xof_xfer_itm Clear() {
 		lnki_type = Byte_.Max_value_127;
 		lnki_w = lnki_h = file_w = orig_w = orig_h = html_w = html_h = gallery_mgr_h = Int_.Neg1;
-		lnki_upright = Int_.Neg1; lnki_thumbtime = Xof_doc_thumb.Null; lnki_page = Xof_doc_page.Null;
+		lnki_upright = Int_.Neg1; lnki_time = Xof_doc_thumb.Null; lnki_page = Xof_doc_page.Null;
 		img_is_thumbable = false;
 		orig_file_len = 0;	// NOTE: cannot be -1, or else will always download orig; see ext rule chk and (orig_file_len < 0)
 		lnki_redirect = null; lnki_ttl = null; lnki_md5 = null; lnki_ext = null;
@@ -72,7 +72,7 @@ public class Xof_xfer_itm implements Xof_file_itm {
 	}
 	public Xof_xfer_itm Clone() {
 		Xof_xfer_itm rv = new Xof_xfer_itm();
-		rv.lnki_type = lnki_type; rv.lnki_w = lnki_w; rv.lnki_h = lnki_h; rv.lnki_upright = lnki_upright; rv.lnki_thumbtime = lnki_thumbtime; rv.lnki_page = lnki_page;
+		rv.lnki_type = lnki_type; rv.lnki_w = lnki_w; rv.lnki_h = lnki_h; rv.lnki_upright = lnki_upright; rv.lnki_time = lnki_time; rv.lnki_page = lnki_page;
 		rv.img_is_thumbable = img_is_thumbable;
 		rv.orig_w = orig_w; rv.orig_h = orig_h; rv.orig_file_len = orig_file_len;
 		rv.lnki_redirect = lnki_redirect; rv.lnki_ttl = lnki_ttl; rv.lnki_md5 = lnki_md5; rv.lnki_ext = lnki_ext;
@@ -87,10 +87,10 @@ public class Xof_xfer_itm implements Xof_file_itm {
 	}
 	public Xof_xfer_itm Init_by_lnki(byte[] ttl, byte[] redirect, byte lnki_type, int w, int h, double upright, double thumbtime, int lnki_page) {
 		this.Set__ttl(ttl, redirect);
-		this.lnki_type = lnki_type; this.lnki_w = w; this.lnki_h = h; this.lnki_upright = upright; this.lnki_thumbtime = thumbtime; this.lnki_page = lnki_page;
+		this.lnki_type = lnki_type; this.lnki_w = w; this.lnki_h = h; this.lnki_upright = upright; this.lnki_time = thumbtime; this.lnki_page = lnki_page;
 		img_is_thumbable = Xof_xfer_itm_.Lnki_thumbable_calc(lnki_type, lnki_w, lnki_h);
-		if (lnki_thumbtime != Xof_doc_thumb.Null && !lnki_ext.Id_is_media())	// thumbtime is set, but ext is not media; PAGE:en.w:Moon; EX:[[File:A.png|thumbtime=0:02]] DATE:2014-07-22
-			lnki_thumbtime = Xof_doc_thumb.Null;								// disable thumbtime
+		if (lnki_time != Xof_doc_thumb.Null && !lnki_ext.Id_is_media())	// thumbtime is set, but ext is not media; PAGE:en.w:Moon; EX:[[File:A.png|thumbtime=0:02]] DATE:2014-07-22
+			lnki_time = Xof_doc_thumb.Null;								// disable thumbtime
 		return this;
 	}
 	public void Init_for_gallery(int html_w, int html_h, int file_w) {
@@ -145,7 +145,7 @@ public class Xof_xfer_itm implements Xof_file_itm {
 			if (lnki_ext.Id_is_video()) {		// video is a special case; src is thumb_w but html_w / html_h is based on calc
 				html_orig_src = Trg_html(Xof_repo_itm.Mode_orig, Xof_img_size.Size_null_deprecated);
 				if (meta_itm.Thumbs_indicates_oga() && lnki_ext.Id_is_ogv()) {lnki_ext = Xof_ext_.new_by_ext_(Xof_ext_.Bry_oga); return true;}	// if audio, do not thumb; NOTE: must happen after html_orig_src, b/c html must still be generated to auto-download files; NOTE: must change ext to oga b/c ogg may trigger video code elsewhere
-				Xof_meta_thumb thumb = meta_itm.Thumbs_get_vid(Xof_doc_thumb.X_int(lnki_thumbtime));
+				Xof_meta_thumb thumb = meta_itm.Thumbs_get_vid(Xof_doc_thumb.X_int(lnki_time));
 				if (thumb != null) {
 					Xof_xfer_itm_.Calc_xfer_size(calc_size, lnki_type, thumb_w_img, thumb.Width(), thumb.Height(), html_w, html_h, img_is_thumbable, lnki_upright);
 					html_w = calc_size.Val_0(); html_h = calc_size.Val_1(); 
@@ -205,7 +205,7 @@ public class Xof_xfer_itm implements Xof_file_itm {
 			if (meta_itm.Thumbs_indicates_oga() && lnki_ext.Id_is_ogv()) {lnki_ext = Xof_ext_.new_by_ext_(Xof_ext_.Bry_oga); return true;}	// if audio, do not thumb; NOTE: must happen after html_orig_src, b/c html must still be generated to auto-download files; NOTE: must change ext to oga b/c ogg may trigger video code elsewhere
 			if		(lnki_ext.Id_is_audio()) return true;	// if audio, return true; SEE:NOTE_2
 			else if (lnki_ext.Id_is_video()) {
-				Xof_meta_thumb thumb = meta_itm.Thumbs_get_vid(Xof_doc_thumb.X_int(lnki_thumbtime));	// get thumb at lnki_thumbtime; NOTE: in most cases this will just be the 1st thumb; note that orig video files don't have an official thumb
+				Xof_meta_thumb thumb = meta_itm.Thumbs_get_vid(Xof_doc_thumb.X_int(lnki_time));	// get thumb at lnki_time; NOTE: in most cases this will just be the 1st thumb; note that orig video files don't have an official thumb
 				if (thumb != null) {
 					html_w = thumb.Width(); html_h = thumb.Height();	// NOTE: take thumb_size; do not rescale to html_w, html_h b/c html_w will default to 220; native width of thumbnail should be used; DATE:2013-04-11
 					html_view_src = Trg_html(Xof_repo_itm.Mode_thumb, thumb.Width());	// NOTE: must pass thumb.Width() not html_w b/c only one thumb generated for a video file

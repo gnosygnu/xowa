@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.xowa.dbs.*;
+import gplx.xowa.wikis.data.*; import gplx.xowa.dbs.*;
 public class Xob_cmd_exec_sql implements Xob_cmd {
 	private Xowe_wiki wiki; private int file_idx = -1; private String sql;
 	public Xob_cmd_exec_sql(Xob_bldr bldr, Xowe_wiki wiki) {this.wiki = wiki;}
@@ -26,8 +26,8 @@ public class Xob_cmd_exec_sql implements Xob_cmd {
 		Xoae_app app = wiki.Appe();
 		wiki.Init_assert();	// force load; needed to pick up MediaWiki ns for MediaWiki:mainpage
 		Xodb_mgr_sql db_mgr = wiki.Db_mgr_as_sql();
-		Xodb_fsys_mgr fsys_mgr = db_mgr.Fsys_mgr();
-		Xodb_file file = fsys_mgr.Get_by_idx(file_idx);
+		Xowe_core_data_mgr fsys_mgr = db_mgr.Core_data_mgr();
+		Xowd_db_file file = fsys_mgr.Dbs__get_at(file_idx);
 		app.Usr_dlg().Plog_many("", "", "exec_sql: running sql; file_idx=~{0} sql=~{1}", file_idx, sql);
 		file.Conn().Exec_sql(sql);
 	}

@@ -19,7 +19,7 @@ package gplx.xowa; import gplx.*;
 import gplx.xowa.langs.msgs.*;
 public class Xow_mainpage_finder {
 	public static byte[] Find_or(Xowe_wiki wiki, byte[] or) {
-		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
 		Xol_msg_itm msg_itm = Xol_msg_mgr_.Get_msg_itm(tmp_bfr, wiki, wiki.Lang(), Msg_mainpage);
 		byte[] rv = msg_itm.Src_is_missing()
 			? or

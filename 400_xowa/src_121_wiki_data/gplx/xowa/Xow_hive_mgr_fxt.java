@@ -66,7 +66,7 @@ public class Xow_hive_mgr_fxt {
 	public Xow_hive_mgr_fxt Create_ctg(String key_str, int... pages) {Create_ctg(app, hive_mgr, key_str, pages); return this;}
 	public static void Create_ctg(Xoae_app app, Xob_hive_mgr hive_mgr, String key_str, int... pages) {
 		byte[] key_bry = Bry_.new_ascii_(key_str);
-		Bry_bfr bfr = app.Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr bfr = app.Utl__bfr_mkr().Get_b512();
 		bfr.Add(key_bry);
 		int pages_len = pages.length;
 		for (int i = 0; i < pages_len; i++)				
@@ -77,7 +77,7 @@ public class Xow_hive_mgr_fxt {
 	}
 	public Xow_hive_mgr_fxt Create_id(int id, int fil_idx, int row_idx, boolean type_redirect, int itm_len, int ns_id, String ttl) {Create_id(app, hive_mgr, id, fil_idx, row_idx, type_redirect, itm_len, ns_id, ttl); return this;}
 	public static void Create_id(Xoae_app app, Xob_hive_mgr hive_mgr, int id, int fil_idx, int row_idx, boolean type_redirect, int itm_len, int ns_id, String ttl) {
-		Bry_bfr bfr = app.Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr bfr = app.Utl__bfr_mkr().Get_b512();
 		byte[] key_bry = Base85_utl.XtoStrByAry(id, 5);
 		bfr	.Add(key_bry)						.Add_byte_pipe()
 			.Add_base85_len_5(fil_idx)			.Add_byte_pipe()

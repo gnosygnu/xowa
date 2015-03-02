@@ -34,7 +34,7 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 		boolean found = load_mgr.Load_by_ttl(db_page, ns_itm, ttl_bry);
 		if (found) throw Err_mgr._.fmt_(GRP_KEY, "title_exists", "create requested but title already exists: ~{0}", String_.new_utf8_(ttl_bry));
 		int text_len = text.length;
-		Bry_bfr tmp = wiki.Utl_bry_bfr_mkr().Get_m001();
+		Bry_bfr tmp = wiki.Utl__bfr_mkr().Get_m001();
 		int page_id = page_id_next++;
 		int fil_idx = 0;
 		int ns_id = ttl.Ns().Id();
@@ -44,7 +44,7 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 		Xob_xdat_file page_rdr = new Xob_xdat_file();
 		if (Bry_.Len_gt_0(page_rdr_bry)) page_rdr.Parse(page_rdr_bry, page_rdr_bry.length, page_rdr_url);
 		int row_idx = page_rdr.Count();
-		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
 		page_rdr.Insert(tmp_bfr, tmp.Xto_bry_and_clear());
 		this.Data_save(Xotdb_dir_info_.Tid_page, page_rdr, page_rdr_url, tmp_bfr);
 		tmp_bfr.Mkr_rls();
@@ -78,7 +78,7 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 		// update page
 		Xob_xdat_file page_rdr = new Xob_xdat_file(); Xob_xdat_itm page_itm = new Xob_xdat_itm();
 		load_mgr.Load_page(tmp_page, db_page.Text_db_id(), db_page.Db_row_idx(), ns, true, page_rdr, page_itm);
-		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
 		if (text == null) text = tmp_page.Text(); 
 		int text_len = text.length;
 		DateAdp modified_on = tmp_page.Modified_on();
@@ -95,7 +95,7 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 		Xoa_ttl redirect_ttl = redirect_mgr.Extract_redirect(text, text_len);
 		db_page.Text_len_(text_len);
 		db_page.Type_redirect_(redirect_ttl != null);
-		Bry_bfr tmp = wiki.Utl_bry_bfr_mkr().Get_b512();
+		Bry_bfr tmp = wiki.Utl__bfr_mkr().Get_b512();
 		Xodb_page_.Txt_ttl_save(tmp, db_page);
 		byte[] ttl_row_bry = tmp.Xto_bry_and_clear();
 		tmp.Mkr_rls();

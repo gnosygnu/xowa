@@ -65,7 +65,7 @@ public class Score_xnde implements Xox_xnde, Xop_xnde_atr_parser, Xoh_cmd_itm {
 			ly_process.Exe_exists_(exists ? Bool_.Y_byte : Bool_.N_byte);
 		}
 		if (ly_process.Exe_exists() == Bool_.N_byte) {Html_write_code_as_pre(bfr, app); return;}
-		Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_b128();
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b128();
 		tmp_bfr.Add(code).Add_byte_pipe().Add_int_bool(lang_is_abc).Add_byte_pipe().Add_int_bool(code_is_raw);
 		sha1 = gplx.security.HashAlgo_.Sha1.Calc_hash_bry(tmp_bfr.Mkr_rls().Xto_bry_and_clear()); // NOTE: MW transforms to base32; for now, keep sha1 as raw
 		sha1_prefix = String_.new_ascii_(sha1, 0, 8);
@@ -130,7 +130,7 @@ public class Score_xnde implements Xox_xnde, Xop_xnde_atr_parser, Xoh_cmd_itm {
 			Io_mgr._.SaveFilBry(ly_file, ly_text);
 		}	
 		else {
-			Bry_bfr tmp_bfr = wiki.Utl_bry_bfr_mkr().Get_m001();
+			Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
 			ly_text = code_is_raw ? code : score_xtn.Lilypond_fmtr().Bld_bry_many(tmp_bfr, Score_xtn_mgr.Lilypond_version, code);
 			tmp_bfr.Mkr_rls();
 			Io_mgr._.SaveFilBry(ly_file, ly_text);

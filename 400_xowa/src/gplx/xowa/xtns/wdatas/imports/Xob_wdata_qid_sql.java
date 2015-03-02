@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
-import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.dbs.tbls.*;
+import gplx.xowa.wikis.data.*; import gplx.dbs.*; import gplx.xowa.dbs.*; import gplx.xowa.dbs.tbls.*;
 public class Xob_wdata_qid_sql extends Xob_wdata_qid_base {
 	Xodb_mgr_sql db_mgr; Xodb_wdata_qids_tbl tbl; Db_stmt stmt; Db_conn conn;
 	@Override public String Wkr_key() {return KEY;} public static final String KEY = "import.sql.wdata.qid";	
@@ -25,10 +25,10 @@ public class Xob_wdata_qid_sql extends Xob_wdata_qid_base {
 		tbl = db_mgr.Tbl_wdata_qids();
 		long wikidata_max = wiki.Appe().Setup_mgr().Dump_mgr().Db_wikidata_max();
 		if (wikidata_max > 0) {
-			Xodb_file wdata_file = db_mgr.Fsys_mgr().Make(Xodb_file_tid.Tid_wikidata);
-			db_mgr.Fsys_mgr().Conn_wdata_(wdata_file);
+			Xowd_db_file wdata_file = db_mgr.Core_data_mgr().Dbs__add_new(Xowd_db_file_.Tid_wikidata);
+			db_mgr.Core_data_mgr().Conn_wdata_(wdata_file);
 		}
-		conn = db_mgr.Fsys_mgr().Conn_wdata();
+		conn = db_mgr.Core_data_mgr().Conn_wdata();
 		stmt = tbl.Insert_stmt(conn);
 		conn.Txn_mgr().Txn_bgn_if_none();
 	}
@@ -38,7 +38,7 @@ public class Xob_wdata_qid_sql extends Xob_wdata_qid_base {
 	@Override public void Qid_end() {
 		conn.Txn_mgr().Txn_end_all();
 		stmt.Rls();
-		db_mgr.Fsys_mgr().Index_create(wiki.Appe().Usr_dlg(), Byte_.Ary(Xodb_file_tid.Tid_core, Xodb_file_tid.Tid_wikidata), Index_wdata_qids);
+		db_mgr.Core_data_mgr().Index_create(wiki.Appe().Usr_dlg(), Byte_.Ary(Xowd_db_file_.Tid_core, Xowd_db_file_.Tid_wikidata), Index_wdata_qids);
 	}
 	private static final Db_idx_itm Index_wdata_qids	= Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS wdata_qids__src ON wdata_qids (wq_src_wiki, wq_src_ns, wq_src_ttl);");
 }

@@ -28,7 +28,7 @@ import gplx.xowa.wmfs.*;
 public class Xoae_app implements Xoa_app, GfoInvkAble {
 	public Xoae_app(Gfo_usr_dlg usr_dlg, Io_url root_dir, Io_url user_dir, String bin_dir_name) {
 		Xoa_app_.Usr_dlg_(usr_dlg);			
-		Io_url.Http_file_str_encoder = Xoa_app_.Utl_encoder_mgr().Fsys();
+		Io_url.Http_file_str_encoder = Xoa_app_.Utl__encoder_mgr().Fsys();
 		fsys_mgr = new Xoa_fsys_mgr(bin_dir_name, root_dir);
 		log_wtr = usr_dlg.Log_wtr();
 		cfg_mgr = new Xoa_cfg_mgr(this);
@@ -42,7 +42,7 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 		gui_mgr = new Xoa_gui_mgr(this);
 		bldr = new Xob_bldr(this);
 		file_mgr.Ctor_by_app(this);
-		href_parser = new Xoh_href_parser(Xoa_app_.Utl_encoder_mgr().Href(), url_parser.Url_parser());
+		href_parser = new Xoh_href_parser(Xoa_app_.Utl__encoder_mgr().Href(), url_parser.Url_parser());
 		sanitizer = new Xop_sanitizer(parser_amp_mgr, msg_log);
 		user_mgr = new Xou_user_mgr(this, user);
 		sys_cfg = new Xoa_sys_cfg(this);
@@ -65,6 +65,8 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 	public Xof_cache_mgr		File_mgr__cache_mgr()	{return file_mgr.Cache_mgr();}
 	public Xof_img_mgr			File_mgr__img_mgr()		{return file_mgr.Img_mgr();}
 	public Xowmf_mgr			Wmf_mgr()				{return wmf_mgr;} private final Xowmf_mgr wmf_mgr = new Xowmf_mgr();
+	public Bry_bfr_mkr			Utl__bfr_mkr()			{return Xoa_app_.Utl__bfr_mkr();}
+	public Url_encoder_mgr		Utl__encoder_mgr()		{return Xoa_app_.Utl__encoder_mgr();}
 
 	
 	public Xoa_wiki_mgr			Wiki_mgr() {return wiki_mgr;} private Xoa_wiki_mgr wiki_mgr;
@@ -101,7 +103,6 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 
 	public Xoh_file_main_wkr	File_main_wkr() {return file_main_wkr;} private Xoh_file_main_wkr file_main_wkr = new Xoh_file_main_wkr();		
 	public Btrie_slim_mgr		Utl_trie_tblw_ws() {return utl_trie_tblw_ws;} private Btrie_slim_mgr utl_trie_tblw_ws = Xop_tblw_ws_itm.trie_();
-	public Bry_bfr_mkr			Utl_bry_bfr_mkr() {return Xoa_app_.Utl_bry_bfr_mkr();}
 	public Gfo_fld_rdr			Utl_fld_rdr() {return utl_fld_rdr;} Gfo_fld_rdr utl_fld_rdr = Gfo_fld_rdr.xowa_();
 	public Gfo_log_bfr			Log_bfr() {return log_bfr;} private Gfo_log_bfr log_bfr = new Gfo_log_bfr();
 	public Xoa_sys_cfg			Sys_cfg() {return sys_cfg;} private Xoa_sys_cfg sys_cfg;
@@ -167,7 +168,7 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 		Env_.GarbageCollect();
 	}
 	public void Free_mem(boolean clear_ctx) {
-		this.Utl_bry_bfr_mkr().Clear();
+		this.Utl__bfr_mkr().Clear();
 		msg_log.Clear();
 		wiki_mgr.Free_mem(clear_ctx);
 	}

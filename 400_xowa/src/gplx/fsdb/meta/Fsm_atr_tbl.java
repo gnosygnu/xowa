@@ -21,9 +21,9 @@ public class Fsm_atr_tbl {
 	private String tbl_name = "file_meta_atr"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private String fld_uid, fld_url, fld_path_bgn;
 	private Db_conn conn; private final Db_stmt_bldr stmt_bldr = new Db_stmt_bldr();
-	public void Conn_(Db_conn new_conn, boolean created, boolean version_is_1) {
+	public void Conn_(Db_conn new_conn, boolean created, boolean schema_is_1) {
 		this.conn = new_conn; flds.Clear();
-		if (version_is_1) {
+		if (schema_is_1) {
 			tbl_name		= "fsdb_db_atr";
 		}
 		fld_uid				= flds.Add_int("uid");

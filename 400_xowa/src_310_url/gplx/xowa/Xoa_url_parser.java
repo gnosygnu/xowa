@@ -136,7 +136,7 @@ public class Xoa_url_parser {
 	}
 	public static Xoa_url Parse_url(Xoae_app app, Xowe_wiki cur_wiki, byte[] raw, int bgn, int end, boolean from_url_bar) {return Parse_url(Xoa_url.blank_(), app, cur_wiki, raw, bgn, end, from_url_bar);}
 	public static Xoa_url Parse_url(Xoa_url rv, Xoae_app app, Xowe_wiki cur_wiki, byte[] raw, int bgn, int end, boolean from_url_bar) {
-		Xowe_wiki wiki = null; Bry_bfr_mkr bfr_mkr = app.Utl_bry_bfr_mkr();
+		Xowe_wiki wiki = null; Bry_bfr_mkr bfr_mkr = app.Utl__bfr_mkr();
 		byte[] cur_wiki_key = cur_wiki.Domain_bry();
 		byte[] page_bry = Bry_.Empty;
 		boolean page_is_main_page = false;
@@ -210,7 +210,7 @@ public class Xoa_url_parser {
 				page_bry = Xoa_page_.Main_page_bry_empty;
 		}
 		if (rv.Anchor_bry() != null) {
-			byte[] anchor_bry = Xoa_app_.Utl_encoder_mgr().Id().Encode(rv.Anchor_bry());	// reencode for anchors (which use . encoding, not % encoding); PAGE:en.w:Enlightenment_Spain#Enlightened_despotism_.281759%E2%80%931788.29
+			byte[] anchor_bry = Xoa_app_.Utl__encoder_mgr().Id().Encode(rv.Anchor_bry());	// reencode for anchors (which use . encoding, not % encoding); PAGE:en.w:Enlightenment_Spain#Enlightened_despotism_.281759%E2%80%931788.29
 			rv.Anchor_bry_(anchor_bry);
 		}
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, page_bry);

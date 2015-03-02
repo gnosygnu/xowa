@@ -104,7 +104,7 @@ class Xoctg_fmtr_itm_subc extends Xoctg_fmtr_itm_base {
 	}
 	byte[] Bld_contains_text(int sub_ctgs, int sub_pages, int sub_files) {
 		if (sub_ctgs == 0 && sub_pages == 0 && sub_files == 0) return Bry_.Empty;
-		Bry_bfr bfr = wiki.Utl_bry_bfr_mkr().Get_b128();
+		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b128();
 		bfr.Add_byte(Byte_ascii.Paren_bgn);
 		Bld_contains_text_itm(bfr, Xol_msg_itm_.Id_ctgtree_subc_counts_ctg, sub_ctgs);
 		Bld_contains_text_itm(bfr, Xol_msg_itm_.Id_ctgtree_subc_counts_page, sub_pages);

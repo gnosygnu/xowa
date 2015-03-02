@@ -32,7 +32,7 @@ public class Pfunc_rel2abs extends Pf_func_base {
 		byte[] qry = Eval_argx(ctx, src, caller, self);
 		byte[] orig = Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, self.Args_len(), 0);
 		if (orig.length == 0) orig = ctx.Cur_page().Ttl().Full_txt();
-		bb.Add(Rel2abs(ctx.App().Utl_bry_bfr_mkr().Get_b512().Mkr_rls(), qry, orig));
+		bb.Add(Rel2abs(ctx.App().Utl__bfr_mkr().Get_b512().Mkr_rls(), qry, orig));
 	}
 	public static boolean Rel2abs_ttl(byte[] ttl, int bgn, int end) {
 		int last = end - 1;
