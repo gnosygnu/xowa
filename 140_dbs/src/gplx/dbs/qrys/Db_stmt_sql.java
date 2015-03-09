@@ -114,7 +114,7 @@ public class Db_stmt_sql implements Db_stmt {// used for formatting SQL statemen
 	}	
 	public Db_rdr Exec_select_as_rdr() {throw Err_.not_implemented_();}	
 	public Object Exec_select_val() {
-		try {Object rv = Db_qry_select.Rdr_to_val(this.Exec_select()); return rv;} catch (Exception e) {throw Err_.err_(e, "failed to exec prepared statement: sql={0}", sql_orig);}
+		try {Object rv = Db_qry__select_cmd.Rdr_to_val(this.Exec_select()); return rv;} catch (Exception e) {throw Err_.err_(e, "failed to exec prepared statement: sql={0}", sql_orig);}
 	}
 	public Db_stmt Clear() {
 		args.Clear();
@@ -136,21 +136,41 @@ public class Db_stmt_sql implements Db_stmt {// used for formatting SQL statemen
 	public Db_stmt Parse(Db_qry qry, String sql_str) {
 		this.qry = qry;
 		this.sql_orig = sql_str;
-		int arg_idx = 0;
-		byte[] src = Bry_.new_utf8_(sql_str);
-		int pos_prv = 0;
+		Init_fmtr(tmp_bfr, tmp_fmtr, sql_str);
+		return this;
+	}
+	private static void Init_fmtr(Bry_bfr tmp_bfr, Bry_fmtr tmp_fmtr, String sql_str) {
+		byte[] sql_bry = Bry_.new_utf8_(sql_str);
+		int arg_idx = 0; int pos_prv = 0;
 		tmp_bfr.Clear();
 		while (true) {
-			int pos_cur = Bry_finder.Find_fwd(src, Byte_ascii.Question, pos_prv);
-			if (pos_cur == Bry_.NotFound) break;
-			tmp_bfr.Add_mid(src, pos_prv, pos_cur);
+			int pos_cur = Bry_finder.Find_fwd(sql_bry, Byte_ascii.Question, pos_prv); if (pos_cur == Bry_.NotFound) break;
+			tmp_bfr.Add_mid(sql_bry, pos_prv, pos_cur);
 			tmp_bfr.Add_byte(Byte_ascii.Tilde).Add_byte(Byte_ascii.Curly_bgn);
 			tmp_bfr.Add_int_variable(arg_idx++);
 			tmp_bfr.Add_byte(Byte_ascii.Curly_end);
 			pos_prv = pos_cur + 1;
 		}
-		tmp_bfr.Add_mid(src, pos_prv, src.length);
+		tmp_bfr.Add_mid(sql_bry, pos_prv, sql_bry.length);
 		tmp_fmtr.Fmt_(tmp_bfr.Xto_bry_and_clear());
-		return this;
+	}
+	public static String Xto_str(Bry_bfr tmp_bfr, Bry_fmtr tmp_fmtr, String sql_str, ListAdp args) {
+		Init_fmtr(tmp_bfr, tmp_fmtr, sql_str);
+		Object[] ary = args.Xto_obj_ary();
+		int len = ary.length;
+		for (int i = 0; i < len; ++i) {
+			Object obj = ary[i];
+			String str = "";
+			if (obj == null)
+				str = "NULL";
+			else {
+				str = Object_.Xto_str_strict_or_null(obj);
+				if (ClassAdp_.Eq(obj.getClass(), String_.Cls_ref_type))
+					str = "'" + String_.Replace(str, "'", "''") + "'";					
+			}
+			ary[i] = str;
+		}
+		tmp_fmtr.Bld_bfr_many(tmp_bfr, ary);
+		return tmp_bfr.Xto_str_and_clear();
 	} 
 }

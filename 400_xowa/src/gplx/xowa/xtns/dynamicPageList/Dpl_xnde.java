@@ -48,7 +48,7 @@ public class Dpl_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 		bfr.Add(html_mode.Grp_bgn()).Add_byte_nl();
 		for (int i = itms_bgn; i < itms_len; i++) {
 			Xodb_page page = (Xodb_page)pages.FetchAt(i);
-			Xoa_ttl ttl = Xoa_ttl.parse_(wiki, page.Ns_id(), page.Ttl_wo_ns());
+			Xoa_ttl ttl = Xoa_ttl.parse_(wiki, page.Ns_id(), page.Ttl_page_db());
 			byte[] ttl_page_txt = showns ? ttl.Full_txt() : ttl.Page_txt();
 			if (ttl_page_txt == null) continue;	// NOTE: apparently DynamicPageList allows null pages; DATE:2013-07-22
 			switch (html_mode.Tid()) {

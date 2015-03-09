@@ -53,8 +53,8 @@ public class Xob_xfer_temp_cmd_orig extends Xob_itm_basic_base implements Xob_cm
 			, orig_w, orig_h
 			, orig_w, orig_h							// file_w, file_h is same as orig_w,orig_h; i.e.: make same file_w as orig_w
 			, Xof_img_size.Null, Xof_img_size.Null		// html_w, html_h is -1; i.e.: will not be displayed in page at specific size (this matches logic in Xob_xfer_temp_cmd_thumb)
-			, Xof_doc_thumb.Null
-			, Xof_doc_page.Null
+			, Xof_lnki_time.Null
+			, Xof_lnki_page.Null
 			, 0);
 		}
 		conn.Txn_mgr().Txn_end_all();

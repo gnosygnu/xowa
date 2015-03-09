@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.pfuncs.ifs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import gplx.xowa.wmfs.apis.*;
 public class Pfunc_ifexist_mgr {
-	private Xodb_page db_page = Xodb_page.tmp_();
+	private Xodb_page db_page = Xodb_page.new_tmp();
 	private HashAdp regy = HashAdp_.new_bry_();
 	public void Clear() {regy.Clear();}
 	public boolean Exists(Xowe_wiki wiki, byte[] raw_bry) {

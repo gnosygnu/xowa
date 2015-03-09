@@ -145,10 +145,11 @@ public class Xow_hzip_itm__anchor {
 		int ttl_end = Bry_finder.Find_fwd(src, Xow_hzip_dict.Escape, ttl_bgn, src_len);		if (ttl_end == Bry_finder.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("a.ttl_end_missing", bgn, ttl_bgn);
 		byte[] ttl_bry = Bry_.Mid(src, ttl_bgn, ttl_end);
 		Xoa_ttl ttl = ttl_parser.Ttl_parse(ns.Id(), ttl_bry);
-		bfr.Add_str("<a href='/wiki/").Add(ttl.Full_db()).Add_str("' title='");
+		byte[] ttl_full = ttl.Full_db();
+		bfr.Add_str("<a href='/wiki/").Add(Html_utl.Escape_html_as_bry(ttl_full)).Add_str("' title='");
 		int rv = ttl_end + 1;
 		if (tid == Xow_hzip_dict.Tid_lnki_text_n) {
-			if (ns.Id() != 0) ttl_bry = ttl.Full_db();
+			if (ns.Id() != 0) ttl_bry = ttl_full;
 			bfr.Add(Html_utl.Escape_html_as_bry(ttl_bry)).Add_str("'>").Add(ttl_bry);
 			bfr.Add_str("</a>");
 		}

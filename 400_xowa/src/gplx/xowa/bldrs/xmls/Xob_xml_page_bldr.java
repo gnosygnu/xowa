@@ -39,7 +39,7 @@ public class Xob_xml_page_bldr {
 	}
 	public Xob_xml_page_bldr Add(Xodb_page doc) {
 		bfr.Add(Indent_2).Add(Xob_xml_parser_.Bry_page_bgn).Add_byte_nl();
-		bfr.Add(Indent_4).Add(Xob_xml_parser_.Bry_title_bgn).Add(doc.Ttl_w_ns()).Add(Xob_xml_parser_.Bry_title_end).Add_byte_nl();
+		bfr.Add(Indent_4).Add(Xob_xml_parser_.Bry_title_bgn).Add(doc.Ttl_full_db()).Add(Xob_xml_parser_.Bry_title_end).Add_byte_nl();
 		bfr.Add(Indent_4).Add(Xob_xml_parser_.Bry_id_bgn).Add_int_variable(doc.Id()).Add(Xob_xml_parser_.Bry_id_end).Add_byte_nl();
 		bfr.Add(Indent_4).Add(Xob_xml_parser_.Bry_redirect_bgn_frag).Add(Nde_inline).Add_byte_nl();
 		bfr.Add(Indent_4).Add(Xob_xml_parser_.Bry_revision_bgn).Add_byte_nl();
@@ -51,7 +51,7 @@ public class Xob_xml_page_bldr {
 		bfr.Add(Indent_6).Add(Xob_xml_parser_.Bry_contributor_end).Add_byte_nl();
 		bfr.Add(Indent_6).Add(Xob_xml_parser_.Bry_minor_bgn_frag).Add(Nde_inline).Add_byte_nl();
 		bfr.Add(Indent_6).Add(Xob_xml_parser_.Bry_comment_bgn).Add(Revision_comment).Add(Xob_xml_parser_.Bry_comment_end).Add_byte_nl();
-		bfr.Add(Indent_6).Add(Xob_xml_parser_.Bry_text_bgn).Add(doc.Text()).Add(Xob_xml_parser_.Bry_text_end).Add_byte_nl();
+		bfr.Add(Indent_6).Add(Xob_xml_parser_.Bry_text_bgn).Add(doc.Wtxt()).Add(Xob_xml_parser_.Bry_text_end).Add_byte_nl();
 		bfr.Add(Indent_4).Add(Xob_xml_parser_.Bry_revision_end).Add_byte_nl();
 		bfr.Add(Indent_2).Add(Xob_xml_parser_.Bry_page_end).Add_byte_nl();
 		return this;

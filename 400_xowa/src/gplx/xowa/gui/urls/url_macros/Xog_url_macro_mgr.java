@@ -66,6 +66,7 @@ public class Xog_url_macro_mgr {
 		types_mgr.Set("u"		, "~{0}.wikiversity.org/wiki/~{1}");
 		types_mgr.Set("n"		, "~{0}.wikinews.org/wiki/~{1}");
 		types_mgr.Set("a"		, "~{0}.wikia.com/wiki/~{1}");
+		types_mgr.Set("m"		, "~{0}.wikimedia.com/wiki/~{1}");
 		custom_mgr.Set("c"		, "commons.wikimedia.org/wiki/~{0}");
 		custom_mgr.Set("wd"		, "www.wikidata.org/wiki/~{0}");
 		custom_mgr.Set("wd.q"	, "www.wikidata.org/wiki/Q~{0}");

@@ -36,9 +36,9 @@ public class Xof_xfer_mgr {
 		ext_rule = src_repo.Ext_rules().Get_or_null(ext.Ext());
 		orig_w = 0; orig_h = 0; file_w = 0; file_h = 0;
 	}	private byte lnki_type;
-	private Xof_xfer_itm xfer_itm; private double lnki_thumbtime = Xof_doc_thumb.Null; private boolean lnki_thumbable; private int lnki_w, lnki_h, file_w, file_h; private double lnki_upright;
+	private Xof_xfer_itm xfer_itm; private double lnki_thumbtime = Xof_lnki_time.Null; private boolean lnki_thumbable; private int lnki_w, lnki_h, file_w, file_h; private double lnki_upright;
 	private Xof_ext ext; private Xof_rule_itm ext_rule; private Xof_repo_itm src_repo, trg_repo; private boolean src_repo_is_wmf; private byte[] ttl, md5; private int orig_w, orig_h, orig_file_len; 
-	private int lnki_page = Xof_doc_page.Null;
+	private int lnki_page = Xof_lnki_page.Null;
 	public Xof_meta_itm Meta_itm() {return meta_itm;} private Xof_meta_itm meta_itm;
 	public boolean Download_allowed_by_ext() {return orig_file_len < ext_rule.Make_max();}
 	public Xof_xfer_mgr Check_file_exists_before_xfer_n_() {check_file_exists_before_xfer = false; return this;} private boolean check_file_exists_before_xfer = true;
@@ -240,8 +240,8 @@ public class Xof_xfer_mgr {
 				thumb_pass = Img_rename_by_size(trg_url);					// NOTE: lnki cites view_w which will rarely match file_w; PAGE:en.w:Earth;Northwest coast of United States to Central South America at Night.ogv|250px; which is atually 640
 				if (thumb_pass) {
 					Xof_meta_thumb thumb = meta_itm.Update_thumb_add(file_w, file_h); // NOTE: only store 1 width; depend on browser to resize to other widths; this matches MW's behavior
-					if (Xof_doc_thumb.Null_n(lnki_thumbtime)) {		// lnki specified seek
-						thumb.Seeks_add(Xof_doc_thumb.X_int(lnki_thumbtime));
+					if (Xof_lnki_time.Null_n(lnki_thumbtime)) {		// lnki specified seek
+						thumb.Seeks_add(Xof_lnki_time.X_int(lnki_thumbtime));
 						meta_itm.Owner_fil().Dirty_();
 					}
 					rslt.Clear();						
@@ -308,7 +308,7 @@ public class Xof_xfer_mgr {
 	private boolean Img_rename_by_size(Io_url trg_url) {
 		if (!Cmd_query_size(trg_url)) return false;
 		if (file_w != lnki_w) {	// NOTE: only rename if file_w is different; this proc can be called if file_w is same, but file_h < 1; EX: A.svg|thumb|30px will call this proc to get size of thumb
-			String new_name = Xof_doc_thumb.Null_y(lnki_thumbtime) ? file_w + "px" : file_w + "px" + Xof_meta_thumb_parser.Dlm_seek_str + Xof_doc_thumb.X_str(lnki_thumbtime);
+			String new_name = Xof_lnki_time.Null_y(lnki_thumbtime) ? file_w + "px" : file_w + "px" + Xof_meta_thumb_parser.Dlm_seek_str + Xof_lnki_time.X_str(lnki_thumbtime);
 			Io_url new_trg = trg_url.GenNewNameOnly(new_name);
 			if (trg_url.Eq(new_trg)) return true;	// HACK: io will delete file if moving unto itself; (i.e.: mv A.png A.png is same as del A.png); problem is that this proc is being called too many times
 			try {Io_mgr._.MoveFil_args(trg_url, new_trg, true).Exec();}

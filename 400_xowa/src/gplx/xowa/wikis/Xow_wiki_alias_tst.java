@@ -36,6 +36,7 @@ public class Xow_wiki_alias_tst {
 		fxt.Parse__domain_name("enwikiquote"			, "en.wikiquote.org");
 		fxt.Parse__domain_name("enwikinews"				, "en.wikinews.org");
 		fxt.Parse__domain_name("enwikivoyage"			, "en.wikivoyage.org");
+		fxt.Parse__domain_name("plwikimedia"			, "pl.wikimedia.org");
 	}
 	@Test  public void Parse__tid() {
 		fxt.Parse__tid("pages-articles.xml"				, Xow_wiki_alias.Tid_pages_articles);

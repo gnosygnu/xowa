@@ -80,7 +80,7 @@ public class Xob_xml_parser {
 							title_needed = false;
 						}
 						break;
-					case Xob_xml_parser_.Id_text_end:		data_bfr_add = false; rv.Text_(data_bfr.Xto_bry_and_clear()); break;
+					case Xob_xml_parser_.Id_text_end:		data_bfr_add = false; rv.Wtxt_(data_bfr.Xto_bry_and_clear()); break;
 					case Xob_xml_parser_.Id_amp: case Xob_xml_parser_.Id_quot: case Xob_xml_parser_.Id_lt: case Xob_xml_parser_.Id_gt:
 					case Xob_xml_parser_.Id_cr_nl: case Xob_xml_parser_.Id_cr:
 						if (data_bfr_add) data_bfr.Add_byte(itm.Subst_byte());

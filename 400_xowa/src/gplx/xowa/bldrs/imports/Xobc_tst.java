@@ -178,7 +178,7 @@ public class Xobc_tst {
 		ListAdp actl = ListAdp_.new_();
 		Xodb_page page = new Xodb_page();
 		while (parser.Read(page)) {
-			actl.Add(String_.new_utf8_(page.Text()));
+			actl.Add(String_.new_utf8_(page.Wtxt()));
 		}
 		Tfds.Eq_ary(expd, actl.XtoStrAry());
 	}

@@ -37,10 +37,8 @@ public class Xohd_page_html_mgr__save {
 	private int Insert_row(Xohd_page_html_tbl tbl, int page_id, int row_tid, byte[] bry) {return bry == null ? 0 : tbl.Insert(page_id, row_tid, bry);}
 	public static byte[] Write_redlinks(Bry_bfr bfr, Xopg_redlink_idx_list redlink_mgr) {
 		int len = redlink_mgr.Len(); if (len == 0) return null;
-		bfr.Add_int_variable(redlink_mgr.Max());
-		for (int i = 0; i < len; ++i) {
-			bfr.Add_byte_pipe().Add_int_variable(redlink_mgr.Get_at(i));
-		}
+		for (int i = 0; i < len; ++i)
+			bfr.Add_int_variable(redlink_mgr.Get_at(i)).Add_byte_pipe();
 		return bfr.Xto_bry_and_clear();
 	}
 	public static byte[] Write_imgs(Bry_bfr bfr, ListAdp imgs) {

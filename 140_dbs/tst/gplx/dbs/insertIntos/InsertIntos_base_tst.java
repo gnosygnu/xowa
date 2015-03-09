@@ -35,10 +35,10 @@ public abstract class InsertIntos_base_tst {
 			(Db_qry_.insert_("dbs_insert_intos")
 			.Cols_("key1", "val_int")
 			.Select_
-			(	Db_qry_select.new_().Cols_("key1", "val_int").From_("dbs_group_bys")
+			(	Db_qry__select_cmd.new_().Cols_("key1", "val_int").From_("dbs_group_bys")
 			)
 			);
-		DataRdr rdr = conn.Exec_qry_as_rdr(Db_qry_select.new_().Cols_("key1", "val_int").From_("dbs_insert_intos"));
+		DataRdr rdr = conn.Exec_qry_as_rdr(Db_qry__select_cmd.new_().Cols_("key1", "val_int").From_("dbs_insert_intos"));
 		GfoNde nde = GfoNde_.rdr_(rdr);
 		GfoNdeTstr.tst_ValsByCol(nde, "key1", "a");
 	}
@@ -50,10 +50,10 @@ public abstract class InsertIntos_base_tst {
 			(Db_qry_.insert_("dbs_insert_intos")
 			.Cols_("key1", "val_int")
 			.Select_
-			(	Db_qry_select.new_().Cols_("key1").Cols_groupBy_sum("val_int", "val_int_func")
+			(	Db_qry__select_cmd.new_().Cols_("key1").Cols_groupBy_sum("val_int", "val_int_func")
 				.From_("dbs_group_bys").GroupBy_("key1")
 			));
-		DataRdr rdr = conn.Exec_qry_as_rdr(Db_qry_select.new_().Cols_("key1", "val_int").From_("dbs_insert_intos"));
+		DataRdr rdr = conn.Exec_qry_as_rdr(Db_qry__select_cmd.new_().Cols_("key1", "val_int").From_("dbs_insert_intos"));
 		GfoNde nde = GfoNde_.rdr_(rdr);
 		GfoNdeTstr.tst_ValsByCol(nde, "val_int", 3);
 	}

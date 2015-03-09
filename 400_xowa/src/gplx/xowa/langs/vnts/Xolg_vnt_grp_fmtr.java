@@ -16,19 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-class Xolg_vnt_grp {
-	private final ListAdp list = ListAdp_.new_();
-	public byte[] Text() {return text;} public void Text_(byte[] v) {text = v;} private byte[] text;
-	public int Len() {return list.Count();}
-	public Xolg_vnt_itm Get_at(int i) {return (Xolg_vnt_itm)list.FetchAt(i);}
-	public void Add(Xolg_vnt_itm itm) {list.Add(itm);}
-}
-class Xolg_vnt_itm {
-	public Xolg_vnt_itm(byte[] key, byte[] text) {this.key = key; this.text = text;}
-	public byte[] Key() {return key;} private final byte[] key;
-	public byte[] Text() {return text;} private final byte[] text;
-}
-class Xolg_vnt_grp_fmtr implements Bry_fmtr_arg {
+public class Xolg_vnt_grp_fmtr implements Bry_fmtr_arg {
 	private Xolg_vnt_grp grp;
 	private Xolg_vnt_itm_fmtr itm_fmtr = new Xolg_vnt_itm_fmtr();
 	public void Init(Xolg_vnt_grp grp, byte[] page_href, byte[] page_vnt) {
@@ -39,11 +27,13 @@ class Xolg_vnt_grp_fmtr implements Bry_fmtr_arg {
 		fmtr.Bld_bfr_many(bfr, grp.Text(), itm_fmtr);
 	}
 	private static final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
-	(  "  <h3 id='p-variants-label'><span>~{grp_text}</span><a href='#'></a></h3>"
-	,  "  <div class='menu'>"
-	,  "    <ul>~{itms}"
-	,  "    </ul>"
-	,  "  </div>"
+	( "    <div id='p-variants' role='navigation' class='vectorMenu' aria-labelledby='p-variants-label'>"
+	, "      <h3 id='p-variants-label'><span>~{grp_text}</span><a href='#'></a></h3>"
+	, "      <div class='menu'>"
+	, "        <ul>~{itms}"
+	, "        </ul>"
+	, "      </div>"
+	, "    </div>"
 	), "grp_text", "itms"
 	);
 }
@@ -62,7 +52,7 @@ class Xolg_vnt_itm_fmtr implements Bry_fmtr_arg {
 	private static final byte[] Itm_cls_selected_y = Bry_.new_ascii_(" class='selected'");
 	private static final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
-	, "      <li id='ca-varlang-~{itm_idx}'~{itm_cls_selected}><a href='/wiki/~{itm_href}?xowa_vnt=~{itm_lang}' lang='~{itm_lang}' hreflang='~{itm_lang}'>~{itm_text}</a></li>"
+	, "          <li id='ca-varlang-~{itm_idx}'~{itm_cls_selected}><a href='/wiki/~{itm_href}?xowa_vnt=~{itm_lang}' lang='~{itm_lang}' hreflang='~{itm_lang}'>~{itm_text}</a></li>"
 	), "itm_idx", "itm_cls_selected", "itm_lang", "itm_text", "itm_href"
 	);
 }

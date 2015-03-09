@@ -126,15 +126,17 @@ public class Xowd_pg_regy_tbl {
 		stmt.Val_int(fld_page_html_db_id, html_db_id).Crt_int(fld_db_id, db_id).Crt_int(fld_page_id, page_id).Exec_update();
 	}
 	private void Read_page__all(Xodb_page page, Db_rdr rdr) {
-		page.Id_			(rdr.Read_int(fld_page_id));
-		page.Ns_id_			(rdr.Read_int(fld_page_ns));
-		page.Ttl_wo_ns_		(rdr.Read_bry_by_str(fld_page_title));
-		page.Modified_on_	(DateAdp_.parse_fmt(rdr.Read_str(fld_page_touched), Page_touched_fmt));
-		page.Type_redirect_	(rdr.Read_bool_by_byte(fld_page_is_redirect));
-		page.Text_len_		(rdr.Read_int(fld_page_len));
-		page.Text_db_id_	(rdr.Read_int(fld_page_text_db_id));
-		page.Html_db_id_	(rdr.Read_int(fld_page_html_db_id));
-		page.Redirect_id_	(rdr.Read_int(fld_page_redirect_id));
+		page.Init_by_sql
+		( rdr.Read_int(fld_page_id)
+		, rdr.Read_int(fld_page_ns)
+		, rdr.Read_bry_by_str(fld_page_title)
+		, DateAdp_.parse_fmt(rdr.Read_str(fld_page_touched), Page_touched_fmt)
+		, rdr.Read_bool_by_byte(fld_page_is_redirect)
+		, rdr.Read_int(fld_page_len)
+		, rdr.Read_int(fld_page_text_db_id)
+		, rdr.Read_int(fld_page_html_db_id)
+		, rdr.Read_int(fld_page_redirect_id)
+		);
 	}
 	private static final String Page_touched_fmt = "yyyyMMddHHmmss";
 }

@@ -32,4 +32,6 @@ public interface Db_engine {
 	void			Exec_ddl_create_tbl(Db_meta_tbl meta);
 	void			Exec_ddl_create_idx(Gfo_usr_dlg usr_dlg, Db_meta_idx... ary);
 	void			Exec_ddl_append_fld(String tbl, Db_meta_fld fld);
+	void			Exec_env_db_attach(String alias, Io_url db_url);
+	void			Exec_env_db_detach(String alias);
 }

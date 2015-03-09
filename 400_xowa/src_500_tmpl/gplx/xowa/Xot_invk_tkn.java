@@ -194,7 +194,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 			&&	lang.Vnt_mgr().Enabled()) {					// lang has vnts
 			Xodb_page page = lang.Vnt_mgr().Convert_ttl(wiki, wiki.Ns_mgr().Ns_template(), name_ary);
 			if (page != Xodb_page.Null) {
-				name_ary = page.Ttl_wo_ns();
+				name_ary = page.Ttl_page_db();
 				Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.Add(wiki.Ns_mgr().Ns_template().Name_db_w_colon(), name_ary));
 				if (ttl == null) { // ttl is not valid; just output orig; REF.MW:Parser.php|braceSubstitution|if ( !$found ) $text = $frame->virtualBracketedImplode( '{{', '|', '}}', $titleWithSpaces, $args );
 					bfr.Add(Xop_curly_bgn_lxr.Hook).Add(name_ary).Add(Xop_curly_end_lxr.Hook);

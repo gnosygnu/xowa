@@ -17,13 +17,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.fsdb.data; import gplx.*; import gplx.fsdb.*;
 public class Fsd_fil_itm {
-	public int Id() {return id;} public Fsd_fil_itm Id_(int v) {id = v; return this;} private int id;
-	public int Owner() {return owner;} public Fsd_fil_itm Owner_(int v) {owner = v; return this;} private int owner;
-	public int Ext_id() {return ext_id;} public Fsd_fil_itm Ext_id_(int v) {ext_id = v; return this;} private int ext_id;
-	public String Name() {return name;} public Fsd_fil_itm Name_(String v) {name = v; return this;} private String name;
-	public int Db_bin_id() {return bin_db_id;} public Fsd_fil_itm Db_bin_id_(int v) {bin_db_id = v; return this;} private int bin_db_id;
+	public int Id() {return id;} private int id;
+	public int Owner() {return owner;} private int owner;
+	public int Ext_id() {return ext_id;} private int ext_id;
+	public String Name() {return name;} private String name;
+	public int Db_bin_id() {return bin_db_id;} private int bin_db_id;
 	public int Mnt_id() {return mnt_id;} public Fsd_fil_itm Mnt_id_(int v) {mnt_id = v; return this;} private int mnt_id;
 	public Fsd_fil_itm Init(int id, int owner, int ext_id, String name, int bin_db_id) {this.id = id; this.owner = owner; this.ext_id = ext_id; this.name = name; this.bin_db_id = bin_db_id; return this;}
+	public void Init_for_insert(int bin_db_id, int dir_id, int fil_id) {
+		this.bin_db_id = bin_db_id; this.owner = dir_id; this.id = fil_id;
+	}
 	public static final int Null_id = 0;
 	public static final Fsd_fil_itm Null = new Fsd_fil_itm().Init(Null_id, 0, 0, "", Fsd_bin_tbl.Null_db_bin_id);
 }

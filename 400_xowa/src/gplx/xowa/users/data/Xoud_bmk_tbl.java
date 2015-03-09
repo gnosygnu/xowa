@@ -33,7 +33,7 @@ public class Xoud_bmk_tbl {
 		catch (Exception exc) {stmt_delete = null; throw Err_.err_(exc, "stmt failed");} // must reset stmt, else next call will fail
 	}
 	@gplx.Virtual public void Select_all(ListAdp rv) {
-		if (stmt_select == null) stmt_select = Db_stmt_.new_select_as_rdr(conn, Db_qry__select_in_tbl.new_(Tbl_name, null, Flds__all));
+		if (stmt_select == null) stmt_select = Db_stmt_.new_select_as_rdr(conn, Db_qry__select_in_tbl.new_(Tbl_name, null, Flds__all, Db_qry__select_in_tbl.Order_by_null));
 		try {
 			Db_rdr rdr = stmt_select.Clear().Exec_select_as_rdr();
 			while (rdr.Move_next()) {

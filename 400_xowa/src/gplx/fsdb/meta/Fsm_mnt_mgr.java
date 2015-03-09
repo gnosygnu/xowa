@@ -76,12 +76,15 @@ public class Fsm_mnt_mgr implements GfoInvkAble {
 		return false;
 	}
 	public int Insert_to_mnt() {return insert_to_mnt;} public Fsm_mnt_mgr Insert_to_mnt_(int v) {insert_to_mnt = v; return this;} private int insert_to_mnt = Mnt_idx_user;
-	public void Fil_insert(Fsd_fil_itm rv    , byte[] dir, byte[] fil, int ext_id, DateAdp modified, String hash, long bin_len, gplx.ios.Io_stream_rdr bin_rdr) {
+	public void Fil_insert(byte[] dir, byte[] fil, int ext_id, DateAdp modified, String hash, long bin_len, gplx.ios.Io_stream_rdr bin_rdr) {Fil_insert(new Fsd_fil_itm(), dir, fil, ext_id, modified, hash, bin_len, bin_rdr);}
+	public void Fil_insert(Fsd_fil_itm rv, byte[] dir, byte[] fil, int ext_id, DateAdp modified, String hash, long bin_len, gplx.ios.Io_stream_rdr bin_rdr) {
 		ary[insert_to_mnt].Fil_insert(rv, dir, fil, ext_id, modified, hash, bin_len, bin_rdr);
 	}
-	public void Thm_insert(Fsd_thm_itm rv, byte[] dir, byte[] fil, int ext_id, int w, int h, double thumbtime, int page, DateAdp modified, String hash, long bin_len, gplx.ios.Io_stream_rdr bin_rdr) {
-		ary[insert_to_mnt].Thm_insert(rv, dir, fil, ext_id, w, h, thumbtime, page, modified, hash, bin_len, bin_rdr);
+	public void Thm_insert(byte[] dir, byte[] fil, int ext_id, int w, int h, double time, int page, DateAdp modified, String hash, long bin_len, gplx.ios.Io_stream_rdr bin_rdr) {Thm_insert(Fsd_thm_itm.new_(), dir, fil, ext_id, w, h, time, page, modified, hash, bin_len, bin_rdr);}
+	public void Thm_insert(Fsd_thm_itm rv, byte[] dir, byte[] fil, int ext_id, int w, int h, double time, int page, DateAdp modified, String hash, long bin_len, gplx.ios.Io_stream_rdr bin_rdr) {
+		ary[insert_to_mnt].Thm_insert(rv, dir, fil, ext_id, w, h, time, page, modified, hash, bin_len, bin_rdr);
 	}
+	public void Img_insert(byte[] dir, byte[] fil, int ext_id, int img_w, int img_h, DateAdp modified, String hash, long bin_len, gplx.ios.Io_stream_rdr bin_rdr) {Img_insert(new Fsd_img_itm(), dir, fil, ext_id, img_w, img_h, modified, hash, bin_len, bin_rdr);}
 	public void Img_insert(Fsd_img_itm rv, byte[] dir, byte[] fil, int ext_id, int img_w, int img_h, DateAdp modified, String hash, long bin_len, gplx.ios.Io_stream_rdr bin_rdr) {
 		ary[insert_to_mnt].Img_insert(rv, dir, fil, ext_id, modified, hash, bin_len, bin_rdr, img_w, img_h);
 	}

@@ -110,7 +110,7 @@ public class Xop_lnki_wkr_ {
 			ctx.Msg_log().Add_itm_none(Xop_lnki_log.Upright_val_is_invalid, src, val_tkn_bgn, val_tkn_end);
 		}
 		else
-			lnki.Thumbtime_(fracs / TimeSpanAdp_.Ratio_f_to_s);
+			lnki.Time_(fracs / TimeSpanAdp_.Ratio_f_to_s);
 	}
 	public static boolean Adjust_for_brack_end_len_of_3(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int cur_pos, Xop_lnki_tkn lnki) {
 		if (	cur_pos < src_len										// bounds check

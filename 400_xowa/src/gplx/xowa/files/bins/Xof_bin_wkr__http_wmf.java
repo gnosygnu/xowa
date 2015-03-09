@@ -24,15 +24,18 @@ public class Xof_bin_wkr__http_wmf implements Xof_bin_wkr {
 	public byte Tid() {return Xof_bin_wkr_.Tid_http_wmf;}
 	public boolean Resize_allowed() {return bin_wkr_resize;} public void Resize_allowed_(boolean v) {bin_wkr_resize = v;} private boolean bin_wkr_resize = true;
 	public int Fail_timeout() {return fail_timeout;} public Xof_bin_wkr__http_wmf Fail_timeout_(int v) {fail_timeout = v; return this;} private int fail_timeout = 0;	// NOTE: always default to 0; manually set to 1000 for fsdb_make only; DATE:2014-06-21
-	public Io_stream_rdr Get_as_rdr(Xof_fsdb_itm itm, boolean is_thumb, int w) {
-		Download_init(itm.Orig_repo_name(), itm.Lnki_ttl(), itm.Lnki_md5(), itm.Lnki_ext(), is_thumb, w, itm.Lnki_time(), itm.Lnki_page(), Io_url_.Null);
+	public Io_stream_rdr Get_as_rdr(Xof_fsdb_itm fsdb, boolean is_thumb, int w) {
+		Download_init(fsdb.Orig_repo_name(), fsdb.Lnki_ttl(), fsdb.Lnki_md5(), fsdb.Lnki_ext(), is_thumb, w, fsdb.Lnki_time(), fsdb.Lnki_page(), Io_url_.Null);
 		Io_stream_rdr rdr = download_wkr.Exec_as_rdr();
 		boolean rv = rdr.Len() != IoItmFil.Size_invalid;	// NOTE: use IoItmFil.Size_invalid, not Io_stream_rdr_.Read_done; DATE:2014-06-21
 		if (!rv) Handle_error();
+		fsdb.Fsdb_insert_y_();
 		return rv ? rdr : Io_stream_rdr_.Null;
 	}
-	public boolean Get_to_fsys(Xof_fsdb_itm itm, boolean is_thumb, int w, Io_url bin_url) {
-		return Get_to_fsys(itm.Orig_repo_name(), itm.Lnki_ttl(), itm.Lnki_md5(), itm.Lnki_ext(), is_thumb, w, itm.Lnki_time(), itm.Lnki_page(), bin_url);
+	public boolean Get_to_fsys(Xof_fsdb_itm fsdb, boolean is_thumb, int w, Io_url bin_url) {
+		boolean rv = Get_to_fsys(fsdb.Orig_repo_name(), fsdb.Lnki_ttl(), fsdb.Lnki_md5(), fsdb.Lnki_ext(), is_thumb, w, fsdb.Lnki_time(), fsdb.Lnki_page(), bin_url);
+		if (rv) fsdb.Fsdb_insert_y_();
+		return rv;
 	}
 	private boolean Get_to_fsys(byte[] orig_repo, byte[] orig_ttl, byte[] orig_md5, Xof_ext orig_ext, boolean lnki_is_thumb, int file_w, double lnki_time, int lnki_page, Io_url file_url) {
 		Download_init(orig_repo, orig_ttl, orig_md5, orig_ext, lnki_is_thumb, file_w, lnki_time, lnki_page, file_url);

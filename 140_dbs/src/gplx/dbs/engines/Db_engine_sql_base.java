@@ -37,7 +37,7 @@ public abstract class Db_engine_sql_base implements Db_engine {
 		String sql = this.SqlWtr().Xto_str(qry, false); // DBG: Tfds.Write(sql);
 		return qry.Exec_is_rdr() ? (Object)this.Exec_as_rdr(sql) : this.Exec_as_int(sql);
 	}
-	private int Exec_as_int(String sql) {
+	protected int Exec_as_int(String sql) {
 		try {
 			Statement cmd = New_stmt_exec(sql);	
 			return cmd.executeUpdate(sql);			
@@ -65,6 +65,8 @@ public abstract class Db_engine_sql_base implements Db_engine {
 	public void Exec_ddl_append_fld(String tbl, Db_meta_fld fld) {
 		Exec_as_int(Db_sqlbldr__sqlite.I.Bld_alter_tbl_add(tbl, fld));
 	}
+	@gplx.Virtual public void Exec_env_db_attach(String alias, Io_url db_url) {}
+	@gplx.Virtual public void	Exec_env_db_detach(String alias) {}
 	@gplx.Virtual public DataRdr New_rdr(ResultSet rdr, String sql) {return gplx.stores.Db_data_rdr_.new_(rdr, sql);}
 	@gplx.Virtual public Sql_qry_wtr SqlWtr() {return Sql_qry_wtr_.new_ansi();}
 	@gplx.Internal protected abstract Connection Conn_new();	

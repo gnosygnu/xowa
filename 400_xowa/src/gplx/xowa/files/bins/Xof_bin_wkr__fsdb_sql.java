@@ -41,10 +41,10 @@ public class Xof_bin_wkr__fsdb_sql implements Xof_bin_wkr, GfoInvkAble {
 	private void Find_ids(byte[] orig_repo, byte[] orig_ttl, int orig_ext, double lnki_time, int lnki_page, boolean is_thumb, int w, Int_obj_ref tmp_itm_id, Int_obj_ref tmp_bin_id, Int_obj_ref tmp_mnt_id) {
 		synchronized (tmp_bin_id) {
 			byte[] dir = orig_repo, fil = orig_ttl;
-			double time = Xof_doc_thumb.Convert_to_fsdb_thumbtime(orig_ext, lnki_time, lnki_page);
+			double time = Xof_lnki_time.Convert_to_fsdb_thumbtime(orig_ext, lnki_time, lnki_page);
 			if (is_thumb) {
-				Fsd_thm_itm thm_itm = Fsd_thm_itm.load_();
-				Init_thm(orig_ext, w, lnki_time, lnki_page, thm_itm);
+				Fsd_thm_itm thm_itm = Fsd_thm_itm.new_();
+				thm_itm.Init_by_req(w, lnki_time, lnki_page);
 				boolean found = mnt_mgr.Thm_select_bin(dir, fil, thm_itm);
 				tmp_itm_id.Val_(thm_itm.Id());
 				tmp_bin_id.Val_(found ? thm_itm.Db_bin_id() : Fsd_bin_tbl.Null_db_bin_id);
@@ -57,12 +57,6 @@ public class Xof_bin_wkr__fsdb_sql implements Xof_bin_wkr, GfoInvkAble {
 				tmp_mnt_id.Val_(fil_itm.Mnt_id());
 			}
 		}
-	}
-	private void Init_thm(int src_ext_id, int src_w, double src_time, int src_page, Fsd_thm_itm trg) {
-		trg.Owner().Ext_id_(src_ext_id);
-		trg.Width_(src_w);
-		trg.Thumbtime_(src_time);
-		trg.Page_(src_page);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.MatchIn(k, Invk_url_))		mnt_mgr.Init_by_wiki(m.ReadIoUrl("v"), Bool_.Y);

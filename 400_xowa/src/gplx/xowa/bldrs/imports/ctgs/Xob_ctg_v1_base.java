@@ -65,7 +65,7 @@ public abstract class Xob_ctg_v1_base extends Xob_itm_dump_base implements Xobd_
 		}
 	}
 	@gplx.Virtual public void Log(byte err_tid, Xodb_page page, byte[] src, int ctg_bgn) {
-		String title = String_.new_utf8_(page.Ttl_w_ns());
+		String title = String_.new_utf8_(page.Ttl_full_db());
 		int ctg_end = ctg_bgn + 40; if (ctg_end > src.length) ctg_end = src.length;
 		String ctg_str = String_.Replace(String_.new_utf8_(src, ctg_bgn, ctg_end), "\n", "");
 		String err = "";

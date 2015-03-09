@@ -20,6 +20,7 @@ import gplx.core.primitives.*;
 import gplx.xowa.files.*; import gplx.xowa.parsers.lnkis.*;
 public class Xoh_file_mgr {
 	private final Xowe_wiki wiki; private final Bool_obj_ref queue_add_ref = Bool_obj_ref.n_();
+	private final Xof_xfer_itm tmp_xfer_itm = new Xof_xfer_itm();
 	public Xoh_file_mgr(Xowe_wiki wiki, Xow_html_mgr html_mgr, Xoh_html_wtr html_wtr) {
 		this.wiki = wiki;
 		this.file_wtr = new Xoh_file_wtr__basic(wiki, html_mgr, html_wtr);
@@ -34,10 +35,10 @@ public class Xoh_file_mgr {
 		Xof_xfer_itm xfer_itm = this.Lnki_eval(ctx, page, lnki, queue_add_ref);
 		file_wtr.Write_file(bfr, ctx, hctx, src, lnki, xfer_itm, alt_text);
 	}
-	public Xof_xfer_itm Lnki_eval(Xop_ctx ctx, Xoae_page page, Xop_lnki_tkn lnki, Bool_obj_ref queue_add_ref) {return Lnki_eval(ctx, page.File_queue(), lnki.Ttl().Page_url(), lnki.Lnki_type(), lnki.Lnki_w(), lnki.Lnki_h(), lnki.Upright(), lnki.Thumbtime(), lnki.Page(), lnki.Ns_id() == Xow_ns_.Id_media, queue_add_ref);}
+	public Xof_xfer_itm Lnki_eval(Xop_ctx ctx, Xoae_page page, Xop_lnki_tkn lnki, Bool_obj_ref queue_add_ref) {return Lnki_eval(ctx, page.File_queue(), lnki.Ttl().Page_url(), lnki.Lnki_type(), lnki.W(), lnki.H(), lnki.Upright(), lnki.Time(), lnki.Page(), lnki.Ns_id() == Xow_ns_.Id_media, queue_add_ref);}
 	public Xof_xfer_itm Lnki_eval(Xop_ctx ctx, Xof_xfer_queue queue, byte[] lnki_ttl, byte lnki_type, int lnki_w, int lnki_h, double lnki_upright, double lnki_thumbtime, int lnki_page, boolean lnki_is_media_ns, Bool_obj_ref queue_add_ref) {
 		queue_add_ref.Val_n_();
-		int uid = queue.Elem_id().Val_add();
+		int uid = queue.Html_uid().Val_add();
 		tmp_xfer_itm.Clear().Init_by_lnki(lnki_ttl, Bry_.Empty, lnki_type, lnki_w, lnki_h, lnki_upright, lnki_thumbtime, lnki_page).Set__html_uid_tid(uid, Xof_html_elem.Tid_img);
 		boolean found = Find_file(ctx, tmp_xfer_itm);
 		boolean file_queue_add = File_queue_add(wiki, tmp_xfer_itm, lnki_is_media_ns, found);
@@ -50,7 +51,7 @@ public class Xoh_file_mgr {
 		}
 		rv.File_found_(found);
 		return rv;
-	}	private Xof_xfer_itm tmp_xfer_itm = new Xof_xfer_itm();
+	}
 	private boolean Find_file(Xop_ctx ctx, Xof_xfer_itm xfer_itm) {
 		if (wiki.File_mgr().Version() == Xow_file_mgr.Version_2)
 			return ctx.Cur_page().Lnki_file_mgr().Find(wiki, ctx.Cur_page(), Xof_exec_tid.Tid_wiki_page, xfer_itm);

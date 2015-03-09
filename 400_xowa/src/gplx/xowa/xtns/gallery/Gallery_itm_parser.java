@@ -71,7 +71,7 @@ public class Gallery_itm_parser {
 		ctx.Cur_page().Lnki_list().Add(lnki_tkn);
 		mgr.Get_thumb_size(lnki_tkn, cur_itm.Ext());		// NOTE: set thumb size, so that lnki.temp parse picks it up
 		if (file_wkr != null) file_wkr.Wkr_exec(ctx, src, lnki_tkn, gplx.xowa.bldrs.files.Xob_lnki_src_tid.Tid_gallery);
-		lnki_tkn.Lnki_w_(-1).Lnki_h_(-1);					// NOTE: reset lnki back to defaults, else itm will show as large missing caption
+		lnki_tkn.W_(-1).H_(-1);					// NOTE: reset lnki back to defaults, else itm will show as large missing caption
 	}
 	private byte Parse_itm() {
 		int fld_count = 0;

@@ -34,7 +34,7 @@ public class Xowd_db_init_wkr__html implements Xowd_db_init_tbl_wkr, Xowd_db_ini
 	}
 	private Xohd_page_html_tbl Make_tbl(Xow_core_data_mgr core_data_mgr, Xowd_db_file db_file, boolean created) {
 		Xohd_page_html_tbl rv = new Xohd_page_html_tbl();
-		rv.Conn_(db_file.Conn(), created, core_data_mgr.Cfg__schema_is_1(), core_data_mgr.Cfg__db_id(), core_data_mgr.Tbl__cfg().Select_as_byte_or("xowa.schema.dbs.html", "zip_tid", gplx.ios.Io_stream_.Tid_bzip2));
+		rv.Conn_(db_file.Conn(), created, core_data_mgr.Cfg__schema_is_1(), core_data_mgr.Cfg__db_id(), core_data_mgr.Cfg__hdump_zip_tid());
 		return rv;
 	}
 	public void Assert_col__page_html_db_id(Xowe_core_data_mgr core_data_mgr) {
@@ -43,8 +43,9 @@ public class Xowd_db_init_wkr__html implements Xowd_db_init_tbl_wkr, Xowd_db_ini
 		if (String_.Eq(exists, "y")) return;
 		Xowd_pg_regy_tbl pg_tbl = core_data_mgr.Tbl__pg();
 		Db_conn conn = core_data_mgr.Dbs__get_db_core().Conn();
+		pg_tbl.Conn_(conn,  Bool_.N, Bool_.N, core_data_mgr.Cfg__db_id(), Bool_.Y);
 		conn.Exec_ddl_append_fld(pg_tbl.Tbl_name(), pg_tbl.Fld_html_db_id());		// TODO: currently NULL; change to NOT NULL DEFAULT -1; ALTER TABLE page ADD html_db_id int NULL;
-		conn.Exec_ddl_append_fld(pg_tbl.Tbl_name(), pg_tbl.Fld_page_redirect_id());	// TODO: currently NULL; change to NOT NULL DEFAULT -1; ALTER TABLE page ADD html_db_id int NULL;
+//			conn.Exec_ddl_append_fld(pg_tbl.Tbl_name(), pg_tbl.Fld_page_redirect_id());	// TODO: currently NULL; change to NOT NULL DEFAULT -1; ALTER TABLE page ADD html_db_id int NULL;
 		cfg_tbl.Insert(Xowe_core_data_mgr.Cfg_grp_db_meta, Cfg_itm_html_db_exists, "y");
 	}
 	private Xowd_db_file Create_db(Xowe_core_data_mgr core_data_mgr, byte tid) {

@@ -85,24 +85,27 @@ public class IoEngine_system extends IoEngine_base {
 	}
 	@SuppressWarnings("resource")
 	@Override public String LoadFilStr(IoEngine_xrg_loadFilStr args) {
-		Io_url url = args.Url();
+		Io_url url = args.Url(); String url_str = url.Xto_api();
 		boolean file_exists = ExistsFil_api(url);			// check if file exists first to avoid throwing exception; note that most callers pass Missing_ignored; DATE:2015-02-24
 		if (!file_exists) {
 			if (args.MissingIgnored()) 	return "";
 			else 						throw Err_Fil_NotFound(url);
 		}		
 		// get reader for file
-		InputStream stream = null;
-		try 	{stream = new FileInputStream(url.Xto_api());}
+		InputStream stream = null;		
+		try 	{stream = new FileInputStream(url_str);}
 		catch 	(FileNotFoundException e) {
 			if (args.MissingIgnored()) return "";
 			throw Err_Fil_NotFound(e, url);
 		}
+		return Load_from_stream_as_str(stream, url_str);
+	}
+	public static String Load_from_stream_as_str(InputStream stream, String url_str) {
 		InputStreamReader reader = null;
 		try 	{reader = new InputStreamReader(stream, IoEngineArgs._.LoadFilStr_Encoding);}
 		catch 	(UnsupportedEncodingException e) {
-			Closeable_Close(stream, url, false);
-			throw Err_Text_UnsupportedEncoding(IoEngineArgs._.LoadFilStr_Encoding, "", url, e);
+			Closeable_Close(stream, url_str, false);
+			throw Err_text_unsupported_encoding(IoEngineArgs._.LoadFilStr_Encoding, "", url_str, e);
 		}
 		
 		// make other objects
@@ -114,17 +117,17 @@ public class IoEngine_system extends IoEngine_base {
 		while (true) {
 		    try 	{pos = reader.read(readerBuffer);}
 		    catch	(IOException e) {
-			    Closeable_Close(stream, url, false);
-			    Closeable_Close(reader, url, false);
-		    	throw Err_.err_key_(e, IoEngineArgs._.Err_IoException, "read data from file failed").Add("url", url.Xto_api()).Add("pos", pos);
+			    Closeable_Close(stream, url_str, false);
+			    Closeable_Close(reader, url_str, false);
+		    	throw Err_.err_key_(e, IoEngineArgs._.Err_IoException, "read data from file failed").Add("url", url_str).Add("pos", pos);
 		    }
 		    if (pos == -1) break;
 		    sw.write(readerBuffer, 0, pos);
 		}
 		
 		// cleanup
-	    Closeable_Close(stream, url, false);
-	    Closeable_Close(reader, url, false);
+	    Closeable_Close(stream, url_str, false);
+	    Closeable_Close(reader, url_str, false);
 		return sw.toString();
 	}
 	@Override public boolean ExistsDir(Io_url url) {return new File(url.Xto_api()).exists();}
@@ -353,12 +356,13 @@ public class IoEngine_system extends IoEngine_base {
 			XferDir(IoEngine_xrg_xferDir.copy_(src, trg));
 		}
 	}
-	protected static void Closeable_Close(Closeable closeable, Io_url url, boolean throwErr) {
+	protected static void Closeable_Close(Closeable closeable, Io_url url, boolean throwErr) {Closeable_Close(closeable, url.Xto_api(), throwErr);}
+	protected static void Closeable_Close(Closeable closeable, String url_str, boolean throwErr) {
 		if 		(closeable == null) return;
 		try 	{closeable.close();}
 		catch 	(IOException e) {
 			if (throwErr)
-				throw Err_.err_key_(e, IoEngineArgs._.Err_IoException, "close object failed").Add("class", ClassAdp_.NameOf_obj(closeable)).Add("url", url.Xto_api());
+				throw Err_.err_key_(e, IoEngineArgs._.Err_IoException, "close object failed").Add("class", ClassAdp_.NameOf_obj(closeable)).Add("url", url_str);
 //			else
 //				UsrDlg_._.Finally("failed to close FileChannel", "url", url, "apiErr", Err_.Message_err_arg(e));
 		}		
@@ -372,11 +376,11 @@ public class IoEngine_system extends IoEngine_base {
 		if (!Op_sys.Cur().Tid_is_drd())
 			IoEngine_system_xtn.SetWritable(fil, true);
 	}
-	Err Err_Text_UnsupportedEncoding(String encodingName, String text, Io_url url, Exception e) {
+	private static Err Err_text_unsupported_encoding(String encodingName, String text, String url_str, Exception e) {
 		return Err_.err_key_(e, "gplx.texts.UnsupportedEncodingException", "text is in unsupported encoding").CallLevel_1_()
 			.Add("encodingName", encodingName)
 			.Add("text", text)
-			.Add("url", url.Xto_api())
+			.Add("url", url_str)
 			;
 	}
 	boolean user_agent_needs_resetting = true;

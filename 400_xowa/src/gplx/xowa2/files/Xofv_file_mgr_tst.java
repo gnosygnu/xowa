@@ -160,8 +160,8 @@ class Xof_xfer_mkr {
 	private void Reset() {
 		redirect_bry = Bry_.Empty;
 		upright = Xop_lnki_tkn.Upright_null;
-		thumbtime = Xof_doc_thumb.Null;
-		page = Xof_doc_page.Null;
+		thumbtime = Xof_lnki_time.Null;
+		page = Xof_lnki_page.Null;
 	}
 	public Xof_xfer_mkr Init_thumb(int uid, String ttl_str, int xfer_w, int xfer_h) {
 		this.lnki_type = Xop_lnki_type.Id_thumb;
@@ -207,30 +207,28 @@ class Xof_orig_itm_mkr {
 }
 class Xof_fsdb_mkr {
 	private byte[] repo_comm, repo_wiki, repo;
-	private boolean file_is_orig;
-	private byte[] ttl_bry; private byte lnki_type; private Xof_ext ext; private byte[] md5; private int file_w, file_h;
+	private byte[] ttl_bry; private byte lnki_type; private int file_w, file_h;
 	private double upright, thumbtime; private int page;
 	public Xof_fsdb_mkr() {this.Reset();}
 	public void Setup_repos(byte[] repo_comm, byte[] repo_wiki) {this.repo_comm = repo_comm; this.repo_wiki = repo_wiki;}
 	private void Reset() {
 		upright = Xop_lnki_tkn.Upright_null;
-		thumbtime = Xof_doc_thumb.Null;
-		page = Xof_doc_page.Null;
+		thumbtime = Xof_lnki_time.Null;
+		page = Xof_lnki_page.Null;
 	}
 	public Xof_fsdb_mkr Init_comm_thum(String ttl_str, int file_w, int file_h)	{return Init(Bool_.Y, Bool_.N, ttl_str, file_w, file_h);}
 	public Xof_fsdb_mkr Init_comm_orig(String ttl_str, int file_w, int file_h)	{return Init(Bool_.Y, Bool_.Y, ttl_str, file_w, file_h);}
 	public Xof_fsdb_mkr Init(boolean repo_is_commons, boolean file_is_orig, String ttl_str, int file_w, int file_h) {
-		this.file_is_orig = file_is_orig; this.lnki_type = file_is_orig ? Xop_lnki_type.Id_none : Xop_lnki_type.Id_thumb; 
+		this.lnki_type = file_is_orig ? Xop_lnki_type.Id_none : Xop_lnki_type.Id_thumb; 
 		this.repo = repo_is_commons ? repo_comm : repo_wiki;
-		this.ttl_bry = Bry_.new_utf8_(ttl_str); this.ext = Xof_ext_.new_by_ttl_(ttl_bry); this.md5 = Xof_xfer_itm_.Md5_(ttl_bry);
+		this.ttl_bry = Bry_.new_utf8_(ttl_str);
 		this.file_w = file_w; this.file_h = file_h;
 		return this;
 	}
 	public Xof_fsdb_itm Make() {
 		Xof_fsdb_itm rv = new Xof_fsdb_itm();
-		rv.Ctor_by_lnki(ttl_bry, ext, md5, lnki_type, file_w, file_h, Xof_patch_upright_tid_.Tid_all, upright, thumbtime, page);
+		rv.Ctor_by_lnki(ttl_bry, lnki_type, file_w, file_h, Xof_patch_upright_tid_.Tid_all, upright, thumbtime, page);
 		rv.Orig_repo_name_(repo);
-		rv.File_is_orig_(file_is_orig);
 		this.Reset();
 		return rv;
 	}
@@ -239,8 +237,8 @@ class Xou_cache_itm_mkr {
 	private byte[] dir; private byte[] ttl; private boolean is_orig; private int w, h; private double time; private int page; private long size;
 	public Xou_cache_itm_mkr() {this.Reset();}
 	private void Reset() {
-		this.time = Xof_doc_thumb.Null;
-		this.page = Xof_doc_page.Null;
+		this.time = Xof_lnki_time.Null;
+		this.page = Xof_lnki_page.Null;
 		this.h = 200;
 		this.size = 1;
 	}
@@ -263,7 +261,7 @@ class Xof_fsdb_mgr__test implements Xof_fsdb_mgr {
 	public Xof_fsdb_mgr__test() {this.Clear();}
 	public int Download_count() {return download_count;}
 	public void Add(Xof_fsdb_itm itm) {
-		byte[] key = Bld_key_to_bry(tmp_bfr, itm.Orig_repo_name(), itm.Lnki_ttl(), itm.File_is_orig(), itm.Lnki_w(), itm.Lnki_time(), itm.Lnki_page());
+		byte[] key = Bld_key_to_bry(tmp_bfr, itm.Orig_repo_name(), itm.Lnki_ttl(), itm.Lnki_w(), itm.Lnki_time(), itm.Lnki_page());
 //			Tfds.Write("add:" + String_.new_utf8_(key));
 		hash.Add(key, itm);
 	}
@@ -273,7 +271,7 @@ class Xof_fsdb_mgr__test implements Xof_fsdb_mgr {
 		hash.Clear();
 	}
 	public boolean Download(Xofv_file_itm itm) {
-		byte[] key = Bld_key_to_bry(tmp_bfr, itm.File_repo(), itm.File_ttl(), itm.Lnki_is_orig(), itm.Html_w(), itm.Lnki_time(), itm.Lnki_page());
+		byte[] key = Bld_key_to_bry(tmp_bfr, itm.File_repo(), itm.File_ttl(), itm.Html_w(), itm.Lnki_time(), itm.Lnki_page());
 //			Tfds.Write("down:" + String_.new_utf8_(key));
 		if (!hash.Has(key)) {
 			return false;
@@ -282,10 +280,9 @@ class Xof_fsdb_mgr__test implements Xof_fsdb_mgr {
 		++download_count;
 		return true;
 	}
-	private static byte[] Bld_key_to_bry(Bry_bfr bfr, byte[] dir, byte[] name, boolean is_orig, int w, double time, int page) {
+	private static byte[] Bld_key_to_bry(Bry_bfr bfr, byte[] dir, byte[] name, int w, double time, int page) {
 		bfr	.Add(dir).Add_byte_pipe()
 			.Add(name).Add_byte_pipe()
-			.Add_int_bool(is_orig).Add_byte_pipe()
 			.Add_int_variable(w).Add_byte_pipe()
 			.Add_double(time).Add_byte_pipe()
 			.Add_int_variable(page).Add_byte_pipe()

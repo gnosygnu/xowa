@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
 import gplx.html.*; import gplx.xowa.html.portal.*; import gplx.xowa.pages.skins.*; import gplx.xowa.pages.*;
-import gplx.xowa.wikis.*; import gplx.xowa.gui.*; import gplx.xowa.xtns.wdatas.*;
+import gplx.xowa.wikis.*; import gplx.xowa.gui.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.langs.vnts.*;
 public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 	private Xop_ctx ctx; private Xoae_page page; private Bry_bfr tmp_bfr = Bry_bfr.reset_(255); 
 	public Xoh_page_wtr_wkr(byte page_mode) {this.page_mode = page_mode;} private byte page_mode;
@@ -114,6 +114,10 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 		if	(ns_id == Xow_ns_.Id_mediawiki) {	// if MediaWiki and wikitext, must be a message; convert args back to php; DATE:2014-06-13
 			bfr.Add(gplx.xowa.apps.Xoa_gfs_php_mgr.Xto_php(tmp_bfr, Bool_.N, data_raw));
 			return;
+		}
+		Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();
+		if (vnt_mgr.Enabled()) {	// VNT
+//				vnt_mgr.Convert_ttl
 		}
 		if	(ns_id == Xow_ns_.Id_file)			// if [[File]], add boilerplate header
 			app.File_main_wkr().Bld_html(wiki, ctx, bfr, page.Ttl(), wiki.Cfg_file_page(), page.File_queue());

@@ -35,7 +35,7 @@ public class Xow_hive_mgr_fxt {
 		String[] actl = new String[actl_len];
 		for (int i = 0; i < actl_len; i++) {
 			Xodb_page itm = (Xodb_page)list.FetchAt(i);
-			actl[i] = String_.new_ascii_(itm.Ttl_wo_ns());
+			actl[i] = String_.new_ascii_(itm.Ttl_page_db());
 		}
 		Tfds.Eq_ary_str(expd, actl);
 	}

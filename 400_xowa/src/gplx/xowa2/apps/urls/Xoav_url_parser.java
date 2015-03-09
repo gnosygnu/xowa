@@ -20,7 +20,7 @@ public class Xoav_url_parser {
 	private static final byte[] Bry_site = Bry_.new_ascii_("/site/"), Bry_wiki = Bry_.new_ascii_("/wiki/");
 	public void Parse_xo_href(Xoav_url rv, byte[] src, byte[] cur_wiki_bry) {
 		rv.Clear();
-		int pos = 0;
+		int pos = 5;	// remove "http:"
 		int src_len = src.length;
 		if (Bry_.HasAtBgn(src, Bry_site, pos, src_len))
 			pos = Parse_wiki(rv, src, src_len, pos);

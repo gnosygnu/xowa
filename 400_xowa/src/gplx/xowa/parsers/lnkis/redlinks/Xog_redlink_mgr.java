@@ -81,7 +81,7 @@ public class Xog_redlink_mgr implements GfoInvkAble {
 					if (variants_enabled) {
 						Xodb_page vnt_page = vnt_mgr.Convert_ttl(wiki, lnki.Ttl());
 						if (vnt_page != null) {
-							Xoa_ttl vnt_ttl = Xoa_ttl.parse_(wiki, lnki.Ttl().Ns().Id(), vnt_page.Ttl_wo_ns());
+							Xoa_ttl vnt_ttl = Xoa_ttl.parse_(wiki, lnki.Ttl().Ns().Id(), vnt_page.Ttl_page_db());
 							html_itm.Html_atr_set(lnki_id, "href", "/wiki/" + String_.new_utf8_(vnt_ttl.Full_url()));
 							if (!String_.Eq(vnt_mgr.Html_style(), ""))
 								html_itm.Html_atr_set(lnki_id, "style", vnt_mgr.Html_style());

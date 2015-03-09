@@ -52,7 +52,7 @@ public class Xob_fxt {
 	public Xob_fxt doc_ary_(Xodb_page... v) {doc_ary = v; return this;} private Xodb_page[] doc_ary;
 	public Xodb_page doc_wo_date_(int id, String title, String text) {return doc_(id, "2012-01-02 13:14", title, text);}
 	public Xodb_page doc_(int id, String date, String title, String text) {
-		Xodb_page rv = new Xodb_page().Id_(id).Ttl_(Bry_.new_utf8_(title), wiki.Ns_mgr()).Text_(Bry_.new_utf8_(text));
+		Xodb_page rv = new Xodb_page().Id_(id).Ttl_(Bry_.new_utf8_(title), wiki.Ns_mgr()).Wtxt_(Bry_.new_utf8_(text));
 		int[] modified_on = new int[7];
 		dateParser.Parse_iso8651_like(modified_on, date);
 		rv.Modified_on_(DateAdp_.seg_(modified_on));

@@ -49,7 +49,7 @@ class Xof_wiki_finder {	// UNUSED
 				return false;
 		}
 		itm.Orig_ttl_(ttl_bry);
-		if (db_page.Type_redirect()) {
+		if (db_page.Redirected()) {
 			Xoae_page page = Get_page__by_wiki(wiki, ns_id, ttl_bry);
 			Xoa_ttl redirect_ttl = wiki.Redirect_mgr().Extract_redirect_loop(page.Data_raw());		
 			itm.Orig_redirect_(redirect_ttl);			

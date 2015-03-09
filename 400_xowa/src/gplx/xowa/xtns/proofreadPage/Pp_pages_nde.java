@@ -264,7 +264,7 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 		int page_leaf_max = 0;
 		for (int i = 0; i < len; i++) {
 			Xodb_page page = (Xodb_page)rslt.FetchAt(i);
-			Xoa_ttl page_ttl = Xoa_ttl.parse_(wiki, ns_page_id, page.Ttl_wo_ns());		if (page_ttl == null) continue;					// page_ttl is not valid; should never happen;
+			Xoa_ttl page_ttl = Xoa_ttl.parse_(wiki, ns_page_id, page.Ttl_page_db());	if (page_ttl == null) continue;					// page_ttl is not valid; should never happen;
 			byte[] page_ttl_leaf = page_ttl.Leaf_txt();									if (page_ttl_leaf == null) continue;			// page is not leaf; should not happen
 			int page_leaf_val = Bry_.Xto_int_or(page_ttl_leaf, Int_.MinValue);		if (page_leaf_val == Int_.MinValue) continue;	// leaf is not int; ignore
 			if (page_leaf_val > page_leaf_max) page_leaf_max = page_leaf_val;

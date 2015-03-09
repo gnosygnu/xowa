@@ -23,6 +23,7 @@ public class Xohd_page_html_tbl {
 	private String fld_db_id, fld_page_id, fld_html_tid, fld_html_data;
 	private Db_conn conn; private Db_stmt stmt_select, stmt_insert, stmt_delete; private int db_id; private byte zip_tid;
 	private final Io_stream_zip_mgr zip_mgr = Xoa_app_.Utl__zip_mgr();
+	public Db_conn Conn() {return conn;}
 	public void Conn_(Db_conn new_conn, boolean created, boolean schema_is_1, int db_id, byte zip_tid) {
 		this.conn = new_conn; flds.Clear(); this.db_id = db_id; this.zip_tid = zip_tid;
 		if (schema_is_1) {
@@ -71,4 +72,11 @@ public class Xohd_page_html_tbl {
 	}
 	public static final String Hash_key = "wiki_page_html";
 	public static Xohd_page_html_tbl Get_from_db(Xow_core_data_mgr core_data_mgr, Xowd_db_file db_file) {return (Xohd_page_html_tbl)db_file.Tbls__get_by(core_data_mgr, Hash_key);}
+	public static Xohd_page_html_tbl Get_from_db__root(Xowe_wiki wiki) {
+		gplx.xowa.wikis.data.Xow_core_data_mgr core_data_mgr = wiki.Data_mgr__core_mgr();
+		Xowd_db_file hdump_db = core_data_mgr.Dbs__get_by_tid_nth_or_new(Xowd_db_file_.Tid_html);
+		Xohd_page_html_tbl rv = new Xohd_page_html_tbl();
+		rv.Conn_(hdump_db.Conn(), Bool_.N, core_data_mgr.Cfg__schema_is_1(), core_data_mgr.Cfg__db_id(), core_data_mgr.Cfg__hdump_zip_tid());
+		return rv;
+	}
 }

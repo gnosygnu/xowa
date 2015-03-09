@@ -100,9 +100,9 @@ class Xos_search_mgr_fxt {
 	public Xowe_wiki Wiki() {return wiki;}
 	public Xobl_regy_itm 	regy_itm_(int id, String bgn, String end, int count) {return new Xobl_regy_itm(id, Bry_.new_utf8_(bgn), Bry_.new_utf8_(end), count);}
 	public Xodb_page 	data_ttl_(int id, String ttl) {return data_ttl_(id, 0, 0, false, 0, ttl);}
-	public Xodb_page 	data_ttl_(int id, int fil, int row, boolean redirect, int len, String ttl) {return new Xodb_page().Set_all_(id, fil, row, redirect, len, Bry_.new_utf8_(ttl));}
+	public Xodb_page 	data_ttl_(int id, int fil, int row, boolean redirect, int len, String ttl) {return new Xodb_page().Init(id, Bry_.new_utf8_(ttl), redirect, len, fil, row);}
 	public Xodb_page 		data_id_(int id, String ttl) {return data_id_(id, Xow_ns_.Id_main, ttl);} 
-	public Xodb_page 		data_id_(int id, int ns, String ttl) {return new Xodb_page().Id_(id).Ns_id_(ns).Ttl_wo_ns_(Bry_.new_utf8_(ttl)).Text_db_id_(0).Text_len_(0);}
+	public Xodb_page 		data_id_(int id, int ns, String ttl) {return new Xodb_page().Id_(id).Ns_id_(ns).Ttl_page_db_(Bry_.new_utf8_(ttl)).Wtxt_db_id_(0).Wtxt_len_(0);}
 	public Xobl_search_ttl 	data_sttl_(String word, int... ids) {return new Xobl_search_ttl(Bry_.new_utf8_(word), data_ttl_word_page_ary_(ids));}
 	public Xobl_search_ttl_page[] data_ttl_word_page_ary_(int... ids) {
 		int ids_len = ids.length;
@@ -212,7 +212,7 @@ class Xos_search_mgr_fxt {
 		String[] rv = new String[itms_len];
 		for (int i = 0; i < itms_len; i++) {
 			Xodb_page itm = page.Itms_get_at(i);
-			rv[i] = String_.new_utf8_(itm.Ttl_wo_ns());
+			rv[i] = String_.new_utf8_(itm.Ttl_page_db());
 		}
 		return rv;
 	}

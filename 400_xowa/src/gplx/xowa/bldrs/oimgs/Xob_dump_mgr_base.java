@@ -134,9 +134,9 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 			if ((exec_count % progress_interval) == 0)
 				usr_dlg.Prog_many("", "", "parsing: ns=~{0} db=~{1} pg=~{2} count=~{3} time=~{4} rate=~{5} ttl=~{6}"
 					, ns.Id(), db_id, page.Id(), exec_count
-					, Env_.TickCount_elapsed_in_sec(time_bgn), rate_mgr.Rate_as_str(), String_.new_utf8_(page.Ttl_wo_ns()));
+					, Env_.TickCount_elapsed_in_sec(time_bgn), rate_mgr.Rate_as_str(), String_.new_utf8_(page.Ttl_page_db()));
 			ctx.Clear();
-			Exec_pg_itm_hook(ns, page, page.Text());
+			Exec_pg_itm_hook(ns, page, page.Wtxt());
 			ctx.App().Utl__bfr_mkr().Clear_fail_check();	// make sure all bfrs are released
 			if (ctx.Wiki().Cache_mgr().Tmpl_result_cache().Count() > 50000) 
 				ctx.Wiki().Cache_mgr().Tmpl_result_cache().Clear();
@@ -145,12 +145,12 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 			if ((exec_count % poll_interval) == 0)
 				poll_mgr.Poll();
 			if	((exec_count % commit_interval) == 0)
-				Exec_commit(ns.Id(), db_id, page.Id(), page.Ttl_wo_ns());
+				Exec_commit(ns.Id(), db_id, page.Id(), page.Ttl_page_db());
 			if ((exec_count % cleanup_interval) == 0)
 				Free();
 		}
 		catch (Exception exc) {
-			bldr.Usr_dlg().Warn_many(GRP_KEY, "parse", "failed to parse ~{0} error ~{1}", String_.new_utf8_(page.Ttl_wo_ns()), Err_.Message_lang(exc));
+			bldr.Usr_dlg().Warn_many(GRP_KEY, "parse", "failed to parse ~{0} error ~{1}", String_.new_utf8_(page.Ttl_page_db()), Err_.Message_lang(exc));
 			ctx.App().Utl__bfr_mkr().Clear();
 			this.Free();
 		}
@@ -230,7 +230,7 @@ class Xob_dump_mgr_base_ {
 			for (int i = 0; i < page_count; i++) {
 				page = (Xodb_page)pages.FetchAt(i);
 				Xot_defn_tmpl defn = new Xot_defn_tmpl();
-				defn.Init_by_new(ns_tmpl, ns_tmpl.Gen_ttl(page.Ttl_wo_ns()), page.Text(), null, false);	// NOTE: passing null, false; will be overriden later when Parse is called
+				defn.Init_by_new(ns_tmpl, ns_tmpl.Gen_ttl(page.Ttl_page_db()), page.Wtxt(), null, false);	// NOTE: passing null, false; will be overriden later when Parse is called
 				defn_cache.Add(defn, ns_tmpl.Case_match());
 				++load_count;
 				if ((load_count % 10000) == 0) usr_dlg.Prog_many("", "", "tmpl_loading: ~{0}", load_count);

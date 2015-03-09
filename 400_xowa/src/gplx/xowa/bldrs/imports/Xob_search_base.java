@@ -34,7 +34,7 @@ public abstract class Xob_search_base extends Xob_itm_dump_base implements Xobd_
 	public void Wkr_run(Xodb_page page) {
 //			if (page.Ns_id() != Xow_ns_.Id_main) return; // limit to main ns for now
 		try {
-		byte[] ttl = page.Ttl_wo_ns();
+		byte[] ttl = page.Ttl_page_db();
 		byte[][] words = Split(lang, list, dump_bfr, ttl);
 		Xob_tmp_wtr wtr = tmp_wtr_mgr.Get_or_new(ns_main == null ? page.Ns() : ns_main);
 		int words_len = words.length;
@@ -48,7 +48,7 @@ public abstract class Xob_search_base extends Xob_itm_dump_base implements Xobd_
 			byte[] word = words[i];				
 			wtr.Bfr()	.Add(word)								.Add_byte(Byte_ascii.Pipe)
 						.Add_base85_len_5(page.Id())			.Add_byte(Byte_ascii.Semic)
-						.Add_base85_len_5(page.Text().length)	.Add_byte(Byte_ascii.NewLine);
+						.Add_base85_len_5(page.Wtxt().length)	.Add_byte(Byte_ascii.NewLine);
 		}
 		} catch (Exception e) {bldr.Usr_dlg().Warn_many("", "", "search_index:fatal error: err=~{0}", Err_.Message_gplx_brief(e));}	// never let single page crash entire import
 	}

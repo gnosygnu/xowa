@@ -129,6 +129,20 @@ public class Xoa_css_img_downloader_tst {
 		)
 		);
 	}
+	@Test  public void Import_url_space() {		// PURPOSE: some css has spaces; replace with underlines else fails when downloaded; EX: https://it.wikivoyage.org/w/index.php?title=MediaWiki:Container e Infobox.css&action=raw&ctype=text/css; DATE:2015-03-08
+		Io_mgr._.InitEngine_mem();
+		Io_mgr._.SaveFilStr("mem/www/b_c.css", "imported_css");
+		fxt.Test_css_convert
+		(	"x @import url(\"mem/www/b c.css\") screen; z"
+		, 	String_.Concat_lines_nl
+		(	"x "
+		,	"/*XOWA:mem/www/b_c.css*/"
+		,	"imported_css"
+		,	""
+		,	" z"
+		)
+		);
+	}
 	@Test  public void Wikisource_freedimg() {	// PURPOSE: check that "wikimedia" is replaced for FreedImg hack; PAGE:en.s:Page:Notes_on_Osteology_of_Baptanodon._With_a_Description_of_a_New_Species.pdf/3 DATE:2014-09-06
 		fxt.Downloader().Stylesheet_prefix_(Bry_.new_utf8_("mem"));	// stylesheet prefix prefix defaults to ""; set to "mem", else test will try to retrieve "//url" which will fail
 		Io_mgr._.InitEngine_mem();

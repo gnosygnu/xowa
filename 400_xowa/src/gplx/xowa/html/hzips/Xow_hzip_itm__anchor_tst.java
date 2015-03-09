@@ -34,6 +34,11 @@ public class Xow_hzip_itm__anchor_tst {
 		fxt.Test_save(brys, "<a xtid='a_lnki_text_n' href=\"/wiki/Template:A\" id='xowa_lnki_0' title='Template:A'>Template:A</a>");
 		fxt.Test_load(brys, "<a href='/wiki/Template:A' title='Template:A'>Template:A</a>");
 	}
+	@Test   public void Srl_lnki_text_n_apos() {
+		byte[][] brys = Bry_.Ary(Xow_hzip_dict.Bry_lnki_text_n, Bry_.ints_(12), Bry_.new_ascii_("A'b"), Xow_hzip_dict.Escape_bry);
+		fxt.Test_save(brys, "<a xtid='a_lnki_text_n' href=\"/wiki/Template:A'b\" id='xowa_lnki_0' title='Template:A'b'>Template:A'b</a>");
+		fxt.Test_load(brys, "<a href='/wiki/Template:A&#39;b' title='Template:A&#39;b'>Template:A'b</a>");
+	}
 	@Test   public void Srl_lnki_text_n_smoke() {
 		byte[][] brys = Bry_.Ary(Bry_.new_ascii_("a_1"), Xow_hzip_dict.Bry_lnki_text_n, Bry_.ints_(2), Bry_.new_ascii_("A"), Xow_hzip_dict.Escape_bry, Bry_.new_ascii_("a_2"));
 		fxt.Test_save(brys, "a_1<a xtid='a_lnki_text_n' href=\"/wiki/A\" id='xowa_lnki_0' title='A'>A</a>a_2");

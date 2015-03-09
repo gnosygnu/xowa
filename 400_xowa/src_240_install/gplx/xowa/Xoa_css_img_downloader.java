@@ -114,6 +114,7 @@ public class Xoa_css_img_downloader {
 			if (css_url_len > 1 && css_url[1] != Byte_ascii.Slash)		// skip if css_url starts with "//"; EX: "//site/page"
 				css_url = Bry_.Add(rel_url_prefix, css_url);			// "/w/a.css" -> "//en.wikipedia.org/w/a.css"
 		}
+		css_url = Bry_.Replace(css_url, Byte_ascii.Space, Byte_ascii.Underline);	// NOTE: must replace spaces with underlines else download will fail; EX:https://it.wikivoyage.org/w/index.php?title=MediaWiki:Container e Infobox.css&action=raw&ctype=text/css; DATE:2015-03-08
 		byte[] css_src_bry = Import_url_build(stylesheet_prefix, rel_url_prefix, css_url);
 		String css_src_str = String_.new_utf8_(css_src_bry);
 		download_wkr.Download_xrg().Prog_fmt_hdr_(usr_dlg.Log_many(GRP_KEY, "logo.download", "downloading import for '~{0}'", css_src_str));

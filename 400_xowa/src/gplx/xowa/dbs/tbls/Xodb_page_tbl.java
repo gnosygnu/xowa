@@ -35,7 +35,7 @@ public class Xodb_page_tbl {
 	public boolean Select_by_ttl(Xodb_page rv, Xow_ns ns, byte[] ttl) {
 		Db_rdr rdr = Db_rdr_.Null; Db_stmt stmt = Db_stmt_.Null;
 		try {
-			stmt = Db_stmt_.new_select_as_rdr(conn, Db_qry__select_in_tbl.new_(Tbl_name, String_.Ary(Fld_page_ns, Fld_page_title), html_db_enabled ? Select_by_id_flds__hdump : Select_by_id_flds__basic));
+			stmt = Db_stmt_.new_select_as_rdr(conn, Db_qry__select_in_tbl.new_(Tbl_name, String_.Ary(Fld_page_ns, Fld_page_title), html_db_enabled ? Select_by_id_flds__hdump : Select_by_id_flds__basic, Db_qry__select_in_tbl.Order_by_null));
 			rdr = stmt.Val_int(ns.Id()).Val_str(String_.new_utf8_(ttl)).Exec_select_as_rdr();
 			if (rdr.Move_next()) {
 				Read_page__all2(rv, rdr, html_db_enabled);
@@ -45,17 +45,22 @@ public class Xodb_page_tbl {
 		return false;
 	}
 	public static void Read_page__all2(Xodb_page page, Db_rdr rdr, boolean html_db_enabled) {
-		page.Id_			(rdr.Read_int(Fld_page_id));
-		page.Ns_id_			(rdr.Read_int(Fld_page_ns));
-		page.Ttl_wo_ns_		(rdr.Read_bry_by_str(Fld_page_title));
-		page.Modified_on_	(DateAdp_.parse_fmt(rdr.Read_str(Fld_page_touched), Page_touched_fmt));
-		page.Type_redirect_	(rdr.Read_byte(Fld_page_is_redirect) == 1);
-		page.Text_len_		(rdr.Read_int(Fld_page_len));
-		page.Text_db_id_	(rdr.Read_int(Fld_page_file_idx));
+		int html_db_id = -1, redirected_id = -1;
 		if (html_db_enabled) {
-			page.Html_db_id_(rdr.Read_int(Fld_page_html_db_id));
-			page.Redirect_id_(rdr.Read_int(Fld_page_is_redirect));
+			html_db_id = rdr.Read_int(Fld_page_html_db_id);
+			redirected_id = rdr.Read_int(Fld_page_redirect_id);
 		}
+		page.Init_by_sql
+		( rdr.Read_int(Fld_page_id)
+		, rdr.Read_int(Fld_page_ns)
+		, rdr.Read_bry_by_str(Fld_page_title)
+		, DateAdp_.parse_fmt(rdr.Read_str(Fld_page_touched), Page_touched_fmt)
+		, rdr.Read_bool_by_byte(Fld_page_is_redirect)
+		, rdr.Read_int(Fld_page_len)
+		, rdr.Read_int(Fld_page_file_idx)
+		, html_db_id
+		, redirected_id
+		);
 	}
 	public boolean Select_by_id(Xodb_page rv, int page_id) {
 		DataRdr rdr = DataRdr_.Null; 
@@ -103,7 +108,7 @@ public class Xodb_page_tbl {
 		stmt.Exec_insert();
 	}
 	public DataRdr Select_all(Db_conn p) {
-		Db_qry_select qry = Db_qry_select.new_().From_(Tbl_name).Cols_(Fld_page_id, Fld_page_title).OrderBy_asc_(Fld_page_id);
+		Db_qry__select_cmd qry = Db_qry__select_cmd.new_().From_(Tbl_name).Cols_(Fld_page_id, Fld_page_title).OrderBy_asc_(Fld_page_id);
 		return p.Exec_qry_as_rdr(qry);
 	}
 	private DataRdr Load_ttls_starting_with_rdr(int ns_id, byte[] ttl_frag, boolean include_redirects, int max_results, int min_page_len, int browse_len, boolean fwd, boolean search_suggest) {
@@ -113,7 +118,7 @@ public class Xodb_page_tbl {
 			crt = Criteria_.And(crt, Db_crt_.eq_(Fld_page_is_redirect, Byte_.Zero));
 		String[] cols = search_suggest ? Flds_select_idx : html_db_enabled ? Flds_select_all__html_y : Flds_select_all__html_n;
 		int limit = fwd ? max_results + 1 : max_results; // + 1 to get next item
-		Db_qry_select select = Db_qry_.select_cols_(Tbl_name, crt, cols).Limit_(limit).OrderBy_(Fld_page_title, fwd);
+		Db_qry__select_cmd select = Db_qry_.select_cols_(Tbl_name, crt, cols).Limit_(limit).OrderBy_(Fld_page_title, fwd);
 		return select.Exec_qry_as_rdr(conn);
 	}
 	public void Load_ttls_for_all_pages(Cancelable cancelable, ListAdp rslt_list, Xodb_page rslt_nxt, Xodb_page rslt_prv, Int_obj_ref rslt_count, Xow_ns ns, byte[] key, int max_results, int min_page_len, int browse_len, boolean include_redirects, boolean fetch_prv_item) {
@@ -127,7 +132,7 @@ public class Xodb_page_tbl {
 				if (cancelable.Canceled()) return;
 				Xodb_page page = new Xodb_page();
 				Read_page__idx(page, rdr);
-				if (max_val_check && !Bry_.HasAtBgn(page.Ttl_wo_ns(), key)) break;
+				if (max_val_check && !Bry_.HasAtBgn(page.Ttl_page_db(), key)) break;
 				nxt_itm = page;
 				if (rslt_idx == max_results) {}	// last item which is not meant for rslts, but only for nxt itm
 				else {
@@ -211,7 +216,7 @@ public class Xodb_page_tbl {
 	public void Select_by_search(Cancelable cancelable, ListAdp rv, byte[] search, int results_max) {
 		if (Bry_.Len_eq_0(search)) return;	// do not allow empty search
 		Criteria crt = gplx.core.criterias.Criteria_.And_many(Db_crt_.eq_(Fld_page_ns, Xow_ns_.Id_main), Db_crt_.like_(Fld_page_title, ""));
-		Db_qry_select qry = Db_qry_.select_().From_(Tbl_name).Cols_(Fld_page_id, Fld_page_len, Fld_page_ns, Fld_page_title).Where_(crt);	// NOTE: use fields from main index only
+		Db_qry__select_cmd qry = Db_qry_.select_().From_(Tbl_name).Cols_(Fld_page_id, Fld_page_len, Fld_page_ns, Fld_page_title).Where_(crt);	// NOTE: use fields from main index only
 		DataRdr rdr = DataRdr_.Null; 
 		Db_stmt stmt = Db_stmt_.Null;
 		search = Bry_.Replace(search, Byte_ascii.Asterisk, Byte_ascii.Percent);
@@ -223,8 +228,8 @@ public class Xodb_page_tbl {
 				Xodb_page page = new Xodb_page();
 				page.Id_			(rdr.ReadInt(Fld_page_id));
 				page.Ns_id_			(rdr.ReadInt(Fld_page_ns));
-				page.Ttl_wo_ns_		(rdr.ReadBryByStr(Fld_page_title));
-				page.Text_len_		(rdr.ReadInt(Fld_page_len));
+				page.Ttl_page_db_	(rdr.ReadBryByStr(Fld_page_title));
+				page.Wtxt_len_		(rdr.ReadInt(Fld_page_len));
 				rv.Add(page);
 			}
 		}	finally {rdr.Rls(); stmt.Rls();}
@@ -239,7 +244,7 @@ public class Xodb_page_tbl {
 		Criteria crt = gplx.core.criterias.Criteria_.And_many(Db_crt_.eq_(Fld_page_ns, -1), Db_crt_.mt_(Fld_page_title, ""));
 		if (redirect != Bool_.__byte)
 			crt = gplx.core.criterias.Criteria_.And(crt, Db_crt_.eq_(Fld_page_is_redirect, redirect));
-		Db_qry_select qry = Db_qry_.select_().From_(Tbl_name).Cols_(html_db_enabled ? Flds_select_all__html_y : Flds_select_all__html_n)
+		Db_qry__select_cmd qry = Db_qry_.select_().From_(Tbl_name).Cols_(html_db_enabled ? Flds_select_all__html_y : Flds_select_all__html_n)
 			.Where_(crt)
 			.Limit_(limit);
 		return p.Stmt_new(qry);
@@ -286,22 +291,27 @@ public class Xodb_page_tbl {
 	;
 	public static final boolean Load_idx_flds_only_y = true;
 	public static void Read_page__all(Xodb_page page, DataRdr rdr, boolean html_db_enabled) {
-		page.Id_			(rdr.ReadInt(Fld_page_id));
-		page.Ns_id_			(rdr.ReadInt(Fld_page_ns));
-		page.Ttl_wo_ns_		(rdr.ReadBryByStr(Fld_page_title));
-		page.Modified_on_	(DateAdp_.parse_fmt(rdr.ReadStr(Fld_page_touched), Page_touched_fmt));
-		page.Type_redirect_	(rdr.ReadByte(Fld_page_is_redirect) == 1);
-		page.Text_len_		(rdr.ReadInt(Fld_page_len));
-		page.Text_db_id_	(rdr.ReadInt(Fld_page_file_idx));
+		int html_db_id = -1, redirected_id = -1;
 		if (html_db_enabled) {
-			page.Html_db_id_(rdr.ReadInt(Fld_page_html_db_id));
-			page.Redirect_id_(rdr.ReadInt(Fld_page_redirect_id));
+			html_db_id = rdr.ReadInt(Fld_page_html_db_id);
+			redirected_id = rdr.ReadInt(Fld_page_redirect_id);
 		}
+		page.Init_by_sql
+		( rdr.ReadInt(Fld_page_id)
+		, rdr.ReadInt(Fld_page_ns)
+		, rdr.ReadBryByStr(Fld_page_title)
+		, DateAdp_.parse_fmt(rdr.ReadStr(Fld_page_touched), Page_touched_fmt)
+		, rdr.ReadByte(Fld_page_is_redirect) == 1
+		, rdr.ReadInt(Fld_page_len)
+		, rdr.ReadInt(Fld_page_file_idx)
+		, html_db_id
+		, redirected_id
+		);
 	}
 	public static void Read_page__idx(Xodb_page page, DataRdr rdr) {
 		page.Id_			(rdr.ReadInt(Fld_page_id));
 		page.Ns_id_			(rdr.ReadInt(Fld_page_ns));
-		page.Ttl_wo_ns_		(rdr.ReadBryByStr(Fld_page_title));
-		page.Text_len_		(rdr.ReadInt(Fld_page_len));
+		page.Ttl_page_db_	(rdr.ReadBryByStr(Fld_page_title));
+		page.Wtxt_len_		(rdr.ReadInt(Fld_page_len));
 	}
 }

@@ -27,13 +27,13 @@ public class Xoh_file_main_wkr implements Bry_fmtr_arg {
 		Int_2_ref size_main = opt.Size_main();
 		int main_w = size_main.Val_0();
 		int main_h = size_main.Val_1();
-		this.xfer_itm = wiki.Html_mgr().Html_wtr().Lnki_wtr().File_wtr().Lnki_eval(ctx, queue, ttl.Page_txt(), Xop_lnki_type.Id_thumb, main_w, main_h, Xop_lnki_tkn.Upright_null, Xof_doc_thumb.Null, Xof_doc_page.Null, false, queue_add_ref);
+		this.xfer_itm = wiki.Html_mgr().Html_wtr().Lnki_wtr().File_wtr().Lnki_eval(ctx, queue, ttl.Page_txt(), Xop_lnki_type.Id_thumb, main_w, main_h, Xop_lnki_tkn.Upright_null, Xof_lnki_time.Null, Xof_lnki_page.Null, false, queue_add_ref);
 		Xof_meta_itm meta_itm = wiki.File_mgr().Meta_mgr().Get_itm_or_new(ttl.Page_db(), Xof_xfer_itm_.Md5_(ttl.Page_db()));	// NOTE: can't use Md5 of xfer_itm, b/c xfer_itm.Ttl() b/c may be redirected; EX:w:[[Image:Alcott-L.jpg]]
 		Xof_repo_itm trg_repo = null;
 		trg_repo = meta_itm.Repo_itm(wiki);
 		if (trg_repo == null) trg_repo = wiki.File_mgr().Repo_mgr().Repos_get_at(0).Trg();
 		xfer_itm.Set__meta(meta_itm, trg_repo, Xof_repo_itm.Thumb_default_null);
-		xfer_itm.Set__orig(meta_itm.Orig_w(), meta_itm.Orig_h(), Xof_img_size.Size_null);
+		xfer_itm.Init_by_orig_old(meta_itm.Orig_w(), meta_itm.Orig_h(), Xof_img_size.Size_null);
 		xfer_itm.Trg_repo_idx_(meta_itm.Vrtl_repo());
 
 		play_btn_icon = wiki.Html_mgr().Img_media_play_btn();
@@ -57,11 +57,11 @@ public class Xoh_file_main_wkr implements Bry_fmtr_arg {
 		alts.Ctor(xfer_itm, opt);
 		Xof_ext ext = xfer_itm.Lnki_ext();
 		if (ext.Id_is_thumbable_img())
-			opt.Html_main_img().Bld_bfr_many(bfr, xfer_itm.Orig_w(), xfer_itm.Orig_h(), xfer_itm.Html_orig_src(), file_size_bry, ext.Mime_type(), elem_id_val, xfer_itm.Html_w(), xfer_itm.Html_h(), xfer_itm.Html_view_src(), ttl.Full_txt(), Xoa_app_.Utl__encoder_mgr().Url().Encode(ttl.Page_url()), alts);
+			opt.Html_main_img().Bld_bfr_many(bfr, xfer_itm.Orig_w(), xfer_itm.Orig_h(), xfer_itm.Html_orig_url(), file_size_bry, ext.Mime_type(), elem_id_val, xfer_itm.Html_w(), xfer_itm.Html_h(), xfer_itm.Html_view_url(), ttl.Full_txt(), Xoa_app_.Utl__encoder_mgr().Url().Encode(ttl.Page_url()), alts);
 		else if (ext.Id_is_video())	// NOTE: video must precede audio else File:***.ogg will not show thumbs
-			opt.Html_main_vid().Bld_bfr_many(bfr, elem_id_val, xfer_itm.Html_view_src(), Atr_class_image, ttl.Page_db(), xfer_itm.Html_view_src(), xfer_itm.Html_w(), xfer_itm.Html_h(), Bry_.Empty, xfer_itm.Html_orig_src(), xfer_itm.Html_w(), xfer_itm.Html_w(), play_btn_icon);
+			opt.Html_main_vid().Bld_bfr_many(bfr, elem_id_val, xfer_itm.Html_view_url(), Atr_class_image, ttl.Page_db(), xfer_itm.Html_view_url(), xfer_itm.Html_w(), xfer_itm.Html_h(), Bry_.Empty, xfer_itm.Html_orig_url(), xfer_itm.Html_w(), xfer_itm.Html_w(), play_btn_icon);
 		else if (ext.Id_is_audio())
-			opt.Html_main_aud().Bld_bfr_many(bfr, xfer_itm.Html_orig_src(), ttl.Page_db(), xfer_itm.Html_w(), xfer_itm.Html_w(), play_btn_icon);
+			opt.Html_main_aud().Bld_bfr_many(bfr, xfer_itm.Html_orig_url(), ttl.Page_db(), xfer_itm.Html_w(), xfer_itm.Html_w(), play_btn_icon);
 	}
 	private static final byte[] Atr_class_image = Bry_.new_ascii_("image");
 }

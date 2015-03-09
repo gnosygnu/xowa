@@ -33,15 +33,15 @@ public class Xob_redirect_tbl {
 	public void Update_trg_redirect_id(Io_url core_url, int max_redirected_depth) {
 		Sqlite_engine_.Db_attach(conn, "page_db", core_url.Raw());		// link database with page table 
 		conn.Exec_sql(Sql_get_page_data);								// fill in page_id, page_ns, page_is_redirect for trg_ttl; EX: Page_A has "#REDIRECT Page_B"; Page_B is in redirect tbl; find its id, ttl, redirect status
-		for (int i = 0; i < max_redirected_depth; i++) {					// loop to find redirected redirects; note that it is bounded by depth (to guard against circular redirects)
+		for (int i = 0; i < max_redirected_depth; i++) {				// loop to find redirected redirects; note that it is bounded by depth (to guard against circular redirects)
 			int affected = conn.Exec_sql(Sql_get_redirect_redirects);	// find redirects that are also redirects
-			if (affected == 0) break;										// no more redirected redirects; stop
+			if (affected == 0) break;									// no more redirected redirects; stop
 			conn.Exec_sql(Sql_get_redirect_page_data);					// get page data for redirects
 		}
 		Sqlite_engine_.Db_detach(conn, "page_db");
 	}
 	public void Update_src_redirect_id(Io_url core_url, Db_conn core_provider) {
-		core_provider.Exec_sql(Sql_ddl__page_redirect_id);					// create page.page_redirect_id
+		core_provider.Exec_sql(Sql_ddl__page_redirect_id);				// create page.page_redirect_id
 		Sqlite_engine_.Idx_create(conn, Idx_trg_src);
 		Sqlite_engine_.Db_attach(conn, "page_db", core_url.Raw());		// link database with page table 
 		conn.Exec_sql(Sql_update_redirect_id);							// update page_redirect_id

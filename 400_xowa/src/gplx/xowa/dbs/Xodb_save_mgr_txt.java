@@ -30,7 +30,7 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 	public void Clear() {page_id_next = 0;}	// TEST: needed for ctg_test		
 	public void Data_create(Xoa_ttl ttl, byte[] text) {
 		Xow_ns ns_itm = ttl.Ns(); byte[] ttl_bry = ttl.Page_db();
-		Xodb_page db_page = Xodb_page.tmp_();
+		Xodb_page db_page = Xodb_page.new_tmp();
 		boolean found = load_mgr.Load_by_ttl(db_page, ns_itm, ttl_bry);
 		if (found) throw Err_mgr._.fmt_(GRP_KEY, "title_exists", "create requested but title already exists: ~{0}", String_.new_utf8_(ttl_bry));
 		int text_len = text.length;
@@ -50,7 +50,7 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 		tmp_bfr.Mkr_rls();
 		
 		Xoa_ttl redirect_ttl = redirect_mgr.Extract_redirect(text, text_len);
-		db_page.Set_all_(page_id, fil_idx, row_idx, redirect_ttl != null, text_len, ttl.Page_db());
+		db_page.Init(page_id, ttl.Page_db(), redirect_ttl != null, text_len, fil_idx, row_idx);
 		Xodb_page_.Txt_ttl_save(tmp, db_page);
 		byte[] ttl_row_bry = tmp.Mkr_rls().Xto_bry_and_clear();
 		Xowd_hive_mgr ttl_hive = new Xowd_hive_mgr(wiki, Xotdb_dir_info_.Tid_ttl);
@@ -68,18 +68,18 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 	private void Data_update_under(Xoae_page page, byte[] text, byte[] new_ttl) {
 		Xoa_ttl ttl = page.Ttl();
 		Xow_ns ns = ttl.Ns(); byte[] ttl_bry = ttl.Page_db();
-		Xodb_page db_page = Xodb_page.tmp_();
+		Xodb_page db_page = Xodb_page.new_tmp();
 		if (!load_mgr.Load_by_ttl(db_page, ns, ttl_bry)) throw Err_mgr._.fmt_(GRP_KEY, "title_missing", "update requested but title does not exist: ~{0}", String_.new_utf8_(ttl_bry));
 		byte[] old_ttl = ttl_bry;
 		if (new_ttl != null) {
 			ttl_bry = new_ttl;
-			db_page.Ttl_wo_ns_(new_ttl);
+			db_page.Ttl_page_db_(new_ttl);
 		}
 		// update page
 		Xob_xdat_file page_rdr = new Xob_xdat_file(); Xob_xdat_itm page_itm = new Xob_xdat_itm();
-		load_mgr.Load_page(tmp_page, db_page.Text_db_id(), db_page.Db_row_idx(), ns, true, page_rdr, page_itm);
+		load_mgr.Load_page(tmp_page, db_page.Wtxt_db_id(), db_page.Tdb_row_idx(), ns, true, page_rdr, page_itm);
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
-		if (text == null) text = tmp_page.Text(); 
+		if (text == null) text = tmp_page.Wtxt(); 
 		int text_len = text.length;
 		DateAdp modified_on = tmp_page.Modified_on();
 		if (update_modified_on_enabled) {
@@ -88,13 +88,13 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 		}
 		Xodb_page_.Txt_page_save(tmp_bfr, db_page.Id(), modified_on, ttl_bry, text, true);
 		page_rdr.Update(tmp_bfr, page_itm, tmp_bfr.Xto_bry_and_clear());
-		Io_url page_rdr_url = fsys_mgr.Url_ns_fil(Xotdb_dir_info_.Tid_page, ttl.Ns().Id(), db_page.Text_db_id());
+		Io_url page_rdr_url = fsys_mgr.Url_ns_fil(Xotdb_dir_info_.Tid_page, ttl.Ns().Id(), db_page.Wtxt_db_id());
 		this.Data_save(Xotdb_dir_info_.Tid_page, page_rdr, page_rdr_url, tmp_bfr);
 		tmp_bfr.Mkr_rls();
 		// update ttl
 		Xoa_ttl redirect_ttl = redirect_mgr.Extract_redirect(text, text_len);
-		db_page.Text_len_(text_len);
-		db_page.Type_redirect_(redirect_ttl != null);
+		db_page.Wtxt_len_(text_len);
+		db_page.Redirected_(redirect_ttl != null);
 		Bry_bfr tmp = wiki.Utl__bfr_mkr().Get_b512();
 		Xodb_page_.Txt_ttl_save(tmp, db_page);
 		byte[] ttl_row_bry = tmp.Xto_bry_and_clear();

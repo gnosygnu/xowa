@@ -54,7 +54,7 @@ public class Xofc_fil_itm implements CompareAble {
 			.Add_yn(is_orig).Add_byte_pipe()
 			.Add_int_variable(w).Add_byte_pipe()
 			.Add_int_variable(h).Add_byte_pipe()
-			.Add_int_variable(Xof_doc_thumb.X_int(time))
+			.Add_int_variable(Xof_lnki_time.X_int(time))
 			;
 		return bfr.Xto_bry_and_clear();
 	}
@@ -63,7 +63,7 @@ public class Xofc_fil_itm implements CompareAble {
 			.Add(name).Add_byte_pipe()
 			.Add_yn(is_orig).Add_byte_pipe()
 			.Add_int_variable(w).Add_byte_pipe()
-			.Add_double(Xof_doc_thumb.Db_save_double(time)).Add_byte_pipe()
+			.Add_double(Xof_lnki_time.Db_save_double(time)).Add_byte_pipe()
 			.Add_int_variable(page)
 			;
 		return bfr.Xto_bry_and_clear();

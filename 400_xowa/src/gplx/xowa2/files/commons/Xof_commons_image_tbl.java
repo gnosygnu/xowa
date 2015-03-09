@@ -50,8 +50,7 @@ public class Xof_commons_image_tbl {
 			);
 		}	finally {rdr.Rls();}
 	}
-	private static final String tbl_name = "image";
-	private static final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private static final String tbl_name = "image"; private static final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private static final String
 	  fld_img_name				= flds.Add_str("img_name", 255)			// varbinary(255)
 	, fld_img_media_type		= flds.Add_str("img_media_type", 255)	// enum('UNKNOWN','BITMAP','DRAWING','AUDIO','VIDEO','MULTIMEDIA','OFFICE','TEXT','EXECUTABLE','ARCHIVE')"

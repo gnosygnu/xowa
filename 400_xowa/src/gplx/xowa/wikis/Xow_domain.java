@@ -34,6 +34,7 @@ public class Xow_domain {
 		Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key_or_intl(lang_key);
 		return new Xow_domain(domain_bry, domain_tid, lang_itm, lang_itm);
 	}
+	public static Xow_domain new_(byte[] domain_bry, int domain_tid, Xol_lang_itm lang) {return new Xow_domain(domain_bry, domain_tid, lang, lang);}
 	public static Xow_domain new_orig(byte[] domain_bry, int domain_tid, byte[] lang_key, byte[] lang_orig_key) {
 		Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key_or_intl(lang_key);
 		Xol_lang_itm lang_orig_itm = Bry_.Eq(lang_key, lang_orig_key) ? lang_itm : Xol_lang_itm_.Get_by_key_or_intl(lang_orig_key);

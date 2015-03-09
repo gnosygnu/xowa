@@ -31,9 +31,9 @@ public class Xof_orig_tbl {
 			tbl_name			= "wiki_orig";
 			fld_prefix			= "orig_";
 		}
+		fld_repo				= flds.Add_byte(fld_prefix + "repo");
 		fld_ttl					= flds.Add_str(fld_prefix + "ttl", 1024);
 		fld_status				= flds.Add_byte("status");	// NOTE: "status" in v1 and v2
-		fld_repo				= flds.Add_byte(fld_prefix + "repo");
 		fld_ext					= flds.Add_int(fld_prefix + "ext");
 		fld_w					= flds.Add_int(fld_prefix + "w");
 		fld_h					= flds.Add_int(fld_prefix + "h");
@@ -51,7 +51,7 @@ public class Xof_orig_tbl {
 		Xof_orig_itm rv = Xof_orig_itm.Null;
 		Db_rdr rdr = Db_rdr_.Null;
 		try {
-			Db_stmt stmt = conn.Stmt_select(tbl_name, flds.To_str_ary(), fld_ttl);
+			Db_stmt stmt = conn.Stmt_select(tbl_name, flds, fld_ttl);
 			rdr = stmt.Clear().Crt_bry_as_str(fld_ttl, ttl).Exec_select_as_rdr();
 			if (rdr.Move_next())
 				rv = Make_itm(rdr);
@@ -59,12 +59,28 @@ public class Xof_orig_tbl {
 		finally {rdr.Rls();}
 		return rv;
 	}
+	public boolean Exists__repo_ttl(byte repo, byte[] ttl) {
+		Db_rdr rdr = Db_rdr_.Null;
+		try {
+			rdr = conn.Stmt_select(tbl_name, flds, fld_repo, fld_ttl).Crt_byte(fld_repo, repo).Crt_bry_as_str(fld_ttl, ttl).Exec_select_as_rdr();
+			return rdr.Move_next();
+		}
+		finally {rdr.Rls();}
+	}
 	public void Insert(byte repo, byte[] ttl, int ext, int w, int h, byte[] redirect) {
-		Db_stmt stmt = Db_stmt_.Null;
-		stmt = conn.Stmt_insert(tbl_name, flds);
+		Db_stmt stmt = conn.Stmt_insert(tbl_name, flds);
 		stmt.Clear()
-		.Val_bry_as_str(fld_ttl, ttl).Val_byte(fld_status, Xof_orig_wkr_.Status_found).Val_byte(fld_repo, repo).Val_int(fld_ext, ext).Val_int(fld_w, w).Val_int(fld_h, h).Val_bry_as_str(fld_redirect, redirect)
+			.Val_byte(fld_repo, repo).Val_bry_as_str(fld_ttl, ttl).Val_byte(fld_status, Status_found)
+			.Val_int(fld_ext, ext).Val_int(fld_w, w).Val_int(fld_h, h).Val_bry_as_str(fld_redirect, redirect)
 		.Exec_insert();
+	}
+	public void Update(byte repo, byte[] ttl, int ext, int w, int h, byte[] redirect) {
+		Db_stmt stmt = conn.Stmt_update_exclude(tbl_name, flds, String_.Ary(fld_repo, fld_ttl));
+		stmt.Clear()
+			.Val_byte(fld_status, Status_found)
+			.Val_int(fld_ext, ext).Val_int(fld_w, w).Val_int(fld_h, h).Val_bry_as_str(fld_redirect, redirect)
+			.Crt_byte(fld_repo, repo).Crt_bry_as_str(fld_ttl, ttl)
+		.Exec_update();
 	}
 	public Xof_orig_itm Make_itm(Db_rdr rdr) {
 		byte repo = rdr.Read_byte(fld_repo);
@@ -75,9 +91,8 @@ public class Xof_orig_tbl {
 		, rdr.Read_int(fld_w)
 		, rdr.Read_int(fld_h)
 		, rdr.Read_bry_by_str(fld_redirect)
-		, Xof_repo_itm.Repo_is_known(repo) ? Xof_orig_wkr_.Status_found : Xof_orig_wkr_.Status_missing_orig	// NOTE: orig_db may mistakenly have status of found; rely on repo to set status; PAGE:ru.w:Птичкин,_Евгений_Николаевич; DATE:2015-02-16
 		);
-		return rv;
+		return rv.W() == Xof_img_size.Null ? Xof_orig_itm.Null : rv;
 	}
 	public static final String Db_conn_bldr_type = "xowa.file.orig_regy";
 	public static Db_conn Conn__get_or_make(Io_url root_dir, Xof_orig_tbl tbl, boolean schema_is_1, Xof_fsdb_mode fsdb_mode) {
@@ -95,6 +110,7 @@ public class Xof_orig_tbl {
 		tbl.Conn_(conn, created, schema_is_1);
 		return conn;
 	}
+	private static final byte Status_found = 1;
 }
 class Xof_orig_tbl__in_wkr extends Db_in_wkr__base {
 	private Xof_orig_tbl tbl; private String tbl_name; private Db_meta_fld_list flds; private String fld_ttl;
@@ -118,8 +134,9 @@ class Xof_orig_tbl__in_wkr extends Db_in_wkr__base {
 		while (rdr.Move_next()) {
 			if (cancelable.Canceled()) return;
 			Xof_orig_itm itm = tbl.Make_itm(rdr);
+			if (itm == Xof_orig_itm.Null) continue;
 			byte[] itm_ttl = itm.Page();
-			rv.Add_if_new(itm_ttl, itm);	// guard against dupes (shouldn't happen)
+			rv.Add_if_new(itm_ttl, itm);	// guard against dupes; fails on en.w:Paris; DATE:2015-03-08
 		}
 	}
 }

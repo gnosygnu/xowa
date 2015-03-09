@@ -32,5 +32,7 @@ public class Null_engine implements Db_engine {
 	public void				Exec_ddl_create_tbl(Db_meta_tbl meta) {}
 	public void				Exec_ddl_create_idx(Gfo_usr_dlg usr_dlg, Db_meta_idx... ary) {}
 	public void				Exec_ddl_append_fld(String tbl, Db_meta_fld fld) {}
+	public void				Exec_env_db_attach(String alias, Io_url db_url)		{}
+	public void				Exec_env_db_detach(String alias)					{}
         public static final Null_engine _ = new Null_engine(); Null_engine() {}
 }

@@ -32,11 +32,11 @@ public class Db_stmt_ {
 		return conn.Stmt_new(qry);
 	}
 	public static Db_stmt new_select_(Db_conn conn, String tbl, String[] where, String... flds) {
-		Db_qry_select qry = Db_qry_.select_cols_(tbl, Db_crt_.eq_many_(where), flds);
+		Db_qry__select_cmd qry = Db_qry_.select_cols_(tbl, Db_crt_.eq_many_(where), flds);
 		return conn.Stmt_new(qry);
 	}
 	public static Db_stmt new_select_in_(Db_conn conn, String tbl, String in_fld, Object[] in_vals, String... flds) {
-		Db_qry_select qry = Db_qry_.select_cols_(tbl, Db_crt_.in_(in_fld, in_vals), flds).OrderBy_asc_(in_fld);
+		Db_qry__select_cmd qry = Db_qry_.select_cols_(tbl, Db_crt_.in_(in_fld, in_vals), flds).OrderBy_asc_(in_fld);
 		return conn.Stmt_new(qry);
 	}
 	public static Db_stmt new_select_all_(Db_conn conn, String tbl) {

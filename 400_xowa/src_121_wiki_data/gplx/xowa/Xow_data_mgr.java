@@ -52,14 +52,14 @@ public class Xow_data_mgr implements GfoInvkAble {
 	}
 	public Xoae_page Get_page(Xoae_page rv, Xow_ns ns, Xoa_ttl ttl, boolean called_from_tmpl, boolean redirect_force) {
 		int redirects = 0;
-		Xodb_page db_page = Xodb_page.tmp_();
+		Xodb_page db_page = Xodb_page.new_tmp();
 		while (true) {
 			boolean exists = wiki.Db_mgr().Load_mgr().Load_by_ttl(db_page, ns, ttl.Page_db());
 			if (!exists) return rv.Missing_();
 			if (wiki.Appe().Mode() == Xoa_app_.Mode_gui)	// NOTE: must check if gui, else will write during mass build; DATE:2014-05-03
 				wiki.Appe().Usr_dlg().Prog_many(GRP_KEY, "file_load", "loading page for ~{0}", String_.new_utf8_(ttl.Raw()));
 			wiki.Db_mgr().Load_mgr().Load_page(db_page, ns, !called_from_tmpl);
-			byte[] bry = db_page.Text();
+			byte[] bry = db_page.Wtxt();
 			rv.Data_raw_(bry).Revision_data().Modified_on_(db_page.Modified_on()).Id_(db_page.Id()).Html_db_id_(db_page.Html_db_id());
 			if (redirect_force) return rv;
 			Xoa_ttl redirect_ttl = redirect_mgr.Extract_redirect(bry, bry.length);

@@ -23,14 +23,14 @@ public class Xof_file_ext__ogv_tst {
 	@Test   public void Copy_orig() {
 		fxt.Init_orig_db(Xof_orig_arg.new_comm("A.ogv", 440, 400));
 		fxt.Init_fsdb_db(Xof_fsdb_arg.new_comm_thumb("A.ogv", 440, 400));
-		fxt.Exec_get(Xof_exec_arg.new_orig("A.ogv").Rslt_orig_found().Rslt_fsdb_xowa().Rslt_conv_n());
+		fxt.Exec_get(Xof_exec_arg.new_orig("A.ogv").Rslt_orig_exists_y().Rslt_file_exists_y().Rslt_file_resized_n());
 		fxt.Test_fsys("mem/root/common/thumb/d/0/A.ogv/440px.jpg", "440,400");
 	}
 	@Test   public void Copy_orig_w_thumbtime() {
 		fxt.Init_orig_db(Xof_orig_arg.new_comm("A.ogv", 440, 400));
 		fxt.Init_fsdb_db(Xof_fsdb_arg.new_comm_thumb("A.ogv", 440, 400, 10));
-		fxt.Exec_get(Xof_exec_arg.new_orig("A.ogv").Lnki_time_(10).Rslt_orig_found().Rslt_fsdb_xowa().Rslt_conv_n());
+		fxt.Exec_get(Xof_exec_arg.new_orig("A.ogv").Lnki_time_(10).Rslt_orig_exists_y().Rslt_file_exists_y().Rslt_file_resized_n());
 		fxt.Test_fsys("mem/root/common/thumb/d/0/A.ogv/440px-10.jpg", "440,400");
-		fxt.Exec_get(Xof_exec_arg.new_thumb("A.png", Xop_lnki_tkn.Width_null, 130));
+		// fxt.Exec_get(Xof_exec_arg.new_thumb("A.png", Xop_lnki_tkn.Width_null, 130)); DELETE: not needed; tests if new A.png can be resized from existing; DATE:2015-03-03
 	}
 }

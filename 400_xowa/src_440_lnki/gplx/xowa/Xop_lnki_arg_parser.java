@@ -54,8 +54,8 @@ public class Xop_lnki_arg_parser {
 		lnki_w = Xop_lnki_tkn.Width_null;
 		lnki_h = Xop_lnki_tkn.Height_null;
 		byte rv = Identify_tid(src, bgn, end);
-		if (lnki_w != Xop_lnki_tkn.Width_null) lnki.Lnki_w_(lnki_w);
-		if (lnki_h != Xop_lnki_tkn.Height_null)lnki.Lnki_h_(lnki_h);
+		if (lnki_w != Xop_lnki_tkn.Width_null) lnki.W_(lnki_w);
+		if (lnki_h != Xop_lnki_tkn.Height_null)lnki.H_(lnki_h);
 		return rv;
 	}
 	public byte Identify_tid(byte[] src, int bgn, int end) {

@@ -31,9 +31,9 @@ public abstract class Xob_wdata_qid_base extends Xob_itm_dump_base implements Xo
 	}	private Json_parser parser;
 	public void Wkr_run(Xodb_page page) {
 		if (page.Ns_id() != Xow_ns_.Id_main) return;	// qid pages are only in the Main namespace
-		Json_doc jdoc = parser.Parse(page.Text()); 
+		Json_doc jdoc = parser.Parse(page.Wtxt()); 
 		if (jdoc == null) {
-			bldr.Usr_dlg().Warn_many(GRP_KEY, "json.invalid", "json is invalid: ns=~{0} id=~{1}", page.Ns_id(), String_.new_utf8_(page.Ttl_wo_ns()));
+			bldr.Usr_dlg().Warn_many(GRP_KEY, "json.invalid", "json is invalid: ns=~{0} id=~{1}", page.Ns_id(), String_.new_utf8_(page.Ttl_page_db()));
 			return;
 		}
 		Wdata_doc_parser wdoc_parser = app.Wiki_mgr().Wdata_mgr().Wdoc_parser(jdoc);

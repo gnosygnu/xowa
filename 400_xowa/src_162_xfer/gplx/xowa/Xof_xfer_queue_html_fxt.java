@@ -19,20 +19,20 @@ package gplx.xowa; import gplx.*;
 import gplx.core.primitives.*; import gplx.dbs.*;
 import gplx.ios.*; import gplx.xowa.wikis.*; import gplx.xowa.files.*;
 public class Xof_xfer_queue_html_fxt extends Xof_xfer_queue_base_fxt {
+	private final Xof_xfer_queue queue = new Xof_xfer_queue();
 	@Override public void Clear(boolean src_repo_is_wmf) {
 		Db_conn_bldr.I.Reg_default_mem();
 		super.Clear(src_repo_is_wmf);
 		this.Api_size().Clear();
 	}
-	public Xof_xfer_queue_html_fxt Lnki_orig_ (String lnki_ttl)							{return Lnki_(lnki_ttl, Bool_.N, Xof_img_size.Size_null_deprecated, Xof_img_size.Size_null_deprecated, Xop_lnki_tkn.Upright_null, Xof_doc_thumb.Null_as_int);}
-	public Xof_xfer_queue_html_fxt Lnki_thumb_(String lnki_ttl, int lnki_w)				{return Lnki_(lnki_ttl, Bool_.Y, lnki_w, Xof_img_size.Size_null_deprecated, Xop_lnki_tkn.Upright_null, Xof_doc_thumb.Null_as_int);}
-	public Xof_xfer_queue_html_fxt Lnki_thumb_(String lnki_ttl, int lnki_w, int lnki_h) {return Lnki_(lnki_ttl, Bool_.Y, lnki_w, lnki_h, Xop_lnki_tkn.Upright_null, Xof_doc_thumb.Null_as_int);}
+	public Xof_xfer_queue_html_fxt Lnki_orig_ (String lnki_ttl)							{return Lnki_(lnki_ttl, Bool_.N, Xof_img_size.Size_null_deprecated, Xof_img_size.Size_null_deprecated, Xop_lnki_tkn.Upright_null, Xof_lnki_time.Null_as_int);}
+	public Xof_xfer_queue_html_fxt Lnki_thumb_(String lnki_ttl, int lnki_w)				{return Lnki_(lnki_ttl, Bool_.Y, lnki_w, Xof_img_size.Size_null_deprecated, Xop_lnki_tkn.Upright_null, Xof_lnki_time.Null_as_int);}
+	public Xof_xfer_queue_html_fxt Lnki_thumb_(String lnki_ttl, int lnki_w, int lnki_h) {return Lnki_(lnki_ttl, Bool_.Y, lnki_w, lnki_h, Xop_lnki_tkn.Upright_null, Xof_lnki_time.Null_as_int);}
 	public Xof_xfer_queue_html_fxt Lnki_(String lnki_ttl, boolean thumb, int lnki_w, int lnki_h, double upright, int seek_time) { // NOTE: only one xfer_itm; supports one Lnki_ per test only
 		Xowe_wiki wiki = this.En_wiki();
-		xfer_itm = wiki.Html_mgr().Html_wtr().Lnki_wtr().File_wtr().Lnki_eval(wiki.Ctx(), queue, Bry_.new_utf8_(lnki_ttl), thumb ? Xop_lnki_type.Id_thumb : Xop_lnki_type.Id_null, lnki_w, lnki_h, upright, Xof_doc_thumb.X_int(seek_time), Xof_doc_page.Null, false, queue_add_ref);
+		xfer_itm = wiki.Html_mgr().Html_wtr().Lnki_wtr().File_wtr().Lnki_eval(wiki.Ctx(), queue, Bry_.new_utf8_(lnki_ttl), thumb ? Xop_lnki_type.Id_thumb : Xop_lnki_type.Id_null, lnki_w, lnki_h, upright, Xof_lnki_time.X_int(seek_time), Xof_lnki_page.Null, false, queue_add_ref);
 		return this;
 	}	private Xof_xfer_itm xfer_itm = new Xof_xfer_itm(); Bool_obj_ref queue_add_ref = Bool_obj_ref.n_();
-	Xof_xfer_queue queue = new Xof_xfer_queue();
 	public Xof_xfer_itm Xfer_itm() {return xfer_itm;}
 	public Xof_xfer_queue_html_fxt Src(Io_fil... v) {return (Xof_xfer_queue_html_fxt)Src_base(v);}
 	public Xof_xfer_queue_html_fxt Trg(Io_fil... v) {return (Xof_xfer_queue_html_fxt)Trg_base(v);}
@@ -52,8 +52,8 @@ public class Xof_xfer_queue_html_fxt extends Xof_xfer_queue_base_fxt {
 		wiki.File_mgr().Cfg_download().Enabled_(true);
 		queue.Exec(Xof_exec_tid.Tid_wiki_page, usr_dlg, wiki, Xoae_page.Empty);
 		tst_trg_fils();
-		if (this.html_orig_src   != null)	Tfds.Eq(this.html_orig_src  , String_.new_utf8_(xfer_itm.Html_orig_src()));
-		if (this.Html_view_src() != null)	Tfds.Eq(this.Html_view_src(), String_.new_utf8_(xfer_itm.Html_view_src()));
+		if (this.html_orig_src   != null)	Tfds.Eq(this.html_orig_src  , String_.new_utf8_(xfer_itm.Html_orig_url()));
+		if (this.Html_view_src() != null)	Tfds.Eq(this.Html_view_src(), String_.new_utf8_(xfer_itm.Html_view_url()));
 		if (this.Html_w() != -1)			Tfds.Eq(this.Html_w(), xfer_itm.Html_w());
 		if (this.Html_h() != -1)			Tfds.Eq(this.Html_h(), xfer_itm.Html_h());
 		queue.Clear();

@@ -46,7 +46,9 @@ public class Wmf_dump_list_parser_tst {
 //			( "advisory.wikipedia.org", "beta.wikiversity.org", "donate.wikipedia.org", "login.wikipedia.org"
 //			, "nostalgia.wikipedia.org", "outreach.wikipedia.org", "quality.wikipedia.org", "sources.wikipedia.org"
 //			, "strategy.wikipedia.org", "ten.wikipedia.org", "test2.wikipedia.org", "test.wikipedia.org"
-//			, "usability.wikipedia.org", "vote.wikipedia.org");
+//			, "usability.wikipedia.org", "vote.wikipedia.org"
+//			, "bd.wikimedia.org", "dk.wikimedia.org", "mx.wikimedia.org", "nyc.wikimedia.org", "nz.wikimedia.org", "pa-us.wikimedia.org", "rs.wikimedia.org", "ua.wikimedia.org"
+//			);
 //			Wmf_dump_itm[] itms = new Wmf_dump_list_parser().Parse(Io_mgr._.LoadFilBry("C:\\xowa\\bin\\any\\html\\xowa\\maint\\backup-index.html"));
 //			Array_.Sort(itms);
 //			Bry_bfr sql_bfr = Bry_bfr.new_();

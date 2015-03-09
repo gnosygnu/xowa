@@ -44,28 +44,28 @@ public class Xob_xml_parser_tst {
 	@Test  public void Xml() {
 		Xodb_page doc = doc_(1, "a", "&quot;a &amp; b &lt;&gt; a | b&quot;", Date_1);
 		fil = page_bldr.Add(doc).XtoByteStreamRdr();
-		tst_parse(fil, doc.Text_(Bry_.new_utf8_("\"a & b <> a | b\"")), 0);
+		tst_parse(fil, doc.Wtxt_(Bry_.new_utf8_("\"a & b <> a | b\"")), 0);
 	}
 	@Test  public void Tab() {
 		Xodb_page doc = doc_(1, "a", "a \t b", Date_1);
 		fil = page_bldr.Add(doc).XtoByteStreamRdr();
-		tst_parse(fil, doc.Text_(Bry_.new_utf8_("a &#09; b")), 0);
+		tst_parse(fil, doc.Wtxt_(Bry_.new_utf8_("a &#09; b")), 0);
 	}
 	@Test  public void Tab_disable() {
 		Xodb_page doc = doc_(1, "a", "a \t b", Date_1);
 		page_parser.Trie_tab_del_();
 		fil = page_bldr.Add(doc).XtoByteStreamRdr();
-		tst_parse(fil, doc.Text_(Bry_.new_utf8_("a \t b")), 0);
+		tst_parse(fil, doc.Wtxt_(Bry_.new_utf8_("a \t b")), 0);
 	}
 	@Test  public void Cr_nl() {
 		Xodb_page doc = doc_(1, "a", "a \r\n b", Date_1);
 		fil = page_bldr.Add(doc).XtoByteStreamRdr();
-		tst_parse(fil, doc.Text_(Bry_.new_utf8_("a \n b")), 0);
+		tst_parse(fil, doc.Wtxt_(Bry_.new_utf8_("a \n b")), 0);
 	}
 	@Test  public void Cr() {
 		Xodb_page doc = doc_(1, "a", "a \r b", Date_1);
 		fil = page_bldr.Add(doc).XtoByteStreamRdr();
-		tst_parse(fil, doc.Text_(Bry_.new_utf8_("a \n b")), 0);
+		tst_parse(fil, doc.Wtxt_(Bry_.new_utf8_("a \n b")), 0);
 	}
 	@Test  public void Text_long() {
 		String s = String_.Repeat("a", 1024);
@@ -87,24 +87,24 @@ public class Xob_xml_parser_tst {
 	@Test  public void Ns_file() {
 		Xodb_page doc = doc_(1, "File:a", "a", Date_1);
 		Tfds.Eq(Xow_ns_.Id_file, doc.Ns_id());
-		Tfds.Eq("a", String_.new_utf8_(doc.Ttl_wo_ns()));
+		Tfds.Eq("a", String_.new_utf8_(doc.Ttl_page_db()));
 	}
 	@Test  public void Ns_main() {
 		Xodb_page doc = doc_(1, "a", "a", Date_1);
 		Tfds.Eq(Xow_ns_.Id_main, doc.Ns_id());
-		Tfds.Eq("a", String_.new_utf8_(doc.Ttl_wo_ns()));
+		Tfds.Eq("a", String_.new_utf8_(doc.Ttl_page_db()));
 	}
 	@Test  public void Ns_main_book() {
 		Xodb_page doc = doc_(1, "Book", "a", Date_1);
 		Tfds.Eq(Xow_ns_.Id_main, doc.Ns_id());
-		Tfds.Eq("Book", String_.new_utf8_(doc.Ttl_wo_ns()));
+		Tfds.Eq("Book", String_.new_utf8_(doc.Ttl_page_db()));
 	}
 	@Test  public void XmlEntities() {
 		Xodb_page orig = doc_(1, "A&amp;b", "a", Date_1);
 		Xodb_page actl = new Xodb_page();
 		fil = page_bldr.Add(orig).XtoByteStreamRdr();
 		page_parser.Parse_page(actl, usr_dlg, fil, fil.Bfr(), 0, ns_mgr);
-		Tfds.Eq("A&b", String_.new_utf8_(actl.Ttl_w_ns()));
+		Tfds.Eq("A&b", String_.new_utf8_(actl.Ttl_full_db()));
 	}
 	@Test  public void Root() {
 		Xodb_page doc = doc_(1, "a", "a", Date_1);
@@ -122,13 +122,13 @@ public class Xob_xml_parser_tst {
 		Xodb_page actl = new Xodb_page();
 		int rv = page_parser.Parse_page(actl, usr_dlg, fil, fil.Bfr(), cur_pos, ns_mgr);
 		Tfds.Eq(expd.Id(), actl.Id(), "id");
-		Tfds.Eq(String_.new_utf8_(expd.Ttl_w_ns()), String_.new_utf8_(actl.Ttl_w_ns()), "title");
-		Tfds.Eq(String_.new_utf8_(expd.Text()), String_.new_utf8_(actl.Text()), "text");
+		Tfds.Eq(String_.new_utf8_(expd.Ttl_full_db()), String_.new_utf8_(actl.Ttl_full_db()), "title");
+		Tfds.Eq(String_.new_utf8_(expd.Wtxt()), String_.new_utf8_(actl.Wtxt()), "text");
 		Tfds.Eq_date(expd.Modified_on(), actl.Modified_on(), "timestamp");
 		return rv;
 	}
 	Xodb_page doc_(int id, String title, String text, String date) {
-		Xodb_page rv = new Xodb_page().Id_(id).Ttl_(Bry_.new_ascii_(title), ns_mgr).Text_(Bry_.new_ascii_(text));
+		Xodb_page rv = new Xodb_page().Id_(id).Ttl_(Bry_.new_ascii_(title), ns_mgr).Wtxt_(Bry_.new_ascii_(text));
 		int[] modified_on = new int[7];
 		dateParser.Parse_iso8651_like(modified_on, date);
 		rv.Modified_on_(DateAdp_.seg_(modified_on));

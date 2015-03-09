@@ -41,7 +41,7 @@ class Xodb_page_wkr_ctg_fxt {
 		byte[] bry = Bry_.new_utf8_("[[Category:");
 		wkr.Wkr_hooks().Add(bry, bry);
 		mgr.Wkr_add(wkr);
-		Xodb_page page = new Xodb_page().Text_(src);//.Ttl_(Bry_.new_utf8_("Test"), new Xow_ns_mgr());
+		Xodb_page page = new Xodb_page().Wtxt_(src);//.Ttl_(Bry_.new_utf8_("Test"), new Xow_ns_mgr());
 		mgr.Wkr_bgn(bldr);
 		mgr.Wkr_run(page);
 		byte[][] ttl = (byte[][])wkr.Found().Xto_ary(byte[].class);

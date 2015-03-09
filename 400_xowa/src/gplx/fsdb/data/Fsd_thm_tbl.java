@@ -75,11 +75,11 @@ public class Fsd_thm_tbl {
 		.Val_int(fld_w, width)
 		.Val_int(fld_h, height);
 		if (this.Schema_thm_page()) {
-			stmt_insert.Val_double	(fld_time, gplx.xowa.files.Xof_doc_thumb.Db_save_double(thumbtime));
-			stmt_insert.Val_int		(fld_page, gplx.xowa.files.Xof_doc_page.Db_save_int(page));
+			stmt_insert.Val_double	(fld_time, gplx.xowa.files.Xof_lnki_time.Db_save_double(thumbtime));
+			stmt_insert.Val_int		(fld_page, gplx.xowa.files.Xof_lnki_page.Db_save_int(page));
 		}
 		else
-			stmt_insert.Val_int		(fld_thumbtime, gplx.xowa.files.Xof_doc_thumb.Db_save_int(thumbtime));
+			stmt_insert.Val_int		(fld_thumbtime, gplx.xowa.files.Xof_lnki_time.Db_save_int(thumbtime));
 		stmt_insert
 		.Val_int(fld_bin_db_id, bin_db_id)
 		.Val_long(fld_size, size)
@@ -88,7 +88,7 @@ public class Fsd_thm_tbl {
 		.Exec_insert();
 	}
 	private Db_stmt Select_by_fil_w_stmt() {
-		Db_qry_select qry = Db_qry_.select_().From_(tbl_name).Cols_all_();
+		Db_qry__select_cmd qry = Db_qry_.select_().From_(tbl_name).Cols_all_();
 		gplx.core.criterias.Criteria crt 
 			= this.Schema_thm_page()
 			? Db_crt_.eq_many_(fld_owner_id, fld_w, fld_time, fld_page)
@@ -103,19 +103,34 @@ public class Fsd_thm_tbl {
 		try {
 			stmt_select_by_fil_w.Clear()
 				.Crt_int(fld_owner_id, owner_id)
-				.Crt_int(fld_w, thm.Width())
+				.Crt_int(fld_w, thm.W())
 				;
 			if (this.Schema_thm_page())  {
-				stmt_select_by_fil_w.Crt_double(fld_time, gplx.xowa.files.Xof_doc_thumb.Db_save_double(thm.Thumbtime()));
-				stmt_select_by_fil_w.Crt_int(fld_page, gplx.xowa.files.Xof_doc_page.Db_save_int(thm.Page()));
+				stmt_select_by_fil_w.Crt_double(fld_time, gplx.xowa.files.Xof_lnki_time.Db_save_double(thm.Time()));
+				stmt_select_by_fil_w.Crt_int(fld_page, gplx.xowa.files.Xof_lnki_page.Db_save_int(thm.Page()));
 			}
 			else {
-				stmt_select_by_fil_w.Crt_int(fld_time, gplx.xowa.files.Xof_doc_thumb.Db_save_int(thm.Thumbtime()));
+				stmt_select_by_fil_w.Crt_int(fld_time, gplx.xowa.files.Xof_lnki_time.Db_save_int(thm.Time()));
 			}
 			rdr = stmt_select_by_fil_w.Exec_select_as_rdr();
 			return rdr.Move_next()
 				? Ctor_by_load(thm, rdr, this.Schema_thm_page())
 				: false;
+		}
+		finally {rdr.Rls();}
+	}
+	public boolean Select_itm_by_fil_width2(int owner_id, Fsd_thm_itm thm) {
+		if (stmt_select_by_fil_w == null) stmt_select_by_fil_w = conn.Rls_reg(conn.Stmt_select(tbl_name, flds, fld_owner_id));
+		Db_rdr rdr = Db_rdr_.Null;
+		try {
+			ListAdp list = ListAdp_.new_();
+			rdr = stmt_select_by_fil_w.Clear().Crt_int(fld_owner_id, thm.Owner_id()).Exec_select_as_rdr();
+			while (rdr.Move_next()) {
+				Fsd_thm_itm itm = Fsd_thm_itm.new_();
+				Ctor_by_load(itm, rdr, this.Schema_thm_page());
+				list.Add(itm);
+			}
+			return Match_nearest(list, thm, schema_thm_page);
 		}
 		finally {rdr.Rls();}
 	}
@@ -131,17 +146,39 @@ public class Fsd_thm_tbl {
 		double time = 0;
 		int page = 0;
 		if (schema_thm_page) {
-			time = gplx.xowa.files.Xof_doc_thumb.Db_load_double(rdr, fld_time);
-			page = gplx.xowa.files.Xof_doc_page.Db_load_int(rdr, fld_page);
+			time = gplx.xowa.files.Xof_lnki_time.Db_load_double(rdr, fld_time);
+			page = gplx.xowa.files.Xof_lnki_page.Db_load_int(rdr, fld_page);
 		}
 		else {
-			time = gplx.xowa.files.Xof_doc_thumb.Db_load_int(rdr, fld_thumbtime);
-			page = gplx.xowa.files.Xof_doc_page.Null;
+			time = gplx.xowa.files.Xof_lnki_time.Db_load_int(rdr, fld_thumbtime);
+			page = gplx.xowa.files.Xof_lnki_page.Null;
 		}
-		itm.Ctor(id, owner_id, width, time, page, height, size, modified, hash);
-		itm.Db_bin_id_(bin_db_id);
+		itm.Init_by_load(bin_db_id, id, owner_id, width, time, page, height, size, modified, hash);
 		return true;
 	}
 	public static final DateAdp Modified_null = null;
 	public static final String Hash_null = "";
+	public static boolean Match_nearest(ListAdp list, Fsd_thm_itm thm, boolean schema_thm_page) {
+		int len = list.Count(); if (len == 0) return Bool_.N;
+		list.SortBy(Fsdb_thm_itm_sorter.I);
+		int thm_w = thm.W(), thm_page = thm.Page(); double thm_time = thm.Time();
+		Fsd_thm_itm max = null;
+		for (int i = 0; i < len; ++i) {
+			Fsd_thm_itm comp = (Fsd_thm_itm)list.FetchAt(i);
+			int comp_w = comp.W();
+			int comp_page = schema_thm_page ? comp.Page() : thm_page;
+			if (	thm_w			== comp_w
+				&&	thm_time		== comp.Time()
+				&&	thm_page		== comp_page
+				) {	// exact match
+				thm.Init_by_match(comp);
+				return Bool_.Y;
+			}
+			if (comp_w > thm_w) max = comp;
+			else break;
+		}
+		if (max == null) return Bool_.N;
+		thm.Init_by_match(max);
+		return Bool_.Y;
+	}
 }

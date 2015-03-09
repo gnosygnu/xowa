@@ -26,7 +26,7 @@ public class Xoa_app_ {
 		boot_mgr.Run(args);
 	}
 	public static final String Name = "xowa";
-	public static final String Version = "2.3.1.1";
+	public static final String Version = "2.3.2.1";
 	public static String Build_date = "2012-12-30 00:00:00";
 	public static String Op_sys;
 	public static String User_agent = "";
@@ -46,7 +46,6 @@ public class Xoa_app_ {
 	public static Io_stream_zip_mgr Utl__zip_mgr()		{return utl__zip_mgr;}		private static final Io_stream_zip_mgr utl__zip_mgr = new Io_stream_zip_mgr();
 
 	public static Xoa_gfs_mgr		Gfs_mgr() {return gfs_mgr;}		public static void Gfs_mgr_(Xoa_gfs_mgr v) {gfs_mgr = v;} private static Xoa_gfs_mgr gfs_mgr;
-//		public static Xoa_lang_mgr		Lang_mgr() {return lang_mgr;}	public static void Lang_mgr_(Xoa_lang_mgr v) {lang_mgr = v;} private static Xoa_lang_mgr lang_mgr;
 
 	public static final byte Mode_console = 0, Mode_gui = 1, Mode_http = 2;
 }	

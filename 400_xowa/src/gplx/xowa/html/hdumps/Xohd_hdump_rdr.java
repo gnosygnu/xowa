@@ -44,7 +44,11 @@ public class Xohd_hdump_rdr {
 	}
 	public void Get_by_ttl(Xog_page rv, Xoa_ttl ttl) {
 		synchronized (dbpg) {
-			if (!Get_by_ttl__fill_hpg(rv, ttl)) return;
+			dbpg.Clear();
+			if (!Get_by_ttl__fill_hpg(rv, ttl)) {
+				rv.Exists_n_();
+				return;
+			}
 			Bry_bfr bfr = bfr_mkr.Get_m001();
 			byte[] body_bry = abrv_mgr.Parse(bfr, rv);
 			body_bry = hzip_mgr.Parse(bfr, ttl.Page_db(), body_bry);
@@ -56,6 +60,7 @@ public class Xohd_hdump_rdr {
 		core_data_mgr.Tbl__pg().Select_by_ttl(dbpg, ttl.Ns(), ttl.Page_db());	// get rows from db
 		if (dbpg.Redirect_id() != -1) Get_by_ttl__resolve_redirect(dbpg, rv);
 		if (dbpg.Html_db_id() == -1) return false;								// dbpg does not hdump; exit;
+		rv.Init(dbpg.Id(), null, ttl);	// FIXME
 		Xowd_db_file html_db = core_data_mgr.Dbs__get_at(dbpg.Html_db_id());
 		load_mgr.Load_page(rv, Xohd_page_html_tbl.Get_from_db(core_data_mgr, html_db), dbpg.Id(), ttl);
 		return true;

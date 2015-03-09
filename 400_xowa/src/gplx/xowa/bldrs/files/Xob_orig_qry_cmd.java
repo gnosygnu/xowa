@@ -28,12 +28,12 @@ public class Xob_orig_qry_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		Xob_bmk_mgr bmk = new Xob_bmk_mgr();
 		bmk.Init(conn, this.Cmd_key(), true, false, true);
 		bmk.Load();
-		Xof_fsdb_itm itm = new Xof_fsdb_itm();
+//			Xof_fsdb_itm itm = new Xof_fsdb_itm();
 		DataRdr rdr = DataRdr_.Null;
 		try {
 			// rdr = Select(conn, bmk.Repo_prv(), bmk.Ttl_prv());
 			while (rdr.MoveNextPeer()) {
-				Load_itm(itm, rdr);
+				// Load_itm(itm, rdr);
 				// QueryItm
 			}
 		}
@@ -47,9 +47,6 @@ public class Xob_orig_qry_cmd extends Xob_itm_basic_base implements Xob_cmd {
 			qry.Call(itm);
 		}
 		*/
-	}
-	private void Load_itm(Xof_fsdb_itm itm, DataRdr rdr) {
-		itm.Lnki_ttl_(null);
 	}
 	public DataRdr Select(Db_conn p, byte prv_repo_id, byte[] prv_ttl) {
 		String sql = String_.Concat_lines_nl_skip_last

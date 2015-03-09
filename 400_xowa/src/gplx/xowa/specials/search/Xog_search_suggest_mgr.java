@@ -86,7 +86,7 @@ public class Xog_search_suggest_mgr implements GfoInvkAble {
 				for (int i = 0; i < len; i++) {
 					Xodb_page p = (Xodb_page)found.FetchAt(i);
 					Xow_ns ns = wiki.Ns_mgr().Ids_get_or_null(p.Ns_id());
-					byte[] ttl = Xoa_ttl.Replace_unders(ns.Gen_ttl(p.Ttl_wo_ns()));
+					byte[] ttl = Xoa_ttl.Replace_unders(ns.Gen_ttl(p.Ttl_page_db()));
 					wtr.Add_str_arg(i, ttl);
 				}
 			wtr.Add_brack_end();

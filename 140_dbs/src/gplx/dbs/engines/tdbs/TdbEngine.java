@@ -57,7 +57,8 @@ public class TdbEngine implements Db_engine {
 	public void	Exec_ddl_create_tbl(Db_meta_tbl meta) {throw Err_.not_implemented_();}
 	public void Exec_ddl_create_idx(Gfo_usr_dlg usr_dlg, Db_meta_idx... ary) {throw Err_.not_implemented_();}
 	public void	Exec_ddl_append_fld(String tbl, Db_meta_fld fld) {throw Err_.not_implemented_();}
-
+	public void			Exec_env_db_attach(String alias, Io_url db_url)		{}
+	public void			Exec_env_db_detach(String alias)					{}
 
 	HashAdp wkrs = HashAdp_.new_(); TdbDbLoadMgr loadMgr = TdbDbLoadMgr.new_(); TdbDbSaveMgr saveMgr = TdbDbSaveMgr.new_();
 	public static final TdbEngine _ = new TdbEngine(); 

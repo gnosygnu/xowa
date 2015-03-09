@@ -24,28 +24,28 @@ public class Xof_file_redirect_tst {
 		fxt.Init_orig_db(Xof_orig_arg.new_wiki("A.png", 440, 400));
 		fxt.Init_fsdb_db(Xof_fsdb_arg.new_wiki_orig("A.png", 440, 400));
 		fxt.Init_orig_db(Xof_orig_arg.new_wiki_redirect("B.png", "A.png"));
-		fxt.Exec_get(Xof_exec_arg.new_orig("B.png").Rslt_fsdb_xowa());
+		fxt.Exec_get(Xof_exec_arg.new_orig("B.png").Rslt_file_exists_y());
 		fxt.Test_fsys("mem/root/enwiki/orig/7/0/A.png", "440,400");
 	}
 	@Test  public void Same_wiki_thumb_copy() {
 		fxt.Init_orig_db(Xof_orig_arg.new_wiki("A.png", 440, 400));
 		fxt.Init_fsdb_db(Xof_fsdb_arg.new_wiki_thumb("A.png", 220, 200));
 		fxt.Init_orig_db(Xof_orig_arg.new_wiki_redirect("B.png", "A.png"));
-		fxt.Exec_get(Xof_exec_arg.new_thumb("B.png", 220).Rslt_fsdb_xowa());
+		fxt.Exec_get(Xof_exec_arg.new_thumb("B.png", 220).Rslt_file_exists_y());
 		fxt.Test_fsys("mem/root/enwiki/thumb/7/0/A.png/220px.png", "220,200");
 	}
 	@Test  public void Same_wiki_thumb_make() {
 		fxt.Init_orig_db(Xof_orig_arg.new_wiki("A.png", 440, 400));
 		fxt.Init_fsdb_db(Xof_fsdb_arg.new_wiki_orig("A.png", 440, 400));
 		fxt.Init_orig_db(Xof_orig_arg.new_wiki_redirect("B.png", "A.png"));
-		fxt.Exec_get(Xof_exec_arg.new_thumb("B.png", 220).Rslt_fsdb_xowa().Rslt_conv_y());
+		fxt.Exec_get(Xof_exec_arg.new_thumb("B.png", 220).Rslt_file_exists_y().Rslt_file_resized_y());
 		fxt.Test_fsys("mem/root/enwiki/thumb/7/0/A.png/220px.png", "220,200");
 	}
 	@Test  public void Diff_wiki_orig_copy() {
 		fxt.Init_orig_db(Xof_orig_arg.new_comm("A.png", 440, 400));
 		fxt.Init_fsdb_db(Xof_fsdb_arg.new_comm_orig("A.png", 440, 400));
 		fxt.Init_orig_db(Xof_orig_arg.new_comm_redirect("B.png", "A.png"));
-		fxt.Exec_get(Xof_exec_arg.new_orig("B.png").Rslt_fsdb_xowa());
+		fxt.Exec_get(Xof_exec_arg.new_orig("B.png").Rslt_file_exists_y());
 		fxt.Test_fsys("mem/root/common/orig/7/0/A.png", "440,400");
 	}
 //		@Test  public void Cross_wiki() {

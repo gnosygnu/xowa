@@ -24,25 +24,18 @@ public class Xof_orig_itm {
 	public int			W() {return w;} private int w;
 	public int			H() {return h;} private int h;
 	public byte[]		Redirect() {return redirect;} private byte[] redirect;	// redirect trg; EX: A.png is redirected to B.jpg; record will have A.png|jpg|220|200|B.jpg where jpg|220|200 are the attributes of B.jpg
-	public byte			Status() {return status;} private byte status;
+	public boolean			Insert_new() {return insert_new;} public void Insert_new_y_() {insert_new = Bool_.Y;} private boolean insert_new;
 	public void Clear() {
 		this.repo = Repo_null;
 		this.page = this.redirect = null;
 		this.ext = Xof_ext_.Id_unknown;
 		this.w = this.h = Xof_img_size.Null;
-		this.status = Status_null;
 	}
-	public Xof_orig_itm Init(byte repo, byte[] page, int ext, int w, int h, byte[] redirect) {return Init(repo, page, ext, w, h, redirect, Status_null);}
-	public Xof_orig_itm Init(byte repo, byte[] page, int ext, int w, int h, byte[] redirect, byte status) {
+	public Xof_orig_itm Init(byte repo, byte[] page, int ext, int w, int h, byte[] redirect) {
 		this.repo = repo; this.page = page; this.ext = ext;
-		this.w = w; this.h = h;  this.redirect = redirect; this.status = status;
+		this.w = w; this.h = h;  this.redirect = redirect;
 		return this;
 	}
-	public static final byte Status_null = Byte_.Max_value_127;
 	public static final byte Repo_comm = 0, Repo_wiki = 1, Repo_null = Byte_.Max_value_127;	// SERIALIZED: "wiki_orig.orig_repo"
-	public static byte Repo_by_domain(byte[] domain) {return Bry_.Eq(domain, Xow_domain_.Domain_bry_commons) ? Repo_comm : Repo_wiki;}
-	public static Xof_orig_itm new_clone(Xof_orig_itm itm) {
-		return new Xof_orig_itm().Init(itm.repo, itm.page, itm.ext, itm.w, itm.h, itm.redirect, itm.status);
-	}
 	public static final Xof_orig_itm Null = null;
 }

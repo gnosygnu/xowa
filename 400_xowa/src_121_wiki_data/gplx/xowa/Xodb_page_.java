@@ -29,15 +29,18 @@ public class Xodb_page_ {
 	public static void Txt_ttl_load(Xodb_page page, byte[] bry) {Txt_ttl_load(page, bry, 0, bry.length);}
 	private static void Txt_ttl_load(Xodb_page page, byte[] bry, int bgn, int end) {
 		try {
-			page.Id_				(Base85_utl.XtoIntByAry	(bry, bgn +  0, bgn +  4));
-			page.Text_db_id_		(Base85_utl.XtoIntByAry	(bry, bgn +  6, bgn + 10));
-			page.Db_row_idx_		(Base85_utl.XtoIntByAry	(bry, bgn + 12, bgn + 16));
-			page.Type_redirect_		(bry[18] == Byte_ascii.Num_1);
-			page.Text_len_			(Base85_utl.XtoIntByAry	(bry, bgn + 20, bgn + 24));
-			page.Ttl_wo_ns_			(Bry_.Mid			(bry, bgn + 26, end));
+			page.Init_by_tdb
+			( Base85_utl.XtoIntByAry	(bry, bgn +  0, bgn +  4)
+			, Base85_utl.XtoIntByAry	(bry, bgn +  6, bgn + 10)
+			, Base85_utl.XtoIntByAry	(bry, bgn + 12, bgn + 16)
+			,							 bry[18] == Byte_ascii.Num_1
+			, Base85_utl.XtoIntByAry	(bry, bgn + 20, bgn + 24)
+			, page.Ns_id()
+			, Bry_.Mid					(bry, bgn + 26, end)
+			);
 		} catch (Exception e) {throw Err_.err_(e, "parse_by_ttl failed: {0}", String_.new_utf8_(bry, bgn, end));}
 	}
-	public static void Txt_ttl_save(Bry_bfr bfr, Xodb_page page) {Txt_ttl_save(bfr, page.Id(), page.Text_db_id(), page.Db_row_idx(), page.Type_redirect(), page.Text_len(), page.Ttl_wo_ns());}
+	public static void Txt_ttl_save(Bry_bfr bfr, Xodb_page page) {Txt_ttl_save(bfr, page.Id(), page.Wtxt_db_id(), page.Tdb_row_idx(), page.Redirected(), page.Wtxt_len(), page.Ttl_page_db());}
 	public static void Txt_ttl_save(Bry_bfr bfr, int id, int file_idx, int row_idx, boolean redirect, int text_len, byte[] ttl_wo_ns) {
 		bfr	.Add_base85_len_5(id)					.Add_byte_pipe()
 			.Add_base85_len_5(file_idx)				.Add_byte_pipe()
@@ -51,23 +54,25 @@ public class Xodb_page_ {
 	private static void Txt_id_load(Xodb_page page, byte[] bry, int bgn, int end) {
 		try {
 			page.Clear();
-			page.Id_			(Base85_utl.XtoIntByAry	(bry, bgn +  0, bgn +  4));
-			page.Text_db_id_	(Base85_utl.XtoIntByAry	(bry, bgn +  6, bgn + 10));
-			page.Db_row_idx_	(Base85_utl.XtoIntByAry	(bry, bgn + 12, bgn + 16));
-			page.Type_redirect_	(bry[18] == Byte_ascii.Num_1);
-			page.Text_len_		(Base85_utl.XtoIntByAry	(bry, bgn + 20, bgn + 24));
-			page.Ns_id_			(Base85_utl.XtoIntByAry	(bry, bgn + 26, bgn + 30));
-			page.Ttl_wo_ns_		(Bry_.Mid			(bry, bgn + 32, end));
+			page.Init_by_tdb
+			( Base85_utl.XtoIntByAry	(bry, bgn +  0, bgn +  4)
+			, Base85_utl.XtoIntByAry	(bry, bgn +  6, bgn + 10)
+			, Base85_utl.XtoIntByAry	(bry, bgn + 12, bgn + 16)
+			,							 bry[18] == Byte_ascii.Num_1
+			, Base85_utl.XtoIntByAry	(bry, bgn + 20, bgn + 24)
+			, Base85_utl.XtoIntByAry	(bry, bgn + 26, bgn + 30)
+			, Bry_.Mid					(bry, bgn + 32, end)
+			);
 		} catch (Exception e) {throw Err_.err_(e, "parse_by_id failed: {0}", String_.new_utf8_(bry, bgn, end));}
 	}
 	public static void Txt_id_save(Bry_bfr bfr, Xodb_page page) {
 		bfr	.Add_base85_len_5(page.Id())					.Add_byte_pipe()
-			.Add_base85_len_5(page.Text_db_id())			.Add_byte_pipe()
-			.Add_base85_len_5(page.Db_row_idx())			.Add_byte_pipe()
-			.Add_byte(page.Type_redirect() ? Byte_ascii.Num_1 : Byte_ascii.Num_0).Add_byte_pipe()
-			.Add_base85_len_5(page.Text_len())				.Add_byte_pipe()
+			.Add_base85_len_5(page.Wtxt_db_id())			.Add_byte_pipe()
+			.Add_base85_len_5(page.Tdb_row_idx())			.Add_byte_pipe()
+			.Add_byte(page.Redirected() ? Byte_ascii.Num_1 : Byte_ascii.Num_0).Add_byte_pipe()
+			.Add_base85_len_5(page.Wtxt_len())				.Add_byte_pipe()
 			.Add_base85_len_5(page.Ns_id())					.Add_byte_pipe()
-			.Add(page.Ttl_wo_ns())							.Add_byte_nl();
+			.Add(page.Ttl_page_db())						.Add_byte_nl();
 	}
 	public static void Txt_page_save(Bry_bfr bfr, int id, DateAdp modified_on, byte[] title, byte[] text, boolean add_nl) {
 		int ts = Bit_.Xto_int_date_short(modified_on.XtoSegAry());

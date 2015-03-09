@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 import gplx.threads.*; import gplx.gfui.*; import gplx.xowa.gui.history.*; import gplx.xowa.gui.bnds.*;
+import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.cfgs2.*;
 import gplx.xowa.pages.*; import gplx.xowa.pages.skins.*;
 public class Xog_tab_itm implements GfoInvkAble {
@@ -75,6 +76,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 	public Xoae_page				Page() {return page;}
 	public void Page_(Xoae_page page) {
 		this.page = page;
+		this.wiki = page.Wikie();	// NOTE: must update wiki else back doesn't work; DATE:2015-03-05
 		this.Page_update_ui();	// force tab button to update when page changes
 	}	private Xoae_page page;		
 	public void Page_update_ui() {
@@ -104,6 +106,9 @@ public class Xog_tab_itm implements GfoInvkAble {
 			&&	url.Args().length == 0) {				// url has no args; needed for Category:A?from=b#mw-pages
 			html_itm.Scroll_page_by_id_gui(url.Anchor_str());	// skip page_load and jump to anchor
 			return;
+		}
+		if (url.Xowa_vnt() != null) {
+			wiki.Lang().Vnt_mgr().Cur_vnt_(url.Xowa_vnt());
 		}
 		if (win.Page__async__working(url)) return;
 		app.Gui_mgr().Search_suggest_mgr().Cancel();	// cancel pending search_suggest calls
@@ -157,7 +162,8 @@ public class Xog_tab_itm implements GfoInvkAble {
 			Gfo_thread_wkr async_wkr = null;				
 			if (wkr.Hdump_enabled()) {
 				wiki.File_mgr().Fsdb_mgr().Init_by_wiki(wiki);
-				async_wkr = new gplx.xowa2.gui.Xogv_img_wkr(wiki.File_mgr().Fsdb_mgr().Orig_mgr(), wiki.File_mgr().Fsdb_mgr().Bin_mgr(), app.File_mgr__cache_mgr(), wiki.File_mgr__repo_mgr(), html_itm, page, page.Hdump_data().Imgs(), gplx.xowa.files.Xof_exec_tid.Tid_wiki_page);
+				Xof_fsdb_mgr fsdb_mgr = wiki.File_mgr().Fsdb_mgr();
+				async_wkr = new Xof_file_wkr(fsdb_mgr.Orig_mgr(), fsdb_mgr.Bin_mgr(), fsdb_mgr.Mnt_mgr(), app.File_mgr__cache_mgr(), wiki.File_mgr__repo_mgr(), html_itm, page, page.Hdump_data().Imgs(), gplx.xowa.files.Xof_exec_tid.Tid_wiki_page);
 				if (wiki.Html_mgr__hdump_enabled()) {
 					wiki.Html_mgr__hdump_wtr().Save(page);
 				}
@@ -261,10 +267,10 @@ class Load_page_wkr implements Gfo_thread_wkr {
 				app.Utl__bfr_mkr().Clear();									// clear bry_bfr_mk only; NOTE: call before page parse, not when page is first added, else threading errors; DATE:2014-05-30
 			this.page = wiki.GetPageByTtl(url, ttl, wiki.Lang(), tab, false);
 			int html_db_id = page.Revision_data().Html_db_id();
-			if (wiki.Html_mgr__hdump_enabled() && html_db_id != -1) {
-				wiki.Html_mgr__hdump_rdr().Get_by_ttl(page);
+			if (wiki.Html_mgr__hdump_enabled())
 				hdump_enabled = true;
-			}
+			if (wiki.Html_mgr__hdump_enabled() && html_db_id != -1)
+				wiki.Html_mgr__hdump_rdr().Get_by_ttl(page);
 			else
 				wiki.ParsePage(page, false);
 			GfoInvkAble_.InvkCmd_val(tab.Cmd_sync(), Xog_tab_itm.Invk_show_url_loaded_swt, this);

@@ -73,7 +73,7 @@ class Xoctg_pagelist_mgr_fxt {
 			Xodb_page page = new Xodb_page();
 			Xodb_category_itm ctg_xtn = Xodb_category_itm.load_(0, 0, hidden, 0, 0, 0);
 			page.Xtn_(ctg_xtn);
-			page.Ttl_wo_ns_(Bry_.new_ascii_(ttl));
+			page.Ttl_page_db_(Bry_.new_ascii_(ttl));
 			init_ctgs.AddMany(page);
 		}
 	}	private ListAdp init_ctgs = ListAdp_.new_();

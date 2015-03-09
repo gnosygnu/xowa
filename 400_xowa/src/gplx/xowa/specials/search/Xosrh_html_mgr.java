@@ -55,7 +55,7 @@ class Xosrh_html_mgr implements GfoInvkAble {
 		Bry_bfr tmp_ttl_bfr = core.Wiki().Appe().Utl__bfr_mkr().Get_b512();
 		for (int i = 0; i < itms_len; i++) {
 			Xodb_page itm = grp.Itms_get_at(i);
-			byte[] itm_ttl = Xoa_ttl.Replace_unders(itm.Ttl_wo_ns());
+			byte[] itm_ttl = Xoa_ttl.Replace_unders(itm.Ttl_page_db());
 			int itm_ns_id = itm.Ns_id();
 			if (itm_ns_id != Xow_ns_.Id_main) {
 				Xow_ns itm_ns = ns_mgr.Ids_get_or_null(itm_ns_id);
@@ -64,7 +64,7 @@ class Xosrh_html_mgr implements GfoInvkAble {
 					.Add(itm_ttl);
 				itm_ttl = tmp_ttl_bfr.Xto_bry_and_clear();
 			}
-			html_itm.Bld_bfr_many(bfr, itm_ttl, itm.Text_len());
+			html_itm.Bld_bfr_many(bfr, itm_ttl, itm.Wtxt_len());
 		}
 		html_all_end.Bld_bfr_many(bfr, search_bry, xowa_idx_bwd, xowa_idx_fwd);
 		tmp_ttl_bfr.Mkr_rls();

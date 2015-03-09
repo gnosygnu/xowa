@@ -65,7 +65,7 @@ class Xob_dump_src_id {
 			while (rdr.MoveNextPeer()) {
 				Xodb_page page = New_page(db_mgr, cur_ns, rdr);
 				list.Add(page);
-				size_len += page.Text_len();
+				size_len += page.Wtxt_len();
 				if (size_len > size_max)
 					break;
 			}
@@ -84,12 +84,12 @@ class Xob_dump_src_id {
 	}
 	private static Xodb_page New_page(Xodb_mgr_sql db_mgr, int ns_id, DataRdr rdr) {
 		Xodb_page rv = new Xodb_page();
-		rv.Ns_id_(ns_id);
 		rv.Id_(rdr.ReadInt(Xodb_page_tbl.Fld_page_id));
-		rv.Ttl_wo_ns_(rdr.ReadBryByStr(Xodb_page_tbl.Fld_page_title));
+		rv.Ns_id_(ns_id);
+		rv.Ttl_page_db_(rdr.ReadBryByStr(Xodb_page_tbl.Fld_page_title));
 		byte[] old_text = rdr.ReadBry(Xodb_text_tbl.Fld_old_text);
 		old_text = db_mgr.Wiki().Appe().Zip_mgr().Unzip(db_mgr.Data_storage_format(), old_text);
-		rv.Text_(old_text);
+		rv.Wtxt_(old_text);
 		return rv;
 	}
 	private static String New_rdr__redirect_clause(byte redirect) {

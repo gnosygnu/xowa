@@ -19,7 +19,7 @@ package gplx.xowa; import gplx.*;
 import gplx.core.primitives.*;	
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.ttls.*;
 import gplx.xowa.wikis.data.*;
-import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*;
+import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.fsdb.meta.*;
 import gplx.xowa.html.hzips.*; import gplx.xowa.html.hdumps.*;
 public interface Xow_wiki extends Xow_ttl_parser {
 	byte[]						Domain_bry();			// EX: en.wikipedia.org
@@ -34,6 +34,7 @@ public interface Xow_wiki extends Xow_ttl_parser {
 	Xow_repo_mgr				File_mgr__repo_mgr();
 	Xof_orig_mgr				File_mgr__orig_mgr();
 	Xof_bin_mgr					File_mgr__bin_mgr();
+	Fsm_mnt_mgr					File_mgr__mnt_mgr();
 	Xow_core_data_mgr			Data_mgr__core_mgr();
 	boolean						Html_mgr__hdump_enabled();
 	Xow_hzip_mgr				Html_mgr__hzip_mgr();

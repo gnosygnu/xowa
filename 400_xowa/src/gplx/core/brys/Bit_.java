@@ -112,8 +112,8 @@ public class Bit_ {
 		int[] rv = new int[Pow_ary_date_short.length];
 		Xto_date_short_int_ary(rv, v);
 		return DateAdp_.seg_(rv);
-	}
-	private static final int[] Pow_ary_date_short = new int[] {1048576, 65536, 2048, 64, 1};
+	}		
+	private static final int[] Pow_ary_date_short = new int[] {1048576, 65536, 2048, 64, 1};	// yndhm -> 12,4,5,5,6
 	private static final int[] Base2_ary = new int[] 
 		{          1,          2,          4,          8,         16,         32,         64,        128
 		,        256,        512,       1024,       2048,       4096,       8192,      16384,      32768

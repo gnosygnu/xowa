@@ -22,35 +22,50 @@ import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.
 public class Xof_orig_mgr {
 	private Xof_orig_wkr[] wkrs; private int wkrs_len;		
 	private Xof_url_bldr url_bldr; private Xow_repo_mgr repo_mgr;
+	private final Xof_img_size img_size = new Xof_img_size();
 	public Xof_orig_mgr() {this.Wkrs__clear();}
 	public void Init_by_wiki(Io_url db_dir, boolean schema_is_1, byte[] domain_bry, Xof_download_wkr download_wkr, Xow_repo_mgr repo_mgr, Xof_url_bldr url_bldr, Xof_fsdb_mode fsdb_mode) {
 		this.repo_mgr = repo_mgr; this.url_bldr = url_bldr;
-		if (fsdb_mode.Tid_wmf()) {
-			Xof_orig_wkr wmf_api = new Xof_orig_wkr__wmf_api(new Xoapi_orig_wmf(), download_wkr, repo_mgr, domain_bry);	// NOTE: do not reinstate without handling scrib / pfunc calls to Orig_mgr
-			this.Wkrs__add_many(wmf_api);
-		}
-		else {
+		if (!fsdb_mode.Tid_wmf()) {		// add view,make; don't add if wmf
 			Xof_orig_wkr__orig_db wkr_xowa_db = new Xof_orig_wkr__orig_db(); 
 			Xof_orig_tbl.Conn__get_or_make(db_dir, wkr_xowa_db.Tbl(), schema_is_1, fsdb_mode);
 			this.Wkrs__add_many(wkr_xowa_db);
 		}
+		if (!fsdb_mode.Tid_make())		// add view,wmf; don't add if make
+			this.Wkrs__add_many(new Xof_orig_wkr__wmf_api(new Xoapi_orig_wmf(), download_wkr, repo_mgr, domain_bry));
 	}
 	public Xof_orig_itm Find_by_ttl_or_null(byte[] ttl) {
 		for (int i = 0; i < wkrs_len; i++) {
 			Xof_orig_wkr wkr = wkrs[i];
-			Xof_orig_itm itm = wkr.Find_as_itm(ttl);
-			if (itm != Xof_orig_itm.Null) return itm;
+			Xof_orig_itm orig = wkr.Find_as_itm(ttl);
+			if (orig == Xof_orig_itm.Null) continue;
+			if (orig.Insert_new()) this.Insert(orig.Repo(), orig.Page(), orig.Ext(), orig.W(), orig.H(), orig.Redirect());
+			return orig;
 		}
 		return Xof_orig_itm.Null;
 	}
 	public void Find_by_list(OrderedHash rv, ListAdp itms, byte exec_tid) {
 		for (int i = 0; i < wkrs_len; i++) {
 			Xof_orig_wkr wkr = wkrs[i];
-			if (wkr.Find_by_list(rv, itms)) break;
+			wkr.Find_by_list(rv, itms);
 		}
-		Xof_orig_rdr_func.Eval(rv, itms, exec_tid, url_bldr, repo_mgr);
+		int len = itms.Count();
+		for (int i = 0; i < len; i++) {
+			try {
+				Xof_fsdb_itm fsdb = (Xof_fsdb_itm)itms.FetchAt(i);
+				fsdb.Orig_exists_n_();																			// default to status = missing
+				Xof_orig_itm orig = (Xof_orig_itm)rv.Fetch(fsdb.Lnki_ttl());
+				if (orig == Xof_orig_itm.Null) continue;
+				if (orig.Insert_new()) this.Insert(orig.Repo(), orig.Page(), orig.Ext(), orig.W(), orig.H(), orig.Redirect());
+				Xof_file_wkr.Eval_orig(exec_tid, orig, fsdb, url_bldr, repo_mgr, img_size);
+				if (!Io_mgr._.ExistsFil(fsdb.Html_view_url()))
+					fsdb.File_exists_n_();
+			} catch (Exception e) {
+				throw Err_.err_(e, "orig: {0}", Err_.Message_gplx_brief(e));
+			}
+		}
 	}
-	public void Insert(byte repo, byte[] page, int ext, int w, int h, byte[] redirect, byte status) {
+	public void Insert(byte repo, byte[] page, int ext, int w, int h, byte[] redirect) {
 		for (int i = 0; i < wkrs_len; i++) {
 			Xof_orig_wkr wkr = wkrs[i];
 			if (wkr.Add_orig(repo, page, ext, w, h, redirect)) break;

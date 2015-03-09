@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.portal; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import gplx.xowa.wikis.*; import gplx.xowa.gui.*; import gplx.xowa.html.sidebar.*; import gplx.xowa.pages.*;
+import gplx.xowa.wikis.*; import gplx.xowa.gui.*; import gplx.xowa.html.sidebar.*; import gplx.xowa.pages.*; import gplx.xowa.langs.vnts.*;
 import gplx.xowa.apis.xowa.html.*; import gplx.xowa.apis.xowa.html.skins.*;
 public class Xow_portal_mgr implements GfoInvkAble {
 	private Xowe_wiki wiki; private boolean lang_is_rtl; private Xoapi_toggle_itm toggle_itm;
@@ -67,8 +67,15 @@ public class Xow_portal_mgr implements GfoInvkAble {
 			talk_cls = Xow_portal_mgr.Cls_selected_y;
 		else
 			subj_cls = Xow_portal_mgr.Cls_selected_y;
+		Bry_fmtr_arg vnt_menu = null;
+//			Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();	// VNT; DATE:2015-03-03
+//			if (vnt_mgr.Enabled()) {
+//				Xolg_vnt_grp_fmtr vnt_menu_fmtr = vnt_mgr.Vnt_mnu_fmtr();
+//				vnt_menu_fmtr.Init(vnt_mgr.Vnt_grp(), ttl.Full_db(), vnt_mgr.Cur_vnt());
+//				vnt_menu = wiki.Lang().Vnt_mgr().Enabled() ? vnt_menu_fmtr : null;
+//			}
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();
-		div_ns_fmtr.Bld_bfr_many(tmp_bfr, Bry_.Add(Xoh_href_parser.Href_wiki_bry, ttl.Subj_txt()), subj_cls, Bry_.Add(Xoh_href_parser.Href_wiki_bry, ttl.Talk_txt()), talk_cls);
+		div_ns_fmtr.Bld_bfr_many(tmp_bfr, Bry_.Add(Xoh_href_parser.Href_wiki_bry, ttl.Subj_txt()), subj_cls, Bry_.Add(Xoh_href_parser.Href_wiki_bry, ttl.Talk_txt()), talk_cls, vnt_menu);
 		return tmp_bfr.Mkr_rls().Xto_bry_and_clear();
 	}
 	private byte[] Ns_cls_by_ord(Xow_ns_mgr ns_mgr, int ns_ord) {
@@ -94,14 +101,14 @@ public class Xow_portal_mgr implements GfoInvkAble {
 	public byte[] Div_home_bry() {return api_skin != null && api_skin.Sidebar_home_enabled() ? div_home_bry : Bry_.Empty;} private byte[] div_home_bry = Bry_.Empty;
 	public byte[] Div_wikis_bry(Bry_bfr_mkr bfr_mkr) {
 		if (toggle_itm == null)	// TEST:lazy-new b/c Init_by_wiki
-			toggle_itm = wiki.Appe().Api_root().Html().Page().Toggle_mgr().Get_or_new("offline-wikis").Init(wiki.Appe().User().Wiki());
+			toggle_itm = wiki.Appe().Api_root().Html().Page().Toggle_mgr().Get_or_new("offline-wikis").Init(wiki.Appe().User().Wiki(), Bry_.new_ascii_("Wikis"));
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();
 		div_wikis_fmtr.Bld_bfr_many(tmp_bfr, toggle_itm.Html_toggle_btn(), toggle_itm.Html_toggle_hdr());
 		return tmp_bfr.Mkr_rls().Xto_bry_and_clear();
 	}
 	public byte[] Missing_ns_cls() {return missing_ns_cls;} public Xow_portal_mgr Missing_ns_cls_(byte[] v) {missing_ns_cls = v; return this;} private byte[] missing_ns_cls;	// NOTE: must be null due to Init check above
 	private Bry_fmtr div_personal_fmtr = Bry_fmtr.new_("~{portal_personal_subj_href};~{portal_personal_subj_text};~{portal_personal_talk_cls};~{portal_personal_talk_href};~{portal_personal_talk_cls};", "portal_personal_subj_href", "portal_personal_subj_text", "portal_personal_subj_cls", "portal_personal_talk_href", "portal_personal_talk_cls");
-	private Bry_fmtr div_ns_fmtr = Bry_fmtr.new_("~{portal_ns_subj_href};~{portal_ns_subj_cls};~{portal_ns_talk_href};~{portal_ns_talk_cls}", "portal_ns_subj_href", "portal_ns_subj_cls", "portal_ns_talk_href", "portal_ns_talk_cls");
+	private Bry_fmtr div_ns_fmtr = Bry_fmtr.new_("~{portal_ns_subj_href};~{portal_ns_subj_cls};~{portal_ns_talk_href};~{portal_ns_talk_cls};~{portal_div_vnts}", "portal_ns_subj_href", "portal_ns_subj_cls", "portal_ns_talk_href", "portal_ns_talk_cls", "portal_div_vnts");
 	private Bry_fmtr div_view_fmtr = Bry_fmtr.new_("", "portal_view_read_cls", "portal_view_edit_cls", "portal_view_html_cls", "search_text");
 	private Bry_fmtr div_logo_fmtr = Bry_fmtr.new_("", "portal_nav_main_href", "portal_logo_url");
 	private Bry_fmtr div_wikis_fmtr = Bry_fmtr.new_("", "toggle_btn", "toggle_hdr");
@@ -122,8 +129,8 @@ public class Xow_portal_mgr implements GfoInvkAble {
 		return this;
 	}
 	private static final String Invk_div_personal_ = "div_personal_", Invk_div_view_ = "div_view_", Invk_div_ns_ = "div_ns_", Invk_div_home_ = "div_home_", Invk_div_wikis_ = "div_wikis_"
-		, Invk_missing_ns_cls = "missing_ns_cls", Invk_missing_ns_cls_ = "missing_ns_cls_", Invk_missing_ns_cls_list = "missing_ns_cls_list"
-		;
+	, Invk_missing_ns_cls = "missing_ns_cls", Invk_missing_ns_cls_ = "missing_ns_cls_", Invk_missing_ns_cls_list = "missing_ns_cls_list"
+	;
 	public static final String Invk_div_logo_ = "div_logo_";
 	private static KeyVal[] Options_missing_ns_cls_list = KeyVal_.Ary(KeyVal_.new_("", "Show as blue link"), KeyVal_.new_("new", "Show as red link"), KeyVal_.new_("xowa_display_none", "Hide")); 
 	private static final byte[] Missing_ns_cls_hide = Bry_.new_ascii_("xowa_display_none");

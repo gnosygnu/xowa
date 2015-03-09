@@ -96,7 +96,7 @@ class Xosrh_qry_itm {
 				ids = ListAdp_.new_();
 				for (int i = 0; i < ids_len; i++) {
 					Xodb_page itm = (Xodb_page)tmp_ids.FetchAt(i);
-					byte[] itm_ttl = itm.Ttl_wo_ns();
+					byte[] itm_ttl = itm.Ttl_page_db();
 					itm_ttl = wiki.Lang().Case_mgr().Case_build_lower(itm_ttl, 0, itm_ttl.length);	// lowercase ttl (since all search words are lower-cased)
 					itm_ttl = Bry_.Replace(itm_ttl, Byte_ascii.Underline, Byte_ascii.Space);	// replace _ with " " (assume user will use spaces in search term)
 					if (Bry_finder.Find_fwd(itm_ttl, word) != Bry_.NotFound)

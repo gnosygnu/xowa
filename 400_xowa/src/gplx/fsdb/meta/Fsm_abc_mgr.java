@@ -42,14 +42,12 @@ public class Fsm_abc_mgr implements RlsAble {
 	}
 	public void Fil_insert(Fsd_fil_itm rv    , byte[] dir, byte[] fil, int ext_id, DateAdp modified, String hash, long bin_len, gplx.ios.Io_stream_rdr bin_rdr) {
 		int bin_db_id = bin_mgr.Get_id_for_insert(bin_len);
-		rv.Db_bin_id_(bin_db_id);
 		int fil_id = atr_mgr.Fil_insert(rv, dir, fil, ext_id, modified, hash, bin_db_id, bin_len, bin_rdr);
 		bin_len = bin_mgr.Insert(bin_db_id, fil_id, Fsd_bin_tbl.Owner_tid_fil, bin_len, bin_rdr);
 		bin_mgr.Increment(bin_len);
 	}
 	public void Thm_insert(Fsd_thm_itm rv, byte[] dir, byte[] fil, int ext_id, int w, int h, double thumbtime, int page, DateAdp modified, String hash, long bin_len, gplx.ios.Io_stream_rdr bin_rdr) {
 		int bin_db_id = bin_mgr.Get_id_for_insert(bin_len);
-		rv.Db_bin_id_(bin_db_id);
 		int thm_id = atr_mgr.Thm_insert(rv, dir, fil, ext_id, w, h, thumbtime, page, modified, hash, bin_db_id, bin_len, bin_rdr);
 		bin_len = bin_mgr.Insert(bin_db_id, thm_id, Fsd_bin_tbl.Owner_tid_thm, bin_len, bin_rdr);
 		bin_mgr.Increment(bin_len);

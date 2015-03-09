@@ -44,8 +44,8 @@ public class Db_qry_insert implements Db_qry_arg_owner {
 	}
 	public Db_qry_arg_owner Key_arg_(String k, int v)		{return Arg_obj_type_(k, v, Db_val_type.Tid_int32);}
 	public Db_qry_arg_owner Key_arg_(String k, String v)	{return Arg_obj_type_(k, v, Db_val_type.Tid_varchar);}
-	public Db_qry_select Select() {return select;} Db_qry_select select;
-	public Db_qry_insert Select_(Db_qry_select qry) {this.select = qry; return this;}
+	public Db_qry__select_cmd Select() {return select;} Db_qry__select_cmd select;
+	public Db_qry_insert Select_(Db_qry__select_cmd qry) {this.select = qry; return this;}
 	public Db_qry_insert Cols_(String... ary) {
 		if (cols == null) cols = Sql_select_fld_list.new_();
 		for (String fld : ary)

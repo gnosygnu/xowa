@@ -32,7 +32,7 @@ public abstract class Joins_base_tst {
 		conn.Exec_qry(new Db_qry_insert("dbs_crud_ops").Arg_("id", 1).Arg_("name", "you"));
 		conn.Exec_qry(new Db_qry_insert("dbs_join1").Arg_("join_id", 0).Arg_("join_data", "data0"));
 		conn.Exec_qry(new Db_qry_insert("dbs_join1").Arg_("join_id", 1).Arg_("join_data", "data1"));
-		Db_qry_select select = Db_qry_select.new_().From_("dbs_crud_ops").Join_("dbs_join1", "j1", Sql_join_itm.new_("join_id", "dbs_crud_ops", "id")).Cols_("id", "name", "join_data");
+		Db_qry__select_cmd select = Db_qry__select_cmd.new_().From_("dbs_crud_ops").Join_("dbs_join1", "j1", Sql_join_itm.new_("join_id", "dbs_crud_ops", "id")).Cols_("id", "name", "join_data");
 
 		DataRdr rdr = conn.Exec_qry_as_rdr(select);
 		GfoNde table = GfoNde_.rdr_(rdr);

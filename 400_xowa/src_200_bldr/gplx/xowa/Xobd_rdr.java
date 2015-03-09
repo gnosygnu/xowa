@@ -45,7 +45,7 @@ public class Xobd_rdr implements Xob_cmd {
 			while (true) {
 				int cur_pos = parser.Parse_page(page, usr_dlg, fil, fil.Bfr(), prv_pos, ns_mgr); if (cur_pos == Bry_.NotFound) break;
 				if (cur_pos < prv_pos)
-					bldr.StatusMgr_prog_fmt(fil.Fil_pos(), fil_len, 1, optRdrFillFmt, Int_.Xto_str_pad_bgn((int)(fil.Fil_pos() / Io_mgr.Len_mb), Int_.DigitCount((int)(fil.Fil_len() / Io_mgr.Len_mb))), "", String_.new_utf8_(page.Ttl_w_ns())); // ;
+					bldr.StatusMgr_prog_fmt(fil.Fil_pos(), fil_len, 1, optRdrFillFmt, Int_.Xto_str_pad_bgn((int)(fil.Fil_pos() / Io_mgr.Len_mb), Int_.DigitCount((int)(fil.Fil_len() / Io_mgr.Len_mb))), "", String_.new_utf8_(page.Ttl_full_db()));
 				prv_pos = cur_pos;
 				try {
 					for (int i = 0; i < wkr_ary_len; i++)
@@ -55,7 +55,7 @@ public class Xobd_rdr implements Xob_cmd {
 					Err_.Noop(e);
 					long dividend = fil.Fil_pos();
 					if (dividend >= fil_len) dividend = fil_len - 1; // prevent % from going over 100
-					String msg = DecimalAdp_.CalcPctStr(dividend, fil_len, "00.00") + "|" + String_.new_utf8_(page.Ttl_w_ns()) + "|" + Err_.Message_lang(e)  + "|" + Xot_tmpl_wtr.Err_string; Xot_tmpl_wtr.Err_string = "";
+					String msg = DecimalAdp_.CalcPctStr(dividend, fil_len, "00.00") + "|" + String_.new_utf8_(page.Ttl_full_db()) + "|" + Err_.Message_lang(e)  + "|" + Xot_tmpl_wtr.Err_string; Xot_tmpl_wtr.Err_string = "";
 					bldr.Usr_dlg().Log_wtr().Log_msg_to_session(msg);
 					ConsoleAdp._.WriteLine(msg);
 				}

@@ -20,4 +20,5 @@ public interface Xoa_page {
 	Xoa_ttl					Ttl();
 	Xoa_url					Url();
 	void					Xtn_gallery_packed_exists_y_();
+	boolean					Exists();
 }

@@ -46,7 +46,7 @@ class Xosrh_page_mgr_fxt {
 		for (int i = bgn; i < end; i++) {
 			byte[] id_bry = new byte[5];	// NOTE: do not reuse; will break hive_mgr
 			Base85_utl.XtoStrByAry(i, id_bry, 0, 5);
-			tmp_itm.Ns_id_(Xow_ns_.Id_main).Set_all_(i, 0, i - bgn, false, 10, Bry_.XtoStrBytesByInt(i, 0));
+			tmp_itm.Ns_id_(Xow_ns_.Id_main).Init(i, Bry_.XtoStrBytesByInt(i, 0), false, 10, 0, i - bgn);
 			Xodb_page_.Txt_id_save(tmp_bfr, tmp_itm);
 			hive_mgr.Create(id_bry, tmp_bfr.Xto_bry_and_clear(), null);
 		}
@@ -61,7 +61,7 @@ class Xosrh_page_mgr_fxt {
 		for (int i = 0; i < len; i++) {
 			int itm_id = i + bgn;
 			int itm_len = itm_id;
-			Xodb_page itm = Xodb_page.srch_(itm_id, itm_len);
+			Xodb_page itm = Xodb_page.new_srch(itm_id, itm_len);
 			rv.Add(itm);
 		}
 		return new Xosrh_page_mgr_searcher_mok(rv);

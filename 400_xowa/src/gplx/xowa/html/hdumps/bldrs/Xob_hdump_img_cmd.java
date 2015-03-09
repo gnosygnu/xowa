@@ -40,16 +40,16 @@ class Xob_hdump_img_cmd extends Xob_itm_basic_base implements Xob_cmd {
 				Save(cur_page_id, bfr.Xto_bry_and_clear());
 				cur_page_id = lnki_page_id;
 			}
-			int html_uid			= rdr.Read_int(1);
-			byte[] lnki_ttl			= rdr.Read_bry(2);
-			int html_w				= rdr.Read_int(3);
-			int html_h				= rdr.Read_int(4);
-			int file_repo_id		= rdr.Read_int(5);
-			int file_ext_id			= rdr.Read_int(6);
-			boolean file_is_orig		= rdr.Read_int(7) == 1;
-			double file_time		= rdr.Read_double(8);
-			int file_page			= rdr.Read_int(9);
-			Xohd_data_itm__base.Data_write_static(bfr, 0, lnki_ttl, Byte_.Zero, 0, 0, Xof_img_size.Upright_null, html_uid, html_w, html_h, file_repo_id, file_ext_id, file_is_orig, html_w, file_time, file_page);
+//				int html_uid			= rdr.Read_int(1);
+//				byte[] lnki_ttl			= rdr.Read_bry(2);
+//				int html_w				= rdr.Read_int(3);
+//				int html_h				= rdr.Read_int(4);
+//				int file_repo_id		= rdr.Read_int(5);
+//				int file_ext_id			= rdr.Read_int(6);
+//				boolean file_is_orig		= rdr.Read_int(7) == 1;
+//				double file_time		= rdr.Read_double(8);
+//				int file_page			= rdr.Read_int(9);
+//				Xohd_data_itm__base.Data_write_static(bfr, 0, lnki_ttl, Byte_.Zero, 0, 0, Xof_img_size.Upright_null, html_uid, html_w, html_h, file_repo_id, file_ext_id, file_is_orig, html_w, file_time, file_page);
 		}
 		Save(cur_page_id, bfr.Xto_bry_and_clear());;
 	}
@@ -91,7 +91,7 @@ class Page_async_cmd__img implements Page_async_cmd {
 		missing.Clear();
 		for (int i = 0; i < len; ++i) {
 			Xohd_data_itm__base itm = ary[i];
-			boolean exists = Io_mgr._.ExistsFil(itm.File_url());
+			boolean exists = Io_mgr._.ExistsFil(itm.Html_view_url());
 			if (!exists) missing.Add(itm);
 		}
 	}
@@ -104,3 +104,13 @@ class Page_async_cmd__img implements Page_async_cmd {
 		}
 	}
 }
+/*		
+CREATE TABLE xtn_gallery
+( src_page_id		integer		NOT NULL
+, html_uid			integer		NOT NULL
+, box_max			integer		NOT NULL
+, box_w				integer		NOT NULL
+, img_w				integer		NOT NULL
+, img_pad			integer		NOT NULL
+);	
+*/

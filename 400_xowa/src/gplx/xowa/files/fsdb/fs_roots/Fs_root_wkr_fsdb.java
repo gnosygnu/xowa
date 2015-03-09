@@ -30,7 +30,7 @@ public class Fs_root_wkr_fsdb {
 		Orig_fil_itm orig_itm = orig_dir_mgr.Get_by_ttl(lnki_ttl);
 		if (orig_itm == Orig_fil_itm.Null) return false;
 		Io_url orig_url = orig_itm.Fil_url();
-		if (fsdb_itm.Lnki_type_as_mode() == Xof_repo_itm.Mode_orig) {
+		if (fsdb_itm.File_is_orig()) {
 			fsdb_itm.Html_size_(orig_itm.Fil_w(), orig_itm.Fil_h());
 			fsdb_itm.Html_view_url_(orig_url);
 			fsdb_itm.Html_orig_url_(orig_url);

@@ -24,11 +24,11 @@ public class Xow_lang_mgr {
 	}
 	public Bry_fmtr Html_div() {return html_div;} private final Bry_fmtr html_div = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<div id=\"xowa-lang\">"
-	, "  <h5>~{langs_hdr}~{wikidata_link}~{toggle_btn}</h5>"
+	, "  <h5>~{toggle_btn}~{wikidata_link}</h5>"
 	, "  <div~{toggle_hdr}>~{grps}"
 	, "  </div>"
 	, "</div>"
-	), "langs_hdr", "wikidata_link", "toggle_btn", "toggle_hdr", "grps");
+	), "wikidata_link", "toggle_btn", "toggle_hdr", "grps");
 	public Bry_fmtr Html_wikidata_link() {return html_wikidata_link;} private final Bry_fmtr html_wikidata_link = Bry_fmtr.new_(" (<a href=\"/site/www.wikidata.org/wiki/~{qid}\">wikidata</a>)", "qid");
 	public void Clear() {hash.Clear();}
 	public void Itms_reg(Xow_xwiki_itm xwiki, Xoac_lang_itm lang) {
@@ -109,8 +109,8 @@ class Xow_lang_html implements Bry_fmtr_arg {
 				Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b128().Mkr_rls();
 				byte[] msg_lang = wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_page_lang_header);
 				byte[] wikidata_link = Bry_.Len_eq_0(qid) ? Bry_.Empty : lang_mgr.Html_wikidata_link().Bld_bry_many(tmp_bfr, qid);
-				toggle_itm.Init(wiki);
-				lang_mgr.Html_div().Bld_bfr_many(bfr, msg_lang, wikidata_link, toggle_itm.Html_toggle_btn(), toggle_itm.Html_toggle_hdr(), this);
+				toggle_itm.Init(wiki, msg_lang);
+				lang_mgr.Html_div().Bld_bfr_many(bfr, wikidata_link, toggle_itm.Html_toggle_btn(), toggle_itm.Html_toggle_hdr(), this);
 				stage = 0;
 				break;
 			}
@@ -171,7 +171,7 @@ class Xow_lang_html implements Bry_fmtr_arg {
 				if (i != 0) bfr.Add_byte_comma();
 				byte[] badge = badges[i];
 				byte[] badge_cls = (byte[])badges_hash.Get_by_bry(badge);
-				if (badge_cls == null) Gfo_usr_dlg_._.Warn_many("", "", "unknown badge: badge~{0}", String_.new_utf8_(badge));
+				if (badge_cls == null) Gfo_usr_dlg_._.Warn_many("", "", "unknown badge: badge=~{0}", String_.new_utf8_(badge));
 				else bfr.Add(badge_cls);
 			}
 		}
@@ -187,5 +187,6 @@ class Xow_lang_html implements Bry_fmtr_arg {
 	.Add_str_obj("Q17437796", Bry_.new_ascii_("badge-featuredarticle"))
 	.Add_str_obj("Q17559452", Bry_.new_ascii_("badge-recommendedarticle"))
 	.Add_str_obj("Q17506997", Bry_.new_ascii_("badge-featuredlist"))
+	.Add_str_obj("Q17580674", Bry_.new_ascii_("badge-featuredportal"))
 	;
 }

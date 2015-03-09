@@ -43,7 +43,7 @@ public class Xodb_categorylinks_tbl {
 		gplx.core.criterias.Criteria comp_crt = !arg_is_from 
 			? Db_crt_.mte_(Fld_cl_sortkey, arg_sortkey_str)		// from:  sortkey >= 'val'
 			: Db_crt_.lte_(Fld_cl_sortkey, arg_sortkey_str);	// until: sortkey <= 'val'
-		Db_qry_select qry = Db_qry_.select_().Cols_(Fld_cl_from, Fld_cl_sortkey).From_(Tbl_name)
+		Db_qry__select_cmd qry = Db_qry_.select_().Cols_(Fld_cl_from, Fld_cl_sortkey).From_(Tbl_name)
 			.Where_(gplx.core.criterias.Criteria_.And_many(Db_crt_.eq_(Fld_cl_to_id, -1), Db_crt_.eq_(Fld_cl_type_id, arg_tid), comp_crt))
 			.OrderBy_(Fld_cl_sortkey, !arg_is_from)
 			.Limit_(limit + 1);									// + 1 to get last_plus_one for next page / previous page

@@ -59,11 +59,29 @@ public class Db_qry__select_in_tbl implements Db_qry {
 			return sb.XtoStr();
 		}
 	}
-	public static Db_qry__select_in_tbl new_(String base_table, String[] where_flds, String[] select_flds) {
-		Db_qry__select_in_tbl rv = new Db_qry__select_in_tbl(base_table, select_flds, where_flds, null, null, null, null);
+	public static Db_qry__select_in_tbl new_(String base_table, String[] where_flds, String[] select_flds, String[] order_flds) {
+		String order_by_sql = null;
+		if (order_flds != Order_by_null) {
+			int len = order_flds.length;
+			switch (len) {
+				case 0: break;
+				case 1: order_by_sql = order_flds[0]; break;
+				default:
+					Bry_bfr bfr = Bry_bfr.new_();
+					for (int i = 0; i < len; ++i) {
+						String order_fld = order_flds[i];
+						if (i != 0) bfr.Add_byte_comma();
+						bfr.Add_str_ascii(order_fld);
+					}
+					order_by_sql = bfr.Xto_str_and_clear();
+					break;
+			}
+		}
+		Db_qry__select_in_tbl rv = new Db_qry__select_in_tbl(base_table, select_flds, where_flds, null, null, order_by_sql, null);
 		rv.where = where_flds.length == 0 ? Db_crt_.Wildcard : Db_crt_.eq_many_(where_flds);
 		return rv;
 	}
 	public static Db_qry__select_in_tbl as_(Object obj) {return obj instanceof Db_qry__select_in_tbl ? (Db_qry__select_in_tbl)obj : null;}
 	public static final String[] Where_flds__all = String_.Ary_empty;
+	public static final String[] Order_by_null = null;
 }

@@ -72,7 +72,7 @@ public class Xof_ext_ {
 	private static final Xof_ext[] Ary = new Xof_ext[Id__max];
 
 	public static byte[] Get_ext_by_id_(int id) {
-		if (id < 0 || id >= Id__max) throw Err_.new_fmt_("index out of bounds; {id}", id);
+		if (id < 0 || id >= Id__max) throw Err_.new_fmt_("index out of bounds; {0}", id);
 		return Bry__ary[id];
 	}
 	public static int Get_id_by_ext_(byte[] ext_bry) {

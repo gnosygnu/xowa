@@ -71,7 +71,7 @@ public class Xof_xfer_queue_html_wmf_api_tst {
 	}
 	@Test  public void Upright_defect() {	// PURPOSE.fix: upright not working;  PAGE:en.w:Beethoven; [[File:Rudolf-habsburg-olmuetz.jpg|thumb|upright|]]; changed upright to = Upright_default; DATE:2014-05-23
 		fxt	.ini_page_api("en_wiki", "A.png", "", 1378, 1829);
-		fxt	.Lnki_("A.png", true, -1, -1, Xof_img_size.Upright_default_marker, Xof_doc_thumb.Null_as_int)
+		fxt	.Lnki_("A.png", true, -1, -1, Xof_img_size.Upright_default_marker, Xof_lnki_time.Null_as_int)
 			.Src(	fxt.img_("mem/src/en.wikipedia.org/thumb/7/70/A.png/170px-A.png", 170, 226))
 			.Trg(	fxt.img_("mem/trg/en.wikipedia.org/fit/7/0/A.png/170px.png", 170, 226)
 				,	fxt.reg_("mem/xowa/file/#meta/en.wikipedia.org/7/70.csv"		, "A.png|y||2?1378,1829|1?170,226")
@@ -80,7 +80,7 @@ public class Xof_xfer_queue_html_wmf_api_tst {
 	}
 	@Test  public void Height_only() {	// PURPOSE.fix: height only was still using old infer-size code; EX:w:[[File:Upper and Middle Manhattan.jpg|x120px]]; DATE:2012-12-27
 		fxt	.ini_page_api("en_wiki", "A.png", "", 12591, 1847);
-		fxt	.Lnki_("A.png", false, -1, 130, Xop_lnki_tkn.Upright_null, Xof_doc_thumb.Null_as_int)
+		fxt	.Lnki_("A.png", false, -1, 130, Xop_lnki_tkn.Upright_null, Xof_lnki_time.Null_as_int)
 			.Src(	fxt.img_("mem/src/en.wikipedia.org/thumb/7/70/A.png/887px-A.png", 887, 130))
 			.Trg(	fxt.img_("mem/trg/en.wikipedia.org/fit/7/0/A.png/887px.png", 887, 130)
 				,	fxt.reg_("mem/xowa/file/#meta/en.wikipedia.org/7/70.csv"		, "A.png|y||2?12591,1847|1?887,130")
@@ -89,7 +89,7 @@ public class Xof_xfer_queue_html_wmf_api_tst {
 	}
 	@Test  public void Width_only_height_ignored() {// PURPOSE.fix: if height is not specified, do not recalc; needed when true scaled height is 150x151 but WM has 150x158; defect would discard 150x158; EX:[[File:Tokage_2011-07-15.jpg|150px]] simple.wikipedia.org/wiki/2011_Pacific_typhoon_season; DATE:2013-06-03
 		fxt	.ini_page_api("en_wiki", "A.png", "", 4884, 4932);
-		fxt	.Lnki_("A.png", true, 150, -1, Xop_lnki_tkn.Upright_null, Xof_doc_thumb.Null_as_int)
+		fxt	.Lnki_("A.png", true, 150, -1, Xop_lnki_tkn.Upright_null, Xof_lnki_time.Null_as_int)
 			.Src(	fxt.img_("mem/src/en.wikipedia.org/thumb/7/70/A.png/150px-A.png", 150, 158))
 			.Trg(	fxt.img_("mem/trg/en.wikipedia.org/fit/7/0/A.png/150px.png", 150, 158)
 				,	fxt.reg_("mem/xowa/file/#meta/en.wikipedia.org/7/70.csv"		, "A.png|y||2?4884,4932|1?150,158")
@@ -97,7 +97,7 @@ public class Xof_xfer_queue_html_wmf_api_tst {
 			.tst();
 	}
 	@Test  public void Missing_was_not_being_marked() {	// PURPOSE.fix: missing image was not showing up as repo=x in meta; DATE:2013-01-10
-		fxt	.Lnki_("A.png", false, -1, 130, Xop_lnki_tkn.Upright_null, Xof_doc_thumb.Null_as_int)
+		fxt	.Lnki_("A.png", false, -1, 130, Xop_lnki_tkn.Upright_null, Xof_lnki_time.Null_as_int)
 			.Src()
 			.Trg(	fxt.reg_("mem/xowa/file/#meta/en.wikipedia.org/7/70.csv"		, "A.png|x||0?0,0|")
 				)
@@ -142,7 +142,7 @@ public class Xof_xfer_queue_html_wmf_api_tst {
 	@Test  public void Ogg_audio() {	// PURPOSE: ogg is audio; (a) do not download thumb; (b) get from correct wiki;  DATE:2013-08-03
 		fxt	.ini_page_create_commons("File:A.ogg");
 		fxt	.ini_page_api("commons", "A.ogg", "", 0, 0);
-		fxt	.Lnki_("A.ogg", false, -1, -1, 1, Xof_doc_thumb.Null_as_int)
+		fxt	.Lnki_("A.ogg", false, -1, -1, 1, Xof_lnki_time.Null_as_int)
 			.Src(	fxt.img_("mem/src/commons.wikimedia.org/4/42/A.ogg", 0, 0))
 			.Trg(	fxt.img_("mem/trg/commons.wikimedia.org/raw/4/2/A.ogg", 0, 0)
 				,	fxt.reg_("mem/xowa/file/#meta/en.wikipedia.org/4/42.csv"		, "A.ogg|0||1?0,0|0?0,0")
@@ -159,7 +159,7 @@ public class Xof_xfer_queue_html_wmf_api_tst {
 	@Test  public void Imap() { // PURPOSE: check that imap downloads orig, even when thumb is requested; DATE:2014-08-08
 		fxt	.ini_page_create_commons("File:A.png");
 		fxt	.ini_page_api("commons", "A.png", "", 180, 160);
-		fxt	.Lnki_("A.png", true, 90, Xof_img_size.Size_null_deprecated, Xof_img_size.Size_null_deprecated, Xof_doc_thumb.Null_as_int);	// thumbtime of 2 specified; will be ignored below
+		fxt	.Lnki_("A.png", true, 90, Xof_img_size.Size_null_deprecated, Xof_img_size.Size_null_deprecated, Xof_lnki_time.Null_as_int);	// thumbtime of 2 specified; will be ignored below
 		fxt	.Xfer_itm().Html_elem_tid_(Xof_html_elem.Tid_imap);
 		fxt	.Src(	fxt.img_("mem/src/commons.wikimedia.org/thumb/7/70/A.png/90px-A.png", 90, 80))
 			.Trg(	fxt.img_("mem/trg/commons.wikimedia.org/fit/7/0/A.png/90px.png", 90, 80)

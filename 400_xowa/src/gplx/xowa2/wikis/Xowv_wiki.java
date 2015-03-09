@@ -19,7 +19,7 @@ package gplx.xowa2.wikis; import gplx.*; import gplx.xowa2.*;
 import gplx.core.primitives.*;
 import gplx.xowa.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.langs.cases.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.html.hzips.*;
 import gplx.xowa.wikis.data.*;
-import gplx.xowa.files.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.bins.*;
+import gplx.xowa.files.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.bins.*; import gplx.fsdb.meta.*;
 import gplx.xowa.dbs.tbls.*; import gplx.dbs.*; import gplx.xowa.html.hdumps.*; import gplx.xowa.wikis.*; import gplx.xowa.files.repos.*;
 import gplx.xowa2.apps.*; import gplx.xowa2.wikis.specials.*; import gplx.xowa2.gui.*;
 public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser {
@@ -30,13 +30,14 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser {
 		this.domain_itm = Xow_domain_.parse(domain_bry);
 		this.domain_tid = domain_itm.Domain_tid();
 		this.domain_abrv = Xow_wiki_alias.Build_alias(Xow_domain_.parse(domain_bry));
-		this.ns_mgr = Xow_ns_mgr_.default_(app.Utl_case_mgr()); // new Xow_ns_mgr(app.Utl_case_mgr()); // FIXME
+		this.ns_mgr = Xow_ns_mgr_.default_(app.Utl_case_mgr());
 		this.data_mgr__core_mgr = new Xowv_core_data_mgr(domain_str, wiki_root_dir);
 		this.html_mgr__hzip_mgr = new Xow_hzip_mgr(app.Usr_dlg(), this);
 		this.html_mgr__hdump_rdr = new Xohd_hdump_rdr(app, this);
 		this.xwiki_mgr = new Xow_xwiki_mgr();
 		this.special_mgr = new Xosp_special_mgr(this);
-		this.fsys_mgr = new Xow_fsys_mgr(wiki_root_dir, wiki_root_dir.OwnerDir().OwnerDir().GenSubDir_nest("file", domain_str));
+		Io_url wiki_file_dir = domain_tid == Xow_domain_.Tid_int_home ? wiki_root_dir : wiki_root_dir.OwnerDir().OwnerDir().GenSubDir_nest("file", domain_str);
+		this.fsys_mgr = new Xow_fsys_mgr(wiki_root_dir, wiki_file_dir);
 	}
 	public Xoa_app				App() {return app;}
 	public byte[]				Domain_bry() {return domain_bry;} private final byte[] domain_bry;
@@ -51,6 +52,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser {
 	public Xof_fsdb_mode		File_mgr__fsdb_mode() {return file_mgr__fsdb_mode;} private final Xof_fsdb_mode file_mgr__fsdb_mode = Xof_fsdb_mode.new_view();
 	public Xof_orig_mgr			File_mgr__orig_mgr() {return fsdb_mgr.Orig_mgr();}
 	public Xof_bin_mgr			File_mgr__bin_mgr() {return fsdb_mgr.Bin_mgr();}
+	public Fsm_mnt_mgr			File_mgr__mnt_mgr() {return fsdb_mgr.Mnt_mgr();}
 	public boolean					Html_mgr__hdump_enabled() {return Bool_.Y;}
 	public Xow_hzip_mgr			Html_mgr__hzip_mgr() {return html_mgr__hzip_mgr;} private final Xow_hzip_mgr html_mgr__hzip_mgr;
 	public Xohd_hdump_rdr		Html_mgr__hdump_rdr() {return html_mgr__hdump_rdr;} private final Xohd_hdump_rdr html_mgr__hdump_rdr;
@@ -61,7 +63,8 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser {
 	public Xoav_app Appv() {return app;} private final Xoav_app app;
 	public void Pages_get(Xog_page rv, Gfo_url url, Xoa_ttl ttl) {
 		if (data_mgr__core_mgr.Init()) {
-			file_mgr__repo_mgr.Add_repo(app, Bry_.new_utf8_("commons.wikimedia.org"), Bry_.new_utf8_("simple.wikipedia.org"));
+			file_mgr__repo_mgr.Add_repo(app, fsys_mgr.File_dir(), Bry_.new_utf8_("commons.wikimedia.org"), Bry_.new_utf8_("simple.wikipedia.org"));
+			file_mgr__repo_mgr.Add_repo(app, fsys_mgr.File_dir(), Bry_.new_utf8_("simple.wikipedia.org"), Bry_.new_utf8_("commons.wikimedia.org"));
 			fsdb_mgr.Init_by_wiki(this);
 			data_mgr__core_mgr.Tbl__ns().Select_all(0, ns_mgr);
 			html_mgr__hdump_rdr.Init_by_db(data_mgr__core_mgr);

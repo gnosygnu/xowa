@@ -56,6 +56,7 @@ public class Scrib_lib_title implements Scrib_lib {
 	;
 	private static final String[] Proc_names = String_.Ary(Invk_newTitle, Invk_makeTitle, Invk_getExpensiveData, Invk_getUrl, Invk_getContent, Invk_getFileInfo, Invk_getCurrentTitle, Invk_protectionLevels, Invk_cascadingProtection);
 	public boolean NewTitle(Scrib_proc_args args, Scrib_proc_rslt rslt) {
+		if (args.Len() == 0) return rslt.Init_obj(null);	// invalid title, return null; EX:{{#invoke:Message box|fmbox}} DATE:2015-03-04
 		byte[] ttl_bry = args.Pull_bry(0);
 		Object ns_obj = args.Cast_obj_or_null(1);
 		Xowe_wiki wiki = core.Wiki();
@@ -136,7 +137,7 @@ public class Scrib_lib_title implements Scrib_lib {
 			ttl_exists = core.Wiki().Db_mgr().Load_mgr().Load_by_ttl(tmp_db_page, ttl.Ns(), ttl.Page_db());
 		}
 		if (ttl_exists) {
-			ttl_redirect = tmp_db_page.Type_redirect();
+			ttl_redirect = tmp_db_page.Redirected();
 			ttl_id = tmp_db_page.Id();
 		}
 		KeyVal[] rv = new KeyVal[4];
@@ -224,6 +225,6 @@ public class Scrib_lib_title implements Scrib_lib {
 		if (!ns_file_or_media)
 			rv[rv_idx++] = KeyVal_.new_("file"		, false);								// REF.MW: if ( $ns !== NS_FILE && $ns !== NS_MEDIA )  $ret['file'] = false;
 		return rv;
-	}	private static final Xodb_page tmp_db_page = Xodb_page.tmp_();
+	}	private static final Xodb_page tmp_db_page = Xodb_page.new_tmp();
 	public static final String Key_wikitexet = "wikitext";
 }

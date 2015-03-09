@@ -21,7 +21,7 @@ import gplx.xowa.files.fsdb.*; import gplx.xowa.gui.views.*;
 public class Js_img_mgr {
 	public static void Update_img(Xoae_page page, Xof_xfer_itm itm) {
 		Xog_js_wkr js_wkr = Env_.Mode_testing() ? Xog_js_wkr_.Null : page.Tab().Html_itm(); 
-		Js_img_mgr.Update_img(page, js_wkr, itm.Html_img_wkr(), itm.Html_uid(), itm.Lnki_type(), itm.Html_elem_tid(), itm.Html_w(), itm.Html_h(), String_.new_utf8_(itm.Html_view_src()), itm.Orig_w(), itm.Orig_h(), String_.new_utf8_(itm.Html_orig_src()), itm.Lnki_ttl(), itm.Gallery_mgr_h());
+		Js_img_mgr.Update_img(page, js_wkr, itm.Html_img_wkr(), itm.Html_uid(), itm.Lnki_type(), itm.Html_elem_tid(), itm.Html_w(), itm.Html_h(), String_.new_utf8_(itm.Html_view_url()), itm.Orig_w(), itm.Orig_h(), String_.new_utf8_(itm.Html_orig_url()), itm.Lnki_ttl(), itm.Gallery_mgr_h());
 	}
 	public static void Update_img(Xoa_page page, Xog_js_wkr js_wkr, Xof_fsdb_itm itm) {
 		Js_img_mgr.Update_img(page, js_wkr, itm.Html_img_wkr(), itm.Html_uid(), itm.Lnki_type(), itm.Html_elem_tid(), itm.Html_w(), itm.Html_h(), itm.Html_view_url().To_http_file_str(), itm.Orig_w(), itm.Orig_h(), itm.Html_orig_url().To_http_file_str(), itm.Lnki_ttl(), itm.Gallery_mgr_h());

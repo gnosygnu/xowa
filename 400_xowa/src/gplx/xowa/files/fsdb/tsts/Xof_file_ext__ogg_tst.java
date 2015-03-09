@@ -32,6 +32,6 @@ public class Xof_file_ext__ogg_tst {
 	@Test   public void Audio() {
 		fxt.Init_orig_db(Xof_orig_arg.new_comm("A.ogg", 0, 0));	// audio has no size
 		fxt.Init_fsdb_db(Xof_fsdb_arg.new_comm_thumb("A.ogg", 440, 400));	// create a thumb but it should never be used
-		fxt.Exec_get(Xof_exec_arg.new_orig("A.ogg").Exec_tid_(Xof_exec_tid.Tid_viewer_app).Rslt_orig_found().Rslt_fsdb_null().Rslt_conv_n());
+		fxt.Exec_get(Xof_exec_arg.new_orig("A.ogg").Exec_tid_(Xof_exec_tid.Tid_viewer_app).Rslt_orig_exists_y().Rslt_file_exists_n().Rslt_file_resized_n());
 	}
 }

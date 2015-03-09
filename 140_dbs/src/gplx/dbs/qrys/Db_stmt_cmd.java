@@ -140,7 +140,7 @@ public class Db_stmt_cmd implements Db_stmt {
 		try {return engine.New_rdr_by_obj(stmt.executeQuery(), sql);}	catch (Exception e) {throw Err_.err_(e, "select failed: sql={0}", sql);}	
 	}
 	public Object Exec_select_val() {
-		try {Object rv = Db_qry_select.Rdr_to_val(engine.New_rdr(stmt.executeQuery(), sql)); return rv;} catch (Exception e) {throw Err_.err_(e, "failed to exec prepared statement: sql={0}", sql);}	
+		try {Object rv = Db_qry__select_cmd.Rdr_to_val(engine.New_rdr(stmt.executeQuery(), sql)); return rv;} catch (Exception e) {throw Err_.err_(e, "failed to exec prepared statement: sql={0}", sql);}	
 	}
 	public Db_stmt Clear() {
 		val_idx = 0;

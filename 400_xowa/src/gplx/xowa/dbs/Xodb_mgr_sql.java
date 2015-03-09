@@ -93,7 +93,7 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 		tbl_text.Insert(text_stmt, page_id, text, data_storage_format);
 	}
 	public boolean Ctg_select_v1(Xoctg_view_ctg view_ctg, Db_conn ctg_provider, Xodb_category_itm ctg) {
-		Db_qry_select qry = Db_qry_.select_().Cols_(Xodb_categorylinks_tbl.Fld_cl_from)
+		Db_qry__select_cmd qry = Db_qry_.select_().Cols_(Xodb_categorylinks_tbl.Fld_cl_from)
 			.From_(Xodb_categorylinks_tbl.Tbl_name)
 			.Where_(Db_crt_.eq_(Xodb_categorylinks_tbl.Fld_cl_to_id, ctg.Id()))
 		;
@@ -118,9 +118,9 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 			byte ctg_tid = Xodb_load_mgr_txt.Load_ctg_v1_tid(page.Ns_id());
 			Xoctg_view_grp ctg_grp = view_ctg.Grp_by_tid(ctg_tid);
 			Xoctg_view_itm ctg_itm = new Xoctg_view_itm();
-			ctg_itm.Load_by_ttl_data(ctg_tid, page.Id(), 0, page.Text_len());
-			ctg_itm.Ttl_(Xoa_ttl.parse_(wiki, page.Ns_id(), page.Ttl_wo_ns()));
-			ctg_itm.Sortkey_(page.Ttl_wo_ns());
+			ctg_itm.Load_by_ttl_data(ctg_tid, page.Id(), 0, page.Wtxt_len());
+			ctg_itm.Ttl_(Xoa_ttl.parse_(wiki, page.Ns_id(), page.Ttl_page_db()));
+			ctg_itm.Sortkey_(page.Ttl_page_db());
 			ctg_grp.Itms_add(ctg_itm);
 			rv = true;
 		}

@@ -23,13 +23,13 @@ public class Xof_file_ext__flac_tst {
 	@Test   public void Orig_page() {	// .flac is on page [[File:A.flac]]
 		fxt.Init_orig_db(Xof_orig_arg.new_comm_file("A.flac"));
 		fxt.Init_fsdb_db(Xof_fsdb_arg.new_comm_file("A.flac"));
-		fxt.Exec_get(Xof_exec_arg.new_orig("A.flac").Rslt_orig_missing().Rslt_fsdb_null());	// do not qry or get bin; (since file is not "viewable" immediately); DATE:2015-02-15
+		fxt.Exec_get(Xof_exec_arg.new_orig("A.flac").Rslt_orig_exists_y().Rslt_file_exists_n());	// check orig (since orig may redirect) but do not get file; (since file is not "viewable" immediately); DATE:2015-02-15
 		fxt.Test_fsys_exists_n("mem/root/common/orig/8/b/A.flac");
 	}
 	@Test   public void Orig_app() {	// .flac is clicked; get file
 		fxt.Init_orig_db(Xof_orig_arg.new_comm_file("A.flac"));
 		fxt.Init_fsdb_db(Xof_fsdb_arg.new_comm_file("A.flac"));
-		fxt.Exec_get(Xof_exec_arg.new_orig("A.flac").Exec_tid_(Xof_exec_tid.Tid_viewer_app).Rslt_orig_found().Rslt_fsdb_xowa());
+		fxt.Exec_get(Xof_exec_arg.new_orig("A.flac").Exec_tid_(Xof_exec_tid.Tid_viewer_app).Rslt_orig_exists_y().Rslt_file_exists_y());
 		fxt.Test_fsys_exists_y("mem/root/common/orig/8/b/A.flac");
 	}
 }

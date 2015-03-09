@@ -35,7 +35,7 @@ public class Xob_base_fxt {
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public GfoInvkAble Bldr_itm() {return bldr_itm;} GfoInvkAble bldr_itm;
 	public Xodb_page page_(String ttl) {return page_(ttl, "");}
-	public Xodb_page page_(String ttl, String text) {return new Xodb_page().Ttl_(Bry_.new_utf8_(ttl), wiki.Ns_mgr()).Text_(Bry_.new_utf8_(text));}
+	public Xodb_page page_(String ttl, String text) {return new Xodb_page().Ttl_(Bry_.new_utf8_(ttl), wiki.Ns_mgr()).Wtxt_(Bry_.new_utf8_(text));}
 	public Io_fil_chkr meta_(String url, String data) {return new Io_fil_chkr(Io_url_.mem_fil_(url), data);}
 	public void Init_fxts(Xob_bldr bldr, Xowe_wiki wiki, Xob_base_fxt... fxt_ary) {
 		int fxt_ary_len = fxt_ary.length;

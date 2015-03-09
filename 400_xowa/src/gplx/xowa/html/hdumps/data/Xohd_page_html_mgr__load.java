@@ -21,7 +21,9 @@ import gplx.xowa.dbs.*; import gplx.xowa.pages.*; import gplx.xowa.html.hdumps.c
 import gplx.xowa.wikis.data.*; import gplx.xowa2.gui.*;
 public class Xohd_page_html_mgr__load {
 	private final Xohd_page_srl_mgr srl_mgr = Xohd_page_srl_mgr.I;
-	private final Bry_rdr rdr = new Bry_rdr(); private final ListAdp rows = ListAdp_.new_(), imgs = ListAdp_.new_();
+	private final Bry_rdr rdr = new Bry_rdr(); private final ListAdp rows = ListAdp_.new_(), imgs = ListAdp_.new_();		
+	private static final int redlink_list_max = 1024;
+	private final int[] redlink_list = new int[redlink_list_max];
 	public void Load_page(Xog_page hpg, Xohd_page_html_tbl tbl, int page_id, Xoa_ttl page_ttl) {
 		tbl.Select_by_page(rows, page_id);
 		Parse_rows(hpg, page_id, Xoa_url.blank_(), page_ttl, rows);
@@ -53,37 +55,25 @@ public class Xohd_page_html_mgr__load {
 		}
 		if (imgs.Count() > 0) hpg.Img_itms_((Xohd_data_itm__base[])imgs.Xto_ary_and_clear(Xohd_data_itm__base.class));
 	}
-	private void Load_data_img() {
+	public static Xohd_data_itm__base Load_img(Bry_rdr rdr) {
 		int tid = rdr.Read_int_to_pipe();
-		byte[] lnki_ttl = rdr.Read_bry_to_pipe();
-		int lnki_ext = rdr.Read_int_to_pipe();
-		byte lnki_type = rdr.Read_byte_to_pipe();
-		int lnki_w = rdr.Read_int_to_pipe();
-		int lnki_h = rdr.Read_int_to_pipe();
-		double lnki_upright = rdr.Read_double_to_pipe();
-		double lnki_time = rdr.Read_double_to_pipe();
-		int lnki_page = rdr.Read_int_to_pipe();
-		int html_uid = rdr.Read_int_to_pipe();
-		int html_w = rdr.Read_int_to_pipe();
-		int html_h = rdr.Read_int_to_pipe();
-		int file_repo_id = rdr.Read_int_to_pipe();
-		boolean file_is_orig = rdr.Read_yn_to_pipe();
-		int file_w = rdr.Read_int_to_pipe();
 		Xohd_data_itm__base img_itm = null;
 		switch (tid) {
 			case Xohd_data_itm__base.Tid_basic		: img_itm = new Xohd_data_itm__img(); break;
-			case Xohd_data_itm__base.Tid_gallery	: img_itm = new Xohd_data_itm__gallery_itm().Init_by_gallery(rdr.Read_int_to_pipe(), rdr.Read_int_to_pipe(), rdr.Read_int_to_pipe()); break;
+			case Xohd_data_itm__base.Tid_gallery	: img_itm = new Xohd_data_itm__gallery_itm(); break;
 		}
-		img_itm.Init_by_base(lnki_ttl, lnki_type, lnki_w, lnki_h, lnki_upright, html_uid, html_w, html_h, file_repo_id, lnki_ext, file_is_orig, file_w, lnki_time, lnki_page);
+		img_itm.Data_parse(rdr);
 		rdr.Pos_add_one();
-		imgs.Add(img_itm);
+		return img_itm;
+	}
+	private void Load_data_img() {
+		imgs.Add(Load_img(rdr));
 	}
 	private void Load_data_redlink(Xog_page hpg) {
-		int len = rdr.Read_int_to_pipe();
-		int[] redlink_uids = new int[len];
-		for (int i = 0; i < len; ++i)
-			redlink_uids[i] = rdr.Read_int_to_pipe();
-		hpg.Redlink_uids_(redlink_uids);
+		int len = 0;
+		while (!rdr.Pos_is_eos() && len < redlink_list_max)
+			redlink_list[len++] = rdr.Read_int_to_pipe();
+		hpg.Redlink_uids_(Int_.Ary_copy(redlink_list, len));
 	}
 	private void Load_data_gallery(Xog_page hpg) {
 		int uid = rdr.Read_int_to_pipe();

@@ -51,7 +51,7 @@ public class Xodb_text_tbl {
 			ListAdp pages = ListAdp_.new_();
 			for (int i = 0; i < len; i++) {
 				Xodb_page page = (Xodb_page)hash.FetchAt(i);
-				if (page.Text_db_id() == file.Id())
+				if (page.Wtxt_db_id() == file.Id())
 					pages.Add(page);
 			}
 			len = pages.Count();
@@ -74,7 +74,7 @@ public class Xodb_text_tbl {
 				byte[] old_text = rdr.ReadBry(Fld_old_text);
 				old_text = zip_mgr.Unzip(db_mgr.Data_storage_format(), old_text);
 				Xodb_page page = (Xodb_page)hash.Fetch(Int_obj_val.new_(page_id));
-				page.Text_(old_text);
+				page.Wtxt_(old_text);
 			}
 		}	finally {rdr.Rls(); stmt.Rls();}
 	}

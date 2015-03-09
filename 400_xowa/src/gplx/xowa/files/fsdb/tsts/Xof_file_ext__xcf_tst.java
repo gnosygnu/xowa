@@ -23,13 +23,13 @@ public class Xof_file_ext__xcf_tst {
 	@Test   public void Make_orig() {
 		fxt.Init_orig_db(Xof_orig_arg.new_comm("A.xcf", 440, 400));
 		fxt.Init_fsdb_db(Xof_fsdb_arg.new_comm_orig("A.xcf", 440, 400));
-		fxt.Exec_get(Xof_exec_arg.new_orig("A.xcf").Rslt_orig_found().Rslt_fsdb_xowa().Rslt_conv_y());
+		fxt.Exec_get(Xof_exec_arg.new_orig("A.xcf").Rslt_orig_exists_y().Rslt_file_exists_y().Rslt_file_resized_y());
 		fxt.Test_fsys("mem/root/common/thumb/4/4/A.xcf/440px.png", "440,400");
 	}
 	@Test   public void Make_thumb() {
 		fxt.Init_orig_db(Xof_orig_arg.new_comm("A.xcf", 440, 400));
 		fxt.Init_fsdb_db(Xof_fsdb_arg.new_comm_orig("A.xcf", 440, 400));
-		fxt.Exec_get(Xof_exec_arg.new_thumb("A.xcf").Rslt_orig_found().Rslt_fsdb_xowa().Rslt_conv_y());
+		fxt.Exec_get(Xof_exec_arg.new_thumb("A.xcf").Rslt_orig_exists_y().Rslt_file_exists_y().Rslt_file_resized_y());
 		fxt.Test_fsys("mem/root/common/thumb/4/4/A.xcf/220px.png", "220,200");
 	}
 }

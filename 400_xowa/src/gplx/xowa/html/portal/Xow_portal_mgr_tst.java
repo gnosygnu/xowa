@@ -20,8 +20,8 @@ import org.junit.*;
 public class Xow_portal_mgr_tst {
 	@Before public void init() {fxt.Init();} private Xowh_portal_mgr_fxt fxt = new Xowh_portal_mgr_fxt();
 	@Test  public void Div_ns_bry() {
-		fxt.Test_div_ns_bry("A"			, "/wiki/A;selected;/wiki/Talk:A;xowa_display_none");
-		fxt.Test_div_ns_bry("Talk:A"	, "/wiki/A;;/wiki/Talk:A;selected");
+		fxt.Test_div_ns_bry("A"			, "/wiki/A;selected;/wiki/Talk:A;xowa_display_none;");
+		fxt.Test_div_ns_bry("Talk:A"	, "/wiki/A;;/wiki/Talk:A;selected;");
 	}
 	@Test  public void Div_personal_bry() {
 		fxt.Test_div_personal_bry("/wiki/User:anonymous;anonymous;xowa_display_none;/wiki/User_talk:anonymous;xowa_display_none;");

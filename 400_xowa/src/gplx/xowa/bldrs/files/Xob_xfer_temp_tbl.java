@@ -38,7 +38,7 @@ class Xob_xfer_temp_tbl {
 		.Val_int(file_h)
 		.Val_int(html_w)
 		.Val_int(html_h)
-		.Val_double(Xof_doc_thumb.Db_save_double(thumbtime))
+		.Val_double(Xof_lnki_time.Db_save_double(thumbtime))
 		.Val_int(page)
 		.Val_int(count)
 		.Exec_insert();

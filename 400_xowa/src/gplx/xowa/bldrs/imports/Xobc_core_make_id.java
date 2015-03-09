@@ -25,7 +25,7 @@ public class Xobc_core_make_id extends Xob_itm_dump_base implements Xobd_wkr, Gf
 		this.Init_dump(KEY, wiki.Tdb_fsys_mgr().Site_dir().GenSubDir(Xotdb_dir_info_.Name_id));
 	}
 	public void Wkr_run(Xodb_page page) {
-		byte[] ttl = page.Ttl_wo_ns();
+		byte[] ttl = page.Ttl_page_db();
 		if (dump_bfr.Len() + row_fixed_len + ttl.length > dump_fil_len) Io_mgr._.AppendFilBfr(dump_url_gen.Nxt_url(), dump_bfr);
 		Xodb_page_.Txt_id_save(dump_bfr, page);
 	}

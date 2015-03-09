@@ -46,8 +46,8 @@ public class Xoh_file_wtr__basic {
 			lnki_halign = wiki.Lang().Img_thumb_halign_default();	// if halign is not supplied, then default to align for language
 		byte[] lnki_halign_bry = Xop_lnki_align_h.Html_names[lnki_halign];
 		byte[] lnki_href = wiki.Appe().Href_parser().Build_to_bry(wiki, lnki.Ttl());
-		byte[] img_view_src = xfer_itm.Html_view_src();
-		byte[] img_orig_src = xfer_itm.Html_orig_src();
+		byte[] img_view_src = xfer_itm.Html_view_url();
+		byte[] img_orig_src = xfer_itm.Html_orig_url();
 		byte[] lnki_ttl = lnki.Ttl().Page_txt();				
 		Xof_ext lnki_ext = xfer_itm.Lnki_ext();
 		boolean lnki_is_thumbable = Xop_lnki_type.Id_is_thumbable(lnki.Lnki_type());
@@ -163,7 +163,7 @@ public class Xoh_file_wtr__basic {
 			html_fmtr.Html_thumb_part_info(scratch_bfr, uid, lnki_href, html_mgr.Img_media_info_btn());
 			info_btn = scratch_bfr.Xto_bry_and_clear();
 		}
-		int play_btn_width = lnki.Lnki_w(); if (play_btn_width < 1) play_btn_width = html_mgr.Img_thumb_width();	// if no width set width to default img width
+		int play_btn_width = lnki.W(); if (play_btn_width < 1) play_btn_width = html_mgr.Img_thumb_width();	// if no width set width to default img width
 		html_fmtr.Html_thumb_file_audio(scratch_bfr, Arg_caption_div(ctx, src, lnki, uid, img_orig_src, lnki_href), Arg_alt_html(ctx, src, lnki), Arg_play_btn(uid, play_btn_width, Play_btn_max_width, img_orig_src, lnki.Ttl().Page_txt()), info_btn);
 		return scratch_bfr.Xto_bry_and_clear();
 	}

@@ -34,9 +34,9 @@ public class Xob_page_txt extends Xob_itm_dump_base implements Xobd_wkr, GfoInvk
 	Xob_xdat_file_wtr[] page_wtr_regy = new Xob_xdat_file_wtr[Ns_ordinal_max]; static final int Ns_ordinal_max = Xow_ns_mgr_.Ordinal_max;	// ASSUME: no more than 128 ns in a wiki
 	Xob_stat_type data_rpt_typ; Xob_stat_mgr stat_mgr = new Xob_stat_mgr(); byte page_storage_type;		
 	public void Wkr_run(Xodb_page page) {
-		int id = page.Id(); byte[] ttl_wo_ns = page.Ttl_wo_ns(), text = page.Text(); int ttl_len = ttl_wo_ns.length, text_len = text.length; Xow_ns ns = page.Ns();
+		int id = page.Id(); byte[] ttl_wo_ns = page.Ttl_page_db(), text = page.Wtxt(); int ttl_len = ttl_wo_ns.length, text_len = text.length; Xow_ns ns = page.Ns();
 		boolean redirect = redirect_mgr.Is_redirect(text, text_len);
-		page.Type_redirect_(redirect);
+		page.Redirected_(redirect);
 
 		// page: EX: \t123\t2012-06-09\ttitle\ttext\n; NOTE: 512k * ~20 ns = 10 MB max memory; no need for intermediary flushing
 		Xob_xdat_file_wtr page_wtr = Page_wtr_get(ns);
@@ -47,7 +47,7 @@ public class Xob_page_txt extends Xob_itm_dump_base implements Xobd_wkr, GfoInvk
 		// idx: EX: 00100|aB64|Ttl;
 		Xob_tmp_wtr ttl_wtr = ttl_wtr_mgr.Get_or_new(ns);
 		int file_idx = page_wtr.Fil_idx(), row_idx = page_wtr.Idx_pos() - ListAdp_.LastIdxOffset;
-		page.Text_db_id_(file_idx).Db_row_idx_(row_idx);
+		page.Wtxt_db_id_(file_idx).Tdb_row_idx_(row_idx);
 		if (ttl_wtr.FlushNeeded(Xodb_page_.Txt_ttl_len__fixed + ttl_len)) ttl_wtr.Flush(bldr.Usr_dlg());
 		Xodb_page_.Txt_ttl_save(ttl_wtr.Bfr(), id, file_idx, row_idx, redirect, text_len, ttl_wo_ns);
 	}

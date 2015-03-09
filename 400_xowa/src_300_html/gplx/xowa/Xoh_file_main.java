@@ -28,9 +28,9 @@ class Xoh_file_main_alts implements Bry_fmtr_arg {
 		for (int i = 0; i < len; i++) {
 			Int_2_ref size = size_alts[i];
 			if (xfer_itm.Html_w() < size.Val_0()) continue;
-			xfer_itm.Init_by_lnki(orig_itm.Lnki_ttl(), orig_itm.Lnki_redirect(), Xop_lnki_type.Id_none, size.Val_0(), size.Val_1(), Xop_lnki_tkn.Upright_null, Xof_doc_thumb.Null, Xof_doc_page.Null);
+			xfer_itm.Init_by_lnki(orig_itm.Lnki_ttl(), orig_itm.Orig_redirect(), Xop_lnki_type.Id_none, size.Val_0(), size.Val_1(), Xop_lnki_tkn.Upright_null, Xof_lnki_time.Null, Xof_lnki_page.Null);
 			xfer_itm.Calc_by_meta();
-			opt.Html_alts().Bld_bfr_many(bfr, xfer_itm.Html_w(), xfer_itm.Html_h(), xfer_itm.Html_view_src(), i == len - 1 ? opt.Html_alt_dlm_last() : opt.Html_alt_dlm_default());
+			opt.Html_alts().Bld_bfr_many(bfr, xfer_itm.Html_w(), xfer_itm.Html_h(), xfer_itm.Html_view_url(), i == len - 1 ? opt.Html_alt_dlm_last() : opt.Html_alt_dlm_default());
 		}
 	}	
 }

@@ -20,19 +20,24 @@ public interface Xof_file_itm {
 	byte[]				Lnki_ttl();
 	byte[]				Lnki_md5();
 	Xof_ext				Lnki_ext();
-//		byte[]				Lnki_redirect();
 	byte 				Lnki_type();
 	int					Lnki_w();
 	int					Lnki_h();
 	double				Lnki_upright();
 	double				Lnki_time();
+	int					Lnki_page();
+	byte				Orig_repo_id();
+	byte[]				Orig_repo_name();
+	byte[]				Orig_ttl();
+	int					Orig_ext();
 	int					Orig_w();
 	int					Orig_h();
-//		byte				Orig_repo();
+	byte[]				Orig_redirect();
 	boolean				Img_is_thumbable();
 	int					File_w();
 	int					Html_uid();
+	byte				Html_elem_tid();
 	int					Html_w();
 	int					Html_h();
-//		Io_url				Html_url();
+	int					Gallery_mgr_h();
 }

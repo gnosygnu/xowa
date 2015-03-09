@@ -37,7 +37,7 @@ class Xof_orig_tbl_fxt {
 	}
 	public Xof_orig_itm Exec_insert(String ttl, int w, int h) {
 		byte[] ttl_bry = Bry_.new_utf8_(ttl);
-		Xof_orig_itm rv = new Xof_orig_itm().Init(Xof_orig_itm.Repo_comm, ttl_bry, Xof_ext_.new_by_ttl_(ttl_bry).Id(), w, h, Bry_.Empty, Xof_orig_wkr_.Status_found);
+		Xof_orig_itm rv = new Xof_orig_itm().Init(Xof_orig_itm.Repo_comm, ttl_bry, Xof_ext_.new_by_ttl_(ttl_bry).Id(), w, h, Bry_.Empty);
 		tbl.Insert(rv.Repo(), rv.Page(), rv.Ext(), rv.W(), rv.H(), rv.Redirect());
 		return rv;
 	}
@@ -48,7 +48,7 @@ class Xof_orig_tbl_fxt {
 		for (int i = 0; i < itms_len; ++i) {
 			String itm = itms[i];
 			Xof_fsdb_itm fsdb_itm = new Xof_fsdb_itm();
-			fsdb_itm.Ctor_by_orig_redirect(Bry_.new_utf8_(itm));
+			fsdb_itm.Ctor_by_lnki(Bry_.new_utf8_(itm), Xop_lnki_type.Id_none, Xof_img_size.Null, Xof_img_size.Null, Xof_patch_upright_tid_.Tid_all, Xof_img_size.Upright_null, Xof_lnki_time.Null, Xof_lnki_page.Null);
 			list.Add(fsdb_itm);
 		}
 		tbl.Select_by_list(rv, list);

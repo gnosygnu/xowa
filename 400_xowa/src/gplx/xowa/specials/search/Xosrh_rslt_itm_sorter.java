@@ -26,8 +26,8 @@ public class Xosrh_rslt_itm_sorter implements gplx.lists.ComparerAble {
 //			else if	(rhs == null)					return CompareAble_.More;
 		else {
 			switch (tid) {
-				case Tid_len_dsc:	return Int_.Compare(lhs.Text_len(), rhs.Text_len()) * -1;
-				case Tid_ttl_asc:	return Bry_.Compare(lhs.Ttl_wo_ns(), rhs.Ttl_wo_ns());
+				case Tid_len_dsc:	return Int_.Compare(lhs.Wtxt_len(), rhs.Wtxt_len()) * -1;
+				case Tid_ttl_asc:	return Bry_.Compare(lhs.Ttl_page_db(), rhs.Ttl_page_db());
 				case Tid_id:		return Int_.Compare(lhs.Id(), rhs.Id());
 				default:			throw Err_mgr._.unhandled_(tid);
 			}

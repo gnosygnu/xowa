@@ -29,8 +29,10 @@ public abstract class Xogv_tab_base {
 	public Xog_page Go_to(byte[] wiki, byte[] page, byte[] anch, byte[] qarg, boolean redirect_force, String bmk_pos) {
 		Xog_history_itm old_itm = this.Cur_itm();
 		Xog_history_itm new_itm = new Xog_history_itm(wiki, page, anch, qarg, redirect_force, bmk_pos);
-		history_stack.Add(new_itm);
-		return Fetch_page_and_show(old_itm, new_itm);
+		Xog_page rv = Fetch_page_and_show(old_itm, new_itm);
+		if (rv.Exists())
+			history_stack.Add(new_itm);
+		return rv;
 	}
 	public Xog_page Go_bwd() {return Go_by_dir(Bool_.Y);}
 	public Xog_page Go_fwd() {return Go_by_dir(Bool_.N);}
@@ -42,7 +44,8 @@ public abstract class Xogv_tab_base {
 	private Xog_page Fetch_page_and_show(Xog_history_itm old_itm, Xog_history_itm new_itm) {
 		if (new_itm == Xog_history_itm.Null) return new Xog_page().Exists_n_();
 		Xog_page new_hpg = Fetch_page(new_itm.Wiki(), new_itm.Page(), new_itm.Qarg());
-		Show_page(old_itm, new_itm, new_hpg);
+		if (new_hpg.Exists())
+			Show_page(old_itm, new_itm, new_hpg);
 		return new_hpg;
 	}
 	private Xog_page Fetch_page(byte[] wiki_domain, byte[] page_bry, byte[] qarg_bry) {

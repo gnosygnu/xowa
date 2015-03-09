@@ -57,11 +57,11 @@ public class Xofw_wiki_wkr_base implements Xofw_wiki_finder {
 			return true;
 		}
 		return false;
-	}	static final Xodb_page tmp_db_page = Xodb_page.tmp_();
+	}	static final Xodb_page tmp_db_page = Xodb_page.new_tmp();
 	byte[] Get_redirect(Xowe_wiki wiki, Xow_ns file_ns, Xodb_page db_page) {
-		if (db_page.Type_redirect()) {
+		if (db_page.Redirected()) {
 			wiki.Db_mgr().Load_mgr().Load_page(db_page, file_ns, false);
-			byte[] src = db_page.Text();
+			byte[] src = db_page.Wtxt();
 			Xoa_ttl redirect_ttl = wiki.Redirect_mgr().Extract_redirect(src, src.length);
 			return redirect_ttl == Xop_redirect_mgr.Redirect_null_ttl ? Xop_redirect_mgr.Redirect_null_bry : redirect_ttl.Page_db();
 		}

@@ -28,7 +28,7 @@ public class Xodb_search_title_word_tbl {
 		.Exec_insert();
 	}	
 	public static void Select_by_word(Cancelable cancelable, ListAdp rv, Xodb_ctx db_ctx, byte[] search, int results_max, Db_conn p) {
-		Db_qry_select qry = Db_qry_.select_()
+		Db_qry__select_cmd qry = Db_qry_.select_()
 			.Cols_(Xodb_search_title_word_tbl.Fld_stw_word_id)
 			.From_(Xodb_search_title_word_tbl.Tbl_name, "w")
 			;

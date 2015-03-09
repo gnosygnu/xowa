@@ -82,7 +82,7 @@ public abstract class Gallery_mgr_base {
 		byte[] itm_caption = itm.Caption_bry(); if (itm_caption == null) itm_caption = Bry_.Empty;
 
 		Xop_lnki_tkn lnki = itm.Lnki_tkn();
-		int lnki_w_orig = lnki.Lnki_w(), lnki_h_orig = lnki.Lnki_h(); // store orig lnki_w / lnki_w
+		int lnki_w_orig = lnki.W(), lnki_h_orig = lnki.H(); // store orig lnki_w / lnki_w
 		this.Get_thumb_size(lnki, itm.Ext());	// packed=expand by 1.5;
 		if (xfer_itm == null) {	// will be null on 1st pass
 			xfer_itm = html_wtr.Lnki_wtr().File_wtr().Lnki_eval(ctx, page, lnki, html_wtr.Queue_add_ref())
@@ -105,7 +105,7 @@ public abstract class Gallery_mgr_base {
 			itm_html = itm_missing_fmtr.Bld_bry_many(tmp_bfr, this.Get_thumb_padding() + itm_default_h, ttl.Page_txt());
 			itm.Html_prepare(wiki, ctx, src, xnde, xfer_itm, gallery_li_id, i);
 			xfer_itm.Html_img_wkr_(itm);
-			lnki.Lnki_w_(lnki_w_orig).Lnki_h_(lnki_h_orig);
+			lnki.W_(lnki_w_orig).H_(lnki_h_orig);
 			html_w_expand = lnki_w_orig; html_h_expand = lnki_h_orig;	// reset lnki_w_orig / lnki_h_orig else large captions
 		}
 		else {
@@ -149,15 +149,15 @@ public abstract class Gallery_mgr_base {
 		Wrap_gallery_text(bfr, itm_caption, html_w_expand, html_h_expand);
 		bfr.Add(itm_li_end_bry);
 		if (hctx_is_hdump)
-			page.Hdump_data().Imgs_add_img(new Xohd_data_itm__gallery_itm().Init_by_gallery(itm_div_width, img_div_w, vpad), xfer_itm, Xohd_data_itm__gallery_itm.Tid_gallery);
+			page.Hdump_data().Imgs_add_img(new Xohd_data_itm__gallery_itm().Data_init_gallery(itm_div_width, img_div_w, vpad), xfer_itm, Xohd_data_itm__gallery_itm.Tid_gallery);
 	}
 	private static final byte[] 
 	  Wrap_gallery_text_bgn = Bry_.new_ascii_("\n      <div class=\"gallerytext\">") // NOTE: The newline after <div class="gallerytext"> is needed to accommodate htmltidy
 	, Wrap_gallery_text_end = Bry_.new_ascii_("\n      </div>")	// NOTE: prepend "\n"; will cause extra \n when caption exists, but needed when caption doesn't exists; EX: "<div class='caption'>    </div>"; \n puts
 	;
 	@gplx.Virtual public void Get_thumb_size(Xop_lnki_tkn lnki, Xof_ext ext) { // REF.MW: getThumbParams; Get the transform parameters for a thumbnail.
-		lnki.Lnki_w_(itm_default_w);
-		lnki.Lnki_h_(itm_default_h);
+		lnki.W_(itm_default_w);
+		lnki.H_(itm_default_h);
 	}
 	@gplx.Virtual public void Adjust_image_parameters(Xof_xfer_itm xfer_itm) {	// REF.MW: Adjust the image parameters for a thumbnail. Used by a subclass to insert extra high resolution images.
 	}

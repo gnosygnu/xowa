@@ -24,8 +24,12 @@ public class Xopg_hdump_data {
 	public ListAdp					Imgs() {return imgs;} private final ListAdp imgs = ListAdp_.new_();
 	public void						Imgs_add(Xohd_data_itm itm) {imgs.Add(itm);}
 	public void						Imgs_add_img(Xohd_data_itm__base img, Xof_xfer_itm xfer, int tid) {
-		img.Init_by_base(xfer.Lnki_ttl(), xfer.Lnki_type(), xfer.Lnki_w(), xfer.Lnki_h(), xfer.Lnki_upright(), xfer.Html_uid(), xfer.Html_w(), xfer.Html_h()
-		, xfer.Trg_repo_idx(), xfer.Lnki_ext().Id(), xfer.Img_is_orig(), xfer.File_w(), xfer.Lnki_time(), xfer.Lnki_page());
+		img.Data_init_base
+		( xfer.Lnki_ttl(), xfer.Lnki_ext().Id(), xfer.Lnki_type(), xfer.Lnki_w(), xfer.Lnki_h(), xfer.Lnki_upright()
+		, xfer.Lnki_time(), xfer.Lnki_page()
+		, xfer.Trg_repo_idx(), xfer.Img_is_orig(), xfer.File_w()
+		, xfer.Html_uid(), xfer.Html_w(), xfer.Html_h()
+		);
 		imgs.Add(img);
 	}
 	public void Clear() {

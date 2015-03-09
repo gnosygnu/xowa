@@ -78,7 +78,7 @@ public class Fsd_fil_tbl {
 	}	
 	public Fsd_fil_itm Select_itm_by_name(int dir_id, String fil_name) {
 		if (stmt_select_by_name == null) {
-			Db_qry_select qry = Db_qry_select.new_().From_(tbl_name).Cols_(flds.To_str_ary()).Where_(Db_crt_.eq_many_(fld_owner_id, fld_name)).Indexed_by_(Idx_owner);
+			Db_qry__select_cmd qry = Db_qry__select_cmd.new_().From_(tbl_name).Cols_(flds.To_str_ary()).Where_(Db_crt_.eq_many_(fld_owner_id, fld_name)).Indexed_by_(Idx_owner);
 			stmt_select_by_name = conn.Rls_reg(conn.Stmt_new(qry));
 		}
 		Db_rdr rdr = Db_rdr_.Null;

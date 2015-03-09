@@ -40,36 +40,34 @@ public class Xof_bin_mgr implements GfoInvkAble {
 		Io_stream_rdr rdr = Find_as_rdr(exec_tid, itm);
 		if (rdr == Io_stream_rdr_.Null) return Io_url_.Null;
 		Io_url trg = itm.Html_view_url();
-		if (itm.Rslt_fil_created()) return trg;	// rdr is opened directly from trg; return its url; occurs when url goes through imageMagick / inkscape, or when thumb is already on disk;
-		Io_stream_wtr_.Save_rdr(trg, rdr);		// rdr is stream; either from http_wmf or fsdb; save to trg and return;
-		if (itm.Rslt_bin() == Xof_bin_wkr_.Tid_fsdb_xowa) {	// rdr is coming from fsdb; register in cache
-			if (!Env_.Mode_testing())
-				cache_mgr.Reg(itm, rdr.Len());
-		}
+		if (itm.File_resized()) return trg;			// rdr is opened directly from trg; return its url; occurs when url goes through imageMagick / inkscape, or when thumb is already on disk;
+		Io_stream_wtr_.Save_rdr(trg, rdr);			// rdr is stream; either from http_wmf or fsdb; save to trg and return;
+		if (!Env_.Mode_testing()) cache_mgr.Reg(itm, rdr.Len());
 		return trg;
 	}
 	public Io_stream_rdr Find_as_rdr(byte exec_tid, Xof_fsdb_itm itm) {
 		Io_stream_rdr rv = Io_stream_rdr_.Null;
+		Xof_repo_itm repo = repo_mgr.Repos_get_by_wiki(itm.Orig_repo_name()).Trg();
 		boolean file_is_orig = itm.File_is_orig();
 		if (file_is_orig || exec_tid == Xof_exec_tid.Tid_viewer_app) {			// orig or viewer_app; note that viewer_app always return orig
-			Io_url trg = url_bldr.To_url(repo_mgr, itm, Bool_.Y);
+			Io_url trg = url_bldr.To_url_trg(repo, itm, Bool_.Y);
 			itm.Html_view_url_(trg);
 			for (int i = 0; i < wkrs_len; i++) {
 				Xof_bin_wkr wkr = wkrs[i];
 				rv = wkr.Get_as_rdr(itm, Bool_.N, itm.Html_w());
 				if (rv == Io_stream_rdr_.Null) continue;						// orig not found; continue;
-				itm.Rslt_bin_(wkr.Tid());
+				itm.File_exists_y_();
 				return rv;
 			}
 		}
 		else {																	// thumb
-			Io_url trg = url_bldr.To_url(repo_mgr, itm, Bool_.N);
+			Io_url trg = url_bldr.To_url_trg(repo, itm, Bool_.N);
 			itm.Html_view_url_(trg);
 			for (int i = 0; i < wkrs_len; i++) {
 				Xof_bin_wkr wkr = wkrs[i];
 				rv = wkr.Get_as_rdr(itm, Bool_.Y, itm.Html_w());				// get thumb's bin
 				if (rv != Io_stream_rdr_.Null) {								// thumb's bin exists;
-					itm.Rslt_bin_(wkr.Tid());
+					itm.File_exists_y_();
 					return rv;
 				}
 				usr_dlg.Log_direct(String_.Format("thumb not found; ttl={0} w={1} ", String_.new_utf8_(itm.Lnki_ttl()), itm.Lnki_w()));
@@ -79,12 +77,11 @@ public class Xof_bin_mgr implements GfoInvkAble {
 					continue;													// nothing found; continue;
 				}
 				if (!wkr.Resize_allowed()) continue;
-				Io_url orig = url_bldr.To_url(repo_mgr, itm, Bool_.Y);			// get orig url
+				Io_url orig = url_bldr.To_url_trg(repo, itm, Bool_.Y);			// get orig url
 				Io_stream_wtr_.Save_rdr(orig, rv);
 				boolean resized = Resize(exec_tid, itm, file_is_orig, orig, trg);
 				if (!resized) continue;
-				itm.Rslt_bin_(wkr.Tid());
-				itm.Rslt_fil_created_(true);
+				itm.File_exists_y_();
 				rv = Io_stream_rdr_.file_(trg);									// return stream of resized url; (result of imageMagick / inkscape)
 				rv.Open();
 				return rv;
@@ -95,7 +92,7 @@ public class Xof_bin_mgr implements GfoInvkAble {
 	private boolean Resize(byte exec_tid, Xof_fsdb_itm itm, boolean file_is_orig, Io_url src, Io_url trg) {			
 		tmp_size.Html_size_calc(exec_tid, itm.Lnki_w(), itm.Lnki_h(), itm.Lnki_type(), mnt_mgr.Patch_upright(), itm.Lnki_upright(), itm.Lnki_ext().Id(), itm.Orig_w(), itm.Orig_h(), Xof_img_size.Thumb_width_img);
 		boolean rv = resizer.Exec(src, trg, tmp_size.Html_w(), tmp_size.Html_h(), itm.Lnki_ext().Id(), resize_warning);
-		itm.Rslt_cnv_(rv ? Xof_cnv_wkr_.Tid_y : Xof_cnv_wkr_.Tid_n);
+		itm.File_resized_y_();
 		return rv;
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

@@ -21,7 +21,7 @@ import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.dbs.*; import gplx.x
 public class Db_mgr_fxt {
 	public Db_mgr_fxt Ctor_fsys()	{bldr_fxt = new Xob_fxt().Ctor(Xoa_test_.Url_root().GenSubDir("root")); return this;} 
 	public Db_mgr_fxt Ctor_mem()	{bldr_fxt = new Xob_fxt().Ctor_mem(); return this;} private Xob_fxt bldr_fxt;
-	public Xodb_page page_(int id, String modified_on, boolean type_redirect, int text_len) {return new Xodb_page().Id_(id).Modified_on_(DateAdp_.parse_gplx(modified_on)).Type_redirect_(type_redirect).Text_len_(text_len);}
+	public Xodb_page page_(int id, String modified_on, boolean type_redirect, int text_len) {return new Xodb_page().Id_(id).Modified_on_(DateAdp_.parse_gplx(modified_on)).Redirected_(type_redirect).Wtxt_len_(text_len);}
 	public Xowe_wiki Wiki() {return bldr_fxt.Wiki();}
 	public Xob_bldr Bldr() {return bldr_fxt.Bldr();}
 	public Db_mgr_fxt doc_ary_(Xodb_page... v) {bldr_fxt.doc_ary_(v); return this;}
@@ -56,14 +56,14 @@ public class Db_mgr_fxt {
 		wiki.Db_mgr_as_sql().Load_mgr().Load_by_ttl(actl, ns, ttl_bry);
 		Tfds.Eq(expd.Id(), actl.Id());
 		Tfds.Eq_date(expd.Modified_on(), actl.Modified_on());
-		Tfds.Eq(expd.Type_redirect(), actl.Type_redirect());
-		Tfds.Eq(expd.Text_len(), actl.Text_len());
+		Tfds.Eq(expd.Redirected(), actl.Redirected());
+		Tfds.Eq(expd.Wtxt_len(), actl.Wtxt_len());
 	}	private Xodb_page actl = new Xodb_page();
 	public void Test_load_page(int ns_id, int page_id, String expd) {
 		Xowe_wiki wiki = bldr_fxt.Wiki();
 		Xow_ns ns = wiki.Ns_mgr().Ids_get_or_null(ns_id);
 		wiki.Db_mgr_as_sql().Load_mgr().Load_page(actl.Id_(page_id), ns, false);
-		Tfds.Eq(expd, String_.new_ascii_(actl.Text()));
+		Tfds.Eq(expd, String_.new_ascii_(actl.Wtxt()));
 	}
 	public void Test_search(String search_word_str, int... expd) {
 		Xowe_wiki wiki = bldr_fxt.Wiki();

@@ -19,7 +19,7 @@ package gplx.dbs.utls; import gplx.*; import gplx.dbs.*;
 import gplx.dbs.qrys.*;
 public class PoolIds {
 	public int FetchNext(Db_conn conn, String url) {
-		Db_qry_select cmd = Db_qry_.select_().From_(Tbl_Name).Where_(Db_crt_.eq_(Fld_id_path, url));
+		Db_qry__select_cmd cmd = Db_qry_.select_().From_(Tbl_Name).Where_(Db_crt_.eq_(Fld_id_path, url));
 		int rv = 0;//boolean isNew = true;
 		DataRdr rdr = DataRdr_.Null;
 		try {

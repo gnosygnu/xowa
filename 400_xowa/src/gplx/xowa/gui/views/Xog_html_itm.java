@@ -57,7 +57,7 @@ public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 	}
 	public void Show(Xoae_page page) {
 		byte view_mode = owner_tab.View_mode();			
-		byte[] html_src = owner_tab.Wiki().Html_mgr().Page_wtr_mgr().Gen(page, view_mode);
+		byte[] html_src = page.Wikie().Html_mgr().Page_wtr_mgr().Gen(page, view_mode);	// NOTE: must use wiki of page, not of owner tab; DATE:2015-03-05
 		Html_src_(page, html_src);
 		if (view_mode == Xopg_view_mode.Tid_read){			// used only for Xosrh test; DATE:2014-01-29
 			html_box.Html_doc_body_focus();					// NOTE: only focus if read so up / down will scroll box; edit / html should focus edit-box; DATE:2014-06-05

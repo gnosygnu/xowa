@@ -54,7 +54,7 @@ public abstract class GroupBys_base_tst {
 		conn.Exec_qry(Db_qry_.insert_("dbs_group_bys").Arg_("key1", "a").Arg_("val_int", 1));
 		conn.Exec_qry(Db_qry_.insert_("dbs_group_bys").Arg_("key1", "a").Arg_("val_int", 2));
 
-		Db_qry_select qry = Db_qry_.select_().From_("dbs_group_bys")
+		Db_qry__select_cmd qry = Db_qry_.select_().From_("dbs_group_bys")
 			.Cols_("key1")
 			.GroupBy_("key1");
 		int expd = min ? 1 : 2;

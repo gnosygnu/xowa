@@ -117,14 +117,22 @@ class Xohd_abrv_mgr_fxt {
 	public Xohd_abrv_mgr_fxt Init_data_gly(int uid, int box_max) {hpg.Gly_itms().Add(uid, new Xohd_data_itm__gallery_mgr(uid, box_max)); return this;}
 	public Xohd_abrv_mgr_fxt Init_data_img_basic(String ttl, int html_uid, int html_w, int html_h) {
 		Xohd_data_itm__img img = new Xohd_data_itm__img();
-		img.Init_by_base(Bry_.new_utf8_(ttl), Xop_lnki_type.Id_none, Xof_img_size.Null, Xof_img_size.Null, Xof_img_size.Upright_null, html_uid, html_w, html_h, Xohd_data_itm__base.File_repo_id_commons, Xof_ext_.Id_png, Bool_.N, html_w, Xof_doc_thumb.Null, Xof_doc_page.Null);
+		img.Data_init_base(Bry_.new_utf8_(ttl), Xof_ext_.Id_png, Xop_lnki_type.Id_none, Xof_img_size.Null, Xof_img_size.Null, Xof_img_size.Upright_null
+			, Xof_lnki_time.Null, Xof_lnki_page.Null
+			, Xohd_data_itm__base.File_repo_id_commons, Bool_.N, html_w
+			, html_uid, html_w, html_h
+			);
 		img_list.Add(img);
 		return this;
 	}
 	public Xohd_abrv_mgr_fxt Init_data_img_gly(String ttl, int html_uid, int html_w, int html_h, int box_w, int img_w, int img_pad) {
 		Xohd_data_itm__gallery_itm img = new Xohd_data_itm__gallery_itm();
-		img.Init_by_gallery(box_w, img_w, img_pad);
-		img.Init_by_base(Bry_.new_utf8_(ttl), Xop_lnki_type.Id_none, Xof_img_size.Null, Xof_img_size.Null, Xof_img_size.Upright_null, html_uid, html_w, html_h, Xohd_data_itm__base.File_repo_id_commons, Xof_ext_.Id_png, Bool_.N, html_w, Xof_doc_thumb.Null, Xof_doc_page.Null);
+		img.Data_init_gallery(box_w, img_w, img_pad);
+		img.Data_init_base(Bry_.new_utf8_(ttl), Xof_ext_.Id_png, Xop_lnki_type.Id_none, Xof_img_size.Null, Xof_img_size.Null, Xof_img_size.Upright_null
+			, Xof_lnki_time.Null, Xof_lnki_page.Null
+			, Xohd_data_itm__base.File_repo_id_commons, Bool_.N, html_w
+			, html_uid, html_w, html_h
+			);
 		img_list.Add(img);
 		return this;
 	}

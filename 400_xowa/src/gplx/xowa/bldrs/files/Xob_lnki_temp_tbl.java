@@ -32,7 +32,7 @@ class Xob_lnki_temp_tbl {
 		.Val_int(w)
 		.Val_int(h)
 		.Val_double(upright)
-		.Val_double(gplx.xowa.files.Xof_doc_thumb.Db_save_double(thumbtime))
+		.Val_double(gplx.xowa.files.Xof_lnki_time.Db_save_double(thumbtime))
 		.Val_int(page)
 		.Exec_insert();
 	}

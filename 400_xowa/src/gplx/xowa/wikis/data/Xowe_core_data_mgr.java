@@ -25,6 +25,7 @@ public class Xowe_core_data_mgr implements Xow_core_data_mgr {
 	public Xow_core_data_map		Map()		{return map;}		private final Xow_core_data_map	map			= new Xow_core_data_map();
 	public boolean						Cfg__schema_is_1()	{return Bool_.Y;}
 	public int						Cfg__db_id()		{return 1;}
+	public byte						Cfg__hdump_zip_tid() {return Tbl__cfg().Select_as_byte_or("xowa.schema.dbs.html", "zip_tid", gplx.ios.Io_stream_.Tid_bzip2);}
 	public Db_cfg_tbl				Tbl__cfg()	{return tbl__cfg;}	private final Db_cfg_tbl			tbl__cfg	= new Db_cfg_tbl();
 	public Xodb_xowa_db_tbl			Tbl__db()	{return tbl__db;}	private final Xodb_xowa_db_tbl	tbl__db		= new Xodb_xowa_db_tbl();
 	public Xowd_pg_regy_tbl			Tbl__pg()	{return tbl__pg;}	private final Xowd_pg_regy_tbl	tbl__pg		= new Xowd_pg_regy_tbl();

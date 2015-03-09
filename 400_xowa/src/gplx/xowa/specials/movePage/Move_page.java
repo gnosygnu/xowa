@@ -43,7 +43,7 @@ public class Move_page implements Xows_page {
 		wiki.Db_mgr().Load_mgr().Load_by_ttl(src_page, src_ttl.Ns(), src_ttl.Page_db());
 		page.Revision_data().Id_(src_page.Id());
 		page.Revision_data().Modified_on_(src_page.Modified_on());
-		page.Data_raw_(src_page.Text());
+		page.Data_raw_(src_page.Wtxt());
 		if (args.Create_redirect()) {	// NOTE: not tested; DATE:2014-02-27
 			save_mgr.Data_update(page, Xop_redirect_mgr.Make_redirect_text(trg_ttl.Full_db()));
 			Xodb_page trg_page = new Xodb_page();

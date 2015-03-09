@@ -168,7 +168,7 @@ public class Xob_fsdb_make extends Xob_itm_basic_base implements Xob_cmd {
 			rdr = Xob_xfer_regy_tbl.Select_by_lnki_page_id(conn, page_id_val, select_interval);
 			while (rdr.MoveNextPeer()) {
 				pages_found = true;	// at least one page found; set true
-				Xodb_tbl_oimg_xfer_itm itm = Xodb_tbl_oimg_xfer_itm.new_rdr_(rdr);
+				Xodb_tbl_oimg_xfer_itm itm = Xodb_tbl_oimg_xfer_itm.new_rdr_( rdr);
 				if (itm.Lnki_page_id() == page_id_val		// if same page_id but lnki_id < last, then ignore; needed b/c select selects by page_id, and need to be handle breaks between pages
 					&& itm.Lnki_id() <= lnki_id_val)
 					continue;
@@ -310,20 +310,17 @@ class Xodb_tbl_oimg_xfer_itm extends Xof_fsdb_itm {	public int 			Lnki_id() {ret
 		rv.lnki_id			= rdr.ReadInt(Xob_xfer_regy_tbl.Fld_lnki_id);
 		rv.lnki_page_id		= rdr.ReadInt(Xob_xfer_regy_tbl.Fld_lnki_page_id);
 		rv.lnki_ext_id		= rdr.ReadInt(Xob_xfer_regy_tbl.Fld_lnki_ext);
-		rv.File_is_orig_		(rdr.ReadByte(Xob_xfer_regy_tbl.Fld_file_is_orig) == Bool_.Y_byte);
-		byte[] ttl = rdr.ReadBryByStr(Xob_xfer_regy_tbl.Fld_lnki_ttl);
-		rv.Ctor_by_orig
-		( rdr.ReadByte(Xob_xfer_regy_tbl.Fld_orig_repo)
-		, ttl
+		rv.Ctor_by_fsdb_make
+		( rdr.ReadBryByStr(Xob_xfer_regy_tbl.Fld_lnki_ttl)
+		, rdr.ReadInt(Xob_xfer_regy_tbl.Fld_file_w), rdr.ReadInt(Xob_xfer_regy_tbl.Fld_file_h)	// set lnki_size; Xof_bin_mgr uses lnki_size
+		, Xof_lnki_time.Db_load_double(rdr, Xob_xfer_regy_tbl.Fld_lnki_time)
+		, Xof_lnki_page.Db_load_int(rdr, Xob_xfer_regy_tbl.Fld_lnki_page)
+		, rdr.ReadByte(Xob_xfer_regy_tbl.Fld_orig_repo)
 		, rdr.ReadInt(Xob_xfer_regy_tbl.Fld_orig_w)
 		, rdr.ReadInt(Xob_xfer_regy_tbl.Fld_orig_h)
 		, Bry_.Empty
+		, rdr.ReadByte(Xob_xfer_regy_tbl.Fld_file_is_orig) == Bool_.Y_byte
 		);
-		rv.Lnki_ttl_(ttl);
-		rv.Html_size_(rdr.ReadInt(Xob_xfer_regy_tbl.Fld_file_w), rdr.ReadInt(Xob_xfer_regy_tbl.Fld_file_h));	// set html_size as file_size (may try to optimize later by removing similar thumbs (EX: 220,221 -> 220))
-		rv.Lnki_size_(rdr.ReadInt(Xob_xfer_regy_tbl.Fld_file_w), rdr.ReadInt(Xob_xfer_regy_tbl.Fld_file_h));	// set lnki_size; Xof_bin_mgr uses lnki_size;			
-		rv.Lnki_page_			(Xof_doc_page.Db_load_int(rdr, Xob_xfer_regy_tbl.Fld_lnki_page));
-		rv.Lnki_time_			(Xof_doc_thumb.Db_load_double(rdr, Xob_xfer_regy_tbl.Fld_lnki_time));
 		return rv;
 	}
 }

@@ -48,7 +48,7 @@ public class Xop_languages_xnde implements Xox_xnde {
 		boolean english_needed = true;
 		for (int i = 0; i < len; i++) {
 			Xodb_page page = (Xodb_page)rslts.FetchAt(i);
-			byte[] page_ttl_bry = page.Ttl_wo_ns();
+			byte[] page_ttl_bry = page.Ttl_page_db();
 			int page_ttl_bry_len = page_ttl_bry.length;
 			if 		(Bry_.Eq(root_ttl_bry, page_ttl_bry)) continue; 	// ignore self; EX: "page"
 			if 		(lang_bgn < page_ttl_bry_len 							// guard against out of bounds

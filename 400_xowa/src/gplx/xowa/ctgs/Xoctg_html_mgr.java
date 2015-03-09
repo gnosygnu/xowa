@@ -61,7 +61,7 @@ public class Xoctg_html_mgr implements GfoInvkAble {
 			boolean id_exists = wiki.Db_mgr().Load_mgr().Load_by_id(dbo_page, itm.Id());
 			Xoa_ttl itm_ttl = null;
 			if (id_exists)
-				itm_ttl = Xoa_ttl.parse_(wiki, dbo_page.Ns_id(), dbo_page.Ttl_wo_ns());
+				itm_ttl = Xoa_ttl.parse_(wiki, dbo_page.Ns_id(), dbo_page.Ttl_page_db());
 			else {
 				itm_ttl = Xoa_ttl.parse_(wiki, itm.Sortkey());
 				if (itm_ttl == null)

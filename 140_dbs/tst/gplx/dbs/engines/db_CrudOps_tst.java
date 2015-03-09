@@ -112,7 +112,7 @@ class CrudOpsFxt {
 		this.Init();
 		String val = "Ω";
 		fx.tst_ExecDml(1, Db_qry_.insert_("dbs_crud_ops").Arg_("id", 3).Arg_obj_type_("name", val, Db_val_type.Tid_nvarchar));
-		Db_qry_select select = Db_qry_.select_val_("dbs_crud_ops", "name", Db_crt_.eq_("id", 3));
+		Db_qry__select_cmd select = Db_qry_.select_val_("dbs_crud_ops", "name", Db_crt_.eq_("id", 3));
 		Tfds.Eq(val, ExecRdr_val(select));
 
 		fx.tst_ExecDml(1, Db_qry_.update_("dbs_crud_ops", Db_crt_.Wildcard).Arg_obj_type_("name", val + "a", Db_val_type.Tid_nvarchar));
@@ -125,5 +125,5 @@ class CrudOpsFxt {
 		Tfds.Eq(val, ExecRdr_val(Db_qry_.select_val_("dbs_crud_ops", "name", Db_crt_.eq_("id", 3))));
 		Tfds.Eq(val, ExecRdr_val(Db_qry_.select_val_("dbs_crud_ops", "name", Db_crt_.eq_("name", "\\"))));
 	}
-	String ExecRdr_val(Db_qry_select select) {return (String)select.ExecRdr_val(fx.Conn());}
+	String ExecRdr_val(Db_qry__select_cmd select) {return (String)select.ExecRdr_val(fx.Conn());}
 }

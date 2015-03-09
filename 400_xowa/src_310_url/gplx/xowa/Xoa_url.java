@@ -28,6 +28,7 @@ public class Xoa_url {
 	public boolean				Protocol_is_relative() {return protocol_is_relative;} public Xoa_url Protocol_is_relative_(boolean v) {protocol_is_relative = v; return this;} private boolean protocol_is_relative;
 	public byte[]			Use_lang() {return use_lang;} public Xoa_url Use_lang_(byte[] v) {use_lang = v; return this;} private byte[] use_lang;
 	public byte[]			Lang_bry() {return lang_bry;} public Xoa_url Lang_bry_(byte[] v) {lang_bry = v; return this;} private byte[] lang_bry;
+	public byte[]			Xowa_vnt() {return xowa_vnt;} public void Xowa_vnt_(byte[] v) {xowa_vnt = v;} private byte[] xowa_vnt;
 	public boolean Redirect_force() {return redirect_force;} public Xoa_url Redirect_force_(boolean v) {redirect_force = v; return this;} private boolean redirect_force;
 	public boolean Search_fulltext() {return search_fulltext;} public Xoa_url Search_fulltext_(boolean v) {search_fulltext = v; return this;} private boolean search_fulltext;
 	public boolean Action_is_edit() {return action_is_edit;} public Xoa_url Action_is_edit_(boolean v) {action_is_edit = v; return this;} private boolean action_is_edit;
@@ -44,7 +45,7 @@ public class Xoa_url {
 	public void Init(byte[] raw) {
 		this.raw = raw;
 		segs_ary = null;
-		lang_bry = wiki_bry = page_bry = anchor_bry = use_lang = null;
+		lang_bry = wiki_bry = page_bry = anchor_bry = use_lang = xowa_vnt = null;
 		err = 0;
 		protocol_is_relative = false;
 		redirect_force = false;

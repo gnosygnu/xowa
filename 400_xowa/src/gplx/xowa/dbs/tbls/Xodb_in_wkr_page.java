@@ -51,10 +51,10 @@ class Xodb_in_wkr_page_title extends Xodb_in_wkr_page_base {
 		for (int i = bgn; i < end; i++) {
 			Xodb_page page = (Xodb_page)hash.FetchAt(i);
 			stmt.Val_int(in_ns);
-			stmt.Val_bry_as_str(page.Ttl_wo_ns());
+			stmt.Val_bry_as_str(page.Ttl_page_db());
 		}
 	}
-	@Override public Xodb_page Eval_rslts_key(Xodb_page rdr_page) {return (Xodb_page)hash.Fetch(rdr_page.Ttl_wo_ns());}
+	@Override public Xodb_page Eval_rslts_key(Xodb_page rdr_page) {return (Xodb_page)hash.Fetch(rdr_page.Ttl_page_db());}
 }
 class Xodb_in_wkr_page_title_ns extends Xodb_in_wkr_page_base {
 	private Xow_ns_mgr ns_mgr;
@@ -73,15 +73,15 @@ class Xodb_in_wkr_page_title_ns extends Xodb_in_wkr_page_base {
 		for (int i = bgn; i < end; i++) {
 			Xodb_page page = (Xodb_page)hash.FetchAt(i);
 			stmt.Val_int(page.Ns_id());
-			stmt.Val_bry_as_str(page.Ttl_wo_ns());
+			stmt.Val_bry_as_str(page.Ttl_page_db());
 		}
 	}
 	@Override public Xodb_page Eval_rslts_key(Xodb_page rdr_page) {
 		Xow_ns ns = ns_mgr.Ids_get_or_null(rdr_page.Ns_id());
 		if (ns == null) return null;	// NOTE: ns seems to "randomly" be null when threading during redlinks; guard against null; DATE:2014-01-03
-		byte[] ttl_wo_ns = rdr_page.Ttl_wo_ns();
+		byte[] ttl_wo_ns = rdr_page.Ttl_page_db();
 		rdr_page.Ttl_(ns, ttl_wo_ns);
-		return (Xodb_page)hash.Fetch(rdr_page.Ttl_w_ns());
+		return (Xodb_page)hash.Fetch(rdr_page.Ttl_full_db());
 	}
 }
 abstract class Xodb_in_wkr_page_base extends Xodb_in_wkr_base {

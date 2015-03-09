@@ -20,7 +20,7 @@ import gplx.fsdb.*; import gplx.dbs.*; import gplx.xowa.files.origs.*; import gp
 import gplx.xowa.wikis.*; import gplx.xowa.files.repos.*;
 import gplx.fsdb.data.*;
 class Xof_file_fxt {		
-	private Xoae_app app; private Xof_fsdb_mgr fsdb_mgr;
+	private Xoae_app app; private Xof_fsdb_mgr fsdb_mgr; private Xowe_wiki wiki;
 	private final Fsd_thm_itm tmp_thm = Fsd_thm_itm.new_(); private final Fsd_img_itm tmp_img = new Fsd_img_itm();
 	public void Rls() {fsdb_mgr.Rls();}
 	public void Reset() {
@@ -28,7 +28,7 @@ class Xof_file_fxt {
 		Io_url fsys_db = Xoa_test_.Url_file_enwiki();
 		Xoa_test_.Db_init(fsys_db);
 		app = Xoa_app_fxt.app_(Op_sys.Cur().Os_name(), fsys_db);
-		Xowe_wiki wiki = Xoa_app_fxt.wiki_tst_(app);
+		wiki = Xoa_app_fxt.wiki_tst_(app);
 		wiki.File_mgr__fsdb_mode().Tid_make_y_();
 		Xof_repo_fxt.Repos_init(app.File_mgr(), true, wiki);
 		wiki.Db_mgr_create_as_sql();		// NOTE: must create as sql_db_mgr not txt_db_mgr
@@ -44,7 +44,7 @@ class Xof_file_fxt {
 		this.Init_orig_db(Xof_orig_arg.new_comm(ttl, w, h));
 	}
 	public void Init_orig_db(Xof_orig_arg arg) {
-		fsdb_mgr.Orig_mgr().Insert(arg.Repo(), arg.Page(), Xof_ext_.new_by_ttl_(arg.Page()).Id(), arg.W(), arg.H(), arg.Redirect(), Xof_orig_wkr_.Status_found);
+		fsdb_mgr.Orig_mgr().Insert(arg.Repo(), arg.Page(), Xof_ext_.new_by_ttl_(arg.Page()).Id(), arg.W(), arg.H(), arg.Redirect());
 	}
 	public void Init_fsdb_db(Xof_fsdb_arg arg) {
 		if (arg.Is_thumb())
@@ -53,16 +53,17 @@ class Xof_file_fxt {
 			fsdb_mgr.Mnt_mgr().Img_insert(tmp_img, arg.Wiki(), arg.Ttl(), arg.Ext(), arg.W(), arg.H(), arg.Modified(), arg.Hash(), arg.Bin().length, gplx.ios.Io_stream_rdr_.mem_(arg.Bin()));
 	}
 	public void Exec_get(Xof_exec_arg arg) {
-		byte[] ttl = arg.Ttl();
-		byte[] md5 = Xof_xfer_itm_.Md5_(ttl);
-		Xof_ext ext = Xof_ext_.new_by_ttl_(ttl);
+		byte[] ttl_bry = arg.Ttl();
 		Xof_fsdb_itm itm = new Xof_fsdb_itm();
-		itm.Ctor_by_lnki(ttl, ext, md5, arg.Lnki_type(), arg.Lnki_w(), arg.Lnki_h(), Xof_patch_upright_tid_.Tid_all, arg.Lnki_upright(), arg.Lnki_time(), Xof_doc_page.Null);
+		itm.Ctor_by_lnki(ttl_bry, arg.Lnki_type(), arg.Lnki_w(), arg.Lnki_h(), Xof_patch_upright_tid_.Tid_all, arg.Lnki_upright(), arg.Lnki_time(), Xof_lnki_page.Null);
 		ListAdp itms_list = ListAdp_.new_(); itms_list.Add(itm);
-		fsdb_mgr.Fsdb_search_by_list(arg.Exec_tid(), itms_list, Xoae_page.Empty, Xog_js_wkr_.Null);
-		if (arg.Rslt_orig() != Xof_orig_wkr_.Status_null)	Tfds.Eq(arg.Rslt_orig(), itm.Orig_status(), "rslt_orig");
-		if (arg.Rslt_fsdb() != Xof_bin_wkr_.Tid_null)		Tfds.Eq(arg.Rslt_fsdb(), itm.Rslt_bin(), "rslt_fsdb");
-		if (arg.Rslt_conv() != Xof_cnv_wkr_.Tid_null)		Tfds.Eq(arg.Rslt_conv(), itm.Rslt_cnv(), "rslt_conv");
+		fsdb_mgr.Orig_mgr().Find_by_list(OrderedHash_.new_bry_(), itms_list, Xof_exec_tid.Tid_wiki_page);
+		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Xow_ns_.Id_main, ttl_bry);
+		Xoae_page page = Xoae_page.new_(wiki, ttl);
+		fsdb_mgr.Fsdb_search_by_list(arg.Exec_tid(), itms_list, page, Xog_js_wkr_.Null);
+		if (arg.Rslt_orig_exists()  != Bool_.__byte)	Tfds.Eq(arg.Rslt_orig_exists()  == Bool_.Y_byte, itm.Orig_exists(), "orig_exists");
+		if (arg.Rslt_file_exists()  != Bool_.__byte)	Tfds.Eq(arg.Rslt_file_exists()  == Bool_.Y_byte, itm.File_exists(), "file_exists");
+		if (arg.Rslt_file_resized() != Bool_.__byte)	Tfds.Eq(arg.Rslt_file_resized() == Bool_.Y_byte, itm.File_resized(), "file_resize");
 	}
 	public void Test_fsys_exists_y(String url)			{Test_fsys_exists(url, Bool_.Y);}
 	public void Test_fsys_exists_n(String url)			{Test_fsys_exists(url, Bool_.N);}
@@ -123,18 +124,18 @@ class Xof_fsdb_arg {
 	public int W() {return w;} private final int w;
 	public int H() {return h;} private final int h;
 	public double Time() {return time;} private final double time;
-	public int Page() {return page;} private final int page = Xof_doc_page.Null;
+	public int Page() {return page;} private final int page = Xof_lnki_page.Null;
 	public byte[] Bin() {return bin;} private final byte[] bin;
 	public DateAdp Modified() {return modified;} private final DateAdp modified = Fsd_thm_tbl.Modified_null;
 	public String Hash() {return hash;} private final String hash = Fsd_thm_tbl.Hash_null;
-	public static Xof_fsdb_arg new_comm_file(String ttl)						{return new_(Xow_domain_.Domain_bry_commons, Bool_.N, ttl, Xof_img_size.Null, Xof_img_size.Null, Xof_doc_thumb.Null_as_int);}
-	public static Xof_fsdb_arg new_comm_thumb(String ttl)						{return new_(Xow_domain_.Domain_bry_commons, Bool_.Y, ttl, W_default, H_default, Xof_doc_thumb.Null_as_int);}
-	public static Xof_fsdb_arg new_comm_thumb(String ttl, int w, int h)			{return new_(Xow_domain_.Domain_bry_commons, Bool_.Y, ttl, w, h, Xof_doc_thumb.Null_as_int);}
+	public static Xof_fsdb_arg new_comm_file(String ttl)						{return new_(Xow_domain_.Domain_bry_commons, Bool_.N, ttl, Xof_img_size.Null, Xof_img_size.Null, Xof_lnki_time.Null_as_int);}
+	public static Xof_fsdb_arg new_comm_thumb(String ttl)						{return new_(Xow_domain_.Domain_bry_commons, Bool_.Y, ttl, W_default, H_default, Xof_lnki_time.Null_as_int);}
+	public static Xof_fsdb_arg new_comm_thumb(String ttl, int w, int h)			{return new_(Xow_domain_.Domain_bry_commons, Bool_.Y, ttl, w, h, Xof_lnki_time.Null_as_int);}
 	public static Xof_fsdb_arg new_comm_thumb(String ttl, int w, int h, int s)	{return new_(Xow_domain_.Domain_bry_commons, Bool_.Y, ttl, w, h, s);}
-	public static Xof_fsdb_arg new_comm_orig(String ttl, int w, int h)			{return new_(Xow_domain_.Domain_bry_commons, Bool_.N, ttl, w, h, Xof_doc_thumb.Null_as_int);}
-	public static Xof_fsdb_arg new_comm(boolean thumb, String ttl, int w, int h)	{return new_(Xow_domain_.Domain_bry_commons, thumb, ttl, w, h, Xof_doc_thumb.Null_as_int);}
-	public static Xof_fsdb_arg new_wiki_thumb(String ttl, int w, int h)			{return new_(Xow_domain_.Domain_bry_enwiki, Bool_.Y, ttl, w, h, Xof_doc_thumb.Null_as_int);}
-	public static Xof_fsdb_arg new_wiki_orig(String ttl, int w, int h)			{return new_(Xow_domain_.Domain_bry_enwiki, Bool_.N, ttl, w, h, Xof_doc_thumb.Null_as_int);}
+	public static Xof_fsdb_arg new_comm_orig(String ttl, int w, int h)			{return new_(Xow_domain_.Domain_bry_commons, Bool_.N, ttl, w, h, Xof_lnki_time.Null_as_int);}
+	public static Xof_fsdb_arg new_comm(boolean thumb, String ttl, int w, int h)	{return new_(Xow_domain_.Domain_bry_commons, thumb, ttl, w, h, Xof_lnki_time.Null_as_int);}
+	public static Xof_fsdb_arg new_wiki_thumb(String ttl, int w, int h)			{return new_(Xow_domain_.Domain_bry_enwiki, Bool_.Y, ttl, w, h, Xof_lnki_time.Null_as_int);}
+	public static Xof_fsdb_arg new_wiki_orig(String ttl, int w, int h)			{return new_(Xow_domain_.Domain_bry_enwiki, Bool_.N, ttl, w, h, Xof_lnki_time.Null_as_int);}
 	public static Xof_fsdb_arg new_(byte[] wiki, boolean is_thumb, String ttl_str, int w, int h, int time) {
 		byte[] ttl = Bry_.new_utf8_(ttl_str);
 		int ext = Xof_ext_.new_by_ttl_(ttl).Id();
@@ -152,20 +153,19 @@ class Xof_exec_arg {
 	public int Lnki_w() {return lnki_w;} private int lnki_w;
 	public int Lnki_h() {return lnki_h;} private int lnki_h = Xop_lnki_tkn.Height_null;
 	public double Lnki_upright() {return lnki_upright;} public Xof_exec_arg Lnki_upright_(double v) {lnki_upright = v; return this;} private double lnki_upright = Xop_lnki_tkn.Upright_null;
-	public int Lnki_time() {return lnki_time;} public Xof_exec_arg Lnki_time_(int v) {lnki_time = v; return this;} private int lnki_time = Xof_doc_thumb.Null_as_int;
-	public int Lnki_page() {return lnki_page;} public Xof_exec_arg Lnki_page_(int v) {lnki_page = v; return this;} private int lnki_page = Xof_doc_page.Null;
+	public int Lnki_time() {return lnki_time;} public Xof_exec_arg Lnki_time_(int v) {lnki_time = v; return this;} private int lnki_time = Xof_lnki_time.Null_as_int;
+	public int Lnki_page() {return lnki_page;} public Xof_exec_arg Lnki_page_(int v) {lnki_page = v; return this;} private int lnki_page = Xof_lnki_page.Null;
 	public byte Exec_tid() {return exec_tid;} public Xof_exec_arg Exec_tid_(byte v) {exec_tid = v; return this;} private byte exec_tid = Xof_exec_tid.Tid_wiki_page;
-	public byte Rslt_orig() {return rslt_orig;} private byte rslt_orig = Xof_orig_wkr_.Status_null;
-	public byte Rslt_fsdb() {return rslt_fsdb;} private byte rslt_fsdb = Xof_bin_wkr_.Tid_null;
-	public byte Rslt_conv() {return rslt_conv;} private byte rslt_conv = Xof_cnv_wkr_.Tid_null;
+	public byte Rslt_orig_exists() {return rslt_orig_exists;} private byte rslt_orig_exists = Bool_.__byte;
+	public byte Rslt_file_exists() {return rslt_file_exists;} private byte rslt_file_exists = Bool_.__byte;
+	public byte Rslt_file_resized() {return rslt_file_resized;} private byte rslt_file_resized = Bool_.__byte;
 	public boolean Lnki_type_is_thumb() {return Xop_lnki_type.Id_defaults_to_thumb(lnki_type);}
-	public Xof_exec_arg Rslt_orig_noop()		{rslt_orig = Xof_orig_wkr_.Status_noop; return this;}
-	public Xof_exec_arg Rslt_orig_missing()		{rslt_orig = Xof_orig_wkr_.Status_missing_orig; return this;}
-	public Xof_exec_arg Rslt_orig_found()		{rslt_orig = Xof_orig_wkr_.Status_found; return this;}
-	public Xof_exec_arg Rslt_fsdb_xowa()		{rslt_fsdb = Xof_bin_wkr_.Tid_fsdb_xowa; return this;}
-	public Xof_exec_arg Rslt_fsdb_null()		{rslt_fsdb = Xof_bin_wkr_.Tid_null; return this;}
-	public Xof_exec_arg Rslt_conv_y()			{rslt_conv = Xof_cnv_wkr_.Tid_y; return this;}
-	public Xof_exec_arg Rslt_conv_n()			{rslt_conv = Xof_cnv_wkr_.Tid_n; return this;}
+	public Xof_exec_arg Rslt_orig_exists_n()	{rslt_orig_exists = Bool_.N_byte; return this;}
+	public Xof_exec_arg Rslt_orig_exists_y()	{rslt_orig_exists = Bool_.Y_byte; return this;}
+	public Xof_exec_arg Rslt_file_exists_n()	{rslt_file_exists = Bool_.N_byte; return this;}
+	public Xof_exec_arg Rslt_file_exists_y()	{rslt_file_exists = Bool_.Y_byte; return this;}
+	public Xof_exec_arg Rslt_file_resized_n()	{rslt_file_resized = Bool_.N_byte; return this;}
+	public Xof_exec_arg Rslt_file_resized_y()	{rslt_file_resized = Bool_.Y_byte; return this;}
 	public static Xof_exec_arg new_thumb(String ttl)					{return new_(ttl, Xop_lnki_type.Id_thumb, 220, Xop_lnki_tkn.Height_null);}
 	public static Xof_exec_arg new_thumb(String ttl, int w)				{return new_(ttl, Xop_lnki_type.Id_thumb, w, Xop_lnki_tkn.Height_null);}
 	public static Xof_exec_arg new_thumb(String ttl, int w, int h)		{return new_(ttl, Xop_lnki_type.Id_thumb, w, h);}

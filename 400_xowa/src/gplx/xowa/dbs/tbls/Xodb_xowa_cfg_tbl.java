@@ -40,7 +40,7 @@ public class Xodb_xowa_cfg_tbl {
 	public int Select_val_as_int(String grp, String key) {return Int_.parse_(Select_val(grp, key));}
 	public String Select_val(String grp, String key) {return Select_val_or(grp, key, null);}
 	public String Select_val_or(String grp, String key, String or) {
-		Db_qry_select qry = Db_qry_.select_val_(Tbl_name, Fld_cfg_val, Where_grp_key(grp, key));
+		Db_qry__select_cmd qry = Db_qry_.select_val_(Tbl_name, Fld_cfg_val, Where_grp_key(grp, key));
 		String rv = (String)qry.ExecRdr_val(conn);
 		return rv == null ? or : rv;
 	}

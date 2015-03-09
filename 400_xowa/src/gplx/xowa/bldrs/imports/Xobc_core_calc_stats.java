@@ -98,12 +98,12 @@ public class Xobc_core_calc_stats extends Xob_itm_basic_base implements Xob_cmd 
 		int rv = 0;
 		byte[] bry = Io_mgr._.LoadFilBry(fil);
 		Xob_xdat_file xdat_file = new Xob_xdat_file().Parse(bry, bry.length, fil);
-		Xodb_page page = Xodb_page.tmp_();
+		Xodb_page page = Xodb_page.new_tmp();
 		int count = xdat_file.Count();
 		for (int i = 0; i < count; i++) {
 			byte[] ttl_bry = xdat_file.Get_bry(i);
 			Xodb_page_.Txt_ttl_load(page, ttl_bry);
-			rv += page.Type_redirect() ? 0 : 1;
+			rv += page.Redirected() ? 0 : 1;
 		}
 		return rv;
 	}

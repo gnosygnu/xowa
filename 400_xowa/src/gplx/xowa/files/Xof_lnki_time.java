@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*;
-public class Xof_doc_thumb {
+public class Xof_lnki_time {
 	public static double	Db_save_double(double v) {return v;}
 	public static double	Db_load_double(DataRdr rdr, String fld) {return rdr.ReadDouble(fld);}
 	public static double	Db_load_double(Db_rdr rdr, String fld)	{return rdr.Read_double(fld);}
@@ -33,9 +33,9 @@ public class Xof_doc_thumb {
 	public static final int		Null_as_int = -1;
 
 	public static double	Convert_to_xowa_thumbtime	(int ext, double val)	{return Xof_ext_.Id_supports_thumbtime(ext)	? val		: Null;}
-	public static int		Convert_to_xowa_page		(int ext, double val)	{return Xof_ext_.Id_supports_page(ext)		? (int)val	: Xof_doc_page.Null;}
+	public static int		Convert_to_xowa_page		(int ext, double val)	{return Xof_ext_.Id_supports_page(ext)		? (int)val	: Xof_lnki_page.Null;}
 	public static double	Convert_to_fsdb_thumbtime	(int ext, double thumbtime, int page) {
-		return	page != Xof_doc_page.Null
+		return	page != Xof_lnki_page.Null
 			&&	Xof_ext_.Id_supports_page(ext)		// redefine thumbtime to page if pdf
 			?	page
 			:	thumbtime

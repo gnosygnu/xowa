@@ -59,8 +59,8 @@ public class Gallery_mgr_packed_base extends Gallery_mgr_base {
 			w = itm_default_w;
 		else
 			w = (itm_default_h) * 10 + 100;	// We want the width not to be the constraining factor, so use random big number.
-		lnki.Lnki_w_((int)(Scale_factor * w));
-		lnki.Lnki_h_((int)(Scale_factor * itm_default_h));
+		lnki.W_((int)(Scale_factor * w));
+		lnki.H_((int)(Scale_factor * itm_default_h));
 	}
 }
 class Gallery_mgr_packed_overlay extends Gallery_mgr_packed_base {

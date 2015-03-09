@@ -48,7 +48,7 @@ class Xofc_fil_mgr {
 		if (itm == Xofc_fil_itm.Null) {								// not in memory
 			itm = tbl.Select_one_v1(dir_id, name, is_orig, w, h, time);
 			if (itm == Xofc_fil_itm.Null) {							// not in db
-				itm = Make_v1(dir_id, name, is_orig, w, h, time, Xof_doc_page.Null, ext, size);
+				itm = Make_v1(dir_id, name, is_orig, w, h, time, Xof_lnki_page.Null, ext, size);
 				created.Val_(true);
 			}
 			else													// NOTE: itm loaded from tbl; add to hash; do not add if created b/c Make adds to hash;
@@ -127,8 +127,8 @@ class Xofc_fil_mgr {
 		byte[] md5 = Xof_xfer_itm_.Md5_(ttl);
 		int itm_ext_id = itm.Ext().Id();
 		Io_url fil_url = url_bldr.Init_for_trg_file(mode_id, trg_repo, ttl, md5, itm.Ext(), itm.W()
-			, Xof_doc_thumb.Convert_to_xowa_thumbtime	(itm_ext_id, itm.Time())
-			, Xof_doc_thumb.Convert_to_xowa_page		(itm_ext_id, itm.Time())
+			, Xof_lnki_time.Convert_to_xowa_thumbtime	(itm_ext_id, itm.Time())
+			, Xof_lnki_time.Convert_to_xowa_page		(itm_ext_id, itm.Time())
 			).Xto_url();
 		Io_mgr._.DeleteFil_args(fil_url).MissingFails_off().Exec();
 		itm.Cmd_mode_delete_();

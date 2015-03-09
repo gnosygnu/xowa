@@ -19,19 +19,16 @@ package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
 public class Xof_fsdb_mode {
 	private int tid;
 	Xof_fsdb_mode(int tid) {this.tid = tid;}
-	public boolean Tid_unknown()		{return tid == Tid_int_unknown;}
 	public boolean Tid_wmf()			{return tid == Tid_int_wmf;}
 	public boolean Tid_view()			{return tid == Tid_int_view;}
 	public boolean Tid_make()			{return tid == Tid_int_make;}
 	public void Tid_view_y_()		{tid = Tid_int_view;}
 	public void Tid_make_y_()		{tid = Tid_int_make;}
 	private static final int
-	  Tid_int_unknown	= 0
-	, Tid_int_wmf		= 1
+	  Tid_int_wmf		= 1
 	, Tid_int_view		= 2
 	, Tid_int_make		= 3
 	;
-//		public static Xof_fsdb_mode new_unknown()	{return new Xof_fsdb_mode(Tid_int_unknown);}
 	public static Xof_fsdb_mode new_wmf()		{return new Xof_fsdb_mode(Tid_int_wmf);}
 	public static Xof_fsdb_mode new_view()		{return new Xof_fsdb_mode(Tid_int_view);}
 }

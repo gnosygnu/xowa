@@ -51,7 +51,7 @@ public class Xodb_page_raw_parser {
 		page.Ttl_(ttl, ns_mgr);
 		read = rdr.Read_next(); if (!read) throw Err_.new_("could not read text");
 		byte[] text = Bry_.Mid(rdr.Bfr(), rdr.Key_pos_bgn(), rdr.Key_pos_end() - 1);
-		page.Text_(text);
+		page.Wtxt_(text);
 		rdr.Bfr_last_read_add(1);
 		return true;
 	}

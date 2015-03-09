@@ -66,7 +66,7 @@ public class Xoa_url_parser {
 			byte[] sub_bry = segs_ary[1];							// lang/type seems to be 2nd seg; EX: "en", "fr"; "commons"
 			byte[] lang_bry = sub_bry;
 			if (upload_segs_hash.Has(sub_bry)) {					// wikimedia links will have fmt of "/wikipedia/commons"; must change to wikimedia
-				domain_bry = Xow_domain_.Seg_bry_wikimedia;
+				domain_bry = Xow_domain_.Tid_bry_wikimedia;
 				lang_bry = Xol_lang_itm_.Key__unknown;
 			}
 			tmp_bfr.Clear().Add(sub_bry).Add_byte(Byte_ascii.Dot)	// add lang/type + .;	EX: "en."; "fr."; "commons."
@@ -105,6 +105,7 @@ public class Xoa_url_parser {
 					case Id_arg_action: 	if (Bry_.Eq(arg.Val_bry(), Bry_arg_action_edit)) url.Action_is_edit_(true); break;
 					case Id_arg_title: 		url.Page_bry_(arg.Val_bry()); url.Segs_ary_(Segs_ary_remove_w(url.Segs_ary())); break;	// handle /w/index.php?title=Earth
 					case Id_arg_fulltext: 	url.Search_fulltext_(true); break;
+					case Id_arg_xowa_vnt: 	url.Xowa_vnt_(arg.Val_bry()); ; break;
 				}
 			} 
 		}
@@ -281,7 +282,7 @@ public class Xoa_url_parser {
 		return Bry_.Add(Bry_.Mid(v, 0, pos), Bry_.Mid(v, pos + 2));	// skip ".m"
 	}
 	// private static final byte Tid_xowa = (byte)Gfo_url_parser.Protocol_file_tid + 1;
-	private static final byte Id_arg_redirect = 0, Id_arg_uselang = 1, Id_arg_title = 2, Id_arg_action = 3, Id_arg_fulltext = 4;
+	private static final byte Id_arg_redirect = 0, Id_arg_uselang = 1, Id_arg_title = 2, Id_arg_action = 3, Id_arg_fulltext = 4, Id_arg_xowa_vnt = 5;
 	private static final byte[] Bry_arg_redirect = Bry_.new_ascii_("redirect"), Bry_arg_uselang = Bry_.new_ascii_("uselang"), Bry_arg_title = Bry_.new_ascii_("title"), Bry_arg_fulltext = Bry_.new_ascii_("fulltext");
 	private static final byte[] Bry_upload_wikimedia_org = Bry_.new_ascii_("upload.wikimedia.org"), Bry_dot_org = Bry_.new_ascii_(".org")
 		, Bry_file = Bry_.new_ascii_("File:");	// NOTE: File does not need i18n; is a canonical namespace 
@@ -290,6 +291,7 @@ public class Xoa_url_parser {
 	public static final byte[] Bry_arg_action_eq_edit = Bry_.new_ascii_("action=edit")
 	, Bry_arg_action = Bry_.new_ascii_("action")
 	, Bry_arg_action_edit = Bry_.new_ascii_("edit")
+	, Bry_arg_xowa_vnt = Bry_.new_ascii_("xowa_vnt")
 	;
 	private static final Hash_adp_bry qry_args_hash = Hash_adp_bry.ci_ascii_()
 	.Add_bry_byte(Bry_arg_redirect, Id_arg_redirect)
@@ -297,6 +299,7 @@ public class Xoa_url_parser {
 	.Add_bry_byte(Bry_arg_title, Id_arg_title)
 	.Add_bry_byte(Bry_arg_action, Id_arg_action)
 	.Add_bry_byte(Bry_arg_fulltext, Id_arg_fulltext)
+	.Add_bry_byte(Bry_arg_xowa_vnt, Id_arg_xowa_vnt)
 	;
 	private static final Hash_adp_bry upload_segs_hash = Hash_adp_bry.ci_ascii_()
 	.Add_bry_bry(Xow_domain_.Tid_bry_commons);//.Add_bry_bry(Xow_domain_.Tid_bry_species_bry).Add_bry_bry(Xow_domain_.Tid_bry_meta_bry);

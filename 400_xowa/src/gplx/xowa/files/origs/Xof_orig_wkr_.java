@@ -20,21 +20,7 @@ import gplx.xowa.wmfs.apis.*;
 public class Xof_orig_wkr_ {
 	public static final Xof_orig_wkr[] Ary_empty = new Xof_orig_wkr[0];
 	public static final byte
-	  Tid_null				= Byte_.Max_value_127
-	, Tid_noop				= 0
-	, Tid_missing			= 1
-	, Tid_mock				= 2
-	, Tid_xowa_db			= 3
-	, Tid_xowa_reg			= 4
-	, Tid_wmf_api			= 5
-	, Tid_dir				= 6
-	;
-	public static final byte 
-	  Status_null			= Byte_.Max_value_127
-	, Status_noop			= 0
-	, Status_found			= 1
-	, Status_missing_orig	= 2
-	, Status_missing_qry	= 3
-	, Status_missing_bin	= 4
+	  Tid_xowa_db			= 1
+	, Tid_wmf_api			= 2
 	;
 }

@@ -52,7 +52,7 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 	}
 	public boolean Load_by_ttl(Xodb_page rv, Xow_ns ns, byte[] ttl) {return db_mgr.Tbl_page().Select_by_ttl(rv, ns, ttl);}
 	public void Load_by_ttls(Cancelable cancelable, OrderedHash rv, boolean fill_idx_fields_only, int bgn, int end) {db_mgr.Tbl_page().Select_by_ttl_in(cancelable, rv, db_mgr.Db_ctx(), fill_idx_fields_only, bgn, end);}
-	public void Load_page(Xodb_page rv, Xow_ns ns, boolean timestamp_enabled) {rv.Text_(db_mgr.Tbl_text().Select(rv.Text_db_id(), rv.Id()));}
+	public void Load_page(Xodb_page rv, Xow_ns ns, boolean timestamp_enabled) {rv.Wtxt_(db_mgr.Tbl_text().Select(rv.Wtxt_db_id(), rv.Id()));}
 	public boolean Load_by_id	(Xodb_page rv, int id) {return db_mgr.Tbl_page().Select_by_id(rv, id);}
 	public void Load_by_ids(Cancelable cancelable, ListAdp rv, int bgn, int end) {db_mgr.Tbl_page().Select_by_id_list(cancelable, false, rv, bgn, end);}
 	public boolean Load_ctg_v1(Xoctg_view_ctg rv, byte[] ctg_bry) {
@@ -98,9 +98,9 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 				view_grp = rv.Grp_by_tid(cur_tid);
 				prv_tid = cur_tid; 
 			}
-			Xoa_ttl ttl = Xoa_ttl.parse_(wiki, db_page.Ns_id(), db_page.Ttl_wo_ns());
+			Xoa_ttl ttl = Xoa_ttl.parse_(wiki, db_page.Ns_id(), db_page.Ttl_page_db());
 			Xoctg_view_itm view_itm = new Xoctg_view_itm().Sortkey_(db_ctg.Sortkey()).Ttl_(ttl);
-			view_itm.Load_by_ttl_data(cur_tid, db_page.Id(), Xodb_page.Timestamp_null, db_page.Text_len());
+			view_itm.Load_by_ttl_data(cur_tid, db_page.Id(), Xodb_page.Modified_on_null_int, db_page.Wtxt_len());
 			view_grp.Itms_add(view_itm);
 		}
 		len = Xoa_ctg_mgr.Tid__max;
@@ -154,7 +154,7 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 		for (int i = 0; i < len; i++) {
 			Xodb_page page = new Xodb_page();
 			byte[] ttl = Xoa_ttl.Replace_spaces(ctg_ttls[i]);	// NOTE: ctg_ttls has spaces since v1 rendered it literally;
-			page.Ttl_wo_ns_(ttl);
+			page.Ttl_page_db_(ttl);
 			if (!hash.Has(ttl))
 				hash.Add(ttl, page);
 		}

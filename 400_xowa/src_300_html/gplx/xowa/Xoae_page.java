@@ -27,14 +27,16 @@ public class Xoae_page implements Xoa_page {
 		redlink_lnki_list = new Xopg_redlink_lnki_list(ttl.Ns().Id_module());
 		Ttl_(ttl);
 	}	Xoae_page() {}	// called by Null
-	public void						Xtn_gallery_packed_exists_y_() {html_data.Xtn_imap_exists_y_();}
 	public Xow_wiki					Wiki() {return wiki;}
 	public Xoa_ttl					Ttl() {return ttl;} public Xoae_page Ttl_(Xoa_ttl v) {ttl = v; url.Wiki_bry_(wiki.Domain_bry()).Page_bry_(v.Full_url()); return this;} private Xoa_ttl ttl;
 	public Xoa_url					Url() {return url;} public Xoae_page Url_(Xoa_url v) {url = v; return this;} private Xoa_url url = Xoa_url.blank_();
+	public void						Xtn_gallery_packed_exists_y_() {html_data.Xtn_imap_exists_y_();}
+	public boolean						Exists() {return !Missing();}
+
+	public Xopg_revision_data		Revision_data() {return revision_data;} private Xopg_revision_data revision_data = new Xopg_revision_data();
 	public Xowe_wiki				Wikie() {return wiki;} private Xowe_wiki wiki;
 	public Xopg_redlink_lnki_list	Redlink_lnki_list() {return redlink_lnki_list;} private Xopg_redlink_lnki_list redlink_lnki_list;
 	public Xol_lang					Lang() {return lang;} public Xoae_page Lang_(Xol_lang v) {lang = v; return this;} private Xol_lang lang;
-	public Xopg_revision_data		Revision_data() {return rev_data;} private Xopg_revision_data rev_data = new Xopg_revision_data();
 	public Xopg_html_data			Html_data() {return html_data;} private Xopg_html_data html_data = new Xopg_html_data();
 	public Xog_tab_itm				Tab() {return tab;} public void Tab_(Xog_tab_itm v) {tab = v;} private Xog_tab_itm tab;
 	public Xopg_hdump_data			Hdump_data() {return hdump_data;} private final Xopg_hdump_data hdump_data = new Xopg_hdump_data();
@@ -90,7 +92,7 @@ public class Xoae_page implements Xoa_page {
 		tmpl_stack_ary = Bry_.Ary_empty;
 		tmpl_stack_ary_len = tmpl_stack_ary_max = 0;
 		popup_mgr.Clear();
-		rev_data.Clear();
+		revision_data.Clear();
 		tmpl_prepend_mgr.Clear();
 	}
 	public static final Xoae_page Null = null;

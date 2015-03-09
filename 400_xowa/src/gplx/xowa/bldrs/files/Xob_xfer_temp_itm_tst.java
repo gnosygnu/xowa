@@ -54,7 +54,7 @@ public class Xob_xfer_temp_itm_tst {
 		(	KeyVal_.new_(Xob_orig_regy_tbl.Fld_orig_file_ext	, Xof_ext_.Id_jpg)
 		,	KeyVal_.new_(Xob_lnki_regy_tbl.Fld_lnki_time		, (double)3)
 		);
-		fxt.Test_lnki_thumbtime(Xof_doc_thumb.Null);
+		fxt.Test_lnki_thumbtime(Xof_lnki_time.Null);
 
 		fxt.Reset().Test_bgn
 		(	KeyVal_.new_(Xob_orig_regy_tbl.Fld_orig_media_type	, Xof_media_type.Name_video)
@@ -67,7 +67,7 @@ public class Xob_xfer_temp_itm_tst {
 		(	KeyVal_.new_(Xob_orig_regy_tbl.Fld_orig_file_ext	, Xof_ext_.Id_jpg)
 		,	KeyVal_.new_(Xob_lnki_regy_tbl.Fld_lnki_page		, 3)
 		);
-		fxt.Test_lnki_page(Xof_doc_page.Null);
+		fxt.Test_lnki_page(Xof_lnki_page.Null);
 
 		fxt.Reset().Test_bgn
 		(	KeyVal_.new_(Xob_orig_regy_tbl.Fld_orig_file_ext	, Xof_ext_.Id_pdf)
@@ -136,7 +136,7 @@ class Xob_xfer_temp_itm_fxt {
 		( Xof_ext_.Id_png, 1, Xof_repo_itm.Repo_remote
 		, "A.png", Xof_ext_.Id_png, "A.png", Xop_lnki_type.Id_thumb, Xob_lnki_src_tid.Tid_file
 		, 220, 200, 1, 2, 440, 400, 3
-		, Xop_lnki_tkn.Upright_null, Xof_doc_thumb.Null, Xof_doc_page.Null
+		, Xop_lnki_tkn.Upright_null, Xof_lnki_time.Null, Xof_lnki_page.Null
 		, Xof_media_type.Name_bitmap, "png"
 		));
 		GfoNdeList subs = GfoNdeList_.new_();

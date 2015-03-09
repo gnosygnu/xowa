@@ -25,6 +25,7 @@ public class Xow_domain_tst {
 	@Test  public void Parse_zh_classical_wikipedia()	{fxt.Test_parse("zh-classical.wikipedia.org"	, "lzh"	, Xow_domain_.Tid_int_wikipedia);}
 	@Test  public void Parse_commons() 					{fxt.Test_parse("commons.wikimedia.org"			, ""	, Xow_domain_.Tid_int_commons);}
 	@Test  public void Parse_species() 					{fxt.Test_parse("species.wikimedia.org"			, ""	, Xow_domain_.Tid_int_species);}
+	@Test  public void Parse_ru_wikimedia_org() 		{fxt.Test_parse("ru.wikimedia.org"				, "ru"	, Xow_domain_.Tid_int_wikimedia);}
 	@Test  public void Parse_home() 					{fxt.Test_parse("home"							, ""	, Xow_domain_.Tid_int_home);}
 	@Test  public void Parse_other() 					{fxt.Test_parse("other.wiki"					, ""	, Xow_domain_.Tid_int_other);}
 }

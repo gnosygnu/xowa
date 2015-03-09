@@ -40,7 +40,7 @@ public class Fsm_bin_tbl {
 	}
 	public Fsm_bin_fil[] Select_all(Io_url dir) {
 		ListAdp rv = ListAdp_.new_();
-		Db_qry qry = Db_qry_select.new_().From_(tbl_name).Cols_all_().Where_(Db_crt_.eq_many_(Db_meta_fld.Ary_empy)).OrderBy_asc_(fld_uid);
+		Db_qry qry = Db_qry__select_cmd.new_().From_(tbl_name).Cols_all_().Where_(Db_crt_.eq_many_(Db_meta_fld.Ary_empy)).OrderBy_asc_(fld_uid);
 		Db_rdr rdr = Db_rdr_.Null;
 		try {
 			rdr = conn.Stmt_new(qry).Clear().Exec_select_as_rdr();

@@ -53,7 +53,7 @@ public class Xob_hive_mgr {
 			for (; row_idx < rows_len; row_idx++) {
 				xdat_file.GetAt(xdat_itm, row_idx);
 				Xodb_page ttl_itm = Xodb_page_.Txt_ttl_load(Bry_.Mid(xdat_itm.Src(), xdat_itm.Itm_bgn(), xdat_itm.Itm_end()));
-				if (!include_redirects && ttl_itm.Type_redirect()) continue;
+				if (!include_redirects && ttl_itm.Redirected()) continue;
 				++count;
 				nxt_itm = ttl_itm;
 				if (count == total) {
@@ -88,7 +88,7 @@ public class Xob_hive_mgr {
 			for (; row_idx > -1; row_idx--) {
 				xdat_file.GetAt(xdat_itm, row_idx);
 				Xodb_page ttl_itm = Xodb_page_.Txt_ttl_load(Bry_.Mid(xdat_itm.Src(), xdat_itm.Itm_bgn(), xdat_itm.Itm_end()));
-				if (!include_redirects && ttl_itm.Type_redirect()) continue;
+				if (!include_redirects && ttl_itm.Redirected()) continue;
 //				list.Add(ttl_itm);
 				++count;
 				prv_itm = ttl_itm;
@@ -158,7 +158,7 @@ public class Xob_hive_mgr {
 			for (; row_idx < rows_len; row_idx++) {
 				xdat.GetAt(xdat_itm, row_idx);
 				Xodb_page ttl_itm = Xodb_page_.Txt_ttl_load(Bry_.Mid(xdat_itm.Src(), xdat_itm.Itm_bgn(), xdat_itm.Itm_end()));
-				if (!include_redirects && ttl_itm.Type_redirect()) continue;
+				if (!include_redirects && ttl_itm.Redirected()) continue;
 				list.Add(ttl_itm);
 				if (++count == total) {loop = false; break;}
 			}

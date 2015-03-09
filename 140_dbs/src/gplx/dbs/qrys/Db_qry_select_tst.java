@@ -19,8 +19,8 @@ package gplx.dbs.qrys; import gplx.*; import gplx.dbs.*;
 import org.junit.*; import gplx.dbs.sqls.*;
 public class Db_qry_select_tst {
 	@Before public void setup() {
-		cmd = Db_qry_select.new_();
-	}	Db_qry_select cmd; String expd;
+		cmd = Db_qry__select_cmd.new_();
+	}	Db_qry__select_cmd cmd; String expd;
 	@Test  public void Basic() {
 		cmd.Cols_("fld0", "fld1").From_("tbl0");
 		expd = "SELECT fld0, fld1 FROM tbl0";
@@ -76,7 +76,7 @@ public class Db_qry_select_tst {
 //		}
 //		@Test  public void Union() {
 //			cmd.From_("tbl0").select("fld0").union_(qry2.from("tbl1").select("fld0"));
-//			cmd.From_("tbl0").select("fld0").union_().from("tbl1").select("fld0"); // feasible, but will be bad later when trying to access Db_qry_select props
+//			cmd.From_("tbl0").select("fld0").union_().from("tbl1").select("fld0"); // feasible, but will be bad later when trying to access Db_qry__select_cmd props
 //			expd = "SELECT fld0 FROM tbl0 UNION SELECT fld0 FROM tbl1";
 //			Tfds.Eq(cmd.XtoStr(), expd);
 //		}

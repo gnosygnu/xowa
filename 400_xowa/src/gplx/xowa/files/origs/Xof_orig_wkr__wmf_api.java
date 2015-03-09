@@ -24,7 +24,17 @@ public class Xof_orig_wkr__wmf_api implements Xof_orig_wkr {
 		this.orig_api = orig_api; this.download_wkr = download_wkr; this.repo_mgr = repo_mgr; this.wiki_domain = wiki_domain;
 	}
 	public byte Tid() {return Xof_orig_wkr_.Tid_wmf_api;}
-	public boolean			Find_by_list(OrderedHash rv, ListAdp itms) {throw Err_.not_implemented_();}
+	public void			Find_by_list(OrderedHash rv, ListAdp itms) {
+		int len = itms.Count();
+		for (int i = 0; i < len; ++i) {
+			Xof_fsdb_itm fsdb = (Xof_fsdb_itm)itms.FetchAt(i);
+			byte[] fsdb_ttl = fsdb.Lnki_ttl();
+			if (rv.Has(fsdb_ttl)) continue;
+			Xof_orig_itm orig = Find_as_itm(fsdb_ttl);
+			if (orig == Xof_orig_itm.Null) continue;
+			rv.Add(fsdb_ttl, orig);
+		}
+	}
 	public Xof_orig_itm Find_as_itm(byte[] ttl) {
 		boolean found = orig_api.Api_query_size(api_rv, download_wkr, repo_mgr, ttl, Xof_img_size.Null, Xof_img_size.Null);	// pass in null size to look for orig; DATE:2015-02-10
 		if (!found) return Xof_orig_itm.Null;	// ttl not found by api; return
@@ -32,9 +42,10 @@ public class Xof_orig_wkr__wmf_api implements Xof_orig_wkr {
 		byte[] api_page = api_rv.Orig_page();
 		int api_w = api_rv.Orig_w(), api_h = api_rv.Orig_h();
 		Xof_ext api_ext = Xof_ext_.new_by_ttl_(api_page); api_ext = Ext__handle_ogg(api_ext, api_w, api_h);
-		byte[] api_redirect = Bry_.Eq(api_page, ttl) ? null : api_page;	// ttl is different; must be redirect
+		byte[] api_redirect = Bry_.Eq(api_page, ttl) ? Bry_.Empty : api_page;	// ttl is different; must be redirect
 		Xof_orig_itm rv = new Xof_orig_itm();
 		rv.Init(api_repo, api_page, api_ext.Id(), api_w, api_h, api_redirect);
+		rv.Insert_new_y_();
 		return rv;
 	}
 	public boolean Add_orig(byte repo, byte[] page, int ext_id, int w, int h, byte[] redirect) {return false;}

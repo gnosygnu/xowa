@@ -56,7 +56,7 @@ public class Mem_tbl {
 		String[] select = null; Criteria where = null;
 		Db_qry__select_in_tbl qry = Db_qry__select_in_tbl.as_(stmt.Qry());
 		if (qry == null) {
-			Db_qry_select qry2 = (Db_qry_select)stmt.Qry();
+			Db_qry__select_cmd qry2 = (Db_qry__select_cmd)stmt.Qry();
 			select = qry2.Cols_ary();
 			where = qry2.Where();
 		}

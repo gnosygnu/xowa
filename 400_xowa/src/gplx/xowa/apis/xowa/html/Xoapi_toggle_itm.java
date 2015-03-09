@@ -19,12 +19,13 @@ package gplx.xowa.apis.xowa.html; import gplx.*; import gplx.xowa.*; import gplx
 public class Xoapi_toggle_itm implements GfoInvkAble {
 	public Xoapi_toggle_itm(byte[] key_bry) {this.key_bry = key_bry;}
 	public byte[] Key_bry() {return key_bry;} private byte[] key_bry;
+	public byte[] Heading_bry() {return heading_bry;} private byte[] heading_bry;
 	public byte[] Icon_src() {return icon_src;} private byte[] icon_src = Bry_.Empty;
 	public byte[] Icon_title() {return icon_title;} private byte[] icon_title = Bry_.Empty;
 	public byte[] Elem_display() {return elem_display;} private byte[] elem_display = Bry_.Empty;
 	public byte[] Html_toggle_hdr_cls() {return html_toggle_hdr_cls;} public Xoapi_toggle_itm Html_toggle_hdr_cls_(byte[] v) {html_toggle_hdr_cls = v; return this;} private byte[] html_toggle_hdr_cls = Bry_.Empty;
 	public boolean Visible() {return visible;} private boolean visible;
-	public Xoapi_toggle_itm Init(Xowe_wiki wiki) {
+	public Xoapi_toggle_itm Init(Xowe_wiki wiki, byte[] heading_bry) {
 		if (Img_src_y == null) {
 			Io_url img_dir = wiki.Appe().User().Fsys_mgr().App_img_dir().GenSubDir_nest("window", "portal");
 			Img_src_y = img_dir.GenSubFil("twisty_down.png").To_http_file_bry();
@@ -34,6 +35,7 @@ public class Xoapi_toggle_itm implements GfoInvkAble {
 		byte[] img_title_msg = visible ? Img_title_msg_y : Img_title_msg_n;
 		icon_title = wiki.Msg_mgr().Val_by_key_obj(img_title_msg);
 		elem_display = visible ? Img_display_y : Img_display_n;
+		this.heading_bry = heading_bry;
 		Html_toggle_gen();
 		return this;
 	}
@@ -65,8 +67,8 @@ public class Xoapi_toggle_itm implements GfoInvkAble {
 		}
 		Bry_fmtr fmtr = Bry_fmtr.new_(); Bry_bfr bfr = Bry_bfr.new_(8); 
 		html_toggle_btn
-			= fmtr.Fmt_("<a href='javascript:xowa_toggle_visible(\"~{key}\");'><img id='~{key}-toggle-icon' src='~{src}' title='~{title}' /></a>")
-			.Keys_("key", "src", "title").Bld_bry_many(bfr, key_bry, icon_src, icon_title)
+			= fmtr.Fmt_("<a href='javascript:xowa_toggle_visible(\"~{key}\");' style='text-decoration: none !important;'>~{heading}<img id='~{key}-toggle-icon' src='~{src}' title='~{title}' /></a>")
+			.Keys_("key", "src", "title", "heading").Bld_bry_many(bfr, key_bry, icon_src, icon_title, heading_bry)
 			;
 		html_toggle_hdr
 			= fmtr.Fmt_(" id='~{key}-toggle-elem' style='~{display}~{toggle_hdr_cls}'")

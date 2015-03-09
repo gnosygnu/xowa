@@ -28,7 +28,7 @@ class Schema_loader_mgr__sqlite implements Schema_loader_mgr {
 	public void Load(Schema_db_mgr db_mgr, Db_conn conn) {
 		Gfo_usr_dlg_._.Log_many("", "", "db.schema.load.bgn: conn=~{0}", conn.Url().Xto_api());
 		Schema_tbl_mgr tbl_mgr = db_mgr.Tbl_mgr();
-		Db_qry__select_in_tbl qry = Db_qry__select_in_tbl.new_("sqlite_master", String_.Ary_empty, String_.Ary("type", "name", "sql"));
+		Db_qry__select_in_tbl qry = Db_qry__select_in_tbl.new_("sqlite_master", String_.Ary_empty, String_.Ary("type", "name", "sql"), Db_qry__select_in_tbl.Order_by_null);
 		Db_stmt stmt = Db_stmt_.new_select_as_rdr(conn, qry);
 		Db_rdr rdr = stmt.Exec_select_as_rdr();
 		while (rdr.Move_next()) {

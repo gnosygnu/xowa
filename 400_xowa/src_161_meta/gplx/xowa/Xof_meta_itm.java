@@ -45,7 +45,7 @@ public class Xof_meta_itm {
 	public byte Orig_exists() {return orig_exists;} private byte orig_exists = Exists_unknown;
 	public void Orig_exists_(byte v) {if (this.orig_exists == v) return; this.orig_exists = v; Dirty();}
 	public Xof_meta_thumb[] Thumbs() {return thumbs;} private Xof_meta_thumb[] thumbs = Xof_meta_thumb.Ary_empty;
-	public boolean Thumbs_indicates_oga() {return Thumbs_get_by_w(0, 0, Xof_doc_thumb.Null_as_int) != null;}	// if 0,0 exists, then assume no thumbs; needed for oga/ogg
+	public boolean Thumbs_indicates_oga() {return Thumbs_get_by_w(0, 0, Xof_lnki_time.Null_as_int) != null;}	// if 0,0 exists, then assume no thumbs; needed for oga/ogg
 	public boolean Thumbs_del(int w) {
 		int del_idx = -1;
 		int thumbs_len = thumbs.length;
@@ -64,17 +64,17 @@ public class Xof_meta_itm {
 		thumbs = thumbs_new;
 		return true;
 	}
-	public Xof_meta_thumb Thumbs_get_img(int w, int w_adj)	{return Thumbs_get_by_w(w, w_adj, Xof_doc_thumb.Null_as_int);}
+	public Xof_meta_thumb Thumbs_get_img(int w, int w_adj)	{return Thumbs_get_by_w(w, w_adj, Xof_lnki_time.Null_as_int);}
 	public Xof_meta_thumb Thumbs_get_vid(int s)				{return Thumbs_get_by_w(Xop_lnki_tkn.Width_null, 0, s);}
 	Xof_meta_thumb Thumbs_get_by_w(int w, int w_adj, int seek) {
 		int thumbs_len = thumbs.length;
 		for (int i = 0; i < thumbs_len; i++) {
 			Xof_meta_thumb thumb = thumbs[i];
 			int tmp_adj = w_adj;// thumb.Width() < 50 ? 0 : w_adj;
-			if (	(Xof_doc_thumb.Null_y(seek) 
+			if (	(Xof_lnki_time.Null_y(seek) 
 				&&	Int_.Between(thumb.Width(), w - tmp_adj, w + tmp_adj))
 				||	(w == Xop_lnki_tkn.Width_null
-					&& (Xof_doc_thumb.Null_y(seek) || Int_.In(seek, thumb.Seeks()))))
+					&& (Xof_lnki_time.Null_y(seek) || Int_.In(seek, thumb.Seeks()))))
 				return thumb;
 		}
 		return null;

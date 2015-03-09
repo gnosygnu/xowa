@@ -58,7 +58,7 @@ public class Gallery_html_wtr {
 			if (	itm_ttl != null				// ttl does not have invalid characters
 				&&	itm_ttl.Ns().Id_file()		// ttl is in file ns;
 				) {
-				Xop_lnki_tkn lnki = ctx.Tkn_mkr().Lnki(itm.Ttl_bgn(), itm.Ttl_end()).Ttl_(itm_ttl).Lnki_w_(mgr.Itm_w()).Lnki_h_(mgr.Itm_h());
+				Xop_lnki_tkn lnki = ctx.Tkn_mkr().Lnki(itm.Ttl_bgn(), itm.Ttl_end()).Ttl_(itm_ttl).W_(mgr.Itm_w()).H_(mgr.Itm_h());
 				Xof_xfer_itm xfer_itm = wtr.Lnki_wtr().File_wtr().Lnki_eval(ctx, page, lnki, wtr.Queue_add_ref())
 					.Gallery_mgr_h_(mgr.Itm_h_or_default())
 					.Html_elem_tid_(Xof_html_elem.Tid_gallery)
@@ -80,7 +80,7 @@ public class Gallery_html_wtr {
 					mgr_elem_id = itm_elem_id;	// HACK: set mgr_elem_id to first itm_elem_id
 				int html_w = xfer_itm.Html_w();
 				int html_h = xfer_itm.Html_h();
-				byte[] html_src = xfer_itm.Html_view_src();
+				byte[] html_src = xfer_itm.Html_view_url();
 				if (html_src.length == 0) {	// itm not found; use gallery defaults
 					html_w = mgr.Itm_w_or_default();
 					html_h = mgr.Itm_h_or_default();
@@ -105,7 +105,7 @@ public class Gallery_html_wtr {
 					, lnki_alt
 					);
 				if (hctx_is_hdump)
-					hdump_imgs.Imgs_add_img(new Xohd_data_itm__gallery_itm().Init_by_gallery(itm_div_w, itm_box_w, itm_margin), xfer_itm, Xohd_data_itm__gallery_itm.Tid_gallery);
+					hdump_imgs.Imgs_add_img(new Xohd_data_itm__gallery_itm().Data_init_gallery(itm_div_w, itm_box_w, itm_margin), xfer_itm, Xohd_data_itm__gallery_itm.Tid_gallery);
 			}
 			else {
 				Gallery_html_wtr_.Itm_txt_fmtr.Bld_bfr_many(itm_bfr

@@ -32,12 +32,12 @@ class Xow_page_fetcher_mok implements Xow_page_fetcher {
 	public Xow_page_fetcher Wiki_(Xowe_wiki v) {return this;}
 	public void Clear() {pages.Clear();}	private HashAdp pages = HashAdp_.new_();
 	public void Add(int ns_id, byte[] ttl, byte[] text) {
-		Xodb_page page = new Xodb_page().Ns_id_(ns_id).Ttl_wo_ns_(ttl).Text_(text);
+		Xodb_page page = new Xodb_page().Ns_id_(ns_id).Ttl_page_db_(ttl).Wtxt_(text);
 		pages.Add(Make_key(ns_id, ttl), page);
 	}
 	public byte[] Fetch(int ns_id, byte[] ttl) {
 		Xodb_page rv = (Xodb_page)pages.Fetch(Make_key(ns_id, ttl));
-		return rv == null ? null : rv.Text();
+		return rv == null ? null : rv.Wtxt();
 	}
 	String Make_key(int ns_id, byte[] ttl) {return Int_.Xto_str(ns_id) + "|" + String_.new_utf8_(ttl);}
 }

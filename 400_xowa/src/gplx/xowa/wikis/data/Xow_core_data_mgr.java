@@ -22,6 +22,7 @@ public interface Xow_core_data_mgr {
 	Xow_core_data_map		Map();
 	boolean					Cfg__schema_is_1();
 	int						Cfg__db_id();
+	byte					Cfg__hdump_zip_tid();
 	int						Dbs__len();
 	Xowd_db_file			Dbs__get_at(int i);
 	Xowd_db_file			Dbs__get_by_tid_nth_or_new(byte tid);

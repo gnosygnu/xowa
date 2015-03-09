@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs; import gplx.*;
 import gplx.core.criterias.*; import gplx.dbs.qrys.*;
 public class Db_qry_ {
-	public static Db_qry_select select_cols_(String tbl, Criteria crt, String... cols){return select_().From_(tbl).Where_(crt).Cols_(cols);}
-	public static Db_qry_select select_val_(String tbl, String col, Criteria crt)			{return select_().From_(tbl).Where_(crt).Cols_(col);}
-	public static Db_qry_select select_tbl_(String tbl)										{return select_().From_(tbl);}
-	public static Db_qry_select select_()													{return Db_qry_select.new_();}
+	public static Db_qry__select_cmd select_cols_(String tbl, Criteria crt, String... cols){return select_().From_(tbl).Where_(crt).Cols_(cols);}
+	public static Db_qry__select_cmd select_val_(String tbl, String col, Criteria crt)		{return select_().From_(tbl).Where_(crt).Cols_(col);}
+	public static Db_qry__select_cmd select_tbl_(String tbl)								{return select_().From_(tbl);}
+	public static Db_qry__select_cmd select_()												{return Db_qry__select_cmd.new_();}
 	public static Db_qry_delete delete_(String tbl, Criteria crt)							{return Db_qry_delete.new_(tbl, crt);}
 	public static Db_qry_delete delete_tbl_(String tbl)										{return Db_qry_delete.new_(tbl);}
 	public static Db_qry_insert insert_(String tbl)											{return new Db_qry_insert(tbl);}

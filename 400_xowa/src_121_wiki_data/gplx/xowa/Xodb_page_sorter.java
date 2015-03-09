@@ -26,11 +26,11 @@ public class Xodb_page_sorter implements ComparerAble {
 		switch (compareType) {
 			case Tid_ns_ttl:	{
 				int rv = Int_.Compare(lhs.Ns_id(), rhs.Ns_id());
-				return rv == CompareAble_.Same ? Bry_.Compare(lhs.Ttl_wo_ns(), rhs.Ttl_wo_ns()) : rv;
+				return rv == CompareAble_.Same ? Bry_.Compare(lhs.Ttl_page_db(), rhs.Ttl_page_db()) : rv;
 			}
-			case Tid_itm_len:	return Int_.Compare(lhs.Text_len(), rhs.Text_len());
+			case Tid_itm_len:	return Int_.Compare(lhs.Wtxt_len(), rhs.Wtxt_len());
 			case Tid_id:		return Int_.Compare(lhs.Id(), rhs.Id());
-			case Tid_ttl:		return Bry_.Compare(lhs.Ttl_wo_ns(), rhs.Ttl_wo_ns());
+			case Tid_ttl:		return Bry_.Compare(lhs.Ttl_page_db(), rhs.Ttl_page_db());
 			case Tid_ctg_tid_sortkey:
 				gplx.xowa.ctgs.Xoctg_page_xtn lhs_xtn = (gplx.xowa.ctgs.Xoctg_page_xtn)lhs.Xtn();
 				gplx.xowa.ctgs.Xoctg_page_xtn rhs_xtn = (gplx.xowa.ctgs.Xoctg_page_xtn)rhs.Xtn();

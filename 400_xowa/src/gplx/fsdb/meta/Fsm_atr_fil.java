@@ -73,7 +73,7 @@ public class Fsm_atr_fil implements RlsAble {
 	public int Fil_insert(Fsd_fil_itm rv, String dir, String fil, int ext_id, DateAdp modified, String hash, int bin_db_id, long bin_len, gplx.ios.Io_stream_rdr bin_rdr) {
 		int dir_id = Dir_id__get_or_insert(dir);
 		int fil_id = Fil_id__get_or_insert(Xtn_tid_none, dir_id, fil, ext_id, modified, hash, bin_db_id, bin_len);
-		rv.Id_(fil_id).Owner_(dir_id);
+		rv.Init_for_insert(bin_db_id, dir_id, fil_id);
 		return fil_id;
 	}
 	public int Img_insert(Fsd_img_itm rv, String dir, String fil, int ext_id, int img_w, int img_h, DateAdp modified, String hash, int bin_db_id, long bin_len, gplx.ios.Io_stream_rdr bin_rdr) {
@@ -87,7 +87,7 @@ public class Fsm_atr_fil implements RlsAble {
 		int fil_id = Fil_id__get_or_insert(Xtn_tid_thm, dir_id, fil, ext_id, modified, hash, Fsd_bin_tbl.Null_db_bin_id, Fsd_bin_tbl.Null_size);	// NOTE: bin_db_id must be set to NULL
 		int thm_id = abc_mgr.Next_id();
 		tbl_thm.Insert(thm_id, fil_id, thm_w, thm_h, thumbtime, page, bin_db_id, bin_len, modified, hash);
-		rv.Id_(thm_id).Owner_id_(fil_id).Dir_id_(dir_id);
+		rv.Init_by_insert(bin_db_id, dir_id, fil_id, thm_id);
 		return thm_id;
 	}
 	public static Fsm_atr_fil make_(Fsm_abc_mgr abc_mgr, int id, Io_url url, String path_bgn) {

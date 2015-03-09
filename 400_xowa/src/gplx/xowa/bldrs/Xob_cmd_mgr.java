@@ -20,6 +20,7 @@ import gplx.core.primitives.*;
 import gplx.xowa.wikis.*; import gplx.xowa.xtns.wdatas.imports.*; import gplx.xowa.bldrs.imports.ctgs.*; import gplx.xowa.bldrs.imports.*; import gplx.xowa.bldrs.oimgs.*;
 import gplx.xowa.bldrs.wikis.redirects.*; import gplx.xowa.bldrs.wikis.images.*;
 import gplx.xowa.bldrs.files.*; import gplx.xowa.files.origs.*;
+import gplx.xowa.html.hdumps.bldrs.*;
 public class Xob_cmd_mgr implements GfoInvkAble {
 	public Xob_cmd_mgr(Xob_bldr bldr) {this.bldr = bldr;} private Xob_bldr bldr;
 	public void Clear() {list.Clear(); dump_rdrs.Clear();}
@@ -60,6 +61,7 @@ public class Xob_cmd_mgr implements GfoInvkAble {
 		else if	(String_.Eq(cmd_key, Xob_download_wkr.KEY_oimg))			return Add(new Xob_download_wkr(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_page_regy_cmd.KEY_oimg))			return Add(new Xob_page_regy_cmd(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_exec_sql.KEY))					return Add(new Xob_cmd_exec_sql(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_rl_regy_cmd.Cmd_key_const))		return Add(new Xob_rl_regy_cmd(bldr, wiki));
 
 		else if	(String_.Eq(cmd_key, Xob_redirect_cmd.KEY_redirect))		return Add(new Xob_redirect_cmd(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_wiki_image_sql.KEY))				return Add(new Xob_wiki_image_sql(bldr, wiki));

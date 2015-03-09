@@ -60,33 +60,33 @@ public class Xob_page_sql extends Xob_itm_basic_base implements Xobd_wkr, GfoInv
 		int page_id = page.Id();
 		DateAdp modified = page.Modified_on();
 		if (modified.compareTo(modified_latest) == CompareAble_.More) modified_latest = modified;
-		byte[] text = page.Text();
-		int text_len = page.Text_len();
+		byte[] text = page.Wtxt();
+		int text_len = page.Wtxt_len();
 		Xoa_ttl redirect_ttl = redirect_mgr.Extract_redirect(text, text_len);
 		boolean redirect = redirect_ttl != null;
-		page.Type_redirect_(redirect);
+		page.Redirected_(redirect);
 		Xow_ns ns = page.Ns();
 		int random_int = ns.Count() + 1;
 		ns.Count_(random_int);		
 		if (dg_enabled) {
-			if (dg_match_mgr.Match(1, page_id, ns.Id(), page.Ttl_wo_ns(), page.Ttl_w_ns(), wiki.Lang(), text)) return;
+			if (dg_match_mgr.Match(1, page_id, ns.Id(), page.Ttl_page_db(), page.Ttl_full_db(), wiki.Lang(), text)) return;
 		}
 		text = zip_mgr.Zip(data_storage_format, text);
 		int text_stmt_idx = text_stmts_mgr.Stmt_by_ns(ns.Bldr_file_idx(), text.length);	// NOTE: was text.length, but want text_len which is original page_len, not compressed; DATE:2014-08-04
 		Db_stmt text_stmt = text_stmts_mgr.Stmt_at(text_stmt_idx);
 		try {
-			db_mgr.Page_create(page_stmt, text_stmt, page_id, page.Ns_id(), page.Ttl_wo_ns(), redirect, modified, text, random_int, text_stmt_idx);
+			db_mgr.Page_create(page_stmt, text_stmt, page_id, page.Ns_id(), page.Ttl_page_db(), redirect, modified, text, random_int, text_stmt_idx);
 		}
 		catch (Exception e) {
-			usr_dlg.Warn_many("", "", "failed to insert page: id=~{0} ns=~{1} title=~{2} error=~{3}", page.Id(), page.Ns_id(), String_.new_utf8_(page.Ttl_wo_ns()), Err_.Message_gplx_brief(e));
+			usr_dlg.Warn_many("", "", "failed to insert page: id=~{0} ns=~{1} title=~{2} error=~{3}", page.Id(), page.Ns_id(), String_.new_utf8_(page.Ttl_page_db()), Err_.Message_gplx_brief(e));
 			page_stmt.Reset_stmt();	// must new stmt variable, else java.sql.SQLException: "statement is not executing"
 			text_stmt.Reset_stmt();	// must new stmt variable, else java.sql.SQLException: "statement is not executing"
 		}
 		if (redirect && redirect_id_enabled) {
-			redirect_tbl.Insert(page_id, page.Ttl_wo_ns(), redirect_ttl);
+			redirect_tbl.Insert(page_id, page.Ttl_page_db(), redirect_ttl);
 		}
 		++page_count_all;
-		if (ns.Id_main() && !page.Type_redirect()) ++page_count_main;
+		if (ns.Id_main() && !page.Redirected()) ++page_count_main;
 		if (page_count_all % txn_commit_interval == 0) {
 			Db_conn conn = text_stmts_mgr.Conn_at(text_stmt_idx);
 			conn.Txn_mgr().Txn_end_all_bgn_if_none();

@@ -20,7 +20,7 @@ import gplx.xowa.files.fsdb.*;
 public interface Xof_orig_wkr {
 	byte			Tid();
 	Xof_orig_itm	Find_as_itm(byte[] ttl);
-	boolean			Find_by_list(OrderedHash rv, ListAdp itms);
+	void			Find_by_list(OrderedHash rv, ListAdp itms);
 	boolean			Add_orig(byte repo, byte[] page, int ext_id, int w, int h, byte[] redirect);
 	void			Db_txn_save();
 	void			Db_rls();

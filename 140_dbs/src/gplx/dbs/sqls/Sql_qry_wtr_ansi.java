@@ -29,7 +29,7 @@ public class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 				case Db_qry_.Tid_delete:		return Bld_qry_delete((Db_qry_delete)cmd);
 				case Db_qry_.Tid_update:		return Bld_qry_update((Db_qry_update)cmd);
 				case Db_qry_.Tid_select_in_tbl:
-				case Db_qry_.Tid_select:		return Bld_qry_select((Db_qry_select)cmd);
+				case Db_qry_.Tid_select:		return Bld_qry_select((Db_qry__select_cmd)cmd);
 				case Db_qry_.Tid_sql:			return ((Db_qry_sql)cmd).Xto_sql();
 				default:						throw Err_.unhandled(cmd.Tid());
 			}
@@ -81,7 +81,7 @@ public class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 		Bld_where(sb, cmd.Where());
 		return sb.Xto_str_and_clear();
 	}
-	private String Bld_qry_select(Db_qry_select cmd) {
+	private String Bld_qry_select(Db_qry__select_cmd cmd) {
 		sb.Add("SELECT ");
 		if (cmd.Cols().Distinct()) sb.Add("DISTINCT ");
 		Sql_select_fld_list flds = cmd.Cols().Flds();
@@ -118,7 +118,7 @@ public class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 		}
 	}
 	private void Bld_select_limit(String_bldr sb, int limit) {
-		if (limit == Db_qry_select.Limit_disabled) return;
+		if (limit == Db_qry__select_cmd.Limit_disabled) return;
 		sb.Add(" LIMIT ").Add(limit);
 	}
 	private void Bld_clause_from(String_bldr sb, Sql_from from) {
@@ -197,6 +197,7 @@ public class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 		this.Bld_where_val(sb, crt);
 	}
 	public void Bld_where_val(String_bldr sb, Criteria crt) {
+		if (crt == null) return;	// handle empty crt; EX: SELECT * FROM tbl;
 		Criteria_bool_base crt_bool = Criteria_bool_base.as_(crt);
 		if (crt_bool != null) {
 			sb.Add("(");

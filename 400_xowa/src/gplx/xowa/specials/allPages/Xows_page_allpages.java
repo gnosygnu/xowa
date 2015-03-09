@@ -134,7 +134,7 @@ public class Xows_page_allpages implements GfoInvkAble, Bry_fmtr_arg, Xows_page 
 		return html_list_end.Bld_bry_many(bfr, arg_from, args__rest, lbl_text);
 	}
 	public static Xoa_ttl ttl_(Xowe_wiki wiki, Xow_ns ns, Xodb_page itm) {
-		byte[] ttl_bry = itm.Ttl_wo_ns();
+		byte[] ttl_bry = itm.Ttl_page_db();
 		if (!ns.Id_main()) ttl_bry = Bry_.Add(ns.Name_db_w_colon(), ttl_bry);
 		return Xoa_ttl.parse_(wiki, ttl_bry);
 	}
@@ -189,7 +189,7 @@ class Xos_pagelist_html_itm_fmtr implements Bry_fmtr_arg {
 			byte[] href = href_parser.Build_to_bry(wiki, ttl);
 			byte[] title = Xoh_html_wtr.Ttl_to_title(ttl.Full_txt());
 			byte[] cls = Xoh_lnki_wtr.Lnki_cls_visited(history_mgr, wiki_key, ttl.Page_txt());	// NOTE: must be ttl.Page_txt() in order to match Xou_history_mgr.Add
-			Bry_fmtr fmtr = ttl_itm.Type_redirect() ? itm_redirect : itm_normal;
+			Bry_fmtr fmtr = ttl_itm.Redirected() ? itm_redirect : itm_normal;
 			fmtr.Bld_bfr_many(bfr, itm_pct, href, title, ttl.Full_txt(), cls);
 		}
 	}

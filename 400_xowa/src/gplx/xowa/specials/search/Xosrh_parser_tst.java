@@ -103,7 +103,7 @@ class Xosearch_parser_fxt {
 		int len = ids.length;
 		ListAdp id_vals = ListAdp_.new_();
 		for (int i = 0; i < len; i++)
-			id_vals.Add(Xodb_page.srch_(ids[i], 0));
+			id_vals.Add(Xodb_page.new_srch(ids[i], 0));
 		matches.Add(Bry_.new_ascii_(name), id_vals);
 	}
 	public void Test_match(String raw, int... expd) {

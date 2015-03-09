@@ -26,18 +26,24 @@ public class Db_conn {
 	}
 	public Db_url			Url()						{return engine.Url();}
 	public Db_txn_mgr		Txn_mgr()					{return txn_mgr;} private final Db_txn_mgr txn_mgr;
+	public void				Txn_bgn()					{txn_mgr.Txn_bgn();}
+	public void				Txn_commit()				{txn_mgr.Txn_end(); txn_mgr.Txn_bgn();}
+	public void				Txn_end()					{txn_mgr.Txn_end();}
 	public Db_stmt			Stmt_insert(String tbl, Db_meta_fld_list flds)							{return engine.New_stmt_prep(Db_qry_insert.new_(tbl, flds.To_str_ary()));}
 	public Db_stmt			Stmt_insert(String tbl, String... cols)							{return engine.New_stmt_prep(Db_qry_insert.new_(tbl, cols));}
 	public Db_stmt			Stmt_update(String tbl, String[] where, String... cols)			{return engine.New_stmt_prep(Db_qry_update.new_(tbl, where, cols));}
 	public Db_stmt			Stmt_update_exclude(String tbl, Db_meta_fld_list flds, String... where) {return engine.New_stmt_prep(Db_qry_update.new_(tbl, where, flds.To_str_ary_exclude(where)));}
 	public Db_stmt			Stmt_delete(String tbl, String... where)							{return engine.New_stmt_prep(Db_qry_delete.new_(tbl, where));}
-	public Db_stmt			Stmt_select(String tbl, String[] cols, String... where)			{return engine.New_stmt_prep(Db_qry__select_in_tbl.new_(tbl, where, cols));}
-	public Db_stmt			Stmt_select(String tbl, Db_meta_fld_list flds, String... where)	{return engine.New_stmt_prep(Db_qry__select_in_tbl.new_(tbl, where, flds.To_str_ary()));}
+	public Db_stmt			Stmt_select(String tbl, String[] cols, String... where)			{return engine.New_stmt_prep(Db_qry__select_in_tbl.new_(tbl, where, cols, null));}
+	public Db_stmt			Stmt_select(String tbl, Db_meta_fld_list flds, String... where)	{return engine.New_stmt_prep(Db_qry__select_in_tbl.new_(tbl, where, flds.To_str_ary(), null));}
+	public Db_stmt			Stmt_select_order(String tbl, Db_meta_fld_list flds, String[] where, String... orderbys) {return engine.New_stmt_prep(Db_qry__select_in_tbl.new_(tbl, where, flds.To_str_ary(), orderbys));}
 	public void				Exec_create_tbl_and_idx(Db_meta_tbl meta) {
 		engine.Exec_ddl_create_tbl(meta);
 		engine.Exec_ddl_create_idx(Gfo_usr_dlg_.Null, meta.Idxs());
 	}
 	public void				Exec_create_idx(Gfo_usr_dlg usr_dlg, Db_meta_idx... idxs)		{engine.Exec_ddl_create_idx(usr_dlg, idxs);}
+	public void				Exec_env_db_attach(String alias, Io_url db_url)						{engine.Exec_env_db_attach(alias, db_url);}
+	public void				Exec_env_db_detach(String alias)									{engine.Exec_env_db_detach(alias);}
 	public void				Exec_ddl_append_fld(String tbl, Db_meta_fld fld)					{engine.Exec_ddl_append_fld(tbl, fld);}
 	public Db_stmt			Rls_reg(Db_stmt stmt)		{rls_list.Add(stmt); return stmt;}
 	public void				Conn_term() {
@@ -54,4 +60,23 @@ public class Db_conn {
 	public DataRdr			Exec_qry_as_rdr(Db_qry qry)	{return DataRdr_.cast_(engine.Exec_as_obj(qry));}
 	public int				Exec_sql(String sql)		{return this.Exec_qry(Db_qry_sql.dml_(sql));}
 	public DataRdr			Exec_sql_as_rdr(String sql)	{return this.Exec_qry_as_rdr(Db_qry_sql.rdr_(sql));}
+	public void	Exec_sql_idx(Gfo_usr_dlg usr_dlg, Db_meta_idx... idxs)		{engine.Exec_ddl_create_idx(usr_dlg, idxs);}
+	public void	Exec_sql(Db_batch_wkr... wkrs) {
+		int len = wkrs.length;
+		for (int i = 0; i < len; ++i) {
+			Db_batch_wkr wkr = wkrs[i];
+			wkr.Batch_bgn();
+			wkr.Batch_end();
+		}
+	}
+	public void Exec_sql__vacuum(Db_batch_wkr__msg msg) {
+		msg.Msg_("vaccuum");
+		Exec_sql(msg, Batch_sql("VACCUUM;"));
+	}
+	public void Exec_sql__idx(Db_batch_wkr__msg msg, Db_meta_idx... idxs) {
+		engine.Exec_ddl_create_idx(msg.Usr_dlg(), idxs);
+	}
+	public Db_batch_wkr__msg Batch_msg(Gfo_usr_dlg usr_dlg, String msg_pre) {return new Db_batch_wkr__msg(usr_dlg, msg_pre);}
+	public Db_batch_wkr__attach Batch_attach(String alias, Io_url url) {return new Db_batch_wkr__attach(this).Add(alias, url);}
+	public Db_batch_wkr__sql Batch_sql(String... lines) {return new Db_batch_wkr__sql(this, lines);}
 }

@@ -21,6 +21,8 @@ public class Xol_vnt_mgr implements GfoInvkAble {
 	private int converter_ary_len; private OrderedHash tmp_page_list = OrderedHash_.new_bry_();
 	public Xol_vnt_mgr(Xol_lang lang) {this.lang = lang;}
 	public Xol_vnt_converter[] Converter_ary() {return converter_ary;} private Xol_vnt_converter[] converter_ary; 
+	public Xolg_vnt_grp Vnt_grp() {return vnt_grp;} private Xolg_vnt_grp vnt_grp = new Xolg_vnt_grp();
+	public Xolg_vnt_grp_fmtr Vnt_mnu_fmtr() {return vnt_mnu_fmtr;} private Xolg_vnt_grp_fmtr vnt_mnu_fmtr = new Xolg_vnt_grp_fmtr();
 	public Xol_lang Lang() {return lang;} private Xol_lang lang;
 	public byte[] Cur_vnt() {return cur_vnt;} public Xol_vnt_mgr Cur_vnt_(byte[] v) {cur_vnt = v; return this;} private byte[] cur_vnt = Bry_.Empty;
 	public boolean Enabled() {return enabled;} public void Enabled_(boolean v) {this.enabled = v;} private boolean enabled = false;
@@ -28,6 +30,14 @@ public class Xol_vnt_mgr implements GfoInvkAble {
 	public void Init_by_wiki(Xowe_wiki wiki) {
 		if (!enabled) return;
 		Xop_vnt_lxr_.set_(wiki);
+		// VNT
+//			vnt_grp.Add(new Xolg_vnt_itm(Bry_.new_utf8_("zh-hans"), Bry_.new_utf8_("Simplified")));
+//			vnt_grp.Add(new Xolg_vnt_itm(Bry_.new_utf8_("zh-hant"), Bry_.new_utf8_("Traditional")));
+//			vnt_grp.Add(new Xolg_vnt_itm(Bry_.new_utf8_("zh-cn"), Bry_.new_utf8_("China")));
+//			vnt_grp.Add(new Xolg_vnt_itm(Bry_.new_utf8_("zh-hk"), Bry_.new_utf8_("Hong Kong")));
+//			vnt_grp.Add(new Xolg_vnt_itm(Bry_.new_utf8_("zh-mo"), Bry_.new_utf8_("Macau")));
+//			vnt_grp.Add(new Xolg_vnt_itm(Bry_.new_utf8_("zh-sg"), Bry_.new_utf8_("Singapore")));
+//			vnt_grp.Add(new Xolg_vnt_itm(Bry_.new_utf8_("zh-tw"), Bry_.new_utf8_("Taiwan")));
 	}
 	public Xol_vnt_itm Get_or_new(byte[] key) {
 		Xol_vnt_itm rv = (Xol_vnt_itm)vnts.Fetch(key);
@@ -76,7 +86,7 @@ public class Xol_vnt_mgr implements GfoInvkAble {
 			if (ttl == null) continue;
 			Xodb_page page = new Xodb_page();
 			page.Ttl_(ns, ttl.Page_db());
-			byte[] converted_ttl = page.Ttl_w_ns();
+			byte[] converted_ttl = page.Ttl_full_db();
 			if (tmp_page_list.Has(converted_ttl)) continue;
 			tmp_page_list.Add(converted_ttl, page);
 			++rv;

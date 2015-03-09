@@ -59,6 +59,7 @@ public class Xow_wiki_alias {
 			case Xow_domain_.Tid_int_wikiquote:
 			case Xow_domain_.Tid_int_wikinews:
 			case Xow_domain_.Tid_int_wikivoyage:
+			case Xow_domain_.Tid_int_wikimedia:
 				return Bry_.Add(wiki_type.Lang_orig_key(), alias);
 			default:
 				throw Err_mgr._.unhandled_(tid);
@@ -70,7 +71,6 @@ public class Xow_wiki_alias {
 		if (end - bgn == 0) return null; // empty bry;
 		if (alias_bry_trie == null) Init_aliases();
 		Object o = alias_bry_trie.Match_bgn(src, end - 1, bgn - 1); if (o == null) return Parse__domain_name_null;
-//																			 throw Err_mgr._.parse_(typeof(Xow_wiki_alias), src);
 		int domain_tid = ((Int_obj_ref)o).Val();
 		Bry_bfr bfr = Bry_bfr.reset_(255);
 		switch (domain_tid) {
@@ -80,7 +80,7 @@ public class Xow_wiki_alias {
 			case Domain_commons:
 			case Domain_species:
 			case Domain_meta:
-			case Domain_incubator:				return bfr.Add(Xow_domain_.Tid__get_bry(domain_tid)).Add_byte(Byte_ascii.Dot).Add(Xow_domain_.Seg_bry_wikimedia).Add_byte(Byte_ascii.Dot).Add(Xow_domain_.Seg_bry_org).Xto_bry_and_clear();
+			case Domain_incubator:				return bfr.Add(Xow_domain_.Tid__get_bry(domain_tid)).Add_byte(Byte_ascii.Dot).Add(Xow_domain_.Tid_bry_wikimedia).Add_byte(Byte_ascii.Dot).Add(Xow_domain_.Seg_bry_org).Xto_bry_and_clear();
 			case Domain_wikipedia:
 			case Domain_wiktionary:
 			case Domain_wikisource:
@@ -89,6 +89,7 @@ public class Xow_wiki_alias {
 			case Domain_wikiquote:
 			case Domain_wikinews:
 			case Domain_wikivoyage:
+			case Domain_wikimedia:
 				bfr.Add_mid(src, 0, alias_bry_trie.Match_pos() + 1);
 				bfr.Add_byte(Byte_ascii.Dot);
 				return bfr.Add(Xow_domain_.Tid__get_bry(domain_tid)).Add_byte(Byte_ascii.Dot).Add(Xow_domain_.Seg_bry_org).Xto_bry_and_clear();
@@ -176,6 +177,7 @@ public class Xow_wiki_alias {
 	, Domain_wikiquote = Xow_domain_.Tid_int_wikiquote
 	, Domain_wikinews = Xow_domain_.Tid_int_wikinews
 	, Domain_wikivoyage = Xow_domain_.Tid_int_wikivoyage
+	, Domain_wikimedia = Xow_domain_.Tid_int_wikimedia
 	, Domain_commons = Xow_domain_.Tid_int_commons
 	, Domain_species = Xow_domain_.Tid_int_species
 	, Domain_meta = Xow_domain_.Tid_int_meta
@@ -194,6 +196,7 @@ public class Xow_wiki_alias {
 		Init_alias("wikiquote"				, Domain_wikiquote);
 		Init_alias("wikinews"				, Domain_wikinews);
 		Init_alias("wikivoyage"				, Domain_wikivoyage);
+		Init_alias("wikimedia"				, Domain_wikimedia);
 		Init_alias("commonswiki"			, Domain_commons);
 		Init_alias("specieswiki"			, Domain_species);
 		Init_alias("metawiki"				, Domain_meta);

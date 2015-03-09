@@ -62,7 +62,7 @@ class Xofo_lnki_chkr implements Tst_chkr {
 		rv += mgr.Tst_val(lnki_w == -1, path, "lnki_w", lnki_w, actl.Lnki_w());
 		rv += mgr.Tst_val(lnki_h == -1, path, "lnki_h", lnki_h, actl.Lnki_h());
 		rv += mgr.Tst_val(lnki_upright == -1, path, "lnki_upright", lnki_upright, actl.Lnki_upright());
-		rv += mgr.Tst_val(lnki_thumbtime == -1, path, "lnki_thumbtime", lnki_thumbtime, Xof_doc_thumb.X_int(actl.Lnki_thumbtime()));
+		rv += mgr.Tst_val(lnki_thumbtime == -1, path, "lnki_thumbtime", lnki_thumbtime, Xof_lnki_time.X_int(actl.Lnki_thumbtime()));
 		return rv;
 	}
 }

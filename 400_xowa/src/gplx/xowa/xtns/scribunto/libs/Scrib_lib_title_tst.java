@@ -100,7 +100,7 @@ public class Scrib_lib_title_tst {
 	}
 	private static void Wiki_orig_tbl__insert(Xowe_wiki wiki, String ttl_str, int w, int h) {
 		byte[] ttl_bry = Bry_.new_utf8_(ttl_str);
-		wiki.File_mgr().Fsdb_mgr().Orig_mgr().Insert(Xof_repo_itm.Repo_remote, ttl_bry, Xof_ext_.new_by_ttl_(ttl_bry).Id(), w, h, Bry_.Empty, Xof_orig_wkr_.Status_found);
+		wiki.File_mgr().Fsdb_mgr().Orig_mgr().Insert(Xof_repo_itm.Repo_remote, ttl_bry, Xof_ext_.new_by_ttl_(ttl_bry).Id(), w, h, Bry_.Empty);
 	}
 //		private static void Init_page_regy(Xowe_wiki wiki, String ttl, int id, boolean is_redirect) {
 //			String url_str = "test/en.wikipedia.org/wiki_page_regy";

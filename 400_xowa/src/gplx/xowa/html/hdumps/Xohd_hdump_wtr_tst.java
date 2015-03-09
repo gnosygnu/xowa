@@ -123,7 +123,8 @@ class Xodb_hdump_mgr__base_fxt {
 		hdump_wtr.Generate_hdump(bfr, page);
 	}
 	public Xohd_data_itm__base Make_xfer(String lnki_ttl, int html_uid, int html_w, int html_h, boolean file_is_orig, int file_ext_id) {
-		return new Xohd_data_itm__img().Init_by_base(Bry_.new_utf8_(lnki_ttl), Byte_.Zero, 0, 0, Xof_img_size.Upright_null, html_uid, html_w, html_h, Xohd_data_itm__base.File_repo_id_null, file_ext_id, file_is_orig, html_w, Xof_doc_thumb.Null, Xof_doc_page.Null);
+		return new Xohd_data_itm__img().Data_init_base
+		(Bry_.new_utf8_(lnki_ttl), file_ext_id, Byte_.Zero, 0, 0, Xof_img_size.Upright_null, Xof_lnki_time.Null, Xof_lnki_page.Null, Xohd_data_itm__base.File_repo_id_null, file_is_orig, html_w, html_uid, html_w, html_h);
 	}
 }
 class Xohd_hdump_wtr_fxt extends Xodb_hdump_mgr__base_fxt {

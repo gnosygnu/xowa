@@ -47,8 +47,8 @@ class Xob_xfer_temp_itm {
 				= orig_w = orig_h = orig_page_id = Int_.Neg1;
 		join_ttl =  redirect_src = orig_media_type = null;
 		lnki_upright = Xop_lnki_tkn.Upright_null;
-		lnki_thumbtime = Xof_doc_thumb.Null;
-		lnki_page = Xof_doc_page.Null;
+		lnki_thumbtime = Xof_lnki_time.Null;
+		lnki_page = Xof_lnki_page.Null;
 	}
 	public void Load(DataRdr rdr) {
 		lnki_id			= rdr.ReadInt(Xob_lnki_regy_tbl.Fld_lnki_id);
@@ -59,7 +59,7 @@ class Xob_xfer_temp_itm {
 		lnki_w			= rdr.ReadInt(Xob_lnki_regy_tbl.Fld_lnki_w);
 		lnki_h			= rdr.ReadInt(Xob_lnki_regy_tbl.Fld_lnki_h);
 		lnki_upright	= rdr.ReadDouble(Xob_lnki_regy_tbl.Fld_lnki_upright);
-		lnki_thumbtime	= Xof_doc_thumb.Db_load_double(rdr, Xob_lnki_regy_tbl.Fld_lnki_time);
+		lnki_thumbtime	= Xof_lnki_time.Db_load_double(rdr, Xob_lnki_regy_tbl.Fld_lnki_time);
 		lnki_page		= rdr.ReadInt(Xob_lnki_regy_tbl.Fld_lnki_page);
 		lnki_count		= rdr.ReadInt(Xob_lnki_regy_tbl.Fld_lnki_count);
 		orig_repo		= rdr.ReadByte(Xob_orig_regy_tbl.Fld_orig_repo);
@@ -89,13 +89,13 @@ class Xob_xfer_temp_itm {
 //			}
 		lnki_ext = orig_ext_id;
 		orig_media_type_tid = Xof_media_type.Xto_byte(orig_media_type);
-		if (	Xof_doc_thumb.Null_n(lnki_thumbtime)				// thumbtime defined
+		if (	Xof_lnki_time.Null_n(lnki_thumbtime)				// thumbtime defined
 			&&	orig_media_type_tid != Xof_media_type.Tid_video 	// video can have thumbtime
 			)
-			lnki_thumbtime = Xof_doc_thumb.Null;					// set thumbtime to NULL; actually occurs for one file: [[File:Crash.arp.600pix.jpg|thumb|thumbtime=2]]
-		if (	Xof_doc_page.Null_n(lnki_page)
+			lnki_thumbtime = Xof_lnki_time.Null;					// set thumbtime to NULL; actually occurs for one file: [[File:Crash.arp.600pix.jpg|thumb|thumbtime=2]]
+		if (	Xof_lnki_page.Null_n(lnki_page)
 			&&	!Xof_ext_.Id_supports_page(orig_ext_id))			// djvu / pdf can have page parameters, which are currently being stored in thumbtime; DATE:2014-01-18
-			lnki_page = Xof_doc_page.Null;
+			lnki_page = Xof_lnki_page.Null;
 		if (orig_page_id == -1) {	// no orig found (i.e.: not in local's / remote's image.sql);
 			chk_tid = Chk_tid_orig_page_id_is_null;
 			return false;

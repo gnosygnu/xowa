@@ -20,7 +20,7 @@ import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*;
 public class Xof_url_bldr {
 	private final Bry_bfr bfr = Bry_bfr.reset_(400);
 	private byte[] ttl; private byte[] md5; private Xof_ext ext; private boolean file_is_thumb; private int file_w;
-	private double time = Xof_doc_thumb.Null; private int page = Xof_doc_page.Null; private byte time_dlm = Byte_ascii.At;
+	private double time = Xof_lnki_time.Null; private int page = Xof_lnki_page.Null; private byte time_dlm = Byte_ascii.At;
 	private byte[] root; private byte dir_spr; private boolean fsys_tid_is_wnt; private boolean wmf_dir_hive; private boolean wmf_protocol_is_file; private int md5_dir_depth; private byte[] area;
 	public Xof_url_bldr Root_(byte[] v) {root = v; return this;}
 	public Xof_url_bldr Init_by_root(byte[] root, byte dir_spr, boolean wmf_dir_hive, boolean wmf_protocol_is_file, int md5_dir_depth) {
@@ -63,13 +63,9 @@ public class Xof_url_bldr {
 	public byte[] Xto_bry() {Bld(); byte[] rv = bfr.Xto_bry_and_clear(); Clear(); return rv;}
 	public String Xto_str() {Bld(); String rv = bfr.Xto_str(); Clear(); return rv;}
 	public Io_url Xto_url() {Bld(); Io_url rv = Io_url_.new_fil_(bfr.Xto_str()); Clear(); return rv;}
-	public Io_url To_url(Xow_repo_mgr repo_mgr, Xof_fsdb_itm itm, boolean orig) {return To_url(repo_mgr.Repos_get_by_wiki(itm.Orig_repo_name()), itm, orig ? Xof_repo_itm.Mode_orig : Xof_repo_itm.Mode_thumb, Bool_.N);}
-	public Io_url To_url(Xof_repo_pair repo_pair, Xof_fsdb_itm itm, boolean orig) {return To_url(repo_pair, itm, orig ? Xof_repo_itm.Mode_orig : Xof_repo_itm.Mode_thumb, Bool_.N);}
-	public Io_url To_url(Xof_repo_pair repo_pair, Xof_fsdb_itm itm, byte mode, boolean src) {
-		return src 
-			? this.Init_for_src_file(mode, repo_pair.Src(), itm.Lnki_ttl(), itm.Lnki_md5(), itm.Lnki_ext(), itm.Html_w(), itm.Lnki_time(), itm.Lnki_page()).Xto_url()
-			: this.Init_for_trg_file(mode, repo_pair.Trg(), itm.Lnki_ttl(), itm.Lnki_md5(), itm.Lnki_ext(), itm.Html_w(), itm.Lnki_time(), itm.Lnki_page()).Xto_url()
-			;
+	public Io_url To_url_trg(Xof_repo_itm repo_itm, Xof_fsdb_itm itm, boolean orig) {
+		byte mode = orig ? Xof_repo_itm.Mode_orig : Xof_repo_itm.Mode_thumb;
+		return this.Init_for_trg_file(mode, repo_itm, itm.Lnki_ttl(), itm.Lnki_md5(), itm.Lnki_ext(), itm.Html_w(), itm.Lnki_time(), itm.Lnki_page()).Xto_url();
 	}
 	private void Bld() {
 		Add_core();
@@ -104,9 +100,9 @@ public class Xof_url_bldr {
 	private Xof_url_bldr Add_thumb_xowa() {
 		bfr.Add_byte(dir_spr);															// add dir_spr;				EX: "\"
 		bfr.Add_int_variable(file_w).Add(Bry_px);										// add file_w;				EX: "220px"
-		if (Xof_doc_thumb.Null_n(time))
-			bfr.Add_byte(time_dlm).Add_str(Xof_doc_thumb.X_str(time));					// add time					EX: "@5"
-		else if (page != Xof_doc_page.Null)
+		if (Xof_lnki_time.Null_n(time))
+			bfr.Add_byte(time_dlm).Add_str(Xof_lnki_time.X_str(time));					// add time					EX: "@5"
+		else if (page != Xof_lnki_page.Null)
 			bfr.Add_byte(Byte_ascii.Dash).Add_int_variable(page);						// add page					EX: "-5"
 		bfr.Add_byte(Byte_ascii.Dot);													// add .					EX: "."
 		if (file_is_thumb)
@@ -122,8 +118,8 @@ public class Xof_url_bldr {
 			case Xof_ext_.Id_ogg:
 			case Xof_ext_.Id_ogv:
 			case Xof_ext_.Id_webm:
-				if (Xof_doc_thumb.Null_n(time))
-					bfr.Add(Bry_seek).Add_str(Xof_doc_thumb.X_str(time)).Add_byte(Byte_ascii.Dash);// add seek;				EX: "seek%3D5-"
+				if (Xof_lnki_time.Null_n(time))
+					bfr.Add(Bry_seek).Add_str(Xof_lnki_time.X_str(time)).Add_byte(Byte_ascii.Dash);// add seek;				EX: "seek%3D5-"
 				else
 					bfr.Add(Bry_mid);													// add mid;					EX: "mid-"
 				break;
@@ -164,7 +160,7 @@ public class Xof_url_bldr {
 		return this;
 	}
 	private void Add_thumb_wmf_page(byte[] bry_page_1, byte[] bry_page) {
-		if (Xof_doc_thumb.Null_y(page))
+		if (Xof_lnki_time.Null_y(page))
 			bfr.Add(bry_page_1);														// add "lossy-page1-"		EX: "lossy-page1-"
 		else {
 			bfr.Add(bry_page);															// add "lossy-page"			EX: "lossy-page"
@@ -174,7 +170,7 @@ public class Xof_url_bldr {
 	}
 	private Xof_url_bldr Clear() {
 		root = area = ttl = md5 = null;
-		file_w = 0; time = Xof_doc_thumb.Null;
+		file_w = 0; time = Xof_lnki_time.Null;
 		ext = null;
 		bfr.Clear();
 		return this;

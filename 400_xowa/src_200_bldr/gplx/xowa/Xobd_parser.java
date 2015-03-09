@@ -36,7 +36,7 @@ public class Xobd_parser implements Xobd_wkr {
 		}
 	}
 	public void Wkr_run(Xodb_page page) {
-		byte[] src = page.Text(); int src_len = src.length;
+		byte[] src = page.Wtxt(); int src_len = src.length;
 		int pos = 0;
 		while (true) {
 			if (pos == src_len) break;

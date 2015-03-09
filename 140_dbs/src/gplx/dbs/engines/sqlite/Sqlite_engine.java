@@ -28,6 +28,8 @@ public class Sqlite_engine extends Db_engine_sql_base {
 	}
 	@Override public DataRdr New_rdr(ResultSet rdr, String commandText) {return Sqlite_rdr.new_(rdr, commandText);}
 	@Override public Db_rdr New_rdr_clone() {return new Db_rdr__sqlite();}
+	@Override public void Exec_env_db_attach(String alias, Io_url db_url)	{Exec_as_int(String_.Format("ATTACH '{0}' AS {1};", db_url.Raw(), alias));}
+	@Override public void Exec_env_db_detach(String alias)					{Exec_as_int(String_.Format("DETACH {0};", alias));}
 		static boolean loaded = false; 
 	@gplx.Internal @Override protected Connection Conn_new() {
 		if (!loaded) {

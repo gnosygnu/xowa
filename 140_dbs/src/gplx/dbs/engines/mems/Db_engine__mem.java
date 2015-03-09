@@ -40,5 +40,7 @@ public class Db_engine__mem implements Db_engine {
 	}
 	public void			Exec_ddl_create_idx(Gfo_usr_dlg usr_dlg, Db_meta_idx... ary) {}	// TODO: implement unique index
 	public void			Exec_ddl_append_fld(String tbl, Db_meta_fld fld) {}
+	public void			Exec_env_db_attach(String alias, Io_url db_url)		{}
+	public void			Exec_env_db_detach(String alias)					{}
         public static final Db_engine__mem _ = new Db_engine__mem(); Db_engine__mem() {}
 }

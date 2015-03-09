@@ -191,7 +191,7 @@ public class Xof_xfer_queue_html_cases_tst {
 	}
 	@Test  public void Upright_size_incorrect() {// PURPOSE.fix: incorrect image size being brought down; EX: w:ASCII; [[Image:ASCII Code Chart.svg|thumb|right|upright=1.6]]; 264, but should be 350 
 		fxt	.ini_page_create_en_wiki			("File:A.png");
-		fxt	.Lnki_("A.png", true, -1, -1, 1.6, Xof_doc_thumb.Null_as_int)											// upright
+		fxt	.Lnki_("A.png", true, -1, -1, 1.6, Xof_lnki_time.Null_as_int)											// upright
 			.Src(	fxt.img_("mem/src/en.wikipedia.org/7/70/A.png", 830, 328)
 				,	fxt.img_("mem/src/en.wikipedia.org/thumb/7/70/A.png/350px-A.png", 350, 138)	
 				)
