@@ -17,17 +17,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*; import gplx.core.strings.*;
-import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.dbs.*; import gplx.xowa.specials.search.*; import gplx.xowa.ctgs.*; import gplx.xowa.dbs.tbls.*;
+import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.dbs.*; import gplx.xowa.specials.search.*; import gplx.xowa.ctgs.*;
+import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.bldrs.infos.*;
 public class Db_mgr_fxt {
 	public Db_mgr_fxt Ctor_fsys()	{bldr_fxt = new Xob_fxt().Ctor(Xoa_test_.Url_root().GenSubDir("root")); return this;} 
 	public Db_mgr_fxt Ctor_mem()	{bldr_fxt = new Xob_fxt().Ctor_mem(); return this;} private Xob_fxt bldr_fxt;
-	public Xodb_page page_(int id, String modified_on, boolean type_redirect, int text_len) {return new Xodb_page().Id_(id).Modified_on_(DateAdp_.parse_gplx(modified_on)).Redirected_(type_redirect).Wtxt_len_(text_len);}
+	public Xowd_page_itm page_(int id, String modified_on, boolean type_redirect, int text_len) {return new Xowd_page_itm().Id_(id).Modified_on_(DateAdp_.parse_gplx(modified_on)).Redirected_(type_redirect).Text_len_(text_len);}
 	public Xowe_wiki Wiki() {return bldr_fxt.Wiki();}
 	public Xob_bldr Bldr() {return bldr_fxt.Bldr();}
-	public Db_mgr_fxt doc_ary_(Xodb_page... v) {bldr_fxt.doc_ary_(v); return this;}
-	public Xodb_page doc_(int id, String date, String title, String text) {return bldr_fxt.doc_(id, date, title, text);}
-	public Xodb_page doc_wo_date_(int id, String title, String text) {return bldr_fxt.doc_(id, "2012-01-02 03:04", title, text);}
-	public Xodb_page doc_ttl_(int id, String title) {return bldr_fxt.doc_(id, "2012-01-02 03:04", title, "IGNORE");}
+	public Db_mgr_fxt doc_ary_(Xowd_page_itm... v) {bldr_fxt.doc_ary_(v); return this;}
+	public Xowd_page_itm doc_(int id, String date, String title, String text) {return bldr_fxt.doc_(id, date, title, text);}
+	public Xowd_page_itm doc_wo_date_(int id, String title, String text) {return bldr_fxt.doc_(id, "2012-01-02 03:04", title, text);}
+	public Xowd_page_itm doc_ttl_(int id, String title) {return bldr_fxt.doc_(id, "2012-01-02 03:04", title, "IGNORE");}
 	public Db_mgr_fxt Init_fil(String url, String raw) {return Init_fil(Io_url_.new_fil_(url), raw);}
 	public Db_mgr_fxt Init_fil(Io_url url, String raw) {Io_mgr._.SaveFilStr(url, raw); return this;}
 	public Db_mgr_fxt Exec_run(Xobd_wkr wkr)		{bldr_fxt.Run(wkr); return this;}
@@ -35,21 +36,19 @@ public class Db_mgr_fxt {
 	public Db_mgr_fxt Exec_run(Xobd_parser_wkr wkr) {bldr_fxt.Run(wkr); return this;}
 	public void Init_page_insert(Int_obj_ref page_id_next, int ns_id, String[] ttls) {
 		Xowe_wiki wiki = this.Wiki();
-		Xodb_page_tbl tbl_page = wiki.Db_mgr_as_sql().Tbl_page();
-		Db_stmt stmt = Db_stmt_.Null;
-		try {
-			stmt = tbl_page.Insert_stmt(wiki.Db_mgr_as_sql().Core_data_mgr().Conn_page());
-			int len = ttls.length;
-			DateAdp modified_on = Tfds.Now_time0_add_min(0);
-			for (int i = 0; i < len; i++) {
-				String ttl = ttls[i];
-				int page_id = page_id_next.Val();
-				tbl_page.Insert(stmt, page_id, ns_id, Bry_.new_utf8_(ttl), false, modified_on, 0, page_id, 0, 0);
-				page_id_next.Val_add(1);
-			}
-		} finally {stmt.Rls();}
+		int len = ttls.length;
+		DateAdp modified_on = Tfds.Now_time0_add_min(0);
+		Xowd_page_tbl tbl_page = wiki.Db_mgr_as_sql().Core_data_mgr().Tbl__page();
+		tbl_page.Insert_bgn();
+		for (int i = 0; i < len; i++) {
+			String ttl = ttls[i];
+			int page_id = page_id_next.Val();
+			tbl_page.Insert_cmd_by_batch(page_id, ns_id, Bry_.new_utf8_(ttl), false, modified_on, 0, page_id, 0, 0);
+			page_id_next.Val_add(1);
+		}
+		tbl_page.Insert_end();
 	}
-	public void Test_load_ttl(int ns_id, String ttl_str, Xodb_page expd) {
+	public void Test_load_ttl(int ns_id, String ttl_str, Xowd_page_itm expd) {
 		Xowe_wiki wiki = bldr_fxt.Wiki();
 		Xow_ns ns = wiki.Ns_mgr().Ids_get_or_null(ns_id);
 		byte[] ttl_bry = Bry_.new_ascii_(ttl_str);
@@ -57,13 +56,13 @@ public class Db_mgr_fxt {
 		Tfds.Eq(expd.Id(), actl.Id());
 		Tfds.Eq_date(expd.Modified_on(), actl.Modified_on());
 		Tfds.Eq(expd.Redirected(), actl.Redirected());
-		Tfds.Eq(expd.Wtxt_len(), actl.Wtxt_len());
-	}	private Xodb_page actl = new Xodb_page();
+		Tfds.Eq(expd.Text_len(), actl.Text_len());
+	}	private Xowd_page_itm actl = new Xowd_page_itm();
 	public void Test_load_page(int ns_id, int page_id, String expd) {
 		Xowe_wiki wiki = bldr_fxt.Wiki();
 		Xow_ns ns = wiki.Ns_mgr().Ids_get_or_null(ns_id);
 		wiki.Db_mgr_as_sql().Load_mgr().Load_page(actl.Id_(page_id), ns, false);
-		Tfds.Eq(expd, String_.new_ascii_(actl.Wtxt()));
+		Tfds.Eq(expd, String_.new_ascii_(actl.Text()));
 	}
 	public void Test_search(String search_word_str, int... expd) {
 		Xowe_wiki wiki = bldr_fxt.Wiki();
@@ -76,7 +75,7 @@ public class Db_mgr_fxt {
 		int len = rslts.Count();
 		int[] rv = new int[len];
 		for (int i = 0; i < len; i++) {
-			Xodb_page page = (Xodb_page)rslts.FetchAt(i);
+			Xowd_page_itm page = (Xowd_page_itm)rslts.FetchAt(i);
 			rv[i] = page.Id();
 		}
 		return rv;
@@ -125,23 +124,15 @@ public class Db_mgr_fxt {
 		}
 		return (int[])list.Xto_ary_and_clear(int.class);
 	}
-	public void Init_db_sqlite() {Init_db_sqlite(Xoa_test_.Url_wiki_enwiki().GenSubFil_nest("en.wikipedia.org.sqlite3"));}
-	public void Init_db_sqlite(Io_url url) {
+	public void Init_db_sqlite() {
 		Xowe_wiki wiki = this.Wiki();
 		Db_conn_pool.I.Clear();
-		Xodb_mgr_sql db_mgr = wiki.Db_mgr_create_as_sql();
-		db_mgr.Data_storage_format_(gplx.ios.Io_stream_.Tid_file);
-		db_mgr.Init_by_ns_map("");
-		Db_conn conn = db_mgr.Core_data_mgr().Conn_core();
-		conn.Exec_qry(Db_qry_delete.new_all_("xowa_cfg"));
-		conn.Exec_qry(Db_qry_delete.new_all_("xowa_db"));
-		conn.Exec_qry(Db_qry_delete.new_all_("xowa_ns"));
-		conn.Exec_qry(Db_qry_delete.new_all_("page"));
-		conn.Exec_qry(Db_qry_delete.new_all_("text"));
-		conn.Exec_qry(Db_qry_delete.new_all_("category"));
-		conn.Exec_qry(Db_qry_delete.new_all_("categorylinks"));
+		Db_conn_bldr.I.Reg_default_sqlite();
+		Io_mgr._.DeleteDir_cmd(wiki.Fsys_mgr().Root_dir()).MissingIgnored_().Exec();
+		wiki.Db_mgr_create_as_sql().Core_data_mgr().Init_by_make(Xowd_core_db_props.Test, Xob_info_session.Test);
+		Io_mgr._.SaveFilStr(wiki.Import_cfg().Src_dir().GenSubFil("a.xml"), "<test/>");
 	}
 	public void Rls() {
-		this.Wiki().Db_mgr().Rls();
+		this.Wiki().Db_mgr_as_sql().Core_data_mgr().Rls();
 	}
 }

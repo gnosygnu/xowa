@@ -23,6 +23,16 @@ public class Db_meta_fld_list {
 	public Db_meta_fld Get_by(String name) {return (Db_meta_fld)flds.Fetch(name);}
 	public String[] To_str_ary()			{if (str_ary == null) str_ary = (String[])keys.Xto_ary(String.class); return str_ary;} private String[] str_ary;
 	public Db_meta_fld[] To_fld_ary()		{if (fld_ary == null) fld_ary = (Db_meta_fld[])flds.Xto_ary(Db_meta_fld.class); return fld_ary;} private Db_meta_fld[] fld_ary;
+	public String[] To_str_ary_wo_autonum()	{
+		int len = flds.Count();
+		ListAdp rv = ListAdp_.new_();
+		for (int i = 0; i < len; ++i) {
+			Db_meta_fld fld = (Db_meta_fld)flds.FetchAt(i);
+			if (fld.Autonum()) continue;
+			rv.Add(fld.Name());
+		}
+		return (String[])rv.Xto_ary(String.class);
+	} 
 	public String[] To_str_ary_exclude(String[] ary) {
 		HashAdp ary_hash = HashAdp_.new_();
 		ListAdp rv = ListAdp_.new_();
@@ -46,11 +56,14 @@ public class Db_meta_fld_list {
 	public String Add_int(String name)					{return Add(name, Db_meta_fld.Tid_int,		Len_null, Bool_.N, Bool_.N, Bool_.N, Db_meta_fld.Default_value_null);}
 	public String Add_int_pkey(String name)				{return Add(name, Db_meta_fld.Tid_int,		Len_null, Bool_.N, Bool_.Y, Bool_.N, Db_meta_fld.Default_value_null);}
 	public String Add_int_pkey_autonum(String name)		{return Add(name, Db_meta_fld.Tid_int,		Len_null, Bool_.N, Bool_.Y, Bool_.Y, Db_meta_fld.Default_value_null);}
+	public String Add_int_autonum(String name)			{return Add(name, Db_meta_fld.Tid_int,		Len_null, Bool_.N, Bool_.Y, Bool_.N, Db_meta_fld.Default_value_null);}
 	public String Add_int_dflt(String name, int dflt)	{return Add(name, Db_meta_fld.Tid_int,		Len_null, Bool_.N, Bool_.N, Bool_.N, dflt);}
 	public String Add_long(String name)					{return Add(name, Db_meta_fld.Tid_long,		Len_null, Bool_.N, Bool_.N, Bool_.N, Db_meta_fld.Default_value_null);}
 	public String Add_float(String name)				{return Add(name, Db_meta_fld.Tid_float,	Len_null, Bool_.N, Bool_.N, Bool_.N, Db_meta_fld.Default_value_null);}
 	public String Add_double(String name)				{return Add(name, Db_meta_fld.Tid_double,	Len_null, Bool_.N, Bool_.N, Bool_.N, Db_meta_fld.Default_value_null);}
 	public String Add_str(String name, int len)			{return Add(name, Db_meta_fld.Tid_str,		     len, Bool_.N, Bool_.N, Bool_.N, Db_meta_fld.Default_value_null);}
+	public String Add_str_pkey(String name, int len)	{return Add(name, Db_meta_fld.Tid_str,		     len, Bool_.N, Bool_.Y, Bool_.N, Db_meta_fld.Default_value_null);}
+	public String Add_str_null(String name, int len)	{return Add(name, Db_meta_fld.Tid_str,		     len, Bool_.Y, Bool_.N, Bool_.N, Db_meta_fld.Default_value_null);}
 	public String Add_str_dflt(String name, int len, String dflt)
 														{return Add(name, Db_meta_fld.Tid_str,		     len, Bool_.N, Bool_.N, Bool_.N, dflt);}
 	public String Add_text(String name)					{return Add(name, Db_meta_fld.Tid_text,		Len_null, Bool_.N, Bool_.N, Bool_.N, Db_meta_fld.Default_value_null);}

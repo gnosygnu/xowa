@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.vnts.*; import gplx.xowa.langs.cnvs.*;
 import gplx.xowa.wikis.caches.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.pfuncs.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.pages.*;
+import gplx.xowa.wikis.data.tbls.*;
 public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 	public Arg_nde_tkn Name_tkn() {return name_tkn;} public Xot_invk_tkn Name_tkn_(Arg_nde_tkn v) {name_tkn = v; return this;} Arg_nde_tkn name_tkn = Arg_nde_tkn.Null;
 	public byte Defn_tid() {return defn_tid;} private byte defn_tid = Xot_defn_.Tid_null;
@@ -192,8 +193,8 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		}
 		if (	defn.Defn_tid() == Xot_defn_.Tid_null		// name is not a known defn
 			&&	lang.Vnt_mgr().Enabled()) {					// lang has vnts
-			Xodb_page page = lang.Vnt_mgr().Convert_ttl(wiki, wiki.Ns_mgr().Ns_template(), name_ary);
-			if (page != Xodb_page.Null) {
+			Xowd_page_itm page = lang.Vnt_mgr().Convert_ttl(wiki, wiki.Ns_mgr().Ns_template(), name_ary);
+			if (page != Xowd_page_itm.Null) {
 				name_ary = page.Ttl_page_db();
 				Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.Add(wiki.Ns_mgr().Ns_template().Name_db_w_colon(), name_ary));
 				if (ttl == null) { // ttl is not valid; just output orig; REF.MW:Parser.php|braceSubstitution|if ( !$found ) $text = $frame->virtualBracketedImplode( '{{', '|', '}}', $titleWithSpaces, $args );

@@ -17,12 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.filters.dansguardians; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.filters.*;
 class Dg_parser {
-	private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_._; private final Bry_bfr key_bldr = Bry_bfr.reset_(32);
+	private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.I; private final Bry_bfr key_bldr = Bry_bfr.reset_(32);
 	private final ListAdp files = ListAdp_.new_(), lines = ListAdp_.new_(), words = ListAdp_.new_();
 	private int next_id = 0;
 	public Dg_file[] Parse_dir(Io_url dir) {
 		Io_url[] fil_urls = Io_mgr._.QueryDir_args(dir).Recur_(true).ExecAsUrlAry();
-		this.usr_dlg = Gfo_usr_dlg_._;
+		this.usr_dlg = Gfo_usr_dlg_.I;
 		files.Clear();
 		int len = fil_urls.length;
 		for (int i = 0; i < len; ++i) {

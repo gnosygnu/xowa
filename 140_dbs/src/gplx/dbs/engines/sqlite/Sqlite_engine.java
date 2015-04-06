@@ -20,16 +20,24 @@ import java.sql.*;
 import gplx.stores.*; import gplx.dbs.engines.*; import gplx.dbs.engines.sqlite.*;
 import gplx.dbs.qrys.*; 
 public class Sqlite_engine extends Db_engine_sql_base {
-	@Override public String Tid() {return Sqlite_url.Tid_const;}
-	@Override public Db_engine New_clone(Db_url connectInfo) {
+	private final Sqlite_txn_mgr txn_mgr;
+	Sqlite_engine() {
+		this.txn_mgr = new Sqlite_txn_mgr(this);
+	}
+	@Override public String Tid() {return Sqlite_conn_info.Tid_const;}
+	@Override public Db_engine New_clone(Db_conn_info connectInfo) {
 		Sqlite_engine rv = new Sqlite_engine();
 		rv.Ctor(connectInfo);
 		return rv;
 	}
 	@Override public DataRdr New_rdr(ResultSet rdr, String commandText) {return Sqlite_rdr.new_(rdr, commandText);}
 	@Override public Db_rdr New_rdr_clone() {return new Db_rdr__sqlite();}
-	@Override public void Exec_env_db_attach(String alias, Io_url db_url)	{Exec_as_int(String_.Format("ATTACH '{0}' AS {1};", db_url.Raw(), alias));}
-	@Override public void Exec_env_db_detach(String alias)					{Exec_as_int(String_.Format("DETACH {0};", alias));}
+	@Override public void	Env_db_attach(String alias, Io_url db_url)	{Exec_as_int(String_.Format("ATTACH '{0}' AS {1};", db_url.Raw(), alias));}
+	@Override public void	Env_db_detach(String alias)					{Exec_as_int(String_.Format("DETACH {0};", alias));}
+	@Override public void	Txn_bgn(String name)	{txn_mgr.Txn_bgn(name);}
+	@Override public void	Txn_end()				{txn_mgr.Txn_end();}
+	@Override public void	Txn_cxl()				{txn_mgr.Txn_cxl();}
+	@Override public void	Txn_sav()				{txn_mgr.Txn_sav();}
 		static boolean loaded = false; 
 	@gplx.Internal @Override protected Connection Conn_new() {
 		if (!loaded) {
@@ -39,24 +47,11 @@ public class Sqlite_engine extends Db_engine_sql_base {
 			catch (ClassNotFoundException e) {throw Err_.new_("could not load sqlite jdbc driver");}
 			loaded = true;					
 		}
-		Sqlite_url url_as_sqlite = (Sqlite_url)url;
-		return Conn_make_by_url("jdbc:sqlite://" + String_.Replace(url_as_sqlite.Url().Raw(), "\\", "/"), "", "");
+		Sqlite_conn_info conn_info_as_sqlite = (Sqlite_conn_info)conn_info;
+		Connection rv = Conn_make_by_url("jdbc:sqlite://" + String_.Replace(conn_info_as_sqlite.Url().Raw(), "\\", "/"), "", "");
+		return rv;
 	}
-	private boolean pragma_needed = true; 
-	@Override public void Txn_bgn() {
-//		Execute(Db_qry_sql.xtn_("PRAGMA ENCODING=\"UTF-8\";"));
-//		Execute(Db_qry_sql.xtn_("PRAGMA journal_mode = OFF;"));	// will cause out of memory
-//		Execute(Db_qry_sql.xtn_("PRAGMA journal_mode = MEMORY;"));
-		if (pragma_needed) {
-			Exec_as_obj(Db_qry_sql.xtn_("PRAGMA synchronous = OFF;"));
-			pragma_needed = false;
-		}
-//		Execute(Db_qry_sql.xtn_("PRAGMA temp_store = MEMORY;"));
-//		Execute(Db_qry_sql.xtn_("PRAGMA locking_mode = EXCLUSIVE;"));
-//		Execute(Db_qry_sql.xtn_("PRAGMA cache_size=4000;"));	// too many will also cause out of memory		
-		Exec_as_obj(Db_qry_sql.xtn_("BEGIN TRANSACTION;"));
-	}
-		public static final Sqlite_engine _ = new Sqlite_engine(); Sqlite_engine() {}
+		public static final Sqlite_engine _ = new Sqlite_engine();
 }
 class Db_rdr__sqlite extends Db_rdr__basic {	@Override public byte Read_byte(int i)			{try {return (byte)rdr.getInt(i + 1);} catch (Exception e) {throw Err_.new_("read failed: i={0} type={1} err={2}", i, Byte_.Cls_val_name, Err_.Message_lang(e));}} 
 	@Override public byte Read_byte(String k)		{try {return (byte)Int_.cast_(rdr.getObject(k));} catch (Exception e) {throw Err_.new_("read failed: k={0} type={1} err={2}", k, Byte_.Cls_val_name, Err_.Message_lang(e));}} 

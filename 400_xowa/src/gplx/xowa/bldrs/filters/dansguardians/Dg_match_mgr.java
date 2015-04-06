@@ -32,7 +32,7 @@ public class Dg_match_mgr {
 		ttl_filter_mgr.Load(Bool_.N, root_dir.GenSubFil("xowa.title.include.txt"));
 		ttl_filter_mgr.Load(Bool_.Y, root_dir.GenSubFil("xowa.title.exclude.txt"));
 		Io_url dg_root_url = root_dir.GenSubDir("dansguardian");
-		Dg_file[] files = parser.Parse_dir(dg_root_url); Gfo_usr_dlg_._.Plog_many("", "", "import.dg.rules: url=~{0} files=~{1}", dg_root_url, files.length);
+		Dg_file[] files = parser.Parse_dir(dg_root_url); Gfo_usr_dlg_.I.Plog_many("", "", "import.dg.rules: url=~{0} files=~{1}", dg_root_url, files.length);
 		Init_by_files(files);
 		if (log_enabled) log_mgr.Commit();
 	}

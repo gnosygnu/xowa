@@ -76,7 +76,7 @@ public class Xow_portal_mgr implements GfoInvkAble {
 //			}
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();
 		div_ns_fmtr.Bld_bfr_many(tmp_bfr, Bry_.Add(Xoh_href_parser.Href_wiki_bry, ttl.Subj_txt()), subj_cls, Bry_.Add(Xoh_href_parser.Href_wiki_bry, ttl.Talk_txt()), talk_cls, vnt_menu);
-		return tmp_bfr.Mkr_rls().Xto_bry_and_clear();
+		return tmp_bfr.To_bry_and_rls();
 	}
 	private byte[] Ns_cls_by_ord(Xow_ns_mgr ns_mgr, int ns_ord) {
 		Xow_ns ns = ns_mgr.Ords_get_at(ns_ord);
@@ -95,7 +95,7 @@ public class Xow_portal_mgr implements GfoInvkAble {
 			case Xopg_view_mode.Tid_html: html_cls = Cls_selected_y; break;
 		}
 		div_view_fmtr.Bld_bfr_many(tmp_bfr, read_cls, edit_cls, html_cls, search_text);
-		return tmp_bfr.Mkr_rls().Xto_bry_and_clear();
+		return tmp_bfr.To_bry_and_rls();
 	}	public static final byte[] Cls_selected_y = Bry_.new_ascii_("selected"), Cls_new = Bry_.new_ascii_("new"), Cls_display_none = Bry_.new_ascii_("xowa_display_none");
 	public byte[] Div_logo_bry() {return div_logo_bry;} private byte[] div_logo_bry = Bry_.Empty;
 	public byte[] Div_home_bry() {return api_skin != null && api_skin.Sidebar_home_enabled() ? div_home_bry : Bry_.Empty;} private byte[] div_home_bry = Bry_.Empty;
@@ -104,7 +104,7 @@ public class Xow_portal_mgr implements GfoInvkAble {
 			toggle_itm = wiki.Appe().Api_root().Html().Page().Toggle_mgr().Get_or_new("offline-wikis").Init(wiki.Appe().User().Wiki(), Bry_.new_ascii_("Wikis"));
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();
 		div_wikis_fmtr.Bld_bfr_many(tmp_bfr, toggle_itm.Html_toggle_btn(), toggle_itm.Html_toggle_hdr());
-		return tmp_bfr.Mkr_rls().Xto_bry_and_clear();
+		return tmp_bfr.To_bry_and_rls();
 	}
 	public byte[] Missing_ns_cls() {return missing_ns_cls;} public Xow_portal_mgr Missing_ns_cls_(byte[] v) {missing_ns_cls = v; return this;} private byte[] missing_ns_cls;	// NOTE: must be null due to Init check above
 	private Bry_fmtr div_personal_fmtr = Bry_fmtr.new_("~{portal_personal_subj_href};~{portal_personal_subj_text};~{portal_personal_talk_cls};~{portal_personal_talk_href};~{portal_personal_talk_cls};", "portal_personal_subj_href", "portal_personal_subj_text", "portal_personal_subj_cls", "portal_personal_talk_href", "portal_personal_talk_cls");

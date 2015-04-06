@@ -19,6 +19,7 @@ package gplx.dbs; import gplx.*;
 import gplx.dbs.sqls.*;
 public class Db_meta_tbl {
 	public Db_meta_tbl(String name, Db_meta_fld[] flds, Db_meta_idx[] idxs) {
+		if (idxs == null) idxs = Db_meta_idx.Ary_empty;	// empty params will pass idxs of null; set to idxs[0] else null ref when calling create_table
 		this.name = name; this.flds = flds; this.idxs = idxs;
 	}
 	public String Name() {return name;} private final String name;		

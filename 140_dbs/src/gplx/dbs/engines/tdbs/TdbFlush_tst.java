@@ -81,7 +81,7 @@ public class TdbFlush_tst {
 }
 class TdbEngineFxt {
 	public TdbEngine run_MakeEngine(Io_url url) {
-		Db_url connectInfo = Db_url_.tdb_(url);
+		Db_conn_info connectInfo = Db_conn_info_.tdb_(url);
 		TdbEngine engine = (TdbEngine)TdbEngine._.New_clone(connectInfo);
 		engine.Conn_open();
 		return engine;

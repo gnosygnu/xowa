@@ -35,7 +35,7 @@ public class Xof_file_mgr implements GfoInvkAble {
 	}
 	public void Init_by_app(Xoae_app app) {
 		Io_url db_url = app.User().Fsys_mgr().Root_dir().OwnerDir().GenSubFil_ary("xowa.user.", app.User().Key_str(), ".sqlite3");
-		Db_conn_bldr_data conn_data = Db_conn_bldr.I.Get_or_new("xowa.user_db", db_url);
+		Db_conn_bldr_data conn_data = Db_conn_bldr.I.Get_or_new(db_url);
 		boolean schema_is_1 = Bool_.Y;
 		cache_mgr.Init_for_db(conn_data.Conn(), conn_data.Created(), schema_is_1);
 	}

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import org.junit.*; import gplx.xowa.tdbs.*;
+import org.junit.*; import gplx.xowa.tdbs.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xosrh_parser_tst {
 	@Before public void init() {fxt.Clear();} private Xosearch_parser_fxt fxt = new Xosearch_parser_fxt();
 	@Test   public void Scan_word() 			{fxt.Test_scan("abc", "abc");}
@@ -103,7 +103,7 @@ class Xosearch_parser_fxt {
 		int len = ids.length;
 		ListAdp id_vals = ListAdp_.new_();
 		for (int i = 0; i < len; i++)
-			id_vals.Add(Xodb_page.new_srch(ids[i], 0));
+			id_vals.Add(Xowd_page_itm.new_srch(ids[i], 0));
 		matches.Add(Bry_.new_ascii_(name), id_vals);
 	}
 	public void Test_match(String raw, int... expd) {
@@ -118,7 +118,7 @@ class Xosearch_parser_fxt {
 		int len = list.Count();
 		int[] rv = new int[len];
 		for (int i = 0; i < len; i++)
-			rv[i] = ((Xodb_page)list.FetchAt(i)).Id();
+			rv[i] = ((Xowd_page_itm)list.FetchAt(i)).Id();
 		return rv;
 	}
 	private void Test_match_assign_ids(byte[] src, Xosrh_qry_itm itm) {

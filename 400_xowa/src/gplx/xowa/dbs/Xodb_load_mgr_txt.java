@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs; import gplx.*; import gplx.xowa.*;
-import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.flds.*; import gplx.xowa.bldrs.imports.ctgs.*; import gplx.xowa.ctgs.*; import gplx.xowa.dbs.tbls.*; import gplx.xowa.specials.search.*; import gplx.xowa.tdbs.*;
+import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.flds.*; import gplx.xowa.bldrs.cmds.ctgs.*; import gplx.xowa.ctgs.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.specials.search.*; import gplx.xowa.tdbs.*;
 public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 	public Xodb_load_mgr_txt(Xowe_wiki wiki) {
 		this.wiki = wiki;
@@ -24,24 +24,24 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 	}	private Xowe_wiki wiki; Xotdb_fsys_mgr fsys_mgr;
 	Xob_xdat_file tmp_xdat_file = new Xob_xdat_file(); Xob_xdat_itm tmp_xdat_itm = new Xob_xdat_itm(); 
 	public void Load_init			(Xowe_wiki wiki) {}
-	public void Load_page(Xodb_page rv, Xow_ns ns, boolean timestamp_enabled) {Load_page(rv, rv.Wtxt_db_id(), rv.Tdb_row_idx(), ns, timestamp_enabled, tmp_xdat_file, tmp_xdat_itm);}
-	public void Load_page(Xodb_page rv, int txt_fil_idx, int txt_row_idx, Xow_ns ns, boolean timestamp_enabled, Xob_xdat_file xdat_file, Xob_xdat_itm xdat_itm) {
+	public void Load_page(Xowd_page_itm rv, Xow_ns ns, boolean timestamp_enabled) {Load_page(rv, rv.Text_db_id(), rv.Tdb_row_idx(), ns, timestamp_enabled, tmp_xdat_file, tmp_xdat_itm);}
+	public void Load_page(Xowd_page_itm rv, int txt_fil_idx, int txt_row_idx, Xow_ns ns, boolean timestamp_enabled, Xob_xdat_file xdat_file, Xob_xdat_itm xdat_itm) {
 		Io_url file = fsys_mgr.Url_ns_fil(Xotdb_dir_info_.Tid_page, ns.Id(), txt_fil_idx);
 		byte[] bry = gplx.ios.Io_stream_rdr_.Load_all(file); int bry_len = bry.length;
 		xdat_file.Clear().Parse(bry, bry_len, file).GetAt(xdat_itm, txt_row_idx);
 		Load_page_parse(rv, bry, bry_len, xdat_itm.Itm_bgn(), xdat_itm.Itm_end(), timestamp_enabled);
 	}
-	public boolean Load_by_ttl(Xodb_page rv, Xow_ns ns, byte[] ttl) {	// NOTE: ttl must be correct case; EX: "Example title"
+	public boolean Load_by_ttl(Xowd_page_itm rv, Xow_ns ns, byte[] ttl) {	// NOTE: ttl must be correct case; EX: "Example title"
 		if (!Env_.Mode_testing() && wiki.Init_needed()) wiki.Init_assert();	// NOTE: need to call assert as wiki_finder (and possibly elsewhere) may call load on commons_wiki without ever asserting; DATE:2013-03-19
-		if (!Load_xdat_itm(tmp_xdat_itm, ns, Xotdb_dir_info_.Tid_ttl, ttl, Xodb_page_.Txt_ttl_pos, Byte_ascii.Tab, true)) return false;
-		Xodb_page_.Txt_ttl_load(rv, tmp_xdat_itm.Itm_bry());
+		if (!Load_xdat_itm(tmp_xdat_itm, ns, Xotdb_dir_info_.Tid_ttl, ttl, Xotdb_page_itm_.Txt_ttl_pos, Byte_ascii.Tab, true)) return false;
+		Xotdb_page_itm_.Txt_ttl_load(rv, tmp_xdat_itm.Itm_bry());
 		rv.Exists_(true);
 		return Bry_.Eq(rv.Ttl_page_db(), ttl);
 	}
 	public void Load_by_ttls(Cancelable cancelable, OrderedHash rv, boolean fill_idx_fields_only, int bgn, int end) {// NOTE: Load_by_ttls just a wrapper around Load_by_ttl; for xdat, Load_by_ttl is fast enough
 		for (int i = bgn; i < end; i++) {
 			if (cancelable.Canceled()) return;
-			Xodb_page page = (Xodb_page)rv.FetchAt(i);
+			Xowd_page_itm page = (Xowd_page_itm)rv.FetchAt(i);
 			Load_by_ttl(page, page.Ns(), page.Ttl_page_db());
 		}
 	}
@@ -52,7 +52,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		Gfo_usr_dlg_fmt msg_wtr = Gfo_usr_dlg_fmt.fmt_(GRP_KEY, "search2_ids", "resolving ids: ~{0} of ~{1} (~{2})", len, 10f);
 		for (int i = 0; i < len; i++) {
 			if (cancelable.Canceled()) return;
-			Xodb_page itm = (Xodb_page)list.FetchAt(i + bgn);
+			Xowd_page_itm itm = (Xowd_page_itm)list.FetchAt(i + bgn);
 			Base85_utl.XtoStrByAry(itm.Id(), id_bry, 0, 5);
 			int cur_fil_idx = this.Find_file_idx_by_site(Xotdb_dir_info_.Tid_id, id_bry);
 			if (cur_fil_idx != prv_fil_idx) {
@@ -63,7 +63,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 			itm.Ns_id_(tmp_page.Ns_id()).Ttl_page_db_(tmp_page.Ttl_page_db());
 			msg_wtr.Write_prog_cur(i, wiki.Appe().Usr_dlg());
 		}
-	} 	Xodb_page tmp_page = new Xodb_page();
+	} 	Xowd_page_itm tmp_page = new Xowd_page_itm();
 	public void Load_search(Cancelable cancelable, ListAdp rv, byte[] search, int results_max) {
 		Xow_ns ns = wiki.Ns_mgr().Ns_main();
 		int search_len = search.length;
@@ -115,7 +115,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 			int page_id 	= Base85_utl.XtoIntByAry(raw, pos, pos + 4);
 			pos += 6;	// 5 + 1 for semic;
 			int page_len 	= Base85_utl.XtoIntByAry(raw, pos, pos + 4);
-			rv.Add(Xodb_page.new_srch(page_id, page_len));
+			rv.Add(Xowd_page_itm.new_srch(page_id, page_len));
 			pos += 6;	// 5 + 1 for pipe
 //				if (match.Itms_len() == max_results) break;
 		}
@@ -171,16 +171,16 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 			idx_mgr.Total_(count);
 		}
 	}
-	public boolean Load_by_id(Xodb_page page, int id)			{Base85_utl.XtoStrByAry(id, tmp_id_bry, 0, 5); return Load_by_id(page, tmp_id_bry);} private byte[] tmp_id_bry = new byte[5];
-	boolean Load_by_id(Xodb_page page, byte[] id_bry)	{
+	public boolean Load_by_id(Xowd_page_itm page, int id)			{Base85_utl.XtoStrByAry(id, tmp_id_bry, 0, 5); return Load_by_id(page, tmp_id_bry);} private byte[] tmp_id_bry = new byte[5];
+	boolean Load_by_id(Xowd_page_itm page, byte[] id_bry)	{
 		if (!Load_xdat_itm(tmp_xdat_itm, Xotdb_dir_info_.Tid_id, id_bry, true)) return false;;
-		Xodb_page_.Txt_id_load(page, tmp_xdat_itm.Itm_bry());
+		Xotdb_page_itm_.Txt_id_load(page, tmp_xdat_itm.Itm_bry());
 		return true;
 	}
-	boolean Load_by_id(Xodb_page page, Xob_xdat_file xdat_file, byte[] id_bry) {
+	boolean Load_by_id(Xowd_page_itm page, Xob_xdat_file xdat_file, byte[] id_bry) {
 		xdat_file.Find(tmp_xdat_itm, id_bry, 0, Byte_ascii.Pipe, true);
 		if (tmp_xdat_itm.Missing()) return false;
-		Xodb_page_.Txt_id_load(page, tmp_xdat_itm.Itm_bry());
+		Xotdb_page_itm_.Txt_id_load(page, tmp_xdat_itm.Itm_bry());
 		return true;
 	}
 	boolean Load_xdat_itm(Xob_xdat_itm xdat_itm, byte regy_tid, byte[] key, boolean exact) {return Load_xdat_itm(xdat_itm, null, regy_tid, key, 0, Byte_ascii.Pipe, exact);}
@@ -225,7 +225,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 			rv = true;
 		}
 		if (cancelable.Canceled()) return false;
-		tmp_bfr.Mkr_rls().Clear();
+		tmp_bfr.Clear_and_rls();
 		return rv;
 	}
 	int Find_file_idx_by_ns(byte regy_tid, Xow_ns ns, byte[] key) {
@@ -258,7 +258,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		Load_xdat_file(Cancelable_.Never, tmp_xdat_file, file_url);
 		Xob_random_itm file = files[file_idx];
 		tmp_xdat_file.GetAt(tmp_xdat_itm, random_idx - file.Bgn());	// get nth row; EX: random_idx=120; .Bgn=103 -> get 17th
-		Xodb_page page = Xodb_page_.Txt_ttl_load(tmp_xdat_itm.Itm_bry());
+		Xowd_page_itm page = Xotdb_page_itm_.Txt_ttl_load(tmp_xdat_itm.Itm_bry());
 		return page.Ttl_page_db();
 	}
 	private static Xob_random_itm[] Build_random_itms(Xowd_regy_mgr mgr, Int_obj_ref count) {
@@ -286,9 +286,9 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		if (tmp_xdat_itm.Missing()) return false;
 		ListAdp ctgs = ListAdp_.new_();
 		Load_ctg_v1_parse(ctgs, wiki.Appe().Usr_dlg(), tmp_xdat_itm.Itm_bry());
-		ctgs.SortBy(Xodb_page_sorter.IdAsc);
+		ctgs.SortBy(Xowd_page_itm_sorter.IdAsc);
 		this.Load_by_ids(Cancelable_.Never, ctgs, 0, ctgs.Count());
-		ctgs.SortBy(Xodb_page_sorter.Ns_id_TtlAsc);
+		ctgs.SortBy(Xowd_page_itm_sorter.Ns_id_TtlAsc);
 
 		int ctgs_len = ctgs.Count(); if (ctgs_len == 0) return false;
 		if (count_only != null) {	// Ctg_count specificed
@@ -296,7 +296,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 			return true;
 		}
 		for (int i = 0; i < ctgs_len; i++) {
-			Xodb_page itm = (Xodb_page)ctgs.FetchAt(i);
+			Xowd_page_itm itm = (Xowd_page_itm)ctgs.FetchAt(i);
 			byte itm_tid = Load_ctg_v1_tid(itm.Ns_id());
 			Xoctg_view_itm sub = Load_ctg_v1_sub(itm_tid, itm);
 			sub.Ttl_(Xoa_ttl.parse_(wiki, itm.Ns_id(), itm.Ttl_page_db())).Sortkey_(itm.Ttl_page_db());
@@ -316,7 +316,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		rv.Clear();
 		boolean garbage = false;
 		for (int i = 0; i < rowCount; i++) {
-			Xodb_page row = new Xodb_page();
+			Xowd_page_itm row = new Xowd_page_itm();
 			rv.Add(row);
 			if (garbage) continue;
 			int bgn = pos + 1 + (i * (Base85_utl.Len_int + gplx.xowa.apps.progs.Xoa_prog_mgr.Len_dlm_fld));
@@ -340,13 +340,13 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 			default: 					return Xoa_ctg_mgr.Tid_page;
 		}		
 	}
-	private static Xoctg_view_itm Load_ctg_v1_sub(byte tid, Xodb_page data) {
+	private static Xoctg_view_itm Load_ctg_v1_sub(byte tid, Xowd_page_itm data) {
 		Xoctg_view_itm rv = new Xoctg_view_itm();
-		rv.Load_by_ttl_data(tid, data.Id(), 0, data.Wtxt_len());
+		rv.Load_by_ttl_data(tid, data.Id(), 0, data.Text_len());
 		return rv;
 	}
 
-	private void Load_page_parse(Xodb_page page, byte[] src, int src_len, int row_bgn, int row_end, boolean timestamp_enabled) { // \n\tdate5\tpage_title\tpage_text
+	private void Load_page_parse(Xowd_page_itm page, byte[] src, int src_len, int row_bgn, int row_end, boolean timestamp_enabled) { // \n\tdate5\tpage_title\tpage_text
 		int timestamp_bgn = row_bgn + 5 + 1;
 		int timestamp_end = timestamp_bgn + 5;
 		if (timestamp_enabled) {
@@ -354,8 +354,8 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 			page.Modified_on_(Bit_.Xto_date_short(timestamp));
 		}
 		int name_bgn = timestamp_end + 1;
-		int name_end = Bry_finder.Find_fwd(src, Xodb_page_.Txt_page_dlm, name_bgn, src_len);			
-		page.Wtxt_(Bry_.Mid(src, name_end + 1, row_end - 1));	// +1 to skip dlm
+		int name_end = Bry_finder.Find_fwd(src, Xotdb_page_itm_.Txt_page_dlm, name_bgn, src_len);			
+		page.Text_(Bry_.Mid(src, name_end + 1, row_end - 1));	// +1 to skip dlm
 	}
 	Xowd_regy_mgr Get_regy_by_site(byte regy_tid) {
 		Xowd_regy_mgr rv = site_regys[regy_tid];
@@ -376,29 +376,29 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		}
 		return rv;
 	}	private Xowd_regy_mgr[] ns_regys = new Xowd_regy_mgr[Xow_ns_mgr_.Ordinal_max];
-	private Xodb_page tmp_rslt_nxt = new Xodb_page(), tmp_rslt_prv = new Xodb_page(); private Int_obj_ref tmp_rslt_count = Int_obj_ref.zero_();
+	private Xowd_page_itm tmp_rslt_nxt = new Xowd_page_itm(), tmp_rslt_prv = new Xowd_page_itm(); private Int_obj_ref tmp_rslt_count = Int_obj_ref.zero_();
 	public void Load_ttls_for_search_suggest(Cancelable cancelable, ListAdp rslt_list, Xow_ns ns, byte[] key, int max_results, int min_page_len, int browse_len, boolean include_redirects, boolean fetch_prv_item) {
 		this.Load_ttls_for_all_pages(cancelable, rslt_list, tmp_rslt_nxt, tmp_rslt_prv, tmp_rslt_count, ns, key, max_results, min_page_len, browse_len, include_redirects, fetch_prv_item);
 	}
-	public void Load_ttls_for_all_pages(Cancelable cancelable, ListAdp rslt_list, Xodb_page rslt_nxt, Xodb_page rslt_prv, Int_obj_ref rslt_count, Xow_ns ns, byte[] key, int max_results, int min_page_len, int browse_len, boolean include_redirects, boolean fetch_prv_item) {
+	public void Load_ttls_for_all_pages(Cancelable cancelable, ListAdp rslt_list, Xowd_page_itm rslt_nxt, Xowd_page_itm rslt_prv, Int_obj_ref rslt_count, Xow_ns ns, byte[] key, int max_results, int min_page_len, int browse_len, boolean include_redirects, boolean fetch_prv_item) {
 		byte dir_tid = Xotdb_dir_info_.Tid_ttl;
 		Xob_xdat_file cur_xdat_file = new Xob_xdat_file();
 		Xob_xdat_itm cur_xdat_itm = new Xob_xdat_itm();
 		Xowd_regy_mgr regy = new Xowd_regy_mgr(fsys_mgr.Url_ns_reg(ns.Num_str(), dir_tid));
 		int fil_idx = regy.Files_find(key); if (fil_idx == Xowd_regy_mgr.Regy_null) return;
 		if (!this.Load_xdat_file(Cancelable_.Never, cur_xdat_file, dir_tid, ns, fil_idx)) return;
-		cur_xdat_file.Find(cur_xdat_itm, key, Xodb_page_.Txt_ttl_pos, Byte_ascii.Tab, false);
+		cur_xdat_file.Find(cur_xdat_itm, key, Xotdb_page_itm_.Txt_ttl_pos, Byte_ascii.Tab, false);
 		int itm_idx = cur_xdat_itm.Itm_idx();
 		if (itm_idx == -1) itm_idx = 0;	// nothing found; return;
 		Special_allpages_query_fwd(rslt_list, rslt_nxt, rslt_count	, dir_tid, ns, include_redirects, browse_len, fil_idx, itm_idx    , cur_xdat_file, cur_xdat_itm, regy);
 		Special_allpages_query_bwd(rslt_list, rslt_prv				, dir_tid, ns, include_redirects, browse_len, fil_idx, itm_idx - 1, cur_xdat_file, cur_xdat_itm);
 	}
-	private void Special_allpages_query_fwd(ListAdp rslt_list, Xodb_page rslt_nxt, Int_obj_ref rslt_count, byte dir_tid, Xow_ns ns, boolean include_redirects, int total, int fil_idx, int row_idx, Xob_xdat_file xdat_file, Xob_xdat_itm xdat_itm, Xowd_regy_mgr regy) {
+	private void Special_allpages_query_fwd(ListAdp rslt_list, Xowd_page_itm rslt_nxt, Int_obj_ref rslt_count, byte dir_tid, Xow_ns ns, boolean include_redirects, int total, int fil_idx, int row_idx, Xob_xdat_file xdat_file, Xob_xdat_itm xdat_itm, Xowd_regy_mgr regy) {
 		int count = 0; ++total;
 		boolean loop = true;
 		int regy_len = regy.Files_ary().length;
 		int rslt_list_len = rslt_count.Val();
-		Xodb_page nxt_itm = null;
+		Xowd_page_itm nxt_itm = null;
 		while (loop) {
 			if (fil_idx == regy_len) break;
 			if (xdat_file == null) {
@@ -409,7 +409,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 			int rows_len = xdat_file.Count();
 			for (; row_idx < rows_len; row_idx++) {
 				xdat_file.GetAt(xdat_itm, row_idx);
-				Xodb_page ttl_itm = Xodb_page_.Txt_ttl_load(Bry_.Mid(xdat_itm.Src(), xdat_itm.Itm_bgn(), xdat_itm.Itm_end()));
+				Xowd_page_itm ttl_itm = Xotdb_page_itm_.Txt_ttl_load(Bry_.Mid(xdat_itm.Src(), xdat_itm.Itm_bgn(), xdat_itm.Itm_end()));
 				if (!include_redirects && ttl_itm.Redirected()) continue;
 				++count;
 				nxt_itm = ttl_itm;
@@ -429,14 +429,14 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		if (rslt_nxt != null)
 			rslt_nxt.Copy(nxt_itm);
 	}
-	private void Special_allpages_query_bwd(ListAdp rslt_list, Xodb_page rslt_prv, byte dir_tid, Xow_ns ns, boolean include_redirects, int total, int fil_idx, int row_idx, Xob_xdat_file xdat_file, Xob_xdat_itm xdat_itm) {
+	private void Special_allpages_query_bwd(ListAdp rslt_list, Xowd_page_itm rslt_prv, byte dir_tid, Xow_ns ns, boolean include_redirects, int total, int fil_idx, int row_idx, Xob_xdat_file xdat_file, Xob_xdat_itm xdat_itm) {
 		if (row_idx < 0) {
 			--fil_idx;
 			row_idx = -1;
 		}
 		int count = 0;
 		boolean loop = true;
-		Xodb_page prv_itm = null;
+		Xowd_page_itm prv_itm = null;
 		while (loop) {
 			if (fil_idx == -1) break;
 			if (xdat_file == null) {
@@ -448,7 +448,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 				row_idx = xdat_file.Count() - 1;
 			for (; row_idx > -1; row_idx--) {
 				xdat_file.GetAt(xdat_itm, row_idx);
-				Xodb_page ttl_itm = Xodb_page_.Txt_ttl_load(Bry_.Mid(xdat_itm.Src(), xdat_itm.Itm_bgn(), xdat_itm.Itm_end()));
+				Xowd_page_itm ttl_itm = Xotdb_page_itm_.Txt_ttl_load(Bry_.Mid(xdat_itm.Src(), xdat_itm.Itm_bgn(), xdat_itm.Itm_end()));
 				if (!include_redirects && ttl_itm.Redirected()) continue;
 //				list.Add(ttl_itm);
 				++count;
@@ -465,7 +465,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 			--fil_idx;
 		}
 		if (prv_itm == null && rslt_list.Count() > 0) {
-			prv_itm = (Xodb_page)rslt_list.FetchAt(0);
+			prv_itm = (Xowd_page_itm)rslt_list.FetchAt(0);
 		}
 		if (rslt_prv != null)
 			rslt_prv.Copy(prv_itm);
@@ -514,19 +514,19 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		ctg_mgr.Get_titles(wiki.Appe().Usr_dlg(), wiki, rv);
 		rv.Num_(data_ctg);
 	}
-	public Xodb_page[] Load_ctg_list(byte[][] ttls) {
+	public Xowd_page_itm[] Load_ctg_list(byte[][] ttls) {
 		int len = ttls.length;
-		Xodb_page[] rv = new Xodb_page[len];
+		Xowd_page_itm[] rv = new Xowd_page_itm[len];
 		Xow_ns ns = wiki.Ns_mgr().Ns_category();
 		
 		Xoctg_data_ctg ctg_temp = new Xoctg_data_ctg(Bry_.Empty);
 		for (int i = 0; i < len; i++) {
 			byte[] ttl = Xoa_ttl.Replace_spaces(ttls[i]);	// NOTE: ctg_ttls has spaces since v1 rendered it literally;
-			Xodb_page page = new Xodb_page();
+			Xowd_page_itm page = new Xowd_page_itm();
 			this.Load_by_ttl(page, ns, ttl);
 
 			Load_ctg_v2_main(ctg_temp, page.Ttl_page_db());
-			Xodb_category_itm ctg_itm = Xodb_category_itm.load_(page.Id(), page.Wtxt_db_id(), ctg_temp.Hidden(), ctg_temp.Total_by_tid(Xoa_ctg_mgr.Tid_subc), ctg_temp.Total_by_tid(Xoa_ctg_mgr.Tid_file), ctg_temp.Total_by_tid(Xoa_ctg_mgr.Tid_page)); 
+			Xowd_category_itm ctg_itm = Xowd_category_itm.load_(page.Id(), page.Text_db_id(), ctg_temp.Hidden(), ctg_temp.Total_by_tid(Xoa_ctg_mgr.Tid_subc), ctg_temp.Total_by_tid(Xoa_ctg_mgr.Tid_file), ctg_temp.Total_by_tid(Xoa_ctg_mgr.Tid_page)); 
 			page.Xtn_(ctg_itm);
 			rv[i] = page;
 		}

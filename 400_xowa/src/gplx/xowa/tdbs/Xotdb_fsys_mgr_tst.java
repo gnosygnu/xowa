@@ -30,7 +30,7 @@ class Xow_fsys_mgr_fxt {
 		wiki = Xoa_app_fxt.wiki_tst_(app);
 	}
 	Xoae_app app; Xowe_wiki wiki;
-	public Xow_fsys_mgr_fxt Zip_(byte tid, boolean v) {wiki.Tdb_fsys_mgr().Tdb_dir_regy()[tid].Ext_tid_(v ? gplx.ios.Io_stream_.Tid_zip : gplx.ios.Io_stream_.Tid_file); return this;}
+	public Xow_fsys_mgr_fxt Zip_(byte tid, boolean v) {wiki.Tdb_fsys_mgr().Tdb_dir_regy()[tid].Ext_tid_(v ? gplx.ios.Io_stream_.Tid_zip : gplx.ios.Io_stream_.Tid_raw); return this;}
 	public void Url_ns_fil(byte tid, int ns_id, int fil_idx, String expd) {
 		Tfds.Eq(expd, wiki.Tdb_fsys_mgr().Url_ns_fil(tid, ns_id, fil_idx).Raw());
 	}

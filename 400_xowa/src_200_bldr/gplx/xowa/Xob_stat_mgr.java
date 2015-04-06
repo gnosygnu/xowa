@@ -38,7 +38,7 @@ public class Xob_stat_mgr {
 			for (int i = 0; i < regy.Count(); i++) {
 				Xob_stat_type typ = (Xob_stat_type)regy.FetchAt(i);
 				Xob_stat_itm itm = (Xob_stat_itm)typ.GetOrNew(ns);
-				sb.Add(Int_.Xto_str_pad_bgn(itm.Fils, 5)).Add(" ");
+				sb.Add(Int_.Xto_str_pad_bgn_zero(itm.Fils, 5)).Add(" ");
 			}
 			sb.Add_str_w_crlf(ns);
 		}

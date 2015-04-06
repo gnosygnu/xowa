@@ -51,12 +51,12 @@ INSERT INTO dbs_multiple_data_types VALUES (1, 'John Doe', B'1', '3/30/2006 10:2
 class DataTypes_base_fxt {
 	public Db_conn Conn() {return conn;} Db_conn conn;
 	public DataTypes_base_fxt() {}
-	public void Rls() {conn.Conn_term();}
+	public void Rls() {conn.Rls_conn();}
 	public String Select_FloatStr() {return select_FloatStr;} public DataTypes_base_fxt Select_FloatStr_(String v) {select_FloatStr = v; return this;} private String select_FloatStr;
 	public void RunAll(Db_conn conn) {
 		this.conn = conn;
 		this.Select_hook(select_FloatStr);
-		conn.Conn_term();
+		conn.Rls_conn();
 	}
 	public void Select_hook(String floatStr) {
 		DataRdr rdr = Db_qry_.select_tbl_("dbs_multiple_data_types").Exec_qry_as_rdr(conn);

@@ -23,4 +23,5 @@ class Xog_js_wkr__null implements Xog_js_wkr {
 	public void Html_img_update			(String uid, String src, int w, int h) {}
 	public void Html_atr_set			(String uid, String key, String val) {}
 	public void Html_elem_replace_html	(String uid, String html) {}
+	public void Html_redlink			(String html_uid) {}
 }

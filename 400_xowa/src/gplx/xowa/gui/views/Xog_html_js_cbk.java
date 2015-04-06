@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
-import gplx.threads.*; import gplx.xowa.xtns.pfuncs.ifs.*;
+import gplx.threads.*; import gplx.xowa.xtns.pfuncs.ifs.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xog_html_js_cbk implements GfoInvkAble {
 	private Xoae_app app;
 	private Xog_html_itm html_itm;
@@ -86,8 +86,8 @@ public class Xog_html_js_cbk implements GfoInvkAble {
 			Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry);
 			wiki.Db_mgr().Load_mgr().Load_by_ttl(tmp_page, ttl.Ns(), ttl.Page_db());
 		}
-		return String_.Ary(tmp_page.Exists() ? "1" : "0", Int_.Xto_str(tmp_page.Id()), Int_.Xto_str(tmp_page.Ns_id()), String_.new_utf8_(tmp_page.Ttl_page_db()), Bool_.Xto_str_lower(tmp_page.Redirected()), tmp_page.Modified_on().XtoStr_fmt("yyyy-MM-dd HH:mm:ss"), Int_.Xto_str(tmp_page.Wtxt_len()));
-	}	private static final Xodb_page tmp_page = Xodb_page.new_tmp();
+		return String_.Ary(tmp_page.Exists() ? "1" : "0", Int_.Xto_str(tmp_page.Id()), Int_.Xto_str(tmp_page.Ns_id()), String_.new_utf8_(tmp_page.Ttl_page_db()), Bool_.Xto_str_lower(tmp_page.Redirected()), tmp_page.Modified_on().XtoStr_fmt("yyyy-MM-dd HH:mm:ss"), Int_.Xto_str(tmp_page.Text_len()));
+	}	private static final Xowd_page_itm tmp_page = Xowd_page_itm.new_tmp();
 	private String[][] Get_titles_meta(GfoMsg m) {
 		Xowe_wiki wiki = html_itm.Owner_tab().Wiki();
 		try {

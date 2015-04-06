@@ -22,6 +22,7 @@ public class Xof_bin_wkr__http_wmf implements Xof_bin_wkr {
 	private final Xof_url_bldr url_bldr = new Xof_url_bldr();
 	public Xof_bin_wkr__http_wmf(Xow_repo_mgr repo_mgr, gplx.ios.IoEngine_xrg_downloadFil download_wkr) {this.repo_mgr = repo_mgr; this.download_wkr = download_wkr;}
 	public byte Tid() {return Xof_bin_wkr_.Tid_http_wmf;}
+	public String Key() {return Xof_bin_wkr_.Key_http_wmf;}
 	public boolean Resize_allowed() {return bin_wkr_resize;} public void Resize_allowed_(boolean v) {bin_wkr_resize = v;} private boolean bin_wkr_resize = true;
 	public int Fail_timeout() {return fail_timeout;} public Xof_bin_wkr__http_wmf Fail_timeout_(int v) {fail_timeout = v; return this;} private int fail_timeout = 0;	// NOTE: always default to 0; manually set to 1000 for fsdb_make only; DATE:2014-06-21
 	public Io_stream_rdr Get_as_rdr(Xof_fsdb_itm fsdb, boolean is_thumb, int w) {
@@ -59,5 +60,5 @@ public class Xof_bin_wkr__http_wmf implements Xof_bin_wkr {
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_fail_timeout_ = "fail_timeout_";
-
+	public static Xof_bin_wkr__http_wmf new_(Xow_wiki wiki) {return new Xof_bin_wkr__http_wmf(wiki.File_mgr__repo_mgr(), wiki.App().Wmf_mgr().Download_wkr().Download_xrg());}
 }

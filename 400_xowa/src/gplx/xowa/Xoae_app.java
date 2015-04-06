@@ -69,6 +69,7 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 	public Url_encoder_mgr		Utl__encoder_mgr()		{return Xoa_app_.Utl__encoder_mgr();}
 
 	
+	public Xoa_css_extractor	Css_installer() {return css_installer;} private final Xoa_css_extractor css_installer = new Xoa_css_extractor();
 	public Xoa_wiki_mgr			Wiki_mgr() {return wiki_mgr;} private Xoa_wiki_mgr wiki_mgr;
 	public Xou_user_mgr			User_mgr() {return user_mgr;} private Xou_user_mgr user_mgr;
 	public Xof_file_mgr			File_mgr() {return file_mgr;} private Xof_file_mgr file_mgr = new Xof_file_mgr();
@@ -131,6 +132,7 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 		gui_mgr.Init_by_app();
 		user.Init_by_app(this);
 		file_mgr.Init_by_app(this);
+		css_installer.Init_by_app(this);
 		wiki_mgr.Init_by_app();
 		gplx.xowa.utls.upgrades.Xoa_upgrade_mgr.Check(this);
 		ctg_mgr.Init_by_app(this);

@@ -70,7 +70,7 @@ public class Gallery_itm_parser {
 		Xopg_redlink_logger file_wkr = ctx.Lnki().File_wkr();	// NOTE: do not set file_wkr ref early (as member var); parse_all sets late
 		ctx.Cur_page().Lnki_list().Add(lnki_tkn);
 		mgr.Get_thumb_size(lnki_tkn, cur_itm.Ext());		// NOTE: set thumb size, so that lnki.temp parse picks it up
-		if (file_wkr != null) file_wkr.Wkr_exec(ctx, src, lnki_tkn, gplx.xowa.bldrs.files.Xob_lnki_src_tid.Tid_gallery);
+		if (file_wkr != null) file_wkr.Wkr_exec(ctx, src, lnki_tkn, gplx.xowa.bldrs.cmds.files.Xob_lnki_src_tid.Tid_gallery);
 		lnki_tkn.W_(-1).H_(-1);					// NOTE: reset lnki back to defaults, else itm will show as large missing caption
 	}
 	private byte Parse_itm() {
@@ -218,7 +218,7 @@ public class Gallery_itm_parser {
 	private static final byte Mode_eos = 1, Mode_nl = 2, Mode_pipe = 3, Mode_text = 4;
 	private void Init_keyword(Byte_obj_ref tmp_bref, Xol_lang lang, int kwd_id, byte trie_key) {
 		Xol_kwd_grp grp = lang.Kwd_mgr().Get_at(kwd_id);
-		if (grp == null) {Gfo_usr_dlg_._.Warn_many("", "", "could not find gallery keyword: ~{0}", String_.new_utf8_(Xol_kwd_grp_.Bry_by_id(kwd_id))); return;}
+		if (grp == null) {Gfo_usr_dlg_.I.Warn_many("", "", "could not find gallery keyword: ~{0}", String_.new_utf8_(Xol_kwd_grp_.Bry_by_id(kwd_id))); return;}
 		Xol_kwd_itm[] itms = grp.Itms();
 		int len = itms.length;
 		Byte_obj_val trie_ref = Byte_obj_val.new_(trie_key);

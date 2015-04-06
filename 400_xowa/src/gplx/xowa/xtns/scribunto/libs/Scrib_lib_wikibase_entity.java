@@ -52,6 +52,6 @@ public class Scrib_lib_wikibase_entity implements Scrib_lib {
 		Wdata_claim_grp prop_grp = wdoc.Claim_list_get(pid_int); if (prop_grp == null) return rslt.Init_str_empty();
 		Bry_bfr bfr = app.Utl__bfr_mkr().Get_b512();
 		wdata_mgr.Resolve_to_bfr(bfr, prop_grp, lang);
-		return rslt.Init_obj(bfr.Mkr_rls().Xto_bry_and_clear());
+		return rslt.Init_obj(bfr.To_bry_and_rls());
 	}
 }

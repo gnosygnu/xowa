@@ -58,7 +58,7 @@ public class Xog_tab_itm_edit_mgr {
 		Xoh_page_wtr_wkr wkr = wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_view_mode.Tid_read);
 		wkr.Page_(new_page);
 		wkr.XferAry(tmp_bfr, 0);
-		byte[] new_html = tmp_bfr.Mkr_rls().Xto_bry_and_clear();
+		byte[] new_html = tmp_bfr.To_bry_and_rls();
 		new_page.Html_data().Edit_preview_(new_html);
 
 		Invalidate(wiki);
@@ -106,7 +106,7 @@ public class Xog_tab_itm_edit_mgr {
 		Bry_bfr bfr = win.App().Utl__bfr_mkr().Get_m001();
 		bfr.Add(new_page.Root().Root_src());
 		wiki.Ctx().Defn_trace().Print(data, bfr);
-		new_page.Data_raw_(bfr.Mkr_rls().Xto_bry_and_clear());
+		new_page.Data_raw_(bfr.To_bry_and_rls());
 		byte old = tab.View_mode();
 		tab.View_mode_(view_tid);
 		Xog_tab_itm_read_mgr.Show_page(tab, new_page, false);

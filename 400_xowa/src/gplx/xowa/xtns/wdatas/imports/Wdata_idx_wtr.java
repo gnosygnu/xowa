@@ -35,12 +35,12 @@ class Wdata_idx_wtr {
 		Xobdc_merger.Basic(usr_dlg, dump_url_gen, dump_dir.OwnerDir().GenSubDir("sort"), dump_fil_max, Io_line_rdr_key_gen_.first_pipe, new Xob_make_cmd_site(usr_dlg, make_dir, make_fil_len));
 	}
 	public static Wdata_idx_wtr new_qid_(Xowe_wiki wdata_wiki, String wiki_str, String ns_num, int dump_fil_max) {
-		Io_url dump_dir = wdata_wiki.Fsys_mgr().Tmp_dir().GenSubDir_nest(Xob_wdata_qid_txt.KEY, "qid", wiki_str, ns_num, "dump");	// /xowa/wiki/www.wikidata.org/tmp/wdata_qid/ + enwiki/000/dump/
+		Io_url dump_dir = wdata_wiki.Fsys_mgr().Tmp_dir().GenSubDir_nest("wdata.qid", "qid", wiki_str, ns_num, "dump");	// /xowa/wiki/www.wikidata.org/tmp/wdata_qid/ + enwiki/000/dump/
 		Io_url make_dir = dir_qid_(wdata_wiki, wiki_str, ns_num);																	// /xowa/wiki/www.wikidata.org/site/data/qid/ + enwiki/000/
 		return new Wdata_idx_wtr(dump_dir, dump_fil_max, make_dir);
 	}
 	public static Wdata_idx_wtr new_pid_(Xowe_wiki wdata_wiki, String lang_key, int dump_fil_max) {
-		Io_url dump_dir = wdata_wiki.Fsys_mgr().Tmp_dir().GenSubDir_nest(Xob_wdata_pid_txt.KEY, "pid", lang_key, "dump");			// /xowa/wiki/www.wikidata.org/tmp/wdata_pid/ + en/
+		Io_url dump_dir = wdata_wiki.Fsys_mgr().Tmp_dir().GenSubDir_nest("wdata.pid", "pid", lang_key, "dump");			// /xowa/wiki/www.wikidata.org/tmp/wdata_pid/ + en/
 		Io_url make_dir = dir_pid_(wdata_wiki, lang_key);																			// /xowa/wiki/www.wikidata.org/site/data/pid/ + en/
 		return new Wdata_idx_wtr(dump_dir, dump_fil_max, make_dir);
 	}

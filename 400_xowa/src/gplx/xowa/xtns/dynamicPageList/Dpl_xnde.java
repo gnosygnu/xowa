@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.dynamicPageList; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
 import gplx.xowa.html.*;
-import gplx.xowa.dbs.*; import gplx.xowa.ctgs.*;
+import gplx.xowa.dbs.*; import gplx.xowa.ctgs.*; import gplx.xowa.wikis.data.tbls.*;
 public class Dpl_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 	private Dpl_itm itm = new Dpl_itm(); private ListAdp pages = ListAdp_.new_();
 	public void Xatr_parse(Xowe_wiki wiki, byte[] src, Xop_xatr_itm xatr, Object xatr_key_obj) {} // NOTE: <dynamicPageList> has no attributes
@@ -47,7 +47,7 @@ public class Dpl_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 		boolean showns = itm.Show_ns();
 		bfr.Add(html_mode.Grp_bgn()).Add_byte_nl();
 		for (int i = itms_bgn; i < itms_len; i++) {
-			Xodb_page page = (Xodb_page)pages.FetchAt(i);
+			Xowd_page_itm page = (Xowd_page_itm)pages.FetchAt(i);
 			Xoa_ttl ttl = Xoa_ttl.parse_(wiki, page.Ns_id(), page.Ttl_page_db());
 			byte[] ttl_page_txt = showns ? ttl.Full_txt() : ttl.Page_txt();
 			if (ttl_page_txt == null) continue;	// NOTE: apparently DynamicPageList allows null pages; DATE:2013-07-22
@@ -77,7 +77,7 @@ class Dpl_page_finder {
 		int includes_len = includes.Count();
 		OrderedHash old_regy = OrderedHash_.new_(), new_regy = OrderedHash_.new_(), cur_regy = OrderedHash_.new_();
 		Xodb_load_mgr load_mgr = wiki.Db_mgr().Load_mgr();
-		Xodb_page tmp_page = new Xodb_page();
+		Xowd_page_itm tmp_page = new Xowd_page_itm();
 		Int_obj_ref tmp_id = Int_obj_ref.zero_();
 		ListAdp del_list = ListAdp_.new_();
 		int ns_filter = itm.Ns_filter();
@@ -96,12 +96,12 @@ class Dpl_page_finder {
 		int pages_len = old_regy.Count();
 		for (int i = 0; i < pages_len; i++) {		// loop over old and create pages
 			Int_obj_ref old_id = (Int_obj_ref)old_regy.FetchAt(i);
-			rv.Add(new Xodb_page().Id_(old_id.Val()));
+			rv.Add(new Xowd_page_itm().Id_(old_id.Val()));
 		}			
 		wiki.Db_mgr().Load_mgr().Load_by_ids(Cancelable_.Never, rv, 0, pages_len);
-		rv.SortBy(Xodb_page_sorter.IdAsc);
+		rv.SortBy(Xowd_page_itm_sorter.IdAsc);
 	}
-	private static void Find_excludes(OrderedHash exclude_pages, Xodb_load_mgr load_mgr, Xodb_page tmp_page, Int_obj_ref tmp_id, ListAdp exclude_ctgs) {
+	private static void Find_excludes(OrderedHash exclude_pages, Xodb_load_mgr load_mgr, Xowd_page_itm tmp_page, Int_obj_ref tmp_id, ListAdp exclude_ctgs) {
 		if (exclude_ctgs == null) return;
 		int exclude_ctgs_len = exclude_ctgs.Count();
 		for (int i = 0; i < exclude_ctgs_len; i++) {
@@ -109,7 +109,7 @@ class Dpl_page_finder {
 			Find_pages_in_ctg(exclude_pages, load_mgr, tmp_page, tmp_id, exclude_ctg);
 		}
 	}
-	private static void Find_pages_in_ctg(OrderedHash list, Xodb_load_mgr load_mgr, Xodb_page tmp_page, Int_obj_ref tmp_id, byte[] ctg_ttl) {
+	private static void Find_pages_in_ctg(OrderedHash list, Xodb_load_mgr load_mgr, Xowd_page_itm tmp_page, Int_obj_ref tmp_id, byte[] ctg_ttl) {
 		Xoctg_view_ctg ctg = new Xoctg_view_ctg().Name_(ctg_ttl);
 		load_mgr.Load_ctg_v1(ctg, ctg_ttl);
 

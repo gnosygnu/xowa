@@ -119,7 +119,7 @@ public class Xog_url_wkr {
 					tmp_bfr.Add_byte(Byte_ascii.Slash);
 				}
 				tmp_bfr.Add(page_bry);
-				page_bry = tmp_bfr.Mkr_rls().Xto_bry_and_clear();
+				page_bry = tmp_bfr.To_bry_and_rls();
 			}
 			rv.Segs_ary_(Bry_.Ary_empty);
 		}

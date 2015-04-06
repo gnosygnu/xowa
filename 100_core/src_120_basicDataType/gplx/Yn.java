@@ -18,6 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 public class Yn {
 	public static final String Y = "y", N = "n";
+	public static boolean parse_by_char_or(String v, boolean or) {
+		if		(String_.Eq(v, Y))	return true;
+		else if	(String_.Eq(v, N))	return false;
+		else						return or;
+	}
 	public static boolean parse_or_n_(String v) {return parse_or_(v, false);}
 	public static int parse_as_int(String v) {
 		if		(v == null)				return Bool_.__int;

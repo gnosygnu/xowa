@@ -16,25 +16,25 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hdumps.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.hdumps.*;
-import gplx.xowa.html.hdumps.core.*; import gplx.xowa.html.hdumps.data.srl.*;
+import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.html.hdumps.core.*; import gplx.xowa.html.hdumps.data.srl.*;
 import gplx.xowa2.gui.*; import gplx.xowa.html.hdumps.pages.*; import gplx.xowa.parsers.lnkis.redlinks.*;
 public class Xohd_page_html_mgr__save {
 	private Xohd_page_srl_mgr srl_mgr = Xohd_page_srl_mgr.I;
-	public void Update(Bry_bfr tmp_bfr, Xohd_page_html_tbl tbl, Xoae_page page) {
+	public void Update(Bry_bfr tmp_bfr, Xowd_html_tbl tbl, Xoae_page page) {
 		Xog_page hpg = new Xog_page();
 		hpg.Ctor_from_page(tmp_bfr, page);
 		tbl.Delete(page.Revision_data().Id());
 		this.Insert(tmp_bfr, tbl, hpg, page.Hdump_data());
 	}
-	public int Insert(Bry_bfr tmp_bfr, Xohd_page_html_tbl tbl, Xog_page hpg, Xopg_hdump_data hdump_data) {
+	public int Insert(Bry_bfr tmp_bfr, Xowd_html_tbl tbl, Xog_page hpg, Xopg_hdump_data hdump_data) {
 		int rv = 0;
 		int page_id = hpg.Page_id();
-		rv += Insert_row(tbl, page_id, Xohd_page_html_row.Tid_html		, srl_mgr.Save(hpg, tmp_bfr));
-		rv += Insert_row(tbl, page_id, Xohd_page_html_row.Tid_img		, Write_imgs(tmp_bfr, hdump_data.Imgs()));
-		rv += Insert_row(tbl, page_id, Xohd_page_html_row.Tid_redlink	, Write_redlinks(tmp_bfr, hdump_data.Redlink_mgr()));
+		rv += Insert_row(tbl, page_id, Xowd_html_row.Tid_html		, srl_mgr.Save(hpg, tmp_bfr));
+		rv += Insert_row(tbl, page_id, Xowd_html_row.Tid_img		, Write_imgs(tmp_bfr, hdump_data.Imgs()));
+		rv += Insert_row(tbl, page_id, Xowd_html_row.Tid_redlink	, Write_redlinks(tmp_bfr, hdump_data.Redlink_mgr()));
 		return rv;
 	}
-	private int Insert_row(Xohd_page_html_tbl tbl, int page_id, int row_tid, byte[] bry) {return bry == null ? 0 : tbl.Insert(page_id, row_tid, bry);}
+	private int Insert_row(Xowd_html_tbl tbl, int page_id, int row_tid, byte[] bry) {return bry == null ? 0 : tbl.Insert(page_id, row_tid, bry);}
 	public static byte[] Write_redlinks(Bry_bfr bfr, Xopg_redlink_idx_list redlink_mgr) {
 		int len = redlink_mgr.Len(); if (len == 0) return null;
 		for (int i = 0; i < len; ++i)

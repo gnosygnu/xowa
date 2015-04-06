@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.xowa.bldrs.cmds.*;
 public class Xow_ns implements GfoInvkAble {
 	public Xow_ns(int id, byte case_match, byte[] name, boolean is_alias) {
 		this.id = id; this.case_match = case_match; this.is_alias = is_alias;
@@ -32,7 +33,7 @@ public class Xow_ns implements GfoInvkAble {
 			this.name_db_w_colon	= Bry_.Add(v, Byte_ascii.Colon);
 			this.name_str			= String_.new_utf8_(v);
 		}
-		this.num_str = Int_.Xto_str_pad_bgn(id, 3);
+		this.num_str = Int_.Xto_str_pad_bgn_zero(id, 3);
 		this.num_bry = Bry_.new_ascii_(num_str);
 		this.name_enc = Xoa_url_encoder._.Encode(name_bry);
 		this.name_txt = Bry_.Replace(name_enc, Byte_ascii.Underline, Byte_ascii.Space);
@@ -92,8 +93,7 @@ public class Xow_ns implements GfoInvkAble {
 		return rv;
 	}
 	public boolean Exists() {return exists;} public Xow_ns Exists_(boolean v) {exists = v; return this;} private boolean exists;
-	public int Bldr_file_idx() {return bldr_file_idx;} public void Bldr_file_idx_(int v) {bldr_file_idx = v;} private int bldr_file_idx = Bldr_file_idx_heap;
-	public static final int Bldr_file_idx_heap = -1;
+	public Xob_ns_file_itm Bldr_data() {return bldr_data;} public void Bldr_data_(Xob_ns_file_itm v) {bldr_data = v;} private Xob_ns_file_itm bldr_data;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_subpages_enabled_))	subpages_enabled = m.ReadYn("v");
 		else if (ctx.Match(k, Invk_id))					return id;

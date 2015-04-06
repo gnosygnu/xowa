@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
-import gplx.ios.*; import gplx.xowa.bldrs.*; 
+import gplx.ios.*; import gplx.xowa.bldrs.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xob_base_fxt {
 	public Xob_base_fxt Clear() {
 		if (app == null) {
@@ -34,8 +34,8 @@ public class Xob_base_fxt {
 	public Xob_bldr Bldr() {return bldr;} private Xob_bldr bldr;
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public GfoInvkAble Bldr_itm() {return bldr_itm;} GfoInvkAble bldr_itm;
-	public Xodb_page page_(String ttl) {return page_(ttl, "");}
-	public Xodb_page page_(String ttl, String text) {return new Xodb_page().Ttl_(Bry_.new_utf8_(ttl), wiki.Ns_mgr()).Wtxt_(Bry_.new_utf8_(text));}
+	public Xowd_page_itm page_(String ttl) {return page_(ttl, "");}
+	public Xowd_page_itm page_(String ttl, String text) {return new Xowd_page_itm().Ttl_(Bry_.new_utf8_(ttl), wiki.Ns_mgr()).Text_(Bry_.new_utf8_(text));}
 	public Io_fil_chkr meta_(String url, String data) {return new Io_fil_chkr(Io_url_.mem_fil_(url), data);}
 	public void Init_fxts(Xob_bldr bldr, Xowe_wiki wiki, Xob_base_fxt... fxt_ary) {
 		int fxt_ary_len = fxt_ary.length;
@@ -66,11 +66,11 @@ public class Xob_base_fxt {
 		cmd.Cmd_run();
 		cmd.Cmd_end();
 	}
-	public static void Run_wkr(Xob_bldr bldr, Xobd_wkr wkr, Xodb_page[] page_ary) {
+	public static void Run_wkr(Xob_bldr bldr, Xobd_wkr wkr, Xowd_page_itm[] page_ary) {
 		wkr.Wkr_bgn(bldr);
 		int page_ary_len = page_ary.length;
 		for (int i = 0; i < page_ary_len; i++) {
-			Xodb_page page = page_ary[i];
+			Xowd_page_itm page = page_ary[i];
 			wkr.Wkr_run(page);
 		}
 		wkr.Wkr_end();		

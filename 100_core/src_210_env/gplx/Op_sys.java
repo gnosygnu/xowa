@@ -45,8 +45,14 @@ public class Op_sys {
 	public static final Op_sys Drd = new_unx_flavor_(Tid_drd, "windows", Bitness_32);
 	public static final Op_sys Wnt = new_wnt_(Sub_tid_unknown, Bitness_32);
 	public static Op_sys Cur() {return cur_op_sys;} static Op_sys cur_op_sys = new_auto_identify_();
-	static Op_sys new_wnt_(byte bitness, byte sub_tid)						{return new Op_sys(Tid_wnt	, sub_tid			, "windows", bitness, "\r\n", Byte_ascii.Backslash	, Bool_.N, new byte[] {Byte_ascii.Slash, Byte_ascii.Backslash, Byte_ascii.Lt, Byte_ascii.Gt, Byte_ascii.Colon, Byte_ascii.Pipe, Byte_ascii.Question, Byte_ascii.Asterisk, Byte_ascii.Quote});}
-	static Op_sys new_unx_flavor_(byte tid, String os_name, byte bitness)	{return new Op_sys(tid		, Sub_tid_unknown	, os_name  , bitness, "\n"  , Byte_ascii.Slash		, Bool_.Y, new byte[] {Byte_ascii.Slash});}
+	public static String Fsys_path_to_lnx(String v) {
+		return cur_op_sys.Tid_is_wnt() ? String_.Replace(v, Wnt.fsys_dir_spr_str, Lnx.fsys_dir_spr_str) : v; 
+	}
+	public static String Fsys_path_to_wnt(String v) {
+		return cur_op_sys.Tid_is_wnt() ? String_.Replace(v, Lnx.fsys_dir_spr_str, Wnt.fsys_dir_spr_str) : v; 
+	}
+	private static Op_sys new_wnt_(byte bitness, byte sub_tid)						{return new Op_sys(Tid_wnt	, sub_tid			, "windows", bitness, "\r\n", Byte_ascii.Backslash	, Bool_.N, new byte[] {Byte_ascii.Slash, Byte_ascii.Backslash, Byte_ascii.Lt, Byte_ascii.Gt, Byte_ascii.Colon, Byte_ascii.Pipe, Byte_ascii.Question, Byte_ascii.Asterisk, Byte_ascii.Quote});}
+	private static Op_sys new_unx_flavor_(byte tid, String os_name, byte bitness)	{return new Op_sys(tid		, Sub_tid_unknown	, os_name  , bitness, "\n"  , Byte_ascii.Slash		, Bool_.Y, new byte[] {Byte_ascii.Slash});}
 		static final String GRP_KEY = "gplx.op_sys";
 //	public static Op_sys Cur_() {cur_op_sys = new_auto_identify_(); return cur_op_sys;}
 	static Op_sys new_auto_identify_() {

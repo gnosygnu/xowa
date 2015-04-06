@@ -18,26 +18,50 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 import gplx.core.primitives.*;
 public class Bry_bfr {
+	private Bry_bfr_mkr_mgr mkr_mgr; private int reset;
 	public byte[] Bfr() {return bfr;} private byte[] bfr;
-	@gplx.Internal protected int Bfr_max() {return bfr_max;} private int bfr_max;
 	public int Len() {return bfr_len;} private int bfr_len;
 	public boolean Len_eq_0() {return bfr_len == 0;}
 	public boolean Len_gt_0() {return bfr_len > 0;}
 	public void Bfr_init(byte[] bfr, int bfr_len) {
-		this.bfr = bfr;
-		this.bfr_len = bfr_len;
-		this.bfr_max = bfr.length;		// NOTE: must sync bfr_max, else will fail later during add; bfr will think bfr has .length of bfr_max, when it actually has .length of bfr_len; DATE:2014-03-09
+		synchronized (this) {
+			this.bfr = bfr;
+			this.bfr_len = bfr_len;
+			this.bfr_max = bfr.length;	// NOTE: must sync bfr_max, else will fail later during add; bfr will think bfr has .length of bfr_max, when it actually has .length of bfr_len; DATE:2014-03-09
+		}
 	}
-	@gplx.Internal protected int Mkr_itm() {return mkr_itm;} private int mkr_itm = -1;
-	@gplx.Internal protected Bry_bfr_mkr_mgr Mkr_mgr() {return mkr_mgr;} Bry_bfr_mkr_mgr mkr_mgr;
-	@gplx.Internal protected Bry_bfr Mkr_(Bry_bfr_mkr_mgr mkr_mgr, int itm) {this.mkr_mgr = mkr_mgr; this.mkr_itm = itm; return this;} 
-	public Bry_bfr Mkr_rls() {mkr_mgr.Rls(this); return this;}
-	private void Mkr_clear() {
-		if (mkr_mgr != null) mkr_mgr.Rls(this);
-		mkr_mgr = null;
-		mkr_itm = -1;
+	public Bry_bfr Mkr_rls() {
+		if (mkr_mgr != null) {
+			synchronized (mkr_mgr) {
+				mkr_mgr.Rls(mkr_idx);
+			}
+			synchronized (this) {
+				this.mkr_mgr = null;
+				this.mkr_idx = -1;
+			}
+		}
+		return this;
 	}
-	private Bry_bfr Reset_(int v) {reset = v; return this;} private int reset;
+	public void Clear_and_rls() {
+		this.Clear();
+		this.Mkr_rls();
+	}
+	public String To_str_and_rls() {return String_.new_utf8_(To_bry_and_rls());}
+	public byte[] To_bry_and_rls() {
+		byte[] rv = null;
+		synchronized (bfr) {
+			rv = Xto_bry();
+			this.Clear();
+			if (reset > 0) Reset_if_gt(reset);
+			synchronized (mkr_mgr) {
+				mkr_mgr.Rls(mkr_idx);
+			}
+			mkr_mgr = null;
+			mkr_idx = -1;
+		}
+		return rv;
+	}
+	private Bry_bfr Reset_(int v) {reset = v; return this;}
 	public Bry_bfr Reset_if_gt(int limit) {
 		if (bfr_max > limit) {
 			this.bfr_max = limit;
@@ -46,7 +70,12 @@ public class Bry_bfr {
 		bfr_len = 0;
 		return this;
 	}
-	public Bry_bfr Clear() {bfr_len = 0; return this;}
+	public Bry_bfr Clear() {
+		synchronized (this) {
+			this.bfr_len = 0;
+		}
+		return this;
+	}
 	public Bry_bfr ClearAndReset() {bfr_len = 0; if (reset > 0) Reset_if_gt(reset); return this;}
 	public byte Get_at_last_or_nil_if_empty() {return bfr_len == 0 ? Byte_ascii.Nil : bfr[bfr_len - 1];}
 	public Bry_bfr Add_safe(byte[] val) {return val == null ? this : Add(val);}
@@ -491,7 +520,7 @@ public class Bry_bfr {
 	}
 	public void Rls() {
 		bfr = null;
-		Mkr_clear();
+		this.Mkr_rls();
 	}
 	@Override public int hashCode() {return Bry_obj_ref.CalcHashCode(bfr, 0, bfr_len);}
 	@Override public boolean equals(Object obj) {return obj == null ? false : Bry_.Match(bfr, 0, bfr_len, ((Bry_obj_ref)obj).Val());}	// NOTE: strange, but null check needed; throws null error; PAGE:c:File:Eug�ne_Delacroix_-_La_libert�_guidant_le_peuple.jpg
@@ -499,6 +528,15 @@ public class Bry_bfr {
 		bfr_max = v;
 		bfr = Bry_.Resize(bfr, 0, v);
 	}
+	@gplx.Internal protected int		Mkr_idx()			{return mkr_idx;} private int mkr_idx = -1;
+	@gplx.Internal protected boolean		Mkr_idx_is_null()	{return mkr_idx == -1;}
+	@gplx.Internal protected int		Bfr_max()			{return bfr_max;} private int bfr_max;
+	@gplx.Internal protected Bry_bfr Mkr_init(Bry_bfr_mkr_mgr mkr_mgr, int itm) {
+		synchronized (this) {
+			this.mkr_mgr = mkr_mgr; this.mkr_idx = itm;
+		}
+		return this;
+	} 
         public static Bry_bfr new_()			{return new Bry_bfr(16);}
         public static Bry_bfr new_(int v)		{return new Bry_bfr(v);}
         public static Bry_bfr reset_(int v)		{return new Bry_bfr(16).Reset_(v);}	// PERF: set initial size to 16, not reset val; allows for faster "startup"; DATE:2014-06-14

@@ -17,10 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*;
-import gplx.xowa.wikis.*; import gplx.xowa.xtns.wdatas.imports.*; import gplx.xowa.bldrs.imports.ctgs.*; import gplx.xowa.bldrs.imports.*; import gplx.xowa.bldrs.oimgs.*;
-import gplx.xowa.bldrs.wikis.redirects.*; import gplx.xowa.bldrs.wikis.images.*;
-import gplx.xowa.bldrs.files.*; import gplx.xowa.files.origs.*;
-import gplx.xowa.html.hdumps.bldrs.*;
+import gplx.xowa.wikis.*; import gplx.xowa.xtns.wdatas.imports.*;
+import gplx.xowa.bldrs.cmds.texts.*; import gplx.xowa.bldrs.cmds.texts.sqls.*; import gplx.xowa.bldrs.cmds.texts.tdbs.*; import gplx.xowa.bldrs.cmds.files.*; import gplx.xowa.bldrs.cmds.ctgs.*; import gplx.xowa.bldrs.cmds.utils.*; import gplx.xowa.bldrs.cmds.wikis.*;
+import gplx.xowa.files.origs.*; import gplx.xowa.html.hdumps.bldrs.*;
 public class Xob_cmd_mgr implements GfoInvkAble {
 	public Xob_cmd_mgr(Xob_bldr bldr) {this.bldr = bldr;} private Xob_bldr bldr;
 	public void Clear() {list.Clear(); dump_rdrs.Clear();}
@@ -28,57 +27,57 @@ public class Xob_cmd_mgr implements GfoInvkAble {
 	public Xob_cmd Get_at(int i) {return (Xob_cmd)list.FetchAt(i);} 
 	public Xob_cmd Add(Xob_cmd cmd) {list.Add(cmd); return cmd;}
 	public GfoInvkAble Add_cmd(Xowe_wiki wiki, String cmd_key) {
-		if		(String_.Eq(cmd_key, Xob_init_txt.KEY))						return Add(new Xob_init_txt(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_init_sql.KEY))						return Add(new Xob_init_sql(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_term_txt.KEY))						return Add(new Xob_term_txt(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_term_sql.KEY))						return Add(new Xob_term_sql(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_page_sql.KEY))						return Xml_rdr_direct_add(wiki, new Xob_page_sql(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_page_txt.KEY))						return Xml_rdr_direct_add(wiki, new Xob_page_txt(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_search_txt.KEY))					return Xml_rdr_direct_add(wiki, new Xob_search_txt(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_ctg_v1_txt.KEY))					return Xml_rdr_parser_add(wiki, new Xob_ctg_v1_txt().Ctor(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_ctg_v1_sql.KEY))					return Xml_rdr_parser_add(wiki, new Xob_ctg_v1_sql().Ctor(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_categorylinks_txt.KEY))			return Add(new Xob_categorylinks_txt(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_categorylinks_sql.KEY))			return Add(new Xob_categorylinks_sql(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_wdata_qid_txt.KEY))				return Xml_rdr_direct_add(wiki, new Xob_wdata_qid_txt().Ctor(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_wdata_qid_sql.KEY))				return Xml_rdr_direct_add(wiki, new Xob_wdata_qid_sql().Ctor(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_wdata_pid_txt.KEY))				return Xml_rdr_direct_add(wiki, new Xob_wdata_pid_txt().Ctor(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_wdata_pid_sql.KEY))				return Xml_rdr_direct_add(wiki, new Xob_wdata_pid_sql().Ctor(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_search_sql_wkr.KEY))				return Xml_rdr_direct_add(wiki, new Xob_search_sql_wkr(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_search_sql_cmd.KEY_search_sql))	return Add(new Xob_search_sql_cmd(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_category_registry_sql.KEY))		return Add(new Xob_category_registry_sql(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_lnki_temp_wkr.KEY_oimg))			return Add(new Xob_lnki_temp_wkr(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_lnki_regy_cmd.KEY_oimg))			return Add(new Xob_lnki_regy_cmd(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_text_db_prep.KEY_oimg))			return Add(new Xob_text_db_prep(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_orig_regy_cmd.KEY_oimg))			return Add(new Xob_orig_regy_cmd(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_xfer_temp_cmd_thumb.KEY_oimg))		return Add(new Xob_xfer_temp_cmd_thumb(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_xfer_temp_cmd_orig.KEY_oimg))		return Add(new Xob_xfer_temp_cmd_orig(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_xfer_regy_cmd.KEY_oimg))			return Add(new Xob_xfer_regy_cmd(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_xfer_regy_update_cmd.KEY_oimg))	return Add(new Xob_xfer_regy_update_cmd(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_xfer_update_cmd.KEY_oimg))			return Add(new Xob_xfer_update_cmd(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_diff_regy_exec_cmd.KEY_oimg))		return Add(new Xob_diff_regy_exec_cmd(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_diff_regy_make_cmd.KEY_oimg))		return Add(new Xob_diff_regy_make_cmd(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_orig_tbl_bldr.KEY_oimg))			return Add(new Xob_orig_tbl_bldr(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_download_wkr.KEY_oimg))			return Add(new Xob_download_wkr(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_page_regy_cmd.KEY_oimg))			return Add(new Xob_page_regy_cmd(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_cmd_exec_sql.KEY))					return Add(new Xob_cmd_exec_sql(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_rl_regy_cmd.Cmd_key_const))		return Add(new Xob_rl_regy_cmd(bldr, wiki));
-
-		else if	(String_.Eq(cmd_key, Xob_redirect_cmd.KEY_redirect))		return Add(new Xob_redirect_cmd(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_wiki_image_sql.KEY))				return Add(new Xob_wiki_image_sql(bldr, wiki));
-
-		else if	(String_.Eq(cmd_key, Xob_fsdb_make.KEY_oimg))				return Add(new Xob_fsdb_make(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_wdata_db_cmd.KEY_oimg))			return Add(new Xob_wdata_db_cmd(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xoctg_link_idx_wkr.KEY))				return Add(new Xoctg_link_idx_wkr(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xoctg_hiddencat_parser_sql.KEY))		return Add(new Xoctg_hiddencat_parser_sql(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xoctg_hiddencat_parser_txt.KEY))		return Add(new Xoctg_hiddencat_parser_txt(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xoctg_hiddencat_ttl_wkr.KEY))			return Add(new Xoctg_hiddencat_ttl_wkr(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xobc_core_make_id.KEY))				return Xml_rdr_direct_add(wiki, new Xobc_core_make_id(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xobc_core_calc_stats.KEY))				return Add(new Xobc_core_calc_stats(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xobc_core_cleanup.KEY))				return Add(new Xobc_core_cleanup(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xobc_core_decompress_bz.KEY))			return Add(new Xobc_core_decompress_bz(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xobc_deploy_zip.KEY))					return Add(new Xobc_deploy_zip(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xobc_deploy_copy.KEY))					return Add(new Xobc_deploy_copy(bldr, wiki));
-		else 																throw Err_.unhandled(cmd_key);
+		if		(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_init))					return Add(new Xob_init_cmd(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_page))					return Xml_rdr_direct_add(wiki, new Xob_page_cmd(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_css))					return Add(new Xob_css_cmd(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_search_wkr))				return Xml_rdr_direct_add(wiki, new Xob_search_sql_wkr(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_search_cmd))				return Add(new Xob_search_sql_cmd(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_cat_core_v1))			return Xml_rdr_parser_add(wiki, new Xob_ctg_v1_sql().Ctor(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_cat_core))				return Add(new Xob_category_registry_sql(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_cat_link))				return Add(new Xob_categorylinks_sql(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_cat_hidden))				return Add(new Xoctg_hiddencat_parser_sql(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_text_term))					return Add(new Xob_term_cmd(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_wiki_page_dump_make))			return Add(new Xob_page_dump_cmd_make(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_wiki_page_dump_drop))			return Add(new Xob_page_dump_cmd_drop(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_wiki_redirect))				return Add(new Xob_redirect_cmd(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_wiki_image))					return Add(new Xob_image_cmd(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_file_lnki_temp))				return Add(new Xob_lnki_temp_wkr(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_file_lnki_regy))				return Add(new Xob_lnki_regy_cmd(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_file_page_regy))				return Add(new Xob_page_regy_cmd(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_file_orig_regy))				return Add(new Xob_orig_regy_cmd(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_file_xfer_temp_thumb))		return Add(new Xob_xfer_temp_cmd_thumb(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_file_xfer_temp_orig))			return Add(new Xob_xfer_temp_cmd_orig(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_file_xfer_regy))				return Add(new Xob_xfer_regy_cmd(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_file_xfer_regy_update))		return Add(new Xob_xfer_regy_update_cmd(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_file_fsdb_make))				return Add(new Xob_fsdb_make_cmd(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_file_orig_reg))				return Add(new Xob_orig_tbl_bldr(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_file_xfer_update))			return Add(new Xob_xfer_update_cmd(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_html_redlinks))				return Add(new Xob_redlink_mkr_cmd(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_util_cleanup))				return Add(new Xob_cleanup_cmd(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_util_download))				return Add(new Xob_download_wkr(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_wbase_qid))					return Xml_rdr_direct_add(wiki, new Xob_wdata_qid_sql().Ctor(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_wbase_pid))					return Xml_rdr_direct_add(wiki, new Xob_wdata_pid_sql().Ctor(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_wbase_db))					return Add(new Xob_wdata_db_cmd(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_tdb_text_init))				return Add(new Xob_init_tdb(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_tdb_make_page))				return Xml_rdr_direct_add(wiki, new Xob_page_txt(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_tdb_make_id))					return Xml_rdr_direct_add(wiki, new Xob_make_id_wkr(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_tdb_make_search_title))		return Xml_rdr_direct_add(wiki, new Xob_search_tdb(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_tdb_make_category))			return Xml_rdr_parser_add(wiki, new Xob_ctg_v1_txt().Ctor(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_tdb_calc_stats))				return Add(new Xob_calc_stats_cmd(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_tdb_text_cat_link))			return Add(new Xob_categorylinks_txt(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_tdb_ctg_link_idx))			return Add(new Xoctg_link_idx_wkr(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_tdb_cat_hidden_sql))			return Add(new Xoctg_hiddencat_parser_txt(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_tdb_cat_hidden_ttl))			return Add(new Xoctg_hiddencat_ttl_wkr(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_tdb_core_term))				return Add(new Xob_term_txt(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_tdb_text_wdata_qid))			return Xml_rdr_direct_add(wiki, new Xob_wdata_qid_txt().Ctor(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_tdb_text_wdata_pid))			return Xml_rdr_direct_add(wiki, new Xob_wdata_pid_txt().Ctor(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_diff_regy_exec))				return Add(new Xob_diff_regy_exec_cmd(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_diff_regy_make))				return Add(new Xob_diff_regy_make_cmd(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_exec_sql))					return Add(new Xob_exec_sql_cmd(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_decompress_bz2))				return Add(new Xob_decompress_bz2_cmd(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_deploy_zip))					return Add(new Xob_deploy_zip_cmd(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_deploy_copy))					return Add(new Xob_deploy_copy_cmd(bldr, wiki));
+		else 																		throw Err_.unhandled(cmd_key);
 	}
 	private Xobd_wkr Xml_rdr_direct_add(Xowe_wiki wiki, Xobd_wkr wkr) {
 		Xobd_rdr dump_rdr = Xml_rdr_get(wiki);
@@ -105,7 +104,7 @@ public class Xob_cmd_mgr implements GfoInvkAble {
 		if			(ctx.Match(k, Invk_add))				return Add_cmd(Wiki_get_or_make(m), m.ReadStr("v"));
 		else if		(ctx.Match(k, Invk_add_many))			return Add_many(m);
 		else if		(ctx.Match(k, Invk_get_first))			return Get_first(m);
-		else if		(ctx.Match(k, Invk_new_batch))			return new Xobc_core_batch(bldr, m.ReadBry("v"));
+		else if		(ctx.Match(k, Invk_new_batch))			return new Xob_core_batch_utl(bldr, m.ReadBry("v"));
 		else	return GfoInvkAble_.Rv_unhandled;
 	}
 	private static final String Invk_add = "add", Invk_add_many = "add_many", Invk_new_batch = "new_batch", Invk_get_first = "get_first";

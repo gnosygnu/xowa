@@ -384,6 +384,6 @@ class Pf_func_bang extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_bang;}
 	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {bfr.Add_byte_pipe();}
 	@Override public Pf_func New(int id, byte[] name) {return this;}
-        public static final Pf_func_bang _ = new Pf_func_bang();
+	public static final Pf_func_bang _ = new Pf_func_bang();
 	Pf_func_bang() {this.Name_(Byte_ascii.Bang_bry);}
 }

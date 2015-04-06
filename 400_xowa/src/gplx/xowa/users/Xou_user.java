@@ -16,8 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.users.history.*; import gplx.xowa.xtns.scribunto.*;
-import gplx.xowa.users.data.*;
+import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.users.history.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.users.data.*;
 public class Xou_user implements GfoEvMgrOwner, GfoInvkAble {
 	public Xou_user(Xoae_app app, Io_url user_dir) {
 		this.evMgr = GfoEvMgr.new_(this);
@@ -33,7 +32,7 @@ public class Xou_user implements GfoEvMgrOwner, GfoInvkAble {
 	public byte[] Key_bry() {return key_bry;} private byte[] key_bry;
 	public void Key_str_(String v) {this.key_str = v; this.key_bry = Bry_.new_utf8_(v);}
 	public GfoEvMgr EvMgr() {return evMgr;} private final GfoEvMgr evMgr;
-	public Xoud_data_mgr Data_mgr() {return data_mgr;} private Xoud_data_mgr data_mgr = new Xoud_data_mgr();
+	public Xoud_db_mgr Data_mgr() {return data_mgr;} private Xoud_db_mgr data_mgr = new Xoud_db_mgr();
 	public Xol_lang Lang() {if (lang == null) {lang = app.Lang_mgr().Get_by_key_or_new(app.Sys_cfg().Lang()); lang.Init_by_load();} return lang;} private Xol_lang lang;		
 	public void Lang_(Xol_lang v) {
 		lang = v;
@@ -70,7 +69,7 @@ public class Xou_user implements GfoEvMgrOwner, GfoInvkAble {
 	public void Bookmarks_add(byte[] wiki_domain, byte[] ttl_full_txt) {
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_k004();
 		bookmarks_add_fmtr.Bld_bfr_many(tmp_bfr, wiki_domain, ttl_full_txt);
-		byte[] new_entry = tmp_bfr.Mkr_rls().Xto_bry_and_clear();
+		byte[] new_entry = tmp_bfr.To_bry_and_rls();
 		Xoa_ttl bookmarks_ttl = Xoa_ttl.parse_(wiki, Bry_data_bookmarks);
 		Xoae_page bookmarks_page = wiki.Data_mgr().Get_page(bookmarks_ttl, false);
 		byte[] new_data = Bry_.Add(bookmarks_page.Data_raw(), new_entry);
@@ -106,7 +105,7 @@ public class Xou_user implements GfoEvMgrOwner, GfoInvkAble {
 		for (int i = 0; i < dirs_len; i++) {
 			Io_url dir = dirs[i];
 			String name = dir.NameOnly();
-			if (String_.Eq(name, gplx.xowa.bldrs.imports.Xobc_core_batch.Dir_dump)
+			if (String_.Eq(name, gplx.xowa.bldrs.cmds.utils.Xob_core_batch_utl.Dir_dump)
 //					|| !Io_mgr._.ExistsDir(dir.GenSubFil_nest("ns"))
 				) continue;
 			byte[] dir_name_as_bry = Bry_.new_utf8_(name);

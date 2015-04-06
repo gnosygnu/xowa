@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.cnvs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import org.junit.*;
-import gplx.xowa.langs.vnts.*;
+import gplx.xowa.langs.vnts.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xol_cnv_mgr_tst {
 	private Xol_cnv_mgr_fxt fxt = new Xol_cnv_mgr_fxt();
 	@Before public void init() {fxt.Clear();}
@@ -80,7 +80,7 @@ class Xol_cnv_mgr_fxt {
 	public void Test_convert_by_ttl(String lang_key, String raw, boolean expd) {
 		Xol_lang lang = app.Lang_mgr().Get_by_key_or_new(Bry_.new_ascii_(lang_key));
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_utf8_(raw));
-		Xodb_page page = lang.Vnt_mgr().Convert_ttl(wiki, ttl);
+		Xowd_page_itm page = lang.Vnt_mgr().Convert_ttl(wiki, ttl);
 		if (expd)
 			Tfds.Eq_true(page.Exists());
 		else

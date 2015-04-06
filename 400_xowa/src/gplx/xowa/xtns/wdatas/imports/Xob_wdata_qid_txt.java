@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 public class Xob_wdata_qid_txt extends Xob_wdata_qid_base {
-	@Override public String Wkr_key() {return KEY;} public static final String KEY = "wdata.qid";
+	@Override public String Wkr_key() {return gplx.xowa.bldrs.Xob_cmd_keys.Key_tdb_text_wdata_qid;}
 	
 	Wdata_idx_bldr_qid qid_bldr;
 	@Override public void Qid_bgn() {qid_bldr = new Wdata_idx_bldr_qid().Ctor(this, bldr, wiki, dump_fil_len);}

@@ -95,12 +95,12 @@ public class Xop_lnki_wkr__basic_tst {
 	@Test  public void Size_dangling_xnde() {	// PURPOSE: dangling xnde should not eat rest of lnki; PAGE:sr.w:Сићевачка_клисура DATE:2014-07-03
 		fxt.Init_log_(Xop_xnde_log.Dangling_xnde).Test_parse_page_wiki("[[Image:a.png|<b>c|40px]]"	, fxt.tkn_lnki_().Width_(40).Height_(-1));
 	}
-	@Test   public void Size_ws_para() {	// PURPOSE: <p> in arg_bldr causes parse to fail; EX: w:Supreme_Court_of_the_United_States; DATE:2014-04-05
+	@Test   public void Size_ws_para() {	// PURPOSE: <p> in arg_bldr causes parse to fail; EX: w:Supreme_Court_of_the_United_States; DATE:2014-04-05; updated test; DATE:2015-03-31
 		fxt.Init_para_y_();
 		fxt.Test_parse_page_all("[[File:A.png| \n 40px]]"
 		, fxt.tkn_para_bgn_para_(0)
 		, fxt.tkn_lnki_().Width_(40).Height_(-1)
-		, fxt.tkn_para_end_pre_(22));	// NOTE: this is wrong, but can be ignored b/c </pre> is not processed inside lnki
+		, fxt.tkn_para_end_para_(22));
 		fxt.Init_para_n_();
 	}
 

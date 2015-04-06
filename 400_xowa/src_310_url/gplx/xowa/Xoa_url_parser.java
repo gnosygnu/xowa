@@ -251,7 +251,7 @@ public class Xoa_url_parser {
 			if (bfr.Len() > 0) bfr.Add_byte(Byte_ascii.Slash);
 			bfr.Add(page);
 		}
-		return bfr.Mkr_rls().Xto_bry_and_clear();
+		return bfr.To_bry_and_rls();
 	}
 	public static Xoa_url Parse_from_url_bar(Xoae_app app, Xowe_wiki wiki, String s) {
 		byte[] bry = Bry_.new_utf8_(s);

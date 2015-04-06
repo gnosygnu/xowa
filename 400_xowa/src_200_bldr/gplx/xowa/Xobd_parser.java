@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.core.btries.*;
+import gplx.core.btries.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xobd_parser implements Xobd_wkr {
 	private Btrie_slim_mgr trie = Btrie_slim_mgr.ci_ascii_();		// NOTE:ci.ascii:MW_const.en; ctg.v1 assumes [[Category:
 	private ListAdp wkr_list = ListAdp_.new_();
@@ -35,8 +35,8 @@ public class Xobd_parser implements Xobd_wkr {
 			}
 		}
 	}
-	public void Wkr_run(Xodb_page page) {
-		byte[] src = page.Wtxt(); int src_len = src.length;
+	public void Wkr_run(Xowd_page_itm page) {
+		byte[] src = page.Text(); int src_len = src.length;
 		int pos = 0;
 		while (true) {
 			if (pos == src_len) break;

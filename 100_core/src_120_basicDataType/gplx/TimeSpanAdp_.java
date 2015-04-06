@@ -116,7 +116,7 @@ public class TimeSpanAdp_ {
 			zeros = first && !fmt_padZeros ? 1 : padZerosAry[i];	// if first, don't zero pad (avoid "01")
 			dlm = first ? "" : Sprs[i];						// if first, don't use dlm (avoid ":01")
 			sb.Add(dlm);
-			sb.Add(Int_.Xto_str_pad_bgn(val, zeros));
+			sb.Add(Int_.Xto_str_pad_bgn_zero(val, zeros));
 			first = false;
 		}
 		return sb.XtoStr();

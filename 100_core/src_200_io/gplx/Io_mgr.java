@@ -50,6 +50,10 @@ public class Io_mgr {	// exists primarily to gather all cmds under gplx namespac
 		}
 		return false;
 	}
+	public void Create_fil_ary(Io_fil[] fil_ary) {
+		for (Io_fil fil : fil_ary)
+			SaveFilStr(fil.Url(), fil.Data());
+	}
 	public Io_url[]						QueryDir_fils(Io_url dir) {return QueryDir_args(dir).ExecAsUrlAry();}
 	public IoEngine_xrg_queryDir		QueryDir_args(Io_url dir) {return IoEngine_xrg_queryDir.new_(dir);}
 	public void							DeleteDirSubs(Io_url url) {IoEngine_xrg_deleteDir.new_(url).Exec();}
@@ -133,5 +137,6 @@ public class Io_mgr {	// exists primarily to gather all cmds under gplx namespac
 	public IoEngine_xrg_downloadFil DownloadFil_args(String src, Io_url trg) {return IoEngine_xrg_downloadFil.new_(src, trg);}
 	public static final Io_mgr _ = new Io_mgr(); public Io_mgr() {}
 	public static final int Len_kb = 1024, Len_mb = 1048576, Len_gb = 1073741824, Len_gb_2 = 2147483647;
+	public static final long Len_mb_long = Len_mb;
 	public static final long Len_null = -1;
 }

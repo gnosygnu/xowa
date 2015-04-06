@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.logs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.bldrs.oimgs.*; import gplx.xowa.parsers.logs.*;
+import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.parsers.logs.*;
 import gplx.xowa.xtns.scribunto.*;
 public class Xop_log_invoke_wkr implements GfoInvkAble {
 	private Xop_log_mgr log_mgr;
@@ -32,9 +32,7 @@ public class Xop_log_invoke_wkr implements GfoInvkAble {
 			stmt = Xop_log_invoke_tbl.Insert_stmt(conn);
 		}
 	}
-	public void Init_reset() {
-		Xop_log_invoke_tbl.Delete(conn);
-	}
+	public void Init_reset() {Xop_log_invoke_tbl.Delete(conn);}
 	public boolean Eval_bgn(Xoae_page page, byte[] mod_name, byte[] fnc_name) {return !exclude_mod_names.Has(mod_name);}
 	public void Eval_end(Xoae_page page, byte[] mod_name, byte[] fnc_name, long invoke_time_bgn) {
 		if (log_enabled && stmt != null) {

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import gplx.core.primitives.*;
-import gplx.xowa.wikis.caches.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.wikis.xwikis.*;
+import gplx.xowa.wikis.caches.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa2.files.commons.*; import gplx.xowa.files.origs.*;
 import gplx.xowa.wmfs.apis.*;
 public class Scrib_lib_title implements Scrib_lib {
@@ -66,7 +66,7 @@ public class Scrib_lib_title implements Scrib_lib {
 		}
 		if (ns_bry != null) {
 			Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
-			ttl_bry = bfr.Add(ns_bry).Add_byte(Byte_ascii.Colon).Add(ttl_bry).Mkr_rls().Xto_bry_and_clear();
+			ttl_bry = bfr.Add(ns_bry).Add_byte(Byte_ascii.Colon).Add(ttl_bry).To_bry_and_rls();
 		}
 		Xoa_ttl ttl = Xoa_ttl.parse_(core.Wiki(), ttl_bry);
 		if (ttl == null) return rslt.Init_obj(null);	// invalid title; exit; matches MW logic
@@ -92,7 +92,7 @@ public class Scrib_lib_title implements Scrib_lib {
 		//	bfr.Add();
 		//}
 		Pfunc_urlfunc.UrlString(core.Ctx(), url_func_tid, false, ttl_bry, bfr, qry_bry);
-		return rslt.Init_obj(bfr.Mkr_rls().Xto_str_and_clear());
+		return rslt.Init_obj(bfr.To_str_and_rls());
 	}
 	private static final Hash_adp_bry url_func_hash = Hash_adp_bry.ci_ascii_()
 	.Add_str_byte("fullUrl", Pfunc_urlfunc.Tid_full)
@@ -123,7 +123,7 @@ public class Scrib_lib_title implements Scrib_lib {
 			tmp_bfr.Add(ns_bry).Add_byte(Byte_ascii.Colon);
 		tmp_bfr.Add_str(ttl_str);
 		if (anchor_str != null) tmp_bfr.Add_byte(Byte_ascii.Hash).Add_str(anchor_str);
-		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, tmp_bfr.Mkr_rls().Xto_bry_and_clear());
+		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, tmp_bfr.To_bry_and_rls());
 		if (ttl == null) return rslt.Init_obj(null);	// invalid title; exit;
 		return rslt.Init_obj(GetInexpensiveTitleData(ttl));
 	}
@@ -159,8 +159,8 @@ public class Scrib_lib_title implements Scrib_lib {
 		// boolean exists = !file_page.Missing();
 		// if (!exists) return rslt.Init_obj(KeyVal_.Ary(KeyVal_.new_("exists", false)));	// NOTE: do not reinstate; will exit early if commons is not installed; DATE:2015-01-25; NOTE: Media objects are often flagged as absent in offline mode
 		// NOTE: MW registers image if deleted; XOWA doesn't register b/c needs width / height also, not just image name
-		wiki.File_mgr().Fsdb_mgr().Init_by_wiki(wiki);
-		Xof_orig_itm itm = wiki.File_mgr().Fsdb_mgr().Orig_mgr().Find_by_ttl_or_null(ttl.Page_db());
+		wiki.File_mgr().Init_file_mgr_by_load(wiki);
+		Xof_orig_itm itm = wiki.File_mgr__orig_mgr().Find_by_ttl_or_null(ttl.Page_db());
 		if (itm == Xof_orig_itm.Null) return rslt.Init_obj(GetFileInfo_absent);
 		KeyVal[] rv = KeyVal_.Ary
 		( KeyVal_.new_("exists"		, true)
@@ -225,6 +225,6 @@ public class Scrib_lib_title implements Scrib_lib {
 		if (!ns_file_or_media)
 			rv[rv_idx++] = KeyVal_.new_("file"		, false);								// REF.MW: if ( $ns !== NS_FILE && $ns !== NS_MEDIA )  $ret['file'] = false;
 		return rv;
-	}	private static final Xodb_page tmp_db_page = Xodb_page.new_tmp();
+	}	private static final Xowd_page_itm tmp_db_page = Xowd_page_itm.new_tmp();
 	public static final String Key_wikitexet = "wikitext";
 }

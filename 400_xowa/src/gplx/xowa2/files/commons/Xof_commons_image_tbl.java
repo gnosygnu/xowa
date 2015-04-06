@@ -17,25 +17,27 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa2.files.commons; import gplx.*; import gplx.xowa2.*; import gplx.xowa2.files.*;
 import gplx.dbs.*;
-public class Xof_commons_image_tbl {
+public class Xof_commons_image_tbl implements RlsAble {
 	private Db_stmt stmt_insert;
 	public Db_conn Conn() {return conn;}
 	public void Conn_(Db_conn v) {
 		conn = v;
 		stmt_insert = null;
+		conn.Rls_reg(this);
 	}	private Db_conn conn;
+	public void Rls() {
+		stmt_insert = Db_stmt_.Rls(stmt_insert);
+	}
 	public void Insert(String ttl, String media_type, String minor_mime, int size, int w, int h, int bits, int ext_id, String img_timestamp) {
-		if (stmt_insert == null) stmt_insert = conn.Rls_reg(conn.Stmt_insert(tbl_name, flds.To_str_ary()));
+		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(tbl_name, flds);
 		stmt_insert.Clear()
 		.Val_str(ttl).Val_str(media_type).Val_str(minor_mime)
 		.Val_int(size).Val_int(w).Val_int(h).Val_int(bits).Val_int(ext_id).Val_str(img_timestamp)
 		.Exec_insert();
 	}
 	public Xof_commons_image_itm Select(byte[] ttl) {
-		Db_stmt stmt = conn.Stmt_select(tbl_name, flds.To_str_ary(), fld_img_name);
-		Db_rdr rdr = Db_rdr_.Null;
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld_img_name).Clear().Val_bry_as_str(ttl).Exec_select__rls_auto();
 		try {
-			rdr = stmt.Clear().Val_bry_as_str(ttl).Exec_select_as_rdr();
 			if (!rdr.Move_next()) return null;
 			return new Xof_commons_image_itm
 			( rdr.Read_str(fld_img_name)

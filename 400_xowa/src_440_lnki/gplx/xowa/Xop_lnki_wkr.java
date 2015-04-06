@@ -68,7 +68,7 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 		}
 		if (lnki_is_file) {
 			ctx.Cur_page().Lnki_list().Add(lnki);
-			if (file_wkr != null) file_wkr.Wkr_exec(ctx, src, lnki, gplx.xowa.bldrs.files.Xob_lnki_src_tid.Tid_file);
+			if (file_wkr != null) file_wkr.Wkr_exec(ctx, src, lnki, gplx.xowa.bldrs.cmds.files.Xob_lnki_src_tid.Tid_file);
 		}
 		Xoa_ttl lnki_ttl = lnki.Ttl();
 		if (	lnki_ttl.Wik_bgn() != -1		// lnki is xwiki

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.wikis.*; import gplx.xowa.files.*; import gplx.xowa.files.repos.*;
+import gplx.xowa.wikis.*; import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xofw_wiki_wkr_base implements Xofw_wiki_finder {
 	public Xofw_wiki_wkr_base(Xowe_wiki wiki, Xoa_wiki_mgr wiki_mgr) {this.wiki = wiki; this.wiki_mgr = wiki_mgr;} private Xowe_wiki wiki; Xoa_wiki_mgr wiki_mgr;
 	public void Find(ListAdp repo_pairs, Xof_xfer_itm file) {
@@ -57,11 +57,11 @@ public class Xofw_wiki_wkr_base implements Xofw_wiki_finder {
 			return true;
 		}
 		return false;
-	}	static final Xodb_page tmp_db_page = Xodb_page.new_tmp();
-	byte[] Get_redirect(Xowe_wiki wiki, Xow_ns file_ns, Xodb_page db_page) {
+	}	static final Xowd_page_itm tmp_db_page = Xowd_page_itm.new_tmp();
+	byte[] Get_redirect(Xowe_wiki wiki, Xow_ns file_ns, Xowd_page_itm db_page) {
 		if (db_page.Redirected()) {
 			wiki.Db_mgr().Load_mgr().Load_page(db_page, file_ns, false);
-			byte[] src = db_page.Wtxt();
+			byte[] src = db_page.Text();
 			Xoa_ttl redirect_ttl = wiki.Redirect_mgr().Extract_redirect(src, src.length);
 			return redirect_ttl == Xop_redirect_mgr.Redirect_null_ttl ? Xop_redirect_mgr.Redirect_null_bry : redirect_ttl.Page_db();
 		}

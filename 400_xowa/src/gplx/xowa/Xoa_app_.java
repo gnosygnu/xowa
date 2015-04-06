@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.dbs.*; import gplx.ios.*; import gplx.gfui.*; 
 import gplx.xowa.apps.*; import gplx.xowa.langs.*; import gplx.xowa.users.*;
-import gplx.xowa.html.hdumps.*; import gplx.xowa.html.hdumps.core.*;
+import gplx.xowa.files.*; import gplx.xowa.html.hdumps.*; import gplx.xowa.html.hdumps.core.*;
 import gplx.xowa.urls.encoders.*;
 public class Xoa_app_ {
 	public static void Run(String... args) {
@@ -26,7 +26,7 @@ public class Xoa_app_ {
 		boot_mgr.Run(args);
 	}
 	public static final String Name = "xowa";
-	public static final String Version = "2.3.2.1";
+	public static final String Version = "2.4.1.1";
 	public static String Build_date = "2012-12-30 00:00:00";
 	public static String Op_sys;
 	public static String User_agent = "";
@@ -44,6 +44,7 @@ public class Xoa_app_ {
 	public static Bry_bfr_mkr		Utl__bfr_mkr()		{return utl__bry_bfr_mkr;}	private static final Bry_bfr_mkr utl__bry_bfr_mkr = new Bry_bfr_mkr();
 	public static Url_encoder_mgr	Utl__encoder_mgr()	{return utl__encoder_mgr;}	private static final Url_encoder_mgr utl__encoder_mgr = new Url_encoder_mgr();
 	public static Io_stream_zip_mgr Utl__zip_mgr()		{return utl__zip_mgr;}		private static final Io_stream_zip_mgr utl__zip_mgr = new Io_stream_zip_mgr();
+//		public static Xof_url_bldr		Utl__url_bldr()		{return utl__url_bldr;}		private static final Xof_url_bldr utl__url_bldr = Xof_url_bldr.new_v2_();
 
 	public static Xoa_gfs_mgr		Gfs_mgr() {return gfs_mgr;}		public static void Gfs_mgr_(Xoa_gfs_mgr v) {gfs_mgr = v;} private static Xoa_gfs_mgr gfs_mgr;
 
@@ -66,7 +67,7 @@ class Xoa_app_boot_mgr {
 		}
 	}
 	private boolean Init_env(String[] args) {
-		Gfo_usr_dlg_._ = usr_dlg = Xoa_app_.usr_dlg_console_();
+		Gfo_usr_dlg_.I = usr_dlg = Xoa_app_.usr_dlg_console_();
 		log_wtr = usr_dlg.Log_wtr(); log_wtr.Log_msg_to_session_fmt("env.init: version=~{0}", Xoa_app_.Version);
 		GfuiEnv_.Init_swt(args, Xoa_app_.class); 
 		Io_url jar_url = Env_.AppUrl();

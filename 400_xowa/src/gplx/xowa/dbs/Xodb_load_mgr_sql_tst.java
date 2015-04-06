@@ -16,12 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs; import gplx.*; import gplx.xowa.*;
-import org.junit.*; import gplx.core.primitives.*; import gplx.xowa.bldrs.*; import gplx.xowa.ctgs.*; import gplx.dbs.*; import gplx.xowa.dbs.tbls.*;
+import org.junit.*; import gplx.core.primitives.*; import gplx.xowa.bldrs.*; import gplx.xowa.ctgs.*; import gplx.dbs.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xodb_load_mgr_sql_tst {
 	@Before public void init() {if (Xoa_test_.Db_skip()) return; fxt.Clear();} private Xodb_load_mgr_sql_fxt fxt = new Xodb_load_mgr_sql_fxt();
+	@After public void term() {if (Xoa_test_.Db_skip()) return; fxt.Rls();}
 	@Test  public void Load_ctg_ttls() {
 		if (Xoa_test_.Db_skip()) return;
-		Xodb_page[] ctgs = fxt.pages_
+		Xowd_page_itm[] ctgs = fxt.pages_
 		(	fxt.ctg_(1, "Ctg_1", Bool_.Y, 10, 11, 12)
 		,	fxt.ctg_(2, "Ctg_2", Bool_.N, 20, 21, 22)
 		,	fxt.ctg_(3, "Ctg_3", Bool_.Y, 30, 31, 32)
@@ -39,6 +40,7 @@ class Xoctg_url_mok extends Xoctg_url {	public Xoctg_url_mok Page_bgn_(String v)
 	}	
 }
 class Xodb_load_mgr_sql_fxt {
+	Db_mgr_fxt fxt; Int_obj_ref next_id = Int_obj_ref.new_(1); Xoae_app app; Xowe_wiki wiki;
 	public void Clear() {
 		if (fxt == null) {
 			fxt = new Db_mgr_fxt();
@@ -47,46 +49,47 @@ class Xodb_load_mgr_sql_fxt {
 			wiki = fxt.Wiki();
 			app = wiki.Appe();
 		}
-	}	Db_mgr_fxt fxt; Int_obj_ref next_id = Int_obj_ref.new_(1); Xoae_app app; Xowe_wiki wiki;
-
-	public Xodb_page[] pages_(Xodb_page... ary) {return ary;}
-	public Xodb_page ctg_(int id, String ttl, boolean hidden, int count_subcs, int count_files, int count_pages) {
-		Xodb_page rv = new Xodb_page().Ns_id_(Xow_ns_.Id_category).Id_(id).Ttl_page_db_(Bry_.new_ascii_(ttl));
-		Xodb_category_itm ctg = Xodb_category_itm.load_(id, 0, hidden, count_subcs, count_files, count_pages);
+	}
+	public void Rls() {fxt.Rls();}
+	public Xowd_page_itm[] pages_(Xowd_page_itm... ary) {return ary;}
+	public Xowd_page_itm ctg_(int id, String ttl, boolean hidden, int count_subcs, int count_files, int count_pages) {
+		Xowd_page_itm rv = new Xowd_page_itm().Ns_id_(Xow_ns_.Id_category).Id_(id).Ttl_page_db_(Bry_.new_ascii_(ttl));
+		Xowd_category_itm ctg = Xowd_category_itm.load_(id, 0, hidden, count_subcs, count_files, count_pages);
 		rv.Xtn_(ctg);
 		return rv;
 	}
-	public void Init_save_ctgs(Xodb_page[] ary) {
+	public void Init_save_ctgs(Xowd_page_itm[] ary) {
 		int len = ary.length;
 		Xodb_mgr_sql db_mgr = wiki.Db_mgr_as_sql();
-		Db_conn p = db_mgr.Core_data_mgr().Conn_core(); 
-		p.Txn_mgr().Txn_bgn_if_none();
-		Db_stmt page_stmt = db_mgr.Tbl_page().Insert_stmt(p);
-		Db_stmt category_stmt = db_mgr.Tbl_category().Insert_stmt(p);
+		Xowd_cat_core_tbl cat_core_tbl = db_mgr.Core_data_mgr().Db__cat_core().Tbl__cat_core().Create_tbl();
 		DateAdp modified = DateAdp_.Now();
+		Xowd_page_tbl tbl_page = wiki.Db_mgr_as_sql().Core_data_mgr().Tbl__page();
+		tbl_page.Insert_bgn();
+		cat_core_tbl.Insert_bgn();
 		for (int i = 0; i < len; i++) {
-			Xodb_page page = ary[i];
-			db_mgr.Tbl_page().Insert(page_stmt, page.Id(), page.Ns_id(), page.Ttl_page_db(), false, modified, 10, page.Id(), 0, 0);
-			Xodb_category_itm ctg_itm = (Xodb_category_itm)page.Xtn(); 
-			db_mgr.Tbl_category().Insert(category_stmt, ctg_itm.Id(), ctg_itm.Count_pages(), ctg_itm.Count_subcs(), ctg_itm.Count_files(), Bool_.Xto_byte(ctg_itm.Hidden()), 0);
+			Xowd_page_itm page = ary[i];
+			tbl_page.Insert_cmd_by_batch(page.Id(), page.Ns_id(), page.Ttl_page_db(), false, modified, 10, page.Id(), 0, 0);
+			Xowd_category_itm ctg_itm = (Xowd_category_itm)page.Xtn(); 
+			cat_core_tbl.Insert_cmd_by_batch(ctg_itm.Id(), ctg_itm.Count_pages(), ctg_itm.Count_subcs(), ctg_itm.Count_files(), Bool_.Xto_byte(ctg_itm.Hidden()), 0);
 		}
-		p.Txn_mgr().Txn_end_all();
+		cat_core_tbl.Insert_end();
+		tbl_page.Insert_end();
 	}
-	public void Test_load_ctg_list(Xodb_page[] ary) {
+	public void Test_load_ctg_list(Xowd_page_itm[] ary) {
 		int len = ary.length;
 		byte[][] ttls = new byte[len][];
 		for (int i = 0; i < len; i++) {
 			ttls[i] = ary[i].Ttl_page_db();
 		}
-		Xodb_page[] actl = wiki.Db_mgr_as_sql().Load_mgr().Load_ctg_list(ttls);
+		Xowd_page_itm[] actl = wiki.Db_mgr_as_sql().Load_mgr().Load_ctg_list(ttls);
 		Tfds.Eq_str_lines(Xto_str(ary), Xto_str(actl));
 	}
-	private static String Xto_str(Xodb_page[] ary) {
+	private static String Xto_str(Xowd_page_itm[] ary) {
 		Bry_bfr bfr = Bry_bfr.new_();
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
-			Xodb_page page = ary[i];
-			Xodb_category_itm ctg_itm = (Xodb_category_itm)page.Xtn();
+			Xowd_page_itm page = ary[i];
+			Xowd_category_itm ctg_itm = (Xowd_category_itm)page.Xtn();
 			bfr.Add_int_variable(page.Id()).Add_byte_pipe();
 			bfr.Add(page.Ttl_page_db()).Add_byte_pipe();
 			bfr.Add_byte(Bool_.Xto_byte(ctg_itm.Hidden())).Add_byte_nl();
@@ -96,30 +99,6 @@ class Xodb_load_mgr_sql_fxt {
 
 	public Xoctg_url_mok ctg_url_() {return new Xoctg_url_mok();}
 	public Xodb_load_mgr_sql_fxt Init_limit_(int v) {limit = v; return this;} private int limit = 3;
-//		public void Init_ctg_insert(Xoctg_mok_ctg ctg) {
-//			Xodb_mgr_sql db_mgr = wiki.Db_mgr_as_sql();
-//			Db_conn p = db_mgr.Fsys_mgr().Core_provider();
-//			p.Txn_mgr().Txn_bgn_if_none();
-//			Xodb_categorylinks_tbl ctg_tbl = db_mgr.Tbl_categorylinks(); 
-//			Db_stmt ctg_stmt = ctg_tbl.Insert_stmt(p);
-//			Xodb_page_tbl page_tbl = db_mgr.Tbl_page(); 
-//			Db_stmt page_stmt = page_tbl.Insert_stmt();
-//			DateAdp modified_on = Tfds.Now_time0_add_min(0);
-//			int page_id = next_id.Val_add_post();
-//			page_tbl.Insert(page_stmt, page_id, Xow_ns_.Id_category, ctg.Ttl(), false, modified_on, 0, page_id, 0);
-//			for (byte i = 0; i < Xoa_ctg_mgr.Tid__max; i++) {
-//				Xoctg_mok_grp grp = ctg.Grps_get_or_new(i);
-//				int grp_len = grp.Itms().Count();
-//				for (int j = 0; j < grp_len; j++) {
-//					Xodb_page page = (Xodb_page)grp.Itms().FetchAt(j);
-//					Xoctg_page_xtn page_ctg = (Xoctg_page_xtn)page.Xtn();
-//					page_id = page.Id();
-//					ctg_tbl.Insert(ctg_stmt, page_id, ctg.Ttl(), page_ctg.Sortkey(), 0, i);
-//					page_tbl.Insert(page_stmt, page_id, page.Ns_id(), page.Ttl_wo_ns(), false, modified_on, 0, page_id, 0);
-//				}
-//			}
-//			p.Txn_mgr().Txn_end_all();
-//		}
 	public void Test_select(Xoctg_url ctg_url, Xoctg_mok_ctg expd) {
 		Xoctg_view_ctg view_ctg = new Xoctg_view_ctg();
 		wiki.Db_mgr_as_sql().Load_mgr().Load_ctg_v2a(view_ctg, ctg_url, expd.Ttl(), limit);
@@ -145,7 +124,7 @@ class Xodb_load_mgr_sql_fxt {
 		int len = list.Count();
 		String[] rv = new String[len];
 		for (int i = 0; i< len; i++) {
-			Xodb_page itm = (Xodb_page)list.FetchAt(i);
+			Xowd_page_itm itm = (Xowd_page_itm)list.FetchAt(i);
 			rv[i] = String_.new_ascii_(itm.Ttl_page_db());
 		}
 		return rv;
@@ -181,9 +160,9 @@ class Xoctg_mok_ctg {
 		int ns_id = Xow_ns_.Id_main;
 		byte ctg_tid = Xoa_ctg_mgr.Tid_page;
 		for (int i = bgn; i < end; i++) {
-			byte[] ttl = Bry_.Add(ttl_prefix, Bry_.new_ascii_(Int_.Xto_str_pad_bgn(i, 3)));
+			byte[] ttl = Bry_.Add(ttl_prefix, Bry_.new_ascii_(Int_.Xto_str_pad_bgn_zero(i, 3)));
 			Xoctg_page_xtn db_ctg = new Xoctg_page_xtn(ctg_tid, ttl);
-			Xodb_page page = new Xodb_page();
+			Xowd_page_itm page = new Xowd_page_itm();
 			int page_id = next_id.Val_add_post();
 			page.Id_(page_id).Ns_id_(ns_id).Ttl_page_db_(ttl).Xtn_(db_ctg);
 			grp.Itms().Add(page);

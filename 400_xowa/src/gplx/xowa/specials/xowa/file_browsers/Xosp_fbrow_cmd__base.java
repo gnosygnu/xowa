@@ -183,7 +183,7 @@ class Xosp_fbrow_cmd__wiki_add extends Xosp_fbrow_cmd__base {
 	@Override public Xosp_fbrow_cmd Make_new() {return new Xosp_fbrow_cmd__wiki_add();}
 	@Override protected void Process_itm(Xosp_fbrow_data_sub itm) {
 		byte[] url_bry = itm.Url().RawBry();
-		if (!Bry_.HasAtEnd(url_bry, Ext_sqlite3_000)) itm.Selectable_(false);
+		if (!Bry_.HasAtEnd(url_bry, Ext_xowa)) itm.Selectable_(false);
 	}
 	@Override protected Xosp_fbrow_rslt Write_html_selected(Xoa_url_arg_mgr arg_mgr, String selected, GfoInvkAble select_invkable) {
 		String[] wikis = String_.Split(selected, ";");
@@ -197,7 +197,7 @@ class Xosp_fbrow_cmd__wiki_add extends Xosp_fbrow_cmd__base {
 	( "<a href='/site/~{domain}/wiki/Earth'>~{domain} Main Page</a>"
 	)
 	, "domain");
-	private static final byte[] Ext_sqlite3_000 = Bry_.new_ascii_(".000.sqlite3");
+	private static final byte[] Ext_xowa = Bry_.new_ascii_(".xowa");
 	public static final byte[] Regy_key = Bry_.new_ascii_("xowa.wiki.add");
 		public static final Xosp_fbrow_cmd__wiki_add I = new Xosp_fbrow_cmd__wiki_add();
 }

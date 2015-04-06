@@ -18,13 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html.hdumps.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.hdumps.*;
 import gplx.core.brys.*; import gplx.core.btries.*; import gplx.dbs.*; import gplx.ios.*;
 import gplx.xowa.dbs.*; import gplx.xowa.pages.*; import gplx.xowa.html.hdumps.core.*; import gplx.xowa.html.hdumps.data.*; import gplx.xowa.html.hdumps.pages.*; import gplx.xowa.pages.skins.*; import gplx.xowa.html.hdumps.data.srl.*;
-import gplx.xowa.wikis.data.*; import gplx.xowa2.gui.*;
+import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa2.gui.*;
 public class Xohd_page_html_mgr__load {
 	private final Xohd_page_srl_mgr srl_mgr = Xohd_page_srl_mgr.I;
 	private final Bry_rdr rdr = new Bry_rdr(); private final ListAdp rows = ListAdp_.new_(), imgs = ListAdp_.new_();		
 	private static final int redlink_list_max = 1024;
 	private final int[] redlink_list = new int[redlink_list_max];
-	public void Load_page(Xog_page hpg, Xohd_page_html_tbl tbl, int page_id, Xoa_ttl page_ttl) {
+	public void Load_page(Xog_page hpg, Xowd_html_tbl tbl, int page_id, Xoa_ttl page_ttl) {
 		tbl.Select_by_page(rows, page_id);
 		Parse_rows(hpg, page_id, Xoa_url.blank_(), page_ttl, rows);
 	}
@@ -33,17 +33,17 @@ public class Xohd_page_html_mgr__load {
 		imgs.Clear();
 		int len = rows.Count();
 		for (int i = 0; i < len; ++i) {
-			Xohd_page_html_row row = (Xohd_page_html_row)rows.FetchAt(i);
+			Xowd_html_row row = (Xowd_html_row)rows.FetchAt(i);
 			switch (row.Tid()) {
-				case Xohd_page_html_row.Tid_html:			srl_mgr.Load(hpg, row.Data()); break;
-				case Xohd_page_html_row.Tid_img:
-				case Xohd_page_html_row.Tid_redlink:
+				case Xowd_html_row.Tid_html:			srl_mgr.Load(hpg, row.Data()); break;
+				case Xowd_html_row.Tid_img:
+				case Xowd_html_row.Tid_redlink:
 															Parse_data(hpg, row); break;
 			}
 		}
 		rows.Clear();
 	}
-	private void Parse_data(Xog_page hpg, Xohd_page_html_row row) {
+	private void Parse_data(Xog_page hpg, Xowd_html_row row) {
 		rdr.Src_(row.Data());
 		while (!rdr.Pos_is_eos()) {
 			int tid = rdr.Read_int_to_pipe();
@@ -78,6 +78,6 @@ public class Xohd_page_html_mgr__load {
 	private void Load_data_gallery(Xog_page hpg) {
 		int uid = rdr.Read_int_to_pipe();
 		int box_max = rdr.Read_int_to_pipe();
-		hpg.Gly_itms().Add(uid, new Xohd_data_itm__gallery_mgr(uid, box_max));
+		hpg.Gallery_itms().Add(uid, new Xohd_data_itm__gallery_mgr(uid, box_max));
 	}
 }

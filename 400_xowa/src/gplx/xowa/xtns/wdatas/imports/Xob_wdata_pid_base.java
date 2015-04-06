@@ -16,8 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
-import gplx.json.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.parsers.*;
+import gplx.json.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.parsers.*; import gplx.xowa.wikis.data.tbls.*;
 public abstract class Xob_wdata_pid_base extends Xob_itm_dump_base implements Xobd_wkr, GfoInvkAble {
+	private Json_parser parser;
 	public Xob_wdata_pid_base Ctor(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki); return this;}
 	public abstract String Wkr_key();
 	public abstract void Pid_bgn();
@@ -28,10 +29,10 @@ public abstract class Xob_wdata_pid_base extends Xob_itm_dump_base implements Xo
 		this.Init_dump(this.Wkr_key(), wiki.Tdb_fsys_mgr().Site_dir().GenSubDir_nest("data", "pid"));	// NOTE: must pass in correct make_dir in order to delete earlier version (else make_dirs will append)
 		parser = bldr.App().Wiki_mgr().Wdata_mgr().Jdoc_parser();
 		this.Pid_bgn();
-	}	Json_parser parser;
-	public void Wkr_run(Xodb_page page) {
+	}
+	public void Wkr_run(Xowd_page_itm page) {
 		if (page.Ns_id() != Wdata_wiki_mgr.Ns_property) return;
-		Json_doc jdoc = parser.Parse(page.Wtxt()); 
+		Json_doc jdoc = parser.Parse(page.Text()); 
 		if (jdoc == null) {
 			bldr.Usr_dlg().Warn_many(GRP_KEY, "json.invalid", "json is invalid: ns=~{0} id=~{1}", page.Ns_id(), String_.new_utf8_(page.Ttl_page_db()));
 			return;

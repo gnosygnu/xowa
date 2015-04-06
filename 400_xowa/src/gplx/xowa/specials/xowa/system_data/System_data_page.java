@@ -28,7 +28,7 @@ public class System_data_page implements Xows_page {
 		byte[] file_txt = Io_mgr._.LoadFilBry(file_url);
 		file_txt = gplx.html.Html_utl.Escape_html_as_bry(file_txt, true, false, false, false, false);	// escape < or "</pre>" in messages will cause pre to break
 		fmtr_all.Bld_bfr_many(tmp_bfr, file_url.Raw(), file_txt);
-		page.Data_raw_(tmp_bfr.Mkr_rls().Xto_bry_and_clear());
+		page.Data_raw_(tmp_bfr.To_bry_and_rls());
 	}
 	private static Io_url Path_from_type(Xowe_wiki wiki, byte type) {
 		Xoae_app app = wiki.Appe();

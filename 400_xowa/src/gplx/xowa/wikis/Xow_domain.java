@@ -20,8 +20,10 @@ import gplx.xowa.langs.*;
 public class Xow_domain {
 	Xow_domain(byte[] domain_bry, int domain_tid, Xol_lang_itm lang_itm, Xol_lang_itm lang_orig_itm) {
 		this.domain_bry = domain_bry; this.domain_tid = domain_tid; this.lang_itm = lang_itm; this.lang_orig_itm = lang_orig_itm;
+		this.domain_str = String_.new_utf8_(domain_bry);
 	}
 	public byte[]			Domain_bry() {return domain_bry;} private final byte[] domain_bry;
+	public String			Domain_str() {return domain_str;} private final String domain_str;
 	public int				Domain_tid() {return domain_tid;} private final int domain_tid;
 	public Xol_lang_itm		Lang_itm() {return lang_itm;} private final Xol_lang_itm lang_itm;
 	public int				Lang_uid() {return lang_itm.Id();}

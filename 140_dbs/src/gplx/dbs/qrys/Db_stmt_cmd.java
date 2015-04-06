@@ -114,7 +114,7 @@ public class Db_stmt_cmd implements Db_stmt {
 		catch (Exception e) {
 			this.Rls();
 			Reset_stmt();
-			throw Err_.err_(e, "db_stmt.insert: sql={0} err={1}", sql, Err_.Message_gplx_brief(e));
+			throw Err_.err_(e, "db_stmt.insert: url={0} sql={1} err={2}", engine.Conn_info(), sql, Err_.Message_gplx_brief(e));
 		}
 	}
 	public int Exec_update() {
@@ -135,9 +135,12 @@ public class Db_stmt_cmd implements Db_stmt {
 	}
 	public DataRdr Exec_select() {
 		try {DataRdr rv = engine.New_rdr(stmt.executeQuery(), sql); return rv;} catch (Exception e) {throw Err_.err_(e, "failed to exec prepared statement: sql={0}", sql);}	
-	}	
-	public Db_rdr Exec_select_as_rdr() {
-		try {return engine.New_rdr_by_obj(stmt.executeQuery(), sql);}	catch (Exception e) {throw Err_.err_(e, "select failed: sql={0}", sql);}	
+	}
+	public Db_rdr Exec_select__rls_auto() {
+		try {return engine.New_rdr__rls_auto(this, stmt.executeQuery(), sql);}	catch (Exception e) {throw Err_.err_(e, "select failed: sql={0}", sql);}	
+	}
+	public Db_rdr Exec_select__rls_manual() {
+		try {return engine.New_rdr__rls_manual(stmt.executeQuery(), sql);}	catch (Exception e) {throw Err_.err_(e, "select failed: sql={0}", sql);}	
 	}
 	public Object Exec_select_val() {
 		try {Object rv = Db_qry__select_cmd.Rdr_to_val(engine.New_rdr(stmt.executeQuery(), sql)); return rv;} catch (Exception e) {throw Err_.err_(e, "failed to exec prepared statement: sql={0}", sql);}	
@@ -153,6 +156,7 @@ public class Db_stmt_cmd implements Db_stmt {
 		try {
 			if (stmt.getConnection().isClosed()) return;	// do not close stmt if connection is already closed; throws null error; DATE:2015-02-11
 			stmt.close();									
+			stmt = null;
 		}
 		catch (Exception e) {throw Err_.err_(e, "failed to close command: {0}", sql);}
 	}

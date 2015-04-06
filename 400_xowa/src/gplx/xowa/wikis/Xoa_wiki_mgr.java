@@ -29,9 +29,7 @@ public class Xoa_wiki_mgr implements GfoInvkAble {
 	public Cfg_nde_root Groups() {return groups;} Cfg_nde_root groups = new Cfg_nde_root().Root_(new Xoac_wiki_grp(Bry_.Empty), Xoac_lang_grp.Make_grp, Bry_.Ary_empty);
 	public Xow_script_mgr Scripts() {return scripts;} private Xow_script_mgr scripts = new Xow_script_mgr();
 	public Wdata_wiki_mgr Wdata_mgr() {return wdata_mgr;} Wdata_wiki_mgr wdata_mgr;
-	public Xoa_css_extractor Css_installer() {return css_installer;} private Xoa_css_extractor css_installer = new Xoa_css_extractor();
 	public void Init_by_app() {
-		css_installer.Init_by_app(app);
 		wdata_mgr.Init_by_app();
 	}
 	public int Count() {return hash.Count();}

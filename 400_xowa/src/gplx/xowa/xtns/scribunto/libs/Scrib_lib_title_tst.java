@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import org.junit.*;
 import gplx.dbs.*; import gplx.xowa2.files.commons.*; import gplx.xowa.wikis.data.*;
-import gplx.xowa.wikis.*; import gplx.xowa.files.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.repos.*;
+import gplx.fsdb.*; import gplx.xowa.wikis.*; import gplx.xowa.files.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.repos.*;
 public class Scrib_lib_title_tst {
 	@Before public void init() {
 		Db_conn_bldr.I.Reg_default_mem();
@@ -96,18 +96,21 @@ public class Scrib_lib_title_tst {
 		fxt.Test_scrib_proc_obj(lib, Scrib_lib_title.Invk_cascadingProtection, Object_.Ary("A")									, Scrib_lib_title.CascadingProtection_rv);
 	}
 	private static void Wiki_orig_tbl__create(Xowe_wiki wiki) {
-		wiki.File_mgr().Fsdb_mgr().Init_by_wiki(wiki);
+		Xowe_wiki_bldr.Create(wiki, 1, "dump.xml");
+		Xowd_db_file text_db = wiki.Data_mgr__core_mgr().Dbs__make_by_tid(Xowd_db_file_.Tid_text); text_db.Tbl__text().Create_tbl();
+		Fsdb_db_mgr__v2_bldr.I.Make(wiki);
+		wiki.File_mgr().Init_file_mgr_by_load(wiki);
 	}
 	private static void Wiki_orig_tbl__insert(Xowe_wiki wiki, String ttl_str, int w, int h) {
 		byte[] ttl_bry = Bry_.new_utf8_(ttl_str);
-		wiki.File_mgr().Fsdb_mgr().Orig_mgr().Insert(Xof_repo_itm.Repo_remote, ttl_bry, Xof_ext_.new_by_ttl_(ttl_bry).Id(), w, h, Bry_.Empty);
+		wiki.File_mgr__orig_mgr().Insert(Xof_repo_itm.Repo_remote, ttl_bry, Xof_ext_.new_by_ttl_(ttl_bry).Id(), w, h, Bry_.Empty);
 	}
 //		private static void Init_page_regy(Xowe_wiki wiki, String ttl, int id, boolean is_redirect) {
 //			String url_str = "test/en.wikipedia.org/wiki_page_regy";
-//			Db_meta_tbl meta = new Xowd_pg_regy_tbl().new_meta();
+//			Db_meta_tbl meta = new Xowd_page_tbl().new_meta();
 //			Db_conn_pool.I.Set_mem(url_str, meta);
-//			Db_url url = Db_url_.mem_(url_str);
-//			Xowd_pg_regy_tbl tbl = new Xowd_pg_regy_tbl(Bool_.N, url);
+//			Db_conn_info url = Db_conn_info_.mem_(url_str);
+//			Xowd_page_tbl tbl = new Xowd_page_tbl(Bool_.N, url);
 //			tbl.Insert(id, ns_id, Bry_.new_utf8_(ttl), is_redirect, modified_on, page_len, random_int, text_db_id, html_db_id);
 //		}
 	private static String ttl_fast(int ns_id, String ns_str, String ttl) {return ttl_fast(ns_id, ns_str, ttl, "", "", ttl);}

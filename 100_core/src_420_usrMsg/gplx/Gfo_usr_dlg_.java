@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public class Gfo_usr_dlg_ {
-	public static Gfo_usr_dlg _ = Gfo_usr_dlg_null._;
+	public static Gfo_usr_dlg I = Gfo_usr_dlg_null._;
         public static final Gfo_usr_dlg Null = Gfo_usr_dlg_null._;
 }
 class Gfo_usr_dlg_null implements Gfo_usr_dlg {

@@ -16,9 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.ifs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.xowa.wmfs.apis.*;
+import gplx.xowa.wmfs.apis.*; import gplx.xowa.wikis.data.tbls.*;
 public class Pfunc_ifexist_mgr {
-	private Xodb_page db_page = Xodb_page.new_tmp();
+	private Xowd_page_itm db_page = Xowd_page_itm.new_tmp();
 	private HashAdp regy = HashAdp_.new_bry_();
 	public void Clear() {regy.Clear();}
 	public boolean Exists(Xowe_wiki wiki, byte[] raw_bry) {
@@ -44,8 +44,8 @@ public class Pfunc_ifexist_mgr {
 		boolean rv = wiki.Db_mgr().Load_mgr().Load_by_ttl(db_page, ns, ttl_bry);
 		if (	!rv
 			&&	wiki.Lang().Vnt_mgr().Enabled()) {
-			Xodb_page page = wiki.Lang().Vnt_mgr().Convert_ttl(wiki, ns, ttl_bry);
-			if (page != Xodb_page.Null)
+			Xowd_page_itm page = wiki.Lang().Vnt_mgr().Convert_ttl(wiki, ns, ttl_bry);
+			if (page != Xowd_page_itm.Null)
 				rv = page.Exists();
 		}
 		itm.Exists_(rv);
@@ -66,7 +66,7 @@ public class Pfunc_ifexist_mgr {
 		}
 		else {
 			if (!env_is_testing)
-				wiki.File_mgr().Fsdb_mgr().Init_by_wiki(wiki);								// NOTE: must init Fsdb_mgr (else conn == null), and with bin_wkrs (else no images will ever load); DATE:2014-09-21
+				wiki.File_mgr().Init_file_mgr_by_load(wiki);								// NOTE: must init Fsdb_mgr (else conn == null), and with bin_wkrs (else no images will ever load); DATE:2014-09-21
 			return wiki.File_mgr().Exists(ttl_bry);											// less-accurate test using either (1) orig_wiki table in local wiki (v2) or (2) meta_db_mgr (v1)
 		}
 	}

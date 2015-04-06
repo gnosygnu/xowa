@@ -25,9 +25,9 @@ class Fs_root_dir {
 	private Orig_fil_mgr cache = new Orig_fil_mgr(), fs_fil_mgr;
 	private Db_conn conn; private Db_cfg_tbl cfg_tbl; private Orig_fil_tbl fil_tbl;
 	private int fil_id_next = 0;
-	public void Init(Io_url url, Db_cfg_tbl cfg_tbl, Orig_fil_tbl fil_tbl, Gfo_usr_dlg usr_dlg, Xof_img_wkr_query_img_size img_size_wkr) {
+	public void Init(Io_url url, Orig_fil_tbl fil_tbl, Gfo_usr_dlg usr_dlg, Xof_img_wkr_query_img_size img_size_wkr) {
 		this.url = url;
-		this.cfg_tbl = cfg_tbl; this.fil_tbl = fil_tbl; this.usr_dlg = usr_dlg; this.img_size_wkr = img_size_wkr;
+		this.fil_tbl = fil_tbl; this.usr_dlg = usr_dlg; this.img_size_wkr = img_size_wkr;
 	}
 	public Orig_fil_itm Get_by_ttl(byte[] lnki_ttl) {
 		Orig_fil_itm rv = (Orig_fil_itm)cache.Get_by_ttl(lnki_ttl);
@@ -55,7 +55,7 @@ class Fs_root_dir {
 		if (Xof_ext_.Id_is_image(rv.Fil_ext_id()))
 			img_size = img_size_wkr.Exec(rv.Fil_url());
 		rv.Init_by_size(++fil_id_next, img_size.Width(), img_size.Height());
-		cfg_tbl.Update(Cfg_grp_root_dir, Cfg_key_fil_id_next, Int_.Xto_str(fil_id_next));
+		cfg_tbl.Update_int(Cfg_grp_root_dir, Cfg_key_fil_id_next, fil_id_next);
 		fil_tbl.Insert(rv);
 		return rv;
 	}
@@ -77,21 +77,22 @@ class Fs_root_dir {
 		}
 		return rv;
 	}
-	private static final String Db_conn_bldr_type = "gplx.xowa.fs_root";
 	private Db_conn Init_db_fil_mgr() {
 		Io_url db_url = url.GenSubFil("^orig_regy.sqlite3");
 		boolean created = false; boolean schema_is_1 = Bool_.Y;
-		Db_conn conn = Db_conn_bldr.I.Get(Db_conn_bldr_type, db_url);
+		Db_conn conn = Db_conn_bldr.I.Get(db_url);
 		if (conn == null) {
-			conn = Db_conn_bldr.I.New(Db_conn_bldr_type, db_url);
+			conn = Db_conn_bldr.I.New(db_url);
 			created = true;
 		}
-		cfg_tbl.Conn_(conn, created, schema_is_1, Fsm_abc_mgr.Cfg_tbl_v1, Fsm_abc_mgr.Cfg_tbl_v2);
+		cfg_tbl = new Db_cfg_tbl(conn, schema_is_1 ? "fsdb_cfg" : "xowa_cfg");
 		fil_tbl.Conn_(conn, created, schema_is_1);
-		if (created)
-			cfg_tbl.Insert(Cfg_grp_root_dir, Cfg_key_fil_id_next, Int_.Xto_str(fil_id_next));
+		if (created) {
+			cfg_tbl.Create_tbl();
+			cfg_tbl.Insert_int(Cfg_grp_root_dir, Cfg_key_fil_id_next, fil_id_next);
+		}
 		else {
-			fil_id_next = cfg_tbl.Select_as_int_or_fail(Cfg_grp_root_dir, Cfg_key_fil_id_next);
+			fil_id_next = cfg_tbl.Select_int(Cfg_grp_root_dir, Cfg_key_fil_id_next);
 		}
 		return conn;
 	}

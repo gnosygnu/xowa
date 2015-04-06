@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs; import gplx.*; import gplx.xowa.*;
-import gplx.dbs.*; import gplx.xowa.ctgs.*; import gplx.xowa.html.hdumps.*; import gplx.xowa.tdbs.*;
+import gplx.ios.*; import gplx.dbs.*; import gplx.xowa.wikis.data.*; import gplx.xowa.ctgs.*; import gplx.xowa.html.hdumps.*; import gplx.xowa.tdbs.*;
 public class Xodb_mgr_txt implements Xodb_mgr {
 	public Xodb_mgr_txt(Xowe_wiki wiki, Xow_data_mgr data_mgr) {
 		this.wiki = wiki;
@@ -25,10 +25,9 @@ public class Xodb_mgr_txt implements Xodb_mgr {
 	}	private Xowe_wiki wiki;
 	public byte Tid() {return Tid_txt;} public static final byte Tid_txt = 0;
 	public String Tid_name() {return "xdat";}
-	public byte Data_storage_format() {return data_storage_format;} public void Data_storage_format_(byte v) {data_storage_format = v;} private byte data_storage_format = gplx.ios.Io_stream_.Tid_file;
+	public byte Data_storage_format() {return data_storage_format;} public void Data_storage_format_(byte v) {data_storage_format = v;} private byte data_storage_format = gplx.ios.Io_stream_.Tid_raw;
 	public Xodb_load_mgr Load_mgr() {return load_mgr;} private Xodb_load_mgr_txt load_mgr;
 	public Xodb_save_mgr Save_mgr() {return save_mgr;} private Xodb_save_mgr_txt save_mgr;
-	public Xodb_ctx Db_ctx() {return db_ctx;} private Xodb_ctx db_ctx = new Xodb_ctx();
 	public DateAdp Dump_date_query() {
 		Io_url url = wiki.Tdb_fsys_mgr().Url_ns_fil(Xotdb_dir_info_.Tid_page, Xow_ns_.Id_main, 0);
 		return Io_mgr._.QueryFil(url).ModifiedTime();
@@ -44,10 +43,9 @@ public class Xodb_mgr_txt implements Xodb_mgr {
 	}	byte category_version = Xoa_ctg_mgr.Version_null;
 	public byte Search_version() {return gplx.xowa.specials.search.Xosrh_core.Version_2;}
 	public void Search_version_refresh() {throw Err_.not_implemented_();}
-	public void Rls() {}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_data_storage_format))				return Xoi_dump_mgr.Wtr_tid_to_str(data_storage_format);
-		else if	(ctx.Match(k, Invk_data_storage_format_))				data_storage_format = Xoi_dump_mgr.Wtr_tid_parse(m.ReadStr("v"));
+		if		(ctx.Match(k, Invk_data_storage_format))				return Io_stream_.Obsolete_to_str(data_storage_format);
+		else if	(ctx.Match(k, Invk_data_storage_format_))				data_storage_format = Io_stream_.Obsolete_to_tid(m.ReadStr("v"));
 		else if	(ctx.Match(k, Invk_category_version))					return this.Category_version();
 		else if	(ctx.Match(k, Invk_category_version_))					category_version = m.ReadByte("v");
 		else if	(ctx.Match(k, Invk_search_version))						return this.Search_version();

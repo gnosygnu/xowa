@@ -38,8 +38,8 @@ public class Db_stmt_bldr {
 			default:						throw Err_.unhandled(cmd_mode);
 		}
 	}
-	public void Batch_bgn() {conn.Txn_mgr().Txn_bgn_if_none();}
-	public void Batch_end() {conn.Txn_mgr().Txn_end_all();}
+	public void Batch_bgn() {conn.Txn_bgn(tbl_name);}
+	public void Batch_end() {conn.Txn_end();}
 	public void Rls() {
 		create = Db_stmt_.Rls(create);
 		update = Db_stmt_.Rls(update);

@@ -37,8 +37,8 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 			Bry_bfr comment_bfr = wiki.Utl__bfr_mkr().Get_b512();
 			Parse(bfr, comment_bfr, sidebar_msg.Val());
 			Bld_html(bfr);
-			html_bry = bfr.Mkr_rls().Xto_bry_and_clear();
-			comment_bfr = comment_bfr.Mkr_rls().Clear();
+			html_bry = bfr.To_bry_and_rls();
+			comment_bfr.Clear_and_rls();
 		} catch (Exception e) {
 			wiki.Appe().Usr_dlg().Warn_many(GRP_KEY, "sidebar.init", "sidebar init failed: ~{0} ~{1}", wiki.Domain_str(), Err_.Message_gplx_brief(e));
 			html_bry = Bry_.Empty;

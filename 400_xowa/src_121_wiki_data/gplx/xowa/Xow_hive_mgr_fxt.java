@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.tdbs.*;
+import gplx.xowa.tdbs.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xow_hive_mgr_fxt {
 	public void Clear() {
 		if (hive_mgr == null) {
@@ -34,7 +34,7 @@ public class Xow_hive_mgr_fxt {
 		int actl_len = list.Count();
 		String[] actl = new String[actl_len];
 		for (int i = 0; i < actl_len; i++) {
-			Xodb_page itm = (Xodb_page)list.FetchAt(i);
+			Xowd_page_itm itm = (Xowd_page_itm)list.FetchAt(i);
 			actl[i] = String_.new_ascii_(itm.Ttl_page_db());
 		}
 		Tfds.Eq_ary_str(expd, actl);
@@ -54,7 +54,7 @@ public class Xow_hive_mgr_fxt {
 				byte[] ttl_bry = tmp_bfr.Xto_bry_and_clear(); 
 				if 		(ttl_idx == 0) 					ttl_0 = ttl_bry;
 				else if (ttl_idx == ttls_per_file - 1) 	ttl_n = ttl_bry;
-				Xodb_page_.Txt_ttl_save(xdat_wtr.Bfr(), id++, 0, ttl_idx, ttl_idx % 2 == 1, 1, ttl_bry);
+				Xotdb_page_itm_.Txt_ttl_save(xdat_wtr.Bfr(), id++, 0, ttl_idx, ttl_idx % 2 == 1, 1, ttl_bry);
 				xdat_wtr.Add_idx(Byte_ascii.Nil);
 			}
 			xdat_wtr.Flush(wiki.Appe().Usr_dlg());
@@ -72,7 +72,7 @@ public class Xow_hive_mgr_fxt {
 		for (int i = 0; i < pages_len; i++)				
 			bfr.Add_byte_pipe().Add_base85_len_5(pages[i]);
 		bfr.Add_byte_nl();
-		byte[] row = bfr.Mkr_rls().Xto_bry_and_clear();
+		byte[] row = bfr.To_bry_and_rls();
 		hive_mgr.Create(Xotdb_dir_info_.Tid_category, key_bry, row);
 	}
 	public Xow_hive_mgr_fxt Create_id(int id, int fil_idx, int row_idx, boolean type_redirect, int itm_len, int ns_id, String ttl) {Create_id(app, hive_mgr, id, fil_idx, row_idx, type_redirect, itm_len, ns_id, ttl); return this;}

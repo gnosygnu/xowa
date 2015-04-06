@@ -29,11 +29,12 @@ public class Xof_orig_tbl_tst {
 	}
 }
 class Xof_orig_tbl_fxt {
-	private Xof_orig_tbl tbl = new Xof_orig_tbl();
+	private Xof_orig_tbl tbl;
 	public void Clear() {
-		String test_url = "test/file/en.wikipedia.org/file/orig_regy";
-		Db_conn conn = Db_conn_pool.I.Get_or_new__mem(test_url);
-		tbl.Conn_(conn, Bool_.Y, Bool_.Y);
+		Io_url test_url = Io_url_.mem_fil_("mem/file/en.wikipedia.org/file/orig_regy");
+		Db_conn conn = Db_conn_bldr.I.New(test_url);
+		tbl = new Xof_orig_tbl(conn, Bool_.Y);
+		tbl.Create_tbl();
 	}
 	public Xof_orig_itm Exec_insert(String ttl, int w, int h) {
 		byte[] ttl_bry = Bry_.new_utf8_(ttl);

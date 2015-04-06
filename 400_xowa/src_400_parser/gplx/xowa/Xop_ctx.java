@@ -235,17 +235,17 @@ public class Xop_ctx {
 			}
 		}
 	}
-	public Xop_tkn_itm Stack_pop_til(Xop_root_tkn root, byte[] src, int til_idx, boolean include, int bgn_pos, int cur_pos, int closing_tkn_tid) {
-		if (stack_len == 0) return null;
-		int min_idx = include ? til_idx - 1 : til_idx;
-		if (min_idx < -1) min_idx = -1;
+	public Xop_tkn_itm Stack_pop_til(Xop_root_tkn root, byte[] src, int til_idx, boolean include, int bgn_pos, int cur_pos, int closing_tkn_tid) {	// NOTE: closing_tkn_tid is a book-keeping variable to indicate who started auto-close; only used by xnde.AutoClose 
+		if (stack_len == 0) return null;				// nothing to pop; return;
+		int min_idx	= include ? til_idx - 1	: til_idx;	// if "include", auto-close tkn at til_idx; if not, auto-close to one before
+		if (min_idx < -1) min_idx = -1;					// bounds-check; make sure til_idx was not -1, resulting in -2; NOTE: does not seem to be needed; DATE:2015-03-31
 		Xop_tkn_itm rv = null;
-		for (int i = stack_len - 1; i > min_idx; i--) {
+		for (int i = stack_len - 1; i > min_idx; i--) {	// pop tkns going backwards
 			rv = stack[i];
-			Stack_autoClose(root, src, rv, bgn_pos, cur_pos, closing_tkn_tid);
+			Stack_auto_close(root, src, rv, bgn_pos, cur_pos, closing_tkn_tid);
 		}
 		Stack_pop_idx(til_idx);
-		return include ? rv : stack[stack_len]; // if include, return poppedTkn; if not, return tkn before poppedTkn
+		return include ? rv : stack[stack_len];			// if include, return popped_tkn; if not, return tkn before popped_tkn
 	}
 	public Xop_tkn_itm Stack_pop_before(Xop_root_tkn root, byte[] src, int til_idx, boolean include, int bgn_pos, int cur_pos, int closing_tkn_tid) {	// used by Xop_tblw_lxr to detect \n| in lnki; seems useful as well
 		if (stack_len == 0) return null;
@@ -254,11 +254,11 @@ public class Xop_ctx {
 		Xop_tkn_itm rv = null;
 		for (int i = stack_len - 1; i > min_idx; i--) {
 			rv = stack[i];
-			Stack_autoClose(root, src, rv, bgn_pos, cur_pos, closing_tkn_tid);
+			Stack_auto_close(root, src, rv, bgn_pos, cur_pos, closing_tkn_tid);
 		}
 		return include ? rv : stack[stack_len]; // if include, return poppedTkn; if not, return tkn before poppedTkn
 	}
-	public void Stack_autoClose(Xop_root_tkn root, byte[] src, Xop_tkn_itm tkn, int bgn_pos, int cur_pos, int closing_tkn_tid) {
+	public void Stack_auto_close(Xop_root_tkn root, byte[] src, Xop_tkn_itm tkn, int bgn_pos, int cur_pos, int closing_tkn_tid) {
 		int src_len = src.length;
 		switch (tkn.Tkn_tid()) {
 			case Xop_tkn_itm_.Tid_newLine: break;	// NOOP: just a marker

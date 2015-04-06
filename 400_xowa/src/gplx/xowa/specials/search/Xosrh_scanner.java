@@ -116,7 +116,7 @@ class Xosrh_scanner {
 		}
 		if (tid == Xosrh_qry_tkn.Tid_word) {	// if word has symbol, convert to quoted; EX: a-b should become "a-b"; otherwise searcher would search for a single word a-b
 			byte[] cur_word = Bry_.Mid(src, src_bgn, src_end);
-			byte[][] words = gplx.xowa.bldrs.imports.Xob_search_base.Split(null, tmp_list, tmp_bfr, cur_word);
+			byte[][] words = gplx.xowa.bldrs.cmds.texts.Xob_search_base.Split(null, tmp_list, tmp_bfr, cur_word);
 			int words_len = words.length;
 			if (words_len == 1 && !Bry_.Eq(words[0], cur_word) && Bry_finder.Find_fwd(cur_word, Byte_ascii.Asterisk) == -1) {
 				tkns.Add(Xosrh_qry_tkn.new_bry_(tid, words[0]));

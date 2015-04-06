@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.proofreadPage; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
 import gplx.xowa.html.*; import gplx.xowa.parsers.amps.*;
-import gplx.xowa.xtns.lst.*; import gplx.xowa.pages.*;
+import gplx.xowa.xtns.lst.*; import gplx.xowa.pages.*; import gplx.xowa.wikis.data.tbls.*;
 public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 	private boolean xtn_literal = false;
 	private Xop_root_tkn xtn_root;
@@ -263,14 +263,14 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 		int len = rslt_count.Val();
 		int page_leaf_max = 0;
 		for (int i = 0; i < len; i++) {
-			Xodb_page page = (Xodb_page)rslt.FetchAt(i);
+			Xowd_page_itm page = (Xowd_page_itm)rslt.FetchAt(i);
 			Xoa_ttl page_ttl = Xoa_ttl.parse_(wiki, ns_page_id, page.Ttl_page_db());	if (page_ttl == null) continue;					// page_ttl is not valid; should never happen;
 			byte[] page_ttl_leaf = page_ttl.Leaf_txt();									if (page_ttl_leaf == null) continue;			// page is not leaf; should not happen
 			int page_leaf_val = Bry_.Xto_int_or(page_ttl_leaf, Int_.MinValue);		if (page_leaf_val == Int_.MinValue) continue;	// leaf is not int; ignore
 			if (page_leaf_val > page_leaf_max) page_leaf_max = page_leaf_val;
 		}
 		return page_leaf_max;
-	}	private static Xodb_page tmp_page = new Xodb_page();	// tmp_page passed to Load_ttls_for_all_pages; values are never looked at, so use static instance
+	}	private static Xowd_page_itm tmp_page = new Xowd_page_itm();	// tmp_page passed to Load_ttls_for_all_pages; values are never looked at, so use static instance
 	private ListAdp Get_ttls_from_xnde_args__exclude(ListAdp list) {
 		if (Bry_.Len_eq_0(exclude)) return list;	// exclude is blank; exit early;
 		int[] exclude_pages = Int_ary_.Parse_list_or(exclude, null);

@@ -16,17 +16,32 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-import gplx.core.criterias.*; import gplx.dbs.qrys.*;
+import gplx.core.primitives.*; import gplx.core.criterias.*; import gplx.dbs.qrys.*;
 public class Mem_tbl {
 	private final ListAdp rows = ListAdp_.new_(); private final ListAdp where_rows = ListAdp_.new_();
+	private final HashAdp autonum_hash = HashAdp_.new_();
+	private final Db_meta_tbl meta;
+	public Mem_tbl(Db_meta_tbl meta) {this.meta = meta;}
 	public int Insert(Db_stmt__mem stmt) {
-		Db_qry_insert qry = (Db_qry_insert)stmt.Qry();
-		String[] cols = qry.Cols_for_insert(); int len = cols.length;
 		Mem_itm itm = new Mem_itm();
-		for (int i = 0; i < len; ++i) 
-			itm.Set_by(cols[i], stmt.Args_get_at(i));
+		Db_meta_fld[] flds = meta.Flds();
+		int len = flds.length;
+		for (int i = 0; i < len; ++i) {
+			Db_meta_fld fld = flds[i];
+			String fld_name = fld.Name();
+			Object val = fld.Autonum() ? Autonum_calc(fld_name) : stmt.Args_get_by(fld_name);
+			itm.Set_by(fld_name, val);
+		}
 		rows.Add(itm);
 		return 1;
+	}
+	private int Autonum_calc(String name) {
+		Int_obj_ref autonum_itm = (Int_obj_ref)autonum_hash.Fetch(name);
+		if (autonum_itm == null) {
+			autonum_itm = Int_obj_ref.new_(0);
+			autonum_hash.Add(name, autonum_itm);
+		}
+		return autonum_itm.Val_add();
 	}
 	public int Update(Db_stmt__mem stmt) {
 		Db_qry_update qry = (Db_qry_update)stmt.Qry();

@@ -50,7 +50,7 @@ class Io_sort_fxt {
 	public String GenRandom(int rows, int pad) {
 		ListAdp list = ListAdp_.new_();
 		for (int i = 0; i < rows; i++)
-			list.Add(Int_.Xto_str_pad_bgn(i, pad) + "|");
+			list.Add(Int_.Xto_str_pad_bgn_zero(i, pad) + "|");
 		list.Shuffle();
 		for (int i = 0; i < rows; i++) {
 			String itm = (String)list.FetchAt(i);
@@ -60,7 +60,7 @@ class Io_sort_fxt {
 	}
 	public String GenOrdered(int rows, int pad) {
 		for (int i = 0; i < rows; i++)
-			sb.Add(Int_.Xto_str_pad_bgn(i, pad) + "|" + "\n");
+			sb.Add(Int_.Xto_str_pad_bgn_zero(i, pad) + "|" + "\n");
 		return sb.Xto_str_and_clear();
 	}	
 }

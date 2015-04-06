@@ -16,17 +16,18 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
+import gplx.xowa.wikis.data.tbls.*;
 public class Xosrh_rslt_itm_sorter implements gplx.lists.ComparerAble {
 	public byte Tid() {return tid;} public Xosrh_rslt_itm_sorter Tid_(byte v) {tid = v; return this;} private byte tid = Tid_len_dsc;
 	public int compare(Object lhsObj, Object rhsObj) {
-		Xodb_page lhs = (Xodb_page)lhsObj;
-		Xodb_page rhs = (Xodb_page)rhsObj;
+		Xowd_page_itm lhs = (Xowd_page_itm)lhsObj;
+		Xowd_page_itm rhs = (Xowd_page_itm)rhsObj;
 		if		(lhs == null || rhs == null || tid == Tid_none)	return CompareAble_.Same;
 //			else if	(lhs == null)					return CompareAble_.Less;
 //			else if	(rhs == null)					return CompareAble_.More;
 		else {
 			switch (tid) {
-				case Tid_len_dsc:	return Int_.Compare(lhs.Wtxt_len(), rhs.Wtxt_len()) * -1;
+				case Tid_len_dsc:	return Int_.Compare(lhs.Text_len(), rhs.Text_len()) * -1;
 				case Tid_ttl_asc:	return Bry_.Compare(lhs.Ttl_page_db(), rhs.Ttl_page_db());
 				case Tid_id:		return Int_.Compare(lhs.Id(), rhs.Id());
 				default:			throw Err_mgr._.unhandled_(tid);

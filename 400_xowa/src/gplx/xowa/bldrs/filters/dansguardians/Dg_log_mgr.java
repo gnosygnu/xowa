@@ -25,13 +25,13 @@ class Dg_log_mgr {
 	private final Dg_page_rule_tbl	tbl_page_rule = new Dg_page_rule_tbl();
 	private final Bry_bfr tmp_bfr = Bry_bfr.reset_(16);
 	public void Init(Io_url db_url) {
-		Db_conn_bldr_data conn_data = Db_conn_bldr.I.Get_or_new("", db_url);
+		Db_conn_bldr_data conn_data = Db_conn_bldr.I.Get_or_new(db_url);
 		conn = conn_data.Conn(); boolean created = conn_data.Created();
 		tbl_file.Conn_(conn, created);
 		tbl_rule.Conn_(conn, created);
 		tbl_page_score.Conn_(conn, created);
 		tbl_page_rule.Conn_(conn, created);
-		conn.Txn_mgr().Txn_bgn();
+		conn.Txn_bgn();
 	}
 	public void Insert_file(Dg_file file) {tbl_file.Insert(file.Id(), file.Rel_path(), file.Lines().length);}
 	public void Insert_rule(Dg_rule rule) {tbl_rule.Insert(rule.File_id(), rule.Id(), rule.Idx(), rule.Score(), Dg_word.Ary_concat(rule.Words(), tmp_bfr, Byte_ascii.Tilde));}
@@ -39,8 +39,8 @@ class Dg_log_mgr {
 		tbl_page_score.Insert(log_tid, page_id, page_ns, page_ttl, page_len, page_score, page_rule_count, clude_type);
 	}
 	public void Insert_page_rule(int log_tid, int page_id, int rule_id, int rule_score_total) {tbl_page_rule.Insert(log_tid, page_id, rule_id, rule_score_total);}
-	public void Commit()	{conn.Txn_mgr().Txn_end_all_bgn_if_none();}
-	public void Rls()		{conn.Txn_mgr().Txn_end_all();}
+	public void Commit()	{conn.Txn_sav();}
+	public void Rls()		{conn.Txn_end();}
 }
 class Dg_file_tbl {
 	private String tbl_name = "dg_file"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
@@ -55,12 +55,12 @@ class Dg_file_tbl {
 			Db_meta_tbl meta = Db_meta_tbl.new_(tbl_name, flds
 			, Db_meta_idx.new_unique_by_tbl(tbl_name, "file_id", fld_file_id)
 			);
-			conn.Exec_create_tbl_and_idx(meta);
+			conn.Ddl_create_tbl(meta);
 		}
 		stmt_insert = null;
 	}
 	public void Insert(int file_id, String file_path, int rule_count) {
-		if (stmt_insert == null) stmt_insert = conn.Rls_reg(conn.Stmt_insert(tbl_name, flds));
+		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(tbl_name, flds);
 		stmt_insert.Clear()
 		.Val_int(fld_file_id	, file_id)
 		.Val_str(fld_file_path	, file_path)
@@ -68,7 +68,7 @@ class Dg_file_tbl {
 		.Exec_insert();
 	}
 }
-class Dg_rule_tbl {
+class Dg_rule_tbl implements RlsAble {
 	private String tbl_name = "dg_rule"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private String fld_file_id, fld_rule_id, fld_rule_idx, fld_rule_score, fld_rule_text;
 	private Db_conn conn; private Db_stmt stmt_insert;
@@ -83,12 +83,15 @@ class Dg_rule_tbl {
 			Db_meta_tbl meta = Db_meta_tbl.new_(tbl_name, flds
 			, Db_meta_idx.new_unique_by_tbl(tbl_name, "pkey", fld_rule_id)
 			);
-			conn.Exec_create_tbl_and_idx(meta);
+			conn.Ddl_create_tbl(meta);
 		}
-		stmt_insert = null;
+		conn.Rls_reg(this);
+	}
+	public void Rls() {
+		stmt_insert = Db_stmt_.Rls(stmt_insert);
 	}
 	public void Insert(int file_id, int rule_id, int rule_idx, int rule_score, String rule_text) {
-		if (stmt_insert == null) stmt_insert = conn.Rls_reg(conn.Stmt_insert(tbl_name, flds));
+		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(tbl_name, flds);
 		stmt_insert.Clear()
 		.Val_int(fld_file_id		, file_id)
 		.Val_int(fld_rule_id		, rule_id)
@@ -98,7 +101,7 @@ class Dg_rule_tbl {
 		.Exec_insert();
 	}
 }
-class Dg_page_score_tbl {
+class Dg_page_score_tbl implements RlsAble {
 	private String tbl_name = "dg_page_score"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private String fld_log_tid, fld_page_id, fld_page_ns, fld_page_ttl, fld_page_len, fld_page_score, fld_page_rule_count, fld_clude_type;
 	private Db_conn conn; private Db_stmt stmt_insert;
@@ -116,12 +119,16 @@ class Dg_page_score_tbl {
 			Db_meta_tbl meta = Db_meta_tbl.new_(tbl_name, flds
 			, Db_meta_idx.new_unique_by_tbl(tbl_name, "pkey", fld_log_tid, fld_page_id)
 			);
-			conn.Exec_create_tbl_and_idx(meta);
+			conn.Ddl_create_tbl(meta);
 		}
 		stmt_insert = null;
+		conn.Rls_reg(this);
+	}
+	public void Rls() {
+		stmt_insert = Db_stmt_.Rls(stmt_insert);
 	}
 	public void Insert(int log_tid, int page_id, int page_ns, byte[] page_ttl, int page_len, int page_score, int page_rule_count, int clude_type) {
-		if (stmt_insert == null) stmt_insert = conn.Rls_reg(conn.Stmt_insert(tbl_name, flds));
+		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(tbl_name, flds);
 		stmt_insert.Clear()
 		.Val_int(fld_log_tid		, log_tid)
 		.Val_int(fld_page_id		, page_id)
@@ -134,7 +141,7 @@ class Dg_page_score_tbl {
 		.Exec_insert();
 	}
 }
-class Dg_page_rule_tbl {
+class Dg_page_rule_tbl implements RlsAble {
 	private String tbl_name = "dg_page_rule"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private String fld_log_tid, fld_page_id, fld_rule_id, fld_rule_score_total;
 	private Db_conn conn; private Db_stmt stmt_insert;
@@ -148,12 +155,16 @@ class Dg_page_rule_tbl {
 			Db_meta_tbl meta = Db_meta_tbl.new_(tbl_name, flds
 			, Db_meta_idx.new_unique_by_tbl(tbl_name, "pkey", fld_log_tid, fld_page_id, fld_rule_id)
 			);
-			conn.Exec_create_tbl_and_idx(meta);
+			conn.Ddl_create_tbl(meta);
 		}
 		stmt_insert = null;
+		conn.Rls_reg(this);
+	}
+	public void Rls() {
+		stmt_insert = Db_stmt_.Rls(stmt_insert);
 	}
 	public void Insert(int log_tid, int page_id, int rule_id, int rule_score_total) {
-		if (stmt_insert == null) stmt_insert = conn.Rls_reg(conn.Stmt_insert(tbl_name, flds));
+		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(tbl_name, flds);
 		stmt_insert.Clear()
 		.Val_int(fld_log_tid			, log_tid)
 		.Val_int(fld_page_id			, page_id)

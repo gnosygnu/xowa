@@ -83,8 +83,8 @@ public class Gallery_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 		}
 	}
 	private void Init_atrs(Xowe_wiki wiki) {
-		Db_cfg_grp cfg_grp = wiki.File_mgr().Cfg_get(Xof_fsdb_mgr_cfg.Grp_xowa);
-		if (cfg_grp.Get_yn_or_n(Xof_fsdb_mgr_cfg.Key_gallery_fix_defaults)) {
+		Db_cfg_hash cfg_grp = wiki.File_mgr().Cfg_get(Xof_fsdb_mgr_cfg.Grp_xowa);
+		if (cfg_grp.Get(Xof_fsdb_mgr_cfg.Key_gallery_fix_defaults).To_yn_or_n()) {
 			if (itm_w == Gallery_xnde.Null && itm_h == Gallery_xnde.Null)	// if no w/h specified, set both to default (just like v1)
 				itm_w = itm_h = Gallery_xnde.Default;
 		}
@@ -94,7 +94,7 @@ public class Gallery_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 		}
 		gallery_mgr = Gallery_mgr_base_.New_by_mode(mode);
 		if (	!wiki.File_mgr().Version_1_y()											// v2: fsdb
-			&&	!cfg_grp.Get_yn_or_n(Xof_fsdb_mgr_cfg.Key_gallery_packed) 				// packed not supported
+			&&	!cfg_grp.Get(Xof_fsdb_mgr_cfg.Key_gallery_packed).To_yn_or_n() 			// packed not supported
 			) {
 			gallery_mgr = Gallery_mgr_base_.New_by_mode(Gallery_mgr_base_.Traditional_tid);	// always go to traditional
 			html_wtr_v1 = true;

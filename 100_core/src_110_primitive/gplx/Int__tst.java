@@ -26,7 +26,7 @@ public class Int__tst {
 		tst_XtoStr_PadLeft_Zeroes(-12	, 3, "-12");		// negative
 		tst_XtoStr_PadLeft_Zeroes(-123	, 3, "-123");		// negative
 		tst_XtoStr_PadLeft_Zeroes(-1234	, 3, "-1234");		// negative
-	}	void tst_XtoStr_PadLeft_Zeroes(int val, int zeros, String expd) {Tfds.Eq(expd, Int_.Xto_str_pad_bgn(val, zeros));}
+	}	void tst_XtoStr_PadLeft_Zeroes(int val, int zeros, String expd) {Tfds.Eq(expd, Int_.Xto_str_pad_bgn_zero(val, zeros));}
 	@Test  public void parseOr_() {
 		tst_ParseOr("", -1);		// empty
 		tst_ParseOr("123", 123);	// single

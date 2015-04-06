@@ -16,43 +16,24 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
-import gplx.ios.*; import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; 
+import gplx.ios.*; import gplx.dbs.*;
 import gplx.fsdb.data.*;
-public class Fsm_bin_fil implements RlsAble {
-	public Fsm_bin_fil(int id, Io_url url, long bin_len, long bin_max, byte cmd_mode) {
-		this.id = id; this.url = url; this.bin_len = bin_len; this.bin_max = bin_max; this.cmd_mode = cmd_mode;
+public class Fsm_bin_fil {
+	private final Fsd_bin_tbl tbl;
+	public Fsm_bin_fil(int id, String url_rel, long bin_len, Db_conn conn, boolean schema_is_1) {
+		this.id = id; this.url_rel = url_rel; this.bin_len = bin_len; this.conn = conn;
+		this.tbl = new Fsd_bin_tbl(conn, schema_is_1);
 	}
-	public int Id() {return id;} private final int id;
-	public Io_url Url() {return url;} private final Io_url url;
-	public long Bin_max() {return bin_max;} private long bin_max;
-	public void Bin_max_(long v) {
-		bin_max = v; 
-		if (cmd_mode == Db_cmd_mode.Tid_ignore) cmd_mode = Db_cmd_mode.Tid_update;
+	public int				Id()		{return id;}		private final int id;
+	public String			Url_rel()	{return url_rel;}	private final String url_rel;
+	public long				Bin_len()	{return bin_len;}	private void Bin_len_(long v) {bin_len = v;} private long bin_len; 
+	public Db_conn			Conn()		{return conn;}		private final Db_conn conn;
+	public boolean				Select_to_url(int id, Io_url url)	{return tbl.Select_to_url(id, url);}
+	public Io_stream_rdr	Select_as_rdr(int id)				{return tbl.Select_as_rdr(id);}
+	public void				Insert(int bin_id, byte owner_tid, long rdr_len, gplx.ios.Io_stream_rdr rdr) {
+		tbl.Insert_rdr(bin_id, owner_tid, rdr_len, rdr);
+		Bin_len_(bin_len + rdr_len);
 	}
-	public long Bin_len() {return bin_len;} private long bin_len;
-	public void Bin_len_(long v) {
-		bin_len = v; 
-		if (cmd_mode == Db_cmd_mode.Tid_ignore) cmd_mode = Db_cmd_mode.Tid_update;
-	}
-	public byte Cmd_mode() {return cmd_mode;} public Fsm_bin_fil Cmd_mode_(byte v) {cmd_mode = v; return this;} private byte cmd_mode;
 	public static final Fsm_bin_fil[] Ary_empty = new Fsm_bin_fil[0];
-	private Fsd_bin_tbl bin_tbl = new Fsd_bin_tbl(); private Db_conn conn;
-	public static Fsm_bin_fil make_(int id, Io_url url, long bin_len, long bin_max) {
-		Fsm_bin_fil rv = new Fsm_bin_fil(id, url, bin_len, bin_max, Db_cmd_mode.Tid_create);
-		rv.Conn(); // force table create
-		return rv;
-	}
-	private static final String Db_conn_bldr_type = "gplx.fsdb.fsm_bin";
-	public Db_conn Conn() {
-		if (conn == null) {
-			Db_conn_bldr_data conn_data = Db_conn_bldr.I.Get_or_new(Db_conn_bldr_type, url);				
-			conn =  conn_data.Conn();
-			bin_tbl.Conn_(conn, conn_data.Created(), Bool_.Y);
-		}
-		return conn;
-	}
-	public long Insert(int bin_id, byte owner_tid, long bin_len, gplx.ios.Io_stream_rdr bin_rdr) {this.Conn(); return bin_tbl.Insert_rdr(bin_id, owner_tid, bin_len, bin_rdr);}
-	public boolean Get_to_url(int id, Io_url url) {this.Conn(); return bin_tbl.Select_to_url(id, url);}
-	public Io_stream_rdr Get_as_rdr(int id) {return bin_tbl.Select_as_rdr(this.Conn(), id);}
-	public void Rls() {if (conn != null) conn.Conn_term();}
+	public static final long Bin_len_null = 0;
 }

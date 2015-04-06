@@ -157,7 +157,7 @@ public class Wdata_wiki_mgr_fxt {
 		parser_fxt.Exec_parse_page_all_as_str(raw);
 		Bry_bfr tmp_bfr = wiki.Appe().Utl__bfr_mkr().Get_b512();
 		wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_view_mode.Tid_read).Wdata_lang_wtr().Page_(page).XferAry(tmp_bfr, 0);
-	    Tfds.Eq_str_lines(expd, tmp_bfr.Mkr_rls().Xto_str_and_clear());
+	    Tfds.Eq_str_lines(expd, tmp_bfr.To_str_and_rls());
 	}
 	public void Test_xwiki_links(String ttl, String... expd) {
 		tmp_langs.Clear();
@@ -179,6 +179,6 @@ public class Wdata_wiki_mgr_fxt {
 		raw_bry = gplx.json.Json_parser_tst.Replace_apos(raw_bry);
 		Bry_bfr bfr = app.Utl__bfr_mkr().Get_b512();
 		Wdata_wiki_mgr.Write_json_as_html(wdata_mgr.Jdoc_parser(), bfr, raw_bry);
-		Tfds.Eq(expd, bfr.Mkr_rls().Xto_str_and_clear());
+		Tfds.Eq(expd, bfr.To_str_and_rls());
 	}
 }

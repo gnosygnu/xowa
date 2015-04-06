@@ -16,17 +16,18 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.apps.*;
+import gplx.dbs.*; import gplx.xowa.apps.*;
 public class Xoa_app_fxt {
 	public static Xoae_app app_() {
 		Io_mgr._.InitEngine_mem();
+		Db_conn_bldr.I.Reg_default_mem();
 		return app_("linux", Io_url_.mem_dir_("mem/xowa/"));
 	}
 	public static Xoae_app app_(String op_sys, Io_url root_dir) {
 		Io_url user_dir = root_dir.GenSubDir_nest("user", "test_user");
 		Gfo_log_wtr_base._.Log_dir_(user_dir.GenSubDir_nest("tmp", "current"));			
 		Xoae_app app = new Xoae_app(Gfo_usr_dlg_base.test_(), root_dir, user_dir, op_sys);
-		app.Setup_mgr().Dump_mgr().Data_storage_format_(gplx.ios.Io_stream_.Tid_file);	// TEST: set data_storage_format to file, else bldr tests will fails (expects plain text)
+		app.Setup_mgr().Dump_mgr().Data_storage_format_(gplx.ios.Io_stream_.Tid_raw);	// TEST: set data_storage_format to file, else bldr tests will fails (expects plain text)
 		GfsCore._.Clear();							// NOTE: must clear
 		GfsCore._.AddCmd(app, Xoae_app.Invk_app);	// NOTE: must add app to GfsCore; app.Gfs_mgr() always adds current app to GfsCore; note this causes old test to leave behind GfsCore for new test
 		GfsCore._.AddCmd(app, Xoae_app.Invk_xowa);	// add alias for app; DATE:2014-06-09

@@ -18,12 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
 public class Db_stmt__mem implements Db_stmt {
 	private static final String Key_na = ""; // key is not_available; only called by procs with signature of Val(<type> v);
-	private final ListAdp val_list = ListAdp_.new_();
+	private final OrderedHash val_list = OrderedHash_.new_();
 	public Db_stmt__mem(Db_engine__mem engine, Db_qry qry) {Ctor_stmt(engine, qry);} private Db_engine__mem engine;
 	public void Ctor_stmt(Db_engine engine, Db_qry qry) {this.engine = (Db_engine__mem)engine; this.qry = qry;}
 	public HashAdp Crts() {return crt_hash;} private final HashAdp crt_hash = HashAdp_.new_();
 	public int Args_len() {return val_list.Count();}
-	public Object Args_get_at(int i) {return val_list.FetchAt(i);}
+	public Object Args_get_at(int i)	{return val_list.FetchAt(i);}
+	public Object Args_get_by(String k) {return val_list.Fetch(k);}
 	public Db_qry Qry() {return qry;} private Db_qry qry;
 	public Db_stmt Reset_stmt() {return this;}
 	public Db_stmt Clear() {
@@ -117,14 +118,15 @@ public class Db_stmt__mem implements Db_stmt {
 		return tbl.Delete(this);
 	}
 	public DataRdr Exec_select() {throw Err_.not_implemented_();}	
-	public Db_rdr Exec_select_as_rdr() {
+	public Db_rdr Exec_select__rls_auto() {return this.Exec_select__rls_manual();}
+	public Db_rdr Exec_select__rls_manual() {
 		Mem_tbl tbl = engine.Tbls_get(qry.Base_table());
 		return tbl.Select(this);
-	}	
+	}
 	public Object Exec_select_val() {throw Err_.not_implemented_();}
 	private void Add(String k, boolean where, Object v) {
-		if (k == Db_meta_fld.Key_null) return;	// key is explicitly null; ignore; allows version_2+ type definitions
-		val_list.Add(v);
+		if (k == Db_meta_fld.Key_null) return;	// key is explicitly null; ignore; allows schema_2+ type definitions
+		val_list.Add_if_new(k, v);				// NOTE: only add if new; WHERE with IN will call Add many times; fld_ttl IN ('A.png', 'B.png');
 		if (where) {
 			ListAdp list = (ListAdp)crt_hash.Fetch(k);
 			if (list == null) {

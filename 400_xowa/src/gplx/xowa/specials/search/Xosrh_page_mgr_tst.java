@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import org.junit.*; import gplx.xowa.tdbs.*;
+import org.junit.*; import gplx.xowa.tdbs.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xosrh_page_mgr_tst {
 	@Before public void init() {fxt.Clear();} private Xosrh_page_mgr_fxt fxt = new Xosrh_page_mgr_fxt();
 	@Test   public void Basic() {
@@ -42,17 +42,17 @@ class Xosrh_page_mgr_fxt {
 		return this;
 	}	private Xoae_app app; Xowe_wiki wiki; Bry_bfr tmp_bfr; Xosrh_page_mgr page_mgr; Xowd_hive_mgr hive_mgr;
 	public Xosrh_page_mgr_fxt Init_site_ids(int bgn, int end) {
-		Xodb_page tmp_itm = new Xodb_page();
+		Xowd_page_itm tmp_itm = new Xowd_page_itm();
 		for (int i = bgn; i < end; i++) {
 			byte[] id_bry = new byte[5];	// NOTE: do not reuse; will break hive_mgr
 			Base85_utl.XtoStrByAry(i, id_bry, 0, 5);
 			tmp_itm.Ns_id_(Xow_ns_.Id_main).Init(i, Bry_.XtoStrBytesByInt(i, 0), false, 10, 0, i - bgn);
-			Xodb_page_.Txt_id_save(tmp_bfr, tmp_itm);
+			Xotdb_page_itm_.Txt_id_save(tmp_bfr, tmp_itm);
 			hive_mgr.Create(id_bry, tmp_bfr.Xto_bry_and_clear(), null);
 		}
 		return this;
 	}
-	// public Xodb_page Set_all(int id, int fil_idx, int row_idx, boolean type_redirect, int itm_len, int ns_id, byte[] ttl) {
+	// public Xowd_page_itm Set_all(int id, int fil_idx, int row_idx, boolean type_redirect, int itm_len, int ns_id, byte[] ttl) {
 	public Xosrh_page_mgr_fxt Init_sort_by_name_(boolean v) {page_mgr.Sort_tid_(v ? Xosrh_rslt_itm_sorter.Tid_ttl_asc : Xosrh_rslt_itm_sorter.Tid_len_dsc); return this;}
 	public Xosrh_page_mgr_fxt Init_itms_per_page_(int v) {page_mgr.Itms_per_page_(v); return this;}
 	public Xosrh_page_mgr_searcher_mok ids_(int bgn, int end) {
@@ -61,7 +61,7 @@ class Xosrh_page_mgr_fxt {
 		for (int i = 0; i < len; i++) {
 			int itm_id = i + bgn;
 			int itm_len = itm_id;
-			Xodb_page itm = Xodb_page.new_srch(itm_id, itm_len);
+			Xowd_page_itm itm = Xowd_page_itm.new_srch(itm_id, itm_len);
 			rv.Add(itm);
 		}
 		return new Xosrh_page_mgr_searcher_mok(rv);
@@ -75,7 +75,7 @@ class Xosrh_page_mgr_fxt {
 		int len = page.Itms_len();
 		int[] rv = new int[len];
 		for (int i = 0; i < len; i++) {
-			rv[i] = ((Xodb_page)page.Itms_get_at(i)).Id();
+			rv[i] = ((Xowd_page_itm)page.Itms_get_at(i)).Id();
 		}
 		return rv;
 	}

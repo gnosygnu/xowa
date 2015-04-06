@@ -466,7 +466,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 								ctx.Msg_log().Add_itm_none(Xop_xnde_log.Auto_closing_section, src, bgn_nde.Src_bgn(), bgn_nde.Name_end());
 						}
 						else
-							ctx.Stack_autoClose(root, src, tkn, bgn_pos, cur_pos, Xop_tkn_itm_.Tid_xnde);
+							ctx.Stack_auto_close(root, src, tkn, bgn_pos, cur_pos, Xop_tkn_itm_.Tid_xnde);
 					}
 				}
 			}
@@ -559,7 +559,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		if (tag_id == -1) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not extract int: page=~{0}", ctx.Cur_page().Url().Xto_full_str_safe()); return Bry_finder.Not_found;}
 		Bry_bfr tmp = ctx.Wiki().Utl__bfr_mkr().Get_b128();
 		tmp.Add(Pfunc_tag.Xtag_end_lhs).Add_int_pad_bgn(Byte_ascii.Num_0, 10, tag_id).Add(Pfunc_tag.Xtag_rhs);
-		byte[] tag_end = tmp.Mkr_rls().Xto_bry_and_clear();
+		byte[] tag_end = tmp.To_bry_and_rls();
 		int rv = Bry_finder.Find_fwd(src, tag_end, open_end + Pfunc_tag.Xtag_rhs.length);
 		if (rv == Bry_finder.Not_found) {ctx.App().Usr_dlg().Warn_many("", "", "parser.xtn: could not find end: page=~{0}", ctx.Cur_page().Url().Xto_full_str_safe()); return Bry_finder.Not_found;}
 		rv = Bry_finder.Find_bwd(src, Byte_ascii.Lt, rv - 1);

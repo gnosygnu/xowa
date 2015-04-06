@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
 public class Db_rdr_ {
-	public static final Db_rdr Null = new Db_rdr__null();
+	public static final Db_rdr Empty = new Db_rdr__empty();
 }
-class Db_rdr__null implements Db_rdr {
+class Db_rdr__empty implements Db_rdr {
 	public boolean			Move_next()						{return false;}
 	public byte[]		Read_bry(int i)					{return Bry_.Empty;}
 	public byte[]		Read_bry(String k)				{return Bry_.Empty;}

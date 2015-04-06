@@ -171,7 +171,7 @@ class Xow_lang_html implements Bry_fmtr_arg {
 				if (i != 0) bfr.Add_byte_comma();
 				byte[] badge = badges[i];
 				byte[] badge_cls = (byte[])badges_hash.Get_by_bry(badge);
-				if (badge_cls == null) Gfo_usr_dlg_._.Warn_many("", "", "unknown badge: badge=~{0}", String_.new_utf8_(badge));
+				if (badge_cls == null) Gfo_usr_dlg_.I.Warn_many("", "", "unknown badge: badge=~{0}", String_.new_utf8_(badge));
 				else bfr.Add(badge_cls);
 			}
 		}

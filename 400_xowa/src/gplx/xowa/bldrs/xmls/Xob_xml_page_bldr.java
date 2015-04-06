@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.xmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.ios.*;
+import gplx.ios.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xob_xml_page_bldr {
 	public byte[] Xto_bry() {return bfr.Xto_bry_and_clear();}
 	public Io_buffer_rdr XtoByteStreamRdr() {return XtoByteStreamRdr(Io_mgr.Len_kb);}
@@ -32,12 +32,12 @@ public class Xob_xml_page_bldr {
 		bfr.Add_str(all);
 		return this;
 	}
-	public Xob_xml_page_bldr Add_ary(Xodb_page... ary) {
-		for (Xodb_page doc : ary)
+	public Xob_xml_page_bldr Add_ary(Xowd_page_itm... ary) {
+		for (Xowd_page_itm doc : ary)
 			Add(doc);
 		return this;
 	}
-	public Xob_xml_page_bldr Add(Xodb_page doc) {
+	public Xob_xml_page_bldr Add(Xowd_page_itm doc) {
 		bfr.Add(Indent_2).Add(Xob_xml_parser_.Bry_page_bgn).Add_byte_nl();
 		bfr.Add(Indent_4).Add(Xob_xml_parser_.Bry_title_bgn).Add(doc.Ttl_full_db()).Add(Xob_xml_parser_.Bry_title_end).Add_byte_nl();
 		bfr.Add(Indent_4).Add(Xob_xml_parser_.Bry_id_bgn).Add_int_variable(doc.Id()).Add(Xob_xml_parser_.Bry_id_end).Add_byte_nl();
@@ -51,7 +51,7 @@ public class Xob_xml_page_bldr {
 		bfr.Add(Indent_6).Add(Xob_xml_parser_.Bry_contributor_end).Add_byte_nl();
 		bfr.Add(Indent_6).Add(Xob_xml_parser_.Bry_minor_bgn_frag).Add(Nde_inline).Add_byte_nl();
 		bfr.Add(Indent_6).Add(Xob_xml_parser_.Bry_comment_bgn).Add(Revision_comment).Add(Xob_xml_parser_.Bry_comment_end).Add_byte_nl();
-		bfr.Add(Indent_6).Add(Xob_xml_parser_.Bry_text_bgn).Add(doc.Wtxt()).Add(Xob_xml_parser_.Bry_text_end).Add_byte_nl();
+		bfr.Add(Indent_6).Add(Xob_xml_parser_.Bry_text_bgn).Add(doc.Text()).Add(Xob_xml_parser_.Bry_text_end).Add_byte_nl();
 		bfr.Add(Indent_4).Add(Xob_xml_parser_.Bry_revision_end).Add_byte_nl();
 		bfr.Add(Indent_2).Add(Xob_xml_parser_.Bry_page_end).Add_byte_nl();
 		return this;

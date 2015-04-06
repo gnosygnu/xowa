@@ -51,5 +51,5 @@ public class Xoh_file_html_fmtr__hdump extends Xoh_file_html_fmtr__base {
 		bfr.Add_int_variable(uid);
 		bfr.Add(Bry_xnde_end);
 	}	private static final byte[] Bry_xnde_end = Bry_.new_ascii_("'/>");
-        public static final Xoh_file_html_fmtr__hdump Hdump = new Xoh_file_html_fmtr__hdump(); Xoh_file_html_fmtr__hdump() {}
+	public static final Xoh_file_html_fmtr__hdump Hdump = new Xoh_file_html_fmtr__hdump(); Xoh_file_html_fmtr__hdump() {}
 }

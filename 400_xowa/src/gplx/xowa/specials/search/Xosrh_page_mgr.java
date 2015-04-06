@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
+import gplx.xowa.wikis.data.tbls.*;
 public class Xosrh_page_mgr implements Xosrh_page_mgr_searcher {
 	public int Pages_len() {return pages_ary.length;}
 	public int Itms_bgn() {return itms_bgn;} private int itms_bgn;
@@ -66,7 +67,7 @@ public class Xosrh_page_mgr implements Xosrh_page_mgr_searcher {
 		}
 		rv = new Xosrh_rslt_grp(page_idx);
 		for (int i = itms_bgn; i < itms_end; i++)
-			rv.Itms_add((Xodb_page)cur_ids.FetchAt(i));
+			rv.Itms_add((Xowd_page_itm)cur_ids.FetchAt(i));
 		pages_ary[page_idx] = rv;
 		rv.Itms_total_(cur_ids.Count());
 		return rv;

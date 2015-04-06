@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.allPages; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import org.junit.*;
+import org.junit.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xows_page_allpages_tst {		
 	@Before public void init() {fxt.Clear();} private Xows_page_allpages_fxt fxt = new Xows_page_allpages_fxt();
 	@Test  public void Build_data() {
@@ -144,17 +144,17 @@ class Xows_page_allpages_fxt {
 	public Xows_page_allpages_fxt Expd_display_ttl(String v) {expd_display_ttl = v; return this;} private String expd_display_ttl;
 	public Xows_page_allpages_fxt Expd_address_page(String v) {expd_address_page = v; return this;} private String expd_address_page;
 
-	public static String Xto_str(Xowe_wiki wiki, Xodb_page v) {
+	public static String Xto_str(Xowe_wiki wiki, Xowd_page_itm v) {
 		if (v == null) return null;
 		Xow_ns ns = wiki.Ns_mgr().Ids_get_or_null(v.Ns_id());
 		String ns_str = ns == null ? "" : String_.new_ascii_(ns.Name_db_w_colon());
 		return ns_str + String_.new_ascii_(v.Ttl_page_db());
 	}
-	public static String[] Xto_str_ary(Xowe_wiki wiki, Xodb_page[] ary) {
+	public static String[] Xto_str_ary(Xowe_wiki wiki, Xowd_page_itm[] ary) {
 		int ary_len = ary.length;
 		String[] rv = new String[ary_len];
 		for (int i = 0; i < ary_len; i++) {
-			Xodb_page itm = ary[i];
+			Xowd_page_itm itm = ary[i];
 			rv[i] = Xto_str(wiki, itm);
 		}
 		return rv;

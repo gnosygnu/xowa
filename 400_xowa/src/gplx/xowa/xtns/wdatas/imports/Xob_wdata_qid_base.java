@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
-import gplx.json.*; import gplx.ios.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.parsers.*;
+import gplx.json.*; import gplx.ios.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.parsers.*; import gplx.xowa.wikis.data.tbls.*;
 public abstract class Xob_wdata_qid_base extends Xob_itm_dump_base implements Xobd_wkr, GfoInvkAble {
 	public Xob_wdata_qid_base Ctor(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki); return this;}
 	public abstract String Wkr_key();
@@ -29,18 +29,18 @@ public abstract class Xob_wdata_qid_base extends Xob_itm_dump_base implements Xo
 		parser = bldr.App().Wiki_mgr().Wdata_mgr().Jdoc_parser();
 		this.Qid_bgn();
 	}	private Json_parser parser;
-	public void Wkr_run(Xodb_page page) {
+	public void Wkr_run(Xowd_page_itm page) {
 		if (page.Ns_id() != Xow_ns_.Id_main) return;	// qid pages are only in the Main namespace
-		Json_doc jdoc = parser.Parse(page.Wtxt()); 
+		Json_doc jdoc = parser.Parse(page.Text()); 
 		if (jdoc == null) {
 			bldr.Usr_dlg().Warn_many(GRP_KEY, "json.invalid", "json is invalid: ns=~{0} id=~{1}", page.Ns_id(), String_.new_utf8_(page.Ttl_page_db()));
 			return;
 		}
 		Wdata_doc_parser wdoc_parser = app.Wiki_mgr().Wdata_mgr().Wdoc_parser(jdoc);
-		byte[] qid = wdoc_parser.Parse_qid(jdoc);
+		byte[] qid = wdoc_parser.Parse_qid(jdoc);			
 		OrderedHash sitelinks = wdoc_parser.Parse_sitelinks(qid, jdoc);
 		int sitelinks_len = sitelinks.Count(); if (sitelinks_len == 0) return;	// no subs; return;
-		Wdata_sitelink_itm main_sitelink = null;
+		Wdata_sitelink_itm main_sitelink = null;		// SEE:NOTE_1:non-english non-main titles
 		for (int i = 0; i < sitelinks_len; i++) {		// iterate links; find main_sitelink (hopefully enwiki)
 			Wdata_sitelink_itm sitelink = (Wdata_sitelink_itm)sitelinks.FetchAt(i);
 			byte[] xwiki_key = sitelink.Site();
@@ -50,7 +50,7 @@ public abstract class Xob_wdata_qid_base extends Xob_itm_dump_base implements Xo
 				main_sitelink = sitelink;
 		}
 
-		Xoa_ttl core_ttl = Xoa_ttl.parse_(wiki, main_sitelink.Name());	// NOTE: parse ttl to get ns; this may still be inaccurate as it is using wikidata's ns, not enwiki's;; DATE:2014-07-23
+		Xoa_ttl core_ttl = Xoa_ttl.parse_(wiki, main_sitelink.Name());	// NOTE: parse ttl to get ns; this may still be inaccurate as it is using wikidata's ns, not enwiki's; DATE:2014-07-23
 		Xow_ns core_ns = core_ttl.Ns();
 		boolean core_ns_is_main = core_ns.Id_main();
 		
@@ -66,7 +66,7 @@ public abstract class Xob_wdata_qid_base extends Xob_itm_dump_base implements Xo
 				int colon_pos = Bry_finder.Find_fwd(data_ttl_bry, Byte_ascii.Colon);
 				int data_ttl_len = data_ttl_bry.length;
 				if (colon_pos == Bry_.NotFound || colon_pos == data_ttl_len - 1) {
-					bldr.App().Usr_dlg().Log_many(GRP_KEY, "ns_not_found", "namespace not found; ~{0} ~{1} ~{2}", String_.new_ascii_(qid), core_ns.Name_str(), String_.new_utf8_(data_ttl_bry));
+					bldr.App().Usr_dlg().Log_many(GRP_KEY, "ns_not_found", "namespace not found; qid=~{0} ns=~{1} ttl=~{2}", qid, core_ns.Name_str(), data_ttl_bry);
 					actl_ttl = data_ttl_bry;
 				}
 				else
@@ -99,3 +99,23 @@ class Wdata_idx_bldr_qid extends Wdata_idx_mgr_base {
 		return (Wdata_idx_wtr)rv;
 	}
 }
+/*
+NOTE_1:non-english non-main titles
+The problem is that sitelinks have full titles which namespace names. EX:frwiki|Aide:Page1
+. there is no way to know that "Aide" is "ns 6" in frwiki without loading up the ns names of frwiki
+. furthermore, ttls can have ":" in the main namespace; EX:frwiki|Aidex:Page1 is actually in ns 0
+The ideal approach is to load up a ns_mgr for every wiki. this is problematic:
+. memory space: potentially 800+ wikis
+. data availability: wikidata dump does not have ns names for other wikis, so they need to be provided beforehand (in a new xowa.gfs file)
+So, for now, employ the following workaround:
+. find the ns of the baseline sitelink: (a) enwiki; (b) wiki; (c) 1st (not commons)
+. parse each sitelink
+.. if a sitelink has no ":", it must be in the main ns
+.. if a sitelink has a ":"
+... try to parse import wikidata.org's ns_mgr. this will find simple ns like "Category", "File", etc.
+... if no ns, use the ns of the baseline sitelink
+Note that this approach still fails in following situations
+. baseline sitelink is in non-English ns.*; EX: fr.w|Aide:Page1 en.d|Help:Page1; fr.w is identified as main ns but en.d is put in Help ns
+. the wrong sitelink is chosen as baseline; EX:: en.w|Category:Page1 de.w|Page1 es.w|Page1 ru.w|MainNs:Page1; ru.w is put in Category Ns
+. a non-English title happens to have an English ns name in its main ns; EX:fr.w|Category:Page1; fr.w should be in Main ns (since no "Category" ns name in fr.w), but put in Category
+*/

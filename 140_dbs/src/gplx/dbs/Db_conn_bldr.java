@@ -20,11 +20,12 @@ public class Db_conn_bldr {
 	private Db_conn_bldr_wkr wkr;
 	public void Reg_default_sqlite()	{wkr = Db_conn_bldr_wkr__sqlite.I; wkr.Clear_for_tests();}
 	public void Reg_default_mem()		{wkr = Db_conn_bldr_wkr__mem.I; wkr.Clear_for_tests();}
-	public Db_conn Get(String type, Object url_obj) {return wkr.Get(type, url_obj);}
-	public Db_conn New(String type, Object url_obj) {return wkr.New(type, url_obj);}
-	public Db_conn_bldr_data Get_or_new(String type, Object url_obj) {
-		boolean exists = wkr.Exists(type, url_obj);
-		Db_conn conn = exists ? Get(type, url_obj) : New(type, url_obj);
+	public boolean Exists(Io_url url) {return wkr.Exists(url);}
+	public Db_conn Get(Io_url url) {return wkr.Get(url);}
+	public Db_conn New(Io_url url) {return wkr.New(url);}
+	public Db_conn_bldr_data Get_or_new(Io_url url) {
+		boolean exists = wkr.Exists(url);
+		Db_conn conn = exists ? Get(url) : New(url);
 		return new Db_conn_bldr_data(conn, exists);
 	}
         public static final Db_conn_bldr I = new Db_conn_bldr(); Db_conn_bldr() {}

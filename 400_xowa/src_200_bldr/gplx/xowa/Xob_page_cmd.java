@@ -16,9 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-interface Xodb_page_cmd {
+import gplx.xowa.wikis.data.tbls.*;
+interface Xowd_page_cmd {
 	String Cmd_key();
 	void Cmd_bgn(Xob_bldr bldr);
-	void Cmd_run(Xodb_page page);
+	void Cmd_run(Xowd_page_itm page);
 	void Cmd_end();
 }

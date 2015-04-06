@@ -35,7 +35,7 @@ public class Xoh_page_body_cls {	// REF.MW:Skin.php|getPageClasses
 					tmp_bfr.Add_byte_space().Add(Bry_wb_propertypage).Add_byte(Byte_ascii.Dash).Add(ttl.Page_db());
 					break;
 				default:
-					Gfo_usr_dlg_._.Warn_many("", "", "unexpected ns for page_body_cls; ttl=~{0}", String_.new_utf8_(ttl.Raw()));
+					Gfo_usr_dlg_.I.Warn_many("", "", "unexpected ns for page_body_cls; ttl=~{0}", String_.new_utf8_(ttl.Raw()));
 					break;
 			}
 		}

@@ -35,7 +35,7 @@ public class Xotdb_fsys_mgr {
 	public Io_url Url_ns_fil(byte tid, int ns_id, int fil_idx) {
 		Xotdb_dir_info dir_info = dir_regy[tid];
 		String dir_name = dir_info.Name() + Xotdb_dir_info.Wtr_dir(dir_info.Ext_tid());
-		return Xotdb_fsys_mgr.Url_fil(ns_dir.GenSubDir_nest(Int_.Xto_str_pad_bgn(ns_id, 3), dir_name), fil_idx, dir_regy[tid].Ext_bry());
+		return Xotdb_fsys_mgr.Url_fil(ns_dir.GenSubDir_nest(Int_.Xto_str_pad_bgn_zero(ns_id, 3), dir_name), fil_idx, dir_regy[tid].Ext_bry());
 	}
 	public Io_url Url_site_fil(byte tid, int fil_idx)	{return Xotdb_fsys_mgr.Url_fil(Url_site_dir(tid), fil_idx, Xotdb_dir_info_.Bry_xdat);}
 	public Io_url Url_site_reg(byte tid)				{return Url_site_dir(tid).GenSubFil(Xotdb_dir_info_.Name_reg_fil);}
@@ -53,11 +53,11 @@ public class Xotdb_fsys_mgr {
 	private static void Scan_dirs_zip(Xotdb_fsys_mgr fsys_mgr, byte id) {
 		Io_url[] dirs = Io_mgr._.QueryDir_args(fsys_mgr.Ns_dir().GenSubDir_nest("000")).FilPath_("*page*").DirOnly_().Recur_(false).ExecAsUrlAry();
 		int len = dirs.length;
-		byte tid = gplx.ios.Io_stream_.Tid_file;	// needed for Xoa_xowa_exec_tst
+		byte tid = gplx.ios.Io_stream_.Tid_raw;	// needed for Xoa_xowa_exec_tst
 		for (int i = 0; i < len; i++) {
 			Io_url dir = dirs[i];
 			String dir_name = dir.NameOnly();
-			if		(String_.Eq(dir_name, "page"))			{tid = gplx.ios.Io_stream_.Tid_file; break;} 
+			if		(String_.Eq(dir_name, "page"))			{tid = gplx.ios.Io_stream_.Tid_raw; break;} 
 			else if	(String_.Eq(dir_name, "page_zip"))		tid = gplx.ios.Io_stream_.Tid_zip;
 			else if	(String_.Eq(dir_name, "page_gz"))		tid = gplx.ios.Io_stream_.Tid_gzip;
 			else if	(String_.Eq(dir_name, "page_bz2"))		tid = gplx.ios.Io_stream_.Tid_bzip2;

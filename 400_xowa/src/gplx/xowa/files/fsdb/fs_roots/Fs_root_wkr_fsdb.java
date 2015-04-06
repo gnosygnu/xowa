@@ -64,7 +64,7 @@ public class Fs_root_wkr_fsdb {
 		orig_dir_mgr_init(orig_dir);
 	}
 	private void orig_dir_mgr_init(Io_url orig_dir) {
-		orig_dir_mgr.Init(orig_dir, new Db_cfg_tbl(), new Orig_fil_tbl(), wiki.Appe().Usr_dlg(), wiki.Appe().File_mgr().Img_mgr().Wkr_query_img_size());
+		orig_dir_mgr.Init(orig_dir, new Orig_fil_tbl(), wiki.Appe().Usr_dlg(), wiki.Appe().File_mgr().Img_mgr().Wkr_query_img_size());
 	}
 	public void Thumb_dir_(Io_url v) {
 		thumb_dir = v;

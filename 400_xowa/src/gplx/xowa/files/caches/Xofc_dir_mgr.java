@@ -81,12 +81,12 @@ class Xofc_dir_mgr {
 	private void Db_recalc_next_id(Xofc_dir_itm itm, String err) {
 		if (String_.Has(err, "PRIMARY KEY must be unique")) { // primary key exception in strange situations (multiple xowas at same time)
 			int next_id = tbl.Select_max_uid() + 1;				
-			Gfo_usr_dlg_._.Warn_many("", "", "uid out of sync; incrementing; uid=~{0} name=~{1} err=~{2}", itm.Id(), String_.new_utf8_(itm.Name()), err);
+			Gfo_usr_dlg_.I.Warn_many("", "", "uid out of sync; incrementing; uid=~{0} name=~{1} err=~{2}", itm.Id(), String_.new_utf8_(itm.Name()), err);
 			itm.Id_(next_id);
 			cache_mgr.Next_id_(next_id + 1);
 			err = tbl.Db_save(itm);
 			if (err == null) return;
 		}
-		Gfo_usr_dlg_._.Warn_many("", "", "failed to save uid; uid=~{0} name=~{1} err=~{2}", itm.Id(), String_.new_utf8_(itm.Name()), err);
+		Gfo_usr_dlg_.I.Warn_many("", "", "failed to save uid; uid=~{0} name=~{1} err=~{2}", itm.Id(), String_.new_utf8_(itm.Name()), err);
 	}
 }

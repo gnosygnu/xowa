@@ -31,4 +31,5 @@ public class Db_meta_idx {
 	public static Db_meta_idx new_unique_by_tbl_wo_null(String tbl, String name, String... flds)	{return new Db_meta_idx(tbl, Bld_idx_name(tbl, name), Bool_.Y, String_.Ary_wo_null(flds));}
 	public static Db_meta_idx new_normal_by_tbl_wo_null(String tbl, String name, String... flds)	{return new Db_meta_idx(tbl, Bld_idx_name(tbl, name), Bool_.N, String_.Ary_wo_null(flds));}
 	public static String Bld_idx_name(String tbl, String suffix) {return String_.Concat(tbl, "__", suffix);}
+	public static final Db_meta_idx[] Ary_empty = new Db_meta_idx[0];
 }

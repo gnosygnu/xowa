@@ -65,7 +65,7 @@ public class OrderedHash_base extends HashAdp_base implements OrderedHash, GfoIn
 		int count = ordered.Count();
 		int pad = String_.Len(Int_.Xto_str(count));
 		for (int i = 0; i < count; i++) {
-			sb	.Add(Int_.Xto_str_pad_bgn(i, pad))
+			sb	.Add(Int_.Xto_str_pad_bgn_zero(i, pad))
 				.Add(":").Add(ordered.FetchAt(i).toString())
 				.Add(Op_sys.Cur().Nl_str());
 		}

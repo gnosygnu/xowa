@@ -103,6 +103,6 @@ public class Xow_hzip_mgr {
 	private Btrie_slim_mgr btrie = Btrie_slim_mgr.cs_()
 	.Add_str_byte("<a "			, Tid_a_lhs)
 	.Add_str_byte("</a>"		, Tid_a_rhs)
-	.Add_str_byte("<h"			, Tid_h_lhs)
+//		.Add_str_byte("<h"			, Tid_h_lhs)
 	;
 }

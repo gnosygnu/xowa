@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.core.primitives.*;
+import gplx.core.primitives.*; import gplx.xowa.wikis.data.tbls.*;
 class Xog_search_suggest_cmd implements GfoInvkAble, Cancelable {
 	public Xog_search_suggest_cmd(Xoae_app app, Xog_search_suggest_mgr mgr) {
 		this.app = app; this.mgr = mgr;
@@ -60,19 +60,19 @@ class Xog_search_suggest_cmd implements GfoInvkAble, Cancelable {
 	}
 	private boolean Search_by_all_pages_v1() {
 		rslts_2.Clear();
-		Xodb_page rslt_nxt = new Xodb_page();
-		Xodb_page rslt_prv = new Xodb_page();
+		Xowd_page_itm rslt_nxt = new Xowd_page_itm();
+		Xowd_page_itm rslt_prv = new Xowd_page_itm();
 		Xoa_ttl search_ttl = Xoa_ttl.parse_(wiki, search_bry); if (search_ttl == null) return false;
 		byte[] search_ttl_bry = search_ttl.Page_db();
 		ListAdp page_list = ListAdp_.new_();
 		wiki.Db_mgr().Load_mgr().Load_ttls_for_all_pages(this, page_list, rslt_nxt, rslt_prv, Int_obj_ref.zero_(), wiki.Ns_mgr().Ns_main(), search_ttl_bry, max_results, all_pages_min, all_pages_extend, true, false);
-		Xodb_page[] page_ary = (Xodb_page[])page_list.Xto_ary_and_clear(Xodb_page.class);
+		Xowd_page_itm[] page_ary = (Xowd_page_itm[])page_list.Xto_ary_and_clear(Xowd_page_itm.class);
 		int idx = 0, page_ary_len = page_ary.length;
 		for (int i = 0; i < page_ary_len; i++) {
-			Xodb_page page = page_ary[i];
+			Xowd_page_itm page = page_ary[i];
 			if (page != null) {
 				if (!Bry_.HasAtBgn(page.Ttl_page_db(), search_ttl_bry)) continue;	// look-ahead may return other titles that don't begin with search; ignore
-				if (page.Wtxt_len() > all_pages_min) {
+				if (page.Text_len() > all_pages_min) {
 					rslts_2.Add(page);
 					idx++;
 				}
@@ -89,16 +89,16 @@ class Xog_search_suggest_cmd implements GfoInvkAble, Cancelable {
 		for (int i = 0; i < len; i++)
 			rslts_1.Add(rv.Itms_get_at(i));
 		if (canceled) {working = false; return false;}
-		rslts_1.SortBy(Xodb_page_sorter.EnyLenDsc);
+		rslts_1.SortBy(Xowd_page_itm_sorter.EnyLenDsc);
 		if (canceled) {working = false; return false;}
 		if (len > max_results) len = max_results;
 		rslts_2.Clear();
 		for (int i = 0; i < len; i++)
 			rslts_2.Add(rslts_1.FetchAt(i));
 		if (canceled) {working = false; return false;}
-		rslts_2.SortBy(Xodb_page_sorter.IdAsc);
+		rslts_2.SortBy(Xowd_page_itm_sorter.IdAsc);
 		wiki.Db_mgr().Load_mgr().Load_by_ids(this, rslts_2, 0, len);
-		rslts_2.SortBy(Xodb_page_sorter.TitleAsc);
+		rslts_2.SortBy(Xowd_page_itm_sorter.TitleAsc);
 		if (canceled) {working = false; return false;}
 		return true;
 	}

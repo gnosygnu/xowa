@@ -96,7 +96,7 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 			seen.AddKeyVal(domain);
 			fmtr.Bld_bfr_many(tmp_bfr, key);
 		}
-		return tmp_bfr.Mkr_rls().Xto_str_and_clear();
+		return tmp_bfr.To_str_and_rls();
 	}
 	public void Add_bulk_peers(byte[] raw) {
 		byte[][] keys = Bry_.Split(raw, Byte_ascii.Tilde);

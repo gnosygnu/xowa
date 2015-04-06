@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wmfs.apis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wmfs.*;
 public class Xoapi_orig_wmf extends Xoapi_orig_base {
 	@Override public boolean Api_query_size_exec(Xoapi_orig_rslts rv, Xof_download_wkr download_wkr, byte[] ttl, int width, int height, Gfo_usr_dlg usr_dlg, byte[] repo_wiki_key) {
+		if (Env_.Mode_testing()) return false; // TEST: disable during tests else scrib_lib_title will try to call WMF API; DATE:2015-03-20
 		String src = Bld_api_url(repo_wiki_key, ttl, width, height);
 		// xrg.Prog_fmt_hdr_(); // TOMBSTONE: do not uncomment; api will reuse whatever's in place
 		byte[] xml = download_wkr.Download_xrg().Exec_as_bry(src);

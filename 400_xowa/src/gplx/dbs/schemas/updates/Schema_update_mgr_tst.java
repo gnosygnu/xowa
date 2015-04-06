@@ -40,7 +40,7 @@ class Schema_update_mgr_fxt {
 	public void Test_exec_n(Schema_update_cmd cmd) {Test_exec(cmd, Bool_.N);}
 	private void Test_exec(Schema_update_cmd cmd, boolean expd) {
 		update_mgr.Add(cmd);
-		update_mgr.Update(db_mgr, Db_conn_.Null);
+		update_mgr.Update(db_mgr, Db_conn_.Empty);
 		Tfds.Eq(expd, cmd.Exec_is_done());
 	}
 }

@@ -41,14 +41,14 @@ public class Xoa_gfs_mgr implements GfoInvkAble, GfoInvkRootWkr {
 		catch (Exception e) {				// gfs is corrupt; may happen if multiple XOWAs opened, and "Close all" chosen in OS; DATE:2014-07-01
 			if	(!String_.Eq(type, "xowa"))			// check if user.gfs
 				Io_mgr._.MoveFil(url, url.GenNewNameOnly(url.NameOnly() + "-" + DateAdp_.Now().XtoStr_fmt_yyyyMMdd_HHmmss()));	// move file
-			Gfo_usr_dlg_._.Warn_many("", "", "invalid gfs; obsoleting: src=~{0} err=~{1}", url.Raw(), Err_.Message_gplx(e));
+			Gfo_usr_dlg_.I.Warn_many("", "", "invalid gfs; obsoleting: src=~{0} err=~{1}", url.Raw(), Err_.Message_gplx(e));
 		}
 	}
 	public GfoMsg Parse_root_msg(String v) {return gplx.gfs.Gfs_msg_bldr._.ParseToMsg(v);}
 	public Gfs_wtr Wtr() {return wtr;} private Gfs_wtr wtr = new Gfs_wtr();
 	public void Run_url(Io_url url) {
 		Run_url_for(GfsCore._.Root(), url);
-		Gfo_usr_dlg_._.Log_wtr().Log_msg_to_session_fmt("gfs.done: ~{0}", url.Raw());
+		Gfo_usr_dlg_.I.Log_wtr().Log_msg_to_session_fmt("gfs.done: ~{0}", url.Raw());
 	}
 	public void Run_url_for(GfoInvkAble invk, Io_url url) {
 		String raw = Io_mgr._.LoadFilStr_args(url).MissingIgnored_().Exec(); if (String_.Len_eq_0(raw)) return;
@@ -59,7 +59,7 @@ public class Xoa_gfs_mgr implements GfoInvkAble, GfoInvkRootWkr {
 	public Object Run_str_for(GfoInvkAble invk, GfoMsg root_msg) {
 		try {
 			int sub_msgs_len = root_msg.Subs_count();
-			GfsCtx ctx = GfsCtx.new_().Fail_if_unhandled_(Fail_if_unhandled).Usr_dlg_(Gfo_usr_dlg_._);
+			GfsCtx ctx = GfsCtx.new_().Fail_if_unhandled_(Fail_if_unhandled).Usr_dlg_(Gfo_usr_dlg_.I);
 			Object rv = null;
 			for (int i = 0; i < sub_msgs_len; i++) {
 				GfoMsg sub_msg = root_msg.Subs_getAt(i);
@@ -67,7 +67,7 @@ public class Xoa_gfs_mgr implements GfoInvkAble, GfoInvkRootWkr {
 			}
 			return rv;
 		} catch (Exception e) {
-			Gfo_usr_dlg_._.Warn_many("", "", "error while executing script: err=~{0}", Err_.Message_gplx(e));
+			Gfo_usr_dlg_.I.Warn_many("", "", "error while executing script: err=~{0}", Err_.Message_gplx(e));
 			return GfoInvkAble_.Rv_error;
 		}
 	}
@@ -120,7 +120,7 @@ class Xoa_gfs_mgr_ {
 		if (!Io_mgr._.ExistsFil(dflt_url)) return;	// no dflt
 		if (!Io_mgr._.ExistsFil(orig_url)) {
 			Io_mgr._.CopyFil(dflt_url, orig_url, true);
-			Gfo_usr_dlg_._.Log_many("", "", "xowa_cfg_os generated; url=~{0}", orig_url.Raw());
+			Gfo_usr_dlg_.I.Log_many("", "", "xowa_cfg_os generated; url=~{0}", orig_url.Raw());
 		}
 	}
 }

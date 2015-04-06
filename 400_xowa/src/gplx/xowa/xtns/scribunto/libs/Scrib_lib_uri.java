@@ -48,8 +48,8 @@ public class Scrib_lib_uri implements Scrib_lib {
 		Bry_bfr tmp_bfr = core.App().Utl__bfr_mkr().Get_b512();
 		Pfunc_anchorencode.Func_init(core.Ctx());
 		Pfunc_anchorencode.Anchor_encode(raw_bry, bfr, tmp_bfr);
-		tmp_bfr.Mkr_rls().Clear();
-		return rslt.Init_obj(bfr.Mkr_rls().Xto_str_and_clear());
+		tmp_bfr.Clear_and_rls();
+		return rslt.Init_obj(bfr.To_str_and_rls());
 	}
 	public boolean Url_func(Scrib_proc_args args, Scrib_proc_rslt rslt, byte url_tid) {
 		Xowe_wiki wiki = core.Wiki();
@@ -64,13 +64,13 @@ public class Scrib_lib_uri implements Scrib_lib {
 			ttl_bry = bfr.Xto_bry_and_clear();
 		}				
 		Pfunc_urlfunc.UrlString(core.Ctx(), url_tid, false, ttl_bry, bfr, qry_bry);
-		return rslt.Init_obj(bfr.Mkr_rls().Xto_str_and_clear());
+		return rslt.Init_obj(bfr.To_str_and_rls());
 	}
 	private boolean Init_uri_for_page(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		Xop_ctx ctx = core.Ctx();
 		byte[] ttl_bry = ctx.Cur_page().Ttl().Raw();
 		Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b512();
 		Pfunc_urlfunc.UrlString(ctx, Pfunc_urlfunc.Tid_full, false, ttl_bry, tmp_bfr, Bry_.Empty);
-		return rslt.Init_obj(tmp_bfr.Mkr_rls().Xto_bry_and_clear());
+		return rslt.Init_obj(tmp_bfr.To_bry_and_rls());
 	}
 }

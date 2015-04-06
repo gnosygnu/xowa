@@ -16,9 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs; import gplx.*; import gplx.xowa.*;
-import gplx.dbs.*; import gplx.xowa.dbs.tbls.*;
+import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.xowa.wikis.data.tbls.*;
 class Xodb_upgrade_mgr {
-	public static void Upgrade(Xodb_mgr_sql db_mgr, KeyVal[] kv_ary, String version_key, String version_val) {
+	public static void Upgrade(Xodb_mgr_sql db_mgr, Db_cfg_hash cfg_hash, String version_key, String version_val) {
 //			String version_new = null;
 //			if	(String_.Eq(version_val, "0.6.2.0")) {
 //				Xodb_upgrade_mgr_v0_6_2_0.Upgrade(db_mgr, kv_ary);

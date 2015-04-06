@@ -55,7 +55,6 @@ public class Sqlite_engine_ {
 		p.Exec_qry(qry);
 	}
 	public static void Idx_create(Gfo_usr_dlg usr_dlg, Db_conn conn, String tbl, Db_meta_idx[] idx_ary) {
-		conn.Txn_mgr().Txn_end_all();	// commit any pending transactions
 		int len = idx_ary.length;
 		for (int i = 0; i < len; ++i) {
 			Db_meta_idx idx = idx_ary[i];
@@ -68,7 +67,6 @@ public class Sqlite_engine_ {
 	public static void Idx_create(Db_conn p, Db_idx_itm... idxs) {Idx_create(Gfo_usr_dlg_.Null, p, "", idxs);}
 	public static void Idx_create(Gfo_usr_dlg usr_dlg, Db_conn p, String file_id, Db_idx_itm... idxs) {
 		int len = idxs.length;
-		p.Txn_mgr().Txn_end_all();	// commit any pending transactions
 		for (int i = 0; i < len; i++) {
 			String index = idxs[i].Xto_sql();
 			usr_dlg.Plog_many("", "", "creating index: ~{0} ~{1}", file_id, index);
@@ -79,7 +77,7 @@ public class Sqlite_engine_ {
 	public static Db_conn Conn_load_or_make_(Io_url url, Bool_obj_ref created) {
 		boolean exists = Io_mgr._.ExistsFil(url);
 		created.Val_(!exists);
-		Db_url connect = exists ? Sqlite_url.load_(url) : Sqlite_url.make_(url); 
+		Db_conn_info connect = exists ? Sqlite_conn_info.load_(url) : Sqlite_conn_info.make_(url); 
 		Db_conn p = Db_conn_pool.I.Get_or_new(connect);
 		if (!exists)
 			Pragma_page_size(p, 4096);

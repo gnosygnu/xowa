@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.logs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.dbs.*; import gplx.xowa.bldrs.oimgs.*;
+import gplx.dbs.*; import gplx.xowa.bldrs.*;
 public class Xop_log_mgr implements GfoInvkAble {
 	private Db_conn conn;
 	private Xoae_app app; private Xop_log_basic_tbl log_tbl;
@@ -33,7 +33,7 @@ public class Xop_log_mgr implements GfoInvkAble {
 	private Db_conn Conn() {
 		if (conn == null) {
 			if (log_dir == null) log_dir = app.User().Fsys_mgr().App_temp_dir();
-			Xodb_db_file db_file = Xodb_db_file.init__temp_log(log_dir);
+			Xob_db_file db_file = Xob_db_file.new__temp_log(log_dir);
 			conn = db_file.Conn();
 		}
 		return conn;
@@ -41,25 +41,23 @@ public class Xop_log_mgr implements GfoInvkAble {
 	public Xop_log_invoke_wkr Make_wkr_invoke() {return new Xop_log_invoke_wkr(this, this.Conn());}
 	public Xop_log_property_wkr Make_wkr_property() {return new Xop_log_property_wkr(this, this.Conn());}
 	public Xop_log_basic_wkr Make_wkr() {
-		if (log_tbl == null) {
+		if (log_tbl == null)
 			log_tbl = new Xop_log_basic_tbl(this.Conn());
-			conn.Txn_mgr().Txn_bgn_if_none();
-		}
 		return new Xop_log_basic_wkr(this, log_tbl);
 	}
 	public void Commit_chk() {
 		++exec_count;
 		if ((exec_count % commit_interval) == 0)
-			conn.Txn_mgr().Txn_end_all_bgn_if_none();
+			conn.Txn_sav();
 	}
 	public void Delete_all() {
 		log_tbl.Delete();
 	}
-	public void Txn_bgn() {conn.Txn_mgr().Txn_bgn_if_none();}
-	public void Txn_end() {conn.Txn_mgr().Txn_end_all();}
+	public void Txn_bgn() {conn.Txn_bgn();}
+	public void Txn_end() {conn.Txn_end();}
 	public void Rls() {
 		if (log_tbl != null)	log_tbl.Rls();
-		if (conn != null)	{conn.Conn_term(); conn = null;}
+		if (conn != null)	{conn.Rls_conn(); conn = null;}
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_commit_interval_))		commit_interval = m.ReadInt("v");

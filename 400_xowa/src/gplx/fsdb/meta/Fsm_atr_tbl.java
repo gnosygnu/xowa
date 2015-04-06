@@ -18,62 +18,38 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*;
 public class Fsm_atr_tbl {
-	private String tbl_name = "file_meta_atr"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
-	private String fld_uid, fld_url, fld_path_bgn;
-	private Db_conn conn; private final Db_stmt_bldr stmt_bldr = new Db_stmt_bldr();
-	public void Conn_(Db_conn new_conn, boolean created, boolean schema_is_1) {
-		this.conn = new_conn; flds.Clear();
-		if (schema_is_1) {
-			tbl_name		= "fsdb_db_atr";
-		}
-		fld_uid				= flds.Add_int("uid");
-		fld_url				= flds.Add_str("url", 255);
-		fld_path_bgn		= flds.Add_str("path_bgn", 255);
-		if (created) {
-			Db_meta_tbl meta = Db_meta_tbl.new_(tbl_name, flds
-			, Db_meta_idx.new_unique_by_tbl(tbl_name, "pkey", fld_uid)
-			);
-			conn.Exec_create_tbl_and_idx(meta);
-		}
-		stmt_bldr.Conn_(conn, tbl_name, flds, fld_uid);
+	private final String tbl_name; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private final String fld_uid, fld_url;
+	private final Db_conn conn;
+	public Fsm_atr_tbl(Db_conn conn, boolean schema_is_1) {
+		this.conn = conn;
+		String fld_prefix = "";
+		if (schema_is_1)			{tbl_name = "fsdb_db_atr";}
+		else						{tbl_name = "fsdb_dba"; fld_prefix = "dba_";}
+		this.fld_uid				= flds.Add_int_pkey	(fld_prefix + "uid");
+		this.fld_url				= flds.Add_str		(fld_prefix + "url", 255);
 	}
-	public Fsm_atr_fil[] Select_all(Fsm_abc_mgr abc_mgr, Io_url dir) {
-		ListAdp rv = ListAdp_.new_();
-		Db_rdr rdr = Db_rdr_.Null;
+	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds));}
+	public Fsm_atr_fil Select_1st_or_fail(Fsm_mnt_itm mnt_itm, Fsdb_db_mgr core_mgr, int mnt_id, boolean schema_thm_page) {
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empy).Exec_select__rls_auto();
+		boolean schema_is_1 = core_mgr.File__schema_is_1();
 		try {
-			rdr = conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empy).Exec_select_as_rdr();
-			while (rdr.Move_next()) {
-				Io_url url = dir.GenSubFil(rdr.Read_str(fld_url));
-				Fsm_atr_fil itm = new Fsm_atr_fil(abc_mgr, url);
-				itm.Ctor_by_load
-				( rdr.Read_int(fld_uid)
-				, url
-				, rdr.Read_str(fld_path_bgn)
-				, Db_cmd_mode.Tid_ignore
+			if (rdr.Move_next()) {
+				String url_rel = rdr.Read_str(fld_url);
+				return new Fsm_atr_fil
+				( mnt_itm
+				, rdr.Read_int(fld_uid)
+				, url_rel
+				, core_mgr.File__atr_file__at(mnt_id).Conn()
+				, schema_is_1
+				, schema_thm_page
 				);
-				rv.Add(itm);
 			}
 		}
 		finally {rdr.Rls();}
-		return (Fsm_atr_fil[])rv.Xto_ary(Fsm_atr_fil.class);
+		throw Err_.new_("missing atr db; conn_info={0}", conn.Conn_info().Xto_api());
 	}
-	public void Commit_all(Fsm_atr_fil[] ary) {
-		stmt_bldr.Batch_bgn();
-		try {
-			int len = ary.length;
-			for (int i = 0; i < len; i++)
-				Commit_itm(ary[i]);
-		}	finally {stmt_bldr.Batch_end();}
-	}
-	private void Commit_itm(Fsm_atr_fil itm) {
-		Db_stmt stmt = stmt_bldr.Get(itm.Cmd_mode());
-		switch (itm.Cmd_mode()) {
-			case Db_cmd_mode.Tid_create:	stmt.Clear().Val_int(fld_uid, itm.Id())	.Val_str(fld_url, itm.Url().NameAndExt()).Val_str(fld_path_bgn, itm.Path_bgn()).Exec_insert(); break;
-			case Db_cmd_mode.Tid_update:	stmt.Clear()							.Val_str(fld_url, itm.Url().NameAndExt()).Val_str(fld_path_bgn, itm.Path_bgn()).Crt_int(fld_uid, itm.Id()).Exec_update(); break;
-			case Db_cmd_mode.Tid_delete:	stmt.Clear().Crt_int(fld_uid, itm.Id()).Exec_delete();	break;
-			case Db_cmd_mode.Tid_ignore:	break;
-			default:						throw Err_.unhandled(itm.Cmd_mode());
-		}
-		itm.Cmd_mode_(Db_cmd_mode.Tid_ignore);
+	public void Insert(int id, String url_rel) {
+		conn.Stmt_insert(tbl_name, flds).Val_int(fld_uid, id).Val_str(fld_url, url_rel).Exec_insert();
 	}
 }

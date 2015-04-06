@@ -16,22 +16,23 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
-import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.bldrs.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.origs.*;
+import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.bldrs.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.origs.*;
 import gplx.json.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.xtns.wdatas.core.*;
-import gplx.xowa.bldrs.oimgs.*;
+import gplx.xowa.bldrs.cmds.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xob_wdata_db_cmd extends Xob_dump_mgr_base implements Xob_cmd {
 	private Wdata_tbl_mgr tbl_mgr = new Wdata_tbl_mgr();
 	private Wdata_wiki_mgr wdata_mgr; private Json_parser json_parser;
 	private byte[] lang_key = Xol_lang_.Key_en;
 	public Xob_wdata_db_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
-	@Override public String Cmd_key() {return KEY_oimg;} public static final String KEY_oimg = "wiki.wdata_db";
+	@Override public String Cmd_key() {return Xob_cmd_keys.Key_wbase_db;}
 	@Override public byte Init_redirect() {return Bool_.N_byte;}	// json will never be found in a redirect
 	@Override public int[] Init_ns_ary() {return Int_.Ary(Xow_ns_.Id_main, Wdata_wiki_mgr.Ns_property);}
 	@Override protected void Init_reset(Db_conn p) {
-		p.Exec_sql("DELETE FROM " + gplx.xowa.dbs.tbls.Xodb_xowa_cfg_tbl.Tbl_name);
+		Db_cfg_tbl cfg_tbl = new Db_cfg_tbl(p, "xowa_cfg");
+		cfg_tbl.Delete_all();
 	}
 	@Override protected Db_conn Init_db_file() {
-		Xodb_db_file tbl_file = Xodb_db_file.init_(wiki.Fsys_mgr().Root_dir(), "wdata_db.sqlite3");
+		Xob_db_file tbl_file = Xob_db_file.new_(wiki.Fsys_mgr().Root_dir(), "wdata_db.sqlite3");
 		Db_conn conn = tbl_file.Conn();
 		tbl_mgr.Init(conn);
 		return conn;
@@ -39,15 +40,15 @@ public class Xob_wdata_db_cmd extends Xob_dump_mgr_base implements Xob_cmd {
 	@Override protected void Cmd_bgn_end() {
 		wdata_mgr = bldr.App().Wiki_mgr().Wdata_mgr();
 		json_parser = wdata_mgr.Jdoc_parser();
-		tbl_mgr.Conn().Txn_mgr().Txn_bgn_if_none();
+		tbl_mgr.Conn().Txn_bgn();
 	}
-	@Override public void Exec_pg_itm_hook(Xow_ns ns, Xodb_page page, byte[] page_src) {
+	@Override public void Exec_pg_itm_hook(int ns_ord, Xow_ns ns, Xowd_page_itm page, byte[] page_src) {
 		Json_doc jdoc = json_parser.Parse(page_src); if (jdoc == null) return; // not a json document
 		Wdata_doc wdoc = new Wdata_doc(page.Ttl_page_db(), wdata_mgr, jdoc);
 		tbl_mgr.Exec_insert_by_wdoc(lang_key, wdata_mgr, page.Id(), wdoc);
 	}
 	@Override public void Exec_commit_hook() {
-		tbl_mgr.Conn().Txn_mgr().Txn_end_all_bgn_if_none();
+		tbl_mgr.Conn().Txn_sav();
 	}
 	@Override public void Exec_end_hook() {
 		tbl_mgr.Term(usr_dlg);
@@ -77,7 +78,7 @@ class Wdata_tbl_mgr {
 			tbls[i].Exec_insert_by_wdoc(lang_key, wdata_mgr, page_id, wdoc);
 	}
 	public void Term(Gfo_usr_dlg usr_dlg) {
-		conn.Txn_mgr().Txn_end_all();
+		conn.Txn_end();
 		for (int i = 0; i < tbls_len; i++)
 			tbls[i].Make_idxs(usr_dlg, conn);
 	}

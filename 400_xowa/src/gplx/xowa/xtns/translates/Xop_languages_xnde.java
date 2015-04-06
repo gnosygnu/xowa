@@ -17,8 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.translates; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
-import gplx.xowa.html.*;
-import gplx.xowa.langs.*;
+import gplx.xowa.html.*; import gplx.xowa.langs.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xop_languages_xnde implements Xox_xnde {
 	public Xop_xnde_tkn Xnde() {return xnde;} private Xop_xnde_tkn xnde;
 	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
@@ -47,7 +46,7 @@ public class Xop_languages_xnde implements Xox_xnde {
 		int lang_bgn = root_ttl_bry.length + 1;			// lang starts after /; EX: "Page" will have subpage of "Page/fr" and lang_bgn of 5
 		boolean english_needed = true;
 		for (int i = 0; i < len; i++) {
-			Xodb_page page = (Xodb_page)rslts.FetchAt(i);
+			Xowd_page_itm page = (Xowd_page_itm)rslts.FetchAt(i);
 			byte[] page_ttl_bry = page.Ttl_page_db();
 			int page_ttl_bry_len = page_ttl_bry.length;
 			if 		(Bry_.Eq(root_ttl_bry, page_ttl_bry)) continue; 	// ignore self; EX: "page"

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.dbs.*; import gplx.dbs.engines.sqlite.*;
-class Xofc_fil_tbl {		
+class Xofc_fil_tbl implements RlsAble {
 	private String tbl_name = "file_cache_fil"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private String fld_uid, fld_dir_id, fld_name, fld_is_orig, fld_w, fld_h, fld_time, fld_page, fld_ext, fld_size, fld_cache_time;
 	private Db_conn conn; private final Db_stmt_bldr stmt_bldr = new Db_stmt_bldr(); private Db_stmt select_itm_stmt, select_itm_v2_stmt;
@@ -49,10 +49,16 @@ class Xofc_fil_tbl {
 			Db_meta_tbl meta = Db_meta_tbl.new_(tbl_name, flds
 			, Db_meta_idx.new_normal_by_tbl(tbl_name, "fil", fld_name, fld_is_orig, fld_w, fld_h, fld_time, fld_cache_time, fld_uid)
 			);
-			conn.Exec_create_tbl_and_idx(meta);
+			conn.Ddl_create_tbl(meta);
 		}
 		select_itm_stmt = select_itm_v2_stmt = null;
 		stmt_bldr.Conn_(conn, tbl_name, flds, fld_uid);
+		conn.Rls_reg(this);
+	}
+	public void Rls() {
+		select_itm_stmt = Db_stmt_.Rls(select_itm_stmt);
+		select_itm_v2_stmt = Db_stmt_.Rls(select_itm_v2_stmt);
+		stmt_bldr.Rls();
 	}
 	public String Db_save(Xofc_fil_itm itm) {
 		try {
@@ -84,53 +90,45 @@ class Xofc_fil_tbl {
 			.Val_long(fld_cache_time, itm.Cache_time())
 			;
 	}
-	public void Cleanup() {
-		select_itm_stmt = Db_stmt_.Rls(select_itm_stmt);
-		stmt_bldr.Rls();
-	}
 	public Xofc_fil_itm Select_one_v1(int dir_id, byte[] fil_name, boolean fil_is_orig, int fil_w, int fil_h, double fil_thumbtime) {
-		if (select_itm_stmt == null) select_itm_stmt = conn.Rls_reg(conn.Stmt_select(tbl_name, flds, String_.Ary(fld_dir_id, fld_name, fld_is_orig, fld_w, fld_h, fld_time)));
-		Db_rdr rdr = Db_rdr_.Null;
-		try {
-			rdr = select_itm_stmt.Clear()
+		if (select_itm_stmt == null) select_itm_stmt = conn.Stmt_select(tbl_name, flds, String_.Ary(fld_dir_id, fld_name, fld_is_orig, fld_w, fld_h, fld_time));
+		Db_rdr rdr = select_itm_stmt.Clear()
 			.Crt_int(fld_dir_id, dir_id)
 			.Crt_bry_as_str(fld_name, fil_name)
 			.Crt_bool_as_byte(fld_is_orig, fil_is_orig)
 			.Crt_int(fld_w, fil_w)
 			.Crt_int(fld_h, fil_h)
 			.Crt_int(fld_time, Xof_lnki_time.Db_save_int(fil_thumbtime))
-			.Exec_select_as_rdr();
+			.Exec_select__rls_manual();
+		try {
 			return rdr.Move_next() ? new_itm(rdr) : Xofc_fil_itm.Null;
 		}
 		finally {rdr.Rls();}
 	}
 	public Xofc_fil_itm Select_one_v2(int dir_id, byte[] name, boolean is_orig, int w, double time, int page) {
-		if (select_itm_v2_stmt == null) select_itm_v2_stmt = conn.Rls_reg(conn.Stmt_select(tbl_name, flds, String_.Ary(fld_dir_id, fld_name, fld_is_orig, fld_w, fld_time, fld_page)));
-		Db_rdr rdr = Db_rdr_.Null;
-		try {
-			rdr = select_itm_v2_stmt.Clear()
+		if (select_itm_v2_stmt == null) select_itm_v2_stmt = conn.Stmt_select(tbl_name, flds, String_.Ary(fld_dir_id, fld_name, fld_is_orig, fld_w, fld_time, fld_page));
+		Db_rdr rdr = select_itm_v2_stmt.Clear()
 			.Crt_int(fld_dir_id, dir_id)
 			.Crt_bry_as_str(fld_name, name)
 			.Crt_bool_as_byte(fld_is_orig, is_orig)
 			.Crt_int(fld_w, w)
 			.Crt_int(fld_time, Xof_lnki_time.Db_save_int(time))
 			.Crt_int(fld_page, page)
-			.Exec_select_as_rdr();
+			.Exec_select__rls_manual();
+		try {
 			return rdr.Move_next() ? new_itm(rdr) : Xofc_fil_itm.Null;
 		}
 		finally {rdr.Rls();}
 	}
 	public void Select_all(Bry_bfr fil_key_bldr, OrderedHash hash) {
 		hash.Clear();
-		Db_stmt select_all_stmt = conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empy);
-		Db_rdr rdr = Db_rdr_.Null;
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empy).Exec_select__rls_auto();
 		try {
-			rdr = select_all_stmt.Exec_select_as_rdr();
 			while (rdr.Move_next()) {
 				Xofc_fil_itm fil_itm = new_itm(rdr);
 				byte[] key = fil_itm.Gen_hash_key_v1(fil_key_bldr);
 				if (hash.Has(key))		// NOTE: need to check for uniqueness else dupe file will cause select to fail; shouldn't happen, but somehow did; DATE:2013-12-28
-					Gfo_usr_dlg_._.Warn_many("", "", "cache had duplicate itm: key=~{0}", String_.new_utf8_(key));
+					Gfo_usr_dlg_.I.Warn_many("", "", "cache had duplicate itm: key=~{0}", String_.new_utf8_(key));
 				else
 					hash.Add(key, fil_itm);
 			}

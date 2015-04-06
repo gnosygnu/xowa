@@ -18,17 +18,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html.hdumps; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import gplx.xowa.html.hdumps.data.*; import gplx.xowa.html.hzips.*; import gplx.xowa.html.hdumps.abrvs.*; import gplx.xowa.html.hdumps.pages.*;
 import gplx.xowa.pages.*; import gplx.xowa.pages.skins.*; import gplx.xowa.html.modules.*;
-import gplx.xowa.wikis.data.*; import gplx.xowa2.gui.*;
+import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa2.gui.*;
 public class Xohd_hdump_rdr {
 	private final Bry_bfr_mkr bfr_mkr; private final Xow_hzip_mgr hzip_mgr;
 	private final Xohd_abrv_mgr abrv_mgr; private final Xohd_page_html_mgr__load load_mgr; 
-	private Xow_core_data_mgr core_data_mgr; private final Xodb_page dbpg = new Xodb_page(); 
+	private Xowd_db_mgr core_data_mgr; private final Xowd_page_itm dbpg = new Xowd_page_itm(); 
 	public Xohd_hdump_rdr(Xoa_app app, Xow_wiki wiki) {
 		this.bfr_mkr = app.Utl__bfr_mkr(); this.hzip_mgr = wiki.Html_mgr__hzip_mgr();
 		abrv_mgr = new Xohd_abrv_mgr(app.Usr_dlg(), app.Fsys_mgr(), app.Utl__encoder_mgr().Fsys(), wiki.Domain_bry());
 		load_mgr = new Xohd_page_html_mgr__load();	// TODO: get db_id
 	}
-	public void Init_by_db(Xow_core_data_mgr core_data_mgr) {this.core_data_mgr = core_data_mgr;}
+	public void Init_by_db(Xowd_db_mgr core_data_mgr) {this.core_data_mgr = core_data_mgr;}
 	public void Get_by_ttl(Xoae_page page) {
 		Xog_page hpg = new Xog_page();
 		Get_by_ttl(hpg, page.Ttl());
@@ -57,19 +57,19 @@ public class Xohd_hdump_rdr {
 		}
 	}
 	private boolean Get_by_ttl__fill_hpg(Xog_page rv, Xoa_ttl ttl) {
-		core_data_mgr.Tbl__pg().Select_by_ttl(dbpg, ttl.Ns(), ttl.Page_db());	// get rows from db
+		core_data_mgr.Tbl__page().Select_by_ttl(dbpg, ttl.Ns(), ttl.Page_db());	// get rows from db
 		if (dbpg.Redirect_id() != -1) Get_by_ttl__resolve_redirect(dbpg, rv);
 		if (dbpg.Html_db_id() == -1) return false;								// dbpg does not hdump; exit;
 		rv.Init(dbpg.Id(), null, ttl);	// FIXME
 		Xowd_db_file html_db = core_data_mgr.Dbs__get_at(dbpg.Html_db_id());
-		load_mgr.Load_page(rv, Xohd_page_html_tbl.Get_from_db(core_data_mgr, html_db), dbpg.Id(), ttl);
+		load_mgr.Load_page(rv, html_db.Tbl__html(), dbpg.Id(), ttl);
 		return true;
 	}
-	private void Get_by_ttl__resolve_redirect(Xodb_page dbpg, Xog_page hpg) {
+	private void Get_by_ttl__resolve_redirect(Xowd_page_itm dbpg, Xog_page hpg) {
 		int redirect_count = 0;
 		while (redirect_count < 5) {
 			int redirect_id = dbpg.Redirect_id();
-			core_data_mgr.Tbl__pg().Select_by_id(dbpg, redirect_id);
+			core_data_mgr.Tbl__page().Select_by_id(dbpg, redirect_id);
 			if (redirect_id == -1) break;
 		}
 	}

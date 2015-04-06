@@ -21,11 +21,11 @@ import gplx.dbs.engines.sqlite.*; import gplx.dbs.engines.mysql.*; import gplx.d
 public class Db_conn_pool {
 	private final HashAdp conn_hash = HashAdp_.new_(); private final HashAdp engine_hash = HashAdp_.new_();		
 	public void Clear() {conn_hash.Clear();}
-	public void Del(Db_url url) {conn_hash.Del(url.Xto_api());}
-	public Db_conn Get_or_new__mem(String db)		{return Get_or_new(Db_url__mem.new_(db));}
-	public Db_conn Get_or_new__sqlite(Io_url url)	{return Get_or_new(Db_url_.sqlite_(url));}
-	public Db_conn Get_or_new(String s)				{return Get_or_new(Db_url_.parse_(s));}
-	public Db_conn Get_or_new(Db_url url) {
+	public void Del(Db_conn_info url) {conn_hash.Del(url.Xto_api());}
+	public Db_conn Get_or_new__mem(String db)		{return Get_or_new(Db_conn_info__mem.new_(db));}
+	public Db_conn Get_or_new__sqlite(Io_url url)	{return Get_or_new(Db_conn_info_.sqlite_(url));}
+	public Db_conn Get_or_new(String s)				{return Get_or_new(Db_conn_info_.parse_(s));}
+	public Db_conn Get_or_new(Db_conn_info url) {
 		Db_conn rv = (Db_conn)conn_hash.Fetch(url.Xto_api());
 		if (rv == null) {
 			Db_engine prime = (Db_engine)engine_hash.Fetch(url.Tid()); if (prime == null) throw Err_.new_("db engine prototype not found; tid={0}", url.Tid());

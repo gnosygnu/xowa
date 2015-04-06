@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.fsdb.fs_roots; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
 import gplx.dbs.*;
-public class Orig_fil_tbl {
+public class Orig_fil_tbl implements RlsAble {
 	private String tbl_name = "orig_fil"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private String fld_uid, fld_name, fld_ext_id, fld_w, fld_h, fld_dir_url;		
 	private Db_conn conn; private Db_stmt stmt_insert, stmt_select;
@@ -37,16 +37,20 @@ public class Orig_fil_tbl {
 			Db_meta_tbl meta = Db_meta_tbl.new_(tbl_name, flds
 			, Db_meta_idx.new_unique_by_tbl(tbl_name, "main", fld_name)
 			);
-			conn.Exec_create_tbl_and_idx(meta);
+			conn.Ddl_create_tbl(meta);
 		}
 		stmt_insert = stmt_select = null;
+		conn.Rls_reg(this);
+	}
+	public void Rls() {
+		stmt_insert = Db_stmt_.Rls(stmt_insert);
+		stmt_select = Db_stmt_.Rls(stmt_select);
 	}
 	public Orig_fil_itm Select_itm(byte[] ttl) {
-		if (stmt_select == null) stmt_select = conn.Rls_reg(conn.Stmt_select(tbl_name, flds, fld_name));
+		if (stmt_select == null) stmt_select = conn.Stmt_select(tbl_name, flds, fld_name);
 		Orig_fil_itm rv = Orig_fil_itm.Null;
-		Db_rdr rdr = Db_rdr_.Null;
+		Db_rdr rdr = stmt_select.Clear().Crt_bry_as_str(fld_name, ttl).Exec_select__rls_manual();
 		try {
-			rdr = stmt_select.Clear().Crt_bry_as_str(fld_name, ttl).Exec_select_as_rdr();
 			if (rdr.Move_next())
 				rv = Load_itm(rdr);
 			return rv;
@@ -64,7 +68,7 @@ public class Orig_fil_tbl {
 		);
 	}
 	public void Insert(Orig_fil_itm fil_itm) {
-		if (stmt_insert == null) stmt_insert = conn.Rls_reg(conn.Stmt_insert(tbl_name, flds));
+		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(tbl_name, flds);
 		stmt_insert.Clear()
 		.Val_int(fld_uid, fil_itm.Fil_uid())
 		.Val_bry_as_str(fld_name, fil_itm.Fil_name())
@@ -74,5 +78,4 @@ public class Orig_fil_tbl {
 		.Val_bry_as_str(fld_dir_url, fil_itm.Fil_dir_url())
 		.Exec_insert();
 	}	
-	public void Rls() {}
 }

@@ -376,4 +376,34 @@ public class Xop_list_wkr_uncommon_tst {
 		, "</dl>"
 		));		
 	}
+	@Test   public void Pre_and_nested() {	// PURPOSE: pre should interrupt list; PAGE:fi.w:Luettelo_hyönteisistä; DATE:2015-03-31
+		fxt.Init_para_y_();
+		fxt.Test_parse_page_all_str
+		( String_.Concat_lines_nl_skip_last
+		( "*a"
+		, "**b"
+		, " c"		// pre
+		, "*d"		// *d treated mistakenly as **d
+		), String_.Concat_lines_nl_skip_last
+		( "<ul>"
+		, "  <li>a"
+		, ""
+		, "    <ul>"
+		, "      <li>b"
+		, "      </li>"
+		, "    </ul>"
+		, "  </li>"
+		, "</ul>"
+		, ""
+		, "<pre>c"
+		, "</pre>"
+		, ""
+		, "<ul>"
+		, "  <li>d"
+		, "  </li>"
+		, "</ul>"
+		, ""
+		));
+		fxt.Init_para_n_();
+	}
 }

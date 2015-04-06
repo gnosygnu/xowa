@@ -16,11 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.xowa.wikis.data.tbls.*;
 public interface Xobd_wkr extends GfoInvkAble {
 	String Wkr_key();
 	void Wkr_ini(Xob_bldr bldr);
 	void Wkr_bgn(Xob_bldr bldr);
-	void Wkr_run(Xodb_page page);
+	void Wkr_run(Xowd_page_itm page);
 	void Wkr_end();
 	void Wkr_print();
 }

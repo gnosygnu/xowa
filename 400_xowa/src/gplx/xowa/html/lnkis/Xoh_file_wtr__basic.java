@@ -155,7 +155,7 @@ public class Xoh_file_wtr__basic {
 		lnki_file_wkr.Html_full_img(tmp_bfr, hctx, page, xfer_itm, uid, lnki_href, Xoh_lnki_consts.Tid_a_cls_image, Xoh_lnki_consts.Tid_a_rel_none, anchor_title, lnki_ttl, xfer_itm.Html_w(), xfer_itm.Html_h(), view_src, lnki_alt_text, img_cls_tid, Xoh_lnki_consts.Bry_none);
 		byte[] thumb = tmp_bfr.Xto_bry_and_clear();
 		html_fmtr.Html_thumb_file_image(tmp_bfr, thumb, Arg_caption_div(ctx, src, lnki, uid, img_orig_src, lnki_href), lnki_alt_html);
-		return tmp_bfr.Mkr_rls().Xto_bry_and_clear();
+		return tmp_bfr.To_bry_and_rls();
 	}
 	private byte[] Arg_content_audio(Xop_lnki_tkn lnki, Xop_ctx ctx, byte[] src, int uid, byte[] lnki_href, byte[] img_orig_src, byte[] alt) {
 		byte[] info_btn = Bry_.Empty;
@@ -197,14 +197,14 @@ public class Xoh_file_wtr__basic {
 		media_alt_fmtr.Set(ctx, Xoh_wtr_ctx.Alt, src, lnki.Alt_tkn().Val_tkn(), Xoh_lnki_text_fmtr.Null_fmtr);
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();
 		media_alt_fmtr.XferAry(tmp_bfr, 0);
-		return tmp_bfr.Mkr_rls().Xto_bry_and_clear(); 
+		return tmp_bfr.To_bry_and_rls(); 
 	}		
 	private byte[] Arg_alt_html(Xop_ctx ctx, byte[] alt_src, Xop_lnki_tkn lnki) {
 		if (!lnki.Alt_exists()) return Bry_.Empty;
 		media_alt_fmtr.Set(ctx, Xoh_wtr_ctx.Basic, alt_src, lnki.Alt_tkn().Val_tkn(), html_fmtr.Html_thumb_part_alt_fmtr());
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();
 		media_alt_fmtr.XferAry(tmp_bfr, 0);
-		return tmp_bfr.Mkr_rls().Xto_bry_and_clear(); 
+		return tmp_bfr.To_bry_and_rls(); 
 	}
 	private byte[] Arg_play_btn(int uid, int width, int max_width, byte[] a_href, byte[] a_xowa_title) {
 		html_fmtr.Html_thumb_part_play(scratch_bfr, uid, width - 2, max_width, a_href, a_xowa_title, html_mgr.Img_media_play_btn());	// NOTE: -2 is fudge factor else play btn will jut out over video thumb; see Earth and ISS video

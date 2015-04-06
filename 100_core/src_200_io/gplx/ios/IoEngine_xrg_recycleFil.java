@@ -22,7 +22,7 @@ public class IoEngine_xrg_recycleFil extends IoEngine_xrg_fil_affects1_base {
 
 	public int Mode() {return mode;} public IoEngine_xrg_recycleFil Mode_(int v) {mode = v; return this;} int mode;
 	public String AppName() {return appName;} public IoEngine_xrg_recycleFil AppName_(String val) {appName = val; return this;} private String appName = "unknown_app";
-	public UuidAdp Uuid() {return uuid;} public IoEngine_xrg_recycleFil Uuid_(UuidAdp val) {uuid = val; return this;} UuidAdp uuid;
+	public Guid_adp Uuid() {return uuid;} public IoEngine_xrg_recycleFil Uuid_(Guid_adp val) {uuid = val; return this;} Guid_adp uuid;
 	public boolean Uuid_include() {return uuid_include;} public IoEngine_xrg_recycleFil Uuid_include_() {uuid_include = true; return this;} private boolean uuid_include;
 	public DateAdp Time() {return time;} public IoEngine_xrg_recycleFil Time_(DateAdp val) {time = val; return this;} DateAdp time;
 	public ListAdp RootDirNames() {return rootDirNames;} public IoEngine_xrg_recycleFil RootDirNames_(ListAdp val) {rootDirNames = val; return this;} ListAdp rootDirNames;
@@ -49,7 +49,7 @@ public class IoEngine_xrg_recycleFil extends IoEngine_xrg_fil_affects1_base {
 	public IoEngine_xrg_recycleFil(int v) {
 		mode = v;
 		time = DateAdp_.Now();
-		uuid = UuidAdp_.random_();
+		uuid = Guid_adp_.random_();
 		rootDirNames = ListAdp_.new_(); rootDirNames.Add("z_trash");
 	}
 	public static IoEngine_xrg_recycleFil sysm_(Io_url url) {return new IoEngine_xrg_recycleFil(SysmConst);}

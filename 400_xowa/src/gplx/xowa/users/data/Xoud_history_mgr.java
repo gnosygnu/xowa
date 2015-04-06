@@ -18,8 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.threads.*; import gplx.dbs.*;
 public class Xoud_history_mgr implements GfoInvkAble {
-	private final Xoud_history_tbl history_tbl = new Xoud_history_tbl();
-	public void Conn_(Db_conn new_conn, boolean created, int user_id) {history_tbl.Conn_(new_conn, created, user_id);}
+	private Xoud_history_tbl history_tbl;
+	public void Conn_(Db_conn new_conn, boolean created, int user_id) {
+		history_tbl = new Xoud_history_tbl(new_conn);
+		if (created) history_tbl.Create_tbl();
+	}
 	public void Update_async(Gfo_async_mgr async_mgr, Xoa_ttl ttl, Xoa_url url) {
 //			if (Skip_history(ttl)) return;
 //			async_mgr.Queue(this, Invk_update, "wiki", String_.new_utf8_(url.Wiki_bry()), "page", String_.new_utf8_(url.Page_bry()), "qarg", String_.new_utf8_(url.Args_all_as_bry()));

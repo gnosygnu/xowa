@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.gfui.*;
-import gplx.threads.*;
+import gplx.threads.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.utils.*;
 class Xoi_cmd_wiki_download extends Gfo_thread_cmd_download implements Gfo_thread_cmd {	private Xoi_setup_mgr install_mgr; private String wiki_key, dump_date, dump_type;
 	public Xoi_cmd_wiki_download Ctor_download_(Xoi_setup_mgr install_mgr, String wiki_key, String dump_date, String dump_type) {
 		this.install_mgr = install_mgr;
@@ -181,7 +181,7 @@ class Xoi_cmd_wiki_zip implements Gfo_thread_cmd {
 		wiki.Init_assert();
 		bldr.Cmd_mgr().Clear();
 		bldr.Pause_at_end_(false);
-		((Xobc_deploy_zip)bldr.Cmd_mgr().Add_cmd(wiki, "deploy.zip")).Delete_dirs_page_(delete_dirs_page);
+		((Xob_deploy_zip_cmd)bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_deploy_zip)).Delete_dirs_page_(delete_dirs_page);
 		bldr.Run();
 		app.Usr_dlg().Prog_none(GRP_KEY, "clear", "");
 		app.Usr_dlg().Note_none(GRP_KEY, "clear", "");

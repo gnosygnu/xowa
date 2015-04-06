@@ -24,7 +24,8 @@ public class Bry_bfr_mkr {
 	public Bry_bfr Get_k004() {return mkr_k004.Get();}
 	public Bry_bfr Get_m001() {return mkr_m001.Get();}
 	public void Rls(Bry_bfr v) {
-		v.Mkr_mgr().Rls(v);
+		v.Mkr_rls();
+//			v.Mkr_mgr().Rls(v);
 	}
 	public void Reset_if_gt(int v) {
 		for (byte i = Tid_b128; i <= Tid_m001; i++)
@@ -71,7 +72,7 @@ class Bry_bfr_mkr_mgr {
 			for (int i = 0; i < ary_max; i++) {
 				Bry_bfr itm = ary[i];
 				if (itm != null) {
-					if (itm.Mkr_mgr() != null) throw Err_.new_("failed to clear bfr: " + Int_.Xto_str(i));
+					if (!itm.Mkr_idx_is_null()) throw Err_.new_("failed to clear bfr: " + Int_.Xto_str(i));
 					itm.Clear();
 				}
 				ary[i] = null;
@@ -117,7 +118,7 @@ class Bry_bfr_mkr_mgr {
 					ary[rv_idx] = rv;
 				}
 			}
-			rv.Mkr_(this, rv_idx);
+			rv.Mkr_init(this, rv_idx);
 			return rv.Clear();	// NOTE: ALWAYS call Clear when doing Get. caller may forget to call Clear, and reused bfr may have leftover bytes. unit tests will not catch, and difficult to spot in app
 		}
 	}
@@ -131,16 +132,26 @@ class Bry_bfr_mkr_mgr {
 		Array_.CopyTo(free, 0, new_free, 0, free_len);
 		free = new_free;
 	}
-	public void Rls(Bry_bfr v) {
+//		public void Rls(Bry_bfr v) {
+//			synchronized (thread_lock) {
+//				int idx = v.Mkr_itm();
+//				if (idx == -1) throw Err_mgr._.fmt_("gplx.Bry_bfr", "rls_failed", "rls called on bfr that was not created by factory");
+//				int new_ary_len = nxt_idx - 1;
+//				if (idx == new_ary_len)
+//					nxt_idx = new_ary_len;
+//				else
+//					free[free_len++] = idx;
+//				v.Mkr_(null, -1);
+//			}
+//		}
+	public void Rls(int idx) {
 		synchronized (thread_lock) {
-			int idx = v.Mkr_itm();
 			if (idx == -1) throw Err_mgr._.fmt_("gplx.Bry_bfr", "rls_failed", "rls called on bfr that was not created by factory");
 			int new_ary_len = nxt_idx - 1;
 			if (idx == new_ary_len)
 				nxt_idx = new_ary_len;
 			else
 				free[free_len++] = idx;
-			v.Mkr_(null, -1);
 		}
 	}
 	public static final Bry_bfr[] Ary_empty = new Bry_bfr[0];

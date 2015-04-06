@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.ctgs; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.dbs.*;
+import gplx.xowa.dbs.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xoctg_html_mgr implements GfoInvkAble {
 	@gplx.Internal protected Xoctg_fmtr_grp Fmtr_grp() {return fmtr_grp;} private Xoctg_fmtr_grp fmtr_grp = new Xoctg_fmtr_grp();
 	private final Xoctg_fmtr_all mgr_subcs = new Xoctg_fmtr_all(Xoa_ctg_mgr.Tid_subc);
@@ -54,7 +54,7 @@ public class Xoctg_html_mgr implements GfoInvkAble {
 		title_list.SortBy(Xoctg_view_itm_sorter_id._);
 		int len = title_list.Count();
 		int pct = len / 16;
-		Xodb_page dbo_page = new Xodb_page();
+		Xowd_page_itm dbo_page = new Xowd_page_itm();
 		for (int i = 0; i < len; i++) {
 			Xoctg_view_itm itm = (Xoctg_view_itm)title_list.FetchAt(i);
 			if (pct != 0 && i % pct == 0) usr_dlg.Prog_many("", "", "loading title data: ~{0} / ~{1} -- ~{2}", i, len, String_.new_utf8_(itm.Sortkey()));

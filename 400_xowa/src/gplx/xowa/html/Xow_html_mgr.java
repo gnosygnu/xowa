@@ -41,7 +41,7 @@ public class Xow_html_mgr implements GfoInvkAble {
 	public void Init_by_lang(Xol_lang lang) {
 		portal_mgr.Init_by_lang(lang);
 	}
-	public Xowe_wiki				Wiki() {return wiki;} private Xowe_wiki wiki;
+	public Xowe_wiki			Wiki() {return wiki;} private Xowe_wiki wiki;
 	public Xoh_html_wtr			Html_wtr() {return html_wtr;} private Xoh_html_wtr html_wtr;
 	public Xoh_page_wtr_mgr		Page_wtr_mgr() {return page_wtr_mgr;} private Xoh_page_wtr_mgr page_wtr_mgr;
 	public Xow_portal_mgr		Portal_mgr() {return portal_mgr;} private Xow_portal_mgr portal_mgr;

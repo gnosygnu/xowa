@@ -112,7 +112,8 @@ public class Db_stmt_sql implements Db_stmt {// used for formatting SQL statemen
 	public DataRdr Exec_select() {
 		try {DataRdr rv = conn.Exec_qry_as_rdr(Db_qry_sql.rdr_(this.Xto_sql())); return rv;} catch (Exception e) {throw Err_.err_(e, "failed to exec prepared statement: sql={0}", sql_orig);}
 	}	
-	public Db_rdr Exec_select_as_rdr() {throw Err_.not_implemented_();}	
+	public Db_rdr Exec_select__rls_auto()	{return Db_rdr_.Empty;}
+	public Db_rdr Exec_select__rls_manual() {return Db_rdr_.Empty;}
 	public Object Exec_select_val() {
 		try {Object rv = Db_qry__select_cmd.Rdr_to_val(this.Exec_select()); return rv;} catch (Exception e) {throw Err_.err_(e, "failed to exec prepared statement: sql={0}", sql_orig);}
 	}

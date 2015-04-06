@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import org.junit.*; import gplx.xowa.tdbs.*;
+import org.junit.*; import gplx.xowa.tdbs.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xosrh_core_tst {
 	@Before public void Init() {fxt.Clear();} private Xos_search_mgr_fxt fxt = new Xos_search_mgr_fxt();
 	@Test   public void Basic() {
@@ -99,10 +99,10 @@ class Xos_search_mgr_fxt {
 	public Xoae_app App() {return app;}
 	public Xowe_wiki Wiki() {return wiki;}
 	public Xobl_regy_itm 	regy_itm_(int id, String bgn, String end, int count) {return new Xobl_regy_itm(id, Bry_.new_utf8_(bgn), Bry_.new_utf8_(end), count);}
-	public Xodb_page 	data_ttl_(int id, String ttl) {return data_ttl_(id, 0, 0, false, 0, ttl);}
-	public Xodb_page 	data_ttl_(int id, int fil, int row, boolean redirect, int len, String ttl) {return new Xodb_page().Init(id, Bry_.new_utf8_(ttl), redirect, len, fil, row);}
-	public Xodb_page 		data_id_(int id, String ttl) {return data_id_(id, Xow_ns_.Id_main, ttl);} 
-	public Xodb_page 		data_id_(int id, int ns, String ttl) {return new Xodb_page().Id_(id).Ns_id_(ns).Ttl_page_db_(Bry_.new_utf8_(ttl)).Wtxt_db_id_(0).Wtxt_len_(0);}
+	public Xowd_page_itm 	data_ttl_(int id, String ttl) {return data_ttl_(id, 0, 0, false, 0, ttl);}
+	public Xowd_page_itm 	data_ttl_(int id, int fil, int row, boolean redirect, int len, String ttl) {return new Xowd_page_itm().Init(id, Bry_.new_utf8_(ttl), redirect, len, fil, row);}
+	public Xowd_page_itm 		data_id_(int id, String ttl) {return data_id_(id, Xow_ns_.Id_main, ttl);} 
+	public Xowd_page_itm 		data_id_(int id, int ns, String ttl) {return new Xowd_page_itm().Id_(id).Ns_id_(ns).Ttl_page_db_(Bry_.new_utf8_(ttl)).Text_db_id_(0).Text_len_(0);}
 	public Xobl_search_ttl 	data_sttl_(String word, int... ids) {return new Xobl_search_ttl(Bry_.new_utf8_(word), data_ttl_word_page_ary_(ids));}
 	public Xobl_search_ttl_page[] data_ttl_word_page_ary_(int... ids) {
 		int ids_len = ids.length;
@@ -211,7 +211,7 @@ class Xos_search_mgr_fxt {
 		int itms_len = page.Itms_len();
 		String[] rv = new String[itms_len];
 		for (int i = 0; i < itms_len; i++) {
-			Xodb_page itm = page.Itms_get_at(i);
+			Xowd_page_itm itm = page.Itms_get_at(i);
 			rv[i] = String_.new_utf8_(itm.Ttl_page_db());
 		}
 		return rv;

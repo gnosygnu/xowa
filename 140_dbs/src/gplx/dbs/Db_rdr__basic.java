@@ -19,7 +19,8 @@ package gplx.dbs; import gplx.*;
 import java.sql.ResultSet;
 public class Db_rdr__basic implements Db_rdr {
 	protected ResultSet rdr; 
-	public void Ctor(ResultSet rdr, String sql) {this.rdr = rdr; this.sql = sql;}  
+	private Db_stmt stmt;
+	public void Ctor(Db_stmt stmt, ResultSet rdr, String sql) {this.stmt = stmt; this.rdr = rdr; this.sql = sql;}  
 	public String		Sql()					{return sql;} private String sql;
 	public boolean			Move_next()	{
 		try	 {return rdr.next();}	
@@ -45,5 +46,9 @@ public class Db_rdr__basic implements Db_rdr {
 	@gplx.Virtual public byte			Read_byte(String k)			{try {return Byte_.cast_(rdr.getObject(k));} catch (Exception e) {throw Err_.new_("read failed: k={0} type={1} err={2}", k, Byte_.Cls_val_name, Err_.Message_lang(e));}} 
 	@gplx.Virtual public boolean 		Read_bool_by_byte(int i)	{try {return rdr.getByte(i + 1) == 1;} catch (Exception e) {throw Err_.new_("read failed: i={0} type={1} err={2}", i, Bool_.Cls_val_name, Err_.Message_lang(e));}} 
 	@gplx.Virtual public boolean 		Read_bool_by_byte(String k)	{try {return Byte_.cast_(rdr.getObject(k)) == 1;} catch (Exception e) {throw Err_.new_("read failed: k={0} type={1} err={2}", k, Bool_.Cls_val_name, Err_.Message_lang(e));}} 
-	@gplx.Virtual public void			Rls()						{try {rdr.close();} catch (Exception e) {throw Err_.new_("close failed: err={0}", Err_.Message_lang(e));}} 
+	@gplx.Virtual public void			Rls() {
+		try	{rdr.close();} 
+		catch (Exception e) {throw Err_.new_("close failed: err={0}", Err_.Message_lang(e));}
+		if (stmt != null) stmt.Rls();
+	}
 }

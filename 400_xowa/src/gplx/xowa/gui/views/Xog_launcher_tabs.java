@@ -65,11 +65,11 @@ class Xog_launcher_tabs {
 		Xog_tab_itm tab = win.Tab_mgr().Tabs_new_init(launch_wiki, Xoae_page.new_(launch_wiki, launch_ttl)); // WORKAROUND: set the tab to an empty page, else null ref later; DATE:2014-07-23
 		tab.Show_url_bgn(launch_url);
 	}
-        public static final Xog_launcher_tabs _ = new Xog_launcher_tabs(); Xog_launcher_tabs() {}
+	public static final Xog_launcher_tabs _ = new Xog_launcher_tabs(); Xog_launcher_tabs() {}
 }
 class Io_fil_marker {
 	private Io_url url;
-	private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_._;
+	private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.I;
 	public Io_fil_marker Usr_dlg_(Gfo_usr_dlg v) {this.usr_dlg = v; return this;}
 	public Io_fil_marker Url_(Io_url url) {this.url = url; return this;}
 	public boolean Bgn() {

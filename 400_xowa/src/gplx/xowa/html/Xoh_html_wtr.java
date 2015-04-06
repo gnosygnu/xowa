@@ -644,7 +644,7 @@ class Xoh_display_ttl_wtr {
 		}
 		return false;
 	}
-        public static final Xoh_display_ttl_wtr _ = new Xoh_display_ttl_wtr(); Xoh_display_ttl_wtr() {}
+	public static final Xoh_display_ttl_wtr _ = new Xoh_display_ttl_wtr(); Xoh_display_ttl_wtr() {}
 }
 /*
 NOTE_1:inline always written as <tag></tag>, not <tag/>

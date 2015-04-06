@@ -38,7 +38,7 @@ public class Xoh_page_wtr_wkr_ {
 		if (head_end == null) return;
 		int insert_pos = Bry_finder.Find_fwd(html_bfr.Bfr(), Html_tag_.Head_rhs);
 		if (insert_pos == Bry_finder.Not_found) {
-			Gfo_usr_dlg_._.Warn_many("", "", "could not find </head>");
+			Gfo_usr_dlg_.I.Warn_many("", "", "could not find </head>");
 			return;
 		}
 		html_bfr.Insert_at(insert_pos, head_end);
@@ -48,7 +48,7 @@ public class Xoh_page_wtr_wkr_ {
 		if (html_end == null) return;
 		int insert_pos = Bry_finder.Find_bwd(html_bfr.Bfr(), Html_tag_.Html_rhs, html_bfr.Len());
 		if (insert_pos == Bry_finder.Not_found) {
-			Gfo_usr_dlg_._.Warn_many("", "", "could not find </html>");
+			Gfo_usr_dlg_.I.Warn_many("", "", "could not find </html>");
 			return;
 		}
 		html_bfr.Insert_at(insert_pos, html_end);

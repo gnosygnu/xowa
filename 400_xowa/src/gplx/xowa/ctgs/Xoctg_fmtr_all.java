@@ -111,7 +111,7 @@ class Xoctg_fmtr_all {
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_k004();
 		Html_nav_bry(bfr, wiki, ttl, view_grp, Bool_.N);
 		Html_nav_bry(bfr, wiki, ttl, view_grp, Bool_.Y);
-		return bfr.Mkr_rls().Xto_bry_and_clear();
+		return bfr.To_bry_and_rls();
 	}
 	private void Html_nav_bry(Bry_bfr bfr, Xowe_wiki wiki, Xoa_ttl ttl, Xoctg_view_grp view_grp, boolean fill_at_bgn) {
 		Bry_bfr href_bfr = wiki.Utl__bfr_mkr().Get_b512();
@@ -130,7 +130,7 @@ class Xoctg_fmtr_all {
 		href_bfr.Add_byte(Byte_ascii.Question).Add(arg_idx_lbl).Add_byte(Byte_ascii.Eq);		// filefrom=
 		href_bfr.Add(arg_sortkey);																// Abc
 		href_bfr.Add_byte(Byte_ascii.Hash).Add(div_id);											// #mw-subcategories
-		byte[] nav_href = href_bfr.Mkr_rls().Xto_bry_and_clear();
+		byte[] nav_href = href_bfr.To_bry_and_rls();
 		byte[] nav_ttl = ttl.Full_url();
 		int nav_text_id = fill_at_bgn ? Xol_msg_itm_.Id_next_results : Xol_msg_itm_.Id_prev_results;
 		byte[] nav_text = wiki.Msg_mgr().Val_by_id_args(nav_text_id, grp_max);					// fill_at_bgn 200 / previous 200

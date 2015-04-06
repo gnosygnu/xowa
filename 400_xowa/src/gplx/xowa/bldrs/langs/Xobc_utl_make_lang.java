@@ -32,7 +32,7 @@ public class Xobc_utl_make_lang implements GfoInvkAble {
 		lang_parser.Parse_mediawiki(lang_mgr, lang_root.GenSubDir("mediawiki"), kwd_mgr);
 		kwd_mgr.Add_words();
 		lang_parser.Save_langs(lang_mgr, lang_root.GenSubDir(Xol_mw_lang_parser.Dir_name_core), manual_text_bgn_hash, manual_text_end_hash);
-		Gfo_usr_dlg_._.Prog_many("", "", "done");
+		Gfo_usr_dlg_.I.Prog_many("", "", "done");
 	}
 	public void Parse_manual_text(byte[] langs_bry, byte[] text, OrderedHash manual_text) {
 		OrderedHash langs = lang_mgr.Xto_hash(langs_bry);

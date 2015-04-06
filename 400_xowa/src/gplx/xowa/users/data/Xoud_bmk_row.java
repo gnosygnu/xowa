@@ -17,15 +17,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 public class Xoud_bmk_row {
-	public Xoud_bmk_row(int bmk_id, int bmk_sort, String bmk_wiki, String bmk_page, String bmk_qarg, String bmk_wtxt, DateAdp bmk_time, int bmk_count) {
-		this.bmk_id = bmk_id; this.bmk_sort = bmk_sort; this.bmk_wiki = bmk_wiki; this.bmk_page = bmk_page; this.bmk_qarg = bmk_qarg; this.bmk_wtxt = bmk_wtxt; this.bmk_time = bmk_time; this.bmk_count = bmk_count;
+	public Xoud_bmk_row(int id, String wiki, String page, String qarg, String name, String comment, String tag, int sort, int count, DateAdp time) {
+		this.id = id; this.wiki = wiki; this.page = page; this.qarg = qarg;
+		this.name = name; this.comment = comment; this.tag = tag;
+		this.sort = sort; this.count = count; this.time = time;
 	}
-	public int Bmk_id() {return bmk_id;} private final int bmk_id;
-	public int Bmk_sort() {return bmk_sort;} private final int bmk_sort;
-	public String Bmk_wiki() {return bmk_wiki;} private final String bmk_wiki;
-	public String Bmk_page() {return bmk_page;} private final String bmk_page;
-	public String Bmk_qarg() {return bmk_qarg;} private final String bmk_qarg;
-	public String Bmk_wtxt() {return bmk_wtxt;} private final String bmk_wtxt;
-	public DateAdp Bmk_time() {return bmk_time;} private final DateAdp bmk_time;
-	public int Bmk_count() {return bmk_count;} private final int bmk_count;
+	public int		Id() {return id;} private final int id;
+	public String	Wiki() {return wiki;} private final String wiki;
+	public String	Page() {return page;} private final String page;
+	public String	Qarg() {return qarg;} private final String qarg;
+	public String	Name() {return name;} private final String name;
+	public String	Comment() {return comment;} private final String comment;
+	public String	Tag() {return tag;} private final String tag;
+	public int		Sort() {return sort;} private final int sort;
+	public int		Count() {return count;} private final int count;
+	public DateAdp	Time() {return time;} private final DateAdp time;
 }

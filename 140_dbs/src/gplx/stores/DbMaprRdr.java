@@ -114,7 +114,7 @@ public class DbMaprRdr extends DataRdr_base implements SrlMgr {
 	HashAdp tables = HashAdp_.new_();
 	Db_conn conn; Criteria rootCrt;
 	DbMaprMgr mgr; ListAdp rowStack = ListAdp_.new_();
-	public static DbMaprRdr new_(Db_url dbInfo, Criteria rootCrt) {
+	public static DbMaprRdr new_(Db_conn_info dbInfo, Criteria rootCrt) {
 		DbMaprRdr rv = new DbMaprRdr();
 		rv.conn = Db_conn_pool.I.Get_or_new(dbInfo); rv.rootCrt = rootCrt;
 		return rv;

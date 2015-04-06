@@ -17,50 +17,47 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.fsdb.data; import gplx.*; import gplx.fsdb.*;
 import gplx.dbs.*;
-public class Fsd_dir_tbl {
-	private String tbl_name = "file_data_dir"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
-	private String fld_id, fld_owner_id, fld_name;		
-	private Db_conn conn; private Db_stmt stmt_insert, stmt_update, stmt_select_by_name;		
-	public void Conn_(Db_conn new_conn, boolean created, boolean schema_is_1) {
-		this.conn = new_conn; flds.Clear();
-		String fld_prefix = "";
-		if (schema_is_1) {
-			tbl_name			= "fsdb_dir";
-			fld_prefix			= "dir_";
-		}
-		fld_id				= flds.Add_int(fld_prefix + "id");
-		fld_owner_id		= flds.Add_int(fld_prefix + "owner_id");
-		fld_name			= flds.Add_str(fld_prefix + "name", 255);
-		if (created) {
-			Db_meta_tbl meta = Db_meta_tbl.new_(tbl_name, flds
-			, Db_meta_idx.new_unique_by_tbl(tbl_name, "pkey", fld_id)
-			, Db_meta_idx.new_normal_by_tbl(tbl_name, "name", fld_name, fld_owner_id, fld_id)
-			);
-			conn.Exec_create_tbl_and_idx(meta);
-		}
-		stmt_insert = stmt_update = stmt_select_by_name = null;
+public class Fsd_dir_tbl implements RlsAble {
+	private final String tbl_name = "fsdb_dir"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private final String fld_id, fld_owner_id, fld_name;		
+	private final Db_conn conn; private Db_stmt stmt_insert, stmt_update, stmt_select_by_name;		
+	public Fsd_dir_tbl(Db_conn conn, boolean schema_is_1) {
+		this.conn = conn;
+		this.fld_id				= flds.Add_int_pkey	("dir_id");
+		this.fld_owner_id		= flds.Add_int		("dir_owner_id");
+		this.fld_name			= flds.Add_str		("dir_name", 255);
+		conn.Rls_reg(this);
 	}
-	public void Insert(int id, String name, int owner_id) {
-		if (stmt_insert == null) stmt_insert = conn.Rls_reg(conn.Stmt_insert(tbl_name, flds));
+	public void Rls() {
+		stmt_insert = Db_stmt_.Rls(stmt_insert);
+		stmt_update = Db_stmt_.Rls(stmt_update);
+		stmt_select_by_name = Db_stmt_.Rls(stmt_select_by_name);
+	}
+	public void Create_tbl() {
+		conn.Ddl_create_tbl
+		( Db_meta_tbl.new_(tbl_name, flds
+		, Db_meta_idx.new_normal_by_tbl(tbl_name, "name", fld_name, fld_owner_id, fld_id)));
+	}
+	public void Insert(int id, byte[] name, int owner_id) {
+		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(tbl_name, flds);
 		stmt_insert.Clear()
 			.Val_int(fld_id, id)
 			.Val_int(fld_owner_id, owner_id)
-			.Val_str(fld_name, name)
+			.Val_bry_as_str(fld_name, name)
 			.Exec_insert();
 	}	
-	public void Update(int id, String name, int owner_id) {
-		if (stmt_update == null) stmt_update = conn.Rls_reg(conn.Stmt_update_exclude(tbl_name, flds, fld_id));
+	public void Update(int id, byte[] name, int owner_id) {
+		if (stmt_update == null) stmt_update = conn.Stmt_update_exclude(tbl_name, flds, fld_id);
 		stmt_update.Clear()
 			.Val_int(fld_owner_id, owner_id)
-			.Val_str(fld_name, name)
+			.Val_bry_as_str(fld_name, name)
 			.Crt_int(fld_id, id)
 			.Exec_update();
 	}
-	public Fsd_dir_itm Select_itm(String name) {
-		if (stmt_select_by_name == null) stmt_select_by_name = conn.Rls_reg(conn.Stmt_select(tbl_name, flds, fld_name));
-		Db_rdr rdr = Db_rdr_.Null;
+	public Fsd_dir_itm Select_or_null(byte[] name) {
+		if (stmt_select_by_name == null) stmt_select_by_name = conn.Stmt_select(tbl_name, flds, fld_name);
+		Db_rdr rdr = stmt_select_by_name.Clear().Crt_bry_as_str(fld_name, name).Exec_select__rls_manual();
 		try {
-			rdr = stmt_select_by_name.Clear().Crt_str(fld_name, name).Exec_select_as_rdr();
 			return rdr.Move_next()
 				? new Fsd_dir_itm(rdr.Read_int(fld_id), rdr.Read_int(fld_owner_id), name)
 				: Fsd_dir_itm.Null

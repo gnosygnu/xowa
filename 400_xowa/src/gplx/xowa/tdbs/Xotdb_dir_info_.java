@@ -19,14 +19,14 @@ package gplx.xowa.tdbs; import gplx.*; import gplx.xowa.*;
 public class Xotdb_dir_info_ {
 	public static String Tid_name(byte tid) {
 		switch (tid) {
-			case Xotdb_dir_info_.Tid_page:				return Xotdb_dir_info_.Name_page;
+			case Xotdb_dir_info_.Tid_page:					return Xotdb_dir_info_.Name_page;
 			case Xotdb_dir_info_.Tid_ttl:					return Xotdb_dir_info_.Name_title;
 			case Xotdb_dir_info_.Tid_id:					return Xotdb_dir_info_.Name_id;
-			case Xotdb_dir_info_.Tid_category:			return Xotdb_dir_info_.Name_category;
+			case Xotdb_dir_info_.Tid_category:				return Xotdb_dir_info_.Name_category;
 			case Xotdb_dir_info_.Tid_category2_link:		return Xotdb_dir_info_.Name_category2_link;
 			case Xotdb_dir_info_.Tid_category2_main:		return Xotdb_dir_info_.Name_category2_main;
 			case Xotdb_dir_info_.Tid_search_ttl:			return Xotdb_dir_info_.Name_search_ttl;
-			default:									throw Err_.unhandled(tid);
+			default:										throw Err_.unhandled(tid);
 		}
 	}
 	public static Xotdb_dir_info[] regy_() {
@@ -37,6 +37,9 @@ public class Xotdb_dir_info_ {
 		regy_itm_(rv, Bool_.N, Tid_category);
 		regy_itm_(rv, Bool_.N, Tid_search_ttl);
 		return rv;
+	}
+	public static boolean Dir_name_is_tdb(String dir_name) {
+		return String_.In(dir_name, Name_ns, Name_site, Name_cfg, "tmp");
 	}
 	private static void regy_itm_(Xotdb_dir_info[] rv, boolean ns_root, byte id) {rv[id] = new Xotdb_dir_info(ns_root, id, Tid_name(id));}
 	public static final String Ext_xdat = ".xdat", Ext_csv = ".csv", Ext_zip = ".zip"

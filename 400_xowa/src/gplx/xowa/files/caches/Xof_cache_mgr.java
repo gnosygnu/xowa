@@ -47,19 +47,6 @@ public class Xof_cache_mgr implements GfoInvkAble {
 			fil_mgr.Cleanup();
 		} catch (Exception e) {usr_dlg.Warn_many("", "", "cache_mgr.term:fatal error: err=~{0}", Err_.Message_gplx_brief(e));}
 	}
-	public Xofc_dir_itm Dir__get_or_make(byte[] dir) {return dir_mgr.Get_by_name_or_make(dir);}
-	public Xofc_fil_itm Fil__get_or_null(byte[] dir, byte[] ttl, boolean is_orig, int w, double time, int page) {
-		Xofc_dir_itm dir_itm = dir_mgr.Get_by_name_or_null(dir); if (dir_itm == null) return null;
-		return fil_mgr.Get_or_null(dir_itm.Id(), ttl, is_orig, w, time, page);
-	}
-	public Xofc_fil_itm Fil__make(byte[] dir, byte[] ttl, boolean is_orig, int w, int h, double time, int page, long size) {
-		Xofc_dir_itm dir_itm = dir_mgr.Get_by_name_or_make(dir);
-		return fil_mgr.Make_v2(dir_itm.Id(), ttl, is_orig, w, h, time, page, Xof_ext_.new_by_ttl_(ttl), size);
-	}
-	public void Fil__update(Xofc_fil_itm fil) {
-		fil.Cache_time_now_();
-		if (fil.Cmd_mode() == Db_cmd_mode.Tid_create) cfg_mgr.Cache_len_add(fil.Size());
-	}
 	public Xofc_fil_itm Reg(Xof_fsdb_itm itm, long bin_len) {return this.Reg(itm.Orig_repo_name(), itm.Lnki_ttl(), itm.File_is_orig(), itm.File_w(), itm.File_w(), itm.Lnki_time(), itm.Lnki_ext(), bin_len, DateAdp_.MaxValue, "");}
 	private Xofc_fil_itm Reg(byte[] repo, byte[] ttl, boolean fil_is_orig, int fil_w, int fil_h, double fil_thumbtime, Xof_ext ext, long bin_len, DateAdp modified, String hash) {
 		int dir_id = dir_mgr.Get_by_name_or_make(repo).Id();

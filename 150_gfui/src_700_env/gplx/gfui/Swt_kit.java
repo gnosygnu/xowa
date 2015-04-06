@@ -194,7 +194,7 @@ public class Swt_kit implements Gfui_kit {
 			return rv;
 		}
 		catch (Exception e) {
-			Gfo_usr_dlg_._.Warn_many("", "", "error while calculating font height; err=~{0}", Err_.Message_gplx_brief(e));
+			Gfo_usr_dlg_.I.Warn_many("", "", "error while calculating font height; err=~{0}", Err_.Message_gplx_brief(e));
 			return 8;
 		}
 	}

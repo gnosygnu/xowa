@@ -36,7 +36,7 @@ public class Xog_tab_itm_read_mgr {
 		catch (Exception e) {
 			if (String_.Eq(Err_.Message_lang(e), "class org.eclipse.swt.SWTException Widget is disposed")) return; // ignore errors caused by user closing tab early; DATE:2014-07-26
 			if (show_is_err) {	// trying to show error page, but failed; don't show again, else recursion until out of memory; TODO:always load error page; no reason it should fail; WHEN:html_skin; DATE:2014-06-08
-				Gfo_usr_dlg_._.Warn_many("", "", "fatal error trying to load error page; page=~{0} err=~{1}" + new_page.Url().Xto_full_str_safe(), Err_.Message_gplx(e));
+				Gfo_usr_dlg_.I.Warn_many("", "", "fatal error trying to load error page; page=~{0} err=~{1}" + new_page.Url().Xto_full_str_safe(), Err_.Message_gplx(e));
 				return;
 			}
 			else
@@ -63,7 +63,7 @@ public class Xog_tab_itm_read_mgr {
 		if (url != null && ttl != null) {
 			try {url_str = url_parser.Build_str(url);}
 			catch (Exception e) {	// HACK: failed pages will have a null wiki; for now, catch and ignore; DATE:2014-06-22
-				Gfo_usr_dlg_._.Warn_many("", "", "failed to build url: url=~{0}, err=~{1}", String_.new_utf8_(url.Raw()), Err_.Message_gplx(e));
+				Gfo_usr_dlg_.I.Warn_many("", "", "failed to build url: url=~{0}, err=~{1}", String_.new_utf8_(url.Raw()), Err_.Message_gplx(e));
 				url_str = String_.new_utf8_(ttl.Full_txt());
 			}
 			win_str = String_.new_utf8_(Bry_.Add(ttl.Full_txt(), Win_text_suffix_page));

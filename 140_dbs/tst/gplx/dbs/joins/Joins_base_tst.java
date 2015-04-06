@@ -25,7 +25,7 @@ public abstract class Joins_base_tst {
 		Db_qry_delete.new_("dbs_join1").Exec_qry(conn);
 	}
 	@After public void teardown() {
-		conn.Conn_term();
+		conn.Rls_conn();
 	}
 	protected void InnerJoin_hook() {
 		conn.Exec_qry(new Db_qry_insert("dbs_crud_ops").Arg_("id", 0).Arg_("name", "me"));

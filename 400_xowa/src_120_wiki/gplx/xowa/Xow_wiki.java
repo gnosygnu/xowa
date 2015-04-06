@@ -35,7 +35,7 @@ public interface Xow_wiki extends Xow_ttl_parser {
 	Xof_orig_mgr				File_mgr__orig_mgr();
 	Xof_bin_mgr					File_mgr__bin_mgr();
 	Fsm_mnt_mgr					File_mgr__mnt_mgr();
-	Xow_core_data_mgr			Data_mgr__core_mgr();
+	Xowd_db_mgr					Data_mgr__core_mgr();
 	boolean						Html_mgr__hdump_enabled();
 	Xow_hzip_mgr				Html_mgr__hzip_mgr();
 	Xohd_hdump_rdr				Html_mgr__hdump_rdr();

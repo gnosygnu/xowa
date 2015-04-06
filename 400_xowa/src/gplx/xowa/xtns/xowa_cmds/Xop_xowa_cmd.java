@@ -37,6 +37,7 @@ public class Xop_xowa_cmd implements Xox_xnde {
 		xtn_html = wiki.Parser().Parse_text_to_wtxt(sub_root, sub_ctx, ctx.Tkn_mkr(), xtn_src);
 	}
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
-		throw Err_.not_implemented_msg_("xowa_cmd.xtn_write should not be called");
+		bfr.Add(xtn_html);
+		//throw Err_.not_implemented_msg_("xowa_cmd.xtn_write should not be called");
 	}
 }

@@ -16,129 +16,98 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.fsdb.data; import gplx.*; import gplx.fsdb.*;
-import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.engines.sqlite.*;
-import gplx.fsdb.meta.*;
-public class Fsd_thm_tbl {
-	private String tbl_name = "file_data_thm"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
-	private String fld_id, fld_owner_id, fld_w, fld_h, fld_time, fld_page, fld_bin_db_id, fld_size, fld_modified, fld_hash, fld_thumbtime;		
-	private Db_conn conn; private Db_stmt stmt_insert, stmt_select_by_fil_w;
-	private Fsm_atr_fil atr_fil;		
-	public void Conn_(Db_conn new_conn, boolean created, boolean schema_is_1, Fsm_atr_fil atr_fil) {
-		this.conn = new_conn; flds.Clear(); this.atr_fil = atr_fil;
-		String fld_prefix = "";
-		if (schema_is_1) {
-			tbl_name		= "fsdb_xtn_thm";
-			fld_prefix		= "thm_";
+import gplx.dbs.*; import gplx.fsdb.meta.*; import gplx.xowa.files.*;
+public class Fsd_thm_tbl implements RlsAble {
+	private final String tbl_name; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private final String fld_id, fld_owner_id, fld_w, fld_h, fld_time, fld_page, fld_bin_db_id, fld_size, fld_modified, fld_hash;
+	private final Db_conn conn; private Db_stmt stmt_insert, stmt_select_by_fil_w; private int mnt_id; private boolean schema_thm_page;
+	public Fsd_thm_tbl(Db_conn conn, boolean schema_is_1, int mnt_id, boolean schema_thm_page) {
+		this.conn = conn; this.mnt_id = mnt_id; this.schema_thm_page = schema_thm_page;
+		this.tbl_name = schema_is_1 ? "fsdb_xtn_thm" : "fsdb_thm";
+		this.fld_id				= flds.Add_int_pkey	("thm_id");
+		this.fld_owner_id		= flds.Add_int		("thm_owner_id");
+		this.fld_w				= flds.Add_int		("thm_w");
+		this.fld_h				= flds.Add_int		("thm_h");
+		if (schema_thm_page) {
+			this.fld_time		= flds.Add_double	("thm_time");
+			this.fld_page		= flds.Add_int		("thm_page");
 		}
-		fld_id				= flds.Add_int(fld_prefix + "id");
-		fld_owner_id		= flds.Add_int(fld_prefix + "owner_id");
-		fld_w				= flds.Add_int(fld_prefix + "w");
-		fld_h				= flds.Add_int(fld_prefix + "h");
-		fld_time			= flds.Add_double(fld_prefix + "time");
-		fld_page			= flds.Add_int(fld_prefix + "page");
-		fld_bin_db_id		= flds.Add_int(fld_prefix + "bin_db_id");
-		fld_size			= flds.Add_long(fld_prefix + "size");
-		fld_modified		= flds.Add_str(fld_prefix + "modified", 14);		// stored as yyyyMMddHHmmss
-		fld_hash			= flds.Add_str(fld_prefix + "hash", 40);
-		if (created) {
-			Db_meta_tbl meta = Db_meta_tbl.new_(tbl_name, flds
-			, Db_meta_idx.new_unique_by_tbl(tbl_name, "pkey", fld_id)
-			, Db_meta_idx.new_unique_by_tbl(tbl_name, "owner", fld_owner_id, fld_id, fld_w, fld_time, fld_page)
-			);
-			conn.Exec_create_tbl_and_idx(meta);
+		else {
+			this.fld_time		= flds.Add_int		("thm_thumbtime");
+			this.fld_page		= Db_meta_fld.Key_null;
 		}
-		stmt_insert = stmt_select_by_fil_w = null;
-		schema_thm_page_init = true;
+		this.fld_bin_db_id		= flds.Add_int		("thm_bin_db_id");
+		this.fld_size			= flds.Add_long		("thm_size");
+		this.fld_modified		= flds.Add_str		("thm_modified", 14);		// stored as yyyyMMddHHmmss
+		this.fld_hash			= flds.Add_str		("thm_hash", 40);
+		conn.Rls_reg(this);
 	}
-	private boolean Schema_thm_page() {
-		if (schema_thm_page_init) {
-			schema_thm_page = atr_fil.Abc_mgr().Cfg_mgr().Schema_thm_page();
-			schema_thm_page_init = false;
-			if (schema_thm_page) {
-				fld_thumbtime	= Db_meta_fld.Key_null;
-			}
-			else {
-				fld_time		= Db_meta_fld.Key_null;
-				fld_page		= Db_meta_fld.Key_null;
-			}
-		}
-		return schema_thm_page;
-	}	private boolean schema_thm_page, schema_thm_page_init = true;
-	public void Insert(int id, int thm_owner_id, int width, int height, double thumbtime, int page, int bin_db_id, long size, DateAdp modified, String hash) {
-		if (stmt_insert == null) {
-			String tmp_fld_time = this.Schema_thm_page() ? fld_time : fld_thumbtime;
-			stmt_insert = conn.Rls_reg(conn.Stmt_insert(tbl_name, fld_id, fld_owner_id, fld_w, fld_h, tmp_fld_time, fld_page, fld_bin_db_id, fld_size, fld_modified, fld_hash));
-		}
+	public void Rls() {
+		stmt_insert = Db_stmt_.Rls(stmt_insert);
+		stmt_select_by_fil_w = Db_stmt_.Rls(stmt_select_by_fil_w);
+	}
+	public void Create_tbl() {
+		conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds
+		, Db_meta_idx.new_unique_by_tbl(tbl_name, "owner", fld_owner_id, fld_id, fld_w, fld_time, fld_page)
+		));
+	}
+	public void Insert(int id, int thm_owner_id, int width, int height, double thumbtime, int page, int bin_db_id, long size) {
+		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(tbl_name, flds);
 		stmt_insert.Clear()
 		.Val_int(fld_id, id)
 		.Val_int(fld_owner_id, thm_owner_id)
 		.Val_int(fld_w, width)
 		.Val_int(fld_h, height);
-		if (this.Schema_thm_page()) {
-			stmt_insert.Val_double	(fld_time, gplx.xowa.files.Xof_lnki_time.Db_save_double(thumbtime));
-			stmt_insert.Val_int		(fld_page, gplx.xowa.files.Xof_lnki_page.Db_save_int(page));
+		if (schema_thm_page) {
+			stmt_insert.Val_double	(fld_time, Xof_lnki_time.Db_save_double(thumbtime));
+			stmt_insert.Val_int		(fld_page, Xof_lnki_page.Db_save_int(page));
 		}
 		else
-			stmt_insert.Val_int		(fld_thumbtime, gplx.xowa.files.Xof_lnki_time.Db_save_int(thumbtime));
+			stmt_insert.Val_int		(fld_time, Xof_lnki_time.Db_save_int(thumbtime));
 		stmt_insert
 		.Val_int(fld_bin_db_id, bin_db_id)
 		.Val_long(fld_size, size)
-		.Val_str(fld_modified, Sqlite_engine_.X_date_to_str(modified))
-		.Val_str(fld_hash, hash)
+		.Val_str(fld_modified, Modified_null_str)
+		.Val_str(fld_hash, Hash_null)
 		.Exec_insert();
 	}
-	private Db_stmt Select_by_fil_w_stmt() {
-		Db_qry__select_cmd qry = Db_qry_.select_().From_(tbl_name).Cols_all_();
-		gplx.core.criterias.Criteria crt 
-			= this.Schema_thm_page()
-			? Db_crt_.eq_many_(fld_owner_id, fld_w, fld_time, fld_page)
-			: Db_crt_.eq_many_(fld_owner_id, fld_w, fld_thumbtime)
-			;
-		qry.Where_(crt);
-		return conn.Stmt_new(qry);
-	}
-	public boolean Select_itm_by_fil_width(int owner_id, Fsd_thm_itm thm) {
-		if (stmt_select_by_fil_w == null) stmt_select_by_fil_w = conn.Rls_reg(Select_by_fil_w_stmt());
-		Db_rdr rdr = Db_rdr_.Null;
+	public boolean Select_itm_by_fil_width(int dir_id, int fil_id, Fsd_thm_itm thm) {
+		if (stmt_select_by_fil_w == null) stmt_select_by_fil_w = conn.Stmt_select(tbl_name, flds, String_.Ary_wo_null(fld_owner_id, fld_w, fld_time, fld_page));
+		stmt_select_by_fil_w.Clear().Crt_int(fld_owner_id, fil_id).Crt_int(fld_w, thm.W());
+		if (schema_thm_page) {
+			stmt_select_by_fil_w.Crt_double	(fld_time, Xof_lnki_time.Db_save_double(thm.Time()));
+			stmt_select_by_fil_w.Crt_int	(fld_page, Xof_lnki_page.Db_save_int(thm.Page()));
+		}
+		else {
+			stmt_select_by_fil_w.Crt_int	(fld_time, Xof_lnki_time.Db_save_int(thm.Time()));
+		}
+		Db_rdr rdr = stmt_select_by_fil_w.Exec_select__rls_manual();
 		try {
-			stmt_select_by_fil_w.Clear()
-				.Crt_int(fld_owner_id, owner_id)
-				.Crt_int(fld_w, thm.W())
-				;
-			if (this.Schema_thm_page())  {
-				stmt_select_by_fil_w.Crt_double(fld_time, gplx.xowa.files.Xof_lnki_time.Db_save_double(thm.Time()));
-				stmt_select_by_fil_w.Crt_int(fld_page, gplx.xowa.files.Xof_lnki_page.Db_save_int(thm.Page()));
-			}
-			else {
-				stmt_select_by_fil_w.Crt_int(fld_time, gplx.xowa.files.Xof_lnki_time.Db_save_int(thm.Time()));
-			}
-			rdr = stmt_select_by_fil_w.Exec_select_as_rdr();
 			return rdr.Move_next()
-				? Ctor_by_load(thm, rdr, this.Schema_thm_page())
+				? Ctor_by_load(thm, rdr, dir_id)
 				: false;
 		}
 		finally {rdr.Rls();}
 	}
-	public boolean Select_itm_by_fil_width2(int owner_id, Fsd_thm_itm thm) {
-		if (stmt_select_by_fil_w == null) stmt_select_by_fil_w = conn.Rls_reg(conn.Stmt_select(tbl_name, flds, fld_owner_id));
-		Db_rdr rdr = Db_rdr_.Null;
+	public boolean Select_itm_by_fil_width2(int dir_id, int fil_id, Fsd_thm_itm thm) {
+		if (stmt_select_by_fil_w == null) stmt_select_by_fil_w = conn.Stmt_select(tbl_name, flds, fld_owner_id);
+		ListAdp list = ListAdp_.new_();
+		Db_rdr rdr = stmt_select_by_fil_w.Clear().Crt_int(fld_owner_id, thm.Fil_id()).Exec_select__rls_manual();
 		try {
-			ListAdp list = ListAdp_.new_();
-			rdr = stmt_select_by_fil_w.Clear().Crt_int(fld_owner_id, thm.Owner_id()).Exec_select_as_rdr();
 			while (rdr.Move_next()) {
 				Fsd_thm_itm itm = Fsd_thm_itm.new_();
-				Ctor_by_load(itm, rdr, this.Schema_thm_page());
+				Ctor_by_load(itm, rdr, dir_id);
 				list.Add(itm);
 			}
 			return Match_nearest(list, thm, schema_thm_page);
 		}
 		finally {rdr.Rls();}
 	}
-	private boolean Ctor_by_load(Fsd_thm_itm itm, Db_rdr rdr, boolean schema_thm_page) {
-		int id = rdr.Read_int(fld_id);
-		int owner_id = rdr.Read_int(fld_owner_id);
-		int width = rdr.Read_int(fld_w);
-		int height = rdr.Read_int(fld_h);
+	private boolean Ctor_by_load(Fsd_thm_itm itm, Db_rdr rdr, int dir_id) {
+		int thm_id = rdr.Read_int(fld_id);
+		int fil_id = rdr.Read_int(fld_owner_id);
+		int w = rdr.Read_int(fld_w);
+		int h = rdr.Read_int(fld_h);
 		long size = rdr.Read_long(fld_size);
 		String modified = rdr.Read_str(fld_modified);
 		String hash = rdr.Read_str(fld_hash);
@@ -146,18 +115,18 @@ public class Fsd_thm_tbl {
 		double time = 0;
 		int page = 0;
 		if (schema_thm_page) {
-			time = gplx.xowa.files.Xof_lnki_time.Db_load_double(rdr, fld_time);
-			page = gplx.xowa.files.Xof_lnki_page.Db_load_int(rdr, fld_page);
+			time = Xof_lnki_time.Db_load_double(rdr, fld_time);
+			page = Xof_lnki_page.Db_load_int(rdr, fld_page);
 		}
 		else {
-			time = gplx.xowa.files.Xof_lnki_time.Db_load_int(rdr, fld_thumbtime);
-			page = gplx.xowa.files.Xof_lnki_page.Null;
+			time = Xof_lnki_time.Db_load_int(rdr, fld_time);
+			page = Xof_lnki_page.Null;
 		}
-		itm.Init_by_load(bin_db_id, id, owner_id, width, time, page, height, size, modified, hash);
+		itm.Ctor(mnt_id, dir_id, fil_id, thm_id, bin_db_id, w, h, time, page, size, modified, hash);
 		return true;
 	}
 	public static final DateAdp Modified_null = null;
-	public static final String Hash_null = "";
+	public static final String Hash_null = "", Modified_null_str = "";
 	public static boolean Match_nearest(ListAdp list, Fsd_thm_itm thm, boolean schema_thm_page) {
 		int len = list.Count(); if (len == 0) return Bool_.N;
 		list.SortBy(Fsdb_thm_itm_sorter.I);

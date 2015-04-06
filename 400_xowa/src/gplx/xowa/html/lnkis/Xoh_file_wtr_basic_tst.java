@@ -141,6 +141,29 @@ public class Xoh_file_wtr_basic_tst {
 		,	""
 		));
 	}
+	@Test  public void Pre_in_caption() {	// PURPOSE: ignore pre if in caption; PAGE:s.w:Virus; DATE:2015-03-31
+		fxt.Init_para_y_();
+		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		( "[[File:A.png|thumb|a\n b]]"	// "\n " is pre
+		), String_.Concat_lines_nl_skip_last
+		( "<div class=\"thumb tright\">"
+		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"
+		, "    <a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/220px.png\" width=\"0\" height=\"0\" /></a>"
+		, "    <div class=\"thumbcaption\">"
+		, "      <div class=\"magnify\">"
+		, "        <a href=\"/wiki/File:A.png\" class=\"internal\" title=\"Enlarge\">"
+		, "          <img src=\"file:///mem/xowa/user/test_user/app/img/file/magnify-clip.png\" width=\"15\" height=\"11\" alt=\"\" />"
+		, "        </a>"
+		, "      </div>"
+		, "      a"						// no pre
+		, " b"
+		, "    </div>"
+		, "  </div>"
+		, "</div>"
+		, ""
+		));
+		fxt.Init_para_n_();
+	}
 	@Test  public void Img_title() {
 		fxt.Wtr_cfg().Lnki_title_(true);
 		Tst_img_title("[[File:A.png|frameless|a b]]", "a b");

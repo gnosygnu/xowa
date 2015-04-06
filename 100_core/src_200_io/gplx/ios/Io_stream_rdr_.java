@@ -31,7 +31,7 @@ public class Io_stream_rdr_ {
 	}
 	public static Io_stream_rdr new_by_tid_(byte tid) {
 		switch (tid) {
-			case Io_stream_.Tid_file:					return new Io_stream_rdr_file();
+			case Io_stream_.Tid_raw:					return new Io_stream_rdr_file();
 			case Io_stream_.Tid_zip: 					return new Io_stream_rdr_zip();
 			case Io_stream_.Tid_gzip: 					return new Io_stream_rdr_gzip();
 			case Io_stream_.Tid_bzip2: 					return new Io_stream_rdr_bzip2();
@@ -124,7 +124,7 @@ class Io_stream_rdr_adp implements Io_stream_rdr {
 	private java.io.InputStream strm;	
 	public Io_stream_rdr_adp(java.io.InputStream strm) {this.strm = strm;} 
 	public Object Under() {return strm;}
-	public byte Tid() {return Io_stream_.Tid_file;}
+	public byte Tid() {return Io_stream_.Tid_raw;}
 	public Io_url Url() {return url;} public Io_stream_rdr Url_(Io_url v) {this.url = v; return this;} private Io_url url;
 	public long Len() {return len;} public Io_stream_rdr Len_(long v) {len = v; return this;} private long len = Io_mgr.Len_null;
 	public void Open_mem(byte[] v) {}
@@ -172,7 +172,7 @@ abstract class Io_stream_rdr_base implements Io_stream_rdr {
 	public abstract java.io.InputStream Wrap_stream(java.io.InputStream stream);
 }
 class Io_stream_rdr_file extends Io_stream_rdr_base {
-	@Override public byte Tid() {return Io_stream_.Tid_file;}
+	@Override public byte Tid() {return Io_stream_.Tid_raw;}
 	public Io_stream_rdr Open() {
 		try {
 			if (!Io_mgr._.Exists(url))

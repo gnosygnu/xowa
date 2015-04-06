@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.ios.*; import gplx.xowa.wikis.*; import gplx.xowa.html.*;
+import gplx.ios.*; import gplx.xowa.html.*;
+import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 public class Xoa_css_extractor {	
 	public IoEngine_xrg_downloadFil Download_xrg() {return download_xrg;} private IoEngine_xrg_downloadFil download_xrg = Io_mgr._.DownloadFil_args("", Io_url_.Null);	
 	public Xoa_css_extractor Wiki_domain_(byte[] v) {wiki_domain = v; return this;} private byte[] wiki_domain; 
@@ -39,7 +40,7 @@ public class Xoa_css_extractor {
 		failover_dir = app.Fsys_mgr().Bin_any_dir().GenSubDir_nest("html", "xowa", "import");
 		url_encoder = Xoa_app_.Utl__encoder_mgr().Url();
 	}
-	public void Install_assert(Xowe_wiki wiki, Io_url wiki_html_dir) {
+	public void Install_assert(boolean download_from_css_tbl, Xowe_wiki wiki, Io_url wiki_html_dir) {
 		try {
 			Io_url css_common_url = wiki_html_dir.GenSubFil(Css_common_name);
 			Io_url css_wiki_url   = wiki_html_dir.GenSubFil(Css_wiki_name);
@@ -48,14 +49,17 @@ public class Xoa_css_extractor {
 			if (wiki.Domain_tid() == Xow_domain_.Tid_int_home || Env_.Mode_testing()) return;		// NOTE: do not download if home_wiki; also needed for TEST
 			if (Io_mgr._.ExistsFil(css_wiki_url)) return;											// css file exists; nothing to generate
 			wiki.Appe().Usr_dlg().Log_many("", "", "generating css for '~{0}'", wiki.Domain_str());
-			this.Install(wiki, wiki_html_dir);
+			if (download_from_css_tbl) {
+				if (Install_by_db(wiki, wiki_html_dir)) return;
+			}
+			this.Install_by_wmf(wiki, wiki_html_dir);
 		}
 		catch (Exception e) {	// if error, failover; paranoia catch for outliers like bad network connectivity fail, or MediaWiki: message not existing; DATE:2013-11-21
 			wiki.Appe().Usr_dlg().Warn_many("", "", "failed while trying to generate css; failing over; wiki='~{0}' err=~{1}", wiki.Domain_str(), Err_.Message_gplx(e));
 			Css_common_failover();	// only failover xowa_common.css; xowa_wiki.css comes from MediaWiki:Common.css / Vector.css
 		}
 	}
-	public void Install(Xowe_wiki wiki, Io_url wiki_html_dir) {
+	private void Install_by_wmf(Xowe_wiki wiki, Io_url wiki_html_dir) {
 		opt_download_css_common = wiki.Appe().Setup_mgr().Dump_mgr().Css_commons_download();
 		if (!wiki.Appe().User().Cfg_mgr().Security_mgr().Web_access_enabled()) opt_download_css_common = false;	// if !web_access_enabled, don't download
 		this.wiki_domain = wiki.Domain_bry();
@@ -69,6 +73,17 @@ public class Xoa_css_extractor {
 		Css_common_setup();
 		Css_wiki_setup();
 		Logo_setup();
+	}
+	private boolean Install_by_db(Xowe_wiki wiki, Io_url wiki_html_dir) {
+		Xowd_db_mgr core_db_mgr = wiki.Data_mgr__core_mgr();
+		if (	core_db_mgr == null
+			||	core_db_mgr.Props() == null
+			||	core_db_mgr.Props().Schema_is_1()
+			||	!core_db_mgr.Tbl__cfg().Select_yn_or(Xow_cfg_consts.Grp__wiki_schema, Xow_cfg_consts.Key__schema__tbl_css_core, Bool_.N)
+			) return false;
+		Xowd_db_file core_db = core_db_mgr.Db__core();
+		gplx.xowa.html.css.Xowd_css_core_mgr.Get(core_db.Tbl__css_core(), core_db.Tbl__css_file(), wiki_html_dir);
+		return true;
 	}
 	public void Css_common_setup() {
 		if (opt_download_css_common)

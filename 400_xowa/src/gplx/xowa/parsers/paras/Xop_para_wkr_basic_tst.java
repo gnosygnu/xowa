@@ -296,7 +296,7 @@ public class Xop_para_wkr_basic_tst {
 			,	"</p>"
 			));
 	}
-	@Test  public void Pre_lnki_in_td() {	// PURPOSE: ]] in td causes strange parsing; SEE: any {{Commons category}} article
+	@Test  public void Pre_lnki_in_td() {	// PURPOSE: ]] in td causes strange parsing; SEE: any {{Commons category}} article; updated test; DATE:2015-03-31
 		raw = String_.Concat_lines_nl_skip_last
 			(	"<table>"
 			,	"<tr>"
@@ -310,7 +310,7 @@ public class Xop_para_wkr_basic_tst {
 		fxt.Test_parse_page_wiki_str(raw, String_.Concat_lines_nl_skip_last
 			(	"<table>"
 			,	"  <tr>"
-			,	"    <td><a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\" \" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
+			,	"    <td><a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"  \" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
 			,	"    </td>"
 			,	"    <td>b"
 			,	"    </td>"

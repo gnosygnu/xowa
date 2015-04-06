@@ -16,20 +16,20 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.origs; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.core.primitives.*;
-import gplx.dbs.*;
+import gplx.core.primitives.*; import gplx.dbs.*;
 import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.wmfs.apis.*;
 public class Xof_orig_mgr {
-	private Xof_orig_wkr[] wkrs; private int wkrs_len;		
-	private Xof_url_bldr url_bldr; private Xow_repo_mgr repo_mgr;
-	private final Xof_img_size img_size = new Xof_img_size();
+	private Xof_orig_wkr[] wkrs; private int wkrs_len;
+	private Xof_url_bldr url_bldr; private Xow_repo_mgr repo_mgr; private final Xof_img_size img_size = new Xof_img_size();
 	public Xof_orig_mgr() {this.Wkrs__clear();}
-	public void Init_by_wiki(Io_url db_dir, boolean schema_is_1, byte[] domain_bry, Xof_download_wkr download_wkr, Xow_repo_mgr repo_mgr, Xof_url_bldr url_bldr, Xof_fsdb_mode fsdb_mode) {
+	public void Init_by_wiki(Xof_fsdb_mode fsdb_mode, Xof_orig_tbl[] orig_tbls, byte[] domain_bry, Xof_download_wkr download_wkr, Xow_repo_mgr repo_mgr, Xof_url_bldr url_bldr) {
 		this.repo_mgr = repo_mgr; this.url_bldr = url_bldr;
 		if (!fsdb_mode.Tid_wmf()) {		// add view,make; don't add if wmf
-			Xof_orig_wkr__orig_db wkr_xowa_db = new Xof_orig_wkr__orig_db(); 
-			Xof_orig_tbl.Conn__get_or_make(db_dir, wkr_xowa_db.Tbl(), schema_is_1, fsdb_mode);
-			this.Wkrs__add_many(wkr_xowa_db);
+			int orig_tbls_len = orig_tbls.length;
+			for (int i = 0; i < orig_tbls_len; ++i) {
+				Xof_orig_tbl orig_tbl = orig_tbls[i];
+				this.Wkrs__add_many(new Xof_orig_wkr__orig_db(orig_tbl, i == orig_tbls_len - 1));
+			}
 		}
 		if (!fsdb_mode.Tid_make())		// add view,wmf; don't add if make
 			this.Wkrs__add_many(new Xof_orig_wkr__wmf_api(new Xoapi_orig_wmf(), download_wkr, repo_mgr, domain_bry));
@@ -61,7 +61,7 @@ public class Xof_orig_mgr {
 				if (!Io_mgr._.ExistsFil(fsdb.Html_view_url()))
 					fsdb.File_exists_n_();
 			} catch (Exception e) {
-				throw Err_.err_(e, "orig: {0}", Err_.Message_gplx_brief(e));
+				Xoa_app_.Usr_dlg().Warn_many("", "", "orig: ~{0}", Err_.Message_gplx_brief(e));
 			}
 		}
 	}
@@ -71,21 +71,19 @@ public class Xof_orig_mgr {
 			if (wkr.Add_orig(repo, page, ext, w, h, redirect)) break;
 		}			
 	}
-	public void Txn_save() {
-		for (int i = 0; i < wkrs_len; i++) {
-			Xof_orig_wkr wkr = wkrs[i];
-			wkr.Db_txn_save();
-		}
-	}
-	public void Rls() {
-		for (int i = 0; i < wkrs_len; i++) {
-			Xof_orig_wkr wkr = wkrs[i];
-			wkr.Db_rls();
-		}
-	}
 	private void		Wkrs__clear() {wkrs = Xof_orig_wkr_.Ary_empty; wkrs_len = 0;}
 	private void		Wkrs__add_many(Xof_orig_wkr... v) {
 		wkrs = (Xof_orig_wkr[])Array_.Resize_add(wkrs, v);
 		wkrs_len += v.length;
+	}
+	public void			Wkrs_del(byte tid) {
+		ListAdp list = ListAdp_.new_();
+		for (int i = 0; i < wkrs_len; ++i) {
+			Xof_orig_wkr wkr = wkrs[i];
+			if (wkr.Tid() == tid) continue;	// do not add deleted wkr
+			list.Add(wkr);
+		}
+		wkrs = (Xof_orig_wkr[])list.Xto_ary_and_clear(Xof_orig_wkr.class);
+		wkrs_len = wkrs.length;
 	}
 }

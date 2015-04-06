@@ -61,7 +61,7 @@ public class Xof_xfer_mgr {
 		// BLOCK: thumb
 		if (lnki_thumbable) {									// lnki is thumb with known width >>> try to do thumb
 			if (lnki_w < 1 && lnki_h < 1) {						// NOTE: only give default thumb if both w and h are < 1; if h > 0, then skip; EX:Paris;[[File:IMA-Ile-St-Louis.jpg|thumb|x220]]
-				wiki.File_mgr().Fsdb_mgr().Init_by_wiki(wiki);
+				wiki.File_mgr().Init_file_mgr_by_load(wiki);
 				lnki_w = Xof_img_size.Upright_calc(wiki.File_mgr().Patch_upright(), lnki_upright, lnki_w, lnki_w, lnki_h, lnki_type);
 				if (lnki_w < 1)
 					lnki_w = wiki.Html_mgr().Img_thumb_width();		// NOTE: used to be src_repo.Thumb_w()

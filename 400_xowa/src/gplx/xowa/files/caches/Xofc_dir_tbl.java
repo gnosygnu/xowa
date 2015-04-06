@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.dbs.*; import gplx.dbs.engines.sqlite.*;
-class Xofc_dir_tbl {
+class Xofc_dir_tbl implements RlsAble {
 	private String tbl_name = "file_cache_dir"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private String fld_id, fld_name;
 	private Db_conn conn; private final Db_stmt_bldr stmt_bldr = new Db_stmt_bldr(); private Db_stmt select_stmt;
@@ -34,9 +34,13 @@ class Xofc_dir_tbl {
 			Db_meta_tbl meta = Db_meta_tbl.new_(tbl_name, flds
 			, Db_meta_idx.new_normal_by_tbl(tbl_name, "name", fld_name)
 			);
-			conn.Exec_create_tbl_and_idx(meta);
+			conn.Ddl_create_tbl(meta);
 		}
 		stmt_bldr.Conn_(conn, tbl_name, flds, fld_id);
+		conn.Rls_reg(this);
+	}
+	public void Rls() {
+		select_stmt = Db_stmt_.Rls(select_stmt);
 	}
 	public String Db_save(Xofc_dir_itm itm) {
 		try {
@@ -60,20 +64,17 @@ class Xofc_dir_tbl {
 		stmt_bldr.Rls();
 	}
 	public Xofc_dir_itm Select_one(byte[] name) {
-		if (select_stmt == null) select_stmt = conn.Rls_reg(conn.Stmt_select(tbl_name, flds, fld_name));
-		Db_rdr rdr = Db_rdr_.Null;
+		if (select_stmt == null) select_stmt = conn.Stmt_select(tbl_name, flds, fld_name);
+		Db_rdr rdr = select_stmt.Clear().Crt_bry_as_str(fld_name, name).Exec_select__rls_manual();
 		try {
-			rdr = select_stmt.Clear().Crt_bry_as_str(fld_name, name).Exec_select_as_rdr();
 			return rdr.Move_next() ? new_itm(rdr) : Xofc_dir_itm.Null;
 		}
 		finally {rdr.Rls();}
 	}		
 	public void Select_all(ListAdp list) {
 		list.Clear();
-		Db_stmt select_all_stmt = conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empy);
-		Db_rdr rdr = Db_rdr_.Null;
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empy).Exec_select__rls_auto();
 		try {
-			rdr = select_all_stmt.Exec_select_as_rdr();
 			while (rdr.Move_next())
 				list.Add(new_itm(rdr));
 		}

@@ -207,14 +207,14 @@ class TfdsMsgBldr {
 		for (int i = 0; i < list.Count(); i++) {
 			TfdsEqAryItm itm = (TfdsEqAryItm)list.FetchAt(i);
 			sb.Add_fmt_line("{0}: {1} {2} {3}"
-				, Int_.Xto_str_pad_bgn(itm.Idx(), 4)
+				, Int_.Xto_str_pad_bgn_zero(itm.Idx(), 4)
 				, String_.PadBgn(itm.Lhs(), lhsLenMax, " ")
 				, itm.Eq() ? "==" : "!="
 				, String_.PadBgn(itm.Rhs(), rhsLenMax, " ")
 				);
 		}
 //			String compSym = isEq ? "  " : "!=";
-//			String result = String_.Format("{0}: {1}{2}  {3}  {4}", Int_.Xto_str_pad_bgn(i, 4), lhsString, String_.CrLf + "\t\t", compSym, rhsString);
+//			String result = String_.Format("{0}: {1}{2}  {3}  {4}", Int_.Xto_str_pad_bgn_zero(i, 4), lhsString, String_.CrLf + "\t\t", compSym, rhsString);
 //			foreach (Object obj in list) {
 //				String itmComparison = (String)obj;
 //				sb.Add_fmt_line("{0}{1}", "\t\t", itmComparison);

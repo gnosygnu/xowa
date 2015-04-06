@@ -16,79 +16,44 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
-import gplx.dbs.*;
-public class Fsm_bin_mgr implements RlsAble {
-	private Io_url dir;
-	private final Fsm_bin_tbl tbl = new Fsm_bin_tbl();
-	private Fsm_bin_fil[] fil_ary = Fsm_bin_fil.Ary_empty; private int fil_ary_len = 0;
-	private Fsm_bin_fil fil_cur;
-	public int Len()			{return fil_ary.length;}
-	public long Db_bin_max()	{return db_bin_max;}
-	public int Insert_to_bin() {return insert_to_bin;} public Fsm_bin_mgr Insert_to_bin_(int v) {insert_to_bin = v; return this;} private int insert_to_bin = Fsm_mnt_mgr.Insert_to_bin_null;
-	public Fsm_bin_mgr Db_bin_max_(long v) {
-		db_bin_max = v;
-		for (int i = 0; i < fil_ary_len; i++)
-			fil_ary[i].Bin_max_(v);
-		return this;
-	}	private long db_bin_max = Io_mgr.Len_mb * Long_.Xby_int(188);
-	public Fsm_bin_fil Get_at(int i) {return fil_ary[i];}
-	private Fsm_bin_fil Get_cur() {return fil_ary_len == 0 ? null : fil_ary[fil_ary_len - 1];}
-	public void Txn_open() {
-		Get_cur().Conn().Txn_mgr().Txn_bgn_if_none();
+import gplx.ios.*; import gplx.dbs.*;
+public class Fsm_bin_mgr {
+	private final Fsdb_db_mgr core_mgr; private final int mnt_id; private final Fsm_bin_tbl tbl;
+	private Fsm_bin_fil[] dbs__ary = Fsm_bin_fil.Ary_empty; private int dbs__ary_len = 0; private Fsm_bin_fil nth_db;		
+	public Fsm_bin_mgr(Fsdb_db_mgr core_mgr, Db_conn conn, int mnt_id) {
+		this.core_mgr = core_mgr; this.mnt_id = mnt_id; 
+		this.tbl = new Fsm_bin_tbl(conn, core_mgr.File__schema_is_1(), mnt_id);
 	}
-	public void Txn_save() {		
-		tbl.Commit_all(fil_ary);
-		Get_cur().Conn().Txn_mgr().Txn_end_all();
+	public void Ctor_by_load() {
+		this.dbs__ary = tbl.Select_all(core_mgr);
+		this.dbs__ary_len = dbs__ary.length;
+		if (dbs__ary_len > 0) this.nth_db = dbs__ary[dbs__ary_len - 1];
 	}
-	public void Rls() {
-		int len = fil_ary.length;
-		for (int i = 0; i < len; i++) {
-			Fsm_bin_fil itm = fil_ary[i];
-			itm.Rls();
-		}
+	public Fsm_bin_fil Dbs__get_nth()		{return nth_db;}
+	public Fsm_bin_fil Dbs__get_at(int i)	{return dbs__ary[i];}
+	public Fsm_bin_fil Dbs__make(String file_name) {
+		Fsdb_db_file db = core_mgr.File__bin_file__new(mnt_id, file_name);
+		Fsm_bin_fil rv = new Fsm_bin_fil(dbs__ary_len, db.Url().NameAndExt(), Fsm_bin_fil.Bin_len_null, db.Conn(), core_mgr.File__schema_is_1());
+		tbl.Insert(rv.Id(), rv.Url_rel());
+		Dbs__add(rv);
+		return rv;
 	}
-	public int Get_id_for_insert(long bin_len) {
-		if (insert_to_bin != Fsm_mnt_mgr.Insert_to_bin_null) return insert_to_bin;	// insert_to_bin specified; return it
-		if (fil_cur.Bin_len() > fil_cur.Bin_max())
-			Itms_add(0);
-		return fil_cur.Id();
+	public void Insert(int db_id, int bin_id, byte owner_tid, long bin_len, Io_stream_rdr bin_rdr) {
+		Fsm_bin_fil fil = dbs__ary[db_id];
+		fil.Insert(bin_id, owner_tid, bin_len, bin_rdr);
+		dbs__ary[db_id].Insert(bin_id, owner_tid, bin_len, bin_rdr);
 	}
-	public void Increment(long bin_len) {
-		long new_bin_len = fil_cur.Bin_len() + bin_len;
-		fil_cur.Bin_len_(new_bin_len);
+	public void Txn_bgn() {
+		for (int i = 0; i < dbs__ary_len; ++i)
+			dbs__ary[i].Conn().Txn_bgn();
 	}
-	public long Insert(int db_id, int bin_id, byte owner_tid, long bin_len, gplx.ios.Io_stream_rdr bin_rdr) {
-		Fsm_bin_fil bin_fil = fil_ary[db_id];
-		return bin_fil.Insert(bin_id, owner_tid, bin_len, bin_rdr);
+	public void Txn_end() {
+		for (int i = 0; i < dbs__ary_len; ++i)
+			dbs__ary[i].Conn().Txn_end();
 	}
-	public void Init_for_db(Db_conn conn, boolean created, boolean schema_is_1, Io_url dir) {
-		this.dir = dir;
-		tbl.Conn_(conn, created, schema_is_1);
-		if (created)
-			this.Itms_add(0);
-		else {
-			fil_ary = tbl.Select_all(dir);
-			fil_ary_len = this.fil_ary.length;
-			fil_cur = this.fil_ary[fil_ary_len - 1];
-		}
-	}
-	private void Itms_add(long bin_len) {
-		Fsm_bin_fil cur = Get_cur();
-		if (cur != null) {
-			cur.Conn().Txn_mgr().Txn_end_all();
-			cur.Conn().Conn_term();
-		}
-		int new_itms_len = fil_ary_len + 1;
-		Fsm_bin_fil[] new_itms = new Fsm_bin_fil[new_itms_len];
-		for (int i = 0; i < fil_ary_len; i++)
-			new_itms[i] = fil_ary[i];
-		fil_cur = Fsm_bin_fil.make_(fil_ary_len, url_(dir, fil_ary_len), bin_len, db_bin_max);
-		fil_ary = new_itms;
-		fil_ary_len = new_itms_len;
-		fil_ary[fil_ary_len - 1] = fil_cur;
-		this.Txn_open();
-	}
-	private static Io_url url_(Io_url dir, int id) {
-		return dir.GenSubFil_ary("fsdb.bin.", Int_.Xto_str_pad_bgn(id, 4), ".sqlite3");
+	private void Dbs__add(Fsm_bin_fil fil) {
+		this.dbs__ary = (Fsm_bin_fil[])Array_.Resize(dbs__ary, dbs__ary_len + 1);
+		this.dbs__ary[dbs__ary_len++] = fil;
+		this.nth_db = fil;
 	}
 }

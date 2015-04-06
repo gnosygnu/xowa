@@ -23,7 +23,7 @@ public class Xot_tmpl_wtr {
 		rslt_bfr.Reset_if_gt(Io_mgr.Len_mb);
 		Write_tkn(ctx, src, src.length, rslt_bfr, root);
 		ctx.Tmpl_output_(null);
-		return rslt_bfr.Mkr_rls().Xto_bry_and_clear();
+		return rslt_bfr.To_bry_and_rls();
 	}
 	private void Write_tkn(Xop_ctx ctx, byte[] src, int src_len, Bry_bfr rslt_bfr, Xop_tkn_itm tkn) {
 		switch (tkn.Tkn_tid()) {

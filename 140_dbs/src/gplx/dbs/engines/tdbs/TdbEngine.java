@@ -18,20 +18,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
 import gplx.dbs.qrys.*; import gplx.dbs.sqls.*;
 public class TdbEngine implements Db_engine {
-	public String Tid() {return Tdb_url.Tid_const;}
-	public Db_url Url() {return url;} private Db_url url;
+	public String Tid() {return Tdb_conn_info.Tid_const;}
+	public Db_conn_info Conn_info() {return conn_info;} private Db_conn_info conn_info;
 	public TdbDatabase Db() {return db;} TdbDatabase db;
 	public void Conn_open() {
-		Tdb_url tdb_url = (Tdb_url)url;
+		Tdb_conn_info tdb_url = (Tdb_conn_info)conn_info;
 		String url_str = tdb_url.Server();
 		db = loadMgr.LoadTbls(Io_url_.new_any_(url_str));
 	}
 	public void Conn_term() {}
-	public void Txn_bgn() {}
-	public void Txn_end() {}
-	public Db_engine New_clone(Db_url url) {
+	public void Txn_bgn(String name)	{}
+	public void Txn_end()				{}
+	public void Txn_cxl()				{}
+	public void Txn_sav()				{}
+	public Db_engine New_clone(Db_conn_info conn_info) {
 		TdbEngine rv = new TdbEngine();
-		rv.CtorTdbEngine(url);
+		rv.CtorTdbEngine(conn_info);
 		rv.Conn_open();
 		return rv;
 	}
@@ -41,7 +43,8 @@ public class TdbEngine implements Db_engine {
 	}
 	public Db_stmt	New_stmt_prep(Db_qry qry) {return new Db_stmt_sql().Parse(qry, Sql_qry_wtr_.I.Xto_str(qry, true));}
 	public Object	New_stmt_prep_as_obj(String sql) {throw Err_.not_implemented_();}
-	public Db_rdr	New_rdr_by_obj(Object o, String sql) {return Db_rdr_.Null;}
+	public Db_rdr	New_rdr__rls_manual(Object rdr_obj, String sql) {return Db_rdr_.Empty;}
+	public Db_rdr	New_rdr__rls_auto(Db_stmt stmt, Object rdr_obj, String sql) {return Db_rdr_.Empty;}
 	public DataRdr	New_rdr(java.sql.ResultSet rdr, String sql) {return DataRdr_.Null;} 
 	public TdbTable FetchTbl(String name) {
 		TdbTable tbl = db.Tables().FetchOrFail(name);
@@ -54,16 +57,17 @@ public class TdbEngine implements Db_engine {
 	public void FlushTbl(TdbTable tbl) {
 		saveMgr.SaveFile(db, tbl.File());
 	}
-	public void	Exec_ddl_create_tbl(Db_meta_tbl meta) {throw Err_.not_implemented_();}
-	public void Exec_ddl_create_idx(Gfo_usr_dlg usr_dlg, Db_meta_idx... ary) {throw Err_.not_implemented_();}
-	public void	Exec_ddl_append_fld(String tbl, Db_meta_fld fld) {throw Err_.not_implemented_();}
-	public void			Exec_env_db_attach(String alias, Io_url db_url)		{}
-	public void			Exec_env_db_detach(String alias)					{}
+	public void	Ddl_create_tbl(Db_meta_tbl meta) {throw Err_.not_implemented_();}
+	public void Ddl_create_idx(Gfo_usr_dlg usr_dlg, Db_meta_idx... ary) {throw Err_.not_implemented_();}
+	public void			Ddl_append_fld(String tbl, Db_meta_fld fld) {throw Err_.not_implemented_();}
+	public void			Ddl_delete_tbl(String tbl)						{}
+	public void			Env_db_attach(String alias, Io_url db_url)		{}
+	public void			Env_db_detach(String alias)					{}
 
 	HashAdp wkrs = HashAdp_.new_(); TdbDbLoadMgr loadMgr = TdbDbLoadMgr.new_(); TdbDbSaveMgr saveMgr = TdbDbSaveMgr.new_();
 	public static final TdbEngine _ = new TdbEngine(); 
-	void CtorTdbEngine(Db_url url) {
-		this.url = url;
+	void CtorTdbEngine(Db_conn_info conn_info) {
+		this.conn_info = conn_info;
 		wkrs.Add(Db_qry_.Tid_select, TdbSelectWkr._);
 		wkrs.Add(Db_qry_.Tid_insert, TdbInsertWkr.new_());
 		wkrs.Add(Db_qry_.Tid_update, TdbUpdateWkr.new_());

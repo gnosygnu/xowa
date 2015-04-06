@@ -19,24 +19,21 @@ package gplx.dbs; import gplx.*;
 import gplx.dbs.engines.sqlite.*;
 public interface Db_conn_bldr_wkr {
 	void Clear_for_tests();
-	boolean Exists(String type, Object url_obj);
-	Db_conn Get(String type, Object url_obj);
-	Db_conn New(String type, Object url_obj);
+	boolean Exists(Io_url url);
+	Db_conn Get(Io_url url);
+	Db_conn New(Io_url url);
 }
 class Db_conn_bldr_wkr__sqlite implements Db_conn_bldr_wkr {
 	public void Clear_for_tests() {}
-	public boolean Exists(String type, Object url_obj) {
-		Io_url io_url = (Io_url)url_obj; return Io_mgr._.ExistsFil(io_url);
-	}
-	public Db_conn Get(String type, Object url_obj) {
-		Io_url io_url = (Io_url)url_obj; if (!Io_mgr._.ExistsFil(io_url)) return null;
-		Db_url db_url = Db_url_.sqlite_(io_url);
+	public boolean Exists(Io_url url) {return Io_mgr._.ExistsFil(url);}
+	public Db_conn Get(Io_url url) {
+		if (!Io_mgr._.ExistsFil(url)) return null;
+		Db_conn_info db_url = Db_conn_info_.sqlite_(url);
 		return Db_conn_pool.I.Get_or_new(db_url);
 	}
-	public Db_conn New(String type, Object url_obj) {
-		Io_url io_url = (Io_url)url_obj;
-		Io_mgr._.CreateDirIfAbsent(io_url.OwnerDir());	// must assert that dir exists
-		Db_url db_url = Sqlite_url.make_(io_url);
+	public Db_conn New(Io_url url) {
+		Io_mgr._.CreateDirIfAbsent(url.OwnerDir());	// must assert that dir exists
+		Db_conn_info db_url = Sqlite_conn_info.make_(url);
 		Db_conn conn = Db_conn_pool.I.Get_or_new(db_url);
 		Sqlite_engine_.Pragma_page_size(conn, 4096);
 		// conn.Conn_term();	// close conn after PRAGMA adjusted
@@ -47,22 +44,19 @@ class Db_conn_bldr_wkr__sqlite implements Db_conn_bldr_wkr {
 class Db_conn_bldr_wkr__mem implements Db_conn_bldr_wkr {
 	private final HashAdp hash = HashAdp_.new_();
 	public void Clear_for_tests() {hash.Clear(); Db_conn_pool.I.Clear();}
-	public boolean Exists(String type, Object url_obj) {
-		Io_url io_url = (Io_url)url_obj;
-		String io_url_str = io_url.Xto_api();
+	public boolean Exists(Io_url url) {
+		String io_url_str = url.Xto_api();
 		return hash.Has(io_url_str);
 	}
-	public Db_conn Get(String type, Object url_obj) {
-		Io_url io_url = (Io_url)url_obj;
-		String io_url_str = io_url.Xto_api();
+	public Db_conn Get(Io_url url) {
+		String io_url_str = url.Xto_api();
 		if (!hash.Has(io_url_str)) return null;
-		return Db_conn_pool.I.Get_or_new__mem(io_url.Xto_api());
+		return Db_conn_pool.I.Get_or_new__mem(url.Xto_api());
 	}
-	public Db_conn New(String type, Object url_obj) {
-		Io_url io_url = (Io_url)url_obj;
-		String io_url_str = io_url.Xto_api();
+	public Db_conn New(Io_url url) {
+		String io_url_str = url.Xto_api();
 		hash.Add(io_url_str, io_url_str);
-		return Db_conn_pool.I.Get_or_new__mem(io_url.Xto_api());
+		return Db_conn_pool.I.Get_or_new__mem(url.Xto_api());
 	}
         public static final Db_conn_bldr_wkr__mem I = new Db_conn_bldr_wkr__mem(); Db_conn_bldr_wkr__mem() {}
 }

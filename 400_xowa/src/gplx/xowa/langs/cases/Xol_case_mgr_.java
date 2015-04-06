@@ -19,7 +19,7 @@ package gplx.xowa.langs.cases; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.intl.*;
 public class Xol_case_mgr_ {
         @gplx.Internal protected static Xol_case_mgr new_() {return new Xol_case_mgr(Gfo_case_mgr_.Tid_custom);}
-        public static Xol_case_mgr Ascii()	{if (mgr_ascii == null) mgr_ascii = new_mgr_ascii_(); return mgr_ascii;} private static Xol_case_mgr mgr_ascii;
+	public static Xol_case_mgr Ascii()	{if (mgr_ascii == null) mgr_ascii = new_mgr_ascii_(); return mgr_ascii;} private static Xol_case_mgr mgr_ascii;
 	public static Xol_case_mgr Utf8()	{if (mgr_utf8 == null)	mgr_utf8  = new_mgr_utf8_();  return mgr_utf8;}  private static Xol_case_mgr mgr_utf8;
 	private static Xol_case_mgr new_mgr_ascii_() {
 		Xol_case_mgr rv = new Xol_case_mgr(Gfo_case_mgr_.Tid_ascii);

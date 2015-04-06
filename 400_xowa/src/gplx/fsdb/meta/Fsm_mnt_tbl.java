@@ -17,29 +17,24 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
 import gplx.dbs.*;
-public class Fsm_mnt_tbl {
-	private String tbl_name = "file_meta_mnt"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
-	private String fld_id, fld_name, fld_url;		
-	private Db_conn conn;
-	public void Conn_(Db_conn new_conn, boolean created, boolean schema_is_1) {
-		this.conn = new_conn; flds.Clear();
-		String fld_prefix = "";
-		if (schema_is_1) {
-			tbl_name		= "fsdb_mnt";
-			fld_prefix		= "mnt_";
-		}
-		fld_id				= flds.Add_int(fld_prefix + "id");
-		fld_name			= flds.Add_str(fld_prefix + "name", 255);
-		fld_url				= flds.Add_str(fld_prefix + "url", 255);
-		if (created) {
-			Db_meta_tbl meta = Db_meta_tbl.new_(tbl_name, flds
-			, Db_meta_idx.new_unique_by_tbl(tbl_name, "pkey", fld_id)
-			);
-			conn.Exec_create_tbl_and_idx(meta);
-			this.Insert(Fsm_mnt_mgr.Mnt_idx_main, "fsdb.main", "fsdb.main");
-			this.Insert(Fsm_mnt_mgr.Mnt_idx_user, "fsdb.user", "fsdb.user");
-		}
+public class Fsm_mnt_tbl implements RlsAble {
+	private final String tbl_name = "fsdb_mnt"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private final String fld_id, fld_name, fld_url;		
+	private final Db_conn conn;
+	public Fsm_mnt_tbl(Db_conn conn, boolean schema_is_1) {
+		this.conn = conn;
+		fld_id				= flds.Add_int_pkey	("mnt_id");
+		fld_name			= flds.Add_str		("mnt_name", 255);
+		fld_url				= flds.Add_str		("mnt_url", 255);
+		conn.Rls_reg(this);
 	}
+	public void Create_tbl() {
+		Db_meta_tbl meta = Db_meta_tbl.new_(tbl_name, flds);
+		conn.Ddl_create_tbl(meta);
+		this.Insert(Fsm_mnt_mgr.Mnt_idx_main, Mnt_name_main, Mnt_name_main);
+		this.Insert(Fsm_mnt_mgr.Mnt_idx_user, Mnt_name_user, Mnt_name_user);
+	}
+	public void Rls() {}
 	public void Insert(int id, String name, String url) {
 		Db_stmt stmt = conn.Stmt_insert(tbl_name, flds);
 		stmt.Clear().Val_int(fld_id, id).Val_str(fld_name, name).Val_str(fld_url, url).Exec_insert();
@@ -49,11 +44,9 @@ public class Fsm_mnt_tbl {
 		stmt.Clear().Val_str(fld_name, name).Val_str(fld_url, url).Crt_int(fld_id, id).Exec_update();
 	}	
 	public Fsm_mnt_itm[] Select_all() {
-		Db_stmt stmt = conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empy);
-		Db_rdr rdr = Db_rdr_.Null;
 		ListAdp list = ListAdp_.new_();
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empy).Clear().Exec_select__rls_auto();
 		try {
-			rdr = stmt.Clear().Exec_select_as_rdr();
 			while (rdr.Move_next()) {
 				Fsm_mnt_itm itm = new Fsm_mnt_itm(rdr.Read_int(fld_id), rdr.Read_str(fld_name), rdr.Read_str(fld_url));
 				list.Add(itm);
@@ -62,4 +55,5 @@ public class Fsm_mnt_tbl {
 		finally {rdr.Rls();}
 		return (Fsm_mnt_itm[])list.Xto_ary_and_clear(Fsm_mnt_itm.class);
 	}
+	public static final String Mnt_name_main = "fsdb.main", Mnt_name_user = "fsdb.user";
 }

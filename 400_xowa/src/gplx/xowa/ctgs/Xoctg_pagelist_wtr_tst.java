@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.ctgs; import gplx.*; import gplx.xowa.*;
 import org.junit.*;
-import gplx.xowa.dbs.tbls.*;
+import gplx.xowa.wikis.data.tbls.*;
 public class Xoctg_pagelist_wtr_tst {
 	@Before public void init() {fxt.Clear();} private Xoctg_pagelist_mgr_fxt fxt = new Xoctg_pagelist_mgr_fxt();
 	@Test   public void Basic() {
@@ -70,8 +70,8 @@ class Xoctg_pagelist_mgr_fxt {
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
 			String ttl = ary[i];
-			Xodb_page page = new Xodb_page();
-			Xodb_category_itm ctg_xtn = Xodb_category_itm.load_(0, 0, hidden, 0, 0, 0);
+			Xowd_page_itm page = new Xowd_page_itm();
+			Xowd_category_itm ctg_xtn = Xowd_category_itm.load_(0, 0, hidden, 0, 0, 0);
 			page.Xtn_(ctg_xtn);
 			page.Ttl_page_db_(Bry_.new_ascii_(ttl));
 			init_ctgs.AddMany(page);
@@ -79,7 +79,7 @@ class Xoctg_pagelist_mgr_fxt {
 	}	private ListAdp init_ctgs = ListAdp_.new_();
 	public void Test_print_hidden(String expd) {
 		Bry_bfr bfr = Bry_bfr.new_();
-		Xodb_page[] page_ary = (Xodb_page[])init_ctgs.Xto_ary_and_clear(Xodb_page.class);
+		Xowd_page_itm[] page_ary = (Xowd_page_itm[])init_ctgs.Xto_ary_and_clear(Xowd_page_itm.class);
 		hidden_wtr.Print_hidden(bfr, fxt.Wiki(), page_ary);
 		Tfds.Eq_str_lines(expd, bfr.Xto_str_and_clear());
 //		Tfds.Write(bfr.Xto_bry_and_clear());

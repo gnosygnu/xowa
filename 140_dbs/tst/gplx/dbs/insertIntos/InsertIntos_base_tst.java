@@ -26,7 +26,7 @@ public abstract class InsertIntos_base_tst {
 		conn.Exec_qry(Db_qry_delete.new_("dbs_insert_intos"));
 	}
 	@After public void teardown() {
-		conn.Conn_term();
+		conn.Rls_conn();
 	}
 	protected void Select_hook() {
 		conn.Exec_qry(Db_qry_.insert_("dbs_group_bys").Arg_("key1", "a").Arg_("val_int", 1));

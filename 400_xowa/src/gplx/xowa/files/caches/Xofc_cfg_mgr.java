@@ -16,33 +16,34 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.xowa.dbs.tbls.*;
+import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.xowa.wikis.data.tbls.*;
 class Xofc_cfg_mgr {
-	private final Db_cfg_tbl tbl = new Db_cfg_tbl();
+	private Db_cfg_tbl tbl;
 	public int Next_id() {return next_id++;} public void Next_id_(int v) {next_id = v;} private int next_id;		
 	public long Cache_len() {return cache_len;} public void Cache_len_(long v) {cache_len = v;} private long cache_len = 0;
 	public void Cache_len_add(long v) {cache_len += v;}
 	public long Cache_min() {return cache_min;} public void Cache_min_(long v) {cache_min = v;} private long cache_min = Io_mgr.Len_mb * 75;
 	public long Cache_max() {return cache_max;} public void Cache_max_(long v) {cache_max = v;} private long cache_max = Io_mgr.Len_mb * 100;
 	public void Conn_(Db_conn v, boolean created, boolean schema_is_1) {
-		tbl.Conn_(v, created, schema_is_1, "xowa_cfg", "file_cache_cfg");
+		tbl = new Db_cfg_tbl(v, schema_is_1 ? "xowa_cfg" : "file_cache_cfg");
 		if (created) {
-			tbl.Insert(Cfg_grp, Cfg_key__next_id, Int_.Xto_str(1));
-			tbl.Insert(Cfg_grp, Cfg_key__cache_len, Long_.Xto_str(0));
-			tbl.Insert(Cfg_grp, Cfg_key__cache_min, Long_.Xto_str(cache_min));
-			tbl.Insert(Cfg_grp, Cfg_key__cache_max, Long_.Xto_str(cache_max));
+			tbl.Create_tbl();
+			tbl.Insert_int(Cfg_grp, Cfg_key__next_id, 1);
+			tbl.Insert_int(Cfg_grp, Cfg_key__cache_len, 0);
+			tbl.Insert_long(Cfg_grp, Cfg_key__cache_min, cache_min);
+			tbl.Insert_long(Cfg_grp, Cfg_key__cache_max, cache_max);
 		}
 		else {
-			next_id = tbl.Select_as_int_or_fail(Cfg_grp, Cfg_key__next_id);
-			cache_len = tbl.Select_as_int_or_fail(Cfg_grp, Cfg_key__cache_len);
-			cache_max = tbl.Select_as_int_or_fail(Cfg_grp, Cfg_key__cache_max);
+			next_id = tbl.Select_int(Cfg_grp, Cfg_key__next_id);
+			cache_len = tbl.Select_int(Cfg_grp, Cfg_key__cache_len);
+			cache_max = tbl.Select_int(Cfg_grp, Cfg_key__cache_max);
 		}
 	}
 	public void Save_all() {
-		tbl.Update(Cfg_grp, Cfg_key__next_id, Int_.Xto_str(next_id));
-		tbl.Update(Cfg_grp, Cfg_key__cache_len, Long_.Xto_str(cache_len));
-		tbl.Update(Cfg_grp, Cfg_key__cache_min, Long_.Xto_str(cache_min));
-		tbl.Update(Cfg_grp, Cfg_key__cache_max, Long_.Xto_str(cache_max));
+		tbl.Update_int(Cfg_grp, Cfg_key__next_id, next_id);
+		tbl.Update_long(Cfg_grp, Cfg_key__cache_len, cache_len);
+		tbl.Update_long(Cfg_grp, Cfg_key__cache_min, cache_min);
+		tbl.Update_long(Cfg_grp, Cfg_key__cache_max, cache_max);
 	}
 	public void Cleanup() {}
 	private static final String Cfg_grp = "fsdb.cache", Cfg_key__next_id = "next_id", Cfg_key__cache_min = "cache_min", Cfg_key__cache_max = "cache_max", Cfg_key__cache_len = "cache_len";

@@ -16,9 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.origs; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
+import gplx.xowa.wikis.data.tbls.*;
 class Xof_wiki_finder {	// UNUSED
 	private Xowe_wiki wiki_0, wiki_1;
-	private Xodb_page db_page = new Xodb_page(); 
+	private Xowd_page_itm db_page = new Xowd_page_itm(); 
 	public Xof_wiki_finder(Xowe_wiki wiki_0, Xowe_wiki wiki_1) {
 		this.wiki_0 = wiki_0; this.wiki_1 = wiki_1;
 	}
@@ -61,7 +62,7 @@ class Xof_wiki_finder {	// UNUSED
 		}
 		return true;
 	}
-	private boolean Find_page__by_wiki(Xodb_page db_page, Xowe_wiki wiki, int ns_id, byte[] ttl_bry) {
+	private boolean Find_page__by_wiki(Xowd_page_itm db_page, Xowe_wiki wiki, int ns_id, byte[] ttl_bry) {
 		Xow_ns ns = wiki.Ns_mgr().Ids_get_or_null(ns_id);
 		wiki.Db_mgr().Load_mgr().Load_page(db_page, ns, false);
 		return db_page.Exists();

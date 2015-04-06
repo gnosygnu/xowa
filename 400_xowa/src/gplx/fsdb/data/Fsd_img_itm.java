@@ -17,11 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.fsdb.data; import gplx.*; import gplx.fsdb.*;
 public class Fsd_img_itm {
-	public int Id() {return id;} public void Id_(int v) {this.id = v;} private int id;
-	public int W() {return w;} public void W_(int v) {this.w = v;} private int w;
-	public int H() {return h;} public void H_(int v) {this.h = v;} private int h;
-	public int Db_bin_id() {return bin_db_id;} public Fsd_img_itm Db_bin_id_(int v) {bin_db_id = v; return this;} private int bin_db_id;
-	public Fsd_img_itm Init_by_load(int id, int w, int h) {this.id = id; this.w = w; this.h = h; return this;}
-	public static final Fsd_img_itm Null = new Fsd_img_itm();
-	public static final int Bits_default = 8;
+	public void Ctor(int mnt_id, int dir_id, int fil_id, int bin_db_id) {
+		this.mnt_id = mnt_id; this.dir_id = dir_id; this.fil_id = fil_id; this.bin_db_id = bin_db_id;
+	}
+	public int Mnt_id()		{return mnt_id;} private int mnt_id;
+	public int Fil_id()		{return fil_id;} private int fil_id;
+	public int Dir_id()		{return dir_id;} private int dir_id;
+	public int Bin_db_id()	{return bin_db_id;} private int bin_db_id;
 }

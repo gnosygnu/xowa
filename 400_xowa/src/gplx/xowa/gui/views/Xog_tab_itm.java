@@ -161,9 +161,9 @@ public class Xog_tab_itm implements GfoInvkAble {
 			//	win.Page__async__bgn(this);
 			Gfo_thread_wkr async_wkr = null;				
 			if (wkr.Hdump_enabled()) {
-				wiki.File_mgr().Fsdb_mgr().Init_by_wiki(wiki);
+				wiki.File_mgr().Init_file_mgr_by_load(wiki);
 				Xof_fsdb_mgr fsdb_mgr = wiki.File_mgr().Fsdb_mgr();
-				async_wkr = new Xof_file_wkr(fsdb_mgr.Orig_mgr(), fsdb_mgr.Bin_mgr(), fsdb_mgr.Mnt_mgr(), app.File_mgr__cache_mgr(), wiki.File_mgr__repo_mgr(), html_itm, page, page.Hdump_data().Imgs(), gplx.xowa.files.Xof_exec_tid.Tid_wiki_page);
+				async_wkr = new Xof_file_wkr(wiki.File_mgr__orig_mgr(), fsdb_mgr.Bin_mgr(), fsdb_mgr.Mnt_mgr(), app.File_mgr__cache_mgr(), wiki.File_mgr__repo_mgr(), html_itm, page, page.Hdump_data().Imgs(), gplx.xowa.files.Xof_exec_tid.Tid_wiki_page);
 				if (wiki.Html_mgr__hdump_enabled()) {
 					wiki.Html_mgr__hdump_wtr().Save(page);
 				}
@@ -175,6 +175,19 @@ public class Xog_tab_itm implements GfoInvkAble {
 		finally {
 			app.Thread_mgr().Page_load_mgr().Resume();
 			this.tab_is_loading = false;
+		}
+	}
+	public void Exec_async_hdump(Xoa_app app, Xow_wiki wiki, gplx.xowa.files.gui.Xog_js_wkr js_wkr, gplx.threads.Gfo_thread_pool thread_pool, Xoa_page page, ListAdp imgs, int[] redlink_ary) {
+		if (imgs.Count() > 0) {
+			Xof_file_wkr file_thread = new Xof_file_wkr
+				( wiki.File_mgr__orig_mgr(), wiki.File_mgr__bin_mgr(), wiki.File_mgr__mnt_mgr()
+				, app.File_mgr__cache_mgr(), wiki.File_mgr__repo_mgr(), html_itm, page, imgs
+				, gplx.xowa.files.Xof_exec_tid.Tid_wiki_page);
+			thread_pool.Add_at_end(file_thread); thread_pool.Run();
+		}
+		if (redlink_ary.length > 0) {
+			Xog_redlink_thread redlink_thread = new Xog_redlink_thread(redlink_ary, js_wkr);
+			thread_pool.Add_at_end(redlink_thread); thread_pool.Run();
 		}
 	}
 	@gplx.Internal protected void Show_url_failed(Load_page_wkr wkr) {

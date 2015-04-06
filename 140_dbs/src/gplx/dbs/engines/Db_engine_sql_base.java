@@ -19,19 +19,18 @@ package gplx.dbs.engines; import gplx.*; import gplx.dbs.*;
 import java.sql.*; 
 import gplx.dbs.engines.*; import gplx.dbs.qrys.*; import gplx.dbs.sqls.*;
 public abstract class Db_engine_sql_base implements Db_engine {
-	@gplx.Internal protected void Ctor(Db_url url) {this.url = url;}
+	@gplx.Internal protected void Ctor(Db_conn_info conn_info) {this.conn_info = conn_info;}
 	public abstract String Tid();
-	public Db_url Url() {return url;} protected Db_url url;
-	public abstract		Db_engine New_clone(Db_url url);
-	public Db_rdr		New_rdr_by_obj(Object rdr, String sql) {
-		Db_rdr__basic rv = (Db_rdr__basic)New_rdr_clone();	
-		rv.Ctor((ResultSet)rdr, sql);	
-		return rv;
-	}
+	public Db_conn_info Conn_info() {return conn_info;} protected Db_conn_info conn_info;
+	public abstract		Db_engine New_clone(Db_conn_info conn_info);
+	public Db_rdr		New_rdr__rls_manual(Object rdr_obj, String sql)					{return New_rdr(null, rdr_obj, sql);}
+	public Db_rdr		New_rdr__rls_auto(Db_stmt stmt, Object rdr_obj, String sql)	{return New_rdr(stmt, rdr_obj, sql);}
 	@gplx.Virtual public Db_rdr New_rdr_clone() {return new Db_rdr__basic();}
 	public Db_stmt		New_stmt_prep(Db_qry qry) {return new Db_stmt_cmd(this, qry);}
-	public void			Txn_bgn() {Exec_as_obj(Db_qry_sql.xtn_("BEGIN TRANSACTION;"));}
-	public void			Txn_end() {Exec_as_obj(Db_qry_sql.xtn_("COMMIT TRANSACTION;"));}
+	@gplx.Virtual public void	Txn_bgn(String name)	{Exec_as_obj(Db_qry_sql.xtn_("BEGIN TRANSACTION;"));}
+	@gplx.Virtual public void	Txn_end()				{Exec_as_obj(Db_qry_sql.xtn_("COMMIT TRANSACTION;"));}
+	@gplx.Virtual public void	Txn_cxl()				{Exec_as_obj(Db_qry_sql.xtn_("ROLLBACK TRANSACTION;"));}
+	@gplx.Virtual public void	Txn_sav()				{this.Txn_end(); this.Txn_bgn("");}
 	public Object		Exec_as_obj(Db_qry qry) {
 		if (qry.Tid() == Db_qry_.Tid_flush) return null;	// ignore flush (delete-db) statements
 		String sql = this.SqlWtr().Xto_str(qry, false); // DBG: Tfds.Write(sql);
@@ -42,7 +41,7 @@ public abstract class Db_engine_sql_base implements Db_engine {
 			Statement cmd = New_stmt_exec(sql);	
 			return cmd.executeUpdate(sql);			
 		}
-		catch (Exception exc) {throw Err_.err_(exc, "exec nonQuery failed").Add("sql", sql).Add("err", Err_.Message_gplx_brief(exc));}
+		catch (Exception exc) {throw Err_.new_("db.engine:exec failed; url={0} sql={1} err={2}", conn_info.Xto_api(), sql, Err_.Message_gplx_brief(exc));}
 	}
 	private DataRdr Exec_as_rdr(String sql) {
 		try {
@@ -51,31 +50,35 @@ public abstract class Db_engine_sql_base implements Db_engine {
 			ResultSet rdr = cmd.getResultSet();	
 			return New_rdr(rdr, sql);
 		}
-		catch (Exception exc) {throw Err_.err_(exc, "exec reader failed").Add("sql", sql).Add("err", Err_.Message_gplx_brief(exc));}
+		catch (Exception exc) {throw Err_.new_("db.engine:rdr failed; url={0} sql={1} err={2}", conn_info.Xto_api(), sql, Err_.Message_gplx_brief(exc));}
 	}
-	public void Exec_ddl_create_tbl(Db_meta_tbl meta) {Exec_as_int(meta.To_sql_create());}
-	public void Exec_ddl_create_idx(Gfo_usr_dlg usr_dlg, Db_meta_idx... ary) {
+	public void Ddl_create_tbl(Db_meta_tbl tbl) {Exec_as_int(tbl.To_sql_create());}
+	public void Ddl_create_idx(Gfo_usr_dlg usr_dlg, Db_meta_idx... ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			Db_meta_idx idx = ary[i];
-			usr_dlg.Plog_many("", "", "db.idx.create; db=~{0} idx=~{1}", url.Database(), idx.Name());
+			usr_dlg.Plog_many("", "", "creating database index (please wait); db=~{0} idx=~{1}", conn_info.Database(), idx.Name());
 			Exec_as_int(idx.To_sql_create());
 		}
 	}
-	public void Exec_ddl_append_fld(String tbl, Db_meta_fld fld) {
-		Exec_as_int(Db_sqlbldr__sqlite.I.Bld_alter_tbl_add(tbl, fld));
-	}
-	@gplx.Virtual public void Exec_env_db_attach(String alias, Io_url db_url) {}
-	@gplx.Virtual public void	Exec_env_db_detach(String alias) {}
+	public void Ddl_append_fld(String tbl, Db_meta_fld fld)	{Exec_as_int(Db_sqlbldr__sqlite.I.Bld_alter_tbl_add(tbl, fld));}
+	public void Ddl_delete_tbl(String tbl)						{Exec_as_int(Db_sqlbldr__sqlite.I.Bld_drop_tbl(tbl));}
+	@gplx.Virtual public void Env_db_attach(String alias, Io_url db_url) {}
+	@gplx.Virtual public void	Env_db_detach(String alias) {}
 	@gplx.Virtual public DataRdr New_rdr(ResultSet rdr, String sql) {return gplx.stores.Db_data_rdr_.new_(rdr, sql);}
 	@gplx.Virtual public Sql_qry_wtr SqlWtr() {return Sql_qry_wtr_.new_ansi();}
+	private Db_rdr New_rdr(Db_stmt stmt, Object rdr, String sql) {
+		Db_rdr__basic rv = (Db_rdr__basic)New_rdr_clone();	
+		rv.Ctor(stmt, (ResultSet)rdr, sql);	
+		return rv;
+	}
 	@gplx.Internal protected abstract Connection Conn_new();	
-		private Connection connection;
+		protected Connection connection;
 	public void Conn_open() {connection = Conn_new();}
 	public void Conn_term() {
 		if (connection == null) return;	// connection never opened; just exit
 		try 	{connection.close();}
-		catch 	(Exception e) {throw Err_.err_(e, "Conn_term.fail; url={0} err={1}", url.Xto_raw(), Err_.Message_lang(e));}
+		catch 	(Exception e) {throw Err_.err_(e, "Conn_term.fail; url={0} err={1}", conn_info.Xto_raw(), Err_.Message_lang(e));}
 		connection = null;
 	}
 	public Object New_stmt_prep_as_obj(String sql) {
@@ -90,6 +93,6 @@ public abstract class Db_engine_sql_base implements Db_engine {
 	}
 	protected Connection Conn_make_by_url(String url, String uid, String pwd) {
 		try {return DriverManager.getConnection(url, uid, pwd);}
-		catch (SQLException e) {throw Err_.err_(e, "connection open failed").Add("ConnectInfo", Url().Xto_raw());}
+		catch (SQLException e) {throw Err_.err_(e, "connection open failed").Add("ConnectInfo", Conn_info().Xto_raw());}
 	}
 	}

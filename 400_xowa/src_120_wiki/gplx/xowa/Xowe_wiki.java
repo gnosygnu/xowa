@@ -18,12 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.core.primitives.*; import gplx.xowa.apps.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.files.exts.*;
 import gplx.xowa.wikis.*; import gplx.xowa.users.*; import gplx.xowa.html.*; import gplx.xowa.users.history.*; import gplx.xowa.specials.*; import gplx.xowa.xtns.*; import gplx.xowa.dbs.*; import gplx.xowa.wikis.ttls.*;
-import gplx.xowa.wikis.data.*;
+import gplx.fsdb.*;
+import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.fsdb.meta.*;
 import gplx.xowa.langs.vnts.*; import gplx.xowa.gui.views.*; import gplx.xowa.wikis.xwikis.*;
 import gplx.xowa.html.hzips.*; import gplx.xowa.html.hdumps.*;
 import gplx.xowa.setup.maints.*; import gplx.xowa.wikis.caches.*;
-import gplx.xowa.bldrs.imports.*;  import gplx.xowa.xtns.pfuncs.*;
+import gplx.xowa.bldrs.xmls.*; import gplx.xowa.xtns.pfuncs.*;
 import gplx.xowa.tdbs.*;
 public class Xowe_wiki implements Xow_wiki, GfoInvkAble {
 	private Xow_html_util util;
@@ -87,12 +88,14 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble {
 	public Xow_fsys_mgr			Fsys_mgr() {return fsys_mgr;} private final Xow_fsys_mgr fsys_mgr;
 	public Xoa_ttl				Ttl_parse(byte[] ttl)				{return Xoa_ttl.parse_(this, ttl);}
 	public Xoa_ttl				Ttl_parse(int ns_id, byte[] ttl)	{return Xoa_ttl.parse_(this, ns_id, ttl);}
-	public Xow_core_data_mgr	Data_mgr__core_mgr() {return db_mgr.Tid() == Xodb_mgr_txt.Tid_txt ? null : this.Db_mgr_as_sql().Core_data_mgr();}	// TEST:
+	public Xowd_db_mgr			Data_mgr__core_mgr() {return db_mgr.Tid() == Xodb_mgr_txt.Tid_txt ? null : this.Db_mgr_as_sql().Core_data_mgr();}	// TEST:
 	public Xow_repo_mgr			File_mgr__repo_mgr() {return file_mgr.Repo_mgr();}
-	public Xof_orig_mgr			File_mgr__orig_mgr() {return file_mgr.Fsdb_mgr().Orig_mgr();}
+	public Xof_orig_mgr			File_mgr__orig_mgr() {return file_mgr.Orig_mgr();}
 	public Xof_bin_mgr			File_mgr__bin_mgr() {return file_mgr.Fsdb_mgr().Bin_mgr();}
 	public Fsm_mnt_mgr			File_mgr__mnt_mgr() {return file_mgr.Fsdb_mgr().Mnt_mgr();}
 	public Xof_fsdb_mode		File_mgr__fsdb_mode() {return file_mgr.Fsdb_mode();}
+	public Fsdb_db_mgr			File_mgr__file_db_core() {return file_mgr.Db_core();}
+
 	public boolean					Html_mgr__hdump_enabled() {return html_mgr__hdump_enabled;}	private boolean html_mgr__hdump_enabled = Bool_.N;
 	public Xow_hzip_mgr			Html_mgr__hzip_mgr() {return html_mgr.Hzip_mgr();}
 	public Xohd_hdump_rdr		Html_mgr__hdump_rdr() {return html_mgr__hdump_rdr;} private final Xohd_hdump_rdr html_mgr__hdump_rdr;
@@ -111,6 +114,7 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble {
 	public Xow_html_mgr			Html_mgr() {return html_mgr;} private Xow_html_mgr html_mgr;
 	public Xow_xtn_mgr			Xtn_mgr() {return xtn_mgr;} private Xow_xtn_mgr xtn_mgr;
 	public Xow_cache_mgr		Cache_mgr() {return cache_mgr;} private Xow_cache_mgr cache_mgr;
+	public Xow_page_mgr			Page_mgr() {return page_mgr;} private Xow_page_mgr page_mgr = new Xow_page_mgr();
 
 	public byte[]				Commons_wiki_key() {return commons_wiki_key;} private byte[] commons_wiki_key = Xow_domain_.Domain_bry_commons;
 	public Xob_hive_mgr			Hive_mgr() {return hive_mgr;} private Xob_hive_mgr hive_mgr;
@@ -124,7 +128,7 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble {
 	private void Wdata_wiki_abrv_() {
 		Bry_bfr bfr = app.Utl__bfr_mkr().Get_b128();
 		Xow_wiki_alias.Build_alias_by_lang_tid(bfr, wdata_wiki_lang, Int_obj_ref.new_(wdata_wiki_tid));
-		wdata_wiki_abrv = bfr.Mkr_rls().Xto_bry_and_clear();
+		wdata_wiki_abrv = bfr.To_bry_and_rls();
 	}
 
 	public boolean Init_needed() {return init_needed;} public Xowe_wiki Init_needed_(boolean v) {init_needed = v; return this;} private boolean init_needed = true;
@@ -192,6 +196,17 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble {
 	public Xodb_mgr_sql Db_mgr_create_as_sql() {Xodb_mgr_sql rv = new Xodb_mgr_sql(this); db_mgr = rv; return rv;}
 	public Xowe_wiki Init_assert() {if (init_needed) Init_wiki(app.User()); return this;}
 	private boolean init_in_process = false;
+	public void Init_db_mgr() {
+		Io_url core_db_url = gplx.xowa.wikis.Xow_fsys_mgr.Find_core_fil(this);
+		if (core_db_url == null) {
+			tdb_fsys_mgr.Scan_dirs();
+		}
+		else {
+			Xodb_mgr_sql db_mgr_sql = this.Db_mgr_create_as_sql();
+			db_mgr_sql.Core_data_mgr().Init_by_load(core_db_url);
+			file_mgr.Init_file_mgr_by_load(this);
+		}
+	}
 	private void Init_wiki(Xou_user user) {	// NOTE: (a) one-time initialization for all wikis; (b) not called by tests
 		if (init_in_process) {
 			app.Usr_dlg().Log_many("", "", "wiki.init: circular call canceled: ~{0}", domain_str);
@@ -203,17 +218,11 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble {
 		log_bfr.Add("wiki.init.bgn: " + domain_str);
 		app.Cfg_mgr().Init(this);
 		file_mgr.Cfg_download().Enabled_(app.File_mgr().Wmf_mgr().Enabled());	// default download to app global; can be overriden below
-		Io_url sqlite_url = Xodb_mgr_sql.Find_core_url(this);
 		app.Gfs_mgr().Run_url_for(this, tdb_fsys_mgr.Cfg_wiki_stats_fil());
 		app.Gfs_mgr().Run_url_for(this, app.Fsys_mgr().Cfg_wiki_core_dir().GenSubFil(domain_str + ".gfs"));		// run cfg for wiki by user ; EX: /xowa/user/anonymous/wiki/en.wikipedia.org/cfg/user_wiki.gfs
-		if (sqlite_url == null) {
-			tdb_fsys_mgr.Scan_dirs();
-		}
-		else {
-			Xodb_mgr_sql db_mgr_sql = this.Db_mgr_create_as_sql();
-			db_mgr_sql.Init_load(gplx.dbs.Db_url_.sqlite_(sqlite_url));
-		}
-		if (!Xob_import_marker.Check(this)) {app.Wiki_mgr().Del(domain_bry); init_needed = false; return;}	// NOTE: must call after Db_mgr_create_as_sql(); also, must delete wiki from mgr; DATE:2014-08-24
+		Init_db_mgr();
+		// FIXME: commented out; fires multiple times during import process
+		if (!app.Bldr().Import_marker().Chk(this)) {app.Wiki_mgr().Del(domain_bry); init_needed = false; return;}	// NOTE: must call after Db_mgr_create_as_sql(); also, must delete wiki from mgr; DATE:2014-08-24
 		db_mgr.Load_mgr().Load_init(this);
 		app.Gfs_mgr().Run_url_for(this, tdb_fsys_mgr.Cfg_wiki_core_fil());
 		gplx.xowa.utls.upgrades.Xoa_upgrade_mgr.Check(this);
@@ -230,13 +239,13 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble {
 		Bry_fmtr.Null.Eval_mgr().Enabled_(false);
 		app.Wiki_mgr().Scripts().Exec(this);
 		Bry_fmtr.Null.Eval_mgr().Enabled_(true);
-		app.Wiki_mgr().Css_installer().Install_assert(this, user.Fsys_mgr().Wiki_html_dir(domain_str));
+		app.Css_installer().Install_assert(Bool_.Y, this, user.Fsys_mgr().Wiki_html_dir(domain_str));
 		if (html_mgr__hdump_enabled) {
 			// if (db_mgr.Tid() == Xodb_mgr_txt.Tid_txt) this.Db_mgr_create_as_sql();
-			this.Db_mgr_as_sql().Html_db_enabled_(html_mgr__hdump_enabled);
-			Xowd_db_init_wkr__html.I.Assert_col__page_html_db_id(Db_mgr_as_sql().Core_data_mgr());	// NOTE: must go above html_mgr.Init_by_wiki b/c Page_load will be done via messages
+			Xowd_html_tbl.Assert_col__page_html_db_id(Db_mgr_as_sql().Core_data_mgr());	// NOTE: must go above html_mgr.Init_by_wiki b/c Page_load will be done via messages
+			this.Db_mgr_as_sql().Core_data_mgr().Tbl__page().Hdump_enabled_(html_mgr__hdump_enabled);
 			html_mgr__hdump_rdr.Init_by_db(this.Data_mgr__core_mgr());
-			html_mgr__hdump_wtr.Init_by_db((Xowe_core_data_mgr)this.Data_mgr__core_mgr());
+			html_mgr__hdump_wtr.Init_by_db(this.Data_mgr__core_mgr());
 		}
 		html_mgr.Init_by_wiki(this);
 		this.Copy_cfg(app.User().Wiki());
@@ -276,7 +285,6 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble {
 		else if	(ctx.Match(k, Invk_msgs))				return msg_mgr;
 		else if	(ctx.Match(k, Invk_util))				return util;
 		else if	(ctx.Match(k, Invk_app))				return app;
-		else if	(ctx.Match(k, Invk_data_storage_format_))db_mgr.Data_storage_format_(m.ReadByte("v"));
 		else if	(ctx.Match(k, Invk_db_mgr))				return db_mgr;
 		else if	(ctx.Match(k, Invk_db_mgr_to_sql_))		this.Db_mgr_create_as_sql();
 		else if	(ctx.Match(k, Invk_import_mgr))			return import_mgr;
@@ -293,9 +301,12 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble {
 	, Invk_special = "special"
 	, Invk_props = "props", Invk_parser = "parser"
 	, Invk_msgs = "msgs", Invk_app = "app", Invk_util = "util"
-	, Invk_xtns = "xtns", Invk_data_storage_format_ = "data_storage_format_", Invk_import_mgr = "import"
-	, Invk_db_mgr = "db_mgr", Invk_db_mgr_to_sql_ = "db_mgr_to_sql_"
+	, Invk_xtns = "xtns", Invk_import_mgr = "import"
+	, Invk_db_mgr_to_sql_ = "db_mgr_to_sql_"
 	, Invk_domain = "domain", Invk_maint = "maint", Invk_hdump_enabled_ = "hdump_enabled_"
+	;
+	public static final String			// SERIALIZED
+		Invk_db_mgr = "db_mgr"	// SERIALIZED:000.sqlite3|xowa_cfg
 	;
 	public static final String Invk_lang_ = "lang_";
 	private static void File_repos_assert(Xoae_app app, Xowe_wiki wiki) {

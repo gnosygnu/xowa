@@ -85,7 +85,7 @@ class Xofc_fil_mgr {
 			long cur_size = 0, actl_size = 0;
 			Xof_url_bldr url_bldr = new Xof_url_bldr();
 			ListAdp deleted = ListAdp_.new_();
-			tbl.Conn().Txn_mgr().Txn_bgn_if_none();
+			tbl.Conn().Txn_bgn();
 			long compress_to = cfg_mgr.Cache_min();
 			for (int i = 0; i < len; ++i) {
 				Xofc_fil_itm itm = (Xofc_fil_itm)hash.FetchAt(i);
@@ -115,7 +115,7 @@ class Xofc_fil_mgr {
 		catch (Exception e) {
 			usr_dlg.Warn_many("", "", "failed to compress cache: err=~{0}", Err_.Message_gplx_brief(e));
 		}
-		finally {tbl.Conn().Txn_mgr().Txn_end_all();}
+		finally {tbl.Conn().Txn_end();}
 	}
 	private void Fsys_delete(Xof_url_bldr url_bldr, Xoa_wiki_mgr wiki_mgr, Xoa_repo_mgr repo_mgr, Xofc_dir_mgr dir_mgr, Xofc_fil_itm itm) {
 		byte mode_id = itm.Is_orig() ? Xof_repo_itm.Mode_orig : Xof_repo_itm.Mode_thumb;
@@ -133,17 +133,17 @@ class Xofc_fil_mgr {
 		Io_mgr._.DeleteFil_args(fil_url).MissingFails_off().Exec();
 		itm.Cmd_mode_delete_();
 	}
-	public void Cleanup() {tbl.Cleanup();}
+	public void Cleanup() {tbl.Rls();}
 	private void Db_recalc_next_id(Xofc_fil_itm fil_itm, String err_msg) {
 		if (String_.Has(err_msg, "PRIMARY KEY must be unique")) { // primary key exception in strange situations (multiple xowas at same time)
 			int next_id = tbl.Select_max_uid() + 1;				
-			Gfo_usr_dlg_._.Warn_many("", "", "uid out of sync; incrementing; uid=~{0} name=~{1} err=~{2}", fil_itm.Uid(), String_.new_utf8_(fil_itm.Name()), err_msg);
+			Gfo_usr_dlg_.I.Warn_many("", "", "uid out of sync; incrementing; uid=~{0} name=~{1} err=~{2}", fil_itm.Uid(), String_.new_utf8_(fil_itm.Name()), err_msg);
 			fil_itm.Uid_(next_id);
 			cache_mgr.Next_id_(next_id + 1);
 			err_msg = tbl.Db_save(fil_itm);
 			if (err_msg == null)
 				return;
 		}
-		Gfo_usr_dlg_._.Warn_many("", "", "failed to save uid; uid=~{0} name=~{1} err=~{2}", fil_itm.Uid(), String_.new_utf8_(fil_itm.Name()), err_msg);
+		Gfo_usr_dlg_.I.Warn_many("", "", "failed to save uid; uid=~{0} name=~{1} err=~{2}", fil_itm.Uid(), String_.new_utf8_(fil_itm.Name()), err_msg);
 	}
 }

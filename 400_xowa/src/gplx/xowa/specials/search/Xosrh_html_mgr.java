@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.xowa.langs.numbers.*;
+import gplx.xowa.langs.numbers.*; import gplx.xowa.wikis.data.tbls.*;
 class Xosrh_html_mgr implements GfoInvkAble {
 	public Bry_fmtr Html_all_bgn()	{return html_all_bgn;} Bry_fmtr html_all_bgn = Bry_fmtr.new_(String_.Concat_lines_nl
 	(	"~{search_results_header}<br/>"
@@ -54,7 +54,7 @@ class Xosrh_html_mgr implements GfoInvkAble {
 		Xow_ns_mgr ns_mgr = wiki.Ns_mgr();
 		Bry_bfr tmp_ttl_bfr = core.Wiki().Appe().Utl__bfr_mkr().Get_b512();
 		for (int i = 0; i < itms_len; i++) {
-			Xodb_page itm = grp.Itms_get_at(i);
+			Xowd_page_itm itm = grp.Itms_get_at(i);
 			byte[] itm_ttl = Xoa_ttl.Replace_unders(itm.Ttl_page_db());
 			int itm_ns_id = itm.Ns_id();
 			if (itm_ns_id != Xow_ns_.Id_main) {
@@ -64,7 +64,7 @@ class Xosrh_html_mgr implements GfoInvkAble {
 					.Add(itm_ttl);
 				itm_ttl = tmp_ttl_bfr.Xto_bry_and_clear();
 			}
-			html_itm.Bld_bfr_many(bfr, itm_ttl, itm.Wtxt_len());
+			html_itm.Bld_bfr_many(bfr, itm_ttl, itm.Text_len());
 		}
 		html_all_end.Bld_bfr_many(bfr, search_bry, xowa_idx_bwd, xowa_idx_fwd);
 		tmp_ttl_bfr.Mkr_rls();

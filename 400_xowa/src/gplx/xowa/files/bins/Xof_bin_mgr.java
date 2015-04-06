@@ -20,20 +20,37 @@ import gplx.core.primitives.*; import gplx.ios.*;
 import gplx.fsdb.meta.*;
 import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.cnvs.*; import gplx.xowa.files.caches.*;
 import gplx.xowa.wmfs.*;
-public class Xof_bin_mgr implements GfoInvkAble {		
-	private final Gfo_usr_dlg usr_dlg; private final Fsm_mnt_mgr mnt_mgr; private final Xow_repo_mgr repo_mgr; private final Xof_cache_mgr cache_mgr; private final Xowmf_mgr wmf_mgr; private final Xof_url_bldr url_bldr;
-	private Xof_bin_wkr[] wkrs; private int wkrs_len;		
+public class Xof_bin_mgr {		
+	private final Fsm_mnt_mgr mnt_mgr;
+	private final Gfo_usr_dlg usr_dlg; private final Xow_repo_mgr repo_mgr; private final Xof_cache_mgr cache_mgr; private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2_();
+	private Xof_bin_wkr[] wkrs = Xof_bin_wkr_.Ary_empty; private int wkrs_len;
 	private final String_obj_ref resize_warning = String_obj_ref.null_(); private final Xof_img_size tmp_size = new Xof_img_size();
-	public Xof_bin_mgr(Fsm_mnt_mgr mnt_mgr, Xow_repo_mgr repo_mgr, Xof_cache_mgr cache_mgr, Xowmf_mgr wmf_mgr, Xof_url_bldr url_bldr) {
-		this.mnt_mgr = mnt_mgr; this.repo_mgr = repo_mgr; this.cache_mgr = cache_mgr; this.wmf_mgr = wmf_mgr; this.url_bldr = url_bldr;
-		this.usr_dlg = Gfo_usr_dlg_._;			
-		Wkrs__clear();
+	public Xof_bin_mgr(Fsm_mnt_mgr mnt_mgr, Xow_repo_mgr repo_mgr, Xof_cache_mgr cache_mgr, Xof_img_wkr_resize_img resize_wkr) {
+		this.mnt_mgr = mnt_mgr; this.repo_mgr = repo_mgr; this.cache_mgr = cache_mgr;
+		this.usr_dlg = Gfo_usr_dlg_.I;			
+		this.Resizer_(resize_wkr);
 	}
 	public void Resizer_(Xof_img_wkr_resize_img v) {resizer = v;} private Xof_img_wkr_resize_img resizer;
-	public void Init_by_wiki(Xof_img_wkr_resize_img resize_wkr) {
-		this.Wkrs__get_or_new(Xof_bin_wkr_.Key_fsdb_wiki);
-		this.Wkrs__get_or_new(Xof_bin_wkr_.Key_http_wmf);
-		this.Resizer_(resize_wkr);
+	public void Wkrs__del(String key) {
+		ListAdp list = ListAdp_.new_();
+		for (Xof_bin_wkr wkr : wkrs) {
+			if (String_.Eq(key, wkr.Key())) continue;
+			list.Add(wkr);
+		}
+		this.wkrs = (Xof_bin_wkr[])list.Xto_ary(Xof_bin_wkr.class);
+		this.wkrs_len = wkrs.length;
+	}
+	public void Wkrs__add(Xof_bin_wkr v) {
+		this.wkrs = (Xof_bin_wkr[])Array_.Resize_add_one(wkrs, wkrs_len, v);
+		++this.wkrs_len;
+	}
+	public Xof_bin_wkr Wkrs__get_or_null(String key) {
+		byte tid = Xof_bin_wkr_.X_key_to_tid(key);
+		for (int i = 0; i < wkrs_len; ++i) {
+			Xof_bin_wkr wkr = wkrs[i];
+			if (wkr.Tid() == tid) return wkr;
+		}
+		return null;
 	}
 	public boolean Find_to_url_as_bool(byte exec_tid, Xof_fsdb_itm itm) {return Find_to_url(exec_tid, itm) != Io_url_.Null;}
 	private Io_url Find_to_url(byte exec_tid, Xof_fsdb_itm itm) {
@@ -93,43 +110,6 @@ public class Xof_bin_mgr implements GfoInvkAble {
 		tmp_size.Html_size_calc(exec_tid, itm.Lnki_w(), itm.Lnki_h(), itm.Lnki_type(), mnt_mgr.Patch_upright(), itm.Lnki_upright(), itm.Lnki_ext().Id(), itm.Orig_w(), itm.Orig_h(), Xof_img_size.Thumb_width_img);
 		boolean rv = resizer.Exec(src, trg, tmp_size.Html_w(), tmp_size.Html_h(), itm.Lnki_ext().Id(), resize_warning);
 		itm.File_resized_y_();
-		return rv;
-	}
-	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_add))		return Wkrs__get_or_new(m.ReadStr("type"), m.ReadStrOr("key", null));
-		else	return GfoInvkAble_.Rv_unhandled;
-	}	private static final String Invk_add = "add";
-	public void Wkrs__clear() {this.wkrs = Xof_bin_wkr_.Ary_empty; this.wkrs_len = 0;}
-	public Xof_bin_wkr Wkrs__get_or_new(String type) {return Wkrs__get_or_new(type, null);}
-	private Xof_bin_wkr Wkrs__get_or_new(String type, String key) {
-		if (key == null) key = type;	// default empty key to type; EX: add('xowa.http.wmf') -> add('xowa.http.wmf', 'xowa.http.wmf')
-		Xof_bin_wkr rv = Wkrs__get_or_null(key);
-		if (rv == null) {
-			rv = Wkrs__new(type);
-			Wkrs__add(rv);
-		}
-		return rv;
-	}
-	public void Wkrs__add(Xof_bin_wkr v) {Wkrs__add_many(v);}
-	private void Wkrs__add_many(Xof_bin_wkr... v) {
-		wkrs = (Xof_bin_wkr[])Array_.Resize_add(wkrs, v);
-		wkrs_len += v.length;
-	}
-	private Xof_bin_wkr Wkrs__get_or_null(String key) {
-		int wkrs_len = wkrs.length;
-		byte tid = Xof_bin_wkr_.X_key_to_tid(key);
-		for (int i = 0; i < wkrs_len; ++i) {
-			Xof_bin_wkr wkr = wkrs[i];
-			if (wkr.Tid() == tid) return wkr;
-		}
-		return null;
-	}
-	private Xof_bin_wkr Wkrs__new(String type) {
-		Xof_bin_wkr rv = null;
-		if		(String_.Eq(type, Xof_bin_wkr_.Key_fsdb_wiki))		rv = new Xof_bin_wkr__fsdb_sql(mnt_mgr);
-		else if	(String_.Eq(type, Xof_bin_wkr_.Key_fsys_wmf))		rv = new Xof_bin_wkr__fsys_wmf();
-		else if	(String_.Eq(type, Xof_bin_wkr_.Key_http_wmf))		rv = new Xof_bin_wkr__http_wmf(repo_mgr, wmf_mgr.Download_wkr().Download_xrg());
-		else														throw Err_.unhandled(type);
 		return rv;
 	}
 }

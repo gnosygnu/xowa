@@ -252,7 +252,7 @@ class Xoh_ctg_page_fxt {
 		fmtr_itm.Col_idx_(0, 0);
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
 		fmtr_itm.XferAry(bfr, 0);
-		Tfds.Eq_str_lines(expd, bfr.Mkr_rls().Xto_str_and_clear());
+		Tfds.Eq_str_lines(expd, bfr.To_str_and_rls());
 	}
 	public void Test_html_grp(byte tid, String expd) {
 		Xoctg_fmtr_all list_mgr = ctg_html.Fmtr(tid);
@@ -260,11 +260,11 @@ class Xoh_ctg_page_fxt {
 		fmtr_grp.Init_from_all(wiki, wiki.Lang(), ctg, list_mgr, ctg.Grp_by_tid(tid));
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
 		fmtr_grp.XferAry(bfr, 0);
-		Tfds.Eq_str_lines(expd, bfr.Mkr_rls().Xto_str_and_clear());
+		Tfds.Eq_str_lines(expd, bfr.To_str_and_rls());
 	}
 	public void Test_html_all(byte tid, String expd) {
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
 		ctg_html.Bld_all(bfr, wiki, wiki.Lang(), ctg, tid);
-		Tfds.Eq_str_lines(expd, bfr.Mkr_rls().Xto_str_and_clear());
+		Tfds.Eq_str_lines(expd, bfr.To_str_and_rls());
 	}
 }

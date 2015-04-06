@@ -91,6 +91,9 @@ public class Io_size_ {
 		long rv = parse_or_(v, Long_.MinValue); if (rv == Long_.MinValue) throw Err_.new_fmt_("invalid val: {0}", v);
 		return rv;
 	}
+	public static String	To_str_mb(long v)				{return Long_.Xto_str(v / Io_mgr.Len_mb_long);}
+	public static long		To_long_by_msg_mb(GfoMsg m)		{return m.ReadLong("v") * Io_mgr.Len_mb_long;}
+	public static long		To_long_by_int_mb(int v)		{return (long)v * Io_mgr.Len_mb_long;}
 }
 class Io_size_fmtr_arg implements Bry_fmtr_arg {	
 	public long Val() {return val;} public Io_size_fmtr_arg Val_(long v) {val = v; return this;} long val;

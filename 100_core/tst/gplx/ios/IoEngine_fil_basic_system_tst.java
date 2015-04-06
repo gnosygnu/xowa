@@ -37,7 +37,7 @@ public class IoEngine_fil_basic_system_tst extends IoEngine_fil_basic_base {
 		ListAdp list = root.XtoNames(); list.DelAt(0); // remove drive
 		IoEngine_xrg_recycleFil recycleXrg = bin.Send_xrg(fil)
 			.RootDirNames_(list)
-			.AppName_("gplx.test").Time_(DateAdp_.parse_gplx("20100102_115559123")).Uuid_(UuidAdp_.parse_("467ffb41-cdfe-402f-b22b-be855425784b"));
+			.AppName_("gplx.test").Time_(DateAdp_.parse_gplx("20100102_115559123")).Uuid_(Guid_adp_.parse_("467ffb41-cdfe-402f-b22b-be855425784b"));
 		recycleXrg.Exec();
 		fx.tst_ExistsPaths(false, fil);
 		fx.tst_ExistsPaths(true, recycleXrg.RecycleUrl());

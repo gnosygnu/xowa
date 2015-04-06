@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.btries.*; import gplx.core.primitives.*; import gplx.xowa.parsers.lnkis.redlinks.*;
 class Imap_parser {
-	private Imap_xtn_mgr xtn_mgr; private Xoa_url page_url; private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_._;
+	private Imap_xtn_mgr xtn_mgr; private Xoa_url page_url; private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.I;
 	private byte[] imap_img_src;
 	private Imap_itm_img imap_img;
 	private Imap_itm_dflt imap_dflt;
@@ -194,7 +194,7 @@ class Imap_parser {
 			imap_img = new Imap_itm_img(lnki_tkn);
 			lnki_tkn.Lnki_file_wkr_(imap);
 			wiki_ctx.Cur_page().Lnki_list().Add(lnki_tkn);
-			if (file_wkr != null) file_wkr.Wkr_exec(wiki_ctx, src, lnki_tkn, gplx.xowa.bldrs.files.Xob_lnki_src_tid.Tid_imageMap);
+			if (file_wkr != null) file_wkr.Wkr_exec(wiki_ctx, src, lnki_tkn, gplx.xowa.bldrs.cmds.files.Xob_lnki_src_tid.Tid_imageMap);
 		}
 		return img_end;
 	}

@@ -236,7 +236,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		tmp_ctx.Parse_tid_(Xop_parser_.Parse_tid_page_tmpl);	// default xnde names to template; needed for test, but should be in place; DATE:2014-06-27
 		cur_wiki.Parser().Parse_text_to_wtxt(tmp_root, tmp_ctx, tmp_ctx.Tkn_mkr(), text_bry);
 		tmp_root.Tmpl_evaluate(tmp_ctx, text_bry, mock_frame, tmp_bfr);
-		return rslt.Init_obj(tmp_bfr.Mkr_rls().Xto_str_and_clear());
+		return rslt.Init_obj(tmp_bfr.To_str_and_rls());
 	}
 	public boolean CallParserFunction(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		String frame_id = args.Pull_str(0);
@@ -314,7 +314,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 			Xot_defn_tmpl transclude_tmpl = ctx.Wiki().Parser().Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), ttl.Ns(), ttl.Page_db(), sub_src);
 			Bry_bfr sub_bfr = cur_wiki.Utl__bfr_mkr().Get_k004();
 			transclude_tmpl.Tmpl_evaluate(ctx, sub_frame, sub_bfr);
-			return rslt.Init_obj(sub_bfr.Mkr_rls().Xto_str_and_clear());
+			return rslt.Init_obj(sub_bfr.To_str_and_rls());
 		}
 		else {
 //				String err_msg = "expand_template failed; ttl=" + ttl_str;

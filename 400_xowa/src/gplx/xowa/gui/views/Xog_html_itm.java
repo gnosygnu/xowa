@@ -103,6 +103,7 @@ public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 		GfoMsg m = GfoMsg_.new_cast_(Invk_html_elem_atr_set).Add("elem_id", elem_id).Add("atr_key", atr_key).Add("atr_val", atr_val);
 		GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_elem_atr_set, m);
 	}
+	public void Html_redlink(String html_uid) {Html_elem_atr_set_append(html_uid, "class", "new");}
 	public void Html_elem_atr_set_append(String elem_id, String atr_key, String atr_val) {
 		GfoMsg m = GfoMsg_.new_cast_(Invk_html_elem_atr_set_append).Add("elem_id", elem_id).Add("atr_key", atr_key).Add("atr_val", atr_val);
 		GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_elem_atr_set_append, m);

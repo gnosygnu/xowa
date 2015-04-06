@@ -17,14 +17,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa2.apps; import gplx.*; import gplx.xowa2.*;
 import gplx.xowa.langs.cases.*; import gplx.xowa.users.data.*;
-import gplx.xowa2.wikis.*; import gplx.xowa2.users.data.*;
+import gplx.xowa2.wikis.*;
 public class Xoav_wiki_mgr implements GfoInvkAble {
 	private final Xoav_app app; private final OrderedHash hash = OrderedHash_.new_bry_();		
 	public Xoav_wiki_mgr(Xoav_app app, Xol_case_mgr case_mgr) {this.app = app;}
 	public Xowv_wiki Get_by_domain(byte[] domain) {return (Xowv_wiki)hash.Fetch(domain);}
 	public Xowv_wiki Import_by_fil(Io_url fil) {
 		Io_url wiki_dir = fil.OwnerDir();
-		Xowv_wiki rv = Load(String_.Replace(fil.NameOnly(), ".000", ""), wiki_dir);
+		Xowv_wiki rv = Load(Gen_domain_str(fil.NameOnly()), wiki_dir);
 		app.User_data_mgr().Site_mgr().Import(rv.Domain_str(), rv.Domain_str(), wiki_dir.Raw(), "");
 		return rv;
 	}
@@ -36,7 +36,9 @@ public class Xoav_wiki_mgr implements GfoInvkAble {
 			Load(itm.Domain(), Io_url_.new_dir_(itm.Path()));
 		}
 	}
-	public Xowv_wiki Load_by_fil(Io_url fil)		{return Load(String_.Replace(fil.NameOnly(), ".000", ""), fil.OwnerDir());}
+	public Xowv_wiki Load_by_fil(Io_url fil)		{
+		return Load(Gen_domain_str(fil.NameOnly()), fil.OwnerDir());
+	}
 	public void Load_by_dir(Io_url wiki_root_dir)	{
 		Io_url[] wiki_dirs = Io_mgr._.QueryDir_args(wiki_root_dir).DirOnly_().ExecAsUrlAry();
 		for (Io_url wiki_dir : wiki_dirs) {
@@ -56,4 +58,9 @@ public class Xoav_wiki_mgr implements GfoInvkAble {
 		else	return GfoInvkAble_.Rv_unhandled;
 	}
 	public static final String Invk_import_by_fil = "import_by_fil";
+	private static String Gen_domain_str(String file_name) {
+		int dash_pos = String_.FindFwd(file_name, "-");
+		if (dash_pos != Bry_finder.Not_found) file_name = String_.Mid(file_name, 0, dash_pos);
+		return file_name;
+	}
 }

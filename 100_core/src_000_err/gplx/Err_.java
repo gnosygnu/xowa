@@ -24,7 +24,8 @@ public class Err_ {	//_20110415
 	public static Err new_(String hdr)							{return Err.hdr_(hdr);}
 	public static Err new_key_(String key, String hdr)			{return Err.hdr_(hdr).Key_(key);}
 	public static Err err_key_(Exception exc, String key, String hdr) {return Err.exc_(exc, hdr).Key_(key);}
-	public static Err err_(Exception exc, String hdr)	{return Err.exc_(exc, hdr);}
+	public static Err err_(Exception e)					{return Err.exc_(e, Message_gplx_brief(e));}
+	public static Err err_(Exception e, String hdr)		{return Err.exc_(e, hdr);}
 	public static Err err_(Exception e, String fmt, Object... args) {return Err.exc_(e, String_.Format(fmt, args));}
 	public static Err cast_(Exception ignore, Class<?> t, Object o) {
 		String o_str = "";

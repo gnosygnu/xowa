@@ -55,8 +55,8 @@ class Xoh_tidy_wkr_jtidy implements Xoh_tidy_wkr {
 	}
 	public void Exec_tidy(Xoae_page page, Bry_bfr bfr) {
 				if (tidy == null) tidy_init();			// lazy create to skip tests
-		int bfr_len = bfr.Len();
-		long bgn = Env_.TickCount();
+//		int bfr_len = bfr.Len();
+//		long bgn = Env_.TickCount();
 		byte[] orig = bfr.Xto_bry_and_clear();
 		ByteArrayInputStream rdr = new ByteArrayInputStream(orig);
 		try {
@@ -72,6 +72,6 @@ class Xoh_tidy_wkr_jtidy implements Xoh_tidy_wkr {
 			try {rdr.close();}
 			catch (Exception exc) {System.out.println("jtidy close failed");}
 		}
-		app.Usr_dlg().Log_many("", "", "jtidy.exec; elapsed=~{0} len=~{1}", Env_.TickCount_elapsed_in_frac(bgn), bfr_len);
+//		app.Usr_dlg().Log_many("", "", "jtidy.exec; elapsed=~{0} len=~{1}", Env_.TickCount_elapsed_in_frac(bgn), bfr_len);
 			}
 }

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.lnkis.redlinks; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*;
-import gplx.xowa.dbs.tbls.*;
+import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.langs.vnts.*; import gplx.xowa.gui.views.*; import gplx.xowa.pages.*; import gplx.xowa.html.hdumps.core.*;
 public class Xog_redlink_mgr implements GfoInvkAble {
 	private Xog_win_itm win; private Xog_html_itm html_itm; private Xowe_wiki wiki; private Xoae_page page;
@@ -27,7 +27,7 @@ public class Xog_redlink_mgr implements GfoInvkAble {
 		this.redlink_lnki_list = page.Redlink_lnki_list();
 		this.lnki_list = redlink_lnki_list.Lnki_list();
 		this.thread_id = redlink_lnki_list.Thread_id();
-		this.log_enabled = log_enabled; this.usr_dlg = log_enabled ? Gfo_usr_dlg_._ : Gfo_usr_dlg_.Null;
+		this.log_enabled = log_enabled; this.usr_dlg = log_enabled ? Gfo_usr_dlg_.I : Gfo_usr_dlg_.Null;
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_run)) Redlink();
@@ -53,7 +53,7 @@ public class Xog_redlink_mgr implements GfoInvkAble {
 				if (redlink_lnki_list.Thread_id() != thread_id) return;
 				Xop_lnki_tkn lnki = (Xop_lnki_tkn)work_list.FetchAt(i);
 				Xoa_ttl ttl = lnki.Ttl();
-				Xodb_page db_page = new Xodb_page().Ttl_(ttl);
+				Xowd_page_itm db_page = new Xowd_page_itm().Ttl_(ttl);
 				byte[] full_txt = ttl.Full_db();
 				if (!page_hash.Has(full_txt))
 					page_hash.Add(full_txt, db_page);
@@ -64,7 +64,7 @@ public class Xog_redlink_mgr implements GfoInvkAble {
 				if (redlink_lnki_list.Thread_id() != thread_id) return;
 				int end = i + Batch_size;
 				if (end > page_len) end = page_len;
-				wiki.Db_mgr().Load_mgr().Load_by_ttls(win.Usr_dlg(), page_hash, Xodb_page_tbl.Load_idx_flds_only_y, i, end);
+				wiki.Db_mgr().Load_mgr().Load_by_ttls(win.Usr_dlg(), page_hash, Bool_.Y, i, end);
 			}
 			int redlink_count = 0;
 			Bry_bfr bfr = null;
@@ -74,12 +74,12 @@ public class Xog_redlink_mgr implements GfoInvkAble {
 			for (int j = 0; j < len; j++) {
 				Xop_lnki_tkn lnki = (Xop_lnki_tkn)work_list.FetchAt(j);
 				byte[] full_db = lnki.Ttl().Full_db();
-				Xodb_page db_page = (Xodb_page)page_hash.Fetch(full_db);
+				Xowd_page_itm db_page = (Xowd_page_itm)page_hash.Fetch(full_db);
 				if (db_page == null) continue;	// pages shouldn't be null, but just in case
 				if (!db_page.Exists()) {
 					String lnki_id = Xopg_redlink_lnki_list.Lnki_id_prefix + Int_.Xto_str(lnki.Html_id());
 					if (variants_enabled) {
-						Xodb_page vnt_page = vnt_mgr.Convert_ttl(wiki, lnki.Ttl());
+						Xowd_page_itm vnt_page = vnt_mgr.Convert_ttl(wiki, lnki.Ttl());
 						if (vnt_page != null) {
 							Xoa_ttl vnt_ttl = Xoa_ttl.parse_(wiki, lnki.Ttl().Ns().Id(), vnt_page.Ttl_page_db());
 							html_itm.Html_atr_set(lnki_id, "href", "/wiki/" + String_.new_utf8_(vnt_ttl.Full_url()));

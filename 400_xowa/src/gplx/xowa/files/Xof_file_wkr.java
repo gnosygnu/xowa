@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-import gplx.threads.*;
+import gplx.threads.*; import gplx.ios.*;
 import gplx.fsdb.*; import gplx.fsdb.meta.*; import gplx.fsdb.data.*; import gplx.xowa.files.fsdb.*;
 import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.caches.*; import gplx.xowa.files.gui.*;
 import gplx.xowa.html.hdumps.core.*;
@@ -42,7 +42,7 @@ public class Xof_file_wkr implements Gfo_thread_wkr {
 	private final Xoa_page hpg; private final ListAdp imgs; private final byte exec_tid;
 	public Xof_file_wkr(Xof_orig_mgr orig_mgr, Xof_bin_mgr bin_mgr, Fsm_mnt_mgr mnt_mgr, Xof_cache_mgr cache_mgr, Xow_repo_mgr repo_mgr, Xog_js_wkr js_wkr, Xoa_page hpg, ListAdp imgs, byte exec_tid) {
 		this.orig_mgr = orig_mgr; this.bin_mgr = bin_mgr; this.mnt_mgr = mnt_mgr; this.cache_mgr = cache_mgr;
-		this.usr_dlg = Gfo_usr_dlg_._; this.repo_mgr = repo_mgr; this.js_wkr = js_wkr;			
+		this.usr_dlg = Gfo_usr_dlg_.I; this.repo_mgr = repo_mgr; this.js_wkr = js_wkr;			
 		this.hpg = hpg; this.imgs = imgs; this.exec_tid = exec_tid;
 	}
 	public String Name() {return "xowa.load_imgs";}
@@ -109,28 +109,19 @@ public class Xof_file_wkr implements Gfo_thread_wkr {
 	}
 	private static void Save_bin(Xof_fsdb_itm itm, Fsm_mnt_mgr mnt_mgr) {
 		Io_url html_url = itm.Html_view_url();
-		long bin_len = Io_mgr._.QueryFil(html_url).Size();
-		gplx.ios.Io_stream_rdr bin_rdr = gplx.ios.Io_stream_rdr_.file_(html_url);
+		long rdr_len = Io_mgr._.QueryFil(html_url).Size();
+		Io_stream_rdr rdr = gplx.ios.Io_stream_rdr_.file_(html_url);
 		try {
-			bin_rdr.Open();
-			mnt_mgr.Txn_open();
-			if (itm.Lnki_ext().Id_is_thumbable_img()) {
-				if (itm.File_is_orig())
-					mnt_mgr.Img_insert(itm.Orig_repo_name(), itm.Lnki_ttl(), itm.Lnki_ext().Id(), itm.Html_w(), itm.Html_h(), Fsd_thm_tbl.Modified_null, Fsd_thm_tbl.Hash_null, bin_len, bin_rdr);
-				else
-					mnt_mgr.Thm_insert(itm.Orig_repo_name(), itm.Lnki_ttl(), itm.Lnki_ext().Id(), itm.Html_w(), itm.Html_h(), itm.Lnki_time(), itm.Lnki_page(), Fsd_thm_tbl.Modified_null, Fsd_thm_tbl.Hash_null, bin_len, bin_rdr);
-			}
-			else {
-				if (itm.Lnki_ext().Id_is_video() && !itm.File_is_orig())	// insert as thumbnail
-					mnt_mgr.Thm_insert(itm.Orig_repo_name(), itm.Lnki_ttl(), itm.Lnki_ext().Id(), itm.Html_w(), itm.Html_h(), itm.Lnki_time(), itm.Lnki_page(), Fsd_thm_tbl.Modified_null, Fsd_thm_tbl.Hash_null, bin_len, bin_rdr);
-				else
-					mnt_mgr.Fil_insert(itm.Orig_repo_name(), itm.Lnki_ttl(), itm.Lnki_ext().Id(), Fsd_thm_tbl.Modified_null, Fsd_thm_tbl.Hash_null, bin_len, bin_rdr);
-			}
-			mnt_mgr.Txn_save();
+			rdr.Open();
+			Fsm_mnt_itm mnt_itm = mnt_mgr.Mnts__get_insert();
+			Fsm_atr_fil atr_fil = mnt_itm.Atr_mgr().Db__core();
+			Fsm_bin_fil bin_fil = mnt_itm.Bin_mgr().Dbs__get_nth();
+			Xof_bin_updater bin_updater = new Xof_bin_updater();
+			bin_updater.Save_bin(mnt_itm, atr_fil, bin_fil, itm, rdr, rdr_len);
 		}
 		catch (Exception e) {
-			Xoa_app_.Usr_dlg().Warn_many("", "", "failed to save file: ttl=~{0} url=~{1} err=~{2}", String_.new_utf8_(itm.Lnki_ttl()), html_url.Raw(), Err_.Message_gplx(e));
+			Xoa_app_.Usr_dlg().Warn_many("", "", "failed to save file: ttl=~{0} url=~{1} err=~{2}", itm.Lnki_ttl(), html_url.Raw(), Err_.Message_gplx(e));
 		}
-		finally {bin_rdr.Rls();}
+		finally {rdr.Rls();}
 	}
 }

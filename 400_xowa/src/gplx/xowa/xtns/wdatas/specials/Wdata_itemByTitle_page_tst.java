@@ -71,7 +71,7 @@ class Wdata_itemByTitle_page_fxt {
 	public String Expd_html(String wmf_key, String ttl_str) {
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_k004();
 		special_page.Html_fmtr().Bld_bfr_many(tmp_bfr, "Search for items by site and title", "Site", wmf_key, "Page", ttl_str, "Search");
-		return tmp_bfr.Mkr_rls().Xto_str_and_clear();
+		return tmp_bfr.To_str_and_rls();
 	}
 }
 

@@ -19,7 +19,7 @@ package gplx.dbs.utls; import gplx.*; import gplx.dbs.*;
 import org.junit.*;
 public class PoolIds_tst {
 	@Before public void setup() {
-		conn = Db_conn_pool.I.Get_or_new(Db_url_.Test);
+		conn = Db_conn_pool.I.Get_or_new(Db_conn_info_.Test);
 		Db_qry_fxt.DeleteAll(conn, PoolIds.Tbl_Name);
 		mgr = PoolIds._;
 	}

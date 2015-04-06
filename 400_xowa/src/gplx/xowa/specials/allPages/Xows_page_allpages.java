@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.allPages; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
 import gplx.core.primitives.*; import gplx.xowa.html.*; import gplx.xowa.html.lnkis.*;
-import gplx.xowa.wikis.*;
+import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xows_page_allpages implements GfoInvkAble, Bry_fmtr_arg, Xows_page {
 	public Xows_page_allpages(Xowe_wiki wiki) {
 		this.wiki = wiki;
@@ -60,13 +60,13 @@ public class Xows_page_allpages implements GfoInvkAble, Bry_fmtr_arg, Xows_page 
 		(	"<a href=\"/wiki/Special:AllPages?from=~{arg_from}~{args__rest}\" title=\"Special:AllPages\">~{lbl_text}</a>"
 		),	"arg_from", "args__rest", "lbl_text");
 	public int Itms_per_page() {return itms_per_page;} private int itms_per_page = 345;
-	public void Itms_per_page_(int v) {itms_per_page = v; rslt_list_ttls = new Xodb_page[v];}
+	public void Itms_per_page_(int v) {itms_per_page = v; rslt_list_ttls = new Xowd_page_itm[v];}
 	public int Itms_per_grp() {return itms_per_grp;} private int itms_per_grp = 3;
 	public boolean List_include_redirects() {return show_redirects;} private boolean show_redirects = true;
-	public Xodb_page Rslt_prv() {return rslt_prv;} public void Rslt_prv_(Xodb_page v) {rslt_prv = v;} private Xodb_page rslt_prv;
-	public Xodb_page Rslt_nxt() {return rslt_nxt;} public void Rslt_nxt_(Xodb_page v) {rslt_nxt = v;} private Xodb_page rslt_nxt;
+	public Xowd_page_itm Rslt_prv() {return rslt_prv;} public void Rslt_prv_(Xowd_page_itm v) {rslt_prv = v;} private Xowd_page_itm rslt_prv;
+	public Xowd_page_itm Rslt_nxt() {return rslt_nxt;} public void Rslt_nxt_(Xowd_page_itm v) {rslt_nxt = v;} private Xowd_page_itm rslt_nxt;
 	public int Rslt_list_len() {return rslt_list_len;} public void Rslt_list_len_(int v) {rslt_list_len = v;} private int rslt_list_len;
-	public Xodb_page[] Rslt_list_ttls() {return rslt_list_ttls;} private Xodb_page[] rslt_list_ttls;
+	public Xowd_page_itm[] Rslt_list_ttls() {return rslt_list_ttls;} private Xowd_page_itm[] rslt_list_ttls;
 	public void Special_gen(Xoa_url url, Xoae_page page, Xowe_wiki wiki, Xoa_ttl ttl) {
 		wiki.Ctx().Cur_page().Html_data().Display_ttl_(wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_sp_allpages_hdr));
 		url.Page_bry_(Bry_.Add(Bry_.new_ascii_("Special:"), ttl.Page_txt_wo_qargs()));	// HACK: need to re-set Page b/c href_parser does not eliminate qargs; DATE:2013-02-08
@@ -100,14 +100,14 @@ public class Xows_page_allpages implements GfoInvkAble, Bry_fmtr_arg, Xows_page 
 			arg_hash.Save(url);
 		}
 		Int_obj_ref rslt_len = Int_obj_ref.new_(rslt_list_len);
-		Xodb_page rslt_nxt2 = new Xodb_page();
-		Xodb_page rslt_prv2 = new Xodb_page();
+		Xowd_page_itm rslt_nxt2 = new Xowd_page_itm();
+		Xowd_page_itm rslt_prv2 = new Xowd_page_itm();
 		int all_pages_min = 0;// no minimum for all pages
 		ListAdp rslt_list = ListAdp_.new_();
 		wiki.Db_mgr().Load_mgr().Load_ttls_for_all_pages(Cancelable_.Never, rslt_list, rslt_nxt2, rslt_prv2, rslt_len, init_ns, from_ttl.Page_db(), itms_per_page, all_pages_min, itms_per_page, !hide_redirects_val, true);
 		rslt_list_len = rslt_len.Val();
 		for (int i = 0; i < rslt_list_len; i++)
-			rslt_list_ttls[i] = (Xodb_page)rslt_list.FetchAt(i);
+			rslt_list_ttls[i] = (Xowd_page_itm)rslt_list.FetchAt(i);
 		rslt_nxt = rslt_nxt2;
 		rslt_prv = rslt_prv2;
 		return true;
@@ -123,7 +123,7 @@ public class Xows_page_allpages implements GfoInvkAble, Bry_fmtr_arg, Xows_page 
 		tmp_bfr.Mkr_rls();
 		page.Html_data().Html_restricted_n_();
 	}
-	byte[] Build_html_end(Bry_bfr bfr, Xodb_page itm, boolean fwd) {
+	byte[] Build_html_end(Bry_bfr bfr, Xowd_page_itm itm, boolean fwd) {
 		Xoa_ttl ttl = Xows_page_allpages.ttl_(wiki, init_ns, itm); if (ttl == null) return Bry_.Empty;	// occurs when range is empty; EX: Module:A in simplewikibooks
 		int msg_id = fwd ? Xol_msg_itm_.Id_sp_allpages_fwd : Xol_msg_itm_.Id_sp_allpages_bwd;
 		Xol_msg_itm msg_itm = wiki.Lang().Msg_mgr().Itm_by_id_or_null(msg_id);
@@ -133,7 +133,7 @@ public class Xows_page_allpages implements GfoInvkAble, Bry_fmtr_arg, Xows_page 
 		byte[] arg_from = Xoa_app_.Utl__encoder_mgr().Id().Encode(ttl.Page_txt_wo_qargs());
 		return html_list_end.Bld_bry_many(bfr, arg_from, args__rest, lbl_text);
 	}
-	public static Xoa_ttl ttl_(Xowe_wiki wiki, Xow_ns ns, Xodb_page itm) {
+	public static Xoa_ttl ttl_(Xowe_wiki wiki, Xow_ns ns, Xowd_page_itm itm) {
 		byte[] ttl_bry = itm.Ttl_page_db();
 		if (!ns.Id_main()) ttl_bry = Bry_.Add(ns.Name_db_w_colon(), ttl_bry);
 		return Xoa_ttl.parse_(wiki, ttl_bry);
@@ -177,13 +177,13 @@ class Xos_pagelist_html_itm_fmtr implements Bry_fmtr_arg {
 		ttls_len = ttls.length;
 		itm_pct = 100 / itms_per_grp;
 		init_ns = mgr.Init_ns();
-	} 	int itms_per_grp, ttls_len, itm_pct; Xodb_page[] ttls; Xow_ns init_ns;
+	} 	int itms_per_grp, ttls_len, itm_pct; Xowd_page_itm[] ttls; Xow_ns init_ns;
 	public void XferAry_end() {ttls = null;}
 	public void XferAry(Bry_bfr bfr, int idx) {
 		int itm_end = itm_idx + itms_per_grp;
 		for (int i = itm_idx; i < itm_end; i++) {
 			if (i >= ttls_len) break;	// handle odd number of itms; EX: interval=3; items=4; proc gets called on 0 (0-2) and 3 (3-5); ArrayIndex for 4, 5 
-			Xodb_page ttl_itm = ttls[i];
+			Xowd_page_itm ttl_itm = ttls[i];
 			if (ttl_itm == null) break; // ttl_itm can be null at bgn or end of title list; EX: list=A-Z; count=5; key=Z; itms=X,Y,Z,null,null
 			Xoa_ttl ttl = Xows_page_allpages.ttl_(wiki, init_ns, ttl_itm);
 			byte[] href = href_parser.Build_to_bry(wiki, ttl);

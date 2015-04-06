@@ -47,7 +47,7 @@ public class Imap_map implements Xoh_file_img_wkr, Js_img_wkr {
 		Xowe_wiki wiki = xtn_mgr.Wiki();
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_k004();
 		Write_imap_div(tmp_bfr, Xoh_wtr_ctx.Basic, html_uid, html_w, html_h, Bry_.new_utf8_(html_src), orig_w, orig_h, lnki_ttl);
-		js_wkr.Html_elem_replace_html("imap_div_" + Int_.Xto_str(html_uid), tmp_bfr.Mkr_rls().Xto_str_and_clear());
+		js_wkr.Html_elem_replace_html("imap_div_" + Int_.Xto_str(html_uid), tmp_bfr.To_str_and_rls());
 	}
 	private void Write_imap_div(Bry_bfr bfr, Xoh_wtr_ctx hctx, int html_uid, int html_w, int html_h, byte[] html_src, int orig_w, int orig_h, byte[] lnki_ttl) {
 		byte[] desc_style = Calc_desc_style(html_w, html_h);

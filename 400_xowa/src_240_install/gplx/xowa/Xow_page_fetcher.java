@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.xowa.wikis.data.tbls.*;
 public interface Xow_page_fetcher {
 	Xow_page_fetcher Wiki_(Xowe_wiki v);
 	byte[] Fetch(int ns_id, byte[] ttl);
@@ -32,12 +33,12 @@ class Xow_page_fetcher_mok implements Xow_page_fetcher {
 	public Xow_page_fetcher Wiki_(Xowe_wiki v) {return this;}
 	public void Clear() {pages.Clear();}	private HashAdp pages = HashAdp_.new_();
 	public void Add(int ns_id, byte[] ttl, byte[] text) {
-		Xodb_page page = new Xodb_page().Ns_id_(ns_id).Ttl_page_db_(ttl).Wtxt_(text);
+		Xowd_page_itm page = new Xowd_page_itm().Ns_id_(ns_id).Ttl_page_db_(ttl).Text_(text);
 		pages.Add(Make_key(ns_id, ttl), page);
 	}
 	public byte[] Fetch(int ns_id, byte[] ttl) {
-		Xodb_page rv = (Xodb_page)pages.Fetch(Make_key(ns_id, ttl));
-		return rv == null ? null : rv.Wtxt();
+		Xowd_page_itm rv = (Xowd_page_itm)pages.Fetch(Make_key(ns_id, ttl));
+		return rv == null ? null : rv.Text();
 	}
 	String Make_key(int ns_id, byte[] ttl) {return Int_.Xto_str(ns_id) + "|" + String_.new_utf8_(ttl);}
 }

@@ -84,7 +84,7 @@ public class DbMaprWtr extends DataWtr_base implements DataWtr {
 	public String XtoStr() {return "";}
 	@Override public SrlMgr SrlMgr_new(Object o) {return new DbMaprWtr();}
 	DbMaprMgr mgr; Db_conn conn; String curTableName; Db_qry_insert insertCmd;		
-	public static DbMaprWtr new_by_url_(Db_url url) {
+	public static DbMaprWtr new_by_url_(Db_conn_info url) {
 		DbMaprWtr rv = new DbMaprWtr();
 		rv.conn = Db_conn_pool.I.Get_or_new(url);
 		return rv;

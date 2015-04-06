@@ -35,7 +35,7 @@ public class Io_stream_wtr_ {
 	}
 	public static Io_stream_wtr new_by_tid_(byte v) {
 		switch (v) {
-			case gplx.ios.Io_stream_.Tid_file	: return new Io_stream_wtr_file();
+			case gplx.ios.Io_stream_.Tid_raw	: return new Io_stream_wtr_file();
 			case gplx.ios.Io_stream_.Tid_zip	: return new Io_stream_wtr_zip();
 			case gplx.ios.Io_stream_.Tid_gzip	: return new Io_stream_wtr_gzip();
 			case gplx.ios.Io_stream_.Tid_bzip2	: return new Io_stream_wtr_bzip2();
@@ -172,7 +172,7 @@ class Io_stream_wtr_zip implements Io_stream_wtr {
 }
 class Io_stream_wtr_file implements Io_stream_wtr {
 	IoStream bry_stream; 
-	@Override public byte Tid() {return Io_stream_.Tid_file;}
+	@Override public byte Tid() {return Io_stream_.Tid_raw;}
 	public Io_url Url() {return url;} public Io_stream_wtr Url_(Io_url v) {url = v; return this;} Io_url url;
 	public void Trg_bfr_(Bry_bfr v) {trg_bfr = v;} private Bry_bfr trg_bfr; java.io.ByteArrayOutputStream mem_stream;
 	public Io_stream_wtr Open() {

@@ -44,6 +44,9 @@ public class Xof_fsdb_itm {
 	public Io_url				Html_orig_url() {return html_orig_url;} private Io_url html_orig_url = Io_url_.Null;
 	public int					Gallery_mgr_h() {return gallery_mgr_h;} private int gallery_mgr_h = Int_.Neg1;
 	public Js_img_wkr			Html_img_wkr() {return html_img_wkr;} private Js_img_wkr html_img_wkr;
+	public int					Temp_file_w() {return temp_file_w;} private int temp_file_w;
+	public long					Temp_file_size() {return temp_file_size;} private long temp_file_size;
+	public Io_url				Temp_file_url() {return temp_file_url;} private Io_url temp_file_url;
 	public boolean					Orig_exists() {return orig_exists;} public void Orig_exists_y_() {orig_exists = Bool_.Y;} public void Orig_exists_n_() {orig_exists = Bool_.N;} private boolean orig_exists;
 	public boolean					File_exists() {return file_exists;} public void File_exists_y_() {file_exists = Bool_.Y;} public void File_exists_n_() {file_exists = Bool_.N;} public void File_exists_(boolean v) {file_exists = v;} private boolean file_exists;
 	public boolean					File_resized() {return file_resized;} public void File_resized_y_() {file_resized = Bool_.Y;} private boolean file_resized;
@@ -71,7 +74,7 @@ public class Xof_fsdb_itm {
 		html_orig_url = url_bldr.To_url_trg(repo, this, Bool_.Y);
 	}
 	public void			Ctor_by_fsdb_make
-		( byte[] lnki_ttl, int lnki_w, int lnki_h, double lnki_time, int lnki_page
+		( byte[] lnki_ttl, int lnki_ext, int lnki_w, int lnki_h, double lnki_time, int lnki_page
 		, byte orig_repo_id, int orig_w, int orig_h, byte[] orig_redirect
 		, boolean file_is_orig
 		) {
@@ -80,7 +83,9 @@ public class Xof_fsdb_itm {
 		this.file_is_orig = file_is_orig;
 		this.html_w = lnki_w; this.html_h = lnki_h;	// set html_size as file_size (may try to optimize later by removing similar thumbs (EX: 220,221 -> 220))
 		this.Lnki_ttl_(lnki_ttl);
+		this.lnki_ext = Xof_ext_.new_by_id_(lnki_ext);	// NOTE: data in fsdb_make may override lnki_ext; EX: ttl=A.png; but ext=".jpg"
 	}
+	public void Init_temp(int temp_file_w, long temp_file_size, Io_url temp_file_url) {this.temp_file_w = temp_file_w; this.temp_file_size = temp_file_size; this.temp_file_url = temp_file_url;}
 	public void Lnki_ext_(Xof_ext v) {lnki_ext = v;}
 	public void Lnki_size_(int w, int h) {this.lnki_w = w; this.lnki_h = h;}
 	public void Orig_repo_name_(byte[] v) {orig_repo_name = v;}

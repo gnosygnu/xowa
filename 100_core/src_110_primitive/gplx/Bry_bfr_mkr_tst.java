@@ -56,7 +56,7 @@ class Bry_bfr_mkr_fxt {
 	}
 	public Bry_bfr_mkr_fxt Rls(int i) {
 		Bry_bfr bfr = mkr.Ary()[i];
-		mkr.Rls(bfr);
+		bfr.Mkr_rls();
 		return this;
 	}
 	public Bry_bfr_mkr_fxt Tst_idxs(int... expd) {
@@ -65,7 +65,7 @@ class Bry_bfr_mkr_fxt {
 		for (int i = 0; i < actl_len; i++) {
 			Bry_bfr bfr = mkr.Ary()[i];
 			int actl_val = Bry_bfr_mkr_tst.Int_null;
-			if (bfr != null) actl_val =  bfr.Mkr_itm();
+			if (bfr != null) actl_val =  bfr.Mkr_idx();
 			actl[i] = actl_val;
 		}
 		Tfds.Eq_ary(expd, actl);

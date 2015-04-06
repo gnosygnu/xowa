@@ -77,8 +77,8 @@ public class Xosp_fbrow_special_tst {
 		, "          <td>2004-01-02 00:00:00</td>"
 		, "        </tr>"
 		, "        <tr>"
-		, "          <td><input type='checkbox' id='chk_3.000.sqlite3'/></td>"
-		, "          <td>3.000.sqlite3</td>"
+		, "          <td><input type='checkbox' id='chk_3.xowa'/></td>"
+		, "          <td>3.xowa</td>"
 		, "          <td class='fsys_td_size'>1 KB</td>"
 		, "          <td>2004-01-03 00:00:00</td>"
 		, "        </tr>"
@@ -128,7 +128,7 @@ class Xosp_fbrow_special_fxt {
 		)
 		,   bldr.Fil("1.txt", 1, "2001-01-01")
 		,   bldr.Fil("2.txt", 2, "2004-01-02")
-		,   bldr.Fil("3.000.sqlite3", 3, "2004-01-03")
+		,   bldr.Fil("3.xowa", 3, "2004-01-03")
 		);
 	}
 	public void Init_dir(IoItmDir dir) {

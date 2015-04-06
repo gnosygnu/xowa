@@ -30,13 +30,13 @@ public class Xotdb_dir_info {
 		ext_bry = Wtr_ext(v);
 		ext_str = String_.new_ascii_(ext_bry);
 		return this;
-	}	byte ext_tid = gplx.ios.Io_stream_.Tid_file;
+	}	byte ext_tid = gplx.ios.Io_stream_.Tid_raw;
 
 	public static final String Wtr_xdat_str = ".xdat", Wtr_zip_str = ".zip", Wtr_gz_str = ".gz", Wtr_bz2_str = ".bz2";
 	public static final byte[] Wtr_xdat_bry = Bry_.new_ascii_(Wtr_xdat_str), Wtr_zip_bry = Bry_.new_ascii_(Wtr_zip_str), Wtr_gz_bry = Bry_.new_ascii_(Wtr_gz_str), Wtr_bz2_bry = Bry_.new_ascii_(Wtr_bz2_str);
 	public static String Wtr_dir(byte v) {
 		switch (v) {
-			case gplx.ios.Io_stream_.Tid_file	: return "";
+			case gplx.ios.Io_stream_.Tid_raw	: return "";
 			case gplx.ios.Io_stream_.Tid_zip	: return "_zip";
 			case gplx.ios.Io_stream_.Tid_gzip	: return "_gz";
 			case gplx.ios.Io_stream_.Tid_bzip2	: return "_bz2";
@@ -45,7 +45,7 @@ public class Xotdb_dir_info {
 	}
 	public static byte[] Wtr_ext(byte v) {
 		switch (v) {
-			case gplx.ios.Io_stream_.Tid_file	: return Wtr_xdat_bry;
+			case gplx.ios.Io_stream_.Tid_raw	: return Wtr_xdat_bry;
 			case gplx.ios.Io_stream_.Tid_zip	: return Wtr_zip_bry;
 			case gplx.ios.Io_stream_.Tid_gzip	: return Wtr_gz_bry;
 			case gplx.ios.Io_stream_.Tid_bzip2	: return Wtr_bz2_bry;

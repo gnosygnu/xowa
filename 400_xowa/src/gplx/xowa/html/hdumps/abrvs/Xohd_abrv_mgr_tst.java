@@ -110,11 +110,11 @@ class Xohd_abrv_mgr_fxt {
 	public void Clear() {
 		Xoae_app app = Xoa_app_fxt.app_();
 		wiki = Xoa_app_fxt.wiki_tst_(app);
-		abrv_mgr = new Xohd_abrv_mgr(Gfo_usr_dlg_._, app.Fsys_mgr(), app.Utl__encoder_mgr().Fsys(), wiki.Domain_bry());
+		abrv_mgr = new Xohd_abrv_mgr(Gfo_usr_dlg_.I, app.Fsys_mgr(), app.Utl__encoder_mgr().Fsys(), wiki.Domain_bry());
 	}
 	public void Clear_imgs() {img_list.Clear();}
 	public Xohd_abrv_mgr_fxt Init_body(String body) {hpg.Page_body_(Bry_.new_utf8_(body)); return this;}
-	public Xohd_abrv_mgr_fxt Init_data_gly(int uid, int box_max) {hpg.Gly_itms().Add(uid, new Xohd_data_itm__gallery_mgr(uid, box_max)); return this;}
+	public Xohd_abrv_mgr_fxt Init_data_gly(int uid, int box_max) {hpg.Gallery_itms().Add(uid, new Xohd_data_itm__gallery_mgr(uid, box_max)); return this;}
 	public Xohd_abrv_mgr_fxt Init_data_img_basic(String ttl, int html_uid, int html_w, int html_h) {
 		Xohd_data_itm__img img = new Xohd_data_itm__img();
 		img.Data_init_base(Bry_.new_utf8_(ttl), Xof_ext_.Id_png, Xop_lnki_type.Id_none, Xof_img_size.Null, Xof_img_size.Null, Xof_img_size.Upright_null

@@ -20,6 +20,7 @@ import gplx.xowa.apis.xowa.*; import gplx.xowa.gui.cmds.*;
 public class Xoapi_root implements GfoInvkAble {
 	private Xoae_app app;
 	public Xoapi_root(Xoae_app app) {
+		app_api.Ctor_by_app(app);
 		usr_api.Ctor_by_app(app);
 		bldr_api.Ctor_by_app(app);
 	}

@@ -18,8 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*;
 public class Xoud_cfg_mgr {
-	private final Xoud_cfg_tbl tbl = new Xoud_cfg_tbl();
-	public void Conn_(Db_conn new_conn, boolean created, int user_id) {tbl.Conn_(new_conn, created, user_id);}
+	private Db_cfg_tbl tbl;
+	public void Conn_(Db_conn new_conn, boolean created, int user_id) {
+		tbl = new Db_cfg_tbl(new_conn, "user_opt");
+		if (created) tbl.Create_tbl();
+	}
 	public int		Select_int_or(String grp, String key, int or)		{
 		String rv = Select_str_or(grp, key, null);
 		return rv == null ? or : Int_.parse_or_(rv, or);
@@ -30,12 +33,12 @@ public class Xoud_cfg_mgr {
 		return rv == null ? or : Bry_.new_utf8_(rv);
 	}
 	public String	Select_str_or(String grp, String key, String or) {
-		String rv = tbl.Select_as_str_or(grp, key, null);
+		String rv = tbl.Select_str_or(grp, key, null);
 		return rv == null ? or : rv;
 	}
 	public byte[] Assert_bry_or(String key, byte[] or) {return Assert_bry_or("", key, or);}
 	public byte[] Assert_bry_or(String grp, String key, byte[] or) {
-		String rv = tbl.Select_as_str_or(grp, key, null);
+		String rv = tbl.Select_str_or(grp, key, null);
 		if (rv == null) {
 			Insert_bry(grp, key, or);
 			return or;
@@ -44,18 +47,18 @@ public class Xoud_cfg_mgr {
 			return Bry_.new_utf8_(rv);
 	}
 	public void Update_bry(String key, byte[] val) {Update_bry("", key, val);}
-	public void Update_bry(String grp, String key, byte[] val) {tbl.Update(grp, key, String_.new_utf8_(val));}
+	public void Update_bry(String grp, String key, byte[] val) {tbl.Update_bry(grp, key, val);}
 	public void Insert_bry(String key, byte[] val) {Insert_bry("", key, val);}
-	public void Insert_bry(String grp, String key, byte[] val)	{tbl.Insert(grp, key, String_.new_utf8_(val));}
-	public void Insert_int(String grp, String key, int val)		{tbl.Insert(grp, key, Int_.Xto_str(val));}
+	public void Insert_bry(String grp, String key, byte[] val)	{tbl.Insert_bry(grp, key, val);}
+	public void Insert_int(String grp, String key, int val)		{tbl.Insert_int(grp, key, val);}
 	public int Next_id(String tbl_name) {
 		String grp = "xowa." + tbl_name, key = "next_id";
-		int next_id = tbl.Select_as_int_or(grp, key, 1);	// EX: xowa.cfg_history|next_id|1
-		String new_val = Int_.Xto_str(next_id + 1);
+		int next_id = tbl.Select_int_or(grp, key, 1);	// EX: xowa.cfg_history|next_id|1
+		int new_val = next_id + 1;
 		if (next_id == 1)
-			tbl.Insert(grp, key, new_val);
+			tbl.Insert_int(grp, key, new_val);
 		else
-			tbl.Update(grp, key, new_val);
+			tbl.Update_int(grp, key, new_val);
 		return next_id;
 	}
 }

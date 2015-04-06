@@ -18,62 +18,33 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*;
 public class Fsm_bin_tbl {
-	private String tbl_name = "file_meta_bin"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
-	private String fld_uid, fld_url, fld_bin_len, fld_bin_max;		
-	private Db_conn conn; private final Db_stmt_bldr stmt_bldr = new Db_stmt_bldr();
-	public void Conn_(Db_conn new_conn, boolean created, boolean schema_is_1) {
-		this.conn = new_conn; flds.Clear();
-		if (schema_is_1) {
-			tbl_name		= "fsdb_db_bin";
-		}
-		fld_uid				= flds.Add_int("uid");
-		fld_url				= flds.Add_str("url", 255);
-		fld_bin_len			= flds.Add_long("bin_len");
-		fld_bin_max			= flds.Add_long("bin_max");
-		if (created) {
-			Db_meta_tbl meta = Db_meta_tbl.new_(tbl_name, flds
-			, Db_meta_idx.new_unique_by_tbl(tbl_name, "pkey", fld_uid)
-			);
-			conn.Exec_create_tbl_and_idx(meta);
-		}
-		stmt_bldr.Conn_(conn, tbl_name, flds, fld_uid);
+	private final String tbl_name; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private final String fld_uid, fld_url;
+	private final Db_conn conn; private int mnt_id;
+	public Fsm_bin_tbl(Db_conn conn, boolean schema_is_1, int mnt_id) {
+		this.conn = conn; this.mnt_id = mnt_id;
+		String fld_prefix = "";
+		if (schema_is_1)			{tbl_name = "fsdb_db_bin";}
+		else						{tbl_name = "fsdb_dbb"; fld_prefix = "dbb_";}
+		fld_uid				= flds.Add_int_pkey	(fld_prefix + "uid");
+		fld_url				= flds.Add_str		(fld_prefix + "url", 255);
 	}
-	public Fsm_bin_fil[] Select_all(Io_url dir) {
+	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds));}
+	public void Insert(int id, String url_rel) {
+		conn.Stmt_insert(tbl_name, flds).Crt_int(fld_uid, id).Val_str(fld_url, url_rel).Exec_insert();
+	}
+	public Fsm_bin_fil[] Select_all(Fsdb_db_mgr db_conn_mgr) {
 		ListAdp rv = ListAdp_.new_();
-		Db_qry qry = Db_qry__select_cmd.new_().From_(tbl_name).Cols_all_().Where_(Db_crt_.eq_many_(Db_meta_fld.Ary_empy)).OrderBy_asc_(fld_uid);
-		Db_rdr rdr = Db_rdr_.Null;
+		Db_rdr rdr = conn.Stmt_select_order(tbl_name, flds, Db_meta_fld.Ary_empy, fld_uid).Clear().Exec_select__rls_auto();
 		try {
-			rdr = conn.Stmt_new(qry).Clear().Exec_select_as_rdr();
 			while (rdr.Move_next()) {
-				Fsm_bin_fil itm = new Fsm_bin_fil
-				( rdr.Read_int(fld_uid)
-				, dir.GenSubFil(rdr.Read_str(fld_url))
-				, rdr.Read_long(fld_bin_len)
-				, rdr.Read_long(fld_bin_max)
-				, Db_cmd_mode.Tid_ignore
-				);
+				int bin_id = rdr.Read_int(fld_uid);
+				String bin_url = rdr.Read_str(fld_url);
+				Fsdb_db_file bin_db = db_conn_mgr.File__bin_file__at(mnt_id, bin_id, bin_url);
+				Fsm_bin_fil itm = new Fsm_bin_fil(bin_id, bin_url, Fsm_bin_fil.Bin_len_null, bin_db.Conn(), db_conn_mgr.File__schema_is_1());
 				rv.Add(itm);
 			}
-		} finally {rdr.Rls();}
+		}	finally {rdr.Rls();}
 		return (Fsm_bin_fil[])rv.Xto_ary(Fsm_bin_fil.class);
-	}
-	public void Commit_all(Fsm_bin_fil[] ary) {
-		stmt_bldr.Batch_bgn();
-		try {
-			int len = ary.length;
-			for (int i = 0; i < len; i++)
-				Commit_itm(ary[i]);
-		}	finally {stmt_bldr.Batch_end();}
-	}
-	private void Commit_itm(Fsm_bin_fil itm) {
-		Db_stmt stmt = stmt_bldr.Get(itm.Cmd_mode());
-		switch (itm.Cmd_mode()) {
-			case Db_cmd_mode.Tid_create:	stmt.Clear().Crt_int(fld_uid, itm.Id())	.Val_str(fld_url, itm.Url().NameAndExt()).Val_long(fld_bin_len, itm.Bin_len()).Val_long(fld_bin_max, itm.Bin_max()).Exec_insert(); break;
-			case Db_cmd_mode.Tid_update:	stmt.Clear()							.Val_str(fld_url, itm.Url().NameAndExt()).Val_long(fld_bin_len, itm.Bin_len()).Val_long(fld_bin_max, itm.Bin_max()).Crt_int(fld_uid, itm.Id()).Exec_update(); break;
-			case Db_cmd_mode.Tid_delete:	stmt.Clear().Crt_int(fld_uid, itm.Id()).Exec_delete();	break;
-			case Db_cmd_mode.Tid_ignore:	break;
-			default:					throw Err_.unhandled(itm.Cmd_mode());
-		}
-		itm.Cmd_mode_(Db_cmd_mode.Tid_ignore);
 	}
 }

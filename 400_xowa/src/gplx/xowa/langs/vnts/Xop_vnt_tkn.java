@@ -59,7 +59,7 @@ public class Xop_vnt_tkn extends Xop_tkn_itm_base {
 					if (rule != null) {
 						Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
 						wiki.Html_mgr().Html_wtr().Write_tkn_ary(tmp_bfr, ctx, Xoh_wtr_ctx.Alt, src, rule.Rule_subs());
-						byte[] display_ttl = tmp_bfr.Mkr_rls().Xto_bry_and_clear();
+						byte[] display_ttl = tmp_bfr.To_bry_and_rls();
 						page.Html_data().Display_ttl_vnt_(display_ttl);
 					}
 					break;

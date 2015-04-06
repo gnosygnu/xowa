@@ -243,5 +243,5 @@ class Xog_menu_bldr {
 	, Const_itm_grp_bgn_rhs	= Bry_.new_ascii_("') {\n")
 	, Const_itm_grp_end		= Bry_.new_ascii_("}\n")
 	;
-        public static final Xog_menu_bldr _ = new Xog_menu_bldr(); Xog_menu_bldr() {}
+	public static final Xog_menu_bldr _ = new Xog_menu_bldr(); Xog_menu_bldr() {}
 }

@@ -23,7 +23,7 @@ class Xow_hzip_mgr_fxt {
 		if (hzip_mgr == null) {
 			Xoae_app app = Xoa_app_fxt.app_();
 			wiki = Xoa_app_fxt.wiki_tst_(app);
-			hzip_mgr = new Xow_hzip_mgr(Gfo_usr_dlg_._, wiki);
+			hzip_mgr = new Xow_hzip_mgr(Gfo_usr_dlg_.I, wiki);
 		}
 	}
 	public void Test_save(byte[][] expd_brys, String html) {Test_save(html, expd_brys);}

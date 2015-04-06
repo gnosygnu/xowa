@@ -51,7 +51,7 @@ public class Xot_defn_tmpl implements Xot_defn {
 			bfr.Add_mid(src, find_bgn_lhs, find_end);
 			pos = find_end + Bry_onlyinclude_end_len;
 		}
-		return bfr.Mkr_rls().Xto_bry_and_clear();
+		return bfr.To_bry_and_rls();
 	}
 	private static final byte[] Bry_onlyinclude_bgn = Bry_.new_ascii_("<onlyinclude>"), Bry_onlyinclude_end = Bry_.new_ascii_("</onlyinclude>");
 	private static int Bry_onlyinclude_bgn_len = Bry_onlyinclude_bgn.length, Bry_onlyinclude_end_len = Bry_onlyinclude_end.length;

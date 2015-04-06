@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa2.apps; import gplx.*; import gplx.xowa2.*;
 import gplx.dbs.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.langs.cases.*; import gplx.intl.*; import gplx.xowa.users.data.*;
 import gplx.xowa.*;
-import gplx.xowa2.apps.urls.*; import gplx.xowa2.users.*; import gplx.xowa.files.caches.*; import gplx.xowa.files.imgs.*;
+import gplx.xowa2.apps.urls.*; import gplx.xowa.files.caches.*; import gplx.xowa.files.imgs.*;
 import gplx.xowa.wmfs.*;
 import gplx.xowa.urls.encoders.*;
 public class Xoav_app implements Xoa_app {
@@ -37,7 +37,7 @@ public class Xoav_app implements Xoa_app {
 	public Url_encoder_mgr		Utl__encoder_mgr()			{return Xoa_app_.Utl__encoder_mgr();}
 
 	public Xoav_wiki_mgr Wiki_mgr() {return wiki_mgr;} private final Xoav_wiki_mgr wiki_mgr;
-	public Xoud_data_mgr User_data_mgr() {return user_data_mgr;} private Xoud_data_mgr user_data_mgr = new Xoud_data_mgr();
+	public Xoud_db_mgr User_data_mgr() {return user_data_mgr;} private Xoud_db_mgr user_data_mgr = new Xoud_db_mgr();
 
 	public Gfo_usr_dlg Usr_dlg() {return usr_dlg;} public void Usr_dlg_(Gfo_usr_dlg v) {usr_dlg = v;} private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Null;
 	public Xop_amp_mgr Utl_amp_mgr() {return utl_amp_mgr;} private Xop_amp_mgr utl_amp_mgr = new Xop_amp_mgr();

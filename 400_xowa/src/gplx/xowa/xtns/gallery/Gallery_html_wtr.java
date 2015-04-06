@@ -167,7 +167,7 @@ class Gallery_html_wtr_ {
 			Bry_bfr caption_bfr = wiki.Utl__bfr_mkr().Get_k004();
 			Xop_root_tkn caption_root = itm.Caption_tkn();
 			wtr.Write_tkn(caption_bfr, ctx, hctx, caption_root.Root_src(), caption_root, Xoh_html_wtr.Sub_idx_null, caption_root);
-			rv = caption_bfr.Mkr_rls().Xto_bry_and_clear();
+			rv = caption_bfr.To_bry_and_rls();
 		}
 		return rv;
 	}

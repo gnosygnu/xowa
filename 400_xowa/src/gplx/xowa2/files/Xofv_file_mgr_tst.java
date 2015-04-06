@@ -21,84 +21,76 @@ import gplx.xowa.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*; imp
 import gplx.xowa2.apps.*; import gplx.xowa2.wikis.*; import gplx.xowa.files.origs.*;
 public class Xofv_file_mgr_tst {
 	@Before public void init() {fxt.Clear();} private final Xofv_file_mgr_fxt fxt = new Xofv_file_mgr_fxt();
-	@After  public void term() {Gfo_usr_dlg_._ = Gfo_usr_dlg_.Null;}
-	@Test   public void Thumb() {
-		fxt	.Init_orig_add(fxt.Mkr_orig().Init_comm("A.png", 440, 400))
-			.Init_fsdb_add(fxt.Mkr_fsdb().Init_comm_thum("A.png", 220, 200))
-			.Init_xfer_add(fxt.Mkr_xfer().Init_thumb(0, "A.png", 220, 200))
-			.Exec_process_lnki()
-			.Test_html_get(fxt.Mkr_html().Init(0, "file:///mem/xowa/file/comm/thumb/7/0/A.png/220px.png", 220, 200))
-			.Test_fsys_get("mem/xowa/file/comm/thumb/7/0/A.png/220px.png")
-			.Test_fsdb_download(1);
-			;
-	}
-	@Test   public void Orig() {
-		fxt	.Init_orig_add(fxt.Mkr_orig().Init_comm("A.png", 440, 400))
-			.Init_fsdb_add(fxt.Mkr_fsdb().Init_comm_orig("A.png", 440, 400))
-			.Init_xfer_add(fxt.Mkr_xfer().Init_none(0, "A.png"))
-			.Exec_process_lnki()
-			.Test_html_get(fxt.Mkr_html().Init(0, "file:///mem/xowa/file/comm/orig/7/0/A.png", 440, 400))
-			.Test_fsys_get("mem/xowa/file/comm/orig/7/0/A.png")
-			.Test_fsdb_download(1);
-			;
-	}
-	@Test   public void Img_size() {	// PURPOSE: test integration of Xof_img_size
-		fxt	.Init_orig_add(fxt.Mkr_orig().Init_comm("A.png", 440, 400))
-			.Init_fsdb_add(fxt.Mkr_fsdb().Init_comm_thum("A.png", 110, 100))
-			.Init_xfer_add(fxt.Mkr_xfer().Init_thumb(0, "A.png", Xof_img_size.Null, Xof_img_size.Null).Upright_(.5f))
-			.Exec_process_lnki()
-			.Test_html_get(fxt.Mkr_html().Init(0, "file:///mem/xowa/file/comm/thumb/7/0/A.png/110px.png", 110, 100))
-			.Test_fsys_get("mem/xowa/file/comm/thumb/7/0/A.png/110px.png")
-			.Test_fsdb_download(1);
-			;
-	}
-	@Test   public void Orig_mgr() {	// PURPOSE: test integration of Orig_mgr
-		fxt	.Init_orig_add(fxt.Mkr_orig().Init_comm_redirect("B.jpg", "A.png", 440, 400))	// B.jpg redirects to A.png
-			.Init_fsdb_add(fxt.Mkr_fsdb().Init_comm_thum("A.png", 220, 200))
-			.Init_xfer_add(fxt.Mkr_xfer().Init_thumb(0, "B.jpg", 220, 200))
-			.Exec_process_lnki()
-			.Test_html_get(fxt.Mkr_html().Init(0, "file:///mem/xowa/file/comm/thumb/7/0/A.png/220px.png", 220, 200))
-			.Test_fsys_get("mem/xowa/file/comm/thumb/7/0/A.png/220px.png")
-			.Test_fsdb_download(1);
-			;
-	}
-	@Test   public void Cache_exists() {
-		fxt	.Init_orig_add(fxt.Mkr_orig().Init_comm("A.png", 440, 400))
-			.Init_fsdb_add(fxt.Mkr_fsdb().Init_comm_thum("A.png", 220, 200))
-			.Init_xfer_add(fxt.Mkr_xfer().Init_thumb(0, "A.png", 220, 200))
-			.Init_cache_add(fxt.Mkr_cache().Init("comm", "A.png", Bool_.N, 220))	// add to cache
-			.Init_fsys_add("mem/xowa/file/comm/thumb/7/0/A.png/220px.png")			// copy file to fsys
-			.Exec_process_lnki()
-			.Test_fsdb_download(0)	// skip download
-			;
-	}
-	@Test   public void Cache_absent() {
-		fxt	.Init_orig_add(fxt.Mkr_orig().Init_comm("A.png", 440, 400))
-			.Init_fsdb_add(fxt.Mkr_fsdb().Init_comm_thum("A.png", 220, 200))
-			.Init_xfer_add(fxt.Mkr_xfer().Init_thumb(0, "A.png", 220, 200))
-			.Init_cache_add(fxt.Mkr_cache().Init("commons", "A.png", Bool_.N, 220))	// add to cache
-			.Exec_process_lnki()
-			.Test_fsdb_download(1)	// do download
-			;
-	}
+	@After  public void term() {Gfo_usr_dlg_.I = Gfo_usr_dlg_.Null;}
+	@Test  public void Stub() {}
+//		@Test   public void Thumb() {
+//			fxt	.Init_orig_add(fxt.Mkr_orig().Init_comm("A.png", 440, 400))
+//				.Init_fsdb_add(fxt.Mkr_fsdb().Init_comm_thum("A.png", 220, 200))
+//				.Init_xfer_add(fxt.Mkr_xfer().Init_thumb(0, "A.png", 220, 200))
+//				.Exec_process_lnki()
+//				.Test_html_get(fxt.Mkr_html().Init(0, "file:///mem/xowa/file/comm/thumb/7/0/A.png/220px.png", 220, 200))
+//				.Test_fsys_get("mem/xowa/file/comm/thumb/7/0/A.png/220px.png")
+//				.Test_fsdb_download(1);
+//				;
+//		}
+//		@Test   public void Orig() {
+//			fxt	.Init_orig_add(fxt.Mkr_orig().Init_comm("A.png", 440, 400))
+//				.Init_fsdb_add(fxt.Mkr_fsdb().Init_comm_orig("A.png", 440, 400))
+//				.Init_xfer_add(fxt.Mkr_xfer().Init_none(0, "A.png"))
+//				.Exec_process_lnki()
+//				.Test_html_get(fxt.Mkr_html().Init(0, "file:///mem/xowa/file/comm/orig/7/0/A.png", 440, 400))
+//				.Test_fsys_get("mem/xowa/file/comm/orig/7/0/A.png")
+//				.Test_fsdb_download(1);
+//				;
+//		}
+//		@Test   public void Img_size() {	// PURPOSE: test integration of Xof_img_size
+//			fxt	.Init_orig_add(fxt.Mkr_orig().Init_comm("A.png", 440, 400))
+//				.Init_fsdb_add(fxt.Mkr_fsdb().Init_comm_thum("A.png", 110, 100))
+//				.Init_xfer_add(fxt.Mkr_xfer().Init_thumb(0, "A.png", Xof_img_size.Null, Xof_img_size.Null).Upright_(.5f))
+//				.Exec_process_lnki()
+//				.Test_html_get(fxt.Mkr_html().Init(0, "file:///mem/xowa/file/comm/thumb/7/0/A.png/110px.png", 110, 100))
+//				.Test_fsys_get("mem/xowa/file/comm/thumb/7/0/A.png/110px.png")
+//				.Test_fsdb_download(1);
+//				;
+//		}
+//		@Test   public void Orig_mgr() {	// PURPOSE: test integration of Orig_mgr
+//			fxt	.Init_orig_add(fxt.Mkr_orig().Init_comm_redirect("B.jpg", "A.png", 440, 400))	// B.jpg redirects to A.png
+//				.Init_fsdb_add(fxt.Mkr_fsdb().Init_comm_thum("A.png", 220, 200))
+//				.Init_xfer_add(fxt.Mkr_xfer().Init_thumb(0, "B.jpg", 220, 200))
+//				.Exec_process_lnki()
+//				.Test_html_get(fxt.Mkr_html().Init(0, "file:///mem/xowa/file/comm/thumb/7/0/A.png/220px.png", 220, 200))
+//				.Test_fsys_get("mem/xowa/file/comm/thumb/7/0/A.png/220px.png")
+//				.Test_fsdb_download(1);
+//				;
+//		}
+//		@Test   public void Cache_exists() {
+//			fxt	.Init_orig_add(fxt.Mkr_orig().Init_comm("A.png", 440, 400))
+//				.Init_fsdb_add(fxt.Mkr_fsdb().Init_comm_thum("A.png", 220, 200))
+//				.Init_xfer_add(fxt.Mkr_xfer().Init_thumb(0, "A.png", 220, 200))
+//				.Init_cache_add(fxt.Mkr_cache().Init("comm", "A.png", Bool_.N, 220))	// add to cache
+//				.Init_fsys_add("mem/xowa/file/comm/thumb/7/0/A.png/220px.png")			// copy file to fsys
+//				.Exec_process_lnki()
+//				.Test_fsdb_download(0)	// skip download
+//				;
+//		}
+//		@Test   public void Cache_absent() {
+//			fxt	.Init_orig_add(fxt.Mkr_orig().Init_comm("A.png", 440, 400))
+//				.Init_fsdb_add(fxt.Mkr_fsdb().Init_comm_thum("A.png", 220, 200))
+//				.Init_xfer_add(fxt.Mkr_xfer().Init_thumb(0, "A.png", 220, 200))
+//				.Init_cache_add(fxt.Mkr_cache().Init("commons", "A.png", Bool_.N, 220))	// add to cache
+//				.Exec_process_lnki()
+//				.Test_fsdb_download(1)	// do download
+//				;
+//		}
 }
 class Xofv_file_mgr_fxt {
 	private Xofv_file_mgr file_mgr;
-	private final Xof_fsdb_mgr__test fsdb_mgr = new Xof_fsdb_mgr__test(); private final Xog_html_gui__test html_gui = new Xog_html_gui__test();
 	public Xof_xfer_mkr Mkr_xfer() {return mkr_xfer;} private final Xof_xfer_mkr mkr_xfer = new Xof_xfer_mkr();
 	public Xof_orig_itm_mkr Mkr_orig() {return mkr_orig;} private final Xof_orig_itm_mkr mkr_orig = new Xof_orig_itm_mkr();
 	public Xof_fsdb_mkr Mkr_fsdb() {return mkr_fsdb;} private final Xof_fsdb_mkr mkr_fsdb = new Xof_fsdb_mkr();		
-	public Xog_html_rsc_mkr Mkr_html() {return mkr_html;} private final Xog_html_rsc_mkr mkr_html = new Xog_html_rsc_mkr();
 	public Xou_cache_itm_mkr Mkr_cache() {return mkr_cache;} private final Xou_cache_itm_mkr mkr_cache = new Xou_cache_itm_mkr();
 	public void Clear() {
-		file_mgr = new Xofv_file_mgr(Bry_.new_ascii_("enwiki"));
-		Db_conn_bldr.I.Reg_default_mem();
-		Db_conn conn = Db_conn_bldr.I.New("", Io_url_.mem_fil_("mem/file/cache.db")); boolean created = Bool_.Y; boolean schema_is_1 = Bool_.N;
-		file_mgr.Cache_mgr().Init_for_db(conn, created, schema_is_1);
-		file_mgr.Orig_wkr().Conn_(conn, created, schema_is_1);
-		fsdb_mgr.Clear();
-		html_gui.Clear();
-		file_mgr.Fsdb_mgr_(fsdb_mgr);
+		file_mgr = new Xofv_file_mgr(Bry_.Empty);
 		Clear_repos();
 	}
 	private void Clear_repos() {
@@ -111,45 +103,12 @@ class Xofv_file_mgr_fxt {
 		mkr_fsdb.Setup_repos(Bry_.new_ascii_("comm"), Bry_.new_ascii_("wiki"));
 	}
 	public Xofv_file_mgr_fxt Init_xfer_add(Xof_xfer_mkr mkr)	{file_mgr.Reg(mkr.Make()); return this;}
-	public Xofv_file_mgr_fxt Init_orig_add(Xof_orig_itm_mkr mkr)	{mkr.Make(file_mgr.Orig_wkr()); return this;}
-	public Xofv_file_mgr_fxt Init_fsdb_add(Xof_fsdb_mkr mkr)	{fsdb_mgr.Add(mkr.Make()); return this;}
 	public Xofv_file_mgr_fxt Init_cache_add(Xou_cache_itm_mkr mkr)	{mkr.Make(file_mgr.Cache_mgr()); return this;}
 	public Xofv_file_mgr_fxt Init_fsys_add(String s) {Io_mgr._.SaveFilStr(s, ""); return this;}
 	public Xofv_file_mgr_fxt Exec_process_lnki() {file_mgr.Process_lnki(); return this;}
 	public Xofv_file_mgr_fxt Test_fsys_get(String path) {
 		Tfds.Eq_true(Io_mgr._.ExistsFil(Io_url_.mem_fil_(path)), "fsys: " + path);
 		return this;
-	}
-	public Xofv_file_mgr_fxt Test_html_get(Xog_html_rsc_mkr mkr) {
-		file_mgr.Process_html(html_gui);
-		Xog_html_rsc expd = mkr.Make();
-		Xog_html_rsc actl = html_gui.Get_by_id(expd.Uid());
-		Bry_bfr bfr = Bry_bfr.reset_(255);
-		Tfds.Eq_str_lines(Xog_html_rsc_mkr.Xto_str(bfr, expd), Xog_html_rsc_mkr.Xto_str(bfr, actl));
-		return this;
-	}
-	public Xofv_file_mgr_fxt Test_fsdb_download(int expd) {
-		Tfds.Eq(expd, fsdb_mgr.Download_count());
-		return this;
-	}
-}
-class Xog_html_rsc_mkr {
-	private int uid; private String src; private int html_w, html_h;
-	public Xog_html_rsc_mkr Init(int uid, String src, int html_w, int html_h) {this.uid = uid; this.src = src; this.html_w = html_w; this.html_h = html_h; return this;}
-	private void Reset() {}
-	public Xog_html_rsc Make() {
-		Xog_html_rsc rv = new Xog_html_rsc(uid, src, html_w, html_h);
-		this.Reset();
-		return rv;
-	}
-	public static String Xto_str(Bry_bfr bfr, Xog_html_rsc itm) {
-		if (itm == null) return "";
-		bfr	.Add_int_variable(itm.Uid()).Add_byte_nl()
-			.Add_str_utf8(itm.Src()).Add_byte_nl()
-			.Add_int_variable(itm.Html_w()).Add_byte_nl()
-			.Add_int_variable(itm.Html_h()).Add_byte_nl()
-			;
-		return bfr.Xto_str_and_clear();
 	}
 }
 class Xof_xfer_mkr {
@@ -234,75 +193,23 @@ class Xof_fsdb_mkr {
 	}
 }
 class Xou_cache_itm_mkr {
-	private byte[] dir; private byte[] ttl; private boolean is_orig; private int w, h; private double time; private int page; private long size;
+//		private byte[] dir; private byte[] ttl; private boolean is_orig; private int w, h; private double time; private int page; private long size;
 	public Xou_cache_itm_mkr() {this.Reset();}
 	private void Reset() {
-		this.time = Xof_lnki_time.Null;
-		this.page = Xof_lnki_page.Null;
-		this.h = 200;
-		this.size = 1;
+//			this.time = Xof_lnki_time.Null;
+//			this.page = Xof_lnki_page.Null;
+//			this.h = 200;
+//			this.size = 1;
 	}
 	public Xou_cache_itm_mkr Init(String dir_str, String ttl_str, boolean is_orig, int w) {
-		this.dir = Bry_.new_utf8_(dir_str);
-		this.ttl = Bry_.new_utf8_(ttl_str);
-		this.is_orig = is_orig;
-		this.w = w;
+//			this.dir = Bry_.new_utf8_(dir_str);
+//			this.ttl = Bry_.new_utf8_(ttl_str);
+//			this.is_orig = is_orig;
+//			this.w = w;
 		return this;
 	}
 	public void Make(Xof_cache_mgr cache_mgr) {
-		cache_mgr.Fil__make(dir, ttl, is_orig, w, h, time, page, size);
+//			cache_mgr.Fil__make(dir, ttl, is_orig, w, h, time, page, size);
 		this.Reset();
 	}
-}
-class Xof_fsdb_mgr__test implements Xof_fsdb_mgr {
-	private Hash_adp_bry hash = Hash_adp_bry.cs_();
-	private Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
-	private int download_count;
-	public Xof_fsdb_mgr__test() {this.Clear();}
-	public int Download_count() {return download_count;}
-	public void Add(Xof_fsdb_itm itm) {
-		byte[] key = Bld_key_to_bry(tmp_bfr, itm.Orig_repo_name(), itm.Lnki_ttl(), itm.Lnki_w(), itm.Lnki_time(), itm.Lnki_page());
-//			Tfds.Write("add:" + String_.new_utf8_(key));
-		hash.Add(key, itm);
-	}
-	public void Clear() {
-		download_count = 0;
-		Io_mgr._.InitEngine_mem();
-		hash.Clear();
-	}
-	public boolean Download(Xofv_file_itm itm) {
-		byte[] key = Bld_key_to_bry(tmp_bfr, itm.File_repo(), itm.File_ttl(), itm.Html_w(), itm.Lnki_time(), itm.Lnki_page());
-//			Tfds.Write("down:" + String_.new_utf8_(key));
-		if (!hash.Has(key)) {
-			return false;
-		}
-		Io_mgr._.SaveFilStr(itm.File_url(), "");
-		++download_count;
-		return true;
-	}
-	private static byte[] Bld_key_to_bry(Bry_bfr bfr, byte[] dir, byte[] name, int w, double time, int page) {
-		bfr	.Add(dir).Add_byte_pipe()
-			.Add(name).Add_byte_pipe()
-			.Add_int_variable(w).Add_byte_pipe()
-			.Add_double(time).Add_byte_pipe()
-			.Add_int_variable(page).Add_byte_pipe()
-			;
-		return bfr.Xto_bry_and_clear();
-	}
-}
-class Xog_html_gui__test implements Xog_html_gui {
-	private HashAdp hash = HashAdp_.new_();
-	public void Clear() {hash.Clear();}
-	public Xog_html_rsc Get_by_id(int v) {return (Xog_html_rsc)hash.Fetch(Int_obj_ref.new_(v));}
-	public void Update(int id, String src, int w, int h) {
-		Xog_html_rsc rsc = new Xog_html_rsc(id, src, w, h);
-		hash.Add(Int_obj_ref.new_(id), rsc);
-	}
-}
-class Xog_html_rsc {
-	public Xog_html_rsc(int uid, String src, int html_w, int html_h) {this.uid = uid; this.src = src; this.html_w = html_w; this.html_h = html_h;}
-	public int Uid() {return uid;} private final int uid;
-	public String Src() {return src;} private final String src;
-	public int Html_w() {return html_w;} private final int html_w;
-	public int Html_h() {return html_h;} private final int html_h;
 }

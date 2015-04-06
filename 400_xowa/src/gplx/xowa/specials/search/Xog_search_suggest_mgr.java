@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.gfui.*; import gplx.threads.*; import gplx.xowa.gui.*; import gplx.xowa.gui.views.*;
+import gplx.gfui.*; import gplx.threads.*; import gplx.xowa.gui.*; import gplx.xowa.gui.views.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xog_search_suggest_mgr implements GfoInvkAble {
 	public Xog_search_suggest_mgr(Xoa_gui_mgr gui_mgr) {
 		this.app = gui_mgr.App();
@@ -84,7 +84,7 @@ public class Xog_search_suggest_mgr implements GfoInvkAble {
 			wtr.Add_brack_bgn();
 				int len = found.Count();
 				for (int i = 0; i < len; i++) {
-					Xodb_page p = (Xodb_page)found.FetchAt(i);
+					Xowd_page_itm p = (Xowd_page_itm)found.FetchAt(i);
 					Xow_ns ns = wiki.Ns_mgr().Ids_get_or_null(p.Ns_id());
 					byte[] ttl = Xoa_ttl.Replace_unders(ns.Gen_ttl(p.Ttl_page_db()));
 					wtr.Add_str_arg(i, ttl);

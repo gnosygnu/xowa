@@ -33,7 +33,7 @@ class Xoud_opt_scope {
 class Xoud_opt_scope_parser {
 	private Gfo_usr_dlg usr_dlg; private final ListAdp list = ListAdp_.new_();
 	public Xoud_opt_scope[] Parse(byte[] src) {
-		usr_dlg = Gfo_usr_dlg_._;
+		usr_dlg = Gfo_usr_dlg_.I;
 		list.Clear();
 		int pos = 0; int src_len = src.length;
 		while (pos < src_len) {

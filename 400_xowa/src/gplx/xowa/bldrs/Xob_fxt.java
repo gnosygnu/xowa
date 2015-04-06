@@ -16,13 +16,14 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
-import gplx.ios.*; import gplx.xowa.tdbs.*;
+import gplx.ios.*; import gplx.dbs.*; import gplx.xowa.tdbs.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.bldrs.cmds.texts.tdbs.*;
 public class Xob_fxt {
 	public Xob_fxt Ctor_mem() {
 		Io_mgr._.InitEngine_mem();
 		return Ctor(Io_url_.mem_dir_("mem/xowa/"));
 	}
 	public Xob_fxt Ctor(Io_url root_dir) {
+		Db_conn_bldr.I.Reg_default_sqlite();
 		app = Xoa_app_fxt.app_("linux", root_dir);
 		wiki = Xoa_app_fxt.wiki_tst_(app);
 		bldr = Xoa_app_fxt.bldr_(app);
@@ -38,7 +39,7 @@ public class Xob_fxt {
 	public Io_url fil_site_ctg(int idx)				{return wiki.Tdb_fsys_mgr().Url_site_fil(Xotdb_dir_info_.Tid_category, idx);}
 	public Io_url fil_site_id(int idx)				{return wiki.Tdb_fsys_mgr().Url_site_fil(Xotdb_dir_info_.Tid_id, idx);}
 	public Io_url fil_reg(byte tid) 				{return wiki.Tdb_fsys_mgr().Url_site_reg(tid);}
-	public Io_url fil_reg(int ns_id, byte tid) 		{return wiki.Tdb_fsys_mgr().Url_ns_reg(Int_.Xto_str_pad_bgn(ns_id, 3), tid);}
+	public Io_url fil_reg(int ns_id, byte tid) 		{return wiki.Tdb_fsys_mgr().Url_ns_reg(Int_.Xto_str_pad_bgn_zero(ns_id, 3), tid);}
 	public Xob_fxt Fil_expd(Io_url url, String... expd) {
 		String text = String_.Concat_lines_nl_skip_last(expd);	// skipLast b/c if trailing line wanted, easier to pass in extra argument for ""
 		expd_list.Add(new Io_fil_chkr(url, text));
@@ -49,10 +50,10 @@ public class Xob_fxt {
 			skip_list.Add(urls[i]);
 		return this;
 	} 	ListAdp skip_list = ListAdp_.new_();
-	public Xob_fxt doc_ary_(Xodb_page... v) {doc_ary = v; return this;} private Xodb_page[] doc_ary;
-	public Xodb_page doc_wo_date_(int id, String title, String text) {return doc_(id, "2012-01-02 13:14", title, text);}
-	public Xodb_page doc_(int id, String date, String title, String text) {
-		Xodb_page rv = new Xodb_page().Id_(id).Ttl_(Bry_.new_utf8_(title), wiki.Ns_mgr()).Wtxt_(Bry_.new_utf8_(text));
+	public Xob_fxt doc_ary_(Xowd_page_itm... v) {doc_ary = v; return this;} private Xowd_page_itm[] doc_ary;
+	public Xowd_page_itm doc_wo_date_(int id, String title, String text) {return doc_(id, "2012-01-02 13:14", title, text);}
+	public Xowd_page_itm doc_(int id, String date, String title, String text) {
+		Xowd_page_itm rv = new Xowd_page_itm().Id_(id).Ttl_(Bry_.new_utf8_(title), wiki.Ns_mgr()).Text_(Bry_.new_utf8_(text));
 		int[] modified_on = new int[7];
 		dateParser.Parse_iso8651_like(modified_on, date);
 		rv.Modified_on_(DateAdp_.seg_(modified_on));
@@ -60,21 +61,21 @@ public class Xob_fxt {
 	}
 	public Xob_fxt Run_ctg() {
 		Xobd_parser parser = new Xobd_parser();
-		gplx.xowa.bldrs.imports.ctgs.Xob_ctg_v1_base ctg_wkr = new gplx.xowa.bldrs.imports.ctgs.Xob_ctg_v1_txt().Ctor(bldr, wiki);
+		gplx.xowa.bldrs.cmds.ctgs.Xob_ctg_v1_base ctg_wkr = new gplx.xowa.bldrs.cmds.ctgs.Xob_ctg_v1_txt().Ctor(bldr, wiki);
 		byte[] bry = Bry_.new_utf8_("[[Category:");
 		ctg_wkr.Wkr_hooks().Add(bry, bry);
 		parser.Wkr_add(ctg_wkr);
 		return Run(parser);
 	}
 	public Xob_fxt Run_id() {
-		gplx.xowa.bldrs.imports.Xobc_core_make_id wkr = new gplx.xowa.bldrs.imports.Xobc_core_make_id(bldr, wiki);
+		Xob_make_id_wkr wkr = new Xob_make_id_wkr(bldr, wiki);
 		Run(wkr);
 		return this;
 	}
 	private void Run_wkr(Xobd_wkr wkr) {
 		wkr.Wkr_bgn(bldr);
 		for (int i = 0; i < doc_ary.length; i++) {
-			Xodb_page page = doc_ary[i];
+			Xowd_page_itm page = doc_ary[i];
 			wkr.Wkr_run(page);
 		}
 		wkr.Wkr_end();		
@@ -95,12 +96,12 @@ public class Xob_fxt {
 		return rv;
 	}
 	public Xob_fxt Run_tmpl_dump() {
-		Xobc_parse_dump_templates wkr = new Xobc_parse_dump_templates(bldr, wiki);
+		Xob_parse_dump_templates_cmd wkr = new Xob_parse_dump_templates_cmd(bldr, wiki);
 		Run_wkr(wkr);
 		tst_fils(wkr.Dump_url_gen().Prv_urls());
 		return this;
 	}
-	public Xob_fxt Run_page_title() {return Run(new gplx.xowa.bldrs.imports.Xob_page_txt(bldr, wiki));}
+	public Xob_fxt Run_page_title() {return Run(new gplx.xowa.bldrs.cmds.texts.tdbs.Xob_page_txt(bldr, wiki));}
 	public Xob_fxt Run(Xobd_parser_wkr... wkrs) {
 		Xobd_parser parser_wkr = new Xobd_parser();
 		int len = wkrs.length;
@@ -115,7 +116,7 @@ public class Xob_fxt {
 			Xobd_wkr wkr = wkrs[j];
 			wkr.Wkr_bgn(bldr);
 			for (int i = 0; i < doc_ary_len; i++) {
-				Xodb_page page = doc_ary[i];
+				Xowd_page_itm page = doc_ary[i];
 				wkr.Wkr_run(page);
 			}
 			wkr.Wkr_end();

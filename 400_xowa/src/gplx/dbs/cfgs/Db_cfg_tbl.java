@@ -16,72 +16,104 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.cfgs; import gplx.*; import gplx.dbs.*;
-import gplx.dbs.*;
-public class Db_cfg_tbl {
-	private String tbl_name; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
-	private String fld_grp, fld_key, fld_val;
-	private Db_conn conn; private Db_stmt stmt_insert, stmt_update, stmt_select;
-	public Db_conn Conn() {return conn;}
-	public void Conn_(Db_conn new_conn, boolean created, boolean schema_is_1, String tbl_v1, String tbl_v2) {
-		this.conn = new_conn; flds.Clear();
-		String fld_prefix = "";
-		if (schema_is_1) {
-			tbl_name		= tbl_v1;
-			fld_prefix		= "cfg_";
-		}
-		else
-			tbl_name		= tbl_v2;
-		fld_grp				= flds.Add_str(fld_prefix + "grp", 255);
-		fld_key				= flds.Add_str(fld_prefix + "key", 255);
-		fld_val				= flds.Add_str(fld_prefix + "val", 1024);
-		if (created) {
-			Db_meta_tbl meta = Db_meta_tbl.new_(tbl_name, flds
-			, Db_meta_idx.new_unique_by_tbl(tbl_name, "main", fld_grp, fld_key, fld_val)
-			);
-			conn.Exec_create_tbl_and_idx(meta);
-		}
-		stmt_insert = stmt_update = stmt_select = null;			
+import gplx.core.primitives.*;
+public class Db_cfg_tbl implements RlsAble {
+	private final String tbl_name; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private final String fld_grp, fld_key, fld_val;
+	private Db_stmt stmt_insert, stmt_update, stmt_select;
+	public Db_conn Conn() {return conn;} private final Db_conn conn; 
+	public Db_cfg_tbl(Db_conn conn, String tbl_name) {
+		this.conn = conn; this.tbl_name = tbl_name;
+		this.fld_grp				= flds.Add_str("cfg_grp", 255);
+		this.fld_key				= flds.Add_str("cfg_key", 255);
+		this.fld_val				= flds.Add_str("cfg_val", 1024);
+		conn.Rls_reg(this);
 	}
-	public void Insert(String grp, String key, String val) {
-		if (stmt_insert == null) stmt_insert = conn.Rls_reg(conn.Stmt_insert(tbl_name, flds));
+	public void Rls() {
+		stmt_insert = Db_stmt_.Rls(stmt_insert);
+		stmt_update = Db_stmt_.Rls(stmt_update);
+		stmt_select = Db_stmt_.Rls(stmt_select);
+	}
+	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds, Db_meta_idx.new_unique_by_tbl(tbl_name, "main", fld_grp, fld_key, fld_val)));}
+	public void Delete_val(String grp, String key)	{conn.Stmt_delete(tbl_name, fld_grp, fld_key).Crt_str(fld_grp, grp).Crt_str(fld_key, key).Exec_delete();}
+	public void Delete_grp(String grp)				{conn.Stmt_delete(tbl_name, fld_grp).Crt_str(fld_grp, grp).Exec_delete();}
+	public void Delete_all()						{conn.Stmt_delete(tbl_name, Db_meta_fld.Ary_empy).Exec_delete();}
+	public void Insert_yn		(String grp, String key, boolean  val)		{Insert_str(grp, key, val ? "y" : "n");}
+	public void Insert_byte		(String grp, String key, byte val)			{Insert_str(grp, key, Byte_.Xto_str(val));}
+	public void Insert_int		(String grp, String key, int val)			{Insert_str(grp, key, Int_.Xto_str(val));}
+	public void Insert_long		(String grp, String key, long val)			{Insert_str(grp, key, Long_.Xto_str(val));}
+	public void Insert_date		(String grp, String key, DateAdp val)		{Insert_str(grp, key, val.XtoStr_fmt_yyyyMMdd_HHmmss());}
+	public void Insert_guid		(String grp, String key, Guid_adp val)		{Insert_str(grp, key, val.XtoStr());}
+	public void Insert_bry		(String grp, String key, byte[] val)		{Insert_str(grp, key, String_.new_utf8_(val));}
+	public void Insert_str		(String grp, String key, String val) {
+		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(tbl_name, flds);
 		stmt_insert.Clear().Val_str(fld_grp, grp).Val_str(fld_key, key).Val_str(fld_val, val).Exec_insert();
-	}	
-	public void Update(String grp, String key, String val) {
-		if (stmt_update == null) stmt_update = conn.Rls_reg(conn.Stmt_update_exclude(tbl_name, flds, fld_grp, fld_key));
+	}
+	public void Update_yn		(String grp, String key, boolean  val)		{Update_str(grp, key, val ? "y" : "n");}
+	public void Update_byte		(String grp, String key, byte val)			{Update_str(grp, key, Byte_.Xto_str(val));}
+	public void Update_int		(String grp, String key, int val)			{Update_str(grp, key, Int_.Xto_str(val));}
+	public void Update_long		(String grp, String key, long val)			{Update_str(grp, key, Long_.Xto_str(val));}
+	public void Update_date		(String grp, String key, DateAdp val)		{Update_str(grp, key, val.XtoStr_fmt_yyyyMMdd_HHmmss());}
+	public void Update_guid		(String grp, String key, Guid_adp val)		{Update_str(grp, key, val.XtoStr());}
+	public void Update_bry		(String grp, String key, byte[] val)		{Update_str(grp, key, String_.new_utf8_(val));}
+	public void Update_str		(String grp, String key, String val) {
+		if (stmt_update == null) stmt_update = conn.Stmt_update_exclude(tbl_name, flds, fld_grp, fld_key);
 		stmt_update.Clear().Val_str(fld_val, val).Crt_str(fld_grp, grp).Crt_str(fld_key, key).Exec_update();
 	}
-	public int Select_as_int_or_fail(String grp, String key) {
-		int rv = Select_as_int_or(grp, key, Int_.MinValue);
-		if (rv == Int_.MinValue) throw Err_.new_fmt_("dbs.cfg_tbl.Select_as_int_or_fail: tbl={0} grp={1} key={2}", tbl_name, grp, key);
+	public void Upsert_str		(String grp, String key, String val) {
+		String cur_val = this.Select_str_or(grp, key, null);
+		if (cur_val == null)	this.Insert_str(grp, key, val);
+		else					this.Update_str(grp, key, val);
+	}
+	public boolean			Select_yn		(String grp, String key)				{String val = Select_str(grp, key); return Parse_yn		(grp, key, val);}
+	public byte			Select_byte		(String grp, String key)				{String val = Select_str(grp, key); return Parse_byte	(grp, key, val);}
+	public int			Select_int		(String grp, String key)				{String val = Select_str(grp, key); return Parse_int	(grp, key, val);}
+	public long			Select_long		(String grp, String key)				{String val = Select_str(grp, key); return Parse_long	(grp, key, val);}
+	public byte[]		Select_bry		(String grp, String key)				{String val = Select_str(grp, key); return Parse_bry	(grp, key, val);}
+	public DateAdp		Select_date		(String grp, String key)				{String val = Select_str(grp, key); return Parse_date	(grp, key, val);}
+	public Guid_adp		Select_guid		(String grp, String key)				{String val = Select_str(grp, key); return Parse_guid	(grp, key, val);}
+	public boolean			Select_yn_or	(String grp, String key, boolean  or)	{String val = Select_str_or(grp, key, null)	; return val == null ? or : Parse_yn	(grp, key, val);}
+	public byte			Select_byte_or	(String grp, String key, byte or)		{String val = Select_str_or(grp, key, null)	; return val == null ? or : Parse_byte	(grp, key, val);}
+	public int			Select_int_or	(String grp, String key, int or)		{String val = Select_str_or(grp, key, null)	; return val == null ? or : Parse_int	(grp, key, val);}
+	public long			Select_long_or	(String grp, String key, long or)		{String val = Select_str_or(grp, key, null)	; return val == null ? or : Parse_long	(grp, key, val);}
+	public byte[]		Select_bry_or	(String grp, String key, byte[] or)		{String val = Select_str_or(grp, key, null)	; return val == null ? or : Parse_bry	(grp, key, val);}
+	public DateAdp		Select_date_or	(String grp, String key, DateAdp or)	{String val = Select_str_or(grp, key, null)	; return val == null ? or : Parse_date	(grp, key, val);}
+	public Guid_adp		Select_guid_or	(String grp, String key, Guid_adp or)	{String val = Select_str_or(grp, key, null)	; return val == null ? or : Parse_guid	(grp, key, val);}
+	public String		Select_str		(String grp, String key) {
+		String rv = Select_str_or(grp, key, null); if (rv == null) throw Err_.new_("cfg.missing; grp={0} key={1}", grp, key);
 		return rv;
 	}
-	public long Select_as_long_or(String grp, String key, long or) {return Long_.parse_or_(Select_as_str_or(grp, key, null), or);}
-	public byte Select_as_byte_or(String grp, String key, byte or) {return Byte_.parse_or_(Select_as_str_or(grp, key, null), or);}
-	public int Select_as_int_or(String grp, String key, int or) {return Int_.parse_or_(Select_as_str_or(grp, key, null), or);}
-	public String Select_as_str_or(String grp, String key, String or) {
-		if (stmt_select == null) stmt_select = conn.Rls_reg(conn.Stmt_select(tbl_name, String_.Ary(fld_val), fld_grp, fld_key));
-		Db_rdr rdr = Db_rdr_.Null;
-		try {
-			rdr = stmt_select.Clear()
-				.Crt_str(fld_grp, grp)
-				.Crt_str(fld_key, key)
-				.Exec_select_as_rdr();
-			return rdr.Move_next() ? rdr.Read_str(fld_val) : or;
-		} finally {rdr.Rls();}
+	public String		Select_str_or	(String grp, String key, String or) {
+		if (stmt_select == null) stmt_select = conn.Stmt_select(tbl_name, String_.Ary(fld_val), fld_grp, fld_key);
+		Db_rdr rdr = stmt_select.Clear().Crt_str(fld_grp, grp).Crt_str(fld_key, key).Exec_select__rls_manual();
+		try {return rdr.Move_next() ? rdr.Read_str(fld_val) : or;} finally {rdr.Rls();}
 	}
-	public Db_cfg_grp Select_as_grp(String grp) {
-		Db_cfg_grp rv = null;
-		Db_stmt stmt = conn.Stmt_select(tbl_name, flds, fld_grp);
-		Db_rdr rdr = Db_rdr_.Null;
+	public Db_cfg_hash Select_as_hash(String grp) {
+		Db_cfg_hash rv = new Db_cfg_hash(grp);
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld_grp).Crt_str(fld_grp, grp).Exec_select__rls_auto();
 		try {
-			rdr = stmt.Clear().Crt_str(fld_grp, grp).Exec_select_as_rdr();
 			while (rdr.Move_next()) {
-				if (rv == null) rv = new Db_cfg_grp(grp);
-				rv.Upsert(rdr.Read_str(fld_key), rdr.Read_str(fld_val));
+				rv.Add(rdr.Read_str(fld_key), rdr.Read_str(fld_val));
 			}
 		}
 		finally {rdr.Rls();}
-		return rv == null ? Db_cfg_grp.Null : rv;
+		return rv;
 	}
-	public void Rls() {conn.Conn_term();}
+	// NOTE: Assert guarantees that a value exists in database and returns it (Select + Insert); (1) String val = Assert('grp', 'key', 'val'); (2) Update('grp', 'key', 'val2');
+	public boolean			Assert_yn	(String grp, String key, boolean  or)	{String val = Select_str_or(grp, key, null)	; if (val == null) {Insert_yn		(grp, key, or); return or;} return Parse_yn		(grp, key, val);}
+	public byte			Assert_byte	(String grp, String key, byte or)		{String val = Select_str_or(grp, key, null)	; if (val == null) {Insert_byte		(grp, key, or); return or;} return Parse_byte	(grp, key, val);}
+	public int			Assert_int	(String grp, String key, int or)		{String val = Select_str_or(grp, key, null)	; if (val == null) {Insert_int		(grp, key, or); return or;} return Parse_int	(grp, key, val);}
+	public long			Assert_long	(String grp, String key, long or)		{String val = Select_str_or(grp, key, null)	; if (val == null) {Insert_long		(grp, key, or); return or;} return Parse_long	(grp, key, val);}
+	public byte[]		Assert_bry	(String grp, String key, byte[] or)		{String val = Select_str_or(grp, key, null)	; if (val == null) {Insert_bry		(grp, key, or); return or;} return Parse_bry	(grp, key, val);}
+	public DateAdp		Assert_date	(String grp, String key, DateAdp or)	{String val = Select_str_or(grp, key, null)	; if (val == null) {Insert_date		(grp, key, or); return or;} return Parse_date	(grp, key, val);}
+	public Guid_adp		Assert_guid	(String grp, String key, Guid_adp or)	{String val = Select_str_or(grp, key, null)	; if (val == null) {Insert_guid		(grp, key, or); return or;} return Parse_guid	(grp, key, val);}
+	public String		Assert_str	(String grp, String key, String or)		{String val = Select_str_or(grp, key, null)	; if (val == null) {Insert_str		(grp, key, or); return or;} return val;}
+	private boolean		Parse_yn		(String grp, String key, String val)	{try {return Yn.parse_(val)				;} catch (Exception e) {throw err_parse(e, grp, key, val, Bool_.Cls_val_name);}}
+	private byte		Parse_byte		(String grp, String key, String val)	{try {return Byte_.parse_(val)			;} catch (Exception e) {throw err_parse(e, grp, key, val, Byte_.Cls_val_name);}}
+	private int			Parse_int		(String grp, String key, String val)	{try {return Int_.parse_(val)			;} catch (Exception e) {throw err_parse(e, grp, key, val, Int_.Cls_val_name);}}
+	private long		Parse_long		(String grp, String key, String val)	{try {return Long_.parse_(val)			;} catch (Exception e) {throw err_parse(e, grp, key, val, Long_.Cls_val_name);}}
+	private byte[]		Parse_bry		(String grp, String key, String val)	{try {return Bry_.new_utf8_(val)		;} catch (Exception e) {throw err_parse(e, grp, key, val, Bry_.Cls_val_name);}}
+	private DateAdp		Parse_date		(String grp, String key, String val)	{try {return DateAdp_.parse_gplx(val)	;} catch (Exception e) {throw err_parse(e, grp, key, val, DateAdp_.Cls_ref_name);}}
+	private Guid_adp	Parse_guid		(String grp, String key, String val)	{try {return Guid_adp_.parse_(val)		;} catch (Exception e) {throw err_parse(e, grp, key, val, Guid_adp_.Cls_ref_name);}}
+	private Err			err_parse(Exception e, String grp, String key, String val, String type) {return Err_.new_("cfg.val is not parseable; grp={0} key={1} val={2} type={3}", grp, key, val, type);}
 }

@@ -16,26 +16,31 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.fsdb.tsts; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
-import gplx.fsdb.*; import gplx.dbs.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.cnvs.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.gui.*;
-import gplx.xowa.wikis.*; import gplx.xowa.files.repos.*;
+import gplx.fsdb.*; import gplx.fsdb.meta.*; import gplx.dbs.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.cnvs.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.gui.*;
+import gplx.xowa.wikis.*; import gplx.xowa.files.repos.*; import gplx.xowa.wikis.data.*;
 import gplx.fsdb.data.*;
 class Xof_file_fxt {		
-	private Xoae_app app; private Xof_fsdb_mgr fsdb_mgr; private Xowe_wiki wiki;
+	private Xoae_app app; private Xof_fsdb_mgr__sql fsdb_mgr; private Xowe_wiki wiki; private Xof_orig_mgr orig_mgr;
 	private final Fsd_thm_itm tmp_thm = Fsd_thm_itm.new_(); private final Fsd_img_itm tmp_img = new Fsd_img_itm();
-	public void Rls() {fsdb_mgr.Rls();}
+	public void Rls() {}
 	public void Reset() {
 		Io_mgr._.InitEngine_mem();	// NOTE: files are downloaded to mem_engine, regardless of Db being mem or sqlite; always reset
-		Io_url fsys_db = Xoa_test_.Url_file_enwiki();
-		Xoa_test_.Db_init(fsys_db);
-		app = Xoa_app_fxt.app_(Op_sys.Cur().Os_name(), fsys_db);
+		Io_url root_url = Xoa_test_.Url_root();
+		Xoa_test_.Db_init(root_url);
+		app = Xoa_app_fxt.app_(Op_sys.Cur().Os_name(), root_url);
 		wiki = Xoa_app_fxt.wiki_tst_(app);
 		wiki.File_mgr__fsdb_mode().Tid_make_y_();
+		this.fsdb_mgr = (Xof_fsdb_mgr__sql)wiki.File_mgr().Fsdb_mgr();
+		this.orig_mgr = wiki.File_mgr__orig_mgr();
 		Xof_repo_fxt.Repos_init(app.File_mgr(), true, wiki);
-		wiki.Db_mgr_create_as_sql();		// NOTE: must create as sql_db_mgr not txt_db_mgr
-		fsdb_mgr = new Xof_fsdb_mgr__sql();	// NOTE: must new Xof_fsdb_mgr__sql b/c it keeps a local init;
-		fsdb_mgr.Init_by_wiki(wiki);
-		fsdb_mgr.Bin_mgr().Wkrs__clear();
-		Xof_bin_wkr__fsdb_sql bin_wkr_fsdb = (Xof_bin_wkr__fsdb_sql)fsdb_mgr.Bin_mgr().Wkrs__get_or_new(Xof_bin_wkr_.Key_fsdb_wiki);
+		Xowe_wiki_bldr.Create(wiki, 1, "dump.xml");
+		Xowd_db_file text_db = wiki.Data_mgr__core_mgr().Dbs__make_by_tid(Xowd_db_file_.Tid_text); text_db.Tbl__text().Create_tbl();
+		Fsdb_db_mgr__v2 fsdb_core = Fsdb_db_mgr__v2_bldr.I.Make(wiki);
+		fsdb_mgr.Mnt_mgr().Ctor_by_load(fsdb_core);
+		fsdb_mgr.Mnt_mgr().Mnts__get_main().Bin_mgr().Dbs__make("temp.xowa");
+		wiki.File_mgr().Init_file_mgr_by_load(wiki);
+		fsdb_mgr.Bin_mgr().Wkrs__del(Xof_bin_wkr_.Key_http_wmf);	// never use http_wmf wkr for these tests
+		Xof_bin_wkr__fsdb_sql bin_wkr_fsdb = (Xof_bin_wkr__fsdb_sql)fsdb_mgr.Bin_mgr().Wkrs__get_or_null(Xof_bin_wkr_.Key_fsdb_wiki);
 		fsdb_mgr.Bin_mgr().Resizer_(Xof_img_wkr_resize_img_mok._);
 		bin_wkr_fsdb.Resize_allowed_(true);
 	}
@@ -44,20 +49,23 @@ class Xof_file_fxt {
 		this.Init_orig_db(Xof_orig_arg.new_comm(ttl, w, h));
 	}
 	public void Init_orig_db(Xof_orig_arg arg) {
-		fsdb_mgr.Orig_mgr().Insert(arg.Repo(), arg.Page(), Xof_ext_.new_by_ttl_(arg.Page()).Id(), arg.W(), arg.H(), arg.Redirect());
+		orig_mgr.Insert(arg.Repo(), arg.Page(), Xof_ext_.new_by_ttl_(arg.Page()).Id(), arg.W(), arg.H(), arg.Redirect());
 	}
 	public void Init_fsdb_db(Xof_fsdb_arg arg) {
+		Fsm_mnt_itm mnt_itm = fsdb_mgr.Mnt_mgr().Mnts__get_main();
+		Fsm_atr_fil atr_fil = mnt_itm.Atr_mgr().Db__core();
+		Fsm_bin_fil bin_fil = mnt_itm.Bin_mgr().Dbs__get_nth();
 		if (arg.Is_thumb())
-			fsdb_mgr.Mnt_mgr().Thm_insert(tmp_thm, arg.Wiki(), arg.Ttl(), arg.Ext(), arg.W(), arg.H(), arg.Time(), arg.Page(), arg.Modified(), arg.Hash(), arg.Bin().length, gplx.ios.Io_stream_rdr_.mem_(arg.Bin()));
+			mnt_itm.Insert_thm(tmp_thm, atr_fil, bin_fil, arg.Wiki(), arg.Ttl(), arg.Ext(), arg.W(), arg.H(), arg.Time(), arg.Page(), arg.Bin().length, gplx.ios.Io_stream_rdr_.mem_(arg.Bin()));
 		else
-			fsdb_mgr.Mnt_mgr().Img_insert(tmp_img, arg.Wiki(), arg.Ttl(), arg.Ext(), arg.W(), arg.H(), arg.Modified(), arg.Hash(), arg.Bin().length, gplx.ios.Io_stream_rdr_.mem_(arg.Bin()));
+			mnt_itm.Insert_img(tmp_img, atr_fil, bin_fil, arg.Wiki(), arg.Ttl(), arg.Ext(), arg.W(), arg.H(), arg.Bin().length, gplx.ios.Io_stream_rdr_.mem_(arg.Bin()));
 	}
 	public void Exec_get(Xof_exec_arg arg) {
 		byte[] ttl_bry = arg.Ttl();
 		Xof_fsdb_itm itm = new Xof_fsdb_itm();
 		itm.Ctor_by_lnki(ttl_bry, arg.Lnki_type(), arg.Lnki_w(), arg.Lnki_h(), Xof_patch_upright_tid_.Tid_all, arg.Lnki_upright(), arg.Lnki_time(), Xof_lnki_page.Null);
 		ListAdp itms_list = ListAdp_.new_(); itms_list.Add(itm);
-		fsdb_mgr.Orig_mgr().Find_by_list(OrderedHash_.new_bry_(), itms_list, Xof_exec_tid.Tid_wiki_page);
+		orig_mgr.Find_by_list(OrderedHash_.new_bry_(), itms_list, Xof_exec_tid.Tid_wiki_page);
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Xow_ns_.Id_main, ttl_bry);
 		Xoae_page page = Xoae_page.new_(wiki, ttl);
 		fsdb_mgr.Fsdb_search_by_list(arg.Exec_tid(), itms_list, page, Xog_js_wkr_.Null);

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.threads.*; import gplx.xowa.wikis.*;
+import gplx.threads.*; import gplx.xowa.wikis.*; import gplx.xowa.bldrs.*;
 abstract class Xoi_cmd_base implements Gfo_thread_cmd {
 	public void Ctor(Xoi_setup_mgr install_mgr, String wiki_key) {
 		this.install_mgr = install_mgr; this.wiki_key = wiki_key;
@@ -85,11 +85,11 @@ class Xoi_cmd_category2_build extends Xoi_cmd_base {
 	@Override public String Async_key() {return KEY;} public static final String KEY = "wiki.category2.build";
 	@Override public void Process_async_init(Xoae_app app, Xowe_wiki wiki, Xob_bldr bldr) {
 		if (app.Setup_mgr().Dump_mgr().Wiki_storage_type_is_sql()) {
-			wiki.Db_mgr_as_sql().Category_version_update(false);
-			bldr.Cmd_mgr().Add_many(wiki, "import.sql.category_registry", "import.sql.categorylinks", "import.sql.hiddencat");
+			wiki.Db_mgr_as_sql().Category_version_update(false);				
+			bldr.Cmd_mgr().Add_many(wiki, Xob_cmd_keys.Key_text_cat_core, Xob_cmd_keys.Key_text_cat_link, Xob_cmd_keys.Key_text_cat_hidden);
 		}
 		else
-			bldr.Cmd_mgr().Add_many(wiki, "ctg.hiddencat_sql", "ctg.hiddencat_ttl", "ctg.link_sql", "ctg.link_idx");
+			bldr.Cmd_mgr().Add_many(wiki, Xob_cmd_keys.Key_tdb_cat_hidden_sql, Xob_cmd_keys.Key_tdb_cat_hidden_ttl, Xob_cmd_keys.Key_text_cat_link, Xob_cmd_keys.Key_tdb_ctg_link_idx);
 	}
 	@Override public void Process_async_done(Xoae_app app, Xowe_wiki wiki, Xob_bldr bldr) {
 		app.Usr_dlg().Prog_many("", "", "category2 setup done");
@@ -101,7 +101,7 @@ class Xoi_cmd_search2_build extends Xoi_cmd_base {
 	@Override public void Process_async_init(Xoae_app app, Xowe_wiki wiki, Xob_bldr bldr) {
 		if (app.Setup_mgr().Dump_mgr().Wiki_storage_type_is_sql()) {
 			wiki.Db_mgr_as_sql().Category_version_update(false);
-			bldr.Cmd_mgr().Add_many(wiki, "import.sql.search_title.cmd");
+			bldr.Cmd_mgr().Add_many(wiki, Xob_cmd_keys.Key_text_search_cmd);
 		}
 	}
 	@Override public void Process_async_done(Xoae_app app, Xowe_wiki wiki, Xob_bldr bldr) {

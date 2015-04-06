@@ -142,5 +142,5 @@ public class Xoh_file_html_fmtr__base implements Xoh_file_img_wkr {
 	, "      </div>"
 	), "uid", "a_width", "a_max_width", "a_href", "a_xowa_title", "img_src");
 
-        public static final Xoh_file_html_fmtr__base Base = new Xoh_file_html_fmtr__base();
+	public static final Xoh_file_html_fmtr__base Base = new Xoh_file_html_fmtr__base();
 }

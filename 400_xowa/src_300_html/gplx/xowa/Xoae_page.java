@@ -60,6 +60,7 @@ public class Xoae_page implements Xoa_page {
 	public ListAdp					Slink_list() {return slink_list;} private ListAdp slink_list = ListAdp_.new_();
 	public Wdata_external_lang_links_data Wdata_external_lang_links() {return wdata_external_lang_links;} private Wdata_external_lang_links_data wdata_external_lang_links = new Wdata_external_lang_links_data();
 	public boolean						Pages_recursed() {return pages_recursed;} public void Pages_recursed_(boolean v) {pages_recursed = v; } private boolean pages_recursed;
+	public int						Bldr__ns_ord() {return bldr__ns_ord;} public void Bldr__ns_ord_(int v) {bldr__ns_ord = v;} private int bldr__ns_ord;
 	public Xopg_tmpl_prepend_mgr	Tmpl_prepend_mgr() {return tmpl_prepend_mgr;} private Xopg_tmpl_prepend_mgr tmpl_prepend_mgr = new Xopg_tmpl_prepend_mgr();
 	public void						Tmpl_stack_del() {--tmpl_stack_ary_len;}
 	public boolean						Tmpl_stack_add(byte[] key) {

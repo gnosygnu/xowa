@@ -50,11 +50,16 @@ public class Array_ {
 			rv[i + newLen] = cur[i];
 		return rv;
 	}
-	public static Object Resize(Object src, int trgLen) {		
-		Object trg = Create(ComponentType(src), trgLen);		
-		int srcLen = Array.getLength(src);							
-		int copyLen = srcLen > trgLen ? trgLen : srcLen;	// trgLen can either expand or shrink
-		CopyTo(src, 0, trg, 0, copyLen);
+	public static Object Resize_add_one(Object src, int src_len, Object new_obj) {
+		Object rv = Resize(src, src_len + 1);	
+		Set(rv, src_len, new_obj);
+		return rv;
+	}
+	public static Object Resize(Object src, int trg_len) {		
+		Object trg = Create(ComponentType(src), trg_len);		
+		int src_len = Array.getLength(src);								
+		int copy_len = src_len > trg_len ? trg_len : src_len;	// trg_len can either expand or shrink
+		CopyTo(src, 0, trg, 0, copy_len);
 		return trg;
 	}
 	public static String XtoStr(Object ary) {	

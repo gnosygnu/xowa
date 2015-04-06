@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.xowa.dbs.*;
+import gplx.xowa.dbs.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.bldrs.cmds.texts.*;
 class Xosrh_qry_itm {
 	public Xosrh_qry_itm(byte tid, byte[] word, Xosrh_qry_itm lhs, Xosrh_qry_itm rhs) {
 		this.tid = tid; this.word = word; this.lhs = lhs; this.rhs = rhs;
@@ -59,7 +59,7 @@ class Xosrh_qry_itm {
 		ListAdp rv = ListAdp_.new_();
 		int found_len = found.Count();
 		for (int i = 0; i < found_len; i++) {
-			Xodb_page page = (Xodb_page)found.FetchAt(i);
+			Xowd_page_itm page = (Xowd_page_itm)found.FetchAt(i);
 			if (	ns_mgr.Has(page.Ns_id())
 				||	wiki_db_tid == Xodb_mgr_txt.Tid_txt)	// xdat does not store ns, so ns will always be null; no choice but to bring back all results; DATE:2013-11-14
 				rv.Add(page);
@@ -75,7 +75,7 @@ class Xosrh_qry_itm {
 				break;
 			case Xosrh_qry_itm.Tid_word_quote:
 				OrderedHash tmp_search_list = OrderedHash_.new_();
-				byte[][] words = gplx.xowa.bldrs.imports.Xob_search_base.Split(wiki.Lang(), tmp_search_list, tmp_bfr, word);
+				byte[][] words = gplx.xowa.bldrs.cmds.texts.Xob_search_base.Split(wiki.Lang(), tmp_search_list, tmp_bfr, word);
 				int words_len = words.length;
 				ListAdp prv_list = null;
 				for (int i = 0; i < words_len; i++) {
@@ -95,7 +95,7 @@ class Xosrh_qry_itm {
 				if (cancelable.Canceled()) return;
 				ids = ListAdp_.new_();
 				for (int i = 0; i < ids_len; i++) {
-					Xodb_page itm = (Xodb_page)tmp_ids.FetchAt(i);
+					Xowd_page_itm itm = (Xowd_page_itm)tmp_ids.FetchAt(i);
 					byte[] itm_ttl = itm.Ttl_page_db();
 					itm_ttl = wiki.Lang().Case_mgr().Case_build_lower(itm_ttl, 0, itm_ttl.length);	// lowercase ttl (since all search words are lower-cased)
 					itm_ttl = Bry_.Replace(itm_ttl, Byte_ascii.Underline, Byte_ascii.Space);	// replace _ with " " (assume user will use spaces in search term)
@@ -156,7 +156,7 @@ class Xosrh_qry_itm {
 		}
 		len = list_to_hash.Count();
 		for (int i = 0; i < len; i++) {
-			Xodb_page id = (Xodb_page)list_to_hash.FetchAt(i);
+			Xowd_page_itm id = (Xowd_page_itm)list_to_hash.FetchAt(i);
 			try {
 				if (!tmp_hash.Has(id.Id_val())) tmp_hash.Add(id.Id_val(), id);
 			}	catch (Exception e) {Err_.Noop(e); tmp_hash.Clear(); return ListAdp_.Null;}	// handle error in case of threading issues; must clear tmp_hash else will accumulate;
@@ -165,7 +165,7 @@ class Xosrh_qry_itm {
 		}
 		len = list_to_comp.Count();
 		for (int i = 0; i < len; i++) {
-			Xodb_page id = (Xodb_page)list_to_comp.FetchAt(i);
+			Xowd_page_itm id = (Xowd_page_itm)list_to_comp.FetchAt(i);
 			boolean exists = tmp_hash.Has(id.Id_val());
 			switch (tid) {
 				case Evaluate_tid_and: 		// iterate comp and add if in a; EX: (a,cur_b,c) AND (a,d); add a

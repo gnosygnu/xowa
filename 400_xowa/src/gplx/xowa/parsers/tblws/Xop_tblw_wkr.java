@@ -221,7 +221,7 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 						break;
 				}
 //					if (prv_tid == Xop_tkn_itm_.Tid_xnde)
-//						ctx.Stack_autoClose(root, src, prv_tkn, prv_tkn.Src_bgn(), prv_tkn.Src_end());
+//						ctx.Stack_auto_close(root, src, prv_tkn, prv_tkn.Src_bgn(), prv_tkn.Src_end());
 				if (create_th)	new_tkn = tkn_mkr.Tblw_th(bgn_pos, cur_pos, tbl_is_xml);
 				else			new_tkn = tkn_mkr.Tblw_td(bgn_pos, cur_pos, tbl_is_xml);
 				cell_pipe_seen = false;

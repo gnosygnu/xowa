@@ -30,7 +30,7 @@ public class Prefs_rename_mgr {
 			if (String_.Has(cur_str, itm.Src())) {
 				cur_str_changed = true;
 				cur_str = String_.Replace(cur_str, itm.Src(), itm.Trg());
-				Gfo_usr_dlg_._.Log_many("", "", "cfg.replace: src=~{src} trg = ~{trg}", itm.Src(), itm.Trg());
+				Gfo_usr_dlg_.I.Log_many("", "", "cfg.replace: src=~{src} trg = ~{trg}", itm.Src(), itm.Trg());
 			}
 		}
 		if (cur_str_changed)
@@ -38,7 +38,7 @@ public class Prefs_rename_mgr {
 		return cur_str_changed;
 	}
 	private static void List_add(ListAdp list, String src, String trg) {list.Add(new Prefs_rename_itm(src, trg));}
-        public static final Prefs_rename_mgr _ = new Prefs_rename_mgr();
+	public static final Prefs_rename_mgr _ = new Prefs_rename_mgr();
 }
 class Prefs_rename_itm {
 	public Prefs_rename_itm(String src, String trg) {this.src = src; this.trg = trg;}

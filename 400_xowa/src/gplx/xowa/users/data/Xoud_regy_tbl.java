@@ -35,7 +35,7 @@ public class Xoud_regy_tbl {
 		if (created) {
 			Schema_update_cmd cmd = Schema_update_cmd_.Make_tbl_create(Xoud_regy_tbl.Tbl_name	, Xoud_regy_tbl.Tbl_sql		, Xoud_regy_tbl.Idx_core);
 			cmd.Exec(null, conn);
-//				conn.Exec_create_tbl_and_idx(meta);
+//				conn.Ddl_create_tbl(meta);
 		}
 		return this;
 	} private Db_conn conn;
@@ -56,20 +56,19 @@ public class Xoud_regy_tbl {
 	}
 	@gplx.Virtual public void Select_by_grp(ListAdp rv, String grp) {
 		if (stmt_select_grp == null) stmt_select_grp = Db_stmt_.new_select_as_rdr(conn, Db_qry__select_in_tbl.new_(Tbl_name, String_.Ary(Fld_regy_grp), Flds__all, Db_qry__select_in_tbl.Order_by_null));
+		Db_rdr rdr = stmt_select_grp.Clear().Val_str(grp).Exec_select__rls_manual();
 		try {
-			Db_rdr rdr = stmt_select_grp.Clear().Val_str(grp).Exec_select_as_rdr();
 			while (rdr.Move_next()) {
 				Xoud_regy_row row = Make_row(rdr);
 				rv.Add(row);
 			}
-			rdr.Rls();
 		}
-		catch (Exception exc) {stmt_select_grp = null; throw Err_.err_(exc, "stmt failed");} // must reset stmt, else next call will fail
+		finally {rdr.Rls();}
 	}
 	@gplx.Virtual public String Select_val(String grp, String key) {
 		if (stmt_select_key == null) stmt_select_key = Db_stmt_.new_select_as_rdr(conn, Db_qry__select_in_tbl.new_(Tbl_name, String_.Ary(Fld_regy_grp, Fld_regy_key), Flds__all, Db_qry__select_in_tbl.Order_by_null));
 		try {
-			Db_rdr rdr = stmt_select_key.Clear().Val_str(grp).Val_str(key).Exec_select_as_rdr();
+			Db_rdr rdr = stmt_select_key.Clear().Val_str(grp).Val_str(key).Exec_select__rls_manual();
 			String rv = null;
 			if (rdr.Move_next())
 				rv = rdr.Read_str(2);

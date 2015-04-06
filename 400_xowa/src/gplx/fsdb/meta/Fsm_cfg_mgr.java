@@ -16,62 +16,35 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
-import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.xowa.*;
-import gplx.fsdb.meta.*;
+import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.fsdb.meta.*;
 public class Fsm_cfg_mgr {		
-	private final Db_cfg_tbl cfg_tbl = new Db_cfg_tbl();
-	private final HashAdp grps = HashAdp_.new_();
+	private final Db_cfg_tbl tbl; private final HashAdp grp_hash = HashAdp_.new_();
+	public Fsm_cfg_mgr(Fsdb_db_mgr db_conn_mgr, Db_conn conn) {
+		this.tbl = new Db_cfg_tbl(conn, db_conn_mgr.File__cfg_tbl_name());
+	}
+	public void Ctor_by_load() {
+		Db_cfg_hash hash		= Grps_get_or_load(Grp_core);
+		this.next_id			= hash.Get(Key_next_id).To_int_or(-1); if (next_id == -1) throw Err_.new_("next_id not found in cfg");
+		this.schema_thm_page	= hash.Get(Key_schema_thm_page).To_yn_or_n();
+		this.patch_next_id		= hash.Get(Key_patch_next_id).To_yn_or_n();
+	}
+	public Db_cfg_tbl				Tbl() {return tbl;}
 	public int Next_id()			{return next_id++;} private int next_id = 1;
+	public void Next_id_commit()	{tbl.Update_int("core", "next_id", next_id);}
 	public boolean Schema_thm_page()	{return schema_thm_page;} private boolean schema_thm_page = true;
 	public boolean Patch_next_id()		{return patch_next_id;} private boolean patch_next_id = true;
 	public void Patch_next_id_exec(int last_id) {
 		if (last_id >= next_id)
 			next_id = last_id + 1;
-		cfg_tbl.Insert(Grp_core, Key_patch_next_id, "y");
+		tbl.Insert_yn(Grp_core, Key_patch_next_id, Bool_.Y);
 	}
-	public void Txn_save() {
-		this.Update_next_id();
-	}
-	public void Rls() {cfg_tbl.Rls();}
-	private void Update_next_id()	{cfg_tbl.Update("core", "next_id", Int_.Xto_str(next_id));}
-	public Fsm_cfg_mgr Update(String grp, String key, String new_val) {
-		String cur_val = cfg_tbl.Select_as_str_or(grp, key, null);
-		if (cur_val == null)
-			cfg_tbl.Insert(grp, key, new_val);
-		else
-			cfg_tbl.Update(grp, key, new_val);
-		return this;
-	}
-	public Db_cfg_grp Grps_get_or_load(String grp_key) {
-		Db_cfg_grp grp = (Db_cfg_grp)grps.Fetch(grp_key);
-		if (grp == null) {
-			grp = cfg_tbl.Select_as_grp(grp_key);
-			grps.Add(grp_key, grp);
+	public Db_cfg_hash Grps_get_or_load(String grp_key) {
+		Db_cfg_hash rv = (Db_cfg_hash)grp_hash.Fetch(grp_key);
+		if (rv == null) {
+			rv = tbl.Select_as_hash(grp_key);
+			grp_hash.Add(grp_key, rv);
 		}
-		return grp;
-	}
-	public Db_cfg_grp Grps_get_or_add(String grp_key) {	// TEST:
-		Db_cfg_grp grp = (Db_cfg_grp)grps.Fetch(grp_key);
-		if (grp == null) {
-			grp = new Db_cfg_grp(grp_key);
-			grps.Add(grp_key, grp);
-		}
-		return grp;
-	}
-	public static Fsm_cfg_mgr new_() {return new Fsm_cfg_mgr();}
-	public void Init_for_db(Db_conn conn, boolean created, boolean schema_is_1) {
-		cfg_tbl.Conn_(conn, created, schema_is_1, Fsm_abc_mgr.Cfg_tbl_v1, Fsm_abc_mgr.Cfg_tbl_v2);
-		if (created) {
-			cfg_tbl.Insert(Fsm_cfg_mgr.Grp_core, Fsm_cfg_mgr.Key_next_id				, "1");	// start next_id at 1
-			cfg_tbl.Insert(Fsm_cfg_mgr.Grp_core, Fsm_cfg_mgr.Key_schema_thm_page		, "y");	// new dbs automatically have page and time in fsdb_xtn_tm
-			cfg_tbl.Insert(Fsm_cfg_mgr.Grp_core, Fsm_cfg_mgr.Key_patch_next_id			, "y");	// new dbs automatically have correct next_id
-		}
-		else {
-			Db_cfg_grp core_grp = Grps_get_or_load(Grp_core);
-			this.next_id			= core_grp.Get_int_or(Key_next_id, -1); if (next_id == -1) throw Err_.new_("next_id not found in fsdb_cfg");
-			this.schema_thm_page	= core_grp.Get_yn_or_n(Key_schema_thm_page);
-			this.patch_next_id		= core_grp.Get_yn_or_n(Key_patch_next_id);
-		}
+		return rv;
 	}
 	public static final String Grp_core = "core";
 	public static final String Key_next_id = "next_id", Key_schema_thm_page = "schema.thm.page", Key_patch_next_id = "patch.next_id";

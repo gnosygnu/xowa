@@ -58,6 +58,9 @@ public class Db_sqlbldr__sqlite implements Db_sqlbldr {
 		tmp_bfr.Add_byte_semic();
 		return tmp_bfr.Xto_str_and_clear();
 	}
+	public String Bld_drop_tbl(String tbl) {
+		return String_.Format("DROP TABLE IF EXISTS {0};", tbl);
+	}
 	private void Bld_fld(Bry_bfr tmp_bfr, Db_meta_fld fld) {
 		tmp_bfr.Add_str_ascii(fld.Name()).Add_byte_space();
 		Tid_to_sql(tmp_bfr, fld.Tid(), fld.Len()); tmp_bfr.Add_byte_space();
@@ -74,7 +77,7 @@ public class Db_sqlbldr__sqlite implements Db_sqlbldr {
 			tmp_bfr.Add_byte_space();
 		}
 		if (fld.Primary()) tmp_bfr.Add_str_ascii("PRIMARY KEY ");
-		if (fld.Autoincrement()) tmp_bfr.Add_str_ascii("AUTOINCREMENT ");
+		if (fld.Autonum()) tmp_bfr.Add_str_ascii("AUTOINCREMENT ");
 		tmp_bfr.Del_by_1();	// remove trailing space
 	}
 	public static void Tid_to_sql(Bry_bfr tmp_bfr, int tid, int len) {// REF: https://www.sqlite.org/datatype3.html

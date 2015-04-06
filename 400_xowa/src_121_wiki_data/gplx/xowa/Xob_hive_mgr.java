@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.specials.*; import gplx.xowa.specials.allPages.*; import gplx.xowa.tdbs.*;
 public class Xob_hive_mgr {
 	public Xob_hive_mgr(Xowe_wiki wiki) {this.wiki = wiki; this.fsys_mgr = wiki.Tdb_fsys_mgr();} private Xowe_wiki wiki; Xotdb_fsys_mgr fsys_mgr;
@@ -25,7 +26,7 @@ public class Xob_hive_mgr {
 		int xdat_idx = Regy__find_file_ns(key, dir_tid, ns.Num_str());
 		Xob_xdat_file xdat_main = new Xob_xdat_file();
 		xdat_main = xdat_load_(xdat_main, dir_tid, ns, xdat_idx);
-		xdat_main.Find(xdat_itm, key, Xodb_page_.Txt_ttl_pos, Byte_ascii.Tab, false);
+		xdat_main.Find(xdat_itm, key, Xotdb_page_itm_.Txt_ttl_pos, Byte_ascii.Tab, false);
 		int itm_idx = xdat_itm.Itm_idx();
 		Special_allpages_query_fwd(mgr, dir_tid, ns, include_redirects, count, xdat_idx, itm_idx    , xdat_main);
 		Special_allpages_query_bwd(mgr, dir_tid, ns, include_redirects, count, xdat_idx, itm_idx - 1, xdat_main);
@@ -41,8 +42,8 @@ public class Xob_hive_mgr {
 		boolean loop = true;
 		int regy_len = regy.Files_ary().length;
 		int rslt_list_len = mgr.Rslt_list_len();
-		Xodb_page[] rslt_list_ttls = mgr.Rslt_list_ttls();
-		Xodb_page nxt_itm = null;
+		Xowd_page_itm[] rslt_list_ttls = mgr.Rslt_list_ttls();
+		Xowd_page_itm nxt_itm = null;
 		while (loop) {
 			if (fil_idx == regy_len) break;
 			if (xdat_file == null) {
@@ -52,7 +53,7 @@ public class Xob_hive_mgr {
 			int rows_len = xdat_file.Count();
 			for (; row_idx < rows_len; row_idx++) {
 				xdat_file.GetAt(xdat_itm, row_idx);
-				Xodb_page ttl_itm = Xodb_page_.Txt_ttl_load(Bry_.Mid(xdat_itm.Src(), xdat_itm.Itm_bgn(), xdat_itm.Itm_end()));
+				Xowd_page_itm ttl_itm = Xotdb_page_itm_.Txt_ttl_load(Bry_.Mid(xdat_itm.Src(), xdat_itm.Itm_bgn(), xdat_itm.Itm_end()));
 				if (!include_redirects && ttl_itm.Redirected()) continue;
 				++count;
 				nxt_itm = ttl_itm;
@@ -76,7 +77,7 @@ public class Xob_hive_mgr {
 		}
 		int count = 0;
 		boolean loop = true;
-		Xodb_page prv_itm = null;
+		Xowd_page_itm prv_itm = null;
 		while (loop) {
 			if (fil_idx == -1) break;
 			if (xdat_file == null) {
@@ -87,7 +88,7 @@ public class Xob_hive_mgr {
 				row_idx = xdat_file.Count() - 1;
 			for (; row_idx > -1; row_idx--) {
 				xdat_file.GetAt(xdat_itm, row_idx);
-				Xodb_page ttl_itm = Xodb_page_.Txt_ttl_load(Bry_.Mid(xdat_itm.Src(), xdat_itm.Itm_bgn(), xdat_itm.Itm_end()));
+				Xowd_page_itm ttl_itm = Xotdb_page_itm_.Txt_ttl_load(Bry_.Mid(xdat_itm.Src(), xdat_itm.Itm_bgn(), xdat_itm.Itm_end()));
 				if (!include_redirects && ttl_itm.Redirected()) continue;
 //				list.Add(ttl_itm);
 				++count;
@@ -112,7 +113,7 @@ public class Xob_hive_mgr {
 		Io_url xdat_url = fsys_mgr.Url_ns_fil(dir_tid, ns.Id(), xdat_idx);
 		byte[] xdat_bry = gplx.ios.Io_stream_rdr_.Load_all(xdat_url);
 		xdat.Parse(xdat_bry, xdat_bry.length, xdat_url);
-		xdat.Find(xdat_itm, key, Xodb_page_.Txt_ttl_pos, Byte_ascii.Tab, false);
+		xdat.Find(xdat_itm, key, Xotdb_page_itm_.Txt_ttl_pos, Byte_ascii.Tab, false);
 		Find_nearby_add_fwd(list, dir_tid, ns, include_redirects, count, xdat_idx, xdat_itm.Itm_idx());
 	}	private Xob_xdat_itm xdat_itm = new Xob_xdat_itm(); //Int_2_ref find_nearby_rslt = new Int_2_ref();
 //		private void Find_nearby_add_bwd(ListAdp list, byte dir_tid, Xow_ns ns, boolean include_redirects, int total, int fil_bgn, int row_bgn) {
@@ -133,7 +134,7 @@ public class Xob_hive_mgr {
 //				first = false;
 //				for (; row_idx > -1; row_idx--) {
 //					xdat.GetAt(xdat_itm, row_idx);
-//					Xodb_page ttl_itm = Xodb_page_.Txt_ttl_load(Bry_.Mid(xdat_itm.Src(), xdat_itm.Itm_bgn(), xdat_itm.Itm_end()));
+//					Xowd_page_itm ttl_itm = Xotdb_page_itm_.Txt_ttl_load(Bry_.Mid(xdat_itm.Src(), xdat_itm.Itm_bgn(), xdat_itm.Itm_end()));
 //					if (!include_redirects && ttl_itm.Type_redirect()) continue;
 //					list.Add(ttl_itm);
 //					if (++count == total) {loop = false; break;}
@@ -157,7 +158,7 @@ public class Xob_hive_mgr {
 			first = false;
 			for (; row_idx < rows_len; row_idx++) {
 				xdat.GetAt(xdat_itm, row_idx);
-				Xodb_page ttl_itm = Xodb_page_.Txt_ttl_load(Bry_.Mid(xdat_itm.Src(), xdat_itm.Itm_bgn(), xdat_itm.Itm_end()));
+				Xowd_page_itm ttl_itm = Xotdb_page_itm_.Txt_ttl_load(Bry_.Mid(xdat_itm.Src(), xdat_itm.Itm_bgn(), xdat_itm.Itm_end()));
 				if (!include_redirects && ttl_itm.Redirected()) continue;
 				list.Add(ttl_itm);
 				if (++count == total) {loop = false; break;}

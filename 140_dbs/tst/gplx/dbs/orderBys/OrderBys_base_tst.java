@@ -23,7 +23,7 @@ public abstract class OrderBys_base_tst {
 		fx.Conn_(conn);
 		Db_qry_delete.new_("dbs_crud_ops").Exec_qry(conn);
 	}	protected Db_conn_fxt fx = new Db_conn_fxt();
-	@After public void teardown() {conn.Conn_term();}
+	@After public void teardown() {conn.Rls_conn();}
 	protected abstract Db_conn provider_(); protected Db_conn conn;		
 	protected void Basic_hook() {
 		fx.tst_ExecDml(1, new Db_qry_insert("dbs_crud_ops").Arg_("id", 1).Arg_("name", "you"));

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.movePage; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.core.primitives.*;
+import gplx.core.primitives.*; import gplx.xowa.wikis.data.tbls.*;
 public class Move_page implements Xows_page {
 	private Move_trg_ns_list_fmtr ns_list_fmtr = new Move_trg_ns_list_fmtr();
 	private Move_url_args args = new Move_url_args();
@@ -39,14 +39,14 @@ public class Move_page implements Xows_page {
 		Xow_ns trg_ns = wiki.Ns_mgr().Ids_get_or_null(trg_ns_id); if (trg_ns == null) throw Err_.new_fmt_("unknown ns: ns={0}", trg_ns_id);
 		byte[] trg_ttl_bry = args.Trg_ttl();
 		Xoa_ttl trg_ttl = Xoa_ttl.parse_(wiki, trg_ns_id, trg_ttl_bry);
-		Xodb_page src_page = new Xodb_page();
+		Xowd_page_itm src_page = new Xowd_page_itm();
 		wiki.Db_mgr().Load_mgr().Load_by_ttl(src_page, src_ttl.Ns(), src_ttl.Page_db());
 		page.Revision_data().Id_(src_page.Id());
 		page.Revision_data().Modified_on_(src_page.Modified_on());
-		page.Data_raw_(src_page.Wtxt());
+		page.Data_raw_(src_page.Text());
 		if (args.Create_redirect()) {	// NOTE: not tested; DATE:2014-02-27
 			save_mgr.Data_update(page, Xop_redirect_mgr.Make_redirect_text(trg_ttl.Full_db()));
-			Xodb_page trg_page = new Xodb_page();
+			Xowd_page_itm trg_page = new Xowd_page_itm();
 			boolean trg_page_exists = wiki.Db_mgr().Load_mgr().Load_by_ttl(trg_page, trg_ns, trg_ttl_bry);
 			if (trg_page_exists)
 				save_mgr.Data_update(page, page.Data_raw());
@@ -74,7 +74,7 @@ public class Move_page implements Xows_page {
 		, msg_mgr.Val_by_key_obj("move-leave-redirect")
 		, msg_mgr.Val_by_key_obj("movepagebtn")
 		);
-		return tmp_bfr.Mkr_rls().Xto_bry_and_clear();
+		return tmp_bfr.To_bry_and_rls();
 	}
 	private Bry_fmtr fmtr_all = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<form action='/wiki/Special:MovePage' id='movepage'>"

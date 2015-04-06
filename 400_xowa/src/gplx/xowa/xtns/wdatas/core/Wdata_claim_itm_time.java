@@ -35,7 +35,7 @@ public class Wdata_claim_itm_time extends Wdata_claim_itm_core { 	public Wdata_c
 			precision_int = Bry_.Xto_int_or(precision, -1);
 			if (precision_int == -1) {
 				precision_int = Wdata_date.Fmt_ymdhns;
-				Gfo_usr_dlg_._.Warn_many("", "", "unknown precision: ~{0}", String_.new_utf8_(precision));
+				Gfo_usr_dlg_.I.Warn_many("", "", "unknown precision: ~{0}", String_.new_utf8_(precision));
 			}
 		}
 		return precision_int;
@@ -45,7 +45,7 @@ public class Wdata_claim_itm_time extends Wdata_claim_itm_core { 	public Wdata_c
 			before_int = Bry_.Xto_int_or(before, -1);
 			if (before_int == -1) {
 				before_int = 0;
-				Gfo_usr_dlg_._.Warn_many("", "", "unknown before: ~{0}", String_.new_utf8_(before));
+				Gfo_usr_dlg_.I.Warn_many("", "", "unknown before: ~{0}", String_.new_utf8_(before));
 			}
 		}
 		return before_int;
@@ -55,7 +55,7 @@ public class Wdata_claim_itm_time extends Wdata_claim_itm_core { 	public Wdata_c
 			after_int = Bry_.Xto_int_or(after, -1);
 			if (after_int == -1) {
 				after_int = 0;
-				Gfo_usr_dlg_._.Warn_many("", "", "unknown after: ~{0}", String_.new_utf8_(after));
+				Gfo_usr_dlg_.I.Warn_many("", "", "unknown after: ~{0}", String_.new_utf8_(after));
 			}
 		}
 		return after_int;

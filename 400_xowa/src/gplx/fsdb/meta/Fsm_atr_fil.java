@@ -16,125 +16,94 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
-import gplx.core.primitives.*; import gplx.cache.*;
-import gplx.dbs.*; import gplx.dbs.engines.sqlite.*;
-import gplx.fsdb.data.*;
-public class Fsm_atr_fil implements RlsAble {
-	private Gfo_cache_mgr_bry dir_cache = new Gfo_cache_mgr_bry();		
-	private final Fsd_dir_tbl tbl_dir = new Fsd_dir_tbl(); private final Fsd_fil_tbl tbl_fil = new Fsd_fil_tbl(); private Fsd_thm_tbl tbl_thm = new Fsd_thm_tbl();
-	private static final String Db_conn_bldr_type = "gplx.fsdb.fsm_atr_fil";
-	public Fsm_atr_fil(Fsm_abc_mgr abc_mgr, Io_url io_url) {
-		this.abc_mgr = abc_mgr;
-		Db_conn_bldr_data conn_data = Db_conn_bldr.I.Get_or_new(Db_conn_bldr_type, io_url);
-		boolean created = conn_data.Created(); conn = conn_data.Conn();
-		boolean schema_is_1 = Bool_.Y; 
-		tbl_dir.Conn_(conn, created, schema_is_1);
-		tbl_fil.Conn_(conn, created, schema_is_1);
-		tbl_thm.Conn_(conn, created, schema_is_1, this);
+import gplx.core.primitives.*; import gplx.cache.*; import gplx.ios.*;
+import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.fsdb.data.*;
+public class Fsm_atr_fil {
+	private final Fsm_mnt_itm mnt_itm; private final int mnt_id;
+	private Fsd_dir_tbl tbl_dir; private Fsd_fil_tbl tbl_fil; private Fsd_thm_tbl tbl_thm;
+	private final Gfo_cache_mgr_bry dir_cache = new Gfo_cache_mgr_bry(); private Gfo_cache_mgr_bry fil_cache; private Bry_bfr fil_cache_key_bfr;
+	public Fsm_atr_fil(Fsm_mnt_itm mnt_itm, int id, String url_rel, Db_conn conn, boolean schema_is_1, boolean schema_thm_page) {
+		this.mnt_itm = mnt_itm; this.mnt_id = mnt_itm.Id();
+		this.id = id; this.url_rel = url_rel; this.conn = conn;
+		this.tbl_dir = new Fsd_dir_tbl(conn, schema_is_1);
+		this.tbl_fil = new Fsd_fil_tbl(conn, schema_is_1, mnt_id);
+		this.tbl_thm = new Fsd_thm_tbl(conn, schema_is_1, mnt_id, schema_thm_page);
 	}
-	public Fsm_abc_mgr Abc_mgr() {return abc_mgr;} private Fsm_abc_mgr abc_mgr;
-	public Db_conn Conn() {return conn;} private Db_conn conn;
-	public int Id() {return id;} private int id;
-	public Io_url Url() {return url;} private Io_url url;
-	public String Path_bgn() {return path_bgn;} private String path_bgn;
-	public byte Cmd_mode() {return cmd_mode;} public Fsm_atr_fil Cmd_mode_(byte v) {cmd_mode = v; return this;} private byte cmd_mode;
-	public void Ctor_by_load(int id, Io_url url, String path_bgn, byte cmd_mode) {
-		this.id = id;
-		this.url = url;
-		this.path_bgn = path_bgn;
-		this.cmd_mode = cmd_mode;
+	public int				Id() {return id;} private final int id;
+	public String			Url_rel() {return url_rel;} private final String url_rel;
+	public Db_conn			Conn() {return conn;} private final Db_conn conn;
+	public Fsd_fil_itm		Select_fil_or_null(byte[] dir, byte[] fil) {
+		int dir_id = Get_dir_id_or_neg1(dir); 
+		return dir_id == Int_.Neg1 ? Fsd_fil_itm.Null : tbl_fil.Select_or_null(dir_id, fil);
 	}
-	public void Rls() {
-		conn.Txn_mgr().Txn_end_all();
-		conn.Conn_term();
-	}
-	public void Txn_open() {
-		conn.Txn_mgr().Txn_bgn_if_none();
-	}
-	public void Txn_save() {
-		conn.Txn_mgr().Txn_end_all();
-	}
-	public Fsd_fil_itm Fil_select(byte[] dir, byte[] fil) {
-		Int_obj_ref dir_id_obj = (Int_obj_ref)dir_cache.Get_or_null(dir);
-		int dir_id = -1;
-		if (dir_id_obj == null) {
-			Fsd_dir_itm dir_itm = tbl_dir.Select_itm(String_.new_utf8_(dir));
-			dir_id = dir_itm == Fsd_dir_itm.Null ? -1 : dir_itm.Id();
-			dir_cache.Add(dir, Int_obj_ref.new_(dir_id));
-		}
-		else
-			dir_id = dir_id_obj.Val();
-		if (dir_id == Int_.Neg1) return Fsd_fil_itm.Null;
-		return tbl_fil.Select_itm_by_name(dir_id, String_.new_utf8_(fil));
-	}
-	public boolean Thm_select(int owner_id, Fsd_thm_itm thm) {
-		return tbl_thm.Select_itm_by_fil_width(owner_id, thm);
-	}
-	public int Fil_insert(Fsd_fil_itm rv, String dir, String fil, int ext_id, DateAdp modified, String hash, int bin_db_id, long bin_len, gplx.ios.Io_stream_rdr bin_rdr) {
-		int dir_id = Dir_id__get_or_insert(dir);
-		int fil_id = Fil_id__get_or_insert(Xtn_tid_none, dir_id, fil, ext_id, modified, hash, bin_db_id, bin_len);
-		rv.Init_for_insert(bin_db_id, dir_id, fil_id);
+	public boolean				Select_thm(Fsd_thm_itm rv, int dir_id, int fil_id) {return tbl_thm.Select_itm_by_fil_width(dir_id, fil_id, rv);}
+	public int				Insert_fil(Fsd_fil_itm rv, byte[] dir, byte[] fil, int ext_id, int bin_db_id, long bin_len, Io_stream_rdr bin_rdr) {
+		int dir_id = Get_dir_id_or_make(dir);
+		int fil_id = Get_fil_id_or_make(Tid_none, dir_id, fil, ext_id, bin_db_id, bin_len);
+		rv.Ctor(mnt_id, fil_id, dir_id, bin_db_id, fil, ext_id);
 		return fil_id;
 	}
-	public int Img_insert(Fsd_img_itm rv, String dir, String fil, int ext_id, int img_w, int img_h, DateAdp modified, String hash, int bin_db_id, long bin_len, gplx.ios.Io_stream_rdr bin_rdr) {
-		int dir_id = Dir_id__get_or_insert(dir);
-		int fil_id = Fil_id__get_or_insert(Xtn_tid_img, dir_id, fil, ext_id, modified, hash, bin_db_id, bin_len);
-		rv.Id_(fil_id);
+	public int				Insert_img(Fsd_img_itm rv, byte[] dir, byte[] fil, int ext_id, int img_w, int img_h, int bin_db_id, long bin_len, Io_stream_rdr bin_rdr) {
+		int dir_id = Get_dir_id_or_make(dir);
+		int fil_id = Get_fil_id_or_make(Tid_img, dir_id, fil, ext_id, bin_db_id, bin_len);
+		rv.Ctor(mnt_id, dir_id, fil_id, bin_db_id);
 		return fil_id;
 	}
-	public int Thm_insert(Fsd_thm_itm rv, String dir, String fil, int ext_id, int thm_w, int thm_h, double thumbtime, int page, DateAdp modified, String hash, int bin_db_id, long bin_len, gplx.ios.Io_stream_rdr bin_rdr) {
-		int dir_id = Dir_id__get_or_insert(dir);
-		int fil_id = Fil_id__get_or_insert(Xtn_tid_thm, dir_id, fil, ext_id, modified, hash, Fsd_bin_tbl.Null_db_bin_id, Fsd_bin_tbl.Null_size);	// NOTE: bin_db_id must be set to NULL
-		int thm_id = abc_mgr.Next_id();
-		tbl_thm.Insert(thm_id, fil_id, thm_w, thm_h, thumbtime, page, bin_db_id, bin_len, modified, hash);
-		rv.Init_by_insert(bin_db_id, dir_id, fil_id, thm_id);
+	public int				Insert_thm(Fsd_thm_itm rv, byte[] dir, byte[] fil, int ext_id, int w, int h, double time, int page, int bin_db_id, long bin_len, Io_stream_rdr bin_rdr) {
+		int dir_id = Get_dir_id_or_make(dir);
+		int fil_id = Get_fil_id_or_make(Tid_thm, dir_id, fil, ext_id, Fsd_bin_tbl.Bin_db_id_null, Fsd_bin_tbl.Size_null);	// NOTE: bin_db_id must be set to NULL
+		int thm_id = mnt_itm.Next_id();
+		tbl_thm.Insert(thm_id, fil_id, w, h, time, page, bin_db_id, bin_len);
+		rv.Ctor(mnt_id, dir_id, fil_id, thm_id, bin_db_id, w, h, time, page, bin_len, Fsd_thm_tbl.Modified_null_str, Fsd_thm_tbl.Hash_null);
 		return thm_id;
 	}
-	public static Fsm_atr_fil make_(Fsm_abc_mgr abc_mgr, int id, Io_url url, String path_bgn) {
-		Fsm_atr_fil rv = new Fsm_atr_fil(abc_mgr, url);
-		rv.id = id;
-		rv.url = url;
-		rv.path_bgn = path_bgn;
-		rv.cmd_mode = Db_cmd_mode.Tid_create;
-		return rv;
+	public void Fil_cache_enabled_y_() {
+		fil_cache = new Gfo_cache_mgr_bry();
+		fil_cache_key_bfr = Bry_bfr.reset_(255);
+		tbl_fil.Select_all(fil_cache_key_bfr, fil_cache);
 	}
-	private int Dir_id__get_or_insert(String dir_str) {
-		byte[] dir_bry = Bry_.new_utf8_(dir_str);
+	private int Get_dir_id_or_neg1(byte[] dir_bry) {
 		Object rv_obj = dir_cache.Get_or_null(dir_bry);
-		int rv = -1;
-		if (rv_obj != null) {	// item found
-			rv = ((Int_obj_ref)rv_obj).Val();
-			if (rv == -1)		// dir was previously -1; occurs when doing select on empty db (no dir, so -1 added) and then doing insert (-1 now needs to be dropped)
-				dir_cache.Del(dir_bry);
+		if (rv_obj == null) {										// not in mem
+			Fsd_dir_itm itm = tbl_dir.Select_or_null(dir_bry);		// try db
+			if (itm == Fsd_dir_itm.Null) return -1;					// not in db
+			int dir_id = itm.Dir_id();
+			dir_cache.Add(dir_bry, Int_obj_ref.new_(dir_id));		// add to mem
+			return dir_id;
 		}
+		else
+			return ((Int_obj_ref)rv_obj).Val();
+	}
+	private int Get_dir_id_or_make(byte[] dir_bry) {
+		int rv = Get_dir_id_or_neg1(dir_bry);
 		if (rv == -1) {
-			Fsd_dir_itm itm = tbl_dir.Select_itm(dir_str);
-			if (itm == Fsd_dir_itm.Null) {
-				rv = abc_mgr.Next_id();
-				tbl_dir.Insert(rv, dir_str, 0);	// 0: always assume root owner
-			}
-			else {
-				rv = itm.Id();
-			}
+			rv = mnt_itm.Next_id();
+			tbl_dir.Insert(rv, dir_bry, Fsd_dir_itm.Owner_root);
 			dir_cache.Add(dir_bry, Int_obj_ref.new_(rv));
 		}
 		return rv;
 	}
-	private int Fil_id__get_or_insert(int xtn_tid, int dir_id, String fil, int ext_id, DateAdp modified, String hash, int bin_db_id, long bin_len) {
-		Fsd_fil_itm fil_itm = tbl_fil.Select_itm_by_name(dir_id, fil);
-		int fil_id = fil_itm.Id();
-		if (fil_id == Fsd_fil_itm.Null_id) {	// new item
-			fil_id = abc_mgr.Next_id();				
-			tbl_fil.Insert(fil_id, dir_id, fil, xtn_tid, ext_id, bin_len, modified, hash, bin_db_id);
+	private int Get_fil_id_or_make(int xtn_tid, int dir_id, byte[] fil, int ext_id, int bin_db_id, long bin_len) {
+		if (fil_cache != null) {
+			byte[] cache_key = Fsd_fil_itm.Gen_cache_key(fil_cache_key_bfr, dir_id, fil);
+			Object cache_obj = fil_cache.Get_or_null(cache_key);
+			if (cache_obj != null) return ((Fsd_fil_itm)cache_obj).Fil_id();
 		}
-		else {									// existing item				
-			if (	fil_itm.Db_bin_id() == Fsd_bin_tbl.Null_db_bin_id	// prv row was previously inserted by thumb
-				&&	xtn_tid != Xtn_tid_thm					// cur row is not thumb
+		Fsd_fil_itm fil_itm = tbl_fil.Select_or_null(dir_id, fil);
+		int fil_id = -1;
+		if (fil_itm == Fsd_fil_itm.Null) {		// new item
+			fil_id = mnt_itm.Next_id();
+			tbl_fil.Insert(fil_id, dir_id, fil, xtn_tid, ext_id, bin_len, bin_db_id);
+		}
+		else {									// existing item
+			fil_id = fil_itm.Fil_id();
+			if (	fil_itm.Bin_db_id() == Fsd_bin_tbl.Bin_db_id_null	// prv row was previously inserted by thumb
+				&&	xtn_tid != Tid_thm									// cur row is not thumb
 				) {
-				tbl_fil.Update(fil_id, dir_id, fil, xtn_tid, ext_id, bin_len, modified, hash, bin_db_id);	// update props; note that thumb inserts null props, whereas file will insert real props (EX: bin_db_id)
+				tbl_fil.Update(fil_id, dir_id, fil, xtn_tid, ext_id, bin_len, bin_db_id);	// update props; note that thumb inserts null props, whereas file will insert real props (EX: bin_db_id)
 			}
 		}
 		return fil_id;
 	}
-	private static final int Xtn_tid_none = 0, Xtn_tid_thm = 1, Xtn_tid_img = 2;
+	private static final int Tid_none = 0, Tid_thm = 1, Tid_img = 2;
 }

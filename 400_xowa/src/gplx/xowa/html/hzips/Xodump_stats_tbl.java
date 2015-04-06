@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.html.hdumps.core.*; import gplx.xowa.html.hzips.*; import gplx.xowa.html.hdumps.pages.*;
 import gplx.xowa2.gui.*;
-public class Xodump_stats_tbl {
+public class Xodump_stats_tbl implements RlsAble {
 	private static final String tbl_name = "hdump_stats"; private static final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private static final String
-	  fld_page_id = flds.Add_int("page_id"), fld_wtxt_len = flds.Add_int("wtxt_len"), fld_row_orig_len = flds.Add_int("row_orig_len"), fld_row_zip_len = flds.Add_int("row_zip_len")
+	  fld_page_id = flds.Add_int_pkey("page_id"), fld_wtxt_len = flds.Add_int("wtxt_len"), fld_row_orig_len = flds.Add_int("row_orig_len"), fld_row_zip_len = flds.Add_int("row_zip_len")
 	, fld_body_len = flds.Add_int("body_len"), fld_display_ttl_len = flds.Add_int("display_ttl_len"), fld_content_sub_len = flds.Add_int("content_sub_len"), fld_sidebar_div_len = flds.Add_int("sidebar_div_len")
 	, fld_js_math = flds.Add_int("js_math"), fld_js_imap = flds.Add_int("js_imap"), fld_js_packed = flds.Add_int("js_packed"), fld_js_hiero = flds.Add_int("js_hiero")
 	, fld_a_rhs = flds.Add_int("a_rhs"), fld_lnki_text_n = flds.Add_int("lnki_text_n"), fld_lnki_text_y = flds.Add_int("lnki_text_y")
@@ -29,21 +29,19 @@ public class Xodump_stats_tbl {
 	, fld_hdr_1 = flds.Add_int("hdr_1"), fld_hdr_2 = flds.Add_int("hdr_2"), fld_hdr_3 = flds.Add_int("hdr_3"), fld_hdr_4 = flds.Add_int("hdr_4"), fld_hdr_5 = flds.Add_int("hdr_5"), fld_hdr_6 = flds.Add_int("hdr_6")
 	, fld_img_full = flds.Add_int("img_full")
 	;		
-	private Db_conn conn; private Db_stmt stmt_insert;
-	public Xodump_stats_tbl Conn_(Db_conn new_conn, boolean created) {
-		this.conn = new_conn;
-		if (created) {
-			Db_meta_tbl meta = Db_meta_tbl.new_(tbl_name, flds
-			, Db_meta_idx.new_unique_by_tbl(tbl_name, "pkey", fld_page_id)
-			);
-			conn.Exec_create_tbl_and_idx(meta);
-		}
-		stmt_insert = null;
-		return this;
-	}		
+	private final Db_conn conn; private Db_stmt stmt_insert;
+	public Xodump_stats_tbl(Db_conn conn) {
+		this.conn = conn;
+		this.Create_tbl();	// always zap table
+		conn.Rls_reg(this);
+	}
+	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds, Db_meta_idx.new_unique_by_tbl(tbl_name, "pkey", fld_page_id)));}
+	public void Rls() {
+		stmt_insert = Db_stmt_.Rls(stmt_insert);
+	}
 	public void Insert(Xog_page hpg, Xodump_stats_itm hzip, int wtxt_len, int row_orig_len, int row_zip_len) {
 		Xopg_module_mgr js_mgr = hpg.Module_mgr();
-		if (stmt_insert == null) stmt_insert = conn.Rls_reg(conn.Stmt_insert(tbl_name, flds));
+		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(tbl_name, flds);
 		stmt_insert.Clear()
 			.Val_int(fld_page_id				, hpg.Page_id())
 			.Val_int(fld_wtxt_len				, wtxt_len)

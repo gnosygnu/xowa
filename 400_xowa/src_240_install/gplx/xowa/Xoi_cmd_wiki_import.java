@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.threads.*; import gplx.xowa.gui.views.*;
+import gplx.threads.*; import gplx.xowa.bldrs.*; import gplx.xowa.gui.views.*; import gplx.xowa.bldrs.cmds.utils.*;
 class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 	public Xoi_cmd_wiki_import(Xoi_setup_mgr install_mgr, String wiki_key, String wiki_date, String dump_type) {this.install_mgr = install_mgr; this.Owner_(install_mgr); this.wiki_key = wiki_key; this.wiki_date = wiki_date; this.dump_type = dump_type;} private Xoi_setup_mgr install_mgr; String wiki_key, wiki_date, dump_type;
 	public static final String KEY = "wiki.import";
@@ -43,28 +43,29 @@ class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 	boolean running;
 	public boolean Import_move_bz2_to_done() {return import_move_bz2_to_done;} public Xoi_cmd_wiki_import Import_move_bz2_to_done_(boolean v) {import_move_bz2_to_done = v; return this;} private boolean import_move_bz2_to_done = true;
 	private void Process_txt(Xob_bldr bldr) {
-		((gplx.xowa.bldrs.imports.Xobc_core_cleanup)bldr.Cmd_mgr().Add_cmd(wiki, "core.cleanup")).Delete_wiki_(true).Delete_sqlite3_(true);
-		bldr.Cmd_mgr().Add_cmd(wiki, "core.init");
-		bldr.Cmd_mgr().Add_cmd(wiki, "core.make_page");
-		bldr.Cmd_mgr().Add_cmd(wiki, "core.make_id");
-		bldr.Cmd_mgr().Add_cmd(wiki, "core.make_search_title");
+		((Xob_cleanup_cmd)bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_util_cleanup)).Delete_tdb_(true).Delete_sqlite3_(true);
+		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_tdb_text_init);
+		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_tdb_make_page);
+		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_tdb_make_id);
+		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_tdb_make_search_title);
 		if (wiki.Import_cfg().Category_version() == gplx.xowa.ctgs.Xoa_ctg_mgr.Version_1)
-			bldr.Cmd_mgr().Add_cmd(wiki, "core.make_category");
-		bldr.Cmd_mgr().Add_cmd(wiki, "core.calc_stats");	
-		bldr.Cmd_mgr().Add_cmd(wiki, "core.term");
+			bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_tdb_make_category);
+		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_tdb_calc_stats);
+		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_tdb_core_term);
 	}	
 	private void Process_sql(Xob_bldr bldr) {
-		((gplx.xowa.bldrs.imports.Xobc_core_cleanup)bldr.Cmd_mgr().Add_cmd(wiki, "core.cleanup")).Delete_wiki_(true).Delete_sqlite3_(true);
-		bldr.Cmd_mgr().Add_cmd(wiki, "import.sql.init");
-		bldr.Cmd_mgr().Add_cmd(wiki, "import.sql.page");
+		((Xob_cleanup_cmd)bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_util_cleanup)).Delete_tdb_(true).Delete_sqlite3_(true);
+		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_init);
+		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_page);
+		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_css);	
 		if (wiki.Import_cfg().Category_version() == gplx.xowa.ctgs.Xoa_ctg_mgr.Version_1) {
-			bldr.Cmd_mgr().Add_cmd(wiki, "import.sql.category_v1");
-			bldr.Cmd_mgr().Add_cmd(wiki, "import.sql.category_registry");
-			bldr.Cmd_mgr().Add_cmd(wiki, "import.sql.categorylinks");
+			bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_cat_core_v1);
+			bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_cat_core);
+			bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_cat_link);
 		}
 		if (wiki.Appe().Setup_mgr().Dump_mgr().Search_version() == gplx.xowa.specials.search.Xosrh_core.Version_2)
-			bldr.Cmd_mgr().Add_cmd(wiki, "import.sql.search_title.wkr");
-		bldr.Cmd_mgr().Add_cmd(wiki, "import.sql.term");	
+			bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_search_wkr);
+		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_term);	
 	}	
 	private void Process_async() {
 		Xoae_app app = install_mgr.App();
@@ -80,8 +81,7 @@ class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 		else
 			Process_txt(bldr);
 		bldr.Run();
-		app.Usr_dlg().Prog_none(GRP_KEY, "clear", "");
-		app.Usr_dlg().Note_none(GRP_KEY, "clear", "");
+		app.Usr_dlg().Prog_none(GRP_KEY, "clear", ""); app.Usr_dlg().Note_none(GRP_KEY, "clear", "");
 		app.User().Available_from_fsys();
 		wiki.Init_needed_(true);
 		wiki.Html_mgr().Page_wtr_mgr().Init_(true);

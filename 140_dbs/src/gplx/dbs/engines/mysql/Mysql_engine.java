@@ -19,17 +19,17 @@ package gplx.dbs.engines.mysql; import gplx.*; import gplx.dbs.*; import gplx.db
 import gplx.stores.*; import gplx.dbs.engines.*; import gplx.dbs.sqls.*;
 import java.sql.*; 
 public class Mysql_engine extends Db_engine_sql_base {
-	@Override public String Tid() {return Mysql_url.Tid_const;}
+	@Override public String Tid() {return Mysql_conn_info.Tid_const;}
 	@Override public Sql_qry_wtr SqlWtr() {return Sql_qry_wtr_.new_escape_backslash();}
-	@Override public Db_engine New_clone(Db_url connectInfo) {
+	@Override public Db_engine New_clone(Db_conn_info connectInfo) {
 		Mysql_engine rv = new Mysql_engine();
 		rv.Ctor(connectInfo);
 		return rv;
 	}
 	@Override public DataRdr New_rdr(ResultSet rdr, String commandText) {return Mysql_rdr.new_(rdr, commandText);}
 		@gplx.Internal @Override protected Connection Conn_new() {
-		Mysql_url url_as_mysql = (Mysql_url)url; 
-		return Conn_make_by_url("jdbc:mysql://localhost/" + url_as_mysql.Database() + "?characterEncoding=UTF8", url_as_mysql.Uid(), url_as_mysql.Pwd());
+		Mysql_conn_info conn_info_as_mysql = (Mysql_conn_info)conn_info; 
+		return Conn_make_by_url("jdbc:mysql://localhost/" + conn_info_as_mysql.Database() + "?characterEncoding=UTF8", conn_info_as_mysql.Uid(), conn_info_as_mysql.Pwd());
 	}
 		public static final Mysql_engine _ = new Mysql_engine(); Mysql_engine() {}
 }
