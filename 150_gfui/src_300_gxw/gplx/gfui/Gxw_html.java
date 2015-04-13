@@ -34,6 +34,7 @@ public interface Gxw_html extends GxwElem {
 	boolean		Html_elem_atr_set_append(String id, String atr_key, String append);
 	boolean		Html_elem_delete(String id);
 	boolean		Html_elem_replace_html(String id, String html);
+	boolean		Html_elem_append_above(String id, String html);
 	boolean		Html_gallery_packed_exec();
 	boolean		Html_elem_focus(String id);
 	boolean		Html_elem_scroll_into_view(String id);

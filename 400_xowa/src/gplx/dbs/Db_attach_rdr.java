@@ -26,7 +26,10 @@ public class Db_attach_rdr {
 		this.diff_db = !String_.Eq(conn_info.Url().Raw(), attach_url.Raw());
 	}
 	public Db_rdr Exec_as_rdr(String sql) {
-		if (diff_db) conn.Env_db_attach(attach_name, attach_url);
+		try {
+			if (diff_db) conn.Env_db_attach(attach_name, attach_url);
+		} catch (Exception e) {Err_.Noop(e); Gfo_usr_dlg_.I.Warn_many("", "", "db:failed to attach db; name=~{0} url=~{1}", attach_name, attach_url.Raw());}
+		sql = String_.Replace(sql, "<attach_db>", diff_db ? attach_name + "." : "");	// replace <attach> with either "attach_db." or "";
 		return conn.Exec_sql_as_rdr2(sql);
 	}
 	public void Rls() {

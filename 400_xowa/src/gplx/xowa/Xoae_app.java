@@ -60,7 +60,7 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 		html_mgr = new Xoh_html_mgr(this);
 //			queue_file = new Xop_queue_mgr(this);
 	}
-	public byte					Mode()					{return Xoa_app_.Mode;}
+	public byte					Mode()					{return Xoa_app_.Mode();}
 	public Xoa_fsys_mgr			Fsys_mgr()				{return fsys_mgr;} private final Xoa_fsys_mgr fsys_mgr;
 	public Xof_cache_mgr		File_mgr__cache_mgr()	{return file_mgr.Cache_mgr();}
 	public Xof_img_mgr			File_mgr__img_mgr()		{return file_mgr.Img_mgr();}
@@ -108,8 +108,8 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 	public Gfo_log_bfr			Log_bfr() {return log_bfr;} private Gfo_log_bfr log_bfr = new Gfo_log_bfr();
 	public Xoa_sys_cfg			Sys_cfg() {return sys_cfg;} private Xoa_sys_cfg sys_cfg;
 	public Bry_fmtr				Tmp_fmtr() {return tmp_fmtr;} Bry_fmtr tmp_fmtr = Bry_fmtr.new_("");
-	public boolean					Xwiki_missing(byte[] wiki_key)	{return user.Wiki().Xwiki_mgr().Get_by_key(wiki_key) == null;} // NOTE: only the user_wiki has a full list of all wikis b/c it has xwiki objects; wiki_mgr does not, b/c it has heavier wiki objects which are loaded dynamically;
-	public boolean					Xwiki_exists(byte[] wiki_key)	{return user.Wiki().Xwiki_mgr().Get_by_key(wiki_key) != null;}
+	public boolean					Xwiki_mgr__missing(byte[] wiki_key)	{return user.Wiki().Xwiki_mgr().Get_by_key(wiki_key) == null;} // NOTE: only the user_wiki has a full list of all wikis b/c it has xwiki objects; wiki_mgr does not, b/c it has heavier wiki objects which are loaded dynamically;
+	public boolean					Xwiki_mgr__exists(byte[] wiki_key)	{return user.Wiki().Xwiki_mgr().Get_by_key(wiki_key) != null;}
 	public Xoa_ctg_mgr			Ctg_mgr() {return ctg_mgr;} private Xoa_ctg_mgr ctg_mgr = new Xoa_ctg_mgr();
 	public Xoa_fsys_eval		Url_cmd_eval() {return url_cmd_eval;} Xoa_fsys_eval url_cmd_eval;
 	public Xoa_cur				Cur_redirect() {return cur_redirect;} private Xoa_cur cur_redirect;
@@ -158,6 +158,7 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 		} 
 		gui_mgr.Browser_win().Usr_dlg().Canceled_y_();		
 		user.App_term(); usr_dlg.Log_many("", "", "term:app_term");
+		gui_mgr.Browser_win().Tab_mgr().Tabs_close_all();
 		log_wtr.Term(); usr_dlg.Log_many("", "", "term:log_wtr");
 		log_mgr.Rls(); usr_dlg.Log_many("", "", "term:log_mgr");
 		if (Scrib_core.Core() != null) {Scrib_core.Core().Term(); usr_dlg.Log_many("", "", "term:scrib");}

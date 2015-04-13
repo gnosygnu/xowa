@@ -35,7 +35,7 @@ public class Xog_menu_mgr implements GfoInvkAble {
 	}
 	public void Init_by_kit() {
 		try {
-			if (Xoa_app_.Mode == Xoa_app_.Mode_http) return;	// NOTE: do not try to initialize menu if http_server; will fail in headless mode when it tries to load SWT images; DATE:2015-03-27
+			if (!Xoa_app_.Mode_is_gui()) return;	// NOTE: do not try to initialize menu if http_server; will fail in headless mode when it tries to load SWT images; DATE:2015-03-27
 			popup_mnu_mgr.Init_by_kit();
 			window_mnu_mgr.Init_by_kit();
 			Lang_changed(app.User().Lang());

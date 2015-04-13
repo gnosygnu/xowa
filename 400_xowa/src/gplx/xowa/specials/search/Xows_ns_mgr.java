@@ -17,11 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
 import gplx.core.primitives.*;
-public class Xosrh_ns_mgr {
-	private OrderedHash ns_hash = OrderedHash_.new_();
+public class Xows_ns_mgr {
+	private final OrderedHash ns_hash = OrderedHash_.new_(); private final Int_obj_ref tmp_ns_id = Int_obj_ref.neg1_(); private final Bry_bfr tmp_bfr = Bry_bfr.reset_(32);
 	private boolean ns_all, ns_main;
-	private Int_obj_ref tmp_ns_id = Int_obj_ref.neg1_();
-	private Bry_bfr tmp_bfr = Bry_bfr.reset_(32);
 	public void Clear() {
 		ns_hash.Clear();
 		ns_all = ns_main = false;
@@ -64,7 +62,7 @@ public class Xosrh_ns_mgr {
 		if (ns_hash.Count() == 0)
 			ns_main = true;
 	}
-	public byte[] Xto_hash_key() {
+	public byte[] To_hash_key() {
 		if		(ns_all) 
 			return Hash_key_all;
 		else if (ns_main)
@@ -72,7 +70,7 @@ public class Xosrh_ns_mgr {
 		else {
 			int ns_hash_len = ns_hash.Count();
 			for (int i = 0; i < ns_hash_len; i++) {
-				if (i != 0) tmp_bfr.Add_byte_pipe();
+				if (i != 0) tmp_bfr.Add_byte_semic();
 				Int_obj_ref ns_id_ref = (Int_obj_ref)ns_hash.FetchAt(i);
 				tmp_bfr.Add_int_variable(ns_id_ref.Val());
 			}

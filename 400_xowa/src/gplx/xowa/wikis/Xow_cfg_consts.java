@@ -25,8 +25,4 @@ public class Xow_cfg_consts {
 	, Grp__bldr_fsdb		= "xowa.bldr.fsdb"
 	, Grp_wiki_init			= "wiki.init"
 	;
-	public static final String
-	  Key__schema__col_page_html_text_id	= "col.page.page_html_text_id"
-	, Key__schema__tbl_css_core				= "tbl.css_core"
-	;
 }

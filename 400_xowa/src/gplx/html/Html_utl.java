@@ -18,42 +18,50 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.html; import gplx.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
 public class Html_utl {
-	public static byte[] Escape_for_atr_val_as_bry(Bry_bfr tmp_bfr, byte quote_byte, String s) {
+	private static final Url_encoder encoder_id = Url_encoder.new_html_id_(); private static final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+	public static String Encode_id_as_str(byte[] key) {return String_.new_utf8_(Encode_id_as_bry(key));}
+	public static byte[] Encode_id_as_bry(byte[] key) {
+		byte[] escaped = Escape_html_as_bry(tmp_bfr, key, Bool_.N, Bool_.N, Bool_.N, Bool_.Y, Bool_.Y);
+		return encoder_id.Encode(escaped);
+	}
+	public static byte[] Escape_for_atr_val_as_bry(Bry_bfr bfr, byte quote_byte, String s) {
 		if (s == null) return null;
-		return Escape_for_atr_val_as_bry(tmp_bfr, quote_byte, Bry_.new_utf8_(s));
+		return Escape_for_atr_val_as_bry(bfr, quote_byte, Bry_.new_utf8_(s));
 	}
-	public static byte[] Escape_for_atr_val_as_bry(Bry_bfr tmp_bfr, byte quote_byte, byte[] bry) {
+	public static byte[] Escape_for_atr_val_as_bry(Bry_bfr bfr, byte quote_byte, byte[] bry) {
 		if (bry == null) return null;
-		boolean dirty = Escape_for_atr_val_as_bry(tmp_bfr, quote_byte, bry, 0, bry.length);
-		return dirty ? tmp_bfr.Xto_bry_and_clear() : bry;
+		boolean dirty = Escape_for_atr_val_as_bry(bfr, quote_byte, bry, 0, bry.length);
+		return dirty ? bfr.Xto_bry_and_clear() : bry;
 	}
-	public static boolean Escape_for_atr_val_as_bry(Bry_bfr tmp_bfr, byte quote_byte, byte[] src, int bgn, int end) {
+	public static boolean Escape_for_atr_val_as_bry(Bry_bfr bfr, byte quote_byte, byte[] src, int bgn, int end) {
 		boolean dirty = false;
 		for (int i = bgn; i < end; i++) {
 			byte b = src[i];
 			if (b == quote_byte) {
 				if (!dirty) {
-					tmp_bfr.Add_mid(src, bgn, i);
+					bfr.Add_mid(src, bgn, i);
 					dirty = true;
 				}
 				switch (quote_byte) {
-					case Byte_ascii.Apos: 	tmp_bfr.Add(Html_entity_.Apos_num_bry); break;
-					case Byte_ascii.Quote: 	tmp_bfr.Add(Html_entity_.Quote_bry); break;
+					case Byte_ascii.Apos: 	bfr.Add(Html_entity_.Apos_num_bry); break;
+					case Byte_ascii.Quote: 	bfr.Add(Html_entity_.Quote_bry); break;
 					default: 				throw Err_.unhandled(quote_byte);
 				}
 			}
 			else {
 				if (dirty)
-					tmp_bfr.Add_byte(b);
+					bfr.Add_byte(b);
 			}
 		}
 		return dirty;
 	}
 	public static String Escape_html_as_str(String v)						{return String_.new_utf8_(Escape_html_as_bry(Bry_.new_utf8_(v)));}
 	public static byte[] Escape_html_as_bry(Bry_bfr tmp, byte[] bry)		{return Escape_html(false, tmp, bry, 0, bry.length, true, true, true, true, true);}
-	public static byte[] Escape_html_as_bry(byte[] bry)						{return Escape_html(false, Bry_bfr.new_(), bry, 0, bry.length, true, true, true, true, true);}
+	public static byte[] Escape_html_as_bry(byte[] bry)						{return Escape_html(false, tmp_bfr, bry, 0, bry.length, true, true, true, true, true);}
 	public static byte[] Escape_html_as_bry(byte[] bry, boolean lt, boolean gt, boolean amp, boolean quote, boolean apos)
-																			{return Escape_html(false, Bry_bfr.new_(), bry, 0, bry.length, lt, gt, amp, quote, apos);}
+																			{return Escape_html(false, tmp_bfr, bry, 0, bry.length, lt, gt, amp, quote, apos);}
+	public static byte[] Escape_html_as_bry(Bry_bfr bfr, byte[] bry, boolean lt, boolean gt, boolean amp, boolean quote, boolean apos)
+																			{return Escape_html(false, bfr, bry, 0, bry.length, lt, gt, amp, quote, apos);}
 	public static void Escape_html_to_bfr(Bry_bfr bfr, byte[] bry, int bgn, int end, boolean escape_lt, boolean escape_gt, boolean escape_amp, boolean escape_quote, boolean escape_apos) {
 		Escape_html(true, bfr, bry, bgn, end, escape_lt, escape_gt, escape_amp, escape_quote, escape_apos);
 	}

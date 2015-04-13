@@ -45,8 +45,10 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 		return conn;
 	}
 	@Override protected void Cmd_bgn_end() {
-		ns_file_is_case_match_all = Ns_file_is_case_match_all(wiki);						// NOTE: must call after wiki.init
-		wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_view_mode.Tid_read).Ctgs_enabled_(false);	// disable categories else progress messages written (also for PERF)
+		ns_file_is_case_match_all = Ns_file_is_case_match_all(wiki);							// NOTE: must call after wiki.init
+		wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_view_mode.Tid_read).Ctgs_enabled_(false);		// disable categories else progress messages written (also for PERF)
+		if (wiki.File_mgr__bin_mgr() != null)
+			wiki.File_mgr__bin_mgr().Wkrs__del(gplx.xowa.files.bins.Xof_bin_wkr_.Key_http_wmf);	// remove wmf wkr, else will try to download images during parsing
 		commons_wiki = app.Wiki_mgr().Get_by_key_or_make(Xow_domain_.Domain_bry_commons);
 		Xop_log_mgr log_mgr = ctx.App().Log_mgr();
 		log_mgr.Log_dir_(wiki.Fsys_mgr().Root_dir());	// put log in wiki dir, instead of user.temp
@@ -66,6 +68,9 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 		trg_fsdb_mgr.Init_by_wiki(wiki);
 		Fsm_mnt_mgr trg_mnt_mgr = trg_fsdb_mgr.Mnt_mgr();
 		Fsdb_db_mgr__v2 fsdb_core = Fsdb_db_mgr__v2_bldr.I.Make(wiki);
+		wiki.File_mgr().Init_file_mgr_by_load(wiki);										// must happen after fsdb.make
+		wiki.File_mgr__bin_mgr().Wkrs__del(gplx.xowa.files.bins.Xof_bin_wkr_.Key_http_wmf);	// must happen after init_file_mgr_by_load; remove wmf wkr, else will try to download images during parsing
+		wiki.File_mgr__orig_mgr().Wkrs_del(gplx.xowa.files.origs.Xof_orig_wkr_.Tid_wmf_api);
 		trg_mnt_mgr = new Fsm_mnt_mgr(); trg_mnt_mgr.Ctor_by_load(fsdb_core);
 		trg_mnt_mgr.Mnts__get_insert_idx_(Fsm_mnt_mgr.Mnt_idx_main);
 		Fsm_mnt_mgr.Patch(trg_mnt_mgr.Mnts__get_main().Cfg_mgr().Tbl()); // NOTE: see fsdb_make; DATE:2014-04-26

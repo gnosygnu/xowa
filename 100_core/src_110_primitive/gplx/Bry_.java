@@ -409,7 +409,9 @@ public class Bry_ {
 		}
 		return trimmed ? Bry_.Mid(v, 0, pos + 1) : v;
 	}
+	public static boolean Has(byte[] src, byte[] lkp) {return Bry_finder.Find_fwd(src, lkp) != Bry_finder.Not_found;}
 	public static boolean Has(byte[] src, byte lkp) {
+		if (src == null) return false;
 		int len = src.length;
 		for (int i = 0; i < len; i++)
 			if (src[i] == lkp) return true;

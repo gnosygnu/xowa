@@ -23,6 +23,11 @@ public class ListAdp_ {
 	public static ListAdp size_(int v) {return new ListAdp_obj(v);}
 	public static ListAdp many_(Object... ary) {return new ListAdp_obj().AddMany(ary);}
 	public static final ListAdp Null = new ListAdp_null();
+	public static void Add_list(ListAdp rv, ListAdp add) {
+		int len = add.Count();
+		for (int i = 0; i < len; ++i)
+			rv.Add(add.FetchAt(i));
+	}
 	public static void DelAt_last(ListAdp list) {list.DelAt(list.Count() - 1);}
 	public static Object Pop(ListAdp list) {
 		int lastIdx = list.Count() - 1;

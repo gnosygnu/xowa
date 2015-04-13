@@ -190,7 +190,7 @@ public class Xoh_file_wtr__basic {
 		return scratch_bfr.Xto_bry_and_clear();				
 	}	private byte[] msg_file_enlarge;
 	private Bry_fmtr_arg Arg_caption(Xop_ctx ctx, byte[] src, Xoh_wtr_ctx hctx_for_caption, Xop_lnki_tkn lnki) {
-		return lnki.Caption_exists() ? caption_fmtr.Set(ctx, hctx_for_caption, src, lnki.Caption_val_tkn(), Xoh_lnki_text_fmtr.Null_fmtr) : Bry_fmtr_arg_.Null;
+		return lnki.Caption_exists() ? caption_fmtr.Set(ctx, hctx_for_caption, src, lnki.Caption_val_tkn(), Xoh_lnki_text_fmtr.Null_fmtr) : Bry_fmtr_arg_.Noop;
 	}
 	public byte[] Arg_alt_text(Xop_ctx ctx, byte[] src, Xop_lnki_tkn lnki) {
 		if (!lnki.Alt_exists()) return Bry_.Empty;

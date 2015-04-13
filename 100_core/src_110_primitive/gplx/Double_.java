@@ -20,11 +20,14 @@ public class Double_ {
 	public static final String Cls_val_name = "double";
 	public static final Class<?> Cls_ref_type = Double.class; 
 	public static final double
-	  MinValue	= Double.MIN_VALUE			
-	, NaN		= Double.NaN				
-	, Inf_pos	= Double.POSITIVE_INFINITY	
+	  MinValue		= Double.MIN_VALUE			
+	, NaN			= Double.NaN				
+	, Inf_pos		= Double.POSITIVE_INFINITY	
 	;
-	public static final byte[] NaN_bry = Bry_.new_ascii_("NaN");
+	public static final byte[]
+	  NaN_bry		= Bry_.new_ascii_("NaN")
+	, Inf_pos_bry	= Bry_.new_ascii_("INF")
+	;
 	public static boolean IsNaN(double v) {return Double.isNaN(v);}	
 	public static double cast_(Object o)					{try {return (Double)o;} catch(Exception e) {throw Err_.type_mismatch_exc_(e, double.class, o);}}
 	public static double parse_(String raw)					{try {return Double.parseDouble(raw);} catch(Exception e) {throw Err_.parse_type_exc_(e, double.class, raw);}}

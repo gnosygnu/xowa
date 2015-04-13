@@ -29,10 +29,10 @@ public class Gfo_pattern_itm_ {
 			byte b = last ? Byte_ascii.Nil : raw[pos];
 			switch (b) {
 				case Byte_ascii.Nil:
-					if (itm != null) {itm.Compile(raw, itm_bgn, pos); itm = null;}
+					if (itm != null) {itm.Compile(raw, itm_bgn, pos); itm = null; itm_bgn = -1;}
 					break;
 				case Byte_ascii.Asterisk:
-					if (itm != null) {itm.Compile(raw, itm_bgn, pos); itm = null;}
+					if (itm != null) {itm.Compile(raw, itm_bgn, pos); itm = null; itm_bgn = -1;}
 					rv.Add(Gfo_pattern_itm_wild._);
 					break;
 				default:

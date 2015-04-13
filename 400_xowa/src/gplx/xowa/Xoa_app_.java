@@ -26,7 +26,7 @@ public class Xoa_app_ {
 		boot_mgr.Run(args);
 	}
 	public static final String Name = "xowa";
-	public static final String Version = "2.4.1.1";
+	public static final String Version = "2.4.2.1";
 	public static String Build_date = "2012-12-30 00:00:00";
 	public static String Op_sys;
 	public static String User_agent = "";
@@ -39,7 +39,8 @@ public class Xoa_app_ {
 		return rv;
 	}
 
-	public static byte Mode = Xoa_app_.Mode_console;
+	public static byte				Mode()				{return mode;}				public static void Mode_(byte v) {mode = v;} private static byte mode = Xoa_app_.Mode_console;
+	public static boolean				Mode_is_gui()		{return mode == Xoa_app_.Mode_gui;}
 	public static Gfo_usr_dlg		Usr_dlg()			{return usr_dlg;}			public static void Usr_dlg_(Gfo_usr_dlg v) {usr_dlg = v;} private static Gfo_usr_dlg usr_dlg;
 	public static Bry_bfr_mkr		Utl__bfr_mkr()		{return utl__bry_bfr_mkr;}	private static final Bry_bfr_mkr utl__bry_bfr_mkr = new Bry_bfr_mkr();
 	public static Url_encoder_mgr	Utl__encoder_mgr()	{return utl__encoder_mgr;}	private static final Url_encoder_mgr utl__encoder_mgr = new Url_encoder_mgr();
@@ -172,17 +173,19 @@ class Xoa_app_boot_mgr {
 
 			// launch
 			app.Launch(); chkpoint = "launch";
-			if		(String_.Eq(app_mode, "server"))
+			if		(String_.Eq(app_mode, "server")) {
+				Xoa_app_.Mode_(Xoa_app_.Mode_http);
 				app.Tcp_server().Run();
+			}
 			else if	(String_.Eq(app_mode, "http_server")) {
-				Xoa_app_.Mode = Xoa_app_.Mode_http;
+				Xoa_app_.Mode_(Xoa_app_.Mode_http);
 				app.Http_server().Run();
 			}
 			else {
 				if (cmd_text != null)
 					ConsoleAdp._.WriteLine_utf8(Object_.Xto_str_strict_or_empty(app.Gfs_mgr().Run_str(cmd_text)));
 				if (app_mode_gui) {
-					Xoa_app_.Mode = Xoa_app_.Mode_gui;
+					Xoa_app_.Mode_(Xoa_app_.Mode_gui);
 					app.Gui_mgr().Run(); chkpoint = "run";
 				}
 				else	// teardown app, else lua will keep process running

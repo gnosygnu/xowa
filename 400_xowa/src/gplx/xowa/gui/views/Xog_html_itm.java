@@ -63,7 +63,7 @@ public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 			html_box.Html_doc_body_focus();					// NOTE: only focus if read so up / down will scroll box; edit / html should focus edit-box; DATE:2014-06-05
 			page.Root().Data_htm_(html_src);
 		}
-	}
+	}		
 	private void Html_src_(Xoae_page page, byte[] html_bry) {
 		String html_str = String_.new_utf8_(html_bry);
 		if (owner_tab.Tab_mgr().Html_load_tid__url()) {
@@ -111,6 +111,10 @@ public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 	public void Html_elem_replace_html(String id, String html) {
 		GfoMsg m = GfoMsg_.new_cast_(Invk_html_elem_replace_html).Add("id", id).Add("html", html);
 		GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_elem_replace_html, m);
+	}
+	public void Html_elem_append_above(String id, String html) {
+		GfoMsg m = GfoMsg_.new_cast_(Invk_html_elem_append_above).Add("id", id).Add("html", html);
+		GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_elem_append_above, m);
 	}
 	public void Html_gallery_packed_exec() {
 		if (!String_.Eq(owner_tab.Tab_key(), owner_tab.Tab_mgr().Active_tab().Tab_key())) return;	// do not exec unless active;
@@ -174,6 +178,7 @@ public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 		else if	(ctx.Match(k, Invk_html_elem_atr_set_append))			html_box.Html_elem_atr_set_append(m.ReadStr("elem_id"), m.ReadStr("atr_key"), m.ReadStr("atr_val"));
 		else if	(ctx.Match(k, Invk_html_elem_delete))					html_box.Html_elem_delete(m.ReadStr("elem_id"));
 		else if	(ctx.Match(k, Invk_html_elem_replace_html))				html_box.Html_elem_replace_html(m.ReadStr("id"), m.ReadStr("html"));
+		else if	(ctx.Match(k, Invk_html_elem_append_above))				html_box.Html_elem_append_above(m.ReadStr("id"), m.ReadStr("html"));
 		else if	(ctx.Match(k, Invk_html_gallery_packed_exec))			html_box.Html_gallery_packed_exec();
 		else if	(ctx.Match(k, Invk_html_popups_bind_hover_to_doc))		html_box.Html_js_eval_script("xowa_popups_bind_doc();");
 		else if (ctx.Match(k, Invk_scroll_page_by_bmk))					Scroll_page_by_bmk();
@@ -186,7 +191,7 @@ public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 	private static final String 
 	  Invk_html_gallery_packed_exec = "html_gallery_packed_exec", Invk_html_popups_bind_hover_to_doc = "html_popups_bind_hover_to_doc"
 	, Invk_html_img_update = "html_img_update", Invk_html_elem_atr_set = "html_elem_atr_set"
-	, Invk_html_elem_atr_set_append = "html_elem_atr_set_append", Invk_html_elem_delete = "html_elem_delete", Invk_html_elem_replace_html = "html_elem_replace_html"
+	, Invk_html_elem_atr_set_append = "html_elem_atr_set_append", Invk_html_elem_delete = "html_elem_delete", Invk_html_elem_replace_html = "html_elem_replace_html", Invk_html_elem_append_above = "html_elem_append_above"
 	, Invk_scroll_page_by_bmk = "scroll_page_by_bmk", Invk_scroll_page_by_id = "scroll_page_by_id"
 	;
 	public static final String 

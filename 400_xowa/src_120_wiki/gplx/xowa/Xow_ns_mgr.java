@@ -224,6 +224,14 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 	private void Ords_sort_add(int ns_id) {
 		this.Add_new(ns_id, Bry_.XbyInt(ns_id), Xow_ns_case_.Id_1st, false);	// NOTE: name and case_match are mostly useless defaults; note that in theory this proc should not be called (all siteInfos should be well-formed) but just in case, create items now so that Get_by_ord() does not fail
 	}
+	public byte[] Bld_ttl_w_ns(Bry_bfr bfr, boolean text_form, boolean literalize, int ns_id, byte[] ttl) {
+		if (ns_id == Xow_ns_.Id_main) return ttl;
+		Xow_ns ns = Ids_get_or_null(ns_id); if (ns == null) {Xoa_app_.Usr_dlg().Warn_many("", "", "ns_mgr:uknown ns_id; ns_id=~{0} ttl=~{1}", ns_id, ttl); return ttl;}
+		if (literalize) bfr.Add_byte(Byte_ascii.Colon);	// NOTE: add : to literalize ns; EX: [[Category:A]] will get thrown into category list; [[:Category:A]] will print
+		bfr.Add(text_form ? ns.Name_txt_w_colon() : ns.Name_db_w_colon());
+		bfr.Add(ttl);
+		return bfr.Xto_bry_and_clear();
+	}
 	class Xow_ns_mgr_name_itm {
 		public Xow_ns_mgr_name_itm(byte[] name, Xow_ns ns) {this.name = name; this.name_len = name.length; this.ns = ns;}
 		public byte[] Name() {return name;} private byte[] name;

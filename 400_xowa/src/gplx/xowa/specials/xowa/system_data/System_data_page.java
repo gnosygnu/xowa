@@ -19,7 +19,7 @@ package gplx.xowa.specials.xowa.system_data; import gplx.*; import gplx.xowa.*; 
 import gplx.core.primitives.*;
 public class System_data_page implements Xows_page {
 	private Xoa_url_arg_hash arg_hash = new Xoa_url_arg_hash();
-	public void Special_gen(Xoa_url url, Xoae_page page, Xowe_wiki wiki, Xoa_ttl ttl) {
+	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
 		arg_hash.Load(url);
 		byte[] file_type = arg_hash.Get_val_bry_or(Arg_type, null); if (file_type == null) return;
 		Byte_obj_val type_val = (Byte_obj_val)type_hash.Get_by_bry(file_type); if (type_val == null) return; 

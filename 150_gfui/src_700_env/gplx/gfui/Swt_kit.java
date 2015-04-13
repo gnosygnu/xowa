@@ -92,6 +92,7 @@ public class Swt_kit implements Gfui_kit {
 		gui_wtr.Log_many("", "", "swt.kit.term:bgn");
 		cursor.dispose(); gui_wtr.Log_many("", "", "swt.kit.term:cursor");
 	}
+	public Shell Main_shell() {return shell;}
 	public void Kit_term() {
 		clipboard.Rls(); gui_wtr.Log_many("", "", "swt.kit.term:clipboard");
 		msg_wkr_stop.Rls(); gui_wtr.Log_many("", "", "swt.kit.term:usrMsgWkr");
@@ -197,6 +198,9 @@ public class Swt_kit implements Gfui_kit {
 			Gfo_usr_dlg_.I.Warn_many("", "", "error while calculating font height; err=~{0}", Err_.Message_gplx_brief(e));
 			return 8;
 		}
+	}
+	public boolean Window_is_disposed() {
+		return shell.isDisposed();
 	}
 	public void Set_mnu_popup(GfuiElem owner, Gfui_mnu_grp grp) {
 		Control control = Swt_control_.cast_or_fail(owner).Under_menu_control();

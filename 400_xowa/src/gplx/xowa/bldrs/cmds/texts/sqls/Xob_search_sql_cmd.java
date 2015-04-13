@@ -78,6 +78,7 @@ public class Xob_search_sql_cmd extends Xob_itm_basic_base implements Xob_cmd {	
 			? db_mgr.Db__core()
 			: db_mgr.Dbs__make_by_tid(Xowd_db_file_.Tid_search_core)
 			;
+		db.Tbl__search_word().Ddl__page_count_y_();
 		db.Tbl__search_word().Create_tbl();
 		db.Tbl__search_link().Create_tbl();
 		return db;

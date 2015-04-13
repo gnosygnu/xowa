@@ -46,6 +46,16 @@ public class Gfo_pattern_tst {
 		fxt.Test_Match_y(pattern, "abc", "xyzabc");
 		fxt.Test_Match_n(pattern, "abcd", "");
 	}
+	@Test  public void Match_mid() {
+		Gfo_pattern pattern = fxt.pattern_("a*c*e");
+		fxt.Test_Match_y(pattern, "ace", "abcde");
+		fxt.Test_Match_n(pattern, "abc", "");
+	}
+	@Test  public void Bug_ctx() {	// PURPOSE.fix: cb was true b/c ctx was not reset correctly
+		Gfo_pattern pattern = fxt.pattern_("b*");
+		fxt.Test_Match_y(pattern, "bc");
+		fxt.Test_Match_n(pattern, "cb");
+	}
 }
 class Gfo_pattern_itm_fxt {
 	public void Clear() {}

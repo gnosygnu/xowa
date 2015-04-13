@@ -19,7 +19,7 @@ package gplx.xowa.apis.xowa.startups.tabs; import gplx.*; import gplx.xowa.*; im
 public class Xoapi_startup_tabs implements GfoInvkAble {
 	public String Custom() {return custom;} private String custom;
 	public boolean Custom_is_expr() {return custom_is_expr;} private boolean custom_is_expr;
-	public String Previous() {return previous;} public Xoapi_startup_tabs Previous_(String v) {previous = v; return this;} private String previous;
+	public String Previous() {return previous;} private String previous;
 	public String Manual() {return manual;} public void Manual_(String v) {manual = v;} private String manual;
 	public byte Type() {return type;} private byte type = Xoapi_startup_tabs_tid_.Tid_previous;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

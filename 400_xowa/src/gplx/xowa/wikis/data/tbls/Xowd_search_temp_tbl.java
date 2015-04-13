@@ -73,9 +73,10 @@ public class Xowd_search_temp_tbl {
 	,	";"
 	);
 	private static final String Sql_create_word_v2 = String_.Concat_lines_nl
-	(	"INSERT INTO search_word (word_id, word_text)"
+	(	"INSERT INTO search_word (word_id, word_text, word_page_count)"
 	,	"SELECT  word_id"
 	,	",       word_text"
+	,	",       Count(DISTINCT page_id)"
 	,	"FROM    search_temp"
 	,	"GROUP BY "
 	,	"        word_text"

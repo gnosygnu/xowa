@@ -79,7 +79,7 @@ public class Xoa_css_extractor {
 		if (	core_db_mgr == null
 			||	core_db_mgr.Props() == null
 			||	core_db_mgr.Props().Schema_is_1()
-			||	!core_db_mgr.Tbl__cfg().Select_yn_or(Xow_cfg_consts.Grp__wiki_schema, Xow_cfg_consts.Key__schema__tbl_css_core, Bool_.N)
+			||	!core_db_mgr.Tbl__cfg().Select_yn_or(Xow_cfg_consts.Grp__wiki_schema, Xowd_db_file_schema_props.Key__tbl_css_core, Bool_.N)
 			) return false;
 		Xowd_db_file core_db = core_db_mgr.Db__core();
 		gplx.xowa.html.css.Xowd_css_core_mgr.Get(core_db.Tbl__css_core(), core_db.Tbl__css_file(), wiki_html_dir);

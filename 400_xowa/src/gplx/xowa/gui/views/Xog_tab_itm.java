@@ -55,7 +55,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 		Xoae_page temp_page = page;							// switch .page, since its underlying html_box has changed and .page must reflect html_box
 		this.page = comp.page;
 		comp.page = temp_page;
-		page.Tab_(this); comp.Page().Tab_(comp);
+		page.Tab_data().Tab_(this); comp.Page().Tab_data().Tab_(comp);
 
 		byte temp_view_mode = view_mode;					// switch .view_mode to match .page
 		this.view_mode = comp.view_mode;
@@ -73,7 +73,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 	public boolean					Tab_is_loading() {return tab_is_loading;} private boolean tab_is_loading;
 	public Xog_html_itm			Html_itm() {return html_itm;} private Xog_html_itm html_itm;
 	public Gfui_html			Html_box() {return html_itm.Html_box();}
-	public Xoae_page				Page() {return page;}
+	public Xoae_page			Page() {return page;}
 	public void Page_(Xoae_page page) {
 		this.page = page;
 		this.wiki = page.Wikie();	// NOTE: must update wiki else back doesn't work; DATE:2015-03-05
@@ -100,18 +100,18 @@ public class Xog_tab_itm implements GfoInvkAble {
 	public void Show_url_bgn(Xoa_url url) {
 		this.tab_is_loading = true;
 		Xoae_app app = win.App(); Gfo_usr_dlg usr_dlg = app.Usr_dlg();
-		Xoae_page page = Xoae_page.Empty; 
-		if (	url.Anchor_str() != null				// url has anchor
-			&&	url.Eq_page(page.Url())					// url has same page_name as existing page
-			&&	url.Args().length == 0) {				// url has no args; needed for Category:A?from=b#mw-pages
+//			Xoae_page page = Xoae_page.Empty; 
+		if (	url.Anchor_str() != null						// url has anchor
+			&&	url.Eq_page(page.Url())							// url has same page_name as existing page
+			&&	url.Args().length == 0) {						// url has no args; needed for Category:A?from=b#mw-pages
 			html_itm.Scroll_page_by_id_gui(url.Anchor_str());	// skip page_load and jump to anchor
 			return;
 		}
-		if (url.Xowa_vnt() != null) {
+		if (url.Xowa_vnt() != null)
 			wiki.Lang().Vnt_mgr().Cur_vnt_(url.Xowa_vnt());
-		}
 		if (win.Page__async__working(url)) return;
-		app.Gui_mgr().Search_suggest_mgr().Cancel();	// cancel pending search_suggest calls
+		app.Gui_mgr().Search_suggest_mgr().Cancel();			// cancel pending search_suggest calls
+		if (page != null) page.Tab_data().Close_mgr().When_close(this);			// cancel any current search cmds
 		app.Log_wtr().Queue_enabled_(true);
 		usr_dlg.Clear();
 		this.wiki = app.Wiki_mgr().Get_by_key_or_null(url.Wiki_bry());	// NOTE: must update wiki
@@ -128,6 +128,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 		Xoa_url url = page.Url(); Xoa_ttl ttl = page.Ttl();
 		Xoae_app app = wiki.Appe(); Gfo_usr_dlg usr_dlg = app.Usr_dlg();
 		try {
+			if (page.Tab_data().Cancel_show()) return;	// Special:Search canceled show; NOTE: must be inside try b/c finally handles thread
 			wiki.Ctx().Cur_page_(page);
 			if (page.Missing()) {
 				if (wiki.Db_mgr().Save_mgr().Create_enabled()) {
@@ -241,7 +242,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 			catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.cmds: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_brief(e));}
 		}
 		try {
-			if (page.Tab() != null) {	// needed b/c Preview has page.Tab of null which causes null_ref error in redlinks
+			if (page.Tab_data().Tab() != null) {	// needed b/c Preview has page.Tab of null which causes null_ref error in redlinks
 				Xog_redlink_mgr redlinks_wkr = new Xog_redlink_mgr(win_itm, page, app.User().Cfg_mgr().Log_mgr().Log_redlinks());
 				ThreadAdp_.invk_(redlinks_wkr, gplx.xowa.parsers.lnkis.redlinks.Xog_redlink_mgr.Invk_run).Start();
 				usr_dlg.Prog_none("", "imgs.done", "");
@@ -282,8 +283,10 @@ class Load_page_wkr implements Gfo_thread_wkr {
 			int html_db_id = page.Revision_data().Html_db_id();
 			if (wiki.Html_mgr__hdump_enabled())
 				hdump_enabled = true;
-			if (wiki.Html_mgr__hdump_enabled() && html_db_id != -1)
-				wiki.Html_mgr__hdump_rdr().Get_by_ttl(page);
+			if (wiki.Html_mgr__hdump_enabled() && html_db_id != -1) {
+				wiki.ParsePage(page, false);
+//					wiki.Html_mgr__hdump_rdr().Get_by_ttl(page);
+			}
 			else
 				wiki.ParsePage(page, false);
 			GfoInvkAble_.InvkCmd_val(tab.Cmd_sync(), Xog_tab_itm.Invk_show_url_loaded_swt, this);

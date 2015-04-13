@@ -27,9 +27,12 @@ public class DecimalAdp implements CompareAble {
 	protected DecimalAdp(int v) {this.under = new BigDecimal(v);}
 	public String Xto_str() {
 		BigDecimal tmp = under;
-		if (tmp.scale() > 14) tmp = tmp.setScale(14, RoundingMode.DOWN);	// NOTE: setting to 14 to match PHP/C# values more closely; RoundingMode.Down for same reason; see E, Pi tests 
-		return tmp	.stripTrailingZeros()									// NOTE: stripTrailingZeros for exp tests; EX: 120.0 -> 120; 0.01200000000000 -> .012 
-					.toPlainString();										// NOTE: toPlainString b/c stripTrailingZeros now converts 120 to 1.2E+2 (and any other value that is a multiple of 10)
+		int tmp_scale = tmp.scale();
+		if 	(tmp_scale <= -14) return tmp.toString();	// NOTE: if large number, call .toString which will return exponential notaion (1E##) instead of literal (1000....); 14 matches MW code; DATE:2015-04-10
+		if 	(tmp_scale > 14)
+			tmp = tmp.setScale(14, RoundingMode.DOWN);	// NOTE: if small number, round down to remove excessive zeroes; 14 matches PHP/C# values more closely; RoundingMode.Down for same reason; see E, Pi tests
+		return tmp	.stripTrailingZeros()				// NOTE: stripTrailingZeros for exp tests; EX: 120.0 -> 120; 0.01200000000000 -> .012 
+					.toPlainString();					// NOTE: toPlainString b/c stripTrailingZeros now converts 120 to 1.2E+2 (and any other value that is a multiple of 10)
 	}
 	public String Xto_str(String fmt) {return new DecimalFormat(fmt).format(under);}
 	@Override public String toString() {return under.toString();}

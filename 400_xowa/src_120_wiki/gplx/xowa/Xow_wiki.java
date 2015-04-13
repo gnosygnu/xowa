@@ -17,10 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.core.primitives.*;	
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.ttls.*;
-import gplx.xowa.wikis.data.*;
+import gplx.xowa.wikis.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.wikis.data.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.fsdb.meta.*;
-import gplx.xowa.html.hzips.*; import gplx.xowa.html.hdumps.*;
+import gplx.xowa.html.wtrs.*; import gplx.xowa.html.hzips.*; import gplx.xowa.html.hdumps.*;
 public interface Xow_wiki extends Xow_ttl_parser {
 	byte[]						Domain_bry();			// EX: en.wikipedia.org
 	String						Domain_str();
@@ -39,4 +38,5 @@ public interface Xow_wiki extends Xow_ttl_parser {
 	boolean						Html_mgr__hdump_enabled();
 	Xow_hzip_mgr				Html_mgr__hzip_mgr();
 	Xohd_hdump_rdr				Html_mgr__hdump_rdr();
+	Xoh_lnki_wtr_utl			Html_mgr__lnki_wtr_utl();
 }

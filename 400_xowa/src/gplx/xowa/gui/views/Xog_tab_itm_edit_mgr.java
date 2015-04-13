@@ -49,10 +49,10 @@ public class Xog_tab_itm_edit_mgr {
 
 		byte[] new_text = Get_new_text(tab);
 		Xoae_page new_page = Xoae_page.new_(wiki, page.Ttl());
-		new_page.Revision_data().Id_(page.Revision_data().Id());				// NOTE: page_id needed for sqlite (was not needed for xdat)
+		new_page.Revision_data().Id_(page.Revision_data().Id());	// NOTE: page_id needed for sqlite (was not needed for xdat)
 		new_page.Data_raw_(new_text);
 		wiki.ParsePage_root(new_page, true);						// refresh html
-		tab.Page_(new_page); new_page.Tab_(tab);					// replace old page with new_page; DATE:2014-10-09
+		tab.Page_(new_page); new_page.Tab_data().Tab_(tab);			// replace old page with new_page; DATE:2014-10-09
 
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
 		Xoh_page_wtr_wkr wkr = wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_view_mode.Tid_read);

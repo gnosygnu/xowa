@@ -26,6 +26,11 @@ class Xow_hzip_mgr_fxt {
 			hzip_mgr = new Xow_hzip_mgr(Gfo_usr_dlg_.I, wiki);
 		}
 	}
+	public void	Init_xwiki(String alias, String domain) {
+		wiki.Appe().Wiki_mgr().Get_by_key_or_make(Bry_.new_utf8_(domain));
+		wiki.Xwiki_mgr().Add_full(alias, domain);
+		wiki.Appe().User().Wiki().Xwiki_mgr().Add_full(domain, domain);
+	}
 	public void Test_save(byte[][] expd_brys, String html) {Test_save(html, expd_brys);}
 	public void Test_save(String html, byte[]... expd_brys) {
 		byte[] expd = Bry_.Add(expd_brys);

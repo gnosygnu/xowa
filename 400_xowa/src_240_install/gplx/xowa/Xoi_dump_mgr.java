@@ -30,7 +30,7 @@ public class Xoi_dump_mgr implements GfoInvkAble {
 	public boolean Css_wiki_update() {return css_wiki_update;} private boolean css_wiki_update = true;
 	public boolean Css_commons_download() {return css_commons_download;} private boolean css_commons_download = true; // changed from false to true; DATE:2014-10-19
 	public boolean Delete_xml_file() {return delete_xml_file;} private boolean delete_xml_file = true;
-	public byte Search_version() {return search_version;} private byte search_version = gplx.xowa.specials.search.Xosrh_core.Version_2;
+	public byte Search_version() {return search_version;} private byte search_version = gplx.xowa.specials.search.Xows_page__search.Version_2;
 	public boolean Import_bz2_by_stdout() {return import_bz2_by_stdout;} private boolean import_bz2_by_stdout = true;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_server_urls))						return String_.Concat_with_str(",\n", server_urls);

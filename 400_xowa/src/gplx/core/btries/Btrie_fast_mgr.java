@@ -44,6 +44,7 @@ public class Btrie_fast_mgr {
 	}
 	public Btrie_fast_mgr Add_bry_bval(byte   key, byte val) {return Add(new byte[] {key}, Byte_obj_val.new_(val));}
 	public Btrie_fast_mgr Add_bry_bval(byte[] key, byte val) {return Add(key, Byte_obj_val.new_(val));}
+	public Btrie_fast_mgr Add_str_byte(String key, byte val) {return Add(Bry_.new_utf8_(key), Byte_obj_val.new_(val));}
 	public Btrie_fast_mgr Add(byte key, Object val) {return Add(new byte[] {key}, val);}
 	public Btrie_fast_mgr Add(String key, Object val) {return Add(Bry_.new_utf8_(key), val);}
 	public Btrie_fast_mgr Add(byte[] key, Object val) {

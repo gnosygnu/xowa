@@ -22,16 +22,16 @@ public class Wdata_itemByTitle_page implements Xows_page {
 	private static final byte[] Arg_site = Bry_.new_ascii_("site"), Arg_page = Bry_.new_ascii_("page");
 	public Bry_fmtr Html_fmtr() {return html_fmtr;}
 	private Wdata_itemByTitle_cfg cfg;
-	public void Special_gen(Xoa_url calling_url, Xoae_page page, Xowe_wiki wiki, Xoa_ttl ttl) {
+	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
 		if (cfg == null) cfg = (Wdata_itemByTitle_cfg)wiki.Appe().Special_mgr().Get_or_null(Wdata_itemByTitle_cfg.Key);
 		// Special:ItemByTitle/enwiki/Earth -> www.wikidata.org/wiki/Q2
 		Gfo_usr_dlg usr_dlg = wiki.Appe().Usr_dlg();
 		byte[] site_bry = cfg.Site_default();
 		byte[] page_bry = Bry_.Empty;
 		byte[] raw_bry = ttl.Full_txt_wo_qarg(); 					// EX: enwiki/Earth
-		int args_len = calling_url.Args().length;
+		int args_len = url.Args().length;
 		if (args_len > 0) {
-			arg_hash.Load(calling_url);
+			arg_hash.Load(url);
 			site_bry = arg_hash.Get_val_bry_or(Arg_site, Bry_.Empty);
 			page_bry = arg_hash.Get_val_bry_or(Arg_page, Bry_.Empty);
 		}

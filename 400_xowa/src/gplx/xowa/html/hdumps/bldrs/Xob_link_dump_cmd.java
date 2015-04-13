@@ -45,7 +45,7 @@ public class Xob_link_dump_cmd {
 				, ";"
 				))				
 				.Exec();
-			conn.Exec_sql("UPDATE rl_dump SET trg_ns = -1 AND trg_ttl = '' WHERE trg_page_id != -1;");
+			conn.Exec_sql("UPDATE link_dump SET trg_ns = -1 AND trg_ttl = '' WHERE trg_page_id != -1;");
 			tbl.Create_idx_2();
 			conn.Env_vacuum();
 		} catch (Exception e) {

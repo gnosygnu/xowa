@@ -41,6 +41,9 @@ public class Byte_ascii {
 		, Ltr_x			= 120, Ltr_y			= 121, Ltr_z			= 122, Curly_bgn		= 123, Pipe				= 124
 		, Curly_end		= 125, Tilde			= 126
 		;
+	public static final byte
+	  Angle_bgn = Lt, Angle_end = Gt
+	;
 	public static final byte Max_7_bit = (byte)127, Ascii_min = 0, Ascii_max = 127;
 	public static boolean Is_sym(byte b) {
 		switch (b) {

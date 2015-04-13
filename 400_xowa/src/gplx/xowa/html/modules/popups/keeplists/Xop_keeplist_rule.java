@@ -18,12 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html.modules.popups.keeplists; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.modules.*; import gplx.xowa.html.modules.popups.*;
 import gplx.core.regxs.*;
 public class Xop_keeplist_rule {
+	private Gfo_pattern[] excludes; private int excludes_len;
 	public Xop_keeplist_rule(Gfo_pattern[] includes, Gfo_pattern[] excludes) {
 		this.includes = includes; this.includes_len = includes.length;
 		this.excludes = excludes; this.excludes_len = excludes.length;
 	}
 	public Gfo_pattern[] Includes() {return includes;} private Gfo_pattern[] includes; private int includes_len;
-	private Gfo_pattern[] excludes; private int excludes_len;
 	public boolean Match(byte[] ttl) {
 		boolean match_found = false;
 		for (int i = 0; i < includes_len; ++i) {

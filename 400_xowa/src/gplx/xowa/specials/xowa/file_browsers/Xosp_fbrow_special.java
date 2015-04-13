@@ -19,7 +19,7 @@ package gplx.xowa.specials.xowa.file_browsers; import gplx.*; import gplx.xowa.*
 import gplx.xowa.specials.*; import gplx.ios.*;
 public class Xosp_fbrow_special implements Xows_page {
 	private static final Xoa_url_arg_mgr url_args = new Xoa_url_arg_mgr(null);
-	public void Special_gen(Xoa_url url, Xoae_page page, Xowe_wiki wiki, Xoa_ttl ttl) {
+	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
 		Xosp_fbrow_rslt rslt = Gen(url.Args(), GfoInvkAble_.Null);
 		page.Html_data().Html_restricted_n_();
 		page.Html_data().Custom_head_end_concat(rslt.Html_head());

@@ -34,7 +34,7 @@ public class Xob_css_cmd implements Xob_cmd {
 		core_db.Tbl__css_core().Create_tbl();
 		core_db.Tbl__css_file().Create_tbl();
 		gplx.xowa.html.css.Xowd_css_core_mgr.Set(core_db.Tbl__css_core(), core_db.Tbl__css_file(), css_dir);
-		core_db.Tbl__cfg().Insert_yn(Xow_cfg_consts.Grp__wiki_schema, Xow_cfg_consts.Key__schema__tbl_css_core, Bool_.Y);
+		core_db.Tbl__cfg().Insert_yn(Xow_cfg_consts.Grp__wiki_schema, Xowd_db_file_schema_props.Key__tbl_css_core, Bool_.Y);
 		core_db.Conn().Txn_end();
 		usr_dlg.Plog_many("", "", Cmd_key() + ":end;");
 	}

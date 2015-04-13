@@ -37,7 +37,7 @@ public class Xou_history_html implements Bry_fmtr_arg, Xows_page {
 		,	"    <td>~{itm_last}</td>"
 		,	"  </tr>"
 		), "itm_wiki", "itm_page", "itm_count", "itm_last");
-	public void Special_gen(Xoa_url calling_url, Xoae_page page, Xowe_wiki wiki, Xoa_ttl ttl) {
+	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
 		this.app = wiki.Appe(); this.mgr = app.User().History_mgr();
 		mgr.Sort();
 		Bry_bfr bfr = app.Utl__bfr_mkr().Get_m001(); 

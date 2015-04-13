@@ -30,8 +30,8 @@ public class Xob_wdata_qid_sql extends Xob_wdata_qid_base {
 		tbl.Create_tbl();
 		tbl.Insert_bgn();
 	}
-	@Override public void Qid_add(byte[] wiki_key, Xow_ns ns, byte[] ttl, byte[] qid) {
-		tbl.Insert_cmd_by_batch(wiki_key, ns.Id(), ttl, qid);
+	@Override public void Qid_add(byte[] wiki_key, int ns_id, byte[] ttl, byte[] qid) {
+		tbl.Insert_cmd_by_batch(wiki_key, ns_id, ttl, qid);
 	}
 	@Override public void Qid_end() {
 		tbl.Insert_end();

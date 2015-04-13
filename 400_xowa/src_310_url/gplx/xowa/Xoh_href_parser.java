@@ -72,10 +72,10 @@ public class Xoh_href_parser {
 			}
 		}
 	}
-	public byte[] Build_to_bry(Xowe_wiki wiki, Xoa_ttl ttl)				{Build_to_bfr(tmp_bfr, wiki, ttl, Bool_.N); return tmp_bfr.Xto_bry_and_clear();}
-	public void Build_to_bfr(Bry_bfr bfr, Xowe_wiki wiki, byte[] raw)	{Build_to_bfr(bfr, wiki, Xoa_ttl.parse_(wiki, raw), Bool_.N);}
-	public void Build_to_bfr(Bry_bfr bfr, Xowe_wiki wiki, Xoa_ttl ttl)	{Build_to_bfr(bfr, wiki, ttl, Bool_.N);}
-	public void Build_to_bfr(Bry_bfr bfr, Xowe_wiki wiki, Xoa_ttl ttl, boolean force_site) {
+	public byte[] Build_to_bry(Xow_wiki wiki, Xoa_ttl ttl)				{Build_to_bfr(tmp_bfr, wiki, ttl, Bool_.N); return tmp_bfr.Xto_bry_and_clear();}
+	public void Build_to_bfr(Bry_bfr bfr, Xow_wiki wiki, byte[] raw)	{Build_to_bfr(bfr, wiki, wiki.Ttl_parse(raw), Bool_.N);}
+	public void Build_to_bfr(Bry_bfr bfr, Xow_wiki wiki, Xoa_ttl ttl)	{Build_to_bfr(bfr, wiki, ttl, Bool_.N);}
+	public void Build_to_bfr(Bry_bfr bfr, Xow_wiki wiki, Xoa_ttl ttl, boolean force_site) {
 		byte[] page = ttl.Full_txt_raw();
 		Xow_xwiki_itm xwiki = ttl.Wik_itm();
 		if (xwiki == null)																		// not an xwiki; EX: [[wikt:Word]]
@@ -97,7 +97,7 @@ public class Xoh_href_parser {
 			else {}																				// anchor: noop
 		}
 		else {																					// xwiki
-			if (wiki.Appe().Xwiki_missing(xwiki.Domain_bry())) {									// xwiki is not offline; use http:
+			if (wiki.App().Xwiki_mgr__missing(xwiki.Domain_bry())) {								// xwiki is not offline; use http:
 				bfr.Add(Href_http_bry);															// add "http://";	EX: http://
 				bfr.Add(xwiki.Domain_bry());													// add xwiki;		EX: en_dict	 
 				bfr.Add(Href_wiki_bry);															// add "/wiki/";	EX: /wiki/
@@ -114,9 +114,9 @@ public class Xoh_href_parser {
 		int anch_bgn = Bry_finder.Find_fwd(ttl_full, Byte_ascii.Hash);	// NOTE: cannot use Anch_bgn b/c Anch_bgn has bug with whitespace
 		if (anch_bgn == Bry_.NotFound)	// no anchor; just add page
 			encoder.Encode(bfr_encoder, ttl_full, page_bgn, ttl_full.length);
-		else {								// anchor exists; check if anchor is preceded by ws; EX: [[A #b]] -> "/wiki/A#b"
+		else {							// anchor exists; check if anchor is preceded by ws; EX: [[A #b]] -> "/wiki/A#b"
 			int page_end = Bry_finder.Find_bwd_last_ws(ttl_full, anch_bgn);		// first 1st ws before #; handles multiple ws
-			page_end = page_end == Bry_.NotFound ? anch_bgn : page_end;		// if ws not found, use # pos; else use 1st ws pos
+			page_end = page_end == Bry_.NotFound ? anch_bgn : page_end;			// if ws not found, use # pos; else use 1st ws pos
 			encoder.Encode(bfr_encoder, ttl_full, page_bgn, page_end);			// add page
 			encoder.Encode(bfr_encoder, ttl_full, anch_bgn, ttl_full.length);	// add anchor
 		}
@@ -130,9 +130,9 @@ public class Xoh_href_parser {
 	private static final byte[][] Seg__ary = new byte[][] {Seg_null_bry, Seg_wiki_bry, Seg_site_bry, Seg_xcmd_bry};
 	private static void Parse_wiki(Xoh_href rv, Url_encoder encoder, Xowe_wiki wiki, byte[] raw, int bgn, int len) {
 		byte[] ttl_raw = Bry_.Mid(raw, bgn, len);
-		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_raw);
+		Xoa_ttl ttl = wiki.Ttl_parse(ttl_raw);
 		if (ttl == null) {
-			wiki.Appe().Usr_dlg().Warn_many("xowa.href.parser", "invalid_wiki", "wiki href does not have valid title: ~{0}", String_.new_utf8_(raw, bgn, len));
+			Xoa_app_.Usr_dlg().Warn_many("xowa.href.parser", "invalid_wiki", "wiki href does not have valid title: ~{0}", String_.new_utf8_(raw, bgn, len));
 			return;
 		}
 		if (ttl.Wik_itm() == null) {										// standard href; EX: "/wiki/A"
@@ -174,12 +174,12 @@ public class Xoh_href_parser {
 //				rv.Qarg_(qarg_bry);
 //				page_bry = Bry_.Mid(page_bry, 0, qarg_pos);
 //			}
-		Parse_ttl_and_resolve_xwiki(wiki.Appe().Usr_dlg(), rv, wiki, encoder, page_bry, raw, bgn, len);
+		Parse_ttl_and_resolve_xwiki(rv, wiki, encoder, page_bry, raw, bgn, len);
 	}
-	private static void Parse_ttl_and_resolve_xwiki(Gfo_usr_dlg usr_dlg, Xoh_href rv, Xowe_wiki wiki, Url_encoder encoder, byte[] page_bry, byte[] raw, int bgn, int len) {
-		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, page_bry);
+	private static void Parse_ttl_and_resolve_xwiki(Xoh_href rv, Xowe_wiki wiki, Url_encoder encoder, byte[] page_bry, byte[] raw, int bgn, int len) {
+		Xoa_ttl ttl = wiki.Ttl_parse(page_bry);
 		if (ttl == null) {
-			usr_dlg.Warn_many("xowa.href.parser", "invalid_wiki", "wiki href does not have valid title: ~{0}", String_.new_utf8_(raw, bgn, len));
+			Xoa_app_.Usr_dlg().Warn_many("xowa.href.parser", "invalid_wiki", "wiki href does not have valid title: ~{0}", String_.new_utf8_(raw, bgn, len));
 			rv.Page_(Bry_.Empty);
 			return;
 		}
@@ -198,7 +198,7 @@ public class Xoh_href_parser {
 	}
 	private static void Parse_xcmd(Xoh_href rv, Url_encoder encoder, Xowe_wiki wiki, byte[] raw, int bgn, int len) {	// /xcmd/; note encoder is passed, but don't decode for now; most invk commands have an _ which will get changed to a " ";
 		rv.Tid_(Xoh_href.Tid_xcmd);
-		rv.Wiki_(wiki.Domain_bry());										// wiki is always the current wiki
+		rv.Wiki_(wiki.Domain_bry());									// wiki is always the current wiki
 		rv.Page_(Bry_.Mid(raw, bgn, len));								// page is everything after "/xcmd/"; individual cmds will do further parsing; note that it should be decoded; EX: %20 -> " "; also note that anchor (#) or query params (?) are not parsed; the entire String will be reparsed later
 	}
 	private static final byte Protocol_xowa_tid = Xoo_protocol_itm.Tid_xowa;

@@ -21,8 +21,8 @@ public class Move_page implements Xows_page {
 	private Move_trg_ns_list_fmtr ns_list_fmtr = new Move_trg_ns_list_fmtr();
 	private Move_url_args args = new Move_url_args();
 	private Xoa_ttl src_ttl;
-	public void Special_gen(Xoa_url calling_url, Xoae_page page, Xowe_wiki wiki, Xoa_ttl ttl) {
-		args.Parse(calling_url);
+	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
+		args.Parse(url);
 		byte[] src_ttl_bry = args.Src_ttl();
 		src_ttl = Xoa_ttl.parse_(wiki, src_ttl_bry);
 		if (args.Submitted()) {

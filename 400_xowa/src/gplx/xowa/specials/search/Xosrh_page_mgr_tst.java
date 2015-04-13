@@ -82,5 +82,5 @@ class Xosrh_page_mgr_fxt {
 }
 class Xosrh_page_mgr_searcher_mok implements Xosrh_page_mgr_searcher {
 	public Xosrh_page_mgr_searcher_mok(ListAdp list) {this.list = list;} ListAdp list;
-	public ListAdp Parse_search_and_load_ids(Cancelable cancelable, Bry_bfr bfr, Xosrh_ns_mgr ns_mgr, byte[] search) {return list;}
+	public ListAdp Parse_search_and_load_ids(Cancelable cancelable, Bry_bfr bfr, Xows_ns_mgr ns_mgr, byte[] search) {return list;}
 }

@@ -45,6 +45,7 @@ public class Gxw_html_server implements Gxw_html {
 	public boolean			Html_elem_atr_set_append(String id, String atr_key, String val) {return Exec_as_bool(cfg.Elem_atr_set_append(id, atr_key, val));}
 	public boolean			Html_elem_delete(String id) {return Exec_as_bool(cfg.Elem_delete(id));}
 	public boolean			Html_elem_replace_html(String id, String html) {return Exec_as_bool(cfg.Elem_replace_html(id, html));}
+	public boolean			Html_elem_append_above(String id, String html) {return Exec_as_bool(cfg.Elem_append_above(id, html));}
 	public boolean			Html_gallery_packed_exec() {return Exec_as_bool(cfg.Gallery_packed_exec());}
 	public boolean			Html_elem_focus(String id) {return Exec_as_bool(cfg.Elem_focus(id));}
 	public boolean			Html_elem_scroll_into_view(String id) {return Exec_as_bool(cfg.Elem_scroll_into_view(id));}

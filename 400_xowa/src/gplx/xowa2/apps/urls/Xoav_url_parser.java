@@ -17,10 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa2.apps.urls; import gplx.*; import gplx.xowa2.*; import gplx.xowa2.apps.*;
 public class Xoav_url_parser {
-	private static final byte[] Bry_site = Bry_.new_ascii_("/site/"), Bry_wiki = Bry_.new_ascii_("/wiki/");
+	private static final byte[] Bry_site = Bry_.new_ascii_("/site/"), Bry_wiki = Bry_.new_ascii_("/wiki/"), Bry_http = Bry_.new_ascii_("http:");
 	public void Parse_xo_href(Xoav_url rv, byte[] src, byte[] cur_wiki_bry) {
 		rv.Clear();
-		int pos = 5;	// remove "http:"
+		int pos = Bry_.HasAtBgn(src, Bry_http) ? Bry_http.length  : 0;	// DRD: DRD:2.2 adds "http:" to all links
 		int src_len = src.length;
 		if (Bry_.HasAtBgn(src, Bry_site, pos, src_len))
 			pos = Parse_wiki(rv, src, src_len, pos);

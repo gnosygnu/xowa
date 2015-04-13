@@ -21,7 +21,7 @@ public class Xop_statistics_page implements Xows_page {
 	private Xop_statistics_stats_page_grp stats_page = new Xop_statistics_stats_page_grp();
 //		private Xop_statistics_stats_wiki_grp stats_wiki = new Xop_statistics_stats_wiki_grp();
 	private Xop_statistics_stats_ns_grp stats_ns = new Xop_statistics_stats_ns_grp();
-	public void Special_gen(Xoa_url calling_url, Xoae_page page, Xowe_wiki wiki, Xoa_ttl ttl) {
+	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
 		byte[] html = Build_html(wiki);
 		page.Html_data().Html_restricted_n_();	// [[Special:]] pages allow all HTML
 		page.Data_raw_(html);

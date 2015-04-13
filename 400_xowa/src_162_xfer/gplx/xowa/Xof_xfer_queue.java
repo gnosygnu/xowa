@@ -63,7 +63,7 @@ public class Xof_xfer_queue {
 	}
 	private void Exec_v2(byte exec_tid, Gfo_usr_dlg wtr, Xowe_wiki wiki, Xoae_page page) {
 		wiki.File_mgr().Init_file_mgr_by_load(wiki);
-		wiki.File_mgr().Fsdb_mgr().Fsdb_search_by_list(exec_tid, Xfer_itms_to_fsdb_itms(wiki, xfer_list, wiki.File_mgr().Patch_upright()), page, page.Tab().Html_itm());
+		wiki.File_mgr().Fsdb_mgr().Fsdb_search_by_list(exec_tid, Xfer_itms_to_fsdb_itms(wiki, xfer_list, wiki.File_mgr().Patch_upright()), page, page.Tab_data().Tab().Html_itm());
 	}
 	private ListAdp Xfer_itms_to_fsdb_itms(Xowe_wiki wiki, ListAdp xfer_list, int upright_patch) {
 		ListAdp rv = ListAdp_.new_();
@@ -77,8 +77,10 @@ public class Xof_xfer_queue {
 				fsdb.Ctor_by_orig(xfer.Orig_repo_id(), xfer.Orig_repo_name(), xfer.Orig_ttl(), xfer.Orig_ext(), xfer.Orig_w(), xfer.Orig_h(), xfer.Orig_redirect());
 			else {	// NOTE: orig_ext doesn't exist; try to get again, b/c Xof_file_wkr won't get it; DATE:2015-04-05
 				Xof_orig_itm orig = wiki.File_mgr().Orig_mgr().Find_by_ttl_or_null(xfer.Lnki_ttl());
-				gplx.xowa.files.repos.Xof_repo_pair repo_pair = wiki.File_mgr__repo_mgr().Repos_get_by_id(orig.Repo());
-				fsdb.Ctor_by_orig(orig.Repo(), repo_pair.Trg().Wiki_key(), orig.Page(), orig.Ext(), orig.W(), orig.H(), orig.Redirect());
+				if (orig != null) {; // no orig;
+					gplx.xowa.files.repos.Xof_repo_pair repo_pair = wiki.File_mgr__repo_mgr().Repos_get_by_id(orig.Repo());
+					fsdb.Ctor_by_orig(orig.Repo(), repo_pair.Trg().Wiki_key(), orig.Page(), orig.Ext(), orig.W(), orig.H(), orig.Redirect());
+				}
 			}
 			fsdb.Html_uid_(xfer.Html_uid());
 			fsdb.Html_elem_tid_(xfer.Html_elem_tid());

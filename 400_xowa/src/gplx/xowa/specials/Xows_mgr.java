@@ -27,12 +27,12 @@ public class Xows_mgr {
 	public Xows_mgr(Xowe_wiki wiki, Xol_lang lang) {
 		hash = Hash_adp_bry.ci_utf8_(lang.Case_mgr());
 		page_allpages = new Xows_page_allpages(wiki);
-		page_search = new Xosrh_core(wiki);
+		page_search = new Xows_page__search(wiki);
 		page_random = new Xows_page_random(wiki);
 		Evt_lang_changed(wiki.Lang());
 	}
 	public Xows_page_allpages			Page_allpages() {return page_allpages;} private final Xows_page_allpages page_allpages;
-	public Xosrh_core					Page_search() {return page_search;} private final Xosrh_core page_search;
+	public Xows_page__search					Page_search() {return page_search;} private final Xows_page__search page_search;
 	public Xows_page_random				Page_random() {return page_random;} private final Xows_page_random page_random;
 	public Xop_randomRootPage_page		Page_randomRootPage() {return page_randomRootPage;} private final Xop_randomRootPage_page page_randomRootPage = new Xop_randomRootPage_page();
 	public Xou_history_html				Page_history() {return page_history;} private final Xou_history_html page_history = new Xou_history_html();
@@ -66,7 +66,7 @@ public class Xows_mgr {
 		hash.Add_bry_obj(Popup_history_page.Ttl_name_bry		, page_popup_history);
 		hash.Add_bry_obj(Xosp_fbrow_special.Ttl_name_bry		, page_file_browser);
 	}
-	public void Special_gen(Xoa_url calling_url, Xoae_page page, Xowe_wiki wiki, Xoa_ttl ttl) {
+	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
 		int slash_pos = Bry_finder.Find_fwd(ttl.Page_txt_wo_qargs(), Xoa_ttl.Subpage_spr);	// check for slash
 		byte[] special_name = slash_pos == Bry_.NotFound
 				? ttl.Base_txt_wo_qarg()												// no slash found; use base_txt; ignore qry args and just get page_names; EX: Search/Earth?fulltext=y; Allpages?from=Earth...
@@ -80,7 +80,8 @@ public class Xows_mgr {
 		}
 		if (o != null) {
 			Xows_page special = (Xows_page)o;
-			special.Special_gen(calling_url, page, wiki, ttl);
+			page.Revision_data().Modified_on_(DateAdp_.Now());
+			special.Special_gen(wiki, page, url, ttl);
 		}
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

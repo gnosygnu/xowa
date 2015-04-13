@@ -41,7 +41,7 @@ public class Xob_redirect_tbl {
 		Sqlite_engine_.Db_detach(conn, "page_db");
 	}
 	public void Update_src_redirect_id(Io_url core_url, Db_conn core_provider) {
-		core_provider.Exec_sql(Sql_ddl__page_redirect_id);				// create page.page_redirect_id
+//			core_provider.Exec_sql(Sql_ddl__page_redirect_id);				// create page.page_redirect_id
 		Sqlite_engine_.Idx_create(conn, Idx_trg_src);
 		Sqlite_engine_.Db_attach(conn, "page_db", core_url.Raw());		// link database with page table 
 		conn.Exec_sql(Sql_update_redirect_id);							// update page_redirect_id
@@ -90,9 +90,9 @@ public class Xob_redirect_tbl {
 	, Idx_trg_id  = Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS redirect__trg_id  ON redirect (trg_id);")
 	, Idx_trg_src = Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS redirect__trg_src ON redirect (src_id, trg_id);")
 	;
-	public static final String
-	  Sql_ddl__page_redirect_id		= "ALTER TABLE page ADD COLUMN page_redirect_id integer NOT NULL DEFAULT '-1'"
-	;
+//		public static final String
+//		  Sql_ddl__page_redirect_id		= "ALTER TABLE page ADD COLUMN page_redirect_id integer NOT NULL DEFAULT '-1'"
+//		;
 	private static final String
 	  Sql_get_page_data = String_.Concat_lines_nl			// get data from page table for initial redirect dump 
 	( "REPLACE INTO redirect "
@@ -154,8 +154,8 @@ public class Xob_redirect_tbl {
 	, ",       p.page_touched"
 	, ",       p.page_len"
 	, ",       p.page_random_int"
-	, ",       p.page_file_idx"
-//		, ",       p.page_html_db_id"
+	, ",       p.page_text_db_id"
+	, ",       p.page_html_db_id"
 	, ",       r.trg_id"
 	, "FROM    redirect r"
 	, "        JOIN page_db.page p ON r.src_id = p.page_id"

@@ -257,22 +257,23 @@ public class Bry_bfr {
 		return this;
 	}
 	public Bry_bfr Add_bry_escape_by_doubling(byte quote_byte, byte[] val) {return Add_bry_escape(quote_byte, quote_byte, val, 0, val.length);}
-	public Bry_bfr Add_bry_escape(byte quote_byte, byte escape_byte, byte[] val, int bgn, int end) {
-		boolean clean = true;
-		for (int i = bgn; i < end; i++) {
+	public Bry_bfr Add_bry_escape(byte quote_byte, byte escape_byte, byte[] val, int bgn, int end) {return Add_bry_escape(quote_byte, new byte[] {escape_byte}, val, bgn, end);}
+	public Bry_bfr Add_bry_escape(byte quote_byte, byte[] escape, byte[] val, int bgn, int end) {	// used for xml_wtr; DATE:2015-04-09
+		boolean clean = true;	// add with chunks of bytes instead of one-by-one
+		for (int i = bgn; i < end; ++i) {
 			byte b = val[i];
 			if (clean) {
 				if	(b == quote_byte) {
 					clean = false;
 					this.Add_mid(val, bgn, i);
-					this.Add_byte(escape_byte);
+					this.Add(escape);
 					this.Add_byte(quote_byte);
 				}
 				else {}
 			}
 			else {
 				if	(b == quote_byte)
-					this.Add_byte(escape_byte);
+					this.Add(escape);
 				this.Add_byte(b);
 			}
 		}

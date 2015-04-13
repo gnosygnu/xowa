@@ -28,4 +28,5 @@ public interface Xoa_app {
 	Gfo_usr_dlg				Usr_dlg();
 	Bry_bfr_mkr				Utl__bfr_mkr();
 	Url_encoder_mgr			Utl__encoder_mgr();
+	boolean					Xwiki_mgr__missing(byte[] domain);
 }

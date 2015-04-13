@@ -22,4 +22,5 @@ public interface Xog_js_wkr {
 
 	void Html_atr_set			(String uid, String key, String val);
 	void Html_elem_replace_html	(String uid, String html);
+	void Html_elem_append_above	(String uid, String html);
 }

@@ -41,7 +41,9 @@ public class Xohd_hdump_wtr {
 			core_data_mgr.Tbl__page().Update__html_db_id(page.Revision_data().Id(), html_db_id);
 		}
 		else {
-			return;
+			hdump_db = core_data_mgr.Dbs__get_at(html_db_id);
+			html_db_id = hdump_db.Id();
+		//			return;
 		}
 		save_mgr.Update(tmp_bfr, hdump_db.Tbl__html(), page);
 		tmp_bfr.Mkr_rls();
@@ -49,6 +51,7 @@ public class Xohd_hdump_wtr {
 	public void Generate_hdump(Bry_bfr tmp_bfr, Xoae_page page) {
 		page.File_queue().Clear();	// need to reset uid to 0, else xowa_file_# will resume from last
 		page_wtr_mgr.Wkr(Xopg_view_mode.Tid_read).Write_body(tmp_bfr, Xoh_wtr_ctx.Hdump, page);
-		page.Hdump_data().Body_(tmp_bfr.Xto_bry_and_clear());
+		// page.Wikie().Html_mgr().Hzip_mgr().Write(tmp_bfr, new Xodump_stats_itm(), page.Url().Xto_full_bry(), tmp_bfr.Xto_bry_and_clear());					// hzip data
+		page.Hdump_data().Body_(tmp_bfr.Xto_bry_and_clear());														// write to body bry
 	}
 }

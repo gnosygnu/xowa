@@ -27,7 +27,7 @@ public class Nearby_mgr implements Xows_page {
 //		int pages_count = 0;
 	Bry_bfr tmp_bfr = Bry_bfr.new_();
 	public int Results_max() {return results_max;} public Nearby_mgr Results_max_(int v) {results_max = v; return this;} private int results_max = 1;
-	public void Special_gen(Xoa_url calling_url, Xoae_page page, Xowe_wiki wiki, Xoa_ttl ttl) {
+	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
 		page.Data_raw_(Bld_html(wiki));
 		page.Html_data().Html_restricted_n_();		// [[Special:]] pages allow all HTML
 //			wiki.ParsePage(page, false);	// do not clear else previous Search_text will be lost		

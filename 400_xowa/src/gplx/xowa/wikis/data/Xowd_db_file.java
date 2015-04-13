@@ -18,12 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.bldrs.infos.*;
 public class Xowd_db_file {
-	Xowd_db_file(Xob_info_session info_session, Xob_info_file info_file, Xowd_core_db_props props, int id, byte tid, Io_url url, String ns_ids, int part_id, Guid_adp guid, Db_conn conn, byte cmd_mode) {
+	Xowd_db_file(Db_cfg_tbl cfg_tbl, Xob_info_session info_session, Xob_info_file info_file, Xowd_core_db_props props, Xowd_db_file_schema_props schema_props, int id, byte tid, Io_url url, String ns_ids, int part_id, Guid_adp guid, Db_conn conn, byte cmd_mode) {
 		this.id = id; this.tid = tid; this.url = url; this.ns_ids = ns_ids; this.part_id = part_id; this.guid = guid;
 		this.conn = conn; this.cmd_mode = cmd_mode;
 		this.url_rel = url.NameAndExt();			
 		boolean schema_is_1 = props.Schema_is_1();
-		this.tbl__cfg = new Db_cfg_tbl(conn, "xowa_cfg");
+		this.tbl__cfg = cfg_tbl;
 		this.tbl__db = new Xowd_xowa_db_tbl(conn, schema_is_1);
 		this.tbl__ns = new Xowd_site_ns_tbl(conn, schema_is_1);
 		this.tbl__site_stats = new Xowd_site_stats_tbl(conn, schema_is_1);
@@ -36,10 +36,10 @@ public class Xowd_db_file {
 		this.tbl__cat_link = new Xowd_cat_link_tbl(conn, schema_is_1);
 		this.tbl__wbase_qid = new Xowd_wbase_qid_tbl(conn, schema_is_1);
 		this.tbl__wbase_pid = new Xowd_wbase_pid_tbl(conn, schema_is_1);
-		this.tbl__search_word = new Xowd_search_word_tbl(conn, schema_is_1);
+		this.tbl__search_word = new Xowd_search_word_tbl(conn, schema_is_1, schema_props.Search__word__page_count_exists());
 		this.tbl__search_link = new Xowd_search_link_tbl(conn, schema_is_1);
-		this.info_session = info_session == null ? Xob_info_session.Load(tbl__cfg) : info_session;
-		this.info_file = info_file == null ? Xob_info_file.Load(tbl__cfg) : info_file;
+		this.info_session = info_session;
+		this.info_file = info_file;
 	}
 	public int						Id()				{return id;}				private final int id;		// unique id in xowa_db
 	public byte						Tid()				{return tid;}				private final byte tid;
@@ -75,8 +75,9 @@ public class Xowd_db_file {
 	public static Xowd_db_file make_(Xob_info_session info_session, Xowd_core_db_props props, int id, byte tid, Io_url url, String ns_ids, int part_id, String core_file_name, Db_conn conn) {
 		Guid_adp guid = Guid_adp_.random_();
 		Xob_info_file info_file = new Xob_info_file(id, Xowd_db_file_.To_key(tid), ns_ids, part_id, guid, props.Schema(), core_file_name, url.NameAndExt());
-		Xowd_db_file rv = new Xowd_db_file(info_session, info_file, props, id, tid, url, ns_ids, part_id, guid, conn, Db_cmd_mode.Tid_create);
-		rv.Tbl__cfg().Create_tbl();	// always create cfg in each db
+		Db_cfg_tbl cfg_tbl = new Db_cfg_tbl(conn, "xowa_cfg");
+		Xowd_db_file rv = new Xowd_db_file(cfg_tbl, info_session, info_file, props, Xowd_db_file_schema_props.make_(), id, tid, url, ns_ids, part_id, guid, conn, Db_cmd_mode.Tid_create);
+		cfg_tbl.Create_tbl();	// always create cfg in each db
 		return rv;
 	}
 	public static Xowd_db_file load_(Xowd_core_db_props props, int id, byte tid, Io_url url, String ns_ids, int part_id, Guid_adp guid) {
@@ -85,6 +86,7 @@ public class Xowd_db_file {
 			Xoa_app_.Usr_dlg().Warn_many("", "", "wiki.db:missing db; tid=~{0} url=~{1}", Xowd_db_file_.To_key(tid), url.Raw());
 			conn = Db_conn_.Empty;
 		}
-		return new Xowd_db_file(null, null, props, id, tid, url, ns_ids, part_id, guid, conn, Db_cmd_mode.Tid_ignore);
+		Db_cfg_tbl cfg_tbl = new Db_cfg_tbl(conn, "xowa_cfg");
+		return new Xowd_db_file(cfg_tbl, Xob_info_session.Load(cfg_tbl), Xob_info_file.Load(cfg_tbl), props, Xowd_db_file_schema_props.load_(cfg_tbl), id, tid, url, ns_ids, part_id, guid, conn, Db_cmd_mode.Tid_ignore);
 	}
 }

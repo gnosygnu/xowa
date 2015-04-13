@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
 import gplx.core.primitives.*; import gplx.xowa.wikis.data.tbls.*;
 class Xog_search_suggest_cmd implements GfoInvkAble, Cancelable {
+	private Xowe_wiki wiki; private byte[] search_bry; private Xosrh_page_mgr searcher; private int max_results, all_pages_extend, all_pages_min;
 	public Xog_search_suggest_cmd(Xoae_app app, Xog_search_suggest_mgr mgr) {
 		this.app = app; this.mgr = mgr;
 	}	private Xoae_app app; Xog_search_suggest_mgr mgr; Bry_bfr tmp_bfr = Bry_bfr.reset_(255); ListAdp rslts_1 = ListAdp_.new_(), rslts_2 = ListAdp_.new_();
@@ -25,7 +26,7 @@ class Xog_search_suggest_cmd implements GfoInvkAble, Cancelable {
 		this.wiki = wiki; this.search_bry = search_bry; this.max_results = max_results;
 		this.search_mode = search_mode; this.all_pages_extend = all_pages_extend; this.all_pages_min = all_pages_min;
 		searcher = new Xosrh_page_mgr();
-	}	private Xowe_wiki wiki; private byte[] search_bry; private Xosrh_page_mgr searcher; private int max_results, all_pages_extend, all_pages_min;
+	}
 	private byte search_mode;
 	public byte[] Search_bry() {return search_bry;}
 	public boolean Canceled() {return canceled;}

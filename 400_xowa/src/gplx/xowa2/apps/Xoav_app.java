@@ -35,6 +35,7 @@ public class Xoav_app implements Xoa_app {
 	public Xowmf_mgr			Wmf_mgr()					{return wmf_mgr;} private final Xowmf_mgr wmf_mgr = new Xowmf_mgr();
 	public Bry_bfr_mkr			Utl__bfr_mkr()				{return Xoa_app_.Utl__bfr_mkr();}
 	public Url_encoder_mgr		Utl__encoder_mgr()			{return Xoa_app_.Utl__encoder_mgr();}
+	public boolean					Xwiki_mgr__missing(byte[] domain)	{return wiki_mgr.Get_by_domain(domain) == null;}
 
 	public Xoav_wiki_mgr Wiki_mgr() {return wiki_mgr;} private final Xoav_wiki_mgr wiki_mgr;
 	public Xoud_db_mgr User_data_mgr() {return user_data_mgr;} private Xoud_db_mgr user_data_mgr = new Xoud_db_mgr();

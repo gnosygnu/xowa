@@ -17,14 +17,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.regxs; import gplx.*; import gplx.core.*;
 public class Gfo_pattern {
-	private Gfo_pattern_itm[] itms; int itms_len;
+	private final Gfo_pattern_itm[] itms; private final int itms_len;
+	private final Gfo_pattern_ctx ctx = new Gfo_pattern_ctx();
 	public Gfo_pattern(byte[] raw) {
 		this.raw = raw;
 		itms = Gfo_pattern_itm_.Compile(raw);
 		itms_len = itms.length;
 	}
 	public byte[] Raw() {return raw;} private byte[] raw;
-	private Gfo_pattern_ctx ctx = new Gfo_pattern_ctx();
 	public boolean Match(byte[] val) {
 		int val_len = val.length;
 		int val_pos = 0;

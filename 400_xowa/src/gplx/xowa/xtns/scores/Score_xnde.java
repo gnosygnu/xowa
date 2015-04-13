@@ -158,7 +158,7 @@ public class Score_xnde implements Xox_xnde, Xop_xnde_atr_parser, Xoh_cmd_itm {
 		fail_msg = null;		
 	}	private String fail_msg = null;
 	public void Hcmd_write(Xoae_app app, Gfo_usr_dlg usr_dlg, Xoae_page page) {
-		Xog_html_itm html_itm = page.Tab().Html_itm();
+		Xog_html_itm html_itm = page.Tab_data().Tab().Html_itm();
 		if (fail_msg == null) {	// fill in png/midi;			
 			html_itm.Html_atr_set(html_id_a, "href", html_a_href);
 			html_itm.Html_atr_set(html_id_img, "src", html_img_src);

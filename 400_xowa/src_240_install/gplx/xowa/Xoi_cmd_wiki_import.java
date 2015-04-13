@@ -63,7 +63,7 @@ class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 			bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_cat_core);
 			bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_cat_link);
 		}
-		if (wiki.Appe().Setup_mgr().Dump_mgr().Search_version() == gplx.xowa.specials.search.Xosrh_core.Version_2)
+		if (wiki.Appe().Setup_mgr().Dump_mgr().Search_version() == gplx.xowa.specials.search.Xows_page__search.Version_2)
 			bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_search_wkr);
 		bldr.Cmd_mgr().Add_cmd(wiki, Xob_cmd_keys.Key_text_term);	
 	}	

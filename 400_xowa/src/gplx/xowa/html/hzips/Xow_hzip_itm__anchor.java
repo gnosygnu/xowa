@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.html.*; import gplx.xowa.wikis.ttls.*;
+import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.btries.*;
+import gplx.html.*; import gplx.xowa.wikis.ttls.*;
 public class Xow_hzip_itm__anchor {
 	private Xow_hzip_mgr hzip_mgr; private Xow_ttl_parser ttl_parser; private Byte_obj_ref xtid_ref = Byte_obj_ref.zero_();
 	private Bry_rdr bry_rdr = new Bry_rdr();
@@ -56,8 +57,20 @@ public class Xow_hzip_itm__anchor {
 		return bry_rdr.Pos() + 2;												// +2=/>
 	}
 	public int Save_lnki(Bry_bfr bfr, Xodump_stats_itm stats, byte[] src, int src_len, int bgn, int pos, boolean caption) {
-		int ttl_bgn = Bry_finder.Find_fwd(src, Find_href_wiki_bry, pos, src_len);			if (ttl_bgn == Bry_finder.Not_found) return Xow_hzip_mgr.Unhandled;//hzip_mgr.Warn_by_pos_add_dflt("a.ttl_bgn_missing", bgn, pos);
-		ttl_bgn += Find_href_wiki_len;
+		int ttl_bgn = Bry_finder.Find_fwd(src, Find_href_bry, pos, src_len);				if (ttl_bgn == Bry_finder.Not_found) return Xow_hzip_mgr.Unhandled;//hzip_mgr.Warn_by_pos_add_dflt("a.ttl_bgn_missing", bgn, pos);
+		ttl_bgn += Find_href_bry.length;
+		// get site
+		byte[] site = null;
+		Object href_tid_obj = btrie_href.Match_bgn(src, ttl_bgn, src_len);
+		if (href_tid_obj == null) return Xow_hzip_mgr.Unhandled;	// not "/wiki/" or "/site/"
+		if (((Byte_obj_val)href_tid_obj).Val() == Href_tid_site) {
+			// /site/en.wiktionary.org/
+			int site_bgn = ttl_bgn + Href_bry_len; int site_end = Bry_finder.Find_fwd(src, Byte_ascii.Slash, site_bgn);
+			byte[] site_domain = Bry_.Mid(src, site_bgn, site_end);
+			site = site_domain;
+		}
+		else
+			ttl_bgn += Href_bry_len;
 		int ttl_end = Bry_finder.Find_fwd(src, Byte_ascii.Quote, ttl_bgn , src_len);		if (ttl_end == Bry_finder.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("a.ttl_end_missing", bgn, ttl_bgn);
 		Xoa_ttl ttl = ttl_parser.Ttl_parse(Bry_.Mid(src, ttl_bgn, ttl_end));				if (ttl == null) return hzip_mgr.Warn_by_pos("a.ttl_invalid", ttl_bgn, ttl_end);
 		int a_lhs_end = Bry_finder.Find_fwd(src, Byte_ascii.Gt, ttl_end, src_len);			if (a_lhs_end == Bry_finder.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("a.a_lhs_end_missing", bgn, ttl_end);
@@ -67,7 +80,10 @@ public class Xow_hzip_itm__anchor {
 			bfr.Add(Xow_hzip_dict.Bry_lnki_text_y);
 		else
 			bfr.Add(Xow_hzip_dict.Bry_lnki_text_n);
-		bfr.Add_byte((byte)ttl.Ns().Ord());	// ASSUME:NS_MAX_255
+		bfr.Add_byte((byte)ttl.Ns().Ord());	// ASSUME:NS_MAX_255; no more than 255 ns in wiki; note that ids > 255 still supported
+		if (site != null) {
+			bfr.Add_byte_pipe().Add(site).Add_byte_pipe();
+		}
 		int ttl_len = ttl_end - ttl_bgn;
 		if (caption) {
 			bfr.Add(ttl.Page_db());
@@ -141,12 +157,25 @@ public class Xow_hzip_itm__anchor {
 	public int Load_lnki(Bry_bfr bfr, byte[] src, int src_len, int bgn, byte tid) {
 		byte ns_ord = src[bgn];
 		Xow_ns ns = ttl_parser.Ns_mgr().Ords_get_at(ns_ord);
+		byte[] site_bry = null;
 		int ttl_bgn = bgn + 1;
+		if (src[ttl_bgn] == Byte_ascii.Pipe) {	// site
+			int site_bgn = ttl_bgn + 1;
+			int site_end = Bry_finder.Find_fwd(src, Byte_ascii.Pipe, site_bgn, src_len);
+			site_bry = Bry_.Mid(src, site_bgn, site_end);
+			ttl_bgn = site_end + 1;
+		}
 		int ttl_end = Bry_finder.Find_fwd(src, Xow_hzip_dict.Escape, ttl_bgn, src_len);		if (ttl_end == Bry_finder.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("a.ttl_end_missing", bgn, ttl_bgn);
 		byte[] ttl_bry = Bry_.Mid(src, ttl_bgn, ttl_end);
 		Xoa_ttl ttl = ttl_parser.Ttl_parse(ns.Id(), ttl_bry);
 		byte[] ttl_full = ttl.Full_db();
-		bfr.Add_str("<a href='/wiki/").Add(Html_utl.Escape_html_as_bry(ttl_full)).Add_str("' title='");
+		bfr.Add_str_ascii("<a href='");
+		if (site_bry != null) {
+			bfr.Add_str_ascii("/site/");
+			bfr.Add(site_bry);
+		}
+		bfr.Add_str_ascii("/wiki/");
+		bfr.Add(Html_utl.Escape_html_as_bry(ttl_full)).Add_str("' title='");
 		int rv = ttl_end + 1;
 		if (tid == Xow_hzip_dict.Tid_lnki_text_n) {
 			if (ns.Id() != 0) ttl_bry = ttl_full;
@@ -167,14 +196,17 @@ public class Xow_hzip_itm__anchor {
 			);
 	}
 	private static final byte[]
-	  Find_href_wiki_bry	= Bry_.new_ascii_("href=\"/wiki/")
-	, Find_href_bry			= Bry_.new_ascii_("href=\"")
+	  Find_href_bry			= Bry_.new_ascii_("href=\"")
 	, Find_a_rhs_bgn_bry	= Bry_.new_ascii_("</a>")
 	, Find_img_xatrs		= Bry_.new_ascii_("xatrs='")
 	;
+	private static final byte Href_tid_wiki = 1, Href_tid_site = 2;
+	private static final int Href_bry_len = 6; // "/wiki/".length
+	private static final Btrie_fast_mgr btrie_href = Btrie_fast_mgr.cs_()
+	.Add_str_byte("/wiki/", Href_tid_wiki)
+	.Add_str_byte("/site/", Href_tid_site);
 	private static final int 
-	  Find_href_wiki_len	= Find_href_wiki_bry.length
-	, Find_href_len			= Find_href_bry.length
+	  Find_href_len			= Find_href_bry.length
 	, Find_a_rhs_bgn_len	= Find_a_rhs_bgn_bry.length
 	;
 }	

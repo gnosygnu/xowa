@@ -122,17 +122,22 @@ public class Xog_tab_mgr implements GfoEvObj {
 	}
 	public void Tabs_close_cur() {
 		if (this.Active_tab_is_null()) return;
+		if (!active_tab.Page().Tab_data().Close_mgr().When_close(active_tab)) return;
 		tab_mgr.Tabs_close_by_idx(active_tab.Tab_idx());
-		Xog_tab_itm cur_tab = this.Active_tab();
+		Xog_tab_itm cur_tab = this.Active_tab();			// get new current tab for line below
 		if (cur_tab != null) cur_tab.Html_box().Focus();	// NOTE: needed to focus tab box else tab button will be focused; DATE:2014-07-13
 	}
 	public void Tabs_close_others() {this.Tabs_close_to_bgn(); this.Tabs_close_to_end();}
 	public void Tabs_close_to_bgn() {if (Active_tab_is_null()) return; Tabs_close_rng(0							, active_tab.Tab_idx());}
 	public void Tabs_close_to_end() {if (Active_tab_is_null()) return; Tabs_close_rng(active_tab.Tab_idx() + 1	, tab_regy.Count());}
 	public void Tabs_close_rng(int bgn, int end) {
-		for (int i = bgn; i < end; i++)
-			tab_mgr.Tabs_close_by_idx(bgn);
+		for (int i = bgn; i < end; i++) {
+			Xog_tab_itm tab = Tabs_get_at(bgn);
+			if (tab.Page().Tab_data().Close_mgr().When_close(tab))
+				tab_mgr.Tabs_close_by_idx(bgn);
+		}
 	}
+	public void Tabs_close_all() {Tabs_close_rng(0, Tabs_len());}
 	public void Tabs_close_undo() {
 		if (closed_undo_list.Count() == 0) return;
 		String url = (String)ListAdp_.Pop(closed_undo_list);

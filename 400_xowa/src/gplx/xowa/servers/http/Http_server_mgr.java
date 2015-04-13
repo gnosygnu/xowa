@@ -87,7 +87,7 @@ public class Http_server_mgr implements GfoInvkAble {
 		byte[] output_html = wiki.Html_mgr().Page_wtr_mgr().Gen(page, Xopg_view_mode.Tid_read);		// write html from page data
 		switch (retrieve_mode) {
 			case File_retrieve_mode.Mode_skip:				break;	// noop
-			case File_retrieve_mode.Mode_async_server:		app.Gui_mgr().Browser_win().Page__async__bgn(page.Tab()); break;
+			case File_retrieve_mode.Mode_async_server:		app.Gui_mgr().Browser_win().Page__async__bgn(page.Tab_data().Tab()); break;
 			case File_retrieve_mode.Mode_wait:
 				if (page.File_queue().Count() > 0) {
 					app.Gui_mgr().Browser_win().Active_tab().Async();

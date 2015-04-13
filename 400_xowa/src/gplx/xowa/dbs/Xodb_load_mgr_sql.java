@@ -24,7 +24,7 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 	public byte Search_version() {
 		if (search_version_init_needed) Search_version_init();
 		return search_version;
-	}	private byte search_version = gplx.xowa.specials.search.Xosrh_core.Version_null;
+	}	private byte search_version = gplx.xowa.specials.search.Xows_page__search.Version_null;
 	public void Search_version_refresh() {
 		search_version_init_needed = true;
 		Search_version_init();
@@ -121,12 +121,12 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 		if (search_version_init_needed) {
 			search_version_init_needed = false;
 			Xowd_db_file search_db = db_mgr.Core_data_mgr().Db__search();
-			search_version = search_db == Xowd_db_file.Null ? Xosrh_core.Version_1 : Xosrh_core.Version_2;
+			search_version = search_db == Xowd_db_file.Null ? Xows_page__search.Version_1 : Xows_page__search.Version_2;
 		}
 	}
 	public void Load_search(Cancelable cancelable, ListAdp rv, byte[] search, int results_max) {
 		if (search_version_init_needed) Search_version_init();
-		if (search_version == gplx.xowa.specials.search.Xosrh_core.Version_1)
+		if (search_version == gplx.xowa.specials.search.Xows_page__search.Version_1)
 			db_mgr.Core_data_mgr().Tbl__page().Select_by_search(cancelable, rv, search, results_max);
 		else {
 			Xowd_db_mgr core_data_mgr = db_mgr.Core_data_mgr();

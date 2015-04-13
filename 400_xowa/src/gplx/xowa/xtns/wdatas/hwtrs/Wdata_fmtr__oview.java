@@ -47,27 +47,19 @@ class Wdata_fmtr__oview_tbl implements Bry_fmtr_arg {
 	}
 	private Bry_fmtr row_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
-	, "  <h1 id='wb-firstHeading-~{ttl}' class='wb-firstHeading'>"
-	, "    <div class='wikibase-labelview '>"
-	, "      <div class='wikibase-labelview-container'>"
-	, "        <span class='wikibase-labelview-text'>~{ttl_label}</span>"
-	, "        <span class='wikibase-labelview-entityid'>(~{ttl})</span>"
+	, "      <div class='wikibase-entitytermsview'>"
+	, "        <div class='wikibase-entitytermsview-heading'>"
+	, "          <h1 class='wikibase-entitytermsview-heading-label'>~{ttl_label}"
+	, "            <span class='wikibase-entitytermsview-heading-label-id'>(~{ttl})</span>"
+	, "          </h1>"
+	, "          <div class='wikibase-entitytermsview-heading-description '>~{ttl_descr}"
+	, "          </div>"
+	, "          <div class='wikibase-entitytermsview-heading-aliases'>"
+	, "            <ul class='wikibase-entitytermsview-aliases'>~{ttl_aliases}"
+	, "            </ul>"
+	, "          </div>"
+	, "        </div>"
 	, "      </div>"
-	, "    </div>"
-	, "  </h1>"
-	, "  <div class='wikibase-descriptionview ' dir='auto'>"
-	, "    <div class='wikibase-descriptionview-container'>"
-	, "      <span class='wikibase-descriptionview-text'>~{ttl_descr}</span>"
-	, "    </div>"
-	, "  </div>"
-	, "  <hr class='wb-hr' />"
-	, "  <div class='wikibase-aliasesview '>"
-	, "    <div class='wikibase-aliasesview-container'>"
-	, "      <span class='wikibase-aliasesview-label'>~{hdr_aliases}</span>"
-	, "      <ul class='wikibase-aliasesview-list'>~{ttl_aliases}"
-	, "      </ul>"
-	, "    </div>"
-	, "  </div>"
 	), "ttl", "ttl_label", "ttl_descr", "hdr_aliases", "ttl_aliases"
 	);
 	private static byte[][] Alias_get_or_empty(OrderedHash list, byte[][] langs) {
@@ -94,7 +86,7 @@ class Wdata_fmtr__oview_alias_itm implements Bry_fmtr_arg {
 	}
 	private Bry_fmtr row_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
-	, "        <li class='wikibase-aliasesview-list-item'>~{itm}</li>"
+	, "              <li class='wikibase-entitytermsview-aliases-alias'>~{itm}</li>"
 	), "itm"
 	);
 }

@@ -20,7 +20,7 @@ import gplx.xowa.xtns.gallery.*;
 import gplx.xowa.files.fsdb.*; import gplx.xowa.gui.views.*;
 public class Js_img_mgr {
 	public static void Update_img(Xoae_page page, Xof_xfer_itm itm) {
-		Xog_js_wkr js_wkr = Env_.Mode_testing() ? Xog_js_wkr_.Null : page.Tab().Html_itm(); 
+		Xog_js_wkr js_wkr = Env_.Mode_testing() ? Xog_js_wkr_.Noop : page.Tab_data().Tab().Html_itm(); 
 		Js_img_mgr.Update_img(page, js_wkr, itm.Html_img_wkr(), itm.Html_uid(), itm.Lnki_type(), itm.Html_elem_tid(), itm.Html_w(), itm.Html_h(), String_.new_utf8_(itm.Html_view_url()), itm.Orig_w(), itm.Orig_h(), String_.new_utf8_(itm.Html_orig_url()), itm.Lnki_ttl(), itm.Gallery_mgr_h());
 	}
 	public static void Update_img(Xoa_page page, Xog_js_wkr js_wkr, Xof_fsdb_itm itm) {
@@ -30,7 +30,7 @@ public class Js_img_mgr {
 		html_itm.Html_elem_atr_set_append(html_id, "class", " new");
 	}
 	private static void Update_img(Xoa_page page, Xog_js_wkr js_wkr, Js_img_wkr img_wkr, int uid, byte lnki_type, byte elem_tid, int html_w, int html_h, String html_src, int orig_w, int orig_h, String orig_src, byte[] lnki_ttl, int gallery_mgr_h) {
-		if (Xoa_app_.Mode != Xoa_app_.Mode_gui) return;	// do not update html widget unless app is gui; null ref on http server; DATE:2014-09-17
+		if (!Xoa_app_.Mode_is_gui()) return;	// do not update html widget unless app is gui; null ref on http server; DATE:2014-09-17
 		switch (elem_tid) {
 			case Xof_html_elem.Tid_gallery_v2:
 				img_wkr.Html_update(page, js_wkr, uid, html_w, html_h, html_src, orig_w, orig_h, orig_src, lnki_ttl);

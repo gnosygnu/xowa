@@ -31,6 +31,9 @@ public class Xowd_search_link_tbl {
 		fld_page_id			= flds.Add_int(fld_prefix + "page_id");
 		in_wkr.Ctor(tbl_name, flds, fld_page_id, fld_word_id);
 	}
+	public String Tbl_name()		{return tbl_name;}
+	public String Fld_word_id()		{return fld_word_id;}
+	public String Fld_page_id()		{return fld_page_id;}
 	public void Create_tbl()		{conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds));}
 	public void Create_idx_unique() {conn.Ddl_create_idx(Xoa_app_.Usr_dlg(), Db_meta_idx.new_unique_by_tbl(tbl_name, "main", fld_word_id, fld_page_id));}
 	public void Create_idx_normal() {conn.Ddl_create_idx(Xoa_app_.Usr_dlg(), Db_meta_idx.new_normal_by_tbl(tbl_name, "main", fld_word_id, fld_page_id));}

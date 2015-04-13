@@ -67,14 +67,14 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 	public void Load_search(Cancelable cancelable, ListAdp rv, byte[] search, int results_max) {
 		Xow_ns ns = wiki.Ns_mgr().Ns_main();
 		int search_len = search.length;
-		byte match_tid = Xosrh_core.Match_tid_all;
+		byte match_tid = Xows_page__search.Match_tid_all;
 		if (search_len > 0 && search[search_len - 1] == Byte_ascii.Asterisk) {
 			search = Bry_.Mid(search, 0, search_len - 1);
-			match_tid = Xosrh_core.Match_tid_bgn;
+			match_tid = Xows_page__search.Match_tid_bgn;
 		}
 		int bgn_idx = this.Find_file_idx_by_ns(Xotdb_dir_info_.Tid_search_ttl, ns, search);
 		if (bgn_idx == Xow_data_mgr.File_idx_unknown) return;
-		if (match_tid == Xosrh_core.Match_tid_all) {
+		if (match_tid == Xows_page__search.Match_tid_all) {
 			if (!this.Load_xdat_file(cancelable, tmp_xdat_file, Xotdb_dir_info_.Tid_search_ttl, ns, bgn_idx)) return;			
 			tmp_xdat_file.Find(tmp_xdat_itm, search, 0, Byte_ascii.Pipe, true);
 			if (tmp_xdat_itm.Missing()) return;

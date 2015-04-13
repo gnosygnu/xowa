@@ -19,7 +19,7 @@ package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.xowa.specials.*;
 public class Xoud_history_special implements Bry_fmtr_arg, Xows_page {
 	private ListAdp rows = ListAdp_.new_();
-	public void Special_gen(Xoa_url calling_url, Xoae_page page, Xowe_wiki wiki, Xoa_ttl ttl) {
+	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
 		Xoae_app app = wiki.Appe();
 		Xoud_history_mgr mgr = app.User().Data_mgr().History_mgr();
 		mgr.Select(rows, 100);

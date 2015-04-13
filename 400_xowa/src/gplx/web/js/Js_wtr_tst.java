@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
+package gplx.web.js; import gplx.*; import gplx.web.*;
 import org.junit.*;
 public class Js_wtr_tst {
 	@Before public void Init() {fxt.Clear();} private Js_wtr_fxt fxt = new Js_wtr_fxt();

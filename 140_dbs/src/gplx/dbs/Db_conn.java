@@ -59,11 +59,11 @@ public class Db_conn {
 	public int				Exec_sql_plog_ntx(String msg, String sql) {return Exec_sql_plog(Bool_.N, msg, sql);}
 	public int				Exec_sql_plog_txn(String msg, String sql) {return Exec_sql_plog(Bool_.Y, msg, sql);}
 	public int				Exec_sql_plog(boolean txn, String msg, String sql) {
-		Gfo_usr_dlg_.I.Plog_many("", "", "bgn: " + msg);
+		Gfo_usr_dlg_.I.Plog_many("", "", msg);
 		if (txn) this.Txn_bgn();
 		int rv = Exec_sql(sql);
 		if (txn) this.Txn_end();
-		Gfo_usr_dlg_.I.Plog_many("", "", "end: " + msg);
+		Gfo_usr_dlg_.I.Plog_many("", "", "done:" + msg);
 		return rv;
 	}
 	public int				Exec_qry(Db_qry qry)		{return Int_.cast_(engine.Exec_as_obj(qry));}

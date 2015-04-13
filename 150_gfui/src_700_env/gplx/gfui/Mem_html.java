@@ -76,6 +76,7 @@ class Mem_html extends GxwTextMemo_lang implements Gxw_html {		public String Htm
 	public boolean Html_elem_img_update(String elem_id, String elem_src, int elem_width, int elem_height) {return true;}
 	public boolean Html_elem_delete(String elem_id) {return true;}
 	public boolean Html_elem_replace_html(String id, String html) {return true;}
+	public boolean Html_elem_append_above(String id, String html) {return true;}
 	public boolean Html_gallery_packed_exec() {return true;}
 	public String Html_js_eval_script(String script) {return "";}
 	String ExtractAtr(String key, String txt, int pos) {

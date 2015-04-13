@@ -49,7 +49,7 @@ class Xop_randomRootPage_page_fxt {
 		page.Url_(url);
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_ascii_(special_url));
 		page.Ttl_(ttl);
-		special_page.Special_gen(url, page, wiki, ttl);
+		special_page.Special_gen(wiki, page, url, ttl);
 		return page;
 	}
 }

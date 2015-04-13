@@ -114,7 +114,7 @@ public class Db_stmt_cmd implements Db_stmt {
 		catch (Exception e) {
 			this.Rls();
 			Reset_stmt();
-			throw Err_.err_(e, "db_stmt.insert: url={0} sql={1} err={2}", engine.Conn_info(), sql, Err_.Message_gplx_brief(e));
+			throw Err_.err_(e, "db_stmt.insert: url={0} sql={1} err={2}", engine.Conn_info().Xto_api(), sql, Err_.Message_gplx_brief(e));
 		}
 	}
 	public int Exec_update() {

@@ -51,8 +51,8 @@ public class Wdata_visitor__html_wtr_tst {
 	@Test   public void Quantity_frac() {
 		fxt
 		.Test_claim_val
-		( fxt.Wdata_fxt().Make_claim_quantity(1, "+0.12345", "units", "+0.12346", "+0.12344")
-		, "+0.12345 ±0.00001 units"
+		( fxt.Wdata_fxt().Make_claim_quantity(1, "+0.1234", "units", "+0.1235", "+0.1233")
+		, "+0.1234 ±0.0001 units"
 		);
 	}
 	@Test   public void Entity() {

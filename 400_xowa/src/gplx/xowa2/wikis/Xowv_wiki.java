@@ -17,10 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa2.wikis; import gplx.*; import gplx.xowa2.*;
 import gplx.core.primitives.*;
-import gplx.xowa.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.langs.cases.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.html.hzips.*;
-import gplx.xowa.wikis.data.*;
+import gplx.xowa.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.langs.cases.*; import gplx.xowa.wikis.ttls.*;
 import gplx.xowa.files.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.bins.*;
-import gplx.xowa.wikis.data.tbls.*; import gplx.dbs.*; import gplx.xowa.html.hdumps.*; import gplx.xowa.wikis.*; import gplx.xowa.files.repos.*;
+import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*; import gplx.xowa.files.repos.*; import gplx.xowa.wikis.data.tbls.*; import gplx.dbs.*;
+import gplx.xowa.html.wtrs.*; import gplx.xowa.html.hdumps.*; import gplx.xowa.html.hzips.*;
 import gplx.xowa2.apps.*; import gplx.xowa2.wikis.specials.*; import gplx.xowa2.gui.*;
 import gplx.fsdb.*; import gplx.fsdb.meta.*;
 public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser {
@@ -34,6 +34,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser {
 		this.ns_mgr = Xow_ns_mgr_.default_(app.Utl_case_mgr());
 		this.html_mgr__hzip_mgr = new Xow_hzip_mgr(app.Usr_dlg(), this);
 		this.html_mgr__hdump_rdr = new Xohd_hdump_rdr(app, this);
+		this.html_mgr__lnki_wtr_utl = new Xoh_lnki_wtr_utl(this, new Xoh_href_parser(Xoa_app_.Utl__encoder_mgr().Url_ttl(), new Gfo_url_parser()));
 		this.xwiki_mgr = new Xow_xwiki_mgr();
 		this.special_mgr = new Xosp_special_mgr(this);
 		Io_url wiki_file_dir = domain_tid == Xow_domain_.Tid_int_home ? wiki_root_dir : wiki_root_dir.OwnerDir().OwnerDir().GenSubDir_nest("file", domain_str);
@@ -57,6 +58,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser {
 	public boolean					Html_mgr__hdump_enabled() {return Bool_.Y;}
 	public Xow_hzip_mgr			Html_mgr__hzip_mgr() {return html_mgr__hzip_mgr;} private final Xow_hzip_mgr html_mgr__hzip_mgr;
 	public Xohd_hdump_rdr		Html_mgr__hdump_rdr() {return html_mgr__hdump_rdr;} private final Xohd_hdump_rdr html_mgr__hdump_rdr;
+	public Xoh_lnki_wtr_utl		Html_mgr__lnki_wtr_utl() {return html_mgr__lnki_wtr_utl;} private final Xoh_lnki_wtr_utl html_mgr__lnki_wtr_utl;
 	public Xol_lang				Lang() {throw Err_.not_implemented_();}
 
 	public Xosp_special_mgr Special_mgr() {return special_mgr;} private Xosp_special_mgr special_mgr;

@@ -17,9 +17,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import org.junit.*;
-import gplx.xowa.wikis.*; import gplx.xowa.tdbs.*;
-public class Xob_wdata_qid_base_tst {		
-	@Before public void init() {fxt = new gplx.xowa.bldrs.Xob_fxt().Ctor_mem();} gplx.xowa.bldrs.Xob_fxt fxt; // NOTE: reset memory instance (don't just call clear)
+import gplx.xowa.wikis.*; import gplx.xowa.tdbs.*; import gplx.dbs.*;
+public class Xob_wdata_qid_base_tst {
+	private gplx.xowa.bldrs.Xob_fxt fxt; // NOTE: reset memory instance (don't just call clear)
+	@Before public void init() {
+		this.fxt = new gplx.xowa.bldrs.Xob_fxt().Ctor_mem();
+		gplx.dbs.Db_conn_bldr.I.Reg_default_mem();
+	}
 	@Test  public void Basic() {	
 		fxt.doc_ary_
 		(	fxt.doc_wo_date_(2, "q2", Xob_wdata_pid_base_tst.json_("q2", "links", String_.Ary("enwiki", "q2_en", "frwiki", "q2_fr")))
@@ -50,7 +54,16 @@ public class Xob_wdata_qid_base_tst {
 		.Run(new Xob_wdata_qid_txt().Ctor(fxt.Bldr(), this.fxt.Wiki()))
 		;
 	}
-	@Test  public void Ns() {	
+	@Test  public void Ns() {
+		// setup db
+		Db_conn conn = Xowmf_site_tbl.Get_conn_or_new(fxt.App().Fsys_mgr().Root_dir());
+		Xowmf_site_tbl site_tbl = new Xowmf_site_tbl(conn);
+		site_tbl.Insert(1, "en.wikipedia.org");
+		site_tbl.Insert(2, "fr.wikipedia.org");
+		Xowmf_ns_tbl ns_tbl = new Xowmf_ns_tbl(conn);
+		ns_tbl.Insert(1, Xow_ns_.Id_help, Xow_ns_case_.Id_1st, Bry_.new_ascii_("Help"), Bry_.Empty);
+		ns_tbl.Insert(2, Xow_ns_.Id_help, Xow_ns_case_.Id_1st, Bry_.new_ascii_("Aide"), Bry_.Empty);
+		// run test
 		fxt.doc_ary_
 		(	fxt.doc_wo_date_(1, "11", Xob_wdata_pid_base_tst.json_("q1", "links", String_.Ary("enwiki", "Help:Q1_en", "frwiki", "Aide:Q1_fr")))
 		)

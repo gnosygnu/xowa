@@ -20,6 +20,11 @@ public class ThreadAdp_ {
 		public static void Sleep(int milliseconds) {
 		try {Thread.sleep(milliseconds);} catch (InterruptedException e) {throw Err_.err_key_(e, "gplx.Thread", "thread interrupted").Add("milliseconds", milliseconds);}
 	}
+	public static void Notify_all(Object o) {o.notifyAll();}
+	public static void Wait(Object o) {
+		try {o.wait();}
+		catch (InterruptedException e) {throw Err_.err_key_(e, "gplx.Thread", "thread wait");}
+	}
 		public static ThreadAdp invk_(GfoInvkAble invk, String cmd)						{return invk_(Name_null, invk, cmd);}
 	public static ThreadAdp invk_(String name, GfoInvkAble invk, String cmd)		{return new ThreadAdp(name, invk, cmd, GfoMsg_.Null);}
 	public static ThreadAdp invk_msg_(GfoInvkAble invk, GfoMsg msg)					{return invk_msg_(Name_null, invk, msg);}

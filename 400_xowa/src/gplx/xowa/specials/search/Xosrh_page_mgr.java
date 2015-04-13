@@ -37,14 +37,14 @@ public class Xosrh_page_mgr implements Xosrh_page_mgr_searcher {
 	private Xosrh_rslt_grp[] pages_ary; ListAdp cur_ids = ListAdp_.new_();
 	private Xosrh_rslt_itm_sorter sorter = new Xosrh_rslt_itm_sorter();		
 	private Xowe_wiki wiki;
-	public Xosrh_ns_mgr Ns_mgr() {return ns_mgr;} public void Ns_mgr_(Xosrh_ns_mgr v) {ns_mgr = v;} private Xosrh_ns_mgr ns_mgr = new Xosrh_ns_mgr();
+	public Xows_ns_mgr Ns_mgr() {return ns_mgr;} public void Ns_mgr_(Xows_ns_mgr v) {ns_mgr = v;} private Xows_ns_mgr ns_mgr = new Xows_ns_mgr();
 	public Xosrh_rslt_grp Search(Bry_bfr bfr, Xowe_wiki wiki, byte[] search, int page_idx, Xosrh_page_mgr_searcher searcher) {return Search(bfr, wiki, search, page_idx, searcher, Cancelable_.Never);}
 	public Xosrh_rslt_grp Search(Bry_bfr bfr, Xowe_wiki wiki, byte[] search, int page_idx, Xosrh_page_mgr_searcher searcher, Cancelable cancelable) {
 		this.wiki = wiki;
 		Xosrh_rslt_grp rv = null;
 		itms_bgn = page_idx * itms_per_page;
 		itms_end = itms_bgn + itms_per_page;
-		if (Prv_search_is_same(search, ns_mgr.Xto_hash_key())) {	// search is same
+		if (Prv_search_is_same(search, ns_mgr.To_hash_key())) {	// search is same
 			if (page_idx < pages_ary.length) {		// page_idx is in bounds
 				rv = pages_ary[page_idx];
 				if (rv != null) return rv;			// page_found; return it;
@@ -54,7 +54,7 @@ public class Xosrh_page_mgr implements Xosrh_page_mgr_searcher {
 			ListAdp ids = searcher.Parse_search_and_load_ids(cancelable, bfr, ns_mgr, search);
 			Rebuild(cancelable, wiki, ids);
 			prv_search_bry = search;
-			prv_ns_bry = ns_mgr.Xto_hash_key();
+			prv_ns_bry = ns_mgr.To_hash_key();
 		}
 		int ids_len = cur_ids.Count();
 		if (itms_end > ids_len) itms_end = ids_len;
@@ -72,7 +72,7 @@ public class Xosrh_page_mgr implements Xosrh_page_mgr_searcher {
 		rv.Itms_total_(cur_ids.Count());
 		return rv;
 	}
-	public ListAdp Parse_search_and_load_ids(Cancelable cancelable, Bry_bfr bfr, Xosrh_ns_mgr ns_mgr, byte[] search) {
+	public ListAdp Parse_search_and_load_ids(Cancelable cancelable, Bry_bfr bfr, Xows_ns_mgr ns_mgr, byte[] search) {
 		search = wiki.Lang().Case_mgr().Case_build_lower(search, 0, search.length);
 		Xosrh_qry_itm cur_root = Xosrh_parser._.Parse(search);
 		cur_root.Search(cancelable, bfr, search, wiki, itms_per_page, ns_mgr);

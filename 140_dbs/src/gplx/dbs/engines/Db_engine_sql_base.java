@@ -61,7 +61,16 @@ public abstract class Db_engine_sql_base implements Db_engine {
 			Exec_as_int(idx.To_sql_create());
 		}
 	}
-	public void Ddl_append_fld(String tbl, Db_meta_fld fld)	{Exec_as_int(Db_sqlbldr__sqlite.I.Bld_alter_tbl_add(tbl, fld));}
+	public void Ddl_append_fld(String tbl, Db_meta_fld fld)		{
+		Gfo_usr_dlg_.I.Plog_many("", "", "adding column to table: db=~{0} tbl=~{1} fld=~{2}", conn_info.Database(), tbl, fld.Name());
+		try {
+			Exec_as_int(Db_sqlbldr__sqlite.I.Bld_alter_tbl_add(tbl, fld));
+			Gfo_usr_dlg_.I.Plog_many("", "", "column added to table: db=~{0} tbl=~{1} fld=~{2}", conn_info.Database(), tbl, fld.Name());
+		}
+		catch (Exception e) {	// catch error if column already added to table
+			Gfo_usr_dlg_.I.Warn_many("", "", "column not added to table: db=~{0} tbl=~{1} fld=~{2} err=~{3}", conn_info.Database(), tbl, fld.Name(), Err_.Message_gplx(e));
+		}
+	}
 	public void Ddl_delete_tbl(String tbl)						{Exec_as_int(Db_sqlbldr__sqlite.I.Bld_drop_tbl(tbl));}
 	@gplx.Virtual public void Env_db_attach(String alias, Io_url db_url) {}
 	@gplx.Virtual public void	Env_db_detach(String alias) {}

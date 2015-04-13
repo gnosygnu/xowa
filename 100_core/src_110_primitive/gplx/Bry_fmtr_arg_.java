@@ -26,8 +26,8 @@ public class Bry_fmtr_arg_ {
 	public static Bry_fmtr_arg_bfr_preserve bfr_retain_(Bry_bfr v)		{return new Bry_fmtr_arg_bfr_preserve(v);}
 	public static Bry_fmtr_arg fmtr_(Bry_fmtr v, Bry_fmtr_arg... arg_ary) {return new Bry_fmtr_arg_fmtr(v, arg_ary);}
 	public static Bry_fmtr_arg_fmtr_objs fmtr_null_() {return new Bry_fmtr_arg_fmtr_objs(null, null);}
-	public static final Bry_fmtr_arg Null = new Bry_fmtr_arg_null();
+	public static final Bry_fmtr_arg Noop = new Bry_fmtr_arg__noop();
 }
-class Bry_fmtr_arg_null implements Bry_fmtr_arg {
+class Bry_fmtr_arg__noop implements Bry_fmtr_arg {
 	public void XferAry(Bry_bfr trg, int idx) {}
 }

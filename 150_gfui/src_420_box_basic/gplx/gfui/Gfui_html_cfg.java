@@ -39,6 +39,7 @@ public class Gfui_html_cfg implements GfoInvkAble {
 	}	private Bry_fmtr fmtr_elem_atr_set_append = Bry_fmtr.keys_("elem_id", "atr_key", "atr_val");
 	public String Elem_delete(String elem_id)									{return Exec_fmt(fmtr_elem_delete, elem_id);}						private Bry_fmtr fmtr_elem_delete = Bry_fmtr.keys_("elem_id");
 	public String Elem_replace_html(String id, String html)						{return Exec_fmt(fmtr_elem_replace_html, id, Escape_quote(html));}	private Bry_fmtr fmtr_elem_replace_html = Bry_fmtr.keys_("id", "html");
+	public String Elem_append_above(String id, String html)						{return Exec_fmt(fmtr_elem_append_above, id, Escape_quote(html));}	private Bry_fmtr fmtr_elem_append_above = Bry_fmtr.keys_("id", "html");
 	public String Gallery_packed_exec()											{return Exec_fmt(fmtr_gallery_packed_exec);}						private Bry_fmtr fmtr_gallery_packed_exec = Bry_fmtr.keys_();
 	public String Elem_focus(String elem_id)									{return Exec_fmt(fmtr_elem_focus, elem_id);}						private Bry_fmtr fmtr_elem_focus = Bry_fmtr.keys_("elem_id");
 	public String Elem_scroll_into_view(String elem_id)							{return Exec_fmt(fmtr_elem_scroll_into_view, elem_id);}				private Bry_fmtr fmtr_elem_scroll_into_view = Bry_fmtr.keys_("elem_id");
@@ -79,6 +80,7 @@ public class Gfui_html_cfg implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_elem_atr_set_append_))						fmtr_elem_atr_set_append.Fmt_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_elem_delete_))								fmtr_elem_delete.Fmt_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_elem_replace_html_))							fmtr_elem_replace_html.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_elem_append_above_))							fmtr_elem_append_above.Fmt_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_gallery_packed_exec_))						fmtr_gallery_packed_exec.Fmt_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_elem_focus_))								fmtr_elem_focus.Fmt_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_elem_scroll_into_view_))						fmtr_elem_scroll_into_view.Fmt_(m.ReadBry("v"));
@@ -107,7 +109,7 @@ public class Gfui_html_cfg implements GfoInvkAble {
 	, Invk_elem_atr_get_ = "elem_atr_get_", Invk_elem_atr_get_toString_ = "elem_atr_get_toString_", Invk_elem_atr_set_ = "elem_atr_set_", Invk_elem_atr_set_append_ = "elem_atr_set_append_"
 	, Invk_elem_path_get_ = "elem_path_get_", Invk_elem_path_set_ = "elem_path_set_"
 	, Invk_elem_focus_ = "elem_focus_", Invk_elem_scroll_into_view_ = "elem_scroll_into_view_"
-	, Invk_elem_img_update_ = "elem_img_update_", Invk_elem_delete_ = "elem_delete_", Invk_elem_replace_html_ = "elem_replace_html_", Invk_gallery_packed_exec_ = "gallery_packed_exec_"
+	, Invk_elem_img_update_ = "elem_img_update_", Invk_elem_delete_ = "elem_delete_", Invk_elem_replace_html_ = "elem_replace_html_", Invk_elem_append_above_ = "elem_append_above_", Invk_gallery_packed_exec_ = "gallery_packed_exec_"
 	, Invk_js_scripts_add = "js_scripts_add"
 	, Invk_javascript_enabled_ = "javascript_enabled_"
 	;

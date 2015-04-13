@@ -50,6 +50,7 @@ public class Db_meta_fld_list {
 		}
 		return rv.XtoStrAry();
 	}
+	public boolean Has(String key)							{return flds.Has(key);}
 	public String Add_bool(String name)					{return Add(name, Db_meta_fld.Tid_bool,		Len_null, Bool_.N, Bool_.N, Bool_.N, Db_meta_fld.Default_value_null);}
 	public String Add_byte(String name)					{return Add(name, Db_meta_fld.Tid_byte,		Len_null, Bool_.N, Bool_.N, Bool_.N, Db_meta_fld.Default_value_null);}
 	public String Add_short(String name)				{return Add(name, Db_meta_fld.Tid_short,	Len_null, Bool_.N, Bool_.N, Bool_.N, Db_meta_fld.Default_value_null);}
@@ -70,10 +71,14 @@ public class Db_meta_fld_list {
 	public String Add_bry(String name)					{return Add(name, Db_meta_fld.Tid_bry,		Len_null, Bool_.N, Bool_.N, Bool_.N, Db_meta_fld.Default_value_null);}
 	public String Add(String name, int tid, int len, boolean nullable, boolean primary, boolean autoincrement, Object default_value) {
 		Db_meta_fld fld = new Db_meta_fld(name, tid, len, nullable, primary, autoincrement, default_value);
-		flds.Add(name, fld);
-		keys.Add(name);
+		Add_itm(fld);
 		return name;
 	}
-	private static final int Len_null = -1;
+	public void Add_itm(Db_meta_fld fld) {
+		String name = fld.Name();
+		flds.Add(name, fld);
+		keys.Add(name);
+	}
+	private static final int Len_null = Db_meta_fld.Len_null;
 	public static Db_meta_fld_list new_() {return new Db_meta_fld_list();}
 }

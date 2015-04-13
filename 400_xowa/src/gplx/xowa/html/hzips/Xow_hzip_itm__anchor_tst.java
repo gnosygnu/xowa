@@ -20,7 +20,7 @@ import org.junit.*; import gplx.xowa.html.*;
 public class Xow_hzip_itm__anchor_tst {
 	@Before public void init() {fxt.Clear();} private Xow_hzip_mgr_fxt fxt = new Xow_hzip_mgr_fxt();
 	@Test   public void Srl_lnki_text_n() {
-		byte[][] brys = Bry_.Ary(Xow_hzip_dict.Bry_lnki_text_n, Bry_.ints_(2), Bry_.new_ascii_("A"), Xow_hzip_dict.Escape_bry);
+		byte[][] brys = Bry_.Ary(Xow_hzip_dict.Bry_lnki_text_n, Bry_.ints_(2), Bry_.new_ascii_("A"), Xow_hzip_dict.Escape_bry);	// 2=ns_ord for Main
 		fxt.Test_save(brys, "<a xtid='a_lnki_text_n' href=\"/wiki/A\" id='xowa_lnki_0' title='A'>A</a>");
 		fxt.Test_load(brys, "<a href='/wiki/A' title='A'>A</a>");
 	}
@@ -38,6 +38,11 @@ public class Xow_hzip_itm__anchor_tst {
 		byte[][] brys = Bry_.Ary(Xow_hzip_dict.Bry_lnki_text_n, Bry_.ints_(12), Bry_.new_ascii_("A'b"), Xow_hzip_dict.Escape_bry);
 		fxt.Test_save(brys, "<a xtid='a_lnki_text_n' href=\"/wiki/Template:A'b\" id='xowa_lnki_0' title='Template:A'b'>Template:A'b</a>");
 		fxt.Test_load(brys, "<a href='/wiki/Template:A&#39;b' title='Template:A&#39;b'>Template:A'b</a>");
+	}
+	@Test   public void Srl_lnki_text_n_xwiki() {
+		byte[][] brys = Bry_.Ary(Xow_hzip_dict.Bry_lnki_text_n, Bry_.ints_(2), Byte_ascii.Pipe_bry, Bry_.new_ascii_("en.wiktionary.org"), Byte_ascii.Pipe_bry, Bry_.new_ascii_("A"), Xow_hzip_dict.Escape_bry);
+		fxt.Test_save(brys, "<a xtid='a_lnki_text_n' href=\"/site/en.wiktionary.org/wiki/A\" id='xowa_lnki_0' title='A'>A</a>");
+		fxt.Test_load(brys, "<a href='/site/en.wiktionary.org/wiki/A' title='A'>A</a>");
 	}
 	@Test   public void Srl_lnki_text_n_smoke() {
 		byte[][] brys = Bry_.Ary(Bry_.new_ascii_("a_1"), Xow_hzip_dict.Bry_lnki_text_n, Bry_.ints_(2), Bry_.new_ascii_("A"), Xow_hzip_dict.Escape_bry, Bry_.new_ascii_("a_2"));
@@ -85,6 +90,10 @@ public class Xow_hzip_itm__anchor_tst {
 	}
 	@Test   public void Html_lnki_trail() {
 		fxt.Test_html("[[A]]b", "<a xtid='a_lnki_text_y' href=\"/wiki/A\" xowa_redlink='1'>Ab</a>");
+	}
+	@Test   public void Html_lnki_xwiki() {
+		fxt.Init_xwiki("wikt", "en.wiktionary.org");
+		fxt.Test_html("[[wikt:A]]", "<a xtid='a_lnki_text_n' href=\"/site/en.wiktionary.org/wiki/A\" xowa_redlink='0'>wikt:A</a>");
 	}
 	@Test   public void Html_lnke_txt() {
 		fxt.Test_html("http://a.org", "<a xtid='a_lnke_txt' href=\"http://a.org\" class=\"external text\" rel=\"nofollow\">http://a.org</a>");

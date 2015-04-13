@@ -65,7 +65,7 @@ class Wdata_itemByTitle_page_fxt {
 		page.Url_(url);
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_ascii_(link));
 		page.Ttl_(ttl);
-		special_page.Special_gen(url, page, wiki, ttl);
+		special_page.Special_gen(wiki, page, url, ttl);
 		Tfds.Eq_str_lines(expd, String_.new_ascii_(page.Data_raw()));
 	}
 	public String Expd_html(String wmf_key, String ttl_str) {

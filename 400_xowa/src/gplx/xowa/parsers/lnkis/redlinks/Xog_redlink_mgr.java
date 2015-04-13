@@ -23,7 +23,7 @@ public class Xog_redlink_mgr implements GfoInvkAble {
 	private Xopg_redlink_lnki_list redlink_lnki_list; private ListAdp lnki_list; private boolean log_enabled; private Gfo_usr_dlg usr_dlg; private int thread_id;		
 	public Xog_redlink_mgr(Xog_win_itm win, Xoae_page page, boolean log_enabled) {
 		this.win = win; this.page = page; this.wiki = page.Wikie();
-		this.html_itm = page.Tab().Html_itm();	// NOTE: caching locally b/c page.Tab() is sometimes null
+		this.html_itm = page.Tab_data().Tab().Html_itm();	// NOTE: caching locally b/c page.Tab() is sometimes null
 		this.redlink_lnki_list = page.Redlink_lnki_list();
 		this.lnki_list = redlink_lnki_list.Lnki_list();
 		this.thread_id = redlink_lnki_list.Thread_id();

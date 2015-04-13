@@ -56,6 +56,6 @@ public class Xob_info_session {
 	, Cfg_key__time				= "time"			// EX: 20150102 030405
 	, Cfg_key__guid				= "guid"			// EX: 00000000-0000-0000-0000-000000000000
 	;
-	public static Xob_info_session new_(String user, String wiki_domain, String dump_name) {return new Xob_info_session(user, Xoa_app_.Version, wiki_domain, dump_name, DateAdp_.Now(), Guid_adp_.random_());}
+	public static Xob_info_session new_(String user, String wiki_domain, String dump_name) {return new Xob_info_session(user, Xoa_app_.Version, wiki_domain, dump_name, DateAdp_.Now(), Guid_adp_.Empty);}
 	public static final Xob_info_session Test = new_("anonymous", "en.wikipedia.org", "enwiki-latest-pages-articles");
 }

@@ -68,7 +68,7 @@ class Xof_file_fxt {
 		orig_mgr.Find_by_list(OrderedHash_.new_bry_(), itms_list, Xof_exec_tid.Tid_wiki_page);
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Xow_ns_.Id_main, ttl_bry);
 		Xoae_page page = Xoae_page.new_(wiki, ttl);
-		fsdb_mgr.Fsdb_search_by_list(arg.Exec_tid(), itms_list, page, Xog_js_wkr_.Null);
+		fsdb_mgr.Fsdb_search_by_list(arg.Exec_tid(), itms_list, page, Xog_js_wkr_.Noop);
 		if (arg.Rslt_orig_exists()  != Bool_.__byte)	Tfds.Eq(arg.Rslt_orig_exists()  == Bool_.Y_byte, itm.Orig_exists(), "orig_exists");
 		if (arg.Rslt_file_exists()  != Bool_.__byte)	Tfds.Eq(arg.Rslt_file_exists()  == Bool_.Y_byte, itm.File_exists(), "file_exists");
 		if (arg.Rslt_file_resized() != Bool_.__byte)	Tfds.Eq(arg.Rslt_file_resized() == Bool_.Y_byte, itm.File_resized(), "file_resize");

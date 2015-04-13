@@ -225,6 +225,10 @@ class Func_tkn_e_op extends Func_tkn_base {
 		DecimalAdp rhs = val_stack.Pop();
 		DecimalAdp lhs = val_stack.Pop();
 		int rhs_int = rhs.Xto_int();
+		if (rhs_int > 308) {	// PHP:"maximum of ~1.8e308"; verified with {{#expr:1.8e308}} on sandbox; REF:http://php.net/manual/en/language.types.float.php; PAGE:en.w:Factorial; en.w:Astatine; DATE:2015-04-08
+			shunter.Rslt_set(Double_.Inf_pos_bry);
+			return false;
+		}
 		double rhs_double = rhs.Xto_double();
 		if ((double)rhs_int == rhs_double)	// exponent is integer; use pow_10 which does less casts to double
 			val_stack.Push(lhs.Op_mult(DecimalAdp_.pow_10_(rhs_int)));

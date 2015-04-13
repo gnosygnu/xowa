@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.modules.popups; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.modules.*;
 import gplx.core.primitives.*; import gplx.threads.*;
+import gplx.web.js.*;
 import gplx.xowa.gui.views.*;
 import gplx.xowa.specials.search.*;
 import gplx.xowa.apis.xowa.html.modules.*;
@@ -62,7 +63,7 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 	}
 	public String Show_init(int id, byte[] href, byte[] tooltip) {
 		Xoae_page cur_page = Cur_page();
-		Xog_tab_itm tab = cur_page.Tab();
+		Xog_tab_itm tab = cur_page.Tab_data().Tab();
 		if (tab != null && tab.Tab_is_loading()) return "";	// NOTE: tab is null when previewing
 		Xow_popup_itm itm = new Xow_popup_itm(id, href, tooltip, show_init_word_count);
 		String rv = String_.new_utf8_(Get_popup_html(Cur_wiki(), cur_page, itm));
@@ -107,10 +108,16 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 				Xowe_wiki popup_wiki = app.Wiki_mgr().Get_by_key_or_null(temp_href.Wiki());
 				popup_wiki.Init_assert();
 				Xoa_ttl popup_ttl = Xoa_ttl.parse_(popup_wiki, temp_href.Page_and_anchor());
+				switch (popup_ttl.Ns().Id()) {
+					case Xow_ns_.Id_media:
+					case Xow_ns_.Id_special:
+					case Xow_ns_.Id_file:
+						return Bry_.Empty;
+				}
 				if (ns_allowed_regy.Count() > 0 && !ns_allowed_regy.Has(ns_allowed_regy_key.Val_(popup_ttl.Ns().Id()))) return Bry_.Empty;
 				itm.Init(popup_wiki.Domain_bry(), popup_ttl);
 				Xoae_page popup_page = popup_wiki.Data_mgr().Get_page(popup_ttl, false);
-				byte[] rv = popup_wiki.Html_mgr().Module_mgr().Popup_mgr().Parser().Parse(wiki, popup_page, cur_page.Tab(), itm);
+				byte[] rv = popup_wiki.Html_mgr().Module_mgr().Popup_mgr().Parser().Parse(wiki, popup_page, cur_page.Tab_data().Tab(), itm);
 				Update_progress_bar(app, cur_wiki, cur_page, itm);
 				return rv;
 			}
@@ -250,7 +257,7 @@ class Load_popup_wkr implements Gfo_thread_wkr {
 			if (ns_allowed_regy.Count() > 0 && !ns_allowed_regy.Has(ns_allowed_regy_key.Val_(popup_ttl.Ns().Id()))) {Rslt_(Bry_.Empty); return;}
 			itm.Init(popup_wiki.Domain_bry(), popup_ttl);
 			Xoae_page popup_page = popup_wiki.Data_mgr().Get_page(popup_ttl, false);
-			byte[] rv = popup_wiki.Html_mgr().Module_mgr().Popup_mgr().Parser().Parse(wiki, popup_page, cur_page.Tab(), itm);
+			byte[] rv = popup_wiki.Html_mgr().Module_mgr().Popup_mgr().Parser().Parse(wiki, popup_page, cur_page.Tab_data().Tab(), itm);
 			Xow_popup_mgr.Update_progress_bar(app, popup_wiki, cur_page, itm);
 			Rslt_(rv);
 		}
