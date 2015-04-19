@@ -95,7 +95,7 @@ public class Xow_ns implements GfoInvkAble {
 	public boolean Exists() {return exists;} public Xow_ns Exists_(boolean v) {exists = v; return this;} private boolean exists;
 	public Xob_ns_file_itm Bldr_data() {return bldr_data;} public void Bldr_data_(Xob_ns_file_itm v) {bldr_data = v;} private Xob_ns_file_itm bldr_data;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_subpages_enabled_))	subpages_enabled = m.ReadYn("v");
+		if		(ctx.Match(k, Invk_subpages_enabled_))	this.subpages_enabled = m.ReadYn("v");
 		else if (ctx.Match(k, Invk_id))					return id;
 		else if (ctx.Match(k, Invk_name_txt))			return name_txt;
 		else if (ctx.Match(k, Invk_name_ui))			return Name_ui();

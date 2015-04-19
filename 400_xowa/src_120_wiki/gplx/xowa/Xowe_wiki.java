@@ -217,31 +217,30 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble {
 		}
 		init_in_process = true;
 		if (app.Stage() == Xoa_stage_.Tid_launch) init_needed = false;	// NOTE: only mark inited if app fully launched; otherwise statements in xowa.gfs can fire and prematurely set home to inited; DATE:2013-03-24
-		Gfo_log_bfr log_bfr = app.Log_bfr();
-		log_bfr.Add("wiki.init.bgn: " + domain_str);
+		Gfo_log_bfr log_bfr = app.Log_bfr(); log_bfr.Add("wiki.init.bgn: " + domain_str);
 		app.Cfg_mgr().Init(this);
 		file_mgr.Cfg_download().Enabled_(app.File_mgr().Wmf_mgr().Enabled());	// default download to app global; can be overriden below
 		app.Gfs_mgr().Run_url_for(this, tdb_fsys_mgr.Cfg_wiki_stats_fil());
-		app.Gfs_mgr().Run_url_for(this, app.Fsys_mgr().Cfg_wiki_core_dir().GenSubFil(domain_str + ".gfs"));		// run cfg for wiki by user ; EX: /xowa/user/anonymous/wiki/en.wikipedia.org/cfg/user_wiki.gfs
 		Init_db_mgr();
-		// FIXME: commented out; fires multiple times during import process
 		if (!app.Bldr().Import_marker().Chk(this)) {app.Wiki_mgr().Del(domain_bry); init_needed = false; return;}	// NOTE: must call after Db_mgr_create_as_sql(); also, must delete wiki from mgr; DATE:2014-08-24
 		db_mgr.Load_mgr().Load_init(this);
 		app.Gfs_mgr().Run_url_for(this, tdb_fsys_mgr.Cfg_wiki_core_fil());
 		gplx.xowa.utls.upgrades.Xoa_upgrade_mgr.Check(this);
+		// init ns_mgr
 		if (lang.Init_by_load()) {
 			if (domain_tid == Xow_domain_.Tid_int_wikipedia)	// NOTE: if type is wikipedia, add "Wikipedia" as an alias; PAGE:en.w:pt.wikipedia.org/wiki/Página principal which redirects to Wikipedia:Página principal
 				ns_mgr.Aliases_add(Xow_ns_.Id_project, Xow_ns_.Ns_name_wikipedia);
 		}
+		app.Gfs_mgr().Run_url_for(this, app.Fsys_mgr().Cfg_wiki_core_dir().GenSubFil(domain_str + ".gfs"));		// NOTE: must be run after lang.Init_by_load b/c lang will reload ns_mgr; DATE:2015-04-17run cfg for wiki by user ; EX: /xowa/user/anonymous/wiki/en.wikipedia.org/cfg/user_wiki.gfs
 		cfg_parser.Xtns().Itm_pages().Init(ns_mgr);	// init ns_mgr for Page / Index ns just before rebuild; usually set by #cfg file
 		Xow_ns_mgr_.rebuild_(lang, ns_mgr);	// always rebuild; may be changed by user_wiki.gfs; different lang will change namespaces; EX: de.wikisource.org will have Seite for File and none of {{#lst}} will work
+		// push lang changes
 		fragment_mgr.Evt_lang_changed(lang);
 		parser.Init_by_lang(lang);
 		html_mgr.Init_by_lang(lang);
 		lang.Vnt_mgr().Init_by_wiki(this);
-		Bry_fmtr.Null.Eval_mgr().Enabled_(false);
-		app.Wiki_mgr().Scripts().Exec(this);
-		Bry_fmtr.Null.Eval_mgr().Enabled_(true);
+		// other init
+		Bry_fmtr.Null.Eval_mgr().Enabled_(false); app.Wiki_mgr().Scripts().Exec(this); Bry_fmtr.Null.Eval_mgr().Enabled_(true);
 		app.Css_installer().Install_assert(Bool_.Y, this, user.Fsys_mgr().Wiki_html_dir(domain_str));
 		Html_mgr__hdump_enabled_(html_mgr__hdump_enabled);
 		html_mgr.Init_by_wiki(this);

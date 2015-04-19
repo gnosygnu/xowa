@@ -30,7 +30,7 @@ public class Xof_fsdb_itm {
 	public byte					Orig_repo_id() {return orig_repo_id;} private byte orig_repo_id = Xof_repo_itm.Repo_null;
 	public byte[]				Orig_repo_name() {return orig_repo_name;} private byte[] orig_repo_name;
 	public byte[]				Orig_ttl() {return orig_ttl;} private byte[] orig_ttl;
-	public int					Orig_ext() {return orig_ext;} private int orig_ext;
+	public Xof_ext				Orig_ext() {return orig_ext;} private Xof_ext orig_ext;
 	public int					Orig_w() {return orig_w;} private int orig_w = Xop_lnki_tkn.Width_null;
 	public int					Orig_h() {return orig_h;} private int orig_h = Xop_lnki_tkn.Height_null;
 	public byte[]				Orig_redirect() {return orig_redirect;} private byte[] orig_redirect = Bry_.Empty;
@@ -59,14 +59,16 @@ public class Xof_fsdb_itm {
 		// this.file_is_orig = !(Xop_lnki_type.Id_defaults_to_thumb(lnki_type) || lnki_w != Xop_lnki_tkn.Width_null || lnki_h != Xop_lnki_tkn.Height_null); // DELETE: overriden below.
 		this.Lnki_ttl_(lnki_ttl);
 	}	private int lnki_upright_patch;
-	public void	Ctor_by_orig(byte orig_repo_id, byte[] orig_repo_name, byte[] orig_ttl, int orig_ext, int orig_w, int orig_h, byte[] orig_redirect) {
+	public void	Ctor_by_orig(byte orig_repo_id, byte[] orig_repo_name, byte[] orig_ttl, Xof_ext orig_ext, int orig_w, int orig_h, byte[] orig_redirect) {
 		this.orig_repo_id = orig_repo_id; this.orig_repo_name = orig_repo_name;
 		this.orig_ttl = orig_ttl; this.orig_ext = orig_ext;
 		this.orig_w = orig_w; this.orig_h = orig_h; this.orig_redirect = orig_redirect;
-		if (orig_ext != lnki_ext.Id())
-			this.Lnki_ext_(Xof_ext_.new_by_id_(orig_ext));	// overwrite ext with whatever's in file_orig; needed for ogg -> oga / ogv
-		if (Bry_.Len_gt_0(orig_redirect))					// redirect exists; EX: A.png redirected to B.png
+		if (orig_ext != null && orig_ext.Id() != lnki_ext.Id())
+			this.Lnki_ext_(orig_ext);						// overwrite ext with whatever's in file_orig; needed for ogg -> oga / ogv
+		if		(Bry_.Len_gt_0(orig_redirect))				// redirect exists; EX: A.png redirected to B.png
 			this.Lnki_ttl_(orig_redirect);					// update fsdb with atrs of B.png
+		else if	(!Bry_.Eq(lnki_ttl, orig_ttl))				// ttls differ; EX: "A_.png" vs "A.png"
+			this.Lnki_ttl_(orig_ttl);
 	}
 	public void			Ctor_for_html(byte exec_tid, Xof_img_size img_size, Xof_repo_itm repo, Xof_url_bldr url_bldr) {
 		Calc_html_size(exec_tid, img_size);

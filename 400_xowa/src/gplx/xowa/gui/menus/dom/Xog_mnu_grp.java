@@ -57,7 +57,7 @@ public class Xog_mnu_grp extends Xog_mnu_base {
 	}
 	public void Build() {
 		Xoa_gui_mgr gui_mgr = app.Gui_mgr(); Gfui_kit kit = gui_mgr.Kit(); Xog_win_itm win = gui_mgr.Browser_win();
-		if (!kit.Kit_init_done()) return;	// NOTE: .gfs will fire Build before Kit.Init; check that kit is inited
+		if (!kit.Kit_mode__ready()) return;	// NOTE: .gfs will fire Build before Kit.Init; check that kit is inited
 		if (under_mnu == null) {
 			if (mnu_is_popup) {
 				if		(String_.Eq(key, Xog_popup_mnu_mgr.Root_key_tabs_btns))

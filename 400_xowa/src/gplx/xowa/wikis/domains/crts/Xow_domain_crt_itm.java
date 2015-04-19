@@ -15,29 +15,8 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-public interface Xof_file_itm {
-	byte[]				Lnki_ttl();
-	byte[]				Lnki_md5();
-	Xof_ext				Lnki_ext();
-	byte 				Lnki_type();
-	int					Lnki_w();
-	int					Lnki_h();
-	double				Lnki_upright();
-	double				Lnki_time();
-	int					Lnki_page();
-	byte				Orig_repo_id();
-	byte[]				Orig_repo_name();
-	byte[]				Orig_ttl();
-	Xof_ext				Orig_ext();
-	int					Orig_w();
-	int					Orig_h();
-	byte[]				Orig_redirect();
-	boolean				Img_is_thumbable();
-	int					File_w();
-	int					Html_uid();
-	byte				Html_elem_tid();
-	int					Html_w();
-	int					Html_h();
-	int					Gallery_mgr_h();
+package gplx.xowa.wikis.domains.crts; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*;
+import gplx.core.primitives.*;
+public interface Xow_domain_crt_itm {
+	boolean Matches(Xow_domain cur, Xow_domain comp);
 }

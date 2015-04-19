@@ -60,8 +60,8 @@ public class Scrib_invoke_func extends Pf_func_base {
 			String invoke_error = Err_msg_make(e);
 			Error(bfr, wiki.Msg_mgr(), invoke_error);
 			bfr.Add(Html_tag_.Comm_bgn).Add_str(Err_.Message_gplx_brief(e)).Add(Html_tag_.Comm_end);
-			Scrib_err_filter_mgr err_filter_mgr = invoke_wkr.Err_filter_mgr();
-			if (err_filter_mgr.Count_gt_0() && err_filter_mgr.Match(String_.new_utf8_(mod_name), String_.new_utf8_(fnc_name), invoke_error))
+			Scrib_err_filter_mgr err_filter_mgr = invoke_wkr == null ? null : invoke_wkr.Err_filter_mgr();
+			if (err_filter_mgr == null || (err_filter_mgr.Count_gt_0() && err_filter_mgr.Match(String_.new_utf8_(mod_name), String_.new_utf8_(fnc_name), invoke_error)))
 				ctx.App().Usr_dlg().Warn_many("", "", "invoke failed: ~{0} ~{1} ~{2}", String_.new_utf8_(ctx.Cur_page().Ttl().Raw()), String_.new_utf8_(src, self.Src_bgn(), self.Src_end()), Err_.Message_gplx_brief(e));
 			Scrib_core.Core_invalidate_when_page_changes();	// NOTE: invalidate core when page changes, not for rest of page, else page with many errors will be very slow due to multiple invalidations; PAGE:th.d:all; DATE:2014-10-03
 		}

@@ -73,13 +73,13 @@ public class Xof_xfer_queue {
 			Xof_fsdb_itm fsdb = new Xof_fsdb_itm();
 			fsdb.Ctor_by_lnki(xfer.Lnki_ttl(), xfer.Lnki_type(), xfer.Lnki_w(), xfer.Lnki_h(), upright_patch, xfer.Lnki_upright(), xfer.Lnki_time(), xfer.Lnki_page());
 			fsdb.Lnki_ext_(xfer.Lnki_ext());
-			if (xfer.Orig_ext() > 0)
+			if (xfer.Orig_ext() != null)
 				fsdb.Ctor_by_orig(xfer.Orig_repo_id(), xfer.Orig_repo_name(), xfer.Orig_ttl(), xfer.Orig_ext(), xfer.Orig_w(), xfer.Orig_h(), xfer.Orig_redirect());
 			else {	// NOTE: orig_ext doesn't exist; try to get again, b/c Xof_file_wkr won't get it; DATE:2015-04-05
 				Xof_orig_itm orig = wiki.File_mgr().Orig_mgr().Find_by_ttl_or_null(xfer.Lnki_ttl());
 				if (orig != null) {; // no orig;
 					gplx.xowa.files.repos.Xof_repo_pair repo_pair = wiki.File_mgr__repo_mgr().Repos_get_by_id(orig.Repo());
-					fsdb.Ctor_by_orig(orig.Repo(), repo_pair.Trg().Wiki_key(), orig.Page(), orig.Ext(), orig.W(), orig.H(), orig.Redirect());
+					fsdb.Ctor_by_orig(orig.Repo(), repo_pair.Trg().Wiki_key(), orig.Page(), Xof_ext_.new_by_id_(orig.Ext()), orig.W(), orig.H(), orig.Redirect());
 				}
 			}
 			fsdb.Html_uid_(xfer.Html_uid());

@@ -17,13 +17,32 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
 import gplx.core.primitives.*; import gplx.xowa.wikis.*; import gplx.xowa.apis.xowa.specials.*;
-public class Xows_page__search implements Xows_page {
+import gplx.xowa.wikis.domains.crts.*;
+public class Xows_page__search implements Xows_page, GfoInvkAble, GfoEvObj {
+	private final Xow_domain wiki_domain; private final Xoapi_search search_api;
 	private final Xows_core search_mgr; private final Xows_arg_mgr args_mgr = new Xows_arg_mgr();
+	private Xow_domain_crt_itm multi_wiki_crt;
 	public Xows_page__search(Xowe_wiki wiki) {
+		this.wiki_domain = wiki.Domain_itm();
 		this.search_mgr = new Xows_core(wiki.Appe().Wiki_mgr());
-	} 
+		this.ev_mgr = GfoEvMgr.new_(this);
+		this.search_api = wiki.Appe().Api_root().Special().Search();
+	}
+	public GfoEvMgr EvMgr() {return ev_mgr;} private GfoEvMgr ev_mgr;
+	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
+		if		(ctx.Match(k, Xoapi_search.Evt_multi_wiki_rules_changed))				this.multi_wiki_crt = search_api.Multi_wiki_crt(wiki_domain);
+		else	return GfoInvkAble_.Rv_unhandled;
+		return this;
+	}
+	public boolean Match_ttl(Xoa_ttl ttl) {
+		return ttl.Ns().Id_special() && Bry_.Eq(ttl.Root_txt(), Bry_search);
+	}
 	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
 		if (wiki.Domain_tid() == Xow_domain_.Tid_int_home) return;	// do not allow search in home wiki; will throw null ref error b/c no search_ttl dirs
+		if (multi_wiki_crt == null) {
+			this.multi_wiki_crt = search_api.Multi_wiki_crt(wiki.Domain_itm());
+			GfoEvMgr_.SubSame_many(search_api, this, Xoapi_search.Evt_multi_wiki_rules_changed);
+		}
 		// get args
 		Xog_search_suggest_mgr search_suggest_mgr = wiki.Appe().Gui_mgr().Search_suggest_mgr();
 		args_mgr.Clear();
@@ -56,7 +75,6 @@ public class Xows_page__search implements Xows_page {
 			}
 			page.Html_data().Html_restricted_n_();
 			page.Html_data().Xtn_search_text_(search_bry);
-			Xoapi_search search_api = wiki.Appe().Api_root().Special().Search();
 			Xows_ui_qry qry = new Xows_ui_qry(search_bry, args_mgr.Paging_idx(), search_api.Results_per_page(), args_mgr.Sort_tid(), args_mgr.Ns_mgr(), search_api.Async_db(), Bry_.Ary(wiki.Domain_bry()));
 			search_mgr.Search(wiki, page, qry);
 		}
@@ -71,5 +89,5 @@ public class Xows_page__search implements Xows_page {
 	}
 	public static final byte Match_tid_all = 0, Match_tid_bgn = 1;
 	public static final byte Version_null = 0, Version_1 = 1, Version_2 = 2;
-	private static final byte[] Bry_special_name = Bry_.new_ascii_("Special:Search");
+	private static final byte[] Bry_special_name = Bry_.new_ascii_("Special:Search"), Bry_search = Bry_.new_ascii_("Search");
 }

@@ -16,47 +16,42 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.bins; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.core.primitives.*; import gplx.dbs.*; import gplx.ios.*; import gplx.cache.*; import gplx.xowa.files.fsdb.*;
+import gplx.dbs.*; import gplx.ios.*; import gplx.cache.*; import gplx.xowa.files.fsdb.*;
 import gplx.fsdb.*; import gplx.fsdb.data.*; import gplx.fsdb.meta.*;
 public class Xof_bin_wkr__fsdb_sql implements Xof_bin_wkr {
-	private final Int_obj_ref tmp_itm_id = Int_obj_ref.neg1_(), tmp_bin_id = Int_obj_ref.neg1_(), tmp_mnt_id = Int_obj_ref.neg1_();
+	private final Xof_bin_wkr_ids tmp_ids = new Xof_bin_wkr_ids();
 	Xof_bin_wkr__fsdb_sql(Fsm_mnt_mgr mnt_mgr) {this.mnt_mgr = mnt_mgr;}
 	public byte Tid() {return Xof_bin_wkr_.Tid_fsdb_xowa;}
 	public String Key() {return Xof_bin_wkr_.Key_fsdb_wiki;}
 	public Fsm_mnt_mgr Mnt_mgr() {return mnt_mgr;} private final Fsm_mnt_mgr mnt_mgr;
 	public boolean Resize_allowed() {return bin_wkr_resize;} public void Resize_allowed_(boolean v) {bin_wkr_resize = v;} private boolean bin_wkr_resize = false;		
 	public Io_stream_rdr Get_as_rdr(Xof_fsdb_itm itm, boolean is_thumb, int w) {
-		Find_ids(itm, is_thumb, w, tmp_itm_id, tmp_bin_id, tmp_mnt_id);
-		int bin_db_id = tmp_bin_id.Val(); if (bin_db_id == Fsd_bin_tbl.Bin_db_id_null) return gplx.ios.Io_stream_rdr_.Null;
-		Fsm_bin_fil bin_db = mnt_mgr.Bins__at(tmp_mnt_id.Val(), bin_db_id);
-		return bin_db.Select_as_rdr(tmp_itm_id.Val());
+		Find_ids(itm, is_thumb, w);
+		int bin_db_id = tmp_ids.Bin_db_id(); if (bin_db_id == Fsd_bin_tbl.Bin_db_id_null) return gplx.ios.Io_stream_rdr_.Null;
+		Fsm_bin_fil bin_db = mnt_mgr.Bins__at(tmp_ids.Mnt_id(), bin_db_id);
+		return bin_db.Select_as_rdr(tmp_ids.Itm_id());
 	}
 	public boolean Get_to_fsys(Xof_fsdb_itm itm, boolean is_thumb, int w, Io_url bin_url) {return Get_to_fsys(itm.Orig_repo_name(), itm.Lnki_ttl(), itm.Lnki_md5(), itm.Lnki_ext(), is_thumb, w, itm.Lnki_time(), itm.Lnki_page(), bin_url);}
 	private boolean Get_to_fsys(byte[] orig_repo, byte[] orig_ttl, byte[] orig_md5, Xof_ext orig_ext, boolean lnki_is_thumb, int file_w, double lnki_time, int lnki_page, Io_url file_url) {
-		Find_ids(orig_repo, orig_ttl, orig_ext.Id(), lnki_time, lnki_page, lnki_is_thumb, file_w, tmp_itm_id, tmp_bin_id, tmp_mnt_id);
-		int bin_db_id = tmp_bin_id.Val(); if (bin_db_id == Fsd_bin_tbl.Bin_db_id_null) return false;
-		Fsm_bin_fil bin_db = mnt_mgr.Bins__at(tmp_mnt_id.Val(), bin_db_id);
-		return bin_db.Select_to_url(tmp_itm_id.Val(), file_url);
+		Find_ids(orig_repo, orig_ttl, orig_ext.Id(), lnki_time, lnki_page, lnki_is_thumb, file_w);
+		int bin_db_id = tmp_ids.Bin_db_id(); if (bin_db_id == Fsd_bin_tbl.Bin_db_id_null) return false;
+		Fsm_bin_fil bin_db = mnt_mgr.Bins__at(tmp_ids.Mnt_id(), bin_db_id);
+		return bin_db.Select_to_url(tmp_ids.Itm_id(), file_url);
 	}
-	private void Find_ids(Xof_fsdb_itm itm, boolean is_thumb, int w, Int_obj_ref tmp_itm_id, Int_obj_ref tmp_bin_id, Int_obj_ref tmp_mnt_id) {Find_ids(itm.Orig_repo_name(), itm.Lnki_ttl(), itm.Lnki_ext().Id(), itm.Lnki_time(), itm.Lnki_page(), is_thumb, w, tmp_itm_id, tmp_bin_id, tmp_mnt_id);}
-	private void Find_ids(byte[] orig_repo, byte[] orig_ttl, int orig_ext, double lnki_time, int lnki_page, boolean is_thumb, int w, Int_obj_ref tmp_itm_id, Int_obj_ref tmp_bin_id, Int_obj_ref tmp_mnt_id) {
-		synchronized (tmp_bin_id) {
+	private void Find_ids(Xof_fsdb_itm itm, boolean is_thumb, int w) {Find_ids(itm.Orig_repo_name(), itm.Lnki_ttl(), itm.Lnki_ext().Id(), itm.Lnki_time(), itm.Lnki_page(), is_thumb, w);}
+	private void Find_ids(byte[] orig_repo, byte[] orig_ttl, int orig_ext, double lnki_time, int lnki_page, boolean is_thumb, int w) {
+		synchronized (tmp_ids) {
 			byte[] dir = orig_repo, fil = orig_ttl;
 			double time = Xof_lnki_time.Convert_to_fsdb_thumbtime(orig_ext, lnki_time, lnki_page);
 			if (is_thumb) {
 				Fsd_thm_itm thm_itm = Fsd_thm_itm.new_();
 				thm_itm.Init_by_req(w, lnki_time, lnki_page);
 				boolean found = Select_thm_bin(thm_itm, dir, fil);
-				tmp_itm_id.Val_(thm_itm.Thm_id());
-				tmp_bin_id.Val_(found ? thm_itm.Db_bin_id() : Fsd_bin_tbl.Bin_db_id_null);
-				tmp_mnt_id.Val_(thm_itm.Mnt_id());
+				tmp_ids.Init_by_thm(found, thm_itm);
 			}
 			else {
 				Fsd_fil_itm fil_itm = Select_fil_bin(dir, fil, is_thumb, w, time);
-				if (fil_itm == Fsd_fil_itm.Null) return;
-				tmp_itm_id.Val_(fil_itm.Fil_id());
-				tmp_bin_id.Val_(fil_itm.Bin_db_id());
-				tmp_mnt_id.Val_(fil_itm.Mnt_id());
+				tmp_ids.Init_by_fil(fil_itm);
 			}
 		}
 	}
@@ -82,4 +77,33 @@ public class Xof_bin_wkr__fsdb_sql implements Xof_bin_wkr {
 	public void Txn_bgn() {mnt_mgr.Mnts__get_insert().Txn_bgn();}
 	public void Txn_end() {mnt_mgr.Mnts__get_insert().Txn_end();}
         public static Xof_bin_wkr__fsdb_sql new_(Fsm_mnt_mgr mnt_mgr) {return new Xof_bin_wkr__fsdb_sql(mnt_mgr);}
-}	
+}
+class Xof_bin_wkr_ids {
+	public Xof_bin_wkr_ids() {this.Clear();}
+	public int Mnt_id() {return mnt_id;} private int mnt_id;
+	public int Bin_db_id() {return bin_db_id;} private int bin_db_id;
+	public int Itm_id() {return itm_id;} private int itm_id;
+	public void Init_by_thm(boolean found, Fsd_thm_itm thm) {
+		if (found) {
+			this.mnt_id = thm.Mnt_id();
+			this.bin_db_id = thm.Db_bin_id();
+			this.itm_id = thm.Thm_id();
+		}
+		else
+			this.Clear();
+	}
+	public void Init_by_fil(Fsd_fil_itm fil) {
+		if (fil == Fsd_fil_itm.Null)
+			this.Clear();
+		else {
+			this.mnt_id = fil.Mnt_id();
+			this.bin_db_id = fil.Bin_db_id();
+			this.itm_id = fil.Fil_id();
+		}
+	}
+	private void Clear() {
+		this.mnt_id = -1;
+		this.bin_db_id = Fsd_bin_tbl.Bin_db_id_null;
+		this.itm_id = -1;
+	}
+}

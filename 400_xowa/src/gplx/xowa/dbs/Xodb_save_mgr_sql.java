@@ -39,7 +39,7 @@ public class Xodb_save_mgr_sql implements Xodb_save_mgr {
 					if (cur_page_id > max_page_id) max_page_id = cur_page_id;
 				}
 				page_id = max_page_id + 1;
-				db_mgr.Core_data_mgr().Tbl__cfg().Insert_int("db", "page.id_next", page_id + 1);
+				db_mgr.Core_data_mgr().Tbl__cfg().Upsert_int("db", "page.id_next", page_id + 1);
 			} finally {rdr.Rls();}
 		}
 
@@ -52,7 +52,7 @@ public class Xodb_save_mgr_sql implements Xodb_save_mgr {
 		page_core_tbl.Insert_bgn();
 		page_text_tbl.Insert_bgn();
 		try {
-			page_mgr.Create(page_core_tbl, page_text_tbl, page_id, ns_id, text_raw, redirect, DateAdp_.Now(), text_zip, text_raw.length, ns_count, page_text_db.Id(), -1);
+			page_mgr.Create(page_core_tbl, page_text_tbl, page_id, ns_id, ttl.Page_db(), redirect, DateAdp_.Now(), text_zip, text_raw.length, ns_count, page_text_db.Id(), -1);
 			db_file.Tbl__ns().Update_ns_count(ns_id, ns_count);
 			db_file.Tbl__cfg().Update_int("db", "page.id_next", page_id + 1);
 		} finally {

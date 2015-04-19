@@ -46,7 +46,7 @@ public class Xof_cache_mgr2 {
 			Xof_cache_itm itm = Get_or_null(fsdb.Lnki_ttl(), fsdb.Lnki_type(), fsdb.Lnki_upright(), fsdb.Lnki_w(), fsdb.Lnki_h(), fsdb.Lnki_time(), fsdb.Lnki_page());
 			if (itm == Xof_cache_itm.Null) {
 				itm = new Xof_cache_itm(key_bfr, Db_cmd_mode.Tid_create, site, fsdb.Lnki_ttl(), fsdb.Lnki_type(), fsdb.Lnki_upright(), fsdb.Lnki_w(), fsdb.Lnki_h(), fsdb.Lnki_time(), fsdb.Lnki_page()
-					, fsdb.Orig_repo_id(), fsdb.Orig_ttl(), fsdb.Orig_ext(), fsdb.Orig_w(), fsdb.Orig_h()
+					, fsdb.Orig_repo_id(), fsdb.Orig_ttl(), fsdb.Orig_ext().Id(), fsdb.Orig_w(), fsdb.Orig_h()
 					, fsdb.Lnki_time(), fsdb.Lnki_page(), fsdb.Temp_file_size(), 1, DateAdp_.Now().Timestamp_unix(), fsdb.Temp_file_w())
 					;
 				hash.Add(itm.Lnki_key(), itm);

@@ -104,7 +104,7 @@ public class Xol_mw_lang_parser {
 				try {
 					Xol_lang lang = lang_mgr.Get_by_key_or_new(Bry_.new_utf8_(fil.NameOnly()));
 					Xob_i18n_parser.Load_msgs(true, lang, fil);
-				}	catch (Exception exc) {Err_.Noop(exc); Tfds.WriteText(String_.Format("failed to parse json file; url={0} err={1}", fil.Raw(), Err_.Message_gplx_brief(exc)));}
+				}	catch (Exception exc) {Err_.Noop(exc); Tfds.WriteText(String_.Format("failed to parse json file; url={0} err={1}\n", fil.Raw(), Err_.Message_gplx_brief(exc)));}
 			}
 		}
 	}

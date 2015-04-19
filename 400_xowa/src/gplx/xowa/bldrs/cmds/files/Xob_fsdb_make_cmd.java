@@ -61,7 +61,7 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		}
 		// trg_mnt_itm
 		this.trg_bin_db_max = app.Api_root().Bldr().Wiki().Import().File_db_max();
-		Fsdb_db_mgr trg_db_mgr = Fsdb_db_mgr_.new_detect(wiki.Domain_str(), wiki.Fsys_mgr().Root_dir(), wiki.Fsys_mgr().File_dir());
+		Fsdb_db_mgr trg_db_mgr = Fsdb_db_mgr_.new_detect(wiki, wiki.Fsys_mgr().Root_dir(), wiki.Fsys_mgr().File_dir());
 		if (trg_db_mgr == null) trg_db_mgr = Fsdb_db_mgr__v2_bldr.I.Make(wiki);
 		Fsm_mnt_mgr trg_mnt_mgr = new Fsm_mnt_mgr(); trg_mnt_mgr.Ctor_by_load(trg_db_mgr);
 		trg_mnt_mgr.Mnts__get_insert_idx_(Fsm_mnt_mgr.Mnt_idx_main);		// NOTE: do not delete; mnt_mgr default to Mnt_idx_user; DATE:2014-04-25
@@ -119,7 +119,7 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	}
 	public void Cmd_end() {
 		usr_dlg.Note_many("", "", "fsdb_make.done: count=~{0} rate=~{1}", exec_count, DecimalAdp_.divide_safe_(exec_count, Env_.TickCount_elapsed_in_sec(time_bgn)).Xto_str("#,###.000"));
-		src_fsdb_wkr.Mnt_mgr().Mnts__get_main().Txn_end();
+		if (src_fsdb_wkr != null) src_fsdb_wkr.Mnt_mgr().Mnts__get_main().Txn_end();	// NOTE: src_fsdb_wkr will be null if no src db defined
 		trg_atr_fil.Conn().Txn_end(); trg_atr_fil.Conn().Rls_conn();
 		if (!trg_mnt_itm.Db_mgr().File__solo_file()) {
 			trg_bin_fil.Conn().Txn_end(); trg_bin_fil.Conn().Rls_conn();
@@ -303,10 +303,10 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		}
 		else if (String_.Eq(version, "v2")) {
 			url = wiki.Fsys_mgr().Root_dir().GenSubDir("prv");		// v2: EX: /xowa/wiki/en.wikipedia.org/prv/
-			rv = Fsdb_db_mgr_.new_detect(domain_str, url, url);		// note that v2 is prioritized over v1
+			rv = Fsdb_db_mgr_.new_detect(wiki, url, url);			// note that v2 is prioritized over v1
 		}
 		else throw Err_.new_("fsdb.make:unknown fsdb_type; version={0}", version);
-		if (!Io_mgr._.ExistsFil(rv.File__mnt_file().Url())) throw Err_.new_("fsdb.make:source fsdb not found; version={0} url={1}", version, url.Raw());
+		if (rv == null) throw Err_.new_("fsdb.make:source fsdb not found; version={0} url={1}", version, url.Raw());
 		return rv;
 	}
 	private static final byte Select_rv_stop = 0, Select_rv_process = 1, Select_rv_next_page = 2;

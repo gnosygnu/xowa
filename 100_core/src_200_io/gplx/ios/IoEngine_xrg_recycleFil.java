@@ -49,7 +49,7 @@ public class IoEngine_xrg_recycleFil extends IoEngine_xrg_fil_affects1_base {
 	public IoEngine_xrg_recycleFil(int v) {
 		mode = v;
 		time = DateAdp_.Now();
-		uuid = Guid_adp_.random_();
+		uuid = Guid_adp_.new_();
 		rootDirNames = ListAdp_.new_(); rootDirNames.Add("z_trash");
 	}
 	public static IoEngine_xrg_recycleFil sysm_(Io_url url) {return new IoEngine_xrg_recycleFil(SysmConst);}

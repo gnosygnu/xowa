@@ -78,7 +78,7 @@ class Xows_html_wkr {
 	private static final Bry_fmtr fmtr_tbl = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<table class='wikitable sortable'>"
 	, "  <tr>"
-	, "    <th colspan='2' style='text-align:left'><a href='/site/home/wiki/Help:Special/Search'>Help</a>"
+	, "    <th colspan='2' style='text-align:left'><a href='/site/home/wiki/Help:Special/Search'>Help</a>"	// SERVER:"<a href='"; DATE:2015-04-16
 	, "    </th>"
 	, "  </tr>"
 	, "  <tr>"
@@ -95,8 +95,8 @@ class Xows_html_wkr {
 	, "  </tr>"
 	, "</table>"
 	), "wiki", "cancel", "hdr_len", "hdr_ttl", "insert_key", "rows");
-	private static final Bry_fmtr		fmtr_link = Bry_fmtr.new_("<a href='~{a_href}' title='~{a_title}'>~{a_text}</a>", "a_href", "a_title", "a_text");
-	private static final Bry_fmtr		fmtr_link_id = Bry_fmtr.new_("<a id='~{a_id}' href='~{a_href}' title='~{a_title}'>~{a_text}</a>", "a_id", "a_href", "a_title", "a_text");
+	private static final Bry_fmtr		fmtr_link = Bry_fmtr.new_("<a href='~{a_href}' title='~{a_title}'>~{a_text}</a>", "a_href", "a_title", "a_text");	// SERVER:"<a href='"; DATE:2015-04-16
+	private static final Bry_fmtr		fmtr_link_id = Bry_fmtr.new_("<a href='~{a_href}' title='~{a_title}' id='~{a_id}'>~{a_text}</a>", "a_id", "a_href", "a_title", "a_text"); // SERVER:"<a href='"; DATE:2015-04-16
 	private static final Bry_fmtr_vals	fmtr_paging_bwd = Bry_fmtr_vals.new_(fmtr_link);
 	private static final Bry_fmtr_vals	fmtr_paging_fwd = Bry_fmtr_vals.new_(fmtr_link);
 	private static final Bry_fmtr_vals	fmtr_paging_cxl = Bry_fmtr_vals.new_(fmtr_link_id);
@@ -126,7 +126,7 @@ class Xows_html_row implements Bry_fmtr_arg {
 	, "  <tr id='~{page_key}'>"
 	, "    <td>~{page_len}"
 	, "    </td>"
-	, "    <td><a href='~{a_href}' title='~{a_title}'>~{a_text}</a>"
+	, "    <td><a href='~{a_href}' title='~{a_title}'>~{a_text}</a>"	// SERVER:"<a href='"; DATE:2015-04-16
 	, "    </td>"
 	, "  </tr>"
 	), "page_key", "page_len", "a_href", "a_title", "a_text");

@@ -34,7 +34,7 @@ public class Xow_domain_ {
 	, Domain_bry_wikimediafoundation			= Bry_.new_ascii_("wikimediafoundation.org")
 	, Domain_bry_species						= Bry_.new_ascii_("species.wikimedia.org")
 	;
-	private static final byte Tid_int_null = Byte_.Max_value_127;
+	public static final byte Tid_int_null = Byte_.Max_value_127;
 	public static final int
 	  Tid_int_other		=  0, Tid_int_home       =  1
 	, Tid_int_wikipedia =  2, Tid_int_wiktionary =  3, Tid_int_wikisource =  4, Tid_int_wikibooks =  5, Tid_int_wikiversity =  6, Tid_int_wikiquote = 7, Tid_int_wikinews = 8, Tid_int_wikivoyage = 9
@@ -86,8 +86,9 @@ public class Xow_domain_ {
 	.Add_bry_int(Tid_bry_other					, Tid_int_other)
 	;
 	public static byte[]	Tid__get_bry(int tid) {return Tid_bry__ary[tid];}
-	public static int		Tid__get_int(byte[] key) {
-		Object o = hash_tid_by_bry.Get_by_bry(key);
+	public static int		Tid__get_int(byte[] key) {return Tid__get_int(key, 0, key.length);}
+	public static int		Tid__get_int(byte[] key, int bgn, int end) {
+		Object o = hash_tid_by_bry.Get_by_mid(key, bgn, end);
 		return o == null ? Tid_int_null : ((Int_obj_val)o).Val();
 	}
 	public static Xow_domain parse(byte[] raw) {

@@ -98,6 +98,26 @@ public class Xoh_file_wtr_basic_tst {
 			,	""
 			));
 	}
+	@Test  public void Img_frame_and_thumb() {	// PURPOSE: lnki with "frame and thumb" was not showing box due to bit-adding; PAGE:en.w:History_of_Western_Civilization DATE:2015-04-16
+		fxt.Test_parse_page_wiki_str
+			(	"[[File:A.png|frame|thumb|220x110px|b]]"	// NOTE: frame AND thumb
+			,	String_.Concat_lines_nl_skip_last
+			(	"<div class=\"thumb tright\">"
+			,	"  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"
+			,	"    <a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/220px.png\" width=\"220\" height=\"110\" /></a>"
+			,	"    <div class=\"thumbcaption\">"
+			,	"      <div class=\"magnify\">"
+			,	"        <a href=\"/wiki/File:A.png\" class=\"internal\" title=\"Enlarge\">"
+			,	"          <img src=\"file:///mem/xowa/user/test_user/app/img/file/magnify-clip.png\" width=\"15\" height=\"11\" alt=\"\" />"
+			,	"        </a>"
+			,	"      </div>"
+			,	"      b"
+			,	"    </div>"
+			,	"  </div>"
+			,	"</div>"
+			,	""
+			));
+	}
 	@Test  public void Cls_border() {
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.png|border]]"

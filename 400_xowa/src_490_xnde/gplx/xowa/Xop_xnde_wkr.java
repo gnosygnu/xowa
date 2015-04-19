@@ -634,12 +634,9 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 					case Xop_xnde_tag_.Tid_imageMap:				xnde_xtn = tkn_mkr.Xnde_imageMap(); break;
 					case Xop_xnde_tag_.Tid_hiero:					xnde_xtn = tkn_mkr.Xnde_hiero(); break;
 					case Xop_xnde_tag_.Tid_inputBox:				xnde_xtn = tkn_mkr.Xnde_inputbox(); break;
-					case Xop_xnde_tag_.Tid_dynamicPageList:
+					case Xop_xnde_tag_.Tid_dynamicPageList:			xnde_xtn = tkn_mkr.Xnde_dynamicPageList(); break;
 					case Xop_xnde_tag_.Tid_pages: {
-						switch (tag_id) {
-							case Xop_xnde_tag_.Tid_pages:			xnde_xtn = tkn_mkr.Xnde_pages(); break;
-							case Xop_xnde_tag_.Tid_dynamicPageList: xnde_xtn = tkn_mkr.Xnde_dynamicPageList(); break;
-						}
+						xnde_xtn = tkn_mkr.Xnde_pages();
 						boolean enabled = ctx.Wiki().Xtn_mgr().Xtn_proofread().Enabled();
 						if (!enabled) {	// if Page / Index ns does not exist, disable xtn and escape content; DATE:2014-11-28
 							escaped = true;

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.langs.*; import gplx.xowa.xtns.wdatas.*;
+import gplx.xowa.langs.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.wikis.domains.crts.*;
 public class Xoa_wiki_mgr implements GfoInvkAble {
 	private Xoae_app app;
 	private ListAdp list = ListAdp_.new_(); private Hash_adp_bry hash = Hash_adp_bry.ci_ascii_();	// ASCII:url_domain; EX:en.wikipedia.org
@@ -41,6 +41,15 @@ public class Xoa_wiki_mgr implements GfoInvkAble {
 		Xowe_wiki rv = this.Get_by_key_or_null(key);
 		if (rv == null) rv = New_wiki(key);
 		return rv;
+	}
+	public Xowe_wiki[] Get_by_crt(Xow_domain cur, Xow_domain_crt_itm crt) {
+		ListAdp rv = ListAdp_.new_();
+		int len = this.Count();
+		for (int i = 0; i < len; ++i) {
+			Xow_wiki wiki = this.Get_at(i);
+			if (crt.Matches(cur, wiki.Domain_itm())) rv.Add(wiki);
+		}
+		return (Xowe_wiki[])rv.Xto_ary_and_clear(Xowe_wiki.class);
 	}
 	public Xowe_wiki Wiki_commons() {
 		Xowe_wiki rv = this.Get_by_key_or_null(Xow_domain_.Domain_bry_commons);

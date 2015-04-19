@@ -44,8 +44,8 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 	public Xoae_app			App()				{return app;} private Xoae_app app;
 	public Xog_tab_mgr		Tab_mgr()			{return tab_mgr;} private Xog_tab_mgr tab_mgr;
 	public Xog_tab_itm		Active_tab()		{return tab_mgr.Active_tab();}
-	public Xoae_page			Active_page()		{return tab_mgr.Active_tab().Page();} public void Active_page_(Xoae_page v) {tab_mgr.Active_tab().Page_(v);}
-	public Xowe_wiki			Active_wiki()		{return tab_mgr.Active_tab().Wiki();}
+	public Xoae_page		Active_page()		{return tab_mgr.Active_tab().Page();} public void Active_page_(Xoae_page v) {tab_mgr.Active_tab().Page_(v);}
+	public Xowe_wiki		Active_wiki()		{return tab_mgr.Active_tab().Wiki();}
 	public Xog_html_itm		Active_html_itm()	{return tab_mgr.Active_tab().Html_itm();}
 	public Gfui_html		Active_html_box()	{return tab_mgr.Active_tab().Html_itm().Html_box();}
 	public Xog_resizer		Resizer() {return resizer;} private Xog_resizer resizer = new Xog_resizer();
@@ -180,6 +180,8 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 		Xoae_page cur_page = tab.Page(); Xowe_wiki cur_wiki = tab.Wiki();
 		Xoae_page new_page = tab.History_mgr().Go_by_dir(cur_wiki, fwd);
 		if (new_page.Missing()) return;
+		if (new_page.Wikie().Special_mgr().Page_search().Match_ttl(new_page.Ttl()))		// if Special:Search, reload page; needed for async loading; DATE:2015-04-19
+			new_page = new_page.Wikie().GetPageByTtl(new_page.Url(), new_page.Ttl());	// NOTE: must reparse page if (a) Edit -> Read; or (b) "Options" save
 		byte history_nav_type = fwd ? Xog_history_stack.Nav_fwd : Xog_history_stack.Nav_bwd;
 		boolean new_page_is_same = Bry_.Eq(cur_page.Ttl().Full_txt(), new_page.Ttl().Full_txt());
 		Xog_tab_itm_read_mgr.Show_page(tab, new_page, true, new_page_is_same, false, history_nav_type);

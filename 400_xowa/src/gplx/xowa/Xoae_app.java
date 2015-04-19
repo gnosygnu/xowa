@@ -156,9 +156,9 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 		if (setup_mgr.Cmd_mgr().Working()) {
 			if (!gui_mgr.Kit().Ask_yes_no("", "", "An import is in progress. Are you sure you want to exit?")) return false;
 		} 
+		if (!gui_mgr.Browser_win().Tab_mgr().Tabs__pub_close_all()) return false;
 		gui_mgr.Browser_win().Usr_dlg().Canceled_y_();		
 		user.App_term(); usr_dlg.Log_many("", "", "term:app_term");
-		gui_mgr.Browser_win().Tab_mgr().Tabs_close_all();
 		log_wtr.Term(); usr_dlg.Log_many("", "", "term:log_wtr");
 		log_mgr.Rls(); usr_dlg.Log_many("", "", "term:log_mgr");
 		if (Scrib_core.Core() != null) {Scrib_core.Core().Term(); usr_dlg.Log_many("", "", "term:scrib");}

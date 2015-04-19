@@ -62,43 +62,43 @@ public class Xof_bin_mgr {
 		if (!Env_.Mode_testing()) cache_mgr.Reg(itm, rdr.Len());
 		return trg;
 	}
-	public Io_stream_rdr Find_as_rdr(byte exec_tid, Xof_fsdb_itm itm) {
+	public Io_stream_rdr Find_as_rdr(byte exec_tid, Xof_fsdb_itm fsdb) {
 		Io_stream_rdr rv = Io_stream_rdr_.Null;
-		Xof_repo_itm repo = repo_mgr.Repos_get_by_wiki(itm.Orig_repo_name()).Trg();
-		boolean file_is_orig = itm.File_is_orig();
+		Xof_repo_itm repo = repo_mgr.Repos_get_by_wiki(fsdb.Orig_repo_name()).Trg();
+		boolean file_is_orig = fsdb.File_is_orig();
 		if (file_is_orig || exec_tid == Xof_exec_tid.Tid_viewer_app) {			// orig or viewer_app; note that viewer_app always return orig
-			Io_url trg = url_bldr.To_url_trg(repo, itm, Bool_.Y);
-			itm.Html_view_url_(trg);
+			Io_url trg = url_bldr.To_url_trg(repo, fsdb, Bool_.Y);
+			fsdb.Html_view_url_(trg);
 			for (int i = 0; i < wkrs_len; i++) {
 				Xof_bin_wkr wkr = wkrs[i];
-				rv = wkr.Get_as_rdr(itm, Bool_.N, itm.Html_w());
+				rv = wkr.Get_as_rdr(fsdb, Bool_.N, fsdb.Html_w());
 				if (rv == Io_stream_rdr_.Null) continue;						// orig not found; continue;
-				itm.File_exists_y_();
+				fsdb.File_exists_y_();
 				return rv;
 			}
 		}
 		else {																	// thumb
-			Io_url trg = url_bldr.To_url_trg(repo, itm, Bool_.N);
-			itm.Html_view_url_(trg);
+			Io_url trg = url_bldr.To_url_trg(repo, fsdb, Bool_.N);
+			fsdb.Html_view_url_(trg);
 			for (int i = 0; i < wkrs_len; i++) {
 				Xof_bin_wkr wkr = wkrs[i];
-				rv = wkr.Get_as_rdr(itm, Bool_.Y, itm.Html_w());				// get thumb's bin
+				rv = wkr.Get_as_rdr(fsdb, Bool_.Y, fsdb.Html_w());				// get thumb's bin
 				if (rv != Io_stream_rdr_.Null) {								// thumb's bin exists;
-					itm.File_exists_y_();
+					fsdb.File_exists_y_();
 					return rv;
 				}
-				usr_dlg.Log_direct(String_.Format("thumb not found; ttl={0} w={1} ", String_.new_utf8_(itm.Lnki_ttl()), itm.Lnki_w()));
-				rv = wkr.Get_as_rdr(itm, Bool_.N, itm.Orig_w());				// thumb missing; get orig;
+				usr_dlg.Log_direct(String_.Format("thumb not found; ttl={0} w={1} ", String_.new_utf8_(fsdb.Lnki_ttl()), fsdb.Lnki_w()));
+				rv = wkr.Get_as_rdr(fsdb, Bool_.N, fsdb.Orig_w());				// thumb missing; get orig;
 				if (rv == Io_stream_rdr_.Null) {
 					usr_dlg.Log_direct(String_.Format("orig not found;"));
 					continue;													// nothing found; continue;
 				}
 				if (!wkr.Resize_allowed()) continue;
-				Io_url orig = url_bldr.To_url_trg(repo, itm, Bool_.Y);			// get orig url
+				Io_url orig = url_bldr.To_url_trg(repo, fsdb, Bool_.Y);			// get orig url
 				Io_stream_wtr_.Save_rdr(orig, rv);
-				boolean resized = Resize(exec_tid, itm, file_is_orig, orig, trg);
+				boolean resized = Resize(exec_tid, fsdb, file_is_orig, orig, trg);
 				if (!resized) continue;
-				itm.File_exists_y_();
+				fsdb.File_exists_y_();
 				rv = Io_stream_rdr_.file_(trg);									// return stream of resized url; (result of imageMagick / inkscape)
 				rv.Open();
 				return rv;

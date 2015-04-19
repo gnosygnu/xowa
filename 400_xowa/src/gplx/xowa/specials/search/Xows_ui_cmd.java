@@ -48,6 +48,7 @@ class Xows_ui_cmd implements GfoInvkAble, Cancelable, Xog_tab_close_lnr {
 			if (canceled) return; 	// NOTE: must check else throws SWT exception
 		}
 		js_wkr.Html_atr_set("xowa_cancel_" + wiki.Domain_str(), "style", "display:none;");
+		qry.Page_max_(cache.Count() / qry.Page_len());
 		Xoa_app_.Usr_dlg().Prog_many("", "", "");
 	}
 	public boolean Search() {
@@ -55,7 +56,7 @@ class Xows_ui_cmd implements GfoInvkAble, Cancelable, Xog_tab_close_lnr {
 		boolean rv = false;
 		if (qry.Itms_end() > cache.Count() && !cache.Done()) {
 			if (async)
-				ThreadAdp_.invk_(this, Invk_search_db).Start();
+				ThreadAdp_.invk_("xowa.special.search", this, Invk_search_db).Start();
 			else
 				Search_db();
 			rv = true;

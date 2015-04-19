@@ -229,8 +229,7 @@ class HttpRequest implements Runnable{
 					else
 						req += app.Http_server().Home();
 				}
-				if(req.endsWith("wiki/")) req+="Main_Page";
-				if(req.endsWith("wiki")) req+="/Main_Page";
+				req = Http_server_wkr_.Assert_main_page(app, req);
 			}
 			
 			if(req.contains("%xowa-cmd%") || req.contains("/xowa-cmd:")){

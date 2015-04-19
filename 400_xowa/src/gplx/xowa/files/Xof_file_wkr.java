@@ -64,7 +64,7 @@ public class Xof_file_wkr implements Gfo_thread_wkr {
 	}
 	public static void Show_img(byte exec_tid, Xof_fsdb_itm fsdb, Gfo_usr_dlg usr_dlg, Xof_bin_mgr bin_mgr, Fsm_mnt_mgr mnt_mgr, Xof_cache_mgr cache_mgr, Xow_repo_mgr repo_mgr, Xog_js_wkr js_wkr, Xof_img_size img_size, Xof_url_bldr url_bldr, Xoa_page hpg) {
 		try {
-			if (fsdb.Orig_ext() < 0) {
+			if (fsdb.Orig_ext() == null) {
 				usr_dlg.Warn_many("", "", "file.missing.ext: file=~{0} width=~{1} page=~{2}", fsdb.Lnki_ttl(), fsdb.Lnki_w(), hpg.Ttl().Full_db());
 				return;
 			}
@@ -104,7 +104,7 @@ public class Xof_file_wkr implements Gfo_thread_wkr {
 		byte repo_id = orig.Repo();
 		Xof_repo_pair repo_pair = repo_mgr.Repos_get_by_id(repo_id);
 		Xof_repo_itm repo_itm = repo_pair.Trg();
-		fsdb.Ctor_by_orig(repo_id, repo_pair.Wiki_domain(), orig.Page(), orig.Ext(), orig.W(), orig.H(), orig.Redirect());
+		fsdb.Ctor_by_orig(repo_id, repo_pair.Wiki_domain(), orig.Page(), Xof_ext_.new_by_id_(orig.Ext()), orig.W(), orig.H(), orig.Redirect());
 		fsdb.Ctor_for_html(exec_tid, img_size, repo_itm, url_bldr);
 	}
 	private static void Save_bin(Xof_fsdb_itm itm, Fsm_mnt_mgr mnt_mgr) {

@@ -89,25 +89,25 @@ public class GfsCore implements GfoInvkAble {
 }
 class GfsCore_ {
 	public static final String Arg_primitive = "v";
-	public static Object Exec(GfsCtx ctx, GfoInvkAble ownerInvk, GfoMsg ownerMsg, Object ownerPrimitive, int depth) {
-		if (ownerMsg.Args_count() == 0 && ownerMsg.Subs_count() == 0 && String_.Eq(ownerMsg.Key(), "")) {UsrDlg_._.Warn("empty msg"); return GfoInvkAble_.Rv_unhandled;}
-		if (ownerPrimitive != null) ownerMsg.Parse_(false).Add(GfsCore_.Arg_primitive, ownerPrimitive);
-		Object rv = ownerInvk.Invk(ctx, 0, ownerMsg.Key(), ownerMsg);
+	public static Object Exec(GfsCtx ctx, GfoInvkAble owner_invk, GfoMsg owner_msg, Object owner_primitive, int depth) {
+		if (owner_msg.Args_count() == 0 && owner_msg.Subs_count() == 0 && String_.Eq(owner_msg.Key(), "")) {UsrDlg_._.Warn("empty msg"); return GfoInvkAble_.Rv_unhandled;}
+		if (owner_primitive != null) owner_msg.Parse_(false).Add(GfsCore_.Arg_primitive, owner_primitive);
+		Object rv = owner_invk.Invk(ctx, 0, owner_msg.Key(), owner_msg);
 		if		(rv == GfoInvkAble_.Rv_cancel)		return rv;
 		else if (rv == GfoInvkAble_.Rv_unhandled)	{
 			if (ctx.Fail_if_unhandled())
-				throw Err_.new_("Object does not support key").Add("key", ownerMsg.Key()).Add("ownerType", ClassAdp_.FullNameOf_obj(ownerInvk));
+				throw Err_.new_("Object does not support key").Add("key", owner_msg.Key()).Add("ownerType", ClassAdp_.FullNameOf_obj(owner_invk));
 			else {
 				Gfo_usr_dlg usr_dlg = ctx.Usr_dlg();
-				if (usr_dlg != null) usr_dlg.Warn_many(GRP_KEY, "unhandled_key", "Object does not support key: key=~{0} ownerType=~{1}", ownerMsg.Key(), ClassAdp_.FullNameOf_obj(ownerInvk));
+				if (usr_dlg != null) usr_dlg.Warn_many(GRP_KEY, "unhandled_key", "Object does not support key: key=~{0} ownerType=~{1}", owner_msg.Key(), ClassAdp_.FullNameOf_obj(owner_invk));
 				return GfoInvkAble_.Null;
 			}
 		}
-		if (ownerMsg.Subs_count() == 0) {					// msg is leaf
+		if (owner_msg.Subs_count() == 0) {					// msg is leaf
 			GfsRegyItm regyItm = GfsRegyItm.as_(rv);
 			if (regyItm == null) return rv;					// rv is primitive or other non-regy Object
 			if (regyItm.IsCmd())							// rv is cmd; invk cmd
-				return regyItm.InvkAble().Invk(ctx, 0, ownerMsg.Key(), ownerMsg);
+				return regyItm.InvkAble().Invk(ctx, 0, owner_msg.Key(), owner_msg);
 			else											// rv is host
 				return regyItm.InvkAble();
 		}
@@ -123,9 +123,9 @@ class GfsCore_ {
 				primitive = rv;
 			}
 			Object exec_rv = null;
-			int len = ownerMsg.Subs_count();
+			int len = owner_msg.Subs_count();
 			for (int i = 0; i < len; i++)	// iterate over subs; needed for a{b;c;d;}
-				exec_rv = Exec(ctx, invk, ownerMsg.Subs_getAt(i), primitive, depth + 1); 
+				exec_rv = Exec(ctx, invk, owner_msg.Subs_getAt(i), primitive, depth + 1); 
 			return exec_rv;
 		}
 	}

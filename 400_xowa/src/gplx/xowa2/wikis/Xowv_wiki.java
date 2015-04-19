@@ -72,7 +72,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser {
 				data_mgr__core_mgr = new Xowd_db_mgr(fsys_mgr.Root_dir(), domain_itm);
 				Io_url core_url = gplx.xowa.wikis.Xow_fsys_mgr.Find_core_fil(fsys_mgr.Root_dir(), domain_str);
 				data_mgr__core_mgr.Init_by_load(core_url);
-				this.db_core_mgr = Fsdb_db_mgr_.new_detect(domain_str, fsys_mgr.Root_dir(), fsys_mgr.File_dir());
+				this.db_core_mgr = Fsdb_db_mgr_.new_detect(this, fsys_mgr.Root_dir(), fsys_mgr.File_dir());
 				if (db_core_mgr != null)	// will be null for xowa db
 					fsdb_mgr.Mnt_mgr().Ctor_by_load(db_core_mgr);
 				file_mgr__repo_mgr.Add_repo(app, fsys_mgr.File_dir(), Bry_.new_utf8_("commons.wikimedia.org"), Bry_.new_utf8_("simple.wikipedia.org"));

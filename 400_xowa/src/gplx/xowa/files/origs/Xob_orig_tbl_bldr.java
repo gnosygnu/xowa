@@ -26,7 +26,7 @@ public class Xob_orig_tbl_bldr extends Xob_itm_basic_base implements Xob_cmd {
 		Xof_fsdb_mode fsdb_mode = wiki.File_mgr__fsdb_mode();
 		fsdb_mode.Tid_make_y_();
 		wiki.Init_assert();
-		Fsdb_db_mgr db_core_mgr = Fsdb_db_mgr_.new_detect(wiki.Domain_str(), wiki.Fsys_mgr().Root_dir(), wiki.Fsys_mgr().File_dir());
+		Fsdb_db_mgr db_core_mgr = Fsdb_db_mgr_.new_detect(wiki, wiki.Fsys_mgr().Root_dir(), wiki.Fsys_mgr().File_dir());
 		conn = db_core_mgr.File__orig_tbl_ary()[gplx.fsdb.meta.Fsm_mnt_mgr.Mnt_idx_main].Conn();
 		Io_url make_db_url = Xob_db_file.new__file_make(wiki.Fsys_mgr().Root_dir()).Url();
 		Sqlite_engine_.Db_attach(conn, "make_db", make_db_url.Raw());

@@ -37,9 +37,8 @@ public class Xof_orig_mgr {
 	public Xof_orig_itm Find_by_ttl_or_null(byte[] ttl) {
 		for (int i = 0; i < wkrs_len; i++) {
 			Xof_orig_wkr wkr = wkrs[i];
-			Xof_orig_itm orig = wkr.Find_as_itm(ttl);
-			if (orig == Xof_orig_itm.Null) continue;
-			if (orig.Insert_new()) this.Insert(orig.Repo(), orig.Page(), orig.Ext(), orig.W(), orig.H(), orig.Redirect());
+			Xof_orig_itm orig = wkr.Find_as_itm(ttl); if (orig == Xof_orig_itm.Null) continue;
+			if (orig.Insert_new()) this.Insert(orig.Repo(), ttl, orig.Ext(), orig.W(), orig.H(), orig.Redirect()); // NOTE: orig_page must be same as find_arg not orig.Page() else will not be found for next call; DATE:2015-04-14
 			return orig;
 		}
 		return Xof_orig_itm.Null;
@@ -54,9 +53,8 @@ public class Xof_orig_mgr {
 			try {
 				Xof_fsdb_itm fsdb = (Xof_fsdb_itm)itms.FetchAt(i);
 				fsdb.Orig_exists_n_();																			// default to status = missing
-				Xof_orig_itm orig = (Xof_orig_itm)rv.Fetch(fsdb.Lnki_ttl());
-				if (orig == Xof_orig_itm.Null) continue;
-				if (orig.Insert_new()) this.Insert(orig.Repo(), orig.Page(), orig.Ext(), orig.W(), orig.H(), orig.Redirect());
+				Xof_orig_itm orig = (Xof_orig_itm)rv.Fetch(fsdb.Lnki_ttl()); if (orig == Xof_orig_itm.Null) continue;
+				if (orig.Insert_new()) this.Insert(orig.Repo(), fsdb.Lnki_ttl(), orig.Ext(), orig.W(), orig.H(), orig.Redirect());	// NOTE: orig_page must be same as find_arg not orig.Page() else will not be found for next call; DATE:2015-04-14
 				Xof_file_wkr.Eval_orig(exec_tid, orig, fsdb, url_bldr, repo_mgr, img_size);
 				if (!Io_mgr._.ExistsFil(fsdb.Html_view_url()))
 					fsdb.File_exists_n_();

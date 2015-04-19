@@ -58,11 +58,15 @@ public class Xowd_search_word_tbl implements RlsAble {
 		ListAdp list = ListAdp_.new_();
 		Db_rdr rdr = stmt_select_in.Clear().Crt_bry_as_str(fld_text, Bry_.Replace(word, Byte_ascii.Asterisk, Byte_ascii.Percent)).Exec_select__rls_manual();
 		try	{
+			int row_count = 0;
 			while (rdr.Move_next()) {
 				synchronized (cxl) {
 					if (cxl.Canceled()) break;
 				}
-				list.Add(new_row(rdr));
+				Xowd_search_word_row word_row = new_row(rdr);
+				if (++row_count % 100 == 0)
+					Xoa_app_.Usr_dlg().Prog_many("", "", "search; reading pages for word: word=~{0} pages=~{1}", word_row.Text(), word_row.Page_count());
+				list.Add(word_row);
 			}
 		}
 		finally {rdr.Rls();}

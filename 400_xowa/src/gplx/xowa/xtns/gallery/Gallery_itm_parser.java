@@ -62,6 +62,11 @@ public class Gallery_itm_parser {
 		if (cur_itm.Link_bgn() != -1)
 			lnki_tkn.Link_tkn_(new Arg_nde_tkn_mock("link", String_.new_utf8_(src, cur_itm.Link_bgn(), cur_itm.Link_end())));	// NOTE: hackish, but add the link as arg_nde, since gallery link is not parsed like a regular lnki
 		cur_itm.Lnki_tkn_(lnki_tkn);
+		if (cur_itm.Page_bgn() != -1) {
+			int page_val = Bry_.Xto_int_or(src, cur_itm.Page_bgn(), cur_itm.Page_end(), -1);
+			if (page_val == -1) Xoa_app_.Usr_dlg().Warn_many("", "", "page is not an int: wiki=~{0} ttl=~{1} page=~{2}", wiki.Domain_str(), ctx.Cur_page().Ttl().Page_db(), String_.new_utf8_(src, cur_itm.Page_bgn(), cur_itm.Page_end()));
+			lnki_tkn.Page_(page_val);
+		}
 		byte[] lnki_caption = cur_itm.Caption_bry();
 		if (Bry_.Len_gt_0(lnki_caption)) {
 			Xop_root_tkn caption_tkn = wiki.Parser().Parse_text_to_wdom_old_ctx(ctx, lnki_caption, true);

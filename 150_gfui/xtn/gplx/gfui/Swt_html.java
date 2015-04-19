@@ -216,7 +216,7 @@ class Swt_html_lnr_status implements StatusTextListener {
 	public Swt_html_lnr_status(Swt_html html_box) {this.html_box = html_box;} private Swt_html html_box;
 	public void Host_set(GfoEvObj host) {this.host = host;} GfoEvObj host;
 	@Override public void changed(StatusTextEvent ev) {
-		if (html_box.Kit().Mode_is_shutdown())
+		if (html_box.Kit().Kit_mode__term())
 			return;	// shutting down raises status changed events; ignore, else SWT exception thrown; DATE:2014-05-29 
 		String ev_text = ev.text;
 //		if (String_.Has(ev_text, "Loading [MathJax]")) return;	// suppress MathJax messages; // NOTE: disabled for 2.1 (which no longer outputs messages to status); DATE:2013-05-03

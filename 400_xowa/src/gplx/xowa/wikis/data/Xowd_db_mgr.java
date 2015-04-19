@@ -94,7 +94,7 @@ public class Xowd_db_mgr {
 		switch (db.Tid()) {
 			case Xowd_db_file_.Tid_wiki_solo:
 			case Xowd_db_file_.Tid_text_solo:
-			case Xowd_db_file_.Tid_core					: {db__core = db; if (props.Layout_text().Tid_is_all_or_few()) db__cat_core = db__search = db; break;}
+			case Xowd_db_file_.Tid_core					: {db__core = db; if (props.Layout_text().Tid_is_all_or_few()) db__cat_core = db__search = db__text = db; break;}
 			case Xowd_db_file_.Tid_text					: {db__text = db; break;}
 			case Xowd_db_file_.Tid_html_data			: {db__html = db; break;}
 			case Xowd_db_file_.Tid_search_core			: {if (db__search == null)		db__search = db; break;}

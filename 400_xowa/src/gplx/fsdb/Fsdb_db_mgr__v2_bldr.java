@@ -39,7 +39,7 @@ public class Fsdb_db_mgr__v2_bldr {
 		conn.Txn_end();
 		return rv;
 	}
-	private Fsdb_db_file Make_core_file_user(Xowe_wiki wiki, Io_url wiki_dir, String user_file_name, String main_core_name) { // always create file; do not create mnt_tbl;
+	public Fsdb_db_file Make_core_file_user(Xow_wiki wiki, Io_url wiki_dir, String user_file_name, String main_core_name) { // always create file; do not create mnt_tbl;
 		Io_url url = wiki_dir.GenSubFil(user_file_name);
 		Db_conn conn = Db_conn_bldr.I.New(url);
 		conn.Txn_bgn();
@@ -91,11 +91,11 @@ public class Fsdb_db_mgr__v2_bldr {
 			default:						throw Err_.not_implemented_();
 		}
 	}
-	public static void Make_cfg_data(Xowe_wiki wiki, String file_core_name, Fsdb_db_file file, byte file_tid, int part_id) {
+	public static void Make_cfg_data(Xow_wiki wiki, String file_core_name, Fsdb_db_file file, byte file_tid, int part_id) {
 		Db_cfg_tbl cfg_tbl = file.Tbl__cfg();
 		Xowd_db_file core_db = wiki.Data_mgr__core_mgr().Db__core();
 		core_db.Info_session().Save(cfg_tbl);
-		Xob_info_file info_file = new Xob_info_file(-1, Xowd_db_file_.To_key(file_tid), Xob_info_file.Ns_ids_empty, part_id, Guid_adp_.random_(), 2, file_core_name, file.Url().NameAndExt());
+		Xob_info_file info_file = new Xob_info_file(-1, Xowd_db_file_.To_key(file_tid), Xob_info_file.Ns_ids_empty, part_id, Guid_adp_.new_(), 2, file_core_name, file.Url().NameAndExt());
 		info_file.Save(cfg_tbl);
 	}
 	private static String	Main_core_name_all(String wiki_domain)	{return wiki_domain + ".xowa";}					// EX: en.wikipedia.org.xowa

@@ -34,6 +34,7 @@ class Xows_db_wkr {
 			, wiki.Data_mgr__core_mgr().Db__search().Tbl__search_word()
 			);
 		}
+		Xoa_app_.Usr_dlg().Prog_many("", "", "search started (please wait)");
 		// load pages for each word
 		Xows_db_matcher matcher = cache.Matcher();
 		Xows_db_word[] word_ary = cache.Words();

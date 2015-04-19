@@ -27,6 +27,7 @@ public class Xob_term_cmd extends Xob_term_base {
 		cfg_tbl.Insert_bry(Xow_cfg_consts.Grp_wiki_init, "props.main_page", wiki.Props().Main_page());
 		cfg_tbl.Insert_bry(Xow_cfg_consts.Grp_wiki_init, "props.siteinfo_misc", wiki.Props().Siteinfo_misc());
 		cfg_tbl.Insert_bry(Xow_cfg_consts.Grp_wiki_init, "props.siteinfo_mainpage", wiki.Props().Siteinfo_mainpage());
+//			gplx.fsdb.Fsdb_db_mgr__v2_bldr.I.Make(wiki);// bld wiki
 		wiki.Data_mgr__core_mgr().Rls();
 	}
 }

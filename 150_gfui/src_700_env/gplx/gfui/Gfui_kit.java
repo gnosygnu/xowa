@@ -20,7 +20,7 @@ public interface Gfui_kit extends GfoInvkAble {
 	byte			Tid();
 	String			Key();
 	void			Cfg_set(String type, String key, Object val);
-	boolean			Kit_init_done();
+	boolean			Kit_mode__ready();
 	void			Kit_init(Gfo_usr_dlg gui_wtr);
 	void			Kit_run();
 	void			Kit_term();

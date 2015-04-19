@@ -30,7 +30,7 @@ public class Xof_xfer_itm implements Xof_file_itm {
 	public byte					Orig_repo_id() {return orig_repo_id;} private byte orig_repo_id = Xof_repo_itm.Repo_null;
 	public byte[]				Orig_repo_name() {return orig_repo_name;} private byte[] orig_repo_name;
 	public byte[]				Orig_ttl() {return orig_ttl;} private byte[] orig_ttl;
-	public int					Orig_ext() {return orig_ext;} private int orig_ext;
+	public Xof_ext				Orig_ext() {return orig_ext;} private Xof_ext orig_ext;
 	public int					Orig_w() {return orig_w;} private int orig_w;
 	public int					Orig_h() {return orig_h;} private int orig_h;
 	public byte[]				Orig_redirect() {return orig_redirect;} private byte[] orig_redirect;
@@ -66,7 +66,8 @@ public class Xof_xfer_itm implements Xof_file_itm {
 	public Xof_xfer_itm Url_bldr_(Xof_url_bldr v) {url_bldr = v; return this;} private Xof_url_bldr url_bldr = Xof_url_bldr.Temp;
 	public Xof_xfer_itm Clear() {
 		lnki_type = orig_repo_id = Byte_.Max_value_127;
-		lnki_w = lnki_h = file_w = orig_ext = orig_w = orig_h = html_w = html_h = gallery_mgr_h = Int_.Neg1;
+		lnki_w = lnki_h = file_w = orig_w = orig_h = html_w = html_h = gallery_mgr_h = Int_.Neg1;
+		orig_ext = null;
 		lnki_upright = Int_.Neg1; lnki_time = Xof_lnki_time.Null; lnki_page = Xof_lnki_page.Null;
 		file_found = file_exists = img_is_thumbable = false;
 		orig_file_len = 0;	// NOTE: cannot be -1, or else will always download orig; see ext rule chk and (orig_file_len < 0)
@@ -104,14 +105,16 @@ public class Xof_xfer_itm implements Xof_file_itm {
 	public void Init_by_orig_old(int w, int h, int orig_file_len) {
 		this.orig_w = w; this.orig_h = h; this.orig_file_len = orig_file_len;
 	}
-	public void Init_by_orig(byte orig_repo_id, byte[] orig_repo_name, byte[] orig_ttl, int orig_ext, int orig_w, int orig_h, byte[] orig_redirect, int orig_file_len) {
+	public void Init_by_orig(byte orig_repo_id, byte[] orig_repo_name, byte[] orig_ttl, Xof_ext orig_ext, int orig_w, int orig_h, byte[] orig_redirect, int orig_file_len) {
 		this.orig_repo_id = orig_repo_id; this.orig_repo_name = orig_repo_name;
 		this.orig_ttl = orig_ttl; this.orig_ext = orig_ext;
 		this.orig_w = orig_w; this.orig_h = orig_h; this.orig_redirect = orig_redirect;
-		if (orig_ext != lnki_ext.Id())
-			this.Lnki_ext_(Xof_ext_.new_by_id_(orig_ext));	// overwrite ext with whatever's in file_orig; needed for ogg -> oga / ogv
-		if (Bry_.Len_gt_0(orig_redirect))					// redirect exists; EX: A.png redirected to B.png
+		if (orig_ext.Id() != lnki_ext.Id())
+			this.Lnki_ext_(orig_ext);						// overwrite ext with whatever's in file_orig; needed for ogg -> oga / ogv
+		if		(Bry_.Len_gt_0(orig_redirect))				// redirect exists; EX: A.png redirected to B.png
 			this.Lnki_ttl_(orig_redirect);					// update fsdb with atrs of B.png
+		else if	(!Bry_.Eq(lnki_ttl, orig_ttl))				// ttls differ; EX: "A_.png" vs "A.png"
+			this.Lnki_ttl_(orig_ttl);
 		this.orig_file_len = orig_file_len;
 	}
 	private void Lnki_ttl_(byte[] v) {

@@ -16,14 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
-interface Xow_wmf_api_wkr {
-	void		Api_init();
-	void		Api_term();
-	boolean		Api_wiki_enabled(String wiki_domain);
-	String		Api_qargs();
-	boolean		Api_exec(String wiki_domain, byte[] rslt);
-}
-class Xow_wmf_api_mgr {
+public class Xow_wmf_api_mgr {
 	public void Trg_engine_key(String v) {this.trg_engine_key = v;} private String trg_engine_key = gplx.ios.IoEngine_.SysKey;
 	public void Api_exec(Xow_wmf_api_wkr wkr) {this.Api_exec(Wikis, wkr);}
 	public void Api_exec(String[] wiki_ary, Xow_wmf_api_wkr wkr) {
@@ -864,6 +857,9 @@ class Xow_wmf_api_mgr {
 , "zu.wikipedia.org"
 , "zu.wiktionary.org"
 , "zu.wikibooks.org"
+, "ne.wikipedia.org"
+, "ne.wiktionary.org"
+, "ne.wikibooks.org"
 };
 //, "als.wikisource.org"
 //, "als.wikinews.org"

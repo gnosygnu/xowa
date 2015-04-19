@@ -210,7 +210,10 @@ public class Xowd_page_tbl implements RlsAble {
 			;
 		int limit = fwd ? max_results + 1 : max_results; // + 1 to get next item
 		Db_qry__select_cmd qry = Db_qry_.select_cols_(tbl_name, crt, cols).Limit_(limit).OrderBy_(fld_title, fwd);
-		return conn.Stmt_new(qry).Crt_int(fld_ns, ns_id).Crt_str(fld_title, ttl_frag_str).Crt_int(fld_len, min_page_len).Exec_select__rls_auto();
+		Db_stmt stmt = conn.Stmt_new(qry).Crt_int(fld_ns, ns_id).Crt_str(fld_title, ttl_frag_str).Crt_int(fld_len, min_page_len);
+		if (!include_redirects)
+			stmt.Crt_bool_as_byte(fld_is_redirect, include_redirects);
+		return stmt.Exec_select__rls_auto();
 	}
 	public void Select_for_special_all_pages(Cancelable cancelable, ListAdp rslt_list, Xowd_page_itm rslt_nxt, Xowd_page_itm rslt_prv, Int_obj_ref rslt_count, Xow_ns ns, byte[] key, int max_results, int min_page_len, int browse_len, boolean include_redirects, boolean fetch_prv_item) {
 		Xowd_page_itm nxt_itm = null;

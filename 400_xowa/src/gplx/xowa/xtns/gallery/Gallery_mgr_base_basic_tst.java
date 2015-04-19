@@ -80,6 +80,12 @@ public class Gallery_mgr_base_basic_tst {
 	@Test   public void Link() {
 		fxt.Test_html_frag("<gallery>File:A.png|b|link=c</gallery>", "<a href=\"/wiki/C\" class=\"image\"");
 	}
+	@Test  public void Page() {	// PURPOSE: page was not being set; PAGE:pt.s:Portal:Diccionario_geographico_do_Brazil; DATE:2015-04-16
+		fxt.Test_html_frag
+		( "<gallery>File:A.pdf|b|page=8</gallery>"
+		, "A.pdf/120px-8.jpg"	// make sure page 8 shows up
+		);
+	}
 	@Test   public void Alt_caption_multiple() {
 		fxt.Test_html_frag("<gallery>File:A.png|alt=b|c[[d|e]]f</gallery>", "<div class=\"gallerytext\"><p>c<a href=\"/wiki/D\">ef</a>\n</p>");
 	}

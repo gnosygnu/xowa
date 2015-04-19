@@ -25,7 +25,7 @@ public abstract class Gfui_kit_base implements Gfui_kit {
 	public Gfui_clipboard Clipboard() {return Gfui_clipboard_null.Null;}
 	public GfoInvkAbleCmd Kit_term_cbk() {return kit_term_cbk;} public void	Kit_term_cbk_(GfoInvkAbleCmd v) {kit_term_cbk = v;} private GfoInvkAbleCmd kit_term_cbk;
 	public void Cfg_set(String type, String key, Object val) {}
-	public boolean Kit_init_done() {return true;}
+	public boolean Kit_mode__ready() {return true;}
 	public void Kit_init(Gfo_usr_dlg gui_wtr) {}
 	@gplx.Virtual public void Kit_run() {}
 	@gplx.Virtual public void Kit_term() {kit_term_cbk.Invk();}

@@ -17,11 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import org.junit.*;
-import gplx.brys.*; import gplx.threads.*; import gplx.xowa.wikis.*; import gplx.xowa.setup.maints.*;
+import gplx.brys.*; import gplx.threads.*; import gplx.xowa.wikis.*; import gplx.xowa.setup.maints.*; import gplx.xowa.xtns.wdatas.imports.*;
 public class Xoi_cmd_wiki_tst {
-	@Test  public void Run() {
-//			Bld_import_list(Wikis);
-//			Bld_cfg_files(Wikis);	// NOTE: remember to carry over the wikisource / page / index commands from the existing xowa_build_cfg.gfs; also, only run the xowa_build_cfg.gfs once; DATE:2013-10-15; last run: DATE:2014-09-09
+	@Test  public void Run() {	// MAINT			
+//			Bld_import_list(Xow_wmf_api_mgr.Wikis);
+//			Bld_cfg_files(Xow_wmf_api_mgr.Wikis);	// NOTE: remember to carry over the wikisource / page / index commands from the existing xowa_build_cfg.gfs; also, only run the xowa_build_cfg.gfs once; DATE:2013-10-15; last run: DATE:2014-09-09
 	}
 	public void Bld_import_list(String... ary) {
 		int ary_len = ary.length;

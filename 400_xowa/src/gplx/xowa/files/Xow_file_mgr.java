@@ -115,7 +115,7 @@ public class Xow_file_mgr implements GfoInvkAble {
 	}
 	public void Init_file_mgr_by_load(Xow_wiki wiki) {
 		if (db_core != null) return;	// already init'd
-		this.db_core = Fsdb_db_mgr_.new_detect(wiki.Domain_str(), wiki.Fsys_mgr().Root_dir(), wiki.Fsys_mgr().File_dir());
+		this.db_core = Fsdb_db_mgr_.new_detect(wiki, wiki.Fsys_mgr().Root_dir(), wiki.Fsys_mgr().File_dir());
 		if (db_core == null ) return;	// no fsdb_core found; exit
 		this.version = Version_2;
 		this.fsdb_mode = Xof_fsdb_mode.new_view();

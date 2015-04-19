@@ -74,6 +74,9 @@ public class Xof_img_size_tst {
 	@Test  	public void Frame() {	// PURPOSE: frame incorrectly defaulted to file_is_orig; [[File:MESSENGER.jpg|200x200px|framed]]; DATE:2013-12-22
 		fxt.Lnki_type_(Xop_lnki_type.Id_frame).Lnki_ext_(Xof_ext_.Id_png).Lnki_(200, 200).Orig_(2038, 1529).Test_html(200, 150, Bool_.N);
 	}
+	@Test  	public void Frame_and_thumb(){ // PURPOSE: frame and thumb should be treated as frame; Enm.Has(val, Id_frame) vs val == Id_frame; PAGE:en.w:History_of_Western_Civilization; DATE:2015-04-16
+		fxt.Lnki_type_(Enm_.Add_byte(Xop_lnki_type.Id_frame, Xop_lnki_type.Id_thumb)).Lnki_(200,  -1).Test_html(400, 200, Bool_.Y);	// mut return same as Lnki_lt_orig_frame above
+	}
 }
 class Xof_img_size_fxt {
 	private Xof_img_size img_size = new Xof_img_size();

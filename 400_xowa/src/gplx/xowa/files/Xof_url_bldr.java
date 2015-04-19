@@ -65,6 +65,7 @@ public class Xof_url_bldr {
 	public Io_url Xto_url() {Bld(); Io_url rv = Io_url_.new_fil_(bfr.Xto_str()); Clear(); return rv;}
 	public Io_url To_url_trg(Xof_repo_itm repo_itm, Xof_fsdb_itm itm, boolean orig) {
 		byte mode = orig ? Xof_repo_itm.Mode_orig : Xof_repo_itm.Mode_thumb;
+//			return this.Init_for_trg_file(mode, repo_itm, itm.Lnki_ttl(), itm.Lnki_md5(), itm.Lnki_ext(), itm.Html_w(), itm.Lnki_time(), itm.Lnki_page()).Xto_url();
 		return this.Init_for_trg_file(mode, repo_itm, itm.Lnki_ttl(), itm.Lnki_md5(), itm.Lnki_ext(), itm.Html_w(), itm.Lnki_time(), itm.Lnki_page()).Xto_url();
 	}
 	private void Bld() {

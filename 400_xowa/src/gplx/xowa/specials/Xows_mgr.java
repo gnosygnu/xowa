@@ -32,7 +32,7 @@ public class Xows_mgr {
 		Evt_lang_changed(wiki.Lang());
 	}
 	public Xows_page_allpages			Page_allpages() {return page_allpages;} private final Xows_page_allpages page_allpages;
-	public Xows_page__search					Page_search() {return page_search;} private final Xows_page__search page_search;
+	public Xows_page__search			Page_search() {return page_search;} private final Xows_page__search page_search;
 	public Xows_page_random				Page_random() {return page_random;} private final Xows_page_random page_random;
 	public Xop_randomRootPage_page		Page_randomRootPage() {return page_randomRootPage;} private final Xop_randomRootPage_page page_randomRootPage = new Xop_randomRootPage_page();
 	public Xou_history_html				Page_history() {return page_history;} private final Xou_history_html page_history = new Xou_history_html();

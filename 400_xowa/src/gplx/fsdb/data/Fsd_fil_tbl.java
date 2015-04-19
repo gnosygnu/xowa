@@ -69,6 +69,8 @@ public class Fsd_fil_tbl implements RlsAble {
 		.Val_int(fld_bin_db_id, bin_db_id)
 		.Val_bry_as_str(fld_name, name)
 		.Val_long(fld_size, size)
+		.Val_str(fld_modified, String_.Empty)
+		.Val_str(fld_hash, String_.Empty)
 		.Crt_int(fld_id, id)
 		.Exec_update();
 	}	

@@ -73,7 +73,7 @@ public class Xowd_db_file {
 
 	public static final Xowd_db_file Null = null;
 	public static Xowd_db_file make_(Xob_info_session info_session, Xowd_core_db_props props, int id, byte tid, Io_url url, String ns_ids, int part_id, String core_file_name, Db_conn conn) {
-		Guid_adp guid = Guid_adp_.random_();
+		Guid_adp guid = Guid_adp_.new_();
 		Xob_info_file info_file = new Xob_info_file(id, Xowd_db_file_.To_key(tid), ns_ids, part_id, guid, props.Schema(), core_file_name, url.NameAndExt());
 		Db_cfg_tbl cfg_tbl = new Db_cfg_tbl(conn, "xowa_cfg");
 		Xowd_db_file rv = new Xowd_db_file(cfg_tbl, info_session, info_file, props, Xowd_db_file_schema_props.make_(), id, tid, url, ns_ids, part_id, guid, conn, Db_cmd_mode.Tid_create);
