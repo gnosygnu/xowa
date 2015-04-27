@@ -182,6 +182,10 @@ public class Xoh_href_parser_tst {
 	@Test   public void Parse_protocol() {	// PURPOSE: check that urls with form of "ftp://" return back Tid_ftp; DATE:2014-04-25
 		fxt	.Test_parse_protocol("ftp://a.org", Xoo_protocol_itm.Tid_ftp);
 	}
+	@Test   public void Build_xwiki_wikimedia_mail() {	// PURPOSE: DATE:2015-04-22
+		fxt	.Init_xwiki_by_many("mail|https://lists.wikimedia.org/mailman/listinfo/$1|Wikitech Mailing List");
+		fxt.Test_build("mail:A"				, "https://lists.wikimedia.org/mailman/listinfo/A");
+	}
 //		@Test   public void Parse_question_ttl()				{fxt.Prep_raw_("/wiki/%3F").Expd_tid_(Xoh_href.Tid_wiki).Expd_full_("en.wikipedia.org/wiki/?").Expd_page_("?").Test_parse();}
 //		@Test   public void Parse_question_w_arg()			{fxt.Prep_raw_("/wiki/A%3F?action=edit").Expd_tid_(Xoh_href.Tid_wiki).Expd_full_("en.wikipedia.org/wiki/A??action=edit").Expd_page_("A??action=edit").Test_parse();}
 }
@@ -201,6 +205,10 @@ class Xoh_href_parser_fxt {
 	public Xoae_app App() {return app;} private Xoae_app app;
 	public Xoh_href_parser_fxt Init_xwiki_alias(String alias, String domain) {
 		app.User().Wiki().Xwiki_mgr().Add_full(alias, domain);
+		return this;
+	}
+	public Xoh_href_parser_fxt Init_xwiki_by_many(String raw) {
+		wiki.Xwiki_mgr().Add_many(Bry_.new_utf8_(raw));	// need to add to wiki's xwiki_mgr for ttl_parse
 		return this;
 	}
 	public Xoh_href_parser_fxt Init_hover_full_y_() {return Init_hover_full_(Bool_.Y);}
@@ -230,7 +238,7 @@ class Xoh_href_parser_fxt {
 	}
 	public void Test_build(String raw, String expd) {
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_utf8_(raw));
-		href_parser.Build_to_bfr(tmp_bfr, wiki, ttl);
+		href_parser.Build_to_bfr(tmp_bfr, app, wiki.Domain_bry(), ttl);
 		Tfds.Eq(expd, tmp_bfr.Xto_str_and_clear());
 	}
 	public void Test_parse_protocol(String raw, byte expd_tid) {

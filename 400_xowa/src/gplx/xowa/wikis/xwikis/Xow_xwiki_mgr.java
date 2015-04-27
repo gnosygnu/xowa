@@ -49,6 +49,17 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 	public void Sort_by_key() {
 		list.Sort();
 	}
+	public Xow_domain[] Get_by_crt(Xow_domain cur, gplx.xowa.wikis.domains.crts.Xow_domain_crt_itm crt) {
+		ListAdp rv = ListAdp_.new_();
+		int len = this.Len();
+		for (int i = 0; i < len; ++i) {
+			Xow_xwiki_itm wiki = this.Get_at(i);
+			if (!wiki.Offline()) continue;
+			Xow_domain domain_itm = Xow_domain_.parse(wiki.Domain_bry());
+			if (crt.Matches(cur, domain_itm)) rv.Add(domain_itm);
+		}
+		return (Xow_domain[])rv.Xto_ary_and_clear(Xow_domain.class);
+	}
 	public void Add_bulk(byte[] raw) {
 		byte[][] rows = Bry_.Split(raw, Byte_ascii.NewLine);
 		int rows_len = rows.length;

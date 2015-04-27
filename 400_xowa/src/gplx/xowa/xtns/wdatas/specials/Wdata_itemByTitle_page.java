@@ -22,6 +22,7 @@ public class Wdata_itemByTitle_page implements Xows_page {
 	private static final byte[] Arg_site = Bry_.new_ascii_("site"), Arg_page = Bry_.new_ascii_("page");
 	public Bry_fmtr Html_fmtr() {return html_fmtr;}
 	private Wdata_itemByTitle_cfg cfg;
+	public Xows_special_meta Special_meta() {return Xows_special_meta_.Itm__item_by_title;}
 	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
 		if (cfg == null) cfg = (Wdata_itemByTitle_cfg)wiki.Appe().Special_mgr().Get_or_null(Wdata_itemByTitle_cfg.Key);
 		// Special:ItemByTitle/enwiki/Earth -> www.wikidata.org/wiki/Q2

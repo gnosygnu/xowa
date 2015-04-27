@@ -35,7 +35,7 @@ class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 	public void Async_run() {
 		running = true;
 		install_mgr.App().Usr_dlg().Log_many(GRP_KEY, "import.bgn", "import.bgn ~{0} ~{1} ~{2}", wiki_key, wiki_date, dump_type);
-		ThreadAdp_.invk_(this, Invk_process_async).Start();			
+		ThreadAdp_.invk_(this.Async_key(), this, Invk_process_async).Start();			
 	}
 	public boolean Async_running() {
 		return running;

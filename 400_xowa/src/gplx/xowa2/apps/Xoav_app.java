@@ -22,12 +22,14 @@ import gplx.xowa2.apps.urls.*; import gplx.xowa.files.caches.*; import gplx.xowa
 import gplx.xowa.wmfs.*;
 import gplx.xowa.urls.encoders.*;
 public class Xoav_app implements Xoa_app {
+	private Xoa_url_parser url_parser = new Xoa_url_parser();
 	public Xoav_app(Gfo_usr_dlg usr_dlg, String plat_name, Io_url root_dir) {
 		this.fsys_mgr = new Xoa_fsys_mgr(plat_name, root_dir);
 		this.file_mgr__cache_mgr = new Xof_cache_mgr(usr_dlg, null, null);
 		this.file_mgr__img_mgr = new Xof_img_mgr();
 		this.wiki_mgr = new Xoav_wiki_mgr(this, utl_case_mgr);
 		this.utl_msg_log = Gfo_msg_log.Test();
+		this.href_parser = new Xoh_href_parser(Xoa_app_.Utl__encoder_mgr().Href(), url_parser.Url_parser());
 	}
 	public Xoa_fsys_mgr			Fsys_mgr()					{return fsys_mgr;} private final Xoa_fsys_mgr fsys_mgr;
 	public Xof_cache_mgr		File_mgr__cache_mgr()		{return file_mgr__cache_mgr;} private final Xof_cache_mgr file_mgr__cache_mgr;
@@ -36,6 +38,7 @@ public class Xoav_app implements Xoa_app {
 	public Bry_bfr_mkr			Utl__bfr_mkr()				{return Xoa_app_.Utl__bfr_mkr();}
 	public Url_encoder_mgr		Utl__encoder_mgr()			{return Xoa_app_.Utl__encoder_mgr();}
 	public boolean					Xwiki_mgr__missing(byte[] domain)	{return wiki_mgr.Get_by_domain(domain) == null;}
+	public Xoh_href_parser		Html__href_parser()			{return href_parser;} private Xoh_href_parser href_parser;
 
 	public Xoav_wiki_mgr Wiki_mgr() {return wiki_mgr;} private final Xoav_wiki_mgr wiki_mgr;
 	public Xoud_db_mgr User_data_mgr() {return user_data_mgr;} private Xoud_db_mgr user_data_mgr = new Xoud_db_mgr();

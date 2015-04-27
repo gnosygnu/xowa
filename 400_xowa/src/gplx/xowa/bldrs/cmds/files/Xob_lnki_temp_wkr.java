@@ -65,9 +65,9 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 		gplx.xowa.xtns.hieros.Hiero_xnde.Log_wkr = log_mgr.Make_wkr();
 		Xof_fsdb_mgr__sql trg_fsdb_mgr = new Xof_fsdb_mgr__sql();
 		wiki.File_mgr__fsdb_mode().Tid_make_y_();
+		Fsdb_db_mgr__v2 fsdb_core = Fsdb_db_mgr__v2_bldr.I.Make(wiki, Bool_.Y);
 		trg_fsdb_mgr.Init_by_wiki(wiki);
 		Fsm_mnt_mgr trg_mnt_mgr = trg_fsdb_mgr.Mnt_mgr();
-		Fsdb_db_mgr__v2 fsdb_core = Fsdb_db_mgr__v2_bldr.I.Make(wiki);
 		wiki.File_mgr().Init_file_mgr_by_load(wiki);										// must happen after fsdb.make
 		wiki.File_mgr__bin_mgr().Wkrs__del(gplx.xowa.files.bins.Xof_bin_wkr_.Key_http_wmf);	// must happen after init_file_mgr_by_load; remove wmf wkr, else will try to download images during parsing
 		wiki.File_mgr__orig_mgr().Wkrs_del(gplx.xowa.files.origs.Xof_orig_wkr_.Tid_wmf_api);
@@ -129,7 +129,8 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 			hdump_bldr.Bld_term();
 			link_dump_cmd.Wkr_end();
 		}
-		Gfo_usr_dlg_.I.Warn_many("", "", invoke_wkr.Err_filter_mgr().Print());
+		String err_filter_mgr = invoke_wkr.Err_filter_mgr().Print();
+		if (String_.Len_gt_0(err_filter_mgr)) usr_dlg.Warn_many("", "", err_filter_mgr);
 		wiki.Appe().Log_mgr().Txn_end();
 		tbl.Insert_end();
 	}

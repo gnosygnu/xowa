@@ -23,6 +23,7 @@ public class Xows_page_allpages implements GfoInvkAble, Bry_fmtr_arg, Xows_page 
 		this.wiki = wiki;
 		html_itm_fmtr = new Xos_pagelist_html_itm_fmtr(this, wiki);
 	}	private Xos_pagelist_html_itm_fmtr html_itm_fmtr;
+	public Xows_special_meta Special_meta() {return Xows_special_meta_.Itm__all_pages;}
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public Bry_fmtr Html_all() {return html_all;} Bry_fmtr html_all = Bry_fmtr.new_(String_.Concat_lines_nl
 		(	"<table class=\"mw-allpages-table-form\">"
@@ -161,8 +162,6 @@ public class Xows_page_allpages implements GfoInvkAble, Bry_fmtr_arg, Xows_page 
 	public static final String Invk_html_all_ = "html_all_", Invk_html_list_grp_ = "html_list_grp_", Invk_html_list_itm_normal_ = "html_list_itm_normal_", Invk_html_list_itm_redirect_ = "html_list_itm_redirect_"
 	, Invk_itms_per_page_ = "itms_per_page_", Invk_itms_per_grp_ = "itms_per_grp_", Invk_show_redirects_ = "show_redirects_";
 	public static final String GRP_KEY = "xowa.special.allpages";
-	public static final String Ttl_full_str = "Special:AllPages";
-	public static final byte[] Ttl_full_bry = Bry_.new_ascii_(Ttl_full_str);
 }
 class Xos_pagelist_html_itm_fmtr implements Bry_fmtr_arg {
 	public Xos_pagelist_html_itm_fmtr(Xows_page_allpages mgr, Xowe_wiki wiki) {

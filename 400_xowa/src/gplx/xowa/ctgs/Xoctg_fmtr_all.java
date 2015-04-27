@@ -56,12 +56,12 @@ class Xoctg_fmtr_all {
 		("div_id", "all_label", "all_stats", "all_navs", "lang_key", "lang_ltr", "grps");
 		html_nav.Fmt_(String_.Concat_lines_nl_skip_last
 		(	""
-		,	"  (<a class=\"xowa_nav\" href=\"~{nav_href}\" title=\"~{nav_title}\">~{nav_text}</a>)"
+		,	"  (<a href=\"~{nav_href}\" class=\"xowa_nav\" title=\"~{nav_title}\">~{nav_text}</a>)"
 		))
 		.Keys_("nav_href", "nav_title", "nav_text");
 		html_itm.Fmt_(String_.Concat_lines_nl_skip_last
 		(	""
-		,	"            <li><a~{itm_atr_cls} href=\"~{itm_href}\" title=\"~{itm_title}\">~{itm_text}</a></li>"
+		,	"            <li><a href=\"~{itm_href}\"~{itm_atr_cls} title=\"~{itm_title}\">~{itm_text}</a></li>"
 		))
 		.Keys_("itm_href", "itm_title", "itm_text", "itm_id", "itm_atr_cls");
 		html_itm_missing.Fmt_(String_.Concat_lines_nl_skip_last
@@ -80,7 +80,7 @@ class Xoctg_fmtr_all {
 				,	"                    <span class=\"CategoryTreeToggle\" style=\"display: none;\" data-ct-title=\"~{itm_data_title}\" title=\"~{itm_title}\" data-ct-state=\"collapsed\">"
 				,	"                    </span> "
 				,	"                  </span>"
-				,	"                  <a class=\"CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory\" href=\"~{itm_href}\">~{itm_text}"
+				,	"                  <a href=\"~{itm_href}\" class=\"CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory\">~{itm_text}"
 				,	"                  </a>"
 				,	"                  <span title=\"~{itm_contains_title}\" dir=\"ltr\">~{itm_contains_text}"
 				,	"                  </span>"
@@ -115,7 +115,8 @@ class Xoctg_fmtr_all {
 	}
 	private void Html_nav_bry(Bry_bfr bfr, Xowe_wiki wiki, Xoa_ttl ttl, Xoctg_view_grp view_grp, boolean fill_at_bgn) {
 		Bry_bfr href_bfr = wiki.Utl__bfr_mkr().Get_b512();
-		wiki.Appe().Href_parser().Build_to_bfr(href_bfr, wiki, ttl);
+		Xoae_app app = wiki.Appe();
+		app.Href_parser().Build_to_bfr(href_bfr, app, wiki.Domain_bry(), ttl);
 		byte[] arg_idx_lbl = null; byte[] arg_sortkey = null;
 		if (fill_at_bgn) {
 			arg_idx_lbl = url_arg_bgn;

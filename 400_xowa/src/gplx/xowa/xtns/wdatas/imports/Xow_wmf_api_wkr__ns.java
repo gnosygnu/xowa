@@ -19,17 +19,17 @@ package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import
 import gplx.json.*;
 class Xow_wmf_api_wkr__ns implements Xow_wmf_api_wkr {
 	private final Json_parser parser = new Json_parser();
-	private final Xowmf_site_tbl tbl_site; private final Xowmf_ns_tbl tbl_itm;
+	private final Xowmf_site_tbl tbl_site; private final Xowmf_ns_tbl tbl_ns;
 	private int site_id_next = 1;
-	public Xow_wmf_api_wkr__ns(Xowmf_site_tbl tbl_site, Xowmf_ns_tbl tbl_itm) {
-		this.tbl_site = tbl_site; this.tbl_itm = tbl_itm;
+	public Xow_wmf_api_wkr__ns(Xowmf_site_tbl tbl_site, Xowmf_ns_tbl tbl_ns) {
+		this.tbl_site = tbl_site; this.tbl_ns = tbl_ns;
 	}
 	public boolean		Api_wiki_enabled(String wiki_domain) {return true;}	// run against all wikis
 	public String	Api_qargs() {return "action=query&meta=siteinfo&siprop=namespaces&format=json";}
 	public void		Api_init() {
 		tbl_site.Conn().Txn_bgn();
 		tbl_site.Delete_all();
-		tbl_itm.Delete_all();
+		tbl_ns.Delete_all();
 	}
 	public boolean		Api_exec(String wiki_domain, byte[] rslt) {
 		try {
@@ -47,7 +47,9 @@ class Xow_wmf_api_wkr__ns implements Xow_wmf_api_wkr {
 					byte[] ns_name = Get_val_or_null(nde, Bry_name);
 					byte[] ns_canonical = Get_val_or_null(nde, Bry_canonical);
 					if (ns_canonical == null) ns_canonical = Bry_.Empty;	// main_ns has no canonical
-					tbl_itm.Insert(site_id, ns_id, ns_case, ns_name, ns_canonical);
+					byte[] subpages = Get_val_or_null(nde, Bry_subpages);	
+					byte[] content = Get_val_or_null(nde, Bry_content);	
+					tbl_ns.Insert(site_id, ns_id, ns_case, subpages != null, content != null, ns_name, ns_canonical);
 				} catch (Exception e) {
 					Xoa_app_.Usr_dlg().Warn_many("", "", "wmf_api_wkr.ns:unknown; wiki=~{0} rslt=~{1} i=~{2} err=~{3}", wiki_domain, rslt, i, Err_.Message_gplx(e));
 					continue;
@@ -69,6 +71,7 @@ class Xow_wmf_api_wkr__ns implements Xow_wmf_api_wkr {
 		return sub_as_kv == null ? null : sub_as_kv.Val().Data_bry();	// sub_as_kv == null when key is not present; note that "canonical" does not exist for Main ns
 	}
 	private static final byte[] Bry_query = Bry_.new_ascii_("query"), Bry_namespaces = Bry_.new_ascii_("namespaces")
-	, Bry_id = Bry_.new_ascii_("id"), Bry_case = Bry_.new_ascii_("case"), Bry_name = Bry_.new_ascii_("*"), Bry_canonical = Bry_.new_ascii_("canonical");
+	, Bry_id = Bry_.new_ascii_("id"), Bry_case = Bry_.new_ascii_("case"), Bry_name = Bry_.new_ascii_("*"), Bry_canonical = Bry_.new_ascii_("canonical")
+		, Bry_subpages = Bry_.new_ascii_("subpages"), Bry_content = Bry_.new_ascii_("content");
 	private static final byte[][] Bry_jpath = new byte[][] {Bry_query, Bry_namespaces};
 }

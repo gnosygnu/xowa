@@ -46,7 +46,7 @@ public class Xoctg_html_mgr_tst {
 			,	"        <td style=\"width: 33%;\">"
 			,	"          <h3>A</h3>"
 			,	"          <ul>"
-			,	"            <li><a class=\"xowa-visited\" href=\"/wiki/A_1\" title=\"A 1\">A 1</a></li>"
+			,	"            <li><a href=\"/wiki/A_1\" class=\"xowa-visited\" title=\"A 1\">A 1</a></li>"
 			,	"          </ul>"
 			,	"        </td>"
 			,	"      </tr>"
@@ -135,7 +135,7 @@ public class Xoctg_html_mgr_tst {
 			,	"                    <span class=\"CategoryTreeToggle\" style=\"display: none;\" data-ct-title=\"Subc_1\" title=\"Subc 1\" data-ct-state=\"collapsed\">"
 			,	"                    </span> "
 			,	"                  </span>"
-			,	"                  <a class=\"CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory\" href=\"/wiki/Category:Subc_1\">Subc 1"
+			,	"                  <a href=\"/wiki/Category:Subc_1\" class=\"CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory\">Subc 1"
 			,	"                  </a>"
 			,	"                  <span title=\"contains 0 subcategories, 0 pages, and 0 files\" dir=\"ltr\">"
 			,	"                  </span>"
@@ -194,8 +194,8 @@ public class Xoctg_html_mgr_tst {
 		fxt.Init_itm_page("A1").Init_ctg_name_("Ctg_1").Init_ctg_pages_(1, 1)
 			.Test_bld_rslts_lnk(Bool_.Y, "Category:Ctg_1", String_.Concat_lines_nl
 		(	""
-		,	"  (<a class=\"xowa_nav\" href=\"/wiki/Category:Ctg_1?pageuntil=A1#mw-pages\" title=\"Category:Ctg_1\">previous 0</a>)"
-		,	"  (<a class=\"xowa_nav\" href=\"/wiki/Category:Ctg_1?pagefrom=A1#mw-pages\" title=\"Category:Ctg_1\">next 0</a>)"
+		,	"  (<a href=\"/wiki/Category:Ctg_1?pageuntil=A1#mw-pages\" class=\"xowa_nav\" title=\"Category:Ctg_1\">previous 0</a>)"
+		,	"  (<a href=\"/wiki/Category:Ctg_1?pagefrom=A1#mw-pages\" class=\"xowa_nav\" title=\"Category:Ctg_1\">next 0</a>)"
 		));
 	}
 	@Test   public void Calc_col_max() {

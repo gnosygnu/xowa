@@ -22,7 +22,7 @@ import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files
 import gplx.fsdb.data.*; import gplx.fsdb.meta.*;
 public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	private Db_conn bldr_conn; private Db_cfg_tbl bldr_cfg_tbl;
-	private Xof_bin_mgr src_bin_mgr; private Xof_bin_wkr__fsdb_sql src_fsdb_wkr; private boolean src_bin_mgr__cache_enabled = Bool_.N; private String src_bin_mgr__fsdb_version; private boolean src_bin_mgr__wmf_enabled;
+	private Xof_bin_mgr src_bin_mgr; private Xof_bin_wkr__fsdb_sql src_fsdb_wkr; private boolean src_bin_mgr__cache_enabled = Bool_.N; private String src_bin_mgr__fsdb_version; private String[] src_bin_mgr__fsdb_skip_wkrs; private boolean src_bin_mgr__wmf_enabled;
 	private Fsm_mnt_itm trg_mnt_itm; private Fsm_cfg_mgr trg_cfg_mgr; private Fsm_atr_fil trg_atr_fil; private Fsm_bin_fil trg_bin_fil; private long trg_bin_db_max;
 	private final Xof_bin_updater trg_bin_updater = new Xof_bin_updater(); private Xob_tier_namer tier_namer; private int[] ns_ids; private int prv_lnki_tier_id = -1;
 	private long download_size_max = Io_mgr.Len_mb_long; private int[] download_keep_tier_ids = Int_.Ary(0);
@@ -48,6 +48,9 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 			src_bin_mgr.Wkrs__add(src_fsdb_wkr);
 			src_fsdb_wkr.Mnt_mgr().Ctor_by_load(new_src_bin_db_mgr(wiki, src_bin_mgr__fsdb_version));
 			src_fsdb_wkr.Mnt_mgr().Mnts__get_main().Txn_bgn();			// NOTE: txn on atr speeds up from 50 -> 300; DATE:2015-03-21				
+			if (src_bin_mgr__fsdb_skip_wkrs != null) {
+				src_fsdb_wkr.Skip_mgr_init(src_bin_mgr__fsdb_skip_wkrs);
+			}
 			if (src_bin_mgr__cache_enabled) {
 				usr_dlg.Prog_many("", "", "src_bin_mgr.cache.bgn");
 				src_fsdb_wkr.Mnt_mgr().Mnts__get_main().Atr_mgr().Db__core().Fil_cache_enabled_y_();
@@ -62,7 +65,7 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		// trg_mnt_itm
 		this.trg_bin_db_max = app.Api_root().Bldr().Wiki().Import().File_db_max();
 		Fsdb_db_mgr trg_db_mgr = Fsdb_db_mgr_.new_detect(wiki, wiki.Fsys_mgr().Root_dir(), wiki.Fsys_mgr().File_dir());
-		if (trg_db_mgr == null) trg_db_mgr = Fsdb_db_mgr__v2_bldr.I.Make(wiki);
+		if (trg_db_mgr == null) trg_db_mgr = Fsdb_db_mgr__v2_bldr.I.Make(wiki, Bool_.Y);
 		Fsm_mnt_mgr trg_mnt_mgr = new Fsm_mnt_mgr(); trg_mnt_mgr.Ctor_by_load(trg_db_mgr);
 		trg_mnt_mgr.Mnts__get_insert_idx_(Fsm_mnt_mgr.Mnt_idx_main);		// NOTE: do not delete; mnt_mgr default to Mnt_idx_user; DATE:2014-04-25
 		this.trg_mnt_itm = trg_mnt_mgr.Mnts__get_insert();
@@ -119,7 +122,9 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	}
 	public void Cmd_end() {
 		usr_dlg.Note_many("", "", "fsdb_make.done: count=~{0} rate=~{1}", exec_count, DecimalAdp_.divide_safe_(exec_count, Env_.TickCount_elapsed_in_sec(time_bgn)).Xto_str("#,###.000"));
-		if (src_fsdb_wkr != null) src_fsdb_wkr.Mnt_mgr().Mnts__get_main().Txn_end();	// NOTE: src_fsdb_wkr will be null if no src db defined
+		if (src_fsdb_wkr != null) {
+			src_fsdb_wkr.Mnt_mgr().Mnts__get_main().Txn_end();	// NOTE: src_fsdb_wkr will be null if no src db defined
+		}
 		trg_atr_fil.Conn().Txn_end(); trg_atr_fil.Conn().Rls_conn();
 		if (!trg_mnt_itm.Db_mgr().File__solo_file()) {
 			trg_bin_fil.Conn().Txn_end(); trg_bin_fil.Conn().Rls_conn();
@@ -276,6 +281,7 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		else if	(ctx.Match(k, Invk_resume_enabled_))				resume_enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_ns_ids_))						ns_ids = Int_.Ary_parse(m.ReadStr("v"), "|");
 		else if	(ctx.Match(k, Invk_src_bin_mgr__fsdb_version_))		src_bin_mgr__fsdb_version = m.ReadStr("v");
+		else if	(ctx.Match(k, Invk_src_bin_mgr__fsdb_skip_wkrs_))	src_bin_mgr__fsdb_skip_wkrs = m.ReadStrAry("v", "|");
 		else if	(ctx.Match(k, Invk_src_bin_mgr__wmf_enabled_))		src_bin_mgr__wmf_enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_src_bin_mgr__cache_enabled_))	src_bin_mgr__cache_enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_poll_mgr))						return poll_mgr;
@@ -289,7 +295,7 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	, Invk_select_interval_ = "select_interval_", Invk_commit_interval_ = "commit_interval_", Invk_progress_interval_ = "progress_interval_", Invk_delete_interval_ = "delete_interval_"
 	, Invk_exec_count_max_ = "exec_count_max_", Invk_exec_fail_max_ = "exec_fail_max_", Invk_exit_now_ = "exit_now_", Invk_exit_after_commit_ = "exit_after_commit_"
 	, Invk_resume_enabled_ = "resume_enabled_", Invk_poll_mgr = "poll_mgr"
-	, Invk_src_bin_mgr__fsdb_version_ = "src_bin_mgr__fsdb_version_"
+	, Invk_src_bin_mgr__fsdb_version_ = "src_bin_mgr__fsdb_version_", Invk_src_bin_mgr__fsdb_skip_wkrs_ = "src_bin_mgr__fsdb_skip_wkrs_"
 	, Invk_src_bin_mgr__wmf_enabled_ = "src_bin_mgr__wmf_enabled_"
 	, Invk_src_bin_mgr__cache_enabled_ = "src_bin_mgr__cache_enabled_", Invk_ns_ids_ = "ns_ids_"
 	, Invk_download_size_max = "download_size_max", Invk_download_keep_tier_ids = "download_keep_tier_ids"

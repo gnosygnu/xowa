@@ -170,7 +170,6 @@ class Http_server_wkr implements Runnable {
 			}  
 		}
 	} private boolean canceled;
-	@SuppressWarnings("resource")
 	public void run() {		
 		try {
 			if (server_socket == null)
@@ -303,6 +302,7 @@ class HttpRequest implements Runnable{
 		page_html = page_html.replaceAll(app_file_dir			, "%file%/");
 		page_html = page_html.replaceAll("xowa-cmd"				, "%xowa-cmd%/xowa-cmd");
 		page_html = page_html.replaceAll("<a href=\"/wiki/"		, "<a href=\"/"+wiki_domain+"/wiki/");
+		page_html = page_html.replaceAll("<a href='/wiki/"		, "<a href='/"+wiki_domain+"/wiki/");
 		page_html = page_html.replaceAll("action=\"/wiki/"		, "action=\"/"+wiki_domain+"/wiki/");
 		page_html = page_html.replaceAll("/site"				, "");
 		return page_html;

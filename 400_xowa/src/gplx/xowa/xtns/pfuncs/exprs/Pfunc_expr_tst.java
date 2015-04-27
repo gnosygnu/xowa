@@ -59,7 +59,8 @@ public class Pfunc_expr_tst {
 	@Test  public void Pi_mult()			{fxt.Test_parse_tmpl_str_test("{{#expr:pi*1}}"									, "{{test}}"	, "3.14159265358979");}
 	@Test  public void E_op_pos()			{fxt.Test_parse_tmpl_str_test("{{#expr:1.2 e 2}}"								, "{{test}}"	, "120");}
 	@Test  public void E_op_neg()			{fxt.Test_parse_tmpl_str_test("{{#expr:1.2 e -2}}"								, "{{test}}"	, "0.012");}
-	@Test  public void E_op_inf()			{fxt.Test_parse_tmpl_str_test("{{#expr:1.2 e 309}}"								, "{{test}}"	, "INF");}		// PURPOSE:constrain decimal to PHP double (e308); PAGE:en.w:Factorial; en.w:Astatine; DATE:2015-04-09
+	@Test  public void E_op_inf()			{fxt.Test_parse_tmpl_str_test("{{#expr:1.2 e 309}}"								, "{{test}}"	, "INF");}		// PURPOSE:constrain to PHP double (e308); PAGE:en.w:Factorial; en.w:Astatine; DATE:2015-04-09
+	@Test  public void E_op_inf_2()			{fxt.Test_parse_tmpl_str_test("{{#expr:1.8 e 308}}"								, "{{test}}"	, "INF");}		// PURPOSE:constrain to PHP double (1.8 e308); PAGE:en.w:Mathematics_of_Sudoku DATE:2015-04-21
 	@Test  public void E_op_large()			{fxt.Test_parse_tmpl_str_test("{{#expr:1E28}}"									, "{{test}}"	, "1E+28");}	// PURPOSE:number should print in exponent notation (1E307), not full literal String (10000000...); DATE:2015-04-09;
 	@Test  public void Ceil_neg()			{fxt.Test_parse_tmpl_str_test("{{#expr:ceil(-1.2)}}"							, "{{test}}"	, "-1");}
 	@Test  public void Trunc_neg()			{fxt.Test_parse_tmpl_str_test("{{#expr:trunc(-1.2)}}"							, "{{test}}"	, "-1");}

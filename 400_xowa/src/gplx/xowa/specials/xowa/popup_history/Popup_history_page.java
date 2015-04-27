@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.specials.xowa.popup_history; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*; import gplx.xowa.specials.xowa.*;
 import gplx.xowa.html.modules.popups.*;
 public class Popup_history_page implements Xows_page {
+	public Xows_special_meta Special_meta() {return Xows_special_meta_.Itm__popup_history;}
 	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
 		Xoae_page cur_page = wiki.Appe().Gui_mgr().Browser_win().Active_page(); if (cur_page == null) return;
 		OrderedHash hash = cur_page.Popup_mgr().Itms();
@@ -32,9 +33,8 @@ public class Popup_history_page implements Xows_page {
 		page.Html_data().Html_restricted_n_();
 	}
 	private Bry_fmtr fmtr_main = Bry_fmtr.new_("<a href='~{href}'>~{ttl}</a>\n\n", "href", "ttl");	// NOTE: need to use anchor (as opposed to lnki or lnke) b/c xwiki will not work on all wikis
-	public static final byte[] Ttl_name_bry = Bry_.new_ascii_("XowaPopupHistory");
 	public static boolean Ttl_chk(Xoa_ttl ttl) {
 		return	ttl.Ns().Id_special()
-			&&	Bry_.Eq(ttl.Page_db(), Ttl_name_bry);
+			&&	Bry_.Eq(ttl.Page_db(), Xows_special_meta_.Itm__popup_history.Key_bry());
 	}
 }

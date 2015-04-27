@@ -23,7 +23,7 @@ import gplx.xowa.specials.xowa.system_data.*; import gplx.xowa.specials.xowa.def
 import gplx.xowa.xtns.wdatas.specials.*;
 import gplx.xowa.users.data.*;
 public class Xows_mgr {
-	private Hash_adp_bry hash;
+	private final Hash_adp_bry hash;
 	public Xows_mgr(Xowe_wiki wiki, Xol_lang lang) {
 		hash = Hash_adp_bry.ci_utf8_(lang.Case_mgr());
 		page_allpages = new Xows_page_allpages(wiki);
@@ -48,23 +48,23 @@ public class Xows_mgr {
 	public Xosp_fbrow_special			Page_file_browser() {return page_file_browser;} private final Xosp_fbrow_special page_file_browser = new Xosp_fbrow_special();
 	public void Evt_lang_changed(Xol_lang lang) {
 		hash.Clear();
-		hash.Add_str_obj("search"								, page_search);
-		hash.Add_str_obj("allpages"								, page_allpages);
-		hash.Add_str_obj("prefixindex"							, page_allpages);
-		hash.Add_str_obj("random"								, page_random);
-		hash.Add_str_obj("randompage"							, page_random);
-		hash.Add_str_obj("randomrootpage"						, page_randomRootPage);
-		hash.Add_bry_obj(Xou_history_mgr.Ttl_name				, page_history);
-		hash.Add_bry_obj(Xoud_history_special.Ttl_name			, page_history2);
-		hash.Add_bry_obj(Nearby_mgr.Ttl_name					, page_nearby);
-		hash.Add_str_obj("mylanguage"							, page_mylanguage);
-		hash.Add_str_obj("itembytitle"							, page_itemByTitle);
-		hash.Add_str_obj("statistics"							, page_statistics);
-		hash.Add_str_obj("movePage"								, page_movePage);
-		hash.Add_str_obj("XowaSystemData"						, page_system_data);
-		hash.Add_str_obj(Default_tab_page.Ttl_name_str			, page_default_tab);
-		hash.Add_bry_obj(Popup_history_page.Ttl_name_bry		, page_popup_history);
-		hash.Add_bry_obj(Xosp_fbrow_special.Ttl_name_bry		, page_file_browser);
+		hash.Add_str_obj(Xows_special_meta_.Key__search					, page_search);
+		hash.Add_str_obj(Xows_special_meta_.Key__all_pages				, page_allpages);
+		hash.Add_str_obj("prefixindex"									, page_allpages);
+		hash.Add_str_obj(Xows_special_meta_.Key__random					, page_random);
+		hash.Add_str_obj("random"										, page_random);
+		hash.Add_str_obj(Xows_special_meta_.Key__random_root_page		, page_randomRootPage);
+		hash.Add_bry_obj(Xou_history_mgr.Ttl_name						, page_history);
+		hash.Add_str_obj(Xows_special_meta_.Key__page_history			, page_history2);
+		hash.Add_str_obj(Xows_special_meta_.Key__nearby					, page_nearby);
+		hash.Add_str_obj(Xows_special_meta_.Key__my_language			, page_mylanguage);
+		hash.Add_str_obj(Xows_special_meta_.Key__item_by_title			, page_itemByTitle);
+		hash.Add_str_obj(Xows_special_meta_.Key__statistics				, page_statistics);
+		hash.Add_str_obj(Xows_special_meta_.Key__move_page				, page_movePage);
+		hash.Add_str_obj(Xows_special_meta_.Key__system_data			, page_system_data);
+		hash.Add_str_obj(Xows_special_meta_.Key__default_tab			, page_default_tab);
+		hash.Add_str_obj(Xows_special_meta_.Key__popup_history			, page_popup_history);
+		hash.Add_str_obj(Xows_special_meta_.Key__file_browser			, page_file_browser);
 	}
 	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
 		int slash_pos = Bry_finder.Find_fwd(ttl.Page_txt_wo_qargs(), Xoa_ttl.Subpage_spr);	// check for slash

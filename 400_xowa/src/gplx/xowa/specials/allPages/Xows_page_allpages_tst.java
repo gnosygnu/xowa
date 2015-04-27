@@ -170,7 +170,7 @@ class Xows_page_allpages_fxt {
 	}
 	public Xows_page_allpages_fxt Test_special_gen() {
 		Xoa_url_parser parserx = new Xoa_url_parser();
-		parserx.Parse(init_url, Xows_page_allpages.Ttl_full_bry);
+		parserx.Parse(init_url, Xows_special_meta_.Itm__all_pages.Ttl_bry());
 		Xoa_ttl init_ttl = Make_init_ttl();
 		allpages.Special_gen(wiki, wiki.Ctx().Cur_page(), init_url, init_ttl);
 		if (expd_display_ttl != null) Tfds.Eq(expd_display_ttl, String_.new_utf8_(wiki.Ctx().Cur_page().Html_data().Display_ttl()));
@@ -201,5 +201,5 @@ class Xows_page_allpages_fxt {
 		Xoa_ttl init_ttl = Make_init_ttl();
 		allpages.Build_data(init_url, init_ttl);
 	}
-	private Xoa_ttl Make_init_ttl() {return Xoa_ttl.parse_(wiki, Bry_.new_utf8_(Xows_page_allpages.Ttl_full_str + init_ttl_leaf));}
+	private Xoa_ttl Make_init_ttl() {return Xoa_ttl.parse_(wiki, Bry_.new_utf8_(Xows_special_meta_.Itm__all_pages.Ttl_str() + init_ttl_leaf));}
 }

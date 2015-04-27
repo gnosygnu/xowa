@@ -34,7 +34,7 @@ public class Xowd_db_file {
 		this.tbl__css_file = new Xowd_css_file_tbl(conn);
 		this.tbl__cat_core = new Xowd_cat_core_tbl(conn, schema_is_1);
 		this.tbl__cat_link = new Xowd_cat_link_tbl(conn, schema_is_1);
-		this.tbl__wbase_qid = new Xowd_wbase_qid_tbl(conn, schema_is_1);
+		this.tbl__wbase_qid = new Xowd_wbase_qid_tbl(conn, schema_is_1, schema_props.Wbase__qid__src_ttl_has_spaces());
 		this.tbl__wbase_pid = new Xowd_wbase_pid_tbl(conn, schema_is_1);
 		this.tbl__search_word = new Xowd_search_word_tbl(conn, schema_is_1, schema_props.Search__word__page_count_exists());
 		this.tbl__search_link = new Xowd_search_link_tbl(conn, schema_is_1);
@@ -84,9 +84,11 @@ public class Xowd_db_file {
 		Db_conn conn = Db_conn_bldr.I.Get(url);
 		if (conn == null) {
 			Xoa_app_.Usr_dlg().Warn_many("", "", "wiki.db:missing db; tid=~{0} url=~{1}", Xowd_db_file_.To_key(tid), url.Raw());
-			conn = Db_conn_.Empty;
+			conn = Db_conn_.Noop;
 		}
-		Db_cfg_tbl cfg_tbl = new Db_cfg_tbl(conn, "xowa_cfg");
-		return new Xowd_db_file(cfg_tbl, Xob_info_session.Load(cfg_tbl), Xob_info_file.Load(cfg_tbl), props, Xowd_db_file_schema_props.load_(cfg_tbl), id, tid, url, ns_ids, part_id, guid, conn, Db_cmd_mode.Tid_ignore);
+		Db_cfg_tbl cfg_tbl = new Db_cfg_tbl(conn, "xowa_cfg");	// NOTE: this loads the cfg tbl for the current db, not the core db
+		Xob_info_session info_session = Xob_info_session.Load(cfg_tbl);
+		Xob_info_file info_file = Xob_info_file.Load(cfg_tbl);
+		return new Xowd_db_file(cfg_tbl, info_session, info_file, props, Xowd_db_file_schema_props.load_(cfg_tbl, tid, info_session.Version()), id, tid, url, ns_ids, part_id, guid, conn, Db_cmd_mode.Tid_ignore);
 	}
 }

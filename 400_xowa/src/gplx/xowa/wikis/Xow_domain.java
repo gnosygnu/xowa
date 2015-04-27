@@ -32,6 +32,7 @@ public class Xow_domain {
 	public int				Lang_orig_uid() {return lang_orig_itm.Id();}
 	public byte[]			Lang_orig_key() {return lang_orig_itm.Key();}
 	public byte[]			Wmf_key() {return wmf_key;} public void Wmf_key_(byte[] v) {wmf_key = v;} private byte[] wmf_key;
+	public int				Sort_idx() {return sort_idx;} public void Sort_idx_(int v) {sort_idx = v;} private int sort_idx = -1;
 	public static Xow_domain new_(byte[] domain_bry, int domain_tid, byte[] lang_key) {
 		Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key_or_intl(lang_key);
 		return new Xow_domain(domain_bry, domain_tid, lang_itm, lang_itm);

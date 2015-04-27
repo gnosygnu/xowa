@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 import gplx.threads.*; import gplx.gfui.*; import gplx.xowa.gui.*; import gplx.xowa.gui.history.*; import gplx.xowa.xtns.math.*; import gplx.xowa.files.*;
 import gplx.xowa.gui.urls.*; import gplx.xowa.gui.views.*; import gplx.xowa.pages.*;
-import gplx.xowa.parsers.lnkis.redlinks.*;
+import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.specials.*;
 public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 	private GfoInvkAble sync_cmd;
 	public Xog_win_itm(Xoae_app app, Xoa_gui_mgr gui_mgr) {
@@ -180,7 +180,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 		Xoae_page cur_page = tab.Page(); Xowe_wiki cur_wiki = tab.Wiki();
 		Xoae_page new_page = tab.History_mgr().Go_by_dir(cur_wiki, fwd);
 		if (new_page.Missing()) return;
-		if (new_page.Wikie().Special_mgr().Page_search().Match_ttl(new_page.Ttl()))		// if Special:Search, reload page; needed for async loading; DATE:2015-04-19
+		if (Xows_special_meta_.Itm__search.Match_ttl(new_page.Ttl()))		// if Special:Search, reload page; needed for async loading; DATE:2015-04-19
 			new_page = new_page.Wikie().GetPageByTtl(new_page.Url(), new_page.Ttl());	// NOTE: must reparse page if (a) Edit -> Read; or (b) "Options" save
 		byte history_nav_type = fwd ? Xog_history_stack.Nav_fwd : Xog_history_stack.Nav_bwd;
 		boolean new_page_is_same = Bry_.Eq(cur_page.Ttl().Full_txt(), new_page.Ttl().Full_txt());
@@ -205,7 +205,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 		Page__async__bgn(tab);
 	}
 	public void Page__async__bgn(Xog_tab_itm tab) {
-		page__async__thread = ThreadAdp_.invk_msg_(this, GfoMsg_.new_cast_(Invk_page_async_exec).Add("v", tab)).Start();
+		page__async__thread = ThreadAdp_.invk_msg_(gplx.xowa.apps.Xoa_thread_.Key_page_async, this, GfoMsg_.new_cast_(Invk_page_async_exec).Add("v", tab)).Start();
 	}	private ThreadAdp page__async__thread = ThreadAdp.Null;
 	public boolean Page__async__working(Xoa_url url) {
 		if (page__async__thread.IsAlive()) {				// cancel pending image downloads

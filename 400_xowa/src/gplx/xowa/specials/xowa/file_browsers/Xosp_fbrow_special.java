@@ -19,6 +19,7 @@ package gplx.xowa.specials.xowa.file_browsers; import gplx.*; import gplx.xowa.*
 import gplx.xowa.specials.*; import gplx.ios.*;
 public class Xosp_fbrow_special implements Xows_page {
 	private static final Xoa_url_arg_mgr url_args = new Xoa_url_arg_mgr(null);
+	public Xows_special_meta Special_meta() {return Xows_special_meta_.Itm__file_browser;}
 	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
 		Xosp_fbrow_rslt rslt = Gen(url.Args(), GfoInvkAble_.Null);
 		page.Html_data().Html_restricted_n_();
@@ -36,5 +37,4 @@ public class Xosp_fbrow_special implements Xows_page {
 	.Add_bry_obj(Xosp_fbrow_cmd__wiki_add.Regy_key, Xosp_fbrow_cmd__wiki_add.I)
 	.Add_bry_obj(Xosp_fbrow_cmd__root_set.Regy_key, Xosp_fbrow_cmd__root_set.I)
 	;
-	public static final byte[] Ttl_name_bry = Bry_.new_ascii_("XowaFileBrowser");
 }

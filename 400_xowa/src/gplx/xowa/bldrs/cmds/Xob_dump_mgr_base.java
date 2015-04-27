@@ -180,6 +180,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 		gplx.xowa.xtns.scribunto.Scrib_core.Core_invalidate();
 		wiki.Cache_mgr().Free_mem_all();
 	}
+	protected void Reset_db_y_() {this.reset_db = true;}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_commit_interval_))		commit_interval = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk_progress_interval_))		progress_interval = m.ReadInt("v");

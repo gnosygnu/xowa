@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.dbs; import gplx.*; import gplx.xowa.*;
-import gplx.ios.*; import gplx.dbs.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.ios.*; import gplx.dbs.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.dbs.qrys.*;
 import gplx.xowa.wikis.*;
 public class Xodb_save_mgr_sql implements Xodb_save_mgr {
 	private final Xow_page_mgr page_mgr;
@@ -30,7 +30,8 @@ public class Xodb_save_mgr_sql implements Xodb_save_mgr {
 		Xowd_db_file db_file = db_mgr.Core_data_mgr().Db__core();
 		int ns_count = db_file.Tbl__ns().Select_ns_count(ns_id) + 1;
 		int page_id = db_file.Tbl__cfg().Select_int_or("db", "page.id_nxt", -1);
-		if (page_id == -1) {	// HACK: was dbs.qrys.Db_qry_sql.rdr_("SELECT (Max(page_id) + 1) AS max_page_id FROM page;")
+		if (page_id == -1) {	// HACK: changed for tests; was dbs.qrys.Db_qry_sql.rdr_("SELECT (Max(page_id) + 1) AS max_page_id FROM page;")
+//				Db_rdr rdr = db_mgr.Core_data_mgr().Tbl__page().Conn().Stmt_new(Db_qry_sql.rdr_("SELECT (Max(page_id) + 1) AS max_page_id FROM page;")).Exec_select__rls_manual();
 			Db_rdr rdr = db_mgr.Core_data_mgr().Tbl__page().Conn().Stmt_select(db_file.Tbl__page().Tbl_name(), String_.Ary(db_file.Tbl__page().Fld_page_id()), Db_meta_fld.Ary_empy).Exec_select__rls_auto();
 			try {
 				int max_page_id = -1;

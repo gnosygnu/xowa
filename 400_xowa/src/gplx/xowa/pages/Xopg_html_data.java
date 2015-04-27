@@ -31,7 +31,8 @@ public class Xopg_html_data {
 			: display_ttl						// return normal title
 			;
 	}
-	public Xopg_html_data Display_ttl_(byte[] v) {display_ttl = v; return this;} private byte[] display_ttl;
+	public Xopg_html_data		Display_ttl_(byte[] v) {display_ttl = v; return this;} private byte[] display_ttl;
+	public boolean					Mode_wtxt_shown() {synchronized (this) {return mode_wtxt_shown;}} public void Mode_wtxt_shown_y_() {synchronized (this) {this.mode_wtxt_shown = true;}} private boolean mode_wtxt_shown; 
 	public byte[]				Display_ttl_vnt() {return display_ttl_vnt;} public void Display_ttl_vnt_(byte[] v) {display_ttl_vnt = v;} private byte[] display_ttl_vnt;
 	public byte[]				Content_sub() {return content_sub;} public void Content_sub_(byte[] v) {content_sub = v;} private byte[] content_sub;
 	public String				Bmk_pos() {return html_bmk_pos;} public void Bmk_pos_(String v) {html_bmk_pos = v;} private String html_bmk_pos;
@@ -85,6 +86,7 @@ public class Xopg_html_data {
 		custom_html = custom_html_end = custom_head_end = custom_name = null;
 		if (ctg_hash != null) ctg_hash.Clear();
 		indicators = null;
+		this.mode_wtxt_shown = false;
 	}
 	public byte[][] Ctgs_to_ary() {return ctg_hash == null ? Bry_.Ary_empty : (byte[][])ctg_hash.Xto_ary(byte[].class);}
 	public void Ctgs_add(Xoa_ttl ttl) {

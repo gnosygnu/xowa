@@ -21,11 +21,13 @@ public class Xow_xwiki_itm implements gplx.CompareAble {
 	public Xow_xwiki_itm(byte[] key_bry, byte[] url_fmt, int lang_id, int domain_tid, byte[] domain_bry, byte[] domain_name) {
 		this.key_bry = key_bry; this.key_str = String_.new_utf8_(key_bry); 
 		this.url_fmt = url_fmt; this.lang_id = lang_id;
+		this.url_fmtr = Bry_.Len_eq_0(url_fmt) ? null : Bry_fmtr.new_(url_fmt, "0");
 		this.domain_tid = domain_tid; this.domain_bry = domain_bry; this.domain_name = domain_name;
 	}
 	public byte[]	Key_bry() {return key_bry;} private final byte[] key_bry;				// EX: commons
 	public String	Key_str() {return key_str;} private final String key_str;
 	public byte[]	Url_fmt() {return url_fmt;} private final byte[] url_fmt;				// EX: //commons.wikimedia.org/wiki/Category:$1
+	public Bry_fmtr	Url_fmtr(){return url_fmtr;} private final Bry_fmtr url_fmtr;
 	public int		Lang_id() {return lang_id;} private final int lang_id;					// EX: Id__unknown
 	public int		Domain_tid() {return domain_tid;} private final int domain_tid;			// EX: Tid_int_commons
 	public byte[]	Domain_bry() {return domain_bry;} private final byte[] domain_bry;		// EX: commons.wikimedia.org

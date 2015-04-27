@@ -24,7 +24,7 @@ public class Xoud_opt_scope_tst {
 		fxt.Test_parse("en.w"		, fxt.Make(Xol_lang_itm_.Id_en, Xow_domain_.Tid_int_wikipedia));
 		fxt.Test_parse("en.*"		, fxt.Make(Xol_lang_itm_.Id_en, Xoud_opt_scope.Type_id_wildcard));
 		fxt.Test_parse("*.w"		, fxt.Make(Xoud_opt_scope.Lang_id_wildcard, Xow_domain_.Tid_int_wikipedia));
-		fxt.Test_parse("*.*"		, Xoud_opt_scope.App);
+		fxt.Test_parse("<any>"		, Xoud_opt_scope.App);
 		fxt.Test_parse("en.w,fr.d"	, fxt.Make(Xol_lang_itm_.Id_en, Xow_domain_.Tid_int_wikipedia), fxt.Make(Xol_lang_itm_.Id_fr, Xow_domain_.Tid_int_wiktionary));
 	}
 }

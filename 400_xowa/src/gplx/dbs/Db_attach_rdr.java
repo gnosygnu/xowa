@@ -25,14 +25,16 @@ public class Db_attach_rdr {
 		Sqlite_conn_info conn_info = (Sqlite_conn_info)conn.Conn_info();
 		this.diff_db = !String_.Eq(conn_info.Url().Raw(), attach_url.Raw());
 	}
-	public Db_rdr Exec_as_rdr(String sql) {
+	public void Attach() {
 		try {
 			if (diff_db) conn.Env_db_attach(attach_name, attach_url);
-		} catch (Exception e) {Err_.Noop(e); Gfo_usr_dlg_.I.Warn_many("", "", "db:failed to attach db; name=~{0} url=~{1}", attach_name, attach_url.Raw());}
+		}	catch (Exception e) {Err_.Noop(e); Gfo_usr_dlg_.I.Warn_many("", "", "db:failed to attach db; name=~{0} url=~{1}", attach_name, attach_url.Raw());}
+	}
+	public Db_rdr Exec_as_rdr(String sql) {
 		sql = String_.Replace(sql, "<attach_db>", diff_db ? attach_name + "." : "");	// replace <attach> with either "attach_db." or "";
 		return conn.Exec_sql_as_rdr2(sql);
 	}
-	public void Rls() {
+	public void Detach() {
 		if (diff_db) conn.Env_db_detach(attach_name);
 	}
 }

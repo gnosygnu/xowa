@@ -28,5 +28,9 @@ public class Db_conn_bldr {
 		Db_conn conn = exists ? Get(url) : New(url);
 		return new Db_conn_bldr_data(conn, exists);
 	}
+	public Db_conn Get_or_noop(Io_url url) {
+		Db_conn rv = wkr.Get(url);
+		return rv == null ? Db_conn_.Noop : rv;
+	}
         public static final Db_conn_bldr I = new Db_conn_bldr(); Db_conn_bldr() {}
 }

@@ -142,7 +142,7 @@ class Dpl_itm {
 			(	Known_invalid_keys.Get_by_mid(src, fld_bgn, fld_end) != null
 			||	Bry_.HasAtBgn(key_bry, Html_tag_.Comm_bgn)			// ignore comment-like keys; EX: <!--category=Ctg_0--> will have key of "<!--category="
 			);
-		String err_msg = String_.Format("unknown_key: page={0} key={1}", String_.new_utf8_(page_ttl), String_.new_utf8_(key_bry));
+		String err_msg = String_.Format("dynamic_page_list:unknown_key: page={0} key={1}", String_.new_utf8_(page_ttl), String_.new_utf8_(key_bry));
 		if (log)
 			usr_dlg.Log_many("", "", err_msg);
 		else

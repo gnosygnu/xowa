@@ -16,16 +16,19 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.dbs.cfgs.*;
+import gplx.dbs.cfgs.*; import gplx.xowa.bldrs.infos.*;
 public class Xowd_db_file_schema_props {
-	Xowd_db_file_schema_props(boolean search__word__page_count_exists) {
+	Xowd_db_file_schema_props(boolean search__word__page_count_exists, boolean wbase__qid__src_ttl_has_spaces) {
 		this.search__word__page_count_exists = search__word__page_count_exists;
+		this.wbase__qid__src_ttl_has_spaces = wbase__qid__src_ttl_has_spaces;
 	}
 	public boolean Search__word__page_count_exists() {return search__word__page_count_exists;} private final boolean search__word__page_count_exists;
-	public static Xowd_db_file_schema_props make_() {return new Xowd_db_file_schema_props(Bool_.Y);}
-	public static Xowd_db_file_schema_props load_(Db_cfg_tbl tbl) {
+	public boolean Wbase__qid__src_ttl_has_spaces() {return wbase__qid__src_ttl_has_spaces;} private final boolean wbase__qid__src_ttl_has_spaces;
+	public static Xowd_db_file_schema_props make_() {return new Xowd_db_file_schema_props(Bool_.Y, Bool_.N);}
+	public static Xowd_db_file_schema_props load_(Db_cfg_tbl tbl, int tid, String version) {
 		boolean search__word__page_count_exists = tbl.Select_yn_or(Grp, Key__col_search_word_page_count, Bool_.N);
-		return new Xowd_db_file_schema_props(search__word__page_count_exists);
+		boolean wbase__qid__src_ttl_has_spaces = String_.In(version, "2.4.2.1", "2.4.3.1", "2.4.3.2");
+		return new Xowd_db_file_schema_props(search__word__page_count_exists, wbase__qid__src_ttl_has_spaces);
 	}
 	public static final String Grp = Xow_cfg_consts.Grp__wiki_schema;
 	public static final String

@@ -88,7 +88,7 @@ public class Dpl_xnde_tst {
 	}
 	@Test  public void Invalid_key() {
 		fxt.Ctg_create("Ctg_0", "A", "B");
-		fxt.Warns("unknown_key: page=Test page key=invalid_key");
+		fxt.Warns("dynamic_page_list:unknown_key: page=Test page key=invalid_key");
 		fxt.Ul_pages(String_.Concat_lines_nl_skip_last
 		(	"<DynamicPageList>"
 		,	"invalid_key=invalid_val"
@@ -156,7 +156,7 @@ public class Dpl_xnde_tst {
 		), fxt.Ul(Itm_html_null, "B", "A"));
 	}
 	@Test  public void Error_skip_line() {	// PURPOSE: error should skip rest of line; was failing with array out of bounds; en.n:Portal:Austria/Wikipedia; DATE:2014-01-18
-		fxt.Warns("unknown_key: page=Test page key=Ctg_0 order");	// ignore warning message
+		fxt.Warns("dynamic_page_list:unknown_key: page=Test page key=Ctg_0 order");	// ignore warning message
 		fxt.Ul_pages("<DynamicPageList> category=Ctg_0 order=descending</DynamicPageList>", "No pages meet these criteria.");
 	}
 	@Test  public void Atr_has_template() {	// PURPOSE: attribute also has template; DATE:2014-01-31

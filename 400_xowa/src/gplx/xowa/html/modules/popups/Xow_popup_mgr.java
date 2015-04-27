@@ -19,7 +19,7 @@ package gplx.xowa.html.modules.popups; import gplx.*; import gplx.xowa.*; import
 import gplx.core.primitives.*; import gplx.threads.*;
 import gplx.web.js.*;
 import gplx.xowa.gui.views.*;
-import gplx.xowa.specials.search.*;
+import gplx.xowa.specials.*; import gplx.xowa.specials.search.*;
 import gplx.xowa.apis.xowa.html.modules.*;
 public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 	private Xoae_app app; private Xowe_wiki wiki; private Js_wtr js_wtr = new Js_wtr();
@@ -110,9 +110,11 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 				Xoa_ttl popup_ttl = Xoa_ttl.parse_(popup_wiki, temp_href.Page_and_anchor());
 				switch (popup_ttl.Ns().Id()) {
 					case Xow_ns_.Id_media:
-					case Xow_ns_.Id_special:
 					case Xow_ns_.Id_file:
-						return Bry_.Empty;
+						return Bry_.Empty;		// do not popup for media or file
+					case Xow_ns_.Id_special:
+						if (!Xows_special_meta_.Itm__popup_history.Match_ttl(popup_ttl)) return Bry_.Empty;	// do not popup for special, unless popupHistory; DATE:2015-04-20
+						break;
 				}
 				if (ns_allowed_regy.Count() > 0 && !ns_allowed_regy.Has(ns_allowed_regy_key.Val_(popup_ttl.Ns().Id()))) return Bry_.Empty;
 				itm.Init(popup_wiki.Domain_bry(), popup_ttl);

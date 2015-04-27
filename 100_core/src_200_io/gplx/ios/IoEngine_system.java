@@ -39,10 +39,7 @@ public class IoEngine_system extends IoEngine_base {
 	@Override public void DeleteFil_api(IoEngine_xrg_deleteFil args) {
 		Io_url url = args.Url();
 		File fil = Fil_(url);	
-		if (!Fil_Exists(fil)) {
-			if (args.MissingFails()) throw IoErr.FileNotFound("delete", url);
-			else	return;
-		}
+		if (!Fil_Exists(fil)) return;
 		MarkFileWritable(fil, url, args.ReadOnlyFails(), "DeleteFile");
 		DeleteFil_lang(fil, url);
 	}
@@ -68,8 +65,8 @@ public class IoEngine_system extends IoEngine_base {
 			// write text
 			try 	{fc.write(ByteBuffer.wrap(textBytes));}
 			catch	(IOException e) {
-				Closeable_Close(fc, url, false);
-				Closeable_Close(fos, url, false);
+				Closeable_close(fc, url, false);
+				Closeable_close(fos, url, false);
 				throw Err_.err_key_(e, IoEngineArgs._.Err_IoException, "write data to file failed").Add("url", url.Xto_api());
 			}
 			if (!Op_sys.Cur().Tid_is_drd()) {
@@ -79,11 +76,10 @@ public class IoEngine_system extends IoEngine_base {
 		}
 		finally {		
 			// cleanup
-			Closeable_Close(fc, url, false);
-			Closeable_Close(fos, url, false);
+			Closeable_close(fc, url, false);
+			Closeable_close(fos, url, false);
 		}
 	}
-	@SuppressWarnings("resource")
 	@Override public String LoadFilStr(IoEngine_xrg_loadFilStr args) {
 		Io_url url = args.Url(); String url_str = url.Xto_api();
 		boolean file_exists = ExistsFil_api(url);			// check if file exists first to avoid throwing exception; note that most callers pass Missing_ignored; DATE:2015-02-24
@@ -104,7 +100,7 @@ public class IoEngine_system extends IoEngine_base {
 		InputStreamReader reader = null;
 		try 	{reader = new InputStreamReader(stream, IoEngineArgs._.LoadFilStr_Encoding);}
 		catch 	(UnsupportedEncodingException e) {
-			Closeable_Close(stream, url_str, false);
+			Closeable_close(stream, url_str, false);
 			throw Err_text_unsupported_encoding(IoEngineArgs._.LoadFilStr_Encoding, "", url_str, e);
 		}
 		
@@ -117,8 +113,11 @@ public class IoEngine_system extends IoEngine_base {
 		while (true) {
 		    try 	{pos = reader.read(readerBuffer);}
 		    catch	(IOException e) {
-			    Closeable_Close(stream, url_str, false);
-			    Closeable_Close(reader, url_str, false);
+	    		try 	{
+	    			stream.close();
+	    			reader.close();
+	    		}
+	    		catch 	(IOException e2) {}		    	
 		    	throw Err_.err_key_(e, IoEngineArgs._.Err_IoException, "read data from file failed").Add("url", url_str).Add("pos", pos);
 		    }
 		    if (pos == -1) break;
@@ -126,8 +125,8 @@ public class IoEngine_system extends IoEngine_base {
 		}
 		
 		// cleanup
-	    Closeable_Close(stream, url_str, false);
-	    Closeable_Close(reader, url_str, false);
+	    Closeable_close(stream, url_str, false);
+	    Closeable_close(reader, url_str, false);
 		return sw.toString();
 	}
 	@Override public boolean ExistsDir(Io_url url) {return new File(url.Xto_api()).exists();}
@@ -272,10 +271,10 @@ public class IoEngine_system extends IoEngine_base {
 			while 	(pos < count) {
 				try 	{read = trgChannel.transferFrom(srcChannel, pos, transferSize);}
 				catch 	(IOException e) {
-					Closeable_Close(srcChannel, srcUrl, false);
-					Closeable_Close(trgChannel, trgUrl, false);
-					Closeable_Close(srcStream, srcUrl, false);
-					Closeable_Close(trgStream, srcUrl, false);
+					Closeable_close(srcChannel, srcUrl, false);
+					Closeable_close(trgChannel, trgUrl, false);
+					Closeable_close(srcStream, srcUrl, false);
+					Closeable_close(trgStream, srcUrl, false);
 					throw Err_.err_key_(e, IoEngineArgs._.Err_IoException, "transfer data failed").Add("src", srcUrl.Xto_api()).Add("trg", trgUrl.Xto_api());
 				}
 			    if (read == -1) break;
@@ -286,10 +285,10 @@ public class IoEngine_system extends IoEngine_base {
 		}
 		finally {
 			// cleanup
-			Closeable_Close(srcChannel, srcUrl, false);
-			Closeable_Close(trgChannel, trgUrl, false);
-			Closeable_Close(srcStream, srcUrl, false);
-			Closeable_Close(trgStream, srcUrl, false);
+			Closeable_close(srcChannel, srcUrl, false);
+			Closeable_close(trgChannel, trgUrl, false);
+			Closeable_close(srcStream, srcUrl, false);
+			Closeable_close(trgStream, srcUrl, false);
 		}
 		UpdateFilModifiedTime(trgUrl, QueryFil(srcUrl).ModifiedTime());	// must happen after file is closed
 	}
@@ -356,8 +355,8 @@ public class IoEngine_system extends IoEngine_base {
 			XferDir(IoEngine_xrg_xferDir.copy_(src, trg));
 		}
 	}
-	protected static void Closeable_Close(Closeable closeable, Io_url url, boolean throwErr) {Closeable_Close(closeable, url.Xto_api(), throwErr);}
-	protected static void Closeable_Close(Closeable closeable, String url_str, boolean throwErr) {
+	protected static void Closeable_close(Closeable closeable, Io_url url, boolean throwErr) {Closeable_close(closeable, url.Xto_api(), throwErr);}
+	protected static void Closeable_close(Closeable closeable, String url_str, boolean throwErr) {
 		if 		(closeable == null) return;
 		try 	{closeable.close();}
 		catch 	(IOException e) {

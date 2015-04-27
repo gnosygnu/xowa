@@ -34,16 +34,17 @@ class Xows_ui_async_fxt {
 	private Xows_html_row html_row; private static final byte[] Bry_enwiki = Bry_.new_ascii_("w");
 	private Xows_ui_async async;
 	private Xog_js_wkr__log js_wkr = new Xog_js_wkr__log();
+	private Xowe_wiki wiki;
 	public void Clear() {
 		Xoae_app app = Xoa_app_fxt.app_();
-		Xowe_wiki wiki = Xoa_app_fxt.wiki_(app, "w");
+		this.wiki = Xoa_app_fxt.wiki_(app, "w");
 		html_row = new Xows_html_row(); html_row.Ctor(wiki.Html_mgr__lnki_wtr_utl());
 		html_row.Fmtr().Fmt_("~{page_key}");
 		async = new Xows_ui_async(Cancelable_.Never, html_row, js_wkr, 5, Bry_enwiki);
 	}
 	public Xows_db_row Make_rslt(int len, String ttl) {
 		byte[] ttl_bry = Bry_.new_ascii_(ttl);
-		return new Xows_db_row(Bry_enwiki, 1, Xow_ns_.Id_main, len, ttl_bry, ttl_bry);
+		return new Xows_db_row(Bry_enwiki, wiki.Ttl_parse(ttl_bry), 1, len);
 	}
 	public Object[] Make_args_append(String uid, String html)	{return Object_.Ary(Xog_js_wkr__log.Proc_append_above, uid, html);}
 	public Object[] Make_args_replace(String uid)				{return Object_.Ary(Xog_js_wkr__log.Proc_replace_html, uid, "");}

@@ -184,7 +184,7 @@ public class Xoapi_popups implements GfoInvkAble, GfoEvMgrOwner {
 	;
 	public static final byte[]
 	  Dflt_xnde_ignore_ids		= Bry_.new_ascii_("coordinates")
-	, Dflt_tmpl_keeplist		= Bry_.new_ascii_("en.wikipedia.org|formatnum;age;age_in_days;age_in_years_and_days*;nts;number_table_sorting*;as_of;oldstyledatedy;gregorian_serial_date;currentminute;currentsecond;dmca;spaced_ndash;trim;month*;convert*;worldpop*;ipa*;lang*;nowrap*;h:*;mvar;math;vgy;audio;iso_639_name;transl;translate;linktext;zh;nihongo*;japanese_name;ko-hhrm|\n")
+	, Dflt_tmpl_keeplist		= Bry_.new_ascii_("en.wikipedia.org|formatnum;age;age_in_days;age_in_years_and_days*;nts;number_table_sorting*;as_of;oldstyledatedy;gregorian_serial_date;currentminute;currentsecond;dmca;spaced_ndash;trim;month*;convert*;worldpop*;ipa*;lang*;nowrap*;h:*;mvar;math;vgy;audio;iso_639_name;transl;translate;linktext;zh;nihongo*;japanese_name;ko-hhrm;mp|\n")
 	, Dflt_html_fmtr_popup = Bry_.new_ascii_(String_.Concat_lines_nl_skip_last
 	( "<div dir=~{page_lang_ltr}>"
 	, "  <div>~{content}"

@@ -20,7 +20,7 @@ import gplx.core.primitives.*; import gplx.core.btries.*;
 import gplx.gfui.*; import gplx.xowa.gui.menus.*; import gplx.xowa.gui.menus.dom.*; import gplx.xowa.files.gui.*;
 import gplx.html.*; import gplx.xowa.html.modules.*; import gplx.xowa.pages.*;
 public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
-	private Xoae_app app;
+	private Xoae_app app; private final Object thread_lock = new Object();
 	public Xog_html_itm(Xog_tab_itm owner_tab) {
 		this.owner_tab = owner_tab;
 		app = owner_tab.Tab_mgr().Win().App();
@@ -92,41 +92,57 @@ public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 	public String Get_elem_value_for_edit_box()			{return html_box.Html_elem_atr_get_str(Elem_id__xowa_edit_data_box, Gfui_html.Atr_value);}
 	public String Get_elem_value(String elem_id)		{return html_box.Html_elem_atr_get_str(elem_id, Gfui_html.Atr_value);}
 	public void Html_img_update(String elem_id, String elem_src, int elem_width, int elem_height) {
-		GfoMsg m = GfoMsg_.new_cast_(Invk_html_img_update).Add("elem_id", elem_id).Add("elem_src", elem_src).Add("elem_width", elem_width).Add("elem_height", elem_height);
-		GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_img_update, m);
-	}	Object guard = new Object();
+		synchronized (thread_lock) {
+			GfoMsg m = GfoMsg_.new_cast_(Invk_html_img_update).Add("elem_id", elem_id).Add("elem_src", elem_src).Add("elem_width", elem_width).Add("elem_height", elem_height);
+			GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_img_update, m);
+		}
+	}
 	public void Html_elem_delete(String elem_id) {
-		GfoMsg m = GfoMsg_.new_cast_(Invk_html_elem_delete).Add("elem_id", elem_id);
-		GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_elem_delete, m);
+		synchronized (thread_lock) {
+			GfoMsg m = GfoMsg_.new_cast_(Invk_html_elem_delete).Add("elem_id", elem_id);
+			GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_elem_delete, m);
+		}
 	}
 	public void Html_atr_set(String elem_id, String atr_key, String atr_val) {
-		GfoMsg m = GfoMsg_.new_cast_(Invk_html_elem_atr_set).Add("elem_id", elem_id).Add("atr_key", atr_key).Add("atr_val", atr_val);
-		GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_elem_atr_set, m);
+		synchronized (thread_lock) {
+			GfoMsg m = GfoMsg_.new_cast_(Invk_html_elem_atr_set).Add("elem_id", elem_id).Add("atr_key", atr_key).Add("atr_val", atr_val);
+			GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_elem_atr_set, m);
+		}
 	}
 	public void Html_redlink(String html_uid) {Html_elem_atr_set_append(html_uid, "class", "new");}
 	public void Html_elem_atr_set_append(String elem_id, String atr_key, String atr_val) {
-		GfoMsg m = GfoMsg_.new_cast_(Invk_html_elem_atr_set_append).Add("elem_id", elem_id).Add("atr_key", atr_key).Add("atr_val", atr_val);
-		GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_elem_atr_set_append, m);
+		synchronized (thread_lock) {
+			GfoMsg m = GfoMsg_.new_cast_(Invk_html_elem_atr_set_append).Add("elem_id", elem_id).Add("atr_key", atr_key).Add("atr_val", atr_val);
+			GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_elem_atr_set_append, m);
+		}
 	}
 	public void Html_elem_replace_html(String id, String html) {
-		GfoMsg m = GfoMsg_.new_cast_(Invk_html_elem_replace_html).Add("id", id).Add("html", html);
-		GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_elem_replace_html, m);
+		synchronized (thread_lock) {
+			GfoMsg m = GfoMsg_.new_cast_(Invk_html_elem_replace_html).Add("id", id).Add("html", html);
+			GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_elem_replace_html, m);
+		}
 	}
 	public void Html_elem_append_above(String id, String html) {
-		GfoMsg m = GfoMsg_.new_cast_(Invk_html_elem_append_above).Add("id", id).Add("html", html);
-		GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_elem_append_above, m);
+		synchronized (thread_lock) {	// needed for Special:Search and async; DATE:2015-04-23
+			GfoMsg m = GfoMsg_.new_cast_(Invk_html_elem_append_above).Add("id", id).Add("html", html);
+			GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_elem_append_above, m);
+		}
 	}
 	public void Html_gallery_packed_exec() {
-		if (!String_.Eq(owner_tab.Tab_key(), owner_tab.Tab_mgr().Active_tab().Tab_key())) return;	// do not exec unless active;
-		GfoMsg m = GfoMsg_.new_cast_(Invk_html_gallery_packed_exec);
-		GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_gallery_packed_exec, m);
-		module_packed_done = true;
+		synchronized (thread_lock) {
+			if (!String_.Eq(owner_tab.Tab_key(), owner_tab.Tab_mgr().Active_tab().Tab_key())) return;	// do not exec unless active;
+			GfoMsg m = GfoMsg_.new_cast_(Invk_html_gallery_packed_exec);
+			GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_gallery_packed_exec, m);
+			module_packed_done = true;
+		}
 	}
 	public void Html_popups_bind_hover_to_doc() {
-		if (!String_.Eq(owner_tab.Tab_key(), owner_tab.Tab_mgr().Active_tab().Tab_key())) return;	// do not exec unless active;
-		GfoMsg m = GfoMsg_.new_cast_(Invk_html_popups_bind_hover_to_doc);
-		GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_popups_bind_hover_to_doc, m);
-		module_popups_done = true;
+		synchronized (thread_lock) {
+			if (!String_.Eq(owner_tab.Tab_key(), owner_tab.Tab_mgr().Active_tab().Tab_key())) return;	// do not exec unless active;
+			GfoMsg m = GfoMsg_.new_cast_(Invk_html_popups_bind_hover_to_doc);
+			GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_popups_bind_hover_to_doc, m);
+			module_popups_done = true;
+		}
 	}
 	private boolean module_packed_done = false, module_popups_done = false;
 	public void Tab_selected(Xoae_page page) {

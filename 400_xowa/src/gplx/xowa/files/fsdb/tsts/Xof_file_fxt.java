@@ -35,7 +35,7 @@ class Xof_file_fxt {
 		Xof_repo_fxt.Repos_init(app.File_mgr(), true, wiki);
 		Xowe_wiki_bldr.Create(wiki, 1, "dump.xml");
 		Xowd_db_file text_db = wiki.Data_mgr__core_mgr().Dbs__make_by_tid(Xowd_db_file_.Tid_text); text_db.Tbl__text().Create_tbl();
-		Fsdb_db_mgr__v2 fsdb_core = Fsdb_db_mgr__v2_bldr.I.Make(wiki);
+		Fsdb_db_mgr__v2 fsdb_core = Fsdb_db_mgr__v2_bldr.I.Make(wiki, Bool_.Y);
 		fsdb_mgr.Mnt_mgr().Ctor_by_load(fsdb_core);
 		fsdb_mgr.Mnt_mgr().Mnts__get_main().Bin_mgr().Dbs__make("temp.xowa");
 		wiki.File_mgr().Init_file_mgr_by_load(wiki);

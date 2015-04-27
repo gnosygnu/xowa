@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apis.xowa.startups.tabs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apis.*; import gplx.xowa.apis.xowa.*; import gplx.xowa.apis.xowa.startups.*;
+import gplx.xowa.specials.*;
 public class Xoapi_startup_tabs implements GfoInvkAble {
 	public String Custom() {return custom;} private String custom;
 	public boolean Custom_is_expr() {return custom_is_expr;} private boolean custom_is_expr;
@@ -46,7 +47,7 @@ public class Xoapi_startup_tabs implements GfoInvkAble {
 		String xowa_home = gplx.xowa.users.Xouc_pages_mgr.Page_xowa;
 		if (manual == null) {
 			switch (type) {
-				case Xoapi_startup_tabs_tid_.Tid_blank:			rv.Add(gplx.xowa.specials.xowa.default_tab.Default_tab_page.Ttl_full_str); break;
+				case Xoapi_startup_tabs_tid_.Tid_blank:			rv.Add(Xows_special_meta_.Itm__default_tab.Ttl_str()); break;
 				case Xoapi_startup_tabs_tid_.Tid_xowa:			rv.Add(xowa_home); break;
 				case Xoapi_startup_tabs_tid_.Tid_custom:		Add_ary(rv, custom); break;
 				case Xoapi_startup_tabs_tid_.Tid_previous:		Add_ary(rv, previous); break;

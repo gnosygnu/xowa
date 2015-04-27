@@ -19,6 +19,7 @@ package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.xowa.specials.*;
 public class Xoud_history_special implements Bry_fmtr_arg, Xows_page {
 	private ListAdp rows = ListAdp_.new_();
+	public Xows_special_meta Special_meta() {return Xows_special_meta_.Itm__page_history;}
 	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
 		Xoae_app app = wiki.Appe();
 		Xoud_history_mgr mgr = app.User().Data_mgr().History_mgr();
@@ -55,5 +56,4 @@ public class Xoud_history_special implements Bry_fmtr_arg, Xows_page {
 	, "  </tr>"
 	), "itm_wiki", "itm_page", "itm_count", "itm_last"
 	);
-	public static final byte[] Ttl_name = Bry_.new_ascii_("XowaHistory");
 }

@@ -61,6 +61,7 @@ public class Bry_rdr {
 		return bgn == pos ? or_int : rv * negative;
 	}
 	public byte[] Read_bry_to_nl()		{return Read_bry_to(Byte_ascii.NewLine);}
+	public byte[] Read_bry_to_semic()	{return Read_bry_to(Byte_ascii.Semic);}
 	public byte[] Read_bry_to_pipe()	{return Read_bry_to(Byte_ascii.Pipe);}
 	public byte[] Read_bry_to_quote()	{return Read_bry_to(Byte_ascii.Quote);}
 	public byte[] Read_bry_to_apos()	{return Read_bry_to(Byte_ascii.Apos);}

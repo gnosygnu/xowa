@@ -48,11 +48,12 @@ public abstract class Xob_wdata_qid_base extends Xob_itm_dump_base implements Xo
 			if (sitelink_ns != Xow_ns_.Id_main)	// ttl not in main; chop off ns portion; EX:Aide:French_title -> French_title
 				sitelink_ttl = Bry_.Mid(sitelink_ttl, ns_parser_rslt.Ttl_bgn(), sitelink_ttl.length);
 			sitelink_ttl = wiki.Lang().Case_mgr().Case_build_1st_upper(tmp_bfr, sitelink_ttl, 0, sitelink_ttl.length);
-			this.Qid_add(sitelink.Site(), sitelink_ns, sitelink_ttl, qid);
+			this.Qid_add(sitelink.Site(), sitelink_ns, Xoa_ttl.Replace_spaces(sitelink_ttl), qid);	// NOTE: always convert spaces to underscores; EX: "A B" -> "A_B" DATE:2015-04-21
 		}
 	}
 	public void Wkr_end() {
 		this.Qid_end();
+		// wiki.Data_mgr__core_mgr().Db__wbase().Tbl__cfg().Insert_int("", "", 1);
 	}
 	public void Wkr_print() {}
 }

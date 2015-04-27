@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.threads.*; import gplx.dbs.*;
+import gplx.xowa.specials.*;
 public class Xoud_history_mgr implements GfoInvkAble {
 	private Xoud_history_tbl history_tbl;
 	public void Conn_(Db_conn new_conn, boolean created, int user_id) {
@@ -47,9 +48,9 @@ public class Xoud_history_mgr implements GfoInvkAble {
 		byte[] page_db = ttl.Page_db();
 		return	(	ttl.Ns().Id_special()
 				&&	(	Bry_.Eq(page_db, gplx.xowa.users.history.Xou_history_mgr.Ttl_name)	// do not add XowaPageHistory to history
-					||	Bry_.Eq(page_db, gplx.xowa.specials.xowa.popup_history.Popup_history_page.Ttl_name_bry)
-					||	Bry_.Eq(page_db, gplx.xowa.specials.xowa.default_tab.Default_tab_page.Ttl_name_bry)
-					||	Bry_.Eq(page_db, Xoud_history_special.Ttl_name)
+					||	Bry_.Eq(page_db, Xows_special_meta_.Itm__popup_history.Key_bry())
+					||	Bry_.Eq(page_db, Xows_special_meta_.Itm__default_tab.Key_bry())
+					||	Bry_.Eq(page_db, Xows_special_meta_.Itm__page_history.Key_bry())
 					)
 				);
 	}

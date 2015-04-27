@@ -53,7 +53,7 @@ public class Xog_search_suggest_mgr implements GfoInvkAble {
 	}
 	public void Search(Xowe_wiki wiki, byte[] search_bry, byte[] cbk_func) {
 		this.wiki = wiki; this.search_bry = search_bry; this.cbk_func = cbk_func;
-		ThreadAdp_.invk_(this, Invk_search_async).Start();
+		ThreadAdp_.invk_(gplx.xowa.apps.Xoa_thread_.Key_special_suggest, this, Invk_search_async).Start();
 	}	private Xowe_wiki wiki; private byte[] search_bry, cbk_func;
 	private Object thread_guard = new Object();
 	private void Search_async() {

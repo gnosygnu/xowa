@@ -61,8 +61,8 @@ public class Xob_wdata_qid_base_tst {
 		site_tbl.Insert(1, "en.wikipedia.org");
 		site_tbl.Insert(2, "fr.wikipedia.org");
 		Xowmf_ns_tbl ns_tbl = new Xowmf_ns_tbl(conn);
-		ns_tbl.Insert(1, Xow_ns_.Id_help, Xow_ns_case_.Id_1st, Bry_.new_ascii_("Help"), Bry_.Empty);
-		ns_tbl.Insert(2, Xow_ns_.Id_help, Xow_ns_case_.Id_1st, Bry_.new_ascii_("Aide"), Bry_.Empty);
+		ns_tbl.Insert(1, Xow_ns_.Id_help, Xow_ns_case_.Id_1st, Bool_.Y, Bool_.N, Bry_.new_ascii_("Help"), Bry_.Empty);
+		ns_tbl.Insert(2, Xow_ns_.Id_help, Xow_ns_case_.Id_1st, Bool_.Y, Bool_.N, Bry_.new_ascii_("Aide"), Bry_.Empty);
 		// run test
 		fxt.doc_ary_
 		(	fxt.doc_wo_date_(1, "11", Xob_wdata_pid_base_tst.json_("q1", "links", String_.Ary("enwiki", "Help:Q1_en", "frwiki", "Aide:Q1_fr")))
@@ -115,6 +115,36 @@ public class Xob_wdata_qid_base_tst {
 		,	"!!!!*|!!!!*|"
 		,	"Q1_en|q1"
 		,	"Q2_en|q2"
+		,	""
+		)
+		.Fil_expd
+		(	reg_(fxt.Wiki(), "enwiki", "000")
+		,	"0|Q1_en|Q2_en|2"
+		,	""
+		)
+		.Fil_expd(ttl_(fxt.Wiki(), "frwiki", "000", 0)
+		,	"!!!!*|!!!!*|"
+		,	"Q1_fr|q1"
+		,	"Q2_fr|q2"
+		,	""
+		)
+		.Fil_expd
+		(	reg_(fxt.Wiki(), "frwiki", "000")
+		,	"0|Q1_fr|Q2_fr|2"
+		,	""
+		)
+		.Run(new Xob_wdata_qid_txt().Ctor(fxt.Bldr(), this.fxt.Wiki()))
+		;
+	}
+	@Test  public void Spaces() {	// PURPOSE: assert that ttls with spaces are converted to unders DATE:2015-04-21
+		fxt.doc_ary_
+		(	fxt.doc_wo_date_(2, "q2", Xob_wdata_pid_base_tst.json_("q2", "links", String_.Ary("enwiki", "q2 en", "frwiki", "q2 fr")))	// note "q2 en" not "q2_en"
+		,	fxt.doc_wo_date_(1, "q1", Xob_wdata_pid_base_tst.json_("q1", "links", String_.Ary("enwiki", "q1 en", "frwiki", "q1 fr")))
+		)
+		.Fil_expd(ttl_(fxt.Wiki(), "enwiki", "000", 0)
+		,	"!!!!*|!!!!*|"
+		,	"Q1_en|q1"
+		,	"Q2_en|q2"	// NOTE: q2_en
 		,	""
 		)
 		.Fil_expd

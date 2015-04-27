@@ -141,5 +141,4 @@ class Xow_search_scanner {
 	.Add_str_byte(")"	, Xow_search_tkn.Tid_paren_end)
 	.Add_str_byte("or"	, Xow_search_tkn.Tid_or)
 	.Add_str_byte("and"	, Xow_search_tkn.Tid_and);
-        public static final Xow_search_scanner I = new Xow_search_scanner(); Xow_search_scanner() {}
 }

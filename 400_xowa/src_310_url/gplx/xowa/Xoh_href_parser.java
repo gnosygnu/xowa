@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.core.btries.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.net.*; import gplx.xowa.parsers.lnkes.*;
+import gplx.xowa.wikis.*;
 public class Xoh_href_parser {
 	private Gfo_url_parser url_parser; private Gfo_url tmp_url = new Gfo_url(); 
 	private Btrie_slim_mgr segs = Btrie_slim_mgr.ci_ascii_(); // NOTE:ci.ascii:XO_const.en; /wiki/, /site/ etc.
@@ -72,10 +73,14 @@ public class Xoh_href_parser {
 			}
 		}
 	}
-	public byte[] Build_to_bry(Xow_wiki wiki, Xoa_ttl ttl)				{Build_to_bfr(tmp_bfr, wiki, ttl, Bool_.N); return tmp_bfr.Xto_bry_and_clear();}
-	public void Build_to_bfr(Bry_bfr bfr, Xow_wiki wiki, byte[] raw)	{Build_to_bfr(bfr, wiki, wiki.Ttl_parse(raw), Bool_.N);}
-	public void Build_to_bfr(Bry_bfr bfr, Xow_wiki wiki, Xoa_ttl ttl)	{Build_to_bfr(bfr, wiki, ttl, Bool_.N);}
-	public void Build_to_bfr(Bry_bfr bfr, Xow_wiki wiki, Xoa_ttl ttl, boolean force_site) {
+	public byte[] Build_to_bry(Xow_wiki wiki, Xoa_ttl ttl) {
+		synchronized (tmp_bfr) {
+			Build_to_bfr(tmp_bfr, wiki.App(), wiki.Domain_bry(), ttl, Bool_.N);
+			return tmp_bfr.Xto_bry_and_clear();
+		}
+	}
+	public void Build_to_bfr(Bry_bfr bfr, Xoa_app app, byte[] domain_bry, Xoa_ttl ttl)	{Build_to_bfr(bfr, app, domain_bry, ttl, Bool_.N);}
+	public void Build_to_bfr(Bry_bfr bfr, Xoa_app app, byte[] domain_bry, Xoa_ttl ttl, boolean force_site) {
 		byte[] page = ttl.Full_txt_raw();
 		Xow_xwiki_itm xwiki = ttl.Wik_itm();
 		if (xwiki == null)																		// not an xwiki; EX: [[wikt:Word]]
@@ -88,7 +93,7 @@ public class Xoh_href_parser {
 			if (ttl.Anch_bgn() != 1) {															// not an anchor-only;	EX: "#A"
 				if (force_site) {																// popup parser always writes as "/site/"
 					bfr.Add(Href_site_bry);														// add "/site/";	EX: /site/
-					bfr.Add(wiki.Domain_bry());													// add xwiki;		EX: en_dict	 
+					bfr.Add(domain_bry);														// add xwiki;		EX: en_dict	 
 					bfr.Add(Href_wiki_bry);														// add "/wiki/";	EX: /wiki/
 				}
 				else
@@ -97,10 +102,17 @@ public class Xoh_href_parser {
 			else {}																				// anchor: noop
 		}
 		else {																					// xwiki
-			if (wiki.App().Xwiki_mgr__missing(xwiki.Domain_bry())) {								// xwiki is not offline; use http:
-				bfr.Add(Href_http_bry);															// add "http://";	EX: http://
-				bfr.Add(xwiki.Domain_bry());													// add xwiki;		EX: en_dict	 
-				bfr.Add(Href_wiki_bry);															// add "/wiki/";	EX: /wiki/
+			if (app.Xwiki_mgr__missing(xwiki.Domain_bry())) {									// xwiki is not offline; use http:
+				Bry_fmtr url_fmtr = xwiki.Url_fmtr();
+				if (url_fmtr == null) {
+					bfr.Add(Href_http_bry);														// add "http://";	EX: http://
+					bfr.Add(xwiki.Domain_bry());												// add xwiki;		EX: en_dict	 
+					bfr.Add(Href_wiki_bry);														// add "/wiki/";	EX: /wiki/
+				}
+				else {																			// url_fmtr exists; DATE:2015-04-22
+					url_fmtr.Bld_bfr(bfr, bfr_encoder.Xto_bry_and_clear());						// use it and pass bfr_encoder for page_name;
+					return;
+				}
 			}
 			else {																				// xwiki is avaiable; use /site/
 				bfr.Add(Href_site_bry);															// add "/site/";	EX: /site/

@@ -139,6 +139,16 @@ public class Xof_ext_ {
 				return false;
 		}
 	}
+	public static boolean Id_is_image_wo_svg(int id) {	// same as Id_is_image, but ignore svg
+		switch (id) {
+			case Xof_ext_.Id_png: case Xof_ext_.Id_jpg: case Xof_ext_.Id_jpeg:
+			case Xof_ext_.Id_gif: case Xof_ext_.Id_tif: case Xof_ext_.Id_tiff:
+			case Xof_ext_.Id_bmp: case Xof_ext_.Id_xcf:
+				return true;
+			default:
+				return false;
+		}
+	}
 	public static boolean Id_is_thumbable_img(int id) {
 		switch (id) {
 			case Xof_ext_.Id_png: case Xof_ext_.Id_jpg: case Xof_ext_.Id_jpeg:

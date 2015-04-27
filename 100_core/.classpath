@@ -5,7 +5,6 @@
 	<classpathentry kind="src" path="src_100_interface"/>
 	<classpathentry kind="src" path="src_110_primitive"/>
 	<classpathentry kind="src" path="src_120_basicDataType"/>
-	<classpathentry kind="src" path="src_130_crt"/>
 	<classpathentry kind="src" path="src_140_list"/>
 	<classpathentry kind="src" path="src_150_text"/>
 	<classpathentry kind="src" path="src_160_hash"/>

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html.modules.popups; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.modules.*;
 public class Xow_popup_itm implements Cancelable {
 	public Xow_popup_itm(int id, byte[] page_href, byte[] tooltip, int init_words_needed) {
-		this.popup_id = "popup_" + Int_.Xto_str(id);
+		this.popup_id = gplx.xowa.apps.Xoa_thread_.Key_page_popup + Int_.Xto_str(id);
 		this.words_needed = init_words_needed;
 		this.page_href = page_href;
 		this.tooltip = tooltip;

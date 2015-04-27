@@ -52,10 +52,11 @@ public class Scrib_lib_language_tst {
 		Xol_lang other_lang = fxt.Core().App().Lang_mgr().Get_by_key_or_new(Bry_.new_ascii_("zh"));
 		other_lang.Fallback_bry_(Bry_.new_ascii_("gan-hant, zh-hant, zh-hans"));
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_language.Invk_getFallbacksFor, Object_.Ary("zh"), String_.Concat_lines_nl
-		( "1=gan-hant"
-		, "2=zh-hant"
-		, "3=zh-hans"
-		, "4=en"		// auto-add en
+		( "1="
+		, "  1=gan-hant"
+		, "  2=zh-hant"
+		, "  3=zh-hans"
+		, "  4=en"		// auto-add en
 		));
 	}
 	@Test  public void GetFallbacksFor_unknown() {

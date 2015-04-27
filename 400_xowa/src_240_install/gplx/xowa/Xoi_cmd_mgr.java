@@ -43,7 +43,7 @@ public class Xoi_cmd_mgr implements GfoInvkAble {
 		else
 			working = false;
 	}
-	private void Run_async(Gfo_thread_cmd cmd) {ThreadAdp_.invk_msg_(this, GfoMsg_.new_cast_(Invk_process_async).Add("v", cmd)).Start();}
+	private void Run_async(Gfo_thread_cmd cmd) {ThreadAdp_.invk_msg_(cmd.Async_key(), this, GfoMsg_.new_cast_(Invk_process_async).Add("v", cmd)).Start();}
 	private void Cmds_run() {
 		if (working) {
 			app.Gui_mgr().Kit().Ask_ok("", "", "An import is in progress. Please wait for it to complete. If you want to do multiple imports at once, see Help:Import/Script.");

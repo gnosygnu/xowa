@@ -22,6 +22,8 @@ import gplx.xowa.xtns.wdatas.parsers.*; import gplx.xowa.xtns.wdatas.pfuncs.*; i
 public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 	private final Wdata_doc_parser wdoc_parser_v1, wdoc_parser_v2;
 	private final Wdata_prop_val_visitor prop_val_visitor;
+	private final Hash_adp_bry qids_cache = Hash_adp_bry.cs_(), pids_cache = Hash_adp_bry.cs_();
+	private Int_obj_ref wiki_tid_ref = Int_obj_ref.zero_();
 	private Wdata_hwtr_mgr hwtr_mgr;
 	public Wdata_wiki_mgr(Xoae_app app) {
 		this.app = app;
@@ -47,7 +49,7 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 		qids_cache.Clear();
 		pids_cache.Clear();
 		doc_cache.Clear();
-	}	private Hash_adp_bry qids_cache = Hash_adp_bry.cs_(), pids_cache = Hash_adp_bry.cs_();
+	}
 	public void Qids_add(Bry_bfr bfr, byte[] lang_key, int wiki_tid, byte[] ns_num, byte[] ttl, byte[] qid) {
 		Xow_wiki_alias.Build_alias_by_lang_tid(bfr, lang_key, wiki_tid_ref.Val_(wiki_tid));
 		byte[] qids_key = bfr.Add_byte(Byte_ascii.Pipe).Add(ns_num).Add_byte(Byte_ascii.Pipe).Add(ttl).Xto_bry();
@@ -57,17 +59,15 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 	private byte[] Qids_get(byte[] wiki_abrv, Xoa_ttl ttl) {
 		if (!enabled) return null;
 		if (Bry_.Len_eq_0(wiki_abrv)) return null;	// "other" wikis will never call wikidata
-		synchronized (qid_key) {
-			qid_key.Init(wiki_abrv, ttl);
-			byte[] rv = (byte[])qids_cache.Fetch(qid_key.Cache_key());
-			if (rv == null) {	// not in cache
-				rv = this.Wdata_wiki().Db_mgr().Load_mgr().Load_qid(qid_key.Wiki_abrv(), qid_key.Ns_num_bry(), qid_key.Ttl_bry()); 
-				byte[] add_val = rv == null ? Bry_.Empty : rv;	// JAVA: hashtable does not accept null as value; use Bry_.Empty
-				qids_cache.Add(qid_key.Cache_key(), add_val);	// NOTE: if not in db, will insert a null value for cache_key; DATE:2014-07-23
-			}
-			return Bry_.Len_eq_0(rv) ? null : rv;				// JAVA: convert Bry_.Empty to null
+		byte[] cache_key = Bry_.Add(wiki_abrv, Byte_ascii.Pipe_bry, ttl.Ns().Num_bry(), Byte_ascii.Pipe_bry, ttl.Page_db());	// EX:enwiki|014|Earth
+		byte[] rv = (byte[])qids_cache.Fetch(cache_key);
+		if (rv == null) {	// not in cache; load from db
+			rv = this.Wdata_wiki().Db_mgr().Load_mgr().Load_qid(wiki_abrv, ttl.Ns().Num_bry(), ttl.Page_db()); 
+			byte[] add_val = rv == null ? Bry_.Empty : rv;	// JAVA: hashtable does not accept null as value; use Bry_.Empty
+			qids_cache.Add(cache_key, add_val);				// NOTE: if not in db, will insert a null value for cache_key; DATE:2014-07-23
 		}
-	}	private Int_obj_ref wiki_tid_ref = Int_obj_ref.zero_(); private Wdata_qid_key qid_key = new Wdata_qid_key();
+		return Bry_.Len_eq_0(rv) ? null : rv;				// JAVA: convert Bry_.Empty to null
+	}
 	public Int_obj_val Pids_add(byte[] pids_key, int pid_id) {Int_obj_val rv = Int_obj_val.new_(pid_id); pids_cache.Add(pids_key, rv); return rv;}
 	public int Pids_get(byte[] lang_key, byte[] pid_name) {
 		if (!enabled) return Pid_null;
@@ -220,25 +220,4 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 	public static void Log_missing_qid(Xop_ctx ctx, byte[] qid) {
 		ctx.Wiki().Appe().Usr_dlg().Log_many("", "", "qid not found in wikidata; qid=~{0} page=~{1}", String_.new_utf8_(qid), String_.new_utf8_(ctx.Cur_page().Ttl().Page_db()));
 	}
-}
-class Wdata_qid_key {
-	public byte[] Wiki_abrv() {return wiki_abrv;} private byte[] wiki_abrv;
-	public byte[] Ns_num_bry() {return ns_num_bry;} private byte[] ns_num_bry;
-	public byte[] Ttl_bry() {return ttl_bry;} private byte[] ttl_bry;
-	public byte[] Cache_key() {return cache_key;} private byte[] cache_key;
-	public void Init(byte[] wiki_abrv, Xoa_ttl ttl) {
-		this.wiki_abrv = wiki_abrv;
-		Xow_ns ns = ttl.Ns();
-		boolean ns_is_canonical = Xow_ns_.Canonical_id(ns.Name_bry()) != Xow_ns_.Id_null;	// handle titles with non-canoncial ns; PAGE:uk.s:Автор:Богдан_Гаврилишин DATE:2014-07-23
-		if (ns_is_canonical) {				// canonical ns;		EX: Category:A
-			ns_num_bry = ns.Num_bry();		// use ns's number;		EX: 14
-			ttl_bry = ttl.Page_db();		// use page_db			EX: A
-		}
-		else {								// not a canonical ns;  EX: Author:A
-			ns_num_bry = Ns_num_bry_main;	// use main ns			EX: 0
-			ttl_bry = ttl.Full_db();		// use full_db			EX: Author:A
-		}
-		this.cache_key = Bry_.Add(wiki_abrv, Byte_ascii.Pipe_bry, ns_num_bry, Byte_ascii.Pipe_bry, ttl_bry);
-	}
-	public static final byte[] Ns_num_bry_main = Bry_.new_ascii_("000");
 }

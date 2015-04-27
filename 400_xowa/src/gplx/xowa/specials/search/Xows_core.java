@@ -34,36 +34,37 @@ class Xows_core {
 	}
 	public void Search(Xow_wiki search_wiki, Xoae_page page, Xows_ui_qry qry) {
 		// generate 1 cmd per wiki
-		byte[][] domain_ary = qry.Wiki_domains(); int domain_ary_len = domain_ary.length;
+		Xow_domain[] domain_ary = qry.Wiki_domains(); int domain_ary_len = domain_ary.length;
 		for (int i = 0; i < domain_ary_len; ++i) {
-			byte[] domain = domain_ary[i];
-			Xowe_wiki wiki = wiki_mgr.Get_by_key_or_null(domain); if (wiki == null) continue;
-			Assert_page_count(wiki);
-			Xows_ui_cmd cmd = new Xows_ui_cmd(this, qry, wiki, page.Tab_data().Close_mgr(), page.Tab_data().Tab().Html_itm());
-			qry.Cmds__add(cmd);
+			Xow_domain domain = domain_ary[i];
+			try {
+				Xowe_wiki wiki = wiki_mgr.Get_by_key_or_make(domain.Domain_bry()); wiki.Init_assert();
+				Assert_page_count(wiki);
+				Xows_ui_cmd cmd = new Xows_ui_cmd(this, qry, wiki, page, page.Tab_data().Close_mgr(), page.Tab_data().Tab().Html_itm());
+				qry.Cmds__add(cmd);
+			} catch (Exception e) {Xoa_app_.Usr_dlg().Warn_many("", "", "search:wiki failed; wiki=~{0} err=~{1}", domain.Domain_str(), Err_.Message_lang(e));}	// handle bad wikis, like "en.wikipedia.org-old"; DATE:2015-04-24
 		}
 		qry.Page_max_(Int_.MaxValue);
 		// do search and generate html
-		html_wkr.Init_by_wiki(search_wiki.Html_mgr__lnki_wtr_utl(), search_wiki.Lang().Num_mgr());
+		html_wkr.Init_by_wiki(search_wiki, search_wiki.Html_mgr__lnki_wtr_utl(), search_wiki.Lang().Num_mgr());
 		int cmds_len = qry.Cmds__len();
 		Bry_bfr tmp_bfr = Bry_bfr.new_();
 		for (int i = 0; i < cmds_len; ++i) {
-			Xows_ui_cmd cmd = qry.Cmds__get_at(i);
-			cmd_hash.Del(cmd.Key_for_html());
-			cmd_hash.Add_bry_obj(cmd.Key_for_html(), cmd);
+			Xows_ui_cmd cmd = qry.Cmds__get_at(i); byte[] cmd_key = cmd.Key();
+			cmd_hash.AddReplace(cmd_key, cmd);
 			boolean searching_db = cmd.Search();				
-			html_wkr.Gen_tbl(tmp_bfr, qry, cmd.Rslt(), cmd.Key_for_html(), cmd.Wiki_domain_bry(), searching_db);
+			html_wkr.Gen_tbl(tmp_bfr, qry, cmd.Rslt(), cmd_key, cmd.Wiki().Domain_bry(), searching_db);
 		}
 		page.Data_raw_(html_wkr.Gen_page(qry, tmp_bfr.Xto_bry_and_clear()));
 	}
 	public void Search_end(Xows_ui_cmd cmd) {
-		cmd_hash.Del(cmd.Key_for_html());
+		cmd_hash.Del(cmd.Key());
 	}
 	public void Cancel(byte[] cmd_key) {
 		Xows_ui_cmd cmd = (Xows_ui_cmd)cmd_hash.Get_by_bry(cmd_key);
 		if (cmd == null) return;
 		cmd.Cancel();
-		cmd_hash.Del(cmd.Key_for_html());
+		cmd_hash.Del(cmd.Key());
 	}
 	private void Assert_page_count(Xowe_wiki wiki) {
 		Xowd_db_file search_db = wiki.Data_mgr__core_mgr().Db__search();

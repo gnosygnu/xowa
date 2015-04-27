@@ -168,7 +168,7 @@ class Xoi_cmd_wiki_zip implements Gfo_thread_cmd {
 	public void Async_run() {
 		running = true;
 		install_mgr.App().Usr_dlg().Log_many(GRP_KEY, "zip.bgn", "zip.bgn ~{0}", wiki_key);
-		ThreadAdp_.invk_(this, Invk_process_async).Start();
+		ThreadAdp_.invk_(this.Async_key(), this, Invk_process_async).Start();
 	}
 	public boolean Async_running() {
 		return running;

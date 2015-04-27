@@ -47,11 +47,13 @@ class Xoh_ctg_itm_fmtr implements Bry_fmtr_arg {
 		int ctgs_len = page.Category_list().length;
 		Bry_bfr tmp_bfr = Xoa_app_.Utl__bfr_mkr().Get_b128();
 		Bry_bfr tmp_href = Xoa_app_.Utl__bfr_mkr().Get_b128();
-		byte[] ctg_prefix = page.Wiki().Ns_mgr().Ns_category().Name_db_w_colon();
+		Xowe_wiki wiki = page.Wikie();
+		Xoae_app app = wiki.Appe();
+		byte[] ctg_prefix = wiki.Ns_mgr().Ns_category().Name_db_w_colon();
 		for (int i = 0; i < ctgs_len; i++) {
 			byte[] page_name = page.Category_list()[i];
 			tmp_bfr.Add(ctg_prefix).Add(page_name);
-			page.Wikie().Appe().Href_parser().Build_to_bfr(tmp_href, page.Wikie(), tmp_bfr.Xto_bry_and_clear());
+			page.Wikie().Appe().Href_parser().Build_to_bfr(tmp_href, app, wiki.Domain_bry(), wiki.Ttl_parse(tmp_bfr.Xto_bry_and_clear()));
 			itm_fmtr.Bld_bfr(bfr, tmp_href.Xto_bry_and_clear(), page_name, page_name);
 		}
 		tmp_bfr.Mkr_rls();

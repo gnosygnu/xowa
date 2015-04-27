@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.translates; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.specials.*;
 public class Xop_mylanguage_page implements Xows_page {
+	public Xows_special_meta Special_meta() {return Xows_special_meta_.Itm__my_language;}
 	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
 		// Special:MyLanguage/Help:A -> Help:A/fr
 		byte[] page_bry = ttl.Leaf_txt_wo_qarg(); 					// EX: Help:A

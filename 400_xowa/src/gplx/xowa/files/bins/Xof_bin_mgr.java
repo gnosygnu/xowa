@@ -87,10 +87,9 @@ public class Xof_bin_mgr {
 					fsdb.File_exists_y_();
 					return rv;
 				}
-				usr_dlg.Log_direct(String_.Format("thumb not found; ttl={0} w={1} ", String_.new_utf8_(fsdb.Lnki_ttl()), fsdb.Lnki_w()));
 				rv = wkr.Get_as_rdr(fsdb, Bool_.N, fsdb.Orig_w());				// thumb missing; get orig;
 				if (rv == Io_stream_rdr_.Null) {
-					usr_dlg.Log_direct(String_.Format("orig not found;"));
+					usr_dlg.Log_direct(String_.Format("bin_mgr:thumb not found; wkr={0} ttl={1} w={2}", wkr.Key(), fsdb.Lnki_ttl(), fsdb.Lnki_w()));
 					continue;													// nothing found; continue;
 				}
 				if (!wkr.Resize_allowed()) continue;

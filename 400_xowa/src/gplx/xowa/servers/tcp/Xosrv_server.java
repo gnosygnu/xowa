@@ -33,7 +33,7 @@ public class Xosrv_server implements GfoInvkAble {
 		rdr.Init(this, rdr_port);
 		wtr.Init(wtr_host, wtr_port);
 		Gxw_html_server.Init_gui_for_server(app, wtr);
-		ThreadAdp_.invk_(rdr, Xosrv_socket_rdr.Invk_start).Start();
+		ThreadAdp_.invk_(gplx.xowa.apps.Xoa_thread_.Key_http_server_main, rdr, Xosrv_socket_rdr.Invk_start).Start();
 		app.Usr_dlg().Note_many("", "", "server started: listening on ~{0}. Press Ctrl+C to exit", rdr_port);
 		last_cmd = Env_.TickCount();
 		Running_(true);

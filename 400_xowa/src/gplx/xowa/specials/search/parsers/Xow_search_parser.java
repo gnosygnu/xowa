@@ -20,7 +20,7 @@ public class Xow_search_parser {
 	private Xow_search_parser_ctx parse_ctx = new Xow_search_parser_ctx(); private byte[] src;
 	public Xows_db_matcher Parse(byte[] src) {
 		this.src = src;
-		Xow_search_tkn[] tkns = Xow_search_scanner.I.Scan(src);
+		Xow_search_tkn[] tkns = new Xow_search_scanner().Scan(src);
 		return Parse_itm_or(parse_ctx.Init(tkns));
 	}
 	private Xows_db_matcher Parse_itm_or(Xow_search_parser_ctx parse_ctx) {
@@ -76,7 +76,6 @@ public class Xow_search_parser {
 		return new Xows_db_matcher(tid, tkn.Val(src), null, null);
 	}
 	private static Xows_db_matcher new_join(int tid, Xows_db_matcher lhs, Xows_db_matcher rhs) {return new Xows_db_matcher(tid, null, lhs, rhs);}
-	public static final Xow_search_parser I = new Xow_search_parser(); Xow_search_parser() {}
 }
 class Xow_search_parser_ctx {
 	private Xow_search_tkn[] ary; private int pos = 0; private int ary_len;

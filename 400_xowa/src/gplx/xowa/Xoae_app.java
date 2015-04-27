@@ -64,6 +64,7 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 	public Xoa_fsys_mgr			Fsys_mgr()				{return fsys_mgr;} private final Xoa_fsys_mgr fsys_mgr;
 	public Xof_cache_mgr		File_mgr__cache_mgr()	{return file_mgr.Cache_mgr();}
 	public Xof_img_mgr			File_mgr__img_mgr()		{return file_mgr.Img_mgr();}
+	public Xoh_href_parser		Html__href_parser()		{return href_parser;} private Xoh_href_parser href_parser;
 	public Xowmf_mgr			Wmf_mgr()				{return wmf_mgr;} private final Xowmf_mgr wmf_mgr = new Xowmf_mgr();
 	public Bry_bfr_mkr			Utl__bfr_mkr()			{return Xoa_app_.Utl__bfr_mkr();}
 	public Url_encoder_mgr		Utl__encoder_mgr()		{return Xoa_app_.Utl__encoder_mgr();}
@@ -90,7 +91,7 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 	public Xoa_thread_mgr		Thread_mgr() {return thread_mgr;} private Xoa_thread_mgr thread_mgr = new Xoa_thread_mgr();
 	public Xoa_hive_mgr			Hive_mgr() {return hive_mgr;} private Xoa_hive_mgr hive_mgr;
 	public Xoa_url_parser		Url_parser() {return url_parser;} private Xoa_url_parser url_parser = new Xoa_url_parser();
-	public Xoh_href_parser		Href_parser() {return href_parser;} private Xoh_href_parser href_parser;
+	public Xoh_href_parser		Href_parser() {return href_parser;}
 	public Xop_sanitizer		Sanitizer() {return sanitizer;} private Xop_sanitizer sanitizer;
 	public Xop_xatr_parser		Xatr_parser() {return xatr_parser;} private Xop_xatr_parser xatr_parser = new Xop_xatr_parser();
 	public Xop_xnde_tag_regy	Xnde_tag_regy() {return xnde_tag_regy;} private Xop_xnde_tag_regy xnde_tag_regy = new Xop_xnde_tag_regy();

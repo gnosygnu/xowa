@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs; import gplx.*;
 import gplx.dbs.qrys.*;
 public class Db_conn_ {
-	public static final Db_conn Empty = Db_conn_pool.I.Get_or_new(Db_conn_info_.Null);
+	public static final Db_conn Noop = Db_conn_pool.I.Get_or_new(Db_conn_info_.Null);
 	public static int Select_fld0_as_int_or(Db_conn p, String sql, int or) {
 		DataRdr rdr = DataRdr_.Null;
 		try {

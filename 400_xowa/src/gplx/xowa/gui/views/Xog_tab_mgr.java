@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
-import gplx.gfui.*; import gplx.xowa.cfgs2.*; import gplx.xowa.apis.xowa.gui.browsers.*;
+import gplx.gfui.*; import gplx.xowa.cfgs2.*; import gplx.xowa.apis.xowa.gui.browsers.*; import gplx.xowa.specials.*;
 public class Xog_tab_mgr implements GfoEvObj {
 	private OrderedHash tab_regy = OrderedHash_.new_(); private int tab_uid = 0;
 	public Xog_tab_mgr(Xog_win_itm win) {
@@ -76,7 +76,7 @@ public class Xog_tab_mgr implements GfoEvObj {
 	public Xog_tab_itm Tabs_new_dflt(boolean focus) {
 		boolean active_tab_is_null = this.Active_tab_is_null();
 		Xowe_wiki cur_wiki = active_tab_is_null ? win.App().User().Wiki() : active_tab.Wiki();
-		Xoa_ttl ttl = Xoa_ttl.parse_(cur_wiki, gplx.xowa.specials.xowa.default_tab.Default_tab_page.Ttl_full_bry);
+		Xoa_ttl ttl = Xoa_ttl.parse_(cur_wiki, Xows_special_meta_.Itm__default_tab.Ttl_bry());
 		Xoa_url url = Xoa_url_parser.Parse_from_url_bar(win.App(), cur_wiki, ttl.Full_db_as_str());
 		Xog_tab_itm rv = Tabs_new(focus, active_tab_is_null, cur_wiki, Xoae_page.new_(cur_wiki, ttl));
 		rv.Page_update_ui();

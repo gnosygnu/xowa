@@ -52,7 +52,7 @@ public class Xowd_search_word_tbl implements RlsAble {
 	}
 	public Xowd_search_word_row[] Select_in(Cancelable cxl, byte[] word) {
 		if (stmt_select_in == null) {
-			Db_qry__select_cmd qry = Db_qry_.select_().From_(tbl_name).Where_(Db_crt_.like_(fld_text, ""));
+			Db_qry__select_cmd qry = Db_qry_.select_().From_(tbl_name).OrderBy_(fld_page_count, Bool_.N).Where_(Db_crt_.like_(fld_text, ""));	// order by highest page count to look at most common words
 			stmt_select_in = conn.Stmt_new(qry);
 		}
 		ListAdp list = ListAdp_.new_();
@@ -64,7 +64,7 @@ public class Xowd_search_word_tbl implements RlsAble {
 					if (cxl.Canceled()) break;
 				}
 				Xowd_search_word_row word_row = new_row(rdr);
-				if (++row_count % 100 == 0)
+				if (++row_count % 10 == 0)
 					Xoa_app_.Usr_dlg().Prog_many("", "", "search; reading pages for word: word=~{0} pages=~{1}", word_row.Text(), word_row.Page_count());
 				list.Add(word_row);
 			}

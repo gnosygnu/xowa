@@ -42,15 +42,6 @@ public class Xoa_wiki_mgr implements GfoInvkAble {
 		if (rv == null) rv = New_wiki(key);
 		return rv;
 	}
-	public Xowe_wiki[] Get_by_crt(Xow_domain cur, Xow_domain_crt_itm crt) {
-		ListAdp rv = ListAdp_.new_();
-		int len = this.Count();
-		for (int i = 0; i < len; ++i) {
-			Xow_wiki wiki = this.Get_at(i);
-			if (crt.Matches(cur, wiki.Domain_itm())) rv.Add(wiki);
-		}
-		return (Xowe_wiki[])rv.Xto_ary_and_clear(Xowe_wiki.class);
-	}
 	public Xowe_wiki Wiki_commons() {
 		Xowe_wiki rv = this.Get_by_key_or_null(Xow_domain_.Domain_bry_commons);
 		if (rv != null) rv.Init_assert();

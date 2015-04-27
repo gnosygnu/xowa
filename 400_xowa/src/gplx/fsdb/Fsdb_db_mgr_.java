@@ -40,7 +40,7 @@ public class Fsdb_db_mgr_ {
 		Db_conn main_core_conn = Db_conn_bldr.I.Get(main_core_url);
 		Io_url user_core_url = wiki_dir.GenSubFil(Fsdb_db_mgr__v2_bldr.Make_user_name(domain_str));
 		if (!Db_conn_bldr.I.Exists(user_core_url))	// if user file does not exist, create it; needed b/c offline packages don't include file; DATE:2015-04-19
-			Fsdb_db_mgr__v2_bldr.I.Make_core_file_user(wiki, wiki_dir, user_core_url.NameAndExt(), main_core_url.NameAndExt());
+			Fsdb_db_mgr__v2_bldr.I.Make_core_file_user(wiki, user_core_url, user_core_url.NameAndExt(), main_core_url.NameAndExt());
 		Db_conn user_core_conn = Db_conn_bldr.I.Get(user_core_url);
 		return new Fsdb_db_mgr__v2(Fsdb_db_mgr__v2.Cfg__layout_file__get(main_core_conn), wiki_dir, new Fsdb_db_file(main_core_url, main_core_conn), new Fsdb_db_file(user_core_url, user_core_conn));
 	}

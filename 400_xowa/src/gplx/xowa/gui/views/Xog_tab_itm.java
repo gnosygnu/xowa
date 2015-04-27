@@ -171,6 +171,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 			}
 			else
 				async_wkr = new Load_files_wkr(this);
+			page.Html_data().Mode_wtxt_shown_y_();
 			app.Thread_mgr().File_load_mgr().Add_at_end(async_wkr).Run();
 		}
 		finally {
@@ -244,7 +245,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 		try {
 			if (page.Tab_data().Tab() != null) {	// needed b/c Preview has page.Tab of null which causes null_ref error in redlinks
 				Xog_redlink_mgr redlinks_wkr = new Xog_redlink_mgr(win_itm, page, app.User().Cfg_mgr().Log_mgr().Log_redlinks());
-				ThreadAdp_.invk_(redlinks_wkr, gplx.xowa.parsers.lnkis.redlinks.Xog_redlink_mgr.Invk_run).Start();
+				ThreadAdp_.invk_(gplx.xowa.apps.Xoa_thread_.Key_page_redlink, redlinks_wkr, gplx.xowa.parsers.lnkis.redlinks.Xog_redlink_mgr.Invk_run).Start();
 				usr_dlg.Prog_none("", "imgs.done", "");
 			}
 		}	catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.redlinks: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_brief(e));}

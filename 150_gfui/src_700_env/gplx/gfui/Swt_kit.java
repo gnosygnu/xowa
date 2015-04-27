@@ -311,10 +311,12 @@ class Swt_gui_cmd implements GfuiInvkCmd, Runnable {
 		return this;
 	}	
 	@Override public void run() {
-		try {target.Invk(invk_ctx, invk_ikey, invk_key, invk_msg);}
-		catch (Exception e) {
-			if (kit.Kit_mode__term()) return;	// NOTE: if shutting down, don't warn; warn will try to write to status.bar, which will fail b/c SWT is shutting down; failures will try to write to status.bar again, causing StackOverflow exception; DATE:2014-05-04
-			usr_dlg.Warn_many("", "", "fatal error while running; key=~{0} err=~{1}", invk_key, Err_.Message_gplx_brief(e));
+		synchronized (this) {// needed for Special:Search and async; DATE:2015-04-23
+			try {target.Invk(invk_ctx, invk_ikey, invk_key, invk_msg);}
+			catch (Exception e) {
+				if (kit.Kit_mode__term()) return;	// NOTE: if shutting down, don't warn; warn will try to write to status.bar, which will fail b/c SWT is shutting down; failures will try to write to status.bar again, causing StackOverflow exception; DATE:2014-05-04
+				usr_dlg.Warn_many("", "", "fatal error while running; key=~{0} err=~{1}", invk_key, Err_.Message_gplx_brief(e));
+			}
 		}
 	} 
 	public void Rls() {

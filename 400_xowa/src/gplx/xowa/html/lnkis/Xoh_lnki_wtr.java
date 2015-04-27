@@ -100,7 +100,7 @@ public class Xoh_lnki_wtr {
 				wiki.Html_mgr().Hzip_mgr().Itm__anchor().Html_plain(bfr, lnki);
 			else
 				bfr.Add(Xoh_consts.A_bgn);							// '<a href="'
-			app.Href_parser().Build_to_bfr(bfr, wiki, lnki_ttl, hctx.Mode_is_popup());	// '/wiki/A'
+			app.Href_parser().Build_to_bfr(bfr, app, wiki.Domain_bry(), lnki_ttl, hctx.Mode_is_popup());	// '/wiki/A'
 			if (cfg.Lnki_id()) {
 				int lnki_html_id = lnki.Html_id();
 				if (lnki_html_id > Lnki_id_ignore)					// html_id=0 for skipped lnkis; EX:anchors and interwiki

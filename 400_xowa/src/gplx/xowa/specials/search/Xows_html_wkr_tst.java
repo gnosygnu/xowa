@@ -16,28 +16,28 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import org.junit.*; import gplx.xowa.tdbs.*; import gplx.xowa.wikis.data.tbls.*;
+import org.junit.*; import gplx.xowa.tdbs.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xows_html_wkr_tst {
 	@Before public void init() {fxt.Clear();} private Xows_html_wkr_fxt fxt = new Xows_html_wkr_fxt();
 	@Test   public void Paging() {
-		fxt.Test_paging(Bool_.Y, 1, "<a href='/wiki/Special:Search/A%3Ffulltext%3Dy%26xowa_page_index%3D2' title='Next'>Next</a>");
-		fxt.Test_paging(Bool_.N, 1, "<a href='/wiki/Special:Search/A%3Ffulltext%3Dy%26xowa_page_index%3D0' title='Previous'>Previous</a>");
-		fxt.Test_paging(Bool_.Y, 2, "Next");
-		fxt.Test_paging(Bool_.N, 0, "Previous");
+		fxt.Test_paging(Bool_.Y, 1, "<a href='/site/en.wikipedia.org/wiki/Special:Search/A%3Ffulltext%3Dy%26xowa_page_index%3D2' title='Next'>Next<img src='file:///mem/xowa/user/anonymous/app/img/window/paging/go_fwd.png' width='16' height='16'/></a>");
+		fxt.Test_paging(Bool_.N, 1, "<a href='/site/en.wikipedia.org/wiki/Special:Search/A%3Ffulltext%3Dy%26xowa_page_index%3D0' title='Previous'><img src='file:///mem/xowa/user/anonymous/app/img/window/paging/go_bwd.png' width='16' height='16'/>Previous</a>");
+		fxt.Test_paging(Bool_.Y, 2, "<a href='/site/en.wikipedia.org/wiki/Special:Search/A%3Ffulltext%3Dy%26xowa_page_index%3D3' title='Next'>Next<img src='file:///mem/xowa/user/anonymous/app/img/window/paging/go_fwd.png' width='16' height='16'/></a>");
+		fxt.Test_paging(Bool_.N, 0, "&#160;");
 	}
 	@Test   public void Rows() {
 		fxt.Test_rows(Xows_db_row.Ary(fxt.Make_row(10, "A"), fxt.Make_row(20, "B")), String_.Concat_lines_nl_skip_last
 		( ""
 		, "  <tr id='w.7CA'>"
-		, "    <td>10"
+		, "    <td style='padding-right:5px; vertical-align:top; text-align:right;'>10"
 		, "    </td>"
-		, "    <td><a href='/wiki/A' title='A'>A</a>"
+		, "    <td style='padding-left:5px; vertical-align:top;'><a href='/site/w/wiki/A' title='A'>A</a>"
 		, "    </td>"
 		, "  </tr>"
 		, "  <tr id='w.7CB'>"
-		, "    <td>20"
+		, "    <td style='padding-right:5px; vertical-align:top; text-align:right;'>20"
 		, "    </td>"
-		, "    <td><a href='/wiki/B' title='B'>B</a>"
+		, "    <td style='padding-left:5px; vertical-align:top;'><a href='/site/w/wiki/B' title='B'>B</a>"
 		, "    </td>"
 		, "  </tr>"
 		));
@@ -54,13 +54,12 @@ class Xows_html_wkr_fxt {
 		return this;
 	}
 	public void Test_paging(boolean fwd, int paging_idx, String expd) {
-		Xows_ui_qry qry = new Xows_ui_qry(Bry_.new_ascii_("A"), paging_idx, 100, Xosrh_rslt_itm_sorter.Tid_len_dsc, new Xows_ns_mgr(), true, Bry_.Ary(wiki.Domain_bry()));
+		Xows_ui_qry qry = new Xows_ui_qry(Bry_.new_ascii_("A"), paging_idx, 100, Xosrh_rslt_itm_sorter.Tid_len_dsc, new Xows_ns_mgr(), true, new Xow_domain[] {Xow_domain_.parse(wiki.Domain_bry())});
 		qry.Page_max_(2);
-		html_mgr.Init_by_wiki(wiki.Html_mgr__lnki_wtr_utl(), wiki.Lang().Num_mgr());
+		html_mgr.Init_by_wiki(wiki, wiki.Html_mgr__lnki_wtr_utl(), wiki.Lang().Num_mgr());
 		html_mgr.Qry_(qry);
-		Bry_fmtr_arg fmtr_arg = html_mgr.Paging_link(fwd);
-		fmtr_arg.XferAry(tmp_bfr, 0);
-		Tfds.Eq(expd, tmp_bfr.Xto_str_and_clear());
+		byte[] paging_link = html_mgr.Paging_link(fwd);
+		Tfds.Eq(expd, String_.new_ascii_(paging_link));
 	}
 	public void Test_rows(Xows_db_row[] rows, String expd) {
 		Xows_ui_rslt rslt = new Xows_ui_rslt();
@@ -74,6 +73,6 @@ class Xows_html_wkr_fxt {
 	}
 	public Xows_db_row Make_row(int len, String ttl_str) {
 		byte[] ttl_bry = Bry_.new_utf8_(ttl_str);
-		return new Xows_db_row(Bry_.new_ascii_("w"), 1, Xow_ns_.Id_main, len, ttl_bry, ttl_bry);
+		return new Xows_db_row(Bry_.new_ascii_("w"), wiki.Ttl_parse(ttl_bry), 1, len);
 	}
 }

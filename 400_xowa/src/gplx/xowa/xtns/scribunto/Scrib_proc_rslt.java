@@ -51,11 +51,12 @@ public class Scrib_proc_rslt {
 		ary = KeyVal_.Ary_empty;
 		return true;
 	}
-	public boolean Init_bry_ary(byte[][] v) {
+	public boolean Init_bry_ary(byte[][] v) {	// NOTE:fallbacks should return "table {fallback_1, fallback_2}"; PAGE:wd:Main_Page DATE:2015-04-21
 		int len = v.length;
-		ary = new KeyVal[len];
+		KeyVal[] itms = new KeyVal[len];
 		for (int i = 0; i < len; i++)
-			ary[i] = KeyVal_.int_(i + Scrib_core.Base_1, String_.new_utf8_(v[i]));
+			itms[i] = KeyVal_.int_(i + Scrib_core.Base_1, String_.new_utf8_(v[i]));
+		this.ary = new KeyVal[] {KeyVal_.int_(Scrib_core.Base_1, itms)};
 		return true;
 	}
 }

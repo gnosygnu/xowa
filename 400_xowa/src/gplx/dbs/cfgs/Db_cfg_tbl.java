@@ -60,6 +60,7 @@ public class Db_cfg_tbl implements RlsAble {
 		if (stmt_update == null) stmt_update = conn.Stmt_update_exclude(tbl_name, flds, fld_grp, fld_key);
 		stmt_update.Clear().Val_str(fld_val, val).Crt_str(fld_grp, grp).Crt_str(fld_key, key).Exec_update();
 	}
+	public void Upsert_yn		(String grp, String key, boolean val)			{Upsert_str(grp, key, val ? "y" : "n");}
 	public void Upsert_int		(String grp, String key, int val)			{Upsert_str(grp, key, Int_.Xto_str(val));}
 	public void Upsert_str		(String grp, String key, String val) {
 		String cur_val = this.Select_str_or(grp, key, null);

@@ -18,11 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
 import gplx.core.primitives.*;
 class Xows_arg_mgr {
+	private final Xows_paging_parser paging_parser = new Xows_paging_parser();
 	public Xows_ns_mgr	Ns_mgr()		{return ns_mgr;} private final Xows_ns_mgr ns_mgr = new Xows_ns_mgr();
 	public byte[]		Search_bry()	{return search_bry;} private byte[] search_bry;
 	public int			Paging_idx()	{return paging_idx;} private int paging_idx;
 	public byte			Sort_tid()		{return sort_tid;} private byte sort_tid;
 	public byte[]		Cancel()		{return cancel;} private byte[] cancel;
+	public Xows_paging_itm[] Paging_itms() {return paging_itms;} private Xows_paging_itm[] paging_itms;
 	public Xows_arg_mgr Search_bry_(byte[] v) {search_bry = v; return this;} 
 	public Xows_arg_mgr Clear() {
 		ns_mgr.Clear();
@@ -45,6 +47,7 @@ class Xows_arg_mgr {
 					case Arg_page_idx: 		this.paging_idx 	= Bry_.Xto_int_or(arg.Val_bry(), 0); break;
 					case Arg_sort: 			this.sort_tid		= Xosrh_rslt_itm_sorter.parse_(String_.new_ascii_(arg.Val_bry())); break;			
 					case Arg_cancel: 		this.cancel			= arg.Val_bry(); break;
+					case Arg_paging: 		this.paging_itms	= paging_parser.Parse(arg.Val_bry()); break;
 					default:				break;
 				}
 			}
@@ -55,12 +58,17 @@ class Xows_arg_mgr {
 		}
 		ns_mgr.Add_main_if_empty();
 	}
-	private static final byte Arg_search = 0, Arg_page_idx = 1, Arg_sort = 2, Arg_cancel = 3;
+	private static final byte Arg_search = 0, Arg_page_idx = 1, Arg_sort = 2, Arg_cancel = 3, Arg_paging = 4;
 	private static byte[] Ns_bry = Bry_.new_ascii_("ns");
+	public static final byte[]
+	  Arg_bry_page_index	= Bry_.new_ascii_("xowa_page_index")
+	, Arg_bry_cancel		= Bry_.new_ascii_("cancel")
+	;
 	private static final Hash_adp_bry url_args = Hash_adp_bry.ci_ascii_()
-		.Add_str_byte("xowa_page_index", Arg_page_idx)
+		.Add_str_byte("xowa_paging", Arg_paging)
+		.Add_bry_byte(Arg_bry_page_index, Arg_page_idx)
 		.Add_str_byte("xowa_sort", Arg_sort)
 		.Add_str_byte("search", Arg_search)
-		.Add_str_byte("cancel", Arg_cancel)
+		.Add_bry_byte(Arg_bry_cancel, Arg_cancel)
 	;
 }

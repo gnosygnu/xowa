@@ -132,7 +132,7 @@ class IoStream_base implements IoStream {
 		bfr.Clear();
 	}
 	@gplx.Virtual public void Rls() {
-		IoEngine_system.Closeable_Close(under, url, true);
+		IoEngine_system.Closeable_close(under, url, true);
 	}
 	RandomAccessFile under; boolean mode_is_append; byte mode;
 	public static IoStream_base rdr_wrapper_() {return new IoStream_base();}

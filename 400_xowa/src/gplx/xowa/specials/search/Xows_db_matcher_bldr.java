@@ -95,5 +95,4 @@ class Xows_db_matcher_bldr {
 			rv.Add(new Xows_db_word(row.Id(), row.Text(), row.Page_count()));
 		}
 	}
-	public static final Xows_db_matcher_bldr I = new Xows_db_matcher_bldr(); Xows_db_matcher_bldr() {}
 }
