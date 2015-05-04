@@ -23,6 +23,11 @@ public class GfuiLbl_ {
 		rv.TextMgr().AlignH_(GfuiAlign_.Mid);
 		return rv;
 	}
+	public static GfuiLbl kit_(Gfui_kit kit, String key, GxwElem elm, KeyValHash ctorArgs) {
+		GfuiLbl rv = new GfuiLbl();
+		rv.ctor_kit_GfuiElemBase(kit, key, elm, ctorArgs);
+		return rv;
+	}
 	public static GfuiLbl prefix_(String key, GfuiElem owner, String text) {
 		GfuiLbl rv = sub_(key, owner);
 		rv.Text_(text);

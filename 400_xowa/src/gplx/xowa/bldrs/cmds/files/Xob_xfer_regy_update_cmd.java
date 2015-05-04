@@ -33,14 +33,15 @@ public class Xob_xfer_regy_update_cmd extends Xob_itm_basic_base implements Xob_
 	private void Copy_atrs_to_make_db(Db_conn make_db_provider) {
 		wiki.File_mgr().Init_file_mgr_by_load(wiki);
 		Fsm_mnt_itm fsdb_abc_mgr = wiki.File_mgr().Fsdb_mgr().Mnt_mgr().Mnts__get_main();		// 0 = fsdb.main
-		Db_conn conn = fsdb_abc_mgr.Atr_mgr().Db__core().Conn();							// 0 = fsdb.atr.00
+		Db_conn conn = fsdb_abc_mgr.Atr_mgr().Db__core().Conn();								// 0 = fsdb.atr.00
 		Io_url fsdb_atr_url = ((gplx.dbs.engines.sqlite.Sqlite_conn_info)conn.Conn_info()).Url();
 		Sqlite_engine_.Tbl_create_and_delete(make_db_provider, Xob_fsdb_regy_tbl.Tbl_name, Xob_fsdb_regy_tbl.Tbl_sql);
 		Sqlite_engine_.Db_attach(make_db_provider, "fsdb_db", fsdb_atr_url.Raw());
 		make_db_provider.Txn_bgn();
 		make_db_provider.Exec_sql(Xob_fsdb_regy_tbl.Insert_fsdb_fil);
+		String fsdb_thm_tbl = "fsdb_thm";
 		String insert_sql_fsdb_thm = wiki.File_mgr().Fsdb_mgr().Mnt_mgr().Mnts__get_main().Cfg_mgr().Schema_thm_page()	// Cfg_get(Fsm_cfg_mgr.Grp_core).Get_yn_or_n(Fsm_cfg_mgr.Key_schema_thm_page)
-			? Xob_fsdb_regy_tbl.Insert_fsdb_thm
+			? String_.Format(Xob_fsdb_regy_tbl.Insert_fsdb_thm, fsdb_thm_tbl)
 			: Xob_fsdb_regy_tbl.Insert_fsdb_thm_v0
 			;
 		make_db_provider.Exec_sql(insert_sql_fsdb_thm);
@@ -110,7 +111,7 @@ class Xob_fsdb_regy_tbl {
 	,	",       f.fil_id"
 	,	",       t.thm_id"
 	,	"FROM    fsdb_db.fsdb_fil f"
-	,	"        JOIN fsdb_db.fsdb_xtn_thm t ON f.fil_id = t.thm_owner_id"
+	,	"        JOIN fsdb_db.{0} t ON f.fil_id = t.thm_owner_id"
 	,	"        JOIN fsdb_db.fsdb_dir d ON f.fil_owner_id = d.dir_id"
 	,	";"
 	)
@@ -128,18 +129,18 @@ class Xob_fsdb_regy_tbl {
 	,	",       f.fil_id"
 	,	",       t.thm_id"
 	,	"FROM    fsdb_db.fsdb_fil f"
-	,	"        JOIN fsdb_db.fsdb_xtn_thm t ON f.fil_id = t.thm_owner_id"
+	,	"        JOIN fsdb_db.{0} t ON f.fil_id = t.thm_owner_id"
 	,	"        JOIN fsdb_db.fsdb_dir d ON f.fil_owner_id = d.dir_id"
 	,	";"
 	)
 	,	Update_regy_fil = String_.Concat_lines_nl
 	(	"REPLACE INTO xfer_regy "
-	,	"( lnki_id, lnki_page_id, orig_page_id, orig_repo, lnki_ttl, orig_redirect_src, lnki_ext, orig_media_type"
+	,	"( lnki_id, lnki_tier_id, lnki_page_id, orig_page_id, orig_repo, lnki_ttl, orig_redirect_src, lnki_ext, orig_media_type"
 	,	", file_is_orig, orig_w, orig_h, file_w, file_h, lnki_time, lnki_page, lnki_count"
 	,	", xfer_status"
 	,	")"
 	,	"SELECT "
-	,	"  lnki_id, lnki_page_id, orig_page_id, orig_repo, lnki_ttl, orig_redirect_src, lnki_ext, orig_media_type"
+	,	"  lnki_id, lnki_tier_id, lnki_page_id, orig_page_id, orig_repo, lnki_ttl, orig_redirect_src, lnki_ext, orig_media_type"
 	,	", file_is_orig, orig_w, orig_h, file_w, file_h, lnki_time, lnki_page, lnki_count"
 	,	", CASE WHEN f.fsdb_name IS NOT NULL THEN 1 ELSE 0 END"
 	,	"FROM    xfer_regy x"
@@ -150,12 +151,12 @@ class Xob_fsdb_regy_tbl {
 	)
 	,	Update_regy_thm = String_.Concat_lines_nl
 	(	"REPLACE INTO xfer_regy "
-	,	"( lnki_id, lnki_page_id, orig_page_id, orig_repo, lnki_ttl, orig_redirect_src, lnki_ext, orig_media_type"
+	,	"( lnki_id, lnki_tier_id, lnki_page_id, orig_page_id, orig_repo, lnki_ttl, orig_redirect_src, lnki_ext, orig_media_type"
 	,	", file_is_orig, orig_w, orig_h, file_w, file_h, lnki_time, lnki_page, lnki_count"
 	,	", xfer_status"
 	,	")"
 	,	"SELECT "
-	,	"  lnki_id, lnki_page_id, orig_page_id, orig_repo, lnki_ttl, orig_redirect_src, lnki_ext, orig_media_type"
+	,	"  lnki_id, lnki_tier_id, lnki_page_id, orig_page_id, orig_repo, lnki_ttl, orig_redirect_src, lnki_ext, orig_media_type"
 	,	", file_is_orig, orig_w, orig_h, file_w, file_h, lnki_time, lnki_page, lnki_count"
 	,	", CASE WHEN f.fsdb_name IS NOT NULL THEN 1 ELSE 0 END"
 	,	"FROM    xfer_regy x"

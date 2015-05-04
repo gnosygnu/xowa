@@ -25,8 +25,18 @@ public class Indicator_html_bldr_tst {
 		fxt.Test_bld(String_.Concat_lines_nl_skip_last
 		( ""
 		, "  <div class='mw-indicators'>"
-		, "    <div id='mw-indicator-b' class='mw-indicator'>b1</div>"
+		, "    <div id='mw-indicator-b' class='mw-indicator'>b1</div>"	// reverse-order
 		, "    <div id='mw-indicator-a' class='mw-indicator'>a1</div>"
+		, "  </div>"
+		));
+	}
+	@Test  public void Multiple_ignore() {
+		fxt.Init_indicator("a", "a1");
+		fxt.Init_indicator("a", "a2");
+		fxt.Test_bld(String_.Concat_lines_nl_skip_last
+		( ""
+		, "  <div class='mw-indicators'>"
+		, "    <div id='mw-indicator-a' class='mw-indicator'>a2</div>"	// 2nd overwrites 1st
 		, "  </div>"
 		));
 	}
@@ -44,8 +54,8 @@ class Indicator_html_bldr_fxt {
 	}
 	public void Init_indicator(String name, String html) {
 		Indicator_xnde xnde = new Indicator_xnde();
-		xnde.Init_for_test(Bry_.new_utf8_(name), Bry_.new_utf8_(html));			
-		Indicator_html_bldr indicators = page.Html_data().Indicators_or_new();
+		xnde.Init_for_test(name, Bry_.new_utf8_(html));			
+		Indicator_html_bldr indicators = page.Html_data().Indicators();
 		indicators.Add(xnde);
 	}
 	public void Test_bld(String expd) {

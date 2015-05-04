@@ -20,6 +20,7 @@ import gplx.xowa.*; import gplx.xowa.html.hdumps.core.*; import gplx.xowa.html.h
 import gplx.xowa.files.*;
 import gplx.xowa.pages.*; import gplx.xowa.pages.skins.*;	import gplx.xowa.html.modules.*;
 public class Xog_page implements Xoa_page {
+	public Xow_wiki			Wiki() {return wiki;} private Xow_wiki wiki;
 	public Xoa_url			Url() {return page_url;} private Xoa_url page_url;
 	public Xoa_ttl			Ttl() {return page_ttl;} private Xoa_ttl page_ttl;
 	public void				Xtn_gallery_packed_exists_y_() {}
@@ -37,7 +38,8 @@ public class Xog_page implements Xoa_page {
 	public int[]			Redlink_uids() {return redlink_uids;} public void Redlink_uids_(int[] v) {redlink_uids = v;} private int[] redlink_uids;
 	public Xohd_data_itm__base[] Img_itms() {return img_itms;} public void Img_itms_(Xohd_data_itm__base[] v) {this.img_itms = v;} private Xohd_data_itm__base[] img_itms;
 	public OrderedHash		Gallery_itms() {return gallery_itms;} private OrderedHash gallery_itms = OrderedHash_.new_();
-	public Xog_page Init(int page_id, Xoa_url page_url, Xoa_ttl page_ttl) {
+	public Xog_page Init(Xow_wiki wiki, int page_id, Xoa_url page_url, Xoa_ttl page_ttl) {
+		this.wiki = wiki;
 		this.page_id = page_id; this.page_url = page_url; this.page_ttl = page_ttl;
 		content_sub = sidebar_div = Bry_.Empty;
 		display_ttl = null;
@@ -51,7 +53,7 @@ public class Xog_page implements Xoa_page {
 		page_body					= page.Hdump_data().Body();
 		Xopg_html_data html_data	= page.Html_data();
 		Xoh_module_mgr mod_mgr		= html_data.Module_mgr();	
-		module_mgr.Init(mod_mgr.Itm_mathjax().Enabled(), mod_mgr.Itm_popups().Bind_hover_area(), mod_mgr.Itm_gallery().Enabled(), mod_mgr.Itm_hiero().Enabled());
+		module_mgr.Init(mod_mgr.Itm__mathjax().Enabled(), mod_mgr.Itm__popups().Bind_hover_area(), mod_mgr.Itm__gallery().Enabled(), mod_mgr.Itm__hiero().Enabled());
 		display_ttl					= html_data.Display_ttl();
 		content_sub					= html_data.Content_sub();
 		sidebar_div					= Save_sidebars(tmp_bfr, page, html_data);

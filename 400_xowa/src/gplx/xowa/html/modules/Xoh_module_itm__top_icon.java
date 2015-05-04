@@ -19,9 +19,9 @@ package gplx.xowa.html.modules; import gplx.*; import gplx.xowa.*; import gplx.x
 import gplx.xowa.gui.*;
 import gplx.xowa.apis.xowa.html.modules.*;
 public class Xoh_module_itm__top_icon implements Xoh_module_itm {
+	public byte[] Key() {return Xoh_module_itm_.Key_top_icon;}
 	public boolean Enabled() {return enabled;} public void Enabled_y_() {enabled = true;} public void Enabled_(boolean v) {enabled = v;} private boolean enabled;
 	public void Clear() {enabled = false;}
-	public byte[] Key() {return Key_const;} private static final byte[] Key_const = Bry_.new_ascii_("top_icon");
 	public void Write_css_script(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_module_wtr wtr) {}
 	public void Write_js_include(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_module_wtr wtr) {}
 	public void Write_css_include(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_module_wtr wtr) {

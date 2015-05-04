@@ -23,7 +23,7 @@ public class Xob_orig_tbl_bldr extends Xob_itm_basic_base implements Xob_cmd {
 	public String Cmd_key() {return Xob_cmd_keys.Key_file_orig_reg;}
 	public void Cmd_init(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {
-		Xof_fsdb_mode fsdb_mode = wiki.File_mgr__fsdb_mode();
+		Xof_fsdb_mode fsdb_mode = wiki.File__fsdb_mode();
 		fsdb_mode.Tid_make_y_();
 		wiki.Init_assert();
 		Fsdb_db_mgr db_core_mgr = Fsdb_db_mgr_.new_detect(wiki, wiki.Fsys_mgr().Root_dir(), wiki.Fsys_mgr().File_dir());

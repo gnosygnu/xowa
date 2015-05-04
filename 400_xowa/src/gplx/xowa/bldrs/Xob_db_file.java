@@ -31,6 +31,7 @@ public class Xob_db_file {
 	public static Xob_db_file new__wiki_image(Io_url dir)			{return new_(dir, Name__wiki_image);}
 	public static Xob_db_file new__wiki_redirect(Io_url dir)		{return new_(dir, Name__wiki_redirect);}
 	public static Xob_db_file new__temp_log(Io_url dir)				{return new_(dir, Name__temp_log);}
+	public static Xob_db_file new__redlink(Io_url dir)				{return new_(dir, Name__redlink);}
 	public static Xob_db_file new_(Io_url dir, String name) {
 		Io_url url = dir.GenSubFil(name);
 		Db_conn_bldr_data conn_data = Db_conn_bldr.I.Get_or_new(url);
@@ -43,6 +44,6 @@ public class Xob_db_file {
 	public static final String 
 	  Name__wiki_image = "xowa.wiki.image.sqlite3", Name__wiki_redirect = "xowa.wiki.redirect.sqlite3"
 	, Name__file_make = "xowa.file.make.sqlite3", Name__temp_log = "xowa.temp.log.sqlite3"
-	, Name__page_regy = "xowa.file.page_regy.sqlite3"
+	, Name__page_regy = "xowa.file.page_regy.sqlite3", Name__redlink = "xowa.temp.redlink.sqlite3"
 	;
 }

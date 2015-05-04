@@ -16,9 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.engines.process; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
-import gplx.threads.*;
+import gplx.core.threads.*;
 import gplx.texts.HexDecUtl;
 import gplx.xowa.xtns.scribunto.*;
+import gplx.core.threads.Thread_adp_;
 import gplx.ios.*;
 import java.io.*;
 public class Process_server implements Scrib_server {
@@ -63,7 +64,7 @@ public class Process_server implements Scrib_server {
     		long time_now = System.currentTimeMillis();
     		if (time_now > time_woke + server_timeout_busy_wait) {
 				if (time_now > time_bgn + server_timeout) throw Scrib_xtn_mgr.err_("lua_timeout: timeout={0} cmd={1}", server_timeout, String_.new_utf8_(cmd_last));
-				ThreadAdp_.Sleep(server_timeout_polling);
+				Thread_adp_.Sleep(server_timeout_polling);
 				time_woke = System.currentTimeMillis();
 			}
         }

@@ -160,7 +160,7 @@ public class Scrib_lib_title implements Scrib_lib {
 		// if (!exists) return rslt.Init_obj(KeyVal_.Ary(KeyVal_.new_("exists", false)));	// NOTE: do not reinstate; will exit early if commons is not installed; DATE:2015-01-25; NOTE: Media objects are often flagged as absent in offline mode
 		// NOTE: MW registers image if deleted; XOWA doesn't register b/c needs width / height also, not just image name
 		wiki.File_mgr().Init_file_mgr_by_load(wiki);
-		Xof_orig_itm itm = wiki.File_mgr__orig_mgr().Find_by_ttl_or_null(ttl.Page_db());
+		Xof_orig_itm itm = wiki.File__orig_mgr().Find_by_ttl_or_null(ttl.Page_db());
 		if (itm == Xof_orig_itm.Null) return rslt.Init_obj(GetFileInfo_absent);
 		KeyVal[] rv = KeyVal_.Ary
 		( KeyVal_.new_("exists"		, true)

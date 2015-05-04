@@ -22,11 +22,11 @@ public class Xog_tab_close_mgr {
 	public void Add(Xog_tab_close_lnr lnr) {list.Add(lnr);} 
 	public int Len() {return list.Count();} 
 	public Xog_tab_close_lnr Get_at(int i) {return (Xog_tab_close_lnr)list.FetchAt(i);}
-	public boolean When_close(Xog_tab_itm tab) {
+	public boolean When_close(Xog_tab_itm tab, Xoa_url url) {
 		int len = list.Count();
 		for (int i = 0; i < len; ++i) {
 			Xog_tab_close_lnr lnr = Get_at(i);
-			if (!lnr.When_close(tab)) return false;
+			if (!lnr.When_close(tab, url)) return false;
 		}
 		return true;
 	}

@@ -15,8 +15,8 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.threads; import gplx.*;
-public class ThreadAdp_ {
+package gplx.core.threads; import gplx.*; import gplx.core.*;
+public class Thread_adp_ {
 		public static void Sleep(int milliseconds) {
 		try {Thread.sleep(milliseconds);} catch (InterruptedException e) {throw Err_.err_key_(e, "gplx.Thread", "thread interrupted").Add("milliseconds", milliseconds);}
 	}
@@ -25,12 +25,12 @@ public class ThreadAdp_ {
 		try {o.wait();}
 		catch (InterruptedException e) {throw Err_.err_key_(e, "gplx.Thread", "thread wait");}
 	}
-		public static ThreadAdp invk_(GfoInvkAble invk, String cmd)						{return invk_(Name_null, invk, cmd);}
-	public static ThreadAdp invk_(String name, GfoInvkAble invk, String cmd)		{return new ThreadAdp(name, invk, cmd, GfoMsg_.Null);}
-	public static ThreadAdp invk_msg_(GfoInvkAble invk, GfoMsg msg)					{return invk_msg_(Name_null, invk, msg);}
-	public static ThreadAdp invk_msg_(String name, GfoInvkAble invk, GfoMsg msg)	{return new ThreadAdp(name, invk, msg.Key(), msg);}
+		public static Thread_adp invk_(GfoInvkAble invk, String cmd)						{return invk_(Name_null, invk, cmd);}
+	public static Thread_adp invk_(String name, GfoInvkAble invk, String cmd)		{return new Thread_adp(name, invk, cmd, GfoMsg_.Null);}
+	public static Thread_adp invk_msg_(GfoInvkAble invk, GfoMsg msg)					{return invk_msg_(Name_null, invk, msg);}
+	public static Thread_adp invk_msg_(String name, GfoInvkAble invk, GfoMsg msg)	{return new Thread_adp(name, invk, msg.Key(), msg);}
 	public static void Run_invk_msg(String name, GfoInvkAble invk, GfoMsg m) {
-		ThreadAdp_.invk_msg_(name, invk, m).Start();
+		Thread_adp_.invk_msg_(name, invk, m).Start();
 	}
 	public static final String Name_null = null;
 }

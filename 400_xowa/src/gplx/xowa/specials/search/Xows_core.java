@@ -22,8 +22,7 @@ class Xows_core {
 	private final Hash_adp_bry cache_hash = Hash_adp_bry.cs_(); private final Hash_adp_bry cmd_hash = Hash_adp_bry.cs_();
 	private boolean ask_for_upgrade = true; private final Hash_adp_bry upgraded_wikis = Hash_adp_bry.cs_();		
 	public Xows_core(Xoa_wiki_mgr wiki_mgr) {this.wiki_mgr = wiki_mgr;}
-	public Xows_db_wkr Db() {return db;} private final Xows_db_wkr db = new Xows_db_wkr();
-	public Xows_html_wkr Html_wkr() {return html_wkr;} private final Xows_html_wkr html_wkr = new Xows_html_wkr();
+	private final Xows_html_wkr html_wkr = new Xows_html_wkr();
 	public Xows_db_cache Get_cache_or_new(byte[] key) {
 		Xows_db_cache cache = (Xows_db_cache)cache_hash.Get_by_bry(key);
 		if (cache == null) {
@@ -46,16 +45,16 @@ class Xows_core {
 		}
 		qry.Page_max_(Int_.MaxValue);
 		// do search and generate html
-		html_wkr.Init_by_wiki(search_wiki, search_wiki.Html_mgr__lnki_wtr_utl(), search_wiki.Lang().Num_mgr());
+		html_wkr.Init_by_wiki(search_wiki, search_wiki.Lang().Num_mgr(), qry);
 		int cmds_len = qry.Cmds__len();
 		Bry_bfr tmp_bfr = Bry_bfr.new_();
 		for (int i = 0; i < cmds_len; ++i) {
 			Xows_ui_cmd cmd = qry.Cmds__get_at(i); byte[] cmd_key = cmd.Key();
 			cmd_hash.AddReplace(cmd_key, cmd);
 			boolean searching_db = cmd.Search();				
-			html_wkr.Gen_tbl(tmp_bfr, qry, cmd.Rslt(), cmd_key, cmd.Wiki().Domain_bry(), searching_db);
+			html_wkr.Gen_tbl(tmp_bfr, cmd.Rslt(), cmd_key, cmd.Wiki().Domain_bry(), searching_db);
 		}
-		page.Data_raw_(html_wkr.Gen_page(qry, tmp_bfr.Xto_bry_and_clear()));
+		page.Data_raw_(html_wkr.Gen_page(tmp_bfr.Xto_bry_and_clear()));
 	}
 	public void Search_end(Xows_ui_cmd cmd) {
 		cmd_hash.Del(cmd.Key());
@@ -69,7 +68,7 @@ class Xows_core {
 	private void Assert_page_count(Xowe_wiki wiki) {
 		Xowd_db_file search_db = wiki.Data_mgr__core_mgr().Db__search();
 		if (ask_for_upgrade
-			&& Xoa_app_.Mode_is_gui()
+			&& wiki.App().App_type().Uid_is_gui()
 			&& !search_db.Tbl__search_word().Ddl__page_count()
 			&& !upgraded_wikis.Has(wiki.Domain_bry()) ) {
 			ask_for_upgrade = false;

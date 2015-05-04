@@ -28,7 +28,7 @@ public class Xob_import_marker {
 		Io_mgr._.DeleteFil_args(url_(wiki)).MissingFails_off().Exec();
 	}
 	public boolean Chk(Xowe_wiki wiki) {
-		if (!Xoa_app_.Mode_is_gui()) return true;					// NOTE: ignore during Server / Console modes; DATE:2015-04-01
+		if (!wiki.App().App_type().Uid_is_gui()) return true;		// NOTE: ignore during Server / Console modes; DATE:2015-04-01
 		if (in_progress_hash.Has(wiki.Domain_bry())) return true;	// NOTE: ignore if currently building; different bldr commands call wiki.Init_assert() which may lead to fals checks;
 		Io_url url = url_(wiki);
 		if (!Io_mgr._.ExistsFil(url)) return true;

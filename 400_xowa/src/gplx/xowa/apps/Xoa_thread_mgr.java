@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps; import gplx.*; import gplx.xowa.*;
-import gplx.threads.*;
+import gplx.core.threads.*;
 public class Xoa_thread_mgr {
 	public Gfo_thread_pool		Page_load_mgr() {return page_load_mgr;} private Gfo_thread_pool page_load_mgr = new Gfo_thread_pool();
 	public Gfo_thread_pool		File_load_mgr() {return file_load_mgr;} private Gfo_thread_pool file_load_mgr = new Gfo_thread_pool();

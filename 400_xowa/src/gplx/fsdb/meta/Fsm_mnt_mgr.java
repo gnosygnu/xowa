@@ -51,7 +51,7 @@ public class Fsm_mnt_mgr implements GfoInvkAble {
 	public static void Patch_core(Db_cfg_tbl cfg_tbl) {
 		cfg_tbl.Insert_int	(Fsm_cfg_mgr.Grp_core, Fsm_cfg_mgr.Key_next_id					, 1);		// start next_id at 1
 		cfg_tbl.Insert_yn	(Fsm_cfg_mgr.Grp_core, Fsm_cfg_mgr.Key_schema_thm_page			, Bool_.Y);	// new dbs automatically have page and time in fsdb_xtn_tm
-		cfg_tbl.Insert_yn	(Fsm_cfg_mgr.Grp_core, Fsm_cfg_mgr.Key_patch_next_id			, Bool_.Y);	// new dbs automatically have correct next_id
+		cfg_tbl.Insert_yn	(Fsm_cfg_mgr.Grp_core, Fsm_cfg_mgr.Key_patch__next_id			, Bool_.Y);	// new dbs automatically have correct next_id
 	}
 	public static final String Cfg_grp_core = "core", Cfg_key_mnt_insert_idx = "mnt.insert_idx";	// SERIALIZED
 }

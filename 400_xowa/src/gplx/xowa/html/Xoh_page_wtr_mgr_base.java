@@ -15,16 +15,12 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.threads; import gplx.*;
-public interface Gfo_thread_cmd extends GfoInvkAble {
-	void Cmd_ctor();
-	String Async_key();
-	int Async_sleep_interval();
-	boolean Async_prog_enabled(); 
-	void Async_prog_run(int async_sleep_sum);
-	byte Async_init();
-	boolean Async_term();
-	void Async_run();
-	boolean Async_running();
-	Gfo_thread_cmd Async_next_cmd(); void Async_next_cmd_(Gfo_thread_cmd next);
+package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
+public abstract class Xoh_page_wtr_mgr_base {
+	public byte[] Css_common_bry() {return css_common_bry;} private byte[] css_common_bry;
+	public byte[] Css_wiki_bry() {return css_wiki_bry;} private byte[] css_wiki_bry;
+	public void Init_css_urls(Io_url css_common_url, Io_url css_wiki_url) {
+		this.css_common_bry = css_common_url.To_http_file_bry();
+		this.css_wiki_bry = css_wiki_url.To_http_file_bry();
+	}		
 }

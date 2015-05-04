@@ -68,4 +68,5 @@ public class GfuiBtn extends GfuiElemBase {
 		}	catch (Exception e) {GfuiEnv_.ShowMsg(Err_.Message_gplx(e));}
 	}
 	public static final String Invk_btn_img = "btn_img", Invk_btn_img_ = "btn_img_";
+	public static final String CFG_border_on_ = "border_on_";
 }

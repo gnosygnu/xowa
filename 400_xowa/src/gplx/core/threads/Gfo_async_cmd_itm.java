@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.threads; import gplx.*;
+package gplx.core.threads; import gplx.*; import gplx.core.*;
 public class Gfo_async_cmd_itm implements GfoInvkAble {
 	private GfoInvkAble invk; private String invk_key; private GfoMsg msg = GfoMsg_.new_cast_("");
 	public Gfo_async_cmd_itm Init(GfoInvkAble invk, String invk_key, Object... args) {

@@ -23,7 +23,7 @@ public class Xow_html_mgr implements GfoInvkAble {
 		this.wiki = wiki;
 		html_wtr = new Xoh_html_wtr(wiki, this);
 		Xoae_app app = wiki.Appe();
-		page_wtr_mgr = new Xoh_page_wtr_mgr(app.Gui_mgr().Kit().Tid() != gplx.gfui.Gfui_kit_.Swing_tid);	// reverse logic to handle swt,drd but not mem
+		page_wtr_mgr = new Xohe_page_wtr_mgr(app.Gui_mgr().Kit().Tid() != gplx.gfui.Gfui_kit_.Swing_tid);	// reverse logic to handle swt,drd but not mem
 		Io_url file_dir = app.User().Fsys_mgr().App_img_dir().GenSubDir_nest("file");
 		img_media_play_btn = Xoa_app_.Utl__encoder_mgr().Fsys().Encode_http(file_dir.GenSubFil("play.png"));
 		img_media_info_btn = Xoa_app_.Utl__encoder_mgr().Fsys().Encode_http(file_dir.GenSubFil("info.png"));
@@ -43,7 +43,7 @@ public class Xow_html_mgr implements GfoInvkAble {
 	}
 	public Xowe_wiki			Wiki() {return wiki;} private Xowe_wiki wiki;
 	public Xoh_html_wtr			Html_wtr() {return html_wtr;} private Xoh_html_wtr html_wtr;
-	public Xoh_page_wtr_mgr		Page_wtr_mgr() {return page_wtr_mgr;} private Xoh_page_wtr_mgr page_wtr_mgr;
+	public Xohe_page_wtr_mgr	Page_wtr_mgr() {return page_wtr_mgr;} private Xohe_page_wtr_mgr page_wtr_mgr;
 	public Xow_portal_mgr		Portal_mgr() {return portal_mgr;} private Xow_portal_mgr portal_mgr;
 	public Xow_toc_mgr			Toc_mgr() {return toc_mgr;} private Xow_toc_mgr toc_mgr = new Xow_toc_mgr();
 	public Xow_module_mgr		Module_mgr() {return module_mgr;} private Xow_module_mgr module_mgr;

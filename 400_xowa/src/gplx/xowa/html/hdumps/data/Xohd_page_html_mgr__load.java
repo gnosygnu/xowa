@@ -24,12 +24,12 @@ public class Xohd_page_html_mgr__load {
 	private final Bry_rdr rdr = new Bry_rdr(); private final ListAdp rows = ListAdp_.new_(), imgs = ListAdp_.new_();		
 	private static final int redlink_list_max = 1024;
 	private final int[] redlink_list = new int[redlink_list_max];
-	public void Load_page(Xog_page hpg, Xowd_html_tbl tbl, int page_id, Xoa_ttl page_ttl) {
+	public void Load_page(Xow_wiki wiki, Xog_page hpg, Xowd_html_tbl tbl, int page_id, Xoa_ttl page_ttl) {
 		tbl.Select_by_page(rows, page_id);
-		Parse_rows(hpg, page_id, Xoa_url.blank_(), page_ttl, rows);
+		Parse_rows(wiki, hpg, page_id, Xoa_url.blank_(), page_ttl, rows);
 	}
-	public void Parse_rows(Xog_page hpg, int page_id, Xoa_url page_url, Xoa_ttl page_ttl, ListAdp rows) {	// TEST:
-		hpg.Init(page_id, page_url, page_ttl);
+	public void Parse_rows(Xow_wiki wiki, Xog_page hpg, int page_id, Xoa_url page_url, Xoa_ttl page_ttl, ListAdp rows) {	// TEST:
+		hpg.Init(wiki, page_id, page_url, page_ttl);
 		imgs.Clear();
 		int len = rows.Count();
 		for (int i = 0; i < len; ++i) {
@@ -38,7 +38,7 @@ public class Xohd_page_html_mgr__load {
 				case Xowd_html_row.Tid_html:			srl_mgr.Load(hpg, row.Data()); break;
 				case Xowd_html_row.Tid_img:
 				case Xowd_html_row.Tid_redlink:
-															Parse_data(hpg, row); break;
+														Parse_data(hpg, row); break;
 			}
 		}
 		rows.Clear();
@@ -61,13 +61,16 @@ public class Xohd_page_html_mgr__load {
 		switch (tid) {
 			case Xohd_data_itm__base.Tid_basic		: img_itm = new Xohd_data_itm__img(); break;
 			case Xohd_data_itm__base.Tid_gallery	: img_itm = new Xohd_data_itm__gallery_itm(); break;
+			default: return null;	// TODO: remove; needed for redlink
 		}
 		img_itm.Data_parse(rdr);
 		rdr.Pos_add_one();
 		return img_itm;
 	}
 	private void Load_data_img() {
-		imgs.Add(Load_img(rdr));
+		Xohd_data_itm__base img = Load_img(rdr);
+		if (img == null) return;
+		imgs.Add(img);
 	}
 	private void Load_data_redlink(Xog_page hpg) {
 		int len = 0;

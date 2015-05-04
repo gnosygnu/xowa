@@ -114,6 +114,7 @@ public class Xowh_sidebar_mgr_tst {
 		,	"* interaction"
 		,	"** helppage|help"
 		,	"* TOOLBOX"
+		,	"** TOOLBOXEND"
 		,	"* LANGUAGES"
 		)
 		, 	fxt.nav_grp_("Grp_0_text", "Grp_0_title").Itms_add

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.servers.tcp; import gplx.*; import gplx.xowa.*; import gplx.xowa.servers.*;
-import gplx.core.primitives.*; import gplx.ios.*; import gplx.json.*; import gplx.threads.*;
+import gplx.core.primitives.*; import gplx.ios.*; import gplx.json.*; import gplx.core.threads.*;
 public class Xosrv_server implements GfoInvkAble {
 	private long last_cmd;
 	public Xosrv_socket_rdr Rdr() {return rdr;} private Xosrv_socket_rdr rdr = new Xosrv_socket_rdr();
@@ -33,13 +33,13 @@ public class Xosrv_server implements GfoInvkAble {
 		rdr.Init(this, rdr_port);
 		wtr.Init(wtr_host, wtr_port);
 		Gxw_html_server.Init_gui_for_server(app, wtr);
-		ThreadAdp_.invk_(gplx.xowa.apps.Xoa_thread_.Key_http_server_main, rdr, Xosrv_socket_rdr.Invk_start).Start();
+		Thread_adp_.invk_(gplx.xowa.apps.Xoa_thread_.Key_http_server_main, rdr, Xosrv_socket_rdr.Invk_start).Start();
 		app.Usr_dlg().Note_many("", "", "server started: listening on ~{0}. Press Ctrl+C to exit", rdr_port);
 		last_cmd = Env_.TickCount();
 		Running_(true);
 		while (running) {
 			if (shutdown_interval != -1 && Env_.TickCount() - last_cmd > shutdown_interval) break;
-			ThreadAdp_.Sleep(1000);
+			Thread_adp_.Sleep(1000);
 		}
 		rdr.Rls();
 		wtr.Rls();

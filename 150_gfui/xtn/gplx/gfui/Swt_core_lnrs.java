@@ -25,6 +25,8 @@ import gplx.GfoMsg_;
 import gplx.GfsCtx;
 import gplx.String_;
 import gplx.Tfds;
+
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseEvent;
@@ -50,17 +52,24 @@ class Swt_lnr_resize implements Listener {
 	}
 	public Swt_lnr_resize(Swt_win win) {this.win = win;} Swt_win win;
 }
+class Swt_lnr_traverse implements Listener {
+	@Override public void handleEvent(Event e) {
+		if (e.detail == SWT.TRAVERSE_ESCAPE)
+			e.doit = false;
+    }
+}
 class Swt_lnr_key implements KeyListener {
 	public Swt_lnr_key(GxwElem elem) {this.elem = elem;} GxwElem elem;
 //	static int counter = 0;
 	@Override public void keyPressed(KeyEvent ev) 	{
-		IptEvtDataKey data = XtoKeyData(ev);
-		if (!elem.Host().KeyDownCbk(data)) {
+		IptEvtDataKey ipt_data = XtoKeyData(ev);
+		if (!elem.Host().KeyDownCbk(ipt_data) || ipt_data.Handled())
 			ev.doit = false;
-		}
 	}
 	@Override public void keyReleased(KeyEvent ev) 	{
-		if (!elem.Host().KeyUpCbk(XtoKeyData(ev))) ev.doit = false;
+		IptEvtDataKey ipt_data = XtoKeyData(ev);
+		if (!elem.Host().KeyUpCbk(ipt_data) || ipt_data.Handled())
+			ev.doit = false;
 	}
 	IptEvtDataKey XtoKeyData(KeyEvent ev) {
 		int val = ev.keyCode;

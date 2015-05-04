@@ -121,7 +121,7 @@ public class Xof_cache_mgr2 {
 //			byte mode_id = itm.File_is_orig() ? gplx.xowa.files.repos.Xof_repo_itm.Mode_orig : gplx.xowa.files.repos.Xof_repo_itm.Mode_thumb;
 //			byte[] wiki_domain = Xow_domain_tid_.To_domain(itm.Lnki_site()).Domain_bry();
 //			Xow_wiki wiki = wiki_mgr.Get_by_key_or_make(wiki_domain);
-//			gplx.xowa.files.repos.Xof_repo_itm trg_repo = wiki.File_mgr__repo_mgr().Repos_get_by_wiki(wiki_domain).Trg();
+//			gplx.xowa.files.repos.Xof_repo_itm trg_repo = wiki.File__repo_mgr().Repos_get_by_wiki(wiki_domain).Trg();
 //			byte[] ttl = itm.Lnki_ttl();			
 //			byte[] md5 = Xof_xfer_itm_.Md5_(ttl);
 //			Xof_ext itm_ext = Xof_ext_.new_by_id_(itm.Orig_ext());

@@ -19,7 +19,7 @@ package gplx.json; import gplx.*;
 public class Json_doc {
 	public void Ctor(byte[] src, Json_itm_nde root) {this.src = src; this.root = root;}
 	public Bry_bfr Bfr() {return bfr;} Bry_bfr bfr = Bry_bfr.new_();
-	public NumberParser Utl_num_parser() {return utl_num_parser;} NumberParser utl_num_parser = new NumberParser();
+	public Number_parser Utl_num_parser() {return utl_num_parser;} Number_parser utl_num_parser = new Number_parser();
 	public byte[] Str_utf8_bry() {return str_utf8_bry;} private byte[] str_utf8_bry = new byte[6];
 	public byte[] Src() {return src;} private byte[] src;
 	public Json_itm_nde Root() {return root;} Json_itm_nde root;

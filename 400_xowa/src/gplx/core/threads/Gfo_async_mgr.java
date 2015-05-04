@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.threads; import gplx.*;
+package gplx.core.threads; import gplx.*; import gplx.core.*;
 import gplx.core.primitives.*;
 public class Gfo_async_mgr implements GfoInvkAble {
 	private ListAdp queue = ListAdp_.new_();
@@ -29,7 +29,7 @@ public class Gfo_async_mgr implements GfoInvkAble {
 		synchronized (running) {
 			if (running.Val_n()) {
 				running.Val_y_();
-				gplx.threads.ThreadAdp_.invk_(Invk_run, this, Invk_run).Start();
+				gplx.core.threads.Thread_adp_.invk_(Invk_run, this, Invk_run).Start();
 			}
 		}
 	}

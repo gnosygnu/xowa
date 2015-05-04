@@ -16,20 +16,22 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.core.btries.*; import gplx.core.flds.*; import gplx.ios.*; import gplx.threads.*;
+import gplx.core.btries.*; import gplx.core.flds.*; import gplx.ios.*; import gplx.core.threads.*;
 import gplx.xowa.apps.*; import gplx.xowa.apps.caches.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apis.*; import gplx.xowa.urls.encoders.*; import gplx.xowa.apps.progs.*;
 import gplx.xowa.langs.*; import gplx.xowa.specials.*; import gplx.xowa.cfgs2.*;
 import gplx.xowa.files.caches.*; import gplx.xowa.files.imgs.*;
 import gplx.xowa.wikis.*; import gplx.xowa.users.*; import gplx.xowa.gui.*; import gplx.xowa.cfgs.*; import gplx.xowa.ctgs.*; import gplx.xowa.html.tocs.*; import gplx.xowa.fmtrs.*; import gplx.xowa.html.*;
+import gplx.xowa.html.wtrs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.tblws.*;
 import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.math.*;
 import gplx.xowa.parsers.logs.*; import gplx.xowa.servers.tcp.*; import gplx.xowa.servers.http.*;
 import gplx.xowa.wmfs.*;
 public class Xoae_app implements Xoa_app, GfoInvkAble {
-	public Xoae_app(Gfo_usr_dlg usr_dlg, Io_url root_dir, Io_url user_dir, String bin_dir_name) {
-		Xoa_app_.Usr_dlg_(usr_dlg);			
+	public Xoae_app(Gfo_usr_dlg usr_dlg, Xoa_app_type app_type, Io_url root_dir, Io_url wiki_dir, Io_url file_dir, Io_url user_dir, Io_url css_dir, String bin_dir_name) {
+		Xoa_app_.Usr_dlg_(usr_dlg);
+		this.app_type = app_type;
 		Io_url.Http_file_str_encoder = Xoa_app_.Utl__encoder_mgr().Fsys();
-		fsys_mgr = new Xoa_fsys_mgr(bin_dir_name, root_dir);
+		fsys_mgr = new Xoa_fsys_mgr(bin_dir_name, root_dir, wiki_dir, file_dir, css_dir);
 		log_wtr = usr_dlg.Log_wtr();
 		cfg_mgr = new Xoa_cfg_mgr(this);
 		api_root = new Xoapi_root(this);
@@ -58,19 +60,19 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 		http_server = new Http_server_mgr(this);
 		cfg_regy = new Xocfg_regy(this);
 		html_mgr = new Xoh_html_mgr(this);
-//			queue_file = new Xop_queue_mgr(this);
+		this.html__lnki_bldr = new Xoh_lnki_bldr(this, href_parser);
 	}
-	public byte					Mode()					{return Xoa_app_.Mode();}
+	public Xoa_app_type			App_type()				{return app_type;} private final Xoa_app_type app_type;
 	public Xoa_fsys_mgr			Fsys_mgr()				{return fsys_mgr;} private final Xoa_fsys_mgr fsys_mgr;
-	public Xof_cache_mgr		File_mgr__cache_mgr()	{return file_mgr.Cache_mgr();}
-	public Xof_img_mgr			File_mgr__img_mgr()		{return file_mgr.Img_mgr();}
+	public Xof_cache_mgr		File__cache_mgr()	{return file_mgr.Cache_mgr();}
+	public Xof_img_mgr			File__img_mgr()		{return file_mgr.Img_mgr();}
 	public Xoh_href_parser		Html__href_parser()		{return href_parser;} private Xoh_href_parser href_parser;
+	public Xoh_lnki_bldr		Html__lnki_bldr()		{return html__lnki_bldr;} private final Xoh_lnki_bldr html__lnki_bldr;
+	public Xoa_css_extractor	Html__css_installer()	{return html__css_installer;} private final Xoa_css_extractor html__css_installer = new Xoa_css_extractor();
 	public Xowmf_mgr			Wmf_mgr()				{return wmf_mgr;} private final Xowmf_mgr wmf_mgr = new Xowmf_mgr();
 	public Bry_bfr_mkr			Utl__bfr_mkr()			{return Xoa_app_.Utl__bfr_mkr();}
 	public Url_encoder_mgr		Utl__encoder_mgr()		{return Xoa_app_.Utl__encoder_mgr();}
-
 	
-	public Xoa_css_extractor	Css_installer() {return css_installer;} private final Xoa_css_extractor css_installer = new Xoa_css_extractor();
 	public Xoa_wiki_mgr			Wiki_mgr() {return wiki_mgr;} private Xoa_wiki_mgr wiki_mgr;
 	public Xou_user_mgr			User_mgr() {return user_mgr;} private Xou_user_mgr user_mgr;
 	public Xof_file_mgr			File_mgr() {return file_mgr;} private Xof_file_mgr file_mgr = new Xof_file_mgr();
@@ -124,7 +126,7 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 	public Xop_amp_mgr			Parser_amp_mgr() {return parser_amp_mgr;} private Xop_amp_mgr parser_amp_mgr = new Xop_amp_mgr();
 
 	private Xoa_fmtr_mgr fmtr_mgr;
-	public NumberParser Utl_num_parser() {return utl_num_parser;} private NumberParser utl_num_parser = new NumberParser();
+	public Number_parser Utl_num_parser() {return utl_num_parser;} private Number_parser utl_num_parser = new Number_parser();
 	public void Init_by_app() {
 		stage = Xoa_stage_.Tid_init;
 		prog_mgr.Init_by_app(url_cmd_eval);
@@ -133,7 +135,7 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 		gui_mgr.Init_by_app();
 		user.Init_by_app(this);
 		file_mgr.Init_by_app(this);
-		css_installer.Init_by_app(this);
+		html__css_installer.Init_by_app(this);
 		wiki_mgr.Init_by_app();
 		gplx.xowa.utls.upgrades.Xoa_upgrade_mgr.Check(this);
 		ctg_mgr.Init_by_app(this);

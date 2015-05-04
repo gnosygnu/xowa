@@ -59,7 +59,8 @@ public class Xow_file_mgr implements GfoInvkAble {
 		version = Version_2;
 	}
 	public int Patch_upright() {
-		return this.Version() == Version_1
+		Fsm_mnt_mgr mnt_mgr = fsdb_mgr.Mnt_mgr();
+		return this.Version() == Version_1 || mnt_mgr == null
 			? Xof_patch_upright_tid_.Tid_all
 			: fsdb_mgr.Mnt_mgr().Patch_upright()
 			;
@@ -119,7 +120,7 @@ public class Xow_file_mgr implements GfoInvkAble {
 		if (db_core == null ) return;	// no fsdb_core found; exit
 		this.version = Version_2;
 		this.fsdb_mode = Xof_fsdb_mode.new_view();
-		orig_mgr.Init_by_wiki(fsdb_mode, db_core.File__orig_tbl_ary(), wiki.Domain_bry(), wiki.App().Wmf_mgr().Download_wkr(), wiki.File_mgr__repo_mgr(), Xof_url_bldr.new_v2_());
+		orig_mgr.Init_by_wiki(fsdb_mode, db_core.File__orig_tbl_ary(), wiki.Domain_bry(), wiki.App().Wmf_mgr().Download_wkr(), wiki.File__repo_mgr(), Xof_url_bldr.new_v2_());
 		fsdb_mgr.Init_by_wiki(wiki);
 	}
 

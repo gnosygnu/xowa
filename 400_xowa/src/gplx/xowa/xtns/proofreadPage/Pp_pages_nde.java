@@ -60,11 +60,13 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 		page.Pages_recursed_(true);
 		Bry_bfr full_bfr = app.Utl__bfr_mkr().Get_m001();
 		Hash_adp_bry lst_page_regy = ctx.Lst_page_regy(); if (lst_page_regy == null) lst_page_regy = Hash_adp_bry.cs_();	// SEE:NOTE:page_regy; DATE:2014-01-01
+		page.Html_data().Indicators().Enabled_(Bool_.N);				// disable <indicator> b/c <page> should not add to current page; PAGE:en.s:The_Parochial_System_(Wilberforce,_1838); DATE:2015-04-29
 		byte[] page_bry = Bld_wikitext(full_bfr, lst_page_regy);
 		if (page_bry != null)
 			xtn_root = Bld_root_nde(full_bfr, lst_page_regy, page_bry);	// NOTE: this effectively reparses page twice; needed b/c of "if {| : ; # *, auto add new_line" which can build different tokens
 		page.Pages_recursed_(false);
 		full_bfr.Mkr_rls();
+		page.Html_data().Indicators().Enabled_(Bool_.Y);
 	}
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
 		if (xtn_literal)
@@ -225,28 +227,27 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 	}
 	private ListAdp Get_ttls_from_xnde_args__rng(ListAdp list) {
 		if (Bry_.Len_eq_0(bgn_page_bry) && Bry_.Len_eq_0(end_page_bry)) return list;	// from and to are blank; exit early
-		NumberParser num_parser = wiki.Appe().Utl_num_parser();
 		bgn_page_int = 0;	// NOTE: default to 0 (1st page)
 		if (Bry_.Len_gt_0(bgn_page_bry)) {
 			num_parser.Parse(bgn_page_bry);
-			if (num_parser.HasErr()) {
+			if (num_parser.Has_err()) {
 				Fail_args("pages node does not have a valid 'from': from={0}", String_.new_utf8_(bgn_page_bry));
 				return null;
 			}
 			else
-				bgn_page_int = num_parser.AsInt();
+				bgn_page_int = num_parser.Rv_as_int();
 		}
 		end_page_int = 0;	
 		if (Bry_.Len_eq_0(end_page_bry)) 
 			end_page_int = Get_max_page_idx(wiki, index_ttl);
 		else {
 			num_parser.Parse(end_page_bry);
-			if (num_parser.HasErr()) {
+			if (num_parser.Has_err()) {
 				Fail_args("pages node does not have a valid 'to': to={0}", String_.new_utf8_(bgn_page_bry));
 				return null;
 			}
 			else
-				end_page_int = num_parser.AsInt();
+				end_page_int = num_parser.Rv_as_int();
 		}
 		if (bgn_page_int > end_page_int) {
 			Fail_args("from must be less than to: from={0} to={0}", bgn_page_int, end_page_int);
@@ -266,7 +267,7 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 			Xowd_page_itm page = (Xowd_page_itm)rslt.FetchAt(i);
 			Xoa_ttl page_ttl = Xoa_ttl.parse_(wiki, ns_page_id, page.Ttl_page_db());	if (page_ttl == null) continue;					// page_ttl is not valid; should never happen;
 			byte[] page_ttl_leaf = page_ttl.Leaf_txt();									if (page_ttl_leaf == null) continue;			// page is not leaf; should not happen
-			int page_leaf_val = Bry_.Xto_int_or(page_ttl_leaf, Int_.MinValue);		if (page_leaf_val == Int_.MinValue) continue;	// leaf is not int; ignore
+			int page_leaf_val = Bry_.Xto_int_or(page_ttl_leaf, Int_.MinValue);			if (page_leaf_val == Int_.MinValue) continue;	// leaf is not int; ignore
 			if (page_leaf_val > page_leaf_max) page_leaf_max = page_leaf_val;
 		}
 		return page_leaf_max;
@@ -397,8 +398,8 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 	, Xatr_toc_prv		= 11
 	, Xatr_toc_nxt		= 12
 	;
-
 	public static final Xoa_ttl[] Ttls_null = null;
+	private static final Number_parser num_parser = new Number_parser().Ignore_space_at_end_y_();	// ignore space at end; PAGE:en.s:1911_Encyclop�dia_Britannica/Boissier,_Marie_Louis_Antoine_Gaston DATE:2015-04-29
 	private String Fail_msg_suffix() {
 		String excerpt = Bry_fmtr.Escape_tilde(String_.new_utf8_(Bry_.Mid_by_len_safe(src, xnde_tkn.Src_bgn(), 32)));
 		return String_.Format(" ttl={0} src={1}", String_.new_utf8_(cur_page_ttl.Full_db()), excerpt);

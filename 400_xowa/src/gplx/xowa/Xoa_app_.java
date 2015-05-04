@@ -26,7 +26,7 @@ public class Xoa_app_ {
 		boot_mgr.Run(args);
 	}
 	public static final String Name = "xowa";
-	public static final String Version = "2.4.4.1";
+	public static final String Version = "2.5.1.1";
 	public static String Build_date = "2012-12-30 00:00:00";
 	public static String Op_sys;
 	public static String User_agent = "";
@@ -38,19 +38,12 @@ public class Xoa_app_ {
 		rv.Log_wtr().Queue_enabled_(true);
 		return rv;
 	}
-
-	public static byte				Mode()				{return mode;}				public static void Mode_(byte v) {mode = v;} private static byte mode = Xoa_app_.Mode_console;
-	public static boolean				Mode_is_gui()		{return mode == Xoa_app_.Mode_gui;}
 	public static Gfo_usr_dlg		Usr_dlg()			{return usr_dlg;}			public static void Usr_dlg_(Gfo_usr_dlg v) {usr_dlg = v;} private static Gfo_usr_dlg usr_dlg;
 	public static Bry_bfr_mkr		Utl__bfr_mkr()		{return utl__bry_bfr_mkr;}	private static final Bry_bfr_mkr utl__bry_bfr_mkr = new Bry_bfr_mkr();
 	public static Url_encoder_mgr	Utl__encoder_mgr()	{return utl__encoder_mgr;}	private static final Url_encoder_mgr utl__encoder_mgr = new Url_encoder_mgr();
 	public static Io_stream_zip_mgr Utl__zip_mgr()		{return utl__zip_mgr;}		private static final Io_stream_zip_mgr utl__zip_mgr = new Io_stream_zip_mgr();
-//		public static Xof_url_bldr		Utl__url_bldr()		{return utl__url_bldr;}		private static final Xof_url_bldr utl__url_bldr = Xof_url_bldr.new_v2_();
-
 	public static Xoa_gfs_mgr		Gfs_mgr() {return gfs_mgr;}		public static void Gfs_mgr_(Xoa_gfs_mgr v) {gfs_mgr = v;} private static Xoa_gfs_mgr gfs_mgr;
-
-	public static final byte Mode_console = 0, Mode_gui = 1, Mode_http = 2;
-}	
+}
 class Xoa_app_boot_mgr {
 	private Gfo_usr_dlg usr_dlg; private Gfo_log_wtr log_wtr; private String chkpoint = "null";
 	public void Run(String[] args) {
@@ -125,7 +118,7 @@ class Xoa_app_boot_mgr {
 		return rv;
 	}
 	private void Run_app(App_cmd_mgr args_mgr) {
-		boolean app_mode_gui = false;
+		boolean app_type_is_gui = false;
 		Xoae_app app = null;
 		try {
 			// init vars
@@ -143,12 +136,13 @@ class Xoa_app_boot_mgr {
 			Xoa_app_.Op_sys = args_mgr.Args_get("bin_dir_name").Val_as_str_or(Bin_dir_name());
 			Xoa_app_.User_agent = String_.Format("XOWA/{0} ({1}) [gnosygnu@gmail.com]", Xoa_app_.Version, Xoa_app_.Op_sys);
 			String cmd_text = args_mgr.Args_get("cmd_text").Val_as_str_or(null);
-			app_mode_gui = String_.Eq(app_mode, "gui");
+			Xoa_app_type app_type = Xoa_app_type.parse(app_mode);
+			app_type_is_gui = app_type.Uid_is_gui();
 
 			// init app
 			Db_conn_bldr.I.Reg_default_sqlite();
-			app = new Xoae_app(usr_dlg, root_dir, user_dir, Xoa_app_.Op_sys); usr_dlg.Log_wtr().Queue_enabled_(false); log_wtr.Log_msg_to_session_fmt("app.init");
-			app.Fsys_mgr().Wiki_dir_(wiki_dir);
+			app = new Xoae_app(usr_dlg, app_type, root_dir, wiki_dir, root_dir.GenSubDir("file"), user_dir, root_dir.GenSubDir_nest("user", "anonymous", "wiki"), Xoa_app_.Op_sys);
+			usr_dlg.Log_wtr().Queue_enabled_(false); log_wtr.Log_msg_to_session_fmt("app.init");
 			try {
 				app.Sys_cfg().Lang_(System_lang());
 				if (launch_url != null)
@@ -166,26 +160,23 @@ class Xoa_app_boot_mgr {
 			try {app.Gfs_mgr().Run_url(cmd_file); chkpoint = "run_url";}
 			catch (Exception e) {
 				usr_dlg.Warn_many("", "", "script file failed: ~{0} ~{1} ~{2}", chkpoint, cmd_file.Raw(), Err_.Message_gplx(e));
-				if (app_mode_gui)
+				if (app_type_is_gui)
 					GfuiEnv_.ShowMsg(Err_.Message_gplx(e));
 			}
 			gplx.xowa.apps.setups.Xoa_setup_mgr.Delete_old_files(app);
 
 			// launch
 			app.Launch(); chkpoint = "launch";
-			if		(String_.Eq(app_mode, "server")) {
-				Xoa_app_.Mode_(Xoa_app_.Mode_http);
+			if		(app_type.Uid_is_tcp())
 				app.Tcp_server().Run();
-			}
-			else if	(String_.Eq(app_mode, "http_server")) {
-				Xoa_app_.Mode_(Xoa_app_.Mode_http);
+			else if	(app_type.Uid_is_http())
 				app.Http_server().Run();
-			}
 			else {
-				if (cmd_text != null)
+				if (cmd_text != null) {
+					gplx.xowa.servers.Gxw_html_server.Init_gui_for_server(app, null); // NOTE: must init kit else "app.shell.fetch_page" will fail; DATE:2015-04-30
 					ConsoleAdp._.WriteLine_utf8(Object_.Xto_str_strict_or_empty(app.Gfs_mgr().Run_str(cmd_text)));
-				if (app_mode_gui) {
-					Xoa_app_.Mode_(Xoa_app_.Mode_gui);
+				}
+				if (app_type_is_gui) {
 					app.Gui_mgr().Run(); chkpoint = "run";
 				}
 				else	// teardown app, else lua will keep process running
@@ -194,7 +185,7 @@ class Xoa_app_boot_mgr {
 		}
 		catch (Exception e) {usr_dlg.Warn_many("", "", "app launch failed: ~{0} ~{1}", chkpoint, Err_.Message_gplx(e));}
 		finally {
-			if (app != null && app_mode_gui)	// only cancel if app_mode_gui is true; (force cmd_line to end process)
+			if (app != null && app_type_is_gui)	// only cancel if app_type_is_gui is true; (force cmd_line to end process)
 				app.Setup_mgr().Cmd_mgr().Canceled_y_();
 		}
 	}

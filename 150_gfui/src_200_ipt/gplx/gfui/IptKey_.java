@@ -17,9 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
 import java.awt.event.KeyEvent;
+import gplx.core.primitives.*;
 public class IptKey_ {
 	private static EnmMgr enmMgr = EnmMgr.new_().BitRngBgn_(65536).BitRngEnd_(262144).Prefix_("key.");
 	public static IptKey[] Ary(IptKey... ary) {return ary;}
+	public static final IptKey[] Ary_empty = new IptKey[0];
 	public static IptKey as_(Object obj) {return obj instanceof IptKey ? (IptKey)obj : null;}
 	public static IptKey cast_(Object obj) {try {return (IptKey)obj;} catch(Exception exc) {throw Err_.type_mismatch_exc_(exc, IptKey.class, obj);}}
 	public static IptKey add_(IptKey... ary) {
@@ -99,4 +101,49 @@ public class IptKey_ {
 	, Quote = new_(222, "quote")
 	, Shift = new_(KeyCode_Shift, "shift"), Ctrl = new_(KeyCode_Ctrl, "ctrl"), Alt = new_(KeyCode_Alt, "alt")
 	;
+	private static OrderedHash ui_str_hash;
+	public static OrderedHash Ui_str_hash() {
+		if (ui_str_hash == null) {
+			ui_str_hash = OrderedHash_.new_();
+			All_add(ui_str_hash
+			, IptKey_.Back, IptKey_.Tab, IptKey_.Clear, IptKey_.Enter
+			, IptKey_.Pause, IptKey_.CapsLock, IptKey_.Escape, IptKey_.Space
+			, IptKey_.PageUp, IptKey_.PageDown, IptKey_.End, IptKey_.Home
+			, IptKey_.Left, IptKey_.Up, IptKey_.Right, IptKey_.Down
+			, IptKey_.PrintScreen, IptKey_.Insert, IptKey_.Delete
+			, IptKey_.D0, IptKey_.D1, IptKey_.D2, IptKey_.D3, IptKey_.D4
+			, IptKey_.D5, IptKey_.D6, IptKey_.D7, IptKey_.D8, IptKey_.D9
+			, IptKey_.A, IptKey_.B, IptKey_.C, IptKey_.D, IptKey_.E
+			, IptKey_.F, IptKey_.G, IptKey_.H, IptKey_.I, IptKey_.J
+			, IptKey_.K, IptKey_.L, IptKey_.M, IptKey_.N, IptKey_.O
+			, IptKey_.P, IptKey_.Q, IptKey_.R, IptKey_.S, IptKey_.T
+			, IptKey_.U, IptKey_.V, IptKey_.W, IptKey_.X, IptKey_.Y
+			, IptKey_.Z
+			, IptKey_.F1, IptKey_.F2, IptKey_.F3, IptKey_.F4, IptKey_.F5, IptKey_.F6
+			, IptKey_.F7, IptKey_.F8, IptKey_.F9, IptKey_.F10, IptKey_.F11, IptKey_.F12
+			, IptKey_.NumLock, IptKey_.ScrollLock
+			, IptKey_.Semicolon, IptKey_.Equal, IptKey_.Comma, IptKey_.Minus, IptKey_.Period, IptKey_.Slash, IptKey_.Tick
+			, IptKey_.OpenBracket, IptKey_.Back, IptKey_.CloseBracket, IptKey_.Quote
+			);
+		}
+		return ui_str_hash;
+	}
+	private static void All_add(OrderedHash hash, IptKey... ary) {
+		int len = ary.length;
+		for (int i = 0; i < len; ++i) {
+			IptKey key = ary[i];
+			hash.AddReplace(Int_obj_ref.new_(key.Val()), key);
+		}
+	}
+	public static String To_str(int val) {
+		String mod_str = "", rv = "";
+		boolean mod_c = Enm_.HasInt(val, IptKey_.Ctrl.Val());	if (mod_c) {mod_str += "c"; val = Enm_.FlipInt(Bool_.N, val, IptKey_.Ctrl.Val());}
+		boolean mod_a = Enm_.HasInt(val, IptKey_.Alt.Val());	if (mod_a) {mod_str += "a"; val = Enm_.FlipInt(Bool_.N, val, IptKey_.Alt.Val());}
+		boolean mod_s = Enm_.HasInt(val, IptKey_.Shift.Val()); if (mod_s) {mod_str += "s"; val = Enm_.FlipInt(Bool_.N, val, IptKey_.Shift.Val());}
+		if (String_.Len_gt_0(mod_str))
+			rv = "mod." + mod_str + "+";
+		IptKey key = (IptKey)IptKey_.Ui_str_hash().Fetch(Int_obj_ref.new_(val));
+		String key_str = key == null ? "key." + Int_.Xto_str(val) : key.Key();
+		return rv + key_str;
+	}
 }

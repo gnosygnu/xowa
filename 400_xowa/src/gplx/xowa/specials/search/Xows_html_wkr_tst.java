@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import org.junit.*; import gplx.xowa.tdbs.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.tbls.*;
+import org.junit.*; import gplx.xowa.html.wtrs.*; import gplx.xowa.tdbs.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xows_html_wkr_tst {
 	@Before public void init() {fxt.Clear();} private Xows_html_wkr_fxt fxt = new Xows_html_wkr_fxt();
 	@Test   public void Paging() {
@@ -56,15 +56,13 @@ class Xows_html_wkr_fxt {
 	public void Test_paging(boolean fwd, int paging_idx, String expd) {
 		Xows_ui_qry qry = new Xows_ui_qry(Bry_.new_ascii_("A"), paging_idx, 100, Xosrh_rslt_itm_sorter.Tid_len_dsc, new Xows_ns_mgr(), true, new Xow_domain[] {Xow_domain_.parse(wiki.Domain_bry())});
 		qry.Page_max_(2);
-		html_mgr.Init_by_wiki(wiki, wiki.Html_mgr__lnki_wtr_utl(), wiki.Lang().Num_mgr());
-		html_mgr.Qry_(qry);
+		html_mgr.Init_by_wiki(wiki, wiki.Lang().Num_mgr(), qry);
 		byte[] paging_link = html_mgr.Paging_link(fwd);
 		Tfds.Eq(expd, String_.new_ascii_(paging_link));
 	}
 	public void Test_rows(Xows_db_row[] rows, String expd) {
 		Xows_ui_rslt rslt = new Xows_ui_rslt();
-		Xows_html_row html_row = html_mgr.Html_rows();
-		html_row.Ctor(wiki.Html_mgr__lnki_wtr_utl());
+		Xows_html_row html_row = new Xows_html_row(wiki.App().Html__lnki_bldr());
 		html_row.Init(rslt);
 		for (int i = 0; i < rows.length; ++i)
 			rslt.Add(rows[i]);

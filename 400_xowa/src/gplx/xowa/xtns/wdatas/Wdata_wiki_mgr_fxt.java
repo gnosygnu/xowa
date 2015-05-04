@@ -114,7 +114,7 @@ public class Wdata_wiki_mgr_fxt {
 		Tfds.Eq(expd, String_.new_utf8_(qid_ttl));
 	}
 	public void Test_parse_pid_null(String val)			{Test_parse_pid(val, Wdata_wiki_mgr.Pid_null);}
-	public void Test_parse_pid(String val, int expd)	{Tfds.Eq(expd, Wdata_pf_property.Parse_pid(num_parser, Bry_.new_ascii_(val)));} private NumberParser num_parser = new NumberParser();
+	public void Test_parse_pid(String val, int expd)	{Tfds.Eq(expd, Wdata_pf_property.Parse_pid(num_parser, Bry_.new_ascii_(val)));} private Number_parser num_parser = new Number_parser();
 	public void Init_pages_add(Wdata_doc page) {wdata_mgr.Pages_add(page.Qid(), page);}
 	public void Test_parse(String raw, String expd) {
 		parser_fxt.Test_parse_page_tmpl_str(raw, expd);

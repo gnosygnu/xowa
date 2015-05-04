@@ -60,9 +60,7 @@ public class Xowd_search_word_tbl implements RlsAble {
 		try	{
 			int row_count = 0;
 			while (rdr.Move_next()) {
-				synchronized (cxl) {
-					if (cxl.Canceled()) break;
-				}
+				if (cxl.Canceled()) break;
 				Xowd_search_word_row word_row = new_row(rdr);
 				if (++row_count % 10 == 0)
 					Xoa_app_.Usr_dlg().Prog_many("", "", "search; reading pages for word: word=~{0} pages=~{1}", word_row.Text(), word_row.Page_count());

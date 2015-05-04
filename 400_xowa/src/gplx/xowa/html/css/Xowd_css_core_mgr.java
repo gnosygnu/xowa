@@ -18,7 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html.css; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import gplx.dbs.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xowd_css_core_mgr {
-	public static void Set(Xowd_css_core_tbl core_tbl, Xowd_css_file_tbl file_tbl, Io_url css_dir) {Set(core_tbl, file_tbl, css_dir, Key_default);}
 	public static void Set(Xowd_css_core_tbl core_tbl, Xowd_css_file_tbl file_tbl, Io_url css_dir, String key) {
 		Db_conn conn = core_tbl.Conn();
 		Io_url[] file_list = Io_mgr._.QueryDir_args(css_dir).Recur_().ExecAsUrlAry();
@@ -41,7 +40,6 @@ public class Xowd_css_core_mgr {
 		}
 		catch (Exception e) {conn.Txn_cxl(); throw Err_.err_(e);}
 	}
-	public static void Get(Xowd_css_core_tbl core_tbl, Xowd_css_file_tbl file_tbl, Io_url css_dir) {Get(core_tbl, file_tbl, css_dir, Key_default);}
 	public static void Get(Xowd_css_core_tbl core_tbl, Xowd_css_file_tbl file_tbl, Io_url css_dir, String key) {
 		int css_id = core_tbl.Select_id_by_key(key); if (css_id == Xowd_css_core_tbl.Id_null) throw Err_.new_("skin:unknown key: {0}", key);
 		Xowd_css_file_itm[] file_list = file_tbl.Select_by_owner(css_id);
@@ -53,5 +51,5 @@ public class Xowd_css_core_mgr {
 			Io_mgr._.SaveFilBry(file_url, file.Data());
 		}
 	}
-	public static final String Key_default = "xowa.default";
+	public static final String Key_default = "xowa.default", Key_mobile = "xowa.mobile";
 }

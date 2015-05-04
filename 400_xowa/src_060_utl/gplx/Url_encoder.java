@@ -22,7 +22,7 @@ public class Url_encoder implements Url_encoder_interface {
 	private Url_encoder_itm[] encode_ary = new Url_encoder_itm[256], decode_ary = new Url_encoder_itm[256];
 	private Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	private Url_encoder anchor_encoder = null;
-	private Object thread_guard = new Object();
+	private Object thread_lock = new Object();
 	public void Itms_ini(byte primary_encode_marker) {
 		Url_encoder_itm_hex hex = new Url_encoder_itm_hex(primary_encode_marker);
 		for (int i = 0; i < 256; i++) {
@@ -72,26 +72,26 @@ public class Url_encoder implements Url_encoder_interface {
 		return this;
 	}
 	public byte[] Encode_http(Io_url url) {
-		synchronized (thread_guard) {
+		synchronized (thread_lock) {
 			tmp_bfr.Add(Io_url.Http_file_bry);
 			Encode(tmp_bfr, url.RawBry());
 			return tmp_bfr.Xto_bry_and_clear();
 		}
 	}
 	public String Encode_str(String str)					{
-		synchronized (thread_guard) {
+		synchronized (thread_lock) {
 			byte[] bry = Bry_.new_utf8_(str); Encode(tmp_bfr, bry, 0, bry.length); return tmp_bfr.Xto_str_and_clear();
 		}
 	}
 	public byte[] Encode_bry(String str)					{
-		synchronized (thread_guard) {
+		synchronized (thread_lock) {
 			byte[] bry = Bry_.new_utf8_(str); Encode(tmp_bfr, bry, 0, bry.length); return tmp_bfr.Xto_bry_and_clear();
 		}
 	}
 	public byte[] Encode(byte[]	bry)						{Encode(tmp_bfr, bry, 0, bry.length); return tmp_bfr.Xto_bry_and_clear();}
 	public Bry_bfr Encode(Bry_bfr bfr, byte[] bry)	{Encode(bfr,	 bry, 0, bry.length); return bfr;}
 	public void Encode(Bry_bfr bfr, byte[] bry, int bgn, int end) {
-		synchronized (thread_guard) {
+		synchronized (thread_lock) {
 			for (int i = bgn; i < end; i++) {
 				byte b = bry[i];
 				if (anchor_encoder != null && b == Byte_ascii.Hash) {
@@ -105,22 +105,22 @@ public class Url_encoder implements Url_encoder_interface {
 		}
 	}
 	public String Decode_str(String str) {
-		synchronized (thread_guard) {
+		synchronized (thread_lock) {
 			byte[] bry = Bry_.new_utf8_(str); Decode(bry, 0, bry.length, tmp_bfr, true); return tmp_bfr.Xto_str_and_clear();
 		}
 	}
 	public byte[] Decode(byte[] bry) {
-		synchronized (thread_guard) {
+		synchronized (thread_lock) {
 			Decode(bry, 0, bry.length, tmp_bfr, false); return tmp_bfr.Xto_bry_and_clear();
 		}
 	}
 	public byte[] Decode_lax(byte[] bry) {
-		synchronized (thread_guard) {
+		synchronized (thread_lock) {
 			Decode(bry, 0, bry.length, tmp_bfr, false); return tmp_bfr.Xto_bry_and_clear();
 		}
 	}
 	public void Decode(byte[] bry, int bgn, int end, Bry_bfr bfr, boolean fail_when_invalid) {
-		synchronized (thread_guard) {
+		synchronized (thread_lock) {
 			for (int i = bgn; i < end; i++) {
 				byte b = bry[i];
 				if (anchor_encoder != null && b == Byte_ascii.Hash) {

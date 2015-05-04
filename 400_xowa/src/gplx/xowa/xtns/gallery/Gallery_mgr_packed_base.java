@@ -27,7 +27,7 @@ public class Gallery_mgr_packed_base extends Gallery_mgr_base {
 	}
 	@Override public void Itms_per_row_(int v) {}
 	@Override public void Get_modules(Xoae_page page) {
-		page.Html_data().Module_mgr().Itm_gallery().Enabled_y_();
+		page.Html_data().Module_mgr().Itm__gallery().Enabled_y_();
 	}
 	@Override public int Get_thumb_padding()				{return 0;}
 	@Override public int Get_gb_padding()				{return 2;}

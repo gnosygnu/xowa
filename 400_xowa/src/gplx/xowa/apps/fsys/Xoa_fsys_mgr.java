@@ -17,35 +17,32 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps.fsys; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
 public class Xoa_fsys_mgr implements GfoInvkAble {
-	public Xoa_fsys_mgr(String plat_name, Io_url root_dir) {
-		Init_by_boot(plat_name, root_dir);
+	public Xoa_fsys_mgr(String plat_name, Io_url root_dir, Io_url wiki_dir, Io_url file_dir, Io_url css_dir) {
+		this.root_dir				= root_dir;
+		this.wiki_dir 				= wiki_dir;
+		this.file_dir				= file_dir;
+		this.css_dir				= css_dir;
+		this.bin_plat_dir			= root_dir.GenSubDir("bin").GenSubDir(plat_name);
+		this.bin_any_dir			= root_dir.GenSubDir("bin").GenSubDir("any");
+		this.bin_xowa_dir			= bin_any_dir.GenSubDir("xowa");
+		this.bin_xtns_dir			= bin_any_dir.GenSubDir_nest("xowa", "xtns");
+		this.cfg_lang_core_dir		= bin_any_dir.GenSubDir_nest("xowa", "cfg", "lang", "core");
+		this.cfg_wiki_core_dir		= bin_any_dir.GenSubDir_nest("xowa", "cfg", "wiki", "core");
 	}
-	public Io_url Root_dir()				{return root_dir;} private Io_url root_dir;
-	public byte[] Root_dir_bry()			{return root_dir_bry;} private byte[] root_dir_bry;
-	public Io_url File_dir()				{return file_dir;} private Io_url file_dir;
-	public Io_url Wiki_dir()				{return wiki_dir;} public void Wiki_dir_(Io_url v) {wiki_dir = v;} private Io_url wiki_dir;
-	public Io_url Bin_plat_dir()			{return bin_plat_dir;} private Io_url bin_plat_dir;
-	public Io_url Bin_any_dir()				{return bin_any_dir;} private Io_url bin_any_dir;
-	public Io_url Bin_xowa_dir()			{return bin_xowa_dir;} private Io_url bin_xowa_dir;
-	public Io_url Bin_xtns_dir()			{return bin_xtns_dir;} private Io_url bin_xtns_dir;
-	public Io_url Cfg_lang_core_dir()		{return cfg_lang_core_dir;} private Io_url cfg_lang_core_dir;
-	public Io_url Cfg_wiki_core_dir()		{return cfg_wiki_core_dir;} private Io_url cfg_wiki_core_dir;
-	public Io_url Bin_data_os_cfg_fil()		{return bin_plat_dir.GenSubFil_nest("xowa", "cfg", Xoa_gfs_mgr.Cfg_os);}
-	private void Init_by_boot(String plat_name, Io_url root_dir) {
-		this.root_dir			= root_dir;
-		root_dir_bry			= root_dir.To_http_file_bry();
-		file_dir				= root_dir.GenSubDir("file");
-		bin_plat_dir			= root_dir.GenSubDir("bin").GenSubDir(plat_name);
-		bin_any_dir				= root_dir.GenSubDir("bin").GenSubDir("any");
-		bin_xowa_dir			= bin_any_dir.GenSubDir("xowa");
-		bin_xtns_dir			= bin_any_dir.GenSubDir_nest("xowa", "xtns");
-		cfg_lang_core_dir		= bin_any_dir.GenSubDir_nest("xowa", "cfg", "lang", "core");
-		cfg_wiki_core_dir		= bin_any_dir.GenSubDir_nest("xowa", "cfg", "wiki", "core");
-		Wiki_dir_				(root_dir.GenSubDir("wiki"));
-	}
-	public void Init_by_app(GfoInvkAble app_mgr_invk) {// for gfs and app.launcher
-		this.app_mgr_invk = app_mgr_invk;
-	}	private GfoInvkAble app_mgr_invk;
+	public Io_url Root_dir()					{return root_dir;} private final Io_url root_dir;
+	public Io_url Wiki_dir()					{return wiki_dir;} private final Io_url wiki_dir;
+	public Io_url File_dir()					{return file_dir;} private final Io_url file_dir;
+	public Io_url Css_dir()						{return css_dir;} private final Io_url css_dir;
+	public Io_url Bin_plat_dir()				{return bin_plat_dir;} private final Io_url bin_plat_dir;
+	public Io_url Bin_any_dir()					{return bin_any_dir;} private final Io_url bin_any_dir;
+	public Io_url Bin_xowa_dir()				{return bin_xowa_dir;} private final Io_url bin_xowa_dir;
+	public Io_url Bin_xtns_dir()				{return bin_xtns_dir;} private final Io_url bin_xtns_dir;
+	public Io_url Cfg_lang_core_dir()			{return cfg_lang_core_dir;} private final Io_url cfg_lang_core_dir;
+	public Io_url Cfg_wiki_core_dir()			{return cfg_wiki_core_dir;} private final Io_url cfg_wiki_core_dir;
+	public Io_url Bin_data_os_cfg_fil()			{return bin_plat_dir.GenSubFil_nest("xowa", "cfg", Xoa_gfs_mgr.Cfg_os);}
+	public Io_url Wiki_css_dir(String wiki)		{return css_dir.GenSubDir_nest(wiki, "html");}	// EX: /xowa/temp/simple.wikipedia.org/html/xowa_common.css
+	public Io_url Wiki_file_dir(String wiki)	{return file_dir.GenSubDir_nest(wiki);}			// EX: /xowa/temp/simple.wikipedia.org/orig/
+	public void Init_by_app(GfoInvkAble app_mgr_invk) {this.app_mgr_invk = app_mgr_invk;} private GfoInvkAble app_mgr_invk; // for gfs and app.launcher
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_apps))					return app_mgr_invk;
 		else if	(ctx.Match(k, Invk_root_dir))				return root_dir;

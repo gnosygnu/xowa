@@ -90,20 +90,20 @@ public class Xop_lnki_wkr_ {
 		else
 			return bgn_pos;
 	}
-	public static void Page_parse(Xop_ctx ctx, byte[] src, NumberParser number_parser, Xop_lnki_tkn lnki, Arg_nde_tkn arg) {
+	public static void Page_parse(Xop_ctx ctx, byte[] src, Number_parser number_parser, Xop_lnki_tkn lnki, Arg_nde_tkn arg) {
 		int val_tkn_bgn = arg.Val_tkn().Src_bgn(), val_tkn_end = arg.Val_tkn().Src_end();
 		byte[] val_bry = Bry_.Trim(src, val_tkn_bgn, val_tkn_end);	// some tkns have trailing space; EX.WWI: [[File:Bombers of WW1.ogg|thumb |thumbtime=3]]
 		number_parser.Parse(val_bry);
-		if (number_parser.HasErr())
+		if (number_parser.Has_err())
 			ctx.Msg_log().Add_itm_none(Xop_lnki_log.Upright_val_is_invalid, src, val_tkn_bgn, val_tkn_end);
 		else
-			lnki.Page_(number_parser.AsInt());
+			lnki.Page_(number_parser.Rv_as_int());
 	}
 	public static byte[] Val_extract(byte[] src, Arg_nde_tkn arg) {
 		int val_tkn_bgn = arg.Val_tkn().Src_bgn(), val_tkn_end = arg.Val_tkn().Src_end();
 		return Bry_.Trim(src, val_tkn_bgn, val_tkn_end);	// trim trailing space
 	}
-	public static void Thumbtime_parse(Xop_ctx ctx, byte[] src, NumberParser number_parser, Xop_lnki_tkn lnki, Arg_nde_tkn arg) {
+	public static void Thumbtime_parse(Xop_ctx ctx, byte[] src, Number_parser number_parser, Xop_lnki_tkn lnki, Arg_nde_tkn arg) {
 		int val_tkn_bgn = arg.Val_tkn().Src_bgn(), val_tkn_end = arg.Val_tkn().Src_end();
 		long fracs = TimeSpanAdp_.parse_to_fracs(src, val_tkn_bgn, val_tkn_end, false);
 		if (fracs == TimeSpanAdp_.parse_null) {

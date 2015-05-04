@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.modules; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 public class Xoh_module_itm__navframe implements Xoh_module_itm {
-	public byte[] Key() {return Key_const;} private static final byte[] Key_const = Bry_.new_ascii_("navframe");
+	public byte[] Key() {return Xoh_module_itm_.Key_navframe;}
 	public boolean Enabled() {return enabled;} public void Enabled_y_() {enabled = true;} public void Enabled_(boolean v) {enabled = v;} private boolean enabled;
 	public void Clear() {enabled = false;}
 	public void Write_css_include(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_module_wtr wtr) {}
@@ -28,7 +28,7 @@ public class Xoh_module_itm__navframe implements Xoh_module_itm {
 	public void Write_js_head_global(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_module_wtr wtr) {
 		if (!enabled) return;
 		wtr.Write_js_global_ini_atr_val(Key_enabled		, true);
-		wtr.Write_js_global_ini_atr_val(Key_collapsed	, app.Api_root().Html().Modules().Navframe().Collapsed() || wiki.Html_mgr().Module_mgr().Itm_navframe().Enabled_n());
+		wtr.Write_js_global_ini_atr_val(Key_collapsed	, app.Api_root().Html().Modules().Navframe().Collapsed() || wiki.Html_mgr().Module_mgr().Itm__navframe().Enabled_n());
 		wtr.Write_js_global_ini_atr_msg(wiki			, Key_show);
 		wtr.Write_js_global_ini_atr_msg(wiki			, Key_hide);
 	}

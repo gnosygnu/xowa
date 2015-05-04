@@ -61,10 +61,8 @@ public class Fsdb_db_mgr__v2_bldr {
 		Fsdb_db_file rv = new Fsdb_db_file(core_url, core_conn);
 		Db_cfg_tbl cfg_tbl = rv.Tbl__cfg();
 		cfg_tbl.Create_tbl();
-		cfg_tbl.Insert_int(Fsm_cfg_mgr.Grp_core, Fsm_cfg_mgr.Key_next_id				, 1);		// start next_id at 1
-		cfg_tbl.Insert_yn(Fsm_cfg_mgr.Grp_core, Fsm_cfg_mgr.Key_schema_thm_page			, Bool_.Y);	// new dbs automatically have page and time in fsdb_xtn_tm
-		cfg_tbl.Insert_yn(Fsm_cfg_mgr.Grp_core, Fsm_cfg_mgr.Key_patch_next_id			, Bool_.Y);	// new dbs automatically have correct next_id
 		Fsm_mnt_mgr.Patch(cfg_tbl);
+		Fsm_mnt_mgr.Patch_core(cfg_tbl);
 		Xof_orig_tbl orig_tbl = new Xof_orig_tbl(core_conn, schema_is_1); orig_tbl.Create_tbl();
 		if (mnt_id == Fsm_mnt_mgr.Mnt_idx_main) {
 			Fsm_mnt_tbl mnt_tbl = new Fsm_mnt_tbl(core_conn, schema_is_1); mnt_tbl.Create_tbl();

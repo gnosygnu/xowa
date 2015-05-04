@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.threads.*;
+import gplx.core.threads.*;
 public class Xoi_cmd_mgr implements GfoInvkAble {
 	ListAdp cmds = ListAdp_.new_();
 	public Xoi_cmd_mgr(Xoi_setup_mgr install_mgr) {this.app = install_mgr.App(); this.install_mgr = install_mgr;} private Xoae_app app; Xoi_setup_mgr install_mgr;
@@ -33,7 +33,7 @@ public class Xoi_cmd_mgr implements GfoInvkAble {
 			while (cmd.Async_running()) {
 				if (canceled) {working = false; return;}
 				if (async_prog_enabled) cmd.Async_prog_run(async_sleep_sum);
-				ThreadAdp_.Sleep(async_sleep_interval);
+				Thread_adp_.Sleep(async_sleep_interval);
 				async_sleep_sum += async_sleep_interval;	// NOTE: this is not exact
 			}
 		}
@@ -43,7 +43,7 @@ public class Xoi_cmd_mgr implements GfoInvkAble {
 		else
 			working = false;
 	}
-	private void Run_async(Gfo_thread_cmd cmd) {ThreadAdp_.invk_msg_(cmd.Async_key(), this, GfoMsg_.new_cast_(Invk_process_async).Add("v", cmd)).Start();}
+	private void Run_async(Gfo_thread_cmd cmd) {Thread_adp_.invk_msg_(cmd.Async_key(), this, GfoMsg_.new_cast_(Invk_process_async).Add("v", cmd)).Start();}
 	private void Cmds_run() {
 		if (working) {
 			app.Gui_mgr().Kit().Ask_ok("", "", "An import is in progress. Please wait for it to complete. If you want to do multiple imports at once, see Help:Import/Script.");

@@ -44,6 +44,6 @@ public class Fs_root_fsdb_mgr implements Xof_fsdb_mgr, GfoInvkAble {	// read ima
 		return this;
 	}	private static final String Invk_root_dir_ = "root_dir_", Invk_orig_dir_ = "orig_dir_", Invk_thumb_dir_ = "thumb_dir_";
 	public Xof_bin_mgr Bin_mgr() {throw Err_.not_implemented_();}
-	public Fsm_mnt_mgr Mnt_mgr() {throw Err_.not_implemented_();}
+	public Fsm_mnt_mgr Mnt_mgr() {return null;}
 	public void Rls() {}
 }

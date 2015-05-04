@@ -16,9 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
-import gplx.gfui.*; import gplx.threads.*;
+import gplx.gfui.*; import gplx.core.threads.*;
 import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.gui.history.*; import gplx.xowa.pages.*;
 public class Xog_tab_itm_read_mgr {
+	private static final Xoa_url_parser url_parser = new Xoa_url_parser();	// NOTE: separate url_parser to reduce threading issues
 	public static void Async(Xog_tab_itm tab) {tab.Async();}
 	public static void Show_page(Xog_tab_itm tab, Xoae_page new_page, boolean reset_to_read) {Show_page(tab, new_page, reset_to_read, false, false, Xog_history_stack.Nav_fwd);}
 	public static void Show_page(Xog_tab_itm tab, Xoae_page new_page, boolean reset_to_read, boolean new_page_is_same, boolean show_is_err, byte history_nav_type) {
@@ -45,7 +46,7 @@ public class Xog_tab_itm_read_mgr {
 		}
 		tab.Page_(new_page);
 		if (tab == tab.Tab_mgr().Active_tab())
-			Update_selected_tab(win.App().Url_parser(), win, new_page.Url(), new_page.Ttl());
+			Update_selected_tab(win, new_page.Url(), new_page.Ttl());
 		Xol_font_info lang_font = wiki.Lang().Gui_font();
 		if (lang_font.Name() == null) lang_font = win.Gui_mgr().Win_cfg().Font();
 		Xog_win_itm_.Font_update(win, lang_font);
@@ -57,8 +58,8 @@ public class Xog_tab_itm_read_mgr {
 		else
 			GfoInvkAble_.InvkCmd_val(tab.Html_itm().Cmd_async(), Xog_html_itm.Invk_html_elem_focus, Xog_html_itm.Elem_id__xowa_edit_data_box);	// NOTE: must be async, else won't work; DATE:2014-06-05
 	}
-	public static void Update_selected_tab_blank(Xoa_url_parser url_parser, Xog_win_itm win) {Update_selected_tab(url_parser, win, null, null);} // called when all tabs are null
-	public static void Update_selected_tab(Xoa_url_parser url_parser, Xog_win_itm win, Xoa_url url, Xoa_ttl ttl) {
+	public static void Update_selected_tab_blank(Xog_win_itm win) {Update_selected_tab(win, null, null);} // called when all tabs are null
+	public static void Update_selected_tab(Xog_win_itm win, Xoa_url url, Xoa_ttl ttl) {
 		String url_str = "", win_str = Win_text_blank;
 		if (url != null && ttl != null) {
 			try {url_str = url_parser.Build_str(url);}
@@ -78,7 +79,7 @@ public class Xog_tab_itm_read_mgr {
 		win.App().Log_wtr().Queue_enabled_(false);
 		Xoae_page fail_page = wiki.Data_mgr().Get_page(ttl, false);
 		tab.View_mode_(Xopg_view_mode.Tid_edit);
-		Update_selected_tab(win.App().Url_parser(), win, url, ttl);
+		Update_selected_tab(win, url, ttl);
 		Show_page(tab, fail_page, false, false, true, Xog_history_stack.Nav_fwd);
 		win.Win_box().Text_(err_msg);
 	}

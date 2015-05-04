@@ -38,7 +38,7 @@ public abstract class Xohd_data_itm__base implements Xohd_data_itm {
 //		public byte[]		Orig_ttl() {return orig_ttl;} private byte[] orig_ttl;
 //		public int			Orig_ext() {return orig_ext;} private int orig_ext;
 //		public byte[]		Orig_redirect() {return orig_redirect;} private byte[] orig_redirect = Bry_.Empty;
-//		public byte			Html_elem_tid() {return html_elem_tid;} public void Html_elem_tid_(byte v) {html_elem_tid = v;} private byte html_elem_tid;
+	public abstract byte Html_elem_tid();
 //		public Io_url		Html_orig_url() {return html_orig_url;} public void Html_orig_url_(Io_url v) {html_orig_url = v;} private Io_url html_orig_url = Io_url_.Null;
 //		public int			Gallery_mgr_h() {return gallery_mgr_h;} public void Gallery_mgr_h_(int v) {gallery_mgr_h = v;} private int gallery_mgr_h = Int_.Neg1;
 	public Xohd_data_itm__base Data_init_base

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.json; import gplx.*;
 public class Json_parser {
 	public Json_factory Factory() {return factory;} private Json_factory factory = new Json_factory();
-	private byte[] src; private int src_len, pos; private NumberParser num_parser = new NumberParser();
+	private byte[] src; private int src_len, pos; private Number_parser num_parser = new Number_parser();
 	private static final byte[] Bry_bool_rue = Bry_.new_ascii_("rue"), Bry_bool_alse = Bry_.new_ascii_("alse"), Bry_null_ull = Bry_.new_ascii_("ull");
 	public Json_doc Parse(byte[] src) {
 		Json_doc doc = new Json_doc();
@@ -127,7 +127,7 @@ public class Json_parser {
 			}
 		}
 		num_parser.Parse(src, num_bgn, pos);
-		return num_parser.HasFrac() 
+		return num_parser.Has_frac() 
 			? factory.Decimal(doc, num_bgn, pos)
 			: factory.Int(doc, num_bgn, pos);
 	}

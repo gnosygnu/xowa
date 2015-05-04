@@ -29,9 +29,9 @@ class Xof_file_fxt {
 		Xoa_test_.Db_init(root_url);
 		app = Xoa_app_fxt.app_(Op_sys.Cur().Os_name(), root_url);
 		wiki = Xoa_app_fxt.wiki_tst_(app);
-		wiki.File_mgr__fsdb_mode().Tid_make_y_();
+		wiki.File__fsdb_mode().Tid_make_y_();
 		this.fsdb_mgr = (Xof_fsdb_mgr__sql)wiki.File_mgr().Fsdb_mgr();
-		this.orig_mgr = wiki.File_mgr__orig_mgr();
+		this.orig_mgr = wiki.File__orig_mgr();
 		Xof_repo_fxt.Repos_init(app.File_mgr(), true, wiki);
 		Xowe_wiki_bldr.Create(wiki, 1, "dump.xml");
 		Xowd_db_file text_db = wiki.Data_mgr__core_mgr().Dbs__make_by_tid(Xowd_db_file_.Tid_text); text_db.Tbl__text().Create_tbl();

@@ -38,7 +38,7 @@ public class Xow_portal_mgr implements GfoInvkAble {
 		if (missing_ns_cls == null)	// if missing_ns_cls not set for wiki, use the home wiki's
 			Missing_ns_cls_(wiki.Appe().User().Wiki().Html_mgr().Portal_mgr().Missing_ns_cls());
 		Xoapi_skins skins = wiki.Appe().Api_root().Html().Skins();
-		api_skin = wiki.Appe().Mode() == Xoa_app_.Mode_gui ? skins.Desktop() : skins.Server();
+		api_skin = wiki.App().App_type().Uid_is_gui() ? skins.Desktop() : skins.Server();
 		Bry_fmtr_eval_mgr eval_mgr = wiki.Eval_mgr();
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
 		Init_fmtr(tmp_bfr, eval_mgr, div_view_fmtr);

@@ -22,7 +22,7 @@ import gplx.fsdb.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.fsdb.meta.*;
 import gplx.xowa.langs.vnts.*; import gplx.xowa.gui.views.*; import gplx.xowa.wikis.xwikis.*;
-import gplx.xowa.html.wtrs.*; import gplx.xowa.html.hzips.*; import gplx.xowa.html.hdumps.*;
+import gplx.xowa.html.wtrs.*; import gplx.xowa.html.hzips.*; import gplx.xowa.html.hdumps.*; import gplx.xowa.html.css.*;
 import gplx.xowa.setup.maints.*; import gplx.xowa.wikis.caches.*;
 import gplx.xowa.bldrs.xmls.*; import gplx.xowa.xtns.pfuncs.*;
 import gplx.xowa.tdbs.*;
@@ -40,7 +40,6 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble {
 		html_mgr = new Xow_html_mgr(this);
 		this.html_mgr__hdump_rdr = new Xohd_hdump_rdr(app, this);
 		this.html_mgr__hdump_wtr = new Xohd_hdump_wtr(app, this);
-		this.html_mgr__lnki_wtr_utl = new Xoh_lnki_wtr_utl(this, app.Href_parser());
 
 		tdb_fsys_mgr = new Xotdb_fsys_mgr(wiki_dir, ns_mgr);
 		xwiki_domain_tid = Xwiki_tid(domain_tid);
@@ -78,6 +77,7 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble {
 		maint_mgr = new Xow_maint_mgr(this);
 		cache_mgr = new Xow_cache_mgr(this);
 	}
+	public boolean					Type_is_edit() {return Bool_.Y;}
 	public byte[]				Domain_bry() {return domain_bry;} private final byte[] domain_bry; 
 	public String				Domain_str() {return domain_str;} private final String domain_str;
 	public int					Domain_tid() {return domain_tid;} private final int domain_tid;
@@ -90,18 +90,18 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble {
 	public Xoa_ttl				Ttl_parse(byte[] ttl)				{return Xoa_ttl.parse_(this, ttl);}
 	public Xoa_ttl				Ttl_parse(int ns_id, byte[] ttl)	{return Xoa_ttl.parse_(this, ns_id, ttl);}
 	public Xowd_db_mgr			Data_mgr__core_mgr() {return db_mgr.Tid() == Xodb_mgr_txt.Tid_txt ? null : this.Db_mgr_as_sql().Core_data_mgr();}	// TEST:
-	public Xow_repo_mgr			File_mgr__repo_mgr() {return file_mgr.Repo_mgr();}
-	public Xof_orig_mgr			File_mgr__orig_mgr() {return file_mgr.Orig_mgr();}
-	public Xof_bin_mgr			File_mgr__bin_mgr() {return file_mgr.Fsdb_mgr().Bin_mgr();}
-	public Fsm_mnt_mgr			File_mgr__mnt_mgr() {return file_mgr.Fsdb_mgr().Mnt_mgr();}
-	public Xof_fsdb_mode		File_mgr__fsdb_mode() {return file_mgr.Fsdb_mode();}
-	public Fsdb_db_mgr			File_mgr__file_db_core() {return file_mgr.Db_core();}
+	public Xow_repo_mgr			File__repo_mgr() {return file_mgr.Repo_mgr();}
+	public Xof_orig_mgr			File__orig_mgr() {return file_mgr.Orig_mgr();}
+	public Xof_bin_mgr			File__bin_mgr() {return file_mgr.Fsdb_mgr().Bin_mgr();}
+	public Fsm_mnt_mgr			File__mnt_mgr() {return file_mgr.Fsdb_mgr().Mnt_mgr();}
+	public Xof_fsdb_mode		File__fsdb_mode() {return file_mgr.Fsdb_mode();}
+	public Fsdb_db_mgr			File__file_db_core() {return file_mgr.Db_core();}
 
-	public boolean					Html_mgr__hdump_enabled() {return html_mgr__hdump_enabled;}	private boolean html_mgr__hdump_enabled = Bool_.N;
-	public Xow_hzip_mgr			Html_mgr__hzip_mgr() {return html_mgr.Hzip_mgr();}
-	public Xohd_hdump_rdr		Html_mgr__hdump_rdr() {return html_mgr__hdump_rdr;} private final Xohd_hdump_rdr html_mgr__hdump_rdr;
-	public Xohd_hdump_wtr		Html_mgr__hdump_wtr() {return html_mgr__hdump_wtr;} private final Xohd_hdump_wtr html_mgr__hdump_wtr;
-	public Xoh_lnki_wtr_utl		Html_mgr__lnki_wtr_utl() {return html_mgr__lnki_wtr_utl;} private final Xoh_lnki_wtr_utl html_mgr__lnki_wtr_utl;
+	public boolean					Html__hdump_enabled() {return html_mgr__hdump_enabled;}	private boolean html_mgr__hdump_enabled = Bool_.N;
+	public Xow_hzip_mgr			Html__hzip_mgr() {return html_mgr.Hzip_mgr();}
+	public Xohd_hdump_rdr		Html__hdump_rdr() {return html_mgr__hdump_rdr;} private final Xohd_hdump_rdr html_mgr__hdump_rdr;
+	public Xohd_hdump_wtr		Html__hdump_wtr() {return html_mgr__hdump_wtr;} private final Xohd_hdump_wtr html_mgr__hdump_wtr;
+	public Xoh_page_wtr_mgr_base		Html__page_wtr_mgr() {return html_mgr.Page_wtr_mgr();}
 
 	public Xow_xwiki_mgr		Xwiki_mgr() {return xwiki_mgr;} private final Xow_xwiki_mgr xwiki_mgr;
 	public int					Xwiki_domain_tid() {return xwiki_domain_tid;} private int xwiki_domain_tid;
@@ -241,8 +241,8 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble {
 		lang.Vnt_mgr().Init_by_wiki(this);
 		// other init
 		Bry_fmtr.Null.Eval_mgr().Enabled_(false); app.Wiki_mgr().Scripts().Exec(this); Bry_fmtr.Null.Eval_mgr().Enabled_(true);
-		app.Css_installer().Install_assert(Bool_.Y, this, user.Fsys_mgr().Wiki_html_dir(domain_str));
-		Html_mgr__hdump_enabled_(html_mgr__hdump_enabled);
+		app.Html__css_installer().Install(this, Xowd_css_core_mgr.Key_default);
+		Html__hdump_enabled_(html_mgr__hdump_enabled);
 		html_mgr.Init_by_wiki(this);
 		this.Copy_cfg(app.User().Wiki());
 		File_repos_assert(app, this);
@@ -251,7 +251,7 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble {
 		app.Log_wtr().Log_msg_to_session_direct(log_bfr.Xto_str());
 		init_in_process = false;
 	}
-	private void Html_mgr__hdump_enabled_(boolean v) {
+	private void Html__hdump_enabled_(boolean v) {
 		this.html_mgr__hdump_enabled = v;
 		if (html_mgr__hdump_enabled) {
 			// if (db_mgr.Tid() == Xodb_mgr_txt.Tid_txt) this.Db_mgr_create_as_sql();

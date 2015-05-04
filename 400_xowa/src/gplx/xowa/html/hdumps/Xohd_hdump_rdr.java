@@ -23,8 +23,9 @@ public class Xohd_hdump_rdr {
 	private final Bry_bfr_mkr bfr_mkr; private final Xow_hzip_mgr hzip_mgr;
 	private final Xohd_abrv_mgr abrv_mgr; private final Xohd_page_html_mgr__load load_mgr; 
 	private Xowd_db_mgr core_data_mgr; private final Xowd_page_itm dbpg = new Xowd_page_itm(); 
-	public Xohd_hdump_rdr(Xoa_app app, Xow_wiki wiki) {
-		this.bfr_mkr = app.Utl__bfr_mkr(); this.hzip_mgr = wiki.Html_mgr__hzip_mgr();
+	private final Xow_wiki wiki;
+	public Xohd_hdump_rdr(Xoa_app app, Xow_wiki wiki) {			
+		this.bfr_mkr = app.Utl__bfr_mkr(); this.hzip_mgr = wiki.Html__hzip_mgr(); this.wiki = wiki;
 		abrv_mgr = new Xohd_abrv_mgr(app.Usr_dlg(), app.Fsys_mgr(), app.Utl__encoder_mgr().Fsys(), wiki.Domain_bry());
 		load_mgr = new Xohd_page_html_mgr__load();	// TODO: get db_id
 	}
@@ -60,9 +61,9 @@ public class Xohd_hdump_rdr {
 		core_data_mgr.Tbl__page().Select_by_ttl(dbpg, ttl.Ns(), ttl.Page_db());	// get rows from db
 		if (dbpg.Redirect_id() != -1) Get_by_ttl__resolve_redirect(dbpg, rv);
 		if (dbpg.Html_db_id() == -1) return false;								// dbpg does not hdump; exit;
-		rv.Init(dbpg.Id(), null, ttl);	// FIXME
+		rv.Init(wiki, dbpg.Id(), null, ttl);	// FIXME
 		Xowd_db_file html_db = core_data_mgr.Dbs__get_at(dbpg.Html_db_id());
-		load_mgr.Load_page(rv, html_db.Tbl__html(), dbpg.Id(), ttl);
+		load_mgr.Load_page(wiki, rv, html_db.Tbl__html(), dbpg.Id(), ttl);
 		return true;
 	}
 	private void Get_by_ttl__resolve_redirect(Xowd_page_itm dbpg, Xog_page hpg) {
@@ -75,9 +76,9 @@ public class Xohd_hdump_rdr {
 	}
 	public static void Load_module_mgr(Xoh_module_mgr page_module_mgr, Xog_page hpg) {
 		Xopg_module_mgr dump_module_mgr = hpg.Module_mgr();
-		page_module_mgr.Itm_mathjax().Enabled_			(dump_module_mgr.Math_exists());
-		page_module_mgr.Itm_popups().Bind_hover_area_	(dump_module_mgr.Imap_exists());
-		page_module_mgr.Itm_gallery().Enabled_			(dump_module_mgr.Gallery_packed_exists());
-		page_module_mgr.Itm_hiero().Enabled_			(dump_module_mgr.Hiero_exists());
+		page_module_mgr.Itm__mathjax().Enabled_			(dump_module_mgr.Math_exists());
+		page_module_mgr.Itm__popups().Bind_hover_area_	(dump_module_mgr.Imap_exists());
+		page_module_mgr.Itm__gallery().Enabled_			(dump_module_mgr.Gallery_packed_exists());
+		page_module_mgr.Itm__hiero().Enabled_			(dump_module_mgr.Hiero_exists());
 	}
 }

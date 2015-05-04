@@ -94,15 +94,14 @@ public class Prefs_mgr implements GfoInvkAble {
 		try		{app.Cfg_mgr().Set_by_app(String_.new_utf8_(get_cmd), hnde_val);}
 		catch (Exception e) {app.Usr_dlg().Warn_many("", "", "pref update failed: code=~{0} err=~{1}", String_.new_utf8_(eval_code), Err_.Message_gplx_brief(e));}
 	}
-	Object Eval_run(byte[] cmd) {
+	private Object Eval_run(byte[] cmd) {
 		try {return Eval(cmd);}
 		catch (Exception e) {Err_.Noop(e); return null;}		
 	}
-	byte[] Parse_wikitext_to_html(byte[] src) {
+	private byte[] Parse_wikitext_to_html(byte[] src) {
 		Xowe_wiki wiki = app.User().Wiki();		
 		Xop_root_tkn root = new Xop_root_tkn();
-		Xop_ctx ctx = wiki.Ctx();
-		ctx.Cur_page().Clear();
+		Xop_ctx ctx = Xop_ctx.new_(wiki);	// NOTE: always create new ctx; do not reuse existing, else popup will clear out existing page's prefs; DATE:2015-04-29
 		wiki.Parser().Parse_text_to_wdom(root, ctx, ctx.Tkn_mkr(), src, 0);
 		return root.Data_mid();			
 	}

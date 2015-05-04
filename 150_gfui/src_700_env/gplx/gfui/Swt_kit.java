@@ -42,7 +42,9 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Button;
 import org.omg.PortableServer.THREAD_POLICY_ID;
-import gplx.threads.*;
+
+import gplx.core.threads.Thread_adp_;
+import gplx.core.threads.*;
 public class Swt_kit implements Gfui_kit {
 	private final KeyValHash ctor_args = KeyValHash.new_(); private final KeyValHash ctor_args_null = KeyValHash.new_();
 	private final HashAdp kit_args = HashAdp_.new_(); private Swt_msg_wkr_stop msg_wkr_stop;
@@ -125,7 +127,9 @@ public class Swt_kit implements Gfui_kit {
 	}
 	public GfuiInvkCmd New_cmd_sync	(GfoInvkAble invk) 	{return new Swt_gui_cmd(this, gui_wtr, display, invk, Bool_.N);}
 	public GfuiInvkCmd New_cmd_async(GfoInvkAble invk) 	{return new Swt_gui_cmd(this, gui_wtr, display, invk, Bool_.Y);}
-	public GfuiWin New_win_utl(String key, GfuiWin owner, KeyVal... args) {return GfuiWin_.kit_(this, key, new Swt_win(shell), ctor_args_null);	}
+	public GfuiWin New_win_utl(String key, GfuiWin owner, KeyVal... args) {
+		return GfuiWin_.kit_(this, key, new Swt_win(shell), ctor_args_null);
+		}
 	public GfuiWin New_win_app(String key, KeyVal... args) {
 		Swt_win win = new Swt_win(display);
 		this.shell = win.UnderShell();
@@ -134,6 +138,11 @@ public class Swt_kit implements Gfui_kit {
 	}
 	public GfuiBtn New_btn(String key, GfuiElem owner, KeyVal... args) {
 		GfuiBtn rv = GfuiBtn_.kit_(this, key, new Swt_btn_no_border(Swt_control_.cast_or_fail(owner), ctor_args), ctor_args);
+		owner.SubElems().Add(rv);
+		return rv;
+	}
+	public GfuiLbl New_lbl(String key, GfuiElem owner, KeyVal... args) {
+		GfuiLbl rv = GfuiLbl_.kit_(this, key, new Swt_lbl(Swt_control_.cast_or_fail(owner), ctor_args), ctor_args);
 		owner.SubElems().Add(rv);
 		return rv;
 	}
@@ -262,7 +271,7 @@ class Swt_shell_close_lnr implements Listener, GfoInvkAble {
 		}
 		if (kit.Kit_sync_cmd_exists()) {							// sync cmd is running; cannot shut down app else app just hangs; DATE:2015-04-13
 			event.doit = false;										// cancel shutdown
-			ThreadAdp_.invk_(this, Invk_wait_for_sync_cmd).Start();	// wait for sync_cmd to end in background thread; call shutdown again when it does
+			Thread_adp_.invk_(this, Invk_wait_for_sync_cmd).Start();	// wait for sync_cmd to end in background thread; call shutdown again when it does
 		}
 	}
 	private void Wait_for_sync_cmd() {	// THREAD:non-GUI
@@ -273,7 +282,7 @@ class Swt_shell_close_lnr implements Listener, GfoInvkAble {
 				usr_dlg.Log_many("", "", "swt:sync cmd done; shutting down");
 				break;
 			}
-			ThreadAdp_.Sleep(loop_wait);
+			Thread_adp_.Sleep(loop_wait);
 			loop_count++;
 		}
 		if (loop_count == loop_max)

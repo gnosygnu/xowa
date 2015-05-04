@@ -16,9 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hdumps.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.hdumps.*;
-import gplx.core.brys.*;
+import gplx.core.brys.*; import gplx.xowa.files.*;
 public class Xohd_data_itm__gallery_itm extends Xohd_data_itm__base {
 	@Override public int Img_tid() {return Xohd_data_itm__base.Tid_gallery;}
+	@Override public byte Html_elem_tid() {return Xof_html_elem.Tid_img;}
 	public int Box_w() {return box_w;} private int box_w;
 	public int Img_w() {return img_w;} private int img_w;
 	public int Img_pad() {return img_pad;} private int img_pad;

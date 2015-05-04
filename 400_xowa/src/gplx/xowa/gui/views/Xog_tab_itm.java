@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
-import gplx.threads.*; import gplx.gfui.*; import gplx.xowa.gui.history.*; import gplx.xowa.gui.bnds.*;
+import gplx.core.threads.*; import gplx.gfui.*; import gplx.xowa.gui.history.*; import gplx.xowa.gui.bnds.*;
 import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.cfgs2.*;
 import gplx.xowa.pages.*; import gplx.xowa.pages.skins.*;
@@ -37,7 +37,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 		html_box.Html_js_enabled_(gui_mgr.Html_mgr().Javascript_enabled());
 		html_box.Html_invk_src_(win);
 		html_itm.Html_box_(html_box);
-		if (app.Mode() == Xoa_app_.Mode_gui) {	// NOTE: only run for gui; will cause firefox addon to fail; DATE:2014-05-03
+		if (app.App_type().Uid_is_gui()) {	// NOTE: only run for gui; will cause firefox addon to fail; DATE:2014-05-03
 			html_box.Html_doc_html_load_by_mem("");	// NOTE: must set source, else control will be empty, and key events will not be raised; DATE:2014-04-30
 			IptBnd_.ipt_to_(IptCfg_.Null, html_box, this, "popup", IptEventType_.MouseDown, IptMouseBtn_.Right);
 			GfoEvMgr_.SubSame(html_box, GfuiElemKeys.Evt_menu_detected, html_itm);
@@ -111,13 +111,14 @@ public class Xog_tab_itm implements GfoInvkAble {
 			wiki.Lang().Vnt_mgr().Cur_vnt_(url.Xowa_vnt());
 		if (win.Page__async__working(url)) return;
 		app.Gui_mgr().Search_suggest_mgr().Cancel();			// cancel pending search_suggest calls
-		if (page != null) page.Tab_data().Close_mgr().When_close(this);			// cancel any current search cmds
+		if (page != null) page.Tab_data().Close_mgr().When_close(this, url);			// cancel any current search cmds
 		app.Log_wtr().Queue_enabled_(true);
 		usr_dlg.Clear();
 		this.wiki = app.Wiki_mgr().Get_by_key_or_null(url.Wiki_bry());	// NOTE: must update wiki
 		wiki.Init_assert();	// NOTE: assert wiki.Init before parsing; needed b/c lang (with lang-specific ns) is only loaded on init, and parse Xoa_ttl.parse_ will fail below; EX:pt.wikipedia.org/wiki/Wikipedia:P�gina principal
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, url.Page_bry());
 		if (ttl == null) {usr_dlg.Prog_one("", "", "title is invalid: ~{0}", String_.new_utf8_(url.Raw())); return;}
+		Tab_name_(String_.new_utf8_(ttl.Full_txt()));
 		usr_dlg.Prog_one("", "", "loading: ~{0}", String_.new_utf8_(ttl.Raw()));
 		if (app.Api_root().Html().Modules().Popups().Enabled())
 			this.Html_box().Html_js_eval_script("if (window.xowa_popups_hide_all != null) window.xowa_popups_hide_all();");	// should be more configurable; DATE:2014-07-09
@@ -159,14 +160,15 @@ public class Xog_tab_itm implements GfoInvkAble {
 				app.User().Data_mgr().History_mgr().Update_async(app.Async_mgr(), ttl, url);
 			}
 			usr_dlg.Prog_none("", "", "rendering html");
+			html_itm.Html_box().Size_(tab_mgr.Tab_mgr().Size()); // NOTE: must resize tab here, else scrolling to anchor in background tab doesn't work (html_box has size of 0, 0) DATE:2015-05-03
 			//	win.Page__async__bgn(this);
 			Gfo_thread_wkr async_wkr = null;				
 			if (wkr.Hdump_enabled()) {
 				wiki.File_mgr().Init_file_mgr_by_load(wiki);
 				Xof_fsdb_mgr fsdb_mgr = wiki.File_mgr().Fsdb_mgr();
-				async_wkr = new Xof_file_wkr(wiki.File_mgr__orig_mgr(), fsdb_mgr.Bin_mgr(), fsdb_mgr.Mnt_mgr(), app.File_mgr__cache_mgr(), wiki.File_mgr__repo_mgr(), html_itm, page, page.Hdump_data().Imgs(), gplx.xowa.files.Xof_exec_tid.Tid_wiki_page);
-				if (wiki.Html_mgr__hdump_enabled()) {
-					wiki.Html_mgr__hdump_wtr().Save(page);
+				async_wkr = new Xof_file_wkr(wiki.File__orig_mgr(), fsdb_mgr.Bin_mgr(), fsdb_mgr.Mnt_mgr(), app.File__cache_mgr(), wiki.File__repo_mgr(), html_itm, page, page.Hdump_data().Imgs(), gplx.xowa.files.Xof_exec_tid.Tid_wiki_page);
+				if (wiki.Html__hdump_enabled()) {
+					wiki.Html__hdump_wtr().Save(page);
 				}
 			}
 			else
@@ -179,11 +181,11 @@ public class Xog_tab_itm implements GfoInvkAble {
 			this.tab_is_loading = false;
 		}
 	}
-	public void Exec_async_hdump(Xoa_app app, Xow_wiki wiki, gplx.xowa.files.gui.Xog_js_wkr js_wkr, gplx.threads.Gfo_thread_pool thread_pool, Xoa_page page, ListAdp imgs, int[] redlink_ary) {
+	public void Exec_async_hdump(Xoa_app app, Xow_wiki wiki, gplx.xowa.files.gui.Xog_js_wkr js_wkr, gplx.core.threads.Gfo_thread_pool thread_pool, Xoa_page page, ListAdp imgs, int[] redlink_ary) {
 		if (imgs.Count() > 0) {
 			Xof_file_wkr file_thread = new Xof_file_wkr
-				( wiki.File_mgr__orig_mgr(), wiki.File_mgr__bin_mgr(), wiki.File_mgr__mnt_mgr()
-				, app.File_mgr__cache_mgr(), wiki.File_mgr__repo_mgr(), html_itm, page, imgs
+				( wiki.File__orig_mgr(), wiki.File__bin_mgr(), wiki.File__mnt_mgr()
+				, app.File__cache_mgr(), wiki.File__repo_mgr(), html_itm, page, imgs
 				, gplx.xowa.files.Xof_exec_tid.Tid_wiki_page);
 			thread_pool.Add_at_end(file_thread); thread_pool.Run();
 		}
@@ -215,7 +217,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 				if (page.Html_data().Xtn_gallery_packed_exists())	// packed_gallery exists; fire js once; PAGE:en.w:National_Sculpture_Museum_(Valladolid); DATE:2014-07-21
 					html_itm.Html_gallery_packed_exec();
 				if (	page.Html_data().Xtn_imap_exists()			// imap exists; DATE:2014-08-07
-					&&	page.Html_data().Module_mgr().Itm_popups().Enabled()
+					&&	page.Html_data().Module_mgr().Itm__popups().Enabled()
 					)
 					html_itm.Html_popups_bind_hover_to_doc();		// rebind all elements to popup
 			}
@@ -245,7 +247,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 		try {
 			if (page.Tab_data().Tab() != null) {	// needed b/c Preview has page.Tab of null which causes null_ref error in redlinks
 				Xog_redlink_mgr redlinks_wkr = new Xog_redlink_mgr(win_itm, page, app.User().Cfg_mgr().Log_mgr().Log_redlinks());
-				ThreadAdp_.invk_(gplx.xowa.apps.Xoa_thread_.Key_page_redlink, redlinks_wkr, gplx.xowa.parsers.lnkis.redlinks.Xog_redlink_mgr.Invk_run).Start();
+				Thread_adp_.invk_(gplx.xowa.apps.Xoa_thread_.Key_page_redlink, redlinks_wkr, gplx.xowa.parsers.lnkis.redlinks.Xog_redlink_mgr.Invk_run).Start();
 				usr_dlg.Prog_none("", "imgs.done", "");
 			}
 		}	catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.redlinks: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_brief(e));}
@@ -260,43 +262,6 @@ public class Xog_tab_itm implements GfoInvkAble {
 		return this;
 	}
 	public static final String Invk_show_url_loaded_swt = "show_url_loaded_swt", Invk_show_url_failed_swt = "show_url_failed_swt";
-}
-class Load_page_wkr implements Gfo_thread_wkr {
-	private Xog_tab_itm tab;
-	public Load_page_wkr(Xog_tab_itm tab, Xowe_wiki wiki, Xoa_url url, Xoa_ttl ttl) {this.tab = tab; this.wiki = wiki; this.url = url; this.ttl = ttl;}
-	public String Name() {return "xowa.load_page_wkr";}
-	public boolean Resume() {return false;}
-	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
-	public Xoae_page Page() {return page;} private Xoae_page page;
-	public Xoa_url Url() {return url;} private Xoa_url url;
-	public Xoa_ttl Ttl() {return ttl;} private Xoa_ttl ttl;
-	public boolean Hdump_enabled() {return hdump_enabled;} private boolean hdump_enabled;
-	public Exception Exc() {return exc;} private Exception exc;
-	public void Exec() {
-		try {
-			Xoae_app app = wiki.Appe();
-			app.Usr_dlg().Log_many("", "", "page.load: url=~{0}", url.Xto_full_str_safe());
-			if (Env_.System_memory_free() < app.Sys_cfg().Free_mem_when())	// check if low in memory
-				app.Free_mem(false);										// clear caches (which will clear bry_bfr_mk)
-			else															// not low in memory
-				app.Utl__bfr_mkr().Clear();									// clear bry_bfr_mk only; NOTE: call before page parse, not when page is first added, else threading errors; DATE:2014-05-30
-			this.page = wiki.GetPageByTtl(url, ttl, wiki.Lang(), tab, false);
-			int html_db_id = page.Revision_data().Html_db_id();
-			if (wiki.Html_mgr__hdump_enabled())
-				hdump_enabled = true;
-			if (wiki.Html_mgr__hdump_enabled() && html_db_id != -1) {
-				wiki.ParsePage(page, false);
-//					wiki.Html_mgr__hdump_rdr().Get_by_ttl(page);
-			}
-			else
-				wiki.ParsePage(page, false);
-			GfoInvkAble_.InvkCmd_val(tab.Cmd_sync(), Xog_tab_itm.Invk_show_url_loaded_swt, this);
-		}
-		catch (Exception e) {
-			this.exc = e;
-			GfoInvkAble_.InvkCmd_val(tab.Cmd_sync(), Xog_tab_itm.Invk_show_url_failed_swt, this);
-		}
-	}
 }
 class Load_files_wkr implements Gfo_thread_wkr {
 	private Xog_tab_itm tab;

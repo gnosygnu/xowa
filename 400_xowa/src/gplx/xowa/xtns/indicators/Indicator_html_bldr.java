@@ -18,9 +18,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.indicators; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 public class Indicator_html_bldr implements Bry_fmtr_arg {
 	private Indicator_html_bldr_itm bldr_itm = new Indicator_html_bldr_itm();
-	private ListAdp list = ListAdp_.new_();
-	public void Add(Indicator_xnde xnde) {list.Add(xnde);}
+	private OrderedHash list = OrderedHash_.new_();
+	public void Enabled_(boolean v) {enabled = v;} private boolean enabled = Bool_.Y;
+	public void Clear() {
+		enabled = Bool_.Y;
+		list.Clear();
+	}
+	public int Count() {return list.Count();}
+	public boolean Has(String key) {return list.Has(key);}
+	public void Add(Indicator_xnde xnde) {
+		if (!enabled) return;				// do not add if disabled; called from <page>; PAGE:en.s:The_Parochial_System_(Wilberforce,_1838); DATE:2015-04-29
+		list.AddReplace(xnde.Name(), xnde);	// AddReplace: 2nd indicator overwrites 1st; DATE:2015-04-29
+	}
 	public void XferAry(Bry_bfr bfr, int idx) {
+		if (list.Count() == 0) return;		// do not build html if no items; DATE:2015-04-29
 		bldr_itm.Init(list);
 		fmtr_grp.Bld_bfr_many(bfr, bldr_itm);
 	}
@@ -33,13 +44,13 @@ public class Indicator_html_bldr implements Bry_fmtr_arg {
 	;
 }
 class Indicator_html_bldr_itm implements Bry_fmtr_arg {
-	private ListAdp list;
-	public void Init(ListAdp list) {this.list = list;}
+	private OrderedHash list;
+	public void Init(OrderedHash list) {this.list = list;}
 	public void XferAry(Bry_bfr bfr, int idx) {
 		int list_len = list.Count();
 		for (int i = list_len - 1; i > -1; --i) {	// reverse order
 			Indicator_xnde xnde = (Indicator_xnde)list.FetchAt(i);
-			fmtr_itm.Bld_bfr(bfr, xnde.Name(), xnde.Html());
+			fmtr_itm.Bld_bfr_many(bfr, xnde.Name(), xnde.Html());
 		}
 	}
 	private static final Bry_fmtr

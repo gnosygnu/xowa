@@ -21,7 +21,7 @@ public class Json_itm_int extends Json_itm_base {
 	@Override public byte Tid() {return Json_itm_.Tid_int;}
 	public int Data_as_int() {
 		if (data_is_null) {
-			data = doc.Utl_num_parser().Parse(doc.Src(), Src_bgn(), Src_end()).AsInt();
+			data = doc.Utl_num_parser().Parse(doc.Src(), Src_bgn(), Src_end()).Rv_as_int();
 			data_is_null = false;
 		}
 		return data;

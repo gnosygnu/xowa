@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.modules.popups; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.modules.*;
-import gplx.core.primitives.*; import gplx.threads.*;
+import gplx.core.primitives.*; import gplx.core.threads.*;
 import gplx.web.js.*;
 import gplx.xowa.gui.views.*;
 import gplx.xowa.specials.*; import gplx.xowa.specials.search.*;
@@ -25,7 +25,7 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 	private Xoae_app app; private Xowe_wiki wiki; private Js_wtr js_wtr = new Js_wtr();
 	private int show_init_word_count = Xoapi_popups.Dflt_show_init_word_count, show_more_word_count = Xoapi_popups.Dflt_show_more_word_count;
 	private Xoh_href temp_href = new Xoh_href(); 
-	private Object async_thread_guard = new Object(); private Xow_popup_itm async_itm; private GfoInvkAble async_cmd_show; private int async_id_next = 1;
+	private static final Object thread_lock = new Object(); private Xow_popup_itm async_itm; private GfoInvkAble async_cmd_show; private int async_id_next = 1;
 	public Xow_popup_mgr(Xowe_wiki wiki) {
 		this.wiki = wiki; this.app = wiki.Appe();
 		ev_mgr = GfoEvMgr.new_(this);
@@ -83,24 +83,37 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 	}
 	public String Get_async_bgn(byte[] js_cbk, byte[] href) {
 		if (Bry_.HasAtBgn(href, gplx.xowa.parsers.lnkes.Xop_lnke_wkr.Bry_xowa_protocol)) return null; // ignore xowa-cmd
-		synchronized (async_thread_guard) {
+		synchronized (thread_lock) {
 			if (async_itm != null) async_itm.Cancel();
 			async_itm = new Xow_popup_itm(++async_id_next, href, Bry_.Empty, show_init_word_count);
 			String id_str = async_itm.Popup_id();
-			ThreadAdp_.invk_(id_str, this, Invk_show_popup_async).Start();
+			Thread_adp_.invk_(id_str, this, Invk_show_popup_async).Start();
 			return id_str;
+		}
+	}
+	public static boolean Running() {
+		boolean rv = false;
+		synchronized (thread_lock) {
+			rv = running;
+		}
+		return rv;
+	}	private static boolean running = false;
+	private static void Running_(boolean v) {
+		synchronized (thread_lock) {
+			running = v;
 		}
 	}
 	private byte[] Get_popup_html(Xowe_wiki cur_wiki, Xoae_page cur_page, Xow_popup_itm itm) {
 		try {
-			synchronized (async_thread_guard) {	// queue popups to reduce contention with Load_page_wkr; DATE:2014-08-24
+			synchronized (thread_lock) {	// queue popups to reduce contention with Load_page_wkr; DATE:2014-08-24
 //					Load_popup_wkr load_popup_wkr = new Load_popup_wkr(wiki, cur_page, itm, temp_href, ns_allowed_regy, ns_allowed_regy_key);
 //					app.Thread_mgr().Page_load_mgr().Add_at_end(load_popup_wkr);
 //					load_popup_wkr.Exec();
 //					while (!load_popup_wkr.Rslt_done()) {
-//						ThreadAdp_.Sleep(100);
+//						Thread_adp_.Sleep(100);
 //					}
 //					return load_popup_wkr.Rslt_bry();
+				Running_(true);
 				if (itm.Canceled()) return null;
 				cur_page.Popup_mgr().Itms().AddReplace(itm.Popup_id(), itm);
 				app.Href_parser().Parse(temp_href, itm.Page_href(), wiki, cur_page.Ttl().Full_url());			// NOTE: use Full_url, not Page_url, else anchors won't work for non-main ns; PAGE:en.w:Project:Sandbox; DATE:2014-08-07
@@ -118,6 +131,10 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 				}
 				if (ns_allowed_regy.Count() > 0 && !ns_allowed_regy.Has(ns_allowed_regy_key.Val_(popup_ttl.Ns().Id()))) return Bry_.Empty;
 				itm.Init(popup_wiki.Domain_bry(), popup_ttl);
+				int wait_count = 0;
+				while (gplx.xowa.gui.views.Load_page_wkr.Running() && ++wait_count < 100) {
+					Thread_adp_.Sleep(10);
+				}
 				Xoae_page popup_page = popup_wiki.Data_mgr().Get_page(popup_ttl, false);
 				byte[] rv = popup_wiki.Html_mgr().Module_mgr().Popup_mgr().Parser().Parse(wiki, popup_page, cur_page.Tab_data().Tab(), itm);
 				Update_progress_bar(app, cur_wiki, cur_page, itm);
@@ -127,6 +144,9 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 		catch(Exception e) {
 			app.Usr_dlg().Warn_many("", "", "failed to get popup: href=~{0} err=~{1}", String_.new_utf8_(itm.Page_href()), Err_.Message_gplx_brief(e));
 			return null;
+		}
+		finally {
+			Running_(false);
 		}
 	}
 	public static void Update_progress_bar(Xoae_app app, Xowe_wiki cur_wiki, Xoae_page cur_page, Xow_popup_itm itm) {
@@ -142,7 +162,7 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 	}
 	private void Show_popup_async() {
 		try {
-			synchronized (async_thread_guard) {
+			synchronized (thread_lock) {
 				Xoae_page cur_page = app.Gui_mgr().Browser_win().Active_page();
 				async_itm.Popup_html_(Get_popup_html(app.Gui_mgr().Browser_win().Active_wiki(), cur_page, async_itm));
 			}
@@ -250,17 +270,26 @@ class Load_popup_wkr implements Gfo_thread_wkr {
 	public void Exec() {
 		Xoae_app app = wiki.Appe();
 		try {
-			if (itm.Canceled()) {Rslt_(null); return;}
+			if (itm.Canceled()) return;
 			cur_page.Popup_mgr().Itms().AddReplace(itm.Popup_id(), itm);
-			app.Href_parser().Parse(temp_href, itm.Page_href(), wiki, cur_page.Ttl().Full_url());	// NOTE: use Full_url, not Page_url, else anchors won't work for non-main ns; PAGE:en.w:Project:Sandbox; DATE:2014-08-07
+			app.Href_parser().Parse(temp_href, itm.Page_href(), wiki, cur_page.Ttl().Full_url());			// NOTE: use Full_url, not Page_url, else anchors won't work for non-main ns; PAGE:en.w:Project:Sandbox; DATE:2014-08-07
+			if (temp_href.Protocol_tid() == gplx.xowa.net.Xoo_protocol_itm.Tid_file) return;			// NOTE: do not get popups for "file:///"; DATE:2015-04-05
 			Xowe_wiki popup_wiki = app.Wiki_mgr().Get_by_key_or_null(temp_href.Wiki());
 			popup_wiki.Init_assert();
 			Xoa_ttl popup_ttl = Xoa_ttl.parse_(popup_wiki, temp_href.Page_and_anchor());
-			if (ns_allowed_regy.Count() > 0 && !ns_allowed_regy.Has(ns_allowed_regy_key.Val_(popup_ttl.Ns().Id()))) {Rslt_(Bry_.Empty); return;}
+			switch (popup_ttl.Ns().Id()) {
+				case Xow_ns_.Id_media:
+				case Xow_ns_.Id_file:
+					return;		// do not popup for media or file
+				case Xow_ns_.Id_special:
+					if (!Xows_special_meta_.Itm__popup_history.Match_ttl(popup_ttl)) return;	// do not popup for special, unless popupHistory; DATE:2015-04-20
+					break;
+			}
+			if (ns_allowed_regy.Count() > 0 && !ns_allowed_regy.Has(ns_allowed_regy_key.Val_(popup_ttl.Ns().Id()))) return;
 			itm.Init(popup_wiki.Domain_bry(), popup_ttl);
 			Xoae_page popup_page = popup_wiki.Data_mgr().Get_page(popup_ttl, false);
 			byte[] rv = popup_wiki.Html_mgr().Module_mgr().Popup_mgr().Parser().Parse(wiki, popup_page, cur_page.Tab_data().Tab(), itm);
-			Xow_popup_mgr.Update_progress_bar(app, popup_wiki, cur_page, itm);
+			Xow_popup_mgr.Update_progress_bar(app, wiki, cur_page, itm);
 			Rslt_(rv);
 		}
 		catch(Exception e) {

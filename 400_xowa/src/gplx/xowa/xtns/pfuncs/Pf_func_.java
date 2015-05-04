@@ -40,7 +40,7 @@ public class Pf_func_ {
 		tkn.Tmpl_evaluate(ctx, src, caller, bfr);
 		return bfr.Xto_bry_and_clear();
 	}
-	private static final NumberParser lhs_parser = new NumberParser().Hex_enabled_(true), rhs_parser = new NumberParser().Hex_enabled_(true);
+	private static final Number_parser lhs_parser = new Number_parser().Hex_enabled_(true), rhs_parser = new Number_parser().Hex_enabled_(true);
 	public static boolean Eq_(byte[] lhs, byte[] rhs) {	// PATCH.PHP: php allows "003" == "3.0"; ASSUME: numbers are either int or int-like decimal; long, float, decimal not supported
 		int lhs_len = lhs.length, rhs_len = rhs.length;
 		boolean rv = true;
@@ -56,10 +56,10 @@ public class Pf_func_ {
 		else if (lhs_len == 0 || rhs_len == 0)	// one side is empty String and the other side is String; return false;
 			return false;
 		lhs_parser.Parse(lhs, 0, lhs_len);
-		if (lhs_parser.HasErr()) return false;
+		if (lhs_parser.Has_err()) return false;
 		rhs_parser.Parse(rhs, 0, rhs_len);
-		if (rhs_parser.HasErr()) return false;
-		return lhs_parser.HasFrac() || rhs_parser.HasFrac() ? lhs_parser.AsDec().Eq(rhs_parser.AsDec()) : lhs_parser.AsInt() == rhs_parser.AsInt();
+		if (rhs_parser.Has_err()) return false;
+		return lhs_parser.Has_frac() || rhs_parser.Has_frac() ? lhs_parser.Rv_as_dec().Eq(rhs_parser.Rv_as_dec()) : lhs_parser.Rv_as_int() == rhs_parser.Rv_as_int();
 	}
 	public static void Reg(gplx.xowa.langs.Xol_func_name_regy func_regy, Xol_lang lang) {
 		Xol_kwd_mgr kwd_mgr = lang.Kwd_mgr();

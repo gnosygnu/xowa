@@ -20,53 +20,50 @@ import gplx.core.primitives.*; import gplx.dbs.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.langs.cases.*;
 import gplx.gfui.*;
 class Xows_db_wkr {
-	private final Object thread_lock = new Object();
 	public void Search(Xows_ui_cmd cmd, Xows_ui_qry qry, Xows_ui_rslt rslt, Xows_db_cache cache, Xow_wiki wiki) {
-		synchronized (thread_lock){
-			// assert matcher
-			Xowd_db_file search_db = wiki.Data_mgr__core_mgr().Db__search();
-			Xoa_app_.Usr_dlg().Prog_many("", "", "search started (please wait)");
-			Xows_db_matcher matcher = cache.Matcher();
-			if (matcher == null) {
-				cache.Init_by_db
-				( cmd
-				, wiki.Lang().Case_mgr().Case_build_lower(qry.Search_raw())	// lower-case search
-				, search_db.Tbl__search_word()
-				);
-				matcher = cache.Matcher();
-			}
-			// init
-			int rslts_wanted = qry.Itms_end() - qry.Itms_bgn();
-			Xowd_db_file core_db = wiki.Data_mgr__core_mgr().Db__core();
-			Xowd_page_tbl page_tbl = core_db.Tbl__page();
-			Xowd_search_link_tbl link_tbl = search_db.Tbl__search_link();
-			Xows_db_word[] word_ary = cache.Words(); int word_ary_len = word_ary.length;
-			// read pages for each word from db
-			Db_attach_rdr attach_rdr = new Db_attach_rdr(search_db.Conn(), "page_db", core_db.Url());
-			attach_rdr.Attach();
-			int total_found = 0;
-			try {
-				while (true) {
-					boolean found_none = true;
-					for (int i = 0; i < word_ary_len; ++i) {	// loop each word to get rslts_wanted
-						if (cmd.Canceled()) return;
-						Xows_db_word word = word_ary[i];
-						if (word.Rslts_done()) continue;		// last db_search for word returned 0 results; don't search again;
-						int offset = word.Rslts_offset();
-						Xoa_app_.Usr_dlg().Prog_many("", "", "searching; wiki=~{0} total=~{1} offset=~{2} index=~{3} word=~{4}", wiki.Domain_str(), word_ary_len, offset, i, word.Text());
-						String sql = String_.Format(Search_sql, link_tbl.Tbl_name(), link_tbl.Fld_page_id(), link_tbl.Fld_word_id(), word.Id(), "page_len", "DESC", Int_.MaxValue, offset); // need to return enough results to fill qry.Page_len() as many results may be discarded below; DATE:2015-04-24
-						int rslts_found = Search_pages(cmd, qry, rslt, cache, wiki, page_tbl, attach_rdr, sql, word, matcher, rslts_wanted);
-						total_found += rslts_found;
-						if		(rslts_found == -1)		return;				// canceled
-						else if (rslts_found > 0)		found_none = false;	// NOTE: do not reverse and do rslts_found == 0; want to check if any word returns results;
-					}
-					if (found_none)					{cache.Done_y_(); break;}
-					if (total_found >= rslts_wanted) break;
-				}
-				cache.Itms_end_(qry.Itms_end());
-				cache.Sort();
-			}	finally {attach_rdr.Detach();}
+		// assert matcher
+		Xowd_db_file search_db = wiki.Data_mgr__core_mgr().Db__search();
+		Xoa_app_.Usr_dlg().Prog_many("", "", "search started (please wait)");
+		Xows_db_matcher matcher = cache.Matcher();
+		if (matcher == null) {
+			cache.Init_by_db
+			( cmd
+			, wiki.Lang().Case_mgr().Case_build_lower(qry.Search_raw())	// lower-case search
+			, search_db.Tbl__search_word()
+			);
+			matcher = cache.Matcher();
 		}
+		// init
+		int rslts_wanted = qry.Itms_end() - qry.Itms_bgn();
+		Xowd_db_file core_db = wiki.Data_mgr__core_mgr().Db__core();
+		Xowd_page_tbl page_tbl = core_db.Tbl__page();
+		Xowd_search_link_tbl link_tbl = search_db.Tbl__search_link();
+		Xows_db_word[] word_ary = cache.Words(); int word_ary_len = word_ary.length;
+		// read pages for each word from db
+		Db_attach_rdr attach_rdr = new Db_attach_rdr(search_db.Conn(), "page_db", core_db.Url());
+		attach_rdr.Attach();
+		int total_found = 0;
+		try {
+			while (true) {
+				boolean found_none = true;
+				for (int i = 0; i < word_ary_len; ++i) {	// loop each word to get rslts_wanted
+					if (cmd.Canceled()) return;
+					Xows_db_word word = word_ary[i];
+					if (word.Rslts_done()) continue;		// last db_search for word returned 0 results; don't search again;
+					int offset = word.Rslts_offset();
+					Xoa_app_.Usr_dlg().Prog_many("", "", "searching; wiki=~{0} total=~{1} offset=~{2} index=~{3} word=~{4}", wiki.Domain_str(), word_ary_len, offset, i, word.Text());
+					String sql = String_.Format(Search_sql, link_tbl.Tbl_name(), link_tbl.Fld_page_id(), link_tbl.Fld_word_id(), word.Id(), "page_len", "DESC", Int_.MaxValue, offset); // need to return enough results to fill qry.Page_len() as many results may be discarded below; DATE:2015-04-24
+					int rslts_found = Search_pages(cmd, qry, rslt, cache, wiki, page_tbl, attach_rdr, sql, word, matcher, rslts_wanted);
+					total_found += rslts_found;
+					if		(rslts_found == -1)		return;				// canceled
+					else if (rslts_found > 0)		found_none = false;	// NOTE: do not reverse and do rslts_found == 0; want to check if any word returns results;
+				}
+				if (found_none)					{cache.Done_y_(); break;}
+				if (total_found >= rslts_wanted) break;
+			}
+			cache.Itms_end_(qry.Itms_end());
+			cache.Sort();
+		}	finally {attach_rdr.Detach();}
 	}
 	private int Search_pages(Xows_ui_cmd cmd, Xows_ui_qry qry, Xows_ui_rslt rslt, Xows_db_cache cache, Xow_wiki wiki, Xowd_page_tbl page_tbl, Db_attach_rdr attach_rdr, String sql, Xows_db_word word, Xows_db_matcher matcher, int rslts_wanted) {
 		int rslts_found = 0;

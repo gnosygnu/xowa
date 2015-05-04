@@ -17,5 +17,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 public interface Xog_tab_close_lnr {
-	boolean When_close(Xog_tab_itm tab);
+	boolean When_close(Xog_tab_itm tab, Xoa_url url);
 }

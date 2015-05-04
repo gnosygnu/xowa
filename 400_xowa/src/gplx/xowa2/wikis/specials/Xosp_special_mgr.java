@@ -23,7 +23,7 @@ public class Xosp_special_mgr {
 	public Xosp_special_mgr(Xowv_wiki wiki) {this.wiki = wiki;}
 	public void Get_by_ttl(Xog_page rv, Gfo_url url, Xoa_ttl ttl) {
 		Xosp_fbrow_rslt rslt = Xosp_fbrow_special.Gen(url.Args(), wiki.Appv().Wiki_mgr());
-		rv.Init(-1, null, ttl);
+		rv.Init(wiki, -1, null, ttl);
 		rv.Page_body_(rslt.Html_body());
 		rv.Html_head_xtn_(rslt.Html_head());
 	}

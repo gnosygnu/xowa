@@ -69,7 +69,7 @@ public class Xows_page__search implements Xows_page, GfoInvkAble, GfoEvObj {
 		Xoa_ttl search_ttl = Xoa_ttl.parse_(wiki, search_bry); 
 		Xoae_page search_page = page;
 		if (!Bry_.Eq(search_bry, Xows_special_meta_.Itm__search.Ttl_bry()))	// do not lookup page else stack overflow; happens when going directly to Special:Search (from history)
-			search_page = wiki.Data_mgr().Get_page(search_ttl, false);	// try to find page; EX:Special:Searc?search=Earth -> en.w:Earth; needed for search suggest
+			search_page = wiki.Data_mgr().Get_page(search_ttl, false);	// try to find page; EX:Special:Search?search=Earth -> en.w:Earth; needed for search suggest
 		// page not found, or explicit_search invoked
 		if (search_page.Missing() || url.Search_fulltext()) {
 			if (args_mgr.Cancel() != null) {

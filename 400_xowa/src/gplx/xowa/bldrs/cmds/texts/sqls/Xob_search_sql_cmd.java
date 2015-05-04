@@ -46,7 +46,7 @@ public class Xob_search_sql_cmd extends Xob_itm_basic_base implements Xob_cmd {	
 			while (page_rdr.Move_next()) {
 				int page_id = page_rdr.Read_int(fld_page_id);
 				byte[] ttl = page_rdr.Read_bry_by_str(fld_page_ttl);
-				byte[][] words = Xob_search_base.Split(lang, hash, bfr, ttl);
+				byte[][] words = Xob_search_base.Split_ttl_into_words(lang, hash, bfr, ttl);
 				int words_len = words.length;
 				for (int i = 0; i < words_len; i++) {
 					byte[] word = words[i];

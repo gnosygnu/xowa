@@ -93,7 +93,7 @@ public class Gfui_bnd_parser {
 	private void Process_sym(boolean src_is_gfui, Gfui_bnd_tkn sym_tkn, int itm_bgn, int itm_end) {
 		Hash_adp_bry regy = src_is_gfui ? gfui_regy : norm_regy;
 		Gfui_bnd_tkn tkn = (Gfui_bnd_tkn)regy.Get_by_mid(src, itm_bgn, itm_end);
-		if (tkn == null) throw Err_.new_fmt_("unknown key: key={0}", String_.new_utf8_(src, itm_bgn, itm_end));
+		if (tkn == null) return;
 		int mod_adj = Mod_val_null;
 		switch (tkn.Tid()) {
 			case Gfui_bnd_tkn.Tid_mod_c:		mod_adj = Gfui_bnd_tkn.Tid_mod_c; break;

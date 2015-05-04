@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.gfui.*; import gplx.threads.*; import gplx.xowa.gui.*; import gplx.xowa.gui.views.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.gfui.*; import gplx.core.threads.*; import gplx.xowa.gui.*; import gplx.xowa.gui.views.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.web.js.*;
 public class Xog_search_suggest_mgr implements GfoInvkAble {
 	public Xog_search_suggest_mgr(Xoa_gui_mgr gui_mgr) {
@@ -53,14 +53,14 @@ public class Xog_search_suggest_mgr implements GfoInvkAble {
 	}
 	public void Search(Xowe_wiki wiki, byte[] search_bry, byte[] cbk_func) {
 		this.wiki = wiki; this.search_bry = search_bry; this.cbk_func = cbk_func;
-		ThreadAdp_.invk_(gplx.xowa.apps.Xoa_thread_.Key_special_suggest, this, Invk_search_async).Start();
+		Thread_adp_.invk_(gplx.xowa.apps.Xoa_thread_.Key_special_suggest, this, Invk_search_async).Start();
 	}	private Xowe_wiki wiki; private byte[] search_bry, cbk_func;
-	private Object thread_guard = new Object();
+	private Object thread_lock = new Object();
 	private void Search_async() {
 		if (!enabled) return;
 		if (search_bry.length == 0) return;
 		this.Cancel();
-		synchronized (thread_guard) {
+		synchronized (thread_lock) {
 			if (Bry_.Eq(search_bry , last_search_bry)) {
 				if (log_enabled) app.Usr_dlg().Log_many("", "", "search repeated?: word=~{0}", String_.new_utf8_(search_bry));
 				return;
@@ -72,7 +72,7 @@ public class Xog_search_suggest_mgr implements GfoInvkAble {
 		}
 	}	private Xog_search_suggest_cmd cur_cmd; byte[] last_search_bry;
 	public void Notify() {// EX: receiveSuggestions('search_word', ['result_1', 'result_2']);
-		// synchronized (thread_guard) NOTE: never use synchronized here; will synchronized search; DATE:2013-09-24
+		// synchronized (thread_lock) NOTE: never use synchronized here; will synchronized search; DATE:2013-09-24
 		byte[] search_bry = cur_cmd.Search_bry();
 		if (!Bry_.Eq(search_bry, last_search_bry)) {
 			if (log_enabled) app.Usr_dlg().Log_many("", "", "search does not match?: expd=~{0} actl=~{1}", String_.new_utf8_(last_search_bry), String_.new_utf8_(search_bry));

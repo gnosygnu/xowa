@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
-import gplx.threads.*;
+import gplx.core.threads.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -147,7 +147,7 @@ public class ProcessAdp implements GfoInvkAble, RlsAble {
 	        while (thread.isAlive()) {
 	        	thread_run = true;
 	        	long prv = Env_.TickCount();
-	        	ThreadAdp_.Sleep(thread_interval);
+	        	Thread_adp_.Sleep(thread_interval);
 //	        	try {thread.join(thread_interval);}
 //	        	catch (InterruptedException e) {throw Err_.err_key_(e, "gplx.ProcessAdp", "thread interrupted at join");}
 	        	long cur = Env_.TickCount();

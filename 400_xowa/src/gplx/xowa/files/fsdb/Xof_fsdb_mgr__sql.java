@@ -29,10 +29,10 @@ public class Xof_fsdb_mgr__sql implements Xof_fsdb_mgr, GfoInvkAble {
 		if (init) return;
 		try {
 			init = true;
-			if (wiki.File_mgr__fsdb_mode().Tid_wmf()) return;
+			if (wiki.File__fsdb_mode().Tid_wmf()) return;
 			Xoa_app app = wiki.App();
-			this.cache_mgr = app.File_mgr__cache_mgr(); this.url_bldr = Xof_url_bldr.new_v2_(); 
-			this.repo_mgr = wiki.File_mgr__repo_mgr(); Xof_img_mgr img_mgr = app.File_mgr__img_mgr();
+			this.cache_mgr = app.File__cache_mgr(); this.url_bldr = Xof_url_bldr.new_v2_(); 
+			this.repo_mgr = wiki.File__repo_mgr(); Xof_img_mgr img_mgr = app.File__img_mgr();
 			Fsdb_db_mgr core = Fsdb_db_mgr_.new_detect(wiki, wiki.Fsys_mgr().Root_dir(), wiki.Fsys_mgr().File_dir());
 			if (core == null) return;
 			fsdb_enabled = true;

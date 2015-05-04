@@ -104,4 +104,25 @@ public class Pp_pages_nde_basic_tst {
 		, "&lt;pages index=&quot;A&quot; from=1 to=1&gt;a"
 		);
 	}
+	@Test  public void Page_has_nl() {	// PURPOSE: parse "to" page, even if it has \n at end; PAGE:en.s:1911_Encyclop�dia_Britannica/Boissier,_Marie_Louis_Antoine_Gaston DATE:2015-04-29
+		fxt.Init_page_create("Page:A/1", "abc");
+		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to='1\n' />", String_.Concat_lines_nl
+		(	"<p>abc&#32;"
+		,	"</p>"
+		,	""
+		));
+	}
+	@Test  public void Indicator() {	// PURPOSE: handle indicators; PAGE:en.s:The_Parochial_System_(Wilberforce,_1838); DATE:2015-04-29
+		fxt.Init_page_create("Page:A/1", "<indicator name='b'>b</indicator>page_1");
+		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		( "<indicator name='a'>a</indicator>"
+		, "<pages index=\"A\" from=1 to='1\' />"
+		), String_.Concat_lines_nl
+		(	"<p>page_1&#32;"	// make sure Page:A/1 is transcribed
+		,	"</p>"
+		,	""
+		));
+		Tfds.Eq(1, fxt.Page().Html_data().Indicators().Count());		// only 1 indicator, not 2
+		Tfds.Eq(true, fxt.Page().Html_data().Indicators().Has("a"));	// indicator should be from wikitext, not <page>
+	}
 }

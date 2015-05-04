@@ -20,6 +20,7 @@ import gplx.core.primitives.*;
 import gplx.ios.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.dbs.*; import gplx.xowa.tdbs.*; import gplx.xowa.wikis.data.tbls.*;
 public abstract class Xob_search_base extends Xob_itm_dump_base implements Xobd_wkr, GfoInvkAble {
+	private final OrderedHash list = OrderedHash_.new_(); private Xol_lang lang;
 	public abstract String Wkr_key();
 	public abstract Io_make_cmd Make_cmd_site();
 	public void Wkr_ini(Xob_bldr bldr) {}
@@ -35,7 +36,7 @@ public abstract class Xob_search_base extends Xob_itm_dump_base implements Xobd_
 //			if (page.Ns_id() != Xow_ns_.Id_main) return; // limit to main ns for now
 		try {
 		byte[] ttl = page.Ttl_page_db();
-		byte[][] words = Split(lang, list, dump_bfr, ttl);
+		byte[][] words = Split_ttl_into_words(lang, list, dump_bfr, ttl);
 		Xob_tmp_wtr wtr = tmp_wtr_mgr.Get_or_new(ns_main == null ? page.Ns() : ns_main);
 		int words_len = words.length;
 		int row_len = 0;
@@ -60,9 +61,8 @@ public abstract class Xob_search_base extends Xob_itm_dump_base implements Xobd_
 		if (delete_temp) Io_mgr._.DeleteDirDeep(temp_dir);
 	}
 	public void Wkr_print() {}
-	OrderedHash list = OrderedHash_.new_(); Xol_lang lang;
-	static final int row_fixed_len = 5 + 1 + 1 + 1;	// 5=rowId; 1=|; 1=NmsOrd; 1=|		
-	public static byte[][] Split(Xol_lang lang, OrderedHash list, Bry_bfr bfr, byte[] ttl) {
+	// private static final int row_fixed_len = 5 + 1 + 1 + 1;	// 5=rowId; 1=|; 1=NmsOrd; 1=|		
+	public static byte[][] Split_ttl_into_words(Xol_lang lang, OrderedHash list, Bry_bfr bfr, byte[] ttl) {
 		if (lang != null)	// null lang passed in by searcher
 			ttl = lang.Case_mgr().Case_build_lower(ttl);
 		int ttl_len = ttl.length; Bry_obj_ref word_ref = Bry_obj_ref.new_(Bry_.Empty);
@@ -70,17 +70,19 @@ public abstract class Xob_search_base extends Xob_itm_dump_base implements Xobd_
 		while (true) {
 			if (word_done || i == ttl_len) {
 				if (bfr.Len() > 0) {
-					byte[] word = bfr.Xto_bry();
+					byte[] word = bfr.Xto_bry_and_clear();
 					word_ref.Val_(word);
-					if (!list.Has(word_ref)) list.Add(word_ref, word);
-					bfr.ClearAndReset();
+					if (!list.Has(word_ref)) list.Add(word_ref, word);	// don't add same word twice; EX: Title of "Can Can" should only have "Can" in index
 				}
 				if (i == ttl_len) break;
 				word_done = false;
 			}
 			byte b = ttl[i];
 			switch (b) {
-				case Byte_ascii.Tab: case Byte_ascii.NewLine: case Byte_ascii.CarriageReturn: case Byte_ascii.Space: case Byte_ascii.Underline:
+				case Byte_ascii.Underline:	// underline is word-breaking; EX: A_B -> A, B
+				case Byte_ascii.Space:		// should not occur, but just in case (only underscores)
+				case Byte_ascii.Tab: case Byte_ascii.NewLine: case Byte_ascii.CarriageReturn:	// should not occur in titles, but just in case
+
 				case Byte_ascii.Dash:	// treat hypenated words separately
 				case Byte_ascii.Dot:	// treat abbreviations as separate words; EX: A.B.C.
 				case Byte_ascii.Bang: case Byte_ascii.Hash: case Byte_ascii.Dollar: case Byte_ascii.Percent:
@@ -100,7 +102,6 @@ public abstract class Xob_search_base extends Xob_itm_dump_base implements Xobd_
 					break;
 			}
 		}
-		bfr.ClearAndReset();
 		byte[][] rv = (byte[][])list.Xto_ary(byte[].class);
 		list.Clear(); list.ResizeBounds(16);
 		return rv;

@@ -20,6 +20,7 @@ package gplx.gfui;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import gplx.Bool_;
 import gplx.GfoInvkAbleCmd;
 import gplx.GfoMsg;
 import gplx.GfsCtx;
@@ -32,24 +33,26 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 class Swt_win implements GxwWin, Swt_control {
+	private Swt_lnr_resize resize_lnr; private Swt_lnr_show show_lnr;	// use ptr to dispose later
+	void ctor(boolean window_is_dialog, Shell shell, Display display) {
+		this.shell = shell;		
+		this.display = display;
+		this.ctrl_mgr = new Swt_core_cmds(shell);
+		this.show_lnr = new Swt_lnr_show(this);
+		this.resize_lnr = new Swt_lnr_resize(this);
+		shell.addListener(SWT.Show, show_lnr);
+		shell.addListener(SWT.Resize, resize_lnr);
+		if (window_is_dialog) {
+			shell.addListener(SWT.Traverse, new Swt_lnr_traverse());
+		}
+	}
 	public Display UnderDisplay() {return display;} private Display display;
 	public Shell UnderShell() {return shell;} private Shell shell;
 	@Override public Control Under_control() {return shell;}
 	@Override public Composite Under_composite() {return shell;}
 	@Override public Control Under_menu_control() {return shell;}
-	public Swt_win(Shell owner) 		{ctor(new Shell(owner, SWT.RESIZE | SWT.DIALOG_TRIM), owner.getDisplay());}
-	public Swt_win(Display display) 	{ctor(new Shell(display), display);	}
-	Swt_lnr_show showLnr;	// use ptr to dispose later
-	void ctor(Shell shell, Display display) {
-		this.shell = shell;		
-		this.display = display;
-		ctrlMgr = new Swt_core_cmds(shell);
-		showLnr = new Swt_lnr_show(this);
-		resizeLnr = new Swt_lnr_resize(this);
-		shell.addListener(SWT.Show, showLnr);
-		shell.addListener(SWT.Resize, resizeLnr);
-	}
-	Swt_lnr_resize resizeLnr;
+	public Swt_win(Shell owner) 		{ctor(Bool_.Y, new Shell(owner, SWT.RESIZE | SWT.DIALOG_TRIM), owner.getDisplay());}
+	public Swt_win(Display display) 	{ctor(Bool_.N, new Shell(display), display);	}
 	public void ShowWin() 		{shell.setVisible(true);}
 	public void HideWin() 		{shell.setVisible(false);}
 	public boolean Maximized() 	{return shell.getMaximized();} public void Maximized_(boolean v) {shell.setMaximized(v);}
@@ -70,15 +73,12 @@ class Swt_win implements GxwWin, Swt_control {
         } catch (FileNotFoundException e1) {e1.printStackTrace();}
 		shell.setImage(image);
 	}
-	public void OpenedCmd_set(GfoInvkAbleCmd v) {whenLoadedCmd = v;} GfoInvkAbleCmd whenLoadedCmd = GfoInvkAbleCmd.Null;
-	public void Opened() {whenLoadedCmd.Invk();}
-	public GxwCore_base Core() {return ctrlMgr;} GxwCore_base ctrlMgr;
-	public GxwCbkHost Host() {return host;} public void Host_set(GxwCbkHost host) {this.host = host;} GxwCbkHost host = GxwCbkHost_.Null;
-	public String TextVal() {
-		return shell.getText();} 
-	public void TextVal_set(String v) {
-		shell.setText(v);
-	}
+	public void OpenedCmd_set(GfoInvkAbleCmd v) {when_loaded_cmd = v;} private GfoInvkAbleCmd when_loaded_cmd = GfoInvkAbleCmd.Null;
+	public void Opened() {when_loaded_cmd.Invk();}
+	public GxwCore_base Core() {return ctrl_mgr;} private GxwCore_base ctrl_mgr;
+	public GxwCbkHost Host() {return host;} public void Host_set(GxwCbkHost host) {this.host = host;} private GxwCbkHost host = GxwCbkHost_.Null;
+	public String TextVal() {return shell.getText();} 
+	public void TextVal_set(String v) {shell.setText(v);}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {return this;}
 	public void SendKeyDown(IptKey key)				{}
 	public void SendMouseMove(int x, int y)			{}
@@ -89,7 +89,7 @@ class Swt_win implements GxwWin, Swt_control {
 	//public void windowDeactivated(WindowEvent e) 	{}
 	//public void windowDeiconified(WindowEvent e) 	{host.SizeChangedCbk();}
 	//public void windowIconified(WindowEvent e) 		{host.SizeChangedCbk();}
-	//public void windowOpened(WindowEvent e) 		{whenLoadedCmd.Invk();}
+	//public void windowOpened(WindowEvent e) 		{when_loaded_cmd.Invk();}
 	//@Override public void processKeyEvent(KeyEvent e) 					{if (GxwCbkHost_.ExecKeyEvent(host, e)) 	super.processKeyEvent(e);}
 	//@Override public void processMouseEvent(MouseEvent e) 				{if (GxwCbkHost_.ExecMouseEvent(host, e)) 	super.processMouseEvent(e);}
 	//@Override public void processMouseWheelEvent(MouseWheelEvent e) 	{if (GxwCbkHost_.ExecMouseWheel(host, e)) 	super.processMouseWheelEvent(e);}
@@ -102,7 +102,7 @@ class Swt_win implements GxwWin, Swt_control {
 	public void TaskbarVisible_set(boolean val) {} 	public void TaskbarParkingWindowFix(GxwElem form) {}
 	void ctor_GxwForm() {
 	//	this.setLayout(null);										// use gfui layout
-	//	this.ctrlMgr.BackColor_set(ColorAdp_.White);				// default form backColor to white
+	//	this.ctrl_mgr.BackColor_set(ColorAdp_.White);				// default form backColor to white
 	//	this.setUndecorated(true);									// remove icon, titleBar, minimize, maximize, close, border
 	//	this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);	// JAVA: cannot cancel alt+f4; set Close to noop, and manually control closing by calling this.CloseForm
 	//	enableEvents(AWTEvent.MOUSE_EVENT_MASK | AWTEvent.MOUSE_WHEEL_EVENT_MASK | AWTEvent.MOUSE_MOTION_EVENT_MASK);

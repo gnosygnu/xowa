@@ -20,12 +20,13 @@ import gplx.html.*; import gplx.xowa.html.portal.*; import gplx.xowa.pages.skins
 import gplx.xowa.wikis.*; import gplx.xowa.gui.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.langs.vnts.*;
 public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 	private Xop_ctx ctx; private Xoae_page page; private Bry_bfr tmp_bfr = Bry_bfr.reset_(255); 
+	private byte[] root_dir_bry;
 	public Xoh_page_wtr_wkr(byte page_mode) {this.page_mode = page_mode;} private byte page_mode;
 	public Wdata_xwiki_link_wtr Wdata_lang_wtr() {return wtr_page_lang;} private Wdata_xwiki_link_wtr wtr_page_lang = new Wdata_xwiki_link_wtr();
 	public Xoh_page_wtr_wkr Page_(Xoae_page v) {this.page = v; return this;} 
-	public Xoh_page_wtr_wkr Mgr_(Xoh_page_wtr_mgr v) {this.mgr = v; return this;} private Xoh_page_wtr_mgr mgr;
+	public Xoh_page_wtr_wkr Mgr_(Xohe_page_wtr_mgr v) {this.mgr = v; return this;} private Xohe_page_wtr_mgr mgr;
 	public boolean Ctgs_enabled() {return ctgs_enabled;} public Xoh_page_wtr_wkr Ctgs_enabled_(boolean v) {ctgs_enabled = v; return this;} private boolean ctgs_enabled = true;
-	public byte[] Write(Xoh_page_wtr_mgr mgr, Xoae_page page, Xop_ctx ctx, Bry_bfr html_bfr) {
+	public byte[] Write(Xohe_page_wtr_mgr mgr, Xoae_page page, Xop_ctx ctx, Bry_bfr html_bfr) {
 		this.mgr = mgr; this.page = page; this.ctx = ctx; 
 		Xowe_wiki wiki = page.Wikie(); Xoae_app app = wiki.Appe();
 		ctx.Cur_page_(page); // HACK: must update page for toc_mgr; WHEN: Xoae_page rewrite
@@ -50,12 +51,13 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 		this.page = null;
 		return html_bfr.Xto_bry_and_clear();
 	}
-	private void Write_page(Bry_bfr html_bfr, Xoae_app app, Xowe_wiki wiki, Xoh_page_wtr_mgr mgr, Xoae_page page, byte view_tid, Bry_fmtr fmtr, Object page_data) {
+	private void Write_page(Bry_bfr html_bfr, Xoae_app app, Xowe_wiki wiki, Xohe_page_wtr_mgr mgr, Xoae_page page, byte view_tid, Bry_fmtr fmtr, Object page_data) {
 		byte[] custom_html = page.Html_data().Custom_html();
 		if (custom_html != null) {
 			html_bfr.Add(custom_html);
 			return;
 		}
+		if (root_dir_bry == null) this.root_dir_bry = app.Fsys_mgr().Root_dir().To_http_file_bry();
 		DateAdp page_modified_on_dte = page.Revision_data().Modified_on();
 		Xoa_ttl page_ttl = page.Ttl(); int page_ns_id = page_ttl.Ns().Id();
 		byte page_tid = Xow_page_tid.Identify(wiki.Domain_tid(), page_ns_id, page_ttl.Page_db());
@@ -66,7 +68,7 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 		byte[] js_edit_toolbar_bry = view_tid == Xopg_view_mode.Tid_edit ? wiki.Fragment_mgr().Html_js_edit_toolbar() : Bry_.Empty;
 		Xow_portal_mgr portal_mgr = wiki.Html_mgr().Portal_mgr().Init_assert();
 		fmtr.Bld_bfr_many(html_bfr
-		, app.Fsys_mgr().Root_dir_bry(), Xoa_app_.Version, Xoa_app_.Build_date, app.Tcp_server().Running_str()
+		, root_dir_bry, Xoa_app_.Version, Xoa_app_.Build_date, app.Tcp_server().Running_str()
 		, page.Revision_data().Id()
 		, Xoh_page_wtr_wkr_.Bld_page_name(tmp_bfr, page_ttl, null)					// NOTE: page_name does not show display_title (<i>). always pass in null
 		, Xoh_page_wtr_wkr_.Bld_page_name(tmp_bfr, page_ttl, page.Html_data().Display_ttl())

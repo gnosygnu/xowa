@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
-import gplx.threads.*;
+import gplx.core.threads.*;
 public class Env_ {
 	public static void Init(String[] args, String appNameAndExt, Class<?> type) {
 		mode_testing = false;
@@ -30,10 +30,8 @@ public class Env_ {
 		appArgs = args;
 		appUrl = JarAdp_.Url_type(type);
 	}
-	public static void Init_drd(String[] args, Io_url url) {
+	public static void Init_drd() {
 		mode_testing = mode_debug = false;
-		appArgs = args;
-		appUrl = url;
 	}
 	public static void Init_testing() {mode_testing = true;}
 	public static boolean Mode_testing()	{return mode_testing;}	static boolean mode_testing = true;
@@ -93,7 +91,7 @@ public class Env_ {
 				return System.getProperty(key);
 			}	static final String Env_prop_key__user_language = "user.language";
 	public static void Term_add(GfoInvkAble invk, String cmd) {
-				ThreadAdp thread = ThreadAdp_.invk_(invk, cmd);
+				Thread_adp thread = Thread_adp_.invk_(invk, cmd);
 		Runtime.getRuntime().addShutdownHook(thread.Under_thread());
 			}
 }

@@ -18,12 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 public class Xot_tmpl_wtr {
 	public byte[] Write_all(Xop_ctx ctx, Xop_root_tkn root, byte[] src) {
-		Bry_bfr rslt_bfr = ctx.App().Utl__bfr_mkr().Get_m001();
-		ctx.Tmpl_output_(rslt_bfr);
-		rslt_bfr.Reset_if_gt(Io_mgr.Len_mb);
-		Write_tkn(ctx, src, src.length, rslt_bfr, root);
-		ctx.Tmpl_output_(null);
-		return rslt_bfr.To_bry_and_rls();
+//			synchronized (this) {	// THREAD:added synchronized after "failed to write tkn" DATE:2015-04-29
+			Bry_bfr rslt_bfr = ctx.App().Utl__bfr_mkr().Get_m001();
+			ctx.Tmpl_output_(rslt_bfr);
+			rslt_bfr.Reset_if_gt(Io_mgr.Len_mb);
+			Write_tkn(ctx, src, src.length, rslt_bfr, root);
+			ctx.Tmpl_output_(null);
+			return rslt_bfr.To_bry_and_rls();
+//			}
 	}
 	private void Write_tkn(Xop_ctx ctx, byte[] src, int src_len, Bry_bfr rslt_bfr, Xop_tkn_itm tkn) {
 		switch (tkn.Tkn_tid()) {

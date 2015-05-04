@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
-import gplx.threads.*; import gplx.dbs.*;
+import gplx.core.threads.*; import gplx.dbs.*;
 import gplx.xowa.specials.*;
 public class Xoud_history_mgr implements GfoInvkAble {
 	private Xoud_history_tbl history_tbl;

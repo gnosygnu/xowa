@@ -20,7 +20,7 @@ import gplx.xowa.html.hdumps.data.*; import gplx.xowa.html.hzips.*; import gplx.
 import gplx.xowa.pages.*; import gplx.xowa.pages.skins.*; import gplx.xowa.dbs.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa2.gui.*;
 public class Xohd_hdump_wtr {
-	private final Bry_bfr_mkr bfr_mkr; private final Xoh_page_wtr_mgr page_wtr_mgr;
+	private final Bry_bfr_mkr bfr_mkr; private final Xohe_page_wtr_mgr page_wtr_mgr;
 	private final Xohd_page_html_mgr__save save_mgr;  private Xowd_db_mgr core_data_mgr;
 	public Xohd_hdump_wtr(Xoa_app app, Xowe_wiki wiki) {
 		this.bfr_mkr = app.Utl__bfr_mkr(); this.page_wtr_mgr = wiki.Html_mgr().Page_wtr_mgr();

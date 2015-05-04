@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
 import gplx.gfml.*;
-import gplx.threads.*;
+import gplx.core.threads.*;
 import java.awt.AWTKeyStroke;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -81,7 +81,7 @@ public class GfuiEnv_ {
 	public static void ShowMsg(String message) {javax.swing.JOptionPane.showMessageDialog(null, message, "", javax.swing.JOptionPane.INFORMATION_MESSAGE, null);}
 	public static void BringToFront(ProcessAdp process) {} 
 	public static void DoEvents(int milliseconds) {
-				ThreadAdp_.Sleep(milliseconds);
+				Thread_adp_.Sleep(milliseconds);
 			}
 	public static void Run(GfuiWin form) {javax.swing.SwingUtilities.invokeLater(new GfuiFormRunner(form));}
 	public static FontAdp System_font() {

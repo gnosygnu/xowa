@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.sidebar; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import gplx.xowa.langs.msgs.*;
+import gplx.core.btries.*; import gplx.xowa.langs.msgs.*;
 public class Xowh_sidebar_mgr implements GfoInvkAble {
 	public Xowh_sidebar_mgr(Xowe_wiki wiki) {this.wiki = wiki;} private Xowe_wiki wiki;		
 	public int Grps_len() {return grps.Count();} ListAdp grps = ListAdp_.new_();
@@ -63,7 +63,7 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 			byte tid = line[1] == Byte_ascii.Asterisk ? Xowh_sidebar_itm.Tid_itm : Xowh_sidebar_itm.Tid_grp;
 			byte[] bry = Bry_.Trim(line, tid, line_len);	// trim *, **; note that tid indicates # of asterisks
 			bry = gplx.html.Html_utl.Del_comments(comment_bfr, bry);	// strip comments; DATE:2014-03-08
-			if 	(Bry_.Match(bry, CONST_itm_search) || Bry_.Match(bry, CONST_itm_toolbox) || Bry_.Match(bry, CONST_itm_languages)) continue;	// ignore SEARCH, TOOLBOX, LANGUAGES
+			if (ignore_trie.Match_bgn(bry, 0, bry.length) != null) continue; // ignore SEARCH, TOOLBOX, LANGUAGES
 			int pipe_pos = Bry_finder.Find_fwd(bry, Byte_ascii.Pipe);
 			byte[] text_key = tid == Xowh_sidebar_itm.Tid_grp ? bry : Bry_.Mid(bry, pipe_pos + 1, bry.length);	// get text_key; note that grp is entire bry, while itm is after |
 			byte[] text_val = Resolve_key(text_key);
@@ -112,8 +112,6 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 	(	""
 	,	"      <li id=\"~{itm_id}\"><a href=\"~{itm_href}\"~{itm_cls}~{itm_accesskey_and_title}>~{itm_text}</a></li>"
 	),	"itm_id", "itm_href", "itm_cls", "itm_accesskey_and_title", "itm_text"); 
-	private static final byte[] CONST_itm_search = Bry_.new_ascii_("SEARCH"), CONST_itm_toolbox = Bry_.new_ascii_("TOOLBOX"), CONST_itm_languages = Bry_.new_ascii_("LANGUAGES"), CONST_id_prefix = Bry_.new_ascii_("n-");
-	private static final String GRP_KEY = "xowa.wiki.gui.skin.mgr";
 	private byte[] Resolve_key(byte[] key) {
 		byte[] val = wiki.Msg_mgr().Val_by_key_obj(key);
 		if (Bry_.Len_eq_0(val)) val = key;	// if key is not found, default to val
@@ -125,5 +123,14 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 		else											return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_html_grp_fmt_ = "html_grp_fmt_", Invk_html_itm_fmt_ = "html_itm_fmt_";
+	private static final byte[] CONST_id_prefix = Bry_.new_ascii_("n-");
+	private static final byte Ignore_tid_search = 1, Ignore_tid_toolbox = 2, Ignore_tid_toolbox_end = 3, Ignore_tid_languages = 4;
+	private static final Btrie_slim_mgr ignore_trie = Btrie_slim_mgr.ci_ascii_()
+	.Add_str_byte("SEARCH", Ignore_tid_search)
+	.Add_str_byte("TOOLBOX", Ignore_tid_toolbox)
+	.Add_str_byte("TOOLBOXEND", Ignore_tid_toolbox_end)
+	.Add_str_byte("LANGUAGES", Ignore_tid_languages)
+	;
+	private static final String GRP_KEY = "xowa.wiki.gui.skin.mgr";
 	private static final byte[] CONST_sidebar_ttl = Bry_.new_ascii_("Sidebar");
 }

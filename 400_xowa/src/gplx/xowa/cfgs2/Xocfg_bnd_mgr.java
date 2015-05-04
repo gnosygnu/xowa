@@ -51,14 +51,19 @@ public class Xocfg_bnd_mgr implements GfoInvkAble, Gfo_sort_able {
 			app.Usr_dlg().Warn_many("", "", "failed to set bnds; src=~{0} err=~{1}", String_.new_utf8_(src), Err_.Message_gplx_brief(e));
 		}
 	}
+	private void Show_shortcut_win(String uid, String name, String binding) {
+		Xog_bnd_win win = new Xog_bnd_win();			
+		win.Show(app.Gui_mgr().Kit(), app.Gui_mgr().Browser_win().Win_box(), bnd_mgr.Bnd_parser(), name, binding);
+	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Xoa_fmtr_itm.Invk_get_at))			return this.Get_at(m.ReadInt("v"));
 		else if	(ctx.Match(k, Xoa_fmtr_itm.Invk_len))				return this.Len();
 		else if	(ctx.Match(k, Xoa_fmtr_itm.Invk_sorter))			return sorter;
 		else if	(ctx.Match(k, Invk_set_bulk))						Set_bulk(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_init))							return Init(m.ReadStr("v"));
+		else if	(ctx.Match(k, Invk_show_shortcut_win))				Show_shortcut_win(m.ReadStr("uid"), m.ReadStr("name"), m.ReadStr("binding"));
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}
-	private static final String Invk_set_bulk = "set_bulk", Invk_init = "init";
+	private static final String Invk_set_bulk = "set_bulk", Invk_init = "init", Invk_show_shortcut_win = "show_shortcut_win";
 }

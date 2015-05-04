@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.threads.*; import gplx.xowa.bldrs.*; import gplx.xowa.gui.views.*; import gplx.xowa.bldrs.cmds.utils.*;
+import gplx.core.threads.*; import gplx.xowa.bldrs.*; import gplx.xowa.gui.views.*; import gplx.xowa.bldrs.cmds.utils.*;
 class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 	public Xoi_cmd_wiki_import(Xoi_setup_mgr install_mgr, String wiki_key, String wiki_date, String dump_type) {this.install_mgr = install_mgr; this.Owner_(install_mgr); this.wiki_key = wiki_key; this.wiki_date = wiki_date; this.dump_type = dump_type;} private Xoi_setup_mgr install_mgr; String wiki_key, wiki_date, dump_type;
 	public static final String KEY = "wiki.import";
@@ -35,7 +35,7 @@ class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 	public void Async_run() {
 		running = true;
 		install_mgr.App().Usr_dlg().Log_many(GRP_KEY, "import.bgn", "import.bgn ~{0} ~{1} ~{2}", wiki_key, wiki_date, dump_type);
-		ThreadAdp_.invk_(this.Async_key(), this, Invk_process_async).Start();			
+		Thread_adp_.invk_(this.Async_key(), this, Invk_process_async).Start();			
 	}
 	public boolean Async_running() {
 		return running;

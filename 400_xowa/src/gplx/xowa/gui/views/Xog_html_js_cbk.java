@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
-import gplx.threads.*; import gplx.xowa.xtns.pfuncs.ifs.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.core.threads.*; import gplx.xowa.xtns.pfuncs.ifs.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xog_html_js_cbk implements GfoInvkAble {
 	private Xoae_app app;
 	private Xog_html_itm html_itm;
@@ -126,7 +126,7 @@ public class Xog_html_js_cbk implements GfoInvkAble {
 	}
 	private String[] Wikidata_get_label(GfoMsg m) {
 		try {
-			ThreadAdp_.Sleep(10);	// slow down calls to prevent random crashing in XulRunner; DATE:2014-04-23
+			Thread_adp_.Sleep(10);	// slow down calls to prevent random crashing in XulRunner; DATE:2014-04-23
 			gplx.xowa.xtns.wdatas.Wdata_wiki_mgr wdata_mgr = app.Wiki_mgr().Wdata_mgr();
 			wdata_mgr.Wdata_wiki().Init_assert();	// NOTE: must assert else ns_mgr won't load Property
 			int len = m.Args_count();

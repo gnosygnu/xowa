@@ -117,7 +117,7 @@ class Xow_search_scanner {
 		}
 		if (tid == Xow_search_tkn.Tid_word) {				// if word has symbol, convert to quoted; EX: a-b should become "a-b"; otherwise searcher would search for a single word a-b
 			byte[] cur_word = Bry_.Mid(src, src_bgn, src_end);
-			byte[][] words = gplx.xowa.bldrs.cmds.texts.Xob_search_base.Split(null, tmp_list, tmp_bfr, cur_word);
+			byte[][] words = gplx.xowa.bldrs.cmds.texts.Xob_search_base.Split_ttl_into_words(null, tmp_list, tmp_bfr, cur_word);
 			int words_len = words.length;
 			if (	words_len == 1					// only one word
 				&&	!Bry_.Eq(words[0], cur_word)	// split word not same as raw

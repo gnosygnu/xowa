@@ -19,40 +19,65 @@ package gplx.xowa.html.hdumps.bldrs; import gplx.*; import gplx.xowa.*; import g
 import gplx.dbs.*; import gplx.xowa.bldrs.*; import gplx.xowa.html.hdumps.data.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xob_redlink_mkr_cmd extends Xob_itm_basic_base implements Xob_cmd {
-	private Xob_link_dump_tbl link_dump_tbl; private Xowd_html_tbl html_dump_tbl;
 	private int commit_interval = 10000, commit_count = 0;
 	public Xob_redlink_mkr_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Cmd_key() {return Xob_cmd_keys.Key_html_redlinks;}
-	public void Cmd_init(Xob_bldr bldr) {}
-	public void Cmd_bgn(Xob_bldr bldr) {
-		this.link_dump_tbl = Xob_link_dump_tbl.Get_or_new(wiki);
-		this.html_dump_tbl = wiki.Data_mgr__core_mgr().Db__core().Tbl__html();	// FIXME: need to get by html_db_id
-	}
-	public void Cmd_run() {
-		Db_rdr rdr = link_dump_tbl.Select_missing();
-		int cur_page_id = -1; Bry_bfr bfr = Bry_bfr.reset_(255);
-		html_dump_tbl.Conn().Txn_bgn();
-		while (rdr.Move_next()) {
-			int src_page_id = rdr.Read_int(Xob_link_dump_tbl.Fld_src_page_id);
-			if (cur_page_id != src_page_id) {
-				if (cur_page_id != -1) Commit(cur_page_id, bfr);
-				cur_page_id = src_page_id;
+	public void Cmd_run() {Read_data();}
+	private void Read_data() {
+		Bry_bfr bfr = Bry_bfr.reset_(255);
+		wiki.Init_assert();
+		Xowd_db_file core_db = wiki.Data_mgr__core_mgr().Db__core();
+		Xob_db_file link_dump_db = Xob_db_file.new__redlink(wiki.Fsys_mgr().Root_dir());
+		Db_attach_rdr attach_rdr = new Db_attach_rdr(link_dump_db.Conn(), "page_db", core_db.Url());
+		attach_rdr.Attach();
+		Xowd_page_tbl page_tbl = core_db.Tbl__page();
+		int cur_html_db_id = -1, cur_page_id = -1; Xowd_html_tbl html_dump_tbl = null;
+		Db_rdr rdr = attach_rdr.Exec_as_rdr(Sql_select);			
+		try {
+			while (rdr.Move_next()) {
+				// switch html_db if needed
+				int html_db_id = rdr.Read_int(page_tbl.Fld_html_db_id().Name());
+				if (html_db_id != cur_html_db_id) {
+					if (html_dump_tbl != null) html_dump_tbl.Conn().Txn_end();
+					html_dump_tbl = wiki.Data_mgr__core_mgr().Dbs__get_at(html_db_id).Tbl__html();
+					html_dump_tbl.Conn().Txn_bgn();
+					cur_html_db_id = html_db_id;
+				}
+				// commit page_id if needed
+				int page_id = rdr.Read_int(page_tbl.Fld_page_id());
+				if (cur_page_id != page_id) {
+					if (cur_page_id != -1) Commit(html_dump_tbl, cur_page_id, bfr);
+					cur_page_id = page_id;
+				}
+				// add html_uid to cur_page's bfr
+				int html_uid = rdr.Read_int(Xob_link_dump_tbl.Fld_src_html_uid);
+				bfr.Add_int_variable(html_uid).Add_byte_pipe();
 			}
-			bfr.Add_int_variable(rdr.Read_int(Xob_link_dump_tbl.Fld_src_html_uid)).Add_byte_pipe();
 		}
-		Commit(cur_page_id, bfr);
-		html_dump_tbl.Conn().Txn_end();
+		finally {rdr.Rls();}
+		Commit(html_dump_tbl, cur_page_id, bfr);	// commit cur page
+		html_dump_tbl.Conn().Txn_end();				// close cur tbl
+		attach_rdr.Detach();
 	}
-	private void Commit(int cur_page_id, Bry_bfr bfr) {
+	private void Commit(Xowd_html_tbl html_dump_tbl, int cur_page_id, Bry_bfr bfr) {
 		html_dump_tbl.Insert(cur_page_id, Xowd_html_row.Tid_redlink, bfr.Xto_bry_and_clear());
 		++commit_count;
 		if ((commit_count % commit_interval ) == 0)
 			html_dump_tbl.Conn().Txn_sav();
 	}
-	public void Cmd_end() {
-		html_dump_tbl.Conn().Rls_conn();
-		link_dump_tbl.Conn().Rls_conn();
-	}
+	private static final String Sql_select = String_.Concat_lines_nl_skip_last
+	( "SELECT p.page_html_db_id"
+	, ",      p.page_id"
+	, ",      ld.src_html_uid"
+	, "FROM   link_dump ld"
+	, "	   JOIN <attach_db>page p ON p.page_id = ld.src_page_id "
+	, "WHERE  ld.trg_page_id = -1"
+	, "ORDER BY p.page_html_db_id, p.page_id"
+	, ";"
+	);
+	public void Cmd_init(Xob_bldr bldr) {}
+	public void Cmd_bgn(Xob_bldr bldr) {}
+	public void Cmd_end() {}
 	public void Cmd_term() {}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_commit_interval_))		commit_interval = m.ReadInt("v");

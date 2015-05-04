@@ -57,7 +57,7 @@ class Xoh_page_wtr_wkr_fxt {
 		wiki.Html_mgr().Page_wtr_mgr().Html_capable_(true);
 		Xoae_page page = wiki.Ctx().Cur_page();
 		page.Data_raw_(Bry_.new_utf8_(raw));
-		Xoh_page_wtr_mgr mgr = wiki.Html_mgr().Page_wtr_mgr();
+		Xohe_page_wtr_mgr mgr = wiki.Html_mgr().Page_wtr_mgr();
 		Xoh_page_wtr_wkr wkr = mgr.Wkr(Xopg_view_mode.Tid_edit).Page_(page).Mgr_(mgr);
 		wkr.XferAry(tmp_bfr, 0);
 		Tfds.Eq(expd, tmp_bfr.Xto_str_and_clear());
@@ -67,7 +67,7 @@ class Xoh_page_wtr_wkr_fxt {
 		Xoae_page page = wiki.Ctx().Cur_page();
 		page.Ttl_(Xoa_ttl.parse_(wiki, Bry_.new_ascii_(page_name)));
 		page.Data_raw_(Bry_.new_utf8_(page_text));
-		Xoh_page_wtr_mgr mgr = wiki.Html_mgr().Page_wtr_mgr();
+		Xohe_page_wtr_mgr mgr = wiki.Html_mgr().Page_wtr_mgr();
 		Xoh_page_wtr_wkr wkr = mgr.Wkr(Xopg_view_mode.Tid_read).Page_(page).Mgr_(mgr);
 		wkr.XferAry(tmp_bfr, 0);
 		Tfds.Eq(expd, tmp_bfr.Xto_str_and_clear());

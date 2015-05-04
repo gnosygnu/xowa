@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
-import gplx.threads.*; import gplx.gfui.*; import gplx.xowa.gui.*; import gplx.xowa.gui.history.*; import gplx.xowa.xtns.math.*; import gplx.xowa.files.*;
+import gplx.core.threads.*; import gplx.gfui.*; import gplx.xowa.gui.*; import gplx.xowa.gui.history.*; import gplx.xowa.xtns.math.*; import gplx.xowa.files.*;
 import gplx.xowa.gui.urls.*; import gplx.xowa.gui.views.*; import gplx.xowa.pages.*;
 import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.specials.*;
 public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
@@ -205,21 +205,21 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 		Page__async__bgn(tab);
 	}
 	public void Page__async__bgn(Xog_tab_itm tab) {
-		page__async__thread = ThreadAdp_.invk_msg_(gplx.xowa.apps.Xoa_thread_.Key_page_async, this, GfoMsg_.new_cast_(Invk_page_async_exec).Add("v", tab)).Start();
-	}	private ThreadAdp page__async__thread = ThreadAdp.Null;
+		page__async__thread = Thread_adp_.invk_msg_(gplx.xowa.apps.Xoa_thread_.Key_page_async, this, GfoMsg_.new_cast_(Invk_page_async_exec).Add("v", tab)).Start();
+	}	private Thread_adp page__async__thread = Thread_adp.Null;
 	public boolean Page__async__working(Xoa_url url) {
 		if (page__async__thread.IsAlive()) {				// cancel pending image downloads
 			page__async__restart_url = url;
 			this.Usr_dlg().Canceled_y_();
 			app.Wmf_mgr().Download_wkr().Download_xrg().Prog_cancel_y_();
-			ThreadAdp_.invk_(this, Invk_page_async_cancel_wait).Start();
+			Thread_adp_.invk_(this, Invk_page_async_cancel_wait).Start();
 			return true;
 		}
 		return false;
 	}
 	private void Page__async__cancel__wait() {
 		while (page__async__thread.IsAlive()) {
-			ThreadAdp_.Sleep(10);
+			Thread_adp_.Sleep(10);
 		}
 		this.Active_page().File_queue().Clear();
 		this.Usr_dlg().Canceled_n_();	// NOTE: must mark "uncanceled", else one cancelation will stop all future downloads; DATE:2014-05-04
@@ -302,7 +302,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 		GfoEvMgr_.Sub(app.Gui_mgr().Win_cfg().Font(), Xol_font_info.Font_changed, this, Invk_window_font_changed);
 
 		if (	!Env_.Mode_testing()
-			&&	app.Mode() == Xoa_app_.Mode_gui)	// only run for gui; do not run for tcp/http server; DATE:2014-05-03
+			&&	app.App_type().Uid_is_gui())	// only run for gui; do not run for tcp/http server; DATE:2014-05-03
 			app.Usr_dlg().Ui_wkr_(new Gfo_usr_dlg_ui_swt(kit, prog_box, info_box, info_box, app.Api_root().Gui().Browser().Info()));
 	}
 }

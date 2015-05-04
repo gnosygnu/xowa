@@ -67,6 +67,11 @@ public abstract class Gfui_kit_base implements Gfui_kit {
 		owner.SubElems().Add(rv);
 		return rv;
 	}
+	@gplx.Virtual public GfuiLbl New_lbl(String key, GfuiElem owner, KeyVal... args) {
+		GfuiLbl rv = GfuiLbl_.kit_(this, key, New_btn_impl(), ctor_args);
+		owner.SubElems().Add(rv);
+		return rv;
+	}
 	@gplx.Virtual public GfuiStatusBox New_status_box(String key, GfuiElem owner, KeyVal... args) {
 		GfuiStatusBox rv = GfuiStatusBox_.kit_(this, key, this.Factory().text_memo_());
 		owner.SubElems().Add(rv);

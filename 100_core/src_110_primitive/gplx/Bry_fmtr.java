@@ -121,98 +121,100 @@ public class Bry_fmtr {
 	public int Missing_adj() {return missing_adj;} public Bry_fmtr Missing_adj_(int v) {missing_adj = v; return this;} int missing_adj;
 	public boolean Fail_when_invalid_escapes() {return fail_when_invalid_escapes;} public Bry_fmtr Fail_when_invalid_escapes_(boolean v) {fail_when_invalid_escapes = v; return this;} private boolean fail_when_invalid_escapes = true;
 	public Bry_fmtr Compile() {
-		Bry_bfr lkp_bfr = Bry_bfr.new_(16);
-		int fmt_len = fmt.length; int fmt_end = fmt_len - 1; int fmt_pos = 0;
-		byte[] trg_bry = new byte[fmt_len]; int trg_pos = 0;
-		boolean lkp_is_active = false, lkp_is_numeric = true;
-		byte nxt_byte, tmp_byte;
-		ListAdp list = ListAdp_.new_();
-		fmt_args_exist = false;
-		while (true) {
-			if (fmt_pos > fmt_end) break;
-			byte cur_byte = fmt[fmt_pos];
-			if		(lkp_is_active) {
-				if (cur_byte == char_arg_end) {
-					if (lkp_is_numeric)
-						list.Add(Bry_fmtr_itm.arg_(lkp_bfr.XtoInt(0) - baseInt));
+		synchronized (this) {	// THREAD: DATE:2015-04-29
+			Bry_bfr lkp_bfr = Bry_bfr.new_(16);
+			int fmt_len = fmt.length; int fmt_end = fmt_len - 1; int fmt_pos = 0;
+			byte[] trg_bry = new byte[fmt_len]; int trg_pos = 0;
+			boolean lkp_is_active = false, lkp_is_numeric = true;
+			byte nxt_byte, tmp_byte;
+			ListAdp list = ListAdp_.new_();
+			fmt_args_exist = false;
+			while (true) {
+				if (fmt_pos > fmt_end) break;
+				byte cur_byte = fmt[fmt_pos];
+				if		(lkp_is_active) {
+					if (cur_byte == char_arg_end) {
+						if (lkp_is_numeric)
+							list.Add(Bry_fmtr_itm.arg_(lkp_bfr.XtoInt(0) - baseInt));
+						else {
+							byte[] key_fmt = lkp_bfr.Xto_bry();
+							Object idx_ref = keys.Fetch(Bry_obj_ref.new_(key_fmt));
+							if (idx_ref == null) {
+								int lkp_bfr_len = lkp_bfr.Len();
+								byte[] lkp_bry = lkp_bfr.Bfr();
+								trg_bry[trg_pos++] = char_escape;
+								trg_bry[trg_pos++] = char_arg_bgn;
+								for (int i = 0; i < lkp_bfr_len; i++)
+									trg_bry[trg_pos++] = lkp_bry[i];
+								trg_bry[trg_pos++] = char_arg_end;
+							}
+							else {
+								list.Add(Bry_fmtr_itm.arg_(((Int_obj_val)idx_ref).Val() - baseInt));
+							}
+						}
+						lkp_is_active = false;
+						lkp_bfr.Clear();
+						fmt_args_exist = true;
+					}
 					else {
-						byte[] key_fmt = lkp_bfr.Xto_bry();
-						Object idx_ref = keys.Fetch(Bry_obj_ref.new_(key_fmt));
-						if (idx_ref == null) {
-							int lkp_bfr_len = lkp_bfr.Len();
-							byte[] lkp_bry = lkp_bfr.Bfr();
-							trg_bry[trg_pos++] = char_escape;
-							trg_bry[trg_pos++] = char_arg_bgn;
-							for (int i = 0; i < lkp_bfr_len; i++)
-								trg_bry[trg_pos++] = lkp_bry[i];
-							trg_bry[trg_pos++] = char_arg_end;
+						lkp_bfr.Add_byte(cur_byte);
+						switch (cur_byte) {
+							case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
+							case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
+								break;
+							default:
+								lkp_is_numeric = false;
+								break;
+						}
+					}
+					fmt_pos += 1;
+				}
+				else if	(cur_byte == char_escape) {
+					if (fmt_pos == fmt_end) {
+						if (fail_when_invalid_escapes)
+							throw Err_.new_("escape char encountered but no more chars left");
+						else {
+							trg_bry[trg_pos] = cur_byte;
+							break;
+						}
+					}
+					nxt_byte = fmt[fmt_pos + 1];
+					if (nxt_byte == char_arg_bgn) {
+						if (trg_pos > 0) {list.Add(Bry_fmtr_itm.dat_(trg_bry, trg_pos)); trg_pos = 0;}	// something pending; add it to list
+						int eval_lhs_bgn = fmt_pos + 2;
+						if (eval_lhs_bgn < fmt_len && fmt[eval_lhs_bgn] == char_eval_bgn) {	// eval found
+							fmt_pos = Compile_eval_cmd(fmt, fmt_len, eval_lhs_bgn, list);
+							continue;
 						}
 						else {
-							list.Add(Bry_fmtr_itm.arg_(((Int_obj_val)idx_ref).Val() - baseInt));
+							lkp_is_active = true;
+							lkp_is_numeric = true;
 						}
 					}
-					lkp_is_active = false;
-					lkp_bfr.Clear();
-					fmt_args_exist = true;
+					else {	// ~{0}; ~~ -> ~; ~n -> newLine; ~t -> tab
+						if		(nxt_byte == char_escape)		tmp_byte = char_escape;
+						else if	(nxt_byte == char_escape_nl)	tmp_byte = Byte_ascii.NewLine;
+						else if (nxt_byte == char_escape_tab)	tmp_byte = Byte_ascii.Tab;
+						else {
+							if (fail_when_invalid_escapes) throw Err_.new_("unknown escape code").Add("code", Char_.XbyInt(nxt_byte)).Add("fmt_pos", fmt_pos + 1);
+							else
+								tmp_byte = cur_byte;
+						}
+						trg_bry[trg_pos++] = tmp_byte;
+					}
+					fmt_pos += 2;
 				}
 				else {
-					lkp_bfr.Add_byte(cur_byte);
-					switch (cur_byte) {
-						case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-						case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-							break;
-						default:
-							lkp_is_numeric = false;
-							break;
-					}
+					trg_bry[trg_pos++] = cur_byte;
+					fmt_pos += 1;
 				}
-				fmt_pos += 1;
 			}
-			else if	(cur_byte == char_escape) {
-				if (fmt_pos == fmt_end) {
-					if (fail_when_invalid_escapes)
-						throw Err_.new_("escape char encountered but no more chars left");
-					else {
-						trg_bry[trg_pos] = cur_byte;
-						break;
-					}
-				}
-				nxt_byte = fmt[fmt_pos + 1];
-				if (nxt_byte == char_arg_bgn) {
-					if (trg_pos > 0) {list.Add(Bry_fmtr_itm.dat_(trg_bry, trg_pos)); trg_pos = 0;}	// something pending; add it to list
-					int eval_lhs_bgn = fmt_pos + 2;
-					if (eval_lhs_bgn < fmt_len && fmt[eval_lhs_bgn] == char_eval_bgn) {	// eval found
-						fmt_pos = Compile_eval_cmd(fmt, fmt_len, eval_lhs_bgn, list);
-						continue;
-					}
-					else {
-						lkp_is_active = true;
-						lkp_is_numeric = true;
-					}
-				}
-				else {	// ~{0}; ~~ -> ~; ~n -> newLine; ~t -> tab
-					if		(nxt_byte == char_escape)		tmp_byte = char_escape;
-					else if	(nxt_byte == char_escape_nl)	tmp_byte = Byte_ascii.NewLine;
-					else if (nxt_byte == char_escape_tab)	tmp_byte = Byte_ascii.Tab;
-					else {
-						if (fail_when_invalid_escapes) throw Err_.new_("unknown escape code").Add("code", Char_.XbyInt(nxt_byte)).Add("fmt_pos", fmt_pos + 1);
-						else
-							tmp_byte = cur_byte;
-					}
-					trg_bry[trg_pos++] = tmp_byte;
-				}
-				fmt_pos += 2;
-			}
-			else {
-				trg_bry[trg_pos++] = cur_byte;
-				fmt_pos += 1;
-			}
+			if (lkp_is_active) throw Err_.new_("idx mode not closed");
+			if (trg_pos > 0) {list.Add(Bry_fmtr_itm.dat_(trg_bry, trg_pos)); trg_pos = 0;}
+			itms = (Bry_fmtr_itm[])list.Xto_ary(Bry_fmtr_itm.class);
+			itms_len = itms.length;
+			return this;
 		}
-		if (lkp_is_active) throw Err_.new_("idx mode not closed");
-		if (trg_pos > 0) {list.Add(Bry_fmtr_itm.dat_(trg_bry, trg_pos)); trg_pos = 0;}
-		itms = (Bry_fmtr_itm[])list.Xto_ary(Bry_fmtr_itm.class);
-		itms_len = itms.length;
-		return this;
 	}
 	int Compile_eval_cmd(byte[] fmt, int fmt_len, int eval_lhs_bgn, ListAdp list) {
 		int eval_lhs_end = Bry_finder.Find_fwd(fmt, char_eval_end, eval_lhs_bgn + Int_.Const_dlm_len, fmt_len); if (eval_lhs_end == Bry_.NotFound) throw Err_mgr._.fmt_(GRP_KEY, "eval_lhs_end_invalid", "could not find eval_lhs_end: ~{0}", String_.new_utf8_(fmt, eval_lhs_bgn, fmt_len));

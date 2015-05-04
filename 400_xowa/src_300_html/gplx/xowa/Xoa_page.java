@@ -17,8 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 public interface Xoa_page {
-	Xoa_ttl					Ttl();
+	Xow_wiki				Wiki();
 	Xoa_url					Url();
+	Xoa_ttl					Ttl();
 	void					Xtn_gallery_packed_exists_y_();
 	boolean					Exists();
 }

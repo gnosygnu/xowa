@@ -17,13 +17,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
 public class IptKey implements IptArg {
-	public String Key()					{return key;} private String key;
+	@gplx.Internal protected IptKey(int val, String key) {this.val = val; this.key = key;}
+	public String Key()					{return key;} private final String key;
+	public int Val()					{return val;} private final int val;
 	public boolean Eq(IptArg comp)			{return String_.Eq(key, comp.Key());}
 	public String XtoUiStr()			{return IptKeyStrMgr._.XtoStr(this);}
 	public IptKey Add(IptKey comp)		{return IptKey_.add_(this, comp);}
 	public boolean Mod_shift()				{return Enm_.HasInt(val, IptKey_.Shift.Val());}
 	public boolean Mod_ctrl()				{return Enm_.HasInt(val, IptKey_.Ctrl.Val());}
 	public boolean Mod_alt()				{return Enm_.HasInt(val, IptKey_.Alt.Val());}
-	@gplx.Internal protected int Val()					{return val;} int val;
-	@gplx.Internal protected IptKey(int val, String key) {this.val = val; this.key = key;}
 }

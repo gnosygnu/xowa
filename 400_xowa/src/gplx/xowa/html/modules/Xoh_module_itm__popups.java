@@ -19,10 +19,10 @@ package gplx.xowa.html.modules; import gplx.*; import gplx.xowa.*; import gplx.x
 import gplx.xowa.gui.*;
 import gplx.xowa.apis.xowa.html.modules.*;
 public class Xoh_module_itm__popups implements Xoh_module_itm {
+	public byte[] Key() {return Xoh_module_itm_.Key_popups;}
 	public boolean Enabled() {return enabled;} public void Enabled_y_() {enabled = true;} public void Enabled_(boolean v) {enabled = v;} private boolean enabled;
 	public boolean Bind_hover_area() {return bind_hover_area;} public void Bind_hover_area_(boolean v) {bind_hover_area = v;} private boolean bind_hover_area;
 	public void Clear() {enabled = false; bind_hover_area = false;}
-	public byte[] Key() {return Key_const;} private static final byte[] Key_const = Bry_.new_ascii_("popups");
 	public void Write_css_script(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_module_wtr wtr) {}
 	public void Write_js_include(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_module_wtr wtr) {}
 	public void Write_css_include(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_module_wtr wtr) {

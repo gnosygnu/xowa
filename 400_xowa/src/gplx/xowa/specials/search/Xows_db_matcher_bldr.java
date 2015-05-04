@@ -24,10 +24,7 @@ class Xows_db_matcher_bldr {
 		rv.SortBy(Xows_db_word_sorter.Page_count_dsc);
 		return (Xows_db_word[])rv.Xto_ary(Xows_db_word.class);
 	}
-	public void Gather_words_for_db(Cancelable cxl, Xows_db_matcher matcher, ListAdp rv, Xowd_search_word_tbl word_tbl) {
-		synchronized (cxl) {
-			if (cxl.Canceled()) return;
-		}
+	private void Gather_words_for_db(Cancelable cxl, Xows_db_matcher matcher, ListAdp rv, Xowd_search_word_tbl word_tbl) {
 		switch (matcher.Tid()) {
 			case Xows_db_matcher.Tid_word:
 				byte[] word_text = matcher.Raw();

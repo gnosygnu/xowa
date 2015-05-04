@@ -26,10 +26,11 @@ import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 class Swt_core_cmds extends GxwCore_base {
+	Control control; private boolean compositeAble = false;
 	public Swt_core_cmds(Control control) {
-		compositeAble = control instanceof Composite;
+		this.compositeAble = control instanceof Composite;
 		this.control = control;
-	} 	Control control; boolean compositeAble = false; 
+	}
 	@Override public int Width() {return control.getSize().x;} @Override public void Width_set(int v) 	{if (Cfg_resize_disabled) return; control.setSize(v, this.Height());}
 	@Override public int Height() {return control.getSize().y;} @Override public void Height_set(int v) {if (Cfg_resize_disabled) return; control.setSize(this.Width(), v);}
 	@Override public int X() {return control.getLocation().x;} @Override public void X_set(int v) {control.setLocation(v, this.Y());}

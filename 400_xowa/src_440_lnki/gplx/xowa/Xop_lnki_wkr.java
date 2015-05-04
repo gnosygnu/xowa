@@ -20,7 +20,7 @@ import gplx.core.btries.*;
 import gplx.xowa.wikis.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.xtns.relatedSites.*;
 public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 	private Arg_bldr arg_bldr = Arg_bldr._;
-	private NumberParser number_parser = new NumberParser();
+	private Number_parser number_parser = new Number_parser();
 	private Sites_regy_mgr sites_regy_mgr;
 	public void Ctor_ctx(Xop_ctx ctx) {}
 	public void Page_bgn(Xop_ctx ctx, Xop_root_tkn root) {
@@ -155,10 +155,10 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 							val_tkn_bgn = Bry_finder.Find_fwd_while_space_or_tab(src, val_tkn_bgn, val_tkn_end);	// trim ws at bgn; needed for next step
 							if (val_tkn_end - val_tkn_bgn > 19) val_tkn_end = val_tkn_bgn + 19;	// HACK: limit upright tkn to 19 digits; 20 or more will overflow long; WHEN: rewrite number_parser to handle doubles; PAGE:de.w:Feuerland DATE:2015-02-03
 							number_parser.Parse(src, val_tkn_bgn, val_tkn_end);
-							if (number_parser.HasErr())
+							if (number_parser.Has_err())
 								ctx.Msg_log().Add_itm_none(Xop_lnki_log.Upright_val_is_invalid, src, val_tkn_bgn, val_tkn_end);
 							else
-								lnki.Upright_(number_parser.AsDec().Xto_double());
+								lnki.Upright_(number_parser.Rv_as_dec().Xto_double());
 						}
 						else	// no =; EX: [[Image:a|upright]]
 							lnki.Upright_(gplx.xowa.files.Xof_img_size.Upright_default_marker);// NOTE: was incorrectly hardcoded as 1; DATE:2014-07-23

@@ -75,7 +75,7 @@ class Xosrh_qry_itm {
 				break;
 			case Xosrh_qry_itm.Tid_word_quote:
 				OrderedHash tmp_search_list = OrderedHash_.new_();
-				byte[][] words = gplx.xowa.bldrs.cmds.texts.Xob_search_base.Split(wiki.Lang(), tmp_search_list, tmp_bfr, word);
+				byte[][] words = gplx.xowa.bldrs.cmds.texts.Xob_search_base.Split_ttl_into_words(wiki.Lang(), tmp_search_list, tmp_bfr, word);
 				int words_len = words.length;
 				ListAdp prv_list = null;
 				for (int i = 0; i < words_len; i++) {

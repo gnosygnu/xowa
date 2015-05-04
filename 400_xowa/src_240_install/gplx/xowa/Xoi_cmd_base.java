@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.threads.*; import gplx.xowa.wikis.*; import gplx.xowa.bldrs.*;
+import gplx.core.threads.*; import gplx.xowa.wikis.*; import gplx.xowa.bldrs.*;
 abstract class Xoi_cmd_base implements Gfo_thread_cmd {
 	public void Ctor(Xoi_setup_mgr install_mgr, String wiki_key) {
 		this.install_mgr = install_mgr; this.wiki_key = wiki_key;
@@ -37,7 +37,7 @@ abstract class Xoi_cmd_base implements Gfo_thread_cmd {
 	public void Async_run() {
 		running = true;
 //			install_mgr.App().Gui_wtr().Log_many(GRP_KEY, "import.bgn", "import.bgn ~{0} ~{1} ~{2}", wiki_key, wiki_date, dump_type);
-		ThreadAdp_.invk_(this.Async_key(), this, Invk_process_async).Start();			
+		Thread_adp_.invk_(this.Async_key(), this, Invk_process_async).Start();			
 	}
 	public boolean Async_running() {return running;} private boolean running;
 	public void Process_async() {

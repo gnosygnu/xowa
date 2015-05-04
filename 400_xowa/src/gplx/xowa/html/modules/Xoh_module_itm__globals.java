@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html.modules; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import gplx.xowa.langs.numbers.*;
 public class Xoh_module_itm__globals implements Xoh_module_itm {
-	private Xoh_module_wtr tmp_wtr = new Xoh_module_wtr();
-	public byte[] Key() {return Key_const;} private static final byte[] Key_const = Bry_.new_ascii_("globals");
+	private final Xoh_module_wtr tmp_wtr = new Xoh_module_wtr();
+	public byte[] Key() {return Xoh_module_itm_.Key_globals;}
 	public boolean Enabled() {return enabled;} public void Enabled_n_() {enabled = false;} public void Enabled_y_() {enabled = true;} public void Enabled_(boolean v) {enabled = v;} private boolean enabled;
 	public void Clear() {enabled = false;}
 	public void Write_css_include(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_module_wtr wtr) {
@@ -46,8 +46,8 @@ public class Xoh_module_itm__globals implements Xoh_module_itm {
 	public void Write_js_tail_script(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_module_wtr wtr) {}
 	public void Write_js_head_global(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_module_wtr wtr) {
 		if (!enabled) return;
-		wtr.Write_js_global_ini_atr_val(Key_mode_is_gui			, app.Mode() == Xoa_app_.Mode_gui);
-		wtr.Write_js_global_ini_atr_val(Key_mode_is_http		, app.Mode() == Xoa_app_.Mode_http);
+		wtr.Write_js_global_ini_atr_val(Key_mode_is_gui			, app.App_type().Uid_is_gui());
+		wtr.Write_js_global_ini_atr_val(Key_mode_is_http		, app.App_type().Uid_is_http());
 		wtr.Write_js_global_ini_atr_val(Key_http_port			, app.Http_server().Port());
 		wtr.Write_js_global_ini_atr_msg(wiki, Key_sort_ascending);
 		wtr.Write_js_global_ini_atr_msg(wiki, Key_sort_descending);

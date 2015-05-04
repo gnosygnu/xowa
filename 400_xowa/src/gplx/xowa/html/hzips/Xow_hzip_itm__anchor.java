@@ -73,6 +73,10 @@ public class Xow_hzip_itm__anchor {
 			ttl_bgn += Href_bry_len;
 		int ttl_end = Bry_finder.Find_fwd(src, Byte_ascii.Quote, ttl_bgn , src_len);		if (ttl_end == Bry_finder.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("a.ttl_end_missing", bgn, ttl_bgn);
 		Xoa_ttl ttl = ttl_parser.Ttl_parse(Bry_.Mid(src, ttl_bgn, ttl_end));				if (ttl == null) return hzip_mgr.Warn_by_pos("a.ttl_invalid", ttl_bgn, ttl_end);
+//			int id_bgn = Bry_finder.Find_fwd(src, Find_id_bry, ttl_end, src_len);				if (id_bgn == Bry_finder.Not_found) return Xow_hzip_mgr.Unhandled;
+//			id_bgn += Find_id_bry.length;
+//			int id_end = Bry_finder.Find_fwd(src, Byte_ascii.Quote, id_bgn, src_len);			if (id_end == Bry_finder.Not_found) return Xow_hzip_mgr.Unhandled;
+//			int id = Bry_.Xto_int_or(src, id_bgn, id_end, -1);									if (id == Bry_finder.Not_found) return Xow_hzip_mgr.Unhandled;
 		int a_lhs_end = Bry_finder.Find_fwd(src, Byte_ascii.Gt, ttl_end, src_len);			if (a_lhs_end == Bry_finder.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("a.a_lhs_end_missing", bgn, ttl_end);
 		++a_lhs_end;	// skip >
 		int a_rhs_bgn = Bry_finder.Find_fwd(src, Find_a_rhs_bgn_bry, a_lhs_end, src_len);	if (a_rhs_bgn == Bry_finder.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("a.a_rhs_bgn_missing", bgn, ttl_end);
@@ -196,7 +200,8 @@ public class Xow_hzip_itm__anchor {
 			);
 	}
 	private static final byte[]
-	  Find_href_bry			= Bry_.new_ascii_("href=\"")
+	  Find_href_bry			= Bry_.new_ascii_(" href=\"")
+//		, Find_id_bry			= Bry_.new_ascii_(" id=\"")
 	, Find_a_rhs_bgn_bry	= Bry_.new_ascii_("</a>")
 	, Find_img_xatrs		= Bry_.new_ascii_("xatrs='")
 	;

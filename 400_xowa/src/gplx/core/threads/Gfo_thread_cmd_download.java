@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.threads; import gplx.*;
+package gplx.core.threads; import gplx.*; import gplx.core.*;
 import gplx.gfui.*;
 public class Gfo_thread_cmd_download implements Gfo_thread_cmd {
 	public Gfo_thread_cmd Ctor(Gfo_usr_dlg usr_dlg, Gfui_kit kit) {this.usr_dlg = usr_dlg; this.kit = kit; xrg.Prog_dlg_(usr_dlg); return this;}
@@ -50,7 +50,7 @@ public class Gfo_thread_cmd_download implements Gfo_thread_cmd {
 	}
 	public void Async_prog_run(int async_sleep_sum) {}
 	public boolean Async_running() {return xrg.Prog_running();} 
-	public void Async_run() {ThreadAdp_.invk_(gplx.xowa.apps.Xoa_thread_.Key_bldr_download, this, Invk_async_bgn).Start();}
+	public void Async_run() {Thread_adp_.invk_(gplx.xowa.apps.Xoa_thread_.Key_bldr_download, this, Invk_async_bgn).Start();}
 	private void Download() {
 		download_pass = true;
 		if (!xrg.Exec()) {

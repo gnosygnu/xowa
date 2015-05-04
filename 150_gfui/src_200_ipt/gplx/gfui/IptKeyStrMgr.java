@@ -24,8 +24,8 @@ class IptKeyStrMgr {
 	}
 	public String XtoStr(IptKey key) {
 		if (literals == null) Init();
-		Object rvObj = literals.Fetch(key.Val());
-		return rvObj == null ? String_.Empty : (String)rvObj;
+		Object rv = literals.Fetch(key.Val());
+		return rv == null ? String_.Empty : (String)rv;
 	}
 	public void XtoIptKeyAry(ListAdp list) {
 		if (literals == null) Init();

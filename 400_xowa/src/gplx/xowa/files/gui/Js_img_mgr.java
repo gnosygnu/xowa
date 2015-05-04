@@ -30,7 +30,7 @@ public class Js_img_mgr {
 		html_itm.Html_elem_atr_set_append(html_id, "class", " new");
 	}
 	private static void Update_img(Xoa_page page, Xog_js_wkr js_wkr, Js_img_wkr img_wkr, int uid, byte lnki_type, byte elem_tid, int html_w, int html_h, String html_src, int orig_w, int orig_h, String orig_src, byte[] lnki_ttl, int gallery_mgr_h) {
-		if (!Xoa_app_.Mode_is_gui()) return;	// do not update html widget unless app is gui; null ref on http server; DATE:2014-09-17
+		if (!page.Wiki().App().App_type().Uid_is_gui()) return;	// do not update html widget unless app is gui; null ref on http server; DATE:2014-09-17
 		switch (elem_tid) {
 			case Xof_html_elem.Tid_gallery_v2:
 				img_wkr.Html_update(page, js_wkr, uid, html_w, html_h, html_src, orig_w, orig_h, orig_src, lnki_ttl);

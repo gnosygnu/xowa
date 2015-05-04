@@ -117,7 +117,7 @@ public class Xog_tab_mgr implements GfoEvObj {
 		Xog_tab_itm tab = Tabs_get_by_key_or_warn(key); if (tab == null) return;
 		active_tab = tab;
 		Xoae_page page = tab.Page();
-		Xog_tab_itm_read_mgr.Update_selected_tab(win.App().Url_parser(), win, page.Url(), page.Ttl());
+		Xog_tab_itm_read_mgr.Update_selected_tab(win, page.Url(), page.Ttl());
 		tab.Html_itm().Tab_selected(page);
 	}
 	public void Tabs_close_cur() {
@@ -149,7 +149,7 @@ public class Xog_tab_mgr implements GfoEvObj {
 		return rv;
 	}
 	public boolean Tabs__pub_close(Xog_tab_itm tab) {
-		return tab.Page().Tab_data().Close_mgr().When_close(tab);
+		return tab.Page().Tab_data().Close_mgr().When_close(tab, Xoa_url.Null);
 	}
 	public void Tabs_close_undo() {
 		if (closed_undo_list.Count() == 0) return;
@@ -165,7 +165,7 @@ public class Xog_tab_mgr implements GfoEvObj {
 		tab_regy.Del(key);
 		if (tab_regy.Count() == 0) {
 			active_tab = Xog_tab_itm_.Null;
-			Xog_tab_itm_read_mgr.Update_selected_tab_blank(win.App().Url_parser(), win);
+			Xog_tab_itm_read_mgr.Update_selected_tab_blank(win);
 		}
 		else
 			Tabs_recalc_idx();
@@ -217,10 +217,8 @@ public class Xog_tab_mgr implements GfoEvObj {
 	}
 	public void Tabs_new_link(String link, boolean focus) {
 		Xowe_wiki wiki = active_tab.Wiki();
+		Xog_tab_itm new_tab = Tabs_new(focus, false, wiki, Xoae_page.new_(wiki, active_tab.Page().Ttl()));	// NOTE: do not use ttl from link, else middle-clicking pages with anchors won't work; DATE:2015-05-03
 		Xoa_url url = Xoa_url_parser.Parse_from_url_bar(win.App(), wiki, link);	// NOTE: link must be of form domain/wiki/page; DATE:2014-05-27
-		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, url.Page_bry());
-		Xog_tab_itm new_tab = Tabs_new(focus, false, wiki, Xoae_page.new_(wiki, ttl));
-		new_tab.Tab_name_(String_.new_utf8_(Xoa_ttl.Replace_unders(url.Page_bry())));
 		new_tab.Show_url_bgn(url);
 		if (focus)
 			tab_mgr.Tabs_select_by_idx(new_tab.Tab_idx());

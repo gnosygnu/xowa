@@ -33,8 +33,8 @@ public class Xop_lnki_type {
 				||	Enm_.HasInt(id, Id_none)		// TODO: deprecate
 				)
 			return false;
-		else										// TODO: throw err; should not happen
-			return false;
+		else										// should not happen
+			throw Err_.unhandled(id);
 	}
 	public static boolean Id_limits_large_size(byte id) {// Linker.php|makeThumbLink2|Do not present an image bigger than the source, for bitmap-style images; assuming original of 400,200
 		if		(	Enm_.HasInt(id, Id_thumb)		// [[File:A.png|600px|thumb]]      -> 400,200
@@ -46,8 +46,8 @@ public class Xop_lnki_type {
 				||	Enm_.HasInt(id, Id_none)		// TODO: deprecate
 				)
 			return false;
-		else										// TODO: throw err; should not happen;
-			return true;
+		else										// should not happen;
+			throw Err_.unhandled(id);
 	}
 	public static boolean Id_supports_upright(byte id) {// REF:Linker.php|makeImageLink;if ( isset( $fp['thumbnail'] ) || isset( $fp['manualthumb'] ) || isset( $fp['framed'] ) || isset( $fp['frameless'] ) || !$hp['width'] )  DATE:2014-05-22
 		if		(	Enm_.HasInt(id, Id_thumb)
@@ -59,7 +59,7 @@ public class Xop_lnki_type {
 				||	Enm_.HasInt(id, Id_none)
 				)
 				return false;
-		else										// TODO: throw err; should not happen;
-			return true;
+		else										// should not happen;
+			throw Err_.unhandled(id);
 	}
 }

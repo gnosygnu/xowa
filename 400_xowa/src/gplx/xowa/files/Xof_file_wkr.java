@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-import gplx.threads.*; import gplx.ios.*;
+import gplx.core.threads.*; import gplx.ios.*;
 import gplx.fsdb.*; import gplx.fsdb.meta.*; import gplx.fsdb.data.*; import gplx.xowa.files.fsdb.*;
 import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.caches.*; import gplx.xowa.files.gui.*;
 import gplx.xowa.html.hdumps.core.*;
@@ -57,6 +57,7 @@ public class Xof_file_wkr implements Gfo_thread_wkr {
 		fsdb.Ctor_by_lnki(hdump.Lnki_ttl(), hdump.Lnki_type(), hdump.Lnki_w(), hdump.Lnki_h(), Xof_patch_upright_tid_.Tid_all, hdump.Lnki_upright(), hdump.Lnki_time(), hdump.Lnki_page());
 		fsdb.Lnki_ext_(Xof_ext_.new_by_id_(hdump.Lnki_ext()));
 		fsdb.Html_uid_(hdump.Html_uid());
+		fsdb.Html_elem_tid_(hdump.Html_elem_tid());
 		fsdb.Orig_exists_n_();
 		Xof_orig_itm orig = orig_mgr.Find_by_ttl_or_null(fsdb.Lnki_ttl()); if (orig == Xof_orig_itm.Null) return;
 		Eval_orig(exec_tid, orig, fsdb, url_bldr, repo_mgr, img_size);

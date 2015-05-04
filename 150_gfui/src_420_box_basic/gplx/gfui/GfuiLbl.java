@@ -31,6 +31,9 @@ public class GfuiLbl extends GfuiElemBase { // standard label does not support t
 		super.ctor_GfuiBox_base(ctorArgs);
 		this.CustomDraw_set(true);
 	}
-	GfuiBorderMgr focusBorder = GfuiBorderMgr.new_();
+	@Override public void ctor_kit_GfuiElemBase(Gfui_kit kit, String key, GxwElem underElem, KeyValHash ctorArgs) {
+		super.ctor_kit_GfuiElemBase(kit, key, underElem, ctorArgs);
+		this.CustomDraw_set(true);
+	}
 	@Override public GxwElem UnderElem_make(KeyValHash ctorArgs) {return GxwElemFactory_._.lbl_();}
 }

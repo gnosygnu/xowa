@@ -25,7 +25,7 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	private Xof_bin_mgr src_bin_mgr; private Xof_bin_wkr__fsdb_sql src_fsdb_wkr; private boolean src_bin_mgr__cache_enabled = Bool_.N; private String src_bin_mgr__fsdb_version; private String[] src_bin_mgr__fsdb_skip_wkrs; private boolean src_bin_mgr__wmf_enabled;
 	private Fsm_mnt_itm trg_mnt_itm; private Fsm_cfg_mgr trg_cfg_mgr; private Fsm_atr_fil trg_atr_fil; private Fsm_bin_fil trg_bin_fil; private long trg_bin_db_max;
 	private final Xof_bin_updater trg_bin_updater = new Xof_bin_updater(); private Xob_tier_namer tier_namer; private int[] ns_ids; private int prv_lnki_tier_id = -1;
-	private long download_size_max = Io_mgr.Len_mb_long; private int[] download_keep_tier_ids = Int_.Ary(0);
+	private long download_size_max = Io_mgr.Len_mb_long * 5; private int[] download_keep_tier_ids = Int_.Ary(0);
 	private Xobu_poll_mgr poll_mgr; private int poll_interval; private long time_bgn;
 	private int select_interval = 2500, progress_interval = 1, commit_interval = 1, delete_interval = 5000;
 	private boolean exec_done, resume_enabled; private int exec_count, exec_count_max = Int_.MaxValue, exec_fail, exec_fail_max = 10000; // 115 errors over 900k images		
@@ -34,8 +34,8 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	public Xob_fsdb_make_cmd(Xob_bldr bldr, Xowe_wiki wiki) {
 		this.Cmd_ctor(bldr, wiki);
 		this.poll_mgr = new Xobu_poll_mgr(bldr.App());
-		wiki.File_mgr__fsdb_mode().Tid_make_y_();
-		this.src_bin_mgr = new Xof_bin_mgr(new Fsm_mnt_mgr(), wiki.File_mgr__repo_mgr(), app.File_mgr__cache_mgr(), app.File_mgr__img_mgr().Wkr_resize_img());
+		wiki.File__fsdb_mode().Tid_make_y_();
+		this.src_bin_mgr = new Xof_bin_mgr(new Fsm_mnt_mgr(), wiki.File__repo_mgr(), app.File__cache_mgr(), app.File__img_mgr().Wkr_resize_img());
 	}
 	public String Cmd_key() {return Xob_cmd_keys.Key_file_fsdb_make;}
 	public void Cmd_bgn(Xob_bldr bldr) {			
@@ -44,12 +44,12 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		this.tier_namer = new Xob_tier_namer(wiki.Domain_str(), ns_ids);
 		// src_bin_mgr
 		if (src_bin_mgr__fsdb_version != null) {
-			this.src_fsdb_wkr = Xof_bin_wkr__fsdb_sql.new_(wiki.File_mgr__mnt_mgr());
+			this.src_fsdb_wkr = Xof_bin_wkr__fsdb_sql.new_(wiki.File__mnt_mgr());
 			src_bin_mgr.Wkrs__add(src_fsdb_wkr);
 			src_fsdb_wkr.Mnt_mgr().Ctor_by_load(new_src_bin_db_mgr(wiki, src_bin_mgr__fsdb_version));
 			src_fsdb_wkr.Mnt_mgr().Mnts__get_main().Txn_bgn();			// NOTE: txn on atr speeds up from 50 -> 300; DATE:2015-03-21				
 			if (src_bin_mgr__fsdb_skip_wkrs != null) {
-				src_fsdb_wkr.Skip_mgr_init(src_bin_mgr__fsdb_skip_wkrs);
+				src_fsdb_wkr.Skip_mgr_init(src_fsdb_wkr.Mnt_mgr().Mnts__get_main().Cfg_mgr(), src_bin_mgr__fsdb_skip_wkrs);
 			}
 			if (src_bin_mgr__cache_enabled) {
 				usr_dlg.Prog_many("", "", "src_bin_mgr.cache.bgn");
@@ -255,6 +255,9 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		bldr_cfg_tbl.Conn().Txn_sav();
 		trg_cfg_mgr.Next_id_commit();
 		trg_atr_fil.Conn().Txn_sav();
+		if (src_bin_mgr__fsdb_version != null && src_bin_mgr__fsdb_skip_wkrs != null) {
+			src_fsdb_wkr.Skip_mgr().Skip_term(src_fsdb_wkr.Mnt_mgr().Mnts__get_main().Cfg_mgr());
+		}
 		if (!trg_mnt_itm.Db_mgr().File__solo_file())
 			trg_bin_fil.Conn().Txn_sav();
 		if (exit_after_commit) exit_now = true;

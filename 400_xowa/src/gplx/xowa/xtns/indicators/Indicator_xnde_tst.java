@@ -20,6 +20,6 @@ import org.junit.*;
 public class Indicator_xnde_tst {
 	@Before public void init() {fxt.Reset();} private Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Basic() {
-		fxt.Test_parse_page_all_str("<indicator>test</indicator>", "");
+		fxt.Test_parse_page_all_str("<indicator name='a'>test</indicator>", "");
 	}
 }

@@ -21,7 +21,7 @@ import gplx.xowa.gui.*;
 public class Xoh_module_mgr_tst {
 	@Before public void init() {fxt.Clear();} private Xoh_module_mgr_fxt fxt = new Xoh_module_mgr_fxt();
 	@Test   public void Css() {
-		fxt.Mgr().Itm_css().Enabled_y_();
+		fxt.Mgr().Itm__css().Enabled_y_();
 		fxt.Test_write(String_.Concat_lines_nl_skip_last
 		( ""
 		, "  <style type=\"text/css\">"
@@ -32,7 +32,7 @@ public class Xoh_module_mgr_tst {
 	@Test   public void Toc() {
 		fxt.Init_msg(Xoh_module_itm__toc.Key_showtoc, "Sh\"ow");
 		fxt.Init_msg(Xoh_module_itm__toc.Key_hidetoc, "Hi'de");
-		fxt.Mgr().Itm_toc().Enabled_y_();
+		fxt.Mgr().Itm__toc().Enabled_y_();
 		fxt.Test_write(String_.Concat_lines_nl_skip_last
 		( ""
 		, "  <script type='text/javascript'>"
@@ -47,7 +47,7 @@ public class Xoh_module_mgr_tst {
 	}
 	@Test  public void Globals() {
 		fxt.Init_msg(Xol_msg_itm_.Id_dte_month_name_january, "Jan'uary" );	// add apos to simulate apostrophes in Hebrew months; DATE:2014-07-28
-		fxt.Mgr().Itm_globals().Enabled_y_();
+		fxt.Mgr().Itm__globals().Enabled_y_();
 		fxt.Test_write(String_.Concat_lines_nl_skip_last
 		( ""
 		, "  <link rel=\"stylesheet\" href=\"file:///mem/xowa/bin/any/xowa/html/res/src/xowa/core/core.css\" type='text/css'>"
@@ -78,7 +78,7 @@ public class Xoh_module_mgr_tst {
 		gplx.xowa.langs.numbers.Xol_transform_mgr separators_mgr = la_lang.Num_mgr().Separators_mgr();
 		separators_mgr.Clear();
 		separators_mgr.Set(gplx.xowa.langs.numbers.Xol_num_mgr.Separators_key__grp, Bry_.new_ascii_(" "));
-		fxt.Mgr().Itm_globals().Enabled_y_();
+		fxt.Mgr().Itm__globals().Enabled_y_();
 		fxt.Test_write(String_.Concat_lines_nl_skip_last
 		( ""
 		, "  <link rel=\"stylesheet\" href=\"file:///mem/xowa/bin/any/xowa/html/res/src/xowa/core/core.css\" type='text/css'>"

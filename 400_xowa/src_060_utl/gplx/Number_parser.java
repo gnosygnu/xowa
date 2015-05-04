@@ -16,19 +16,24 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
-public class NumberParser {
-	public int AsInt() {return (int)int_val;} long int_val = 0;
-	public DecimalAdp AsDec() {return dec_val == null ? DecimalAdp_.long_(int_val) : dec_val;} DecimalAdp dec_val = null;
-	public boolean HasErr()  {return hasErr;} private boolean hasErr;
-	public boolean HasFrac() {return hasFrac;} private boolean hasFrac;
-	public boolean Hex_enabled() {return hex_enabled;} public NumberParser Hex_enabled_(boolean v) {hex_enabled = v; return this;} private boolean hex_enabled;
-	public NumberParser Parse(byte[] src) {return Parse(src, 0, src.length);}
-	public NumberParser Parse(byte[] ary, int bgn, int end) {
+public class Number_parser {
+	public int				Rv_as_int() {return (int)int_val;} long int_val = 0;
+	public DecimalAdp		Rv_as_dec() {return dec_val == null ? DecimalAdp_.long_(int_val) : dec_val;} DecimalAdp dec_val = null;
+	public boolean				Has_err()  {return has_err;} private boolean has_err;
+	public boolean				Has_frac() {return has_frac;} private boolean has_frac;
+	public boolean				Hex_enabled() {return hex_enabled;} public Number_parser Hex_enabled_(boolean v) {hex_enabled = v; return this;} private boolean hex_enabled;
+	public Number_parser	Ignore_chars_(byte[] v) {this.ignore_chars = v; return this;} private byte[] ignore_chars;
+	public Number_parser	Ignore_space_at_end_y_() {this.ignore_space_at_end = true; return this;} private boolean ignore_space_at_end;
+	public void	Clear() {
+		ignore_chars = null;
+	}
+	public Number_parser Parse(byte[] src) {return Parse(src, 0, src.length);}
+	public Number_parser Parse(byte[] ary, int bgn, int end) {
 		int loop_bgn = end - 1, loop_end = bgn - 1, exp_multiplier = 1, factor = 10;
 		long multiplier = 1, frc_multiplier = 1;
 		int_val = 0; dec_val = null; boolean comma_nil = true;
 		long frc_int = 0;
-		hasErr = false; hasFrac = false; boolean has_exp = false, has_neg = false, exp_neg = false, has_plus = false, has_num = false;
+		has_err = false; has_frac = false; boolean has_exp = false, has_neg = false, exp_neg = false, has_plus = false, has_num = false;
 		boolean input_is_hex = false;
 		if (hex_enabled) {
 			if (loop_end + 2 < end) {		// ArrayOutOfBounds check
@@ -64,30 +69,31 @@ public class NumberParser {
 					has_num = true;
 					break;
 				case Byte_ascii.Dot:
-					if (hasFrac) return IsErr_();
+					if (has_frac) return Has_err_y_();
 					frc_int = int_val;
 					int_val = 0;
 					frc_multiplier = multiplier;
 					multiplier = 1;
-					hasFrac = true;
+					has_frac = true;
 					break;
 				case Byte_ascii.Comma:
 					if (comma_nil)
 						comma_nil = false;
 					else
-						return IsErr_();
+						return Has_err_y_();
 					break;
 				case Byte_ascii.Dash:
-					if (has_neg) return IsErr_();
+					if (has_neg) return Has_err_y_();
 					has_neg = true;
 					break;
 				case Byte_ascii.Space:
-					if (i == bgn) {}	// space at bgn
+					if		(i == bgn) {}	// space at bgn
+					else if (i == end - 1 && ignore_space_at_end) {}	// ignore space at end; DATE:2015-04-29
 					else
-						return IsErr_();
+						return Has_err_y_();
 					break;
 				case Byte_ascii.Plus:
-					if (has_plus) return IsErr_();
+					if (has_plus) return Has_err_y_();
 					has_plus = true;
 					break;
 				case Byte_ascii.Ltr_e:
@@ -98,7 +104,7 @@ public class NumberParser {
 						has_num = true;						
 					}
 					else {
-						if (has_exp) return IsErr_();
+						if (has_exp) return Has_err_y_();
 						exp_neg = has_neg;
 						exp_multiplier = (int)Math_.Pow(10, int_val);
 						int_val = 0;
@@ -119,7 +125,7 @@ public class NumberParser {
 						has_num = true;
 					}
 					else
-						return IsErr_();
+						return Has_err_y_();
 					break;
 				case Byte_ascii.Ltr_a:
 				case Byte_ascii.Ltr_b:
@@ -132,20 +138,31 @@ public class NumberParser {
 						has_num = true;
 					}
 					else
-						return IsErr_();
+						return Has_err_y_();
 					break;
 				case Byte_ascii.Ltr_x:
 				case Byte_ascii.Ltr_X:
 					if (input_is_hex)
-						return (factor == 16) ? this : IsErr_();	// check for '0x'
+						return (factor == 16) ? this : Has_err_y_();	// check for '0x'
 					else
-						return IsErr_();
+						return Has_err_y_();
 				default:
-					return IsErr_();
+					if (ignore_chars != null) {
+						int ignore_chars_len = ignore_chars.length;
+						boolean ignored = false;
+						for (int j = 0; j < ignore_chars_len; ++j) {
+							if (cur == ignore_chars[j]) {
+								ignored = true;
+								break;
+							}
+						}
+						if (ignored) continue;
+					}
+					return Has_err_y_();
 			}
 		}			
-		if (!has_num) return IsErr_();	// handles situations wherein just symbols; EX: "+", ".", "-.", " ,  " etc.
-		if (hasFrac) {
+		if (!has_num) return Has_err_y_();	// handles situations wherein just symbols; EX: "+", ".", "-.", " ,  " etc.
+		if (has_frac) {
 			long full_val = (((int_val * frc_multiplier) + frc_int));
 			if (has_neg) full_val *= -1;
 			if (has_exp) {
@@ -160,5 +177,5 @@ public class NumberParser {
 		}
 		return this;
 	}
-	NumberParser IsErr_() {hasErr = true; return this;}
+	private Number_parser Has_err_y_() {has_err = true; return this;}
 }

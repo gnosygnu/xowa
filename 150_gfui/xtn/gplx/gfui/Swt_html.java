@@ -17,9 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui;
 import gplx.core.primitives.*;
+import gplx.core.threads.Thread_adp_;
+
 import java.security.acl.Owner;
 import gplx.*;
-import gplx.threads.ThreadAdp_;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.*;
 import org.eclipse.swt.events.*;
@@ -28,7 +29,6 @@ import org.eclipse.swt.widgets.*;
 import java.security.acl.Owner;
 
 import gplx.*;
-import gplx.threads.ThreadAdp_;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.*;
 import org.eclipse.swt.events.*;
@@ -99,7 +99,7 @@ class Swt_html implements Gxw_html, Swt_control, FocusListener {
 		while (count < 5) {
 			boolean rv = Eval_script_as_bool(kit.Html_cfg().Elem_img_update(elem_id, elem_src, elem_width, elem_height));
 			if (rv) return rv;
-			ThreadAdp_.Sleep(100);
+			Thread_adp_.Sleep(100);
 			count++;
 		}
 		return false;

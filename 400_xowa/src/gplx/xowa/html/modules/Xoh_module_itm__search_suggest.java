@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html.modules; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import gplx.xowa.gui.*;
 public class Xoh_module_itm__search_suggest implements Xoh_module_itm {
+	public byte[] Key() {return Xoh_module_itm_.Key_search_suggest;}
 	public boolean Enabled() {return enabled;} public void Enabled_y_() {enabled = true;} public void Enabled_(boolean v) {enabled = v;} private boolean enabled = false;
 	public void Clear() {enabled = false;}
-	public byte[] Key() {return Key_const;} private static final byte[] Key_const = Bry_.new_ascii_("xowa.search_suggest");
 	public void Write_css_include(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_module_wtr wtr) {
 		if (!enabled) return;
 		if (Url_css == null) Url_css = app.Fsys_mgr().Bin_any_dir().GenSubFil_nest("xowa", "html", "res", "src", "xowa", "search-suggest", "search-suggest.css").To_http_file_bry();

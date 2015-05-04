@@ -18,36 +18,28 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
 import gplx.html.*; import gplx.xowa.html.wtrs.*; import gplx.xowa.langs.numbers.*;
 class Xows_html_wkr {		
-	private final Bry_bfr bfr = Bry_bfr.new_(255);
 	private final Bry_bfr tmp_bfr = Bry_bfr.new_(255);
 	private Xows_ui_qry qry; private Xow_wiki wiki; private Xol_num_mgr num_mgr;
-	private Xoh_lnki_bldr lnki_bldr; private Xoh_anchor_kv_bldr self_lnkr = new Xoh_anchor_kv_bldr();
-	public Xows_html_row Html_rows() {return html_rows;} private final Xows_html_row html_rows = new Xows_html_row();
-	public void Init_by_wiki(Xow_wiki wiki, Xoh_lnki_wtr_utl lnki_wtr_utl, Xol_num_mgr num_mgr) {
-		this.wiki = wiki; this.num_mgr = num_mgr;
-		this.lnki_bldr = new Xoh_lnki_bldr(wiki.App(), wiki.App().Html__href_parser());
-		html_rows.Ctor(lnki_wtr_utl);
+	private Xoh_lnki_bldr lnki_bldr; private Xoh_anchor_kv_bldr self_lnkr = new Xoh_anchor_kv_bldr(); private Xows_html_row html_rows;		
+	public void Init_by_wiki(Xow_wiki wiki, Xol_num_mgr num_mgr, Xows_ui_qry qry) {
+		this.wiki = wiki; this.num_mgr = num_mgr; this.qry = qry;
+		this.lnki_bldr = wiki.App().Html__lnki_bldr();
+		this.html_rows = new Xows_html_row(lnki_bldr);
+		self_lnkr.Init_w_qarg(qry.Special_link_base_href());
 	}
-	@gplx.Internal protected void Qry_(Xows_ui_qry qry) {this.qry = qry; self_lnkr.Init_w_qarg(qry.Special_link_base_href());}	// TEST:
-	public byte[] Gen_page(Xows_ui_qry qry, byte[] tbls) {
-		synchronized (bfr) {
-			this.Qry_(qry);
-			byte[] rslts_hdr = fmtr_rslts.Bld_bry_many(tmp_bfr, num_mgr.Format_num(qry.Itms_bgn() + ListAdp_.Base1), num_mgr.Format_num(qry.Itms_end()), qry.Search_raw());
-			byte[] option_link = lnki_bldr.Href_(Bry_.new_ascii_("home"), wiki.Ttl_parse(Bry_.new_ascii_("Help:Options/Search"))).Img_16x16(Xoh_img_path.Img_option).Bld_to_bry();
-			fmtr_page.Bld_bfr_many(bfr, rslts_hdr, option_link, Paging_link(Bool_.N), Paging_link(Bool_.Y), tbls);
-			return bfr.Xto_bry_and_clear();
-		}
+	public byte[] Gen_page(byte[] tbls) {
+		byte[] rslts_hdr = fmtr_rslts.Bld_bry_many(tmp_bfr, num_mgr.Format_num(qry.Itms_bgn() + ListAdp_.Base1), num_mgr.Format_num(qry.Itms_end()), qry.Search_raw());
+		byte[] option_link = lnki_bldr.Href_(Bry_.new_ascii_("home"), wiki.Ttl_parse(Bry_.new_ascii_("Help:Options/Search"))).Img_16x16(Xoh_img_path.Img_option).Bld_to_bry();
+		fmtr_page.Bld_bfr_many(tmp_bfr, rslts_hdr, option_link, Paging_link(Bool_.N), Paging_link(Bool_.Y), tbls);
+		return tmp_bfr.Xto_bry_and_clear();
 	}
-	public void Gen_tbl(Bry_bfr bfr, Xows_ui_qry qry, Xows_ui_rslt rslt, byte[] cmd_key, byte[] wiki_domain, boolean searching_db) {
-		synchronized (bfr) {
-			this.Qry_(qry);
-			html_rows.Init(rslt);
-			byte[] search_link = lnki_bldr.Href_(wiki_domain, wiki.Ttl_parse(self_lnkr.Bld_to_bry())).Caption_(wiki_domain).Img_16x16(Xoh_img_path.Img_search).Bld_to_bry();
-			fmtr_tbl.Bld_bfr_many(bfr, search_link, searching_db ? Cancel_link(wiki_domain, cmd_key) : Bry_.Empty, Bry_hdr_len, Bry_hdr_ttl, Xows_ui_async.Gen_insert_key(wiki_domain), html_rows);
-		}
+	public void Gen_tbl(Bry_bfr bfr, Xows_ui_rslt rslt, byte[] cmd_key, byte[] wiki_domain, boolean searching_db) {
+		html_rows.Init(rslt);
+		byte[] search_link = lnki_bldr.Href_(wiki_domain, wiki.Ttl_parse(self_lnkr.Bld_to_bry())).Caption_(wiki_domain).Img_16x16(Xoh_img_path.Img_search).Img_pos_is_left_(Bool_.Y).Bld_to_bry();
+		fmtr_tbl.Bld_bfr_many(bfr, search_link, searching_db ? Cancel_link(wiki_domain, cmd_key) : Bry_.Empty, Bry_hdr_len, Bry_hdr_ttl, Xows_ui_async.Gen_insert_key(wiki_domain), html_rows);
 	}		
 	private byte[] Cancel_link(byte[] domain, byte[] cmd_key) {
-		lnki_bldr.Id_(tmp_bfr.Add_str_ascii("xowa_cancel_").Add(domain).Xto_bry_and_clear());
+		lnki_bldr.Id_(Bry_.Add(Bry_.new_ascii_("xowa_cancel_"), domain));
 		lnki_bldr.Href_(wiki, self_lnkr.Add_int(Xows_arg_mgr.Arg_bry_page_index, qry.Page_idx()).Add_bry(Xows_arg_mgr.Arg_bry_cancel, cmd_key).Bld_to_bry());
 		lnki_bldr.Title_(Bry_cancel);
 		lnki_bldr.Img_16x16(Xoh_img_path.Img_cancel);
@@ -99,8 +91,9 @@ class Xows_html_wkr {
 	;
 }
 class Xows_html_row implements Bry_fmtr_arg {
-	private Xows_ui_rslt rslt; private Xoh_lnki_wtr_utl lnki_wtr_utl;
-	public Xows_html_row Ctor(Xoh_lnki_wtr_utl lnki_wtr_utl) {this.lnki_wtr_utl = lnki_wtr_utl; return this;}
+	private final Xoh_lnki_bldr lnki_bldr; private Xows_ui_rslt rslt;
+	private final Object thread_lock = new Object();
+	public Xows_html_row(Xoh_lnki_bldr lnki_bldr) {this.lnki_bldr = lnki_bldr;}
 	public Xows_html_row Init(Xows_ui_rslt rslt) {this.rslt = rslt; return this;}
 	public void XferAry(Bry_bfr bfr, int idx) { // <a href="/wiki/A" title="A" class="xowa-visited">A</a>
 		int len = rslt.Len();
@@ -110,17 +103,21 @@ class Xows_html_row implements Bry_fmtr_arg {
 		}
 	}
 	public void Gen_html(Bry_bfr bfr, Xows_db_row row) {
-		byte[] href = lnki_wtr_utl.Bld_href(row.Wiki_domain(), row.Page_ttl());
-		byte[] title = lnki_wtr_utl.Bld_title(row.Page_ttl().Full_db());
-		fmtr.Bld_bfr_many(bfr, Html_utl.Encode_id_as_str(row.Key()), row.Page_len(), href, title, Xoa_ttl.Replace_unders(row.Page_ttl().Full_db()));
+		synchronized (thread_lock) {
+			lnki_bldr.Href_(row.Wiki_domain(), row.Page_ttl());
+			byte[] title = row.Page_ttl().Full_txt();
+			lnki_bldr.Title_(title);
+			lnki_bldr.Caption_(title);
+			fmtr.Bld_bfr_many(bfr, Html_utl.Encode_id_as_str(row.Key()), row.Page_len(), lnki_bldr.Bld_to_bry());
+		}
 	}
 	public Bry_fmtr Fmtr() {return fmtr;} private final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "  <tr id='~{page_key}'>"
 	, "    <td style='padding-right:5px; vertical-align:top; text-align:right;'>~{page_len}"
 	, "    </td>"
-	, "    <td style='padding-left:5px; vertical-align:top;'><a href='~{a_href}' title='~{a_title}'>~{a_text}</a>"	// SERVER:"<a href='"; DATE:2015-04-16
+	, "    <td style='padding-left:5px; vertical-align:top;'>~{lnki}"	// SERVER:"<a href='"; DATE:2015-04-16
 	, "    </td>"
 	, "  </tr>"
-	), "page_key", "page_len", "a_href", "a_title", "a_text");
+	), "page_key", "page_len", "lnki");
 }

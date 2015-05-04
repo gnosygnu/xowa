@@ -38,6 +38,7 @@ public interface Gfui_kit extends GfoInvkAble {
 	Gfui_tab_mgr	New_tab_mgr(String key, GfuiElem owner, KeyVal... args);
 	GfuiTextBox		New_text_box(String key, GfuiElem owner, KeyVal... args);
 	GfuiBtn			New_btn(String key, GfuiElem owner, KeyVal... args);
+	GfuiLbl			New_lbl(String key, GfuiElem owner, KeyVal... args);
 	Gfui_dlg_file	New_dlg_file(byte type, String msg);
 	Gfui_dlg_msg	New_dlg_msg(String msg);
 	ImageAdp		New_img_load(Io_url path);

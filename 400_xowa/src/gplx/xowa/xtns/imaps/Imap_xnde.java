@@ -24,7 +24,7 @@ public class Imap_xnde implements Xox_xnde {
 		xtn_mgr = wiki.Xtn_mgr().Xtn_imap();
 		xtn_mgr.Xtn_assert();
 		Xoae_page page = ctx.Cur_page();
-		page.Html_data().Module_mgr().Itm_popups().Bind_hover_area_(true);
+		page.Html_data().Module_mgr().Itm__popups().Bind_hover_area_(true);
 		page.Html_data().Xtn_imap_exists_y_();
 		ctx.Para().Process_block__xnde(xnde.Tag(), Xop_xnde_tag.Block_end);
 		imap_data = xtn_mgr.Parser().Parse(wiki, ctx, root, src, xnde);

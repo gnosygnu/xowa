@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import org.junit.*;
-import gplx.brys.*; import gplx.threads.*; import gplx.xowa.wikis.*; import gplx.xowa.setup.maints.*; import gplx.xowa.xtns.wdatas.imports.*;
+import gplx.brys.*; import gplx.core.threads.*; import gplx.xowa.wikis.*; import gplx.xowa.setup.maints.*; import gplx.xowa.xtns.wdatas.imports.*;
 public class Xoi_cmd_wiki_tst {
-	@Test  public void Run() {	// MAINT			
+	@Test  public void Run() {	// MAIN
 //			Bld_import_list(Xow_wmf_api_mgr.Wikis);
 //			Bld_cfg_files(Xow_wmf_api_mgr.Wikis);	// NOTE: remember to carry over the wikisource / page / index commands from the existing xowa_build_cfg.gfs; also, only run the xowa_build_cfg.gfs once; DATE:2013-10-15; last run: DATE:2014-09-09
 	}
@@ -75,7 +75,7 @@ public class Xoi_cmd_wiki_tst {
 			dump_file.Server_url_(Xob_dump_file_.Server_wmf);
 			if (dump_file.Connect()) break;
 			Tfds.WriteText(String_.Format("retrying: {0} {1}\n", count, dump_file.File_modified()));
-			ThreadAdp_.Sleep(15000);	// wait for connection to reset
+			Thread_adp_.Sleep(15000);	// wait for connection to reset
 		}
 		if (count == 10) {
 			Tfds.WriteText(String_.Format("failed: {0}\n", dump_file.File_url()));
@@ -101,7 +101,7 @@ public class Xoi_cmd_wiki_tst {
 //			bfr.Add_byte_pipe();
 		bfr.Add_str(dump_file.Dump_date());
 		bfr.Add_byte_nl();
-		ThreadAdp_.Sleep(1000);
+		Thread_adp_.Sleep(1000);
 	}
 	*/
 	public void Bld_cfg_files(String... ary) {

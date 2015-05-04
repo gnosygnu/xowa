@@ -624,6 +624,7 @@ public class Bry_ {
 	}
 	public static int Xto_int_or(byte[] ary, int or)							{return Xto_int_or(ary, null, 0, ary.length, or);}
 	public static int Xto_int_or(byte[] ary, int bgn, int end, int or)			{return Xto_int_or(ary, null, bgn, end, or);}
+	public static int Xto_int_or(byte[] ary, byte[] ignore_ary, int or)			{return Xto_int_or(ary, ignore_ary, 0, ary.length, or);}
 	public static int Xto_int_or(byte[] ary, byte[] ignore_ary, int bgn, int end, int or) {
 		if (	ary == null
 			||	end == bgn				// null-len

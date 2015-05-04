@@ -19,6 +19,8 @@ package gplx.gfui; import gplx.*;
 public class IptArg_ {
 	public static final IptArg[] Ary_empty = new IptArg[0];
 	public static final IptArg Null = null;
+	public static final String Wildcard_key = "wildcard";
+	public static IptArg Wildcard = new IptKey(Int_.MaxValue, Wildcard_key);
 	public static boolean Is_null_or_none(IptArg arg) {return arg == Null || arg == IptKey_.None;}
 	public static IptArg[] Ary(IptArg... v) {return v;}
 	public static IptArg[] parse_ary_or_empty(String v) {

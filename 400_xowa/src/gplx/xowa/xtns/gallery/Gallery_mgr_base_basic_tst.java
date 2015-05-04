@@ -154,7 +154,7 @@ class Gallery_mgr_base_fxt {
 	public void Test_html_frag(String raw, String... expd_frags)		{fxt.Test_html_full_frag(raw, expd_frags);}	// TODO: change to wiki_str; currently uids do not get reset if wiki
 	public void Test_html_frag_n(String raw, String... expd_frags)	{fxt.Test_html_full_frag_n(raw, expd_frags);}
 	public void Test_html_modules_js(String expd)							{
-		fxt.Page().Html_data().Module_mgr().Itm_globals().Enabled_n_();
+		fxt.Page().Html_data().Module_mgr().Itm__globals().Enabled_n_();
 		fxt.Test_html_modules_js(expd);
 	}
 }

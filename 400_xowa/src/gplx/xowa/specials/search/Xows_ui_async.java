@@ -41,14 +41,10 @@ class Xows_ui_async {
 		Displace(new_row_slot, new_row);
 		html_row.Gen_html(bfr, new_row);
 		String html_tbl = bfr.Xto_str_and_clear();
-		synchronized (cxl) {
-			if (cxl.Canceled()) return;
-		}
+		if (cxl.Canceled()) return;
 		js_wkr.Html_elem_append_above(Html_utl.Encode_id_as_str(insert_key), html_tbl);
 		if (last_row != null) {
-			synchronized (cxl) {
-				if (cxl.Canceled()) return;
-			}
+			if (cxl.Canceled()) return;
 			js_wkr.Html_elem_replace_html(Html_utl.Encode_id_as_str(last_row.Key()), "");
 		}
 	}

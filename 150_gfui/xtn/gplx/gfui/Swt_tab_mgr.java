@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui;
 import gplx.*;
-import gplx.threads.ThreadAdp_;
+import gplx.core.threads.Thread_adp_;
 
 import org.eclipse.swt.*;
 import org.eclipse.swt.custom.*;

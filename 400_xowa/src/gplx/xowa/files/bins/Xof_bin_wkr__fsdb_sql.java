@@ -26,7 +26,8 @@ public class Xof_bin_wkr__fsdb_sql implements Xof_bin_wkr {
 	public String Key() {return Xof_bin_wkr_.Key_fsdb_wiki;}
 	public Fsm_mnt_mgr Mnt_mgr() {return mnt_mgr;} private final Fsm_mnt_mgr mnt_mgr;
 	public boolean Resize_allowed() {return bin_wkr_resize;} public void Resize_allowed_(boolean v) {bin_wkr_resize = v;} private boolean bin_wkr_resize = false;		
-	public void Skip_mgr_init(String[] wkrs) {this.skip_mgr = new Xof_bin_skip_mgr(wkrs);}
+	public Xof_bin_skip_mgr Skip_mgr() {return skip_mgr;}
+	public void Skip_mgr_init(Fsm_cfg_mgr cfg_mgr, String[] wkrs) {this.skip_mgr = new Xof_bin_skip_mgr(cfg_mgr, wkrs);}
 	public Io_stream_rdr Get_as_rdr(Xof_fsdb_itm fsdb, boolean is_thumb, int w) {
 		Find_ids(fsdb, is_thumb, w);
 		int bin_db_id = tmp_ids.Bin_db_id(); if (bin_db_id == Fsd_bin_tbl.Bin_db_id_null) return Io_stream_rdr_.Null;

@@ -32,7 +32,7 @@ public class Xof_lnki_file_mgr {
 				page_init_needed = false;					
 				wiki.File_mgr().Init_file_mgr_by_load(wiki);						// NOTE: fsdb_mgr may not be init'd for wiki; assert that that it is
 				Make_fsdb_list(page.Lnki_list(), wiki.File_mgr().Patch_upright());	// NOTE: Patch_upright check must occur after Init_by_wiki; DATE:2014-05-31
-				wiki.File_mgr__orig_mgr().Find_by_list(orig_regy, fsdb_list, exec_tid);
+				wiki.File__orig_mgr().Find_by_list(orig_regy, fsdb_list, exec_tid);
 				Make_fsdb_hash();
 			}
 			Xof_fsdb_itm fsdb = (Xof_fsdb_itm)fsdb_hash.Fetch(xfer.Lnki_ttl());

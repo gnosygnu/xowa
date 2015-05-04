@@ -21,7 +21,7 @@ public class IptBndMgr implements SrlAble {
 	public void EventsToFwd_set(IptEventType v) {eventsToFwd = v;} IptEventType eventsToFwd = IptEventType_.KeyDown;
 	public void EventsToFwd_add(IptEventType v) {eventsToFwd = eventsToFwd.Add(v);}
 	@gplx.Internal protected boolean Has(IptEventType type) {return IptEventType_.Has(curTypes, type);}
-	@gplx.Internal protected void Clear() {hash.Clear(); curTypes = IptEventType_.None; ClearLists(); chainMgr.Clear();}
+	public void Clear() {hash.Clear(); curTypes = IptEventType_.None; ClearLists(); chainMgr.Clear();}
 	public void Add(IptBnd bnd) {
 		for (IptBndHash list : regy)
 			if (IptEventType_.Has(bnd.EventTypes(), list.EventType()))
@@ -40,7 +40,7 @@ public class IptBndMgr implements SrlAble {
 			cfg.Owners_del(ptr.CfgKey());
 			for (IptBndHash list : regy) {
 				for (int j = 0; j < list.Count(); j++) {
-					IptBndListItm itmList = list.GetAt(j);
+					IptBndListItm itmList = list.Get_at(j);
 					for (int k = 0; k < itmList.Count(); k++) {
 						IptBnd bnd = itmList.FetchAt(k);							
 						if (String_.Eq(ptr.BndKey(), bnd.Key())) {
@@ -60,7 +60,7 @@ public class IptBndMgr implements SrlAble {
 		IptBnd old = null;
 		for (IptBndHash list : regy) {
 			for (int j = 0; j < list.Count(); j++) {
-				IptBndListItm itmList = list.GetAt(j);
+				IptBndListItm itmList = list.Get_at(j);
 				for (int i = 0; i < itmList.Count(); i++) {
 					IptBnd bnd = itmList.FetchAt(i);
 					if (String_.Eq(key, bnd.Key())) {
@@ -89,7 +89,7 @@ public class IptBndMgr implements SrlAble {
 			IptBndHash list = regy[i];
 			int list_len = list.Count();
 			for (int j = 0; j < list_len; j++) {
-				IptBndListItm bnds = list.GetAt(j);
+				IptBndListItm bnds = list.Get_at(j);
 				int bnds_len = bnds.Count();
 				for (int k = 0; k < bnds_len; k++) {
 					IptBnd itm_bnd = bnds.FetchAt(k);
@@ -129,7 +129,7 @@ public class IptBndMgr implements SrlAble {
 		IptBndHash list = regy[AryIdx(evData.EventType())];
 		String key = evData.EventArg().Key();
 		if (!String_.Eq(chainMgr.ActiveKey(), "")) key = chainMgr.ActiveKey() + key;
-		IptBndListItm itm = list.Get(key);
+		IptBndListItm itm = list.Get_by(key);
 		String chainP = "";
 		if (evData.EventType() == IptEventType_.KeyDown) {
 			chainP = chainMgr.Process(evData.EventArg());
@@ -170,20 +170,27 @@ public class IptBndMgr implements SrlAble {
 	}
 }
 class IptBndHash implements SrlAble {
+	private IptBndListItm wildcard_list;
 	public IptEventType EventType() {return eventType;} IptEventType eventType;
 	public int Count() {return hash.Count();}
-	public IptBndListItm Get(String iptKey) {return (IptBndListItm)hash.Fetch(iptKey);}
-	public IptBndListItm GetAt(int i) {return (IptBndListItm)hash.FetchAt(i);}
+	public IptBndListItm Get_by(String key) {return wildcard_list == null ? (IptBndListItm)hash.Fetch(key) : wildcard_list;}
+	public IptBndListItm Get_at(int i) {return (IptBndListItm)hash.FetchAt(i);}
 	public void Add(IptBnd bnd) {
 		for (int i = 0; i < bnd.Ipts().Count(); i++) {
 			IptArg arg = (IptArg)bnd.Ipts().FetchAt(i);
 			if (!IptArg_.EventType_match(arg, eventType)) continue;	// bnd may have multiple ipts of different evTypes; only add bnd if evType matches
-			IptBndListItm itm = (IptBndListItm)hash.Fetch(arg.Key());
-			if (itm == null) {
-				itm = new IptBndListItm(arg.Key());
-				hash.Add(arg.Key(), itm);
+			if (String_.Eq(arg.Key(), IptArg_.Wildcard_key)) {
+				if (wildcard_list == null) wildcard_list = new IptBndListItm(IptArg_.Wildcard_key);
+				wildcard_list.Add(bnd);
 			}
-			itm.Add(bnd);
+			else {
+				IptBndListItm itm = (IptBndListItm)hash.Fetch(arg.Key());
+				if (itm == null) {
+					itm = new IptBndListItm(arg.Key());
+					hash.Add(arg.Key(), itm);
+				}
+				itm.Add(bnd);
+			}
 		}
 	}
 	public void Del(IptBnd bnd) {

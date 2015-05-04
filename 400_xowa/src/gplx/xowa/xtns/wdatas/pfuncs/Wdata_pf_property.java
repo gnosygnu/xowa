@@ -47,13 +47,13 @@ public class Wdata_pf_property extends Pf_func_base {
 		if (property_wkr != null)
 			property_wkr.Eval_end(ctx.Cur_page(), id, log_time_bgn);
 	}
-	public static int Parse_pid(NumberParser num_parser, byte[] bry) {
+	public static int Parse_pid(Number_parser num_parser, byte[] bry) {
 		int bry_len = bry.length;
 		if (bry_len < 2) return Wdata_wiki_mgr.Pid_null;	// must have at least 2 chars; p#
 		byte b_0 = bry[0];
 		if (b_0 != Byte_ascii.Ltr_p && b_0 != Byte_ascii.Ltr_P)	return Wdata_wiki_mgr.Pid_null;
 		num_parser.Parse(bry, 1, bry_len);
-		return num_parser.HasErr() ? Wdata_wiki_mgr.Pid_null : num_parser.AsInt();
+		return num_parser.Has_err() ? Wdata_wiki_mgr.Pid_null : num_parser.Rv_as_int();
 	}
 	public static void Print_self(Gfo_usr_dlg usr_dlg, Bry_bfr bfr, byte[] src, Xot_invk self, String warn_cls, String warn_fmt, Object... args) {
 		bfr.Add_mid(src, self.Src_bgn(), self.Src_end());

@@ -35,6 +35,7 @@ public class Xop_xatr_itm {
 	public int Eq_pos() {return eq_pos;} private int eq_pos;
 	public boolean Invalid() {return tid < Tid_key_val;}	// NOTE: Tid order is important
 	public byte Quote_byte() {return quote_byte;} private byte quote_byte;
+	public String Val_as_str(byte[] src) {return String_.new_utf8_(Val_as_bry(src));}
 	public byte[] Val_as_bry(byte[] src) {if (val_bry == null) val_bry = Bry_.Mid(src, val_bgn, val_end); return val_bry;}	// NOTE: val_bry is cached
 	public byte[] Val_as_bry__blank_to_null(byte[] src) {byte[] rv = Val_as_bry(src); return Bry_.Len_eq_0(rv) ? null : rv;}
 	public int Val_as_int_or(byte[] src, int or) {return val_bry == null ? Bry_.Xto_int_or_lax(src, val_bgn, val_end, or) : Bry_.Xto_int_or(val_bry, or);}

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.xowa.files.*;
 class Xofo_lnki_parser extends Obj_ary_parser_base {
-	NumberParser parser = new NumberParser(); Xofo_lnki[] ary; int ary_idx;		
+	Number_parser parser = new Number_parser(); Xofo_lnki[] ary; int ary_idx;		
 	public Xofo_lnki[] Parse_ary(byte[] bry, int bgn, int end) {
 		Parse_core(bry, bgn, end, Byte_ascii.Semic, Byte_ascii.NewLine);
 		return ary;

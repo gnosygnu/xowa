@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.bins; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.ios.*; import gplx.threads.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.repos.*;
+import gplx.ios.*; import gplx.core.threads.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.repos.*;
 public class Xof_bin_wkr__http_wmf implements Xof_bin_wkr {
 	private final Xow_repo_mgr repo_mgr; private final IoEngine_xrg_downloadFil download_wkr; 
 	private final Xof_url_bldr url_bldr = new Xof_url_bldr();
@@ -46,7 +46,7 @@ public class Xof_bin_wkr__http_wmf implements Xof_bin_wkr {
 	}
 	private void Handle_error() {
 		if (fail_timeout > 0)
-			ThreadAdp_.Sleep(fail_timeout);	// as per WMF policy, pause 1 second for every cache miss; http://lists.wikimedia.org/pipermail/wikitech-l/2013-September/071948.html
+			Thread_adp_.Sleep(fail_timeout);	// as per WMF policy, pause 1 second for every cache miss; http://lists.wikimedia.org/pipermail/wikitech-l/2013-September/071948.html
 	}
 	private void Download_init(byte[] orig_repo, byte[] orig_ttl, byte[] orig_md5, Xof_ext orig_ext, boolean lnki_is_thumb, int file_w, double lnki_time, int lnki_page, Io_url file_url) {
 		byte mode = lnki_is_thumb ? Xof_repo_itm.Mode_thumb : Xof_repo_itm.Mode_orig;
@@ -60,5 +60,5 @@ public class Xof_bin_wkr__http_wmf implements Xof_bin_wkr {
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_fail_timeout_ = "fail_timeout_";
-	public static Xof_bin_wkr__http_wmf new_(Xow_wiki wiki) {return new Xof_bin_wkr__http_wmf(wiki.File_mgr__repo_mgr(), wiki.App().Wmf_mgr().Download_wkr().Download_xrg());}
+	public static Xof_bin_wkr__http_wmf new_(Xow_wiki wiki) {return new Xof_bin_wkr__http_wmf(wiki.File__repo_mgr(), wiki.App().Wmf_mgr().Download_wkr().Download_xrg());}
 }

@@ -49,9 +49,9 @@ public class Xoav_wiki_mgr implements GfoInvkAble {
 	}
 	private Xowv_wiki Load(String domain_str, Io_url wiki_dir) {
 		byte[] domain_bry = Bry_.new_utf8_(domain_str);
-		Xowv_wiki wiki = new Xowv_wiki(app, domain_bry, wiki_dir);
-		hash.AddReplace(domain_bry, wiki);
-		return wiki;
+		Xowv_wiki rv = new Xowv_wiki(app, domain_bry, wiki_dir);
+		hash.AddReplace(domain_bry, rv);
+		return rv;
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_import_by_fil))		return Import_by_fil(Io_url_.new_fil_(m.ReadStr("v")));

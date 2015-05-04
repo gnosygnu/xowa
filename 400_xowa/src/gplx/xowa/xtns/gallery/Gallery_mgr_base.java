@@ -99,8 +99,10 @@ public abstract class Gallery_mgr_base {
 		if (File_found_mode != Bool_.__byte)
 			file_found = File_found_mode == Bool_.Y_byte;
 		int vpad = -1, img_div_w = -1;
-		if (	!ttl.Ns().Id_file()
-			||	!file_found
+		if (	!hctx_is_hdump				// always write img if hdump; DATE:2015-04-27
+			&&	(	!ttl.Ns().Id_file()
+				||	!file_found
+				)
 			) {	// itm is not a file, or is not found; write text
 			itm_html = itm_missing_fmtr.Bld_bry_many(tmp_bfr, this.Get_thumb_padding() + itm_default_h, ttl.Page_txt());
 			itm.Html_prepare(wiki, ctx, src, xnde, xfer_itm, gallery_li_id, i);

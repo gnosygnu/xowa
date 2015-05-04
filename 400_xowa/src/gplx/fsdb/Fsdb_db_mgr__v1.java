@@ -62,7 +62,6 @@ class Fsdb_db_mgr__v1_bldr {
 		Fsdb_db_file db_abc = new_db(mnt_dir.GenSubFil(Fsdb_db_mgr__v1.Abc_name));
 		Db_cfg_tbl cfg_tbl = new Db_cfg_tbl(db_abc.Conn(), "fsdb_cfg"); cfg_tbl.Create_tbl();
 		Fsm_mnt_mgr.Patch(cfg_tbl);
-		Fsm_mnt_mgr.Patch_core(cfg_tbl);
 		Fsm_atr_tbl dba_tbl = new Fsm_atr_tbl(db_abc.Conn(), schema_is_1); dba_tbl.Create_tbl();
 		dba_tbl.Insert(mnt_id, mnt_name);
 		Fsm_bin_tbl dbb_tbl = new Fsm_bin_tbl(db_abc.Conn(), schema_is_1, mnt_id); dbb_tbl.Create_tbl();

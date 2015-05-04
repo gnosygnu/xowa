@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.gfui.*;
-import gplx.threads.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.utils.*;
+import gplx.core.threads.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.utils.*;
 class Xoi_cmd_wiki_download extends Gfo_thread_cmd_download implements Gfo_thread_cmd {	private Xoi_setup_mgr install_mgr; private String wiki_key, dump_date, dump_type;
 	public Xoi_cmd_wiki_download Ctor_download_(Xoi_setup_mgr install_mgr, String wiki_key, String dump_date, String dump_type) {
 		this.install_mgr = install_mgr;
@@ -168,7 +168,7 @@ class Xoi_cmd_wiki_zip implements Gfo_thread_cmd {
 	public void Async_run() {
 		running = true;
 		install_mgr.App().Usr_dlg().Log_many(GRP_KEY, "zip.bgn", "zip.bgn ~{0}", wiki_key);
-		ThreadAdp_.invk_(this.Async_key(), this, Invk_process_async).Start();
+		Thread_adp_.invk_(this.Async_key(), this, Invk_process_async).Start();
 	}
 	public boolean Async_running() {
 		return running;
