@@ -49,7 +49,7 @@ public class Io_line_rdr_tst {
 class Io_line_rdr_fxt {
 	Io_line_rdr rdr;
 	ListAdp lines = ListAdp_.new_(); Bry_bfr tmp = Bry_bfr.new_();
-	public Io_line_rdr_fxt(Io_url... urls) {rdr = new Io_line_rdr(Gfo_usr_dlg_base.test_(), urls);}
+	public Io_line_rdr_fxt(Io_url... urls) {rdr = new Io_line_rdr(Gfo_usr_dlg_.Test(), urls);}
 	public Io_line_rdr_fxt Load_len_lines_(int v) {return Load_len_(v * 3);}	// 3: 2=##, 1=\n
 	public Io_line_rdr_fxt Load_len_(int v) {rdr.Load_len_(v); return this;}
 	public Io_line_rdr_fxt File_lines_(int count) {

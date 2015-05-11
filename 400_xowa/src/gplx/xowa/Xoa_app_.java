@@ -26,16 +26,14 @@ public class Xoa_app_ {
 		boot_mgr.Run(args);
 	}
 	public static final String Name = "xowa";
-	public static final String Version = "2.5.1.1";
+	public static final String Version = "2.5.2.1";
 	public static String Build_date = "2012-12-30 00:00:00";
 	public static String Op_sys;
 	public static String User_agent = "";
 	public static final Gfo_msg_grp Nde = Gfo_msg_grp_.prj_(Name);
 	public static Gfo_usr_dlg usr_dlg_console_() {
-		Gfo_usr_dlg rv = new Gfo_usr_dlg_base();
-		rv.Ui_wkr_(Gfo_usr_dlg_ui_.Console);
-		rv.Log_wtr_(new Gfo_log_wtr_base());
-		rv.Log_wtr().Queue_enabled_(true);
+		Gfo_usr_dlg rv = new Gfo_usr_dlg_base(new Gfo_usr_dlg__log_base(), Gfo_usr_dlg__gui_.Console);
+		rv.Log_wkr().Queue_enabled_(true);
 		return rv;
 	}
 	public static Gfo_usr_dlg		Usr_dlg()			{return usr_dlg;}			public static void Usr_dlg_(Gfo_usr_dlg v) {usr_dlg = v;} private static Gfo_usr_dlg usr_dlg;
@@ -45,7 +43,7 @@ public class Xoa_app_ {
 	public static Xoa_gfs_mgr		Gfs_mgr() {return gfs_mgr;}		public static void Gfs_mgr_(Xoa_gfs_mgr v) {gfs_mgr = v;} private static Xoa_gfs_mgr gfs_mgr;
 }
 class Xoa_app_boot_mgr {
-	private Gfo_usr_dlg usr_dlg; private Gfo_log_wtr log_wtr; private String chkpoint = "null";
+	private Gfo_usr_dlg usr_dlg; private Gfo_usr_dlg__log log_wtr; private String chkpoint = "null";
 	public void Run(String[] args) {
 		try {
 			if (!Init_env(args)) return;
@@ -54,7 +52,7 @@ class Xoa_app_boot_mgr {
 		}
 		catch (Exception e) {
 			String err_str = Err_.Message_gplx(e);
-			log_wtr.Log_err(err_str);
+			log_wtr.Log_to_err(err_str);
 			ConsoleAdp._.WriteLine(err_str);
 			if (log_wtr.Log_dir() == null) log_wtr.Log_dir_(Env_.AppUrl().OwnerDir().GenSubFil("xowa.log"));
 			log_wtr.Queue_enabled_(false);
@@ -62,12 +60,12 @@ class Xoa_app_boot_mgr {
 	}
 	private boolean Init_env(String[] args) {
 		Gfo_usr_dlg_.I = usr_dlg = Xoa_app_.usr_dlg_console_();
-		log_wtr = usr_dlg.Log_wtr(); log_wtr.Log_msg_to_session_fmt("env.init: version=~{0}", Xoa_app_.Version);
+		log_wtr = usr_dlg.Log_wkr(); log_wtr.Log_to_session_fmt("env.init: version=~{0}", Xoa_app_.Version);
 		GfuiEnv_.Init_swt(args, Xoa_app_.class); 
 		Io_url jar_url = Env_.AppUrl();
 		Xoa_app_.Build_date = Io_mgr._.QueryFil(jar_url).ModifiedTime().XtoUtc().XtoStr_fmt("yyyy-MM-dd HH:mm");
-		log_wtr.Log_msg_to_session_fmt("env.init: jar_url=~{0}; build_date=~{1}", jar_url.NameAndExt(), Xoa_app_.Build_date);
-		log_wtr.Log_msg_to_session_fmt("env.init: op_sys=~{0}", Op_sys.Cur().Xto_str());
+		log_wtr.Log_to_session_fmt("env.init: jar_url=~{0}; build_date=~{1}", jar_url.NameAndExt(), Xoa_app_.Build_date);
+		log_wtr.Log_to_session_fmt("env.init: op_sys=~{0}", Op_sys.Cur().Xto_str());
 		chkpoint = "init_env";
 		return true;
 	}
@@ -142,7 +140,7 @@ class Xoa_app_boot_mgr {
 			// init app
 			Db_conn_bldr.I.Reg_default_sqlite();
 			app = new Xoae_app(usr_dlg, app_type, root_dir, wiki_dir, root_dir.GenSubDir("file"), user_dir, root_dir.GenSubDir_nest("user", "anonymous", "wiki"), Xoa_app_.Op_sys);
-			usr_dlg.Log_wtr().Queue_enabled_(false); log_wtr.Log_msg_to_session_fmt("app.init");
+			usr_dlg.Log_wkr().Queue_enabled_(false); log_wtr.Log_to_session_fmt("app.init");
 			try {
 				app.Sys_cfg().Lang_(System_lang());
 				if (launch_url != null)
@@ -153,7 +151,7 @@ class Xoa_app_boot_mgr {
 				app.Init_by_app(); chkpoint = "init_gfs";
 			}
 			catch (Exception e) {usr_dlg.Warn_many("", "", "app init failed: ~{0} ~{1}", chkpoint, Err_.Message_gplx(e));}
-			app.Usr_dlg().Log_wtr_(app.Log_wtr());	// NOTE: log_wtr must be set for cmd-line (else process will fail);
+			app.Usr_dlg().Log_wkr_(app.Log_wtr());	// NOTE: log_wtr must be set for cmd-line (else process will fail);
 
 			// run gfs
 			gplx.xowa.users.prefs.Prefs_rename_mgr._.Check(app.User().Fsys_mgr().App_data_cfg_user_fil());

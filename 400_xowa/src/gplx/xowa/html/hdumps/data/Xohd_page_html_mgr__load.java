@@ -16,14 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hdumps.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.hdumps.*;
-import gplx.core.brys.*; import gplx.core.btries.*; import gplx.dbs.*; import gplx.ios.*;
+import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.btries.*; import gplx.dbs.*; import gplx.ios.*;
 import gplx.xowa.dbs.*; import gplx.xowa.pages.*; import gplx.xowa.html.hdumps.core.*; import gplx.xowa.html.hdumps.data.*; import gplx.xowa.html.hdumps.pages.*; import gplx.xowa.pages.skins.*; import gplx.xowa.html.hdumps.data.srl.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa2.gui.*;
 public class Xohd_page_html_mgr__load {
 	private final Xohd_page_srl_mgr srl_mgr = Xohd_page_srl_mgr.I;
-	private final Bry_rdr rdr = new Bry_rdr(); private final ListAdp rows = ListAdp_.new_(), imgs = ListAdp_.new_();		
-	private static final int redlink_list_max = 1024;
-	private final int[] redlink_list = new int[redlink_list_max];
+	private final Bry_rdr rdr = new Bry_rdr(); private final ListAdp rows = ListAdp_.new_(), imgs = ListAdp_.new_();
 	public void Load_page(Xow_wiki wiki, Xog_page hpg, Xowd_html_tbl tbl, int page_id, Xoa_ttl page_ttl) {
 		tbl.Select_by_page(rows, page_id);
 		Parse_rows(wiki, hpg, page_id, Xoa_url.blank_(), page_ttl, rows);
@@ -61,7 +59,7 @@ public class Xohd_page_html_mgr__load {
 		switch (tid) {
 			case Xohd_data_itm__base.Tid_basic		: img_itm = new Xohd_data_itm__img(); break;
 			case Xohd_data_itm__base.Tid_gallery	: img_itm = new Xohd_data_itm__gallery_itm(); break;
-			default: return null;	// TODO: remove; needed for redlink
+			default									: throw Err_.unhandled(tid);
 		}
 		img_itm.Data_parse(rdr);
 		rdr.Pos_add_one();
@@ -73,10 +71,11 @@ public class Xohd_page_html_mgr__load {
 		imgs.Add(img);
 	}
 	private void Load_data_redlink(Xog_page hpg) {
-		int len = 0;
-		while (!rdr.Pos_is_eos() && len < redlink_list_max)
-			redlink_list[len++] = rdr.Read_int_to_pipe();
-		hpg.Redlink_uids_(Int_.Ary_copy(redlink_list, len));
+		OrderedHash redlink_hash = hpg.Redlink_uids();
+		while (!rdr.Pos_is_eos()) {
+			Int_obj_ref redlink_uid = Int_obj_ref.new_(rdr.Read_int_to_pipe());
+			redlink_hash.Add(redlink_uid, redlink_uid);
+		}
 	}
 	private void Load_data_gallery(Xog_page hpg) {
 		int uid = rdr.Read_int_to_pipe();

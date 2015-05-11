@@ -39,7 +39,7 @@ public class Db_conn {
 	public void				Env_db_attach(String alias, Io_url db_url)							{engine.Env_db_attach(alias, db_url);}
 	public void				Env_db_detach(String alias)											{engine.Env_db_detach(alias);}
 	public void				Env_vacuum()														{Exec_sql_plog_ntx("vacuuming: url=" + this.Conn_info().Xto_api(), "VACUUM;");}
-	public void				Ddl_create_tbl(Db_meta_tbl meta)									{engine.Ddl_create_tbl(meta); engine.Ddl_create_idx(Gfo_usr_dlg_.Null, meta.Idxs());}
+	public void				Ddl_create_tbl(Db_meta_tbl meta)									{engine.Ddl_create_tbl(meta); engine.Ddl_create_idx(Gfo_usr_dlg_.Noop, meta.Idxs());}
 	public void				Ddl_create_idx(Db_meta_idx... idxs)							{engine.Ddl_create_idx(Gfo_usr_dlg_.I, idxs);}
 	public void				Ddl_create_idx(Gfo_usr_dlg usr_dlg, Db_meta_idx... idxs)		{engine.Ddl_create_idx(usr_dlg, idxs);}
 	public void				Ddl_append_fld(String tbl, Db_meta_fld fld)							{engine.Ddl_append_fld(tbl, fld);}

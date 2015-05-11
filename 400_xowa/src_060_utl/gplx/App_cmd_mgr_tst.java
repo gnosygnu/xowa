@@ -91,14 +91,14 @@ public class App_cmd_mgr_tst {
 	}
 }
 class App_cmd_mgr_fxt {
-	public Gfo_usr_dlg Usr_dlg() {return dlg_mgr;} Gfo_usr_dlg dlg_mgr;
+	public Gfo_usr_dlg Usr_dlg() {return usr_dlg;} Gfo_usr_dlg usr_dlg;
 	public App_cmd_mgr Mgr() {return mgr;} App_cmd_mgr mgr = new App_cmd_mgr(); Tst_mgr tst_mgr = new Tst_mgr();
 	public App_cmd_mgr_fxt Clear() {
-		if (dlg_mgr == null) {
-			dlg_mgr = Gfo_usr_dlg_base.test_();
+		if (usr_dlg == null) {
+			usr_dlg = Gfo_usr_dlg_.Test();
 		}
 		mgr.Clear();
-		dlg_mgr.Clear();
+		usr_dlg.Gui_wkr().Clear();
 		return this;
 	}
 	public App_cmd_arg arg_(String key) {return arg_(key, false);}
@@ -124,7 +124,7 @@ class App_cmd_mgr_fxt {
 		return this;
 	}
 	public App_cmd_mgr_fxt tst_write(String... expd) {
-		String[] actl = ((Gfo_usr_dlg_ui_test)dlg_mgr.Ui_wkr()).Xto_str_ary();
+		String[] actl = ((Gfo_usr_dlg__gui_test)usr_dlg.Gui_wkr()).Xto_str_ary();
 		Tfds.Eq_ary_str(expd, actl);
 		return this;
 	}

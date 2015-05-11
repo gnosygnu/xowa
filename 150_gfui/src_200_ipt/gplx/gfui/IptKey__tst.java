@@ -20,11 +20,20 @@ import org.junit.*;
 public class IptKey__tst {
 	private final IptKey__fxt fxt = new IptKey__fxt();
 	@Test  public void To_str() {
-		fxt.Test_to_str(196608, "mod.cs+key.0");
+		fxt.Test_to_str(196608, "mod.cs");
+	}
+	@Test  public void To_str__numeric() {
+		fxt.Test_to_str(16777296, "key.#16777296");
+	}
+	@Test   public void parse_() {
+		fxt.Test_parse("key.#10", 10);
 	}
 }
 class IptKey__fxt {
 	public void Test_to_str(int keycode, String expd) {
 		Tfds.Eq(expd, IptKey_.To_str(keycode));
+	}
+	public void Test_parse(String raw, int keycode) {
+		Tfds.Eq(keycode, IptKey_.parse_(raw).Val());
 	}
 }

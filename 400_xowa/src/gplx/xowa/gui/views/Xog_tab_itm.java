@@ -113,7 +113,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 		app.Gui_mgr().Search_suggest_mgr().Cancel();			// cancel pending search_suggest calls
 		if (page != null) page.Tab_data().Close_mgr().When_close(this, url);			// cancel any current search cmds
 		app.Log_wtr().Queue_enabled_(true);
-		usr_dlg.Clear();
+		usr_dlg.Gui_wkr().Clear();
 		this.wiki = app.Wiki_mgr().Get_by_key_or_null(url.Wiki_bry());	// NOTE: must update wiki
 		wiki.Init_assert();	// NOTE: assert wiki.Init before parsing; needed b/c lang (with lang-specific ns) is only loaded on init, and parse Xoa_ttl.parse_ will fail below; EX:pt.wikipedia.org/wiki/Wikipedia:P�gina principal
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, url.Page_bry());
@@ -160,14 +160,14 @@ public class Xog_tab_itm implements GfoInvkAble {
 				app.User().Data_mgr().History_mgr().Update_async(app.Async_mgr(), ttl, url);
 			}
 			usr_dlg.Prog_none("", "", "rendering html");
-			html_itm.Html_box().Size_(tab_mgr.Tab_mgr().Size()); // NOTE: must resize tab here, else scrolling to anchor in background tab doesn't work (html_box has size of 0, 0) DATE:2015-05-03
+			// html_itm.Html_box().Size_(tab_mgr.Tab_mgr().Size()); // COMMENTED: causes clicks on macosx to be off by 4 px; NOTE: must resize tab here, else scrolling to anchor in background tab doesn't work (html_box has size of 0, 0) DATE:2015-05-03
 			//	win.Page__async__bgn(this);
-			Gfo_thread_wkr async_wkr = null;				
+			Gfo_thread_wkr async_wkr = null;
 			if (wkr.Hdump_enabled()) {
 				wiki.File_mgr().Init_file_mgr_by_load(wiki);
 				Xof_fsdb_mgr fsdb_mgr = wiki.File_mgr().Fsdb_mgr();
 				async_wkr = new Xof_file_wkr(wiki.File__orig_mgr(), fsdb_mgr.Bin_mgr(), fsdb_mgr.Mnt_mgr(), app.File__cache_mgr(), wiki.File__repo_mgr(), html_itm, page, page.Hdump_data().Imgs(), gplx.xowa.files.Xof_exec_tid.Tid_wiki_page);
-				if (wiki.Html__hdump_enabled()) {
+				if (wiki.Html__hdump_enabled() && page.Revision_data().Html_db_id() == -1) {
 					wiki.Html__hdump_wtr().Save(page);
 				}
 			}

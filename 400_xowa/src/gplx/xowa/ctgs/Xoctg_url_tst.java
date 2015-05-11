@@ -38,7 +38,7 @@ class Xoctg_url_fxt {
 	}	private Xoa_url_parser parser; Xoa_url page_url; Xoctg_url ctg_url;
 	public void Test_parse(String url_str, Xoctg_url_chkr expd) {
 		parser.Parse(page_url, Bry_.new_utf8_(url_str));
-		ctg_url.Parse(Gfo_usr_dlg_base.test_(), page_url);
+		ctg_url.Parse(Gfo_usr_dlg_.Test(), page_url);
 		expd.Chk(ctg_url);
 		expd.Clear();
 	}

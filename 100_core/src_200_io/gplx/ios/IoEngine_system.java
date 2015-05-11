@@ -401,8 +401,8 @@ public class IoEngine_system extends IoEngine_base {
 		prog_dlg = xfer_fmt.usr_dlg;
 		if (!Web_access_enabled) {
 			if (prog_dlg != null) {
-				if (session_fil == null) session_fil = prog_dlg.Log_wtr().Session_dir().GenSubFil("internet.txt");
-				prog_dlg.Log_wtr().Log_msg_to_url_fmt(session_fil, "download disabled: src='~{0}' trg='~{1}'", xrg.Src(), xrg.Trg().Raw());				
+				if (session_fil == null) session_fil = prog_dlg.Log_wkr().Session_dir().GenSubFil("internet.txt");
+				prog_dlg.Log_wkr().Log_msg_to_url_fmt(session_fil, "download disabled: src='~{0}' trg='~{1}'", xrg.Src(), xrg.Trg().Raw());				
 			}
 			return false;
 		}
@@ -435,8 +435,8 @@ public class IoEngine_system extends IoEngine_base {
     		}
     		if (prog_dlg != null) {
     			xfer_fmt.Term();
-    			if (session_fil == null) session_fil = prog_dlg.Log_wtr().Session_dir().GenSubFil("internet.txt");
-    			prog_dlg.Log_wtr().Log_msg_to_url_fmt(session_fil, "download pass: src='~{0}' trg='~{1}'", src_str, xrg.Trg().Raw());
+    			if (session_fil == null) session_fil = prog_dlg.Log_wkr().Session_dir().GenSubFil("internet.txt");
+    			prog_dlg.Log_wkr().Log_msg_to_url_fmt(session_fil, "download pass: src='~{0}' trg='~{1}'", src_str, xrg.Trg().Raw());
     		}
     		return true;
 		}
@@ -446,8 +446,8 @@ public class IoEngine_system extends IoEngine_base {
 			else if (ClassAdp_.Eq_typeSafe(exc, java.io.FileNotFoundException.class))	xrg.Rslt_(IoEngine_xrg_downloadFil.Rslt_fail_file_not_found);
 			else																		xrg.Rslt_(IoEngine_xrg_downloadFil.Rslt_fail_unknown);
 			if (prog_dlg != null && !xrg.Prog_cancel()) {
-    			if (session_fil == null) session_fil = prog_dlg.Log_wtr().Session_dir().GenSubFil("internet.txt");
-    			prog_dlg.Log_wtr().Log_msg_to_url_fmt(session_fil, "download fail: src='~{0}' trg='~{1}' error='~{2}'", src_str, xrg.Trg().Raw(), Err_.Message_lang(exc));
+    			if (session_fil == null) session_fil = prog_dlg.Log_wkr().Session_dir().GenSubFil("internet.txt");
+    			prog_dlg.Log_wkr().Log_msg_to_url_fmt(session_fil, "download fail: src='~{0}' trg='~{1}' error='~{2}'", src_str, xrg.Trg().Raw(), Err_.Message_lang(exc));
 			}
 			if (trg_stream != null) {
 				try {
@@ -552,7 +552,7 @@ class Io_stream_rdr_http implements Io_stream_rdr {
 		if (!IoEngine_system.Web_access_enabled) {
 			read_done = read_failed = true;
 			if (prog_dlg != null)
-				prog_dlg.Log_wtr().Log_msg_to_url_fmt(session_fil, "download disabled: src='~{0}' trg='~{1}'", xrg.Src(), xrg.Trg().Raw());
+				prog_dlg.Log_wkr().Log_msg_to_url_fmt(session_fil, "download disabled: src='~{0}' trg='~{1}'", xrg.Src(), xrg.Trg().Raw());
 			return this;
 		}
 		src_str = xrg.Src();
@@ -604,12 +604,12 @@ class Io_stream_rdr_http implements Io_stream_rdr {
 			if (prog_dlg != null) {
 				xfer_fmt.Term();
 			}
-			if (session_fil == null && prog_dlg != null) session_fil = prog_dlg.Log_wtr().Session_dir().GenSubFil("internet.txt");
+			if (session_fil == null && prog_dlg != null) session_fil = prog_dlg.Log_wkr().Session_dir().GenSubFil("internet.txt");
 			if (read_failed) {
 			}
 			else {
 				if (prog_dlg != null)
-					prog_dlg.Log_wtr().Log_msg_to_url_fmt(session_fil, "download pass: src='~{0}' trg='~{1}'", src_str, xrg.Trg().Raw());
+					prog_dlg.Log_wkr().Log_msg_to_url_fmt(session_fil, "download pass: src='~{0}' trg='~{1}'", src_str, xrg.Trg().Raw());
 				xrg.Rslt_(IoEngine_xrg_downloadFil.Rslt_pass);
 			}
 			xrg.Prog_running_(false);
@@ -632,8 +632,8 @@ class Io_stream_rdr_http implements Io_stream_rdr {
 		else if (ClassAdp_.Eq_typeSafe(exc, java.io.FileNotFoundException.class))	xrg.Rslt_(IoEngine_xrg_downloadFil.Rslt_fail_file_not_found);
 		else																		xrg.Rslt_(IoEngine_xrg_downloadFil.Rslt_fail_unknown);
 		if (prog_dlg != null && !xrg.Prog_cancel()) {
-			if (session_fil == null) session_fil = prog_dlg.Log_wtr().Session_dir().GenSubFil("internet.txt");
-			prog_dlg.Log_wtr().Log_msg_to_url_fmt(session_fil, "download fail: src='~{0}' trg='~{1}' error='~{2}'", src_str, xrg.Trg().Raw(), Err_.Message_lang(exc));
+			if (session_fil == null) session_fil = prog_dlg.Log_wkr().Session_dir().GenSubFil("internet.txt");
+			prog_dlg.Log_wkr().Log_msg_to_url_fmt(session_fil, "download fail: src='~{0}' trg='~{1}' error='~{2}'", src_str, xrg.Trg().Raw(), Err_.Message_lang(exc));
 		}
 		this.Rls();
 	}

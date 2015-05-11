@@ -69,7 +69,7 @@ class Imap_parser_fxt extends Imap_fxt_base {
 		Xoa_url url = Xoa_url.new_(wiki.Domain_bry(), Bry_.new_ascii_("Test_1"));
 		Imap_xtn_mgr xtn_mgr = new Imap_xtn_mgr();
 		parser = new Imap_parser(xtn_mgr);
-		parser.Init(wiki, url, Gfo_usr_dlg_.Null);
+		parser.Init(wiki, url, Gfo_usr_dlg_.Noop);
 		parser.Clear();
 		imap = new Imap_map(1);
 	}

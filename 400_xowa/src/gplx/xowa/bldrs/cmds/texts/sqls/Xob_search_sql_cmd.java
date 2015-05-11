@@ -25,7 +25,7 @@ public class Xob_search_sql_cmd extends Xob_itm_basic_base implements Xob_cmd {	
 	public void Cmd_bgn(Xob_bldr bldr) {}
 	public void Cmd_run() {this.Exec(wiki);}
 	public void Cmd_end() {}
-	public void Cmd_term() {}
+	public void Cmd_term() {}		
 	public void Exec(Xowe_wiki wiki) {
 		if (!Env_.Mode_testing()) wiki.Init_assert();
 		Xowd_db_mgr db_mgr = wiki.Db_mgr_as_sql().Core_data_mgr();

@@ -176,7 +176,7 @@ given qry = "../C/./D" and src = "A/B"
 . iterate over every slash to create "segs_ary"
 A  -> [A]			add
 B  -> [A, B]		add
-.. -> [A]  		pop
+.. -> [A]  			pop
 C  -> [A, C]		add
 .  -> [A, C] 		noop
 D  -> [A, C, D] 	add

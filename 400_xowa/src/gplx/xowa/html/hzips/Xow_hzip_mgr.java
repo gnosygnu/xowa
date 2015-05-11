@@ -57,7 +57,7 @@ public class Xow_hzip_mgr {
 		}
 		if (add_bgn != -1) bfr.Add_mid(src, add_bgn, src_len);
 	}
-	public byte[] Parse(Bry_bfr rv, byte[] page_url, byte[] src) {
+	public byte[] Parse(Bry_bfr rv, byte[] page_url, byte[] src, OrderedHash redlink_uids) {
 		this.page_url = page_url; this.src = src;
 		this.src_len = src.length;			
 		int pos = 0, add_bgn = -1;
@@ -71,7 +71,7 @@ public class Xow_hzip_mgr {
 				byte tid = src[tid_pos];
 				switch (tid) {
 					case Xow_hzip_dict.Tid_lnki_text_n:
-					case Xow_hzip_dict.Tid_lnki_text_y:			pos = itm__anchor.Load_lnki(rv, src, src_len, itm_pos, tid); break;
+					case Xow_hzip_dict.Tid_lnki_text_y:			pos = itm__anchor.Load_lnki(rv, src, src_len, itm_pos, tid, redlink_uids); break;
 					case Xow_hzip_dict.Tid_lnke_txt:
 					case Xow_hzip_dict.Tid_lnke_brk_text_n:
 					case Xow_hzip_dict.Tid_lnke_brk_text_y:		pos = itm__anchor.Load_lnke(rv, src, src_len, itm_pos, tid); break;

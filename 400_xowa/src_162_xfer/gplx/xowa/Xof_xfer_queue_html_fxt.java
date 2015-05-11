@@ -57,5 +57,5 @@ public class Xof_xfer_queue_html_fxt extends Xof_xfer_queue_base_fxt {
 		if (this.Html_w() != -1)			Tfds.Eq(this.Html_w(), xfer_itm.Html_w());
 		if (this.Html_h() != -1)			Tfds.Eq(this.Html_h(), xfer_itm.Html_h());
 		queue.Clear();
-	}	private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Null;
+	}	private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Noop;
 }

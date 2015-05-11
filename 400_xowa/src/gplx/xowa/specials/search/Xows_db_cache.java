@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.xowa.specials.search.parsers.*;
+import gplx.xowa.specials.search.parsers_old.*;
 class Xows_db_cache {	// one cache per search term; EX: "Earth* AND (History OR Future) AND -"middle earth"" is one cache
 	private final OrderedHash hash = OrderedHash_.new_bry_();
 	public Xows_db_word[]	Words()		{return words;}		private Xows_db_word[] words;		// words in cache; EX: earth, history, future but not "middle earth" (since not'ed)

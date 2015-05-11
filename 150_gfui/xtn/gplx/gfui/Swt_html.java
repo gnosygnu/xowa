@@ -75,6 +75,7 @@ class Swt_html implements Gxw_html, Swt_control, FocusListener {
 	public String 		Html_doc_selected_get_src_or_empty() 							{return Eval_script_as_str(kit.Html_cfg().Doc_selected_get_src_or_empty());}
 	public String 		Html_doc_selected_get_active_or_selection() 					{return Eval_script_as_str(kit.Html_cfg().Doc_selected_get_active_or_selection());}
 	public void 		Html_doc_body_focus() 											{Eval_script_as_exec(kit.Html_cfg().Doc_body_focus());}
+	public boolean 		Html_doc_loaded() 												{return Bool_.parse_((String)Eval_script(kit.Html_cfg().Doc_loaded()));}
 	public void 		Html_doc_selection_focus_toggle() 								{Eval_script_as_exec(kit.Html_cfg().Doc_selection_focus_toggle());}
 	public String 		Html_elem_atr_get_str(String elem_id, String atr_key) 			{return Eval_script_as_str(kit.Html_cfg().Elem_atr_get(elem_id, atr_key));}
 	public boolean 		Html_elem_atr_get_bool(String elem_id, String atr_key) 			{return Bool_.parse_((String)Eval_script(kit.Html_cfg().Elem_atr_get_toString(elem_id, atr_key)));}

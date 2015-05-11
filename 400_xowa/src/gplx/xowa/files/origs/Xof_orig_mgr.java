@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.origs; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.core.primitives.*; import gplx.dbs.*;
-import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.wmfs.apis.*;
+import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.wmfs.apis.*; import gplx.xowa.files.downloads.*;
 public class Xof_orig_mgr {
 	private Xof_orig_wkr[] wkrs; private int wkrs_len;
 	private Xof_url_bldr url_bldr; private Xow_repo_mgr repo_mgr; private final Xof_img_size img_size = new Xof_img_size();

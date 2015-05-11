@@ -28,6 +28,7 @@ public interface Gxw_html extends GxwElem {
 	boolean		Html_doc_find(String id, String find, boolean dir_fwd, boolean case_match, boolean wrap_find);
 	void		Html_doc_body_focus();
 	void		Html_doc_selection_focus_toggle();
+	boolean		Html_doc_loaded();
 	String		Html_elem_atr_get_str	(String id, String atr_key);
 	boolean		Html_elem_atr_get_bool	(String id, String atr_key);
 	boolean		Html_elem_atr_set		(String id, String atr_key, String val);

@@ -35,6 +35,7 @@ public class Xopg_redlink_lnki_list {
 		if (disabled) return;
 		Xoa_ttl ttl = lnki.Ttl(); if (ttl == null) return;		// occurs for invalid links
 		Xow_ns ns = ttl.Ns();
+		lnki.Html_id_(lnki_idx);								// NOTE: set html_id in order html to print out "id='xowa_lnki_1'; want to print out id for consistency's sake, even if these links won't be check for redlinks; DATE:2015-05-07
 		if (	ns.Id_file_or_media()							// ignore files which will usually not be in local wiki (most are in commons), and whose html is built up separately
 			||	(ns.Id_ctg() && !ttl.ForceLiteralLink())		// ignore ctgs which have their own html builder, unless it is literal; EX: [[:Category:A]]; DATE:2014-02-24
 			||	ns.Id_special()									// ignore special, especially Search; EX: Special:Search/Earth
@@ -42,9 +43,9 @@ public class Xopg_redlink_lnki_list {
 			||	ttl.Wik_itm() != null							// xwiki lnki; EX: simplewiki links in homewiki; [[simplewiki:Earth]]
 			)
 			return;				
-		lnki.Html_id_(lnki_idx);
 		lnki_list.Add(lnki);
 		++lnki_idx;
 	}
 	public static final String Lnki_id_prefix = "xowa_lnki_";
+	public static final int Lnki_id_prefix_len = String_.Len(Lnki_id_prefix);
 }

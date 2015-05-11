@@ -54,3 +54,40 @@ public class Xob_search_sql_wkr extends Xob_search_base implements Io_make_cmd {
 		search_word_tbl.Ddl__page_count__cfg(search_db.Tbl__cfg());
 	}
 }
+class Xob_search_wkr extends Xob_itm_basic_base implements Xobd_wkr {
+	private Xowd_db_file search_db; private Xowd_search_temp_tbl search_temp_tbl;
+	private Xol_lang lang; private final Bry_bfr tmp_bfr = Bry_bfr.new_(255); private final OrderedHash list = OrderedHash_.new_bry_();
+	public String Wkr_key() {return Xob_cmd_keys.Key_text_search_wkr;}
+	public void Wkr_ini(Xob_bldr bldr) {}
+	public void Wkr_bgn(Xob_bldr bldr) {
+		if (!Env_.Mode_testing()) wiki.Init_assert();
+		this.lang = wiki.Lang();
+		Xowd_db_mgr db_mgr = wiki.Db_mgr_as_sql().Core_data_mgr();
+		this.search_db = Xob_search_sql_cmd.Dbs__get_or_make(db_mgr);
+		this.search_temp_tbl = new Xowd_search_temp_tbl(search_db.Conn(), db_mgr.Props().Schema_is_1());
+		search_temp_tbl.Create_tbl();
+		search_temp_tbl.Insert_bgn();
+	}
+	public void Wkr_run(Xowd_page_itm page) {
+		try {
+			int page_id = page.Id();
+			byte[] ttl = page.Ttl_page_db();
+			byte[][] words = Xob_search_base.Split_ttl_into_words(lang, list, tmp_bfr, ttl);
+			int len = words.length;
+			for (int i = 0; i < len; ++i) {
+				byte[] word = words[i];
+				search_temp_tbl.Insert_cmd_by_batch(page_id, word);
+			}
+		}	catch (Exception e) {bldr.Usr_dlg().Warn_many("", "", "search_index:fatal error: err=~{0}", Err_.Message_gplx_brief(e));}	// never let single page crash entire import
+	}
+	public void Wkr_end() {
+		search_temp_tbl.Make_data(usr_dlg, search_db.Tbl__search_link(), search_db.Tbl__search_word());
+		search_temp_tbl.Insert_end();
+	}
+	public void Wkr_print() {}
+	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
+		if		(ctx.Match(k, Invk_set)) {}
+		else	return GfoInvkAble_.Rv_unhandled;
+		return this;
+	}	private static final String Invk_set = "set";
+}

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wmfs; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.wmfs.apis.*;
+import gplx.xowa.wmfs.apis.*; import gplx.xowa.files.downloads.*;
 public class Xowmf_mgr {
 	public Xowmf_mgr() {
 		Gfo_usr_dlg usr_dlg = Xoa_app_.Usr_dlg();

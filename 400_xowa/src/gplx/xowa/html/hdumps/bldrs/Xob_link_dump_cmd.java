@@ -35,7 +35,8 @@ public class Xob_link_dump_cmd {
 			Db_attach_cmd.new_(conn, "page_db", page_db_url)
 				.Add_fmt("update trg_page_id", String_.Concat_lines_nl_skip_last
 				( "REPLACE INTO link_dump"
-				, "SELECT  r.src_page_id"
+				, "SELECT  r.uid"
+				, ",       r.src_page_id"
 				, ",       r.src_html_uid"
 				, ",       Coalesce(p.page_id, -1)"
 				, ",       r.trg_ns"

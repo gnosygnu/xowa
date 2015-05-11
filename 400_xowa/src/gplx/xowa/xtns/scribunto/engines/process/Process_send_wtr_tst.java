@@ -32,7 +32,7 @@ public class Process_send_wtr_tst {
 class Scrib_lua_srl_fxt {
 	public void Clear() {
 		if (srl == null) {
-			usr_dlg = Gfo_usr_dlg_base.test_();
+			usr_dlg = Gfo_usr_dlg_.Test();
 			srl = new Process_send_wtr(usr_dlg);
 		}
 	}	Process_send_wtr srl; Gfo_usr_dlg usr_dlg;

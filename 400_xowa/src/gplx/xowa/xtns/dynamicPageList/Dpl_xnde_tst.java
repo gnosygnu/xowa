@@ -188,7 +188,7 @@ class Dpl_xnde_fxt {
 		next_id = 100;
 		fxt.Reset();
 		warns = String_.Ary_empty;
-		fxt.App().Usr_dlg().Ui_wkr().Clear();
+		fxt.App().Usr_dlg().Gui_wkr().Clear();
 		fxt.Wiki().Hive_mgr().Clear();
 		fxt.Wiki().Db_mgr().Save_mgr().Clear();	// NOTE: must clear to reset next_id to 0; Ctg_create assumes clean slate from 0
 		fxt.Wiki().Xtn_mgr().Xtn_proofread().Enabled_y_();

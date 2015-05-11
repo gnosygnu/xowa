@@ -21,7 +21,7 @@ public class Gfo_thread_pool implements GfoInvkAble {
 	private ListAdp queue = ListAdp_.new_();
 	private GfoMsg run_msg = GfoMsg_.new_cast_(Invk_run_wkr);
 	private boolean running = false;
-	public Gfo_usr_dlg Usr_dlg() {return usr_dlg;} public Gfo_thread_pool Usr_dlg_(Gfo_usr_dlg v) {usr_dlg = v; return this;} private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Null;
+	public Gfo_usr_dlg Usr_dlg() {return usr_dlg;} public Gfo_thread_pool Usr_dlg_(Gfo_usr_dlg v) {usr_dlg = v; return this;} private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Noop;
 	public void Clear() {synchronized (thread_lock) {queue.Clear(); running = false;}}
 	public Gfo_thread_pool Add_at_end(Gfo_thread_wkr wkr) {
 		synchronized (thread_lock) {queue.Add(wkr);}

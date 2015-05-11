@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wmfs.apis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wmfs.*;
+import gplx.xowa.files.downloads.*;
 public class Xoapi_orig_mok extends Xoapi_orig_base {
 	private String wiki_str = "", ttl_str = "", redirect_str = ""; private int orig_w, orig_h; private boolean fail = false;
 	public Xoapi_orig_mok Ini(String wiki_str, String ttl_str, String redirect_str, int orig_w, int orig_h, boolean pass) {

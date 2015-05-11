@@ -34,6 +34,10 @@ public class Bry_finder {
 			if (src[i] == lkp) return i;
 		return Bry_finder.Not_found;
 	}
+	public static int Move_fwd(byte[] src, byte lkp, int cur, int end) {
+		int rv = Find_fwd(src, lkp, cur, src.length);
+		return rv == Bry_finder.Not_found ? rv : rv + 1;
+	}
 	public static int Move_fwd(byte[] src, byte[] lkp, int cur, int end) {
 		int rv = Find_fwd(src, lkp, cur, src.length);
 		return rv == Bry_finder.Not_found ? rv : rv + lkp.length;
@@ -191,6 +195,18 @@ public class Bry_finder {
 			}
 		}
 	}
+	public static int Find_fwd_until_ws(byte[] src, int cur, int end) {
+		while (true) {
+			if (cur == end) return Bry_finder.Not_found;
+			switch (src[cur])  {
+				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.NewLine: case Byte_ascii.CarriageReturn:
+					return cur;
+				default: 
+					++cur;
+					break;
+			}
+		}
+	}
 	public static int Find_fwd_while_space_or_tab(byte[] src, int cur, int end) {
 		while (true) {
 			if (cur == end) return cur;
@@ -222,11 +238,13 @@ public class Bry_finder {
 	public static int Find_fwd_while_ws(byte[] src, int cur, int end) {
 		while (true) {
 			if (cur == end) return cur;
-			switch (src[cur]) {
-				case Byte_ascii.NewLine: case Byte_ascii.CarriageReturn:
-				case Byte_ascii.Space: case Byte_ascii.Tab:		++cur; break;
-				default:										return cur; 
-			}
+			try {
+				switch (src[cur]) {
+					case Byte_ascii.NewLine: case Byte_ascii.CarriageReturn:
+					case Byte_ascii.Space: case Byte_ascii.Tab:		++cur; break;
+					default:										return cur; 
+				}
+			} catch (Exception e) {throw Err_.new_("idx is invalid; cur={0} src={1} err={2}", cur, src, Err_.Message_gplx(e));}
 		}
 	}
 	public static int Find_fwd_while_letter(byte[] src, int cur, int end) {

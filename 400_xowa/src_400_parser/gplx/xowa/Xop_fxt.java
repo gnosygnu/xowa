@@ -327,7 +327,7 @@ public class Xop_fxt {
 	}
 	public void tst_Warn(String... expd) {
 		Gfo_usr_dlg usr_dlg = app.Usr_dlg();
-		Gfo_usr_dlg_ui_test ui_wkr = (Gfo_usr_dlg_ui_test)usr_dlg.Ui_wkr();
+		Gfo_usr_dlg__gui_test ui_wkr = (Gfo_usr_dlg__gui_test)usr_dlg.Gui_wkr();
 		String[] actl = ui_wkr.Warns().XtoStrAry();
 		Tfds.Eq_ary_str(expd, actl);
 	}

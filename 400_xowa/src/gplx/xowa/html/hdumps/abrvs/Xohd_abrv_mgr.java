@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hdumps.abrvs; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.hdumps.*;
-import gplx.core.brys.*; import gplx.core.btries.*;
+import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.btries.*;
 import gplx.html.*; import gplx.xowa.html.*; import gplx.xowa.html.hdumps.core.*; import gplx.xowa.html.lnkis.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.xtns.gallery.*;
 import gplx.xowa.wikis.*; import gplx.xowa.apps.fsys.*;
@@ -73,7 +73,7 @@ public class Xohd_abrv_mgr {
 		byte tid = itm.Tid();
 		switch (tid) {
 			case Xohd_abrv_.Tid_dir:					bfr.Add(root_dir); return rv;
-			case Xohd_abrv_.Tid_hiero_dir:			bfr.Add(hiero_img_dir); return rv;
+			case Xohd_abrv_.Tid_hiero_dir:				bfr.Add(hiero_img_dir); return rv;
 			case Xohd_abrv_.Tid_redlink:				return Write_redlink(bfr, hpg, uid, rv);
 		}
 		if (itm.Elem_is_xnde()) rv += 2;		// if xnde, skip "/>"
@@ -131,14 +131,12 @@ public class Xohd_abrv_mgr {
 		return rv;
 	}
 	private int Write_redlink(Bry_bfr bfr, Xog_page hpg, int uid, int rv) {
-		int[] redlink_uids = hpg.Redlink_uids(); if (redlink_uids == null) return rv;
-		int redlink_uid_max = redlink_uids.length;
-		if (uid < redlink_uid_max && redlink_uids[uid] == 1)
-			bfr.Add(Redlink_cls_new);
+		if (hpg.Redlink_uids().Has(redlink_key.Val_(uid)))
+			bfr.Add(Xoh_redlink_utl.Cls_bry);
 		else
 			bfr.Del_by_1();
 		return rv;
-	}	private static final byte[] Redlink_cls_new = Bry_.new_ascii_("class='new'");
+	}	private final Int_obj_ref redlink_key = Int_obj_ref.neg1_();
 	public static final Bry_fmtr fmtr_img = Bry_fmtr.new_("src='~{src}' width='~{w}' height='~{h}'", "src", "w", "h");
 	private static final Btrie_slim_mgr trie = Xohd_abrv_.new_trie();
 }

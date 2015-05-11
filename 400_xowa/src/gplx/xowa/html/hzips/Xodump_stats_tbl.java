@@ -33,7 +33,7 @@ public class Xodump_stats_tbl implements RlsAble {
 	public Xodump_stats_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.Create_tbl();
-		conn.Stmt_delete(tbl_name); // always zap table
+		conn.Stmt_delete(tbl_name).Exec_delete(); // always zap table
 		conn.Rls_reg(this);
 	}
 	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds, Db_meta_idx.new_unique_by_tbl(tbl_name, "pkey", fld_page_id)));}

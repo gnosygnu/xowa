@@ -111,6 +111,12 @@ public class Bry_ {
 		catch (Exception e) {throw Err_.err_(e, "unsupported encoding");}
 	}
 	public static byte[] Coalesce(byte[] orig, byte[] val_if_not_blank) {return Bry_.Len_eq_0(val_if_not_blank) ? orig : val_if_not_blank;}
+	public static byte Get_at_end_or_fail(byte[] bry) {
+		if (bry == null) throw Err_.new_("bry is null");
+		int bry_len = bry.length;
+		if (bry_len == 0) throw Err_.new_("bry has 0 len");
+		return bry[bry_len - 1];
+	}
 	public static int While_fwd(byte[] src, byte while_byte, int bgn, int end) {
 		for (int i = bgn; i < end; i++)
 			if (src[i] != while_byte) return i;
@@ -427,11 +433,14 @@ public class Bry_ {
 		}
 		return true;
 	}
+	public static boolean HasAtBgn(byte[] src, byte lkp, int src_bgn) {
+		return src_bgn < src.length ? src[src_bgn] == lkp : false;
+	}
 	public static boolean HasAtBgn(byte[] src, byte[] lkp) {return HasAtBgn(src, lkp, 0, src.length);}
-	public static boolean HasAtBgn(byte[] src, byte[] lkp, int src_bgn, int srcEnd) {
-		int lkpLen = lkp.length;
-		if (lkpLen + src_bgn > srcEnd) return false; // lkp is longer than src
-		for (int i = 0; i < lkpLen; i++) {
+	public static boolean HasAtBgn(byte[] src, byte[] lkp, int src_bgn, int src_end) {
+		int lkp_len = lkp.length;
+		if (lkp_len + src_bgn > src_end) return false; // lkp is longer than src
+		for (int i = 0; i < lkp_len; i++) {
 			if (lkp[i] != src[i + src_bgn]) return false;
 		}
 		return true;

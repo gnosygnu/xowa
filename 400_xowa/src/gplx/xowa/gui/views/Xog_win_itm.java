@@ -303,6 +303,6 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 
 		if (	!Env_.Mode_testing()
 			&&	app.App_type().Uid_is_gui())	// only run for gui; do not run for tcp/http server; DATE:2014-05-03
-			app.Usr_dlg().Ui_wkr_(new Gfo_usr_dlg_ui_swt(kit, prog_box, info_box, info_box, app.Api_root().Gui().Browser().Info()));
+			app.Usr_dlg().Gui_wkr_(new Gfo_usr_dlg__gui__swt(kit, prog_box, info_box, info_box, app.Api_root().Gui().Browser().Info()));
 	}
 }

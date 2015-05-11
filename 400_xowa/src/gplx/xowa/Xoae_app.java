@@ -19,6 +19,7 @@ package gplx.xowa; import gplx.*;
 import gplx.core.btries.*; import gplx.core.flds.*; import gplx.ios.*; import gplx.core.threads.*;
 import gplx.xowa.apps.*; import gplx.xowa.apps.caches.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apis.*; import gplx.xowa.urls.encoders.*; import gplx.xowa.apps.progs.*;
 import gplx.xowa.langs.*; import gplx.xowa.specials.*; import gplx.xowa.cfgs2.*;
+import gplx.xowa.bldrs.css.*;
 import gplx.xowa.files.caches.*; import gplx.xowa.files.imgs.*;
 import gplx.xowa.wikis.*; import gplx.xowa.users.*; import gplx.xowa.gui.*; import gplx.xowa.cfgs.*; import gplx.xowa.ctgs.*; import gplx.xowa.html.tocs.*; import gplx.xowa.fmtrs.*; import gplx.xowa.html.*;
 import gplx.xowa.html.wtrs.*;
@@ -32,7 +33,7 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 		this.app_type = app_type;
 		Io_url.Http_file_str_encoder = Xoa_app_.Utl__encoder_mgr().Fsys();
 		fsys_mgr = new Xoa_fsys_mgr(bin_dir_name, root_dir, wiki_dir, file_dir, css_dir);
-		log_wtr = usr_dlg.Log_wtr();
+		log_wtr = usr_dlg.Log_wkr();
 		cfg_mgr = new Xoa_cfg_mgr(this);
 		api_root = new Xoapi_root(this);
 		user = new Xou_user(this, user_dir);
@@ -84,7 +85,7 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 	public Xoapi_root			Api_root() {return api_root;} private Xoapi_root api_root;
 	public Xop_tkn_mkr			Tkn_mkr() {return tkn_mkr;} private Xop_tkn_mkr tkn_mkr = new Xop_tkn_mkr();
 	public Gfo_usr_dlg			Usr_dlg() {return Xoa_app_.Usr_dlg();}
-	public Gfo_log_wtr			Log_wtr() {return log_wtr;} private Gfo_log_wtr log_wtr;
+	public Gfo_usr_dlg__log			Log_wtr() {return log_wtr;} private Gfo_usr_dlg__log log_wtr;
 	public Xoa_gfs_mgr			Gfs_mgr() {return Xoa_app_.Gfs_mgr();}
 	public Xoa_special_mgr		Special_mgr() {return special_mgr;} private Xoa_special_mgr special_mgr = new gplx.xowa.specials.Xoa_special_mgr();
 	public Xoh_html_mgr			Html_mgr() {return html_mgr;} private Xoh_html_mgr html_mgr;
@@ -131,7 +132,6 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 		stage = Xoa_stage_.Tid_init;
 		prog_mgr.Init_by_app(url_cmd_eval);
 		xtn_mgr.Init_by_app(this);
-		log_wtr.Init();
 		gui_mgr.Init_by_app();
 		user.Init_by_app(this);
 		file_mgr.Init_by_app(this);
@@ -162,7 +162,7 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 		if (!gui_mgr.Browser_win().Tab_mgr().Tabs__pub_close_all()) return false;
 		gui_mgr.Browser_win().Usr_dlg().Canceled_y_();		
 		user.App_term(); usr_dlg.Log_many("", "", "term:app_term");
-		log_wtr.Term(); usr_dlg.Log_many("", "", "term:log_wtr");
+		log_wtr.Log_term(); usr_dlg.Log_many("", "", "term:log_wtr");
 		log_mgr.Rls(); usr_dlg.Log_many("", "", "term:log_mgr");
 		if (Scrib_core.Core() != null) {Scrib_core.Core().Term(); usr_dlg.Log_many("", "", "term:scrib");}
 		wiki_mgr.Rls(); usr_dlg.Log_many("", "", "term:wiki_mgr");

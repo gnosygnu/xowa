@@ -18,14 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.core.primitives.*;
 public class Xop_xatr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATTRIBS_REGEX
-	private ListAdp xatrs = ListAdp_.new_();
+	private final ListAdp xatrs = ListAdp_.new_();
 	private static final byte Mode_atr_bgn = 1, Mode_invalid = 2, Mode_key = 3, Mode_eq = 4, Mode_val_bgn = 5, Mode_val_quote = 6, Mode_val_raw = 7;
 	private byte mode = Mode_atr_bgn;
 	private int atr_bgn = -1, key_bgn = -1, key_end = -1, eq_pos = -1, val_bgn = -1, val_end = -1; boolean valid = true;
 	private byte quote_byte = Byte_ascii.Nil;
-	private Hash_adp_bry repeated_atrs_hash = Hash_adp_bry.ci_ascii_();		// ASCII:xnde_atrs
-	private Bry_bfr key_bfr = Bry_bfr.new_(), val_bfr = Bry_bfr.new_(); boolean key_bfr_on = false, val_bfr_on = false, ws_is_before_val = false;
-	public Bry_obj_ref Bry_obj() {return bry_ref;} private Bry_obj_ref bry_ref = Bry_obj_ref.null_();
+	private final Hash_adp_bry repeated_atrs_hash = Hash_adp_bry.ci_ascii_();		// ASCII:xnde_atrs
+	private final Bry_bfr key_bfr = Bry_bfr.new_(), val_bfr = Bry_bfr.new_();
+	private boolean key_bfr_on = false, val_bfr_on = false, ws_is_before_val = false;
+	public Bry_obj_ref Bry_obj() {return bry_ref;} private final Bry_obj_ref bry_ref = Bry_obj_ref.null_();
 	public int Xnde_find_gt_find(byte[] src, int pos, int end) {
 		bry_ref.Val_(null);
 		byte b = src[pos];

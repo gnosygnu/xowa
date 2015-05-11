@@ -34,7 +34,7 @@ public class Io_sort_cmd_img_tst {
 		Io_url trg_fil = Io_url_.mem_fil_("mem/trg.csv");
 		Io_mgr._.SaveFilStr(src_fil, raw);
 		Io_sort_cmd_img cmd = new Io_sort_cmd_img().Make_url_gen_(Io_url_gen_.fil_(trg_fil));
-		Io_line_rdr rdr = new Io_line_rdr(Gfo_usr_dlg_base.test_(), src_fil).Key_gen_(new Io_line_rdr_key_gen_img());
+		Io_line_rdr rdr = new Io_line_rdr(Gfo_usr_dlg_.Test(), src_fil).Key_gen_(new Io_line_rdr_key_gen_img());
 		cmd.Sort_bgn();
 		while (rdr.Read_next()) {
 			cmd.Sort_do(rdr);

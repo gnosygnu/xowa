@@ -32,7 +32,7 @@ public class Prefs_converter {
 				Io_mgr._.SaveFilStr(trg_fil, new_str);
 				app.Cfg_mgr().Db_load_txt();
 				app.Cfg_mgr().Set_by_app("app.setup.dumps.wiki_storage_type", "sqlite");
-				app.Log_wtr().Log_msg_to_session_fmt("converted options to v2");
+				app.Log_wtr().Log_to_session_fmt("converted options to v2");
 			}
 		}
 	}

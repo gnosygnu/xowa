@@ -25,4 +25,5 @@ class Xog_js_wkr__noop implements Xog_js_wkr {
 	public void Html_elem_replace_html	(String uid, String html) {}
 	public void Html_elem_append_above	(String uid, String html) {}
 	public void Html_redlink			(String html_uid) {}
+	public boolean Html_doc_loaded			() {return true;}
 }

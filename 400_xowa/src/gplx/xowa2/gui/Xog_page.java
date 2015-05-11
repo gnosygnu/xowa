@@ -35,7 +35,7 @@ public class Xog_page implements Xoa_page {
 	public byte[]			Display_ttl() {return display_ttl;} public void Display_ttl_(byte[] v) {this.display_ttl = v;} private byte[] display_ttl;
 	public byte[]			Content_sub() {return content_sub;} public void Content_sub_(byte[] v) {this.content_sub = v;} private byte[] content_sub;
 	public byte[]			Sidebar_div() {return sidebar_div;} public void Sidebar_div_(byte[] v) {this.sidebar_div = v;} private byte[] sidebar_div;
-	public int[]			Redlink_uids() {return redlink_uids;} public void Redlink_uids_(int[] v) {redlink_uids = v;} private int[] redlink_uids;
+	public OrderedHash		Redlink_uids() {return redlink_uids;} private final OrderedHash redlink_uids = OrderedHash_.new_();
 	public Xohd_data_itm__base[] Img_itms() {return img_itms;} public void Img_itms_(Xohd_data_itm__base[] v) {this.img_itms = v;} private Xohd_data_itm__base[] img_itms;
 	public OrderedHash		Gallery_itms() {return gallery_itms;} private OrderedHash gallery_itms = OrderedHash_.new_();
 	public Xog_page Init(Xow_wiki wiki, int page_id, Xoa_url page_url, Xoa_ttl page_ttl) {
@@ -46,6 +46,7 @@ public class Xog_page implements Xoa_page {
 		img_itms = Xohd_data_itm__base.Ary_empty;
 		module_mgr.Clear();
 		gallery_itms.Clear();
+		redlink_uids.Clear();
 		return this;
 	}
 	public void Ctor_from_page(Bry_bfr tmp_bfr, Xoae_page page) {

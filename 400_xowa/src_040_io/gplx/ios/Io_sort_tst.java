@@ -38,7 +38,7 @@ class Io_sort_fxt {
 		
 		Io_mgr._.SaveFilStr(src_url, src);
 
-		Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_base.test_();
+		Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Test();
 		Io_url_gen src_fil_gen = Io_url_gen_.fil_(src_url);
 		Io_url[] tmp_url_ary = externalSort.Split(usr_dlg, src_fil_gen, Io_url_gen_.dir_(src_url.OwnerDir()), Io_line_rdr_key_gen_.first_pipe);
 		Io_sort_fil_basic cmd = new Io_sort_fil_basic(usr_dlg, Io_url_gen_.fil_(trg_url), Io_mgr.Len_kb);

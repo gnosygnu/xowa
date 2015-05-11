@@ -39,6 +39,11 @@ public class OrderedHash_base extends HashAdp_base implements OrderedHash, GfoIn
 		ordered.Clear();
 	}
 	public Object Xto_ary(Class<?> type)			{return ordered.Xto_ary(type);}
+	public Object Xto_ary_and_clear(Class<?> t)	{
+		Object rv = Xto_ary(t);
+		this.Clear();
+		return rv;
+	}
 	@gplx.Virtual public void Sort()						{if (locked) Lock_fail(); ordered.Sort();}	// NOTE: uses item's .compareTo
 	public void SortBy(ComparerAble comparer)		{if (locked) Lock_fail(); ordered.SortBy(comparer);}
 	@Override public java.util.Iterator iterator() {return ordered.iterator();}

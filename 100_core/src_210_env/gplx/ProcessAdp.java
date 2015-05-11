@@ -217,9 +217,14 @@ public class ProcessAdp implements GfoInvkAble, RlsAble {
 		else if (!exe_url.OwnerDir().EqNull())						// only set workingDir if ownerDir is not null; NOTE: workingDir necessary for AdvMame; probably not a bad thing to do 
 			pb.directory(new File(exe_url.OwnerDir().Xto_api()));
 	}	ProcessBuilder pb;
-	Process Process_start() {
+	protected Process Process_start() {
 		try {process = pb.start();}
-		catch (IOException e) {throw Err_.err_key_(e, "gplx.ProcessAdp", "thread start failed");}
+		catch (IOException e) {
+			java.util.List<String> command_list = pb.command();
+			String[] command_ary = new String[command_list.size()];
+			command_ary = command_list.toArray(command_ary);
+			throw Err_.err_(e, "process:start failed; args={0}", String_.Concat_with_str(" ", command_ary));
+		}
 		return process;
 	}
 	void Process_run_and_end() {
@@ -290,50 +295,54 @@ class Thread_ProcessAdp_async extends Thread {
     }
 }
 class Thread_ProcessAdp_sync extends Thread {
-	public Thread_ProcessAdp_sync(ProcessAdp process_adp) {this.process_adp = process_adp;} ProcessAdp process_adp;
-	public boolean Done() {return done;} boolean done = false;
+	public Thread_ProcessAdp_sync(ProcessAdp process_adp) {this.process_adp = process_adp;} private final ProcessAdp process_adp;
+	public boolean Done() {return done;} private boolean done = false;
 	public void Cancel() {
 		process_adp.UnderProcess().destroy();
 	}
     public synchronized void run() {
     	done = false;
-		Process process = process_adp.Process_start();
-		StreamGobbler input_gobbler = new StreamGobbler("input", process.getInputStream());
-		StreamGobbler error_gobbler = new StreamGobbler("error", process.getErrorStream());
-		input_gobbler.start();
-		error_gobbler.start();
-        try {process.waitFor();}
-        catch (InterruptedException e) 	{
-        	this.Cancel();
-        	String kill_rslt = process_adp.Kill();        	
-            process_adp.Process_post(kill_rslt);
-        	done = false;
-        	return;
-        }
-        while (input_gobbler.isAlive()) {
-        	try {input_gobbler.join(50);}
-        	catch (InterruptedException e) {throw Err_.err_key_(e, "gplx.ProcessAdp", "thread interrupted at input gobbler");}
-        }
-        while (error_gobbler.isAlive()) {
-        	try {error_gobbler.join(50);}
-        	catch (InterruptedException e) {throw Err_.err_key_(e, "gplx.ProcessAdp", "thread interrupted at error gobbler");}
-        }
-        String result = input_gobbler.Rslt() + "\n" + error_gobbler.Rslt();
-        process_adp.Process_post(result);
-    	done = true;
+    	try {
+			Process process = process_adp.Process_start();
+			StreamGobbler input_gobbler = new StreamGobbler("input", process.getInputStream());
+			StreamGobbler error_gobbler = new StreamGobbler("error", process.getErrorStream());
+			input_gobbler.start();
+			error_gobbler.start();
+	        try {process.waitFor();}
+	        catch (InterruptedException e) 	{
+	        	this.Cancel();
+	        	String kill_rslt = process_adp.Kill();        	
+	            process_adp.Process_post(kill_rslt);
+	        	done = false;
+	        	return;
+	        }
+	        while (input_gobbler.isAlive()) {
+	        	try {input_gobbler.join(50);}
+	        	catch (InterruptedException e) {throw Err_.err_key_(e, "gplx.ProcessAdp", "thread interrupted at input gobbler");}
+	        }
+	        while (error_gobbler.isAlive()) {
+	        	try {error_gobbler.join(50);}
+	        	catch (InterruptedException e) {throw Err_.err_key_(e, "gplx.ProcessAdp", "thread interrupted at error gobbler");}
+	        }
+	        String result = input_gobbler.Rslt() + "\n" + error_gobbler.Rslt();
+	        process_adp.Process_post(result);
+    	} 	catch (Exception e) {	// NOTE: warn; do not throw, else multiple errors if timidity not available; PAGE:fr.u:Pentatoniques_altérées/Gammes_avec_deux_notes_altérées DATE:2015-05-08
+    		Gfo_usr_dlg_.I.Warn_many("", "", "process.sync failed; cmd=~{0} args=~{1}", process_adp.Exe_url().Raw(), process_adp.Args_str());    		
+    	}
+    	finally {done = true;}
     }
 }
 class StreamGobbler extends Thread {
-	String name; InputStream stream;
+	private final String name; private final InputStream stream;
 	public StreamGobbler (String name, InputStream stream) {this.name = name; this.stream = stream;}
-	public String Rslt() {return rslt;} String rslt;
+	public String Rslt() {return rslt;} private String rslt;
 	public void run () {
 		try {
 			String_bldr sb = String_bldr_.new_();
 			InputStreamReader isr = new InputStreamReader(stream);
 			BufferedReader br = new BufferedReader(isr);
 			while (true) {
-				String s = br.readLine ();
+				String s = br.readLine();
 				if (s == null) break;
 				sb.Add(s);
 			}

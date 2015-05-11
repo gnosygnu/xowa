@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.origs; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.wmfs.apis.*;
+import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.wmfs.apis.*; import gplx.xowa.files.downloads.*;
 public class Xof_orig_wkr__wmf_api implements Xof_orig_wkr {
 	private final Xoapi_orig_base orig_api; private final Xof_download_wkr download_wkr; private final Xow_repo_mgr repo_mgr; private final byte[] wiki_domain;
 	private final Xoapi_orig_rslts api_rv = new Xoapi_orig_rslts();		

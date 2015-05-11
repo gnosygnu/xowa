@@ -39,6 +39,7 @@ public class Gxw_html_server implements Gxw_html {
 	public boolean			Html_doc_find(String id, String find, boolean dir_fwd, boolean case_match, boolean wrap_find) {throw Err_.not_implemented_();}
 	public void			Html_doc_body_focus() {Exec(cfg.Doc_body_focus());}
 	public void			Html_doc_selection_focus_toggle() {Exec(cfg.Doc_selection_focus_toggle());}
+	public boolean			Html_doc_loaded() {return Bool_.cast_(Exec(cfg.Doc_loaded()));}
 	public String		Html_elem_atr_get_str	(String id, String atr_key) {return Exec(cfg.Elem_atr_get(id, atr_key));}
 	public boolean			Html_elem_atr_get_bool	(String id, String atr_key) {return Bool_.parse_(Exec(cfg.Elem_atr_get(id, atr_key)));}
 	public boolean			Html_elem_atr_set		(String id, String atr_key, String val) {return Exec_as_bool(cfg.Elem_atr_set(id, atr_key, val));}

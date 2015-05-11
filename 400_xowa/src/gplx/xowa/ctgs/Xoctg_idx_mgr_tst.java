@@ -87,11 +87,11 @@ class Xoctg_idx_mgr_fxt {
 		}
 		return bfr.Xto_bry_and_clear();
 	}
-	public Xoctg_idx_mgr_fxt Init_itms(int block_len, byte[] src) {idx_mgr.Block_len_(block_len); idx_mgr.Index(Gfo_usr_dlg_base.test_(), Ctg_name, src); return this;}
+	public Xoctg_idx_mgr_fxt Init_itms(int block_len, byte[] src) {idx_mgr.Block_len_(block_len); idx_mgr.Index(Gfo_usr_dlg_.Test(), Ctg_name, src); return this;}
 	public Xoctg_idx_mgr_fxt Init_block_len(int block_len) {idx_mgr.Block_len_(block_len); return this;}
 	public Xoctg_idx_mgr_fxt Init_src(byte[] v) {src = v; src_len = v.length; return this;} private byte[] src; int src_len;
 	public Xoctg_idx_mgr_fxt Test_index(byte[] src, String... expd) {
-		idx_mgr.Index(Gfo_usr_dlg_base.test_(), Ctg_name, src);
+		idx_mgr.Index(Gfo_usr_dlg_.Test(), Ctg_name, src);
 		Tfds.Eq_ary_str(expd, Idx_mgr_itms(idx_mgr));
 		return this;
 	}
@@ -118,7 +118,7 @@ class Xoctg_idx_mgr_fxt {
 	}
 	public Xoctg_idx_mgr_fxt Test_find(String find, boolean fill_at_bgn, String[] expd_ary, String last_plus_one) {
 		if (tmp_list == null) tmp_list = ListAdp_.new_();
-		idx_mgr.Index(Gfo_usr_dlg_base.test_(), Bry_.Empty, src);
+		idx_mgr.Index(Gfo_usr_dlg_.Test(), Bry_.Empty, src);
 		tmp_list.Clear();
 		idx_mgr.Find(tmp_list, src, fill_at_bgn, Bry_.new_ascii_(find), 3, tmp_last_plus_one);
 		Tfds.Eq_ary(expd_ary, To_str_ary(tmp_list));

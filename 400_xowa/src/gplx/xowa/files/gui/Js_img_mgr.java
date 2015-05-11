@@ -27,7 +27,7 @@ public class Js_img_mgr {
 		Js_img_mgr.Update_img(page, js_wkr, itm.Html_img_wkr(), itm.Html_uid(), itm.Lnki_type(), itm.Html_elem_tid(), itm.Html_w(), itm.Html_h(), itm.Html_view_url().To_http_file_str(), itm.Orig_w(), itm.Orig_h(), itm.Html_orig_url().To_http_file_str(), itm.Lnki_ttl(), itm.Gallery_mgr_h());
 	}
 	public static void Update_link_missing(Xog_html_itm html_itm, String html_id) {
-		html_itm.Html_elem_atr_set_append(html_id, "class", " new");
+		html_itm.Html_redlink(html_id);
 	}
 	private static void Update_img(Xoa_page page, Xog_js_wkr js_wkr, Js_img_wkr img_wkr, int uid, byte lnki_type, byte elem_tid, int html_w, int html_h, String html_src, int orig_w, int orig_h, String orig_src, byte[] lnki_ttl, int gallery_mgr_h) {
 		if (!page.Wiki().App().App_type().Uid_is_gui()) return;	// do not update html widget unless app is gui; null ref on http server; DATE:2014-09-17

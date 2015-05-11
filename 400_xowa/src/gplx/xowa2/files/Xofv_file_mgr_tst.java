@@ -21,7 +21,7 @@ import gplx.xowa.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*; imp
 import gplx.xowa2.apps.*; import gplx.xowa2.wikis.*; import gplx.xowa.files.origs.*;
 public class Xofv_file_mgr_tst {
 	@Before public void init() {fxt.Clear();} private final Xofv_file_mgr_fxt fxt = new Xofv_file_mgr_fxt();
-	@After  public void term() {Gfo_usr_dlg_.I = Gfo_usr_dlg_.Null;}
+	@After  public void term() {Gfo_usr_dlg_.I = Gfo_usr_dlg_.Noop;}
 	@Test  public void Stub() {}
 //		@Test   public void Thumb() {
 //			fxt	.Init_orig_add(fxt.Mkr_orig().Init_comm("A.png", 440, 400))

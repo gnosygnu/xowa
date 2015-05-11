@@ -47,7 +47,7 @@ public class Xob_xdat_file_wtr_tst {
 	}
 	private void tst_Flush(Xob_xdat_file_wtr wtr, String expd) {
 		Io_url url = wtr.Fil_url();
-		wtr.Flush(Gfo_usr_dlg_base.test_());
+		wtr.Flush(Gfo_usr_dlg_.Test());
 		String actl = Io_mgr._.LoadFilStr(url);
 		Tfds.Eq(expd, actl);
 	}

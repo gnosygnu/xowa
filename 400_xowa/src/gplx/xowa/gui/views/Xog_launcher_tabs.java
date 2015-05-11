@@ -30,7 +30,7 @@ class Xog_launcher_tabs {
 		// tab.Html_itm().Html_box().Focus(); // focus the html_box so wheel scroll works; DATE:2013-02-08
 		app.Usr_dlg().Prog_none("", "", "");
 		log_bfr.Add("app.launch.page.end");
-		app.Usr_dlg().Log_wtr().Log_msg_to_session_direct(log_bfr.Xto_str());
+		app.Usr_dlg().Log_wkr().Log_to_session_direct(log_bfr.Xto_str());
 	}
 	private boolean Restore_tabs(Xoae_app app, Xowe_wiki home_wiki, Xog_win_itm win, Io_fil_marker fil_marker) {
 		String[] launch_urls = app.Api_root().App().Startup().Tabs().Calc_startup_strs(app);

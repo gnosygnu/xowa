@@ -248,7 +248,7 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble {
 		File_repos_assert(app, this);
 		xtn_mgr.Init_by_wiki(this);
 		log_bfr.Add("wiki.init.end");
-		app.Log_wtr().Log_msg_to_session_direct(log_bfr.Xto_str());
+		app.Log_wtr().Log_to_session_direct(log_bfr.Xto_str());
 		init_in_process = false;
 	}
 	private void Html__hdump_enabled_(boolean v) {

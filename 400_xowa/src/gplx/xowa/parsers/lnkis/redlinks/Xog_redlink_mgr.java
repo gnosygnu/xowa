@@ -27,7 +27,7 @@ public class Xog_redlink_mgr implements GfoInvkAble {
 		this.redlink_lnki_list = page.Redlink_lnki_list();
 		this.lnki_list = redlink_lnki_list.Lnki_list();
 		this.thread_id = redlink_lnki_list.Thread_id();
-		this.log_enabled = log_enabled; this.usr_dlg = log_enabled ? Gfo_usr_dlg_.I : Gfo_usr_dlg_.Null;
+		this.log_enabled = log_enabled; this.usr_dlg = log_enabled ? Gfo_usr_dlg_.I : Gfo_usr_dlg_.Noop;
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_run)) Redlink();

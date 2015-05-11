@@ -17,15 +17,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public class Gfo_usr_dlg_ {
-	public static Gfo_usr_dlg I = Gfo_usr_dlg_null._;
-        public static final Gfo_usr_dlg Null = Gfo_usr_dlg_null._;
+	public static Gfo_usr_dlg			I		= Gfo_usr_dlg_noop._;	// NOTE: global instance which can be reassigned
+        public static final Gfo_usr_dlg	Noop	= Gfo_usr_dlg_noop._;
+	public static Gfo_usr_dlg Test() {
+		if (test == null)
+			test = new Gfo_usr_dlg_base(Gfo_usr_dlg__log_.Noop, Gfo_usr_dlg__gui_.Test);
+		return test;
+	}	private static Gfo_usr_dlg_base test;
 }
-class Gfo_usr_dlg_null implements Gfo_usr_dlg {
+class Gfo_usr_dlg_noop implements Gfo_usr_dlg {
 	public boolean Canceled() {return false;} public void Canceled_y_() {} public void Canceled_n_() {}
 	public void Cancel() {} public void Cancel_reset() {}
 	public void Clear() {}
-	public Gfo_usr_dlg_ui Ui_wkr() {throw Err_.not_implemented_();} public void Ui_wkr_(Gfo_usr_dlg_ui v) {}
-	public Gfo_log_wtr Log_wtr() {throw Err_.not_implemented_();} public void Log_wtr_(Gfo_log_wtr v) {}
+	public Gfo_usr_dlg__log Log_wkr() {return Gfo_usr_dlg__log_.Noop;} public void Log_wkr_(Gfo_usr_dlg__log v) {}
+	public Gfo_usr_dlg__gui Gui_wkr() {return Gfo_usr_dlg__gui_.Noop;} public void Gui_wkr_(Gfo_usr_dlg__gui v) {}
 	public String Log_many(String grp_key, String msg_key, String fmt, Object... args) {return "";}
 	public String Warn_many(String grp_key, String msg_key, String fmt, Object... args) {return "";}
 	public Err Fail_many(String grp_key, String msg_key, String fmt, Object... args) {return Err_.new_(fmt);}
@@ -39,5 +44,5 @@ class Gfo_usr_dlg_null implements Gfo_usr_dlg {
 	public String Log_direct(String msg) {return "";}
 	public String Plog_many(String grp_key, String msg_key, String fmt, Object... args) {return "";}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {return this;}
-        public static final Gfo_usr_dlg_null _ = new Gfo_usr_dlg_null(); Gfo_usr_dlg_null() {}
+        public static final Gfo_usr_dlg_noop _ = new Gfo_usr_dlg_noop(); Gfo_usr_dlg_noop() {}
 }

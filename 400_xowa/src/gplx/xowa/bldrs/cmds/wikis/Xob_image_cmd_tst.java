@@ -45,7 +45,7 @@ class Xob_image_cmd_fxt {
 	public Xob_image_cmd_fxt W_(int v) {w = v; return this;}
 	public Xob_image_cmd_fxt H_(int v) {h = v; return this;}
 	public Xob_image_cmd_fxt Test(int expd) {
-		Tfds.Eq(expd, Xob_image_cmd.Calc_ext_id(Gfo_usr_dlg_.Null, name, media_type, minor_mime, w, h));
+		Tfds.Eq(expd, Xob_image_cmd.Calc_ext_id(Gfo_usr_dlg_.Noop, name, media_type, minor_mime, w, h));
 		return this;
 	}
 }

@@ -47,6 +47,7 @@ public class Xob_redlink_mkr_cmd extends Xob_itm_basic_base implements Xob_cmd {
 				int page_id = rdr.Read_int(page_tbl.Fld_page_id());
 				if (cur_page_id != page_id) {
 					if (cur_page_id != -1) Commit(html_dump_tbl, cur_page_id, bfr);
+					bfr.Add_int_variable(gplx.xowa.html.hdumps.core.Xohd_data_tid.Tid_redlink).Add_byte_pipe();
 					cur_page_id = page_id;
 				}
 				// add html_uid to cur_page's bfr

@@ -47,6 +47,7 @@ public class Gfui_html extends GfuiElemBase {
 	public String				Html_active_atr_get_str(String atrKey, String or) {return under.Html_active_atr_get_str(atrKey, or);}
 	public void					Html_js_enabled_(boolean v) {under.Html_js_enabled_(v);}
 	public void					Html_js_eval_proc(String name, String... args) {under.Html_js_eval_proc(name, args);}
+	public boolean					Html_doc_loaded() {return under.Html_doc_loaded();}
 	public String				Html_js_eval_script(String script) {return under.Html_js_eval_script(script);}
 	public void					Html_js_cbks_add(String js_func_name, GfoInvkAble invk) {under.Html_js_cbks_add(js_func_name, invk);}
 	public void					Html_invk_src_(GfoEvObj v) {under.Html_invk_src_(v);}

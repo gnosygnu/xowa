@@ -67,7 +67,7 @@ class Sql_file_parser_fxt {
 		Io_mgr._.SaveFilBry(src_fil, Bry_.new_utf8_(raw_str));
 		Io_url trg_fil = Io_url_.new_fil_("mem/test.csv");
 		parser.Src_fil_(src_fil).Trg_fil_gen_(Io_url_gen_.fil_(trg_fil));
-		parser.Parse(Gfo_usr_dlg_base.test_());
+		parser.Parse(Gfo_usr_dlg_.Test());
 		byte[] actl = Io_mgr._.LoadFilBry(trg_fil);
 		Tfds.Eq(expd, String_.new_utf8_(actl));
 	}	

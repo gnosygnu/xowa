@@ -57,14 +57,14 @@ public class Xobd_rdr implements Xob_cmd {
 					long dividend = fil.Fil_pos();
 					if (dividend >= fil_len) dividend = fil_len - 1; // prevent % from going over 100
 					String msg = DecimalAdp_.CalcPctStr(dividend, fil_len, "00.00") + "|" + String_.new_utf8_(page.Ttl_full_db()) + "|" + Err_.Message_lang(e)  + "|" + Xot_tmpl_wtr.Err_string; Xot_tmpl_wtr.Err_string = "";
-					bldr.Usr_dlg().Log_wtr().Log_msg_to_session(msg);
+					bldr.Usr_dlg().Log_wkr().Log_to_session(msg);
 					ConsoleAdp._.WriteLine(msg);
 				}
 			}
 		}
 		catch (Exception e) {
 			String msg = Err_.Message_lang(e);
-			bldr.Usr_dlg().Log_wtr().Log_msg_to_session(msg);
+			bldr.Usr_dlg().Log_wkr().Log_to_session(msg);
 			ConsoleAdp._.WriteLine(msg);
 			throw Err_.err_(e, "error while reading dump");
 		}

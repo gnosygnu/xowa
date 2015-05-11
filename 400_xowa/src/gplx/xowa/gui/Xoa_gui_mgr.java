@@ -48,7 +48,7 @@ public class Xoa_gui_mgr implements GfoEvObj, GfoInvkAble {
 		RectAdp prog_box_rect = browser_win.Prog_box().Rect();
 		memo_win.Rect_set(RectAdp_.new_(prog_box_rect.X(), prog_box_rect.Y() - 75, prog_box_rect.Width(), 100));
 		memo_txt.Size_(memo_win.Size().Op_add(-8, -30));
-		memo_txt.Text_(String_.Concat_lines_nl(browser_win.Usr_dlg().Ui_wkr().Prog_msgs().Xto_str_ary()));
+		memo_txt.Text_(String_.Concat_lines_nl(browser_win.Usr_dlg().Gui_wkr().Prog_msgs().Xto_str_ary()));
 		memo_win.Show();
 		memo_win.Focus();
 	}
@@ -109,7 +109,7 @@ public class Xoa_gui_mgr implements GfoEvObj, GfoInvkAble {
 			Xog_win_itm main_win = ui_mgr.Browser_win();
 			Xog_win_itm_.Show_win(main_win); log_bfr.Add("app.gui.win_load.done");
 			Xog_tab_itm_read_mgr.Launch(main_win);
-			app.Log_wtr().Log_msg_to_session_direct(log_bfr.Xto_str());
+			app.Log_wtr().Log_to_session_direct(log_bfr.Xto_str());
 			kit.Kit_run();	// NOTE: enters thread-loop
 		} catch (Exception e) {
 			app.Usr_dlg().Warn_many("", "", "run_failed: ~{0} ~{1}", log_bfr.Xto_str(), Err_.Message_gplx(e));

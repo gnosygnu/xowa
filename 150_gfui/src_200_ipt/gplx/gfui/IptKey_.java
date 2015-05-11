@@ -19,7 +19,7 @@ package gplx.gfui; import gplx.*;
 import java.awt.event.KeyEvent;
 import gplx.core.primitives.*;
 public class IptKey_ {
-	private static EnmMgr enmMgr = EnmMgr.new_().BitRngBgn_(65536).BitRngEnd_(262144).Prefix_("key.");
+	private static EnmMgr enm_mgr = EnmMgr.new_().BitRngBgn_(65536).BitRngEnd_(262144).Prefix_("key.");
 	public static IptKey[] Ary(IptKey... ary) {return ary;}
 	public static final IptKey[] Ary_empty = new IptKey[0];
 	public static IptKey as_(Object obj) {return obj instanceof IptKey ? (IptKey)obj : null;}
@@ -29,13 +29,13 @@ public class IptKey_ {
 		int newVal = ary[0].Val();
 		for (int i = 1; i < ary.length; i++)
 			newVal = Enm_.FlipInt(true, newVal, ary[i].Val());
-		return getOrNew_(newVal);
+		return get_or_new_(newVal);
 	}
 	public static IptKey api_(int val) {
-		IptKey rv = (IptKey)enmMgr.Get(val);
+		IptKey rv = (IptKey)enm_mgr.Get(val);
 		return (rv == null) ? new_(val, "key_" + Int_.Xto_str(val)) : rv;
 	}
-	public static IptKey parse_(String raw) {return getOrNew_(enmMgr.GetVal(raw));}
+	public static IptKey parse_(String raw) {return get_or_new_(enm_mgr.GetVal(raw));}
 	public static IptKey rdr_or_(DataRdr rdr, String key, IptKey or) {
 		String val = rdr.ReadStrOr(key, ""); // NOTE: "" cannot be null, b/c nullRdr returns String.empty
 		return (String_.Eq(val, "")) ? or : parse_(val);
@@ -58,13 +58,13 @@ public class IptKey_ {
 			list.Del(key);
 		return (IptKey[])list.Xto_ary(IptKey.class);
 	}
-	static IptKey getOrNew_(int val) {
-		IptKey rv = (IptKey)enmMgr.Get(val);
-		return (rv == null) ? new_(val, enmMgr.GetStr(val)) : rv;
+	private static IptKey get_or_new_(int val) {
+		IptKey rv = (IptKey)enm_mgr.Get(val);
+		return (rv == null) ? new_(val, enm_mgr.GetStr(val)) : rv;
 	}
 	static IptKey new_(int val, String name) {
 		IptKey rv = new IptKey(val, String_.HasAtBgn(name, "key.") ? name : "key." + name);
-		enmMgr.RegObj(val, name, rv);
+		enm_mgr.RegObj(val, name, rv);
 		return rv;
 	}
 	public static final int KeyCode_Shift = 65536, KeyCode_Ctrl = 131072, KeyCode_Alt = 262144;
@@ -100,6 +100,7 @@ public class IptKey_ {
 	, CloseBracket = new_(221, "closeBracket")
 	, Quote = new_(222, "quote")
 	, Shift = new_(KeyCode_Shift, "shift"), Ctrl = new_(KeyCode_Ctrl, "ctrl"), Alt = new_(KeyCode_Alt, "alt")
+	, Keypad_enter = new_(16777296, "keypad_enter")
 	;
 	private static OrderedHash ui_str_hash;
 	public static OrderedHash Ui_str_hash() {
@@ -140,10 +141,13 @@ public class IptKey_ {
 		boolean mod_c = Enm_.HasInt(val, IptKey_.Ctrl.Val());	if (mod_c) {mod_str += "c"; val = Enm_.FlipInt(Bool_.N, val, IptKey_.Ctrl.Val());}
 		boolean mod_a = Enm_.HasInt(val, IptKey_.Alt.Val());	if (mod_a) {mod_str += "a"; val = Enm_.FlipInt(Bool_.N, val, IptKey_.Alt.Val());}
 		boolean mod_s = Enm_.HasInt(val, IptKey_.Shift.Val()); if (mod_s) {mod_str += "s"; val = Enm_.FlipInt(Bool_.N, val, IptKey_.Shift.Val());}
-		if (String_.Len_gt_0(mod_str))
-			rv = "mod." + mod_str + "+";
+		if (String_.Len_gt_0(mod_str)) {
+			rv = "mod." + mod_str;
+            if (val == 0) return rv;	// handle modifiers only, like "mod.cs"; else will be "mod.cs+key.#0"
+			rv += "+";
+		}
 		IptKey key = (IptKey)IptKey_.Ui_str_hash().Fetch(Int_obj_ref.new_(val));
-		String key_str = key == null ? "key." + Int_.Xto_str(val) : key.Key();
+		String key_str = key == null ? "key.#" + Int_.Xto_str(val) : key.Key();
 		return rv + key_str;
 	}
 }

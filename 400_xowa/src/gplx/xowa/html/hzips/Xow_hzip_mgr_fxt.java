@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 class Xow_hzip_mgr_fxt {
 	private Bry_bfr bfr = Bry_bfr.reset_(Io_mgr.Len_mb); private Xow_hzip_mgr hzip_mgr; private Xowe_wiki wiki;
-	private Xodump_stats_itm stats = new Xodump_stats_itm();
+	private Xodump_stats_itm stats = new Xodump_stats_itm(); private final OrderedHash redlink_uids = OrderedHash_.new_();
 	public void Clear() {
 		if (hzip_mgr == null) {
 			Xoae_app app = Xoa_app_fxt.app_();
@@ -31,6 +31,7 @@ class Xow_hzip_mgr_fxt {
 		wiki.Xwiki_mgr().Add_full(alias, domain);
 		wiki.Appe().User().Wiki().Xwiki_mgr().Add_full(domain, domain);
 	}
+	public byte[] Make_int(int v) {return Xow_hzip_int_.Save_bin_int_abrv(v);}
 	public void Test_save(byte[][] expd_brys, String html) {Test_save(html, expd_brys);}
 	public void Test_save(String html, byte[]... expd_brys) {
 		byte[] expd = Bry_.Add(expd_brys);
@@ -39,7 +40,7 @@ class Xow_hzip_mgr_fxt {
 	}
 	public void Test_load(byte[][] src_brys, String expd) {
 		byte[] src = Bry_.Add(src_brys);
-		src = hzip_mgr.Parse(bfr, Bry_.Empty, src);
+		src = hzip_mgr.Parse(bfr, Bry_.Empty, src, redlink_uids);
 		Tfds.Eq(expd, String_.new_utf8_(src));
 	}
 	public void Test_html(String html, String expd) {

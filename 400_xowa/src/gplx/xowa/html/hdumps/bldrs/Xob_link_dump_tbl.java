@@ -20,7 +20,8 @@ import gplx.dbs.*;
 class Xob_link_dump_tbl implements RlsAble {
 	public static final String Tbl_name = "link_dump"; private static final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	public static final String
-	  Fld_src_page_id		= flds.Add_int("src_page_id")
+	  Fld_uid				= flds.Add_int_pkey_autonum("uid")
+	, Fld_src_page_id		= flds.Add_int("src_page_id")
 	, Fld_src_html_uid		= flds.Add_int("src_html_uid")
 	, Fld_trg_page_id		= flds.Add_int_dflt("trg_page_id", -1)
 	, Fld_trg_ns			= flds.Add_int("trg_ns")
@@ -47,9 +48,10 @@ class Xob_link_dump_tbl implements RlsAble {
 	public void Rls() {
 		stmt_insert = Db_stmt_.Rls(stmt_insert);
 	}
-	public void Insert_bgn() {conn.Txn_bgn(); stmt_insert = conn.Stmt_insert(Tbl_name, flds);}
+	public void Insert_bgn() {conn.Txn_bgn();}
 	public void Insert_end() {conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
 	public void Insert_cmd_by_batch(int src_page_id, int src_html_uid, int trg_ns, byte[] trg_ttl) {
+		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(Tbl_name, flds.To_str_ary_wo_autonum());
 		stmt_insert.Clear().Val_int(Fld_src_page_id, src_page_id)
 			.Val_int(Fld_src_html_uid, src_html_uid).Val_int(Fld_trg_page_id, -1).Val_int(Fld_trg_ns, trg_ns).Val_bry_as_str(Fld_trg_ttl, trg_ttl)
 			.Exec_insert();

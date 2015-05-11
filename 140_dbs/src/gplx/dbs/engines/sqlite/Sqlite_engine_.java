@@ -64,7 +64,7 @@ public class Sqlite_engine_ {
 			usr_dlg.Log_many("", "", "index created: ~{0} ~{1}", tbl, idx_sql);
 		}
 	}
-	public static void Idx_create(Db_conn p, Db_idx_itm... idxs) {Idx_create(Gfo_usr_dlg_.Null, p, "", idxs);}
+	public static void Idx_create(Db_conn p, Db_idx_itm... idxs) {Idx_create(Gfo_usr_dlg_.Noop, p, "", idxs);}
 	public static void Idx_create(Gfo_usr_dlg usr_dlg, Db_conn p, String file_id, Db_idx_itm... idxs) {
 		int len = idxs.length;
 		for (int i = 0; i < len; i++) {

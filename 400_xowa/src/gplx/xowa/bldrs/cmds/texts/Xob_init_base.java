@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.cmds.texts; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
 import gplx.xowa.wikis.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.xmls.*;
+import gplx.xowa.bldrs.css.*;
 public abstract class Xob_init_base implements Xob_cmd, GfoInvkAble {
 	private Xob_bldr bldr; private Xowe_wiki wiki; private Gfo_usr_dlg usr_dlg;
 	private byte wbase_enabled = Bool_.__byte;

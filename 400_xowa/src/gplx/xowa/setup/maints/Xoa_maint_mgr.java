@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.setup.maints; import gplx.*; import gplx.xowa.*; import gplx.xowa.setup.*;
-import gplx.ios.*; import gplx.xowa.wikis.*;
+import gplx.ios.*; import gplx.xowa.wikis.*; import gplx.xowa.files.downloads.*;
 public class Xoa_maint_mgr implements GfoInvkAble {
 	public Xoa_maint_mgr(Xoae_app app) {
 		this.app = app;

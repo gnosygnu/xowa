@@ -41,6 +41,10 @@ public class Gfui_bnd_parser_tst {
 		fxt.Test_x_to_gfui("Ctrl + Shift + A"				, "mod.cs+key.a");
 		fxt.Test_x_to_gfui("Ctrl + Alt + Shift + A"			, "mod.cas+key.a");
 	}
+	@Test  public void Keypad_enter() {
+		fxt.Test_x_to_norm("key.keypad_enter"				, "Keypad Enter");
+		fxt.Test_x_to_norm("mod.c+key.keypad_enter"			, "Ctrl + Keypad Enter");
+	}
 }
 class Gfui_bnd_parser_fxt {
 	private Gfui_bnd_parser parser;

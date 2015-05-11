@@ -22,19 +22,19 @@ public class Pfunc_rel2abs_tst {
 	@Before public void init()					{fxt.Reset();}
 	@Test   public void Slash_lvl3()			{fxt.Test_parse_tmpl_str_test("{{#rel2abs:/d|a/b/c}}"				, "{{test}}"			, "a/b/c/d");}
 	@Test   public void Cur_lvl1()				{fxt.Test_parse_tmpl_str_test("{{#rel2abs:./d|a}}"					, "{{test}}"			, "a/d");}
-	@Test   public void Cur_lvl2()				{fxt.Test_parse_tmpl_str_test("{{#rel2abs:./d|a/b}}"					, "{{test}}"			, "a/b/d");}
+	@Test   public void Cur_lvl2()				{fxt.Test_parse_tmpl_str_test("{{#rel2abs:./d|a/b}}"				, "{{test}}"			, "a/b/d");}
 	@Test   public void Cur_lvl3()				{fxt.Test_parse_tmpl_str_test("{{#rel2abs:./d|a/b/c}}"				, "{{test}}"			, "a/b/c/d");}
 	@Test   public void Owner_lvl3()			{fxt.Test_parse_tmpl_str_test("{{#rel2abs:../d|a/b/c}}"				, "{{test}}"			, "a/b/d");}
 	@Test   public void Owner_cur_lvl3()		{fxt.Test_parse_tmpl_str_test("{{#rel2abs:../.|a/b/c}}"				, "{{test}}"			, "a/b");}
-	@Test   public void Text_lvl3()				{fxt.Test_parse_tmpl_str_test("{{#rel2abs:d|a/b/c}}"					, "{{test}}"			, "d");}
-	@Test   public void Slash_mult()			{fxt.Test_parse_tmpl_str_test("{{#rel2abs:/d//e|a/b/c}}"				, "{{test}}"			, "a/b/c/d/e");}
+	@Test   public void Text_lvl3()				{fxt.Test_parse_tmpl_str_test("{{#rel2abs:d|a/b/c}}"				, "{{test}}"			, "d");}
+	@Test   public void Slash_mult()			{fxt.Test_parse_tmpl_str_test("{{#rel2abs:/d//e|a/b/c}}"			, "{{test}}"			, "a/b/c/d/e");}
 	@Test   public void Slash_cur_mult()		{fxt.Test_parse_tmpl_str_test("{{#rel2abs:/d/./e|a/b/c}}"			, "{{test}}"			, "a/b/c/d/e");}
 	@Test   public void Qry_ends_w_slash()		{fxt.Test_parse_tmpl_str_test("{{#rel2abs:/d/|a/b/c}}"				, "{{test}}"			, "a/b/c/d");}
 	@Test   public void Qry_is_empty()			{fxt.Test_parse_tmpl_str_test("{{#rel2abs:|a/b/c}}"					, "{{test}}"			, "a/b/c");}
-	@Test   public void Qry_is_dot()			{fxt.Test_parse_tmpl_str_test("{{#rel2abs:.|a/b/c}}"					, "{{test}}"			, "a/b/c");}
+	@Test   public void Qry_is_dot()			{fxt.Test_parse_tmpl_str_test("{{#rel2abs:.|a/b/c}}"				, "{{test}}"			, "a/b/c");}
 	@Test   public void DotDot_mult2()			{fxt.Test_parse_tmpl_str_test("{{#rel2abs:/../..|a/b/c}}"			, "{{test}}"			, "a");}
-	@Test   public void DotDot_mult3()			{fxt.Test_parse_tmpl_str_test("{{#rel2abs:/../../..|a/b/c}}"			, "{{test}}"			, "");}
-	@Test   public void Src_is_empty()			{fxt.Test_parse_tmpl_str_test("{{#rel2abs:/d|}}"						, "{{test}}"			, "Test page/d");}
+	@Test   public void DotDot_mult3()			{fxt.Test_parse_tmpl_str_test("{{#rel2abs:/../../..|a/b/c}}"		, "{{test}}"			, "");}
+	@Test   public void Src_is_empty()			{fxt.Test_parse_tmpl_str_test("{{#rel2abs:/d|}}"					, "{{test}}"			, "Test page/d");}
 	@Test   public void Err_owner()				{fxt.Test_parse_tmpl_str_test("{{#rel2abs:..}}"						, "{{test}}"			, "");}	// PURPOSE.fix: should not fail
 	@Test   public void Err_owner_2()			{fxt.Test_parse_tmpl_str_test("{{#rel2abs:/../../b|a}}"				, "{{test}}"			, "");}	// PURPOSE.fix: should not fail
 	@Test   public void Ns_should_be_included_for_cur_page()	{// PURPOSE.fix: current title was not returning ns; EX: de.wikipedia.org/wiki/Hilfe:Vorlagenprogrammierung#Funktion_rel2abs 

@@ -46,8 +46,8 @@ public class Gfui_bnd_parser {
 	private String Convert(boolean src_is_gfui, String src_str) {			
 		this.src = Bry_.new_utf8_(src_str); this.src_len = src.length;			
 		tkns.Clear(); mod_val = Mod_val_null;
-		int pos = 0; int itm_bgn = -1, itm_end = -1;
-		while (pos <= src_len) {	// loop over bytes and break up tkns by symbols
+		int pos = 0; int itm_bgn = -1, itm_end = -1; boolean is_numeric = false;
+		while (pos <= src_len) {			// loop over bytes and break up tkns by symbols
 			byte b = pos == src_len ? Byte_ascii.NewLine: src[pos];	// treat eos as "\n" for purpose of separating tokens
 			Gfui_bnd_tkn sym_tkn = null;
 			switch (b) {
@@ -68,6 +68,11 @@ public class Gfui_bnd_parser {
 						itm_end = pos;
 					++pos;
 					continue;
+				case Byte_ascii.Hash:
+					if (is_numeric) throw Err_.new_("multiple numeric symbols in keycode");
+					is_numeric = true;
+					++pos;
+					continue;
 				default:					// letter / number; continue
 					if (itm_bgn == -1)		// no word started; start it
 						itm_bgn = pos;
@@ -76,7 +81,8 @@ public class Gfui_bnd_parser {
 			}
 			if (itm_end == -1)				// end not set by space; char before symbol is end
 				itm_end = pos;
-			Process_sym(src_is_gfui, sym_tkn, itm_bgn, itm_end);
+			Process_sym(src_is_gfui, is_numeric, sym_tkn, itm_bgn, itm_end);
+			is_numeric = false;
 			if (sym_tkn.Tid() == Gfui_bnd_tkn.Tid_sym_eos)
 				break;
 			else
@@ -90,9 +96,21 @@ public class Gfui_bnd_parser {
 		}
 		return tmp_bfr.Xto_str_and_clear();
 	}
-	private void Process_sym(boolean src_is_gfui, Gfui_bnd_tkn sym_tkn, int itm_bgn, int itm_end) {
+	private void Process_sym(boolean src_is_gfui, boolean is_numeric, Gfui_bnd_tkn sym_tkn, int itm_bgn, int itm_end) {
 		Hash_adp_bry regy = src_is_gfui ? gfui_regy : norm_regy;
-		Gfui_bnd_tkn tkn = (Gfui_bnd_tkn)regy.Get_by_mid(src, itm_bgn, itm_end);
+		Gfui_bnd_tkn tkn = null;
+		if (is_numeric) {	// EX: "key.#10" or "#10"
+			int tkn_bgn = itm_bgn;
+			if (src_is_gfui) {	// remove "key." in "key.#10"
+				tkn_bgn = Bry_finder.Move_fwd(src, Byte_ascii.Dot, itm_bgn, itm_end);
+				if (tkn_bgn == -1) throw Err_.new_("invalid keycode.dot: keycode={0}", Bry_.Mid(src, tkn_bgn, itm_end));
+				++tkn_bgn;		// skip #
+			}
+			int keycode = Bry_.Xto_int_or(src, tkn_bgn, itm_end, -1); if (keycode == -1) throw Err_.new_("invalid keycode: keycode={0}", Bry_.Mid(src, tkn_bgn, itm_end));
+			tkn = new Gfui_bnd_tkn(Gfui_bnd_tkn.Tid_key, keycode, Bry_.Empty, Bry_.Empty);
+		}
+		else
+			tkn = (Gfui_bnd_tkn)regy.Get_by_mid(src, itm_bgn, itm_end);
 		if (tkn == null) return;
 		int mod_adj = Mod_val_null;
 		switch (tkn.Tid()) {
@@ -103,7 +121,7 @@ public class Gfui_bnd_parser {
 			case Gfui_bnd_tkn.Tid_mod_as:		mod_adj = Gfui_bnd_tkn.Tid_mod_as; break;
 			case Gfui_bnd_tkn.Tid_mod_ca:		mod_adj = Gfui_bnd_tkn.Tid_mod_ca; break;
 			case Gfui_bnd_tkn.Tid_mod_cas:		mod_adj = Gfui_bnd_tkn.Tid_mod_cas; break;
-			case Gfui_bnd_tkn.Tid_key: break;
+			case Gfui_bnd_tkn.Tid_key:			break;
 			default: throw Err_.unhandled(tkn.Tid());
 		}
 		switch (sym_tkn.Tid()) {
@@ -187,6 +205,7 @@ public class Gfui_bnd_parser {
 		Init_itm("key.tab", "Tab");
 		Init_itm("key.clear", "Clear");
 		Init_itm("key.enter", "Enter");
+		Init_itm("key.keypad_enter", "Keypad Enter");
 		Init_itm("key.shiftKey", "ShiftKey");
 		Init_itm("key.ctrlKey", "CtrlKey");
 		Init_itm("key.altKey", "AltKey");
@@ -232,21 +251,30 @@ public class Gfui_bnd_parser {
 	private void Init_itm(byte tid, String gfui, String norm) {
 		byte[] gfui_bry = Bry_.new_utf8_(gfui);
 		byte[] norm_bry = Bry_.new_utf8_(norm);
-		Gfui_bnd_tkn itm = new Gfui_bnd_tkn(tid, gfui_bry, norm_bry);
+		Gfui_bnd_tkn itm = new Gfui_bnd_tkn(tid, Gfui_bnd_tkn.Keycode_null, gfui_bry, norm_bry);
 		gfui_regy.Add(gfui_bry, itm);
 		norm_regy.Add_if_new(norm_bry, itm);
 	}
 	private static final int Mod_val_null = 0;
 	public static Gfui_bnd_parser new_en_() {return new Gfui_bnd_parser().Init_en();} Gfui_bnd_parser() {}
-	private static Gfui_bnd_tkn new_sym_(byte tid, byte[] bry) {return new Gfui_bnd_tkn(tid, bry, bry);}
-	private static Gfui_bnd_tkn new_mod_(byte tid, String gfui, String norm) {return new Gfui_bnd_tkn(tid, Bry_.new_ascii_(gfui), Bry_.new_ascii_(norm));}
+	private static Gfui_bnd_tkn new_sym_(byte tid, byte[] bry) {return new Gfui_bnd_tkn(tid, Gfui_bnd_tkn.Keycode_null, bry, bry);}
+	private static Gfui_bnd_tkn new_mod_(byte tid, String gfui, String norm) {return new Gfui_bnd_tkn(tid, Gfui_bnd_tkn.Keycode_null, Bry_.new_ascii_(gfui), Bry_.new_ascii_(norm));}
 }
 class Gfui_bnd_tkn {
-	public Gfui_bnd_tkn(byte tid, byte[] gfui, byte[] norm) {this.tid = tid; this.bry_gfui = gfui; this.bry_norm = norm;}
-	public byte Tid() {return tid;} private byte tid;
-	public byte[] Bry_gfui() {return bry_gfui;} private byte[] bry_gfui;
-	public byte[] Bry_norm() {return bry_norm;} private byte[] bry_norm;
+	public Gfui_bnd_tkn(byte tid, int keycode, byte[] gfui, byte[] norm) {
+		this.tid = tid; this.keycode = keycode; ; this.bry_gfui = gfui; this.bry_norm = norm;
+	}
+	public byte Tid() {return tid;} private final byte tid;
+	public int Keycode() {return keycode;} private final int keycode;
+	public byte[] Bry_gfui() {return bry_gfui;} private final byte[] bry_gfui;
+	public byte[] Bry_norm() {return bry_norm;} private final byte[] bry_norm;
 	public void Write(Bry_bfr bfr, boolean src_is_gfui) {
+		if (keycode != Gfui_bnd_tkn.Keycode_null) {
+			if (src_is_gfui)
+				bfr.Add(Bry_key_prefix);
+			bfr.Add_byte(Byte_ascii.Hash).Add_int_variable(keycode);
+			return;
+		}
 		byte[] bry = src_is_gfui ? bry_gfui : bry_norm;
 		switch (tid) {
 			case Tid_mod_c:		case Tid_mod_a:		case Tid_mod_s:
@@ -283,4 +311,6 @@ class Gfui_bnd_tkn {
 	, Tid_sym_plus	=  8	, Tid_sym_pipe	=  9	, Tid_sym_comma = 10,	Tid_sym_eos = 11
 	, Tid_key		= 12
 	;
+	public static final int Keycode_null = 0;
+	private static final byte[] Bry_key_prefix = Bry_.new_ascii_("key.");
 }

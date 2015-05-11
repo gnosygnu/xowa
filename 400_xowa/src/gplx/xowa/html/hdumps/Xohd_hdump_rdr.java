@@ -52,7 +52,7 @@ public class Xohd_hdump_rdr {
 			}
 			Bry_bfr bfr = bfr_mkr.Get_m001();
 			byte[] body_bry = abrv_mgr.Parse(bfr, rv);
-			body_bry = hzip_mgr.Parse(bfr, ttl.Page_db(), body_bry);
+			body_bry = hzip_mgr.Parse(bfr, ttl.Page_db(), body_bry, rv.Redlink_uids());
 			bfr.Mkr_rls();
 			rv.Page_body_(body_bry);
 		}

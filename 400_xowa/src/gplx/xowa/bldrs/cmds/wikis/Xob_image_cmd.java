@@ -57,7 +57,7 @@ public class Xob_image_cmd extends Xob_itm_dump_base implements Xob_cmd, GfoInvk
 			case Fld_img_media_type:	cur_media_type = Bry_.Mid(src, fld_bgn, fld_end); break;
 			case Fld_img_minor_mime:	cur_minor_mime = Bry_.Mid(src, fld_bgn, fld_end); break;
 			case Fld_img_timestamp:	cur_timestamp = Bry_.Mid(src, fld_bgn, fld_end);
-				cur_ext_id = Calc_ext_id(show_issues ? app.Usr_dlg() : Gfo_usr_dlg_.Null, cur_ttl, cur_media_type, cur_minor_mime, cur_width, cur_height);
+				cur_ext_id = Calc_ext_id(show_issues ? app.Usr_dlg() : Gfo_usr_dlg_.Noop, cur_ttl, cur_media_type, cur_minor_mime, cur_width, cur_height);
 				tbl_image.Insert(stmt, cur_ttl, cur_media_type, cur_minor_mime, cur_size, cur_width, cur_height, cur_bits, cur_ext_id, cur_timestamp);
 				++commit_count;
 				if ((commit_count % 10000) == 0) {

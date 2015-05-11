@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hdumps.abrvs; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.hdumps.*;
-import org.junit.*; import gplx.xowa.html.hdumps.core.*; import gplx.xowa.html.hdumps.data.*; import gplx.xowa.files.*;
+import org.junit.*; import gplx.core.primitives.*; import gplx.xowa.html.hdumps.core.*; import gplx.xowa.html.hdumps.data.*; import gplx.xowa.files.*;
 import gplx.xowa2.gui.*;
 public class Xohd_abrv_mgr_tst {
 	@Before public void init() {
@@ -88,7 +88,7 @@ public class Xohd_abrv_mgr_tst {
 		));
 	}
 	@Test  public void Redlink() {
-		fxt	.Init_data_redlink(2, 1, 2);
+		fxt	.Init_data_redlink(1, 2);
 		fxt	.Init_body(String_.Concat_lines_nl_skip_last
 		( "<a href=\"/wiki/A\" xowa_redlink='1'>A</a>"
 		, "<a href=\"/wiki/B\" xowa_redlink='2'>B</a>"
@@ -136,14 +136,12 @@ class Xohd_abrv_mgr_fxt {
 		img_list.Add(img);
 		return this;
 	}
-	public Xohd_abrv_mgr_fxt Init_data_redlink(int max, int... uids) {
-		int[] ary = new int[max + ListAdp_.Base1];
+	public Xohd_abrv_mgr_fxt Init_data_redlink(int... uids) {
 		int uids_len = uids.length;
 		for (int i = 0; i < uids_len; ++i) {
-			int uid = uids[i];
-			ary[uid] = 1;
+			Int_obj_ref redlink_uid = Int_obj_ref.new_(uids[i]);
+			hpg.Redlink_uids().Add(redlink_uid, redlink_uid);
 		}
-		hpg.Redlink_uids_(ary);
 		return this;
 	}
 	public Xohd_abrv_mgr_fxt Test_html(String expd) {

@@ -36,8 +36,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser {
 		this.html__hdump_rdr = new Xohd_hdump_rdr(app, this);
 		this.xwiki_mgr = new Xow_xwiki_mgr();
 		this.special_mgr = new Xosp_special_mgr(this);
-		Io_url wiki_file_dir = domain_tid == Xow_domain_.Tid_int_home ? wiki_root_dir : wiki_root_dir.OwnerDir().OwnerDir().GenSubDir_nest("file", domain_str);
-		this.fsys_mgr = new Xow_fsys_mgr(wiki_root_dir, wiki_file_dir);
+		this.fsys_mgr = new Xow_fsys_mgr(wiki_root_dir, wiki_root_dir);
 		this.fsdb_mgr = new Xof_fsdb_mgr__sql();
 	}
 	public Xoa_app						App() {return app;}

@@ -32,7 +32,7 @@ class BinaryHeap_Io_line_rdr_fxt {
 		for (int i = 0; i < file_total; i++) {
 			Io_url url = Io_url_.mem_fil_("mem/fil_" + ary[i] + ".txt");
 			Io_mgr._.SaveFilStr(url, ary[i]);
-			Io_line_rdr stream = new Io_line_rdr(Gfo_usr_dlg_base.test_(), url);
+			Io_line_rdr stream = new Io_line_rdr(Gfo_usr_dlg_.Test(), url);
 			stream.Read_next();
 			heap.Add(stream);
 		}
