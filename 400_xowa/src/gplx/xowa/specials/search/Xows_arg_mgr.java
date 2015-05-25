@@ -40,12 +40,12 @@ class Xows_arg_mgr {
 		for (int i = 0; i < len; ++i) {
 			Gfo_url_arg arg = arg_ary[i];
 			byte[] key = arg.Key_bry();
-			Object tid = url_args.Fetch(key);
+			Object tid = url_args.Get_by(key);
 			if (tid != null) {
 				switch (((Byte_obj_val)tid).Val()) {
 					case Arg_search: 		this.search_bry 	= Bry_.Replace(arg.Val_bry(), Byte_ascii.Plus, Byte_ascii.Space); break;
 					case Arg_page_idx: 		this.paging_idx 	= Bry_.Xto_int_or(arg.Val_bry(), 0); break;
-					case Arg_sort: 			this.sort_tid		= Xosrh_rslt_itm_sorter.parse_(String_.new_ascii_(arg.Val_bry())); break;			
+					case Arg_sort: 			this.sort_tid		= Xosrh_rslt_itm_sorter.parse_(String_.new_a7(arg.Val_bry())); break;			
 					case Arg_cancel: 		this.cancel			= arg.Val_bry(); break;
 					case Arg_paging: 		this.paging_itms	= paging_parser.Parse(arg.Val_bry()); break;
 					default:				break;
@@ -59,10 +59,10 @@ class Xows_arg_mgr {
 		ns_mgr.Add_main_if_empty();
 	}
 	private static final byte Arg_search = 0, Arg_page_idx = 1, Arg_sort = 2, Arg_cancel = 3, Arg_paging = 4;
-	private static byte[] Ns_bry = Bry_.new_ascii_("ns");
+	private static byte[] Ns_bry = Bry_.new_a7("ns");
 	public static final byte[]
-	  Arg_bry_page_index	= Bry_.new_ascii_("xowa_page_index")
-	, Arg_bry_cancel		= Bry_.new_ascii_("cancel")
+	  Arg_bry_page_index	= Bry_.new_a7("xowa_page_index")
+	, Arg_bry_cancel		= Bry_.new_a7("cancel")
 	;
 	private static final Hash_adp_bry url_args = Hash_adp_bry.ci_ascii_()
 		.Add_str_byte("xowa_paging", Arg_paging)

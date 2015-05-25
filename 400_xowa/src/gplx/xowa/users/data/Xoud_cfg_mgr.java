@@ -30,7 +30,7 @@ public class Xoud_cfg_mgr {
 	public byte[]	Select_bry_or(String key, byte[] or)				{return Select_bry_or(""	, key, or);}
 	public byte[]	Select_bry_or(String grp, String key, byte[] or)	{
 		String rv = Select_str_or(grp, key, null);
-		return rv == null ? or : Bry_.new_utf8_(rv);
+		return rv == null ? or : Bry_.new_u8(rv);
 	}
 	public String	Select_str_or(String grp, String key, String or) {
 		String rv = tbl.Select_str_or(grp, key, null);
@@ -44,7 +44,7 @@ public class Xoud_cfg_mgr {
 			return or;
 		}
 		else
-			return Bry_.new_utf8_(rv);
+			return Bry_.new_u8(rv);
 	}
 	public void Update_bry(String key, byte[] val) {Update_bry("", key, val);}
 	public void Update_bry(String grp, String key, byte[] val) {tbl.Update_bry(grp, key, val);}

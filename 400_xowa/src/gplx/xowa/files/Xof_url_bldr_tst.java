@@ -35,7 +35,7 @@ class Xof_url_bldr_fxt {
 	public Xof_url_bldr_fxt Dir_spr_(byte v) {dir_spr = v; return this;} private byte dir_spr;
 	public Xof_url_bldr_fxt Root_(String v) {root = v; return this;} private String root;
 	public Xof_url_bldr_fxt Md5_(String v) {md5 = v; return this;} private String md5;
-	public Xof_url_bldr_fxt Ttl_(String v) {ttl = v; ext = Xof_ext_.new_by_ttl_(Bry_.new_utf8_(v)); return this;} private String ttl; Xof_ext ext;
+	public Xof_url_bldr_fxt Ttl_(String v) {ttl = v; ext = Xof_ext_.new_by_ttl_(Bry_.new_u8(v)); return this;} private String ttl; Xof_ext ext;
 	public Xof_url_bldr_fxt Page_(int v) {page = v; return this;} private int page = Xof_lnki_page.Null;
 	public Xof_url_bldr_fxt Seek_(int v) {seek = v; return this;} private double seek = Xof_lnki_time.Null;
 	public Xof_url_bldr_fxt Expd_src_(String v) {expd_src = v; return this;} private String expd_src;
@@ -45,8 +45,8 @@ class Xof_url_bldr_fxt {
 		page = Xof_lnki_page.Null;
 	}
 	public Xof_url_bldr_fxt tst() {
-		url_bldr.Init_by_root(Bry_.new_utf8_(root), dir_spr, Bool_.Y, Bool_.N, 2);
-		url_bldr.Init_by_itm (Xof_repo_itm.Mode_thumb, Bry_.new_utf8_(ttl), Bry_.new_utf8_(md5), ext, 0, seek, page);
+		url_bldr.Init_by_root(Bry_.new_u8(root), dir_spr, Bool_.Y, Bool_.N, 2);
+		url_bldr.Init_by_itm (Xof_repo_itm_.Mode_thumb, Bry_.new_u8(ttl), Bry_.new_u8(md5), ext, 0, seek, page);
 		Tfds.Eq(expd_src, url_bldr.Xto_str());
 		return this;
 	}

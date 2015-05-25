@@ -32,22 +32,22 @@ public class Gfo_thread_cmd_unzip implements Gfo_thread_cmd {
 	public boolean Async_prog_enabled()	{return true;}
 	public void Async_prog_run(int async_sleep_sum) {
 		String size_str = " please wait...";
-		if (trg.Type_fil()) size_str = gplx.ios.Io_size_.Xto_str(Io_mgr._.QueryFil(trg).Size());
+		if (trg.Type_fil()) size_str = gplx.ios.Io_size_.To_str(Io_mgr.I.QueryFil(trg).Size());
 		usr_dlg.Prog_many(GRP_KEY, "unzip", "unzipping: ~{0}", size_str);
 	}
 	@gplx.Virtual public byte Async_init() {
-		if (!Io_mgr._.ExistsFil(src)) {
+		if (!Io_mgr.I.ExistsFil(src)) {
 			kit.Ask_ok(GRP_KEY, "source_missing", "Source file does not exist: '~{0}'", src.Raw());
 			return Gfo_thread_cmd_.Init_cancel_step;
 		}
 		trg_is_dir = trg.Type_dir();
 		if (delete_trg_if_exists
-			&&	(( trg_is_dir && Io_mgr._.ExistsDir(trg))
-				||	(!trg_is_dir && Io_mgr._.ExistsFil(trg)))
+			&&	(( trg_is_dir && Io_mgr.I.ExistsDir(trg))
+				||	(!trg_is_dir && Io_mgr.I.ExistsFil(trg)))
 			) {
 			int rslt = kit.Ask_yes_no_cancel(GRP_KEY, "target_exists", "Target file already exists: '~{0}'.\nDo you want to delete it?", trg.Raw());
 			switch (rslt) {
-				case Gfui_dlg_msg_.Btn_yes:		if (trg_is_dir) Io_mgr._.DeleteDirDeep(trg); else Io_mgr._.DeleteFil(trg); break;
+				case Gfui_dlg_msg_.Btn_yes:		if (trg_is_dir) Io_mgr.I.DeleteDirDeep(trg); else Io_mgr.I.DeleteFil(trg); break;
 				case Gfui_dlg_msg_.Btn_no:		return Gfo_thread_cmd_.Init_cancel_step;
 				case Gfui_dlg_msg_.Btn_cancel:	return Gfo_thread_cmd_.Init_cancel_all;
 			}
@@ -61,9 +61,9 @@ public class Gfo_thread_cmd_unzip implements Gfo_thread_cmd {
 	}
 	public boolean Async_term() {
 		if (rename_dir) {
-			Io_url[] dirs = Io_mgr._.QueryDir_args(trg.OwnerDir()).DirOnly_().Recur_(false).ExecAsUrlAry();
+			Io_url[] dirs = Io_mgr.I.QueryDir_args(trg.OwnerDir()).DirOnly_().Recur_(false).ExecAsUrlAry();
 			int dirs_len = dirs.length;
-			Io_url zip_dir = Io_url_.Null;
+			Io_url zip_dir = Io_url_.Empty;
 			for (int i = 0; i < dirs_len; i++) {
 				Io_url dir = dirs[i];
 				if (String_.HasAtBgn(String_.Lower(dir.NameOnly()), String_.Lower(trg.NameOnly()))) {	// HACK: check that directory starts with archive name; DATE:2013-12-22
@@ -71,19 +71,19 @@ public class Gfo_thread_cmd_unzip implements Gfo_thread_cmd {
 					break;
 				}
 			}
-			if (zip_dir == Io_url_.Null) {
+			if (zip_dir == Io_url_.Empty) {
 				kit.Ask_ok(GRP_KEY, "rename.fail", "unable to find directory: trg=~{0}", trg.Raw());
 				return false;
 			}
 			if (!String_.Eq(String_.Lower(zip_dir.Raw()), String_.Lower(trg.Raw())))	// HACK: inkscape is itself
-				Io_mgr._.MoveDirDeep(zip_dir, trg);
+				Io_mgr.I.MoveDirDeep(zip_dir, trg);
 		}
 		switch (term_cmd_for_src) {
 			case Term_cmd_for_src_noop: break;
-			case Term_cmd_for_src_delete: Io_mgr._.DeleteFil(src); break;
+			case Term_cmd_for_src_delete: Io_mgr.I.DeleteFil(src); break;
 			case Term_cmd_for_src_move:
-				if (term_cmd_for_src_url == Io_url_.Null) throw Err_mgr._.fmt_(GRP_KEY, "url_missing", "move specified, but no url");
-				Io_mgr._.MoveFil_args(src, term_cmd_for_src_url, true).Exec();
+				if (term_cmd_for_src_url == Io_url_.Empty) throw Err_mgr._.fmt_(GRP_KEY, "url_missing", "move specified, but no url");
+				Io_mgr.I.MoveFil_args(src, term_cmd_for_src_url, true).Exec();
 				break;
 			default: throw Err_mgr._.unhandled_(term_cmd_for_src);
 		}
@@ -93,7 +93,7 @@ public class Gfo_thread_cmd_unzip implements Gfo_thread_cmd {
 	public static final byte Term_cmd_for_src_noop = 0, Term_cmd_for_src_delete = 1, Term_cmd_for_src_move = 2;
 	boolean rename_dir = false, trg_is_dir = false, delete_trg_if_exists = true;
 	public byte Term_cmd_for_src() {return term_cmd_for_src;} public void Term_cmd_for_src_(byte v) {term_cmd_for_src = v;} private byte term_cmd_for_src = Term_cmd_for_src_delete;
-	public Io_url Term_cmd_for_src_url() {return term_cmd_for_src_url;} public void Term_cmd_for_src_url_(Io_url v) {this.term_cmd_for_src_url = v;} Io_url term_cmd_for_src_url = Io_url_.Null;
+	public Io_url Term_cmd_for_src_url() {return term_cmd_for_src_url;} public void Term_cmd_for_src_url_(Io_url v) {this.term_cmd_for_src_url = v;} Io_url term_cmd_for_src_url = Io_url_.Empty;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_owner))					return owner;
 		else if	(ctx.Match(k, Invk_src_))					src = Bry_fmtr_eval_mgr_.Eval_url(url_eval_mgr, m.ReadBry("v"));

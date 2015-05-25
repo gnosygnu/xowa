@@ -323,7 +323,7 @@ public class Xop_lnki_wkr__basic_tst {
 		fxt.Test_parse_page_all_str("[[Ab]]cd e", "<a href=\"/wiki/Ab\">Abcd</a> e");
 	}
 	@Test   public void Trail_fr() {
-		byte[] ltr_c_in_french = Bry_.new_utf8_("ç");
+		byte[] ltr_c_in_french = Bry_.new_u8("ç");
 		Xol_lnki_trail_mgr lnki_trail_mgr = fxt.Wiki().Lang().Lnki_trail_mgr();
 		lnki_trail_mgr.Add(ltr_c_in_french);
 		fxt.Test_parse_page_all_str("[[Ab]]çd e", "<a href=\"/wiki/Ab\">Abçd</a> e");
@@ -340,10 +340,10 @@ public class Xop_lnki_wkr__basic_tst {
 	}
 	@Test  public void Visited() { // PURPOSE: show redirected titles as visited; EX:fr.w:Alpes_Pennines; DATE:2014-02-28
 		Xowe_wiki wiki = fxt.Wiki();
-		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_ascii_("Src"));		// simulate requrest for "Src" page
+		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_a7("Src"));		// simulate requrest for "Src" page
 		Xoae_page previous_page = Xoae_page.test_(wiki, ttl);
-		previous_page.Redirected_ttls().Add(Bry_.new_ascii_("Src"));		// simulate redirect from "Src"
-		fxt.App().User().History_mgr().Add(previous_page);					// simulate "Src" already being clicked once; this is the key call
+		previous_page.Redirected_ttls().Add(Bry_.new_a7("Src"));		// simulate redirect from "Src"
+		fxt.App().Usere().History_mgr().Add(previous_page);					// simulate "Src" already being clicked once; this is the key call
 		fxt.Wtr_cfg().Lnki_visited_(true);
 		fxt.Test_parse_page_all_str("[[Src]]"		, "<a href=\"/wiki/Src\" class=\"xowa-visited\">Src</a>");	// show [[Src]] as visited since it exists in history
 		fxt.Test_parse_page_all_str("[[Other]]"		, "<a href=\"/wiki/Other\">Other</a>");						// show other pages as not visited

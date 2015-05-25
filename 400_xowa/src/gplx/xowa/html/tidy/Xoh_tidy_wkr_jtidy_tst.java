@@ -23,7 +23,8 @@ import org.junit.*;
 public class Xoh_tidy_wkr_jtidy_tst {
 	@Before public void init() {fxt.Clear();} private Jtidy_fxt fxt = new Jtidy_fxt();
 	@Test   public void Image_full() {
-		fxt.Test_tidy("<a href='http://𐎍𐎁_𐎜'>𐎍𐎁_𐎜</a>", "<a href='http://%F0%90%8E%8D%F0%90%8E%81_%F0%90%8E%9C'>&eth;&#144;&#142;&#141;&eth;&#144;&#142;&#129;_&eth;&#144;&#142;&#156;</a>\r\n");
+		String nl = Op_sys.Cur().Tid_is_wnt() ? "\r\n" : "\n";	// NOTE: JTidy uses different line-endings based on OS; DATE:2015-05-11
+		fxt.Test_tidy("<a href='http://𐎍𐎁_𐎜'>𐎍𐎁_𐎜</a>", "<a href='http://%F0%90%8E%8D%F0%90%8E%81_%F0%90%8E%9C'>&eth;&#144;&#142;&#141;&eth;&#144;&#142;&#129;_&eth;&#144;&#142;&#156;</a>" + nl);
 	}
 }
 class Jtidy_fxt {

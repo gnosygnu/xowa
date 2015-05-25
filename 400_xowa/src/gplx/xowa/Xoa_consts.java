@@ -25,6 +25,6 @@ public class Xoa_consts {
 	, Invk_end						= new byte[] {Byte_ascii.Curly_end, Byte_ascii.Curly_end}						// "}}"
 	, Transclude_bgn				= new byte[] {Byte_ascii.Curly_bgn, Byte_ascii.Curly_bgn, Byte_ascii.Colon}		// "{{:"
 	, Url_relative_prefix			= new byte[] {Byte_ascii.Slash, Byte_ascii.Slash}								// "//"
-	, Url_wiki_intermediary			= Bry_.new_ascii_("/wiki/")
+	, Url_wiki_intermediary			= Bry_.new_a7("/wiki/")
 	;
 }

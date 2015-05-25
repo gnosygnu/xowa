@@ -21,13 +21,13 @@ public class Xob_term_cmd extends Xob_term_base {
 	public Xob_term_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Ctor(bldr, wiki); this.wiki = wiki;} private Xowe_wiki wiki;
 	@Override public String Cmd_key() {return KEY;} public static final String KEY = "text.term";
 	@Override public void Cmd_end_hook() {
-		Io_mgr._.DeleteDirDeep(wiki.Fsys_mgr().Tmp_dir());
+		Io_mgr.I.DeleteDirDeep(wiki.Fsys_mgr().Tmp_dir());
 		Db_cfg_tbl cfg_tbl = wiki.Data_mgr__core_mgr().Tbl__cfg();
 		cfg_tbl.Insert_bry(Xow_cfg_consts.Grp_wiki_init, "props.bldr_version", wiki.Props().Bldr_version());
 		cfg_tbl.Insert_bry(Xow_cfg_consts.Grp_wiki_init, "props.main_page", wiki.Props().Main_page());
 		cfg_tbl.Insert_bry(Xow_cfg_consts.Grp_wiki_init, "props.siteinfo_misc", wiki.Props().Siteinfo_misc());
 		cfg_tbl.Insert_bry(Xow_cfg_consts.Grp_wiki_init, "props.siteinfo_mainpage", wiki.Props().Siteinfo_mainpage());
-//			gplx.fsdb.Fsdb_db_mgr__v2_bldr.I.Make(wiki);// bld wiki
+		gplx.fsdb.Fsdb_db_mgr__v2_bldr.I.Get_or_make(wiki, false);// always build file.user db; DATE:2015-05-12
 		wiki.Data_mgr__core_mgr().Rls();
 	}
 }

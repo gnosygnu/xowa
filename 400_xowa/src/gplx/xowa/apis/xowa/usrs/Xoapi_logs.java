@@ -25,7 +25,7 @@ public class Xoapi_logs implements GfoInvkAble {
 	public void Enabled_(boolean v) {
 		app.Log_wtr().Enabled_(v);
 		if (!v)
-			Io_mgr._.DeleteFil_args(app.Log_wtr().Session_fil()).MissingFails_off().Exec();
+			Io_mgr.I.DeleteFil_args(app.Log_wtr().Session_fil()).MissingFails_off().Exec();
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_enabled)) 							return Yn.Xto_str(this.Enabled());

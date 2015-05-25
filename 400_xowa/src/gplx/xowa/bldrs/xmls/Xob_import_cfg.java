@@ -40,7 +40,7 @@ public class Xob_import_cfg {
 		}
 		if (src_fil_is_bz2) {
 			Chk_file_ext(wiki.Appe(), src_fil_bz2, ".bz2", "xml");				
-			src_fil = src_fil_bz2; src_rdr_len = Io_mgr._.QueryFil(src_fil_bz2).Size();
+			src_fil = src_fil_bz2; src_rdr_len = Io_mgr.I.QueryFil(src_fil_bz2).Size();
 			Xoae_app app = wiki.Appe();
 			if (app.Setup_mgr().Dump_mgr().Import_bz2_by_stdout()) {
 				ProcessAdp process = app.Prog_mgr().App_decompress_bz2_by_stdout();
@@ -51,7 +51,7 @@ public class Xob_import_cfg {
 		}
 		else {
 			Chk_file_ext(wiki.Appe(), src_fil_xml, ".xml", "bz2");
-			src_fil = src_fil_xml; src_rdr_len = Io_mgr._.QueryFil(src_fil_xml).Size();
+			src_fil = src_fil_xml; src_rdr_len = Io_mgr.I.QueryFil(src_fil_xml).Size();
 			return Io_stream_rdr_.file_(src_fil_xml);
 		}
 	}

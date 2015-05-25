@@ -21,7 +21,7 @@ public class Xog_url_macro_mgr {
 	public Xog_url_macro_mgr() {
 		this.Init();
 	}
-	public void Lang_default_(byte[] v) {lang_default = v;} private byte[] lang_default = Bry_.new_ascii_("en");
+	public void Lang_default_(byte[] v) {lang_default = v;} private byte[] lang_default = Bry_.new_a7("en");
 	public Xog_url_macro_grp Types_mgr() {return types_mgr;} private Xog_url_macro_grp types_mgr = new Xog_url_macro_grp();
 	public Xog_url_macro_grp Custom_mgr() {return custom_mgr;} private Xog_url_macro_grp custom_mgr = new Xog_url_macro_grp();
 	public byte[] Fmt_or_null(byte[] raw) {
@@ -80,7 +80,7 @@ public class Xog_url_macro_mgr {
 		custom_mgr.Set("?"		, "Special:Search/~{0}?fulltext=y");
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_lang_default))					return String_.new_utf8_(lang_default);
+		if		(ctx.Match(k, Invk_lang_default))					return String_.new_u8(lang_default);
 		else if	(ctx.Match(k, Invk_lang_default_))					lang_default = m.ReadBry("v");
 		else if	(ctx.Match(k, Invk_types))							return types_mgr;
 		else if	(ctx.Match(k, Invk_custom))							return custom_mgr;

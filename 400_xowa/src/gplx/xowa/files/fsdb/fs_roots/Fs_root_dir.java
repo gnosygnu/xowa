@@ -61,7 +61,7 @@ class Fs_root_dir {
 	}
 	private Orig_fil_mgr Init_fs_fil_mgr() {	// NOTE: need to read entire dir, b/c ttl may be "A.png", but won't know which subdir
 		Orig_fil_mgr rv = new Orig_fil_mgr();
-		Io_url[] fils = Io_mgr._.QueryDir_args(url).Recur_(recurse).ExecAsUrlAry();
+		Io_url[] fils = Io_mgr.I.QueryDir_args(url).Recur_(recurse).ExecAsUrlAry();
 		int fils_len = fils.length;
 		for (int i = 0; i < fils_len; i++) {
 			Io_url fil = fils[i];
@@ -102,7 +102,7 @@ class Fs_root_dir {
 	}
 	private static final String Cfg_grp_root_dir = "xowa.root_dir", Cfg_key_fil_id_next = "fil_id_next";
 	public static byte[] Xto_fil_bry(Io_url url) {
-		byte[] rv = Bry_.new_utf8_(url.NameAndExt());
+		byte[] rv = Bry_.new_u8(url.NameAndExt());
 		rv = Bry_.Replace(rv, Byte_ascii.Space, Byte_ascii.Underline);
 		rv = Bry_.Upper_1st(rv);
 		return rv;

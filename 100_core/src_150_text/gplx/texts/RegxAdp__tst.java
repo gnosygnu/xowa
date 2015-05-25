@@ -63,17 +63,17 @@ public class RegxAdp__tst implements TfdsEqListItmStr {
 	RegxMatch match_(int bgn) {return match_(bgn, Int_.MinValue);}
 	RegxMatch match_(int bgn, int len) {return new RegxMatch(true, bgn, bgn + len, RegxGroup.Ary_empty);}
 	void tst_Matches(String find, String input, RegxMatch... expd) {
-		ListAdp expdList = Array_.XtoList(expd);			
-		ListAdp actlList = RegxAdp_.Find_args(input, find).Exec_asList();
+		List_adp expdList = Array_.XtoList(expd);			
+		List_adp actlList = RegxAdp_.Find_args(input, find).Exec_asList();
 		Tfds.Eq_list(expdList, actlList, this);
 	}
 	void tst_Groups(String text, String regx, String... expd) {
 		RegxAdp regx_mgr = RegxAdp_.new_(regx);
 		RegxMatch[] rslts = regx_mgr.Match_all(text, 0);
-		Tfds.Eq_ary_str(expd, Xto_ary(rslts));
+		Tfds.Eq_ary_str(expd, To_ary(rslts));
 	}
-	String[] Xto_ary(RegxMatch[] ary) {
-		ListAdp rv = ListAdp_.new_();
+	String[] To_ary(RegxMatch[] ary) {
+		List_adp rv = List_adp_.new_();
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
 			RegxMatch itm = ary[i];
@@ -82,7 +82,7 @@ public class RegxAdp__tst implements TfdsEqListItmStr {
 				rv.Add(itm.Groups()[j].Val());
 			}
 		}
-		return rv.XtoStrAry();
+		return rv.To_str_ary();
 	}
 	public String XtoStr(Object curObj, Object expdObj) {
 		RegxMatch cur = (RegxMatch)curObj, expd = (RegxMatch)expdObj;

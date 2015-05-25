@@ -26,7 +26,7 @@ public class Xos_url_gen_tst {
 	}
 	private void tst_url_gen(String root_str, int idx, String expd) {
 		Io_url root = Io_url_.mem_fil_(root_str);
-		Io_url actl_url = Xos_url_gen.bld_fil_(root, idx, Bry_.new_utf8_(".csv"));
+		Io_url actl_url = Xos_url_gen.bld_fil_(root, idx, Bry_.new_u8(".csv"));
 		Tfds.Eq(expd, actl_url.Xto_api());
 	}
 }

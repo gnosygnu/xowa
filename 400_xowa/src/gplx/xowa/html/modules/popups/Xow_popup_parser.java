@@ -142,7 +142,7 @@ public class Xow_popup_parser {
 				}
 			}
 			last_word_idx = (last_hdr_tkn == null)						// no hdr found
-				? words_needed_val - ListAdp_.Base1						// get last word
+				? words_needed_val - List_adp_.Base1						// get last word
 				: last_hdr_tkn.Idx() - 1								// get word before hdr
 				;
 			if (last_word_idx >= words_len)
@@ -177,7 +177,7 @@ public class Xow_popup_parser {
 		if (last_word_idx != -1) {
 			Xow_popup_word last_word = words[last_word_idx];
 			wrdx_bfr.Delete_rng_to_end(last_word.Bfr_end());// delete everything after last_word
-			popup_itm.Words_found_(last_word_idx + ListAdp_.Base1);	// last_word_idx = 0 -> words_found = 1
+			popup_itm.Words_found_(last_word_idx + List_adp_.Base1);	// last_word_idx = 0 -> words_found = 1
 			if (last_word.Tid() == Xop_tkn_itm_.Tid_hdr)	// on odd case where hdr is still last word, add \n else text will literally be "==A==" b/c no trailing \n
 				wrdx_bfr.Add_byte_nl();
 		}

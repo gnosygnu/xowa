@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.core.primitives.*;
 public class Xop_xatr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATTRIBS_REGEX
-	private final ListAdp xatrs = ListAdp_.new_();
+	private final List_adp xatrs = List_adp_.new_();
 	private static final byte Mode_atr_bgn = 1, Mode_invalid = 2, Mode_key = 3, Mode_eq = 4, Mode_val_bgn = 5, Mode_val_quote = 6, Mode_val_raw = 7;
 	private byte mode = Mode_atr_bgn;
 	private int atr_bgn = -1, key_bgn = -1, key_end = -1, eq_pos = -1, val_bgn = -1, val_end = -1; boolean valid = true;
@@ -351,7 +351,7 @@ public class Xop_xatr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_AT
 			++i;
 		}
 		repeated_atrs_hash.Clear();
-		return (Xop_xatr_itm[])xatrs.Xto_ary(Xop_xatr_itm.class);
+		return (Xop_xatr_itm[])xatrs.To_ary(Xop_xatr_itm.class);
 	}
 	private void Make(Gfo_msg_log log_mgr, byte[] src, int atr_end) {
 		Xop_xatr_itm xatr = null;
@@ -381,7 +381,7 @@ public class Xop_xatr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_AT
 		val_bfr_on = key_bfr_on = ws_is_before_val = false;
 	}
 	private void Invalidate_repeated_atr(Xop_xatr_itm cur, byte[] key_bry) {
-		Xop_xatr_itm prv = (Xop_xatr_itm)repeated_atrs_hash.Fetch(key_bry);
+		Xop_xatr_itm prv = (Xop_xatr_itm)repeated_atrs_hash.Get_by(key_bry);
 		if (prv != null) {
 			prv.Tid_to_repeat_();
 			repeated_atrs_hash.Del(key_bry);

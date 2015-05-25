@@ -23,5 +23,5 @@ public interface GfoNdeList {
 	void Add(GfoNde rcd);
 	void Del(GfoNde rcd);
 	void Clear();
-	void SortBy(ComparerAble comparer);
+	void Sort_by(ComparerAble comparer);
 }

@@ -23,5 +23,5 @@ public class Wdata_pf_wbreponame extends Pf_func_base {
 	@Override public Pf_func New(int id, byte[] name) {return new Wdata_pf_wbreponame().Name_(name);}
 	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {
 		bfr.Add(Reponame);	// NOTE: MW has logic to look for message named "wbreponame", and returning it if it exists; only applies to non-WMF Wikidatas; DATE:2014-09-07
-	}	private static final byte[] Reponame = Bry_.new_ascii_("Wikidata");
+	}	private static final byte[] Reponame = Bry_.new_a7("Wikidata");
 }

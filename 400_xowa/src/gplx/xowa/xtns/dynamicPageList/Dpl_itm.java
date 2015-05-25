@@ -19,8 +19,8 @@ package gplx.xowa.xtns.dynamicPageList; import gplx.*; import gplx.xowa.*; impor
 import gplx.core.primitives.*;
 import gplx.html.*; import gplx.xowa.html.*;
 class Dpl_itm {
-	public ListAdp Ctg_includes() {return ctg_includes;} private ListAdp ctg_includes;
-	public ListAdp Ctg_excludes() {return ctg_excludes;} private ListAdp ctg_excludes;
+	public List_adp Ctg_includes() {return ctg_includes;} private List_adp ctg_includes;
+	public List_adp Ctg_excludes() {return ctg_excludes;} private List_adp ctg_excludes;
 	public int Count() {return count;} private int count = Int_.MinValue;
 	public int Offset() {return offset;} private int offset = Int_.MinValue;
 	public boolean No_follow() {return no_follow;} private boolean no_follow;
@@ -97,8 +97,8 @@ class Dpl_itm {
 		sub_root.Clear();
 		val = wiki.Parser().Parse_text_to_wtxt(sub_root, sub_ctx, sub_tkn_mkr, val);
 		switch (key_id) {
-			case Dpl_itm_keys.Key_category: 			if (ctg_includes == null) ctg_includes = ListAdp_.new_(); ctg_includes.Add(Xoa_ttl.Replace_spaces(val)); break;
-			case Dpl_itm_keys.Key_notcategory:		 	if (ctg_excludes == null) ctg_excludes = ListAdp_.new_(); ctg_excludes.Add(Xoa_ttl.Replace_spaces(val)); break;
+			case Dpl_itm_keys.Key_category: 			if (ctg_includes == null) ctg_includes = List_adp_.new_(); ctg_includes.Add(Xoa_ttl.Replace_spaces(val)); break;
+			case Dpl_itm_keys.Key_notcategory:		 	if (ctg_excludes == null) ctg_excludes = List_adp_.new_(); ctg_excludes.Add(Xoa_ttl.Replace_spaces(val)); break;
 			case Dpl_itm_keys.Key_ns:		 			{Xow_ns ns = (Xow_ns)wiki.Ns_mgr().Names_get_or_null(val, 0, val.length); ns_filter = ns == null ? Xow_ns_.Id_main : ns.Id(); break;}
 			case Dpl_itm_keys.Key_order:				sort_ascending = Dpl_sort.Parse_as_bool_byte(val); break;
 			case Dpl_itm_keys.Key_suppresserrors:		suppress_errors = Dpl_itm_keys.Parse_as_bool(val, false); break;
@@ -142,7 +142,7 @@ class Dpl_itm {
 			(	Known_invalid_keys.Get_by_mid(src, fld_bgn, fld_end) != null
 			||	Bry_.HasAtBgn(key_bry, Html_tag_.Comm_bgn)			// ignore comment-like keys; EX: <!--category=Ctg_0--> will have key of "<!--category="
 			);
-		String err_msg = String_.Format("dynamic_page_list:unknown_key: page={0} key={1}", String_.new_utf8_(page_ttl), String_.new_utf8_(key_bry));
+		String err_msg = String_.Format("dynamic_page_list:unknown_key: page={0} key={1}", String_.new_u8(page_ttl), String_.new_u8(key_bry));
 		if (log)
 			usr_dlg.Log_many("", "", err_msg);
 		else

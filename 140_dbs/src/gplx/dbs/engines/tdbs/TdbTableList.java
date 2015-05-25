@@ -16,11 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-import gplx.lists.*; /*OrderedHash_base*/ import gplx.stores.dsvs.*; /*DsvStoreLayout*/
-public class TdbTableList extends OrderedHash_base {
-	public TdbTable Fetch(String name) {return TdbTable.as_(Fetch_base(name));}
-	public TdbTable FetchOrFail(String name) {
-		TdbTable rv = TdbTable.as_(Fetch(name)); if (rv == null) throw Err_.new_("could not find table; database file may not exist").Add("table", name);
+import gplx.lists.*; /*Ordered_hash_base*/ import gplx.stores.dsvs.*; /*DsvStoreLayout*/
+public class TdbTableList extends Ordered_hash_base {
+	public TdbTable Get_by(String name) {return TdbTable.as_(Fetch_base(name));}
+	public TdbTable Get_by_or_fail(String name) {
+		TdbTable rv = TdbTable.as_(Get_by(name)); if (rv == null) throw Err_.new_("could not find table; database file may not exist").Add("table", name);
 		return rv;
 	}
 	public void Add(TdbTable dataTable) {Add_base(dataTable.Name(), dataTable);}
@@ -51,7 +51,7 @@ public class TdbTableList extends OrderedHash_base {
 			int id = subRdr.ReadInt(Fld_id);
 			String name = subRdr.ReadStr(Fld_name);
 			int file_id = subRdr.ReadInt(Fld_file_id);
-			TdbFile file = files.FetchOrFail(file_id);
+			TdbFile file = files.Get_by_or_fail(file_id);
 			TdbTable table = TdbTable.load_(id, name, file);
 			this.Add(table);
 		}

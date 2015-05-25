@@ -45,7 +45,7 @@ public class Listing_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 	}
 	private void Init_args() {
 		if (xatr_name == null) {
-			xatr_name = msg_mgr.Itm_by_key_or_new(Bry_.new_ascii_("listings-unknown")).Val();
+			xatr_name = msg_mgr.Itm_by_key_or_new(Bry_.new_a7("listings-unknown")).Val();
 		}
 		xatr_alt = Parse_wikitext(xatr_alt);
 		xatr_address = Parse_wikitext(xatr_address);
@@ -209,22 +209,22 @@ public class Listing_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 	}
 	private static final int Xatr_meridian_null = 361;
 	public static final byte[]
-	  Tag_strong					= Bry_.new_ascii_("strong")
-	, Tag_a							= Bry_.new_ascii_("a")
-	, Tag_em						= Bry_.new_ascii_("em")
-	, Tag_abbr						= Bry_.new_ascii_("abbr")
-	, Atr_a_href					= Bry_.new_ascii_("href")
-	, Atr_a_class					= Bry_.new_ascii_("class")
-	, Atr_a_class_external_text		= Bry_.new_ascii_("external text")
-	, Atr_a_class_email				= Bry_.new_ascii_("email")
-	, Atr_a_rel						= Bry_.new_ascii_("rel")
-	, Atr_a_rel_nofollow			= Bry_.new_ascii_("nofollow")
-	, Atr_a_title					= Bry_.new_ascii_("title")
-	, Txt_comma_space				= Bry_.new_ascii_(", ")
-	, Txt_space_paren				= Bry_.new_ascii_(" (")
-	, Txt_colon_space				= Bry_.new_ascii_(": ")
-	, Txt_dot_space					= Bry_.new_ascii_(". ")
-	, Txt_mailto					= Bry_.new_ascii_("mailto:")
+	  Tag_strong					= Bry_.new_a7("strong")
+	, Tag_a							= Bry_.new_a7("a")
+	, Tag_em						= Bry_.new_a7("em")
+	, Tag_abbr						= Bry_.new_a7("abbr")
+	, Atr_a_href					= Bry_.new_a7("href")
+	, Atr_a_class					= Bry_.new_a7("class")
+	, Atr_a_class_external_text		= Bry_.new_a7("external text")
+	, Atr_a_class_email				= Bry_.new_a7("email")
+	, Atr_a_rel						= Bry_.new_a7("rel")
+	, Atr_a_rel_nofollow			= Bry_.new_a7("nofollow")
+	, Atr_a_title					= Bry_.new_a7("title")
+	, Txt_comma_space				= Bry_.new_a7(", ")
+	, Txt_space_paren				= Bry_.new_a7(" (")
+	, Txt_colon_space				= Bry_.new_a7(": ")
+	, Txt_dot_space					= Bry_.new_a7(". ")
+	, Txt_mailto					= Bry_.new_a7("mailto:")
 	;
 }
 class Listing_xatrs {

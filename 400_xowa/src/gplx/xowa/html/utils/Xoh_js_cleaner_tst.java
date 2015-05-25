@@ -34,9 +34,9 @@ class Xoh_js_cleaner_fxt {
 		}
 	}	private Xoae_app app; Xowe_wiki wiki; Xoh_js_cleaner mgr;
 	public void Test_clean(String raw_str, String expd) {
-		byte[] raw = Bry_.new_ascii_(raw_str);
+		byte[] raw = Bry_.new_a7(raw_str);
 		byte[] actl = mgr.Clean(wiki, raw, 0, raw.length);
 		if (actl == null) actl = raw;
-		Tfds.Eq(expd, String_.new_ascii_(actl));
+		Tfds.Eq(expd, String_.new_a7(actl));
 	}
 }

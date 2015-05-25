@@ -34,7 +34,7 @@ class Xoa_fmtr_itm_fxt {
 		GfsCore._.MsgParser_(gplx.gfs.Gfs_msg_bldr._);
 	}
 	public Xoa_fmtr_itm_fxt Init_src(String v) {itm.Src_(v); return this;}
-	public Xoa_fmtr_itm_fxt Init_fmt(String v) {itm.Fmt_(Bry_.new_ascii_(v)); return this;}
+	public Xoa_fmtr_itm_fxt Init_fmt(String v) {itm.Fmt_(Bry_.new_a7(v)); return this;}
 	public void Test_run(String expd) {
 		String actl = itm.Run();
 		Tfds.Eq(expd, actl);

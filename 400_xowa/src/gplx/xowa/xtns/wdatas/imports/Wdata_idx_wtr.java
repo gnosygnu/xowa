@@ -29,7 +29,7 @@ class Wdata_idx_wtr {
 		dump_bfr.Add(ttl).Add_byte_pipe().Add(qid).Add_byte_nl();
 	}
 	public void Flush() {
-		Io_mgr._.AppendFilBfr(dump_url_gen.Nxt_url(), dump_bfr);
+		Io_mgr.I.AppendFilBfr(dump_url_gen.Nxt_url(), dump_bfr);
 	}
 	public void Make(Gfo_usr_dlg usr_dlg, int make_fil_len) {
 		Xobdc_merger.Basic(usr_dlg, dump_url_gen, dump_dir.OwnerDir().GenSubDir("sort"), dump_fil_max, Io_line_rdr_key_gen_.first_pipe, new Xob_make_cmd_site(usr_dlg, make_dir, make_fil_len));

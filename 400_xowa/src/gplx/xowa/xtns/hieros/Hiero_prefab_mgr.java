@@ -18,12 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.srls.dsvs.*;
 class Hiero_prefab_mgr implements GfoInvkAble {
-	private OrderedHash hash = OrderedHash_.new_bry_();
+	private Ordered_hash hash = Ordered_hash_.new_bry_();
 	private Hiero_prefab_srl srl;
 	public Hiero_prefab_mgr() {srl = new Hiero_prefab_srl(this);}
 	public int Len() {return hash.Count();}
-	public Hiero_prefab_itm Get_at(int i) {return (Hiero_prefab_itm)hash.FetchAt(i);}
-	public Hiero_prefab_itm Get_by_key(byte[] key) {return (Hiero_prefab_itm)hash.Fetch(key);}
+	public Hiero_prefab_itm Get_at(int i) {return (Hiero_prefab_itm)hash.Get_at(i);}
+	public Hiero_prefab_itm Get_by_key(byte[] key) {return (Hiero_prefab_itm)hash.Get_by(key);}
 	public void Add(byte[] key) {hash.Add(key, new Hiero_prefab_itm(key));}
 	public void Clear() {hash.Clear();}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

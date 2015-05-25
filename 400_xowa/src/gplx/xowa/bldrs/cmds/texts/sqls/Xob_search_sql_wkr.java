@@ -56,7 +56,7 @@ public class Xob_search_sql_wkr extends Xob_search_base implements Io_make_cmd {
 }
 class Xob_search_wkr extends Xob_itm_basic_base implements Xobd_wkr {
 	private Xowd_db_file search_db; private Xowd_search_temp_tbl search_temp_tbl;
-	private Xol_lang lang; private final Bry_bfr tmp_bfr = Bry_bfr.new_(255); private final OrderedHash list = OrderedHash_.new_bry_();
+	private Xol_lang lang; private final Bry_bfr tmp_bfr = Bry_bfr.new_(255); private final Ordered_hash list = Ordered_hash_.new_bry_();
 	public String Wkr_key() {return Xob_cmd_keys.Key_text_search_wkr;}
 	public void Wkr_ini(Xob_bldr bldr) {}
 	public void Wkr_bgn(Xob_bldr bldr) {

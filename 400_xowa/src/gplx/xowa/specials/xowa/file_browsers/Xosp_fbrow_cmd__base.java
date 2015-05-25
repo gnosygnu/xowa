@@ -33,7 +33,7 @@ abstract class Xosp_fbrow_cmd__base implements Xosp_fbrow_cmd {
 			String path_str = arg_mgr.Read_str_or_null("path"); if (path_str == null) return Xosp_fbrow_rslt.err_("url has unknown path");
 			// if (Op_sys.Cur().Tid_is_wnt()) path_str = String_.Replace(path_str, "/", "\\");
 			Io_url path_url = Io_url_.new_any_(path_str);
-			IoItmDir dir = Io_mgr._.QueryDir_args(path_url).DirInclude_(true).ExecAsDir();
+			IoItmDir dir = Io_mgr.I.QueryDir_args(path_url).DirInclude_(true).ExecAsDir();
 			dir.SubDirs().Sort(); dir.SubFils().Sort();
 			Xosp_fbrow_data_dir dir_itm = Xosp_fbrow_data_dir.new_(dir);
 			Process_itms(dir_itm);
@@ -57,7 +57,7 @@ abstract class Xosp_fbrow_cmd__base implements Xosp_fbrow_cmd {
 	protected abstract String Cmd_gui();
 	protected abstract Xosp_fbrow_rslt Write_html_selected(Xoa_url_arg_mgr arg_mgr, String selected, GfoInvkAble select_invkable);
 	protected abstract void Process_itm(Xosp_fbrow_data_sub itm);
-	private static final byte[] Html_head_default = Bry_.new_ascii_(String_.Concat_lines_nl_skip_last
+	private static final byte[] Html_head_default = Bry_.new_a7(String_.Concat_lines_nl_skip_last
 	( "  <style type='text/css'>"
 	, "    .fsys_tb           {border: 1px solid #AAAAAA;}"
 	, "    .fsys_tb td        {padding: 0 1em 0 1em;}"
@@ -118,7 +118,7 @@ class Xosp_fbrow_html implements Bry_fmtr_arg {
 				fmtr_row_dir.Bld_bfr_many(bfr, selected_html, encoder.Encode_str(itm.Url().Raw()), itm.Url().NameOnly(), cmd_src);
 			else {
 				fmtr_row_fil.Bld_bfr_many(bfr, selected_html, encoder.Encode_str(itm.Url().Raw()), itm.Url().NameAndExt()
-				, Io_size_.Xto_str(itm.Size(), 1, "#,###", " ", Bool_.Y), itm.Modified().XtoStr_fmt_yyyy_MM_dd_HH_mm_ss());
+				, Io_size_.To_str(itm.Size(), 1, "#,###", " ", Bool_.Y), itm.Modified().XtoStr_fmt_yyyy_MM_dd_HH_mm_ss());
 			}
 		}
 	}
@@ -174,7 +174,7 @@ class Xosp_fbrow_html implements Bry_fmtr_arg {
 class Xosp_fbrow_cmd__err implements Xosp_fbrow_cmd {
 	public Xosp_fbrow_cmd Make_new() {return this;}
 	public Xosp_fbrow_rslt Write_html(Xoa_url_arg_mgr arg_mgr, GfoInvkAble select_invkable) {return Rslt;}
-	private static final Xosp_fbrow_rslt Rslt = new Xosp_fbrow_rslt(Bry_.Empty, Bry_.new_utf8_("url has unknown cmd"));
+	private static final Xosp_fbrow_rslt Rslt = new Xosp_fbrow_rslt(Bry_.Empty, Bry_.new_u8("url has unknown cmd"));
 		public static final Xosp_fbrow_cmd__err I = new Xosp_fbrow_cmd__err(); Xosp_fbrow_cmd__err() {}
 }
 class Xosp_fbrow_cmd__wiki_add extends Xosp_fbrow_cmd__base {
@@ -197,8 +197,8 @@ class Xosp_fbrow_cmd__wiki_add extends Xosp_fbrow_cmd__base {
 	( "<a href='/site/~{domain}/wiki/Earth'>~{domain} Main Page</a>"
 	)
 	, "domain");
-	private static final byte[] Ext_xowa = Bry_.new_ascii_(".xowa");
-	public static final byte[] Regy_key = Bry_.new_ascii_("xowa.wiki.add");
+	private static final byte[] Ext_xowa = Bry_.new_a7(".xowa");
+	public static final byte[] Regy_key = Bry_.new_a7("xowa.wiki.add");
 		public static final Xosp_fbrow_cmd__wiki_add I = new Xosp_fbrow_cmd__wiki_add();
 }
 class Xosp_fbrow_cmd__root_set extends Xosp_fbrow_cmd__base {
@@ -209,8 +209,8 @@ class Xosp_fbrow_cmd__root_set extends Xosp_fbrow_cmd__base {
 		if (itm.Url().Type_fil()) itm.Selectable_(false);
 	}
 	@Override protected Xosp_fbrow_rslt Write_html_selected(Xoa_url_arg_mgr arg_mgr, String selected, GfoInvkAble select_invkable) {
-		return new Xosp_fbrow_rslt(Bry_.Empty, Bry_.new_utf8_(selected));
+		return new Xosp_fbrow_rslt(Bry_.Empty, Bry_.new_u8(selected));
 	}
-	public static final byte[] Regy_key = Bry_.new_ascii_("xowa.fsys.root_");
+	public static final byte[] Regy_key = Bry_.new_a7("xowa.fsys.root_");
 		public static final Xosp_fbrow_cmd__root_set I = new Xosp_fbrow_cmd__root_set();
 }

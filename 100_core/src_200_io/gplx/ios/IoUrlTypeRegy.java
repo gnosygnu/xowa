@@ -19,14 +19,14 @@ package gplx.ios; import gplx.*;
 import gplx.core.strings.*;
 public class IoUrlTypeRegy implements GfoInvkAble {
 	public String[] FetchAryOr(String key, String... or) {
-		IoUrlTypeGrp itm = (IoUrlTypeGrp)hash.Fetch(key);
+		IoUrlTypeGrp itm = (IoUrlTypeGrp)hash.Get_by(key);
 		return itm == null ? or : itm.AsAry();
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_Get)) {
 			String key = m.ReadStr(k);
 			if (ctx.Deny()) return this;
-			IoUrlTypeGrp itm = (IoUrlTypeGrp)hash.Fetch(key);
+			IoUrlTypeGrp itm = (IoUrlTypeGrp)hash.Get_by(key);
 			if (itm == null) {
 				itm = new IoUrlTypeGrp(key);
 				hash.Add(key, itm);
@@ -36,17 +36,17 @@ public class IoUrlTypeRegy implements GfoInvkAble {
 		else return GfoInvkAble_.Rv_unhandled;
 //			return this;
 	}	public static final String Invk_Get = "Get";
-	OrderedHash hash = OrderedHash_.new_();
+	Ordered_hash hash = Ordered_hash_.new_();
         public static final IoUrlTypeRegy _ = new IoUrlTypeRegy(); IoUrlTypeRegy() {}
 }
 class IoUrlTypeGrp implements GfoInvkAble {
 	public String[] AsAry() {
 		String[] rv = new String[list.Count()];
 		for (int i = 0; i < list.Count(); i++)
-			rv[i] = (String)list.FetchAt(i);
+			rv[i] = (String)list.Get_at(i);
 		return rv;
 	}
-	OrderedHash list = OrderedHash_.new_();
+	Ordered_hash list = Ordered_hash_.new_();
 	public IoUrlTypeGrp(String key) {this.key = key;} private String key;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_AddMany)) {
@@ -65,12 +65,12 @@ class IoUrlTypeGrp implements GfoInvkAble {
 			String_bldr sb = String_bldr_.new_();
 			sb.Add(key).Add("{");
 			for (int i = 0; i < list.Count(); i++)
-				sb.Add_spr_unless_first((String)list.FetchAt(i), " ", i);
+				sb.Add_spr_unless_first((String)list.Get_at(i), " ", i);
 			sb.Add("}");
 			return sb.XtoStr();
 		}
 		else if	(ctx.Match(k, Invk_Clear)) {if (ctx.Deny()) return this; list.Clear();}
 		else return GfoInvkAble_.Rv_unhandled;
 		return this;
-	}	public static final String Invk_AddMany = "AddMany", Invk_Clear = "Clear", Invk_Print = "Print";
+	}	public static final String Invk_AddMany = "Add_many", Invk_Clear = "Clear", Invk_Print = "Print";
 }

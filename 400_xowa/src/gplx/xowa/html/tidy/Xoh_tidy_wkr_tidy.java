@@ -29,11 +29,11 @@ public class Xoh_tidy_wkr_tidy extends ProcessAdp implements Xoh_tidy_wkr { 	pri
 	public void Exec_tidy(Xoae_page page, Bry_bfr bfr) {
 		int bfr_len = bfr.Len();
 		long bgn = Env_.TickCount();
-		Io_mgr._.SaveFilBfr(tidy_source, bfr);			// saves bfr to source; clears bfr
+		Io_mgr.I.SaveFilBfr(tidy_source, bfr);			// saves bfr to source; clears bfr
 		this.Run(tidy_source.Raw(), tidy_target.Raw());	// converts source to target
-		Io_mgr._.LoadFilBryByBfr(tidy_target, bfr);		// loads bfr by target
+		Io_mgr.I.LoadFilBryByBfr(tidy_target, bfr);		// loads bfr by target
 		if (bfr.Len_eq_0())								// something went wrong; load from source
-			Io_mgr._.LoadFilBryByBfr(tidy_source, bfr);	// loads bfr by target
+			Io_mgr.I.LoadFilBryByBfr(tidy_source, bfr);	// loads bfr by target
 		app.Usr_dlg().Log_many("", "", "tidy exec; elapsed=~{0} len=~{1}", Env_.TickCount_elapsed_in_frac(bgn), bfr_len);
 	}
 	public static final String Args_fmt = String_.Concat	// see https://meta.wikimedia.org/wiki/Data_dumps; missing numeric-entities:yes; enclose-text: yes

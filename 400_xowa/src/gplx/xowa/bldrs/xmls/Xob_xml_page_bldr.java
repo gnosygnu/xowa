@@ -22,7 +22,7 @@ public class Xob_xml_page_bldr {
 	public Io_buffer_rdr XtoByteStreamRdr() {return XtoByteStreamRdr(Io_mgr.Len_kb);}
 	public Io_buffer_rdr XtoByteStreamRdr(int bfr_len) {
 		Io_url url = Io_url_.mem_fil_("mem/byteStreamRdr.txt");
-		Io_mgr._.SaveFilBry(url, bfr.Xto_bry_and_clear());
+		Io_mgr.I.SaveFilBry(url, bfr.Xto_bry_and_clear());
 		return Io_buffer_rdr.new_(gplx.ios.Io_stream_rdr_.file_(url), bfr_len);
 	}
 	public Bry_bfr Bfr() {return bfr;} Bry_bfr bfr = Bry_bfr.new_();
@@ -56,9 +56,9 @@ public class Xob_xml_page_bldr {
 		bfr.Add(Indent_2).Add(Xob_xml_parser_.Bry_page_end).Add_byte_nl();
 		return this;
 	}
-	private static final byte[] Nde_inline = Bry_.new_ascii_(" />"), Indent_2 = Bry_.Repeat_space(2), Indent_4 = Bry_.Repeat_space(4), Indent_6 = Bry_.Repeat_space(6), Indent_8 = Bry_.Repeat_space(8);
+	private static final byte[] Nde_inline = Bry_.new_a7(" />"), Indent_2 = Bry_.Repeat_space(2), Indent_4 = Bry_.Repeat_space(4), Indent_6 = Bry_.Repeat_space(6), Indent_8 = Bry_.Repeat_space(8);
 	private static final int Revision_id = 1234, Contributor_id = 9876;
-	private static final byte[] Contributor_username = Bry_.new_ascii_("contributor_username"), Revision_comment = Bry_.new_ascii_("revision_comment");
+	private static final byte[] Contributor_username = Bry_.new_a7("contributor_username"), Revision_comment = Bry_.new_a7("revision_comment");
 }
 /*
   <page>

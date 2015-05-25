@@ -22,7 +22,7 @@ interface GfmlScopeItm {
 }
 class GfmlScopeRegy {
 	public boolean Has(String key) {
-		GfmlScopeList list = (GfmlScopeList)hash.Fetch(key); if (list == null) return false;
+		GfmlScopeList list = (GfmlScopeList)hash.Get_by(key); if (list == null) return false;
 		return list.Count() > 0;
 	}
 	public void Add(GfmlScopeItm itm) {
@@ -30,23 +30,23 @@ class GfmlScopeRegy {
 		list.Add(itm);
 	}
 	public void Del(GfmlScopeItm itm) {
-		GfmlScopeList list = (GfmlScopeList)hash.Fetch(itm.Key()); if (list == null) return;
+		GfmlScopeList list = (GfmlScopeList)hash.Get_by(itm.Key()); if (list == null) return;
 		list.Del(itm);
 		if (list.Count() == 0) hash.Del(itm.Key());
 	}
-	public GfmlScopeItm Fetch(String key, GfmlDocPos pos) {
-		GfmlScopeList list = (GfmlScopeList)hash.Fetch(key); if (list == null) return null;
-		return list.Fetch(pos);
+	public GfmlScopeItm Get_by(String key, GfmlDocPos pos) {
+		GfmlScopeList list = (GfmlScopeList)hash.Get_by(key); if (list == null) return null;
+		return list.Get_by(pos);
 	}
 	GfmlScopeList ItmOrNew(String key) {
-		GfmlScopeList rv = (GfmlScopeList)hash.Fetch(key);
+		GfmlScopeList rv = (GfmlScopeList)hash.Get_by(key);
 		if (rv == null) {
 			rv = GfmlScopeList.new_(key);
 			hash.Add(key, rv);
 		}
 		return rv;
 	}
-	HashAdp hash = HashAdp_.new_();
+	Hash_adp hash = Hash_adp_.new_();
 	public static GfmlScopeRegy new_() {return new GfmlScopeRegy();}
 }
 class GfmlScopeList {
@@ -54,7 +54,7 @@ class GfmlScopeList {
 	public int Count() {return list.Count();}
 	public void Add(GfmlScopeItm itm) {list.Add(itm);}
 	public void Del(GfmlScopeItm itm) {list.Del(itm);}
-	public GfmlScopeItm Fetch(GfmlDocPos pos) {
+	public GfmlScopeItm Get_by(GfmlDocPos pos) {
 		if (list.Count() == 0) return null;
 		GfmlScopeItm rv = null;
 		for (Object itemObj : list) {
@@ -66,7 +66,7 @@ class GfmlScopeList {
 		}
 		return rv;
 	}
-	ListAdp list = ListAdp_.new_();
+	List_adp list = List_adp_.new_();
 	public static GfmlScopeList new_(String key) {
 		GfmlScopeList rv = new GfmlScopeList(); rv.key = key; return rv;
 	}	GfmlScopeList() {}

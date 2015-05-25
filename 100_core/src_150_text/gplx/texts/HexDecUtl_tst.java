@@ -46,15 +46,15 @@ public class HexDecUtl_tst {
 		tst_Write("[00000000]", 1, 9, 255, "[000000FF]");
 	}
 	private void tst_Write(String s, int bgn, int end, int val, String expd) {
-		byte[] bry = Bry_.new_ascii_(s);
+		byte[] bry = Bry_.new_a7(s);
 		HexDecUtl.Write(bry, bgn, end, val);
-		Tfds.Eq(expd, String_.new_ascii_(bry));
+		Tfds.Eq(expd, String_.new_a7(bry));
 	}
 	private void tst_XtoInt(String raw, int expd) {
 		int actl = HexDecUtl.parse_(raw);
 		Tfds.Eq(expd, actl);
 	}
-	private void tst_XtoInt_bry(String raw, int expd) {Tfds.Eq(expd, HexDecUtl.parse_or_(Bry_.new_ascii_(raw), -1));}
+	private void tst_XtoInt_bry(String raw, int expd) {Tfds.Eq(expd, HexDecUtl.parse_or_(Bry_.new_a7(raw), -1));}
 	private void tst_XtoStr(int val, String expd) {tst_XtoStr(val, 0, expd);}
 	private void tst_XtoStr(int val, int pad, String expd) {
 		String actl = HexDecUtl.XtoStr(val, pad);

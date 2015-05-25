@@ -45,11 +45,11 @@ class Xox_xowa_html_cmd_fxt {
 		html_mgr.Page_wtr_mgr().Page_read_fmtr().Fmt_("<html><head></head><body>~{page_data}</body></html>");
 	}
 	public void Test_parse_w_skin(String raw, String expd) {
-		byte[] raw_bry = Bry_.new_utf8_(raw);
+		byte[] raw_bry = Bry_.new_u8(raw);
 		Xop_root_tkn root = fxt.Exec_parse_page_all_as_root(raw_bry);
 		fxt.Page().Root_(root);
 		html_mgr.Html_wtr().Write_all(bfr, fxt.Ctx(), raw_bry, root);
 		byte[] actl = html_mgr.Page_wtr_mgr().Wkr(Xopg_view_mode.Tid_read).Write(html_mgr.Page_wtr_mgr(), fxt.Page(), fxt.Ctx(), bfr);
-		Tfds.Eq_str_lines(expd, String_.new_utf8_(actl));
+		Tfds.Eq_str_lines(expd, String_.new_u8(actl));
 	}
 }

@@ -42,7 +42,7 @@ public class Io_sort_cmd_ns implements Io_make_cmd {
 	}
 	public void Sort_end() {
 		Flush();
-		Io_mgr._.AppendFilBfr(reg_url, reg_bfr);
+		Io_mgr.I.AppendFilBfr(reg_url, reg_bfr);
 		//fil_wtr.Rls(); reg_bfr.Rls(); key_bfr_0.Rls(); key_bfr_n.Rls();
 	}
 	private void Flush() {

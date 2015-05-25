@@ -31,10 +31,10 @@ public class Xoh_file_wtr__basic {
 	public Xoh_file_html_fmtr__base Html_fmtr() {return html_fmtr;}
 	public void Init_by_page(Xoh_wtr_ctx hctx, Xoae_page page) {
 		this.page = page;
-		this.cfg_alt_defaults_to_caption = wiki.Appe().User().Wiki().Html_mgr().Imgs_mgr().Alt_defaults_to_caption().Val();
+		this.cfg_alt_defaults_to_caption = wiki.Appe().Usere().Wiki().Html_mgr().Imgs_mgr().Alt_defaults_to_caption().Val();
 		html_fmtr = hctx.Mode_is_hdump() ? Xoh_file_html_fmtr__hdump.Hdump : Xoh_file_html_fmtr__hdump.Base;
 	}
-	public void Write_file(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xof_xfer_itm xfer_itm, byte[] img_alt) {
+	public void Write_file(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xof_file_itm xfer_itm, byte[] img_alt) {
 		int uid = xfer_itm.Html_uid();
 		int div_width = xfer_itm.Html_w();
 		if (div_width < 1 && wiki.File_mgr().Version_2_y()) // NOTE: html_w is -1 for v2 and missing files; use lnki_w if available; primarily affects audio files with specified width; [[File:A.oga|30px]]; DATE:2014-05-03
@@ -46,16 +46,16 @@ public class Xoh_file_wtr__basic {
 			lnki_halign = wiki.Lang().Img_thumb_halign_default();	// if halign is not supplied, then default to align for language
 		byte[] lnki_halign_bry = Xop_lnki_align_h.Html_names[lnki_halign];
 		byte[] lnki_href = wiki.Appe().Href_parser().Build_to_bry(wiki, lnki.Ttl());
-		byte[] img_view_src = xfer_itm.Html_view_url();
-		byte[] img_orig_src = xfer_itm.Html_orig_url();
+		byte[] img_view_src = xfer_itm.Html_view_url().To_http_file_bry();
+		byte[] img_orig_src = xfer_itm.Html_orig_url().To_http_file_bry();
 		byte[] lnki_ttl = lnki.Ttl().Page_txt();				
-		Xof_ext lnki_ext = xfer_itm.Lnki_ext();
+		Xof_ext orig_ext = xfer_itm.Orig_ext();
 		boolean lnki_is_thumbable = Xop_lnki_type.Id_is_thumbable(lnki.Lnki_type());
-		if (lnki_is_thumbable && !xfer_itm.File_found())			// "non-found" thumbs should default to 220; otherwise large "non-found" thumbs will create large boxes; PAGE:en.w:Wikipedia:Featured_picture_candidates/September_Morn "|1000000x260px"; DATE:2014-09-24
+		if (lnki_is_thumbable && !xfer_itm.File_exists())			// "non-found" thumbs should default to 220; otherwise large "non-found" thumbs will create large boxes; PAGE:en.w:Wikipedia:Featured_picture_candidates/September_Morn "|1000000x260px"; DATE:2014-09-24
 			div_width = Xof_img_size.Thumb_width_img;
 		if (	html_mgr.Img_suppress_missing_src()					// option to suppress src when file is missing
-			&&	!xfer_itm.Html_pass()								// file is missing; wipe values and wait for "correct" info before regenerating; mostly to handle unknown redirects
-			&&	!lnki_ext.Id_is_media()								// file is media; never suppress; src needs to be available for "click" on play; note that most media will be missing (not downloaded)
+			&&	!xfer_itm.File_exists()								// file is missing; wipe values and wait for "correct" info before regenerating; mostly to handle unknown redirects
+			&&	!orig_ext.Id_is_media()								// file is media; never suppress; src needs to be available for "click" on play; note that most media will be missing (not downloaded)
 			&&	lnki.Ns_id() != Xow_ns_.Id_media					// ns is media; never suppress; "src" will use only orig_src; DATE:2014-01-30
 			) {						
 			img_orig_src = img_view_src = Bry_.Empty;				// null out src
@@ -63,21 +63,21 @@ public class Xoh_file_wtr__basic {
 		if		(lnki.Ns_id() == Xow_ns_.Id_media)					// NOTE: regardless of ext (ogg vs jpeg) and literal status (Media vs :Media), [[Media]] links are always rendered the same way; REF.MW:Linker.php|makeMediaLinkObj; PAGE:en.w:Beethoven; EX: [[:Media:De-Ludwig_van_Beethoven.ogg|listen]]); [[File:Beethoven 3.jpg|The [[Media:BeethovenWithLyreGuitar( W. J. Mahler - 1804).jpg|complete painting]]...]]
 			this.Write_file_ns_media(bfr, ctx, src, lnki, img_orig_src);
 		else {
-			if	(	Xof_ext_.Id_is_video_strict(lnki_ext.Id())		// id is .ogv or .webm
-					||	(	lnki_ext.Id_is_ogg()					// id is ogg
+			if	(	Xof_ext_.Id_is_video_strict(orig_ext.Id())		// id is .ogv or .webm
+					||	(	orig_ext.Id_is_ogg()					// id is ogg
 						&&	wiki.File_mgr().Version_1_y()			// version is v1 (v2 always marks ogg as aud); DATE:2014-02-01
-						&&	(	xfer_itm.Html_pass()				// NOTE: xfer_itm.Html_pass() checks for video .ogg files (ext = .ogg and thumb is available); EX: WWI;
-							||	xfer_itm.Meta_itm().State_new()		// NOTE: State_new() will always assume that ogg is video; needed for 1st load and dynamic updates
+						&&	(	xfer_itm.File_exists()				// NOTE: xfer_itm.Html_pass() checks for video .ogg files (ext = .ogg and thumb is available); EX: WWI;
+							||	xfer_itm.Meta_is_new()				// NOTE: State_new() will always assume that ogg is video; needed for 1st load and dynamic updates
 							)
 						)
 					) {	
 				xfer_itm.Html_elem_tid_(Xof_html_elem.Tid_vid);
 				this.Write_file_video(bfr, ctx, src, lnki, uid, div_width, lnki_halign_bry, lnki_href, img_view_src, img_orig_src, img_alt, xfer_itm);
 			}
-			else if  (lnki_ext.Id_is_audio())						// audio
+			else if  (orig_ext.Id_is_audio())						// audio
 				this.Write_file_audio(bfr, ctx, src, lnki, uid, div_width, lnki_halign_bry, lnki_href, img_orig_src, img_alt);
 			else													// image
-				this.Write_file_image(bfr, ctx, hctx, src, lnki, xfer_itm, uid, lnki_is_thumbable, div_width, lnki_halign, lnki_halign_bry, lnki_ttl, lnki_ext, lnki_href, img_view_src, img_orig_src, img_alt);
+				this.Write_file_image(bfr, ctx, hctx, src, lnki, xfer_itm, uid, lnki_is_thumbable, div_width, lnki_halign, lnki_halign_bry, lnki_ttl, orig_ext, lnki_href, img_view_src, img_orig_src, img_alt);
 		}
 		if (hctx.Mode_is_hdump() && Xof_html_elem.Tid_is_file(xfer_itm.Html_elem_tid())) {
 			page.Hdump_data().Imgs_add_img(new Xohd_data_itm__img(), xfer_itm, Xohd_data_itm__gallery_itm.Tid_basic);
@@ -93,7 +93,7 @@ public class Xoh_file_wtr__basic {
 		else
 			bfr.Add(content);
 	}
-	private void Write_file_video(Bry_bfr bfr, Xop_ctx ctx, byte[] src, Xop_lnki_tkn lnki, int uid, int div_width, byte[] lnki_halign_bry, byte[] lnki_href, byte[] img_view_src, byte[] img_orig_src, byte[] alt, Xof_xfer_itm xfer_itm) {
+	private void Write_file_video(Bry_bfr bfr, Xop_ctx ctx, byte[] src, Xop_lnki_tkn lnki, int uid, int div_width, byte[] lnki_halign_bry, byte[] lnki_href, byte[] img_view_src, byte[] img_orig_src, byte[] alt, Xof_file_itm xfer_itm) {
 		xfer_itm.Html_elem_tid_(Xof_html_elem.Tid_vid);
 		boolean video_is_thumb = Xop_lnki_type.Id_defaults_to_thumb(lnki.Lnki_type());
 		byte[] content = Arg_content_video(ctx, src, lnki, xfer_itm, uid, video_is_thumb, lnki_href, img_view_src, img_orig_src, alt);
@@ -102,8 +102,8 @@ public class Xoh_file_wtr__basic {
 		else
 			bfr.Add(content);
 	}
-	private void Write_file_image(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xof_xfer_itm xfer_itm, int uid, boolean lnki_is_thumbable, int div_width, int lnki_halign, byte[] lnki_halign_bry
-		, byte[] lnki_ttl, Xof_ext lnki_ext, byte[] lnki_href, byte[] img_view_src, byte[] img_orig_src, byte[] alt) {
+	private void Write_file_image(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xof_file_itm xfer_itm, int uid, boolean lnki_is_thumbable, int div_width, int lnki_halign, byte[] lnki_halign_bry
+		, byte[] lnki_ttl, Xof_ext orig_ext, byte[] lnki_href, byte[] img_view_src, byte[] img_orig_src, byte[] alt) {
 		if (lnki_halign == Xop_lnki_align_h.Center) bfr.Add(Div_center_bgn);
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();
 		byte[] anchor_title = html_wtr.Cfg().Lnki_title()
@@ -148,9 +148,9 @@ public class Xoh_file_wtr__basic {
 		if (lnki_halign == Xop_lnki_align_h.Center) bfr.Add(Html_tag_.Div_rhs);
 		tmp_bfr.Mkr_rls();
 	}
-	private byte[] Arg_content_thumb(Xoh_file_img_wkr lnki_file_wkr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xof_xfer_itm xfer_itm, int uid, byte[] lnki_href, byte[] view_src, byte[] img_orig_src, byte[] lnki_alt_text, byte[] lnki_ttl, byte[] anchor_title) {
+	private byte[] Arg_content_thumb(Xoh_file_img_wkr lnki_file_wkr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xof_file_itm xfer_itm, int uid, byte[] lnki_href, byte[] view_src, byte[] img_orig_src, byte[] lnki_alt_text, byte[] lnki_ttl, byte[] anchor_title) {
 		byte[] lnki_alt_html = wiki.Html_mgr().Imgs_mgr().Alt_in_caption().Val() ? Arg_alt_html(ctx, src, lnki) : Bry_.Empty;
-		byte img_cls_tid = xfer_itm.Html_pass() ? Xoh_lnki_consts.Tid_img_cls_thumbimage : Xoh_lnki_consts.Tid_img_cls_none;
+		byte img_cls_tid = xfer_itm.File_exists() ? Xoh_lnki_consts.Tid_img_cls_thumbimage : Xoh_lnki_consts.Tid_img_cls_none;
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();
 		lnki_file_wkr.Html_full_img(tmp_bfr, hctx, page, xfer_itm, uid, lnki_href, Xoh_lnki_consts.Tid_a_cls_image, Xoh_lnki_consts.Tid_a_rel_none, anchor_title, lnki_ttl, xfer_itm.Html_w(), xfer_itm.Html_h(), view_src, lnki_alt_text, img_cls_tid, Xoh_lnki_consts.Bry_none);
 		byte[] thumb = tmp_bfr.Xto_bry_and_clear();
@@ -167,7 +167,7 @@ public class Xoh_file_wtr__basic {
 		html_fmtr.Html_thumb_file_audio(scratch_bfr, Arg_caption_div(ctx, src, lnki, uid, img_orig_src, lnki_href), Arg_alt_html(ctx, src, lnki), Arg_play_btn(uid, play_btn_width, Play_btn_max_width, img_orig_src, lnki.Ttl().Page_txt()), info_btn);
 		return scratch_bfr.Xto_bry_and_clear();
 	}
-	private byte[] Arg_content_video(Xop_ctx ctx, byte[] src, Xop_lnki_tkn lnki, Xof_xfer_itm xfer_itm, int uid, boolean lnki_thumb, byte[] a_href, byte[] view_src, byte[] orig_src, byte[] img_alt) {
+	private byte[] Arg_content_video(Xop_ctx ctx, byte[] src, Xop_lnki_tkn lnki, Xof_file_itm xfer_itm, int uid, boolean lnki_thumb, byte[] a_href, byte[] view_src, byte[] orig_src, byte[] img_alt) {
 		int thumb_w = xfer_itm.Html_w();
 		int play_btn_width = thumb_w; if (play_btn_width < 1) play_btn_width = wiki.Html_mgr().Img_thumb_width();
 		byte[] caption_html = Bry_.Empty, alt_html = Bry_.Empty;
@@ -226,10 +226,10 @@ public class Xoh_file_wtr__basic {
 	}
 	public static final int Play_btn_max_width = 1024;
 	private static final byte[]
-	  Div_center_bgn			= Bry_.new_ascii_("<div class=\"center\">")
-	, Div_float_none			= Bry_.new_ascii_("<div class=\"floatnone\">")
-	, Div_float_left			= Bry_.new_ascii_("<div class=\"floatleft\">")
-	, Div_float_right			= Bry_.new_ascii_("<div class=\"floatright\">")
-	, Atr_title					= Bry_.new_ascii_(" title=\"")
+	  Div_center_bgn			= Bry_.new_a7("<div class=\"center\">")
+	, Div_float_none			= Bry_.new_a7("<div class=\"floatnone\">")
+	, Div_float_left			= Bry_.new_a7("<div class=\"floatleft\">")
+	, Div_float_right			= Bry_.new_a7("<div class=\"floatright\">")
+	, Atr_title					= Bry_.new_a7(" title=\"")
 	;
 }

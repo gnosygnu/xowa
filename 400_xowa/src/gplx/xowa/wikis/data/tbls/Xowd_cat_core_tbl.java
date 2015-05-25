@@ -57,7 +57,7 @@ public class Xowd_cat_core_tbl implements RlsAble {
 		Db_rdr rdr = stmt_select.Clear().Crt_int(fld_id, id).Exec_select__rls_manual();
 		try {return rdr.Move_next() ? new_itm(rdr) : Xowd_category_itm.Null;} finally {rdr.Rls();}
 	}
-	public void Select_by_cat_id_in(Cancelable cancelable, OrderedHash rv, int bgn, int end) {
+	public void Select_by_cat_id_in(Cancelable cancelable, Ordered_hash rv, int bgn, int end) {
 		in_wkr.Init(rv);
 		in_wkr.Select_in(cancelable, conn, bgn, end);
 	}

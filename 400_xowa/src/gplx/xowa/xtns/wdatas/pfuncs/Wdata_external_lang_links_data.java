@@ -18,12 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.wdatas.pfuncs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.xowa.xtns.pfuncs.*;
 public class Wdata_external_lang_links_data {
-	private ListAdp langs_list = ListAdp_.new_(); private Hash_adp_bry langs_hash = Hash_adp_bry.ci_ascii_(); // ASCII:lang_code
+	private List_adp langs_list = List_adp_.new_(); private Hash_adp_bry langs_hash = Hash_adp_bry.ci_ascii_(); // ASCII:lang_code
 	public boolean Enabled() {return enabled;} private boolean enabled; public Wdata_external_lang_links_data Enabled_(boolean v) {enabled = v; return this;}
 	public boolean Sort() {return sort;} public Wdata_external_lang_links_data Sort_(boolean v) {sort = v; return this;} private boolean sort;
 	public int Langs_len() {return langs_list.Count();}
 	public Wdata_external_lang_links_data Langs_add(byte[] v) {langs_hash.Add(v, v); langs_list.Add(v); return this;}
-	public byte[] Langs_get_at(int i) {return (byte[])langs_list.FetchAt(i);}
+	public byte[] Langs_get_at(int i) {return (byte[])langs_list.Get_at(i);}
 	public boolean Langs_hide(byte[] src, int bgn, int end) {
 		if (sort) return false;
 		return langs_hash.Get_by_mid(src, bgn, end) == null;

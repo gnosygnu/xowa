@@ -16,10 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.dbs.*; import gplx.xowa.apps.*;
+import gplx.dbs.*; import gplx.xowa.apps.*; import gplx.xowa.files.exts.*;
 public class Xoa_app_fxt {
 	public static Xoae_app app_() {
-		Io_mgr._.InitEngine_mem();
+		Io_mgr.I.InitEngine_mem();
 		Db_conn_bldr.I.Reg_default_mem();
 		return app_("linux", Io_url_.mem_dir_("mem/xowa/"));
 	}
@@ -43,6 +43,14 @@ public class Xoa_app_fxt {
 		rv.Ns_mgr().Ids_get_or_null(Xow_ns_.Id_main).Subpages_enabled_(true);
 		app.Wiki_mgr().Add(rv);
 		return rv;
+	}
+	public static void repo_(Xoae_app app, Xowe_wiki wiki) {
+		app.File_mgr().Repo_mgr().Set("src:wiki", "mem/wiki/repo/src/", wiki.Domain_str()).Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2);
+		app.File_mgr().Repo_mgr().Set("trg:wiki", "mem/wiki/repo/trg/", wiki.Domain_str()).Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2).Primary_(true);
+		wiki.File_mgr().Repo_mgr().Add_repo(Bry_.new_u8("src:wiki"), Bry_.new_u8("trg:wiki"));
+		app.File_mgr().Repo_mgr().Set("src:c", "mem/wiki/repo/src/", "commons.wikimedia.org").Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2);
+		app.File_mgr().Repo_mgr().Set("trg:c", "mem/wiki/repo/trg/", "commons.wikimedia.org").Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2).Primary_(true);
+		wiki.File_mgr().Repo_mgr().Add_repo(Bry_.new_u8("src:c"), Bry_.new_u8("trg:c"));
 	}
 	public static void Init_gui(Xoae_app app, Xowe_wiki wiki) {
 		app.Gui_mgr().Browser_win().Init_by_kit(gplx.gfui.Mem_kit._);

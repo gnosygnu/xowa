@@ -40,7 +40,7 @@ public class Xop_lnki_wkr_ {
 	public static boolean Parse_ttl(Xop_ctx ctx, byte[] src, Xop_lnki_tkn lnki, int ttl_bgn, int ttl_end) {
 		Xoae_app app = ctx.App();
 		byte[] ttl_bry = Bry_.Mid(src, ttl_bgn, ttl_end);
-		ttl_bry = Xoa_app_.Utl__encoder_mgr().Url_ttl().Decode(ttl_bry);
+		ttl_bry = Xoa_app_.Utl__encoder_mgr().Http_url_ttl().Decode(ttl_bry);
 		int ttl_bry_len = ttl_bry.length;
 		Xoa_ttl page_ttl = ctx.Cur_page().Ttl();
 		if (page_ttl.Ns().Subpages_enabled()

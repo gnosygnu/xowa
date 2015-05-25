@@ -19,21 +19,21 @@ package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
 import org.junit.*;
 public class Xow_domain_tst {		
 	@Before public void init() {fxt.Clear();} private final Xow_domain_fxt fxt = new Xow_domain_fxt();
-	@Test  public void Parse_en_wikipedia() 			{fxt.Test_parse("en.wikipedia.org"				, "en"	, Xow_domain_.Tid_int_wikipedia);}
-	@Test  public void Parse_fr_wikipedia() 			{fxt.Test_parse("fr.wikipedia.org"				, "fr"	, Xow_domain_.Tid_int_wikipedia);}
-	@Test  public void Parse_en_wiktionary() 			{fxt.Test_parse("en.wiktionary.org"				, "en"	, Xow_domain_.Tid_int_wiktionary);}
-	@Test  public void Parse_zh_classical_wikipedia()	{fxt.Test_parse("zh-classical.wikipedia.org"	, "lzh"	, Xow_domain_.Tid_int_wikipedia);}
-	@Test  public void Parse_commons() 					{fxt.Test_parse("commons.wikimedia.org"			, ""	, Xow_domain_.Tid_int_commons);}
-	@Test  public void Parse_species() 					{fxt.Test_parse("species.wikimedia.org"			, ""	, Xow_domain_.Tid_int_species);}
-	@Test  public void Parse_ru_wikimedia_org() 		{fxt.Test_parse("ru.wikimedia.org"				, "ru"	, Xow_domain_.Tid_int_wikimedia);}
-	@Test  public void Parse_home() 					{fxt.Test_parse("home"							, ""	, Xow_domain_.Tid_int_home);}
-	@Test  public void Parse_other() 					{fxt.Test_parse("other.wiki"					, ""	, Xow_domain_.Tid_int_other);}
+	@Test  public void Parse_en_wikipedia() 			{fxt.Test_parse("en.wikipedia.org"				, "en"	, Xow_domain_type_.Tid_wikipedia);}
+	@Test  public void Parse_fr_wikipedia() 			{fxt.Test_parse("fr.wikipedia.org"				, "fr"	, Xow_domain_type_.Tid_wikipedia);}
+	@Test  public void Parse_en_wiktionary() 			{fxt.Test_parse("en.wiktionary.org"				, "en"	, Xow_domain_type_.Tid_wiktionary);}
+	@Test  public void Parse_zh_classical_wikipedia()	{fxt.Test_parse("zh-classical.wikipedia.org"	, "lzh"	, Xow_domain_type_.Tid_wikipedia);}
+	@Test  public void Parse_commons() 					{fxt.Test_parse("commons.wikimedia.org"			, ""	, Xow_domain_type_.Tid_commons);}
+	@Test  public void Parse_species() 					{fxt.Test_parse("species.wikimedia.org"			, ""	, Xow_domain_type_.Tid_species);}
+	@Test  public void Parse_ru_wikimedia_org() 		{fxt.Test_parse("ru.wikimedia.org"				, "ru"	, Xow_domain_type_.Tid_wikimedia);}
+	@Test  public void Parse_home() 					{fxt.Test_parse("home"							, ""	, Xow_domain_type_.Tid_home);}
+	@Test  public void Parse_other() 					{fxt.Test_parse("other.wiki"					, ""	, Xow_domain_type_.Tid_other);}
 }
 class Xow_domain_fxt {
 	public void Clear() {}
 	public void Test_parse(String domain, String expd_lang, int expd_tid) {
-		Xow_domain actl = Xow_domain_.parse(Bry_.new_ascii_(domain));
-		Tfds.Eq(expd_lang, String_.new_ascii_((actl.Lang_key())));
+		Xow_domain actl = Xow_domain_.parse(Bry_.new_a7(domain));
+		Tfds.Eq(expd_lang, String_.new_a7((actl.Lang_key())));
 		Tfds.Eq(expd_tid, actl.Domain_tid());
 	}
 }

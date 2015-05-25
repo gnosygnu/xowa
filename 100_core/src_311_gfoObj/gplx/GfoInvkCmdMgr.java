@@ -37,7 +37,7 @@ public class GfoInvkCmdMgr {
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m, Object host) {
 		for (int i = 0; i < list.Count(); i++) {
-			GfoInvkCmdItm itm = (GfoInvkCmdItm)list.FetchAt(i);
+			GfoInvkCmdItm itm = (GfoInvkCmdItm)list.Get_at(i);
 			if (itm.Type_isXtn()) {
 				Object invkVal = itm.Invk().Invk(ctx, ikey, k, m);
 				if (invkVal != GfoInvkAble_.Rv_unhandled) return invkVal;
@@ -52,7 +52,7 @@ public class GfoInvkCmdMgr {
 		return Unhandled;
 	}
 	public static final String_obj_val Unhandled = String_obj_val.new_("GfoInvkCmdMgr Unhandled");
-	ListAdp list = ListAdp_.new_();
+	List_adp list = List_adp_.new_();
         public static GfoInvkCmdMgr new_() {return new GfoInvkCmdMgr();} GfoInvkCmdMgr() {}
 }
 class GfoInvkCmdItm {

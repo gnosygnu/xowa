@@ -19,10 +19,10 @@ package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.x
 import gplx.core.primitives.*; import gplx.dbs.*;
 import gplx.xowa.files.fsdb.*; import gplx.xowa2.files.*; import gplx.xowa.wikis.*;
 public class Xof_cache_mgr implements GfoInvkAble {
-	private final Gfo_usr_dlg usr_dlg; private final Xoa_wiki_mgr wiki_mgr; private final Xoa_repo_mgr repo_mgr;
+	private final Gfo_usr_dlg usr_dlg; private final Xoae_wiki_mgr wiki_mgr; private final Xoa_repo_mgr repo_mgr;
 	private final Xofc_cfg_mgr cfg_mgr = new Xofc_cfg_mgr(); private final Xofc_dir_mgr dir_mgr; private final Xofc_fil_mgr fil_mgr;
 	private final Bool_obj_ref fil_created = Bool_obj_ref.n_();
-	public Xof_cache_mgr(Gfo_usr_dlg usr_dlg, Xoa_wiki_mgr wiki_mgr, Xoa_repo_mgr repo_mgr) {
+	public Xof_cache_mgr(Gfo_usr_dlg usr_dlg, Xoae_wiki_mgr wiki_mgr, Xoa_repo_mgr repo_mgr) {
 		this.usr_dlg = usr_dlg; this.wiki_mgr = wiki_mgr; this.repo_mgr = repo_mgr;
 		this.dir_mgr = new Xofc_dir_mgr(this);
 		this.fil_mgr = new Xofc_fil_mgr(this);
@@ -47,7 +47,7 @@ public class Xof_cache_mgr implements GfoInvkAble {
 			fil_mgr.Cleanup();
 		} catch (Exception e) {usr_dlg.Warn_many("", "", "cache_mgr.term:fatal error: err=~{0}", Err_.Message_gplx_brief(e));}
 	}
-	public Xofc_fil_itm Reg(Xof_fsdb_itm itm, long bin_len) {return this.Reg(itm.Orig_repo_name(), itm.Lnki_ttl(), itm.File_is_orig(), itm.File_w(), itm.File_w(), itm.Lnki_time(), itm.Lnki_ext(), bin_len, DateAdp_.MaxValue, "");}
+	public Xofc_fil_itm Reg(Xof_fsdb_itm itm, long bin_len) {return this.Reg(itm.Orig_repo_name(), itm.Orig_ttl(), itm.File_is_orig(), itm.File_w(), itm.File_w(), itm.Lnki_time(), itm.Orig_ext(), bin_len, DateAdp_.MaxValue, "");}
 	private Xofc_fil_itm Reg(byte[] repo, byte[] ttl, boolean fil_is_orig, int fil_w, int fil_h, double fil_thumbtime, Xof_ext ext, long bin_len, DateAdp modified, String hash) {
 		int dir_id = dir_mgr.Get_by_name_or_make(repo).Id();
 		Xofc_fil_itm fil_itm = fil_mgr.Get_or_make(dir_id, ttl, fil_is_orig, fil_w, fil_h, fil_thumbtime, ext, bin_len, fil_created.Val_n_());
@@ -60,7 +60,7 @@ public class Xof_cache_mgr implements GfoInvkAble {
 		if (Env_.Mode_testing()) return;				// NOTE: needed else test breaks in sqlite mode; DATE:2015-02-21
 		Xofc_fil_itm cache_fil_itm = this.Reg(itm, 0);	// get item
 		if (cache_fil_itm.Size() == 0) {				// item does not exist; size will be 0, since 0 passed above
-			long fil_size = Io_mgr._.QueryFil(itm.Html_view_url()).Size();
+			long fil_size = Io_mgr.I.QueryFil(itm.Html_view_url()).Size();
 			cache_fil_itm.Size_(fil_size);
 		}
 	}

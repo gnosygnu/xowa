@@ -30,7 +30,7 @@ public class z455_dflts_scope_tst {
 		tst_FetchOrNullByPos(regy, "point", rootPos, "point", "x", "y");
 		tst_FetchOrNullByPos(regy, "point", currPos, "point", "x", "y");
 
-		ListAdp list = ListAdp_.new_();
+		List_adp list = List_adp_.new_();
 		list.Add(GfmlDefaultItem.new_("point", "z", GfmlTkn_.raw_("0")));
 		GfmlDefaultPragma_bgnCmd.ExecList(regy, currPos, list);
 
@@ -42,7 +42,7 @@ public class z455_dflts_scope_tst {
 		Tfds.Eq(expdTypeKey, actl.Key());
 		String[] actlSubs = new String[actl.SubFlds().Count()];
 		for (int i = 0; i < actlSubs.length; i++)
-			actlSubs[i] = actl.SubFlds().FetchAt(i).Name();
+			actlSubs[i] = actl.SubFlds().Get_at(i).Name();
 		Tfds.Eq_ary(expdSubs, actlSubs);
 		return actl;
 	}

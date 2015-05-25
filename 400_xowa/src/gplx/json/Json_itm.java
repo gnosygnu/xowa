@@ -31,7 +31,7 @@ class Json_itm_null extends Json_itm_base {
 	@Override public Object Data() {return null;}
 	@Override public void Print_as_json(Bry_bfr bfr, int depth) {bfr.Add(Bry_null);}
 	@Override public byte[] Data_bry() {return Bry_null;}
-	private static final byte[] Bry_null = Bry_.new_ascii_("null");
+	private static final byte[] Bry_null = Bry_.new_a7("null");
 	public static Json_itm_null Null = new Json_itm_null();
 }
 class Json_itm_bool extends Json_itm_base {
@@ -47,7 +47,7 @@ class Json_itm_decimal extends Json_itm_base {
 	@Override public byte Tid() {return Json_itm_.Tid_decimal;}
 	@Override public Object Data() {
 		if (data == null)
-			data = DecimalAdp_.parse_(String_.new_ascii_(this.Data_bry()));
+			data = DecimalAdp_.parse_(String_.new_a7(this.Data_bry()));
 		return data;
 	}	DecimalAdp data;
 	@Override public byte[] Data_bry() {
@@ -68,7 +68,7 @@ class Json_itm_str extends Json_itm_base {
 		if (data_str == null) {
 			if (data_bry == null)
 				data_bry = Data_make_bry();
-			data_str = String_.new_utf8_(data_bry);
+			data_str = String_.new_u8(data_bry);
 		}
 		return data_str;
 	}	private String data_str;

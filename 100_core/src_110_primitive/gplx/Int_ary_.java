@@ -40,7 +40,7 @@ public class Int_ary_ {
 				}
 				int add_len = 1;
 				if (itm_is_rng) {
-					add_len = num - rng_bgn + ListAdp_.Base1;
+					add_len = num - rng_bgn + List_adp_.Base1;
 					if (add_len == 0) return or;		// bgn >= end;
 				}
 				if (add_len + rv_idx > rv_len) {		// ary out of space; resize

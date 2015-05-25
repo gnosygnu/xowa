@@ -40,10 +40,10 @@ class Xoa_url_arg_mgr {
 		Gfo_url_arg arg = (Gfo_url_arg)hash.Get_by_bry(key);
 		return arg == null ? or : arg.Val_bry();
 	}
-	public String Read_str_or_null(String key) {return Read_str_or_null(Bry_.new_utf8_(key));}
+	public String Read_str_or_null(String key) {return Read_str_or_null(Bry_.new_u8(key));}
 	public String Read_str_or_null(byte[] key) {
 		Gfo_url_arg arg = (Gfo_url_arg)hash.Get_by_bry(key);
-		return arg == null ? null : String_.new_utf8_(arg.Val_bry());
+		return arg == null ? null : String_.new_u8(arg.Val_bry());
 	}
 }
 class Xoa_url_enum_mgr {
@@ -62,7 +62,7 @@ class Xoa_url_enum_itm {
 	public Xoa_url_enum_itm(byte[] key) {this.key = key;}
 	public byte[] Key() {return key;} private final byte[] key;
 	public Xoa_url_enum_itm Add(String key, int val) {
-		hash.Add_bry_obj(Bry_.new_utf8_(key), Int_obj_val.new_(val));
+		hash.Add_bry_obj(Bry_.new_u8(key), Int_obj_val.new_(val));
 		return this;
 	}
 	public int Get_as_int_or(byte[] val, int or) {

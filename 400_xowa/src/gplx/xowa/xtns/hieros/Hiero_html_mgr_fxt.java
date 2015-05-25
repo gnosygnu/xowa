@@ -48,9 +48,9 @@ public class Hiero_html_mgr_fxt {
 		this.Init_file("a&A1", 37, 38);
 		return this;
 	}
-	public Hiero_html_mgr_fxt Init_prefab(String prefab)					{xtn_mgr.Prefab_mgr().Add(Bry_.new_utf8_(prefab)); return this;}
-	public Hiero_html_mgr_fxt Init_file(String s, int w, int h)				{xtn_mgr.File_mgr().Add(Bry_.new_utf8_(s), w, h); return this;}
-	public Hiero_html_mgr_fxt Init_phoneme(String phoneme, String code)		{xtn_mgr.Phoneme_mgr().Add(Bry_.new_utf8_(phoneme), Bry_.new_utf8_(code)); return this;}
+	public Hiero_html_mgr_fxt Init_prefab(String prefab)					{xtn_mgr.Prefab_mgr().Add(Bry_.new_u8(prefab)); return this;}
+	public Hiero_html_mgr_fxt Init_file(String s, int w, int h)				{xtn_mgr.File_mgr().Add(Bry_.new_u8(s), w, h); return this;}
+	public Hiero_html_mgr_fxt Init_phoneme(String phoneme, String code)		{xtn_mgr.Phoneme_mgr().Add(Bry_.new_u8(phoneme), Bry_.new_u8(code)); return this;}
 	public void Test_html_full_str(String raw, String expd)					{fxt.Test_html_full_str(raw, expd);}
 	public void Test_html_full_frag(String raw, String expd)				{fxt.Test_html_full_frag(raw, expd);}
 }	

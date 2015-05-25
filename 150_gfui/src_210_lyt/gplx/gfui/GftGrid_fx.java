@@ -31,7 +31,7 @@ class GftGrid_fx {
 		return this;
 	}
 	public GftGrid_fx ini_ItmWidth(int i, int width) {
-		GftItem itm = (GftItem)itms.FetchAt(i);
+		GftItem itm = (GftItem)itms.Get_at(i);
 		itm.Gft_w_(width);
 		return this;
 	}
@@ -43,7 +43,7 @@ class GftGrid_fx {
 		return this;
 	}
 	public GftGrid_fx ini_Lyt(int num) {
-		curGrid = (GftGrid)grid.SubLyts().FetchAt(num);
+		curGrid = (GftGrid)grid.SubLyts().Get_at(num);
 		return this;
 	}
 	public GftGrid_fx ini_BandDir(DirInt dir) {curGrid.Bands_dir_(dir); return this;}
@@ -51,7 +51,7 @@ class GftGrid_fx {
 	public GftGrid_fx ini_Set(int idx, GftBand orig) {return ini_Set(idx, idx, orig);}
 	public GftGrid_fx ini_Set(int bgn, int end, GftBand orig) {curGrid.Bands_set(bgn, end, orig); return this;}
 	public GftGrid_fx run() {
-		GftItem[] ary = (GftItem[])itms.Xto_ary(GftItem.class);
+		GftItem[] ary = (GftItem[])itms.To_ary(GftItem.class);
 		grid.Exec(owner, ary);
 		return this;
 	}
@@ -70,7 +70,7 @@ class GftGrid_fx {
 		int len = end - bgn + 1;
 		int[] actl = new int[len];
 		for (int i = 0; i < len; i++) {
-			GftItem itm = (GftItem)itms.FetchAt(i + bgn);
+			GftItem itm = (GftItem)itms.Get_at(i + bgn);
 			actl[i] = GetVal(itm, name);
 		}
 		Tfds.Eq_ary(expd, actl, name);
@@ -89,5 +89,5 @@ class GftGrid_fx {
 		return rv;
 	}
 	GftGrid grid = GftGrid.new_(), curGrid;
-	ListAdp itms = ListAdp_.new_();
+	List_adp itms = List_adp_.new_();
 }

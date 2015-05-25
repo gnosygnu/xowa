@@ -78,7 +78,7 @@ class GfmlFrame_ndeTknMgr {
 			k = bldr.TypeMgr().FldPool().Keyed_PopNextAsTkn();
 		GfmlAtr atr = GfmlAtr.string_(k, v);
 		GfmlFrame_nde_.TransferToAtr(frame.waitingTkns, atr, idxAtrBgn, idxAtrEnd);
-		frame.waitingTkns.AddAt(atr, idxAtrBgn);
+		frame.waitingTkns.Add_at(atr, idxAtrBgn);
 		this.IdxAtr_clear();
 	}
 	GfmlFrame_nde frame; GfmlBldr bldr;

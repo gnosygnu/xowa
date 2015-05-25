@@ -28,14 +28,14 @@ public class Xob_page_regy_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		commons_wiki.Init_assert();
 		if (build_commons) {
 			Xob_page_regy_tbl.Reset_table(page_regy_provider);
-			Xob_page_regy_tbl.Create_data(bldr.Usr_dlg(), page_regy_provider, Xof_repo_itm.Repo_remote, commons_wiki);
+			Xob_page_regy_tbl.Create_data(bldr.Usr_dlg(), page_regy_provider, Xof_repo_itm_.Repo_remote, commons_wiki);
 			Sqlite_engine_.Idx_create(usr_dlg, page_regy_provider, "repo_page", Xob_page_regy_tbl.Idx_main);
 		}
 		else {
 			if (!Bry_.Eq(commons_wiki.Domain_bry(), wiki.Domain_bry())) {	// skip local wiki if cur wiki is commons
 				wiki.Init_assert();
 				Xob_page_regy_tbl.Delete_local(page_regy_provider);
-				Xob_page_regy_tbl.Create_data(bldr.Usr_dlg(), page_regy_provider, Xof_repo_itm.Repo_local, wiki);
+				Xob_page_regy_tbl.Create_data(bldr.Usr_dlg(), page_regy_provider, Xof_repo_itm_.Repo_local, wiki);
 			}
 		}
 	}

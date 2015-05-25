@@ -85,10 +85,10 @@ class XmlDataWtr extends DataWtr_base implements DataWtr {
 			ndeOpened = false;
 		}
 		else {
-			String name = (String)names.FetchAtLast();
+			String name = (String)names.Get_at_last();
 			sb.Add("</" + name + ">" + String_.CrLf);
 		}
-		names.DelAt(names.Count() - 1);
+		names.Del_at(names.Count() - 1);
 		//			if (nde.ParentNode == null) throw Err_.new_("WriteXmlNodeEnd() called on root node");
 //			nde = nde.ParentNode;
 //			WriteLineFeed(doc, nde);
@@ -107,7 +107,7 @@ class XmlDataWtr extends DataWtr_base implements DataWtr {
 //		int atrCount = 0;
 //		int ndeState = -1; static final int NdeState0_Opened = 0, NdeState0_H = 1;
 //		XmlDocument doc = new XmlDocument(); XmlNode nde;
-	ListAdp names = ListAdp_.new_();
+	List_adp names = List_adp_.new_();
 	String_bldr sb = String_bldr_.new_();
 	public static XmlDataWtr new_() {return new XmlDataWtr();} XmlDataWtr() {}
 }

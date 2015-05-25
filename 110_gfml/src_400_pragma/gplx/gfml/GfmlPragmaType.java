@@ -20,9 +20,9 @@ import gplx.lists.*;
 class GfmlPragmaType implements GfmlPragma {
 	public String KeyOfPragma() {return pragmaKey;} private String pragmaKey = "_type";
 	public void Exec(GfmlBldr bldr, GfmlNde pragmaNde) {
-		OrderedHash list = OrderedHash_.new_(); ListAdp replaced = ListAdp_.new_();
+		Ordered_hash list = Ordered_hash_.new_(); List_adp replaced = List_adp_.new_();
 		for (int i = 0 ; i < pragmaNde.SubHnds().Count(); i++) {
-			GfmlNde typNde = pragmaNde.SubHnds().FetchAt(i);
+			GfmlNde typNde = pragmaNde.SubHnds().Get_at(i);
 			GfmlType type = GfmlTypeCompiler.Compile(typNde, GfmlType_.Root, bldr.TypeMgr().TypeRegy(), list);
 			if (i == 0) {
 				GfmlFrame_nde topFrame = GfmlFrame_nde_.as_(bldr.CurFrame());
@@ -48,7 +48,7 @@ class GfmlPragmaType implements GfmlPragma {
 		return makr.Xto_bry();
 	}
 	public static final String CacheLog_key = "log:type";
-	@gplx.Internal protected static void ExecList(GfmlTypRegy regy, OrderedHash list, ListAdp replaced) {
+	@gplx.Internal protected static void ExecList(GfmlTypRegy regy, Ordered_hash list, List_adp replaced) {
 		for (Object typeObj : list) {
 			GfmlType type = (GfmlType)typeObj;
 			if (regy.Has(type.Key()))
@@ -60,7 +60,7 @@ class GfmlPragmaType implements GfmlPragma {
 class GfmlPragmaType_endCmd implements GfmlBldrCmd {
 	public String Key() {return "cmd.gfml.type.end";}
 	public void Exec(GfmlBldr bldr, GfmlTkn tkn) {ExecList(bldr.TypeMgr().TypeRegy(), list, replaced);}
-	@gplx.Internal protected static void ExecList(GfmlTypRegy regy, OrderedHash list, ListAdp replaced) {
+	@gplx.Internal protected static void ExecList(GfmlTypRegy regy, Ordered_hash list, List_adp replaced) {
 		for (Object typeObj : list) {
 			GfmlType type = (GfmlType)typeObj;
 			regy.Del(type);
@@ -70,8 +70,8 @@ class GfmlPragmaType_endCmd implements GfmlBldrCmd {
 			regy.Add(type);
 		}
 	}
-	OrderedHash list; ListAdp replaced;
-	public static GfmlPragmaType_endCmd new_(OrderedHash list, ListAdp replaced) {
+	Ordered_hash list; List_adp replaced;
+	public static GfmlPragmaType_endCmd new_(Ordered_hash list, List_adp replaced) {
 		GfmlPragmaType_endCmd rv = new GfmlPragmaType_endCmd();
 		rv.list = list; rv.replaced = replaced;
 		return rv;

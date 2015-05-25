@@ -36,7 +36,7 @@ class Json_kv_ary_srl_fxt {
 		}
 	}	private Json_parser parser;
 	public void Test_parse(String raw_str, KeyVal[] expd) {
-		byte[] raw_bry = Json_parser_tst.Replace_apos(Bry_.new_utf8_(raw_str));
+		byte[] raw_bry = Json_parser_tst.Replace_apos(Bry_.new_u8(raw_str));
 		Json_doc doc = parser.Parse(raw_bry);
 		KeyVal[] actl = Json_kv_ary_srl.Val_by_itm_nde(doc.Root());
 		Tfds.Eq_str_lines(KeyVal_.Ary_x_to_str(expd), KeyVal_.Ary_x_to_str(actl));

@@ -21,16 +21,16 @@ public class Bry_fmtr {
 	public byte[] Fmt() {return fmt;} private byte[] fmt = Bry_.Empty;
 	public boolean Fmt_null() {return fmt.length == 0;}
 	public Bry_fmtr_eval_mgr Eval_mgr() {return eval_mgr;} public Bry_fmtr Eval_mgr_(Bry_fmtr_eval_mgr v) {eval_mgr = v; return this;} Bry_fmtr_eval_mgr eval_mgr = Bry_fmtr_eval_mgr_gfs._;
-	public Bry_fmtr Fmt_(byte[] v) {fmt = v; dirty = true; return this;} public Bry_fmtr Fmt_(String v) {return Fmt_(Bry_.new_utf8_(v));}
+	public Bry_fmtr Fmt_(byte[] v) {fmt = v; dirty = true; return this;} public Bry_fmtr Fmt_(String v) {return Fmt_(Bry_.new_u8(v));}
 	public Bry_fmtr Keys_(String... ary) {
-		if (keys == null)	keys = HashAdp_.new_();
+		if (keys == null)	keys = Hash_adp_.new_();
 		else				keys.Clear();
 		int ary_len = ary.length;
 		for (int i = 0; i < ary_len; i++)
-			keys.Add(Bry_obj_ref.new_(Bry_.new_utf8_(ary[i])), Int_obj_val.new_(i));
+			keys.Add(Bry_obj_ref.new_(Bry_.new_u8(ary[i])), Int_obj_val.new_(i));
 		dirty = true;
 		return this;
-	}	HashAdp keys = null;
+	}	Hash_adp keys = null;
 	public void Bld_bfr(Bry_bfr bfr, byte[]... args) {
 		if (dirty) Compile(); 
 		int args_len = args.length;
@@ -116,7 +116,7 @@ public class Bry_fmtr {
 		}
 		return rv.XtoStr();
 	}	private Bry_fmtr_itm[] itms; int itms_len;
-	public byte[] Missing_bgn() {return missing_bgn;} public Bry_fmtr Missing_bgn_(byte[] v) {missing_bgn = v; return this;} private byte[] missing_bgn = missing_bgn_static; static byte[] missing_bgn_static = Bry_.new_utf8_("~{"), missing_end_static = Bry_.new_utf8_("}");
+	public byte[] Missing_bgn() {return missing_bgn;} public Bry_fmtr Missing_bgn_(byte[] v) {missing_bgn = v; return this;} private byte[] missing_bgn = missing_bgn_static; static byte[] missing_bgn_static = Bry_.new_u8("~{"), missing_end_static = Bry_.new_u8("}");
 	public byte[] Missing_end() {return missing_end;} public Bry_fmtr Missing_end_(byte[] v) {missing_end = v; return this;} private byte[] missing_end = missing_end_static;
 	public int Missing_adj() {return missing_adj;} public Bry_fmtr Missing_adj_(int v) {missing_adj = v; return this;} int missing_adj;
 	public boolean Fail_when_invalid_escapes() {return fail_when_invalid_escapes;} public Bry_fmtr Fail_when_invalid_escapes_(boolean v) {fail_when_invalid_escapes = v; return this;} private boolean fail_when_invalid_escapes = true;
@@ -127,7 +127,7 @@ public class Bry_fmtr {
 			byte[] trg_bry = new byte[fmt_len]; int trg_pos = 0;
 			boolean lkp_is_active = false, lkp_is_numeric = true;
 			byte nxt_byte, tmp_byte;
-			ListAdp list = ListAdp_.new_();
+			List_adp list = List_adp_.new_();
 			fmt_args_exist = false;
 			while (true) {
 				if (fmt_pos > fmt_end) break;
@@ -138,7 +138,7 @@ public class Bry_fmtr {
 							list.Add(Bry_fmtr_itm.arg_(lkp_bfr.XtoInt(0) - baseInt));
 						else {
 							byte[] key_fmt = lkp_bfr.Xto_bry();
-							Object idx_ref = keys.Fetch(Bry_obj_ref.new_(key_fmt));
+							Object idx_ref = keys.Get_by(Bry_obj_ref.new_(key_fmt));
 							if (idx_ref == null) {
 								int lkp_bfr_len = lkp_bfr.Len();
 								byte[] lkp_bry = lkp_bfr.Bfr();
@@ -211,15 +211,15 @@ public class Bry_fmtr {
 			}
 			if (lkp_is_active) throw Err_.new_("idx mode not closed");
 			if (trg_pos > 0) {list.Add(Bry_fmtr_itm.dat_(trg_bry, trg_pos)); trg_pos = 0;}
-			itms = (Bry_fmtr_itm[])list.Xto_ary(Bry_fmtr_itm.class);
+			itms = (Bry_fmtr_itm[])list.To_ary(Bry_fmtr_itm.class);
 			itms_len = itms.length;
 			return this;
 		}
 	}
-	int Compile_eval_cmd(byte[] fmt, int fmt_len, int eval_lhs_bgn, ListAdp list) {
-		int eval_lhs_end = Bry_finder.Find_fwd(fmt, char_eval_end, eval_lhs_bgn + Int_.Const_dlm_len, fmt_len); if (eval_lhs_end == Bry_.NotFound) throw Err_mgr._.fmt_(GRP_KEY, "eval_lhs_end_invalid", "could not find eval_lhs_end: ~{0}", String_.new_utf8_(fmt, eval_lhs_bgn, fmt_len));
+	int Compile_eval_cmd(byte[] fmt, int fmt_len, int eval_lhs_bgn, List_adp list) {
+		int eval_lhs_end = Bry_finder.Find_fwd(fmt, char_eval_end, eval_lhs_bgn + Int_.Const_dlm_len, fmt_len); if (eval_lhs_end == Bry_.NotFound) throw Err_mgr._.fmt_(GRP_KEY, "eval_lhs_end_invalid", "could not find eval_lhs_end: ~{0}", String_.new_u8(fmt, eval_lhs_bgn, fmt_len));
 		byte[] eval_dlm = Bry_.Mid(fmt, eval_lhs_bgn		, eval_lhs_end + Int_.Const_dlm_len);
-		int eval_rhs_bgn = Bry_finder.Find_fwd(fmt, eval_dlm		, eval_lhs_end + Int_.Const_dlm_len, fmt_len); if (eval_rhs_bgn == Bry_.NotFound) throw Err_mgr._.fmt_(GRP_KEY, "eval_rhs_bgn_invalid", "could not find eval_rhs_bgn: ~{0}", String_.new_utf8_(fmt, eval_lhs_end, fmt_len));
+		int eval_rhs_bgn = Bry_finder.Find_fwd(fmt, eval_dlm		, eval_lhs_end + Int_.Const_dlm_len, fmt_len); if (eval_rhs_bgn == Bry_.NotFound) throw Err_mgr._.fmt_(GRP_KEY, "eval_rhs_bgn_invalid", "could not find eval_rhs_bgn: ~{0}", String_.new_u8(fmt, eval_lhs_end, fmt_len));
 		byte[] eval_cmd = Bry_.Mid(fmt, eval_lhs_end + Int_.Const_dlm_len, eval_rhs_bgn);
 		byte[] eval_rslt = eval_mgr.Eval(eval_cmd);
 		int eval_rhs_end = eval_rhs_bgn + Int_.Const_dlm_len + eval_dlm.length;

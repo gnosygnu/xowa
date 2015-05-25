@@ -30,7 +30,7 @@ public class StringTableBldr {
 		return this;
 	}
 	public StringTableCol FetchAtOrNew(int i) {
-		if (i < cols.Count()) return StringTableCol.as_(cols.FetchAt(i));
+		if (i < cols.Count()) return StringTableCol.as_(cols.Get_at(i));
 		StringTableCol col = StringTableCol.new_();
 		col.Halign_(defaultHalign);
 		cols.Add(i, col);
@@ -39,10 +39,10 @@ public class StringTableBldr {
 	public String XtoStr() {
 		sb.Clear();
 		for (int rowI = 0; rowI < rows.Count(); rowI++) {
-			String[] row = (String[])rows.FetchAt(rowI);
+			String[] row = (String[])rows.Get_at(rowI);
 			for (int colI = 0; colI < row.length; colI++) {
 				if (colI != 0) sb.Add(" ");
-				StringTableCol col = StringTableCol.as_(cols.FetchAt(colI)); if (col == null) throw Err_.missing_idx_(colI, cols.Count());
+				StringTableCol col = StringTableCol.as_(cols.Get_at(colI)); if (col == null) throw Err_.missing_idx_(colI, cols.Count());
 				sb.Add(col.PadCell(row[colI]));
 			}
 			sb.Add(String_.CrLf);
@@ -51,7 +51,7 @@ public class StringTableBldr {
 	}
 	
 	public static StringTableBldr new_() {return new StringTableBldr();} StringTableBldr() {}
-	OrderedHash cols = OrderedHash_.new_();
-	ListAdp rows = ListAdp_.new_();
+	Ordered_hash cols = Ordered_hash_.new_();
+	List_adp rows = List_adp_.new_();
 	String_bldr sb = String_bldr_.new_();
 }

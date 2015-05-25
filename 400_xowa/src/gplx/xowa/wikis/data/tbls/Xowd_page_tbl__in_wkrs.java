@@ -19,9 +19,9 @@ package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gpl
 import gplx.core.criterias.*;
 import gplx.dbs.*; import gplx.dbs.utls.*;
 class Xowd_page_tbl__ttl_ns extends Xowd_page_tbl__in_wkr__base {
-	private Xow_ns_mgr ns_mgr; private OrderedHash hash;
+	private Xow_ns_mgr ns_mgr; private Ordered_hash hash;
 	@Override protected int Interval() {return 64;}	// NOTE: 96+ overflows; PAGE:en.w:Space_Liability_Convention; DATE:2013-10-24
-	public void Init(Xow_ns_mgr ns_mgr, OrderedHash hash) {this.ns_mgr = ns_mgr; this.hash = hash;}
+	public void Init(Xow_ns_mgr ns_mgr, Ordered_hash hash) {this.ns_mgr = ns_mgr; this.hash = hash;}
 	@Override protected Criteria In_filter(Object[] part_ary) {
 		int len = part_ary.length;
 		Criteria[] crt_ary = new Criteria[len];
@@ -32,7 +32,7 @@ class Xowd_page_tbl__ttl_ns extends Xowd_page_tbl__in_wkr__base {
 	}
 	@Override protected void Fill_stmt(Db_stmt stmt, int bgn, int end) {
 		for (int i = bgn; i < end; i++) {
-			Xowd_page_itm page = (Xowd_page_itm)hash.FetchAt(i);
+			Xowd_page_itm page = (Xowd_page_itm)hash.Get_at(i);
 			stmt.Val_int(page.Ns_id());
 			stmt.Val_bry_as_str(page.Ttl_page_db());
 		}
@@ -42,13 +42,13 @@ class Xowd_page_tbl__ttl_ns extends Xowd_page_tbl__in_wkr__base {
 		if (ns == null) return null;	// NOTE: ns seems to "randomly" be null when threading during redlinks; guard against null; DATE:2014-01-03
 		byte[] ttl_wo_ns = rdr_page.Ttl_page_db();
 		rdr_page.Ttl_(ns, ttl_wo_ns);
-		return (Xowd_page_itm)hash.Fetch(rdr_page.Ttl_full_db());
+		return (Xowd_page_itm)hash.Get_by(rdr_page.Ttl_full_db());
 	}
 }
 class Xowd_page_tbl__ttl extends Xowd_page_tbl__in_wkr__base {
-	private OrderedHash hash; private int in_ns;
+	private Ordered_hash hash; private int in_ns;
 	@Override protected int Interval() {return 64;}	// NOTE: 96+ overflows; EX: w:Space_Liability_Convention; DATE:2013-10-24
-	public void Init(OrderedHash hash, int in_ns) {this.hash = hash; this.in_ns = in_ns;}
+	public void Init(Ordered_hash hash, int in_ns) {this.hash = hash; this.in_ns = in_ns;}
 	@Override protected Criteria In_filter(Object[] part_ary) {
 		int len = part_ary.length;
 		Criteria[] crt_ary = new Criteria[len];
@@ -59,28 +59,28 @@ class Xowd_page_tbl__ttl extends Xowd_page_tbl__in_wkr__base {
 	}
 	@Override protected void Fill_stmt(Db_stmt stmt, int bgn, int end) {
 		for (int i = bgn; i < end; i++) {
-			Xowd_page_itm page = (Xowd_page_itm)hash.FetchAt(i);
+			Xowd_page_itm page = (Xowd_page_itm)hash.Get_at(i);
 			stmt.Val_int(in_ns);
 			stmt.Val_bry_as_str(page.Ttl_page_db());
 		}
 	}
-	@Override public Xowd_page_itm Read_data_to_page(Xowd_page_itm rdr_page) {return (Xowd_page_itm)hash.Fetch(rdr_page.Ttl_page_db());}
+	@Override public Xowd_page_itm Read_data_to_page(Xowd_page_itm rdr_page) {return (Xowd_page_itm)hash.Get_by(rdr_page.Ttl_page_db());}
 }
 class Xowd_page_tbl__id extends Xowd_page_tbl__in_wkr__base {
-	private ListAdp list;		// list is original list of ids which may have dupes; needed to fill statement (which takes range of bgn - end); DATE:2013-12-08
-	private OrderedHash hash;	// hash is unique list of ids; needed for fetch from rdr (which indexes by id)
-	public void Init(ListAdp list, OrderedHash hash) {this.list = list; this.hash = hash; this.Fill_idx_fields_only_(true);}
+	private List_adp list;		// list is original list of ids which may have dupes; needed to fill statement (which takes range of bgn - end); DATE:2013-12-08
+	private Ordered_hash hash;	// hash is unique list of ids; needed for fetch from rdr (which indexes by id)
+	public void Init(List_adp list, Ordered_hash hash) {this.list = list; this.hash = hash; this.Fill_idx_fields_only_(true);}
 	@Override protected boolean		Show_progress() {return true;}
 	@Override protected Criteria In_filter(Object[] part_ary) {
 		return Db_crt_.in_(this.In_fld_name(), part_ary);
 	}
 	@Override protected void Fill_stmt(Db_stmt stmt, int bgn, int end) {
 		for (int i = bgn; i < end; i++) {
-			Xowd_page_itm page = (Xowd_page_itm)list.FetchAt(i);
+			Xowd_page_itm page = (Xowd_page_itm)list.Get_at(i);
 			stmt.Val_int(page.Id());		
 		}
 	}
-	@Override public Xowd_page_itm Read_data_to_page(Xowd_page_itm rdr_page) {return (Xowd_page_itm)hash.Fetch(rdr_page.Id_val());}
+	@Override public Xowd_page_itm Read_data_to_page(Xowd_page_itm rdr_page) {return (Xowd_page_itm)hash.Get_by(rdr_page.Id_val());}
 }
 abstract class Xowd_page_tbl__in_wkr__base extends Db_in_wkr__base {
 	protected Xowd_page_tbl tbl; private String tbl_name, fld_in_name;

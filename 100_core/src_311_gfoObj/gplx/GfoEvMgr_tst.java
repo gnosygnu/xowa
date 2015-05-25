@@ -60,9 +60,9 @@ class MockEvObj implements GfoEvObj {
 		handled.Add(m.ReadStr("v"));
 		return this;
 	}
-	ListAdp handled = ListAdp_.new_();
+	List_adp handled = List_adp_.new_();
 	public void tst_Handled(String... expd) {
-		Tfds.Eq_ary_str(expd, handled.XtoStrAry());
+		Tfds.Eq_ary_str(expd, handled.To_str_ary());
 		handled.Clear();
 	}
 	public MockEvObj(){eventMgr = GfoEvMgr.new_(this);}

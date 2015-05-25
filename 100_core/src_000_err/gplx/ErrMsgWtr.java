@@ -56,7 +56,7 @@ public class ErrMsgWtr {
 		sb.Add("\t").Add(err.Proc().SignatureRaw()).Add_char_crlf();
 //			WriteKeyValAry(sb, err.ProcArgs());
 	}
-	void WriteKeyValAry(String_bldr sb, ListAdp ary) {
+	void WriteKeyValAry(String_bldr sb, List_adp ary) {
 		// calc keyMax for valIndentLen
 		int keyMax = 0;
 		for (Object o : ary) {
@@ -78,10 +78,10 @@ public class ErrMsgWtr {
 		Err first = errAry[0];
 		boolean onlyOne = len == 1;
 		sb.Add_str_w_crlf(String_.Repeat("-", 80));
-		ListAdp tmp = ListAdp_.new_();
-		OrderedHash callStack = first.CallStack(); int callStackCount = callStack.Count();
+		List_adp tmp = List_adp_.new_();
+		Ordered_hash callStack = first.CallStack(); int callStackCount = callStack.Count();
 		for (int i = 0; i < callStackCount ; i++) {
-			ErrProcData proc = (ErrProcData)callStack.FetchAt(i);
+			ErrProcData proc = (ErrProcData)callStack.Get_at(i);
 			// get procIndex
 			int idx = -1;
 			for (int j = 0; j < len; j++) {
@@ -100,13 +100,13 @@ public class ErrMsgWtr {
 			sb.Add_str_w_crlf((String)o);
 	}
 	static Err[] InnerAsAry(Err err) {
-		ListAdp errAry = ListAdp_.new_();
+		List_adp errAry = List_adp_.new_();
 		Err cur = Err_.as_(err);
 		while (cur != null) {
 			errAry.Add(cur);
 			cur = cur.Inner();
 		}
-		return (Err[])errAry.Xto_ary(Err.class);
+		return (Err[])errAry.To_ary(Err.class);
 	}
 	public static final ErrMsgWtr _ = new ErrMsgWtr(); ErrMsgWtr() {}
 }

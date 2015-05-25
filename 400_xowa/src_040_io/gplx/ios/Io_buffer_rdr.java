@@ -22,7 +22,7 @@ public class Io_buffer_rdr implements RlsAble {	//_20120115
 		if (bfr_len <= 0) throw Err_.new_("bfr_len must be > 0").Add("bfr_len", bfr_len);
 		bfr = new byte[bfr_len]; this.bfr_len = bfr_len;
 		this.rdr = rdr;
-		IoItmFil fil = Io_mgr._.QueryFil(url); if (!fil.Exists()) throw Err_.new_("fil does not exist").Add("url", url);
+		IoItmFil fil = Io_mgr.I.QueryFil(url); if (!fil.Exists()) throw Err_.new_("fil does not exist").Add("url", url);
 		fil_len = fil.Size();
 		fil_pos = 0;
 		fil_eof = false;
@@ -58,8 +58,8 @@ public class Io_buffer_rdr implements RlsAble {	//_20120115
 		if (rdr != null) rdr.Rls();
 	}
 	@gplx.Internal protected void DumpToFil(int bgn, int len, String urlStr, String msg) {
-		String text = String_.new_utf8_len_safe_(bfr, bgn, len);
-		Io_mgr._.AppendFilStr(Io_url_.new_any_(urlStr), msg + text + "\n");
+		String text = String_.new_u8_by_len(bfr, bgn, len);
+		Io_mgr.I.AppendFilStr(Io_url_.new_any_(urlStr), msg + text + "\n");
 	}
 	public static Io_buffer_rdr new_(Io_stream_rdr rdr, int bfr_len) {
 		Io_buffer_rdr rv = new Io_buffer_rdr(rdr, rdr.Url(), bfr_len);

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.wikis.domains.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
 import gplx.xowa.langs.*;
 public class Xow_wiki_abrv_ {
@@ -29,22 +30,22 @@ public class Xow_wiki_abrv_ {
 		return true;
 	}
 	public static final byte 
-	  Tid_null						= Xow_domain_.Tid_int_other
-	, Tid_wikipedia					= Xow_domain_.Tid_int_wikipedia
-	, Tid_wiktionary				= Xow_domain_.Tid_int_wiktionary
-	, Tid_wikisource				= Xow_domain_.Tid_int_wikisource
-	, Tid_wikibooks					= Xow_domain_.Tid_int_wikibooks
-	, Tid_wikiversity				= Xow_domain_.Tid_int_wikiversity
-	, Tid_wikiquote					= Xow_domain_.Tid_int_wikiquote
-	, Tid_wikinews					= Xow_domain_.Tid_int_wikinews
-	, Tid_wikivoyage				= Xow_domain_.Tid_int_wikivoyage
-	, Tid_commons					= Xow_domain_.Tid_int_commons
-	, Tid_species					= Xow_domain_.Tid_int_species
-	, Tid_meta						= Xow_domain_.Tid_int_meta
-	, Tid_incubator					= Xow_domain_.Tid_int_incubator
-	, Tid_wikidata					= Xow_domain_.Tid_int_wikidata
-	, Tid_mediawiki					= Xow_domain_.Tid_int_mediawiki
-	, Tid_wikimediafoundation		= Xow_domain_.Tid_int_wikimediafoundation
+	  Tid_null						= Xow_domain_type_.Tid_other
+	, Tid_wikipedia					= Xow_domain_type_.Tid_wikipedia
+	, Tid_wiktionary				= Xow_domain_type_.Tid_wiktionary
+	, Tid_wikisource				= Xow_domain_type_.Tid_wikisource
+	, Tid_wikibooks					= Xow_domain_type_.Tid_wikibooks
+	, Tid_wikiversity				= Xow_domain_type_.Tid_wikiversity
+	, Tid_wikiquote					= Xow_domain_type_.Tid_wikiquote
+	, Tid_wikinews					= Xow_domain_type_.Tid_wikinews
+	, Tid_wikivoyage				= Xow_domain_type_.Tid_wikivoyage
+	, Tid_commons					= Xow_domain_type_.Tid_commons
+	, Tid_species					= Xow_domain_type_.Tid_species
+	, Tid_meta						= Xow_domain_type_.Tid_meta
+	, Tid_incubator					= Xow_domain_type_.Tid_incubator
+	, Tid_wikidata					= Xow_domain_type_.Tid_wikidata
+	, Tid_mediawiki					= Xow_domain_type_.Tid_mediawiki
+	, Tid_wmforg		= Xow_domain_type_.Tid_wmforg
 	;
 	private static final Btrie_bwd_mgr trie = Init_trie();
 	private static Btrie_bwd_mgr Init_trie() {
@@ -63,7 +64,7 @@ public class Xow_wiki_abrv_ {
 		Init_trie_itm(rv, "incubatorwiki"			, Tid_incubator);
 		Init_trie_itm(rv, "wikidatawiki"			, Tid_wikidata);
 		Init_trie_itm(rv, "mediawikiwiki"			, Tid_mediawiki);
-		Init_trie_itm(rv, "foundationwiki"			, Tid_wikimediafoundation);
+		Init_trie_itm(rv, "foundationwiki"			, Tid_wmforg);
 		return rv;
 	}
 	private static void Init_trie_itm(Btrie_bwd_mgr rv, String abrv_name, byte abrv_tid) {

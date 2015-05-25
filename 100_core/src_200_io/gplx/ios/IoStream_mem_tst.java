@@ -19,7 +19,7 @@ package gplx.ios; import gplx.*;
 import org.junit.*; //using System.IO; /*Stream*/
 public class IoStream_mem_tst {
 	@Test  public void Write() { // confirm that changes written to Stream acquired via .AdpObj are written to IoStream_mem.Buffer
-		IoStream_mem stream = IoStream_mem.wtr_data_(Io_url_.Null, 0);
+		IoStream_mem stream = IoStream_mem.wtr_data_(Io_url_.Empty, 0);
 		byte[] data = Bry_.ints_(1);
 		stream.Write(data, 0, Array_.Len(data));
 

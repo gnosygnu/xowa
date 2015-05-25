@@ -29,8 +29,8 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	public static void Eq_date(DateAdp expd, DateAdp actl)									{Eq_wkr(expd.XtoStr_gplx(), actl.XtoStr_gplx(), true, EmptyStr);}
 	public static void Eq_date(DateAdp expd, DateAdp actl, String fmt, Object... args){Eq_wkr(expd.XtoStr_gplx(), actl.XtoStr_gplx(), true, String_.Format(fmt, args));}
 	public static void Eq_url(Io_url expd, Io_url actl)										{Eq_wkr(expd.Raw(), actl.Raw(), true, EmptyStr);}
-	public static void Eq_bry(String expd, byte[] actl)										{Eq_wkr(expd, String_.new_utf8_(actl), true, EmptyStr);}
-	public static void Eq_bry(byte[] expd, byte[] actl)										{Eq_wkr(String_.new_utf8_(expd), String_.new_utf8_(actl), true, EmptyStr);}
+	public static void Eq_bry(String expd, byte[] actl)										{Eq_wkr(expd, String_.new_u8(actl), true, EmptyStr);}
+	public static void Eq_bry(byte[] expd, byte[] actl)										{Eq_wkr(String_.new_u8(expd), String_.new_u8(actl), true, EmptyStr);}
 	public static void Eq_str(XtoStrAble expd, XtoStrAble actl, String msg)					{Eq_wkr(expd.XtoStr(), actl.XtoStr(), true, msg);}
 	public static void Eq_str(XtoStrAble expd, XtoStrAble actl)								{Eq_wkr(expd.XtoStr(), actl.XtoStr(), true, String_.Empty);}
 	public static void Eq_str_lines(String lhs, String rhs)									{Eq_str_lines(lhs, rhs, EmptyStr);}
@@ -57,8 +57,8 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	public static void Eq_ary(Object lhs, Object rhs, String fmt, Object... args){Eq_ary_wkr(lhs, rhs, true, String_.Format(fmt, args));}	
 	public static void Eq_ary_str(Object lhs, Object rhs, String note)			{Eq_ary_wkr(lhs, rhs, false, note);}					
 	public static void Eq_ary_str(Object lhs, Object rhs)						{Eq_ary_wkr(lhs, rhs, false, EmptyStr);}					
-	public static void Eq_list(ListAdp lhs, ListAdp rhs)									{Eq_list_wkr(lhs, rhs, TfdsEqListItmStr_cls_default._, EmptyStr);}
-	public static void Eq_list(ListAdp lhs, ListAdp rhs, TfdsEqListItmStr xtoStr)			{Eq_list_wkr(lhs, rhs, xtoStr, EmptyStr);}
+	public static void Eq_list(List_adp lhs, List_adp rhs)									{Eq_list_wkr(lhs, rhs, TfdsEqListItmStr_cls_default._, EmptyStr);}
+	public static void Eq_list(List_adp lhs, List_adp rhs, TfdsEqListItmStr xtoStr)			{Eq_list_wkr(lhs, rhs, xtoStr, EmptyStr);}
 	static void Eq_able_wkr(EqAble lhs, EqAble rhs, boolean expd, String customMsg) {
 		boolean actl = false;
 		if		(lhs == null && rhs != null) actl = false;
@@ -75,11 +75,11 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 		throw Err_.new_(msg);
 	}
 	static void Eq_ary_wkr(Object lhsAry, Object rhsAry, boolean compareUsingEquals, String customMsg) {
-		ListAdp list = ListAdp_.new_(); boolean pass = true;
+		List_adp list = List_adp_.new_(); boolean pass = true;
 		int lhsLen = Array_.Len(lhsAry), rhsLen = Array_.Len(rhsAry);
 		for (int i = 0; i < lhsLen; i++) {
-			Object lhs = Array_.FetchAt(lhsAry, i);
-			Object rhs = i >= rhsLen ? "<<N/A>>" : Array_.FetchAt(rhsAry, i);
+			Object lhs = Array_.Get_at(lhsAry, i);
+			Object rhs = i >= rhsLen ? "<<N/A>>" : Array_.Get_at(rhsAry, i);
 			String lhsString = msgBldr.Obj_xtoStr(lhs); String rhsString = msgBldr.Obj_xtoStr(rhs);	// even if compareUsingEquals, method does ToStr on each itm for failMsg
 			boolean isEq = compareUsingEquals
 				? Object_.Eq(lhs, rhs)
@@ -89,7 +89,7 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 		}
 		for (int i = lhsLen; i < rhsLen; i++) {
 			String lhsString = "<<N/A>>";
-			String rhsString = msgBldr.Obj_xtoStr(Array_.FetchAt(rhsAry, i));
+			String rhsString = msgBldr.Obj_xtoStr(Array_.Get_at(rhsAry, i));
 			Eq_ary_wkr_addItm(list, i, false, lhsString, rhsString);
 			pass = false;
 		}
@@ -97,12 +97,12 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 		String msg = msgBldr.Eq_ary_xtoStr(list, lhsLen, rhsLen, customMsg);
 		throw Err_.new_(msg);
 	}
-	static void Eq_list_wkr(ListAdp lhsList, ListAdp rhsList, TfdsEqListItmStr xtoStr, String customMsg) {
-		ListAdp list = ListAdp_.new_(); boolean pass = true;
+	static void Eq_list_wkr(List_adp lhsList, List_adp rhsList, TfdsEqListItmStr xtoStr, String customMsg) {
+		List_adp list = List_adp_.new_(); boolean pass = true;
 		int lhsLen = lhsList.Count(), rhsLen = rhsList.Count();
 		for (int i = 0; i < lhsLen; i++) {
-			Object lhs = lhsList.FetchAt(i);
-			Object rhs = i >= rhsLen ? null : rhsList.FetchAt(i);
+			Object lhs = lhsList.Get_at(i);
+			Object rhs = i >= rhsLen ? null : rhsList.Get_at(i);
 			String lhsStr = xtoStr.XtoStr(lhs, lhs);
 			String rhsStr = rhs == null ? "<<N/A>>" : xtoStr.XtoStr(rhs, lhs);
 			boolean isEq = Object_.Eq(lhsStr, rhsStr); if (!isEq) pass = false;
@@ -110,7 +110,7 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 		}
 		for (int i = lhsLen; i < rhsLen; i++) {
 			String lhsStr = "<<N/A>>";
-			Object rhs = rhsList.FetchAt(i);
+			Object rhs = rhsList.Get_at(i);
 			String rhsStr = xtoStr.XtoStr(rhs, null);
 			Eq_ary_wkr_addItm(list, i, false, lhsStr, rhsStr);
 			pass = false;
@@ -119,7 +119,7 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 		String msg = msgBldr.Eq_ary_xtoStr(list, lhsLen, rhsLen, customMsg);
 		throw Err_.new_(msg);
 	}
-	static void Eq_ary_wkr_addItm(ListAdp list, int i, boolean isEq, String lhsString, String rhsString) {
+	static void Eq_ary_wkr_addItm(List_adp list, int i, boolean isEq, String lhsString, String rhsString) {
 		TfdsEqAryItm itm = new TfdsEqAryItm().Idx_(i).Eq_(isEq).Lhs_(lhsString).Rhs_(rhsString);
 		list.Add(itm);
 	}
@@ -160,7 +160,7 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	private static final DateAdp time0 = DateAdp_.parse_gplx("2001-01-01 00:00:00.000");
 	private static DateAdp nowTime; // NOTE: cannot set to time0 due to static initialization;
 	public static void WriteText(String text) {ConsoleAdp._.WriteText(text);}
-	public static void Write_bry(byte[] ary) {Write(String_.new_utf8_(ary));}
+	public static void Write_bry(byte[] ary) {Write(String_.new_u8(ary));}
 	public static void Write() {Write("tmp");}
 	public static void Write(Object... ary) {
 		String_bldr sb = String_bldr_.new_();
@@ -192,20 +192,20 @@ class TfdsMsgBldr {
 			);
 		return WrapMsg(detail);
 	}
-	public String Eq_ary_xtoStr(ListAdp list, int lhsAryLen, int rhsAryLen, String customMsg) {
+	public String Eq_ary_xtoStr(List_adp list, int lhsAryLen, int rhsAryLen, String customMsg) {
 		String_bldr sb = String_bldr_.new_();
 		sb.Add(CustomMsg_xtoStr(customMsg));
 		if (lhsAryLen != rhsAryLen) 
 			sb.Add_fmt_line("{0}element counts differ: {1} {2}", "\t\t", lhsAryLen, rhsAryLen);
 		int lhsLenMax = 0, rhsLenMax = 0;
 		for (int i = 0; i < list.Count(); i++) {
-			TfdsEqAryItm itm = (TfdsEqAryItm)list.FetchAt(i);
+			TfdsEqAryItm itm = (TfdsEqAryItm)list.Get_at(i);
 			int lhsLen = String_.Len(itm.Lhs()), rhsLen = String_.Len(itm.Rhs());
 			if (lhsLen > lhsLenMax) lhsLenMax = lhsLen;
 			if (rhsLen > rhsLenMax) rhsLenMax = rhsLen;
 		}
 		for (int i = 0; i < list.Count(); i++) {
-			TfdsEqAryItm itm = (TfdsEqAryItm)list.FetchAt(i);
+			TfdsEqAryItm itm = (TfdsEqAryItm)list.Get_at(i);
 			sb.Add_fmt_line("{0}: {1} {2} {3}"
 				, Int_.Xto_str_pad_bgn_zero(itm.Idx(), 4)
 				, String_.PadBgn(itm.Lhs(), lhsLenMax, " ")

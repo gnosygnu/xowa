@@ -47,7 +47,7 @@ class Xol_cnv_mgr_fxt {
 	public Xop_fxt Parser_fxt() {return parser_fxt;} private Xop_fxt parser_fxt;
 	public void Clear() {
 		app = Xoa_app_fxt.app_();
-		Xol_lang lang = app.Lang_mgr().Get_by_key_or_new(Bry_.new_utf8_("zh"));
+		Xol_lang lang = app.Lang_mgr().Get_by_key_or_new(Bry_.new_u8("zh"));
 		Xol_lang_.Lang_init(lang);
 		Init_cnv(app, "zh", "zh-hant", KeyVal_.new_("x0", "x1"));
 		lang.Vnt_mgr().Enabled_(true);
@@ -56,21 +56,21 @@ class Xol_cnv_mgr_fxt {
 		parser_fxt = new Xop_fxt(app, wiki);
 	}
 	public static void Init_cnv(Xoae_app app, String lang_key, String vnt_key, KeyVal... ary) {
-		Xol_lang lang = app.Lang_mgr().Get_by_key_or_new(Bry_.new_ascii_(lang_key));
-		Xol_cnv_grp grp = lang.Cnv_mgr().Get_or_make(Bry_.new_ascii_(vnt_key));
+		Xol_lang lang = app.Lang_mgr().Get_by_key_or_new(Bry_.new_a7(lang_key));
+		Xol_cnv_grp grp = lang.Cnv_mgr().Get_or_make(Bry_.new_a7(vnt_key));
 		int ary_len = ary.length;
 		for (int i = 0; i < ary_len; i++) {
 			KeyVal itm = ary[i];
-			grp.Add(Bry_.new_utf8_(itm.Key()), Bry_.new_utf8_(itm.Val_to_str_or_empty()));
+			grp.Add(Bry_.new_u8(itm.Key()), Bry_.new_u8(itm.Val_to_str_or_empty()));
 		}
-		Xol_vnt_itm vnt_itm = lang.Vnt_mgr().Get_or_new(Bry_.new_ascii_(vnt_key));
+		Xol_vnt_itm vnt_itm = lang.Vnt_mgr().Get_or_new(Bry_.new_a7(vnt_key));
 		vnt_itm.Convert_ary_(Bry_.Ary(vnt_key));
 		vnt_itm.Converter().Rebuild();
 	}
 //		public void Test_convert(String lang, String vnt, String raw, String expd) {
-//			Xol_cnv_grp convert_grp = app.Lang_mgr().Get_by_key_or_new(Bry_.new_ascii_(lang)).Cnv_mgr().Get_or_new(Bry_.new_ascii_(vnt));
+//			Xol_cnv_grp convert_grp = app.Lang_mgr().Get_by_key_or_new(Bry_.new_a7(lang)).Cnv_mgr().Get_or_new(Bry_.new_a7(vnt));
 //			Bry_bfr bfr = Bry_bfr.new_();
-//			boolean converted = convert_grp.Convert_to_bfr(bfr, Bry_.new_utf8_(raw));
+//			boolean converted = convert_grp.Convert_to_bfr(bfr, Bry_.new_u8(raw));
 //			String actl = converted ? bfr.Xto_str_and_clear() : raw;
 //			Tfds.Eq(expd, actl);
 //		}
@@ -78,8 +78,8 @@ class Xol_cnv_mgr_fxt {
 		parser_fxt.Test_parse_page_all_str(raw, expd);
 	}
 	public void Test_convert_by_ttl(String lang_key, String raw, boolean expd) {
-		Xol_lang lang = app.Lang_mgr().Get_by_key_or_new(Bry_.new_ascii_(lang_key));
-		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_utf8_(raw));
+		Xol_lang lang = app.Lang_mgr().Get_by_key_or_new(Bry_.new_a7(lang_key));
+		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_u8(raw));
 		Xowd_page_itm page = lang.Vnt_mgr().Convert_ttl(wiki, ttl);
 		if (expd)
 			Tfds.Eq_true(page.Exists());

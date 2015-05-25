@@ -21,14 +21,14 @@ import gplx.dbs.*; import gplx.dbs.qrys.*;
 public class DbMaprWtr extends DataWtr_base implements DataWtr {
 	public void InitWtr(String key, Object val) {}
 	@Override public Object StoreRoot(SrlObj root, String key) {
-		mgr = (DbMaprMgr)this.EnvVars().FetchOrFail(DbMaprWtr.Key_Mgr);
+		mgr = (DbMaprMgr)this.EnvVars().Get_by_or_fail(DbMaprWtr.Key_Mgr);
 		DbMaprWtrUtl.PurgeObjTree(root, mgr, conn);
 		WriteGfoObj(root, mgr.Root());
 		mgr.Clear();
 		return null;
 	}
-	@Override public void SrlList(String subPropKey, ListAdp list, SrlObj subProto, String itmKey) {
-		DbMaprItm ownerMapr = (DbMaprItm)mgr.MaprStack().FetchAtLast();
+	@Override public void SrlList(String subPropKey, List_adp list, SrlObj subProto, String itmKey) {
+		DbMaprItm ownerMapr = (DbMaprItm)mgr.MaprStack().Get_at_last();
 		DbMaprItm subMapr = ownerMapr.Subs_get(subPropKey);
 
 		for (Object subObj : list) {
@@ -47,8 +47,8 @@ public class DbMaprWtr extends DataWtr_base implements DataWtr {
 	void WriteContextFlds() {
 		int maprStackCount = mgr.MaprStack().Count() - 1; // -1 b/c current is added to stack
 		for (int i = 0; i < maprStackCount; i ++) {
-			DbMaprItm mapr = (DbMaprItm)mgr.MaprStack().FetchAt(i);
-			SrlObj gobj = (SrlObj)mgr.OwnerStack().FetchAt(i);
+			DbMaprItm mapr = (DbMaprItm)mgr.MaprStack().Get_at(i);
+			SrlObj gobj = (SrlObj)mgr.OwnerStack().Get_at(i);
 			for (Object argObj : mapr.ContextFlds()) {
 				DbMaprArg arg = (DbMaprArg)argObj;
 				Object argVal = GfoInvkAble_.InvkCmd((GfoInvkAble)gobj, arg.ObjProp());
@@ -62,7 +62,7 @@ public class DbMaprWtr extends DataWtr_base implements DataWtr {
 		insertCmd = null;
 	}
 	@Override public void WriteData(String name, Object val) {
-		DbMaprItm ownerMapr = (DbMaprItm)mgr.MaprStack().FetchAtLast();
+		DbMaprItm ownerMapr = (DbMaprItm)mgr.MaprStack().Get_at_last();
 		String fld = ""; try {fld = ownerMapr.Flds_get(name).DbFld();} catch (Exception exc) {throw Err_.err_(exc, "failed to fetch fld from mapr").Add("key", name);}
 		WriteDataVal(fld, val);
 	}

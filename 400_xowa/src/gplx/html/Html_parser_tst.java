@@ -34,8 +34,8 @@ class Xoh_parser_fxt {
 	}	private Html_parser parser;
 	public Xoh_parser_fxt Test_parse_find_all(String raw_str, String... expd) {return Test_parse_find(raw_str, Html_parser.Wildcard_str, Html_parser.Wildcard_str, expd);}
 	public Xoh_parser_fxt Test_parse_find(String raw_str, String find_key, String find_val, String... expd) {
-		byte[] raw = Bry_.new_ascii_(raw_str);
-		Html_nde[] actl_ndes = parser.Parse_as_ary(raw, 0, raw.length, Bry_.new_ascii_(find_key), Bry_.new_ascii_(find_val));
+		byte[] raw = Bry_.new_a7(raw_str);
+		Html_nde[] actl_ndes = parser.Parse_as_ary(raw, 0, raw.length, Bry_.new_a7(find_key), Bry_.new_a7(find_val));
 		String[] actl = Xto_ids(raw, actl_ndes);
 		Tfds.Eq_ary_str(expd, actl);
 		return this;

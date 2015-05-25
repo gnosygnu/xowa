@@ -41,5 +41,5 @@ public class GxwCore_mock extends GxwCore_base {
 	@Override public void Invalidate() {} @Override public void Dispose() {}
 
 	public void SendKey(IptKey key) {}
-	ListAdp list = ListAdp_.new_();
+	List_adp list = List_adp_.new_();
 }

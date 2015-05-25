@@ -36,7 +36,7 @@ public class HashAlgo_sha1_tst {
 		tst_CalcBase16FromString(String_.Repeat("a", 1000000), "34aa973cd4c4daa4f61eeb2bdbad27316534016f");
 	}
 	void tst_CalcBase16FromString(String raw, String expd) {
-		IoStream stream = IoStream_.mem_txt_(Io_url_.Null, raw);
+		IoStream stream = IoStream_.mem_txt_(Io_url_.Empty, raw);
 		String actl = HashAlgo_.Sha1.CalcHash(ConsoleDlg_.Null, stream);
 		Tfds.Eq(expd, actl);
 	}

@@ -74,7 +74,7 @@ public class Xol_grammar_fi implements Xol_grammar {
 		}
 		return true;
 	}	static Xol_grammar_manual_regy manual_regy;
-	private static final byte[] Bry_sta_y = Bry_.new_ascii_("sta"), Bry_sta_n = Bry_.new_utf8_("stä"), Bry_a_y = Bry_.new_ascii_("a"), Bry_a_n = Bry_.new_utf8_("ä"), Bry_ssa_y = Bry_.new_ascii_("ssa"), Bry_ssa_n = Bry_.new_utf8_("ssä");
+	private static final byte[] Bry_sta_y = Bry_.new_a7("sta"), Bry_sta_n = Bry_.new_u8("stä"), Bry_a_y = Bry_.new_a7("a"), Bry_a_n = Bry_.new_u8("ä"), Bry_ssa_y = Bry_.new_a7("ssa"), Bry_ssa_n = Bry_.new_u8("ssä");
 	static final byte Trie_vh_back = 0, Trie_vh_front = 1;
 	private static Btrie_slim_mgr trie_vh = Btrie_slim_mgr.cs_().Add_str_byte__many(Trie_vh_back, "a", "o", "u").Add_str_byte__many(Trie_vh_front, "ä", "ö", "y");
 }

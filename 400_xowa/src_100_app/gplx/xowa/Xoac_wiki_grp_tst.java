@@ -40,7 +40,7 @@ public class Xoac_wiki_grp_tst {
 	}
 }
 class Xoac_wiki_grp_fxt {
-	Xoa_wiki_mgr wiki_mgr; Tst_mgr tst_mgr = new Tst_mgr();
+	Xoae_wiki_mgr wiki_mgr; Tst_mgr tst_mgr = new Tst_mgr();
 	public void Clear() {
 		Xoae_app app = Xoa_app_fxt.app_();
 		wiki_mgr = app.Wiki_mgr();			
@@ -48,11 +48,11 @@ class Xoac_wiki_grp_fxt {
 	public Xoac_wiki_itm_chkr itm_(String key) {return new Xoac_wiki_itm_chkr(key);}
 	public Xoac_wiki_grp_chkr grp_(String key) {return new Xoac_wiki_grp_chkr(key);}
 	public Xoac_wiki_grp_fxt Define_bulk(String raw, Xoac_wiki_grp_chkr... expd) {
-		wiki_mgr.Groups().Set_bulk(Bry_.new_utf8_(raw));
-		tst_mgr.Tst_ary("", expd, Xto_ary(wiki_mgr.Groups()));
+		wiki_mgr.Groups().Set_bulk(Bry_.new_u8(raw));
+		tst_mgr.Tst_ary("", expd, To_ary(wiki_mgr.Groups()));
 		return this;
 	}
-	Xoac_wiki_grp[] Xto_ary(Cfg_nde_root root) {
+	Xoac_wiki_grp[] To_ary(Cfg_nde_root root) {
 		int len = root.Root_len();
 		Xoac_wiki_grp[] rv = new Xoac_wiki_grp[len];
 		for (int i = 0; i < len; i++) {
@@ -70,7 +70,7 @@ class Xoac_wiki_itm_chkr implements Xoac_wiki_chkr_obj {
 	public int Chk(Tst_mgr mgr, String path, Object actl_obj) {
 		Xoac_wiki_itm actl = (Xoac_wiki_itm)actl_obj;
 		int rv = 0;
-		rv += mgr.Tst_val(key == null, path, "key", key, String_.new_utf8_(actl.Key_bry()));
+		rv += mgr.Tst_val(key == null, path, "key", key, String_.new_u8(actl.Key_bry()));
 		rv += mgr.Tst_val(aliases == null, path, "aliases", String_.AryXtoStr(aliases), String_.AryXtoStr(String_.Ary(actl.Aliases())));
 		return rv;
 	}
@@ -84,12 +84,12 @@ class Xoac_wiki_grp_chkr implements Xoac_wiki_chkr_obj {
 	public int Chk(Tst_mgr mgr, String path, Object actl_obj) {
 		Xoac_wiki_grp actl = (Xoac_wiki_grp)actl_obj;
 		int rv = 0;
-		rv += mgr.Tst_val(key == null, path, "key", key, String_.new_utf8_(actl.Key_bry()));
-		rv += mgr.Tst_val(name == null, path, "name", name, String_.new_utf8_(actl.Name_bry()));
-		rv += mgr.Tst_sub_ary(itms, Xto_ary(actl), path, rv);
+		rv += mgr.Tst_val(key == null, path, "key", key, String_.new_u8(actl.Key_bry()));
+		rv += mgr.Tst_val(name == null, path, "name", name, String_.new_u8(actl.Name_bry()));
+		rv += mgr.Tst_sub_ary(itms, To_ary(actl), path, rv);
 		return rv;
 	}
-	Xoac_wiki_obj[] Xto_ary(Xoac_wiki_grp grp) {
+	Xoac_wiki_obj[] To_ary(Xoac_wiki_grp grp) {
 		int len = grp.Itms_len();
 		Xoac_wiki_obj[] rv = new Xoac_wiki_obj[len];
 		for (int i = 0; i < len; i++)

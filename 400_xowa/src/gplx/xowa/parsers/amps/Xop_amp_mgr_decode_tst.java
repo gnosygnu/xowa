@@ -39,6 +39,6 @@ class Xop_amp_mgr_fxt {
 	private Xop_amp_mgr amp_mgr = new Xop_amp_mgr();
 	public void Reset() {}
 	public void Test_decode_as_bry(String raw, String expd) {
-		Tfds.Eq(expd, String_.new_utf8_(amp_mgr.Decode_as_bry(Bry_.new_utf8_(raw))));
+		Tfds.Eq(expd, String_.new_u8(amp_mgr.Decode_as_bry(Bry_.new_u8(raw))));
 	}
 }

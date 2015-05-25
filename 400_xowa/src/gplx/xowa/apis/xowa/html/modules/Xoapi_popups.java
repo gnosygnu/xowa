@@ -82,7 +82,7 @@ public class Xoapi_popups implements GfoInvkAble, GfoEvMgrOwner {
 		else if	(ctx.Match(k, Invk_win_show_all_max_w_))	 		{win_show_all_max_w = m.ReadInt("v");}
 		else if	(ctx.Match(k, Invk_win_bind_focus_blur))		 	return Yn.Xto_str(win_bind_focus_blur);
 		else if	(ctx.Match(k, Invk_win_bind_focus_blur_))	 		win_bind_focus_blur = m.ReadYn("v");
-		else if	(ctx.Match(k, Invk_xnde_ignore_ids))	 			return String_.new_utf8_(xnde_ignore_ids);
+		else if	(ctx.Match(k, Invk_xnde_ignore_ids))	 			return String_.new_u8(xnde_ignore_ids);
 		else if	(ctx.Match(k, Invk_xnde_ignore_ids_))	 			{xnde_ignore_ids = m.ReadBry("v"); GfoEvMgr_.PubVal(this, Evt_xnde_ignore_ids_changed, xnde_ignore_ids);}
 		else if	(ctx.Match(k, Invk_scan_len))	 					return scan_len;
 		else if	(ctx.Match(k, Invk_scan_len_))	 					{scan_len = Set_int_gt_0(m, scan_len, Evt_scan_len_changed);}
@@ -94,27 +94,27 @@ public class Xoapi_popups implements GfoInvkAble, GfoEvMgrOwner {
 		else if	(ctx.Match(k, Invk_read_til_stop_bwd_))	 			{read_til_stop_bwd = m.ReadInt("v"); GfoEvMgr_.PubVal(this, Evt_read_til_stop_bwd_changed, read_til_stop_bwd);}
 		else if	(ctx.Match(k, Invk_stop_if_hdr_after))	 			return stop_if_hdr_after;
 		else if	(ctx.Match(k, Invk_stop_if_hdr_after_))	 			{stop_if_hdr_after = m.ReadInt("v"); GfoEvMgr_.PubVal(this, Evt_stop_if_hdr_after_changed, stop_if_hdr_after);}
-		else if	(ctx.Match(k, Invk_ns_allowed))	 					return String_.new_utf8_(ns_allowed);
+		else if	(ctx.Match(k, Invk_ns_allowed))	 					return String_.new_u8(ns_allowed);
 		else if	(ctx.Match(k, Invk_ns_allowed_))	 				{ns_allowed = m.ReadBry("v"); GfoEvMgr_.PubVal(this, Evt_ns_allowed_changed, ns_allowed);}
 		else if	(ctx.Match(k, Invk_tmpl_tkn_max))	 				return tmpl_tkn_max;
 		else if	(ctx.Match(k, Invk_tmpl_tkn_max_))	 				{tmpl_tkn_max = m.ReadInt("v"); GfoEvMgr_.PubVal(this, Evt_tmpl_tkn_max_changed, tmpl_tkn_max);}
-		else if	(ctx.Match(k, Invk_tmpl_keeplist))	 				return String_.new_utf8_(tmpl_keeplist);
+		else if	(ctx.Match(k, Invk_tmpl_keeplist))	 				return String_.new_u8(tmpl_keeplist);
 		else if	(ctx.Match(k, Invk_tmpl_keeplist_))	 				{tmpl_keeplist = m.ReadBry("v"); GfoEvMgr_.PubVal(this, Evt_tmpl_keeplist_changed, tmpl_keeplist);}
-		else if	(ctx.Match(k, Invk_html_fmtr_popup))	 			return String_.new_utf8_(html_fmtr_popup);
+		else if	(ctx.Match(k, Invk_html_fmtr_popup))	 			return String_.new_u8(html_fmtr_popup);
 		else if	(ctx.Match(k, Invk_html_fmtr_popup_))	 			{html_fmtr_popup = m.ReadBry("v"); GfoEvMgr_.PubVal(this, Evt_html_fmtr_popup_changed, html_fmtr_popup);}
-		else if	(ctx.Match(k, Invk_html_fmtr_popup_dflt))	 		return String_.new_utf8_(html_fmtr_popup_dflt);
+		else if	(ctx.Match(k, Invk_html_fmtr_popup_dflt))	 		return String_.new_u8(html_fmtr_popup_dflt);
 		else if	(ctx.Match(k, Invk_html_fmtr_popup_dflt_))	 		{html_fmtr_popup_dflt = m.ReadBry("v");}
-		else if	(ctx.Match(k, Invk_html_fmtr_viewed))				return String_.new_utf8_(html_fmtr_viewed);
+		else if	(ctx.Match(k, Invk_html_fmtr_viewed))				return String_.new_u8(html_fmtr_viewed);
 		else if	(ctx.Match(k, Invk_html_fmtr_viewed_))			 	{html_fmtr_viewed = m.ReadBry("v"); GfoEvMgr_.PubVal(this, Evt_html_fmtr_viewed_changed, html_fmtr_viewed);}
-		else if	(ctx.Match(k, Invk_html_fmtr_viewed_dflt))			return String_.new_utf8_(html_fmtr_viewed_dflt);
+		else if	(ctx.Match(k, Invk_html_fmtr_viewed_dflt))			return String_.new_u8(html_fmtr_viewed_dflt);
 		else if	(ctx.Match(k, Invk_html_fmtr_viewed_dflt_))			{html_fmtr_viewed_dflt = m.ReadBry("v");}
-		else if	(ctx.Match(k, Invk_html_fmtr_wiki))	 				return String_.new_utf8_(html_fmtr_wiki);
+		else if	(ctx.Match(k, Invk_html_fmtr_wiki))	 				return String_.new_u8(html_fmtr_wiki);
 		else if	(ctx.Match(k, Invk_html_fmtr_wiki_))			 	{html_fmtr_wiki = m.ReadBry("v"); GfoEvMgr_.PubVal(this, Evt_html_fmtr_wiki_changed, html_fmtr_wiki);}
-		else if	(ctx.Match(k, Invk_html_fmtr_wiki_dflt))			return String_.new_utf8_(html_fmtr_wiki_dflt);
+		else if	(ctx.Match(k, Invk_html_fmtr_wiki_dflt))			return String_.new_u8(html_fmtr_wiki_dflt);
 		else if	(ctx.Match(k, Invk_html_fmtr_wiki_dflt_))			{html_fmtr_wiki_dflt = m.ReadBry("v");}
-		else if	(ctx.Match(k, Invk_html_fmtr_next_sect))	 		return String_.new_utf8_(html_fmtr_next_sect);
+		else if	(ctx.Match(k, Invk_html_fmtr_next_sect))	 		return String_.new_u8(html_fmtr_next_sect);
 		else if	(ctx.Match(k, Invk_html_fmtr_next_sect_))			{html_fmtr_next_sect = m.ReadBry("v"); GfoEvMgr_.PubVal(this, Evt_html_fmtr_next_sect_changed, html_fmtr_next_sect);}
-		else if	(ctx.Match(k, Invk_html_fmtr_next_sect_dflt))		return String_.new_utf8_(html_fmtr_next_sect_dflt);
+		else if	(ctx.Match(k, Invk_html_fmtr_next_sect_dflt))		return String_.new_u8(html_fmtr_next_sect_dflt);
 		else if	(ctx.Match(k, Invk_html_fmtr_next_sect_dflt_))		{html_fmtr_next_sect_dflt = m.ReadBry("v");}
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
@@ -183,9 +183,9 @@ public class Xoapi_popups implements GfoInvkAble, GfoEvMgrOwner {
 	, Evt_html_fmtr_next_sect_changed	= "html_fmtr_next_sect_changed"
 	;
 	public static final byte[]
-	  Dflt_xnde_ignore_ids		= Bry_.new_ascii_("coordinates")
-	, Dflt_tmpl_keeplist		= Bry_.new_ascii_("en.wikipedia.org|formatnum;age;age_in_days;age_in_years_and_days*;nts;number_table_sorting*;as_of;oldstyledatedy;gregorian_serial_date;currentminute;currentsecond;dmca;spaced_ndash;trim;month*;convert*;worldpop*;ipa*;lang*;nowrap*;h:*;mvar;math;vgy;audio;iso_639_name;transl;translate;linktext;zh;nihongo*;japanese_name;ko-hhrm;mp|\n")
-	, Dflt_html_fmtr_popup = Bry_.new_ascii_(String_.Concat_lines_nl_skip_last
+	  Dflt_xnde_ignore_ids		= Bry_.new_a7("coordinates")
+	, Dflt_tmpl_keeplist		= Bry_.new_a7("en.wikipedia.org|formatnum;age;age_in_days;age_in_years_and_days*;nts;number_table_sorting*;as_of;oldstyledatedy;gregorian_serial_date;currentminute;currentsecond;dmca;spaced_ndash;trim;month*;convert*;worldpop*;ipa*;lang*;nowrap*;h:*;mvar;math;vgy;audio;iso_639_name;transl;translate;linktext;zh;nihongo*;japanese_name;ko-hhrm;mp|\n")
+	, Dflt_html_fmtr_popup = Bry_.new_a7(String_.Concat_lines_nl_skip_last
 	( "<div dir=~{page_lang_ltr}>"
 	, "  <div>~{content}"
 	, "  </div>"
@@ -208,9 +208,9 @@ public class Xoapi_popups implements GfoInvkAble, GfoEvMgrOwner {
 	, "  </div>"
 	, "</div>"
 	))
-	, Dflt_html_fmtr_viewed			= Bry_.new_ascii_("\n    <span class='data_key'>~{<>msgs.get('api-xowa.html.modules.popups.msgs.view_time-name');<>}</span><span class='data_val'>~{viewed_val}</span>")
-	, Dflt_html_fmtr_wiki			= Bry_.new_ascii_("\n    <span class='data_key'>~{<>msgs.get('api-xowa.html.modules.popups.msgs.wiki-name');<>}</span><span class='data_val'>~{wiki_val}</span>")
-	, Dflt_html_fmtr_next_sect		= Bry_.new_ascii_("\n\n<span class='next_sect'>~{<>msgs.get('api-xowa.html.modules.popups.msgs.next_sect-name');<>}~{next_sect_val}</span>")
+	, Dflt_html_fmtr_viewed			= Bry_.new_a7("\n    <span class='data_key'>~{<>msgs.get('api-xowa.html.modules.popups.msgs.view_time-name');<>}</span><span class='data_val'>~{viewed_val}</span>")
+	, Dflt_html_fmtr_wiki			= Bry_.new_a7("\n    <span class='data_key'>~{<>msgs.get('api-xowa.html.modules.popups.msgs.wiki-name');<>}</span><span class='data_val'>~{wiki_val}</span>")
+	, Dflt_html_fmtr_next_sect		= Bry_.new_a7("\n\n<span class='next_sect'>~{<>msgs.get('api-xowa.html.modules.popups.msgs.next_sect-name');<>}~{next_sect_val}</span>")
 	;
 	public static final String[]
 	  Dflt_html_fmtr_popup_keys			= String_.Ary("content", "page_lang_ltr", "page_url", "page_title", "popup_id", "wiki_item", "page_size", "edit_time", "view_time_item", "xowa_root_dir")

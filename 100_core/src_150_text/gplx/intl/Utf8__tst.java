@@ -24,7 +24,7 @@ public class Utf8__tst {
 		fxt.Test_Get_pos0_of_char_bwd("a", 0);			// len=1; short-String
 		fxt.Test_Get_pos0_of_char_bwd("abc¢", 3);		// len=2; (note that bry.len = 5)
 		fxt.Test_Get_pos0_of_char_bwd("abc€", 3);		// len=3; (note that bry.len = 6)
-		fxt.Test_Get_pos0_of_char_bwd("abc" + String_.new_utf8_(Byte_.Ary_by_ints(240, 164, 173, 162)), 3);		// len=4; (note that bry.len = 7)
+		fxt.Test_Get_pos0_of_char_bwd("abc" + String_.new_u8(Byte_.Ary_by_ints(240, 164, 173, 162)), 3);		// len=4; (note that bry.len = 7)
 	}
 	@Test  public void Increment_char_at_last_pos() {
 		fxt.Test_Increment_char_at_last_pos("a", "b");
@@ -59,11 +59,11 @@ public class Utf8__tst {
 }
 class Utf8__fxt {
 	public void Test_Get_pos0_of_char_bwd(String str, int expd) {
-		byte[] bry = Bry_.new_utf8_(str);
+		byte[] bry = Bry_.new_u8(str);
 		int pos = bry.length - 1;	// always start from last char
 		Tfds.Eq(expd, Utf8_.Get_pos0_of_char_bwd(bry, pos));
 	}
 	public void Test_Increment_char_at_last_pos(String str, String expd) {
-		Tfds.Eq(expd, String_.new_utf8_(Utf8_.Increment_char_at_last_pos(Bry_.new_utf8_(str))));
+		Tfds.Eq(expd, String_.new_u8(Utf8_.Increment_char_at_last_pos(Bry_.new_u8(str))));
 	}
 }

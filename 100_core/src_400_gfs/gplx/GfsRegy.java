@@ -20,11 +20,11 @@ class GfsRegy implements GfoInvkAble {
 	public int Count() {return hash.Count();}
 	public void Clear() {hash.Clear(); typeHash.Clear();}
 	public boolean Has(String k) {return hash.Has(k);}
-	public GfsRegyItm FetchAt(int i) {return (GfsRegyItm)hash.FetchAt(i);}
-	public GfsRegyItm Fetch(String key) {return (GfsRegyItm)hash.Fetch(key);}
-	public GfsRegyItm FetchByType(GfoInvkAble invk) {return (GfsRegyItm)typeHash.Fetch(ClassAdp_.FullNameOf_obj(invk));}
+	public GfsRegyItm Get_at(int i) {return (GfsRegyItm)hash.Get_at(i);}
+	public GfsRegyItm Get_by(String key) {return (GfsRegyItm)hash.Get_by(key);}
+	public GfsRegyItm FetchByType(GfoInvkAble invk) {return (GfsRegyItm)typeHash.Get_by(ClassAdp_.FullNameOf_obj(invk));}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		Object rv = (GfsRegyItm)hash.Fetch(k); if (rv == null) throw Err_.missing_key_(k);
+		Object rv = (GfsRegyItm)hash.Get_by(k); if (rv == null) throw Err_.missing_key_(k);
 		return rv;
 	}
 	public void AddObj(GfoInvkAble invk, String key) {Add(key, invk, false);}
@@ -33,15 +33,15 @@ class GfsRegy implements GfoInvkAble {
 		if (hash.Has(key)) return;
 		GfsRegyItm regyItm = new GfsRegyItm().Key_(key).InvkAble_(invk).IsCmd_(typeCmd).TypeKey_(ClassAdp_.FullNameOf_obj(invk));
 		hash.Add(key, regyItm);
-		typeHash.Add_if_new(regyItm.TypeKey(), regyItm);	// NOTE: changed to allow same Object to be added under different aliases (app, xowa) DATE:2014-06-09;
+		typeHash.Add_if_dupe_use_1st(regyItm.TypeKey(), regyItm);	// NOTE: changed to allow same Object to be added under different aliases (app, xowa) DATE:2014-06-09;
 	}
 	public void Del(String k) {
-		GfsRegyItm itm =(GfsRegyItm)hash.Fetch(k);
+		GfsRegyItm itm =(GfsRegyItm)hash.Get_by(k);
 		if (itm != null) typeHash.Del(itm.TypeKey());
 		hash.Del(k);
 	}
-	HashAdp typeHash = HashAdp_.new_();
-	OrderedHash hash = OrderedHash_.new_();
+	Hash_adp typeHash = Hash_adp_.new_();
+	Ordered_hash hash = Ordered_hash_.new_();
         public static GfsRegy new_() {return new GfsRegy();} GfsRegy() {}
 }
 class GfsRegyItm implements GfoInvkAble {

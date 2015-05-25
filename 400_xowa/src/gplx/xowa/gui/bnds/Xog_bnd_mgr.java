@@ -21,13 +21,13 @@ import gplx.xowa.gui.cmds.*; import gplx.xowa.gui.menus.dom.*;
 public class Xog_bnd_mgr {
 	private Xog_win_itm win; private Xog_cmd_mgr_invk invk_mgr;
 	private Xog_bnd_box[] boxs = Xog_bnd_box_.Ary();
-	private ListAdp startup_itms = ListAdp_.new_();
-	private OrderedHash regy = OrderedHash_.new_();
+	private List_adp startup_itms = List_adp_.new_();
+	private Ordered_hash regy = Ordered_hash_.new_();
 	public Xog_bnd_mgr(Xog_win_itm win) {this.win = win; invk_mgr = win.Gui_mgr().Cmd_mgr().Invk_mgr();}
 	public Gfui_bnd_parser Bnd_parser() {if (bnd_parser == null) bnd_parser = Gfui_bnd_parser.new_en_(); return bnd_parser;} private Gfui_bnd_parser bnd_parser;
 	public int Len() {return regy.Count();}
-	public Xog_bnd_itm Get_at(int i)			{return (Xog_bnd_itm)regy.FetchAt(i);}
-	public Xog_bnd_itm Get_or_null(String v)	{return (Xog_bnd_itm)regy.Fetch(v);}
+	public Xog_bnd_itm Get_at(int i)			{return (Xog_bnd_itm)regy.Get_at(i);}
+	public Xog_bnd_itm Get_or_null(String v)	{return (Xog_bnd_itm)regy.Get_by(v);}
 	public void Init_by_kit(Xoae_app app) {
 		Add_system_bnds();
 		Add_custom_bnds();	// NOTE: should go after Add_system_bnds in case user overrides any;
@@ -47,7 +47,7 @@ public class Xog_bnd_mgr {
 	}
 	public void Del(Xog_bnd_itm itm, IptArg new_ipt) {
 		boolean itm_has_ipt = !IptArg_.Is_null_or_none(new_ipt);
-		ListAdp deleted = ListAdp_.new_();
+		List_adp deleted = List_adp_.new_();
 		for (int i = 0; i < Xog_bnd_box_.Ary_len; i++) {
 			Xog_bnd_box old_box = boxs[i];
 			int old_itms_len = old_box.Len();
@@ -66,7 +66,7 @@ public class Xog_bnd_mgr {
 			}
 			int deleted_len = deleted.Count();
 			for (int j = 0; j < deleted_len; j++) {
-				String deleted_key = (String)deleted.FetchAt(j);
+				String deleted_key = (String)deleted.Get_at(j);
 				old_box.Del(deleted_key);
 			}
 			deleted.Clear();
@@ -124,8 +124,8 @@ public class Xog_bnd_mgr {
 		Init_itm(Xog_cmd_itm_.Key_gui_page_view_mode_read						, Xog_bnd_box_.Tid_browser				, "mod.c+key.m,mod.c+key.r");
 		Init_itm(Xog_cmd_itm_.Key_gui_page_view_mode_edit						, Xog_bnd_box_.Tid_browser				, "mod.c+key.m,mod.c+key.e");
 		Init_itm(Xog_cmd_itm_.Key_gui_page_view_mode_html						, Xog_bnd_box_.Tid_browser				, "mod.c+key.m,mod.c+key.h", "mod.c+key.u");
-		Init_itm(Xog_cmd_itm_.Key_gui_page_view_reload							, Xog_bnd_box_.Tid_browser				, "mod.s+key.f5");
-		Init_itm(Xog_cmd_itm_.Key_gui_page_view_refresh							, Xog_bnd_box_.Tid_browser				, "key.f5");
+		Init_itm(Xog_cmd_itm_.Key_gui_page_view_reload							, Xog_bnd_box_.Tid_browser				, "key.f5");
+		Init_itm(Xog_cmd_itm_.Key_gui_page_view_refresh							, Xog_bnd_box_.Tid_browser				, "mod.s+key.f5");
 		Init_itm(Xog_cmd_itm_.Key_gui_page_view_save_as							, Xog_bnd_box_.Tid_browser				, "");
 		Init_itm(Xog_cmd_itm_.Key_gui_page_view_print							, Xog_bnd_box_.Tid_browser				, "");
 
@@ -209,7 +209,7 @@ public class Xog_bnd_mgr {
 	}
 	private void Init_itm(String cmd, int idx, int box, String ipt) {Init_itm(cmd, idx, box, IptArg_.parse_or_none_(ipt));}
 	private void Init_itm(String cmd, int idx, int box, IptArg ipt) {
-		String key = cmd + "-" + Int_.Xto_str(idx + ListAdp_.Base1);		// EX: xowa.widgets.url.focus-1 xowa.widgets.url.focus-2
+		String key = cmd + "-" + Int_.Xto_str(idx + List_adp_.Base1);		// EX: xowa.widgets.url.focus-1 xowa.widgets.url.focus-2
 		Xog_bnd_itm itm = new Xog_bnd_itm(key, Bool_.Y, cmd, box, ipt);
 		boxs[box].Add(itm);
 		regy.Add(itm.Key(), itm);
@@ -228,9 +228,9 @@ public class Xog_bnd_mgr {
 	private void Add_custom_bnds() {	// NOTE: custom bnds are stored in cfg; cfg executes before Init_by_kit when all windows elements are null; run cfg now, while Init_by_kit is called and elems are now created
 		int len = startup_itms.Count();
 		for (int i = 0; i < len; i++) {
-			Xog_bnd_itm new_itm = (Xog_bnd_itm)startup_itms.FetchAt(i);
+			Xog_bnd_itm new_itm = (Xog_bnd_itm)startup_itms.Get_at(i);
 			try {
-				Xog_bnd_itm cur_itm = (Xog_bnd_itm)regy.Fetch(new_itm.Key());
+				Xog_bnd_itm cur_itm = (Xog_bnd_itm)regy.Get_by(new_itm.Key());
 				if (cur_itm == null) {win.Usr_dlg().Warn_many("", "", "binding no longer exists; key=~{0}", new_itm.Key());}	// could happen when breaking backward compatibility
 				cur_itm.Init_by_set(new_itm.Box(), new_itm.Ipt());
 			}	catch (Exception e) {win.Usr_dlg().Warn_many("", "", "failed to set custom binding; key=~{0} err=~{1}", new_itm.Key(), Err_.Message_gplx_brief(e));}

@@ -39,7 +39,7 @@ public class Gfo_fld_rdr_tst {
 }
 class Gfo_fld_rdr_fxt {
 	Gfo_fld_rdr rdr = new Gfo_fld_rdr(); Gfo_fld_wtr wtr = Gfo_fld_wtr.xowa_();
-	public Gfo_fld_rdr_fxt Raw_(String v) {rdr.Data_(Bry_.new_utf8_(v)); return this;}
+	public Gfo_fld_rdr_fxt Raw_(String v) {rdr.Data_(Bry_.new_u8(v)); return this;}
 	public Gfo_fld_rdr_fxt ini_xdat() 	{rdr.Ctor_xdat(); return this;}
 	public Gfo_fld_rdr_fxt ini_sql() 	{rdr.Ctor_sql(); return this;}
 	public Gfo_fld_rdr_fxt tst_Read_int(int expd) 					{Tfds.Eq(expd, rdr.Read_int()); return this;}
@@ -47,7 +47,7 @@ class Gfo_fld_rdr_fxt {
 	public Gfo_fld_rdr_fxt tst_Read_str_simple(String expd) 		{Tfds.Eq(expd, rdr.Read_str_simple()); return this;}
 	public Gfo_fld_rdr_fxt tst_Read_str_escape(String expd) 		{Tfds.Eq(expd, rdr.Read_str_escape()); return this;}
 	public Gfo_fld_rdr_fxt tst_Write_str_escape(String val, String expd) {
-		byte[] bry = Bry_.new_utf8_(val);
+		byte[] bry = Bry_.new_u8(val);
 		wtr.Bfr_(bfr);
 		wtr.Write_bry_escape_fld(bry);
 		Tfds.Eq(expd, bfr.Xto_str());

@@ -19,8 +19,8 @@ package gplx.gfui; import gplx.*;
 public class TabBox extends GfuiElemBase {
 	public int Tabs_Count() {return mgr.Count();}
 	public TabPnlItm Tabs_SelectedItm() {return mgr.CurTab();}
-	public GfuiElem Tabs_FetchAt(int i) {return pnlBox.SubElems().Fetch(mgr.FetchAt(i).Key());}
-	public GfuiElem Tabs_SelectedPnl() {return pnlBox.SubElems().Fetch(mgr.CurTab().Key());}
+	public GfuiElem Tabs_FetchAt(int i) {return pnlBox.SubElems().Get_by(mgr.Get_at(i).Key());}
+	public GfuiElem Tabs_SelectedPnl() {return pnlBox.SubElems().Get_by(mgr.CurTab().Key());}
 	public void Tabs_Select(int idx) {mgr.Select(idx);}
 	public GfuiElem Tabs_Add(String key, String name) {
 		TabPnlItm newTab = mgr.Add(key, name);
@@ -30,9 +30,9 @@ public class TabBox extends GfuiElemBase {
 		return pnl;
 	}
 	public void Tabs_DelAt(int idx) {
-		TabBtnAreaMgr.Del(this, mgr.FetchAt(idx));
-		TabPnlAreaMgr.Del(this, mgr.FetchAt(idx));
-		mgr.DelAt(idx);
+		TabBtnAreaMgr.Del(this, mgr.Get_at(idx));
+		TabPnlAreaMgr.Del(this, mgr.Get_at(idx));
+		mgr.Del_at(idx);
 	}
 	@gplx.Internal protected TabBoxMgr Mgr() {return mgr;} TabBoxMgr mgr = TabBoxMgr.new_();
 	@gplx.Internal protected GfuiElem BtnBox() {return btnBox;} GfuiElem btnBox; 
@@ -72,7 +72,7 @@ class TabBtnAreaMgr {
 		btn.Click_invk(GfoInvkAbleCmd.new_(tabBox, TabBoxEvt_tabSelectByBtn.Key));
 		btn.Inject_(TabBnd_reorderTab.new_(tabBox));
 		if (btnBox.SubElems().Count() > 0) {	// place button after last
-			GfuiElem lastBtn = btnBox.SubElems().FetchAt(btnBox.SubElems().Count() - 1);
+			GfuiElem lastBtn = btnBox.SubElems().Get_at(btnBox.SubElems().Count() - 1);
 			btn.X_(lastBtn.X() + lastBtn.Width());
 		}
 		btnBox.SubElems().Add(btn);
@@ -81,27 +81,27 @@ class TabBtnAreaMgr {
 	public static void Del(TabBox tabBox, TabPnlItm itm) {
 		GfuiElem btnBox = tabBox.BtnBox();
 		int idx = itm.Idx();
-		GfuiBtn btn = (GfuiBtn)btnBox.SubElems().FetchAt(idx);
-		btnBox.SubElems().DelAt(idx);
+		GfuiBtn btn = (GfuiBtn)btnBox.SubElems().Get_at(idx);
+		btnBox.SubElems().Del_at(idx);
 		for (int i = idx; i < btnBox.SubElems().Count(); i++) {
-			GfuiBtn cur = (GfuiBtn)btnBox.SubElems().FetchAt(i);
+			GfuiBtn cur = (GfuiBtn)btnBox.SubElems().Get_at(i);
 			cur.X_(cur.X() - btn.Width());
 		}
 	}
 	public static void Select(TabBox tabBox, TabPnlItm curTabItm, TabPnlItm newTabItm) {
 		if (curTabItm != null) {
-			GfuiBtn curBtn = (GfuiBtn)tabBox.BtnBox().SubElems().FetchAt(curTabItm.Idx());
+			GfuiBtn curBtn = (GfuiBtn)tabBox.BtnBox().SubElems().Get_at(curTabItm.Idx());
 			Select(curBtn, false);
 		}
-		GfuiBtn newBtn = (GfuiBtn)tabBox.BtnBox().SubElems().FetchAt(newTabItm.Idx());
+		GfuiBtn newBtn = (GfuiBtn)tabBox.BtnBox().SubElems().Get_at(newTabItm.Idx());
 		Select(newBtn, true);
 	}
-	public static void MoveTo(TabBox tabBox, int curIdx, int newIdx) {
+	public static void Move_to(TabBox tabBox, int curIdx, int newIdx) {
 		GfuiElemList btns = tabBox.BtnBox().SubElems();
-		btns.MoveTo(curIdx, newIdx);
+		btns.Move_to(curIdx, newIdx);
 		int curX = 0;
 		for (int i = 0; i < btns.Count(); i++) {
-			GfuiBtn cur = (GfuiBtn)btns.FetchAt(i);
+			GfuiBtn cur = (GfuiBtn)btns.Get_at(i);
 			cur.X_(curX);
 			curX += cur.Width();
 		}
@@ -129,15 +129,15 @@ class TabPnlAreaMgr {
 		return pnl;
 	}
 	public static void Del(TabBox tabBox, TabPnlItm itm) {
-		tabBox.PnlBox().SubElems().DelAt(itm.Idx());
-		((GfuiElemBase)tabBox.PnlBox()).Lyt().SubLyts().DelAt(itm.Idx());
+		tabBox.PnlBox().SubElems().Del_at(itm.Idx());
+		((GfuiElemBase)tabBox.PnlBox()).Lyt().SubLyts().Del_at(itm.Idx());
 	}
 	public static void Select(TabBox tabBox, TabPnlItm curTabItm, TabPnlItm newTabItm) {
 		if (curTabItm != null) {
-			GfuiElem curTab = tabBox.PnlBox().SubElems().FetchAt(curTabItm.Idx());
+			GfuiElem curTab = tabBox.PnlBox().SubElems().Get_at(curTabItm.Idx());
 			curTab.Visible_set(false);
 		}
-		GfuiElem newTab = tabBox.PnlBox().SubElems().FetchAt(newTabItm.Idx());
+		GfuiElem newTab = tabBox.PnlBox().SubElems().Get_at(newTabItm.Idx());
 		newTab.Visible_set(true);
 		newTab.Zorder_front();
 		newTab.Focus();

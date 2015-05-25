@@ -44,19 +44,19 @@ public class Xol_case_mgr_tst {
 //			Bry_bfr bfr = Bry_bfr.new_();
 //			for (int i = 0; i < ary.length; i++) {
 //				Xol_case_itm itm = ary[i];
-//				bfr.Add_str("xo|");
+//				bfr.Add_str_a7("xo|");
 //				bfr.Add_bry_comma(itm.Src_ary()).Add_byte_pipe();
 //				bfr.Add_bry_comma(itm.Trg_ary()).Add_byte_nl();
 //			}
-//			Io_mgr._.SaveFilStr("C:\\test1.txt", bfr.Xto_str_and_clear());
+//			Io_mgr.I.SaveFilStr("C:\\test1.txt", bfr.Xto_str_and_clear());
 //		}
 }
 class Xol_case_mgr_fxt {
 	private Xol_case_mgr case_mgr = Xol_case_mgr_.new_(); private String_bldr sb = String_bldr_.new_();
 	public void Clear() {case_mgr.Clear();}
-	public Xol_case_itm_bry itm_both_(String src, String trg)	{return new Xol_case_itm_bry(Xol_case_itm_.Tid_both , Bry_.new_utf8_(src), Bry_.new_utf8_(trg));}
-	public Xol_case_itm_bry itm_upper_(String src, String trg) {return new Xol_case_itm_bry(Xol_case_itm_.Tid_upper, Bry_.new_utf8_(src), Bry_.new_utf8_(trg));}
-	public Xol_case_itm_bry itm_lower_(String src, String trg) {return new Xol_case_itm_bry(Xol_case_itm_.Tid_lower, Bry_.new_utf8_(src), Bry_.new_utf8_(trg));}
+	public Xol_case_itm_bry itm_both_(String src, String trg)	{return new Xol_case_itm_bry(Xol_case_itm_.Tid_both , Bry_.new_u8(src), Bry_.new_u8(trg));}
+	public Xol_case_itm_bry itm_upper_(String src, String trg) {return new Xol_case_itm_bry(Xol_case_itm_.Tid_upper, Bry_.new_u8(src), Bry_.new_u8(trg));}
+	public Xol_case_itm_bry itm_lower_(String src, String trg) {return new Xol_case_itm_bry(Xol_case_itm_.Tid_lower, Bry_.new_u8(src), Bry_.new_u8(trg));}
 	public String Init_ltrs_raw() {
 		return String_.Concat_lines_nl
 			(	"0|a|A"
@@ -66,7 +66,7 @@ class Xol_case_mgr_fxt {
 	}
 	public Xol_case_mgr_fxt Init_ltrs() {
 		case_mgr = Xol_case_mgr_.new_();
-		case_mgr.Add_bulk(Bry_.new_utf8_(Init_ltrs_raw()));
+		case_mgr.Add_bulk(Bry_.new_u8(Init_ltrs_raw()));
 		return this;
 	}
 	public Xol_case_mgr_fxt Init_ltrs_universal() {
@@ -76,24 +76,24 @@ class Xol_case_mgr_fxt {
 	public Xol_case_mgr_fxt Upper(String raw_str, String expd) {return Case_build(Bool_.Y, raw_str, expd);}
 	public Xol_case_mgr_fxt Lower(String raw_str, String expd) {return Case_build(Bool_.N, raw_str, expd);}
 	public Xol_case_mgr_fxt Case_build(boolean upper, String raw_str, String expd) {
-		byte[] raw = Bry_.new_utf8_(raw_str);
+		byte[] raw = Bry_.new_u8(raw_str);
 		byte[] actl = case_mgr.Case_build(upper, raw, 0, raw.length);
-		Tfds.Eq(expd, String_.new_utf8_(actl));
+		Tfds.Eq(expd, String_.new_u8(actl));
 		return this;
 	}
 	public void parse_xo__tst(String raw, Xol_case_itm_bry... expd) {
-		Tfds.Eq_str_lines(Xto_str(expd), Xto_str(Xol_case_itm_.parse_xo_(Bry_.new_utf8_(raw))));
+		Tfds.Eq_str_lines(Xto_str(expd), Xto_str(Xol_case_itm_.parse_xo_(Bry_.new_u8(raw))));
 	}
 	public void parse_mw__tst(Xol_case_itm_bry... expd) {
 		String raw = raw_(expd);
-		Xol_case_itm[] actl = Xol_case_itm_.parse_mw_(Bry_.new_utf8_(raw));
+		Xol_case_itm[] actl = Xol_case_itm_.parse_mw_(Bry_.new_u8(raw));
 		Tfds.Eq_str_lines(Xto_str(expd), Xto_str(actl));
 	}
 	public String Xto_str(Xol_case_itm[] ary) {
 		int ary_len = ary.length;
 		for (int i = 0; i < ary_len; i++) {
 			Xol_case_itm itm = ary[i];
-			sb.Add(Byte_.Xto_str(itm.Tid())).Add_char_pipe().Add(String_.new_utf8_(itm.Src_ary())).Add_char_pipe().Add(String_.new_utf8_(itm.Trg_ary())).Add_char_nl();
+			sb.Add(Byte_.Xto_str(itm.Tid())).Add_char_pipe().Add(String_.new_u8(itm.Src_ary())).Add_char_pipe().Add(String_.new_u8(itm.Trg_ary())).Add_char_nl();
 		}
 		return sb.Xto_str_and_clear();
 	}
@@ -102,8 +102,8 @@ class Xol_case_mgr_fxt {
 		uppers_list.Clear(); lowers_list.Clear();
 		for (int i = 0; i < itms_len; i++) {
 			Xol_case_itm_bry itm = itms[i];
-			String src = String_.new_utf8_(itm.Src_ary());
-			String trg = String_.new_utf8_(itm.Trg_ary());
+			String src = String_.new_u8(itm.Src_ary());
+			String trg = String_.new_u8(itm.Trg_ary());
 			switch (itm.Tid()) {
 				case Xol_case_itm_.Tid_both:
 					uppers_list.Add(trg); uppers_list.Add(src);
@@ -111,8 +111,8 @@ class Xol_case_mgr_fxt {
 					break;
 			}
 		}
-		return raw_str_(uppers_list.XtoStrAry(), lowers_list.XtoStrAry());
-	}	ListAdp uppers_list = ListAdp_.new_(), lowers_list = ListAdp_.new_();
+		return raw_str_(uppers_list.To_str_ary(), lowers_list.To_str_ary());
+	}	List_adp uppers_list = List_adp_.new_(), lowers_list = List_adp_.new_();
 	String raw_str_(String[] uppers, String[] lowers) {
 		sb.Add("a:2:{s:14:\"wikiUpperChars\";a:1046:{");
 		raw_ary(sb, uppers);
@@ -133,9 +133,9 @@ class Xol_case_mgr_fxt {
 	public void Test_reuse_1st_upper(String raw)				{Test_reuse_1st_upper(raw, null, Bool_.Y);}
 	public void Test_reuse_1st_upper(String raw, String expd)	{Test_reuse_1st_upper(raw, expd, Bool_.N);}
 	private void Test_reuse_1st_upper(String raw, String expd, boolean expd_is_same) {
-		byte[] raw_bry = Bry_.new_utf8_(raw);
+		byte[] raw_bry = Bry_.new_u8(raw);
 		byte[] actl_bry = case_mgr.Case_reuse_1st_upper(raw_bry);
-		String actl_str = String_.new_utf8_(actl_bry);
+		String actl_str = String_.new_u8(actl_bry);
 		boolean actl_is_same = Object_.Eq(raw_bry, actl_bry);	// pointers will be same if no change
 		if (expd_is_same) {
 			Tfds.Eq_true(actl_is_same, "expd should be same: " + actl_str);

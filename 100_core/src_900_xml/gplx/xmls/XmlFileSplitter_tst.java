@@ -21,7 +21,7 @@ import gplx.ios.*; import gplx.texts.*;
 public class XmlFileSplitter_tst {
 	@Before public void setup() {
 		splitter = new XmlFileSplitter();
-		Io_mgr._.InitEngine_mem();
+		Io_mgr.I.InitEngine_mem();
 	} XmlFileSplitter splitter;
 	@Test  public void FindMatchPos() {
 		tst_FindMatchPos("abcde", "a", 0);
@@ -59,22 +59,22 @@ public class XmlFileSplitter_tst {
 	void tst_Split(String txt, String... expd) {
 		Io_url xmlFil = Io_url_.mem_fil_("mem/800_misc/txt.xml");
 		Io_url tmpDir = xmlFil.OwnerDir().GenSubDir("temp_xml");
-		Io_mgr._.DeleteDirDeep(tmpDir);
+		Io_mgr.I.DeleteDirDeep(tmpDir);
 		splitter.Opts().StatusFmt_(null).PartDir_(tmpDir);
 		splitter.Opts().Namer().Ctor_io(tmpDir, "", "fil_{0}.xml", "000");
-		Io_mgr._.SaveFilStr(xmlFil, txt);
+		Io_mgr.I.SaveFilStr(xmlFil, txt);
 		splitter.Split(xmlFil);
-		Io_url[] tmpFilAry = Io_mgr._.QueryDir_fils(tmpDir);
+		Io_url[] tmpFilAry = Io_mgr.I.QueryDir_fils(tmpDir);
 		Tfds.Eq(expd.length, tmpFilAry.length);
 		for (int i = 0; i < tmpFilAry.length; i++) {
 			Io_url tmpFil = tmpFilAry[i];
-			Tfds.Eq(expd[i], Io_mgr._.LoadFilStr(tmpFil));
+			Tfds.Eq(expd[i], Io_mgr.I.LoadFilStr(tmpFil));
 		}
 	}
-	byte[] byte_(String s) {return Bry_.new_utf8_(s);}
+	byte[] byte_(String s) {return Bry_.new_u8(s);}
 	byte[][] byteAry_(String s) {
 		byte[][] rv = new byte[1][];
-		rv[0] = Bry_.new_utf8_(s);
+		rv[0] = Bry_.new_u8(s);
 		return rv;
 	}
 	void tst_ExtractHdr(String src, String find, String expdHdr, String expdSrc) {
@@ -82,7 +82,7 @@ public class XmlFileSplitter_tst {
 		byte[] srcAry = byte_(src);
 		int findPos = splitter.FindMatchPos(srcAry, byteAry_(find));
 		srcAry = splitter.SplitHdr(srcAry, findPos);
-            Tfds.Eq(String_.new_utf8_(splitter.Hdr()), expdHdr);
-		Tfds.Eq(String_.new_utf8_(srcAry), expdSrc);
+            Tfds.Eq(String_.new_u8(splitter.Hdr()), expdHdr);
+		Tfds.Eq(String_.new_u8(srcAry), expdSrc);
 	}
 }

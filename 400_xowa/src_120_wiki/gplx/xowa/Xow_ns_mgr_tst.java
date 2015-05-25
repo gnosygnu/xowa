@@ -31,7 +31,7 @@ public class Xow_ns_mgr_tst {
 		fxt.Ns_mgr().Add_new(Xow_ns_.Id_template, "Template");
 		fxt.Ns_mgr().Aliases_add(Xow_ns_.Id_template, "Templatex");
 		fxt.Ns_mgr().Init();
-		byte[] name = Bry_.new_ascii_("Templatex:Abc");
+		byte[] name = Bry_.new_a7("Templatex:Abc");
 		Tfds.Eq(10, fxt.Ns_mgr().Tmpls_get_w_colon(name, 0, name.length));
 	}
 	@Test  public void Utf8() {// PURPOSE: handle different casings for ns_names; PAGE:ru.w:Портрет_итальянского_Ренессанса DATE:2014-07-04
@@ -71,7 +71,7 @@ class Xow_ns_mgr_fxt {
 		int ns_names_len = ns_names.length;
 		for (int i = 0; i < ns_names_len; ++i) {
 			String ns_name = ns_names[i];
-			Xow_ns actl_ns = ns_mgr.Names_get_or_null(Bry_.new_utf8_(ns_name));
+			Xow_ns actl_ns = ns_mgr.Names_get_or_null(Bry_.new_u8(ns_name));
 			int actl_id = actl_ns == null ? Int_.MinValue : actl_ns.Id();
 			Tfds.Eq(expd_id, actl_id, ns_name);
 		}

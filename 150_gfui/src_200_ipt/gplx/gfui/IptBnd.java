@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfui; import gplx.*;
 public interface IptBnd extends SrlAble {
 	String			Key();
-	ListAdp			Ipts();
+	List_adp			Ipts();
 	IptEventType	EventTypes();
 	void			Exec(IptEventData iptData);
 }

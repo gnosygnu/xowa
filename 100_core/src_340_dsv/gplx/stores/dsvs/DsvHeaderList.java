@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.stores.dsvs; import gplx.*; import gplx.stores.*;
 public class DsvHeaderList {
 	@gplx.Internal protected int Count() {return list.Count();}
-	@gplx.Internal protected DsvHeaderItm FetchAt(int i) {return (DsvHeaderItm)list.FetchAt(i);}
+	@gplx.Internal protected DsvHeaderItm Get_at(int i) {return (DsvHeaderItm)list.Get_at(i);}
 	public DsvHeaderList Add_LeafTypes() {this.Add(new DsvHeaderItm(DsvHeaderItm.Id_LeafTypes, null)); return this;}
 	public DsvHeaderList Add_LeafNames() {this.Add(new DsvHeaderItm(DsvHeaderItm.Id_LeafNames, null)); return this;}
 	public DsvHeaderList Add_TableName() {this.Add(new DsvHeaderItm(DsvHeaderItm.Id_TableName, null)); return this;}
@@ -26,7 +26,7 @@ public class DsvHeaderList {
 	public DsvHeaderList Add_Comment(String comment) {this.Add(new DsvHeaderItm(DsvHeaderItm.Id_Comment, comment)); return this;}
 	void Add(DsvHeaderItm data) {list.Add(data);}
 
-	ListAdp list = ListAdp_.new_();
+	List_adp list = List_adp_.new_();
 	public static DsvHeaderList new_() {return new DsvHeaderList();} DsvHeaderList() {}
 }
 class DsvHeaderItm {

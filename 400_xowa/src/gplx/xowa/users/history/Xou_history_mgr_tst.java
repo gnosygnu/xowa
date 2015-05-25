@@ -50,9 +50,9 @@ class Xou_history_mgr_fxt {
 		if (app == null) {
 			app = Xoa_app_fxt.app_();
 			wiki = Xoa_app_fxt.wiki_tst_(app);
-			under = app.User().History_mgr();
+			under = app.Usere().History_mgr();
 		}
-		Io_mgr._.DeleteDirDeep(Io_url_.new_dir_("mem/xowa/user/test_user/app/data/history/"));
+		Io_mgr.I.DeleteDirDeep(Io_url_.new_dir_("mem/xowa/user/test_user/app/data/history/"));
 		under.Clear();
 	}
 	public Xou_history_mgr_fxt Add_many(String... ary) {
@@ -64,12 +64,12 @@ class Xou_history_mgr_fxt {
 		return this;
 	}
 	public Xou_history_mgr_fxt Add_one(String ttl_str, String arg_str) {
-		byte[] ttl_bry = Bry_.new_utf8_(ttl_str);
+		byte[] ttl_bry = Bry_.new_u8(ttl_str);
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry);
 		Xoae_page page = Xoae_page.test_(wiki, ttl);
 		page.Revision_data().Modified_on_(DateAdp_.Now());
 		byte[] url_bry = ttl_bry;
-		if (arg_str != null) url_bry = Bry_.Add(url_bry, Bry_.new_utf8_(arg_str));
+		if (arg_str != null) url_bry = Bry_.Add(url_bry, Bry_.new_u8(arg_str));
 		Xoa_url url = app.Url_parser().Parse(url_bry);
 		url.Wiki_bry_(wiki.Domain_bry());
 		page.Url_(url);  // set url b/c history_mgr.Add uses url
@@ -82,7 +82,7 @@ class Xou_history_mgr_fxt {
 		String[] actl = new String[actl_len];
 		for (int i = 0; i < actl_len; i++) {
 			Xou_history_itm itm = under.Get_at(i);
-			actl[i] = String_.new_utf8_(itm.Page());
+			actl[i] = String_.new_u8(itm.Page());
 		}
 		Tfds.Eq_ary_str(expd, actl);
 		return this;
@@ -90,7 +90,7 @@ class Xou_history_mgr_fxt {
 	public Xou_history_mgr_fxt Invk(String key, Object v) {GfoInvkAble_.InvkCmd_val(under, key, v); return this;}
 	public Xou_history_mgr_fxt Save() {under.Save(app); return this;}
 	public Xou_history_mgr_fxt Fil_tst(String expd_url, String expd) {
-		String actl = Io_mgr._.LoadFilStr(expd_url);
+		String actl = Io_mgr.I.LoadFilStr(expd_url);
 		Tfds.Eq_str_lines(expd, actl);
 		return this;
 	}

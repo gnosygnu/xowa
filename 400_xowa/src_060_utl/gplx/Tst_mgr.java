@@ -19,13 +19,13 @@ package gplx;
 import gplx.core.strings.*;
 public class Tst_mgr {
 	public Tst_mgr ThrowError_n_() {throwError = false; return this;} private boolean throwError = true;
-	public ListAdp Results() {return results;} ListAdp results = ListAdp_.new_();
+	public List_adp Results() {return results;} List_adp results = List_adp_.new_();
 	public KeyValHash Vars() {return vars;} KeyValHash vars = KeyValHash.new_();
 	public Object Vars_get_by_key(String key) {return vars.FetchValOr(key, null);}
 	public String Vars_get_bry_as_str(String key, int bgn, int end) {
 		byte[] bry = (byte[])vars.FetchValOr(key, null); if (bry == null) return String_.Empty;
 		if (bgn < 0 || end > bry.length || end < bgn || end < 0) return "<<OUT OF BOUNDS>>";
-		return String_.new_utf8_(Bry_.Mid(bry, bgn, end));
+		return String_.new_u8(Bry_.Mid(bry, bgn, end));
 	}
 	public int Tst_val(boolean skip, String path, String name, Object expd, Object actl) {
 		Tst_itm itm = Tst_itm.eq_(skip, path, name, expd, actl);
@@ -83,7 +83,7 @@ public class Tst_mgr {
 		if (ary == null) return "<NULL>";
 		int len = Array_.Len(ary);
 		for (int i = 0; i < len; i++) {
-			Object itm = Array_.FetchAt(ary, i);
+			Object itm = Array_.Get_at(ary, i);
 			ary_sb.Add(Object_.Xto_str_strict_or_null_mark(itm)).Add(",");
 		}
 		return ary_sb.Xto_str_and_clear();
@@ -93,13 +93,13 @@ public class Tst_mgr {
 		int comp_max = 0, path_max =0, name_max = 0;
 		int len = results.Count();
 		for (int i = 0; i < len; i++) {
-			Tst_itm itm = (Tst_itm)results.FetchAt(i);
+			Tst_itm itm = (Tst_itm)results.Get_at(i);
 			comp_max = Max(comp_max, itm.Comp());
 			path_max = Max(path_max, itm.Path());
 			name_max = Max(name_max, itm.Name());
 		}
 		for (int i = 0; i < len; i++) {
-			Tst_itm itm = (Tst_itm)results.FetchAt(i);
+			Tst_itm itm = (Tst_itm)results.Get_at(i);
 			sb.Add_fmt("\n{0}  {1}  {2}  '{3}'", String_.PadEnd(itm.Comp(), comp_max, " "), "#" + String_.PadEnd(itm.Path(), path_max, " "), "@" + String_.PadEnd(itm.Name(), name_max, " ") + ":", itm.Expd());
 			if (!itm.Pass())
 				sb.Add_fmt("\n{0}  {1}  {2}  '{3}'", String_.PadEnd("", comp_max, " "), " " + String_.PadEnd("", path_max, " "), " " + String_.PadEnd("", name_max, " ") + " ", itm.Actl());

@@ -40,7 +40,7 @@ public class Wdata_date {
 			default:				throw Err_.unhandled(date[0]);
 		}
 		int year_end = Bry_finder.Find_fwd(date, Byte_ascii.Dash, 1);
-		long year		= Long_.parse_or_(String_.new_ascii_(date, 1, year_end), -1); if (year == -1) throw Err_.new_("parse failed; raw={0}", String_.new_ascii_(date));
+		long year		= Long_.parse_or_(String_.new_a7(date, 1, year_end), -1); if (year == -1) throw Err_.new_("parse failed; raw={0}", String_.new_a7(date));
 		int month		= Bry_.Xto_int_or(date, year_end +  1, year_end +  3, -1);
 		int day			= Bry_.Xto_int_or(date, year_end +  4, year_end +  6, -1);
 		int hour		= Bry_.Xto_int_or(date, year_end +  7, year_end +  9, -1);
@@ -73,14 +73,14 @@ public class Wdata_date {
 		byte[] time_spr = msgs.Sym_time_spr();
 		switch (precision) {
 			case Wdata_date.Fmt_ym:					// EX: "Feb 2001"
-				bfr.Add(months[months_bgn + date.Month() - ListAdp_.Base1]);
+				bfr.Add(months[months_bgn + date.Month() - List_adp_.Base1]);
 				bfr.Add_byte_space();
 				bfr.Add_long_variable(year);
 				break;
 			case Wdata_date.Fmt_ymd: 				// EX: "3 Feb 2001"
 				bfr.Add_int_variable(date.Day());
 				bfr.Add_byte_space();
-				bfr.Add(months[months_bgn + date.Month() - ListAdp_.Base1]);
+				bfr.Add(months[months_bgn + date.Month() - List_adp_.Base1]);
 				bfr.Add_byte_space();
 				bfr.Add_long_variable(date.Year());
 				break;
@@ -91,7 +91,7 @@ public class Wdata_date {
 				bfr.Add_byte_space();
 				bfr.Add_int_variable(date.Day());
 				bfr.Add_byte_space();
-				bfr.Add(months[months_bgn + date.Month() - ListAdp_.Base1]);
+				bfr.Add(months[months_bgn + date.Month() - List_adp_.Base1]);
 				bfr.Add_byte_space();
 				bfr.Add_long_variable(date.Year());
 				break;
@@ -102,7 +102,7 @@ public class Wdata_date {
 				bfr.Add_byte_space();
 				bfr.Add_int_variable(date.Day());
 				bfr.Add_byte_space();
-				bfr.Add(months[months_bgn + date.Month() - ListAdp_.Base1]);
+				bfr.Add(months[months_bgn + date.Month() - List_adp_.Base1]);
 				bfr.Add_byte_space();
 				bfr.Add_long_variable(date.Year());
 				break;
@@ -118,7 +118,7 @@ public class Wdata_date {
 					bfr.Add_byte_space();
 					bfr.Add_int_variable(date.Day());
 					bfr.Add_byte_space();
-					bfr.Add(months[months_bgn + date.Month() - ListAdp_.Base1]);
+					bfr.Add(months[months_bgn + date.Month() - List_adp_.Base1]);
 					bfr.Add_byte_space();
 					bfr.Add_long_variable(date.Year());
 				}

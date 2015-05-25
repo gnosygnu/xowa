@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfml; import gplx.*;
 class IntObjHash_base {
 	public int Count() {return count;} int count;
-	public boolean Has(int key) {return Fetch(key) != null;}
-	public Object Fetch(int key) {
+	public boolean Has(int key) {return Get_by(key) != null;}
+	public Object Get_by(int key) {
 		if (key < 0) throw Err_.new_("key must be >= 0").Add("key", key);
 		if (key > maxKey) return null;
 		Object[] subAry = FetchSubAry(key);

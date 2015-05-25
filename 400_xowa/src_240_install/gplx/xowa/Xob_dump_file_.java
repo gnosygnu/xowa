@@ -35,9 +35,9 @@ public class Xob_dump_file_ {
 				)
 			){
 			Xoi_mirror_parser mirror_parser = new Xoi_mirror_parser();
-			String dump_wiki_url = dump_server + String_.new_ascii_(rv.Wiki_alias()) + "/";
-			byte[] dump_url_wiki_html = gplx.ios.IoEngine_xrg_downloadFil.new_("", Io_url_.Null).Exec_as_bry(dump_wiki_url); if (Bry_.Len_eq_0(dump_url_wiki_html)) return;
-			String[] dump_available_dates = mirror_parser.Parse(String_.new_utf8_(dump_url_wiki_html));
+			String dump_wiki_url = dump_server + String_.new_a7(rv.Wiki_alias()) + "/";
+			byte[] dump_url_wiki_html = gplx.ios.IoEngine_xrg_downloadFil.new_("", Io_url_.Empty).Exec_as_bry(dump_wiki_url); if (Bry_.Len_eq_0(dump_url_wiki_html)) return;
+			String[] dump_available_dates = mirror_parser.Parse(String_.new_u8(dump_url_wiki_html));
 			String dump_dates_latest = Xoi_mirror_parser.Find_last_lte(dump_available_dates, dump_date);
 			if (String_.Eq(dump_dates_latest, "")) return;	// nothing found
 			rv.Dump_date_(dump_dates_latest);
@@ -59,8 +59,8 @@ public class Xob_dump_file_ {
 			);
 	}
 	private static final byte[] Bry_dash = new byte[] {Byte_ascii.Dash}, Bry_slash = new byte[] {Byte_ascii.Slash};
-	public static final byte[] Ext_xml_bz2 = Bry_.new_ascii_(".xml.bz2");
-	public static final byte[] Ext_sql_gz  = Bry_.new_ascii_(".sql.gz");
+	public static final byte[] Ext_xml_bz2 = Bry_.new_a7(".xml.bz2");
+	public static final byte[] Ext_sql_gz  = Bry_.new_a7(".sql.gz");
 	public static final String 
 		  Server_wmf			= "http://dumps.wikimedia.org/"
 		, Server_your_org		= "http://dumps.wikimedia.your.org/"

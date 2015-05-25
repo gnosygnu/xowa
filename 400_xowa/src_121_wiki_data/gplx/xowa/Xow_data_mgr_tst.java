@@ -131,33 +131,33 @@ class Xow_data_mgr_fxt {
 		wiki.Db_mgr().Save_mgr().Page_id_next_(0);
 	}
 	public Xow_data_mgr_fxt Create(String ttl_str, String data) {
-		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_utf8_(ttl_str));
-		wiki.Db_mgr().Save_mgr().Data_create(ttl, Bry_.new_utf8_(data));
+		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_u8(ttl_str));
+		wiki.Db_mgr().Save_mgr().Data_create(ttl, Bry_.new_u8(data));
 		return this;
 	}
 	public Xow_data_mgr_fxt Update(String ttl_str, String data) {
-		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_utf8_(ttl_str));
+		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_u8(ttl_str));
 		Xoae_page page = Xoae_page.test_(wiki, ttl);
-		wiki.Db_mgr().Save_mgr().Data_update(page, Bry_.new_utf8_(data));
+		wiki.Db_mgr().Save_mgr().Data_update(page, Bry_.new_u8(data));
 		return this;
 	}
 	public Xow_data_mgr_fxt Rename(String old_ttl, String new_ttl) {
-		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_utf8_(old_ttl));
+		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_u8(old_ttl));
 		Xoae_page page = Xoae_page.test_(wiki, ttl);
-		wiki.Db_mgr().Save_mgr().Data_rename(page, ttl.Ns().Id(), Bry_.new_utf8_(new_ttl));
+		wiki.Db_mgr().Save_mgr().Data_rename(page, ttl.Ns().Id(), Bry_.new_u8(new_ttl));
 		return this;
 	}
 	public Xow_data_mgr_fxt Tst_regy_title(String expd) {return Tst_regy(Xotdb_dir_info_.Name_title, expd);}
 	Xow_data_mgr_fxt Tst_regy(String name, String expd) {
 		Io_url file_orig = Io_url_.mem_fil_("mem/xowa/wiki/en.wikipedia.org/ns/000/" + name + "/reg.csv");
-		Tfds.Eq_str_lines(expd, Io_mgr._.LoadFilStr(file_orig));
+		Tfds.Eq_str_lines(expd, Io_mgr.I.LoadFilStr(file_orig));
 		return this;
 	}
 	public Xow_data_mgr_fxt Tst_data_page(String expd) {return Tst_data(Xotdb_dir_info_.Tid_page , Xow_ns_.Id_main, 0, expd);}
 	public Xow_data_mgr_fxt Tst_data_title(String expd) {return Tst_data(Xotdb_dir_info_.Tid_ttl, Xow_ns_.Id_main, 0, expd);}
 	public Xow_data_mgr_fxt Tst_data(byte dir_tid, int ns_id, int fil, String expd) {
 		Io_url url = wiki.Tdb_fsys_mgr().Url_ns_fil(dir_tid, ns_id, fil);
-		Tfds.Eq_str_lines(expd, Io_mgr._.LoadFilStr(url));
+		Tfds.Eq_str_lines(expd, Io_mgr.I.LoadFilStr(url));
 		return this;
 	}
 }

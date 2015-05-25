@@ -22,7 +22,7 @@ public class Pf_formatnum_fa_tst {
 	private Xop_fxt fxt;
 	@Before public void init() {
 		Xoae_app app = Xoa_app_fxt.app_();
-		Xol_lang lang = new Xol_lang(app.Lang_mgr(), Bry_.new_ascii_("fa")).Init_by_load_assert();
+		Xol_lang lang = new Xol_lang(app.Lang_mgr(), Bry_.new_a7("fa")).Init_by_load_assert();
 		String gfs = String_.Concat_lines_nl
 		( "numbers {"
 		, "  digits {"

@@ -17,12 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public abstract class DataWtr_base implements SrlMgr {
-	@gplx.Virtual public HashAdp EnvVars() {return envVars;} HashAdp envVars = HashAdp_.new_();
+	@gplx.Virtual public Hash_adp EnvVars() {return envVars;} Hash_adp envVars = Hash_adp_.new_();
 	public boolean Type_rdr() {return false;}
 	public abstract void WriteData(String key, Object o);
 	public abstract void WriteNodeBgn(String nodeName);
 	public abstract void WriteNodeEnd();
-	@gplx.Virtual public void SrlList(String key, ListAdp list, SrlObj proto, String itmKey) {
+	@gplx.Virtual public void SrlList(String key, List_adp list, SrlObj proto, String itmKey) {
 		this.WriteNodeBgn(key);
 		for (Object itmObj : list) {
 			SrlObj itm = (SrlObj)itmObj;

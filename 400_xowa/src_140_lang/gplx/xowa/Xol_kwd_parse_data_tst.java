@@ -31,8 +31,8 @@ public class Xol_kwd_parse_data_tst {
 	Xol_kwd_parse_data_tst Tst_strip(String v) {
 		Bry_bfr tmp = Bry_bfr.new_();
 		Byte_obj_ref rslt = Byte_obj_ref.zero_();
-		byte[] actl = Xol_kwd_parse_data.Strip(tmp, Bry_.new_ascii_(v), rslt);
-		Tfds.Eq(key, String_.new_ascii_(actl));
+		byte[] actl = Xol_kwd_parse_data.Strip(tmp, Bry_.new_a7(v), rslt);
+		Tfds.Eq(key, String_.new_a7(actl));
 		return this;
 	}
 }

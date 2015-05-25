@@ -30,7 +30,7 @@ public class Process_send_wtr {
 		bfr.Add_double(v);
 		return true;
 	}
-	public boolean Encode_str(Bry_bfr bfr, String v) {return Encode_str(bfr, Bry_.new_utf8_(v));}
+	public boolean Encode_str(Bry_bfr bfr, String v) {return Encode_str(bfr, Bry_.new_u8(v));}
 	public boolean Encode_str(Bry_bfr bfr, byte[] bry) {
 		int len = bry.length;
 		bfr.Add_byte(Byte_ascii.Quote);
@@ -53,7 +53,7 @@ public class Process_send_wtr {
 		bfr.Add_int_variable(prc.Id());
 		bfr.Add_byte(Byte_ascii.Brack_end);
 		return true;		
-	}	static final byte[] Prc_bgn = Bry_.new_ascii_("chunks[");
+	}	static final byte[] Prc_bgn = Bry_.new_a7("chunks[");
 	private boolean Encode_ary(Bry_bfr bfr, KeyVal[] ary) {
 		int len = ary.length;
 		bfr.Add_byte(Byte_ascii.Curly_bgn);
@@ -93,6 +93,6 @@ public class Process_send_wtr {
 		else												{throw Scrib_xtn_mgr.err_("Object cannot be serialized: {0}", ClassAdp_.NameOf_obj(o));}
 		return true;
 	}
-	private static final byte[] CONST_nil = Bry_.new_ascii_("nil"), CONST_bool_true = Bry_.new_ascii_("true"), CONST_bool_false = Bry_.new_ascii_("false"), CONST_escape_000 = Bry_.new_ascii_("\\000");
+	private static final byte[] CONST_nil = Bry_.new_a7("nil"), CONST_bool_true = Bry_.new_a7("true"), CONST_bool_false = Bry_.new_a7("false"), CONST_escape_000 = Bry_.new_a7("\\000");
 	private static final String GRP_KEY = "xowa-scribunto-lua-srl";
 }

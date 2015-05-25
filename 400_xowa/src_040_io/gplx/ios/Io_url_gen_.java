@@ -33,13 +33,13 @@ class Io_url_gen_dir implements Io_url_gen {
 		}
 		return rv;
 	}
-	public void Del_all() {if (Io_mgr._.ExistsDir(dir)) Io_mgr._.DeleteDirDeep(dir);}
+	public void Del_all() {if (Io_mgr.I.ExistsDir(dir)) Io_mgr.I.DeleteDirDeep(dir);}
 	public Io_url_gen_dir(Io_url dir) {this.dir = dir;} Io_url dir;
 }
 class Io_url_gen_fil implements Io_url_gen {
 	public Io_url Cur_url() {return cur_url;} Io_url cur_url;
 	public Io_url Nxt_url() {return cur_url;}
 	public Io_url[] Prv_urls() {return new Io_url[]{cur_url};}
-	public void Del_all() {Io_mgr._.DeleteFil_args(cur_url).MissingFails_off().Exec();}
+	public void Del_all() {Io_mgr.I.DeleteFil_args(cur_url).MissingFails_off().Exec();}
 	public Io_url_gen_fil(Io_url fil) {this.cur_url = fil;}
 }

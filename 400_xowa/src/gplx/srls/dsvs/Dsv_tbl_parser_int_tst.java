@@ -38,7 +38,7 @@ class Mok_int_itm implements XtoStrAble {
 }
 class Mok_int_mgr extends Mok_mgr_base {
 	public void Clear() {itms.Clear();}
-	@Override public XtoStrAble[] Itms() {return (XtoStrAble[])itms.Xto_ary(XtoStrAble.class);} private ListAdp itms = ListAdp_.new_();
+	@Override public XtoStrAble[] Itms() {return (XtoStrAble[])itms.To_ary(XtoStrAble.class);} private List_adp itms = List_adp_.new_();
 	private String fld_0;
 	private int fld_1, fld_2;
 	@Override public Dsv_fld_parser[] Fld_parsers() {
@@ -46,7 +46,7 @@ class Mok_int_mgr extends Mok_mgr_base {
 	}
 	@Override public boolean Write_bry(Dsv_tbl_parser parser, int fld_idx, byte[] src, int bgn, int end) {
 		switch (fld_idx) {
-			case 0: fld_0 = String_.new_utf8_(src, bgn, end); return true;
+			case 0: fld_0 = String_.new_u8(src, bgn, end); return true;
 			default: return false;
 		}
 	}

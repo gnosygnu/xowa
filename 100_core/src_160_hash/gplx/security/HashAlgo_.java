@@ -40,18 +40,18 @@ public class HashAlgo_ {
 }
 class HashAlgo_null implements HashAlgo {
 	public String Key() {return "HashAlgo_null";}
-	public byte[] Calc_hash_bry(byte[] v) {return Bry_.new_ascii_(CalcHash(ConsoleDlg_.Null, gplx.ios.IoStream_.ary_(v)));}
+	public byte[] Calc_hash_bry(byte[] v) {return Bry_.new_a7(CalcHash(ConsoleDlg_.Null, gplx.ios.IoStream_.ary_(v)));}
 	public String CalcHash(ConsoleDlg dialog, IoStream stream) {return "NullAlgoHash";}
 }
 class HashAlgo_md5 implements HashAlgo {
 	public String Key() {return KEY;} public static final String KEY = "md5";
-	public byte[] Calc_hash_bry(byte[] v) {return Bry_.new_ascii_(CalcHash(ConsoleDlg_.Null, gplx.ios.IoStream_.ary_(v)));}
+	public byte[] Calc_hash_bry(byte[] v) {return Bry_.new_a7(CalcHash(ConsoleDlg_.Null, gplx.ios.IoStream_.ary_(v)));}
 	public String CalcHash(ConsoleDlg dialog, IoStream stream) {return HashAlgoUtl.CalcHashAsString(dialog, stream, "MD5");}
 	public static HashAlgo_md5 new_() {return new HashAlgo_md5();} HashAlgo_md5() {}
 }
 class HashAlgo_sha1 implements HashAlgo {
 	public String Key() {return KEY;} public static final String KEY = "sha1";
-	public byte[] Calc_hash_bry(byte[] v) {return Bry_.new_ascii_(CalcHash(ConsoleDlg_.Null, gplx.ios.IoStream_.ary_(v)));}
+	public byte[] Calc_hash_bry(byte[] v) {return Bry_.new_a7(CalcHash(ConsoleDlg_.Null, gplx.ios.IoStream_.ary_(v)));}
 	public String CalcHash(ConsoleDlg dialog, IoStream stream) {return HashAlgoUtl.CalcHashAsString(dialog, stream, "SHA1");}
 	public static HashAlgo_sha1 new_() {return new HashAlgo_sha1();} HashAlgo_sha1() {}
 }

@@ -47,14 +47,14 @@ public class Xox_xowa_html_cmd implements Xox_xnde, Xop_xnde_atr_parser {
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {}
 	private static byte Pos_val(byte[] bry) {
 		Object o = pos_val_hash.Get_by_bry(bry);
-		if (o == null) throw Err_.new_("unknown pos:{0}", String_.new_utf8_(bry));
+		if (o == null) throw Err_.new_("unknown pos:{0}", String_.new_u8(bry));
 		return ((Byte_obj_val)o).Val();
 	}
 	private static final byte Pos_head_end = 1, Pos_html_end = 2;
 	private static final byte[] 
-	  Xatr_pos_key				= Bry_.new_ascii_("pos")
-	, Xatr_pos_val__head_end	= Bry_.new_ascii_("head.end")
-	, Xatr_pos_val__html_end	= Bry_.new_ascii_("html.end")
+	  Xatr_pos_key				= Bry_.new_a7("pos")
+	, Xatr_pos_val__head_end	= Bry_.new_a7("head.end")
+	, Xatr_pos_val__html_end	= Bry_.new_a7("html.end")
 	;
 	private static final Hash_adp_bry pos_val_hash = Hash_adp_bry.ci_ascii_()
 	.Add_bry_byte(Xatr_pos_val__head_end, Pos_head_end)

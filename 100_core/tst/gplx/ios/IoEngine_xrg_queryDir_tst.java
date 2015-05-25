@@ -46,7 +46,7 @@ public class IoEngine_xrg_queryDir_tst {
 		tst_ExecPathAry(finder_().DirInclude_()					// include dirs; NOTE: fil1A not returned b/c Recur_ is not true
 			, dir_("dirA"), fil_("fil1.txt"));
 	}
-	@Test  public void SortBy() {
+	@Test  public void Sort_by() {
 		save_text_(fil_("fil2a.txt"), fil_("fil1.txt"));
 
 		tst_ExecPathAry(finder_()								// default: sortByAscOrder
@@ -58,7 +58,7 @@ public class IoEngine_xrg_queryDir_tst {
 	
 	Io_url[] save_text_(Io_url... ary) {
 		for (Io_url url : ary)
-			Io_mgr._.SaveFilStr(url, url.Raw());
+			Io_mgr.I.SaveFilStr(url, url.Raw());
 		return ary;
 	}
 	void tst_ExecPathAry(IoEngine_xrg_queryDir finder, Io_url... expd) {Tfds.Eq_ary(expd, finder.ExecAsUrlAry());}

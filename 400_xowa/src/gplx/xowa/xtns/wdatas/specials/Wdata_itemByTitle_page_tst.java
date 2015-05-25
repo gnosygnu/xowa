@@ -53,20 +53,20 @@ class Wdata_itemByTitle_page_fxt {
 	Wdata_wiki_mgr_fxt wdata_fxt;
 	public void Init_wdata_page(String qid_ttl, String text) {
 		Wdata_doc doc = wdata_fxt.Wdoc_bldr(qid_ttl).Xto_wdoc();
-		app.Wiki_mgr().Wdata_mgr().Pages_add(Bry_.new_ascii_(qid_ttl), doc);
+		app.Wiki_mgr().Wdata_mgr().Pages_add(Bry_.new_a7(qid_ttl), doc);
 		parser_fxt.Init_page_create(app.Wiki_mgr().Wdata_mgr().Wdata_wiki(), qid_ttl, text);
 	}
 	public void Init_wdata_label(String wmf_key_str, String wdata_label, String qid) {
-		wdata_fxt.Init_qids_add("en", Xow_domain_.Tid_int_wikipedia, wdata_label, qid);		
+		wdata_fxt.Init_qids_add("en", Xow_domain_type_.Tid_wikipedia, wdata_label, qid);		
 	}
 	public void Test_open(String link, String expd) {
 		Xoae_page page = wiki.Ctx().Cur_page();
 		Xoa_url url = Xoa_url_parser.Parse_url(app, wiki, link);
 		page.Url_(url);
-		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_ascii_(link));
+		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_a7(link));
 		page.Ttl_(ttl);
 		special_page.Special_gen(wiki, page, url, ttl);
-		Tfds.Eq_str_lines(expd, String_.new_ascii_(page.Data_raw()));
+		Tfds.Eq_str_lines(expd, String_.new_a7(page.Data_raw()));
 	}
 	public String Expd_html(String wmf_key, String ttl_str) {
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_k004();

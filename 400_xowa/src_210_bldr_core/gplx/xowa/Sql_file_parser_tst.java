@@ -59,16 +59,16 @@ public class Sql_file_parser_tst {
 }
 class Sql_file_parser_fxt {
 	Sql_file_parser parser = new Sql_file_parser().Src_len_(Io_mgr.Len_kb).Trg_len_(Io_mgr.Len_kb);
-	public Sql_file_parser_fxt Clear() {Io_mgr._.InitEngine_mem(); return this;}
+	public Sql_file_parser_fxt Clear() {Io_mgr.I.InitEngine_mem(); return this;}
 	public Sql_file_parser_fxt Init_flds_req_idx_(int flds_all_len, int... idxs) {parser.Flds_req_idx_(flds_all_len, idxs); return this;}
 	public Sql_file_parser_fxt Init_cmd_(Sql_file_parser_cmd cmd) {parser.Fld_cmd_(cmd); return this;}
 	public void Test_parse(String raw_str, String expd) {
 		Io_url src_fil = Io_url_.new_fil_("mem/test.sql");
-		Io_mgr._.SaveFilBry(src_fil, Bry_.new_utf8_(raw_str));
+		Io_mgr.I.SaveFilBry(src_fil, Bry_.new_u8(raw_str));
 		Io_url trg_fil = Io_url_.new_fil_("mem/test.csv");
 		parser.Src_fil_(src_fil).Trg_fil_gen_(Io_url_gen_.fil_(trg_fil));
 		parser.Parse(Gfo_usr_dlg_.Test());
-		byte[] actl = Io_mgr._.LoadFilBry(trg_fil);
-		Tfds.Eq(expd, String_.new_utf8_(actl));
+		byte[] actl = Io_mgr.I.LoadFilBry(trg_fil);
+		Tfds.Eq(expd, String_.new_u8(actl));
 	}	
 }

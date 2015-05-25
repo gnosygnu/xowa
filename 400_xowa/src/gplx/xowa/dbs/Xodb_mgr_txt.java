@@ -30,11 +30,11 @@ public class Xodb_mgr_txt implements Xodb_mgr {
 	public Xodb_save_mgr Save_mgr() {return save_mgr;} private Xodb_save_mgr_txt save_mgr;
 	public DateAdp Dump_date_query() {
 		Io_url url = wiki.Tdb_fsys_mgr().Url_ns_fil(Xotdb_dir_info_.Tid_page, Xow_ns_.Id_main, 0);
-		return Io_mgr._.QueryFil(url).ModifiedTime();
+		return Io_mgr.I.QueryFil(url).ModifiedTime();
 	}
 	public byte Category_version() {
 		if (category_version == Xoa_ctg_mgr.Version_null) {
-			if (Io_mgr._.ExistsDir(wiki.Tdb_fsys_mgr().Url_site_dir(Xotdb_dir_info_.Tid_category2_link)))
+			if (Io_mgr.I.ExistsDir(wiki.Tdb_fsys_mgr().Url_site_dir(Xotdb_dir_info_.Tid_category2_link)))
 				category_version = Xoa_ctg_mgr.Version_2;
 			else
 				category_version = Xoa_ctg_mgr.Version_1;

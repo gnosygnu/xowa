@@ -60,7 +60,7 @@ public class Xop_tblw_lxr_ws {
 		}
 		return ctx.Tblw().Make_tkn_bgn(ctx, tkn_mkr, root, src, src_len, bgn_pos, cur_pos, false, wlxr_type, Xop_tblw_wkr.Called_from_general, -1, -1);
 	}
-	public static final byte[] Hook_tb = Bry_.new_ascii_("{|"), Hook_te = Bry_.new_ascii_("|}"), Hook_tr = Bry_.new_ascii_("|-")
-		, Hook_th = Bry_.new_ascii_("!"), Hook_tc = Bry_.new_ascii_("|+");
+	public static final byte[] Hook_tb = Bry_.new_a7("{|"), Hook_te = Bry_.new_a7("|}"), Hook_tr = Bry_.new_a7("|-")
+		, Hook_th = Bry_.new_a7("!"), Hook_tc = Bry_.new_a7("|+");
 	public static final int Tblw_ws_cell_pipe = -1;
 }

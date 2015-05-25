@@ -36,7 +36,7 @@ public class HashAlgo_md5_tst {
 		tst_CalcBase16FromString(String_.Repeat("a", 1000000), "7707d6ae4e027c70eea2a935c2296f21");
 	}
 	void tst_CalcBase16FromString(String raw, String expd) {
-		IoStream stream = IoStream_.mem_txt_(Io_url_.Null, raw);
+		IoStream stream = IoStream_.mem_txt_(Io_url_.Empty, raw);
 		String actl = HashAlgo_.Md5.CalcHash(ConsoleDlg_.Null, stream);
 		Tfds.Eq(expd, actl);
 	}

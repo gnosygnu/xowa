@@ -28,7 +28,7 @@ public class CharStream {
 	public void MoveNextBy(int offset) {pos += offset;}
 	public void MoveBack() {pos--;}
 	public void MoveBackBy(int offset) {pos -= offset;}
-	public void MoveTo(int val) {pos = val;}
+	public void Move_to(int val) {pos = val;}
 	public boolean Match(String match) {
 		int matchLen = String_.Len(match);
 		for (int i = 0; i < matchLen; i++) {

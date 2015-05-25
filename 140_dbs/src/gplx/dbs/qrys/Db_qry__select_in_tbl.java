@@ -71,7 +71,7 @@ public class Db_qry__select_in_tbl implements Db_qry {
 					for (int i = 0; i < len; ++i) {
 						String order_fld = order_flds[i];
 						if (i != 0) bfr.Add_byte_comma();
-						bfr.Add_str_ascii(order_fld);
+						bfr.Add_str_a7(order_fld);
 					}
 					order_by_sql = bfr.Xto_str_and_clear();
 					break;

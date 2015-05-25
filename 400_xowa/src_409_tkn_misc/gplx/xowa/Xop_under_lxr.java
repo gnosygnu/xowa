@@ -56,7 +56,7 @@ class Xop_under_lxr implements Xop_lxr {
 					if (kwd_case_match)					// cs; add word directly to trie
 						core_trie.Add(kwd_bry, word_lxr);
 					else {								// NOTE: next part is imprecise; XOWA parser is cs, but kwd is ci; for now, just add all upper and all lower
-						Gfo_usr_dlg_.I.Warn_many("", "", "under keyword does not start with __; id=~{0} key=~{1} word=~{2}", kwd_id, String_.new_utf8_(kwd_grp.Key()), String_.new_utf8_(kwd_bry));
+						Gfo_usr_dlg_.I.Warn_many("", "", "under keyword does not start with __; id=~{0} key=~{1} word=~{2}", kwd_id, String_.new_u8(kwd_grp.Key()), String_.new_u8(kwd_bry));
 						core_trie.Add(lang.Case_mgr().Case_build_lower(kwd_bry), word_lxr);
 						core_trie.Add(lang.Case_mgr().Case_build_upper(kwd_bry), word_lxr);	
 					}
@@ -128,7 +128,7 @@ class Xop_under_hook {
 	public byte[] Key() {return key;} private byte[] key;
 	public int Key_len() {return key_len;} private int key_len;
 	public static final byte Tid_std = 1, Tid_alt = 2;
-	public static final byte[] Key_std = new byte[] {Byte_ascii.Underline, Byte_ascii.Underline}, Key_alt = Bry_.new_utf8_("＿＿");	// ja wikis
+	public static final byte[] Key_std = new byte[] {Byte_ascii.Underline, Byte_ascii.Underline}, Key_alt = Bry_.new_u8("＿＿");	// ja wikis
 	public static final Xop_under_hook
 	  Itm_std = new Xop_under_hook(Tid_std, Key_std)
 	, Itm_alt = new Xop_under_hook(Tid_alt, Key_alt)

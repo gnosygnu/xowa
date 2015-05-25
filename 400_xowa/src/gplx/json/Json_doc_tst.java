@@ -39,7 +39,7 @@ public class Json_doc_tst {
 }
 class Json_qry_mgr_fxt {
 	public void Test_get_val_as_str(Json_doc doc, String qry, String expd){
-		byte[][] qry_bry = Bry_.Split(Bry_.new_utf8_(qry), Byte_ascii.Slash);
+		byte[][] qry_bry = Bry_.Split(Bry_.new_u8(qry), Byte_ascii.Slash);
 		Tfds.Eq(expd, doc.Get_val_as_str_or(qry_bry, null));
 	}
 }

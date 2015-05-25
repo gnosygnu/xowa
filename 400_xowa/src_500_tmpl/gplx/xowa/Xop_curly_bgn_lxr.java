@@ -26,7 +26,7 @@ public class Xop_curly_bgn_lxr implements Xop_lxr {
 	public static Btrie_fast_mgr tmpl_bgn_trie_() {	// hook sequences for adding new_line to tmpl return; "{|" "|-" ":" ";" "#" "*"; EX: "{{a}}" returns "*"; convert to "\n*"
 		Btrie_fast_mgr rv = Btrie_fast_mgr.cs_();
 		rv.Add(Xop_tblw_lxr_ws.Hook_tb, Bry_.Empty);
-		rv.Add(Bry_.new_ascii_("|-"), Bry_.Empty);
+		rv.Add(Bry_.new_a7("|-"), Bry_.Empty);
 		rv.Add(Byte_ascii.Colon, Bry_.Empty);
 		rv.Add(Byte_ascii.Semic, Bry_.Empty);
 		rv.Add(Byte_ascii.Hash, Bry_.Empty);

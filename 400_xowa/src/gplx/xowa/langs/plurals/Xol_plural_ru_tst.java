@@ -30,6 +30,6 @@ public class Xol_plural_ru_tst {
 	}
 	private void Tst(int count, String[] forms, String expd) {
 		byte[] actl = Xol_plural_ru._.Plural_eval(null, count, Bry_.Ary(forms));
-		Tfds.Eq_bry(Bry_.new_ascii_safe_null_(expd), actl);
+		Tfds.Eq_bry(Bry_.new_a7(expd), actl);
 	}
 }

@@ -45,7 +45,7 @@ class Xop_keeplist_wiki_fxt {
 		Xowe_wiki wiki = Xoa_app_fxt.wiki_(app, "enwiki");
 		Xow_popup_mgr popup_mgr = wiki.Html_mgr().Module_mgr().Popup_mgr();
 		popup_mgr.Init_by_wiki(wiki);
-		popup_mgr.Parser().Tmpl_keeplist_init_(Bry_.new_utf8_(raw));
+		popup_mgr.Parser().Tmpl_keeplist_init_(Bry_.new_u8(raw));
 		Xop_keeplist_wiki rv = popup_mgr.Parser().Tmpl_keeplist();
 		return rv;
 	}
@@ -55,7 +55,7 @@ class Xop_keeplist_wiki_fxt {
 		int len = itms.length;
 		for (int i = 0; i < len; i++) {
 			String itm = itms[i];
-			Tfds.Eq(expd, keeplist_wiki.Match(Bry_.new_utf8_(itm)), "itm={0} expd={1}", itm, expd);
+			Tfds.Eq(expd, keeplist_wiki.Match(Bry_.new_u8(itm)), "itm={0} expd={1}", itm, expd);
 		}
 	}
 }

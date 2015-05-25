@@ -37,7 +37,7 @@ public class GfuiMoveElemBtn extends GfuiBtn { 	@Override public GxwElem UnderEl
 }
 class GfuiResizeFormBnd implements IptBnd {
 	public String Key() {return "gplx.gfui.resizeForm";}
-	public ListAdp Ipts() {return args;} ListAdp args = ListAdp_.new_();
+	public List_adp Ipts() {return args;} List_adp args = List_adp_.new_();
 	public IptEventType EventTypes() {return IptEventType_.KeyDown.Add(IptEventType_.MouseDown).Add(IptEventType_.MouseUp).Add(IptEventType_.MouseMove);}
 	public void Exec(IptEventData iptData) {
 		int val = iptData.EventType().Val();
@@ -61,7 +61,7 @@ class GfuiResizeFormBnd implements IptBnd {
 		active = false;
 	}
 	void ExecKeyDown(IptEventData iptData) {
-		SizeAdp deltaSize = (SizeAdp)hash.Fetch(iptData.EventArg());
+		SizeAdp deltaSize = (SizeAdp)hash.Get_by(iptData.EventArg());
 		ResizeForm(iptData.Sender(), deltaSize);
 	}
 	void ResizeForm(GfuiElem elem, SizeAdp deltaSize) {
@@ -75,10 +75,10 @@ class GfuiResizeFormBnd implements IptBnd {
 	static SizeAdp Op_add(SizeAdp lhs, SizeAdp rhs) {return SizeAdp_.new_(lhs.Width() + rhs.Width(), lhs.Height() + rhs.Height());}
 	public Object Srl(GfoMsg owner) {return IptBnd_.Srl(owner, this);}
 
-	boolean active = false; PointAdp lastPos = PointAdp_.Zero; HashAdp hash = HashAdp_.new_();
+	boolean active = false; PointAdp lastPos = PointAdp_.Zero; Hash_adp hash = Hash_adp_.new_();
 	public static GfuiResizeFormBnd new_() {return new GfuiResizeFormBnd();}
 	GfuiResizeFormBnd() {
-		args.AddMany(IptMouseBtn_.Right, IptMouseMove.AnyDirection);
+		args.Add_many(IptMouseBtn_.Right, IptMouseMove.AnyDirection);
 		IptBndArgsBldr.AddWithData(args, hash, IptKey_.Ctrl.Add(IptKey_.Shift).Add(IptKey_.Up), SizeAdp_.new_(0, -10));
 		IptBndArgsBldr.AddWithData(args, hash, IptKey_.Ctrl.Add(IptKey_.Shift).Add(IptKey_.Down), SizeAdp_.new_(0, 10));
 		IptBndArgsBldr.AddWithData(args, hash, IptKey_.Ctrl.Add(IptKey_.Shift).Add(IptKey_.Left), SizeAdp_.new_(-10, 0));

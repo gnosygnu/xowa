@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 public class Scrib_lua_mod {
-	private OrderedHash hash = OrderedHash_.new_();
+	private Ordered_hash hash = Ordered_hash_.new_();
 	public Scrib_lua_mod(Scrib_core core, String name) {this.name = name; this.core = core;} private Scrib_core core;
 	public int Lua_id() {return lua_id;} private int lua_id = -1;
 	public String Name() {return name;} private String name;
@@ -25,8 +25,8 @@ public class Scrib_lua_mod {
 	public byte[] Text_bry() {return text_bry;} private byte[] text_bry;
 	public void Fncs_clear() {hash.Clear();}
 	public int Fncs_len() {return hash.Count();}
-	public Scrib_lua_proc Fncs_get_at(int i) {return (Scrib_lua_proc)hash.FetchAt(i);}
-	public Scrib_lua_proc Fncs_get_by_key(String key) {return (Scrib_lua_proc)hash.Fetch(key);}
+	public Scrib_lua_proc Fncs_get_at(int i) {return (Scrib_lua_proc)hash.Get_at(i);}
+	public Scrib_lua_proc Fncs_get_by_key(String key) {return (Scrib_lua_proc)hash.Get_by(key);}
 	public void Fncs_add(Scrib_lua_proc prc) {hash.Add(prc.Key(), prc);}
 	public int Fncs_get_id(String key) {
 		Scrib_lua_proc fnc = Fncs_get_by_key(key); if (fnc == null) throw Err_.new_fmt_("Scrb_fnc does not exist: module={0} func={1}", name, key);
@@ -35,7 +35,7 @@ public class Scrib_lua_mod {
 	public Scrib_lua_proc LoadString(String text) {
 		if (lua_id != -1) return init_chunk_func;
 		text = String_.Replace(text, "&#09;", "\t");	// NOTE: this should only get called once per module
-		text_bry = Bry_.new_utf8_(text);
+		text_bry = Bry_.new_u8(text);
 		init_chunk_func = core.Interpreter().LoadString("=" + name, text);	// MW: Scribunto: Prepending an "=" to the chunk name avoids truncation or a "[string" prefix;
 		lua_id = init_chunk_func.Id();
 		return init_chunk_func;

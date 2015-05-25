@@ -22,7 +22,7 @@ public class IoEngine_memory extends IoEngine_base {
 	@Override public void DeleteFil_api(IoEngine_xrg_deleteFil args) {
 		Io_url url = args.Url();
 		IoItmDir dir = FetchDir(url.OwnerDir()); if (dir == null) return; // url doesn't exist; just exit
-		IoItmFil fil = IoItmFil_.as_(dir.SubFils().Fetch(url.NameAndExt()));
+		IoItmFil fil = IoItmFil_.as_(dir.SubFils().Get_by(url.NameAndExt()));
 		if (fil != null && fil.ReadOnly() && args.ReadOnlyFails()) throw IoErr.FileIsReadOnly(url);
 		dir.SubFils().Del(url);
 	}
@@ -53,7 +53,7 @@ public class IoEngine_memory extends IoEngine_base {
 		Io_url url = args.Url();
 		IoItmDir dir = FetchDir(url.OwnerDir());
 		if (dir != null) {
-			IoItmFil fil = IoItmFil_.as_(dir.SubFils().Fetch(url.NameAndExt()));
+			IoItmFil fil = IoItmFil_.as_(dir.SubFils().Get_by(url.NameAndExt()));
 			if (fil != null && fil.ReadOnly()) throw IoErr.FileIsReadOnly(url);
 		}
 
@@ -105,7 +105,7 @@ public class IoEngine_memory extends IoEngine_base {
 		dir = IoItmDir_.top_(url);
 		dirs.Add(dir);
 		IoItmDir ownerDir = FetchDir(url.OwnerDir());
-		if (ownerDir == null && !url.OwnerDir().Eq(Io_url_.Null)) {	// no owner dir && not "driveDir" -> create
+		if (ownerDir == null && !url.OwnerDir().Eq(Io_url_.Empty)) {	// no owner dir && not "driveDir" -> create
 			CreateDir(url.OwnerDir());	// recursive
 			ownerDir = FetchDir(url.OwnerDir());
 		}
@@ -118,8 +118,8 @@ public class IoEngine_memory extends IoEngine_base {
 		IoItmDir ownerDir = FetchDir(url.OwnerDir()); if (ownerDir == null) return; // no ownerDir; no need to unregister
 		ownerDir.SubDirs().Del(url);
 	}
-	@Override public void XferDir(IoEngine_xrg_xferDir args) {Io_url trg = args.Trg(); utl.XferDir(this, args.Src(), IoEnginePool._.Fetch(trg.Info().EngineKey()), trg, args);}
-	@Override public void MoveDirDeep(IoEngine_xrg_xferDir args) {Io_url trg = args.Trg(); utl.XferDir(this, args.Src(), IoEnginePool._.Fetch(trg.Info().EngineKey()), trg, args);}
+	@Override public void XferDir(IoEngine_xrg_xferDir args) {Io_url trg = args.Trg(); utl.XferDir(this, args.Src(), IoEnginePool._.Get_by(trg.Info().EngineKey()), trg, args);}
+	@Override public void MoveDirDeep(IoEngine_xrg_xferDir args) {Io_url trg = args.Trg(); utl.XferDir(this, args.Src(), IoEnginePool._.Get_by(trg.Info().EngineKey()), trg, args);}
 	@Override public void MoveDir(Io_url src, Io_url trg) {if (ExistsDir(trg)) throw Err_.new_("trg already exists").Add("trg", trg);
 		IoItmDir dir = FetchDir(src); dir.Name_(trg.NameAndExt());
 		for (Object filObj : dir.SubFils()) {			// move all subFiles
@@ -159,11 +159,11 @@ public class IoEngine_memory extends IoEngine_base {
 		dir.SubFils().Del(fil.Url());
 		dir.SubFils().Add(fil);
 	}
-	IoItmDir FetchDir(Io_url url) {return IoItmDir_.as_(dirs.Fetch(url));}
+	IoItmDir FetchDir(Io_url url) {return IoItmDir_.as_(dirs.Get_by(url));}
 	IoItmFil_mem FetchFil(Io_url url) {
 		IoItmDir ownerDir = FetchDir(url.OwnerDir());
 		if (ownerDir == null) return IoItmFil_mem.Null;
-		IoItmFil_mem rv = IoItmFil_mem.as_(ownerDir.SubFils().Fetch(url.NameAndExt())); 
+		IoItmFil_mem rv = IoItmFil_mem.as_(ownerDir.SubFils().Get_by(url.NameAndExt())); 
 		if (rv == null) rv = IoItmFil_mem.Null;
 		return rv;
 	}
@@ -187,7 +187,7 @@ public class IoEngine_memory extends IoEngine_base {
 			xrg.Rslt_(IoEngine_xrg_downloadFil.Rslt_fail_file_not_found);
 			return Io_stream_rdr_.Null;
 		}
-		byte[] bry = Bry_.new_utf8_(FetchFil(Io_url_.mem_fil_(xrg.Src())).Text());
+		byte[] bry = Bry_.new_u8(FetchFil(Io_url_.mem_fil_(xrg.Src())).Text());
 		return Io_stream_rdr_.mem_(bry);
 	}
 	IoItmHash dirs = IoItmHash.new_();

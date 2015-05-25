@@ -25,16 +25,16 @@ public class TabBox_tst {
 //			fx.Make(1).tst_Selected("0").FetchBtnAt(0).tst_X(0);
 //			fx.Make(3).tst_Selected("2").FetchBtnAt(2).tst_X(160);
 	}
-//		@Test  public void DelAt() {
-//			fx.Make(2).DelAt(1).tst_Btns("0");
-//			fx.Make(2).DelAt(0).tst_Btns("1");
-//			fx.Make(3).DelAt(0).tst_Btns("1", "2");
-//			fx.Make(3).DelAt(1).tst_Btns("0", "2");
-//			fx.Make(3).DelAt(2).tst_Btns("0", "1");
+//		@Test  public void Del_at() {
+//			fx.Make(2).Del_at(1).tst_Btns("0");
+//			fx.Make(2).Del_at(0).tst_Btns("1");
+//			fx.Make(3).Del_at(0).tst_Btns("1", "2");
+//			fx.Make(3).Del_at(1).tst_Btns("0", "2");
+//			fx.Make(3).Del_at(2).tst_Btns("0", "1");
 
-//			fx.Make(3).Select(1).DelAt(1).tst_Selected("2");	// 1 deleted; 2 shifted down into slot
-//			fx.Make(3).Select(1).DelAt(0).tst_Selected("1");	// 0 deleted; 1 still remains active (but will have idx of 0
-//			fx.Make(3).Select(2).DelAt(2).tst_Selected("1");	// 2 deleted; 1 selected
+//			fx.Make(3).Select(1).Del_at(1).tst_Selected("2");	// 1 deleted; 2 shifted down into slot
+//			fx.Make(3).Select(1).Del_at(0).tst_Selected("1");	// 0 deleted; 1 still remains active (but will have idx of 0
+//			fx.Make(3).Select(2).Del_at(2).tst_Selected("1");	// 2 deleted; 1 selected
 //		}
 //		@Test  public void Selected_byAdd() {
 //			fx.Make(2).Select(0).tst_Selected("0").Select(1).tst_Selected("1");
@@ -42,7 +42,7 @@ public class TabBox_tst {
 //		@Test  public void Selected_byBtn() {
 //			fx.Make(2).tst_Selected("1");
 //
-//			GfuiBtn btn = fx.TabBox().SubBtnArea().FetchAt(0);
+//			GfuiBtn btn = fx.TabBox().SubBtnArea().Get_at(0);
 //			btn.Click();
 //			fx.tst_Selected("0");
 //		}
@@ -73,27 +73,27 @@ class TabBoxFxt implements GfoInvkAble {
 			tabBox.Tabs_Add(Int_.Xto_str(i), Int_.Xto_str(i));
 		return this;
 	}
-	@gplx.Internal protected TabBoxFxt DelAt(int index) {tabBox.Tabs_DelAt(index); return this;}
+	@gplx.Internal protected TabBoxFxt Del_at(int index) {tabBox.Tabs_DelAt(index); return this;}
 //		@gplx.Internal protected TabBoxFxt Select(int index) {tabBox.Tabs_Select(index); return this;}
 	@gplx.Internal protected GfuiElemFxt FetchBtnAt(int index) {
-		GfuiBtn btn = (GfuiBtn)tabBox.BtnBox().SubElems().FetchAt(index);
+		GfuiBtn btn = (GfuiBtn)tabBox.BtnBox().SubElems().Get_at(index);
 		GfuiElemFxt fx_elem = GfuiElemFxt.new_(btn);
 		return fx_elem;
 	}
 //		@gplx.Internal protected TabBoxFxt tst_BtnX(int idx, int expdX) {
-//			Tfds.Eq(expdX, tabBox.SubBtnArea().FetchAt(idx).X());
+//			Tfds.Eq(expdX, tabBox.SubBtnArea().Get_at(idx).X());
 //			return this;
 //		}
 	@gplx.Internal protected TabBoxFxt tst_Selected(String expd) {
 		TabPnlItm curTab = tabBox.Tabs_SelectedItm();			
-		GfuiBtn btn = (GfuiBtn)tabBox.BtnBox().SubElems().FetchAt(curTab.Idx());
+		GfuiBtn btn = (GfuiBtn)tabBox.BtnBox().SubElems().Get_at(curTab.Idx());
 		Tfds.Eq(expd, btn.Text());
 		return this;
 	}
 	@gplx.Internal protected TabBoxFxt tst_Btns(String... expd) {
 		String[] actl = new String[tabBox.Tabs_Count() ];
 		for (int i = 0; i < tabBox.Tabs_Count() ; i++) {
-			GfuiBtn button = (GfuiBtn)tabBox.BtnBox().SubElems().FetchAt(i);
+			GfuiBtn button = (GfuiBtn)tabBox.BtnBox().SubElems().Get_at(i);
 			actl[i] = button.TextMgr().Val();
 		}
 		Tfds.Eq_ary(expd, actl);
@@ -109,8 +109,8 @@ class TabBoxFxt implements GfoInvkAble {
 //			return this;
 //		}
 //		@gplx.Internal protected TabBoxFxt tst_FocusOrder() {
-//			for (int i = 0; i < tabBox.SubBtnArea().SubZones().FetchAt(0).Count(); i++) {
-//				GfuiElem subBtn = (GfuiElem)tabBox.SubBtnArea().SubZones().FetchAt(0).FetchAt(i);
+//			for (int i = 0; i < tabBox.SubBtnArea().SubZones().Get_at(0).Count(); i++) {
+//				GfuiElem subBtn = (GfuiElem)tabBox.SubBtnArea().SubZones().Get_at(0).Get_at(i);
 //				Tfds.Eq(i, subBtn.UnderElem().Core().Focus_index());
 //			}
 //			return this;

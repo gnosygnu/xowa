@@ -53,7 +53,7 @@ public class Xoctg_link_idx_wkr_tst {
 		(	"0|Ctg_1|Ctg_2|2"
 		))
 		;
-		byte[] ctg_name = Bry_.new_ascii_("Ctg_1");
+		byte[] ctg_name = Bry_.new_a7("Ctg_1");
 		Xoctg_data_ctg main = new Xoctg_data_ctg(ctg_name);
 		fxt.Wiki().Db_mgr().Load_mgr().Load_ctg_v2(main, ctg_name);
 		Tfds.Eq(1, main.Grp_by_tid(Xoa_ctg_mgr.Tid_subc).Total());

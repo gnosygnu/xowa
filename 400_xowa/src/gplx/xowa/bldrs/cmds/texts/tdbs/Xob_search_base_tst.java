@@ -46,11 +46,11 @@ public class Xob_search_base_tst {
 		;
 	}	private Xob_fxt fxt = new Xob_fxt().Ctor_mem();
 	private void tst_Split(String raw, String... expd) {
-		OrderedHash list = OrderedHash_.new_(); Bry_bfr bfr = Bry_bfr.new_();
-		byte[][] actl_bry = Xob_search_base.Split_ttl_into_words(fxt.App().Lang_mgr().Lang_en(), list, bfr, Bry_.new_utf8_(raw));
+		Ordered_hash list = Ordered_hash_.new_(); Bry_bfr bfr = Bry_bfr.new_();
+		byte[][] actl_bry = Xob_search_base.Split_ttl_into_words(fxt.App().Lang_mgr().Lang_en(), list, bfr, Bry_.new_u8(raw));
 		String[] actl = new String[actl_bry.length];
 		for (int i = 0; i < actl_bry.length; i++)
-			actl[i] = String_.new_utf8_(actl_bry[i]);
+			actl[i] = String_.new_u8(actl_bry[i]);
 		Tfds.Eq_ary(expd, actl);
 	}
 }

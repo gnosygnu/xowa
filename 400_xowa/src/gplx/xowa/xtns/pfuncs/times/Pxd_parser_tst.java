@@ -62,7 +62,7 @@ public class Pxd_parser_tst {
 	@Test  public void Ago()										{tst_date_("1 month ago"			, "2012-01-27");}
 
 	private void tst_date_(String raw, String expd) {
-		byte[] raw_ary = Bry_.new_utf8_(raw);
+		byte[] raw_ary = Bry_.new_u8(raw);
 		DateAdp date = parser.Parse(raw_ary, bfr);
 		if (date == DateAdp_.MinValue)
 			Tfds.Eq(expd, bfr.Xto_str_and_clear(), raw);
@@ -70,7 +70,7 @@ public class Pxd_parser_tst {
 			Tfds.Eq(expd, date.XtoStr_fmt_yyyy_MM_dd());
 	}
 	private void tst_time_(String raw, String expd) {
-		byte[] raw_ary = Bry_.new_utf8_(raw);
+		byte[] raw_ary = Bry_.new_u8(raw);
 		DateAdp date = parser.Parse(raw_ary, bfr);
 		if (date == DateAdp_.MinValue)
 			Tfds.Eq(expd, bfr.Xto_str_and_clear(), raw);
@@ -78,7 +78,7 @@ public class Pxd_parser_tst {
 			Tfds.Eq(expd, date.XtoStr_fmt("HH:mm:ss.fff"));
 	}
 	private void tst_both_(String raw, String expd) {
-		byte[] raw_ary = Bry_.new_utf8_(raw);
+		byte[] raw_ary = Bry_.new_u8(raw);
 		DateAdp date = parser.Parse(raw_ary, bfr);
 		if (date == DateAdp_.MinValue)
 			Tfds.Eq(expd, bfr.Xto_str_and_clear(), raw);

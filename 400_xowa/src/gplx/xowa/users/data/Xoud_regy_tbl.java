@@ -54,7 +54,7 @@ public class Xoud_regy_tbl {
 		try {stmt_delete.Clear().Val_str(grp).Val_str(key).Exec_delete();}
 		catch (Exception exc) {stmt_delete = null; throw Err_.err_(exc, "stmt failed");} // must reset stmt, else next call will fail
 	}
-	@gplx.Virtual public void Select_by_grp(ListAdp rv, String grp) {
+	@gplx.Virtual public void Select_by_grp(List_adp rv, String grp) {
 		if (stmt_select_grp == null) stmt_select_grp = Db_stmt_.new_select_as_rdr(conn, Db_qry__select_in_tbl.new_(Tbl_name, String_.Ary(Fld_regy_grp), Flds__all, Db_qry__select_in_tbl.Order_by_null));
 		Db_rdr rdr = stmt_select_grp.Clear().Val_str(grp).Exec_select__rls_manual();
 		try {

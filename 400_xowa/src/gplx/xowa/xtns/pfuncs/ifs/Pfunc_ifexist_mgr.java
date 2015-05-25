@@ -19,13 +19,13 @@ package gplx.xowa.xtns.pfuncs.ifs; import gplx.*; import gplx.xowa.*; import gpl
 import gplx.xowa.wmfs.apis.*; import gplx.xowa.wikis.data.tbls.*;
 public class Pfunc_ifexist_mgr {
 	private Xowd_page_itm db_page = Xowd_page_itm.new_tmp();
-	private HashAdp regy = HashAdp_.new_bry_();
+	private Hash_adp regy = Hash_adp_bry.cs_();
 	public void Clear() {regy.Clear();}
 	public boolean Exists(Xowe_wiki wiki, byte[] raw_bry) {
 		if (Bry_.Len_eq_0(raw_bry)) return false;	// return early; NOTE: {{autolink}} can pass in "" (see test)
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, raw_bry); if (ttl == null) return false;
 		byte[] ttl_bry = ttl.Page_db();	// NOTE: must use Page_db; EX: {{#ifexist:File:Peter & Paul fortress in SPB 03.jpg|y|n}}
-		Object exists_obj = regy.Fetch(ttl_bry);
+		Object exists_obj = regy.Get_by(ttl_bry);
 		if (exists_obj != null) return ((Pfunc_ifexist_itm)exists_obj).Exists();
 		Pfunc_ifexist_itm exists_itm = new Pfunc_ifexist_itm(ttl_bry);
 		regy.Add(ttl_bry, exists_itm);

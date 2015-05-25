@@ -56,9 +56,9 @@ public class Pfunc_tag extends Pf_func_base {
 	, Xtag_bgn = 14 // <xtag_bgn id='
 	;
 	public static final byte[]
-	  Xtag_bgn_lhs = Bry_.new_ascii_("<xtag_bgn id='")
-	, Xtag_end_lhs = Bry_.new_ascii_("<xtag_end id='")
-	, Xtag_rhs = Bry_.new_ascii_("'/>")
+	  Xtag_bgn_lhs = Bry_.new_a7("<xtag_bgn id='")
+	, Xtag_end_lhs = Bry_.new_a7("<xtag_end id='")
+	, Xtag_rhs = Bry_.new_a7("'/>")
 	;
 	private static int tag__next_id = 0;	// NOTE:must be app-level variable, not page-level, b/c pre-compiled templates can reserve tag #s; PAGE:de.s:Seite:NewtonPrincipien.djvu/465 DATE:2015-02-03
 }

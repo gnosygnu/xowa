@@ -24,5 +24,5 @@ public class Xobcl_kwd_row {
 	} 
 	public byte[] Key() {return key;} private byte[] key;
 	public byte[][] Itms() {return itms;} private byte[][] itms;
-	public boolean Itms_has(byte[] key) {return itms_hash.Has(key);} private OrderedHash itms_hash = OrderedHash_.new_bry_();
+	public boolean Itms_has(byte[] key) {return itms_hash.Has(key);} private Ordered_hash itms_hash = Ordered_hash_.new_bry_();
 }

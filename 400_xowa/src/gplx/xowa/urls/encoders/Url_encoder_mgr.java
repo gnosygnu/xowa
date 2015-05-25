@@ -17,12 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.urls.encoders; import gplx.*; import gplx.xowa.*; import gplx.xowa.urls.*;
 public class Url_encoder_mgr {
-	public Url_encoder	Id()			{return id;}			private final Url_encoder id				= Url_encoder.new_html_id_();
-	public Url_encoder	Url()			{return url;}			private final Url_encoder url			= Url_encoder.new_http_url_();
-	public Url_encoder	Url_ttl()		{return url_ttl;}		private final Url_encoder url_ttl		= Url_encoder.new_http_url_ttl_();
+	public Url_encoder	File()			{return file;}			private final Url_encoder file			= Url_encoder.new_file_();
+	public Url_encoder	Http_url()		{return http_url;}		private final Url_encoder http_url		= Url_encoder.new_http_url_();
+	public Url_encoder	Http_url_ttl()	{return http_url_ttl;}	private final Url_encoder http_url_ttl	= Url_encoder.new_http_url_ttl_();
+	public Url_encoder	Id()			{return html_id;}		private final Url_encoder html_id		= Url_encoder.new_html_id_();
 	public Url_encoder	Href()			{return href;}			private final Url_encoder href			= Url_encoder.new_html_href_mw_();
 	public Url_encoder	Href_quotes()	{return href_quotes;}	private final Url_encoder href_quotes	= Url_encoder.new_html_href_quotes_();
-	public Url_encoder	Comma()			{return comma;}			private final Url_encoder comma			= Url_encoder.url_comma();
 	public Url_encoder	Gfs()			{return gfs;}			private final Url_encoder gfs			= Url_encoder.new_gfs_();
 	public Url_encoder	Fsys()			{return fsys;}			private final Url_encoder fsys			= Url_encoder.new_fsys_lnx_();
 	public Url_encoder	Fsys_safe()		{return fsys_safe;}		private final Url_encoder fsys_safe		= Url_encoder.new_fsys_wnt_();

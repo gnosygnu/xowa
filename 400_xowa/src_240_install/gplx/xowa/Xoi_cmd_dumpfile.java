@@ -26,7 +26,7 @@ class Xoi_cmd_dumpfile {
 	public Xoi_cmd_dumpfile Parse_msg(GfoMsg m) {
 		Io_url dump_url = m.ReadIoUrl("url");
 		domain = m.ReadBry("domain");
-		if (Bry_.Len_eq_0(domain)) domain = Bry_.new_utf8_(dump_url.OwnerDir().NameOnly());
+		if (Bry_.Len_eq_0(domain)) domain = Bry_.new_u8(dump_url.OwnerDir().NameOnly());
 		bz2_unzip = String_.Eq(m.ReadStr("args"), "unzip");
 		String dump_ext = dump_url.Ext();
 		if		(String_.Eq(dump_ext, ".bz2")) {
@@ -55,6 +55,6 @@ class Xoi_cmd_dumpfile {
 			wiki.Import_cfg().Src_fil_bz2_(bz2_url);
 		else
 			wiki.Import_cfg().Src_fil_xml_(xml_url);
-		return cmd_mgr.Dump_add_many_custom(String_.new_utf8_(domain), "", "", true);
+		return cmd_mgr.Dump_add_many_custom(String_.new_u8(domain), "", "", true);
 	}
 }

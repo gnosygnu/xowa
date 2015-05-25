@@ -46,7 +46,8 @@ public class Xohd_hdump_rdr {
 	public void Get_by_ttl(Xog_page rv, Xoa_ttl ttl) {
 		synchronized (dbpg) {
 			dbpg.Clear();
-			if (!Get_by_ttl__fill_hpg(rv, ttl)) {
+			if (	!Get_by_ttl__fill_hpg(rv, ttl)
+				||	rv.Page_body() == null) {	// occurs when row exists in page, but not in html
 				rv.Exists_n_();
 				return;
 			}

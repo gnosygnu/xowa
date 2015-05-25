@@ -477,12 +477,12 @@ class Xop_popup_parser_fxt {
 		parser.Wrdx_mkr().Xnde_ignore_ids_(Xoapi_popups.Dflt_xnde_ignore_ids);
 		word_min = 2;
 	}
-	public Xop_popup_parser_fxt Init_notoc_(String v) {parser.Cfg().Notoc_(Bry_.new_utf8_(v)); return this;}
+	public Xop_popup_parser_fxt Init_notoc_(String v) {parser.Cfg().Notoc_(Bry_.new_u8(v)); return this;}
 	public Xop_popup_parser_fxt Init_tmpl_read_len_(int v) {parser.Cfg().Tmpl_read_len_(v); return this;}
 	public Xop_popup_parser_fxt Init_tmpl_read_max_(int v) {parser.Cfg().Tmpl_read_max_(v); return this;}
 	public Xop_popup_parser_fxt Init_word_needed_(int v) {word_min = v; return this;}
 	public Xop_popup_parser_fxt Init_para_enabled_(boolean v) {parser.Wtxt_ctx().Para().Enabled_(v); return this;}
-	public Xop_popup_parser_fxt Init_ellipsis_(String v) {parser.Cfg().Ellipsis_(Bry_.new_utf8_(v)); return this;}
+	public Xop_popup_parser_fxt Init_ellipsis_(String v) {parser.Cfg().Ellipsis_(Bry_.new_u8(v)); return this;}
 	public Xop_popup_parser_fxt Init_read_til_stop_fwd_(int v) {parser.Cfg().Read_til_stop_fwd_(v); return this;}
 	public Xop_popup_parser_fxt Init_read_til_stop_bwd_(int v) {parser.Cfg().Read_til_stop_bwd_(v); return this;}
 	public Xop_popup_parser_fxt Init_stop_if_hdr_after_(int v) {parser.Cfg().Stop_if_hdr_after_(v); return this;}
@@ -491,18 +491,18 @@ class Xop_popup_parser_fxt {
 	public Xop_popup_parser_fxt Init_page(String ttl, String txt) {Xop_fxt.Init_page_create_static(wiki, ttl, txt); return this;}
 	public Xop_popup_parser_fxt Expd_tmpl_loop_count(int expd) {Tfds.Eq(expd, parser.Data().Tmpl_loop_count()); return this;}
 	public Xop_popup_parser_fxt Test_ns_allowed(String raw, int... expd) {
-		Int_obj_ref[] ids = Xow_popup_mgr.Ns_allowed_parse(wiki, Bry_.new_utf8_(raw));
+		Int_obj_ref[] ids = Xow_popup_mgr.Ns_allowed_parse(wiki, Bry_.new_u8(raw));
 		Tfds.Eq_ary(expd, Int_obj_ref.Ary_xto_int_ary(ids));
 		return this;
 	}
 	public void Test_parse(String raw, String expd)				{Test_parse(raw, "Test_1", expd);}
 	public void Test_parse(String raw, String ttl, String expd)	{
-		Xoae_page page = Xoae_page.create_(wiki, Xoa_ttl.parse_(wiki, Bry_.new_ascii_(ttl)));
-		page.Data_raw_(Bry_.new_utf8_(raw));
-		Xow_popup_itm itm = new Xow_popup_itm(1, Bry_.new_utf8_(raw), Bry_.Empty, word_min);
+		Xoae_page page = Xoae_page.create_(wiki, Xoa_ttl.parse_(wiki, Bry_.new_a7(ttl)));
+		page.Data_raw_(Bry_.new_u8(raw));
+		Xow_popup_itm itm = new Xow_popup_itm(1, Bry_.new_u8(raw), Bry_.Empty, word_min);
 		itm.Init(wiki.Domain_bry(), page.Ttl());
 		byte[] actl = parser.Parse(wiki, page, null, itm);
-		Tfds.Eq_str_lines(expd, String_.new_utf8_(actl));
+		Tfds.Eq_str_lines(expd, String_.new_u8(actl));
 	}
 	public void Test_Assert_at_end(String raw, String expd) {
 		if (test_bfr == null) test_bfr = Bry_bfr.new_();

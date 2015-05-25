@@ -65,7 +65,7 @@ class Xoi_wiki_props_fxt {
 	private Xoi_wiki_props_api api = new Xoi_wiki_props_api();
 	private Bry_bfr bfr = Bry_bfr.new_();
 	public Xoi_wiki_props_wiki wiki_() {return wiki_("domain_doesnt_matter");}
-	public Xoi_wiki_props_wiki wiki_(String wiki_domain) {return new Xoi_wiki_props_wiki().Wiki_domain_(Bry_.new_ascii_(wiki_domain));}
+	public Xoi_wiki_props_wiki wiki_(String wiki_domain) {return new Xoi_wiki_props_wiki().Wiki_domain_(Bry_.new_a7(wiki_domain));}
 	public Xoi_wiki_props_alias alias_(int id, String alias) {return new Xoi_wiki_props_alias().Init_by_ctor(id, alias);}
 	public Xoi_wiki_props_ns ns_(int id, boolean subpages_enabled) {return new Xoi_wiki_props_ns().Init_by_ctor(id, subpages_enabled);}
 	public void Test_parse(String xml, Xoi_wiki_props_wiki expd) {
@@ -79,12 +79,12 @@ class Xoi_wiki_props_fxt {
 	}
 	private String Xto_str(Xoi_wiki_props_wiki v) {
 		int len = v.Alias_ary().length;
-		bfr.Add_str("aliases").Add_byte_nl();
+		bfr.Add_str_a7("aliases").Add_byte_nl();
 		for (int i = 0; i < len; i++) {
 			Xoi_wiki_props_alias alias = v.Alias_ary()[i];
 			bfr.Add_int_variable(alias.Id()).Add_byte_pipe().Add_str(alias.Alias()).Add_byte_nl();
 		}
-		bfr.Add_str("ns").Add_byte_nl();
+		bfr.Add_str_a7("ns").Add_byte_nl();
 		len = v.Ns_ary().length;
 		for (int i = 0; i < len; i++) {
 			Xoi_wiki_props_ns ns = v.Ns_ary()[i];
@@ -103,7 +103,7 @@ class Xob_subpage_tst_fxt {
 		mgr.Clear();
 		hash.Clear();
 		return this;
-	}	private Xoae_app app; Xob_wiki_cfg_bldr mgr; OrderedHash hash = OrderedHash_.new_();
+	}	private Xoae_app app; Xob_wiki_cfg_bldr mgr; Ordered_hash hash = Ordered_hash_.new_();
 	private Xob_subpage_parser parser = new Xob_subpage_parser();
 	public Xob_subpage_tst_fxt Init_cmd(String wiki, String key, String text) {
 //		mgr.Itms_get_or_new(wiki).Itms_add(key, text);
@@ -115,7 +115,7 @@ class Xob_subpage_tst_fxt {
 	}
 	private String_bldr sb = String_bldr_.new_();
 	public void Test_parse(String s) {
-		Xob_subpage_wiki[] actl = parser.Parse(Bry_.new_utf8_(s));
+		Xob_subpage_wiki[] actl = parser.Parse(Bry_.new_u8(s));
 		Tfds.Eq_str_lines("", X_str_wikis(actl));
 	}		
 	public String X_str_wikis(Xob_subpage_wiki[] ary) {
@@ -134,7 +134,7 @@ class Xob_subpage_tst_fxt {
 		sb.Add(wiki.Name()).Add_char_nl();
 		int ns_len = wiki.Ns_list().Count();
 		for (int i = 0; i < ns_len; i++) {
-			Xob_subpage_ns ns = (Xob_subpage_ns)wiki.Ns_list().FetchAt(i);
+			Xob_subpage_ns ns = (Xob_subpage_ns)wiki.Ns_list().Get_at(i);
 			sb.Add(ns.Id()).Add("=").Add(Bool_.Xto_str_lower(ns.Enabled())).Add_char_nl();
 		}
 		sb.Add_char_nl();

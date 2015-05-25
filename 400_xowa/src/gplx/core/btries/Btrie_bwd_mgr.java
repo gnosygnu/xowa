@@ -39,19 +39,19 @@ public class Btrie_bwd_mgr {
 			cur = nxt;
 		}
 	}
-	public Btrie_bwd_mgr Add_str_byte(String key, byte val) {return Add(Bry_.new_utf8_(key), Byte_obj_val.new_(val));}
+	public Btrie_bwd_mgr Add_str_byte(String key, byte val) {return Add(Bry_.new_u8(key), Byte_obj_val.new_(val));}
 	public Btrie_bwd_mgr Add_byteVal_strAry(byte val, String... ary) {
 		int ary_len = ary.length;
 		Byte_obj_val byteVal = Byte_obj_val.new_(val);
 		for (int i = 0; i < ary_len; i++) {
 			String itm = ary[i];
-			Add(Bry_.new_utf8_(itm), byteVal);
+			Add(Bry_.new_u8(itm), byteVal);
 		}
 		return this;
 	}
-	public Btrie_bwd_mgr Add(String key, Object val) {return Add(Bry_.new_utf8_(key), val);}
+	public Btrie_bwd_mgr Add(String key, Object val) {return Add(Bry_.new_u8(key), val);}
 	public Btrie_bwd_mgr Add(byte[] key, Object val) {
-		if (val == null) throw Err_.new_("null objects cannot be registered").Add("key", String_.new_utf8_(key));
+		if (val == null) throw Err_.new_("null objects cannot be registered").Add("key", String_.new_u8(key));
 		int key_len = key.length;
 		Btrie_slim_itm cur = root;
 		for (int i = key_len - 1; i > -1; i--) {

@@ -17,15 +17,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 public class Xop_xatr_hash {
-	private final OrderedHash hash = OrderedHash_.new_bry_();
+	private final Ordered_hash hash = Ordered_hash_.new_bry_();
 	private final byte[] src;
 	Xop_xatr_hash(byte[] src) {this.src = src;}
 	public int Len() {return hash.Count();}
 	public Xop_xatr_itm Get_at(int idx) {
-		return (Xop_xatr_itm)hash.FetchAt(idx);
+		return (Xop_xatr_itm)hash.Get_at(idx);
 	}
 	public Xop_xatr_itm Get_by(String key) {
-		return (Xop_xatr_itm)hash.Fetch(Bry_.new_utf8_(key));
+		return (Xop_xatr_itm)hash.Get_by(Bry_.new_u8(key));
 	}
 	public byte[] Get_as_bry_or(String key, byte[] or) {
 		Xop_xatr_itm itm = Get_by(key);
@@ -36,7 +36,7 @@ public class Xop_xatr_hash {
 		return String_.Eq(itm.Val_as_str(src), val);
 	}
 	private void Add(Xop_xatr_itm itm) {
-		hash.AddReplace(itm.Key_bry(), itm);
+		hash.Add_if_dupe_use_nth(itm.Key_bry(), itm);
 	}
 	public static Xop_xatr_hash new_ary(byte[] src, Xop_xatr_itm[] ary) {
 		Xop_xatr_hash rv = new Xop_xatr_hash(src);

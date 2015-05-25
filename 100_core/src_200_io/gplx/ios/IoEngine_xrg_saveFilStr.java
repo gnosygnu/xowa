@@ -23,7 +23,7 @@ public class IoEngine_xrg_saveFilStr {
 	public boolean Append() {return append;}  public IoEngine_xrg_saveFilStr Append_() {return Append_(true);} public IoEngine_xrg_saveFilStr Append_(boolean val) {append = val; return this;} private boolean append = false;
 	public void Exec() {
 		if (String_.Eq(text, "") && append) return;	// no change; don't bother writing to disc
-		IoEnginePool._.Fetch(url.Info().EngineKey()).SaveFilText_api(this);
+		IoEnginePool._.Get_by(url.Info().EngineKey()).SaveFilText_api(this);
 	}
 	public static IoEngine_xrg_saveFilStr new_(Io_url url, String text) {
 		IoEngine_xrg_saveFilStr rv = new IoEngine_xrg_saveFilStr();

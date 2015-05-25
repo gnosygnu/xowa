@@ -33,8 +33,8 @@ public class Xol_grammar_ru implements Xol_grammar {
 		return rv;
 	}
 	private static void genitive_trie_add(Btrie_bwd_mgr trie, byte tid, String find_str, String repl_str) {
-		byte[] find_bry = Bry_.new_utf8_(find_str);
-		byte[] repl_bry = repl_str == null ? null : Bry_.new_utf8_(repl_str);
+		byte[] find_bry = Bry_.new_u8(find_str);
+		byte[] repl_bry = repl_str == null ? null : Bry_.new_u8(repl_str);
 		Xol_grammar_ru_genitive_itm itm = new Xol_grammar_ru_genitive_itm(tid, find_bry, repl_bry);
 		trie.Add(find_bry, itm);
 	}

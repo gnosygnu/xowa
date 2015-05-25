@@ -33,9 +33,9 @@ public class Xoh_module_itm__navframe implements Xoh_module_itm {
 		wtr.Write_js_global_ini_atr_msg(wiki			, Key_hide);
 	}
 	private static final byte[]
-	  Key_enabled				= Bry_.new_ascii_("navframe-enabled")
-	, Key_collapsed				= Bry_.new_ascii_("navframe-collapsed")
-	, Key_show					= Bry_.new_ascii_("show")
-	, Key_hide					= Bry_.new_ascii_("hide")
+	  Key_enabled				= Bry_.new_a7("navframe-enabled")
+	, Key_collapsed				= Bry_.new_a7("navframe-collapsed")
+	, Key_show					= Bry_.new_a7("show")
+	, Key_hide					= Bry_.new_a7("hide")
 	;
 }

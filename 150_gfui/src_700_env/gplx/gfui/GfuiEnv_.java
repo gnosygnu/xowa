@@ -61,13 +61,13 @@ public class GfuiEnv_ {
 		IptBndMgr_win = IptCfg_.new_("gplx.gfui.GfuiWin");
 
 		// alias default dirs
-		Io_mgr._.AliasDir_sysEngine("app:\\", Env_.AppUrl().OwnerDir().Raw());
+		Io_mgr.I.AliasDir_sysEngine("app:\\", Env_.AppUrl().OwnerDir().Raw());
 
 		GfsCore._.MsgParser_(GfoMsgParser_gfml._);
 		GfsCore._.AddLib(GfsLibIni_core._);
 		GfsCore._.AddLib(GfsLibIni_gfui._);
 		Io_url iniFile = Env_.AppUrl().GenSubFil(".gfs");
-		if (Io_mgr._.ExistsFil(iniFile))
+		if (Io_mgr.I.ExistsFil(iniFile))
 			GfsCore._.ExecFile(iniFile);
 	}
 	public static void Init_swt(String[] args, Class<?> type) {

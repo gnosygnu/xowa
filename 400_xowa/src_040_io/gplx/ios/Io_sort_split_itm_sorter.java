@@ -19,7 +19,7 @@ package gplx.ios; import gplx.*;
 public class Io_sort_split_itm_sorter implements gplx.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Io_sort_split_itm lhs = (Io_sort_split_itm)lhsObj, rhs = (Io_sort_split_itm)rhsObj;
-//			Tfds.Write(String_.new_utf8_(lhs.Bfr(), lhs.Key_bgn(), lhs.Key_end()), String_.new_utf8_(rhs.Bfr(), rhs.Key_bgn(), rhs.Key_end()));
+//			Tfds.Write(String_.new_u8(lhs.Bfr(), lhs.Key_bgn(), lhs.Key_end()), String_.new_u8(rhs.Bfr(), rhs.Key_bgn(), rhs.Key_end()));
 		return Bry_.Compare(lhs.Bfr(), lhs.Key_bgn(), lhs.Key_end(), rhs.Bfr(), rhs.Key_bgn(), rhs.Key_end());
 	}
 	public static final Io_sort_split_itm_sorter _ = new Io_sort_split_itm_sorter(); Io_sort_split_itm_sorter() {}

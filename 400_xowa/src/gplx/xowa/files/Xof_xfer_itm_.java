@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
 import gplx.gfui.*;
 public class Xof_xfer_itm_ {
-	public static void Calc_xfer_size(Int_2_ref rv, byte lnki_type, int thumb_default_w, int file_w, int file_h, int lnki_w, int lnki_h, boolean lnki_thumb, double lnki_upright, Xof_ext ext, byte exec_tid) {
+	public static void Calc_xfer_size(Int_2_ref rv, byte lnki_type, int thumb_default_w, int file_w, int file_h, int lnki_w, int lnki_h, boolean lnki_thumb, double lnki_upright, Xof_ext ext, int exec_tid) {
 		boolean ext_is_svg = ext.Id_is_svg();
 		boolean limit_size = !ext_is_svg || (ext_is_svg && exec_tid == Xof_exec_tid.Tid_wiki_file);
 		Calc_xfer_size(rv, lnki_type, thumb_default_w, file_w, file_h, lnki_w, lnki_h, lnki_thumb, lnki_upright, limit_size);
@@ -60,29 +60,12 @@ public class Xof_xfer_itm_ {
 			? 0
 			: (int)Math_.Round(((double)lnki_w * file_h) / file_w, 0);	// NOTE: (double) needed else result will be int and decimal will be automatically truncated
 	}
-	public static final Url_encoder Md5_decoder = Url_encoder.new_http_url_().Itms_raw_same_many(Byte_ascii.Plus);
-	public static byte[] Md5_calc(byte[] v) {return Bry_.new_ascii_(gplx.security.HashAlgo_.Md5.CalcHash(ConsoleDlg_.Null, gplx.ios.IoStream_.ary_(v)));}
-	public static byte[] Md5_(byte[] ttl) {
-		ttl = Md5_decoder.Decode_lax(Ttl_standardize(ttl));	// NOTE: this line is repeated in member above
-		return Xof_xfer_itm_.Md5_calc(ttl);				// NOTE: md5 is calculated off of url_decoded ttl; EX: A%2Cb is converted to A,b and then md5'd. note that A%2Cb still remains the title
-	}
 	public static boolean Lnki_thumbable_calc(byte lnki_type, int lnki_w, int lnki_h) {
 		return 
 			(	lnki_type == Xop_lnki_type.Id_frame && lnki_w != -1 && lnki_h != -1)
 			||	(Xop_lnki_type.Id_defaults_to_thumb(lnki_type) || lnki_w != -1 || lnki_h != -1)
 			;
 	}	// SEE:NOTE_3
-	public static byte[] Ttl_standardize(byte[] ttl) {
-		int ttl_len = ttl.length;
-		for (int i = 0; i < ttl_len; i++) {	// convert all spaces to _; NOTE: not same as lnki.Ttl().Page_url(), b/c Page_url does incompatible encoding
-			byte b = ttl[i];
-			if (b == Byte_ascii.Space) ttl[i] = Byte_ascii.Underline;
-			if (i == 0) {
-				if (b > 96 && b < 123) ttl[i] -= 32;	// NOTE: file automatically uppercases 1st letter
-			}
-		}
-		return ttl;
-	}
 }
 /*
 NOTE_1:proc source/layout

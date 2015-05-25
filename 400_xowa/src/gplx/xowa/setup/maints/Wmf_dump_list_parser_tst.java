@@ -49,7 +49,7 @@ public class Wmf_dump_list_parser_tst {
 //			, "usability.wikipedia.org", "vote.wikipedia.org"
 //			, "bd.wikimedia.org", "dk.wikimedia.org", "mx.wikimedia.org", "nyc.wikimedia.org", "nz.wikimedia.org", "pa-us.wikimedia.org", "rs.wikimedia.org", "ua.wikimedia.org"
 //			);
-//			Wmf_dump_itm[] itms = new Wmf_dump_list_parser().Parse(Io_mgr._.LoadFilBry("C:\\xowa\\bin\\any\\html\\xowa\\maint\\backup-index.html"));
+//			Wmf_dump_itm[] itms = new Wmf_dump_list_parser().Parse(Io_mgr.I.LoadFilBry("C:\\xowa\\bin\\any\\html\\xowa\\maint\\backup-index.html"));
 //			Array_.Sort(itms);
 //			Bry_bfr sql_bfr = Bry_bfr.new_();
 //			Bry_bfr bld_bfr = Bry_bfr.new_();
@@ -58,13 +58,13 @@ public class Wmf_dump_list_parser_tst {
 //			for (int i = 0; i < itms_len; i++) {
 //				Wmf_dump_itm itm = itms[i];
 //				byte[] abrv = itm.Wiki_abrv();
-//				if (Bry_.Eq(abrv, Bry_.new_ascii_("testwikidatawiki"))) continue;
+//				if (Bry_.Eq(abrv, Bry_.new_a7("testwikidatawiki"))) continue;
 //				byte[] domain_bry = Xow_wiki_alias.Parse__domain_name(abrv, 0, abrv.length);
 //				if (domain_bry == null) continue;			// not a standard WMF wiki; ignore
-//				if (Bry_finder.Find_fwd(domain_bry, Bry_.new_ascii_("wikimania")) != Bry_.NotFound) continue;
+//				if (Bry_finder.Find_fwd(domain_bry, Bry_.new_a7("wikimania")) != Bry_.NotFound) continue;
 //				if (excluded_domains.Has(domain_bry)) continue;
 //				Xow_domain domain_itm = Xow_domain_.parse(domain_bry);
-//				byte[] tid_name = Xto_display_name(Xow_domain_.Tid__get_bry(domain_itm.Domain_tid()));
+//				byte[] tid_name = Xto_display_name(Xow_domain_type_.Get_type_as_bry(domain_itm.Domain_tid()));
 //				sql_bfr
 //					.Add_byte(Byte_ascii.Paren_bgn)
 //					.Add_int_variable(counter++)
@@ -80,7 +80,7 @@ public class Wmf_dump_list_parser_tst {
 //					.Add_byte(Byte_ascii.Apos)
 //					.Add_byte(Byte_ascii.Paren_end)
 //					.Add_byte(Byte_ascii.Comma)
-//					.Add_str("--" + String_.new_utf8_(abrv))
+//					.Add_str("--" + String_.new_u8(abrv))
 //					.Add_byte_nl()
 //					;
 //				bld_bfr
@@ -93,13 +93,13 @@ public class Wmf_dump_list_parser_tst {
 //					;
 //			}
 //			Io_url temp = Io_url_.new_fil_("C:\\import_update.txt");
-//			Io_mgr._.SaveFilBfr(temp, sql_bfr);
-////			Io_mgr._.AppendFilBfr(temp, bld_bfr);
+//			Io_mgr.I.SaveFilBfr(temp, sql_bfr);
+////			Io_mgr.I.AppendFilBfr(temp, bld_bfr);
 //		}
 //		private static byte[] Xto_display_name(byte[] v) {
-//			if		(Bry_.Eq(v, Xow_domain_.Tid_bry_wikimediafoundation))	return Bry_.new_ascii_("Wikimedia Foundation");
-//			else if	(Bry_.Eq(v, Xow_domain_.Tid_bry_species))				return Bry_.new_ascii_("Wikispecies");
-//			else if	(Bry_.Eq(v, Xow_domain_.Tid_bry_mediawiki))				return Bry_.new_ascii_("MediaWiki");
+//			if		(Bry_.Eq(v, Xow_domain_type_.Key_bry_wmforg))	return Bry_.new_a7("Wikimedia Foundation");
+//			else if	(Bry_.Eq(v, Xow_domain_type_.Key_bry_species))				return Bry_.new_a7("Wikispecies");
+//			else if	(Bry_.Eq(v, Xow_domain_type_.Key_bry_mediawiki))				return Bry_.new_a7("MediaWiki");
 //			else															return Bry_.Add(Byte_ascii.Case_upper(v[0]), Bry_.Mid(v, 1, v.length));
 //		}
 }
@@ -114,7 +114,7 @@ class Wmf_dump_list_parser_fxt {
 		);
 	}
 	public void Test_parse(String raw, String... expd) {
-		Wmf_dump_itm[] actl = parser.Parse(Bry_.new_ascii_(raw));
+		Wmf_dump_itm[] actl = parser.Parse(Bry_.new_a7(raw));
 		Tfds.Eq_str_lines(String_.Concat_lines_nl(expd), String_.Concat_lines_nl(Xto_str(actl)));
 	}
 	public String[] Xto_str(Wmf_dump_itm[] ary) {
@@ -127,9 +127,9 @@ class Wmf_dump_list_parser_fxt {
 	public static String Xto_str(Wmf_dump_itm itm) {
 		DateAdp status_time = itm.Status_time();
 		String status_time_str = status_time == null ? "" : status_time.XtoStr_fmt(DateAdp_.Fmt_iso8561_date_time); 
-		return String_.Concat_with_str("\n", String_.new_ascii_(itm.Wiki_abrv()), itm.Dump_date().XtoStr_fmt("yyyyMMdd")
+		return String_.Concat_with_str("\n", String_.new_a7(itm.Wiki_abrv()), itm.Dump_date().XtoStr_fmt("yyyyMMdd")
 			, Byte_.Xto_str(itm.Status_tid())
-			, String_.new_ascii_(itm.Status_msg())
+			, String_.new_a7(itm.Status_msg())
 			, status_time_str
 			);
 		

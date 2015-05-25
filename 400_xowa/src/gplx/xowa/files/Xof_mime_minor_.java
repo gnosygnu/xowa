@@ -19,17 +19,17 @@ package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*;
 public class Xof_mime_minor_ {
 	public static Xof_ext ext_(byte[] minor_mime) {
-		Int_obj_val id_obj = (Int_obj_val)mime_hash.Fetch(minor_mime);
+		Int_obj_val id_obj = (Int_obj_val)mime_hash.Get_by(minor_mime);
 		int id = id_obj == null ? Xof_ext_.Id_unknown : id_obj.Val();
 		return Xof_ext_.new_by_id_(id);
 	}
 	private static final byte[] 
-	  Mime_svg = Bry_.new_ascii_("svg+xml"), Mime_djvu = Bry_.new_ascii_("vnd.djvu"), Mime_midi = Bry_.new_ascii_("midi")
-	, Mime_xcf = Bry_.new_ascii_("x-xcf"), Mime_flac = Bry_.new_ascii_("x-flac")
-	, Mime_bmp = Bry_.new_ascii_("x-bmp"), Mime_bmp_2 = Bry_.new_ascii_("x-ms-bmp");
-	private static final HashAdp mime_hash = mime_hash_();
-	private static HashAdp mime_hash_() {
-		HashAdp rv = HashAdp_.new_bry_();
+	  Mime_svg = Bry_.new_a7("svg+xml"), Mime_djvu = Bry_.new_a7("vnd.djvu"), Mime_midi = Bry_.new_a7("midi")
+	, Mime_xcf = Bry_.new_a7("x-xcf"), Mime_flac = Bry_.new_a7("x-flac")
+	, Mime_bmp = Bry_.new_a7("x-bmp"), Mime_bmp_2 = Bry_.new_a7("x-ms-bmp");
+	private static final Hash_adp mime_hash = mime_hash_();
+	private static Hash_adp mime_hash_() {
+		Hash_adp rv = Hash_adp_bry.cs_();
 		mime_hash_itm_(rv, Xof_ext_.Bry_png		, Xof_ext_.Id_png);
 		mime_hash_itm_(rv, Xof_ext_.Bry_jpg		, Xof_ext_.Id_jpg);
 		mime_hash_itm_(rv, Xof_ext_.Bry_jpeg	, Xof_ext_.Id_jpeg);
@@ -51,5 +51,5 @@ public class Xof_mime_minor_ {
 		mime_hash_itm_(rv, Xof_ext_.Bry_wav		, Xof_ext_.Id_wav);
 		return rv;
 	}
-	private static void mime_hash_itm_(HashAdp hash, byte[] key, int val) {hash.Add(key, Int_obj_val.new_(val));}
+	private static void mime_hash_itm_(Hash_adp hash, byte[] key, int val) {hash.Add(key, Int_obj_val.new_(val));}
 }

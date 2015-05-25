@@ -29,9 +29,9 @@ public class Wdata_dict_snak_tid {
 	, Str_somevalue								= "somevalue"
 	;
 	public static final byte[]
-	  Bry_novalue								= Bry_.new_ascii_(Str_novalue)
-	, Bry_value									= Bry_.new_ascii_(Str_value)
-	, Bry_somevalue								= Bry_.new_ascii_(Str_somevalue)
+	  Bry_novalue								= Bry_.new_a7(Str_novalue)
+	, Bry_value									= Bry_.new_a7(Str_value)
+	, Bry_somevalue								= Bry_.new_a7(Str_somevalue)
 	;
 	private static Hash_adp_bry Dict = Hash_adp_bry.cs_()
 	.Add_bry_byte(Bry_novalue					, Tid_novalue)
@@ -55,7 +55,7 @@ public class Wdata_dict_snak_tid {
 		}
 	}
 	public static byte Xto_tid(byte[] v) {
-		Object rv_obj = Dict.Get_by_bry(v); if	(rv_obj == null) throw Err_.new_fmt_("unknown snak tid: val=~{0}", String_.new_utf8_(v));
+		Object rv_obj = Dict.Get_by_bry(v); if	(rv_obj == null) throw Err_.new_fmt_("unknown snak tid: val=~{0}", String_.new_u8(v));
 		return ((Byte_obj_val)rv_obj).Val();
 	}
 }

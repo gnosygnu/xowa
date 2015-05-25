@@ -44,7 +44,7 @@ class Xow_ttl_fxt {
 	public Xowe_wiki Wiki() {return fxt.Wiki();}
 	public void Reset() {
 		fxt.Reset();
-		fxt.Wiki().Xwiki_mgr().Add_full(Bry_.new_utf8_("fr"), Bry_.new_utf8_("fr.wikipedia.org"));
+		fxt.Wiki().Xwiki_mgr().Add_full(Bry_.new_u8("fr"), Bry_.new_u8("fr.wikipedia.org"));
 		test_raw = "Test page";
 		expd_ns_id = Int_.MinValue;
 		expd_xwik_txt = expd_full_txt = expd_full_url = expd_page_txt = expd_page_url = expd_leaf_txt = expd_leaf_url = expd_base_txt = expd_base_url
@@ -55,32 +55,32 @@ class Xow_ttl_fxt {
 		fxt.Log_clear();
 	}
 	public void Test() {
-		Xoa_ttl actl = Xoa_ttl.parse_(fxt.Wiki(), Bry_.new_utf8_(test_raw));
+		Xoa_ttl actl = Xoa_ttl.parse_(fxt.Wiki(), Bry_.new_u8(test_raw));
 		if (expd_err == null) {
 			if (expd_ns_id != Int_.MinValue) Tfds.Eq(expd_ns_id, actl.Ns().Id(), "ns");
-			if (expd_xwik_txt != null) Tfds.Eq(expd_xwik_txt, String_.new_utf8_(actl.Wik_txt()), "Wiki");
-			if (expd_page_txt != null) Tfds.Eq(expd_page_txt, String_.new_utf8_(actl.Page_txt()), "Page_txt");
-			if (expd_page_url != null) Tfds.Eq(expd_page_url, String_.new_utf8_(actl.Page_url()), "Page_url");
-			if (expd_full_txt != null) Tfds.Eq(expd_full_txt, String_.new_utf8_(actl.Full_txt()), "Full_txt");
-			if (expd_full_url != null) Tfds.Eq(expd_full_url, String_.new_utf8_(actl.Full_url()), "Full_url");
-			if (expd_leaf_txt != null) Tfds.Eq(expd_leaf_txt, String_.new_utf8_(actl.Leaf_txt()), "Leaf_txt");
-			if (expd_leaf_url != null) Tfds.Eq(expd_leaf_url, String_.new_utf8_(actl.Leaf_url()), "Leaf_url");
-			if (expd_base_txt != null) Tfds.Eq(expd_base_txt, String_.new_utf8_(actl.Base_txt()), "Base_txt");
-			if (expd_base_url != null) Tfds.Eq(expd_base_url, String_.new_utf8_(actl.Base_url()), "Base_url");
-			if (expd_root_txt != null) Tfds.Eq(expd_root_txt, String_.new_utf8_(actl.Root_txt()), "Root_txt");
-			if (expd_rest_txt != null) Tfds.Eq(expd_rest_txt, String_.new_utf8_(actl.Rest_txt()), "Rest_txt");
-			if (expd_talk_txt != null) Tfds.Eq(expd_talk_txt, String_.new_utf8_(actl.Talk_txt()), "Talk_txt");
-			if (expd_talk_url != null) Tfds.Eq(expd_talk_url, String_.new_utf8_(actl.Talk_url()), "Talk_url");
-			if (expd_subj_txt != null) Tfds.Eq(expd_subj_txt, String_.new_utf8_(actl.Subj_txt()), "Subj_txt");
-			if (expd_subj_url != null) Tfds.Eq(expd_subj_url, String_.new_utf8_(actl.Subj_url()), "Subj_url");
-			if (expd_anch_txt != null) Tfds.Eq(expd_anch_txt, String_.new_utf8_(actl.Anch_txt()), "Anch_txt");
-			if (expd_qarg_txt != null) Tfds.Eq(expd_qarg_txt, String_.new_utf8_(actl.Qarg_txt()), "Qarg_txt");
-			if (expd_base_txt_wo_qarg != null) Tfds.Eq(expd_base_txt_wo_qarg, String_.new_utf8_(actl.Base_txt_wo_qarg()), "Expd_base_txt_wo_qarg");
-			if (expd_leaf_txt_wo_qarg != null) Tfds.Eq(expd_leaf_txt_wo_qarg, String_.new_utf8_(actl.Leaf_txt_wo_qarg()), "Expd_leaf_txt_wo_qarg");
+			if (expd_xwik_txt != null) Tfds.Eq(expd_xwik_txt, String_.new_u8(actl.Wik_txt()), "Wiki");
+			if (expd_page_txt != null) Tfds.Eq(expd_page_txt, String_.new_u8(actl.Page_txt()), "Page_txt");
+			if (expd_page_url != null) Tfds.Eq(expd_page_url, String_.new_u8(actl.Page_url()), "Page_url");
+			if (expd_full_txt != null) Tfds.Eq(expd_full_txt, String_.new_u8(actl.Full_txt()), "Full_txt");
+			if (expd_full_url != null) Tfds.Eq(expd_full_url, String_.new_u8(actl.Full_url()), "Full_url");
+			if (expd_leaf_txt != null) Tfds.Eq(expd_leaf_txt, String_.new_u8(actl.Leaf_txt()), "Leaf_txt");
+			if (expd_leaf_url != null) Tfds.Eq(expd_leaf_url, String_.new_u8(actl.Leaf_url()), "Leaf_url");
+			if (expd_base_txt != null) Tfds.Eq(expd_base_txt, String_.new_u8(actl.Base_txt()), "Base_txt");
+			if (expd_base_url != null) Tfds.Eq(expd_base_url, String_.new_u8(actl.Base_url()), "Base_url");
+			if (expd_root_txt != null) Tfds.Eq(expd_root_txt, String_.new_u8(actl.Root_txt()), "Root_txt");
+			if (expd_rest_txt != null) Tfds.Eq(expd_rest_txt, String_.new_u8(actl.Rest_txt()), "Rest_txt");
+			if (expd_talk_txt != null) Tfds.Eq(expd_talk_txt, String_.new_u8(actl.Talk_txt()), "Talk_txt");
+			if (expd_talk_url != null) Tfds.Eq(expd_talk_url, String_.new_u8(actl.Talk_url()), "Talk_url");
+			if (expd_subj_txt != null) Tfds.Eq(expd_subj_txt, String_.new_u8(actl.Subj_txt()), "Subj_txt");
+			if (expd_subj_url != null) Tfds.Eq(expd_subj_url, String_.new_u8(actl.Subj_url()), "Subj_url");
+			if (expd_anch_txt != null) Tfds.Eq(expd_anch_txt, String_.new_u8(actl.Anch_txt()), "Anch_txt");
+			if (expd_qarg_txt != null) Tfds.Eq(expd_qarg_txt, String_.new_u8(actl.Qarg_txt()), "Qarg_txt");
+			if (expd_base_txt_wo_qarg != null) Tfds.Eq(expd_base_txt_wo_qarg, String_.new_u8(actl.Base_txt_wo_qarg()), "Expd_base_txt_wo_qarg");
+			if (expd_leaf_txt_wo_qarg != null) Tfds.Eq(expd_leaf_txt_wo_qarg, String_.new_u8(actl.Leaf_txt_wo_qarg()), "Expd_leaf_txt_wo_qarg");
 			if (expd_force_literal_link != -1) Tfds.Eq(expd_force_literal_link == 1, actl.ForceLiteralLink(), "ForceLiteralLink");
 		}
 		else {
-			Tfds.Eq_ary(String_.Ary(String_.new_utf8_(expd_err.Owner().Path()) + "." + String_.new_utf8_(expd_err.Key_bry())), fxt.Log_xtoAry());
+			Tfds.Eq_ary(String_.Ary(String_.new_u8(expd_err.Owner().Path()) + "." + String_.new_u8(expd_err.Key_bry())), fxt.Log_xtoAry());
 		}
 	}
 }

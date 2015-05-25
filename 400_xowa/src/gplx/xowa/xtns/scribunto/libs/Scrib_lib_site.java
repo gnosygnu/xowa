@@ -90,7 +90,7 @@ public class Scrib_lib_site implements Scrib_lib {
 		boolean is_extralanguage_link = false;
 		int rv_len = 7;
 		if (is_extralanguage_link) rv_len += 2;
-		String url = String_.new_utf8_(itm.Domain_bry());
+		String url = String_.new_u8(itm.Domain_bry());
 		boolean url_is_relative = String_.HasAtBgn(url, "//");
 		KeyVal[] rv = new KeyVal[rv_len];
 		rv[ 0] = KeyVal_.new_("prefix"					, prefix);

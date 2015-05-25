@@ -31,7 +31,7 @@ class Pft_fmt_itm_roman implements Pft_fmt_itm {
 				return;
 			}
 		}
-		bfr.Add_str("xf");
+		bfr.Add_str_a7("xf");
 	}
 }
 class Pft_fmt_itm_thai implements Pft_fmt_itm {
@@ -257,23 +257,23 @@ class Pft_fmt_itm_hebrew_ {
 	public static byte[] Get_hebrew_month_name_gen(Xowe_wiki wiki, DateAdp date) {return Get_hebrew_month_name(wiki, date, Month_name_gen_ary);}
 	private static byte[] Get_hebrew_month_name(Xowe_wiki wiki, DateAdp date, byte[][] name_ary) {
 		int[] hebrew_date = Pft_fmt_itm_hebrew_.Calc_hebrew_date(date);
-		int hebrew_month = hebrew_date[Pft_fmt_itm_hebrew_.Rslt_month_num] - ListAdp_.Base1;
+		int hebrew_month = hebrew_date[Pft_fmt_itm_hebrew_.Rslt_month_num] - List_adp_.Base1;
 		byte[] msg_key = name_ary[hebrew_month];
 		return wiki.Msg_mgr().Val_by_key_obj(msg_key);
 	}
 	private static final byte[][] Month_name_full_ary = new byte[][] 
-	{ Bry_.new_ascii_("hebrew-calendar-m1"), Bry_.new_ascii_("hebrew-calendar-m2"), Bry_.new_ascii_("hebrew-calendar-m3")
-	, Bry_.new_ascii_("hebrew-calendar-m4"), Bry_.new_ascii_("hebrew-calendar-m5"), Bry_.new_ascii_("hebrew-calendar-m6")
-	, Bry_.new_ascii_("hebrew-calendar-m7"), Bry_.new_ascii_("hebrew-calendar-m8"), Bry_.new_ascii_("hebrew-calendar-m9")
-	, Bry_.new_ascii_("hebrew-calendar-m10"), Bry_.new_ascii_("hebrew-calendar-m11"), Bry_.new_ascii_("hebrew-calendar-m12")
-	, Bry_.new_ascii_("hebrew-calendar-m6a"), Bry_.new_ascii_("hebrew-calendar-m6b")
+	{ Bry_.new_a7("hebrew-calendar-m1"), Bry_.new_a7("hebrew-calendar-m2"), Bry_.new_a7("hebrew-calendar-m3")
+	, Bry_.new_a7("hebrew-calendar-m4"), Bry_.new_a7("hebrew-calendar-m5"), Bry_.new_a7("hebrew-calendar-m6")
+	, Bry_.new_a7("hebrew-calendar-m7"), Bry_.new_a7("hebrew-calendar-m8"), Bry_.new_a7("hebrew-calendar-m9")
+	, Bry_.new_a7("hebrew-calendar-m10"), Bry_.new_a7("hebrew-calendar-m11"), Bry_.new_a7("hebrew-calendar-m12")
+	, Bry_.new_a7("hebrew-calendar-m6a"), Bry_.new_a7("hebrew-calendar-m6b")
 	};
 	private static final byte[][] Month_name_gen_ary = new byte[][] 
-	{ Bry_.new_ascii_("hebrew-calendar-m1-gen"), Bry_.new_ascii_("hebrew-calendar-m2-gen"), Bry_.new_ascii_("hebrew-calendar-m3-gen")
-	, Bry_.new_ascii_("hebrew-calendar-m4-gen"), Bry_.new_ascii_("hebrew-calendar-m5-gen"), Bry_.new_ascii_("hebrew-calendar-m6-gen")
-	, Bry_.new_ascii_("hebrew-calendar-m7-gen"), Bry_.new_ascii_("hebrew-calendar-m8-gen"), Bry_.new_ascii_("hebrew-calendar-m9-gen")
-	, Bry_.new_ascii_("hebrew-calendar-m10-gen"), Bry_.new_ascii_("hebrew-calendar-m11-gen"), Bry_.new_ascii_("hebrew-calendar-m12-gen")
-	, Bry_.new_ascii_("hebrew-calendar-m6a-gen"), Bry_.new_ascii_("hebrew-calendar-m6b-gen")
+	{ Bry_.new_a7("hebrew-calendar-m1-gen"), Bry_.new_a7("hebrew-calendar-m2-gen"), Bry_.new_a7("hebrew-calendar-m3-gen")
+	, Bry_.new_a7("hebrew-calendar-m4-gen"), Bry_.new_a7("hebrew-calendar-m5-gen"), Bry_.new_a7("hebrew-calendar-m6-gen")
+	, Bry_.new_a7("hebrew-calendar-m7-gen"), Bry_.new_a7("hebrew-calendar-m8-gen"), Bry_.new_a7("hebrew-calendar-m9-gen")
+	, Bry_.new_a7("hebrew-calendar-m10-gen"), Bry_.new_a7("hebrew-calendar-m11-gen"), Bry_.new_a7("hebrew-calendar-m12-gen")
+	, Bry_.new_a7("hebrew-calendar-m6a-gen"), Bry_.new_a7("hebrew-calendar-m6b-gen")
 	};
 	public static final int
 	  Rslt_year_num				= 0

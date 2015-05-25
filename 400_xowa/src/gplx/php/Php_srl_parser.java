@@ -107,7 +107,7 @@ public class Php_srl_parser {
 			case Byte_ascii.Ltr_d:		// EX: 'd:1.23;'
 				pos = Chk(raw, pos + 1, Byte_ascii.Colon);
 				int double_end = Bry_finder.Find_fwd(raw, Byte_ascii.Semic, pos, raw_len);
-				String double_str = String_.new_ascii_(raw, pos, double_end);
+				String double_str = String_.new_a7(raw, pos, double_end);
 				double double_val = 0;
 				if		(String_.Eq(double_str, "INF")) double_val = Double_.Inf_pos;
 				else if (String_.Eq(double_str, "NAN")) double_val = Double_.NaN;
@@ -120,7 +120,7 @@ public class Php_srl_parser {
 				pos = Chk(raw, pos, Byte_ascii.Colon);
 				pos = Chk(raw, pos, Byte_ascii.Quote);
 				int str_end = pos + len_val;
-				String str_val = String_.new_utf8_(raw, pos, str_end);
+				String str_val = String_.new_u8(raw, pos, str_end);
 				rv = factory.Str(pos, str_end, str_val);
 				pos = Chk(raw, str_end, Byte_ascii.Quote);
 				pos = Chk(raw, pos, Byte_ascii.Semic);
@@ -142,7 +142,7 @@ public class Php_srl_parser {
 			default: throw err_(raw, pos, "unexpected type: {0}", Char_.XtoStr(b));
 		}
 		return rv;
-	}	static final byte[] CONST_funct_bgn = Bry_.new_ascii_("O:42:\"Scribunto_LuaStandaloneInterpreterFunction\":1:{s:2:\"id\";i:"), CONST_funct_end = Bry_.new_ascii_(";}");
+	}	static final byte[] CONST_funct_bgn = Bry_.new_a7("O:42:\"Scribunto_LuaStandaloneInterpreterFunction\":1:{s:2:\"id\";i:"), CONST_funct_end = Bry_.new_a7(";}");
 	int Parse_int_val(int bgn) {
 		pos = bgn;
 		pos = Chk(raw, pos + 1, Byte_ascii.Colon);
@@ -190,7 +190,7 @@ public class Php_srl_parser {
 	}
 	Err err_(byte[] raw, int bgn, String fmt, Object... args) {return err_(raw, bgn, raw.length, fmt, args);}
 	Err err_(byte[] raw, int bgn, int raw_len, String fmt, Object... args) {
-		String msg = String_.Format(fmt, args) + " " + Int_.Xto_str(bgn) + " " + String_.new_utf8_len_safe_(raw, bgn, 20);
+		String msg = String_.Format(fmt, args) + " " + Int_.Xto_str(bgn) + " " + String_.new_u8_by_len(raw, bgn, 20);
 		return Err_.new_(msg);
 	}
 }

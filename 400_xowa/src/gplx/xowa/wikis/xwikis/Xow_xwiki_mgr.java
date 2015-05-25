@@ -25,12 +25,12 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 		srl = new Xow_xwiki_mgr_srl(this, url_parser);
 	}		
 	public Xow_lang_mgr Lang_mgr() {return lang_mgr;} private final Xow_lang_mgr lang_mgr = Xow_lang_mgr.dflt_();
-	public int Len() {return list.Count();} private OrderedHash list = OrderedHash_.new_bry_(); private Hash_adp_bry hash = Hash_adp_bry.ci_ascii_();	// ASCII:lang_code
+	public int Len() {return list.Count();} private Ordered_hash list = Ordered_hash_.new_bry_(); private Hash_adp_bry hash = Hash_adp_bry.ci_ascii_();	// ASCII:lang_code
 	public void Clear() {hash.Clear(); list.Clear();}
-	public Xow_xwiki_itm Get_at(int i)								{return (Xow_xwiki_itm)list.FetchAt(i);}
+	public Xow_xwiki_itm Get_at(int i)								{return (Xow_xwiki_itm)list.Get_at(i);}
 	public Xow_xwiki_itm Get_by_key(byte[] key)						{return (Xow_xwiki_itm)hash.Get_by_bry(key);}
 	public Xow_xwiki_itm Get_by_mid(byte[] src, int bgn, int end)	{return (Xow_xwiki_itm)hash.Get_by_mid(src, bgn, end);}
-	public Xow_xwiki_itm Add_full(String alias, String domain)		{return Add_full(Bry_.new_ascii_(alias), Bry_.new_ascii_(domain), null);}
+	public Xow_xwiki_itm Add_full(String alias, String domain)		{return Add_full(Bry_.new_a7(alias), Bry_.new_a7(domain), null);}
 	public Xow_xwiki_itm Add_full(byte[] alias, byte[] domain)		{return Add_full(alias, domain, null);}
 	public Xow_xwiki_itm Add_full(byte[] alias, byte[] domain_bry, byte[] url_fmt) {
 		int domain_tid = Byte_.Zero;
@@ -50,7 +50,7 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 		list.Sort();
 	}
 	public Xow_domain[] Get_by_crt(Xow_domain cur, gplx.xowa.wikis.domains.crts.Xow_domain_crt_itm crt) {
-		ListAdp rv = ListAdp_.new_();
+		List_adp rv = List_adp_.new_();
 		int len = this.Len();
 		for (int i = 0; i < len; ++i) {
 			Xow_xwiki_itm wiki = this.Get_at(i);
@@ -58,7 +58,7 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 			Xow_domain domain_itm = Xow_domain_.parse(wiki.Domain_bry());
 			if (crt.Matches(cur, domain_itm)) rv.Add(domain_itm);
 		}
-		return (Xow_domain[])rv.Xto_ary_and_clear(Xow_domain.class);
+		return (Xow_domain[])rv.To_ary_and_clear(Xow_domain.class);
 	}
 	public void Add_bulk(byte[] raw) {
 		byte[][] rows = Bry_.Split(raw, Byte_ascii.NewLine);
@@ -92,19 +92,19 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 		}
 		byte[] url_fmt = Bry_.Add(Xoh_href_parser.Href_http_bry, domain_bry, Xoh_href_parser.Href_wiki_bry, Arg_0);
 		return Xow_xwiki_itm.new_(alias, url_fmt, lang_id, domain.Domain_tid(), domain_bry);
-	}	static final byte[] Arg_0 = Bry_.new_ascii_("~{0}");
+	}	static final byte[] Arg_0 = Bry_.new_a7("~{0}");
 	String Exec_itms_print(byte[] raw) {
 		Bry_fmtr fmtr = Bry_fmtr.new_bry_(raw, "wiki_key");//, "wiki_type_url", "wiki_lang", "wiki_name", "wiki_logo_url");
 		Bry_bfr tmp_bfr = Xoa_app_.Utl__bfr_mkr().Get_k004();
 		Hash_adp_bry seen = Hash_adp_bry.ci_ascii_();	// ASCII:url_domain; EX:en.wikipedia.org
 		int wikis_len = list.Count();
 		for (int i = 0; i < wikis_len; i++) {
-			Xow_xwiki_itm itm = (Xow_xwiki_itm)list.FetchAt(i);
+			Xow_xwiki_itm itm = (Xow_xwiki_itm)list.Get_at(i);
 			byte[] key = itm.Key_bry();
-			if (Bry_.Eq(key, Xow_domain_.Tid_bry_home)) continue;	// skip home
+			if (Bry_.Eq(key, Xow_domain_type_.Key_bry_home)) continue;	// skip home
 			byte[] domain = itm.Domain_bry();
 			if (seen.Has(domain)) continue;
-			seen.AddKeyVal(domain);
+			seen.Add_as_key_and_val(domain);
 			fmtr.Bld_bfr_many(tmp_bfr, key);
 		}
 		return tmp_bfr.To_str_and_rls();
@@ -112,13 +112,13 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 	public void Add_bulk_peers(byte[] raw) {
 		byte[][] keys = Bry_.Split(raw, Byte_ascii.Tilde);
 		int len = keys.length;
-		OrderedHash peers = OrderedHash_.new_();
+		Ordered_hash peers = Ordered_hash_.new_();
 		Cfg_nde_root peer_root = wiki.Appe().Wiki_mgr().Groups();
 		for (int i = 0; i < len; i++) {
 			byte[] key = keys[i];
 			Cfg_nde_obj peer_grp = peer_root.Grps_get(key);
 			if (peer_grp == null)
-				throw Err_mgr._.fmt_(GRP_KEY, "invalid_peer", "unknown peer group: ~{0}", String_.new_utf8_(key));
+				throw Err_mgr._.fmt_(GRP_KEY, "invalid_peer", "unknown peer group: ~{0}", String_.new_u8(key));
 			else
 				Cfg_nde_obj_.Fill_recurse(peers, peer_grp);
 		}
@@ -126,25 +126,25 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 		len = peers.Count();
 		byte[] lang_key_bry = wiki.Lang().Key_bry();
 		if (lang_key_bry == Xol_lang_itm_.Key__unknown) lang_key_bry = Xol_lang_.Key_en;	// default non-lang wikis to english
-		String lang_key_str = String_.new_utf8_(lang_key_bry);
+		String lang_key_str = String_.new_u8(lang_key_bry);
 		int lang_id = Xol_lang_itm_.Get_by_key(lang_key_bry).Id();
 		for (int i = 0; i < len; i++) {
-			Xoac_wiki_itm wiki_itm = (Xoac_wiki_itm)peers.FetchAt(i);
+			Xoac_wiki_itm wiki_itm = (Xoac_wiki_itm)peers.Get_at(i);
 			byte[] wiki_name_bry = wiki_itm.Key_bry();
-			String wiki_name = String_.new_utf8_(wiki_name_bry);
+			String wiki_name = String_.new_u8(wiki_name_bry);
 			String domain_str = null;
-			int domain_tid = Xow_domain_.Tid__get_int(wiki_name_bry);
+			int domain_tid = Xow_domain_type_.Get_type_as_tid(wiki_name_bry);
 			switch (domain_tid) {
-				case Xow_domain_.Tid_int_commons:
-				case Xow_domain_.Tid_int_species:
-				case Xow_domain_.Tid_int_meta:
-				case Xow_domain_.Tid_int_incubator:			domain_str = String_.Format("{0}.wikimedia.org", wiki_name); break;			// EX: commons.wikimedia.org
-				case Xow_domain_.Tid_int_wikidata:				domain_str = String_.Format("www.wikidata.org", wiki_name); break;			// EX: www.wikidata.org
-				case Xow_domain_.Tid_int_mediawiki:			domain_str = String_.Format("www.mediawiki.org", wiki_name); break;
-				case Xow_domain_.Tid_int_wikimediafoundation:	domain_str = String_.Format("wikimediafoundation.org", wiki_name); break;
+				case Xow_domain_type_.Tid_commons:
+				case Xow_domain_type_.Tid_species:
+				case Xow_domain_type_.Tid_meta:
+				case Xow_domain_type_.Tid_incubator:			domain_str = String_.Format("{0}.wikimedia.org", wiki_name); break;			// EX: commons.wikimedia.org
+				case Xow_domain_type_.Tid_wikidata:				domain_str = String_.Format("www.wikidata.org", wiki_name); break;			// EX: www.wikidata.org
+				case Xow_domain_type_.Tid_mediawiki:			domain_str = String_.Format("www.mediawiki.org", wiki_name); break;
+				case Xow_domain_type_.Tid_wmforg:	domain_str = String_.Format("wikimediafoundation.org", wiki_name); break;
 				default:										domain_str = String_.Format("{0}.{1}.org", lang_key_str, wiki_name); break;	// EX: en.wiktionary.org
 			}
-			byte[] domain_bry = Bry_.new_utf8_(domain_str);
+			byte[] domain_bry = Bry_.new_u8(domain_str);
 			Xowe_wiki lang_wiki = wiki.Appe().Wiki_mgr().Get_by_key_or_null(domain_bry);
 			boolean offline_exists = lang_wiki != null;
 			String fmt = String_.Format("http://" + domain_str + "/wiki/~{0}");
@@ -152,7 +152,7 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 			for (int j = 0; j < aliases_len; j++) {
 				byte[] alias = wiki_itm.Aliases()[j];
 				if (wiki.Ns_mgr().Names_get_or_null(alias, 0, alias.length) != null) continue;	// NOTE: do not add xwiki if alias matches namespace; EX: en.wiktionary.org has ns of "Wiktionary"; do not add alias of "wiktionary"; note that wikipedia does have an alias to wiktionary
-				Xow_xwiki_itm xwiki = Xow_xwiki_itm.new_(alias, Bry_.new_utf8_(fmt), lang_id, domain_tid, domain_bry).Offline_(offline_exists);	// NOTE: domain_tid must be used, not wiki.Domain_tid; DATE:2014-09-14
+				Xow_xwiki_itm xwiki = Xow_xwiki_itm.new_(alias, Bry_.new_u8(fmt), lang_id, domain_tid, domain_bry).Offline_(offline_exists);	// NOTE: domain_tid must be used, not wiki.Domain_tid; DATE:2014-09-14
 				Add_itm(xwiki, null);
 			}
 		}
@@ -160,24 +160,24 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 	public void Add_bulk_langs(GfoMsg m) {
 		byte[] grp_key = m.ReadBry("grp_key");
 		byte[] wiki_type_name = m.ReadBryOr("wiki_type_name", null);
-		int wiki_tid = wiki_type_name == null ? wiki.Domain_tid() : Xow_domain_.Tid__get_int(wiki_type_name);
+		int wiki_tid = wiki_type_name == null ? wiki.Domain_tid() : Xow_domain_type_.Get_type_as_tid(wiki_type_name);
 		Add_bulk_langs(grp_key, wiki_tid);
 	}
 	public void Add_bulk_langs(byte[] grp_key) {Add_bulk_langs(grp_key, wiki.Domain_tid());}
 	public void Add_bulk_langs(byte[] grp_key, int domain_tid) {
-		OrderedHash langs = wiki.Appe().Lang_mgr().Xto_hash(grp_key);
+		Ordered_hash langs = wiki.Appe().Lang_mgr().Xto_hash(grp_key);
 		int len = langs.Count();
-		byte[] wiki_tid_name = Xow_domain_.Tid__get_bry(domain_tid);
-		String wiki_tid_name_str = String_.new_utf8_(wiki_tid_name);
+		byte[] wiki_tid_name = Xow_domain_type_.Get_type_as_bry(domain_tid);
+		String wiki_tid_name_str = String_.new_u8(wiki_tid_name);
 		for (int i = 0; i < len; i++) {
-			Xoac_lang_itm lang = (Xoac_lang_itm)langs.FetchAt(i);
-			String domain_str = String_.Format("{0}.{1}.org", String_.new_utf8_(lang.Key_bry()), wiki_tid_name_str); // EX: fr.wikipedia.org
-			byte[] domain_bry = Bry_.new_utf8_(domain_str);
+			Xoac_lang_itm lang = (Xoac_lang_itm)langs.Get_at(i);
+			String domain_str = String_.Format("{0}.{1}.org", String_.new_u8(lang.Key_bry()), wiki_tid_name_str); // EX: fr.wikipedia.org
+			byte[] domain_bry = Bry_.new_u8(domain_str);
 			Xowe_wiki lang_wiki = wiki.Appe().Wiki_mgr().Get_by_key_or_null(domain_bry);
 			boolean offline_exists = lang_wiki != null;
 			String url_fmt = String_.Format("http://" + domain_str + "/wiki/~{0}");
 			int lang_id = Xol_lang_itm_.Get_by_key(lang.Key_bry()).Id();
-			Xow_xwiki_itm xwiki = Xow_xwiki_itm.new_(lang.Key_bry(), Bry_.new_utf8_(url_fmt), lang_id, domain_tid, domain_bry).Offline_(offline_exists);
+			Xow_xwiki_itm xwiki = Xow_xwiki_itm.new_(lang.Key_bry(), Bry_.new_u8(url_fmt), lang_id, domain_tid, domain_bry).Offline_(offline_exists);
 			Add_itm(xwiki, lang);
 		}
 		lang_mgr.Grps_sort();
@@ -191,9 +191,9 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 		byte[] xwiki_domain = xwiki.Domain_bry();
 		if (!domain_hash.Has(xwiki_domain)) {	// domain is new
 			domain_hash.Add(xwiki_domain, xwiki_key);
-			list.AddReplace(xwiki_key, xwiki);	// only add to list if domain is new; some wikis like commons will be added multiple times under different aliases (commons, c, commons.wikimedia.org); need to check domain and add only once DATE:2014-11-07
+			list.Add_if_dupe_use_nth(xwiki_key, xwiki);	// only add to list if domain is new; some wikis like commons will be added multiple times under different aliases (commons, c, commons.wikimedia.org); need to check domain and add only once DATE:2014-11-07
 		}
-		hash.AddReplace(xwiki_key, xwiki);
+		hash.Add_if_dupe_use_nth(xwiki_key, xwiki);
 	}	private final Hash_adp_bry domain_hash = Hash_adp_bry.ci_ascii_(); 
 	public void Add_many(byte[] v) {srl.Load_by_bry(v);}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

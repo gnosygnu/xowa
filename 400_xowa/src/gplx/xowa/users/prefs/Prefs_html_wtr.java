@@ -40,7 +40,7 @@ class Prefs_html_wtr {
 	private void Write_textarea(Bry_bfr bfr, Html_nde hnde, int prop_idx, Object prop_val) {
 		Write__id(bfr, prop_idx);						// " id='xowa_prop_123'"
 		Write__nde_end(bfr);							// ">"
-		bfr.Add(Html_utl.Escape_html_as_bry(Bry_.new_utf8_(Object_.Xto_str_strict_or_empty(prop_val))));
+		bfr.Add(Html_utl.Escape_html_as_bry(Bry_.new_u8(Object_.Xto_str_strict_or_empty(prop_val))));
 														// "abcde"
 	}
 	private void Write_checkbox(Bry_bfr bfr, Html_nde hnde, int prop_idx, Object prop_val) {
@@ -62,7 +62,7 @@ class Prefs_html_wtr {
 			bfr.Add_str(option.Key());					// "option_key"
 			bfr.Add_byte(Byte_ascii.Apos);				// "'"
 			if (String_.Eq(Object_.Xto_str_strict_or_empty(prop_val), option.Key()))
-				bfr.Add_str(" selected='selected'");	// " selected='selected'"
+				bfr.Add_str_a7(" selected='selected'");	// " selected='selected'"
 			bfr.Add_byte(Byte_ascii.Gt);				// ">"
 			bfr.Add_str(option.Val_to_str_or_empty());	// "option_text"
 			bfr.Add(Nde_stub_option_end);				// "</option>\n"
@@ -76,20 +76,20 @@ class Prefs_html_wtr {
 		Write_io_btn(bfr, hnde, prop_idx);
 	}
 	private void Write_io_btn(Bry_bfr bfr, Html_nde hnde, int prop_idx) {
-		bfr.Add_str("<button id='xowa_prop_").Add_int_variable(prop_idx).Add_str("_io").Add_byte(Byte_ascii.Apos);
-		bfr.Add_str(" class='options_button' onclick='xowa_io_select(\"file\", \"");
-		bfr.Add_str("xowa_prop_").Add_int_variable(prop_idx);
-		byte[] xowa_io_msg = hnde.Atrs_val_by_key_bry(Bry_.new_ascii_("xowa_io_msg"));
-		if (xowa_io_msg == null) xowa_io_msg = Bry_.new_ascii_("Please select a file.");
-		bfr.Add_str("\", \"").Add(xowa_io_msg).Add_str("\");'>");
-		bfr.Add_str("...</button>").Add_byte_nl();		
+		bfr.Add_str_a7("<button id='xowa_prop_").Add_int_variable(prop_idx).Add_str("_io").Add_byte(Byte_ascii.Apos);
+		bfr.Add_str_a7(" class='options_button' onclick='xowa_io_select(\"file\", \"");
+		bfr.Add_str_a7("xowa_prop_").Add_int_variable(prop_idx);
+		byte[] xowa_io_msg = hnde.Atrs_val_by_key_bry(Bry_.new_a7("xowa_io_msg"));
+		if (xowa_io_msg == null) xowa_io_msg = Bry_.new_a7("Please select a file.");
+		bfr.Add_str_a7("\", \"").Add(xowa_io_msg).Add_str("\");'>");
+		bfr.Add_str_a7("...</button>").Add_byte_nl();		
 	}
-	private static final byte[] Atr_key_xowa_prop_list = Bry_.new_ascii_("xowa_prop_list")
-		, Atr_stub_id = Bry_.new_ascii_(" id='xowa_prop_")
-		, Atr_stub_value = Bry_.new_ascii_(" value='")
-		, Atr_stub_checked = Bry_.new_ascii_(" checked='checked'")
-		, Nde_stub_option_bgn = Bry_.new_ascii_("  <option value='")
-		, Nde_stub_option_end = Bry_.new_ascii_("</option>\n")
+	private static final byte[] Atr_key_xowa_prop_list = Bry_.new_a7("xowa_prop_list")
+		, Atr_stub_id = Bry_.new_a7(" id='xowa_prop_")
+		, Atr_stub_value = Bry_.new_a7(" value='")
+		, Atr_stub_checked = Bry_.new_a7(" checked='checked'")
+		, Nde_stub_option_bgn = Bry_.new_a7("  <option value='")
+		, Nde_stub_option_end = Bry_.new_a7("</option>\n")
 		;
 	Object Eval_prop_get(Html_nde hnde) {
 		byte[] cmd = hnde.Atrs_val_by_key_bry(Prefs_mgr.Bry_prop);

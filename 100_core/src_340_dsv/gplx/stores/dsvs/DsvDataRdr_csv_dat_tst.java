@@ -150,27 +150,27 @@ class DsvDataRdr_fxt {
 	public DsvDataRdr_fxt tst_FldListCsv(String... names) {return tst_Flds(TblIdx0, GfoFldList_.str_(names));}
 	public DsvDataRdr_fxt tst_Flds(int tblIdx, GfoFldList expdFlds) {
 		GfoNde tbl = root.Subs().FetchAt_asGfoNde(tblIdx);
-		ListAdp expdList = ListAdp_.new_(), actlList = ListAdp_.new_();
+		List_adp expdList = List_adp_.new_(), actlList = List_adp_.new_();
 		String_bldr sb = String_bldr_.new_();
 		GfoFldList_BldDbgList(expdFlds, expdList, sb);
 		GfoFldList_BldDbgList(tbl.SubFlds(), actlList, sb);
 		Tfds.Eq_list(expdList, actlList);
 		return this;
 	}
-	void GfoFldList_BldDbgList(GfoFldList flds, ListAdp list, String_bldr sb) {
+	void GfoFldList_BldDbgList(GfoFldList flds, List_adp list, String_bldr sb) {
 		for (int i = 0; i < flds.Count(); i++) {
-			GfoFld fld = flds.FetchAt(i);
+			GfoFld fld = flds.Get_at(i);
 			sb.Add(fld.Key()).Add(",").Add(fld.Type().Key());
 			list.Add(sb.Xto_str_and_clear());
 		}
 	}
 	public DsvDataRdr_fxt tst_Tbls(String... expdNames) {
-		ListAdp actlList = ListAdp_.new_();
+		List_adp actlList = List_adp_.new_();
 		for (int i = 0; i < root.Subs().Count(); i++) {
 			GfoNde tbl = root.Subs().FetchAt_asGfoNde(i);
 			actlList.Add(tbl.Name());
 		}
-		Tfds.Eq_ary(expdNames, actlList.XtoStrAry());
+		Tfds.Eq_ary(expdNames, actlList.To_str_ary());
 		return this;
 	}
 	public DsvDataRdr_fxt tst_DatNull() {
@@ -184,7 +184,7 @@ class DsvDataRdr_fxt {
 			Tfds.Eq(0, tbl.Subs().Count());
 			return this;
 		}
-		ListAdp expdList = ListAdp_.new_(), actlList = ListAdp_.new_();
+		List_adp expdList = List_adp_.new_(), actlList = List_adp_.new_();
 		String_bldr sb = String_bldr_.new_();
 		for (int i = 0; i < tbl.Subs().Count(); i++) {
 			GfoNde row = tbl.Subs().FetchAt_asGfoNde(i);

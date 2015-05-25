@@ -23,15 +23,15 @@ public class Xoa_url_parser_url_bar_tst {
 		fxt.Test_parse_from_url_bar("Page_1"					, "en.wikipedia.org/wiki/Page_1");				// basic
 	}
 	@Test  public void Lang() {
-		fxt.App().User().Wiki().Xwiki_mgr().Add_full("uk", "uk.wikipedia.org");
+		fxt.App().Usere().Wiki().Xwiki_mgr().Add_full("uk", "uk.wikipedia.org");
 		fxt.Test_parse_from_url_bar("uk"						, "en.wikipedia.org/wiki/uk");					// lang-like page (uk=Ukraine) should not try to open wiki; DATE:2014-02-07
 	}
 	@Test  public void Lang_like() {
-		fxt.App().User().Wiki().Xwiki_mgr().Add_full(Bry_.new_ascii_("uk"), Bry_.new_ascii_("uk.wikipedia.org"), Bry_.new_ascii_("http://~{1}.wikipedia.org"));	// NOTE: fmt needed for Type_is_lang
+		fxt.App().Usere().Wiki().Xwiki_mgr().Add_full(Bry_.new_a7("uk"), Bry_.new_a7("uk.wikipedia.org"), Bry_.new_a7("http://~{1}.wikipedia.org"));	// NOTE: fmt needed for Type_is_lang
 		fxt.Test_parse_from_url_bar("uk/A"						, "en.wikipedia.org/wiki/uk/A");				// uk/A should not try be interpreted as wiki="uk" page="A"; DATE:2014-04-26
 	}
 	@Test  public void Macro() {
-		fxt.App().User().Wiki().Xwiki_mgr().Add_full("fr.wikisource.org", "fr.wikisource.org");
+		fxt.App().Usere().Wiki().Xwiki_mgr().Add_full("fr.wikisource.org", "fr.wikisource.org");
 		fxt.Test_parse_from_url_bar("fr.s:Auteur:Shakespeare"	, "fr.wikisource.org/wiki/Auteur:Shakespeare");	// url_macros
 	}
 	@Test  public void Home() {
@@ -39,9 +39,9 @@ public class Xoa_url_parser_url_bar_tst {
 		fxt.Test_parse_from_url_bar("home/wiki/Main_Page"		, "home/wiki/Main_Page");						// home Main_Page should go to home; DATE:2014-02-09
 	}
 	@Test  public void Custom() {
-		fxt.App().User().Wiki().Xwiki_mgr().Add_full("zh.wikipedia.org", "zh.wikipedia.org");
+		fxt.App().Usere().Wiki().Xwiki_mgr().Add_full("zh.wikipedia.org", "zh.wikipedia.org");
 		gplx.xowa.wikis.Xoa_wiki_regy.Make_wiki_dir(fxt.App(), "zh.wikipedia.org");
-		fxt.App().Wiki_mgr().Get_by_key_or_make(Bry_.new_ascii_("zh.wikipedia.org")).Props().Main_page_(Bry_.new_ascii_("Zh_Main_Page"));
+		fxt.App().Wiki_mgr().Get_by_key_or_make(Bry_.new_a7("zh.wikipedia.org")).Props().Main_page_(Bry_.new_a7("Zh_Main_Page"));
 		fxt.Test_parse_from_url_bar("zh.w:"						, "zh.wikipedia.org/wiki/Zh_Main_Page");
 		fxt.Test_parse_from_url_bar("zh.w:Main_Page"			, "zh.wikipedia.org/wiki/Main_Page");
 	}

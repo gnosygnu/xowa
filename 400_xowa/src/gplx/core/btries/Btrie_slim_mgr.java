@@ -41,10 +41,10 @@ public class Btrie_slim_mgr implements Btrie_mgr {
 		}
 	}
 	public Btrie_slim_mgr Add_bry_tid(byte[] bry, byte tid)			{return (Btrie_slim_mgr)Add_obj(bry, Byte_obj_val.new_(tid));}
-	public Btrie_slim_mgr Add_str_byte(String key, byte val)		{return (Btrie_slim_mgr)Add_obj(Bry_.new_utf8_(key), Byte_obj_val.new_(val));}
-	public Btrie_slim_mgr Add_str_int(String key, int val)			{return (Btrie_slim_mgr)Add_obj(Bry_.new_utf8_(key), Int_obj_val.new_(val));}
-	public Btrie_slim_mgr Add_bry(String key, String val)			{return (Btrie_slim_mgr)Add_obj(Bry_.new_utf8_(key), Bry_.new_utf8_(val));}
-	public Btrie_slim_mgr Add_bry(String key, byte[] val)			{return (Btrie_slim_mgr)Add_obj(Bry_.new_utf8_(key), val);}
+	public Btrie_slim_mgr Add_str_byte(String key, byte val)		{return (Btrie_slim_mgr)Add_obj(Bry_.new_u8(key), Byte_obj_val.new_(val));}
+	public Btrie_slim_mgr Add_str_int(String key, int val)			{return (Btrie_slim_mgr)Add_obj(Bry_.new_u8(key), Int_obj_val.new_(val));}
+	public Btrie_slim_mgr Add_bry(String key, String val)			{return (Btrie_slim_mgr)Add_obj(Bry_.new_u8(key), Bry_.new_u8(val));}
+	public Btrie_slim_mgr Add_bry(String key, byte[] val)			{return (Btrie_slim_mgr)Add_obj(Bry_.new_u8(key), val);}
 	public Btrie_slim_mgr Add_bry(byte[] v)							{return (Btrie_slim_mgr)Add_obj(v, v);}
 	public Btrie_slim_mgr Add_bry_bval(byte b, byte val)			{return (Btrie_slim_mgr)Add_obj(new byte[] {b}, Byte_obj_val.new_(val));}
 	public Btrie_slim_mgr Add_bry_bval(byte[] bry, byte val)		{return (Btrie_slim_mgr)Add_obj(bry, Byte_obj_val.new_(val));}
@@ -52,10 +52,10 @@ public class Btrie_slim_mgr implements Btrie_mgr {
 		int ary_len = ary.length;
 		Byte_obj_val bval = Byte_obj_val.new_(val);
 		for (int i = 0; i < ary_len; i++)
-			Add_obj(Bry_.new_utf8_(ary[i]), bval);
+			Add_obj(Bry_.new_u8(ary[i]), bval);
 		return this;
 	}
-	public Btrie_slim_mgr Add_stub(String key, byte val)		{byte[] bry = Bry_.new_utf8_(key); return (Btrie_slim_mgr)Add_obj(bry, new Btrie_itm_stub(val, bry));}
+	public Btrie_slim_mgr Add_stub(String key, byte val)		{byte[] bry = Bry_.new_u8(key); return (Btrie_slim_mgr)Add_obj(bry, new Btrie_itm_stub(val, bry));}
 	public Btrie_slim_mgr Add_stubs(byte[][] ary)				{return Add_stubs(ary, ary.length);}
 	public Btrie_slim_mgr Add_stubs(byte[][] ary, int ary_len) {
 		for (byte i = 0; i < ary_len; i++) {
@@ -64,9 +64,9 @@ public class Btrie_slim_mgr implements Btrie_mgr {
 		}
 		return this;
 	}
-	public Btrie_mgr Add_obj(String key, Object val) {return Add_obj(Bry_.new_utf8_(key), val);}
+	public Btrie_mgr Add_obj(String key, Object val) {return Add_obj(Bry_.new_u8(key), val);}
 	public Btrie_mgr Add_obj(byte[] key, Object val) {
-		if (val == null) throw Err_.new_("null objects cannot be registered").Add("key", String_.new_utf8_(key));
+		if (val == null) throw Err_.new_("null objects cannot be registered").Add("key", String_.new_u8(key));
 		int key_len = key.length; int key_end = key_len - 1;
 		Btrie_slim_itm cur = root;
 		for (int i = 0; i < key_len; i++) {

@@ -19,7 +19,7 @@ package gplx.xowa.bldrs.xmls; import gplx.*; import gplx.xowa.*; import gplx.xow
 import org.junit.*; import gplx.ios.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xob_xml_parser_tst {
 	@Before public void init() {
-		Io_mgr._.InitEngine_mem();
+		Io_mgr.I.InitEngine_mem();
 		Xoae_app app = Xoa_app_fxt.app_();
 		bldr = new Xob_bldr(app);
 	}	private Xow_ns_mgr ns_mgr = Xow_ns_mgr_.default_(gplx.xowa.langs.cases.Xol_case_mgr_.Ascii());
@@ -43,28 +43,28 @@ public class Xob_xml_parser_tst {
 	@Test  public void Xml() {
 		Xowd_page_itm doc = doc_(1, "a", "&quot;a &amp; b &lt;&gt; a | b&quot;", Date_1);
 		fil = page_bldr.Add(doc).XtoByteStreamRdr();
-		tst_parse(fil, doc.Text_(Bry_.new_utf8_("\"a & b <> a | b\"")), 0);
+		tst_parse(fil, doc.Text_(Bry_.new_u8("\"a & b <> a | b\"")), 0);
 	}
 	@Test  public void Tab() {
 		Xowd_page_itm doc = doc_(1, "a", "a \t b", Date_1);
 		fil = page_bldr.Add(doc).XtoByteStreamRdr();
-		tst_parse(fil, doc.Text_(Bry_.new_utf8_("a &#09; b")), 0);
+		tst_parse(fil, doc.Text_(Bry_.new_u8("a &#09; b")), 0);
 	}
 	@Test  public void Tab_disable() {
 		Xowd_page_itm doc = doc_(1, "a", "a \t b", Date_1);
 		page_parser.Trie_tab_del_();
 		fil = page_bldr.Add(doc).XtoByteStreamRdr();
-		tst_parse(fil, doc.Text_(Bry_.new_utf8_("a \t b")), 0);
+		tst_parse(fil, doc.Text_(Bry_.new_u8("a \t b")), 0);
 	}
 	@Test  public void Cr_nl() {
 		Xowd_page_itm doc = doc_(1, "a", "a \r\n b", Date_1);
 		fil = page_bldr.Add(doc).XtoByteStreamRdr();
-		tst_parse(fil, doc.Text_(Bry_.new_utf8_("a \n b")), 0);
+		tst_parse(fil, doc.Text_(Bry_.new_u8("a \n b")), 0);
 	}
 	@Test  public void Cr() {
 		Xowd_page_itm doc = doc_(1, "a", "a \r b", Date_1);
 		fil = page_bldr.Add(doc).XtoByteStreamRdr();
-		tst_parse(fil, doc.Text_(Bry_.new_utf8_("a \n b")), 0);
+		tst_parse(fil, doc.Text_(Bry_.new_u8("a \n b")), 0);
 	}
 	@Test  public void Text_long() {
 		String s = String_.Repeat("a", 1024);
@@ -86,24 +86,24 @@ public class Xob_xml_parser_tst {
 	@Test  public void Ns_file() {
 		Xowd_page_itm doc = doc_(1, "File:a", "a", Date_1);
 		Tfds.Eq(Xow_ns_.Id_file, doc.Ns_id());
-		Tfds.Eq("a", String_.new_utf8_(doc.Ttl_page_db()));
+		Tfds.Eq("a", String_.new_u8(doc.Ttl_page_db()));
 	}
 	@Test  public void Ns_main() {
 		Xowd_page_itm doc = doc_(1, "a", "a", Date_1);
 		Tfds.Eq(Xow_ns_.Id_main, doc.Ns_id());
-		Tfds.Eq("a", String_.new_utf8_(doc.Ttl_page_db()));
+		Tfds.Eq("a", String_.new_u8(doc.Ttl_page_db()));
 	}
 	@Test  public void Ns_main_book() {
 		Xowd_page_itm doc = doc_(1, "Book", "a", Date_1);
 		Tfds.Eq(Xow_ns_.Id_main, doc.Ns_id());
-		Tfds.Eq("Book", String_.new_utf8_(doc.Ttl_page_db()));
+		Tfds.Eq("Book", String_.new_u8(doc.Ttl_page_db()));
 	}
 	@Test  public void XmlEntities() {
 		Xowd_page_itm orig = doc_(1, "A&amp;b", "a", Date_1);
 		Xowd_page_itm actl = new Xowd_page_itm();
 		fil = page_bldr.Add(orig).XtoByteStreamRdr();
 		page_parser.Parse_page(actl, usr_dlg, fil, fil.Bfr(), 0, ns_mgr);
-		Tfds.Eq("A&b", String_.new_utf8_(actl.Ttl_full_db()));
+		Tfds.Eq("A&b", String_.new_u8(actl.Ttl_full_db()));
 	}
 	@Test  public void Root() {
 		Xowd_page_itm doc = doc_(1, "a", "a", Date_1);
@@ -121,13 +121,13 @@ public class Xob_xml_parser_tst {
 		Xowd_page_itm actl = new Xowd_page_itm();
 		int rv = page_parser.Parse_page(actl, usr_dlg, fil, fil.Bfr(), cur_pos, ns_mgr);
 		Tfds.Eq(expd.Id(), actl.Id(), "id");
-		Tfds.Eq(String_.new_utf8_(expd.Ttl_full_db()), String_.new_utf8_(actl.Ttl_full_db()), "title");
-		Tfds.Eq(String_.new_utf8_(expd.Text()), String_.new_utf8_(actl.Text()), "text");
+		Tfds.Eq(String_.new_u8(expd.Ttl_full_db()), String_.new_u8(actl.Ttl_full_db()), "title");
+		Tfds.Eq(String_.new_u8(expd.Text()), String_.new_u8(actl.Text()), "text");
 		Tfds.Eq_date(expd.Modified_on(), actl.Modified_on(), "timestamp");
 		return rv;
 	}
 	Xowd_page_itm doc_(int id, String title, String text, String date) {
-		Xowd_page_itm rv = new Xowd_page_itm().Id_(id).Ttl_(Bry_.new_ascii_(title), ns_mgr).Text_(Bry_.new_ascii_(text));
+		Xowd_page_itm rv = new Xowd_page_itm().Id_(id).Ttl_(Bry_.new_a7(title), ns_mgr).Text_(Bry_.new_a7(text));
 		int[] modified_on = new int[7];
 		dateParser.Parse_iso8651_like(modified_on, date);
 		rv.Modified_on_(DateAdp_.seg_(modified_on));

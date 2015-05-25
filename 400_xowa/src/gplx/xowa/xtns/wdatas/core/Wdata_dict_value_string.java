@@ -22,8 +22,8 @@ public class Wdata_dict_value_string {
 	, Tid_type									= 1
 	;
 	public static byte[] 
-	  Bry_value									= Bry_.new_ascii_("value")
-	, Bry_type									= Bry_.new_ascii_("type")
+	  Bry_value									= Bry_.new_a7("value")
+	, Bry_type									= Bry_.new_a7("type")
 	;
 	public static final Hash_adp_bry Dict = Hash_adp_bry.cs_()
 	.Add_bry_byte(Bry_value						, Tid_value)

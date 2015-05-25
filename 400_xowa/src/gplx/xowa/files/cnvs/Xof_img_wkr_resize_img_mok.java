@@ -23,7 +23,7 @@ public class Xof_img_wkr_resize_img_mok implements Xof_img_wkr_resize_img {
 		int src_w = src_size.Width(), src_h = src_size.Height();
 		if (trg_w < 1) throw Err_.new_fmt_("trg_w must be > 0: {0}", trg_w);
 		if (trg_h < 1) trg_h = Xof_xfer_itm_.Scale_h(src_w, src_h, trg_w);
-		Io_mgr._.SaveFilStr(trg, SizeAdp_.new_(trg_w, trg_h).XtoStr());
+		Io_mgr.I.SaveFilStr(trg, SizeAdp_.new_(trg_w, trg_h).XtoStr());
 		return true;
 	}
 	public static final Xof_img_wkr_resize_img_mok _ = new Xof_img_wkr_resize_img_mok(); Xof_img_wkr_resize_img_mok() {}

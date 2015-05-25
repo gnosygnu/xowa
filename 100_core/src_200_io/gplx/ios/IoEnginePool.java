@@ -17,18 +17,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.ios; import gplx.*;
 public class IoEnginePool {
-	public void AddReplace(IoEngine engine) {
+	public void Add_if_dupe_use_nth(IoEngine engine) {
 		hash.Del(engine.Key());
 		hash.Add(engine.Key(), engine);
 	}
-	public IoEngine Fetch(String key) {
-		IoEngine rv = (IoEngine)hash.Fetch(key); 
+	public IoEngine Get_by(String key) {
+		IoEngine rv = (IoEngine)hash.Get_by(key); 
 		return rv == null ? IoEngine_.Mem : rv; // rv == null when url is null or empty; return Mem which should be a noop; DATE:2013-06-04
 	}
-	HashAdp hash = HashAdp_.new_();
+	Hash_adp hash = Hash_adp_.new_();
 	public static final IoEnginePool _ = new IoEnginePool();
 	IoEnginePool() {
-		this.AddReplace(IoEngine_.Sys);
-		this.AddReplace(IoEngine_.Mem);
+		this.Add_if_dupe_use_nth(IoEngine_.Sys);
+		this.Add_if_dupe_use_nth(IoEngine_.Mem);
 	}
 }

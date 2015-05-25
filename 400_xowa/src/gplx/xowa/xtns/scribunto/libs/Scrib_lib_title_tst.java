@@ -23,7 +23,7 @@ public class Scrib_lib_title_tst {
 	@Before public void init() {
 		Db_conn_bldr.I.Reg_default_mem();
 		fxt.Clear_for_lib();
-		fxt.Core().Wiki().File__fsdb_mode().Tid_make_y_();
+		fxt.Core().Wiki().File__fsdb_mode().Tid_v2_bld_y_();
 		lib = fxt.Core().Lib_title().Init();
 	}	private Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt(); private Scrib_lib lib;
 	@Test  public void NewTitle() {
@@ -98,12 +98,12 @@ public class Scrib_lib_title_tst {
 	private static void Wiki_orig_tbl__create(Xowe_wiki wiki) {
 		Xowe_wiki_bldr.Create(wiki, 1, "dump.xml");
 		Xowd_db_file text_db = wiki.Data_mgr__core_mgr().Dbs__make_by_tid(Xowd_db_file_.Tid_text); text_db.Tbl__text().Create_tbl();
-		Fsdb_db_mgr__v2_bldr.I.Make(wiki, Bool_.Y);
+		Fsdb_db_mgr__v2_bldr.I.Get_or_make(wiki, Bool_.Y);
 		wiki.File_mgr().Init_file_mgr_by_load(wiki);
 	}
 	private static void Wiki_orig_tbl__insert(Xowe_wiki wiki, String ttl_str, int w, int h) {
-		byte[] ttl_bry = Bry_.new_utf8_(ttl_str);
-		wiki.File__orig_mgr().Insert(Xof_repo_itm.Repo_remote, ttl_bry, Xof_ext_.new_by_ttl_(ttl_bry).Id(), w, h, Bry_.Empty);
+		byte[] ttl_bry = Bry_.new_u8(ttl_str);
+		wiki.File__orig_mgr().Insert(Xof_repo_itm_.Repo_remote, ttl_bry, Xof_ext_.new_by_ttl_(ttl_bry).Id(), w, h, Bry_.Empty);
 	}
 //		private static void Init_page_regy(Xowe_wiki wiki, String ttl, int id, boolean is_redirect) {
 //			String url_str = "test/en.wikipedia.org/wiki_page_regy";
@@ -111,7 +111,7 @@ public class Scrib_lib_title_tst {
 //			Db_conn_pool.I.Set_mem(url_str, meta);
 //			Db_conn_info url = Db_conn_info_.mem_(url_str);
 //			Xowd_page_tbl tbl = new Xowd_page_tbl(Bool_.N, url);
-//			tbl.Insert(id, ns_id, Bry_.new_utf8_(ttl), is_redirect, modified_on, page_len, random_int, text_db_id, html_db_id);
+//			tbl.Insert(id, ns_id, Bry_.new_u8(ttl), is_redirect, modified_on, page_len, random_int, text_db_id, html_db_id);
 //		}
 	private static String ttl_fast(int ns_id, String ns_str, String ttl) {return ttl_fast(ns_id, ns_str, ttl, "", "", ttl);}
 	private static String ttl_fast(int ns_id, String ns_str, String ttl, String anchor) {return ttl_fast(ns_id, ns_str, ttl, anchor, "", ttl);}

@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.ios; import gplx.*;
 public interface Io_stream_rdr extends RlsAble {
 	byte Tid();
+	boolean Exists();
 	Io_url Url(); Io_stream_rdr Url_(Io_url v);
 	long Len(); Io_stream_rdr Len_(long v);
 	Io_stream_rdr Open();

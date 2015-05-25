@@ -45,12 +45,12 @@ class String_surrogate_utl_fxt {
 	private String_surrogate_utl codepoint_utl = new String_surrogate_utl();
 	public void Clear() {}
 	public void Test_count_surrogates__char_idx(String src_str, int bgn_byte, int char_idx, int expd_count, int expd_pos) {
-		byte[] src_bry = Bry_.new_utf8_(src_str); int src_len = src_bry.length;
+		byte[] src_bry = Bry_.new_u8(src_str); int src_len = src_bry.length;
 		Tfds.Eq(expd_count	, codepoint_utl.Count_surrogates__char_idx(src_bry, src_len, bgn_byte, char_idx));
 		Tfds.Eq(expd_pos	, codepoint_utl.Byte_pos());
 	}
 	public void Test_count_surrogates__codepoint_idx(String src_str, int bgn_byte, int char_idx, int expd_count, int expd_pos) {
-		byte[] src_bry = Bry_.new_utf8_(src_str); int src_len = src_bry.length;
+		byte[] src_bry = Bry_.new_u8(src_str); int src_len = src_bry.length;
 		Tfds.Eq(expd_count	, codepoint_utl.Count_surrogates__codepoint_idx1(src_bry, src_len, bgn_byte, char_idx), "count");
 		Tfds.Eq(expd_pos	, codepoint_utl.Byte_pos(), "pos");
 	}

@@ -122,7 +122,7 @@ class Xows_text_parser__v2_fxt {
 		word_mgr.Clear();
 		return this;
 	}
-	public Xob_word_itm Make_word(String raw, int count) {return new Xob_word_itm(Bry_.new_utf8_(raw)).Count_(count);}
+	public Xob_word_itm Make_word(String raw, int count) {return new Xob_word_itm(Bry_.new_u8(raw)).Count_(count);}
 	public void Test_split(String src, String... expd_words) {
 		int len = expd_words.length;
 		Xob_word_itm[] ary = new Xob_word_itm[len];
@@ -132,7 +132,7 @@ class Xows_text_parser__v2_fxt {
 		Test_split(src, ary);
 	}
 	public void Test_split(String src, Xob_word_itm... expd_words) {
-		byte[] src_bry = Bry_.new_utf8_(src);
+		byte[] src_bry = Bry_.new_u8(src);
 		word_parser.Parse(src_bry, src_bry.length, 0, src_bry.length);
 		Tfds.Eq_str_lines(To_str(expd_words), To_str(word_mgr));
 	}

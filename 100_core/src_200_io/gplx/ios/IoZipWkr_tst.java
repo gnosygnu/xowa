@@ -19,7 +19,7 @@ package gplx.ios; import gplx.*;
 import org.junit.*;
 public class IoZipWkr_tst {
 	@Test  public void Basic() {
-		wkr = IoZipWkr.new_(Io_url_.Null, "e \"{0}\" -o\"{1}\" -y");
+		wkr = IoZipWkr.new_(Io_url_.Empty, "e \"{0}\" -o\"{1}\" -y");
 		tst_Expand_genCmdString(Io_url_.wnt_fil_("C:\\fil1.zip"), Io_url_.wnt_dir_("D:\\out\\"), "e \"C:\\fil1.zip\" -o\"D:\\out\" -y");	// NOTE: not "D:\out\" because .Xto_api
 	}	IoZipWkr wkr;
 	void tst_Expand_genCmdString(Io_url srcUrl, Io_url trgUrl, String expd) {

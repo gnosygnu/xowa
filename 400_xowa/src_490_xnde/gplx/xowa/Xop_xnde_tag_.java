@@ -20,8 +20,8 @@ import gplx.xowa.langs.*;
 public class Xop_xnde_tag_ {
 	public static final int EndNdeMode_normal = 0, EndNdeMode_inline = 1, EndNdeMode_escape = 2; // escape is for hr which does not support </hr>
 	public static final int BgnNdeMode_normal = 0, BgnNdeMode_inline = 1;
-	public static final byte[] Name_onlyinclude = Bry_.new_ascii_("onlyinclude");
-	public static final byte[] XtnEndTag_bgn = Bry_.new_ascii_("</");//, XtnEndTag_end = Bry_.new_ascii_(">");
+	public static final byte[] Name_onlyinclude = Bry_.new_a7("onlyinclude");
+	public static final byte[] XtnEndTag_bgn = Bry_.new_a7("</");//, XtnEndTag_end = Bry_.new_a7(">");
 	public static final byte
   Tid_b = 0
 , Tid_strong = 1

@@ -62,7 +62,7 @@ class Xoi_cmd_dumpfile_fxt {
 		return this;
 	}
 	public Xoi_cmd_dumpfile_fxt Test_domain(String expd_domain) {
-		Tfds.Eq(expd_domain, String_.new_utf8_(dumpfile.Domain()));
+		Tfds.Eq(expd_domain, String_.new_u8(dumpfile.Domain()));
 		return this;
 	}
 	private void Eq_url(String expd, Io_url actl) {

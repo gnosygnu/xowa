@@ -35,7 +35,7 @@ public class Prefs_mgr implements GfoInvkAble {
 		props_get_fmtr.Fmt_(src);
 		Bry_bfr bfr = Bry_bfr.new_();
 		try {src = props_get_fmtr.Fmt_(src).Bld_bry_none(bfr);}
-		catch (Exception e) {src = Bry_.Add(src, Bry_.new_utf8_(Err_.Message_gplx_brief(e)));}
+		catch (Exception e) {src = Bry_.Add(src, Bry_.new_u8(Err_.Message_gplx_brief(e)));}
 		Html_nde[] hndes = html_rdr.Parse_as_ary(src);
 		hndes = Html_selecter.Select(src, hndes, atrs_hash);
 		int pos = 0;
@@ -57,8 +57,8 @@ public class Prefs_mgr implements GfoInvkAble {
 		app.Usr_dlg().Prog_direct("options saved (" + DateAdp_.Now().XtoStr_fmt("HH:mm:ss") + ")");
 	}
 	public void Props_set(byte[] src) {
-		src = Bry_.Replace(src, Bry_.new_ascii_("<xowa_cmd>"), Bry_.new_ascii_("&lt;xowa_cmd>"));
-		src = Bry_.Replace(src, Bry_.new_ascii_("</xowa_cmd>"), Bry_.new_ascii_("&lt;/xowa_cmd>"));
+		src = Bry_.Replace(src, Bry_.new_a7("<xowa_cmd>"), Bry_.new_a7("&lt;xowa_cmd>"));
+		src = Bry_.Replace(src, Bry_.new_a7("</xowa_cmd>"), Bry_.new_a7("&lt;/xowa_cmd>"));
 		src = this.Parse_wikitext_to_html(src);	
 		Html_nde[] hndes = html_rdr.Parse_as_ary(src);
 		hndes = Html_selecter.Select(src, hndes, atrs_hash);
@@ -91,21 +91,21 @@ public class Prefs_mgr implements GfoInvkAble {
 		hnde_val = Scrub_tidy_trailing_nl_in_textarea(tidy_enabled, elem_tid, hnde_val);
 		get_str  = Scrub_tidy_trailing_nl_in_textarea(tidy_enabled, elem_tid, get_str);
 		if (String_.Eq(get_str, hnde_val)) return;
-		try		{app.Cfg_mgr().Set_by_app(String_.new_utf8_(get_cmd), hnde_val);}
-		catch (Exception e) {app.Usr_dlg().Warn_many("", "", "pref update failed: code=~{0} err=~{1}", String_.new_utf8_(eval_code), Err_.Message_gplx_brief(e));}
+		try		{app.Cfg_mgr().Set_by_app(String_.new_u8(get_cmd), hnde_val);}
+		catch (Exception e) {app.Usr_dlg().Warn_many("", "", "pref update failed: code=~{0} err=~{1}", String_.new_u8(eval_code), Err_.Message_gplx_brief(e));}
 	}
 	private Object Eval_run(byte[] cmd) {
 		try {return Eval(cmd);}
 		catch (Exception e) {Err_.Noop(e); return null;}		
 	}
 	private byte[] Parse_wikitext_to_html(byte[] src) {
-		Xowe_wiki wiki = app.User().Wiki();		
+		Xowe_wiki wiki = app.Usere().Wiki();	// NOTE: this limits prefs to home_wiki only
 		Xop_root_tkn root = new Xop_root_tkn();
-		Xop_ctx ctx = Xop_ctx.new_(wiki);	// NOTE: always create new ctx; do not reuse existing, else popup will clear out existing page's prefs; DATE:2015-04-29
+		Xop_ctx ctx = Xop_ctx.new_(wiki);		// NOTE: always create new ctx; do not reuse existing, else popup will clear out existing page's prefs; DATE:2015-04-29
 		wiki.Parser().Parse_text_to_wdom(root, ctx, ctx.Tkn_mkr(), src, 0);
 		return root.Data_mid();			
 	}
-	public Object Eval(byte[] code) {return app.Gfs_mgr().Run_str(String_.new_ascii_(code));}
+	public Object Eval(byte[] code) {return app.Gfs_mgr().Run_str(String_.new_a7(code));}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_exec_get))		return Props_get(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_save))			Props_set_and_reload();
@@ -113,7 +113,7 @@ public class Prefs_mgr implements GfoInvkAble {
 		return this;
 	}	private static final String Invk_exec_get = "exec_get", Invk_save = "save";
 	private static final byte Tid_prop = 0, Tid_prop_get = 1, Tid_prop_set = 2;
-	public static final byte[] Bry_prop = Bry_.new_ascii_("xowa_prop"), Bry_prop_get = Bry_.new_ascii_("xowa_prop_get"), Bry_prop_set = Bry_.new_ascii_("xowa_prop_set"), Bry_id = Bry_.new_ascii_("id");
+	public static final byte[] Bry_prop = Bry_.new_a7("xowa_prop"), Bry_prop_get = Bry_.new_a7("xowa_prop_get"), Bry_prop_set = Bry_.new_a7("xowa_prop_set"), Bry_id = Bry_.new_a7("id");
 	public static byte Elem_tid_tid_of(Html_nde hnde) {
 		byte[] elem_name = Bry_.Mid(hnde.Src(), hnde.Name_bgn(), hnde.Name_end());
 		if		(Bry_.Eq(elem_name, Nde_textarea)) 			return Elem_tid_textarea;
@@ -128,7 +128,7 @@ public class Prefs_mgr implements GfoInvkAble {
 			else 												return Elem_tid_null;
 		}
 		else													return Elem_tid_null;
-	}	static final byte[] Input_type = Bry_.new_ascii_("type"), Nde_input = Bry_.new_ascii_("input"), Nde_textarea = Bry_.new_ascii_("textarea"), Nde_select = Bry_.new_ascii_("select"), Type_text = Bry_.new_ascii_("text"), Type_checkbox = Bry_.new_ascii_("checkbox"), Type_combo = Bry_.new_ascii_("xowa_combo"), Type_xowa_io = Bry_.new_ascii_("xowa_io");
+	}	static final byte[] Input_type = Bry_.new_a7("type"), Nde_input = Bry_.new_a7("input"), Nde_textarea = Bry_.new_a7("textarea"), Nde_select = Bry_.new_a7("select"), Type_text = Bry_.new_a7("text"), Type_checkbox = Bry_.new_a7("checkbox"), Type_combo = Bry_.new_a7("xowa_combo"), Type_xowa_io = Bry_.new_a7("xowa_io");
 	public static String Scrub_tidy_trailing_nl_in_textarea(boolean tidy_enabled, byte elem_tid, String val) {
 		return	// if tidy_enabled and text_area and ends with \n, then remove \n; DATE:2014-06-21
 			(	tidy_enabled
@@ -150,5 +150,5 @@ class Prefs_trg_mgr {
 		trg_type = arg_hash.Get_val_bry_or(Prefs_trg_mgr.Arg_option_trg_type_bry, null);
 		trg_val = arg_hash.Get_val_bry_or(Prefs_trg_mgr.Arg_option_trg_val_bry, null);
 	}
-	public static final byte[] Arg_option_trg_type_bry = Bry_.new_ascii_("option_trg_type"), Arg_option_trg_val_bry = Bry_.new_ascii_("option_trg_val");
+	public static final byte[] Arg_option_trg_type_bry = Bry_.new_a7("option_trg_type"), Arg_option_trg_val_bry = Bry_.new_a7("option_trg_val");
 }

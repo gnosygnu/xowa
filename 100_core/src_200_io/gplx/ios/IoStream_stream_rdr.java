@@ -25,7 +25,7 @@ public class IoStream_stream_rdr implements IoStream {
 	}
 	public IoStream UnderRdr_(Object v) {this.stream = (java.io.InputStream)v; return this;}  java.io.InputStream stream;	
 	public Object UnderRdr() {return stream;}
-	public Io_url Url() {return Io_url_.Null;}
+	public Io_url Url() {return Io_url_.Empty;}
 	public long Pos() {return -1;}
 	public long Len() {return -1;}
 	public int ReadAry(byte[] array) {return -1;}

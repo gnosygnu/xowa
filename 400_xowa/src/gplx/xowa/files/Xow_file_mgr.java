@@ -39,13 +39,13 @@ public class Xow_file_mgr implements GfoInvkAble {
 	public byte Version() {
 		if (version == Bool_.__byte) {
 			Io_url file_dir = wiki.Fsys_mgr().File_dir();
-			if (!Io_mgr._.ExistsFil(file_dir.GenSubFil(Fsdb_db_mgr__v1.Mnt_name))) {
+			if (!Io_mgr.I.ExistsFil(file_dir.GenSubFil(Fsdb_db_mgr__v1.Mnt_name))) {
 				version = Version_1;
-				fsdb_mode = Xof_fsdb_mode.new_wmf();
+				fsdb_mode = Xof_fsdb_mode.new_v0();
 			}
 			else {
 				version = Version_2;
-				fsdb_mode = Xof_fsdb_mode.new_view();
+				fsdb_mode = Xof_fsdb_mode.new_v2_gui();
 			}
 		}
 		return version;
@@ -70,17 +70,17 @@ public class Xow_file_mgr implements GfoInvkAble {
 	public Xof_meta_mgr  Meta_mgr() {return meta_mgr;} private Xof_meta_mgr meta_mgr;
 	public Xof_cfg_download Cfg_download() {return cfg_download;} private Xof_cfg_download cfg_download = new Xof_cfg_download();
 	public void Cfg_set(String grp, String key, String val) {	// TEST: should only be called by tests
-		if (test_grps == null) test_grps = HashAdp_.new_();
-		Db_cfg_hash grp_itm = (Db_cfg_hash)test_grps.Fetch(grp);
+		if (test_grps == null) test_grps = Hash_adp_.new_();
+		Db_cfg_hash grp_itm = (Db_cfg_hash)test_grps.Get_by(grp);
 		if (grp_itm == null) {
 			grp_itm = new Db_cfg_hash(grp);
 			test_grps.Add(grp, grp_itm);
 		}
 		grp_itm.Set(key, val);
-	}	private HashAdp test_grps;
+	}	private Hash_adp test_grps;
 	public Db_cfg_hash Cfg_get(String grp) {
 		if (test_grps != null) {
-			Db_cfg_hash rv = (Db_cfg_hash)test_grps.Fetch(grp);
+			Db_cfg_hash rv = (Db_cfg_hash)test_grps.Get_by(grp);
 			return rv == null ? new Db_cfg_hash("") : rv;
 		}
 		if (this.Version() == Version_1) return new Db_cfg_hash("");
@@ -89,10 +89,10 @@ public class Xow_file_mgr implements GfoInvkAble {
 	}
 	public Xof_fsdb_mgr Fsdb_mgr() {return fsdb_mgr;} private Xof_fsdb_mgr fsdb_mgr = new Xof_fsdb_mgr__sql();
 	public boolean Find_meta(Xof_xfer_itm xfer_itm) {
-		xfer_itm.Trg_repo_idx_(Xof_meta_itm.Repo_unknown);
+		xfer_itm.Orig_repo_id_(Xof_meta_itm.Repo_unknown);
 		byte[] xfer_itm_ttl = xfer_itm.Lnki_ttl();
-		xfer_itm.Set__ttl(xfer_itm_ttl, Bry_.Empty);
-		Xof_meta_itm meta_itm = meta_mgr.Get_itm_or_new(xfer_itm_ttl, xfer_itm.Lnki_md5());
+		xfer_itm.Orig_ttl_and_redirect_(xfer_itm_ttl, Bry_.Empty);
+		Xof_meta_itm meta_itm = meta_mgr.Get_itm_or_new(xfer_itm_ttl, xfer_itm.Orig_ttl_md5());
 		xfer_itm.Set__meta_only(meta_itm);
 		if (meta_itm.State_new()) {														// meta_itm is brand new
 			xfer_itm.Set__meta(meta_itm, repo_mgr.Repos_get_at(0).Trg(), wiki.Html_mgr().Img_thumb_width());	// default to 1st repo to prevent null_ref in xfer_mgr; questionable, but all wikis must have at least 1 repo
@@ -117,10 +117,12 @@ public class Xow_file_mgr implements GfoInvkAble {
 	public void Init_file_mgr_by_load(Xow_wiki wiki) {
 		if (db_core != null) return;	// already init'd
 		this.db_core = Fsdb_db_mgr_.new_detect(wiki, wiki.Fsys_mgr().Root_dir(), wiki.Fsys_mgr().File_dir());
-		if (db_core == null ) return;	// no fsdb_core found; exit
+//			if (db_core == null) return;	// no fsdb_core found; exit
+		if (db_core == null)	
+			db_core = Fsdb_db_mgr__v2_bldr.I.Get_or_make(wiki, false);
 		this.version = Version_2;
-		this.fsdb_mode = Xof_fsdb_mode.new_view();
-		orig_mgr.Init_by_wiki(fsdb_mode, db_core.File__orig_tbl_ary(), wiki.Domain_bry(), wiki.App().Wmf_mgr().Download_wkr(), wiki.File__repo_mgr(), Xof_url_bldr.new_v2_());
+		this.fsdb_mode = Xof_fsdb_mode.new_v2_gui();
+		orig_mgr.Init_by_wiki(wiki, fsdb_mode, db_core.File__orig_tbl_ary(), Xof_url_bldr.new_v2());
 		fsdb_mgr.Init_by_wiki(wiki);
 	}
 

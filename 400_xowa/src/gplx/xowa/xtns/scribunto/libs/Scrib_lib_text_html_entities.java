@@ -1534,6 +1534,6 @@ new_itm_(rv, idx, Bry_.ints_(240, 157, 149, 171), "&zopf;");
 		return rv;
 	}
 	private static void new_itm_(KeyVal[] ary, Int_obj_ref idx, byte[] key, String val) {
-		ary[idx.Val_add_post()] = KeyVal_.new_(String_.new_utf8_(key), val);
+		ary[idx.Val_add_post()] = KeyVal_.new_(String_.new_u8(key), val);
 	}
 }

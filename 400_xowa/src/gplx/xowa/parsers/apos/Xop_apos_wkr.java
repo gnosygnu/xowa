@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.apos; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 public class Xop_apos_wkr implements Xop_ctx_wkr {
 	public Xop_apos_dat Dat() {return dat;} private Xop_apos_dat dat = new Xop_apos_dat();
-	private ListAdp stack = ListAdp_.new_(); private int bold_count, ital_count; private Xop_apos_tkn dual_tkn = null;
+	private List_adp stack = List_adp_.new_(); private int bold_count, ital_count; private Xop_apos_tkn dual_tkn = null;
 	public void Ctor_ctx(Xop_ctx ctx) {}
 	public void Page_bgn(Xop_ctx ctx, Xop_root_tkn root) {
 		Reset();
@@ -82,7 +82,7 @@ public class Xop_apos_wkr implements Xop_ctx_wkr {
 		Xop_apos_tkn idxNeg1 = null, idxNeg2 = null, idxNone = null; // look at previous tkn for spaces; EX: "a '''" -> idxNeg1; " a'''" -> idxNeg2; "ab'''" -> idxNone
 	    int tknsLen = stack.Count(); 
 		for (int i = 0; i < tknsLen; i++) {
-			Xop_apos_tkn apos = (Xop_apos_tkn)stack.FetchAt(i);
+			Xop_apos_tkn apos = (Xop_apos_tkn)stack.Get_at(i);
 			if (apos.Apos_tid() != Xop_apos_tkn_.Typ_bold) continue;	// only look for bold
 			int tknBgn = apos.Src_bgn();
 			boolean idxNeg1Space = tknBgn > 0 && src[tknBgn - 1] == Byte_ascii.Space;
@@ -98,7 +98,7 @@ public class Xop_apos_wkr implements Xop_ctx_wkr {
 		// now recalc all cmds for stack
 		dat.State_clear();
 		for (int i = 0; i < tknsLen; i++) {
-			Xop_apos_tkn apos = (Xop_apos_tkn)stack.FetchAt(i);
+			Xop_apos_tkn apos = (Xop_apos_tkn)stack.Get_at(i);
 			dat.Ident(ctx, src, apos.Apos_tid(), apos.Src_end());	// NOTE: apos.Typ() must map to apos_len
 			int newCmd = dat.Cmd();
 			if (newCmd == apos.Apos_cmd()) continue;
@@ -115,10 +115,10 @@ public class Xop_apos_wkr implements Xop_ctx_wkr {
 		stack.Clear();
 		dat.State_clear();
 	}
-	private static Xop_apos_tkn Previous_bgn(ListAdp stack, int typ) {
+	private static Xop_apos_tkn Previous_bgn(List_adp stack, int typ) {
 		int stack_len = stack.Count();
 		for (int i = stack_len - 1; i > -1; --i) {
-			Xop_apos_tkn apos = (Xop_apos_tkn)stack.FetchAt(i);
+			Xop_apos_tkn apos = (Xop_apos_tkn)stack.Get_at(i);
 			int cmd = apos.Apos_cmd();
 			switch (typ) {
 				case Xop_apos_tkn_.Typ_ital:

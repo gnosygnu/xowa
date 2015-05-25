@@ -17,11 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public class GfsCtx {
-	public OrderedHash Vars() {return vars;} OrderedHash vars = OrderedHash_.new_();
+	public Ordered_hash Vars() {return vars;} Ordered_hash vars = Ordered_hash_.new_();
 	public boolean Fail_if_unhandled() {return fail_if_unhandled;} public GfsCtx Fail_if_unhandled_(boolean v) {fail_if_unhandled = v; return this;} private boolean fail_if_unhandled;
 	public Gfo_usr_dlg Usr_dlg() {return usr_dlg;} public GfsCtx Usr_dlg_(Gfo_usr_dlg v) {usr_dlg = v; return this;} Gfo_usr_dlg usr_dlg;
 	public boolean Help_browseMode() {return help_browseMode;} public GfsCtx Help_browseMode_(boolean v) {help_browseMode = v; return this;} private boolean help_browseMode;
-	@gplx.Internal protected ListAdp Help_browseList() {return help_browseList;} ListAdp help_browseList = ListAdp_.new_();
+	@gplx.Internal protected List_adp Help_browseList() {return help_browseList;} List_adp help_browseList = List_adp_.new_();
 	public Object MsgSrc() {return msgSrc;} public GfsCtx MsgSrc_(Object v) {msgSrc = v; return this;} Object msgSrc;
 	public boolean Match(String k, String match) {
 		if (help_browseMode) {

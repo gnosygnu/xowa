@@ -78,7 +78,7 @@ class Xows_text_tkn__ellipsis implements Xows_text_tkn {
 		return rv;
 	}
 	public static Xows_text_tkn new_(Btrie_slim_mgr trie, String ellipsis) {
-		byte[] bry = Bry_.new_utf8_(ellipsis);
+		byte[] bry = Bry_.new_u8(ellipsis);
 		Xows_text_tkn rv = new Xows_text_tkn__ellipsis(Bry_.Get_at_end_or_fail(bry));
 		trie.Add_obj(bry, rv);
 		return rv;
@@ -119,7 +119,7 @@ class Xows_text_tkn__apos implements Xows_text_tkn {
 	}
 	private static final byte Apos_contraction = 1, Apos_possessive_plural = 2, Apos_possessive_singular = 3;
 	public static Xows_text_tkn new_(Btrie_slim_mgr trie, String apos, byte possessive_byte) {
-		byte[] bry = Bry_.new_utf8_(apos);			
+		byte[] bry = Bry_.new_u8(apos);			
 		Xows_text_tkn rv = new Xows_text_tkn__apos(possessive_byte);
 		trie.Add_obj(bry, rv);
 		return rv;
@@ -138,7 +138,7 @@ class Xows_text_tkn__apos implements Xows_text_tkn {
 //			return tkn_end;
 //		}
 //		public static Xows_text_tkn new_(Btrie_slim_mgr trie, String dash) {
-//			byte[] bry = Bry_.new_utf8_(dash);
+//			byte[] bry = Bry_.new_u8(dash);
 //			Xows_text_tkn rv = new Xows_text_tkn__slash();
 //			trie.Add_obj(bry, rv);
 //			return rv;

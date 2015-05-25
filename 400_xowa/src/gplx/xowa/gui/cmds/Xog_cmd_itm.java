@@ -19,7 +19,7 @@ package gplx.xowa.gui.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.
 public class Xog_cmd_itm {
 	public Xog_cmd_itm(String key, Xog_cmd_ctg ctg, String cmd) {
 		this.key = key; this.ctg = ctg; this.cmd = cmd;
-		this.key_bry = Bry_.new_utf8_(key);
+		this.key_bry = Bry_.new_u8(key);
 		this.uid = ++Uid_next;
 	}
 	public int Uid() {return uid;} private int uid;

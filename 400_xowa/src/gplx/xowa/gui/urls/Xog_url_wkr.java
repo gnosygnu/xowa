@@ -16,14 +16,16 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.urls; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
-import gplx.xowa.files.*; import gplx.xowa.gui.views.*;
+import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*;
+import gplx.xowa.gui.views.*;
 public class Xog_url_wkr {
 	private Xoh_href href = new Xoh_href();
 	private Xoae_app app; private Xog_win_itm win; private Xowe_wiki wiki; private Xoae_page page;
+	private final Xof_img_size img_size = new Xof_img_size(); private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
 	public byte Href_tid() {return href.Tid();}
 	public Xog_url_wkr Parse(Xog_win_itm win, String href_str) {
 		if (href_str == null) return this;	// text is not link; return;
-		byte[] href_bry = Bry_.new_utf8_(href_str);
+		byte[] href_bry = Bry_.new_u8(href_str);
 		this.win = win; this.app = win.App(); 
 		this.page = win.Active_page();
 		this.wiki = win.Active_tab().Wiki();
@@ -44,7 +46,7 @@ public class Xog_url_wkr {
 	}
 	private Xoa_url Exec_url_xowa(Xoae_app app) {		// EX: xowa:app.version
 		// NOTE: must catch exception else it will bubble to SWT browser and raise secondary exception of xowa is not a registered protocol
-		try {app.Gfs_mgr().Run_str(String_.new_utf8_(href.Page()));}
+		try {app.Gfs_mgr().Run_str(String_.new_u8(href.Page()));}
 		catch (Exception e) {app.Gui_mgr().Kit().Ask_ok("", "", Err_.Message_gplx_brief(e));}
 		return Rslt_handled;
 	}
@@ -53,7 +55,7 @@ public class Xog_url_wkr {
 		return Rslt_handled;
 	}
 	private Xoa_url Exec_url_anchor(Xog_win_itm win) {	// EX: #anchor
-		win.Active_html_itm().Scroll_page_by_id_gui(String_.new_utf8_(href.Anchor()));	// NOTE: was originally directly; changed to call on thread; DATE:2014-05-03
+		win.Active_html_itm().Scroll_page_by_id_gui(String_.new_u8(href.Anchor()));	// NOTE: was originally directly; changed to call on thread; DATE:2014-05-03
 		return Rslt_handled;
 	}
 	private Xoa_url Exec_url_xcmd(Xog_win_itm win) {		// EX: /xcmd/
@@ -61,34 +63,35 @@ public class Xog_url_wkr {
 		int xowa_href_bry_len = xowa_href_bry.length;
 		int slash_pos = Bry_finder.Find_fwd(xowa_href_bry, Byte_ascii.Slash); if (slash_pos == Bry_.NotFound) slash_pos = xowa_href_bry_len;
 		byte[] xowa_cmd_bry = Bry_.Mid(xowa_href_bry, 0, slash_pos);
-		String xowa_cmd_str = String_.new_utf8_(xowa_cmd_bry);
+		String xowa_cmd_str = String_.new_u8(xowa_cmd_bry);
 		GfoMsg m = GfoMsg_.new_cast_(xowa_cmd_str);
 		if (String_.Eq(xowa_cmd_str, Xog_win_itm.Invk_eval))
-			m.Add("cmd", String_.new_utf8_(xowa_href_bry, slash_pos + 1, xowa_href_bry_len));
+			m.Add("cmd", String_.new_u8(xowa_href_bry, slash_pos + 1, xowa_href_bry_len));
 		win.Invk(GfsCtx.new_(), 0, xowa_cmd_str, m);
 		return Rslt_handled;
 	}
-	private Xoa_url Exec_url_file(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xog_win_itm win, byte[] href_bry) {	// EX: file:///xowa/A.png
-		href_bry = Xoa_app_.Utl__encoder_mgr().Url().Decode(href_bry);
-		Io_url href_url = Io_url_.http_any_(String_.new_utf8_(href_bry), Op_sys.Cur().Tid_is_wnt());
+	private Xoa_url Exec_url_file(Xoae_app app, Xowe_wiki cur_wiki, Xoae_page page, Xog_win_itm win, byte[] href_bry) {	// EX: file:///xowa/A.png
+		Xowe_wiki wiki = (Xowe_wiki)page.Commons_mgr().Source_wiki_or(cur_wiki);
+		Io_url href_url = Io_url_.http_any_(String_.new_u8(Xoa_app_.Utl__encoder_mgr().Http_url().Decode(href_bry)), Op_sys.Cur().Tid_is_wnt());
 		gplx.gfui.Gfui_html html_box = win.Active_html_box();
 		String xowa_ttl = wiki.Gui_mgr().Cfg_browser().Content_editable()
 			? html_box.Html_active_atr_get_str(gplx.xowa.html.Xoh_consts.Atr_xowa_title_str, null)
-			: Xoh_dom_.Title_by_href(Xoa_app_.Utl__encoder_mgr().Comma(), app.Utl__bfr_mkr().Get_b512().Mkr_rls(), href_bry, Bry_.new_utf8_(html_box.Html_doc_html()));
-		if (!Io_mgr._.ExistsFil(href_url)) {
-			Xof_xfer_itm xfer_itm = new Xof_xfer_itm();
-			byte[] title = Xoa_app_.Utl__encoder_mgr().Url().Decode(Bry_.new_utf8_(xowa_ttl));
-			xfer_itm.Init_by_lnki(title, Bry_.Empty, Xop_lnki_type.Id_none, -1, -1, -1, Xof_lnki_time.Null, Xof_lnki_page.Null);
-			wiki.File_mgr().Find_meta(xfer_itm);
-			page.File_queue().Clear();
-			page.File_queue().Add(xfer_itm);	// NOTE: set elem_id to "impossible" number, otherwise it will auto-update an image on the page with a super-large size; [[File:Alfred Sisley 062.jpg]]
-			wiki.File_mgr().Repo_mgr().Xfer_mgr().Force_orig_y_();
-			page.File_queue().Exec(Xof_exec_tid.Tid_viewer_app, win.Usr_dlg(), wiki, page);
-			wiki.File_mgr().Repo_mgr().Xfer_mgr().Force_orig_n_();
+			: Xoh_dom_.Title_by_href(href_bry, Bry_.new_u8(html_box.Html_doc_html()));
+		byte[] lnki_ttl = Xoa_app_.Utl__encoder_mgr().Http_url().Decode(Xoa_ttl.Replace_spaces(Bry_.new_u8(xowa_ttl)));
+		Xof_fsdb_itm fsdb = Xof_orig_file_downloader.Make_fsdb(wiki, lnki_ttl, img_size, url_bldr);
+		if (!Io_mgr.I.ExistsFil(href_url)) {
+//				if (!Xof_orig_file_downloader.Get_to_url(fsdb, href_url, wiki, lnki_ttl, url_bldr))
+			if (!Xof_file_wkr.Show_img(fsdb, Xoa_app_.Usr_dlg(), wiki.File__bin_mgr(), wiki.File__mnt_mgr(), wiki.App().User().File__cache_mgr(), wiki.File__repo_mgr(), gplx.xowa.files.gui.Xog_js_wkr_.Noop, img_size, url_bldr, page))
+				return Rslt_handled;
 		}
-		if (Io_mgr._.ExistsFil(href_url)) {
+		gplx.ios.IoItmFil fil = Io_mgr.I.QueryFil(href_url);
+		if (fil.Exists()) {
 			ProcessAdp media_player = app.Prog_mgr().App_by_ext(href_url.Ext());
 			media_player.Run(href_url);
+			fsdb.File_size_(fil.Size());
+			gplx.xowa.files.caches.Xou_cache_mgr cache_mgr = wiki.Appe().User().File__cache_mgr();
+			cache_mgr.Update(fsdb);
+			cache_mgr.Db_save();
 		}
 		return Rslt_handled;
 	}

@@ -29,8 +29,8 @@ class GfmlBldrCmd_null implements GfmlBldrCmd {
 }
 class GfmlBldrCmdRegy {
 	public void Add(GfmlBldrCmd cmd) {hash.Add(cmd.Key(), cmd);}
-	public GfmlBldrCmd GetOrFail(String key) {return (GfmlBldrCmd)hash.FetchOrFail(key);}
-	HashAdp hash = HashAdp_.new_();
+	public GfmlBldrCmd GetOrFail(String key) {return (GfmlBldrCmd)hash.Get_by_or_fail(key);}
+	Hash_adp hash = Hash_adp_.new_();
 	public static GfmlBldrCmdRegy new_() {
 		GfmlBldrCmdRegy rv = new GfmlBldrCmdRegy();
 		rv.Add(GfmlBldrCmd_elemKey_set._);

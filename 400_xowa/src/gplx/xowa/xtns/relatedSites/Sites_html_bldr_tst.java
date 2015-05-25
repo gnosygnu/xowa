@@ -47,7 +47,7 @@ class Sites_html_bldr_fxt {
 		this.xtn_mgr = wiki.Xtn_mgr().Xtn_sites();
 		xtn_mgr.Enabled_y_();
 		xtn_mgr.Xtn_init_by_wiki(wiki);
-		wiki.Xwiki_mgr().Add_many(Bry_.new_ascii_(String_.Concat_lines_nl_skip_last
+		wiki.Xwiki_mgr().Add_many(Bry_.new_a7(String_.Concat_lines_nl_skip_last
 		( "w|en.wikipedia.org/wiki/$1|Wikipedia"
 		, "commons|commons.wikimedia.org/wiki/Category:$1|Wikimedia Commons"
 		, "dmoz|http://www.dmoz.org/$1|DMOZ"
@@ -57,7 +57,7 @@ class Sites_html_bldr_fxt {
 	}
 	private void Init_regy_mgr(String... ary) {xtn_mgr.Regy_mgr().Set_many(ary);}
 	public void Init_ttl(String lnki_ttl) {
-		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_utf8_(lnki_ttl));
+		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_u8(lnki_ttl));
 		xtn_mgr.Regy_mgr().Match(page, ttl);
 	}
 	public void Test_bld(String expd) {

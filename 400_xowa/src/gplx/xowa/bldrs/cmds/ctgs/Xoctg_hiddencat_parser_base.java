@@ -39,5 +39,5 @@ public abstract class Xoctg_hiddencat_parser_base extends Xob_sql_dump_base impl
 		}
 	}
 	public abstract void Exec_hook(Bry_bfr file_bfr, int cur_id, boolean cur_is_hiddencat);
-	public static final byte[] Key_hiddencat = Bry_.new_ascii_("hiddencat");
+	public static final byte[] Key_hiddencat = Bry_.new_a7("hiddencat");
 }

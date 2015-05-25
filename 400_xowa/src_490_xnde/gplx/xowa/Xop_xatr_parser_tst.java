@@ -66,14 +66,14 @@ class Xop_xatr_parser_fxt {
 	public Xop_xatr_itm_chkr new_invalid_(int bgn, int end) {return new Xop_xatr_itm_chkr().Expd_atr_rng_(bgn, end).Expd_typeId_(Xop_xatr_itm.Tid_invalid);}
 	public Xop_xatr_itm_chkr new_atr_(String key, String val) {return new Xop_xatr_itm_chkr().Expd_key_(key).Expd_val_(val);}
 	public void tst_(String src_str, Xop_xatr_itm_chkr... expd) {
-		byte[] src = Bry_.new_utf8_(src_str);
+		byte[] src = Bry_.new_u8(src_str);
 		Gfo_msg_log msg_log = new Gfo_msg_log(Xoa_app_.Name);
 		Xop_xatr_itm[] actl = parser.Parse(msg_log, src, 0, src.length);
 		tst_mgr.Vars().Clear().Add("raw_bry", src);
 		tst_mgr.Tst_ary("xatr:", expd, actl);
 	}
 	public void tst_int(String src_str, int... expd) {
-		byte[] src = Bry_.new_utf8_(src_str);
+		byte[] src = Bry_.new_u8(src_str);
 		Gfo_msg_log msg_log = new Gfo_msg_log(Xoa_app_.Name);
 		Xop_xatr_itm[] actl_atr = parser.Parse(msg_log, src, 0, src.length);
 		int[] actl = new int[actl_atr.length];
@@ -101,11 +101,11 @@ class Xop_xatr_itm_chkr implements Tst_chkr {
 		if (actl.Key_bry() == null)
 			err += mgr.Tst_val(expd_key == null, path, "key", expd_key, mgr.Vars_get_bry_as_str("raw_bry", actl.Key_bgn(), actl.Key_end()));
 		else
-			err += mgr.Tst_val(expd_key == null, path, "key", expd_key, String_.new_utf8_(actl.Key_bry()));
+			err += mgr.Tst_val(expd_key == null, path, "key", expd_key, String_.new_u8(actl.Key_bry()));
 		if (actl.Val_bry() == null)
 			err += mgr.Tst_val(expd_val == null, path, "val", expd_val, mgr.Vars_get_bry_as_str("raw_bry", actl.Val_bgn(), actl.Val_end()));
 		else
-			err += mgr.Tst_val(expd_val == null, path, "val", expd_val, String_.new_utf8_(actl.Val_bry()));
+			err += mgr.Tst_val(expd_val == null, path, "val", expd_val, String_.new_u8(actl.Val_bry()));
 		return err;
 	}
 }

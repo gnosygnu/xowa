@@ -148,7 +148,7 @@ class Hiero_html_mgr {
 				if (v_len == 1) {
 					switch (v[0]) {
 						case Byte_ascii.Colon:
-							temp_bfr.Add_str("\n            <br/>");
+							temp_bfr.Add_str_a7("\n            <br/>");
 							continue;
 						case Byte_ascii.Asterisk:
 							temp_bfr.Add_byte_space();
@@ -229,7 +229,7 @@ class Hiero_html_mgr {
 	public static final int Image_margin = 1;
 	public static final int Cartouche_width = 2;
 	public static final int Max_height = 44;
-	private static final byte[] Bry_cls_mirrored = Bry_.new_ascii_("class=\"mw-mirrored\" ");
+	private static final byte[] Bry_cls_mirrored = Bry_.new_a7("class=\"mw-mirrored\" ");
 	private static final byte[]
 	  Tkn_lt		= new byte[] {Byte_ascii.Lt}
 	, Tkn_gt		= new byte[] {Byte_ascii.Gt}

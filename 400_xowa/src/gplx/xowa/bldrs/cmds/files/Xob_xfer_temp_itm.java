@@ -89,7 +89,7 @@ class Xob_xfer_temp_itm {
 		if (String_.Eq(join_ttl, redirect_src)) // join_ttl is same as redirect_src; not a redirect; EX:(direct) join="A.png";redirect_src="A.png"; (redirect) join="A.png";redirect_src="B.png" (i.e.: B redirects to A)
 			redirect_src = "";
 //			else {	// redirect; make sure extension matches; EX: A.png redirects to B.png; lnki_ext will be .png (the lnki's ext); should be .png (the actual file's ext)
-//				Xof_ext join_ext = Xof_ext_.new_by_ttl_(Bry_.new_utf8_(join_ttl));
+//				Xof_ext join_ext = Xof_ext_.new_by_ttl_(Bry_.new_u8(join_ttl));
 //				lnki_ext = join_ext.Id();
 //			}
 		lnki_ext = orig_ext_id;

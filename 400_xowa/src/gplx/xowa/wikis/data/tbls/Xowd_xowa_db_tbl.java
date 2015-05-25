@@ -40,7 +40,7 @@ public class Xowd_xowa_db_tbl {
 	}
 	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds));}
 	public Xowd_db_file[] Select_all(Xowd_core_db_props props, Io_url wiki_root_dir) {
-		ListAdp list = ListAdp_.new_();
+		List_adp list = List_adp_.new_();
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds).Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {
@@ -53,8 +53,8 @@ public class Xowd_xowa_db_tbl {
 				list.Add(Xowd_db_file.load_(props, rdr.Read_int(fld_id), rdr.Read_byte(fld_type), wiki_root_dir.GenSubFil(rdr.Read_str(fld_url)), ns_ids, part_id, guid));
 			}
 		}	finally {rdr.Rls();}
-		list.SortBy(Xowd_db_file_sorter__id.I);
-		return (Xowd_db_file[])list.Xto_ary(Xowd_db_file.class);
+		list.Sort_by(Xowd_db_file_sorter__id.I);
+		return (Xowd_db_file[])list.To_ary(Xowd_db_file.class);
 	}
 	public void Commit_all(Xowd_db_mgr core_data_mgr) {
 		stmt_bldr.Batch_bgn();

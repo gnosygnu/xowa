@@ -910,8 +910,8 @@ Regy_add(regy, Id_zu, "zu", "isiZulu");
 	}
 	private static Hash_adp_bry regy; private static final Xol_lang_itm[] langs = new Xol_lang_itm[Id__max];
 	private static void Regy_add(Hash_adp_bry regy, int id, String code_str, String canonical) {
-		byte[] code = Bry_.new_ascii_(code_str);	// ASCII:lang_code should always be ASCII
-		Xol_lang_itm itm = new Xol_lang_itm(id, code, Bry_.new_utf8_(canonical));
+		byte[] code = Bry_.new_a7(code_str);	// ASCII:lang_code should always be ASCII
+		Xol_lang_itm itm = new Xol_lang_itm(id, code, Bry_.new_u8(canonical));
 		langs[id] = itm;
 		regy.Add(code, itm);
 	}

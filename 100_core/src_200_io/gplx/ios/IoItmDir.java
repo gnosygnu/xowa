@@ -34,7 +34,7 @@ public class IoItmDir extends IoItm_base {
 		int count = list.Count();
 		Io_url[] rv = new Io_url[count];
 		for (int i = 0; i < count; i++)
-			rv[i] = list.FetchAt(i).Url();
+			rv[i] = list.Get_at(i).Url();
 		return rv;
 	}
 	public IoItmDir FetchDeepOrNull(Io_url findDirUrl) {
@@ -45,11 +45,11 @@ public class IoItmDir extends IoItm_base {
 		String findName = String_.DelEnd(currDirStr, dirSprLen);	// seed findName for String_.MidByLen below;
 		IoItmDir curDir = this;			
 		while (true) {
-			findDirStr = String_.DelBgn(findDirStr, String_.Len(findName) + dirSprLen);	// NOTE: findName will never have trailingDirSpr; subDirs.Fetch() takes NameOnly; ex: "dir" not "dir\"
+			findDirStr = String_.DelBgn(findDirStr, String_.Len(findName) + dirSprLen);	// NOTE: findName will never have trailingDirSpr; subDirs.Get_by() takes NameOnly; ex: "dir" not "dir\"
 			int nextDirSprPos = String_.FindFwd(findDirStr, dirSpr); if (nextDirSprPos == String_.Find_none) nextDirSprPos = String_.Len(findDirStr);
 			findName = String_.MidByLen(findDirStr, 0, nextDirSprPos);
 			if (String_.Eq(findDirStr, "")) return curDir;	// findDirStr completely removed; all parts match; return curDir
-			curDir = IoItmDir_.as_(curDir.subDirs.Fetch(findName)); // try to find dir
+			curDir = IoItmDir_.as_(curDir.subDirs.Get_by(findName)); // try to find dir
 			if (curDir == null) return null;	// dir not found; exit; NOTE: if dir found, loop restarts; with curDir as either findDir, or owner of findDir
 		}
 	}

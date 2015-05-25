@@ -23,7 +23,7 @@ public class Io_zip_mgr_tst {
 	}
 	private void Zip_unzip_tst(String s) {
 		Io_zip_mgr zip_mgr = Io_zip_mgr_base._;
-		byte[] src = Bry_.new_ascii_(s);
+		byte[] src = Bry_.new_a7(s);
 		byte[] zip = zip_mgr.Zip_bry(src, 0, src.length);
 		byte[] unz = zip_mgr.Unzip_bry(zip, 0, zip.length);
 		Tfds.Eq_ary(src, unz);

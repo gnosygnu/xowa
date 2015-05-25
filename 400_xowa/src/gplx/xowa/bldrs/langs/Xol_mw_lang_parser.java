@@ -25,9 +25,9 @@ public class Xol_mw_lang_parser {
 	public void Bld_all(Xoa_lang_mgr lang_mgr, Xoa_fsys_mgr fsys_mgr, Xol_lang_transform lang_transform) {
 		Io_url lang_root = fsys_mgr.Cfg_lang_core_dir().OwnerDir();
 		Parse_mediawiki(lang_mgr, lang_root.GenSubDir("mediawiki"), lang_transform);
-		Save_langs(lang_mgr, lang_root.GenSubDir(Xol_mw_lang_parser.Dir_name_core), OrderedHash_.new_bry_(), OrderedHash_.new_bry_());
+		Save_langs(lang_mgr, lang_root.GenSubDir(Xol_mw_lang_parser.Dir_name_core), Ordered_hash_.new_bry_(), Ordered_hash_.new_bry_());
 	}
-	public void Save_langs(Xoa_lang_mgr lang_mgr, Io_url xowa_root, OrderedHash manual_text_bgn, OrderedHash manual_text_end) {
+	public void Save_langs(Xoa_lang_mgr lang_mgr, Io_url xowa_root, Ordered_hash manual_text_bgn, Ordered_hash manual_text_end) {
 		int len = lang_mgr.Len();
 		Gfs_bldr bldr = new Gfs_bldr();
 		for (int i = 0; i < len; i++) {
@@ -50,11 +50,11 @@ public class Xol_mw_lang_parser {
 			bldr.Add_term_nl();
 
 			Save_langs_by_manual_text(bldr, manual_text_end, lang_key);
-			Io_mgr._.SaveFilBfr(lang_url, bldr.Bfr());
+			Io_mgr.I.SaveFilBfr(lang_url, bldr.Bfr());
 		}
 	}
-	private void Save_langs_by_manual_text(Gfs_bldr bldr, OrderedHash manual_text_hash, String lang_key) {
-		byte[][] itm = (byte[][])manual_text_hash.Fetch(Bry_.new_utf8_(lang_key));
+	private void Save_langs_by_manual_text(Gfs_bldr bldr, Ordered_hash manual_text_hash, String lang_key) {
+		byte[][] itm = (byte[][])manual_text_hash.Get_by(Bry_.new_u8(lang_key));
 		if (itm != null) bldr.Bfr().Add(itm[1]);
 	}
 	public void Parse_mediawiki(Xoa_lang_mgr lang_mgr, Io_url mediawiki_root, Xol_lang_transform lang_transform) {
@@ -66,43 +66,43 @@ public class Xol_mw_lang_parser {
 	}
 	private void Parse_file_core_php(Xoa_lang_mgr lang_mgr, Io_url mediawiki_root, Bry_bfr bfr, Xol_lang_transform lang_transform) {
 		Io_url dir = mediawiki_root.GenSubDir("core_php");
-		Io_url[] urls = Io_mgr._.QueryDir_fils(dir);
+		Io_url[] urls = Io_mgr.I.QueryDir_fils(dir);
 		int len = urls.length;
 		for (int i = 0; i < len; i++) {
 			Io_url url = urls[i];
 			try {
 				String lang_key = String_.Replace(String_.Lower(String_.Mid(url.NameOnly(), 8)), "_", "-");	// 8=Messages.length; lower b/c format is MessagesEn.php (need "en")
 				// if (String_.In(lang_key, "qqq", "enrtl", "bbc", "bbc-latn")) continue;
-				String text = Io_mgr._.LoadFilStr(url);
-				Xol_lang lang = lang_mgr.Get_by_key_or_new(Bry_.new_utf8_(lang_key));
+				String text = Io_mgr.I.LoadFilStr(url);
+				Xol_lang lang = lang_mgr.Get_by_key_or_new(Bry_.new_u8(lang_key));
 				this.Parse_core(text, lang, bfr, lang_transform);
 			} catch (Exception exc) {Err_.Noop(exc); Tfds.WriteText("failed to parse " + url.NameOnly() + Err_.Message_gplx_brief(exc) + "\n");}
 		}
 	}
 	private void Parse_file_xtns_php(Xoa_lang_mgr lang_mgr, Io_url mediawiki_root, Bry_bfr bfr, Xol_lang_transform lang_transform) {
 		Io_url dir = mediawiki_root.GenSubDir("xtns_php");
-		Io_url[] urls = Io_mgr._.QueryDir_fils(dir);
+		Io_url[] urls = Io_mgr.I.QueryDir_fils(dir);
 		int len = urls.length;
 		for (int i = 0; i < len; i++) {
 			Io_url url = urls[i];
 			try {
-			String text = Io_mgr._.LoadFilStr(url);
+			String text = Io_mgr.I.LoadFilStr(url);
 			boolean prepend_hash = String_.Eq("ParserFunctions.i18n.magic", url.NameOnly());
 			this.Parse_xtn(text, url, lang_mgr, bfr, prepend_hash, lang_transform);
 			} catch (Exception exc) {Err_.Noop(exc); Tfds.WriteText("failed to parse " + url.NameOnly() + Err_.Message_gplx_brief(exc));}
 		}
 	}
 	private void Parse_file_json(Xoa_lang_mgr lang_mgr, Bry_bfr bfr, Xol_lang_transform lang_transform, Io_url root_dir) {
-		Io_url[] dirs = Io_mgr._.QueryDir_args(root_dir).DirOnly_().ExecAsUrlAry();
+		Io_url[] dirs = Io_mgr.I.QueryDir_args(root_dir).DirOnly_().ExecAsUrlAry();
 		int dirs_len = dirs.length;
 		for (int i = 0; i < dirs_len; i++) {
 			Io_url dir = dirs[i];
-			Io_url[] fils = Io_mgr._.QueryDir_args(dir).ExecAsUrlAry();
+			Io_url[] fils = Io_mgr.I.QueryDir_args(dir).ExecAsUrlAry();
 			int fils_len = fils.length;
 			for (int j = 0; j < fils_len; ++j) {
 				Io_url fil = fils[j];
 				try {
-					Xol_lang lang = lang_mgr.Get_by_key_or_new(Bry_.new_utf8_(fil.NameOnly()));
+					Xol_lang lang = lang_mgr.Get_by_key_or_new(Bry_.new_u8(fil.NameOnly()));
 					Xob_i18n_parser.Load_msgs(true, lang, fil);
 				}	catch (Exception exc) {Err_.Noop(exc); Tfds.WriteText(String_.Format("failed to parse json file; url={0} err={1}\n", fil.Raw(), Err_.Message_gplx_brief(exc)));}
 			}
@@ -111,9 +111,9 @@ public class Xol_mw_lang_parser {
 	public void Parse_core(String text, Xol_lang lang, Bry_bfr bfr, Xol_lang_transform lang_transform) {
 		evaluator.Clear();
 		parser.Parse_tkns(text, evaluator);
-		Php_line[] lines = (Php_line[])evaluator.List().Xto_ary(Php_line.class);
+		Php_line[] lines = (Php_line[])evaluator.List().To_ary(Php_line.class);
 		int lines_len = lines.length;
-		ListAdp bry_list = ListAdp_.new_();
+		List_adp bry_list = List_adp_.new_();
 		for (int i = 0; i < lines_len; i++) {
 			Php_line_assign line = (Php_line_assign)lines[i];
 			byte[] key = line.Key().Val_obj_bry();
@@ -169,8 +169,8 @@ public class Xol_mw_lang_parser {
 	public void Parse_xtn(String text, Io_url url, Xoa_lang_mgr lang_mgr, Bry_bfr bfr, boolean prepend_hash, Xol_lang_transform lang_transform) {
 		evaluator.Clear();
 		parser.Parse_tkns(text, evaluator);
-		ListAdp bry_list = ListAdp_.new_();
-		Php_line[] lines = (Php_line[])evaluator.List().Xto_ary(Php_line.class);
+		List_adp bry_list = List_adp_.new_();
+		Php_line[] lines = (Php_line[])evaluator.List().To_ary(Php_line.class);
 		int lines_len = lines.length;
 		for (int i = 0; i < lines_len; i++) {
 			Php_line_assign line = (Php_line_assign)lines[i];
@@ -181,7 +181,7 @@ public class Xol_mw_lang_parser {
 				if (subs.length == 0) continue;	// ignore if no lang_key; EX: ['en']
 				byte[] lang_key = subs[0].Val_obj_bry();
 				try {
-					if (String_.In(String_.new_utf8_(lang_key), Lang_skip)) continue;
+					if (String_.In(String_.new_u8(lang_key), Lang_skip)) continue;
 					Xol_lang lang = lang_mgr.Get_by_key_or_new(lang_key);
 					Byte_obj_val stub = (Byte_obj_val)o;
 					switch (stub.Val()) {
@@ -202,7 +202,7 @@ public class Xol_mw_lang_parser {
 			}
 		}
 	}
-	private void Parse_array_kv(ListAdp rv, Php_line_assign line) {
+	private void Parse_array_kv(List_adp rv, Php_line_assign line) {
 		rv.Clear();
 		Php_itm_ary ary = (Php_itm_ary)line.Val();
 		int subs_len = ary.Subs_len();
@@ -212,8 +212,8 @@ public class Xol_mw_lang_parser {
 			rv.Add(Php_itm_.Parse_bry(kv.Val()));
 		}		
 	}
-	public Xow_ns[] Parse_namespace_strings(ListAdp list, boolean ns_names) {
-		byte[][] brys = (byte[][])list.Xto_ary(byte[].class);
+	public Xow_ns[] Parse_namespace_strings(List_adp list, boolean ns_names) {
+		byte[][] brys = (byte[][])list.To_ary(byte[].class);
 		int brys_len = brys.length;
 		Xow_ns[] rv = new Xow_ns[brys_len / 2];
 		int key_dif = ns_names ? 0 : 1;
@@ -223,16 +223,16 @@ public class Xol_mw_lang_parser {
 			byte[] kv_val = brys[i + val_dif];
 			Bry_.Replace_all_direct(kv_val, Byte_ascii.Underline, Byte_ascii.Space); // NOTE: siteInfo.xml names have " " not "_" (EX: "User talk"). for now, follow that convention
 			int ns_id = Id_by_mw_name(kv_key);
-//				if (ns_id == Xow_ns_.Id_null) throw Err_mgr._.fmt_auto_(GRP_KEY, "namespace_names", String_.new_utf8_(kv_key));
+//				if (ns_id == Xow_ns_.Id_null) throw Err_mgr._.fmt_auto_(GRP_KEY, "namespace_names", String_.new_u8(kv_key));
 			rv[i / 2] = new Xow_ns(ns_id, Xow_ns_case_.Id_1st, kv_val, false);	// note that Xow_ns is being used as glorified id-name struct; case_match and alias values do not matter
 		}
 		return rv;
 	}
-	private void Parse_messages(ListAdp rv, Xol_lang lang, Bry_bfr bfr) {
-		byte[][] brys = (byte[][])rv.Xto_ary(byte[].class);
+	private void Parse_messages(List_adp rv, Xol_lang lang, Bry_bfr bfr) {
+		byte[][] brys = (byte[][])rv.To_ary(byte[].class);
 		int brys_len = brys.length;
 		Xol_msg_mgr mgr = lang.Msg_mgr();
-		ListAdp quote_itm_list = ListAdp_.new_(); Byte_obj_ref quote_parse_result = Byte_obj_ref.zero_(); 
+		List_adp quote_itm_list = List_adp_.new_(); Byte_obj_ref quote_parse_result = Byte_obj_ref.zero_(); 
 		for (int i = 0; i < brys_len; i+=2) {
 			byte[] kv_key = brys[i];
 			Xol_msg_itm itm = mgr.Itm_by_key_or_new(kv_key);
@@ -267,7 +267,7 @@ public class Xol_mw_lang_parser {
 //					if (prepend_hash && word[0] != Byte_ascii.Hash) word = Bry_.Add(Byte_ascii.Hash, word);
 				words[j - kv_ary_bgn] = lang_transform.Kwd_transform(lang_key, kv_key, word);
 			}
-			int keyword_id = Xol_kwd_grp_.Id_by_bry(kv_key); if (keyword_id == -1) continue; //throw Err_mgr._.fmt_(Err_scope_keywords, "invalid_key", "key does not have id", String_.new_utf8_(kv_key));
+			int keyword_id = Xol_kwd_grp_.Id_by_bry(kv_key); if (keyword_id == -1) continue; //throw Err_mgr._.fmt_(Err_scope_keywords, "invalid_key", "key does not have id", String_.new_u8(kv_key));
 			Xol_kwd_grp grp = mgr.Get_or_new(keyword_id);
 			grp.Srl_load(case_match, words);
 		}
@@ -292,14 +292,14 @@ public class Xol_mw_lang_parser {
 	}
 	private boolean Parse_int_as_bool(Php_itm itm) {
 		int rv = Php_itm_.Parse_int_or(itm, Int_.MinValue);
-		if (rv == Int_.MinValue) throw Err_mgr._.fmt_(GRP_KEY, "parse_int_as_bool", "value must be 0 or 1", String_.new_utf8_(itm.Val_obj_bry()));
+		if (rv == Int_.MinValue) throw Err_mgr._.fmt_(GRP_KEY, "parse_int_as_bool", "value must be 0 or 1", String_.new_u8(itm.Val_obj_bry()));
 		return rv == 1;
 	}
 	private void Parse_separatorTransformTable(Php_line_assign line, Xol_num_mgr num_mgr) {
 		if (line.Val().Itm_tid() == Php_itm_.Tid_null) return;// en is null; $separatorTransformTable = null;
 		Php_itm_ary ary = (Php_itm_ary)line.Val();
 		int subs_len = ary.Subs_len();
-		ListAdp tmp_list = ListAdp_.new_(); Byte_obj_ref tmp_result = Byte_obj_ref.zero_(); Bry_bfr tmp_bfr = Bry_bfr.reset_(16); 
+		List_adp tmp_list = List_adp_.new_(); Byte_obj_ref tmp_result = Byte_obj_ref.zero_(); Bry_bfr tmp_bfr = Bry_bfr.reset_(16); 
 		for (int i = 0; i < subs_len; i++) {
 			Php_itm_kv kv = (Php_itm_kv)ary.Subs_get(i);
 			byte[] key_bry = Php_itm_.Parse_bry(kv.Key()), val_bry = Php_itm_.Parse_bry(kv.Val());
@@ -310,14 +310,14 @@ public class Xol_mw_lang_parser {
 				||	Bry_.Eq(key_bry, Bry_separatorTransformTable_comma)
 				)
 				num_mgr.Separators_mgr().Set(key_bry, val_bry);
-			else throw Err_mgr._.unhandled_(String_.new_utf8_(key_bry));	// NOTE: as of v1.22.2, all Messages only have a key of "." or "," DATE:2014-04-15
+			else throw Err_mgr._.unhandled_(String_.new_u8(key_bry));	// NOTE: as of v1.22.2, all Messages only have a key of "." or "," DATE:2014-04-15
 		}
 	}	private static final byte[] Bry_separatorTransformTable_comma = new byte[] {Byte_ascii.Comma}, Bry_separatorTransformTable_dot = new byte[] {Byte_ascii.Dot};
 	private void Parse_digitTransformTable(Php_line_assign line, Xol_num_mgr num_mgr) {
 		if (line.Val().Itm_tid() == Php_itm_.Tid_null) return;// en is null; $digitTransformTable = null;
 		Php_itm_ary ary = (Php_itm_ary)line.Val();
 		int subs_len = ary.Subs_len();
-		ListAdp tmp_list = ListAdp_.new_(); Byte_obj_ref tmp_result = Byte_obj_ref.zero_(); Bry_bfr tmp_bfr = Bry_bfr.reset_(16); 
+		List_adp tmp_list = List_adp_.new_(); Byte_obj_ref tmp_result = Byte_obj_ref.zero_(); Bry_bfr tmp_bfr = Bry_bfr.reset_(16); 
 		for (int i = 0; i < subs_len; i++) {
 			Php_itm_kv kv = (Php_itm_kv)ary.Subs_get(i);
 			byte[] key_bry = Php_itm_.Parse_bry(kv.Key()), val_bry = Php_itm_.Parse_bry(kv.Val());

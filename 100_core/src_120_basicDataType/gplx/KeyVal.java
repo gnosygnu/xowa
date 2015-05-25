@@ -25,7 +25,7 @@ public class KeyVal implements XtoStrAble {
 	public Object Val() {return val;} public KeyVal Val_(Object v) {val = v; return this;} private Object val;
 	public String Val_to_str_or_empty() {return Object_.Xto_str_strict_or_empty(val);}
 	public String Val_to_str_or_null() {return Object_.Xto_str_strict_or_null(val);}
-	public byte[] Val_to_bry() {return Bry_.new_utf8_(Object_.Xto_str_strict_or_null(val));}
+	public byte[] Val_to_bry() {return Bry_.new_u8(Object_.Xto_str_strict_or_null(val));}
 	@Override public String toString() {return XtoStr();}
 	public String XtoStr() {return Key() + "=" + Object_.Xto_str_strict_or_null_mark(val);}
 }

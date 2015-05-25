@@ -26,8 +26,8 @@ public class Wdata_dict_value_entity {
 	, Str_numeric_id							= "numeric-id"
 	;
 	public static byte[] 
-	  Bry_entity_type							= Bry_.new_ascii_(Str_entity_type)
-	, Bry_numeric_id							= Bry_.new_ascii_(Str_numeric_id)
+	  Bry_entity_type							= Bry_.new_a7(Str_entity_type)
+	, Bry_numeric_id							= Bry_.new_a7(Str_numeric_id)
 	;
 	public static final Hash_adp_bry Dict = Hash_adp_bry.cs_()
 	.Add_bry_byte(Bry_entity_type				, Tid_entity_type)
@@ -37,6 +37,6 @@ public class Wdata_dict_value_entity {
 	  Val_entity_type_item_str					= "item"
 	;
 	public static final byte[]
-	  Val_entity_type_item_bry					= Bry_.new_ascii_(Val_entity_type_item_str)
+	  Val_entity_type_item_bry					= Bry_.new_a7(Val_entity_type_item_str)
 	;
 }

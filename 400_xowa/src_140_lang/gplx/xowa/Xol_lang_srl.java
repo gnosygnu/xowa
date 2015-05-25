@@ -21,14 +21,14 @@ public class Xol_lang_srl {
 	public static Xow_ns[] Load_ns_grps(byte[] src) {
 		int src_len = src.length, pos = 0, fld_bgn = 0;
 		int cur_id = -1;
-		ListAdp rv = ListAdp_.new_(); Xol_csv_parser csv_parser = Xol_csv_parser._;
+		List_adp rv = List_adp_.new_(); Xol_csv_parser csv_parser = Xol_csv_parser._;
 		while (true) {
 			boolean last = pos == src_len;	// NOTE: logic occurs b/c of \n}~-> dlm which gobbles up last \n
 			byte b = last ? Byte_ascii.NewLine : src[pos];
 			switch (b) {
 				case Byte_ascii.Pipe:
 					cur_id = Bry_.Xto_int_or(src, fld_bgn, pos, Int_.MinValue);
-					if (cur_id == Int_.MinValue) throw Err_mgr._.fmt_(GRP_KEY, "invalid_id", "invalid_id: ~{0}", String_.new_utf8_(src, fld_bgn, pos));					
+					if (cur_id == Int_.MinValue) throw Err_mgr._.fmt_(GRP_KEY, "invalid_id", "invalid_id: ~{0}", String_.new_u8(src, fld_bgn, pos));					
 					fld_bgn = pos + 1;
 					break;
 				case Byte_ascii.NewLine:
@@ -44,12 +44,12 @@ public class Xol_lang_srl {
 			if (last) break;
 			++pos;
 		}
-		return (Xow_ns[])rv.Xto_ary(Xow_ns.class);
+		return (Xow_ns[])rv.To_ary(Xow_ns.class);
 	}	private static final String GRP_KEY = "xowa.lang.srl";
 	public static void Load_keywords(Xol_kwd_mgr keyword_mgr, byte[] src) {
 		int src_len = src.length, pos = 0, fld_bgn = 0, fld_idx = 0;
 		boolean cur_cs = false; byte[] cur_key = Bry_.Empty;
-		ListAdp cur_words = ListAdp_.new_();
+		List_adp cur_words = List_adp_.new_();
 		Xol_csv_parser csv_parser = Xol_csv_parser._;
 		while (true) {
 			boolean last = pos == src_len;	// NOTE: logic occurs b/c of \n}~-> dlm which gobbles up last \n
@@ -81,7 +81,7 @@ public class Xol_lang_srl {
 					if (cur_words.Count() > 0) {	// guard against blank line wiping out entries; EX: "toc|0|toc1\n\n"; 2nd \n will get last grp and make 0 entries
 						int cur_id = Xol_kwd_grp_.Id_by_bry(cur_key); if (cur_id == -1) throw Err_mgr._.fmt_(GRP_KEY, "invalid_keyword", "key does not have id: ~{0}", cur_id);
 						Xol_kwd_grp grp = keyword_mgr.Get_or_new(cur_id);
-						grp.Srl_load(cur_cs, (byte[][])cur_words.Xto_ary(byte[].class));
+						grp.Srl_load(cur_cs, (byte[][])cur_words.To_ary(byte[].class));
 					}
 					fld_bgn = pos + 1;
 					fld_idx = 0;
@@ -93,7 +93,7 @@ public class Xol_lang_srl {
 			if (last) break;
 			++pos;
 		}
-//			return (Xol_kwd_grp[])rv.Xto_ary(typeof(Xol_kwd_grp));
+//			return (Xol_kwd_grp[])rv.To_ary(typeof(Xol_kwd_grp));
 	}
 	public static void Load_messages(Xol_msg_mgr msg_mgr, byte[] src) {
 		int src_len = src.length, pos = 0, fld_bgn = 0;

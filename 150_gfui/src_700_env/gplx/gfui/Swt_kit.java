@@ -47,7 +47,7 @@ import gplx.core.threads.Thread_adp_;
 import gplx.core.threads.*;
 public class Swt_kit implements Gfui_kit {
 	private final KeyValHash ctor_args = KeyValHash.new_(); private final KeyValHash ctor_args_null = KeyValHash.new_();
-	private final HashAdp kit_args = HashAdp_.new_(); private Swt_msg_wkr_stop msg_wkr_stop;
+	private final Hash_adp kit_args = Hash_adp_.new_(); private Swt_msg_wkr_stop msg_wkr_stop;
 	private Gfo_usr_dlg gui_wtr; private String xul_runner_path = null;
 	private final Bry_fmtr ask_fmtr = Bry_fmtr.new_().Fail_when_invalid_escapes_(false); private final Bry_bfr ask_bfr = Bry_bfr.new_();
 	private final Object thread_lock = new Object();
@@ -60,7 +60,7 @@ public class Swt_kit implements Gfui_kit {
 	public void					Kit_mode_(int v) 		{synchronized (thread_lock) {mode = v;}}
 	public boolean				Kit_mode__ready() 		{return Kit_mode() == Swt_kit_mode.Tid_ready;}
 	public boolean 				Kit_mode__term() 		{return Kit_mode() == Swt_kit_mode.Tid_term;}
-	public boolean 				Kit_sync_cmd_exists() {synchronized (thread_lock) {return sync_cmd_list.Count() != 0;}} private final ListAdp sync_cmd_list = ListAdp_.new_();
+	public boolean 				Kit_sync_cmd_exists() {synchronized (thread_lock) {return sync_cmd_list.Count() != 0;}} private final List_adp sync_cmd_list = List_adp_.new_();
 	public void 				Kit_sync_cmd_add(Swt_gui_cmd cmd) {synchronized (thread_lock) {sync_cmd_list.Add(cmd);}}
 	public void 				Kit_sync_cmd_del(Swt_gui_cmd cmd) {synchronized (thread_lock) {sync_cmd_list.Del(cmd);}}
 	public GfoInvkAbleCmd 		Kit_term_cbk() {return term_cbk;} public void Kit_term_cbk_(GfoInvkAbleCmd v) {this.term_cbk = v;} private GfoInvkAbleCmd term_cbk = GfoInvkAbleCmd.Null;
@@ -99,12 +99,12 @@ public class Swt_kit implements Gfui_kit {
 			return;
 		}
 		// add kv to widget_cfg_hash; new controls will get properties from cfg_hash
-		KeyValHash widget_cfg_hash = (KeyValHash)kit_args.Fetch(type);
+		KeyValHash widget_cfg_hash = (KeyValHash)kit_args.Get_by(type);
 		if (widget_cfg_hash == null) {
 			widget_cfg_hash = KeyValHash.new_();
 			kit_args.Add(type, widget_cfg_hash);
 		}
-		widget_cfg_hash.AddReplace(key, val);
+		widget_cfg_hash.Add_if_dupe_use_nth(key, val);
 	}
 	public boolean Ask_yes_no(String grp_key, String msg_key, String fmt, Object... args) {
 		Swt_dlg_msg dlg = (Swt_dlg_msg)New_dlg_msg(ask_fmtr.Bld_str_many(ask_bfr, fmt, args)).Init_btns_(Gfui_dlg_msg_.Btn_yes, Gfui_dlg_msg_.Btn_no).Init_ico_(Gfui_dlg_msg_.Ico_question);
@@ -149,7 +149,7 @@ public class Swt_kit implements Gfui_kit {
 	public Gfui_html New_html(String key, GfuiElem owner, KeyVal... args) {
 		ctor_args.Clear();
 		// check cfg for browser type
-		KeyValHash html_cfg_args = (KeyValHash)kit_args.Fetch(Gfui_kit_.Cfg_HtmlBox);
+		KeyValHash html_cfg_args = (KeyValHash)kit_args.Get_by(Gfui_kit_.Cfg_HtmlBox);
 		if (html_cfg_args != null) {
 			KeyVal browser_type = html_cfg_args.FetchOrNull(Cfg_Html_BrowserType);
 			if (browser_type != null) ctor_args.Add(browser_type);
@@ -190,7 +190,7 @@ public class Swt_kit implements Gfui_kit {
 	public Gfui_dlg_file New_dlg_file(byte type, String msg) {return new Swt_dlg_file(type, shell).Init_msg_(msg);}
 	public Gfui_dlg_msg New_dlg_msg(String msg) {return new Swt_dlg_msg(shell).Init_msg_(msg);}
 	public ImageAdp New_img_load(Io_url url) {
-		if (url == Io_url_.Null) return ImageAdp_.Null;
+		if (url == Io_url_.Empty) return ImageAdp_.Null;
 		Image img = new Image(display, url.Raw());
 		Rectangle rect = img.getBounds();
 		return new Swt_img(this, img, rect.width, rect.height).Url_(url);
@@ -242,6 +242,7 @@ public class Swt_kit implements Gfui_kit {
 	public static final String Cfg_Html_BrowserType = "BrowserType";
 	public static int Cfg_Html_BrowserType_parse(String v) {
 		if		(String_.Eq(v, "mozilla"))	return Swt_html.Browser_tid_mozilla;
+		else if	(String_.Eq(v, "webkit"))	return Swt_html.Browser_tid_webkit;
 		else								return Swt_html.Browser_tid_none;
 	}
 	public static FontAdp Control_font_get(Font font, GxwCore_base owner) {

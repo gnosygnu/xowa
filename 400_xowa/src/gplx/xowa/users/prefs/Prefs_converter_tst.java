@@ -40,7 +40,7 @@ class Prefs_converter_fxt {
 		Tfds.Eq_str_lines(expd, actl);
 	}
 	public void Parse(String raw_str) {
-		byte[] raw_bry = Bry_.new_utf8_(raw_str);
+		byte[] raw_bry = Bry_.new_u8(raw_str);
 		int bgn_pos = Bry_finder.Find_fwd(raw_bry, Byte_ascii.Paren_bgn);
 		if (bgn_pos == Bry_.NotFound) throw Err_.new_fmt_("unable to find paren_bgn: {0}", raw_str);
 		int end_pos = Bry_finder.Find_fwd(raw_bry, Byte_ascii.Paren_end, bgn_pos);

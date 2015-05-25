@@ -38,43 +38,44 @@ import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import javax.swing.undo.UndoManager;
 public class GxwTextMemo_lang extends JScrollPane implements GxwTextMemo {
-	public JTextArea Inner() {return txtBox;} GxwTextBox_lang txtBox;
+	public JTextArea Inner() {return txt_box;} GxwTextBox_lang txt_box;
 	public GxwCore_base Core() {return core;} GxwCore_base core; 
-	public GxwCbkHost Host() {return host;} public void Host_set(GxwCbkHost host) {this.host = host; txtBox.Host_set(host);} GxwCbkHost host;
+	public GxwCbkHost Host() {return host;} public void Host_set(GxwCbkHost host) {this.host = host; txt_box.Host_set(host);} GxwCbkHost host;
 	@Override public void setBackground(Color c) {
-		if 		(c.getRGB() == Color.BLACK.getRGB())  	txtBox.setCaretColor(Color.WHITE);			
-		else if (c.getRGB() == Color.WHITE.getRGB()) 	txtBox.setCaretColor(Color.BLACK);		
+		if (txt_box == null) return; // WORKAROUND.OSX: OSX LookAndFeel calls setBackground during ctor of Mem_html; DATE:2015-05-11
+		if 		(c.getRGB() == Color.BLACK.getRGB())  	txt_box.setCaretColor(Color.WHITE);			
+		else if (c.getRGB() == Color.WHITE.getRGB()) 	txt_box.setCaretColor(Color.BLACK);		
 		super.setBackground(c);
 	}
 	public void ScrollTillCaretIsVisible() {throw Err_.not_implemented_();}
 	public void Margins_set(int left, int top, int right, int bot) {
 		if (left == 0 && right == 0) {
-			txtBox.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-			txtBox.setMargin(new Insets(0, 0, 0,0));			
+			txt_box.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+			txt_box.setMargin(new Insets(0, 0, 0,0));			
 		}
 		else {			
-//			txtBox.setBorder(BasicBorders.getTextFieldBorder());
-//			txtBox.setMargin(new Insets(0, l, 0, r));						
-			txtBox.setFont(new Font("Courier New", FontStyleAdp_.Plain.val, 12));
-			txtBox.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.BLACK), BorderFactory.createEmptyBorder(top, left, bot, right)));
+//			txt_box.setBorder(BasicBorders.getTextFieldBorder());
+//			txt_box.setMargin(new Insets(0, l, 0, r));						
+			txt_box.setFont(new Font("Courier New", FontStyleAdp_.Plain.val, 12));
+			txt_box.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.BLACK), BorderFactory.createEmptyBorder(top, left, bot, right)));
 		}
 	}
 	public void ctor_MsTextBoxMultiline_() {
-		txtBox = new GxwTextBox_lang();
-		txtBox.ctor_MsTextBox_();
-		core = new GxwCore_host(GxwCore_lang.new_(this), txtBox.ctrlMgr);
-	    this.setViewportView(txtBox);
-	    txtBox.setLineWrap(true);
-	    txtBox.setWrapStyleWord(true);	// else text will wrap in middle of words
+		txt_box = new GxwTextBox_lang();
+		txt_box.ctor_MsTextBox_();
+		core = new GxwCore_host(GxwCore_lang.new_(this), txt_box.ctrlMgr);
+	    this.setViewportView(txt_box);
+	    txt_box.setLineWrap(true);
+	    txt_box.setWrapStyleWord(true);	// else text will wrap in middle of words
 		this.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 		this.setBorder(null);
-		txtBox.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		txtBox.setCaretColor(Color.BLACK);
-		txtBox.getCaret().setBlinkRate(0);
-		txtBox.setMargin(new Insets(0, 200, 200,0));
+		txt_box.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		txt_box.setCaretColor(Color.BLACK);
+		txt_box.getCaret().setBlinkRate(0);
+		txt_box.setMargin(new Insets(0, 200, 200,0));
 		OverrideKeyBindings();
 		InitUndoMgr();
-		txtBox.setCaret(new javax.swing.text.DefaultCaret() {public void setSelectionVisible(boolean vis) {super.setSelectionVisible(true);}});// else highlighted selection will not be visible when text box loses focus 		
+		txt_box.setCaret(new javax.swing.text.DefaultCaret() {public void setSelectionVisible(boolean vis) {super.setSelectionVisible(true);}});// else highlighted selection will not be visible when text box loses focus 		
 		//		this.setLayout(null);
 		
 //		Object fontDefinition = new UIDefaults.ProxyLazyValue("javax.swing.plaf.FontUIResource", null, new Object[] { "dialog", new Integer(Font.PLAIN), new Integer(12) });
@@ -89,7 +90,7 @@ public class GxwTextMemo_lang extends JScrollPane implements GxwTextMemo {
 	}	@gplx.Internal protected GxwTextMemo_lang() {}
 	void InitUndoMgr() {
 		final UndoManager undo = new UndoManager();
-		Document doc = txtBox.getDocument();
+		Document doc = txt_box.getDocument();
 
 		// Listen for undo and redo events
 		doc.addUndoableEditListener(new UndoableEditListener() {
@@ -99,7 +100,7 @@ public class GxwTextMemo_lang extends JScrollPane implements GxwTextMemo {
 		});
 
 		// Create an undo action and add it to the text component
-		txtBox.getActionMap().put("Undo",
+		txt_box.getActionMap().put("Undo",
 		    new AbstractAction("Undo") {
 		        public void actionPerformed(ActionEvent evt) {
 		            try {
@@ -112,10 +113,10 @@ public class GxwTextMemo_lang extends JScrollPane implements GxwTextMemo {
 		   });
 
 		// Bind the undo action to ctl-Z
-		txtBox.getInputMap().put(KeyStroke.getKeyStroke("control Z"), "Undo");
+		txt_box.getInputMap().put(KeyStroke.getKeyStroke("control Z"), "Undo");
 
 		// Create a redo action and add it to the text component
-		txtBox.getActionMap().put("Redo",
+		txt_box.getActionMap().put("Redo",
 		    new AbstractAction("Redo") {
 		        public void actionPerformed(ActionEvent evt) {
 		            try {
@@ -128,20 +129,20 @@ public class GxwTextMemo_lang extends JScrollPane implements GxwTextMemo {
 		    });
 
 		// Bind the redo action to ctl-Y
-		txtBox.getInputMap().put(KeyStroke.getKeyStroke("control Y"), "Redo");		
+		txt_box.getInputMap().put(KeyStroke.getKeyStroke("control Y"), "Redo");		
 	}
 	void OverrideKeyBindings() {
 		Set<AWTKeyStroke> forTraSet = new HashSet<AWTKeyStroke> ();
-		txtBox.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, forTraSet);
-		txtBox.setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, forTraSet);
+		txt_box.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, forTraSet);
+		txt_box.setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, forTraSet);
 
-		GxwTextBox_overrideKeyCmd.noop_((GfuiElem)host, txtBox, "control H"); // else ctrl+h deletes current char		
-//		GxwTextBox_overrideKeyCmd.new_(txtBox, "ENTER", Env_.NewLine); // else enter will always use \n on window; jtextBox allows separation of \r from \n
+		GxwTextBox_overrideKeyCmd.noop_((GfuiElem)host, txt_box, "control H"); // else ctrl+h deletes current char		
+//		GxwTextBox_overrideKeyCmd.new_(txt_box, "ENTER", Env_.NewLine); // else enter will always use \n on window; jtextBox allows separation of \r from \n
 	}
 	public void AlignH_(GfuiAlign val) {
 		// can't work with jtextArea
 //		if (val.Val() == GfuiAlign_.Mid.Val())
-//			txtBox.setAlignmentY(JTextArea.CENTER_ALIGNMENT);
+//			txt_box.setAlignmentY(JTextArea.CENTER_ALIGNMENT);
 	}
 	public int LinesPerScreen() {return LinesPerScreen(this);}
 	public int LinesTotal() {
@@ -256,44 +257,44 @@ public class GxwTextMemo_lang extends JScrollPane implements GxwTextMemo {
 //		String charactersPastEndOfLine = text.Substring(charIndexLastAccordingToApi, newLineLength);
 //		return charactersPastEndOfLine == String_.NewLine ? lineLength + newLineLength : lineLength;
 	}
-	public boolean Border_on() {return txtBox.Border_on();} public void Border_on_(boolean v) {txtBox.Border_on_(v);}
-	public void CreateControlIfNeeded() {txtBox.CreateControlIfNeeded();}
-	public boolean OverrideTabKey() {return txtBox.OverrideTabKey();}
+	public boolean Border_on() {return txt_box.Border_on();} public void Border_on_(boolean v) {txt_box.Border_on_(v);}
+	public void CreateControlIfNeeded() {txt_box.CreateControlIfNeeded();}
+	public boolean OverrideTabKey() {return txt_box.OverrideTabKey();}
 	public void OverrideTabKey_(boolean v) {
-		txtBox.OverrideTabKey_(v);
+		txt_box.OverrideTabKey_(v);
 		if (v) {
 			Set<AWTKeyStroke> forTraSet = new HashSet<AWTKeyStroke> ();
-			txtBox.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, forTraSet);
-			txtBox.setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, forTraSet);
+			txt_box.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, forTraSet);
+			txt_box.setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, forTraSet);
 		}
 		else {
 			Set<AWTKeyStroke> forTraSet = new HashSet<AWTKeyStroke> ();
-			txtBox.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, forTraSet);
-			txtBox.setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, forTraSet);
-			GxwTextBox_overrideKeyCmd.focus_((GfuiElem)host, txtBox, "TAB"); // else ctrl+h deletes current char		
-			GxwTextBox_overrideKeyCmd.focusPrv_((GfuiElem)host, txtBox, "shift TAB"); // else ctrl+h deletes current char		
+			txt_box.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, forTraSet);
+			txt_box.setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, forTraSet);
+			GxwTextBox_overrideKeyCmd.focus_((GfuiElem)host, txt_box, "TAB"); // else ctrl+h deletes current char		
+			GxwTextBox_overrideKeyCmd.focusPrv_((GfuiElem)host, txt_box, "shift TAB"); // else ctrl+h deletes current char		
 //			Set<AWTKeyStroke> forTraSet = new HashSet<AWTKeyStroke> ();
 //			forTraSet.add(AWTKeyStroke.getAWTKeyStroke("TAB"));
 //			Set<AWTKeyStroke> bwdTraSet = new HashSet<AWTKeyStroke> ();
 //			bwdTraSet.add(AWTKeyStroke.getAWTKeyStroke("control TAB"));
-//			txtBox.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, forTraSet);
-//			txtBox.setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, bwdTraSet);
-//			txtBox.OverrideTabKey_(false);
+//			txt_box.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, forTraSet);
+//			txt_box.setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, bwdTraSet);
+//			txt_box.OverrideTabKey_(false);
 		}
 	}	
-	public int SelBgn() {return txtBox.SelBgn();} public void SelBgn_set(int v) {txtBox.SelBgn_set(v);}	
-	public int SelLen() {return txtBox.SelLen();} public void SelLen_set(int v) {txtBox.SelLen_set(v);}	
-	public void EnableDoubleBuffering() {txtBox.EnableDoubleBuffering();}
+	public int SelBgn() {return txt_box.SelBgn();} public void SelBgn_set(int v) {txt_box.SelBgn_set(v);}	
+	public int SelLen() {return txt_box.SelLen();} public void SelLen_set(int v) {txt_box.SelLen_set(v);}	
+	public void EnableDoubleBuffering() {txt_box.EnableDoubleBuffering();}
 	
-	public void SendKeyDown(IptKey key) {txtBox.SendKeyDown(key);}	
-	public String TextVal() {return txtBox.TextVal();}
+	public void SendKeyDown(IptKey key) {txt_box.SendKeyDown(key);}	
+	public String TextVal() {return txt_box.TextVal();}
 	public void TextVal_set(String v) {
-		txtBox.TextVal_set(v);
-		txtBox.setSelectionStart(0); txtBox.setSelectionEnd(0); // else selects whole text and scrolls to end of selection
+		txt_box.TextVal_set(v);
+		txt_box.setSelectionStart(0); txt_box.setSelectionEnd(0); // else selects whole text and scrolls to end of selection
 	}	
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if (ctx.Match(k, GxwElem_lang.AlignH_cmd))  AlignH_(GfuiAlign_.cast_(m.CastObj("v")));
-		return txtBox.Invk(ctx, ikey, k, m);
+		return txt_box.Invk(ctx, ikey, k, m);
 	}
 }
 class GxwCore_host extends GxwCore_base {

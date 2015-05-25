@@ -16,9 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-import gplx.lists.*; /*OrderedHash_base*/ import gplx.stores.dsvs.*; /*DsvStoreLayout*/
-public class TdbFileList extends OrderedHash_base {
-	public TdbFile FetchOrFail(int id) {return TdbFile.as_(FetchOrFail_base(id));}
+import gplx.lists.*; /*Ordered_hash_base*/ import gplx.stores.dsvs.*; /*DsvStoreLayout*/
+public class TdbFileList extends Ordered_hash_base {
+	public TdbFile Get_by_or_fail(int id) {return TdbFile.as_(FetchOrFail_base(id));}
 	public void Add(TdbFile src) {Add_base(src.Id(), src);}
 
 	Io_url dbInfo;

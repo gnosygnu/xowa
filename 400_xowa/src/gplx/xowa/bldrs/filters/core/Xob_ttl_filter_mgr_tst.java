@@ -33,15 +33,15 @@ class Xob_ttl_filter_mgr_fxt {
 	public void Clear() {
 		mgr.Clear();
 	}
-	public void Init_load_exclude(String itm) {mgr.Load(Bool_.Y, Bry_.new_utf8_(itm));}
-	public void Init_load_include(String itm) {mgr.Load(Bool_.N, Bry_.new_utf8_(itm));}
+	public void Init_load_exclude(String itm) {mgr.Load(Bool_.Y, Bry_.new_u8(itm));}
+	public void Init_load_include(String itm) {mgr.Load(Bool_.N, Bry_.new_u8(itm));}
 	public void Test_match_exclude_y(String... itms) {Test_match(Bool_.Y, Bool_.Y, itms);}
 	public void Test_match_exclude_n(String... itms) {Test_match(Bool_.Y, Bool_.N, itms);}
 	public void Test_match_include_y(String... itms) {Test_match(Bool_.N, Bool_.Y, itms);}
 	public void Test_match_include_n(String... itms) {Test_match(Bool_.N, Bool_.N, itms);}
 	private void Test_match(boolean exclude, boolean expd, String... itms) {
 		for (String itm : itms) {
-			byte[] itm_bry = Bry_.new_utf8_(itm);
+			byte[] itm_bry = Bry_.new_u8(itm);
 			if (exclude)
 				Tfds.Eq(expd, mgr.Match_exclude(itm_bry), itm);
 			else

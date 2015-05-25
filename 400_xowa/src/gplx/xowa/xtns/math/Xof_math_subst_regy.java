@@ -160,8 +160,8 @@ public class Xof_math_subst_regy {
 	}
 	private void Reg(String src_str, String trg_str) {Reg(src_str, trg_str, false, true);}
 	private void Reg(String src_str, String trg_str, boolean dollarSign, boolean wholeWord) {
-		byte[] src_bry = Bry_.new_ascii_(src_str);
-		Xof_math_subst_itm itm = new Xof_math_subst_itm(src_bry, Bry_.new_ascii_(trg_str), dollarSign, wholeWord);
+		byte[] src_bry = Bry_.new_a7(src_str);
+		Xof_math_subst_itm itm = new Xof_math_subst_itm(src_bry, Bry_.new_a7(trg_str), dollarSign, wholeWord);
 		trie.Add_obj(src_bry, itm);
 	}
 	private Btrie_slim_mgr trie = Btrie_slim_mgr.cs_();

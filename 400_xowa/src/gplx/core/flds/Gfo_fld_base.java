@@ -43,6 +43,6 @@ public class Gfo_fld_base {
 	protected Gfo_fld_base Ctor_sql_base() {
 		return	Escape_clear().Ini_common()
 				.Fld_dlm_(Byte_ascii.Comma).Row_dlm_(Byte_ascii.Paren_end).Escape_dlm_(Byte_ascii.Backslash).Quote_dlm_(Byte_ascii.Apos)
-				.Escape_reg(Byte_ascii.Backslash).Escape_reg(Byte_ascii.Quote).Escape_reg(Byte_ascii.Apos); // , Escape_eof = Bry_.new_utf8_("\\Z") 
+				.Escape_reg(Byte_ascii.Backslash).Escape_reg(Byte_ascii.Quote).Escape_reg(Byte_ascii.Apos); // , Escape_eof = Bry_.new_u8("\\Z") 
 	}
 }

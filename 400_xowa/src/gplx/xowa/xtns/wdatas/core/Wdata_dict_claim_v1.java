@@ -25,10 +25,10 @@ public class Wdata_dict_claim_v1 {
 	, Str_refs									= "refs"
 	;
 	public static final byte[] 
-	  Bry_m										= Bry_.new_ascii_(Str_m)
-	, Bry_q										= Bry_.new_ascii_(Str_q)
-	, Bry_g										= Bry_.new_ascii_(Str_g)
-	, Bry_rank									= Bry_.new_ascii_(Str_rank)
-	, Bry_refs									= Bry_.new_ascii_(Str_refs)
+	  Bry_m										= Bry_.new_a7(Str_m)
+	, Bry_q										= Bry_.new_a7(Str_q)
+	, Bry_g										= Bry_.new_a7(Str_g)
+	, Bry_rank									= Bry_.new_a7(Str_rank)
+	, Bry_refs									= Bry_.new_a7(Str_refs)
 	;
 }

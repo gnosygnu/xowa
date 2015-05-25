@@ -20,9 +20,9 @@ class Xog_launcher_tabs {
 	public void Launch(Xog_win_itm win) {
 		Xoae_app app = win.App(); Gfo_log_bfr log_bfr = app.Log_bfr();
 		log_bfr.Add("app.launch.page.bgn");			
-		Io_fil_marker fil_marker = new Io_fil_marker().Usr_dlg_(app.Usr_dlg()).Url_(app.User().Fsys_mgr().App_temp_dir().GenSubFil_nest("session", "launch.tabs.marker"));
+		Io_fil_marker fil_marker = new Io_fil_marker().Usr_dlg_(app.Usr_dlg()).Url_(app.Usere().Fsys_mgr().App_temp_dir().GenSubFil_nest("session", "launch.tabs.marker"));
 		boolean tabs_restored = false;
-		Xowe_wiki home_wiki = app.User().Wiki();
+		Xowe_wiki home_wiki = app.Usere().Wiki();
 		if (fil_marker.Bgn())
 			tabs_restored = Restore_tabs(app, home_wiki, win, fil_marker);
 		if (!tabs_restored)
@@ -76,15 +76,15 @@ class Io_fil_marker {
 		boolean rv = false;
 		synchronized (this) {
 			try {
-				rv = !Io_mgr._.ExistsFil(url);			// exists = fail; !exists = pass;
+				rv = !Io_mgr.I.ExistsFil(url);			// exists = fail; !exists = pass;
 				if (rv)									// pass: file does not exist;
-					Io_mgr._.SaveFilStr(url, "");		// create
+					Io_mgr.I.SaveFilStr(url, "");		// create
 				else									// file exists from previous run
-					Io_mgr._.DeleteFil(url);			// delete
+					Io_mgr.I.DeleteFil(url);			// delete
 			}
 			catch (Exception exc) {				// something unexpected happened
 				usr_dlg.Warn_many("", "", "marker.bgn failed: url=~{0} err=~{1}", url.Raw(), Err_.Message_gplx(exc));
-				Io_mgr._.DeleteFil(url);				// try to delete it again
+				Io_mgr.I.DeleteFil(url);				// try to delete it again
 			}
 		}
 		return rv;
@@ -92,11 +92,11 @@ class Io_fil_marker {
 	public void End() {
 		synchronized (this) {
 			try {
-				Io_mgr._.DeleteFil(url);				// delete
+				Io_mgr.I.DeleteFil(url);				// delete
 			}
 			catch (Exception exc) {
 				usr_dlg.Warn_many("", "", "marker.end failed: url=~{0} err=~{1}", url.Raw(), Err_.Message_gplx(exc));
-				Io_mgr._.DeleteFil(url);				// try to delete it again
+				Io_mgr.I.DeleteFil(url);				// try to delete it again
 			}
 		}
 	}

@@ -21,7 +21,7 @@ public class Xop_lnki_wkr__xwiki_tst {
 	@Before public void init() {fxt.Reset(); fxt.Init_para_n_();} private Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Xwiki_file() {	// PURPOSE: if xwiki and File, ignore xwiki (hackish); DATE:2013-12-22
 		Reg_xwiki_alias("test", "test.wikimedia.org");													// must register xwiki, else ttl will not parse it
-		fxt.Wiki().Cfg_parser().Lnki_cfg().Xwiki_repo_mgr().Add_or_mod(Bry_.new_ascii_("test"));	// must add to xwiki_repo_mgr
+		fxt.Wiki().Cfg_parser().Lnki_cfg().Xwiki_repo_mgr().Add_or_mod(Bry_.new_a7("test"));	// must add to xwiki_repo_mgr
 		fxt.Test_parse_page_wiki_str
 		( "[[test:File:A.png|12x10px]]", String_.Concat_lines_nl_skip_last
 		( "<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
@@ -50,8 +50,8 @@ public class Xop_lnki_wkr__xwiki_tst {
 		));
 	}
 	@Test  public void Xwiki_not_registered() {
-		fxt.App().User().Wiki().Xwiki_mgr().Clear();
-		fxt.Wiki().Xwiki_mgr().Add_full(Bry_.new_ascii_("test"), Bry_.new_ascii_("test.wikimedia.org"));	// register alias only, but not in user_wiki
+		fxt.App().Usere().Wiki().Xwiki_mgr().Clear();
+		fxt.Wiki().Xwiki_mgr().Add_full(Bry_.new_a7("test"), Bry_.new_a7("test.wikimedia.org"));	// register alias only, but not in user_wiki
 		fxt.Test_parse_page_wiki_str
 		( "[[test:A|A]]", String_.Concat_lines_nl_skip_last
 		( "<a href=\"http://test.wikimedia.org/wiki/A\">A</a>"

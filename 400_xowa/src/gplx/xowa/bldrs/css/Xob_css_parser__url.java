@@ -35,9 +35,9 @@ class Xob_css_parser__url {
 		}
 		int end_pos = Bry_finder.Find_fwd(src, end_byte, bgn_pos, src_len);
 		if (end_pos == Bry_.NotFound)	// unclosed "url("; exit since nothing else will be found
-			return Xob_css_tkn__warn.new_(tkn_bgn, tkn_end, "mirror.parser.url:dangling; bgn=~{0} excerpt=~{1}", bgn_pos, String_.new_utf8_len_safe_(src, tkn_bgn, tkn_bgn + 128));
+			return Xob_css_tkn__warn.new_(tkn_bgn, tkn_end, "mirror.parser.url:dangling; bgn=~{0} excerpt=~{1}", bgn_pos, String_.new_u8_by_len(src, tkn_bgn, tkn_bgn + 128));
 		if (end_pos - bgn_pos == 0)		// empty; "url()"; ignore
-			return Xob_css_tkn__warn.new_(tkn_bgn, tkn_end, "mirror.parser.url:empty; bgn=~{0} excerpt=~{1}", bgn_pos, String_.new_utf8_len_safe_(src, tkn_bgn, tkn_bgn + 128));
+			return Xob_css_tkn__warn.new_(tkn_bgn, tkn_end, "mirror.parser.url:empty; bgn=~{0} excerpt=~{1}", bgn_pos, String_.new_u8_by_len(src, tkn_bgn, tkn_bgn + 128));
 		byte[] url_orig = Bry_.Mid(src, bgn_pos, end_pos); int url_orig_len = url_orig.length;
 		++end_pos;	// increment end_pos so rv will be after it;
 		if (	end_byte != Byte_ascii.Paren_end) {	// end_byte is apos / quote
@@ -45,14 +45,14 @@ class Xob_css_parser__url {
 				&&	src[end_pos] == Byte_ascii.Paren_end)
 				++end_pos;
 			else
-				return Xob_css_tkn__warn.new_(tkn_bgn, end_pos, "mirror.parser.url:base64 dangling; bgn=~{0} excerpt=~{1}", bgn_pos, String_.new_utf8_(url_orig));
+				return Xob_css_tkn__warn.new_(tkn_bgn, end_pos, "mirror.parser.url:base64 dangling; bgn=~{0} excerpt=~{1}", bgn_pos, String_.new_u8(url_orig));
 		}
 		if (Bry_.HasAtBgn(url_orig, Bry_data_image))	// base64
 			return Xob_css_tkn__base64.new_(tkn_bgn, end_pos);
 		byte[] src_url = Xob_url_fixer.Fix(site, url_orig, url_orig_len);
 		if (src_url == null)	// could not convert
-			return Xob_css_tkn__warn.new_(tkn_bgn, end_pos, "mirror.parser.url:invalid url; bgn=~{0} excerpt=~{1}", tkn_bgn, String_.new_utf8_(url_orig));
+			return Xob_css_tkn__warn.new_(tkn_bgn, end_pos, "mirror.parser.url:invalid url; bgn=~{0} excerpt=~{1}", tkn_bgn, String_.new_u8(url_orig));
 		return Xob_css_tkn__url.new_(tkn_bgn, end_pos, src_url, quote_byte);
 	}
-	private static final byte[] Bry_data_image = Bry_.new_ascii_("data:image/");
+	private static final byte[] Bry_data_image = Bry_.new_a7("data:image/");
 }

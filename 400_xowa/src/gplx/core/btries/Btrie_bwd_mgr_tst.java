@@ -24,7 +24,7 @@ public class Btrie_bwd_mgr_tst {
 		run_Add("c"		,	1);
 		run_Add("abc"	,	123);
 	}
-	@Test  public void Fetch() {
+	@Test  public void Get_by() {
 		ini_setup1();
 		tst_MatchAtCur("c"		, 1);
 		tst_MatchAtCur("abc"	, 123);
@@ -68,19 +68,19 @@ public class Btrie_bwd_mgr_tst {
 		tst_MatchAtCur("a", 1);
 		tst_MatchAtCur("A", 1);
 	}
-	private void run_Add(String k, int val) {trie.Add(Bry_.new_utf8_(k), val);}
+	private void run_Add(String k, int val) {trie.Add(Bry_.new_u8(k), val);}
 	private void tst_Match(String srcStr, byte b, int bgn_pos, int expd) {
-		byte[] src = Bry_.new_utf8_(srcStr);
+		byte[] src = Bry_.new_u8(srcStr);
 		Object actl = trie.Match(b, src, bgn_pos, -1);
 		Tfds.Eq(expd, actl);
 	}
 	private void tst_MatchAtCur(String srcStr, Object expd) {
-		byte[] src = Bry_.new_utf8_(srcStr);
+		byte[] src = Bry_.new_u8(srcStr);
 		Object actl = trie.Match(src[src.length - 1], src, src.length - 1, -1);
 		Tfds.Eq(expd, actl);
 	}
 	private void tst_MatchAtCurExact(String srcStr, Object expd) {
-		byte[] src = Bry_.new_utf8_(srcStr);
+		byte[] src = Bry_.new_u8(srcStr);
 		Object actl = trie.Match_exact(src, src.length - 1, -1);
 		Tfds.Eq(expd, actl);
 	}

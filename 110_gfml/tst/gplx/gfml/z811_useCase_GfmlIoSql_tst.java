@@ -39,12 +39,12 @@ public class z811_useCase_GfmlIoSql_tst {
 		Tfds.Eq_ary_str(XtoStr(expd.Nde()), XtoStr(actl));
 	}
 	String[] XtoStr(GfmlNde nde) {
-		ListAdp list = ListAdp_.new_();
+		List_adp list = List_adp_.new_();
 		for (int i = 0; i < nde.SubObjs_Count(); i++) {
 			GfmlAtr atr = (GfmlAtr)nde.SubObjs_GetAt(i);
 			list.Add(atr.Key() +  "=" + atr.DatTkn().Raw());
 		}
-		return list.XtoStrAry();
+		return list.To_str_ary();
 	}
 	GfmlNdeWrapper nde_(String name) {return GfmlNdeWrapper.new_().Name_(name);}
 }

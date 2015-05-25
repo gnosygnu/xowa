@@ -22,10 +22,10 @@ public class Bry_fmtr_arg_time implements Bry_fmtr_arg {
 	}
 	public long Seconds() {return seconds;} public Bry_fmtr_arg_time Seconds_(long v) {seconds = v; return this;} long seconds;
 	byte[][] segs = new byte[][]
-	{	Bry_.new_ascii_("d")
-	,	Bry_.new_ascii_("h")
-	,	Bry_.new_ascii_("m")
-	,	Bry_.new_ascii_("s")
+	{	Bry_.new_a7("d")
+	,	Bry_.new_a7("h")
+	,	Bry_.new_a7("m")
+	,	Bry_.new_a7("s")
 	};
 	int[] units = new int[] {86400, 3600, 60, 1};
 	int units_len;

@@ -30,10 +30,10 @@ class Wdata_fmtr__langtext_tbl implements Bry_fmtr_arg {
 		toc_data.Orig_(tbl_hdr);
 		toggle_itm.Init_msgs(msgs.Toggle_title_y(), msgs.Toggle_title_n());
 	}
-	public void Init_by_wdoc(OrderedHash list) {
+	public void Init_by_wdoc(Ordered_hash list) {
 		this.list_len = list.Count(); if (list_len == 0) return;
 		toc_data.Make(list_len);
-		list.SortBy(lang_sorter);
+		list.Sort_by(lang_sorter);
 		fmtr_row.Init_by_page(list);
 	}
 	public void XferAry(Bry_bfr bfr, int idx) {
@@ -55,15 +55,15 @@ class Wdata_fmtr__langtext_tbl implements Bry_fmtr_arg {
 	);
 }
 interface Wdata_fmtr__langtext_row extends Bry_fmtr_arg {
-	void Init_by_page(OrderedHash list);
+	void Init_by_page(Ordered_hash list);
 }
 class Wdata_fmtr__langtext_row_base implements Wdata_fmtr__langtext_row {
-	private OrderedHash list;
-	public void Init_by_page(OrderedHash list) {this.list = list;}
+	private Ordered_hash list;
+	public void Init_by_page(Ordered_hash list) {this.list = list;}
 	public void XferAry(Bry_bfr bfr, int idx) {
 		int len = list.Count();
 		for (int i = 0; i < len; ++i) {
-			Wdata_langtext_itm itm = (Wdata_langtext_itm)list.FetchAt(i);
+			Wdata_langtext_itm itm = (Wdata_langtext_itm)list.Get_at(i);
 			Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key_or_intl(itm.Lang());
 			row_fmtr.Bld_bfr_many(bfr, itm.Lang(), Html_utl.Escape_html_as_bry(lang_itm.Localized_name()), Html_utl.Escape_html_as_bry(itm.Text()));
 		}
@@ -93,12 +93,12 @@ class Wdata_fmtr__langtext_row_base implements Wdata_fmtr__langtext_row {
 //		, "            </li>"
 }
 class Wdata_fmtr__alias_row implements Wdata_fmtr__langtext_row {
-	private OrderedHash list;
-	public void Init_by_page(OrderedHash list) {this.list = list;}
+	private Ordered_hash list;
+	public void Init_by_page(Ordered_hash list) {this.list = list;}
 	public void XferAry(Bry_bfr bfr, int idx) {
 		int len = list.Count();
 		for (int i = 0; i < len; ++i) {
-			Wdata_alias_itm itm = (Wdata_alias_itm)list.FetchAt(i);
+			Wdata_alias_itm itm = (Wdata_alias_itm)list.Get_at(i);
 			byte[][] vals_ary = itm.Vals();
 			int vals_len = vals_ary.length;
 			for (int j = 0; j < vals_len; ++j) {
@@ -114,7 +114,7 @@ class Wdata_fmtr__alias_row implements Wdata_fmtr__langtext_row {
 			}
 		}
 	}
-	private static final byte[] lang_code_style_n = Bry_.new_ascii_("border:1px solid white;background:none;");
+	private static final byte[] lang_code_style_n = Bry_.new_a7("border:1px solid white;background:none;");
 	private final Bry_fmtr row_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "        <li class='wikibase-sitelinkview'>"

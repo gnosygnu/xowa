@@ -25,8 +25,8 @@ public class Double_ {
 	, Inf_pos		= Double.POSITIVE_INFINITY	
 	;
 	public static final byte[]
-	  NaN_bry		= Bry_.new_ascii_("NaN")
-	, Inf_pos_bry	= Bry_.new_ascii_("INF")
+	  NaN_bry		= Bry_.new_a7("NaN")
+	, Inf_pos_bry	= Bry_.new_a7("INF")
 	;
 	public static boolean IsNaN(double v) {return Double.isNaN(v);}	
 	public static double cast_(Object o)					{try {return (Double)o;} catch(Exception e) {throw Err_.type_mismatch_exc_(e, double.class, o);}}

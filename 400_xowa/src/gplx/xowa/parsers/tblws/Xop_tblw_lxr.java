@@ -129,7 +129,7 @@ public class Xop_tblw_lxr implements Xop_lxr {
 		core_trie.Add(Hook_th2,	new Xop_tblw_lxr(Xop_tblw_wkr.Tblw_type_th2));
 	}
 	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
-	public static final byte[] Hook_tb = Bry_.new_ascii_("\n{|"), Hook_te = Bry_.new_ascii_("\n|}"), Hook_tr = Bry_.new_ascii_("\n|-")
-		, Hook_td = Bry_.new_ascii_("\n|"), Hook_th = Bry_.new_ascii_("\n!"), Hook_tc = Bry_.new_ascii_("\n|+")
-		, Hook_td2 = Bry_.new_ascii_("||"), Hook_th2 = Bry_.new_ascii_("!!");
+	public static final byte[] Hook_tb = Bry_.new_a7("\n{|"), Hook_te = Bry_.new_a7("\n|}"), Hook_tr = Bry_.new_a7("\n|-")
+		, Hook_td = Bry_.new_a7("\n|"), Hook_th = Bry_.new_a7("\n!"), Hook_tc = Bry_.new_a7("\n|+")
+		, Hook_td2 = Bry_.new_a7("||"), Hook_th2 = Bry_.new_a7("!!");
 }

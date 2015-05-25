@@ -31,7 +31,7 @@ class BinaryHeap_Io_line_rdr_fxt {
 		file_total = ary.length;
 		for (int i = 0; i < file_total; i++) {
 			Io_url url = Io_url_.mem_fil_("mem/fil_" + ary[i] + ".txt");
-			Io_mgr._.SaveFilStr(url, ary[i]);
+			Io_mgr.I.SaveFilStr(url, ary[i]);
 			Io_line_rdr stream = new Io_line_rdr(Gfo_usr_dlg_.Test(), url);
 			stream.Read_next();
 			heap.Add(stream);
@@ -42,7 +42,7 @@ class BinaryHeap_Io_line_rdr_fxt {
 		String[] actl = new String[file_total];
 		for (int i = 0; i < actl.length; i++) {
 			Io_line_rdr bfr = heap.Pop();
-			actl[i] = String_.new_utf8_(bfr.Bfr(), 0, bfr.Bfr_len());
+			actl[i] = String_.new_u8(bfr.Bfr(), 0, bfr.Bfr_len());
 		}
 		Tfds.Eq_ary_str(expd, actl);
 		return this;

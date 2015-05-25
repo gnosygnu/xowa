@@ -25,7 +25,7 @@ public class Bool_ implements GfoInvkAble {
 	public static final String		N_str	= "n"	, Y_str		= "y";
 	public static final byte[] Y_bry = new byte[] {Byte_ascii.Ltr_y}, N_bry = new byte[] {Byte_ascii.Ltr_n};
 	public static final String		True_str = "true", False_str = "false";
-	public static final byte[] True_bry = Bry_.new_ascii_(True_str), False_bry = Bry_.new_ascii_(False_str);
+	public static final byte[] True_bry = Bry_.new_a7(True_str), False_bry = Bry_.new_a7(False_str);
 	public static boolean		cast_(Object obj)				{try {return (Boolean)obj;} catch (Exception e) {throw Err_.type_mismatch_exc_(e, boolean.class, obj);}}
 	public static boolean		cast_or_(Object obj, boolean v)	{try {return (Boolean)obj;} catch (Exception e) {Err_.Noop(e); return v;}}
 	public static boolean		By_int(int v) {return v != 0;}

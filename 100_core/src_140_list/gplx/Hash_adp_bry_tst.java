@@ -50,19 +50,19 @@ class Hash_adp_bry_fxt {
 	public void Clear() {}
 	public Hash_adp_bry_fxt New_cs() {hash = Hash_adp_bry.cs_(); return this;}
 	public Hash_adp_bry_fxt New_ci() {hash = Hash_adp_bry.ci_ascii_(); return this;}
-	public Hash_adp_bry_fxt Add(String key) {byte[] key_bry = Bry_.new_utf8_(key); hash.Add(key_bry, key_bry); return this;}
+	public Hash_adp_bry_fxt Add(String key) {byte[] key_bry = Bry_.new_u8(key); hash.Add(key_bry, key_bry); return this;}
 	public Hash_adp_bry_fxt Count_tst(int expd) {Tfds.Eq(expd, hash.Count()); return this;}
 	public Hash_adp_bry_fxt Get_bry_tst(String key) {return Get_bry_tst(key, key);}
 	public Hash_adp_bry_fxt Get_bry_tst(String key, String expd) {
-		byte[] key_bry = Bry_.new_utf8_(key); 
+		byte[] key_bry = Bry_.new_u8(key); 
 		byte[] actl_bry = (byte[])hash.Get_by_bry(key_bry);
-		Tfds.Eq(expd, String_.new_utf8_(actl_bry));
+		Tfds.Eq(expd, String_.new_u8(actl_bry));
 		return this;
 	}
 	public Hash_adp_bry_fxt Get_mid_tst(String key, int bgn, int end, String expd) {
-		byte[] key_bry = Bry_.new_utf8_(key); 
+		byte[] key_bry = Bry_.new_u8(key); 
 		byte[] actl_bry = (byte[])hash.Get_by_mid(key_bry, bgn, end);
-		Tfds.Eq(expd, String_.new_utf8_(actl_bry));
+		Tfds.Eq(expd, String_.new_u8(actl_bry));
 		return this;
 	}
 }

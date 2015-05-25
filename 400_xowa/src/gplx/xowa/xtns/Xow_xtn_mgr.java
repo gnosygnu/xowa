@@ -20,7 +20,7 @@ import gplx.core.primitives.*; import gplx.core.btries.*;
 import gplx.xowa.xtns.cite.*; import gplx.xowa.xtns.imaps.*; import gplx.xowa.xtns.relatedSites.*; import gplx.xowa.xtns.proofreadPage.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.xowa.xtns.insiders.*; import gplx.xowa.xtns.indicators.*;
 public class Xow_xtn_mgr implements GfoInvkAble {
-	private OrderedHash regy = OrderedHash_.new_bry_();
+	private Ordered_hash regy = Ordered_hash_.new_bry_();
 	public int Count() {return regy.Count();}
 	public Cite_xtn_mgr Xtn_cite() {return xtn_cite;} private Cite_xtn_mgr xtn_cite;
 	public Imap_xtn_mgr Xtn_imap() {return xtn_imap;} private Imap_xtn_mgr xtn_imap;
@@ -63,20 +63,20 @@ public class Xow_xtn_mgr implements GfoInvkAble {
 	public void Init_by_app(Xoae_app app) {
 		int regy_len = regy.Count();
 		for (int i = 0; i < regy_len; i++) {
-			Xox_mgr mgr = (Xox_mgr)regy.FetchAt(i);
+			Xox_mgr mgr = (Xox_mgr)regy.Get_at(i);
 			mgr.Xtn_init_by_app(app);
 		}
 	}
 	public Xow_xtn_mgr Init_by_wiki(Xowe_wiki wiki) {
 		int regy_len = regy.Count();
 		for (int i = 0; i < regy_len; i++) {
-			Xox_mgr mgr = (Xox_mgr)regy.FetchAt(i);
+			Xox_mgr mgr = (Xox_mgr)regy.Get_at(i);
 			mgr.Xtn_init_by_wiki(wiki);
 		}
 		return this;
 	}
-	public Xox_mgr Get_at(int i) {return (Xox_mgr)regy.FetchAt(i);}
-	public Xox_mgr Get_or_fail(byte[] key) {Object rv = regy.Fetch(key); if (rv == null) throw Err_.new_fmt_("unknown xtn: {0}", String_.new_utf8_(key)); return (Xox_mgr)rv;}
+	public Xox_mgr Get_at(int i) {return (Xox_mgr)regy.Get_at(i);}
+	public Xox_mgr Get_or_fail(byte[] key) {Object rv = regy.Get_by(key); if (rv == null) throw Err_.new_fmt_("unknown xtn: {0}", String_.new_u8(key)); return (Xox_mgr)rv;}
 	private Xox_mgr Add(Xoae_app app, Xox_mgr xtn) {
 		xtn.Xtn_ctor_by_app(app);
 		regy.Add(xtn.Xtn_key(), xtn);

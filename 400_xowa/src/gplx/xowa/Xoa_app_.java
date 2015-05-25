@@ -26,7 +26,7 @@ public class Xoa_app_ {
 		boot_mgr.Run(args);
 	}
 	public static final String Name = "xowa";
-	public static final String Version = "2.5.2.1";
+	public static final String Version = "2.5.4.1";
 	public static String Build_date = "2012-12-30 00:00:00";
 	public static String Op_sys;
 	public static String User_agent = "";
@@ -63,7 +63,7 @@ class Xoa_app_boot_mgr {
 		log_wtr = usr_dlg.Log_wkr(); log_wtr.Log_to_session_fmt("env.init: version=~{0}", Xoa_app_.Version);
 		GfuiEnv_.Init_swt(args, Xoa_app_.class); 
 		Io_url jar_url = Env_.AppUrl();
-		Xoa_app_.Build_date = Io_mgr._.QueryFil(jar_url).ModifiedTime().XtoUtc().XtoStr_fmt("yyyy-MM-dd HH:mm");
+		Xoa_app_.Build_date = Io_mgr.I.QueryFil(jar_url).ModifiedTime().XtoUtc().XtoStr_fmt("yyyy-MM-dd HH:mm");
 		log_wtr.Log_to_session_fmt("env.init: jar_url=~{0}; build_date=~{1}", jar_url.NameAndExt(), Xoa_app_.Build_date);
 		log_wtr.Log_to_session_fmt("env.init: op_sys=~{0}", Op_sys.Cur().Xto_str());
 		chkpoint = "init_env";
@@ -82,7 +82,7 @@ class Xoa_app_boot_mgr {
 			.Fmt_hdr_(hdr)
 			.Expd_add_many
 			(	App_cmd_arg.opt_("root_dir").Example_url_("C:\\xowa").Note_("root directory for xowa; defaults to current directory of xowa.jar")
-			,	App_cmd_arg.opt_("user_dir").Example_url_("C:\\xowa\\user\\" + Xou_user.Key_xowa_user).Note_("directory for user_data; defaults to '/xowa/user/" + Xou_user.Key_xowa_user + "'")
+			,	App_cmd_arg.opt_("user_dir").Example_url_("C:\\xowa\\user\\" + Xoue_user.Key_xowa_user).Note_("directory for user_data; defaults to '/xowa/user/" + Xoue_user.Key_xowa_user + "'")
 			,	App_cmd_arg.opt_("wiki_dir").Example_url_("C:\\xowa\\wiki\\").Note_("directory for wikis; defaults to '/xowa/wiki/'")
 			,	App_cmd_arg.opt_("bin_dir_name").Example_("windows").Note_("platform-dependent directory name inside /xowa/bin/; valid values are 'linux', 'macosx', 'windows', 'linux_64', 'macosx_64', 'windows_64'; defaults to detected version")
 			,	App_cmd_arg.opt_("app_mode").Example_("gui").Note_("type of app to run; valid values are 'gui', 'cmd', 'server', 'http_server'; defaults to 'gui'")
@@ -122,7 +122,7 @@ class Xoa_app_boot_mgr {
 			// init vars
 			Io_url jar_dir = Env_.AppUrl().OwnerDir();
 			Io_url root_dir = args_mgr.Args_get("root_dir").Val_as_url_rel_dir_or(jar_dir, jar_dir);
-			Io_url user_dir = args_mgr.Args_get("user_dir").Val_as_url_rel_dir_or(root_dir.GenSubDir("user"), root_dir.GenSubDir_nest("user", Xou_user.Key_xowa_user));
+			Io_url user_dir = args_mgr.Args_get("user_dir").Val_as_url_rel_dir_or(root_dir.GenSubDir("user"), root_dir.GenSubDir_nest("user", Xoue_user.Key_xowa_user));
 			Io_url wiki_dir = args_mgr.Args_get("wiki_dir").Val_as_url_rel_dir_or(root_dir.GenSubDir("wiki"), root_dir.GenSubDir("wiki"));
 			Io_url cmd_file = args_mgr.Args_get("cmd_file").Val_as_url_rel_fil_or(jar_dir, root_dir.GenSubFil("xowa.gfs"));
 			String app_mode = args_mgr.Args_get("app_mode").Val_as_str_or("gui");
@@ -154,7 +154,7 @@ class Xoa_app_boot_mgr {
 			app.Usr_dlg().Log_wkr_(app.Log_wtr());	// NOTE: log_wtr must be set for cmd-line (else process will fail);
 
 			// run gfs
-			gplx.xowa.users.prefs.Prefs_rename_mgr._.Check(app.User().Fsys_mgr().App_data_cfg_user_fil());
+			gplx.xowa.users.prefs.Prefs_rename_mgr._.Check(app.Usere().Fsys_mgr().App_data_cfg_user_fil());
 			try {app.Gfs_mgr().Run_url(cmd_file); chkpoint = "run_url";}
 			catch (Exception e) {
 				usr_dlg.Warn_many("", "", "script file failed: ~{0} ~{1} ~{2}", chkpoint, cmd_file.Raw(), Err_.Message_gplx(e));
@@ -201,7 +201,7 @@ class Xoa_app_boot_mgr {
 	}
 	private static byte[] System_lang() {
 		String lang_code = Env_.Env_prop__user_language();
-		byte[] lang_code_bry = Bry_.new_ascii_(lang_code);
+		byte[] lang_code_bry = Bry_.new_a7(lang_code);
 		Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key(lang_code_bry);
 		return lang_itm == null ? Xol_lang_.Key_en : lang_itm.Key();
 	}

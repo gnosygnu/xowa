@@ -36,7 +36,9 @@ public class Fsm_atr_fil {
 		int dir_id = Get_dir_id_or_neg1(dir); 
 		return dir_id == Int_.Neg1 ? Fsd_fil_itm.Null : tbl_fil.Select_or_null(dir_id, fil);
 	}
-	public boolean				Select_thm(Fsd_thm_itm rv, int dir_id, int fil_id) {return tbl_thm.Select_itm_by_fil_width(dir_id, fil_id, rv);}
+	public boolean				Select_thm(boolean exact, Fsd_thm_itm rv, int dir_id, int fil_id) {
+		return exact ? tbl_thm.Select_itm_by_w_exact(dir_id, fil_id, rv) : tbl_thm.Select_itm_by_w_near(dir_id, fil_id, rv);
+	}
 	public int				Insert_fil(Fsd_fil_itm rv, byte[] dir, byte[] fil, int ext_id, int bin_db_id, long bin_len, Io_stream_rdr bin_rdr) {
 		int dir_id = Get_dir_id_or_make(dir);
 		int fil_id = Get_fil_id_or_make(Tid_none, dir_id, fil, ext_id, bin_db_id, bin_len);

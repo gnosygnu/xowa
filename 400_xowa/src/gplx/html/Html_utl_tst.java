@@ -43,20 +43,20 @@ class Html_utl_fxt {
 		tmp_bfr.Clear();
 	}
 	public void Test_del_comments(String src, String expd) {
-		byte[] actl = Html_utl.Del_comments(tmp_bfr, Bry_.new_utf8_(src));
-		Tfds.Eq(expd, String_.new_ascii_(actl));
+		byte[] actl = Html_utl.Del_comments(tmp_bfr, Bry_.new_u8(src));
+		Tfds.Eq(expd, String_.new_a7(actl));
 	}
 	public void Test_escape_html(boolean lt, boolean gt, boolean amp, boolean quote, boolean apos, String src, String expd) {
-		byte[] actl = Html_utl.Escape_html_as_bry(Bry_.new_ascii_(src), lt, gt, amp, quote, apos);
-		Tfds.Eq(expd, String_.new_ascii_(actl));
+		byte[] actl = Html_utl.Escape_html_as_bry(Bry_.new_a7(src), lt, gt, amp, quote, apos);
+		Tfds.Eq(expd, String_.new_a7(actl));
 	}
 	public void Test_escape_for_atr(String src, boolean quote_is_apos, String expd) {
 		byte[] actl = Html_utl.Escape_for_atr_val_as_bry(tmp_bfr, quote_is_apos ? Byte_ascii.Apos : Byte_ascii.Quote, src);
-		Tfds.Eq(expd, String_.new_utf8_(actl));
+		Tfds.Eq(expd, String_.new_u8(actl));
 	}
 	public void Test_unescape_html(boolean lt, boolean gt, boolean amp, boolean quote, boolean apos, String src, String expd) {
-		byte[] bry = Bry_.new_utf8_(src);
+		byte[] bry = Bry_.new_u8(src);
 		byte[] actl = Html_utl.Unescape(false, tmp_bfr, bry, 0, bry.length, lt, gt, amp, quote, apos);
-		Tfds.Eq(expd, String_.new_ascii_(actl));
+		Tfds.Eq(expd, String_.new_a7(actl));
 	}
 }

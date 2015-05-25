@@ -55,11 +55,11 @@ class Gfs_parser_ctx {
 		cur_nde.Atrs_add(nde);
 		return nde;
 	}
-	public void Cur_nde_from_stack() {cur_nde = (Gfs_nde)nodes.FetchAtLast();}
-	public void Stack_add() {nodes.Add(cur_nde);} ListAdp nodes = ListAdp_.new_();
+	public void Cur_nde_from_stack() {cur_nde = (Gfs_nde)nodes.Get_at_last();}
+	public void Stack_add() {nodes.Add(cur_nde);} List_adp nodes = List_adp_.new_();
 	public void Stack_pop(int pos) {
 		if (nodes.Count() < 2) err_mgr.Fail_nde_stack_empty(this, pos);	// NOTE: need at least 2 items; 1 to pop and 1 to set as current
-		ListAdp_.DelAt_last(nodes);
+		List_adp_.DelAt_last(nodes);
 		Cur_nde_from_stack();
 	}
 	public Gfs_err_mgr Err_mgr() {return err_mgr;} Gfs_err_mgr err_mgr = new Gfs_err_mgr();
@@ -122,5 +122,5 @@ class Gfs_err_mgr {
 				default:						bfr.Add_byte(b); break;
 			}
 		}
-	}	static final byte[] Esc_nl = Bry_.new_ascii_("\\n"), Esc_cr = Bry_.new_ascii_("\\r"), Esc_tab = Bry_.new_ascii_("\\t");
+	}	static final byte[] Esc_nl = Bry_.new_a7("\\n"), Esc_cr = Bry_.new_a7("\\r"), Esc_tab = Bry_.new_a7("\\t");
 }

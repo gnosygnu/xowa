@@ -21,15 +21,15 @@ public class Html_entity_ {
 	  Nl_str = "&#10;"
 	;
 	public static final byte[]
-	  Lt_bry = Bry_.new_ascii_("&lt;"), Gt_bry = Bry_.new_ascii_("&gt;")
-	, Amp_bry = Bry_.new_ascii_("&amp;"), Quote_bry = Bry_.new_ascii_("&quot;")
-	, Apos_num_bry = Bry_.new_ascii_("&#39;")
-	, Apos_key_bry = Bry_.new_ascii_("&apos;")
-	, Eq_bry = Bry_.new_ascii_("&#61;")
-	, Nl_bry = Bry_.new_ascii_(Nl_str), Space_bry = Bry_.new_ascii_("&#32;")
-	, Pipe_bry = Bry_.new_ascii_("&#124;")
-	, Colon_bry = Bry_.new_ascii_("&#58;"), Underline_bry = Bry_.new_ascii_("&#95;"), Asterisk_bry = Bry_.new_ascii_("&#42;")
-	, Brack_bgn_bry = Bry_.new_ascii_("&#91;"), Brack_end_bry = Bry_.new_ascii_("&#93;")
-	, Nbsp_num_bry = Bry_.new_ascii_("&#160;")
+	  Lt_bry = Bry_.new_a7("&lt;"), Gt_bry = Bry_.new_a7("&gt;")
+	, Amp_bry = Bry_.new_a7("&amp;"), Quote_bry = Bry_.new_a7("&quot;")
+	, Apos_num_bry = Bry_.new_a7("&#39;")
+	, Apos_key_bry = Bry_.new_a7("&apos;")
+	, Eq_bry = Bry_.new_a7("&#61;")
+	, Nl_bry = Bry_.new_a7(Nl_str), Space_bry = Bry_.new_a7("&#32;")
+	, Pipe_bry = Bry_.new_a7("&#124;")
+	, Colon_bry = Bry_.new_a7("&#58;"), Underline_bry = Bry_.new_a7("&#95;"), Asterisk_bry = Bry_.new_a7("&#42;")
+	, Brack_bgn_bry = Bry_.new_a7("&#91;"), Brack_end_bry = Bry_.new_a7("&#93;")
+	, Nbsp_num_bry = Bry_.new_a7("&#160;")
 	;
 }

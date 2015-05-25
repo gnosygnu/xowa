@@ -43,7 +43,7 @@ public class Pfunc_ifexist_tst {
 	}
 	@Test  public void Media_y_file_v1() {// DATE:2014-07-04
 		Pfunc_ifexist.Mgr.Clear();
-		Xof_meta_itm meta_itm = fxt.Wiki().File_mgr().Meta_mgr().Get_itm_or_new(Bry_.new_ascii_("A.png"));
+		Xof_meta_itm meta_itm = fxt.Wiki().File_mgr().Meta_mgr().Get_itm_or_new(Bry_.new_a7("A.png"));
 		meta_itm.Orig_exists_(Bool_.Y_byte);
 		fxt.Test_parse_tmpl_str_test("{{#ifexist:Media:A.png|y|n}}", "{{test}}", "y");
 	}

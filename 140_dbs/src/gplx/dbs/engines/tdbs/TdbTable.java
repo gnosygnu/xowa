@@ -40,7 +40,7 @@ public class TdbTable {
 			GfoNde drow = rows.FetchAt_asGfoNde(rowIdx);
 			wtr.WriteLeafBgn("row");
 			for (int i = 0; i < drow.Flds().Count(); i++)
-				wtr.WriteData(drow.Flds().FetchAt(i).Key(), drow.ReadAt(i));
+				wtr.WriteData(drow.Flds().Get_at(i).Key(), drow.ReadAt(i));
 			wtr.WriteLeafEnd();					
 		}
 		wtr.WriteNodeEnd();

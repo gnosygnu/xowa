@@ -512,7 +512,7 @@ class Xow_toc_mgr_fxt {
 	}
 	public void Test_html_toc(String raw, String expd) {
 		toc_mgr.Clear();
-		byte[] raw_bry = Bry_.new_utf8_(raw);
+		byte[] raw_bry = Bry_.new_u8(raw);
 		Xop_root_tkn root = fxt.Ctx().Tkn_mkr().Root(raw_bry);
 		fxt.Parser().Parse_page_all_clear(root, fxt.Ctx(), fxt.Ctx().Tkn_mkr(), raw_bry);
 		toc_mgr.Html(fxt.Page(), Xoh_wtr_ctx.Basic, raw_bry, tmp);

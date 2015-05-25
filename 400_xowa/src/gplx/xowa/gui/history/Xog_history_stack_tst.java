@@ -50,13 +50,13 @@ class Xog_history_stack_fxt {
 	}	private Xoae_app app; private Xowe_wiki wiki; private Xog_history_stack stack = new Xog_history_stack(); private Xoa_url_parser url_parser;
 	public Xog_history_stack_fxt Test_cur(String expd) {
 		Xog_history_itm page = stack.Cur_itm();
-		String actl = page == null ? null : String_.new_utf8_(page.Page());
+		String actl = page == null ? null : String_.new_u8(page.Page());
 		Tfds.Eq(expd, actl, "cur");
 		return this;
 	}
 	public Xog_history_stack_fxt Test_cur_qargs(String expd) {
 		Xog_history_itm page = stack.Cur_itm();
-		String actl = page == null ? null : String_.new_utf8_(page.Qarg());
+		String actl = page == null ? null : String_.new_u8(page.Qarg());
 		Tfds.Eq(expd, actl, "cur_qargs");
 		return this;
 	}
@@ -71,11 +71,11 @@ class Xog_history_stack_fxt {
 		return this;
 	}
 	public Xog_history_stack_fxt Exec_add_one(String ttl_str, String arg_str) {
-		byte[] ttl_bry = Bry_.new_utf8_(ttl_str);
+		byte[] ttl_bry = Bry_.new_u8(ttl_str);
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry);
 		Xoae_page page = Xoae_page.test_(wiki, ttl);
 		byte[] url_bry = ttl_bry;
-		if (arg_str != null) url_bry = Bry_.Add(url_bry, Bry_.new_utf8_(arg_str));
+		if (arg_str != null) url_bry = Bry_.Add(url_bry, Bry_.new_u8(arg_str));
 		Xoa_url url = url_parser.Parse(url_bry);
 		page.Url_(url);  // set url b/c history_mgr.Add uses url
 		stack.Add(Xog_history_mgr.new_(page));

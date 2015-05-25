@@ -16,9 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
-import gplx.lists.*; /*HashAdp_list*/
+import gplx.lists.*; /*Hash_adp_list*/
 class GfuiWinKeyCmdMgr implements GfuiWinOpenAble, GfoInvkAble, GfoEvObj {
-	private HashAdp_list listHash = HashAdp_list.new_();
+	private Hash_adp_list listHash = Hash_adp_list.new_();
 	public GfoEvMgr EvMgr() {if (evMgr == null) evMgr = GfoEvMgr.new_(this); return evMgr;} private GfoEvMgr evMgr;
 	public void Open_exec(GfuiWin form, GfuiElemBase owner, GfuiElemBase sub) {
 		int keyVal = sub.Click_key().Val(); if (sub.Click_key().Eq(IptKey_.None)) return;
@@ -32,9 +32,9 @@ class GfuiWinKeyCmdMgr implements GfuiWinOpenAble, GfoInvkAble, GfoEvObj {
 		if (GfuiTextBox_.as_(sender) != null				// is sender textBox?
 			&& !Enm_.HasInt(keyVal, IptKey_.Alt.Val())		// does key not have alt
 			) return false;									// ignore keys from textbox if they do not have alt
-		ListAdp elemList = (ListAdp)listHash.Fetch(keyVal); if (elemList == null) return false;
+		List_adp elemList = (List_adp)listHash.Get_by(keyVal); if (elemList == null) return false;
 		for (int i = 0; i < elemList.Count(); i++) {
-			GfuiElem elem = (GfuiElem)elemList.FetchAt(i);
+			GfuiElem elem = (GfuiElem)elemList.Get_at(i);
 			if (elem.Visible())
 				elem.Click();
 		}

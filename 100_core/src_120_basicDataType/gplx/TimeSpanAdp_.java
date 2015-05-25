@@ -36,7 +36,7 @@ public class TimeSpanAdp_ {
 	public static TimeSpanAdp from_(long bgn) {return TimeSpanAdp_.fracs_(Env_.TickCount() - bgn);}
 	public static final long parse_null = Long_.MinValue;
 	public static TimeSpanAdp parse_(String raw) {
-		byte[] bry = Bry_.new_utf8_(raw);
+		byte[] bry = Bry_.new_u8(raw);
 		long fracs = parse_to_fracs(bry, 0, bry.length, false);
 		return fracs == parse_null ? null : TimeSpanAdp_.fracs_(fracs);
 	}

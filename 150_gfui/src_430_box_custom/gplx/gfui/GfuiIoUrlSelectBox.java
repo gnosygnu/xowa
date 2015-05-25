@@ -30,7 +30,7 @@ public abstract class GfuiIoUrlSelectBox extends GfuiElemBase {
 	public GfuiLbl Label() {return label;} GfuiLbl label;
 	public Io_url Url() {return Io_url_.new_any_(pathBox.TextMgr().Val());}
 	public Io_url StartingFolder() {return startingFolder;}
-	public void StartingFolder_set(Io_url v) {this.startingFolder = v;} Io_url startingFolder = Io_url_.Null;
+	public void StartingFolder_set(Io_url v) {this.startingFolder = v;} Io_url startingFolder = Io_url_.Empty;
 	@Override public void Focus() {pathBox.Focus();}
 
 	void SelectAction() {

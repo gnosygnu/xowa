@@ -25,11 +25,11 @@ public class Wdata_dict_mainsnak {
 	, Tid_type									= 4
 	;
 	public static byte[] 
-	  Bry_snaktype								= Bry_.new_ascii_("snaktype")
-	, Bry_property								= Bry_.new_ascii_("property")
-	, Bry_hash									= Bry_.new_ascii_("hash")
-	, Bry_datavalue								= Bry_.new_ascii_("datavalue")
-	, Bry_type									= Bry_.new_ascii_("type")
+	  Bry_snaktype								= Bry_.new_a7("snaktype")
+	, Bry_property								= Bry_.new_a7("property")
+	, Bry_hash									= Bry_.new_a7("hash")
+	, Bry_datavalue								= Bry_.new_a7("datavalue")
+	, Bry_type									= Bry_.new_a7("type")
 	;
 	public static final Hash_adp_bry Dict = Hash_adp_bry.cs_()
 	.Add_bry_byte(Bry_snaktype					, Tid_snaktype)

@@ -30,14 +30,14 @@ public class Orig_fil_itm {
 	public Io_url Fil_url() {
 		if (fil_url == null) {
 			byte[] fil_url_bry = Bry_.Add(fil_dir_url, fil_name);
-			fil_url = Io_url_.new_fil_(String_.new_utf8_(fil_url_bry));
+			fil_url = Io_url_.new_fil_(String_.new_u8(fil_url_bry));
 		}
 		return fil_url;
 	}	private Io_url fil_url;
 	public Orig_fil_itm Init_by_make(Io_url url, byte[] name_bry, int ext_id) {
 		this.fil_url = url;
 		this.fil_name = name_bry;
-		this.fil_dir_url = Bry_.new_utf8_(url.OwnerDir().Raw());
+		this.fil_dir_url = Bry_.new_u8(url.OwnerDir().Raw());
 		this.fil_ext_id = ext_id;
 		return this;
 	}

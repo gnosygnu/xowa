@@ -32,6 +32,6 @@ public class Wmf_dump_itm implements gplx.CompareAble {
 	} 	private byte[] status_msg;
 	public byte Status_tid() {return status_tid;} private byte status_tid;
 	public int compareTo(Object obj) {Wmf_dump_itm comp = (Wmf_dump_itm)obj; return Bry_.Compare(wiki_abrv, comp.wiki_abrv);}
-	private static byte[] Status_msg_dump_complete = Bry_.new_ascii_("Dump complete"), Status_msg_dump_in_progress = Bry_.new_ascii_("Dump in progress");
+	private static byte[] Status_msg_dump_complete = Bry_.new_a7("Dump complete"), Status_msg_dump_in_progress = Bry_.new_a7("Dump in progress");
 	public static final byte Status_tid_complete = 0, Status_tid_working = 1, Status_tid_error = 2;
 }

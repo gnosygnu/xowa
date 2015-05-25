@@ -38,10 +38,10 @@ class Xob_image_cmd_fxt {
 		H_(h);
 		return this;
 	}
-	public Xob_image_cmd_fxt Name_(String v) {name = Bry_.new_ascii_(v); return this;}
-	public Xob_image_cmd_fxt Media_type_(String v) {media_type = Bry_.new_ascii_(v); return this;}
+	public Xob_image_cmd_fxt Name_(String v) {name = Bry_.new_a7(v); return this;}
+	public Xob_image_cmd_fxt Media_type_(String v) {media_type = Bry_.new_a7(v); return this;}
 	public Xob_image_cmd_fxt Minor_mime_(byte[] v) {minor_mime = v; return this;}
-	public Xob_image_cmd_fxt Minor_mime_(String v) {return Minor_mime_(Bry_.new_ascii_(v));}
+	public Xob_image_cmd_fxt Minor_mime_(String v) {return Minor_mime_(Bry_.new_a7(v));}
 	public Xob_image_cmd_fxt W_(int v) {w = v; return this;}
 	public Xob_image_cmd_fxt H_(int v) {h = v; return this;}
 	public Xob_image_cmd_fxt Test(int expd) {

@@ -45,7 +45,7 @@ class Xolg_vnt_grp_fmtr_fxt {
 	}
 	public void Init_grp(String text, String... langs) {
 		vnt_grp = new Xolg_vnt_grp();
-		vnt_grp.Text_(Bry_.new_utf8_(text));
+		vnt_grp.Text_(Bry_.new_u8(text));
 		int len = langs.length;
 		String lang_code = "";
 		for (int i = 0; i < len; ++i) {
@@ -53,7 +53,7 @@ class Xolg_vnt_grp_fmtr_fxt {
 			if (i % 2 == 0)
 				lang_code = lang;
 			else {
-				Xolg_vnt_itm itm = new Xolg_vnt_itm(Bry_.new_utf8_(lang_code), Bry_.new_utf8_(lang));
+				Xolg_vnt_itm itm = new Xolg_vnt_itm(Bry_.new_u8(lang_code), Bry_.new_u8(lang));
 				vnt_grp.Add(itm);
 			}
 		}
@@ -61,7 +61,7 @@ class Xolg_vnt_grp_fmtr_fxt {
 	public void Test_to_str(String page_href, String selected_vnt, String expd) {
 		Xolg_vnt_grp_fmtr vnt_grp_fmtr = new Xolg_vnt_grp_fmtr();
 		Bry_bfr bfr = Bry_bfr.new_();
-		vnt_grp_fmtr.Init(vnt_grp, Bry_.new_utf8_(page_href), Bry_.new_utf8_(selected_vnt));
+		vnt_grp_fmtr.Init(vnt_grp, Bry_.new_u8(page_href), Bry_.new_u8(selected_vnt));
 		vnt_grp_fmtr.XferAry(bfr, 0);
 		Tfds.Eq_str_lines(expd, bfr.Xto_str_and_clear());
 	}

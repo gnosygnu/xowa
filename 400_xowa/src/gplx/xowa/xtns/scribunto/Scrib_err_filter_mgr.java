@@ -17,15 +17,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 public class Scrib_err_filter_mgr implements GfoInvkAble {
-	private final OrderedHash hash_by_mod = OrderedHash_.new_();
+	private final Ordered_hash hash_by_mod = Ordered_hash_.new_();
 	public void Clear() {hash_by_mod.Clear();}
 	public boolean Count_gt_0() {return hash_by_mod.Count() > 0;}
 	public boolean Match(String mod, String fnc, String err) {
-		ListAdp itms = Get_itms_or_null(mod, fnc); if (itms == null) return false;
+		List_adp itms = Get_itms_or_null(mod, fnc); if (itms == null) return false;
 		int itms_len = itms.Count();
 		boolean match = false;
 		for (int i = 0; i < itms_len; ++i) {
-			Scrib_err_filter_itm itm = (Scrib_err_filter_itm)itms.FetchAt(i);
+			Scrib_err_filter_itm itm = (Scrib_err_filter_itm)itms.Get_at(i);
 			if (String_.HasAtBgn(err, itm.Err())) {
 				match = true;
 				itm.Count_actl_add_1();
@@ -35,7 +35,7 @@ public class Scrib_err_filter_mgr implements GfoInvkAble {
 		return match;
 	}
 	public void Add(int count_expd, String mod, String fnc, String err, String comment) {
-		ListAdp itms = Get_itms_or_null(mod, fnc);
+		List_adp itms = Get_itms_or_null(mod, fnc);
 		if (itms == null) itms = New_itms(mod, fnc);
 		itms.Add(new Scrib_err_filter_itm(count_expd, mod, fnc, err, comment));
 	}
@@ -43,35 +43,35 @@ public class Scrib_err_filter_mgr implements GfoInvkAble {
 		Bry_bfr bfr = Bry_bfr.new_(8);
 		int i_len = hash_by_mod.Count();
 		for (int i = 0; i < i_len; ++i) {
-			OrderedHash fncs = (OrderedHash)hash_by_mod.FetchAt(i);
+			Ordered_hash fncs = (Ordered_hash)hash_by_mod.Get_at(i);
 			int j_len = fncs.Count();
 			for (int j = 0; j < j_len; ++j) {
-				ListAdp errs = (ListAdp)fncs.FetchAt(j);
+				List_adp errs = (List_adp)fncs.Get_at(j);
 				int k_len = errs.Count();
 				for (int k = 0; k < k_len; ++k) {
-					Scrib_err_filter_itm err = (Scrib_err_filter_itm)errs.FetchAt(k);
+					Scrib_err_filter_itm err = (Scrib_err_filter_itm)errs.Get_at(k);
 					bfr.Add_int_variable(err.Count_actl()).Add_byte_pipe().Add_int_variable(err.Count_expd())
-						.Add_byte_pipe().Add_str_utf8(err.Mod()).Add_byte_pipe().Add_str_utf8(err.Fnc()).Add_byte_pipe().Add_str_utf8(err.Err())
-						.Add_byte_pipe().Add_str_utf8(err.Comment())
+						.Add_byte_pipe().Add_str_u8(err.Mod()).Add_byte_pipe().Add_str_u8(err.Fnc()).Add_byte_pipe().Add_str_u8(err.Err())
+						.Add_byte_pipe().Add_str_u8(err.Comment())
 						.Add_byte_nl();
 				}
 			}
 		}
 		return bfr.Xto_str_and_clear();
 	}
-	private ListAdp Get_itms_or_null(String mod, String fnc) {
-		OrderedHash hash_by_fnc = (OrderedHash)hash_by_mod.Fetch(mod); if (hash_by_fnc == null) return null;
-		return (ListAdp)hash_by_fnc.Fetch(fnc);
+	private List_adp Get_itms_or_null(String mod, String fnc) {
+		Ordered_hash hash_by_fnc = (Ordered_hash)hash_by_mod.Get_by(mod); if (hash_by_fnc == null) return null;
+		return (List_adp)hash_by_fnc.Get_by(fnc);
 	}
-	private ListAdp New_itms(String mod, String fnc) {
-		OrderedHash hash_by_fnc = (OrderedHash)hash_by_mod.Fetch(mod);
+	private List_adp New_itms(String mod, String fnc) {
+		Ordered_hash hash_by_fnc = (Ordered_hash)hash_by_mod.Get_by(mod);
 		if (hash_by_fnc == null) {
-			hash_by_fnc = OrderedHash_.new_();
+			hash_by_fnc = Ordered_hash_.new_();
 			hash_by_mod.Add(mod, hash_by_fnc);
 		}
-		ListAdp list_of_err = (ListAdp)hash_by_fnc.Fetch(fnc);
+		List_adp list_of_err = (List_adp)hash_by_fnc.Get_by(fnc);
 		if (list_of_err == null) {
-			list_of_err = ListAdp_.new_();
+			list_of_err = List_adp_.new_();
 			hash_by_fnc.Add(fnc, list_of_err);
 		}
 		return list_of_err;

@@ -21,11 +21,11 @@ public class Popup_history_page implements Xows_page {
 	public Xows_special_meta Special_meta() {return Xows_special_meta_.Itm__popup_history;}
 	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
 		Xoae_page cur_page = wiki.Appe().Gui_mgr().Browser_win().Active_page(); if (cur_page == null) return;
-		OrderedHash hash = cur_page.Popup_mgr().Itms();
+		Ordered_hash hash = cur_page.Popup_mgr().Itms();
 		int len = hash.Count();
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_k004();
 		for (int i = len - 1; i > -1; --i) {
-			Xow_popup_itm itm = (Xow_popup_itm)hash.FetchAt(i);
+			Xow_popup_itm itm = (Xow_popup_itm)hash.Get_at(i);
 			if (Ttl_chk(itm.Page_ttl())) continue;
 			fmtr_main.Bld_bfr_many(bfr, itm.Page_href(), itm.Page_ttl().Full_txt());
 		}

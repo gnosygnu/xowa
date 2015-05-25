@@ -17,11 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 class Xowd_db_file_hash {
-	private final OrderedHash hash = OrderedHash_.new_();
+	private final Ordered_hash hash = Ordered_hash_.new_();
 	public int Count_total() {return count_total;} private int count_total;
 	public void Clear() {hash.Clear(); count_total = 0;}
 	public void Del(Xowd_db_file file) {
-		OrderedHash tids = (OrderedHash)hash.Fetch(file.Tid());
+		Ordered_hash tids = (Ordered_hash)hash.Get_by(file.Tid());
 		if (tids == null) throw Err_.new_("unknown file.tid: {0}=url", file.Url());
 		if (!tids.Has(file.Id())) throw Err_.new_("unknown file.id: {0}=url", file.Url());
 		tids.Del(file.Id());
@@ -29,16 +29,16 @@ class Xowd_db_file_hash {
 	}
 	public void Add_or_new(Xowd_db_file file) {
 		byte tid = file.Tid();
-		OrderedHash tids = (OrderedHash)hash.Fetch(tid);
+		Ordered_hash tids = (Ordered_hash)hash.Get_by(tid);
 		if (tids == null) {
-			tids = OrderedHash_.new_();
+			tids = Ordered_hash_.new_();
 			hash.Add(tid, tids);
 		}
 		tids.Add(file.Id(), file);
 		++count_total;
 	}
 	public int Count_of_tid(byte tid) {
-		OrderedHash tids = (OrderedHash)hash.Fetch(tid);
+		Ordered_hash tids = (Ordered_hash)hash.Get_by(tid);
 		return tids == null ? 0 : tids.Count();
 	}
 }

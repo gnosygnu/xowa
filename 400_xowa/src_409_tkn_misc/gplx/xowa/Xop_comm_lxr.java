@@ -91,6 +91,6 @@ public class Xop_comm_lxr implements Xop_lxr {
 	private static final int End_len = End_ary.length;
 	public static final Xop_comm_lxr _ = new Xop_comm_lxr(); Xop_comm_lxr() {}
 	private static final String Xowa_skip_text_str = "XOWA_SKIP";
-	private static final byte[] Xowa_skip_text_bry = Bry_.new_ascii_(Xowa_skip_text_str);
-	public static final byte[] Xowa_skip_comment_bry = Bry_.new_ascii_("<!--" + Xowa_skip_text_str + "-->");
+	private static final byte[] Xowa_skip_text_bry = Bry_.new_a7(Xowa_skip_text_str);
+	public static final byte[] Xowa_skip_comment_bry = Bry_.new_a7("<!--" + Xowa_skip_text_str + "-->");
 }

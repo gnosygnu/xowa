@@ -32,11 +32,11 @@ public class Scrib_kv_utl_ {
 			rv[i] = KeyVal_.int_(i + Scrib_core.Base_1, vals[i]);
 		return rv;
 	}
-	public static KeyVal[] base1_list_(ListAdp list) {
+	public static KeyVal[] base1_list_(List_adp list) {
 		int len = list.Count();
 		KeyVal[] rv = new KeyVal[len];
 		for (int i = 0; i < len; i++)
-			rv[i] = KeyVal_.int_(i + Scrib_core.Base_1, list.FetchAt(i));
+			rv[i] = KeyVal_.int_(i + Scrib_core.Base_1, list.Get_at(i));
 		list.Clear();
 		return rv;
 	}

@@ -19,7 +19,7 @@ package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
 public class Xoh_cmd_mgr {
 	public int Count() {return cmds.Count();}
 	public void Clear() {cmds.Clear();}
-	public void Add(Xoh_cmd_itm itm) {cmds.Add(itm);} ListAdp cmds = ListAdp_.new_();
+	public void Add(Xoh_cmd_itm itm) {cmds.Add(itm);} List_adp cmds = List_adp_.new_();
 	public void Exec(Xoae_app app, Xoae_page page) {
 		int len = cmds.Count();
 		if (len == 0) return;
@@ -29,7 +29,7 @@ public class Xoh_cmd_mgr {
 			if (usr_dlg.Canceled()) {usr_dlg.Prog_none(GRP_KEY, "cmds.done", ""); app.Log_wtr().Queue_enabled_(false); return;}
 			Xoh_cmd_itm itm = null;
 			try {
-				itm = (Xoh_cmd_itm)cmds.FetchAt(i);
+				itm = (Xoh_cmd_itm)cmds.Get_at(i);
 				itm.Hcmd_exec(app, usr_dlg, page);
 				itm.Hcmd_write(app, usr_dlg, page);
 			} catch (Exception e) {throw Err_.err_(e, "failed to execute html cmd: name={0}", itm == null ? "unknown" : itm.Hcmd_id());}

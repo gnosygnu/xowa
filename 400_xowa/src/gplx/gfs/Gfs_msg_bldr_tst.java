@@ -56,9 +56,9 @@ class Gfs_msg_bldr_fxt {
 	}
 	public void Test_build(String raw, GfoMsg... expd) {
 		GfoMsg root = msg_bldr.Bld(raw);		
-		Tfds.Eq_str_lines(Xto_str(expd), Xto_str(Xto_ary(root)));
+		Tfds.Eq_str_lines(Xto_str(expd), Xto_str(To_ary(root)));
 	}
-	GfoMsg[] Xto_ary(GfoMsg msg) {
+	GfoMsg[] To_ary(GfoMsg msg) {
 		int len = msg.Subs_count();
 		GfoMsg[] rv = new GfoMsg[len];
 		for (int i = 0; i < len; i++)

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.srls.dsvs.*;
 public class Xob_ns_file_itm_parser extends Dsv_wkr_base {
-	private byte[] ns_ids_bry; private String name; private final ListAdp rslts = ListAdp_.new_();
+	private byte[] ns_ids_bry; private String name; private final List_adp rslts = List_adp_.new_();
 	private Xow_ns_mgr ns_mgr; private byte db_file_tid; private boolean mode_each = false;
 	public void Ctor(byte db_file_tid, Xow_ns_mgr ns_mgr) {
 		this.db_file_tid = db_file_tid; this.ns_mgr = ns_mgr;
@@ -28,7 +28,7 @@ public class Xob_ns_file_itm_parser extends Dsv_wkr_base {
 	@Override public boolean Write_bry(Dsv_tbl_parser parser, int fld_idx, byte[] src, int bgn, int end) {
 		switch (fld_idx) {
 			case 0: ns_ids_bry	= Bry_.Mid(src, bgn, end); return true;
-			case 1: name		= String_.new_utf8_(src, bgn, end); return true;
+			case 1: name		= String_.new_u8(src, bgn, end); return true;
 			default: return false;
 		}
 	}		
@@ -53,7 +53,7 @@ public class Xob_ns_file_itm_parser extends Dsv_wkr_base {
 				ns_ids[i] = ns_mgr.Ords_get_at(i).Id();
 		}
 		else
-			ns_ids = Int_.Ary_parse(String_.new_utf8_(ns_ids_bry), ",");
+			ns_ids = Int_.Ary_parse(String_.new_u8(ns_ids_bry), ",");
 		if (ns_ids.length == 0) throw Err_.new_("map.invalid.ns_missing; src={0}", this.Src());
 		if (String_.Len_eq_0(name)) {	// no name; auto-generate
 			int ns_id_1st = ns_ids[0];	// take 1st ns_id
@@ -66,9 +66,9 @@ public class Xob_ns_file_itm_parser extends Dsv_wkr_base {
 	}
 	public Xob_ns_file_itm[] To_ary(byte[] bry) {
 		this.Load_by_bry(bry);
-		return (Xob_ns_file_itm[])rslts.Xto_ary(Xob_ns_file_itm.class);
+		return (Xob_ns_file_itm[])rslts.To_ary(Xob_ns_file_itm.class);
 	}
-	private static final byte[] ns_ids_bry_each = Bry_.new_ascii_("<each>");
+	private static final byte[] ns_ids_bry_each = Bry_.new_a7("<each>");
 	/*
 "" -> no rules; return "default"; generates "text-001" and lumps all ns into it
 "*|<id>|3700|2" -> auto-generate per ns

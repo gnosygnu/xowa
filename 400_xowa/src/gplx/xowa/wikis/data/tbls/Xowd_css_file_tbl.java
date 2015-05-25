@@ -48,13 +48,13 @@ public class Xowd_css_file_tbl implements RlsAble {
 		return Select_by_stmt(stmt);
 	}
 	private Xowd_css_file_itm[] Select_by_stmt(Db_stmt stmt) {
-		ListAdp rv = ListAdp_.new_();
+		List_adp rv = List_adp_.new_();
 		Db_rdr rdr = stmt.Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next())
 				rv.Add(new_itm(rdr));
 		} finally {rdr.Rls();}
-		return (Xowd_css_file_itm[])rv.Xto_ary_and_clear(Xowd_css_file_itm.class);
+		return (Xowd_css_file_itm[])rv.To_ary_and_clear(Xowd_css_file_itm.class);
 	}
 	private Xowd_css_file_itm new_itm(Db_rdr rdr) {return new Xowd_css_file_itm(rdr.Read_int(fld_css_id), rdr.Read_str(fld_path), rdr.Read_bry(fld_data));}
 }

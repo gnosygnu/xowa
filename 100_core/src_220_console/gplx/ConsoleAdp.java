@@ -40,7 +40,7 @@ public class ConsoleAdp implements GfoInvkAble, ConsoleDlg {
 	void ClearTempText() {
 		if (tempText == null) return;
 		if (Env_.Mode_debug()) {WriteText_lang(String_.CrLf); return;}
-		int count = backspace_by_bytes ? Bry_.new_utf8_(tempText).length : String_.Len(tempText);
+		int count = backspace_by_bytes ? Bry_.new_u8(tempText).length : String_.Len(tempText);
 		String moveBack = String_.Repeat("\b", count);
 		this.WriteText_lang(moveBack);						// move cursor back to beginning of line
 		this.WriteText_lang(String_.Repeat(" ", count));	// overwrite tempText with space

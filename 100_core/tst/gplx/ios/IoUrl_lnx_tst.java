@@ -46,7 +46,7 @@ public class IoUrl_lnx_tst {
 	@Test  public void OwnerDir() {
 		fx.tst_OwnerDir(Io_url_.lnx_dir_("/home/lnxusr"), Io_url_.lnx_dir_("/home"));
 		fx.tst_OwnerDir(Io_url_.lnx_dir_("/fil.txt"), Io_url_.lnx_dir_("/"));
-		fx.tst_OwnerDir(Io_url_.lnx_dir_("/"), Io_url_.Null);
+		fx.tst_OwnerDir(Io_url_.lnx_dir_("/"), Io_url_.Empty);
 	}
 	@Test  public void NameAndExt() {
 		fx.tst_NameAndExt(Io_url_.lnx_fil_("/fil.txt"), "fil.txt");

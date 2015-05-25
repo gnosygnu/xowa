@@ -59,24 +59,24 @@ public class Scrib_lib_text implements Scrib_lib {
 		return rslt.Init_obj(rv);
 	}
 	private String Init_lib_text_get_msg(Xow_msg_mgr msg_mgr, String msg_key) {
-		return String_.new_utf8_(msg_mgr.Val_by_key_obj(Bry_.new_utf8_(msg_key)));
+		return String_.new_u8(msg_mgr.Val_by_key_obj(Bry_.new_u8(msg_key)));
 	}
 }
 class Scrib_lib_text_ {
 	public static KeyVal[] Init_nowiki_protocols(Xowe_wiki wiki) {
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b128();
-		OrderedHash protocols = Xoo_protocol_itm.Regy;
+		Ordered_hash protocols = Xoo_protocol_itm.Regy;
 		int len = protocols.Count();
-		ListAdp rv = ListAdp_.new_();
+		List_adp rv = List_adp_.new_();
 		for (int i = 0; i < len; i++) {
-			Xoo_protocol_itm itm = (Xoo_protocol_itm)protocols.FetchAt(i);
+			Xoo_protocol_itm itm = (Xoo_protocol_itm)protocols.Get_at(i);
 			if (itm.Text_ends_w_colon()) {	// To convert the protocol into a case-insensitive Lua pattern, we need to replace letters with a character class like [Xx] and insert a '%' before various punctuation.
 				KeyVal kv = Init_nowiki_protocols_itm(bfr, itm);
 				rv.Add(kv);
 			}
 		}
 		bfr.Mkr_rls();
-		return (KeyVal[])rv.Xto_ary(KeyVal.class);
+		return (KeyVal[])rv.To_ary(KeyVal.class);
 	}
 	private static KeyVal Init_nowiki_protocols_itm(Bry_bfr bfr, Xoo_protocol_itm itm) {
 		byte[] key = itm.Key_wo_colon_bry();
@@ -108,5 +108,5 @@ class Scrib_lib_text_ {
 		}
 		bfr.Add(Colon_encoded);
 		return KeyVal_.new_(itm.Key_wo_colon_str(), bfr.Xto_str_and_clear());
-	}	private static final byte[] Colon_encoded = Bry_.new_ascii_("&#58;");
+	}	private static final byte[] Colon_encoded = Bry_.new_a7("&#58;");
 }

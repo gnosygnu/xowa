@@ -102,7 +102,7 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 				case Xow_page_tid.Tid_json:		app.Wiki_mgr().Wdata_mgr().Write_json_as_html(bfr, page_ttl.Page_db(), data_raw); break;
 			}
 		}
-		if (	wiki.Domain_tid() != Xow_domain_.Tid_int_home	// allow home wiki to use javascript
+		if (	wiki.Domain_tid() != Xow_domain_type_.Tid_home	// allow home wiki to use javascript
 			&&  !page_tid_uses_pre) {							// if .js, .css or .lua, skip test; may have js fragments, but entire text is escaped and put in pre; don't show spurious warning; DATE:2013-11-21
 			app.Html_mgr().Js_cleaner().Clean_bfr(wiki, page_ttl, bfr, bfr_page_bgn);
 		}
@@ -122,7 +122,7 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 //				vnt_mgr.Convert_ttl
 		}
 		if	(ns_id == Xow_ns_.Id_file)			// if [[File]], add boilerplate header
-			app.File_main_wkr().Bld_html(wiki, ctx, bfr, page.Ttl(), wiki.Cfg_file_page(), page.File_queue());
+			app.Ns_file_page_mgr().Bld_html(wiki, ctx, page, bfr, page.Ttl(), wiki.Cfg_file_page(), page.File_queue());
 		gplx.xowa.html.tidy.Xoh_tidy_mgr tidy_mgr = app.Html_mgr().Tidy_mgr();
 		boolean tidy_enabled = tidy_mgr.Enabled();
 		Bry_bfr hdom_bfr = tidy_enabled ? app.Utl__bfr_mkr().Get_m001() : bfr;	// if tidy, then write to tidy_bfr; note that bfr already has <html> and <head> written to it, so this can't be passed to tidy; DATE:2014-06-11
@@ -165,5 +165,5 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 		if (data_raw_len > 0)		// do not add nl if empty String
 			bfr.Add_byte_nl();	// per MW:EditPage.php: "Ensure there's a newline at the end, otherwise adding lines is awkward."
 	}
-	private static final byte[] Content_editable_bry = Bry_.new_ascii_(" contenteditable=\"true\"");
+	private static final byte[] Content_editable_bry = Bry_.new_a7(" contenteditable=\"true\"");
 }

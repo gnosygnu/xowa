@@ -22,9 +22,9 @@ public class IoRecycleBin {
 	public IoEngine_xrg_recycleFil			Send_xrg(Io_url url) {return IoEngine_xrg_recycleFil.gplx_(url);}
 	public void							Recover(Io_url url) {
 		String_bldr sb = String_bldr_.new_();
-		ListAdp list = Regy_search(url, sb);
+		List_adp list = Regy_search(url, sb);
 		int listCount = list.Count(); if (listCount > 1) throw Err_.new_("found more than 1 url").Add("count", list.Count());
-		Io_url trgUrl = (Io_url)list.FetchAt(0);
+		Io_url trgUrl = (Io_url)list.Get_at(0);
 		IoEngine_xrg_xferFil.move_(url, trgUrl).ReadOnlyFails_(true).Overwrite_(false).Exec();
 		IoEngine_xrg_saveFilStr.new_(FetchRegistryUrl(url), sb.XtoStr()).Exec();
 	}
@@ -34,8 +34,8 @@ public class IoRecycleBin {
 		String text = String_.ConcatWith_any("|", url.NameAndExt_noDirSpr(), xrg.Url().GenRelUrl_orEmpty(url.OwnerRoot()), xrg.Uuid().XtoStr(), xrg.AppName(), xrg.Time());
 		IoEngine_xrg_saveFilStr.new_(regyUrl, text).Append_().Exec();
 	}
-	public ListAdp Regy_search(Io_url url, String_bldr sb) {
-		ListAdp list = ListAdp_.new_();
+	public List_adp Regy_search(Io_url url, String_bldr sb) {
+		List_adp list = List_adp_.new_();
 		Io_url regyUrl = FetchRegistryUrl(url);
 		String[] lines = IoEngine_xrg_loadFilStr.new_(regyUrl).ExecAsStrAry();
 		int linesLen = Array_.Len(lines); 

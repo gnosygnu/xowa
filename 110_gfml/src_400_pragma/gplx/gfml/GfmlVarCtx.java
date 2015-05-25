@@ -18,13 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfml; import gplx.*;
 class GfmlVarCtx {
 	public String Key() {return key;} private String key;
-	public void AddReplace(GfmlVarItm itm) {hash.AddReplace(itm.Key(), itm);}
+	public void Add_if_dupe_use_nth(GfmlVarItm itm) {hash.Add_if_dupe_use_nth(itm.Key(), itm);}
 	public void Del(String key) {hash.Del(key);}
 	public String Fetch_Val(String key) {
-		GfmlVarItm itm = (GfmlVarItm)hash.Fetch(key); if (itm == null) return null;
+		GfmlVarItm itm = (GfmlVarItm)hash.Get_by(key); if (itm == null) return null;
 		return itm.TknVal();
 	}
-	HashAdp hash = HashAdp_.new_();
+	Hash_adp hash = Hash_adp_.new_();
 	public static GfmlVarCtx new_(String key) {
 		GfmlVarCtx rv = new GfmlVarCtx();
 		rv.key = key;
@@ -32,9 +32,9 @@ class GfmlVarCtx {
 	}
 }
 class GfmlVarCtx_ {
-	public static GfmlVarCtx FetchFromCacheOrNew(HashAdp cache, String ctxKey) {
-		HashAdp ctxRegy = FetchRegyOrNew(cache);
-		GfmlVarCtx rv = (GfmlVarCtx)ctxRegy.Fetch(ctxKey);
+	public static GfmlVarCtx FetchFromCacheOrNew(Hash_adp cache, String ctxKey) {
+		Hash_adp ctxRegy = FetchRegyOrNew(cache);
+		GfmlVarCtx rv = (GfmlVarCtx)ctxRegy.Get_by(ctxKey);
 		if (rv == null) {
 			rv = (String_.Eq(ctxKey, DefaultKey))
 				? default_(ctxKey)
@@ -45,15 +45,15 @@ class GfmlVarCtx_ {
 	}
 	static GfmlVarCtx default_(String ctxKey) {
 		GfmlVarCtx rv = GfmlVarCtx.new_(ctxKey);
-		rv.AddReplace(GfmlVarItm.new_("t", GfmlTkn_.raw_("\t"), GfmlVarCtx_.DefaultKey));
-		rv.AddReplace(GfmlVarItm.new_("n", GfmlTkn_.raw_(String_.CrLf), GfmlVarCtx_.DefaultKey));
+		rv.Add_if_dupe_use_nth(GfmlVarItm.new_("t", GfmlTkn_.raw_("\t"), GfmlVarCtx_.DefaultKey));
+		rv.Add_if_dupe_use_nth(GfmlVarItm.new_("n", GfmlTkn_.raw_(String_.CrLf), GfmlVarCtx_.DefaultKey));
 		return rv;
 	}
-	static HashAdp FetchRegyOrNew(HashAdp cache) {
+	static Hash_adp FetchRegyOrNew(Hash_adp cache) {
 		String key = "gfml.cacheKeys.ctxRegy";
-		HashAdp rv = (HashAdp)cache.Fetch(key);
+		Hash_adp rv = (Hash_adp)cache.Get_by(key);
 		if (rv == null) {
-			rv = HashAdp_.new_();
+			rv = Hash_adp_.new_();
 			cache.Add(key, rv);
 		}
 		return rv;

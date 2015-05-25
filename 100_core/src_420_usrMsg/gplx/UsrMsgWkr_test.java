@@ -22,7 +22,7 @@ public class UsrMsgWkr_test implements UsrMsgWkr {
 	}
 	public boolean HasWarn(UsrMsg um) {
 		for (int i = 0; i < msgs.Count(); i++) {
-			UsrMsg found = (UsrMsg)msgs.FetchAt(i);
+			UsrMsg found = (UsrMsg)msgs.Get_at(i);
 			if (String_.Eq(um.XtoStr(), found.XtoStr())) return true;
 		}
 		return false;
@@ -34,5 +34,5 @@ public class UsrMsgWkr_test implements UsrMsgWkr {
 		dlg.Reg(UsrMsgWkr_.Type_Warn, wkr);
 		return wkr;
 	}
-	ListAdp msgs = ListAdp_.new_();
+	List_adp msgs = List_adp_.new_();
 }

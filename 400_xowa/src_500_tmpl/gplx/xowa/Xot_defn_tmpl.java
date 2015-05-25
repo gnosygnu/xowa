@@ -53,7 +53,7 @@ public class Xot_defn_tmpl implements Xot_defn {
 		}
 		return bfr.To_bry_and_rls();
 	}
-	private static final byte[] Bry_onlyinclude_bgn = Bry_.new_ascii_("<onlyinclude>"), Bry_onlyinclude_end = Bry_.new_ascii_("</onlyinclude>");
+	private static final byte[] Bry_onlyinclude_bgn = Bry_.new_a7("<onlyinclude>"), Bry_onlyinclude_end = Bry_.new_a7("</onlyinclude>");
 	private static int Bry_onlyinclude_bgn_len = Bry_onlyinclude_bgn.length, Bry_onlyinclude_end_len = Bry_onlyinclude_end.length;
 	public void Rls() {
 		if (root != null) root.Clear();
@@ -64,7 +64,7 @@ public class Xot_defn_tmpl implements Xot_defn {
 		if (root == null) Parse_tmpl(ctx);
 		Xoae_page page = ctx.Cur_page();
 		if (!page.Tmpl_stack_add(full_name)) {
-			bfr.Add_str("<span class=\"error\">Template loop detected:" + String_.new_utf8_(name) + "</span>");
+			bfr.Add_str_a7("<span class=\"error\">Template loop detected:" + String_.new_u8(name) + "</span>");
 			return false;
 		}
 		boolean rv = true;

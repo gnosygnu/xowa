@@ -210,8 +210,8 @@ public class Imap_xnde_html_all_tst {
 class Imap_xnde_html_fxt {
 	public void Reset() {
 		fxt.Reset();
-		Xol_msg_itm msg = fxt.Wiki().Msg_mgr().Get_or_make(Bry_.new_ascii_("imagemap_description"));
-		msg.Atrs_set(Bry_.new_ascii_("click here"), false, false);
+		Xol_msg_itm msg = fxt.Wiki().Msg_mgr().Get_or_make(Bry_.new_a7("imagemap_description"));
+		msg.Atrs_set(Bry_.new_a7("click here"), false, false);
 	}
 	public Xop_fxt Fxt() {return fxt;} private Xop_fxt fxt = new Xop_fxt();
 	public void Test_html_full_str(String raw, String expd) {fxt.Test_html_full_str(raw, expd);}

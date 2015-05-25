@@ -33,16 +33,16 @@ public class Xoi_firefox_installer implements GfoInvkAble {
 		program.Run(trg_xpi.Raw());
 	}
 	public void Generate() {
-		Io_mgr._.CopyFil(src_xpi, trg_xpi, true);
+		Io_mgr.I.CopyFil(src_xpi, trg_xpi, true);
 		Io_zip_mgr_base._.Unzip_to_dir(trg_xpi, trg_xpi_package);
 		Pref_gen();
 		Io_zip_mgr_base._.Zip_dir(trg_xpi_package, trg_xpi);
 	}
 	private void Pref_gen() {
 		Io_url prefs_fil = trg_xpi_package.GenSubFil_nest("defaults", "preferences", "prefs.js");
-		String prefs_str = Io_mgr._.LoadFilStr(prefs_fil);
+		String prefs_str = Io_mgr.I.LoadFilStr(prefs_fil);
 		prefs_str = Pref_update(prefs_str, "extensions.xowa_viewer.xowa_app", Env_.AppUrl().Raw());
-		Io_mgr._.SaveFilStr(prefs_fil, prefs_str);
+		Io_mgr.I.SaveFilStr(prefs_fil, prefs_str);
 	}
 	public static String Pref_update(String src, String key, String val) {		
 		String find = String_.Format("pref(\"{0}\"", key); // EX: 'pref("key"'

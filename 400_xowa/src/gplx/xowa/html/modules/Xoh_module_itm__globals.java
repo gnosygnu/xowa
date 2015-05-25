@@ -66,17 +66,17 @@ public class Xoh_module_itm__globals implements Xoh_module_itm {
 		wtr.Write_js_global_ini_atr_obj(Key_wgMonthNamesShort			, months_short);
 	}
 	public static final byte[]	// NOTE: most of these are for the table-sorter
-	  Key_mode_is_gui					= Bry_.new_ascii_("mode_is_gui")
-	, Key_mode_is_http					= Bry_.new_ascii_("mode_is_http")
-	, Key_http_port						= Bry_.new_ascii_("http-port")
-	, Key_sort_descending				= Bry_.new_ascii_("sort-descending")
-	, Key_sort_ascending				= Bry_.new_ascii_("sort-ascending")
-	, Key_wgContentLanguage				= Bry_.new_ascii_("wgContentLanguage")
-	, Key_wgSeparatorTransformTable		= Bry_.new_ascii_("wgSeparatorTransformTable")
-	, Key_wgDigitTransformTable			= Bry_.new_ascii_("wgDigitTransformTable")
-	, Key_wgDefaultDateFormat			= Bry_.new_ascii_("wgDefaultDateFormat")
-	, Key_wgMonthNames					= Bry_.new_ascii_("wgMonthNames")
-	, Key_wgMonthNamesShort				= Bry_.new_ascii_("wgMonthNamesShort")
+	  Key_mode_is_gui					= Bry_.new_a7("mode_is_gui")
+	, Key_mode_is_http					= Bry_.new_a7("mode_is_http")
+	, Key_http_port						= Bry_.new_a7("http-port")
+	, Key_sort_descending				= Bry_.new_a7("sort-descending")
+	, Key_sort_ascending				= Bry_.new_a7("sort-ascending")
+	, Key_wgContentLanguage				= Bry_.new_a7("wgContentLanguage")
+	, Key_wgSeparatorTransformTable		= Bry_.new_a7("wgSeparatorTransformTable")
+	, Key_wgDigitTransformTable			= Bry_.new_a7("wgDigitTransformTable")
+	, Key_wgDefaultDateFormat			= Bry_.new_a7("wgDefaultDateFormat")
+	, Key_wgMonthNames					= Bry_.new_a7("wgMonthNames")
+	, Key_wgMonthNamesShort				= Bry_.new_a7("wgMonthNamesShort")
 	;
 	private static byte[] Html_js_table_months(Xoh_module_wtr tmp_wtr, Xow_msg_mgr msg_mgr, int january_id, int december_id) {
 		tmp_wtr.Write_js_ary_bgn();
@@ -96,10 +96,10 @@ public class Xoh_module_itm__globals implements Xoh_module_itm {
 		return tmp_wtr.Bfr().Xto_bry_and_clear();
 	}
 	private static final byte[]
-	  Date_format_default			= Bry_.new_ascii_("dmy")
-	, Num_format_digits				= Bry_.new_ascii_("['', '']")
-	, Var_xowa_root_dir				= Bry_.new_ascii_("xowa_root_dir")
-	, Var_xowa_mode_is_server		= Bry_.new_ascii_("xowa_mode_is_server")
+	  Date_format_default			= Bry_.new_a7("dmy")
+	, Num_format_digits				= Bry_.new_a7("['', '']")
+	, Var_xowa_root_dir				= Bry_.new_a7("xowa_root_dir")
+	, Var_xowa_mode_is_server		= Bry_.new_a7("xowa_mode_is_server")
 	;
 	private static byte[] Url_core_css, Url_core_js, Url_DOMContentLoaded_js;
 }

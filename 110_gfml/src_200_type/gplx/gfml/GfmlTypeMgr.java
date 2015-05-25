@@ -107,23 +107,23 @@ class GfmlFldPool {
 	public GfmlTkn Keyed_PopNextAsTkn() {return GfmlTkn_.val_(Keyed_PopNext().Name());} // helper method for GfmlFrame_nde
 	public GfmlFld Keyed_PopNext() {
 		if (keyedRegy.Count() == 0) return GfmlFld.Null;
-		GfmlFld rv = (GfmlFld)keyedRegy.FetchAt(0);
+		GfmlFld rv = (GfmlFld)keyedRegy.Get_at(0);
 		keyedRegy.Del(rv.Name());
 		return rv;
 	}
 	public GfmlFld Keyed_PopByKey(String key) {
-		GfmlFld rv = (GfmlFld)keyedRegy.Fetch(key); if (rv == null) return GfmlFld.Null;
+		GfmlFld rv = (GfmlFld)keyedRegy.Get_by(key); if (rv == null) return GfmlFld.Null;
 		keyedRegy.Del(rv.Name());
 		return rv;
 	}
 	@gplx.Internal protected int Keyd_Count() {return keyedRegy.Count();}
-	@gplx.Internal protected GfmlFld Keyd_FetchAt(int i) {return (GfmlFld)keyedRegy.FetchAt(i);}
+	@gplx.Internal protected GfmlFld Keyd_FetchAt(int i) {return (GfmlFld)keyedRegy.Get_at(i);}
 	public GfmlFld DefaultMember() {return defaultMember;} GfmlFld defaultMember = GfmlFld.Null;
 	@gplx.Internal protected GfmlType Type() {return type;} GfmlType type = GfmlType_.Null;
 	void InitByType(GfmlType type) {
 		this.type = type;
 		for (int i = 0; i < type.SubFlds().Count(); i++) {
-			GfmlFld fld = (GfmlFld)type.SubFlds().FetchAt(i);
+			GfmlFld fld = (GfmlFld)type.SubFlds().Get_at(i);
 			if (fld.Name_isKey())
 				keyedRegy.Add(fld.Name(), fld);
 			else {
@@ -131,7 +131,7 @@ class GfmlFldPool {
 			}
 		}
 	}
-	OrderedHash keyedRegy = OrderedHash_.new_();
+	Ordered_hash keyedRegy = Ordered_hash_.new_();
 	public static GfmlFldPool new_(GfmlType type) {
 		GfmlFldPool rv = new GfmlFldPool();
 		rv.InitByType(type);

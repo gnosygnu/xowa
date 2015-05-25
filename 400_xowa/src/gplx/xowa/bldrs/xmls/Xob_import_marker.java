@@ -20,22 +20,22 @@ import gplx.gfui.*; import gplx.xowa.bldrs.cmds.utils.*;
 public class Xob_import_marker {
 	private final Hash_adp_bry in_progress_hash = Hash_adp_bry.cs_();
 	public void Bgn(Xowe_wiki wiki) {
-		in_progress_hash.AddKeyVal(wiki.Domain_bry());
-		Io_mgr._.SaveFilStr(url_(wiki), "XOWA has created this file to indicate that an import is in progress. This file will be deleted once the import is completed.");
+		in_progress_hash.Add_as_key_and_val(wiki.Domain_bry());
+		Io_mgr.I.SaveFilStr(url_(wiki), "XOWA has created this file to indicate that an import is in progress. This file will be deleted once the import is completed.");
 	}
 	public void End(Xowe_wiki wiki) {
 		in_progress_hash.Del(wiki.Domain_bry());
-		Io_mgr._.DeleteFil_args(url_(wiki)).MissingFails_off().Exec();
+		Io_mgr.I.DeleteFil_args(url_(wiki)).MissingFails_off().Exec();
 	}
 	public boolean Chk(Xowe_wiki wiki) {
 		if (!wiki.App().App_type().Uid_is_gui()) return true;		// NOTE: ignore during Server / Console modes; DATE:2015-04-01
 		if (in_progress_hash.Has(wiki.Domain_bry())) return true;	// NOTE: ignore if currently building; different bldr commands call wiki.Init_assert() which may lead to fals checks;
 		Io_url url = url_(wiki);
-		if (!Io_mgr._.ExistsFil(url)) return true;
+		if (!Io_mgr.I.ExistsFil(url)) return true;
 		Xoae_app app = wiki.Appe();
 		app.Usr_dlg().Log_many("", "", "import.marker: marker found: url=~{0}", url.Raw());
-		byte[] incompete_msg_bry = app.User().Msg_mgr().Val_by_key_args(Bry_.new_ascii_("api-xowa.import.core.incomplete"), wiki.Domain_str());
-		int rslt = app.Gui_mgr().Kit().Ask_yes_no_cancel("", "", String_.new_utf8_(incompete_msg_bry));
+		byte[] incompete_msg_bry = app.Usere().Msg_mgr().Val_by_key_args(Bry_.new_a7("api-xowa.import.core.incomplete"), wiki.Domain_str());
+		int rslt = app.Gui_mgr().Kit().Ask_yes_no_cancel("", "", String_.new_u8(incompete_msg_bry));
 		switch (rslt) {
 			case Gfui_dlg_msg_.Btn_yes:		Xob_cleanup_cmd.Delete_wiki_sql(wiki); End(wiki); return false;	// delete wiki
 			case Gfui_dlg_msg_.Btn_no:		End(wiki); return true;		// delete marker

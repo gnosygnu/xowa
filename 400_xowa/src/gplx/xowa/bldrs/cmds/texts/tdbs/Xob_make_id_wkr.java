@@ -26,12 +26,12 @@ public class Xob_make_id_wkr extends Xob_itm_dump_base implements Xobd_wkr, GfoI
 	}
 	public void Wkr_run(Xowd_page_itm page) {
 		byte[] ttl = page.Ttl_page_db();
-		if (dump_bfr.Len() + row_fixed_len + ttl.length > dump_fil_len) Io_mgr._.AppendFilBfr(dump_url_gen.Nxt_url(), dump_bfr);
+		if (dump_bfr.Len() + row_fixed_len + ttl.length > dump_fil_len) Io_mgr.I.AppendFilBfr(dump_url_gen.Nxt_url(), dump_bfr);
 		Xotdb_page_itm_.Txt_id_save(dump_bfr, page);
 	}
 	public void Wkr_end() {
 		this.Term_dump(new Xob_make_cmd_site(bldr.Usr_dlg(), make_dir, make_fil_len));
-		if (delete_temp) Io_mgr._.DeleteDirDeep(temp_dir);
+		if (delete_temp) Io_mgr.I.DeleteDirDeep(temp_dir);
 	}
 	public void Wkr_print() {}
 	static final int row_fixed_len = 25 + 1 + 7;	// 25=5 base_85 flds; 1=Redirect; 7=dlm

@@ -19,7 +19,7 @@ package gplx.dbs.qrys; import gplx.*; import gplx.dbs.*;
 import gplx.dbs.engines.*;
 public class Db_stmt_sql implements Db_stmt {// used for formatting SQL statements; not used for actual insert into database
 	private static final String Key_na = ""; // key is not_available; only called by procs with signature of Val(<type> v);
-	private final ListAdp args = ListAdp_.new_();
+	private final List_adp args = List_adp_.new_();
 	private final Bry_bfr tmp_bfr = Bry_bfr.new_();
 	private final Bry_fmtr tmp_fmtr = Bry_fmtr.new_();
 	public void Ctor_stmt(Db_engine engine, Db_qry qry) {}
@@ -75,13 +75,13 @@ public class Db_stmt_sql implements Db_stmt {// used for formatting SQL statemen
 	public Db_stmt Val_bry(String k, byte[] v)	{return Add_bry(Bool_.N, k, v);}
 	public Db_stmt Val_bry(byte[] v)			{return Add_bry(Bool_.N, Key_na, v);}
 	private Db_stmt Add_bry(boolean where, String k, byte[] v) {// HACK: convert to String b/c tdb does not support byte[]
-		try {Add(k, Val_str_wrap(String_.new_utf8_(v)));} catch (Exception e) {throw Err_.err_(e, "failed to add value: type={0} val={1}", "byte[]", v.length);} 
+		try {Add(k, Val_str_wrap(String_.new_u8(v)));} catch (Exception e) {throw Err_.err_(e, "failed to add value: type={0} val={1}", "byte[]", v.length);} 
 		return this;
 	}
 	public Db_stmt Crt_bry_as_str(String k, byte[] v)	{return Add_bry_as_str(Bool_.Y, k, v);}
 	public Db_stmt Val_bry_as_str(String k, byte[] v)	{return Add_bry_as_str(Bool_.N, k, v);}
 	public Db_stmt Val_bry_as_str(byte[] v)				{return Add_bry_as_str(Bool_.N, Key_na, v);}
-	private Db_stmt Add_bry_as_str(boolean where, String k, byte[] v) {return Add_str(where, k, String_.new_utf8_(v));}
+	private Db_stmt Add_bry_as_str(boolean where, String k, byte[] v) {return Add_str(where, k, String_.new_u8(v));}
 	public Db_stmt Crt_str(String k, String v)	{return Add_str(Bool_.Y, k, v);}
 	public Db_stmt Val_str(String k, String v)	{return Add_str(Bool_.N, k, v);}
 	public Db_stmt Val_str(String v)			{return Add_str(Bool_.N, Key_na, v);}
@@ -127,11 +127,11 @@ public class Db_stmt_sql implements Db_stmt {// used for formatting SQL statemen
 		args.Add(v);
 	}
 	public String Xto_sql() {
-		tmp_fmtr.Bld_bfr_many(tmp_bfr, (Object[])args.Xto_ary_and_clear(Object.class));
+		tmp_fmtr.Bld_bfr_many(tmp_bfr, (Object[])args.To_ary_and_clear(Object.class));
 		return tmp_bfr.Xto_str_and_clear();
 	}
 	public int Args_len() {return args.Count();}
-	public String Args_get_at(int i) {return (String)args.FetchAt(i);}
+	public String Args_get_at(int i) {return (String)args.Get_at(i);}
 	private String sql_orig; 
 	public Db_qry Qry() {return qry;} private Db_qry qry;
 	public Db_stmt Parse(Db_qry qry, String sql_str) {
@@ -141,7 +141,7 @@ public class Db_stmt_sql implements Db_stmt {// used for formatting SQL statemen
 		return this;
 	}
 	private static void Init_fmtr(Bry_bfr tmp_bfr, Bry_fmtr tmp_fmtr, String sql_str) {
-		byte[] sql_bry = Bry_.new_utf8_(sql_str);
+		byte[] sql_bry = Bry_.new_u8(sql_str);
 		int arg_idx = 0; int pos_prv = 0;
 		tmp_bfr.Clear();
 		while (true) {
@@ -155,9 +155,9 @@ public class Db_stmt_sql implements Db_stmt {// used for formatting SQL statemen
 		tmp_bfr.Add_mid(sql_bry, pos_prv, sql_bry.length);
 		tmp_fmtr.Fmt_(tmp_bfr.Xto_bry_and_clear());
 	}
-	public static String Xto_str(Bry_bfr tmp_bfr, Bry_fmtr tmp_fmtr, String sql_str, ListAdp args) {
+	public static String Xto_str(Bry_bfr tmp_bfr, Bry_fmtr tmp_fmtr, String sql_str, List_adp args) {
 		Init_fmtr(tmp_bfr, tmp_fmtr, sql_str);
-		Object[] ary = args.Xto_obj_ary();
+		Object[] ary = args.To_obj_ary();
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			Object obj = ary[i];

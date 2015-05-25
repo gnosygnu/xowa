@@ -20,7 +20,7 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.FocusTraversalPolicy;
 public class GfuiWinFocusMgr {
-	public ListAdp SubElems() {return subElems;} ListAdp subElems = ListAdp_.new_();
+	public List_adp SubElems() {return subElems;} List_adp subElems = List_adp_.new_();
 	public void InitForm() {this.Init(win);}
 	public void Init(GfuiWin win) {
 		subElems.Clear();
@@ -28,7 +28,7 @@ public class GfuiWinFocusMgr {
 	}
 	int InitRecursive(GfuiElem owner, int focusIdx) {
 		for (int i = 0; i < owner.SubElems().Count(); i++) {
-			GfuiElem sub = (GfuiElem)owner.SubElems().FetchAt(i);
+			GfuiElem sub = (GfuiElem)owner.SubElems().Get_at(i);
 			if (sub.Focus_able()) {
 				sub.Focus_idx_(focusIdx++);
 				subElems.Add(sub);
@@ -39,9 +39,9 @@ public class GfuiWinFocusMgr {
 	}
 	public GfuiElem Focus(boolean fwd, int cur) {
 		int nxt = fwd 
-			? cur == subElems.LastIndex() ? 0 : ++cur
-			: cur == 0 ? subElems.LastIndex() : --cur;
-		GfuiElem elm = (GfuiElem)subElems.FetchAt(nxt);
+			? cur == subElems.Idx_last() ? 0 : ++cur
+			: cur == 0 ? subElems.Idx_last() : --cur;
+		GfuiElem elm = (GfuiElem)subElems.Get_at(nxt);
 		elm.Focus();
 		return elm;
 	}
@@ -53,7 +53,7 @@ public class GfuiWinFocusMgr {
 	}	GfuiWinFocusMgr() {}
 }
 class FocusTraversalPolicy_cls_base extends FocusTraversalPolicy {
-	ListAdp elems; GfuiWinFocusMgr formFocusMgr;
+	List_adp elems; GfuiWinFocusMgr formFocusMgr;
 	public FocusTraversalPolicy_cls_base(GfuiWinFocusMgr formFocusMgr) {
 		this.elems = formFocusMgr.subElems;
 		this.formFocusMgr = formFocusMgr;
@@ -70,7 +70,7 @@ class FocusTraversalPolicy_cls_base extends FocusTraversalPolicy {
 			if (idx == elems.Count())
 				idx = 0;
 			GfuiElem elem = null;
-			try {elem = (GfuiElem)elems.FetchAt(idx);}
+			try {elem = (GfuiElem)elems.Get_at(idx);}
 			catch (Exception e) {
 				System.out.println(idx);
 				Err_.Noop(e);
@@ -97,10 +97,10 @@ class FocusTraversalPolicy_cls_base extends FocusTraversalPolicy {
 		while (true) {
 			idx--;
 			if (idx == -1)
-				idx = elems.Count() - ListAdp_.Base1;
+				idx = elems.Count() - List_adp_.Base1;
 			GfuiElem elem = null;
 			try {
-				elem = (GfuiElem)elems.FetchAt(idx);
+				elem = (GfuiElem)elems.Get_at(idx);
 //				System.out.println(elem.Key_of_GfuiElem() + " " + elem.Focus_able() + " " + elem.Visible());
 				if (elem.getClass().getName().equals("gplx.gfds.gbu.GbuGrid") && elem.Key_of_GfuiElem().equals("grid0")) {
 					System.out.println(elem.Key_of_GfuiElem() + " " + elem.Focus_able() + " " + elem.Visible());
@@ -127,7 +127,7 @@ class FocusTraversalPolicy_cls_base extends FocusTraversalPolicy {
 	public Component getDefaultComponent(Container focusCycleRoot) 	{return getFirstComponent(focusCycleRoot);}
 	public Component getFirstComponent(Container focusCycleRoot) 	{return elems_empty() ? focusCycleRoot : (Component)FetchAt(0).UnderElem();}
 	public Component getLastComponent(Container focusCycleRoot) 	{return elems_empty() ? focusCycleRoot : (Component)FetchAt(elems.Count() - 1).UnderElem();} 
-	GfuiElem FetchAt(int idx) {return (GfuiElem)elems.FetchAt(idx);}
+	GfuiElem FetchAt(int idx) {return (GfuiElem)elems.Get_at(idx);}
 	GxwElem GxwElemOf(Component c) {		
 		if (GxwElem.class.isAssignableFrom(c.getClass())) return (GxwElem)c;		
 		return (GxwElem)c.getParent(); // HACK: occurs for JComboBox when editable is true; focus is on MetalComboBox, with parent of JComboBox

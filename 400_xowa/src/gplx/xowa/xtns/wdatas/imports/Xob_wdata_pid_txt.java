@@ -36,8 +36,8 @@ class Wdata_idx_bldr_pid extends Wdata_idx_mgr_base {
 		wtr.Write(prop_key, pid);
 	}
 	public Wdata_idx_wtr Get_or_new(byte[] lang_bry) {
-		String lang = String_.Lower(String_.new_utf8_(lang_bry));	// NOTE: for some reason, both "en" and "En" can be added; normalize case
-		Object rv = hash.Fetch(lang);
+		String lang = String_.Lower(String_.new_u8(lang_bry));	// NOTE: for some reason, both "en" and "En" can be added; normalize case
+		Object rv = hash.Get_by(lang);
 		if (rv == null) {
 			Wdata_idx_wtr wtr = Wdata_idx_wtr.new_pid_(wiki, lang, dump_fil_len);
 			hash.Add(lang, wtr);

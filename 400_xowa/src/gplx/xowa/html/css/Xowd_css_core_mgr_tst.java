@@ -53,7 +53,7 @@ public class Xowd_css_core_mgr_tst {
 		( fxt.Make_file_itm(1, "a1.css", "a1_data")
 		, fxt.Make_file_itm(1, "b/b1.png", "b/b1_data")
 		);
-		Io_mgr._.DeleteDirDeep(src_dir);
+		Io_mgr.I.DeleteDirDeep(src_dir);
 		fxt.Init_fs(src_dir, file_ary);
 		fxt.Exec_set(src_dir, "desktop");
 		fxt.Test_skin_tbl(skin_ary);
@@ -65,7 +65,7 @@ class Xowd_css_core_mgr_fxt {
 	private Xowd_css_core_tbl core_tbl; private Xowd_css_file_tbl file_tbl;
 	public void Clear() {
 		Tfds.Now_enabled_y_();
-		Io_mgr._.InitEngine_mem();
+		Io_mgr.I.InitEngine_mem();
 		Db_conn_bldr.I.Reg_default_mem();
 		Db_conn conn = Db_conn_bldr.I.New(Io_url_.mem_fil_("mem/db/css.sqlite3"));
 		this.core_tbl = new Xowd_css_core_tbl(conn);
@@ -74,12 +74,12 @@ class Xowd_css_core_mgr_fxt {
 		file_tbl.Create_tbl();
 	}
 	public Xowd_css_core_itm Make_skin_itm(int id, String key, String updated_on) {return new Xowd_css_core_itm(id, key, DateAdp_.parse_gplx(updated_on));}
-	public Xowd_css_file_itm Make_file_itm(int skin_id, String path, String data) {return new Xowd_css_file_itm(skin_id, path, Bry_.new_utf8_(data));}
+	public Xowd_css_file_itm Make_file_itm(int skin_id, String path, String data) {return new Xowd_css_file_itm(skin_id, path, Bry_.new_u8(data));}
 	public Xowd_css_file_itm[] Make_file_ary(Xowd_css_file_itm... ary) {return ary;}
 	public Xowd_css_core_itm[] Make_skin_ary(Xowd_css_core_itm... ary) {return ary;}
 	public void Init_fs(Io_url css_dir, Xowd_css_file_itm[] file_ary) {
 		for (Xowd_css_file_itm itm : file_ary)
-			Io_mgr._.SaveFilBry(css_dir.GenSubFil(itm.Path()), itm.Data());
+			Io_mgr.I.SaveFilBry(css_dir.GenSubFil(itm.Path()), itm.Data());
 	}
 	public void Exec_set(Io_url css_dir, String key) {Xowd_css_core_mgr.Set(core_tbl, file_tbl, css_dir, key);}
 	public void Exec_get(Io_url css_dir, String key) {Xowd_css_core_mgr.Get(core_tbl, file_tbl, css_dir, key);}
@@ -92,19 +92,19 @@ class Xowd_css_core_mgr_fxt {
 		Tfds.Eq_str_lines(To_str(expd), To_str(actl));
 	}
 	public void Test_fs(Io_url css_dir, Xowd_css_file_itm[] expd) {
-		Io_url[] actl = Io_mgr._.QueryDir_args(css_dir).Recur_().ExecAsUrlAry();
+		Io_url[] actl = Io_mgr.I.QueryDir_args(css_dir).Recur_().ExecAsUrlAry();
 		int len = expd.length;
 		Tfds.Eq(len, actl.length);
 		for (int i = 0; i < len; ++i) {
 			Xowd_css_file_itm expd_itm = expd[i];
-			Tfds.Eq_bry(expd_itm.Data(), Io_mgr._.LoadFilBry(actl[i]));
+			Tfds.Eq_bry(expd_itm.Data(), Io_mgr.I.LoadFilBry(actl[i]));
 		}
 	}
 	private String To_str(Xowd_css_file_itm[] ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			Xowd_css_file_itm itm = ary[i];
-			bfr.Add_int_variable(itm.Css_id()).Add_byte_pipe().Add_str_utf8(itm.Path()).Add_byte_pipe().Add(itm.Data()).Add_byte_nl();
+			bfr.Add_int_variable(itm.Css_id()).Add_byte_pipe().Add_str_u8(itm.Path()).Add_byte_pipe().Add(itm.Data()).Add_byte_nl();
 		}			
 		return bfr.Xto_str_and_clear();
 	}
@@ -113,7 +113,7 @@ class Xowd_css_core_mgr_fxt {
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			Xowd_css_core_itm itm = ary[i];
-			bfr.Add_int_variable(itm.Id()).Add_byte_pipe().Add_str_utf8(itm.Key()).Add_byte_pipe().Add_str_utf8(itm.Updated_on().XtoStr_fmt_yyyyMMdd_HHmmss()).Add_byte_nl();
+			bfr.Add_int_variable(itm.Id()).Add_byte_pipe().Add_str_u8(itm.Key()).Add_byte_pipe().Add_str_u8(itm.Updated_on().XtoStr_fmt_yyyyMMdd_HHmmss()).Add_byte_nl();
 		}			
 		return bfr.Xto_str_and_clear();
 	}

@@ -33,10 +33,10 @@ class Xob_css_parser__url_fxt {
 	protected Xob_css_parser__url url_parser; private final Bry_bfr bfr = Bry_bfr.new_(32);
 	protected Xob_css_tkn__base cur_frag; protected byte[] src_bry;
 	@gplx.Virtual public void Clear() {
-		url_parser = new Xob_css_parser__url(Bry_.new_ascii_("site"));
+		url_parser = new Xob_css_parser__url(Bry_.new_a7("site"));
 	}
 	protected void Exec_parse(String src_str, int expd_tid, String expd_str) {
-		this.src_bry = Bry_.new_utf8_(src_str);
+		this.src_bry = Bry_.new_u8(src_str);
 		this.Exec_parse_hook();
 		cur_frag.Write(bfr, src_bry);
 		String actl_str = bfr.Xto_str_and_clear();

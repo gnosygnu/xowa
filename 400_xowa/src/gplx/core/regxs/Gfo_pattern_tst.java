@@ -59,25 +59,25 @@ public class Gfo_pattern_tst {
 }
 class Gfo_pattern_itm_fxt {
 	public void Clear() {}
-	public Gfo_pattern pattern_(String raw) {return new Gfo_pattern(Bry_.new_utf8_(raw));}
+	public Gfo_pattern pattern_(String raw) {return new Gfo_pattern(Bry_.new_u8(raw));}
 	public void Test_Match_y(Gfo_pattern pattern, String... itms) {Test_Match(pattern, itms, Bool_.Y);}
 	public void Test_Match_n(Gfo_pattern pattern, String... itms) {Test_Match(pattern, itms, Bool_.N);}
 	private void Test_Match(Gfo_pattern pattern, String[] itms, boolean expd) {
 		int len = itms.length;
 		for (int i = 0; i < len; i++) {
 			String itm = itms[i];
-			Tfds.Eq(expd, pattern.Match(Bry_.new_utf8_(itm)), "pattern={0} itm={1} expd={2}", String_.new_utf8_(pattern.Raw()), itm, expd);
+			Tfds.Eq(expd, pattern.Match(Bry_.new_u8(itm)), "pattern={0} itm={1} expd={2}", String_.new_u8(pattern.Raw()), itm, expd);
 		}
 	}
 	public Gfo_pattern_itm_wild itm_wild_() {return Gfo_pattern_itm_wild._;}
 	public Gfo_pattern_itm_text itm_text_(String raw) {
 		Gfo_pattern_itm_text rv = new Gfo_pattern_itm_text();
-		byte[] bry = Bry_.new_utf8_(raw);
+		byte[] bry = Bry_.new_u8(raw);
 		rv.Compile(bry, 0, bry.length);
 		return rv;
 	}
 	public void Test_Compile(String raw, Gfo_pattern_itm... expd) {
-		Gfo_pattern_itm[] actl = Gfo_pattern_itm_.Compile(Bry_.new_utf8_(raw));
+		Gfo_pattern_itm[] actl = Gfo_pattern_itm_.Compile(Bry_.new_u8(raw));
 		Tfds.Eq(Ary_xto_str(expd), Ary_xto_str(actl));
 	}
 	private static String Ary_xto_str(Gfo_pattern_itm[] ary) {

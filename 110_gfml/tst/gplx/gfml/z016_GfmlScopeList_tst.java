@@ -48,7 +48,7 @@ public class z016_GfmlScopeList_tst {
 			list.Add(itm);
 	}
 	void tst_Itm(GfmlScopeList list, GfmlDocPos pos, String expd) {
-		GfmlVarItm itm = (GfmlVarItm)list.Fetch(pos);
+		GfmlVarItm itm = (GfmlVarItm)list.Get_by(pos);
 		String actl = itm == null ? null : itm.TknVal();
 		Tfds.Eq(expd, actl);
 	}

@@ -42,7 +42,7 @@ public class Xop_log_property_wkr implements GfoInvkAble {
 	private void Include_props_add(String[] v) {
 		int len = v.length;
 		for (int i = 0; i < len; i++) {
-			byte[] bry = Bry_.new_utf8_(v[i]);
+			byte[] bry = Bry_.new_u8(v[i]);
 			include_props.Add_bry_bry(bry);
 		}
 		include_all = false;	// set include_all to false, since specific items added

@@ -20,7 +20,7 @@ import gplx.dbs.*; import gplx.fsdb.meta.*; import gplx.xowa.files.*;
 public class Fsd_thm_tbl implements RlsAble {
 	private final String tbl_name; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private final String fld_id, fld_owner_id, fld_w, fld_h, fld_time, fld_page, fld_bin_db_id, fld_size, fld_modified, fld_hash;
-	private final Db_conn conn; private Db_stmt stmt_insert, stmt_select_by_fil_w; private int mnt_id; private boolean schema_thm_page;
+	private final Db_conn conn; private Db_stmt stmt_insert, stmt_select_by_fil_exact, stmt_select_by_fil_near; private int mnt_id; private boolean schema_thm_page;
 	public Fsd_thm_tbl(Db_conn conn, boolean schema_is_1, int mnt_id, boolean schema_thm_page) {
 		this.conn = conn; this.mnt_id = mnt_id; this.schema_thm_page = schema_thm_page;
 		this.tbl_name = schema_is_1 ? "fsdb_xtn_thm" : "fsdb_thm";
@@ -44,7 +44,8 @@ public class Fsd_thm_tbl implements RlsAble {
 	}
 	public void Rls() {
 		stmt_insert = Db_stmt_.Rls(stmt_insert);
-		stmt_select_by_fil_w = Db_stmt_.Rls(stmt_select_by_fil_w);
+		stmt_select_by_fil_exact = Db_stmt_.Rls(stmt_select_by_fil_exact);
+		stmt_select_by_fil_near = Db_stmt_.Rls(stmt_select_by_fil_near);
 	}
 	public void Create_tbl() {
 		conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds
@@ -71,17 +72,17 @@ public class Fsd_thm_tbl implements RlsAble {
 		.Val_str(fld_hash, Hash_null)
 		.Exec_insert();
 	}
-	public boolean Select_itm_by_fil_width(int dir_id, int fil_id, Fsd_thm_itm thm) {
-		if (stmt_select_by_fil_w == null) stmt_select_by_fil_w = conn.Stmt_select(tbl_name, flds, String_.Ary_wo_null(fld_owner_id, fld_w, fld_time, fld_page));
-		stmt_select_by_fil_w.Clear().Crt_int(fld_owner_id, fil_id).Crt_int(fld_w, thm.W());
+	public boolean Select_itm_by_w_exact(int dir_id, int fil_id, Fsd_thm_itm thm) {
+		if (stmt_select_by_fil_exact == null) stmt_select_by_fil_exact = conn.Stmt_select(tbl_name, flds, String_.Ary_wo_null(fld_owner_id, fld_w, fld_time, fld_page));
+		stmt_select_by_fil_exact.Clear().Crt_int(fld_owner_id, fil_id).Crt_int(fld_w, thm.W());
 		if (schema_thm_page) {
-			stmt_select_by_fil_w.Crt_double	(fld_time, Xof_lnki_time.Db_save_double(thm.Time()));
-			stmt_select_by_fil_w.Crt_int	(fld_page, Xof_lnki_page.Db_save_int(thm.Page()));
+			stmt_select_by_fil_exact.Crt_double	(fld_time, Xof_lnki_time.Db_save_double(thm.Time()));
+			stmt_select_by_fil_exact.Crt_int	(fld_page, Xof_lnki_page.Db_save_int(thm.Page()));
 		}
 		else {
-			stmt_select_by_fil_w.Crt_int	(fld_time, Xof_lnki_time.Db_save_int(thm.Time()));
+			stmt_select_by_fil_exact.Crt_int	(fld_time, Xof_lnki_time.Db_save_int(thm.Time()));
 		}
-		Db_rdr rdr = stmt_select_by_fil_w.Exec_select__rls_manual();
+		Db_rdr rdr = stmt_select_by_fil_exact.Exec_select__rls_manual();
 		try {
 			return rdr.Move_next()
 				? Ctor_by_load(thm, rdr, dir_id)
@@ -89,10 +90,10 @@ public class Fsd_thm_tbl implements RlsAble {
 		}
 		finally {rdr.Rls();}
 	}
-	public boolean Select_itm_by_fil_width2(int dir_id, int fil_id, Fsd_thm_itm thm) {
-		if (stmt_select_by_fil_w == null) stmt_select_by_fil_w = conn.Stmt_select(tbl_name, flds, fld_owner_id);
-		ListAdp list = ListAdp_.new_();
-		Db_rdr rdr = stmt_select_by_fil_w.Clear().Crt_int(fld_owner_id, thm.Fil_id()).Exec_select__rls_manual();
+	public boolean Select_itm_by_w_near(int dir_id, int fil_id, Fsd_thm_itm thm) {
+		if (stmt_select_by_fil_near == null) stmt_select_by_fil_near = conn.Stmt_select(tbl_name, flds, fld_owner_id);
+		List_adp list = List_adp_.new_();
+		Db_rdr rdr = stmt_select_by_fil_near.Clear().Crt_int(fld_owner_id, fil_id).Exec_select__rls_manual();
 		try {
 			while (rdr.Move_next()) {
 				Fsd_thm_itm itm = Fsd_thm_itm.new_();
@@ -127,13 +128,13 @@ public class Fsd_thm_tbl implements RlsAble {
 	}
 	public static final DateAdp Modified_null = null;
 	public static final String Hash_null = "", Modified_null_str = "";
-	public static boolean Match_nearest(ListAdp list, Fsd_thm_itm thm, boolean schema_thm_page) {
+	public static boolean Match_nearest(List_adp list, Fsd_thm_itm thm, boolean schema_thm_page) {
 		int len = list.Count(); if (len == 0) return Bool_.N;
-		list.SortBy(Fsdb_thm_itm_sorter.I);
+		list.Sort_by(Fsdb_thm_itm_sorter.I);
 		int thm_w = thm.W(), thm_page = thm.Page(); double thm_time = thm.Time();
 		Fsd_thm_itm max = null;
 		for (int i = 0; i < len; ++i) {
-			Fsd_thm_itm comp = (Fsd_thm_itm)list.FetchAt(i);
+			Fsd_thm_itm comp = (Fsd_thm_itm)list.Get_at(i);
 			int comp_w = comp.W();
 			int comp_page = schema_thm_page ? comp.Page() : thm_page;
 			if (	thm_w			== comp_w
@@ -143,7 +144,8 @@ public class Fsd_thm_tbl implements RlsAble {
 				thm.Init_by_match(comp);
 				return Bool_.Y;
 			}
-			if (comp_w > thm_w) max = comp;
+			if		(comp_w > thm_w)	max = comp;
+			else if (max == null)		max = comp;
 			else break;
 		}
 		if (max == null) return Bool_.N;

@@ -71,26 +71,26 @@ public class Number_parser_tst {
 class Number_parser_fxt {
 	private final Number_parser parser = new Number_parser();
 	public void Clear() {parser.Clear();}
-	public void Init_ignore(String chars) {parser.Ignore_chars_(Bry_.new_ascii_(chars));}
+	public void Init_ignore(String chars) {parser.Ignore_chars_(Bry_.new_a7(chars));}
 	public void Test_int(String raw, int expd) {
-		byte[] raw_bry = Bry_.new_ascii_(raw);
+		byte[] raw_bry = Bry_.new_a7(raw);
 		int actl = parser.Parse(raw_bry, 0, raw_bry.length).Rv_as_int(); 
 		Tfds.Eq(expd, actl, raw);
 	}
 	public void Test_dec(String raw, DecimalAdp expd) {
-		byte[] raw_bry = Bry_.new_ascii_(raw);
+		byte[] raw_bry = Bry_.new_a7(raw);
 		DecimalAdp actl = parser.Parse(raw_bry, 0, raw_bry.length).Rv_as_dec(); 
 		Tfds.Eq(expd.Xto_decimal(), actl.Xto_decimal(), raw);
 	}
 	public void Test_err(String raw, boolean expd) {
-		byte[] raw_bry = Bry_.new_ascii_(raw);
+		byte[] raw_bry = Bry_.new_a7(raw);
 		boolean actl = parser.Parse(raw_bry, 0, raw_bry.length).Has_err(); 
 		Tfds.Eq(expd, actl, raw);
 	}
 	public void Test_hex(String raw, int expd_val) {Test_hex(raw, expd_val, true);}
 	public void Test_hex(String raw, int expd_val, boolean expd_pass) {
 		parser.Hex_enabled_(true);
-		byte[] raw_bry = Bry_.new_ascii_(raw);
+		byte[] raw_bry = Bry_.new_a7(raw);
 		int actl = parser.Parse(raw_bry, 0, raw_bry.length).Rv_as_int();
 		if (expd_pass) {
 			Tfds.Eq(expd_val, actl, raw);

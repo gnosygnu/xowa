@@ -28,13 +28,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //		private void Add_bulk_tst(String raw_str, params KeyVal[] expd_ary) {
 //			Xoae_app app = Xoa_app_fxt.app_();
 //			Xoa_url_alias_mgr mgr = new Xoa_url_alias_mgr(app);
-//			byte[] raw_bry = Bry_.new_ascii_(raw_str);
+//			byte[] raw_bry = Bry_.new_a7(raw_str);
 //			mgr.Add_bulk(raw_bry);
 //			int expd_ary_len = expd_ary.length;
 //			for (int i = 0; i < expd_ary_len; i++) {
 //				KeyVal kv = expd_ary[i];
-//				byte[] ttl 	= Bry_.new_ascii_safe_null_(kv.Key()); 
-//				byte[] expd = Bry_.new_ascii_safe_null_((String)kv.Val());
+//				byte[] ttl 	= Bry_.new_a7(kv.Key()); 
+//				byte[] expd = Bry_.new_a7((String)kv.Val());
 //				byte[] actl = mgr.Fmt_or_null(ttl);
 //				Tfds.Eq(String_.new_utf8_null_safe_(expd), String_.new_utf8_null_safe_(actl));
 //			}

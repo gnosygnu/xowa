@@ -18,11 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.langs.cnvs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import gplx.xowa.apps.fsys.*;
 public class Xol_cnv_mgr implements GfoInvkAble {
-	private OrderedHash hash = OrderedHash_.new_bry_();		
+	private Ordered_hash hash = Ordered_hash_.new_bry_();		
 	public Xol_cnv_mgr(Xol_lang lang) {}//this.lang = lang;} private Xol_lang lang;
-	public Xol_cnv_grp Get_or_null(byte[] key) {return (Xol_cnv_grp)hash.Fetch(key);}
+	public Xol_cnv_grp Get_or_null(byte[] key) {return (Xol_cnv_grp)hash.Get_by(key);}
 	public Xol_cnv_grp Get_or_make(byte[] key) {
-		Xol_cnv_grp rv = (Xol_cnv_grp)hash.Fetch(key);
+		Xol_cnv_grp rv = (Xol_cnv_grp)hash.Get_by(key);
 		if (rv == null) {
 			rv = new Xol_cnv_grp(key);
 			hash.Add(key, rv);

@@ -35,7 +35,7 @@ public class Xob_base_fxt {
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public GfoInvkAble Bldr_itm() {return bldr_itm;} GfoInvkAble bldr_itm;
 	public Xowd_page_itm page_(String ttl) {return page_(ttl, "");}
-	public Xowd_page_itm page_(String ttl, String text) {return new Xowd_page_itm().Ttl_(Bry_.new_utf8_(ttl), wiki.Ns_mgr()).Text_(Bry_.new_utf8_(text));}
+	public Xowd_page_itm page_(String ttl, String text) {return new Xowd_page_itm().Ttl_(Bry_.new_u8(ttl), wiki.Ns_mgr()).Text_(Bry_.new_u8(text));}
 	public Io_fil_chkr meta_(String url, String data) {return new Io_fil_chkr(Io_url_.mem_fil_(url), data);}
 	public void Init_fxts(Xob_bldr bldr, Xowe_wiki wiki, Xob_base_fxt... fxt_ary) {
 		int fxt_ary_len = fxt_ary.length;
@@ -43,7 +43,7 @@ public class Xob_base_fxt {
 			fxt_ary[i].Init_(bldr, wiki);
 	}
 	public Xob_base_fxt Init_fil(String url, String raw) {return Init_fil(Io_url_.new_fil_(url), raw);}
-	public Xob_base_fxt Init_fil(Io_url url, String raw) {Io_mgr._.SaveFilStr(url, raw); return this;}
+	public Xob_base_fxt Init_fil(Io_url url, String raw) {Io_mgr.I.SaveFilStr(url, raw); return this;}
 	public Xob_base_fxt Exec_cmd(String cmd_key, GfoMsg... msgs) {
 		Xob_cmd cmd = (Xob_cmd)bldr.Cmd_mgr().Add_cmd(wiki, cmd_key);
 		this.bldr_itm = cmd;
@@ -58,7 +58,7 @@ public class Xob_base_fxt {
 	}
 	public Xob_base_fxt Test_fil(String url, String expd) {return Test_fil(Io_url_.new_fil_(url), expd);}
 	public Xob_base_fxt Test_fil(Io_url url, String expd) {
-		Tfds.Eq_str_lines(expd, Io_mgr._.LoadFilStr(url));
+		Tfds.Eq_str_lines(expd, Io_mgr.I.LoadFilStr(url));
 		return this;
 	}
 	public static void Run_cmd(Xob_bldr bldr, Xob_cmd cmd) {

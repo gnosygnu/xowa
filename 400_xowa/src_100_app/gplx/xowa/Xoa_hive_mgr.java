@@ -31,7 +31,7 @@ public class Xoa_hive_mgr {
 		Bry_bfr tmp_bfr = app.Utl__bfr_mkr().Get_m001();
 		byte[] tmp_bry = tmp_bfr.Bfr(); bry_len.Val_zero_();
 		Io_url file = Xotdb_fsys_mgr.Url_fil(hive_root, fil_idx, fil_ext_bry);
-		tmp_bry = Io_mgr._.LoadFilBry_reuse(file, tmp_bry, bry_len);
+		tmp_bry = Io_mgr.I.LoadFilBry_reuse(file, tmp_bry, bry_len);
 		xdat_rdr.Clear().Parse(tmp_bry, bry_len.Val(), file);
 		tmp_bfr.Clear_and_rls();
 		return xdat_rdr;

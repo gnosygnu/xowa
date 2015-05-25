@@ -34,10 +34,10 @@ class Xob_css_parser__import {
 		int semic_pos = Bry_finder.Find_fwd(src, Byte_ascii.Semic, frag.Pos_end(), src_len);
 		return Xob_css_tkn__import.new_(tkn_bgn, semic_pos + 1, src_url, url_frag.Trg_url(), url_frag.Quote_byte());
 	}
-	private static final byte[] Tkn_url_bry = Bry_.new_ascii_("url(");
+	private static final byte[] Tkn_url_bry = Bry_.new_a7("url(");
 	public static final byte[]
-	  Wikisource_dynimg_ttl		= Bry_.new_ascii_("en.wikisource.org/w/index.php?title=MediaWiki:Dynimg.css")
-	, Wikisource_dynimg_find	= Bry_.new_ascii_(".freedImg img[src*=\"wikipedia\"], .freedImg img[src*=\"wikisource\"], .freedImg img[src*=\"score\"], .freedImg img[src*=\"math\"] {")
-	, Wikisource_dynimg_repl	= Bry_.new_ascii_(".freedImg img[src*=\"wikipedia\"], .freedImg img[src*=\"wikisource\"], /*XOWA:handle file:// paths which will have /commons.wikimedia.org/ but not /wikipedia/ */ .freedImg img[src*=\"wikimedia\"], .freedImg img[src*=\"score\"], .freedImg img[src*=\"math\"] {")
+	  Wikisource_dynimg_ttl		= Bry_.new_a7("en.wikisource.org/w/index.php?title=MediaWiki:Dynimg.css")
+	, Wikisource_dynimg_find	= Bry_.new_a7(".freedImg img[src*=\"wikipedia\"], .freedImg img[src*=\"wikisource\"], .freedImg img[src*=\"score\"], .freedImg img[src*=\"math\"] {")
+	, Wikisource_dynimg_repl	= Bry_.new_a7(".freedImg img[src*=\"wikipedia\"], .freedImg img[src*=\"wikisource\"], /*XOWA:handle file:// paths which will have /commons.wikimedia.org/ but not /wikipedia/ */ .freedImg img[src*=\"wikimedia\"], .freedImg img[src*=\"score\"], .freedImg img[src*=\"math\"] {")
 	;
 }

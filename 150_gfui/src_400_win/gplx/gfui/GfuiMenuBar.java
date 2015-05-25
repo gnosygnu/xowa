@@ -133,7 +133,7 @@ public class GfuiMenuBar implements GfoInvkAble {
 		IptBnd_.cmd_to_(GfuiEnv_.IptBndMgr_win, win, this, Invk_visible_toggle, IptKey_.add_(IptKey_.Ctrl, IptKey_.Shift, IptKey_.F12));
 		win.SubItms_add(SubItms_key, this);
 	}
-	HashAdp itms = HashAdp_.new_(); GfuiWin win;
+	Hash_adp itms = Hash_adp_.new_(); GfuiWin win;
 	public static final String SubItms_key = "menuBar";
 	public static GfuiMenuBar new_(GfuiWin win) {
 		GfuiMenuBar rv = new GfuiMenuBar();
@@ -242,10 +242,10 @@ class GfuiMenuBarItmType {
 	public String Name() {return name;} private String name;
 	GfuiMenuBarItmType(int v, String n) {val = v; name = n; regy.Add(n, this);}
 	public static GfuiMenuBarItmType parse_(String raw) {
-		try {return (GfuiMenuBarItmType)regy.Fetch(raw);}
+		try {return (GfuiMenuBarItmType)regy.Get_by(raw);}
 		catch (Exception e) {Err_.Noop(e); throw Err_.parse_("GfuiMenuBarItmType", raw);}
 	}
-	static HashAdp regy = HashAdp_.new_();
+	static Hash_adp regy = Hash_adp_.new_();
 	public static final GfuiMenuBarItmType Root = new GfuiMenuBarItmType(1, "root");
 	public static final GfuiMenuBarItmType Top = new GfuiMenuBarItmType(2, "top");
 	public static final GfuiMenuBarItmType Mnu = new GfuiMenuBarItmType(3, "mnu");

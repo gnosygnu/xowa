@@ -19,13 +19,13 @@ package gplx.xowa.bldrs.wiki_cfgs; import gplx.*; import gplx.xowa.*; import gpl
 import gplx.php.*; import gplx.xowa.bldrs.langs.*;
 class Xob_subpage_parser {
 	public Xob_subpage_wiki[] Parse(byte[] src) {
-		src = Bry_.Add(Bry_.new_ascii_("$a = array("), src, Bry_.new_ascii_(");"));
-		ListAdp wikis_list = ListAdp_.new_();
+		src = Bry_.Add(Bry_.new_a7("$a = array("), src, Bry_.new_a7(");"));
+		List_adp wikis_list = List_adp_.new_();
 		try {
 			Php_parser php_parser = new Php_parser();
 			Php_evaluator eval = new Php_evaluator(new Gfo_msg_log("test"));
 			php_parser.Parse_tkns(src, eval);
-			Php_line[] lines = (Php_line[])eval.List().Xto_ary(Php_line.class);
+			Php_line[] lines = (Php_line[])eval.List().To_ary(Php_line.class);
 			Php_line_assign line = (Php_line_assign)lines[0];
 			Php_itm_ary root_ary = (Php_itm_ary)line.Val();
 			Php_itm_kv root_kv = (Php_itm_kv)root_ary.Subs_get(0);
@@ -39,9 +39,9 @@ class Xob_subpage_parser {
 			}
 		}
 		catch (Exception e) {
-			throw Err_.new_fmt_("parse failed; src={0} err={1}", String_.new_utf8_(src), Err_.Message_gplx(e));
+			throw Err_.new_fmt_("parse failed; src={0} err={1}", String_.new_u8(src), Err_.Message_gplx(e));
 		}
-		return (Xob_subpage_wiki[])wikis_list.Xto_ary(Xob_subpage_wiki.class);
+		return (Xob_subpage_wiki[])wikis_list.To_ary(Xob_subpage_wiki.class);
 	}
 	private void Parse_wiki(Php_itm_kv wiki_tkn, Xob_subpage_wiki wiki_itm) {
 		wiki_itm.Name_(wiki_tkn.Key().Val_obj_bry());
@@ -84,5 +84,5 @@ class Xob_subpage_ns {
 }
 class Xob_subpage_wiki {
 	public byte[] Name() {return name;} public Xob_subpage_wiki Name_(byte[] v) {this.name = v; return this;} private byte[] name;
-	public ListAdp Ns_list() {return ns_list;} private ListAdp ns_list = ListAdp_.new_();
+	public List_adp Ns_list() {return ns_list;} private List_adp ns_list = List_adp_.new_();
 }

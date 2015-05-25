@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 public class Xow_user implements GfoInvkAble {
-	public byte[] Name() {return name;} private byte[] name = Bry_.new_ascii_("anonymous");
+	public byte[] Name() {return name;} private byte[] name = Bry_.new_a7("anonymous");
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_name_))						name = m.ReadBry("v");
 		else return GfoInvkAble_.Rv_unhandled;

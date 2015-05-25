@@ -24,9 +24,9 @@ public class Xop_keeplist_wiki {
 	public boolean Enabled() {return enabled;} public void Enabled_(boolean v) {enabled = v;} private boolean enabled = false;	// NOTE: default to false, b/c wikis that are not listed in cfg will not call Rules_seal
 	public Xop_keeplist_rule[] Rules() {return rules;} private Xop_keeplist_rule[] rules; private int rules_len;
 	public Xop_keeplist_wiki_srl Srl() {return srl;} private Xop_keeplist_wiki_srl srl;
-	public void Rules_add(Xop_keeplist_rule rule) {rules_list.Add(rule);} private ListAdp rules_list = ListAdp_.new_();
+	public void Rules_add(Xop_keeplist_rule rule) {rules_list.Add(rule);} private List_adp rules_list = List_adp_.new_();
 	public void Rules_seal() {
-		this.rules = (Xop_keeplist_rule[])rules_list.Xto_ary_and_clear(Xop_keeplist_rule.class);
+		this.rules = (Xop_keeplist_rule[])rules_list.To_ary_and_clear(Xop_keeplist_rule.class);
 		this.rules_len = rules.length;
 		if (rules_len == 0) return;
 		if (rules_len == 1) {

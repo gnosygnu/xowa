@@ -34,7 +34,7 @@ public class Xob_tmp_wtr {
 		Io_url url = url_gen.Nxt_url();
 		if (bfr.Len() > fil_max)	// NOTE: data can exceed proscribed len; EX: wikt:Category for Italian nouns is 1 MB+
 			usr_dlg.Log_many("xowa.tmp_wtr", "flush", "--fil exceeds len: ~{0} ~{1} ~{2}", bfr.Len(), fil_max, url.Xto_api());
-		Io_mgr._.AppendFilBfr(url, bfr);
+		Io_mgr.I.AppendFilBfr(url, bfr);
 	}
 	public void Rls() {bfr.Rls();}
 	public static Xob_tmp_wtr new_(Xow_ns ns_itm, Io_url_gen url_gen, int fil_max)	{return new Xob_tmp_wtr(ns_itm, url_gen, fil_max);}

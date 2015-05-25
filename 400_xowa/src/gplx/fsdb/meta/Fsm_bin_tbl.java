@@ -34,7 +34,7 @@ public class Fsm_bin_tbl {
 		conn.Stmt_insert(tbl_name, flds).Crt_int(fld_uid, id).Val_str(fld_url, url_rel).Exec_insert();
 	}
 	public Fsm_bin_fil[] Select_all(Fsdb_db_mgr db_conn_mgr) {
-		ListAdp rv = ListAdp_.new_();
+		List_adp rv = List_adp_.new_();
 		Db_rdr rdr = conn.Stmt_select_order(tbl_name, flds, Db_meta_fld.Ary_empy, fld_uid).Clear().Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {
@@ -45,6 +45,6 @@ public class Fsm_bin_tbl {
 				rv.Add(itm);
 			}
 		}	finally {rdr.Rls();}
-		return (Fsm_bin_fil[])rv.Xto_ary(Fsm_bin_fil.class);
+		return (Fsm_bin_fil[])rv.To_ary(Fsm_bin_fil.class);
 	}
 }

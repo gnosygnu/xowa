@@ -18,13 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
 public class Db_stmt__mem implements Db_stmt {
 	private static final String Key_na = ""; // key is not_available; only called by procs with signature of Val(<type> v);
-	private final OrderedHash val_list = OrderedHash_.new_();
+	private final Ordered_hash val_list = Ordered_hash_.new_();
 	public Db_stmt__mem(Db_engine__mem engine, Db_qry qry) {Ctor_stmt(engine, qry);} private Db_engine__mem engine;
 	public void Ctor_stmt(Db_engine engine, Db_qry qry) {this.engine = (Db_engine__mem)engine; this.qry = qry;}
-	public HashAdp Crts() {return crt_hash;} private final HashAdp crt_hash = HashAdp_.new_();
+	public Hash_adp Crts() {return crt_hash;} private final Hash_adp crt_hash = Hash_adp_.new_();
 	public int Args_len() {return val_list.Count();}
-	public Object Args_get_at(int i)	{return val_list.FetchAt(i);}
-	public Object Args_get_by(String k) {return val_list.Fetch(k);}
+	public Object Args_get_at(int i)	{return val_list.Get_at(i);}
+	public Object Args_get_by(String k) {return val_list.Get_by(k);}
 	public Db_qry Qry() {return qry;} private Db_qry qry;
 	public Db_stmt Reset_stmt() {return this;}
 	public Db_stmt Clear() {
@@ -89,7 +89,7 @@ public class Db_stmt__mem implements Db_stmt {
 	public Db_stmt Crt_bry_as_str(String k, byte[] v)	{return Add_bry_as_str(Bool_.Y, k, v);}
 	public Db_stmt Val_bry_as_str(String k, byte[] v)	{return Add_bry_as_str(Bool_.N, k, v);}
 	public Db_stmt Val_bry_as_str(byte[] v)				{return Add_bry_as_str(Bool_.N, Key_na, v);}
-	private Db_stmt Add_bry_as_str(boolean where, String k, byte[] v) {return Add_str(where, k, String_.new_utf8_(v));}
+	private Db_stmt Add_bry_as_str(boolean where, String k, byte[] v) {return Add_str(where, k, String_.new_u8(v));}
 	public Db_stmt Crt_str(String k, String v)	{return Add_str(Bool_.Y, k, v);}
 	public Db_stmt Val_str(String k, String v)	{return Add_str(Bool_.N, k, v);}
 	public Db_stmt Val_str(String v)			{return Add_str(Bool_.N, Key_na, v);}
@@ -107,6 +107,7 @@ public class Db_stmt__mem implements Db_stmt {
 	}
 	public boolean Exec_insert() {
 		Mem_tbl tbl = engine.Tbls_get(qry.Base_table());
+		if (tbl == null) throw Err_.new_("must call Create_tbl; tbl={0}", qry.Base_table());
 		return tbl.Insert(this) == 1;
 	}
 	public int Exec_update() {
@@ -126,11 +127,11 @@ public class Db_stmt__mem implements Db_stmt {
 	public Object Exec_select_val() {throw Err_.not_implemented_();}
 	private void Add(String k, boolean where, Object v) {
 		if (k == Db_meta_fld.Key_null) return;	// key is explicitly null; ignore; allows schema_2+ type definitions
-		val_list.Add_if_new(k, v);				// NOTE: only add if new; WHERE with IN will call Add many times; fld_ttl IN ('A.png', 'B.png');
+		val_list.Add_if_dupe_use_1st(k, v);				// NOTE: only add if new; WHERE with IN will call Add many times; fld_ttl IN ('A.png', 'B.png');
 		if (where) {
-			ListAdp list = (ListAdp)crt_hash.Fetch(k);
+			List_adp list = (List_adp)crt_hash.Get_by(k);
 			if (list == null) {
-				list = ListAdp_.new_();
+				list = List_adp_.new_();
 				crt_hash.Add(k, list);
 			}
 			list.Add(v);

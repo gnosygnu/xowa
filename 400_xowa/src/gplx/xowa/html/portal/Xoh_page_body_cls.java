@@ -35,7 +35,7 @@ public class Xoh_page_body_cls {	// REF.MW:Skin.php|getPageClasses
 					tmp_bfr.Add_byte_space().Add(Bry_wb_propertypage).Add_byte(Byte_ascii.Dash).Add(ttl.Page_db());
 					break;
 				default:
-					Gfo_usr_dlg_.I.Warn_many("", "", "unexpected ns for page_body_cls; ttl=~{0}", String_.new_utf8_(ttl.Raw()));
+					Gfo_usr_dlg_.I.Warn_many("", "", "unexpected ns for page_body_cls; ttl=~{0}", String_.new_u8(ttl.Raw()));
 					break;
 			}
 		}
@@ -118,14 +118,14 @@ public class Xoh_page_body_cls {	// REF.MW:Skin.php|getPageClasses
 		return trg_bfr == null ? src : trg_bfr.Xto_bry_and_clear();
 	}
 	private static final byte[]
-	  Bry_id_prefix			= Bry_.new_ascii_("ns-")
-	, Bry_type_special		= Bry_.new_ascii_("ns-special")
-	, Bry_type_talk			= Bry_.new_ascii_("ns-talk")
-	, Bry_type_subject		= Bry_.new_ascii_("ns-subject")
-	, Bry_page_prefix		= Bry_.new_ascii_("page-")
-	, Bry_wb_entitypage		= Bry_.new_ascii_("wb-entitypage")
-	, Bry_wb_itempage		= Bry_.new_ascii_("wb-itempage")
-	, Bry_wb_propertypage	= Bry_.new_ascii_("wb-propertypage")
+	  Bry_id_prefix			= Bry_.new_a7("ns-")
+	, Bry_type_special		= Bry_.new_a7("ns-special")
+	, Bry_type_talk			= Bry_.new_a7("ns-talk")
+	, Bry_type_subject		= Bry_.new_a7("ns-subject")
+	, Bry_page_prefix		= Bry_.new_a7("page-")
+	, Bry_wb_entitypage		= Bry_.new_a7("wb-entitypage")
+	, Bry_wb_itempage		= Bry_.new_a7("wb-itempage")
+	, Bry_wb_propertypage	= Bry_.new_a7("wb-propertypage")
 	;
 	public static int Page_tid_wikitext = 0, Page_tid_wikidata_qid = 1, Page_tid_wikidata_pid = 2;
 }

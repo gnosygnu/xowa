@@ -24,7 +24,7 @@ public class Xouc_startup_mgr implements GfoInvkAble {
 		byte v = Page_parse(page);
 		switch (v) {
 			case Page_home: return config.Pages_mgr().Home();
-			case Page_last: return String_.new_utf8_(config.User().App().Gui_mgr().Browser_win().Active_page().Ttl().Raw());
+			case Page_last: return String_.new_u8(config.User().Appe().Gui_mgr().Browser_win().Active_page().Ttl().Raw());
 			case Page_xowa: return Xouc_pages_mgr.Page_xowa;
 			default: throw Err_.unhandled(page);
 		}
@@ -47,12 +47,12 @@ public class Xouc_startup_mgr implements GfoInvkAble {
 	private String Custom_config() {
 		if (custom_config == null) {	// NOTE: LoadFilStr never returns null, so this will only execute once
 			Io_url custom_config_url = config.User().Fsys_mgr().App_data_cfg_custom_fil();
-			custom_config = Io_mgr._.LoadFilStr_args(custom_config_url).MissingIgnored_().Exec();				
+			custom_config = Io_mgr.I.LoadFilStr_args(custom_config_url).MissingIgnored_().Exec();				
 		}
 		return custom_config;
 	}	private String custom_config;
 	private void Custom_config_(String v) {
-		Xoae_app app = config.User().App();
+		Xoae_app app = config.User().Appe();
 		Object rslt = app.Gfs_mgr().Run_str(v);
 		if (rslt == GfoInvkAble_.Rv_error) {
 			app.Usr_dlg().Warn_many("", "", "custom script failed: ~{0}", v);
@@ -60,7 +60,7 @@ public class Xouc_startup_mgr implements GfoInvkAble {
 		}
 		custom_config = v;
 		// Io_url custom_config_url = config.User().Fsys_mgr().App_data_cfg_custom_fil();	// DELETE: no longer sync user_cfg to custom.gfs; already saved in user.gfs; DATE:2014-05-30
-		// Io_mgr._.SaveFilStr(custom_config_url, v);
+		// Io_mgr.I.SaveFilStr(custom_config_url, v);
 	}
 	public static final byte Page_home = 0, Page_last = 1, Page_xowa = 2;
 }

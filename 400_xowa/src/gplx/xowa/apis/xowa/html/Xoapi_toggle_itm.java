@@ -27,7 +27,7 @@ public class Xoapi_toggle_itm implements GfoInvkAble {
 	public boolean Visible() {return visible;} private boolean visible;
 	public Xoapi_toggle_itm Init(Xowe_wiki wiki, byte[] heading_bry) {
 		if (Img_src_y == null) {
-			Io_url img_dir = wiki.Appe().User().Fsys_mgr().App_img_dir().GenSubDir_nest("window", "portal");
+			Io_url img_dir = wiki.Appe().Usere().Fsys_mgr().App_img_dir().GenSubDir_nest("window", "portal");
 			Img_src_y = img_dir.GenSubFil("twisty_down.png").To_http_file_bry();
 			Img_src_n = img_dir.GenSubFil("twisty_right.png").To_http_file_bry();
 		}
@@ -84,7 +84,7 @@ public class Xoapi_toggle_itm implements GfoInvkAble {
 	private static final String Invk_visible = "visible", Invk_visible_ = "visible_";
 	private static byte[] Img_src_y, Img_src_n;	// assume these are the same for all itms
 	private static final byte[] 
-	  Img_title_msg_y = Bry_.new_ascii_("hide"), Img_title_msg_n = Bry_.new_ascii_("show")
-	, Img_display_y = Bry_.new_ascii_("display:;"), Img_display_n = Bry_.new_ascii_("display:none;")
+	  Img_title_msg_y = Bry_.new_a7("hide"), Img_title_msg_n = Bry_.new_a7("show")
+	, Img_display_y = Bry_.new_a7("display:;"), Img_display_n = Bry_.new_a7("display:none;")
 	;
 }

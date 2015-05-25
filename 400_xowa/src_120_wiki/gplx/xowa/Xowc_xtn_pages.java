@@ -58,7 +58,7 @@ public class Xowc_xtn_pages implements GfoInvkAble {
 		if (	ns == null							// ns doesn't exist; should throw error;
 			||	!Bry_.Eq(ns.Name_bry(), name)		// ns exists, but name doesn't match canonical
 			) {
-			ns_mgr.Aliases_add(id, String_.new_ascii_(name));					
+			ns_mgr.Aliases_add(id, String_.new_a7(name));					
 			++aliases_added;
 		}
 		return aliases_added;
@@ -68,13 +68,13 @@ public class Xowc_xtn_pages implements GfoInvkAble {
 		else return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_ns_names_ = "ns_names_";
-	public static final byte[] Xtn_key = Bry_.new_ascii_("pages");
+	public static final byte[] Xtn_key = Bry_.new_a7("pages");
 	public static final int Ns_index_id_default = 102, Ns_page_id_default = 104;
 
 	private static final byte[]
-	  Default_ns_page_name			= Bry_.new_ascii_("Page")
-	, Default_ns_page_talk_name		= Bry_.new_ascii_("Page_talk")
-	, Default_ns_index_name			= Bry_.new_ascii_("Index")
-	, Default_ns_index_talk_name	= Bry_.new_ascii_("Index_talk")
+	  Default_ns_page_name			= Bry_.new_a7("Page")
+	, Default_ns_page_talk_name		= Bry_.new_a7("Page_talk")
+	, Default_ns_index_name			= Bry_.new_a7("Index")
+	, Default_ns_index_talk_name	= Bry_.new_a7("Index_talk")
 	;
 }

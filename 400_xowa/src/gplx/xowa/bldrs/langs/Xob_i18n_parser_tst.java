@@ -48,14 +48,14 @@ class Xob_i18n_parser_fxt {
 	public void Clear() {
 	}
 	public void Test_xto_gfs(String raw, String expd) {
-		byte[] actl = Xob_i18n_parser.Xto_gfs(Bry_.new_utf8_(raw));
-		Tfds.Eq_str_lines(expd, String_.new_utf8_(actl));
+		byte[] actl = Xob_i18n_parser.Xto_gfs(Bry_.new_u8(raw));
+		Tfds.Eq_str_lines(expd, String_.new_u8(actl));
 	}
 	public void Test_load_msgs_dir(String dir_str) {
 		Xoae_app app = Xoa_app_fxt.app_();
 		Xowe_wiki wiki = Xoa_app_fxt.wiki_tst_(app);
 		Io_url dir_url = Io_url_.new_dir_(dir_str);
-		Io_url[] fil_urls = Io_mgr._.QueryDir_fils(dir_url);
+		Io_url[] fil_urls = Io_mgr.I.QueryDir_fils(dir_url);
 		int len = fil_urls.length;
 		for (int i = 0; i < len; ++i) {
 			Xob_i18n_parser.Load_msgs(false, wiki.Lang(), fil_urls[i]);

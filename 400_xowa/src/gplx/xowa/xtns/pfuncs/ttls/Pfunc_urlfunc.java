@@ -56,7 +56,7 @@ public class Pfunc_urlfunc extends Pf_func_base {	// EX: {{lc:A}} -> a
 	@Override public int Id() {return id;} private int id;
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_urlfunc(id, tid, encode).Name_(name);}
 	public static final byte Tid_local = 0, Tid_full = 1, Tid_canonical = 2;
-	public static final byte[] Bry_relative_url = Bry_.new_ascii_("//");
+	public static final byte[] Bry_relative_url = Bry_.new_a7("//");
 }	
 /*
 NOTE: Both fullurle: and localurle: performed additional character escaping on the resulting link, but no example is known where that still has any additional effect.

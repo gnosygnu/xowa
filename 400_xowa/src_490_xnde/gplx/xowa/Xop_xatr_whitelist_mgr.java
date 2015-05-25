@@ -126,15 +126,15 @@ public class Xop_xatr_whitelist_mgr {
 	private void Ini_grp(String key_str, String base_grp, String... cur_itms) {
 		byte[][] itms = Bry_.Ary(cur_itms);
 		if (base_grp != null)
-			itms = Bry_.Ary_add(itms, (byte[][])grp_hash.Get_by_bry(Bry_.new_ascii_(base_grp)));
-		byte[] key = Bry_.new_ascii_(key_str);
+			itms = Bry_.Ary_add(itms, (byte[][])grp_hash.Get_by_bry(Bry_.new_a7(base_grp)));
+		byte[] key = Bry_.new_a7(key_str);
 		grp_hash.Add_bry_obj(key, itms);
 	}
 	private void Ini_nde(int tag_tid, String... key_strs) {
-		ListAdp keys = ListAdp_.new_();
+		List_adp keys = List_adp_.new_();
 		int len = key_strs.length;
 		for (int i = 0; i < len; i++) {
-			byte[] key = Bry_.new_ascii_(key_strs[i]);
+			byte[] key = Bry_.new_a7(key_strs[i]);
 			Object grp_obj = grp_hash.Get_by_bry(key);	// is the key a grp? EX: "common"
 			if (grp_obj == null)
 				keys.Add(key);
@@ -147,7 +147,7 @@ public class Xop_xatr_whitelist_mgr {
 		}
 		len = keys.Count();
 		for (int i = 0; i < len; i++) {
-			byte[] key_bry = (byte[])keys.FetchAt(i);
+			byte[] key_bry = (byte[])keys.Get_at(i);
 			Xop_xatr_whitelist_itm itm = (Xop_xatr_whitelist_itm)key_trie.Match_exact(key_bry, 0, key_bry.length);
 			if (itm == null) {
 				itm = Ini_key_trie_add(key_bry, true);
@@ -157,7 +157,7 @@ public class Xop_xatr_whitelist_mgr {
 		}
 	}
 	private void Ini_all_loose(String key_str) {
-		byte[] key_bry = Bry_.new_ascii_(key_str);
+		byte[] key_bry = Bry_.new_a7(key_str);
 		Ini_key_trie_add(key_bry, false);
 		Xop_xatr_whitelist_itm itm = Ini_key_trie_add(key_bry, false);
 		key_trie.Add_obj(key_bry, itm);
@@ -166,7 +166,7 @@ public class Xop_xatr_whitelist_mgr {
 			itm.Tags()[i] = 1;
 	}
 	private Xop_xatr_whitelist_itm  Ini_key_trie_add(byte[] key, boolean exact) {
-		Object key_tid_obj = tid_hash.Fetch(key);
+		Object key_tid_obj = tid_hash.Get_by(key);
 		byte key_tid = key_tid_obj == null ? Xop_xatr_itm.Key_tid_generic : ((Byte_obj_val)key_tid_obj).Val();
 		Xop_xatr_whitelist_itm rv = new Xop_xatr_whitelist_itm(key, key_tid, exact);
 		key_trie.Add_obj(key, rv);
@@ -251,7 +251,7 @@ public class Xop_xatr_whitelist_mgr {
 	.Add_str_byte("image-set"	, Style_image_set)
 	.Add_str_byte("/*"			, Style_comment)
 	;
-	private static final byte[] Val_role_presentation = Bry_.new_ascii_("presentation");
+	private static final byte[] Val_role_presentation = Bry_.new_a7("presentation");
 }
 class Xop_xatr_whitelist_itm {
 	public Xop_xatr_whitelist_itm(byte[] key, byte key_tid, boolean exact) {this.key = key; this.key_tid = key_tid; this.exact = exact;}

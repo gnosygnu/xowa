@@ -149,21 +149,21 @@ public class Xow_hzip_itm__anchor {
 		int href_end = Bry_finder.Find_fwd(src, Xow_hzip_dict.Escape, href_bgn, src_len);	if (href_end == Bry_finder.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("a.href_missing", href_bgn, href_bgn);
 		switch (xtid) {
 			case Xow_hzip_dict.Tid_lnke_txt:
-				bfr.Add_str("<a rel=\"nofollow\" class=\"external free\" href=\"").Add_mid(src, href_bgn, href_end).Add_str("\">").Add_mid(src, href_bgn, href_end).Add_str("</a>");
+				bfr.Add_str_a7("<a rel=\"nofollow\" class=\"external free\" href=\"").Add_mid(src, href_bgn, href_end).Add_str_a7("\">").Add_mid(src, href_bgn, href_end).Add_str_a7("</a>");
 				return href_end + 1; // +1 to skip escape
 			case Xow_hzip_dict.Tid_lnke_brk_text_n:
 				int num = Xow_hzip_int_.Load_bin_int_abrv(src, src_len, href_end + 1, count_ref);
-				bfr.Add_str("<a rel=\"nofollow\" class=\"external autonumber\" href=\"").Add_mid(src, href_bgn, href_end).Add_str("\">[").Add_int_variable(num).Add_str("]</a>");
+				bfr.Add_str_a7("<a rel=\"nofollow\" class=\"external autonumber\" href=\"").Add_mid(src, href_bgn, href_end).Add_str_a7("\">[").Add_int_variable(num).Add_str_a7("]</a>");
 				return href_end + 1 + count_ref.Val(); // +1 to skip escape
 			case Xow_hzip_dict.Tid_lnke_brk_text_y:
-				bfr.Add_str("<a rel=\"nofollow\" class=\"external text\" href=\"").Add_mid(src, href_bgn, href_end).Add_str("\">");
+				bfr.Add_str_a7("<a rel=\"nofollow\" class=\"external text\" href=\"").Add_mid(src, href_bgn, href_end).Add_str_a7("\">");
 				return href_end + 1; // +1 to skip escape
 			default:
 				return hzip_mgr.Warn_by_pos("a.xtid_unknown", href_bgn, href_end);
 		}
 	}
 	private final Int_obj_ref id_count_ref = Int_obj_ref.neg1_();
-	public int Load_lnki(Bry_bfr bfr, byte[] src, int src_len, int bgn, byte tid, OrderedHash redlink_uids) {
+	public int Load_lnki(Bry_bfr bfr, byte[] src, int src_len, int bgn, byte tid, Ordered_hash redlink_uids) {
 		// ns; 255 max
 		byte ns_ord = src[bgn];
 		Xow_ns ns = ttl_parser.Ns_mgr().Ords_get_at(ns_ord);
@@ -183,25 +183,25 @@ public class Xow_hzip_itm__anchor {
 		byte[] ttl_bry = Bry_.Mid(src, ttl_bgn, ttl_end);
 		Xoa_ttl ttl = ttl_parser.Ttl_parse(ns.Id(), ttl_bry);
 		byte[] ttl_full = ttl.Full_db();
-		bfr.Add_str_ascii("<a href='");
+		bfr.Add_str_a7("<a href='");
 		if (site_bry != null) {
-			bfr.Add_str_ascii("/site/");
+			bfr.Add_str_a7("/site/");
 			bfr.Add(site_bry);
 		}
-		bfr.Add_str_ascii("/wiki/");
+		bfr.Add_str_a7("/wiki/");
 		bfr.Add(Html_utl.Escape_html_as_bry(ttl_full));
 		if (redlink_uids.Has(id_count_ref.Val_(id)))
-			bfr.Add_str_ascii("' class='xowa_disabled");
-		bfr.Add_str_ascii("' id='").Add_str_ascii(gplx.xowa.parsers.lnkis.redlinks.Xopg_redlink_lnki_list.Lnki_id_prefix).Add_int_variable(id);
-		bfr.Add_str_ascii("' title='");
+			bfr.Add_str_a7("' class='xowa_disabled");
+		bfr.Add_str_a7("' id='").Add_str_a7(gplx.xowa.parsers.lnkis.redlinks.Xopg_redlink_lnki_list.Lnki_id_prefix).Add_int_variable(id);
+		bfr.Add_str_a7("' title='");
 		int rv = ttl_end + 1;
 		if (tid == Xow_hzip_dict.Tid_lnki_text_n) {
 			if (ns.Id() != 0) ttl_bry = ttl_full;
-			bfr.Add(Html_utl.Escape_html_as_bry(ttl_bry)).Add_str("'>").Add(ttl_bry);
-			bfr.Add_str("</a>");
+			bfr.Add(Html_utl.Escape_html_as_bry(ttl_bry)).Add_str_a7("'>").Add(ttl_bry);
+			bfr.Add_str_a7("</a>");
 		}
 		else {
-			bfr.Add(ttl.Page_txt()).Add_str("'>");
+			bfr.Add(ttl.Page_txt()).Add_str_a7("'>");
 		}
 		return rv;
 	}
@@ -214,10 +214,10 @@ public class Xow_hzip_itm__anchor {
 			);
 	}
 	private static final byte[]
-	  Find_href_bry			= Bry_.new_ascii_(" href=\"")
-	, Find_id_bry			= Bry_.new_ascii_(" id=\"")
-	, Find_a_rhs_bgn_bry	= Bry_.new_ascii_("</a>")
-	, Find_img_xatrs		= Bry_.new_ascii_("xatrs='")
+	  Find_href_bry			= Bry_.new_a7(" href=\"")
+	, Find_id_bry			= Bry_.new_a7(" id=\"")
+	, Find_a_rhs_bgn_bry	= Bry_.new_a7("</a>")
+	, Find_img_xatrs		= Bry_.new_a7("xatrs='")
 	;
 	private static final byte Href_tid_wiki = 1, Href_tid_site = 2;
 	private static final int Href_bry_len = 6; // "/wiki/".length

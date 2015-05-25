@@ -17,5 +17,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
 public class Xof_exec_tid {
-	public static final byte Tid_null = 0, Tid_wiki_page = 1, Tid_wiki_file = 2, Tid_viewer_app = 3;
+	public static final int Tid_wiki_page = 1, Tid_wiki_file = 2, Tid_viewer_app = 3;
 }

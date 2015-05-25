@@ -33,12 +33,6 @@ public class Xof_file_mgr implements GfoInvkAble {
 		img_mgr.Init_by_app(app.Wmf_mgr(), app.Prog_mgr());
 		math_mgr.Init_by_app(app);
 	}
-	public void Init_by_app(Xoae_app app) {
-		Io_url db_url = app.User().Fsys_mgr().Root_dir().OwnerDir().GenSubFil_ary("xowa.user.", app.User().Key_str(), ".sqlite3");
-		Db_conn_bldr_data conn_data = Db_conn_bldr.I.Get_or_new(db_url);
-		boolean schema_is_1 = Bool_.Y;
-		cache_mgr.Init_for_db(conn_data.Conn(), conn_data.Created(), schema_is_1);
-	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_repos))				return repo_mgr;
 		else if	(ctx.Match(k, Invk_img_mgr))			return img_mgr;

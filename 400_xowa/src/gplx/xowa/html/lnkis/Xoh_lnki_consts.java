@@ -24,12 +24,12 @@ public class Xoh_lnki_consts {
 	;
 	public static final String Str_img_cls_thumbimage = "thumbimage";
 	private static final byte[] 
-	  Bry_anchor_class_image	= Bry_.new_ascii_(" class=\"image\"")
-	, Bry_anchor_rel_nofollow	= Bry_.new_ascii_(" rel=\"nofollow\"")
-	, Bry_img_cls_thumbborder	= Bry_.new_ascii_(" class=\"thumbborder\"")
-	, Bry_img_cls_prefix		= Bry_.new_ascii_(" class=\"")
+	  Bry_anchor_class_image	= Bry_.new_a7(" class=\"image\"")
+	, Bry_anchor_rel_nofollow	= Bry_.new_a7(" rel=\"nofollow\"")
+	, Bry_img_cls_thumbborder	= Bry_.new_a7(" class=\"thumbborder\"")
+	, Bry_img_cls_prefix		= Bry_.new_a7(" class=\"")
 	;
-	public static final byte[] Bry_img_cls_thumbimage	= Bry_.new_ascii_(" class=\"thumbimage\"");
+	public static final byte[] Bry_img_cls_thumbimage	= Bry_.new_a7(" class=\"thumbimage\"");
 	public static final byte[] Bry_none = Bry_.Empty;
 	public static byte[] A_cls_to_bry(byte tid) {return tid == Tid_a_cls_none ? Bry_.Empty : Bry_anchor_class_image;}
 	public static byte[] A_rel_to_bry(byte tid) {return tid == Tid_a_rel_none ? Bry_.Empty : Bry_anchor_rel_nofollow;}

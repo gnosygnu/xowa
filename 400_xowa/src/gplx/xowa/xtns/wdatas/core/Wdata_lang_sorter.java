@@ -29,7 +29,7 @@ public class Wdata_lang_sorter implements GfoEvObj, gplx.lists.ComparerAble {
 		for (int i = 0; i < len; ++i) {
 			byte[] lang = langs[i];
 			Wdata_lang_sorter_itm itm = new Wdata_lang_sorter_itm(i, lang);
-			hash.Add_if_new(lang, itm);
+			hash.Add_if_dupe_use_1st(lang, itm);
 		}
 	}
 	public int compare(Object lhsObj, Object rhsObj) {
@@ -49,10 +49,10 @@ public class Wdata_lang_sorter implements GfoEvObj, gplx.lists.ComparerAble {
 		Sort_wdoc_list(Bool_.N, wdoc.Descr_list());
 		Sort_wdoc_list(Bool_.N, wdoc.Alias_list());
 	}
-	private void Sort_wdoc_list(boolean is_slink, OrderedHash list) {
+	private void Sort_wdoc_list(boolean is_slink, Ordered_hash list) {
 		int len = list.Count();
 		for (int i = 0; i < len; ++i) {
-			Wdata_lang_sortable itm = (Wdata_lang_sortable)list.FetchAt(i);
+			Wdata_lang_sortable itm = (Wdata_lang_sortable)list.Get_at(i);
 			if (is_slink) {
 				Wdata_sitelink_itm slink = (Wdata_sitelink_itm)itm;
 				byte[] lang_val = slink.Domain_info().Lang_orig_key();	// use orig, not cur; EX: simplewiki has orig of "simple" but lang of "en"
@@ -63,7 +63,7 @@ public class Wdata_lang_sorter implements GfoEvObj, gplx.lists.ComparerAble {
 		}
 	}
 	private int Sort_calc(Wdata_lang_sortable data_itm) {
-		Wdata_lang_sorter_itm sort_itm = (Wdata_lang_sorter_itm)hash.Fetch(data_itm.Lang_code());
+		Wdata_lang_sorter_itm sort_itm = (Wdata_lang_sorter_itm)hash.Get_by(data_itm.Lang_code());
 		int new_sort = sort_itm == null ? Sort_none : sort_itm.Sort();
 		data_itm.Lang_sort_(new_sort);
 		return new_sort;

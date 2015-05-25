@@ -37,7 +37,7 @@ class ErrProcData {
 		*/
 		if (stackTrace == null) return new ErrProcData[0];
 				String[] lines = String_.SplitLines_any(stackTrace);
-		ListAdp list = ListAdp_.new_();
+		List_adp list = List_adp_.new_();
 		int len = Array_.Len(lines);		
 		for (int i = 0; i < len; i++) {
 			ErrProcData md = ErrProcData.parse_(lines[i]);
@@ -45,7 +45,7 @@ class ErrProcData {
 			if (String_.HasAtBgn(md.signatureRaw, "gplx.Err_") || String_.HasAtBgn(md.signatureRaw, "gplx.Err.")) continue;	// java includes entire stackTrace from point of creation; only care about point of throw
 			list.Add(md);
 		}			
-		return (ErrProcData[])list.Xto_ary(ErrProcData.class);
+		return (ErrProcData[])list.To_ary(ErrProcData.class);
 			}
 	public static ErrProcData parse_(String raw) {
 		ErrProcData rv = new ErrProcData().Raw_(raw);

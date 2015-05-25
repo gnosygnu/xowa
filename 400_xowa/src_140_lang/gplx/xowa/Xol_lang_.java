@@ -44,7 +44,7 @@ public class Xol_lang_ {
 				return Char_tid_misc;
 		}
 	}
-	public static final byte[] Key_en = Bry_.new_ascii_("en");
+	public static final byte[] Key_en = Bry_.new_a7("en");
 	public static void Lang_init(Xol_lang lang) {
 		lang.Num_mgr().Separators_mgr().Set(Xol_num_mgr.Separators_key__grp, Xol_num_mgr.Separators_key__grp);
 		lang.Num_mgr().Separators_mgr().Set(Xol_num_mgr.Separators_key__dec, Xol_num_mgr.Separators_key__dec);

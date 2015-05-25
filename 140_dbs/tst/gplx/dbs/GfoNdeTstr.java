@@ -18,15 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs; import gplx.*;
 public class GfoNdeTstr {
 	public static void tst_ValsByCol(GfoNde nde, String fld, Object... expdAry) {
-		ListAdp expd = ListAdp_.new_();
+		List_adp expd = List_adp_.new_();
 		for (int i = 0; i < expdAry.length; i++) {
 			expd.Add(Object_.Xto_str_strict_or_empty(expdAry[i]));
 		}
-		ListAdp actl = ListAdp_.new_();
+		List_adp actl = List_adp_.new_();
 		for (int i = 0; i < nde.Subs().Count(); i++) {
 			GfoNde sub = nde.Subs().FetchAt_asGfoNde(i);
 			actl.Add(Object_.Xto_str_strict_or_empty(sub.Read(fld)));
 		}
-		Tfds.Eq_ary(expd.XtoStrAry(), actl.XtoStrAry());
+		Tfds.Eq_ary(expd.To_str_ary(), actl.To_str_ary());
 	}
 }

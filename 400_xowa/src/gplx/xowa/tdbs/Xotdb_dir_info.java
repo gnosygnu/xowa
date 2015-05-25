@@ -28,12 +28,12 @@ public class Xotdb_dir_info {
 	public Xotdb_dir_info Ext_tid_(byte v) {
 		ext_tid = v; 
 		ext_bry = Wtr_ext(v);
-		ext_str = String_.new_ascii_(ext_bry);
+		ext_str = String_.new_a7(ext_bry);
 		return this;
 	}	byte ext_tid = gplx.ios.Io_stream_.Tid_raw;
 
 	public static final String Wtr_xdat_str = ".xdat", Wtr_zip_str = ".zip", Wtr_gz_str = ".gz", Wtr_bz2_str = ".bz2";
-	public static final byte[] Wtr_xdat_bry = Bry_.new_ascii_(Wtr_xdat_str), Wtr_zip_bry = Bry_.new_ascii_(Wtr_zip_str), Wtr_gz_bry = Bry_.new_ascii_(Wtr_gz_str), Wtr_bz2_bry = Bry_.new_ascii_(Wtr_bz2_str);
+	public static final byte[] Wtr_xdat_bry = Bry_.new_a7(Wtr_xdat_str), Wtr_zip_bry = Bry_.new_a7(Wtr_zip_str), Wtr_gz_bry = Bry_.new_a7(Wtr_gz_str), Wtr_bz2_bry = Bry_.new_a7(Wtr_bz2_str);
 	public static String Wtr_dir(byte v) {
 		switch (v) {
 			case gplx.ios.Io_stream_.Tid_raw	: return "";

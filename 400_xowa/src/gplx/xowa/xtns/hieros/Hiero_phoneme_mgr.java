@@ -18,14 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.srls.dsvs.*;
 class Hiero_phoneme_mgr implements GfoInvkAble {
-	private OrderedHash hash = OrderedHash_.new_bry_();
+	private Ordered_hash hash = Ordered_hash_.new_bry_();
 	private Hiero_phoneme_srl srl;
 	public Hiero_phoneme_mgr() {srl = new Hiero_phoneme_srl(this);}
 	public int Len() {return hash.Count();}
-	public Hiero_phoneme_itm Get_at(int i) {return (Hiero_phoneme_itm)hash.FetchAt(i);}
+	public Hiero_phoneme_itm Get_at(int i) {return (Hiero_phoneme_itm)hash.Get_at(i);}
 	public void Add(byte[] key, byte[] val) {hash.Add(key, new Hiero_phoneme_itm(key, val));}
 	public void Clear() {hash.Clear();}
-	public Hiero_phoneme_itm Get_by_key(byte[] key) {return (Hiero_phoneme_itm)hash.Fetch(key);}
+	public Hiero_phoneme_itm Get_by_key(byte[] key) {return (Hiero_phoneme_itm)hash.Get_by(key);}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_srl))			return srl;
 		else	return GfoInvkAble_.Rv_unhandled;

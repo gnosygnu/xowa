@@ -25,14 +25,14 @@ public interface Db_conn_bldr_wkr {
 }
 class Db_conn_bldr_wkr__sqlite implements Db_conn_bldr_wkr {
 	public void Clear_for_tests() {}
-	public boolean Exists(Io_url url) {return Io_mgr._.ExistsFil(url);}
+	public boolean Exists(Io_url url) {return Io_mgr.I.ExistsFil(url);}
 	public Db_conn Get(Io_url url) {
-		if (!Io_mgr._.ExistsFil(url)) return null;
+		if (!Io_mgr.I.ExistsFil(url)) return null;
 		Db_conn_info db_url = Db_conn_info_.sqlite_(url);
 		return Db_conn_pool.I.Get_or_new(db_url);
 	}
 	public Db_conn New(Io_url url) {
-		Io_mgr._.CreateDirIfAbsent(url.OwnerDir());	// must assert that dir exists
+		Io_mgr.I.CreateDirIfAbsent(url.OwnerDir());	// must assert that dir exists
 		Db_conn_info db_url = Sqlite_conn_info.make_(url);
 		Db_conn conn = Db_conn_pool.I.Get_or_new(db_url);
 		Sqlite_engine_.Pragma_page_size(conn, 4096);
@@ -42,7 +42,7 @@ class Db_conn_bldr_wkr__sqlite implements Db_conn_bldr_wkr {
         public static final Db_conn_bldr_wkr__sqlite I = new Db_conn_bldr_wkr__sqlite(); Db_conn_bldr_wkr__sqlite() {}
 }
 class Db_conn_bldr_wkr__mem implements Db_conn_bldr_wkr {
-	private final HashAdp hash = HashAdp_.new_();
+	private final Hash_adp hash = Hash_adp_.new_();
 	public void Clear_for_tests() {hash.Clear(); Db_conn_pool.I.Clear();}
 	public boolean Exists(Io_url url) {
 		String io_url_str = url.Xto_api();

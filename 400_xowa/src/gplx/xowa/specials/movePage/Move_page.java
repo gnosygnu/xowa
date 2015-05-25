@@ -132,7 +132,7 @@ class Move_trg_ns_list_fmtr implements Bry_fmtr_arg {
 			fmtr.Bld_bfr_many(bfr, ns.Id(), bry_selected, ns.Name_ui());
 		}
 	}
-	private static final byte[] Bry_selected = Bry_.new_ascii_(" selected=''");
+	private static final byte[] Bry_selected = Bry_.new_a7(" selected=''");
 	private Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	(	""
 	,	"  <option value='~{ns_id}' ~{ns_selected}>~{ns_name}</option>"
@@ -150,7 +150,7 @@ class Move_url_args {
 		int args_len = args.length;
 		for (int i = 0; i < args_len; i++) {
 			Gfo_url_arg arg = args[i];
-			Object tid_obj = arg_keys.Fetch(arg.Key_bry());
+			Object tid_obj = arg_keys.Get_by(arg.Key_bry());
 			byte[] val_bry = arg.Val_bry();
 			if (tid_obj != null) {
 				switch (((Byte_obj_val)tid_obj).Val()) {

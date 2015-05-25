@@ -29,6 +29,6 @@ public class Xoh_lnki_consts_tst {
 }
 class Xoh_lnki_consts_fxt {
 	public void Test_img_cls_to_bry(byte tid, String other, String expd) {
-		Tfds.Eq(expd, String_.new_utf8_(Xoh_lnki_consts.Img_cls_to_bry(tid, Bry_.new_utf8__null(other))));
+		Tfds.Eq(expd, String_.new_u8(Xoh_lnki_consts.Img_cls_to_bry(tid, Bry_.new_u8_safe(other))));
 	}
 }

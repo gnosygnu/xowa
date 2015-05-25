@@ -19,10 +19,10 @@ package gplx.xowa; import gplx.*;
 import gplx.ios.*;
 class Sql_fld_mgr {
 	public int Count() {return hash.Count();}
-	public Sql_fld_itm Get_by_key(String fld) {return Get_by_key(Bry_.new_utf8_(fld));}
+	public Sql_fld_itm Get_by_key(String fld) {return Get_by_key(Bry_.new_u8(fld));}
 	public Sql_fld_itm Get_by_key(byte[] fld) {
-		return (Sql_fld_itm)hash.Fetch(fld);
-	}	private OrderedHash hash = OrderedHash_.new_bry_();
+		return (Sql_fld_itm)hash.Get_by(fld);
+	}	private Ordered_hash hash = Ordered_hash_.new_bry_();
 	public Sql_fld_mgr Parse(byte[] raw) {
 		hash.Clear();
 		int bgn = Bry_finder.Find_fwd(raw, Tkn_create_table); if (bgn == Bry_.NotFound) throw Err_.new_("could not find 'CREATE TABLE'");
@@ -48,8 +48,8 @@ class Sql_fld_mgr {
 		}
 	}
 	private static final byte[] 
-		Tkn_create_table = Bry_.new_ascii_("CREATE TABLE")
-	,	Tkn_unique_index = Bry_.new_ascii_("UNIQUE KEY")
+		Tkn_create_table = Bry_.new_a7("CREATE TABLE")
+	,	Tkn_unique_index = Bry_.new_a7("UNIQUE KEY")
 	;
 	public static final int Not_found = -1;
 }

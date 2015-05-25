@@ -47,11 +47,11 @@ class Xow_fragment_mgr_fxt {
 			wiki = Xoa_app_fxt.wiki_tst_(app);
 		}
 	}	private Xowe_wiki wiki;
-	public Xol_lang Make_lang(String key) {return wiki.Appe().Lang_mgr().Get_by_key_or_new(Bry_.new_ascii_(key));}
+	public Xol_lang Make_lang(String key) {return wiki.Appe().Lang_mgr().Get_by_key_or_new(Bry_.new_a7(key));}
 	public void Test_fragment(String key, String expd) {Test_fragment(wiki.Lang(), key, expd);}
 	public void Test_fragment(Xol_lang lang, String key, String expd) {
 		wiki.Fragment_mgr().Evt_lang_changed(lang);
 		byte[] actl = (byte[])GfoInvkAble_.InvkCmd(wiki.Fragment_mgr(), key);
-		Tfds.Eq_str_lines(expd, String_.new_utf8_(actl));
+		Tfds.Eq_str_lines(expd, String_.new_u8(actl));
 	}
 }

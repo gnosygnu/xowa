@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
 import gplx.core.brys.*;
 class Xows_paging_parser {
-	private final ListAdp itm_list = ListAdp_.new_();
+	private final List_adp itm_list = List_adp_.new_();
 	private final Bry_rdr rdr = new Bry_rdr();
 	public Xows_paging_itm[] Parse(byte[] raw) {	// EX: en.wikipedia.org|41|60;en.wiktionary.org|21|40;
 		rdr.Src_(raw);
@@ -29,7 +29,7 @@ class Xows_paging_parser {
 			Xows_paging_itm itm = new Xows_paging_itm(wiki, bgn, end);
 			itm_list.Add(itm);
 		}
-		return (Xows_paging_itm[])itm_list.Xto_ary_and_clear(Xows_paging_itm.class);
+		return (Xows_paging_itm[])itm_list.To_ary_and_clear(Xows_paging_itm.class);
 	}
 }
 class Xows_paging_itm {

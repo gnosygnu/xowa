@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
 public class Xouc_setup_mgr implements GfoInvkAble {
-	public Xouc_setup_mgr(Xou_user user) {this.user = user;}
-	public Xou_user User() {return user;} private Xou_user user;
+	public Xouc_setup_mgr(Xoue_user user) {this.user = user;}
+	public Xoue_user User() {return user;} private Xoue_user user;
 	private String setup_completed = "";
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {			
 		if		(ctx.Match(k, Invk_setup_completed))			return setup_completed;
@@ -47,14 +47,14 @@ public class Xouc_setup_mgr implements GfoInvkAble {
 		app.Cfg_mgr().Set_by_all("app.user.cfg.setup.setup_completed", setup_completed);
 		app.Cfg_mgr().Db_save_txt();
 	}
-	boolean Run(String exe, String arg) {
+	private boolean Run(String exe, String arg) {
 		boolean pass = false; String fail = "";
 		try {pass = new ProcessAdp().Exe_url_(Io_url_.new_fil_(exe)).Args_str_(arg).Run_wait_sync().Exit_code_pass();}
 		catch (Exception e) {
 			fail = Err_.Message_gplx_brief(e);
 		}
 		if (!pass)
-			user.App().Usr_dlg().Prog_many("xowa.setup_mgr", "run.fail", "process exec failed: ~{0} ~{1} ~{2}", exe, arg, fail);
+			user.Appe().Usr_dlg().Prog_many("xowa.setup_mgr", "run.fail", "process exec failed: ~{0} ~{1} ~{2}", exe, arg, fail);
 		return pass;
 	}
 }

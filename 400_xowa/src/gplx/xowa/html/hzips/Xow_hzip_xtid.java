@@ -26,19 +26,19 @@ class Xow_hzip_xtid {
 		return xtid_end;
 	}
 	private static final byte[]
-	  Bry_xtid				= Bry_.new_ascii_("xtid='")
+	  Bry_xtid				= Bry_.new_a7("xtid='")
 	;
 	private static final int 
 	  Len_xtid				= Bry_xtid.length
 	;
 	public static final byte[]
-	  Bry_lnki_text_n		= Bry_.new_ascii_("a_lnki_text_n")
-	, Bry_lnki_text_y		= Bry_.new_ascii_("a_lnki_text_y")
-	, Bry_lnke_txt			= Bry_.new_ascii_("a_lnke_txt")
-	, Bry_lnke_brk_n		= Bry_.new_ascii_("a_lnke_brk_n")
-	, Bry_lnke_brk_y		= Bry_.new_ascii_("a_lnke_brk_y")
-	, Bry_img_full			= Bry_.new_ascii_("a_img_full")
-	, Bry_hdr				= Bry_.new_ascii_("hdr")
+	  Bry_lnki_text_n		= Bry_.new_a7("a_lnki_text_n")
+	, Bry_lnki_text_y		= Bry_.new_a7("a_lnki_text_y")
+	, Bry_lnke_txt			= Bry_.new_a7("a_lnke_txt")
+	, Bry_lnke_brk_n		= Bry_.new_a7("a_lnke_brk_n")
+	, Bry_lnke_brk_y		= Bry_.new_a7("a_lnke_brk_y")
+	, Bry_img_full			= Bry_.new_a7("a_img_full")
+	, Bry_hdr				= Bry_.new_a7("hdr")
 	;
 	private static final Hash_adp_bry Xtids = Hash_adp_bry.cs_()
 	.Add_bry_byte(Bry_lnki_text_n		, Xow_hzip_dict.Tid_lnki_text_n)

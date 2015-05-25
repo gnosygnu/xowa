@@ -56,7 +56,7 @@ class Php_text_itm_arg implements Php_text_itm {
 	public int Idx() {return idx;} private int idx;
 	public void Bld(Bry_bfr bfr, byte[] src) {
 		bfr.Add_byte(Byte_ascii.Tilde).Add_byte(Byte_ascii.Curly_bgn)
-		.Add_int_variable(idx - ListAdp_.Base1) // php is super 1
+		.Add_int_variable(idx - List_adp_.Base1) // php is super 1
 		.Add_byte(Byte_ascii.Curly_end);
 	}
 }

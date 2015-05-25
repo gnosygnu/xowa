@@ -21,15 +21,15 @@ public class GfmlTrie {
 	public String[] Symbols() {
 		String[] rv = new String[symbols.Count()];
 		for (int i = 0; i < rv.length; i++)
-			rv[i] = String_.cast_(symbols.FetchAt(i));
+			rv[i] = String_.cast_(symbols.Get_at(i));
 		return rv;
-	}	OrderedHash symbols = OrderedHash_.new_();
+	}	Ordered_hash symbols = Ordered_hash_.new_();
 	public int LastMatchCount; // PERF: prop is faster than method
 	public Object FindMatch(CharStream stream) {
 		Object result = null; int moveCount = 0; LastMatchCount = 0;
 		IntObjHash_base link = rootLink;
 		while (stream.AtMid()) {
-			Object found = link.Fetch(stream.Cur());
+			Object found = link.Get_by(stream.Cur());
 			if (found == null) break;										//	found is null; can happen for false matches; ex: <!-- reg, and <!-* is cur; goes to <!- before exit
 			LastMatchCount++;
 			IntObjHash_base foundAsLink = IntObjHash_base_.as_(found);
@@ -54,7 +54,7 @@ public class GfmlTrie {
 		IntObjHash_base curLink = rootLink;
 		for (int i = 0; i < ary.length; i++) {
 			char c = ary[i];
-			Object found = curLink.Fetch(c);
+			Object found = curLink.Get_by(c);
 			IntObjHash_base foundAsLink = IntObjHash_base_.as_(found);
 			if (i == lastIndex) {											//	lastChar
 				if (found != null) {										//		slot is occupied
@@ -79,7 +79,7 @@ public class GfmlTrie {
 				curLink = foundAsLink;
 			}
 		}
-		symbols.AddReplace(symbol, symbol);
+		symbols.Add_if_dupe_use_nth(symbol, symbol);
 	}
 	public void Del(String symbol) {
 		char[] ary = String_.XtoCharAry(symbol); int lastIndex = ary.length - 1;
@@ -88,7 +88,7 @@ public class GfmlTrie {
 		for (int i = 0; i < ary.length; i++) {
 			char c = ary[i];
 			linkAry[i] = link;
-			link = IntObjHash_base_.as_(link.Fetch(c));
+			link = IntObjHash_base_.as_(link.Get_by(c));
 			if (link == null) break;										//		c does not have nextHash; break
 		}
 
@@ -96,7 +96,7 @@ public class GfmlTrie {
 		for (int i = lastIndex; i >= 0; i--) {								//	remove each char from hashes; must move backwards
 			char c = ary[i];
 			IntObjHash_base curLink = linkAry[i];
-			Object found = curLink.Fetch(c);
+			Object found = curLink.Get_by(c);
 			IntObjHash_base foundAsLink = IntObjHash_base_.as_(found);
 			if (nextHash != null && nextHash.Bay() != null)					//		occurs when long is dropped; ex: '<-' and '<'; '<-' dropped; <'s .Bay in '<-' chain must be transplanted to '<' .Bay
 				curLink.Set(c, nextHash.Bay());

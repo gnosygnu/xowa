@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import org.junit.*;
+import org.junit.*; import gplx.xowa.files.*;
 public class Xoh_file_wtr_audio_video_tst {
 	@Before public void init() {fxt.Reset();} private Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Audio_full() {
@@ -89,6 +89,7 @@ public class Xoh_file_wtr_audio_video_tst {
 	}
 	@Test  public void Audio_full_width() {	// ISSUE: width arg ignored for v2; zh.b:小学数学/自然数; DATE:2014-05-03
 		fxt.Wiki().File_mgr().Version_2_y_();
+		fxt.App().Usere().Init_by_app(fxt.App());	// TEST: init cache else null reference
 		fxt.Test_html_wiki_frag("[[File:A.oga|30px|a]]", "<div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:30px;\">");
 		fxt.Wiki().File_mgr().Version_1_y_();
 	}
@@ -117,7 +118,7 @@ public class Xoh_file_wtr_audio_video_tst {
 		(	"    <div id=\"xowa_media_div\">"
 		,	"      <div>"
 		,	"        <a href=\"/wiki/File:A.ogv\" class=\"image\" title=\"A.ogv\">"
-		,	"          <img id=\"xowa_file_img_0\" src=\"\" width=\"400\" height=\"0\" alt=\"b\" />"
+		,	"          <img id=\"xowa_file_img_0\" src=\"file:///\" width=\"400\" height=\"0\" alt=\"b\" />"
 		,	"        </a>"
 		,	"      </div>"
 		,	"      <div>"
@@ -128,21 +129,39 @@ public class Xoh_file_wtr_audio_video_tst {
 		,	"    </div>"
 		));		
 	}
-	@Test  public void Video_full_ogg() {// PURPOSE: ogg should default to video on first load; otherwise dynamic-update won't be able to put in thumb
+	@Test  public void Video_full_ogg() {// PURPOSE: ogg should default to video on first load; otherwise dynamic-update won't be able to put in thumb; DATE:2015-05-21
+		Xof_file_fxt file_fxt = Xof_file_fxt.new_all(fxt.Wiki());
+		file_fxt.Exec_orig_add(Bool_.Y, "A.ogg", Xof_ext_.Id_ogv, 400, 400, "");
 		fxt.Test_parse_page_wiki_str
-		(	"[[File:A.ogg|400px|a|alt=b]]", String_.Concat_lines_nl_skip_last
-		(	"    <div id=\"xowa_media_div\">"
-		,	"      <div>"
-		,	"        <a href=\"/wiki/File:A.ogg\" class=\"image\" title=\"A.ogg\">"
-		,	"          <img id=\"xowa_file_img_0\" src=\"\" width=\"400\" height=\"0\" alt=\"b\" />"
-		,	"        </a>"
-		,	"      </div>"
-		,	"      <div>"
-		,	"        <a id=\"xowa_file_play_0\" href=\"file:///mem/wiki/repo/trg/orig/4/2/A.ogg\" xowa_title=\"A.ogg\" class=\"xowa_anchor_button\" style=\"width:398px;max-width:400px;\">"
-		,	"          <img src=\"file:///mem/xowa/user/test_user/app/img/file/play.png\" width=\"22\" height=\"22\" alt=\"Play sound\" />"
-		,	"        </a>"
-		,	"      </div>"
-		,	"    </div>"
+		( "[[File:A.ogg|400px|a|alt=b]]", String_.Concat_lines_nl_skip_last
+		( "<div class=\"thumb tright\">"
+		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:400px;\">"
+		, "    <div id=\"xowa_media_div\">"
+		, "      <div>"
+		, "        <a id=\"xowa_file_play_0\" href=\"file:///\" xowa_title=\"A.ogg\" class=\"xowa_anchor_button\" style=\"width:398px;max-width:1024px;\">"
+		, "          <img src=\"file:///mem/xowa/user/test_user/app/img/file/play.png\" width=\"22\" height=\"22\" alt=\"Play sound\" />"
+		, "        </a>"
+		, "      </div>"
+		, "      <div>"
+		, "        <a href=\"/wiki/File:A.ogg\" class=\"image\" title=\"About this file\">"
+		, "          <img src=\"file:///mem/xowa/user/test_user/app/img/file/info.png\" width=\"22\" height=\"22\" />"
+		, "        </a>"
+		, "      </div>"
+		, "    </div>"
+		, "    <div class=\"thumbcaption\">"
+		, "      <div class=\"magnify\">"
+		, "        <a href=\"/wiki/File:A.ogg\" class=\"internal\" title=\"Enlarge\">"
+		, "          <img src=\"file:///mem/xowa/user/test_user/app/img/file/magnify-clip.png\" width=\"15\" height=\"11\" alt=\"\" />"
+		, "        </a>"
+		, "      </div>"
+		, "      a"
+		, "    </div>"
+		, "    <hr/>"
+		, "    <div class=\"thumbcaption\">"
+		, "b"
+		, "    </div>"
+		, "  </div>"
+		, "</div>"
 		));		
 	}
 	@Test  public void Video_thumb() {
@@ -153,7 +172,7 @@ public class Xoh_file_wtr_audio_video_tst {
 		,	"    <div id=\"xowa_media_div\">"
 		,	"      <div>"
 		,	"        <a href=\"/wiki/File:A.ogv\" class=\"image\" title=\"A.ogv\">"
-		,	"          <img id=\"xowa_file_img_0\" src=\"\" width=\"400\" height=\"0\" alt=\"b\" />"
+		,	"          <img id=\"xowa_file_img_0\" src=\"file:///\" width=\"400\" height=\"0\" alt=\"b\" />"
 		,	"        </a>"
 		,	"      </div>"
 		,	"      <div>"
@@ -187,7 +206,7 @@ public class Xoh_file_wtr_audio_video_tst {
 		,	"    <div id=\"xowa_media_div\">"
 		,	"      <div>"
 		,	"        <a href=\"/wiki/File:A.webm\" class=\"image\" title=\"A.webm\">"
-		,	"          <img id=\"xowa_file_img_0\" src=\"\" width=\"400\" height=\"0\" alt=\"b\" />"
+		,	"          <img id=\"xowa_file_img_0\" src=\"file:///\" width=\"400\" height=\"0\" alt=\"b\" />"
 		,	"        </a>"
 		,	"      </div>"
 		,	"      <div>"

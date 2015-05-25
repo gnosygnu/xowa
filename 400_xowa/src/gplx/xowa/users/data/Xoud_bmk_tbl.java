@@ -46,7 +46,7 @@ public class Xoud_bmk_tbl implements RlsAble {
 		Db_stmt stmt_delete = conn.Stmt_delete(tbl_name, fld_id);
 		stmt_delete.Clear().Crt_int(fld_id, id).Exec_delete();
 	}
-	public void Select_all(ListAdp rv) {
+	public void Select_all(List_adp rv) {
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empy).Clear().Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next())

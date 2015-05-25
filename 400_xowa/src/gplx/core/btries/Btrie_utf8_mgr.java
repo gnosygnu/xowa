@@ -43,9 +43,9 @@ public class Btrie_utf8_mgr implements Btrie_mgr {
 		}
 	}
 	public void Clear() {root.Clear(); count = 0;}
-	public Btrie_mgr Add_obj(String key, Object val) {return Add_obj(Bry_.new_utf8_(key), val);}
+	public Btrie_mgr Add_obj(String key, Object val) {return Add_obj(Bry_.new_u8(key), val);}
 	public Btrie_mgr Add_obj(byte[] key, Object val) {
-		if (val == null) throw Err_.new_("null objects cannot be registered").Add("key", String_.new_utf8_(key));
+		if (val == null) throw Err_.new_("null objects cannot be registered").Add("key", String_.new_u8(key));
 		int key_len = key.length;
 		Btrie_utf8_itm cur = root;
 		int c_bgn = 0;

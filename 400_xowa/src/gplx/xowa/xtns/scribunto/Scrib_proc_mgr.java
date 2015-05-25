@@ -17,12 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 public class Scrib_proc_mgr {
-	private OrderedHash hash = OrderedHash_.new_();
+	private Ordered_hash hash = Ordered_hash_.new_();
 	public void Clear() {hash.Clear();}
-	public Scrib_proc Get_by_key(String key) {return (Scrib_proc)hash.Fetch(key);}
-	public Scrib_proc Get_at(int i) {return (Scrib_proc)hash.FetchAt(i);}
+	public Scrib_proc Get_by_key(String key) {return (Scrib_proc)hash.Get_by(key);}
+	public Scrib_proc Get_at(int i) {return (Scrib_proc)hash.Get_at(i);}
 	public void Set(String key, Scrib_proc proc) {
-		hash.AddReplace(key, proc);		// WORKAROUND: AddReplace b/c some libraries reuse proc name; EX: getGlobalSiteId is used by mw.wikibase.lua and mw.wikibase.entity.lua
+		hash.Add_if_dupe_use_nth(key, proc);		// WORKAROUND: Add_if_dupe_use_nth b/c some libraries reuse proc name; EX: getGlobalSiteId is used by mw.wikibase.lua and mw.wikibase.entity.lua
 	}
 	public Scrib_proc Set(Scrib_lib lib, String proc_name, int proc_id) {
 		Scrib_proc proc = new Scrib_proc(lib, proc_name, proc_id);

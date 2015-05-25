@@ -30,7 +30,7 @@ public class Pft_func_time extends Pf_func_base {
 		Bry_bfr error_bfr = Bry_bfr.new_();
 		DateAdp date = ParseDate(arg_date, utc, error_bfr);
 		if (date == null || error_bfr.Len() > 0)
-			bfr.Add_str("<strong class=\"error\">").Add_bfr_and_clear(error_bfr).Add_str("</strong>");
+			bfr.Add_str_a7("<strong class=\"error\">").Add_bfr_and_clear(error_bfr).Add_str("</strong>");
 		else {
 			Xol_lang lang = ctx.Lang();
 			if (Bry_.Len_gt_0(arg_lang)) {
@@ -51,7 +51,7 @@ public class Pft_func_time extends Pf_func_base {
 		}
 		catch (Exception exc) {
 			Err_.Noop(exc);
-			error_bfr.Add_str("Invalid time");
+			error_bfr.Add_str_a7("Invalid time");
 			return null;
 		}
 	}
@@ -89,7 +89,7 @@ class Pfxtp_roman {
 		int len = names.length;
 		byte[][] rv = new byte[len][];
 		for (int i = 0; i < len; i++)
-			rv[i] = Bry_.new_utf8_(names[i]);
+			rv[i] = Bry_.new_u8(names[i]);
 		return rv;
 	}
 }

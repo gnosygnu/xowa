@@ -34,7 +34,7 @@ public class Xoctg_url {
 			Gfo_url_arg arg = args[i];
 			byte[] arg_key = arg.Key_bry();
 			Object tid_obj = Arg_keys.Get_by_bry(arg_key);
-			if (tid_obj == null) {usr_dlg.Warn_many("", "", "unknown arg_key: ~{0}", String_.new_utf8_(arg_key)); continue;} // ignore invalid args
+			if (tid_obj == null) {usr_dlg.Warn_many("", "", "unknown arg_key: ~{0}", String_.new_u8(arg_key)); continue;} // ignore invalid args
 			byte[] arg_val = arg.Val_bry();
 			byte tid = ((Byte_obj_val)tid_obj).Val();
 			switch (tid) {

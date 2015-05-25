@@ -18,13 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.gui.menus.dom; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*; import gplx.xowa.gui.menus.*;
 import gplx.xowa.gui.cmds.*;
 public class Xog_mnu_regy {
-	private OrderedHash hash;
+	private Ordered_hash hash;
 	private Xoa_gui_mgr gui_mgr;
 	public Xog_mnu_regy(Xoa_gui_mgr gui_mgr) {
 		this.gui_mgr = gui_mgr;
 	}
 	public void Init_by_app(Xoae_app app) {
-		hash = OrderedHash_.new_();
+		hash = Ordered_hash_.new_();
 		Xog_cmd_mgr cmd_mgr = app.Gui_mgr().Cmd_mgr();
 		int len = cmd_mgr.Len();
 		for (int i = 0; i < len; i++) {
@@ -36,7 +36,7 @@ public class Xog_mnu_regy {
 		Init_obsolete(hash, gui_mgr);
 	}
 	public Xog_mnu_itm Get_or_make(String key) {
-		Xog_mnu_itm rv = (Xog_mnu_itm)hash.Fetch(key);
+		Xog_mnu_itm rv = (Xog_mnu_itm)hash.Get_by(key);
 		if (rv == null) {
 			rv = new Xog_mnu_itm(gui_mgr, key);
 			hash.Add(key, rv);
@@ -45,7 +45,7 @@ public class Xog_mnu_regy {
 			rv = rv.Clone();
 		return rv;
 	}
-	private static void Init_obsolete(OrderedHash hash, Xoa_gui_mgr gui_mgr) {
+	private static void Init_obsolete(Ordered_hash hash, Xoa_gui_mgr gui_mgr) {
 		Init_obsolete_itm(hash, gui_mgr, "xowa.file"										, Xog_cmd_itm_.Key_gui_menus_group_file);
 		Init_obsolete_itm(hash, gui_mgr, "xowa.tabs.new_dflt__at_dflt__focus_y"				, Xog_cmd_itm_.Key_gui_browser_tabs_new_dflt__at_dflt__focus_y);
 		Init_obsolete_itm(hash, gui_mgr, "xowa.tabs.close_cur"								, Xog_cmd_itm_.Key_gui_browser_tabs_close_cur);
@@ -96,7 +96,7 @@ public class Xog_mnu_regy {
 		Init_obsolete_itm(hash, gui_mgr, "xowa.file.save_file_as"							, Xog_cmd_itm_.Key_gui_page_selection_save_file_as);
 		Init_obsolete_itm(hash, gui_mgr, "xowa.widgets.prog_log.show"						, Xog_cmd_itm_.Key_gui_browser_prog_log_show);
 	}
-	private static void Init_obsolete_itm(OrderedHash hash, Xoa_gui_mgr gui_mgr, String old, String cur) {
+	private static void Init_obsolete_itm(Ordered_hash hash, Xoa_gui_mgr gui_mgr, String old, String cur) {
 		Xog_mnu_itm rv = new Xog_mnu_itm(gui_mgr, cur);
 		hash.Add(old, rv);
 	}

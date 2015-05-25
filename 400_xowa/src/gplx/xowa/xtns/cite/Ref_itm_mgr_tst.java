@@ -31,9 +31,9 @@ class Ref_itm_mgr_fxt {
 	public Xtn_ref_nde_chkr itm_uid_(int uid)					{return itm_(null, -1, uid);}
 	public Xtn_ref_nde_chkr itm_(String key, int idx)			{return itm_(key, idx, -1);}
 	public Xtn_ref_nde_chkr itm_(String key, int idx, int uid)	{return new Xtn_ref_nde_chkr().Key_(key).Idx_major_(idx).Uid_(uid);}
-	public Ref_itm_mgr_fxt run_Add_follow(String follow)		{return run_Add_grp(Bry_.Empty, Bry_.new_utf8_(follow), Bry_.Ary(Bry_.Empty));}
+	public Ref_itm_mgr_fxt run_Add_follow(String follow)		{return run_Add_grp(Bry_.Empty, Bry_.new_u8(follow), Bry_.Ary(Bry_.Empty));}
 	public Ref_itm_mgr_fxt run_Add(String... name_ary)	{return run_Add_grp(Bry_.Empty, Bry_.Empty, Bry_.Ary(name_ary));}
-	public Ref_itm_mgr_fxt run_Add_grp(String grp, String... name_ary) {return run_Add_grp(Bry_.new_utf8_(grp), Bry_.Empty, Bry_.Ary(name_ary));}
+	public Ref_itm_mgr_fxt run_Add_grp(String grp, String... name_ary) {return run_Add_grp(Bry_.new_u8(grp), Bry_.Empty, Bry_.Ary(name_ary));}
 	public void Clear() {ref_mgr.Grps_clear();}
 	Ref_itm_mgr_fxt run_Add_grp(byte[] grp_name, byte[] follow, byte[]... name_ary) {
 		for (int i = 0; i < name_ary.length; i++) {
@@ -44,7 +44,7 @@ class Ref_itm_mgr_fxt {
 		return this;
 	}
 	public Ref_itm_mgr_fxt tst(Xtn_ref_nde_chkr... chkr_ary) {return tst_grp(ref_mgr.Lst_get(Bry_.Empty, 0), chkr_ary);}
-	public Ref_itm_mgr_fxt tst_grp(String grp_name, Xtn_ref_nde_chkr... chkr_ary) {return tst_grp(ref_mgr.Lst_get(Bry_.new_ascii_(grp_name), 0), chkr_ary);}
+	public Ref_itm_mgr_fxt tst_grp(String grp_name, Xtn_ref_nde_chkr... chkr_ary) {return tst_grp(ref_mgr.Lst_get(Bry_.new_a7(grp_name), 0), chkr_ary);}
 	public Ref_itm_mgr_fxt tst_grp(Ref_itm_lst lst, Xtn_ref_nde_chkr... chkr_ary) {
 		int itms_len = lst.Itms_len();
 		Ref_nde[] actl = new Ref_nde[itms_len];
@@ -52,7 +52,7 @@ class Ref_itm_mgr_fxt {
 			actl[i] = lst.Itms_get_at(i);
 		tst_mgr.Tst_ary("", chkr_ary, actl);
 		return this;
-	}	ListAdp actl_list = ListAdp_.new_();
+	}	List_adp actl_list = List_adp_.new_();
 }
 class Xtn_ref_nde_chkr implements Tst_chkr {
 	public Class<?> TypeOf() {return Ref_nde.class;}
@@ -65,7 +65,7 @@ class Xtn_ref_nde_chkr implements Tst_chkr {
 	public int Chk(Tst_mgr mgr, String path, Object actl_obj) {
 		Ref_nde actl = (Ref_nde)actl_obj;
 		int rv = 0;
-		rv += mgr.Tst_val(key == null, path, "key", key, String_.new_utf8_(actl.Name()));
+		rv += mgr.Tst_val(key == null, path, "key", key, String_.new_u8(actl.Name()));
 		rv += mgr.Tst_val(idx_major == -1, path, "idx_major", idx_major, actl.Idx_major());
 		rv += mgr.Tst_val(idx_minor == -1, path, "idx_minor", idx_minor, actl.Idx_minor());
 		rv += mgr.Tst_val(uid == -1, path, "uid", uid, actl.Uid());

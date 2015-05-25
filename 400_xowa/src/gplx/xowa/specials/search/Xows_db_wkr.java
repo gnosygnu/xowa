@@ -76,7 +76,7 @@ class Xows_db_wkr {
 				int page_ns = rdr.Read_int(page_tbl.Fld_page_ns());
 				if (!qry.Ns_mgr().Has(page_ns)) continue;						// ignore: ns doesn't match
 				byte[] page_ttl = rdr.Read_bry_by_str(page_tbl.Fld_page_title());
-				// Io_mgr._.AppendFilStr("C:\\temp.txt", String_.new_utf8_(word.Text()) + "|" + Int_.Xto_str(page_ns) + "|" + String_.new_utf8_(page_ttl) + "\n");
+				// Io_mgr.I.AppendFilStr("C:\\temp.txt", String_.new_u8(word.Text()) + "|" + Int_.Xto_str(page_ns) + "|" + String_.new_u8(page_ttl) + "\n");
 				byte[] page_ttl_lc = case_mgr.Case_build_lower(Xoa_ttl.Replace_unders(page_ttl));
 				byte[][] page_ttl_words = Bry_.Split(page_ttl_lc, Byte_ascii.Space, Bool_.Y);
 				if (!matcher.Matches(page_ttl_lc, page_ttl_words)) continue;	// ignore: ttl doesn't match matcher

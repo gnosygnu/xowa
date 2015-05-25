@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.html.modules.*;
 public class Gallery_xtn_mgr extends Xox_mgr_base {
-	@Override public byte[] Xtn_key() {return XTN_KEY;} public static final byte[] XTN_KEY = Bry_.new_ascii_("gallery");
+	@Override public byte[] Xtn_key() {return XTN_KEY;} public static final byte[] XTN_KEY = Bry_.new_a7("gallery");
 	@Override public Xox_mgr Clone_new() {return new Gallery_xtn_mgr();}
 	public Gallery_itm_parser Parser() {return parser;} private Gallery_itm_parser parser;
 	public Gallery_html_wtr Html_wtr() {return html_wtr;} private Gallery_html_wtr html_wtr;

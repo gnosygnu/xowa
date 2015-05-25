@@ -48,7 +48,7 @@ class Xol_num_grp_fmtr_fxt {
 	private Bry_bfr bfr = Bry_bfr.new_();
 	public void Reset() {}
 	public void Test_fmt_regx(String raw, String expd) {
-		byte[] actl = grouper.Fmt_regx(bfr, Bry_.new_ascii_(raw));
-		Tfds.Eq(expd, String_.new_utf8_(actl));
+		byte[] actl = grouper.Fmt_regx(bfr, Bry_.new_a7(raw));
+		Tfds.Eq(expd, String_.new_u8(actl));
 	}
 }

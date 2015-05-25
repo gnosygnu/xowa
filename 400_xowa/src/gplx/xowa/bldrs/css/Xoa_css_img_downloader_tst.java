@@ -82,8 +82,8 @@ public class Xoa_css_img_downloader_tst {
 	@Test  public void Clean_exc_site_only() 		{fxt.Test_clean_img_url("//site"								, null);}
 	@Test  public void Clean_exc_site_only_2() 		{fxt.Test_clean_img_url("//site/"								, null);}
 	@Test  public void Import_url() {
-		Io_mgr._.InitEngine_mem();
-		Io_mgr._.SaveFilStr("mem/www/b.css", "imported_css");
+		Io_mgr.I.InitEngine_mem();
+		Io_mgr.I.SaveFilStr("mem/www/b.css", "imported_css");
 		fxt.Test_css_convert
 		(	"x @import url(\"mem/www/b.css\") screen; z"
 		, 	String_.Concat_lines_nl
@@ -101,8 +101,8 @@ public class Xoa_css_img_downloader_tst {
 		fxt.Test_import_url("https://a.org"			, "https://a.org");	// unless starts with https EX:: handle @import(https://...); PAGE:tr.n:Main_Page; DATE:2014-06-04
 	}
 	@Test  public void Import_url_relative() {	// PURPOSE: if directory, add domain; "/a/b.css" -> "//domain/a/b.css"; DATE:2014-02-03
-		Io_mgr._.InitEngine_mem();
-		Io_mgr._.SaveFilStr("mem/en.wikipedia.org/www/b.css", "imported_css");
+		Io_mgr.I.InitEngine_mem();
+		Io_mgr.I.SaveFilStr("mem/en.wikipedia.org/www/b.css", "imported_css");
 		fxt.Test_css_convert
 		(	"x @import url(\"/www/b.css\") screen; z"	// starts with "/"
 		, 	String_.Concat_lines_nl
@@ -115,9 +115,9 @@ public class Xoa_css_img_downloader_tst {
 		);
 	}
 	@Test  public void Import_url_relative_skip() {	// PURPOSE: if rel path, skip; "//site/a/b.css"; DATE:2014-02-03
-		fxt.Downloader().Stylesheet_prefix_(Bry_.new_utf8_("mem"));	// stylesheet prefix prefix defaults to ""; set to "mem", else test will try to retrieve "//url" which will fail
-		Io_mgr._.InitEngine_mem();
-		Io_mgr._.SaveFilStr("mem//en.wikipedia.org/a/b.css", "imported_css");
+		fxt.Downloader().Stylesheet_prefix_(Bry_.new_u8("mem"));	// stylesheet prefix prefix defaults to ""; set to "mem", else test will try to retrieve "//url" which will fail
+		Io_mgr.I.InitEngine_mem();
+		Io_mgr.I.SaveFilStr("mem//en.wikipedia.org/a/b.css", "imported_css");
 		fxt.Test_css_convert
 		(	"x @import url(\"//en.wikipedia.org/a/b.css\") screen; z"	// starts with "//"
 		, 	String_.Concat_lines_nl
@@ -130,8 +130,8 @@ public class Xoa_css_img_downloader_tst {
 		);
 	}
 	@Test  public void Import_url_space() {		// PURPOSE: some css has spaces; replace with underlines else fails when downloaded; EX: https://it.wikivoyage.org/w/index.php?title=MediaWiki:Container e Infobox.css&action=raw&ctype=text/css; DATE:2015-03-08
-		Io_mgr._.InitEngine_mem();
-		Io_mgr._.SaveFilStr("mem/www/b_c.css", "imported_css");
+		Io_mgr.I.InitEngine_mem();
+		Io_mgr.I.SaveFilStr("mem/www/b_c.css", "imported_css");
 		fxt.Test_css_convert
 		(	"x @import url(\"mem/www/b c.css\") screen; z"
 		, 	String_.Concat_lines_nl
@@ -144,9 +144,9 @@ public class Xoa_css_img_downloader_tst {
 		);
 	}
 	@Test  public void Wikisource_freedimg() {	// PURPOSE: check that "wikimedia" is replaced for FreedImg hack; PAGE:en.s:Page:Notes_on_Osteology_of_Baptanodon._With_a_Description_of_a_New_Species.pdf/3 DATE:2014-09-06
-		fxt.Downloader().Stylesheet_prefix_(Bry_.new_utf8_("mem"));	// stylesheet prefix prefix defaults to ""; set to "mem", else test will try to retrieve "//url" which will fail
-		Io_mgr._.InitEngine_mem();
-		Io_mgr._.SaveFilStr("mem//en.wikisource.org/w/index.php?title=MediaWiki:Dynimg.css", ".freedImg img[src*=\"wikipedia\"], .freedImg img[src*=\"wikisource\"], .freedImg img[src*=\"score\"], .freedImg img[src*=\"math\"] {");
+		fxt.Downloader().Stylesheet_prefix_(Bry_.new_u8("mem"));	// stylesheet prefix prefix defaults to ""; set to "mem", else test will try to retrieve "//url" which will fail
+		Io_mgr.I.InitEngine_mem();
+		Io_mgr.I.SaveFilStr("mem//en.wikisource.org/w/index.php?title=MediaWiki:Dynimg.css", ".freedImg img[src*=\"wikipedia\"], .freedImg img[src*=\"wikisource\"], .freedImg img[src*=\"score\"], .freedImg img[src*=\"math\"] {");
 		fxt.Test_css_convert
 		(	"x @import url(\"//en.wikisource.org/w/index.php?title=MediaWiki:Dynimg.css\") screen; z"	// starts with "//"
 		, 	String_.Concat_lines_nl
@@ -166,18 +166,18 @@ class Xoa_css_img_downloader_fxt {
 		downloader.Ctor(Gfo_usr_dlg_.Test(), new Xof_download_wkr_test(), Bry_.Empty);
 	}
 	public void Test_css_convert(String raw, String expd, String... expd_img_ary) {
-		ListAdp actl_img_list = ListAdp_.new_();
-		byte[] actl_bry = downloader.Convert_to_local_urls(Bry_.new_ascii_("mem/en.wikipedia.org"), Bry_.new_utf8_(raw), actl_img_list);
-		Tfds.Eq_str_lines(expd, String_.new_utf8_(actl_bry));
-		Tfds.Eq_ary_str(expd_img_ary, actl_img_list.XtoStrAry());
+		List_adp actl_img_list = List_adp_.new_();
+		byte[] actl_bry = downloader.Convert_to_local_urls(Bry_.new_a7("mem/en.wikipedia.org"), Bry_.new_u8(raw), actl_img_list);
+		Tfds.Eq_str_lines(expd, String_.new_u8(actl_bry));
+		Tfds.Eq_ary_str(expd_img_ary, actl_img_list.To_str_ary());
 	}
 	public void Test_clean_img_url(String raw_str, String expd) {
-		byte[] raw = Bry_.new_ascii_(raw_str);
+		byte[] raw = Bry_.new_a7(raw_str);
 		byte[] actl = downloader.Clean_img_url(raw, raw.length);
-		Tfds.Eq(expd, actl == null ? null : String_.new_ascii_(actl));
+		Tfds.Eq(expd, actl == null ? null : String_.new_a7(actl));
 	}
 	public void Test_import_url(String raw, String expd) {
-		byte[] actl = Xoa_css_img_downloader.Import_url_build(Bry_.new_ascii_("http:"), Bry_.new_ascii_("//en.wikipedia.org"), Bry_.new_utf8_(raw));
-		Tfds.Eq(expd, String_.new_utf8_(actl));
+		byte[] actl = Xoa_css_img_downloader.Import_url_build(Bry_.new_a7("http:"), Bry_.new_a7("//en.wikipedia.org"), Bry_.new_u8(raw));
+		Tfds.Eq(expd, String_.new_u8(actl));
 	}
 }

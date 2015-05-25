@@ -32,24 +32,24 @@ public class IoItmDir_ {
 	}
 	static IoItmDir null_() {
 		IoItmDir rv = new IoItmDir(true);	// TODO: NULL should be removed
-		rv.ctor_IoItmBase_url(Io_url_.Null);
+		rv.ctor_IoItmBase_url(Io_url_.Empty);
 		rv.Exists_set(false);
 		return rv;
 	}
 	public static void Make(IoItmDir dir) {
-		Io_mgr._.CreateDir(dir.Url());
+		Io_mgr.I.CreateDir(dir.Url());
 		int len = dir.SubDirs().Count();
 		for (int i = 0; i < len; ++i) {
-			IoItmDir sub_dir = (IoItmDir)dir.SubDirs().FetchAt(i);
+			IoItmDir sub_dir = (IoItmDir)dir.SubDirs().Get_at(i);
 			Make(sub_dir);
 		}
 		len = dir.SubFils().Count();
 		for (int i = 0; i < len; ++i) {
-			IoItmFil sub_fil = (IoItmFil)dir.SubFils().FetchAt(i);
+			IoItmFil sub_fil = (IoItmFil)dir.SubFils().Get_at(i);
 			String text = String_.Repeat("a", (int)sub_fil.Size());
 			Io_url sub_url = sub_fil.Url();
-			Io_mgr._.SaveFilStr(sub_url, text);
-			Io_mgr._.UpdateFilModifiedTime(sub_url, sub_fil.ModifiedTime());
+			Io_mgr.I.SaveFilStr(sub_url, text);
+			Io_mgr.I.UpdateFilModifiedTime(sub_url, sub_fil.ModifiedTime());
 		}
 	}
 }

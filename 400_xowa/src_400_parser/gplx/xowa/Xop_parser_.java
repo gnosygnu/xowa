@@ -31,7 +31,6 @@ public class Xop_parser_ {
 		ctx.Para().Enabled_(para_enabled);
 		parser.Parse_wtxt_to_wdom(root, ctx, ctx.Tkn_mkr(), wtxt, Xop_parser_.Doc_bgn_bos);
 		wiki.Html_mgr().Html_wtr().Write_all(bfr, ctx, wtxt, root);
-		page.Lnki_file_mgr().Clear();	// NOTE: reset lnki_file_mgr else indicator will stop page from loading; DATE:2015-03-08
 		return bfr.To_bry_and_rls();
 	}
 }

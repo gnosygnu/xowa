@@ -19,22 +19,22 @@ package gplx.gfml; import gplx.*;
 class GfmlPragmaDefault implements GfmlPragma {
 	public String KeyOfPragma() {return "_default";}
 	public void Exec(GfmlBldr bldr, GfmlNde pragmaNde) {
-		ListAdp list = Compile(pragmaNde);
+		List_adp list = Compile(pragmaNde);
 		GfmlDefaultPragma_bgnCmd.ExecList(bldr.TypeMgr().TypeRegy(), bldr.CurNdeFrame().CurDocPos(), list);
 //			bldr.PragmaMgr.EndCmds_add(GfmlDocPos_.up_(bldr.CurNdeFrame.DocPos), GfmlDefaultPragma_endCmd.new_(list));
 	}
-	@gplx.Internal protected ListAdp Compile(GfmlNde pragmaNde) {
-		ListAdp list = ListAdp_.new_();
+	@gplx.Internal protected List_adp Compile(GfmlNde pragmaNde) {
+		List_adp list = List_adp_.new_();
 		for (int i = 0; i < pragmaNde.SubHnds().Count(); i++) {
-			GfmlNde subNde = (GfmlNde)pragmaNde.SubHnds().FetchAt(i);
+			GfmlNde subNde = (GfmlNde)pragmaNde.SubHnds().Get_at(i);
 			CompileSubNde(subNde, list);
 		}
 		return list;
 	}
-	@gplx.Internal protected void CompileSubNde(GfmlNde nde, ListAdp list) {
+	@gplx.Internal protected void CompileSubNde(GfmlNde nde, List_adp list) {
 		String typeKey = nde.SubKeys().FetchDataOrNull("typeKey"); if (typeKey == null) throw Err_.missing_key_("typeKey");
 		for (int i = 0; i < nde.SubHnds().Count(); i++) {
-			GfmlNde subNde = (GfmlNde)nde.SubHnds().FetchAt(i);
+			GfmlNde subNde = (GfmlNde)nde.SubHnds().Get_at(i);
 			GfmlDefaultItem item = CompileItem(subNde, typeKey);
 			list.Add(item);
 		}
@@ -60,7 +60,7 @@ class GfmlDefaultItem {
 	public GfmlObj ValPrev() {return valPrev;} @gplx.Internal protected GfmlDefaultItem ValPrev_(GfmlObj tkn) {valPrev = tkn; return this;} GfmlObj valPrev;
 	
 	public void Exec_bgn(GfmlType type) {
-		GfmlFld fld = type.SubFlds().Fetch(key);
+		GfmlFld fld = type.SubFlds().Get_by(key);
 		if (fld == null) {						// no default defined; create
 			valPrev = GfmlPragmaDefault.Default_none;
 			fld = GfmlFld.new_(true, key, GfmlType_.StringKey).DefaultTkn_(val);
@@ -72,7 +72,7 @@ class GfmlDefaultItem {
 		}
 	}
 	public void Exec_end(GfmlType type) {
-		GfmlFld fld = type.SubFlds().Fetch(key); if (fld == null) return;
+		GfmlFld fld = type.SubFlds().Get_by(key); if (fld == null) return;
 //			if (fld == null) throw Err_.arg_range_msg_("fatal: could not find fld; typeKey={0} fld={1}", typeKey, key);
 		if (valPrev == GfmlPragmaDefault.Default_none)			// drop default; (had been created by pragma)
 			type.SubFlds().Del(fld);
@@ -90,7 +90,7 @@ class GfmlDefaultItem {
 class GfmlDefaultPragma_bgnCmd implements GfmlBldrCmd {
 	public String Key() {return "pragma:gfml.default.bgnCmd";}
 	public void Exec(GfmlBldr bldr, GfmlTkn tkn) {ExecList(bldr.TypeMgr().TypeRegy(), bldr.CurNdeFrame().CurDocPos(), list);}
-	@gplx.Internal protected static void ExecList(GfmlTypRegy regy, GfmlDocPos pos, ListAdp list) {
+	@gplx.Internal protected static void ExecList(GfmlTypRegy regy, GfmlDocPos pos, List_adp list) {
 		GfmlType type = GfmlType_.Null;
 		for (Object itemObj : list) {
 			GfmlDefaultItem item = (GfmlDefaultItem)itemObj;
@@ -103,8 +103,8 @@ class GfmlDefaultPragma_bgnCmd implements GfmlBldrCmd {
 			item.Exec_bgn(type);
 		}
 	}
-	ListAdp list;
-	public static GfmlDefaultPragma_bgnCmd new_(ListAdp list) {
+	List_adp list;
+	public static GfmlDefaultPragma_bgnCmd new_(List_adp list) {
 		GfmlDefaultPragma_bgnCmd rv = new GfmlDefaultPragma_bgnCmd();
 		rv.list = list;
 		return rv;
@@ -113,7 +113,7 @@ class GfmlDefaultPragma_bgnCmd implements GfmlBldrCmd {
 class GfmlDefaultPragma_endCmd implements GfmlBldrCmd {
 	public String Key() {return "pragma:gfml.default.endCmd";}
 	public void Exec(GfmlBldr bldr, GfmlTkn tkn) {ExecList(bldr.TypeMgr().TypeRegy(), list);}
-	public static void ExecList(GfmlTypRegy regy, ListAdp list) {
+	public static void ExecList(GfmlTypRegy regy, List_adp list) {
 		GfmlType type = GfmlType_.Null;
 		for (Object itemObj : list) {
 			GfmlDefaultItem item = (GfmlDefaultItem)itemObj;
@@ -124,8 +124,8 @@ class GfmlDefaultPragma_endCmd implements GfmlBldrCmd {
 			item.Exec_end(type);
 		}
 	}
-	ListAdp list;
-	public static GfmlDefaultPragma_endCmd new_(ListAdp list) {
+	List_adp list;
+	public static GfmlDefaultPragma_endCmd new_(List_adp list) {
 		GfmlDefaultPragma_endCmd rv = new GfmlDefaultPragma_endCmd();
 		rv.list = list;
 		return rv;

@@ -22,7 +22,7 @@ public class Db_cfg_itm {
 	public String		Key() {return key;} private final String key;
 	public String		Val() {return val;} public Db_cfg_itm Val_(String v) {val = v; return this;} private String val;
 	public String		To_str_or(String or)			{return val == null ? or : val;}
-	public byte[]		To_bry_or(byte[] or)			{try {return val == null ? or : Bry_.new_utf8_(val)			;} catch (Exception e) {throw err_parse(e, Bry_.Cls_val_name);}}
+	public byte[]		To_bry_or(byte[] or)			{try {return val == null ? or : Bry_.new_u8(val)			;} catch (Exception e) {throw err_parse(e, Bry_.Cls_val_name);}}
 	public int			To_int_or(int or)				{try {return val == null ? or : Int_.parse_or_(val, or)		;} catch (Exception e) {throw err_parse(e, Int_.Cls_val_name);}}
 	public long			To_long_or(long or)				{try {return val == null ? or : Long_.parse_or_(val, or)	;} catch (Exception e) {throw err_parse(e, Long_.Cls_val_name);}}
 	public byte			To_byte_or(byte or)				{try {return val == null ? or : Byte_.parse_or_(val, or)	;} catch (Exception e) {throw err_parse(e, Byte_.Cls_val_name);}}
@@ -40,8 +40,8 @@ public class Db_cfg_itm {
 	private static final String Grp_none = "";
 	public static		Db_cfg_itm new_str		(String key, String val)						{return new Db_cfg_itm(Grp_none	, key, val);}
 	public static		Db_cfg_itm new_str		(String grp, String key, String val)			{return new Db_cfg_itm(grp		, key, val);}
-	public static		Db_cfg_itm new_bry		(String key, byte[] val)						{return new Db_cfg_itm(Grp_none	, key, String_.new_utf8_(val));}
-	public static		Db_cfg_itm new_bry		(String grp, String key, byte[] val)			{return new Db_cfg_itm(grp		, key, String_.new_utf8_(val));}
+	public static		Db_cfg_itm new_bry		(String key, byte[] val)						{return new Db_cfg_itm(Grp_none	, key, String_.new_u8(val));}
+	public static		Db_cfg_itm new_bry		(String grp, String key, byte[] val)			{return new Db_cfg_itm(grp		, key, String_.new_u8(val));}
 	public static		Db_cfg_itm new_int		(String key, int val)							{return new Db_cfg_itm(Grp_none	, key, Int_.Xto_str(val));}
 	public static		Db_cfg_itm new_int		(String grp, String key, int val)				{return new Db_cfg_itm(grp		, key, Int_.Xto_str(val));}
 	public static		Db_cfg_itm new_long		(String key, long val)							{return new Db_cfg_itm(Grp_none	, key, Long_.Xto_str(val));}

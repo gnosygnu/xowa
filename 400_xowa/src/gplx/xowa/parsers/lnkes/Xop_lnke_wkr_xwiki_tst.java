@@ -20,11 +20,11 @@ import org.junit.*;
 public class Xop_lnke_wkr_xwiki_tst {
 	@Before public void init() {fxt.Reset();} private Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Xwiki() {
-		fxt.App().User().Wiki().Xwiki_mgr().Add_full(Bry_.new_utf8_("en.wikipedia.org"), Bry_.new_utf8_("en.wikipedia.org"));
+		fxt.App().Usere().Wiki().Xwiki_mgr().Add_full(Bry_.new_u8("en.wikipedia.org"), Bry_.new_u8("en.wikipedia.org"));
 		fxt.Test_parse_page_wiki_str("[http://en.wikipedia.org/wiki/A a]", "<a href=\"/site/en.wikipedia.org/wiki/A\">a</a>");
 	}
 	@Test  public void Xwiki_relative() {
-		fxt.App().User().Wiki().Xwiki_mgr().Add_full(Bry_.new_utf8_("en.wikipedia.org"), Bry_.new_utf8_("en.wikipedia.org"));
+		fxt.App().Usere().Wiki().Xwiki_mgr().Add_full(Bry_.new_u8("en.wikipedia.org"), Bry_.new_u8("en.wikipedia.org"));
 		fxt.Test_parse_page_wiki_str("[//en.wikipedia.org/ a]", "<a href=\"/site/en.wikipedia.org/wiki/\">a</a>");
 	}
 	@Test  public void Xwiki_qarg() {// DATE:2013-02-02
@@ -32,12 +32,12 @@ public class Xop_lnke_wkr_xwiki_tst {
 		fxt.Test_parse_page_wiki_str("http://en.wikipedia.org/wiki/Special:Allpages?from=Earth", "<a href=\"/site/en.wikipedia.org/wiki/Special:Allpages?from=Earth\">http://en.wikipedia.org/wiki/Special:Allpages?from=Earth</a>");
 	}
 	@Test  public void Lang_prefix() {
-		fxt.App().User().Wiki().Xwiki_mgr().Add_full(Bry_.new_utf8_("en.wikipedia.org"), Bry_.new_utf8_("en.wikipedia.org"));
-		fxt.Wiki().Xwiki_mgr().Add_full(Bry_.new_ascii_("fr"), Bry_.new_ascii_("fr.wikipedia.org"));
+		fxt.App().Usere().Wiki().Xwiki_mgr().Add_full(Bry_.new_u8("en.wikipedia.org"), Bry_.new_u8("en.wikipedia.org"));
+		fxt.Wiki().Xwiki_mgr().Add_full(Bry_.new_a7("fr"), Bry_.new_a7("fr.wikipedia.org"));
 		fxt.Test_parse_page_wiki_str("[http://en.wikipedia.org/wiki/fr:A a]", "<a href=\"/site/fr.wikipedia.org/wiki/A\">a</a>");
 	}
 	@Test  public void Xwiki_query_arg() {
-		fxt.App().User().Wiki().Xwiki_mgr().Add_full(Bry_.new_utf8_("en.wikipedia.org"), Bry_.new_utf8_("en.wikipedia.org"));
+		fxt.App().Usere().Wiki().Xwiki_mgr().Add_full(Bry_.new_u8("en.wikipedia.org"), Bry_.new_u8("en.wikipedia.org"));
 		fxt.Test_parse_page_wiki_str("[http://en.wikipedia.org/wiki/A?action=edit a]", "<a href=\"/site/en.wikipedia.org/wiki/A?action=edit\">a</a>");
 	}
 }

@@ -32,7 +32,7 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 		Xow_ns ns_itm = ttl.Ns(); byte[] ttl_bry = ttl.Page_db();
 		Xowd_page_itm db_page = Xowd_page_itm.new_tmp();
 		boolean found = load_mgr.Load_by_ttl(db_page, ns_itm, ttl_bry);
-		if (found) throw Err_mgr._.fmt_(GRP_KEY, "title_exists", "create requested but title already exists: ~{0}", String_.new_utf8_(ttl_bry));
+		if (found) throw Err_mgr._.fmt_(GRP_KEY, "title_exists", "create requested but title already exists: ~{0}", String_.new_u8(ttl_bry));
 		int text_len = text.length;
 		Bry_bfr tmp = wiki.Utl__bfr_mkr().Get_m001();
 		int page_id = page_id_next++;
@@ -59,7 +59,7 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 	}
 	public void Data_update(Xoae_page page, byte[] text)		{Data_update_under(page, text, null);}
 	public void Data_rename(Xoae_page page, int trg_ns, byte[] trg_ttl)	{
-		if (wiki.Domain_tid() != Xow_domain_.Tid_int_home) {
+		if (wiki.Domain_tid() != Xow_domain_type_.Tid_home) {
 			wiki.Appe().Usr_dlg().Warn_many("", "", "Only pages in the home wiki can be renamed");
 			return;
 		}
@@ -69,7 +69,7 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 		Xoa_ttl ttl = page.Ttl();
 		Xow_ns ns = ttl.Ns(); byte[] ttl_bry = ttl.Page_db();
 		Xowd_page_itm db_page = Xowd_page_itm.new_tmp();
-		if (!load_mgr.Load_by_ttl(db_page, ns, ttl_bry)) throw Err_mgr._.fmt_(GRP_KEY, "title_missing", "update requested but title does not exist: ~{0}", String_.new_utf8_(ttl_bry));
+		if (!load_mgr.Load_by_ttl(db_page, ns, ttl_bry)) throw Err_mgr._.fmt_(GRP_KEY, "title_missing", "update requested but title does not exist: ~{0}", String_.new_u8(ttl_bry));
 		byte[] old_ttl = ttl_bry;
 		if (new_ttl != null) {
 			ttl_bry = new_ttl;

@@ -34,14 +34,14 @@ public class Gfs_bldr {
 		return this;
 	}
 	public Gfs_bldr Add_indent(int i)			{bfr.Add_byte_repeat(Byte_ascii.Space, i * 2); return this;}
-	public Gfs_bldr Add_parens_str(String v)	{return Add_parens_str(Bry_.new_utf8_(v));}
+	public Gfs_bldr Add_parens_str(String v)	{return Add_parens_str(Bry_.new_u8(v));}
 	public Gfs_bldr Add_parens_str(byte[] v)	{return this.Add_paren_bgn().Add_arg_str(v).Add_paren_end();}
 	public Gfs_bldr Add_parens_str_many(String... ary) {
 		this.Add_paren_bgn();
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
 			if (i != 0) this.Add_comma();
-			this.Add_arg_str(Bry_.new_utf8_(ary[i]));
+			this.Add_arg_str(Bry_.new_u8(ary[i]));
 		}
 		this.Add_paren_end();
 		return this;
@@ -71,7 +71,7 @@ public class Gfs_bldr {
 		bfr.Add(Bry_semic_nl);
 		return this;
 	}
-	private static final byte[] Bry_eq = Bry_.new_ascii_(" = "), Bry_semic_nl = Bry_.new_ascii_(";\n");
+	private static final byte[] Bry_eq = Bry_.new_a7(" = "), Bry_semic_nl = Bry_.new_a7(";\n");
 	private void Add_str_escape_apos(Bry_bfr bfr, byte[] src) {
 		int len = src.length;
 		for (int i = 0; i < len; i++) {
@@ -83,7 +83,7 @@ public class Gfs_bldr {
 		}
 	}
 	public static final byte[]
-		Bry_xquote_bgn			= Bry_.new_ascii_("<:['\n")
-	,	Bry_xquote_end			= Bry_.new_ascii_("']:>\n")
+		Bry_xquote_bgn			= Bry_.new_a7("<:['\n")
+	,	Bry_xquote_end			= Bry_.new_a7("']:>\n")
 	;
 }

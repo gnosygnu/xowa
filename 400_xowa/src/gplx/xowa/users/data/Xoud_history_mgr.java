@@ -26,7 +26,7 @@ public class Xoud_history_mgr implements GfoInvkAble {
 	}
 	public void Update_async(Gfo_async_mgr async_mgr, Xoa_ttl ttl, Xoa_url url) {
 //			if (Skip_history(ttl)) return;
-//			async_mgr.Queue(this, Invk_update, "wiki", String_.new_utf8_(url.Wiki_bry()), "page", String_.new_utf8_(url.Page_bry()), "qarg", String_.new_utf8_(url.Args_all_as_bry()));
+//			async_mgr.Queue(this, Invk_update, "wiki", String_.new_u8(url.Wiki_bry()), "page", String_.new_u8(url.Page_bry()), "qarg", String_.new_u8(url.Args_all_as_bry()));
 	}
 	private void Update(String wiki, String page, String qarg) {
 		Xoud_history_row row = history_tbl.Select_by_page(wiki, page, qarg);
@@ -36,7 +36,7 @@ public class Xoud_history_mgr implements GfoInvkAble {
 		else
 			history_tbl.Update(wiki, page, qarg, time, row.History_count() + 1);
 	}
-	public void Select(ListAdp rv, int top) {
+	public void Select(List_adp rv, int top) {
 		history_tbl.Select_by_top(rv, top);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

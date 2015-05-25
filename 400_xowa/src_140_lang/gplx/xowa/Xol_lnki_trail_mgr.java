@@ -26,7 +26,7 @@ public class Xol_lnki_trail_mgr implements GfoInvkAble {
 	public void Del(byte[] v) {trie.Del(v);}
 	private void Add(String... ary) {
 		for (String itm_str : ary) {
-			byte[] itm = Bry_.new_utf8_(itm_str);
+			byte[] itm = Bry_.new_u8(itm_str);
 			trie.Add_obj(itm, itm);
 		}
 	}
@@ -67,7 +67,7 @@ public class Xol_lnki_trail_mgr implements GfoInvkAble {
 	}
 	byte Add_rng_extract(GfoMsg m, String key) {
 		byte[] bry = m.ReadBry(key);
-		if (bry.length != 1) throw Err_.new_fmt_("argument must be ascii character: ~{0} ~{1}", key, String_.new_utf8_(bry));
+		if (bry.length != 1) throw Err_.new_fmt_("argument must be ascii character: ~{0} ~{1}", key, String_.new_u8(bry));
 		return bry[0];
 	}
 }

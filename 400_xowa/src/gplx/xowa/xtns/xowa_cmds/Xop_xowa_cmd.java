@@ -28,8 +28,8 @@ public class Xop_xowa_cmd implements Xox_xnde {
 		byte[] raw = Bry_.Mid(src, itm_bgn, itm_end);
 		byte[] xtn_src = raw;
 		if (wiki.Sys_cfg().Xowa_cmd_enabled()) {	// only exec if enabled for wiki
-			Object rslt = wiki.Appe().Gfs_mgr().Run_str(String_.new_utf8_(raw));
-			xtn_src = Bry_.new_utf8_(Object_.Xto_str_strict_or_null_mark(rslt));
+			Object rslt = wiki.Appe().Gfs_mgr().Run_str(String_.new_u8(raw));
+			xtn_src = Bry_.new_u8(Object_.Xto_str_strict_or_null_mark(rslt));
 		}
 		Xop_tkn_mkr tkn_mkr = ctx.Tkn_mkr();
 		Xop_ctx sub_ctx = Xop_ctx.new_sub_(wiki);

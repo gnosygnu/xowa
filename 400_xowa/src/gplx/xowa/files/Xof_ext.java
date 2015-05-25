@@ -38,7 +38,7 @@ public class Xof_ext {
 	public boolean		Id_supports_page()		{return Xof_ext_.Id_supports_page(id);}
 	public boolean		Id_needs_convert()		{return Xof_ext_.Id_needs_convert(id);}
 	public int		Id_view()				{return Xof_ext_.Id_view(id);}
-	public boolean		Is_not_viewable(byte exec_tid) {
+	public boolean		Is_not_viewable(int exec_tid) {
 		return	exec_tid != Xof_exec_tid.Tid_viewer_app		// only apply logic if !Tid_viewer_app; note that if Tid_viewer_app, then user clicked on file, so return true;
 				&&	(	this.Id_is_audio()					// NOTE: was audio_strict, but v2 always redefines .ogg as .ogv; DATE:2014-02-02
 					||	id == Xof_ext_.Id_unknown			// ignore unknown exts, else will download needlessly when viewing page; EX: .wav before .wav was registered; PAGE:pl.s:Spiaca_kr�lewna_(Oppman); DATE:2014-08-17

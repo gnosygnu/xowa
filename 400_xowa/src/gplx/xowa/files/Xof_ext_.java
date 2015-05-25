@@ -25,12 +25,12 @@ public class Xof_ext_ {
 	, Id_flac = 15, Id_bmp = 16, Id_xcf = 17, Id_wav = 18;
 	public static final int Id__max = 19;
 	public static final byte[] 
-	  Bry_png = Bry_.new_ascii_("png"), Bry_jpg = Bry_.new_ascii_("jpg"), Bry_jpeg = Bry_.new_ascii_("jpeg")
-	, Bry_gif = Bry_.new_ascii_("gif"), Bry_tif = Bry_.new_ascii_("tif"), Bry_tiff = Bry_.new_ascii_("tiff")
-	, Bry_svg = Bry_.new_ascii_("svg"), Bry_djvu = Bry_.new_ascii_("djvu"), Bry_pdf = Bry_.new_ascii_("pdf")
-	, Bry_mid = Bry_.new_ascii_("mid"), Bry_ogg = Bry_.new_ascii_("ogg"), Bry_oga = Bry_.new_ascii_("oga")
-	, Bry_ogv = Bry_.new_ascii_("ogv"), Bry_webm = Bry_.new_ascii_("webm"), Bry_flac = Bry_.new_ascii_("flac")
-	, Bry_bmp = Bry_.new_ascii_("bmp"), Bry_xcf = Bry_.new_ascii_("xcf"), Bry_wav = Bry_.new_ascii_("wav")
+	  Bry_png = Bry_.new_a7("png"), Bry_jpg = Bry_.new_a7("jpg"), Bry_jpeg = Bry_.new_a7("jpeg")
+	, Bry_gif = Bry_.new_a7("gif"), Bry_tif = Bry_.new_a7("tif"), Bry_tiff = Bry_.new_a7("tiff")
+	, Bry_svg = Bry_.new_a7("svg"), Bry_djvu = Bry_.new_a7("djvu"), Bry_pdf = Bry_.new_a7("pdf")
+	, Bry_mid = Bry_.new_a7("mid"), Bry_ogg = Bry_.new_a7("ogg"), Bry_oga = Bry_.new_a7("oga")
+	, Bry_ogv = Bry_.new_a7("ogv"), Bry_webm = Bry_.new_a7("webm"), Bry_flac = Bry_.new_a7("flac")
+	, Bry_bmp = Bry_.new_a7("bmp"), Bry_xcf = Bry_.new_a7("xcf"), Bry_wav = Bry_.new_a7("wav")
 	;
 	public static final byte[][] Bry__ary = new byte[][]
 	{ Bry_.Empty, Bry_png, Bry_jpg, Bry_jpeg
@@ -41,16 +41,16 @@ public class Xof_ext_ {
 	, Bry_bmp, Bry_xcf, Bry_wav
 	};
 	public static final byte[][] Mime_type__ary = new byte[][] 
-	{ Bry_.new_ascii_("application/octet-stream"), Bry_.new_ascii_("image/png"), Bry_.new_ascii_("image/jpg"), Bry_.new_ascii_("image/jpeg")
-	, Bry_.new_ascii_("image/gif"), Bry_.new_ascii_("image/tiff"), Bry_.new_ascii_("image/tiff")
-	, Bry_.new_ascii_("image/svg+xml"), Bry_.new_ascii_("image/x.djvu"), Bry_.new_ascii_("application/pdf")
-	, Bry_.new_ascii_("application/x-midi"), Bry_.new_ascii_("video/ogg"), Bry_.new_ascii_("audio/oga")
-	, Bry_.new_ascii_("video/ogg"), Bry_.new_ascii_("video/webm"), Bry_.new_ascii_("audio/flac")
-	, Bry_.new_ascii_("image/bmp"), Bry_.new_ascii_("image/xcf"), Bry_.new_ascii_("audio/x-wav")
+	{ Bry_.new_a7("application/octet-stream"), Bry_.new_a7("image/png"), Bry_.new_a7("image/jpg"), Bry_.new_a7("image/jpeg")
+	, Bry_.new_a7("image/gif"), Bry_.new_a7("image/tiff"), Bry_.new_a7("image/tiff")
+	, Bry_.new_a7("image/svg+xml"), Bry_.new_a7("image/x.djvu"), Bry_.new_a7("application/pdf")
+	, Bry_.new_a7("application/x-midi"), Bry_.new_a7("video/ogg"), Bry_.new_a7("audio/oga")
+	, Bry_.new_a7("video/ogg"), Bry_.new_a7("video/webm"), Bry_.new_a7("audio/flac")
+	, Bry_.new_a7("image/bmp"), Bry_.new_a7("image/xcf"), Bry_.new_a7("audio/x-wav")
 	};
-	private static final HashAdp id_hash = id_hash_new_();
-	private static HashAdp id_hash_new_() {
-		HashAdp rv = HashAdp_.new_bry_();
+	private static final Hash_adp id_hash = id_hash_new_();
+	private static Hash_adp id_hash_new_() {
+		Hash_adp rv = Hash_adp_bry.cs_();
 		id_hash_new_(rv, Bry_png, Id_png);		id_hash_new_(rv, Bry_jpg, Id_jpg);		id_hash_new_(rv, Bry_jpeg, Id_jpeg);
 		id_hash_new_(rv, Bry_gif, Id_gif);		id_hash_new_(rv, Bry_tif, Id_tif);		id_hash_new_(rv, Bry_tiff, Id_tiff);
 		id_hash_new_(rv, Bry_svg, Id_svg);		id_hash_new_(rv, Bry_djvu, Id_djvu);	id_hash_new_(rv, Bry_pdf, Id_pdf);
@@ -59,7 +59,7 @@ public class Xof_ext_ {
 		id_hash_new_(rv, Bry_bmp, Id_bmp);		id_hash_new_(rv, Bry_xcf, Id_xcf);		id_hash_new_(rv, Bry_wav, Id_wav);
 		return rv;
 	}
-	private static void id_hash_new_(HashAdp hash, byte[] key, int val) {hash.Add(key, Int_obj_val.new_(val));}
+	private static void id_hash_new_(Hash_adp hash, byte[] key, int val) {hash.Add(key, Int_obj_val.new_(val));}
 
 	private static final Hash_adp_bry ext_hash = Hash_adp_bry.ci_ascii_()
 	.Add_bry_bry(Bry_png).Add_bry_bry(Bry_jpg).Add_bry_bry(Bry_jpeg)
@@ -76,7 +76,7 @@ public class Xof_ext_ {
 		return Bry__ary[id];
 	}
 	public static int Get_id_by_ext_(byte[] ext_bry) {
-		Object o = id_hash.Fetch(ext_bry);
+		Object o = id_hash.Get_by(ext_bry);
 		return o == null ? Id_unknown : ((Int_obj_val)o).Val();
 	}
 	public static Xof_ext new_by_ttl_(byte[] ttl) {

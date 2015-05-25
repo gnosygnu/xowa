@@ -30,19 +30,19 @@ public class Xob_xml_parser_ {
 		return rv;
 	}
 	public static final byte[]
-		  Bry_page_bgn = Bry_.new_ascii_("<page>"), Bry_page_bgn_frag = Bry_.new_ascii_("<page"), Bry_page_end = Bry_.new_ascii_("</page>")
-		, Bry_title_bgn = Bry_.new_ascii_("<title>"), Bry_title_bgn_frag = Bry_.new_ascii_("<title"), Bry_title_end = Bry_.new_ascii_("</title>")
-		, Bry_id_bgn = Bry_.new_ascii_("<id>"), Bry_id_bgn_frag = Bry_.new_ascii_("<id"), Bry_id_end = Bry_.new_ascii_("</id>")
-		, Bry_redirect_bgn = Bry_.new_ascii_("<redirect>"), Bry_redirect_bgn_frag = Bry_.new_ascii_("<redirect"), Bry_redirect_end = Bry_.new_ascii_("</redirect>")
-		, Bry_revision_bgn = Bry_.new_ascii_("<revision>"), Bry_revision_bgn_frag = Bry_.new_ascii_("<revision"), Bry_revision_end = Bry_.new_ascii_("</revision>")
-		, Bry_timestamp_bgn = Bry_.new_ascii_("<timestamp>"), Bry_timestamp_bgn_frag = Bry_.new_ascii_("<timestamp"), Bry_timestamp_end = Bry_.new_ascii_("</timestamp>")
-		, Bry_contributor_bgn = Bry_.new_ascii_("<contributor>"), Bry_contributor_bgn_frag = Bry_.new_ascii_("<contributor"), Bry_contributor_end = Bry_.new_ascii_("</contributor>")
-		, Bry_username_bgn = Bry_.new_ascii_("<username>"), Bry_username_bgn_frag = Bry_.new_ascii_("<username"), Bry_username_end = Bry_.new_ascii_("</username>")
-		, Bry_minor_bgn = Bry_.new_ascii_("<minor>"), Bry_minor_bgn_frag = Bry_.new_ascii_("<minor"), Bry_minor_end = Bry_.new_ascii_("</minor>")
-		, Bry_comment_bgn = Bry_.new_ascii_("<comment>"), Bry_comment_bgn_frag = Bry_.new_ascii_("<comment"), Bry_comment_end = Bry_.new_ascii_("</comment>")
-		, Bry_text_bgn = Bry_.new_ascii_("<text>"), Bry_text_bgn_frag = Bry_.new_ascii_("<text"), Bry_text_end = Bry_.new_ascii_("</text>")
-		, Bry_amp = Bry_.new_ascii_("&amp;"), Bry_quot = Bry_.new_ascii_("&quot;"), Bry_gt = Bry_.new_ascii_("&gt;"), Bry_lt = Bry_.new_ascii_("&lt;")
-		, Bry_tab_ent = Bry_.new_ascii_("&#09;"), Bry_tab = Bry_.new_ascii_("\t"), Bry_cr_nl = Bry_.new_ascii_("\r\n"), Bry_cr = Bry_.new_ascii_("\r")			
+		  Bry_page_bgn = Bry_.new_a7("<page>"), Bry_page_bgn_frag = Bry_.new_a7("<page"), Bry_page_end = Bry_.new_a7("</page>")
+		, Bry_title_bgn = Bry_.new_a7("<title>"), Bry_title_bgn_frag = Bry_.new_a7("<title"), Bry_title_end = Bry_.new_a7("</title>")
+		, Bry_id_bgn = Bry_.new_a7("<id>"), Bry_id_bgn_frag = Bry_.new_a7("<id"), Bry_id_end = Bry_.new_a7("</id>")
+		, Bry_redirect_bgn = Bry_.new_a7("<redirect>"), Bry_redirect_bgn_frag = Bry_.new_a7("<redirect"), Bry_redirect_end = Bry_.new_a7("</redirect>")
+		, Bry_revision_bgn = Bry_.new_a7("<revision>"), Bry_revision_bgn_frag = Bry_.new_a7("<revision"), Bry_revision_end = Bry_.new_a7("</revision>")
+		, Bry_timestamp_bgn = Bry_.new_a7("<timestamp>"), Bry_timestamp_bgn_frag = Bry_.new_a7("<timestamp"), Bry_timestamp_end = Bry_.new_a7("</timestamp>")
+		, Bry_contributor_bgn = Bry_.new_a7("<contributor>"), Bry_contributor_bgn_frag = Bry_.new_a7("<contributor"), Bry_contributor_end = Bry_.new_a7("</contributor>")
+		, Bry_username_bgn = Bry_.new_a7("<username>"), Bry_username_bgn_frag = Bry_.new_a7("<username"), Bry_username_end = Bry_.new_a7("</username>")
+		, Bry_minor_bgn = Bry_.new_a7("<minor>"), Bry_minor_bgn_frag = Bry_.new_a7("<minor"), Bry_minor_end = Bry_.new_a7("</minor>")
+		, Bry_comment_bgn = Bry_.new_a7("<comment>"), Bry_comment_bgn_frag = Bry_.new_a7("<comment"), Bry_comment_end = Bry_.new_a7("</comment>")
+		, Bry_text_bgn = Bry_.new_a7("<text>"), Bry_text_bgn_frag = Bry_.new_a7("<text"), Bry_text_end = Bry_.new_a7("</text>")
+		, Bry_amp = Bry_.new_a7("&amp;"), Bry_quot = Bry_.new_a7("&quot;"), Bry_gt = Bry_.new_a7("&gt;"), Bry_lt = Bry_.new_a7("&lt;")
+		, Bry_tab_ent = Bry_.new_a7("&#09;"), Bry_tab = Bry_.new_a7("\t"), Bry_cr_nl = Bry_.new_a7("\r\n"), Bry_cr = Bry_.new_a7("\r")			
 		;
 	public static final byte
 		  Id_page_bgn = 0, Id_page_bgn_frag = 1, Id_page_end = 2

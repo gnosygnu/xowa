@@ -19,7 +19,7 @@ package gplx.core.regxs; import gplx.*; import gplx.core.*;
 public class Gfo_pattern_itm_ {
 	public static final byte Tid_text = 0, Tid_wild = 1;
 	public static Gfo_pattern_itm[] Compile(byte[] raw) {
-		ListAdp rv = ListAdp_.new_();
+		List_adp rv = List_adp_.new_();
 		int raw_len = raw.length;
 		int itm_bgn = -1;
 		Gfo_pattern_itm itm = null;
@@ -46,6 +46,6 @@ public class Gfo_pattern_itm_ {
 			++pos;
 			if (last) break;
 		}
-		return (Gfo_pattern_itm[])rv.Xto_ary_and_clear(Gfo_pattern_itm.class);
+		return (Gfo_pattern_itm[])rv.To_ary_and_clear(Gfo_pattern_itm.class);
 	}
 }

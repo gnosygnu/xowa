@@ -22,19 +22,19 @@ class Xofs_url_itm {
 	public String Url() {return url;} public void Url_(String v) {url = v;} private String url;
 }
 class Xofs_url_itm_parser {
-	private static final byte[] Xowa_fs_protocol = Bry_.new_ascii_("xowa-fs://");
+	private static final byte[] Xowa_fs_protocol = Bry_.new_a7("xowa-fs://");
 	private static final int Xowa_fa_protocol_len = Xowa_fs_protocol.length;
 	private Bry_bfr url_bfr = Bry_bfr.reset_(16);
 	private Hash_adp_bry names = Hash_adp_bry.cs_();
 	public byte Dir_spr() {return dir_spr;} public void Dir_spr_(byte v) {dir_spr = v;} private byte dir_spr = Op_sys.Cur().Fsys_dir_spr_byte();
 	public void Names_add(String key_str, String val_str) {
-		byte[] key_bry = Bry_.new_utf8_(key_str);
-		byte[] val_bry = Bry_.new_utf8_(val_str);
-		names.AddReplace(key_bry, val_bry);
+		byte[] key_bry = Bry_.new_u8(key_str);
+		byte[] val_bry = Bry_.new_u8(val_str);
+		names.Add_if_dupe_use_nth(key_bry, val_bry);
 	}
 	public void Parse(Xofs_url_itm itm, String raw_str) {
 		itm.Raw_(raw_str);
-		byte[] raw = Bry_.new_utf8_(raw_str);
+		byte[] raw = Bry_.new_u8(raw_str);
 		if (!Bry_.HasAtBgn(raw, Xowa_fs_protocol)) {	// raw does not start with "xowa-fs://"; mark as custom str and exit
 			itm.Tid_is_xowa_(false);
 			itm.Url_(raw_str);
@@ -60,7 +60,7 @@ class Xofs_url_itm_parser {
 							int name_bgn = i + 2;	// skip "~{"
 							int name_end = Bry_finder.Find_fwd(raw, Byte_ascii.Curly_end, name_bgn);
 							byte[] name = (byte[])names.Get_by_mid(raw, name_bgn, name_end);
-							if (name == null) throw Err_.new_("name not found; raw={0} name={1}", raw_str, String_.new_utf8_(raw, name_bgn, name_end));
+							if (name == null) throw Err_.new_("name not found; raw={0} name={1}", raw_str, String_.new_u8(raw, name_bgn, name_end));
 							url_bfr.Add(name);
 							i = name_end;
 						}

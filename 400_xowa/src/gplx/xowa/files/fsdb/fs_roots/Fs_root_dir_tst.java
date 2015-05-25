@@ -42,7 +42,7 @@ class Fs_root_dir_fxt {
 	private Io_url url;
 	public void Reset() {
 		Db_conn_bldr.I.Reg_default_mem();
-		Io_mgr._.InitEngine_mem();
+		Io_mgr.I.InitEngine_mem();
 		url = Io_url_.mem_dir_("mem/dir/");
 		root_dir = new Fs_root_dir();
 		orig_fil_tbl = new Orig_fil_tbl();
@@ -52,20 +52,20 @@ class Fs_root_dir_fxt {
 	public Orig_fil_mok itm_() {return new Orig_fil_mok();}
 	public void Init_fs(String url, int w, int h) {Save_img(url, w, h);}
 	public void Test_get(String name, Orig_fil_mok expd) {
-		Orig_fil_itm actl = root_dir.Get_by_ttl(Bry_.new_utf8_(name));
+		Orig_fil_itm actl = root_dir.Get_by_ttl(Bry_.new_u8(name));
 		expd.Test(actl);
 	}
 	public void Test_db(String ttl, Orig_fil_mok expd) {
-		Orig_fil_itm actl = orig_fil_tbl.Select_itm(Bry_.new_utf8_(ttl));
+		Orig_fil_itm actl = orig_fil_tbl.Select_itm(Bry_.new_u8(ttl));
 		expd.Test(actl);
 	}
 	public static void Save_img(String url, int w, int h) {
 		gplx.gfui.SizeAdp img_size = gplx.gfui.SizeAdp_.new_(w, h);
-		Io_mgr._.SaveFilStr(url, img_size.XtoStr());
+		Io_mgr.I.SaveFilStr(url, img_size.XtoStr());
 	}
 	public void Test_xto_fil_bry(String url_str, String expd) {
 		Io_url url = Io_url_.new_fil_(url_str);
-		Tfds.Eq(expd, String_.new_utf8_(Fs_root_dir.Xto_fil_bry(url)));
+		Tfds.Eq(expd, String_.new_u8(Fs_root_dir.Xto_fil_bry(url)));
 	}
 }
 class Orig_fil_mok {
@@ -80,7 +80,7 @@ class Orig_fil_mok {
 		this.uid = uid;
 		this.url = url; this.w = w; this.h = h;
 		this.name = Io_url_.new_any_(url).NameAndExt();
-		this.ext_id = Xof_ext_.new_by_ttl_(Bry_.new_utf8_(name)).Id();
+		this.ext_id = Xof_ext_.new_by_ttl_(Bry_.new_u8(name)).Id();
 		return this;
 	}
 	public void Test(Orig_fil_itm actl) {
@@ -90,6 +90,6 @@ class Orig_fil_mok {
 		if (url != null)		Tfds.Eq(url, actl.Fil_url().Raw());
 		if (uid != -1)			Tfds.Eq(uid, actl.Fil_uid());
 		if (ext_id != -1)		Tfds.Eq(uid, actl.Fil_ext_id());
-		if (name != null)		Tfds.Eq(name, String_.new_utf8_(actl.Fil_name()));
+		if (name != null)		Tfds.Eq(name, String_.new_u8(actl.Fil_name()));
 	}
 }

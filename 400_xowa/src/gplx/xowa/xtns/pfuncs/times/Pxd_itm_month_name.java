@@ -196,7 +196,7 @@ class Pxd_itm_unit extends Pxd_itm_base implements Pxd_itm_prototype {
 }
 class Pxd_itm_ago extends Pxd_itm_base implements Pxd_itm_prototype {
 	public Pxd_itm_ago(int ary_idx, int seg_idx) {Ctor(ary_idx); Seg_idx_(seg_idx);} 
-	public byte[] Name() {return Name_ago;} public static final byte[] Name_ago = Bry_.new_ascii_("ago");
+	public byte[] Name() {return Name_ago;} public static final byte[] Name_ago = Bry_.new_a7("ago");
 	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_ago;}
 	@Override public int Eval_idx() {return 5;}	// set to high priority so it can evaluate before unit_name
 	public Pxd_itm MakeNew(int ary_idx) {return new Pxd_itm_ago(ary_idx, this.Seg_idx());}
@@ -306,7 +306,7 @@ class Pxd_itm_unit_relative extends Pxd_itm_base implements Pxd_itm_prototype {
 class Pxd_itm_unixtime extends Pxd_itm_base implements Pxd_itm_prototype {
 	private long unixtime;
 	public Pxd_itm_unixtime(int ary_idx, int seg_idx) {Ctor(ary_idx); Seg_idx_(seg_idx);} 
-	public byte[] Name() {return Name_const;} public static final byte[] Name_const = Bry_.new_ascii_("@");
+	public byte[] Name() {return Name_const;} public static final byte[] Name_const = Bry_.new_a7("@");
 	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_unixtime;}
 	@Override public int Eval_idx() {return 5;}	// set to high priority so it can evaluate number early
 	public Pxd_itm MakeNew(int ary_idx) {return new Pxd_itm_unixtime(ary_idx, this.Seg_idx());}
@@ -343,7 +343,7 @@ class Pxd_itm_dow_name extends Pxd_itm_base implements Pxd_itm_prototype {
 }
 class Pxd_itm_iso8601_t extends Pxd_itm_base implements Pxd_itm_prototype {
 	public Pxd_itm_iso8601_t(int ary_idx, int seg_idx) {Ctor(ary_idx); Seg_idx_(seg_idx);} 
-	public byte[] Name() {return Name_const;} public static final byte[] Name_const = Bry_.new_ascii_("T");
+	public byte[] Name() {return Name_const;} public static final byte[] Name_const = Bry_.new_a7("T");
 	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_iso8601_t;}
 	@Override public int Eval_idx() {return 99;}	// evaluate last
 	public Pxd_itm MakeNew(int ary_idx) {return new Pxd_itm_iso8601_t(ary_idx, this.Seg_idx());}

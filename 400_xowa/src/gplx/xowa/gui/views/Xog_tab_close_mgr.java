@@ -17,11 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 public class Xog_tab_close_mgr {
-	private ListAdp list = ListAdp_.new_();
+	private List_adp list = List_adp_.new_();
 	public void Clear() {list.Clear();}
 	public void Add(Xog_tab_close_lnr lnr) {list.Add(lnr);} 
 	public int Len() {return list.Count();} 
-	public Xog_tab_close_lnr Get_at(int i) {return (Xog_tab_close_lnr)list.FetchAt(i);}
+	public Xog_tab_close_lnr Get_at(int i) {return (Xog_tab_close_lnr)list.Get_at(i);}
 	public boolean When_close(Xog_tab_itm tab, Xoa_url url) {
 		int len = list.Count();
 		for (int i = 0; i < len; ++i) {

@@ -23,7 +23,7 @@ import gplx.xowa.wikis.*; import gplx.xowa.apps.fsys.*;
 import gplx.xowa2.gui.*;
 public class Xohd_abrv_mgr {
 	private Bry_bfr tmp_bfr = Bry_bfr.reset_(255); private Bry_rdr bry_rdr = new Bry_rdr(); private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.I;
-	private Xoh_cfg_file cfg_file; private Xof_url_bldr url_bldr = Xof_url_bldr.new_v2_(); private Xoh_file_html_fmtr__base html_fmtr;
+	private Xoh_cfg_file cfg_file; private Xof_url_bldr url_bldr = Xof_url_bldr.new_v2(); private Xoh_file_html_fmtr__base html_fmtr;
 	private byte[] root_dir, file_dir, file_dir_comm, file_dir_wiki, hiero_img_dir;
 	private byte[] wiki_domain;
 	public Xohd_abrv_mgr(Gfo_usr_dlg usr_dlg, Xoa_fsys_mgr fsys_mgr, Url_encoder fsys_encoder, byte[] wiki_domain) {
@@ -96,7 +96,7 @@ public class Xohd_abrv_mgr {
 			case Xohd_abrv_.Tid_file_mgnf: fmtr.Html_thumb_part_magnify	(bfr, uid, a_href, a_title, cfg_file.Img_thumb_magnify()); return rv;
 			case Xohd_abrv_.Tid_file_play: fmtr.Html_thumb_part_play	(bfr, uid, img_view_w, Xoh_file_wtr__basic.Play_btn_max_width, a_href, a_title, cfg_file.Img_media_play_btn()); return rv;
 			case Xohd_abrv_.Tid_gallery_box_max: {
-				Xohd_data_itm__gallery_mgr gly = (Xohd_data_itm__gallery_mgr)hpg.Gallery_itms().Fetch(uid);
+				Xohd_data_itm__gallery_mgr gly = (Xohd_data_itm__gallery_mgr)hpg.Gallery_itms().Get_by(uid);
 				if (gly != null) {	// -1 means no box_max
 					byte[] style = Gallery_mgr_base.box_style_max_width_fmtr.Bld_bry_many(tmp_bfr, gly.Box_max());
 					Html_wtr.Write_atr_bry(bfr, Bool_.N, Byte_ascii.Quote, Html_atr_.Style_bry, style);
@@ -122,8 +122,8 @@ public class Xohd_abrv_mgr {
 				return rv;
 			}
 		}
-		url_bldr.Init_by_root(img.Orig_repo_id() == Xof_repo_itm.Repo_remote ? file_dir_comm : file_dir_wiki, Byte_ascii.Slash, false, false, 2);
-		url_bldr.Init_by_itm(img.File_is_orig() ? Xof_repo_itm.Mode_orig : Xof_repo_itm.Mode_thumb, img.Lnki_ttl(), Xof_xfer_itm_.Md5_(img.Lnki_ttl()), Xof_ext_.new_by_id_(img.Lnki_ext()), img.File_w(), img.Lnki_time(), img.Lnki_page());
+		url_bldr.Init_by_root(img.Orig_repo_id() == Xof_repo_itm_.Repo_remote ? file_dir_comm : file_dir_wiki, Byte_ascii.Slash, false, false, 2);
+		url_bldr.Init_by_itm(img.File_is_orig() ? Xof_repo_itm_.Mode_orig : Xof_repo_itm_.Mode_thumb, img.Lnki_ttl(), Xof_file_wkr_.Md5_(img.Lnki_ttl()), Xof_ext_.new_by_id_(img.Orig_ext()), img.File_w(), img.Lnki_time(), img.Lnki_page());
 		byte[] img_src = url_bldr.Xto_bry(); 
 		if (tid == Xohd_abrv_.Tid_img) {
 			fmtr_img.Bld_bfr_many(bfr, img_src, img_view_w, img.Html_h());

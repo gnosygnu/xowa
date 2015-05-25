@@ -86,7 +86,7 @@ public class Scrib_lib_language implements Scrib_lib {
 		boolean exists = false;
 		if (	lang_code != null									// null check; protecting against Module passing in nil from lua
 			&&	String_.Eq(lang_code, String_.Lower(lang_code))		// must be lower-case; REF.MW: $code === strtolower( $code )
-			&&	Xol_lang_itm_.Exists(Bry_.new_ascii_(lang_code))
+			&&	Xol_lang_itm_.Exists(Bry_.new_a7(lang_code))
 			)
 			exists = true;
 		return rslt.Init_obj(exists);
@@ -133,7 +133,7 @@ public class Scrib_lib_language implements Scrib_lib {
 		byte[] lang_code = args.Pull_bry(0);
 		// byte[] trans_code = args.Get_bry_or_null(1);	// TODO: FetchLanguageName("en", "fr") -> Anglais; WHEN: needs global database of languages;
 		Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key(lang_code);
-		return rslt.Init_obj(lang_itm == null ? String_.Empty : String_.new_utf8_(lang_itm.Canonical_name()));
+		return rslt.Init_obj(lang_itm == null ? String_.Empty : String_.new_u8(lang_itm.Canonical_name()));
 	}
 	public boolean FetchLanguageNames(Scrib_proc_args args, Scrib_proc_rslt rslt) {	
 		// byte[] lang_code = args.Cast_bry_or_null(0);
@@ -239,7 +239,7 @@ public class Scrib_lib_language implements Scrib_lib {
 	private Xol_lang lang_(Scrib_proc_args args) {
 		byte[] lang_code = args.Cast_bry_or_null(0);
 		Xol_lang lang = lang_code == null ? null : core.App().Lang_mgr().Get_by_key_or_load(lang_code);
-		if (lang == null) throw Err_.new_fmt_("lang_code is not valid: {0}", String_.new_utf8_(lang_code));
+		if (lang == null) throw Err_.new_fmt_("lang_code is not valid: {0}", String_.new_u8(lang_code));
 		return lang;
 	}
 }

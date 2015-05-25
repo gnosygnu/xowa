@@ -75,7 +75,7 @@ public class Xob_xdat_file_tst {
 		Rebuild_header_tst(orig, expd);
 	}
 	private void Rebuild_header_tst(String orig, String expd) {		
-		Tfds.Eq_str_lines(expd, String_.new_ascii_(Xob_xdat_file.Rebuid_header(Bry_.new_ascii_(orig), Bry_.new_ascii_("\n"))));		
+		Tfds.Eq_str_lines(expd, String_.new_a7(Xob_xdat_file.Rebuid_header(Bry_.new_a7(orig), Bry_.new_a7("\n"))));		
 	}
 	Bry_bfr tmp = Bry_bfr.new_();
 	private void tst_Sort(Xob_xdat_file rdr, gplx.lists.ComparerAble comparer, String expd) {
@@ -83,27 +83,27 @@ public class Xob_xdat_file_tst {
 		Chk_file(rdr, expd);
 	}
 	private void tst_Insert(Xob_xdat_file rdr, String new_val, String expd) {
-		rdr.Insert(tmp, Bry_.new_utf8_(new_val));
+		rdr.Insert(tmp, Bry_.new_u8(new_val));
 		Chk_file(rdr, expd);
 	}
 	private void tst_Update(Xob_xdat_file rdr, int idx, String new_val, String expd) {
 		Xob_xdat_itm itm = new Xob_xdat_itm(); 
 		rdr.GetAt(itm, idx);
-		rdr.Update(tmp, itm, Bry_.new_utf8_(new_val));
+		rdr.Update(tmp, itm, Bry_.new_u8(new_val));
 		Chk_file(rdr, expd);
 	}
 	private void Chk_file(Xob_xdat_file rdr, String expd) {
 		Io_url url = Io_url_.new_fil_("mem/test.xdat");
 		rdr.Save(url);
-		String actl = Io_mgr._.LoadFilStr(url);
+		String actl = Io_mgr.I.LoadFilStr(url);
 		Tfds.Eq_str_lines(expd, actl);		
 	}
 	private void tst_Find(Xob_xdat_file rdr, String find, int expd, boolean exact) {
-		rdr.Find(itm, Bry_.new_utf8_(find), 2, Byte_ascii.NewLine, exact);
+		rdr.Find(itm, Bry_.new_u8(find), 2, Byte_ascii.NewLine, exact);
 		int id = Bry_.Xto_int_or(Bry_.Mid(itm.Itm_bry(), 0, 1), -1);
 			Tfds.Eq(expd, id);
 	}
-	private void tst_ReadAt(Xob_xdat_file rdr, int i, String expd) {rdr.GetAt(itm, i); Tfds.Eq(expd, String_.new_utf8_(itm.Itm_bry()));}
+	private void tst_ReadAt(Xob_xdat_file rdr, int i, String expd) {rdr.GetAt(itm, i); Tfds.Eq(expd, String_.new_u8(itm.Itm_bry()));}
 	Xob_xdat_itm itm = new Xob_xdat_itm();
 	Xob_xdat_file rdr_(String... lines) {
 		String_bldr sb = String_bldr_.new_();
@@ -112,7 +112,7 @@ public class Xob_xdat_file_tst {
 			String line = lines[i];
 			sb.Add(line).Add_char_nl();
 		}
-		byte[] bry = Bry_.new_utf8_(sb.XtoStr());
-		return new Xob_xdat_file().Parse(bry, bry.length, Io_url_.Null);
+		byte[] bry = Bry_.new_u8(sb.XtoStr());
+		return new Xob_xdat_file().Parse(bry, bry.length, Io_url_.Empty);
 	}
 }

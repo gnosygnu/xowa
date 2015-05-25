@@ -25,9 +25,9 @@ public interface IptCfg extends NewAble, GfoInvkAble {
 class IptCfg_base implements IptCfg {
 	public String CfgKey() {return cfgKey;} private String cfgKey;
 	public IptCfgItm GetOrDefaultArgs(String bndKey, GfoMsg defaultMsg, IptArg[] defaultArgs) {
-		IptCfgItm rv = (IptCfgItm)hash.Fetch(bndKey);
+		IptCfgItm rv = (IptCfgItm)hash.Get_by(bndKey);
 		if (rv == null) {	// no cfg
-			rv = IptCfgItm.new_().Key_(bndKey).Ipt_(ListAdp_.many_((Object[])defaultArgs)).Msg_(defaultMsg);
+			rv = IptCfgItm.new_().Key_(bndKey).Ipt_(List_adp_.many_((Object[])defaultArgs)).Msg_(defaultMsg);
 			hash.Add(bndKey, rv);
 		}
 		else {				// cfg exists
@@ -39,38 +39,38 @@ class IptCfg_base implements IptCfg {
 		IptCfgItm rv = GetOrDefaultArgs(bndKey, m, argAry);
 		rv.Msg_(m); // always overwrite msg
 		if (Dif(rv.Ipt(), argAry)) {
-			rv.Ipt_(ListAdp_.many_((Object[])argAry));
+			rv.Ipt_(List_adp_.many_((Object[])argAry));
 			this.Change(bndKey, argAry);
 		}
 		return rv;
 	}
-	boolean Dif(ListAdp lhs, IptArg[] rhs) {
+	boolean Dif(List_adp lhs, IptArg[] rhs) {
 		if (lhs.Count() != rhs.length) return true;
 		for (int i = 0; i < rhs.length; i++) {
-			IptArg lhsArg = (IptArg)lhs.FetchAt(i);
+			IptArg lhsArg = (IptArg)lhs.Get_at(i);
 			IptArg rhsArg = rhs[i];
 			if (!lhsArg.Eq(rhsArg)) return true;
 		}
 		return false;
 	}
 	void Change(String bndKey, IptArg[] ary) {
-		ListAdp list = (ListAdp)owners.Fetch(bndKey);
+		List_adp list = (List_adp)owners.Get_by(bndKey);
 		if (list == null) return;
 		for (int i = 0; i < list.Count(); i++) {
-			IptBndsOwner owner = (IptBndsOwner)list.FetchAt(i);
+			IptBndsOwner owner = (IptBndsOwner)list.Get_at(i);
 			owner.IptBnds().Change(bndKey, ary);
 		}
 	}
 	public void Owners_del(String bndKey) {owners.Del(bndKey);}
 	public void Owners_add(String bndKey, IptBndsOwner owner) {
-		ListAdp list = (ListAdp)owners.Fetch(bndKey);
+		List_adp list = (List_adp)owners.Get_by(bndKey);
 		if (list == null) {
-			list = ListAdp_.new_();
+			list = List_adp_.new_();
 			owners.Add(bndKey, list);
 		}
 		list.Add(owner);
 		owner.IptBnds().Cfgs().Add(new IptCfgPtr(cfgKey, bndKey));
-	}	OrderedHash owners = OrderedHash_.new_();
+	}	Ordered_hash owners = Ordered_hash_.new_();
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.MatchIn(k, Invk_Add, Invk_set)) {
 			String bndKey = m.ReadStr("bndKey");
@@ -82,7 +82,7 @@ class IptCfg_base implements IptCfg {
 		return this;
 	}	public static final String Invk_Add = "Add", Invk_set = "set";
 	public IptCfg_base(String cfgKey) {this.cfgKey = cfgKey;}
-	OrderedHash hash = OrderedHash_.new_();
+	Ordered_hash hash = Ordered_hash_.new_();
 	public Object NewByKey(Object o) {return new IptCfg_base((String)o);} @gplx.Internal protected static final IptCfg HashProto = new IptCfg_base(); @gplx.Internal protected IptCfg_base() {}
 }
 class IptCfgPtr {

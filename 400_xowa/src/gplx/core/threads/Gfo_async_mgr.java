@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.threads; import gplx.*; import gplx.core.*;
 import gplx.core.primitives.*;
 public class Gfo_async_mgr implements GfoInvkAble {
-	private ListAdp queue = ListAdp_.new_();
+	private List_adp queue = List_adp_.new_();
 	private Bool_obj_ref running = Bool_obj_ref.n_();
 	private Gfo_async_cmd_mkr cmd_mkr = new Gfo_async_cmd_mkr();
 	public void Queue(GfoInvkAble invk, String invk_key, Object... args) {
@@ -39,7 +39,7 @@ public class Gfo_async_mgr implements GfoInvkAble {
 			while (true) {
 				synchronized (queue) {
 					if (queue.Count() == 0) break;
-					cmd = (Gfo_async_cmd_itm)ListAdp_.Pop(queue);
+					cmd = (Gfo_async_cmd_itm)List_adp_.Pop(queue);
 					cmd.Exec();
 				}
 			}

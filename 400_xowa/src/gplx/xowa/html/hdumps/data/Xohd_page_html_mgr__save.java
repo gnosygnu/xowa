@@ -41,10 +41,10 @@ public class Xohd_page_html_mgr__save {
 			bfr.Add_int_variable(redlink_mgr.Get_at(i)).Add_byte_pipe();
 		return bfr.Xto_bry_and_clear();
 	}
-	public static byte[] Write_imgs(Bry_bfr bfr, ListAdp imgs) {
+	public static byte[] Write_imgs(Bry_bfr bfr, List_adp imgs) {
 		int len = imgs.Count(); if (len == 0) return null; // no images; exit early, else will write blank String
 		for (int i = 0; i < len; ++i) {
-			Xohd_data_itm itm = (Xohd_data_itm)imgs.FetchAt(i);
+			Xohd_data_itm itm = (Xohd_data_itm)imgs.Get_at(i);
 			itm.Data_write(bfr);
 		}
 		return bfr.Xto_bry_and_clear();

@@ -66,13 +66,13 @@ public class FontAdp implements GfoInvkAble {
 class FontAdpCache {
 	public Font GetNativeFont(FontAdp fontAdp) {
 		String key = fontAdp.toString();
-		Font rv = (Font)hash.Fetch(key); if (rv != null) return rv;
+		Font rv = (Font)hash.Get_by(key); if (rv != null) return rv;
 				if (screenResolutionInDpi == -1) ScreenResolution_set();
 	    int fontSize = XtoJavaDpi(fontAdp.Size());
 		rv = new Font(fontAdp.Name(), fontAdp.Style().Val(), fontSize);		
 				hash.Add(key, rv);
 		return rv;
-	}	HashAdp hash = HashAdp_.new_();
+	}	Hash_adp hash = Hash_adp_.new_();
 		public static void ScreenResolution_set() {screenResolutionInDpi = Toolkit.getDefaultToolkit().getScreenResolution();}	// usually either 96 or 120
 	public static int XtoOsDpi(float v) {return Math.round((v * 72) / screenResolutionInDpi);} // WORKAROUND/JAVA: Java needs 72 dpi screen resolution; wnt uses 96 or 120 dpi
 	public static int XtoJavaDpi(float v) {return Math.round((v * screenResolutionInDpi) / 72);}

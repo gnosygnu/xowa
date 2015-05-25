@@ -81,15 +81,15 @@ public class IptArg_ {
 class IptMacro {
 	public void Reg(String prefix, String alias, IptArg arg) {
 		if (regy == null) Init();
-		OrderedHash list = (OrderedHash)regy.Fetch(prefix);
+		Ordered_hash list = (Ordered_hash)regy.Get_by(prefix);
 		if (list == null) {
-			list = OrderedHash_.new_();
+			list = Ordered_hash_.new_();
 			regy.Add(prefix, list);
 		}
-		list.AddReplace(alias, arg);
+		list.Add_if_dupe_use_nth(alias, arg);
 	}
 	void Init() {
-		regy = OrderedHash_.new_();
+		regy = Ordered_hash_.new_();
 		Reg("mod", "c", IptKey_.add_(IptKey_.Ctrl));
 		Reg("mod", "a", IptKey_.add_(IptKey_.Alt));
 		Reg("mod", "s", IptKey_.add_(IptKey_.Shift));
@@ -103,16 +103,16 @@ class IptMacro {
 		String[] plusAry = String_.Split(raw, "+");
 		String[] dotAry	= String_.Split(plusAry[0], ".");
 		String bgn = dotAry[0], end = dotAry[1];
-		OrderedHash list = (OrderedHash)regy.Fetch(bgn);
+		Ordered_hash list = (Ordered_hash)regy.Get_by(bgn);
 		if (list == null) throw parse_err(raw, "list not found").Add("list", bgn);
-		IptKey rv = (IptKey)list.Fetch(end);
+		IptKey rv = (IptKey)list.Get_by(end);
 		if (rv == null) throw parse_err(raw, "arg not found").Add("arg", end);
 		for (int i = 1; i < plusAry.length; i++) {
 			rv = rv.Add((IptKey)IptKey_.parse_(plusAry[i]));
 		}
 		return rv;
 	}
-	OrderedHash regy;
+	Ordered_hash regy;
 	static Err parse_err(String raw, String loc) {return Err_.new_key_("gfui", "could not parse IptArg").Add("raw", raw).Add("loc", loc);}
 	public static final IptMacro _ = new IptMacro(); IptMacro() {}
 }

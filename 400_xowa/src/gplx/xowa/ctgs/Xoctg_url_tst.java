@@ -37,7 +37,7 @@ class Xoctg_url_fxt {
 		}
 	}	private Xoa_url_parser parser; Xoa_url page_url; Xoctg_url ctg_url;
 	public void Test_parse(String url_str, Xoctg_url_chkr expd) {
-		parser.Parse(page_url, Bry_.new_utf8_(url_str));
+		parser.Parse(page_url, Bry_.new_u8(url_str));
 		ctg_url.Parse(Gfo_usr_dlg_.Test(), page_url);
 		expd.Chk(ctg_url);
 		expd.Clear();
@@ -45,9 +45,9 @@ class Xoctg_url_fxt {
 }
 class Xoctg_url_chkr {
 	public Xoctg_url_chkr Grp_idxs_(String subc, String file, String page) {
-		grp_idxs[Xoa_ctg_mgr.Tid_subc] = Bry_.new_ascii_(subc);
-		grp_idxs[Xoa_ctg_mgr.Tid_file] = Bry_.new_ascii_(file);
-		grp_idxs[Xoa_ctg_mgr.Tid_page] = Bry_.new_ascii_(page);
+		grp_idxs[Xoa_ctg_mgr.Tid_subc] = Bry_.new_a7(subc);
+		grp_idxs[Xoa_ctg_mgr.Tid_file] = Bry_.new_a7(file);
+		grp_idxs[Xoa_ctg_mgr.Tid_page] = Bry_.new_a7(page);
 		return this;
 	}	byte[][] grp_idxs = new byte[Xoa_ctg_mgr.Tid__max][];
 	public Xoctg_url_chkr Grp_fwds_(byte subc, byte file, byte page) {

@@ -64,17 +64,17 @@ public class Xog_tab_itm_read_mgr {
 		if (url != null && ttl != null) {
 			try {url_str = url_parser.Build_str(url);}
 			catch (Exception e) {	// HACK: failed pages will have a null wiki; for now, catch and ignore; DATE:2014-06-22
-				Gfo_usr_dlg_.I.Warn_many("", "", "failed to build url: url=~{0}, err=~{1}", String_.new_utf8_(url.Raw()), Err_.Message_gplx(e));
-				url_str = String_.new_utf8_(ttl.Full_txt());
+				Gfo_usr_dlg_.I.Warn_many("", "", "failed to build url: url=~{0}, err=~{1}", String_.new_u8(url.Raw()), Err_.Message_gplx(e));
+				url_str = String_.new_u8(ttl.Full_txt());
 			}
-			win_str = String_.new_utf8_(Bry_.Add(ttl.Full_txt(), Win_text_suffix_page));
+			win_str = String_.new_u8(Bry_.Add(ttl.Full_txt(), Win_text_suffix_page));
 		}
 		win.Url_box().Text_(url_str);
 		win.Win_box().Text_(win_str);
 	}
-	private static final byte[] Win_text_suffix_page = Bry_.new_ascii_(" - XOWA"); private static final String Win_text_blank = "XOWA";
+	private static final byte[] Win_text_suffix_page = Bry_.new_a7(" - XOWA"); private static final String Win_text_blank = "XOWA";
 	public static void Show_page_err(Xog_win_itm win, Xog_tab_itm tab, Xowe_wiki wiki, Xoa_url url, Xoa_ttl ttl, Exception e) {
-		String err_msg = String_.Format("page_load fail: page={0} err={1}", String_.new_utf8_(url.Raw()), Err_.Message_gplx(e));
+		String err_msg = String_.Format("page_load fail: page={0} err={1}", String_.new_u8(url.Raw()), Err_.Message_gplx(e));
 		win.Usr_dlg().Warn_many("", "", err_msg);
 		win.App().Log_wtr().Queue_enabled_(false);
 		Xoae_page fail_page = wiki.Data_mgr().Get_page(ttl, false);

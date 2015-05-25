@@ -45,7 +45,7 @@ public class RegxAdp {
 	public boolean Pattern_is_invalid() {return pattern_is_invalid;} private boolean pattern_is_invalid = false;
 	public RegxMatch[] Match_all(String text, int bgn) {
 		int idx = bgn;
-		ListAdp rv = ListAdp_.new_();
+		List_adp rv = List_adp_.new_();
 		int len = String_.Len(text);
 		while (idx <= len) {				// NOTE: must be <= not < else "a?" will return null instead of ""; PAGE:en.d:民; DATE:2015-01-30
 			RegxMatch match = this.Match(text, idx);
@@ -58,7 +58,7 @@ public class RegxAdp {
 				: find_bgn + find_len		// otherwise search after find_end
 				;
 		}
-		return (RegxMatch[])rv.Xto_ary(RegxMatch.class);
+		return (RegxMatch[])rv.To_ary(RegxMatch.class);
 	}
 	@gplx.Internal protected RegxAdp(String regx) {Pattern_(regx);}
 }

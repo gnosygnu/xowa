@@ -38,7 +38,7 @@ public class Gallery_itm_parser {
 		Init_keyword(tmp_bref, lang, Xol_kwd_grp_.Id_img_page, Fld_page);
 		return this;
 	}
-	public void Parse_all(ListAdp rv, Gallery_mgr_base mgr, Gallery_xnde xnde, byte[] src, int content_bgn, int content_end) {
+	public void Parse_all(List_adp rv, Gallery_mgr_base mgr, Gallery_xnde xnde, byte[] src, int content_bgn, int content_end) {
 		this.src = src;
 		this.cur_pos = content_bgn; this.end_pos = content_end;
 		cur_itm = new Gallery_itm();
@@ -60,11 +60,11 @@ public class Gallery_itm_parser {
 	private void Make_lnki_tkn(Gallery_mgr_base mgr, Gallery_xnde xnde, byte[] src) {
 		Xop_lnki_tkn lnki_tkn = ctx.Tkn_mkr().Lnki(cur_itm.Ttl_bgn(), cur_itm.Ttl_end()).Ttl_(cur_itm.Ttl());
 		if (cur_itm.Link_bgn() != -1)
-			lnki_tkn.Link_tkn_(new Arg_nde_tkn_mock("link", String_.new_utf8_(src, cur_itm.Link_bgn(), cur_itm.Link_end())));	// NOTE: hackish, but add the link as arg_nde, since gallery link is not parsed like a regular lnki
+			lnki_tkn.Link_tkn_(new Arg_nde_tkn_mock("link", String_.new_u8(src, cur_itm.Link_bgn(), cur_itm.Link_end())));	// NOTE: hackish, but add the link as arg_nde, since gallery link is not parsed like a regular lnki
 		cur_itm.Lnki_tkn_(lnki_tkn);
 		if (cur_itm.Page_bgn() != -1) {
 			int page_val = Bry_.Xto_int_or(src, cur_itm.Page_bgn(), cur_itm.Page_end(), -1);
-			if (page_val == -1) Xoa_app_.Usr_dlg().Warn_many("", "", "page is not an int: wiki=~{0} ttl=~{1} page=~{2}", wiki.Domain_str(), ctx.Cur_page().Ttl().Page_db(), String_.new_utf8_(src, cur_itm.Page_bgn(), cur_itm.Page_end()));
+			if (page_val == -1) Xoa_app_.Usr_dlg().Warn_many("", "", "page is not an int: wiki=~{0} ttl=~{1} page=~{2}", wiki.Domain_str(), ctx.Cur_page().Ttl().Page_db(), String_.new_u8(src, cur_itm.Page_bgn(), cur_itm.Page_end()));
 			lnki_tkn.Page_(page_val);
 		}
 		byte[] lnki_caption = cur_itm.Caption_bry();
@@ -167,7 +167,7 @@ public class Gallery_itm_parser {
 			case Fld_ttl:
 				cur_itm.Ttl_end_(fld_end);
 				byte[] ttl_bry = Bry_.Mid(src, cur_itm.Ttl_bgn(), fld_end);
-				ttl_bry = Xoa_app_.Utl__encoder_mgr().Url_ttl().Decode(ttl_bry);	// NOTE: must decode url-encoded entries; EX: "A%28b%29.png" -> "A(b).png"; DATE:2014-01-01
+				ttl_bry = Xoa_app_.Utl__encoder_mgr().Http_url_ttl().Decode(ttl_bry);	// NOTE: must decode url-encoded entries; EX: "A%28b%29.png" -> "A(b).png"; DATE:2014-01-01
 				Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry);
 				if (	ttl == null				// invalid ttl; EX:	"<invalid>"
 					||	ttl.Anch_bgn() == 1		// anchor-only ttl; EX: "#invalid"; DATE:2014-03-18
@@ -223,7 +223,7 @@ public class Gallery_itm_parser {
 	private static final byte Mode_eos = 1, Mode_nl = 2, Mode_pipe = 3, Mode_text = 4;
 	private void Init_keyword(Byte_obj_ref tmp_bref, Xol_lang lang, int kwd_id, byte trie_key) {
 		Xol_kwd_grp grp = lang.Kwd_mgr().Get_at(kwd_id);
-		if (grp == null) {Gfo_usr_dlg_.I.Warn_many("", "", "could not find gallery keyword: ~{0}", String_.new_utf8_(Xol_kwd_grp_.Bry_by_id(kwd_id))); return;}
+		if (grp == null) {Gfo_usr_dlg_.I.Warn_many("", "", "could not find gallery keyword: ~{0}", String_.new_u8(Xol_kwd_grp_.Bry_by_id(kwd_id))); return;}
 		Xol_kwd_itm[] itms = grp.Itms();
 		int len = itms.length;
 		Byte_obj_val trie_ref = Byte_obj_val.new_(trie_key);

@@ -26,7 +26,7 @@ public class IoEngine_xrg_xferDir {
 	public boolean ReadOnlyFails() {return readOnlyFails;} public IoEngine_xrg_xferDir ReadOnlyFails_() {return ReadOnlyFails_(true);} public IoEngine_xrg_xferDir ReadOnlyFails_(boolean v) {readOnlyFails = v; return this;} private boolean readOnlyFails = false;
 	public Criteria MatchCrt() {return matchCrt;} public IoEngine_xrg_xferDir MatchCrt_(Criteria v) {matchCrt = v; return this;} Criteria matchCrt = Criteria_.All;
 	public Criteria SubDirScanCrt() {return subDirScanCrt;} public IoEngine_xrg_xferDir SubDirScanCrt_(Criteria v) {subDirScanCrt = v; return this;} Criteria subDirScanCrt = Criteria_.All;
-	public void Exec() {IoEnginePool._.Fetch(src.Info().EngineKey()).XferDir(this);}
+	public void Exec() {IoEnginePool._.Get_by(src.Info().EngineKey()).XferDir(this);}
 	public static IoEngine_xrg_xferDir move_(Io_url src, Io_url trg) {return new_(src, trg, true);}
 	public static IoEngine_xrg_xferDir copy_(Io_url src, Io_url trg) {return new_(src, trg, false);}
 	static IoEngine_xrg_xferDir new_(Io_url src, Io_url trg, boolean move) {

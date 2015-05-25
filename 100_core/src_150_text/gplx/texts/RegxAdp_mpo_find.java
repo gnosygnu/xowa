@@ -19,10 +19,10 @@ package gplx.texts; import gplx.*;
 public class RegxAdp_mpo_find {
 	public String Input() {return input;} public RegxAdp_mpo_find Input_(String val) {input = val; return this;} private String input;
 	public String Find() {return find;} public RegxAdp_mpo_find Find_(String val) {find = val; return this;} private String find;
-	public ListAdp Exec_asList() {
+	public List_adp Exec_asList() {
 		RegxAdp regx = RegxAdp_.new_(find);
 		int idx = 0;
-		ListAdp rv = ListAdp_.new_();
+		List_adp rv = List_adp_.new_();
 		while (true)  {
 			RegxMatch match = regx.Match(input, idx);
 			if (match.Rslt_none()) break;

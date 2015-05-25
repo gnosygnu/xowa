@@ -28,8 +28,8 @@ class TdbSelectWkr implements Db_qryWkr {
 		if (cmd.GroupBy() != null)
 			rv = TdbGroupByWkr.GroupByExec(cmd, rv, tbl);
 		if (cmd.OrderBy() != null) {	// don't use null pattern here; if null ORDER BY, then don't call .Sort on GfoNdeList
-			ComparerAble comparer = Sql_order_by_sorter.new_((Sql_order_by_itm[])cmd.OrderBy().Flds().Xto_ary(Sql_order_by_itm.class));
-			rv.SortBy(comparer);
+			ComparerAble comparer = Sql_order_by_sorter.new_((Sql_order_by_itm[])cmd.OrderBy().Flds().To_ary(Sql_order_by_itm.class));
+			rv.Sort_by(comparer);
 		}
 		return GfoNdeRdr_.peers_(rv, false);
 	}
@@ -49,30 +49,30 @@ class TdbSelectWkr implements Db_qryWkr {
 class TdbGroupByWkr {
 	public static GfoNdeList GroupByExec(Db_qry__select_cmd select, GfoNdeList selectRows, TdbTable tbl) {
 		GfoNdeList rv = GfoNdeList_.new_();
-		OrderedHash groupByHash = OrderedHash_.new_();
-		ListAdp groupByFlds = select.GroupBy().Flds();
+		Ordered_hash groupByHash = Ordered_hash_.new_();
+		List_adp groupByFlds = select.GroupBy().Flds();
 		GfoFldList selectFldsForNewRow = select.Cols().Flds().XtoGfoFldLst(tbl);
 		Sql_select_fld_list selectFlds = select.Cols().Flds();
 		for (int rowIdx = 0; rowIdx < selectRows.Count(); rowIdx++) {
 			GfoNde selectRow = selectRows.FetchAt_asGfoNde(rowIdx);
 			GfoNde groupByRow = FindOrNew(selectFldsForNewRow, groupByFlds, selectRow, groupByHash, rv);
 			for (int i = 0; i < selectFlds.Count(); i++) {
-				Sql_select_fld_base selectFld = selectFlds.FetchAt(i);
+				Sql_select_fld_base selectFld = selectFlds.Get_at(i);
 				Object val = groupByRow.Read(selectFld.Alias());	// groupByRow is keyed by Alias; EX: Count(Id) AS CountOf
 				groupByRow.WriteAt(i, selectFld.GroupBy_eval(val, selectRow.Read(selectFld.Fld()), selectFld.ValType()));
 			}
 		}
 		return rv;
 	}
-	static GfoNde FindOrNew(GfoFldList selectFldsForNewRow, ListAdp groupByFlds, GfoNde selectRow, OrderedHash groupByRows, GfoNdeList rslt) {
+	static GfoNde FindOrNew(GfoFldList selectFldsForNewRow, List_adp groupByFlds, GfoNde selectRow, Ordered_hash groupByRows, GfoNdeList rslt) {
 		int len = groupByFlds.Count();
-		OrderedHash curHash = groupByRows;
+		Ordered_hash curHash = groupByRows;
 		GfoNde rv = null;
 		for (int i = 0; i < len; i++) {
-			String fld = (String)groupByFlds.FetchAt(i);
+			String fld = (String)groupByFlds.Get_at(i);
 			boolean last = i == len - 1;
 			Object val = selectRow.Read(fld);
-			Object o = curHash.Fetch(val);
+			Object o = curHash.Get_by(val);
 			if (last) {
 				if (o == null) {
 					Object[] valAry = new Object[selectFldsForNewRow.Count()];
@@ -85,12 +85,12 @@ class TdbGroupByWkr {
 			}
 			else {
 				if (o == null) {
-					OrderedHash nextHash = OrderedHash_.new_();
+					Ordered_hash nextHash = Ordered_hash_.new_();
 					curHash.Add(val, nextHash);
 					curHash = nextHash;
 				}
 				else {
-					curHash = (OrderedHash)o;
+					curHash = (Ordered_hash)o;
 				}
 			}
 		}

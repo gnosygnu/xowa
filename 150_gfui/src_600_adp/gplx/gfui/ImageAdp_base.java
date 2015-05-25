@@ -36,7 +36,7 @@ public class ImageAdp_base implements ImageAdp, RlsAble {
 	}	SizeAdp size = null;
 	public int Width() {return under.getWidth(null);}	
 	public int Height() {return under.getHeight(null);}	
-	public Io_url Url() {return url;} public ImageAdp Url_(Io_url v) {url = v; return this;} Io_url url = Io_url_.Null;
+	public Io_url Url() {return url;} public ImageAdp Url_(Io_url v) {url = v; return this;} Io_url url = Io_url_.Empty;
 	public Object Under() {return under;} Image under;
 	public boolean Disposed() {return disposed;} private boolean disposed = false;
 
@@ -44,7 +44,7 @@ public class ImageAdp_base implements ImageAdp, RlsAble {
 	public void SaveAsBmp(Io_url url) {SaveAs(url, "bmp");}
 	public void SaveAsPng(Io_url url) {SaveAs(url, "png");}
 	void SaveAs(Io_url url, String fmtStr) {
-		Io_mgr._.CreateDirIfAbsent(url.OwnerDir());
+		Io_mgr.I.CreateDirIfAbsent(url.OwnerDir());
 			    File fil = new File(url.Xto_api());
 //		String[] formatNames = ImageIO.getWriterFormatNames();
 //		for (String s : formatNames)

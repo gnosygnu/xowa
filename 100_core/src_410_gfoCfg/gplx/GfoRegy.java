@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 public class GfoRegy implements GfoInvkAble {
 	public int Count() {return hash.Count();}
-	public HashAdp Parsers() {return parsers;} HashAdp parsers = HashAdp_.new_();
-	public GfoRegyItm FetchOrNull(String key) {return (GfoRegyItm)hash.Fetch(key);}
+	public Hash_adp Parsers() {return parsers;} Hash_adp parsers = Hash_adp_.new_();
+	public GfoRegyItm FetchOrNull(String key) {return (GfoRegyItm)hash.Get_by(key);}
 	public Object FetchValOrFail(String key) {
-		GfoRegyItm rv = (GfoRegyItm)hash.Fetch(key); if (rv == null) throw Err_.new_("regy does not have key").Add("key", key);
+		GfoRegyItm rv = (GfoRegyItm)hash.Get_by(key); if (rv == null) throw Err_.new_("regy does not have key").Add("key", key);
 		return rv.Val();
 	}
 	public Object FetchValOrNull(String key) {return FetchValOr(key, null);}
@@ -30,10 +30,10 @@ public class GfoRegy implements GfoInvkAble {
 		return itm == null ? or : itm.Val();
 	}
 	public void Del(String key) {hash.Del(key);}
-	public void RegObj(String key, Object val) {RegItm(key, val, GfoRegyItm.ValType_Obj, Io_url_.Null);}
+	public void RegObj(String key, Object val) {RegItm(key, val, GfoRegyItm.ValType_Obj, Io_url_.Empty);}
 	public void RegDir(Io_url dirUrl, String match, boolean recur, String chopBgn, String chopEnd) {
-		Io_url[] filUrls = Io_mgr._.QueryDir_args(dirUrl).FilPath_(match).Recur_(recur).ExecAsUrlAry();
-		if (filUrls.length == 0 && !Io_mgr._.ExistsDir(dirUrl)) {UsrDlg_._.Stop(UsrMsg.new_("dirUrl does not exist").Add("dirUrl", dirUrl.Xto_api())); return;}
+		Io_url[] filUrls = Io_mgr.I.QueryDir_args(dirUrl).FilPath_(match).Recur_(recur).ExecAsUrlAry();
+		if (filUrls.length == 0 && !Io_mgr.I.ExistsDir(dirUrl)) {UsrDlg_._.Stop(UsrMsg.new_("dirUrl does not exist").Add("dirUrl", dirUrl.Xto_api())); return;}
 		for (Io_url filUrl : filUrls) {
 			String key = filUrl.NameAndExt();
 			int pos = String_.Find_none;
@@ -58,11 +58,11 @@ public class GfoRegy implements GfoInvkAble {
 	public void RegObjByType(String key, String val, String type) {
 		Object o = val;
 		if (String_.EqNot(type, StringClassXtn.Key_const)) {
-			ParseAble parser = (ParseAble)parsers.Fetch(type);
+			ParseAble parser = (ParseAble)parsers.Get_by(type);
 			if (parser == null) throw Err_.new_("could not find parser").Add("type", type).Add("key", key).Add("val", val);
 			o = parser.ParseAsObj(val);
 		}
-		RegItm(key, o, GfoRegyItm.ValType_Obj, Io_url_.Null);
+		RegItm(key, o, GfoRegyItm.ValType_Obj, Io_url_.Empty);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_RegDir)) {
@@ -85,9 +85,9 @@ public class GfoRegy implements GfoInvkAble {
 		return this;
 	}	public static final String Invk_RegDir = "RegDir", Invk_RegObj = "RegObj";
 	void RegItm(String key, Object val, int valType, Io_url url) {
-		hash.AddReplace(key, new GfoRegyItm(key, val, valType, url));
+		hash.Add_if_dupe_use_nth(key, new GfoRegyItm(key, val, valType, url));
 	}
-	HashAdp hash = HashAdp_.new_();
+	Hash_adp hash = Hash_adp_.new_();
 	public static final String Err_ChopBgn = "chopBgn results in null key", Err_ChopEnd = "chopEnd results in null key", Err_Dupe = "key already registered";
         public static final GfoRegy _ = new GfoRegy(); GfoRegy() {}
         @gplx.Internal protected static GfoRegy new_() {return new GfoRegy();}

@@ -27,19 +27,19 @@ public class Xoh_dom_tst {
 		tst_Find(src, "nde2", "atr0", "val0", "atr1", null);	// wrong nde
 	}
 	@Test  public void Title_by_href() {// PURPOSE: handle content-editable=n and finding file directly for download
-		Title_by_href_tst("/wiki/File:Bazille,_Frédéric_~_Le_Petit_Jardinier_(The_Little_Gardener),_c1866-67_oil_on_canvas_Museum_of_Fine_Arts,_Houston.jpg"
-			, "<a href=\"lure\" xowa_title=\"wrong\"></a><a href=\"/wiki/File:Bazille,_Fr%C3%A9d%C3%A9ric_%7E_Le_Petit_Jardinier_%28The_Little_Gardener%29,_c1866-67_oil_on_canvas_Museum_of_Fine_Arts,_Houston.jpg\" xowa_title=\"find_me\"></a>"
-			, "find_me"
-			);
+		Title_by_href_tst
+		( "/wiki/File:Bazille,_Fr%C3%A9d%C3%A9ric_%7E_Le_Petit_Jardinier_%28The_Little_Gardener%29,_c1866-67_oil_on_canvas_Museum_of_Fine_Arts,_Houston.jpg"
+		, "<a href=\"lure\" xowa_title=\"wrong\"></a><a href=\"/wiki/File:Bazille,_Fr%C3%A9d%C3%A9ric_%7E_Le_Petit_Jardinier_%28The_Little_Gardener%29,_c1866-67_oil_on_canvas_Museum_of_Fine_Arts,_Houston.jpg\" xowa_title=\"find_me\"></a>"
+		, "find_me"
+		);
 	}
 	private void tst_Find(String src, String where_nde, String where_key, String where_val, String select_key, String expd) {
 		Xoh_find rv = new Xoh_find();
-		byte[] actl = Xoh_dom_.Query_val_by_where(rv, Bry_.new_utf8_(src), Bry_.new_utf8_(where_nde), Bry_.new_utf8_(where_key), Bry_.new_utf8_(where_val), Bry_.new_utf8_(select_key), 0);
-		Tfds.Eq(expd, String_.new_utf8_(actl));
+		byte[] actl = Xoh_dom_.Query_val_by_where(rv, Bry_.new_u8(src), Bry_.new_u8(where_nde), Bry_.new_u8(where_key), Bry_.new_u8(where_val), Bry_.new_u8(select_key), 0);
+		Tfds.Eq(expd, String_.new_u8(actl));
 	}
 	private void Title_by_href_tst(String href, String html_src, String expd) {
-		Bry_bfr bfr = Bry_bfr.reset_(255);
-		String actl = Xoh_dom_.Title_by_href(encoder, bfr, Bry_.new_utf8_(href), Bry_.new_utf8_(html_src));
+		String actl = Xoh_dom_.Title_by_href(Bry_.new_u8(href), Bry_.new_u8(html_src));
 		Tfds.Eq(expd, actl);
-	}	static final Url_encoder encoder = Url_encoder.url_comma();
+	}
 }

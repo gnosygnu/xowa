@@ -30,13 +30,13 @@ public class Xot_invk_mock implements Xot_invk {
 	public int Frame_lifetime() {return frame_lifetime;} public void Frame_lifetime_(int v) {frame_lifetime = v;} private int frame_lifetime;
 	public boolean Rslt_is_redirect() {return rslt_is_redirect;} public void Rslt_is_redirect_(boolean v) {rslt_is_redirect = v;} private boolean rslt_is_redirect;
 	public Arg_nde_tkn Name_tkn() {return Arg_nde_tkn.Null;}
-	public int Args_len() {return args.Count() + idx_adj;} private OrderedHash args = OrderedHash_.new_bry_();
-	public Arg_nde_tkn Args_get_by_idx(int i) {return (Arg_nde_tkn)args.FetchAt(i - idx_adj);}
+	public int Args_len() {return args.Count() + idx_adj;} private Ordered_hash args = Ordered_hash_.new_bry_();
+	public Arg_nde_tkn Args_get_by_idx(int i) {return (Arg_nde_tkn)args.Get_at(i - idx_adj);}
 	public Arg_nde_tkn Args_eval_by_idx(byte[] src, int idx) {// DUPE:MW_ARG_RETRIEVE
 		int cur = 0, list_len = args.Count(); 
 		if (idx >= list_len) return null;
 		for (int i = 0; i < list_len; i++) {	// iterate over list to find nth *non-keyd* arg; SEE:NOTE_1
-			Arg_nde_tkn nde = (Arg_nde_tkn)args.FetchAt(i);
+			Arg_nde_tkn nde = (Arg_nde_tkn)args.Get_at(i);
 			if (nde.KeyTkn_exists()) {
 				int key_int = Bry_.Xto_int_or(nde.Key_tkn().Dat_ary(), -1);
 				if (key_int == -1)
@@ -55,7 +55,7 @@ public class Xot_invk_mock implements Xot_invk {
 		}
 		return Args_get_by_key(src, Bry_.XtoStrBytesByInt(idx + 1, 1));
 	}
-	public Arg_nde_tkn Args_get_by_key(byte[] src, byte[] key) {return (Arg_nde_tkn)args.Fetch(key);}
+	public Arg_nde_tkn Args_get_by_key(byte[] src, byte[] key) {return (Arg_nde_tkn)args.Get_by(key);}
 	public static Xot_invk_mock new_(byte defn_tid, byte[] frame_ttl, KeyVal... args)		{return new_(defn_tid, 1, frame_ttl, args);}
 	public static Xot_invk_mock new_(byte[] frame_ttl, KeyVal... args)					{return new_(Xot_defn_.Tid_null, 1, frame_ttl, args);}
 	public static Xot_invk_mock test_(byte[] frame_ttl, KeyVal... args)					{return new_(Xot_defn_.Tid_null, 0, frame_ttl, args);}
@@ -78,7 +78,7 @@ public class Xot_invk_mock implements Xot_invk {
 			}
 			else																		// regular nde
 				nde_tkn = new Arg_nde_tkn_mock(kv_key_str, kv.Val_to_str_or_empty());	// add regular key, val strings
-			rv.args.AddReplace(Bry_.new_utf8_(kv_key_str), nde_tkn);
+			rv.args.Add_if_dupe_use_nth(Bry_.new_u8(kv_key_str), nde_tkn);
 		}
 		return rv;
 	}

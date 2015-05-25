@@ -94,9 +94,9 @@ public class Xoh_module_wtr {
 		bfr.Add(Js_line_2_end);
 	}
 	private static final byte[]
-	  Js_line_1						= Bry_.new_ascii_("xowa.js.jquery.init();")
-	, Js_line_2_bgn					= Bry_.new_ascii_("xowa.js.load_lib('")
-	, Js_line_2_end					= Bry_.new_ascii_("');")
+	  Js_line_1						= Bry_.new_a7("xowa.js.jquery.init();")
+	, Js_line_2_bgn					= Bry_.new_a7("xowa.js.load_lib('")
+	, Js_line_2_end					= Bry_.new_a7("');")
 	;
 	private boolean Reset() {
 		if (bfr.Len() == reset_end) {			// itms wrote nothing
@@ -134,7 +134,7 @@ public class Xoh_module_wtr {
 	public void Write_js_ary_itm(byte[] val) {
 		if (++js_ary_idx != 1) bfr.Add(js_ary_dlm);
 		Write_js_quote(Byte_ascii.Apos, val);
-	}	private int js_ary_idx = 0; private static final byte[] js_ary_dlm = Bry_.new_ascii_(", ");
+	}	private int js_ary_idx = 0; private static final byte[] js_ary_dlm = Bry_.new_a7(", ");
 	public void Write_js_ary_end() {js_ary_idx = 0; bfr.Add_byte(Byte_ascii.Brack_end);}
 	public void Write_js_var(byte[] key, boolean quote_val, byte[] val) {
 		Write_nl_and_indent();
@@ -168,15 +168,15 @@ public class Xoh_module_wtr {
 	public void Indent_add() {indent += 2;}
 	public void Indent_del() {indent -= 2;}
 	private static final byte[]
-	  Css_include_bgn			= Bry_.new_ascii_("<link rel=\"stylesheet\" href=\"")
-	, Css_include_end			= Bry_.new_ascii_("\" type='text/css'>")
-	, Js_include_bgn			= Bry_.new_ascii_("<script src=\"")
-	, Js_include_end			= Bry_.new_ascii_("\" type='text/javascript'></script>")
-	, Js_globals_ini_var_bgn	= Bry_.new_ascii_("var xowa_global_values = {")
-	, Js_globals_ini_var_end	= Bry_.new_ascii_("}")
-	, Js_globals_ini_atr_mid	= Bry_.new_ascii_(" : ")
-	, Js_var_bgn				= Bry_.new_ascii_("var ")
-	, Js_var_mid				= Bry_.new_ascii_(" = ")
-	, Js_var_end				= Bry_.new_ascii_(";")
+	  Css_include_bgn			= Bry_.new_a7("<link rel=\"stylesheet\" href=\"")
+	, Css_include_end			= Bry_.new_a7("\" type='text/css'>")
+	, Js_include_bgn			= Bry_.new_a7("<script src=\"")
+	, Js_include_end			= Bry_.new_a7("\" type='text/javascript'></script>")
+	, Js_globals_ini_var_bgn	= Bry_.new_a7("var xowa_global_values = {")
+	, Js_globals_ini_var_end	= Bry_.new_a7("}")
+	, Js_globals_ini_atr_mid	= Bry_.new_a7(" : ")
+	, Js_var_bgn				= Bry_.new_a7("var ")
+	, Js_var_mid				= Bry_.new_a7(" = ")
+	, Js_var_end				= Bry_.new_a7(";")
 	;
 }

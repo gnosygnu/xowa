@@ -19,10 +19,10 @@ package gplx.stores; import gplx.*;
 import gplx.core.strings.*;
 public abstract class DataRdr_base implements SrlMgr {
 	public boolean Parse() {return parse;} public void Parse_set(boolean v) {parse = v;} private boolean parse;
-	public Io_url Uri() {return uri;} public void Uri_set(Io_url s) {uri = s;} Io_url uri = Io_url_.Null;
+	public Io_url Uri() {return uri;} public void Uri_set(Io_url s) {uri = s;} Io_url uri = Io_url_.Empty;
 	public abstract String NameOfNode();
 	public boolean Type_rdr() {return true;}
-	public HashAdp EnvVars() {return envVars;} HashAdp envVars = HashAdp_.new_();
+	public Hash_adp EnvVars() {return envVars;} Hash_adp envVars = Hash_adp_.new_();
 	public abstract Object Read(String key);
 	public abstract int FieldCount();
 	public abstract String KeyAt(int i);
@@ -38,13 +38,13 @@ public abstract class DataRdr_base implements SrlMgr {
 		try {return (String)val;} 
 		catch (Exception exc) {Err_dataRdr_ReadFailed_useOr(exc, String.class, key, val, or); return or;}
 	}
-	public byte[] ReadBryByStr(String key) {return Bry_.new_utf8_(ReadStr(key));}	
+	public byte[] ReadBryByStr(String key) {return Bry_.new_u8(ReadStr(key));}	
 	public byte[] ReadBryByStrOr(String key, byte[] or) {
 		Object val = Read(key); if (val == null) return or;
-		try {return Bry_.new_utf8_((String)val);}
+		try {return Bry_.new_u8((String)val);}
 		catch (Exception exc) {Err_dataRdr_ReadFailed_useOr(exc, byte[].class, key, val, or); return or;}
 	}
-	@gplx.Virtual public void SrlList(String key, ListAdp list, SrlObj proto, String itmKey) {
+	@gplx.Virtual public void SrlList(String key, List_adp list, SrlObj proto, String itmKey) {
 		list.Clear();
 		DataRdr subRdr = this.Subs_byName_moveFirst(key); // collection node
 		subRdr = subRdr.Subs();

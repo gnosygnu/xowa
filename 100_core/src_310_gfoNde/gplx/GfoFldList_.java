@@ -30,12 +30,12 @@ public class GfoFldList_ {
 class GfoFldList_base implements GfoFldList {
 	public int Count() {return hash.Count();}
 	public boolean Has(String key) {return hash.Has(key);}
-	public int IndexOf(String key) {			
-		Object rv = idxs.Fetch(key);
-		return rv == null ? ListAdp_.NotFound : Int_.cast_(rv);
+	public int Idx_of(String key) {			
+		Object rv = idxs.Get_by(key);
+		return rv == null ? List_adp_.NotFound : Int_.cast_(rv);
 	}
-	public GfoFld FetchAt(int i) {return (GfoFld)hash.FetchAt(i);}
-	public GfoFld FetchOrNull(String key) {return (GfoFld)hash.Fetch(key);}
+	public GfoFld Get_at(int i) {return (GfoFld)hash.Get_at(i);}
+	public GfoFld FetchOrNull(String key) {return (GfoFld)hash.Get_by(key);}
 	public GfoFldList Add(String key, ClassXtn c) {
 		GfoFld fld = GfoFld.new_(key, c);
 		hash.Add(key, fld);
@@ -45,18 +45,18 @@ class GfoFldList_base implements GfoFldList {
 	public String XtoStr() {
 		String_bldr sb = String_bldr_.new_();
 		for (int i = 0; i < hash.Count(); i++) {
-			GfoFld fld = this.FetchAt(i);
+			GfoFld fld = this.Get_at(i);
 			sb.Add(fld.Key()).Add("|");
 		}
 		return sb.XtoStr();
 	}
-	OrderedHash hash = OrderedHash_.new_(); HashAdp idxs = HashAdp_.new_(); // PERF: idxs used for IndexOf; need to recalc if Del ever added 
+	Ordered_hash hash = Ordered_hash_.new_(); Hash_adp idxs = Hash_adp_.new_(); // PERF: idxs used for Idx_of; need to recalc if Del ever added 
 }
 class GfoFldList_null implements GfoFldList {
 	public int Count() {return 0;}
 	public boolean Has(String key) {return false;}
-	public int IndexOf(String key) {return ListAdp_.NotFound;}
-	public GfoFld FetchAt(int i) {return GfoFld.Null;}
+	public int Idx_of(String key) {return List_adp_.NotFound;}
+	public GfoFld Get_at(int i) {return GfoFld.Null;}
 	public GfoFld FetchOrNull(String key) {return null;}
 	public GfoFldList Add(String key, ClassXtn typx) {return this;}
 	public String XtoStr() {return "<<GfoFldList_.Null>>";}

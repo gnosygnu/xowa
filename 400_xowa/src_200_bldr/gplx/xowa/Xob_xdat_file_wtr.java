@@ -82,7 +82,7 @@ public class Xob_xdat_file_wtr {
 //				usr_dlg.Log_many(GRP_KEY, "flush_err", "--ctg exceeds len: expd_len=~{0} actl_len=~{1} url=~{2}", this.Fil_len(), fil_max, fil_url.Xto_api());
 //			IoStream stream = IoStream_.Null;
 //			try {
-//				stream = Io_mgr._.OpenStreamWrite(fil_url);
+//				stream = Io_mgr.I.OpenStreamWrite(fil_url);
 //				if (idx_pos > 0)				// write idx; NOTE: if idx written, then .xdat; else .csv
 //					FlushIdx(stream);
 //				stream.Write(bfr.Bry(), 0, bfr.Len());	// write data;

@@ -34,8 +34,8 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	public Xob_fsdb_make_cmd(Xob_bldr bldr, Xowe_wiki wiki) {
 		this.Cmd_ctor(bldr, wiki);
 		this.poll_mgr = new Xobu_poll_mgr(bldr.App());
-		wiki.File__fsdb_mode().Tid_make_y_();
-		this.src_bin_mgr = new Xof_bin_mgr(new Fsm_mnt_mgr(), wiki.File__repo_mgr(), app.File__cache_mgr(), app.File__img_mgr().Wkr_resize_img());
+		wiki.File__fsdb_mode().Tid_v2_bld_y_();
+		this.src_bin_mgr = new Xof_bin_mgr(new Fsm_mnt_mgr(), wiki.File__repo_mgr(), app.File__img_mgr().Wkr_resize_img(), app.Wmf_mgr().Download_wkr().Download_xrg().Download_fmt());
 	}
 	public String Cmd_key() {return Xob_cmd_keys.Key_file_fsdb_make;}
 	public void Cmd_bgn(Xob_bldr bldr) {			
@@ -65,7 +65,7 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		// trg_mnt_itm
 		this.trg_bin_db_max = app.Api_root().Bldr().Wiki().Import().File_db_max();
 		Fsdb_db_mgr trg_db_mgr = Fsdb_db_mgr_.new_detect(wiki, wiki.Fsys_mgr().Root_dir(), wiki.Fsys_mgr().File_dir());
-		if (trg_db_mgr == null) trg_db_mgr = Fsdb_db_mgr__v2_bldr.I.Make(wiki, Bool_.Y);
+		if (trg_db_mgr == null) trg_db_mgr = Fsdb_db_mgr__v2_bldr.I.Get_or_make(wiki, Bool_.Y);
 		Fsm_mnt_mgr trg_mnt_mgr = new Fsm_mnt_mgr(); trg_mnt_mgr.Ctor_by_load(trg_db_mgr);
 		trg_mnt_mgr.Mnts__get_insert_idx_(Fsm_mnt_mgr.Mnt_idx_main);		// NOTE: do not delete; mnt_mgr default to Mnt_idx_user; DATE:2014-04-25
 		this.trg_mnt_itm = trg_mnt_mgr.Mnts__get_insert();
@@ -85,7 +85,7 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		int total_pending = Xob_xfer_regy_tbl.Select_total_pending(bldr_conn);
 		// if (total_pending > 250000 && src_bin_mgr__fsdb_version == null) 
 		usr_dlg.Note_many("", "", "total pending: ~{0}", total_pending);
-		ListAdp list = ListAdp_.new_();
+		List_adp list = List_adp_.new_();
 		boolean loop = true;
 		while (loop) {
 			byte rslt = Select_fsdb_itms(list);
@@ -106,7 +106,7 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 			int len = list.Count();
 			usr_dlg.Prog_many("", "", "fetched pages: ~{0}", len);
 			for (int i = 0; i < len; ++i) {
-				Xodb_tbl_oimg_xfer_itm fsdb = (Xodb_tbl_oimg_xfer_itm)list.FetchAt(i);
+				Xodb_tbl_oimg_xfer_itm fsdb = (Xodb_tbl_oimg_xfer_itm)list.Get_at(i);
 				Download_itm(fsdb);
 				if (	exit_now
 					||	exec_count	>= exec_count_max
@@ -131,7 +131,7 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		}
 		if (exec_done) {
 			bldr_cfg_tbl.Delete_grp(Cfg_fsdb_make);	// delete bmks for future reruns; DATE:2014-08-20
-			Io_mgr._.DeleteFil_args(wiki.Fsys_mgr().Root_dir().GenSubFil("xowa.file.make.cfg.gfs")).MissingFails_off().Exec();
+			Io_mgr.I.DeleteFil_args(wiki.Fsys_mgr().Root_dir().GenSubFil("xowa.file.make.cfg.gfs")).MissingFails_off().Exec();
 		}
 		bldr_conn.Rls_conn();
 	}
@@ -168,7 +168,7 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		page_id_val = page_id_bmk;
 		lnki_id_val = lnki_id_bmk;
 	}
-	private byte Select_fsdb_itms(ListAdp list) {
+	private byte Select_fsdb_itms(List_adp list) {
 		list.Clear();
 		boolean pages_found = false, links_found = false;
 		DataRdr rdr = Xob_xfer_regy_tbl.Select_by_tier_page(bldr_conn, tier_id_val, page_id_val, select_interval);
@@ -193,7 +193,7 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 			tier_id_val = fsdb.Lnki_tier_id();
 			page_id_val = fsdb.Lnki_page_id();
 			lnki_id_val = fsdb.Lnki_id();
-			fsdb.Orig_repo_name_(fsdb.Orig_repo_id() == Xof_repo_itm.Repo_local ? wiki.Domain_bry() : Xow_domain_.Domain_bry_commons);
+			fsdb.Orig_repo_name_(fsdb.Orig_repo_id() == Xof_repo_itm_.Repo_local ? wiki.Domain_bry() : Xow_domain_.Domain_bry_commons);
 			Download_exec(fsdb);
 			++exec_count;
 			if (exec_count % progress_interval	== 0) Print_progress(fsdb);
@@ -203,7 +203,7 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		}
 		catch (Exception exc) {
 			++exec_fail;
-			usr_dlg.Warn_many("", "", "download error; ttl=~{0} w=~{1} err=~{2}", fsdb.Lnki_ttl(), fsdb.Lnki_w(), Err_.Message_gplx(exc));
+			usr_dlg.Warn_many("", "", "download error; ttl=~{0} w=~{1} err=~{2}", fsdb.Orig_ttl(), fsdb.Lnki_w(), Err_.Message_gplx(exc));
 		}
 	}
 	private void Download_exec(Xodb_tbl_oimg_xfer_itm fsdb) {
@@ -211,7 +211,7 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		try {
 			if (src_rdr == Io_stream_rdr_.Null) {	// download failed
 				++exec_fail;
-				usr_dlg.Warn_many("", "", "failed: ttl=~{0}", String_.Format("[[File:{0}|{1}px]]", fsdb.Lnki_ttl(), fsdb.Html_w()));
+				usr_dlg.Warn_many("", "", "failed: ttl=~{0}", String_.Format("[[File:{0}|{1}px]]", fsdb.Orig_ttl(), fsdb.Html_w()));
 				Print_progress(fsdb);
 			}
 			else {									// download passed
@@ -219,7 +219,7 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 				int lnki_tier_id = fsdb.Lnki_tier_id();
 				if (	src_rdr_len > download_size_max
 					&&	!Int_.In(lnki_tier_id, download_keep_tier_ids)) {
-					usr_dlg.Warn_many("", "", "skipped; ttl=~{0} w=~{1} size=~{2} tier=~{3}", fsdb.Lnki_ttl(), fsdb.Lnki_w(), src_rdr_len, lnki_tier_id);
+					usr_dlg.Warn_many("", "", "skipped; ttl=~{0} w=~{1} size=~{2} tier=~{3}", fsdb.Orig_ttl(), fsdb.Lnki_w(), src_rdr_len, lnki_tier_id);
 					return;
 				}
 				if		(trg_bin_fil == null)											// no trg_bin_fil
@@ -244,7 +244,7 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		this.trg_bin_fil = trg_mnt_itm.Bin_mgr().Dbs__make(trg_bin_fil_name);		// create trg_bin_fil
 		if (!trg_mnt_itm.Db_mgr().File__solo_file()) {
 			Fsdb_db_file trg_bin_db = trg_mnt_itm.Db_mgr().File__bin_file__at(trg_mnt_itm.Id(), trg_bin_fil.Id(), trg_bin_fil_name);
-			Fsdb_db_mgr__v2_bldr.Make_cfg_data(wiki, trg_atr_fil.Url_rel(), trg_bin_db, Xowd_db_file_.Tid_file_data, trg_bin_fil.Id() + ListAdp_.Base1);
+			Fsdb_db_mgr__v2_bldr.Make_cfg_data(wiki, trg_atr_fil.Url_rel(), trg_bin_db, Xowd_db_file_.Tid_file_data, trg_bin_fil.Id() + List_adp_.Base1);
 			trg_bin_fil.Conn().Txn_bgn();
 		}
 	}
@@ -264,7 +264,7 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	}
 	private void Print_progress(Xodb_tbl_oimg_xfer_itm itm) {
 		int time_elapsed = Env_.TickCount_elapsed_in_sec(time_bgn);
-		usr_dlg.Prog_many("", "", "prog: num=~{0} err=~{1} time=~{2} rate=~{3} page=~{4} lnki=~{5} ttl=~{6}", exec_count, exec_fail, time_elapsed, Math_.Div_safe_as_int(exec_count, time_elapsed), page_id_val, lnki_id_val, String_.new_utf8_(itm.Orig_ttl()));
+		usr_dlg.Prog_many("", "", "prog: num=~{0} err=~{1} time=~{2} rate=~{3} page=~{4} lnki=~{5} ttl=~{6}", exec_count, exec_fail, time_elapsed, Math_.Div_safe_as_int(exec_count, time_elapsed), page_id_val, lnki_id_val, itm.Orig_ttl());
 	}
 	private void Delete_files() {}// TODO: purge /xowa/file/ dir to free up hard disk space
 	public void Cmd_init(Xob_bldr bldr) {}
@@ -289,7 +289,7 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		else if	(ctx.Match(k, Invk_src_bin_mgr__cache_enabled_))	src_bin_mgr__cache_enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_poll_mgr))						return poll_mgr;
 		else if	(ctx.Match(k, Invk_download_keep_tier_ids))			download_keep_tier_ids = Int_.Ary_parse(m.ReadStr("v"), "|");
-		else if	(ctx.Match(k, Invk_download_size_max))				download_size_max = Io_size_.To_long_by_msg_mb(m);
+		else if	(ctx.Match(k, Invk_download_size_max))				download_size_max = Io_size_.To_long_by_msg_mb(m, download_size_max);
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}
@@ -330,7 +330,7 @@ class Xodb_tbl_oimg_xfer_itm extends Xof_fsdb_itm {	public int 			Lnki_id()		{re
 		rv.lnki_id			= rdr.ReadInt(Xob_xfer_regy_tbl.Fld_lnki_id);
 		rv.lnki_page_id		= rdr.ReadInt(Xob_xfer_regy_tbl.Fld_lnki_page_id);
 		rv.lnki_tier_id		= rdr.ReadInt(Xob_xfer_regy_tbl.Fld_lnki_tier_id);
-		rv.Ctor_by_fsdb_make
+		rv.Init_at_fsdb_make
 		( rdr.ReadBryByStr(Xob_xfer_regy_tbl.Fld_lnki_ttl)
 		, rdr.ReadInt(Xob_xfer_regy_tbl.Fld_lnki_ext)
 		, rdr.ReadInt(Xob_xfer_regy_tbl.Fld_file_w), rdr.ReadInt(Xob_xfer_regy_tbl.Fld_file_h)	// set lnki_size; Xof_bin_mgr uses lnki_size
@@ -360,7 +360,7 @@ class Xob_tier_namer {
 		String ns_id = Int_.Xto_str_pad_bgn_zero(ns_ids[tier_id], 3);
 		int db_id_int = db_ids[tier_id];
 		db_ids[tier_id] = db_id_int + 1;
-		String db_id = Int_.Xto_str_pad_bgn_zero(db_id_int + ListAdp_.Base1, 3);
+		String db_id = Int_.Xto_str_pad_bgn_zero(db_id_int + List_adp_.Base1, 3);
 		return String_.Format("{0}-file-ns.{1}-db.{2}.xowa", domain_str, ns_id, db_id);
 	}
 }

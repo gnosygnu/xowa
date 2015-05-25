@@ -20,7 +20,7 @@ import gplx.php.*;
 public class Xol_msg_mgr_ {
 //		public static String Get_msg_val_gui_or_null(Xol_lang lang, byte[] pre, byte[] key, byte[] suf) {
 //			String rv = Get_msg_val_gui_or_null(lang, pre, key, suf);
-//			return rv == null ? "<" + String_.new_utf8_(Bry_.Add(pre, key, suf)) + ">" : rv;
+//			return rv == null ? "<" + String_.new_u8(Bry_.Add(pre, key, suf)) + ">" : rv;
 //		}
 	public static String Get_msg_val_gui_or_empty(Xoa_lang_mgr lang_mgr, Xol_lang lang, byte[] pre, byte[] key, byte[] suf) {	// get from lang, else get from en; does not use get_msg_val to skip db lookups; should only be used for gui; DATE:2014-05-28
 		String rv = Get_msg_val_gui_or_null(lang_mgr, lang, pre, key, suf);
@@ -35,7 +35,7 @@ public class Xol_msg_mgr_ {
 		Xol_msg_itm msg_itm = lang.Msg_mgr().Itm_by_key_or_null(msg_key);
 		if (msg_itm == null)
 			msg_itm = lang_mgr.Lang_en().Msg_mgr().Itm_by_key_or_null(msg_key);			
-		return msg_itm == null ? null : String_.new_utf8_(msg_itm.Val());
+		return msg_itm == null ? null : String_.new_u8(msg_itm.Val());
 	}
 	public static byte[] Get_msg_val(Xowe_wiki wiki, Xol_lang lang, byte[] msg_key, byte[][] fmt_args) {
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
@@ -43,7 +43,7 @@ public class Xol_msg_mgr_ {
 		byte[] rv = Get_msg_val(tmp_bfr, wiki, msg_itm, fmt_args);
 		tmp_bfr.Mkr_rls();
 		return rv;
-	}	private static final byte[] Missing_bry = Bry_.new_ascii_("$"), Slash_bry = new byte[] {Byte_ascii.Slash};
+	}	private static final byte[] Missing_bry = Bry_.new_a7("$"), Slash_bry = new byte[] {Byte_ascii.Slash};
 	public static byte[] Get_msg_val(Bry_bfr tmp_bfr, Xowe_wiki wiki, Xol_msg_itm msg_itm, byte[][] fmt_args) {
 		byte[] msg_val = msg_itm.Val();
 		boolean has_fmt = msg_itm.Has_fmt_arg(), has_tmpl = msg_itm.Has_tmpl_txt();

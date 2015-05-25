@@ -39,7 +39,7 @@ public class Xof_rule_mgr implements GfoInvkAble {
 			app_default.Get_or_new(keys[i]).Make_max_(make_max);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_set))		return Get_or_new(Bry_.new_utf8_(m.ReadStr("v")));
+		if		(ctx.Match(k, Invk_set))		return Get_or_new(Bry_.new_u8(m.ReadStr("v")));
 		else	return GfoInvkAble_.Rv_unhandled;
 	}	private static final String Invk_set = "set";
 }

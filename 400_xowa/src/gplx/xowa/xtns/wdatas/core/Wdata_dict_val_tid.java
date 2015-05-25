@@ -40,14 +40,14 @@ public class Wdata_dict_val_tid {
 	, Str_unknown								= "unknown"
 	;
 	public static final byte[]
-	  Bry_bad									= Bry_.new_ascii_(Str_bad)
-	, Bry_string								= Bry_.new_ascii_(Str_string)
-	, Bry_entity								= Bry_.new_ascii_(Str_entity)
-	, Bry_time									= Bry_.new_ascii_(Str_time)
-	, Bry_globecoordinate						= Bry_.new_ascii_(Str_globecoordinate)
-	, Bry_quantity								= Bry_.new_ascii_(Str_quantity)
-	, Bry_monolingualtext						= Bry_.new_ascii_(Str_monolingualtext)
-	, Bry_unknown								= Bry_.new_ascii_(Str_unknown)
+	  Bry_bad									= Bry_.new_a7(Str_bad)
+	, Bry_string								= Bry_.new_a7(Str_string)
+	, Bry_entity								= Bry_.new_a7(Str_entity)
+	, Bry_time									= Bry_.new_a7(Str_time)
+	, Bry_globecoordinate						= Bry_.new_a7(Str_globecoordinate)
+	, Bry_quantity								= Bry_.new_a7(Str_quantity)
+	, Bry_monolingualtext						= Bry_.new_a7(Str_monolingualtext)
+	, Bry_unknown								= Bry_.new_a7(Str_unknown)
 	;
 	private static final Hash_adp_bry Dict = Hash_adp_bry.cs_()
 	.Add_bry_byte(Bry_string					, Tid_string)

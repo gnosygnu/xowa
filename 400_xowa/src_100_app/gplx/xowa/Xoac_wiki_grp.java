@@ -32,16 +32,16 @@ public class Xoac_wiki_grp implements Cfg_nde_obj, Xoac_wiki_obj {
 		return rv;
 	}
 	public int Nde_subs_len() {return itms.Count();}
-	public Cfg_nde_obj Nde_subs_get_at(int i) {return (Cfg_nde_obj)itms.FetchAt(i);}
-	public Cfg_nde_obj Nde_subs_get(byte[] key) {return (Cfg_nde_obj)itms.Fetch(key);}
+	public Cfg_nde_obj Nde_subs_get_at(int i) {return (Cfg_nde_obj)itms.Get_at(i);}
+	public Cfg_nde_obj Nde_subs_get(byte[] key) {return (Cfg_nde_obj)itms.Get_by(key);}
 	public void Nde_subs_add(byte[] itm_key, Cfg_nde_obj itm_obj) {itms.Add(itm_key, itm_obj);}
 	public void Nde_subs_del(byte[] key) {itms.Del(key);}
 	public void Nde_atrs_set(byte[][] ary) {
 		int ary_len = ary.length;
 		if (ary_len > 0) name_bry = ary[0];
 	}
-	public static final byte[] Make_grp = Bry_.new_utf8_("grp"), Make_itm = Bry_.new_utf8_("itm");
+	public static final byte[] Make_grp = Bry_.new_u8("grp"), Make_itm = Bry_.new_u8("itm");
 	public int Itms_len() {return itms.Count();}
-	public Cfg_nde_obj Itms_get_at(int i) {return (Cfg_nde_obj)itms.FetchAt(i);}
-	OrderedHash itms = OrderedHash_.new_bry_();
+	public Cfg_nde_obj Itms_get_at(int i) {return (Cfg_nde_obj)itms.Get_at(i);}
+	Ordered_hash itms = Ordered_hash_.new_bry_();
 }

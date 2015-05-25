@@ -41,7 +41,7 @@ public class TdbDbLoadMgr_tst {
 
 		db.Files().DataObj_Rdr(rdr);
 		Tfds.Eq(db.Files().Count(), 2);
-		TdbFile file2 = db.Files().FetchOrFail(2);
+		TdbFile file2 = db.Files().Get_by_or_fail(2);
 		Tfds.Eq(file2.Path().Raw(), "C:\\file.dsv");
 
 		db.Files().DataObj_Wtr(wtr);
@@ -61,7 +61,7 @@ public class TdbDbLoadMgr_tst {
 
 		db.Tables().DataObj_Rdr(rdr, db.Files());
 		Tfds.Eq(db.Tables().Count(), 1);
-		TdbTable table = db.Tables().FetchOrFail("tbl1");
+		TdbTable table = db.Tables().Get_by_or_fail("tbl1");
 		Tfds.Eq(table.Name(), "tbl1");
 		Tfds.Eq(table.File().Id(), 1);
 
@@ -81,9 +81,9 @@ public class TdbDbLoadMgr_tst {
 		rdr = rdr_(raw);
 
 		db.MakeTbl("tbl0", TdbFile.MainFileId);
-		db.Tables().FetchOrFail(rdr.NameOfNode()).DataObj_Rdr(rdr);
+		db.Tables().Get_by_or_fail(rdr.NameOfNode()).DataObj_Rdr(rdr);
 		Tfds.Eq(db.Tables().Count(), 1);
-		TdbTable tbl = db.Tables().FetchOrFail("tbl0");
+		TdbTable tbl = db.Tables().Get_by_or_fail("tbl0");
 		Tfds.Eq(tbl.Rows().Count(), 1);
 
 		GfoNde row = tbl.Rows().FetchAt_asGfoNde(0);

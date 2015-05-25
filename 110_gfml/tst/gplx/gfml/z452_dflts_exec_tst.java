@@ -67,23 +67,23 @@ public class z452_dflts_exec_tst {
 		GfmlVarCtx evalContext = GfmlVarCtx.new_("testContext");
 		GfmlTkn valTkn = GfmlTkn_.raw_(text);
 		GfmlVarItm varItem = GfmlVarItm.new_("varKey", valTkn, "testContext");
-		evalContext.AddReplace(varItem);
+		evalContext.Add_if_dupe_use_nth(varItem);
 		GfmlVarTkn rv = new GfmlVarTkn("eval", GfmlTknAry_.ary_(valTkn), evalContext, "varKey");
 		return new Object[] {rv, varItem};
 	}
 	void ini_SubFldDefault_add(GfmlType type, String subFldKey, String defaultVal) {
-		GfmlFld subFld = type.SubFlds().Fetch(subFldKey);
+		GfmlFld subFld = type.SubFlds().Get_by(subFldKey);
 		GfmlTkn defaultTkn = GfmlTkn_.raw_(defaultVal);;
 		subFld.DefaultTkn_(defaultTkn);
 	}
 	void tst_SubFldDefault(GfmlType type, String subFldKey, String expdDefaultVal) {
-		GfmlFld subFld = type.SubFlds().Fetch(subFldKey);
+		GfmlFld subFld = type.SubFlds().Get_by(subFldKey);
 		GfmlTkn defaultTkn = GfmlTkn_.as_(subFld.DefaultTkn());
 		String actlDefaultVal = defaultTkn == null || defaultTkn == GfmlTkn_.Null ? null : defaultTkn.Val();
 		Tfds.Eq(expdDefaultVal, actlDefaultVal);
 	}
 	void tst_SubFldExists(GfmlType type, String subFldKey, boolean expd) {
-		GfmlFld subFld = type.SubFlds().Fetch(subFldKey);
+		GfmlFld subFld = type.SubFlds().Get_by(subFldKey);
 		Tfds.Eq(expd, subFld != null);
 	}
 	GfmlType make_(String key, String name, String... atrs) {

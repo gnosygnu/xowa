@@ -16,10 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfml; import gplx.*;
-public class GfmlObjList extends ListAdp_base {
-	@gplx.New public GfmlObj FetchAt(int idx) {return (GfmlObj)FetchAt_base(idx);}
+public class GfmlObjList extends List_adp_base {
+	@gplx.New public GfmlObj Get_at(int idx) {return (GfmlObj)Get_at_base(idx);}
 	public void Add(GfmlObj tkn) {Add_base(tkn);}
-	public void AddAt(GfmlObj tkn, int idx) {super.AddAt_base(idx, tkn);}
+	public void Add_at(GfmlObj tkn, int idx) {super.AddAt_base(idx, tkn);}
 	public void Del(GfmlObj tkn) {Del_base(tkn);}
 	public static GfmlObjList new_() {return new GfmlObjList();} GfmlObjList() {}
 }

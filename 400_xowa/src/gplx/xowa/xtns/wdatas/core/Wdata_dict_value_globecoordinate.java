@@ -32,11 +32,11 @@ public class Wdata_dict_value_globecoordinate {
 	, Str_globe									= "globe"
 	;
 	public static byte[] 
-	  Bry_latitude								= Bry_.new_ascii_(Str_latitude)
-	, Bry_longitude								= Bry_.new_ascii_(Str_longitude)
-	, Bry_altitude								= Bry_.new_ascii_(Str_altitude)
-	, Bry_precision								= Bry_.new_ascii_(Str_precision)
-	, Bry_globe									= Bry_.new_ascii_(Str_globe)
+	  Bry_latitude								= Bry_.new_a7(Str_latitude)
+	, Bry_longitude								= Bry_.new_a7(Str_longitude)
+	, Bry_altitude								= Bry_.new_a7(Str_altitude)
+	, Bry_precision								= Bry_.new_a7(Str_precision)
+	, Bry_globe									= Bry_.new_a7(Str_globe)
 	;
 	public static final Hash_adp_bry Dict = Hash_adp_bry.cs_()
 	.Add_bry_byte(Bry_latitude					, Tid_latitude)
@@ -49,6 +49,6 @@ public class Wdata_dict_value_globecoordinate {
 	  Val_globe_dflt_str						= "http:\\/\\/www.wikidata.org\\/entity\\/Q2"
 	;
 	public static byte[]
-	  Val_globe_dflt_bry						= Bry_.new_ascii_(Val_globe_dflt_str)
+	  Val_globe_dflt_bry						= Bry_.new_a7(Val_globe_dflt_str)
 	;
 }

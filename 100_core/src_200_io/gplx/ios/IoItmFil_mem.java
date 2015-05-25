@@ -26,7 +26,7 @@ class IoItmFil_mem extends IoItmFil {		public static IoItmFil_mem as_(Object obj
 		byte[] buffer = new byte[len];
 		stream.Position_set(0);
 		stream.Read(buffer, 0, len);
-		return String_.new_utf8_(buffer);
+		return String_.new_u8(buffer);
 	}
 	public IoItmFil_mem Clone() {return new_(this.Url(), this.Size(), this.ModifiedTime(), this.Text());}
 	public static IoItmFil_mem new_(Io_url filPath, long size, DateAdp modified, String text) {
@@ -35,5 +35,5 @@ class IoItmFil_mem extends IoItmFil {		public static IoItmFil_mem as_(Object obj
 		rv.stream = IoStream_mem.rdr_txt_(filPath, text);
 		return rv;
 	}
-	public static final IoItmFil_mem Null = new_(Io_url_.Null, 0, DateAdp_.MinValue, "");
+	public static final IoItmFil_mem Null = new_(Io_url_.Empty, -1, DateAdp_.MinValue, "");	// NOTE: size must be -1 for .Exists to be false; DATE:2015-05-16
 }

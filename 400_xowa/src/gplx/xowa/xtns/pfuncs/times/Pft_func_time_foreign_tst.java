@@ -61,8 +61,8 @@ class Pft_func_time_foreign_fxt {
 		Tfds.Now_enabled_n_();
 	}
 	public Pft_func_time_foreign_fxt Init_msg(String key, String val) {
-		Xol_msg_itm msg = fxt.Wiki().Msg_mgr().Get_or_make(Bry_.new_utf8_(key));
-		msg.Atrs_set(Bry_.new_utf8_(val), false, false);
+		Xol_msg_itm msg = fxt.Wiki().Msg_mgr().Get_or_make(Bry_.new_u8(key));
+		msg.Atrs_set(Bry_.new_u8(val), false, false);
 		return this;
 	}
 	public void Test_parse(String raw, String expd) {

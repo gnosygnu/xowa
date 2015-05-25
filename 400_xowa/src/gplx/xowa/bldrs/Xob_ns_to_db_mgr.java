@@ -19,7 +19,7 @@ package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.bldrs.cmds.*;
 public class Xob_ns_to_db_mgr {
 	private final Xob_ns_to_db_wkr wkr; private final Xowd_db_mgr db_mgr; private final long db_max; private boolean one_file_conn_init = true;
-	private final OrderedHash db_list = OrderedHash_.new_();
+	private final Ordered_hash db_list = Ordered_hash_.new_();
 	public Xob_ns_to_db_mgr(Xob_ns_to_db_wkr wkr, Xowd_db_mgr db_mgr, long db_max) {
 		this.wkr = wkr; this.db_mgr = db_mgr; this.db_max = db_max;
 	}
@@ -71,7 +71,7 @@ public class Xob_ns_to_db_mgr {
 		db_list.Del(db.Id());
 	}
 	public void Rls_all() {
-		Xowd_db_file[] ary = (Xowd_db_file[])db_list.Xto_ary(Xowd_db_file.class);
+		Xowd_db_file[] ary = (Xowd_db_file[])db_list.To_ary(Xowd_db_file.class);
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			Xowd_db_file db = (Xowd_db_file)ary[i];
@@ -81,7 +81,7 @@ public class Xob_ns_to_db_mgr {
 	public void Commit() {
 		int len = db_list.Count();
 		for (int i = 0; i < len; ++i) {
-			Xowd_db_file db = (Xowd_db_file)db_list.FetchAt(i);
+			Xowd_db_file db = (Xowd_db_file)db_list.Get_at(i);
 			db.Conn().Txn_sav();
 		}
 	}

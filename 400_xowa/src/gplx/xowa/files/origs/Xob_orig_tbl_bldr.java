@@ -24,7 +24,7 @@ public class Xob_orig_tbl_bldr extends Xob_itm_basic_base implements Xob_cmd {
 	public void Cmd_init(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {
 		Xof_fsdb_mode fsdb_mode = wiki.File__fsdb_mode();
-		fsdb_mode.Tid_make_y_();
+		fsdb_mode.Tid_v2_bld_y_();
 		wiki.Init_assert();
 		Fsdb_db_mgr db_core_mgr = Fsdb_db_mgr_.new_detect(wiki, wiki.Fsys_mgr().Root_dir(), wiki.Fsys_mgr().File_dir());
 		conn = db_core_mgr.File__orig_tbl_ary()[gplx.fsdb.meta.Fsm_mnt_mgr.Mnt_idx_main].Conn();

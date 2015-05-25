@@ -28,8 +28,8 @@ public class Xoac_lang_itm implements Cfg_nde_obj, Xoac_lang_obj {
 	public Cfg_nde_obj Nde_subs_get(byte[] key) {throw Err_mgr._.fmt_(GRP_KEY, "invalid_sub_get", "langs cannot have itms: ~{0}", key);}
 	public int Nde_subs_len() {return 0;}
 	public Cfg_nde_obj Nde_subs_get_at(int i) {throw Err_mgr._.fmt_(GRP_KEY, "invalid_sub_get", "langs cannot have itms: ~{0}", i);}
-	public void Nde_subs_add(byte[] itm_key, Cfg_nde_obj itm_obj) {throw Err_mgr._.fmt_(GRP_KEY, "invalid_sub_add", "langs cannot have itms: ~{0}", String_.new_utf8_(itm_key));}
-	public void Nde_subs_del(byte[] key) {throw Err_mgr._.fmt_(GRP_KEY, "invalid_sub_del", "langs cannot delete itms: ~{0}", String_.new_utf8_(key));}
+	public void Nde_subs_add(byte[] itm_key, Cfg_nde_obj itm_obj) {throw Err_mgr._.fmt_(GRP_KEY, "invalid_sub_add", "langs cannot have itms: ~{0}", String_.new_u8(itm_key));}
+	public void Nde_subs_del(byte[] key) {throw Err_mgr._.fmt_(GRP_KEY, "invalid_sub_del", "langs cannot delete itms: ~{0}", String_.new_u8(key));}
 	public void Nde_atrs_set(byte[][] ary) {
 		if (ary.length != 1) throw Err_mgr._.fmt_("xowa.langs.itms", "invalid_atrs", "expecting name only: ~{0}", String_.AryXtoStr(String_.Ary(ary)));
 		local_name_bry = ary[0];

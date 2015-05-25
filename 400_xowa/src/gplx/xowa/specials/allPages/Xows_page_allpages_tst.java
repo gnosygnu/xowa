@@ -134,10 +134,10 @@ class Xows_page_allpages_fxt {
 		return this;
 	}	private Xoae_app app;
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki; Xows_page_allpages allpages;
-	public Xows_page_allpages_fxt Init_arg(String key, String val) {init_args.Add(new Gfo_url_arg(Bry_.new_ascii_(key), Bry_.new_ascii_(val))); return this;} private ListAdp init_args = ListAdp_.new_();
+	public Xows_page_allpages_fxt Init_arg(String key, String val) {init_args.Add(new Gfo_url_arg(Bry_.new_a7(key), Bry_.new_a7(val))); return this;} private List_adp init_args = List_adp_.new_();
 	public Xows_page_allpages_fxt Init_ttl_leaf(String val) {init_ttl_leaf = val; return this;} private String init_ttl_leaf;
 	public Xows_page_allpages_fxt Init_itms_per_page(int v) {init_itms_per_page = v; return this;} private int init_itms_per_page = 5;
-	public Xows_page_allpages_fxt Expd_arg(String key, String val) {expd_args.Add(new Gfo_url_arg(Bry_.new_ascii_(key), Bry_.new_ascii_(val))); return this;} private ListAdp expd_args = ListAdp_.new_();
+	public Xows_page_allpages_fxt Expd_arg(String key, String val) {expd_args.Add(new Gfo_url_arg(Bry_.new_a7(key), Bry_.new_a7(val))); return this;} private List_adp expd_args = List_adp_.new_();
 	public Xows_page_allpages_fxt Expd_prv(String v) {expd_prv = v; return this;} private String expd_prv;
 	public Xows_page_allpages_fxt Expd_nxt(String v) {expd_nxt = v; return this;} private String expd_nxt;
 	public Xows_page_allpages_fxt Expd_ttls(String... v) {expd_ttls = v; return this;} private String[] expd_ttls;
@@ -147,8 +147,8 @@ class Xows_page_allpages_fxt {
 	public static String Xto_str(Xowe_wiki wiki, Xowd_page_itm v) {
 		if (v == null) return null;
 		Xow_ns ns = wiki.Ns_mgr().Ids_get_or_null(v.Ns_id());
-		String ns_str = ns == null ? "" : String_.new_ascii_(ns.Name_db_w_colon());
-		return ns_str + String_.new_ascii_(v.Ttl_page_db());
+		String ns_str = ns == null ? "" : String_.new_a7(ns.Name_db_w_colon());
+		return ns_str + String_.new_a7(v.Ttl_page_db());
 	}
 	public static String[] Xto_str_ary(Xowe_wiki wiki, Xowd_page_itm[] ary) {
 		int ary_len = ary.length;
@@ -164,7 +164,7 @@ class Xows_page_allpages_fxt {
 		String[] rv = new String[ary_len];
 		for (int i = 0; i < ary_len; i++) {
 			Gfo_url_arg itm = ary[i];
-			rv[i] = String_.new_utf8_(itm.Key_bry()) + "=" + String_.new_utf8_(itm.Val_bry());
+			rv[i] = String_.new_u8(itm.Key_bry()) + "=" + String_.new_u8(itm.Val_bry());
 		}
 		return rv;
 	}
@@ -173,8 +173,8 @@ class Xows_page_allpages_fxt {
 		parserx.Parse(init_url, Xows_special_meta_.Itm__all_pages.Ttl_bry());
 		Xoa_ttl init_ttl = Make_init_ttl();
 		allpages.Special_gen(wiki, wiki.Ctx().Cur_page(), init_url, init_ttl);
-		if (expd_display_ttl != null) Tfds.Eq(expd_display_ttl, String_.new_utf8_(wiki.Ctx().Cur_page().Html_data().Display_ttl()));
-		if (expd_address_page != null) Tfds.Eq(expd_address_page, String_.new_utf8_(init_url.Page_bry()));
+		if (expd_display_ttl != null) Tfds.Eq(expd_display_ttl, String_.new_u8(wiki.Ctx().Cur_page().Html_data().Display_ttl()));
+		if (expd_address_page != null) Tfds.Eq(expd_address_page, String_.new_u8(init_url.Page_bry()));
 		return this;
 	}
 	public Xows_page_allpages_fxt Test_build_data() {
@@ -183,7 +183,7 @@ class Xows_page_allpages_fxt {
 		if (expd_nxt != null) Tfds.Eq(expd_nxt, Xto_str(wiki, allpages.Rslt_nxt()));
 		if (expd_prv != null) Tfds.Eq(expd_prv, Xto_str(wiki, allpages.Rslt_prv()));
 		if (expd_args.Count() > 0) {
-			Gfo_url_arg[] expd_args_ary = (Gfo_url_arg[])expd_args.Xto_ary(Gfo_url_arg.class); 
+			Gfo_url_arg[] expd_args_ary = (Gfo_url_arg[])expd_args.To_ary(Gfo_url_arg.class); 
 			Tfds.Eq_ary_str(Xto_str_ary(init_url.Args()), Xto_str_ary(expd_args_ary));
 		}
 		return this;
@@ -191,15 +191,15 @@ class Xows_page_allpages_fxt {
 	public Xows_page_allpages_fxt Test_build_html(String expd) {
 		Exec_build();
 		allpages.Build_html(wiki.Ctx().Cur_page());
-		Tfds.Eq_str_lines(expd, String_.new_ascii_(wiki.Ctx().Cur_page().Data_raw()));
+		Tfds.Eq_str_lines(expd, String_.new_a7(wiki.Ctx().Cur_page().Data_raw()));
 		return this;
 	}
 	private void Exec_build() {
 		if (allpages.Itms_per_page() != init_itms_per_page) allpages.Itms_per_page_(init_itms_per_page);
-		init_url.Args_((Gfo_url_arg[])init_args.Xto_ary(Gfo_url_arg.class));
+		init_url.Args_((Gfo_url_arg[])init_args.To_ary(Gfo_url_arg.class));
 		init_args.Clear();
 		Xoa_ttl init_ttl = Make_init_ttl();
 		allpages.Build_data(init_url, init_ttl);
 	}
-	private Xoa_ttl Make_init_ttl() {return Xoa_ttl.parse_(wiki, Bry_.new_utf8_(Xows_special_meta_.Itm__all_pages.Ttl_str() + init_ttl_leaf));}
+	private Xoa_ttl Make_init_ttl() {return Xoa_ttl.parse_(wiki, Bry_.new_u8(Xows_special_meta_.Itm__all_pages.Ttl_str() + init_ttl_leaf));}
 }

@@ -27,7 +27,7 @@ public class Xog_cmd_mgr {
 	private void Load_ctg_msgs(Xoae_app app) {
 		Xog_cmd_ctg[] ary = Xog_ctg_itm_.Ary;
 		int len = ary.length;
-		Xol_lang lang = app.User().Lang();
+		Xol_lang lang = app.Usere().Lang();
 		for (int i = 0; i < len; i++) {
 			Xog_cmd_ctg itm = ary[i];
 			itm.Name_(Xol_msg_mgr_.Get_msg_val_gui_or_null(app.Lang_mgr(), lang, Xog_cmd_itm_.Msg_pre_ctg, itm.Key_bry(), Xog_cmd_itm_.Msg_suf_name));
@@ -35,7 +35,7 @@ public class Xog_cmd_mgr {
 	}
 	private void Load_cmd_msgs(Xoae_app app) {
 		int len = this.Len();
-		Xol_lang lang = app.User().Lang();
+		Xol_lang lang = app.Usere().Lang();
 		for (int i = 0; i < len; i++) {
 			Xog_cmd_itm itm = this.Get_at(i);
 			itm.Name_(Xol_msg_mgr_.Get_msg_val_gui_or_null(app.Lang_mgr(), lang, Xog_cmd_itm_.Msg_pre_api, itm.Key_bry(), Xog_cmd_itm_.Msg_suf_name));

@@ -20,7 +20,7 @@ import gplx.core.strings.*;
 public class PerfLogMgr_fxt {
 	public void Init(Io_url url, String text) {
 		this.url = url;
-		entries.ResizeBounds(1000);
+		entries.Resize_bounds(1000);
 		entries.Add(new PerfLogItm(0, text + "|" + DateAdp_.Now().XtoStr_gplx()));
 		tmr.Bgn();
 	}
@@ -41,10 +41,10 @@ public class PerfLogMgr_fxt {
 			PerfLogItm itm = (PerfLogItm)itmObj;
 			sb.Add(itm.XtoStr()).Add_char_crlf();
 		}
-		Io_mgr._.AppendFilStr(url, sb.XtoStr());
+		Io_mgr.I.AppendFilStr(url, sb.XtoStr());
 		entries.Clear();
 	}
-	ListAdp entries = ListAdp_.new_(); PerfLogTmr tmr = PerfLogTmr.new_(); Io_url url = Io_url_.Null;
+	List_adp entries = List_adp_.new_(); PerfLogTmr tmr = PerfLogTmr.new_(); Io_url url = Io_url_.Empty;
 	public static final PerfLogMgr_fxt _ = new PerfLogMgr_fxt(); PerfLogMgr_fxt() {}
 	class PerfLogItm {
 		public String XtoStr() {

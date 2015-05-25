@@ -21,7 +21,7 @@ public class Dsv_fld_parser_ {
 	public static final Dsv_fld_parser Int_parser = Dsv_fld_parser_int._;
 	public static final Dsv_fld_parser Line_parser__comment_is_pipe = new Dsv_fld_parser_line(Byte_ascii.Pipe);
 	public static Err err_fld_unhandled(Dsv_fld_parser parser, Dsv_wkr_base wkr, int fld_idx, byte[] src, int bgn, int end) {
-		throw Err_.new_fmt_("fld unhandled; parser={0} wkr={1} fld_idx={2} val={3}", ClassAdp_.NameOf_obj(parser), ClassAdp_.NameOf_obj(wkr), fld_idx, String_.new_utf8_(src, bgn, end));
+		throw Err_.new_fmt_("fld unhandled; parser={0} wkr={1} fld_idx={2} val={3}", ClassAdp_.NameOf_obj(parser), ClassAdp_.NameOf_obj(wkr), fld_idx, String_.new_u8(src, bgn, end));
 	}
 }
 class Dsv_fld_parser_line implements Dsv_fld_parser {

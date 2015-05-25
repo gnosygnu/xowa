@@ -50,8 +50,8 @@ public class Xog_mnu_bldr {
 		}
 	}
 	public ImageAdp Get_img(String[] img_nest) {
-		Io_url img_url = img_nest.length == 0 ? Io_url_.Null : img_dir.GenSubFil_nest(img_nest);
-		return Io_mgr._.ExistsFil(img_url) ? kit.New_img_load(img_url) : ImageAdp_null._;	// NOTE: must check if file exists else swt exception; NOTE: must use ImageAdp_null._, not ImageAdp_.Null, else error in non-X11 environments
+		Io_url img_url = img_nest.length == 0 ? Io_url_.Empty : img_dir.GenSubFil_nest(img_nest);
+		return Io_mgr.I.ExistsFil(img_url) ? kit.New_img_load(img_url) : ImageAdp_null._;	// NOTE: must check if file exists else swt exception; NOTE: must use ImageAdp_null._, not ImageAdp_.Null, else error in non-X11 environments
 	}
 	private Gfui_mnu_itm Add_btn(Gfui_mnu_grp owner_gui, Xog_mnu_itm sub, String sub_text, String sub_shortcut) {
 		String cmd_text = "app.api.exec('" + sub.Key() + "');";

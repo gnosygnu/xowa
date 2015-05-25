@@ -34,14 +34,14 @@ public abstract class Xob_wdata_qid_base extends Xob_itm_dump_base implements Xo
 	public void Wkr_run(Xowd_page_itm page) {
 		if (page.Ns_id() != Xow_ns_.Id_main) return;	// qid pages are only in the Main namespace
 		Json_doc jdoc = parser.Parse(page.Text()); 
-		if (jdoc == null) {bldr.Usr_dlg().Warn_many("", "", "json is invalid: ns=~{0} id=~{1}", page.Ns_id(), String_.new_utf8_(page.Ttl_page_db())); return;}
+		if (jdoc == null) {bldr.Usr_dlg().Warn_many("", "", "json is invalid: ns=~{0} id=~{1}", page.Ns_id(), String_.new_u8(page.Ttl_page_db())); return;}
 		Wdata_doc_parser wdoc_parser = app.Wiki_mgr().Wdata_mgr().Wdoc_parser(jdoc);
 		byte[] qid = wdoc_parser.Parse_qid(jdoc);
 		Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
-		OrderedHash sitelinks = wdoc_parser.Parse_sitelinks(qid, jdoc);
+		Ordered_hash sitelinks = wdoc_parser.Parse_sitelinks(qid, jdoc);
 		int sitelinks_len = sitelinks.Count(); if (sitelinks_len == 0) return;	// no subs; return;
 		for (int i = 0; i < sitelinks_len; i++) { // iterate sitelinks
-			Wdata_sitelink_itm sitelink = (Wdata_sitelink_itm)sitelinks.FetchAt(i);
+			Wdata_sitelink_itm sitelink = (Wdata_sitelink_itm)sitelinks.Get_at(i);
 			byte[] sitelink_site = sitelink.Site(), sitelink_ttl = sitelink.Name();
 			ns_parser.Find(ns_parser_rslt, sitelink_site, sitelink_ttl);
 			int sitelink_ns = ns_parser_rslt.Ns_id();

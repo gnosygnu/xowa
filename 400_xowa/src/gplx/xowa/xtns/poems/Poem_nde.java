@@ -76,10 +76,10 @@ public class Poem_nde implements Xox_xnde {
 		return bfr.Xto_bry_and_clear();
 	}
 	private static byte[]
-	  Div_poem_bgn = Bry_.new_ascii_("<div class=\"poem\">\n<p>\n")	// NOTE: always enclose in <p>; MW does this implicitly in its modified parse; DATE:2014-04-27
-	, Div_poem_end = Bry_.new_ascii_("\n</p>\n</div>")
-	, Indent_bgn = Bry_.new_ascii_("\n<span class='mw-poem-indented' style='display: inline-block; margin-left: ")
-	, Indent_end = Bry_.new_ascii_("em;'>")
-	, Xowa_br_mark = Bry_.new_ascii_("<!--xowa.br-->")
+	  Div_poem_bgn = Bry_.new_a7("<div class=\"poem\">\n<p>\n")	// NOTE: always enclose in <p>; MW does this implicitly in its modified parse; DATE:2014-04-27
+	, Div_poem_end = Bry_.new_a7("\n</p>\n</div>")
+	, Indent_bgn = Bry_.new_a7("\n<span class='mw-poem-indented' style='display: inline-block; margin-left: ")
+	, Indent_end = Bry_.new_a7("em;'>")
+	, Xowa_br_mark = Bry_.new_a7("<!--xowa.br-->")
 	;
 }

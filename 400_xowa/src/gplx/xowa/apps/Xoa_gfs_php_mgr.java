@@ -58,7 +58,7 @@ public class Xoa_gfs_php_mgr {
 		return dirty ? bfr.Xto_bry_and_clear() : src;
 	}
 	private static int Xto_php_swap(Bry_bfr bfr, byte[] src, int len, int pos) {
-		if (pos >= len) throw Err_.new_("invalid gfs: tilde is last char; src={0}", String_.new_utf8_(src));
+		if (pos >= len) throw Err_.new_("invalid gfs: tilde is last char; src={0}", String_.new_u8(src));
 		byte b = src[pos];
 		switch (b) {
 			case Byte_ascii.Tilde: {	// ~~ -> ~
@@ -72,7 +72,7 @@ public class Xoa_gfs_php_mgr {
 					|| num_end == len
 					|| src[num_end] != Byte_ascii.Curly_end
 					)
-					throw Err_.new_("invalid gfs; num_end not found={0}", String_.new_utf8_(src));
+					throw Err_.new_("invalid gfs; num_end not found={0}", String_.new_u8(src));
 				bfr.Add_byte(Byte_ascii.Dollar);
 				int arg_idx = Bry_.Xto_int_or(src, num_bgn, num_end, -1);
 				if (arg_idx == -1) {
@@ -82,7 +82,7 @@ public class Xoa_gfs_php_mgr {
 				return num_end + 1;
 			}
 			default: {
-				throw Err_.new_("invalid gfs; next char after tilde must be either tilde or open brace; src={0}", String_.new_utf8_(src));
+				throw Err_.new_("invalid gfs; next char after tilde must be either tilde or open brace; src={0}", String_.new_u8(src));
 			}
 		}
 	}

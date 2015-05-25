@@ -34,7 +34,7 @@ class Xog_html_js_cbk_fxt {
 	public void Test_get_title(String ttl, Object... expd) {
 		Xoae_app app = fxt.App();
 		Xowe_wiki wiki = fxt.Wiki();
-		Xoae_page page = Xoae_page.test_(wiki, Xoa_ttl.parse_(wiki, Bry_.new_ascii_("mock_page")));
+		Xoae_page page = Xoae_page.test_(wiki, Xoa_ttl.parse_(wiki, Bry_.new_a7("mock_page")));
 		Xog_tab_itm tab = app.Gui_mgr().Browser_win().Active_tab();
 		tab.Page_(page);
 		Xog_html_js_cbk exec = tab.Html_itm().Js_cbk();

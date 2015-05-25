@@ -31,9 +31,9 @@ public class HashDlgWtr_tst {
 	void tst_Status(int count, String[] expdWritten) {
 		ConsoleDlg_dev dialog = ConsoleDlg_.Dev();
 		String data = String_.Repeat("A", count);
-		IoStream stream = IoStream_.mem_txt_(Io_url_.Null, data);
+		IoStream stream = IoStream_.mem_txt_(Io_url_.Empty, data);
 		calc.CalcHash(dialog, stream);
-		String[] actlWritten = dialog.Written().XtoStrAry();
+		String[] actlWritten = dialog.Written().To_str_ary();
 		Tfds.Eq_ary(actlWritten, expdWritten);
 	}
 	String[] stringAry_(String... ary) {return ary;}

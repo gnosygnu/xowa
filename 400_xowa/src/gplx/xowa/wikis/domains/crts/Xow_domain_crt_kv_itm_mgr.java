@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.domains.crts; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*;
 public class Xow_domain_crt_kv_itm_mgr {
-	private final ListAdp list = ListAdp_.new_();
+	private final List_adp list = List_adp_.new_();
 	public void Clear() {list.Clear();}
 	@gplx.Internal protected void Add(Xow_domain_crt_kv_itm itm) {list.Add(itm);}
 	public boolean Parse_as_itms(byte[] raw) {
@@ -41,7 +41,7 @@ public class Xow_domain_crt_kv_itm_mgr {
 	public Xow_domain_crt_itm Find_itm(Xow_domain cur, Xow_domain comp) {
 		int len = list.Count();
 		for (int i = 0; i < len; ++i) {
-			Xow_domain_crt_kv_itm kv = (Xow_domain_crt_kv_itm)list.FetchAt(i);
+			Xow_domain_crt_kv_itm kv = (Xow_domain_crt_kv_itm)list.Get_at(i);
 			if (kv.Key().Matches(cur, comp)) return kv.Val();
 		}
 		return Xow_domain_crt_itm__none.I;
@@ -49,7 +49,7 @@ public class Xow_domain_crt_kv_itm_mgr {
 	public Xow_domain_crt_itm[] Find_ary(Xow_domain cur, Xow_domain comp) {
 		int len = list.Count();
 		for (int i = 0; i < len; ++i) {
-			Xow_domain_crt_kv_ary kv = (Xow_domain_crt_kv_ary)list.FetchAt(i);
+			Xow_domain_crt_kv_ary kv = (Xow_domain_crt_kv_ary)list.Get_at(i);
 			if (kv.Key().Matches(cur, comp)) return kv.Val();
 		}
 		return null;

@@ -183,14 +183,14 @@ class Pxd_parser_ {
 	private static void Init_unit(int seg_idx, int seg_val, String... name_ary) {
 		int name_ary_len = name_ary.length;
 		for (int i = 0; i < name_ary_len; i++) {
-			byte[] name_bry = Bry_.new_utf8_(name_ary[i]);
+			byte[] name_bry = Bry_.new_u8(name_ary[i]);
 			trie.Add_obj(name_bry, new Pxd_itm_unit(-1, name_bry, seg_idx, seg_val));
 		}
 	}
 	public static final byte[] 
-	  Unit_name_month		= Bry_.new_ascii_("month")
-	, Unit_name_day			= Bry_.new_ascii_("day")
-	, Unit_name_hour		= Bry_.new_ascii_("hour")
+	  Unit_name_month		= Bry_.new_a7("month")
+	, Unit_name_day			= Bry_.new_a7("day")
+	, Unit_name_hour		= Bry_.new_a7("hour")
 	;
 	private static void Init() {
 		Init_reg_months(Names_month_full);
@@ -218,13 +218,13 @@ class Pxd_parser_ {
 			Init_reg_month(names[i], i + Int_.Base1);	// NOTE: Months are Base1: 1-12
 	}
 	private static void Init_reg_month(String name_str, int seg_val) {
-		byte[] name_ary = Bry_.new_utf8_(name_str);
+		byte[] name_ary = Bry_.new_u8(name_str);
 		trie.Add_obj(name_ary, new Pxd_itm_month_name(-1, name_ary, DateAdp_.SegIdx_month, seg_val));
 	}
 	private static void Init_reg_days_of_week(String[] ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
-			byte[] itm_bry = Bry_.new_utf8_(ary[i]);
+			byte[] itm_bry = Bry_.new_u8(ary[i]);
 			trie.Add_obj(itm_bry, new Pxd_itm_dow_name(-1, itm_bry, i));	// NOTE: days are base0; 0-6
 		}
 	}

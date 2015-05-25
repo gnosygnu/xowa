@@ -21,20 +21,20 @@ public class Xpath_ {
 	public static XmlNdeList SelectAll(XmlNde owner, String xpath) {return Select(owner, xpath, Xpath_Args.all_());}
 	public static XmlNde SelectFirst(XmlNde owner, String xpath) {
 		XmlNdeList rv = Select(owner, xpath, Xpath_Args.first_());
-		return rv.Count() == 0 ? null : rv.FetchAt(0);	// selects first
+		return rv.Count() == 0 ? null : rv.Get_at(0);	// selects first
 	}
 	public static XmlNdeList SelectElements(XmlNde owner) {
 		XmlNdeList subNdes = owner.SubNdes(); int count = subNdes.Count();
 		XmlNdeList_cls_list list = new XmlNdeList_cls_list(count);
 		for (int i = 0; i < count; i++) {
-			XmlNde sub = subNdes.FetchAt(i);
+			XmlNde sub = subNdes.Get_at(i);
 			if (sub.NdeType_element()) 
 				list.Add(sub);
 		}
 		return list;
 	}
 	static XmlNdeList Select(XmlNde owner, String xpath, Xpath_Args args) {
-		XmlNdeList_cls_list rv = new XmlNdeList_cls_list(ListAdp_.Capacity_initial);
+		XmlNdeList_cls_list rv = new XmlNdeList_cls_list(List_adp_.Capacity_initial);
 		String[] parts = String_.Split(xpath, "/");
 		TraverseSubs(owner, parts, 0, rv, args);
 		return rv;
@@ -45,7 +45,7 @@ public class Xpath_ {
 		String name = parts[depth];
 		XmlNdeList subNdes = owner.SubNdes(); int count = subNdes.Count();
 		for (int i = 0; i < count; i++) {
-			XmlNde sub = subNdes.FetchAt(i);
+			XmlNde sub = subNdes.Get_at(i);
 			if (args.Cancel) return;
 			if (!String_.Eq(name, sub.Name())) continue;
 			if (depth == partsLen - 1) {

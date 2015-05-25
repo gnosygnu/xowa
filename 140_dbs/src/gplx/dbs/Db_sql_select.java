@@ -51,7 +51,7 @@ class Db_sql_col_ {
 	public static Db_sql_col[] Ary(Db_sql_col... v) {return v;}
 }
 class Db_sql_col_bldr {
-	private final ListAdp tmp_list = ListAdp_.new_();
+	private final List_adp tmp_list = List_adp_.new_();
 	public Db_sql_col[] new_fld_many(String[] ary) {
 		tmp_list.Clear();
 		int ord = -1;
@@ -61,7 +61,7 @@ class Db_sql_col_bldr {
 			Db_sql_col__name fld = new Db_sql_col__name(++ord, fld_key);
 			tmp_list.Add(fld);
 		}
-		return (Db_sql_col[])tmp_list.Xto_ary_and_clear(Db_sql_col.class);
+		return (Db_sql_col[])tmp_list.To_ary_and_clear(Db_sql_col.class);
 	}
         public static final Db_sql_col_bldr I = new Db_sql_col_bldr(); Db_sql_col_bldr() {}
 }

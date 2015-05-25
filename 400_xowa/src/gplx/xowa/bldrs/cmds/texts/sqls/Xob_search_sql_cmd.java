@@ -40,7 +40,7 @@ public class Xob_search_sql_cmd extends Xob_itm_basic_base implements Xob_cmd {	
 		try {
 			Xol_lang lang = wiki.Lang();
 			Bry_bfr bfr = Bry_bfr.reset_(1024);
-			OrderedHash hash = OrderedHash_.new_();
+			Ordered_hash hash = Ordered_hash_.new_();
 			int page_count = 0;
 			String fld_page_id = page_tbl.Fld_page_id(), fld_page_ttl = page_tbl.Fld_page_title();
 			while (page_rdr.Move_next()) {
@@ -56,7 +56,7 @@ public class Xob_search_sql_cmd extends Xob_itm_basic_base implements Xob_cmd {	
 				if		((page_count % commit_interval) == 0)
 					Commit(search_conn);
 				else if ((page_count % progress_interval) == 0)
-					usr_dlg.Prog_many("", "", "parse progress: count=~{0} last=~{1}", page_count, String_.new_utf8_(ttl));
+					usr_dlg.Prog_many("", "", "parse progress: count=~{0} last=~{1}", page_count, String_.new_u8(ttl));
 			}
 			this.Commit(search_conn);
 		} 

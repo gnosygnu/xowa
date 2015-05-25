@@ -18,6 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.xowa.wikis.*; import gplx.xowa.files.*; import gplx.xowa.files.repos.*;
 public interface Xofw_wiki_finder {
-	void Find(ListAdp repo_pairs, Xof_xfer_itm file);
-	boolean Locate(Xofw_file_finder_rslt rv, ListAdp repo_pairs, byte[] ttl_bry);
+	void Find(List_adp repo_pairs, Xof_xfer_itm file);
+	boolean Locate(Xofw_file_finder_rslt rv, List_adp repo_pairs, byte[] ttl_bry);
 }

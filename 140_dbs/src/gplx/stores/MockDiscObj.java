@@ -19,7 +19,7 @@ package gplx.stores; import gplx.*;
 class MockDisc implements SrlObj, GfoInvkAble {
 	public int Id() {return id;} public MockDisc Id_(int val) {id = val; return this;} int id; public static final String id_idk = "id";
 	public String Name() {return name;} public MockDisc Name_(String val) {name = val; return this;} private String name; public static final String name_idk = "name";
-	public ListAdp Titles() {return titles;} ListAdp titles = ListAdp_.new_(); public static final String titles_idk = "titles";
+	public List_adp Titles() {return titles;} List_adp titles = List_adp_.new_(); public static final String titles_idk = "titles";
 	public static final MockDisc _ = new MockDisc(); MockDisc() {}
 	public SrlObj SrlObj_New(Object o)	{return new MockDisc();}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
@@ -37,7 +37,7 @@ class MockDisc implements SrlObj, GfoInvkAble {
 //				if		(String_.Eq(subMsg.Key(), titles_idk)) DoIt(ctx, ikey, k, subMsg, titles, MockTitle._, "title");
 //			}			
 //		}
-//		public static void DoIt(GfsCtx ctx, int ikey, String k, GfoMsg m, ListAdp list, Object o, String subKey) {
+//		public static void DoIt(GfsCtx ctx, int ikey, String k, GfoMsg m, List_adp list, Object o, String subKey) {
 //		}
 	public void SrlObj_Srl(SrlMgr mgr) {
 		id = mgr.SrlIntOr(id_idk, id);
@@ -52,9 +52,9 @@ class MockDisc implements SrlObj, GfoInvkAble {
 class MockTitle implements SrlObj, GfoInvkAble {
 	public int Id() {return id;} public MockTitle Id_(int val) {id = val; return this;} int id; public static final String id_idk = "id";
 	public String Name() {return name;} public MockTitle Name_(String val) {name = val; return this;} private String name; public static final String name_idk = "name";
-	public ListAdp Chapters() {return chapters;} ListAdp chapters = ListAdp_.new_(); public static final String chapters_idk = "chapters";
-	public ListAdp Audios() {return audios;} ListAdp audios = ListAdp_.new_(); public static final String audios_idk = "audios";
-	public ListAdp Subtitles() {return subtitles;} ListAdp subtitles = ListAdp_.new_(); public static final String subtitles_idk = "subtitles";
+	public List_adp Chapters() {return chapters;} List_adp chapters = List_adp_.new_(); public static final String chapters_idk = "chapters";
+	public List_adp Audios() {return audios;} List_adp audios = List_adp_.new_(); public static final String audios_idk = "audios";
+	public List_adp Subtitles() {return subtitles;} List_adp subtitles = List_adp_.new_(); public static final String subtitles_idk = "subtitles";
 	public MockTitle Disc_(MockDisc disc) {disc.Titles().Add(this); return this;}
 	public static MockTitle new_() {
 		MockTitle rv = new MockTitle();
@@ -111,7 +111,7 @@ class MockChapter implements SrlObj, GfoInvkAble {
 class MockStream implements SrlObj, GfoInvkAble {
 	public int Id() {return id;} public MockStream Id_(int val) {id = val; return this;} int id; public static final String id_idk = "id";
 	public String Name() {return name;} public MockStream Name_(String val) {name = val; return this;} private String name; public static final String name_idk = "name";
-	public MockStream Title_(ListAdp list) {list.Add(this); return this;}
+	public MockStream Title_(List_adp list) {list.Add(this); return this;}
 	public static final MockStream _ = new MockStream(); MockStream() {}
 	public static MockStream new_() {
 		MockStream rv = new MockStream();

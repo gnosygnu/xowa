@@ -24,18 +24,18 @@ class Xof_file_fxt {
 	private final Fsd_thm_itm tmp_thm = Fsd_thm_itm.new_(); private final Fsd_img_itm tmp_img = new Fsd_img_itm();
 	public void Rls() {}
 	public void Reset() {
-		Io_mgr._.InitEngine_mem();	// NOTE: files are downloaded to mem_engine, regardless of Db being mem or sqlite; always reset
+		Io_mgr.I.InitEngine_mem();	// NOTE: files are downloaded to mem_engine, regardless of Db being mem or sqlite; always reset
 		Io_url root_url = Xoa_test_.Url_root();
 		Xoa_test_.Db_init(root_url);
 		app = Xoa_app_fxt.app_(Op_sys.Cur().Os_name(), root_url);
 		wiki = Xoa_app_fxt.wiki_tst_(app);
-		wiki.File__fsdb_mode().Tid_make_y_();
+		wiki.File__fsdb_mode().Tid_v2_bld_y_();
 		this.fsdb_mgr = (Xof_fsdb_mgr__sql)wiki.File_mgr().Fsdb_mgr();
 		this.orig_mgr = wiki.File__orig_mgr();
 		Xof_repo_fxt.Repos_init(app.File_mgr(), true, wiki);
 		Xowe_wiki_bldr.Create(wiki, 1, "dump.xml");
 		Xowd_db_file text_db = wiki.Data_mgr__core_mgr().Dbs__make_by_tid(Xowd_db_file_.Tid_text); text_db.Tbl__text().Create_tbl();
-		Fsdb_db_mgr__v2 fsdb_core = Fsdb_db_mgr__v2_bldr.I.Make(wiki, Bool_.Y);
+		Fsdb_db_mgr__v2 fsdb_core = Fsdb_db_mgr__v2_bldr.I.Get_or_make(wiki, Bool_.Y);
 		fsdb_mgr.Mnt_mgr().Ctor_by_load(fsdb_core);
 		fsdb_mgr.Mnt_mgr().Mnts__get_main().Bin_mgr().Dbs__make("temp.xowa");
 		wiki.File_mgr().Init_file_mgr_by_load(wiki);
@@ -63,27 +63,27 @@ class Xof_file_fxt {
 	public void Exec_get(Xof_exec_arg arg) {
 		byte[] ttl_bry = arg.Ttl();
 		Xof_fsdb_itm itm = new Xof_fsdb_itm();
-		itm.Ctor_by_lnki(ttl_bry, arg.Lnki_type(), arg.Lnki_w(), arg.Lnki_h(), Xof_patch_upright_tid_.Tid_all, arg.Lnki_upright(), arg.Lnki_time(), Xof_lnki_page.Null);
-		ListAdp itms_list = ListAdp_.new_(); itms_list.Add(itm);
-		orig_mgr.Find_by_list(OrderedHash_.new_bry_(), itms_list, Xof_exec_tid.Tid_wiki_page);
+		itm.Init_at_lnki(arg.Exec_tid(), wiki.Domain_itm().Abrv_xo(), ttl_bry, arg.Lnki_type(), arg.Lnki_upright(), arg.Lnki_w(), arg.Lnki_h(), arg.Lnki_time(), Xof_lnki_page.Null, Xof_patch_upright_tid_.Tid_all);
+		List_adp itms_list = List_adp_.new_(); itms_list.Add(itm);
+		orig_mgr.Find_by_list(Ordered_hash_.new_bry_(), itms_list, Xof_exec_tid.Tid_wiki_page);
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Xow_ns_.Id_main, ttl_bry);
 		Xoae_page page = Xoae_page.new_(wiki, ttl);
-		fsdb_mgr.Fsdb_search_by_list(arg.Exec_tid(), itms_list, page, Xog_js_wkr_.Noop);
+		fsdb_mgr.Fsdb_search_by_list(itms_list, wiki, page, Xog_js_wkr_.Noop);
 		if (arg.Rslt_orig_exists()  != Bool_.__byte)	Tfds.Eq(arg.Rslt_orig_exists()  == Bool_.Y_byte, itm.Orig_exists(), "orig_exists");
 		if (arg.Rslt_file_exists()  != Bool_.__byte)	Tfds.Eq(arg.Rslt_file_exists()  == Bool_.Y_byte, itm.File_exists(), "file_exists");
 		if (arg.Rslt_file_resized() != Bool_.__byte)	Tfds.Eq(arg.Rslt_file_resized() == Bool_.Y_byte, itm.File_resized(), "file_resize");
 	}
 	public void Test_fsys_exists_y(String url)			{Test_fsys_exists(url, Bool_.Y);}
 	public void Test_fsys_exists_n(String url)			{Test_fsys_exists(url, Bool_.N);}
-	public void Test_fsys_exists(String url, boolean expd) {Tfds.Eq(expd, Io_mgr._.ExistsFil(Io_url_.new_any_(url)));}
-	public void Test_fsys(String url, String expd_bin)	{Tfds.Eq(expd_bin, Io_mgr._.LoadFilStr(url));}
+	public void Test_fsys_exists(String url, boolean expd) {Tfds.Eq(expd, Io_mgr.I.ExistsFil(Io_url_.new_any_(url)));}
+	public void Test_fsys(String url, String expd_bin)	{Tfds.Eq(expd_bin, Io_mgr.I.LoadFilStr(url));}
 }
 class Xof_repo_fxt {
 	public static void Repos_init(Xof_file_mgr file_mgr, boolean src_repo_is_wmf, Xowe_wiki wiki) {
-		byte[] src_commons = Bry_.new_ascii_("src_commons");
-		byte[] src_en_wiki = Bry_.new_ascii_("src_en_wiki");
-		byte[] trg_commons = Bry_.new_ascii_("trg_commons");
-		byte[] trg_en_wiki = Bry_.new_ascii_("trg_en_wiki");
+		byte[] src_commons = Bry_.new_a7("src_commons");
+		byte[] src_en_wiki = Bry_.new_a7("src_en_wiki");
+		byte[] trg_commons = Bry_.new_a7("trg_commons");
+		byte[] trg_en_wiki = Bry_.new_a7("trg_en_wiki");
 		Ini_repo_add(file_mgr, src_commons, "mem/src/commons.wikimedia.org/", Xow_domain_.Domain_str_commons, false);
 		Ini_repo_add(file_mgr, src_en_wiki, "mem/src/en.wikipedia.org/"		, Xow_domain_.Domain_str_enwiki, false);
 		Ini_repo_add(file_mgr, trg_commons, "mem/root/common/", Xow_domain_.Domain_str_commons, true).Primary_(true);
@@ -99,7 +99,7 @@ class Xof_repo_fxt {
 		pair.Trg().Fsys_is_wnt_(true);
 	}
 	private static Xof_repo_itm Ini_repo_add(Xof_file_mgr file_mgr, byte[] key, String root, String wiki, boolean trg) {
-		return file_mgr.Repo_mgr().Set(String_.new_utf8_(key), root, wiki).Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2);
+		return file_mgr.Repo_mgr().Set(String_.new_u8(key), root, wiki).Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2);
 	}
 }
 class Xof_orig_arg {
@@ -116,9 +116,9 @@ class Xof_orig_arg {
 	public static Xof_orig_arg new_comm_redirect(String src, String trg)				{return new_(Bool_.Y, src, 440, 400, trg);}
 	private static Xof_orig_arg new_(boolean repo_is_commons, String page, int w, int h)	{return new_(repo_is_commons, page, w, h, null);}
 	public static Xof_orig_arg new_(boolean repo_is_commons, String page, int w, int h, String redirect_str) {
-		byte repo = repo_is_commons ? Xof_repo_itm.Repo_remote : Xof_repo_itm.Repo_local;
-		byte[] redirect = redirect_str == null ? Bry_.Empty : Bry_.new_utf8_(redirect_str);
-		return new Xof_orig_arg(repo, Bry_.new_utf8_(page), w, h, redirect);
+		byte repo = repo_is_commons ? Xof_repo_itm_.Repo_remote : Xof_repo_itm_.Repo_local;
+		byte[] redirect = redirect_str == null ? Bry_.Empty : Bry_.new_u8(redirect_str);
+		return new Xof_orig_arg(repo, Bry_.new_u8(page), w, h, redirect);
 	}
 }
 class Xof_fsdb_arg {
@@ -145,10 +145,10 @@ class Xof_fsdb_arg {
 	public static Xof_fsdb_arg new_wiki_thumb(String ttl, int w, int h)			{return new_(Xow_domain_.Domain_bry_enwiki, Bool_.Y, ttl, w, h, Xof_lnki_time.Null_as_int);}
 	public static Xof_fsdb_arg new_wiki_orig(String ttl, int w, int h)			{return new_(Xow_domain_.Domain_bry_enwiki, Bool_.N, ttl, w, h, Xof_lnki_time.Null_as_int);}
 	public static Xof_fsdb_arg new_(byte[] wiki, boolean is_thumb, String ttl_str, int w, int h, int time) {
-		byte[] ttl = Bry_.new_utf8_(ttl_str);
+		byte[] ttl = Bry_.new_u8(ttl_str);
 		int ext = Xof_ext_.new_by_ttl_(ttl).Id();
 		String bin_str = ext == Xof_ext_.Id_svg ? file_svg_(w, h) : file_img_(w, h);
-		byte[] bin = Bry_.new_ascii_(bin_str);
+		byte[] bin = Bry_.new_a7(bin_str);
 		return new Xof_fsdb_arg(wiki, ttl, is_thumb, ext, w, h, time, bin);
 	}
 	private static final int W_default = 220, H_default = 200;
@@ -163,7 +163,7 @@ class Xof_exec_arg {
 	public double Lnki_upright() {return lnki_upright;} public Xof_exec_arg Lnki_upright_(double v) {lnki_upright = v; return this;} private double lnki_upright = Xop_lnki_tkn.Upright_null;
 	public int Lnki_time() {return lnki_time;} public Xof_exec_arg Lnki_time_(int v) {lnki_time = v; return this;} private int lnki_time = Xof_lnki_time.Null_as_int;
 	public int Lnki_page() {return lnki_page;} public Xof_exec_arg Lnki_page_(int v) {lnki_page = v; return this;} private int lnki_page = Xof_lnki_page.Null;
-	public byte Exec_tid() {return exec_tid;} public Xof_exec_arg Exec_tid_(byte v) {exec_tid = v; return this;} private byte exec_tid = Xof_exec_tid.Tid_wiki_page;
+	public int Exec_tid() {return exec_tid;} public Xof_exec_arg Exec_tid_(int v) {exec_tid = v; return this;} private int exec_tid = Xof_exec_tid.Tid_wiki_page;
 	public byte Rslt_orig_exists() {return rslt_orig_exists;} private byte rslt_orig_exists = Bool_.__byte;
 	public byte Rslt_file_exists() {return rslt_file_exists;} private byte rslt_file_exists = Bool_.__byte;
 	public byte Rslt_file_resized() {return rslt_file_resized;} private byte rslt_file_resized = Bool_.__byte;
@@ -180,7 +180,7 @@ class Xof_exec_arg {
 	public static Xof_exec_arg new_orig(String ttl)						{return new_(ttl, Xop_lnki_type.Id_null, Xop_lnki_tkn.Width_null, Xop_lnki_tkn.Height_null);}
 	public static Xof_exec_arg new_(String ttl, byte type, int w, int h) {
 		Xof_exec_arg rv = new Xof_exec_arg();
-		rv.ttl = Bry_.new_utf8_(ttl);
+		rv.ttl = Bry_.new_u8(ttl);
 		rv.lnki_type = type;
 		rv.lnki_w = w;
 		rv.lnki_h = h;

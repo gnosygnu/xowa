@@ -58,16 +58,16 @@ public class Xol_duration_itm_ {
 	};
 	public static Xol_duration_itm[] Xto_itm_ary(KeyVal[] kv_ary) {
 		if (kv_ary == null) return Xol_duration_itm_.Ary_default;
-		ListAdp rv = ListAdp_.new_();
+		List_adp rv = List_adp_.new_();
 		int len = kv_ary.length;
 		for (int i = 0; i < len; i++) {
 			KeyVal kv = kv_ary[i];
 			String name = kv.Val_to_str_or_empty();
-			Xol_duration_itm itm = (Xol_duration_itm)regy.Fetch(Bry_.new_utf8_(name));
+			Xol_duration_itm itm = (Xol_duration_itm)regy.Get_by(Bry_.new_u8(name));
 			if (itm != null)
 				rv.Add(itm);
 		}
-		return (Xol_duration_itm[])rv.Xto_ary(Xol_duration_itm.class);
+		return (Xol_duration_itm[])rv.To_ary(Xol_duration_itm.class);
 	}
 }
 class Xol_duration_itm_sorter implements gplx.lists.ComparerAble {

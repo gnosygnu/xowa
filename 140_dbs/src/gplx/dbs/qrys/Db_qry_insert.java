@@ -34,7 +34,7 @@ public class Db_qry_insert implements Db_qry_arg_owner {
 	public Db_qry_arg_owner Arg_(String k, long v)			{return Arg_obj_type_(k, v, Db_val_type.Tid_int64);}
 	public Db_qry_arg_owner Arg_(String k, String v)		{return Arg_obj_type_(k, v, Db_val_type.Tid_varchar);}
 	public Db_qry_arg_owner Arg_bry_(String k, byte[] v)	{return Arg_obj_type_(k, v, Db_val_type.Tid_bry);}
-	public Db_qry_arg_owner Arg_(String k, byte[] v)		{return Arg_obj_type_(k, String_.new_utf8_(v), Db_val_type.Tid_varchar);}
+	public Db_qry_arg_owner Arg_(String k, byte[] v)		{return Arg_obj_type_(k, String_.new_u8(v), Db_val_type.Tid_varchar);}
 	public Db_qry_arg_owner Arg_obj_(String k, Object v)	{return Arg_obj_type_(k, v, Db_val_type.Tid_null);}
 	public Db_qry_arg_owner Arg_obj_type_(String key, Object val, byte val_tid) {
 		if (key == Db_meta_fld.Key_null) return this;

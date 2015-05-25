@@ -51,8 +51,8 @@ public class Xowd_cat_link_tbl implements RlsAble {
 			.Exec_insert();
 	}
 	public void Delete_all() {conn.Stmt_delete(tbl_name, Db_meta_fld.Ary_empy).Exec_delete();}
-	public int Select_by_type(ListAdp list, int cat_page_id, byte arg_tid, byte[] arg_sortkey, boolean arg_is_from, int limit) {
-		String arg_sortkey_str = arg_sortkey == null ? "" : String_.new_utf8_(arg_sortkey);
+	public int Select_by_type(List_adp list, int cat_page_id, byte arg_tid, byte[] arg_sortkey, boolean arg_is_from, int limit) {
+		String arg_sortkey_str = arg_sortkey == null ? "" : String_.new_u8(arg_sortkey);
 		gplx.core.criterias.Criteria comp_crt = !arg_is_from 
 			? Db_crt_.mte_(fld_sortkey, arg_sortkey_str)		// from:  sortkey >= 'val'
 			: Db_crt_.lte_(fld_sortkey, arg_sortkey_str);		// until: sortkey <= 'val'
@@ -71,10 +71,10 @@ public class Xowd_cat_link_tbl implements RlsAble {
 				++count;
 			}
 		}	finally {rdr.Rls();}
-		list.SortBy(Xowd_page_itm_sorter.Ctg_tid_sortkey_asc);
+		list.Sort_by(Xowd_page_itm_sorter.Ctg_tid_sortkey_asc);
 		return count;
 	}
-	public void Select_in(ListAdp rv, int cat_id) {
+	public void Select_in(List_adp rv, int cat_id) {
 		if (stmt_select_in == null) stmt_select_in = conn.Stmt_select(tbl_name, flds, fld_to_id);
 		Db_rdr rdr = stmt_select_in.Clear().Crt_int(fld_to_id, cat_id).Exec_select__rls_manual();
 		try {

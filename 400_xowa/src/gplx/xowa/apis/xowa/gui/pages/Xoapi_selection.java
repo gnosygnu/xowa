@@ -37,7 +37,7 @@ public class Xoapi_selection implements GfoInvkAble {
 		String trg = app.Gui_mgr().Kit().New_dlg_file(Gfui_kit_.File_dlg_type_save, "Select file to save to:").Init_file_(trg_name).Ask();
 		if (String_.Len_eq_0(trg)) return;
 		Io_url trg_url = Io_url_.new_fil_(trg); 
-		Io_mgr._.CopyFil(src_url, trg_url, true);
+		Io_mgr.I.CopyFil(src_url, trg_url, true);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_copy)) 					this.Copy();

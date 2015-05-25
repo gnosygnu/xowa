@@ -17,25 +17,25 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs; import gplx.*;
 public class Db_meta_fld_list {
-	private final OrderedHash flds = OrderedHash_.new_();
-	private final ListAdp keys = ListAdp_.new_();
+	private final Ordered_hash flds = Ordered_hash_.new_();
+	private final List_adp keys = List_adp_.new_();
 	public void Clear() {flds.Clear(); keys.Clear();}
-	public Db_meta_fld Get_by(String name) {return (Db_meta_fld)flds.Fetch(name);}
-	public String[] To_str_ary()			{if (str_ary == null) str_ary = (String[])keys.Xto_ary(String.class); return str_ary;} private String[] str_ary;
-	public Db_meta_fld[] To_fld_ary()		{if (fld_ary == null) fld_ary = (Db_meta_fld[])flds.Xto_ary(Db_meta_fld.class); return fld_ary;} private Db_meta_fld[] fld_ary;
+	public Db_meta_fld Get_by(String name) {return (Db_meta_fld)flds.Get_by(name);}
+	public String[] To_str_ary()			{if (str_ary == null) str_ary = (String[])keys.To_ary(String.class); return str_ary;} private String[] str_ary;
+	public Db_meta_fld[] To_fld_ary()		{if (fld_ary == null) fld_ary = (Db_meta_fld[])flds.To_ary(Db_meta_fld.class); return fld_ary;} private Db_meta_fld[] fld_ary;
 	public String[] To_str_ary_wo_autonum()	{
 		int len = flds.Count();
-		ListAdp rv = ListAdp_.new_();
+		List_adp rv = List_adp_.new_();
 		for (int i = 0; i < len; ++i) {
-			Db_meta_fld fld = (Db_meta_fld)flds.FetchAt(i);
+			Db_meta_fld fld = (Db_meta_fld)flds.Get_at(i);
 			if (fld.Autonum()) continue;
 			rv.Add(fld.Name());
 		}
-		return (String[])rv.Xto_ary(String.class);
+		return (String[])rv.To_ary(String.class);
 	} 
 	public String[] To_str_ary_exclude(String[] ary) {
-		HashAdp ary_hash = HashAdp_.new_();
-		ListAdp rv = ListAdp_.new_();
+		Hash_adp ary_hash = Hash_adp_.new_();
+		List_adp rv = List_adp_.new_();
 		int ary_len = ary.length;
 		for (int i = 0; i < ary_len; ++i) {
 			String ary_itm = ary[i];
@@ -43,12 +43,12 @@ public class Db_meta_fld_list {
 		}
 		int fld_len = flds.Count();
 		for (int i = 0; i < fld_len; ++i) {
-			Db_meta_fld fld = (Db_meta_fld)flds.FetchAt(i);
+			Db_meta_fld fld = (Db_meta_fld)flds.Get_at(i);
 			String fld_key = fld.Name();
 			if (ary_hash.Has(fld_key)) continue;
 			rv.Add(fld_key);
 		}
-		return rv.XtoStrAry();
+		return rv.To_str_ary();
 	}
 	public boolean Has(String key)							{return flds.Has(key);}
 	public String Add_bool(String name)					{return Add(name, Db_meta_fld.Tid_bool,		Len_null, Bool_.N, Bool_.N, Bool_.N, Db_meta_fld.Default_value_null);}

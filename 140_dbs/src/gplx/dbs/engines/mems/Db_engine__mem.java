@@ -17,13 +17,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
 public class Db_engine__mem implements Db_engine {
-	private final HashAdp tbl_hash = HashAdp_.new_();
+	private final Hash_adp tbl_hash = Hash_adp_.new_();
 	Db_engine__mem(Db_conn_info conn_info) {this.conn_info = conn_info;}
 	public String		Tid() {return Db_conn_info__mem.Tid_const;}
 	public Db_conn_info	Conn_info() {return conn_info;} private Db_conn_info conn_info;
 	public Db_engine	New_clone(Db_conn_info conn_info) {return new Db_engine__mem(conn_info);}
 	public Db_stmt		New_stmt_prep(Db_qry qry) {return new Db_stmt__mem(this, qry);}
-	public Mem_tbl		Tbls_get(String name) {return (Mem_tbl)tbl_hash.Fetch(name);}
+	public Mem_tbl		Tbls_get(String name) {return (Mem_tbl)tbl_hash.Get_by(name);}
 	public void			Txn_bgn(String name)	{++txn_count;} private int txn_count = 0;
 	public void			Txn_end()				{--txn_count;}
 	public void			Txn_cxl()				{--txn_count;}
@@ -39,7 +39,7 @@ public class Db_engine__mem implements Db_engine {
 	public Object		New_stmt_prep_as_obj(String sql) {throw Err_.not_implemented_();}
 	public void			Ddl_create_tbl(Db_meta_tbl meta) {
 		Mem_tbl mem_tbl = new Mem_tbl(meta);
-		tbl_hash.AddReplace(meta.Name(), mem_tbl);
+		tbl_hash.Add_if_dupe_use_nth(meta.Name(), mem_tbl);
 	}
 	public void			Ddl_create_idx(Gfo_usr_dlg usr_dlg, Db_meta_idx... ary) {}	// TODO: implement unique index
 	public void			Ddl_append_fld(String tbl, Db_meta_fld fld)	{}

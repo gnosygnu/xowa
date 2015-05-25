@@ -34,12 +34,12 @@ public class Wdata_dict_value_time {
 	, Str_calendarmodel							= "calendarmodel"
 	;
 	public static byte[] 
-	  Bry_time									= Bry_.new_ascii_(Str_time)
-	, Bry_timezone								= Bry_.new_ascii_(Str_timezone)
-	, Bry_before								= Bry_.new_ascii_(Str_before)
-	, Bry_after									= Bry_.new_ascii_(Str_after)
-	, Bry_precision								= Bry_.new_ascii_(Str_precision)
-	, Bry_calendarmodel							= Bry_.new_ascii_(Str_calendarmodel)
+	  Bry_time									= Bry_.new_a7(Str_time)
+	, Bry_timezone								= Bry_.new_a7(Str_timezone)
+	, Bry_before								= Bry_.new_a7(Str_before)
+	, Bry_after									= Bry_.new_a7(Str_after)
+	, Bry_precision								= Bry_.new_a7(Str_precision)
+	, Bry_calendarmodel							= Bry_.new_a7(Str_calendarmodel)
 	;
 	public static final Hash_adp_bry Dict = Hash_adp_bry.cs_()
 	.Add_bry_byte(Bry_time						, Tid_time)
@@ -63,11 +63,11 @@ public class Wdata_dict_value_time {
 	, Val_calendarmodel_str						= "http://www.wikidata.org/entity/Q1985727"
 	;
 	public static final byte[]
-	  Val_precision_bry							= Bry_.new_ascii_(Val_precision_str)
-	, Val_before_bry							= Bry_.new_ascii_(Val_before_str)
-	, Val_after_bry								= Bry_.new_ascii_(Val_after_str)
-	, Val_timezone_bry							= Bry_.new_ascii_(Val_timezone_str)
-	, Val_calendarmodel_bry						= Bry_.new_ascii_(Val_calendarmodel_str)
+	  Val_precision_bry							= Bry_.new_a7(Val_precision_str)
+	, Val_before_bry							= Bry_.new_a7(Val_before_str)
+	, Val_after_bry								= Bry_.new_a7(Val_after_str)
+	, Val_timezone_bry							= Bry_.new_a7(Val_timezone_str)
+	, Val_calendarmodel_bry						= Bry_.new_a7(Val_calendarmodel_str)
 	;
 	public static byte[] Xto_time(String date) {return Xto_time(DateAdp_.parse_fmt(date, "yyyy-MM-dd HH:mm:ss"));}
 	public static byte[] Xto_time(DateAdp date) {
@@ -89,5 +89,5 @@ public class Wdata_dict_value_time {
 		;
 		return tmp_bfr.Xto_bry_and_clear();
 	}
-	private static Bry_bfr tmp_bfr = Bry_bfr.new_(); private static byte[] Bry_year_prefix = Bry_.new_ascii_("+0000000");
+	private static Bry_bfr tmp_bfr = Bry_bfr.new_(); private static byte[] Bry_year_prefix = Bry_.new_a7("+0000000");
 }

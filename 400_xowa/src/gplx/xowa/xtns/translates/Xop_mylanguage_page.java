@@ -22,7 +22,7 @@ public class Xop_mylanguage_page implements Xows_page {
 	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
 		// Special:MyLanguage/Help:A -> Help:A/fr
 		byte[] page_bry = ttl.Leaf_txt_wo_qarg(); 					// EX: Help:A
-		byte[] lang_key = wiki.Appe().User().Lang().Key_bry();		// EX: fr
+		byte[] lang_key = wiki.Appe().Usere().Lang().Key_bry();		// EX: fr
 		byte[] trg_bry = page_bry;
 		boolean lang_is_english = Bry_.Eq(lang_key, Xol_lang_.Key_en); 
 		if (!lang_is_english)

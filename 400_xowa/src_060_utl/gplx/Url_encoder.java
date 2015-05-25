@@ -80,12 +80,12 @@ public class Url_encoder implements Url_encoder_interface {
 	}
 	public String Encode_str(String str)					{
 		synchronized (thread_lock) {
-			byte[] bry = Bry_.new_utf8_(str); Encode(tmp_bfr, bry, 0, bry.length); return tmp_bfr.Xto_str_and_clear();
+			byte[] bry = Bry_.new_u8(str); Encode(tmp_bfr, bry, 0, bry.length); return tmp_bfr.Xto_str_and_clear();
 		}
 	}
 	public byte[] Encode_bry(String str)					{
 		synchronized (thread_lock) {
-			byte[] bry = Bry_.new_utf8_(str); Encode(tmp_bfr, bry, 0, bry.length); return tmp_bfr.Xto_bry_and_clear();
+			byte[] bry = Bry_.new_u8(str); Encode(tmp_bfr, bry, 0, bry.length); return tmp_bfr.Xto_bry_and_clear();
 		}
 	}
 	public byte[] Encode(byte[]	bry)						{Encode(tmp_bfr, bry, 0, bry.length); return tmp_bfr.Xto_bry_and_clear();}
@@ -106,7 +106,7 @@ public class Url_encoder implements Url_encoder_interface {
 	}
 	public String Decode_str(String str) {
 		synchronized (thread_lock) {
-			byte[] bry = Bry_.new_utf8_(str); Decode(bry, 0, bry.length, tmp_bfr, true); return tmp_bfr.Xto_str_and_clear();
+			byte[] bry = Bry_.new_u8(str); Decode(bry, 0, bry.length, tmp_bfr, true); return tmp_bfr.Xto_str_and_clear();
 		}
 	}
 	public byte[] Decode(byte[] bry) {
@@ -224,13 +224,6 @@ public class Url_encoder implements Url_encoder_interface {
 		rv.Itms_raw_diff(Byte_ascii.Space, Byte_ascii.Underline);						// convert " " to "_"
 		return rv;
 	}
-	public static Url_encoder url_comma() {
-		Url_encoder rv = new Url_encoder();
-		rv.Itms_ini(Byte_ascii.Percent);
-		mediawiki_base(rv, true);
-		rv.Itms_raw_same_many(Byte_ascii.Comma);
-		return rv;
-	}
 }
 interface Url_encoder_itm {
 	int Encode(Bry_bfr bfr, byte[] src, int end, int idx, byte b);
@@ -257,7 +250,7 @@ class Url_encoder_itm_hex implements Url_encoder_itm {
 	}
 	public int Decode(Bry_bfr bfr, byte[] src, int end, int idx, byte b, boolean fail_when_invalid) {
 		if (idx + 2 >= end) {
-			if (fail_when_invalid) throw Err_.new_fmt_("decode needs 3 bytes: idx={0} len={1} snip={2}", idx, end, String_.new_utf8_(Bry_.Mid_by_len_safe(src, idx, 3)));
+			if (fail_when_invalid) throw Err_.new_fmt_("decode needs 3 bytes: idx={0} len={1} snip={2}", idx, end, String_.new_u8(Bry_.Mid_by_len_safe(src, idx, 3)));
 			else {
 				bfr.Add_byte(b);
 				return 0;
@@ -277,7 +270,7 @@ class Url_encoder_itm_hex implements Url_encoder_itm {
 			}
 		}
 		if (fail_when_invalid)
-			throw Err_.new_fmt_("decode is invalid: idx={0}, snip={1}", idx, String_.new_utf8_(Bry_.Mid_by_len_safe(src, idx, 3)));
+			throw Err_.new_fmt_("decode is invalid: idx={0}, snip={1}", idx, String_.new_u8(Bry_.Mid_by_len_safe(src, idx, 3)));
 		else {
 			bfr.Add_byte(b);
 			return 0;

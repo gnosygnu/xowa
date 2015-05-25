@@ -22,20 +22,20 @@ public class Io_sort {
 	public Io_url[] Split(Gfo_usr_dlg usr_dlg, Io_url_gen src_fil_gen, Io_url_gen trg_fil_gen, Io_line_rdr_key_gen key_gen) {return Split(usr_dlg, src_fil_gen, trg_fil_gen, Io_sort_split_itm_sorter._, key_gen);}
 	public Io_url[] Split(Gfo_usr_dlg usr_dlg, Io_url_gen src_fil_gen, Io_url_gen trg_fil_gen, ComparerAble row_comparer, Io_line_rdr_key_gen key_gen) {
 		Io_line_rdr rdr = new Io_line_rdr(usr_dlg, src_fil_gen.Prv_urls()).Load_len_(4 * Io_mgr.Len_kb).Key_gen_(key_gen);	// NOTE: do not set load_len to memory_max; only want to load in increments
-		ListAdp rv = ListAdp_.new_();
+		List_adp rv = List_adp_.new_();
 		Bry_bfr bfr = Bry_bfr.reset_(Const_bfr_max); int size_cur = 0;
-		ListAdp row_list = ListAdp_.new_();
+		List_adp row_list = List_adp_.new_();
 		while (true) {
 			boolean reading = rdr.Read_next(); 
 			int size_row = rdr.Itm_pos_end() - rdr.Itm_pos_bgn();
 			int size_new = size_cur + size_row;
 			if (size_new > memory_max || !reading) {
 				usr_dlg.Prog_none(GRP_KEY, "sort", "sorting chunk");
-				row_list.SortBy(row_comparer);
+				row_list.Sort_by(row_comparer);
 				Io_url trg_url = trg_fil_gen.Nxt_url();
 				usr_dlg.Prog_one(GRP_KEY, "write", "writing chunk: ~{0}", trg_url.Raw());
 				Split_flush(trg_url, row_list, memory_max, bfr, rv);
-				row_list.ResizeBounds(16);	// MEM: resize bounds manually; note that each Flush-set may have widely disparately #of rows (EX: 1 row with a million pages vs. 1 million rows with 1 page)
+				row_list.Resize_bounds(16);	// MEM: resize bounds manually; note that each Flush-set may have widely disparately #of rows (EX: 1 row with a million pages vs. 1 million rows with 1 page)
 				size_new = size_row; Env_.GarbageCollect();
 				if (!reading) break;
 			}
@@ -43,7 +43,7 @@ public class Io_sort {
 			size_cur = size_new;
 		}
 		rdr.Rls(); bfr.Rls(); Env_.GarbageCollect();
-		return (Io_url[])rv.Xto_ary(Io_url.class);
+		return (Io_url[])rv.To_ary(Io_url.class);
 	}
 	public void Merge(Gfo_usr_dlg usr_dlg, Io_url[] src_ary, ComparerAble comparer, Io_line_rdr_key_gen key_gen, Io_sort_cmd cmd) {
 		BinaryHeap_Io_line_rdr heap = load_(usr_dlg, src_ary, comparer, key_gen, memory_max); if (heap.Len() == 0) return;//throw Err_.new_(Array_.XtoStr(src_ary));
@@ -65,16 +65,16 @@ public class Io_sort {
 		cmd.Sort_end();
 		heap.Rls();
 	}
-	private static void Split_flush(Io_url url, ListAdp list, int max, Bry_bfr tmp, ListAdp url_list) {
+	private static void Split_flush(Io_url url, List_adp list, int max, Bry_bfr tmp, List_adp url_list) {
 		int len = list.Count();
 		for (int i = 0; i < len; i++) {
-			Io_sort_split_itm itm = (Io_sort_split_itm)list.FetchAt(i);
+			Io_sort_split_itm itm = (Io_sort_split_itm)list.Get_at(i);
 			int add_len = itm.Row_end() - itm.Row_bgn();
-			if ((tmp.Len() + add_len) > Const_bfr_max) Io_mgr._.AppendFilBfr(url, tmp);
+			if ((tmp.Len() + add_len) > Const_bfr_max) Io_mgr.I.AppendFilBfr(url, tmp);
 			tmp.Add_mid(itm.Bfr(), itm.Row_bgn(), itm.Row_end());
 			itm.Rls();
 		}
-		Io_mgr._.AppendFilBfr(url, tmp);
+		Io_mgr.I.AppendFilBfr(url, tmp);
 		list.Clear();
 		url_list.Add(url);
 	}
@@ -84,7 +84,7 @@ public class Io_sort {
 		int default_load_len = memory_max / urls_len + 1;
 		for (int i = 0; i < urls_len; i++) {
 			Io_url url = urls[i];
-			int file_len = (int)Io_mgr._.QueryFil(url).Size();
+			int file_len = (int)Io_mgr.I.QueryFil(url).Size();
 			int load_len = file_len < default_load_len ? file_len : default_load_len;	// PERF.NOTE: 32 MB is default, but if file is 1 MB (or else) only create a bfr for 1 MB; using 32 MB will throw OutOfMemory on -Xmx 64m; DATE:20130112
 			Io_line_rdr stream_bfr = new Io_line_rdr(usr_dlg, url).Key_gen_(key_gen).Load_len_(load_len);
 			boolean read = stream_bfr.Read_next();

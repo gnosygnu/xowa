@@ -38,7 +38,7 @@ public class Xof_math_mgr implements GfoInvkAble {
 	}
 	public boolean Find_itm(Xof_math_itm rv, String wiki_key, byte[] math_bry) {
 		Make_itm(rv, wiki_key, math_bry);
-		return Io_mgr._.ExistsFil(rv.Png_url());
+		return Io_mgr.I.ExistsFil(rv.Png_url());
 	}
 	public boolean Renderer_is_mathjax() {return renderer_is_mathjax;} public void Renderer_is_mathjax_(boolean v) {renderer_is_mathjax = v;} private boolean renderer_is_mathjax = true;
 	private Io_url Make_png_fil(Io_url math_dir, String hash) {
@@ -53,18 +53,18 @@ public class Xof_math_mgr implements GfoInvkAble {
 	}
 	public boolean MakePng(byte[] math, String hash, Io_url png_url, String prog_fmt) {
 		if (!enabled) return false;
-		Io_url tmp_dir = app.User().Fsys_mgr().App_temp_dir().GenSubDir("math"); // cmd_convert_tex_to_dvi.Tmp_dir();
+		Io_url tmp_dir = app.Usere().Fsys_mgr().App_temp_dir().GenSubDir("math"); // cmd_convert_tex_to_dvi.Tmp_dir();
 		Io_url tex_url = tmp_dir.GenSubFil("xowa_math_temp.tex");
 		String latex = Latex_wrap(math);
 		prog_fmt = String_.Replace(prog_fmt, "~", "~~");	// double-up ~ or else will break in progress bar
-		Io_mgr._.SaveFilStr(tex_url, latex);
+		Io_mgr.I.SaveFilStr(tex_url, latex);
 		cmd_convert_tex_to_dvi.Prog_fmt_(prog_fmt + " tex_to_dvi: ~{process_seconds} second(s); ~{process_exe_name} ~{process_exe_args}");
 		boolean pass = cmd_convert_tex_to_dvi.Run(tex_url.Raw(), tmp_dir.Xto_api()).Exit_code_pass();
 		if (!pass) {
 			app.Usr_dlg().Warn_many(GRP_KEY, "tex_to_dvi.fail", "fail: tex_to_dvi: error=~{0} latex=~{1}", cmd_convert_tex_to_dvi.Rslt_out(), latex);
 		}
 		// NOTE: latex sometimes throws errors, but will generate .dvi; for sake of simplicity; always try to run dvipng
-		Io_mgr._.CreateDirIfAbsent(png_url.OwnerDir());
+		Io_mgr.I.CreateDirIfAbsent(png_url.OwnerDir());
 		cmd_convert_dvi_to_png.Prog_fmt_(prog_fmt + " dvi_to_png: ~{process_seconds} second(s); ~{process_exe_name} ~{process_exe_args}");
 		pass = cmd_convert_dvi_to_png.Run(tex_url.GenNewExt(".dvi"), png_url, tmp_dir.Xto_api()).Exit_code_pass();
 		if (!pass) {
@@ -73,7 +73,7 @@ public class Xof_math_mgr implements GfoInvkAble {
 		return pass;
 	}
 	private String_bldr tmp_sb = String_bldr_.new_();
-	private String Latex_wrap(byte[] math) {return Latex_doc_fmtr.Bld_str_many(String_.Replace(String_.new_utf8_(math), "\n\n", "\n"));}	// NOTE: remove lines that are completely blank; not sure if this is right; PAGE:en.w:Standard Model (mathematical formulation); <math>(\mathbf{1},\mathbf\n\n{1},0)</math>
+	private String Latex_wrap(byte[] math) {return Latex_doc_fmtr.Bld_str_many(String_.Replace(String_.new_u8(math), "\n\n", "\n"));}	// NOTE: remove lines that are completely blank; not sure if this is right; PAGE:en.w:Standard Model (mathematical formulation); <math>(\mathbf{1},\mathbf\n\n{1},0)</math>
 	private static Bry_fmtr Latex_doc_fmtr = new Bry_fmtr()
 	.Fmt_(String_.Concat_lines_nl_skip_last
 	(	"\\documentclass{article}"

@@ -32,8 +32,8 @@ public class Xob_redirect_cmd extends Xob_dump_mgr_base {
 	@Override protected Db_conn Init_db_file() {
 		this.db_mgr = wiki.Db_mgr_as_sql();
 		redirect_mgr = wiki.Redirect_mgr();
-		encoder = Xoa_app_.Utl__encoder_mgr().Url_ttl();
-		redirect_tbl = new Xob_redirect_tbl(wiki.Fsys_mgr().Root_dir(), Xoa_app_.Utl__encoder_mgr().Url_ttl()).Create_table();
+		encoder = Xoa_app_.Utl__encoder_mgr().Http_url_ttl();
+		redirect_tbl = new Xob_redirect_tbl(wiki.Fsys_mgr().Root_dir(), Xoa_app_.Utl__encoder_mgr().Http_url_ttl()).Create_table();
 		conn = redirect_tbl.Conn();
 		conn.Txn_bgn();
 		return conn;

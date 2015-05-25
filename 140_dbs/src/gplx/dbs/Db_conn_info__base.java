@@ -27,11 +27,11 @@ public abstract class Db_conn_info__base implements Db_conn_info {
 	protected void Ctor(String server, String database, String raw, String api) {this.server = server; this.database = database; this.raw = raw; this.api = api;}
 	protected static String BldApi(GfoMsg m, KeyVal... xtnAry) {
 		String_bldr sb = String_bldr_.new_();
-		HashAdp hash = HashAdp_.new_();
+		Hash_adp hash = Hash_adp_.new_();
 		for (int i = 0; i < m.Args_count(); i++) {
 			KeyVal kv = m.Args_getAt(i);
 			sb.Add_fmt("{0}={1};", kv.Key(), kv.Val_to_str_or_empty());
-			hash.AddKeyVal(kv.Key());
+			hash.Add_as_key_and_val(kv.Key());
 		}
 		for (KeyVal xtn : xtnAry) {
 			if (hash.Has(xtn.Key())) continue;
@@ -44,7 +44,7 @@ public abstract class Db_conn_info__base implements Db_conn_info {
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			String itm = ary[i];
-			bfr.Add_str_utf8(itm);
+			bfr.Add_str_u8(itm);
 			bfr.Add_byte(i % 2 == 0 ? Byte_ascii.Eq : Byte_ascii.Semic);
 		}
 		return bfr.Xto_str();

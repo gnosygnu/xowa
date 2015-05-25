@@ -31,7 +31,7 @@ class Xob_ctg_v1_sql_make implements Io_make_cmd {
 	public void Sort_bgn() {
 		usr_dlg = wiki.Appe().Usr_dlg();
 		Io_url sql_url = wiki.Fsys_mgr().Root_dir().GenSubFil(Url_sql);
-		Io_mgr._.DeleteFil_args(sql_url).MissingFails_off().Exec();
+		Io_mgr.I.DeleteFil_args(sql_url).MissingFails_off().Exec();
 		sql_wtr = Xob_tmp_wtr.new_wo_ns_(Io_url_gen_.fil_(sql_url), Io_mgr.Len_mb);
 		sql_wtr.Bfr().Add_str(Xob_categorylinks_sql.Sql_categorylinks).Add(Sql_hdr);
 	}
@@ -55,7 +55,7 @@ class Xob_ctg_v1_sql_make implements Io_make_cmd {
 		sql_wtr.Flush(usr_dlg);
 		db_mgr.Category_version_update(true);
 	}
-	private static final byte[] Sql_hdr = Bry_.new_ascii_("INSERT INTO 'categorylinks' VALUES");	
+	private static final byte[] Sql_hdr = Bry_.new_a7("INSERT INTO 'categorylinks' VALUES");	
 	public static final String Url_sql = "xowa_categorylinks.sql";
 	private static byte[] Escape_for_sql(Xowe_wiki wiki, byte[] bry) {
 		Bry_bfr bfr = wiki.Appe().Utl__bfr_mkr().Get_b512();

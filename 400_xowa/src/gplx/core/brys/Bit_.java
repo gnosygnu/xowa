@@ -28,7 +28,7 @@ public class Bit_ {
 		byte[] rv = new byte[8];
     		for (int i = 0; i < 8; i++)
 		rv[i] = bits[i] ? Byte_ascii.Num_1 : Byte_ascii.Num_0;
-    		return String_.new_ascii_(rv);
+    		return String_.new_a7(rv);
 	}
 	public static int[] Bld_pow_ary(int... seg_ary) {
 		int seg_ary_len = seg_ary.length;

@@ -38,13 +38,13 @@ class Xoa_gfs_php_mgr_fxt {
 	private Bry_bfr bfr = Bry_bfr.new_();
 	public void Clear() {}
 	public void Test_Xto_gfs(String raw, String expd) {
-		byte[] actl = Xoa_gfs_php_mgr.Xto_gfs(bfr, Bry_.new_utf8_(raw));
-		Tfds.Eq(expd, String_.new_utf8_(actl));
+		byte[] actl = Xoa_gfs_php_mgr.Xto_gfs(bfr, Bry_.new_u8(raw));
+		Tfds.Eq(expd, String_.new_u8(actl));
 	}
 	public void Test_Xto_php_escape_y(String raw, String expd) {Test_Xto_php(raw, Bool_.Y, expd);}
 	public void Test_Xto_php_escape_n(String raw, String expd) {Test_Xto_php(raw, Bool_.N, expd);}
 	public void Test_Xto_php(String raw, boolean escape_backslash, String expd) {
-		byte[] actl = Xoa_gfs_php_mgr.Xto_php(bfr, escape_backslash, Bry_.new_utf8_(raw));
-		Tfds.Eq(expd, String_.new_utf8_(actl));
+		byte[] actl = Xoa_gfs_php_mgr.Xto_php(bfr, escape_backslash, Bry_.new_u8(raw));
+		Tfds.Eq(expd, String_.new_u8(actl));
 	}
 }

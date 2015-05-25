@@ -71,7 +71,7 @@ class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 		Xoae_app app = install_mgr.App();
 		app.Usr_dlg().Prog_one("", "", "preparing import: ~{0}", wiki_key);
 		Xob_bldr bldr = app.Bldr();
-		wiki = app.Wiki_mgr().Get_by_key_or_make(Bry_.new_ascii_(wiki_key));
+		wiki = app.Wiki_mgr().Get_by_key_or_make(Bry_.new_a7(wiki_key));
 		wiki.Init_assert();
 		bldr.Cmd_mgr().Clear();
 		bldr.Pause_at_end_(false);
@@ -82,18 +82,18 @@ class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 			Process_txt(bldr);
 		bldr.Run();
 		app.Usr_dlg().Prog_none(GRP_KEY, "clear", ""); app.Usr_dlg().Note_none(GRP_KEY, "clear", "");
-		app.User().Available_from_fsys();
+		app.Usere().Available_from_fsys();
 		wiki.Init_needed_(true);
 		wiki.Html_mgr().Page_wtr_mgr().Init_(true);
 		wiki.Init_assert();
 		if		(String_.Eq(src_url.Ext(), ".xml")) {
 			if (app.Setup_mgr().Dump_mgr().Delete_xml_file())
-				Io_mgr._.DeleteFil(src_url);
+				Io_mgr.I.DeleteFil(src_url);
 		}
 		else if (String_.Eq(src_url.Ext(), ".bz2")) {
 			Io_url trg_fil = app.Fsys_mgr().Wiki_dir().GenSubFil_nest("#dump", "done", src_url.NameAndExt());
 			if (import_move_bz2_to_done)
-				Io_mgr._.MoveFil_args(src_url, trg_fil, true).Exec();
+				Io_mgr.I.MoveFil_args(src_url, trg_fil, true).Exec();
 		}
 		running = false;
 		wiki.Import_cfg().Src_fil_xml_(null).Src_fil_bz2_(null);	// reset file else error when going from Import/Script to Import/List
@@ -103,7 +103,7 @@ class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 		Xog_win_itm main_win = install_mgr.App().Gui_mgr().Browser_win();
 		if (main_win.Active_page() == null) return; // will be null when invoked through cmd-line
 		byte[] url = Bry_.Add(wiki.Domain_bry(), Xoh_href_parser.Href_wiki_bry, wiki.Props().Main_page());
-		main_win.Page__navigate_by_url_bar(String_.new_utf8_(url));
+		main_win.Page__navigate_by_url_bar(String_.new_u8(url));
 	}	
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_process_async))			Process_async();

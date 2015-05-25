@@ -44,8 +44,8 @@ class Map_math {// REF.MW:MapSources_math.php
 	}
 	public void Fail(Xop_ctx ctx, byte[] src, Xot_invk self, Bry_bfr bfr, byte[] pfunc_name) {
 		String page_str = ctx.Cur_page().Url().Xto_full_str_safe();
-		String pfunc_name_str = String_.new_utf8_(pfunc_name);
-		String self_str = String_.new_utf8_(src, self.Src_bgn(), self.Src_end()); 
+		String pfunc_name_str = String_.new_u8(pfunc_name);
+		String self_str = String_.new_u8(src, self.Src_bgn(), self.Src_end()); 
 		switch (error) {
 			case  -1:	// empty coord; EX: {{#deg2dd:|precision=6}}}} PAGE:it.v:Sami; DATE:2014-03-02
 			case  -2:	// words > 4; EX:{{#geoLink: $1 $2 $3 $4 $5 $6|lat=51°20′00″19°55′50″}}; PAGE:pl.v:Rezerwat_przyrody_Jaksonek DATE:2014-08-14
@@ -111,7 +111,7 @@ class Map_math {// REF.MW:MapSources_math.php
 		}
 		step = 2;
 	}
-	private static final byte[] Bry_deg = Bry_.new_utf8_("°"), Bry_quot = Bry_.new_ascii_("&quot;");
+	private static final byte[] Bry_deg = Bry_.new_u8("°"), Bry_quot = Bry_.new_a7("&quot;");
 	public byte[] Get_dms(byte[] plus, byte[] minus) { // REF.MW: getDMSString
 		if (step < 2) Set_coord();
 		double deg = coord_deg;
@@ -270,7 +270,7 @@ class Map_math {// REF.MW:MapSources_math.php
 		return bfr.Xto_bry_and_clear_and_trim();
 	}
 	private static final byte Dir_unknown_id = 0, Dir_lat_id = 1, Dir_long_id = 2;
-	public static final byte[] Dir_lat_bry = Bry_.new_ascii_("lat"), Dir_long_bry = Bry_.new_ascii_("long");
+	public static final byte[] Dir_lat_bry = Bry_.new_a7("lat"), Dir_long_bry = Bry_.new_a7("long");
 	private static final Btrie_slim_mgr Dir_trie = Btrie_slim_mgr.ci_ascii_()	// NOTE:ci.ascii:MW_const.en
 	.Add_bry_bval(Dir_lat_bry			, Dir_lat_id)
 	.Add_bry_bval(Dir_long_bry			, Dir_long_id)
@@ -285,7 +285,7 @@ class Map_math {// REF.MW:MapSources_math.php
 	private static final byte Input_byte_degree = Byte_ascii.Slash;	// NOTE: ugly cheat to avoid using multi-byte char; note that all "/" are swapped out to " ", so any remaining "/" was added by the normalizer; EX:  "123° 4/5" -> "123/ 4 5"
 	private static final byte[] Input_units = new byte[] {Input_byte_degree, Byte_ascii.Apos, Byte_ascii.Quote, Byte_ascii.Space};
 	private static final int Input_units_len = Input_units.length;
-	private static final byte[] Input_bry_degree = Bry_.new_utf8_("°");
+	private static final byte[] Input_bry_degree = Bry_.new_u8("°");
 	private static final Btrie_slim_mgr Input_trie = Btrie_slim_mgr.cs_()
 	.Add_str_byte("'"					, Input_tid_apos)		// NOTE: must add ' so that "'" -> "' "
 	.Add_str_byte("‘"					, Input_tid_apos)

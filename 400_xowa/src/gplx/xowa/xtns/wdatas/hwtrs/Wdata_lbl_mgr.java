@@ -20,17 +20,17 @@ import gplx.core.primitives.*;
 import gplx.xowa.xtns.wdatas.core.*;
 public class Wdata_lbl_mgr {
 	private Hash_adp_bry ttl_hash = Hash_adp_bry.ci_ascii_();
-	private HashAdp qid_hash = HashAdp_.new_(), pid_hash = HashAdp_.new_(); private Int_obj_ref int_hash_key = Int_obj_ref.neg1_();
+	private Hash_adp qid_hash = Hash_adp_.new_(), pid_hash = Hash_adp_.new_(); private Int_obj_ref int_hash_key = Int_obj_ref.neg1_();
 	private Wdata_visitor__lbl_gatherer lbl_gatherer;
 	public Wdata_lbl_mgr() {
 		lbl_gatherer = new Wdata_visitor__lbl_gatherer(this);
 	}
 	public void Clear() {ttl_hash.Clear(); qid_hash.Clear(); pid_hash.Clear(); queue.Clear();}
-	public ListAdp Queue() {return queue;} private ListAdp queue = ListAdp_.new_();
+	public List_adp Queue() {return queue;} private List_adp queue = List_adp_.new_();
 	@gplx.Internal protected void Wkr_(Wdata_lbl_wkr v) {this.wkr = v;} private Wdata_lbl_wkr wkr;
 	public Wdata_lbl_itm Get_itm__ttl(byte[] ttl) {
-		Wdata_lbl_itm rv = (Wdata_lbl_itm)ttl_hash.Fetch(ttl);
-		if (rv == null) Gfo_usr_dlg_.I.Warn_many("", "", "wdata.hwtr:unknown entity; ttl=~{0}", String_.new_utf8_(ttl));	// NOTE: should not happen
+		Wdata_lbl_itm rv = (Wdata_lbl_itm)ttl_hash.Get_by(ttl);
+		if (rv == null) Gfo_usr_dlg_.I.Warn_many("", "", "wdata.hwtr:unknown entity; ttl=~{0}", String_.new_u8(ttl));	// NOTE: should not happen
 		return rv;
 	}
 	public byte[] Get_text__ttl(byte[] ttl, byte[] or) {
@@ -40,46 +40,46 @@ public class Wdata_lbl_mgr {
 	public byte[] Get_text__qid(int id) {return Get_text(Bool_.N, id);}
 	public byte[] Get_text__pid(int id) {return Get_text(Bool_.Y, id);}
 	private byte[] Get_text(boolean is_pid, int id) {
-		HashAdp hash = is_pid ? pid_hash : qid_hash;
-		Wdata_lbl_itm rv_itm = (Wdata_lbl_itm)hash.Fetch(int_hash_key.Val_(id));
+		Hash_adp hash = is_pid ? pid_hash : qid_hash;
+		Wdata_lbl_itm rv_itm = (Wdata_lbl_itm)hash.Get_by(int_hash_key.Val_(id));
 		if (rv_itm != null) return rv_itm.Text();	// found; return lbl
 		Gfo_usr_dlg_.I.Warn_many("", "", "wdata.hwtr:unknown entity; is_pid=~{0} id=~{1}", Yn.Xto_str(is_pid), id);	// NOTE: should not happen
 		return Wdata_lbl_itm.Make_ttl(is_pid, id);	// missing; return ttl; EX: "Property:P1", "Q1";
 	}
 	public void Queue_if_missing__ttl(byte[] ttl) {Queue_if_missing__ttl(ttl, Bool_.N);}
 	public void Queue_if_missing__ttl(byte[] ttl, boolean get_en) {
-		if (ttl == null) {Gfo_usr_dlg_.I.Warn_many("", "", "wdata.hwtr:unknown href; href=~{0}", String_.new_utf8_(ttl)); return;}
+		if (ttl == null) {Gfo_usr_dlg_.I.Warn_many("", "", "wdata.hwtr:unknown href; href=~{0}", String_.new_u8(ttl)); return;}
 		boolean has = ttl_hash.Has(ttl);
 		if (!has) Queue_add(qid_hash, Bool_.N, Qid_int(ttl), get_en);
 	}
 	public void Queue_if_missing__qid(int id) {Queue_if_missing(Bool_.N, id);}
 	public void Queue_if_missing__pid(int id) {Queue_if_missing(Bool_.Y, id);}
 	private void Queue_if_missing(boolean is_pid, int id) {
-		HashAdp hash = is_pid ? pid_hash : qid_hash;
+		Hash_adp hash = is_pid ? pid_hash : qid_hash;
 		boolean has = hash.Has(int_hash_key.Val_(id));
 		if (!has) Queue_add(hash, is_pid, id, Bool_.N);
 	}
-	private void Queue_add(HashAdp hash, boolean is_pid, int id, boolean get_en) {
+	private void Queue_add(Hash_adp hash, boolean is_pid, int id, boolean get_en) {
 		Wdata_lbl_itm itm = new Wdata_lbl_itm(is_pid, id, get_en);
 		hash.Add(Int_obj_ref.new_(id), itm);
 		ttl_hash.Add(itm.Ttl(), itm);
 		queue.Add(itm);
 	}
-	public void Resolve(OrderedHash found) {
+	public void Resolve(Ordered_hash found) {
 		int len = queue.Count();
 		for (int i = 0; i < len; ++i) {
-			Wdata_lbl_itm pending_itm = (Wdata_lbl_itm)queue.FetchAt(i);
-			Wdata_langtext_itm found_itm = (Wdata_langtext_itm)found.Fetch(pending_itm.Ttl());
+			Wdata_lbl_itm pending_itm = (Wdata_lbl_itm)queue.Get_at(i);
+			Wdata_langtext_itm found_itm = (Wdata_langtext_itm)found.Get_by(pending_itm.Ttl());
 			if (found_itm != null)
 				pending_itm.Load_vals(found_itm.Lang(), found_itm.Text());
 		}
 		queue.Clear();
 	}
 	public void Gather_labels(Wdata_doc wdoc, Wdata_lang_sorter sorter) {
-		OrderedHash claim_list = wdoc.Claim_list();
+		Ordered_hash claim_list = wdoc.Claim_list();
 		int len = claim_list.Count();
 		for (int i = 0; i < len; ++i) {
-			Wdata_claim_grp grp = (Wdata_claim_grp)claim_list.FetchAt(i);
+			Wdata_claim_grp grp = (Wdata_claim_grp)claim_list.Get_at(i);
 			int grp_len = grp.Len();
 			for (int j = 0; j < grp_len; ++j) {
 				Wdata_claim_itm_core itm = (Wdata_claim_itm_core)grp.Get_at(j);
@@ -118,10 +118,10 @@ public class Wdata_lbl_mgr {
 				}
 			}
 		}
-		OrderedHash slink_list = wdoc.Slink_list();
+		Ordered_hash slink_list = wdoc.Slink_list();
 		len = slink_list.Count();
 		for (int i = 0; i < len; ++i) {
-			Wdata_sitelink_itm itm = (Wdata_sitelink_itm)slink_list.FetchAt(i);
+			Wdata_sitelink_itm itm = (Wdata_sitelink_itm)slink_list.Get_at(i);
 			byte[][] badges = itm.Badges();
 			int badges_len = badges.length;
 			for (int j = 0; j < badges_len; ++j) {

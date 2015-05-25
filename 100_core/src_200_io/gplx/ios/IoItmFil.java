@@ -22,7 +22,7 @@ public class IoItmFil extends IoItm_base {
 	public DateAdp ModifiedTime() {return modifiedTime;}
 	public IoItmFil ModifiedTime_(DateAdp val) {modifiedTime = val; return this;} DateAdp modifiedTime;
 	public IoItmFil ModifiedTime_(String val) {return ModifiedTime_(DateAdp_.parse_gplx(val));}
-	@gplx.Virtual public long Size() {return size;} public IoItmFil Size_(long val) {size = val; return this;} long size;
+	@gplx.Virtual public long Size() {return size;} public IoItmFil Size_(long val) {size = val; return this;} private long size;
 	public IoItmAttrib Attrib() {return attrib;} public IoItmFil Attrib_(IoItmAttrib val) {attrib = val; return this;} IoItmAttrib attrib = IoItmAttrib.normal_();
 	public boolean ReadOnly() {return attrib.ReadOnly();} public IoItmFil ReadOnly_(boolean val) {attrib.ReadOnly_(val); return this;} 
 	@gplx.New public IoItmFil XtnProps_set(String key, Object val) {return (IoItmFil)super.XtnProps_set(key, val);}

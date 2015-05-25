@@ -34,6 +34,6 @@ class Xol_msg_itm_fxt {
 	}
 	public void Test_val(String val, String expd) {
 		Xol_msg_itm itm = Xol_msg_itm_.new_(0, "test", val);
-		Tfds.Eq(expd, String_.new_utf8_(itm.Val()), "has_fmt_arg");
+		Tfds.Eq(expd, String_.new_u8(itm.Val()), "has_fmt_arg");
 	}
 }

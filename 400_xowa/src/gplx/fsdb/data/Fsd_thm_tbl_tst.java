@@ -26,7 +26,7 @@ public class Fsd_thm_tbl_tst {
 		fxt.Test_match_nearest_itm(fxt.Make(100), fxt.Make(100));
 		fxt.Test_match_nearest_itm(fxt.Make(350), fxt.Make(400));
 		fxt.Test_match_nearest_itm(fxt.Make(150), fxt.Make(200));
-		fxt.Test_match_nearest_itm(fxt.Make(500), Fsd_thm_itm.Null);
+		fxt.Test_match_nearest_itm(fxt.Make(999), fxt.Make(400));
 	}
 	@Test   public void Empty() {
 		fxt.Init_list();	// no items
@@ -34,7 +34,7 @@ public class Fsd_thm_tbl_tst {
 	}
 }
 class Fsd_thm_tbl_fxt {
-	private final ListAdp list = ListAdp_.new_();
+	private final List_adp list = List_adp_.new_();
 	public void Clear() {list.Clear();}
 	public Fsd_thm_itm Make(int w) {
 		double time = gplx.xowa.files.Xof_lnki_time.Null;
@@ -43,7 +43,7 @@ class Fsd_thm_tbl_fxt {
 		rv.Init_by_req(w, time, page);
 		return rv;
 	}
-	public void Init_list(Fsd_thm_itm... ary) {list.AddMany((Object[])ary);}
+	public void Init_list(Fsd_thm_itm... ary) {list.Add_many((Object[])ary);}
 	public void Test_match_nearest_itm(Fsd_thm_itm req, Fsd_thm_itm expd) {
 		Fsd_thm_tbl.Match_nearest(list, req, Bool_.Y);
 		if (expd == Fsd_thm_itm.Null) {

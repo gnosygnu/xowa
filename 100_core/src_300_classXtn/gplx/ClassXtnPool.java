@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 import gplx.lists.*;
-public class ClassXtnPool extends HashAdp_base {
+public class ClassXtnPool extends Hash_adp_base {
 	public void Add(ClassXtn typx) {Add_base(typx.Key(), typx);}
-	public ClassXtn FetchOrFail(String key) {return (ClassXtn)FetchOrFail_base(key);}
+	public ClassXtn Get_by_or_fail(String key) {return (ClassXtn)FetchOrFail_base(key);}
 
 	public static final ClassXtnPool _ =  new ClassXtnPool();
 	public static final String Format_null = "";

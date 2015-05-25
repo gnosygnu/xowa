@@ -20,14 +20,14 @@ import org.junit.*;
 public class Xoa_upgrade_mgr_tst {
 	@Test  public void Run() {
 		Xoae_app app = Xoa_app_fxt.app_();
-		Io_url old_history_dir = app.User().Fsys_mgr().App_data_dir();
-		Io_url new_history_dir = app.User().Fsys_mgr().App_data_dir().GenSubDir("history");
-		Io_mgr._.SaveFilStr(old_history_dir.GenSubFil("page_history.csv"), "test");
+		Io_url old_history_dir = app.Usere().Fsys_mgr().App_data_dir();
+		Io_url new_history_dir = app.Usere().Fsys_mgr().App_data_dir().GenSubDir("history");
+		Io_mgr.I.SaveFilStr(old_history_dir.GenSubFil("page_history.csv"), "test");
 		Xoa_upgrade_mgr.Check(app);
-		Tfds.Eq("test", Io_mgr._.LoadFilStr(old_history_dir.GenSubFil("page_history.csv")));	// old file still exists
-		Tfds.Eq("test", Io_mgr._.LoadFilStr(new_history_dir.GenSubFil("page_history.csv")));	// new file exists
-		Io_mgr._.SaveFilStr(new_history_dir.GenSubFil("page_history.csv"), "test1");			// dirty file
+		Tfds.Eq("test", Io_mgr.I.LoadFilStr(old_history_dir.GenSubFil("page_history.csv")));	// old file still exists
+		Tfds.Eq("test", Io_mgr.I.LoadFilStr(new_history_dir.GenSubFil("page_history.csv")));	// new file exists
+		Io_mgr.I.SaveFilStr(new_history_dir.GenSubFil("page_history.csv"), "test1");			// dirty file
 		Xoa_upgrade_mgr.Check(app);																// rerun
-		Tfds.Eq("test1", Io_mgr._.LoadFilStr(new_history_dir.GenSubFil("page_history.csv")));	// dirty file remains (not replaced by old file)
+		Tfds.Eq("test1", Io_mgr.I.LoadFilStr(new_history_dir.GenSubFil("page_history.csv")));	// dirty file remains (not replaced by old file)
 	}
 }

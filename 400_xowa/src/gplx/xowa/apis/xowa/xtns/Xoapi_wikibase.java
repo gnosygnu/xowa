@@ -24,13 +24,13 @@ public class Xoapi_wikibase implements GfoInvkAble, GfoEvMgrOwner {
 	public GfoEvMgr EvMgr() {return evMgr;} private GfoEvMgr evMgr;
 	public byte[][] Core_langs() {return core_langs;} private byte[][] core_langs = Bry_.Ary("en");
 	public byte[][] Sort_langs() {return sort_langs;} private byte[][] sort_langs = Bry_.Ary("en", "de", "es", "fr", "it", "nl", "pl", "ru", "sv");
-	public byte[] Link_wikis() {return link_wikis;} private byte[] link_wikis = Bry_.new_ascii_("enwiki");
+	public byte[] Link_wikis() {return link_wikis;} private byte[] link_wikis = Bry_.new_a7("enwiki");
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_core_langs))	 			return Bry_.Add_w_dlm(Byte_ascii.Semic, core_langs);
 		else if	(ctx.Match(k, Invk_core_langs_))	 		{core_langs = m.ReadBryAry(k, Byte_ascii.Semic); GfoEvMgr_.PubVal(this, Evt_core_langs_changed, core_langs);}
 		else if	(ctx.Match(k, Invk_sort_langs))	 			return Bry_.Add_w_dlm(Byte_ascii.Semic, sort_langs);
 		else if	(ctx.Match(k, Invk_sort_langs_))	 		{sort_langs = m.ReadBryAry(k, Byte_ascii.Semic); GfoEvMgr_.PubVal(this, Evt_sort_langs_changed, sort_langs);}
-		else if	(ctx.Match(k, Invk_link_wikis))	 			return String_.new_utf8_(link_wikis);
+		else if	(ctx.Match(k, Invk_link_wikis))	 			return String_.new_u8(link_wikis);
 		else if	(ctx.Match(k, Invk_link_wikis_))	 		{link_wikis = m.ReadBry(k); GfoEvMgr_.PubVal(this, Evt_link_wikis_changed, link_wikis);}
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;

@@ -212,7 +212,7 @@ public class Int_ implements GfoInvkAble {
 		return sb.XtoStr();
 	}
 	public static int[] Ary_parse(String raw_str, int reqd_len, int[] or) {
-		byte[] raw_bry = Bry_.new_ascii_(raw_str);
+		byte[] raw_bry = Bry_.new_a7(raw_str);
 		int raw_bry_len = raw_bry.length;
 		int[] rv = new int[reqd_len];
 		int cur_val = 0, cur_mult = 1, cur_idx = reqd_len - 1; boolean signed = false;
@@ -256,5 +256,5 @@ public class Int_ implements GfoInvkAble {
 			rv[i] = Int_.parse_(ary[i]);
 		return rv;
 	}
-	public static byte[] Xto_bry(int v) {return Bry_.new_ascii_(Xto_str(v));}
+	public static byte[] Xto_bry(int v) {return Bry_.new_a7(Xto_str(v));}
 }

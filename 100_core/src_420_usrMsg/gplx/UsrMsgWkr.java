@@ -25,7 +25,7 @@ class UsrMsgWkrList {
 			wkr = v;
 		else {
 			if (list == null) {
-				list = ListAdp_.new_();
+				list = List_adp_.new_();
 				list.Add(wkr);
 				wkr = null;
 			}
@@ -45,6 +45,6 @@ class UsrMsgWkrList {
 			}
 		}
 	}
-	ListAdp list; UsrMsgWkr wkr; int type;
+	List_adp list; UsrMsgWkr wkr; int type;
         public UsrMsgWkrList(int type) {this.type = type;}
 }

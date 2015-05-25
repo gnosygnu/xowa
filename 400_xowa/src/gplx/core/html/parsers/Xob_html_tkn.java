@@ -24,7 +24,7 @@ interface Gfo_html_tkn {
 }
 class Gfo_html_tkn_ {
 	public static final int Tid_link = 1;
-	public static final byte[] Key_link = Bry_.new_ascii_("link");
+	public static final byte[] Key_link = Bry_.new_a7("link");
 }
 class Gfo_html_tkn__link implements Gfo_html_tkn {
 	public int Tid() {return Gfo_html_tkn_.Tid_link;}

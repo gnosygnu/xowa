@@ -83,12 +83,12 @@ class Xows_text_parser__v2 {
 	public boolean Ws__is_word_end(int pos) {return parser__ws.Is_word_end(src, end, pos);}
 }
 class Xob_word_mgr {
-	private final OrderedHash hash = OrderedHash_.new_bry_();
+	private final Ordered_hash hash = Ordered_hash_.new_bry_();
 	public void Clear() {hash.Clear();}
 	public int Len() {return hash.Count();}
-	public Xob_word_itm Get_at(int i) {return (Xob_word_itm)hash.FetchAt(i);}
+	public Xob_word_itm Get_at(int i) {return (Xob_word_itm)hash.Get_at(i);}
 	public void Add(byte[] word) {
-		Xob_word_itm itm = (Xob_word_itm)hash.Fetch(word);
+		Xob_word_itm itm = (Xob_word_itm)hash.Get_by(word);
 		if (itm == null) {
 			itm = new Xob_word_itm(word);
 			hash.Add(word, itm);

@@ -39,7 +39,7 @@ public class Db_qry_sql implements Db_qry {
 	public static Db_qry_sql as_(Object obj) {return obj instanceof Db_qry_sql ? (Db_qry_sql)obj : null;}
 	public static Db_qry_sql cast_(Object obj) {try {return (Db_qry_sql)obj;} catch(Exception exc) {throw Err_.type_mismatch_exc_(exc, Db_qry_sql.class, obj);}}
 	public static String Gen_sql(Db_qry qry, Object... args) {
-		byte[] src = Bry_.new_utf8_(Sql_qry_wtr_.Gen_placeholder_parameters(qry));
+		byte[] src = Bry_.new_u8(Sql_qry_wtr_.Gen_placeholder_parameters(qry));
 		int src_len = src.length;
 		int args_idx = 0, args_len = args.length, pos = 0;
 		Bry_bfr bfr = Bry_bfr.new_(src_len);
@@ -74,9 +74,9 @@ public class Db_qry_sql implements Db_qry {
 		else if (ClassAdp_.Eq(val_type, DecimalAdp_.Cls_ref_type))
 			bfr.Add_str(DecimalAdp_.cast_(val).Xto_str());
 		else {
-			byte[] val_bry = Bry_.new_utf8_(Object_.Xto_str_strict_or_null(val));
+			byte[] val_bry = Bry_.new_u8(Object_.Xto_str_strict_or_null(val));
 			val_bry = Bry_.Replace(val_bry, Byte_ascii.Apos_bry, Bry_escape_apos);
 			bfr.Add_byte_apos().Add(val_bry).Add_byte_apos();
 		}
-	}	private static final byte[] Bry_null = Bry_.new_utf8_("NULL"), Bry_escape_apos = Bry_.new_ascii_("''");
+	}	private static final byte[] Bry_null = Bry_.new_u8("NULL"), Bry_escape_apos = Bry_.new_a7("''");
 }

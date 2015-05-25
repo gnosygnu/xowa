@@ -26,12 +26,12 @@ class Int_rng_mgr_null implements Int_rng_mgr {
 	public static final Int_rng_mgr_null _ = new Int_rng_mgr_null(); Int_rng_mgr_null() {}
 }
 class Int_rng_mgr_base implements Int_rng_mgr {
-	private ListAdp itms = ListAdp_.new_();
+	private List_adp itms = List_adp_.new_();
 	public void Clear() {itms.Clear();}
 	public boolean Match(int v) {
 		int len = itms.Count();
 		for (int i = 0; i < len; i++) {
-			Int_where itm = (Int_where)itms.FetchAt(i);
+			Int_where itm = (Int_where)itms.Get_at(i);
 			if (itm.Match(v)) return true;
 		}
 		return false;

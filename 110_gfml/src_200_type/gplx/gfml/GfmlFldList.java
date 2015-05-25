@@ -18,17 +18,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfml; import gplx.*;
 public class GfmlFldList {
 	public int Count() {return hash.Count();}
-	public GfmlFld FetchAt(int index) {return (GfmlFld)hash.FetchAt(index);}
-	public GfmlFld Fetch(String id) {return (GfmlFld)hash.Fetch(id);}
+	public GfmlFld Get_at(int index) {return (GfmlFld)hash.Get_at(index);}
+	public GfmlFld Get_by(String id) {return (GfmlFld)hash.Get_by(id);}
 	public void Add(GfmlFld fld) {
 		if (String_.Len_eq_0(fld.Name())) throw Err_.new_("fld name cannot be null");
 		if (hash.Has(fld.Name())) throw Err_.new_("key already exists").Add("key", fld.Name()); // FIXME: commented out to allow multiple types with same name; need "_type:invk"
-		hash.AddReplace(fld.Name(), fld);
+		hash.Add_if_dupe_use_nth(fld.Name(), fld);
 	}
 	public void Del(GfmlFld fld) {
 		hash.Del(fld);
 		hash.Del(fld.Name());
 	}
-	OrderedHash hash = OrderedHash_.new_();
+	Ordered_hash hash = Ordered_hash_.new_();
 	public static GfmlFldList new_() {return new GfmlFldList();} GfmlFldList() {}
 }

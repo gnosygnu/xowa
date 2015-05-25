@@ -28,8 +28,8 @@ public class Db_rdr__basic implements Db_rdr {
 	}
 	@gplx.Virtual public byte[]		Read_bry(int i)				{try {return rdr.getBytes(i + 1);} catch (Exception e) {throw Err_.new_("read failed: i={0} type={1} err={2}", i, Bry_.Cls_val_name, Err_.Message_lang(e));}} 
 	@gplx.Virtual public byte[]		Read_bry(String k)			{try {return (byte[])rdr.getObject(k);} catch (Exception e) {throw Err_.new_("read failed: k={0} type={1} err={2}", k, Bry_.Cls_val_name, Err_.Message_lang(e));}} 
-	@gplx.Virtual public byte[]		Read_bry_by_str(int i)		{try {return Bry_.new_utf8_(rdr.getString(i + 1));} catch (Exception e) {throw Err_.new_("read failed: i={0} type={1} err={2}", i, String_.Cls_val_name, Err_.Message_lang(e));}} 
-	@gplx.Virtual public byte[]		Read_bry_by_str(String k)	{try {return Bry_.new_utf8_((String)rdr.getObject(k));} catch (Exception e) {throw Err_.new_("read failed: k={0} type={1} err={2}", k, String_.Cls_val_name, Err_.Message_lang(e));}} 
+	@gplx.Virtual public byte[]		Read_bry_by_str(int i)		{try {return Bry_.new_u8(rdr.getString(i + 1));} catch (Exception e) {throw Err_.new_("read failed: i={0} type={1} err={2}", i, String_.Cls_val_name, Err_.Message_lang(e));}} 
+	@gplx.Virtual public byte[]		Read_bry_by_str(String k)	{try {return Bry_.new_u8((String)rdr.getObject(k));} catch (Exception e) {throw Err_.new_("read failed: k={0} type={1} err={2}", k, String_.Cls_val_name, Err_.Message_lang(e));}} 
 	@gplx.Virtual public String 		Read_str(int i)				{try {return rdr.getString(i + 1);} catch (Exception e) {throw Err_.new_("read failed: i={0} type={1} err={2}", i, String_.Cls_val_name, Err_.Message_lang(e));}} 
 	@gplx.Virtual public String 		Read_str(String k)			{try {return (String)rdr.getObject(k);} catch (Exception e) {throw Err_.new_("read failed: k={0} type={1} err={2}", k, String_.Cls_val_name, Err_.Message_lang(e));}} 
 	@gplx.Virtual public DateAdp		Read_date_by_str(int i)		{return DateAdp_.parse_iso8561(Read_str(i));}

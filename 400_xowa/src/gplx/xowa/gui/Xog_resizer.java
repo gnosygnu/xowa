@@ -49,7 +49,7 @@ public class Xog_resizer {
 		Exec_win_resize_elem(layout.Search_box()		, search_box			, new Rect_ref(0, 0, 190								, txt_dim				), url_exec_btn, Xog_resizer.Layout_right_top);
 		Exec_win_resize_elem(layout.Search_exec_btn()	, search_exec_btn		, new Rect_ref(0, 0, btn_dim							, btn_dim				), search_box, Xog_resizer.Layout_right_top);
 		Exec_win_resize_elem(layout.Html_box()			, tab_mgr				, new Rect_ref(0, 0, main_w								, main_h + -(bar_dim * 2) - menu_bar_adj), go_bwd_btn, Xog_resizer.Layout_below_left);	// -40:btn_dim(url bar) + btn_dim (find box)
-		Xoc_layout_mgr layout_mgr = app.User().Cfg_mgr().Layout_mgr();
+		Xoc_layout_mgr layout_mgr = app.Usere().Cfg_mgr().Layout_mgr();
 		switch (layout_mgr.Html_box_adj_type()) {
 			case Xoc_layout_mgr.Html_box_adj_type_none_byte: break;
 			case Xoc_layout_mgr.Html_box_adj_type_abs_byte: tab_mgr.Rect_set(layout_mgr.Html_box_adj_rect()); break;

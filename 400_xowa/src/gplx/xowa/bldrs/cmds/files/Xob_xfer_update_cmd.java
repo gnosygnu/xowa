@@ -41,8 +41,8 @@ public class Xob_xfer_update_cmd extends Xob_itm_basic_base implements Xob_cmd {
 //			// rotate db
 //			DateAdp wiki_date = wiki.Db_mgr().Dump_date_query();
 //			Io_url archive_url = prv_url.GenNewNameOnly("oimg_lnki_" + wiki_date.XtoStr_fmt("yyyyMMdd"));
-//			Io_mgr._.CopyFil(cur_file.Url(), archive_url, true);
-//			Io_mgr._.CopyFil(cur_file.Url(), prv_url, true);
+//			Io_mgr.I.CopyFil(cur_file.Url(), archive_url, true);
+//			Io_mgr.I.CopyFil(cur_file.Url(), prv_url, true);
 	}
 	public void Cmd_init(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {}

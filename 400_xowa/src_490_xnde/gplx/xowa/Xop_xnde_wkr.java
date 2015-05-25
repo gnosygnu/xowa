@@ -310,7 +310,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		if (tag.Restricted()) {
 			Xoae_page page = ctx.Cur_page();
 			if (	page.Html_data().Html_restricted() 
-				&&	page.Wiki().Domain_tid() != Xow_domain_.Tid_int_home) {
+				&&	page.Wiki().Domain_tid() != Xow_domain_type_.Tid_home) {
 				int end_pos = gtPos + 1;
 				ctx.Subs_add(root, tkn_mkr.Bry_raw(bgn_pos, end_pos, Bry_.Add(gplx.html.Html_entity_.Lt_bry, Bry_.Mid(src, bgn_pos + 1, end_pos)))); // +1 to skip <
 				return end_pos;
@@ -689,8 +689,8 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 						xnde_xtn.Xtn_parse(ctx.Wiki(), ctx, root, src, xnde);
 					}
 					catch (Exception e) {
-						String err_msg = String_.Format("failed to render extension: title={0} excerpt={1} err={2}", String_.new_utf8_(ctx.Cur_page().Ttl().Full_txt())
-							, String_.new_utf8_(src, xnde.Tag_open_end(), xnde.Tag_close_bgn())
+						String err_msg = String_.Format("failed to render extension: title={0} excerpt={1} err={2}", String_.new_u8(ctx.Cur_page().Ttl().Full_txt())
+							, String_.new_u8(src, xnde.Tag_open_end(), xnde.Tag_close_bgn())
 							, Err_.Message_gplx_brief(e));
 						if (Env_.Mode_testing()) 
 							throw Err_.err_(e, err_msg);
@@ -711,7 +711,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		return rv;
 	}
 	private static final byte[] 
-	  Bry_escape_lt_slash = Bry_.new_ascii_("&lt;/")
+	  Bry_escape_lt_slash = Bry_.new_a7("&lt;/")
 	;
 	public static int Find_gt_pos(Xop_ctx ctx, byte[] src, int cur_pos, int src_len) {	// UNUSED
 		int gt_pos = -1;	// find closing >

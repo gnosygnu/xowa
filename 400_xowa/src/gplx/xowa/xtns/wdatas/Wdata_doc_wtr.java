@@ -30,41 +30,41 @@ public class Wdata_doc_wtr {
 		wtr.Nde_end();
 		return wtr.Bld();
 	}
-	private void Xto_bry__list(byte[] key, OrderedHash list) {
+	private void Xto_bry__list(byte[] key, Ordered_hash list) {
 		int len = list.Count();
 		if (len == 0) return;
 		wtr.Key(true, key);
 		wtr.Nde_bgn();
 		for (int i = 0; i < len; i++) {
-			KeyVal kv = (KeyVal)list.FetchAt(i);
-			wtr.Kv(i != 0, Bry_.new_utf8_(kv.Key()), Bry_.new_utf8_(kv.Val_to_str_or_empty()));
+			KeyVal kv = (KeyVal)list.Get_at(i);
+			wtr.Kv(i != 0, Bry_.new_u8(kv.Key()), Bry_.new_u8(kv.Val_to_str_or_empty()));
 		}
 		wtr.Nde_end();
 		list.Clear();
 	}
-	private void Xto_bry__sitelinks(byte[] key, OrderedHash list) {	// NOTE: changed to reflect new sitelinks structure; DATE:2014-02-04
+	private void Xto_bry__sitelinks(byte[] key, Ordered_hash list) {	// NOTE: changed to reflect new sitelinks structure; DATE:2014-02-04
 		int len = list.Count();
 		if (len == 0) return;
 		wtr.Key(true, key);
 		wtr.Nde_bgn();
 		for (int i = 0; i < len; i++) {
 			if (i != 0) wtr.Comma();
-			KeyVal kv = (KeyVal)list.FetchAt(i);
-			wtr.Key(false, Bry_.new_utf8_(kv.Key()));												// write key;	EX: enwiki:
+			KeyVal kv = (KeyVal)list.Get_at(i);
+			wtr.Key(false, Bry_.new_u8(kv.Key()));												// write key;	EX: enwiki:
 			wtr.Nde_bgn();																			// bgn nde;		EX: {
-			wtr.Kv(false, Wdata_doc_parser_v1.Bry_name, Bry_.new_utf8_(kv.Val_to_str_or_empty()));	// write name;	EX:   name=Earth
+			wtr.Kv(false, Wdata_doc_parser_v1.Bry_name, Bry_.new_u8(kv.Val_to_str_or_empty()));	// write name;	EX:   name=Earth
 			wtr.Nde_end();																			// end nde;		EX: }
 		}
 		wtr.Nde_end();
 		list.Clear();
 	}
-	private void Xto_bry__aliases(OrderedHash aliases) {
+	private void Xto_bry__aliases(Ordered_hash aliases) {
 		int len = aliases.Count();
 		if (len == 0) return;
 		wtr.Key(true, Wdata_doc_parser_v1.Bry_aliases);
 		wtr.Nde_bgn();
 		for (int i = 0; i < len; i++) {
-			Wdata_alias_itm alias = (Wdata_alias_itm)aliases.FetchAt(i);
+			Wdata_alias_itm alias = (Wdata_alias_itm)aliases.Get_at(i);
 			wtr.Key(i != 0, alias.Lang());
 			wtr.Ary_bgn();
 			byte[][] aliases_ary = alias.Vals();
@@ -78,14 +78,14 @@ public class Wdata_doc_wtr {
 		wtr.Nde_end();
 		aliases.Clear();
 	}
-	private void Xto_bry__claims(byte[] qid, OrderedHash props) {
+	private void Xto_bry__claims(byte[] qid, Ordered_hash props) {
 		int len = props.Count();
 		if (len == 0) return;
 		wtr.Key(true, Wdata_doc_parser_v1.Bry_claims);
 		wtr.Ary_bgn();
 		for (int i = 0; i < len; i++) {
 			if (i != 0) wtr.Comma();
-			Wdata_claim_itm_core prop = (Wdata_claim_itm_core)props.FetchAt(i);
+			Wdata_claim_itm_core prop = (Wdata_claim_itm_core)props.Get_at(i);
 			wtr.Nde_bgn();
 			wtr.Key(false, Wdata_dict_claim_v1.Bry_m);
 			wtr.Ary_bgn();
@@ -125,8 +125,8 @@ public class Wdata_doc_wtr {
 						wtr.Val(Bool_.Y, Wdata_dict_val_tid.Bry_globecoordinate);
 						wtr.Comma();
 						wtr.Nde_bgn();
-						wtr.Kv_double	(Bool_.N, Wdata_dict_value_globecoordinate.Bry_latitude		, Double_.parse_(String_.new_ascii_(claim_globecoordinate.Lat())));
-						wtr.Kv_double	(Bool_.Y, Wdata_dict_value_globecoordinate.Bry_longitude	, Double_.parse_(String_.new_ascii_(claim_globecoordinate.Lng())));
+						wtr.Kv_double	(Bool_.N, Wdata_dict_value_globecoordinate.Bry_latitude		, Double_.parse_(String_.new_a7(claim_globecoordinate.Lat())));
+						wtr.Kv_double	(Bool_.Y, Wdata_dict_value_globecoordinate.Bry_longitude	, Double_.parse_(String_.new_a7(claim_globecoordinate.Lng())));
 						wtr.Kv			(Bool_.Y, Wdata_dict_value_globecoordinate.Bry_altitude		, null);
 						wtr.Kv			(Bool_.Y, Wdata_dict_value_globecoordinate.Bry_globe		, Wdata_dict_value_globecoordinate.Val_globe_dflt_bry);
 						wtr.Kv_double	(Bool_.Y, Wdata_dict_value_globecoordinate.Bry_precision	, .00001d);

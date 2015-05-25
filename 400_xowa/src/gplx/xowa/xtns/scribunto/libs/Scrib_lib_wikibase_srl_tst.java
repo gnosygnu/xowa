@@ -81,7 +81,7 @@ public class Scrib_lib_wikibase_srl_tst {
 		,	"  }"
 		,	"}"
 		);
-		Wdata_doc wdoc = new Wdata_doc(Bry_.new_ascii_("q2"), fxt.Wdata_fxt().App().Wiki_mgr().Wdata_mgr(), jdoc);
+		Wdata_doc wdoc = new Wdata_doc(Bry_.new_a7("q2"), fxt.Wdata_fxt().App().Wiki_mgr().Wdata_mgr(), jdoc);
 		fxt.Test
 		(	wdoc
 		,	"sitelinks:"
@@ -408,7 +408,7 @@ class Scrib_lib_wikibase_srl_fxt {
 		bfr.Add_byte_repeat(Byte_ascii.Space, depth * 2);
 		bfr.Add_str(kv.Key()).Add_byte(Byte_ascii.Colon);
 		Object kv_val = kv.Val();
-		if		(kv_val == null) 							{bfr.Add_str("null").Add_byte_nl(); return;}
+		if		(kv_val == null) 							{bfr.Add_str_a7("null").Add_byte_nl(); return;}
 		Class<?> kv_val_cls = kv_val.getClass();
 		if 	(ClassAdp_.Eq(kv_val_cls, KeyVal[].class)) 	{bfr.Add_byte_nl(); Xto_str(bfr, (KeyVal[])kv_val, depth + 1);}
 		else if (ClassAdp_.Eq(kv_val_cls, KeyVal[].class)) 	{bfr.Add_byte_nl(); Xto_str(bfr, (KeyVal)kv_val, depth + 1);}

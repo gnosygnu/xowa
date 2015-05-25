@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.sqls; import gplx.*; import gplx.dbs.*;
 public class Sql_from {
-	public ListAdp Tbls() {return tbls;} ListAdp tbls = ListAdp_.new_();
-	public Sql_tbl_src BaseTable() {return (Sql_tbl_src)tbls.FetchAt(0);}
+	public List_adp Tbls() {return tbls;} List_adp tbls = List_adp_.new_();
+	public Sql_tbl_src BaseTable() {return (Sql_tbl_src)tbls.Get_at(0);}
 	public static Sql_from new_(Sql_tbl_src baseTable) {
 		Sql_from rv = new Sql_from();
 		rv.tbls.Add(baseTable);

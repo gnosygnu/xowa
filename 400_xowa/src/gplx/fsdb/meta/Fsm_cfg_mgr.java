@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.fsdb.meta.*;
 public class Fsm_cfg_mgr {		
-	private final Db_cfg_tbl tbl; private final HashAdp grp_hash = HashAdp_.new_();
+	private final Db_cfg_tbl tbl; private final Hash_adp grp_hash = Hash_adp_.new_();
 	public Fsm_cfg_mgr(Fsdb_db_mgr db_conn_mgr, Db_conn conn) {
 		this.tbl = new Db_cfg_tbl(conn, db_conn_mgr.File__cfg_tbl_name());
 	}
@@ -42,7 +42,7 @@ public class Fsm_cfg_mgr {
 	public boolean Patch__page_gt_1() {return patch__page_gt_1;} private boolean patch__page_gt_1 = false;
 	public void Patch__save(String cfg_key) {tbl.Insert_yn(Fsm_cfg_mgr.Grp_core, cfg_key, Bool_.Y);}
 	public Db_cfg_hash Grps_get_or_load(String grp_key) {
-		Db_cfg_hash rv = (Db_cfg_hash)grp_hash.Fetch(grp_key);
+		Db_cfg_hash rv = (Db_cfg_hash)grp_hash.Get_by(grp_key);
 		if (rv == null) {
 			rv = tbl.Select_as_hash(grp_key);
 			grp_hash.Add(grp_key, rv);

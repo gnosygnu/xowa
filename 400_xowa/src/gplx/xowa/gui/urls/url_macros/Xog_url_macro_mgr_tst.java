@@ -29,7 +29,7 @@ public class Xog_url_macro_mgr_tst {
 	@Test  public void Type_custom()		{fxt.Test("wd.q:123"			, "www.wikidata.org/wiki/Q123");}
 	@Test  public void Type_del() {
 		fxt.Test("w:A", "en.wikipedia.org/wiki/A");
-		fxt.Abrv_mgr().Types_mgr().Del(Bry_.new_utf8_("w"));
+		fxt.Abrv_mgr().Types_mgr().Del(Bry_.new_u8("w"));
 		fxt.Test("w:A", null);
 	}
 	@Test  public void Type_set() {
@@ -37,7 +37,7 @@ public class Xog_url_macro_mgr_tst {
 		fxt.Test("w.A", null);
 	}
 	@Test  public void Lang_default() {
-		fxt.Abrv_mgr().Lang_default_(Bry_.new_ascii_("fr"));
+		fxt.Abrv_mgr().Lang_default_(Bry_.new_a7("fr"));
 		fxt.Test("w:Page", "fr.wikipedia.org/wiki/Page");
 	}
 	@Test  public void Precedence()	{	// PURPOSE: Custom should take precedence over type
@@ -51,6 +51,6 @@ class Xog_url_macro_mgr_fxt {
 	}
 	public Xog_url_macro_mgr Abrv_mgr() {return abrv_mgr;} private Xog_url_macro_mgr abrv_mgr;
 	public void Test(String raw, String expd) {
-		Tfds.Eq(expd, String_.new_ascii_(abrv_mgr.Fmt_or_null(Bry_.new_ascii_(raw))));
+		Tfds.Eq(expd, String_.new_a7(abrv_mgr.Fmt_or_null(Bry_.new_a7(raw))));
 	}
 }

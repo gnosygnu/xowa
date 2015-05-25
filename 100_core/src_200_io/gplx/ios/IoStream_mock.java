@@ -31,7 +31,7 @@ public class IoStream_mock implements IoStream {
 		return bytes_read;
 	}
 	public Object UnderRdr() {return null;}
-	public Io_url Url() {return Io_url_.Null;}
+	public Io_url Url() {return Io_url_.Empty;}
 	public long Pos() {return -1;}
 	public long Len() {return -1;}
 	public int ReadAry(byte[] array) {return -1;}

@@ -34,14 +34,14 @@ public class Xop_log_basic_wkr implements GfoInvkAble {
 	public void Log_end(Xoae_page page, long log_bgn, int log_tid, byte[] log_msg, byte[] src, int src_bgn, int src_end, int args_len, int args_bgn, int args_end) {
 		log_tbl.Insert
 			( log_tid
-			, log_msg == Xop_log_basic_wkr.Null_log_msg ? "" : String_.new_utf8_(log_msg)
+			, log_msg == Xop_log_basic_wkr.Null_log_msg ? "" : String_.new_u8(log_msg)
 			, save_log_time ?  Env_.TickCount_elapsed_in_frac(log_bgn) : Xop_log_basic_wkr.Null_log_time
 			, page.Revision_data().Id()
-			, save_page_ttl ? String_.new_utf8_(page.Ttl().Full_db()) : Xop_log_basic_wkr.Null_page_ttl
+			, save_page_ttl ? String_.new_u8(page.Ttl().Full_db()) : Xop_log_basic_wkr.Null_page_ttl
 			, save_args_len ? args_len : Xop_log_basic_wkr.Null_args_len
-			, save_args_str ? String_.new_utf8_(src, args_bgn, args_end) : Xop_log_basic_wkr.Null_args_str
+			, save_args_str ? String_.new_u8(src, args_bgn, args_end) : Xop_log_basic_wkr.Null_args_str
 			, src_end - src_bgn
-			, save_src_str ? String_.new_utf8_(src, src_bgn, src_end) : Xop_log_basic_wkr.Null_src_str
+			, save_src_str ? String_.new_u8(src, src_bgn, src_end) : Xop_log_basic_wkr.Null_src_str
 			);
 		log_mgr.Commit_chk();
 	}

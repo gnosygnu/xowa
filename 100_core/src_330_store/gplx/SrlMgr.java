@@ -29,7 +29,7 @@ public interface SrlMgr {
 	DecimalAdp	SrlDecimalOr(String key, DecimalAdp v);
 	DateAdp		SrlDateOr(String key, DateAdp v);
 	Object		SrlObjOr(String key, Object v);
-	void		SrlList(String key, ListAdp list, SrlObj proto, String itmKey);
+	void		SrlList(String key, List_adp list, SrlObj proto, String itmKey);
 	void		TypeKey_(String v);	
 	SrlMgr		SrlMgr_new(Object o);
 }

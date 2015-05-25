@@ -20,7 +20,7 @@ import gplx.gfui.*; import gplx.xowa.langs.*; import gplx.xowa.gui.cmds.*; impor
 public class Xog_mnu_itm extends Xog_mnu_base {
 	private Xoa_gui_mgr gui_mgr;
 	public Xog_mnu_itm(Xoa_gui_mgr gui_mgr, String key) {
-		this.gui_mgr = gui_mgr; this.key = key; this.key_bry = Bry_.new_utf8_(key);
+		this.gui_mgr = gui_mgr; this.key = key; this.key_bry = Bry_.new_u8(key);
 		this.Ctor(gui_mgr);
 	}
 	public byte Tid() {return tid;} public Xog_mnu_itm Tid_(byte v) {tid = v; return this;} private byte tid;		

@@ -28,7 +28,7 @@ public class Xog_html_js_cbk implements GfoInvkAble {
 		bfr.Add_str(m.Key());
 		int len = m.Args_count();
 		for (int i = 0; i < len; i++)
-			bfr.Add_str("|").Add_str(m.Args_getAt(i).Val_to_str_or_empty());
+			bfr.Add_str_a7("|").Add_str(m.Args_getAt(i).Val_to_str_or_empty());
 		return bfr.Xto_str_and_clear();
 	}
 	private String[] Xowa_exec_test_as_array(GfoMsg m) {// return args as array; EX: xowa_exec('proc', 'arg0', 'arg1'); -> proc,arg0,arg1
@@ -44,7 +44,7 @@ public class Xog_html_js_cbk implements GfoInvkAble {
 		Xowe_wiki wiki = html_itm.Owner_tab().Wiki();
 		Xop_ctx ctx = wiki.Ctx();
 		boolean old_para_enabled = ctx.Para().Enabled();
-		byte[] raw = Bry_.new_utf8_(m.Args_getAt(0).Val_to_str_or_empty());
+		byte[] raw = Bry_.new_u8(m.Args_getAt(0).Val_to_str_or_empty());
 		boolean para_enabled = m.Args_count() < 2 ? false : Bool_.parse_(m.Args_getAt(1).Val_to_str_or_empty());
 		try {
 			wiki.Ctx().Para().Enabled_(para_enabled);
@@ -62,7 +62,7 @@ public class Xog_html_js_cbk implements GfoInvkAble {
 		try {
 			Xoa_ttl ttl = Xoa_ttl.parse_(wiki, m.Args_getAt(0).Val_to_bry());
 			Xoae_page page = wiki.Data_mgr().Get_page(ttl, false);
-			return String_.new_utf8_(page.Data_raw());
+			return String_.new_u8(page.Data_raw());
 		} catch (Exception e) {Err_.Noop(e); return null;}
 	}
 	private String Popups_get_async_bgn(GfoMsg m) {
@@ -86,12 +86,12 @@ public class Xog_html_js_cbk implements GfoInvkAble {
 			Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry);
 			wiki.Db_mgr().Load_mgr().Load_by_ttl(tmp_page, ttl.Ns(), ttl.Page_db());
 		}
-		return String_.Ary(tmp_page.Exists() ? "1" : "0", Int_.Xto_str(tmp_page.Id()), Int_.Xto_str(tmp_page.Ns_id()), String_.new_utf8_(tmp_page.Ttl_page_db()), Bool_.Xto_str_lower(tmp_page.Redirected()), tmp_page.Modified_on().XtoStr_fmt("yyyy-MM-dd HH:mm:ss"), Int_.Xto_str(tmp_page.Text_len()));
+		return String_.Ary(tmp_page.Exists() ? "1" : "0", Int_.Xto_str(tmp_page.Id()), Int_.Xto_str(tmp_page.Ns_id()), String_.new_u8(tmp_page.Ttl_page_db()), Bool_.Xto_str_lower(tmp_page.Redirected()), tmp_page.Modified_on().XtoStr_fmt("yyyy-MM-dd HH:mm:ss"), Int_.Xto_str(tmp_page.Text_len()));
 	}	private static final Xowd_page_itm tmp_page = Xowd_page_itm.new_tmp();
 	private String[][] Get_titles_meta(GfoMsg m) {
 		Xowe_wiki wiki = html_itm.Owner_tab().Wiki();
 		try {
-			byte[][] ttls = Bry_.Split(Bry_.new_utf8_((String)m.ReadValAt(0)), Byte_ascii.NewLine);
+			byte[][] ttls = Bry_.Split(Bry_.new_u8((String)m.ReadValAt(0)), Byte_ascii.NewLine);
 			int ttls_len = ttls.length;
 			String[][] rv = new String[ttls_len][];
 			for (int i = 0; i < ttls_len; i++) {
@@ -119,8 +119,8 @@ public class Xog_html_js_cbk implements GfoInvkAble {
 	}		
 	private String Get_search_suggestions(GfoMsg m) {
 		Xowe_wiki wiki = html_itm.Owner_tab().Wiki();
-		byte[] search_str = Bry_.new_utf8_((String)m.ReadValAt(0));
-		byte[] cbk_func = Bry_.new_utf8_((String)m.ReadValAt(1));
+		byte[] search_str = Bry_.new_u8((String)m.ReadValAt(0));
+		byte[] cbk_func = Bry_.new_u8((String)m.ReadValAt(1));
 		app.Gui_mgr().Search_suggest_mgr().Search(wiki, search_str, cbk_func);
 		return "";
 	}
@@ -149,7 +149,7 @@ public class Xog_html_js_cbk implements GfoInvkAble {
 							val_bry = page.Label_list_get(lang_key);
 						}
 						if (val_bry == null) continue;
-						rv[i - 1] = String_.new_utf8_(val_bry);
+						rv[i - 1] = String_.new_u8(val_bry);
 						break;
 					}
 				}	catch (Exception e) {Err_.Noop(e); rv[i] = null;}
@@ -166,7 +166,7 @@ public class Xog_html_js_cbk implements GfoInvkAble {
 		catch (Exception e) {Err_.Noop(e); return null;}
 		return Object_.Xto_str_strict_or_empty(rv);
 	}
-	private static final byte[] Wikidata_get_label_xowa_ui_lang = Bry_.new_ascii_("xowa_ui_lang"), Wikidata_get_label_xowa_title = Bry_.new_ascii_("xowa_title");
+	private static final byte[] Wikidata_get_label_xowa_ui_lang = Bry_.new_a7("xowa_ui_lang"), Wikidata_get_label_xowa_title = Bry_.new_a7("xowa_title");
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_parse_to_html))						return Parse_to_html(m);
 		else if	(ctx.Match(k, Invk_wikidata_get_label))					return Wikidata_get_label(m);
@@ -178,7 +178,7 @@ public class Xog_html_js_cbk implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_get_search_suggestions))				return Get_search_suggestions(m);
 		else if	(ctx.Match(k, Invk_get_titles_meta))					return Get_titles_meta(m);
 		else if	(ctx.Match(k, Invk_get_titles_exists))					return Get_titles_exists(m);
-		else if	(ctx.Match(k, Invk_get_current_url))					return String_.new_utf8_(html_itm.Owner_tab().Page().Url().Raw());
+		else if	(ctx.Match(k, Invk_get_current_url))					return String_.new_u8(html_itm.Owner_tab().Page().Url().Raw());
 		else if	(ctx.Match(k, Invk_xowa_exec_test))						return Xowa_exec_test(m);
 		else if	(ctx.Match(k, Invk_xowa_exec_test_as_array))			return Xowa_exec_test_as_array(m);
 		else	return GfoInvkAble_.Rv_unhandled;

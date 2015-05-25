@@ -44,7 +44,7 @@ public class Xowd_html_tbl implements RlsAble {
 		if (stmt_delete == null) stmt_delete = conn.Stmt_delete(tbl_name, String_.Ary(fld_page_id));
 		stmt_delete.Clear().Crt_int(fld_page_id, page_id).Exec_delete();
 	}
-	public void Select_by_page(ListAdp rv, int page_id) {
+	public void Select_by_page(List_adp rv, int page_id) {
 		if (stmt_select == null) stmt_select = conn.Stmt_select(tbl_name, flds, String_.Ary(fld_page_id));
 		Db_rdr rdr = stmt_select.Clear().Crt_int(fld_page_id, page_id).Exec_select__rls_manual();
 		try {

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfml; import gplx.*;
 public class GfmlDoc {
 	public GfmlNde				RootNde() {return rootNde;} GfmlNde rootNde;
-	@gplx.Internal protected ListAdp			UsrMsgs() {return usrMsgs;} ListAdp usrMsgs = ListAdp_.new_();
+	@gplx.Internal protected List_adp			UsrMsgs() {return usrMsgs;} List_adp usrMsgs = List_adp_.new_();
 	@gplx.Internal protected GfmlLxrRegy		LxrRegy() {return lxrRegy;} GfmlLxrRegy lxrRegy = new GfmlLxrRegy();
 	@gplx.Internal protected GfmlBldrCmdRegy	CmdRegy() {return cmdRegy;} GfmlBldrCmdRegy cmdRegy = GfmlBldrCmdRegy.new_();
 	@gplx.Internal protected GfmlPragmaMgr		PragmaMgr() {return pragmaMgr;} GfmlPragmaMgr pragmaMgr = GfmlPragmaMgr.new_();

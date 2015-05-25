@@ -95,10 +95,10 @@ class Gfo_url_parser_chkr implements Tst_chkr {
 	public Gfo_url_parser_chkr Site_sub_(String v) 			{this.site_sub = v; return this;} private String site_sub;
 	public Gfo_url_parser_chkr Site_name_(String v) 		{this.site_name = v; return this;} private String site_name;
 	public Gfo_url_parser_chkr Site_domain_(String v) 		{this.site_domain = v; return this;} private String site_domain;
-	public Gfo_url_parser_chkr Segs_(String v) 				{segs.Add(v); return this;} ListAdp segs = ListAdp_.new_();
+	public Gfo_url_parser_chkr Segs_(String v) 				{segs.Add(v); return this;} List_adp segs = List_adp_.new_();
 	public Gfo_url_parser_chkr Page_(String v) 				{this.page = v; return this;} private String page;
 	public Gfo_url_parser_chkr Anchor_(String v) 			{this.anchor = v; return this;} private String anchor;
-	public Gfo_url_parser_chkr Args_(String k, String v) 	{args.Add(new Gfo_url_arg_chkr(k, v)); return this;} ListAdp args = ListAdp_.new_();
+	public Gfo_url_parser_chkr Args_(String k, String v) 	{args.Add(new Gfo_url_arg_chkr(k, v)); return this;} List_adp args = List_adp_.new_();
 	public Gfo_url_parser_chkr Err_(byte v) 				{err = v; return this;} private byte err;
 	public Gfo_url_parser_chkr Reset() {
 		protocol_tid = Xoo_protocol_itm.Tid_null;
@@ -114,29 +114,29 @@ class Gfo_url_parser_chkr implements Tst_chkr {
 		int rv = 0;
 		rv += mgr.Tst_val(err == Gfo_url.Err_none, path, "err", err, actl.Err());
 		rv += mgr.Tst_val(protocol_tid == Xoo_protocol_itm.Tid_null, path, "protocol_tid", protocol_tid, actl.Protocol_tid());
-		rv += mgr.Tst_val(site == null, path, "site", site, String_.new_utf8_(actl.Site()));
-		rv += mgr.Tst_val(site_sub == null, path, "site_sub", site_sub, String_.new_utf8_(actl.Site_sub()));
-		rv += mgr.Tst_val(site_name == null, path, "site_name", site_name, String_.new_utf8_(actl.Site_name()));
-		rv += mgr.Tst_val(site_domain == null, path, "site_domain", site_domain, String_.new_utf8_(actl.Site_domain()));
-		bry_ary_chkr.Val_(Bry_.Ary(segs.XtoStrAry()));
+		rv += mgr.Tst_val(site == null, path, "site", site, String_.new_u8(actl.Site()));
+		rv += mgr.Tst_val(site_sub == null, path, "site_sub", site_sub, String_.new_u8(actl.Site_sub()));
+		rv += mgr.Tst_val(site_name == null, path, "site_name", site_name, String_.new_u8(actl.Site_name()));
+		rv += mgr.Tst_val(site_domain == null, path, "site_domain", site_domain, String_.new_u8(actl.Site_domain()));
+		bry_ary_chkr.Val_(Bry_.Ary(segs.To_str_ary()));
 		rv += bry_ary_chkr.Chk(mgr, "segs", actl.Segs());
-		rv += mgr.Tst_val(page == null, path, "page", page, String_.new_utf8_(actl.Page()));
-		rv += mgr.Tst_val(anchor == null, path, "anchor", anchor, String_.new_utf8_(actl.Anchor()));
-		mgr.Tst_sub_ary((Gfo_url_arg_chkr[])args.Xto_ary(Gfo_url_arg_chkr.class), actl.Args(), "args", rv);
+		rv += mgr.Tst_val(page == null, path, "page", page, String_.new_u8(actl.Page()));
+		rv += mgr.Tst_val(anchor == null, path, "anchor", anchor, String_.new_u8(actl.Anchor()));
+		mgr.Tst_sub_ary((Gfo_url_arg_chkr[])args.To_ary(Gfo_url_arg_chkr.class), actl.Args(), "args", rv);
 		return rv;
 	}
 	public Gfo_url_parser_chkr Raw_(String v) 				{this.raw = v; return this;} private String raw;
 	public void tst_() {			
-		byte[] bry = Bry_.new_utf8_(raw);
+		byte[] bry = Bry_.new_u8(raw);
 		Gfo_url url = new Gfo_url();
 		parser.Parse(url, bry, 0, bry.length);
 		Tst_mgr tst_mgr = new Tst_mgr();
 		tst_mgr.Tst_obj(this, url);
 	}	Gfo_url_parser parser = new Gfo_url_parser();
 	public void Parse_site_fast_tst(String raw, String expd) 	{
-		byte[] raw_bry = Bry_.new_utf8_(raw);
+		byte[] raw_bry = Bry_.new_u8(raw);
 		parser.Parse_site_fast(site_data, raw_bry, 0, raw_bry.length);
-		String actl = String_.new_utf8_(raw_bry, site_data.Site_bgn(), site_data.Site_end());
+		String actl = String_.new_u8(raw_bry, site_data.Site_bgn(), site_data.Site_end());
 		Tfds.Eq(expd, actl);
 	}	Gfo_url_site_data site_data = new Gfo_url_site_data();
 }
@@ -146,8 +146,8 @@ class Gfo_url_arg_chkr implements Tst_chkr {
 	public int Chk(Tst_mgr mgr, String path, Object actl_obj) {
 		Gfo_url_arg actl = (Gfo_url_arg)actl_obj;
 		int rv = 0;
-		rv += mgr.Tst_val(key == null, path, "key", key, String_.new_utf8_(actl.Key_bry()));
-		rv += mgr.Tst_val(val == null, path, "val", val, String_.new_utf8_(actl.Val_bry()));
+		rv += mgr.Tst_val(key == null, path, "key", key, String_.new_u8(actl.Key_bry()));
+		rv += mgr.Tst_val(val == null, path, "val", val, String_.new_u8(actl.Val_bry()));
 		return rv;
 	}
 }

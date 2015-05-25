@@ -18,11 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.specials.xowa.file_browsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*; import gplx.xowa.specials.xowa.*;
 import gplx.ios.*;
 class Xosp_fbrow_data_dir {
-	private final OrderedHash hash = OrderedHash_.new_();
+	private final Ordered_hash hash = Ordered_hash_.new_();
 	public Xosp_fbrow_data_dir(Io_url url) {this.url = url;}
 	public Io_url Url() {return url;} private final Io_url url;
 	public int Count() {return hash.Count();}
-	public Xosp_fbrow_data_sub Get_at(int i) {return (Xosp_fbrow_data_sub)hash.FetchAt(i);}
+	public Xosp_fbrow_data_sub Get_at(int i) {return (Xosp_fbrow_data_sub)hash.Get_at(i);}
 	public void Add(Xosp_fbrow_data_sub itm) {hash.Add(itm.Url().NameAndExt(), itm);}
 	public static Xosp_fbrow_data_dir new_(IoItmDir owner) {
 		Xosp_fbrow_data_dir rv = new Xosp_fbrow_data_dir(owner.Url());
@@ -33,7 +33,7 @@ class Xosp_fbrow_data_dir {
 	private static void new_subs(Xosp_fbrow_data_dir owner, boolean dir, IoItmList itms) {
 		int len = itms.Count();
 		for (int i = 0; i < len; ++i) {
-			IoItm_base src = (IoItm_base)itms.FetchAt(i);
+			IoItm_base src = (IoItm_base)itms.Get_at(i);
 			Io_url src_url = src.Url();
 			if (String_.HasAtBgn(src_url.NameAndExt(), ".")) continue;	// ignore hidden "." files; NameAndExt() b/c ".ext" has NameOnly of ""; EX: "/dir/.hidden"
 			Xosp_fbrow_data_sub trg = null;

@@ -18,15 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.cfgs; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.wikis.*;
 public class Xoa_cfg_mgr implements GfoInvkAble {
-	public Xoa_cfg_mgr(Xoae_app app) {this.app = app;} private OrderedHash hash = OrderedHash_.new_bry_();
+	public Xoa_cfg_mgr(Xoae_app app) {this.app = app;} private Ordered_hash hash = Ordered_hash_.new_bry_();
 	public Xoae_app App() {return app;} private Xoae_app app;
 	public Xoa_cfg_itm Get_itm_or_null(byte[] grp_key, byte[] itm_key) {
-		Xoa_cfg_grp grp = (Xoa_cfg_grp)hash.Fetch(grp_key); 
+		Xoa_cfg_grp grp = (Xoa_cfg_grp)hash.Get_by(grp_key); 
 		return grp == null ? null : grp.Get_itm_or_null(itm_key);
 	}
 	public Xoa_cfg_itm Get_itm_or_make(byte[] grp_key, byte[] itm_key) {
 		Xoa_cfg_grp grp = null;
-		Object grp_obj = hash.Fetch(grp_key);
+		Object grp_obj = hash.Get_by(grp_key);
 		if (grp_obj == null) {
 			Xoa_cfg_grp_tid tid = Xoa_cfg_grp_tid.parse_(itm_key);
 			grp = new Xoa_cfg_grp(this, tid, grp_key);
@@ -36,9 +36,9 @@ public class Xoa_cfg_mgr implements GfoInvkAble {
 			grp = (Xoa_cfg_grp)grp_obj;
 		return grp.Get_itm_or_make(itm_key);
 	}
-	public void Set_by_app(String grp_key, String val)				{Set(Bry_.new_utf8_(grp_key), Xoa_cfg_grp_tid.Key_app_bry, val);}
-	public void Set_by_all(String grp_key, String val)				{Set(Bry_.new_utf8_(grp_key), Xoa_cfg_grp_tid.Key_all_bry, val);}
-	public void Set_by_type(String grp_key, byte tid, String val)	{Set(Bry_.new_utf8_(grp_key), Xow_domain_.Tid__get_bry(tid), val);}
+	public void Set_by_app(String grp_key, String val)				{Set(Bry_.new_u8(grp_key), Xoa_cfg_grp_tid.Key_app_bry, val);}
+	public void Set_by_all(String grp_key, String val)				{Set(Bry_.new_u8(grp_key), Xoa_cfg_grp_tid.Key_all_bry, val);}
+	public void Set_by_type(String grp_key, byte tid, String val)	{Set(Bry_.new_u8(grp_key), Xow_domain_type_.Get_type_as_bry(tid), val);}
 	private void Set(byte[] grp_key, byte[] tid_key, String val) {
 		Xoa_cfg_itm itm = Get_itm_or_make(grp_key, tid_key);
 		itm.Val_(val);
@@ -46,7 +46,7 @@ public class Xoa_cfg_mgr implements GfoInvkAble {
 	public void Init(Xowe_wiki wiki) {
 		int len = hash.Count();
 		for (int i = 0; i < len; i++) {
-			Xoa_cfg_grp grp = (Xoa_cfg_grp)hash.FetchAt(i);
+			Xoa_cfg_grp grp = (Xoa_cfg_grp)hash.Get_at(i);
 			Xoa_cfg_itm itm = grp.Get_itm_by_wiki(wiki.Domain_bry(), wiki.Domain_tid());
 			if (itm == null) continue;											// grp exists, but not for wiki; EX: rule exists for download.enabled and enwiki, but frwiki loaded
 			if (itm.Grp().Tid().Tid() == Xoa_cfg_grp_tid.Tid_app) continue;		// rule is for app; don't run for wiki init
@@ -88,14 +88,14 @@ public class Xoa_cfg_mgr implements GfoInvkAble {
 	public void Db_customized_n_() {
 		int len = hash.Count();
 		for (int i = 0; i < len; i++) {
-			Xoa_cfg_grp grp = (Xoa_cfg_grp)hash.FetchAt(i);
+			Xoa_cfg_grp grp = (Xoa_cfg_grp)hash.Get_at(i);
 			grp.Db_customized_n_();
 		}
 	}
 	public void Db_loaded_y_() {
 		int len = hash.Count();
 		for (int i = 0; i < len; i++) {
-			Xoa_cfg_grp grp = (Xoa_cfg_grp)hash.FetchAt(i);
+			Xoa_cfg_grp grp = (Xoa_cfg_grp)hash.Get_at(i);
 			grp.Db_loaded_y_();
 		}
 	}
@@ -109,7 +109,7 @@ public class Xoa_cfg_mgr implements GfoInvkAble {
 		int len = hash.Count();
 		db.Cfg_save_bgn(this);
 		for (int i = 0; i < len; i++) {
-			Xoa_cfg_grp grp = (Xoa_cfg_grp)hash.FetchAt(i);
+			Xoa_cfg_grp grp = (Xoa_cfg_grp)hash.Get_at(i);
 			grp.Db_save(db);
 		}
 		db.Cfg_save_end(this);
@@ -117,7 +117,7 @@ public class Xoa_cfg_mgr implements GfoInvkAble {
 	public void Clear() {
 		int len = hash.Count();
 		for (int i = 0; i < len; i++) {
-			Xoa_cfg_grp grp = (Xoa_cfg_grp)hash.FetchAt(i);
+			Xoa_cfg_grp grp = (Xoa_cfg_grp)hash.Get_at(i);
 			grp.Clear();
 		}
 		hash.Clear();

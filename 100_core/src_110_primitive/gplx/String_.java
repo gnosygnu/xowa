@@ -25,8 +25,8 @@ public class String_ implements GfoInvkAble {
 	public static final String Null = null, Empty = "", Null_mark = "<<NULL>>", Tab = "\t", Lf = "\n", CrLf = "\r\n";
 	public static String cast_(Object v) {return (String)v;}
 	public static String as_(Object obj) {return obj instanceof String ? (String)obj : null;}
-	public static String new_ascii_(byte[] v) {return v == null ? null : new_ascii_(v, 0, v.length);}
-	public static String new_ascii_(byte[] v, int bgn, int end) {
+	public static String new_a7(byte[] v) {return v == null ? null : new_a7(v, 0, v.length);}
+	public static String new_a7(byte[] v, int bgn, int end) {
 		try {
 			return v == null 
 				? null
@@ -34,9 +34,8 @@ public class String_ implements GfoInvkAble {
 		}
 		catch (Exception e) {throw Err_.err_(e, "unsupported encoding");}
 	}	
-	public static String new_utf8_(byte[] v)							{return v == null ? null : new_utf8_(v, 0, v.length);}
-	public static String new_utf8_mid_safe_(byte[] v, int bgn, int end)	{return v == null ? null : new_utf8_(v, bgn, end);}
-	public static String new_utf8_(byte[] v, int bgn, int end) {
+	public static String new_u8(byte[] v) {return v == null ? null : new_u8(v, 0, v.length);}
+	public static String new_u8(byte[] v, int bgn, int end) {
 		try {
 			return v == null
 				? null
@@ -44,10 +43,10 @@ public class String_ implements GfoInvkAble {
 		}
 		catch (Exception e) {throw Err_.err_(e, "unsupported encoding");}
 	}
-	public static String new_utf8_len_safe_(byte[] v, int bgn, int len)	{
+	public static String new_u8_by_len(byte[] v, int bgn, int len)	{
 		int v_len = v.length;
 		if (bgn + len > v_len) len = v_len - bgn;
-		return new_utf8_(v, bgn, bgn + len);
+		return new_u8(v, bgn, bgn + len);
 	}
 	public static String[] Ary_add(String[]... arys) {
 		if (arys == null) return String_.Ary_empty;
@@ -330,14 +329,14 @@ public class String_ implements GfoInvkAble {
 
 	public static String[] Ary(String... ary) {return ary;}
 	public static String[] Ary_wo_null(String... ary) {
-		ListAdp list = ListAdp_.new_();
+		List_adp list = List_adp_.new_();
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			String itm = ary[i];
 			if (itm == null) continue;
 			list.Add(itm);
 		}
-		return list.XtoStrAry();
+		return list.To_str_ary();
 	}
 	public static String AryXtoStr(String... ary) {
 		String_bldr sb = String_bldr_.new_();
@@ -348,7 +347,7 @@ public class String_ implements GfoInvkAble {
 	public static final String[] Ary_empty = new String[0];
 	public static String[] Split(String raw, char dlm) {return Split(raw, dlm, false);}
 	public static String[] Split(String raw, char dlm, boolean addEmptyIfDlmIsLast) {
-		ListAdp list = ListAdp_.new_(); String_bldr sb = String_bldr_.new_();
+		List_adp list = List_adp_.new_(); String_bldr sb = String_bldr_.new_();
 		int rawLen = String_.Len(raw); char c = '\0';
 		for (int i = 0; i < rawLen; i++) {
 			c = String_.CharAt(raw, i);
@@ -361,7 +360,7 @@ public class String_ implements GfoInvkAble {
 		}
 		if (sb.Count() > 0)
 			list.Add(sb.Xto_str_and_clear());
-		return list.XtoStrAry();
+		return list.To_str_ary();
 	}
 	public static String[] Split(String s, String separator) {return Split_do(s, separator, false);}
 	public static String[] SplitLines_crlf(String s) {return Split(s, Op_sys.Wnt.Nl_str());}
@@ -423,7 +422,7 @@ public class String_ implements GfoInvkAble {
 		if (String_.Eq(s, "")			// "".Split('a') return array with one member: ""
 			|| String_.Eq(spr, ""))		// "a".Split('\0') returns array with one member: "a"
 			return new String[] {s};
-		ListAdp list = ListAdp_.new_(); String_bldr sb = String_bldr_.new_();
+		List_adp list = List_adp_.new_(); String_bldr sb = String_bldr_.new_();
 		int i = 0, sprPos = 0; boolean sprMatched = false; char spr0 = CharAt(spr, 0);
 		int textLength = Len(s); int sprLength = Len(spr);
 		while (true) {
@@ -456,7 +455,7 @@ public class String_ implements GfoInvkAble {
 				i++;
 			}
 		}		
-		return (String[])list.Xto_ary(String.class);
+		return (String[])list.To_ary(String.class);
 	}
 	static String Mid_lang(String s, int bgn, int len) {return s.substring(bgn, bgn + len);}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
@@ -496,23 +495,23 @@ public class String_ implements GfoInvkAble {
 		int ary_len = ary.length;
 		String[] rv = new String[ary_len];
 		for (int i = 0; i < ary_len; i++)
-			rv[i] = String_.new_utf8_(ary[i]);
+			rv[i] = String_.new_u8(ary[i]);
 		return rv;
 	}
 	public static String [] Ary_filter(String[] src, String[] filter) {
-		HashAdp hash = HashAdp_.new_();
+		Hash_adp hash = Hash_adp_.new_();
 		int len = filter.length;
 		for (int i = 0; i < len; i++) {
 			String itm = filter[i];
-			hash.AddReplace(itm, itm);				
+			hash.Add_if_dupe_use_nth(itm, itm);				
 		}
-		ListAdp rv = ListAdp_.new_();
+		List_adp rv = List_adp_.new_();
 		len = src.length;
 		for (int i = 0; i < len; i++) {
 			String itm = src[i];
 			if (hash.Has(itm)) rv.Add(itm);
 		}
-		return rv.XtoStrAry();
+		return rv.To_str_ary();
 	}
 	public static String[] Ary_flatten(String[][] src_ary) {
 		int trg_len = 0;

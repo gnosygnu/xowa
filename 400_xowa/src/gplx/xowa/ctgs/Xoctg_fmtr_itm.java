@@ -24,7 +24,7 @@ abstract class Xoctg_fmtr_itm_base implements Xoctg_fmtr_itm {
 		href_parser = wiki.Appe().Href_parser();
 		html_itm = mgr.Html_itm();
 		html_itm_missing = mgr.Html_itm_missing();
-		history_mgr = wiki.Appe().User().History_mgr();
+		history_mgr = wiki.Appe().Usere().History_mgr();
 	}	protected Xowe_wiki wiki; Xol_lang lang; Xoctg_view_ctg ctg; protected int len; protected Xoh_href_parser href_parser; protected Bry_fmtr html_itm, html_itm_missing; protected Xoctg_view_grp list; protected Xow_msg_mgr msg_mgr;
 	Xou_history_mgr history_mgr;
 	public void Init_from_grp(byte[] ttl_char_0, int col_bgn) {this.ttl_char_0 = ttl_char_0; this.col_bgn = col_bgn;} private byte[] ttl_char_0; int col_bgn; int col_end;
@@ -116,6 +116,6 @@ class Xoctg_fmtr_itm_subc extends Xoctg_fmtr_itm_base {
 		if (val == 0) return;
 		if (bfr.Len() > 1) bfr.Add(Bld_contains_text_itm_dlm);	// NOTE: 1 b/c Paren_bgn is always added
 		bfr.Add(msg_mgr.Val_by_id_args(msg_id, val));
-	}	static final byte[] Bld_contains_text_itm_dlm = Bry_.new_ascii_(", "); 
+	}	static final byte[] Bld_contains_text_itm_dlm = Bry_.new_a7(", "); 
 	public static final Xoctg_fmtr_itm_subc _ = new Xoctg_fmtr_itm_subc(); Xoctg_fmtr_itm_subc() {}
 }

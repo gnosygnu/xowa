@@ -104,7 +104,7 @@ public class Xohd_abrv_mgr_tst {
 class Xohd_abrv_mgr_fxt {
 	private Xohd_abrv_mgr abrv_mgr;
 	private Bry_bfr bfr = Bry_bfr.reset_(255);
-	private ListAdp img_list = ListAdp_.new_();
+	private List_adp img_list = List_adp_.new_();
 	private Xowe_wiki wiki;
 	public Xog_page Hpg() {return hpg;} private Xog_page hpg = new Xog_page();
 	public void Clear() {
@@ -113,13 +113,13 @@ class Xohd_abrv_mgr_fxt {
 		abrv_mgr = new Xohd_abrv_mgr(Gfo_usr_dlg_.I, app.Fsys_mgr(), app.Utl__encoder_mgr().Fsys(), wiki.Domain_bry());
 	}
 	public void Clear_imgs() {img_list.Clear();}
-	public Xohd_abrv_mgr_fxt Init_body(String body) {hpg.Page_body_(Bry_.new_utf8_(body)); return this;}
+	public Xohd_abrv_mgr_fxt Init_body(String body) {hpg.Page_body_(Bry_.new_u8(body)); return this;}
 	public Xohd_abrv_mgr_fxt Init_data_gly(int uid, int box_max) {hpg.Gallery_itms().Add(uid, new Xohd_data_itm__gallery_mgr(uid, box_max)); return this;}
 	public Xohd_abrv_mgr_fxt Init_data_img_basic(String ttl, int html_uid, int html_w, int html_h) {
 		Xohd_data_itm__img img = new Xohd_data_itm__img();
-		img.Data_init_base(Bry_.new_utf8_(ttl), Xof_ext_.Id_png, Xop_lnki_type.Id_none, Xof_img_size.Null, Xof_img_size.Null, Xof_img_size.Upright_null
+		img.Data_init_base(Bry_.new_u8(ttl), Xop_lnki_type.Id_none, Xof_img_size.Upright_null, Xof_img_size.Null, Xof_img_size.Null
 			, Xof_lnki_time.Null, Xof_lnki_page.Null
-			, Xohd_data_itm__base.File_repo_id_commons, Bool_.N, html_w
+			, Xohd_data_itm__base.File_repo_id_commons, Xof_ext_.Id_png, Bool_.N, html_w
 			, html_uid, html_w, html_h
 			);
 		img_list.Add(img);
@@ -128,9 +128,9 @@ class Xohd_abrv_mgr_fxt {
 	public Xohd_abrv_mgr_fxt Init_data_img_gly(String ttl, int html_uid, int html_w, int html_h, int box_w, int img_w, int img_pad) {
 		Xohd_data_itm__gallery_itm img = new Xohd_data_itm__gallery_itm();
 		img.Data_init_gallery(box_w, img_w, img_pad);
-		img.Data_init_base(Bry_.new_utf8_(ttl), Xof_ext_.Id_png, Xop_lnki_type.Id_none, Xof_img_size.Null, Xof_img_size.Null, Xof_img_size.Upright_null
+		img.Data_init_base(Bry_.new_u8(ttl), Xop_lnki_type.Id_none, Xof_img_size.Upright_null, Xof_img_size.Null, Xof_img_size.Null
 			, Xof_lnki_time.Null, Xof_lnki_page.Null
-			, Xohd_data_itm__base.File_repo_id_commons, Bool_.N, html_w
+			, Xohd_data_itm__base.File_repo_id_commons, Xof_ext_.Id_png, Bool_.N, html_w
 			, html_uid, html_w, html_h
 			);
 		img_list.Add(img);
@@ -145,9 +145,9 @@ class Xohd_abrv_mgr_fxt {
 		return this;
 	}
 	public Xohd_abrv_mgr_fxt Test_html(String expd) {
-		if (img_list.Count() > 0) hpg.Img_itms_((Xohd_data_itm__base[])img_list.Xto_ary_and_clear(Xohd_data_itm__base.class));
+		if (img_list.Count() > 0) hpg.Img_itms_((Xohd_data_itm__base[])img_list.To_ary_and_clear(Xohd_data_itm__base.class));
 		byte[] actl = abrv_mgr.Parse(bfr, hpg);
-		Tfds.Eq_str_lines(expd, String_.new_utf8_(actl));
+		Tfds.Eq_str_lines(expd, String_.new_u8(actl));
 		return this;
 	}
 }

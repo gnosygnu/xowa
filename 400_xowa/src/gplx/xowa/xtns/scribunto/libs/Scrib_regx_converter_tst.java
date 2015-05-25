@@ -56,11 +56,11 @@ class Scrib_regx_converter_fxt {
 		}
 	}
 	public void Test_parse(String raw, String expd) {
-		under.Parse(Bry_.new_utf8_(raw), Scrib_regx_converter.Anchor_G);
+		under.Parse(Bry_.new_u8(raw), Scrib_regx_converter.Anchor_G);
 		Tfds.Eq(expd, under.Regx());
 	}
 	public void Test_replace(String text, String find, String replace, String expd) {
-		String regex_str = under.Parse(Bry_.new_utf8_(find), Scrib_regx_converter.Anchor_G);
+		String regex_str = under.Parse(Bry_.new_u8(find), Scrib_regx_converter.Anchor_G);
 		String actl = RegxAdp_.Replace(text, regex_str, replace);
 		Tfds.Eq(expd, actl);
 	}

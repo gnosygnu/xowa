@@ -20,7 +20,7 @@ import org.junit.*; import gplx.xowa.langs.*;
 public class Xow_wiki_abrv_tst {
 	@Before public void init() {fxt.Clear();} private Xow_wiki_abrv_fxt fxt = new Xow_wiki_abrv_fxt();
 	@Test  public void Parse() {
-		fxt.Parse("foundationwiki"			, Xol_lang_itm_.Id__intl	, Xow_wiki_abrv_.Tid_wikimediafoundation);
+		fxt.Parse("foundationwiki"			, Xol_lang_itm_.Id__intl	, Xow_wiki_abrv_.Tid_wmforg);
 		fxt.Parse("wikidatawiki"			, Xol_lang_itm_.Id__intl	, Xow_wiki_abrv_.Tid_wikidata);
 		fxt.Parse("mediawikiwiki"			, Xol_lang_itm_.Id__intl	, Xow_wiki_abrv_.Tid_mediawiki);
 		fxt.Parse("commonswiki"				, Xol_lang_itm_.Id__intl	, Xow_wiki_abrv_.Tid_commons);
@@ -43,7 +43,7 @@ class Xow_wiki_abrv_fxt {
 	private Xow_wiki_abrv abrv = new Xow_wiki_abrv();
 	public void Clear() {}
 	public void Parse(String raw, int expd_lang_id, byte expd_domain_tid) {
-		byte[] raw_bry = Bry_.new_ascii_(raw);
+		byte[] raw_bry = Bry_.new_a7(raw);
 		Xow_wiki_abrv_.parse_(abrv, raw_bry, 0, raw_bry.length);
 		Xol_lang_itm actl_lang_itm = abrv.Lang_itm();
 		Tfds.Eq(expd_lang_id	, actl_lang_itm == null ? Xol_lang_itm_.Id__unknown :  actl_lang_itm.Id());

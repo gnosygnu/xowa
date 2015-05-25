@@ -19,7 +19,7 @@ package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
 import gplx.ios.*; import gplx.dbs.*; import gplx.xowa.tdbs.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.bldrs.cmds.texts.tdbs.*;
 public class Xob_fxt {
 	public Xob_fxt Ctor_mem() {
-		Io_mgr._.InitEngine_mem();
+		Io_mgr.I.InitEngine_mem();
 		return Ctor(Io_url_.mem_dir_("mem/xowa/"));
 	}
 	public Xob_fxt Ctor(Io_url root_dir) {
@@ -44,16 +44,16 @@ public class Xob_fxt {
 		String text = String_.Concat_lines_nl_skip_last(expd);	// skipLast b/c if trailing line wanted, easier to pass in extra argument for ""
 		expd_list.Add(new Io_fil_chkr(url, text));
 		return this;
-	} ListAdp expd_list = ListAdp_.new_();
+	} List_adp expd_list = List_adp_.new_();
 	public Xob_fxt Fil_skip(Io_url... urls) {
 		for (int i = 0; i < urls.length; i++)
 			skip_list.Add(urls[i]);
 		return this;
-	} 	ListAdp skip_list = ListAdp_.new_();
+	} 	List_adp skip_list = List_adp_.new_();
 	public Xob_fxt doc_ary_(Xowd_page_itm... v) {doc_ary = v; return this;} private Xowd_page_itm[] doc_ary;
 	public Xowd_page_itm doc_wo_date_(int id, String title, String text) {return doc_(id, "2012-01-02 13:14", title, text);}
 	public Xowd_page_itm doc_(int id, String date, String title, String text) {
-		Xowd_page_itm rv = new Xowd_page_itm().Id_(id).Ttl_(Bry_.new_utf8_(title), wiki.Ns_mgr()).Text_(Bry_.new_utf8_(text));
+		Xowd_page_itm rv = new Xowd_page_itm().Id_(id).Ttl_(Bry_.new_u8(title), wiki.Ns_mgr()).Text_(Bry_.new_u8(text));
 		int[] modified_on = new int[7];
 		dateParser.Parse_iso8651_like(modified_on, date);
 		rv.Modified_on_(DateAdp_.seg_(modified_on));
@@ -62,7 +62,7 @@ public class Xob_fxt {
 	public Xob_fxt Run_ctg() {
 		Xobd_parser parser = new Xobd_parser();
 		gplx.xowa.bldrs.cmds.ctgs.Xob_ctg_v1_base ctg_wkr = new gplx.xowa.bldrs.cmds.ctgs.Xob_ctg_v1_txt().Ctor(bldr, wiki);
-		byte[] bry = Bry_.new_utf8_("[[Category:");
+		byte[] bry = Bry_.new_u8("[[Category:");
 		ctg_wkr.Wkr_hooks().Add(bry, bry);
 		parser.Wkr_add(ctg_wkr);
 		return Run(parser);
@@ -82,7 +82,7 @@ public class Xob_fxt {
 	}
 	private void tst_fils(Io_url[] ary) {
 		Io_fil[] actls = Get_actl(ary);
-		Io_fil_chkr[] expds = (Io_fil_chkr[])expd_list.Xto_ary(Io_fil_chkr.class);
+		Io_fil_chkr[] expds = (Io_fil_chkr[])expd_list.To_ary(Io_fil_chkr.class);
 		tst_mgr.Tst_ary("all", expds, actls);		
 	}
 	Io_fil[] Get_actl(Io_url[] ary) {
@@ -90,7 +90,7 @@ public class Xob_fxt {
 		Io_fil[] rv = new Io_fil[len];
 		for (int i = 0; i < len; i++) {
 			Io_url url = ary[i];
-			String data = Io_mgr._.LoadFilStr(url);
+			String data = Io_mgr.I.LoadFilStr(url);
 			rv[i] = new Io_fil(url, data);
 		}
 		return rv;
@@ -136,23 +136,23 @@ public class Xob_fxt {
 	}
 	private void Test_expd_files() {
 		if (expd_list.Count() > 0) {
-			Io_fil_chkr[] expd = (Io_fil_chkr[])expd_list.Xto_ary(Io_fil_chkr.class);
+			Io_fil_chkr[] expd = (Io_fil_chkr[])expd_list.To_ary(Io_fil_chkr.class);
 			Io_fil[] actl = wiki_();
 			tst_mgr.Tst_ary("all", expd, actl);
 		}
 	}
 	Io_fil[] wiki_() {
-		ListAdp rv = ListAdp_.new_();
+		List_adp rv = List_adp_.new_();
 		wiki_fil_add(rv, wiki.Tdb_fsys_mgr().Ns_dir());
 		wiki_fil_add(rv, wiki.Tdb_fsys_mgr().Site_dir());
 		rv.Sort();
-		return (Io_fil[])rv.Xto_ary(Io_fil.class);
+		return (Io_fil[])rv.To_ary(Io_fil.class);
 	}
-	private void wiki_fil_add(ListAdp list, Io_url root_dir) {
-		Io_url[] ary = Io_mgr._.QueryDir_args(root_dir).Recur_().ExecAsUrlAry();
+	private void wiki_fil_add(List_adp list, Io_url root_dir) {
+		Io_url[] ary = Io_mgr.I.QueryDir_args(root_dir).Recur_().ExecAsUrlAry();
 		for (int i = 0; i < ary.length; i++) {
 			Io_url url = ary[i]; 
-			Io_fil fil = new Io_fil(url, Io_mgr._.LoadFilStr_args(url).MissingIgnored_().Exec());
+			Io_fil fil = new Io_fil(url, Io_mgr.I.LoadFilStr_args(url).MissingIgnored_().Exec());
 			list.Add(fil);
 		}		
 	}

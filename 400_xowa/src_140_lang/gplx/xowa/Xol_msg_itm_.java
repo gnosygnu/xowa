@@ -252,7 +252,7 @@ public static final int
 , Id_xowa_wikidata_links_special = 230
 ;
 	public static final int Id__max = 231;
-	public static Xol_msg_itm new_(int id, String key, String val) {return new_(id, Bry_.new_utf8_(key), Bry_.new_utf8_(val));}
+	public static Xol_msg_itm new_(int id, String key, String val) {return new_(id, Bry_.new_u8(key), Bry_.new_u8(val));}
 	public static Xol_msg_itm new_(int id, byte[] key, byte[] val) {
 		Xol_msg_itm rv = new Xol_msg_itm(id, key);
 		update_val_(rv, val);

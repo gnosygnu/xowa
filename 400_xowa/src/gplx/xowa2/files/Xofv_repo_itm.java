@@ -27,9 +27,9 @@ public class Xofv_repo_itm {
 	public byte[] Dir_sub_orig() {return dir_sub_orig;} private final byte[] dir_sub_orig;
 	public byte[] Dir_sub_thumb() {return dir_sub_thumb;} private final byte[] dir_sub_thumb;
 	public static Xofv_repo_itm new_trg_fsys(byte tid, byte[] key, Io_url root) {
-		return new Xofv_repo_itm(tid, key, root.Info().DirSpr_byte(), Bry_.new_utf8_(root.Raw()), Dir_sub_orig_dflt, Dir_sub_thumb_dflt);
+		return new Xofv_repo_itm(tid, key, root.Info().DirSpr_byte(), Bry_.new_u8(root.Raw()), Dir_sub_orig_dflt, Dir_sub_thumb_dflt);
 	}
 	public static final byte Tid_val_comm = 0, Tid_val_wiki = 1;
-	private static final byte[] Dir_sub_orig_dflt = Bry_.new_ascii_("orig"), Dir_sub_thumb_dflt = Bry_.new_ascii_("thumb");
+	private static final byte[] Dir_sub_orig_dflt = Bry_.new_a7("orig"), Dir_sub_thumb_dflt = Bry_.new_a7("thumb");
 	public static final int Id_temp = 0;
 }

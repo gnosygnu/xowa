@@ -21,7 +21,7 @@ public class Xop_xnde_tag_lang {
 	public Xop_xnde_tag_lang(int lang_code_int, String name_str) {
 		lang_code = Int_obj_ref.new_(lang_code_int);
 		this.name_str = name_str;
-		this.name_bry = Bry_.new_utf8_(name_str);
+		this.name_bry = Bry_.new_u8(name_str);
 		this.xtnEndTag_tmp = Bry_.Add(Xop_xnde_tag_.XtnEndTag_bgn, name_bry);
 	}
 	public Int_obj_ref Lang_code() {return lang_code;} private Int_obj_ref lang_code;

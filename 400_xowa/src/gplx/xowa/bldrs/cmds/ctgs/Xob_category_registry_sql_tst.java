@@ -47,13 +47,13 @@ class Xob_category_registry_sql_fxt {
 	}
 	public void Test_ids(int[] expd) {
 		Io_url rslts_dir = Xob_category_registry_sql.Tmp_dir(wiki);
-		String rslts_txt = Io_mgr._.LoadFilStr(Io_mgr._.QueryDir_fils(rslts_dir)[0]);
+		String rslts_txt = Io_mgr.I.LoadFilStr(Io_mgr.I.QueryDir_fils(rslts_dir)[0]);
 		int[] actl = Parse_rslts_txt(rslts_txt);
 		Tfds.Eq_ary(expd, actl);
 	}
 	int[] Parse_rslts_txt(String rslts_txt) {
 		String[] lines = String_.SplitLines_nl(rslts_txt);
-		ListAdp list = ListAdp_.new_();
+		List_adp list = List_adp_.new_();
 		int len = lines.length;
 		for (int i = 0; i < len; i++) {
 			String line = lines[i];
@@ -61,6 +61,6 @@ class Xob_category_registry_sql_fxt {
 			String[] flds = String_.Split(line, '|');
 			list.Add(Base85_utl.XtoIntByStr(flds[1]));
 		}
-		return (int[])list.Xto_ary_and_clear(int.class);
+		return (int[])list.To_ary_and_clear(int.class);
 	}
 }

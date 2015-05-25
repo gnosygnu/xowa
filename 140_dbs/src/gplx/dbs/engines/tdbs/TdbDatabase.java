@@ -28,7 +28,7 @@ public class TdbDatabase {
 		return rv;
 	}
 	@gplx.Internal protected TdbTable MakeTbl(String name, int fileId) {
-		TdbFile file = files.FetchOrFail(fileId);
+		TdbFile file = files.Get_by_or_fail(fileId);
 		TdbTable rv = TdbTable.new_(TableId_next++, name, file);
 		tables.Add(rv);
 		return rv;

@@ -61,8 +61,8 @@ public class Xob_wdata_qid_base_tst {
 		site_tbl.Insert(1, "en.wikipedia.org");
 		site_tbl.Insert(2, "fr.wikipedia.org");
 		Xowmf_ns_tbl ns_tbl = new Xowmf_ns_tbl(conn);
-		ns_tbl.Insert(1, Xow_ns_.Id_help, Xow_ns_case_.Id_1st, Bool_.Y, Bool_.N, Bry_.new_ascii_("Help"), Bry_.Empty);
-		ns_tbl.Insert(2, Xow_ns_.Id_help, Xow_ns_case_.Id_1st, Bool_.Y, Bool_.N, Bry_.new_ascii_("Aide"), Bry_.Empty);
+		ns_tbl.Insert(1, Xow_ns_.Id_help, Xow_ns_case_.Id_1st, Bool_.Y, Bool_.N, Bry_.new_a7("Help"), Bry_.Empty);
+		ns_tbl.Insert(2, Xow_ns_.Id_help, Xow_ns_case_.Id_1st, Bool_.Y, Bool_.N, Bry_.new_a7("Aide"), Bry_.Empty);
 		// run test
 		fxt.doc_ary_
 		(	fxt.doc_wo_date_(1, "11", Xob_wdata_pid_base_tst.json_("q1", "links", String_.Ary("enwiki", "Help:Q1_en", "frwiki", "Aide:Q1_fr")))

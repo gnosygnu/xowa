@@ -40,7 +40,7 @@ public class Xoa_gfs_mgr implements GfoInvkAble, GfoInvkRootWkr {
 		try {Run_url(url);}
 		catch (Exception e) {				// gfs is corrupt; may happen if multiple XOWAs opened, and "Close all" chosen in OS; DATE:2014-07-01
 			if	(!String_.Eq(type, "xowa"))			// check if user.gfs
-				Io_mgr._.MoveFil(url, url.GenNewNameOnly(url.NameOnly() + "-" + DateAdp_.Now().XtoStr_fmt_yyyyMMdd_HHmmss()));	// move file
+				Io_mgr.I.MoveFil(url, url.GenNewNameOnly(url.NameOnly() + "-" + DateAdp_.Now().XtoStr_fmt_yyyyMMdd_HHmmss()));	// move file
 			Gfo_usr_dlg_.I.Warn_many("", "", "invalid gfs; obsoleting: src=~{0} err=~{1}", url.Raw(), Err_.Message_gplx(e));
 		}
 	}
@@ -51,7 +51,7 @@ public class Xoa_gfs_mgr implements GfoInvkAble, GfoInvkRootWkr {
 		Gfo_usr_dlg_.I.Log_wkr().Log_to_session_fmt("gfs.done: ~{0}", url.Raw());
 	}
 	public void Run_url_for(GfoInvkAble invk, Io_url url) {
-		String raw = Io_mgr._.LoadFilStr_args(url).MissingIgnored_().Exec(); if (String_.Len_eq_0(raw)) return;
+		String raw = Io_mgr.I.LoadFilStr_args(url).MissingIgnored_().Exec(); if (String_.Len_eq_0(raw)) return;
 		Run_str_for(invk, raw);
 	}
 	public Object Run_str(String raw) {return Run_str_for(GfsCore._.Root(), raw);}
@@ -99,10 +99,10 @@ public class Xoa_gfs_mgr implements GfoInvkAble, GfoInvkRootWkr {
 	public static void Msg_parser_init() {
 		GfsCore._.MsgParser_(gplx.gfs.Gfs_msg_bldr._);
 	}
-	public static byte[] Cfg_save_escape(String v) {return Cfg_save_escape(Bry_.new_utf8_(v));}
+	public static byte[] Cfg_save_escape(String v) {return Cfg_save_escape(Bry_.new_u8(v));}
 	public static byte[] Cfg_save_escape(byte[] v) {
 		return Bry_finder.Find_fwd(v, Byte_ascii.Apos) == Bry_.NotFound ? v : Bry_.Replace(v, Bry_apos_1, Bry_apos_2);
-	}	static final byte[] Bry_apos_1 = Bry_.new_ascii_("'"), Bry_apos_2 = Bry_.new_ascii_("''");
+	}	static final byte[] Bry_apos_1 = Bry_.new_a7("'"), Bry_apos_2 = Bry_.new_a7("''");
 	public static String Build_code(String... ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
@@ -117,9 +117,9 @@ public class Xoa_gfs_mgr implements GfoInvkAble, GfoInvkRootWkr {
 class Xoa_gfs_mgr_ {
 	public static void Cfg_os_assert(Io_url orig_url) {
 		Io_url dflt_url = orig_url.GenNewNameOnly(orig_url.NameOnly() + "_default");
-		if (!Io_mgr._.ExistsFil(dflt_url)) return;	// no dflt
-		if (!Io_mgr._.ExistsFil(orig_url)) {
-			Io_mgr._.CopyFil(dflt_url, orig_url, true);
+		if (!Io_mgr.I.ExistsFil(dflt_url)) return;	// no dflt
+		if (!Io_mgr.I.ExistsFil(orig_url)) {
+			Io_mgr.I.CopyFil(dflt_url, orig_url, true);
 			Gfo_usr_dlg_.I.Log_many("", "", "xowa_cfg_os generated; url=~{0}", orig_url.Raw());
 		}
 	}

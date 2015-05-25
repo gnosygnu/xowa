@@ -27,7 +27,7 @@ public class Xoa_shell implements GfoInvkAble {
 		return this;
 	}
 	private String Fetch_page(GfoMsg m) {
-		return String_.new_utf8_(app.Gui_mgr().Browser_win().App__retrieve_by_url(m.ReadStr("url"), m.ReadStrOr("output_type", "html")));
+		return String_.new_u8(app.Gui_mgr().Browser_win().App__retrieve_by_url(m.ReadStr("url"), m.ReadStrOr("output_type", "html")));
 	}
 	private static final String Invk_fetch_page = "fetch_page"
 	, Invk_chars_per_line_max_ = "chars_per_line_max_"

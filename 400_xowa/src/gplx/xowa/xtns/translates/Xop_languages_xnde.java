@@ -24,7 +24,7 @@ public class Xop_languages_xnde implements Xox_xnde {
 		this.xnde = xnde;
 		langs = Find_lang_pages(ctx, wiki);
 	}
-	public ListAdp Langs() {return langs;} private ListAdp langs;
+	public List_adp Langs() {return langs;} private List_adp langs;
 	public Xoa_ttl Root_ttl() {return root_ttl;} private Xoa_ttl root_ttl;
 	private Xoa_ttl Root_ttl_of(Xowe_wiki wiki, Xoa_ttl ttl) {
 		byte[] page_bry = ttl.Page_db();
@@ -33,20 +33,20 @@ public class Xop_languages_xnde implements Xox_xnde {
 		byte[] root_bry = Bry_.Mid(page_bry, 0, slash_pos);
 		return Xoa_ttl.parse_(wiki, ttl.Ns().Id(), root_bry);
 	}
-	private ListAdp Find_lang_pages(Xop_ctx ctx, Xowe_wiki wiki) {
+	private List_adp Find_lang_pages(Xop_ctx ctx, Xowe_wiki wiki) {
 		this.root_ttl = Root_ttl_of(wiki, ctx.Cur_page().Ttl());
-		ListAdp rslts = ListAdp_.new_(); 
+		List_adp rslts = List_adp_.new_(); 
 		Int_obj_ref rslt_count = Int_obj_ref.new_(0);
 		Xow_ns page_ns = root_ttl.Ns();
 		wiki.Db_mgr().Load_mgr().Load_ttls_for_all_pages(Cancelable_.Never, rslts, null, null, rslt_count, page_ns, root_ttl.Page_db(), Int_.MaxValue, 0, Int_.MaxValue, true, false);
 		int len = rslt_count.Val();
-		if (len == 0) return ListAdp_.Null;				// no lang pages; return;
-		ListAdp rv = ListAdp_.new_();
+		if (len == 0) return List_adp_.Noop;				// no lang pages; return;
+		List_adp rv = List_adp_.new_();
 		byte[] root_ttl_bry = root_ttl.Page_db();		// get root_ttl_bry; do not use ns
 		int lang_bgn = root_ttl_bry.length + 1;			// lang starts after /; EX: "Page" will have subpage of "Page/fr" and lang_bgn of 5
 		boolean english_needed = true;
 		for (int i = 0; i < len; i++) {
-			Xowd_page_itm page = (Xowd_page_itm)rslts.FetchAt(i);
+			Xowd_page_itm page = (Xowd_page_itm)rslts.Get_at(i);
 			byte[] page_ttl_bry = page.Ttl_page_db();
 			int page_ttl_bry_len = page_ttl_bry.length;
 			if 		(Bry_.Eq(root_ttl_bry, page_ttl_bry)) continue; 	// ignore self; EX: "page"
@@ -61,10 +61,10 @@ public class Xop_languages_xnde implements Xox_xnde {
 				rv.Add(lang_itm);
 			}
 		}
-		if (rv.Count() == 0) return ListAdp_.Null;	// no lang items; handles situations where just "Page" is returned
+		if (rv.Count() == 0) return List_adp_.Noop;	// no lang items; handles situations where just "Page" is returned
 		if (english_needed)	// english not found; always add; handles situations wherein Page/fr and Page/de added, but not Page/en
 			rv.Add(Xol_lang_itm_.Get_by_key(Xol_lang_.Key_en));
-		rv.SortBy(Xol_lang_itm_.Comparer_key);
+		rv.Sort_by(Xol_lang_itm_.Comparer_key);
 		return rv;
 	}
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
@@ -100,19 +100,19 @@ public class Xop_languages_xnde implements Xox_xnde {
 	// "<img src=\"//bits.wikimedia.org/static-1.22wmf9/extensions/Translate/res/images/prog-1.png\" alt=\"~{img_alt}\" title=\"~{img_title}\" width=\"9\" height=\"9\" />&#160;•&#160;‎"
 }
 class Xop_languages_fmtr implements Bry_fmtr_arg {
-	public void Init(ListAdp langs, Xowe_wiki wiki, Xoa_ttl root_ttl, byte[] cur_lang) {
+	public void Init(List_adp langs, Xowe_wiki wiki, Xoa_ttl root_ttl, byte[] cur_lang) {
 		this.langs = langs;
 		this.wiki = wiki;
 		this.root_ttl = root_ttl;
 		this.cur_lang = cur_lang;
-	}	private ListAdp langs; private Xowe_wiki wiki; private Xoa_ttl root_ttl; private byte[] cur_lang;
+	}	private List_adp langs; private Xowe_wiki wiki; private Xoa_ttl root_ttl; private byte[] cur_lang;
 	public void XferAry(Bry_bfr bfr, int idx) {
 		int len = langs.Count();
 		Xoh_href_parser parser = wiki.Appe().Href_parser();
 		int ns_id = root_ttl.Ns().Id();
 		byte[] root_ttl_bry = root_ttl.Page_db();	// NOTE: do not use .Full(); ns will be added in Xoa_ttl.parse below
 		for (int i = 0; i < len; i++) {
-			Xol_lang_itm lang = (Xol_lang_itm)langs.FetchAt(i);
+			Xol_lang_itm lang = (Xol_lang_itm)langs.Get_at(i);
 			byte[] lang_key = lang.Key();
 			boolean lang_is_en = Bry_.Eq(lang_key, Xol_lang_.Key_en);
 			byte[] lang_ttl_bry = lang_is_en ? root_ttl_bry : Bry_.Add_w_dlm(Xoa_ttl.Subpage_spr, root_ttl_bry, lang_key);

@@ -22,7 +22,7 @@ public class Criteria_eq implements Criteria {
 	public boolean			Negated()	{return negated;} private final boolean negated;
 	public Object		Val()		{return val;} private Object val;
 	public void			Val_as_obj_(Object v) {this.val = v;}
-	public void			Val_from_args(HashAdp args) {throw Err_.not_implemented_();}
+	public void			Val_from_args(Hash_adp args) {throw Err_.not_implemented_();}
 	public boolean Matches(Object comp) {
 		Class<?> val_type = ClassAdp_.ClassOf_obj(val);
 		if (!ClassAdp_.Eq_typeSafe(comp, val_type)) throw Err_.type_mismatch_(val_type, comp);

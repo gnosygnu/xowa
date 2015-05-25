@@ -27,7 +27,7 @@ public class DsvDataWtr extends DataWtr_base implements DataWtr {
 	@Override public void WriteNodeBgn(String name)				{WriteTableBgn(name, GfoFldList_.Null);}
 	public void WriteTableBgn(String name, GfoFldList flds) {
 		for (int i = 0; i < layout.HeaderList().Count(); i++) {
-			DsvHeaderItm data = layout.HeaderList().FetchAt(i);
+			DsvHeaderItm data = layout.HeaderList().Get_at(i);
 			int id = data.Id();				
 			if		(id == DsvHeaderItm.Id_TableName)	WriteTableName(name);
 			else if (id == DsvHeaderItm.Id_LeafNames)	WriteMeta(flds, true, sym.FldNamesSym());
@@ -46,7 +46,7 @@ public class DsvDataWtr extends DataWtr_base implements DataWtr {
 	}
 	void WriteMeta(GfoFldList flds, boolean isName, String cmd) {
 		for (int i = 0; i < flds.Count(); i++) {
-			GfoFld fld = flds.FetchAt(i);
+			GfoFld fld = flds.Get_at(i);
 			String val = isName ? fld.Key(): fld.Type().Key();
 			sb.WriteFld(val);
 		}

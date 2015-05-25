@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 import gplx.gfui.*; import gplx.xowa.cfgs2.*; import gplx.xowa.apis.xowa.gui.browsers.*; import gplx.xowa.specials.*;
 public class Xog_tab_mgr implements GfoEvObj {
-	private OrderedHash tab_regy = OrderedHash_.new_(); private int tab_uid = 0;
+	private Ordered_hash tab_regy = Ordered_hash_.new_(); private int tab_uid = 0;
 	public Xog_tab_mgr(Xog_win_itm win) {
 		this.win = win;
 		ev_mgr = GfoEvMgr.new_(this);
@@ -71,11 +71,11 @@ public class Xog_tab_mgr implements GfoEvObj {
 	}
 	public int Tabs_len() {return tab_regy.Count();}
 	public Xog_tab_itm Tabs_new_init(Xowe_wiki wiki, Xoae_page page) {return this.Tabs_new(true, true, wiki, page);}
-	public Xog_tab_itm Tabs_get_at(int i) {return (Xog_tab_itm)tab_regy.FetchAt(i);}
+	public Xog_tab_itm Tabs_get_at(int i) {return (Xog_tab_itm)tab_regy.Get_at(i);}
 	public Xog_tab_itm Tabs_new_dflt() {return Tabs_new_dflt(false);}
 	public Xog_tab_itm Tabs_new_dflt(boolean focus) {
 		boolean active_tab_is_null = this.Active_tab_is_null();
-		Xowe_wiki cur_wiki = active_tab_is_null ? win.App().User().Wiki() : active_tab.Wiki();
+		Xowe_wiki cur_wiki = active_tab_is_null ? win.App().Usere().Wiki() : active_tab.Wiki();
 		Xoa_ttl ttl = Xoa_ttl.parse_(cur_wiki, Xows_special_meta_.Itm__default_tab.Ttl_bry());
 		Xoa_url url = Xoa_url_parser.Parse_from_url_bar(win.App(), cur_wiki, ttl.Full_db_as_str());
 		Xog_tab_itm rv = Tabs_new(focus, active_tab_is_null, cur_wiki, Xoae_page.new_(cur_wiki, ttl));
@@ -153,11 +153,11 @@ public class Xog_tab_mgr implements GfoEvObj {
 	}
 	public void Tabs_close_undo() {
 		if (closed_undo_list.Count() == 0) return;
-		String url = (String)ListAdp_.Pop(closed_undo_list);
+		String url = (String)List_adp_.Pop(closed_undo_list);
 		Tabs_new_dflt(true);
 		win.Page__navigate_by_url_bar(url);
 	}
-	private ListAdp closed_undo_list = ListAdp_.new_();
+	private List_adp closed_undo_list = List_adp_.new_();
 	private void Tabs_closed(String key) {
 		Xog_tab_itm itm = Tabs_get_by_key_or_warn(key); if (itm == null) return;
 		itm.Html_box().Html_dispose();
@@ -172,11 +172,11 @@ public class Xog_tab_mgr implements GfoEvObj {
 		Tabs_hide_if_one_chk();
 	}
 	private Xog_tab_itm Tabs_get_by_key_or_warn(String key) {
-		Xog_tab_itm rv = (Xog_tab_itm)tab_regy.Fetch(key); if (rv == null) win.App().Usr_dlg().Warn_many("", "", "tab.selected could not find tab; key={0}", key);
+		Xog_tab_itm rv = (Xog_tab_itm)tab_regy.Get_by(key); if (rv == null) win.App().Usr_dlg().Warn_many("", "", "tab.selected could not find tab; key={0}", key);
 		return rv;
 	}
 	private Xog_tab_itm Tabs_get_by_idx_or_warn(int idx) {
-		Xog_tab_itm rv = (Xog_tab_itm)tab_regy.FetchAt(idx); if (rv == null) win.App().Usr_dlg().Warn_many("", "", "tab.selected could not find tab; idx={0}", idx);
+		Xog_tab_itm rv = (Xog_tab_itm)tab_regy.Get_at(idx); if (rv == null) win.App().Usr_dlg().Warn_many("", "", "tab.selected could not find tab; idx={0}", idx);
 		return rv;
 	}
 	private void Tabs_recalc_idx() {

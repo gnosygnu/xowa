@@ -19,7 +19,7 @@ package gplx;
 public class JarAdp_ {
 	public static DateAdp ModifiedTime_type(Class<?> type) {if (type == null) throw Err_.null_("type");
 		Io_url url = Url_type(type);
-		return Io_mgr._.QueryFil(url).ModifiedTime();
+		return Io_mgr.I.QueryFil(url).ModifiedTime();
 	}
 	public static Io_url Url_type(Class<?> type) {if (type == null) throw Err_.null_("type");
 				String codeBase = type.getProtectionDomain().getCodeSource().getLocation().getPath();

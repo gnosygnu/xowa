@@ -79,7 +79,7 @@ class SqlCmd_quote_end implements GfmlBldrCmd {
 		String_bldr sb = String_bldr_.new_();
 		GfmlObjList list = bldr.CurFrame().WaitingTkns();
 		for (int i = 0; i < list.Count(); i++) {
-			GfmlTkn pnd = (GfmlTkn)list.FetchAt(i);
+			GfmlTkn pnd = (GfmlTkn)list.Get_at(i);
 			sb.Add(pnd.Val());
 		}
 		//Int_.Xto_str(bldr.CurNdeFrame().Nde().SubTkns().length)

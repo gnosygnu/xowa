@@ -17,27 +17,27 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public class Gfo_cache_mgr {
-	private OrderedHash hash = OrderedHash_.new_bry_();
-	private OrderedHash recent = OrderedHash_.new_bry_();
+	private Ordered_hash hash = Ordered_hash_.new_bry_();
+	private Ordered_hash recent = Ordered_hash_.new_bry_();
 	public int Max_size() {return max_size;} public Gfo_cache_mgr Max_size_(int v) {max_size = v; return this;} private int max_size;
 	public int Reduce_by() {return reduce_by;} public Gfo_cache_mgr Reduce_by_(int v) {reduce_by = v; return this;} private int reduce_by;
 	public int Cur_size() {return cur_size;} private int cur_size;
 	public int Count() {return hash.Count();}
 	public void Clear() {hash.Clear(); recent.Clear(); cur_size = 0;}
 	@gplx.Internal protected Object Get_at(int i) {
-		Gfo_cache_itm rv = (Gfo_cache_itm)hash.FetchAt(i);
+		Gfo_cache_itm rv = (Gfo_cache_itm)hash.Get_at(i);
 		return rv.Val();
 	}
 	public Object Get_by_key(byte[] key) {
-		Object o = hash.Fetch(key); if (o == null) return null;
+		Object o = hash.Get_by(key); if (o == null) return null;
 		Gfo_cache_itm rv = (Gfo_cache_itm)o;
 		rv.Timestamp_update();
-		Object recent_itm = recent.Fetch(key);
+		Object recent_itm = recent.Get_by(key);
 		if (recent_itm == null) recent.Add(key, rv);
 		return rv.Val();
 	}
 	public void Del(byte[] key) {
-		Object o = hash.Fetch(key); if (o == null) return;
+		Object o = hash.Get_by(key); if (o == null) return;
 		Gfo_cache_itm itm = (Gfo_cache_itm)o;
 		cur_size -= itm.Size();
 		hash.Del(itm.Key());
@@ -46,7 +46,7 @@ public class Gfo_cache_mgr {
 	public void Add_replace(byte[] key, RlsAble val, int size) {
 //			Del(key);
 //			Add(key, val, size);
-		Object o = hash.Fetch(key);
+		Object o = hash.Get_by(key);
 		if (o == null)
 			Add(key, val, size);
 		else {
@@ -67,7 +67,7 @@ public class Gfo_cache_mgr {
 //			ConsoleAdp._.WriteLine("reducing");
 		int len = recent.Count();
 		for (int i = 0; i < len; i++) {
-			Gfo_cache_itm itm = (Gfo_cache_itm)recent.FetchAt(i);
+			Gfo_cache_itm itm = (Gfo_cache_itm)recent.Get_at(i);
 			itm.Rls();	// releases root
 		}
 		recent.Clear();
@@ -76,10 +76,10 @@ public class Gfo_cache_mgr {
 		ConsoleAdp._.WriteLine("compacting:");			
 //			hash.Sort();
 //			int len = hash.Count();
-//			ListAdp deleted = ListAdp_.new_();
+//			List_adp deleted = List_adp_.new_();
 //			int deleted_size = 0, deleted_count = 0;
 //			for (int i = 0; i < len; i++) {
-//				Gfo_cache_itm itm = (Gfo_cache_itm)hash.FetchAt(i);
+//				Gfo_cache_itm itm = (Gfo_cache_itm)hash.Get_at(i);
 //				int new_deleted_size = deleted_size + 1;//itm.Size();
 //				if (new_deleted_size > 4000 && deleted_count > 0) break;
 //				deleted.Add(itm);
@@ -88,7 +88,7 @@ public class Gfo_cache_mgr {
 //			}
 //			len = deleted.Count();
 //			for (int i = 0; i < len; i++) {
-//				Gfo_cache_itm itm = (Gfo_cache_itm)deleted.FetchAt(i);
+//				Gfo_cache_itm itm = (Gfo_cache_itm)deleted.Get_at(i);
 //				cur_size --;
 //				hash.Del(bry_ref.Val_(itm.Key()));
 //				itm.Rls();
@@ -97,7 +97,7 @@ public class Gfo_cache_mgr {
 
 		int len = hash.Count();
 		for (int i = 0; i < len; i++) {
-			Gfo_cache_itm itm = (Gfo_cache_itm)hash.FetchAt(i);
+			Gfo_cache_itm itm = (Gfo_cache_itm)hash.Get_at(i);
 //				hash.Del(bry_ref.Val_(itm.Key()));
 			itm.Rls();
 		}

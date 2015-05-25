@@ -63,7 +63,7 @@ public class Xop_xowa_cmd_tst {
 	}
 //		@Test  public void Wiki_list_fmtrs() {
 //			fxt.Wiki().Sys_cfg().Xowa_cmd_enabled_(true);
-//			fxt.App().Setup_mgr().Maint_mgr().Wiki_mgr().Add(Bry_.new_ascii_("en.wikipedia.org"));
+//			fxt.App().Setup_mgr().Maint_mgr().Wiki_mgr().Add(Bry_.new_a7("en.wikipedia.org"));
 //			fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 //			(	"{|"
 //			,	"<xowa_cmd>"

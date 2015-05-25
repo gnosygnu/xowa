@@ -40,7 +40,7 @@ class Ws_tkn implements Expr_tkn {
 class Paren_bgn_tkn implements Expr_tkn, Func_tkn {
 	public int Tid() {return Expr_tkn_.Tid_paren_lhs;}
 	public boolean Func_is_const() {return false;}
-	public byte[] Val_ary() {return val_ary;} private byte[] val_ary = Bry_.new_utf8_(val_str);
+	public byte[] Val_ary() {return val_ary;} private byte[] val_ary = Bry_.new_u8(val_str);
 	public String Val_str() {return val_str;} static final String val_str = "(";
 	public int ArgCount() {return 0;}
 	public int Precedence() {return -1;}
@@ -50,14 +50,14 @@ class Paren_bgn_tkn implements Expr_tkn, Func_tkn {
 }
 class Paren_end_tkn implements Expr_tkn {
 	public int Tid() {return Expr_tkn_.Tid_paren_rhs;}
-	public byte[] Val_ary() {return val_ary;} private byte[] val_ary = Bry_.new_utf8_(val_str);
+	public byte[] Val_ary() {return val_ary;} private byte[] val_ary = Bry_.new_u8(val_str);
 	public String Val_str() {return val_str;} static final String val_str = ")";
 	public static Paren_end_tkn _ = new Paren_end_tkn(); Paren_end_tkn() {}
 }
 class Num_tkn implements Expr_tkn {
 	public int Tid() {return Expr_tkn_.Tid_number;}		
 	public byte[] Val_ary()	{return val_ary;} private byte[] val_ary;
-	public String Val_str()	{return String_.new_utf8_(val_ary);}
+	public String Val_str()	{return String_.new_u8(val_ary);}
 	public Num_tkn(int val_int) {
 		this.val_int = val_int;
 		this.val_ary = new byte[] {Byte_.By_int(val_int + Byte_ascii.Num_0)};
@@ -66,7 +66,7 @@ class Num_tkn implements Expr_tkn {
 class Dot_tkn implements Expr_tkn {
 	public int Tid() {return Expr_tkn_.Tid_number;}		
 	public byte[] Val_ary()	{return Val_Ary;} static final byte[] Val_Ary = new byte[] {Byte_ascii.Dot};
-	public String Val_str()	{return String_.new_utf8_(Val_Ary);}
+	public String Val_str()	{return String_.new_u8(Val_Ary);}
 	public Dot_tkn() {}
 }
 class Val_stack {
@@ -115,9 +115,9 @@ abstract class Func_tkn_base implements Func_tkn {
 	public abstract int Precedence();
 	public abstract int ArgCount();
 	@gplx.Virtual public boolean Func_is_const() {return false;}
-	public void Ctor(String v) {val_ary = Bry_.new_utf8_(v);}
+	public void Ctor(String v) {val_ary = Bry_.new_u8(v);}
 	public byte[] Val_ary()	{return val_ary;} private byte[] val_ary;
-	public String Val_str()	{return String_.new_utf8_(Val_ary());}
+	public String Val_str()	{return String_.new_u8(Val_ary());}
 	@gplx.Virtual public Func_tkn GetAlt() {return this;}
 	public boolean Calc(Xop_ctx ctx, Pfunc_expr_shunter shunter, Val_stack val_stack) {
 		if (val_stack.Len() < this.ArgCount()) {shunter.Err_set(ctx, Xol_msg_itm_.Id_pfunc_expr_missing_operand, Val_ary()); return false;}

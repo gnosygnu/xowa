@@ -49,47 +49,47 @@ class Xowmf_general_tbl implements RlsAble {
 		finally {rdr.Rls();}
 	}
 }
-//	class Xowmf_general_row {
-//public String Main_page() {return main_page;} private final String main_page;
-//public String Base_url() {return base_url;} private final String base_url;
-//public String Site_name() {return site_name;} private final String site_name;
-//public String Logo() {return logo;} private final String logo;
-//public String Generator() {return generator;} private final String generator;
-//public String Php_version() {return php_version;} private final String php_version;
-//public String Php_sapi() {return php_sapi;} private final String php_sapi;
-//public String Hhvm_version() {return hhvm_version;} private final String hhvm_version;
-//public String Db_type() {return db_type;} private final String db_type;
-//public String Db_version() {return db_version;} private final String db_version;
-//public String Image_whitelist_enabled() {return image_whitelist_enabled;} private final String image_whitelist_enabled;
-//public String Lang_conversion() {return lang_conversion;} private final String lang_conversion;
-//public String Title_conversion() {return title_conversion;} private final String title_conversion;
-//public String Link_prefix_charset() {return link_prefix_charset;} private final String link_prefix_charset;
-//public String Link_prefix() {return link_prefix;} private final String link_prefix;
-//public String Link_trail() {return link_trail;} private final String link_trail;
-//public String Legal_title_chars() {return legal_title_chars;} private final String legal_title_chars;
-//public String Git_hash() {return git_hash;} private final String git_hash;
-//public String Git_branch() {return git_branch;} private final String git_branch;
-//public String Case_type() {return case_type;} private final String case_type;
-//public String Lang() {return lang;} private final String lang;
-//public String Fallback() {return fallback;} private final String fallback;
-//public String Fallback_8bit_encoding() {return fallback_8bit_encoding;} private final String fallback_8bit_encoding;
-//public String Write_api() {return write_api;} private final String write_api;
-//public String Time_zone() {return time_zone;} private final String time_zone;
-//public String Time_offset() {return time_offset;} private final String time_offset;
-//public String Article_path() {return article_path;} private final String article_path;
-//public String Script_path() {return script_path;} private final String script_path;
-//public String Script() {return script;} private final String script;
-//public String Variant_article_path() {return variant_article_path;} private final String variant_article_path;
-//public String Server() {return server;} private final String server;
-//public String Server_name() {return server_name;} private final String server_name;
-//public String Wiki_id() {return wiki_id;} private final String wiki_id;
-//public String Time() {return time;} private final String time;
-//public String Miser_mode() {return miser_mode;} private final String miser_mode;
-//public String Max_upload_size() {return max_upload_size;} private final String max_upload_size;
-//public String Thumb_limits() {return thumb_limits;} private final String thumb_limits;
-//public String Image_limits() {return image_limits;} private final String image_limits;
-//public String Fav_icon() {return fav_icon;} private final String fav_icon;
-//	}
+//class Xowmf_general_row {
+//	public String Main_page() {return main_page;} private final String main_page;
+//	public String Base_url() {return base_url;} private final String base_url;
+//	public String Site_name() {return site_name;} private final String site_name;
+//	public String Logo() {return logo;} private final String logo;
+//	public String Generator() {return generator;} private final String generator;
+//	public String Php_version() {return php_version;} private final String php_version;
+//	public String Php_sapi() {return php_sapi;} private final String php_sapi;
+//	public String Hhvm_version() {return hhvm_version;} private final String hhvm_version;
+//	public String Db_type() {return db_type;} private final String db_type;
+//	public String Db_version() {return db_version;} private final String db_version;
+//	public String Image_whitelist_enabled() {return image_whitelist_enabled;} private final String image_whitelist_enabled;
+//	public String Lang_conversion() {return lang_conversion;} private final String lang_conversion;
+//	public String Title_conversion() {return title_conversion;} private final String title_conversion;
+//	public String Link_prefix_charset() {return link_prefix_charset;} private final String link_prefix_charset;
+//	public String Link_prefix() {return link_prefix;} private final String link_prefix;
+//	public String Link_trail() {return link_trail;} private final String link_trail;
+//	public String Legal_title_chars() {return legal_title_chars;} private final String legal_title_chars;
+//	public String Git_hash() {return git_hash;} private final String git_hash;
+//	public String Git_branch() {return git_branch;} private final String git_branch;
+//	public String Case_type() {return case_type;} private final String case_type;
+//	public String Lang() {return lang;} private final String lang;
+//	public String Fallback() {return fallback;} private final String fallback;
+//	public String Fallback_8bit_encoding() {return fallback_8bit_encoding;} private final String fallback_8bit_encoding;
+//	public String Write_api() {return write_api;} private final String write_api;
+//	public String Time_zone() {return time_zone;} private final String time_zone;
+//	public String Time_offset() {return time_offset;} private final String time_offset;
+//	public String Article_path() {return article_path;} private final String article_path;
+//	public String Script_path() {return script_path;} private final String script_path;
+//	public String Script() {return script;} private final String script;
+//	public String Variant_article_path() {return variant_article_path;} private final String variant_article_path;
+//	public String Server() {return server;} private final String server;
+//	public String Server_name() {return server_name;} private final String server_name;
+//	public String Wiki_id() {return wiki_id;} private final String wiki_id;
+//	public String Time() {return time;} private final String time;
+//	public String Miser_mode() {return miser_mode;} private final String miser_mode;
+//	public String Max_upload_size() {return max_upload_size;} private final String max_upload_size;
+//	public String Thumb_limits() {return thumb_limits;} private final String thumb_limits;
+//	public String Image_limits() {return image_limits;} private final String image_limits;
+//	public String Fav_icon() {return fav_icon;} private final String fav_icon;
+//}
 /*
             "mainpage": "Main Page",
             "super": "https://en.wikipedia.org/wiki/Main_Page",
@@ -250,9 +250,9 @@ class Xowmf_json_tbl implements RlsAble {
 		stmt_select = Db_stmt_.Rls(stmt_select);
 	}
 	public void Delete_all() {conn.Stmt_delete(tbl_name, Db_meta_fld.Ary_empy).Exec_delete();}
-	public void Insert(int site_id, DateAdp date, String text) {
+	public void Insert(int site_id, DateAdp date, byte[] text) {
 		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(tbl_name, flds);
-		stmt_insert.Clear().Val_int(fld_site_id, site_id).Val_str(fld_date, date.XtoStr_gplx()).Val_str(fld_text, text).Exec_insert();
+		stmt_insert.Clear().Val_int(fld_site_id, site_id).Val_str(fld_date, date.XtoStr_gplx()).Val_bry_as_str(fld_text, text).Exec_insert();
 	}
 	public String Select_text_or_null(int site_id) {
 		if (stmt_select == null) stmt_select = conn.Stmt_select(tbl_name, flds, fld_site_id);

@@ -20,7 +20,7 @@ import org.junit.*;
 public class GfoRegy_RegDir_tst {
 	@Before public void setup() {
 		regy = GfoRegy.new_();
-		Io_mgr._.InitEngine_mem();
+		Io_mgr.I.InitEngine_mem();
 		root = Io_url_.mem_dir_("mem/root");
 	}	GfoRegy regy; Io_url root;
 	@Test  public void Basic() {
@@ -57,5 +57,5 @@ public class GfoRegy_RegDir_tst {
 		GfoRegyItm itm = regy.FetchOrNull(expd);
 		Tfds.Eq_nullNot(itm);
 	}
-	void ini_fil(String... nest) {Io_mgr._.SaveFilStr(root.GenSubFil_nest(nest), "");}
+	void ini_fil(String... nest) {Io_mgr.I.SaveFilStr(root.GenSubFil_nest(nest), "");}
 }

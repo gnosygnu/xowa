@@ -18,9 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.core.flds.*;
 public class Xof_meta_fil {
+	private final Ordered_hash itms = Ordered_hash_.new_bry_();
 	public Xof_meta_fil(Xof_meta_mgr meta_mgr, byte[] md5) {this.meta_mgr = meta_mgr; this.md5 = md5;}
-	public Xof_meta_mgr Owner_mgr() {return meta_mgr;}  Xof_meta_mgr meta_mgr;
-	public byte[] Md5() {return md5;} private byte[] md5;
+	public Xof_meta_mgr Owner_mgr() {return meta_mgr;} private final Xof_meta_mgr meta_mgr;
+	public byte[] Md5() {return md5;} private final byte[] md5;
 	public void Dirty_() {meta_mgr.Dirty_(this);}
 	public Xof_meta_itm Get_or_new(byte[] ttl) {
 		Xof_meta_itm rv = Get_or_null(ttl);
@@ -29,12 +30,12 @@ public class Xof_meta_fil {
 			itms.Add(ttl, rv);
 		}
 		return rv;
-	}	private OrderedHash itms = OrderedHash_.new_bry_();
-	public Xof_meta_itm Get_or_null(byte[] ttl) {return (Xof_meta_itm)itms.Fetch(ttl);}
+	}
+	public Xof_meta_itm Get_or_null(byte[] ttl) {return (Xof_meta_itm)itms.Get_by(ttl);}
 	public void Save(Gfo_fld_wtr wtr) {
 		int itms_len = itms.Count();
 		for (int i = 0; i < itms_len; i++) {
-			Xof_meta_itm itm = (Xof_meta_itm)itms.FetchAt(i);
+			Xof_meta_itm itm = (Xof_meta_itm)itms.Get_at(i);
 			itm.Save(wtr);
 		}
 	}
@@ -56,5 +57,5 @@ public class Xof_meta_fil {
 			Bld_url_bfr.Add_byte(md5[i]);
 		Bld_url_bfr.Add(Bry_url_ext);
 		return Io_url_.new_fil_(Bld_url_bfr.Xto_str_and_clear());
-	}	static final byte[] Bry_url_ext = Bry_.new_ascii_(".csv"); static Bry_bfr Bld_url_bfr = Bry_bfr.new_(260);	// 260 is max path of url
+	}	static final byte[] Bry_url_ext = Bry_.new_a7(".csv"); static Bry_bfr Bld_url_bfr = Bry_bfr.new_(260);	// 260 is max path of url
 }

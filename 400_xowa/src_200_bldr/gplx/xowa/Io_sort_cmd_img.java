@@ -42,7 +42,7 @@ class Io_sort_cmd_img implements Io_sort_cmd {
 		//fil_wtr.Rls(); itm_bfr.Rls(); fil_wtr.Rls(); reg_bfr.Rls(); key_bfr_0.Rls(); key_bfr_n.Rls();
 	}
 	private void Flush() {
-		Io_mgr._.SaveFilBry(make_url_gen.Nxt_url(), fil_bfr.Bfr(), fil_bfr.Len());
+		Io_mgr.I.SaveFilBry(make_url_gen.Nxt_url(), fil_bfr.Bfr(), fil_bfr.Len());
 		fil_bfr.Clear();
 	}
 }

@@ -27,7 +27,7 @@ public class DateAdp_parser_tst {
 class DateAdp_parser_fxt {
 	DateAdp_parser parser = DateAdp_parser.new_(); int[] actl = new int[7];
 	public void Test_Parse_iso8651_like(String s, int... expd) {
-		byte[] bry = Bry_.new_ascii_(s);
+		byte[] bry = Bry_.new_a7(s);
 		parser.Parse_iso8651_like(actl, bry, 0, bry.length);
 		Tfds.Eq_ary(expd, actl, s);
 	}

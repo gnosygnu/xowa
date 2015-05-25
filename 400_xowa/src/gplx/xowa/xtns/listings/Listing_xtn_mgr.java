@@ -20,7 +20,7 @@ import gplx.html.*;
 import gplx.xowa.wikis.*;
 public class Listing_xtn_mgr extends Xox_mgr_base {
 	@Override public boolean Enabled_default() {return false;}
-	@Override public byte[] Xtn_key() {return Xtn_key_static;} public static final byte[] Xtn_key_static = Bry_.new_ascii_("Listings");
+	@Override public byte[] Xtn_key() {return Xtn_key_static;} public static final byte[] Xtn_key_static = Bry_.new_a7("Listings");
 	@Override public Xox_mgr Clone_new() {return new Listing_xtn_mgr();}
 	@Override public void Xtn_init_by_wiki(Xowe_wiki wiki) {
 		if (!Enabled()) return;
@@ -69,12 +69,12 @@ public class Listing_xtn_mgr extends Xox_mgr_base {
 		return rv;
 	}
 	private byte[] Load_txt(Xowe_wiki wiki, Xop_ctx sub_ctx, String ttl) {
-		byte[] rv = wiki.Msg_mgr().Val_by_key_obj(Bry_.new_utf8_(ttl)); if (Bry_.Len_eq_0(rv)) return null;	// ttl does not exist; note that msg_mgr returns "" for missing values
+		byte[] rv = wiki.Msg_mgr().Val_by_key_obj(Bry_.new_u8(ttl)); if (Bry_.Len_eq_0(rv)) return null;	// ttl does not exist; note that msg_mgr returns "" for missing values
 		rv = wiki.Parser().Parse_text_to_html(sub_ctx, rv);
 		rv = Html_utl.Escape_html_as_bry(rv);
 		return rv;
 	}
 	private Xol_msg_itm Load_msg(Xowe_wiki wiki, Xop_ctx sub_ctx, String ttl) {
-		return wiki.Msg_mgr().Find_or_null(Bry_.new_utf8_(ttl)); 
+		return wiki.Msg_mgr().Find_or_null(Bry_.new_u8(ttl)); 
 	}
 }

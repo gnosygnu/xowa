@@ -19,7 +19,7 @@ package gplx.gfui; import gplx.*;
 public class GfuiLbl extends GfuiElemBase { // standard label does not support tooltips
 	@Override public void Click() {
 		int focusOrder = this.OwnerElem().SubElems().IndexOfA(this);
-		GfuiElem focusNext = this.OwnerElem().SubElems().FetchAt(focusOrder + 1);	// FIXME: incorporate into new FocusOrder
+		GfuiElem focusNext = this.OwnerElem().SubElems().Get_at(focusOrder + 1);	// FIXME: incorporate into new FocusOrder
 		focusNext.Focus();
 	}
 	@Override public boolean PaintCbk(PaintArgs args) {

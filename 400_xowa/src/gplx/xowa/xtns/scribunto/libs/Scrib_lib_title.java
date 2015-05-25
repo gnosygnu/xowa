@@ -77,8 +77,8 @@ public class Scrib_lib_title implements Scrib_lib {
 		Xowe_wiki wiki = core.Wiki();
 		byte[] ttl_bry = args.Pull_bry(0);
 		byte[] url_func_bry = args.Pull_bry(1);
-		Object url_func_obj = url_func_hash.Fetch(url_func_bry);
-		if (url_func_obj == null) throw Err_.new_fmt_("url_function is not valid: {0}", String_.new_utf8_(url_func_bry));
+		Object url_func_obj = url_func_hash.Get_by(url_func_bry);
+		if (url_func_obj == null) throw Err_.new_fmt_("url_function is not valid: {0}", String_.new_u8(url_func_bry));
 		byte url_func_tid = ((Byte_obj_val)url_func_obj).Val();
 		byte[] qry_bry = args.Extract_qry_args(wiki, 2);
 		// byte[] proto = Scrib_kv_utl_.Val_to_bry_or(values, 3, null);	// NOTE: Scribunto has more conditional logic around argument 2 and setting protocols; DATE:2014-07-07
@@ -86,7 +86,7 @@ public class Scrib_lib_title implements Scrib_lib {
 		Bry_bfr bfr = wiki.Appe().Utl__bfr_mkr().Get_b512();
 		//if (url_func_tid == Pfunc_urlfunc.Tid_full) {
 		//	if (proto == null) proto = Proto_relative;
-		//	Object proto_obj = proto_hash.Fetch(proto); if (proto_obj == null) throw Err_.new_fmt_("protocol is not valid: {0}", proto);
+		//	Object proto_obj = proto_hash.Get_by(proto); if (proto_obj == null) throw Err_.new_fmt_("protocol is not valid: {0}", proto);
 		//	//qry_bry = (byte[])proto_obj;
 		//	byte proto_tid = ((Byte_obj_val)proto_obj).Val();
 		//	bfr.Add();
@@ -98,11 +98,11 @@ public class Scrib_lib_title implements Scrib_lib {
 	.Add_str_byte("fullUrl", Pfunc_urlfunc.Tid_full)
 	.Add_str_byte("localUrl", Pfunc_urlfunc.Tid_local)
 	.Add_str_byte("canonicalUrl", Pfunc_urlfunc.Tid_canonical);
-	// private static final byte[] Proto_relative = Bry_.new_ascii_("relative");
-	// private static final Hash_adp_bry proto_hash = Hash_adp_bry.ci_ascii_().Add_str_obj("http", Bry_.new_ascii_("http://")).Add_str_obj("https", Bry_.new_ascii_("https://")).Add_str_obj("relative", Bry_.new_ascii_("//")).Add_str_obj("canonical", Bry_.new_ascii_("1"));
+	// private static final byte[] Proto_relative = Bry_.new_a7("relative");
+	// private static final Hash_adp_bry proto_hash = Hash_adp_bry.ci_ascii_().Add_str_obj("http", Bry_.new_a7("http://")).Add_str_obj("https", Bry_.new_a7("https://")).Add_str_obj("relative", Bry_.new_a7("//")).Add_str_obj("canonical", Bry_.new_a7("1"));
 	private byte[] Parse_ns(Xowe_wiki wiki, Object ns_obj) {
 		if (ClassAdp_.Eq_typeSafe(ns_obj, String.class))
-			return Bry_.new_utf8_(String_.cast_(ns_obj));
+			return Bry_.new_u8(String_.cast_(ns_obj));
 		else {
 			int ns_id = Int_.cast_(ns_obj);
 			Xow_ns ns = wiki.Ns_mgr().Ids_get_or_null(ns_id);
@@ -186,7 +186,7 @@ public class Scrib_lib_title implements Scrib_lib {
 			else
 				rv = page_itm.Wtxt();
 		}
-		return rv == null ? rslt.Init_obj(null) : rslt.Init_obj(String_.new_utf8_(rv));
+		return rv == null ? rslt.Init_obj(null) : rslt.Init_obj(String_.new_u8(rv));
 	}
 	public boolean GetCurrentTitle(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		return rslt.Init_obj(GetInexpensiveTitleData(core.Page().Ttl()));

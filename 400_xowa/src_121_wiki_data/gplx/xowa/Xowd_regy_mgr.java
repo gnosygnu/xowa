@@ -70,7 +70,7 @@ public class Xowd_regy_mgr {
 			Xowd_hive_regy_itm itm = files_ary[i];
 			itm.Srl_save(bfr);
 		}
-		Io_mgr._.SaveFilBfr(fil, bfr);
+		Io_mgr.I.SaveFilBfr(fil, bfr);
 	}
 	public static final int Regy_null = -1;
 }

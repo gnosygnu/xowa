@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 public class Bry_fmtr_eval_mgr_ {
 	public static Io_url Eval_url(Bry_fmtr_eval_mgr eval_mgr, byte[] fmt) {
-		if (eval_mgr == null) return Io_url_.new_any_(String_.new_utf8_(fmt));
+		if (eval_mgr == null) return Io_url_.new_any_(String_.new_u8(fmt));
 		Bry_bfr bfr = Bry_bfr.reset_(255);
 		Bry_fmtr fmtr = Bry_fmtr.tmp_();
 		fmtr.Eval_mgr_(eval_mgr).Fmt_(fmt).Bld_bfr_none(bfr);

@@ -19,10 +19,10 @@ package gplx.xowa; import gplx.*;
 import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.xowa.langs.cases.*;
 import gplx.xowa.xtns.scribunto.*;
 public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
-	private OrderedHash id_hash = OrderedHash_.new_();		// hash for retrieval by id
+	private Ordered_hash id_hash = Ordered_hash_.new_();		// hash for retrieval by id
 	private Hash_adp_bry name_hash;							// hash for retrieval by name; note that ns names are case-insensitive "File:" == "fILe:"
 	private Hash_adp_bry tmpl_hash;							// hash for retrieval by name; PERF for templates
-	private OrderedHash aliases = OrderedHash_.new_();		// hash to store aliases; used to populate name_hash;
+	private Ordered_hash aliases = Ordered_hash_.new_();		// hash to store aliases; used to populate name_hash;
 	public Xow_ns_mgr(Xol_case_mgr case_mgr) {
 		name_hash = Hash_adp_bry.ci_utf8_(case_mgr);
 		tmpl_hash = Hash_adp_bry.ci_utf8_(case_mgr);
@@ -53,8 +53,8 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 	public int			Ords_len() {return ords_len;} private int ords_len;
 	public Xow_ns		Ords_get_at(int ord)	{return ords[ord];}
 	public int			Ids_len()				{return id_hash.Count();}
-	public Xow_ns		Ids_get_at(int idx)		{return (Xow_ns)id_hash.FetchAt(idx);}
-	public Xow_ns		Ids_get_or_null(int id) {return (Xow_ns)id_hash.Fetch(ns_hash_lkp.Val_(id));} private Int_obj_ref ns_hash_lkp = Int_obj_ref.zero_();
+	public Xow_ns		Ids_get_at(int idx)		{return (Xow_ns)id_hash.Get_at(idx);}
+	public Xow_ns		Ids_get_or_null(int id) {return (Xow_ns)id_hash.Get_by(ns_hash_lkp.Val_(id));} private Int_obj_ref ns_hash_lkp = Int_obj_ref.zero_();
 	private Xow_ns		Ids_get_or_empty(int id) {
 		Xow_ns rv = Ids_get_or_null(id);
 		return rv == null ? Ns__empty : rv;
@@ -83,7 +83,7 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 	public void			Aliases_clear() {aliases.Clear();}		
 	public Xow_ns_mgr	Aliases_add(int ns_id, String name) {
 		KeyVal kv = KeyVal_.new_(name, Int_obj_val.new_(ns_id));
-		aliases.AddReplace(name, kv);
+		aliases.Add_if_dupe_use_nth(name, kv);
 		return this;
 	}
 	public Xow_ns_mgr Init() {
@@ -106,16 +106,16 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 		}
 		int aliases_len = aliases.Count();
 		for (int i = 0; i < aliases_len; i++) {
-			KeyVal kv = (KeyVal)aliases.FetchAt(i);
+			KeyVal kv = (KeyVal)aliases.Get_at(i);
 			int ns_id = ((Int_obj_val)kv.Val()).Val();
 			Xow_ns ns = Ids_get_or_null(ns_id); if (ns == null) continue; // happens when alias exists, but not ns; EX: test has Image alias, but not File alias; should not happen "live" but don't want to fail
 			ns.Aliases_add(kv.Key());	// register alias with official ns; EX: "Image" will be placed in "File"'s .Aliases
-			byte[] alias_bry = Bry_.new_utf8_(kv.Key());
+			byte[] alias_bry = Bry_.new_u8(kv.Key());
 			Rebuild_hashes__add(name_hash, ns, alias_bry);
 			if (ns.Id_tmpl()) {
-				byte[] alias_name = Bry_.new_utf8_(kv.Key());
+				byte[] alias_name = Bry_.new_u8(kv.Key());
 				alias_name = Bry_.Add(alias_name, Byte_ascii.Colon);
-				tmpl_hash.AddReplace(alias_name, alias_name);
+				tmpl_hash.Add_if_dupe_use_nth(alias_name, alias_name);
 			}
 		}
 	}
@@ -125,12 +125,12 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 		Xow_ns project_ns = ords[ns.Ord_subj_id()];
 		if (project_ns == null) return;	// should warn or throw error; for now just exit
 		ns.Name_bry_(Bry_.Replace(ns_name, Project_talk_fmt_arg, project_ns.Name_bry()));
-	}	private static final byte[] Project_talk_fmt_arg = Bry_.new_ascii_("$1");
+	}	private static final byte[] Project_talk_fmt_arg = Bry_.new_a7("$1");
 	private void Rebuild_hashes__add(Hash_adp_bry hash, Xow_ns ns, byte[] key) {
 		Xow_ns_mgr_name_itm ns_itm = new Xow_ns_mgr_name_itm(key, ns);
-		hash.AddReplace(key, ns_itm);
+		hash.Add_if_dupe_use_nth(key, ns_itm);
 		if (Bry_finder.Find_fwd(key, Byte_ascii.Underline) != Bry_.NotFound)	// ns has _; add another entry for space; EX: Help_talk -> Help talk
-			hash.AddReplace(Bry_.Replace(key, Byte_ascii.Underline, Byte_ascii.Space), ns_itm);
+			hash.Add_if_dupe_use_nth(Bry_.Replace(key, Byte_ascii.Underline, Byte_ascii.Space), ns_itm);
 	}
 	public Xow_ns_mgr Add_defaults() { // NOTE: needs to happen after File ns is added; i.e.: cannot be put in Xow_ns_mgr() {} ctor
 		Aliases_add(Xow_ns_.Id_file		, "Image");			// REF.MW: Setup.php; add "Image", "Image talk" for backward compatibility; note that MW hardcodes Image ns as well
@@ -139,7 +139,7 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 		Aliases_add(gplx.xowa.xtns.scribunto.Scrib_xtn_mgr.Ns_id_module, "Module");		// always add "Module" ns; de.wikipedia.org has "Modul" defined in siteinfo.xml, but also uses Module
 		return this;
 	}
-	public Xow_ns_mgr Add_new(int nsId, String name) {return Add_new(nsId, Bry_.new_utf8_(name), Xow_ns_case_.Id_1st, false);}	// for tst_ constructor
+	public Xow_ns_mgr Add_new(int nsId, String name) {return Add_new(nsId, Bry_.new_u8(name), Xow_ns_case_.Id_1st, false);}	// for tst_ constructor
 	public Xow_ns_mgr Add_new(int ns_id, byte[] name, byte caseMatchId, boolean alias) {
 		Bry_.Replace_all_direct(name, Byte_ascii.Space, Byte_ascii.Underline);	// standardize on _; EX: User talk -> User_talk; DATE:2013-04-21
 		Xow_ns ns = new Xow_ns(ns_id, caseMatchId, name, alias);
@@ -161,7 +161,7 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 		++ns_count;
 		if (!id_hash.Has(ns_hash_lkp.Val_(ns_id)))		// NOTE: do not add if already exists; avoids alias
 			id_hash.Add(Int_obj_ref.new_(ns.Id()), ns);
-		name_hash.AddReplace(ns.Name_bry(), new Xow_ns_mgr_name_itm(ns.Name_bry(), ns));
+		name_hash.Add_if_dupe_use_nth(ns.Name_bry(), new Xow_ns_mgr_name_itm(ns.Name_bry(), ns));
 		return this;
 	}
 	public int compare(Object lhsObj, Object rhsObj) {
@@ -172,12 +172,12 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 	private void Ords_sort() {
 		int ords_cur = 0;
 		int ns_len = id_hash.Count();
-		id_hash.SortBy(this);
+		id_hash.Sort_by(this);
 		// assert that all items are grouped in pairs of subj, talk; note that subj is even and talk is odd
 		int nxt_ns_id = Int_.MinValue;
 		int prv_ns_id = Int_.MinValue;
 		for (int i = 0; i < ns_len; i++) {
-			Xow_ns ns = (Xow_ns)id_hash.FetchAt(i);
+			Xow_ns ns = (Xow_ns)id_hash.Get_at(i);
 			int ns_id = ns.Id();
 			if (ns_id < 0						// ignore negative ns (which don't have subj/talk pairing) 			
 				|| ns.Is_alias()				// ignore alias
@@ -199,12 +199,12 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 			Ords_sort_add(nxt_ns_id);
 		
 		// sort again b/c new ns may have been added
-		id_hash.SortBy(this);
+		id_hash.Sort_by(this);
 		ns_len = id_hash.Count();
 		// assign ords; assert that subj has even ordinal index
 		ords_len = 0;
 		for (int i = 0; i < ns_len; i++) {
-			Xow_ns ns = (Xow_ns)id_hash.FetchAt(i);
+			Xow_ns ns = (Xow_ns)id_hash.Get_at(i);
 			int ns_id = ns.Id();
 			if (ns.Is_alias()) continue;		// ignore alias
 			if (ns_id < 0) {}
@@ -255,7 +255,7 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 			if (line.length == 0) continue;
 			byte[][] flds = Bry_.Split(line, Byte_ascii.Pipe);
 			int cur_id = Bry_.Xto_int_or(flds[0], Int_.MinValue);
-			this.Aliases_add(cur_id, String_.new_utf8_(flds[1]));
+			this.Aliases_add(cur_id, String_.new_u8(flds[1]));
 		}
 		Ords_sort();
 	}

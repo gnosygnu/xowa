@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.texts; import gplx.*;
 public class Base32Converter {
-	public static String EncodeString(String orig) {return Encode(Bry_.new_utf8_(orig));}
+	public static String EncodeString(String orig) {return Encode(Bry_.new_u8(orig));}
 	public static String Encode(byte[] raw) {
 		int i = 0, index = 0, digit = 0; int currByte, nextByte;
 		int rawLen = Array_.Len(raw);
@@ -45,7 +45,7 @@ public class Base32Converter {
 		}
 		return new String(ary, 0, aryPos);
 	}
-	public static String DecodeString(String orig) {return String_.new_utf8_(Decode(orig));}
+	public static String DecodeString(String orig) {return String_.new_u8(Decode(orig));}
 	public static byte[] Decode(String raw) {
 		int i, index, lookup, offset; byte digit;
 		int rawLen = String_.Len(raw);

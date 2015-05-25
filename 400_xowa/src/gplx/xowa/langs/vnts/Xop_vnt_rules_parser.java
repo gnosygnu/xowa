@@ -23,8 +23,8 @@ class Xop_vnt_rules_parser {
 	private boolean loop_vnt_subs; private int vnt_subs_cur, vnt_subs_bgn, vnt_subs_len;
 	private int rule_texts_bgn;
 	private Btrie_slim_mgr trie;
-	private ListAdp rules_list = ListAdp_.new_();
-	private ListAdp text_tkns_list = ListAdp_.new_();
+	private List_adp rules_list = List_adp_.new_();
+	private List_adp text_tkns_list = List_adp_.new_();
 	private int text_tkns_ws_end_idx;
 	private byte[] src;
 	private Xop_tkn_mkr tkn_mkr;
@@ -68,7 +68,7 @@ class Xop_vnt_rules_parser {
 		Make_rule();	// make rules for any pending items; EX: "-{A|text}-"; "text" is unclosed by semic and would need to be processed
 		if (mode == Mode_key && rules_list.Count() == 0)
 			Make_rule_literal();
-		return (Xop_vnt_rule[])rules_list.Xto_ary_and_clear(Xop_vnt_rule.class);
+		return (Xop_vnt_rule[])rules_list.To_ary_and_clear(Xop_vnt_rule.class);
 	}
 	private boolean text_tkns_ws_bgn = false;
 	private void Parse_sub() {
@@ -200,7 +200,7 @@ class Xop_vnt_rules_parser {
 			if (text_tkns_ws_end_idx != -1) {	// trailing ws
 				text_tkns_list.Del_range(text_tkns_ws_end_idx, text_tkns_list.Count() - 1);
 			}
-			Xop_tkn_itm[] rule_subs = (Xop_tkn_itm[])text_tkns_list.Xto_ary_and_clear(Xop_tkn_itm.class);
+			Xop_tkn_itm[] rule_subs = (Xop_tkn_itm[])text_tkns_list.To_ary_and_clear(Xop_tkn_itm.class);
 			Xop_vnt_rule rule = new Xop_vnt_rule(cur_macro_bry, cur_lang_bry, rule_subs);
 			rules_list.Add(rule);
 		}

@@ -21,7 +21,7 @@ public class ImageAdp_null implements ImageAdp {
 	public SizeAdp Size() {return SizeAdp_.Zero;}
 	public int Width() {return 0;}
 	public int Height() {return 0;}
-	public Io_url Url() {return Io_url_.Null;} public ImageAdp Url_(Io_url v) {return this;}
+	public Io_url Url() {return Io_url_.Empty;} public ImageAdp Url_(Io_url v) {return this;}
 	public Object Under() {return null;}
 	public boolean Disposed() {return disposed;} private boolean disposed = false;
 	public void Rls() {disposed = true;}

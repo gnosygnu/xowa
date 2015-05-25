@@ -19,11 +19,11 @@ package gplx;
 import java.lang.reflect.Array;
 import gplx.core.strings.*;
 public class Array_ {
-	public static void Sort(Object[] obj) {ListAdp_Sorter.new_().Sort(obj, obj.length);}
-	public static void Sort(Object[] obj, gplx.lists.ComparerAble comparer) {ListAdp_Sorter.new_().Sort(obj, obj.length, true, comparer);}
-	public static ListAdp XtoList(Object ary) {	
+	public static void Sort(Object[] obj) {List_adp_sorter.new_().Sort(obj, obj.length);}
+	public static void Sort(Object[] obj, gplx.lists.ComparerAble comparer) {List_adp_sorter.new_().Sort(obj, obj.length, true, comparer);}
+	public static List_adp XtoList(Object ary) {	
 		int aryLen = Array_.Len(ary);
-		ListAdp rv = ListAdp_.new_();
+		List_adp rv = List_adp_.new_();
 		for (int i = 0; i < aryLen; i++)
 			rv.Add(Array_.Get(ary, i));
 		return rv;
@@ -71,7 +71,7 @@ public class Array_ {
 	}
 		public static int Len(Object ary) {return Array.getLength(ary);}
 	public static final int LenAry(Object[] ary) {return ary == null ? 0 : ary.length;}
-	public static Object FetchAt(Object ary, int i) {return Array.get(ary, i);	}
+	public static Object Get_at(Object ary, int i) {return Array.get(ary, i);	}
 	public static Object Create(Class<?> t, int count) {return Array.newInstance(t, count);}
 	public static Object Get(Object ary, int i) {return Array.get(ary, i);}
 	public static void Set(Object ary, int i, Object o) {Array.set(ary, i, o);}

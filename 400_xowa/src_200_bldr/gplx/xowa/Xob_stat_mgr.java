@@ -19,7 +19,7 @@ package gplx.xowa; import gplx.*;
 import gplx.core.strings.*; import gplx.xowa.tdbs.*;
 public class Xob_stat_mgr {
 	public Xob_stat_type GetOrNew(byte tid) {
-		Xob_stat_type rv = (Xob_stat_type)regy.Fetch(tid);
+		Xob_stat_type rv = (Xob_stat_type)regy.Get_by(tid);
 		if (rv == null) {
 			rv = new Xob_stat_type(tid);
 			regy.Add(tid, rv);
@@ -29,14 +29,14 @@ public class Xob_stat_mgr {
 	public String Print(Xow_ns_mgr nsMgr) {
 		String_bldr sb = String_bldr_.new_();
 		for (int i = 0; i < regy.Count(); i++) {
-			Xob_stat_type typ = (Xob_stat_type)regy.FetchAt(i);
+			Xob_stat_type typ = (Xob_stat_type)regy.Get_at(i);
 			sb.Add(String_.PadEnd(Xotdb_dir_info_.Tid_name(typ.Tid()), 6, " "));
 		}
 		sb.Add_str_w_crlf("ns");
 		String[] nsAry = GetNmsAry(nsMgr);
 		for (String ns : nsAry) {
 			for (int i = 0; i < regy.Count(); i++) {
-				Xob_stat_type typ = (Xob_stat_type)regy.FetchAt(i);
+				Xob_stat_type typ = (Xob_stat_type)regy.Get_at(i);
 				Xob_stat_itm itm = (Xob_stat_itm)typ.GetOrNew(ns);
 				sb.Add(Int_.Xto_str_pad_bgn_zero(itm.Fils, 5)).Add(" ");
 			}
@@ -47,22 +47,22 @@ public class Xob_stat_mgr {
 	public String XtoStr() {
 		String_bldr sb = String_bldr_.new_();
 		for (int i = 0; i < regy.Count(); i++) {
-			Xob_stat_type typ = (Xob_stat_type)regy.FetchAt(i);
+			Xob_stat_type typ = (Xob_stat_type)regy.Get_at(i);
 			typ.XtoStr(sb);
 		}
 		return sb.XtoStr();
 	}
 	String[] GetNmsAry(Xow_ns_mgr nsMgr) {
-		OrderedHash nsRegy = OrderedHash_.new_();
+		Ordered_hash nsRegy = Ordered_hash_.new_();
 		for (int i = 0; i < regy.Count(); i++) {
-			Xob_stat_type typ = (Xob_stat_type)regy.FetchAt(i);
+			Xob_stat_type typ = (Xob_stat_type)regy.Get_at(i);
 			for (int j = 0; j < typ.Count(); j++) {
 				Xob_stat_itm itm = (Xob_stat_itm)typ.GetAt(j);
 				if (!nsRegy.Has(itm.Ns()))
-					nsRegy.AddKeyVal(itm.Ns());
+					nsRegy.Add_as_key_and_val(itm.Ns());
 			}
 		}
-		return (String[])nsRegy.Xto_ary(String.class);
+		return (String[])nsRegy.To_ary(String.class);
 	}
-	OrderedHash regy = OrderedHash_.new_();
+	Ordered_hash regy = Ordered_hash_.new_();
 }

@@ -24,17 +24,17 @@ public class Xoh_file_html_fmtr__hdump extends Xoh_file_html_fmtr__base {
 //		public override void Html_full_media(Bry_bfr tmp_bfr, byte[] a_href, byte[] a_title, Bry_fmtr_arg html) {
 //			fmtr_full_media.Bld_bfr_many(tmp_bfr, a_href, a_title, html);
 //		}
-//		public override void Html_full_img(Bry_bfr tmp_bfr, Xoh_wtr_ctx hctx, Xoae_page page, Xof_xfer_itm xfer_itm, int uid
+//		public override void Html_full_img(Bry_bfr tmp_bfr, Xoh_wtr_ctx hctx, Xoae_page page, Xof_file_itm xfer_itm, int uid
 //			, byte[] a_href, byte a_cls, byte a_rel, byte[] a_title, byte[] a_xowa_title
 //			, int img_w, int img_h, byte[] img_src, byte[] img_alt, byte img_cls, byte[] img_cls_other) {
-//			tmp_bfr.Add_str_ascii("<a xtid='a_img_full' xatrs='");
-//			tmp_bfr.Add_str_ascii(a_cls == Xoh_lnki_consts.Tid_a_cls_none ? "0|" : "1|");	// a_cls			: "" || image
-//			tmp_bfr.Add_str_ascii(a_rel == Xoh_lnki_consts.Tid_a_rel_none ? "0|" : "1|");	// a_rel			: "" || nofollow
+//			tmp_bfr.Add_str_a7("<a xtid='a_img_full' xatrs='");
+//			tmp_bfr.Add_str_a7(a_cls == Xoh_lnki_consts.Tid_a_cls_none ? "0|" : "1|");	// a_cls			: "" || image
+//			tmp_bfr.Add_str_a7(a_rel == Xoh_lnki_consts.Tid_a_rel_none ? "0|" : "1|");	// a_rel			: "" || nofollow
 //			tmp_bfr.Add_int_fixed(img_cls, 1).Add_byte_pipe();								// img_cls			: "" || thumbborder || thumbimage || other
 //			tmp_bfr.Add_int_variable(uid).Add_byte_pipe();									// uid
 //			tmp_bfr.Add_safe(img_cls_other).Add_byte_pipe();								// img_cls_other	: "" || {other}
 //			Html_utl.Escape_html_to_bfr(tmp_bfr, img_alt, 0, img_alt.length, Bool_.N, Bool_.N, Bool_.N, Bool_.N, Bool_.Y);
-//			tmp_bfr.Add_str_ascii("'/>");
+//			tmp_bfr.Add_str_a7("'/>");
 //		}
 	@Override public void Html_thumb_core(Bry_bfr bfr, int uid, byte[] div1_halign, int div2_width, byte[] div2_content) {
 		tmp_bfr.Add(Xohd_abrv_.Key_img_style);
@@ -50,6 +50,6 @@ public class Xoh_file_html_fmtr__hdump extends Xoh_file_html_fmtr__base {
 		bfr.Add(key);
 		bfr.Add_int_variable(uid);
 		bfr.Add(Bry_xnde_end);
-	}	private static final byte[] Bry_xnde_end = Bry_.new_ascii_("'/>");
+	}	private static final byte[] Bry_xnde_end = Bry_.new_a7("'/>");
 	public static final Xoh_file_html_fmtr__hdump Hdump = new Xoh_file_html_fmtr__hdump(); Xoh_file_html_fmtr__hdump() {}
 }

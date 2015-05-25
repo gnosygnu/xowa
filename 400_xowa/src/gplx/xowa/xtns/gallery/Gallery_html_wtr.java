@@ -59,10 +59,9 @@ public class Gallery_html_wtr {
 				&&	itm_ttl.Ns().Id_file()		// ttl is in file ns;
 				) {
 				Xop_lnki_tkn lnki = ctx.Tkn_mkr().Lnki(itm.Ttl_bgn(), itm.Ttl_end()).Ttl_(itm_ttl).W_(mgr.Itm_w()).H_(mgr.Itm_h());
-				Xof_xfer_itm xfer_itm = wtr.Lnki_wtr().File_wtr().Lnki_eval(ctx, page, lnki, wtr.Queue_add_ref())
-					.Gallery_mgr_h_(mgr.Itm_h_or_default())
-					.Html_elem_tid_(Xof_html_elem.Tid_gallery)
-					;
+				Xof_file_itm xfer_itm = wtr.Lnki_wtr().File_wtr().Lnki_eval(Xof_exec_tid.Tid_wiki_page, ctx, page, lnki);
+				xfer_itm.Html_gallery_mgr_h_(mgr.Itm_h_or_default());
+				xfer_itm.Html_elem_tid_(Xof_html_elem.Tid_gallery);
 				if (mode_is_packed) {
 					if (gallery_w_count < itms_per_row) {
 						mgr_box_width_all += Gallery_html_wtr_utl.Calc_itm_pad_w(itm_box_w);
@@ -80,7 +79,7 @@ public class Gallery_html_wtr {
 					mgr_elem_id = itm_elem_id;	// HACK: set mgr_elem_id to first itm_elem_id
 				int html_w = xfer_itm.Html_w();
 				int html_h = xfer_itm.Html_h();
-				byte[] html_src = xfer_itm.Html_view_url();
+				byte[] html_src = xfer_itm.Html_view_url().To_http_file_bry();
 				if (html_src.length == 0) {	// itm not found; use gallery defaults
 					html_w = mgr.Itm_w_or_default();
 					html_h = mgr.Itm_h_or_default();
@@ -122,7 +121,7 @@ public class Gallery_html_wtr {
 	}
 }
 class Gallery_html_wtr_ {
-	public static final byte[] Cls_packed = Bry_.new_utf8_(" mw-gallery-packed");
+	public static final byte[] Cls_packed = Bry_.new_u8(" mw-gallery-packed");
 	public static final Bry_fmtr
 	  Mgr_all_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<ul id=\"xowa_gallery_ul_~{gallery_id}\" class=\"gallery~{gallery_cls}\" style=\"~{gallery_style}\">~{itm_list}"

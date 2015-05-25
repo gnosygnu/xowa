@@ -19,7 +19,7 @@ package gplx.fsdb; import gplx.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.fsdb.meta.*; import gplx.fsdb.data.*; import gplx.xowa.files.origs.*;
 import gplx.xowa.*; import gplx.xowa.wikis.data.*; import gplx.xowa.bldrs.infos.*;
 public class Fsdb_db_mgr__v2_bldr {
-	public Fsdb_db_mgr__v2 Make(Xowe_wiki wiki, boolean delete_if_exists) {
+	public Fsdb_db_mgr__v2 Get_or_make(Xow_wiki wiki, boolean delete_if_exists) { 	// NOTE: must check if file exists else imports with existing v2 dbs will fail; DATE:2015-05-23
 		Xowd_db_layout layout = wiki.Data_mgr__core_mgr().Props().Layout_file();
 		String domain_str = wiki.Domain_str();
 		Io_url wiki_dir = wiki.Fsys_mgr().Root_dir();
@@ -30,14 +30,15 @@ public class Fsdb_db_mgr__v2_bldr {
 		if (delete_if_exists) {
 			Db_conn_bldr.I.Get_or_noop(main_core_url).Rls_conn();
 			Db_conn_bldr.I.Get_or_noop(user_core_url).Rls_conn();
-			Io_mgr._.DeleteFil(main_core_url);
-			Io_mgr._.DeleteFil(user_core_url);
+			Io_mgr.I.DeleteFil(main_core_url);
+			Io_mgr.I.DeleteFil(user_core_url);
 		}
-		Fsdb_db_file main_core_file = Make_core_file_main(wiki, main_core_url, main_core_name, layout);
-		Fsdb_db_file user_core_file = Make_core_file_user(wiki, user_core_url, user_core_name, main_core_name);
+		Fsdb_db_file main_core_file = Io_mgr.I.ExistsFil(main_core_url) ? Load_core_file(main_core_url) : Make_core_file_main(wiki, main_core_url, main_core_name, layout);
+		Fsdb_db_file user_core_file = Io_mgr.I.ExistsFil(user_core_url) ? Load_core_file(user_core_url) : Make_core_file_user(wiki, user_core_url, user_core_name, main_core_name);
 		return new Fsdb_db_mgr__v2(layout, wiki_dir, main_core_file, user_core_file);
 	}
-	private Fsdb_db_file Make_core_file_main(Xowe_wiki wiki, Io_url main_core_url, String main_core_name, Xowd_db_layout layout) {
+	private Fsdb_db_file Load_core_file(Io_url url) {return new Fsdb_db_file(url, Db_conn_bldr.I.Get(url));}
+	private Fsdb_db_file Make_core_file_main(Xow_wiki wiki, Io_url main_core_url, String main_core_name, Xowd_db_layout layout) {
 		Db_conn conn = layout.Tid_is_all() ? Db_conn_bldr.I.Get(main_core_url) : Db_conn_bldr.I.New(main_core_url);	// if all, use existing (assumes same file name); else, create new
 		conn.Txn_bgn();
 		Fsdb_db_file rv = Make_core_file(main_core_url, conn, schema_is_1, Fsm_mnt_mgr.Mnt_idx_main);

@@ -26,8 +26,8 @@ public class Wdata_dict_value_monolingualtext {
 	, Str_language								= "language"
 	;
 	public static byte[] 
-	  Bry_text									= Bry_.new_ascii_(Str_text)
-	, Bry_language								= Bry_.new_ascii_(Str_language)
+	  Bry_text									= Bry_.new_a7(Str_text)
+	, Bry_language								= Bry_.new_a7(Str_language)
 	;
 	public static final Hash_adp_bry Dict = Hash_adp_bry.cs_()
 	.Add_bry_byte(Bry_text						, Tid_text)

@@ -20,7 +20,7 @@ import gplx.core.btries.*; import gplx.xowa.wikis.*; import gplx.xowa.html.*; im
 public class Imap_xtn_mgr extends Xox_mgr_base implements GfoInvkAble {
 	private boolean init;
 	@Override public boolean Enabled_default() {return true;}
-	@Override public byte[] Xtn_key() {return XTN_KEY;} public static final byte[] XTN_KEY = Bry_.new_ascii_("imageMap");
+	@Override public byte[] Xtn_key() {return XTN_KEY;} public static final byte[] XTN_KEY = Bry_.new_a7("imageMap");
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
         @gplx.Internal protected Imap_parser Parser() {return parser;} private Imap_parser parser;
 	public void Desc_assert() {

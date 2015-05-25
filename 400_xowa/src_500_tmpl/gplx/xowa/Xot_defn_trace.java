@@ -32,10 +32,10 @@ class Xot_defn_trace_null implements Xot_defn_trace {
 }
 class Xot_defn_trace_brief implements Xot_defn_trace {
 	public int Count() {return hash.Count();}
-	public Xot_defn_trace_itm_brief GetAt(int i) {return (Xot_defn_trace_itm_brief)hash.FetchAt(i);}
+	public Xot_defn_trace_itm_brief GetAt(int i) {return (Xot_defn_trace_itm_brief)hash.Get_at(i);}
 	public void Trace_bgn(Xop_ctx ctx, byte[] src, byte[] name, Xot_invk caller, Xot_invk self, Xot_defn defn) {
 		int hashKey = Bry_obj_ref.CalcHashCode(name, 0, name.length);
-		Object o = hash.Fetch(hashKey);
+		Object o = hash.Get_by(hashKey);
 		Xot_defn_trace_itm_brief itm = null;
 		if (o == null) {
 			itm = new Xot_defn_trace_itm_brief().Name_(name);
@@ -44,13 +44,13 @@ class Xot_defn_trace_brief implements Xot_defn_trace {
 		else
 			itm = (Xot_defn_trace_itm_brief)o;
 		itm.Count_add();
-	}	private OrderedHash hash = OrderedHash_.new_();
+	}	private Ordered_hash hash = Ordered_hash_.new_();
 	public void Trace_end(int trg_bgn, Bry_bfr trg) {}
 	public void Print(byte[] src, Bry_bfr bb) {
 		int count = hash.Count(); if (count == 0) return;
 		if (bb.Len() != 0) bb.Add_byte_nl();	// only add newLine if something in bb; needed for tests
 		for (int i = 0; i < count; i++) {
-			Xot_defn_trace_itm_brief itm = (Xot_defn_trace_itm_brief)hash.FetchAt(i);
+			Xot_defn_trace_itm_brief itm = (Xot_defn_trace_itm_brief)hash.Get_at(i);
 			bb.Add_int_fixed(itm.Count(), 4).Add_byte(Byte_ascii.Space);
 			bb.Add(itm.Name()).Add_byte_nl();
 		}

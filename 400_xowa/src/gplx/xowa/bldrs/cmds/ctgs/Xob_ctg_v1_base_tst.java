@@ -30,29 +30,29 @@ public class Xob_ctg_v1_base_tst {
 }
 class Xowd_page_wkr_ctg_fxt {
 	byte[] src;
-	public Xowd_page_wkr_ctg_fxt ini_(String s) {src = Bry_.new_utf8_(s); return this;}
+	public Xowd_page_wkr_ctg_fxt ini_(String s) {src = Bry_.new_u8(s); return this;}
 	public Xowd_page_wkr_ctg_fxt tst_(String... expd) {
 		Xobd_parser mgr = new Xobd_parser();
 		Xoae_app app = Xoa_app_fxt.app_();
 		Xowe_wiki wiki = Xoa_app_fxt.wiki_tst_(app);
 		Xob_bldr bldr = Xoa_app_fxt.bldr_(app);
 		Xobd_parser_wkr_ctg_tstr wkr = (Xobd_parser_wkr_ctg_tstr)new Xobd_parser_wkr_ctg_tstr().Ctor(bldr, wiki);
-		byte[] bry = Bry_.new_utf8_("[[Category:");
+		byte[] bry = Bry_.new_u8("[[Category:");
 		wkr.Wkr_hooks().Add(bry, bry);
 		mgr.Wkr_add(wkr);
-		Xowd_page_itm page = new Xowd_page_itm().Text_(src);//.Ttl_(Bry_.new_utf8_("Test"), new Xow_ns_mgr());
+		Xowd_page_itm page = new Xowd_page_itm().Text_(src);//.Ttl_(Bry_.new_u8("Test"), new Xow_ns_mgr());
 		mgr.Wkr_bgn(bldr);
 		mgr.Wkr_run(page);
-		byte[][] ttl = (byte[][])wkr.Found().Xto_ary(byte[].class);
+		byte[][] ttl = (byte[][])wkr.Found().To_ary(byte[].class);
 		String[] actl = new String[ttl.length];
 		for (int i = 0; i < actl.length; i++) {
-			actl[i] = String_.new_utf8_(ttl[i]);
+			actl[i] = String_.new_u8(ttl[i]);
 		}
 		Tfds.Eq_ary_str(expd, actl);
 		return this;
 	}
 }
-class Xobd_parser_wkr_ctg_tstr extends Xob_ctg_v1_txt {	public ListAdp Found() {return found;} ListAdp found = ListAdp_.new_();
+class Xobd_parser_wkr_ctg_tstr extends Xob_ctg_v1_txt {	public List_adp Found() {return found;} List_adp found = List_adp_.new_();
 	@Override public void Process_ctg(Xowd_page_itm page, byte[] src, int src_len, int bgn, int end) {
 		found.Add(Bry_.Mid(src, bgn, end));
 	}

@@ -88,7 +88,7 @@ public class Io_line_rdr {
 		}
 		while (true) {
 			int compare = Bry_.Compare(ttl, 0, ttl.length, bfr, key_pos_bgn, key_pos_end);
-//				if (String_.new_utf8_(bfr, key_pos_bgn, key_pos_end) == "US Naval Jack.svg") {
+//				if (String_.new_u8(bfr, key_pos_bgn, key_pos_end) == "US Naval Jack.svg") {
 //                       Tfds.Write();
 //				}
 			if 		(compare == CompareAble_.Same) {	// eq; return true and move fwd; EX: "BA" and "BA"
@@ -137,7 +137,7 @@ public class Io_line_rdr {
 		Io_url url = urls[url_idx];
 		usr_dlg.Prog_many(GRP_KEY, "load", "loading dump file: ~{0}", url.NameAndExt());
 		if (file_skip_line0) {
-			byte[] stream_bry = Io_mgr._.LoadFilBry(url);
+			byte[] stream_bry = Io_mgr.I.LoadFilBry(url);
 			int stream_bry_len = stream_bry.length;
 			int nl_pos = Bry_finder.Find_fwd(stream_bry, Byte_ascii.NewLine, 0, stream_bry_len);
 			if (nl_pos == Bry_.NotFound)
@@ -147,7 +147,7 @@ public class Io_line_rdr {
 			stream = gplx.ios.IoStream_.ary_(stream_bry);
 		}
 		else {
-			stream = Io_mgr._.OpenStreamRead(url);
+			stream = Io_mgr.I.OpenStreamRead(url);
 		}
 		file_pos = 0; file_len = stream.Len();
 		file_done = false;

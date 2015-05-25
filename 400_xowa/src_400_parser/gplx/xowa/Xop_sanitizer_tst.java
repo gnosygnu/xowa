@@ -38,7 +38,7 @@ class Xop_sanitizer_fxt {
 		sanitizer = new Xop_sanitizer(new Xop_amp_mgr(), new Gfo_msg_log(Xoa_app_.Name));
 	}
 	public void tst_Escape_id(String raw, String expd)  {
-		byte[] raw_bry = Bry_.new_utf8_(raw);
-		Tfds.Eq(expd, String_.new_utf8_(sanitizer.Escape_id(raw_bry)));
+		byte[] raw_bry = Bry_.new_u8(raw);
+		Tfds.Eq(expd, String_.new_u8(sanitizer.Escape_id(raw_bry)));
 	}
 }

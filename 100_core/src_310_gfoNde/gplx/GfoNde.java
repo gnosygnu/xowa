@@ -19,7 +19,7 @@ package gplx;
 import gplx.core.strings.*;
 public class GfoNde implements GfoInvkAble {
 	public GfoFldList Flds() {return flds;} GfoFldList flds;
-	public HashAdp EnvVars() {return envVars;} HashAdp envVars = HashAdp_.new_();
+	public Hash_adp EnvVars() {return envVars;} Hash_adp envVars = Hash_adp_.new_();
 	public String Name() {return name;} public GfoNde Name_(String v) {name = v; return this;} private String name;
 	public Object ReadAt(int i)					{ChkIdx(i); return ary[i];}
 	public void WriteAt(int i, Object val)		{ChkIdx(i); ary[i] = val;}
@@ -33,14 +33,14 @@ public class GfoNde implements GfoInvkAble {
 	public String XtoStr() {
 		String_bldr sb = String_bldr_.new_();
 		for (int i = 0; i < aryLen; i++) {
-			String key = i >= flds.Count()	? "<< NULL " + i + " >>" : flds.FetchAt(i).Key();
+			String key = i >= flds.Count()	? "<< NULL " + i + " >>" : flds.Get_at(i).Key();
 			String val = i >= aryLen		? "<< NULL " + i + " >>" : Object_.Xto_str_strict_or_null_mark(ary[i]);
 			sb.Add(key).Add("=").Add(val);
 		}
 		return sb.XtoStr();
 	}
 	int IndexOfOrFail(String key) {
-		int i = flds.IndexOf(key);
+		int i = flds.Idx_of(key);
 		if ((i < 0 || i >= aryLen)) throw Err_.new_("field name not found").Add("name", key).Add("index", i).Add("count", this.Flds().Count());
 		return i;
 	}
@@ -55,7 +55,7 @@ public class GfoNde implements GfoInvkAble {
 		if (nde.type == GfoNde_.Type_Leaf) {
 			wtr.WriteLeafBgn("flds");
 			for (int i = 0; i < nde.ary.length; i++)
-				wtr.WriteData(nde.Flds().FetchAt(i).Key(), nde.ReadAt(i));
+				wtr.WriteData(nde.Flds().Get_at(i).Key(), nde.ReadAt(i));
 			wtr.WriteLeafEnd();
 		}
 		else {

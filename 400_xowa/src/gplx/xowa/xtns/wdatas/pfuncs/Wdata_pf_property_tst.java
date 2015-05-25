@@ -32,7 +32,7 @@ public class Wdata_pf_property_tst {
 		fxt.Test_parse("{{#property:p1}}", "b");
 	}
 	@Test   public void Entity_fr() {	// PURPOSE: non-English wiki should default to English label if non-English label not available; DATE:2013-12-19
-		fxt.Wiki().Wdata_wiki_lang_(Bry_.new_ascii_("fr"));							// set wiki to French
+		fxt.Wiki().Wdata_wiki_lang_(Bry_.new_a7("fr"));							// set wiki to French
 		fxt.Init_links_add("frwiki", "Test_page", "q1");								// create link for en:Test_page in wikidata
 		fxt.Init_pages_add(fxt.doc_("q1", fxt.Make_claim_entity(1, 2)));						// create wdata page Q1 with prop entity reference to Q2
 		fxt.Init_pages_add(fxt.Wdoc_bldr("q2").Add_label("en", "b").Xto_wdoc());	// create wdata page Q2 with label in en (not fr)
@@ -121,7 +121,7 @@ class Wdata_pf_property_data_fxt {
 			app = parser_fxt.App();
 			wdata_mgr = app.Wiki_mgr().Wdata_mgr();
 		}
-		Io_mgr._.InitEngine_mem();
+		Io_mgr.I.InitEngine_mem();
 		wdata_mgr.Clear();
 		parser_fxt.Reset();
 		expd_id_int = -1;
@@ -129,11 +129,11 @@ class Wdata_pf_property_data_fxt {
 		return this;
 	}	private Xoae_app app; private Wdata_wiki_mgr wdata_mgr; private Xop_fxt parser_fxt;
 	public Wdata_pf_property_data_fxt Expd_id_int_(int v) {expd_id_int = v; return this;} private int expd_id_int;
-	public Wdata_pf_property_data_fxt Expd_q_(String v) {expd_q = Bry_.new_ascii_(v); return this;} private byte[] expd_q;
-	public Wdata_pf_property_data_fxt Expd_of_(String v) {expd_of = Bry_.new_ascii_(v); return this;} private byte[] expd_of;
+	public Wdata_pf_property_data_fxt Expd_q_(String v) {expd_q = Bry_.new_a7(v); return this;} private byte[] expd_q;
+	public Wdata_pf_property_data_fxt Expd_of_(String v) {expd_of = Bry_.new_a7(v); return this;} private byte[] expd_of;
 	public void Test_parse(String raw) {
 		Wdata_pf_property_data actl = new Wdata_pf_property_data();
-		byte[] raw_bry = Bry_.new_utf8_(raw);
+		byte[] raw_bry = Bry_.new_u8(raw);
 		Xowe_wiki wiki = parser_fxt.Wiki(); Xop_ctx ctx = wiki.Ctx();
 		Xop_tkn_mkr tkn_mkr = app.Tkn_mkr();
 		Wdata_pf_property pfunc = new Wdata_pf_property();

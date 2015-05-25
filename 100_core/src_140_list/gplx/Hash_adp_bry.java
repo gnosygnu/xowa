@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 import gplx.core.primitives.*;
 import gplx.intl.*;
-public class Hash_adp_bry extends gplx.lists.HashAdp_base implements HashAdp {
+public class Hash_adp_bry extends gplx.lists.Hash_adp_base implements Hash_adp {
 	private final Hash_adp_bry_itm_base proto, key_ref;
 	Hash_adp_bry(Hash_adp_bry_itm_base proto) {
 		this.proto = proto;
@@ -32,14 +32,14 @@ public class Hash_adp_bry extends gplx.lists.HashAdp_base implements HashAdp {
 	public Hash_adp_bry Add_bry_byte(byte[] key, byte val)			{this.Add_base(key, Byte_obj_val.new_(val)); return this;}
 	public Hash_adp_bry Add_bry_int(byte[] key, int val)			{this.Add_base(key, Int_obj_val.new_(val)); return this;}
 	public Hash_adp_bry Add_bry_bry(byte[] key)						{this.Add_base(key, key); return this;}
-	public Hash_adp_bry Add_str_byte(String key, byte val)			{this.Add_base(Bry_.new_utf8_(key), Byte_obj_val.new_(val)); return this;}
-	public Hash_adp_bry Add_str_obj(String key, Object val)			{this.Add_base(Bry_.new_utf8_(key), val); return this;}
+	public Hash_adp_bry Add_str_byte(String key, byte val)			{this.Add_base(Bry_.new_u8(key), Byte_obj_val.new_(val)); return this;}
+	public Hash_adp_bry Add_str_obj(String key, Object val)			{this.Add_base(Bry_.new_u8(key), val); return this;}
 	public Hash_adp_bry Add_bry_obj(byte[] key, Object val)			{this.Add_base(key, val); return this;}
 	public Hash_adp_bry Add_many_str(String... ary) {
 		int ary_len = ary.length;
 		for (int i = 0; i < ary_len; i++) {
 			String itm = ary[i];
-			byte[] bry = Bry_.new_utf8_(itm);
+			byte[] bry = Bry_.new_u8(itm);
 			Add_bry_bry(bry);
 		}
 		return this;

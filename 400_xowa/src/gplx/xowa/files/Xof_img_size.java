@@ -26,13 +26,13 @@ public class Xof_img_size {
 		html_w = html_h = file_w = file_h = 0;
 		file_is_orig = false;
 	}
-	public void Html_size_calc(byte exec_tid, int lnki_w, int lnki_h, byte lnki_type, int upright_patch, double lnki_upright, int lnki_ext, int orig_w, int orig_h, int thm_dflt_w) {
+	public void Html_size_calc(int exec_tid, int lnki_w, int lnki_h, byte lnki_type, int upright_patch, double lnki_upright, int orig_ext, int orig_w, int orig_h, int thm_dflt_w) {
 		this.Clear();											// always clear before calc; caller should be responsible, but just to be safe.
 		if (Enm_.HasInt(lnki_type, Xop_lnki_type.Id_frame)		// frame: always return orig size; Linker.php!makeThumbLink2; // Use image dimensions, don't scale
 			&& lnki_h == Null) {								// unless lnki_h specified; DATE:2013-12-22
 			html_w = file_w = orig_w;
 			html_h = file_h = orig_h;
-			file_is_orig = Xof_ext_.Orig_file_is_img(lnki_ext);	// file_is_orig = true, unless svg, ogv, pdf
+			file_is_orig = Xof_ext_.Orig_file_is_img(orig_ext);	// file_is_orig = true, unless svg, ogv, pdf
 			if (file_is_orig)
 				file_w = file_h = Size__same_as_orig;
 			return;
@@ -42,7 +42,7 @@ public class Xof_img_size {
 		if (html_w == Null && html_h == Null) {					// no size set; NOTE: do not default to thumb if only height is set; EX: x900px should have w=0 h=900
 			if (Xop_lnki_type.Id_defaults_to_thumb(lnki_type))
 				html_w = thm_dflt_w;
-			else if (	lnki_ext == Xof_ext_.Id_pdf				// pdf and viewing on page; default to 220
+			else if (	orig_ext == Xof_ext_.Id_pdf				// pdf and viewing on page; default to 220
 					&&	exec_tid == Xof_exec_tid.Tid_wiki_page)
 				html_w = thm_dflt_w;
 			else
@@ -51,7 +51,7 @@ public class Xof_img_size {
 		html_w = Upright_calc(upright_patch, lnki_upright, html_w, lnki_w, lnki_h, lnki_type);
 		if (orig_w == Null) return;								// no orig_w; just use html_w and html_h (html_h will likely be -1 and wrong)
 
-		boolean ext_is_svg = lnki_ext == Xof_ext_.Id_svg;
+		boolean ext_is_svg = orig_ext == Xof_ext_.Id_svg;
 		if (html_w == Xof_img_size.Null) {
 			if	(	ext_is_svg									// following strange MW logic; REF.MW:Linker.php|makeImageLink|If its a vector image, and user only specifies height, we don't want it to be limited by its "normal" width; DATE: 2013-11-26
 				&&	html_h != Xof_img_size.Null)
@@ -66,7 +66,7 @@ public class Xof_img_size {
 		}
 		html_h = Scale_h(orig_w, orig_h, html_w);				// calc html_h
 		if (	html_w >= orig_w								// html >= orig
-			&&	(	Xof_ext_.Orig_file_is_img(lnki_ext)			// orig is img (ignore for svg, ogv, pdf, etc)
+			&&	(	Xof_ext_.Orig_file_is_img(orig_ext)			// orig is img (ignore for svg, ogv, pdf, etc)
 				||	ext_is_svg && exec_tid == Xof_exec_tid.Tid_wiki_file	// limit to size if svg and [[File]] page
 				)
 			) {
@@ -82,7 +82,7 @@ public class Xof_img_size {
 			file_h = html_h;
 		}
 	}
-//		private static boolean Calc_limit_size(byte exec_tid, int lnki_type, int lnki_ext) {
+//		private static boolean Calc_limit_size(int exec_tid, int lnki_type, int lnki_ext) {
 //			if (lnki_type != Xop_lnki_type.Id_thumb) return false;  // only limit to size for thumb; EX:[[File:A.png|thumb|999x999px]] does not get limited but [[File:A.png|999x999px]] does  
 //			if (lnki_ext == Xof_ext_.Id_svg)						// if svg...
 //				return exec_tid == Xof_exec_tid.Tid_wiki_file;		// ... only limit to size if [[File]] page

@@ -35,7 +35,7 @@ public class Wdata_claim_itm_time extends Wdata_claim_itm_core { 	public Wdata_c
 			precision_int = Bry_.Xto_int_or(precision, -1);
 			if (precision_int == -1) {
 				precision_int = Wdata_date.Fmt_ymdhns;
-				Gfo_usr_dlg_.I.Warn_many("", "", "unknown precision: ~{0}", String_.new_utf8_(precision));
+				Gfo_usr_dlg_.I.Warn_many("", "", "unknown precision: ~{0}", String_.new_u8(precision));
 			}
 		}
 		return precision_int;
@@ -45,7 +45,7 @@ public class Wdata_claim_itm_time extends Wdata_claim_itm_core { 	public Wdata_c
 			before_int = Bry_.Xto_int_or(before, -1);
 			if (before_int == -1) {
 				before_int = 0;
-				Gfo_usr_dlg_.I.Warn_many("", "", "unknown before: ~{0}", String_.new_utf8_(before));
+				Gfo_usr_dlg_.I.Warn_many("", "", "unknown before: ~{0}", String_.new_u8(before));
 			}
 		}
 		return before_int;
@@ -55,7 +55,7 @@ public class Wdata_claim_itm_time extends Wdata_claim_itm_core { 	public Wdata_c
 			after_int = Bry_.Xto_int_or(after, -1);
 			if (after_int == -1) {
 				after_int = 0;
-				Gfo_usr_dlg_.I.Warn_many("", "", "unknown after: ~{0}", String_.new_utf8_(after));
+				Gfo_usr_dlg_.I.Warn_many("", "", "unknown after: ~{0}", String_.new_u8(after));
 			}
 		}
 		return after_int;
@@ -64,8 +64,8 @@ public class Wdata_claim_itm_time extends Wdata_claim_itm_core { 	public Wdata_c
 	public byte[] Calendar_ttl() {return calendar_ttl;} public void Calendar_ttl_(byte[] v) {calendar_ttl = v;} private byte[] calendar_ttl;
 	public boolean Calendar_is_julian() {return Bry_.Eq(calendar, Calendar_julian);}
 	@Override public String toString() {// TEST:
-		return String_.Concat_with_str("|", Wdata_dict_snak_tid.Xto_str(this.Snak_tid()), Wdata_dict_val_tid.Xto_str(this.Val_tid()), String_.new_utf8_(time), String_.new_utf8_(before), String_.new_utf8_(after), String_.new_utf8_(precision), String_.new_utf8_(calendar));
+		return String_.Concat_with_str("|", Wdata_dict_snak_tid.Xto_str(this.Snak_tid()), Wdata_dict_val_tid.Xto_str(this.Val_tid()), String_.new_u8(time), String_.new_u8(before), String_.new_u8(after), String_.new_u8(precision), String_.new_u8(calendar));
 	}
 	@Override public void Welcome(Wdata_claim_visitor visitor) {visitor.Visit_time(this);}
-	private static final byte[] Calendar_julian = Bry_.new_ascii_("http://www.wikidata.org/entity/Q1985786");
+	private static final byte[] Calendar_julian = Bry_.new_a7("http://www.wikidata.org/entity/Q1985786");
 }

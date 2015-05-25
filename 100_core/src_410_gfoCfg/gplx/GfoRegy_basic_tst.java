@@ -25,7 +25,7 @@ public class GfoRegy_basic_tst {
 		regy.Parsers().Add("Io_url", Io_url_.Parser);
 		Io_url expd = Io_url_.new_any_("C:\\fil.txt");
 		regy.RegObjByType("test", expd.Xto_api(), "Io_url");
-		Io_url actl = (Io_url)regy.FetchValOr("test", Io_url_.Null);
+		Io_url actl = (Io_url)regy.FetchValOr("test", Io_url_.Empty);
 		Tfds.Eq(expd.Xto_api(), actl.Xto_api());
 	}
 }

@@ -65,7 +65,7 @@ class Swt_win implements GxwWin, Swt_control {
 	} 	boolean pin = false;
 	public IconAdp IconWin() {return icon;} IconAdp icon;
 	public void IconWin_set(IconAdp i) {
-		if (i == null || i.Url() == Io_url_.Null) return;
+		if (i == null || i.Url() == Io_url_.Empty) return;
 		icon = i;
         Image image = null;
         try {

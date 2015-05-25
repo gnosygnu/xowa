@@ -19,9 +19,9 @@ package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*; import gplx.x
 import org.junit.*; import gplx.xowa.wikis.*; import gplx.xowa.langs.*;
 public class Xow_xwiki_itm_tst {
 	@Before public void init() {fxt.Clear();} 		private Xow_xwiki_itm_fxt fxt = new Xow_xwiki_itm_fxt();
-	@Test   public void Commons()			{fxt.Test_new_by_mw("commons.wikimedia.org/wiki/$1"	, "commons.wikimedia.org"	, "commons.wikimedia.org/wiki/~{0}"		, Xow_domain_.Tid_int_commons		, Xol_lang_itm_.Id__unknown);}
-	@Test   public void Wiktionary()		{fxt.Test_new_by_mw("fr.wiktionary.org/wiki/$1"		, "fr.wiktionary.org"		, "fr.wiktionary.org/wiki/~{0}"			, Xow_domain_.Tid_int_wiktionary	, Xol_lang_itm_.Id_fr);}
-	@Test   public void Lang()				{fxt.Test_new_by_mw("fr.wikipedia.org/wiki/$1"		, "fr.wikipedia.org"		, "fr.wikipedia.org/wiki/~{0}"			, Xow_domain_.Tid_int_wikipedia	, Xol_lang_itm_.Id_fr);}
+	@Test   public void Commons()			{fxt.Test_new_by_mw("commons.wikimedia.org/wiki/$1"	, "commons.wikimedia.org"	, "commons.wikimedia.org/wiki/~{0}"		, Xow_domain_type_.Tid_commons		, Xol_lang_itm_.Id__unknown);}
+	@Test   public void Wiktionary()		{fxt.Test_new_by_mw("fr.wiktionary.org/wiki/$1"		, "fr.wiktionary.org"		, "fr.wiktionary.org/wiki/~{0}"			, Xow_domain_type_.Tid_wiktionary	, Xol_lang_itm_.Id_fr);}
+	@Test   public void Lang()				{fxt.Test_new_by_mw("fr.wikipedia.org/wiki/$1"		, "fr.wikipedia.org"		, "fr.wikipedia.org/wiki/~{0}"			, Xow_domain_type_.Tid_wikipedia	, Xol_lang_itm_.Id_fr);}
 }
 class Xow_xwiki_itm_fxt {
 	private Bry_bfr tmp_bfr;
@@ -32,12 +32,12 @@ class Xow_xwiki_itm_fxt {
 		tmp_bfr = Bry_bfr.new_(255);
 		url_parser = new Gfo_url_parser();
 		tmp_url = new Gfo_url();
-		key = Bry_.new_ascii_("test");
+		key = Bry_.new_a7("test");
 	}
 	public void Test_new_by_mw(String url_php, String expd_domain, String expd_url_fmt, int expd_wiki_tid, int expd_lang_tid) {
-		Xow_xwiki_itm itm = Xow_xwiki_itm.new_by_mw(tmp_bfr, url_parser, tmp_url, key, Bry_.new_utf8_(url_php), key);
-		Tfds.Eq(expd_domain			, String_.new_utf8_(itm.Domain_bry()));
-		Tfds.Eq(expd_url_fmt		, String_.new_utf8_(itm.Url_fmt()));
+		Xow_xwiki_itm itm = Xow_xwiki_itm.new_by_mw(tmp_bfr, url_parser, tmp_url, key, Bry_.new_u8(url_php), key);
+		Tfds.Eq(expd_domain			, String_.new_u8(itm.Domain_bry()));
+		Tfds.Eq(expd_url_fmt		, String_.new_u8(itm.Url_fmt()));
 		Tfds.Eq(expd_wiki_tid		, itm.Domain_tid(), "wiki");
 		Tfds.Eq(expd_lang_tid		, itm.Lang_id(), "lang");
 	}

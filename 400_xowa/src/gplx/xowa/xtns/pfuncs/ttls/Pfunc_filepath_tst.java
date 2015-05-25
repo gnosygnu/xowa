@@ -16,25 +16,32 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.pfuncs.ttls; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import org.junit.*; import gplx.xowa.tdbs.*;
-import gplx.xowa.wikis.*; import gplx.xowa.files.exts.*;
+import org.junit.*; import gplx.dbs.*;
+import gplx.xowa.tdbs.*;
+import gplx.xowa.files.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.origs.*;
+import gplx.xowa.wikis.*;
 public class Pfunc_filepath_tst {
-	private Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
+	private final Xofw_wiki_wkr_mock mock_wkr = new Xofw_wiki_wkr_mock(); 
+	private Xowe_wiki en_wiki, commons_wiki;
 	@Before public void init() {
 		fxt.Reset();
-		Io_mgr._.InitEngine_mem();
-		Xoae_app app = fxt.App(); en_wiki = fxt.Wiki();
+		Io_mgr.I.InitEngine_mem();
+		Db_conn_bldr.I.Reg_default_mem();
+		Xoae_app app = fxt.App();
+		en_wiki = fxt.Wiki();
+		// Init_orig_mgr(en_wiki);
+		commons_wiki = Xoa_app_fxt.wiki_(app, Xow_domain_.Domain_str_commons);
 		mock_wkr.Clear_commons();	// assume all files are in repo 0
 		en_wiki.File_mgr().Repo_mgr().Page_finder_(mock_wkr);
-		commons_wiki = Xoa_app_fxt.wiki_(app, Xow_domain_.Domain_str_commons);
 		commons_wiki.Db_mgr().Load_mgr().Clear();
 		en_wiki.Db_mgr().Load_mgr().Clear();
 		app.Wiki_mgr().Add(commons_wiki);
-		app.File_mgr().Repo_mgr().Set("src_commons", "mem/xowa/file/commons/src/", commons_wiki.Domain_str()).Ext_rules_(Xof_rule_grp.Grp_app_default);
-		app.File_mgr().Repo_mgr().Set("trg_commons", "mem/xowa/file/commons/trg/", commons_wiki.Domain_str()).Ext_rules_(Xof_rule_grp.Grp_app_default);
-		en_wiki.File_mgr().Repo_mgr().Add_repo(Bry_.new_utf8_("src_commons"), Bry_.new_utf8_("trg_commons"));
-		Io_mgr._.CreateDir(Io_url_.new_dir_("mem/xowa/wiki/commons.wikimedia.org/ns/000/page/"));	// HACK: create page_dir so Scan_dirs_zip will not identify commons as zipped; FIX: remove; WHEN: after redoing commons.css download logic
-	}	private Xowe_wiki en_wiki, commons_wiki; Xofw_wiki_wkr_mock mock_wkr = new Xofw_wiki_wkr_mock(); 
+		app.File_mgr().Repo_mgr().Set("src_commons", "mem/xowa/file/commons/src/", commons_wiki.Domain_str());
+		app.File_mgr().Repo_mgr().Set("trg_commons", "mem/xowa/file/commons/trg/", commons_wiki.Domain_str());
+		en_wiki.File_mgr().Repo_mgr().Add_repo(Bry_.new_u8("src_commons"), Bry_.new_u8("trg_commons"));
+		Io_mgr.I.CreateDir(Io_url_.new_dir_("mem/xowa/wiki/commons.wikimedia.org/ns/000/page/"));	// HACK: create page_dir so Scan_dirs_zip will not identify commons as zipped; FIX: remove; WHEN: after redoing commons.css download logic
+	}
 	@Test  public void Wiki_is_local() {
 		fxt.Init_page_create(en_wiki, "File:A.png", "");
 		mock_wkr.Redirect_("A.png", "A.png").Repo_idx_(0);
@@ -50,6 +57,11 @@ public class Pfunc_filepath_tst {
 		fxt.Test_parse_tmpl_str_test("{{filepath:B.png}}", "{{test}}", "");
 	}
 	@Test  public void Invalid() {	// PURPOSE: handle invalid ttls; EX:w:Germicidin
+		fxt.Init_log_(Xop_ttl_log.Invalid_char);
 		fxt.Test_parse_tmpl_str_test("{{filepath:{{{ImageFile}}}}}", "{{test}}", "");
 	}
+//		private static void Init_orig_mgr(Xow_wiki wiki) {
+//			Xof_orig_tbl orig_tbl = null;
+//			wiki.File__orig_mgr().Init_by_wiki(wiki, Xof_fsdb_mode.new_v2_gui(), new Xof_orig_tbl[] {orig_tbl}, Xof_url_bldr.new_v2());
+//		}
 }

@@ -38,7 +38,7 @@ class Hiero_parser_fxt {
 	}
 	public String[] block_(String... v) {return v;}
 	public void Test_parse(String raw, String[]... expd) {
-		byte[] raw_bry = Bry_.new_ascii_safe_null_(raw);
+		byte[] raw_bry = Bry_.new_a7(raw);
 		Hiero_block[] actl = parser.Parse(raw_bry, 0, raw_bry.length);
 		Tfds.Eq_ary(String_.Ary_flatten(expd), String_.Ary_flatten(Xto_str(actl)));
 	}
@@ -51,7 +51,7 @@ class Hiero_parser_fxt {
 			String[] rv_sub = new String[itm_len];
 			rv[i] = rv_sub;
 			for (int j = 0; j < itm_len; j++) {
-				rv_sub[j] = String_.new_utf8_(itm.Get_at(j));
+				rv_sub[j] = String_.new_u8(itm.Get_at(j));
 			}
 		}
 		return rv;

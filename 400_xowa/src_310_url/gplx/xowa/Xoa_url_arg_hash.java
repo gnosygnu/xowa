@@ -17,23 +17,23 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 public class Xoa_url_arg_hash {
-	private OrderedHash hash = OrderedHash_.new_bry_();
-	public Gfo_url_arg Get_arg(byte[] key) {return (Gfo_url_arg)hash.Fetch(key);}
+	private Ordered_hash hash = Ordered_hash_.new_bry_();
+	public Gfo_url_arg Get_arg(byte[] key) {return (Gfo_url_arg)hash.Get_by(key);}
 	public int Get_val_int_or(byte[] key, int or) {
 		byte[] val_bry = Get_val_bry_or(key, null); if (val_bry == null) return or;		
 		return Bry_.Xto_int_or(val_bry, or);		
 	}
 	public byte[] Get_val_bry_or(byte[] key, byte[] or) {
-		Gfo_url_arg arg = (Gfo_url_arg)hash.Fetch(key);
+		Gfo_url_arg arg = (Gfo_url_arg)hash.Get_by(key);
 		return arg == null ? or : arg.Val_bry();
 	}
 	public String Get_val_str_or(byte[] key, String or) {
-		Gfo_url_arg arg = (Gfo_url_arg)hash.Fetch(key);
-		return arg == null ? or : String_.new_utf8_(arg.Val_bry());
+		Gfo_url_arg arg = (Gfo_url_arg)hash.Get_by(key);
+		return arg == null ? or : String_.new_u8(arg.Val_bry());
 	}
-	public void Set_val_by_int(byte[] key, int val) {Set_val_by_bry(key, Bry_.new_ascii_(Int_.Xto_str(val)));}
+	public void Set_val_by_int(byte[] key, int val) {Set_val_by_bry(key, Bry_.new_a7(Int_.Xto_str(val)));}
 	public void Set_val_by_bry(byte[] key, byte[] val) {		
-		Gfo_url_arg arg = (Gfo_url_arg)hash.Fetch(key);
+		Gfo_url_arg arg = (Gfo_url_arg)hash.Get_by(key);
 		if (arg == null) {
 			arg = new Gfo_url_arg(key, Bry_.Empty);
 			hash.Add(key, arg);
@@ -60,7 +60,7 @@ public class Xoa_url_arg_hash {
 		return this;
 	}
 	public void Save(Xoa_url url) {
-		Gfo_url_arg[] ary = (Gfo_url_arg[])hash.Xto_ary(Gfo_url_arg.class);
+		Gfo_url_arg[] ary = (Gfo_url_arg[])hash.To_ary(Gfo_url_arg.class);
 		url.Args_(ary);
 	}
 	public static void Concat_bfr(Bry_bfr bfr, Url_encoder href_encoder, Gfo_url_arg[] ary) {

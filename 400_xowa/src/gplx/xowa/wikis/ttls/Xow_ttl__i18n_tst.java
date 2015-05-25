@@ -21,8 +21,8 @@ import gplx.xowa.langs.cases.*;
 public class Xow_ttl__i18n_tst {
 	@Before public void init() {fxt.Reset();} private Xow_ttl_fxt fxt = new Xow_ttl_fxt();
 	@Test   public void Bidi() {
-		fxt.Init_ttl("A" + String_.new_utf8_(Bry_.ints_(226, 128, 142)) + "B").Expd_page_txt("AB").Test();
-		fxt.Init_ttl("A" + String_.new_utf8_(Bry_.ints_(226, 128,  97)) + "B").Expd_page_txt("A" + String_.new_utf8_(Bry_.ints_(226, 128,  97)) + "B").Test();
+		fxt.Init_ttl("A" + String_.new_u8(Bry_.ints_(226, 128, 142)) + "B").Expd_page_txt("AB").Test();
+		fxt.Init_ttl("A" + String_.new_u8(Bry_.ints_(226, 128,  97)) + "B").Expd_page_txt("A" + String_.new_u8(Bry_.ints_(226, 128,  97)) + "B").Test();
 	}
 	@Test   public void Multi_byte_char2() { // PURPOSE: multi-byte HTML entity causes array out of index error; EX: w:List_of_Unicode_characters; DATE:2013-12-25
 		fxt.Init_ttl("&#x2c65;").Expd_full_txt("ⱥ").Test();

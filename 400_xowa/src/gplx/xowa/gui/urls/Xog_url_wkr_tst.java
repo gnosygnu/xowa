@@ -39,7 +39,7 @@ public class Xog_url_wkr_tst {
 		fxt.Init_exec("file:///wiki/Category:A?pagefrom=A#mw-pages").Expd_tid_(Xoh_href.Tid_wiki).Expd_page_("Category:A").Expd_qargs_("?pagefrom=A").Expd_anchor_("mw-pages").Test();
 	}
 	@Test  public void Xwiki() {
-		Xow_ns_mgr ns_mgr = fxt.App().Wiki_mgr().Get_by_key_or_make(Bry_.new_ascii_("en.wiktionary.org")).Ns_mgr();
+		Xow_ns_mgr ns_mgr = fxt.App().Wiki_mgr().Get_by_key_or_make(Bry_.new_a7("en.wiktionary.org")).Ns_mgr();
 
 		ns_mgr.Ns_main().Case_match_(Xow_ns_case_.Id_all);
 		fxt.Init_exec("file:///site/en.wiktionary.org/wiki/a").Expd_tid_(Xoh_href.Tid_site).Expd_wiki_("en.wiktionary.org").Expd_page_("a").Test();
@@ -58,10 +58,10 @@ public class Xog_url_wkr_tst {
 		fxt.Init_exec("file:///site/en.wikipedia.org/").Expd_tid_(Xoh_href.Tid_site).Expd_wiki_("en.wikipedia.org").Expd_page_("Main_Page").Test();
 	}
 	@Test  public void Main_page() {// PURPOSE: Main_page does not update to use Main_page of xwiki; DATE:2014-02-23
-		fxt.App().User().Wiki().Xwiki_mgr().Add_full("zh.wikipedia.org", "zh.wikipedia.org");
+		fxt.App().Usere().Wiki().Xwiki_mgr().Add_full("zh.wikipedia.org", "zh.wikipedia.org");
 		gplx.xowa.wikis.Xoa_wiki_regy.Make_wiki_dir(fxt.App(), "zh.wikipedia.org");
-		fxt.App().Wiki_mgr().Get_by_key_or_make(Bry_.new_ascii_("zh.wikipedia.org")).Props().Main_page_(Bry_.new_ascii_("Zh_Main_Page"));
-		fxt.App().Wiki_mgr().Get_by_key_or_make(Bry_.new_ascii_("en.wikipedia.org")).Props().Main_page_(Bry_.new_ascii_("En_Main_Page"));
+		fxt.App().Wiki_mgr().Get_by_key_or_make(Bry_.new_a7("zh.wikipedia.org")).Props().Main_page_(Bry_.new_a7("Zh_Main_Page"));
+		fxt.App().Wiki_mgr().Get_by_key_or_make(Bry_.new_a7("en.wikipedia.org")).Props().Main_page_(Bry_.new_a7("En_Main_Page"));
 		fxt.Init_exec("file:///site/zh.wikipedia.org/").Expd_tid_(Xoh_href.Tid_site).Expd_wiki_("zh.wikipedia.org").Expd_page_("Zh_Main_Page").Test();
 		fxt.Init_exec("file:///site/en.wikipedia.org/").Expd_tid_(Xoh_href.Tid_site).Expd_wiki_("en.wikipedia.org").Expd_page_("En_Main_Page").Test();	// still stuck at Zh
 	}
@@ -82,7 +82,7 @@ class Xog_url_wkr_fxt {
 		wiki = Xoa_app_fxt.wiki_tst_(app);
 		Xoa_app_fxt.Init_gui(app, wiki);
 		win = app.Gui_mgr().Browser_win();
-		win.Active_page_(Xoae_page.test_(wiki, Xoa_ttl.parse_(wiki, Bry_.new_utf8_("test"))));	// TODO: remove unnecessary page init
+		win.Active_page_(Xoae_page.test_(wiki, Xoa_ttl.parse_(wiki, Bry_.new_u8("test"))));	// TODO: remove unnecessary page init
 		expd_wiki = expd_page = expd_qargs = expd_anchor = null;
 	}
 	public Xog_url_wkr_fxt Init_exec(String raw) {
@@ -92,9 +92,9 @@ class Xog_url_wkr_fxt {
 	public void Test() {
 		Xoa_url url = url_wkr.Parse(win, init_raw).Exec();
 		Tfds.Eq(expd_tid, url_wkr.Href_tid());
-		Tfds.Eq(expd_page, String_.new_utf8_(url.Page_bry()));
-		if (expd_wiki != null)			Tfds.Eq(expd_wiki	, String_.new_utf8_(url.Wiki_bry()));
-		if (expd_anchor != null)		Tfds.Eq(expd_anchor	, String_.new_utf8_(url.Anchor_bry()));
-		if (expd_qargs != null)			Tfds.Eq(expd_qargs	, String_.new_utf8_(url.Args_all_as_bry()));
+		Tfds.Eq(expd_page, String_.new_u8(url.Page_bry()));
+		if (expd_wiki != null)			Tfds.Eq(expd_wiki	, String_.new_u8(url.Wiki_bry()));
+		if (expd_anchor != null)		Tfds.Eq(expd_anchor	, String_.new_u8(url.Anchor_bry()));
+		if (expd_qargs != null)			Tfds.Eq(expd_qargs	, String_.new_u8(url.Args_all_as_bry()));
 	}
 }

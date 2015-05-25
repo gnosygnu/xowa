@@ -59,13 +59,13 @@ public class Xob_wiki_cfg_bldr_tst {
 	}
 //		@Test  public void Lang_names_run() {
 //			Io_url dir = Io_url_.new_dir_("/var/www/mediawiki/languages/messages/");
-//			Io_url[] fils = Io_mgr._.QueryDir_args(dir).ExecAsUrlAry();
+//			Io_url[] fils = Io_mgr.I.QueryDir_args(dir).ExecAsUrlAry();
 //			int fils_len = fils.length;
 //			String_bldr sb = String_bldr_.new_();
 //			for (int i = 0; i < fils_len; i++) {
 //				Io_url fil = fils[i];
 //				String lang_code = String_.Lower(String_.Replace(fil.NameOnly(), "Messages", ""));
-//				String txt = Io_mgr._.LoadFilStr(fil);
+//				String txt = Io_mgr.I.LoadFilStr(fil);
 //				String[] lines = String_.Split(txt, '\n');
 //				String line = lines[1];
 //				line = String_.Replace(line, "/** ", "");
@@ -92,8 +92,8 @@ public class Xob_wiki_cfg_bldr_tst {
 //			Tfds.Write(sb.Xto_str_and_clear());
 //		}
 	@Test  public void Ns_aliases() {
-		Io_mgr._.InitEngine_mem();
-		Io_mgr._.SaveFilStr("mem/en.wikipedia.org/w/api.php?action=query&format=xml&meta=siteinfo&siprop=namespacealiases", String_.Concat_lines_nl
+		Io_mgr.I.InitEngine_mem();
+		Io_mgr.I.SaveFilStr("mem/en.wikipedia.org/w/api.php?action=query&format=xml&meta=siteinfo&siprop=namespacealiases", String_.Concat_lines_nl
 		(	"<api>"
 		,	"<query>"
 		,	"<namespacealiases>"
@@ -127,14 +127,14 @@ public class Xob_wiki_cfg_bldr_tst {
 			if (String_.Len_eq_0(wiki)) continue;
 			try {
 			String api = protocol + wiki + "/w/api.php?action=query&format=xml&meta=siteinfo&siprop=namespacealiases";
-			String xml = String_.new_utf8_(Io_mgr._.DownloadFil_args("", null).Trg_engine_key_(trg_engine_key).Exec_as_bry(api));
+			String xml = String_.new_u8(Io_mgr.I.DownloadFil_args("", null).Trg_engine_key_(trg_engine_key).Exec_as_bry(api));
 			if (xml == null) continue;	// not found
 			gplx.xmls.XmlDoc xdoc = gplx.xmls.XmlDoc_.parse_(xml);
 			gplx.xmls.XmlNde xnde = gplx.xmls.Xpath_.SelectFirst(xdoc.Root(), "query/namespacealiases");
 			sb.Add("app.bldr.wiki_cfg_bldr.get('").Add(wiki).Add("').new_cmd_('wiki.ns_mgr.aliases', 'ns_mgr.add_alias_bulk(\"\n");
 			int xndes_len = xnde.SubNdes().Count();
 			for (int j = 0; j < xndes_len; j++) {
-				gplx.xmls.XmlNde ns_nde = xnde.SubNdes().FetchAt(j);
+				gplx.xmls.XmlNde ns_nde = xnde.SubNdes().Get_at(j);
 				if (!String_.Eq(ns_nde.Name(), "ns")) continue;
 				int id = Int_.parse_(ns_nde.Atrs().FetchValOr("id", "-1"));
 				String name = String_.Replace(String_.Replace(ns_nde.Text_inner(), " ", "_"), "'", "''");
@@ -156,7 +156,7 @@ class Xob_wiki_cfg_bldr_fxt {
 		wiki_cfg_bldr.Clear();
 		hash.Clear();
 		return this;
-	}	private Xoae_app app; Xob_wiki_cfg_bldr wiki_cfg_bldr; OrderedHash hash = OrderedHash_.new_();
+	}	private Xoae_app app; Xob_wiki_cfg_bldr wiki_cfg_bldr; Ordered_hash hash = Ordered_hash_.new_();
 	public Xob_wiki_cfg_bldr_fxt Init_cmd(String wiki, String key, String text) {
 		wiki_cfg_bldr.Itms_get_or_new(wiki).Itms_add(key, text);
 		return this;
@@ -169,10 +169,10 @@ class Xob_wiki_cfg_bldr_fxt {
 		wiki_cfg_bldr.Exec();
 		int len = hash.Count();
 		for (int i = 0; i < len; i++) {
-			KeyVal kv = (KeyVal)hash.FetchAt(i);
+			KeyVal kv = (KeyVal)hash.Get_at(i);
 			String wiki = kv.Key();
 			String expd = (String)kv.Val();
-			String actl = Io_mgr._.LoadFilStr(app.Fsys_mgr().Cfg_wiki_core_dir().GenSubFil(wiki + ".gfs"));
+			String actl = Io_mgr.I.LoadFilStr(app.Fsys_mgr().Cfg_wiki_core_dir().GenSubFil(wiki + ".gfs"));
 			Tfds.Eq_str_lines(expd, actl);
 		}
 	}

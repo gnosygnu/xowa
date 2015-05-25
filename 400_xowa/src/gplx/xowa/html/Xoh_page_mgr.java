@@ -45,11 +45,11 @@ public class Xoh_page_mgr implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_font_name_))				{font_name = m.ReadStr("v"); this.Font_css_bry_update();}
 		else if	(ctx.Match(k, Invk_font_size)) 				return font_size;
 		else if	(ctx.Match(k, Invk_font_size_))				{font_size = m.ReadFloat("v"); this.Font_css_bry_update();}
-		else if	(ctx.Match(k, Invk_font_css_fmt)) 			return String_.new_utf8_(font_css_fmtr.Fmt());
+		else if	(ctx.Match(k, Invk_font_css_fmt)) 			return String_.new_u8(font_css_fmtr.Fmt());
 		else if	(ctx.Match(k, Invk_font_css_fmt_)) 			Font_css_fmtr_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_font_enabled)) 			return Yn.Xto_str(font_enabled);
 		else if	(ctx.Match(k, Invk_font_enabled_)) 			font_enabled = m.ReadYn("v");
-		else if	(ctx.Match(k, Invk_content_code_fmt))		return String_.new_utf8_(content_code_fmtr.Fmt());
+		else if	(ctx.Match(k, Invk_content_code_fmt))		return String_.new_u8(content_code_fmtr.Fmt());
 		else if	(ctx.Match(k, Invk_content_code_fmt_))		content_code_fmtr.Fmt_(m.ReadBry("v"));
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;

@@ -35,7 +35,7 @@ public class Xoctg_view_grp {
 		return rv;
 	}
 	public void Itms_add(Xoctg_view_itm sub) {tmp_list.Add(sub);}
-	public ListAdp Itms_list() {return tmp_list;} ListAdp tmp_list = ListAdp_.new_();
-	public void Itms_make() {itms = (Xoctg_view_itm[])tmp_list.Xto_ary(Xoctg_view_itm.class);}
+	public List_adp Itms_list() {return tmp_list;} List_adp tmp_list = List_adp_.new_();
+	public void Itms_make() {itms = (Xoctg_view_itm[])tmp_list.To_ary(Xoctg_view_itm.class);}
 	public byte[] Itms_last_sortkey() {return itms_last_sortkey;} public Xoctg_view_grp Itms_last_sortkey_(byte[] v) {itms_last_sortkey = v; return this;} private byte[] itms_last_sortkey;
 }

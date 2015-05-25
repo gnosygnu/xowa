@@ -36,13 +36,13 @@ public class Xob_siteinfo_parser {
 		int root_subs_len = root.SubNdes().Count();
 		Bry_bfr siteinfo_misc_bfr = Bry_bfr.reset_(512);
 		for (int i = 0; i < root_subs_len; i++) {
-			XmlNde sub_nde = root.SubNdes().FetchAt(i);
+			XmlNde sub_nde = root.SubNdes().Get_at(i);
 			if		(	String_.Eq(sub_nde.Name(), "sitename")
 					||	String_.Eq(sub_nde.Name(), "generator")
 					||	String_.Eq(sub_nde.Name(), "case"))			siteinfo_misc_bfr.Add_str(sub_nde.Text_inner()).Add_byte_pipe();
 			else if	(	String_.Eq(sub_nde.Name(), "base")) {
 				String mainpage_url = sub_nde.Text_inner();
-				byte[] mainpage_name = Siteinfo_parse_mainpage(Bry_.new_utf8_(mainpage_url)); if (mainpage_name == null) throw Err_mgr._.fmt_(GRP_KEY, "siteinfo.mainpage", "could not extract mainpage: ~{0}", mainpage_url);
+				byte[] mainpage_name = Siteinfo_parse_mainpage(Bry_.new_u8(mainpage_url)); if (mainpage_name == null) throw Err_mgr._.fmt_(GRP_KEY, "siteinfo.mainpage", "could not extract mainpage: ~{0}", mainpage_url);
 				wiki.Props().Main_page_(mainpage_name);
 			}
 			else if (	String_.Eq(sub_nde.Name(), "namespaces")) {
@@ -52,14 +52,14 @@ public class Xob_siteinfo_parser {
 			// else throw Err_mgr._.fmt_(GRP_KEY, "siteinfo.root.unknown_sub", "unknown sub for root nde: ~{0}", sub_nde.Name());	// NOTE: do not fail if MW introduces something odd in future (or if JAVA starts picking up other elements)
 		}
 		wiki.Props().Siteinfo_misc_(siteinfo_misc_bfr.Xto_bry_and_clear());
-		wiki.Props().Bldr_version_(Bry_.new_ascii_(Xoa_app_.Version));
+		wiki.Props().Bldr_version_(Bry_.new_a7(Xoa_app_.Version));
 	}
 	private static byte[] Siteinfo_parse_mainpage(byte[] url) {			
 		byte[] wiki_bry = Xoa_consts.Url_wiki_intermediary;
 		int bgn_pos	= Bry_finder.Find_fwd(url, wiki_bry, 0);
 		if (bgn_pos == Bry_.NotFound) {							// "/wiki/" not found; EX: http://mywiki/My_main_page
 			bgn_pos	= Bry_finder.Find_bwd(url, Byte_ascii.Slash);		// ASSUME last segment is page
-			if (bgn_pos == Bry_.NotFound) throw Err_.new_fmt_("could not parse main page url: {0}", String_.new_utf8_(url));
+			if (bgn_pos == Bry_.NotFound) throw Err_.new_fmt_("could not parse main page url: {0}", String_.new_u8(url));
 			++bgn_pos;												// add 1 to position after slash
 		}
 		else														// "/wiki/" found
@@ -71,18 +71,18 @@ public class Xob_siteinfo_parser {
 		Xow_ns_mgr ns_mgr = wiki.Ns_mgr();
 		ns_mgr.Clear();	// NOTE: wipe out any preexisting ns; use siteinfo.xml as definitive list
 		for (int i = 0; i < subs_len; i++) {
-			XmlNde sub_nde = ns_nde.SubNdes().FetchAt(i);
+			XmlNde sub_nde = ns_nde.SubNdes().Get_at(i);
 			if (sub_nde.Atrs().Count() == 0) continue; // NOTE: JAVA again has unexpected nodes
 			try {
 				int ns_id = Int_.parse_(sub_nde.Atrs().FetchValOr("key", ""));
 				byte case_match = Xow_ns_case_.parse_(sub_nde.Atrs().FetchValOr("case", ""));
 				String name = sub_nde.Text_inner();
-				ns_mgr.Add_new(ns_id, Bry_.new_utf8_(name), case_match, false);
+				ns_mgr.Add_new(ns_id, Bry_.new_u8(name), case_match, false);
 			}
 			catch (Exception e) {throw Err_mgr._.fmt_(GRP_KEY, "siteinfo.ns", "parse failed: ~{0} ~{1}", sub_nde.Text_inner(), Err_.Message_gplx_brief(e));}
 		}
 		ns_mgr.Init_w_defaults();
 	}
-	private static final byte[] Bry_siteinfo_bgn = Bry_.new_ascii_("<siteinfo>"), Bry_siteinfo_end = Bry_.new_ascii_("</siteinfo>");
+	private static final byte[] Bry_siteinfo_bgn = Bry_.new_a7("<siteinfo>"), Bry_siteinfo_end = Bry_.new_a7("</siteinfo>");
 	static final String GRP_KEY = "xowa.bldr.core.init";
 }

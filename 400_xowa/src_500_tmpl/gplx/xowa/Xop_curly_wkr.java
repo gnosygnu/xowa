@@ -131,7 +131,7 @@ public class Xop_curly_wkr implements Xop_ctx_wkr {
 			if (vnt_dash_adjust) {
 				Xop_tkn_itm text_tkn = root.Subs_get_or_null(root.Subs_len() - 2);	// -2 to get tkn before newly-created tmpl / prm
 				if (text_tkn == null || text_tkn.Tkn_tid() != Xop_tkn_itm_.Tid_txt)
-					ctx.Wiki().Appe().Usr_dlg().Warn_many("", "", "token before curly_bgn was not text tkn; src=~{0}", String_.new_utf8_(src, lxr_bgn_pos, lxr_end_pos));
+					ctx.Wiki().Appe().Usr_dlg().Warn_many("", "", "token before curly_bgn was not text tkn; src=~{0}", String_.new_u8(src, lxr_bgn_pos, lxr_end_pos));
 				else
 					text_tkn.Src_end_(text_tkn.Src_end() + 1);	// +1 to extend txt_tkn with dash be 1 to include curly; EX: "-" "{{{" -> "-{" "{{"
 			}

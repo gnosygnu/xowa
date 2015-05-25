@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.apis.xowa.html; import gplx.*; import gplx.xowa.*; import gplx.xowa.apis.*; import gplx.xowa.apis.xowa.*;
 import gplx.xowa.cfgs.*;
 public class Xoapi_toggle_mgr implements GfoInvkAble {
-	private OrderedHash hash = OrderedHash_.new_bry_();
+	private Ordered_hash hash = Ordered_hash_.new_bry_();
 	public Xoapi_toggle_itm Get_or_new(String key_str) {
-		byte[] key_bry = Bry_.new_utf8_(key_str);
-		Xoapi_toggle_itm rv = (Xoapi_toggle_itm)hash.Fetch(key_bry);
+		byte[] key_bry = Bry_.new_u8(key_str);
+		Xoapi_toggle_itm rv = (Xoapi_toggle_itm)hash.Get_by(key_bry);
 		if (rv == null) {
 			rv = new Xoapi_toggle_itm(key_bry);
 			hash.Add(key_bry, rv);
@@ -31,15 +31,15 @@ public class Xoapi_toggle_mgr implements GfoInvkAble {
 	public void Img_dir_(Io_url v) {
 		int len = hash.Count();
 		for (int i = 0; i < len; ++i) {
-			Xoapi_toggle_itm itm = (Xoapi_toggle_itm)hash.FetchAt(i);
+			Xoapi_toggle_itm itm = (Xoapi_toggle_itm)hash.Get_at(i);
 			itm.Init_fsys(v);
 		}
 	}
 	public void Save(Xoa_cfg_mgr cfg_mgr) {
 		int len = hash.Count();
 		for (int i = 0; i < len; ++i) {
-			Xoapi_toggle_itm itm = (Xoapi_toggle_itm)hash.FetchAt(i);
-			cfg_mgr.Set_by_app("xowa.api.html.page.toggles.get('" + String_.new_utf8_(itm.Key_bry()) + "').visible", Yn.Xto_str(itm.Visible()));
+			Xoapi_toggle_itm itm = (Xoapi_toggle_itm)hash.Get_at(i);
+			cfg_mgr.Set_by_app("xowa.api.html.page.toggles.get('" + String_.new_u8(itm.Key_bry()) + "').visible", Yn.Xto_str(itm.Visible()));
 		}
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

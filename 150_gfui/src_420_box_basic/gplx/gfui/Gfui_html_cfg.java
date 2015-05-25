@@ -49,11 +49,11 @@ public class Gfui_html_cfg implements GfoInvkAble {
 	public String Window_vpos_(String node_path, String scroll_top)				{return Exec_fmt(fmtr_window_vpos_, node_path, scroll_top);}		private Bry_fmtr fmtr_window_vpos_ = Bry_fmtr.keys_("node_path", "scroll_top");
 	public String Window_print_preview()										{return Exec_fmt(fmtr_window_print_preview);}						private Bry_fmtr fmtr_window_print_preview = Bry_fmtr.keys_();
 	public String Active_atr_get_str(String atr_key)							{return Exec_fmt(fmtr_active_atr_get, atr_key);}					private Bry_fmtr fmtr_active_atr_get = Bry_fmtr.keys_("atr_key");
-	public Bry_fmtr Js_scripts_get(String name) {return (Bry_fmtr)js_scripts.Fetch(name);}
+	public Bry_fmtr Js_scripts_get(String name) {return (Bry_fmtr)js_scripts.Get_by(name);}
 	private void Js_scripts_add(String name, String text) {
 		Bry_fmtr fmtr = Bry_fmtr.new_(text);
-		js_scripts.AddReplace(name, fmtr);
-	}	private OrderedHash js_scripts = OrderedHash_.new_();
+		js_scripts.Add_if_dupe_use_nth(name, fmtr);
+	}	private Ordered_hash js_scripts = Ordered_hash_.new_();
 	private String Exec_fmt(Bry_fmtr fmtr, String... vals) {
 		if (debug_file != null) GfsCore._.ExecFile(debug_file);
 		return fmtr.Bld_str_many(vals);

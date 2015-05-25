@@ -20,7 +20,7 @@ import org.junit.*;
 public class Btrie_fast_mgr_tst {
 	private Btrie_fast_mgr_fxt fxt = new Btrie_fast_mgr_fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test  public void Fetch() {
+	@Test  public void Get_by() {
 		fxt.Test_matchAtCur("a"		, 1);
 		fxt.Test_matchAtCur("abc"	, 123);
 		fxt.Test_matchAtCur("ab"	, 1);
@@ -65,21 +65,21 @@ class Btrie_fast_mgr_fxt {
 	}
 	public void Init_add(int val, byte... ary) {trie.Add(ary, val);}
 	public void Test_match(String src_str, byte b, int bgn_pos, int expd) {
-		byte[] src = Bry_.new_ascii_(src_str);
+		byte[] src = Bry_.new_a7(src_str);
 		Object actl = trie.Match_bgn_w_byte(b, src, bgn_pos, src.length);
 		Tfds.Eq(expd, actl);
 	}
 	public void Test_matchAtCur(String src_str, Object expd) {
-		byte[] src = Bry_.new_ascii_(src_str);
+		byte[] src = Bry_.new_a7(src_str);
 		Object actl = trie.Match_bgn(src, 0, src.length);
 		Tfds.Eq(expd, actl);
 	}
 	public void Test_matchAtCurExact(String src_str, Object expd) {
-		byte[] src = Bry_.new_ascii_(src_str);
+		byte[] src = Bry_.new_a7(src_str);
 		Object actl = trie.Match_exact(src, 0, src.length);
 		Tfds.Eq(expd, actl);
 	}
 	public void Exec_del(String src_str) {
-		trie.Del(Bry_.new_utf8_(src_str));
+		trie.Del(Bry_.new_u8(src_str));
 	}
 }

@@ -22,8 +22,8 @@ public class Xop_list_tkn_ {
 		, Hook_dt = new byte[] {Byte_ascii.NewLine, Byte_ascii.Semic}	, Hook_dd = new byte[] {Byte_ascii.NewLine, Byte_ascii.Colon};
 	public static final byte List_itmTyp_null = 0, List_itmTyp_ul = Byte_ascii.Asterisk, List_itmTyp_ol = Byte_ascii.Hash, List_itmTyp_dt = Byte_ascii.Semic, List_itmTyp_dd = Byte_ascii.Colon;
 	public static final String Str_li = "li", Str_ol = "ol", Str_ul = "ul", Str_dl = "dl", Str_dt = "dt", Str_dd = "dd";
-	public static final byte[] Byt_li = Bry_.new_ascii_(Str_li), Byt_ol = Bry_.new_ascii_(Str_ol), Byt_ul = Bry_.new_ascii_(Str_ul)
-								, Byt_dl = Bry_.new_ascii_(Str_dl), Byt_dt = Bry_.new_ascii_(Str_dt), Byt_dd = Bry_.new_ascii_(Str_dd);
+	public static final byte[] Byt_li = Bry_.new_a7(Str_li), Byt_ol = Bry_.new_a7(Str_ol), Byt_ul = Bry_.new_a7(Str_ul)
+								, Byt_dl = Bry_.new_a7(Str_dl), Byt_dt = Bry_.new_a7(Str_dt), Byt_dd = Bry_.new_a7(Str_dd);
 	public static byte[] XmlTag_lst(byte b) {
 		switch (b) {
 			case List_itmTyp_ul:	return Byt_ul;

@@ -28,9 +28,9 @@ public class Wdata_dict_datavalue {
 	, Str_error									= "error"
 	;
 	public static byte[] 
-	  Bry_value									= Bry_.new_ascii_(Str_value)
-	, Bry_type									= Bry_.new_ascii_(Str_type)
-	, Bry_error									= Bry_.new_ascii_(Str_error)
+	  Bry_value									= Bry_.new_a7(Str_value)
+	, Bry_type									= Bry_.new_a7(Str_type)
+	, Bry_error									= Bry_.new_a7(Str_error)
 	;
 	public static final Hash_adp_bry Dict = Hash_adp_bry.cs_()
 	.Add_bry_byte(Bry_value						, Tid_value)

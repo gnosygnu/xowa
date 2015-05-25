@@ -123,7 +123,7 @@ public class Xop_lnki_arg_parser {
 			bwd_trie.Add(word_bry, Byte_obj_val.new_(Tid_dim));
 		}
 	}	
-	public static final byte[] Bry_upright = Bry_.new_utf8_("upright"), Bry_thumbtime = Bry_.new_utf8_("thumbtime");
+	public static final byte[] Bry_upright = Bry_.new_u8("upright"), Bry_thumbtime = Bry_.new_u8("thumbtime");
 	public static final byte
 	  Tid_unknown = 0, Tid_thumb = 1, Tid_left = 2, Tid_right = 3, Tid_none = 4, Tid_center = 5, Tid_frame = 6, Tid_frameless = 7, Tid_upright = 8, Tid_border = 9
 	, Tid_alt = 10, Tid_link = 11, Tid_baseline = 12, Tid_sub = 13, Tid_super = 14, Tid_top = 15, Tid_text_top = 16, Tid_middle = 17, Tid_bottom = 18, Tid_text_bottom = 19
@@ -133,7 +133,7 @@ public class Xop_lnki_arg_parser {
 	, Tid_noplayer = 24, Tid_noicon = 25, Tid_thumbtime = 26
 	, Tid_class = 27
 	;
-	private static final byte[] X_bry = Bry_.new_utf8_("x");
+	private static final byte[] X_bry = Bry_.new_u8("x");
 	private static final byte Key_dim_num = 0, Key_dim_x = 1, Key_dim_px = 2, Key_space = 3;
 	private static final int[][] Keys_ids = new int[][] 
 	{ new int[] {Xol_kwd_grp_.Id_img_thumbnail		, Tid_thumb}

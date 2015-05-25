@@ -20,7 +20,7 @@ import gplx.xowa.specials.*;
 public class Xou_history_html implements Bry_fmtr_arg, Xows_page {
 	public Xows_special_meta Special_meta() {return Xows_special_meta_.Itm__page_history;}
 	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
-		this.app = wiki.Appe(); this.mgr = app.User().History_mgr();
+		this.app = wiki.Appe(); this.mgr = app.Usere().History_mgr();
 		mgr.Sort();
 		Bry_bfr bfr = app.Utl__bfr_mkr().Get_m001(); 
 		html_grp.Bld_bfr_many(bfr, this);

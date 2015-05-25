@@ -33,9 +33,9 @@ public class Xoh_module_itm__collapsible implements Xoh_module_itm {
 		wtr.Write_js_global_ini_atr_msg(wiki			, Key_expand);
 	}
 	private static final byte[]
-	  Key_enabled				= Bry_.new_ascii_("collapsible-enabled")
-	, Key_collapsed				= Bry_.new_ascii_("collapsible-collapsed")
-	, Key_collapse				= Bry_.new_ascii_("collapsible-collapse")
-	, Key_expand				= Bry_.new_ascii_("collapsible-expand")
+	  Key_enabled				= Bry_.new_a7("collapsible-enabled")
+	, Key_collapsed				= Bry_.new_a7("collapsible-collapsed")
+	, Key_collapse				= Bry_.new_a7("collapsible-collapse")
+	, Key_expand				= Bry_.new_a7("collapsible-expand")
 	;
 }

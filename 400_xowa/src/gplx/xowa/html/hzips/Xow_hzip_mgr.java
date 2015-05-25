@@ -57,7 +57,7 @@ public class Xow_hzip_mgr {
 		}
 		if (add_bgn != -1) bfr.Add_mid(src, add_bgn, src_len);
 	}
-	public byte[] Parse(Bry_bfr rv, byte[] page_url, byte[] src, OrderedHash redlink_uids) {
+	public byte[] Parse(Bry_bfr rv, byte[] page_url, byte[] src, Ordered_hash redlink_uids) {
 		this.page_url = page_url; this.src = src;
 		this.src_len = src.length;			
 		int pos = 0, add_bgn = -1;
@@ -91,7 +91,7 @@ public class Xow_hzip_mgr {
 	public int Warn_by_pos(String err, int bgn, int end)			{return Warn_by_pos(err, bgn, end, 0);}
 	private int Warn_by_pos(String err, int bgn, int end, int end_adj) {
 		end += end_adj; if (end > src_len) end = src_len;
-		usr_dlg.Warn_many("", "", "hzip failed: page=~{0} err=~{1} mid=~{2}", String_.new_utf8_(page_url), err, String_.new_utf8_(src, bgn, end));
+		usr_dlg.Warn_many("", "", "hzip failed: page=~{0} err=~{1} mid=~{2}", String_.new_u8(page_url), err, String_.new_u8(src, bgn, end));
 		return Unhandled;
 	}
 	public static final int Unhandled = -1;

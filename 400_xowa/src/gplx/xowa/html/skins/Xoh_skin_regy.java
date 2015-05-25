@@ -17,10 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.skins; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 class Xoh_skin_regy {
-	private final OrderedHash hash = OrderedHash_.new_();
+	private final Ordered_hash hash = Ordered_hash_.new_();
 	public int Len() {return hash.Count();}
-	public Xoh_skin_itm Get_at(int i) {return (Xoh_skin_itm)hash.FetchAt(i);}
-	public Xoh_skin_itm Get_by_key(String key) {return (Xoh_skin_itm)hash.Fetch(key);}
+	public Xoh_skin_itm Get_at(int i) {return (Xoh_skin_itm)hash.Get_at(i);}
+	public Xoh_skin_itm Get_by_key(String key) {return (Xoh_skin_itm)hash.Get_by(key);}
 	public void Set(String key, String fmt) {
 		Xoh_skin_itm itm = Get_by_key(key);
 		if (itm == null) {

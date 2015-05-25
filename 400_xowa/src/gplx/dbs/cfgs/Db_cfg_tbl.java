@@ -44,10 +44,12 @@ public class Db_cfg_tbl implements RlsAble {
 	public void Insert_long		(String grp, String key, long val)			{Insert_str(grp, key, Long_.Xto_str(val));}
 	public void Insert_date		(String grp, String key, DateAdp val)		{Insert_str(grp, key, val.XtoStr_fmt_yyyyMMdd_HHmmss());}
 	public void Insert_guid		(String grp, String key, Guid_adp val)		{Insert_str(grp, key, val.XtoStr());}
-	public void Insert_bry		(String grp, String key, byte[] val)		{Insert_str(grp, key, String_.new_utf8_(val));}
+	public void Insert_bry		(String grp, String key, byte[] val)		{Insert_str(grp, key, String_.new_u8(val));}
 	public void Insert_str		(String grp, String key, String val) {
 		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(tbl_name, flds);
-		stmt_insert.Clear().Val_str(fld_grp, grp).Val_str(fld_key, key).Val_str(fld_val, val).Exec_insert();
+		try {
+			stmt_insert.Clear().Val_str(fld_grp, grp).Val_str(fld_key, key).Val_str(fld_val, val).Exec_insert();
+		} catch (Exception e) {throw Err_.new_("db_cfg.insert failed: grp={0} key={1} val={2} db={3} err={4}", grp, key, val, conn.Conn_info().Xto_api(), Err_.Message_lang(e));}
 	}
 	public void Update_yn		(String grp, String key, boolean  val)		{Update_str(grp, key, val ? "y" : "n");}
 	public void Update_byte		(String grp, String key, byte val)			{Update_str(grp, key, Byte_.Xto_str(val));}
@@ -55,7 +57,7 @@ public class Db_cfg_tbl implements RlsAble {
 	public void Update_long		(String grp, String key, long val)			{Update_str(grp, key, Long_.Xto_str(val));}
 	public void Update_date		(String grp, String key, DateAdp val)		{Update_str(grp, key, val.XtoStr_fmt_yyyyMMdd_HHmmss());}
 	public void Update_guid		(String grp, String key, Guid_adp val)		{Update_str(grp, key, val.XtoStr());}
-	public void Update_bry		(String grp, String key, byte[] val)		{Update_str(grp, key, String_.new_utf8_(val));}
+	public void Update_bry		(String grp, String key, byte[] val)		{Update_str(grp, key, String_.new_u8(val));}
 	public void Update_str		(String grp, String key, String val) {
 		if (stmt_update == null) stmt_update = conn.Stmt_update_exclude(tbl_name, flds, fld_grp, fld_key);
 		stmt_update.Clear().Val_str(fld_val, val).Crt_str(fld_grp, grp).Crt_str(fld_key, key).Exec_update();
@@ -114,7 +116,7 @@ public class Db_cfg_tbl implements RlsAble {
 	private byte		Parse_byte		(String grp, String key, String val)	{try {return Byte_.parse_(val)			;} catch (Exception e) {throw err_parse(e, grp, key, val, Byte_.Cls_val_name);}}
 	private int			Parse_int		(String grp, String key, String val)	{try {return Int_.parse_(val)			;} catch (Exception e) {throw err_parse(e, grp, key, val, Int_.Cls_val_name);}}
 	private long		Parse_long		(String grp, String key, String val)	{try {return Long_.parse_(val)			;} catch (Exception e) {throw err_parse(e, grp, key, val, Long_.Cls_val_name);}}
-	private byte[]		Parse_bry		(String grp, String key, String val)	{try {return Bry_.new_utf8_(val)		;} catch (Exception e) {throw err_parse(e, grp, key, val, Bry_.Cls_val_name);}}
+	private byte[]		Parse_bry		(String grp, String key, String val)	{try {return Bry_.new_u8(val)		;} catch (Exception e) {throw err_parse(e, grp, key, val, Bry_.Cls_val_name);}}
 	private DateAdp		Parse_date		(String grp, String key, String val)	{try {return DateAdp_.parse_gplx(val)	;} catch (Exception e) {throw err_parse(e, grp, key, val, DateAdp_.Cls_ref_name);}}
 	private Guid_adp	Parse_guid		(String grp, String key, String val)	{try {return Guid_adp_.parse_(val)		;} catch (Exception e) {throw err_parse(e, grp, key, val, Guid_adp_.Cls_ref_name);}}
 	private Err			err_parse(Exception e, String grp, String key, String val, String type) {return Err_.new_("cfg.val is not parseable; grp={0} key={1} val={2} type={3}", grp, key, val, type);}

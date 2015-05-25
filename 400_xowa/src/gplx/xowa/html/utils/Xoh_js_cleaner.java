@@ -26,7 +26,7 @@ public class Xoh_js_cleaner {
 		if (cleaned != null) {
 			bfr.Del_by(end - bgn);
 			bfr.Add(cleaned);
-			app.Usr_dlg().Warn_many("", "", "javascript detected: wiki=~{0} ~{1}", wiki.Domain_str(), String_.new_utf8_(ttl.Full_txt()));
+			app.Usr_dlg().Warn_many("", "", "javascript detected: wiki=~{0} ~{1}", wiki.Domain_str(), String_.new_u8(ttl.Full_txt()));
 		}
 	}
 	public byte[] Clean(Xowe_wiki wiki, byte[] src, int bgn, int end) {
@@ -199,5 +199,5 @@ public class Xoh_js_cleaner {
 		Reg_itm("seekSegmentTime");
 		ctor = false;
 	}
-	private void Reg_itm(String s) {trie.Add_bry(Bry_.new_ascii_(s));} Btrie_slim_mgr trie = Btrie_slim_mgr.ci_ascii_();	// NOTE:ci.ascii:javascript event name
+	private void Reg_itm(String s) {trie.Add_bry(Bry_.new_a7(s));} Btrie_slim_mgr trie = Btrie_slim_mgr.ci_ascii_();	// NOTE:ci.ascii:javascript event name
 }

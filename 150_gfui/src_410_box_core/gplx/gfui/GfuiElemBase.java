@@ -48,7 +48,7 @@ public class GfuiElemBase implements GfuiElem {
 	public void Lyt_exec() {
 		GftItem[] ary = new GftItem[subElems.Count()];
 		for (int i = 0; i < ary.length; i++)
-			ary[i] = (GfuiElemBase)subElems.FetchAt(i);
+			ary[i] = (GfuiElemBase)subElems.Get_at(i);
 		SizeChanged_ignore = true;
 		lyt.Exec(this, ary);
 		SizeChanged_ignore = false;
@@ -99,12 +99,12 @@ public class GfuiElemBase implements GfuiElem {
 		if (subElems.Count() == 0)							// if no subs, focus self
 			underElem.Core().Focus();
 		else if (defaultFocusKey != null) {					// if default is specified, focus it
-			GfuiElem focusTarget = subElems.Fetch(defaultFocusKey); if (focusTarget == null) throw Err_.new_("could not find defaultTarget for focus").Add("ownerKey", this.Key_of_GfuiElem()).Add("defaultTarget", defaultFocusKey);
+			GfuiElem focusTarget = subElems.Get_by(defaultFocusKey); if (focusTarget == null) throw Err_.new_("could not find defaultTarget for focus").Add("ownerKey", this.Key_of_GfuiElem()).Add("defaultTarget", defaultFocusKey);
 			focusTarget.Focus();	
 		}
 		else {												// else, activate first visible elem; NOTE: some elems are visible, but not Focus_able (ex: ImgGalleryBox)
 			for (int i = 0; i < subElems.Count(); i++) {
-				GfuiElem sub = subElems.FetchAt(i);
+				GfuiElem sub = subElems.Get_at(i);
 				if (sub.Visible() && !String_.Eq(sub.Key_of_GfuiElem(), "statusBox")) {
 					sub.Focus();
 					return;
@@ -138,7 +138,7 @@ public class GfuiElemBase implements GfuiElem {
 	@gplx.Virtual public boolean Opened_done() {return ownerForm == null ? false : ownerForm.Opened_done();}
 	@gplx.Virtual public void Opened_cbk() {
 		for (int i = 0; i < subElems.Count(); i++) {
-			GfuiElem elem = subElems.FetchAt(i);
+			GfuiElem elem = subElems.Get_at(i);
 			elem.Opened_cbk();
 		}
 	}
@@ -238,7 +238,7 @@ public class GfuiElemBase implements GfuiElem {
 			if (ctx.Help_browseMode()) {
 				String_bldr sb = String_bldr_.new_();
 				for (int i = 0; i < this.SubElems().Count(); i++) {
-					GfuiElem subE = (GfuiElem)this.SubElems().FetchAt(i);
+					GfuiElem subE = (GfuiElem)this.SubElems().Get_at(i);
 					sb.Add_str_w_crlf(subE.Key_of_GfuiElem());
 				}
 				return sb.XtoStr();
@@ -247,8 +247,8 @@ public class GfuiElemBase implements GfuiElem {
 				Object rv = this.InvkMgr().Invk(ctx, ikey, k, m, this);
 				if (rv != GfoInvkAble_.Rv_unhandled) return rv;
 
-				Object findObj = injected.Fetch(k);
-				if (findObj == null) findObj = this.subElems.Fetch(k);
+				Object findObj = injected.Get_by(k);
+				if (findObj == null) findObj = this.subElems.Get_by(k);
 				if (findObj == null) return GfoInvkAble_.Rv_unhandled;				
 				return findObj;	// necessary for gplx.images
 			}
@@ -283,10 +283,10 @@ public class GfuiElemBase implements GfuiElem {
 //			underMgr.Size_set(SizeAdp_.new_(20, 20));	// NOTE: CS inits to 20,20; JAVA inits to 0,0
 	}
 	@gplx.Virtual public GxwElem UnderElem_make(KeyValHash ctorArgs) {return GxwElemFactory_._.control_();}
-	public Object SubItms_getObj(String key) {return injected.Fetch(key);}
+	public Object SubItms_getObj(String key) {return injected.Get_by(key);}
 	public GfuiElemBase SubItms_add(String key, Object v) {injected.Add(key, v); return this;}
-	public OrderedHash XtnAtrs() {return xtnAtrs;} OrderedHash xtnAtrs = OrderedHash_.new_();
-	HashAdp injected = HashAdp_.new_();
+	public Ordered_hash XtnAtrs() {return xtnAtrs;} Ordered_hash xtnAtrs = Ordered_hash_.new_();
+	Hash_adp injected = Hash_adp_.new_();
 	GxwCore_base underMgr;
 	@gplx.Internal protected static boolean SizeChanged_ignore = false;
 }

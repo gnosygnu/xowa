@@ -21,13 +21,13 @@ class GfuiFocusOrderer {
 	public static void OrderByX(GfuiElem owner) {Order(owner, xcomparer, 0);}
 	public static void OrderByY(GfuiElem owner) {Order(owner, ycomparer, 0);}
 	static int Order(GfuiElem owner, ComparerAble comparer, int order) {
-		ListAdp list = ListAdp_.new_();
+		List_adp list = List_adp_.new_();
 		for (int i = 0; i < owner.SubElems().Count(); i++) {
-			GfuiElem sub = (GfuiElem)owner.SubElems().FetchAt(i);
+			GfuiElem sub = (GfuiElem)owner.SubElems().Get_at(i);
 			if (sub.Focus_idx() != NullVal) continue;
 			list.Add(sub);
 		}
-		list.SortBy(comparer);
+		list.Sort_by(comparer);
 
 		for (Object subObj : list) {
 			GfuiElem sub = (GfuiElem)subObj;

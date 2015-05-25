@@ -36,34 +36,50 @@ public class Xof_bin_wkr__fsdb_sql implements Xof_bin_wkr {
 		if (skip_mgr != null && skip_mgr.Skip(fsdb, rdr)) return Io_stream_rdr_.Null;
 		return rdr;
 	}
-	public boolean Get_to_fsys(Xof_fsdb_itm itm, boolean is_thumb, int w, Io_url bin_url) {return Get_to_fsys(itm.Orig_repo_name(), itm.Lnki_ttl(), itm.Lnki_md5(), itm.Lnki_ext(), is_thumb, w, itm.Lnki_time(), itm.Lnki_page(), bin_url);}
-	private boolean Get_to_fsys(byte[] orig_repo, byte[] orig_ttl, byte[] orig_md5, Xof_ext orig_ext, boolean lnki_is_thumb, int file_w, double lnki_time, int lnki_page, Io_url file_url) {
+	public boolean Get_to_fsys(Xof_fsdb_itm itm, boolean is_thumb, int w, Io_url bin_url) {return Get_to_fsys(itm.Orig_repo_name(), itm.Orig_ttl(), itm.Orig_ext(), is_thumb, w, itm.Lnki_time(), itm.Lnki_page(), bin_url);}
+	private boolean Get_to_fsys(byte[] orig_repo, byte[] orig_ttl, Xof_ext orig_ext, boolean lnki_is_thumb, int file_w, double lnki_time, int lnki_page, Io_url file_url) {
 		Find_ids(orig_repo, orig_ttl, orig_ext.Id(), lnki_time, lnki_page, lnki_is_thumb, file_w);
 		int bin_db_id = tmp_ids.Bin_db_id(); if (bin_db_id == Fsd_bin_tbl.Bin_db_id_null) return false;
 		Fsm_bin_fil bin_db = mnt_mgr.Bins__at(tmp_ids.Mnt_id(), bin_db_id);
 		return bin_db.Select_to_url(tmp_ids.Itm_id(), file_url);
 	}
-	private void Find_ids(Xof_fsdb_itm itm, boolean is_thumb, int w) {Find_ids(itm.Orig_repo_name(), itm.Lnki_ttl(), itm.Lnki_ext().Id(), itm.Lnki_time(), itm.Lnki_page(), is_thumb, w);}
+	public Io_stream_rdr Get_to_fsys_near(Xof_fsdb_itm rv, byte[] orig_repo, byte[] orig_ttl, Xof_ext orig_ext, double lnki_time, int lnki_page) {
+		Fsd_thm_itm thm_itm = Fsd_thm_itm.new_();
+		thm_itm.Init_by_req(Int_.MaxValue, lnki_time, lnki_page);
+		boolean found = Select_thm_bin(Bool_.N, thm_itm, orig_repo, orig_ttl);
+		if (found) {
+			tmp_ids.Init_by_thm(found, thm_itm);
+			rv.Init_by_fsdb_near(Bool_.N, thm_itm.W());
+		}
+		else {
+			Fsd_fil_itm fil_itm = Select_fil_bin(orig_repo, orig_ttl);		// find orig
+			if (fil_itm == Fsd_fil_itm.Null) return Io_stream_rdr_.Null;
+			tmp_ids.Init_by_fil(fil_itm);
+			rv.Init_by_fsdb_near(Bool_.Y, rv.Orig_w());
+		}
+		Fsm_bin_fil bin_db = mnt_mgr.Bins__at(tmp_ids.Mnt_id(), tmp_ids.Bin_db_id());
+		return bin_db.Select_as_rdr(tmp_ids.Itm_id());
+	}
+	private void Find_ids(Xof_fsdb_itm itm, boolean is_thumb, int w) {Find_ids(itm.Orig_repo_name(), itm.Orig_ttl(), itm.Orig_ext().Id(), itm.Lnki_time(), itm.Lnki_page(), is_thumb, w);}
 	private void Find_ids(byte[] orig_repo, byte[] orig_ttl, int orig_ext, double lnki_time, int lnki_page, boolean is_thumb, int w) {
 		synchronized (tmp_ids) {
 			byte[] dir = orig_repo, fil = orig_ttl;
-			double time = Xof_lnki_time.Convert_to_fsdb_thumbtime(orig_ext, lnki_time, lnki_page);
 			if (is_thumb) {
 				Fsd_thm_itm thm_itm = Fsd_thm_itm.new_();
 				thm_itm.Init_by_req(w, lnki_time, lnki_page);
-				boolean found = Select_thm_bin(thm_itm, dir, fil);
+				boolean found = Select_thm_bin(Bool_.Y, thm_itm, dir, fil);
 				tmp_ids.Init_by_thm(found, thm_itm);
 			}
 			else {
-				Fsd_fil_itm fil_itm = Select_fil_bin(dir, fil, is_thumb, w, time);
+				Fsd_fil_itm fil_itm = Select_fil_bin(dir, fil);
 				tmp_ids.Init_by_fil(fil_itm);
 			}
 		}
 	}
-	private Fsd_fil_itm	Select_fil_bin(byte[] dir, byte[] fil, boolean is_thumb, int width, double thumbtime) {
+	private Fsd_fil_itm	Select_fil_bin(byte[] dir, byte[] fil) {
 		int len = mnt_mgr.Mnts__len();
 		for (int i = 0; i < len; i++) {
-			Fsd_fil_itm rv = mnt_mgr.Mnts__get_at(i).Select_fil_or_null(dir, fil, is_thumb, width, thumbtime);
+			Fsd_fil_itm rv = mnt_mgr.Mnts__get_at(i).Select_fil_or_null(dir, fil);
 			if (	rv != Fsd_fil_itm.Null 
 				&&	rv.Bin_db_id() != Fsd_bin_tbl.Bin_db_id_null) {	// NOTE: mnt_0 can have thumb, but mnt_1 can have itm; check for itm with Db_bin_id; DATE:2013-11-16
 				return rv;
@@ -71,10 +87,10 @@ public class Xof_bin_wkr__fsdb_sql implements Xof_bin_wkr {
 		}
 		return Fsd_fil_itm.Null;
 	}
-	private boolean Select_thm_bin(Fsd_thm_itm rv, byte[] dir, byte[] fil) {
+	private boolean Select_thm_bin(boolean exact, Fsd_thm_itm rv, byte[] dir, byte[] fil) {
 		int len = mnt_mgr.Mnts__len();
 		for (int i = 0; i < len; i++) {
-			boolean exists = mnt_mgr.Mnts__get_at(i).Select_thm(rv, dir, fil);
+			boolean exists = mnt_mgr.Mnts__get_at(i).Select_thm(exact, rv, dir, fil);
 			if (exists) return true;
 		}
 		return false;
@@ -91,7 +107,7 @@ class Xof_bin_wkr_ids {
 	public void Init_by_thm(boolean found, Fsd_thm_itm thm) {
 		if (found) {
 			this.mnt_id = thm.Mnt_id();
-			this.bin_db_id = thm.Db_bin_id();
+			this.bin_db_id = thm.Bin_db_id();
 			this.itm_id = thm.Thm_id();
 		}
 		else

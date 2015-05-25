@@ -56,7 +56,7 @@ class Xosrh_page_mgr_fxt {
 	public Xosrh_page_mgr_fxt Init_sort_by_name_(boolean v) {page_mgr.Sort_tid_(v ? Xosrh_rslt_itm_sorter.Tid_ttl_asc : Xosrh_rslt_itm_sorter.Tid_len_dsc); return this;}
 	public Xosrh_page_mgr_fxt Init_itms_per_page_(int v) {page_mgr.Itms_per_page_(v); return this;}
 	public Xosrh_page_mgr_searcher_mok ids_(int bgn, int end) {
-		ListAdp rv = ListAdp_.new_();
+		List_adp rv = List_adp_.new_();
 		int len = end - bgn;
 		for (int i = 0; i < len; i++) {
 			int itm_id = i + bgn;
@@ -67,7 +67,7 @@ class Xosrh_page_mgr_fxt {
 		return new Xosrh_page_mgr_searcher_mok(rv);
 	}
 	public void Test_search(String search_str, Xosrh_page_mgr_searcher searcher, int page_idx, int[] expd) {
-		byte[] search_bry = Bry_.new_ascii_(search_str);		
+		byte[] search_bry = Bry_.new_a7(search_str);		
 		Xosrh_rslt_grp page = page_mgr.Search(tmp_bfr, wiki, search_bry, page_idx, searcher);
 		Tfds.Eq_ary(expd, Xto_int_ary(page));
 	}
@@ -81,6 +81,6 @@ class Xosrh_page_mgr_fxt {
 	}
 }
 class Xosrh_page_mgr_searcher_mok implements Xosrh_page_mgr_searcher {
-	public Xosrh_page_mgr_searcher_mok(ListAdp list) {this.list = list;} ListAdp list;
-	public ListAdp Parse_search_and_load_ids(Cancelable cancelable, Bry_bfr bfr, Xows_ns_mgr ns_mgr, byte[] search) {return list;}
+	public Xosrh_page_mgr_searcher_mok(List_adp list) {this.list = list;} List_adp list;
+	public List_adp Parse_search_and_load_ids(Cancelable cancelable, Bry_bfr bfr, Xows_ns_mgr ns_mgr, byte[] search) {return list;}
 }

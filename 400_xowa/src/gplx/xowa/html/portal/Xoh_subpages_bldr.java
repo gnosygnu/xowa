@@ -52,7 +52,7 @@ public class Xoh_subpages_bldr implements Bry_fmtr_arg {
 		}
 		ttl_bfr.Clear();
 	}
-	private static final byte[] Dlm_1st = Bry_.new_ascii_("&lt; "), Dlm_nth = Bry_.new_ascii_("&lrm; | ");
+	private static final byte[] Dlm_1st = Bry_.new_a7("&lt; "), Dlm_nth = Bry_.new_a7("&lrm; | ");
 	private static final Bry_fmtr
 	  fmtr_grp = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<span class=\"subpages\">~{itms}"

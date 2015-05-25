@@ -62,7 +62,7 @@ public class Xow_data_mgr implements GfoInvkAble {
 			boolean exists = wiki.Db_mgr().Load_mgr().Load_by_ttl(db_page, ns, ttl.Page_db());
 			if (!exists) return rv.Missing_();
 			if (wiki.App().App_type().Uid_is_gui())	// NOTE: must check if gui, else will write during mass build; DATE:2014-05-03
-				wiki.Appe().Usr_dlg().Prog_many(GRP_KEY, "file_load", "loading page for ~{0}", String_.new_utf8_(ttl.Raw()));
+				wiki.Appe().Usr_dlg().Prog_many(GRP_KEY, "file_load", "loading page for ~{0}", String_.new_u8(ttl.Raw()));
 			wiki.Db_mgr().Load_mgr().Load_page(db_page, ns, !called_from_tmpl);
 			byte[] bry = db_page.Text();
 			rv.Data_raw_(bry).Revision_data().Modified_on_(db_page.Modified_on()).Id_(db_page.Id()).Html_db_id_(db_page.Html_db_id());

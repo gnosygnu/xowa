@@ -21,7 +21,7 @@ public class GfmlDataRdr extends GfmlDataRdr_base {
 		GfmlDoc gdoc = GfmlDoc_.parse_any_eol_(raw);
 		GfmlDataRdr rv = new GfmlDataRdr();
 		rv.Parse_set(true);
-		rv.SetNode(gdoc.RootNde().SubHnds().FetchAt(0));
+		rv.SetNode(gdoc.RootNde().SubHnds().Get_at(0));
 		return rv;
 	}
 	public static DataRdr raw_list_(String raw) {

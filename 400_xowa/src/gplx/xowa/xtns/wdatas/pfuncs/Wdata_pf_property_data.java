@@ -39,7 +39,7 @@ public class Wdata_pf_property_data {
 			if (nde_key_bgn == nde_key_end && nde_key_bgn == -1) continue;	// null arg; ignore, else will throw warning below; EX: {{#property:p1|}}; DATE:2013-11-15
 			Object o = Atr_keys.Get_by_mid(src, nde_key_bgn, nde_key_end);
 			if (o == null) {
-				ctx.App().Usr_dlg().Warn_many("", "", "unknown key for property: ~{0} ~{1}", String_.new_utf8_(ctx.Cur_page().Ttl().Full_txt()), String_.new_utf8_(src, self.Src_bgn(), self.Src_end())); 
+				ctx.App().Usr_dlg().Warn_many("", "", "unknown key for property: ~{0} ~{1}", String_.new_u8(ctx.Cur_page().Ttl().Full_txt()), String_.new_u8(src, self.Src_bgn(), self.Src_end())); 
 				continue;
 			}
 			nde.Val_tkn().Tmpl_evaluate(ctx, src, self, tmp_bfr);
@@ -54,6 +54,6 @@ public class Wdata_pf_property_data {
 		tmp_bfr.Mkr_rls();	
 	}
 	static final byte Atr_of_id = 1, Atr_q_id = 2;
-	private static final byte[] Atr_of_bry = Bry_.new_ascii_("of"), Atr_q_bry = Bry_.new_ascii_("q");
+	private static final byte[] Atr_of_bry = Bry_.new_a7("of"), Atr_q_bry = Bry_.new_a7("q");
 	private static final Hash_adp_bry Atr_keys = Hash_adp_bry.ci_ascii_().Add_bry_byte(Atr_of_bry, Atr_of_id).Add_bry_byte(Atr_q_bry, Atr_q_id);
 } 

@@ -77,5 +77,5 @@ public class Xol_num_grp_fmtr {
 			bfr.Add_byte(src[i]);
 		}
 	}
-	private static final byte[] Digit_grouping_pattern_normal = Bry_.new_ascii_("###,###,###");
+	private static final byte[] Digit_grouping_pattern_normal = Bry_.new_a7("###,###,###");
 }

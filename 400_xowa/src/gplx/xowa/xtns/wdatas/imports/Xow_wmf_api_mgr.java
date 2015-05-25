@@ -28,11 +28,26 @@ public class Xow_wmf_api_mgr {
 			if (!wkr.Api_wiki_enabled(wiki)) continue;
 			String call	= String_.Format("https://{0}/w/api.php?{1}", wiki, wkr.Api_qargs());	// EX: https://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=namespaces
 			usr_dlg.Prog_many("", "", "wmf_api:calling; wiki~{0} api=~{1}", wiki, call);
-			byte[] rslt = Io_mgr._.DownloadFil_args("", null).Trg_engine_key_(trg_engine_key).Exec_as_bry(call);
+			byte[] rslt = Io_mgr.I.DownloadFil_args("", null).Trg_engine_key_(trg_engine_key).Exec_as_bry(call);
 			if (rslt == null) {usr_dlg.Warn_many("", "", "wmf_api:wmf api returned nothing; api=~{0}", call); continue;}
 			wkr.Api_exec(wiki, rslt);
 		}
 		wkr.Api_term();
+	}
+	public void Api_exec2(String[] wiki_ary, Xow_wmf_api_wkr[] wkr) {
+		Gfo_usr_dlg usr_dlg = Xoa_app_.Usr_dlg();
+		int len = wiki_ary.length;
+		String all_args = "";
+		Xowmf_json_tbl json_tbl = new Xowmf_json_tbl(null);
+		for (int i = 0; i < len; ++i) {
+			String wiki = wiki_ary[i];
+			String call	= String_.Format("https://{0}/w/api.php?{1}", wiki, all_args);	// EX: https://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=namespaces
+			usr_dlg.Prog_many("", "", "wmf_api:calling; wiki~{0} api=~{1}", wiki, call);
+			byte[] rslt = Io_mgr.I.DownloadFil_args("", null).Trg_engine_key_(trg_engine_key).Exec_as_bry(call);
+			if (rslt == null) {usr_dlg.Warn_many("", "", "wmf_api:wmf api returned nothing; api=~{0}", call); continue;}
+			int site_id = -1;
+			json_tbl.Insert(site_id, DateAdp_.Now(), rslt);
+		}
 	}
 	public static String[] Wikis = new String[]
 { "commons.wikimedia.org"

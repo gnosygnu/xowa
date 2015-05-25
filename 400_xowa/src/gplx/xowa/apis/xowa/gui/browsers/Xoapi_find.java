@@ -47,7 +47,11 @@ class Xog_find_box {
 		this.find_box = win.Find_box();
 	}
 	public void Show() {app.Gui_mgr().Layout().Find_show();}
-	public void Hide() {app.Gui_mgr().Layout().Find_close();}
+	public void Hide() {
+		app.Gui_mgr().Layout().Find_close();
+		if (win.Tab_mgr().Active_tab_is_null()) return;	// if no active_tab, just exit
+		win.Active_html_itm().Html_box().Html_js_eval_script("return xowa_find_html_all_del();");
+	}
 	public void Show_by_paste()		{
 		this.Show();
 		if (win.Tab_mgr().Active_tab_is_null()) return;	// if no active_tab, just show box; don't try to copy what's on tab;

@@ -134,15 +134,15 @@ public class Gfs_parser_tst {
 }
 class Gfs_parser_fxt {
 	public void Clear() {}
-	public Gfs_nde nde_(String v) {return new Gfs_nde().Name_(Bry_.new_ascii_(v));}
-	public Gfs_nde val_(String v) {return new Gfs_nde().Name_(Bry_.new_ascii_(v));}
+	public Gfs_nde nde_(String v) {return new Gfs_nde().Name_(Bry_.new_a7(v));}
+	public Gfs_nde val_(String v) {return new Gfs_nde().Name_(Bry_.new_a7(v));}
 	public void Test_parse(String src_str, Gfs_nde... expd) {
-		byte[] src_bry = Bry_.new_utf8_(src_str);
+		byte[] src_bry = Bry_.new_u8(src_str);
 		Gfs_nde root = parser.Parse(src_bry);
 		Tfds.Eq_str_lines(To_str(null, expd), To_str(src_bry, root.Subs_to_ary()));
 	}	private Bry_bfr tmp_bfr = Bry_bfr.new_(), path_bfr = Bry_bfr.new_(); Gfs_parser parser = new Gfs_parser();
 	public void Test_parse_fail(String src_str, String expd_err) {
-		byte[] src_bry = Bry_.new_utf8_(src_str);
+		byte[] src_bry = Bry_.new_u8(src_str);
 		try {parser.Parse(src_bry);}
 		catch (Exception e) {
 			String actl_err = Err_.Message_gplx_brief(e);
@@ -192,5 +192,5 @@ class Gfs_parser_fxt {
 			bfr.Add(val);
 		bfr.Add_byte_nl();		
 	}
-	private static final byte[] Atr_name = Bry_.new_ascii_("name=");
+	private static final byte[] Atr_name = Bry_.new_a7("name=");
 }

@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.ios; import gplx.*;
-import gplx.lists.*; /*OrderedHash_base*/
-public class IoItmList extends OrderedHash_base {
+import gplx.lists.*; /*Ordered_hash_base*/
+public class IoItmList extends Ordered_hash_base {
 	public boolean Has(Io_url url) {return Has_base(MakeKey(url));}
 	public void Add(IoItm_base itm) {
 		if (ownerDir != null) itm.OwnerDir_set(ownerDir);
@@ -36,7 +36,7 @@ public class IoItmList extends OrderedHash_base {
 			rv[i] = IoItm_base_.as_(i).Url();
 		return rv;
 	}
-	@Override public void Sort() {SortBy(IoItmBase_comparer_nest._);}
+	@Override public void Sort() {Sort_by(IoItmBase_comparer_nest._);}
 	@Override protected Object Fetch_base(Object keyObj) {
 		String key = MakeKey((String)keyObj);
 		return super.Fetch_base(key);

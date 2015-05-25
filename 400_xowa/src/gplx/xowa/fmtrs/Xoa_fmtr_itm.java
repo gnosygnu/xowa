@@ -40,7 +40,7 @@ public class Xoa_fmtr_itm implements GfoInvkAble {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_src))					return src;
 		else if	(ctx.Match(k, Invk_src_)) 					src = m.ReadStr("v"); 
-		else if	(ctx.Match(k, Invk_fmt)) 					return String_.new_utf8_(fmt);
+		else if	(ctx.Match(k, Invk_fmt)) 					return String_.new_u8(fmt);
 		else if	(ctx.Match(k, Invk_fmt_)) 					fmt = m.ReadBry("v"); 
 		else if	(ctx.Match(k, Invk_sorter)) 				return this.Sorter();
 		else if	(ctx.Match(k, Invk_run)) 					return Run(); 
@@ -59,7 +59,7 @@ class Bfmtr_eval_invk implements Bry_fmtr_eval_mgr {
 	public Bfmtr_eval_invk Invk_(GfoInvkAble invk) {this.invk = invk; return this;} private GfoInvkAble invk;
 	public boolean Enabled() {return enabled;} public void Enabled_(boolean v) {enabled = v;} private boolean enabled = true;
 	public byte[] Eval(byte[] cmd) {
-		Object rslt = app.Gfs_mgr().Run_str_for(invk, String_.new_utf8_(cmd));
-		return Bry_.new_utf8_(Object_.Xto_str_strict_or_null_mark(rslt));
+		Object rslt = app.Gfs_mgr().Run_str_for(invk, String_.new_u8(cmd));
+		return Bry_.new_u8(Object_.Xto_str_strict_or_null_mark(rslt));
 	}
 }

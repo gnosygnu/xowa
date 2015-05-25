@@ -34,9 +34,9 @@ public class Xof_rule_grp implements GfoInvkAble {
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_owner))		return owner;
-		else if	(ctx.Match(k, Invk_set))		return Get_or_new(Bry_.new_utf8_(m.ReadStr("v")));
+		else if	(ctx.Match(k, Invk_set))		return Get_or_new(Bry_.new_u8(m.ReadStr("v")));
 		else	return GfoInvkAble_.Rv_unhandled;
 	}	private static final String Invk_owner = "owner", Invk_set = "set";
 	private static final String Grp_app_default_str = "app_default";
-	public static byte[] Grp_app_default = Bry_.new_utf8_(Grp_app_default_str);
+	public static byte[] Grp_app_default = Bry_.new_u8(Grp_app_default_str);
 }

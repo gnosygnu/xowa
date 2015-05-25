@@ -36,7 +36,7 @@ public class Xoapi_tabs implements GfoInvkAble {
 	public void Close_cur()							{tab_mgr.Tabs_close_cur();}
 	public void Select_bwd()						{tab_mgr.Tabs_select(Bool_.N);}
 	public void Select_fwd()						{tab_mgr.Tabs_select(Bool_.Y);}
-	public void Select_by_idx(int v)				{tab_mgr.Tabs_select_by_idx(v - ListAdp_.Base1);}
+	public void Select_by_idx(int v)				{tab_mgr.Tabs_select_by_idx(v - List_adp_.Base1);}
 	public void Move_bwd()							{tab_mgr.Tabs_move(Bool_.N);}
 	public void Move_fwd()							{tab_mgr.Tabs_move(Bool_.Y);}
 	public void Close_others()						{tab_mgr.Tabs_close_others();}

@@ -19,12 +19,12 @@ package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gpl
 import gplx.xowa.wikis.data.tbls.*;
 class Xows_db_matcher_bldr {
 	public Xows_db_word[] Gather_words_for_db(Cancelable cxl, Xows_db_matcher matcher, Xowd_search_word_tbl word_tbl) {
-		ListAdp rv = ListAdp_.new_();
+		List_adp rv = List_adp_.new_();
 		Gather_words_for_db(cxl, matcher, rv, word_tbl);
-		rv.SortBy(Xows_db_word_sorter.Page_count_dsc);
-		return (Xows_db_word[])rv.Xto_ary(Xows_db_word.class);
+		rv.Sort_by(Xows_db_word_sorter.Page_count_dsc);
+		return (Xows_db_word[])rv.To_ary(Xows_db_word.class);
 	}
-	private void Gather_words_for_db(Cancelable cxl, Xows_db_matcher matcher, ListAdp rv, Xowd_search_word_tbl word_tbl) {
+	private void Gather_words_for_db(Cancelable cxl, Xows_db_matcher matcher, List_adp rv, Xowd_search_word_tbl word_tbl) {
 		switch (matcher.Tid()) {
 			case Xows_db_matcher.Tid_word:
 				byte[] word_text = matcher.Raw();
@@ -34,7 +34,7 @@ class Xows_db_matcher_bldr {
 					Load_word_one(rv, word_text, word_tbl);
 				break;
 			case Xows_db_matcher.Tid_word_quote:
-				ListAdp tmp = ListAdp_.new_();
+				List_adp tmp = List_adp_.new_();
 				byte[][] words = Bry_.Split(matcher.Raw(), Byte_ascii.Space, Bool_.Y);
 				int words_len = words.length;
 				for (int i = 0; i < words_len; ++i) {
@@ -42,14 +42,14 @@ class Xows_db_matcher_bldr {
 					Load_word_one(tmp, word, word_tbl);
 				}
 				if (tmp.Count() == 0) return;	// no words in db; EX: "xyz cba"
-				tmp.SortBy(Xows_db_word_sorter.Page_count_dsc);
-				rv.Add(tmp.FetchAt(0));			// add lowest page_count word to db; EX: search for "earth and" should search for "earth" only, but match for "earth and"
+				tmp.Sort_by(Xows_db_word_sorter.Page_count_dsc);
+				rv.Add(tmp.Get_at(0));			// add lowest page_count word to db; EX: search for "earth and" should search for "earth" only, but match for "earth and"
 				break;
 			case Xows_db_matcher.Tid_and:
-				ListAdp lhs_tmp = ListAdp_.new_(), rhs_tmp = ListAdp_.new_();
+				List_adp lhs_tmp = List_adp_.new_(), rhs_tmp = List_adp_.new_();
 				Gather_words_for_db(cxl, matcher.Lhs(), lhs_tmp, word_tbl);
 				Gather_words_for_db(cxl, matcher.Rhs(), rhs_tmp, word_tbl);
-				ListAdp_.Add_list(rv, Calc_lowest(lhs_tmp, rhs_tmp)); // calc side with lowest count; add to rv;
+				List_adp_.Add_list(rv, Calc_lowest(lhs_tmp, rhs_tmp)); // calc side with lowest count; add to rv;
 				break;
 			case Xows_db_matcher.Tid_or:
 				Gather_words_for_db(cxl, matcher.Lhs(), rv, word_tbl);
@@ -60,7 +60,7 @@ class Xows_db_matcher_bldr {
 			default:							throw Err_.unhandled(matcher.Tid());
 		}
 	}
-	private ListAdp Calc_lowest(ListAdp lhs, ListAdp rhs) {
+	private List_adp Calc_lowest(List_adp lhs, List_adp rhs) {
 		int lhs_count = Calc(lhs);
 		int rhs_count = Calc(rhs);
 		// never return 0 as lowest count; note that NOT will return 0;
@@ -68,22 +68,22 @@ class Xows_db_matcher_bldr {
 		else if (rhs_count == 0)	return lhs;
 		else						return lhs_count < rhs_count ? lhs : rhs;
 	}
-	private int Calc(ListAdp list) {
+	private int Calc(List_adp list) {
 		int rv = 0;
 		int len = list.Count();
 		for (int i = 0; i < len; ++i) {
-			Xows_db_word word = (Xows_db_word)list.FetchAt(i);
+			Xows_db_word word = (Xows_db_word)list.Get_at(i);
 			rv += word.Page_count();
 		}
 		return rv;
 	}
-	private void Load_word_one(ListAdp rv, byte[] word_text, Xowd_search_word_tbl word_tbl) {
+	private void Load_word_one(List_adp rv, byte[] word_text, Xowd_search_word_tbl word_tbl) {
 		Xoa_app_.Usr_dlg().Prog_many("", "", "search:word by text; word=~{0}", word_text);
 		Xowd_search_word_row row = word_tbl.Select_by_or_null(word_text); if (row == Xowd_search_word_row.Null) return;
 		Xows_db_word word = new Xows_db_word(row.Id(), row.Text(), row.Page_count());
 		rv.Add(word);
 	}
-	private void Load_word_many(Cancelable cxl, ListAdp rv, byte[] word_text, Xowd_search_word_tbl word_tbl) {
+	private void Load_word_many(Cancelable cxl, List_adp rv, byte[] word_text, Xowd_search_word_tbl word_tbl) {
 		Xoa_app_.Usr_dlg().Prog_many("", "", "search:word by wildcard; word=~{0}", word_text);
 		Xowd_search_word_row[] rows = word_tbl.Select_in(cxl, word_text);
 		int len = rows.length;

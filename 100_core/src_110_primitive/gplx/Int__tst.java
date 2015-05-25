@@ -98,7 +98,7 @@ public class Int__tst {
 	}
 	@Test  public void Xto_int_hex_tst() {
 		Xto_int_hex("007C", 124);
-	}	void Xto_int_hex(String raw, int expd) {Tfds.Eq(expd, Int_.Xto_int_hex(Bry_.new_ascii_(raw)));}
+	}	void Xto_int_hex(String raw, int expd) {Tfds.Eq(expd, Int_.Xto_int_hex(Bry_.new_a7(raw)));}
 	@Test  public void Ary_parse() {
 		Ary_parse__tst("1,2,3"							, 3, Int_.Ary_empty,   1,   2,   3);
 		Ary_parse__tst("123,321,213"					, 3, Int_.Ary_empty, 123, 321, 213);

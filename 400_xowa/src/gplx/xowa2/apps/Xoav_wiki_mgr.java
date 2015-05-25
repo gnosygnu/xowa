@@ -16,12 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa2.apps; import gplx.*; import gplx.xowa2.*;
-import gplx.xowa.langs.cases.*; import gplx.xowa.users.data.*;
-import gplx.xowa2.wikis.*;
-public class Xoav_wiki_mgr implements GfoInvkAble {
-	private final Xoav_app app; private final OrderedHash hash = OrderedHash_.new_bry_();		
+import gplx.xowa.*; import gplx.xowa.langs.cases.*; import gplx.xowa.users.data.*;
+import gplx.xowa.wikis.*; import gplx.xowa2.wikis.*;
+public class Xoav_wiki_mgr implements Xoa_wiki_mgr, GfoInvkAble {
+	private final Xoav_app app; private final Ordered_hash hash = Ordered_hash_.new_bry_();		
 	public Xoav_wiki_mgr(Xoav_app app, Xol_case_mgr case_mgr) {this.app = app;}
-	public Xowv_wiki Get_by_domain(byte[] domain) {return (Xowv_wiki)hash.Fetch(domain);}
+	public Xowv_wiki Get_by_domain(byte[] domain) {return (Xowv_wiki)hash.Get_by(domain);}
 	public Xowv_wiki Import_by_fil(Io_url fil) {
 		Io_url wiki_dir = fil.OwnerDir();
 		Xowv_wiki rv = Load(Gen_domain_str(fil.NameOnly()), wiki_dir);
@@ -39,8 +39,13 @@ public class Xoav_wiki_mgr implements GfoInvkAble {
 	public Xowv_wiki Load_by_fil(Io_url fil)		{
 		return Load(Gen_domain_str(fil.NameOnly()), fil.OwnerDir());
 	}
+	public Xow_wiki Get_by_key_or_make_2(byte[] key) {
+		Xow_wiki rv = this.Get_by_domain(key);
+		// if (rv == null) rv = New_wiki(key);	// TODO: must make wiki, but need wiki_url; DATE:2015-05-23
+		return rv;
+	}
 	public void Load_by_dir(Io_url wiki_root_dir)	{
-		Io_url[] wiki_dirs = Io_mgr._.QueryDir_args(wiki_root_dir).DirOnly_().ExecAsUrlAry();
+		Io_url[] wiki_dirs = Io_mgr.I.QueryDir_args(wiki_root_dir).DirOnly_().ExecAsUrlAry();
 		for (Io_url wiki_dir : wiki_dirs) {
 			String wiki_dir_url = wiki_dir.Raw();
 			if (String_.HasAtBgn(wiki_dir_url, "#")) continue;
@@ -48,9 +53,9 @@ public class Xoav_wiki_mgr implements GfoInvkAble {
 		}
 	}
 	private Xowv_wiki Load(String domain_str, Io_url wiki_dir) {
-		byte[] domain_bry = Bry_.new_utf8_(domain_str);
+		byte[] domain_bry = Bry_.new_u8(domain_str);
 		Xowv_wiki rv = new Xowv_wiki(app, domain_bry, wiki_dir);
-		hash.AddReplace(domain_bry, rv);
+		hash.Add_if_dupe_use_nth(domain_bry, rv);
 		return rv;
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

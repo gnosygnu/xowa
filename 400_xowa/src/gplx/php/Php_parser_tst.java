@@ -161,17 +161,17 @@ class Php_parser_fxt {
 	public Php_itm_kv_chkr   itm_kv_int(String k, int v) 						{return new Php_itm_kv_chkr().Key_(k).Val_(itm_int(v));}
 	public Php_itm_kv_chkr   itm_kv_itm(String k, Php_itm_chkr_base v) 			{return new Php_itm_kv_chkr().Key_(k).Val_(v);}
 	public void tst_tkns(String raw, Php_tkn_chkr_base... expd) {
-		byte[] raw_bry = Bry_.new_utf8_(raw);
+		byte[] raw_bry = Bry_.new_u8(raw);
 		parser.Parse_tkns(raw_bry, tkn_wkr);
-		Php_tkn[] actl = (Php_tkn[])tkn_wkr.List().Xto_ary(Php_tkn.class);
+		Php_tkn[] actl = (Php_tkn[])tkn_wkr.List().To_ary(Php_tkn.class);
 		tst_mgr.Vars().Clear().Add("raw_bry", raw_bry);
 		tst_mgr.Tst_ary("", expd, actl);
 		log_mgr_chkr.tst(tst_mgr, tkn_wkr.Msg_log());
 	}
 	public void tst_lines(String raw, Php_line_assign_chkr... expd) {
-		byte[] raw_bry = Bry_.new_utf8_(raw);
+		byte[] raw_bry = Bry_.new_u8(raw);
 		parser.Parse_tkns(raw_bry, line_wkr);
-		Php_line[] actl = (Php_line[])line_wkr.List().Xto_ary(Php_line.class);
+		Php_line[] actl = (Php_line[])line_wkr.List().To_ary(Php_line.class);
 		tst_mgr.Vars().Clear().Add("raw_bry", raw_bry);
 		tst_mgr.Tst_ary("", expd, actl);
 		log_mgr_chkr.tst(tst_mgr, line_wkr.Msg_log());
@@ -242,7 +242,7 @@ class Php_tkn_var_chkr extends Php_tkn_chkr_base {
 		Php_tkn_var actl = (Php_tkn_var)actl_obj;
 		int rv = 0;
 		byte[] raw_bry = (byte[])mgr.Vars_get_by_key("raw_bry"); 
-		rv += mgr.Tst_val(var_name == null, path, "var_name", var_name, String_.new_utf8_(actl.Var_name(raw_bry))); 
+		rv += mgr.Tst_val(var_name == null, path, "var_name", var_name, String_.new_u8(actl.Var_name(raw_bry))); 
 		return rv;
 	}
 }
@@ -278,7 +278,7 @@ class Php_line_assign_chkr implements Tst_chkr {
 	public int Chk(Tst_mgr mgr, String path, Object actl_obj) {
 		Php_line_assign actl = (Php_line_assign)actl_obj;
 		int rv = 0;
-		rv += mgr.Tst_val(key == null, path, "key", key, String_.new_utf8_(actl.Key().Val_obj_bry()));
+		rv += mgr.Tst_val(key == null, path, "key", key, String_.new_u8(actl.Key().Val_obj_bry()));
 		if (subs != null) rv += mgr.Tst_sub_ary(subs, actl.Key_subs(), "subs", rv);
 		rv += mgr.Tst_sub_obj(val, actl.Val(), "val", rv);
 		return rv;
@@ -320,7 +320,7 @@ class Php_itm_txt_chkr extends Php_itm_chkr_base {
 	@Override public int Chk_itm(Tst_mgr mgr, String path, Php_itm actl_obj) {
 		Php_itm_var actl = (Php_itm_var)actl_obj;
 		int rv = 0;
-		rv += mgr.Tst_val(false, path, "val_obj_str", val_obj_str, String_.new_utf8_(actl.Val_obj_bry()));
+		rv += mgr.Tst_val(false, path, "val_obj_str", val_obj_str, String_.new_u8(actl.Val_obj_bry()));
 		return rv;
 	}
 }
@@ -331,7 +331,7 @@ class Php_itm_quote_chkr extends Php_itm_chkr_base {
 	@Override public int Chk_itm(Tst_mgr mgr, String path, Php_itm actl_obj) {
 		Php_itm_quote actl = (Php_itm_quote)actl_obj;
 		int rv = 0;
-		rv += mgr.Tst_val(false, path, "val_obj_str", val_obj_str, String_.new_utf8_(actl.Val_obj_bry()));
+		rv += mgr.Tst_val(false, path, "val_obj_str", val_obj_str, String_.new_u8(actl.Val_obj_bry()));
 		return rv;
 	}
 }
@@ -359,13 +359,13 @@ class Php_itm_kv_chkr extends Php_itm_chkr_base {
 	@Override public int Chk_itm(Tst_mgr mgr, String path, Php_itm actl_obj) {
 		Php_itm_kv actl = (Php_itm_kv)actl_obj;
 		int rv = 0;
-		rv += mgr.Tst_val(false, path, "key", key, String_.new_utf8_(actl.Key().Val_obj_bry()));
+		rv += mgr.Tst_val(false, path, "key", key, String_.new_u8(actl.Key().Val_obj_bry()));
 		rv += mgr.Tst_sub_obj(val, actl.Val(), path, rv);
 		return rv;
 	}
 }
 class Gfo_msg_log_chkr implements Tst_chkr {
-	ListAdp itms = ListAdp_.new_(); 
+	List_adp itms = List_adp_.new_(); 
 	public Class<?> TypeOf() {return Gfo_msg_log.class;}
 	public void Clear() {itms.Clear();}
 	public void Add_itm(Gfo_msg_itm itm, int bgn, int end) {
@@ -380,7 +380,7 @@ class Gfo_msg_log_chkr implements Tst_chkr {
 		Gfo_msg_data[] actl_itms = new Gfo_msg_data[actl_itms_len];		
 		for (int i = 0; i < actl_itms_len; i++)
 			actl_itms[i] = actl.Ary_get(i);
-		mgr.Tst_ary("itms", (Gfo_msg_data_chkr[])itms.Xto_ary(Gfo_msg_data_chkr.class), actl_itms);
+		mgr.Tst_ary("itms", (Gfo_msg_data_chkr[])itms.To_ary(Gfo_msg_data_chkr.class), actl_itms);
 	}
 }
 class Gfo_msg_data_chkr implements Tst_chkr {

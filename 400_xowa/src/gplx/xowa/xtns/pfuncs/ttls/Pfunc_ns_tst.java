@@ -33,4 +33,5 @@ public class Pfunc_ns_tst {
 		fxt.Wiki().Ns_mgr().Clear().Add_new(4, "wiki").Add_new(5, "$1 talk").Add_new(10, "Template").Init();
 		fxt.Test_parse_tmpl_str_test("{{ns:5}}"					, "{{test}}", "wiki talk");
 	}
+	@Test  public void Ns_neg1()			{fxt.Test_parse_tmpl_str_test("{{ns:-1}}"					, "{{test}}", "Special");}	// PURPOSE.FIX:handle special; DATE:2015-05-18
 }

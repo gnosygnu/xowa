@@ -26,7 +26,7 @@ public class Xow_lang_mgr_fxt {
 	public static void Init_langs(Xowe_wiki wiki) {
 		Xoae_app app = wiki.Appe();
 		Xoa_lang_mgr lang_mgr = app.Lang_mgr();
-		lang_mgr.Groups().Set_bulk(Bry_.new_ascii_(String_.Concat_lines_nl
+		lang_mgr.Groups().Set_bulk(Bry_.new_a7(String_.Concat_lines_nl
 			(	"+||grp|wiki"
 			,	"+|wiki|grp|grp1"
 			,	"+|wiki|grp|grp2"
@@ -37,7 +37,7 @@ public class Xow_lang_mgr_fxt {
 			,	"+|grp1|itm|it|Italian"
 			,	"+|grp1|itm|zh|Chinese"
 			)));
-		wiki.Xwiki_mgr().Add_bulk_langs(Bry_.new_ascii_("wiki"));
+		wiki.Xwiki_mgr().Add_bulk_langs(Bry_.new_a7("wiki"));
 		String bulk = String_.Concat_lines_nl
 			(	"simple.wikipedia.org|simple.wikipedia.org"
 			,	"fr.wikipedia.org|fr.wikipedia.org"
@@ -45,14 +45,14 @@ public class Xow_lang_mgr_fxt {
 			,	"de.wikipedia.org|de.wikipedia.org"
 			,	"it.wikipedia.org|it.wikipedia.org"
 			);
-		wiki.Appe().User().Wiki().Xwiki_mgr().Add_bulk(Bry_.new_ascii_(bulk));
+		wiki.Appe().Usere().Wiki().Xwiki_mgr().Add_bulk(Bry_.new_a7(bulk));
 	}
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	Xoae_app app;
 	public void tst(String raw, String expd) {
 		Xop_ctx ctx = wiki.Ctx();
-		ctx.Cur_page().Ttl_(Xoa_ttl.parse_(wiki, Bry_.new_ascii_("test_page")));
-		byte[] raw_bry = Bry_.new_utf8_(raw);
+		ctx.Cur_page().Ttl_(Xoa_ttl.parse_(wiki, Bry_.new_a7("test_page")));
+		byte[] raw_bry = Bry_.new_u8(raw);
 		Bry_bfr bfr = Bry_bfr.new_();
 		Xop_root_tkn root = ctx.Tkn_mkr().Root(raw_bry);
 		wiki.Parser().Parse_page_all_clear(root, ctx, ctx.Tkn_mkr(), raw_bry);

@@ -81,32 +81,32 @@ class Gallery_itm_parser_fxt {
 	public String[] Expd(String ttl, String caption, String alt, String link)			{return new String[] {ttl, caption, alt, link, null};}
 	public String[] Expd(String ttl, String caption, String alt, String link, int page)	{return new String[] {ttl, caption, alt, link, Int_.Xto_str(page)};}
 	public void Init_kwd_set(int kwd_id, String kwd_val) {
-		wiki.Lang().Kwd_mgr().Get_or_new(kwd_id).Itms()[0].Val_(Bry_.new_ascii_(kwd_val));
+		wiki.Lang().Kwd_mgr().Get_or_new(kwd_id).Itms()[0].Val_(Bry_.new_a7(kwd_val));
 		parser.Init_by_wiki(wiki);
 	}
 	public void Test_parse(String raw, String[]... expd) {
-		ListAdp actl = ListAdp_.new_();
-		byte[] src = Bry_.new_ascii_(raw);
+		List_adp actl = List_adp_.new_();
+		byte[] src = Bry_.new_a7(raw);
 		parser.Parse_all(actl, Gallery_mgr_base_.New_by_mode(Gallery_mgr_base_.Traditional_tid), new Gallery_xnde(), src, 0, src.length);
 		Tfds.Eq_ary(String_.Ary_flatten(expd), String_.Ary_flatten(Xto_str_ary(src, actl)));
 	}
-	private String[][] Xto_str_ary(byte[] src, ListAdp list) {
+	private String[][] Xto_str_ary(byte[] src, List_adp list) {
 		int len = list.Count();
 		String[][] rv = new String[len][];
 		for (int i = 0; i < len; i++) {
-			Gallery_itm itm = (Gallery_itm)list.FetchAt(i);
+			Gallery_itm itm = (Gallery_itm)list.Get_at(i);
 			String[] ary = new String[5];
 			rv[i] = ary;
-			ary[0] = String_.new_utf8_(itm.Ttl().Full_txt());
+			ary[0] = String_.new_u8(itm.Ttl().Full_txt());
 			ary[2] = Xto_str_ary_itm(src, itm.Alt_bgn(), itm.Alt_end());
 			ary[3] = Xto_str_ary_itm(src, itm.Link_bgn(), itm.Link_end());
 			ary[4] = Xto_str_ary_itm(src, itm.Page_bgn(), itm.Page_end());
 			byte[] caption = itm.Caption_bry();
-			ary[1] =  caption == null ? null : String_.new_utf8_(caption);
+			ary[1] =  caption == null ? null : String_.new_u8(caption);
 		}
 		return rv;
 	}
 	private String Xto_str_ary_itm(byte[] src, int bgn, int end) {
-		return bgn == Bry_.NotFound && end == Bry_.NotFound ? null : String_.new_utf8_(src, bgn, end);
+		return bgn == Bry_.NotFound && end == Bry_.NotFound ? null : String_.new_u8(src, bgn, end);
 	}
 }

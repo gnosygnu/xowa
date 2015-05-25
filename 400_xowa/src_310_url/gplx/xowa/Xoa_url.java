@@ -21,7 +21,7 @@ public class Xoa_url {
 	public byte[]			Wiki_bry() {return wiki_bry;} public Xoa_url Wiki_bry_(byte[] v) {wiki_bry = v; return this;} private byte[] wiki_bry;
 	public byte[]			Page_bry() {return page_bry;} public Xoa_url Page_bry_(byte[] v) {page_bry = v; return this;} private byte[] page_bry;
 	public byte[]			Anchor_bry() {return anchor_bry;} public Xoa_url Anchor_bry_(byte[] v) {anchor_bry = v; return this;} private byte[] anchor_bry = null;
-	public String			Anchor_str() {return anchor_bry == null ? null : String_.new_utf8_(anchor_bry);}
+	public String			Anchor_str() {return anchor_bry == null ? null : String_.new_u8(anchor_bry);}
 	public Gfo_url_arg[]	Args() {return args;} public Xoa_url Args_(Gfo_url_arg[] v) {args = v; return this;} private Gfo_url_arg[] args = Gfo_url_arg.Ary_empty;
 	public Xoa_url_arg_hash Args_hash() {if (args_hash == null) args_hash = new Xoa_url_arg_hash().Load(this); return args_hash;} private Xoa_url_arg_hash args_hash;
 	public byte				Protocol_tid() {return protocol_tid;} public Xoa_url Protocol_tid_(byte v) {protocol_tid = v; return this;} private byte protocol_tid;
@@ -81,7 +81,7 @@ public class Xoa_url {
 	}
 	public boolean Eq_page(Xoa_url comp) {return Bry_.Eq(wiki_bry, comp.wiki_bry) && Bry_.Eq(page_bry, comp.page_bry) && redirect_force == comp.Redirect_force();}
 	public byte[] Xto_full_bry()		{return wiki_bry == null ? page_bry : Bry_.Add(wiki_bry, Xoa_consts.Url_wiki_intermediary, page_bry);}
-	public String Xto_full_str()		{return String_.new_utf8_(this.Xto_full_bry());}
+	public String Xto_full_str()		{return String_.new_u8(this.Xto_full_bry());}
 	public String Xto_full_str_safe()	{try {return Xto_full_str();} catch (Exception e) {return gplx.Err_.Message_gplx_brief(e);}}
 	public static final Xoa_url Null = null;
 	public static Xoa_url blank_() {return new Xoa_url();}

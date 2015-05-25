@@ -184,6 +184,6 @@ public class Pft_fmt_itm_ {
 			}
 		}
 		if (raw_bgn != String_.Pos_neg1) {fmt_itms.Add(fmt_len - raw_bgn == 1 ? new Pft_fmt_itm_raw_byt(fmt[fmt_len - 1]) : (Pft_fmt_itm)new Pft_fmt_itm_raw_ary(fmt, raw_bgn, fmt_len)); raw_bgn = String_.Pos_neg1;}
-		return (Pft_fmt_itm[])fmt_itms.Xto_ary(Pft_fmt_itm.class);
-	}	private static ListAdp fmt_itms = ListAdp_.new_();
+		return (Pft_fmt_itm[])fmt_itms.To_ary(Pft_fmt_itm.class);
+	}	private static List_adp fmt_itms = List_adp_.new_();
 }

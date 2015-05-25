@@ -33,7 +33,7 @@ public class Db_qry__select_cmd implements Db_qry {
 		try {
 			Object rv = null;
 			if (rdr.MoveNextPeer()) {
-				rv = rdr.Read(cols.Flds().FetchAt(0).Fld());	// NOTE: need to access from flds for tdb
+				rv = rdr.Read(cols.Flds().Get_at(0).Fld());	// NOTE: need to access from flds for tdb
 			}
 			return rv;
 		}	finally {rdr.Rls();}

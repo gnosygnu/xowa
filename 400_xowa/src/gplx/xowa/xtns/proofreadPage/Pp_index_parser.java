@@ -88,17 +88,17 @@ class Pp_index_parser {
 class Pp_index_page {
 	public Pp_index_page() {}
 	public byte[] Src() {return src;} public Pp_index_page Src_(byte[] v) {src = v; return this;} private byte[] src;
-	public ListAdp		Pagelist_xndes()	{return pagelist_xndes;} private ListAdp pagelist_xndes = ListAdp_.new_();
-	public ListAdp		Page_ttls()			{return page_ttls;} private ListAdp page_ttls = ListAdp_.new_();
-	public ListAdp		Main_lnkis()		{return main_lnkis;} private ListAdp main_lnkis = ListAdp_.new_();
-	public ListAdp		Invk_args()			{return invk_args;} private ListAdp invk_args = ListAdp_.new_();
+	public List_adp		Pagelist_xndes()	{return pagelist_xndes;} private List_adp pagelist_xndes = List_adp_.new_();
+	public List_adp		Page_ttls()			{return page_ttls;} private List_adp page_ttls = List_adp_.new_();
+	public List_adp		Main_lnkis()		{return main_lnkis;} private List_adp main_lnkis = List_adp_.new_();
+	public List_adp		Invk_args()			{return invk_args;} private List_adp invk_args = List_adp_.new_();
 	public Xoa_ttl[] Get_ttls_rng(Xowe_wiki wiki, int ns_page_id, byte[] bgn_page_bry, byte[] end_page_bry, Int_obj_ref bgn_page_ref, Int_obj_ref end_page_ref) {
 		int list_len = page_ttls.Count(); if (list_len == 0) return Pp_pages_nde.Ttls_null;
-		ListAdp rv = ListAdp_.new_();
+		List_adp rv = List_adp_.new_();
 		Xoa_ttl bgn_page_ttl = new_ttl_(wiki, ns_page_id, bgn_page_bry), end_page_ttl = new_ttl_(wiki, ns_page_id, end_page_bry);
 		boolean add = bgn_page_ttl == Xoa_ttl.Null;		// if from is missing, default to bgn; EX: <pages index=A to="A/5"/>
 		for (int i = 0; i < list_len; i++) {			// REF.MW:ProofreadPageRenderer|renderPages
-			Xoa_ttl ttl = (Xoa_ttl)page_ttls.FetchAt(i);
+			Xoa_ttl ttl = (Xoa_ttl)page_ttls.Get_at(i);
 			if (	ttl.Eq_page_db(bgn_page_ttl))	{add = Bool_.Y; bgn_page_ref.Val_(i);}
 			if (add) rv.Add(ttl);
 			if (	end_page_ttl != Xoa_ttl.Null		// if to is missing default to end;
@@ -108,7 +108,7 @@ class Pp_index_page {
 		if (bgn_page_ref.Val() == -1) bgn_page_ref.Val_(0);				// NOTE: set "from" which will be passed to {{MediaWiki:Proofreadpage_header_template}}; DATE:2014-05-21
 		if (end_page_ref.Val() == -1) end_page_ref.Val_(list_len - 1);  // NOTE: set "to"   which will be passed to {{MediaWiki:Proofreadpage_header_template}}; DATE:2014-05-21
 		if (rv.Count() == 0) return Pp_pages_nde.Ttls_null;
-		return (Xoa_ttl[])rv.Xto_ary(Xoa_ttl.class);
+		return (Xoa_ttl[])rv.To_ary(Xoa_ttl.class);
 	}
 	private static Xoa_ttl new_ttl_(Xowe_wiki wiki, int ns_page_id, byte[] bry) {return bry == null ? Xoa_ttl.Null : Xoa_ttl.parse_(wiki, ns_page_id, bry);}
 	public static final Pp_index_page Null = new Pp_index_page();

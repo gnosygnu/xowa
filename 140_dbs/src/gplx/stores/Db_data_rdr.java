@@ -29,13 +29,13 @@ public class Db_data_rdr extends DataRdr_base implements DataRdr {
 	@Override public int FieldCount() {return fieldCount;}
 	@Override public String KeyAt(int i) {
 		String rv = null; 
-		try {rv = rdr.getMetaData().getColumnLabel(i + ListAdp_.Base1);}
+		try {rv = rdr.getMetaData().getColumnLabel(i + List_adp_.Base1);}
 		catch (SQLException e) {Err_.err_(e, "get columnName failed").Add("i", i).Add("commandText", commandText);}
 		return rv;
 	}
 	@Override public Object ReadAt(int i) {
 		Object rv;
-		try {rv = rdr.getObject(i + ListAdp_.Base1);} catch(Exception exc) {throw Err_.new_("could not read val from dataReader; idx not found or rdr not open").Add("idx", i).Add("sql", commandText);}
+		try {rv = rdr.getObject(i + List_adp_.Base1);} catch(Exception exc) {throw Err_.new_("could not read val from dataReader; idx not found or rdr not open").Add("idx", i).Add("sql", commandText);}
 		return rv;
 	}
 	@Override public Object Read(String key) {

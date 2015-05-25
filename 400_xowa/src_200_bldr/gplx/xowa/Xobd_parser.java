@@ -19,18 +19,18 @@ package gplx.xowa; import gplx.*;
 import gplx.core.btries.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xobd_parser implements Xobd_wkr {
 	private Btrie_slim_mgr trie = Btrie_slim_mgr.ci_ascii_();		// NOTE:ci.ascii:MW_const.en; ctg.v1 assumes [[Category:
-	private ListAdp wkr_list = ListAdp_.new_();
+	private List_adp wkr_list = List_adp_.new_();
 	public String Wkr_key() {return KEY;} static final String KEY = "page_parser";
 	public void Wkr_ini(Xob_bldr bldr) {}
 	public void Wkr_add(Xobd_parser_wkr wkr) {wkr_list.Add(wkr);}
 	public void Wkr_bgn(Xob_bldr app) {
 		int wkr_list_len = wkr_list.Count();
 		for (int i = 0; i < wkr_list_len; i++) {
-			Xobd_parser_wkr wkr = (Xobd_parser_wkr)wkr_list.FetchAt(i);
+			Xobd_parser_wkr wkr = (Xobd_parser_wkr)wkr_list.Get_at(i);
 			wkr.Wkr_bgn(app);
 			int hooks_len = wkr.Wkr_hooks().Count();
 			for (int j = 0; j < hooks_len; j++) {
-				byte[] bry = (byte[])wkr.Wkr_hooks().FetchAt(j);
+				byte[] bry = (byte[])wkr.Wkr_hooks().Get_at(j);
 				trie.Add_obj(bry, wkr);
 			}
 		}
@@ -52,7 +52,7 @@ public class Xobd_parser implements Xobd_wkr {
 	public void Wkr_end() {
 		int wkr_list_len = wkr_list.Count();
 		for (int i = 0; i < wkr_list_len; i++) {
-			Xobd_parser_wkr wkr = (Xobd_parser_wkr)wkr_list.FetchAt(i);
+			Xobd_parser_wkr wkr = (Xobd_parser_wkr)wkr_list.Get_at(i);
 			wkr.Wkr_end();
 		}
 	}

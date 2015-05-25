@@ -25,17 +25,17 @@ public class Xow_hive_mgr_fxt {
 			hive_mgr = new Xob_hive_mgr(wiki);
 		}
 		hive_mgr.Clear();
-		Io_mgr._.InitEngine_mem();
+		Io_mgr.I.InitEngine_mem();
 	}	private Xob_hive_mgr hive_mgr; Xoae_app app;
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public void Find_nearby(String key, int count, boolean include_redirects, String... expd) {
-		ListAdp list = ListAdp_.new_();
-		wiki.Hive_mgr().Find_bgn(list, wiki.Ns_mgr().Ns_main(), Bry_.new_ascii_(key), count, include_redirects);
+		List_adp list = List_adp_.new_();
+		wiki.Hive_mgr().Find_bgn(list, wiki.Ns_mgr().Ns_main(), Bry_.new_a7(key), count, include_redirects);
 		int actl_len = list.Count();
 		String[] actl = new String[actl_len];
 		for (int i = 0; i < actl_len; i++) {
-			Xowd_page_itm itm = (Xowd_page_itm)list.FetchAt(i);
-			actl[i] = String_.new_ascii_(itm.Ttl_page_db());
+			Xowd_page_itm itm = (Xowd_page_itm)list.Get_at(i);
+			actl[i] = String_.new_a7(itm.Ttl_page_db());
 		}
 		Tfds.Eq_ary_str(expd, actl);
 	}
@@ -65,7 +65,7 @@ public class Xow_hive_mgr_fxt {
 	}
 	public Xow_hive_mgr_fxt Create_ctg(String key_str, int... pages) {Create_ctg(app, hive_mgr, key_str, pages); return this;}
 	public static void Create_ctg(Xoae_app app, Xob_hive_mgr hive_mgr, String key_str, int... pages) {
-		byte[] key_bry = Bry_.new_ascii_(key_str);
+		byte[] key_bry = Bry_.new_a7(key_str);
 		Bry_bfr bfr = app.Utl__bfr_mkr().Get_b512();
 		bfr.Add(key_bry);
 		int pages_len = pages.length;
@@ -91,7 +91,7 @@ public class Xow_hive_mgr_fxt {
 		hive_mgr.Create(Xotdb_dir_info_.Tid_id, key_bry, row);
 	}
 	public Xow_hive_mgr_fxt Load(String url, String... expd) {
-		String actl = Io_mgr._.LoadFilStr(url);
+		String actl = Io_mgr.I.LoadFilStr(url);
 		Tfds.Eq_ary_str(expd, String_.SplitLines_nl(actl));
 		return this;
 	}

@@ -86,7 +86,7 @@ class Xop_vnt_lxr_end implements Xop_lxr {
 			vnt_tkn.Vnt_cmd_calc(wiki, ctx.Cur_page(), ctx, src);
 		}
 		catch (Exception e) {
-			ctx.App().Usr_dlg().Warn_many("", "", "vnt.parse failed: page=~{0} src=~{1} err=~{2}", String_.new_utf8_(ctx.Cur_page().Ttl().Raw()), String_.new_utf8_(src, bgn_pos, cur_pos), Err_.Message_gplx_brief(e));
+			ctx.App().Usr_dlg().Warn_many("", "", "vnt.parse failed: page=~{0} src=~{1} err=~{2}", String_.new_u8(ctx.Cur_page().Ttl().Raw()), String_.new_u8(src, bgn_pos, cur_pos), Err_.Message_gplx_brief(e));
 			if (vnt_tkn != null)
 				root.Subs_add(tkn_mkr.Bry_mid(src, vnt_tkn.Src_bgn(), cur_pos));
 		}

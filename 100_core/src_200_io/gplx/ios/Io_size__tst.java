@@ -64,6 +64,6 @@ class Io_size__fxt {
 		if (val != Long_.MinValue) Tfds.Fail("expd parse failure; raw=" + raw);
 	}
 	public void Test_Equals(String lhs, String rhs) {Tfds.Eq(Io_size_.parse_or_(lhs, Long_.MinValue), Io_size_.parse_or_(rhs, Long_.MinValue));}
-	public void Test_XtoStr(long val, String expd) {Tfds.Eq(expd, Io_size_.Xto_str(val));}
-	public void Test_Xto_str(long val, int exp_1024, String val_fmt, String unit_pad, boolean round_0_to_1, String expd) {Tfds.Eq(expd, Io_size_.Xto_str(val, exp_1024, val_fmt, unit_pad, round_0_to_1));}
+	public void Test_XtoStr(long val, String expd) {Tfds.Eq(expd, Io_size_.To_str(val));}
+	public void Test_Xto_str(long val, int exp_1024, String val_fmt, String unit_pad, boolean round_0_to_1, String expd) {Tfds.Eq(expd, Io_size_.To_str(val, exp_1024, val_fmt, unit_pad, round_0_to_1));}
 }

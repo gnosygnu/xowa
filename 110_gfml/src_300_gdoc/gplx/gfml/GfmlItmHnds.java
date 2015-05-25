@@ -17,8 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfml; import gplx.*;
 public class GfmlItmHnds {
-	public int Count() {return list.Count();} ListAdp list = ListAdp_.new_();
-	public GfmlNde FetchAt(int idx) {return (GfmlNde)list.FetchAt(idx);}
+	public int Count() {return list.Count();} List_adp list = List_adp_.new_();
+	public GfmlNde Get_at(int idx) {return (GfmlNde)list.Get_at(idx);}
 	public void Add(GfmlNde nde) {list.Add(nde);}		
 	public static GfmlItmHnds new_() {return new GfmlItmHnds();} GfmlItmHnds() {}
 }

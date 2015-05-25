@@ -78,7 +78,7 @@ public class Xob_orig_regy_update_bmk_mgr implements GfoInvkAble {
 			ns_dirty = false;
 		}
 		if (ttl_enable && ttl_dirty) {
-			Save(Cfg_ttl_prv, String_.new_utf8_(ttl_prv));
+			Save(Cfg_ttl_prv, String_.new_u8(ttl_prv));
 			ttl_dirty = false;
 		}
 	}

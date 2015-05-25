@@ -36,7 +36,7 @@ public class Xow_ttl__xwik_tst {
 		fxt.Init_ttl(":::fr:Test").Expd_xwik_txt("").Expd_page_txt(":fr:Test").Expd_force_literal_link(1).Test();
 	}
 	@Test   public void Ns_should_precede_xwiki() {// PURPOSE: the "Wikipedia" in "Wikipedia:Main page" should be interpreted as namespace, not an alias
-		fxt.Wiki().Xwiki_mgr().Add_full(Bry_.new_ascii_("Wikipedia"), Bry_.new_ascii_("en.wikipedia.org"));
+		fxt.Wiki().Xwiki_mgr().Add_full(Bry_.new_a7("Wikipedia"), Bry_.new_a7("en.wikipedia.org"));
 		fxt.Init_ttl("Wikipedia:Test").Expd_xwik_txt("").Expd_full_txt("Wikipedia:Test").Test();
 	}
 }

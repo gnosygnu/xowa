@@ -20,7 +20,7 @@ public class ConsoleDlg_dev implements ConsoleDlg {
 	public boolean Enabled() {return true;}
 	public boolean CanceledChk() {return false;}
 	public int CharsPerLineMax() {return 80;} public void CharsPerLineMax_set(int v) {}
-	public ConsoleDlg_dev Ignore_add(String s) {ignored.AddKeyVal(s); return this;}
+	public ConsoleDlg_dev Ignore_add(String s) {ignored.Add_as_key_and_val(s); return this;}
 	public void WriteText(String s) {WriteString(s);}
 	public void WriteLineFormat(String s, Object... args) {WriteString(String_.Format(s, args) + String_.CrLf);}
 	public void WriteTempText(String s) {WriteString(s);}
@@ -37,13 +37,13 @@ public class ConsoleDlg_dev implements ConsoleDlg {
 	}
 	String cancelVal;
 
-	public ListAdp Written() {return written;}
+	public List_adp Written() {return written;}
 	public void tst_WrittenStr(String... expd) {
 		String[] actl = new String[written.Count()];
 		int actlLength = Array_.Len(actl);
 		for (int i = 0; i < actlLength; i++)
-			actl[i] = written.FetchAt(i).toString();
+			actl[i] = written.Get_at(i).toString();
 		Tfds.Eq_ary(actl, expd);
 	}
-	ListAdp written = ListAdp_.new_(), erased = ListAdp_.new_(); HashAdp ignored = HashAdp_.new_();
+	List_adp written = List_adp_.new_(), erased = List_adp_.new_(); Hash_adp ignored = Hash_adp_.new_();
 }

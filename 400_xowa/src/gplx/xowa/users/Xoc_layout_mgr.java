@@ -48,7 +48,7 @@ public class Xoc_layout_mgr implements GfoInvkAble {
 	}
 }
 class Enm_mgr {
-	private OrderedHash str_hash = OrderedHash_.new_(); private HashAdp val_hash = HashAdp_.new_();
+	private Ordered_hash str_hash = Ordered_hash_.new_(); private Hash_adp val_hash = Hash_adp_.new_();
 	private Int_obj_ref tmp_val_ref = Int_obj_ref.zero_(); 
 	public Enm_mgr Add(byte val, String str) {
 		Int_obj_ref val_ref = Int_obj_ref.new_(val);
@@ -58,7 +58,7 @@ class Enm_mgr {
 		return this;
 	}
 	public String Get_str(byte val) {
-		Object o = val_hash.Fetch(tmp_val_ref.Val_(val));
+		Object o = val_hash.Get_by(tmp_val_ref.Val_(val));
 		if (o == null) return null;
 		return ((KeyVal)o).Val_to_str_or_null();
 	}
@@ -66,7 +66,7 @@ class Enm_mgr {
 		int len = val_hash.Count();
 		KeyVal[] rv = new KeyVal[len];
 		for (int i = 0; i < len; i++) {
-			KeyVal trg = (KeyVal)str_hash.FetchAt(i);
+			KeyVal trg = (KeyVal)str_hash.Get_at(i);
 			rv[i] = KeyVal_.new_(trg.Val_to_str_or_null(), trg.Key());
 		}
 		return rv;

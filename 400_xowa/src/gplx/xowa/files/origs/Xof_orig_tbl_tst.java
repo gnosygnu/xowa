@@ -32,28 +32,29 @@ class Xof_orig_tbl_fxt {
 	private Xof_orig_tbl tbl;
 	public void Clear() {
 		Io_url test_url = Io_url_.mem_fil_("mem/file/en.wikipedia.org/file/orig_regy");
+		Db_conn_bldr.I.Reg_default_mem();
 		Db_conn conn = Db_conn_bldr.I.New(test_url);
 		tbl = new Xof_orig_tbl(conn, Bool_.Y);
 		tbl.Create_tbl();
 	}
 	public Xof_orig_itm Exec_insert(String ttl, int w, int h) {
-		byte[] ttl_bry = Bry_.new_utf8_(ttl);
+		byte[] ttl_bry = Bry_.new_u8(ttl);
 		Xof_orig_itm rv = new Xof_orig_itm().Init(Xof_orig_itm.Repo_comm, ttl_bry, Xof_ext_.new_by_ttl_(ttl_bry).Id(), w, h, Bry_.Empty);
-		tbl.Insert(rv.Repo(), rv.Page(), rv.Ext(), rv.W(), rv.H(), rv.Redirect());
+		tbl.Insert(rv.Repo(), rv.Ttl(), rv.Ext_id(), rv.W(), rv.H(), rv.Redirect());
 		return rv;
 	}
 	public void Test_select_in(String[] itms, Xof_orig_itm... expd) {
-		OrderedHash rv = OrderedHash_.new_();
-		ListAdp list = ListAdp_.new_();
+		Ordered_hash rv = Ordered_hash_.new_();
+		List_adp list = List_adp_.new_();
 		int itms_len = itms.length;
 		for (int i = 0; i < itms_len; ++i) {
 			String itm = itms[i];
 			Xof_fsdb_itm fsdb_itm = new Xof_fsdb_itm();
-			fsdb_itm.Ctor_by_lnki(Bry_.new_utf8_(itm), Xop_lnki_type.Id_none, Xof_img_size.Null, Xof_img_size.Null, Xof_patch_upright_tid_.Tid_all, Xof_img_size.Upright_null, Xof_lnki_time.Null, Xof_lnki_page.Null);
+			fsdb_itm.Init_at_lnki(Xof_exec_tid.Tid_wiki_page, Bry_.new_a7("en.w"), Bry_.new_u8(itm), Xop_lnki_type.Id_none, Xof_img_size.Upright_null, Xof_img_size.Null, Xof_img_size.Null, Xof_lnki_time.Null, Xof_lnki_page.Null, Xof_patch_upright_tid_.Tid_all);
 			list.Add(fsdb_itm);
 		}
 		tbl.Select_by_list(rv, list);
-		Tfds.Eq_str_lines(To_str_ary(expd), To_str_ary((Xof_orig_itm[])rv.Xto_ary(Xof_orig_itm.class)));
+		Tfds.Eq_str_lines(To_str_ary(expd), To_str_ary((Xof_orig_itm[])rv.To_ary(Xof_orig_itm.class)));
 	}
 	private static String To_str_ary(Xof_orig_itm... ary) {
 		Bry_bfr bfr = Bry_bfr.reset_(255);
@@ -61,8 +62,8 @@ class Xof_orig_tbl_fxt {
 		for (int i = 0; i < len; ++i) {
 			Xof_orig_itm itm = ary[i];
 			bfr	.Add_byte(itm.Repo()).Add_byte_pipe()
-				.Add(itm.Page()).Add_byte_pipe()
-				.Add_int_variable(itm.Ext()).Add_byte_pipe()
+				.Add(itm.Ttl()).Add_byte_pipe()
+				.Add_int_variable(itm.Ext_id()).Add_byte_pipe()
 				.Add_int_variable(itm.W()).Add_byte_pipe()
 				.Add_int_variable(itm.H()).Add_byte_pipe()
 				.Add(itm.Redirect()).Add_byte_pipe()

@@ -17,13 +17,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
 public class Xou_cfg implements GfoInvkAble {
-	public Xou_cfg(Xou_user user) {
+	public Xou_cfg(Xoue_user user) {
 		this.user = user;
 		pages_mgr = new Xouc_pages_mgr(this); startup_mgr = new Xouc_startup_mgr(this); setup_mgr = new Xouc_setup_mgr(user);
-		layout_mgr = new Xoc_layout_mgr(user.App());
-		security_mgr = new Xou_security_mgr(user.App());
+		layout_mgr = new Xoc_layout_mgr(user.Appe());
+		security_mgr = new Xou_security_mgr(user.Appe());
 	}
-	public Xou_user User() {return user;} private Xou_user user;
+	public Xoue_user User() {return user;} private Xoue_user user;
 	public Xouc_pages_mgr Pages_mgr() {return pages_mgr;} private Xouc_pages_mgr pages_mgr;
 	public Xouc_startup_mgr Startup_mgr() {return startup_mgr;} private Xouc_startup_mgr startup_mgr;
 	public Xouc_setup_mgr Setup_mgr() {return setup_mgr;} private Xouc_setup_mgr setup_mgr;

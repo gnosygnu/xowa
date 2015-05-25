@@ -51,7 +51,7 @@ class Xop_parser__fxt {
 		fxt.Reset();
 	}
 	public void Test_parse_to_html(String raw, boolean para_enabled, String expd)  {
-		byte[] raw_bry = Bry_.new_utf8_(raw);
+		byte[] raw_bry = Bry_.new_u8(raw);
 		fxt.Wiki().Parser().Parse_text_to_html(bfr, fxt.Page(), para_enabled, raw_bry);
 		Tfds.Eq(expd, bfr.Xto_str_and_clear());
 	}

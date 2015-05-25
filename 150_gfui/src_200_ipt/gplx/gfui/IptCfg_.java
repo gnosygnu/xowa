@@ -22,7 +22,7 @@ public class IptCfg_ {
 }
 class IptCfg_null implements IptCfg {
 	public String CfgKey() {return "<<NULL KEY>>";}
-	public IptCfgItm GetOrDefaultArgs(String bndKey, GfoMsg m, IptArg[] argAry) {return IptCfgItm.new_().Key_(bndKey).Ipt_(ListAdp_.many_((Object[])argAry)).Msg_(m);}
+	public IptCfgItm GetOrDefaultArgs(String bndKey, GfoMsg m, IptArg[] argAry) {return IptCfgItm.new_().Key_(bndKey).Ipt_(List_adp_.many_((Object[])argAry)).Msg_(m);}
 	public void Owners_add(String key, IptBndsOwner owner) {}
 	public void Owners_del(String key) {}
 	public Object NewByKey(Object o) {return this;}

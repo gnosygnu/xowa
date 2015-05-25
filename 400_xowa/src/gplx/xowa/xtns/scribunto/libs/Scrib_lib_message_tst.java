@@ -28,7 +28,7 @@ public class Scrib_lib_message_tst {
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_message.Invk_plain, Object_.Ary((Object)keys_ary_arg("redirectedfrom", "A"))		, "(Redirected from A)");
 	}
 	@Test  public void Plain_lang() {
-		Xol_lang lang = fxt.Parser_fxt().Wiki().Appe().Lang_mgr().Get_by_key_or_new(Bry_.new_ascii_("fr"));
+		Xol_lang lang = fxt.Parser_fxt().Wiki().Appe().Lang_mgr().Get_by_key_or_new(Bry_.new_a7("fr"));
 		Init_msg(lang, "sun", "dim");
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_message.Invk_plain, Object_.Ary((Object)keys_ary_lang("sun", "fr"))				, "dim");
 	}
@@ -56,7 +56,7 @@ public class Scrib_lib_message_tst {
 	}
 	private void Init_msg(String key, String val) {Init_msg(fxt.Core().Wiki().Lang(), key, val);}
 	private void Init_msg(Xol_lang lang, String key, String val) {
-		lang.Msg_mgr().Itm_by_key_or_new(Bry_.new_ascii_(key)).Atrs_set(Bry_.new_ascii_(val), false, false);
+		lang.Msg_mgr().Itm_by_key_or_new(Bry_.new_a7(key)).Atrs_set(Bry_.new_a7(val), false, false);
 	}
 	KeyVal[] keys_ary(String msg_key) {return keys_ary(msg_key, null, null);}
 	KeyVal[] keys_ary_arg(String msg_key, String arg) {return keys_ary(msg_key, null, arg);}

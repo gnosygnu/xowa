@@ -36,14 +36,14 @@ public class References_nde implements Xox_xnde, Xop_xnde_atr_parser {
 		Xop_xatr_itm.Xatr_parse(wiki.Appe(), this, xatrs_hash, wiki, src, xnde);
 		if (xnde.CloseMode() == Xop_xnde_tkn.CloseMode_pair) {	// "<references>", "</references>"; parse anything in between but only to pick up <ref> tags; discard everything else; DATE:2014-06-27
 			int itm_bgn = xnde.Tag_open_end(), itm_end = xnde.Tag_close_bgn();
-			Xop_ctx references_ctx = Xop_ctx.new_sub_(wiki).References_group_(group);
+			Xop_ctx references_ctx = Xop_ctx.new_sub_page_(wiki, ctx, ctx.Lst_page_regy()).References_group_(group);	// changed from following: "Xop_ctx references_ctx = Xop_ctx.new_sub_(wiki).References_group_(group);"; DATE:2015-05-16;
 			references_ctx.Para().Enabled_n_();	// disable para during <references> parsing
 			byte[] references_src = Bry_.Mid(src, itm_bgn, itm_end);
 			Xop_tkn_mkr tkn_mkr = ctx.Tkn_mkr();
 			Xop_root_tkn sub_root = tkn_mkr.Root(src);
 			boolean prv_recursing = ref_mgr.References__recursing();
 			ref_mgr.References__recursing_(true);
-			wiki.Parser().Parse_text_to_wdom(sub_root, references_ctx, tkn_mkr, references_src, Xop_parser_.Doc_bgn_char_0);	// NOTE: parse @gplx.Internal protected contents, but root will be discarded; only picking up <ref> tags; DATE:2014-06-27
+			wiki.Parser().Parse_text_to_wdom(sub_root, references_ctx, tkn_mkr, references_src, Xop_parser_.Doc_bgn_char_0);	// NOTE: parse inner contents, but root will be discarded; only picking up <ref> tags; DATE:2014-06-27
 			ref_mgr.References__recursing_(prv_recursing);
 		}
 		list_idx = ref_mgr.Grps_get(group).Grp_seal();	// NOTE: needs to be sealed at end; else inner refs will end up in new group; EX: <references><ref>don't seal prematurely</ref></references>

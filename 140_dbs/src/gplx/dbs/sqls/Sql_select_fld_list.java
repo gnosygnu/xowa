@@ -21,12 +21,12 @@ import gplx.dbs.engines.tdbs.*;
 public class Sql_select_fld_list {
 	public int Count() {return hash.Count();}
 	public void Add(Sql_select_fld_base fld) {hash.Add(fld.Alias(), fld);}
-	public Sql_select_fld_base FetchAt(int i) {return (Sql_select_fld_base)hash.FetchAt(i);}
-	public Sql_select_fld_base FetchOrNull(String k) {return (Sql_select_fld_base)hash.Fetch(k);}
+	public Sql_select_fld_base Get_at(int i) {return (Sql_select_fld_base)hash.Get_at(i);}
+	public Sql_select_fld_base FetchOrNull(String k) {return (Sql_select_fld_base)hash.Get_by(k);}
 	public GfoFldList XtoGfoFldLst(TdbTable tbl) {
 		GfoFldList rv = GfoFldList_.new_();
 		for (int i = 0; i < this.Count(); i++) {
-			Sql_select_fld_base selectFld = this.FetchAt(i);
+			Sql_select_fld_base selectFld = this.Get_at(i);
 			GfoFld fld = tbl.Flds().FetchOrNull(selectFld.Fld());
 			if (fld == null) throw Err_.new_("fld not found in tbl").Add("fldName", selectFld.Fld()).Add("tblName", tbl.Name()).Add("tblFlds", tbl.Flds().XtoStr());
 			if (rv.Has(selectFld.Alias())) throw Err_.new_("alias is not unique").Add("fldName", selectFld.Fld()).Add("flds", rv.XtoStr());
@@ -39,7 +39,7 @@ public class Sql_select_fld_list {
 		int len = this.Count();
 		String[] rv = new String[len];
 		for (int i = 0; i < len; i++) {
-			Sql_select_fld_base fld = this.FetchAt(i);
+			Sql_select_fld_base fld = this.Get_at(i);
 			rv[i] = fld.Fld();
 		}
 		return rv;
@@ -47,11 +47,11 @@ public class Sql_select_fld_list {
 	public String XtoStr() {
 		String_bldr sb = String_bldr_.new_();
 		for (int i = 0; i < this.Count(); i++) {
-			Sql_select_fld_base fld = this.FetchAt(i);
+			Sql_select_fld_base fld = this.Get_at(i);
 			sb.Add_fmt("{0},{1}|", fld.Fld(), fld.Alias());
 		}
 		return sb.XtoStr();
 	}
-	OrderedHash hash = OrderedHash_.new_();
+	Ordered_hash hash = Ordered_hash_.new_();
 	public static Sql_select_fld_list new_() {return new Sql_select_fld_list();} Sql_select_fld_list() {}
 }

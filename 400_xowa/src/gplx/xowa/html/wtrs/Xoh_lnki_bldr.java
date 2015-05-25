@@ -62,21 +62,21 @@ public class Xoh_lnki_bldr {
 		return rv;
 	}
 	public void Bld(Bry_bfr bfr) {
-		bfr.Add_str_ascii("<a href='").Add(href);
+		bfr.Add_str_a7("<a href='").Add(href);
 		if (title != null)
-			bfr.Add_str_ascii("' title='").Add(title);
+			bfr.Add_str_a7("' title='").Add(title);
 		if (id != null)
-			bfr.Add_str_ascii("' id='").Add(id);
-		bfr.Add_str_ascii("'>");
+			bfr.Add_str_a7("' id='").Add(id);
+		bfr.Add_str_a7("'>");
 		if ( img_pos_is_left && img_rel_path != null)
 			Bld_img(bfr);
 		if (caption != null)
 			bfr.Add(caption);
 		if (!img_pos_is_left && img_rel_path != null)
 			Bld_img(bfr);
-		bfr.Add_str_ascii("</a>");
+		bfr.Add_str_a7("</a>");
 	}
 	private void Bld_img(Bry_bfr bfr) {
-		bfr.Add_str_ascii("<img src='").Add(img_root_dir).Add(img_rel_path).Add_str_ascii("' width='").Add_int_variable(img_w).Add_str_ascii("' height='").Add_int_variable(img_h).Add_str_ascii("'/>");
+		bfr.Add_str_a7("<img src='").Add(img_root_dir).Add(img_rel_path).Add_str_a7("' width='").Add_int_variable(img_w).Add_str_a7("' height='").Add_int_variable(img_h).Add_str_a7("'/>");
 	}
 }

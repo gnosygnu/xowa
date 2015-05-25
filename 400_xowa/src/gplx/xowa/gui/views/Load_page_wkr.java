@@ -54,7 +54,7 @@ public class Load_page_wkr implements Gfo_thread_wkr {
 				app.Free_mem(false);										// clear caches (which will clear bry_bfr_mk)
 			else															// not low in memory
 				app.Utl__bfr_mkr().Clear();									// clear bry_bfr_mk only; NOTE: call before page parse, not when page is first added, else threading errors; DATE:2014-05-30
-			this.page = wiki.GetPageByTtl(url, ttl, wiki.Lang(), tab, false);
+			this.page = wiki.Load_page_by_ttl(url, ttl, wiki.Lang(), tab, false);
 			int html_db_id = page.Revision_data().Html_db_id();
 			if (wiki.Html__hdump_enabled())
 				hdump_enabled = true;

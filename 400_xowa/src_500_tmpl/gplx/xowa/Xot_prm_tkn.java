@@ -60,7 +60,7 @@ public class Xot_prm_tkn extends Xop_tkn_itm_base {
 		else {					// prm is idx; EX: "{{{1}}}"
 //				int invk_args_len = caller.Args_len();
 //				if (prm_idx > invk_args_len) {Tmpl_write_missing(ctx, src, caller, bfr); return true;}
-			arg_nde = caller.Args_eval_by_idx(src, prm_idx - ListAdp_.Base1);	// MW args are Base1; EX: {{test|a|b}}; a is {{{1}}}; b is {{{2}}}
+			arg_nde = caller.Args_eval_by_idx(src, prm_idx - List_adp_.Base1);	// MW args are Base1; EX: {{test|a|b}}; a is {{{1}}}; b is {{{2}}}
 			if (arg_nde == null) {Tmpl_write_missing(ctx, src, caller, bfr); return true;}	// EX: handles "{{{1}}}{{{2}}}" "{{test|a|keyd=b}}" -> "a{{{2}}}"
 		}
 		Arg_itm_tkn arg_val = arg_nde.Val_tkn();

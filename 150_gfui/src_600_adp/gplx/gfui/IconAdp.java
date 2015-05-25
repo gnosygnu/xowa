@@ -24,7 +24,7 @@ import java.net.URL;
 public class IconAdp {
 	public Icon UnderIcon() {return icon;} final Icon icon;
 	public Image XtoImage() {return ((ImageIcon)icon).getImage();}		
-	public Io_url Url() {return url;} Io_url url = Io_url_.Null;
+	public Io_url Url() {return url;} Io_url url = Io_url_.Empty;
 	IconAdp(Icon icon) {this.icon = icon;}
 	public static IconAdp new_(Icon icon) {return new IconAdp(icon);}
 	public static IconAdp file_(Io_url url) {

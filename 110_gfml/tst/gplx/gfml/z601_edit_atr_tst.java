@@ -59,7 +59,7 @@ public class z601_edit_atr_tst {
 		fx	.Raw_("a='1';").Update_(fx.atr_().NdeIdxs_(0).Atr_("b", "2"))
 			.tst_("a='1' b='2';");
 	}
-	@Test  public void AddMany() {
+	@Test  public void Add_many() {
 		fx	.Raw_("a='1';").Update_(fx.atr_().NdeIdxs_(0).Atr_("b", "2")).Update_(fx.atr_().NdeIdxs_(0).Atr_("c", "3"))
 			.tst_("a='1' b='2' c='3';");
 	}
@@ -86,7 +86,7 @@ class GfmlUpdateCmd_atr implements GfmlUpdateCmd {
 	public void Exec(GfmlDoc gdoc) {
 		GfmlNde nde = GetNde(ndeIdxs, gdoc.RootNde());
 		nde.UpdateAtr(atrKey, atrVal);
-//			GfmlAtr atr = atrIdx != -1 ? GfmlAtr.as_(nde.SubKeys().FetchAt(atrIdx)) : GfmlAtr.as_(nde.SubKeys().Fetch(atrKey));
+//			GfmlAtr atr = atrIdx != -1 ? GfmlAtr.as_(nde.SubKeys().Get_at(atrIdx)) : GfmlAtr.as_(nde.SubKeys().Get_by(atrKey));
 //			atr.UpdateAtr(atrKey, atrVal);
 		atrKey = ""; atrVal = "";//atrIdx = -1; 			
 	}
@@ -94,7 +94,7 @@ class GfmlUpdateCmd_atr implements GfmlUpdateCmd {
 		GfmlNde nde = owner;
 		for (int i = 0; i < ndeIdxs.length; i++) {
 			int ndeIdx = ndeIdxs[i];
-			nde = (GfmlNde)owner.SubHnds().FetchAt(ndeIdx);
+			nde = (GfmlNde)owner.SubHnds().Get_at(ndeIdx);
 		}
 		return nde;
 	}
@@ -114,11 +114,11 @@ class GfmlUpdateFx {
 	public GfmlUpdateCmd_atr atr_() {return GfmlUpdateCmd_atr.new_();}
 	public GfmlUpdateCmd_nde nde_() {return GfmlUpdateCmd_nde.new_();}
 	public String Raw() {return raw;} public GfmlUpdateFx Raw_(String v) {raw = v; return this;} private String raw;
-	public GfmlUpdateFx Update_(GfmlUpdateCmd cmd) {cmds.Add(cmd); return this;} ListAdp cmds = ListAdp_.new_();
+	public GfmlUpdateFx Update_(GfmlUpdateCmd cmd) {cmds.Add(cmd); return this;} List_adp cmds = List_adp_.new_();
 	public GfmlUpdateFx tst_(String expd) {
 		GfmlDoc actlDoc = GfmlDataNde.new_any_eol_(raw).Doc();
 		for (int i = 0; i < cmds.Count(); i++) {
-			GfmlUpdateCmd cmd = (GfmlUpdateCmd)cmds.FetchAt(i);
+			GfmlUpdateCmd cmd = (GfmlUpdateCmd)cmds.Get_at(i);
 			cmd.Exec(actlDoc);
 		}
 		String actl = actlDoc.RootNde().XtoStr();

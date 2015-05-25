@@ -40,7 +40,7 @@ public class Json_parser_tst {
 	@Test   public void Subs_empty()			{fxt.Test_parse("{'k0':{}}", fxt.itm_nde_().Subs_add_many(fxt.itm_kv_("k0", fxt.itm_nde_())));}
 	@Test   public void Subs_ws()				{fxt.Test_parse("{'k0': { 'k00' : 1 } }", fxt.itm_nde_().Subs_add_many(fxt.itm_kv_("k0", fxt.itm_nde_().Subs_add_many(fxt.itm_kv_("k00", 1)))));}
 	@Test   public void Ws()					{fxt.Test_parse(" { 'k0' : 'v0' } ", fxt.itm_nde_().Subs_add_many(fxt.itm_kv_("k0", "v0")));}
-	public static String Replace_apos_as_str(String v) {return String_.new_utf8_(Replace_apos(Bry_.new_utf8_(v)));}
+	public static String Replace_apos_as_str(String v) {return String_.new_u8(Replace_apos(Bry_.new_u8(v)));}
 	public static byte[] Replace_apos(byte[] v) {return Bry_.Replace(v, Byte_ascii.Apos, Byte_ascii.Quote);}
 }
 class Json_parser_fxt {
@@ -75,7 +75,7 @@ class Json_parser_fxt {
 		return factory.Kv(itm_str_(k), ary);
 	}
 	public void Test_parse(String raw_str, Json_itm... expd_ary) {
-		byte[] raw = Json_parser_tst.Replace_apos(Bry_.new_utf8_(raw_str));
+		byte[] raw = Json_parser_tst.Replace_apos(Bry_.new_u8(raw_str));
 		Json_doc doc = parser.Parse(raw);
 		doc.Root().Print_as_json(tmp_bfr, 0);
 		String actl = tmp_bfr.Xto_str_and_clear();
@@ -83,7 +83,7 @@ class Json_parser_fxt {
 		Tfds.Eq_str_lines(expd, actl, actl);
 	}
 	public void Test_parse_val0(String raw_str, Object expd) {
-		byte[] raw = Json_parser_tst.Replace_apos(Bry_.new_utf8_(raw_str));
+		byte[] raw = Json_parser_tst.Replace_apos(Bry_.new_u8(raw_str));
 		Json_doc doc = parser.Parse(raw);
 		Json_itm_kv kv = Json_itm_kv.cast_(doc.Root().Subs_get_at(0));	// assume root has kv as first sub; EX: {"a":"b"}
 		Object actl = kv.Val().Data();	 // NOTE: Data_bry is escaped val; EX: a\"b has DataBry of a"b

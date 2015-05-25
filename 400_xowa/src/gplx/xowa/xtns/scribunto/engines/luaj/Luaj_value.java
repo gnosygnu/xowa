@@ -29,7 +29,7 @@ class Luaj_value_ {
 		return Luaj_value_.X_tbl_to_kv_ary(server, table);
 	}
 	public static KeyVal[] X_tbl_to_kv_ary(Luaj_server server, LuaTable tbl) {
-		ListAdp temp = ListAdp_.new_();
+		List_adp temp = List_adp_.new_();
 		LuaValue cur = LuaValue.NIL;
 		int len = 0;
 		while (true) {											// iterate over pairs in tbl; no direct way to get kvs
@@ -65,7 +65,7 @@ class Luaj_value_ {
 			++len;
 		}
 		if (len == 0) return KeyVal_.Ary_empty;
-		return (KeyVal[])temp.Xto_ary(KeyVal.class);
+		return (KeyVal[])temp.To_ary(KeyVal.class);
 	}
 	private static Object X_val_to_obj(Luaj_server server, LuaValue v) {
 		switch (v.type()) {
@@ -90,7 +90,7 @@ class Luaj_value_ {
 		else if	(Object_.Eq(c, Int_.Cls_ref_type))			return LuaValue.valueOf((Integer)o);
 		else if	(Object_.Eq(c, Double_.Cls_ref_type))		return LuaValue.valueOf((Double)o);
 		else if	(Object_.Eq(c, String_.Cls_ref_type))		return LuaValue.valueOf((String)o);
-		else if	(Object_.Eq(c, byte[].class))				return LuaValue.valueOf(String_.new_utf8_((byte[])o));
+		else if	(Object_.Eq(c, byte[].class))				return LuaValue.valueOf(String_.new_u8((byte[])o));
 		else if	(Object_.Eq(c, KeyVal.class))				return X_kv_ary_to_tbl(server, (KeyVal)o);
 		else if	(Object_.Eq(c, KeyVal[].class))				return X_kv_ary_to_tbl(server, (KeyVal[])o);
 		else if	(Object_.Eq(c, Scrib_lua_proc.class))		return server.Get_closure_by_id(((Scrib_lua_proc)o).Id());

@@ -72,5 +72,5 @@ public class Xoh_lnki_title_fmtr implements Bry_fmtr_arg {
 		}
 	}
 	byte[] src; Xop_tkn_itm tkn;
-	public static final byte[] Escape_bgn = Bry_.new_ascii_("&#");
+	public static final byte[] Escape_bgn = Bry_.new_a7("&#");
 }

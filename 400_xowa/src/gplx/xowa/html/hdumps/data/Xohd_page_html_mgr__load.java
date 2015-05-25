@@ -21,17 +21,17 @@ import gplx.xowa.dbs.*; import gplx.xowa.pages.*; import gplx.xowa.html.hdumps.c
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa2.gui.*;
 public class Xohd_page_html_mgr__load {
 	private final Xohd_page_srl_mgr srl_mgr = Xohd_page_srl_mgr.I;
-	private final Bry_rdr rdr = new Bry_rdr(); private final ListAdp rows = ListAdp_.new_(), imgs = ListAdp_.new_();
+	private final Bry_rdr rdr = new Bry_rdr(); private final List_adp rows = List_adp_.new_(), imgs = List_adp_.new_();
 	public void Load_page(Xow_wiki wiki, Xog_page hpg, Xowd_html_tbl tbl, int page_id, Xoa_ttl page_ttl) {
 		tbl.Select_by_page(rows, page_id);
 		Parse_rows(wiki, hpg, page_id, Xoa_url.blank_(), page_ttl, rows);
 	}
-	public void Parse_rows(Xow_wiki wiki, Xog_page hpg, int page_id, Xoa_url page_url, Xoa_ttl page_ttl, ListAdp rows) {	// TEST:
+	public void Parse_rows(Xow_wiki wiki, Xog_page hpg, int page_id, Xoa_url page_url, Xoa_ttl page_ttl, List_adp rows) {	// TEST:
 		hpg.Init(wiki, page_id, page_url, page_ttl);
 		imgs.Clear();
 		int len = rows.Count();
 		for (int i = 0; i < len; ++i) {
-			Xowd_html_row row = (Xowd_html_row)rows.FetchAt(i);
+			Xowd_html_row row = (Xowd_html_row)rows.Get_at(i);
 			switch (row.Tid()) {
 				case Xowd_html_row.Tid_html:			srl_mgr.Load(hpg, row.Data()); break;
 				case Xowd_html_row.Tid_img:
@@ -51,7 +51,7 @@ public class Xohd_page_html_mgr__load {
 				case Xohd_data_tid.Tid_redlink	: Load_data_redlink(hpg); break;		// 2|2|0|1
 			}
 		}
-		if (imgs.Count() > 0) hpg.Img_itms_((Xohd_data_itm__base[])imgs.Xto_ary_and_clear(Xohd_data_itm__base.class));
+		if (imgs.Count() > 0) hpg.Img_itms_((Xohd_data_itm__base[])imgs.To_ary_and_clear(Xohd_data_itm__base.class));
 	}
 	public static Xohd_data_itm__base Load_img(Bry_rdr rdr) {
 		int tid = rdr.Read_int_to_pipe();
@@ -71,7 +71,7 @@ public class Xohd_page_html_mgr__load {
 		imgs.Add(img);
 	}
 	private void Load_data_redlink(Xog_page hpg) {
-		OrderedHash redlink_hash = hpg.Redlink_uids();
+		Ordered_hash redlink_hash = hpg.Redlink_uids();
 		while (!rdr.Pos_is_eos()) {
 			Int_obj_ref redlink_uid = Int_obj_ref.new_(rdr.Read_int_to_pipe());
 			redlink_hash.Add(redlink_uid, redlink_uid);

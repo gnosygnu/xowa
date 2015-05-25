@@ -18,18 +18,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 import gplx.core.primitives.*;
 public class Bry_cache {
-	public byte[] Get_or_new(String v) {return Get_or_new(Bry_.new_utf8_(v));}
+	public byte[] Get_or_new(String v) {return Get_or_new(Bry_.new_u8(v));}
 	public byte[] Get_or_new(byte[] v) {
 		if (v.length == 0) return Bry_.Empty;
-		Object rv = hash.Fetch(hash_ref.Val_(v));
+		Object rv = hash.Get_by(hash_ref.Val_(v));
 		if (rv == null) {
 			Bry_obj_ref bry = Bry_obj_ref.new_(v);
-			hash.AddKeyVal(bry);
+			hash.Add_as_key_and_val(bry);
 			return v;
 		}
 		else
 			return ((Bry_obj_ref)rv).Val();
 	}
-	HashAdp hash = HashAdp_.new_(); Bry_obj_ref hash_ref = Bry_obj_ref.null_();
+	Hash_adp hash = Hash_adp_.new_(); Bry_obj_ref hash_ref = Bry_obj_ref.null_();
 	public static final Bry_cache _ = new Bry_cache(); Bry_cache() {}
 }

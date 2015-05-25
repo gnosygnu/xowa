@@ -23,7 +23,7 @@ public class Xoa_cfg_grp_tid {
 	public int Wiki_tid() {return wiki_tid;} private int wiki_tid;
 	public static final byte Tid_null = 0, Tid_all = 1, Tid_type = 2, Tid_wiki = 3, Tid_app = 4;
 	public static final String Key_app_str = "app";
-	public static final byte[] Key_all_bry = Bry_.new_ascii_("*"), Key_app_bry = Bry_.new_ascii_(Key_app_str);
+	public static final byte[] Key_all_bry = Bry_.new_a7("*"), Key_app_bry = Bry_.new_a7(Key_app_str);
 	public static Xoa_cfg_grp_tid parse_(byte[] key) {
 		Xoa_cfg_grp_tid rv = (Xoa_cfg_grp_tid)factory.Get_by_bry(key);
 		if (rv == null) {
@@ -32,7 +32,7 @@ public class Xoa_cfg_grp_tid {
 			else if	(Bry_.Eq(key, Key_app_bry)) rv.tid = Tid_app;
 			else {
 				Xow_domain wiki_type = Xow_domain_.parse(key);
-				if (wiki_type.Domain_tid() == Xow_domain_.Tid_int_other)
+				if (wiki_type.Domain_tid() == Xow_domain_type_.Tid_other)
 					rv.tid = Tid_wiki;
 				else {
 					rv.tid = Tid_type;

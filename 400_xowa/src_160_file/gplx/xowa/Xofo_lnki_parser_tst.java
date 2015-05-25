@@ -42,7 +42,7 @@ class Xofo_lnki_parser_fxt {
 	public Xofo_lnki_parser_fxt Raw_(String v) {raw = v; return this;} private String raw;
 	public Xofo_lnki_parser_fxt Expd_(Xofo_lnki_chkr... v) {expd = v; return this;} private Xofo_lnki_chkr[] expd;
 	public Xofo_lnki_parser_fxt tst() {
-		byte[] bry = Bry_.new_utf8_(raw);
+		byte[] bry = Bry_.new_u8(raw);
 		Xofo_lnki[] actl = parser.Parse_ary(bry, 0, bry.length);
 		tst_mgr.Tst_ary("", expd, actl);
 		return this;

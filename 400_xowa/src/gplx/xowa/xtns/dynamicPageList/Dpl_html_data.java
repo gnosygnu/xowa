@@ -25,10 +25,10 @@ class Dpl_html_data {
 
 	public static final byte Tid_null = 0, Tid_none = 1, Tid_list_ol = 2, Tid_list_ul = 3, Tid_gallery = 4, Tid_inline = 5;
 	public static final byte[]
-	  Ul_bgn = Bry_.new_ascii_("<ul>"), Ul_end = Bry_.new_ascii_("</ul>")
-	, Ol_bgn = Bry_.new_ascii_("<ol>"), Ol_end = Bry_.new_ascii_("</ol>")
-	, Li_bgn = Bry_.new_ascii_("<li>"), Li_end = Bry_.new_ascii_("</li>")
-	, Br = Bry_.new_ascii_("<br />")
+	  Ul_bgn = Bry_.new_a7("<ul>"), Ul_end = Bry_.new_a7("</ul>")
+	, Ol_bgn = Bry_.new_a7("<ol>"), Ol_end = Bry_.new_a7("</ol>")
+	, Li_bgn = Bry_.new_a7("<li>"), Li_end = Bry_.new_a7("</li>")
+	, Br = Bry_.new_a7("<br />")
 	;
 	private static final Dpl_html_data
 	  Itm_gallery	= new_(Tid_gallery, null, null, null, null)

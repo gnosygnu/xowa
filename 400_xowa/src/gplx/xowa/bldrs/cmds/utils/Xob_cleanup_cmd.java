@@ -31,11 +31,11 @@ public class Xob_cleanup_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		Io_url wiki_root_dir = wiki.Fsys_mgr().Root_dir();
 		if (bz2_fil != null) {
 			if		(String_.Eq(bz2_cmd, "delete"))
-				Io_mgr._.DeleteFil(bz2_fil);
+				Io_mgr.I.DeleteFil(bz2_fil);
 			else if (String_.Eq(bz2_cmd, "move"))
-				Io_mgr._.MoveFil(bz2_fil, bz2_fil.OwnerDir().OwnerDir().GenSubFil_nest("done", bz2_fil.NameAndExt()));
+				Io_mgr.I.MoveFil(bz2_fil, bz2_fil.OwnerDir().OwnerDir().GenSubFil_nest("done", bz2_fil.NameAndExt()));
 		}
-		if (delete_xml)						Io_mgr._.DeleteFil(Xobd_rdr.Find_fil_by(wiki_root_dir, "*.xml"));
+		if (delete_xml)						Io_mgr.I.DeleteFil(Xobd_rdr.Find_fil_by(wiki_root_dir, "*.xml"));
 		if (delete_tdb) {
 			usr_dlg.Note_many("", "", "bldr.wiki:deleting tdb wiki");
 			Delete_tdb(wiki_root_dir);
@@ -43,11 +43,11 @@ public class Xob_cleanup_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		if (delete_sqlite3)
 			Delete_wiki_sql(wiki);			
 		if (delete_all)
-			Io_mgr._.DeleteDir_cmd(wiki_root_dir).Exec();	// do not delete subdirs; needed to support "/prv" for fsdb; DATE:2015-04-01
+			Io_mgr.I.DeleteDir_cmd(wiki_root_dir).Exec();	// do not delete subdirs; needed to support "/prv" for fsdb; DATE:2015-04-01
 		if (delete_by_match_ary != null)
 			Delete_by_match(wiki_root_dir, delete_by_match_ary);
 		if (delete_tmp)
-			Io_mgr._.DeleteDirDeep(wiki_root_dir.GenSubDir("tmp"));
+			Io_mgr.I.DeleteDirDeep(wiki_root_dir.GenSubDir("tmp"));
 	}
 	public void Cmd_init(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {}
@@ -83,7 +83,7 @@ public class Xob_cleanup_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	}
 	private static void Delete_by_match(Io_url dir, Criteria_ioMatch[] match_ary) {
 		int match_len = match_ary.length;
-		Io_url[] subs = Io_mgr._.QueryDir_fils(dir);
+		Io_url[] subs = Io_mgr.I.QueryDir_fils(dir);
 		int subs_len = subs.length;
 		for (int i = 0; i < subs_len; i++) {
 			Io_url sub = subs[i];
@@ -91,25 +91,25 @@ public class Xob_cleanup_cmd extends Xob_itm_basic_base implements Xob_cmd {
 				Criteria_ioMatch match = match_ary[j];
 				if (match.Matches(sub)) {
 					if (sub.Type_fil())
-						Io_mgr._.DeleteFil(sub);
+						Io_mgr.I.DeleteFil(sub);
 				}
 			}
 		}
 	}
 	private static void Delete_tdb(Io_url wiki_root_dir) {
-		Io_url[] dirs = Io_mgr._.QueryDir_args(wiki_root_dir).DirOnly_().DirInclude_().ExecAsUrlAry();
+		Io_url[] dirs = Io_mgr.I.QueryDir_args(wiki_root_dir).DirOnly_().DirInclude_().ExecAsUrlAry();
 		int dirs_len = dirs.length;
 		for (int i = 0; i < dirs_len; i++) {
 			Io_url dir = dirs[i];
 			if (gplx.xowa.tdbs.Xotdb_dir_info_.Dir_name_is_tdb(dir.NameOnly()))
-				Io_mgr._.DeleteDirDeep(dir);
+				Io_mgr.I.DeleteDirDeep(dir);
 		}
 	}
 	public static void Delete_wiki_sql(Xowe_wiki wiki) {
 		Gfo_usr_dlg usr_dlg = wiki.Appe().Usr_dlg(); Io_url wiki_root_dir = wiki.Fsys_mgr().Root_dir();
 		if (wiki.Db_mgr().Tid() == gplx.xowa.dbs.Xodb_mgr_sql.Tid_sql)		// NOTE: must check; if empty dir (or text db) than db_mgr will be txt
 			wiki.Db_mgr_as_sql().Core_data_mgr().Rls();						// NOTE: if sqlite files, must rls;
-		Io_url[] files = Io_mgr._.QueryDir_fils(wiki_root_dir);
+		Io_url[] files = Io_mgr.I.QueryDir_fils(wiki_root_dir);
 		int files_len = files.length;
 		int deleted = 0;
 		String file_prefix = wiki.Domain_str() + "-file";					// NOTE: skip anything with "-file"; EX: "en.wikipedia.org-file.xowa"
@@ -122,7 +122,7 @@ public class Xob_cleanup_cmd extends Xob_itm_basic_base implements Xob_cmd {
 			if (	String_.HasAtBgn(url.NameAndExt(), file_prefix)
 				||	String_.HasAtBgn(url.NameAndExt(), html_prefix)
 				) continue;	// skip
-			Io_mgr._.DeleteFil(url);
+			Io_mgr.I.DeleteFil(url);
 			deleted++;
 		}
 		usr_dlg.Note_many("", "delete_wiki", "deleting sqlite3 files: ~{0} ~{1}", deleted, wiki_root_dir.Raw());

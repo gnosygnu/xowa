@@ -130,7 +130,7 @@ class DsvParser {
 		nextValType = ValType_Data;
 		lineMode = LineType_Data;
 	}
-	String_bldr sb = String_bldr_.new_(); ListAdp tkns = ListAdp_.new_(); DsvTblBldr bldr = DsvTblBldr.new_();
+	String_bldr sb = String_bldr_.new_(); List_adp tkns = List_adp_.new_(); DsvTblBldr bldr = DsvTblBldr.new_();
 	boolean cmdSeqOn = false, qteOn = false, csvOn = false;
 	int nextValType = ValType_Data, lineMode = LineType_Data;		
 	@gplx.Internal protected static DsvParser dsv_() {return new DsvParser();}
@@ -138,9 +138,9 @@ class DsvParser {
 		DsvParser rv = new DsvParser();
 		rv.csvOn = true;
 		rv.lineMode = hasHdr ? LineType_FldNames : LineType_Data;
-		ListAdp names = ListAdp_.new_(), types = ListAdp_.new_();
+		List_adp names = List_adp_.new_(), types = List_adp_.new_();
 		for (int i = 0; i < flds.Count(); i++) {
-			GfoFld fld = flds.FetchAt(i);
+			GfoFld fld = flds.Get_at(i);
 			names.Add(fld.Key()); types.Add(fld.Type().Key());
 		}
 		rv.bldr.MakeFldNames(names); rv.bldr.MakeFldTypes(types);
@@ -159,13 +159,13 @@ class DsvTblBldr {
 		if (stage != Stage_Init) CreateTbl();	// CreateTbl if HDR or ROW is in progress
 		return root;
 	}
-	public void MakeTblBgn(ListAdp tkns) {
+	public void MakeTblBgn(List_adp tkns) {
 		if (stage != Stage_Init) CreateTbl();	// CreateTbl if HDR or ROW is in progress
-		tbl.Name_((String)tkns.FetchAt(0));
+		tbl.Name_((String)tkns.Get_at(0));
 		layout.HeaderList().Add_TableName();
 		stage = Stage_Hdr; tkns.Clear();
 	}
-	public void MakeFldNames(ListAdp tkns) {
+	public void MakeFldNames(List_adp tkns) {
 		if (stage == Stage_Row) CreateTbl();	// CreateTbl if ROW is in progress; NOTE: exclude HDR, as first HDR would have called CreateTbl
 		fldNames.Clear();
 		for (Object fldNameObj : tkns)
@@ -173,23 +173,23 @@ class DsvTblBldr {
 		layout.HeaderList().Add_LeafNames();
 		stage = Stage_Hdr; tkns.Clear();
 	}
-	public void MakeFldTypes(ListAdp tkns) {
+	public void MakeFldTypes(List_adp tkns) {
 		if (stage == Stage_Row) CreateTbl();	// CreateTbl if ROW is in progress; NOTE: exclude HDR, as first HDR would have called CreateTbl
 		fldTypes.Clear();
 		for (Object fldTypeObj : tkns) {
-			ClassXtn type = ClassXtnPool._.FetchOrFail((String)fldTypeObj);
+			ClassXtn type = ClassXtnPool._.Get_by_or_fail((String)fldTypeObj);
 			fldTypes.Add(type);
 		}
 		layout.HeaderList().Add_LeafTypes();
 		stage = Stage_Hdr; tkns.Clear();
 	}
-	public void MakeComment(ListAdp tkns) {			
+	public void MakeComment(List_adp tkns) {			
 		if (stage == Stage_Row)				// comments in ROW; ignore; NOTE: tkns.Clear() could be merged, but this seems clearer
 			tkns.Clear();
 		else {								// comments in HDR
 			String_bldr sb = String_bldr_.new_();
 			for (int i = 0; i < tkns.Count(); i++)
-				sb.Add((String)tkns.FetchAt(i));
+				sb.Add((String)tkns.Get_at(i));
 			layout.HeaderList().Add_Comment(sb.XtoStr());
 			tkns.Clear();
 		}
@@ -199,19 +199,19 @@ class DsvTblBldr {
 		layout.HeaderList().Add_BlankLine();
 		stage = Stage_Init;						// NOTE: mark stage as INIT;
 	}
-	public void MakeVals(ListAdp tkns) {
+	public void MakeVals(List_adp tkns) {
 		if (stage != Stage_Row) CreateFlds(tkns.Count());		// stage != Stage_Row means if (noRowsCreated)
 		GfoNde row = GfoNde_.vals_(tbl.SubFlds(), MakeValsAry(tkns));
 		tbl.Subs().Add(row);
 		stage = Stage_Row; tkns.Clear();
 	}
-	Object[] MakeValsAry(ListAdp tkns) {
+	Object[] MakeValsAry(List_adp tkns) {
 		GfoFldList subFlds = tbl.SubFlds(); int subFldsCount = subFlds.Count();
 		if (tkns.Count() > subFldsCount) throw Err_.new_("values.Count cannot be greater than fields.Count").Add("values.Count", tkns.Count()).Add("fields.Count", subFldsCount);
 		Object[] rv = new Object[subFldsCount];
 		for (int i = 0; i < subFldsCount; i++) {
-			ClassXtn typx = subFlds.FetchAt(i).Type();
-			String val = i < tkns.Count() ? (String)tkns.FetchAt(i) : null;
+			ClassXtn typx = subFlds.Get_at(i).Type();
+			String val = i < tkns.Count() ? (String)tkns.Get_at(i) : null;
 			rv[i] = typx.ParseOrNull(val);
 		}
 		return rv;
@@ -233,14 +233,14 @@ class DsvTblBldr {
 		else {													// all else, where either names or types is defined
 			int maxCount = fldNamesCount > fldTypesCount ? fldNamesCount : fldTypesCount;
 			for (int i = 0; i < maxCount; i++) {
-				String name = i < fldNamesCount ? (String)fldNames.FetchAt(i) : "fld" + i;
-				ClassXtn typx = i < fldTypesCount ? (ClassXtn)fldTypes.FetchAt(i) : StringClassXtn._;
+				String name = i < fldNamesCount ? (String)fldNames.Get_at(i) : "fld" + i;
+				ClassXtn typx = i < fldTypesCount ? (ClassXtn)fldTypes.Get_at(i) : StringClassXtn._;
 				tbl.SubFlds().Add(name, typx);
 			}
 		}
 	}
 	GfoNde root; GfoNde tbl; DsvStoreLayout layout = DsvStoreLayout.dsv_brief_();
-	ListAdp fldNames = ListAdp_.new_(); ListAdp fldTypes = ListAdp_.new_(); 
+	List_adp fldNames = List_adp_.new_(); List_adp fldTypes = List_adp_.new_(); 
 	int stage = Stage_Init;
 	public static DsvTblBldr new_() {return new DsvTblBldr();} DsvTblBldr() {this.Init();}
 	@gplx.Internal protected static final String NullTblName = "";

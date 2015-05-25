@@ -29,7 +29,7 @@ public class Html_parser {
 	public Html_nde[] Parse_as_ary(byte[] src, int bgn, int end) {return Parse_as_ary(src, bgn, end, Wildcard, Wildcard);}
 	public Html_nde[] Parse_as_ary(byte[] src, int bgn, int end, byte[] find_key, byte[] find_val) {	// flattens html into a list of hndes; only used for Options
 		this.src = src; pos = bgn; this.end = end;
-		ListAdp rv = ListAdp_.new_();
+		List_adp rv = List_adp_.new_();
 		while (pos < end) {
 			byte b = src[pos++];
 			switch (b) {
@@ -53,7 +53,7 @@ public class Html_parser {
 					break;
 			}
 		}
-		return (Html_nde[])rv.Xto_ary(Html_nde.class);
+		return (Html_nde[])rv.To_ary(Html_nde.class);
 	}
 	int cur_lhs_bgn, cur_lhs_end, cur_name_bgn, cur_name_end, cur_rhs_bgn; boolean xnde_init = true, tag_tid_is_inline = false;
 	private boolean Parse_xnde_rhs() {

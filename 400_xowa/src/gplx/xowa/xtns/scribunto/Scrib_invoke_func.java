@@ -61,8 +61,8 @@ public class Scrib_invoke_func extends Pf_func_base {
 			Error(bfr, wiki.Msg_mgr(), invoke_error);
 			bfr.Add(Html_tag_.Comm_bgn).Add_str(Err_.Message_gplx_brief(e)).Add(Html_tag_.Comm_end);
 			Scrib_err_filter_mgr err_filter_mgr = invoke_wkr == null ? null : invoke_wkr.Err_filter_mgr();
-			if (err_filter_mgr == null || (err_filter_mgr.Count_gt_0() && err_filter_mgr.Match(String_.new_utf8_(mod_name), String_.new_utf8_(fnc_name), invoke_error)))
-				ctx.App().Usr_dlg().Warn_many("", "", "invoke failed: ~{0} ~{1} ~{2}", String_.new_utf8_(ctx.Cur_page().Ttl().Raw()), String_.new_utf8_(src, self.Src_bgn(), self.Src_end()), Err_.Message_gplx_brief(e));
+			if (err_filter_mgr == null || (err_filter_mgr.Count_gt_0() && err_filter_mgr.Match(String_.new_u8(mod_name), String_.new_u8(fnc_name), invoke_error)))
+				ctx.App().Usr_dlg().Warn_many("", "", "invoke failed: ~{0} ~{1} ~{2}", String_.new_u8(ctx.Cur_page().Ttl().Raw()), String_.new_u8(src, self.Src_bgn(), self.Src_end()), Err_.Message_gplx_brief(e));
 			Scrib_core.Core_invalidate_when_page_changes();	// NOTE: invalidate core when page changes, not for rest of page, else page with many errors will be very slow due to multiple invalidations; PAGE:th.d:all; DATE:2014-10-03
 		}
 	}
@@ -71,7 +71,7 @@ public class Scrib_invoke_func extends Pf_func_base {
 		int nl_pos = String_.FindFwd(rv, "\n",0); if (nl_pos == Bry_.NotFound) nl_pos = String_.Len(rv); rv = String_.Mid(rv, 0, nl_pos);	// gplx errors include message stack which should be removed
 		return String_.Trim(String_.Replace(rv, "class gplx.Err", ""));	// remove leading "gplx.Err" and trim
 	}
-	public static void Error(Bry_bfr bfr, Xow_msg_mgr msg_mgr, String error) {Error(bfr, msg_mgr, Bry_.new_utf8_(error));}
+	public static void Error(Bry_bfr bfr, Xow_msg_mgr msg_mgr, String error) {Error(bfr, msg_mgr, Bry_.new_u8(error));}
 	public static void Error(Bry_bfr bfr, Xow_msg_mgr msg_mgr, byte[] error) {
 		Bry_fmtr fmtr = Bry_fmtr.new_("<strong class=\"error\"><span class=\"scribunto-error\" id=\"mw-scribunto-error-0\">~{0} ~{1}</span></strong>");	// <!--~{0}: ~{1}.-->
 		byte[] script_error_msg = msg_mgr.Val_by_id(Xol_msg_itm_.Id_scribunto_parser_error);

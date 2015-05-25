@@ -26,8 +26,8 @@ public class Sites_regy_mgr implements GfoInvkAble {
 	public void Set_many(String[] keys)	{
 		int len = keys.length;
 		for (int i = 0; i < len; ++i) {
-			byte[] key = Bry_.new_utf8_(keys[i]);
-			hash.AddReplace(key, key);
+			byte[] key = Bry_.new_u8(keys[i]);
+			hash.Add_if_dupe_use_nth(key, key);
 		}
 	}
 	public boolean Match(Xoae_page page, Xoa_ttl lnki_ttl) {

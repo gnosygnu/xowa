@@ -210,7 +210,7 @@ public class Xot_invk_wkr_basic_tst {
 	@Test  public void Missing_foreign() {
 		Xow_ns ns = fxt.Wiki().Ns_mgr().Ns_template();
 		byte[] old_ns = ns.Name_bry();
-		ns.Name_bry_(Bry_.new_ascii_("Template_foreign"));
+		ns.Name_bry_(Bry_.new_a7("Template_foreign"));
 		fxt.Test_parse_tmpl_str("{{Missing}}", "[[:Template_foreign:Missing]]");
 		ns.Name_bry_(old_ns);
 	}

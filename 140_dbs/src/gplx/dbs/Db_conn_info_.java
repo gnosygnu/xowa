@@ -28,12 +28,12 @@ public class Db_conn_info_ {
 	public static final String Key_tdb = Tdb_conn_info.Tid_const;
 }
 class Db_conn_info_pool {
-	private OrderedHash regy = OrderedHash_.new_();
+	private Ordered_hash regy = Ordered_hash_.new_();
 	public Db_conn_info_pool() {
 		this.Add(Null_conn_info._).Add(Tdb_conn_info._).Add(Mysql_conn_info._).Add(Postgres_conn_info._).Add(Sqlite_conn_info._);
 		this.Add(Db_conn_info__mem.I);
 	}
-	public Db_conn_info_pool Add(Db_conn_info itm) {regy.AddReplace(itm.Tid(), itm); return this;}
+	public Db_conn_info_pool Add(Db_conn_info itm) {regy.Add_if_dupe_use_nth(itm.Tid(), itm); return this;}
 	public Db_conn_info Parse(String raw) {// assume each pair has format of: name=val;
 		try {
 			GfoMsg m = GfoMsg_.new_parse_("db_url");
@@ -47,7 +47,7 @@ class Db_conn_info_pool {
 				else
 					m.Add(kv[0], kv[1]);
 			}
-			Db_conn_info prototype = (Db_conn_info)regy.Fetch(url_tid);
+			Db_conn_info prototype = (Db_conn_info)regy.Get_by(url_tid);
 			return prototype.New_self(raw, m);
 		}
 		catch(Exception exc) {throw Err_.parse_type_exc_(exc, Db_conn_info.class, raw);}

@@ -37,12 +37,12 @@ public class Xoh_lnki_wtr {
 		this.wiki = ctx.Wiki();
 		redlinks_mgr = page.Redlink_lnki_list();		// NOTE: need to set redlinks_mgr, else toc parse may fail; EX:pl.d:head_sth_off;DATE:2014-05-07
 		file_wtr.Init_by_page(hctx, page);
-		this.history_mgr = app.User().History_mgr();
+		this.history_mgr = app.Usere().History_mgr();
 	}
 	public void Write(Bry_bfr bfr, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki) {
 		Xoa_ttl lnki_ttl = lnki.Ttl();
 		if (lnki_ttl == null) {// NOTE: parser failed to properly invalidate lnki; escape tkn now and warn; DATE:2014-06-06
-			app.Usr_dlg().Warn_many("", "", "invalid lnki evaded parser; page=~{0} ex=~{1}", ctx.Cur_page().Url().Xto_full_str(), String_.new_utf8_(src, lnki.Src_bgn(), lnki.Src_end()));
+			app.Usr_dlg().Warn_many("", "", "invalid lnki evaded parser; page=~{0} ex=~{1}", ctx.Cur_page().Url().Xto_full_str(), String_.new_u8(src, lnki.Src_bgn(), lnki.Src_end()));
 			Xoh_html_wtr_escaper.Escape(app.Parser_amp_mgr(), bfr, src, lnki.Src_bgn(), lnki.Src_end(), true, false);
 			return;
 		}
@@ -69,7 +69,7 @@ public class Xoh_lnki_wtr {
 	public void Write_file(Bry_bfr bfr, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, byte[] alt) {
 		file_wtr.Write_or_queue(bfr, page, ctx, hctx, src, lnki, alt);
 	}
-	public void Write_file(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xof_xfer_itm xfer, byte[] alt) {
+	public void Write_file(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xof_file_itm xfer, byte[] alt) {
 		file_wtr.File_wtr().Write_file(bfr, ctx, hctx, src, lnki, xfer, alt);
 	}
 	public void Write_plain_by_bry(Bry_bfr bfr, byte[] src, Xop_lnki_tkn lnki, byte[] caption) {
@@ -102,7 +102,7 @@ public class Xoh_lnki_wtr {
 				bfr.Add(Xoh_consts.A_bgn);							// '<a href="'
 			app.Href_parser().Build_to_bfr(bfr, app, wiki.Domain_bry(), lnki_ttl, hctx.Mode_is_popup());	// '/wiki/A'
 			if (cfg.Lnki_id()) {
-				int lnki_html_id = lnki.Html_id();
+				int lnki_html_id = lnki.Html_uid();
 				if (lnki_html_id > Lnki_id_ignore)					// html_id=0 for skipped lnkis; EX:anchors and interwiki
 					bfr	.Add(Xoh_consts.A_mid_id)					// '" id=\"xowa_lnki_'
 						.Add_int_variable(lnki_html_id);			// '1234'
@@ -114,7 +114,7 @@ public class Xoh_lnki_wtr {
 			}
 			if (hctx.Mode_is_hdump()) {
 				bfr.Add(gplx.xowa.html.hdumps.abrvs.Xohd_abrv_.Html_redlink_bgn);
-				bfr.Add_int_variable(lnki.Html_id());
+				bfr.Add_int_variable(lnki.Html_uid());
 				bfr.Add(gplx.xowa.html.hdumps.abrvs.Xohd_abrv_.Html_redlink_end);
 			}
 			else {
@@ -173,8 +173,8 @@ public class Xoh_lnki_wtr {
 	}
 	public static byte[] Lnki_cls_visited(gplx.xowa.users.history.Xou_history_mgr history_mgr, byte[] wiki_key, byte[] page_ttl) {
 		return history_mgr.Has(wiki_key, page_ttl) ? Lnki_cls_visited_bry : Bry_.Empty;
-	}	private static final byte[] Lnki_cls_visited_bry = Bry_.new_ascii_(" class=\"xowa-visited\"");
-	private static final byte[] Bry_xowa_visited = Bry_.new_ascii_("\" class=\"xowa-visited"); 
+	}	private static final byte[] Lnki_cls_visited_bry = Bry_.new_a7(" class=\"xowa-visited\"");
+	private static final byte[] Bry_xowa_visited = Bry_.new_a7("\" class=\"xowa-visited"); 
 	public static final int Lnki_id_ignore = 0, Lnki_id_min	= 1;
 }
 interface Xop_lnki_caption_wtr {

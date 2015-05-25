@@ -57,7 +57,7 @@ public class Xol_csv_parser {
 							int utf_pos = i + 2;
 							for (int j = 0; j < utf_len; j++) {
 								int utf_int = Int_.Xto_int_hex(src, utf_pos, utf_pos + 4);
-								if (utf_int == -1) throw Err_mgr._.fmt_(GRP_KEY, "parse_invalid_escape_u", "invalid value for \\u: ~{0}", String_.new_utf8_(src, bgn, end));
+								if (utf_int == -1) throw Err_mgr._.fmt_(GRP_KEY, "parse_invalid_escape_u", "invalid value for \\u: ~{0}", String_.new_u8(src, bgn, end));
 								utf_bytes[utf_idx++] = (byte)utf_int;
 								utf_pos += 6;
 							}
@@ -77,7 +77,7 @@ public class Xol_csv_parser {
 		}
 	}
 	private static final String GRP_KEY = "Xol_csv_parser";
-	private static final byte[] Bry_pipe = Bry_.new_ascii_("\\u007C");
+	private static final byte[] Bry_pipe = Bry_.new_a7("\\u007C");
 	private static final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	public static final Xol_csv_parser _ = new Xol_csv_parser(); Xol_csv_parser() {}
 }

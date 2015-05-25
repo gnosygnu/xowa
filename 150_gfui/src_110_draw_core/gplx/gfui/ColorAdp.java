@@ -46,11 +46,11 @@ public class ColorAdp {
 }
 class ColorAdpCache {
 	public java.awt.Color GetNativeColor(ColorAdp color) {
-		Object rv = hash.Fetch(color.Value()); if (rv != null) return (java.awt.Color)rv;
+		Object rv = hash.Get_by(color.Value()); if (rv != null) return (java.awt.Color)rv;
 		rv = new java.awt.Color(color.Red(), color.Green(), color.Blue(), color.Alpha());
 		hash.Add(color.Value(), rv);
 		return (java.awt.Color)rv;
 	}
-	HashAdp hash = HashAdp_.new_();
+	Hash_adp hash = Hash_adp_.new_();
 	public static final ColorAdpCache _ = new ColorAdpCache(); ColorAdpCache() {}
 }

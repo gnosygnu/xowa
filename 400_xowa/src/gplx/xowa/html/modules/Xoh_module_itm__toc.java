@@ -39,13 +39,13 @@ public class Xoh_module_itm__toc implements Xoh_module_itm {
 		wtr.Write_js_global_ini_atr_msg(wiki			, Key_hidetoc);
 	}
 	private static final byte[] 
-	  Key_exists				= Bry_.new_ascii_("toc-enabled")
-	, Key_collapsed				= Bry_.new_ascii_("mw_hidetoc")
-	, Val_collapsed_y			= Bry_.new_ascii_("1")
-	, Val_collapsed_n			= Bry_.new_ascii_("0")
+	  Key_exists				= Bry_.new_a7("toc-enabled")
+	, Key_collapsed				= Bry_.new_a7("mw_hidetoc")
+	, Val_collapsed_y			= Bry_.new_a7("1")
+	, Val_collapsed_n			= Bry_.new_a7("0")
 	;
 	public static final byte[] 
-	  Key_showtoc				= Bry_.new_ascii_("showtoc")
-	, Key_hidetoc				= Bry_.new_ascii_("hidetoc")
+	  Key_showtoc				= Bry_.new_a7("showtoc")
+	, Key_hidetoc				= Bry_.new_a7("hidetoc")
 	;
 }

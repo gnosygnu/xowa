@@ -104,7 +104,7 @@ public class Xoh_html_wtr {
 		else
 			tkn.Print_ncr(bfr);
 	}
-	private static final byte[] Bry_hdr_bgn = Bry_.new_ascii_("<span class='mw-headline' id='"), Bry_hdr_end = Bry_.new_ascii_("</span>");
+	private static final byte[] Bry_hdr_bgn = Bry_.new_a7("<span class='mw-headline' id='"), Bry_hdr_end = Bry_.new_a7("</span>");
 	@gplx.Virtual public void Hr(Xop_ctx ctx, Xoh_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Xop_hr_tkn tkn)				{bfr.Add(Tag_hr);}
 	@gplx.Virtual public void Hdr(Xop_ctx ctx, Xoh_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Xop_hdr_tkn hdr) {
 		if (hdr.Hdr_html_first() && cfg.Toc_show() && !page.Hdr_mgr().Toc_manual()) {	// __TOC__ not specified; place at top; NOTE: if __TOC__ was specified, then it would be placed wherever __TOC__ appears
@@ -364,9 +364,9 @@ public class Xoh_html_wtr {
 				break;
 			}
 			case Xop_xnde_tag_.Tid_timeline: {
-				bfr.Add_str("<pre class='xowa-timeline'>");
+				bfr.Add_str_a7("<pre class='xowa-timeline'>");
 				Xox_mgr_base.Xtn_write_escape(app, bfr, src, xnde.Tag_open_end(), xnde.Tag_close_bgn());	// NOTE: do not embed <timeline> tag inside pre, else timeline will render in black; EX:<pre><timeline>a</timeline></pre> will fail; DATE:2014-05-22
-				bfr.Add_str("</pre>");
+				bfr.Add_str_a7("</pre>");
 				break;
 			}
 			case Xop_xnde_tag_.Tid_source: {							// convert <source> to <pre>;
@@ -418,7 +418,7 @@ public class Xoh_html_wtr {
 			default:	// unknown tag
 				if (tag.Restricted()) {	// a; img; script; etc..
 					if (	!page.Html_data().Html_restricted()							// page is not marked restricted (only [[Special:]])
-						||	page.Wiki().Domain_tid() == Xow_domain_.Tid_int_home) {		// page is in home wiki
+						||	page.Wiki().Domain_tid() == Xow_domain_type_.Tid_home) {		// page is in home wiki
 						bfr.Add_mid(src, xnde.Src_bgn(), xnde.Src_end());
 						return;
 					}
@@ -562,7 +562,6 @@ public class Xoh_html_wtr {
 			}
 		}
 	}
-	public Bool_obj_ref Queue_add_ref() {return queue_add_ref;} Bool_obj_ref queue_add_ref = Bool_obj_ref.n_();
 	public void Tblw(Xop_ctx ctx, Xoh_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Xop_tblw_tkn tkn, byte[] bgn, byte[] end, boolean tblw_bgn) {
 		if (hctx.Mode_is_alt())			// add \s for each \n
 			bfr.Add_byte_space();
@@ -595,23 +594,23 @@ public class Xoh_html_wtr {
 //				bfr.Add_byte_nl();
 		}
 	}
-	public static final byte[] Tag__end_quote = Bry_.new_ascii_("\">"), Tag__end_bgn = Bry_.new_ascii_("</")
-	, Tag_hdr_bgn = Bry_.new_ascii_("<h"), Tag_hdr_end = Bry_.new_ascii_("</h"), Tag_hr = Bry_.new_ascii_("<hr/>"), Tag_br = Bry_.new_ascii_("<br/>")
-	, Tag_list_grp_ul_bgn = Bry_.new_ascii_("<ul>"), Tag_list_grp_ul_end = Bry_.new_ascii_("</ul>")
-	, Tag_list_grp_ol_bgn = Bry_.new_ascii_("<ol>"), Tag_list_grp_ol_end = Bry_.new_ascii_("</ol>")
-	, Tag_list_itm_li_bgn = Bry_.new_ascii_("<li>"), Tag_list_itm_li_end = Bry_.new_ascii_("</li>")
-	, Tag_list_itm_dt_bgn = Bry_.new_ascii_("<dt>"), Tag_list_itm_dt_end = Bry_.new_ascii_("</dt>")
-	, Tag_list_itm_dd_bgn = Bry_.new_ascii_("<dd>"), Tag_list_itm_dd_end = Bry_.new_ascii_("</dd>")
-	, Tag_list_grp_dl_bgn = Bry_.new_ascii_("<dl>"), Tag_list_grp_dl_end = Bry_.new_ascii_("</dl>")
-	, File_divider = Bry_.new_ascii_("---------------------------------")
-	, Tag_tblw_tb_bgn = Bry_.new_ascii_("<table>"), Tag_tblw_tb_bgn_atr = Bry_.new_ascii_("<table"), Tag_tblw_tb_end = Bry_.new_ascii_("</table>")
-	, Tag_tblw_tr_bgn = Bry_.new_ascii_("<tr>"), Tag_tblw_tr_bgn_atr = Bry_.new_ascii_("<tr"), Tag_tblw_tr_end = Bry_.new_ascii_("</tr>")
-	, Tag_tblw_td_bgn = Bry_.new_ascii_("<td>"), Tag_tblw_td_bgn_atr = Bry_.new_ascii_("<td"), Tag_tblw_td_end = Bry_.new_ascii_("</td>")
-	, Tag_tblw_th_bgn = Bry_.new_ascii_("<th>"), Tag_tblw_th_bgn_atr = Bry_.new_ascii_("<th"), Tag_tblw_th_end = Bry_.new_ascii_("</th>")
-	, Tag_tblw_tc_bgn = Bry_.new_ascii_("<caption>"), Tag_tblw_tc_bgn_atr = Bry_.new_ascii_("<caption"), Tag_tblw_tc_end = Bry_.new_ascii_("</caption>")
-	, Ary_escape_bgn = Bry_.new_ascii_("&lt;"), Ary_escape_end = Bry_.new_ascii_("&gt;"), Ary_escape_end_bgn = Bry_.new_ascii_("&lt;/")
-	, Tag_para_bgn = Bry_.new_ascii_("<p>"), Tag_para_end = Bry_.new_ascii_("</p>"), Tag_para_mid = Bry_.new_ascii_("</p>\n\n<p>")
-	, Tag_pre_bgn = Bry_.new_ascii_("<pre>"), Tag_pre_end = Bry_.new_ascii_("</pre>")
+	public static final byte[] Tag__end_quote = Bry_.new_a7("\">"), Tag__end_bgn = Bry_.new_a7("</")
+	, Tag_hdr_bgn = Bry_.new_a7("<h"), Tag_hdr_end = Bry_.new_a7("</h"), Tag_hr = Bry_.new_a7("<hr/>"), Tag_br = Bry_.new_a7("<br/>")
+	, Tag_list_grp_ul_bgn = Bry_.new_a7("<ul>"), Tag_list_grp_ul_end = Bry_.new_a7("</ul>")
+	, Tag_list_grp_ol_bgn = Bry_.new_a7("<ol>"), Tag_list_grp_ol_end = Bry_.new_a7("</ol>")
+	, Tag_list_itm_li_bgn = Bry_.new_a7("<li>"), Tag_list_itm_li_end = Bry_.new_a7("</li>")
+	, Tag_list_itm_dt_bgn = Bry_.new_a7("<dt>"), Tag_list_itm_dt_end = Bry_.new_a7("</dt>")
+	, Tag_list_itm_dd_bgn = Bry_.new_a7("<dd>"), Tag_list_itm_dd_end = Bry_.new_a7("</dd>")
+	, Tag_list_grp_dl_bgn = Bry_.new_a7("<dl>"), Tag_list_grp_dl_end = Bry_.new_a7("</dl>")
+	, File_divider = Bry_.new_a7("---------------------------------")
+	, Tag_tblw_tb_bgn = Bry_.new_a7("<table>"), Tag_tblw_tb_bgn_atr = Bry_.new_a7("<table"), Tag_tblw_tb_end = Bry_.new_a7("</table>")
+	, Tag_tblw_tr_bgn = Bry_.new_a7("<tr>"), Tag_tblw_tr_bgn_atr = Bry_.new_a7("<tr"), Tag_tblw_tr_end = Bry_.new_a7("</tr>")
+	, Tag_tblw_td_bgn = Bry_.new_a7("<td>"), Tag_tblw_td_bgn_atr = Bry_.new_a7("<td"), Tag_tblw_td_end = Bry_.new_a7("</td>")
+	, Tag_tblw_th_bgn = Bry_.new_a7("<th>"), Tag_tblw_th_bgn_atr = Bry_.new_a7("<th"), Tag_tblw_th_end = Bry_.new_a7("</th>")
+	, Tag_tblw_tc_bgn = Bry_.new_a7("<caption>"), Tag_tblw_tc_bgn_atr = Bry_.new_a7("<caption"), Tag_tblw_tc_end = Bry_.new_a7("</caption>")
+	, Ary_escape_bgn = Bry_.new_a7("&lt;"), Ary_escape_end = Bry_.new_a7("&gt;"), Ary_escape_end_bgn = Bry_.new_a7("&lt;/")
+	, Tag_para_bgn = Bry_.new_a7("<p>"), Tag_para_end = Bry_.new_a7("</p>"), Tag_para_mid = Bry_.new_a7("</p>\n\n<p>")
+	, Tag_pre_bgn = Bry_.new_a7("<pre>"), Tag_pre_end = Bry_.new_a7("</pre>")
 	;
 	public static final byte Tag__bgn = Byte_ascii.Lt, Tag__end = Byte_ascii.Gt;
 	public static final byte Dir_spr_http = Byte_ascii.Slash;
@@ -620,8 +619,8 @@ public class Xoh_html_wtr {
 }
 class Xoh_display_ttl_wtr {
 	private static final byte[] 
-	  Atr_key_style = Bry_.new_ascii_("style")
-	, Msg_style_restricted = Bry_.new_ascii_(" style='/* attempt to bypass $wgRestrictDisplayTitle */'")
+	  Atr_key_style = Bry_.new_a7("style")
+	, Msg_style_restricted = Bry_.new_a7(" style='/* attempt to bypass $wgRestrictDisplayTitle */'")
 	;
 	private Btrie_slim_mgr style_trie = Btrie_slim_mgr.ci_ascii_()
 	.Add_str_byte__many(Byte_.By_int(0), "display", "user-select", "visibility");  // if ( preg_match( '/(display|user-select|visibility)\s*:/i', $decoded['style'] ) ) {

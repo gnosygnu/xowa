@@ -22,7 +22,7 @@ class Scrib_lib_wikibase_srl_visitor implements Wdata_claim_visitor {
 	public void Visit_str(Wdata_claim_itm_str itm) {
 		rv = new KeyVal[2];
 		rv[0] = KeyVal_.new_(Scrib_lib_wikibase_srl.Key_type, Wdata_dict_val_tid.Xto_str(itm.Val_tid()));
-		rv[1] = KeyVal_.new_(Scrib_lib_wikibase_srl.Key_value, String_.new_utf8_(itm.Val_str()));
+		rv[1] = KeyVal_.new_(Scrib_lib_wikibase_srl.Key_value, String_.new_u8(itm.Val_str()));
 	}
 	public void Visit_entity(Wdata_claim_itm_entity itm) {
 		rv = new KeyVal[2];
@@ -43,8 +43,8 @@ class Scrib_lib_wikibase_srl_visitor implements Wdata_claim_visitor {
 	}
 	private static KeyVal[] Monolingualtext_value(Wdata_claim_itm_monolingualtext itm) {
 		KeyVal[] rv = new KeyVal[2];
-		rv[0] = KeyVal_.new_(Wdata_dict_value_monolingualtext.Str_text			, String_.new_utf8_(itm.Text()));
-		rv[1] = KeyVal_.new_(Wdata_dict_value_monolingualtext.Str_language		, String_.new_utf8_(itm.Lang()));
+		rv[0] = KeyVal_.new_(Wdata_dict_value_monolingualtext.Str_text			, String_.new_u8(itm.Text()));
+		rv[1] = KeyVal_.new_(Wdata_dict_value_monolingualtext.Str_language		, String_.new_u8(itm.Lang()));
 		return rv;
 	}		public void Visit_quantity(Wdata_claim_itm_quantity itm) {
 		rv = new KeyVal[2];
@@ -53,10 +53,10 @@ class Scrib_lib_wikibase_srl_visitor implements Wdata_claim_visitor {
 	}
 	private static KeyVal[] Quantity_value(Wdata_claim_itm_quantity itm) {
 		KeyVal[] rv = new KeyVal[4];
-		rv[0] = KeyVal_.new_(Wdata_dict_value_quantity.Str_amount			, String_.new_utf8_(itm.Amount()));
-		rv[1] = KeyVal_.new_(Wdata_dict_value_quantity.Str_unit				, String_.new_utf8_(itm.Unit()));
-		rv[2] = KeyVal_.new_(Wdata_dict_value_quantity.Str_upperbound		, String_.new_utf8_(itm.Ubound()));
-		rv[3] = KeyVal_.new_(Wdata_dict_value_quantity.Str_lowerbound		, String_.new_utf8_(itm.Lbound()));
+		rv[0] = KeyVal_.new_(Wdata_dict_value_quantity.Str_amount			, String_.new_u8(itm.Amount()));
+		rv[1] = KeyVal_.new_(Wdata_dict_value_quantity.Str_unit				, String_.new_u8(itm.Unit()));
+		rv[2] = KeyVal_.new_(Wdata_dict_value_quantity.Str_upperbound		, String_.new_u8(itm.Ubound()));
+		rv[3] = KeyVal_.new_(Wdata_dict_value_quantity.Str_lowerbound		, String_.new_u8(itm.Lbound()));
 		return rv;
 	}
 	public void Visit_time(Wdata_claim_itm_time itm) {
@@ -66,7 +66,7 @@ class Scrib_lib_wikibase_srl_visitor implements Wdata_claim_visitor {
 	}
 	private static KeyVal[] Time_value(Wdata_claim_itm_time itm) {
 		KeyVal[] rv = new KeyVal[6];
-		rv[0] = KeyVal_.new_(Wdata_dict_value_time.Str_time				, String_.new_ascii_(itm.Time()));
+		rv[0] = KeyVal_.new_(Wdata_dict_value_time.Str_time				, String_.new_a7(itm.Time()));
 		rv[1] = KeyVal_.new_(Wdata_dict_value_time.Str_precision		, Wdata_dict_value_time.Val_precision_int);	// NOTE: must return int, not str; DATE:2014-02-18
 		rv[2] = KeyVal_.new_(Wdata_dict_value_time.Str_before			, Wdata_dict_value_time.Val_before_int);
 		rv[3] = KeyVal_.new_(Wdata_dict_value_time.Str_after			, Wdata_dict_value_time.Val_after_int);
@@ -81,8 +81,8 @@ class Scrib_lib_wikibase_srl_visitor implements Wdata_claim_visitor {
 	}
 	private static KeyVal[] Globecoordinate_value(Wdata_claim_itm_globecoordinate itm) {
 		KeyVal[] rv = new KeyVal[5];
-		rv[0] = KeyVal_.new_(Wdata_dict_value_globecoordinate.Str_latitude			, Double_.parse_(String_.new_ascii_(itm.Lat())));
-		rv[1] = KeyVal_.new_(Wdata_dict_value_globecoordinate.Str_longitude			, Double_.parse_(String_.new_ascii_(itm.Lng())));
+		rv[0] = KeyVal_.new_(Wdata_dict_value_globecoordinate.Str_latitude			, Double_.parse_(String_.new_a7(itm.Lat())));
+		rv[1] = KeyVal_.new_(Wdata_dict_value_globecoordinate.Str_longitude			, Double_.parse_(String_.new_a7(itm.Lng())));
 		rv[2] = KeyVal_.new_(Wdata_dict_value_globecoordinate.Str_altitude			, null);
 		rv[3] = KeyVal_.new_(Wdata_dict_value_globecoordinate.Str_globe				, Wdata_dict_value_globecoordinate.Val_globe_dflt_str);
 		rv[4] = KeyVal_.new_(Wdata_dict_value_globecoordinate.Str_precision			, .00001d);

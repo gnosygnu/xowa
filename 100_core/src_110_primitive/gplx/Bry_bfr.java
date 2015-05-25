@@ -46,7 +46,7 @@ public class Bry_bfr {
 		this.Clear();
 		this.Mkr_rls();
 	}
-	public String To_str_and_rls() {return String_.new_utf8_(To_bry_and_rls());}
+	public String To_str_and_rls() {return String_.new_u8(To_bry_and_rls());}
 	public byte[] To_bry_and_rls() {
 		byte[] rv = null;
 		synchronized (bfr) {
@@ -89,7 +89,7 @@ public class Bry_bfr {
 	}
 	public Bry_bfr Add_mid(byte[] val, int bgn, int end) {
 		int len = end - bgn;
-		if (len < 0) throw Err_.new_fmt_("negative len; bgn={0} end={1} excerpt={2}", bgn, end, String_.new_utf8_len_safe_(val, bgn, bgn + 16));	// NOTE: check for invalid end < bgn, else difficult to debug errors later; DATE:2014-05-11
+		if (len < 0) throw Err_.new_fmt_("negative len; bgn={0} end={1} excerpt={2}", bgn, end, String_.new_u8_by_len(val, bgn, bgn + 16));	// NOTE: check for invalid end < bgn, else difficult to debug errors later; DATE:2014-05-11
 		if (bfr_len + len > bfr_max) Resize((bfr_max + len) * 2);
 		Bry_.Copy_by_pos(val, bgn, end, bfr, bfr_len);
 		// Array_.CopyTo(val, bgn, bfr, bfr_len, len);
@@ -162,10 +162,10 @@ public class Bry_bfr {
 	public Bry_bfr Add_byte_nl()			{return Add_byte(Byte_ascii.NewLine);}
 	public Bry_bfr Add_byte_dot()			{return Add_byte(Byte_ascii.Dot);}
 	public Bry_bfr Add_byte(byte val) {
-		int newPos = bfr_len + 1;
-		if (newPos > bfr_max) Resize(bfr_len * 2);
+		int new_pos = bfr_len + 1;
+		if (new_pos > bfr_max) Resize(bfr_len * 2);
 		bfr[bfr_len] = val;
-		bfr_len = newPos;
+		bfr_len = new_pos;
 		return this;
 	}
 	public Bry_bfr Add_byte_repeat(byte b, int len) {
@@ -180,13 +180,13 @@ public class Bry_bfr {
 		this.Add_byte(b);
 		return this;
 	}
-	public Bry_bfr Add_utf8_int(int val) {
+	public Bry_bfr Add_u8_int(int val) {
 		if (bfr_len + 4 > bfr_max) Resize((bfr_max + 4) * 2);
 		int utf8_len = gplx.intl.Utf16_.Encode_int(val, bfr, bfr_len);
 		bfr_len += utf8_len;
 		return this;
 	}
-	public Bry_bfr Add_bool(boolean v) {return Add(v ? Const_bool_true : Const_bool_false);} public static final byte[] Const_bool_true = Bry_.new_ascii_("true"), Const_bool_false = Bry_.new_ascii_("false");
+	public Bry_bfr Add_bool(boolean v) {return Add(v ? Const_bool_true : Const_bool_false);} public static final byte[] Const_bool_true = Bry_.new_a7("true"), Const_bool_false = Bry_.new_a7("false");
 	public Bry_bfr Add_int_bool(boolean v) {return Add_int_fixed(v ? 1 : 0, 1);}
 	public Bry_bfr Add_int_variable(int val) {
 		int log10 = Int_.Log10(val);
@@ -256,8 +256,6 @@ public class Bry_bfr {
 		}
 		return this;
 	}
-	public Bry_bfr Add_bry_escape_by_doubling(byte quote_byte, byte[] val) {return Add_bry_escape(quote_byte, quote_byte, val, 0, val.length);}
-	public Bry_bfr Add_bry_escape(byte quote_byte, byte escape_byte, byte[] val, int bgn, int end) {return Add_bry_escape(quote_byte, new byte[] {escape_byte}, val, bgn, end);}
 	public Bry_bfr Add_bry_escape(byte quote_byte, byte[] escape, byte[] val, int bgn, int end) {	// used for xml_wtr; DATE:2015-04-09
 		boolean clean = true;	// add with chunks of bytes instead of one-by-one
 		for (int i = bgn; i < end; ++i) {
@@ -267,35 +265,33 @@ public class Bry_bfr {
 					clean = false;
 					this.Add_mid(val, bgn, i);
 					this.Add(escape);
-					this.Add_byte(quote_byte);
 				}
 				else {}
 			}
 			else {
-				if	(b == quote_byte)
-					this.Add(escape);
-				this.Add_byte(b);
+				if (b == quote_byte)	this.Add(escape);
+				else					this.Add_byte(b);
 			}
 		}
 		if (clean)
 			Add(val);
 		return this;
 	}
-	public Bry_bfr Add_str(String v) {return Add_str_utf8(v);}
-	public Bry_bfr Add_str_utf8(String str) {
+	public Bry_bfr Add_str(String v) {return Add_str_u8(v);}
+	public Bry_bfr Add_str_u8(String str) {
 		try {
 			int str_len = str.length();							
-			int bry_len = Bry_.new_utf8_len(str, str_len);
+			int bry_len = Bry_.new_u8_by_len(str, str_len);
 			if (bfr_len + bry_len > bfr_max) Resize((bfr_max + bry_len) * 2);
-			Bry_.new_utf8_write(str, str_len, bfr, bfr_len);
+			Bry_.new_u8_write(str, str_len, bfr, bfr_len);
 			bfr_len += bry_len;
 			return this;
 		}
 		catch (Exception e) {throw Err_.err_(e, "invalid UTF-8 sequence; str={0}", str);}
 	}
-	public Bry_bfr Add_str_ascii(String str) {
+	public Bry_bfr Add_str_a7(String str) {
 		try {
-			int bry_len = str.length();							
+			int bry_len = str.length();						
 			if (bfr_len + bry_len > bfr_max) Resize((bfr_max + bry_len) * 2);
 			for (int i = 0; i < bry_len; ++i) {
 				char c = str.charAt(i);							
@@ -377,7 +373,7 @@ public class Bry_bfr {
 	public Bry_bfr Add_str_pad_space_bgn(String v, int pad_max) {return Add_str_pad_space(v, pad_max, Bool_.N);}
 	public Bry_bfr Add_str_pad_space_end(String v, int pad_max) {return Add_str_pad_space(v, pad_max, Bool_.Y);}
 	Bry_bfr Add_str_pad_space(String v, int pad_max, boolean pad_end) {
-		byte[] v_bry = Bry_.new_utf8_(v); 
+		byte[] v_bry = Bry_.new_u8(v); 
 		if (pad_end)	Add(v_bry);
 		int pad_len = pad_max - v_bry.length;
 		if (pad_len > 0) 
@@ -493,10 +489,10 @@ public class Bry_bfr {
 		if (reset > 0) Reset_if_gt(reset);
 		return rv;
 	}
-	public String Xto_str()								{return String_.new_utf8_(Xto_bry());}
-	public String Xto_str_by_pos(int bgn, int end)		{return String_.new_utf8_(Xto_bry(), bgn, end);}
-	public String Xto_str_and_clear()					{return String_.new_utf8_(Xto_bry_and_clear());}
-	public String Xto_str_and_clear_and_trim()			{return String_.new_utf8_(Xto_bry_and_clear_and_trim());}
+	public String Xto_str()								{return String_.new_u8(Xto_bry());}
+	public String Xto_str_by_pos(int bgn, int end)		{return String_.new_u8(Xto_bry(), bgn, end);}
+	public String Xto_str_and_clear()					{return String_.new_u8(Xto_bry_and_clear());}
+	public String Xto_str_and_clear_and_trim()			{return String_.new_u8(Xto_bry_and_clear_and_trim());}
 	public int XtoIntAndClear(int or) {int rv = XtoInt(or); this.Clear(); return rv;}
 	public int XtoInt(int or) {
 		switch (bfr_len) {

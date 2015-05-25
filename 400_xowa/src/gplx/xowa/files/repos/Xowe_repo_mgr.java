@@ -16,9 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files.repos; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.xowa.wikis.*;
+import gplx.xowa.wikis.*; import gplx.xowa.files.xfers.*;
 public class Xowe_repo_mgr implements Xow_repo_mgr, GfoInvkAble {
-	private Xowe_wiki wiki; private final ListAdp repos = ListAdp_.new_();
+	private Xowe_wiki wiki; private final List_adp repos = List_adp_.new_();
 	public Xowe_repo_mgr(Xowe_wiki wiki) {
 		this.wiki = wiki;
 		Xoae_app app = wiki.Appe();
@@ -31,22 +31,40 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, GfoInvkAble {
 	public Xof_repo_pair Repos_get_by_wiki(byte[] wiki) {
 		int len = repos.Count();
 		for (int i = 0; i < len; i++) {
-			Xof_repo_pair pair = (Xof_repo_pair)repos.FetchAt(i);
+			Xof_repo_pair pair = (Xof_repo_pair)repos.Get_at(i);
 			if (Bry_.Eq(wiki, pair.Wiki_domain()))
 				return pair;
 		}
 		return null;
 	}
-	public Xof_repo_pair Repos_get_at(int i) {return (Xof_repo_pair)repos.FetchAt(i);}
-	public Xof_repo_pair Repos_get_by_id(int id) {
+	public Xof_repo_pair Repos_get_at(int i) {return (Xof_repo_pair)repos.Get_at(i);}
+	private Xof_repo_pair Repos_get_by_id(int id) {
 		int len = repos.Count();
 		for (int i = 0; i < len; i++) {
-			Xof_repo_pair pair = (Xof_repo_pair)repos.FetchAt(i);
+			Xof_repo_pair pair = (Xof_repo_pair)repos.Get_at(i);
 			if (pair.Repo_idx() == id) return pair;
 		}
 		return null;
 	}
-	public Xof_repo_pair[] Repos_ary() {if (repos_ary == null) repos_ary = (Xof_repo_pair[])repos.Xto_ary(Xof_repo_pair.class); return repos_ary;} private Xof_repo_pair[] repos_ary;
+	public Xof_repo_itm Get_trg_by_id_or_null(int id, byte[] lnki_ttl, byte[] page_url) {
+		Xof_repo_pair pair = Repos_get_by_id(id);
+		if (pair == null) {
+			Xoa_app_.Usr_dlg().Warn_many("", "", "repo_mgr.invalid_repo: repo=~{0} lnki_ttl=~{1} page_url=~{2}", id, lnki_ttl, page_url);
+			return null;
+		}
+		else
+			return pair.Trg();
+	}
+	public Xof_repo_itm Get_src_by_id_or_null(int id, byte[] lnki_ttl, byte[] page_url) {
+		Xof_repo_pair pair = Repos_get_by_id(id);
+		if (pair == null) {
+			Xoa_app_.Usr_dlg().Warn_many("", "", "repo_mgr.invalid_repo: repo=~{0} lnki_ttl=~{1} page_url=~{2}", id, lnki_ttl, page_url);
+			return null;
+		}
+		else
+			return pair.Src();
+	}
+	public Xof_repo_pair[] Repos_ary() {if (repos_ary == null) repos_ary = (Xof_repo_pair[])repos.To_ary(Xof_repo_pair.class); return repos_ary;} private Xof_repo_pair[] repos_ary;
 	public boolean Xfer_by_meta(Xof_xfer_itm xfer_itm, Xof_xfer_queue queue) {
 		byte[] ttl = xfer_itm.Lnki_ttl();
 		Xof_meta_itm meta_itm = xfer_itm.Meta_itm();
@@ -55,19 +73,19 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, GfoInvkAble {
 		if (meta_itm.State_new()) {
 			byte rslt = Xfer_by_meta__find_file(ttl, meta_itm, wiki.Domain_bry());
 			switch (rslt) {
-				case Xof_meta_itm.Tid_null: xfer_itm.Trg_repo_idx_(0); chk_all = true; break;	// NOTE: src_wiki_key becomes wiki.Key_bry() for sake of simplicity
-				case Xof_meta_itm.Tid_main: xfer_itm.Trg_repo_idx_(Xof_meta_itm.Repo_same); break;
+				case Xof_meta_itm.Tid_null: xfer_itm.Orig_repo_id_(0); chk_all = true; break;	// NOTE: src_wiki_key becomes wiki.Key_bry() for sake of simplicity
+				case Xof_meta_itm.Tid_main: xfer_itm.Orig_repo_id_(Xof_meta_itm.Repo_same); break;
 				case Xof_meta_itm.Tid_ptr:	src_wiki_key = Xfer_by_meta__find_main_ptr(meta_itm, xfer_itm); break;
 				case Xof_meta_itm.Tid_vrtl: src_wiki_key = Xfer_by_meta__find_main_vrtl(meta_itm, xfer_itm); break;
 			}
 		}
 		else {
 			Xof_repo_itm src_repo = meta_itm.Repo_itm(wiki);
-			src_wiki_key = src_repo.Wiki_key();
-			xfer_itm.Trg_repo_idx_(meta_itm.Vrtl_repo());	// NOTE: set trg_repo_idx b/c xfer_mgr will always set meta_itm.Vrtl_repo() with trg_repo_idx
+			src_wiki_key = src_repo.Wiki_domain();
+			xfer_itm.Orig_repo_id_(meta_itm.Vrtl_repo());	// NOTE: set trg_repo_idx b/c xfer_mgr will always set meta_itm.Vrtl_repo() with trg_repo_idx
 		}
 		if (meta_itm.Ptr_ttl_exists())
-			xfer_itm.Set__ttl(meta_itm.Ttl(), meta_itm.Ptr_ttl());
+			xfer_itm.Orig_ttl_and_redirect_(meta_itm.Ttl(), meta_itm.Ptr_ttl());
 		boolean main_exists_unknown = src_wiki_key == null;		// WORKAROUND/HACK: SEE:NOTE_1:reset_main_exists
 		boolean rv = Xfer_by_meta__exec(chk_all, xfer_itm, meta_itm, src_wiki_key, queue, false);
 		if (!rv && (!chk_all && !main_exists_unknown)) {	// xfer failed even with page found in wiki; try again, but chk all
@@ -77,7 +95,7 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, GfoInvkAble {
 	}
 	byte[] Xfer_by_meta__find_main_ptr(Xof_meta_itm meta_itm, Xof_xfer_itm xfer_itm) {
 		byte[] redirect = meta_itm.Ptr_ttl(); int redirect_tries = 0;
-		byte[] md5 = Xof_xfer_itm_.Md5_(redirect);
+		byte[] md5 = Xof_file_wkr_.Md5_(redirect);
 		while (true) {
 			boolean found = page_finder.Locate(tmp_rslt, repos, redirect);
 			if (!found) return null;
@@ -93,16 +111,16 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, GfoInvkAble {
 				if (redirect_meta.State_new()) {
 					if (repo_idx == Xof_meta_itm.Repo_unknown) {
 //							meta_itm.Vrtl_repo_(Xof_meta_itm.Repo_same);
-						xfer_itm.Trg_repo_idx_(Xof_meta_itm.Repo_same);
+						xfer_itm.Orig_repo_id_(Xof_meta_itm.Repo_same);
 					}
 					else {
 						if (!Bry_.Eq(trg_wiki_key, wiki.Domain_bry())) {
 //								meta_itm.Vrtl_repo_(tmp_rslt.Repo_idx());
-							xfer_itm.Trg_repo_idx_(tmp_rslt.Repo_idx());
+							xfer_itm.Orig_repo_id_(tmp_rslt.Repo_idx());
 						}
 						else {
 //								meta_itm.Vrtl_repo_(Xof_meta_itm.Repo_same);
-							xfer_itm.Trg_repo_idx_(Xof_meta_itm.Repo_same);
+							xfer_itm.Orig_repo_id_(Xof_meta_itm.Repo_same);
 						}
 					}
 				}
@@ -116,21 +134,21 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, GfoInvkAble {
 		int repo_idx = meta_itm.Vrtl_repo();
 		if (repo_idx == Xof_meta_itm.Repo_unknown) return null;;
 		Xof_repo_itm trg_repo = wiki.File_mgr().Repo_mgr().Repos_get_at(repo_idx).Trg();
-		xfer_itm.Trg_repo_idx_(repo_idx);
-		return trg_repo.Wiki_key();
+		xfer_itm.Orig_repo_id_(repo_idx);
+		return trg_repo.Wiki_domain();
 	}
 	boolean Xfer_by_meta__exec(boolean chk_all, Xof_xfer_itm xfer_itm, Xof_meta_itm meta_itm, byte[] main_wiki_key, Xof_xfer_queue queue, boolean second_chance) {
 		int repos_len = repos.Count();
 		for (int i = 0; i < repos_len; i++) {								// iterate over all repo pairs
-			Xof_repo_pair pair = (Xof_repo_pair)repos.FetchAt(i);
+			Xof_repo_pair pair = (Xof_repo_pair)repos.Get_at(i);
 			Xof_repo_itm pair_src = pair.Src();
-			boolean main_wiki_key_is_pair_src = Bry_.Eq(main_wiki_key, pair_src.Wiki_key());
+			boolean main_wiki_key_is_pair_src = Bry_.Eq(main_wiki_key, pair_src.Wiki_domain());
 			if (	(chk_all && !main_wiki_key_is_pair_src)					// only do chk_all if main_wiki is not pair_src; note that chk_all will only be called in two ways (1) with main_wiki_key as null; (2) with main_key_as val
 				||	(!chk_all && main_wiki_key_is_pair_src)) {				// pair.Src.Wiki == main.Wiki; note that there can be multiple pairs with same src; EX: have 2 pairs for commons: one for file and another for http					
 				xfer_mgr.Atrs_by_itm(xfer_itm, pair_src, pair.Trg());
 				boolean make = xfer_mgr.Make_file(wiki);
 				if (make) {
-					xfer_itm.Trg_repo_(pair.Trg());
+					xfer_itm.Trg_repo_itm_(pair.Trg());
 					if (second_chance && xfer_itm.Meta_itm().Vrtl_repo() == 0)	// second_chance and item found; change vrtl_repo from commons back to same; EX: tarball and [[Image:Rembrandt De aartsengel verlaat Tobias en zijn gezin. 1637.jpg|120px]]
 						xfer_itm.Meta_itm().Vrtl_repo_(Xof_meta_itm.Repo_same);
 					return true;												// file was made; return; if not continue looking at other repos					
@@ -173,14 +191,14 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, GfoInvkAble {
 		repos_ary = null;	// reset repos_ary variable
 		Xoa_repo_mgr repo_mgr = wiki.Appe().File_mgr().Repo_mgr();
 		Xof_repo_itm src_repo = repo_mgr.Get_by(src_repo_key), trg_repo = repo_mgr.Get_by(trg_repo_key);
-		byte[] src_wiki_key = src_repo.Wiki_key(), trg_wiki_key = trg_repo.Wiki_key();
-		if (!Bry_.Eq(src_wiki_key, trg_wiki_key) && !Bry_.Eq(src_wiki_key, Xow_domain_.Tid_bry_home)) throw Err_mgr._.fmt_(GRP_KEY, "add_repo", "wiki keys do not match: ~{0} ~{1}", String_.new_utf8_(src_wiki_key), String_.new_utf8_(trg_wiki_key));
+		byte[] src_wiki_key = src_repo.Wiki_domain(), trg_wiki_key = trg_repo.Wiki_domain();
+		if (!Bry_.Eq(src_wiki_key, trg_wiki_key) && !Bry_.Eq(src_wiki_key, Xow_domain_type_.Key_bry_home)) throw Err_mgr._.fmt_(GRP_KEY, "add_repo", "wiki keys do not match: ~{0} ~{1}", String_.new_u8(src_wiki_key), String_.new_u8(trg_wiki_key));
 		Xof_repo_pair pair = new Xof_repo_pair((byte)repos.Count(), src_wiki_key, src_repo, trg_repo);
 		repos.Add(pair);
 		return pair;
 	}
 	public boolean Xfer_file(Xof_xfer_itm file) {
-		int repo_idx = file.Trg_repo_idx();
+		int repo_idx = file.Orig_repo_id();
 		boolean wiki_is_unknown = repo_idx == Xof_meta_itm.Repo_unknown;
 		boolean make_pass = false;
 		int len = repos.Count();			
@@ -188,7 +206,7 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, GfoInvkAble {
 		if (make_pass) return true;
 
 		for (int i = 0; i < len; i++) {
-			Xof_repo_pair pair = (Xof_repo_pair)repos.FetchAt(i);
+			Xof_repo_pair pair = (Xof_repo_pair)repos.Get_at(i);
 			if (i != repo_idx) {	// try other wikis
 				file.Meta_itm().Orig_exists_(Xof_meta_itm.Exists_unknown);	// always reset orig exists; this may have been flagged to missing above and should be cleared
 				make_pass = Xfer_file_exec(file, pair, i);

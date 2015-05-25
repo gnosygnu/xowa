@@ -19,7 +19,7 @@ package gplx.xowa.langs.numbers; import gplx.*; import gplx.xowa.*; import gplx.
 public class Xol_num_mgr implements GfoInvkAble {
 	private boolean digits_translate;
 	protected Bry_bfr tmp_bfr = Bry_bfr.reset_(32);
-	private static final byte[] Comma_bry = Bry_.new_ascii_(",");
+	private static final byte[] Comma_bry = Bry_.new_a7(",");
 	public Xol_num_grp_fmtr Num_grp_fmtr() {return num_grp_fmtr;} private Xol_num_grp_fmtr num_grp_fmtr = new Xol_num_grp_fmtr();
 	public Xol_transform_mgr Separators_mgr() {return separators_mgr;} private Xol_transform_mgr separators_mgr = new Xol_transform_mgr();
 	public Xol_transform_mgr Digits_mgr() {return digits_mgr;} private Xol_transform_mgr digits_mgr = new Xol_transform_mgr();		
@@ -31,7 +31,7 @@ public class Xol_num_mgr implements GfoInvkAble {
 		return num;
 	}
 	public byte[] Format_num_no_separators(byte[] num) {return Format_num(num, true);}
-	public byte[] Format_num(int val)		{return Format_num(Bry_.new_ascii_(Int_.Xto_str(val)));}
+	public byte[] Format_num(int val)		{return Format_num(Bry_.new_a7(Int_.Xto_str(val)));}
 	public byte[] Format_num(byte[] num)	{return Format_num(num, false);}
 	public byte[] Format_num(byte[] num, boolean skip_commafy) {
 		if (!skip_commafy) {
@@ -59,7 +59,7 @@ public class Xol_num_mgr implements GfoInvkAble {
 		if		(ctx.Match(k, Invk_clear))						this.Clear();
 		else if	(ctx.Match(k, Invk_separators))					return separators_mgr;
 		else if	(ctx.Match(k, Invk_digits))						{digits_translate = true; return digits_mgr;}	// NOTE: only langes with a digit_transform_table will call digits; DATE:2014-05-28
-		else if	(ctx.Match(k, Invk_digit_grouping_pattern))		return String_.new_utf8_(num_grp_fmtr.Digit_grouping_pattern());
+		else if	(ctx.Match(k, Invk_digit_grouping_pattern))		return String_.new_u8(num_grp_fmtr.Digit_grouping_pattern());
 		else if	(ctx.Match(k, Invk_digit_grouping_pattern_))	num_grp_fmtr.Digit_grouping_pattern_(m.ReadBry("v"));
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;

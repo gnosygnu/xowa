@@ -20,7 +20,7 @@ import gplx.dbs.engines.sqlite.*;
 public class Db_attach_cmd {
 	private final boolean diff_db;
 	private final Db_conn conn; private final String attach_name; private final Io_url attach_url;
-	private final ListAdp sql_list = ListAdp_.new_();
+	private final List_adp sql_list = List_adp_.new_();
 	Db_attach_cmd(Db_conn conn, String attach_name, Io_url attach_url) {
 		this.conn = conn; this.attach_name = attach_name; this.attach_url = attach_url;
 		Sqlite_conn_info conn_info = (Sqlite_conn_info)conn.Conn_info();
@@ -38,7 +38,7 @@ public class Db_attach_cmd {
 		conn.Txn_bgn(attach_name);	// NOTE: BEGIN TRAN must occur after ATTACH else sqlite will throw error
 		int len = sql_list.Count();
 		for (int i = 0; i < len; ++i) {
-			Db_exec_sql_by_attach_itm itm = (Db_exec_sql_by_attach_itm)sql_list.FetchAt(i);
+			Db_exec_sql_by_attach_itm itm = (Db_exec_sql_by_attach_itm)sql_list.Get_at(i);
 			usr_dlg.Plog_many("", "", itm.Msg());
 			conn.Exec_sql(itm.Sql());
 		}

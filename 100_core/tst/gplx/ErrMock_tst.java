@@ -55,7 +55,7 @@ public class ErrMock_tst {	// NOTE: ErrMock_tst name important b/c gplx java cod
 	ErrMock_tst tst_Msg(String expd) {Tfds.Eq(expd, err.Hdr()); return this;}
 	ErrMock_tst tst_ProcName(String expd) {Tfds.Eq(expd, err.Proc().SignatureRaw()); return this;}
 	ErrMock_tst tst_Arg(int i, String expdKey, Object expdVal) {
-		KeyVal actl = (KeyVal)err.Args().FetchAt(i);
+		KeyVal actl = (KeyVal)err.Args().Get_at(i);
 		KeyVal expd = KeyVal_.new_(expdKey, expdVal);
 		Tfds.Eq(expd.XtoStr(), actl.XtoStr()); return this;
 	}

@@ -50,22 +50,22 @@ class Xop_xatr_whitelist_fxt {
 		if (whitelist_mgr == null) whitelist_mgr = new Xop_xatr_whitelist_mgr().Ini();
 	}	private Xop_xatr_whitelist_mgr whitelist_mgr;
 	public void Whitelist(byte tag_id, String key_str, boolean expd) {
-		byte[] key_bry = Bry_.new_ascii_(key_str);
+		byte[] key_bry = Bry_.new_a7(key_str);
 		atr_itm.Key_rng_(0, key_bry.length);
 		Tfds.Eq(expd, whitelist_mgr.Chk(tag_id, key_bry, atr_itm), key_str);
 	}	private Xop_xatr_itm atr_itm = new Xop_xatr_itm(0, 0);
 	public void Whitelist(byte tag_id, String key_str, String val_str, boolean expd) {
-		byte[] key_bry = Bry_.new_ascii_(key_str);
+		byte[] key_bry = Bry_.new_a7(key_str);
 		atr_itm.Key_rng_(0, key_bry.length);
-		atr_itm.Val_bry_(Bry_.new_ascii_(val_str));
+		atr_itm.Val_bry_(Bry_.new_a7(val_str));
 		Tfds.Eq(expd, whitelist_mgr.Chk(tag_id, key_bry, atr_itm), key_str);
 	}
 	public void Scrub_style_pass(String style_val_str) {Scrub_style(style_val_str, style_val_str);}
 	public void Scrub_style_fail(String val_str) {Scrub_style(val_str, "");}
 	public void Scrub_style(String val_str, String expd) {
-		byte[] val_bry = Bry_.new_ascii_(val_str);
+		byte[] val_bry = Bry_.new_a7(val_str);
 		atr_itm.Val_bry_(val_bry);
 		whitelist_mgr.Scrub_style(atr_itm, val_bry);
-		Tfds.Eq(expd, String_.new_ascii_(atr_itm.Val_bry()));
+		Tfds.Eq(expd, String_.new_a7(atr_itm.Val_bry()));
 	}
 }

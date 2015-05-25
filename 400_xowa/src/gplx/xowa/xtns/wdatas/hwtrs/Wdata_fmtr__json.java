@@ -22,7 +22,7 @@ class Wdata_fmtr__json implements Bry_fmtr_arg {
 	private Xoapi_toggle_itm toggle_itm; private Wdata_toc_data toc_data; private Json_doc jdoc;
 	public void Init_by_ctor(Wdata_toc_data toc_data, Xoapi_toggle_mgr toggle_mgr) {
 		this.toc_data = toc_data.Itms_len_enable_n_();
-		this.toggle_itm = toggle_mgr.Get_or_new("wikidatawiki-json").Html_toggle_hdr_cls_(Bry_.new_ascii_("overflow:auto;"));
+		this.toggle_itm = toggle_mgr.Get_or_new("wikidatawiki-json").Html_toggle_hdr_cls_(Bry_.new_a7("overflow:auto;"));
 	}
 	public void Init_by_lang(Wdata_hwtr_msgs msgs) {
 		toc_data.Orig_(msgs.Json_div_hdr());

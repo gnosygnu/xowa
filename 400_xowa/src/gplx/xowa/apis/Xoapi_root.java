@@ -35,8 +35,9 @@ public class Xoapi_root implements GfoInvkAble {
 		xtns_api.Init_by_kit(app);
 	}
 	public void Init_by_app(Xoae_app app) {
-		Io_url img_dir = app.User().Fsys_mgr().App_img_dir().GenSubDir_nest("window", "portal");
+		Io_url img_dir = app.Usere().Fsys_mgr().App_img_dir().GenSubDir_nest("window", "portal");
 		html_api.Page().Toggle_mgr().Img_dir_(img_dir);
+		usr_api.Init_by_app(app);
 	}
 	public Xoapi_app		App()		{return app_api;} private final Xoapi_app app_api = new Xoapi_app();
 	public Xoapi_nav		Nav()		{return nav_api;} private final Xoapi_nav nav_api = new Xoapi_nav();
@@ -47,6 +48,7 @@ public class Xoapi_root implements GfoInvkAble {
 	public Xoapi_usr		Usr()		{return usr_api;} private final Xoapi_usr usr_api = new Xoapi_usr();
 	public Xoapi_special	Special()	{return special_api;} private final Xoapi_special special_api = new Xoapi_special();
 	public Xoapi_xtns		Xtns()		{return xtns_api;} private final Xoapi_xtns xtns_api = new Xoapi_xtns();
+	public String			Test_str() {return test_str;} public void Test_str_(String v) {test_str = v;} private String test_str;	// TEST
 	private void Exec(String key) {
 		Xog_cmd_itm cmd_itm = app.Gui_mgr().Cmd_mgr().Get_or_null(key);
 		if (cmd_itm == null) app.Usr_dlg().Warn_many("", "", "could not find cmd; key=~{0}", key);
@@ -63,10 +65,13 @@ public class Xoapi_root implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_special)) 	return special_api;
 		else if	(ctx.Match(k, Invk_xtns)) 		return xtns_api;
 		else if	(ctx.Match(k, Invk_exec)) 		Exec(m.ReadStr("v"));
+		else if	(ctx.Match(k, Invk_test_str)) 	return test_str;
+		else if	(ctx.Match(k, Invk_test_str_)) 	test_str = m.ReadStr("v");
 		return this;
 	}
 	private static final String 
 	  Invk_exec = "exec"
 	, Invk_app = "app", Invk_bldr = "bldr", Invk_nav = "nav", Invk_gui = "gui", Invk_html = "html", Invk_net = "net", Invk_usr = "usr", Invk_special = "special", Invk_xtns = "xtns"
+	, Invk_test_str = "test_str", Invk_test_str_ = "test_str_"
 	;
 }

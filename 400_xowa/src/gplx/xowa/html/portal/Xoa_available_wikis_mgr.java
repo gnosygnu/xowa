@@ -24,12 +24,12 @@ public class Xoa_available_wikis_mgr implements GfoInvkAble {
 		if (itms_as_html == null) {
 			String itm_cls = app.Api_root().Html().Modules().Popups().Enabled() ? " class='xowa-hover-off'" : "";
 			Bry_bfr tmp_bfr = Bry_bfr.new_(); // NOTE: do not use app.Utl__bfr_mkr().Get_k004() as it is being used simultaneously by another caller; TODO: find call
-			Xow_xwiki_mgr xwiki_mgr = app.User().Wiki().Xwiki_mgr();
+			Xow_xwiki_mgr xwiki_mgr = app.Usere().Wiki().Xwiki_mgr();
 			xwiki_mgr.Sort_by_key();
 			int len = xwiki_mgr.Len();
 			for (int i = 0; i < len; i++) {
 				Xow_xwiki_itm itm = xwiki_mgr.Get_at(i);
-				if (itm.Domain_tid() == Xow_domain_.Tid_int_home) continue;// don't show home wiki
+				if (itm.Domain_tid() == Xow_domain_type_.Tid_home) continue;// don't show home wiki
 				if (!itm.Offline()) continue;	// only show items marked Offline (added by Available_from_fsys); DATE:2014-09-21
 				itms_as_html_fmtr.Bld_bfr_many(tmp_bfr, itm.Domain_bry(), itm_cls);
 			}

@@ -83,7 +83,7 @@ public class Xop_sanitizer {
 								case Xop_amp_trie_itm.Tid_num_hex:
 									boolean pass = amp_mgr.Parse_as_int(itm_tid == Xop_amp_trie_itm.Tid_num_hex, src, end, pos - 1, pos + itm.Xml_name_bry().length);
 									if (pass)
-										bfr.Add_utf8_int(amp_mgr.Rslt_val());
+										bfr.Add_u8_int(amp_mgr.Rslt_val());
 									else
 										bfr.Add_byte(Byte_ascii.Amp);
 									pos = amp_mgr.Rslt_pos();

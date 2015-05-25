@@ -114,32 +114,32 @@ public class Xowd_page_tbl implements RlsAble {
 			return rdr.Move_next() ? rdr.Read_int(fld_id) : Xowd_page_itm.Id_null;
 		}	finally {rdr.Rls();}
 	}
-	public void Select_in__ttl(Cancelable cancelable, OrderedHash rv, int ns_id, int bgn, int end) {
+	public void Select_in__ttl(Cancelable cancelable, Ordered_hash rv, int ns_id, int bgn, int end) {
 		Xowd_page_tbl__ttl wkr = new Xowd_page_tbl__ttl();
 		wkr.Ctor(this, tbl_name, fld_title);
 		wkr.Init(rv, ns_id);
 		wkr.Select_in(cancelable, conn, bgn, end);
 	}
-	public void Select_in__ns_ttl(Cancelable cancelable, OrderedHash rv, Xow_ns_mgr ns_mgr, boolean fill_idx_fields_only, int bgn, int end) {
+	public void Select_in__ns_ttl(Cancelable cancelable, Ordered_hash rv, Xow_ns_mgr ns_mgr, boolean fill_idx_fields_only, int bgn, int end) {
 		Xowd_page_tbl__ttl_ns wkr = new Xowd_page_tbl__ttl_ns();
 		wkr.Fill_idx_fields_only_(fill_idx_fields_only);
 		wkr.Ctor(this, tbl_name, fld_title);
 		wkr.Init(ns_mgr, rv);
 		wkr.Select_in(cancelable, conn, bgn, end);
 	}
-	public boolean Select_in__id(Cancelable cancelable, ListAdp rv)						{return Select_in__id(cancelable, false, rv, 0, rv.Count());}
-	public boolean Select_in__id(Cancelable cancelable, boolean skip_table_read, ListAdp rv)	{return Select_in__id(cancelable, skip_table_read, rv, 0, rv.Count());}
-	public boolean Select_in__id(Cancelable cancelable, boolean skip_table_read, ListAdp rv, int bgn, int end) {
-		Xowd_page_itm[] page_ary = (Xowd_page_itm[])rv.Xto_ary(Xowd_page_itm.class);
+	public boolean Select_in__id(Cancelable cancelable, List_adp rv)						{return Select_in__id(cancelable, false, rv, 0, rv.Count());}
+	public boolean Select_in__id(Cancelable cancelable, boolean skip_table_read, List_adp rv)	{return Select_in__id(cancelable, skip_table_read, rv, 0, rv.Count());}
+	public boolean Select_in__id(Cancelable cancelable, boolean skip_table_read, List_adp rv, int bgn, int end) {
+		Xowd_page_itm[] page_ary = (Xowd_page_itm[])rv.To_ary(Xowd_page_itm.class);
 		int len = page_ary.length; if (len == 0) return false;
-		OrderedHash hash = OrderedHash_.new_();
+		Ordered_hash hash = Ordered_hash_.new_();
 		for (int i = 0; i < len; i++) {
 			if (cancelable.Canceled()) return false;
 			Xowd_page_itm p = page_ary[i];
 			if (!hash.Has(p.Id_val()))	// NOTE: must check if file already exists b/c dynamicPageList currently allows dupes; DATE:2013-07-22
 				hash.Add(p.Id_val(), p);
 		}
-		hash.SortBy(Xowd_page_itm_sorter.IdAsc);	// sort by ID to reduce disk thrashing; DATE:2015-03-31
+		hash.Sort_by(Xowd_page_itm_sorter.IdAsc);	// sort by ID to reduce disk thrashing; DATE:2015-03-31
 		conn.Txn_bgn();
 		try {
 			Xowd_page_tbl__id wkr = new Xowd_page_tbl__id();
@@ -158,7 +158,7 @@ public class Xowd_page_tbl implements RlsAble {
 			return rdr.Move_next() ? rdr.Read_bry_by_str(fld_title) : null;
 		}	finally {rdr.Rls();}
 	}
-	public void Select_by_search(Cancelable cancelable, ListAdp rv, byte[] search, int results_max) {
+	public void Select_by_search(Cancelable cancelable, List_adp rv, byte[] search, int results_max) {
 		if (Bry_.Len_eq_0(search)) return;	// do not allow empty search
 		Criteria crt = Criteria_.And_many(Db_crt_.eq_(fld_ns, Xow_ns_.Id_main), Db_crt_.like_(fld_title, ""));
 		Db_qry__select_cmd qry = Db_qry_.select_().From_(tbl_name).Cols_(fld_id, fld_len, fld_ns, fld_title).Where_(crt);	// NOTE: use fields from main index only
@@ -176,9 +176,9 @@ public class Xowd_page_tbl implements RlsAble {
 			}
 		}	finally {rdr.Rls();}
 	}
-	public void Select_for_search_suggest(Cancelable cancelable, ListAdp rslt_list, Xow_ns ns, byte[] key, int max_results, int min_page_len, int browse_len, boolean include_redirects, boolean fetch_prv_item) {
-		String search_bgn = String_.new_utf8_(key);
-		String search_end = String_.new_utf8_(gplx.intl.Utf8_.Increment_char_at_last_pos(key));
+	public void Select_for_search_suggest(Cancelable cancelable, List_adp rslt_list, Xow_ns ns, byte[] key, int max_results, int min_page_len, int browse_len, boolean include_redirects, boolean fetch_prv_item) {
+		String search_bgn = String_.new_u8(key);
+		String search_end = String_.new_u8(gplx.intl.Utf8_.Increment_char_at_last_pos(key));
 		String sql = String_.Format
 		( "SELECT {0}, {1}, {2}, {3} FROM {4} INDEXED BY {4}__title WHERE {1} = {5} AND {2} BETWEEN '{6}' AND '{7}' ORDER BY {3} DESC LIMIT {8};"
 		, fld_id, fld_ns, fld_title, fld_len
@@ -194,12 +194,12 @@ public class Xowd_page_tbl implements RlsAble {
 				Read_page__idx(page, rdr);
 				rslt_list.Add(page);
 			}
-			rslt_list.SortBy(Xowd_page_itm_sorter.TitleAsc);
+			rslt_list.Sort_by(Xowd_page_itm_sorter.TitleAsc);
 		}
 		finally {rdr.Rls();}
 	}
 	private Db_rdr Load_ttls_starting_with_rdr(int ns_id, byte[] ttl_frag, boolean include_redirects, int max_results, int min_page_len, int browse_len, boolean fwd, boolean search_suggest) {
-		String ttl_frag_str = String_.new_utf8_(ttl_frag);
+		String ttl_frag_str = String_.new_u8(ttl_frag);
 		Criteria crt_ttl = fwd ? Db_crt_.mte_(fld_title, ttl_frag_str) : Db_crt_.lt_(fld_title, ttl_frag_str);
 		Criteria crt = Criteria_.And_many(Db_crt_.eq_(fld_ns, ns_id), crt_ttl, Db_crt_.mte_(fld_len, min_page_len));
 		if (!include_redirects)
@@ -215,7 +215,7 @@ public class Xowd_page_tbl implements RlsAble {
 			stmt.Crt_bool_as_byte(fld_is_redirect, include_redirects);
 		return stmt.Exec_select__rls_auto();
 	}
-	public void Select_for_special_all_pages(Cancelable cancelable, ListAdp rslt_list, Xowd_page_itm rslt_nxt, Xowd_page_itm rslt_prv, Int_obj_ref rslt_count, Xow_ns ns, byte[] key, int max_results, int min_page_len, int browse_len, boolean include_redirects, boolean fetch_prv_item) {
+	public void Select_for_special_all_pages(Cancelable cancelable, List_adp rslt_list, Xowd_page_itm rslt_nxt, Xowd_page_itm rslt_prv, Int_obj_ref rslt_count, Xow_ns ns, byte[] key, int max_results, int min_page_len, int browse_len, boolean include_redirects, boolean fetch_prv_item) {
 		Xowd_page_itm nxt_itm = null;
 		int rslt_idx = 0;
 		boolean max_val_check = max_results == Int_.MaxValue;
@@ -248,7 +248,7 @@ public class Xowd_page_tbl implements RlsAble {
 					rslt_prv.Copy(prv_itm);
 				else {	// at beginning of range, so no items found; EX: "Module:A" is search, but 1st Module is "Module:B"
 					if (rslt_list.Count() > 0)	// use 1st item
-						rslt_prv.Copy((Xowd_page_itm)rslt_list.FetchAt(0));
+						rslt_prv.Copy((Xowd_page_itm)rslt_list.Get_at(0));
 				}
 			}
 		}

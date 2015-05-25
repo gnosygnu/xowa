@@ -140,6 +140,6 @@ class Xosp_fbrow_special_fxt {
 		args_mgr.Init(url.Args());
 		Xosp_fbrow_cmd__wiki_add cmd = new Xosp_fbrow_cmd__wiki_add();
 		byte[] actl = cmd.Write_html(args_mgr, GfoInvkAble_.Null).Html_body();
-		Tfds.Eq_str_lines(expd, String_.new_utf8_(actl));
+		Tfds.Eq_str_lines(expd, String_.new_u8(actl));
 	}
 }

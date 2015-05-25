@@ -38,7 +38,7 @@ public class TdbEngine implements Db_engine {
 		return rv;
 	}
 	public Object Exec_as_obj(Db_qry qry) {
-		Db_qryWkr wkr = (Db_qryWkr)wkrs.FetchOrFail(qry.Tid());
+		Db_qryWkr wkr = (Db_qryWkr)wkrs.Get_by_or_fail(qry.Tid());
 		return wkr.Exec(this, qry);
 	}
 	public Db_stmt	New_stmt_prep(Db_qry qry) {return new Db_stmt_sql().Parse(qry, Sql_qry_wtr_.I.Xto_str(qry, true));}
@@ -47,7 +47,7 @@ public class TdbEngine implements Db_engine {
 	public Db_rdr	New_rdr__rls_auto(Db_stmt stmt, Object rdr_obj, String sql) {return Db_rdr_.Empty;}
 	public DataRdr	New_rdr(java.sql.ResultSet rdr, String sql) {return DataRdr_.Null;} 
 	public TdbTable FetchTbl(String name) {
-		TdbTable tbl = db.Tables().FetchOrFail(name);
+		TdbTable tbl = db.Tables().Get_by_or_fail(name);
 		if (!tbl.IsLoaded()) loadMgr.LoadTbl(db, tbl);
 		return tbl;
 	}
@@ -64,7 +64,7 @@ public class TdbEngine implements Db_engine {
 	public void			Env_db_attach(String alias, Io_url db_url)		{}
 	public void			Env_db_detach(String alias)					{}
 
-	HashAdp wkrs = HashAdp_.new_(); TdbDbLoadMgr loadMgr = TdbDbLoadMgr.new_(); TdbDbSaveMgr saveMgr = TdbDbSaveMgr.new_();
+	Hash_adp wkrs = Hash_adp_.new_(); TdbDbLoadMgr loadMgr = TdbDbLoadMgr.new_(); TdbDbSaveMgr saveMgr = TdbDbSaveMgr.new_();
 	public static final TdbEngine _ = new TdbEngine(); 
 	void CtorTdbEngine(Db_conn_info conn_info) {
 		this.conn_info = conn_info;

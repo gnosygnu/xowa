@@ -25,7 +25,7 @@ class Xob_page_regy_tbl {
 		Create_data__insert_redirect(usr_dlg, p, repo_tid, wiki.Fsys_mgr().Root_dir().GenSubFil(Xob_db_file.Name__wiki_redirect));
 	}
 	public static void Delete_local(Db_conn p) {
-		p.Exec_sql("DELETE FROM page_regy WHERE repo_id = " + Xof_repo_itm.Repo_local);
+		p.Exec_sql("DELETE FROM page_regy WHERE repo_id = " + Xof_repo_itm_.Repo_local);
 	}
 	private static void Create_data__insert_page(Gfo_usr_dlg usr_dlg, Db_conn cur, byte repo_tid, Io_url join) {
 		usr_dlg.Note_many("", "", "inserting page: ~{0}", join.NameOnly());
@@ -34,7 +34,7 @@ class Xob_page_regy_tbl {
 		Sqlite_engine_.Db_detach(cur, "page_db");
 	}
 	private static void Create_data__insert_redirect(Gfo_usr_dlg usr_dlg, Db_conn cur, byte repo_tid, Io_url join) {
-		if (!Io_mgr._.ExistsFil(join)) return;	// redirect_db will not exist when commons.wikimedia.org is set up on new machine
+		if (!Io_mgr.I.ExistsFil(join)) return;	// redirect_db will not exist when commons.wikimedia.org is set up on new machine
 		usr_dlg.Note_many("", "", "inserting redirect: ~{0}", join.OwnerDir().NameOnly());
 		Sqlite_engine_.Db_attach(cur, "redirect_db", join.Raw());
 		cur.Exec_sql(String_.Format(Sql_create_redirect, repo_tid));

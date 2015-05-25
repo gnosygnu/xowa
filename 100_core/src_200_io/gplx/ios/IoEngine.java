@@ -141,7 +141,7 @@ class IoEngineUtl {
 		IoStream srcStream = null;
 		IoStream trgStream = null;
 		try {
-			srcStream = IoEnginePool._.Fetch(src.Info().EngineKey()).OpenStreamRead(src);
+			srcStream = IoEnginePool._.Get_by(src.Info().EngineKey()).OpenStreamRead(src);
 			trgStream = IoEngine_xrg_openWrite.new_(trg).Exec();
 			srcStream.Transfer(trgStream, bufferLength);
 		}

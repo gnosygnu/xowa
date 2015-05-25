@@ -109,8 +109,8 @@ public class DbMaprMgr_tst {
 		Tfds.Eq(1, disc.Id());
 		Tfds.Eq("name", disc.Name());
 		Tfds.Eq(2, disc.Titles().Count());
-		Tfds.Eq("title1", ((MockTitle)disc.Titles().FetchAt(0)).Name());
-		Tfds.Eq("title2", ((MockTitle)disc.Titles().FetchAt(1)).Name());
+		Tfds.Eq("title1", ((MockTitle)disc.Titles().Get_at(0)).Name());
+		Tfds.Eq("title2", ((MockTitle)disc.Titles().Get_at(1)).Name());
 	}
 	@Test  public void Load_deep() {
 		rdr = rdr_();
@@ -124,13 +124,13 @@ public class DbMaprMgr_tst {
 		Tfds.Eq(1, disc.Id());
 		Tfds.Eq("name", disc.Name());
 		Tfds.Eq(1, disc.Titles().Count());
-		MockTitle t = ((MockTitle)disc.Titles().FetchAt(0));
+		MockTitle t = ((MockTitle)disc.Titles().Get_at(0));
 		Tfds.Eq("title1", t.Name());
-		Tfds.Eq("chapter1", ((MockChapter)t.Chapters().FetchAt(0)).Name());
+		Tfds.Eq("chapter1", ((MockChapter)t.Chapters().Get_at(0)).Name());
 		Tfds.Eq(1, t.Audios().Count());
 		Tfds.Eq(1, t.Subtitles().Count());
-		Tfds.Eq("audio1", ((MockStream)t.Audios().FetchAt(0)).Name());
-		Tfds.Eq("subtitle1", ((MockStream)t.Subtitles().FetchAt(0)).Name());
+		Tfds.Eq("audio1", ((MockStream)t.Audios().Get_at(0)).Name());
+		Tfds.Eq("subtitle1", ((MockStream)t.Subtitles().Get_at(0)).Name());
 	}
 	DbMaprRdr rdr_() {
 		DbMaprRdr rv = DbMaprRdr.new_(Db_conn_info_.Test, Db_crt_.eq_("disc_id", 1));

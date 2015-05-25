@@ -20,13 +20,13 @@ import gplx.stores.*; /*DataRdr_base*/
 public abstract class GfmlDataRdr_base extends DataRdr_base implements DataRdr {
 	@Override public String NameOfNode()			{return curNde.Hnd();}
 	@Override public int FieldCount()			{return curNde.SubKeys().Count();}
-	@Override public String KeyAt(int idx)		{return curNde.SubKeys().FetchAt(idx).KeyTkn().Val();}
-	@Override public Object ReadAt(int idx)		{return GfmlAtr.as_(curNde.SubKeys().FetchAt(idx)).DatTkn().Val();}
+	@Override public String KeyAt(int idx)		{return curNde.SubKeys().Get_at(idx).KeyTkn().Val();}
+	@Override public Object ReadAt(int idx)		{return GfmlAtr.as_(curNde.SubKeys().Get_at(idx)).DatTkn().Val();}
 	@Override public Object Read(String name)	{return curNde.SubKeys().FetchDataOrNull(name);}
 	public boolean MoveNextPeer() {
 		pos += 1;
 		if (list == null || pos >= list.Count()) return false; // TODO_9: makeCurNde null; invalidate FieldAt, etc?
-		curNde = list.FetchAt(pos);
+		curNde = list.Get_at(pos);
 		return true;
 	}
 	@Override public DataRdr Subs() {
@@ -43,7 +43,7 @@ public abstract class GfmlDataRdr_base extends DataRdr_base implements DataRdr {
 		rv.list = GfmlItmHnds.new_();
 		if (curNde == null) return rv;
 		for (int i = 0; i < curNde.SubHnds().Count(); i++) {
-			GfmlNde sub = (GfmlNde)curNde.SubHnds().FetchAt(i);
+			GfmlNde sub = (GfmlNde)curNde.SubHnds().Get_at(i);
 			String typeName = sub.Type().NdeName();
 			if (	sub.Type().IsTypeAny())		// isAnyType b/c match may not be exact; ex: type can be defined as item:key name; but actlNde may be item:key name size;
 				//||	sub.Type().IsTypeNull())

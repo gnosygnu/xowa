@@ -44,7 +44,7 @@ public class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 		if (cmd.Select() != null) {
 			sb.Add_many("INSERT INTO ", cmd.Base_table(), " (");
 			for (int i = 0; i < cmd.Cols().Count(); i++) {
-				Sql_select_fld_base fld = cmd.Cols().FetchAt(i);
+				Sql_select_fld_base fld = cmd.Cols().Get_at(i);
 				sb.Add(fld.Alias());
 				sb.Add(i == cmd.Cols().Count() - 1 ? ") " : ", ");
 			}
@@ -55,13 +55,13 @@ public class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 		int last = arg_count - 1;
 		sb.Add_many("INSERT INTO ", cmd.Base_table(), " (");
 		for (int i = 0; i < arg_count; i++) {
-			KeyVal pair = cmd.Args().FetchAt(i);
+			KeyVal pair = cmd.Args().Get_at(i);
 			this.Xto_sql_col(sb, pair.Key_as_obj());
 			sb.Add(i == last ? ")" : ", ");
 		}
 		sb.Add(" VALUES (");
 		for (int i = 0; i < arg_count; i++) {
-			KeyVal pair = cmd.Args().FetchAt(i);
+			KeyVal pair = cmd.Args().Get_at(i);
 			Db_arg arg = (Db_arg)pair.Val();
 			this.Bld_val(sb, arg);
 			sb.Add(i == last ? ")" : ", ");
@@ -72,7 +72,7 @@ public class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 		int arg_count = cmd.Args().Count(); if (arg_count == 0) throw Err_.new_("Db_qry_update has no columns").Add("base_table", cmd.Base_table());
 		sb.Add_many("UPDATE ", cmd.Base_table(), " SET ");
 		for (int i = 0; i < arg_count; i++) {
-			KeyVal pair = cmd.Args().FetchAt(i);
+			KeyVal pair = cmd.Args().Get_at(i);
 			if (i > 0) sb.Add(", ");
 			this.Xto_sql_col(sb, pair.Key_as_obj());
 			sb.Add("=");
@@ -87,7 +87,7 @@ public class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 		Sql_select_fld_list flds = cmd.Cols().Flds();
 		if (flds.Count() == 0) sb.Add("*");
 		for (int i = 0; i < flds.Count(); i++) {
-			Sql_select_fld_base fld = (Sql_select_fld_base)flds.FetchAt(i);
+			Sql_select_fld_base fld = (Sql_select_fld_base)flds.Get_at(i);
 			if (i > 0) sb.Add(", ");
 			this.Xto_sql_col(sb, fld.XtoSql());
 		}
@@ -103,7 +103,7 @@ public class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 		if (groupBy == null) return;
 		sb.Add(" GROUP BY ");
 		for (int i = 0; i < groupBy.Flds().Count(); i++) {
-			String item = (String)groupBy.Flds().FetchAt(i);
+			String item = (String)groupBy.Flds().Get_at(i);
 			if (i > 0) sb.Add(", ");
 			sb.Add(item);
 		}
@@ -112,7 +112,7 @@ public class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 		if (orderBy == null) return;
 		sb.Add(" ORDER BY ");
 		for (int i = 0; i < orderBy.Flds().Count(); i++) {
-			Sql_order_by_itm item = (Sql_order_by_itm)orderBy.Flds().FetchAt(i);
+			Sql_order_by_itm item = (Sql_order_by_itm)orderBy.Flds().Get_at(i);
 			if (i > 0) sb.Add(", ");
 			sb.Add(item.XtoSql());
 		}
@@ -129,7 +129,7 @@ public class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 				);
 			String tblAliasForJoin = tbl.Alias() == null ? tbl.TblName() : tbl.Alias();
 			for (int i = 0; i < tbl.JoinLinks().Count(); i++) {
-				Sql_join_itm joinLink = (Sql_join_itm)tbl.JoinLinks().FetchAt(i);
+				Sql_join_itm joinLink = (Sql_join_itm)tbl.JoinLinks().Get_at(i);
 				String conjunction = i == 0 ? " ON " : " AND ";
 				sb.Add_many(conjunction, joinLink.SrcTbl(), ".", joinLink.SrcFld(), "=", tblAliasForJoin, ".", joinLink.TrgFldOrSrcFld());
 			}

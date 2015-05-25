@@ -28,9 +28,9 @@ public class Xocfg_bnd_mgr implements GfoInvkAble, Gfo_sort_able {
 	}
 	public Xoae_app App() {return app;} private Xoae_app app;
 	public Xog_bnd_mgr Bnd_mgr() {return bnd_mgr;} private Xog_bnd_mgr bnd_mgr;
-	private OrderedHash regy;
+	private Ordered_hash regy;
 	public void Init() {
-		regy = OrderedHash_.new_();
+		regy = Ordered_hash_.new_();
 		int len = bnd_mgr.Len();
 		for (int i = 0; i < len; i++) {
 			Xog_bnd_itm bnd = bnd_mgr.Get_at(i);
@@ -40,15 +40,15 @@ public class Xocfg_bnd_mgr implements GfoInvkAble, Gfo_sort_able {
 		}
 	}
 	private Xocfg_bnd_itm_srl Init(String key) {return new Xocfg_bnd_itm_srl(app, key);}
-	public Xocfg_bnd_itm Get_at(int i)		{return (Xocfg_bnd_itm)regy.FetchAt(i);}
+	public Xocfg_bnd_itm Get_at(int i)		{return (Xocfg_bnd_itm)regy.Get_at(i);}
 	public int Len() {return regy.Count();}
-	public void Sort(gplx.lists.ComparerAble comparer) {regy.SortBy(comparer);}
+	public void Sort(gplx.lists.ComparerAble comparer) {regy.Sort_by(comparer);}
 	private void Set_bulk(byte[] src) {
 		try {
 			bnd_mgr_srl.Load_by_bry(src);
 		}
 		catch (Exception e) {	// catch errors, so that next cmd (which is page.reload) can still execute
-			app.Usr_dlg().Warn_many("", "", "failed to set bnds; src=~{0} err=~{1}", String_.new_utf8_(src), Err_.Message_gplx_brief(e));
+			app.Usr_dlg().Warn_many("", "", "failed to set bnds; src=~{0} err=~{1}", String_.new_u8(src), Err_.Message_gplx_brief(e));
 		}
 	}
 	private void Show_shortcut_win(String uid, String name, String binding) {

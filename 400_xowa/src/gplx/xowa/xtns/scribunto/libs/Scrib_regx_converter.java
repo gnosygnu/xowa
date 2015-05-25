@@ -17,11 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 public class Scrib_regx_converter {
-	private ListAdp capt_list = ListAdp_.new_(), grps_parens = ListAdp_.new_(); private ListAdp grps_open = ListAdp_.new_();
+	private List_adp capt_list = List_adp_.new_(), grps_parens = List_adp_.new_(); private List_adp grps_open = List_adp_.new_();
 	public Scrib_regx_converter() {Init();}
 	public String Regx() {return regx;} private String regx;
-	public ListAdp Capt_list() {return capt_list;}
-	public KeyVal[] Capt_ary() {return capt_list.Count() == 0 ? null : (KeyVal[])capt_list.Xto_ary(KeyVal.class);}
+	public List_adp Capt_list() {return capt_list;}
+	public KeyVal[] Capt_ary() {return capt_list.Count() == 0 ? null : (KeyVal[])capt_list.To_ary(KeyVal.class);}
 	private Bry_fmtr fmtr_balanced; private Bry_bfr bfr_balanced;
 	public String Parse(byte[] src, byte[] anchor) {
 		int len = src.length;
@@ -55,7 +55,7 @@ public class Scrib_regx_converter {
 				case Byte_ascii.Paren_end:
 					if (grps_open.Count() == 0)
 						throw Err_.new_("Unmatched close-paren at pattern character " + Int_.Xto_str(i));
-					ListAdp_.DelAt_last(grps_open);
+					List_adp_.DelAt_last(grps_open);
 					bfr.Add_byte(Byte_ascii.Paren_end);
 					break;
 				case Byte_ascii.Percent:
@@ -183,15 +183,15 @@ public class Scrib_regx_converter {
 				}
 			}			
 		}
-		if (grps_open.Count() > 0) throw Err_.new_("Unclosed capture beginning at pattern character " + Int_.cast_(grps_open.FetchAt(0)));
+		if (grps_open.Count() > 0) throw Err_.new_("Unclosed capture beginning at pattern character " + Int_.cast_(grps_open.Get_at(0)));
 //			bfr.Add(Bry_regx_end);	// NOTE: do not add PHP /us at end; u=PCRE_UTF8 which is not needed for Java; s=PCRE_DOTALL which will be specified elsewhere
 		regx = bfr.Xto_str_and_clear();
 		return regx;
 	}	private Bry_bfr bfr = Bry_bfr.new_();
-	boolean grps_open_Has(ListAdp list, int v) {
+	boolean grps_open_Has(List_adp list, int v) {
 		int len = list.Count();
 		for (int i = 0; i < len; i++) {
-			Object o = list.FetchAt(i);
+			Object o = list.Get_at(i);
 			if (Int_.cast_(o) == v) return true;
 		}
 		return false;
@@ -213,13 +213,13 @@ public class Scrib_regx_converter {
 				return false;
 		}
 	}
-	private static final byte[] Bry_pow_escaped = Bry_.new_ascii_("\\^")
-	, Bry_dollar_literal = Bry_.new_ascii_("$"), Bry_dollar_escaped = Bry_.new_ascii_("\\$")
-	, Bry_bf0_seg_0 = Bry_.new_ascii_("{"), Bry_bf0_seg_1 = Bry_.new_ascii_("}[^"), Bry_bf0_seg_2 = Bry_.new_ascii_("]*")
-	, Bry_bf2_seg_0 = Bry_.new_ascii_("\\")//, Bry_bf2_seg_1 = Bry_.new_ascii_("")
-	, Bry_regx_dash = Bry_.new_ascii_("*?")	// was *?
+	private static final byte[] Bry_pow_escaped = Bry_.new_a7("\\^")
+	, Bry_dollar_literal = Bry_.new_a7("$"), Bry_dollar_escaped = Bry_.new_a7("\\$")
+	, Bry_bf0_seg_0 = Bry_.new_a7("{"), Bry_bf0_seg_1 = Bry_.new_a7("}[^"), Bry_bf0_seg_2 = Bry_.new_a7("]*")
+	, Bry_bf2_seg_0 = Bry_.new_a7("\\")//, Bry_bf2_seg_1 = Bry_.new_a7("")
+	, Bry_regx_dash = Bry_.new_a7("*?")	// was *?
 	;
-	public static final byte[] Anchor_null = null, Anchor_G = Bry_.new_ascii_("\\G"), Anchor_pow = Bry_.new_ascii_("^");
+	public static final byte[] Anchor_null = null, Anchor_G = Bry_.new_a7("\\G"), Anchor_pow = Bry_.new_a7("^");
 	private void Init() {
 		// REF:tchrist@http://stackoverflow.com/questions/4304928/unicode-equivalents-for-w-and-b-in-java-regular-expressions; PAGE:pl.w:Benjamin_Franklin DATE:2014-08-13			
 				String regx_w = "[\\pL\\pM\\p{Nd}\\p{Nl}\\p{Pc}[\\p{InEnclosedAlphanumerics}&&\\p{So}]]";
@@ -251,14 +251,14 @@ public class Scrib_regx_converter {
 		Init_itm(Bool_.N, "Z", "\\x01-\\x{10ffff}");
 	}
 	private void Init_itm(boolean add_to_percent_hash, String lua, String php) {
-		byte[] lua_bry = Bry_.new_ascii_(lua);
-		byte[] php_bry = Bry_.new_ascii_(php);
+		byte[] lua_bry = Bry_.new_a7(lua);
+		byte[] php_bry = Bry_.new_a7(php);
 		if (add_to_percent_hash) {
 			percent_hash.Add_bry_obj(lua_bry, php_bry);
 			brack_hash.Add_bry_obj(lua_bry, php_bry);	// always add to brack_hash; brack_hash = percent_hash + other characters
 		}
 		else {
-			brack_hash.AddReplace(lua_bry, php_bry);	// replace percent_hash definitions
+			brack_hash.Add_if_dupe_use_nth(lua_bry, php_bry);	// replace percent_hash definitions
 		}
 	}
 	private final Hash_adp_bry percent_hash = Hash_adp_bry.cs_(), brack_hash = Hash_adp_bry.cs_();

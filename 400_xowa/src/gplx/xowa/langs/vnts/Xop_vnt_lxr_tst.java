@@ -54,7 +54,7 @@ public class Xop_vnt_lxr_tst {
 //		}
 //		@Test  public void Enabled() {
 //			Xoae_app app = Xoa_app_fxt.app_();
-//			Xol_lang lang = new Xol_lang(app, Bry_.new_ascii_("zh"));
+//			Xol_lang lang = new Xol_lang(app, Bry_.new_a7("zh"));
 //			Xowe_wiki wiki = Xoa_app_fxt.wiki_(app, "zh.wikipedia.org", lang);
 //			Xop_fxt fxt = new Xop_fxt(app, wiki);
 //			fxt.Test_parse_page_all_str("a-{b}-c", "ac");
@@ -62,10 +62,10 @@ public class Xop_vnt_lxr_tst {
 //		}
 }
 class Xop_vnt_tkn_mok {
-	private ListAdp rules_list = ListAdp_.new_();
-	private ListAdp flags_list = ListAdp_.new_();
+	private List_adp rules_list = List_adp_.new_();
+	private List_adp flags_list = List_adp_.new_();
 	public Xop_vnt_flag[] Flags() {
-		if (flags == null) flags = (Xop_vnt_flag[])flags_list.Xto_ary(Xop_vnt_flag.class);
+		if (flags == null) flags = (Xop_vnt_flag[])flags_list.To_ary(Xop_vnt_flag.class);
 		return flags;
 	}	private Xop_vnt_flag[] flags;
 	public Xop_vnt_tkn_mok Flags_none_()					{flags_list.Clear(); return this;}
@@ -74,20 +74,20 @@ class Xop_vnt_tkn_mok {
 	public Xop_vnt_tkn_mok Flags_codes_(String... ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
-			byte[] bry = Bry_.new_ascii_(ary[i]);
+			byte[] bry = Bry_.new_a7(ary[i]);
 			Xop_vnt_flag flag = (Xop_vnt_flag)Xop_vnt_flag_.Trie.Match_bgn(bry, 0, bry.length);
 			flags_list.Add(flag);
 		}
 		return this;
 	}
 	public Xop_vnt_rule[] Rules() {
-		if (rules == null) rules = (Xop_vnt_rule[])rules_list.Xto_ary(Xop_vnt_rule.class);
+		if (rules == null) rules = (Xop_vnt_rule[])rules_list.To_ary(Xop_vnt_rule.class);
 		return rules;
 	}	private Xop_vnt_rule[] rules;
 	public Xop_vnt_tkn_mok Rule_(String rule)											{return Rule_(Xop_vnt_rule.Null_lang, rule);}
-	public Xop_vnt_tkn_mok Rule_(byte[] lang, String rule)								{return Rule_(Xop_vnt_rule.Null_macro, lang, new Xop_bry_tkn(-1, -1, Bry_.new_utf8_(rule)));}
-	public Xop_vnt_tkn_mok Rule_(String lang, String rule)								{return Rule_(Xop_vnt_rule.Null_macro, Bry_.new_ascii_(lang), new Xop_bry_tkn(-1, -1, Bry_.new_utf8_(rule)));}
-	public Xop_vnt_tkn_mok Rule_(String macro, String lang, String rule)				{return Rule_(Bry_.new_ascii_(macro), Bry_.new_ascii_(lang), new Xop_bry_tkn(-1, -1, Bry_.new_utf8_(rule)));}
+	public Xop_vnt_tkn_mok Rule_(byte[] lang, String rule)								{return Rule_(Xop_vnt_rule.Null_macro, lang, new Xop_bry_tkn(-1, -1, Bry_.new_u8(rule)));}
+	public Xop_vnt_tkn_mok Rule_(String lang, String rule)								{return Rule_(Xop_vnt_rule.Null_macro, Bry_.new_a7(lang), new Xop_bry_tkn(-1, -1, Bry_.new_u8(rule)));}
+	public Xop_vnt_tkn_mok Rule_(String macro, String lang, String rule)				{return Rule_(Bry_.new_a7(macro), Bry_.new_a7(lang), new Xop_bry_tkn(-1, -1, Bry_.new_u8(rule)));}
 	public Xop_vnt_tkn_mok Rule_(byte[] macro, byte[] lang, Xop_tkn_itm... tkns)	{rules_list.Add(new Xop_vnt_rule(macro, lang, tkns)); return this;}
 }
 class Xop_vnt_lxr_fxt {
@@ -110,7 +110,7 @@ class Xop_vnt_lxr_fxt {
 		vnt_mgr.Convert_ttl_init();
 	}
 	public Xop_vnt_lxr_fxt Test_parse(String raw, Xop_vnt_tkn_mok expd) {
-		byte[] raw_bry = Bry_.new_utf8_(raw);
+		byte[] raw_bry = Bry_.new_u8(raw);
 		Xop_root_tkn root = fxt.Exec_parse_page_all_as_root(raw_bry);
 		Xop_vnt_tkn actl = (Xop_vnt_tkn)root.Subs_get(0);
 		Test_vnt_tkn(raw_bry, expd, actl);

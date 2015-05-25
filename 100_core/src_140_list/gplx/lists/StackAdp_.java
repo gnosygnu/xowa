@@ -23,8 +23,8 @@ class StackAdp_base implements StackAdp {
 	public Object Peek() {return Peek_base();}
 	public Object Pop() {return Pop_base();}
 	public void Push(Object obj) {Push_base(obj);}
-	public ListAdp XtoList() {
-		ListAdp list = ListAdp_.new_();
+	public List_adp XtoList() {
+		List_adp list = List_adp_.new_();
 		for (Object obj : stack)
 			list.Add(obj);
 		// NOTE: dotnet traverses last to first; java: first to last 

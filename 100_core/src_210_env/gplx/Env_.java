@@ -39,9 +39,9 @@ public class Env_ {
 	public static String[] AppArgs() {return appArgs;} static String[] appArgs;
 	public static Io_url AppUrl() {
 		if (mode_testing) return Io_url_.mem_fil_("mem/testing.jar");
-		if (appUrl == Io_url_.Null) throw Err_.new_("Env_.Init was not called");
+		if (appUrl == Io_url_.Empty) throw Err_.new_("Env_.Init was not called");
 		return appUrl;
-	}	static Io_url appUrl = Io_url_.Null;
+	}	static Io_url appUrl = Io_url_.Empty;
 	public static void Exit() {Exit_code(0);}
 	public static void Exit_code(int code) {System.exit(code);}	
 	public static String UserName() {return System.getProperty("user.name");}	

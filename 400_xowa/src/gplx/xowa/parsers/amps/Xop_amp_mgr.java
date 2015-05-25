@@ -100,7 +100,7 @@ public class Xop_amp_mgr {
 								boolean ncr_is_hex = amp_itm.Tid() == Xop_amp_trie_itm.Tid_num_hex;
 								int int_bgn = amp_trie.Match_pos();
 								if (Parse_as_int(ncr_is_hex, src, src_len, pos, int_bgn))
-									tmp_bfr.Add_utf8_int(rslt_val);
+									tmp_bfr.Add_u8_int(rslt_val);
 								else 
 									tmp_bfr.Add_mid(src, pos, nxt_pos);
 								pos = rslt_pos;

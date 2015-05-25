@@ -50,22 +50,22 @@ public class Xoud_site_tbl implements RlsAble {
 		stmt.Crt_int(fld_site_id, site_id).Exec_delete();
 	}
 	public Xoud_site_row[] Select_all() {
-		ListAdp rv = ListAdp_.new_();
+		List_adp rv = List_adp_.new_();
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds).Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next())
 				rv.Add(new_row(rdr));
-			return (Xoud_site_row[])rv.Xto_ary_and_clear(Xoud_site_row.class);
+			return (Xoud_site_row[])rv.To_ary_and_clear(Xoud_site_row.class);
 		}
 		finally {rdr.Rls();}
 	}
 	public Xoud_site_row[] Select_by_domain(String domain) {
-		ListAdp rv = ListAdp_.new_();
+		List_adp rv = List_adp_.new_();
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld_site_domain).Crt_str(fld_site_domain, domain).Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next())
 				rv.Add(new_row(rdr));
-			return (Xoud_site_row[])rv.Xto_ary_and_clear(Xoud_site_row.class);
+			return (Xoud_site_row[])rv.To_ary_and_clear(Xoud_site_row.class);
 		}
 		finally {rdr.Rls();}
 	}

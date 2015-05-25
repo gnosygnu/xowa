@@ -18,16 +18,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 public class Cfg_nde_root implements GfoInvkAble {
 	public int Root_len() {return root.Nde_subs_len();}
-	public Cfg_nde_obj Root_get_at(int i) {return (Cfg_nde_obj)root.Nde_subs_get_at(i);} private OrderedHash grps = OrderedHash_.new_bry_();
+	public Cfg_nde_obj Root_get_at(int i) {return (Cfg_nde_obj)root.Nde_subs_get_at(i);} private Ordered_hash grps = Ordered_hash_.new_bry_();
 	public Cfg_nde_obj Root_get(byte[] key) {return (Cfg_nde_obj)root.Nde_subs_get(key);}
-	public Cfg_nde_obj Grps_get(byte[] key) {return (Cfg_nde_obj)grps.Fetch(key);}
+	public Cfg_nde_obj Grps_get(byte[] key) {return (Cfg_nde_obj)grps.Get_by(key);}
 	public Cfg_nde_root Root_(Cfg_nde_obj obj, byte[] typ, byte[][] atrs) {root = obj; grp_type = typ; grp_atrs = atrs; return this;} Cfg_nde_obj root; byte[] grp_type; byte[][] grp_atrs;
 	public void Root_subs_del(byte[] grp_key, byte[] itm_key) {
-		Cfg_nde_obj grp = (Cfg_nde_obj)grps.Fetch(grp_key); if (grp == null) return;
+		Cfg_nde_obj grp = (Cfg_nde_obj)grps.Get_by(grp_key); if (grp == null) return;
 		grp.Nde_subs_del(itm_key);
 	}
 	public void Root_subs_add(byte[] grp_key, byte[] itm_typ, byte[] itm_key, byte[][] itm_atrs) {
-		Cfg_nde_obj grp = (Cfg_nde_obj)grps.Fetch(grp_key);
+		Cfg_nde_obj grp = (Cfg_nde_obj)grps.Get_by(grp_key);
 		if (grp == null) {
 			if (Bry_.Len_eq_0(grp_key))
 				grp = root;
@@ -58,7 +58,7 @@ public class Cfg_nde_root implements GfoInvkAble {
 		boolean fail = false;
 		byte cur_cmd = Byte_.Zero;
 		byte[] cur_grp_key = null, cur_itm_typ = null, cur_itm_key = null;
-		ListAdp cmds = ListAdp_.new_();
+		List_adp cmds = List_adp_.new_();
 		while (true) {
 			boolean last = src_pos == src_len;
 			byte b = last ? Byte_ascii.NewLine : src[src_pos];
@@ -75,7 +75,7 @@ public class Cfg_nde_root implements GfoInvkAble {
 									case Byte_ascii.Dash:	cur_cmd = Cfg_nde_cmd.Cmd_del; fail = false; break;
 								}
 							}
-							if (fail) throw Err_mgr._.fmt_(GRP_KEY, "set_bulk.fld.cmd_invalid", "cmd is invalid: ~{0}", String_.new_utf8_(src, fld_bgn, src_pos));
+							if (fail) throw Err_mgr._.fmt_(GRP_KEY, "set_bulk.fld.cmd_invalid", "cmd is invalid: ~{0}", String_.new_u8(src, fld_bgn, src_pos));
 							break;
 						case 1: cur_grp_key = csv_parser.Load(src, fld_bgn, src_pos); break;
 						case 2: cur_itm_typ = csv_parser.Load(src, fld_bgn, src_pos); break;
@@ -117,7 +117,7 @@ public class Cfg_nde_root implements GfoInvkAble {
 		}
 		int len = cmds.Count();
 		for (int i = 0; i < len; i++) {
-			Cfg_nde_cmd cmd = (Cfg_nde_cmd)cmds.FetchAt(i);
+			Cfg_nde_cmd cmd = (Cfg_nde_cmd)cmds.Get_at(i);
 			switch (cmd.Cmd()) {
 				case Cfg_nde_cmd.Cmd_add: Root_subs_add(cmd.Grp_key(), cmd.Itm_typ(), cmd.Itm_key(), cmd.Itm_atrs()); break;
 				case Cfg_nde_cmd.Cmd_del: Root_subs_del(cmd.Grp_key(), cmd.Itm_key()); break;

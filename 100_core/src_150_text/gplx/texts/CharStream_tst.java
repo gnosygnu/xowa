@@ -42,13 +42,13 @@ public class CharStream_tst {
 		tst_Match(false, "ghi");
 	}
 	@Test  public void AtBounds() {
-		stream.MoveTo(-1);
+		stream.Move_to(-1);
 		tst_AtBounds(true, false, false);
 
-		stream.MoveTo(0);
+		stream.Move_to(0);
 		tst_AtBounds(false, true, false);
 
-		stream.MoveTo(stream.Len());
+		stream.Move_to(stream.Len());
 		tst_AtBounds(false, false, true);
 	}
 	void tst_Match(boolean expd, String text) {Tfds.Eq(expd, stream.Match(text));}

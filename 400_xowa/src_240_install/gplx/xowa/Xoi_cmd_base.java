@@ -43,7 +43,7 @@ abstract class Xoi_cmd_base implements Gfo_thread_cmd {
 	public void Process_async() {
 		Xoae_app app = install_mgr.App();
 		Xob_bldr bldr = app.Bldr();
-		Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(Bry_.new_ascii_(wiki_key));
+		Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(Bry_.new_a7(wiki_key));
 		wiki.Init_assert();
 		bldr.Cmd_mgr().Clear();
 		Process_async_init(app, wiki, bldr);
@@ -79,7 +79,7 @@ class Xoi_cmd_category2_categorylinks extends Xoi_cmd_wiki_download {	public Xoi
 class Xoi_cmd_category2_build extends Xoi_cmd_base {
 	public Xoi_cmd_category2_build(Xoi_setup_mgr install_mgr, String wiki_key) {this.Ctor(install_mgr, wiki_key); this.app = install_mgr.App(); this.wiki_key = wiki_key;} private Xoae_app app; private String wiki_key;
 	@Override public void Cmd_ctor() {
-		Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(Bry_.new_utf8_(wiki_key));
+		Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(Bry_.new_u8(wiki_key));
 		wiki.Import_cfg().Category_version_(gplx.xowa.ctgs.Xoa_ctg_mgr.Version_2);
 	}
 	@Override public String Async_key() {return KEY;} public static final String KEY = "wiki.category2.build";

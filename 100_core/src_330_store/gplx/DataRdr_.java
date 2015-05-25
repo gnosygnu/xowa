@@ -25,8 +25,8 @@ public class DataRdr_ {
 class DataRdr_null implements DataRdr {
 	public String NameOfNode() {return XtoStr();} public String XtoStr() {return "<< NULL READER >>";}
 	public boolean Type_rdr() {return true;}
-	public HashAdp EnvVars() {return HashAdp_.Null;}
-	public Io_url Uri() {return Io_url_.Null;} public void Uri_set(Io_url s) {}
+	public Hash_adp EnvVars() {return Hash_adp_.Noop;}
+	public Io_url Uri() {return Io_url_.Empty;} public void Uri_set(Io_url s) {}
 	public boolean Parse() {return parse;} public void Parse_set(boolean v) {parse = v;} private boolean parse;
 	public int FieldCount() {return 0;}
 	public String KeyAt(int i) {return XtoStr();}
@@ -60,7 +60,7 @@ class DataRdr_null implements DataRdr {
 	public DecimalAdp SrlDecimalOr(String key, DecimalAdp or) {return or;}
 	public double SrlDoubleOr(String key, double or) {return or;}
 	public Object SrlObjOr(String key, Object or) {return or;}
-	public void SrlList(String key, ListAdp list, SrlObj proto, String itmKey) {}
+	public void SrlList(String key, List_adp list, SrlObj proto, String itmKey) {}
 	public void TypeKey_(String v) {}
 	public void XtoStr_gfml(String_bldr sb) {sb.Add_str_w_crlf("NULL:;");}
 	public SrlMgr SrlMgr_new(Object o) {return this;}

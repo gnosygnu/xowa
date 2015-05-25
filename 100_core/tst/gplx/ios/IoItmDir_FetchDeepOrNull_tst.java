@@ -25,8 +25,8 @@ public class IoItmDir_FetchDeepOrNull_tst {
 	@Test  public void FetchDeepOrNull() {
 		tst_FetchDeepOrNull(rootDir, drive.GenSubDir("sub1"), true);
 		tst_FetchDeepOrNull(rootDir, drive.GenSubDir("sub2"), false);
-		tst_FetchDeepOrNull(rootDir.SubDirs().FetchAt(0), drive.GenSubDir("sub1"), true);
-		tst_FetchDeepOrNull(rootDir.SubDirs().FetchAt(0), drive.GenSubDir("sub2"), false);
+		tst_FetchDeepOrNull(rootDir.SubDirs().Get_at(0), drive.GenSubDir("sub1"), true);
+		tst_FetchDeepOrNull(rootDir.SubDirs().Get_at(0), drive.GenSubDir("sub2"), false);
 	}
 	void tst_FetchDeepOrNull(Object rootDirObj, Io_url find, boolean expdFound) {
 		IoItmDir rootDir = IoItmDir_.as_(rootDirObj);

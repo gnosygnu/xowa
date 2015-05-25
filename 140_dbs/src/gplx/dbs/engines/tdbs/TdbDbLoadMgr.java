@@ -19,7 +19,7 @@ package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs
 class TdbDbLoadMgr {
 	public TdbDatabase LoadTbls(Io_url dbInfo) {
 		TdbDatabase db = TdbDatabase.new_(dbInfo);
-		if (!Io_mgr._.ExistsFil(dbInfo)) {
+		if (!Io_mgr.I.ExistsFil(dbInfo)) {
 			db.IsNew_set(true);
 			return db;
 		}
@@ -37,12 +37,12 @@ class TdbDbLoadMgr {
 			String name = rdr.NameOfNode();
 			if		(String_.Eq(name, TdbFileList.StoreTblName))		db.Files().DataObj_Rdr(rdr);
 			else if (String_.Eq(name, TdbTableList.StoreTableName))		db.Tables().DataObj_Rdr(rdr, db.Files());
-			else											db.Tables().FetchOrFail(rdr.NameOfNode()).DataObj_Rdr(rdr);
+			else											db.Tables().Get_by_or_fail(rdr.NameOfNode()).DataObj_Rdr(rdr);
 		}
 		if (db.Files().Count() == 0) throw Err_.new_("fatal error: db has no files").Add("connectInfo", db.DbUrl());
 	}
 	DataRdr MakeDataRdr(Io_url fil) {
-		String text = Io_mgr._.LoadFilStr(fil);
+		String text = Io_mgr.I.LoadFilStr(fil);
 		return TdbStores.rdr_(text);
 	}
 	public static TdbDbLoadMgr new_() {return new TdbDbLoadMgr();} TdbDbLoadMgr() {}

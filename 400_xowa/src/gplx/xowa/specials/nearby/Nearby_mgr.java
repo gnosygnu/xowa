@@ -20,8 +20,8 @@ public class Nearby_mgr implements Xows_page {
 	Xowe_wiki wiki; byte[] trg;
 	private Hash_adp_bry excluded = Hash_adp_bry.ci_ascii_();
 	private Hash_adp_bry visited = Hash_adp_bry.ci_ascii_();
-	ListAdp trail = ListAdp_.new_();
-	ListAdp results = ListAdp_.new_();	
+	List_adp trail = List_adp_.new_();
+	List_adp results = List_adp_.new_();	
 	int results_cur = 0;
 //		int depth_max = 5;
 //		int pages_count = 0;
@@ -35,22 +35,22 @@ public class Nearby_mgr implements Xows_page {
 	}
 	byte[] Bld_html(Xowe_wiki wiki) {
 		form_fmtr.Bld_bfr_many(tmp_bfr);
-		ListAdp list = Find_from_to(wiki, Bry_.new_ascii_("Earth"), Bry_.new_ascii_("Atom"), excluded);
-		tmp_bfr.Add_str("<table>");
+		List_adp list = Find_from_to(wiki, Bry_.new_a7("Earth"), Bry_.new_a7("Atom"), excluded);
+		tmp_bfr.Add_str_a7("<table>");
 		int len = list.Count();
 		for (int i = 0; i < len; i++) {
-			Nearby_rslt rslt = (Nearby_rslt)list.FetchAt(i);
-			tmp_bfr.Add_str("<tr>");
+			Nearby_rslt rslt = (Nearby_rslt)list.Get_at(i);
+			tmp_bfr.Add_str_a7("<tr>");
 			int cell_len = rslt.Len();
 			for (int j = 0; j < cell_len; j++) {
 				Xoa_ttl ttl = (Xoa_ttl)rslt.Get_at(j);
-				tmp_bfr.Add_str("<td>[[");
+				tmp_bfr.Add_str_a7("<td>[[");
 				tmp_bfr.Add(ttl.Page_db());
-				tmp_bfr.Add_str("]]</td>");
+				tmp_bfr.Add_str_a7("]]</td>");
 			}
-			tmp_bfr.Add_str("</tr>");
+			tmp_bfr.Add_str_a7("</tr>");
 		}
-		tmp_bfr.Add_str("</table>");
+		tmp_bfr.Add_str_a7("</table>");
 		return tmp_bfr.Xto_bry_and_clear();
 	}
 	Bry_fmtr form_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl
@@ -65,11 +65,11 @@ public class Nearby_mgr implements Xows_page {
 		,	"</form>"
 		));
 	Xoa_ttl trg_ttl;
-	OrderedHash src_pool = OrderedHash_.new_bry_();
-	public ListAdp Find_from_to(Xowe_wiki wiki, byte[] src_bry, byte[] trg_bry, Hash_adp_bry excluded) {
+	Ordered_hash src_pool = Ordered_hash_.new_bry_();
+	public List_adp Find_from_to(Xowe_wiki wiki, byte[] src_bry, byte[] trg_bry, Hash_adp_bry excluded) {
 		this.wiki = wiki; this.excluded = excluded;
-		Xoa_ttl src_ttl = Xoa_ttl.parse_(wiki, src_bry); if (src_ttl == null) return ListAdp_.Null;
-		trg_ttl = Xoa_ttl.parse_(wiki, trg_bry); if (trg_ttl == null) return ListAdp_.Null;
+		Xoa_ttl src_ttl = Xoa_ttl.parse_(wiki, src_bry); if (src_ttl == null) return List_adp_.Noop;
+		trg_ttl = Xoa_ttl.parse_(wiki, trg_bry); if (trg_ttl == null) return List_adp_.Noop;
 		trg = trg_ttl.Page_db();
 		trail.Clear();
 		results.Clear();
@@ -81,11 +81,11 @@ public class Nearby_mgr implements Xows_page {
 		Examine_page(src_pool);
 		return results;
 	}
-	private void Examine_page(OrderedHash src_pool){
+	private void Examine_page(Ordered_hash src_pool){
 		int len = src_pool.Count();
-		OrderedHash next_pool = OrderedHash_.new_bry_();
+		Ordered_hash next_pool = Ordered_hash_.new_bry_();
 		for (int i = 0; i < len; i++) {
-			Nearby_itmx itmx = (Nearby_itmx)src_pool.FetchAt(i);
+			Nearby_itmx itmx = (Nearby_itmx)src_pool.Get_at(i);
 			Xoa_ttl ttl = itmx.Ttl();
 			byte[] ttl_bry = ttl.Page_db();
 			if (excluded.Has(ttl_bry)) continue;
@@ -94,7 +94,7 @@ public class Nearby_mgr implements Xows_page {
 			Xoae_page page = wiki.Data_mgr().Get_page(ttl, false);
 			if (page.Missing()) continue;
 			wiki.ParsePage(page, true);
-			OrderedHash lnkis = OrderedHash_.new_bry_();
+			Ordered_hash lnkis = Ordered_hash_.new_bry_();
 			Collect_lnkis(lnkis, page.Root());
 			if (lnkis.Has(trg)) {
 				++results_cur;
@@ -103,7 +103,7 @@ public class Nearby_mgr implements Xows_page {
 			}
 			int lnkis_len = lnkis.Count();
 			for (int j = 0; j < lnkis_len; j++) {
-				Xoa_ttl lnki_ttl = (Xoa_ttl)lnkis.FetchAt(j);
+				Xoa_ttl lnki_ttl = (Xoa_ttl)lnkis.Get_at(j);
 				if (next_pool.Has(lnki_ttl.Page_db())) continue;
 				Nearby_itmx next_itmx = new Nearby_itmx(itmx.Trail(), lnki_ttl);
 				next_pool.Add(lnki_ttl.Page_db(), next_itmx);
@@ -113,19 +113,19 @@ public class Nearby_mgr implements Xows_page {
 			Examine_page(next_pool);
 //			++pages_count;
 //			wiki.ParsePage(page, true);
-//			OrderedHash lnkis = OrderedHash_.new_bry_();
+//			Ordered_hash lnkis = Ordered_hash_.new_bry_();
 //			int len = lnkis.Count();
 //			for (int i = 0; i < len; i++) {
-//				Xoa_ttl lnki_ttl = (Xoa_ttl)lnkis.FetchAt(i);
+//				Xoa_ttl lnki_ttl = (Xoa_ttl)lnkis.Get_at(i);
 //				if (!lnki_ttl.Ns().Id_main()) continue;
 //				if (Bry_.Eq(lnki_ttl.Page_db(), trg)) continue;	// skip trg page 
 //				trail.Add(lnki_ttl);
 //				Examine_page(wiki, lnki_ttl, trail);
-//				ListAdp_.DelAt_last(trail);
+//				List_adp_.DelAt_last(trail);
 //				if (results_cur == results_max) return;
 //			}
 	}
-//		private void Examine_page(Xowe_wiki wiki, Xoa_ttl ttl, ListAdp trail){
+//		private void Examine_page(Xowe_wiki wiki, Xoa_ttl ttl, List_adp trail){
 //			byte[] ttl_bry = ttl.Page_db();
 //			if (excluded.Has(ttl_bry)) return;
 //			if (visited.Has(ttl_bry)) return;
@@ -134,7 +134,7 @@ public class Nearby_mgr implements Xows_page {
 //			if (page.Missing()) return;
 //			++pages_count;
 //			wiki.ParsePage(page, true);
-//			OrderedHash lnkis = OrderedHash_.new_bry_();
+//			Ordered_hash lnkis = Ordered_hash_.new_bry_();
 //			Collect_lnkis(lnkis, page.Root());
 //			if (lnkis.Has(trg)) {
 //				++results_cur;
@@ -143,16 +143,16 @@ public class Nearby_mgr implements Xows_page {
 //			}
 //			int len = lnkis.Count();
 //			for (int i = 0; i < len; i++) {
-//				Xoa_ttl lnki_ttl = (Xoa_ttl)lnkis.FetchAt(i);
+//				Xoa_ttl lnki_ttl = (Xoa_ttl)lnkis.Get_at(i);
 //				if (!lnki_ttl.Ns().Id_main()) continue;
 //				if (Bry_.Eq(lnki_ttl.Page_db(), trg)) continue;	// skip trg page 
 //				trail.Add(lnki_ttl);
 //				Examine_page(wiki, lnki_ttl, trail);
-//				ListAdp_.DelAt_last(trail);
+//				List_adp_.DelAt_last(trail);
 //				if (results_cur == results_max) return;
 //			}
 //		}
-	private void Collect_lnkis(OrderedHash lnkis, Xop_tkn_itm tkn) {
+	private void Collect_lnkis(Ordered_hash lnkis, Xop_tkn_itm tkn) {
 		if (tkn.Tkn_tid() == Xop_tkn_itm_.Tid_lnki) {
 			Xop_lnki_tkn lnki_tkn = (Xop_lnki_tkn)tkn;
 			Xoa_ttl lnki_ttl = lnki_tkn.Ttl();
@@ -169,28 +169,28 @@ public class Nearby_mgr implements Xows_page {
 	}
 }
 class Nearby_rslt {
-	public Nearby_rslt(ListAdp trail, Xoa_ttl trg_ttl) {
+	public Nearby_rslt(List_adp trail, Xoa_ttl trg_ttl) {
 		int len = trail.Count();
 		for (int i = 0; i < len; i++) {
-			Xoa_ttl ttl = (Xoa_ttl)trail.FetchAt(i);
+			Xoa_ttl ttl = (Xoa_ttl)trail.Get_at(i);
 			list.Add(ttl);
 		}
 		list.Add(trg_ttl);
 	}
 	public int Len() {return list.Count();}
-	public Xoa_ttl Get_at(int i) {return (Xoa_ttl)list.FetchAt(i);}
-	ListAdp list = ListAdp_.new_();	
+	public Xoa_ttl Get_at(int i) {return (Xoa_ttl)list.Get_at(i);}
+	List_adp list = List_adp_.new_();	
 }
 class Nearby_itmx {
-	public Nearby_itmx(ListAdp v, Xoa_ttl ttl) {
+	public Nearby_itmx(List_adp v, Xoa_ttl ttl) {
 		int len = v.Count();
 		for (int i = 0; i < len; i++) {
-			Xoa_ttl v_ttl = (Xoa_ttl)v.FetchAt(i);
+			Xoa_ttl v_ttl = (Xoa_ttl)v.Get_at(i);
 			trail.Add(v_ttl);
 		}
 		trail.Add(ttl);
 		this.ttl = ttl;
 	}
 	public Xoa_ttl Ttl() {return ttl;} private Xoa_ttl ttl;
-	public ListAdp Trail() {return trail;} ListAdp trail = ListAdp_.new_();	
+	public List_adp Trail() {return trail;} List_adp trail = List_adp_.new_();	
 }

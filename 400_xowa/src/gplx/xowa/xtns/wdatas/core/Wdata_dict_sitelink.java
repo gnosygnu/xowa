@@ -28,9 +28,9 @@ public class Wdata_dict_sitelink {
 	, Str_badges								= "badges"
 	;
 	public static byte[] 
-	  Bry_site									= Bry_.new_ascii_(Str_site)
-	, Bry_title									= Bry_.new_ascii_(Str_title)
-	, Bry_badges								= Bry_.new_ascii_(Str_badges)
+	  Bry_site									= Bry_.new_a7(Str_site)
+	, Bry_title									= Bry_.new_a7(Str_title)
+	, Bry_badges								= Bry_.new_a7(Str_badges)
 	;
 	public static final Hash_adp_bry Dict = Hash_adp_bry.cs_()
 	.Add_bry_byte(Bry_site						, Tid_site)

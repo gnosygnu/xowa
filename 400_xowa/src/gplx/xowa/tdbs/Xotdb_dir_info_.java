@@ -47,7 +47,7 @@ public class Xotdb_dir_info_ {
 		, Name_cfg = "cfg"
 		, Name_reg_fil = "reg.csv", Name_category2 = "category2", Name_category2_link = "link", Name_category2_main = "main"
 		;
-	public static final byte[] Bry_xdat = Bry_.new_ascii_(Ext_xdat), Bry_csv = Bry_.new_ascii_(Ext_csv), Bry_zip = Bry_.new_ascii_(Ext_zip);
+	public static final byte[] Bry_xdat = Bry_.new_a7(Ext_xdat), Bry_csv = Bry_.new_a7(Ext_csv), Bry_zip = Bry_.new_a7(Ext_zip);
 	public static final byte
 		Tid_page				= 0
 		, Tid_ttl 				= 1

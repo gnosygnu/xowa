@@ -180,7 +180,7 @@ public class SqliteDbMain {
 		}
 	}
 	void Iterate_dir(Io_url dir) {
-		Io_url[] urls = Io_mgr._.QueryDir_args(dir).DirInclude_().ExecAsUrlAry();
+		Io_url[] urls = Io_mgr.I.QueryDir_args(dir).DirInclude_().ExecAsUrlAry();
 		int urls_len = urls.length;
 		ConsoleAdp._.WriteLine(dir.Raw());
 		boolean is_root = false;
@@ -208,7 +208,7 @@ public class SqliteDbMain {
 	}
 	void Insert_file(Io_url url) {
 		if (String_.EqNot(url.Ext(), ".csv")) return;
-		String raw = Io_mgr._.LoadFilStr(url);
+		String raw = Io_mgr.I.LoadFilStr(url);
 		String[] lines = String_.SplitLines_nl(raw);
 		int lines_len = lines.length;
 		for (int i = 0; i < lines_len; i++) {
@@ -225,8 +225,8 @@ public class SqliteDbMain {
 		if (flds_len == 4)
 			stmt.setString(2, flds[3]);
 		if (flds_len > 4) {
-			stmt.setInt(3, Bry_.new_ascii_(flds[3])[0] - 32);
-			byte[] orig = Bry_.new_ascii_(flds[4]);
+			stmt.setInt(3, Bry_.new_a7(flds[3])[0] - 32);
+			byte[] orig = Bry_.new_a7(flds[4]);
 			int orig_mode = orig[0] - Byte_ascii.Num_0;
 			int comma_pos = Bry_finder.Find_fwd(orig, Byte_ascii.Comma);
 			int orig_w = Bry_.Xto_int_or(orig, 2, comma_pos, -1);

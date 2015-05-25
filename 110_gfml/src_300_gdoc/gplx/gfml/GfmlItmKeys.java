@@ -19,8 +19,8 @@ package gplx.gfml; import gplx.*;
 public class GfmlItmKeys {
 	public int Count() {return list.Count();}
 	public boolean Has(String key) {return hash.Has(key);}
-	public GfmlItm FetchAt(int i) {return (GfmlItm)list.FetchAt(i);}
-	public GfmlItm Fetch(String key) {return (GfmlItm)hash.Fetch(key);}
+	public GfmlItm Get_at(int i) {return (GfmlItm)list.Get_at(i);}
+	public GfmlItm Get_by(String key) {return (GfmlItm)hash.Get_by(key);}
 	public String FetchDataOr(String key, String or) {
 		GfmlAtr atr = FetchAtr(key);
 		return (atr == null) ? or : atr.DatTkn().Val();
@@ -54,8 +54,8 @@ public class GfmlItmKeys {
 		}
 		if (toDel != null) list.Del(toDel);
 	}
-	GfmlAtr FetchAtr(String key) {return GfmlAtr.as_(hash.Fetch(key));}
-	ListAdp list = ListAdp_.new_(); HashAdp hash = HashAdp_.new_(); 
+	GfmlAtr FetchAtr(String key) {return GfmlAtr.as_(hash.Get_by(key));}
+	List_adp list = List_adp_.new_(); Hash_adp hash = Hash_adp_.new_(); 
 	public static GfmlItmKeys new_() {return new GfmlItmKeys();} GfmlItmKeys() {}
 	@gplx.Internal protected static final String NullKey = "";
 }

@@ -26,7 +26,7 @@ public class GfsCore implements GfoInvkAble {
 	public void AddCmd(GfoInvkAble invk, String key) {root.AddCmd(invk, key);}
 	public void AddObj(GfoInvkAble invk, String key) {root.AddObj(invk, key);}
 	public void AddDeep(GfoInvkAble invk, String... ary) {
-		GfoInvkCmdMgrOwner cur = (GfoInvkCmdMgrOwner)((GfsRegyItm)root.Fetch(ary[0])).InvkAble();
+		GfoInvkCmdMgrOwner cur = (GfoInvkCmdMgrOwner)((GfsRegyItm)root.Get_by(ary[0])).InvkAble();
 		for (int i = 1; i < ary.length - 1; i++)
 			cur = (GfoInvkCmdMgrOwner)cur.InvkMgr().Invk(GfsCtx._, 0, ary[i], GfoMsg_.Null, cur);
 		cur.InvkMgr().Add_cmd(ary[ary.length - 1], invk);
@@ -46,22 +46,22 @@ public class GfsCore implements GfoInvkAble {
 		GfoRegyItm itm = GfoRegy._.FetchOrNull(key);
 		if (itm == null) {UsrDlg_._.Warn(UsrMsg.new_("could not find script for key").Add("key", key)); return;}
 		Io_url url = itm.Url();
-		if (!Io_mgr._.ExistsFil(url)) {
+		if (!Io_mgr.I.ExistsFil(url)) {
 			UsrDlg_._.Warn(UsrMsg.new_("script url does not exist").Add("key", key).Add("url", url));
 			return;
 		}
-		this.ExecText(Io_mgr._.LoadFilStr(url));
+		this.ExecText(Io_mgr.I.LoadFilStr(url));
 	}
-	public Object ExecFile_ignoreMissing(Io_url url) {if (!Io_mgr._.ExistsFil(url)) return null; return ExecText(Io_mgr._.LoadFilStr(url));}
-	public Object ExecFile(Io_url url) {return ExecText(Io_mgr._.LoadFilStr(url));}
+	public Object ExecFile_ignoreMissing(Io_url url) {if (!Io_mgr.I.ExistsFil(url)) return null; return ExecText(Io_mgr.I.LoadFilStr(url));}
+	public Object ExecFile(Io_url url) {return ExecText(Io_mgr.I.LoadFilStr(url));}
 	public Object ExecFile_ignoreMissing(GfoInvkAble root, Io_url url) {
-		if (!Io_mgr._.ExistsFil(url)) return null; 
+		if (!Io_mgr.I.ExistsFil(url)) return null; 
 		if (msgParser == null) throw Err_.new_("msgParser is null");
-		return Exec_bry(Io_mgr._.LoadFilBry(url), root);
+		return Exec_bry(Io_mgr.I.LoadFilBry(url), root);
 	}
 	public Object Exec_bry(byte[] bry) {return Exec_bry(bry, root);}
 	public Object Exec_bry(byte[] bry, GfoInvkAble root) {
-		GfoMsg rootMsg = msgParser.ParseToMsg(String_.new_utf8_(bry));
+		GfoMsg rootMsg = msgParser.ParseToMsg(String_.new_u8(bry));
 		Object rv = null;
 		GfsCtx ctx = GfsCtx.new_();
 		for (int i = 0; i < rootMsg.Subs_count(); i++) {
@@ -136,7 +136,7 @@ class GfsCore_ {
 //			if		(ctx.Match(k, Invk_Add)) {
 //				String libKey = m.ReadStr("libKey"), regKey = m.ReadStr("regKey");
 //				if (ctx.Deny()) return this;
-//				GfsRegyItm itm = regy.Fetch(libKey);
+//				GfsRegyItm itm = regy.Get_by(libKey);
 //				if (regy.Has(regKey)) {ctx.Write_warn("'{0}' already exists", regKey); return this;}
 //				regy.Add(regKey, itm.InvkAble(), itm.Type_cmd());
 //				ctx.Write_note("added '{0}' as '{1}'", regKey, libKey);
@@ -151,7 +151,7 @@ class GfsCore_ {
 //			else if	(ctx.Match(k, Invk_Load)) {
 //				Io_url url = (Io_url)m.ReadObj("url", Io_url_.Parser);
 //				if (ctx.Deny()) return this;
-//				String loadText = Io_mgr._.LoadFilStr(url);
+//				String loadText = Io_mgr.I.LoadFilStr(url);
 //				GfoMsg loadMsg = core.MsgParser().ParseToMsg(loadText);
 //				return core.Exec(ctx, loadMsg);
 //			}

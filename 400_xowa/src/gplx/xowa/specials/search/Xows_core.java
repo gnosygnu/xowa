@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
 import gplx.dbs.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 class Xows_core {
-	private final Xoa_wiki_mgr wiki_mgr;
+	private final Xoae_wiki_mgr wiki_mgr;
 	private final Hash_adp_bry cache_hash = Hash_adp_bry.cs_(); private final Hash_adp_bry cmd_hash = Hash_adp_bry.cs_();
 	private boolean ask_for_upgrade = true; private final Hash_adp_bry upgraded_wikis = Hash_adp_bry.cs_();		
-	public Xows_core(Xoa_wiki_mgr wiki_mgr) {this.wiki_mgr = wiki_mgr;}
+	public Xows_core(Xoae_wiki_mgr wiki_mgr) {this.wiki_mgr = wiki_mgr;}
 	private final Xows_html_wkr html_wkr = new Xows_html_wkr();
 	public Xows_db_cache Get_cache_or_new(byte[] key) {
 		Xows_db_cache cache = (Xows_db_cache)cache_hash.Get_by_bry(key);
@@ -50,7 +50,7 @@ class Xows_core {
 		Bry_bfr tmp_bfr = Bry_bfr.new_();
 		for (int i = 0; i < cmds_len; ++i) {
 			Xows_ui_cmd cmd = qry.Cmds__get_at(i); byte[] cmd_key = cmd.Key();
-			cmd_hash.AddReplace(cmd_key, cmd);
+			cmd_hash.Add_if_dupe_use_nth(cmd_key, cmd);
 			boolean searching_db = cmd.Search();				
 			html_wkr.Gen_tbl(tmp_bfr, cmd.Rslt(), cmd_key, cmd.Wiki().Domain_bry(), searching_db);
 		}
@@ -72,7 +72,7 @@ class Xows_core {
 			&& !search_db.Tbl__search_word().Ddl__page_count()
 			&& !upgraded_wikis.Has(wiki.Domain_bry()) ) {
 			ask_for_upgrade = false;
-			upgraded_wikis.AddKeyVal(wiki.Domain_bry());
+			upgraded_wikis.Add_as_key_and_val(wiki.Domain_bry());
 			boolean ok = wiki.Appe().Gui_mgr().Kit().Ask_ok_cancel("", "", String_.Concat_lines_nl_skip_last
 			( "XOWA would like to upgrade your search database for " + wiki.Domain_str() + "."
 			, "* Press OK to upgrade. This may take a few minutes."

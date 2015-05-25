@@ -59,25 +59,25 @@ public class Xof_meta_mgr_tst {
 }
 class Xof_file_regy_fxt {
 	Xof_meta_mgr regy_mgr;
-	byte[] md5_(byte[] name) {return Xof_xfer_itm_.Md5_(name);}
+	byte[] md5_(byte[] name) {return Xof_file_wkr_.Md5_(name);}
 	public void Ini() {
-		Io_mgr._.InitEngine_mem();
+		Io_mgr.I.InitEngine_mem();
 		Xoae_app app = Xoa_app_fxt.app_();
 		Xowe_wiki wiki = Xoa_app_fxt.wiki_tst_(app);
 		regy_mgr = new Xof_meta_mgr(wiki);
 		regy_mgr.Clear();
 		regy_mgr.Depth_(2);
 	}
-	public Xof_file_regy_fxt Save_fil(String url, String... data) {Io_mgr._.SaveFilStr(Io_url_.mem_fil_(url), String_.Concat_lines_nl(data)); return this;}
+	public Xof_file_regy_fxt Save_fil(String url, String... data) {Io_mgr.I.SaveFilStr(Io_url_.mem_fil_(url), String_.Concat_lines_nl(data)); return this;}
 	public Xof_file_regy_fxt Set(String name_str, int w, int h, boolean orig_exists, String... thumbs) {
-		byte[] name = Bry_.new_utf8_(name_str);		
+		byte[] name = Bry_.new_u8(name_str);		
 		byte[] md5 = md5_(name);
 		Xof_meta_itm itm = regy_mgr.Get_itm_or_new(name, md5);
 		itm.Vrtl_repo_(Xof_meta_itm.Repo_same);	// all tests above assume this is main
-		itm.Update_all(Bry_.Empty, w, h, orig_exists ? Xof_meta_itm.Exists_y : Xof_meta_itm.Exists_unknown, Xto_ary(thumbs));
+		itm.Update_all(Bry_.Empty, w, h, orig_exists ? Xof_meta_itm.Exists_y : Xof_meta_itm.Exists_unknown, To_ary(thumbs));
 		return this;
 	}
-	Xof_meta_thumb[] Xto_ary(String[] ary) {
+	Xof_meta_thumb[] To_ary(String[] ary) {
 		int len = ary.length;
 		Xof_meta_thumb[] rv = new Xof_meta_thumb[len];
 		for (int i = 0; i < len; i++) {
@@ -88,7 +88,7 @@ class Xof_file_regy_fxt {
 	}
 	public Xof_file_regy_fxt tst_Save(String url_str, String... expd_ary) {
 		regy_mgr.Save();
-		Tfds.Eq_ary_str(expd_ary, Io_mgr._.LoadFilStr_args(Io_url_.new_fil_(url_str)).ExecAsStrAryLnx());
+		Tfds.Eq_ary_str(expd_ary, Io_mgr.I.LoadFilStr_args(Io_url_.new_fil_(url_str)).ExecAsStrAryLnx());
 		return this;
 	}
 }

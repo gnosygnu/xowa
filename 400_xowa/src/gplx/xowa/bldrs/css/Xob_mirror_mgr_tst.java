@@ -33,16 +33,16 @@ class Xob_mirror_mgr_fxt {
 	public Io_fsys_fxt Fsys() {return fsys;} private final Io_fsys_fxt fsys = new Io_fsys_fxt();
 	public void Clear() {
 		fsys.Clear();
-//			mirror_mgr = new Xob_mirror_mgr(Gfo_usr_dlg_.Noop, new Xof_download_wkr_test(), Bry_.new_ascii_("mem/http/enwiki"), Bry_.new_ascii_("mem/http/enwiki/wiki/Main_Page"), Io_url_.new_dir_("mem/fsys"));
+//			mirror_mgr = new Xob_mirror_mgr(Gfo_usr_dlg_.Noop, new Xof_download_wkr_test(), Bry_.new_a7("mem/http/enwiki"), Bry_.new_a7("mem/http/enwiki/wiki/Main_Page"), Io_url_.new_dir_("mem/fsys"));
 	}
 	public void Test_css(String raw, String expd) {
-//			byte[] raw_bry = Bry_.new_utf8_(raw);
+//			byte[] raw_bry = Bry_.new_u8(raw);
 //			mirror_mgr.Exec();
 	}
 }
 class Io_fsys_fxt {
 	public void Clear() {
-		Io_mgr._.InitEngine_mem();
+		Io_mgr.I.InitEngine_mem();
 	}
 	public void Init_fil(String url_str) {
 		Io_url url = Io_url_.new_fil_(url_str);
@@ -50,7 +50,7 @@ class Io_fsys_fxt {
 	}
 	public void Init_fil(String url_str, String text) {Init_fil(Io_url_.new_fil_(url_str), text);}
 	public void Init_fil(Io_url url, String text) {
-		Io_mgr._.SaveFilStr(url, text);
+		Io_mgr.I.SaveFilStr(url, text);
 	}
 	public void Test_fil(String url_str) {
 		Io_url url = Io_url_.new_fil_(url_str);
@@ -58,6 +58,6 @@ class Io_fsys_fxt {
 	}
 	public void Test_fil(String url, String expd) {Test_fil(Io_url_.new_fil_(url), expd);}
 	public void Test_fil(Io_url url, String expd) {
-		Tfds.Eq_str_lines(expd, Io_mgr._.LoadFilStr(url));
+		Tfds.Eq_str_lines(expd, Io_mgr.I.LoadFilStr(url));
 	}
 }

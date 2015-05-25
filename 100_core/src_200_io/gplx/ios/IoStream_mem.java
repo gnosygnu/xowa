@@ -53,7 +53,7 @@ class IoStream_mem extends IoStream_base {
 	@Override public void Flush() {}
 	@Override public void Rls() {}
 
-	public static IoStream_mem rdr_txt_(Io_url url, String v) {return rdr_ary_(url, Bry_.new_utf8_(v));}
+	public static IoStream_mem rdr_txt_(Io_url url, String v) {return rdr_ary_(url, Bry_.new_u8(v));}
 	public static IoStream_mem rdr_ary_(Io_url url, byte[] v) {
 		IoStream_mem rv = new IoStream_mem();
 		rv.buffer = v;

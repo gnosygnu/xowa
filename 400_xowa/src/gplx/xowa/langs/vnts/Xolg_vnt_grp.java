@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 public class Xolg_vnt_grp {
-	private final ListAdp list = ListAdp_.new_();
+	private final List_adp list = List_adp_.new_();
 	public byte[] Text() {return text;} public void Text_(byte[] v) {text = v;} private byte[] text;
 	public int Len() {return list.Count();}
-	public Xolg_vnt_itm Get_at(int i) {return (Xolg_vnt_itm)list.FetchAt(i);}
+	public Xolg_vnt_itm Get_at(int i) {return (Xolg_vnt_itm)list.Get_at(i);}
 	public void Add(Xolg_vnt_itm itm) {list.Add(itm);}
 }

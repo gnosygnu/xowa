@@ -47,9 +47,9 @@ public class Xow_hzip_itm__header {
 		byte hdr_num = (byte)(src[bgn] + Byte_ascii.Num_0);
 		int capt_bgn = bgn + 1;
 		int capt_end = Bry_finder.Find_fwd(src, Xow_hzip_dict.Escape, capt_bgn, src_len);		if (capt_end == Bry_finder.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("hdr.capt_end_missing", bgn, capt_bgn);
-		bfr.Add_str("<h").Add_byte(hdr_num).Add_str("><span class='mw-headline' id='").Add_mid(src, capt_bgn, capt_end).Add_str("'>").Add_mid(src, capt_bgn, capt_end).Add_str("</span></h").Add_byte(hdr_num).Add_str(">");
+		bfr.Add_str_a7("<h").Add_byte(hdr_num).Add_str("><span class='mw-headline' id='").Add_mid(src, capt_bgn, capt_end).Add_str("'>").Add_mid(src, capt_bgn, capt_end).Add_str("</span></h").Add_byte(hdr_num).Add_str(">");
 		return capt_end + 1;
 	}
 	public void Html(Bry_bfr bfr, boolean caption) {}
-	public static final byte[] Hdr_end = Bry_.new_ascii_("<!--xo_hdr_end-->");
+	public static final byte[] Hdr_end = Bry_.new_a7("<!--xo_hdr_end-->");
 }

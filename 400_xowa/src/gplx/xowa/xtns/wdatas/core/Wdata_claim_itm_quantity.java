@@ -24,23 +24,23 @@ public class Wdata_claim_itm_quantity extends Wdata_claim_itm_core { 	public Wda
 	@Override public byte Val_tid() {return Wdata_dict_val_tid.Tid_quantity;}
 	public byte[] Amount() {return amount;} private final byte[] amount;
 	public DecimalAdp Amount_as_num() {
-		if (amount_as_num == null) amount_as_num = DecimalAdp_.parse_(String_.new_ascii_(amount));
+		if (amount_as_num == null) amount_as_num = DecimalAdp_.parse_(String_.new_a7(amount));
 		return amount_as_num;
 	}	private DecimalAdp amount_as_num;
 	public byte[] Ubound() {return ubound;} private final byte[] ubound;
 	public DecimalAdp Ubound_as_num() {
-		if (ubound_as_num == null) ubound_as_num = DecimalAdp_.parse_(String_.new_ascii_(ubound));
+		if (ubound_as_num == null) ubound_as_num = DecimalAdp_.parse_(String_.new_a7(ubound));
 		return ubound_as_num;
 	}	private DecimalAdp ubound_as_num;
 	public byte[] Lbound() {return lbound;} private final byte[] lbound;
 	public DecimalAdp Lbound_as_num() {
-		if (lbound_as_num == null) lbound_as_num = DecimalAdp_.parse_(String_.new_ascii_(lbound));
+		if (lbound_as_num == null) lbound_as_num = DecimalAdp_.parse_(String_.new_a7(lbound));
 		return lbound_as_num;
 	}	private DecimalAdp lbound_as_num;
 	public byte[] Unit() {return unit;} private final byte[] unit;
 	@Override public void Welcome(Wdata_claim_visitor visitor) {visitor.Visit_quantity(this);}
 	@Override public String toString() {// TEST:
-		return String_.Concat_with_str("|", Wdata_dict_snak_tid.Xto_str(this.Snak_tid()), Wdata_dict_val_tid.Xto_str(this.Val_tid()), String_.new_utf8_(amount), String_.new_utf8_(unit), String_.new_utf8_(ubound), String_.new_utf8_(lbound));
+		return String_.Concat_with_str("|", Wdata_dict_snak_tid.Xto_str(this.Snak_tid()), Wdata_dict_val_tid.Xto_str(this.Val_tid()), String_.new_u8(amount), String_.new_u8(unit), String_.new_u8(ubound), String_.new_u8(lbound));
 	}
-	public static final byte[] Unit_1 = Bry_.new_ascii_("1");
+	public static final byte[] Unit_1 = Bry_.new_a7("1");
 }

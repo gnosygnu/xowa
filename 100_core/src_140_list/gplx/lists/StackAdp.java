@@ -22,5 +22,5 @@ public interface StackAdp extends EnumerAble {
 	void Push(Object obj);
 	Object Pop();
 	Object Peek();
-	ListAdp XtoList();
+	List_adp XtoList();
 }	

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.fmtrs; import gplx.*; import gplx.xowa.*;
 public class Xoa_fmtr_sort_mgr implements GfoInvkAble {
-	private OrderedHash itms = OrderedHash_.new_();
+	private Ordered_hash itms = Ordered_hash_.new_();
 	private Xoa_fmtr_sort_wkr wkr = new Xoa_fmtr_sort_wkr();
 	private Gfo_sort_able sort_able;
 	public Xoa_fmtr_sort_mgr(Gfo_sort_able sort_able) {this.sort_able = sort_able;}
@@ -26,11 +26,11 @@ public class Xoa_fmtr_sort_mgr implements GfoInvkAble {
 		int keys_len = keys.length;
 		for (int i = 0; i < keys_len; i++) {
 			Xoa_fmtr_sort_itm itm = new Xoa_fmtr_sort_itm(keys[i], true);
-			itms.Add_if_new(itm.Key(), itm);
+			itms.Add_if_dupe_use_1st(itm.Key(), itm);
 		}
 	}
 	public void Exec() {
-		wkr.Itms_((Xoa_fmtr_sort_itm[])itms.Xto_ary(Xoa_fmtr_sort_itm.class));
+		wkr.Itms_((Xoa_fmtr_sort_itm[])itms.To_ary(Xoa_fmtr_sort_itm.class));
 		sort_able.Sort(wkr);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

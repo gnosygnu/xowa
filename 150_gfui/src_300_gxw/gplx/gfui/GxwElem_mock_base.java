@@ -26,7 +26,7 @@ public class GxwElem_mock_base implements GxwElem {
 		return this;
 	}
 
-	ListAdp list = ListAdp_.new_();
+	List_adp list = List_adp_.new_();
 	public static GxwElem_mock_base new_() {return new GxwElem_mock_base();} protected GxwElem_mock_base() {}
 }
 class MockTextBox extends GxwElem_mock_base implements GxwTextFld {

@@ -17,13 +17,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfml; import gplx.*;
 class GfmlTypeHash {
-	public GfmlType Fetch(String key) {return (GfmlType)hash.Fetch(key);}
+	public GfmlType Get_by(String key) {return (GfmlType)hash.Get_by(key);}
 	public void Add(GfmlType type) {
 		if (type.IsTypeNull()) throw Err_.new_("cannot add null type to GfmlTypeHash");
 		if (hash.Has(type.Key())) throw Err_.new_("type key already exists").Add("key", type.Key());
 		hash.Add(type.Key(), type);
 	}
-	HashAdp hash = HashAdp_.new_();
+	Hash_adp hash = Hash_adp_.new_();
 	public static GfmlTypeHash new_() {return new GfmlTypeHash();} GfmlTypeHash() {}
 }
 class GfmlTypRegy {
@@ -31,7 +31,7 @@ class GfmlTypRegy {
 	public GfmlType FetchOrNull(String typeKey) {return FetchOrNull(typeKey, GfmlDocPos_.Root);}
 	public GfmlType FetchOrNull(String typeKey, GfmlDocPos pos) {
 		if (typeKey == null) throw Err_.new_("typeKey cannot be null when added to typRegy");
-		GfmlType rv = (GfmlType)hash.Fetch(typeKey, pos);
+		GfmlType rv = (GfmlType)hash.Get_by(typeKey, pos);
 		return rv == null ? GfmlType_.Null : rv;
 	}
 	public GfmlTypRegy Add(GfmlType type) {

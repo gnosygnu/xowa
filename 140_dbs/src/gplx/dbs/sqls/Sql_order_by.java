@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.sqls; import gplx.*; import gplx.dbs.*;
 public class Sql_order_by {
-	public ListAdp Flds() {return flds;} ListAdp flds = ListAdp_.new_();
+	public List_adp Flds() {return flds;} List_adp flds = List_adp_.new_();
 
 	public static Sql_order_by new_(Sql_order_by_itm... ary) {
 		Sql_order_by rv = new Sql_order_by();

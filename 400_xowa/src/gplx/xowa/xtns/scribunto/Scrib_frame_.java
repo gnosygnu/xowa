@@ -29,7 +29,7 @@ public class Scrib_frame_ {
 		else if (String_.Eq(frame_id, "parent"))	return core.Frame_parent();
 		else if (String_.Eq(frame_id, "empty"))		return Xot_invk_mock.new_(core.Frame_current().Defn_tid(), 0, null, KeyVal_.Ary_empty);	// not sure if it should return null title; DATE:2014-07-12
 		else {
-			return (Xot_invk)core.Frame_created_list().Fetch(frame_id);	// NOTE: can return null; some calls expect nil; EX:mw.lua and "currentFrame = newFrame( 'empty' )"; DATE:2014-07-12
+			return (Xot_invk)core.Frame_created_list().Get_by(frame_id);	// NOTE: can return null; some calls expect nil; EX:mw.lua and "currentFrame = newFrame( 'empty' )"; DATE:2014-07-12
 		}
 	}
 	public static int Get_arg_adj(byte frame_tid) {

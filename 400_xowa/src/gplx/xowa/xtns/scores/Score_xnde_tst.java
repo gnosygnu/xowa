@@ -19,7 +19,7 @@ package gplx.xowa.xtns.scores; import gplx.*; import gplx.xowa.*; import gplx.xo
 import org.junit.*;
 public class Score_xnde_tst {
 	@Test  public void Version() {
-		Tfds.Eq_bry(Bry_.new_ascii_("2.16.2"), Score_xnde.Get_lilypond_version("GNU LilyPond 2.16.2\nline1\nline2"));
-		Tfds.Eq_bry(Bry_.new_ascii_("2.16.2"), Score_xnde.Get_lilypond_version("GNU LilyPond 2.16.2\r\nline1\r\nline2"));
+		Tfds.Eq_bry(Bry_.new_a7("2.16.2"), Score_xnde.Get_lilypond_version("GNU LilyPond 2.16.2\nline1\nline2"));
+		Tfds.Eq_bry(Bry_.new_a7("2.16.2"), Score_xnde.Get_lilypond_version("GNU LilyPond 2.16.2\r\nline1\r\nline2"));
 	}
 }

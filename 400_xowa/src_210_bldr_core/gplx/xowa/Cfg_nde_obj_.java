@@ -17,14 +17,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 public class Cfg_nde_obj_ {
-	public static void Fill_recurse(OrderedHash rv, Cfg_nde_obj peer_grp) {
+	public static void Fill_recurse(Ordered_hash rv, Cfg_nde_obj peer_grp) {
 		int subs_len = peer_grp.Nde_subs_len();
 		for (int i = 0; i < subs_len; i++) {
 			Cfg_nde_obj sub_obj = (Cfg_nde_obj)peer_grp.Nde_subs_get_at(i);
 			if (sub_obj.Nde_typ_is_grp())
 				Cfg_nde_obj_.Fill_recurse(rv, (Cfg_nde_obj)sub_obj);
 			else {
-				rv.AddReplace(sub_obj.Nde_key(), sub_obj);
+				rv.Add_if_dupe_use_nth(sub_obj.Nde_key(), sub_obj);
 			}
 		}
 	}

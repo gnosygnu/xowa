@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
 import gplx.core.primitives.*;
 public class Xows_ns_mgr {
-	private final OrderedHash ns_hash = OrderedHash_.new_(); private final Int_obj_ref tmp_ns_id = Int_obj_ref.neg1_(); private final Bry_bfr tmp_bfr = Bry_bfr.reset_(32);
+	private final Ordered_hash ns_hash = Ordered_hash_.new_(); private final Int_obj_ref tmp_ns_id = Int_obj_ref.neg1_(); private final Bry_bfr tmp_bfr = Bry_bfr.reset_(32);
 	private boolean ns_all, ns_main;
 	public void Clear() {
 		ns_hash.Clear();
@@ -33,7 +33,7 @@ public class Xows_ns_mgr {
 	public void Add_by_id(int ns_id) {
 		if (ns_hash.Has(tmp_ns_id.Val_(ns_id)))
 			ns_hash.Del(tmp_ns_id);
-		ns_hash.AddKeyVal(Int_obj_ref.new_(ns_id));
+		ns_hash.Add_as_key_and_val(Int_obj_ref.new_(ns_id));
 	}
 	public void Add_by_name(byte[] ns_name) {
 		int id = Xow_ns_.Canonical_id(ns_name);
@@ -50,8 +50,8 @@ public class Xows_ns_mgr {
 			if (key_len == 3 && key[2] == Byte_ascii.Asterisk)		// translate ns* as ns_all
 				ns_all = true;
 			else {
-				int ns_id = Bry_.Xto_int_or(key, 2, key_len, -1);
-				if (ns_id != -1) {									// ignore invalid ints; EX: &nsabc=1;
+				int ns_id = Bry_.Xto_int_or(key, 2, key_len, Int_.MinValue);
+				if (ns_id != Int_.MinValue) {						// ignore invalid ints; EX: &nsabc=1;
 					Add_by_id(ns_id);
 					ns_main = ns_all = false;
 				}
@@ -71,7 +71,7 @@ public class Xows_ns_mgr {
 			int ns_hash_len = ns_hash.Count();
 			for (int i = 0; i < ns_hash_len; i++) {
 				if (i != 0) tmp_bfr.Add_byte_semic();
-				Int_obj_ref ns_id_ref = (Int_obj_ref)ns_hash.FetchAt(i);
+				Int_obj_ref ns_id_ref = (Int_obj_ref)ns_hash.Get_at(i);
 				tmp_bfr.Add_int_variable(ns_id_ref.Val());
 			}
 			return tmp_bfr.Xto_bry_and_clear();

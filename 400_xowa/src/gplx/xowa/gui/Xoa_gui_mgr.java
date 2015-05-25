@@ -65,10 +65,10 @@ public class Xoa_gui_mgr implements GfoEvObj, GfoInvkAble {
 		layout.Init(browser_win);
 		cmd_mgr.Init_by_kit(app);
 		app.Api_root().Init_by_kit(app);
-		menu_mgr.Menu_bldr().Init_by_kit(app, kit, app.User().Fsys_mgr().App_img_dir().GenSubDir_nest("window", "menu"));
+		menu_mgr.Menu_bldr().Init_by_kit(app, kit, app.Usere().Fsys_mgr().App_img_dir().GenSubDir_nest("window", "menu"));
 		menu_mgr.Init_by_kit();
 		bnd_mgr.Init_by_kit(app);
-		GfoEvMgr_.SubSame_many(app.User(), this, Xou_user.Evt_lang_changed);
+		GfoEvMgr_.SubSame_many(app.Usere(), this, Xoue_user.Evt_lang_changed);
 		app.Sys_cfg().Lang_(app.Sys_cfg().Lang());	// NOTE: force refresh of lang. must occur after after gui_mgr init, else menu lbls will break
 	}
 	public void Lang_changed(Xol_lang lang) {
@@ -91,7 +91,7 @@ public class Xoa_gui_mgr implements GfoEvObj, GfoInvkAble {
 		else if	(ctx.Match(k, Invk_menus))							return menu_mgr;
 		else if	(ctx.Match(k, Invk_cmds))							return cmd_mgr;
 		else if	(ctx.Match(k, Invk_url_macros))						return url_macro_mgr;
-		else if	(ctx.Match(k, Xou_user.Evt_lang_changed))			Lang_changed((Xol_lang)m.ReadObj("v", ParseAble_.Null));
+		else if	(ctx.Match(k, Xoue_user.Evt_lang_changed))			Lang_changed((Xol_lang)m.ReadObj("v", ParseAble_.Null));
 		else throw Err_mgr._.unhandled_(k);
 		return this;
 	}

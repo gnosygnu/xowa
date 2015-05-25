@@ -51,6 +51,6 @@ public class Base85_utl_tst {
 		run_XtoStr(ary,      0,     2); // !!#
 		run_XtoStr(ary,      3,   173); // !#$
 		run_XtoStr(ary,      6, 14709); // #$%
-            Tfds.Eq("!!#!#$#$%", String_.new_utf8_(ary));
+            Tfds.Eq("!!#!#$#$%", String_.new_u8(ary));
 	}	void run_XtoStr(byte[] ary, int aryPos, int val) {Base85_utl.XtoStrByAry(val, ary, aryPos, 3);}
 }

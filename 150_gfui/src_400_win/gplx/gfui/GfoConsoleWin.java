@@ -88,10 +88,10 @@ class GfoConsoleWinCmds implements GfoInvkAble {
 	GfuiWin win; GfuiTextBox consoleFilBox, consoleBox, statusBox, resultBox;
 	public void Owner_set(GfuiElem elem) {win = (GfuiWin)elem;}
 	public void Init() {
-		consoleFilBox = (GfuiTextBox)win.SubElems().Fetch("consoleFilBox");
-		consoleBox = (GfuiTextBox)win.SubElems().Fetch("consoleBox");
-		resultBox = (GfuiTextBox)win.SubElems().Fetch("resultBox");
-		statusBox = (GfuiTextBox)win.SubElems().Fetch("statusBox");
+		consoleFilBox = (GfuiTextBox)win.SubElems().Get_by("consoleFilBox");
+		consoleBox = (GfuiTextBox)win.SubElems().Get_by("consoleBox");
+		resultBox = (GfuiTextBox)win.SubElems().Get_by("resultBox");
+		statusBox = (GfuiTextBox)win.SubElems().Get_by("statusBox");
 		GfsCore._.AddObj(this, "gfoConsoleWin");
 		GfsCore._.ExecRegy("gplx.gfui.GfoConsoleWin.ini");
 	}
@@ -129,7 +129,7 @@ class GfoConsoleWinCmds implements GfoInvkAble {
 	}
 	void Save() {
 		String consoleFilStr = consoleFilBox.Text();
-		Io_url url = Io_url_.Null;
+		Io_url url = Io_url_.Empty;
 		if (String_.Len_eq_0(consoleFilStr)) {
 			url = GfuiIoDialogUtl.SelectFile();
 			consoleFilBox.Text_(url.Raw());
@@ -137,19 +137,19 @@ class GfoConsoleWinCmds implements GfoInvkAble {
 		}
 		else
 			url = Io_url_.new_any_(consoleFilStr);
-		Io_mgr._.SaveFilStr(url, consoleBox.Text());
+		Io_mgr.I.SaveFilStr(url, consoleBox.Text());
 	}
 	void Load() {
 		String consoleFilStr = consoleFilBox.Text();
-		Io_url dir = Io_url_.Null;
+		Io_url dir = Io_url_.Empty;
 		if (String_.Len_eq_0(consoleFilStr))
-			dir = Io_url_.Null;
+			dir = Io_url_.Empty;
 		else {
 			dir = Io_url_.new_any_(consoleFilStr);
 			dir = dir.OwnerDir();
 		}
-		Io_url url = GfuiIoDialogUtl.SelectFile(dir); if (url == Io_url_.Null) return;
-		consoleBox.Text_(Io_mgr._.LoadFilStr(url));
+		Io_url url = GfuiIoDialogUtl.SelectFile(dir); if (url == Io_url_.Empty) return;
+		consoleBox.Text_(Io_mgr.I.LoadFilStr(url));
 	}
 	String FixNewLines(String cmd) {
 		cmd = String_.Replace(cmd, "\n", "\r\n");
@@ -193,7 +193,7 @@ class GfoConsoleWinCmds implements GfoInvkAble {
 			Io_url v = m.ReadIoUrl("v");
 			if (ctx.Deny()) return this;
 			consoleFilBox.Text_(v.Xto_api());
-			consoleBox.Text_(Io_mgr._.LoadFilStr(v));
+			consoleBox.Text_(Io_mgr.I.LoadFilStr(v));
 		}
 		else return win.Invk(ctx, ikey, k, m);
 		return this;

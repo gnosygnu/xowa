@@ -44,7 +44,7 @@ public class Fsm_mnt_tbl implements RlsAble {
 		stmt.Clear().Val_str(fld_name, name).Val_str(fld_url, url).Crt_int(fld_id, id).Exec_update();
 	}	
 	public Fsm_mnt_itm[] Select_all() {
-		ListAdp list = ListAdp_.new_();
+		List_adp list = List_adp_.new_();
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empy).Clear().Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {
@@ -53,7 +53,7 @@ public class Fsm_mnt_tbl implements RlsAble {
 			}
 		}
 		finally {rdr.Rls();}
-		return (Fsm_mnt_itm[])list.Xto_ary_and_clear(Fsm_mnt_itm.class);
+		return (Fsm_mnt_itm[])list.To_ary_and_clear(Fsm_mnt_itm.class);
 	}
 	public static final String Mnt_name_main = "fsdb.main", Mnt_name_user = "fsdb.user";
 }

@@ -35,7 +35,7 @@ class Io_sort_filCmd_reg implements Io_sort_filCmd { // 123|bgn|end|1
 		itm_count = 0;
 	}
 	public void Flush(Io_url fil) {
-		Io_mgr._.SaveFilBry(fil, bfr.Bfr(), bfr.Len());
+		Io_mgr.I.SaveFilBry(fil, bfr.Bfr(), bfr.Len());
 	}	private Bry_bfr bfr = Bry_bfr.new_(); int fil_idx = 0; int itm_count = 0;
 }
 class Io_url_gen_nest implements gplx.ios.Io_url_gen {
@@ -48,6 +48,6 @@ class Io_url_gen_nest implements gplx.ios.Io_url_gen {
 		}
 		return rv;
 	}
-	public void Del_all() {if (Io_mgr._.ExistsDir(root_dir)) Io_mgr._.DeleteDirDeep(root_dir);}
-	public Io_url_gen_nest(Io_url root_dir, String ext) {this.root_dir = root_dir; this.ext = Bry_.new_utf8_(ext);} Io_url root_dir; byte[] ext; int fil_idx;
+	public void Del_all() {if (Io_mgr.I.ExistsDir(root_dir)) Io_mgr.I.DeleteDirDeep(root_dir);}
+	public Io_url_gen_nest(Io_url root_dir, String ext) {this.root_dir = root_dir; this.ext = Bry_.new_u8(ext);} Io_url root_dir; byte[] ext; int fil_idx;
 }

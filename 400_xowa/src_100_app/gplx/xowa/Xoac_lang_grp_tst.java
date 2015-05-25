@@ -89,11 +89,11 @@ class Xoac_lang_grp_fxt {
 	public Xoac_lang_itm_chkr itm_(String key) {return new Xoac_lang_itm_chkr(key);}
 	public Xoac_lang_grp_chkr grp_(String key) {return new Xoac_lang_grp_chkr(key);}
 	public Xoac_lang_grp_fxt Define_bulk(String raw, Xoac_lang_grp_chkr... expd) {
-		lang_mgr.Groups().Set_bulk(Bry_.new_utf8_(raw));
-		tst_mgr.Tst_ary("", expd, Xto_ary(lang_mgr.Groups()));
+		lang_mgr.Groups().Set_bulk(Bry_.new_u8(raw));
+		tst_mgr.Tst_ary("", expd, To_ary(lang_mgr.Groups()));
 		return this;
 	}
-	Xoac_lang_grp[] Xto_ary(Cfg_nde_root root) {
+	Xoac_lang_grp[] To_ary(Cfg_nde_root root) {
 		int len = root.Root_len();
 		Xoac_lang_grp[] rv = new Xoac_lang_grp[len];
 		for (int i = 0; i < len; i++) {
@@ -114,8 +114,8 @@ class Xoac_lang_itm_chkr extends Xoac_lang_chkr_base {
 	@Override public int Chk(Tst_mgr mgr, String path, Object actl_obj) {
 		Xoac_lang_itm actl = (Xoac_lang_itm)actl_obj;
 		int rv = 0;
-		rv += mgr.Tst_val(key == null, path, "key", key, String_.new_utf8_(actl.Key_bry()));
-		rv += mgr.Tst_val(local_name == null, path, "local_name", local_name, String_.new_utf8_(actl.Local_name_bry()));
+		rv += mgr.Tst_val(key == null, path, "key", key, String_.new_u8(actl.Key_bry()));
+		rv += mgr.Tst_val(local_name == null, path, "local_name", local_name, String_.new_u8(actl.Local_name_bry()));
 		return rv;
 	}
 }
@@ -129,13 +129,13 @@ class Xoac_lang_grp_chkr extends Xoac_lang_chkr_base {
 	@Override public int Chk(Tst_mgr mgr, String path, Object actl_obj) {
 		Xoac_lang_grp actl = (Xoac_lang_grp)actl_obj;
 		int rv = 0;
-		rv += mgr.Tst_val(key == null, path, "key", key, String_.new_utf8_(actl.Key_bry()));
-		rv += mgr.Tst_val(name == null, path, "name", name, String_.new_utf8_(actl.Name_bry()));
+		rv += mgr.Tst_val(key == null, path, "key", key, String_.new_u8(actl.Key_bry()));
+		rv += mgr.Tst_val(name == null, path, "name", name, String_.new_u8(actl.Name_bry()));
 		rv += mgr.Tst_val(sort_idx == -1, path, "sort_idx", sort_idx, actl.Sort_idx());
-		rv += mgr.Tst_sub_ary(itms, Xto_ary(actl), path, rv);
+		rv += mgr.Tst_sub_ary(itms, To_ary(actl), path, rv);
 		return rv;
 	}
-	Xoac_lang_obj[] Xto_ary(Xoac_lang_grp grp) {
+	Xoac_lang_obj[] To_ary(Xoac_lang_grp grp) {
 		int len = grp.Itms_len();
 		Xoac_lang_obj[] rv = new Xoac_lang_obj[len];
 		for (int i = 0; i < len; i++)

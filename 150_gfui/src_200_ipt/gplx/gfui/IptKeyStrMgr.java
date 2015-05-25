@@ -24,16 +24,16 @@ class IptKeyStrMgr {
 	}
 	public String XtoStr(IptKey key) {
 		if (literals == null) Init();
-		Object rv = literals.Fetch(key.Val());
+		Object rv = literals.Get_by(key.Val());
 		return rv == null ? String_.Empty : (String)rv;
 	}
-	public void XtoIptKeyAry(ListAdp list) {
+	public void XtoIptKeyAry(List_adp list) {
 		if (literals == null) Init();
 		for (int i = 0; i < keys.Count(); i++)
-			list.Add((IptKey)keys.FetchAt(i));
+			list.Add((IptKey)keys.Get_at(i));
 	}
 	void Init() {// default to US style keyboard
-		literals = HashAdp_.new_();
+		literals = Hash_adp_.new_();
 		charKeys = new IptKey[256];
 		RegLtr(IptKey_.A, 'a'); RegLtr(IptKey_.B, 'b'); RegLtr(IptKey_.C, 'c'); RegLtr(IptKey_.D, 'd'); RegLtr(IptKey_.E, 'e');
 		RegLtr(IptKey_.F, 'f'); RegLtr(IptKey_.G, 'g'); RegLtr(IptKey_.H, 'h'); RegLtr(IptKey_.I, 'i'); RegLtr(IptKey_.J, 'j');
@@ -70,6 +70,6 @@ class IptKeyStrMgr {
 		charKeys[charVal] = k;
 	}
 	IptKey[] charKeys;
-	HashAdp literals; OrderedHash keys = OrderedHash_.new_();
+	Hash_adp literals; Ordered_hash keys = Ordered_hash_.new_();
 	public static final IptKeyStrMgr _ = new IptKeyStrMgr(); IptKeyStrMgr() {}
 }

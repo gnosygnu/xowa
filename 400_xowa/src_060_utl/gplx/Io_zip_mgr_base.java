@@ -20,9 +20,9 @@ import java.io.*;
 import java.util.zip.*;
 public class Io_zip_mgr_base implements Io_zip_mgr {
 	public void Zip_fil(Io_url src_fil, Io_url trg_fil) {
-		byte[] src_bry = Io_mgr._.LoadFilBry(src_fil);
+		byte[] src_bry = Io_mgr.I.LoadFilBry(src_fil);
 		byte[] trg_bry = Zip_bry(src_bry, 0, src_bry.length);
-		Io_mgr._.SaveFilBry(trg_fil, trg_bry);
+		Io_mgr.I.SaveFilBry(trg_fil, trg_bry);
 	}
 		public void Zip_dir(Io_url src_dir, Io_url trg_fil) {
 		try {
@@ -56,7 +56,7 @@ public class Io_zip_mgr_base implements Io_zip_mgr {
 		} 	catch(IOException exc) {throw Err_.err_(exc, "error duing zip: src=~{0}", zip_path);}
 	}
 	private Io_url[] Zip_dir__get_subs(Io_url url) {
-		return Io_mgr._.QueryDir_args(url).DirInclude_().ExecAsUrlAry();
+		return Io_mgr.I.QueryDir_args(url).DirInclude_().ExecAsUrlAry();
 	}
 		public byte[] Zip_bry(byte[] src, int bgn, int len)  {
 				ByteArrayInputStream src_stream = new ByteArrayInputStream(src, bgn, len);
@@ -90,7 +90,7 @@ public class Io_zip_mgr_base implements Io_zip_mgr {
 	public void Unzip_to_dir(Io_url src_fil, Io_url trg_dir) {
 				byte[] buffer = new byte[4096];
 		try{
-			Io_mgr._.CreateDirIfAbsent(trg_dir);
+			Io_mgr.I.CreateDirIfAbsent(trg_dir);
 			
 			ZipInputStream zip_strm = new ZipInputStream(new FileInputStream(src_fil.Raw()));
 			ZipEntry zip_eny = zip_strm.getNextEntry();
@@ -98,9 +98,9 @@ public class Io_zip_mgr_base implements Io_zip_mgr {
 				String itm_name = zip_eny.getName();
 				if (Op_sys.Cur().Tid_is_wnt()) itm_name = String_.Replace(itm_name, "/", "\\");
 				Io_url itm_url = Io_url_.new_any_(trg_dir.GenSubFil(itm_name).Raw());
-				Io_mgr._.CreateDirIfAbsent(itm_url.OwnerDir());	// make sure owner dir exists
+				Io_mgr.I.CreateDirIfAbsent(itm_url.OwnerDir());	// make sure owner dir exists
 				if (itm_url.Type_fil()) {
-					Io_mgr._.SaveFilStr_args(itm_url, "").Exec();
+					Io_mgr.I.SaveFilStr_args(itm_url, "").Exec();
 					File itm_file = new File(itm_url.Raw());
 					FileOutputStream itm_strm = new FileOutputStream(itm_file);						 
 					int len;

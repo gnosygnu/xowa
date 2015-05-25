@@ -34,7 +34,7 @@ public class Xosrh_page_mgr implements Xosrh_page_mgr_searcher {
 	public boolean Prv_search_is_same(byte[] cur_search_bry, byte[] cur_ns_bry) {
 		return Bry_.Eq(cur_ns_bry, prv_ns_bry) && Bry_.Eq(cur_search_bry, prv_search_bry);
 	}
-	private Xosrh_rslt_grp[] pages_ary; ListAdp cur_ids = ListAdp_.new_();
+	private Xosrh_rslt_grp[] pages_ary; List_adp cur_ids = List_adp_.new_();
 	private Xosrh_rslt_itm_sorter sorter = new Xosrh_rslt_itm_sorter();		
 	private Xowe_wiki wiki;
 	public Xows_ns_mgr Ns_mgr() {return ns_mgr;} public void Ns_mgr_(Xows_ns_mgr v) {ns_mgr = v;} private Xows_ns_mgr ns_mgr = new Xows_ns_mgr();
@@ -51,7 +51,7 @@ public class Xosrh_page_mgr implements Xosrh_page_mgr_searcher {
 			}
 		}
 		else {										// search is new; rebuild;
-			ListAdp ids = searcher.Parse_search_and_load_ids(cancelable, bfr, ns_mgr, search);
+			List_adp ids = searcher.Parse_search_and_load_ids(cancelable, bfr, ns_mgr, search);
 			Rebuild(cancelable, wiki, ids);
 			prv_search_bry = search;
 			prv_ns_bry = ns_mgr.To_hash_key();
@@ -67,31 +67,31 @@ public class Xosrh_page_mgr implements Xosrh_page_mgr_searcher {
 		}
 		rv = new Xosrh_rslt_grp(page_idx);
 		for (int i = itms_bgn; i < itms_end; i++)
-			rv.Itms_add((Xowd_page_itm)cur_ids.FetchAt(i));
+			rv.Itms_add((Xowd_page_itm)cur_ids.Get_at(i));
 		pages_ary[page_idx] = rv;
 		rv.Itms_total_(cur_ids.Count());
 		return rv;
 	}
-	public ListAdp Parse_search_and_load_ids(Cancelable cancelable, Bry_bfr bfr, Xows_ns_mgr ns_mgr, byte[] search) {
+	public List_adp Parse_search_and_load_ids(Cancelable cancelable, Bry_bfr bfr, Xows_ns_mgr ns_mgr, byte[] search) {
 		search = wiki.Lang().Case_mgr().Case_build_lower(search, 0, search.length);
 		Xosrh_qry_itm cur_root = Xosrh_parser._.Parse(search);
 		cur_root.Search(cancelable, bfr, search, wiki, itms_per_page, ns_mgr);
 		return cur_root.Matches(search).Ids();
 	}
-	private void Rebuild(Cancelable cancelable, Xowe_wiki wiki, ListAdp ids) {
+	private void Rebuild(Cancelable cancelable, Xowe_wiki wiki, List_adp ids) {
 		int ids_len = ids.Count();
 		int pages_len = ((ids_len - 1) / itms_per_page) + 1; if (pages_len == 0) pages_len = 1;
 		pages_ary = new Xosrh_rslt_grp[pages_len];
 		cur_ids.Clear();
 		for (int i = 0; i < ids_len; i++)
-			cur_ids.Add(ids.FetchAt(i));
+			cur_ids.Add(ids.Get_at(i));
 		if (sort_tid == Xosrh_rslt_itm_sorter.Tid_ttl_asc) {
-			cur_ids.SortBy(sorter.Tid_(Xosrh_rslt_itm_sorter.Tid_id));
+			cur_ids.Sort_by(sorter.Tid_(Xosrh_rslt_itm_sorter.Tid_id));
 			wiki.Db_mgr().Load_mgr().Load_by_ids(cancelable, cur_ids, 0, ids_len);
-			cur_ids.SortBy(sorter.Tid_(Xosrh_rslt_itm_sorter.Tid_ttl_asc));
+			cur_ids.Sort_by(sorter.Tid_(Xosrh_rslt_itm_sorter.Tid_ttl_asc));
 		}
 		else {
-			cur_ids.SortBy(sorter.Tid_(Xosrh_rslt_itm_sorter.Tid_len_dsc));
+			cur_ids.Sort_by(sorter.Tid_(Xosrh_rslt_itm_sorter.Tid_len_dsc));
 		}		
 	}
 	private static final Xosrh_rslt_grp Grp_empty = new Xosrh_rslt_grp(-1);

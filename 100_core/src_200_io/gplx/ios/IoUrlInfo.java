@@ -118,7 +118,7 @@ abstract class IoUrlInfo_base implements IoUrlInfo {
 		}
 	}
 	static final int
-		  OwnerDirPos_hasNoOwner		= -1	// ListAdp_.NotFound
+		  OwnerDirPos_hasNoOwner		= -1	// List_adp_.NotFound
 		, OwnerDirPos_isNull			= -2
 		, OwnerDirPos_isRoot			= -3;
 }

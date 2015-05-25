@@ -20,19 +20,19 @@ import gplx.core.btries.*;
 public class Xol_transform_mgr implements GfoInvkAble {
 	private Btrie_fast_mgr trie_k_to_v = Btrie_fast_mgr.cs_();
 	private Btrie_fast_mgr trie_v_to_k = Btrie_fast_mgr.cs_();
-	private OrderedHash hash = OrderedHash_.new_bry_();
+	private Ordered_hash hash = Ordered_hash_.new_bry_();
 	private boolean empty = true;
 	public void Clear() {hash.Clear(); trie_k_to_v.Clear(); trie_v_to_k.Clear(); empty = true;}
 	public int Len() {return hash.Count();}
-	public KeyVal Get_at(int i) {return (KeyVal)hash.FetchAt(i);}
+	public KeyVal Get_at(int i) {return (KeyVal)hash.Get_at(i);}
 	public byte[] Get_val_or_self(byte[] k) {	// NOTE: return self; note that MW defaults "." and "," to self, even though MessagesLa.php only specifies ","; i.e.: always return something for "."; DATE:2014-05-13
-		KeyVal kv = (KeyVal)hash.Fetch(k);
+		KeyVal kv = (KeyVal)hash.Get_by(k);
 		return kv == null ? k : (byte[])kv.Val();
 	}
 	public Xol_transform_mgr Set(byte[] k, byte[] v) {
 		trie_k_to_v.Add(k, v);
 		trie_v_to_k.Add(v, k);
-		KeyVal kv = KeyVal_.new_(String_.new_utf8_(k), v);
+		KeyVal kv = KeyVal_.new_(String_.new_u8(k), v);
 		hash.Del(k);
 		hash.Add(k, kv);
 		empty = false;

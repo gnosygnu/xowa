@@ -36,10 +36,10 @@ public class Xoapi_view implements GfoInvkAble {
 	public void Save_as() {
 		if (this.Active_tab_is_null()) return;
 		Xog_tab_itm tab = win.Tab_mgr().Active_tab();
-		String file_name = Xoa_app_.Utl__encoder_mgr().Fsys_safe().Encode_str(String_.new_utf8_(tab.Page().Ttl().Full_url())) + ".html";
+		String file_name = Xoa_app_.Utl__encoder_mgr().Fsys_safe().Encode_str(String_.new_u8(tab.Page().Ttl().Full_url())) + ".html";
 		String file_url = app.Gui_mgr().Kit().New_dlg_file(Gfui_kit_.File_dlg_type_save, "Select file to save to:").Init_file_(file_name).Ask();
 		if (String_.Len_eq_0(file_url)) return;
-		Io_mgr._.SaveFilStr(file_url, tab.Html_box().Text());
+		Io_mgr.I.SaveFilStr(file_url, tab.Html_box().Text());
 		app.Usr_dlg().Prog_many("", "", "saved page: file=~{0}", file_url);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

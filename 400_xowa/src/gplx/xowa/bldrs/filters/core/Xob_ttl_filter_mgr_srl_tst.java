@@ -43,12 +43,12 @@ class Xob_ttl_filter_mgr_srl_fxt {
 	}
 	public void Test_parse(String src, int expd_count, String... expd_itms) {
 		mgr.Init(hash);
-		mgr.Load_by_bry(Bry_.new_utf8_(src));
+		mgr.Load_by_bry(Bry_.new_u8(src));
 		Tfds.Eq(expd_count, hash.Count());
 		int expd_len = expd_itms.length;
 		for (int i = 0; i < expd_len; ++i) {
 			String expd_itm = expd_itms[i];
-			Tfds.Eq_true(hash.Has(Bry_.new_utf8_(expd_itm)));
+			Tfds.Eq_true(hash.Has(Bry_.new_u8(expd_itm)));
 		}
 	}
 } 

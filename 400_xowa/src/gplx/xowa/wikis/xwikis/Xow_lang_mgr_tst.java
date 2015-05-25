@@ -60,7 +60,7 @@ public class Xow_lang_mgr_tst {
 		));
 	}
 	@Test  public void Unregistered() {
-//			fxt.Wiki().Xwiki_mgr().Add_full(Bry_.new_utf8_("zh"), Bry_.new_utf8_("zh.wikipedia.org"), Bry_.new_utf8_("http://zh.wikipedia.org/~{0}"));
+//			fxt.Wiki().Xwiki_mgr().Add_full(Bry_.new_u8("zh"), Bry_.new_u8("zh.wikipedia.org"), Bry_.new_u8("http://zh.wikipedia.org/~{0}"));
 		fxt.tst("[[zh:Earth]]", String_.Concat_lines_nl_skip_last
 		( "<div id=\"xowa-lang\">"
 		, "  <h5><a href='javascript:xowa_toggle_visible(\"wikidata-langs\");' style='text-decoration: none !important;'>In other languages<img id='wikidata-langs-toggle-icon' src='file:///mem/xowa/user/test_user/app/img/window/portal/twisty_right.png' title='' /></a></h5>"

@@ -28,14 +28,14 @@ public class Wdata_claim_itm_globecoordinate extends Wdata_claim_itm_core { 	pub
 	public byte[] Prc() {return prc;} private final byte[] prc;
 	public DecimalAdp Prc_as_num() {
 		if (prc_as_num == null)
-			prc_as_num = Bry_.Eq(prc, null_bry) ? DecimalAdp_.One : DecimalAdp_.parse_(String_.new_ascii_(prc));
+			prc_as_num = Bry_.Eq(prc, null_bry) ? DecimalAdp_.One : DecimalAdp_.parse_(String_.new_a7(prc));
 		return prc_as_num;
 	}	private DecimalAdp prc_as_num;
 	public byte[] Glb() {return glb;} private final byte[] glb;
 	public byte[] Glb_ttl() {return glb_ttl;} public void Glb_ttl_(byte[] v) {glb_ttl = v;} private byte[] glb_ttl;
 	@Override public void Welcome(Wdata_claim_visitor visitor) {visitor.Visit_globecoordinate(this);}
 	@Override public String toString() {// TEST:
-		return String_.Concat_with_str("|", Wdata_dict_snak_tid.Xto_str(this.Snak_tid()), Wdata_dict_val_tid.Xto_str(this.Val_tid()), String_.new_utf8_(lat), String_.new_utf8_(lng), String_.new_utf8_(alt), String_.new_utf8_(prc), String_.new_utf8_(glb));
+		return String_.Concat_with_str("|", Wdata_dict_snak_tid.Xto_str(this.Snak_tid()), Wdata_dict_val_tid.Xto_str(this.Val_tid()), String_.new_u8(lat), String_.new_u8(lng), String_.new_u8(alt), String_.new_u8(prc), String_.new_u8(glb));
 	}
-	private static final byte[] null_bry = Bry_.new_ascii_("null");
+	private static final byte[] null_bry = Bry_.new_a7("null");
 }

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa2.apps.urls; import gplx.*; import gplx.xowa2.*; import gplx.xowa2.apps.*;
 public class Xoav_url_parser {
-	private static final byte[] Bry_site = Bry_.new_ascii_("/site/"), Bry_wiki = Bry_.new_ascii_("/wiki/"), Bry_http = Bry_.new_ascii_("http:");
+	private static final byte[] Bry_site = Bry_.new_a7("/site/"), Bry_wiki = Bry_.new_a7("/wiki/"), Bry_http = Bry_.new_a7("http:");
 	public void Parse_xo_href(Xoav_url rv, byte[] src, byte[] cur_wiki_bry) {
 		rv.Clear();
 		int pos = Bry_.HasAtBgn(src, Bry_http) ? Bry_http.length  : 0;	// DRD: DRD:2.2 adds "http:" to all links
@@ -30,7 +30,7 @@ public class Xoav_url_parser {
 	}
 	private int Parse_wiki(Xoav_url rv, byte[] src, int src_len, int pos) {
 		int wiki_bgn = pos + Bry_site.length;
-		int wiki_end = Bry_finder.Find_fwd(src, Byte_ascii.Slash, wiki_bgn, src_len); if (wiki_end == Bry_.NotFound) throw Err_.new_fmt_("could not find wiki_end; src={0}", String_.new_utf8_(src));
+		int wiki_end = Bry_finder.Find_fwd(src, Byte_ascii.Slash, wiki_bgn, src_len); if (wiki_end == Bry_.NotFound) throw Err_.new_fmt_("could not find wiki_end; src={0}", String_.new_u8(src));
 		rv.Wiki_bry_(Bry_.Mid(src, wiki_bgn, wiki_end));
 		return wiki_end;
 	}

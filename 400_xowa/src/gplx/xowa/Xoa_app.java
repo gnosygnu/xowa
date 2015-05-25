@@ -16,17 +16,20 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.ios.*;
 import gplx.xowa.apps.*; import gplx.xowa.apps.fsys.*;
 import gplx.xowa.bldrs.css.*;
 import gplx.xowa.files.caches.*; import gplx.xowa.files.imgs.*;
 import gplx.xowa.urls.encoders.*;
 import gplx.xowa.wmfs.*;
 import gplx.xowa.html.wtrs.*;
+import gplx.xowa.users.*;
 public interface Xoa_app {
 	Xoa_app_type			App_type();
 	Xoa_fsys_mgr			Fsys_mgr();
 	Xof_cache_mgr			File__cache_mgr();
 	Xof_img_mgr				File__img_mgr();
+	Io_download_fmt			File__download_fmt();
 	Xowmf_mgr				Wmf_mgr();
 	Gfo_usr_dlg				Usr_dlg();
 	Bry_bfr_mkr				Utl__bfr_mkr();
@@ -35,4 +38,5 @@ public interface Xoa_app {
 	Xoh_lnki_bldr			Html__lnki_bldr();
 	Xoa_css_extractor		Html__css_installer();
 	boolean					Xwiki_mgr__missing(byte[] domain);
+	Xou_user				User();
 }

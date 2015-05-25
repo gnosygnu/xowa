@@ -25,7 +25,7 @@ public class Base64Converter {
             toInt[ALPHABET[i]]= i;
         }
     }
-	public static String EncodeString(String orig) {return Encode(Bry_.new_utf8_(orig));}
+	public static String EncodeString(String orig) {return Encode(Bry_.new_u8(orig));}
 	public static String Encode(byte[] buf){
 		if (toInt == null) Init();
 		int size = buf.length;
@@ -51,7 +51,7 @@ public class Base64Converter {
 		}
 		return new String(ar);
 	}
-	public static String DecodeString(String orig) {return String_.new_utf8_(Decode(orig));}
+	public static String DecodeString(String orig) {return String_.new_u8(Decode(orig));}
 	public static byte[] Decode(String s){
 		if (toInt == null) Init();
 		int sLen = String_.Len(s);

@@ -21,7 +21,7 @@ public class Bry_fmtr_itm {
 	public int ArgIdx;
 	public byte[] Dat;
 	public String DatStr() {
-		if (datStr == null) datStr = String_.new_utf8_(Dat);
+		if (datStr == null) datStr = String_.new_u8(Dat);
 		return datStr;
 	}	String datStr;
 	public static Bry_fmtr_itm arg_(int idx) {return new Bry_fmtr_itm(true, idx, Bry_.Empty);}

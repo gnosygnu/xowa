@@ -23,7 +23,7 @@ public class z901_perf_tst {
 //		@Test 
 	public void Long() {
 //			String longText = String_.Repeat("a", 30 * 1000 * 1000);
-		String longText = Io_mgr._.LoadFilStr(Io_url_.new_any_("C:\\core_weekly.temp.gfio"));
+		String longText = Io_mgr.I.LoadFilStr(Io_url_.new_any_("C:\\core_weekly.temp.gfio"));
 //			String_bldr sbXml = String_bldr_.new_();
 //			sbXml.Add("<");
 //			sbXml.Add(longText);

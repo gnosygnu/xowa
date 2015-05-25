@@ -19,7 +19,7 @@ package gplx;
 public class DateAdp_parser {
 	public int[] Parse_iso8651_like(String raw_str) {Parse_iso8651_like(tmp_rv, raw_str); return tmp_rv;} int[] tmp_rv = new int[7];
 	public void Parse_iso8651_like(int[] rv, String raw_str) {
-		byte[] raw_bry = Bry_.new_utf8_(raw_str);
+		byte[] raw_bry = Bry_.new_u8(raw_str);
 		Parse_iso8651_like(rv, raw_bry, 0, raw_bry.length);
 	}
 	public void Parse_iso8651_like(int[] rv, byte[] src, int bgn, int end) {

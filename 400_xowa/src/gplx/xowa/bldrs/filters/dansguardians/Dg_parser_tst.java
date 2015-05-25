@@ -44,7 +44,7 @@ class Dg_parser_fxt {
 	public void Init() {}
 	public Dg_rule Make_line(int score, String... words) {return new Dg_rule(-1, -1, -1, Dg_rule.Tid_rule, null, score, Dg_word.Ary_new_by_str_ary(words));}
 	public void Test_parse_line(String str, Dg_rule expd) {
-		byte[] src = Bry_.new_utf8_(str);
+		byte[] src = Bry_.new_u8(str);
 		Dg_rule actl = parser.Parse_line("rel_path", 0, 0, src, 0, src.length);
 		Tfds.Eq_str_lines(Xto_str(bfr, expd), Xto_str(bfr, actl));
 	}

@@ -42,25 +42,25 @@ public class Xowd_search_link_tbl {
 	public void Insert_cmd_by_batch(int word_id, int page_id) {
 		stmt_insert.Clear().Val_int(fld_word_id, word_id).Val_int(fld_page_id, page_id).Exec_insert();
 	}
-	public void Select_in(Cancelable cancelable, ListAdp rv, ListAdp words) {
+	public void Select_in(Cancelable cancelable, List_adp rv, List_adp words) {
 		in_wkr.Init(words, rv);
 		in_wkr.Select_in(cancelable, conn, 0, words.Count());
 	}
 }
 class Xowd_search_page_tbl__in_wkr extends Db_in_wkr__base {
 	private String tbl_name; private Db_meta_fld_list flds; private String fld_page_id, fld_word_id;
-	private ListAdp words, pages;		
+	private List_adp words, pages;		
 	public void Ctor(String tbl_name, Db_meta_fld_list flds, String fld_page_id, String fld_word_id) {
 		this.tbl_name = tbl_name; this.flds = flds; this.fld_page_id = fld_page_id; this.fld_word_id = fld_word_id;
 	}
-	public void Init(ListAdp words, ListAdp pages) {this.words = words; this.pages = pages;}
+	public void Init(List_adp words, List_adp pages) {this.words = words; this.pages = pages;}
 	@Override protected Db_qry Make_qry(int bgn, int end) {
 		Object[] part_ary = In_ary(end - bgn);			
 		return Db_qry_.select_cols_(tbl_name, Db_crt_.in_(fld_word_id, part_ary), flds.To_str_ary());
 	}
 	@Override protected void Fill_stmt(Db_stmt stmt, int bgn, int end) {
 		for (int i = bgn; i < end; i++) {
-			Int_obj_val word_id = (Int_obj_val)words.FetchAt(i);
+			Int_obj_val word_id = (Int_obj_val)words.Get_at(i);
 			stmt.Crt_int(fld_word_id, word_id.Val());		
 		}
 	}

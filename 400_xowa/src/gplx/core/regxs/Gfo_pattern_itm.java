@@ -27,7 +27,7 @@ class Gfo_pattern_itm_text implements Gfo_pattern_itm {
 	public Gfo_pattern_itm_text() {}
 	public byte Tid() {return Gfo_pattern_itm_.Tid_text;}
 	public byte[] Text() {return text;} private byte[] text; private int text_len;
-	public void Xto_str(String_bldr sb) {sb.Add(this.Tid()).Add("|" + String_.new_utf8_(text));}
+	public void Xto_str(String_bldr sb) {sb.Add(this.Tid()).Add("|" + String_.new_u8(text));}
 	public void Compile(byte[] src, int bgn, int end) {
 		this.text = Bry_.Mid(src, bgn, end);
 		this.text_len = end - bgn;

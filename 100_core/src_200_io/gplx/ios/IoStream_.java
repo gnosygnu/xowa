@@ -29,7 +29,7 @@ import java.io.UnsupportedEncodingException;
 public class IoStream_ {
 	public static final IoStream Null = new IoStream_null();
 	public static IoStream				mem_txt_(Io_url url, String v)	{return IoStream_mem.rdr_txt_(url, v);}
-	public static IoStream				ary_(byte[] v)					{return IoStream_mem.rdr_ary_(Io_url_.Null, v);}
+	public static IoStream				ary_(byte[] v)					{return IoStream_mem.rdr_ary_(Io_url_.Empty, v);}
 	public static final byte Mode_rdr = 0, Mode_wtr_create = 1, Mode_wtr_append = 2, Mode_wtr_update = 3;
 	public static IoStream				stream_rdr_()					{return new IoStream_stream_rdr();}
 	public static IoStream				stream_input_(Io_url url)		{return new IoStream_stream_rdr().UnderRdr_(input_stream_(url));}
@@ -41,7 +41,7 @@ public class IoStream_ {
 }
 class IoStream_null implements IoStream {
 	public Object UnderRdr() {return null;}
-	public Io_url Url() {return Io_url_.Null;}
+	public Io_url Url() {return Io_url_.Empty;}
 	public long Pos() {return -1;}
 	public long Len() {return -1;}
 	public int ReadAry(byte[] array) {return -1;}
@@ -55,7 +55,7 @@ class IoStream_null implements IoStream {
 	public void Rls() {}
 }
 class IoStream_base implements IoStream {
-	@gplx.Virtual public Io_url Url() {return url;} Io_url url = Io_url_.Null;
+	@gplx.Virtual public Io_url Url() {return url;} Io_url url = Io_url_.Empty;
 	public void Transfer(IoStream trg, int bufferLength) {
 		byte[] buffer = new byte[bufferLength];
 		int read = -1;
@@ -166,7 +166,7 @@ class IoStream_base implements IoStream {
 	public static IoStream_base new_(Object stream) {
 		IoStream_base rv = new IoStream_base();
 //		rv.stream = (System.IO.Stream)stream;
-		rv.url = Io_url_.Null;
+		rv.url = Io_url_.Empty;
 		return rv;
 	}
 	}

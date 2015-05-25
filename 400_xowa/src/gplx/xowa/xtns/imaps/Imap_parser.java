@@ -23,7 +23,7 @@ class Imap_parser {
 	private Imap_itm_img imap_img;
 	private Imap_itm_dflt imap_dflt;
 	private Imap_itm_desc imap_desc;
-	private ListAdp shapes = ListAdp_.new_(), pts = ListAdp_.new_(), errs = ListAdp_.new_();
+	private List_adp shapes = List_adp_.new_(), pts = List_adp_.new_(), errs = List_adp_.new_();
 	private byte[] src;
 	private int itm_idx; private int itm_bgn, itm_end;
 	private Xoae_app app; private Xowe_wiki wiki; private Xop_ctx wiki_ctx, imap_ctx; private Xop_root_tkn imap_root;
@@ -84,10 +84,10 @@ class Imap_parser {
 			} catch (Exception e) {usr_dlg.Warn_many("", "", "imap.parse:skipping line; page=~{0} line=~{1} err=~{2}", page_url.Xto_full_str_safe(), Bry_.Mid_safe(src, itm_bgn, itm_end), Err_.Message_gplx(e));}
 			++itm_idx;
 		}
-		rv.Init(xtn_mgr, imap_img_src, imap_img, imap_dflt, imap_desc, (Imap_itm_shape[])shapes.Xto_ary_and_clear(Imap_itm_shape.class), (Imap_err[])errs.Xto_ary_and_clear(Imap_err.class));
+		rv.Init(xtn_mgr, imap_img_src, imap_img, imap_dflt, imap_desc, (Imap_itm_shape[])shapes.To_ary_and_clear(Imap_itm_shape.class), (Imap_err[])errs.To_ary_and_clear(Imap_err.class));
 	}
 	private void Parse_comment(int itm_bgn, int itm_end) {}	// noop comments; EX: "# comment\n"
-	private void Parse_invalid(int itm_bgn, int itm_end) {usr_dlg.Warn_many("", "", "imap has invalid line: page=~{0} line=~{1}", page_url.Xto_full_str_safe(), String_.new_utf8_(src, itm_bgn, itm_end));}
+	private void Parse_invalid(int itm_bgn, int itm_end) {usr_dlg.Warn_many("", "", "imap has invalid line: page=~{0} line=~{1}", page_url.Xto_full_str_safe(), String_.new_u8(src, itm_bgn, itm_end));}
 	private boolean Parse_desc(int itm_bgn, int itm_end) {
 		xtn_mgr.Desc_assert();
 		Btrie_slim_mgr trie = xtn_mgr.Desc_trie();
@@ -145,13 +145,13 @@ class Imap_parser {
 			if		(pts_len < reqd_pts)	return Add_err(Bool_.Y, itm_bgn, itm_end, "imagemap_missing_coord");
 		}
 		pos = Bry_finder.Trim_fwd_space_tab(src, pos, itm_end);
-		Imap_itm_shape shape_itm = new Imap_itm_shape(shape_tid, (Double_obj_val[])pts.Xto_ary_and_clear(Double_obj_val.class));
+		Imap_itm_shape shape_itm = new Imap_itm_shape(shape_tid, (Double_obj_val[])pts.To_ary_and_clear(Double_obj_val.class));
 		Init_link_owner(shape_itm, src, pos, itm_end);
 		shapes.Add(shape_itm);
 		return true;
 	}
 	private boolean Add_err(boolean clear_pts, int bgn, int end, String err_key) {
-		usr_dlg.Warn_many("", "", err_key + ": page=~{0} line=~{1}", page_url.Xto_full_str_safe(), String_.new_utf8_(src, bgn, end));
+		usr_dlg.Warn_many("", "", err_key + ": page=~{0} line=~{1}", page_url.Xto_full_str_safe(), String_.new_u8(src, bgn, end));
 		errs.Add(new Imap_err(itm_idx, err_key));
 		if (clear_pts) pts.Clear();
 		return false;
@@ -188,7 +188,7 @@ class Imap_parser {
 		if (	tkn_itm == null									// no lnki or lnke
 			||	tkn_itm.Tkn_tid() != Xop_tkn_itm_.Tid_lnki		// no lnki; occurs with badly constructed maps; PAGE:en.w:Demography_of_the_United_Kingdom DATE:2015-01-22
 			)
-			imap_ctx.Wiki().Appe().Usr_dlg().Warn_many("", "", "image_map failed to find lnki; page=~{0} imageMap=~{1}", String_.new_utf8_(imap_ctx.Cur_page().Ttl().Full_txt()), String_.new_utf8_(imap_img_src));
+			imap_ctx.Wiki().Appe().Usr_dlg().Warn_many("", "", "image_map failed to find lnki; page=~{0} imageMap=~{1}", String_.new_u8(imap_ctx.Cur_page().Ttl().Full_txt()), String_.new_u8(imap_img_src));
 		else {
 			Xop_lnki_tkn lnki_tkn = (Xop_lnki_tkn)tkn_itm;
 			imap_img = new Imap_itm_img(lnki_tkn);
@@ -210,7 +210,7 @@ class Imap_parser {
 			else {
 				Object tid_obj = tid_trie.Match_bgn_w_byte(b, src, pos, src_end);
 				if (tid_obj == null) {		// not a known imap line; assume continuation of img line and skip to next line
-					imap_ctx.Wiki().Appe().Usr_dlg().Note_many("", "", "image_map extending image over multiple lines; page=~{0} imageMap=~{1}", String_.new_utf8_(imap_ctx.Cur_page().Ttl().Full_txt()), String_.new_utf8_(imap_img_src));
+					imap_ctx.Wiki().Appe().Usr_dlg().Note_many("", "", "image_map extending image over multiple lines; page=~{0} imageMap=~{1}", String_.new_u8(imap_ctx.Cur_page().Ttl().Full_txt()), String_.new_u8(imap_img_src));
 					int next_line = Bry_finder.Find_fwd(src, Byte_ascii.NewLine, pos);
 					if (next_line == Bry_finder.Not_found) next_line = src_end;
 					rv = next_line;

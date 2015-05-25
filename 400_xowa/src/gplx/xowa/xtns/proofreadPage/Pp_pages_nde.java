@@ -88,7 +88,7 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 		if (cfg_pages.Init_needed()) cfg_pages.Init(wiki.Ns_mgr());
 		ns_index_id = cfg_pages.Ns_index_id(); if (ns_index_id == Int_.MinValue) return Fail_msg("wiki does not have an Index ns");
 		ns_page_id  = cfg_pages.Ns_page_id();  if (ns_page_id  == Int_.MinValue) return Fail_msg("wiki does not have a Page ns");	// occurs when <pages> used in a wiki without a "Page:" ns; EX: de.w:Help:Buchfunktion/Feedback
-		index_ttl = Xoa_ttl.parse_(wiki, ns_index_id, index_ttl_bry); if (index_ttl == null) return Fail_args("index title is not valid: index={0}", String_.new_utf8_(index_ttl_bry));
+		index_ttl = Xoa_ttl.parse_(wiki, ns_index_id, index_ttl_bry); if (index_ttl == null) return Fail_args("index title is not valid: index={0}", String_.new_u8(index_ttl_bry));
 		ns_page = wiki.Ns_mgr().Ids_get_or_null(ns_page_id);
 		if (onlysection != null)
 			bgn_sect_bry = end_sect_bry = null;
@@ -119,7 +119,7 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 		if (header != null)
 			rv = Bld_wikitext_for_header(full_bfr, index_page, rv);
 		return rv;
-	}	private static final byte[] Toc_bry = Bry_.new_ascii_("toc");
+	}	private static final byte[] Toc_bry = Bry_.new_a7("toc");
 	private byte[] Make_lnki(Bry_bfr full_bfr, byte[] index_page_src, Xop_lnki_tkn lnki) {
 		byte[] caption = Get_caption(full_bfr, index_page_src, lnki);
 		full_bfr.Add(Xop_tkn_.Lnki_bgn);
@@ -140,28 +140,28 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 			rv = full_bfr.Xto_bry_and_clear();
 		}
 		catch (Exception e) {
-			wiki.Appe().Usr_dlg().Warn_many("", "", "failed to write caption: page=~{0} lnki=~{1} err=~{2}", String_.new_utf8_(ctx.Cur_page().Ttl().Full_db()), String_.new_utf8_mid_safe_(index_page_src, lnki.Src_bgn(), lnki.Src_end()), Err_.Message_gplx_brief(e));
+			wiki.Appe().Usr_dlg().Warn_many("", "", "failed to write caption: page=~{0} lnki=~{1} err=~{2}", String_.new_u8(ctx.Cur_page().Ttl().Full_db()), String_.new_u8(index_page_src, lnki.Src_bgn(), lnki.Src_end()), Err_.Message_gplx_brief(e));
 			rv = lnki.Ttl().Page_txt();
 		}
 		return rv;
 	}
 	private static final byte[] 
-	  Bry_tmpl			= Bry_.new_ascii_("{{:MediaWiki:Proofreadpage_header_template")
-	, Bry_value			= Bry_.new_ascii_("|value=")
-	, Bry_toc_cur		= Bry_.new_ascii_("|current=")
-	, Bry_toc_prv		= Bry_.new_ascii_("|prev=")
-	, Bry_toc_nxt		= Bry_.new_ascii_("|next=")
-	, Bry_page_bgn		= Bry_.new_ascii_("|from=")
-	, Bry_page_end		= Bry_.new_ascii_("|to=")
+	  Bry_tmpl			= Bry_.new_a7("{{:MediaWiki:Proofreadpage_header_template")
+	, Bry_value			= Bry_.new_a7("|value=")
+	, Bry_toc_cur		= Bry_.new_a7("|current=")
+	, Bry_toc_prv		= Bry_.new_a7("|prev=")
+	, Bry_toc_nxt		= Bry_.new_a7("|next=")
+	, Bry_page_bgn		= Bry_.new_a7("|from=")
+	, Bry_page_end		= Bry_.new_a7("|to=")
 	;
 	private byte[] Bld_wikitext_for_header(Bry_bfr full_bfr, Pp_index_page index_page, byte[] rv) {
-		ListAdp main_lnkis = index_page.Main_lnkis();
+		List_adp main_lnkis = index_page.Main_lnkis();
 		int main_lnkis_len = main_lnkis.Count();
 		byte[] index_page_src = index_page.Src();
 		if (main_lnkis_len > 0) {
 			Xoa_ttl page_ttl = ctx.Cur_page().Ttl();
 			for (int i = 0; i < main_lnkis_len; i++) {
-				Xop_lnki_tkn main_lnki = (Xop_lnki_tkn)main_lnkis.FetchAt(i);
+				Xop_lnki_tkn main_lnki = (Xop_lnki_tkn)main_lnkis.Get_at(i);
 				if (page_ttl.Eq_full_db(main_lnki.Ttl())) {
 					Xoae_page old_page = ctx.Cur_page();
 					wiki.Html_mgr().Html_wtr().Init_by_page(ctx, Xoh_wtr_ctx.Basic, index_page_src, ctx.Cur_page());	// HACK: should not reuse html_wtr, but should be safe to use during parse (not html_gen)
@@ -169,10 +169,10 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 						toc_cur = Make_lnki(full_bfr, index_page_src, main_lnki);
 					if (toc_prv == null		// do not set if "prev" is specified
 						&& i > 0)
-						toc_prv = Make_lnki(full_bfr, index_page_src, (Xop_lnki_tkn)main_lnkis.FetchAt(i - 1));
+						toc_prv = Make_lnki(full_bfr, index_page_src, (Xop_lnki_tkn)main_lnkis.Get_at(i - 1));
 					if (toc_nxt == null		// do not set if "next" is specified
 						&& i + 1 < main_lnkis_len)
-						toc_nxt = Make_lnki(full_bfr, index_page_src, (Xop_lnki_tkn)main_lnkis.FetchAt(i + 1));
+						toc_nxt = Make_lnki(full_bfr, index_page_src, (Xop_lnki_tkn)main_lnkis.Get_at(i + 1));
 					wiki.Html_mgr().Html_wtr().Init_by_page(ctx, Xoh_wtr_ctx.Basic, index_page_src, old_page);
 					break;
 				}
@@ -191,10 +191,10 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 			full_bfr.Add(Bry_page_bgn).Add_int_variable(bgn_page_int);	// |from=1"
 		if (end_page_int != -1)
 			full_bfr.Add(Bry_page_end).Add_int_variable(end_page_int);	// |to=3"
-		ListAdp invk_args  = index_page.Invk_args();
+		List_adp invk_args  = index_page.Invk_args();
 		int invk_args_len = invk_args.Count();
 		for (int i = 0; i < invk_args_len; i++) {
-			Pp_index_arg arg = (Pp_index_arg)invk_args.FetchAt(i);
+			Pp_index_arg arg = (Pp_index_arg)invk_args.Get_at(i);
 			full_bfr
 				.Add_byte_pipe()		// |
 				.Add(wiki.Lang().Case_mgr().Case_build_lower(arg.Key()))	// per MW, always lowercase key
@@ -208,7 +208,7 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 	}
 	private Xoa_ttl[] Get_ttls_from_xnde_args() {
 		if (!Chk_step()) return Ttls_null;
-		ListAdp list = ListAdp_.new_();
+		List_adp list = List_adp_.new_();
 		list = Get_ttls_from_xnde_args__include(list);	if (list == null) return Ttls_null;
 		list = Get_ttls_from_xnde_args__rng(list);		if (list == null) return Ttls_null;
 		list = Get_ttls_from_xnde_args__exclude(list);	if (list == null) return Ttls_null;
@@ -216,7 +216,7 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 			list.Sort();
 		return Get_ttls_from_xnde_args__ttls(list);
 	}
-	private ListAdp Get_ttls_from_xnde_args__include(ListAdp list) {
+	private List_adp Get_ttls_from_xnde_args__include(List_adp list) {
 		if (Bry_.Len_eq_0(include)) return list;	// include is blank; exit early;
 		int[] include_pages = Int_ary_.Parse_list_or(include, null);
 		if (include_pages == null) return list;	// ignore invalid include; DATE:2014-02-22
@@ -225,13 +225,13 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 			list.Add(Int_obj_val.new_(include_pages[i]));
 		return list;
 	}
-	private ListAdp Get_ttls_from_xnde_args__rng(ListAdp list) {
+	private List_adp Get_ttls_from_xnde_args__rng(List_adp list) {
 		if (Bry_.Len_eq_0(bgn_page_bry) && Bry_.Len_eq_0(end_page_bry)) return list;	// from and to are blank; exit early
 		bgn_page_int = 0;	// NOTE: default to 0 (1st page)
 		if (Bry_.Len_gt_0(bgn_page_bry)) {
 			num_parser.Parse(bgn_page_bry);
 			if (num_parser.Has_err()) {
-				Fail_args("pages node does not have a valid 'from': from={0}", String_.new_utf8_(bgn_page_bry));
+				Fail_args("pages node does not have a valid 'from': from={0}", String_.new_u8(bgn_page_bry));
 				return null;
 			}
 			else
@@ -243,7 +243,7 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 		else {
 			num_parser.Parse(end_page_bry);
 			if (num_parser.Has_err()) {
-				Fail_args("pages node does not have a valid 'to': to={0}", String_.new_utf8_(bgn_page_bry));
+				Fail_args("pages node does not have a valid 'to': to={0}", String_.new_u8(bgn_page_bry));
 				return null;
 			}
 			else
@@ -258,13 +258,13 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 		return list;
 	}
 	private int Get_max_page_idx(Xowe_wiki wiki, Xoa_ttl index_ttl) {
-		ListAdp rslt = ListAdp_.new_();
+		List_adp rslt = List_adp_.new_();
 		Int_obj_ref rslt_count = Int_obj_ref.zero_();
 		wiki.Db_mgr().Load_mgr().Load_ttls_for_all_pages(Cancelable_.Never, rslt, tmp_page, tmp_page, rslt_count, ns_page, index_ttl.Page_db(), Int_.MaxValue, 0, Int_.MaxValue, false, false);
 		int len = rslt_count.Val();
 		int page_leaf_max = 0;
 		for (int i = 0; i < len; i++) {
-			Xowd_page_itm page = (Xowd_page_itm)rslt.FetchAt(i);
+			Xowd_page_itm page = (Xowd_page_itm)rslt.Get_at(i);
 			Xoa_ttl page_ttl = Xoa_ttl.parse_(wiki, ns_page_id, page.Ttl_page_db());	if (page_ttl == null) continue;					// page_ttl is not valid; should never happen;
 			byte[] page_ttl_leaf = page_ttl.Leaf_txt();									if (page_ttl_leaf == null) continue;			// page is not leaf; should not happen
 			int page_leaf_val = Bry_.Xto_int_or(page_ttl_leaf, Int_.MinValue);			if (page_leaf_val == Int_.MinValue) continue;	// leaf is not int; ignore
@@ -272,33 +272,33 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 		}
 		return page_leaf_max;
 	}	private static Xowd_page_itm tmp_page = new Xowd_page_itm();	// tmp_page passed to Load_ttls_for_all_pages; values are never looked at, so use static instance
-	private ListAdp Get_ttls_from_xnde_args__exclude(ListAdp list) {
+	private List_adp Get_ttls_from_xnde_args__exclude(List_adp list) {
 		if (Bry_.Len_eq_0(exclude)) return list;	// exclude is blank; exit early;
 		int[] exclude_pages = Int_ary_.Parse_list_or(exclude, null);
 		if (exclude_pages == null) return list;	// ignore invalid exclude; DATE:2014-02-22
-		HashAdp exclude_pages_hash = HashAdp_.new_();
+		Hash_adp exclude_pages_hash = Hash_adp_.new_();
 		int exclude_pages_len = exclude_pages.length;
 		for (int i = 0; i < exclude_pages_len; i++) {
 			Int_obj_val exclude_page = Int_obj_val.new_(exclude_pages[i]);
 			if (!exclude_pages_hash.Has(exclude_page))
 				exclude_pages_hash.Add(exclude_page, exclude_page);
 		}
-		ListAdp new_list = ListAdp_.new_();
+		List_adp new_list = List_adp_.new_();
 		int list_len = list.Count();
 		for (int i = 0; i < list_len; i++) {
-			Int_obj_val page = (Int_obj_val)list.FetchAt(i);
+			Int_obj_val page = (Int_obj_val)list.Get_at(i);
 			if (exclude_pages_hash.Has(page)) continue;
 			new_list.Add(page);
 		}
 		return new_list;
 	}
-	private Xoa_ttl[] Get_ttls_from_xnde_args__ttls(ListAdp list) {
+	private Xoa_ttl[] Get_ttls_from_xnde_args__ttls(List_adp list) {
 		int list_len = list.Count(); if (list_len == 0) return Ttls_null; 
 		Xoa_ttl[] rv = new Xoa_ttl[(list_len / step_int) + ((list_len % step_int == 0) ? 0 : 1)];
 		int rv_idx = 0;
 		Bry_bfr ttl_bfr = app.Utl__bfr_mkr().Get_b512();
 		for (int i = 0; i < list_len; i += step_int) {
-			Int_obj_val page = (Int_obj_val)list.FetchAt(i);
+			Int_obj_val page = (Int_obj_val)list.Get_at(i);
 			ttl_bfr.Add(ns_page.Name_db_w_colon())		// EX: 'Page:'
 				.Add(index_ttl_bry)						// EX: 'File.djvu'
 				.Add_byte(Byte_ascii.Slash)				// EX: '/'
@@ -315,7 +315,7 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 		}
 		step_int = Bry_.Xto_int_or(step_bry, Int_.MinValue);
 		if (step_int < 1 || step_int > 1000) {
-			Fail_args("pages node does not have a valid 'step': step={0}", String_.new_utf8_(step_bry));
+			Fail_args("pages node does not have a valid 'step': step={0}", String_.new_u8(step_bry));
 			return false;
 		}
 		return true;
@@ -401,8 +401,8 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 	public static final Xoa_ttl[] Ttls_null = null;
 	private static final Number_parser num_parser = new Number_parser().Ignore_space_at_end_y_();	// ignore space at end; PAGE:en.s:1911_Encyclop�dia_Britannica/Boissier,_Marie_Louis_Antoine_Gaston DATE:2015-04-29
 	private String Fail_msg_suffix() {
-		String excerpt = Bry_fmtr.Escape_tilde(String_.new_utf8_(Bry_.Mid_by_len_safe(src, xnde_tkn.Src_bgn(), 32)));
-		return String_.Format(" ttl={0} src={1}", String_.new_utf8_(cur_page_ttl.Full_db()), excerpt);
+		String excerpt = Bry_fmtr.Escape_tilde(String_.new_u8(Bry_.Mid_by_len_safe(src, xnde_tkn.Src_bgn(), 32)));
+		return String_.Format(" ttl={0} src={1}", String_.new_u8(cur_page_ttl.Full_db()), excerpt);
 	}
 	private String Fail_msg_basic(String msg) {return msg + ";" + Fail_msg_suffix();}
 	private String Fail_msg_custom(String fmt, Object... args) {return String_.Format(fmt, args) + Fail_msg_suffix();}

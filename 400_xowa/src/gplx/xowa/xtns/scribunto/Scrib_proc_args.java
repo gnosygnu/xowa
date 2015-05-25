@@ -23,7 +23,7 @@ public class Scrib_proc_args {
 	public KeyVal[] Ary() {return ary;}
 	public boolean		Pull_bool(int i)				{Object rv = Get_or_fail(i); return Bool_.cast_(rv);}
 	public String	Pull_str(int i)					{Object rv = Get_or_fail(i); return String_.cast_(rv);}
-	public byte[]	Pull_bry(int i)					{Object rv = Get_or_fail(i); return Bry_.new_utf8_(String_.cast_(rv));}
+	public byte[]	Pull_bry(int i)					{Object rv = Get_or_fail(i); return Bry_.new_u8(String_.cast_(rv));}
 	public int		Pull_int(int i)					{Object rv = Get_or_fail(i);
 		try {return Int_.coerce_(rv);} // coerce to handle "1" and 1; will still fail if "abc" is passed
 		catch (Exception e) {
@@ -44,15 +44,15 @@ public class Scrib_proc_args {
 		}
 	}	
 	public String	Cast_str_or_null(int i)			{Object rv = Get_or_null(i); return rv == null ? null			: String_.cast_		(rv);}
-	public byte[]	Cast_bry_or_null(int i)			{Object rv = Get_or_null(i); return rv == null ? null			: Bry_.new_utf8_(String_.cast_	(rv));}	// NOTE: cast is deliberate; Scrib call checkType whi
-	public byte[]	Cast_bry_or_empty(int i)		{Object rv = Get_or_null(i); return rv == null ? Bry_.Empty : Bry_.new_utf8_(String_.cast_	(rv));}
-	public byte[]	Cast_bry_or(int i, byte[] or)	{Object rv = Get_or_null(i); return rv == null ? or				: Bry_.new_utf8_(String_.cast_	(rv));}
+	public byte[]	Cast_bry_or_null(int i)			{Object rv = Get_or_null(i); return rv == null ? null			: Bry_.new_u8(String_.cast_	(rv));}	// NOTE: cast is deliberate; Scrib call checkType whi
+	public byte[]	Cast_bry_or_empty(int i)		{Object rv = Get_or_null(i); return rv == null ? Bry_.Empty : Bry_.new_u8(String_.cast_	(rv));}
+	public byte[]	Cast_bry_or(int i, byte[] or)	{Object rv = Get_or_null(i); return rv == null ? or				: Bry_.new_u8(String_.cast_	(rv));}
 	public Object	Cast_obj_or_null(int i)			{return Get_or_null(i);}
 	public boolean		Cast_bool_or_y(int i)			{Object rv = Get_or_null(i); return rv == null ? Bool_.Y		: Bool_.cast_(rv);}
 	public boolean		Cast_bool_or_n(int i)			{Object rv = Get_or_null(i); return rv == null ? Bool_.N		: Bool_.cast_(rv);}
 	public int		Cast_int_or(int i, int or)		{Object rv = Get_or_null(i); return rv == null ? or				: Int_.coerce_(rv);}	// coerce to handle "1" and 1;
 	public String	Xstr_str_or_null(int i)			{Object rv = Get_or_null(i); return rv == null ? null			: Object_.Xto_str_loose_or(rv, null);}	// NOTE: Modules can throw exceptions in which return value is nothing; do not fail; return ""; EX: -logy; DATE:2013-10-14
-	public byte[]	Xstr_bry_or_null(int i)			{Object rv = Get_or_null(i); return rv == null ? null			: Bry_.new_utf8_(Object_.Xto_str_loose_or(rv, null));}
+	public byte[]	Xstr_bry_or_null(int i)			{Object rv = Get_or_null(i); return rv == null ? null			: Bry_.new_u8(Object_.Xto_str_loose_or(rv, null));}
 	public KeyVal[] Cast_kv_ary_or_null(int i)		{Object rv = Get_or_null(i); return rv == null ? null			: (KeyVal[])rv;}
 	public KeyVal[] Pull_kv_ary(int i) {
 		Object rv = Get_or_fail(i);
@@ -67,7 +67,7 @@ public class Scrib_proc_args {
 			byte[][] rv = new byte[rv_len][];
 			for (int i = 0; i < rv_len; i++) {
 				KeyVal itm = tbl[i];
-				rv[i] = Bry_.new_utf8_(String_.cast_(itm.Val()));
+				rv[i] = Bry_.new_u8(String_.cast_(itm.Val()));
 			}
 			return rv;
 		}
@@ -76,7 +76,7 @@ public class Scrib_proc_args {
 			byte[][] rv = new byte[rv_len][];			
 			for (int i = 0; i < rv_len; i++) {
 				KeyVal itm = ary[i + params_idx];
-				rv[i] = Bry_.new_utf8_(String_.cast_(itm.Val()));
+				rv[i] = Bry_.new_u8(String_.cast_(itm.Val()));
 			}
 			return rv;
 		}
@@ -86,7 +86,7 @@ public class Scrib_proc_args {
 		if (qry_args_obj == null) return Bry_.Empty;
 		Class<?> qry_args_cls = ClassAdp_.ClassOf_obj(qry_args_obj);
 		if		(qry_args_cls == String.class)
-			return Bry_.new_utf8_((String)qry_args_obj);
+			return Bry_.new_u8((String)qry_args_obj);
 		else if (qry_args_cls == KeyVal[].class) {
 			Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b128();
 			KeyVal[] kvs = (KeyVal[])qry_args_obj;
@@ -127,7 +127,7 @@ public class Scrib_proc_args {
 			for (int i = 0; i < v_len; i++) {
 				KeyVal kv = v[i];
 				int idx = Int_.cast_(kv.Key_as_obj());
-				ary[idx - ListAdp_.Base1] = kv;
+				ary[idx - List_adp_.Base1] = kv;
 			}
 		}
 	}

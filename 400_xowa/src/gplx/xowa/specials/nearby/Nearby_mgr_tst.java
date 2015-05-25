@@ -50,20 +50,20 @@ class Nearby_mgr_fxt {
 			tmp_bfr = Bry_bfr.new_();
 		}
 		fxt.Reset();
-		Io_mgr._.InitEngine_mem();
+		Io_mgr.I.InitEngine_mem();
 		nearby_mgr.Results_max_(1);
 		return this;
 	} 	private Xop_fxt fxt; Nearby_mgr nearby_mgr; Hash_adp_bry excluded; Bry_bfr tmp_bfr;
 	public void Init_page(String ttl, String text) {fxt.Init_page_create(ttl, text);}
 	public Nearby_mgr_fxt Init_results_max(int v) {nearby_mgr.Results_max_(v); return this;}
 	public void Test_find(String src, String trg, String... expd) {
-		ListAdp actl = nearby_mgr.Find_from_to(fxt.Wiki(), Bry_.new_ascii_(src), Bry_.new_ascii_(trg), excluded);
+		List_adp actl = nearby_mgr.Find_from_to(fxt.Wiki(), Bry_.new_a7(src), Bry_.new_a7(trg), excluded);
 		Tfds.Eq_ary(String_.SplitLines_nl(Xto_str(actl)), expd);
 	}
-	String Xto_str(ListAdp list) {
+	String Xto_str(List_adp list) {
 		int len = list.Count();
 		for (int i = 0; i < len; i++) {
-			Nearby_rslt rslt = (Nearby_rslt)list.FetchAt(i);
+			Nearby_rslt rslt = (Nearby_rslt)list.Get_at(i);
 			int ttls = rslt.Len();
 			if (i != 0) tmp_bfr.Add_byte_nl();
 			for (int j = 0; j < ttls; j++) {

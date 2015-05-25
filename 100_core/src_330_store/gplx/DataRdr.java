@@ -20,7 +20,7 @@ import gplx.core.strings.*;
 public interface DataRdr extends SrlMgr, RlsAble {
 	String NameOfNode(); String XtoStr();
 	Io_url Uri(); void Uri_set(Io_url s);
-	HashAdp EnvVars();
+	Hash_adp EnvVars();
 	boolean Parse(); void Parse_set(boolean v);
 
 	int FieldCount();

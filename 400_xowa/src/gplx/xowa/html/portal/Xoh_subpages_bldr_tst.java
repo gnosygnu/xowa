@@ -44,7 +44,7 @@ class Xoh_subpages_bldr_fxt {
 		this.subpages_bldr = new Xoh_subpages_bldr(app);
 	}
 	public void Test_bld(String ttl_str, String expd) {
-		byte[] actl = subpages_bldr.Bld(wiki.Ns_mgr(), Xoa_ttl.parse_(wiki, Bry_.new_utf8_(ttl_str)));
-		Tfds.Eq_str_lines(expd, String_.new_utf8_(actl));
+		byte[] actl = subpages_bldr.Bld(wiki.Ns_mgr(), Xoa_ttl.parse_(wiki, Bry_.new_u8(ttl_str)));
+		Tfds.Eq_str_lines(expd, String_.new_u8(actl));
 	}
 }

@@ -20,10 +20,10 @@ public class Err extends RuntimeException {
 	@Override public String getMessage() {return Message_gplx();}
 	public String Key() {return key;} public Err Key_(String v) {key = v; return this;} private String key = "";
 	public String Hdr() {return hdr;} public Err Hdr_(String v) {hdr = v; return this;} private String hdr = "";
-	public ListAdp Args() {return args;} ListAdp args = ListAdp_.new_();
+	public List_adp Args() {return args;} List_adp args = List_adp_.new_();
 	public Err Add(String k, Object o) {args.Add(KeyVal_.new_(k, o)); return this;}
 	@gplx.Internal protected ErrProcData Proc()		{return proc;} ErrProcData proc = ErrProcData.Null;
-	public OrderedHash CallStack()	{return callStack;} OrderedHash callStack = OrderedHash_.new_();
+	public Ordered_hash CallStack()	{return callStack;} Ordered_hash callStack = Ordered_hash_.new_();
 	public int CallLevel() {return callLevel;} public Err CallLevel_(int val) {callLevel = val; return this;} public Err CallLevel_1_() {return CallLevel_(1);} int callLevel;
 	public Err Inner() {return inner;} Err inner;
 	@gplx.Internal protected static Err hdr_(String hdr) {
@@ -35,7 +35,7 @@ public class Err extends RuntimeException {
 		Err rv = hdr_(hdr + ":" + Err_.Message_lang(thrown));	// add a better error description; DATE:2014-08-15
 		rv.inner = convert_(thrown);
 		for (int i = 0; i < rv.inner.callStack.Count(); i++) {
-			ErrProcData itm = (ErrProcData)rv.inner.callStack.FetchAt(i);
+			ErrProcData itm = (ErrProcData)rv.inner.callStack.Get_at(i);
 			rv.callStack.Add(itm.Raw(), itm);
 		}
 		return rv;

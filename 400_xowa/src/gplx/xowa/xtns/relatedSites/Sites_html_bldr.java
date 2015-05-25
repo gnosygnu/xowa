@@ -18,11 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.relatedSites; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.pages.skins.*;
 class Sites_xtn_skin_itm implements Xopg_xtn_skin_itm {
-	private ListAdp itms = ListAdp_.new_();
+	private List_adp itms = List_adp_.new_();
 	private Sites_html_bldr html_bldr;
 	public Sites_xtn_skin_itm(Sites_html_bldr html_bldr) {this.html_bldr = html_bldr;}
 	public byte Tid() {return Xopg_xtn_skin_itm_tid.Tid_sidebar;}
-	public byte[] Key() {return KEY;} public static final byte[] KEY = Bry_.new_utf8_("RelatedSites");
+	public byte[] Key() {return KEY;} public static final byte[] KEY = Bry_.new_u8("RelatedSites");
 	public void Add(Sites_regy_itm itm) {itms.Add(itm);}
 	public void Write(Bry_bfr bfr, Xoae_page page) {
 		html_bldr.Bld_all(bfr, page, itms);
@@ -31,11 +31,11 @@ class Sites_xtn_skin_itm implements Xopg_xtn_skin_itm {
 public class Sites_html_bldr implements Bry_fmtr_arg {
 	private Sites_xtn_mgr xtn_mgr;
 	private Bry_bfr tmp_ttl = Bry_bfr.reset_(255);
-	private ListAdp list; private int list_len;
+	private List_adp list; private int list_len;
 	private Hash_adp_bry hash = Hash_adp_bry.cs_();
 	public Sites_html_bldr(Sites_xtn_mgr xtn_mgr) {this.xtn_mgr = xtn_mgr;}
 	private Bry_fmtr url_fmtr = Bry_fmtr.keys_("title");
-	public void Bld_all(Bry_bfr bfr, Xoae_page page, ListAdp list) {
+	public void Bld_all(Bry_bfr bfr, Xoae_page page, List_adp list) {
 		this.list = list; this.list_len = list.Count();
 		hash.Clear();
 		fmtr_grp.Bld_bfr_many(bfr, xtn_mgr.Msg_related_sites(), this);
@@ -44,7 +44,7 @@ public class Sites_html_bldr implements Bry_fmtr_arg {
 		Xowe_wiki wiki = xtn_mgr.Wiki();
 		Xoh_href_parser href_parser = wiki.Appe().Href_parser();
 		for (int i = 0; i < list_len; ++i) {
-			Sites_regy_itm itm = (Sites_regy_itm)list.FetchAt(i);
+			Sites_regy_itm itm = (Sites_regy_itm)list.Get_at(i);
 			byte[] xwiki_itm_name = itm.Xwiki_itm().Domain_name();
 			if (hash.Has(xwiki_itm_name)) continue;
 			hash.Add(xwiki_itm_name, xwiki_itm_name);
@@ -55,7 +55,7 @@ public class Sites_html_bldr implements Bry_fmtr_arg {
 	private static byte[] Xto_href(Bry_bfr tmp_bfr, Bry_fmtr url_fmtr, Xoh_href_parser href_parser, Xowe_wiki wiki, Xow_xwiki_itm xwiki_itm, byte[] ttl_page_db) {
 		href_parser.Encoder().Encode(tmp_bfr, ttl_page_db);
 		byte[] rv = url_fmtr.Fmt_(xwiki_itm.Url_fmt()).Bld_bry_many(tmp_bfr, tmp_bfr.Xto_bry_and_clear());			
-		if (xwiki_itm.Domain_tid() != Xow_domain_.Tid_int_other)
+		if (xwiki_itm.Domain_tid() != Xow_domain_type_.Tid_other)
 			rv = Bry_.Add(Xoh_href_parser.Href_site_bry, rv);
 		return rv;
 	}

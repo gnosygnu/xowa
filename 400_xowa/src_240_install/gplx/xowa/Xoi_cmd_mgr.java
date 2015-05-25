@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.core.threads.*;
 public class Xoi_cmd_mgr implements GfoInvkAble {
-	ListAdp cmds = ListAdp_.new_();
+	List_adp cmds = List_adp_.new_();
 	public Xoi_cmd_mgr(Xoi_setup_mgr install_mgr) {this.app = install_mgr.App(); this.install_mgr = install_mgr;} private Xoae_app app; Xoi_setup_mgr install_mgr;
 	public Xoae_app App() {return app;}
 	public void Canceled_y_() {canceled = true;} private boolean canceled = false;
@@ -52,12 +52,12 @@ public class Xoi_cmd_mgr implements GfoInvkAble {
 		int cmds_len = cmds.Count();
 		if (cmds_len == 0) return;
 		for (int i = 0; i < cmds_len - 1; i++) {
-			Gfo_thread_cmd cur_cmd = (Gfo_thread_cmd)cmds.FetchAt(i);
-			Gfo_thread_cmd nxt_cmd = (Gfo_thread_cmd)cmds.FetchAt(i + 1);
+			Gfo_thread_cmd cur_cmd = (Gfo_thread_cmd)cmds.Get_at(i);
+			Gfo_thread_cmd nxt_cmd = (Gfo_thread_cmd)cmds.Get_at(i + 1);
 			cur_cmd.Cmd_ctor();
 			cur_cmd.Async_next_cmd_(nxt_cmd);
 		}
-		Gfo_thread_cmd cmd = (Gfo_thread_cmd)cmds.FetchAt(0);
+		Gfo_thread_cmd cmd = (Gfo_thread_cmd)cmds.Get_at(0);
 		cmds.Clear();
 		working = true;
 		this.Run_async(cmd);
@@ -90,7 +90,7 @@ public class Xoi_cmd_mgr implements GfoInvkAble {
 			if (dumpfile_cmd) {
 				if		(String_.Eq(cmd.Async_key(), Xoi_cmd_wiki_download.Key_wiki_download)) continue;	// skip download if wiki.dump_file
 				else if	(String_.Eq(cmd.Async_key(), Xoi_cmd_wiki_unzip.KEY_dump)) {
-					Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(Bry_.new_utf8_(wiki_key));
+					Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(Bry_.new_u8(wiki_key));
 					if (wiki.Import_cfg().Src_fil_xml()  != null) continue;	// skip unzip if xml exists
 				}
 				else if (String_.Eq(cmd.Async_key(), Xoi_cmd_wiki_import.KEY)) {

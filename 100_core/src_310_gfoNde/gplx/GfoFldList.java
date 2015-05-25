@@ -19,8 +19,8 @@ package gplx;
 public interface GfoFldList {
 	int Count();
 	boolean Has(String key);
-	int IndexOf(String key);
-	GfoFld FetchAt(int i);
+	int Idx_of(String key);
+	GfoFld Get_at(int i);
 	GfoFld FetchOrNull(String key);
 	GfoFldList Add(String key, ClassXtn c);
 	String XtoStr();

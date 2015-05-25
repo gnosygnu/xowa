@@ -21,13 +21,12 @@ import gplx.xowa.parsers.lnkis.redlinks.*;
 public class Xopg_hdump_data {
 	public byte[]					Body() {return body;} public void Body_(byte[] v) {body = v;} private byte[] body;
 	public Xopg_redlink_idx_list	Redlink_mgr() {return redlink_mgr;} private final Xopg_redlink_idx_list redlink_mgr = new Xopg_redlink_idx_list();
-	public ListAdp					Imgs() {return imgs;} private final ListAdp imgs = ListAdp_.new_();
+	public List_adp					Imgs() {return imgs;} private final List_adp imgs = List_adp_.new_();
 	public void						Imgs_add(Xohd_data_itm itm) {imgs.Add(itm);}
-	public void						Imgs_add_img(Xohd_data_itm__base img, Xof_xfer_itm xfer, int tid) {
+	public void						Imgs_add_img(Xohd_data_itm__base img, Xof_file_itm xfer, int tid) {
 		img.Data_init_base
-		( xfer.Lnki_ttl(), xfer.Lnki_ext().Id(), xfer.Lnki_type(), xfer.Lnki_w(), xfer.Lnki_h(), xfer.Lnki_upright()
-		, xfer.Lnki_time(), xfer.Lnki_page()
-		, xfer.Trg_repo_idx(), xfer.Img_is_orig(), xfer.File_w()
+		( xfer.Lnki_ttl(), xfer.Lnki_type(), xfer.Lnki_upright(), xfer.Lnki_w(), xfer.Lnki_h(), xfer.Lnki_time(), xfer.Lnki_page()
+		, xfer.Orig_repo_id(), xfer.Orig_ext().Id(), xfer.File_is_orig(), xfer.File_w()
 		, xfer.Html_uid(), xfer.Html_w(), xfer.Html_h()
 		);
 		imgs.Add(img);

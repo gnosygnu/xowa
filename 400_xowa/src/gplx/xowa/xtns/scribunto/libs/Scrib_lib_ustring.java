@@ -53,7 +53,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 		int bgn_char_idx	= args.Cast_int_or(2, 1);
 		boolean plain			= args.Cast_bool_or_n(3);
 		synchronized (surrogate_utl) {
-			byte[] text_bry = Bry_.new_utf8_(text_str); int text_bry_len = text_bry.length;
+			byte[] text_bry = Bry_.new_u8(text_str); int text_bry_len = text_bry.length;
 			bgn_char_idx = Bgn_adjust(text_str, bgn_char_idx);
 			int bgn_adj = surrogate_utl.Count_surrogates__char_idx(text_bry, text_bry_len, 0, bgn_char_idx);		// NOTE: convert from lua / php charidx to java regex codepoint; PAGE:zh.w:南北鐵路 (越南) DATE:2014-08-27
 			int bgn_codepoint_idx = bgn_char_idx + bgn_adj;
@@ -68,12 +68,12 @@ public class Scrib_lib_ustring implements Scrib_lib {
 					: rslt.Init_ary_empty()
 					;
 			}
-			regx = regx_converter.Parse(Bry_.new_utf8_(regx), Scrib_regx_converter.Anchor_G);
+			regx = regx_converter.Parse(Bry_.new_u8(regx), Scrib_regx_converter.Anchor_G);
 			RegxAdp regx_adp = Scrib_lib_ustring.RegxAdp_new_(core.Ctx(), regx);
 			RegxMatch[] regx_rslts = regx_adp.Match_all(text_str, bgn_codepoint_idx);	// NOTE: MW calculates an offset to handle mb strings. however, java's regex always takes offset in chars (not bytes like PHP preg_match); DATE:2014-03-04
 			int len = regx_rslts.length;
 			if (len == 0) return rslt.Init_ary_empty();
-			ListAdp tmp_list = ListAdp_.new_();
+			List_adp tmp_list = List_adp_.new_();
 			RegxMatch match = regx_rslts[0];					// NOTE: take only 1st result; DATE:2014-08-27
 			int match_find_bgn_codepoint = match.Find_bgn();	// NOTE: java regex returns results in codepoint; PAGE:zh.w:南北鐵路 (越南) DATE:2014-08-27
 			int match_find_bgn_adj = -surrogate_utl.Count_surrogates__codepoint_idx1(text_bry, text_bry_len, bgn_byte_pos, match_find_bgn_codepoint - bgn_codepoint_idx); // NOTE: convert from java regex codepoint to lua / php char_idx; PAGE:zh.w:南北鐵路 (越南) DATE:2014-08-27
@@ -96,7 +96,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 	}
 	public boolean Match(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		String text = args.Xstr_str_or_null(0);		// Module can pass raw ints; PAGE:en.w:Budget_of_the_European_Union; DATE:2015-01-22
-		if (text == null) return rslt.Init_many_list(ListAdp_.Null); // if no text is passed, do not fail; return empty; EX:d:changed; DATE:2014-02-06 
+		if (text == null) return rslt.Init_many_list(List_adp_.Noop); // if no text is passed, do not fail; return empty; EX:d:changed; DATE:2014-02-06 
 		String regx = regx_converter.Parse(args.Cast_bry_or_null(1), Scrib_regx_converter.Anchor_G);
 		int bgn = args.Cast_int_or(2, 1);
 		bgn = Bgn_adjust(text, bgn);
@@ -104,7 +104,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 		RegxMatch[] regx_rslts = regx_adp.Match_all(text, bgn);
 		int len = regx_rslts.length;
 		if (len == 0) return rslt.Init_null();	// return null if no matches found; EX:w:Mount_Gambier_(volcano); DATE:2014-04-02; confirmed with en.d:民; DATE:2015-01-30
-		ListAdp tmp_list = ListAdp_.new_();
+		List_adp tmp_list = List_adp_.new_();
 		for (int i = 0; i < len; i++) {
 			RegxMatch match = regx_rslts[i];
 			AddCapturesFromMatch(tmp_list, match, text, regx_converter.Capt_ary(), true);
@@ -128,11 +128,11 @@ public class Scrib_lib_ustring implements Scrib_lib {
 		int len = regx_rslts.length;
 		if (len == 0) return rslt.Init_many_objs(pos, KeyVal_.Ary_empty);
 		RegxMatch match = regx_rslts[0];	// NOTE: take only 1st result
-		ListAdp tmp_list = ListAdp_.new_();
+		List_adp tmp_list = List_adp_.new_();
 		AddCapturesFromMatch(tmp_list, match, text, capt, true);	// NOTE: was incorrectly set as false; DATE:2014-04-23
 		return rslt.Init_many_objs(match.Find_end(), Scrib_kv_utl_.base1_list_(tmp_list));
 	}
-	private void AddCapturesFromMatch(ListAdp tmp_list, RegxMatch rslt, String text, KeyVal[] capts, boolean op_is_match) {// NOTE: this matches behavior in UstringLibrary.php!addCapturesFromMatch
+	private void AddCapturesFromMatch(List_adp tmp_list, RegxMatch rslt, String text, KeyVal[] capts, boolean op_is_match) {// NOTE: this matches behavior in UstringLibrary.php!addCapturesFromMatch
 		RegxGroup[] grps = rslt.Groups();
 		int grps_len = grps.length;
 		int capts_len = capts == null ? 0 : capts.length;
@@ -154,7 +154,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 	public static RegxAdp RegxAdp_new_(Xop_ctx ctx, String regx) {
 		RegxAdp rv = RegxAdp_.new_(regx);
 		if (rv.Pattern_is_invalid()) {
-			ctx.App().Usr_dlg().Warn_many("", "", "regx is invalid: regx=~{0} page=~{1}", regx, String_.new_utf8_(ctx.Cur_page().Ttl().Page_db()));
+			ctx.App().Usr_dlg().Warn_many("", "", "regx is invalid: regx=~{0} page=~{1}", regx, String_.new_u8(ctx.Cur_page().Ttl().Page_db()));
 		}
 		return rv;
 	}
@@ -165,7 +165,7 @@ class Scrib_lib_ustring_gsub_mgr {
 	private Scrib_regx_converter regx_converter;
 	public Scrib_lib_ustring_gsub_mgr(Scrib_core core, Scrib_regx_converter regx_converter) {this.core = core; this.regx_converter = regx_converter;} private Scrib_core core; 
 	private byte tmp_repl_tid = Repl_tid_null; private byte[] tmp_repl_bry = null;
-	private HashAdp repl_hash = null; private Scrib_lua_proc repl_func = null;
+	private Hash_adp repl_hash = null; private Scrib_lua_proc repl_func = null;
 	private int repl_count = 0;
 	public boolean Exec(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		Object text_obj = args.Cast_obj_or_null(0);
@@ -174,7 +174,7 @@ class Scrib_lib_ustring_gsub_mgr {
 		String regx = args.Xstr_str_or_null(1);				// NOTE: @pattern sometimes int; PAGE:en.d:λύω; DATE:2014-09-02
 		if (args.Len() == 2) return rslt.Init_obj(text);	// if no replace arg, return self; PAGE:en.d:'orse; DATE:2013-10-13
 		Object repl_obj = args.Cast_obj_or_null(2);
-		regx = regx_converter.Parse(Bry_.new_utf8_(regx), Scrib_regx_converter.Anchor_pow);
+		regx = regx_converter.Parse(Bry_.new_u8(regx), Scrib_regx_converter.Anchor_pow);
 		int limit = args.Cast_int_or(3, -1);
 		repl_count = 0;
 		Identify_repl(repl_obj);
@@ -185,24 +185,24 @@ class Scrib_lib_ustring_gsub_mgr {
 		Class<?> repl_type = repl_obj.getClass();
 		if		(Object_.Eq(repl_type, String_.Cls_ref_type)) {
 			tmp_repl_tid = Repl_tid_string;
-			tmp_repl_bry = Bry_.new_utf8_((String)repl_obj);
+			tmp_repl_bry = Bry_.new_u8((String)repl_obj);
 		}
 		else if	(Object_.Eq(repl_type, Int_.Cls_ref_type)) {	// NOTE:@replace sometimes int; PAGE:en.d:λύω; DATE:2014-09-02
 			tmp_repl_tid = Repl_tid_string;
-			tmp_repl_bry = Bry_.new_utf8_(Int_.Xto_str(Int_.cast_(repl_obj)));
+			tmp_repl_bry = Bry_.new_u8(Int_.Xto_str(Int_.cast_(repl_obj)));
 		}
 		else if	(Object_.Eq(repl_type, KeyVal[].class)) {
 			tmp_repl_tid = Repl_tid_table;
 			KeyVal[] repl_tbl = (KeyVal[])repl_obj;
 			if (repl_hash == null) 
-				repl_hash = HashAdp_.new_();
+				repl_hash = Hash_adp_.new_();
 			else
 				repl_hash.Clear();
 			int repl_tbl_len = repl_tbl.length;
 			for (int i = 0; i < repl_tbl_len; i++) {
 				KeyVal repl_itm = repl_tbl[i];
 				String repl_itm_val = repl_itm.Val_to_str_or_empty();
-				repl_hash.Add(repl_itm.Key(), Bry_.new_utf8_(repl_itm_val));
+				repl_hash.Add(repl_itm.Key(), Bry_.new_u8(repl_itm_val));
 			}
 		}
 		else if	(Object_.Eq(repl_type, Scrib_lua_proc.class)) {
@@ -249,7 +249,7 @@ class Scrib_lib_ustring_gsub_mgr {
 								switch (b) {
 									case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
 									case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-										int idx = b - Byte_ascii.Num_0 - ListAdp_.Base1;
+										int idx = b - Byte_ascii.Num_0 - List_adp_.Base1;
 										if (idx < match.Groups().length) {	// retrieve numbered capture; TODO: support more than 9 captures
 											RegxGroup grp = match.Groups()[idx];
 											tmp_bfr.Add_str(String_.Mid(text, grp.Bgn(), grp.End()));	// NOTE: grp.Bgn() / .End() is for String pos (bry pos will fail for utf8 strings)
@@ -289,7 +289,7 @@ class Scrib_lib_ustring_gsub_mgr {
 					match_end = grp.End();
 				}
 				String find_str = String_.Mid(text, match_bgn, match_end);	// NOTE: rslt.Bgn() / .End() is for String pos (bry pos will fail for utf8 strings)
-				Object actl_repl_obj = repl_hash.Fetch(find_str);
+				Object actl_repl_obj = repl_hash.Get_by(find_str);
 				if (actl_repl_obj == null)			// match found, but no replacement specified; EX:"abc", "[ab]", "a:A"; "b" in regex but not in tbl; EX:d:DVD; DATE:2014-03-31
 					tmp_bfr.Add_str(find_str);
 				else

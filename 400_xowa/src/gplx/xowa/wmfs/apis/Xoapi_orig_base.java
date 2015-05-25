@@ -27,7 +27,7 @@ public abstract class Xoapi_orig_base {
 			Xof_repo_pair repo_pair = repos[i];
 			if (Api_query_size_exec(rv, download_wkr, ttl, width, height, usr_dlg, repo_pair.Wiki_domain())) return true;
 		}
-		usr_dlg.Warn_many(Xoapi_orig_wmf.GRP_KEY, "download_failed", "download_failed: ~{0}", String_.new_utf8_(ttl));
+		usr_dlg.Warn_many(Xoapi_orig_wmf.GRP_KEY, "download_failed", "download_failed: ~{0}", String_.new_u8(ttl));
 		return false;
 	}
 	public abstract boolean Api_query_size_exec(Xoapi_orig_rslts rv, Xof_download_wkr download_wkr, byte[] ttl, int width, int height, Gfo_usr_dlg usr_dlg, byte[] repo_wiki_key);

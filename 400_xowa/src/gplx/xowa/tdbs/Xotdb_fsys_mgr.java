@@ -51,7 +51,7 @@ public class Xotdb_fsys_mgr {
 		Scan_dirs_ns(ns_dir, ns_mgr);
 	}
 	private static void Scan_dirs_zip(Xotdb_fsys_mgr fsys_mgr, byte id) {
-		Io_url[] dirs = Io_mgr._.QueryDir_args(fsys_mgr.Ns_dir().GenSubDir_nest("000")).FilPath_("*page*").DirOnly_().Recur_(false).ExecAsUrlAry();
+		Io_url[] dirs = Io_mgr.I.QueryDir_args(fsys_mgr.Ns_dir().GenSubDir_nest("000")).FilPath_("*page*").DirOnly_().Recur_(false).ExecAsUrlAry();
 		int len = dirs.length;
 		byte tid = gplx.ios.Io_stream_.Tid_raw;	// needed for Xoa_xowa_exec_tst
 		for (int i = 0; i < len; i++) {
@@ -64,10 +64,10 @@ public class Xotdb_fsys_mgr {
 		}
 		fsys_mgr.Tdb_dir_regy()[id].Ext_tid_(tid);
 	}
-	private static HashAdp Scan_dirs_ns(Io_url ns_dir, Xow_ns_mgr ns_mgr) {
-		Io_url[] ns_dirs = Io_mgr._.QueryDir_args(ns_dir).Recur_(false).DirOnly_().ExecAsUrlAry();
+	private static Hash_adp Scan_dirs_ns(Io_url ns_dir, Xow_ns_mgr ns_mgr) {
+		Io_url[] ns_dirs = Io_mgr.I.QueryDir_args(ns_dir).Recur_(false).DirOnly_().ExecAsUrlAry();
 		int len = ns_dirs.length;
-		HashAdp rv = HashAdp_.new_();
+		Hash_adp rv = Hash_adp_.new_();
 		for (int i = 0; i < len; i++) {
 			int ns_int = Int_.parse_or_(ns_dirs[i].NameOnly(), Int_.MinValue); if (ns_int == Int_.MinValue) continue; 
 			Xow_ns ns = ns_mgr.Ids_get_or_null(ns_int); if (ns == null) continue;

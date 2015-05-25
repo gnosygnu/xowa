@@ -58,6 +58,6 @@ public class z011_IntObjHash_tst {
 		tst_Fetch(17, null);	// works
 		tst_Fetch(16, null);	// used to fail
 	}
-	void tst_Fetch(int key, Object expd) {Tfds.Eq(expd, hash.Fetch(key));}
+	void tst_Fetch(int key, Object expd) {Tfds.Eq(expd, hash.Get_by(key));}
 	void tst_Count(int expd) {Tfds.Eq(expd, hash.Count());}
 }

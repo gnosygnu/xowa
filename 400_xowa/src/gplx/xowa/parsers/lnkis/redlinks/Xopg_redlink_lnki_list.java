@@ -23,11 +23,11 @@ public class Xopg_redlink_lnki_list {
 		this.disabled = ttl_is_module;
 	}
 	public boolean		Disabled() {return disabled;} private final boolean disabled;
-	public ListAdp	Lnki_list() {return lnki_list;} private final ListAdp lnki_list = ListAdp_.new_();
+	public List_adp	Lnki_list() {return lnki_list;} private final List_adp lnki_list = List_adp_.new_();
 	public int		Thread_id() {return thread_id;} private int thread_id = 1;
 	public void		Clear() {
 		if (disabled) return;
-		lnki_idx = 1;											// NOTE: must start at 1; html_wtr checks for > 0
+		lnki_idx = 0;											// NOTE: must start at 0, so that ++lnki_idx is > 0; html_wtr checks for > 0
 		lnki_list.Clear();
 		thread_id++;
 	}
@@ -35,7 +35,7 @@ public class Xopg_redlink_lnki_list {
 		if (disabled) return;
 		Xoa_ttl ttl = lnki.Ttl(); if (ttl == null) return;		// occurs for invalid links
 		Xow_ns ns = ttl.Ns();
-		lnki.Html_id_(lnki_idx);								// NOTE: set html_id in order html to print out "id='xowa_lnki_1'; want to print out id for consistency's sake, even if these links won't be check for redlinks; DATE:2015-05-07
+		lnki.Html_uid_(++lnki_idx);								// NOTE: set html_id in order html to print out "id='xowa_lnki_1'; want to print out id for consistency's sake, even if these links won't be check for redlinks; DATE:2015-05-07
 		if (	ns.Id_file_or_media()							// ignore files which will usually not be in local wiki (most are in commons), and whose html is built up separately
 			||	(ns.Id_ctg() && !ttl.ForceLiteralLink())		// ignore ctgs which have their own html builder, unless it is literal; EX: [[:Category:A]]; DATE:2014-02-24
 			||	ns.Id_special()									// ignore special, especially Search; EX: Special:Search/Earth
@@ -44,7 +44,6 @@ public class Xopg_redlink_lnki_list {
 			)
 			return;				
 		lnki_list.Add(lnki);
-		++lnki_idx;
 	}
 	public static final String Lnki_id_prefix = "xowa_lnki_";
 	public static final int Lnki_id_prefix_len = String_.Len(Lnki_id_prefix);

@@ -134,7 +134,7 @@ class Xob_xfer_temp_itm_fxt {
 	public Xob_xfer_temp_itm_fxt Init_rdr_image() {
 		GfoFldList flds = GfoFldList_.str_(Flds);
 		nde = GfoNde_.vals_(flds, Object_.Ary
-		( Xof_ext_.Id_png, 1, 1, Xof_repo_itm.Repo_remote
+		( Xof_ext_.Id_png, 1, 1, Xof_repo_itm_.Repo_remote
 		, "A.png", Xof_ext_.Id_png, "A.png", Xop_lnki_type.Id_thumb, Xob_lnki_src_tid.Tid_file
 		, 220, 200, 1, 2, 440, 400, 3
 		, Xop_lnki_tkn.Upright_null, Xof_lnki_time.Null, Xof_lnki_page.Null

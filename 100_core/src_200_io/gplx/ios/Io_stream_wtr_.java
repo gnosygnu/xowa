@@ -29,7 +29,7 @@ public class Io_stream_wtr_ {
 		else 											return gplx.ios.Io_stream_wtr_.file_(url);
 	}
 	public static Io_stream_wtr new_by_mem(Bry_bfr bfr, byte tid) {
-		Io_stream_wtr wtr = new_by_tid_(tid).Url_(Io_url_.Null);
+		Io_stream_wtr wtr = new_by_tid_(tid).Url_(Io_url_.Empty);
 		wtr.Trg_bfr_(bfr);
 		return wtr;
 	}
@@ -51,17 +51,23 @@ public class Io_stream_wtr_ {
 		}
 		finally {wtr.Rls();}
 	}
-	public static void Save_rdr(Io_url url, Io_stream_rdr rdr) {
+	public static void Save_rdr(Io_url url, Io_stream_rdr rdr, Io_download_fmt download_progress) {
 		byte[] bry = new byte[4096];
 		Io_stream_wtr wtr = new_by_url_(url);
 		try {
 			wtr.Open();
+			if (download_progress != Io_download_fmt.Null)
+				download_progress.Bgn(rdr.Len());
 			while (true) {
 				int read = rdr.Read(bry, 0, 4096);
 				if (read < gplx.ios.Io_stream_rdr_.Read_done_compare) break; 
+				if (download_progress != Io_download_fmt.Null)
+					download_progress.Prog(read);
 				wtr.Write(bry, 0, read);
 			}
 			wtr.Flush();
+			if (download_progress != Io_download_fmt.Null)
+				download_progress.Term();
 		}
 		finally {wtr.Rls(); rdr.Rls();}
 	}
@@ -70,11 +76,11 @@ abstract class Io_stream_wtr_base implements Io_stream_wtr {
 	java.io.OutputStream zip_stream;
 	public Io_url Url() {return url;} public Io_stream_wtr Url_(Io_url v) {url = v; trg_bfr = null; return this;} Io_url url;
 	public void Trg_bfr_(Bry_bfr v) {trg_bfr = v;} Bry_bfr trg_bfr; java.io.ByteArrayOutputStream mem_stream;
-	public byte[] Xto_ary_and_clear() {return trg_bfr.Xto_bry_and_clear();}
-	public Io_stream_wtr Open() {
+	public byte[] To_ary_and_clear() {return trg_bfr.Xto_bry_and_clear();}
+	@SuppressWarnings("resource") public Io_stream_wtr Open() {
 		java.io.OutputStream bry_stream = null;
 		if (trg_bfr == null) {
-			if (!Io_mgr._.ExistsFil(url)) Io_mgr._.SaveFilStr(url, "");			
+			if (!Io_mgr.I.ExistsFil(url)) Io_mgr.I.SaveFilStr(url, "");			
 			try {bry_stream = new java.io.FileOutputStream(url.Raw());}
 			catch (Exception exc) {throw Err_.new_fmt_("open failed: url={0}", url.Raw());}		
 		}
@@ -122,13 +128,13 @@ class Io_stream_wtr_gzip extends Io_stream_wtr_base {
 class Io_stream_wtr_zip implements Io_stream_wtr {
 	private  java.util.zip.ZipOutputStream zip_stream;	
 	@Override public byte Tid() {return Io_stream_.Tid_zip;}
-	public Io_url Url() {return url;} public Io_stream_wtr Url_(Io_url v) {url = v; trg_bfr = null; return this;} private Io_url url = Io_url_.Null;
+	public Io_url Url() {return url;} public Io_stream_wtr Url_(Io_url v) {url = v; trg_bfr = null; return this;} private Io_url url = Io_url_.Empty;
 	public void Trg_bfr_(Bry_bfr v) {trg_bfr = v;} private Bry_bfr trg_bfr; private java.io.ByteArrayOutputStream mem_stream;
 	@SuppressWarnings("resource") // rely on zip_stream to close bry_stream 
 	public Io_stream_wtr Open() {
 		java.io.OutputStream bry_stream;
 		if (trg_bfr == null) {
-			if (!Io_mgr._.ExistsFil(url)) Io_mgr._.SaveFilStr(url, "");	// create file if it doesn't exist
+			if (!Io_mgr.I.ExistsFil(url)) Io_mgr.I.SaveFilStr(url, "");	// create file if it doesn't exist
 			try {bry_stream = new java.io.FileOutputStream(url.Xto_api());}
 			catch (Exception exc) {throw Err_.new_fmt_("open failed: url={0}", url.Raw());}
 		}
@@ -163,7 +169,7 @@ class Io_stream_wtr_zip implements Io_stream_wtr {
 		}
 		catch (Exception e) {throw Err_.new_fmt_("close failed: url={0}", url.Raw());}
 	}
-	public byte[] Xto_ary_and_clear() {
+	public byte[] To_ary_and_clear() {
 		byte[] rv = trg_bfr.Xto_bry_and_clear();
 		this.Rls();
 		return rv;
@@ -177,7 +183,7 @@ class Io_stream_wtr_file implements Io_stream_wtr {
 	public Io_stream_wtr Open() {
 		try {
 			if (trg_bfr == null)
-				bry_stream = Io_mgr._.OpenStreamWrite(url);
+				bry_stream = Io_mgr.I.OpenStreamWrite(url);
 		}
 		catch (Exception exc) {throw Err_.new_fmt_("open failed: url={0}", url.Raw());}
 		return this;
@@ -190,8 +196,8 @@ class Io_stream_wtr_file implements Io_stream_wtr {
 		else
 			trg_bfr.Add_mid(bry, bgn, bgn + len);
 	}
-	public byte[] Xto_ary_and_clear() {		 
-		return trg_bfr == null ? Io_mgr._.LoadFilBry(url) : trg_bfr.Xto_bry_and_clear();
+	public byte[] To_ary_and_clear() {		 
+		return trg_bfr == null ? Io_mgr.I.LoadFilBry(url) : trg_bfr.Xto_bry_and_clear();
 	}
 	public void Flush() {
 		if (trg_bfr == null)

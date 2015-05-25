@@ -34,15 +34,15 @@ public class Wdata_pf_property_fmt {
 	public void Init() {
 		byte[] comma = new byte[] {Byte_ascii.Comma};
 		separator = comma;
-		value_template = Bry_.new_ascii_("{{{value}}} {{{qualifiers}}}{{{references}}}");
-		qualifier_template = Bry_.new_ascii_("{{{1}}} {{{2}}}");
+		value_template = Bry_.new_a7("{{{value}}} {{{qualifiers}}}{{{references}}}");
+		qualifier_template = Bry_.new_a7("{{{1}}} {{{2}}}");
 		qualifier_separator = comma;
-		qualifiers_wrapper = Bry_.new_ascii_("{{{1}}}");
+		qualifiers_wrapper = Bry_.new_a7("{{{1}}}");
 		qualifiers_template = Bry_.Empty;
 		qualifiers_value_separator = comma;
-		reference_keyvalue_template = Bry_.new_ascii_("{{{1}}} {{{2}}}");
-		reference_wrapper = Bry_.new_ascii_("<ref>{{{1}}}</ref>");
-		references_wrapper = Bry_.new_ascii_("{{{1}}}");
+		reference_keyvalue_template = Bry_.new_a7("{{{1}}} {{{2}}}");
+		reference_wrapper = Bry_.new_a7("<ref>{{{1}}}</ref>");
+		references_wrapper = Bry_.new_a7("{{{1}}}");
 		reference_keyvalue_separator = comma;
 		reference_template = Bry_.Empty;
 		reference_value_separator = comma;

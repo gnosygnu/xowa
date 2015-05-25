@@ -22,7 +22,7 @@ public class DataWtr_ {
 }
 class DataWtr_null implements DataWtr {
 	public boolean Type_rdr() {return false;}
-	public HashAdp EnvVars() {return envVars;} HashAdp envVars = HashAdp_.new_();
+	public Hash_adp EnvVars() {return envVars;} Hash_adp envVars = Hash_adp_.new_();
 	public void InitWtr(String key, Object val) {}
 	public void WriteTableBgn(String name, GfoFldList fields) {}
 	public void WriteNodeBgn(String nodeName) {}
@@ -42,7 +42,7 @@ class DataWtr_null implements DataWtr {
 	public DecimalAdp SrlDecimalOr(String key, DecimalAdp or) {return or;}
 	public double SrlDoubleOr(String key, double or) {return or;}
 	public Object SrlObjOr(String key, Object or) {return or;}
-	public void SrlList(String key, ListAdp list, SrlObj proto, String itmKey) {}
+	public void SrlList(String key, List_adp list, SrlObj proto, String itmKey) {}
 	public void TypeKey_(String v) {}
 	public SrlMgr SrlMgr_new(Object o) {return this;}
 }

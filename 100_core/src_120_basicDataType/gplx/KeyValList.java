@@ -18,15 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 import gplx.core.strings.*;
 public class KeyValList {//20101217
-	public int Count() {return list.Count();} ListAdp list = ListAdp_.new_();
+	public int Count() {return list.Count();} List_adp list = List_adp_.new_();
 	public void Clear() {list.Clear();}
-	public KeyVal GetAt(int i) {return (KeyVal)list.FetchAt(i);}
+	public KeyVal GetAt(int i) {return (KeyVal)list.Get_at(i);}
 	public KeyValList Add(String key, Object val) {list.Add(KeyVal_.new_(key, val)); return this;}
-	public KeyVal[] Xto_bry() {return (KeyVal[])list.Xto_ary(KeyVal.class);}
+	public KeyVal[] Xto_bry() {return (KeyVal[])list.To_ary(KeyVal.class);}
 	public String XtoStr() {
 		String_bldr sb = String_bldr_.new_();
 		for (int i = 0; i < list.Count(); i++) {
-			KeyVal kv = (KeyVal)list.FetchAt(i);
+			KeyVal kv = (KeyVal)list.Get_at(i);
 			sb.Add_spr_unless_first(kv.Key(), " ", i);
 			sb.Add("=").Add(kv.Val_to_str_or_empty());
 		}

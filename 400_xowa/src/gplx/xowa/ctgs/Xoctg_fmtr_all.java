@@ -138,17 +138,17 @@ class Xoctg_fmtr_all {
 		html_nav.Bld_bfr(bfr, nav_href, nav_ttl, nav_text);
 	}
 	public static final byte[]
-		Url_arg_from		= Bry_.new_ascii_("from")
-	,	Url_arg_until 		= Bry_.new_ascii_("until")
-	,	Url_arg_subc_bgn 	= Bry_.new_ascii_("subcatfrom")
-	,	Url_arg_subc_end	= Bry_.new_ascii_("subcatuntil")
-	,	Url_arg_page_bgn 	= Bry_.new_ascii_("pagefrom")
-	,	Url_arg_page_end 	= Bry_.new_ascii_("pageuntil")
-	,	Url_arg_file_bgn 	= Bry_.new_ascii_("filefrom")
-	,	Url_arg_file_end	= Bry_.new_ascii_("fileuntil")
-	,	Div_id_subc			= Bry_.new_ascii_("mw-subcategories")
-	,	Div_id_page			= Bry_.new_ascii_("mw-pages")
-	,	Div_id_file			= Bry_.new_ascii_("mw-category-media")
+		Url_arg_from		= Bry_.new_a7("from")
+	,	Url_arg_until 		= Bry_.new_a7("until")
+	,	Url_arg_subc_bgn 	= Bry_.new_a7("subcatfrom")
+	,	Url_arg_subc_end	= Bry_.new_a7("subcatuntil")
+	,	Url_arg_page_bgn 	= Bry_.new_a7("pagefrom")
+	,	Url_arg_page_end 	= Bry_.new_a7("pageuntil")
+	,	Url_arg_file_bgn 	= Bry_.new_a7("filefrom")
+	,	Url_arg_file_end	= Bry_.new_a7("fileuntil")
+	,	Div_id_subc			= Bry_.new_a7("mw-subcategories")
+	,	Div_id_page			= Bry_.new_a7("mw-pages")
+	,	Div_id_file			= Bry_.new_a7("mw-category-media")
 	;
 }
 interface Xoctg_fmtr_itm extends Bry_fmtr_arg {

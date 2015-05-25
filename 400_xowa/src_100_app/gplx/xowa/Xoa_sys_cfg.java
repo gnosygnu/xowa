@@ -25,8 +25,8 @@ public class Xoa_sys_cfg implements GfoInvkAble {
 		lang_key = Xol_lang_itm_.Get_by_key_or_en(v).Key();
 		if (app.Stage() == gplx.xowa.apps.Xoa_stage_.Tid_launch) {	// do not update user lang unless launched; DATE:2014-05-26
 			Xol_lang lang = app.Lang_mgr().Get_by_key_or_load(lang_key);
-			app.User().Lang_(lang);
-			app.User().Wiki().Html_mgr().Portal_mgr().Init();
+			app.Usere().Lang_(lang);
+			app.Usere().Wiki().Html_mgr().Portal_mgr().Init();
 		}
 		return this;
 	}	private byte[] lang_key = Xol_lang_.Key_en;
@@ -50,8 +50,8 @@ public class Xoa_sys_cfg implements GfoInvkAble {
 }
 class Options_list_lang_ {
 	public static KeyVal[] new_() {
-		OrderedHash translated = OrderedHash_.new_bry_();
-		ListAdp untranslated = ListAdp_.new_();
+		Ordered_hash translated = Ordered_hash_.new_bry_();
+		List_adp untranslated = List_adp_.new_();
 		Add_itm_many(translated, Xol_lang_itm_.Id_en, Xol_lang_itm_.Id_de, Xol_lang_itm_.Id_pl, Xol_lang_itm_.Id_zh_hans, Xol_lang_itm_.Id_zh_hant); // add langs with translations first, so they alphabetize to top of list			
 		int len = Xol_lang_itm_.Id__max;
 		for (int i = 0; i < len; i++) {	// add rest of langs, but sort by code
@@ -59,27 +59,27 @@ class Options_list_lang_ {
 			if (translated.Has(itm.Key())) continue;
 			untranslated.Add(itm);
 		}
-		untranslated.SortBy(Xol_lang_itm_.Comparer_key);
+		untranslated.Sort_by(Xol_lang_itm_.Comparer_key);
 
 		KeyVal[] rv = new KeyVal[len];
 		int translated_max = translated.Count();
 		for (int i = 0; i < translated_max; i++)
-			rv[i] = new_itm((Xol_lang_itm)translated.FetchAt(i));
+			rv[i] = new_itm((Xol_lang_itm)translated.Get_at(i));
 
 		for (int i = translated_max; i < len; i++)
-			rv[i] = new_itm((Xol_lang_itm)untranslated.FetchAt(i - translated_max));
+			rv[i] = new_itm((Xol_lang_itm)untranslated.Get_at(i - translated_max));
 		return rv;
 	}
 	private static KeyVal new_itm(Xol_lang_itm itm) {
-		String key_str = String_.new_utf8_(itm.Key());
-		String name_str = String_.new_utf8_(itm.Localized_name());
+		String key_str = String_.new_u8(itm.Key());
+		String name_str = String_.new_u8(itm.Localized_name());
 		return KeyVal_.new_(key_str, name_str + " [" + key_str + "]");
 	}
-	private static void Add_itm_many(OrderedHash translated, int... langs) {
+	private static void Add_itm_many(Ordered_hash translated, int... langs) {
 		int langs_len = langs.length;
 		for (int i = 0; i < langs_len; i++) {
 			Xol_lang_itm itm = Xol_lang_itm_.Get_by_id(langs[i]);
-			translated.AddReplace(itm.Key(), itm);
+			translated.Add_if_dupe_use_nth(itm.Key(), itm);
 		}
 	}
 }

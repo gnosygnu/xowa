@@ -28,8 +28,8 @@ class Xows_html_wkr {
 		self_lnkr.Init_w_qarg(qry.Special_link_base_href());
 	}
 	public byte[] Gen_page(byte[] tbls) {
-		byte[] rslts_hdr = fmtr_rslts.Bld_bry_many(tmp_bfr, num_mgr.Format_num(qry.Itms_bgn() + ListAdp_.Base1), num_mgr.Format_num(qry.Itms_end()), qry.Search_raw());
-		byte[] option_link = lnki_bldr.Href_(Bry_.new_ascii_("home"), wiki.Ttl_parse(Bry_.new_ascii_("Help:Options/Search"))).Img_16x16(Xoh_img_path.Img_option).Bld_to_bry();
+		byte[] rslts_hdr = fmtr_rslts.Bld_bry_many(tmp_bfr, num_mgr.Format_num(qry.Itms_bgn() + List_adp_.Base1), num_mgr.Format_num(qry.Itms_end()), qry.Search_raw());
+		byte[] option_link = lnki_bldr.Href_(Bry_.new_a7("home"), wiki.Ttl_parse(Bry_.new_a7("Help:Options/Search"))).Img_16x16(Xoh_img_path.Img_option).Bld_to_bry();
 		fmtr_page.Bld_bfr_many(tmp_bfr, rslts_hdr, option_link, Paging_link(Bool_.N), Paging_link(Bool_.Y), tbls);
 		return tmp_bfr.Xto_bry_and_clear();
 	}
@@ -39,7 +39,7 @@ class Xows_html_wkr {
 		fmtr_tbl.Bld_bfr_many(bfr, search_link, searching_db ? Cancel_link(wiki_domain, cmd_key) : Bry_.Empty, Bry_hdr_len, Bry_hdr_ttl, Xows_ui_async.Gen_insert_key(wiki_domain), html_rows);
 	}		
 	private byte[] Cancel_link(byte[] domain, byte[] cmd_key) {
-		lnki_bldr.Id_(Bry_.Add(Bry_.new_ascii_("xowa_cancel_"), domain));
+		lnki_bldr.Id_(Bry_.Add(Bry_.new_a7("xowa_cancel_"), domain));
 		lnki_bldr.Href_(wiki, self_lnkr.Add_int(Xows_arg_mgr.Arg_bry_page_index, qry.Page_idx()).Add_bry(Xows_arg_mgr.Arg_bry_cancel, cmd_key).Bld_to_bry());
 		lnki_bldr.Title_(Bry_cancel);
 		lnki_bldr.Img_16x16(Xoh_img_path.Img_cancel);
@@ -86,8 +86,8 @@ class Xows_html_wkr {
 	, "</table>"
 	), "wiki", "cancel", "hdr_len", "hdr_ttl", "insert_key", "rows");
 	private static final Bry_fmtr		fmtr_rslts = Bry_fmtr.new_("Results <b>~{bgn}</b> of <b>~{end}</b> for <b>~{raw}</b>", "bgn", "end", "raw");
-	private static final byte[] Bry_paging_fwd = Bry_.new_ascii_("Next"), Bry_paging_bwd = Bry_.new_ascii_("Previous"), Bry_cancel = Bry_.new_ascii_("Stop searching")
-	, Bry_hdr_len = Bry_.new_ascii_("Page length"), Bry_hdr_ttl = Bry_.new_ascii_("Page title")
+	private static final byte[] Bry_paging_fwd = Bry_.new_a7("Next"), Bry_paging_bwd = Bry_.new_a7("Previous"), Bry_cancel = Bry_.new_a7("Stop searching")
+	, Bry_hdr_len = Bry_.new_a7("Page length"), Bry_hdr_ttl = Bry_.new_a7("Page title")
 	;
 }
 class Xows_html_row implements Bry_fmtr_arg {

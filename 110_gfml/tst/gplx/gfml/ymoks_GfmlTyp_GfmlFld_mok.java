@@ -43,7 +43,7 @@ class GfmlFld_mok {
 class GfmlTyp_mok {
 	public String Name() {return name;} public GfmlTyp_mok Name_(String v) {name = v; return this;} private String name;
 	public String Key() {return key;} public GfmlTyp_mok Key_(String v) {key = v; return this;} private String key;
-	public ListAdp Subs() {return subFlds;} ListAdp subFlds = ListAdp_.new_();
+	public List_adp Subs() {return subFlds;} List_adp subFlds = List_adp_.new_();
 	public GfmlTyp_mok Atrs_(String... ary) {
 		for (String itm : ary)
 			subFlds.Add(GfmlFld_mok.new_().ini_atr_(itm));
@@ -57,7 +57,7 @@ class GfmlTyp_mok {
 	public GfmlType XtoGfmlType() {
 		GfmlType rv = GfmlType_.new_(key, name); // all types in tests are top-level
 		for (int i = 0; i < subFlds.Count(); i++) {
-			GfmlFld_mok fld = (GfmlFld_mok)subFlds.FetchAt(i);
+			GfmlFld_mok fld = (GfmlFld_mok)subFlds.Get_at(i);
 			rv.SubFlds().Add(fld.XtoGfmlFld());
 		}
 		return rv;
@@ -74,7 +74,7 @@ class GfmlTyp_mok {
 		GfmlTyp_mok rv = new GfmlTyp_mok();
 		rv.key = typ.Key(); rv.name = typ.NdeName();
 		for (int i = 0; i < typ.SubFlds().Count(); i++) {
-			GfmlFld fld = (GfmlFld)typ.SubFlds().FetchAt(i);
+			GfmlFld fld = (GfmlFld)typ.SubFlds().Get_at(i);
 			GfmlFld_mok mkFld = GfmlFld_mok.new_().ini_ndk_(fld.Name(), fld.TypeKey()).DefaultTkn_(fld.DefaultTkn());
 			rv.subFlds.Add(mkFld);
 		}

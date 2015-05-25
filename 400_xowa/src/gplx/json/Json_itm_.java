@@ -20,5 +20,5 @@ public class Json_itm_ {
 	public static final Json_itm[] Ary_empty = new Json_itm[0];
 	public static final byte Tid_unknown = 0, Tid_null = 1, Tid_bool = 2, Tid_int = 3, Tid_decimal = 4, Tid_string = 5, Tid_kv = 6, Tid_array = 7, Tid_nde = 8;
 	public static final byte[][] Names = Bry_.Ary("unknown", "null", "boolean", "int", "decimal", "string", "keyval", "array", "nde");
-	public static final byte[] Const_true = Bry_.new_ascii_("true"), Const_false = Bry_.new_ascii_("false"), Const_null = Bry_.new_ascii_("null");
+	public static final byte[] Const_true = Bry_.new_a7("true"), Const_false = Bry_.new_a7("false"), Const_null = Bry_.new_a7("null");
 }

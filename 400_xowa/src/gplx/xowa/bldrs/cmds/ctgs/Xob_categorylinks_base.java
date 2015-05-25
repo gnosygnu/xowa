@@ -69,8 +69,8 @@ public abstract class Xob_categorylinks_base extends Xob_sql_dump_base implement
 		Xobdc_merger.Basic(bldr.Usr_dlg(), dump_url_gen, temp_dir.GenSubDir("sort"), sort_mem_len, Xoctg_link_sql_sorter._, Io_line_rdr_key_gen_.noop, Make_sort_cmd(sql_parser));
 		wiki.Html_mgr().Importing_ctgs_(Bool_.N);
 	}		
-	private static final byte[] Fld_cl_from = Bry_.new_ascii_("cl_from"), Fld_cl_to = Bry_.new_ascii_("cl_to"), Fld_cl_timestamp = Bry_.new_ascii_("cl_timestamp"), Fld_cl_collation = Bry_.new_ascii_("cl_collation"), Fld_cl_sortkey = Bry_.new_ascii_("cl_sortkey"), Fld_cl_type = Bry_.new_ascii_("cl_type");
-	private static final byte[] Collation_uca = Bry_.new_utf8_("uca"), Sortkey_space = new byte[] {Byte_ascii.Space};
+	private static final byte[] Fld_cl_from = Bry_.new_a7("cl_from"), Fld_cl_to = Bry_.new_a7("cl_to"), Fld_cl_timestamp = Bry_.new_a7("cl_timestamp"), Fld_cl_collation = Bry_.new_a7("cl_collation"), Fld_cl_sortkey = Bry_.new_a7("cl_sortkey"), Fld_cl_type = Bry_.new_a7("cl_type");
+	private static final byte[] Collation_uca = Bry_.new_u8("uca"), Sortkey_space = new byte[] {Byte_ascii.Space};
 }
 class Xoctg_link_sql_sorter implements gplx.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {

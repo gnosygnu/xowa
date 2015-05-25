@@ -92,12 +92,12 @@ public class Xol_num_fmtr_base_tst {
 		tst_Fmt("1234·5678"							, "1·234·5·678");// NOTE: middle-dot is repeated. see dewiki and {{formatnum:1234,5678}}
 		tst_Raw("1234·5678"							, "1234.5678");
 	}
-	Xol_num_grp dat_(String dlm, int digits)				{return new Xol_num_grp(Bry_.new_utf8_(dlm), digits, true);}
-	Xol_num_grp dat_(String dlm, int digits, boolean repeat)	{return new Xol_num_grp(Bry_.new_utf8_(dlm), digits, repeat);}
-	private void tst_Fmt(String val, String expd) {Tfds.Eq(expd, String_.new_utf8_(mgr.Fmt(Bry_.new_utf8_(val))));}
-	private void tst_Raw(String val, String expd) {Tfds.Eq(expd, String_.new_utf8_(mgr.Raw(Xol_num_fmtr_base.Tid_raw, Bry_.new_utf8_(val))));}
+	Xol_num_grp dat_(String dlm, int digits)				{return new Xol_num_grp(Bry_.new_u8(dlm), digits, true);}
+	Xol_num_grp dat_(String dlm, int digits, boolean repeat)	{return new Xol_num_grp(Bry_.new_u8(dlm), digits, repeat);}
+	private void tst_Fmt(String val, String expd) {Tfds.Eq(expd, String_.new_u8(mgr.Fmt(Bry_.new_u8(val))));}
+	private void tst_Raw(String val, String expd) {Tfds.Eq(expd, String_.new_u8(mgr.Raw(Xol_num_fmtr_base.Tid_raw, Bry_.new_u8(val))));}
 	private void ini_(String dec_dlm, Xol_num_grp... ary) {
-		mgr.Dec_dlm_(Bry_.new_utf8_(dec_dlm));
+		mgr.Dec_dlm_(Bry_.new_u8(dec_dlm));
 		int ary_len = ary.length;
 		for (int i = 0; i < ary_len; i++)
 			mgr.Grps_add(ary[i]);

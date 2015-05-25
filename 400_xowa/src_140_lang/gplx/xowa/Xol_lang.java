@@ -23,8 +23,8 @@ public class Xol_lang implements GfoInvkAble {
 	private Xoa_lang_mgr lang_mgr;
 	public Xoa_lang_mgr Lang_mgr() {return lang_mgr;}
 	public Xol_lang(Xoa_lang_mgr lang_mgr, byte[] key_bry) {
-		this.key_bry = key_bry; this.key_str = String_.new_utf8_(key_bry);
-		Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key(key_bry); if (lang_itm == null) throw Err_.new_fmt_("unknown lang_key: {0}", String_.new_utf8_(key_bry));
+		this.key_bry = key_bry; this.key_str = String_.new_u8(key_bry);
+		Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key(key_bry); if (lang_itm == null) throw Err_.new_fmt_("unknown lang_key: {0}", String_.new_u8(key_bry));
 		lang_id = lang_itm.Id();
 		this.lang_mgr = lang_mgr;
 		func_regy = new Xol_func_name_regy(lang_mgr, this);
@@ -97,7 +97,7 @@ public class Xol_lang implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_fallback_load))			Exec_fallback_load(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_numbers))				return num_mgr;
 		else if	(ctx.Match(k, Invk_link_trail))				return lnki_trail_mgr;
-		else if	(ctx.Match(k, Invk_x_axis_end))				return String_.new_utf8_(X_axis_end());
+		else if	(ctx.Match(k, Invk_x_axis_end))				return String_.new_u8(X_axis_end());
 		else if	(ctx.Match(k, Invk_this))					return this;
 		else if	(ctx.Match(k, Xoae_app.Invk_app))			return Xoa_app_.Gfs_mgr().Root_invk();
 		else												return GfoInvkAble_.Rv_unhandled;
@@ -117,7 +117,7 @@ public class Xol_lang implements GfoInvkAble {
 		this.loaded = true;
 		boolean lang_is_en = lang_id == Xol_lang_itm_.Id_en;
 		if (!lang_is_en) Xol_lang_.Lang_init(this);
-		message_mgr.Itm_by_key_or_new(Bry_.new_utf8_("Lang")).Atrs_set(key_bry, false, false);	// set "Lang" keyword; EX: for "fr", "{{int:Lang}}" -> "fr"
+		message_mgr.Itm_by_key_or_new(Bry_.new_u8("Lang")).Atrs_set(key_bry, false, false);	// set "Lang" keyword; EX: for "fr", "{{int:Lang}}" -> "fr"
 		Load_lang(key_bry);
 		ns_aliases.Ary_add_(Xow_ns_.Canonical);	// NOTE: always add English canonical as aliases to all languages
 		this.Evt_lang_changed();
@@ -133,12 +133,12 @@ public class Xol_lang implements GfoInvkAble {
 	}
 	private void Load_lang(byte[] v) {
 		Xoa_gfs_mgr gfs_mgr = Xoa_app_.Gfs_mgr(); Xoa_fsys_mgr app_fsys_mgr = gfs_mgr.App_fsys_mgr();
-		gfs_mgr.Run_url_for(this, Xol_lang_.xo_lang_fil_(app_fsys_mgr, String_.new_ascii_(v)));
+		gfs_mgr.Run_url_for(this, Xol_lang_.xo_lang_fil_(app_fsys_mgr, String_.new_a7(v)));
 		gfs_mgr.Run_url_for(gfs_mgr.Root_invk(), Xol_cnv_mgr.Bld_url(app_fsys_mgr, key_str));
 	}
 	private static final byte[] 
-	  Dir_bry_ltr = Bry_.new_ascii_("ltr"), Dir_bry_rtl = Bry_.new_ascii_("rtl")
-	, X_axis_end_right = Bry_.new_ascii_("right"), X_axis_end_left = Bry_.new_ascii_("left")
+	  Dir_bry_ltr = Bry_.new_a7("ltr"), Dir_bry_rtl = Bry_.new_a7("rtl")
+	, X_axis_end_right = Bry_.new_a7("right"), X_axis_end_left = Bry_.new_a7("left")
 	;
 	public static final int Tid_lower = 1, Tid_upper = 2;
 	private static byte[][] Fallbacy_bry_ary__bld(byte[] v) {

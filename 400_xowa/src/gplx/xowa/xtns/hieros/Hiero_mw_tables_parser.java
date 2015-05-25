@@ -30,8 +30,8 @@ public class Hiero_mw_tables_parser {
 	}
 	public void Load_data(Hiero_xtn_mgr xtn_mgr, Io_url load_fil) {// NOTE: parsing tables.php instead of tables.ser b/c latter is too difficult to read / debug
 		evaluator.Clear();
-		parser.Parse_tkns(Io_mgr._.LoadFilBry(load_fil), evaluator);
-		Php_line[] lines = (Php_line[])evaluator.List().Xto_ary(Php_line.class);
+		parser.Parse_tkns(Io_mgr.I.LoadFilBry(load_fil), evaluator);
+		Php_line[] lines = (Php_line[])evaluator.List().To_ary(Php_line.class);
 		int lines_len = lines.length;
 		for (int i = 0; i < lines_len; i++) {
 			Php_line_assign line = (Php_line_assign)lines[i];
@@ -68,7 +68,7 @@ public class Hiero_mw_tables_parser {
 		}		
 	}
 	private void Parse_phonemes(Hiero_phoneme_mgr mgr, Php_line_assign line) {	// $wh_phonemes = array(k => v, k => v ...);
-		ListAdp tmp_list = ListAdp_.new_(); Byte_obj_ref tmp_rslt = Byte_obj_ref.zero_(); Bry_bfr tmp_bfr = Bry_bfr.new_();
+		List_adp tmp_list = List_adp_.new_(); Byte_obj_ref tmp_rslt = Byte_obj_ref.zero_(); Bry_bfr tmp_bfr = Bry_bfr.new_();
 		Php_itm_ary ary = (Php_itm_ary)line.Val();
 		int subs_len = ary.Subs_len();
 		for (int i = 0; i < subs_len; i++) {
@@ -111,7 +111,7 @@ public class Hiero_mw_tables_parser {
 		}
 		bldr.Add_quote_xtn_end();
 		bldr.Add_paren_end().Add_term_nl();
-		Io_mgr._.SaveFilBfr(save_fil, bldr.Bfr());
+		Io_mgr.I.SaveFilBfr(save_fil, bldr.Bfr());
 	}
 	private static final byte Tid_prefabs = 0, Tid_files = 1, Tid_phonemes = 2;
 	private static Hash_adp_bry Tid_hash = Hash_adp_bry.cs_().Add_str_byte("wh_prefabs", Tid_prefabs).Add_str_byte("wh_files", Tid_files).Add_str_byte("wh_phonemes", Tid_phonemes);

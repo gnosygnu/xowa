@@ -23,11 +23,11 @@ public class Fs_root_fsdb_mgr implements Xof_fsdb_mgr, GfoInvkAble {	// read ima
 	private Xowe_wiki wiki; private Fs_root_wkr_fsdb fsdb_wkr;
 	public Fs_root_fsdb_mgr(Xowe_wiki wiki) {this.Init_by_wiki(wiki); fsdb_wkr = new Fs_root_wkr_fsdb(wiki);}		
 	public void Init_by_wiki(Xow_wiki wiki) {this.wiki = (Xowe_wiki)wiki;}
-	public void Fsdb_search_by_list(byte exec_tid, ListAdp itms, Xoa_page page, Xog_js_wkr js_wkr) {
+	public void Fsdb_search_by_list(List_adp itms, Xow_wiki wiki, Xoa_page page, Xog_js_wkr js_wkr) {
 		int itms_len = itms.Count();
 		for (int i = 0; i < itms_len; i++) {
-			Xof_fsdb_itm itm = (Xof_fsdb_itm)itms.FetchAt(i);
-			if (fsdb_wkr.Find_file(exec_tid, itm))
+			Xof_fsdb_itm itm = (Xof_fsdb_itm)itms.Get_at(i);
+			if (fsdb_wkr.Find_file(itm))
 				Js_img_mgr.Update_img(page, js_wkr, itm);
 		}
 	}

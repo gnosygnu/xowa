@@ -55,7 +55,7 @@ public class GfmlDataNde {
 		String msgKey = String_.Coalesce(gnde.Key(), gnde.Hnd());				
 		GfoMsg msg = GfoMsg_.new_parse_(msgKey);
 		for (int i = 0; i < gnde.SubKeys().Count(); i++) {
-			GfmlItm subItm = (GfmlItm)gnde.SubKeys().FetchAt(i);
+			GfmlItm subItm = (GfmlItm)gnde.SubKeys().Get_at(i);
 			if (subItm.ObjType() == GfmlObj_.Type_atr) {
 				GfmlAtr subAtr = (GfmlAtr)subItm;
 				String subAtrKey = String_.Len_eq_0(subAtr.Key()) ? "" : subAtr.Key(); // NOTE: needs to be "" or else will fail in GfoConsole; key will be evaluated against NullKey in GfsCtx
@@ -68,7 +68,7 @@ public class GfmlDataNde {
 			}
 		}
 		for (int i = 0; i < gnde.SubHnds().Count(); i++) {
-			GfmlItm subItm = (GfmlItm)gnde.SubHnds().FetchAt(i);
+			GfmlItm subItm = (GfmlItm)gnde.SubHnds().Get_at(i);
 			GfmlNde subNde = (GfmlNde)subItm;
 			GfoMsg subMsg = XtoMsg(subNde);
 			msg.Subs_add(subMsg);
@@ -81,7 +81,7 @@ class GfmlDataWtr2 extends DataWtr_base implements DataWtr {
 		GfmlTkn nameTkn = GfmlTkn_.raw_(name);
 		GfmlTkn valTkn = GfmlTkn_.raw_(XtoStr(val));
 		GfmlAtr atr = GfmlAtr.new_(nameTkn, valTkn, GfmlType_.String);
-		GfmlNde nde = gdoc.RootNde().SubHnds().FetchAt(0);
+		GfmlNde nde = gdoc.RootNde().SubHnds().Get_at(0);
 		nde.SubKeys().Add(atr);
 	}
 	public void InitWtr(String key, Object val) {}

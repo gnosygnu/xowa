@@ -20,7 +20,7 @@ import gplx.core.primitives.*;
 public class Php_text_itm_parser {
 	public static final byte Rslt_orig = 0, Rslt_dirty = 1, Rslt_fmt = 2;
 	public boolean Quote_is_single() {return quote_is_single;} public Php_text_itm_parser Quote_is_single_(boolean v) {quote_is_single = v; return this;} private boolean quote_is_single;
-	public byte[] Parse_as_bry(ListAdp tmp_list, byte[] raw, Byte_obj_ref rslt_ref, Bry_bfr tmp_bfr) {
+	public byte[] Parse_as_bry(List_adp tmp_list, byte[] raw, Byte_obj_ref rslt_ref, Bry_bfr tmp_bfr) {
 		Parse(tmp_list, raw, rslt_ref);
 		byte[] rv = raw;
 		switch (rslt_ref.Val()) {
@@ -30,7 +30,7 @@ public class Php_text_itm_parser {
 				tmp_bfr.Clear();
 				int tmp_list_len = tmp_list.Count();
 				for (int i = 0; i < tmp_list_len; i++) {
-					Php_text_itm itm = (Php_text_itm)tmp_list.FetchAt(i);
+					Php_text_itm itm = (Php_text_itm)tmp_list.Get_at(i);
 					itm.Bld(tmp_bfr, raw);
 				}
 				rv = tmp_bfr.Xto_bry_and_clear();
@@ -38,10 +38,10 @@ public class Php_text_itm_parser {
 		}
 		return rv;
 	}
-	public void Parse(ListAdp tmp_list, byte[] raw) {
+	public void Parse(List_adp tmp_list, byte[] raw) {
 		Parse(tmp_list, raw, Byte_obj_ref.zero_());
 	}
-	public void Parse(ListAdp tmp_list, byte[] raw, Byte_obj_ref rslt) {
+	public void Parse(List_adp tmp_list, byte[] raw, Byte_obj_ref rslt) {
 		tmp_list.Clear();
 		int raw_len = raw.length; int raw_last = raw_len - 1; 
 		int txt_bgn = -1;
@@ -62,7 +62,7 @@ public class Php_text_itm_parser {
 						}
 					}
 					else {
-						if (pos_is_last) throw Err_mgr._.fmt_auto_(GRP_KEY, "backslash_is_last_char", String_.new_utf8_(raw));
+						if (pos_is_last) throw Err_mgr._.fmt_auto_(GRP_KEY, "backslash_is_last_char", String_.new_u8(raw));
 						switch (next_char) {
 							case Byte_ascii.Backslash:	next_char = Byte_ascii.Backslash; break;
 							case Byte_ascii.Quote:		next_char = Byte_ascii.Quote; break;
@@ -101,7 +101,7 @@ public class Php_text_itm_parser {
 				case Byte_ascii.Dollar:
 					if (txt_bgn != -1) {tmp_list.Add(new Php_text_itm_text(txt_bgn, i)); txt_bgn = -1;}
 					if (i == raw_last) {
-						//throw Err_mgr._.fmt_auto_(GRP_KEY, "dollar_is_last_char", String_.new_utf8_(raw));
+						//throw Err_mgr._.fmt_auto_(GRP_KEY, "dollar_is_last_char", String_.new_u8(raw));
 					}
 					int int_end = Find_fwd_non_int(raw, i + 1, raw_len);	// +1 to search after $
 					int int_val = Bry_.Xto_int_or(raw, i + 1, int_end, -1); // +1 to search after $
@@ -109,7 +109,7 @@ public class Php_text_itm_parser {
 						tmp_list.Add(new Php_text_itm_text(i, i + 1)); 
 						continue;
 					}
-					//throw Err_mgr._.fmt_auto_(GRP_KEY, "invalid_arg", String_.new_utf8_(raw));
+					//throw Err_mgr._.fmt_auto_(GRP_KEY, "invalid_arg", String_.new_u8(raw));
 					tmp_list.Add(new Php_text_itm_arg(i, int_end, int_val));
 					rslt_val = Rslt_fmt;
 					i = int_end - 1;	// -1 b/c i++ in for loop 
@@ -121,10 +121,10 @@ public class Php_text_itm_parser {
 		}	
 		if (txt_bgn != -1) {tmp_list.Add(new Php_text_itm_text(txt_bgn, raw_len)); txt_bgn = -1; rslt_val = Rslt_dirty;}
 		rslt.Val_(rslt_val);
-	}	private static final byte[] CONST_utf_prefix = Bry_.new_ascii_("\\u00");
-	private void Parse_utf16(ListAdp rv, byte[] src, int bgn, int src_len) {
+	}	private static final byte[] CONST_utf_prefix = Bry_.new_a7("\\u00");
+	private void Parse_utf16(List_adp rv, byte[] src, int bgn, int src_len) {
 		int end = bgn + 4;
-		if (end >= src_len) throw Err_mgr._.fmt_auto_(GRP_KEY, "utf16_parse", String_.new_utf8_(src));
+		if (end >= src_len) throw Err_mgr._.fmt_auto_(GRP_KEY, "utf16_parse", String_.new_u8(src));
 		int v = Int_.Xto_int_hex(src, bgn, end);	// +2; skip "\" + "u"
 		byte[] literal = gplx.intl.Utf16_.Encode_int_to_bry(v);
 		rv.Add(new Php_text_itm_utf16(bgn, end, literal));

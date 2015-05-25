@@ -77,7 +77,7 @@ public class Xoh_module_mgr_tst {
 		Xol_lang la_lang = fxt.Wiki().Lang();
 		gplx.xowa.langs.numbers.Xol_transform_mgr separators_mgr = la_lang.Num_mgr().Separators_mgr();
 		separators_mgr.Clear();
-		separators_mgr.Set(gplx.xowa.langs.numbers.Xol_num_mgr.Separators_key__grp, Bry_.new_ascii_(" "));
+		separators_mgr.Set(gplx.xowa.langs.numbers.Xol_num_mgr.Separators_key__grp, Bry_.new_a7(" "));
 		fxt.Mgr().Itm__globals().Enabled_y_();
 		fxt.Test_write(String_.Concat_lines_nl_skip_last
 		( ""
@@ -110,18 +110,18 @@ class Xoh_module_mgr_fxt {
 	private Bry_bfr bfr = Bry_bfr.reset_(255);
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public Xoh_module_mgr Mgr() {return mgr;}
-	public Xol_lang Make_lang(String key) {return wiki.Appe().Lang_mgr().Get_by_key_or_new(Bry_.new_ascii_(key));}
+	public Xol_lang Make_lang(String key) {return wiki.Appe().Lang_mgr().Get_by_key_or_new(Bry_.new_a7(key));}
 	public void Clear() {
 		fxt.Reset();
 		mgr = fxt.Page().Html_data().Module_mgr();
 		wiki = fxt.Wiki();
 	}
 	public void Init_msg(byte[] key, String val) {
-		wiki.Msg_mgr().Get_or_make(key).Atrs_set(Bry_.new_ascii_(val), false, false);
+		wiki.Msg_mgr().Get_or_make(key).Atrs_set(Bry_.new_a7(val), false, false);
 	}
 	public void Init_msg(int id, String val) {
 		Xol_msg_itm msg_itm = wiki.Lang().Msg_mgr().Itm_by_id_or_null(id);
-		msg_itm.Atrs_set(Bry_.new_ascii_(val), false, false);
+		msg_itm.Atrs_set(Bry_.new_a7(val), false, false);
 	}
 	public void Test_write(String expd) {
 		mgr.Write(bfr, fxt.App(), wiki, fxt.Page());

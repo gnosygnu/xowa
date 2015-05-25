@@ -28,13 +28,13 @@ public class Db_obj_ary_tst {
 }
 class Db_obj_ary_fxt {
 	private Db_obj_ary_crt crt = new Db_obj_ary_crt();
-	public Db_obj_ary_fxt Init_fld(String name, byte tid) {flds_list.Add(new Db_fld(name, tid)); return this;} private ListAdp flds_list = ListAdp_.new_();
-	public Db_obj_ary_fxt Init_vals(Object... ary) {vals_list.Add(ary); return this;} private ListAdp vals_list = ListAdp_.new_();
+	public Db_obj_ary_fxt Init_fld(String name, byte tid) {flds_list.Add(new Db_fld(name, tid)); return this;} private List_adp flds_list = List_adp_.new_();
+	public Db_obj_ary_fxt Init_vals(Object... ary) {vals_list.Add(ary); return this;} private List_adp vals_list = List_adp_.new_();
 	public Db_obj_ary_fxt Test_sql(String expd) {
 		Sql_qry_wtr_ansi cmd_wtr = (Sql_qry_wtr_ansi)Sql_qry_wtr_.I;
 		String_bldr sb = String_bldr_.new_();
-		crt.Flds_((Db_fld[])flds_list.Xto_ary_and_clear(Db_fld.class));
-		crt.Vals_((Object[][])vals_list.Xto_ary_and_clear(Object[].class));
+		crt.Flds_((Db_fld[])flds_list.To_ary_and_clear(Db_fld.class));
+		crt.Vals_((Object[][])vals_list.To_ary_and_clear(Object[].class));
 		cmd_wtr.Append_db_obj_ary(sb, crt);
 		Tfds.Eq(expd, sb.Xto_str_and_clear());
 		return this;

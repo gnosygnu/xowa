@@ -99,10 +99,10 @@ abstract class Wdata_tbl_base {
 		this.Make_tbl(conn);
 		insert_stmt = this.Make_insert_stmt(conn);
 	}
-	public static void Exec_insert_kvs(Db_stmt stmt, int page_id, OrderedHash hash) {
+	public static void Exec_insert_kvs(Db_stmt stmt, int page_id, Ordered_hash hash) {
 		int len = hash.Count();
 		for (int i = 0; i < len; i++) {
-			Json_itm_kv kv = (Json_itm_kv)hash.FetchAt(i);
+			Json_itm_kv kv = (Json_itm_kv)hash.Get_at(i);
 			stmt.Clear()
 			.Val_int(page_id)
 			.Val_bry_as_str(kv.Key().Data_bry())
@@ -141,11 +141,11 @@ class Wdata_alias_tbl extends Wdata_tbl_base {
 	@Override public Db_idx_itm[] Idx_ary() {return new Db_idx_itm[] {Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS wdata_alias__main ON wdata_alias (page_id, lang_key);")};}
 	@Override public String[] Fld_ary() {return new String[] {Fld_page_id, Fld_lang_key, Fld_val};}
 	@Override public void Exec_insert_by_wdoc(byte[] lang_key, Wdata_wiki_mgr wdata_mgr, int page_id, Wdata_doc wdoc) {
-		OrderedHash hash = wdoc.Alias_list();
+		Ordered_hash hash = wdoc.Alias_list();
 		int len = hash.Count();
 		Db_stmt insert_stmt = this.Insert_stmt();
 		for (int i = 0; i < len; i++) {
-			Json_itm_kv kv = (Json_itm_kv)hash.FetchAt(i);
+			Json_itm_kv kv = (Json_itm_kv)hash.Get_at(i);
 			byte[] key = kv.Key().Data_bry();
 			Json_grp val_grp = (Json_grp)kv.Val();
 			int val_grp_len = val_grp.Subs_len();
@@ -197,11 +197,11 @@ class Wdata_link_tbl extends Wdata_tbl_base {
 	@Override public Db_idx_itm[] Idx_ary() {return new Db_idx_itm[] {Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS wdata_link__main ON wdata_link (page_id, wiki_key);")};}
 	@Override public String[] Fld_ary() {return new String[] {Fld_page_id, Fld_wiki_key, Fld_val};}
 	@Override public void Exec_insert_by_wdoc(byte[] lang_key, Wdata_wiki_mgr wdata_mgr, int page_id, Wdata_doc wdoc) {
-		OrderedHash hash = wdoc.Slink_list();
+		Ordered_hash hash = wdoc.Slink_list();
 		int len = hash.Count();
 		Db_stmt insert_stmt = this.Insert_stmt();
 		for (int i = 0; i < len; i++) {
-			Json_itm_kv kv = (Json_itm_kv)hash.FetchAt(i);
+			Json_itm_kv kv = (Json_itm_kv)hash.Get_at(i);
 			byte[] key = kv.Key().Data_bry();
 			Json_itm kv_val = kv.Val();
 			byte[] val = Bry_.Empty;
@@ -251,10 +251,10 @@ class Wdata_claim_tbl extends Wdata_tbl_base {
 	@Override public void Exec_insert_by_wdoc(byte[] lang_key, Wdata_wiki_mgr wdata_mgr, int page_id, Wdata_doc wdoc) {
 		if (visitor == null) visitor = new Xob_wdata_db_visitor(wdata_mgr);
 		visitor.Init(lang_key);
-		OrderedHash list = wdoc.Claim_list();
+		Ordered_hash list = wdoc.Claim_list();
 		int list_len = list.Count();
 		for (int i = 0; i < list_len; i++) {
-			Wdata_claim_grp claim_grp = (Wdata_claim_grp)list.FetchAt(i);
+			Wdata_claim_grp claim_grp = (Wdata_claim_grp)list.Get_at(i);
 			int itms_len = claim_grp.Len();
 			int entity_id = -1;
 			byte[] claim_val = Bry_.Empty;

@@ -107,7 +107,7 @@ public class Xob_hive_mgr {
 		if (prv_itm == null) prv_itm = mgr.Rslt_list_ttls()[0];
 		mgr.Rslt_prv_(prv_itm);			
 	}
-	public void Find_bgn(ListAdp list, Xow_ns ns, byte[] key, int count, boolean include_redirects) {
+	public void Find_bgn(List_adp list, Xow_ns ns, byte[] key, int count, boolean include_redirects) {
 		byte dir_tid = Xotdb_dir_info_.Tid_ttl;
 		int xdat_idx = Regy__find_file_ns(key, dir_tid, ns.Num_str());
 		Io_url xdat_url = fsys_mgr.Url_ns_fil(dir_tid, ns.Id(), xdat_idx);
@@ -116,7 +116,7 @@ public class Xob_hive_mgr {
 		xdat.Find(xdat_itm, key, Xotdb_page_itm_.Txt_ttl_pos, Byte_ascii.Tab, false);
 		Find_nearby_add_fwd(list, dir_tid, ns, include_redirects, count, xdat_idx, xdat_itm.Itm_idx());
 	}	private Xob_xdat_itm xdat_itm = new Xob_xdat_itm(); //Int_2_ref find_nearby_rslt = new Int_2_ref();
-//		private void Find_nearby_add_bwd(ListAdp list, byte dir_tid, Xow_ns ns, boolean include_redirects, int total, int fil_bgn, int row_bgn) {
+//		private void Find_nearby_add_bwd(List_adp list, byte dir_tid, Xow_ns ns, boolean include_redirects, int total, int fil_bgn, int row_bgn) {
 //			if (--row_bgn < 0) {
 //				--fil_bgn;
 //				row_bgn = -1;
@@ -142,7 +142,7 @@ public class Xob_hive_mgr {
 //				--fil_idx;
 //			}
 //		}
-	private void Find_nearby_add_fwd(ListAdp list, byte dir_tid, Xow_ns ns, boolean include_redirects, int total, int fil_bgn, int row_bgn) {
+	private void Find_nearby_add_fwd(List_adp list, byte dir_tid, Xow_ns ns, boolean include_redirects, int total, int fil_bgn, int row_bgn) {
 		int fil_idx = fil_bgn;
 		boolean first = true;
 		int count = 0;

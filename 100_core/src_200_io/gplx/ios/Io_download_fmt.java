@@ -18,27 +18,35 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.ios; import gplx.*;
 import gplx.brys.*;
 public class Io_download_fmt {
-	public long Time_bgn() {return time_bgn;} long time_bgn;
-	public long Time_now() {return time_now;} long time_now;
-	public long Time_dif() {return time_dif;} long time_dif;
-	public long Time_end() {return time_end;} long time_end;
+	private final Io_size_fmtr_arg size_fmtr_arg = new Io_size_fmtr_arg(), rate_fmtr_arg = new Io_size_fmtr_arg().Suffix_(Bry_.new_a7("ps"));
+	private final Bry_fmtr_arg_time prog_left_fmtr_arg = new Bry_fmtr_arg_time(); private final Bry_fmtr_arg_decimal_int prog_pct_fmtr_arg = new Bry_fmtr_arg_decimal_int().Places_(2);
+	private long time_checkpoint_interval = 250;
+	private long time_checkpoint = 0;
+	private long time_prv = 0;
+	public Io_download_fmt() {
+		this.src_name = prog_msg_hdr = "";	// NOTE: set to "" else prog_mgr will fail with null ref
+	}
+	private final Bry_bfr prog_bfr = Bry_bfr.new_(); Bry_fmtr prog_fmtr = Bry_fmtr.new_().Fail_when_invalid_escapes_(false); // NOTE: prog_fmtr can be passed file_names with ~ which are not easy to escape; DATE:2013-02-19
+	public long Time_bgn() {return time_bgn;} private long time_bgn;
+	public long Time_now() {return time_now;} private long time_now;
+	public long Time_dif() {return time_dif;} private long time_dif;
+	public long Time_end() {return time_end;} private long time_end;
 	public String Src_url() {return src_url;} private String src_url;
 	public String Src_name() {return src_name;} private String src_name;
-	public long Src_len() {return src_len;} long src_len;
-	public long Prog_done() {return prog_done;} long prog_done;
-	public long Prog_rate() {return prog_rate;} long prog_rate;
-	public long Prog_left() {return prog_left;} long prog_left;
-	public long Prog_pct() {return prog_pct;} long prog_pct;
+	public long Src_len() {return src_len;} private long src_len;
+	public long Prog_done() {return prog_done;} private long prog_done;
+	public long Prog_rate() {return prog_rate;} private long prog_rate;
+	public long Prog_left() {return prog_left;} private long prog_left;
+	public long Prog_pct() {return prog_pct;} private long prog_pct;
 	public String Prog_msg_hdr() {return prog_msg_hdr;} private String prog_msg_hdr;
-	public int Prog_num_units() {return prog_num_units;} int prog_num_units = Io_mgr.Len_kb;
+	public int Prog_num_units() {return prog_num_units;} private int prog_num_units = Io_mgr.Len_kb;
 	public String Prog_num_fmt() {return prog_num_fmt;} private String prog_num_fmt = "#,##0";
 	public String Prog_msg() {return prog_msg;} private String prog_msg;
-	Io_size_fmtr_arg size_fmtr_arg = new Io_size_fmtr_arg(), rate_fmtr_arg = new Io_size_fmtr_arg().Suffix_(Bry_.new_ascii_("ps"));
-	Bry_fmtr_arg_time prog_left_fmtr_arg = new Bry_fmtr_arg_time(); Bry_fmtr_arg_decimal_int prog_pct_fmtr_arg = new Bry_fmtr_arg_decimal_int().Places_(2);
+	public Gfo_usr_dlg Usr_dlg() {return usr_dlg;} private Gfo_usr_dlg usr_dlg;
 	public void Ctor(Gfo_usr_dlg usr_dlg) {
 		this.usr_dlg = usr_dlg;
-	}	Gfo_usr_dlg usr_dlg;
-	public void Init(String src_url, String prog_msg_hdr) {
+	}
+	public void Download_init(String src_url, String prog_msg_hdr) {
 		this.src_url = src_url;
 		this.src_name = String_.Extract_after_bwd(src_url, "/");
 		this.prog_msg_hdr = prog_msg_hdr;
@@ -53,13 +61,7 @@ public class Io_download_fmt {
 		prog_left = 0;
 		time_bgn = time_prv = Env_.TickCount();
 		time_checkpoint = 0;
-		size_checkpoint = size_checkpoint_interval;
 	}
-	long time_checkpoint_interval = 250;
-	long time_checkpoint = 0;
-	long time_prv = 0;
-	long size_checkpoint = 0;
-	long size_checkpoint_interval = 32 * Io_mgr.Len_kb;
 	public void Prog(int prog_read) {
 		time_now = Env_.TickCount();
 		time_dif = time_now - time_bgn; if (time_dif == 0) time_dif = 1;	// avoid div by zero error below
@@ -79,8 +81,8 @@ public class Io_download_fmt {
 		);
 		prog_msg = prog_bfr.Xto_str_and_clear();
 		if (usr_dlg != null)
-			usr_dlg.Prog_none(GRP_KEY, "prog", prog_msg);
-	}	private Bry_bfr prog_bfr = Bry_bfr.new_(); Bry_fmtr prog_fmtr = Bry_fmtr.new_().Fail_when_invalid_escapes_(false); // NOTE: prog_fmtr can be passed file_names with ~ which are not easy to escape; DATE:2013-02-19
+			usr_dlg.Prog_none("", "prog", prog_msg);
+	}
 	public void Term() {
 		time_end = Env_.TickCount();
 //			prog_rate = (prog_done * 1000) / (time_dif);
@@ -88,5 +90,5 @@ public class Io_download_fmt {
 //			prog_left = (1000 * (src_len - prog_done)) / prog_rate;
 //			if (usr_dlg != null) usr_dlg.Prog_none(GRP_KEY, "clear", "");
 	}
-	static final String GRP_KEY = "gplx.download";
+	public static final Io_download_fmt Null = null;
 }

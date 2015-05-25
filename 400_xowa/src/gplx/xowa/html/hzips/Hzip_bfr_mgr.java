@@ -18,14 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 class Hzip_bfr_mgr {
 	private Gfo_usr_dlg usr_dlg; private Bry_bfr_mkr bfr_mkr;
-	private ListAdp stack = ListAdp_.new_();
+	private List_adp stack = List_adp_.new_();
 	public Hzip_bfr_mgr(Gfo_usr_dlg usr_dlg, Bry_bfr_mkr bfr_mkr) {this.usr_dlg = usr_dlg; this.bfr_mkr = bfr_mkr;}		
 	public Bry_bfr Add(Hzip_bfr_itm__base itm) {
 		stack.Add(itm);
 		return bfr_mkr.Get_k004();
 	}
 	public Bry_bfr Pop(int expd_tid, Bry_bfr cur, byte[] src, int src_len, int pos) {
-		Hzip_bfr_itm__base itm = (Hzip_bfr_itm__base)ListAdp_.Pop(stack);
+		Hzip_bfr_itm__base itm = (Hzip_bfr_itm__base)List_adp_.Pop(stack);
 		if (expd_tid != itm.Tid()) {usr_dlg.Warn_many("", "", "bfr_mgr tid does not match; expd=~{0} actl=~{1}", expd_tid, itm.Tid());}
 		itm.Pop_exec(cur, src, src_len, pos);
 		cur.Mkr_rls();
@@ -44,7 +44,7 @@ class Hzip_bfr_itm__anchor extends Hzip_bfr_itm__base {	// <a href="/wiki/File:E
 		byte[] caption_bry = cur.Xto_bry();	// Calc_title(cur.Xto_bry())
 		bfr.Add(caption_bry).Add_str("'>");
 		bfr.Add_bfr_and_clear(cur);
-		bfr.Add_str("</a>");
+		bfr.Add_str_a7("</a>");
 	}
 	public static Hzip_bfr_itm__base new_(Bry_bfr cur, byte[] src, int src_len, int pos) {
 		Hzip_bfr_itm__anchor rv = new Hzip_bfr_itm__anchor();

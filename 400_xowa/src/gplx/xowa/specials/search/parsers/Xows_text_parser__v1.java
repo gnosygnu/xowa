@@ -19,7 +19,7 @@ package gplx.xowa.specials.search.parsers; import gplx.*; import gplx.xowa.*; im
 import gplx.core.primitives.*;
 class Xows_text_parser__v1 {
 	private Xol_lang lang; private Bry_bfr bfr = Bry_bfr.new_(255);
-	private final OrderedHash list = OrderedHash_.new_bry_();
+	private final Ordered_hash list = Ordered_hash_.new_bry_();
 	public void Init(Xol_lang lang) {this.lang = lang;}
 	public void Parse(byte[] src, int src_len, int bgn, int end) {
 		if (lang != null) {	// null lang passed in by searcher
@@ -61,8 +61,8 @@ class Xows_text_parser__v1 {
 					break;
 			}
 		}
-//			byte[][] rv = (byte[][])list.Xto_ary(typeof(byte[]));
-//			list.Clear(); list.ResizeBounds(16);
+//			byte[][] rv = (byte[][])list.To_ary(typeof(byte[]));
+//			list.Clear(); list.Resize_bounds(16);
 //			return rv;
 	}
 }

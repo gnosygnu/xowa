@@ -25,6 +25,6 @@ public class Wdata_claim_itm_str extends Wdata_claim_itm_core { 	public Wdata_cl
 	public byte[] Val_str() {return val;} private final byte[] val;		
 	@Override public void Welcome(Wdata_claim_visitor visitor) {visitor.Visit_str(this);}
 	@Override public String toString() {// TEST:
-		return String_.Concat_with_str("|", Wdata_dict_snak_tid.Xto_str(this.Snak_tid()), Wdata_dict_val_tid.Xto_str(this.Val_tid()), String_.new_utf8_(val));
+		return String_.Concat_with_str("|", Wdata_dict_snak_tid.Xto_str(this.Snak_tid()), Wdata_dict_val_tid.Xto_str(this.Val_tid()), String_.new_u8(val));
 	}
 }

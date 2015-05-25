@@ -54,11 +54,11 @@ class Xows_html_wkr_fxt {
 		return this;
 	}
 	public void Test_paging(boolean fwd, int paging_idx, String expd) {
-		Xows_ui_qry qry = new Xows_ui_qry(Bry_.new_ascii_("A"), paging_idx, 100, Xosrh_rslt_itm_sorter.Tid_len_dsc, new Xows_ns_mgr(), true, new Xow_domain[] {Xow_domain_.parse(wiki.Domain_bry())});
+		Xows_ui_qry qry = new Xows_ui_qry(Bry_.new_a7("A"), paging_idx, 100, Xosrh_rslt_itm_sorter.Tid_len_dsc, new Xows_ns_mgr(), true, new Xow_domain[] {Xow_domain_.parse(wiki.Domain_bry())});
 		qry.Page_max_(2);
 		html_mgr.Init_by_wiki(wiki, wiki.Lang().Num_mgr(), qry);
 		byte[] paging_link = html_mgr.Paging_link(fwd);
-		Tfds.Eq(expd, String_.new_ascii_(paging_link));
+		Tfds.Eq(expd, String_.new_a7(paging_link));
 	}
 	public void Test_rows(Xows_db_row[] rows, String expd) {
 		Xows_ui_rslt rslt = new Xows_ui_rslt();
@@ -70,7 +70,7 @@ class Xows_html_wkr_fxt {
 		Tfds.Eq_str_lines(expd, tmp_bfr.Xto_str_and_clear());
 	}
 	public Xows_db_row Make_row(int len, String ttl_str) {
-		byte[] ttl_bry = Bry_.new_utf8_(ttl_str);
-		return new Xows_db_row(Bry_.new_ascii_("w"), wiki.Ttl_parse(ttl_bry), 1, len);
+		byte[] ttl_bry = Bry_.new_u8(ttl_str);
+		return new Xows_db_row(Bry_.new_a7("w"), wiki.Ttl_parse(ttl_bry), 1, len);
 	}
 }

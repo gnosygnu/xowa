@@ -28,7 +28,7 @@ class GfmlPragmaLxrFrm implements GfmlPragma {
 		String end = ownerNde.SubKeys().FetchDataOrFail("end");
 		GfmlFrame frame = String_.Eq(type, "comment") ?  GfmlFrame_.comment_() : GfmlFrame_.quote_();
 
-		GfmlLxr lxr = bldr.Doc().LxrRegy().Fetch(key);
+		GfmlLxr lxr = bldr.Doc().LxrRegy().Get_by(key);
 		if (lxr == null) {
 			lxr = GfmlLxr_.frame_(key, frame, bgn, end);
 			bldr.Doc().LxrRegy().Add(lxr);
@@ -48,7 +48,7 @@ class GfmlPragmaLxrFrm implements GfmlPragma {
 			}
 		}
 		for (int i = 0; i < ownerNde.SubHnds().Count(); i++) {
-			GfmlNde subNde = (GfmlNde)ownerNde.SubHnds().FetchAt(i);
+			GfmlNde subNde = (GfmlNde)ownerNde.SubHnds().Get_at(i);
 			GfmlLxr subLxr = null;
 			if (String_.Eq(subNde.Hnd(), "sym"))
 				subLxr = GfmlPragmaLxrSym.Compile(bldr, subNde);

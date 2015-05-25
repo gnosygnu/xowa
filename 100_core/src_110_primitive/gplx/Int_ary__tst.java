@@ -39,6 +39,6 @@ public class Int_ary__tst {
 	}
 }
 class Int_ary__fxt {
-	public void Test_Parse_list_empty(String raw) {Tfds.Eq_ary(Int_.Ary_empty, Int_ary_.Parse_list_or(Bry_.new_ascii_(raw), Int_.Ary_empty));}
-	public void Test_Parse_list_or(String raw, int... expd) {Tfds.Eq_ary(expd, Int_ary_.Parse_list_or(Bry_.new_ascii_(raw), Int_.Ary_empty));}
+	public void Test_Parse_list_empty(String raw) {Tfds.Eq_ary(Int_.Ary_empty, Int_ary_.Parse_list_or(Bry_.new_a7(raw), Int_.Ary_empty));}
+	public void Test_Parse_list_or(String raw, int... expd) {Tfds.Eq_ary(expd, Int_ary_.Parse_list_or(Bry_.new_a7(raw), Int_.Ary_empty));}
 }

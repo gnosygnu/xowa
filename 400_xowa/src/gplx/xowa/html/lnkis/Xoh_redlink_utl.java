@@ -17,6 +17,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 public class Xoh_redlink_utl {
-	public static final byte[] Cls_bry = Bry_.new_ascii_("class='new'");
+	public static final byte[] Cls_bry = Bry_.new_a7("class='new'");
 	public static final String New_str = "new";
 }

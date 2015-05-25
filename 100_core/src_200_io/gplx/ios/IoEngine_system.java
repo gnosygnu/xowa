@@ -31,11 +31,11 @@ import gplx.core.criterias.*;
 public class IoEngine_system extends IoEngine_base {
 	@Override public String Key() {return IoEngine_.SysKey;}
 	@Override public void DeleteDirDeep(IoEngine_xrg_deleteDir args) {utl.DeleteDirDeep(this, args.Url(), args);}
-	@Override public void XferDir(IoEngine_xrg_xferDir args) {Io_url trg = args.Trg(); utl.XferDir(this, args.Src(), IoEnginePool._.Fetch(trg.Info().EngineKey()), trg, args);}
+	@Override public void XferDir(IoEngine_xrg_xferDir args) {Io_url trg = args.Trg(); utl.XferDir(this, args.Src(), IoEnginePool._.Get_by(trg.Info().EngineKey()), trg, args);}
 	@Override public void XferFil(IoEngine_xrg_xferFil args) {utl.XferFil(this, args);}
 	@Override public IoItmDir QueryDirDeep(IoEngine_xrg_queryDir args) {return utl.QueryDirDeep(this, args);}
 	@Override public void CopyDir(Io_url src, Io_url trg) {IoEngine_xrg_xferDir.copy_(src, trg).Recur_().Exec();}
-	@Override public void MoveDirDeep(IoEngine_xrg_xferDir args) {Io_url trg = args.Trg(); utl.XferDir(this, args.Src(), IoEnginePool._.Fetch(trg.Info().EngineKey()), trg, args);}
+	@Override public void MoveDirDeep(IoEngine_xrg_xferDir args) {Io_url trg = args.Trg(); utl.XferDir(this, args.Src(), IoEnginePool._.Get_by(trg.Info().EngineKey()), trg, args);}
 	@Override public void DeleteFil_api(IoEngine_xrg_deleteFil args) {
 		Io_url url = args.Url();
 		File fil = Fil_(url);	
@@ -52,7 +52,7 @@ public class IoEngine_system extends IoEngine_base {
 
 		// encode string
 		byte[] textBytes = null;
-		textBytes = Bry_.new_utf8_(mpo.Text());
+		textBytes = Bry_.new_u8(mpo.Text());
 
 		FileChannel fc = null; FileOutputStream fos = null;
 		if (!ExistsDir(url.OwnerDir())) CreateDir(url.OwnerDir());
@@ -96,7 +96,7 @@ public class IoEngine_system extends IoEngine_base {
 		}
 		return Load_from_stream_as_str(stream, url_str);
 	}
-	public static String Load_from_stream_as_str(InputStream stream, String url_str) {
+	@SuppressWarnings("resource") public static String Load_from_stream_as_str(InputStream stream, String url_str) {
 		InputStreamReader reader = null;
 		try 	{reader = new InputStreamReader(stream, IoEngineArgs._.LoadFilStr_Encoding);}
 		catch 	(UnsupportedEncodingException e) {
@@ -394,11 +394,11 @@ public class IoEngine_system extends IoEngine_base {
 		java.net.URL src_url = null;
 		HttpURLConnection src_conn = null;
 		if (user_agent_needs_resetting) {user_agent_needs_resetting = false; System.setProperty("http.agent", "");}
-		boolean exists = Io_mgr._.ExistsDir(xrg.Trg().OwnerDir());
+		boolean exists = Io_mgr.I.ExistsDir(xrg.Trg().OwnerDir());
 		Gfo_usr_dlg prog_dlg = null;
 		String src_str = xrg.Src();
 		Io_download_fmt xfer_fmt = xrg.Download_fmt();
-		prog_dlg = xfer_fmt.usr_dlg;
+		prog_dlg = xfer_fmt.Usr_dlg();
 		if (!Web_access_enabled) {
 			if (prog_dlg != null) {
 				if (session_fil == null) session_fil = prog_dlg.Log_wkr().Session_dir().GenSubFil("internet.txt");
@@ -407,7 +407,7 @@ public class IoEngine_system extends IoEngine_base {
 			return false;
 		}
 		try {
-			trg_stream = Io_mgr._.OpenStreamWrite(xrg.Trg());
+			trg_stream = Io_mgr.I.OpenStreamWrite(xrg.Trg());
 			src_url = new java.net.URL(src_str);
 			src_conn = (HttpURLConnection)src_url.openConnection();
 //			src_conn.setReadTimeout(5000);	// do not set; if file does not exist, will wait 5 seconds before timing out; want to fail immediately
@@ -419,7 +419,7 @@ public class IoEngine_system extends IoEngine_base {
 			if (xrg.Exec_meta_only()) return true;
 	        src_stream = new java.io.BufferedInputStream(src_conn.getInputStream());
 	        if (!exists) {
-	        	Io_mgr._.CreateDir(xrg.Trg().OwnerDir());	// dir must exist for OpenStreamWrite; create dir at last possible moment in case stream does not exist.
+	        	Io_mgr.I.CreateDir(xrg.Trg().OwnerDir());	// dir must exist for OpenStreamWrite; create dir at last possible moment in case stream does not exist.
 	        }
     		byte[] download_bfr = new byte[Download_bfr_len];	// NOTE: download_bfr was originally member variable; DATE:2013-05-03
     		xfer_fmt.Bgn(content_length);
@@ -428,7 +428,7 @@ public class IoEngine_system extends IoEngine_base {
     			if (xrg.Prog_cancel()) {
     				src_stream.close();
     				trg_stream.Rls();
-    				Io_mgr._.DeleteFil(xrg.Trg());
+    				Io_mgr.I.DeleteFil(xrg.Trg());
     			}
     			xfer_fmt.Prog(count);
     			trg_stream.Write(download_bfr, 0, count);
@@ -518,10 +518,10 @@ class Io_download_http {
 		Io_stream_rdr_http rdr = new Io_stream_rdr_http(xrg); 
 		IoStream trg_stream = null;
 		try {			
-			boolean exists = Io_mgr._.ExistsDir(xrg.Trg().OwnerDir());
+			boolean exists = Io_mgr.I.ExistsDir(xrg.Trg().OwnerDir());
 		    if (!exists)
-		    	Io_mgr._.CreateDir(xrg.Trg().OwnerDir());	// dir must exist for OpenStreamWrite; create dir at last possible moment in case stream does not exist.
-		    trg_stream = Io_mgr._.OpenStreamWrite(xrg.Trg());
+		    	Io_mgr.I.CreateDir(xrg.Trg().OwnerDir());	// dir must exist for OpenStreamWrite; create dir at last possible moment in case stream does not exist.
+		    trg_stream = Io_mgr.I.OpenStreamWrite(xrg.Trg());
 		    byte[] bfr = new byte[Download_bfr_len];
 		    rdr.Open();
 		    while (rdr.Read(bfr, 0, Download_bfr_len) != Read_done) {		    	
@@ -532,7 +532,7 @@ class Io_download_http {
 			if (trg_stream != null) trg_stream.Rls();
 		}
 		if (xrg.Rslt() != IoEngine_xrg_downloadFil.Rslt_pass)
-			Io_mgr._.DeleteFil_args(xrg.Trg()).MissingFails_off().Exec();
+			Io_mgr.I.DeleteFil_args(xrg.Trg()).MissingFails_off().Exec();
 	}
 	public static final int Read_done = -1;
 	public static final int Download_bfr_len = Io_mgr.Len_kb * 128;
@@ -542,6 +542,7 @@ class Io_stream_rdr_http implements Io_stream_rdr {
 		this.xrg = xrg;
 	}	private IoEngine_xrg_downloadFil xrg;
 	public byte Tid() {return Io_stream_.Tid_raw;}
+	public boolean Exists() {return exists;} private boolean exists = false;
 	public Io_url Url() {return url;} public Io_stream_rdr Url_(Io_url v) {url = v; return this;} private Io_url url;
 	public long Len() {return len;} public Io_stream_rdr Len_(long v) {len = v; return this;} private long len = IoItmFil.Size_invalid;	// NOTE: must default size to -1; DATE:2014-06-21	
 	private String src_str; private HttpURLConnection src_conn; private java.io.BufferedInputStream src_stream;
@@ -556,12 +557,11 @@ class Io_stream_rdr_http implements Io_stream_rdr {
 			return this;
 		}
 		src_str = xrg.Src();
-		xfer_fmt = xrg.Download_fmt(); prog_dlg = xfer_fmt.usr_dlg;
+		xfer_fmt = xrg.Download_fmt(); prog_dlg = xfer_fmt.Usr_dlg();
 		try {
 			src_conn = (HttpURLConnection)new java.net.URL(src_str).openConnection();
 			String user_agent = xrg.User_agent();
-			if (user_agent != null)
-				src_conn.setRequestProperty("User-Agent", user_agent);
+			if (user_agent != null) src_conn.setRequestProperty("User-Agent", user_agent);	// NOTE: must be set right after openConnection
 //			src_conn.setReadTimeout(5000);	// do not set; if file does not exist, will wait 5 seconds before timing out; want to fail immediately
 			long content_length = Long_.parse_or_(src_conn.getHeaderField("Content-Length"), IoItmFil.Size_invalid_int);
 			xrg.Src_content_length_(content_length);
@@ -573,6 +573,7 @@ class Io_stream_rdr_http implements Io_stream_rdr {
 				return this;
 			}
 	        read_done = false;
+			this.exists = src_conn.getResponseCode() == 200;	// ASSUME: response code of 200 means that file exists; note that content_length seems to always be -1; DATE:2015-05-20
 	        src_stream = new java.io.BufferedInputStream(src_conn.getInputStream());
     		xfer_fmt.Bgn(content_length);
 		}

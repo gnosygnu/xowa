@@ -24,8 +24,8 @@ public class Xof_img_wkr_resize_img_imageMagick implements Xof_img_wkr_resize_im
 		this.wmf_mgr = wmf_mgr; this.cmd_convert = cmd_convert; this.cmd_convert_svg_to_png = cmd_convert_svg_to_png;
 	}
 	public boolean Exec(Io_url src, Io_url trg, int trg_w, int trg_h, int ext_id, String_obj_ref rslt_val) {
-		if (!Io_mgr._.ExistsFil(src)) return false;
-		Io_mgr._.CreateDirIfAbsent(trg.OwnerDir());
+		if (!Io_mgr.I.ExistsFil(src)) return false;
+		Io_mgr.I.CreateDirIfAbsent(trg.OwnerDir());
 		if (init_needed) {
 			init_needed = false;
 			Gfo_usr_dlg usr_dlg = Xoa_app_.Usr_dlg();

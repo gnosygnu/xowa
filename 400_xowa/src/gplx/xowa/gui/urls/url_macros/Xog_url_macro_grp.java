@@ -20,7 +20,7 @@ import gplx.core.btries.*;
 public class Xog_url_macro_grp implements GfoInvkAble {
 	public Btrie_slim_mgr Trie() {return trie;} private Btrie_slim_mgr trie = Btrie_slim_mgr.cs_();
 	public void Del(byte[] abrv) {trie.Del(abrv);}
-	public void Set(String abrv, String fmt) {Set(Bry_.new_utf8_(abrv), Bry_.new_utf8_(fmt));}
+	public void Set(String abrv, String fmt) {Set(Bry_.new_u8(abrv), Bry_.new_u8(fmt));}
 	public void Set(byte[] abrv, byte[] fmt) {trie.Add_obj(abrv, new Xog_url_macro_itm(abrv, fmt));}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_clear))						trie.Clear();

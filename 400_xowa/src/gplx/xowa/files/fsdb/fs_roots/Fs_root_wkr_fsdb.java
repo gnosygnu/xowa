@@ -25,9 +25,9 @@ public class Fs_root_wkr_fsdb {
 	private String_obj_ref tmp_resize_result = String_obj_ref.null_();
 	private Xof_img_size img_size = new Xof_img_size();
 	public Fs_root_wkr_fsdb(Xowe_wiki wiki) {this.wiki = wiki;}
-	public boolean Find_file(byte exec_tid, Xof_fsdb_itm fsdb_itm) {
-		byte[] lnki_ttl = fsdb_itm.Lnki_ttl();
-		Orig_fil_itm orig_itm = orig_dir_mgr.Get_by_ttl(lnki_ttl);
+	public boolean Find_file(Xof_fsdb_itm fsdb_itm) {
+		byte[] orig_ttl = fsdb_itm.Orig_ttl();
+		Orig_fil_itm orig_itm = orig_dir_mgr.Get_by_ttl(orig_ttl);
 		if (orig_itm == Orig_fil_itm.Null) return false;
 		Io_url orig_url = orig_itm.Fil_url();
 		if (fsdb_itm.File_is_orig()) {
@@ -39,12 +39,12 @@ public class Fs_root_wkr_fsdb {
 		else {
 			String thumb_rel = orig_url.GenRelUrl_orEmpty(orig_dir);
 			int upright_patch = wiki.File_mgr().Patch_upright();
-			img_size.Html_size_calc(exec_tid, fsdb_itm.Lnki_w(), fsdb_itm.Lnki_h(), fsdb_itm.Lnki_type(), upright_patch, fsdb_itm.Lnki_upright(), fsdb_itm.Lnki_ext().Id(), orig_itm.Fil_w(), orig_itm.Fil_h(), Xof_img_size.Thumb_width_img);
+			img_size.Html_size_calc(fsdb_itm.Lnki_exec_tid(), fsdb_itm.Lnki_w(), fsdb_itm.Lnki_h(), fsdb_itm.Lnki_type(), upright_patch, fsdb_itm.Lnki_upright(), fsdb_itm.Orig_ext().Id(), orig_itm.Fil_w(), orig_itm.Fil_h(), Xof_img_size.Thumb_width_img);
 			int html_w = img_size.Html_w(), html_h = img_size.Html_h();
 			String thumb_name = Int_.Xto_str(html_w) + orig_url.Ext();
 			Io_url thumb_url = thumb_dir.GenSubFil_ary(thumb_rel + orig_url.Info().DirSpr(), thumb_name);
-			if (!Io_mgr._.ExistsFil(thumb_url)) {
-				if (!wiki.Appe().File_mgr().Img_mgr().Wkr_resize_img().Exec(orig_url, thumb_url, html_w, html_h, fsdb_itm.Lnki_ext().Id(), tmp_resize_result))
+			if (!Io_mgr.I.ExistsFil(thumb_url)) {
+				if (!wiki.Appe().File_mgr().Img_mgr().Wkr_resize_img().Exec(orig_url, thumb_url, html_w, html_h, fsdb_itm.Orig_ext().Id(), tmp_resize_result))
 					return false;
 			}
 			fsdb_itm.Html_size_(html_w, html_h);

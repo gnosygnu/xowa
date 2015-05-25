@@ -21,16 +21,16 @@ import gplx.xowa.users.history.*;
 public class Xoctg_pagelist_itms implements Bry_fmtr_arg {
 	public void Init_app(Xoae_app app, Bry_fmtr fmtr_itm) {
 		this.href_parser = app.Href_parser();
-		this.history_mgr = app.User().History_mgr();
+		this.history_mgr = app.Usere().History_mgr();
 		this.fmtr_itm = fmtr_itm;
 	} 	private Xoh_href_parser href_parser; private Xou_history_mgr history_mgr; private Bry_fmtr fmtr_itm;
 	public void Init_wiki(Xowe_wiki wiki) {this.wiki = wiki;} private Xowe_wiki wiki;
-	public void Itms_clear() 				{itms.Clear();} private ListAdp itms = ListAdp_.new_();	
+	public void Itms_clear() 				{itms.Clear();} private List_adp itms = List_adp_.new_();	
 	public void Itms_add(Xowd_page_itm page) 	{itms.Add(page);}	
 	public void XferAry(Bry_bfr bfr, int idx) {
 		int len = itms.Count();
 		for (int i = 0; i < len; i++) {
-			Xowd_page_itm page = (Xowd_page_itm)itms.FetchAt(i);
+			Xowd_page_itm page = (Xowd_page_itm)itms.Get_at(i);
 			Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Xow_ns_.Id_category, page.Ttl_page_db());
 			byte[] lnki_cls = Xoh_lnki_wtr.Lnki_cls_visited(history_mgr, wiki.Domain_bry(), ttl.Page_txt());	// NOTE: must be ttl.Page_txt() in order to match Xou_history_mgr.Add
 			byte[] lnki_href = href_parser.Build_to_bry(wiki, ttl);

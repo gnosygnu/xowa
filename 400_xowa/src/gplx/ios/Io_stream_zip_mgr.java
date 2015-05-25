@@ -25,7 +25,7 @@ public class Io_stream_zip_mgr {
 		Io_stream_wtr wtr = Wtr(type);
 		wtr.Write(val, 0, val.length);
 		wtr.Flush();
-		return wtr.Xto_ary_and_clear();
+		return wtr.To_ary_and_clear();
 	}
 	public byte[] Unzip(byte type, byte[] val) {
 		if (type == Io_stream_.Tid_raw) return val;

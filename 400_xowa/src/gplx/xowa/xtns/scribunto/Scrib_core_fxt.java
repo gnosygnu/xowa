@@ -46,7 +46,7 @@ public class Scrib_core_fxt {
 	public KeyVal kv_func_(String key, int id) {return KeyVal_.new_(key, new Scrib_lua_proc(key, id));}
 	public Scrib_core_fxt Init_lib_fil(String name, String text) {
 		Io_url url = core.Fsys_mgr().Script_dir().GenSubFil(name);
-		Io_mgr._.SaveFilStr(url, text);
+		Io_mgr.I.SaveFilStr(url, text);
 		return this;
 	}
 	public Scrib_core_fxt Init_server_prep_add(String v) {server.Prep_add(v); return this;}
@@ -63,7 +63,7 @@ public class Scrib_core_fxt {
 		core.Proc_mgr().Set(core.Lib_mw(), func, idx);
 		return this;
 	}
-	public Scrib_core_fxt Expd_server_rcvd_add(String v) {expd_server_rcvd_list.Add(v); return this;} ListAdp expd_server_rcvd_list = ListAdp_.new_();
+	public Scrib_core_fxt Expd_server_rcvd_add(String v) {expd_server_rcvd_list.Add(v); return this;} List_adp expd_server_rcvd_list = List_adp_.new_();
 	public Scrib_core_fxt Test_LoadString(String name, String text, int expd_id) {
 		int actl_id = core.Interpreter().LoadString(name, text).Id();
 		Test_server_logs();
@@ -132,13 +132,13 @@ public class Scrib_core_fxt {
 		return this;
 	}
 	public Scrib_core_fxt Test_Invoke(String mod_name, String mod_code, String prc_name, KeyVal... args) {
-		core.Invoke(wiki, core.Ctx(), Bry_.Empty, Xot_invk_mock.Null, Xot_invk_mock.new_(Frame_ttl_test, args), tmp_bfr, Bry_.new_utf8_(mod_name), Bry_.new_utf8_(mod_code), Bry_.new_utf8_(prc_name));
+		core.Invoke(wiki, core.Ctx(), Bry_.Empty, Xot_invk_mock.Null, Xot_invk_mock.new_(Frame_ttl_test, args), tmp_bfr, Bry_.new_u8(mod_name), Bry_.new_u8(mod_code), Bry_.new_u8(prc_name));
 		Test_server_logs();
 		return this;
-	}	private static final byte[] Frame_ttl_test = Bry_.new_ascii_("test");
+	}	private static final byte[] Frame_ttl_test = Bry_.new_a7("test");
 	private void Test_server_logs() {
 		if (expd_server_rcvd_list.Count() > 0) {
-			Tfds.Eq_ary_str(expd_server_rcvd_list.XtoStrAry(), server.Log_rcvd().XtoStrAry());
+			Tfds.Eq_ary_str(expd_server_rcvd_list.To_str_ary(), server.Log_rcvd().To_str_ary());
 			expd_server_rcvd_list.Clear();
 			server.Log_rcvd().Clear();
 		}

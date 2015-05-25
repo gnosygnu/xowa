@@ -33,8 +33,8 @@ public class Xoac_lang_grp implements Cfg_nde_obj, Xoac_lang_obj {
 		return rv;
 	}
 	public int Nde_subs_len() {return itms.Count();}
-	public Cfg_nde_obj Nde_subs_get_at(int i) {return (Cfg_nde_obj)itms.FetchAt(i);}
-	public Cfg_nde_obj Nde_subs_get(byte[] key) {return (Cfg_nde_obj)itms.Fetch(key);}
+	public Cfg_nde_obj Nde_subs_get_at(int i) {return (Cfg_nde_obj)itms.Get_at(i);}
+	public Cfg_nde_obj Nde_subs_get(byte[] key) {return (Cfg_nde_obj)itms.Get_by(key);}
 	public void Nde_subs_add(byte[] itm_key, Cfg_nde_obj itm_obj) {
 		if (!itm_obj.Nde_typ_is_grp()) {
 			Xoac_lang_itm itm = (Xoac_lang_itm)itm_obj;
@@ -47,7 +47,7 @@ public class Xoac_lang_grp implements Cfg_nde_obj, Xoac_lang_obj {
 		Cfg_nde_obj cur_obj = (Cfg_nde_obj)Nde_subs_get(key);
 		if (!cur_obj.Nde_typ_is_grp()) {
 			Xoac_lang_itm cur_itm = (Xoac_lang_itm)cur_obj;
-			Xoac_lang_itm reg_itm = (Xoac_lang_itm)regy.Fetch(key);
+			Xoac_lang_itm reg_itm = (Xoac_lang_itm)regy.Get_by(key);
 			if (cur_itm.Uid() == reg_itm.Uid()) regy.Del(cur_itm.Key_bry());
 		}
 		itms.Del(key);
@@ -57,13 +57,13 @@ public class Xoac_lang_grp implements Cfg_nde_obj, Xoac_lang_obj {
 		if (ary_len > 0) name_bry = ary[0];
 		if (ary_len > 1) sort_idx = Bry_.Xto_int_or(ary[1], -1);
 	}
-	public static final byte[] Make_grp = Bry_.new_utf8_("grp"), Make_itm = Bry_.new_utf8_("itm");
+	public static final byte[] Make_grp = Bry_.new_u8("grp"), Make_itm = Bry_.new_u8("itm");
 	public int Itms_len() {return itms.Count();}
-	public Cfg_nde_obj Itms_get_at(int i) {return (Cfg_nde_obj)itms.FetchAt(i);}
-	OrderedHash itms = OrderedHash_.new_bry_();
+	public Cfg_nde_obj Itms_get_at(int i) {return (Cfg_nde_obj)itms.Get_at(i);}
+	Ordered_hash itms = Ordered_hash_.new_bry_();
 
-	private static OrderedHash regy = OrderedHash_.new_bry_();
-	public static Xoac_lang_itm Regy_get_or_null(byte[] key) {return (Xoac_lang_itm)regy.Fetch(key);}
+	private static Ordered_hash regy = Ordered_hash_.new_bry_();
+	public static Xoac_lang_itm Regy_get_or_null(byte[] key) {return (Xoac_lang_itm)regy.Get_by(key);}
 	public static Xoac_lang_itm Regy_get_or_new (byte[] key) {
 		Xoac_lang_itm rv = Regy_get_or_null(key);
 		if (rv == null) {

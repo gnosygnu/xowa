@@ -92,11 +92,11 @@ public class Xoa_prog_mgr implements GfoInvkAble {
 	}
 	public void Exec_view_web(byte[] url) {
 		url = Bry_.Replace(url, Quote_normal, Quote_escape); // escape quotes; DATE:2013-03-31
-		String url_str = String_.new_utf8_(url);
+		String url_str = String_.new_u8(url);
 		url_str = ProcessAdp.Escape_ampersands_if_process_is_cmd(Op_sys.Cur().Tid_is_wnt(), app_view_web.Exe_url().Raw(), url_str);	// escape ampersands; DATE:2014-05-20
 		app_view_web.Run(url_str);
 	}	private static final byte[] Quote_normal = new byte[] {Byte_ascii.Quote}, Quote_escape = new byte[] {Byte_ascii.Quote, Byte_ascii.Quote};
-	private ProcessAdp App_by_ext_key(String ext) {return cmds_view_file_by_ext[Xof_ext_.Get_id_by_ext_(Bry_.new_ascii_(ext))];}
+	private ProcessAdp App_by_ext_key(String ext) {return cmds_view_file_by_ext[Xof_ext_.Get_id_by_ext_(Bry_.new_a7(ext))];}
 	public void Exec_view_by_ext(String exts_raw, String cmd, String args) {
 		String[] exts_ary = String_.Split(exts_raw, '|');
 		int exts_ary_len = exts_ary.length;
@@ -107,7 +107,7 @@ public class Xoa_prog_mgr implements GfoInvkAble {
 		ProcessAdp rv = App_by_ext_key(exts[0]);
 		int len = exts.length;
 		for (int i = 0; i < len; i++) {
-			cmds_view_file_by_ext[Xof_ext_.Get_id_by_ext_(Bry_.new_ascii_(exts[i]))] = rv;
+			cmds_view_file_by_ext[Xof_ext_.Get_id_by_ext_(Bry_.new_a7(exts[i]))] = rv;
 		}
 		return rv;
 	}

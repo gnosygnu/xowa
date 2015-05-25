@@ -30,7 +30,7 @@ public class Map_dd2dms_func extends Pf_func_base {
 		for (int i = 0; i < args_len; i++) {
 			Arg_nde_tkn arg = self.Args_get_by_idx(i);				
 			byte[] key = Pf_func_.Eval_tkn(tmp_bfr, ctx, src, caller, arg.Key_tkn());
-			Object key_tid_obj = Key_hash.Fetch(key);
+			Object key_tid_obj = Key_hash.Get_by(key);
 			if (key_tid_obj != null) {
 				byte[] val = Pf_func_.Eval_tkn(tmp_bfr, ctx, src, caller, arg.Val_tkn());
 				switch (((Byte_obj_val)key_tid_obj).Val()) {

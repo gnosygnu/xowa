@@ -19,7 +19,7 @@ package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*; import gplx.x
 import gplx.xowa.langs.*;
 public class Xow_xwiki_itm implements gplx.CompareAble {
 	public Xow_xwiki_itm(byte[] key_bry, byte[] url_fmt, int lang_id, int domain_tid, byte[] domain_bry, byte[] domain_name) {
-		this.key_bry = key_bry; this.key_str = String_.new_utf8_(key_bry); 
+		this.key_bry = key_bry; this.key_str = String_.new_u8(key_bry); 
 		this.url_fmt = url_fmt; this.lang_id = lang_id;
 		this.url_fmtr = Bry_.Len_eq_0(url_fmt) ? null : Bry_fmtr.new_(url_fmt, "0");
 		this.domain_tid = domain_tid; this.domain_bry = domain_bry; this.domain_name = domain_name;
@@ -36,7 +36,7 @@ public class Xow_xwiki_itm implements gplx.CompareAble {
 	public int compareTo(Object obj) {Xow_xwiki_itm comp = (Xow_xwiki_itm)obj; return Bry_.Compare(key_bry, comp.key_bry);}
 	public boolean Type_is_xwiki_lang(int cur_lang_id) {
 		return	lang_id != Xol_lang_itm_.Id__unknown		// valid lang code
-			&&	domain_tid != Xow_domain_.Tid_int_commons	// commons should never be considered an xwiki_lang; EX:[[commons:A]] PAGE:species:Scarabaeidae; DATE:2014-09-10
+			&&	domain_tid != Xow_domain_type_.Tid_commons	// commons should never be considered an xwiki_lang; EX:[[commons:A]] PAGE:species:Scarabaeidae; DATE:2014-09-10
 			&&	lang_id != cur_lang_id 						// lang is different than current; EX: [[en:A]] in en.wikipedia.org shouldn't link back to self
 			&&	Bry_.Len_gt_0(url_fmt)						// url_fmt exists
 			;

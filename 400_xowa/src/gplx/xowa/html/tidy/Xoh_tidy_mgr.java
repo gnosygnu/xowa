@@ -70,7 +70,7 @@ public class Xoh_tidy_mgr implements GfoInvkAble {
 		return true;
 	}
 	private static final byte[]	// MW:includes/parser/Tidy.php|getWrapped
-	  Wrap_bgn = Bry_.new_ascii_
+	  Wrap_bgn = Bry_.new_a7
 	( "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
 	+ "<html>"
 	+   "<head>"
@@ -78,7 +78,7 @@ public class Xoh_tidy_mgr implements GfoInvkAble {
 	+   "</head>"
 	+   "<body>"
 	)
-	, Wrap_end = Bry_.new_ascii_
+	, Wrap_end = Bry_.new_a7
 	(   "</body>"
 	+ "</html>"
 	);

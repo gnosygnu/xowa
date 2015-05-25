@@ -24,7 +24,7 @@ public class Xof_meta_thumb_parser_tst {
 	@Test  public void Many()			{Tst_parse("1?45,40;0?90,80", itm_y_(45, 40), itm_n_(90, 80));}
 	@Test  public void Seek()			{Tst_parse("1?45,40@2,3,4", itm_y_(45, 40, 2, 3, 4));}
 	private void Tst_parse(String raw_str, Xof_meta_thumb... expd) {
-		byte[] raw = Bry_.new_ascii_(raw_str);
+		byte[] raw = Bry_.new_a7(raw_str);
 		parser.Parse_ary(raw, 0, raw.length);
 		Tfds.Eq_str_lines(Xto_str(expd, 0, expd.length), Xto_str(parser.Ary(), 0, parser.Len()));
 	}

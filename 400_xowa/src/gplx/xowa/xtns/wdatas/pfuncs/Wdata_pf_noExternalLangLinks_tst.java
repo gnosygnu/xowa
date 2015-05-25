@@ -57,7 +57,7 @@ class Wdata_pf_noExternalLangLinks_fxt {
 		int len = data.Langs_len();
 		String[] rv = new String[len];
 		for (int i = 0; i < len; i++) {
-			rv[i] = String_.new_utf8_((byte[])data.Langs_get_at(i));
+			rv[i] = String_.new_u8((byte[])data.Langs_get_at(i));
 		}
 		return rv;
 	}

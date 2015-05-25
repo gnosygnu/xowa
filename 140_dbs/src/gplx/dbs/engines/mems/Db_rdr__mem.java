@@ -32,8 +32,8 @@ public class Db_rdr__mem implements Db_rdr {
 	public byte[] Read_bry(String k)			{return (byte[])row.Get_by(k);}
 	public String Read_str(int i)				{return (String)row.Get_at(i);}
 	public String Read_str(String k)			{return (String)row.Get_by(k);}
-	public byte[] Read_bry_by_str(int i)		{return Bry_.new_utf8__null((String)row.Get_at(i));}		// NOTE: null b/c db can have NULL
-	public byte[] Read_bry_by_str(String k)		{return Bry_.new_utf8__null((String)row.Get_by(k));}		// NOTE: null b/c db can have NULL
+	public byte[] Read_bry_by_str(int i)		{return Bry_.new_u8_safe((String)row.Get_at(i));}		// NOTE: null b/c db can have NULL
+	public byte[] Read_bry_by_str(String k)		{return Bry_.new_u8_safe((String)row.Get_by(k));}		// NOTE: null b/c db can have NULL
 	public DateAdp Read_date_by_str(int i)		{return DateAdp_.parse_iso8561((String)row.Get_at(i));}
 	public DateAdp Read_date_by_str(String k)	{return DateAdp_.parse_iso8561((String)row.Get_by(k));}
 	public byte Read_byte(int i)				{return Byte_.cast_(row.Get_at(i));}

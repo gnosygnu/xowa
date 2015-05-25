@@ -43,17 +43,17 @@ public class Xobc_utl_make_lang_kwds implements GfoInvkAble, Xol_lang_transform 
 		return rv;
 	}
 	public void Add_words() {
-		OrderedHash hash = add_words_hash;
-		OrderedHash tmp = OrderedHash_.new_bry_();
+		Ordered_hash hash = add_words_hash;
+		Ordered_hash tmp = Ordered_hash_.new_bry_();
 		int hash_len = hash.Count();
 		for (int i = 0; i < hash_len; i++) {
-			Xobcl_kwd_lang cfg_lang = (Xobcl_kwd_lang)hash.FetchAt(i); 
+			Xobcl_kwd_lang cfg_lang = (Xobcl_kwd_lang)hash.Get_at(i); 
 			Xol_lang lang = lang_mgr.Get_by_key(cfg_lang.Key_bry()); if (lang == null) continue;
 			int cfg_grp_len = cfg_lang.Grps().length;
 			for (int j = 0; j < cfg_grp_len; j++) {					
 				Xobcl_kwd_row cfg_grp = cfg_lang.Grps()[j];
 				int kwd_id = Xol_kwd_grp_.Id_by_bry(cfg_grp.Key());
-				if (kwd_id == -1) throw Err_.new_("could not find kwd for key: " + String_.new_utf8_(cfg_grp.Key()));
+				if (kwd_id == -1) throw Err_.new_("could not find kwd for key: " + String_.new_u8(cfg_grp.Key()));
 				Xol_kwd_grp kwd_grp = lang.Kwd_mgr().Get_at(kwd_id);
 				tmp.Clear();
 				if (kwd_grp == null) {
@@ -71,37 +71,37 @@ public class Xobc_utl_make_lang_kwds implements GfoInvkAble, Xol_lang_transform 
 						if (!tmp.Has(itm)) tmp.Add(itm, itm);
 					}
 				}
-				byte[][] words = (byte[][])tmp.Xto_ary(byte[].class);
+				byte[][] words = (byte[][])tmp.To_ary(byte[].class);
 				kwd_grp.Srl_load(kwd_grp.Case_match(), words);
 			}
 		}
 	}
-	boolean Hash_itm_applies(OrderedHash hash, byte[] lang_key, byte[] kwd_key, byte[] kwd_word) {
-		Xobcl_kwd_lang cfg_lang = (Xobcl_kwd_lang)hash.Fetch(lang_key); if (cfg_lang == null) return false;
+	boolean Hash_itm_applies(Ordered_hash hash, byte[] lang_key, byte[] kwd_key, byte[] kwd_word) {
+		Xobcl_kwd_lang cfg_lang = (Xobcl_kwd_lang)hash.Get_by(lang_key); if (cfg_lang == null) return false;
 		Xobcl_kwd_row cfg_grp = cfg_lang.Grps_get_by_key(kwd_key); if (cfg_grp == null) return false;
 		return cfg_grp.Itms().length == 0 || cfg_grp.Itms_has(kwd_word);
 	}
 	public void Set(byte[] langs_bry, byte[] kwds) {
-		OrderedHash langs = lang_mgr.Xto_hash(langs_bry);
+		Ordered_hash langs = lang_mgr.Xto_hash(langs_bry);
 		int langs_len = langs.Count();
 		Xol_kwd_mgr kwd_mgr = new Xol_kwd_mgr(lang_mgr.Lang_en());
 		for (int i = 0; i < langs_len; i++) {
-//				Xol_lang_itm lang = (Xol_lang_itm)langs.FetchAt(i);
+//				Xol_lang_itm lang = (Xol_lang_itm)langs.Get_at(i);
 			Xol_lang_srl.Load_keywords(kwd_mgr, kwds);
 		}
 	}
-	public void Parse_add_words(byte[] langs_bry, byte[] kwds) {Parse(langs_bry, kwds, add_words_hash);}	private OrderedHash add_words_hash = OrderedHash_.new_bry_();
-	public void Parse_prepend_hash(byte[] langs_bry, byte[] kwds) {Parse(langs_bry, kwds, prepend_hash);}	private OrderedHash prepend_hash = OrderedHash_.new_bry_();
-	public void Parse_keep_trailing_colon(byte[] langs_bry, byte[] kwds) {Parse(langs_bry, kwds, trailing_colons);}	private OrderedHash trailing_colons = OrderedHash_.new_bry_();
-	private void Parse(byte[] langs_bry, byte[] kwds, OrderedHash hash) {
+	public void Parse_add_words(byte[] langs_bry, byte[] kwds) {Parse(langs_bry, kwds, add_words_hash);}	private Ordered_hash add_words_hash = Ordered_hash_.new_bry_();
+	public void Parse_prepend_hash(byte[] langs_bry, byte[] kwds) {Parse(langs_bry, kwds, prepend_hash);}	private Ordered_hash prepend_hash = Ordered_hash_.new_bry_();
+	public void Parse_keep_trailing_colon(byte[] langs_bry, byte[] kwds) {Parse(langs_bry, kwds, trailing_colons);}	private Ordered_hash trailing_colons = Ordered_hash_.new_bry_();
+	private void Parse(byte[] langs_bry, byte[] kwds, Ordered_hash hash) {
 		Xobcl_kwd_row[] itms = Parse(kwds);
-		OrderedHash langs = lang_mgr.Xto_hash(langs_bry);
+		Ordered_hash langs = lang_mgr.Xto_hash(langs_bry);
 		int langs_len = langs.Count();
 		for (int i = 0; i < langs_len; i++) {
-			Xoac_lang_itm itm = (Xoac_lang_itm)langs.FetchAt(i);
+			Xoac_lang_itm itm = (Xoac_lang_itm)langs.Get_at(i);
 			byte[] key_bry = itm.Key_bry();
 
-			Xobcl_kwd_lang grp = (Xobcl_kwd_lang)hash.Fetch(key_bry);
+			Xobcl_kwd_lang grp = (Xobcl_kwd_lang)hash.Get_by(key_bry);
 			if (grp == null) {
 				grp = new Xobcl_kwd_lang(key_bry, itms); 
 				hash.Add(key_bry, grp);
@@ -114,7 +114,7 @@ public class Xobc_utl_make_lang_kwds implements GfoInvkAble, Xol_lang_transform 
 		int src_len = src.length, pos = 0, fld_bgn = 0;
 		byte[] cur_key = Bry_.Empty;
 		Xol_csv_parser csv_parser = Xol_csv_parser._;
-		ListAdp rv = ListAdp_.new_(); int fld_idx = 0;
+		List_adp rv = List_adp_.new_(); int fld_idx = 0;
 		while (true) {
 			boolean last = pos == src_len;	// NOTE: logic occurs b/c of \n}~-> dlm which gobbles up last \n
 			byte b = last ? Byte_ascii.NewLine : src[pos];
@@ -139,7 +139,7 @@ public class Xobc_utl_make_lang_kwds implements GfoInvkAble, Xol_lang_transform 
 			if (last) break;
 			++pos;
 		}		
-		return (Xobcl_kwd_row[])rv.Xto_ary(Xobcl_kwd_row.class);
+		return (Xobcl_kwd_row[])rv.To_ary(Xobcl_kwd_row.class);
 	}
 }
 class Xobcl_kwd_lang {
@@ -151,10 +151,10 @@ class Xobcl_kwd_lang {
 	public void Merge(Xobcl_kwd_row[] v) {
 		grps = (Xobcl_kwd_row[])Array_.Resize_add(grps, v);
 		for (Xobcl_kwd_row grp : v) {
-			grps_hash.AddReplace(grp.Key(), grp);	// NOTE: AddReplace instead of Add b/c kwds may be expanded; EX: lst is added to all langs but de requires #lst~#section~Abschnitt~; DATE:2013-06-02
+			grps_hash.Add_if_dupe_use_nth(grp.Key(), grp);	// NOTE: Add_if_dupe_use_nth instead of Add b/c kwds may be expanded; EX: lst is added to all langs but de requires #lst~#section~Abschnitt~; DATE:2013-06-02
 		}
 	}
-	public Xobcl_kwd_row Grps_get_by_key(byte[] key) {return (Xobcl_kwd_row)grps_hash.Fetch(key);} private OrderedHash grps_hash = OrderedHash_.new_bry_();
+	public Xobcl_kwd_row Grps_get_by_key(byte[] key) {return (Xobcl_kwd_row)grps_hash.Get_by(key);} private Ordered_hash grps_hash = Ordered_hash_.new_bry_();
 	public byte[] Key_bry() {return key_bry;} private byte[] key_bry;
 	public Xobcl_kwd_row[] Grps() {return grps;} private Xobcl_kwd_row[] grps;
 }

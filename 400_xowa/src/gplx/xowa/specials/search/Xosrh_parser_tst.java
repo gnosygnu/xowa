@@ -69,7 +69,7 @@ class Xosearch_searcher_fxt {
 	Xoae_app app; Xowe_wiki wiki; Xowd_hive_mgr mgr; Bry_bfr tmp_bfr;
 	Xosrh_parser parser;
 	public void Init_search(String ttl_str, int... ids) {		
-		byte[] ttl_bry = Bry_.new_ascii_(ttl_str);		
+		byte[] ttl_bry = Bry_.new_a7(ttl_str);		
 		tmp_bfr.Add(ttl_bry);
 		int len = ids.length;
 		for (int i = 0; i < len; i++) {
@@ -82,7 +82,7 @@ class Xosearch_searcher_fxt {
 		mgr.Create(wiki.Ns_mgr().Ns_main(), ttl_bry, tmp_bfr.Xto_bry_and_clear(), null);
 	}
 	public void Test_search(String ttl_str, int... expd) {
-		byte[] ttl_bry = Bry_.new_ascii_(ttl_str);
+		byte[] ttl_bry = Bry_.new_a7(ttl_str);
 		Xosrh_qry_itm qry_root = parser.Parse(ttl_bry);
 		Xows_ns_mgr ns_mgr = new Xows_ns_mgr(); ns_mgr.Add_all(); // WORKAROUND: xdat fmt does not store ns with search data; pages will be retrieved with ns_id = null; force ns_all (instead of allowing ns_main default);
 		qry_root.Search(Cancelable_.Never, tmp_bfr, ttl_bry, wiki, 100, ns_mgr);
@@ -94,37 +94,37 @@ class Xosearch_parser_fxt {
 	public Xosearch_parser_fxt Clear() {
 		if (parser == null) {
 			parser = Xosrh_parser._;
-			matches = OrderedHash_.new_bry_();
+			matches = Ordered_hash_.new_bry_();
 		}
 		matches.Clear();
 		return this;
-	}	private Xosrh_parser parser; OrderedHash matches;
+	}	private Xosrh_parser parser; Ordered_hash matches;
 	public void Init_match(String name, int... ids) {
 		int len = ids.length;
-		ListAdp id_vals = ListAdp_.new_();
+		List_adp id_vals = List_adp_.new_();
 		for (int i = 0; i < len; i++)
 			id_vals.Add(Xowd_page_itm.new_srch(ids[i], 0));
-		matches.Add(Bry_.new_ascii_(name), id_vals);
+		matches.Add(Bry_.new_a7(name), id_vals);
 	}
 	public void Test_match(String raw, int... expd) {
-		byte[] src = Bry_.new_ascii_(raw);
+		byte[] src = Bry_.new_a7(raw);
 		Xosrh_qry_itm qry_root = parser.Parse(src);
 		Test_match_assign_ids(src, qry_root);
 		Xosrh_qry_ids matches = qry_root.Matches(src);
 		Tfds.Eq_ary(expd, Xto_ints(matches.Ids()));
 	}
-	public static int[] Xto_ints(ListAdp list) {
+	public static int[] Xto_ints(List_adp list) {
 		if (list == null) return Int_.Ary_empty;
 		int len = list.Count();
 		int[] rv = new int[len];
 		for (int i = 0; i < len; i++)
-			rv[i] = ((Xowd_page_itm)list.FetchAt(i)).Id();
+			rv[i] = ((Xowd_page_itm)list.Get_at(i)).Id();
 		return rv;
 	}
 	private void Test_match_assign_ids(byte[] src, Xosrh_qry_itm itm) {
 		if (itm.Tid() == Xosrh_qry_itm.Tid_word) {
 			byte[] word = itm.Word();
-			ListAdp ids = (ListAdp)matches.Fetch(word);
+			List_adp ids = (List_adp)matches.Get_by(word);
 			itm.Ids_(ids);
 		}
 		else {
@@ -133,12 +133,12 @@ class Xosearch_parser_fxt {
 		}
 	}
 	public void Test_scan(String raw, String... expd) {
-		byte[] src = Bry_.new_ascii_(raw);
+		byte[] src = Bry_.new_a7(raw);
 		Xosrh_qry_tkn[] actl_itms = Xosrh_scanner._.Scan(src);
 		Tfds.Eq_ary(expd, To_strings(src, actl_itms));
 	}
 	public void Test_scan_tids(String raw, byte... expd) {
-		byte[] src = Bry_.new_ascii_(raw);
+		byte[] src = Bry_.new_a7(raw);
 		Xosrh_qry_tkn[] actl_itms = Xosrh_scanner._.Scan(src);
 		Tfds.Eq_ary(expd, To_tids(actl_itms));
 	}
@@ -147,7 +147,7 @@ class Xosearch_parser_fxt {
 		String[] rv = new String[len];
 		for (int i = 0; i < len; i++) {
 			Xosrh_qry_tkn tkn = ary[i];
-			rv[i] = String_.new_ascii_(tkn.Val(src));
+			rv[i] = String_.new_a7(tkn.Val(src));
 		}
 		return rv;
 	}
@@ -161,7 +161,7 @@ class Xosearch_parser_fxt {
 		return rv;
 	}
 	public void Test_parse(String raw, String expd) {
-		byte[] src = Bry_.new_ascii_(raw);
+		byte[] src = Bry_.new_a7(raw);
 		Xosrh_qry_itm qry_root = parser.Parse(src);
 		Tfds.Eq(expd, qry_root.Xto_str(src));
 	}

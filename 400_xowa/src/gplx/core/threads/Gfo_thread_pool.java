@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.threads; import gplx.*; import gplx.core.*;
 public class Gfo_thread_pool implements GfoInvkAble {
 	private Object thread_lock = new Object();
-	private ListAdp queue = ListAdp_.new_();
+	private List_adp queue = List_adp_.new_();
 	private GfoMsg run_msg = GfoMsg_.new_cast_(Invk_run_wkr);
 	private boolean running = false;
 	public Gfo_usr_dlg Usr_dlg() {return usr_dlg;} public Gfo_thread_pool Usr_dlg_(Gfo_usr_dlg v) {usr_dlg = v; return this;} private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Noop;
@@ -39,7 +39,7 @@ public class Gfo_thread_pool implements GfoInvkAble {
 			if (running) return;								// already running; discard run request and rely on running-wkr to call Run when done
 			int len = queue.Count(); if (len == 0) return;		// nothing in list; occurs when last item calls Run when done
 			running = true;
-			wkr = (Gfo_thread_wkr)ListAdp_.Pop_first(queue);
+			wkr = (Gfo_thread_wkr)List_adp_.Pop_first(queue);
 		}			
 		Thread_adp_.Run_invk_msg(wkr.Name(), this, run_msg.Clear().Add("v", wkr));
 	}

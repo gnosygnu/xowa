@@ -208,7 +208,7 @@ class GfmlFrame_nde_ {
 	@gplx.Internal protected static void TransferToNde(GfmlObjList waitingTkns, GfmlNde nde, int bgn) {
 		int end = waitingTkns.Count();
 		for (int i = bgn; i < end; i++) {
-			GfmlObj tkn = waitingTkns.FetchAt(i);
+			GfmlObj tkn = waitingTkns.Get_at(i);
 			nde.SubObjs_Add(tkn);
 		}
 		if (bgn != end) // ignore if bgn == end
@@ -218,7 +218,7 @@ class GfmlFrame_nde_ {
 		int len = end - bgn;
 		if (len <= 0 || end == -1) return;	// -1 b/c calling proc passes end - 1, and end may be 0
 		for (int i = 0; i < len; i++)
-			trg.SubObjs_Add(src.FetchAt(i + bgn));
+			trg.SubObjs_Add(src.Get_at(i + bgn));
 		src.Del_range(bgn, end - 1);
 	}		
 }

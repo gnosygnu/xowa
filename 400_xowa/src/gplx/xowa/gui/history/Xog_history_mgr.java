@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.history; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 public class Xog_history_mgr {
-	private final OrderedHash hash = OrderedHash_.new_bry_(); private final Xog_history_stack stack = new Xog_history_stack();
+	private final Ordered_hash hash = Ordered_hash_.new_bry_(); private final Xog_history_stack stack = new Xog_history_stack();
 	public int Count() {return hash.Count();}
 	public Xoae_page Cur_page(Xowe_wiki wiki) {return Get_or_fetch(wiki, stack.Cur_itm());}
 	public Xoae_page Go_bwd(Xowe_wiki wiki) {return Go_by_dir(wiki, Bool_.N);}
@@ -57,7 +57,7 @@ public class Xog_history_mgr {
 	}
 	private Xoae_page Get_or_fetch(Xowe_wiki wiki, Xog_history_itm itm) {
 		byte[] page_key = Build_page_key(itm.Wiki(), itm.Page(), itm.Qarg());
-		Xoae_page rv = (Xoae_page)hash.Fetch(page_key);
+		Xoae_page rv = (Xoae_page)hash.Get_by(page_key);
 		if (rv != null) return rv;
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, itm.Page());
 		return wiki.Data_mgr().Get_page(ttl, false);

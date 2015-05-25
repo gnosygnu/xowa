@@ -34,7 +34,7 @@ public class Xobc_utl_make_lang_tst {
 			);
 	}
 	@Test  public void Trailing_colon() {
-		fxt.Kwd_mgr().Parse_keep_trailing_colon(Bry_.new_utf8_("fr"), Bry_.new_utf8_(String_.Concat_lines_nl
+		fxt.Kwd_mgr().Parse_keep_trailing_colon(Bry_.new_u8("fr"), Bry_.new_u8(String_.Concat_lines_nl
 			(	"if|if:~si:~"
 			,	"ifeq|"
 			)));
@@ -61,7 +61,7 @@ public class Xobc_utl_make_lang_tst {
 			));
 	}
 	@Test  public void Prepend_hash() {
-		fxt.Kwd_mgr().Parse_prepend_hash(Bry_.new_utf8_("fr"), Bry_.new_utf8_(String_.Concat_lines_nl
+		fxt.Kwd_mgr().Parse_prepend_hash(Bry_.new_u8("fr"), Bry_.new_u8(String_.Concat_lines_nl
 			(	"if|if:~si:~"
 			,	"ifeq|"
 			,	"tag|tag~"
@@ -91,7 +91,7 @@ public class Xobc_utl_make_lang_tst {
 			));
 	}
 	@Test  public void Add_words_hash() {
-		fxt.Kwd_mgr().Parse_add_words(Bry_.new_utf8_("fr"), Bry_.new_utf8_(String_.Concat_lines_nl
+		fxt.Kwd_mgr().Parse_add_words(Bry_.new_u8("fr"), Bry_.new_u8(String_.Concat_lines_nl
 			(	"if|if_new:~if~"
 			,	"ifeq|"
 			)));
@@ -116,7 +116,7 @@ public class Xobc_utl_make_lang_tst {
 			));
 	}
 	@Test  public void Manual_text() {
-		fxt.Mgr().Parse_manual_text(Bry_.new_utf8_("fr"), Bry_.new_utf8_(String_.Concat_lines_nl
+		fxt.Mgr().Parse_manual_text(Bry_.new_u8("fr"), Bry_.new_u8(String_.Concat_lines_nl
 			(	"app;"
 			))
 			, fxt.Mgr().Manual_text_end_hash());
@@ -148,15 +148,15 @@ class Xobc_utl_make_lang_fxt {
 		mgr = new Xobc_utl_make_lang(app.Lang_mgr(), app.Fsys_mgr(), app.Msg_log());
 		return this;
 	}	private String_bldr sb = String_bldr_.new_(); private Xoae_app app;
-	public Xobcl_kwd_row row_(String key, String... itms) {return new Xobcl_kwd_row(Bry_.new_ascii_(key), Bry_.Ary(itms));} 
-	public void Parse_rows(String raw, Xobcl_kwd_row... expd) {Tfds.Eq_str_lines(Xto_str(expd), Xto_str(Xobc_utl_make_lang_kwds.Parse(Bry_.new_ascii_(raw))));}
+	public Xobcl_kwd_row row_(String key, String... itms) {return new Xobcl_kwd_row(Bry_.new_a7(key), Bry_.Ary(itms));} 
+	public void Parse_rows(String raw, Xobcl_kwd_row... expd) {Tfds.Eq_str_lines(Xto_str(expd), Xto_str(Xobc_utl_make_lang_kwds.Parse(Bry_.new_a7(raw))));}
 	public void Ini_file_mw_core(String lang, String raw) {
 		Io_url fil = app.Fsys_mgr().Cfg_lang_core_dir().OwnerDir().GenSubFil_nest("mediawiki", "core_php", "Messages" + String_.UpperFirst(lang) + ".php");
-		Io_mgr._.SaveFilStr(fil, raw);
+		Io_mgr.I.SaveFilStr(fil, raw);
 	}
 	public void Tst_file_xo(String lang, String expd) {
 		Io_url fil = Xol_lang_.xo_lang_fil_(app.Fsys_mgr(), lang);
-		Tfds.Eq_str_lines(expd, Io_mgr._.LoadFilStr(fil));
+		Tfds.Eq_str_lines(expd, Io_mgr.I.LoadFilStr(fil));
 	}
 	private String Xto_str(Xobcl_kwd_row[] expd) {
 		int len = expd.length;

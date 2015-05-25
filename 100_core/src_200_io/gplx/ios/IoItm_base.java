@@ -23,7 +23,7 @@ public abstract class IoItm_base implements GfoInvkAble, CompareAble {
 	public void OwnerDir_set(IoItmDir v) {if (v == this) throw Err_.new_("dir cannot be its own owner").Add("url", v.url.Raw());
 		url = v == null && ownerDir != null
 						? ownerDir.url.GenSubFil(name)	// create url, since ownerDir will soon be null; NOTE: must call .url
-						: Io_url_.Null;					// delete url, since ownerDir will be avail
+						: Io_url_.Empty;					// delete url, since ownerDir will be avail
 		ownerDir = v;
 	}
 	public String Name() {return name;} private String name;
@@ -32,9 +32,9 @@ public abstract class IoItm_base implements GfoInvkAble, CompareAble {
 		if (ownerDir == null) url = url.OwnerDir().GenSubFil(name); 
 		return this;
 	} 
-	public Object XtnProps_get(String key) {return props.Fetch(key);} HashAdp props = HashAdp_.Null;
+	public Object XtnProps_get(String key) {return props.Get_by(key);} Hash_adp props = Hash_adp_.Noop;
 	public IoItm_base XtnProps_set(String key, Object val) {
-		if (props == HashAdp_.Null) props = HashAdp_.new_();
+		if (props == Hash_adp_.Noop) props = Hash_adp_.new_();
 		props.Del(key);
 		props.Add(key, val);
 		return this;

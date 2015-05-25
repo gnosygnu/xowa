@@ -40,14 +40,14 @@ class Xop_randomRootPage_page_fxt {
 	public void Init_create_page(String page) {parser_fxt.Init_page_create(page, page);}
 	public void Test_open(String special_url, String expd) {
 		Xoae_page page = Test_special_open(wiki, special_page, special_url);
-		Tfds.Eq(expd, String_.new_ascii_(page.Url().Page_bry()));
-		Tfds.Eq(expd, String_.new_ascii_(page.Data_raw()));
+		Tfds.Eq(expd, String_.new_a7(page.Url().Page_bry()));
+		Tfds.Eq(expd, String_.new_a7(page.Data_raw()));
 	}
 	public static Xoae_page Test_special_open(Xowe_wiki wiki, Xows_page special_page, String special_url) {
 		Xoae_page page = wiki.Ctx().Cur_page();
 		Xoa_url url = Xoa_url_parser.Parse_url(wiki.Appe(), wiki, special_url);
 		page.Url_(url);
-		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_ascii_(special_url));
+		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_a7(special_url));
 		page.Ttl_(ttl);
 		special_page.Special_gen(wiki, page, url, ttl);
 		return page;

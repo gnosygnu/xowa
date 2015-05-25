@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 public class Xop_xnde_tag_stack {
 	public void Push()		{xmlTagsStack.Add(xmlTags); xmlTags = new int[Xop_xnde_tag_._MaxLen];}
-	public void Pop()		{xmlTags = (int[])ListAdp_.Pop(xmlTagsStack);}
+	public void Pop()		{xmlTags = (int[])List_adp_.Pop(xmlTagsStack);}
 	public boolean Has(int id) {return xmlTags[id] != 0;}
 	public void Add(int id) {++xmlTags[id];}
 	public void Del(int id) {
@@ -30,6 +30,6 @@ public class Xop_xnde_tag_stack {
 			xmlTags[i] = 0;
 		xmlTagsStack.Clear();
 	}
-	ListAdp xmlTagsStack = ListAdp_.new_();
+	List_adp xmlTagsStack = List_adp_.new_();
 	int[] xmlTags = new int[Xop_xnde_tag_._MaxLen];
 }

@@ -31,7 +31,7 @@ public class Io_sort_fil_basic implements Io_sort_cmd { // 123|bgn|end|1
 	private void Flush() {
 		Io_url url = url_gen.Nxt_url();
 		usr_dlg.Prog_one(GRP_KEY, "make", "making: ~{0}", url.NameAndExt());
-		Io_mgr._.SaveFilBry(url, bfr.Bfr(), bfr.Len());
+		Io_mgr.I.SaveFilBry(url, bfr.Bfr(), bfr.Len());
 		bfr.Clear();
 	}
 	static final String GRP_KEY = "xowa.bldr.io_sort";

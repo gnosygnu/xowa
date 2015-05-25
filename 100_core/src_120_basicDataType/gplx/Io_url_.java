@@ -18,16 +18,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 import gplx.ios.*; /*IoUrlInfo_*/
 public class Io_url_ {
-	public static final Io_url Null = new Io_url("", IoUrlInfo_.Nil);
+	public static final Io_url Empty = new Io_url("", IoUrlInfo_.Nil);
 	public static final Io_url NullPtr = null;
 	public static final Io_url Parser = new Io_url("", IoUrlInfo_.Nil);
 	public static Io_url as_(Object obj) {return obj instanceof Io_url ? (Io_url)obj : null;}
 	public static Io_url cast_(Object obj) {try {return (Io_url)obj;} catch(Exception exc) {throw Err_.type_mismatch_exc_(exc, Io_url.class, obj);}}
 	public static Io_url Usr() {
 		if (usr_dir == null) {
-			usr_dir = Op_sys.Cur().Tid_is_lnx()
-				? Io_url_.new_inf_(String_.Format("/home/{0}/", Env_.UserName()), IoUrlInfo_.Lnx)
-				: Io_url_.new_inf_("C:\\", IoUrlInfo_.Wnt);
+			switch (Op_sys.Cur().Tid()) {
+				case Op_sys.Tid_wnt: usr_dir = Io_url_.new_inf_("C:\\", IoUrlInfo_.Wnt); break;
+				case Op_sys.Tid_lnx: usr_dir = Io_url_.new_inf_(String_.Format("/home/{0}/", Env_.UserName()), IoUrlInfo_.Lnx); break;
+				case Op_sys.Tid_osx: usr_dir = Io_url_.new_inf_(String_.Format("/Users/{0}/", Env_.UserName()), IoUrlInfo_.Lnx); break;
+				case Op_sys.Tid_drd: usr_dir = Io_url_.new_inf_(String_.Format("/mnt/{0}/", Env_.UserName()), IoUrlInfo_.Lnx); break;
+				default: throw Err_.unhandled(Op_sys.Cur().Tid());
+			}
 		}
 		return usr_dir;
 	}	static Io_url usr_dir;
@@ -44,12 +48,12 @@ public class Io_url_ {
 	public static Io_url new_fil_(String raw) {return new_any_(raw);}
 	public static Io_url new_dir_(String raw) {return new_any_(raw);}	// NOTE: for now, same as new_fil; stack overflow when doing new_dir
 	public static Io_url new_any_(String raw) {return new_inf_(raw, IoUrlInfoRegy._.Match(raw));}
-	public static Io_url new_inf_(String raw, IoUrlInfo info) {return String_.Eq(raw, "") ? Io_url_.Null : new Io_url(raw, info);}
+	public static Io_url new_inf_(String raw, IoUrlInfo info) {return String_.Eq(raw, "") ? Io_url_.Empty : new Io_url(raw, info);}
 	public static Io_url http_any_(String src, boolean wnt) {
 		return new_any_(parse_http_file(src, wnt));
 	}
 	private static String parse_http_file(String v, boolean wnt) {
-		byte[] v_bry = Bry_.new_utf8_(v);
+		byte[] v_bry = Bry_.new_u8(v);
 		int v_len = v_bry.length;
 		if (Bry_.HasAtBgn(v_bry, Io_url.Http_file_bry, 0, v_len)) {
 			byte[] rv = new byte[v_len - Io_url.Http_file_len];
@@ -58,7 +62,7 @@ public class Io_url_ {
 				if (wnt && b == Byte_ascii.Slash) b = Byte_ascii.Backslash;
 				rv[i] = b;
 			}
-			return String_.new_utf8_(rv);
+			return String_.new_u8(rv);
 		}
 		return v;
 	}

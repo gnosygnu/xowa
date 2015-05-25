@@ -24,6 +24,6 @@ public class Wdata_alias_itm implements Wdata_lang_sortable {
 	public byte[] Lang_code() {return lang;}
 	public int Lang_sort() {return lang_sort;} public void Lang_sort_(int v) {lang_sort = v;} private int lang_sort = Wdata_lang_sorter.Sort_null;
 	@Override public String toString() {// TEST:
-		return String_.Concat_with_str("|", String_.new_utf8_(lang), String_.Concat_with_str("~", String_.Ary(vals)));
+		return String_.Concat_with_str("|", String_.new_u8(lang), String_.Concat_with_str("~", String_.Ary(vals)));
 	}
 }

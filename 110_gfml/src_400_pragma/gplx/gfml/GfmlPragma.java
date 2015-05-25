@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfml; import gplx.*;
-import gplx.lists.*;/*HashAdp_list*/
+import gplx.lists.*;/*Hash_adp_list*/
 interface GfmlPragma {
 	String KeyOfPragma();
 	void Exec(GfmlBldr bldr, GfmlNde pragmaNde);
@@ -26,7 +26,7 @@ class GfmlPragmaMgr {
 	public void Pragmas_add(GfmlPragma cmd) {pragmas.Add(cmd.KeyOfPragma(), cmd);}		
 	public boolean Pragmas_compile(String ndeName, GfmlBldr bldr) {
 		if (pragmas.Count() == 0) return false;
-		GfmlPragma cmd = (GfmlPragma)pragmas.Fetch(ndeName); if (cmd == null) return false;
+		GfmlPragma cmd = (GfmlPragma)pragmas.Get_by(ndeName); if (cmd == null) return false;
 		GfmlNde pragmaNde = bldr.CurNde();
 		pragmaNde.ObjType_set_pragma();
 		cmd.Exec(bldr, pragmaNde);
@@ -38,13 +38,13 @@ class GfmlPragmaMgr {
 	public void EndCmds_add(GfmlDocPos pos, GfmlBldrCmd cmd) {endCmds.AddInList(pos.Path(), cmd);}
 	public void EndCmds_del(GfmlDocPos pos, GfmlBldrCmd cmd) {endCmds.DelInList(pos.Path(), cmd);}
 	public void EndCmds_exec(GfmlDocPos pos, GfmlBldr bldr)  {Exec(pos, bldr, endCmds);}
-	static void Exec(GfmlDocPos pos, GfmlBldr bldr, HashAdp_list cmds) {
-		ListAdp list = cmds.Fetch(pos.Path()); if (list == null) return;
+	static void Exec(GfmlDocPos pos, GfmlBldr bldr, Hash_adp_list cmds) {
+		List_adp list = cmds.Get_by(pos.Path()); if (list == null) return;
 		for (int i = 0; i < list.Count(); i++) {
-			GfmlBldrCmd cmd = (GfmlBldrCmd)list.FetchAt(i);
+			GfmlBldrCmd cmd = (GfmlBldrCmd)list.Get_at(i);
 			cmd.Exec(bldr, GfmlTkn_.Null);
 		}
 	}
-	HashAdp pragmas = HashAdp_.new_(); HashAdp_list bgnCmds = HashAdp_list.new_(), endCmds = HashAdp_list.new_();
+	Hash_adp pragmas = Hash_adp_.new_(); Hash_adp_list bgnCmds = Hash_adp_list.new_(), endCmds = Hash_adp_list.new_();
         public static GfmlPragmaMgr new_() {return new GfmlPragmaMgr();} GfmlPragmaMgr() {}
 }

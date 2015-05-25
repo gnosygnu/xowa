@@ -33,7 +33,7 @@ public class Xog_search_suggest_mgr implements GfoInvkAble {
 	public Gfo_url_arg[] Args_default() {return args_default;} private Gfo_url_arg[] args_default = Gfo_url_arg.Ary_empty;
 	public void Args_default_str_(String v) {
 		this.args_default_str = v;
-		byte[] bry = Bry_.new_utf8_("http://x.org/a?" + v);
+		byte[] bry = Bry_.new_u8("http://x.org/a?" + v);
 		Gfo_url tmp_url = new Gfo_url();
 		app.Url_parser().Url_parser().Parse(tmp_url, bry, 0, bry.length);
 		args_default = tmp_url.Args();
@@ -45,7 +45,7 @@ public class Xog_search_suggest_mgr implements GfoInvkAble {
 		long prv_time = Env_.TickCount();
 		while (cur_cmd.Working()) {
 			if (Env_.TickCount() - prv_time > 4000) {
-				if (log_enabled) app.Usr_dlg().Log_many("", "", "search cancel timeout: word=~{0}", String_.new_utf8_(search_bry));
+				if (log_enabled) app.Usr_dlg().Log_many("", "", "search cancel timeout: word=~{0}", String_.new_u8(search_bry));
 				cur_cmd.Working_(false);
 				break;
 			}
@@ -62,12 +62,12 @@ public class Xog_search_suggest_mgr implements GfoInvkAble {
 		this.Cancel();
 		synchronized (thread_lock) {
 			if (Bry_.Eq(search_bry , last_search_bry)) {
-				if (log_enabled) app.Usr_dlg().Log_many("", "", "search repeated?: word=~{0}", String_.new_utf8_(search_bry));
+				if (log_enabled) app.Usr_dlg().Log_many("", "", "search repeated?: word=~{0}", String_.new_u8(search_bry));
 				return;
 			}
 			cur_cmd.Init(wiki, search_bry, results_max, search_mode, all_pages_extend, all_pages_min);
 			this.last_search_bry = search_bry;
-			if (log_enabled) app.Usr_dlg().Log_many("", "", "search bgn: word=~{0}", String_.new_utf8_(search_bry));
+			if (log_enabled) app.Usr_dlg().Log_many("", "", "search bgn: word=~{0}", String_.new_u8(search_bry));
 			cur_cmd.Search();
 		}
 	}	private Xog_search_suggest_cmd cur_cmd; byte[] last_search_bry;
@@ -75,24 +75,24 @@ public class Xog_search_suggest_mgr implements GfoInvkAble {
 		// synchronized (thread_lock) NOTE: never use synchronized here; will synchronized search; DATE:2013-09-24
 		byte[] search_bry = cur_cmd.Search_bry();
 		if (!Bry_.Eq(search_bry, last_search_bry)) {
-			if (log_enabled) app.Usr_dlg().Log_many("", "", "search does not match?: expd=~{0} actl=~{1}", String_.new_utf8_(last_search_bry), String_.new_utf8_(search_bry));
+			if (log_enabled) app.Usr_dlg().Log_many("", "", "search does not match?: expd=~{0} actl=~{1}", String_.new_u8(last_search_bry), String_.new_u8(search_bry));
 			return;	// do not notify if search terms do not match
 		}
-		ListAdp found = cur_cmd.Results();
+		List_adp found = cur_cmd.Results();
 		wtr.Add_str(cbk_func);
 		wtr.Add_paren_bgn();
 			wtr.Add_str_quote(search_bry).Add_comma();				
 			wtr.Add_brack_bgn();
 				int len = found.Count();
 				for (int i = 0; i < len; i++) {
-					Xowd_page_itm p = (Xowd_page_itm)found.FetchAt(i);
+					Xowd_page_itm p = (Xowd_page_itm)found.Get_at(i);
 					Xow_ns ns = wiki.Ns_mgr().Ids_get_or_null(p.Ns_id());
 					byte[] ttl = Xoa_ttl.Replace_unders(ns.Gen_ttl(p.Ttl_page_db()));
 					wtr.Add_str_arg(i, ttl);
 				}
 			wtr.Add_brack_end();
 		wtr.Add_paren_end_semic();
-		if (log_enabled) app.Usr_dlg().Log_many("", "", "search end: word=~{0}", String_.new_utf8_(search_bry));
+		if (log_enabled) app.Usr_dlg().Log_many("", "", "search end: word=~{0}", String_.new_u8(search_bry));
 		main_win.Active_html_box().Html_js_eval_script(wtr.Xto_str_and_clear());
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

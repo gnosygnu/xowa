@@ -50,7 +50,7 @@ public class Xowd_db_mgr {
 			Xowd_db_file db = dbs__ary[i];
 			if (!Byte_.In(db.Tid(), tids)) continue;
 			db.Rls();
-			Io_mgr._.DeleteFil_args(db.Url()).MissingFails_off().Exec();
+			Io_mgr.I.DeleteFil_args(db.Url()).MissingFails_off().Exec();
 			db.Cmd_mode_(Db_cmd_mode.Tid_delete);
 		}
 		db__core.Tbl__db().Commit_all(this);

@@ -50,6 +50,6 @@ class Xop_statistics_page_fxt {
 		special_page = wiki.Special_mgr().Page_statistics();
 	}	private Xop_fxt parser_fxt; private Xop_statistics_page special_page; private Xowe_wiki wiki;
 	public void Test_html(String expd) {
-		Tfds.Eq_str_lines(expd, String_.new_utf8_(special_page.Build_html(wiki)));
+		Tfds.Eq_str_lines(expd, String_.new_u8(special_page.Build_html(wiki)));
 	}
 }

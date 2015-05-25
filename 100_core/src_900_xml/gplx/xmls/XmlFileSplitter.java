@@ -24,7 +24,7 @@ public class XmlFileSplitter {
 	public void Clear() {hdr = null;}
 	public void Split(Io_url xmlUrl) {
 		Io_url partDir = opts.PartDir();
-		byte[] xmlEndTagAry = Bry_.new_utf8_(opts.XmlEnd());
+		byte[] xmlEndTagAry = Bry_.new_u8(opts.XmlEnd());
 		byte[][] nameAry = XtoByteAry(opts.XmlNames());
 		int partIdx = 0;
 
@@ -36,7 +36,7 @@ public class XmlFileSplitter {
 		int findPos = FindMatchPos(rdr.CurAry(), nameAry); if (findPos == String_.Find_none) throw Err_.new_("could not find any names in first segment");
 		byte[] dataAry = SplitHdr(rdr.CurAry(), findPos);
 		if (opts.XmlBgn() != null)
-			hdr = Bry_.new_utf8_(opts.XmlBgn());
+			hdr = Bry_.new_u8(opts.XmlBgn());
 		byte[] tempAry = new byte[0];
 		int newFindPos = FindMatchPosRev(dataAry, nameAry);
 		findPos = (newFindPos <= findPos) ? String_.Find_none : newFindPos;
@@ -134,7 +134,7 @@ public class XmlFileSplitter {
 	byte[][] XtoByteAry(String[] names) {
 		byte[][] rv = new byte[names.length][];
 		for (int i = 0; i < names.length; i++)
-			rv[i] = Bry_.new_utf8_(names[i]);
+			rv[i] = Bry_.new_u8(names[i]);
 		return rv;
 	}
 }

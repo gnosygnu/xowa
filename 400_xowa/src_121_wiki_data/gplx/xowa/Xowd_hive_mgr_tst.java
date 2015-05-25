@@ -70,28 +70,28 @@ class Xowd_hive_mgr_fxt {
 	}
 	public Xowd_hive_mgr_fxt Tst_reg(String expd) {
 		Io_url file_orig = Io_url_.mem_fil_("mem/xowa/wiki/en.wikipedia.org/ns/000/title/reg.csv");
-		Tfds.Eq_str_lines(expd, Io_mgr._.LoadFilStr(file_orig));
+		Tfds.Eq_str_lines(expd, Io_mgr.I.LoadFilStr(file_orig));
 		return this;
 	}
 	public Xowd_hive_mgr_fxt Tst_fil(int fil, String expd) {
 		Io_url url = wiki.Tdb_fsys_mgr().Url_ns_fil(Xotdb_dir_info_.Tid_page, Xow_ns_.Id_main, fil);
-		Tfds.Eq_str_lines(expd, Io_mgr._.LoadFilStr(url));
+		Tfds.Eq_str_lines(expd, Io_mgr.I.LoadFilStr(url));
 		return this;
 	}
 	public Xowd_hive_mgr_fxt Update(String key, String data) {
-		mgr.Update(wiki.Ns_mgr().Ns_main(), Bry_.new_ascii_(key), null, Bry_.new_ascii_(data), 0, Byte_ascii.Pipe, true, true);
+		mgr.Update(wiki.Ns_mgr().Ns_main(), Bry_.new_a7(key), null, Bry_.new_a7(data), 0, Byte_ascii.Pipe, true, true);
 		return this;
 	}
 	public Xowd_hive_mgr_fxt Create(String key, String data) {
-		mgr.Create(wiki.Ns_mgr().Ns_main(), Bry_.new_ascii_(key), Bry_.new_ascii_(data), null);		
+		mgr.Create(wiki.Ns_mgr().Ns_main(), Bry_.new_a7(key), Bry_.new_a7(data), null);		
 		return this;
 	}
 	public Xowd_hive_mgr_fxt Create_and_sort(String key, String data) {
-		mgr.Create(wiki.Ns_mgr().Ns_main(), Bry_.new_ascii_(key), Bry_.new_ascii_(data), new Bry_comparer_bgn_eos(0));		
+		mgr.Create(wiki.Ns_mgr().Ns_main(), Bry_.new_a7(key), Bry_.new_a7(data), new Bry_comparer_bgn_eos(0));		
 		return this;
 	}
 //	public void Get(String ttl_str, boolean exists) {
-//		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_utf8_(ttl_str));
+//		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_u8(ttl_str));
 //		Xowd_page_itm row = mgr.Get(ttl.Ns(), ttl.Full_txt());
 //		Tfds.Eq(exists, row != null);
 //	}

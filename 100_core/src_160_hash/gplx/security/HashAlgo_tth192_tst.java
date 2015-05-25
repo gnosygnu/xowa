@@ -32,7 +32,7 @@ public class HashAlgo_tth192_tst {
 		tst_CalcBase32FromString(String_.Repeat("A", (int)Math_.Pow(2, 27)), "QNIJO36QDIQREUT3HWK4MDVKD2T6OENAEKYADTQ");
 	}
 	void tst_CalcBase32FromString(String raw, String expd) {
-		IoStream stream = IoStream_.mem_txt_(Io_url_.Null, raw);
+		IoStream stream = IoStream_.mem_txt_(Io_url_.Empty, raw);
 		String actl = HashAlgo_.Tth192.CalcHash(ConsoleDlg_.Null, stream);
 		Tfds.Eq(expd, actl);
 	}

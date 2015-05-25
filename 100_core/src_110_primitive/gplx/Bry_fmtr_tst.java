@@ -40,7 +40,7 @@ public class Bry_fmtr_tst {
 	@Test  public void Err_missing_idx()	{tst_Format("~{0}", "~{0}");}
 	String[] ary_(String... ary) {return ary;}
 	void tst(String fmt, String[] keys, String[] args, String expd) {
-		Bry_fmtr fmtr = new Bry_fmtr().Fmt_(Bry_.new_utf8_(fmt));
+		Bry_fmtr fmtr = new Bry_fmtr().Fmt_(Bry_.new_u8(fmt));
 		fmtr.Keys_(keys);
 		String actl = fmtr.Bld_str_many(args);
 		Tfds.Eq(expd, actl);
@@ -73,6 +73,6 @@ class Bry_fmtr_fxt {
 	public void Bld_bfr_many_and_set_fmt(String fmt, Object[] args, String expd) {
 		fmtr.Fmt_(fmt);
 		fmtr.Bld_bfr_many_and_set_fmt(args);
-		Tfds.Eq(expd, String_.new_ascii_(fmtr.Fmt()));
+		Tfds.Eq(expd, String_.new_a7(fmtr.Fmt()));
 	}
 }

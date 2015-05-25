@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 import gplx.brys.*;
 public class Bry_fmtr_arg_ {
-	public static Bry_fmtr_arg_bry bry_(String v)				{return new Bry_fmtr_arg_bry(Bry_.new_utf8_(v));}
+	public static Bry_fmtr_arg_bry bry_(String v)				{return new Bry_fmtr_arg_bry(Bry_.new_u8(v));}
 	public static Bry_fmtr_arg_bry bry_(byte[] v)				{return new Bry_fmtr_arg_bry(v);}
 	public static Bry_fmtr_arg_byt byt_(byte v)				{return new Bry_fmtr_arg_byt(v);}
 	public static Bry_fmtr_arg_int int_(int v)				{return new Bry_fmtr_arg_int(v);}

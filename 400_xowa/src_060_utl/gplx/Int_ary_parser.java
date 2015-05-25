@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 public class Int_ary_parser extends Obj_ary_parser_base {
 	Number_parser parser = new Number_parser(); int[] ary; int ary_idx;
-	public int[] Parse_ary(String str, byte dlm) {byte[] bry = Bry_.new_utf8_(str); return Parse_ary(bry, 0, bry.length, dlm);}
+	public int[] Parse_ary(String str, byte dlm) {byte[] bry = Bry_.new_u8(str); return Parse_ary(bry, 0, bry.length, dlm);}
 	public int[] Parse_ary(byte[] bry, int bgn, int end, byte dlm) {
 		Parse_core(bry, bgn, end, dlm, Byte_ascii.Nil);
 		return ary;
@@ -32,7 +32,7 @@ public class Int_ary_parser extends Obj_ary_parser_base {
 		}
 	}
 	@Override protected void Parse_itm(byte[] bry, int bgn, int end) {
-		parser.Parse(bry, bgn, end); if (parser.Has_err() || parser.Has_frac()) throw Err_.new_fmt_("failed to parse number: {0}", String_.new_utf8_(bry, bgn, end));
+		parser.Parse(bry, bgn, end); if (parser.Has_err() || parser.Has_frac()) throw Err_.new_fmt_("failed to parse number: {0}", String_.new_u8(bry, bgn, end));
 		ary[ary_idx++] = parser.Rv_as_int();
 	}
 	public static final Int_ary_parser _ = new Int_ary_parser();

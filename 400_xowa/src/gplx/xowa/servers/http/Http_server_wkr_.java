@@ -26,12 +26,12 @@ class Http_server_wkr_ {
 		else if (req_array.length == 3)				mode = 2;
 		if (mode == -1) return req;	// not a link to a Main Page; EX:localhost:8080/en.wikipedia.org/wiki/Earth
 		if (req_array.length < 3) return req; // shouldn't happen; EX: "localhost:8080wiki"
-		byte[] wiki_domain = Bry_.new_utf8_(req_array[1]);
+		byte[] wiki_domain = Bry_.new_u8(req_array[1]);
 		Xow_domain domain_itm = Xow_domain_.parse(wiki_domain);
-		if (domain_itm.Domain_tid() == Xow_domain_.Tid_int_other && domain_itm.Lang_itm().Id() == Xol_lang_itm_.Id__intl) return req;
+		if (domain_itm.Domain_tid() == Xow_domain_type_.Tid_other && domain_itm.Lang_itm().Id() == Xol_lang_itm_.Id__intl) return req;
 		Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(wiki_domain);
 		wiki.Init_assert();
-		String main_page = String_.new_utf8_(wiki.Props().Main_page());
+		String main_page = String_.new_u8(wiki.Props().Main_page());
 		if 		(mode == 1) main_page = "/" + main_page;
 		else if (mode == 2) main_page = "wiki/" + main_page;
 		return req + main_page;

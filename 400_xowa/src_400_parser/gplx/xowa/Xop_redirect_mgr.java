@@ -19,7 +19,7 @@ package gplx.xowa; import gplx.*;
 import gplx.xowa.html.*;
 public class Xop_redirect_mgr {		
 	private final Xowe_wiki wiki; private final Url_encoder url_decoder; private Hash_adp_bry redirect_hash;
-	public Xop_redirect_mgr(Xowe_wiki wiki) {this.wiki = wiki; this.url_decoder = Xoa_app_.Utl__encoder_mgr().Url_ttl();}	// NOTE: must be Url_ttl, not Url; PAGE:en.w:Template:Positionskarte+ -> Template:Location_map+, not Template:Location_map DATE:2014-08-21
+	public Xop_redirect_mgr(Xowe_wiki wiki) {this.wiki = wiki; this.url_decoder = Xoa_app_.Utl__encoder_mgr().Http_url_ttl();}	// NOTE: must be Url_ttl, not Url; PAGE:en.w:Template:Positionskarte+ -> Template:Location_map+, not Template:Location_map DATE:2014-08-21
 	public void Clear() {redirect_hash = null;}	// TEST:
 	public boolean Is_redirect(byte[] text, int text_len) {return this.Extract_redirect(text, text_len) != null;}
 	public Xoa_ttl Extract_redirect_loop(byte[] src) {
@@ -53,7 +53,7 @@ public class Xop_redirect_mgr {
 	public static final int Redirect_max_allowed = 4;
 	public static final Xoa_ttl	Redirect_null_ttl = null;
 	public static final byte[]	Redirect_null_bry = Bry_.Empty;
-	private static final byte[] Redirect_bry = Bry_.new_ascii_("#REDIRECT ");
+	private static final byte[] Redirect_bry = Bry_.new_a7("#REDIRECT ");
 	public static byte[] Make_redirect_text(byte[] redirect_to_ttl) {
 		return Bry_.Add
 			(	Redirect_bry				// "#REDIRECT "
@@ -63,13 +63,13 @@ public class Xop_redirect_mgr {
 			);
 	}
 	public static byte[] Bld_redirect_msg(Xoae_app app, Xowe_wiki wiki, Xoae_page page) {
-		ListAdp list = page.Redirected_ttls();
+		List_adp list = page.Redirected_ttls();
 		int list_len = list.Count();
 		if (list_len == 0) return Bry_.Empty;
 		Bry_bfr redirect_bfr = app.Utl__bfr_mkr().Get_b512();
 		for (int i = 0; i < list_len; i++) {
 			if (i != 0) redirect_bfr.Add(Bry_redirect_dlm);
-			byte[] redirect_ttl = (byte[])list.FetchAt(i);
+			byte[] redirect_ttl = (byte[])list.Get_at(i);
 			redirect_bfr.Add(Xoh_consts.A_bgn)			// '<a href="'
 				.Add(Xoh_href_parser.Href_wiki_bry)		// '/wiki/'
 				.Add(redirect_ttl)						// 'PageA'
@@ -86,7 +86,7 @@ public class Xop_redirect_mgr {
 		app.Tmp_fmtr().Fmt_(msg_itm.Val()).Bld_bfr_one(fmt_bfr, redirect_bfr);
 		redirect_bfr.Clear().Mkr_rls(); fmt_bfr.Mkr_rls();
 		return fmt_bfr.Xto_bry_and_clear();
-	}	private static byte[] Bry_redirect_dlm = Bry_.new_ascii_(" <--- "), Bry_redirect_arg = Bry_.new_ascii_("?redirect=no");		
+	}	private static byte[] Bry_redirect_dlm = Bry_.new_a7(" <--- "), Bry_redirect_arg = Bry_.new_a7("?redirect=no");		
 }
 class Xop_redirect_mgr_ {
 	public static int Get_kwd_end_or_end(byte[] src, int bgn, int end) {	// get end of kwd

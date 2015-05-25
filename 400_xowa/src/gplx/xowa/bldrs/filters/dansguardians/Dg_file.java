@@ -78,7 +78,7 @@ class Dg_word {
 		Dg_word[] rv = new Dg_word[ary_len];
 		for (int i = 0; i < ary_len; ++i) {
 			String raw = ary[i];
-			rv[i] = new Dg_word(Bry_.new_utf8_(raw));
+			rv[i] = new Dg_word(Bry_.new_u8(raw));
 		}
 		return rv;
 	}

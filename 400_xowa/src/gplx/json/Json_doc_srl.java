@@ -42,7 +42,7 @@ public class Json_doc_srl {
 		int len = val.length;
 		for (int i = 0; i < len; i++) {
 			Write_itm_hdr(i != 0);					// ', '
-			Write_str(Bry_.new_utf8_(Object_.Xto_str_strict_or_null(val[i])));
+			Write_str(Bry_.new_u8(Object_.Xto_str_strict_or_null(val[i])));
 			Write_new_line();
 		}
 		Indent_del();
@@ -50,7 +50,7 @@ public class Json_doc_srl {
 	}
 	private void Write_kv_str(boolean comma, byte[] key, String val) {
 		Write_key(comma, key);							// "key":
-		Write_str(Bry_.new_utf8_(val));				// "val"
+		Write_str(Bry_.new_u8(val));				// "val"
 		Write_new_line();								// \n
 	}
 	private void Write_key(boolean comma, byte[] key) {	// "key":
@@ -64,7 +64,7 @@ public class Json_doc_srl {
 			bfr.Add(Bry_null);
 		else
 			bfr.Add_byte(Byte_ascii.Quote).Add(v).Add_byte(Byte_ascii.Quote);
-	}	private static final byte[] Bry_null = Bry_.new_ascii_("null");
+	}	private static final byte[] Bry_null = Bry_.new_a7("null");
 	private void Write_comma(boolean comma) {
 		if (comma)
 			bfr.Add_byte(Byte_ascii.Comma);

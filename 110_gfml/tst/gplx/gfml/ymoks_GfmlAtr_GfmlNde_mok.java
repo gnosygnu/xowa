@@ -50,7 +50,7 @@ class GfmlNde_mok implements GfmlItm_mok {
 	public boolean KeyedSubObj() {return keyed;}
 	public GfmlNde_mok KeyedSubObj_() {return KeyedSubObj_(true);}
 	public GfmlNde_mok KeyedSubObj_(boolean v) {keyed = v; return this;} private boolean keyed;
-	public ListAdp Subs() {return subs;}
+	public List_adp Subs() {return subs;}
 	public String XtoStrStub() {
 		String_bldr sb = String_bldr_.new_();
 		sb.Add_kv("key=", key).Add_kv("hnd=", hnd).Add_kv("typ=", typ).Add_kv("subs=", Int_.Xto_str(subs.Count()));
@@ -60,7 +60,7 @@ class GfmlNde_mok implements GfmlItm_mok {
 		for (GfmlItm_mok itm : ary)
 			subs.Add(itm);
 		return this;
-	}	ListAdp subs = ListAdp_.new_();
+	}	List_adp subs = List_adp_.new_();
 
 	public GfmlNde_mok Atrk_(String k, String v)	{subs.Add(GfmlAtr_mok.new_(k, v)); return this;}
 	public GfmlNde_mok Atru_(String v)				{subs.Add(GfmlAtr_mok.new_(GfmlTkn_.NullVal, v)); return this;}
@@ -78,7 +78,7 @@ class GfmlNde_mok implements GfmlItm_mok {
 		if (ownerMok.keyed) rv.KeyedSubObj_(ownerMok.keyed);
 		if (ownerMok.key != null) rv.KeyTkn_set(GfmlTkn_.val_(ownerMok.key));
 		for (int i = 0; i < ownerMok.subs.Count(); i++) {
-			GfmlItm_mok itm = (GfmlItm_mok)ownerMok.subs.FetchAt(i);
+			GfmlItm_mok itm = (GfmlItm_mok)ownerMok.subs.Get_at(i);
 			if (itm.ObjType() == GfmlObj_.Type_nde) {
 				GfmlNde_mok itmMok = (GfmlNde_mok)itm;
 				rv.SubObjs_Add(itmMok.XtoGfmlItm(regy));
@@ -103,7 +103,7 @@ class GfmlNde_mok implements GfmlItm_mok {
 		rv.chainId = nde.ChainId();
 		if (nde.Key() != null) rv.key = nde.Key();
 		for (int i = 0; i < nde.SubKeys().Count(); i++) {
-			GfmlItm subItm = (GfmlItm)nde.SubKeys().FetchAt(i);
+			GfmlItm subItm = (GfmlItm)nde.SubKeys().Get_at(i);
 			if (subItm.ObjType() == GfmlObj_.Type_atr) {
 				GfmlAtr subAtr = (GfmlAtr)subItm;
 				GfmlAtr_mok mokAtr = GfmlAtr_mok.new_(subAtr.Key(), subAtr.DatTkn().Val());
@@ -117,7 +117,7 @@ class GfmlNde_mok implements GfmlItm_mok {
 			}
 		}
 		for (int i = 0; i < nde.SubHnds().Count(); i++) {
-			GfmlNde subNde = (GfmlNde)nde.SubHnds().FetchAt(i);
+			GfmlNde subNde = (GfmlNde)nde.SubHnds().Get_at(i);
 			GfmlNde_mok mokNde = InitNde(subNde);
 			rv.subs.Add(mokNde);
 		}

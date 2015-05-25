@@ -20,7 +20,7 @@ import gplx.core.primitives.*;
 public class Xop_xnde_tag {
 	public Xop_xnde_tag(int id, String name_str) {	// NOTE: should only be used by Xop_xnde_tag_
 		this.id = id;
-		this.name_bry = Bry_.new_ascii_(name_str);
+		this.name_bry = Bry_.new_a7(name_str);
 		this.name_str = name_str;
 		name_len = name_bry.length;
 		xtn_end_tag = Bry_.Add(Xop_xnde_tag_.XtnEndTag_bgn, name_bry);	// always force endtag; needed for <noinclude>
@@ -56,10 +56,10 @@ public class Xop_xnde_tag {
 	public boolean Xtn_auto_close() {return xtn_auto_close;} public Xop_xnde_tag Xtn_auto_close_() {xtn_auto_close = true; return this;} private boolean xtn_auto_close;
 	public boolean Ignore_empty() {return ignore_empty;} public Xop_xnde_tag Ignore_empty_() {ignore_empty = true; return this;} private boolean ignore_empty;
 	public boolean Xtn_skips_template_args() {return xtn_skips_template_args;} public Xop_xnde_tag Xtn_skips_template_args_() {xtn_skips_template_args = true; return this;} private boolean xtn_skips_template_args;
-	public OrderedHash Langs() {return langs;} private OrderedHash langs; private Int_obj_ref langs_key;
+	public Ordered_hash Langs() {return langs;} private Ordered_hash langs; private Int_obj_ref langs_key;
 	public Xop_xnde_tag Langs_(int lang_code, String name) {
 		if (langs == null) {
-			langs = OrderedHash_.new_();
+			langs = Ordered_hash_.new_();
 			langs_key = Int_obj_ref.neg1_();
 		}
 		Xop_xnde_tag_lang lang_tag = new Xop_xnde_tag_lang(lang_code, name);
@@ -72,7 +72,7 @@ public class Xop_xnde_tag {
 		synchronized (langs) {
 			langs_key.Val_(cur_lang);
 		}
-		Xop_xnde_tag_lang lang = (Xop_xnde_tag_lang)langs.Fetch(langs_key);
+		Xop_xnde_tag_lang lang = (Xop_xnde_tag_lang)langs.Get_by(langs_key);
 		if (lang == null) return null;										// cur tag is a lang tag, but no tag for this lang; EX: "<trecho>" and cur_lang=de
 		return Bry_.Eq_ci_ascii(lang.Name_bry(), src, bgn, end)
 			? lang

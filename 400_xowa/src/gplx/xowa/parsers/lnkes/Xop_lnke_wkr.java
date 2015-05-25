@@ -30,7 +30,7 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 		ctx.Msg_log().Add_itm_none(Xop_lnke_log.Dangling, src, tkn.Src_bgn(), cur_pos);
 	}
 	public static final String Str_xowa_protocol = "xowa-cmd:";
-	public static final byte[] Bry_xowa_protocol = Bry_.new_ascii_(Str_xowa_protocol);
+	public static final byte[] Bry_xowa_protocol = Bry_.new_a7(Str_xowa_protocol);
 	public int MakeTkn_bgn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos, byte[] protocol, byte proto_tid, byte lnke_type) {
 		boolean lnke_type_brack = (lnke_type == Xop_lnke_tkn.Lnke_typ_brack);
 		if (	!lnke_type_brack										// lnke doesn't have "["; EX: "ttl:"
@@ -161,7 +161,7 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 		}
 		Xop_lnke_tkn tkn = tkn_mkr.Lnke(bgn_pos, brack_end_pos, protocol, proto_tid, lnke_type, lnke_bgn, lnke_end);
 		tkn.Lnke_relative_(site_data.Rel());
-		Xow_xwiki_itm xwiki = ctx.App().User().Wiki().Xwiki_mgr().Get_by_mid(src, site_bgn, site_end);	// NOTE: check User_wiki.Xwiki_mgr, not App.Wiki_mgr() b/c only it is guaranteed to know all wikis on system
+		Xow_xwiki_itm xwiki = ctx.App().Usere().Wiki().Xwiki_mgr().Get_by_mid(src, site_bgn, site_end);	// NOTE: check User_wiki.Xwiki_mgr, not App.Wiki_mgr() b/c only it is guaranteed to know all wikis on system
 		if (xwiki != null) {	// lnke is to an xwiki; EX: [http://en.wikipedia.org/A a]
 			Xowe_wiki wiki = ctx.Wiki();
 			Xoa_url_parser.Parse_url(xo_url_parser_url, ctx.App(), wiki, src, lnke_bgn, lnke_end, false);

@@ -30,7 +30,7 @@ public class Pfunc_expr_shunter {
 		tmp_fmtr.Fmt_(msg_val).Bld_bfr_one(err_bfr, arg);
 		err_bfr.Add(Err_end_ary);
 		return Null_rslt;
-	}	static final byte[] Err_bgn_ary = Bry_.new_ascii_("<strong class=\"error\">"), Err_end_ary = Bry_.new_ascii_("</strong>"); Bry_fmtr tmp_fmtr = Bry_fmtr.tmp_();
+	}	static final byte[] Err_bgn_ary = Bry_.new_a7("<strong class=\"error\">"), Err_end_ary = Bry_.new_a7("</strong>"); Bry_fmtr tmp_fmtr = Bry_fmtr.tmp_();
 	public void Rslt_set(byte[] bry) {
 		err_bfr.Add(bry);
 	}
@@ -99,7 +99,7 @@ public class Pfunc_expr_shunter {
 						mode_expr = false;
 						break;
 					case Expr_tkn_.Tid_paren_lhs:
-						if (!mode_expr) return Err_set(ctx, Xol_msg_itm_.Id_pfunc_expr_unexpected_operator, Bry_.new_ascii_("("));
+						if (!mode_expr) return Err_set(ctx, Xol_msg_itm_.Id_pfunc_expr_unexpected_operator, Bry_.new_a7("("));
 						prc_stack.Push((Func_tkn)t);
 						break;
 					case Expr_tkn_.Tid_operator:

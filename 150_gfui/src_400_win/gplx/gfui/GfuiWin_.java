@@ -48,9 +48,9 @@ public class GfuiWin_ {
 	}
 }
 class GfuiWinUtl {
-	@gplx.Internal protected static void Open_exec(GfuiWin win, ListAdp loadList, GfuiElemBase owner) {
+	@gplx.Internal protected static void Open_exec(GfuiWin win, List_adp loadList, GfuiElemBase owner) {
 		for (int i = 0; i < owner.SubElems().Count(); i++) {
-			GfuiElemBase sub = (GfuiElemBase)owner.SubElems().FetchAt(i);
+			GfuiElemBase sub = (GfuiElemBase)owner.SubElems().Get_at(i);
 			sub.OwnerWin_(win);
 			for (Object itmObj : loadList) {
 				GfuiWinOpenAble itm = (GfuiWinOpenAble)itmObj;
@@ -61,7 +61,7 @@ class GfuiWinUtl {
 	}
 	@gplx.Internal protected static void SubElems_dispose(GfuiElem owner) {
 		for (int i = 0; i < owner.SubElems().Count(); i++) {
-			GfuiElem sub = (GfuiElem)owner.SubElems().FetchAt(i);
+			GfuiElem sub = (GfuiElem)owner.SubElems().Get_at(i);
 			sub.Dispose();
 			SubElems_dispose(sub);
 		}

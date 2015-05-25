@@ -33,7 +33,7 @@ class GfoCacheMgr_fxt {
 	public GfoCacheMgr_fxt run_Add(String... ary) {
 		for (int i = 0; i < ary.length; i++) {
 			String s = ary[i];
-			mgr.Add(Bry_.new_utf8_(s), new GfoCacheItm_mock(s), String_.Len(s));
+			mgr.Add(Bry_.new_u8(s), new GfoCacheItm_mock(s), String_.Len(s));
 			Env_.TickCount_Test++;
 		}
 		return this;
@@ -41,7 +41,7 @@ class GfoCacheMgr_fxt {
 	public GfoCacheMgr_fxt run_Get(String... ary) {
 		for (int i = 0; i < ary.length; i++) {
 			String s = ary[i];
-			mgr.Get_by_key(Bry_.new_utf8_(s));
+			mgr.Get_by_key(Bry_.new_u8(s));
 			Env_.TickCount_Test++;
 		}
 		return this;

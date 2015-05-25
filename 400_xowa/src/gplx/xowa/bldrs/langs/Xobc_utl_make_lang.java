@@ -25,8 +25,8 @@ public class Xobc_utl_make_lang implements GfoInvkAble {
 		lang_parser = new Xol_mw_lang_parser(msg_log);
 	}
 	public Xobc_utl_make_lang_kwds Kwd_mgr() {return kwd_mgr;} private Xobc_utl_make_lang_kwds kwd_mgr;
-	public OrderedHash Manual_text_bgn_hash() {return manual_text_bgn_hash;} private final OrderedHash manual_text_bgn_hash = OrderedHash_.new_bry_();
-	public OrderedHash Manual_text_end_hash() {return manual_text_end_hash;} private final OrderedHash manual_text_end_hash = OrderedHash_.new_bry_();
+	public Ordered_hash Manual_text_bgn_hash() {return manual_text_bgn_hash;} private final Ordered_hash manual_text_bgn_hash = Ordered_hash_.new_bry_();
+	public Ordered_hash Manual_text_end_hash() {return manual_text_end_hash;} private final Ordered_hash manual_text_end_hash = Ordered_hash_.new_bry_();
 	public void Bld_all() {
 		Io_url lang_root = fsys_mgr.Cfg_lang_core_dir().OwnerDir();	// OwnerDir to get "/lang/" in "/cfg/lang/core/"
 		lang_parser.Parse_mediawiki(lang_mgr, lang_root.GenSubDir("mediawiki"), kwd_mgr);
@@ -34,11 +34,11 @@ public class Xobc_utl_make_lang implements GfoInvkAble {
 		lang_parser.Save_langs(lang_mgr, lang_root.GenSubDir(Xol_mw_lang_parser.Dir_name_core), manual_text_bgn_hash, manual_text_end_hash);
 		Gfo_usr_dlg_.I.Prog_many("", "", "done");
 	}
-	public void Parse_manual_text(byte[] langs_bry, byte[] text, OrderedHash manual_text) {
-		OrderedHash langs = lang_mgr.Xto_hash(langs_bry);
+	public void Parse_manual_text(byte[] langs_bry, byte[] text, Ordered_hash manual_text) {
+		Ordered_hash langs = lang_mgr.Xto_hash(langs_bry);
 		int langs_len = langs.Count();
 		for (int i = 0; i < langs_len; i++) {
-			Xoac_lang_itm itm = (Xoac_lang_itm)langs.FetchAt(i);
+			Xoac_lang_itm itm = (Xoac_lang_itm)langs.Get_at(i);
 			byte[] key_bry = itm.Key_bry();
 			manual_text.Add(key_bry, new byte[][] {key_bry, text});
 		}

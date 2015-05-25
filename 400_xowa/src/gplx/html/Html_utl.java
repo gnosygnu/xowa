@@ -19,14 +19,14 @@ package gplx.html; import gplx.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
 public class Html_utl {
 	private static final Url_encoder encoder_id = Url_encoder.new_html_id_(); private static final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
-	public static String Encode_id_as_str(byte[] key) {return String_.new_utf8_(Encode_id_as_bry(key));}
+	public static String Encode_id_as_str(byte[] key) {return String_.new_u8(Encode_id_as_bry(key));}
 	public static byte[] Encode_id_as_bry(byte[] key) {
 		byte[] escaped = Escape_html_as_bry(tmp_bfr, key, Bool_.N, Bool_.N, Bool_.N, Bool_.Y, Bool_.Y);
 		return encoder_id.Encode(escaped);
 	}
 	public static byte[] Escape_for_atr_val_as_bry(Bry_bfr bfr, byte quote_byte, String s) {
 		if (s == null) return null;
-		return Escape_for_atr_val_as_bry(bfr, quote_byte, Bry_.new_utf8_(s));
+		return Escape_for_atr_val_as_bry(bfr, quote_byte, Bry_.new_u8(s));
 	}
 	public static byte[] Escape_for_atr_val_as_bry(Bry_bfr bfr, byte quote_byte, byte[] bry) {
 		if (bry == null) return null;
@@ -55,7 +55,7 @@ public class Html_utl {
 		}
 		return dirty;
 	}
-	public static String Escape_html_as_str(String v)						{return String_.new_utf8_(Escape_html_as_bry(Bry_.new_utf8_(v)));}
+	public static String Escape_html_as_str(String v)						{return String_.new_u8(Escape_html_as_bry(Bry_.new_u8(v)));}
 	public static byte[] Escape_html_as_bry(Bry_bfr tmp, byte[] bry)		{return Escape_html(false, tmp, bry, 0, bry.length, true, true, true, true, true);}
 	public static byte[] Escape_html_as_bry(byte[] bry)						{return Escape_html(false, tmp_bfr, bry, 0, bry.length, true, true, true, true, true);}
 	public static byte[] Escape_html_as_bry(byte[] bry, boolean lt, boolean gt, boolean amp, boolean quote, boolean apos)
@@ -111,7 +111,7 @@ public class Html_utl {
 	;
 	public static String Unescape_as_str(String src) {
 		Bry_bfr bfr = Bry_bfr.reset_(255);
-		byte[] bry = Bry_.new_utf8_(src);
+		byte[] bry = Bry_.new_u8(src);
 		Unescape(Bool_.Y, bfr, bry, 0, bry.length, Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y);
 		return bfr.Xto_str_and_clear();
 	}

@@ -32,7 +32,7 @@ public class Bry_ {
 			rv[i] = (byte)ary[i];
 		return rv;
 	}
-	public static byte[] new_ascii_(String str) {
+	public static byte[] new_a7(String str) {
 		try {
 			if (str == null) return null;
 			int str_len = str.length();						
@@ -47,12 +47,18 @@ public class Bry_ {
 		}
 		catch (Exception e) {throw Err_.err_(e, "invalid ASCII sequence; str={0}", str);}
 	}
-	public static byte[] new_ascii_safe_null_(String s)	{return s == null ? null : new_ascii_(s);}
-	public static byte[] new_ascii_lang(String s) {
-		try {return s.getBytes("ASCII");}	
-		catch (Exception e) {throw Err_.err_(e, "unsupported encoding");}
+	public static byte[] new_u8_safe(String str) {return str == null ? null : new_u8(str);}
+	public static byte[] new_u8(String str) {
+		try {
+			int str_len = str.length();							
+			int bry_len = new_u8_by_len(str, str_len);
+			byte[] rv = new byte[bry_len];
+			new_u8_write(str, str_len, rv, 0);
+			return rv;
+		}
+		catch (Exception e) {throw Err_.err_(e, "invalid UTF-8 sequence; s={0}", str);}
 	}
-	public static int new_utf8_len(String s, int s_len) {
+	public static int new_u8_by_len(String s, int s_len) {
 		int rv = 0;
 		for (int i = 0; i < s_len; ++i) {
 			char c = s.charAt(i);									
@@ -67,7 +73,7 @@ public class Bry_ {
 		}
 		return rv;
 	}
-	public static void new_utf8_write(String str, int str_len, byte[] bry, int bry_pos) {
+	public static void new_u8_write(String str, int str_len, byte[] bry, int bry_pos) {
 		for (int i = 0; i < str_len; ++i) {
 			char c = str.charAt(i);								
 			if		(	 c <   128) {
@@ -94,21 +100,6 @@ public class Bry_ {
 				bry[bry_pos++] 	= (byte)(0x80 | (c        & 0x3F));
 			}
 		}
-	}
-	public static byte[] new_utf8__null(String str) {return str == null ? null : new_utf8_(str);}
-	public static byte[] new_utf8_(String str) {
-		try {
-			int str_len = str.length();							
-			int bry_len = new_utf8_len(str, str_len);
-			byte[] rv = new byte[bry_len];
-			new_utf8_write(str, str_len, rv, 0);
-			return rv;
-		}
-		catch (Exception e) {throw Err_.err_(e, "invalid UTF-8 sequence; s={0}", str);}
-	}
-	public static byte[] new_utf8_lang(String s) {
-		try {return s.getBytes("UTF-8");}	
-		catch (Exception e) {throw Err_.err_(e, "unsupported encoding");}
 	}
 	public static byte[] Coalesce(byte[] orig, byte[] val_if_not_blank) {return Bry_.Len_eq_0(val_if_not_blank) ? orig : val_if_not_blank;}
 	public static byte Get_at_end_or_fail(byte[] bry) {
@@ -141,7 +132,7 @@ public class Bry_ {
 		byte[][] rv = new byte[ary_len][];
 		for (int i = 0; i < ary_len; i++) {
 			String itm = ary[i];
-			rv[i] = itm == null ? null : Bry_.new_utf8_(itm);
+			rv[i] = itm == null ? null : Bry_.new_u8(itm);
 		}
 		return rv;
 	}
@@ -151,7 +142,7 @@ public class Bry_ {
 		byte[][] rv = new byte[ary_len][];
 		for (int i = 0; i < ary_len; i++) {
 			Object itm = ary[i];
-			rv[i] = itm == null ? null : Bry_.new_utf8_(Object_.Xto_str_strict_or_empty(itm));
+			rv[i] = itm == null ? null : Bry_.new_u8(Object_.Xto_str_strict_or_empty(itm));
 		}
 		return rv;
 	}
@@ -190,7 +181,7 @@ public class Bry_ {
 		int strAryLen = strAry.length;
 		byte[][] rv = new byte[strAryLen][];
 		for (int i = 0; i < strAryLen; i++)
-			rv[i] = Bry_.new_utf8_(strAry[i]);
+			rv[i] = Bry_.new_u8(strAry[i]);
 		return rv;
 	}
 	public static byte[] Xto_str_lower(byte[] src, int bgn, int end) {
@@ -329,7 +320,7 @@ public class Bry_ {
 	public static String MidByLenToStr(byte[] src, int bgn, int len) {
 		int end = bgn + len; end = Int_.BoundEnd(end, src.length);
 		byte[] ary = Bry_.Mid(src, bgn, end);
-		return String_.new_utf8_(ary);
+		return String_.new_u8(ary);
 	}
 	public static byte[] Mid_safe(byte[] src, int bgn, int end) {
 		try {return Mid(src, bgn, end);}
@@ -355,7 +346,7 @@ public class Bry_ {
 			return rv;
 		}	catch (Exception e) {
 			Err err = Err_.new_("").Add("bgn", bgn).Add("end", end);
-			if (src != null) err.Add("src", String_.new_utf8_len_safe_(src, bgn, 32));
+			if (src != null) err.Add("src", String_.new_u8_by_len(src, bgn, 32));
 			if		(src == null)					err.Hdr_("src is null");
 			else if (bgn < 0 || bgn > src.length)	err.Hdr_("invalid bgn");
 			else if (end < 0 || end > src.length)	err.Hdr_("invalid end");
@@ -620,7 +611,7 @@ public class Bry_ {
 	public static int Xto_int(byte[] ary)										{return Xto_int_or(ary, null, 0, ary.length, -1);}
 	public static int Xto_int_or_fail(byte[] ary)								{
 		int rv = Xto_int_or(ary, null, 0, ary.length, Int_.MinValue);
-		if (rv == Int_.MinValue) throw Err_.new_fmt_("could not parse to int; val={0}", String_.new_utf8_(ary));
+		if (rv == Int_.MinValue) throw Err_.new_fmt_("could not parse to int; val={0}", String_.new_u8(ary));
 		return rv;
 	}
 	public static boolean Xto_bool_by_int_or_fail(byte[] ary) {
@@ -628,7 +619,7 @@ public class Bry_ {
 		switch (rv) {
 			case 0: return false;
 			case 1: return true;
-			default: throw Err_.new_fmt_("could not parse to boolean int; val={0}", String_.new_utf8_(ary));
+			default: throw Err_.new_fmt_("could not parse to boolean int; val={0}", String_.new_u8(ary));
 		}
 	}
 	public static int Xto_int_or(byte[] ary, int or)							{return Xto_int_or(ary, null, 0, ary.length, or);}
@@ -717,12 +708,12 @@ public class Bry_ {
 		}
 		return Xto_int_or(ary, bgn, end_num, or);
 	}
-	public static float XtoFloatByPos(byte[] ary, int bgn, int end) {return Float_.parse_(String_.new_utf8_(ary, bgn, end));}
-	public static double Xto_double(byte[] bry) {return Double_.parse_(String_.new_utf8_(bry, 0, bry.length));}
-	public static double Xto_double_or(byte[] bry, double or) {return Double_.parse_or(String_.new_utf8_(bry, 0, bry.length), or);}
-	public static double XtoDoubleByPosOr(byte[] ary, int bgn, int end, double or) {return Double_.parse_or(String_.new_utf8_(ary, bgn, end), or);}
-	public static double XtoDoubleByPos(byte[] ary, int bgn, int end) {return Double_.parse_(String_.new_utf8_(ary, bgn, end));}
-	public static DecimalAdp XtoDecimalByPos(byte[] ary, int bgn, int end) {return DecimalAdp_.parse_(String_.new_utf8_(ary, bgn, end));}
+	public static float XtoFloatByPos(byte[] ary, int bgn, int end) {return Float_.parse_(String_.new_u8(ary, bgn, end));}
+	public static double Xto_double(byte[] bry) {return Double_.parse_(String_.new_u8(bry, 0, bry.length));}
+	public static double Xto_double_or(byte[] bry, double or) {return Double_.parse_or(String_.new_u8(bry, 0, bry.length), or);}
+	public static double XtoDoubleByPosOr(byte[] ary, int bgn, int end, double or) {return Double_.parse_or(String_.new_u8(ary, bgn, end), or);}
+	public static double XtoDoubleByPos(byte[] ary, int bgn, int end) {return Double_.parse_(String_.new_u8(ary, bgn, end));}
+	public static DecimalAdp XtoDecimalByPos(byte[] ary, int bgn, int end) {return DecimalAdp_.parse_(String_.new_u8(ary, bgn, end));}
 	public static final byte Dlm_fld = (byte)'|', Dlm_row = (byte)'\n', Dlm_quote = (byte)'"', Dlm_null = 0, Ascii_zero = 48;
 	public static final String Fmt_csvDte = "yyyyMMdd HHmmss.fff";
 	public static DateAdp ReadCsvDte(byte[] ary, Int_obj_ref posRef, byte lkp) {// ASSUME: fmt = yyyyMMdd HHmmss.fff
@@ -745,11 +736,11 @@ public class Bry_ {
 		f += (ary[bgn + 16] - Ascii_zero) *  100;
 		f += (ary[bgn + 17] - Ascii_zero) *   10;
 		f += (ary[bgn + 18] - Ascii_zero);
-		if (ary[bgn + 19] != lkp) throw Err_.new_("csv date is invalid").Add("txt", String_.new_utf8_len_safe_(ary, bgn, 20));
+		if (ary[bgn + 19] != lkp) throw Err_.new_("csv date is invalid").Add("txt", String_.new_u8_by_len(ary, bgn, 20));
 		posRef.Val_add(19 + 1); // +1=lkp.len
 		return DateAdp_.new_(y, M, d, H, m, s, f);
 	}
-	public static String ReadCsvStr(byte[] ary, Int_obj_ref posRef, byte lkp)				{return String_.new_utf8_(ReadCsvBry(ary, posRef, lkp, true));}
+	public static String ReadCsvStr(byte[] ary, Int_obj_ref posRef, byte lkp)				{return String_.new_u8(ReadCsvBry(ary, posRef, lkp, true));}
 	public static byte[] ReadCsvBry(byte[] ary, Int_obj_ref posRef, byte lkp)				{return ReadCsvBry(ary, posRef, lkp, true);}
 	public static byte[] ReadCsvBry(byte[] ary, Int_obj_ref posRef, byte lkp, boolean make)	{
 		int bgn = posRef.Val(), aryLen = ary.length;
@@ -758,10 +749,10 @@ public class Bry_ {
 			int pos = bgn + 1;	// +1 to skip quote
 			if (make) bb = Bry_bfr.new_(16);
 			while (true) {
-				if (pos == aryLen) throw Err_.new_("endOfAry reached, but no quote found").Add("txt", String_.new_utf8_len_safe_(ary, bgn, pos));
+				if (pos == aryLen) throw Err_.new_("endOfAry reached, but no quote found").Add("txt", String_.new_u8_by_len(ary, bgn, pos));
 				byte b = ary[pos];
 				if (b == Dlm_quote) {                            
-					if (pos == aryLen - 1) throw Err_.new_("endOfAry reached, quote found but lkp not").Add("txt", String_.new_utf8_len_safe_(ary, bgn, pos));
+					if (pos == aryLen - 1) throw Err_.new_("endOfAry reached, quote found but lkp not").Add("txt", String_.new_u8_by_len(ary, bgn, pos));
 					byte next = ary[pos + 1];
 					if		(next == Dlm_quote) {	// byte followed by quote
 						if (make) bb.Add_byte(b);
@@ -771,7 +762,7 @@ public class Bry_ {
 						posRef.Val_(pos + 2);	// 1=endQuote;1=lkp;
 						return make ? bb.Xto_bry() : Bry_.Empty;
 					}
-					else throw Err_.new_("quote found, but not doubled").Add("txt", String_.new_utf8_len_safe_(ary, bgn, pos + 1));
+					else throw Err_.new_("quote found, but not doubled").Add("txt", String_.new_u8_by_len(ary, bgn, pos + 1));
 				}
 				else {
 					if (make) bb.Add_byte(b);
@@ -786,7 +777,7 @@ public class Bry_ {
 					return make ? Bry_.Mid(ary, bgn, i) : Bry_.Empty;
 				}
 			}
-			throw Err_.new_("lkp failed").Add("lkp", (char)lkp).Add("txt", String_.new_utf8_len_safe_(ary, bgn, aryLen));
+			throw Err_.new_("lkp failed").Add("lkp", (char)lkp).Add("txt", String_.new_u8_by_len(ary, bgn, aryLen));
 		}
 	}
 	public static int ReadCsvInt(byte[] ary, Int_obj_ref posRef, byte lkp) {
@@ -846,7 +837,7 @@ public class Bry_ {
 	public static byte[][] Split(byte[] src, byte dlm, boolean trim) {
 		if (Bry_.Len_eq_0(src)) return Bry_.Ary_empty;
 		int src_len = src.length, src_pos = 0, fld_bgn = 0;
-		ListAdp rv = ListAdp_.new_();
+		List_adp rv = List_adp_.new_();
 		while (true) {
 			boolean last = src_pos == src_len;
 			byte b = last ? dlm : src[src_pos];
@@ -862,7 +853,7 @@ public class Bry_ {
 			if (last) break;
 			++src_pos;
 		}
-		return (byte[][])rv.Xto_ary(byte[].class);
+		return (byte[][])rv.To_ary(byte[].class);
 	}
 	public static byte[] Replace_create(byte[] src, byte find, byte replace) {
 		byte[] rv = Bry_.Copy(src);
@@ -950,7 +941,7 @@ public class Bry_ {
 	public static byte[][] Split(byte[] src, byte[] dlm) {
 		if (Bry_.Len_eq_0(src)) return Bry_.Ary_empty;
 		int cur_pos = 0, src_len = src.length, dlm_len = dlm.length;
-		ListAdp rv = ListAdp_.new_();
+		List_adp rv = List_adp_.new_();
 		while (true) {
 			int find_pos = Bry_finder.Find_fwd(src, dlm, cur_pos);
 			if (find_pos == Bry_.NotFound) {
@@ -961,12 +952,12 @@ public class Bry_ {
 			if (find_pos == src_len) break;
 			cur_pos = find_pos + dlm_len;
 		}
-		return (byte[][])rv.Xto_ary(byte[].class);
+		return (byte[][])rv.To_ary(byte[].class);
 	}
 	public static byte[][] Split_lines(byte[] src) {
 		if (Bry_.Len_eq_0(src)) return Bry_.Ary_empty;
 		int src_len = src.length, src_pos = 0, fld_bgn = 0;
-		ListAdp rv = ListAdp_.new_();
+		List_adp rv = List_adp_.new_();
 		while (true) {
 			boolean last = src_pos == src_len;
 			byte b = last ? Byte_ascii.NewLine : src[src_pos];
@@ -987,7 +978,7 @@ public class Bry_ {
 			if (last) break;
 			src_pos = nxt_bgn;
 		}
-		return (byte[][])rv.Xto_ary(byte[].class);
+		return (byte[][])rv.To_ary(byte[].class);
 	}
 	public static byte[] Increment_last(byte[] ary) {return Increment_last(ary, ary.length - 1);}
 	public static byte[] Increment_last(byte[] ary, int end_idx) {

@@ -33,16 +33,16 @@ public class Xof_meta_thumb_parser extends Obj_ary_parser_base {
 	}
 	@Override protected void Parse_itm(byte[] bry, int bgn, int end) {	// EX: "1:45,40"; "1:45,40:3,4"
 		Xof_meta_thumb itm = new Xof_meta_thumb(); boolean height_found = false;
-		if (end - 2 < bgn)	throw Err_mgr._.fmt_(GRP_KEY, "invalid_itm", "itm must be at least 2 bytes long: itm=~{0}", String_.new_utf8_(bry, bgn, end)); // EX: 4,6
+		if (end - 2 < bgn)	throw Err_mgr._.fmt_(GRP_KEY, "invalid_itm", "itm must be at least 2 bytes long: itm=~{0}", String_.new_u8(bry, bgn, end)); // EX: 4,6
 		int pos = bgn;
 		byte exists_byte = bry[pos];
 		switch (exists_byte) {
 			case Byte_ascii.Num_0: itm.Exists_(Xof_meta_itm.Exists_n); break;
 			case Byte_ascii.Num_1: itm.Exists_(Xof_meta_itm.Exists_y); break;
 			case Byte_ascii.Num_2: itm.Exists_(Xof_meta_itm.Exists_unknown); break;
-			default: throw Err_mgr._.fmt_(GRP_KEY, "invalid_exists_val", "exists must be 0,1,2: exists=~{0} itm=~{1}", exists_byte, String_.new_utf8_(bry, bgn, end));
+			default: throw Err_mgr._.fmt_(GRP_KEY, "invalid_exists_val", "exists must be 0,1,2: exists=~{0} itm=~{1}", exists_byte, String_.new_u8(bry, bgn, end));
 		}
-		if (bry[pos + 1] != Dlm_exists) throw Err_mgr._.fmt_(GRP_KEY, "invalid_exists_spr", "question must follow exists: bad_char=~{0} itm=~{1}", bry[pos + 1], String_.new_utf8_(bry, bgn, end));
+		if (bry[pos + 1] != Dlm_exists) throw Err_mgr._.fmt_(GRP_KEY, "invalid_exists_spr", "question must follow exists: bad_char=~{0} itm=~{1}", bry[pos + 1], String_.new_u8(bry, bgn, end));
 		pos += 2;
 		int num_bgn = pos;
 		while (pos < end) {

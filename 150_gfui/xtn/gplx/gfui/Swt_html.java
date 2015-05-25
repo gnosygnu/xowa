@@ -61,11 +61,11 @@ class Swt_html implements Gxw_html, Swt_control, FocusListener {
 	public String 		Html_doc_html() 												{return Eval_script_as_str(kit.Html_cfg().Doc_html());}
 	public void 		Html_doc_html_load_by_mem(String html) {
 		html_doc_html_load_tid = Gxw_html_load_tid_.Tid_mem;
-		browser.setText(html);	// DBG: Io_mgr._.SaveFilStr(Io_url_.new_fil_("C:\\temp.txt"), s)
+		browser.setText(html);	// DBG: Io_mgr.I.SaveFilStr(Io_url_.new_fil_("C:\\temp.txt"), s)
 	}
 	public void Html_doc_html_load_by_url(String path, String html) {
 		html_doc_html_load_tid = Gxw_html_load_tid_.Tid_url;
-		Io_mgr._.SaveFilStr(path, html);
+		Io_mgr.I.SaveFilStr(path, html);
 		browser.setUrl(path);
 	}
 	public byte 		Html_doc_html_load_tid() {return html_doc_html_load_tid;} private byte html_doc_html_load_tid;
@@ -120,7 +120,7 @@ class Swt_html implements Gxw_html, Swt_control, FocusListener {
 		return Eval_script_as_exec(kit.Html_cfg().Window_vpos_(node_path.Val(), scroll_top.Val()));
 	}	private String_obj_ref scroll_top = String_obj_ref.null_(), node_path = String_obj_ref.null_();
 	public boolean Html_doc_find(String elem_id, String find, boolean dir_fwd, boolean case_match, boolean wrap_find) {
-		if (String_.Eq(find, String_.Empty)) return false;
+		// if (String_.Eq(find, String_.Empty)) return false;
 		find = String_.Replace(find, "\\", "\\\\");	// escape \ -> \\
 		find = String_.Replace(find, "'", "\\'");	// escape ' -> \'; NOTE: \\' instead of \'
 		boolean search_text_is_diff = !String_.Eq(find, prv_find_str);
@@ -167,7 +167,7 @@ class Swt_html implements Gxw_html, Swt_control, FocusListener {
 	public static final int
 	  Browser_tid_none 		= SWT.NONE
 	, Browser_tid_mozilla 	= SWT.MOZILLA
-	, Browser_tid_webKit	= SWT.WEBKIT
+	, Browser_tid_webkit	= SWT.WEBKIT
 	;	
 }
 class Swt_core_cmds_html extends Swt_core_cmds {

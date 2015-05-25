@@ -98,12 +98,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //		Xoae_app app; Xowe_wiki wiki; Bry_bfr bfr = Bry_bfr.reset_(500); Xows_page__search search_mgr;
 //		public Xoae_app App() {return app;}
 //		public Xowe_wiki Wiki() {return wiki;}
-//		public Xobl_regy_itm 	regy_itm_(int id, String bgn, String end, int count) {return new Xobl_regy_itm(id, Bry_.new_utf8_(bgn), Bry_.new_utf8_(end), count);}
+//		public Xobl_regy_itm 	regy_itm_(int id, String bgn, String end, int count) {return new Xobl_regy_itm(id, Bry_.new_u8(bgn), Bry_.new_u8(end), count);}
 //		public Xowd_page_itm 	data_ttl_(int id, String ttl) {return data_ttl_(id, 0, 0, false, 0, ttl);}
-//		public Xowd_page_itm 	data_ttl_(int id, int fil, int row, boolean redirect, int len, String ttl) {return new Xowd_page_itm().Init(id, Bry_.new_utf8_(ttl), redirect, len, fil, row);}
+//		public Xowd_page_itm 	data_ttl_(int id, int fil, int row, boolean redirect, int len, String ttl) {return new Xowd_page_itm().Init(id, Bry_.new_u8(ttl), redirect, len, fil, row);}
 //		public Xowd_page_itm 		data_id_(int id, String ttl) {return data_id_(id, Xow_ns_.Id_main, ttl);} 
-//		public Xowd_page_itm 		data_id_(int id, int ns, String ttl) {return new Xowd_page_itm().Id_(id).Ns_id_(ns).Ttl_page_db_(Bry_.new_utf8_(ttl)).Text_db_id_(0).Text_len_(0);}
-//		public Xobl_search_ttl 	data_sttl_(String word, params int[] ids) {return new Xobl_search_ttl(Bry_.new_utf8_(word), data_ttl_word_page_ary_(ids));}
+//		public Xowd_page_itm 		data_id_(int id, int ns, String ttl) {return new Xowd_page_itm().Id_(id).Ns_id_(ns).Ttl_page_db_(Bry_.new_u8(ttl)).Text_db_id_(0).Text_len_(0);}
+//		public Xobl_search_ttl 	data_sttl_(String word, params int[] ids) {return new Xobl_search_ttl(Bry_.new_u8(word), data_ttl_word_page_ary_(ids));}
 //		public Xobl_search_ttl_page[] data_ttl_word_page_ary_(params int[] ids) {
 //			int ids_len = ids.length;
 //			Xobl_search_ttl_page[] rv = new Xobl_search_ttl_page[ids_len];
@@ -121,7 +121,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //				Xobl_regy_itm itm = ary[i];
 //				itm.Srl_save(tmp_bfr);
 //			}
-//			Io_mgr._.SaveFilBfr(url, tmp_bfr);
+//			Io_mgr.I.SaveFilBfr(url, tmp_bfr);
 //		}	private Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 //		public void Init_data(Io_url fil, params Xobl_data_itm[] ary) {
 //			Xob_xdat_file xdat_file = new Xob_xdat_file();
@@ -159,7 +159,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //			search_mgr.Page_mgr().Ns_mgr().Add_all(); // WORKAROUND: xdat fmt does not store ns with search data; pages will be retrieved with ns_id = null; force ns_all (instead of allowing ns_main default);
 //		}
 //		public void Clear() {
-//			Io_mgr._.InitEngine_mem();
+//			Io_mgr.I.InitEngine_mem();
 //			app = Xoa_app_fxt.app_();
 //			wiki = Xoa_app_fxt.wiki_tst_(app);
 //			search_mgr = wiki.Special_mgr().Page_search();
@@ -169,17 +169,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //		public void Test_url_search_bry(String url_str, String expd) {
 //			Xoa_url url = Xoa_url_parser.Parse_url(app, wiki, url_str);
 //			search_mgr.Args_mgr().Clear().Parse(url.Args());
-//			Tfds.Eq(expd, String_.new_utf8_(search_mgr.Args_mgr().Search_bry()));
+//			Tfds.Eq(expd, String_.new_u8(search_mgr.Args_mgr().Search_bry()));
 //		}
 //		public void Test_url__ns(String url_str, String expd) {
 //			Xoa_url url = Xoa_url_parser.Parse_url(app, wiki, url_str);
 //			search_mgr.Args_mgr().Clear().Parse(url.Args());
-//			Tfds.Eq(expd, String_.new_ascii_(search_mgr.Args_mgr().Ns_mgr().Xto_hash_key()));
+//			Tfds.Eq(expd, String_.new_a7(search_mgr.Args_mgr().Ns_mgr().Xto_hash_key()));
 //		}
 //		public void Test_search_exact(String ttl_str, params String[] expd_ary) {Test_search(ttl_str, 0, expd_ary);}
 //		public void Test_search_match_bgn(String ttl_str, params String[] expd_ary) {Test_search(ttl_str, 0, expd_ary);}
 //		public void Test_search(String ttl_str, int page_idx, params String[] expd_ary) {
-//			byte[] ttl_bry = Bry_.new_ascii_(ttl_str);
+//			byte[] ttl_bry = Bry_.new_a7(ttl_str);
 //			Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b128();
 //			Xosrh_rslt_grp page = search_mgr.Page_mgr().Search(bfr, wiki, ttl_bry, page_idx, search_mgr.Page_mgr());
 //			bfr.Mkr_rls();
@@ -187,18 +187,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //		}
 //		public void Test_html_by_url(String ttl_str, String args_str, String expd_html) {
 //			wiki.Init_needed_(false);
-//			byte[] ttl_bry = Bry_.new_ascii_(ttl_str);
+//			byte[] ttl_bry = Bry_.new_a7(ttl_str);
 //			Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry);
 //			Xoae_page page = Xoae_page.test_(wiki, ttl);
-//			byte[] url_bry = Bry_.new_utf8_("http://en.wikipedia.org/wiki/Special:Search/" + ttl_str + args_str);
+//			byte[] url_bry = Bry_.new_u8("http://en.wikipedia.org/wiki/Special:Search/" + ttl_str + args_str);
 //			Xoa_url url = wiki.Appe().Url_parser().Parse(url_bry);
 //			search_mgr.Special_gen(url, page, wiki, ttl);
-//			Tfds.Eq_str_lines(expd_html, String_.new_utf8_(page.Root().Data_htm()));
+//			Tfds.Eq_str_lines(expd_html, String_.new_u8(page.Root().Data_htm()));
 //		}
 //		public void Test_search2(byte match_tid, String ttl_str, int page_idx, byte sort_tid, params String[] expd_ary) {
 //			Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b128();
 //			Xoa_url_parser url_parser = new Xoa_url_parser();			
-//			byte[] url_raw = Bry_.new_ascii_("Special:Search/" + ttl_str + ((match_tid == Xows_page__search.Match_tid_all) ? "" : "*")  + "?fulltext=y" + Xosrh_rslt_itm_sorter.Xto_url_arg(sort_tid) + "&xowa_page_size=1&xowa_page_index=" + page_idx);
+//			byte[] url_raw = Bry_.new_a7("Special:Search/" + ttl_str + ((match_tid == Xows_page__search.Match_tid_all) ? "" : "*")  + "?fulltext=y" + Xosrh_rslt_itm_sorter.Xto_url_arg(sort_tid) + "&xowa_page_size=1&xowa_page_index=" + page_idx);
 //			Xoa_url url = url_parser.Parse(url_raw);
 //			Xoa_ttl ttl = Xoa_ttl.parse_(wiki, url_raw);
 //			Xoae_page page = wiki.Ctx().Cur_page();
@@ -212,7 +212,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //			String[] rv = new String[itms_len];
 //			for (int i = 0; i < itms_len; i++) {
 //				Xowd_page_itm itm = page.Itms_get_at(i);
-//				rv[i] = String_.new_utf8_(itm.Ttl_page_db());
+//				rv[i] = String_.new_u8(itm.Ttl_page_db());
 //			}
 //			return rv;
 //		}

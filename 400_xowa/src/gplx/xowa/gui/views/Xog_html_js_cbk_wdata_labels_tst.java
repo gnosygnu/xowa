@@ -47,7 +47,7 @@ public class Xog_html_js_cbk_wdata_labels_tst {
 	private Wdata_doc doc_(String qid, String src) {
 		gplx.json.Json_doc doc = gplx.json.Json_doc.new_apos_(src);
 		Xoae_app app = Xoa_app_fxt.app_();
-		Wdata_doc rv = new Wdata_doc(Bry_.new_ascii_(qid), app.Wiki_mgr().Wdata_mgr(), doc);
+		Wdata_doc rv = new Wdata_doc(Bry_.new_a7(qid), app.Wiki_mgr().Wdata_mgr(), doc);
 		return rv;
 	}
 	private void Tst_wikidata_label_get(String[] args, String[] expd) {

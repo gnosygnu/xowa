@@ -107,7 +107,7 @@ public class Scrib_core {
 	public byte[] Cur_lang() {return cur_lang;} private byte[] cur_lang = Bry_.Empty;
 	public Scrib_lua_mod RegisterInterface(Scrib_lib lib, Io_url url, KeyVal... args) {
 		this.RegisterLibrary(lib.Procs());
-		Scrib_lua_mod rv = this.LoadLibraryFromFile(url.NameAndExt(), Io_mgr._.LoadFilStr(url));
+		Scrib_lua_mod rv = this.LoadLibraryFromFile(url.NameAndExt(), Io_mgr.I.LoadFilStr(url));
 		Scrib_lua_proc setupInterface_func = rv.Fncs_get_by_key("setupInterface");
 		if (setupInterface_func != null)
 			engine.CallFunction(setupInterface_func.Id(), Scrib_kv_utl_.base1_obj_(args));
@@ -139,7 +139,7 @@ public class Scrib_core {
 		}
 		return rv;
 	}
-	public OrderedHash Frame_created_list() {return frame_created_list;} private OrderedHash frame_created_list = OrderedHash_.new_();	// created by NewChildFrame
+	public Ordered_hash Frame_created_list() {return frame_created_list;} private Ordered_hash frame_created_list = Ordered_hash_.new_();	// created by NewChildFrame
 	public Xot_invk Frame_current() {return frame_current;} private Xot_invk frame_current;
 	public Xot_invk Frame_parent() {return frame_parent;} private Xot_invk frame_parent;
 	@gplx.Internal protected void Frame_current_(Xot_invk v) {frame_current = v;} // TEST:
@@ -159,9 +159,9 @@ public class Scrib_core {
 		parent_frame.Frame_tid_(Scrib_frame_.Tid_parent); current_frame.Frame_tid_(Scrib_frame_.Tid_current);
 		try {
 			Scrib_lua_mod mod = Mods_get_or_new(mod_name, mod_text);
-			KeyVal[] func_args = Scrib_kv_utl_.base1_many_(mod.Init_chunk_func(), String_.new_utf8_(fnc_name));
+			KeyVal[] func_args = Scrib_kv_utl_.base1_many_(mod.Init_chunk_func(), String_.new_u8(fnc_name));
 			KeyVal[] func_rslt = engine.CallFunction(lib_mw.Mod().Fncs_get_id("executeModule"), func_args);			// call init_chunk to get proc dynamically; DATE:2014-07-12
-			if (func_rslt == null || func_rslt.length < 2) throw Err_.new_("lua.error:function did not return a value; fnc_name=~{0}", String_.new_utf8_(fnc_name)); // must return at least 2 items for func_rslt[1] below; DATE:2014-09-22
+			if (func_rslt == null || func_rslt.length < 2) throw Err_.new_("lua.error:function did not return a value; fnc_name=~{0}", String_.new_u8(fnc_name)); // must return at least 2 items for func_rslt[1] below; DATE:2014-09-22
 			Scrib_lua_proc proc = (Scrib_lua_proc)func_rslt[1].Val();												// note that init_chunk should have: [0]:true/false result; [1]:proc
 			func_args = Scrib_kv_utl_.base1_many_(proc);
 			func_rslt = engine.CallFunction(lib_mw.Mod().Fncs_get_id("executeFunction"), func_args);				// call function now
@@ -177,12 +177,12 @@ public class Scrib_core {
 			frame_created_list.Clear();
 		}
 	}
-	public Scrib_lua_mod Mods_get(byte[] mod_name) {return (Scrib_lua_mod)mods.Fetch(mod_name);}
+	public Scrib_lua_mod Mods_get(byte[] mod_name) {return (Scrib_lua_mod)mods.Get_by(mod_name);}
 	private Scrib_lua_mod Mods_get_or_new(byte[] mod_name, byte[] mod_text) {
-		Scrib_lua_mod rv = (Scrib_lua_mod)mods.Fetch(mod_name);
+		Scrib_lua_mod rv = (Scrib_lua_mod)mods.Get_by(mod_name);
 		if (rv == null) {
-			rv = new Scrib_lua_mod(this, "Module:" + String_.new_utf8_(mod_name));
-			rv.LoadString(String_.new_utf8_(mod_text));
+			rv = new Scrib_lua_mod(this, "Module:" + String_.new_u8(mod_name));
+			rv.LoadString(String_.new_u8(mod_text));
 			mods.Add(mod_name, rv);
 		}
 		return rv;
@@ -198,7 +198,7 @@ public class Scrib_core {
 		try {
 			Xot_invk src_frame = frame_current;
 			if (src_frame != null)
-				excerpt = String_.new_utf8_(cur_src, src_frame.Src_bgn(), src_frame.Src_end());
+				excerpt = String_.new_u8(cur_src, src_frame.Src_bgn(), src_frame.Src_end());
 		} catch (Exception e) {Err_.Noop(e);}
 		throw Err_.new_(err, page.Ttl().Page_db_as_str(), excerpt, traceback);
 	}

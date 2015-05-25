@@ -114,7 +114,7 @@ class Php_srl_itm_ary extends Php_srl_itm_base {
 			subs[i].Xto_bfr(bfr, depth + 1);
 		Php_srl_wtr.Indent(bfr, depth);
 		bfr.Add_byte(Byte_ascii.Curly_end).Add_byte_nl();
-	}	static final byte[] CONST_ary_bgn = Bry_.new_ascii_("]{\n");
+	}	static final byte[] CONST_ary_bgn = Bry_.new_a7("]{\n");
 	Php_srl_itm_kv[] subs = Php_srl_itm_kv.Ary_empty;
 }
 class Php_srl_itm_kv {

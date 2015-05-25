@@ -86,7 +86,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 	public void Tab_name_() {
 		byte[] tab_name = page.Html_data().Custom_name();
 		if (tab_name == null) tab_name = page.Ttl().Full_txt();
-		Tab_name_(String_.new_utf8_(tab_name));
+		Tab_name_(String_.new_u8(tab_name));
 	}
 	public void Tab_name_(String tab_name) {
 		Xocfg_tab_btn_mgr cfg_tab_btn_mgr = cfg_tab_mgr.Btn_mgr();
@@ -117,9 +117,9 @@ public class Xog_tab_itm implements GfoInvkAble {
 		this.wiki = app.Wiki_mgr().Get_by_key_or_null(url.Wiki_bry());	// NOTE: must update wiki
 		wiki.Init_assert();	// NOTE: assert wiki.Init before parsing; needed b/c lang (with lang-specific ns) is only loaded on init, and parse Xoa_ttl.parse_ will fail below; EX:pt.wikipedia.org/wiki/Wikipedia:P�gina principal
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, url.Page_bry());
-		if (ttl == null) {usr_dlg.Prog_one("", "", "title is invalid: ~{0}", String_.new_utf8_(url.Raw())); return;}
-		Tab_name_(String_.new_utf8_(ttl.Full_txt()));
-		usr_dlg.Prog_one("", "", "loading: ~{0}", String_.new_utf8_(ttl.Raw()));
+		if (ttl == null) {usr_dlg.Prog_one("", "", "title is invalid: ~{0}", String_.new_u8(url.Raw())); return;}
+		Tab_name_(String_.new_u8(ttl.Full_txt()));
+		usr_dlg.Prog_one("", "", "loading: ~{0}", String_.new_u8(ttl.Raw()));
 		if (app.Api_root().Html().Modules().Popups().Enabled())
 			this.Html_box().Html_js_eval_script("if (window.xowa_popups_hide_all != null) window.xowa_popups_hide_all();");	// should be more configurable; DATE:2014-07-09
 		app.Thread_mgr().Page_load_mgr().Add_at_end(new Load_page_wkr(this, wiki, url, ttl)).Run();
@@ -140,12 +140,12 @@ public class Xog_tab_itm implements GfoInvkAble {
 				}
 				else {
 					if (page.Redirected_ttls().Count() > 0)
-						usr_dlg.Prog_many("", "", "could not find: ~{0} (redirected from ~{1})", String_.new_utf8_(page.Url().Page_bry()), String_.new_utf8_((byte[])page.Redirected_ttls().FetchAt(0)));
+						usr_dlg.Prog_many("", "", "could not find: ~{0} (redirected from ~{1})", String_.new_u8(page.Url().Page_bry()), String_.new_u8((byte[])page.Redirected_ttls().Get_at(0)));
 					else {
 						if (ttl.Ns().Id_file())
-							usr_dlg.Prog_one("", "", "commons.wikimedia.org must be installed in order to view the file. See [[Help:Wikis/Commons]]: ~{0}", String_.new_utf8_(url.Raw()));
+							usr_dlg.Prog_one("", "", "commons.wikimedia.org must be installed in order to view the file. See [[Help:Wikis/Commons]]: ~{0}", String_.new_u8(url.Raw()));
 						else
-							usr_dlg.Prog_one("", "", "could not find: ~{0}", String_.new_utf8_(url.Raw()));
+							usr_dlg.Prog_one("", "", "could not find: ~{0}", String_.new_u8(url.Raw()));
 					}
 				}
 				app.Log_wtr().Queue_enabled_(false);
@@ -156,8 +156,8 @@ public class Xog_tab_itm implements GfoInvkAble {
 			history_mgr.Add(page);
 			Xog_tab_itm_read_mgr.Show_page(this, page, true);
 			if (app.Api_root().Usr().History().Enabled()) {
-				app.User().History_mgr().Add(page);
-				app.User().Data_mgr().History_mgr().Update_async(app.Async_mgr(), ttl, url);
+				app.Usere().History_mgr().Add(page);
+				app.Usere().Data_mgr().History_mgr().Update_async(app.Async_mgr(), ttl, url);
 			}
 			usr_dlg.Prog_none("", "", "rendering html");
 			// html_itm.Html_box().Size_(tab_mgr.Tab_mgr().Size()); // COMMENTED: causes clicks on macosx to be off by 4 px; NOTE: must resize tab here, else scrolling to anchor in background tab doesn't work (html_box has size of 0, 0) DATE:2015-05-03
@@ -166,7 +166,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 			if (wkr.Hdump_enabled()) {
 				wiki.File_mgr().Init_file_mgr_by_load(wiki);
 				Xof_fsdb_mgr fsdb_mgr = wiki.File_mgr().Fsdb_mgr();
-				async_wkr = new Xof_file_wkr(wiki.File__orig_mgr(), fsdb_mgr.Bin_mgr(), fsdb_mgr.Mnt_mgr(), app.File__cache_mgr(), wiki.File__repo_mgr(), html_itm, page, page.Hdump_data().Imgs(), gplx.xowa.files.Xof_exec_tid.Tid_wiki_page);
+				async_wkr = new Xof_file_wkr(wiki.File__orig_mgr(), fsdb_mgr.Bin_mgr(), fsdb_mgr.Mnt_mgr(), app.Usere().File__cache_mgr(), wiki.File__repo_mgr(), html_itm, page, page.Hdump_data().Imgs());
 				if (wiki.Html__hdump_enabled() && page.Revision_data().Html_db_id() == -1) {
 					wiki.Html__hdump_wtr().Save(page);
 				}
@@ -181,12 +181,12 @@ public class Xog_tab_itm implements GfoInvkAble {
 			this.tab_is_loading = false;
 		}
 	}
-	public void Exec_async_hdump(Xoa_app app, Xow_wiki wiki, gplx.xowa.files.gui.Xog_js_wkr js_wkr, gplx.core.threads.Gfo_thread_pool thread_pool, Xoa_page page, ListAdp imgs, int[] redlink_ary) {
+	public void Exec_async_hdump(Xoa_app app, Xow_wiki wiki, gplx.xowa.files.gui.Xog_js_wkr js_wkr, gplx.core.threads.Gfo_thread_pool thread_pool, Xoa_page page, List_adp imgs, int[] redlink_ary) {
 		if (imgs.Count() > 0) {
 			Xof_file_wkr file_thread = new Xof_file_wkr
 				( wiki.File__orig_mgr(), wiki.File__bin_mgr(), wiki.File__mnt_mgr()
-				, app.File__cache_mgr(), wiki.File__repo_mgr(), html_itm, page, imgs
-				, gplx.xowa.files.Xof_exec_tid.Tid_wiki_page);
+				, app.User().File__cache_mgr(), wiki.File__repo_mgr(), html_itm, page, imgs
+				);
 			thread_pool.Add_at_end(file_thread); thread_pool.Run();
 		}
 		if (redlink_ary.length > 0) {
@@ -209,11 +209,11 @@ public class Xog_tab_itm implements GfoInvkAble {
 		if (usr_dlg.Canceled()) {usr_dlg.Prog_none("", "", ""); app.Log_wtr().Queue_enabled_(false); return;}
 		int xfer_len = 0;
 		xfer_len = page.File_queue().Count();
-		String page_ttl_str = String_.new_utf8_(page.Ttl().Raw());
+		String page_ttl_str = String_.new_u8(page.Ttl().Raw());
 		if (xfer_len > 0){
 			usr_dlg.Prog_one("", "", "downloading images: ~{0}", xfer_len);
 			try {
-				page.File_queue().Exec(gplx.xowa.files.Xof_exec_tid.Tid_wiki_page, usr_dlg, wiki, page);
+				page.File_queue().Exec(wiki, page);
 				if (page.Html_data().Xtn_gallery_packed_exists())	// packed_gallery exists; fire js once; PAGE:en.w:National_Sculpture_Museum_(Valladolid); DATE:2014-07-21
 					html_itm.Html_gallery_packed_exec();
 				if (	page.Html_data().Xtn_imap_exists()			// imap exists; DATE:2014-08-07
@@ -229,8 +229,8 @@ public class Xog_tab_itm implements GfoInvkAble {
 				usr_dlg.Prog_one("", "", "generating math: ~{0}", xfer_len);
 				for (int i = 0; i < xfer_len; i++) {
 					if (usr_dlg.Canceled()) {usr_dlg.Prog_none("", "", ""); app.Log_wtr().Queue_enabled_(false); return;}
-					gplx.xowa.xtns.math.Xof_math_itm itm = (gplx.xowa.xtns.math.Xof_math_itm)page.File_math().FetchAt(i);
-					String queue_msg = usr_dlg.Prog_many("", "", "generating math ~{0} of ~{1}: ~{2}", i + ListAdp_.Base1, xfer_len, String_.new_utf8_(itm.Math()));
+					gplx.xowa.xtns.math.Xof_math_itm itm = (gplx.xowa.xtns.math.Xof_math_itm)page.File_math().Get_at(i);
+					String queue_msg = usr_dlg.Prog_many("", "", "generating math ~{0} of ~{1}: ~{2}", i + List_adp_.Base1, xfer_len, String_.new_u8(itm.Math()));
 					app.File_mgr().Math_mgr().MakePng(itm.Math(), itm.Hash(), itm.Png_url(), queue_msg);
 					gplx.gfui.SizeAdp size = app.File_mgr().Img_mgr().Wkr_query_img_size().Exec(itm.Png_url());
 					html_itm.Html_img_update("xowa_math_img_" + itm.Id(), itm.Png_url().To_http_file_str(), size.Width(), size.Height());
@@ -246,13 +246,14 @@ public class Xog_tab_itm implements GfoInvkAble {
 		}
 		try {
 			if (page.Tab_data().Tab() != null) {	// needed b/c Preview has page.Tab of null which causes null_ref error in redlinks
-				Xog_redlink_mgr redlinks_wkr = new Xog_redlink_mgr(win_itm, page, app.User().Cfg_mgr().Log_mgr().Log_redlinks());
+				Xog_redlink_mgr redlinks_wkr = new Xog_redlink_mgr(win_itm, page, app.Usere().Cfg_mgr().Log_mgr().Log_redlinks());
 				Thread_adp_.invk_(gplx.xowa.apps.Xoa_thread_.Key_page_redlink, redlinks_wkr, gplx.xowa.parsers.lnkis.redlinks.Xog_redlink_mgr.Invk_run).Start();
 				usr_dlg.Prog_none("", "imgs.done", "");
 			}
 		}	catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.redlinks: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_brief(e));}
 		try {app.File_mgr().Cache_mgr().Compress_check();}
 		catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.cache: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_brief(e));}
+		app.Usere().File__cache_mgr().Page_end(app.Wiki_mgr());
 		app.Log_wtr().Queue_enabled_(false);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

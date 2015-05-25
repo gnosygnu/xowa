@@ -35,7 +35,7 @@ public class Sqlite_conn_info extends Db_conn_info__base {
 		));
 	}
 	public static Db_conn_info make_(Io_url url) {
-		Io_mgr._.CreateDirIfAbsent(url.OwnerDir());
+		Io_mgr.I.CreateDirIfAbsent(url.OwnerDir());
 		return Db_conn_info_.parse_(Bld_raw
 		( "gplx_key"		, Tid_const
 		, "data source"		, url.Xto_api()

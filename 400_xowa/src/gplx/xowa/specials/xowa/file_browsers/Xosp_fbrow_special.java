@@ -32,7 +32,7 @@ public class Xosp_fbrow_special implements Xows_page {
 		Xosp_fbrow_cmd cmd = (Xosp_fbrow_cmd)cmd_regy.Get_by_bry(cmd_bry); if (cmd == null) cmd = Xosp_fbrow_cmd__err.I;
 		return cmd.Make_new().Write_html(url_args, select_invkable);
 	}
-	private static final byte[] Arg_cmd = Bry_.new_ascii_("cmd");
+	private static final byte[] Arg_cmd = Bry_.new_a7("cmd");
 	private static final Hash_adp_bry cmd_regy = Hash_adp_bry.cs_()
 	.Add_bry_obj(Xosp_fbrow_cmd__wiki_add.Regy_key, Xosp_fbrow_cmd__wiki_add.I)
 	.Add_bry_obj(Xosp_fbrow_cmd__root_set.Regy_key, Xosp_fbrow_cmd__root_set.I)

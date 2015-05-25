@@ -20,7 +20,7 @@ import org.junit.*;
 import gplx.ios.*; /*IoMgrFxt*/ import gplx.dbs.qrys.*;
 public class TdbFlush_tst {
 	@Before public void setup() {
-		Io_mgr._.InitEngine_mem();
+		Io_mgr.I.InitEngine_mem();
 		engine = fx_engine.run_MakeEngine(dbPath);
 	}
 	TdbEngine engine; Io_url dbPath = Io_url_.mem_fil_("mem/dir/db0.dsv"); DateAdp time = DateAdp_.parse_gplx("2001-01-01");
@@ -100,20 +100,20 @@ class TdbEngineFxt {
 
 	public void tst_FilesCount(TdbEngine engine, int count) {Tfds.Eq(engine.Db().Files().Count(), count);}
 	public void tst_File(TdbEngine engine, int index, int id, Io_url url, String format) {
-		TdbFile src = engine.Db().Files().FetchOrFail(id);
+		TdbFile src = engine.Db().Files().Get_by_or_fail(id);
 		Tfds.Eq(src.Path().Raw(), url.Raw());
 	}
 	public static TdbEngineFxt new_() {return new TdbEngineFxt();} TdbEngineFxt() {}
 }
 class IoMgrFxt {
-	public void run_UpdateFilModifiedTime(Io_url url, DateAdp val) {Io_mgr._.UpdateFilModifiedTime(url, val);}
+	public void run_UpdateFilModifiedTime(Io_url url, DateAdp val) {Io_mgr.I.UpdateFilModifiedTime(url, val);}
 	public void tst_QueryFilModified(boolean expdMatch, Io_url url, DateAdp expt) {
-		IoItmFil filItem = Io_mgr._.QueryFil(url);
+		IoItmFil filItem = Io_mgr.I.QueryFil(url);
 		DateAdp actl = filItem.ModifiedTime();
 		boolean actlMatch = String_.Eq(expt.XtoStr_gplx(), actl.XtoStr_gplx());
 		Tfds.Eq(expdMatch, actlMatch, expt.XtoStr_gplx() + (expdMatch ? "!=" : "==") + actl.XtoStr_gplx());
 	}
-	public void tst_Exists(boolean expd, Io_url url) {Tfds.Eq(expd, Io_mgr._.ExistsFil(url));}
+	public void tst_Exists(boolean expd, Io_url url) {Tfds.Eq(expd, Io_mgr.I.ExistsFil(url));}
 
 	public static IoMgrFxt new_() {return new IoMgrFxt();} IoMgrFxt() {}
 }

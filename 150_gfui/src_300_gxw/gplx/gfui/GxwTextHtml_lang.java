@@ -196,7 +196,7 @@ class GxwTextHtml_editor extends JEditorPane implements GxwTextHtml {
 		try {return this.getDocument().getText(sel_bgn, sel_end - sel_bgn);}
 		catch (Exception exc) {throw Err_.err_(exc, "Html_sel_text");}
 	}
-	static void Html_sel_atrs(AttributeSet atrs, ListAdp list, String ownerKey, String dlm) {
+	static void Html_sel_atrs(AttributeSet atrs, List_adp list, String ownerKey, String dlm) {
 		if (atrs == null) return;
 		Enumeration<?> keys = atrs.getAttributeNames();
 		while (true) {
@@ -214,9 +214,9 @@ class GxwTextHtml_editor extends JEditorPane implements GxwTextHtml {
 	public KeyVal[] Html_sel_atrs() {
 		if (String_.Eq(this.getContentType(), "text/plain")) return KeyVal_.Ary_empty;
 		Element elm = Html_sel_elm(); if (elm == null) return KeyVal_.Ary_empty;
-		ListAdp sel_atrs_list = ListAdp_.new_();
+		List_adp sel_atrs_list = List_adp_.new_();
 		Html_sel_atrs(elm.getAttributes(), sel_atrs_list, null, ".");
-		return (KeyVal[])sel_atrs_list.Xto_ary(KeyVal.class);
+		return (KeyVal[])sel_atrs_list.To_ary(KeyVal.class);
 	}
 
 	@Override public void processKeyEvent(KeyEvent e) 					{

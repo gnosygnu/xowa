@@ -20,7 +20,7 @@ public class Binary_search_ {
 	public static int Search(CompareAble[] ary, int ary_len, CompareAble val) {
 		if (ary_len == 1) return 0;
 		int interval = ary_len / 2;
-		int pos = interval - ListAdp_.Base1;
+		int pos = interval - List_adp_.Base1;
 		int pos_last = ary_len - 1;
 		int pos_prv = -1;
 		int loop_count = 0;

@@ -19,20 +19,20 @@ package gplx.gfs; import gplx.*;
 public class Gfs_msg_bldr implements GfoMsgParser {
 	Gfs_parser parser = new Gfs_parser();
 	public GfoMsg ParseToMsg(String s) {return Bld(s);}
-	public GfoMsg Bld(String src) {return Bld(Bry_.new_utf8_(src));}
+	public GfoMsg Bld(String src) {return Bld(Bry_.new_u8(src));}
 	public GfoMsg Bld(byte[] src) {
 		Gfs_nde nde = parser.Parse(src);
 		return Bld_msg(src, nde);
 	}
 	GfoMsg Bld_msg(byte[] src, Gfs_nde nde) {
 		boolean op_is_assign = (nde.Op_tid() == Gfs_nde.Op_tid_assign);
-		String name = String_.new_utf8_(nde.Name_bry(src));
+		String name = String_.new_u8(nde.Name_bry(src));
 		if (op_is_assign) name += Tkn_mutator;
 		GfoMsg rv = GfoMsg_.new_parse_(name);
 		int len = nde.Atrs_len();
 		for (int i = 0; i < len; i++) {
 			Gfs_nde atr = nde.Atrs_get_at(i);
-			rv.Add("", String_.new_utf8_(atr.Name_bry(src)));
+			rv.Add("", String_.new_u8(atr.Name_bry(src)));
 		}
 		len = nde.Subs_len();
 		for (int i = 0; i < len; i++) {

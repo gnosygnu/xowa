@@ -55,7 +55,7 @@ public class Xowd_search_word_tbl implements RlsAble {
 			Db_qry__select_cmd qry = Db_qry_.select_().From_(tbl_name).OrderBy_(fld_page_count, Bool_.N).Where_(Db_crt_.like_(fld_text, ""));	// order by highest page count to look at most common words
 			stmt_select_in = conn.Stmt_new(qry);
 		}
-		ListAdp list = ListAdp_.new_();
+		List_adp list = List_adp_.new_();
 		Db_rdr rdr = stmt_select_in.Clear().Crt_bry_as_str(fld_text, Bry_.Replace(word, Byte_ascii.Asterisk, Byte_ascii.Percent)).Exec_select__rls_manual();
 		try	{
 			int row_count = 0;
@@ -68,19 +68,19 @@ public class Xowd_search_word_tbl implements RlsAble {
 			}
 		}
 		finally {rdr.Rls();}
-		return (Xowd_search_word_row[])list.Xto_ary_and_clear(Xowd_search_word_row.class);
+		return (Xowd_search_word_row[])list.To_ary_and_clear(Xowd_search_word_row.class);
 	}
-	public void Select_by_word(Cancelable cancelable, Xowd_search_link_tbl search_page_tbl, ListAdp rv, byte[] search, int results_max) {
+	public void Select_by_word(Cancelable cancelable, Xowd_search_link_tbl search_page_tbl, List_adp rv, byte[] search, int results_max) {
 		gplx.core.criterias.Criteria crt = null; 
 		if (Bry_.Has(search, Byte_ascii.Asterisk)) {
 			search = Bry_.Replace(search, Byte_ascii.Asterisk, Byte_ascii.Percent);
-			crt = Db_crt_.like_	(fld_text, String_.new_utf8_(search));
+			crt = Db_crt_.like_	(fld_text, String_.new_u8(search));
 		}
 		else
-			crt = Db_crt_.eq_	(fld_text, String_.new_utf8_(search));
+			crt = Db_crt_.eq_	(fld_text, String_.new_u8(search));
 		Db_qry__select_cmd qry = Db_qry_.select_().Cols_(fld_id).From_(tbl_name).Where_(crt);
 
-		ListAdp words = ListAdp_.new_();
+		List_adp words = List_adp_.new_();
 		Db_rdr rdr = conn.Stmt_new(qry).Crt_bry_as_str(fld_text, search).Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next())

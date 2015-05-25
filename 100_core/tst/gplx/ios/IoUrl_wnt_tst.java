@@ -42,8 +42,8 @@ public class IoUrl_wnt_tst {
 	@Test  public void OwnerDir() {
 		fx.tst_OwnerDir(Io_url_.wnt_dir_("C:\\dir\\sub1"), Io_url_.wnt_dir_("C:\\dir"));
 		fx.tst_OwnerDir(Io_url_.wnt_fil_("C:\\fil.txt"), Io_url_.wnt_dir_("C:"));
-		fx.tst_OwnerDir(Io_url_.wnt_dir_("C:"), Io_url_.Null);
-//			fx.tst_OwnerDir(Io_url_.wnt_fil_("press enter to select this folder"), Io_url_.Null);
+		fx.tst_OwnerDir(Io_url_.wnt_dir_("C:"), Io_url_.Empty);
+//			fx.tst_OwnerDir(Io_url_.wnt_fil_("press enter to select this folder"), Io_url_.Empty);
 	}
 	@Test  public void NameAndExt() {
 		fx.tst_NameAndExt(Io_url_.wnt_fil_("C:\\fil.txt"), "fil.txt");
@@ -81,7 +81,7 @@ public class IoUrl_wnt_tst {
 class IoUrlFxt {
 	public void tst_Xto_api(Io_url url, String expd) {Tfds.Eq(expd, url.Xto_api());}
 	public void tst_OwnerRoot(Io_url url, String expd) {Tfds.Eq(expd, url.OwnerRoot().Raw());}
-	public void tst_XtoNames(Io_url url, String... expdAry) {Tfds.Eq_ary(expdAry, url.XtoNames().XtoStrAry());}
+	public void tst_XtoNames(Io_url url, String... expdAry) {Tfds.Eq_ary(expdAry, url.XtoNames().To_str_ary());}
 	public void tst_NameAndExt(Io_url url, String expd) {Tfds.Eq(expd, url.NameAndExt());}
 	public void tst_Xto_gplx(Io_url url, String expd) {Tfds.Eq(expd, url.Raw());}
 	public void tst_IsDir(Io_url url, boolean expd) {Tfds.Eq(expd, url.Type_dir());}

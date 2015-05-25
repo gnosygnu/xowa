@@ -52,7 +52,7 @@ class Insider_html_bldr_fxt {
 		page.Html_data().Xtn_skin_mgr().Add(skin_itm);
 	}
 	public void Init_insider(String lnki_ttl) {
-		skin_itm.Add(Bry_.new_utf8_(lnki_ttl));
+		skin_itm.Add(Bry_.new_u8(lnki_ttl));
 	}
 	public void Test_bld(String expd) {
 		Bry_bfr tmp_bfr = Bry_bfr.reset_(255);

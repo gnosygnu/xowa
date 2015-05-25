@@ -20,7 +20,7 @@ import gplx.intl.*;
 import gplx.xowa.apps.fsys.*; import gplx.xowa.bldrs.langs.*; import gplx.xowa.langs.vnts.*;
 public class Xoa_lang_mgr implements GfoInvkAble {
 	private final Xoa_fsys_mgr fsys_mgr; private final Gfo_msg_log msg_log; private final Xol_lang lang_en; 
-	private final OrderedHash hash = OrderedHash_.new_bry_(); private final Hash_adp_bry fallback_regy = Hash_adp_bry.cs_();
+	private final Ordered_hash hash = Ordered_hash_.new_bry_(); private final Hash_adp_bry fallback_regy = Hash_adp_bry.cs_();
 	public Xoa_lang_mgr(Xoae_app app) {
 		this.fsys_mgr = app.Fsys_mgr(); this.msg_log = app.Msg_log();
 		mw_converter = new Xobc_utl_make_lang(this, fsys_mgr, msg_log);
@@ -29,8 +29,8 @@ public class Xoa_lang_mgr implements GfoInvkAble {
 	public void			Clear() {hash.Clear();}
 	public int			Len() {return hash.Count();}
 	public void			Add(Xol_lang itm) {hash.Add(itm.Key_bry(), itm);}
-	public Xol_lang		Get_at(int i) {return (Xol_lang)hash.FetchAt(i);}
-	public Xol_lang		Get_by_key(byte[] key) {return (Xol_lang)hash.Fetch(key);}
+	public Xol_lang		Get_at(int i) {return (Xol_lang)hash.Get_at(i);}
+	public Xol_lang		Get_by_key(byte[] key) {return (Xol_lang)hash.Get_by(key);}
 	public Xol_lang		Get_by_key_or_load(byte[] key) {return Get_by_key_or_new(key).Init_by_load_assert();}
 	public Xol_lang		Get_by_key_or_new(byte[] key) {
 		Xol_lang rv = Get_by_key(key);
@@ -80,17 +80,17 @@ public class Xoa_lang_mgr implements GfoInvkAble {
 		Xol_mw_lang_parser lang_parser = new Xol_mw_lang_parser(msg_log);
 		lang_parser.Bld_all(this, fsys_mgr);
 	}
-	public OrderedHash Xto_hash(byte[] raw) {
+	public Ordered_hash Xto_hash(byte[] raw) {
 		byte[][] keys = Bry_.Split(raw, Byte_ascii.Tilde);
 		int len = keys.length;
-		OrderedHash langs = OrderedHash_.new_();
+		Ordered_hash langs = Ordered_hash_.new_();
 		Cfg_nde_root lang_root = groups;
 		for (int i = 0; i < len; i++) {
 			byte[] key = keys[i];
 			Cfg_nde_obj lang_grp = lang_root.Grps_get(key);
 			if (lang_grp == null) {
 				Xol_lang_itm itm = Xol_lang_itm_.Get_by_key(key);
-				if (itm == null) throw Err_mgr._.fmt_(GRP_KEY, "invalid_lang", "unknown lang group or key: ~{0}", String_.new_utf8_(key));
+				if (itm == null) throw Err_mgr._.fmt_(GRP_KEY, "invalid_lang", "unknown lang group or key: ~{0}", String_.new_u8(key));
 				langs.Add(key, Xoac_lang_grp.Regy_get_or_new(key));
 			}
 			else
@@ -108,7 +108,7 @@ public class Xoa_lang_mgr implements GfoInvkAble {
 		return this;
 	}
 	private static final String Invk_get = "get", Invk_local_set_bulk = "local_set_bulk", Invk_load_lang = "load_lang", Invk_groups = "groups", Invk_mediawiki_converter = "mediawiki_converter";
-	public static final byte[] Fallback_false = Bry_.new_ascii_("false");
+	public static final byte[] Fallback_false = Bry_.new_a7("false");
 	public static Xol_lang Lang_en_make(Xoa_lang_mgr lang_mgr) {
 		Xol_lang rv = new Xol_lang(lang_mgr, Xol_lang_.Key_en);
 		Xol_lang_.Lang_init(rv);

@@ -59,7 +59,7 @@ public class Xob_xml_parser {
 					case Xob_xml_parser_.Id_id_bgn:			if (page_id_needed) data_bgn = pos; break;	// only flag if first <id>; note that 1st <id> always belongs to <page>;
 					case Xob_xml_parser_.Id_id_end:	
 						if (page_id_needed) {
-							int page_id = Bry_.Xto_int_or(src, data_bgn, hook_bgn, -1); if (page_id == -1) usr_dlg.Warn_many(GRP_KEY, "page_id_invalid", "page_id_is_invalid: ~{0}", String_.new_utf8_(src, data_bgn, hook_bgn));
+							int page_id = Bry_.Xto_int_or(src, data_bgn, hook_bgn, -1); if (page_id == -1) usr_dlg.Warn_many(GRP_KEY, "page_id_invalid", "page_id_is_invalid: ~{0}", String_.new_u8(src, data_bgn, hook_bgn));
 							rv.Id_(page_id);
 							page_id_needed = false;		// turn off for other <id> tags (<contributor>; <revision>)
 						}

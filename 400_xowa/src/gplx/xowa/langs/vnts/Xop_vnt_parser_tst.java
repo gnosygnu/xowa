@@ -60,7 +60,7 @@ public class Xop_vnt_parser_tst {	// uses zh-hant as cur_vnt
 	}
 	@Test  public void Title() {	// PURPOSE: implement title; PAGE:zh.w:Help:進階字詞轉換處理 DATE:2014-08-29
 		fxt.Test_parse("-{T|zh-hant:A;zh-hans:B}-", "");
-		Tfds.Eq("A", String_.new_utf8_(fxt.Parser_fxt().Page().Html_data().Display_ttl_vnt()));
+		Tfds.Eq("A", String_.new_u8(fxt.Parser_fxt().Page().Html_data().Display_ttl_vnt()));
 	}
 }
 class Xop_vnt_parser_fxt {
@@ -71,7 +71,7 @@ class Xop_vnt_parser_fxt {
 		fxt = new Xop_fxt(app, wiki);
 		Init_vnt_mgr(wiki.Lang().Vnt_mgr(), "zh-hans", "zh-hant");
 		Xop_vnt_lxr_.set_(wiki);
-		wiki.Lang().Vnt_mgr().Cur_vnt_(Bry_.new_ascii_("zh-hant"));
+		wiki.Lang().Vnt_mgr().Cur_vnt_(Bry_.new_a7("zh-hant"));
 		return this;
 	}
 	private static void Init_vnt_mgr(Xol_vnt_mgr vnt_mgr, String... vnts_str) {

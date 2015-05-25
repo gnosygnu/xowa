@@ -83,15 +83,15 @@ public class Xot_defn_trace_dbg implements Xot_defn_trace {
 					;
 				if (arg.KeyTkn_exists()) {
 //						byte[] key_ary = Bry_.Mid(src, arg.KeyTkn().Dat_bgn(), arg.KeyTkn().Dat_end());
-					String key_str = String_.new_utf8_(arg.Key_tkn().Dat_ary());
+					String key_str = String_.new_u8(arg.Key_tkn().Dat_ary());
 					int key_str_len = String_.Len(key_str);
 					if (key_str_len > key_max) key_max = key_str_len;
-					argKeys.Add(key_str + "=" + String_.new_utf8_(arg.Val_tkn().Dat_ary()));
+					argKeys.Add(key_str + "=" + String_.new_u8(arg.Val_tkn().Dat_ary()));
 				}
 			}
 			argKeys.Sort();
 			for (int i = 0; i < argKeys.Count(); i++) {
-				String s = (String)argKeys.FetchAt(i);
+				String s = (String)argKeys.Get_at(i);
 				String key = String_.GetStrBefore(s, "=");
 				String val = String_.GetStrAfter(s, "=");
 				bfr.Add_byte_repeat(Byte_ascii.Space, indent + 2).Add_str(key)
@@ -107,7 +107,7 @@ public class Xot_defn_trace_dbg implements Xot_defn_trace {
 //				Fmt(ctx, defn_tmpl.Src(), root, Ary_fmt_lbl , invk, true);
 			Fmt(ctx, defn_tmpl.Data_raw(), root, Ary_eval_lbl, invk, false);
 		}
-	}	private Bry_bfr bfr = Bry_bfr.new_(128); ListAdp argKeys = ListAdp_.new_(); Xot_fmtr_prm prm_fmtr = new Xot_fmtr_prm();
+	}	private Bry_bfr bfr = Bry_bfr.new_(128); List_adp argKeys = List_adp_.new_(); Xot_fmtr_prm prm_fmtr = new Xot_fmtr_prm();
 	private void Fmt(Xop_ctx ctx, byte[] src, Xop_tkn_itm root, byte[] lbl, Xot_invk caller, boolean newLineArgs) {
 		bfr.Add_byte_repeat(Byte_ascii.Space, indent).Add(lbl);
 		bfr.Add_byte_repeat(Byte_ascii.Space, indent);
@@ -134,8 +134,8 @@ public class Xot_defn_trace_dbg implements Xot_defn_trace {
 	public void Clear() {bfr.Clear(); indent = 0; count = 0;}
 	int indent = 0, count = 0;
 	public static final Xot_defn_trace_dbg _ = new Xot_defn_trace_dbg(); Xot_defn_trace_dbg() {}
-	private static final byte[] Ary_invk_lbl = Bry_.new_ascii_("*invk\n"), Ary_lnk_lbl = Bry_.new_ascii_("*lnk: "), Ary_args_lbl = Bry_.new_ascii_("*args\n")
-		, Ary_result_lbl = Bry_.new_ascii_("*result\n")
-		, Ary_eval_lbl = Bry_.new_ascii_("*eval\n")
-		, Ary_source_lbl = Bry_.new_ascii_("*source\n");
+	private static final byte[] Ary_invk_lbl = Bry_.new_a7("*invk\n"), Ary_lnk_lbl = Bry_.new_a7("*lnk: "), Ary_args_lbl = Bry_.new_a7("*args\n")
+		, Ary_result_lbl = Bry_.new_a7("*result\n")
+		, Ary_eval_lbl = Bry_.new_a7("*eval\n")
+		, Ary_source_lbl = Bry_.new_a7("*source\n");
 }

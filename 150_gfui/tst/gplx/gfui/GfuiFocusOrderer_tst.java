@@ -20,7 +20,7 @@ import org.junit.*;
 public class GfuiFocusOrderer_tst {
 	@Before public void setup() {
 		owner = GfuiElem_.new_();
-		list = ListAdp_.new_();	// list of all controls
+		list = List_adp_.new_();	// list of all controls
 	}
 	@Test  public void Horizontal() {
 		ini_Subs(owner, list, xy_(40, 0), xy_(20, 0), xy_(0, 0));
@@ -57,8 +57,8 @@ public class GfuiFocusOrderer_tst {
 		ini_Subs(owner, list, xy_(0, 0), xy_(20, 0));
 		tst_FocusIndxs(owner, list, 0, 1);
 
-		GfuiElem sub1 = owner.SubElems().FetchAt(0);
-		GfuiElem sub2 = owner.SubElems().FetchAt(1);
+		GfuiElem sub1 = owner.SubElems().Get_at(0);
+		GfuiElem sub2 = owner.SubElems().Get_at(1);
 		sub1.Focus_idx_(1);
 		sub2.Focus_idx_(0);
 
@@ -66,8 +66,8 @@ public class GfuiFocusOrderer_tst {
 		tst_FocusIndxs(owner, list, 1, 0);
 	}
 	PointAdp xy_(int x, int y) {return PointAdp_.new_(x, y);}
-	GfuiElem sub_(GfuiElem owner, int i) {return owner.SubElems().FetchAt(i);}
-	void ini_Subs(GfuiElem owner, ListAdp list, PointAdp... points) {
+	GfuiElem sub_(GfuiElem owner, int i) {return owner.SubElems().Get_at(i);}
+	void ini_Subs(GfuiElem owner, List_adp list, PointAdp... points) {
 		for (int i = 0; i < points.length; i++) {
 			GfuiElem sub = GfuiElem_.sub_(Int_.Xto_str(i), owner);
 			sub.Pos_(points[i]);
@@ -75,13 +75,13 @@ public class GfuiFocusOrderer_tst {
 			list.Add(sub);
 		}
 	}
-	void tst_FocusIndxs(GfuiElem owner, ListAdp list, int... expd) {
+	void tst_FocusIndxs(GfuiElem owner, List_adp list, int... expd) {
 		int[] actl = new int[list.Count()];
 		for (int i = 0; i < actl.length; i++) {
-			GfuiElem sub = (GfuiElem)list.FetchAt(i);
+			GfuiElem sub = (GfuiElem)list.Get_at(i);
 			actl[i] = sub.UnderElem().Core().Focus_index();
 		}
 		Tfds.Eq_ary(expd, actl);
 	}
-	GfuiElem owner; ListAdp list;
+	GfuiElem owner; List_adp list;
 }

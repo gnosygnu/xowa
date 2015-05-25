@@ -83,7 +83,7 @@ public class Xob_make_cmd_site implements Io_make_cmd {
 		fil_wtr.Bfr().Add_bfr_and_clear(cur_bfr);
 		fil_wtr.Add_idx(line_dlm);
 		Flush();
-		Io_mgr._.AppendFilBfr(reg_url, reg_bfr);
+		Io_mgr.I.AppendFilBfr(reg_url, reg_bfr);
 		//fil_wtr.Rls(); cur_bfr.Rls(); fil_wtr.Rls(); reg_bfr.Rls(); reg_key_0.Rls(); reg_key_n.Rls();
 	}
 //		private void Flush_large(byte[] bry, int itm_bgn, int itm_end, int itm_len) {
@@ -92,7 +92,7 @@ public class Xob_make_cmd_site implements Io_make_cmd {
 //			fil_wtr.Add_idx_direct(itm_len, Byte_.Zero);
 //			IoStream stream = IoStream_.Null;
 //			try {
-//				stream = Io_mgr._.OpenStreamWrite(fil_wtr.Fil_url());
+//				stream = Io_mgr.I.OpenStreamWrite(fil_wtr.Fil_url());
 //				fil_wtr.FlushIdx(stream);
 //				stream.Write_and_flush(bry, itm_bgn, itm_end);
 //				fil_wtr.Clear();

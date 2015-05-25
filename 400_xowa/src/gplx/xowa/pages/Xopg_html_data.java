@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.pages; import gplx.*; import gplx.xowa.*;
 import gplx.html.*; import gplx.xowa.html.modules.*; import gplx.xowa.pages.skins.*; import gplx.xowa.xtns.indicators.*;
 public class Xopg_html_data {
-	private OrderedHash ctg_hash;
+	private Ordered_hash ctg_hash;
 	public boolean					Html_restricted() {return html_restricted;} private boolean html_restricted = true;
 	public void					Html_restricted_(boolean v) {html_restricted = v;} public void Html_restricted_n_() {Html_restricted_(Bool_.N);}  public void Html_restricted_y_() {Html_restricted_(Bool_.Y);}
 	public byte[]				Display_ttl() {
@@ -83,9 +83,9 @@ public class Xopg_html_data {
 		indicators.Clear();
 		this.mode_wtxt_shown = false;
 	}
-	public byte[][] Ctgs_to_ary() {return ctg_hash == null ? Bry_.Ary_empty : (byte[][])ctg_hash.Xto_ary(byte[].class);}
+	public byte[][] Ctgs_to_ary() {return ctg_hash == null ? Bry_.Ary_empty : (byte[][])ctg_hash.To_ary(byte[].class);}
 	public void Ctgs_add(Xoa_ttl ttl) {
-		if (ctg_hash == null) ctg_hash = OrderedHash_.new_bry_();
+		if (ctg_hash == null) ctg_hash = Ordered_hash_.new_bry_();
 		byte[] ttl_bry = ttl.Page_txt();
 		if (ctg_hash.Has(ttl_bry)) return;
 		ctg_hash.Add(ttl_bry, ttl_bry);

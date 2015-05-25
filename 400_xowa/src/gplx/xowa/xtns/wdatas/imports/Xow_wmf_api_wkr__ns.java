@@ -43,7 +43,7 @@ class Xow_wmf_api_wkr__ns implements Xow_wmf_api_wkr {
 					Json_itm_kv kv = (Json_itm_kv)ns_grp.Subs_get_at(i);
 					Json_itm_nde nde = (Json_itm_nde)kv.Val();
 					int ns_id = Bry_.Xto_int_or(Get_val_or_null(nde, Bry_id), Int_.MinValue);
-					byte ns_case = Xow_ns_case_.parse_(String_.new_utf8_(Get_val_or_null(nde, Bry_case)));
+					byte ns_case = Xow_ns_case_.parse_(String_.new_u8(Get_val_or_null(nde, Bry_case)));
 					byte[] ns_name = Get_val_or_null(nde, Bry_name);
 					byte[] ns_canonical = Get_val_or_null(nde, Bry_canonical);
 					if (ns_canonical == null) ns_canonical = Bry_.Empty;	// main_ns has no canonical
@@ -70,8 +70,8 @@ class Xow_wmf_api_wkr__ns implements Xow_wmf_api_wkr {
 		Json_itm_kv sub_as_kv = (Json_itm_kv)sub;			
 		return sub_as_kv == null ? null : sub_as_kv.Val().Data_bry();	// sub_as_kv == null when key is not present; note that "canonical" does not exist for Main ns
 	}
-	private static final byte[] Bry_query = Bry_.new_ascii_("query"), Bry_namespaces = Bry_.new_ascii_("namespaces")
-	, Bry_id = Bry_.new_ascii_("id"), Bry_case = Bry_.new_ascii_("case"), Bry_name = Bry_.new_ascii_("*"), Bry_canonical = Bry_.new_ascii_("canonical")
-		, Bry_subpages = Bry_.new_ascii_("subpages"), Bry_content = Bry_.new_ascii_("content");
+	private static final byte[] Bry_query = Bry_.new_a7("query"), Bry_namespaces = Bry_.new_a7("namespaces")
+	, Bry_id = Bry_.new_a7("id"), Bry_case = Bry_.new_a7("case"), Bry_name = Bry_.new_a7("*"), Bry_canonical = Bry_.new_a7("canonical")
+		, Bry_subpages = Bry_.new_a7("subpages"), Bry_content = Bry_.new_a7("content");
 	private static final byte[][] Bry_jpath = new byte[][] {Bry_query, Bry_namespaces};
 }

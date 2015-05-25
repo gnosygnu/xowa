@@ -122,35 +122,35 @@ class Xodb_hdump_mgr__base_fxt {
  		}
 	@gplx.Virtual public void Clear_end() {}
 	@gplx.Virtual public void Exec_write(String raw) {
-		Xop_root_tkn root = fxt.Exec_parse_page_all_as_root(Bry_.new_utf8_(raw));
+		Xop_root_tkn root = fxt.Exec_parse_page_all_as_root(Bry_.new_u8(raw));
 		page.Root_(root);
 		hdump_wtr.Generate_hdump(bfr, page);
 	}
 	public Xohd_data_itm__base Make_xfer(String lnki_ttl, int html_uid, int html_w, int html_h, boolean file_is_orig, int file_ext_id) {
 		return new Xohd_data_itm__img().Data_init_base
-		(Bry_.new_utf8_(lnki_ttl), file_ext_id, Byte_.Zero, 0, 0, Xof_img_size.Upright_null, Xof_lnki_time.Null, Xof_lnki_page.Null, Xohd_data_itm__base.File_repo_id_null, file_is_orig, html_w, html_uid, html_w, html_h);
+		(Bry_.new_u8(lnki_ttl), Byte_.Zero, Xof_img_size.Upright_null, 0, 0, Xof_lnki_time.Null, Xof_lnki_page.Null, Xohd_data_itm__base.File_repo_id_null, file_ext_id, file_is_orig, html_w, html_uid, html_w, html_h);
 	}
 }
 class Xohd_hdump_wtr_fxt extends Xodb_hdump_mgr__base_fxt {
-	private ListAdp expd_itms_xfers = ListAdp_.new_();
+	private List_adp expd_itms_xfers = List_adp_.new_();
 	@Override public void Clear_end() {expd_itms_xfers.Clear();}
-	public void Expd_itms_xfers(Xohd_data_itm__base... itms) {expd_itms_xfers.AddMany((Object[])itms);}
+	public void Expd_itms_xfers(Xohd_data_itm__base... itms) {expd_itms_xfers.Add_many((Object[])itms);}
 	public void Test_write_all (String raw, String expd_html) {Test_write(Bool_.N, raw, expd_html);}
 	public void Test_write_frag(String raw, String expd_frag) {Test_write(Bool_.Y, raw, expd_frag);}
 	public void Test_write(boolean frag, String raw, String expd_html) {
 		this.Exec_write(raw);
-		String actl_html = String_.new_utf8_(page.Hdump_data().Body());
+		String actl_html = String_.new_u8(page.Hdump_data().Body());
 		if (frag)
 			Tfds.Eq_true(String_.Has(actl_html, expd_html), actl_html);
 		else
 			Tfds.Eq_str_lines(expd_html, actl_html);
 		if (expd_itms_xfers.Count() > 0) Tfds.Eq_ary_str(Xfer_to_str_ary(expd_itms_xfers), Xfer_to_str_ary(page.Hdump_data().Imgs()));
 	}
-	private static String[] Xfer_to_str_ary(ListAdp list) {
+	private static String[] Xfer_to_str_ary(List_adp list) {
 		int len = list.Count();
 		String[] rv = new String[len];
 		for (int i = 0; i < len; ++i) {
-			Xohd_data_itm__base itm = (Xohd_data_itm__base)list.FetchAt(i);
+			Xohd_data_itm__base itm = (Xohd_data_itm__base)list.Get_at(i);
 			rv[i] = itm.Data_print();
 		}
 		return rv;

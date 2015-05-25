@@ -39,7 +39,7 @@ public class Xoh_page_body_cls_tst {
 class Xoh_page_body_cls_fxt {
 	private Bry_bfr tmp_bfr; private Xoae_app app; private Xowe_wiki wiki;
 	public void Test_escape_cls(String raw, String expd) {
-		Tfds.Eq(expd, String_.new_utf8_(Xoh_page_body_cls.Escape_cls(Bry_.new_utf8_(raw))));
+		Tfds.Eq(expd, String_.new_u8(Xoh_page_body_cls.Escape_cls(Bry_.new_u8(raw))));
 	}
 	public void Test_calc(byte page_tid, String ttl_str, String expd) {
 		if (app == null) {
@@ -48,7 +48,7 @@ class Xoh_page_body_cls_fxt {
 			tmp_bfr = Bry_bfr.reset_(255);
 			wiki.Ns_mgr().Add_new(Wdata_wiki_mgr.Ns_property, Wdata_wiki_mgr.Ns_property_name);
 		}
-		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_utf8_(ttl_str));
-		Tfds.Eq(expd, String_.new_utf8_(Xoh_page_body_cls.Calc(tmp_bfr, ttl, page_tid)));
+		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_u8(ttl_str));
+		Tfds.Eq(expd, String_.new_u8(Xoh_page_body_cls.Calc(tmp_bfr, ttl, page_tid)));
 	}
 }

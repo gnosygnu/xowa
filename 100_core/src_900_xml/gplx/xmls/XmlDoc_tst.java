@@ -35,7 +35,7 @@ public class XmlDoc_tst {
 			, "</root>"
 			);
 		xdoc = XmlDoc_.parse_(xml);
-		xnde = xdoc.Root().SubNdes().FetchAt(0);
+		xnde = xdoc.Root().SubNdes().Get_at(0);
 		Tfds.Eq("a", xnde.Name());
 		Tfds.Eq("<a><b/><b/></a>", xnde.Xml_outer());	
 	}
@@ -48,7 +48,7 @@ public class XmlDoc_tst {
 			, "</root>"
 			);
 		xdoc = XmlDoc_.parse_(xml);
-		xnde = xdoc.Root().SubNdes().FetchAt(0);
+		xnde = xdoc.Root().SubNdes().Get_at(0);
 		Tfds.Eq("a", xnde.Name());
 		Tfds.Eq("test me", xnde.Text_inner());
 	}
@@ -59,9 +59,9 @@ public class XmlDoc_tst {
 			);
 		xdoc = XmlDoc_.parse_(xml);
 		XmlAtrList atrs = xdoc.Root().Atrs();
-		XmlAtr atr = atrs.FetchAt(1);
+		XmlAtr atr = atrs.Get_at(1);
 		tst_Atr(atr, "atr1", "1");
-		atr = atrs.FetchAt(1);
+		atr = atrs.Get_at(1);
 		tst_Atr(atr, "atr1", "1");
 	}
 	void tst_Atr(XmlAtr atr, String expdName, String expdVal) {

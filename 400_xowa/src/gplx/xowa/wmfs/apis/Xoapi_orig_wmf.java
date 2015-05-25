@@ -19,7 +19,7 @@ package gplx.xowa.wmfs.apis; import gplx.*; import gplx.xowa.*; import gplx.xowa
 import gplx.xowa.files.downloads.*;
 public class Xoapi_orig_wmf extends Xoapi_orig_base {
 	@Override public boolean Api_query_size_exec(Xoapi_orig_rslts rv, Xof_download_wkr download_wkr, byte[] ttl, int width, int height, Gfo_usr_dlg usr_dlg, byte[] repo_wiki_key) {
-		if (Env_.Mode_testing()) return false; // TEST: disable during tests else scrib_lib_title will try to call WMF API; DATE:2015-03-20
+		if (Env_.Mode_testing()) return false; // TEST: disable during tests else scrib_lib_title will try to call WMF API; DATE:2015-03-20			
 		String src = Bld_api_url(repo_wiki_key, ttl, width, height);
 		// xrg.Prog_fmt_hdr_(); // TOMBSTONE: do not uncomment; api will reuse whatever's in place
 		byte[] xml = download_wkr.Download_xrg().Exec_as_bry(src);
@@ -31,7 +31,7 @@ public class Xoapi_orig_wmf extends Xoapi_orig_base {
 			int xml_len = xml.length;
 			int pos = 0;
 			pos = Bry_finder.Find_fwd(xml, Bry_xml_ii			, pos, xml_len); 
-			if (pos == Bry_.NotFound) {usr_dlg.Log_many(GRP_KEY, "api_failed", "api failed: ~{0}", String_.new_utf8_(xml)); return false;}
+			if (pos == Bry_.NotFound) {usr_dlg.Log_many(GRP_KEY, "api_failed", "api failed: ~{0}", String_.new_u8(xml)); return false;}
 			pos += Bry_xml_ii.length;
 
 			byte[] orig_wiki = null, orig_page = null; int orig_w = 0, orig_h = 0;
@@ -82,13 +82,13 @@ public class Xoapi_orig_wmf extends Xoapi_orig_base {
 	private static Url_encoder tmp_encoder = Url_encoder.new_http_url_().Itms_raw_diff(Byte_ascii.Space, Byte_ascii.Underline);
 	private static final Bry_bfr tmp_bfr = Bry_bfr.new_();
 	private static final byte[]
-	  Bry_api					= Bry_.new_ascii_("/w/api.php?action=query&format=xml&prop=imageinfo&iiprop=size|url&redirects&titles=File:")	// NOTE: using File b/c it should be canonical
-	, Bry_width					= Bry_.new_ascii_("&iiurlwidth=")
-	, Bry_height				= Bry_.new_ascii_("&iiurlheight=")
-	, Bry_xml_ii				= Bry_.new_ascii_("<ii ")
-	, Bry_xml_width				= Bry_.new_ascii_("width=\"")
-	, Bry_xml_height			= Bry_.new_ascii_("height=\"")
-	, Bry_xml_descriptionurl	= Bry_.new_ascii_("descriptionurl=\"")
+	  Bry_api					= Bry_.new_a7("/w/api.php?action=query&format=xml&prop=imageinfo&iiprop=size|url&redirects&titles=File:")	// NOTE: using File b/c it should be canonical
+	, Bry_width					= Bry_.new_a7("&iiurlwidth=")
+	, Bry_height				= Bry_.new_a7("&iiurlheight=")
+	, Bry_xml_ii				= Bry_.new_a7("<ii ")
+	, Bry_xml_width				= Bry_.new_a7("width=\"")
+	, Bry_xml_height			= Bry_.new_a7("height=\"")
+	, Bry_xml_descriptionurl	= Bry_.new_a7("descriptionurl=\"")
 	;
 	public static final String GRP_KEY = "xowa.file.wmf.api";
 }

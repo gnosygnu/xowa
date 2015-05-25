@@ -24,26 +24,26 @@ public class Xohd_abrv_ {
 	, Tid_redlink = 12, Tid_toc = 13
 	;
 	public static final byte[]
-	  Key_dir					= Bry_.new_ascii_("~{xowa_dir}")
-	, Key_img					= Bry_.new_ascii_("xowa_img='")
-	, Key_img_style				= Bry_.new_ascii_("xowa_img_style='")
-	, Key_file_play				= Bry_.new_ascii_("<xowa_play id='")
-	, Key_file_info				= Bry_.new_ascii_("<xowa_info id='")
-	, Key_file_mgnf				= Bry_.new_ascii_("<xowa_mgnf id='")
-	, Key_hiero_dir				= Bry_.new_ascii_("~{xowa_hiero_dir}")
-	, Key_gallery_box_max		= Bry_.new_ascii_("xowa_gly_box_max='")
-	, Key_gallery_box_w			= Bry_.new_ascii_("xowa_gly_box_w='")
-	, Key_gallery_img_w			= Bry_.new_ascii_("xowa_gly_img_w='")
-	, Key_gallery_img_pad		= Bry_.new_ascii_("xowa_gly_img_pad='")
-	, Key_redlink				= Bry_.new_ascii_("xowa_redlink='")
-	, Key_toc					= Bry_.new_ascii_("~{xowa_toc}")
+	  Key_dir					= Bry_.new_a7("~{xowa_dir}")
+	, Key_img					= Bry_.new_a7("xowa_img='")
+	, Key_img_style				= Bry_.new_a7("xowa_img_style='")
+	, Key_file_play				= Bry_.new_a7("<xowa_play id='")
+	, Key_file_info				= Bry_.new_a7("<xowa_info id='")
+	, Key_file_mgnf				= Bry_.new_a7("<xowa_mgnf id='")
+	, Key_hiero_dir				= Bry_.new_a7("~{xowa_hiero_dir}")
+	, Key_gallery_box_max		= Bry_.new_a7("xowa_gly_box_max='")
+	, Key_gallery_box_w			= Bry_.new_a7("xowa_gly_box_w='")
+	, Key_gallery_img_w			= Bry_.new_a7("xowa_gly_img_w='")
+	, Key_gallery_img_pad		= Bry_.new_a7("xowa_gly_img_pad='")
+	, Key_redlink				= Bry_.new_a7("xowa_redlink='")
+	, Key_toc					= Bry_.new_a7("~{xowa_toc}")
 	;
 	public static final byte[]
-	  A_href_bgn				= Bry_.new_ascii_("/wiki/File:")
-	, Bry_img_style_bgn			= Bry_.new_ascii_("style='width:")
-	, Bry_img_style_end			= Bry_.new_ascii_("px;'")
-	, Html_redlink_bgn			= Bry_.Add(Bry_.new_ascii_("\" "), Key_redlink)
-	, Html_redlink_end			= Bry_.new_ascii_("'>")
+	  A_href_bgn				= Bry_.new_a7("/wiki/File:")
+	, Bry_img_style_bgn			= Bry_.new_a7("style='width:")
+	, Bry_img_style_end			= Bry_.new_a7("px;'")
+	, Html_redlink_bgn			= Bry_.Add(Bry_.new_a7("\" "), Key_redlink)
+	, Html_redlink_end			= Bry_.new_a7("'>")
 	;
 	public static Btrie_slim_mgr new_trie() {
 		Btrie_slim_mgr rv = Btrie_slim_mgr.cs_();

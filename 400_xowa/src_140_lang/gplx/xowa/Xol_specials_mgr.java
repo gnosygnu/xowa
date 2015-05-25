@@ -17,13 +17,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 public class Xol_specials_mgr implements GfoInvkAble {
-	private OrderedHash hash_by_special = OrderedHash_.new_bry_(), hash_by_aliases = OrderedHash_.new_bry_();
+	private Ordered_hash hash_by_special = Ordered_hash_.new_bry_(), hash_by_aliases = Ordered_hash_.new_bry_();
 	public Xol_specials_mgr(Xol_lang lang) {this.lang = lang;} private Xol_lang lang;
 	public void Clear() {hash_by_special.Clear();}
 	public int Count() {return hash_by_special.Count();}
-	public Xol_specials_itm Get_at(int i) {return (Xol_specials_itm)hash_by_special.FetchAt(i);}
-	public Xol_specials_itm Get_by_alias(byte[] alias) {return (Xol_specials_itm)hash_by_aliases.Fetch(alias);}
-	public Xol_specials_itm Get_by_key(byte[] special) {return (Xol_specials_itm)hash_by_special.Fetch(special);}
+	public Xol_specials_itm Get_at(int i) {return (Xol_specials_itm)hash_by_special.Get_at(i);}
+	public Xol_specials_itm Get_by_alias(byte[] alias) {return (Xol_specials_itm)hash_by_aliases.Get_by(alias);}
+	public Xol_specials_itm Get_by_key(byte[] special) {return (Xol_specials_itm)hash_by_special.Get_by(special);}
 	public void Add(byte[] special, byte[][] alias_ary) {
 		Xol_specials_itm itm = new Xol_specials_itm(special, alias_ary);
 		hash_by_special.Add(special, itm);

@@ -281,7 +281,7 @@ public class Wdata_hwtr_mgr_tst {
 //		}
 }
 class Wdata_hwtr_mgr_fxt {
-	private Wdata_hwtr_mgr doc_hwtr; private OrderedHash resolved_ttls = OrderedHash_.new_bry_();
+	private Wdata_hwtr_mgr doc_hwtr; private Ordered_hash resolved_ttls = Ordered_hash_.new_bry_();
 	public Wdata_wiki_mgr_fxt Wdata_fxt() {return wdata_fxt;} private Wdata_wiki_mgr_fxt wdata_fxt = new Wdata_wiki_mgr_fxt();
 	public void init() {
 		if (doc_hwtr == null) {
@@ -294,12 +294,12 @@ class Wdata_hwtr_mgr_fxt {
 		doc_hwtr.Lbl_mgr().Clear();
 	}
 	public Wdata_doc_bldr Wdoc_bldr() {return wdoc_bldr;} private Wdata_doc_bldr wdoc_bldr = new Wdata_doc_bldr();
-	public Wdata_hwtr_mgr_fxt Init_resolved_pid(int pid, String lbl) {resolved_ttls.Add(Wdata_lbl_itm.Make_ttl(Bool_.Y, pid), new Wdata_langtext_itm(Bry_.new_ascii_("en"), Bry_.new_ascii_(lbl))); return this;}
-	public Wdata_hwtr_mgr_fxt Init_resolved_qid(int qid, String lbl) {resolved_ttls.Add(Wdata_lbl_itm.Make_ttl(Bool_.N, qid), new Wdata_langtext_itm(Bry_.new_ascii_("en"), Bry_.new_ascii_(lbl))); return this;}
+	public Wdata_hwtr_mgr_fxt Init_resolved_pid(int pid, String lbl) {resolved_ttls.Add(Wdata_lbl_itm.Make_ttl(Bool_.Y, pid), new Wdata_langtext_itm(Bry_.new_a7("en"), Bry_.new_a7(lbl))); return this;}
+	public Wdata_hwtr_mgr_fxt Init_resolved_qid(int qid, String lbl) {resolved_ttls.Add(Wdata_lbl_itm.Make_ttl(Bool_.N, qid), new Wdata_langtext_itm(Bry_.new_a7("en"), Bry_.new_a7(lbl))); return this;}
 	public void Test_doc(Wdata_doc wdoc, String expd) {
 		doc_hwtr.Init_by_wdoc(wdoc);
 		byte[] actl = doc_hwtr.Write(wdoc);
-		Tfds.Eq_str_lines(expd, String_.new_utf8_(actl));
+		Tfds.Eq_str_lines(expd, String_.new_u8(actl));
 	}
 	public void Test_claim_val(Wdata_claim_itm_core claim, String expd) {			
 		doc_hwtr.Init_by_wdoc(wdoc_bldr.Add_claims(claim).Xto_wdoc());
@@ -307,7 +307,7 @@ class Wdata_hwtr_mgr_fxt {
 		Wdata_visitor__html_wtr html_wtr = new Wdata_visitor__html_wtr().Init(Bry_.Empty, tmp_bfr, doc_hwtr.Msgs(), doc_hwtr.Lbl_mgr());
 		claim.Welcome(html_wtr);
 		byte[] actl = tmp_bfr.Xto_bry_and_clear();
-		Tfds.Eq(expd, String_.new_utf8_(actl));
+		Tfds.Eq(expd, String_.new_u8(actl));
 	}
 	public void Test_json(Wdata_doc wdoc, String expd) {
 		Wdata_fmtr__json fmtr_json = doc_hwtr.Fmtr_json();
@@ -318,7 +318,7 @@ class Wdata_hwtr_mgr_fxt {
 	}
 }
 class Wdata_lbl_wkr__test implements Wdata_lbl_wkr {
-	private OrderedHash found;
-	public Wdata_lbl_wkr__test(OrderedHash found) {this.found = found;}
+	private Ordered_hash found;
+	public Wdata_lbl_wkr__test(Ordered_hash found) {this.found = found;}
 	public void Resolve(Wdata_lbl_mgr lbl_mgr, Wdata_lang_sorter sorter) {lbl_mgr.Resolve(found);}
 }

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
 class Xosrh_scanner {
-	ListAdp tkns = ListAdp_.new_(); byte[] src; int src_len; int pos; int txt_bgn;
+	List_adp tkns = List_adp_.new_(); byte[] src; int src_len; int pos; int txt_bgn;
 	public Xosrh_qry_tkn[] Scan(byte[] src) {			
 		this.src = src; this.src_len = src.length;
 		tkns.Clear(); pos = 0; txt_bgn = -1; 
@@ -44,7 +44,7 @@ class Xosrh_scanner {
 					case Xosrh_qry_tkn.Tid_quote:	// find end quote and add as word
 						int quote_bgn = pos + 1;
 						int quote_end = Bry_finder.Find_fwd(src, Byte_ascii.Quote, quote_bgn, src_len);
-						if (quote_end == Bry_.NotFound) throw Err_.new_fmt_("could not find end quote: {0}", String_.new_utf8_(src));
+						if (quote_end == Bry_.NotFound) throw Err_.new_fmt_("could not find end quote: {0}", String_.new_u8(src));
 						Tkns_add_word(Xosrh_qry_tkn.Tid_word_quoted, quote_bgn, quote_end);
 						pos = quote_end + 1;		// +1 to place after quote
 						break;
@@ -65,7 +65,7 @@ class Xosrh_scanner {
 			Tkns_add_word(Xosrh_qry_tkn.Tid_word, txt_bgn, pos);
 			txt_bgn = -1;
 		}
-		return (Xosrh_qry_tkn[])tkns.Xto_ary_and_clear(Xosrh_qry_tkn.class);
+		return (Xosrh_qry_tkn[])tkns.To_ary_and_clear(Xosrh_qry_tkn.class);
 	}
 	boolean Cur_join_is_word(byte cur_tid, int pos_end) {	// extra logic to handle and / or occuring in unquoted strings; EX: random; for
 		switch (cur_tid) {
@@ -110,7 +110,7 @@ class Xosrh_scanner {
 	}
 	private void Tkns_add_word(byte tid, int src_bgn, int src_end) {
 		if (tkns.Count() > 0) {	// at least 1 tkn
-			Xosrh_qry_tkn last_tkn = (Xosrh_qry_tkn)tkns.FetchAtLast();
+			Xosrh_qry_tkn last_tkn = (Xosrh_qry_tkn)tkns.Get_at_last();
 			if (last_tkn.Tid() == Xosrh_qry_tkn.Tid_word)	// previous tkn is not word; auto "AND" words; EX: A B -> A AND B
 				tkns.Add(Xosrh_qry_tkn.new_bry_(Xosrh_qry_tkn.Tid_and, Bry_and));
 		}
@@ -127,9 +127,9 @@ class Xosrh_scanner {
 		}
 		tkns.Add(new_tkn_(tid, src_bgn, src_end));
 	}
-	OrderedHash tmp_list = OrderedHash_.new_(); Bry_bfr tmp_bfr = Bry_bfr.new_();
+	Ordered_hash tmp_list = Ordered_hash_.new_(); Bry_bfr tmp_bfr = Bry_bfr.new_();
 	Xosrh_qry_tkn new_tkn_(byte tid, int val_bgn, int val_end) {return Xosrh_qry_tkn.new_pos_(tid, val_bgn, val_end);}
-	private static byte[] Bry_and = Bry_.new_ascii_("AND");
+	private static byte[] Bry_and = Bry_.new_a7("AND");
 	private static final Btrie_slim_mgr trie = Btrie_slim_mgr.ci_ascii_()// NOTE:ci.ascii:OR / AND only
 	.Add_str_byte(" ", Xosrh_qry_tkn.Tid_space)
 	.Add_str_byte("\"", Xosrh_qry_tkn.Tid_quote)

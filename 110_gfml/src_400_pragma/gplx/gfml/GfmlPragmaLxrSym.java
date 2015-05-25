@@ -28,7 +28,7 @@ class GfmlPragmaLxrSym implements GfmlPragma {
 		GfmlTkn cmdTkn = ownerNde.SubKeys().FetchDataTknOrNull("cmd");			
 		GfmlBldrCmd cmd = bldr.Doc().CmdRegy().GetOrFail(cmdTkn.Val());
 
-		GfmlLxr lxr = bldr.Doc().LxrRegy().Fetch(key);
+		GfmlLxr lxr = bldr.Doc().LxrRegy().Get_by(key);
 		if (lxr == null) {
 			lxr = GfmlLxr_.symbol_(key, raw, val, cmd);
 			bldr.Doc().LxrRegy().Add(lxr);

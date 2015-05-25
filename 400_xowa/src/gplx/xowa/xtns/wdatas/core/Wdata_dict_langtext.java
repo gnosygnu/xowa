@@ -26,8 +26,8 @@ public class Wdata_dict_langtext {
 	, Str_value									= "value"
 	;
 	public static byte[] 
-	  Bry_language								= Bry_.new_ascii_(Str_language)
-	, Bry_value									= Bry_.new_ascii_(Str_value)
+	  Bry_language								= Bry_.new_a7(Str_language)
+	, Bry_value									= Bry_.new_a7(Str_value)
 	;
 	public static final Hash_adp_bry Dict = Hash_adp_bry.cs_()
 	.Add_bry_byte(Bry_language					, Tid_language)

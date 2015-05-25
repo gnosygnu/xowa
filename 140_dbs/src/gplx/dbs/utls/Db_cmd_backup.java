@@ -50,9 +50,9 @@ public class Db_cmd_backup implements GfoInvkAble {
 		this.InitVars();
 		Io_url bkpCmdFil = bkpDir.GenSubFil_ary("backup_", dbName, ".cmd");
 		// Io_url bkpCmdFil = Io_url_.new_dir_("/home/").GenSubFil_ary("backup_", dbName, ".cmd"); // LNX: uncomment
-		Io_mgr._.SaveFilStr_args(bkpCmdFil, cmdText).Exec(); // explicitly state utf8; 
+		Io_mgr.I.SaveFilStr_args(bkpCmdFil, cmdText).Exec(); // explicitly state utf8; 
 		ProcessAdp.run_wait_(bkpCmdFil);
-		Io_mgr._.DeleteFil(bkpCmdFil);
+		Io_mgr.I.DeleteFil(bkpCmdFil);
 		return this;
 	}
 	@gplx.Internal protected Db_cmd_backup InitVars() {

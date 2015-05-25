@@ -34,7 +34,7 @@ public class Xoctg_html_mgr implements GfoInvkAble {
 		}
 		catch (Exception e) { // ctg error should never cause page to fail
 			tmp_bfr.Mkr_rls();
-			Xoa_app_.Usr_dlg().Warn_many("", "", "failed to generate category: title=~{0} err=~{1}", String_.new_utf8_(page.Ttl().Full_txt()), Err_.Message_gplx_brief(e));
+			Xoa_app_.Usr_dlg().Warn_many("", "", "failed to generate category: title=~{0} err=~{1}", String_.new_u8(page.Ttl().Full_txt()), Err_.Message_gplx_brief(e));
 		}
 	}	private Xoctg_url url_ctg = new Xoctg_url();
 	private void Bld_html_v2(Xowe_wiki wiki, Xoae_page page, Bry_bfr bfr) {
@@ -51,13 +51,13 @@ public class Xoctg_html_mgr implements GfoInvkAble {
 		Add_titles(title_list, ctg.Subcs());
 		Add_titles(title_list, ctg.Files());
 		Add_titles(title_list, ctg.Pages());
-		title_list.SortBy(Xoctg_view_itm_sorter_id._);
+		title_list.Sort_by(Xoctg_view_itm_sorter_id._);
 		int len = title_list.Count();
 		int pct = len / 16;
 		Xowd_page_itm dbo_page = new Xowd_page_itm();
 		for (int i = 0; i < len; i++) {
-			Xoctg_view_itm itm = (Xoctg_view_itm)title_list.FetchAt(i);
-			if (pct != 0 && i % pct == 0) usr_dlg.Prog_many("", "", "loading title data: ~{0} / ~{1} -- ~{2}", i, len, String_.new_utf8_(itm.Sortkey()));
+			Xoctg_view_itm itm = (Xoctg_view_itm)title_list.Get_at(i);
+			if (pct != 0 && i % pct == 0) usr_dlg.Prog_many("", "", "loading title data: ~{0} / ~{1} -- ~{2}", i, len, String_.new_u8(itm.Sortkey()));
 			boolean id_exists = wiki.Db_mgr().Load_mgr().Load_by_id(dbo_page, itm.Id());
 			Xoa_ttl itm_ttl = null;
 			if (id_exists)
@@ -70,8 +70,8 @@ public class Xoctg_html_mgr implements GfoInvkAble {
 			}
 			itm.Ttl_(itm_ttl);
 		}
-	}	ListAdp title_list = ListAdp_.new_(); static final byte[] Bry_missing = Bry_.new_ascii_("missing");
-	private void Add_titles(ListAdp title_list, Xoctg_view_grp grp) {
+	}	List_adp title_list = List_adp_.new_(); static final byte[] Bry_missing = Bry_.new_a7("missing");
+	private void Add_titles(List_adp title_list, Xoctg_view_grp grp) {
 		int len = grp.Itms().length;
 		for (int i = 0; i < len; i++) {
 			Xoctg_view_itm itm = grp.Itms()[i];

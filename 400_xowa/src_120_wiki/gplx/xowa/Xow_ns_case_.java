@@ -18,9 +18,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 public class Xow_ns_case_ {
 	public static final byte Id_all = 0, Id_1st = 1;
+	public static final String Key_all = "case-sensitive", Key_1st = "first-letter";
 	public static byte parse_(String s) {
-		if		(String_.Eq(s, "first-letter"))		return Id_1st;
-		else if	(String_.Eq(s, "case-sensitive"))	return Id_all;
-		else										throw Err_mgr._.unhandled_(s);
+		if		(String_.Eq(s, Key_1st))		return Id_1st;
+		else if	(String_.Eq(s, Key_all))		return Id_all;
+		else									throw Err_mgr._.unhandled_(s);
+	}
+	public static String To_str(byte uid) {
+		switch (uid) {
+			case Id_all: return Key_all;
+			case Id_1st: return Key_1st;
+			default: throw Err_.unhandled(uid);
+		}
 	}
 }

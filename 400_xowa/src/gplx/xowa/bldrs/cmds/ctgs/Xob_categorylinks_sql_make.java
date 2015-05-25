@@ -59,7 +59,7 @@ public class Xob_categorylinks_sql_make implements Io_make_cmd {
 			++cur_row_count;
 			if (cur_row_count % 100000  == 0) usr_dlg.Prog_one("", "", "inserting category row: ~{0}", cur_row_count);
 			if (cur_row_count % 1000000 == 0) {cat_core_tbl.Conn().Txn_sav(); cat_link_tbl.Conn().Txn_sav();}
-		}	catch (Exception e) {usr_dlg.Warn_many("", "", "ctg_links.insert failed: name=~{0} err=~{1}", String_.new_utf8_(new_cat_ttl), Err_.Message_gplx_brief(e));}
+		}	catch (Exception e) {usr_dlg.Warn_many("", "", "ctg_links.insert failed: name=~{0} err=~{1}", String_.new_u8(new_cat_ttl), Err_.Message_gplx_brief(e));}
 	}
 	public void Sort_end() {
 		Save_ctg(Ttl_last);
@@ -70,7 +70,7 @@ public class Xob_categorylinks_sql_make implements Io_make_cmd {
 		usr_dlg.Log_many("", "", "import.category.v2: insert done; committing; rows=~{0}", cur_row_count);
 		name_id_rdr.Rls();
 		if (String_.Eq(sql_parser.Src_fil().NameAndExt(), Xob_ctg_v1_sql_make.Url_sql))	// delete temp xowa_categorylinks.sql file created by cat_v1
-			Io_mgr._.DeleteFil(sql_parser.Src_fil());
+			Io_mgr.I.DeleteFil(sql_parser.Src_fil());
 	}
 	private int Save_ctg(byte[] new_ctg_ttl) {
 		if (cur_cat_ttl != Bry_.Empty && cur_cat_id != -1)
@@ -131,7 +131,7 @@ public class Xob_categorylinks_sql_make implements Io_make_cmd {
 	private static Io_line_rdr New_registry_rdr(Xowe_wiki wiki, Gfo_usr_dlg usr_dlg) {
 		Io_url make_dir = Xob_category_registry_sql.Tmp_dir(wiki);
 		usr_dlg.Prog_many("", "", "loading category_registry files: ~{0}", make_dir.Raw());
-		Io_url[] urls = Io_mgr._.QueryDir_args(make_dir).ExecAsUrlAry();
+		Io_url[] urls = Io_mgr.I.QueryDir_args(make_dir).ExecAsUrlAry();
 		return new Io_line_rdr(usr_dlg, urls).Key_gen_(Io_line_rdr_key_gen_.first_pipe);
 	}
 	private static final byte[] Ttl_last = null, Ttl_first = Bry_.Empty;

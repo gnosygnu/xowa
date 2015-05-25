@@ -226,7 +226,7 @@ class Xob_xdat_file_ {
 			else if	(comp == CompareAble_.Same) {xdat_itm.Found_exact_y_(); return itm_idx;}
 			else if	(comp <  CompareAble_.Same) {hi = itm_idx; delta = -1;}
 			int itm_dif = hi - lo;
-//				if (itm_end - 1 > fld_bgn) Tfds.Write(comp, itm_dif, String_.new_utf8_(src, fld_bgn, itm_end - 1));
+//				if (itm_end - 1 > fld_bgn) Tfds.Write(comp, itm_dif, String_.new_u8(src, fld_bgn, itm_end - 1));
 			switch (itm_dif) {
 				case 0:						return exact ? String_.Find_none : hi;	// NOTE: can be 0 when src.length == 1 || 2; also, sometimes 0 in some situations
 				case -1:

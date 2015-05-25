@@ -44,7 +44,7 @@ public class Xop_lnki_tkn extends Xop_tkn_itm_base {
 	public boolean				Alt_exists() {return alt_tkn != Arg_nde_tkn.Null;}
 	public int				Subpage_tid() {return subpage_tid;} public Xop_lnki_tkn Subpage_tid_(int v) {subpage_tid = v; return this;} private int subpage_tid = Pfunc_rel2abs.Id_null;
 	public boolean				Subpage_slash_at_end() {return subpage_slash_at_end;} public Xop_lnki_tkn Subpage_slash_at_end_(boolean v) {subpage_slash_at_end = v; return this;} private boolean subpage_slash_at_end;
-	public int				Html_id() {return html_id;} public Xop_lnki_tkn Html_id_(int v) {html_id = v; return this;} private int html_id;
+	public int				Html_uid() {return html_uid;} public Xop_lnki_tkn Html_uid_(int v) {html_uid = v; return this;} private int html_uid;
 	public int				Pipe_count() {return pipe_count;} private int pipe_count;
 	public boolean				Pipe_count_is_zero() {return pipe_count++ == 0;} 
 	public boolean				Xtn_sites_link() {return xtn_sites_link;} public void Xtn_sites_link_(boolean v) {xtn_sites_link = v;} private boolean xtn_sites_link;

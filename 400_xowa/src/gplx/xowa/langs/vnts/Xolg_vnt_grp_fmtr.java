@@ -49,7 +49,7 @@ class Xolg_vnt_itm_fmtr implements Bry_fmtr_arg {
 			fmtr.Bld_bfr_many(bfr, i, itm_cls_selected, itm.Key(), itm.Text(), page_href);
 		}
 	}
-	private static final byte[] Itm_cls_selected_y = Bry_.new_ascii_(" class='selected'");
+	private static final byte[] Itm_cls_selected_y = Bry_.new_a7(" class='selected'");
 	private static final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "          <li id='ca-varlang-~{itm_idx}'~{itm_cls_selected}><a href='/wiki/~{itm_href}?xowa_vnt=~{itm_lang}' lang='~{itm_lang}' hreflang='~{itm_lang}'>~{itm_text}</a></li>"

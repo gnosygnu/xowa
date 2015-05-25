@@ -26,7 +26,7 @@ class Test_api implements GfoInvkAble {
 	private static final boolean Dflt_prop_1 = false;
 	private static final int Dflt_prop_2 = 2;
 	private static final String Dflt_prop_3 = "3"; 
-	private static final byte[] Dflt_prop_bry = Bry_.new_ascii_("bry"); 
+	private static final byte[] Dflt_prop_bry = Bry_.new_a7("bry"); 
 	private static final int Dflt_prop_enm = 5;
 	private static final Xocfg_meta_mgr meta_mgr = new Xocfg_meta_mgr().Add
 	( Xocfg_meta_itm_.bool_	(Invk_prop_1, Dflt_prop_1)
@@ -52,7 +52,7 @@ class Xocfg_gui_itm_memo implements Xocfg_gui_itm {
 	public int Box_h() {return box_h;} private int box_h;
 }
 class Xocfg_meta_mgr {
-	private HashAdp hash = HashAdp_.new_();
+	private Hash_adp hash = Hash_adp_.new_();
 	public Xocfg_meta_mgr Add(Xocfg_meta_itm_base... ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
@@ -61,7 +61,7 @@ class Xocfg_meta_mgr {
 		}
 		return this;
 	}
-	public Xocfg_meta_itm_base Get_or_null(String key) {return (Xocfg_meta_itm_base)hash.Fetch(key);}
+	public Xocfg_meta_itm_base Get_or_null(String key) {return (Xocfg_meta_itm_base)hash.Get_by(key);}
 }
 abstract class Xocfg_meta_itm_base {
 	public void Set(int prop_type, String prop_key, Object prop_dflt) {

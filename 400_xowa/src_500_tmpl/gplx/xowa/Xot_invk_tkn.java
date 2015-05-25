@@ -234,9 +234,9 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 					rv = true;
 				}	catch (Exception e) {
 					if (Env_.Mode_testing()) 
-						throw Err_.err_(e, "failed to evaluate function: page={0} defn={1} src={2} err={3}", String_.new_utf8_(ctx.Cur_page().Ttl().Full_txt()), String_.new_utf8_(defn.Name()), String_.new_utf8_(src, this.Src_bgn(), this.Src_end()), Err_.Message_gplx_brief(e));
+						throw Err_.err_(e, "failed to evaluate function: page={0} defn={1} src={2} err={3}", String_.new_u8(ctx.Cur_page().Ttl().Full_txt()), String_.new_u8(defn.Name()), String_.new_u8(src, this.Src_bgn(), this.Src_end()), Err_.Message_gplx_brief(e));
 					else {
-						wiki.Appe().Usr_dlg().Warn_many("", "", "failed to evaluate function: page=~{0} defn=~{1} src=~{2} err=~{3}", String_.new_utf8_(ctx.Cur_page().Ttl().Full_txt()), String_.new_utf8_(defn.Name()), String_.new_utf8_(src, this.Src_bgn(), this.Src_end()), Err_.Message_gplx_brief(e));
+						wiki.Appe().Usr_dlg().Warn_many("", "", "failed to evaluate function: page=~{0} defn=~{1} src=~{2} err=~{3}", String_.new_u8(ctx.Cur_page().Ttl().Full_txt()), String_.new_u8(defn.Name()), String_.new_u8(src, this.Src_bgn(), this.Src_end()), Err_.Message_gplx_brief(e));
 						rv = false;
 					}
 				}
@@ -252,7 +252,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 				try {
 					Bld_key(invk_tmpl, name_ary, rslt_bfr);
 					byte[] rslt_key = rslt_bfr.Xto_bry_and_clear();
-					Object o = wiki.Cache_mgr().Tmpl_result_cache().Fetch(rslt_key);
+					Object o = wiki.Cache_mgr().Tmpl_result_cache().Get_by(rslt_key);
 					Xopg_tmpl_prepend_mgr prepend_mgr = ctx.Cur_page().Tmpl_prepend_mgr().Bgn(bfr);
 					if (o != null) {
 						byte[] rslt = (byte[])o;
@@ -269,7 +269,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 						if (Cache_enabled) {
 							byte[] rslt_val = rslt_bfr.Xto_bry_and_clear();
 							bfr.Add(rslt_val);
-							HashAdp cache = wiki.Cache_mgr().Tmpl_result_cache();
+							Hash_adp cache = wiki.Cache_mgr().Tmpl_result_cache();
 							cache.Del(rslt_key);
 							cache.Add(rslt_key, rslt_val);
 						}
@@ -281,7 +281,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 				break;
 		}
 		return rv;
-	}	private static final byte[] Ary_unknown_bgn = Bry_.new_ascii_("(? [["), Ary_unknown_end = Bry_.new_ascii_("]] ?)"), Ary_dynamic_is_blank = Bry_.new_ascii_("dynamic is blank");
+	}	private static final byte[] Ary_unknown_bgn = Bry_.new_a7("(? [["), Ary_unknown_end = Bry_.new_a7("]] ?)"), Ary_dynamic_is_blank = Bry_.new_a7("dynamic is blank");
 	private boolean Popup_skip(Xop_ctx ctx, byte[] ttl, Bry_bfr bfr) {
 		boolean skip = false;
 		skip = this.Src_end() - this.Src_bgn() > ctx.Tmpl_tkn_max();

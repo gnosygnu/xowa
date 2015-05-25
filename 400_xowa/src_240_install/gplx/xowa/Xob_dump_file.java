@@ -29,9 +29,9 @@ public class Xob_dump_file {
 	public byte[] Wiki_alias()			{return wiki_alias;} private byte[] wiki_alias;
 	public Xob_dump_file Ctor(String wiki_domain, String dump_date, String dump_file_type) {
 		this.dump_date = dump_date; this.dump_file_type = dump_file_type;
-		this.wiki_type = Xow_domain_.parse(Bry_.new_ascii_(wiki_domain));
+		this.wiki_type = Xow_domain_.parse(Bry_.new_a7(wiki_domain));
 		this.wiki_alias = Xow_wiki_alias.Build_alias(wiki_type);
-		byte[] dump_file_bry = Bry_.new_utf8_(dump_file_type);
+		byte[] dump_file_bry = Bry_.new_u8(dump_file_type);
 		byte dump_file_tid = Xow_wiki_alias.Parse__tid(dump_file_bry);
 		byte[] ext = Xob_dump_file_.Ext_xml_bz2;
 		switch (dump_file_tid) {
@@ -39,16 +39,16 @@ public class Xob_dump_file {
 				ext = Xob_dump_file_.Ext_sql_gz;
 				break;
 		}
-		this.file_name = String_.new_utf8_(Xob_dump_file_.Bld_dump_file_name(wiki_alias, Bry_.new_utf8_(dump_date), dump_file_bry, ext));
+		this.file_name = String_.new_u8(Xob_dump_file_.Bld_dump_file_name(wiki_alias, Bry_.new_u8(dump_date), dump_file_bry, ext));
 		return this;
 	}
 	public void Server_url_(String server_url) {
 		this.server_url = server_url;
-		String dump_dir_url = String_.new_utf8_(Xob_dump_file_.Bld_dump_dir_url(Bry_.new_utf8_(server_url), wiki_alias, Bry_.new_utf8_(dump_date)));
+		String dump_dir_url = String_.new_u8(Xob_dump_file_.Bld_dump_dir_url(Bry_.new_u8(server_url), wiki_alias, Bry_.new_u8(dump_date)));
 		this.file_url = dump_dir_url + file_name;
 	}
 	public boolean Connect() {
-		gplx.ios.IoEngine_xrg_downloadFil args = Io_mgr._.DownloadFil_args("", Io_url_.Null);
+		gplx.ios.IoEngine_xrg_downloadFil args = Io_mgr.I.DownloadFil_args("", Io_url_.Empty);
 		boolean rv = args.Src_last_modified_query_(true).Exec_meta(file_url);
 		if (rv) {
 			file_len = args.Src_content_length();

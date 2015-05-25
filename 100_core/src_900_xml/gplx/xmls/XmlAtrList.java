@@ -32,6 +32,6 @@ public class XmlAtrList {
 		Node xatr = list.getNamedItem(key); if (xatr == null) return null;
 		return new XmlAtr(xatr);
 	}
-	public XmlAtr FetchAt(int i) {return list == null ? null : new XmlAtr(list.item(i));}
+	public XmlAtr Get_at(int i) {return list == null ? null : new XmlAtr(list.item(i));}
 	@gplx.Internal protected XmlAtrList(NamedNodeMap list) {this.list = list;} NamedNodeMap list;
 }

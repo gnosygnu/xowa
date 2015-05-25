@@ -25,10 +25,10 @@ public class Xog_win_itm_ {
 		win_box.BackColor_(ColorAdp_.White);
 		win.Tab_mgr().Tab_mgr().BackColor_(ColorAdp_.White);
 
-		app.User().Cfg_mgr().Startup_mgr().Window_mgr().Init_window(win_box);
+		app.Usere().Cfg_mgr().Startup_mgr().Window_mgr().Init_window(win_box);
 		win.Resizer().Exec_win_resize(app, win_box.Width(), win_box.Height());
 
-		IconAdp.regy_loadDir_shallow(app.User().Fsys_mgr().Root_dir().GenSubDir_nest("app", "img", "win"));
+		IconAdp.regy_loadDir_shallow(app.Usere().Fsys_mgr().Root_dir().GenSubDir_nest("app", "img", "win"));
 		win_box.Icon_(IconAdp.regy_("xowa.app"));
 	}
 	public static GfuiBtn new_btn(Xoae_app app, Gfui_kit kit, GfuiWin win, Io_url img_dir, String id, String file) {
@@ -54,5 +54,5 @@ public class Xog_win_itm_ {
 			win.Tab_mgr().Tab_mgr().TextMgr().Font_(new_font);
 		}
 	}
-	public static String new_tiptext(Xoae_app app, int id) {return String_.new_utf8_(app.User().Lang().Msg_mgr().Val_by_id(app.User().Wiki(), id));}
+	public static String new_tiptext(Xoae_app app, int id) {return String_.new_u8(app.Usere().Lang().Msg_mgr().Val_by_id(app.Usere().Wiki(), id));}
 }

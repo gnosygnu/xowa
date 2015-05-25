@@ -40,11 +40,11 @@ public class Gfui_bnd_parser {
 	, new_mod_(Gfui_bnd_tkn.Tid_mod_cas		, "mod.cas"	, "Ctrl + Alt + Shift")
 	};
 	private byte[] src; private int src_len;
-	private ListAdp tkns = ListAdp_.new_(); private int mod_val = Mod_val_null;
+	private List_adp tkns = List_adp_.new_(); private int mod_val = Mod_val_null;
 	public String Xto_norm(String src_str) {return Convert(Bool_.Y, src_str);}
 	public String Xto_gfui(String src_str) {return Convert(Bool_.N, src_str);}
 	private String Convert(boolean src_is_gfui, String src_str) {			
-		this.src = Bry_.new_utf8_(src_str); this.src_len = src.length;			
+		this.src = Bry_.new_u8(src_str); this.src_len = src.length;			
 		tkns.Clear(); mod_val = Mod_val_null;
 		int pos = 0; int itm_bgn = -1, itm_end = -1; boolean is_numeric = false;
 		while (pos <= src_len) {			// loop over bytes and break up tkns by symbols
@@ -91,7 +91,7 @@ public class Gfui_bnd_parser {
 		}
 		int tkns_len = tkns.Count();
 		for (int i = 0; i < tkns_len; i++) {
-			Gfui_bnd_tkn tkn = (Gfui_bnd_tkn)tkns.FetchAt(i);
+			Gfui_bnd_tkn tkn = (Gfui_bnd_tkn)tkns.Get_at(i);
 			tkn.Write(tmp_bfr, !src_is_gfui);
 		}
 		return tmp_bfr.Xto_str_and_clear();
@@ -249,16 +249,16 @@ public class Gfui_bnd_parser {
 		norm_regy.Add(itm.Bry_norm(), itm);
 	}
 	private void Init_itm(byte tid, String gfui, String norm) {
-		byte[] gfui_bry = Bry_.new_utf8_(gfui);
-		byte[] norm_bry = Bry_.new_utf8_(norm);
+		byte[] gfui_bry = Bry_.new_u8(gfui);
+		byte[] norm_bry = Bry_.new_u8(norm);
 		Gfui_bnd_tkn itm = new Gfui_bnd_tkn(tid, Gfui_bnd_tkn.Keycode_null, gfui_bry, norm_bry);
 		gfui_regy.Add(gfui_bry, itm);
-		norm_regy.Add_if_new(norm_bry, itm);
+		norm_regy.Add_if_dupe_use_1st(norm_bry, itm);
 	}
 	private static final int Mod_val_null = 0;
 	public static Gfui_bnd_parser new_en_() {return new Gfui_bnd_parser().Init_en();} Gfui_bnd_parser() {}
 	private static Gfui_bnd_tkn new_sym_(byte tid, byte[] bry) {return new Gfui_bnd_tkn(tid, Gfui_bnd_tkn.Keycode_null, bry, bry);}
-	private static Gfui_bnd_tkn new_mod_(byte tid, String gfui, String norm) {return new Gfui_bnd_tkn(tid, Gfui_bnd_tkn.Keycode_null, Bry_.new_ascii_(gfui), Bry_.new_ascii_(norm));}
+	private static Gfui_bnd_tkn new_mod_(byte tid, String gfui, String norm) {return new Gfui_bnd_tkn(tid, Gfui_bnd_tkn.Keycode_null, Bry_.new_a7(gfui), Bry_.new_a7(norm));}
 }
 class Gfui_bnd_tkn {
 	public Gfui_bnd_tkn(byte tid, int keycode, byte[] gfui, byte[] norm) {
@@ -312,5 +312,5 @@ class Gfui_bnd_tkn {
 	, Tid_key		= 12
 	;
 	public static final int Keycode_null = 0;
-	private static final byte[] Bry_key_prefix = Bry_.new_ascii_("key.");
+	private static final byte[] Bry_key_prefix = Bry_.new_a7("key.");
 }

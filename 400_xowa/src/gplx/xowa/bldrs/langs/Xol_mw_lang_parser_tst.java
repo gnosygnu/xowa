@@ -86,7 +86,7 @@ public class Xol_mw_lang_parser_tst {
 	}
 	@Test  public void Fallback() {
 		fxt.Parse_core("$fallback = 'zh-hans';");
-		Tfds.Eq("zh-hans", String_.new_utf8_(fxt.Lang().Fallback_bry()));
+		Tfds.Eq("zh-hans", String_.new_u8(fxt.Lang().Fallback_bry()));
 	}
 	@Test  public void Separator_transform_table() {
 		fxt.Parse_core("$separatorTransformTable = array( ',' => '.', '.' => ',' );");
@@ -243,36 +243,36 @@ class Xol_mw_lang_parser_fxt {
 			app = Xoa_app_fxt.app_();
 		}
 		app.Lang_mgr().Clear();// NOTE: always clear the lang
-		lang = app.Lang_mgr().Get_by_key_or_new(Bry_.new_ascii_("fr"));
+		lang = app.Lang_mgr().Get_by_key_or_new(Bry_.new_a7("fr"));
 		wiki = Xoa_app_fxt.wiki_(app, "en.wikipedia.org", lang);
 		fxt = new Xop_fxt(app, wiki);
 		lang.Kwd_mgr().Clear(); lang.Msg_mgr().Clear();	// NOTE: clear kwds and msgs else they will be printed to file; this line must go last b/c various xtns will fill in kwds dynamically
 	}
 	public Xol_lang Lang() {return lang;} private Xol_lang lang;
-	public void Num_fmt_tst(String raw, String expd) {Tfds.Eq(expd, String_.new_utf8_(lang.Num_mgr().Format_num(Bry_.new_utf8_(raw))));}
+	public void Num_fmt_tst(String raw, String expd) {Tfds.Eq(expd, String_.new_u8(lang.Num_mgr().Format_num(Bry_.new_u8(raw))));}
 	public void Run_bld_all() {parser.Bld_all(app.Lang_mgr(), app.Fsys_mgr());}
 	public void Save_file(String path, String... lines) {
-		Io_mgr._.SaveFilStr(Io_url_.mem_fil_(path), String_.Concat_lines_nl(lines));
+		Io_mgr.I.SaveFilStr(Io_url_.mem_fil_(path), String_.Concat_lines_nl(lines));
 	}
 	public void Tst_file(String path, String expd) {
 		Io_url url = Io_url_.mem_fil_(path);
-		String actl = Io_mgr._.LoadFilStr(url);
+		String actl = Io_mgr.I.LoadFilStr(url);
 		Tfds.Eq_str_lines(expd, actl);
 	}
 	public Xol_mw_lang_parser_fxt Parse_core(String raw)				{parser.Parse_core(raw, lang, tmp_bfr, Xol_lang_transform_null._); return this;}
-	public Xol_mw_lang_parser_fxt Parse_xtn (String raw)				{parser.Parse_xtn(raw, Io_url_.Null, app.Lang_mgr(), tmp_bfr, false, Xol_lang_transform_null._); lang.Evt_lang_changed(); return this;}
+	public Xol_mw_lang_parser_fxt Parse_xtn (String raw)				{parser.Parse_xtn(raw, Io_url_.Empty, app.Lang_mgr(), tmp_bfr, false, Xol_lang_transform_null._); lang.Evt_lang_changed(); return this;}
 	public Xol_mw_lang_parser_fxt Tst_keyword(int id, boolean case_sensitive, String... words) {
 		Xol_kwd_grp lst = lang.Kwd_mgr().Get_at(id); if (lst == null) throw Err_.new_("list should not be null");
 		Tfds.Eq(case_sensitive, lst.Case_match());
 		int actl_len = lst.Itms().length;
 		String[] actl = new String[actl_len];
 		for (int i = 0; i < actl_len; i++)
-			actl[i] = String_.new_utf8_(lst.Itms()[i].Val());
+			actl[i] = String_.new_u8(lst.Itms()[i].Val());
 		Tfds.Eq_ary_str(words, actl);
 		return this;
 	}
 	public Xol_mw_lang_parser_fxt Tst_keyword_img(String key_str, byte tid) {
-		byte[] key = Bry_.new_utf8_(key_str);
+		byte[] key = Bry_.new_u8(key_str);
 		Tfds.Eq(tid, lang.Lnki_arg_parser().Identify_tid(key, 0, key.length));
 		return this;
 	}
@@ -282,14 +282,14 @@ class Xol_mw_lang_parser_fxt {
 		return this;
 	}
 	public Xol_mw_lang_parser_fxt Tst_ns_lkp(String key_str, int id) {
-		byte[] key = Bry_.new_utf8_(key_str);
+		byte[] key = Bry_.new_u8(key_str);
 		Xow_ns ns = (Xow_ns)wiki.Ns_mgr().Names_get_or_null(key, 0, key.length);
 		int actl = ns == null ? Xow_ns_.Id_null : ns.Id();
 		Tfds.Eq(id, actl);
 		return this;
 	}
 	public Xol_mw_lang_parser_fxt Test_specialPageAliases(String special, String... expd_aliases) {
-		Xol_specials_itm actl_aliases = lang.Specials_mgr().Get_by_key(Bry_.new_utf8_(special));
+		Xol_specials_itm actl_aliases = lang.Specials_mgr().Get_by_key(Bry_.new_u8(special));
 		Tfds.Eq_ary_str(expd_aliases, To_str_ary(actl_aliases));
 		return this;
 	}
@@ -297,7 +297,7 @@ class Xol_mw_lang_parser_fxt {
 		int len = itm.Aliases().length;
 		String[] rv = new String[len];
 		for (int i = 0; i < len; i++) {
-			rv[i] = String_.new_utf8_((byte[])itm.Aliases()[i]);
+			rv[i] = String_.new_u8((byte[])itm.Aliases()[i]);
 		}
 		return rv;
 	}
@@ -306,9 +306,9 @@ class Xol_mw_lang_parser_fxt {
 		return this;
 	}
 	public Xol_mw_lang_parser_fxt Tst_message(String key, int id, String val, boolean fmt) {
-		Xol_msg_itm itm = lang.Msg_mgr().Itm_by_key_or_new(Bry_.new_ascii_(key));
+		Xol_msg_itm itm = lang.Msg_mgr().Itm_by_key_or_new(Bry_.new_a7(key));
 		Tfds.Eq(id, itm.Id());
-		Tfds.Eq(val, String_.new_utf8_(itm.Val()));
+		Tfds.Eq(val, String_.new_u8(itm.Val()));
 		Tfds.Eq(fmt, itm.Has_fmt_arg());
 		return this;
 	}

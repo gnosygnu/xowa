@@ -21,8 +21,8 @@ import gplx.xowa.bldrs.filters.core.*;
 public class Dg_match_mgr {
 	private int score_init, score_fail; private boolean log_enabled, case_match;
 	private final Btrie_slim_mgr btrie = Btrie_slim_mgr.cs_();
-	private final OrderedHash rules = OrderedHash_.new_bry_();
-	private final OrderedHash rule_group_hash = OrderedHash_.new_bry_(), rule_tally_hash = OrderedHash_.new_bry_();
+	private final Ordered_hash rules = Ordered_hash_.new_bry_();
+	private final Ordered_hash rule_group_hash = Ordered_hash_.new_bry_(), rule_tally_hash = Ordered_hash_.new_bry_();
 	private final Dg_parser parser = new Dg_parser();
 	private final Xob_ttl_filter_mgr ttl_filter_mgr = new Xob_ttl_filter_mgr();
 	private final Dg_log_mgr log_mgr = new Dg_log_mgr();
@@ -61,7 +61,7 @@ public class Dg_match_mgr {
 		}
 	}
 	private Dg_rule_group Get_rule_group_or_new(byte[] word) {
-		Dg_rule_group rv = (Dg_rule_group)rule_group_hash.Fetch(word);
+		Dg_rule_group rv = (Dg_rule_group)rule_group_hash.Get_by(word);
 		if (rv == null) {
 			rv = new Dg_rule_group(word);
 			rule_group_hash.Add(word, rv);
@@ -69,7 +69,7 @@ public class Dg_match_mgr {
 		return rv;
 	}
 	private Dg_rule_tally Get_rule_tally_or_new(byte[] key, Dg_rule rule) {
-		Dg_rule_tally rv = (Dg_rule_tally)rule_tally_hash.Fetch(key);
+		Dg_rule_tally rv = (Dg_rule_tally)rule_tally_hash.Get_by(key);
 		if (rv == null) {
 			rv = new Dg_rule_tally(rule);
 			rule_tally_hash.Add(key, rv);
@@ -110,7 +110,7 @@ public class Dg_match_mgr {
 		int rule_tally_len = rule_tally_hash.Count(); if (rule_tally_len == 0) return false;
 		int rule_match_count = 0;
 		for (int i = 0; i < rule_tally_len; ++i) {
-			Dg_rule_tally rule_tally = (Dg_rule_tally)rule_tally_hash.FetchAt(i);
+			Dg_rule_tally rule_tally = (Dg_rule_tally)rule_tally_hash.Get_at(i);
 			int min_results = rule_tally.Results_pass_count();
 			if (min_results > 0) {
 				int rule_score = rule_tally.Rule().Score();
@@ -132,10 +132,10 @@ public class Dg_match_mgr {
 class Dg_rule_group {
 	public Dg_rule_group(byte[] word) {this.word = word;}
 	public byte[] Word() {return word;} private final byte[] word;
-	public ListAdp Rules_list() {return rules_list;} private final ListAdp rules_list = ListAdp_.new_();
+	public List_adp Rules_list() {return rules_list;} private final List_adp rules_list = List_adp_.new_();
 	public Dg_rule[] Rules_ary() {
 		if (rules_ary == null)
-			rules_ary = (Dg_rule[])rules_list.Xto_ary_and_clear(Dg_rule.class);
+			rules_ary = (Dg_rule[])rules_list.To_ary_and_clear(Dg_rule.class);
 		return rules_ary;
 	}	private Dg_rule[] rules_ary;
 }

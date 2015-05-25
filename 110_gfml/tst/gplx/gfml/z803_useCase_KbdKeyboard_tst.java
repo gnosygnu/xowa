@@ -56,7 +56,7 @@ public class z803_useCase_KbdKeyboard_tst {
 	}
 	@Test  public void Load_Smoke() {
 		Io_url url = Tfds.RscDir.GenSubFil_nest("110_gfml", "cfgs_archive", "gfui-keyboard-ui.cfg.gfml");
-		raw = Io_mgr._.LoadFilStr(url);
+		raw = Io_mgr.I.LoadFilStr(url);
 		gdoc = GfmlDoc_.parse_any_eol_(raw);
 //			Tfds.Write(gdoc.RootNde().XtoStr());
 	}

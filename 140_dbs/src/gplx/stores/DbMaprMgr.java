@@ -19,14 +19,14 @@ package gplx.stores; import gplx.*;
 public class DbMaprMgr {
 	public DbMaprArg[] RootIndexFlds() {return rootIndexFlds;} public DbMaprMgr RootIndexFlds_(DbMaprArg... val) {rootIndexFlds = val; return this;} DbMaprArg[] rootIndexFlds;
 	public DbMaprItm Root() {return root;} public DbMaprMgr Root_(DbMaprItm v) {root = v; return this;} DbMaprItm root;
-	public ListAdp OwnerStack() {return ownerStack;} ListAdp ownerStack = ListAdp_.new_();
-	public OrderedHash ContextVars() {return contextVars;} OrderedHash contextVars = OrderedHash_.new_();
-	public ListAdp MaprStack() {return maprStack;} ListAdp maprStack = ListAdp_.new_();
+	public List_adp OwnerStack() {return ownerStack;} List_adp ownerStack = List_adp_.new_();
+	public Ordered_hash ContextVars() {return contextVars;} Ordered_hash contextVars = Ordered_hash_.new_();
+	public List_adp MaprStack() {return maprStack;} List_adp maprStack = List_adp_.new_();
 	public void EnvStack_add(DbMaprItm mapr, SrlObj gobj) {
 		for (Object argObj : mapr.ContextFlds()) {
 			DbMaprArg arg = (DbMaprArg)argObj;
 			Object contextVal = GfoInvkAble_.InvkCmd((GfoInvkAble)gobj, arg.ObjProp());
-			this.ContextVars().AddReplace(arg.DbFld(), contextVal);
+			this.ContextVars().Add_if_dupe_use_nth(arg.DbFld(), contextVal);
 		}
 		this.OwnerStack().Add(gobj);
 		this.MaprStack().Add(mapr);
@@ -36,8 +36,8 @@ public class DbMaprMgr {
 			DbMaprArg arg = (DbMaprArg)argObj;
 			this.ContextVars().Del(arg.DbFld());
 		}
-		ListAdp_.DelAt_last(this.OwnerStack());
-		ListAdp_.DelAt_last(this.MaprStack());
+		List_adp_.DelAt_last(this.OwnerStack());
+		List_adp_.DelAt_last(this.MaprStack());
 	}
 	public void Clear() {
 		ownerStack.Clear();

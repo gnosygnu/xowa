@@ -32,7 +32,7 @@ public class Arg_nde_tkn_mock extends Arg_nde_tkn {	public Arg_nde_tkn_mock(bool
 }
 class Arg_itm_tkn_mock extends Arg_itm_tkn_base {
 	public Arg_itm_tkn_mock(String v) {
-		byte[] dat_ary = Bry_.new_utf8_(v);
+		byte[] dat_ary = Bry_.new_u8(v);
 		this.Subs_add(new Xop_bry_tkn(-1, -1, dat_ary));
 		this.Dat_ary_(dat_ary);
 		this.val = v;

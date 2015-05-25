@@ -70,14 +70,14 @@ public class GxwCheckListBox_lang extends JScrollPane implements GxwCheckListBox
 //		return listBox.requestFocusInWindow();
 ////		return super.requestFocusInWindow();
 //	}
-	public ListAdp Items_getAll() {return Items_get(Mode_All);}
+	public List_adp Items_getAll() {return Items_get(Mode_All);}
 	public int Items_count() {return internalItems.size();}
 	public boolean Items_getCheckedAt(int i) {return internalItems.get(i).selected;}
 	public void Items_setCheckedAt(int i, boolean v) {internalItems.get(i).selected = v;}
-	public ListAdp Items_getChecked() {return Items_get(Mode_Selected);}
+	public List_adp Items_getChecked() {return Items_get(Mode_Selected);}
 	static final int Mode_All = 1, Mode_Selected = 2; 
-	ListAdp Items_get(int mode) {
-		ListAdp list = ListAdp_.new_();
+	List_adp Items_get(int mode) {
+		List_adp list = List_adp_.new_();
 		for (CheckListItem data: internalItems) {
 			boolean add = (mode == Mode_All) || (mode == Mode_Selected) && data.Selected();
 			if (add)

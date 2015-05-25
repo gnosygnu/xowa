@@ -50,7 +50,7 @@ public class Xoa_css_extractor_basic_tst {
 		fxt.Test_fil("mem/xowa/user/anonymous/wiki/en.wikipedia.org/html/xowa_common.css", "failover");
 	}
 	@Test   public void Css_common_copy_specific_wiki() {	// PURPOSE: css for specific wiki
-		fxt.Css_installer().Opt_download_css_common_(false).Wiki_code_(Bry_.new_ascii_("enwiki"));
+		fxt.Css_installer().Opt_download_css_common_(false).Wiki_code_(Bry_.new_a7("enwiki"));
 		fxt.Init_fil("mem/xowa/bin/any/html/xowa/import/xowa_common_override/xowa_common_enwiki.css", "failover");
 		fxt.Exec_css_common_setup();
 		fxt.Test_fil("mem/xowa/user/anonymous/wiki/en.wikipedia.org/html/xowa_common.css", "failover");
@@ -78,13 +78,13 @@ public class Xoa_css_extractor_basic_tst {
 }
 class Xoa_css_extractor_fxt {
 	public void Clear() {
-		Io_mgr._.InitEngine_mem();
+		Io_mgr.I.InitEngine_mem();
 		Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Test();
 		css_installer = new Xoa_css_extractor();
 		css_installer.Download_xrg().Trg_engine_key_(IoEngine_.MemKey);
 		css_installer
 			.Usr_dlg_(usr_dlg)
-			.Wiki_domain_(Bry_.new_ascii_("en.wikipedia.org"))
+			.Wiki_domain_(Bry_.new_a7("en.wikipedia.org"))
 			.Protocol_prefix_("mem/http/")
 			.Mainpage_url_("mem/http/en.wikipedia.org")
 			.Failover_dir_(Io_url_.new_any_("mem/xowa/bin/any/html/xowa/import/"))	// "mem/xowa/user/anonymous/wiki/home/html/"
@@ -93,16 +93,16 @@ class Xoa_css_extractor_fxt {
 		page_fetcher = new Xow_page_fetcher_test();
 		css_installer.Page_fetcher_(page_fetcher);
 		Xoa_css_img_downloader css_img_downloader = new Xoa_css_img_downloader();
-		css_img_downloader.Ctor(usr_dlg, new Xof_download_wkr_test(), Bry_.new_ascii_("mem/http/"));
+		css_img_downloader.Ctor(usr_dlg, new Xof_download_wkr_test(), Bry_.new_a7("mem/http/"));
 		css_installer.Css_img_downloader_(css_img_downloader);
 	}	private Xow_page_fetcher_test page_fetcher;
 	public Xoa_css_extractor Css_installer() {return css_installer;} private Xoa_css_extractor css_installer;
 	public void Init_page(int ns_id, String ttl, String text) {
-		page_fetcher.Add(ns_id, Bry_.new_ascii_(ttl), Bry_.new_ascii_(text));
+		page_fetcher.Add(ns_id, Bry_.new_a7(ttl), Bry_.new_a7(text));
 	}
 	public void Init_fil_empty(String url) 			{Init_fil(url, "");}
-	public void Init_fil(String url, String text) 	{Io_mgr._.SaveFilStr(url, text);}
-	public void Test_fil(String url, String expd) 	{Tfds.Eq_str_lines(expd, Io_mgr._.LoadFilStr(Io_url_.new_any_(url)));}
+	public void Init_fil(String url, String text) 	{Io_mgr.I.SaveFilStr(url, text);}
+	public void Test_fil(String url, String expd) 	{Tfds.Eq_str_lines(expd, Io_mgr.I.LoadFilStr(Io_url_.new_any_(url)));}
 	public void Exec_logo_setup() {
 		css_installer.Mainpage_download();
 		css_installer.Logo_setup();

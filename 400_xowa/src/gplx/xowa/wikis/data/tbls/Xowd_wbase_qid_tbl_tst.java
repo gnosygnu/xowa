@@ -29,7 +29,7 @@ public class Xowd_wbase_qid_tbl_tst {
 class Xowd_wbase_qid_tbl_fxt {
 	private Xowd_wbase_qid_tbl qid_tbl;
 	public void Clear() {
-		Io_mgr._.InitEngine_mem();
+		Io_mgr.I.InitEngine_mem();
 		Db_conn_bldr.I.Reg_default_mem();
 		Db_conn conn = Db_conn_bldr.I.New(Io_url_.mem_fil_("mem/db/wbase.xowa"));
 		this.qid_tbl = new Xowd_wbase_qid_tbl(conn, Bool_.N, Bool_.Y);	// simulate v2.4.2 with bad "spaces"
@@ -37,11 +37,11 @@ class Xowd_wbase_qid_tbl_fxt {
 	}
 	public void Exec_insert(String src_wiki, int src_ns, String src_ttl, String trg_ttl) {
 		qid_tbl.Insert_bgn();
-		qid_tbl.Insert_cmd_by_batch(Bry_.new_utf8_(src_wiki), src_ns, Bry_.new_utf8_(src_ttl), Bry_.new_utf8_(trg_ttl));
+		qid_tbl.Insert_cmd_by_batch(Bry_.new_u8(src_wiki), src_ns, Bry_.new_u8(src_ttl), Bry_.new_u8(trg_ttl));
 		qid_tbl.Insert_end();
 	}
 	public void Test_select(String src_wiki, int src_ns, String src_ttl, String expd) {
-		byte[] actl = qid_tbl.Select_qid(Bry_.new_utf8_(src_wiki), Bry_.new_ascii_(Int_.Xto_str(src_ns)), Bry_.new_utf8_(src_ttl));
-		Tfds.Eq(expd, String_.new_utf8_(actl));
+		byte[] actl = qid_tbl.Select_qid(Bry_.new_u8(src_wiki), Bry_.new_a7(Int_.Xto_str(src_ns)), Bry_.new_u8(src_ttl));
+		Tfds.Eq(expd, String_.new_u8(actl));
 	}
 }

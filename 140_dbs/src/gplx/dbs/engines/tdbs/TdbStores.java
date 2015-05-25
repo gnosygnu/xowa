@@ -27,6 +27,6 @@ class TdbStores {
 	public static DataWtr wtr_() {return DsvDataWtr_.new_();}
 	@gplx.Internal protected static DsvStoreLayout FetchLayout(DataRdr rdr) {
 		GfoNdeRdr ndeRdr = GfoNdeRdr_.as_(rdr); if (ndeRdr == null) return null;	// can happen for non-Dsv Rdrs (ex: Xml)
-		return DsvStoreLayout.as_(ndeRdr.UnderNde().EnvVars().Fetch(DsvStoreLayout.Key_const));
+		return DsvStoreLayout.as_(ndeRdr.UnderNde().EnvVars().Get_by(DsvStoreLayout.Key_const));
 	}
 }

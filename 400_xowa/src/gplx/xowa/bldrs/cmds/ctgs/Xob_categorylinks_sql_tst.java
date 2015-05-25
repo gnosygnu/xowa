@@ -86,7 +86,7 @@ class Db_tst_row {
 class Db_tst_qry {
 	public Db_qry Qry() {return qry;} Db_qry qry;
 	public String[] Cols() {return cols;} public Db_tst_qry Cols_(String... v) {this.cols = v; return this;} private String[] cols;
-	public ListAdp Rows() {return rows;} ListAdp rows = ListAdp_.new_();
+	public List_adp Rows() {return rows;} List_adp rows = List_adp_.new_();
 	public Db_tst_qry Rows_add_vals(Object... ary) {
 		Db_tst_row row = Db_tst_row.kvs_(cols, ary);
 		rows.Add(row);
@@ -100,7 +100,7 @@ class Db_tst_qry {
 			int expd_row_idx = 0, expd_row_max = rows.Count();
 			while (rdr.MoveNextPeer()) {
 				if (expd_row_idx == expd_row_max) break;
-				Db_tst_row expd_row = (Db_tst_row)rows.FetchAt(expd_row_idx);
+				Db_tst_row expd_row = (Db_tst_row)rows.Get_at(expd_row_idx);
 				Test_row(bfr, expd_row_idx, expd_row, rdr);
 				++expd_row_idx;
 			}
@@ -130,7 +130,7 @@ class Db_tst_qry {
 			bfr.Add_str(qry.Xto_sql()).Add_byte(Byte_ascii.Semic);
 			throw Err_.new_(bfr.Xto_str_and_clear());
 		}
-	}	static final byte[] Lbl_row_hdr = Bry_.new_ascii_("row: "), Lbl_eq_y = Bry_.new_ascii_(" == "), Lbl_eq_n = Bry_.new_ascii_(" != ");
+	}	static final byte[] Lbl_row_hdr = Bry_.new_a7("row: "), Lbl_eq_y = Bry_.new_a7(" == "), Lbl_eq_n = Bry_.new_a7(" != ");
 	public static Db_tst_qry tbl_(String tbl_name, String order_by) {return new_(Db_qry_.select_tbl_(tbl_name).OrderBy_asc_(order_by));}
 	public static Db_tst_qry new_(Db_qry qry) {
 		Db_tst_qry rv = new Db_tst_qry();

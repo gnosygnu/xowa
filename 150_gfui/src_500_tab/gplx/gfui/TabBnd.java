@@ -23,7 +23,7 @@ class TabBoxEvt_nameChange {
 	}
 	public static void Rcvd(TabBox tabBox, GfsCtx ctx, GfoMsg m) {
 		TabPnlItm itm = (TabPnlItm)m.CastObj("v");
-		GfuiBtn btn = GfuiBtn_.as_(tabBox.BtnBox().SubElems().Fetch(itm.Key()));
+		GfuiBtn btn = GfuiBtn_.as_(tabBox.BtnBox().SubElems().Get_by(itm.Key()));
 		if (btn != null)	// HACK: check needed b/c Gfds will raise UpdateCaption event before Creating tab
 			btn.Text_(itm.Name()).TipText_(itm.Name());
 	}
@@ -34,7 +34,7 @@ class TabBoxEvt_tabSelectByBtn {
 		GfuiBtn btn = (GfuiBtn)sender;
 		String key = btn.Key_of_GfuiElem();
 		TabBoxMgr mgr = tabBox.Mgr();
-		mgr.Select(mgr.Fetch(key));
+		mgr.Select(mgr.Get_by(key));
 	}
 }
 class TabBnd_selectTab implements InjectAble, GfoInvkAble {
@@ -64,14 +64,14 @@ class TabBnd_reorderTab implements InjectAble, GfoInvkAble {
 		IptBnd_.cmd_to_(IptCfg_.Null, btn, this, MoveNext_cmd, IptKey_.add_(IptKey_.Ctrl, IptKey_.Right));
 	}
 	@gplx.Internal protected void MoveTab(GfuiBtn curBtn, int delta) {
-		TabPnlItm curItm = tabBox.Mgr().Fetch(curBtn.Key_of_GfuiElem());
+		TabPnlItm curItm = tabBox.Mgr().Get_by(curBtn.Key_of_GfuiElem());
 		int curIdx = curItm.Idx();
 		int newIdx = TabBox_.Cycle(delta > 0, curIdx, tabBox.Mgr().Count());
 
-		tabBox.Mgr().MoveTo(curIdx, newIdx);
+		tabBox.Mgr().Move_to(curIdx, newIdx);
 		tabBox.Mgr().Reorder(0); // reorder all; exchanging curIdx for newIdx does not work when going from last to first (17 -> 0, but 0 -> 1)
-		tabBox.PnlBox().SubElems().MoveTo(curIdx, newIdx);
-		TabBtnAreaMgr.MoveTo(tabBox, curIdx, newIdx);
+		tabBox.PnlBox().SubElems().Move_to(curIdx, newIdx);
+		TabBtnAreaMgr.Move_to(tabBox, curIdx, newIdx);
 		TabBoxEvt_orderChanged.Publish(tabBox, curIdx, newIdx);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

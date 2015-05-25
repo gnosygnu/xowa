@@ -25,27 +25,27 @@ class Wdata_slink_grp {
 	public byte[] Wiki_name() {return wiki_name;} private final byte[] wiki_name;
 	public Wdata_toc_data Toc_data() {return toc_data;} private final  Wdata_toc_data toc_data;
 	public Xoapi_toggle_itm Toggle_itm() {return toggle_itm;} private Xoapi_toggle_itm toggle_itm;
-	public OrderedHash Rows() {return rows;} private final OrderedHash rows = OrderedHash_.new_();
-	public static void Sift(Wdata_slink_grp[] rv, OrderedHash list) {
+	public Ordered_hash Rows() {return rows;} private final Ordered_hash rows = Ordered_hash_.new_();
+	public static void Sift(Wdata_slink_grp[] rv, Ordered_hash list) {
 		for (int i = 0; i < Idx__len; ++i)
 			rv[i].Rows().Clear();
 		int list_len = list.Count();
 		for (int i = 0; i < list_len; ++i) {
-			Wdata_sitelink_itm itm = (Wdata_sitelink_itm)list.FetchAt(i);				
+			Wdata_sitelink_itm itm = (Wdata_sitelink_itm)list.Get_at(i);				
 			int idx = Idx_by_tid(itm.Domain_info().Domain_tid());
 			rv[idx].Rows().Add(itm.Site(), itm);
 		}
 	}
 	public static int Idx_by_tid(int tid) {
 		switch (tid) {
-			case Xow_domain_.Tid_int_wikipedia:			return Idx_w;
-			case Xow_domain_.Tid_int_wiktionary:		return Idx_d;
-			case Xow_domain_.Tid_int_wikisource:		return Idx_s;
-			case Xow_domain_.Tid_int_wikivoyage:		return Idx_v;
-			case Xow_domain_.Tid_int_wikiquote:			return Idx_q;
-			case Xow_domain_.Tid_int_wikibooks:			return Idx_b;
-			case Xow_domain_.Tid_int_wikiversity:		return Idx_u;
-			case Xow_domain_.Tid_int_wikinews:			return Idx_n;
+			case Xow_domain_type_.Tid_wikipedia:			return Idx_w;
+			case Xow_domain_type_.Tid_wiktionary:		return Idx_d;
+			case Xow_domain_type_.Tid_wikisource:		return Idx_s;
+			case Xow_domain_type_.Tid_wikivoyage:		return Idx_v;
+			case Xow_domain_type_.Tid_wikiquote:			return Idx_q;
+			case Xow_domain_type_.Tid_wikibooks:			return Idx_b;
+			case Xow_domain_type_.Tid_wikiversity:		return Idx_u;
+			case Xow_domain_type_.Tid_wikinews:			return Idx_n;
 			default:									return Idx_x;
 		}
 	}
@@ -65,18 +65,18 @@ class Wdata_slink_grp {
 	}
 	public static byte[] Name_by_tid(int idx) {
 		switch (idx) {
-			case Idx_w: return Xow_domain_.Tid_bry_wikipedia;
-			case Idx_d: return Xow_domain_.Tid_bry_wiktionary;
-			case Idx_s: return Xow_domain_.Tid_bry_wikisource;
-			case Idx_v: return Xow_domain_.Tid_bry_wikivoyage;
-			case Idx_q: return Xow_domain_.Tid_bry_wikiquote;
-			case Idx_b: return Xow_domain_.Tid_bry_wikibooks;
-			case Idx_u: return Xow_domain_.Tid_bry_wikiversity;
-			case Idx_n: return Xow_domain_.Tid_bry_wikinews;
+			case Idx_w: return Xow_domain_type_.Key_bry_wikipedia;
+			case Idx_d: return Xow_domain_type_.Key_bry_wiktionary;
+			case Idx_s: return Xow_domain_type_.Key_bry_wikisource;
+			case Idx_v: return Xow_domain_type_.Key_bry_wikivoyage;
+			case Idx_q: return Xow_domain_type_.Key_bry_wikiquote;
+			case Idx_b: return Xow_domain_type_.Key_bry_wikibooks;
+			case Idx_u: return Xow_domain_type_.Key_bry_wikiversity;
+			case Idx_n: return Xow_domain_type_.Key_bry_wikinews;
 			case Idx_x: return Name_special;
 			default:	throw Err_.unhandled(idx);
 		}
 	}
 	public static final int Idx__len = 9, Idx_w = 0, Idx_d = 1, Idx_s = 2, Idx_v = 3, Idx_q = 4, Idx_b = 5, Idx_u = 6, Idx_n = 7, Idx_x = 8;
-	private static final byte[] Name_special = Bry_.new_ascii_("special");
+	private static final byte[] Name_special = Bry_.new_a7("special");
 }

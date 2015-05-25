@@ -22,7 +22,7 @@ public class Pf_formatnum_es_tst {
 	private Xop_fxt fxt;
 	@Before public void init() {
 		Xoae_app app = Xoa_app_fxt.app_();
-		Xol_lang lang = new Xol_lang(app.Lang_mgr(), Bry_.new_ascii_("es")).Init_by_load_assert();
+		Xol_lang lang = new Xol_lang(app.Lang_mgr(), Bry_.new_a7("es")).Init_by_load_assert();
 		Xowe_wiki wiki = Xoa_app_fxt.wiki_(app, "es.wikipedia.org", lang);
 		fxt = new Xop_fxt(app, wiki);
 	}

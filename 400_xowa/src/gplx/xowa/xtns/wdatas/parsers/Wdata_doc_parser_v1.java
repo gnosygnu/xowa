@@ -33,12 +33,12 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 				default:
 					throw Err_.unhandled(kv_val.Tid());
 			}
-		} catch (Exception e) {throw Err_.err_(e, "failed to parse qid; src={0}", String_.new_utf8_(doc.Src()));}
+		} catch (Exception e) {throw Err_.err_(e, "failed to parse qid; src={0}", String_.new_u8(doc.Src()));}
 	}
-	public OrderedHash Parse_sitelinks(byte[] qid, Json_doc doc) {
+	public Ordered_hash Parse_sitelinks(byte[] qid, Json_doc doc) {
 		try {
 			Json_itm_nde list_nde = Json_itm_nde.cast_(doc.Get_grp(Bry_links)); if (list_nde == null) return Wdata_doc_parser_v1.Empty_ordered_hash_bry;
-			OrderedHash rv = OrderedHash_.new_bry_();
+			Ordered_hash rv = Ordered_hash_.new_bry_();
 			int list_len = list_nde.Subs_len();
 			for (int i = 0; i < list_len; ++i) {
 				Json_itm_kv wiki_kv		= Json_itm_kv.cast_(list_nde.Subs_get_at(i));
@@ -61,13 +61,13 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 				rv.Add(site_bry, itm);
 			}
 			return rv;
-		} catch (Exception e) {throw Err_.err_(e, "failed to parse sitelinks; qid={0}", String_.new_utf8_(qid));}
+		} catch (Exception e) {throw Err_.err_(e, "failed to parse sitelinks; qid={0}", String_.new_u8(qid));}
 	}
-	public OrderedHash Parse_langvals(byte[] qid, Json_doc doc, boolean label_or_description) {
+	public Ordered_hash Parse_langvals(byte[] qid, Json_doc doc, boolean label_or_description) {
 		try {
 			byte[] langval_key = label_or_description ? Bry_label : Bry_description;
 			Json_itm_nde list_nde = Json_itm_nde.cast_(doc.Get_grp(langval_key)); if (list_nde == null) return Wdata_doc_parser_v1.Empty_ordered_hash_bry;
-			OrderedHash rv = OrderedHash_.new_bry_();
+			Ordered_hash rv = Ordered_hash_.new_bry_();
 			int list_len = list_nde.Subs_len();
 			for (int i = 0; i < list_len; ++i) {
 				Json_itm_kv data_kv		= Json_itm_kv.cast_(list_nde.Subs_get_at(i));
@@ -76,12 +76,12 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 				rv.Add(lang_bry, itm);
 			}
 			return rv;
-		} catch (Exception e) {throw Err_.err_(e, "failed to parse langvals; qid={0} langval_tid={1}", String_.new_utf8_(qid), label_or_description);}
+		} catch (Exception e) {throw Err_.err_(e, "failed to parse langvals; qid={0} langval_tid={1}", String_.new_u8(qid), label_or_description);}
 	}
-	public OrderedHash Parse_aliases(byte[] qid, Json_doc doc) {
+	public Ordered_hash Parse_aliases(byte[] qid, Json_doc doc) {
 		try {
 			Json_itm_nde list_nde = Json_itm_nde.cast_(doc.Get_grp(Bry_aliases)); if (list_nde == null) return Wdata_doc_parser_v1.Empty_ordered_hash_bry;
-			OrderedHash rv = OrderedHash_.new_bry_();
+			Ordered_hash rv = Ordered_hash_.new_bry_();
 			int list_len = list_nde.Subs_len();
 			for (int i = 0; i < list_len; ++i) {
 				Json_itm_kv data_kv		= Json_itm_kv.cast_(list_nde.Subs_get_at(i));
@@ -108,12 +108,12 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 				rv.Add(lang_bry, itm);
 			}
 			return rv;
-		} catch (Exception e) {throw Err_.err_(e, "failed to parse aliases; qid={0}", String_.new_utf8_(qid));}
+		} catch (Exception e) {throw Err_.err_(e, "failed to parse aliases; qid={0}", String_.new_u8(qid));}
 	}
-	public OrderedHash Parse_claims(byte[] qid, Json_doc doc) {
+	public Ordered_hash Parse_claims(byte[] qid, Json_doc doc) {
 		try {
 			Json_itm_ary list_nde = Json_itm_ary.cast_(doc.Get_grp(Bry_claims)); if (list_nde == null) return Empty_ordered_hash_generic;
-			ListAdp temp_list = ListAdp_.new_();
+			List_adp temp_list = List_adp_.new_();
 			byte[] src = doc.Src();
 			int len = list_nde.Subs_len();
 			for (int i = 0; i < len; i++) {
@@ -122,16 +122,16 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 				temp_list.Add(claim_itm);
 			}
 			return Claims_list_to_hash(temp_list);
-		} catch (Exception e) {throw Err_.err_(e, "failed to parse claims; qid={0}", String_.new_utf8_(doc.Src()));}
+		} catch (Exception e) {throw Err_.err_(e, "failed to parse claims; qid={0}", String_.new_u8(doc.Src()));}
 	}
 	public Wdata_claim_itm_base Parse_claims_data(byte[] qid, int pid, byte snak_tid, Json_itm_nde nde) {throw Err_.not_implemented_();}
-	public static OrderedHash Claims_list_to_hash(ListAdp full_list) {
+	public static Ordered_hash Claims_list_to_hash(List_adp full_list) {
 		full_list.Sort();
-		OrderedHash rv = OrderedHash_.new_(); ListAdp temp_itms = ListAdp_.new_();
+		Ordered_hash rv = Ordered_hash_.new_(); List_adp temp_itms = List_adp_.new_();
 		int prv_pid = -1;
 		int len = full_list.Count();
 		for (int i = 0; i < len; ++i) {
-			Wdata_claim_itm_core claim_itm = (Wdata_claim_itm_core)full_list.FetchAt(i);
+			Wdata_claim_itm_core claim_itm = (Wdata_claim_itm_core)full_list.Get_at(i);
 			int cur_pid = claim_itm.Pid();
 			if (prv_pid != cur_pid && prv_pid != -1)
 				Claims_list_to_hash__add(rv, prv_pid, temp_itms);
@@ -141,10 +141,10 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 		Claims_list_to_hash__add(rv, prv_pid, temp_itms);
 		return rv;
 	}
-	private static void Claims_list_to_hash__add(OrderedHash rv, int pid, ListAdp temp_itms) {
+	private static void Claims_list_to_hash__add(Ordered_hash rv, int pid, List_adp temp_itms) {
 		if (temp_itms.Count() == 0) return; // NOTE: will be empty when claims are empty; EX: "claims": []; PAGE:wd.p:585; DATE:2014-10-03
 		Int_obj_ref claim_grp_key = Int_obj_ref.new_(pid);
-		Wdata_claim_grp claim_grp = new Wdata_claim_grp(claim_grp_key, (Wdata_claim_itm_core[])temp_itms.Xto_ary_and_clear(Wdata_claim_itm_core.class));
+		Wdata_claim_grp claim_grp = new Wdata_claim_grp(claim_grp_key, (Wdata_claim_itm_core[])temp_itms.To_ary_and_clear(Wdata_claim_itm_core.class));
 		rv.Add(claim_grp_key, claim_grp);
 	}
 	private Wdata_claim_itm_core Make_claim_itm(byte[] src, Json_itm_nde prop_nde) {
@@ -154,7 +154,7 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 			Json_itm_kv kv = Json_itm_kv.cast_(prop_nde.Subs_get_at(i));
 			Json_itm kv_key = kv.Key();
 			Byte_obj_val bv = (Byte_obj_val)Prop_key_hash.Get_by_mid(src, kv_key.Src_bgn(), kv_key.Src_end());
-			if (bv == null) {Warn("invalid prop node: ~{0}", String_.new_utf8_mid_safe_(src, kv_key.Src_bgn(), kv_key.Src_end())); return null;}
+			if (bv == null) {Warn("invalid prop node: ~{0}", String_.new_u8(src, kv_key.Src_bgn(), kv_key.Src_end())); return null;}
 			switch (bv.Val()) {
 				case Prop_tid_m:
 					rv = New_prop_by_m(src, Json_itm_ary.cast_(kv.Val()));
@@ -220,7 +220,7 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 		return kv.Val().Data_bry();
 	}
 	private void Warn(String fmt, Object... args) {usr_dlg.Warn_many("", "", fmt, args);}
-	public static final OrderedHash Empty_ordered_hash_bry = OrderedHash_.new_bry_(), Empty_ordered_hash_generic = OrderedHash_.new_();
+	public static final Ordered_hash Empty_ordered_hash_bry = Ordered_hash_.new_bry_(), Empty_ordered_hash_generic = Ordered_hash_.new_();
 	private static final byte Prop_tid_m = 0, Prop_tid_q = 1, Prop_tid_g = 2, Prop_tid_rank = 3, Prop_tid_refs = 4;
 	private static final Hash_adp_bry Prop_key_hash = Hash_adp_bry.ci_ascii_()
 	.Add_bry_byte(Wdata_dict_claim_v1.Bry_m		, Prop_tid_m)
@@ -228,9 +228,9 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 	.Add_bry_byte(Wdata_dict_claim_v1.Bry_g		, Prop_tid_g)
 	.Add_bry_byte(Wdata_dict_claim_v1.Bry_rank	, Prop_tid_rank)
 	.Add_bry_byte(Wdata_dict_claim_v1.Bry_refs	, Prop_tid_refs);
-	OrderedHash Bld_hash(Json_doc doc, byte[] key) {
+	Ordered_hash Bld_hash(Json_doc doc, byte[] key) {
 		Json_itm_nde nde = Json_itm_nde.cast_(doc.Get_grp(key)); if (nde == null) return Empty_ordered_hash_bry;
-		OrderedHash rv = OrderedHash_.new_bry_();
+		Ordered_hash rv = Ordered_hash_.new_bry_();
 		int len = nde.Subs_len();
 		for (int i = 0; i < len; i++) {
 			Json_itm_kv kv = Json_itm_kv.cast_(nde.Subs_get_at(i));
@@ -253,13 +253,13 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 	, Str_name									= "name"
 	;
 	public static final byte[]
-	  Bry_entity								= Bry_.new_ascii_(Str_entity)
-	, Bry_id									= Bry_.new_ascii_(Str_id)
-	, Bry_links									= Bry_.new_ascii_(Str_links)
-	, Bry_label									= Bry_.new_ascii_(Str_label)
-	, Bry_aliases								= Bry_.new_ascii_(Str_aliases)
-	, Bry_claims								= Bry_.new_ascii_(Str_claims)
-	, Bry_description							= Bry_.new_ascii_(Str_description)
-	, Bry_name									= Bry_.new_ascii_(Str_name)
+	  Bry_entity								= Bry_.new_a7(Str_entity)
+	, Bry_id									= Bry_.new_a7(Str_id)
+	, Bry_links									= Bry_.new_a7(Str_links)
+	, Bry_label									= Bry_.new_a7(Str_label)
+	, Bry_aliases								= Bry_.new_a7(Str_aliases)
+	, Bry_claims								= Bry_.new_a7(Str_claims)
+	, Bry_description							= Bry_.new_a7(Str_description)
+	, Bry_name									= Bry_.new_a7(Str_name)
 	;
 }

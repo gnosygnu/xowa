@@ -27,7 +27,7 @@ class Swt_img implements ImageAdp {
 	public SizeAdp Size() {if (size == null) size = SizeAdp_.new_(width, height); return size;} SizeAdp size;
 	public int Width() {return width;} int width;
 	public int Height() {return height;} int height;
-	public Io_url Url() {return url;} public ImageAdp Url_(Io_url v) {url = v; return this;} Io_url url = Io_url_.Null;
+	public Io_url Url() {return url;} public ImageAdp Url_(Io_url v) {url = v; return this;} Io_url url = Io_url_.Empty;
 	public Object Under() {return under;} Image under;
 	public boolean Disposed() {return under.isDisposed();}
 	public void Rls() {under.dispose();}

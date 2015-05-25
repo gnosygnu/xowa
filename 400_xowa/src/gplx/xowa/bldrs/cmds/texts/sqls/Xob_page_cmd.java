@@ -35,7 +35,7 @@ public class Xob_page_cmd extends Xob_itm_basic_base implements Xobd_wkr, GfoInv
 		this.text_zip_mgr = Xoa_app_.Utl__zip_mgr(); text_zip_tid = import_cfg.Zip_tid_text();
 		this.ns_to_db_mgr = new Xob_ns_to_db_mgr(new Xob_ns_to_db_wkr__text(), db_mgr, import_cfg.Text_db_max());
 		if (redirect_id_enabled) {
-			this.redirect_tbl = new Xob_redirect_tbl(wiki.Fsys_mgr().Root_dir(), Xoa_app_.Utl__encoder_mgr().Url_ttl()).Create_table();
+			this.redirect_tbl = new Xob_redirect_tbl(wiki.Fsys_mgr().Root_dir(), Xoa_app_.Utl__encoder_mgr().Http_url_ttl()).Create_table();
 			redirect_tbl.Conn().Txn_bgn();
 		}
 		this.dg_match_mgr = app.Api_root().Bldr().Wiki().Filter().Dansguardian().New_mgr(wiki.Domain_str(), wiki.Fsys_mgr().Root_dir());

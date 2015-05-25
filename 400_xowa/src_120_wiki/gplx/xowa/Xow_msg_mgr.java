@@ -53,7 +53,7 @@ public class Xow_msg_mgr implements GfoInvkAble {
 		return itm;
 	}
 	public byte[] Val_by_key_args(byte[] key, Object... args) {return Val_by_key(key, args);}
-	public byte[] Val_by_key_obj(String key) {return Val_by_key(Bry_.new_utf8_(key), null);}
+	public byte[] Val_by_key_obj(String key) {return Val_by_key(Bry_.new_u8(key), null);}
 	public byte[] Val_by_key_obj(byte[] key) {return Val_by_key(key, null);}
 	private byte[] Val_by_key(byte[] key, Object[] args) {
 		Xol_msg_itm itm = msg_mgr.Itm_by_key_or_null(key);
@@ -104,7 +104,7 @@ public class Xow_msg_mgr implements GfoInvkAble {
 			itm.Accesskey_(accesskey_val).Title_(tooltip_val).Atr_accesskey_and_title_(rv);
 			return null;
 		}
-	}	static final byte[] CONST_prefix_tooltip = Bry_.new_ascii_("tooltip-"), CONST_prefix_accesskey = Bry_.new_ascii_("accesskey-"), CONST_atr_title = Bry_.new_ascii_(" title=\""), CONST_atr_accesskey = Bry_.new_ascii_(" accesskey=\"");
+	}	static final byte[] CONST_prefix_tooltip = Bry_.new_a7("tooltip-"), CONST_prefix_accesskey = Bry_.new_a7("accesskey-"), CONST_atr_title = Bry_.new_a7(" title=\""), CONST_atr_accesskey = Bry_.new_a7(" accesskey=\"");
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_get))							return this.Val_by_key_obj(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_get_html_accesskey_and_title))	return this.Val_html_accesskey_and_title(m.ReadBry("v"));

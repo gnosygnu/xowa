@@ -23,7 +23,7 @@ public class Json_doc_bldr {
 		owner.Subs_add(rv);
 		return rv;
 	}
-	public Json_itm Str(byte[] v) {return Str(String_.new_utf8_(v));}
+	public Json_itm Str(byte[] v) {return Str(String_.new_u8(v));}
 	public Json_itm Str(String v) {return Json_itm_tmp.new_str_(v);}
 	public Json_itm Int(int v) {return Json_itm_tmp.new_int_(v);}
 	public Json_itm_kv Kv_int(Json_grp owner, String key, int val)		{Json_itm_kv rv = factory.Kv(Json_itm_tmp.new_str_(key), Json_itm_tmp.new_int_(val)); owner.Subs_add(rv); return rv;}

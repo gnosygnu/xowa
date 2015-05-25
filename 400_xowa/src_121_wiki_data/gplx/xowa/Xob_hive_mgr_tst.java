@@ -37,7 +37,7 @@ class Xob_reg_wtr {
 		.Add_int_variable(itm_count).Add_byte(Byte_ascii.NewLine);		
 	}
 	public void Flush(Io_url url) {
-		Io_mgr._.SaveFilBfr(url, bfr);
-//			Tfds.Write(url.Raw() + "\n" + Io_mgr._.LoadFilStr(url));
+		Io_mgr.I.SaveFilBfr(url, bfr);
+//			Tfds.Write(url.Raw() + "\n" + Io_mgr.I.LoadFilStr(url));
 	}
 }

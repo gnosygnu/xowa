@@ -46,7 +46,7 @@ public class GfoMsg_ {
 	}
 	public static GfoMsg chain_(GfoMsg owner, String key) {
 		GfoMsg sub = owner;
-		ListAdp list = ListAdp_.new_();
+		List_adp list = List_adp_.new_();
 		list.Add(sub.Key());
 		while (sub != null) {
 			if (sub.Subs_count() == 0) break;
@@ -55,10 +55,10 @@ public class GfoMsg_ {
 		}
 		list.Add(key);
 
-		GfoMsg root = GfoMsg_.new_parse_((String)list.FetchAt(0));
+		GfoMsg root = GfoMsg_.new_parse_((String)list.Get_at(0));
 		GfoMsg cur = root;
 		for (int i = 1; i < list.Count(); i++) {
-			String k = (String)list.FetchAt(i);
+			String k = (String)list.Get_at(i);
 			GfoMsg mm = GfoMsg_.new_parse_(k);
 			cur.Subs_add(mm);
 			cur = mm;
@@ -77,14 +77,14 @@ public class GfoMsg_ {
 }
 class GfoMsg_wtr extends GfoMsg_base {
 	@Override protected Object ReadOr(String k, Object defaultOr) {
-		if (args == null) args = ListAdp_.new_();
+		if (args == null) args = List_adp_.new_();
 		args.Add(KeyVal_.new_(k, null));
 		return defaultOr;
 	}
 }
 class GfoMsg_rdr extends GfoMsg_base {
 	@Override protected Object ReadOr(String k, Object defaultOr) {
-		if (args == null) args = ListAdp_.new_();
+		if (args == null) args = List_adp_.new_();
 		args.Add(KeyVal_.new_(k, defaultOr));
 		return defaultOr;
 	}
@@ -92,8 +92,8 @@ class GfoMsg_rdr extends GfoMsg_base {
 class GfoMsg_base implements GfoMsg {
 	public String Key() {return key;} private String key; 
 	public int Subs_count() {return subs == null ? 0 : subs.Count();}
-	public GfoMsg Subs_getAt(int i) {return subs == null ? null : (GfoMsg)subs.FetchAt(i);}
-	public GfoMsg Subs_add(GfoMsg m) {if (subs == null) subs = ListAdp_.new_(); subs.Add(m); return this;}
+	public GfoMsg Subs_getAt(int i) {return subs == null ? null : (GfoMsg)subs.Get_at(i);}
+	public GfoMsg Subs_add(GfoMsg m) {if (subs == null) subs = List_adp_.new_(); subs.Add(m); return this;}
 	public GfoMsg Subs_(GfoMsg... ary) {for (GfoMsg m : ary) Subs_add(m); return this;}
 	public int Args_count() {return args == null ? 0 : args.Count();}
 	public void Args_reset() {
@@ -113,11 +113,11 @@ class GfoMsg_base implements GfoMsg {
 			sub.Args_reset();
 		}
 	}
-	public KeyVal Args_getAt(int i) {return args == null ? null : (KeyVal)args.FetchAt(i);}
+	public KeyVal Args_getAt(int i) {return args == null ? null : (KeyVal)args.Get_at(i);}
 	public GfoMsg Args_ovr(String k, Object v) {
-		if (args == null) args = ListAdp_.new_();
+		if (args == null) args = List_adp_.new_();
 		for (int i = 0; i < args.Count(); i++) {
-			KeyVal kv = (KeyVal)args.FetchAt(i);
+			KeyVal kv = (KeyVal)args.Get_at(i);
 			if (String_.Eq(k, kv.Key())) {
 				kv.Val_(v);
 				return this;
@@ -128,7 +128,7 @@ class GfoMsg_base implements GfoMsg {
 	}
 	public GfoMsg Parse_(boolean v) {parse = v; return this;}
 	public GfoMsg	Add(String k, Object v) {
-		if (args == null) args = ListAdp_.new_();
+		if (args == null) args = List_adp_.new_();
 		args.Add(new KeyVal(KeyVal_.Key_tid_str, k, v));
 		return this;
 	}
@@ -163,8 +163,8 @@ class GfoMsg_base implements GfoMsg {
 		String rv_str = (String)rv;
 		return (String_.Eq(rv_str, "!")) ? !cur : Yn.parse_(rv_str);
 	}
-	public byte[]	ReadBry(String k)						{Object rv = ReadOr(k,false); if (rv == Nil) ThrowNotFound(k); return parse ? Bry_.new_utf8_((String)rv) : (byte[])rv;}
-	public byte[]	ReadBryOr(String k, byte[] or)			{Object rv = ReadOr(k, or); if (rv == Nil) return or; return parse ? Bry_.new_utf8_((String)rv) : (byte[])rv;}
+	public byte[]	ReadBry(String k)						{Object rv = ReadOr(k,false); if (rv == Nil) ThrowNotFound(k); return parse ? Bry_.new_u8((String)rv) : (byte[])rv;}
+	public byte[]	ReadBryOr(String k, byte[] or)			{Object rv = ReadOr(k, or); if (rv == Nil) return or; return parse ? Bry_.new_u8((String)rv) : (byte[])rv;}
 	public Object	CastObjOr(String k, Object or)	{Object rv = ReadOr(k, or)	; if (rv == Nil) return or		; return rv;}
 	public Object	ReadObj(String k)									{Object rv = ReadOr(k, null); if (rv == Nil) ThrowNotFound(k); return rv;}
 	public Object	ReadObj(String k, ParseAble parseAble)				{Object rv = ReadOr(k, null); if (rv == Nil) ThrowNotFound(k); return parse ? parseAble.ParseAsObj((String)rv) : rv;}
@@ -177,13 +177,13 @@ class GfoMsg_base implements GfoMsg {
 		if (args == null) return Nil; // WORKAROUND.gfui: args null for DataBndr_whenEvt_execCmd
 		if (!String_.Eq(k, "")) {
 			for (int i = 0; i < args.Count(); i++) {
-				KeyVal kv = (KeyVal)args.FetchAt(i);
+				KeyVal kv = (KeyVal)args.Get_at(i);
 				if (String_.Eq(k, kv.Key())) return kv.Val();
 			}
 		}
 		if (counter >= args.Count()) return Nil;
 		for (int i = 0; i < args.Count(); i++) {
-			KeyVal kv = (KeyVal)args.FetchAt(i);
+			KeyVal kv = (KeyVal)args.Get_at(i);
 			if (String_.Eq(kv.Key(), "") && i >= counter) {
 				counter++;
 				return kv.Val();
@@ -204,22 +204,22 @@ class GfoMsg_base implements GfoMsg {
 	public GfoMsg CloneNew() {
 		GfoMsg_base rv = new GfoMsg_base().ctor_(key, parse);
 		if (args != null) {
-			rv.args = ListAdp_.new_();
+			rv.args = List_adp_.new_();
 			for (int i = 0; i < args.Count(); i++)
-				rv.args.Add(args.FetchAt(i));
+				rv.args.Add(args.Get_at(i));
 		}
 		if (subs != null) {
-			rv.subs = ListAdp_.new_();
+			rv.subs = List_adp_.new_();
 			for (int i = 0; i < args.Count(); i++) {
-				GfoMsg sub = (GfoMsg)args.FetchAt(i);
+				GfoMsg sub = (GfoMsg)args.Get_at(i);
 				rv.subs.Add(sub.CloneNew());	// NOTE: recursion
 			}
 		}
 		return rv;
 	}
 
-	protected ListAdp args;
-	ListAdp subs;
+	protected List_adp args;
+	List_adp subs;
 	public String XtoStr() {
 		String_bldr sb = String_bldr_.new_();
 		XtoStr(sb, new XtoStrWkr_gplx(), this);

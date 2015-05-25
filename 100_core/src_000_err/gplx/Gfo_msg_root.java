@@ -42,7 +42,7 @@ public class Gfo_msg_root {
 	public Gfo_msg_data Data_new_note_many(String owner_key, String key, String fmt, Object... vals) {return Data_new_many(Gfo_msg_itm_.Cmd_note, Bry_.Empty, -1, -1, owner_key, key, fmt, vals);}
 	public Gfo_msg_data Data_new_many(byte cmd, String owner_key, String key, String fmt, Object[] vals) {return Data_new_many(cmd, Bry_.Empty, -1, -1, owner_key, key, fmt, vals);}
 	public Gfo_msg_data Data_new_many(byte cmd, byte[] src, int bgn, int end, String owner_key, String key, String fmt, Object[] vals) {
-		Object owner_obj = owners.Fetch(owner_key);
+		Object owner_obj = owners.Get_by(owner_key);
 		Gfo_msg_grp owner = null;
 		if (owner_obj == null) {
 			owner = New_list_by_key(owner_key);
@@ -52,7 +52,7 @@ public class Gfo_msg_root {
 			owner = (Gfo_msg_grp)owner_obj;
 		Gfo_msg_itm itm = (Gfo_msg_itm)owner.Subs_get_by_key(key);
 		if (itm == null)
-			itm = new Gfo_msg_itm(owner, uid_item_next++, cmd, Bry_.new_utf8_(key), fmt == null ? Bry_.Empty : Bry_.new_ascii_(fmt), false);
+			itm = new Gfo_msg_itm(owner, uid_item_next++, cmd, Bry_.new_u8(key), fmt == null ? Bry_.Empty : Bry_.new_a7(fmt), false);
 		return Data_new_many(itm, src, bgn, end, vals);
 	}
 	public Gfo_msg_data Data_new_many(Gfo_msg_itm itm, byte[] src, int bgn, int end, Object... vals) {return Data_get().Ctor_src_many(itm, src, bgn, end, vals);}
@@ -67,13 +67,13 @@ public class Gfo_msg_root {
 			String seg = segs[i];
 			Gfo_msg_grp sub_list = (Gfo_msg_grp)cur_list.Subs_get_by_key(seg);
 			if (sub_list == null)
-				sub_list = new Gfo_msg_grp(cur_list, uid_list_next++, Bry_.new_ascii_(key));
+				sub_list = new Gfo_msg_grp(cur_list, uid_list_next++, Bry_.new_a7(key));
 			cur_list = sub_list;
 		}
 		return cur_list;
 	}
 	Gfo_msg_grp root;
-	OrderedHash owners = OrderedHash_.new_();
+	Ordered_hash owners = Ordered_hash_.new_();
 	int uid_list_next = 0;
 	int uid_item_next = 0;
         public static final Gfo_msg_root _ = new Gfo_msg_root("gplx");

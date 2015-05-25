@@ -49,7 +49,7 @@ public class Xob_calc_stats_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		}
 		bfr.Add_byte_nl().Add_byte(Byte_ascii.Semic).Add_byte_nl();
 		Io_url wiki_gfs = Wiki_gfs_url(wiki);
-		Io_mgr._.SaveFilBfr(wiki_gfs, bfr);
+		Io_mgr.I.SaveFilBfr(wiki_gfs, bfr);
 	}
 	private void Gen_call(boolean first, Bry_bfr bfr, String key, Object... vals) {
 		if (!first) bfr.Add_byte(Byte_ascii.Dot);
@@ -80,7 +80,7 @@ public class Xob_calc_stats_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		return Calc_count_articles_dir(ns, hive_dir);
 	}
 	int Calc_count_articles_dir(Xow_ns ns, Io_url dir) {
-		Io_url[] subs = Io_mgr._.QueryDir_args(dir).DirInclude_().ExecAsUrlAry();
+		Io_url[] subs = Io_mgr.I.QueryDir_args(dir).DirInclude_().ExecAsUrlAry();
 		int count = 0;
 		int subs_len = subs.length;
 		bldr.Usr_dlg().Prog_one(GRP_KEY, "count", "calculating: ~{0}", dir.Raw());
@@ -96,7 +96,7 @@ public class Xob_calc_stats_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	int Calc_count_articles_fil(Xow_ns ns, Io_url fil) {
 		if (String_.Eq(fil.NameAndExt(), Xotdb_dir_info_.Name_reg_fil)) return 0;
 		int rv = 0;
-		byte[] bry = Io_mgr._.LoadFilBry(fil);
+		byte[] bry = Io_mgr.I.LoadFilBry(fil);
 		Xob_xdat_file xdat_file = new Xob_xdat_file().Parse(bry, bry.length, fil);
 		Xowd_page_itm page = Xowd_page_itm.new_tmp();
 		int count = xdat_file.Count();

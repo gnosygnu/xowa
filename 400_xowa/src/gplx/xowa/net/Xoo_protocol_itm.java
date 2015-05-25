@@ -19,14 +19,14 @@ package gplx.xowa.net; import gplx.*; import gplx.xowa.*;
 public class Xoo_protocol_itm {
 	public Xoo_protocol_itm(byte tid, String text) {
 		this.tid = tid;
-		this.text_bry = Bry_.new_utf8_(text);
+		this.text_bry = Bry_.new_u8(text);
 		this.text_str = text;
 		int text_len = text_bry.length;
 		for (int i = 0; i < text_len; i++) {
 			if (text_bry[i] == Byte_ascii.Colon) {
 				key_wo_colon_bry = Bry_.Mid(text_bry, 0, i);
 				key_w_colon_bry_len = i;
-				key_wo_colon_str = String_.new_utf8_(key_wo_colon_bry);
+				key_wo_colon_str = String_.new_u8(key_wo_colon_bry);
 				key_w_colon_bry = Bry_.Mid(text_bry, 0, i + 1);
 				text_ends_w_colon = i == text_len - 1;
 				break;
@@ -73,7 +73,7 @@ public class Xoo_protocol_itm {
 	, Tid_relative_1			= 28		// [//a.org]
 	, Tid_relative_2			= 29		// [[//a.org]]
 	;
-	public static final OrderedHash Regy = OrderedHash_.new_bry_();
+	public static final Ordered_hash Regy = Ordered_hash_.new_bry_();
 	public static final Xoo_protocol_itm 
 	  Itm_http					= new_(Tid_http			, "http://")
 	, Itm_https					= new_(Tid_https		, "https://")
@@ -102,13 +102,13 @@ public class Xoo_protocol_itm {
 	, Itm_geo					= new_(Tid_geo			, "geo:")
 	;
 	public static final String Str_file = "file:";
-	public static final byte[] Bry_file = Bry_.new_ascii_(Str_file);
+	public static final byte[] Bry_file = Bry_.new_a7(Str_file);
 	public static Xoo_protocol_itm[] Ary() {
 		if (protocol_itm_ary == null) {
 			int len = Regy.Count();
 			protocol_itm_ary = new Xoo_protocol_itm[len];
 			for (int i = 0; i < len; i++)
-				protocol_itm_ary[i] = (Xoo_protocol_itm)Regy.FetchAt(i);
+				protocol_itm_ary[i] = (Xoo_protocol_itm)Regy.Get_at(i);
 		}
 		return protocol_itm_ary;
 	}	private static Xoo_protocol_itm[] protocol_itm_ary;
@@ -117,7 +117,7 @@ public class Xoo_protocol_itm {
 			int len = Regy.Count();
 			protocol_str_ary = new String[len];
 			for (int i = 0; i < len; i++)
-				protocol_str_ary[i] = ((Xoo_protocol_itm)Regy.FetchAt(i)).Text_str();
+				protocol_str_ary[i] = ((Xoo_protocol_itm)Regy.Get_at(i)).Text_str();
 		}
 		return protocol_str_ary;
 	}	private static String[] protocol_str_ary;

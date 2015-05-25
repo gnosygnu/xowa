@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.ios; import gplx.*;
 public class Io_size_ {
-	public static String Xto_str(long val) {
+	public static String To_str(long val) {
 		long cur = val; int pow = 0;
 		while (cur >= 1024) {
 			cur /= 1024;
@@ -26,9 +26,9 @@ public class Io_size_ {
 		long div = (long)Math_.Pow((long)1024, (long)pow);
 		DecimalAdp valDecimal = DecimalAdp_.divide_(val, div);
 		String[] unit = Io_size_.Units[pow];
-		return valDecimal.Xto_str("#,###.000") + " " + String_.PadBgn(unit[0], 2, " ");
+		return valDecimal.Xto_str("#,##0.000") + " " + String_.PadBgn(unit[0], 2, " ");
 	}
-	public static String Xto_str(long val, int exp_1024, String val_fmt, String unit_pad, boolean round_0_to_1) {
+	public static String To_str(long val, int exp_1024, String val_fmt, String unit_pad, boolean round_0_to_1) {
 		long exp_val = (long)Math_.Pow(1024, exp_1024);
 		DecimalAdp val_as_decimal = DecimalAdp_.divide_(val, exp_val);
 		if (round_0_to_1 && val_as_decimal.Comp_lt(1)) val_as_decimal = DecimalAdp_.One;
@@ -77,13 +77,13 @@ public class Io_size_ {
 	,	String_.Ary("EB", "EXABYTE")
 	};
 	public static final byte[][] Units_bry = new byte[][] 
-	{	Bry_.new_ascii_("B")
-	,	Bry_.new_ascii_("KB")
-	,	Bry_.new_ascii_("MB")
-	,	Bry_.new_ascii_("GB")
-	,	Bry_.new_ascii_("TB")
-	,	Bry_.new_ascii_("PB")
-	,	Bry_.new_ascii_("EB")
+	{	Bry_.new_a7("B")
+	,	Bry_.new_a7("KB")
+	,	Bry_.new_a7("MB")
+	,	Bry_.new_a7("GB")
+	,	Bry_.new_a7("TB")
+	,	Bry_.new_a7("PB")
+	,	Bry_.new_a7("EB")
 	};
 	public static int	Load_int_(GfoMsg m) {return (int)Load_long_(m);}
 	public static long	Load_long_(GfoMsg m) {
@@ -92,8 +92,11 @@ public class Io_size_ {
 		return rv;
 	}
 	public static String	To_str_mb(long v)				{return Long_.Xto_str(v / Io_mgr.Len_mb_long);}
-	public static long		To_long_by_msg_mb(GfoMsg m)		{return m.ReadLong("v") * Io_mgr.Len_mb_long;}
 	public static long		To_long_by_int_mb(int v)		{return (long)v * Io_mgr.Len_mb_long;}
+	public static long		To_long_by_msg_mb(GfoMsg m, long cur) {
+		long val = m.ReadLongOr("v", Int_.MinValue);
+		return val == Int_.MinValue ? cur : (val * Io_mgr.Len_mb_long);
+	}
 }
 class Io_size_fmtr_arg implements Bry_fmtr_arg {	
 	public long Val() {return val;} public Io_size_fmtr_arg Val_(long v) {val = v; return this;} long val;

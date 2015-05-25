@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.html; import gplx.*;
 public class Html_selecter {
 	public static Html_nde[] Select(byte[] src, Html_nde[] ary, Hash_adp_bry hash) {
-		ListAdp list = ListAdp_.new_();
+		List_adp list = List_adp_.new_();
 		int xndes_len = ary.length;
 		for (int i = 0; i < xndes_len; i++) {
 			Html_nde hnde = ary[i];
@@ -33,7 +33,7 @@ public class Html_selecter {
 				}
 			}
 		}
-		Html_nde[] rv = (Html_nde[])list.Xto_ary(Html_nde.class);
+		Html_nde[] rv = (Html_nde[])list.To_ary(Html_nde.class);
 		list.Clear();
 		return rv;
 	}

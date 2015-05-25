@@ -27,7 +27,7 @@ public class EnmMgr {
 		valRegy.Add(val, raw);
 		objRegy.Add(val, o);
 	}
-	public Object Get(int val) {return objRegy.Fetch(val);}
+	public Object Get(int val) {return objRegy.Get_by(val);}
 	public int GetVal(String raw) {
 		String[] ary = String_.Split(raw, bitRngSpr);
 		int rv = 0;
@@ -38,7 +38,7 @@ public class EnmMgr {
 			if (String_.HasAtBgn(term, "#"))
 				cur = Int_.parse_(String_.Mid(term, 1));
 			else
-				cur = Int_.cast_(rawRegy.Fetch(term));			
+				cur = Int_.cast_(rawRegy.Get_by(term));			
 			rv |= cur;
 		}
 		return rv;
@@ -62,11 +62,11 @@ public class EnmMgr {
 		return sb.XtoStr();
 	}
 	void AppendRaw(String_bldr sb, int key) {
-		String raw = (String)valRegy.Fetch(key);
+		String raw = (String)valRegy.Get_by(key);
 		if (sb.Count() > 0) sb.Add(bitRngSpr);
 		if (prefix != null) sb.Add(prefix);
 		sb.Add(raw);
 	}
-	HashAdp rawRegy = HashAdp_.new_(), valRegy = HashAdp_.new_(), objRegy = HashAdp_.new_();
+	Hash_adp rawRegy = Hash_adp_.new_(), valRegy = Hash_adp_.new_(), objRegy = Hash_adp_.new_();
 	public static EnmMgr new_() {return new EnmMgr();} EnmMgr() {}
 }

@@ -75,7 +75,7 @@ public class Sqlite_engine_ {
 		}
 	}
 	public static Db_conn Conn_load_or_make_(Io_url url, Bool_obj_ref created) {
-		boolean exists = Io_mgr._.ExistsFil(url);
+		boolean exists = Io_mgr.I.ExistsFil(url);
 		created.Val_(!exists);
 		Db_conn_info connect = exists ? Sqlite_conn_info.load_(url) : Sqlite_conn_info.make_(url); 
 		Db_conn p = Db_conn_pool.I.Get_or_new(connect);

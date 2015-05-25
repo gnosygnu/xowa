@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.specials.search.parsers_old; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*; import gplx.xowa.specials.search.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
 class Xow_search_scanner {
-	private final ListAdp tkns = ListAdp_.new_(); private byte[] src; private int src_len, pos, txt_bgn;
-	private final OrderedHash tmp_list = OrderedHash_.new_(); private final Bry_bfr tmp_bfr = Bry_bfr.new_();
+	private final List_adp tkns = List_adp_.new_(); private byte[] src; private int src_len, pos, txt_bgn;
+	private final Ordered_hash tmp_list = Ordered_hash_.new_(); private final Bry_bfr tmp_bfr = Bry_bfr.new_();
 	public Xow_search_tkn[] Scan(byte[] src) {
 		this.src = src; this.src_len = src.length;
 		tkns.Clear(); pos = 0; txt_bgn = -1; 
@@ -45,7 +45,7 @@ class Xow_search_scanner {
 					case Xow_search_tkn.Tid_quote:	// find end quote and add as word
 						int quote_bgn = pos + 1;
 						int quote_end = Bry_finder.Find_fwd(src, Byte_ascii.Quote, quote_bgn, src_len);
-						if (quote_end == Bry_.NotFound) throw Err_.new_fmt_("could not find end quote: {0}", String_.new_utf8_(src));
+						if (quote_end == Bry_.NotFound) throw Err_.new_fmt_("could not find end quote: {0}", String_.new_u8(src));
 						Tkns_add_word(Xow_search_tkn.Tid_word_quoted, quote_bgn, quote_end);
 						pos = quote_end + 1;		// +1 to place after quote
 						break;
@@ -66,7 +66,7 @@ class Xow_search_scanner {
 			Tkns_add_word(Xow_search_tkn.Tid_word, txt_bgn, pos);
 			txt_bgn = -1;
 		}
-		return (Xow_search_tkn[])tkns.Xto_ary_and_clear(Xow_search_tkn.class);
+		return (Xow_search_tkn[])tkns.To_ary_and_clear(Xow_search_tkn.class);
 	}
 	private boolean Cur_join_is_word(byte cur_tid, int pos_end) {	// extra logic to handle and / or occuring in unquoted strings; EX: "random"; "for"
 		switch (cur_tid) {
@@ -111,7 +111,7 @@ class Xow_search_scanner {
 	}
 	private void Tkns_add_word(byte tid, int src_bgn, int src_end) {
 		if (tkns.Count() > 0) {								// at least 1 tkn; check for "auto-and"
-			Xow_search_tkn last_tkn = (Xow_search_tkn)tkns.FetchAtLast();
+			Xow_search_tkn last_tkn = (Xow_search_tkn)tkns.Get_at_last();
 			if (last_tkn.Tid() == Xow_search_tkn.Tid_word)	// previous tkn is word; auto "AND" words; EX: A B -> A AND B
 				tkns.Add(Xow_search_tkn.new_bry(Xow_search_tkn.Tid_and, Bry_and));
 		}
@@ -132,7 +132,7 @@ class Xow_search_scanner {
 		tkns.Add(new_tkn(tid, src_bgn, src_end));
 	}
 	private Xow_search_tkn new_tkn(byte tid, int val_bgn, int val_end) {return Xow_search_tkn.new_pos(tid, val_bgn, val_end);}
-	private static final byte[] Bry_and = Bry_.new_ascii_("AND");
+	private static final byte[] Bry_and = Bry_.new_a7("AND");
 	private static final Btrie_slim_mgr trie = Btrie_slim_mgr.ci_ascii_()// NOTE:ci.ascii:OR / AND only
 	.Add_str_byte(" "	, Xow_search_tkn.Tid_space)
 	.Add_str_byte("\""	, Xow_search_tkn.Tid_quote)

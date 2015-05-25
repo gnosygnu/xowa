@@ -27,7 +27,7 @@ public class GfoNde_ {
 	public static GfoNde nde_(String name, Object[] ary, GfoNde... subs)		{return new GfoNde(GfoNde_.Type_Node, name, GfoFldList_.Null, ary, GfoFldList_.Null, subs);}
 	public static GfoNde rdr_(DataRdr rdr) {
 		try {
-			ListAdp rows = ListAdp_.new_();
+			List_adp rows = List_adp_.new_();
 			GfoFldList flds = GfoFldList_.new_(); 
 			int fldLen = rdr.FieldCount();
 			for (int i = 0; i < fldLen; i++)
@@ -38,7 +38,7 @@ public class GfoNde_ {
 					valAry[i] = rdr.ReadAt(i);
 				rows.Add(GfoNde_.vals_(flds, valAry));
 			}
-			return GfoNde_.tbl_("", flds, (GfoNde[])rows.Xto_ary(GfoNde.class));
+			return GfoNde_.tbl_("", flds, (GfoNde[])rows.To_ary(GfoNde.class));
 		}
 		finally {rdr.Rls();}
 	}

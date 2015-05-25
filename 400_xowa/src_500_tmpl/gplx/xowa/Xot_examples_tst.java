@@ -20,7 +20,7 @@ import org.junit.*;
 public class Xot_examples_tst {
 	private Xop_fxt fxt = new Xop_fxt();
 	@Before public void init() {
-		Io_mgr._.InitEngine_mem();
+		Io_mgr.I.InitEngine_mem();
 		fxt.Reset();
 	}
 	@Test  public void Arg_0()					{Init_tmpl_for(); fxt.Test_parse_tmpl_str("{{For}}"				, "For other uses, see [[Test page (disambiguation)]].");}

@@ -54,16 +54,16 @@ class Xop_redirect_mgr_fxt {
 		fxt.Init_page_create(tmpl_ttl_str, tmpl_wtxt_str);								// create redirect_src
 		fxt.Init_page_create(redirect_ttl, "test");										// create redirect_trg
 		fxt.Test_parse_page_tmpl_tkn("{{" + tmpl_ttl_str + "}}");						// parse {{redirect_src}}
-		Xoa_ttl tmpl_ttl = Xoa_ttl.parse_(fxt.Wiki(), Bry_.new_utf8_(tmpl_ttl_str));
+		Xoa_ttl tmpl_ttl = Xoa_ttl.parse_(fxt.Wiki(), Bry_.new_u8(tmpl_ttl_str));
 		Xot_defn_tmpl defn_tmpl = (Xot_defn_tmpl)fxt.Wiki().Cache_mgr().Defn_cache().Get_by_key(tmpl_ttl.Page_db());	// get defn (which parse should have created)
-		Tfds.Eq(expd_frame_ttl, String_.new_utf8_(defn_tmpl.Frame_ttl()));				// check frame_ttl
+		Tfds.Eq(expd_frame_ttl, String_.new_u8(defn_tmpl.Frame_ttl()));				// check frame_ttl
 	}
 	public void Test_redirect(String raw_str, String expd_str) {
 		Xop_redirect_mgr redirect_mgr = fxt.Ctx().Wiki().Redirect_mgr();
 		redirect_mgr.Clear();
-		byte[] raw_bry = Bry_.new_utf8_(raw_str);
+		byte[] raw_bry = Bry_.new_u8(raw_str);
 		Xoa_ttl actl_ttl = redirect_mgr.Extract_redirect(raw_bry, raw_bry.length);
 		byte[] actl_bry = actl_ttl == null ? Bry_.Empty : actl_ttl.Full_txt();
-		Tfds.Eq(expd_str, String_.new_utf8_(actl_bry));
+		Tfds.Eq(expd_str, String_.new_u8(actl_bry));
 	}
 }

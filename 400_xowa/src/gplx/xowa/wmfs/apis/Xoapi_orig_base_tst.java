@@ -43,19 +43,19 @@ class Xoapi_orig_base_fxt {
 		this.wiki = Xoa_app_fxt.wiki_tst_(app);
 	}
 	public void Bld_api_url_tst(String ttl_str, int w, int h, String expd) {
-		String actl = Xoapi_orig_wmf.Bld_api_url(wiki.Domain_bry(), Bry_.new_utf8_(ttl_str), w, h);
+		String actl = Xoapi_orig_wmf.Bld_api_url(wiki.Domain_bry(), Bry_.new_u8(ttl_str), w, h);
 		Tfds.Eq(expd, actl);
 	}
 	public void Parse_size_tst(String xml_str, int expd_w, int expd_h) {
-		byte[] xml_bry = Bry_.new_utf8_(xml_str);
+		byte[] xml_bry = Bry_.new_u8(xml_str);
 		Xoapi_orig_wmf.Parse_xml(rv, app.Usr_dlg(), xml_bry);
 		Tfds.Eq(expd_w, rv.Orig_w());
 		Tfds.Eq(expd_h, rv.Orig_h());
 	}
 	public void Parse_reg_tst(String xml_str, String expd_wiki, String expd_page) {
-		byte[] xml_bry = Bry_.new_utf8_(xml_str);
+		byte[] xml_bry = Bry_.new_u8(xml_str);
 		Xoapi_orig_wmf.Parse_xml(rv, app.Usr_dlg(), xml_bry);
-		Tfds.Eq(expd_wiki, String_.new_utf8_(rv.Orig_wiki()));
-		Tfds.Eq(expd_page, String_.new_utf8_(rv.Orig_page()));
+		Tfds.Eq(expd_wiki, String_.new_u8(rv.Orig_wiki()));
+		Tfds.Eq(expd_page, String_.new_u8(rv.Orig_page()));
 	}
 }

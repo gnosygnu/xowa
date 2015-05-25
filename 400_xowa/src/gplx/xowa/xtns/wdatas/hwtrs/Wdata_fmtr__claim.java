@@ -27,7 +27,7 @@ class Wdata_fmtr__claim_grp implements Bry_fmtr_arg {
 		toggle_itm.Init_msgs(msgs.Toggle_title_y(), msgs.Toggle_title_n());
 		fmtr_tbl.Init_by_lang(msgs);
 	}
-	public void Init_by_wdoc(byte[] ttl, OrderedHash list) {
+	public void Init_by_wdoc(byte[] ttl, Ordered_hash list) {
 		int list_count = list.Count();
 		this.is_empty = list.Count() == 0; if (is_empty) return;
 		toc_data.Make(list_count);
@@ -50,19 +50,19 @@ class Wdata_fmtr__claim_grp implements Bry_fmtr_arg {
 }
 class Wdata_fmtr__claim_tbl implements Bry_fmtr_arg {
 	private Wdata_fmtr__claim_row fmtr_row = new Wdata_fmtr__claim_row(); private Wdata_lbl_mgr lbl_mgr; 
-	private OrderedHash list; private byte[] ttl;
+	private Ordered_hash list; private byte[] ttl;
 	public void Init_by_ctor(Wdata_lbl_mgr lbl_mgr) {this.lbl_mgr = lbl_mgr; fmtr_row.Init_by_ctor(lbl_mgr);}
 	public void Init_by_lang(Wdata_hwtr_msgs msgs) {
 		fmtr_row.Init_by_lang(msgs);
 	}
-	public void Init_by_wdoc(byte[] ttl, OrderedHash list) {
+	public void Init_by_wdoc(byte[] ttl, Ordered_hash list) {
 		this.list = list;
 		this.ttl = ttl;
 	}
 	public void XferAry(Bry_bfr bfr, int idx) {
 		int len = list.Count();
 		for (int i = 0; i < len; ++i) {
-			Wdata_claim_grp grp = (Wdata_claim_grp)list.FetchAt(i);
+			Wdata_claim_grp grp = (Wdata_claim_grp)list.Get_at(i);
 			if (grp.Len() == 0) continue;	// NOTE: group will be empty when claims are empty; EX: "claims": []; PAGE:wd.p:585; DATE:2014-10-03
 			int pid = grp.Id();
 			byte[] pid_lbl = lbl_mgr.Get_text__pid(pid);

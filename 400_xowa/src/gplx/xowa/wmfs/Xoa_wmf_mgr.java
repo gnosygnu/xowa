@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wmfs; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.wmfs.apis.*; import gplx.xowa.wikis.*;	
 public class Xoa_wmf_mgr implements GfoInvkAble {
-	private final Xoa_wiki_mgr wiki_mgr;
-	public Xoa_wmf_mgr(Gfo_usr_dlg usr_dlg, Xoa_wiki_mgr wiki_mgr) {
+	private final Xoae_wiki_mgr wiki_mgr;
+	public Xoa_wmf_mgr(Gfo_usr_dlg usr_dlg, Xoae_wiki_mgr wiki_mgr) {
 		this.wiki_mgr = wiki_mgr;
 	}
 	public boolean Enabled() {return enabled;} private boolean enabled = true; // default to true; DATE:2015-01-05

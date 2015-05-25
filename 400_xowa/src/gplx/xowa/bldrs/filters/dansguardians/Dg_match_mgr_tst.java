@@ -27,7 +27,7 @@ public class Dg_match_mgr_tst {
 }
 class Dg_match_mgr_fxt {
 	private Dg_match_mgr match_mgr;
-	private final ListAdp rule_list = ListAdp_.new_();
+	private final List_adp rule_list = List_adp_.new_();
 	public void Clear() {
 		Db_conn_bldr.I.Reg_default_mem();
 		Io_url root_dir = Io_url_.mem_dir_("mem/dg/");
@@ -35,7 +35,7 @@ class Dg_match_mgr_fxt {
 		rule_list.Clear();
 	}
 	public void Init_line(int score, String... words) {
-		Dg_rule line = new Dg_rule(-1, -1, -1, Dg_rule.Tid_rule, Bry_.new_ascii_("key"), score, Dg_word.Ary_new_by_str_ary(words));
+		Dg_rule line = new Dg_rule(-1, -1, -1, Dg_rule.Tid_rule, Bry_.new_a7("key"), score, Dg_word.Ary_new_by_str_ary(words));
 		rule_list.Add(line);
 	}
 	public void Test_match_many_y(String... words) {Test_match_many(Bool_.Y, words);}
@@ -49,10 +49,10 @@ class Dg_match_mgr_fxt {
 		match_mgr.Clear();
 		int rule_list_len = rule_list.Count();
 		for (int j = 0; j < rule_list_len; ++j) {
-			Dg_rule rule = (Dg_rule)rule_list.FetchAt(j);
+			Dg_rule rule = (Dg_rule)rule_list.Get_at(j);
 			match_mgr.Init_by_rule(rule);
 		}
-		byte[] word_bry = Bry_.new_utf8_(word_str);
+		byte[] word_bry = Bry_.new_u8(word_str);
 		Tfds.Eq(expd, match_mgr.Match(1, 101, 0, Bry_.Empty, Bry_.Empty, null, word_bry), (expd ? "pass:" : "fail:") + word_str);
 	}
 }

@@ -68,7 +68,7 @@ class Dsv_mok_fxt {
 	public Mok_str_itm itm_str_(String... flds) {return new Mok_str_itm(flds);}
 	public Mok_int_itm itm_int_(String fld_0, int fld_1, int fld_2) {return new Mok_int_itm(fld_0, fld_1, fld_2);}
 	public void Test_load(String src, Mok_mgr_base mgr, XtoStrAble... expd) {
-		mgr.Load_by_bry(Bry_.new_utf8_(src));
+		mgr.Load_by_bry(Bry_.new_u8(src));
 		Tfds.Eq_ary_str(expd, mgr.Itms());
 	}
 }
@@ -83,10 +83,10 @@ class Mok_str_mgr extends Mok_mgr_base {
 		this.flds_len = flds_len;
 	}
 	public void Clear() {itms.Clear();}
-	@Override public XtoStrAble[] Itms() {return (XtoStrAble[])itms.Xto_ary(XtoStrAble.class);} private ListAdp itms = ListAdp_.new_();
-	private ListAdp flds = ListAdp_.new_();
+	@Override public XtoStrAble[] Itms() {return (XtoStrAble[])itms.To_ary(XtoStrAble.class);} private List_adp itms = List_adp_.new_();
+	private List_adp flds = List_adp_.new_();
 	@Override public boolean Write_bry(Dsv_tbl_parser parser, int fld_idx, byte[] src, int bgn, int end) {
-		flds.Add(String_.new_utf8_(src, bgn, end));
+		flds.Add(String_.new_u8(src, bgn, end));
 		return true;
 	}
 	@Override public Dsv_fld_parser[] Fld_parsers() {
@@ -96,7 +96,7 @@ class Mok_str_mgr extends Mok_mgr_base {
 		return rv;
 	}
 	@Override public void Commit_itm(Dsv_tbl_parser parser, int pos) {
-		Mok_str_itm itm = new Mok_str_itm((String[])flds.Xto_ary_and_clear(String.class));
+		Mok_str_itm itm = new Mok_str_itm((String[])flds.To_ary_and_clear(String.class));
 		itms.Add(itm);
 	}
 }

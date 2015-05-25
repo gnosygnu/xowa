@@ -17,11 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.cache; import gplx.*;
 public class Gfo_cache_mgr_base {
-	private OrderedHash hash = OrderedHash_.new_bry_();
+	private Ordered_hash hash = Ordered_hash_.new_bry_();
 	public int Compress_max() {return compress_max;} public void Compress_max_(int v) {compress_max = v;} private int compress_max = 16;
 	public int Compress_to() {return compress_to;} public void Compress_to_(int v) {compress_to = v;} private int compress_to = 8;
 	protected Object Base_get_or_null(byte[] key) {
-		Object rv_obj = hash.Fetch(key);
+		Object rv_obj = hash.Get_by(key);
 		return rv_obj == null ? null : ((Gfo_cache_itm)rv_obj).Val();
 	}
 	protected void Base_add(byte[] key, Object val) {
@@ -33,15 +33,15 @@ public class Gfo_cache_mgr_base {
 		hash.Del(key);
 	}
 	public void Compress() {
-		hash.SortBy(Gfo_cache_itm_comparer.Touched_asc);
+		hash.Sort_by(Gfo_cache_itm_comparer.Touched_asc);
 		int del_len = hash.Count() - compress_to;
-		ListAdp del_list = ListAdp_.new_();
+		List_adp del_list = List_adp_.new_();
 		for (int i = 0; i < del_len; i++) {
-			Gfo_cache_itm itm = (Gfo_cache_itm)hash.FetchAt(i);
+			Gfo_cache_itm itm = (Gfo_cache_itm)hash.Get_at(i);
 			del_list.Add(itm);
 		}
 		for (int i = 0; i < del_len; i++) {
-			Gfo_cache_itm itm = (Gfo_cache_itm)del_list.FetchAt(i);
+			Gfo_cache_itm itm = (Gfo_cache_itm)del_list.Get_at(i);
 			hash.Del(itm.Key());
 		}
 	}

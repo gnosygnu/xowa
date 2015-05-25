@@ -25,7 +25,7 @@ public class Xol_duration_mgr {
 		Array_.Sort(intervals, Xol_duration_itm_sorter._);
 		int intervals_len = intervals.length;
 		long val = seconds;
-		ListAdp rv = ListAdp_.new_();
+		List_adp rv = List_adp_.new_();
 		for (int i = 0; i < intervals_len; i++) {
 			Xol_duration_itm itm = intervals[i];
 			long itm_seconds = itm.Seconds();
@@ -37,7 +37,7 @@ public class Xol_duration_mgr {
 				rv.Add(new Xol_interval_itm(itm, val));
 			}
 		}
-		return (Xol_interval_itm[])rv.Xto_ary(Xol_interval_itm.class);
+		return (Xol_interval_itm[])rv.To_ary(Xol_interval_itm.class);
 	}
 	public byte[] Format_durations(Xop_ctx ctx, long seconds, Xol_duration_itm[] ary) {
 		if (interval_msgs == null) Format_durations_init();
@@ -63,7 +63,7 @@ public class Xol_duration_mgr {
 			byte[] msg_key = Bry_.Add(Bry_duration, itm.Name_bry());
 			interval_msgs[i] = msg_mgr.Itm_by_key_or_new(msg_key);
 		}
-	}	private static final byte[] Bry_duration = Bry_.new_ascii_("duration-");
+	}	private static final byte[] Bry_duration = Bry_.new_a7("duration-");
 	private void List_to_str_init() {
 		Xol_msg_mgr msg_mgr = lang.Msg_mgr();
 		Msg_and = msg_mgr.Val_by_str_or_empty("and");

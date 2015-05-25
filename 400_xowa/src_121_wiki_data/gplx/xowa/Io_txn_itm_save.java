@@ -48,7 +48,7 @@ class Io_txn_mgr {
 	}
 	public boolean Commit() {
 		int len = list.Count();
-		Io_txn_itm[] itms = (Io_txn_itm[])list.Xto_ary(Io_txn_itm.class);
+		Io_txn_itm[] itms = (Io_txn_itm[])list.To_ary(Io_txn_itm.class);
 		for (int i = 0; i < len; i++) {
 			Io_txn_itm itm = itms[i];
 			itm.Txn_init(tmp_dir);
@@ -63,5 +63,5 @@ class Io_txn_mgr {
 		}
 		return true;
 	}
-	ListAdp list = ListAdp_.new_();
+	List_adp list = List_adp_.new_();
 }

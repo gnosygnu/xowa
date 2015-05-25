@@ -20,7 +20,7 @@ import gplx.core.primitives.*; import gplx.xowa.urls.encoders.*;
 import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.hdrs.*;
 public class Xow_hdr_mgr {
 	private final Url_encoder_mgr encoder_mgr; private final Xoae_page page;
-	private final HashAdp hdrs_hash = HashAdp_.new_(); private final Bry_bfr hdrs_bfr = Bry_bfr.reset_(255); private final Bry_obj_ref hdrs_ref = Bry_obj_ref.null_();
+	private final Hash_adp hdrs_hash = Hash_adp_.new_(); private final Bry_bfr hdrs_bfr = Bry_bfr.reset_(255); private final Bry_obj_ref hdrs_ref = Bry_obj_ref.null_();
 	private Xop_hdr_tkn[] hdrs_ary = new Xop_hdr_tkn[0]; private int hdrs_max, hdrs_len;
 	public Xow_hdr_mgr(Xoae_page page, Url_encoder_mgr encoder_mgr) {this.page = page; this.encoder_mgr = encoder_mgr;}
 	public boolean Toc_enabled() {
@@ -65,7 +65,7 @@ public class Xow_hdr_mgr {
 		Url_encoder encoder = encoder_mgr.Id();
 		encoder.Encode(enc_bfr, raw_bfr.Bfr(), 0, raw_bfr.Len());
 		byte[] hdrs_id = enc_bfr.Xto_bry();
-		Object o = hdrs_hash.Fetch(hdrs_ref.Val_(hdrs_id));
+		Object o = hdrs_hash.Get_by(hdrs_ref.Val_(hdrs_id));
 		if (o != null) {
 			Xop_hdr_tkn hdr_0 = (Xop_hdr_tkn)o;
 			enc_bfr.Add_byte(Byte_ascii.Underline).Add_int_variable(hdr_0.Hdr_html_dupe_idx_next());

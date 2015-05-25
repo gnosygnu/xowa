@@ -25,7 +25,7 @@ public class Xowd_page_tbl_tst {
 	}
 }
 class Xowd_page_tbl_fxt {
-	public void Test_find_search_end(String val, String expd) {Tfds.Eq(expd, String_.new_utf8_(Find_search_end(Bry_.new_utf8_(val))));}
+	public void Test_find_search_end(String val, String expd) {Tfds.Eq(expd, String_.new_u8(Find_search_end(Bry_.new_u8(val))));}
 	private static byte[] Find_search_end(byte[] orig) {	// NOTE: moved from old Xowd_page_tbl; is probably obsolete
 		byte[] rv = Bry_.Copy(orig);
 		int rv_len = rv.length;

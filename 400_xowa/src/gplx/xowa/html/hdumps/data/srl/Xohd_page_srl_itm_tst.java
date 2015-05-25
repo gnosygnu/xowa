@@ -44,7 +44,7 @@ class Xohd_page_srl_itm_fxt {
 	public Xohd_page_srl_itm_mok Make_srl_display_ttl(String s)	{return Make_srl(Xohd_page_srl_itm_.Tid_display_ttl, s);}
 	public Xohd_page_srl_itm_mok Make_srl_content_sub(String s)	{return Make_srl(Xohd_page_srl_itm_.Tid_content_sub, s);}
 	public Xohd_page_srl_itm_mok Make_srl_sidebar_div(String s)	{return Make_srl(Xohd_page_srl_itm_.Tid_sidebar_div, s);}
-	public Xohd_page_srl_itm_mok Make_srl(byte tid, String s)		{return new Xohd_page_srl_itm_mok(tid, Bry_.new_utf8_(s));}
+	public Xohd_page_srl_itm_mok Make_srl(byte tid, String s)		{return new Xohd_page_srl_itm_mok(tid, Bry_.new_u8(s));}
 	public Xohd_page_srl_itm_mok Make_srl_html_modules(boolean... v) {
 		return new Xohd_page_srl_itm_mok(Xohd_page_srl_itm_.Tid_html_module, new byte[] {Xohd_page_srl_itm__html_module.Calc_flag(v[0], v[1], v[2], v[3])});
 	}
@@ -58,11 +58,11 @@ class Xohd_page_srl_itm_fxt {
 	}
 }
 class Xog_page_bldr {
-	public byte[] Body() {return body;} public Xog_page_bldr Body_(String v) {body = Bry_.new_utf8_(v); return this;} private byte[] body;
+	public byte[] Body() {return body;} public Xog_page_bldr Body_(String v) {body = Bry_.new_u8(v); return this;} private byte[] body;
 	public boolean[] Html_modules() {return html_modules;} public Xog_page_bldr Html_modules_(boolean... v) {html_modules = v; return this;} private boolean[] html_modules;
-	public byte[] Display_ttl() {return display_ttl;} public Xog_page_bldr Display_ttl_(String v) {display_ttl = Bry_.new_utf8_(v); return this;} private byte[] display_ttl;
-	public byte[] Content_sub() {return content_sub;} public Xog_page_bldr Content_sub_(String v) {content_sub = Bry_.new_utf8_(v); return this;} private byte[] content_sub;
-	public byte[] Sidebar_div() {return sidebar_div;} public Xog_page_bldr Sidebar_div_(String v) {sidebar_div = Bry_.new_utf8_(v); return this;} private byte[] sidebar_div;
+	public byte[] Display_ttl() {return display_ttl;} public Xog_page_bldr Display_ttl_(String v) {display_ttl = Bry_.new_u8(v); return this;} private byte[] display_ttl;
+	public byte[] Content_sub() {return content_sub;} public Xog_page_bldr Content_sub_(String v) {content_sub = Bry_.new_u8(v); return this;} private byte[] content_sub;
+	public byte[] Sidebar_div() {return sidebar_div;} public Xog_page_bldr Sidebar_div_(String v) {sidebar_div = Bry_.new_u8(v); return this;} private byte[] sidebar_div;
 	public Xog_page Bld() {
 		Xog_page rv = new Xog_page();
 		rv.Page_body_(body);

@@ -37,7 +37,7 @@ class TdbUpdateWkr implements Db_qryWkr {
 	}
 	void UpdateRow(Db_qry_update cmd, GfoNde row) {
 		for (int i = 0; i < cmd.Args().Count(); i++) {
-			KeyVal p = (KeyVal)cmd.Args().FetchAt(i);
+			KeyVal p = (KeyVal)cmd.Args().Get_at(i);
 			Db_arg prm = (Db_arg)p.Val();
 			row.Write(p.Key(), prm.Val());
 		}

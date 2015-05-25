@@ -19,7 +19,7 @@ package gplx.xowa; import gplx.*;
 import org.junit.*;
 public class Xow_wiki_tst {
 	@Before public void init() {fxt.Clear();} private Xow_wiki_fxt fxt = new Xow_wiki_fxt();
-	@Test   public void GetPageByTtl() {	// PURPOSE.fix: unknown page causes null reference error in scribunto; DATE:2013-08-27
+	@Test   public void Load_page_by_ttl() {	// PURPOSE.fix: unknown page causes null reference error in scribunto; DATE:2013-08-27
 		gplx.xowa.xtns.scribunto.Scrib_core.Core_new_(fxt.Fxt().App(), fxt.Fxt().Ctx());
 		fxt.Test_getPageByTtl("Does_not_exist", null);
 	}
@@ -31,11 +31,11 @@ class Xow_wiki_fxt {
 	public Xop_fxt Fxt() {return fxt;} private Xop_fxt fxt;
 	public void Test_getPageByTtl(String ttl_str, String expd) {
 		Xowe_wiki wiki = fxt.Wiki();
-		byte[] ttl_bry = Bry_.new_ascii_(ttl_str);
+		byte[] ttl_bry = Bry_.new_a7(ttl_str);
 		Xoa_url url = Xoa_url.blank_().Raw_(ttl_bry);
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry);
-		Xoae_page actl = fxt.Wiki().GetPageByTtl(url, ttl);
+		Xoae_page actl = fxt.Wiki().Load_page_by_ttl(url, ttl);
 		if (expd == null) Tfds.Eq_true(actl.Missing());
-		else Tfds.Eq(expd, String_.new_utf8_(actl.Ttl().Raw()));
+		else Tfds.Eq(expd, String_.new_u8(actl.Ttl().Raw()));
 	}
 }

@@ -52,12 +52,12 @@ public class Xosrv_server implements GfoInvkAble {
 			long time_bgn = Env_.TickCount();
 			last_cmd = time_bgn;
 			byte[] msg_bry = msg.Msg_text();
-			String msg_str = String_.new_utf8_(msg_bry);
+			String msg_str = String_.new_u8(msg_bry);
 			app.Usr_dlg().Note_many("", "", "processing cmd: ~{0}", msg_str);
 			String rsp_str = null;
 			if		(Bry_.Eq(cmd_name, Xosrv_cmd_types.Cmd_exec)) 	{rsp_name = Xosrv_cmd_types.Cmd_pass; rsp_str = Exec_cmd(msg_str);}
 			else if	(Bry_.Eq(cmd_name, Xosrv_cmd_types.Js_exec)) 	{rsp_name = Xosrv_cmd_types.Js_pass;  rsp_str = Exec_js(msg.Sender(), msg_bry);}
-			Xosrv_msg rsp_msg = Xosrv_msg.new_(rsp_name, msg.Msg_id(), msg.Recipient(), msg.Sender(), msg.Msg_date(), Bry_.new_utf8_(rsp_str));
+			Xosrv_msg rsp_msg = Xosrv_msg.new_(rsp_name, msg.Msg_id(), msg.Recipient(), msg.Sender(), msg.Msg_date(), Bry_.new_u8(rsp_str));
 			app.Usr_dlg().Note_many("", "", "sending rsp: bytes=~{0}", String_.Len(rsp_str));
 			wtr.Write(rsp_msg);		
 			app.Usr_dlg().Note_many("", "", "rsp sent: elapsed=~{0}", TimeSpanAdp_.fracs_(Env_.TickCount() - time_bgn).XtoStrUiAbbrv());
@@ -79,7 +79,7 @@ public class Xosrv_server implements GfoInvkAble {
 			trace.Val_("json_write: " + Object_.Xto_str_strict_or_null_mark(rv_obj));
 			return json_wtr.Write_root(Bry_xowa_js_result, rv_obj).Bld_as_str();
 		} catch (Exception e) {throw Err_.err_(e, "exec_js error: {0} {1} {2}", trace, msg_text, Err_.Message_gplx(e));}
-	}	private Xosrv_xowa_exec_parser xowa_exec_parser = new Xosrv_xowa_exec_parser(); private Json_doc_srl json_wtr = new Json_doc_srl(); private static final byte[] Bry_xowa_js_result = Bry_.new_ascii_("xowa_js_result");
+	}	private Xosrv_xowa_exec_parser xowa_exec_parser = new Xosrv_xowa_exec_parser(); private Json_doc_srl json_wtr = new Json_doc_srl(); private static final byte[] Bry_xowa_js_result = Bry_.new_a7("xowa_js_result");
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_rdr_port))				return rdr_port;
 		else if	(ctx.Match(k, Invk_rdr_port_))				rdr_port = m.ReadInt("v");
@@ -113,13 +113,13 @@ class Xosrv_xowa_exec_parser {
 	private Object Parse_ary_itm(Json_itm itm) {
 		switch (itm.Tid()) {
 			case Json_itm_.Tid_string:
-				return String_.new_utf8_(itm.Data_bry());
+				return String_.new_u8(itm.Data_bry());
 			case Json_itm_.Tid_array: 
 				Json_itm_ary ary = (Json_itm_ary)itm;
 				int len = ary.Subs_len();
 				String[] rv = new String[len];
 				for (int i = 0; i < len; i++)
-					rv[i] = String_.new_utf8_(ary.Subs_get_at(i).Data_bry());
+					rv[i] = String_.new_u8(ary.Subs_get_at(i).Data_bry());
 				return rv;
 			default:
 				throw Err_.unhandled(itm.Tid());

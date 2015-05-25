@@ -20,7 +20,7 @@ import gplx.ios.*; import gplx.xowa.html.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 import gplx.xowa.files.downloads.*;
 public class Xoa_css_extractor {	
-	public IoEngine_xrg_downloadFil Download_xrg() {return download_xrg;} private IoEngine_xrg_downloadFil download_xrg = Io_mgr._.DownloadFil_args("", Io_url_.Null);	
+	public IoEngine_xrg_downloadFil Download_xrg() {return download_xrg;} private IoEngine_xrg_downloadFil download_xrg = Io_mgr.I.DownloadFil_args("", Io_url_.Empty);	
 	public Xoa_css_extractor Wiki_domain_(byte[] v) {wiki_domain = v; return this;} private byte[] wiki_domain; 
 	public Xoa_css_extractor Usr_dlg_(Gfo_usr_dlg v) {usr_dlg = v; return this;} private Gfo_usr_dlg usr_dlg;
 	public Xoa_css_extractor Failover_dir_(Io_url v) {failover_dir = v; return this;} private Io_url failover_dir;
@@ -37,9 +37,9 @@ public class Xoa_css_extractor {
 		this.usr_dlg = app.Usr_dlg();
 		Xof_download_wkr download_wkr = app.Wmf_mgr().Download_wkr();
 		this.download_xrg = download_wkr.Download_xrg();
-		css_img_downloader = new Xoa_css_img_downloader().Ctor(usr_dlg, download_wkr, Bry_.new_utf8_(protocol_prefix));
+		css_img_downloader = new Xoa_css_img_downloader().Ctor(usr_dlg, download_wkr, Bry_.new_u8(protocol_prefix));
 		failover_dir = app.Fsys_mgr().Bin_any_dir().GenSubDir_nest("html", "xowa", "import");
-		url_encoder = Xoa_app_.Utl__encoder_mgr().Url();
+		url_encoder = Xoa_app_.Utl__encoder_mgr().Http_url();
 	}
 	public void Install(Xow_wiki wiki, String css_key) {
 		try {
@@ -47,8 +47,8 @@ public class Xoa_css_extractor {
 			Io_url css_comm_fil = wiki_html_dir.GenSubFil(Css_common_name);
 			Io_url css_wiki_fil = wiki_html_dir.GenSubFil(Css_wiki_name);
 			wiki.Html__page_wtr_mgr().Init_css_urls(css_comm_fil, css_wiki_fil);
-			if (wiki.Domain_tid() == Xow_domain_.Tid_int_home || Env_.Mode_testing()) return;		// NOTE: do not download if home_wiki; also needed for TEST
-			if (Io_mgr._.ExistsFil(css_wiki_fil)) return;											// css file exists; nothing to generate
+			if (wiki.Domain_tid() == Xow_domain_type_.Tid_home || Env_.Mode_testing()) return;		// NOTE: do not download if home_wiki; also needed for TEST
+			if (Io_mgr.I.ExistsFil(css_wiki_fil)) return;											// css file exists; nothing to generate
 			wiki.App().Usr_dlg().Log_many("", "", "generating css for '~{0}'", wiki.Domain_str());
 			if (css_key != null) {
 				if (Install_by_db(wiki, wiki_html_dir, css_key)) return;
@@ -63,7 +63,7 @@ public class Xoa_css_extractor {
 	}
 	private void Install_by_wmf(Xowe_wiki wiki, Io_url wiki_html_dir) {
 		opt_download_css_common = wiki.Appe().Setup_mgr().Dump_mgr().Css_commons_download();
-		if (!wiki.Appe().User().Cfg_mgr().Security_mgr().Web_access_enabled()) opt_download_css_common = false;	// if !web_access_enabled, don't download
+		if (!wiki.Appe().Usere().Cfg_mgr().Security_mgr().Web_access_enabled()) opt_download_css_common = false;	// if !web_access_enabled, don't download
 		this.wiki_domain = wiki.Domain_bry();
 		mainpage_url = "https://" + wiki.Domain_str();	// NOTE: cannot reuse protocol_prefix b/c "//" needs to be added manually; protocol_prefix is used for logo and images which have form of "//domain/image.png"; changed to https; DATE:2015-02-17
 		if (page_fetcher == null) page_fetcher = new Xow_page_fetcher_wiki();
@@ -98,7 +98,7 @@ public class Xoa_css_extractor {
 	}
 	private void Css_common_failover() {
 		Io_url trg_fil = wiki_html_dir.GenSubFil(Css_common_name);
-		Io_mgr._.CopyFil(Css_common_failover_url(), trg_fil, true);
+		Io_mgr.I.CopyFil(Css_common_failover_url(), trg_fil, true);
 		css_img_downloader.Chk(wiki_domain, trg_fil);
 	}
 	private void Css_common_download() {
@@ -106,19 +106,19 @@ public class Xoa_css_extractor {
 		Io_url trg_fil = wiki_html_dir.GenSubFil(Css_common_name);
 		css_stylesheet_common_missing = !Css_scrape_setup();
 		if (css_stylesheet_common_missing)
-			Io_mgr._.CopyFil(Css_common_failover_url(), trg_fil, true);
+			Io_mgr.I.CopyFil(Css_common_failover_url(), trg_fil, true);
 		else 
 			css_img_downloader.Chk(wiki_domain, trg_fil);
 	}
 	private Io_url Css_common_failover_url() {
-		Io_url css_commons_url = failover_dir.GenSubDir("xowa_common_override").GenSubFil_ary("xowa_common_", String_.new_utf8_(wiki_code), ".css");
-		if (Io_mgr._.ExistsFil(css_commons_url)) return css_commons_url;	// specific css exists for wiki; use it; EX: xowa_common_wiki_mediawikiwiki.css
+		Io_url css_commons_url = failover_dir.GenSubDir("xowa_common_override").GenSubFil_ary("xowa_common_", String_.new_u8(wiki_code), ".css");
+		if (Io_mgr.I.ExistsFil(css_commons_url)) return css_commons_url;	// specific css exists for wiki; use it; EX: xowa_common_wiki_mediawikiwiki.css
 		return failover_dir.GenSubFil(lang_is_ltr ? Css_common_name_ltr : Css_common_name_rtl);
 	}
 	public void Css_wiki_setup() {
 		boolean css_stylesheet_wiki_missing = true;
 		Io_url trg_fil = wiki_html_dir.GenSubFil(Css_wiki_name);
-		if (Io_mgr._.ExistsFil(trg_fil)) return;	// don't download if already there
+		if (Io_mgr.I.ExistsFil(trg_fil)) return;	// don't download if already there
 		css_stylesheet_wiki_missing = !Css_wiki_generate(trg_fil);
 		if (css_stylesheet_wiki_missing)
 			Failover(trg_fil);
@@ -131,11 +131,11 @@ public class Xoa_css_extractor {
 		Css_wiki_generate_section(bfr, Ttl_vector_css);
 		byte[] bry = bfr.Xto_bry_and_clear();
 		bry = Bry_.Replace(bry, gplx.xowa.bldrs.xmls.Xob_xml_parser_.Bry_tab_ent, gplx.xowa.bldrs.xmls.Xob_xml_parser_.Bry_tab);
-		Io_mgr._.SaveFilBry(trg_fil, bry);
+		Io_mgr.I.SaveFilBry(trg_fil, bry);
 		return true;
-	}	private static final byte[] Ttl_common_css = Bry_.new_ascii_("Common.css"), Ttl_vector_css = Bry_.new_ascii_("Vector.css");
+	}	private static final byte[] Ttl_common_css = Bry_.new_a7("Common.css"), Ttl_vector_css = Bry_.new_a7("Vector.css");
 	private boolean Css_wiki_generate_section(Bry_bfr bfr, byte[] ttl) {
-		byte[] page = page_fetcher.Fetch(Xow_ns_.Id_mediawiki, ttl);
+		byte[] page = page_fetcher.Get_by(Xow_ns_.Id_mediawiki, ttl);
 		if (page == null) return false;
 		if (bfr.Len() != 0) bfr.Add_byte_nl().Add_byte_nl();	// add "\n\n" between sections; !=0 checks against first
 		Css_wiki_section_hdr.Bld_bfr_many(bfr, ttl);			// add "/*XOWA:MediaWiki:Common.css*/\n"
@@ -145,7 +145,7 @@ public class Xoa_css_extractor {
 	public void Logo_setup() {
 		boolean logo_missing = true;
 		Io_url logo_url = wiki_html_dir.GenSubFil("logo.png");
-		if (Io_mgr._.ExistsFil(logo_url)) return;	// don't download if already there
+		if (Io_mgr.I.ExistsFil(logo_url)) return;	// don't download if already there
 		logo_missing = !Logo_download(logo_url);
 		if (logo_missing)
 			Failover(logo_url);
@@ -165,7 +165,7 @@ public class Xoa_css_extractor {
 	}
 	private boolean Logo_copy_from_css(Io_url trg_fil) {
 		Io_url commons_file = wiki_html_dir.GenSubFil(Css_common_name);
-		byte[] commons_src = Io_mgr._.LoadFilBry(commons_file);
+		byte[] commons_src = Io_mgr.I.LoadFilBry(commons_file);
 		int bgn_pos = Bry_finder.Find_fwd(commons_src, Bry_mw_wiki_logo);				if (bgn_pos == Bry_finder.Not_found) return false;
 		bgn_pos += Bry_mw_wiki_logo.length;
 		int end_pos = Bry_finder.Find_fwd(commons_src, Byte_ascii.Quote, bgn_pos + 1);	if (end_pos == Bry_finder.Not_found) return false;
@@ -173,10 +173,10 @@ public class Xoa_css_extractor {
 		src_bry = Xob_url_fixer.Fix(wiki_domain, src_bry, src_bry.length);
 		if (wiki_html_dir.Info().DirSpr_byte() == Byte_ascii.Backslash)
 			src_bry = Bry_.Replace(src_bry, Byte_ascii.Slash, Byte_ascii.Backslash);
-		Io_url src_fil = wiki_html_dir.GenSubFil(String_.new_utf8_(src_bry));
-		Io_mgr._.CopyFil(src_fil, trg_fil, true);
+		Io_url src_fil = wiki_html_dir.GenSubFil(String_.new_u8(src_bry));
+		Io_mgr.I.CopyFil(src_fil, trg_fil, true);
 		return true;
-	}	private static final byte[] Bry_mw_wiki_logo = Bry_.new_ascii_(".mw-wiki-logo{background-image:url(\"");
+	}	private static final byte[] Bry_mw_wiki_logo = Bry_.new_a7(".mw-wiki-logo{background-image:url(\"");
 	private String Logo_find_src() {
 		if (mainpage_html == null) return null;
 		int main_page_html_len = mainpage_html.length;
@@ -186,9 +186,9 @@ public class Xoa_css_extractor {
 		logo_bgn += Logo_find_end.length;
 		int logo_end = Bry_finder.Find_fwd(mainpage_html, Byte_ascii.Paren_end, logo_bgn, main_page_html_len);	if (logo_bgn == Bry_.NotFound) return null;
 		byte[] logo_bry = Bry_.Mid(mainpage_html, logo_bgn, logo_end);
-		return protocol_prefix + String_.new_utf8_(logo_bry);
+		return protocol_prefix + String_.new_u8(logo_bry);
 	}
-	private static final byte[] Logo_find_bgn = Bry_.new_ascii_("<div id=\"p-logo\""), Logo_find_end = Bry_.new_ascii_("background-image: url(");
+	private static final byte[] Logo_find_bgn = Bry_.new_a7("<div id=\"p-logo\""), Logo_find_end = Bry_.new_a7("background-image: url(");
 	public boolean Mainpage_download() {
 		mainpage_html = Mainpage_download_html();
 		return mainpage_html != null;
@@ -204,18 +204,18 @@ public class Xoa_css_extractor {
 	}	
 	private void Failover(Io_url trg_fil) {
 		usr_dlg.Note_many("", "", "copying failover file: trg_fil=~{0};", trg_fil.Raw());
-		Io_mgr._.CopyFil(failover_dir.GenSubFil(trg_fil.NameAndExt()), trg_fil, true);		
+		Io_mgr.I.CopyFil(failover_dir.GenSubFil(trg_fil.NameAndExt()), trg_fil, true);		
 	}
 	public boolean Css_scrape_setup() {
 		Io_url trg_fil = wiki_html_dir.GenSubFil(Css_common_name);
-		// if (Io_mgr._.ExistsFil(trg_fil)) return;	// don't download if already there; DELETED: else main_page is not scraped for all stylesheet links; simple.d: fails; DATE:2014-02-11
+		// if (Io_mgr.I.ExistsFil(trg_fil)) return;	// don't download if already there; DELETED: else main_page is not scraped for all stylesheet links; simple.d: fails; DATE:2014-02-11
 		byte[] css_url = Css_scrape();
 		if (css_url == null) {
 			Css_common_failover();
 			return false;
 		}
 		else {
-			Io_mgr._.SaveFilBry(trg_fil, css_url);
+			Io_mgr.I.SaveFilBry(trg_fil, css_url);
 			css_img_downloader.Chk(wiki_domain, trg_fil);
 			return true;
 		}
@@ -226,24 +226,24 @@ public class Xoa_css_extractor {
 		return Css_scrape_download(css_urls);
 	}
 	private String[] Css_scrape_urls(byte[] raw) {
-		ListAdp rv = ListAdp_.new_();
+		List_adp rv = List_adp_.new_();
 		int raw_len = raw.length;
 		int prv_pos = 0; 
 		int css_find_bgn_len = Css_find_bgn.length;
-		byte[] protocol_prefix_bry = Bry_.new_utf8_(protocol_prefix);
+		byte[] protocol_prefix_bry = Bry_.new_u8(protocol_prefix);
 		while (true) {
 			int url_bgn = Bry_finder.Find_fwd(raw, Css_find_bgn, prv_pos);	 				if (url_bgn == Bry_.NotFound) break;	// nothing left; stop
 			url_bgn += css_find_bgn_len;
-			int url_end = Bry_finder.Find_fwd(raw, Byte_ascii.Quote, url_bgn, raw_len); 	if (url_end == Bry_.NotFound) {usr_dlg.Warn_many("", "main_page.css_parse", "could not find css; pos='~{0}' text='~{1}'", url_bgn, String_.new_utf8_len_safe_(raw, url_bgn, url_bgn + 32)); break;}
+			int url_end = Bry_finder.Find_fwd(raw, Byte_ascii.Quote, url_bgn, raw_len); 	if (url_end == Bry_.NotFound) {usr_dlg.Warn_many("", "main_page.css_parse", "could not find css; pos='~{0}' text='~{1}'", url_bgn, String_.new_u8_by_len(raw, url_bgn, url_bgn + 32)); break;}
 			byte[] css_url_bry = Bry_.Mid(raw, url_bgn, url_end);
 			css_url_bry = Bry_.Replace(css_url_bry, Css_amp_find, Css_amp_repl);		// &amp; -> &
 			css_url_bry = url_encoder.Decode(css_url_bry);								// %2C ->		%7C -> |
 			css_url_bry = Bry_.Add(protocol_prefix_bry, css_url_bry);
-			rv.Add(String_.new_utf8_(css_url_bry));
+			rv.Add(String_.new_u8(css_url_bry));
 			prv_pos = url_end;
 		}
-		return rv.XtoStrAry();
-	}	private static final byte[] Css_find_bgn = Bry_.new_ascii_("<link rel=\"stylesheet\" href=\""), Css_amp_find = Bry_.new_ascii_("&amp;"), Css_amp_repl = Bry_.new_ascii_("&");
+		return rv.To_str_ary();
+	}	private static final byte[] Css_find_bgn = Bry_.new_a7("<link rel=\"stylesheet\" href=\""), Css_amp_find = Bry_.new_a7("&amp;"), Css_amp_repl = Bry_.new_a7("&");
 	private byte[] Css_scrape_download(String[] css_urls) {
 		int css_urls_len = css_urls.length;
 		Bry_bfr tmp_bfr = Bry_bfr.new_();

@@ -20,7 +20,7 @@ import org.junit.*; import gplx.core.primitives.*; import gplx.dbs.*;
 import gplx.xowa.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.caches.*;
 import gplx.xowa2.apps.*; import gplx.xowa2.wikis.*; import gplx.xowa.files.origs.*;
 public class Xofv_file_mgr_tst {
-	@Before public void init() {fxt.Clear();} private final Xofv_file_mgr_fxt fxt = new Xofv_file_mgr_fxt();
+//		@Before public void init() {fxt.Clear();} private final Xofv_file_mgr_fxt fxt = new Xofv_file_mgr_fxt();
 	@After  public void term() {Gfo_usr_dlg_.I = Gfo_usr_dlg_.Noop;}
 	@Test  public void Stub() {}
 //		@Test   public void Thumb() {
@@ -83,63 +83,34 @@ public class Xofv_file_mgr_tst {
 //				;
 //		}
 }
-class Xofv_file_mgr_fxt {
-	private Xofv_file_mgr file_mgr;
-	public Xof_xfer_mkr Mkr_xfer() {return mkr_xfer;} private final Xof_xfer_mkr mkr_xfer = new Xof_xfer_mkr();
-	public Xof_orig_itm_mkr Mkr_orig() {return mkr_orig;} private final Xof_orig_itm_mkr mkr_orig = new Xof_orig_itm_mkr();
-	public Xof_fsdb_mkr Mkr_fsdb() {return mkr_fsdb;} private final Xof_fsdb_mkr mkr_fsdb = new Xof_fsdb_mkr();		
-	public Xou_cache_itm_mkr Mkr_cache() {return mkr_cache;} private final Xou_cache_itm_mkr mkr_cache = new Xou_cache_itm_mkr();
-	public void Clear() {
-		file_mgr = new Xofv_file_mgr(Bry_.Empty);
-		Clear_repos();
-	}
-	private void Clear_repos() {
-		Xofv_repo_mgr repo_mgr = file_mgr.Repo_mgr();
-		Io_url root_dir = Io_url_.mem_dir_("mem/xowa/file/");
-		Xofv_repo_itm repo_comm = Xofv_repo_itm.new_trg_fsys(Xofv_repo_itm.Tid_val_comm, Bry_.new_ascii_("comm"), root_dir.GenSubDir("comm"));
-		Xofv_repo_itm repo_wiki = Xofv_repo_itm.new_trg_fsys(Xofv_repo_itm.Tid_val_wiki, Bry_.new_ascii_("wiki"), root_dir.GenSubDir("wiki"));
-		repo_mgr.Add(repo_comm).Add(repo_wiki);
-		mkr_orig.Setup_repos(repo_comm, repo_wiki);
-		mkr_fsdb.Setup_repos(Bry_.new_ascii_("comm"), Bry_.new_ascii_("wiki"));
-	}
-	public Xofv_file_mgr_fxt Init_xfer_add(Xof_xfer_mkr mkr)	{file_mgr.Reg(mkr.Make()); return this;}
-	public Xofv_file_mgr_fxt Init_cache_add(Xou_cache_itm_mkr mkr)	{mkr.Make(file_mgr.Cache_mgr()); return this;}
-	public Xofv_file_mgr_fxt Init_fsys_add(String s) {Io_mgr._.SaveFilStr(s, ""); return this;}
-	public Xofv_file_mgr_fxt Exec_process_lnki() {file_mgr.Process_lnki(); return this;}
-	public Xofv_file_mgr_fxt Test_fsys_get(String path) {
-		Tfds.Eq_true(Io_mgr._.ExistsFil(Io_url_.mem_fil_(path)), "fsys: " + path);
-		return this;
-	}
-}
-class Xof_xfer_mkr {
-	private byte[] ttl_bry; private byte lnki_type; private int xfer_w, xfer_h; private int uid;
-	private byte[] redirect_bry; private double upright, thumbtime; private int page;
-	public Xof_xfer_mkr() {this.Reset();}
-	public Xof_xfer_mkr Upright_(double v) {upright = v; return this;}
-	private void Reset() {
-		redirect_bry = Bry_.Empty;
-		upright = Xop_lnki_tkn.Upright_null;
-		thumbtime = Xof_lnki_time.Null;
-		page = Xof_lnki_page.Null;
-	}
-	public Xof_xfer_mkr Init_thumb(int uid, String ttl_str, int xfer_w, int xfer_h) {
-		this.lnki_type = Xop_lnki_type.Id_thumb;
-		this.uid = uid; this.ttl_bry = Bry_.new_utf8_(ttl_str); this.xfer_w = xfer_w; this.xfer_h = xfer_h;
-		return this;
-	}
-	public Xof_xfer_mkr Init_none(int uid, String ttl_str) {
-		this.lnki_type = Xop_lnki_type.Id_none;
-		this.uid = uid; this.ttl_bry = Bry_.new_utf8_(ttl_str); this.xfer_w = Xof_img_size.Null; this.xfer_h = Xof_img_size.Null;
-		return this;
-	}
-	public Xof_xfer_itm Make() {
-		Xof_xfer_itm rv = new Xof_xfer_itm();
-		rv.Init_by_lnki(ttl_bry, redirect_bry, lnki_type, xfer_w, xfer_h, upright, thumbtime, page);
-		rv.Set__html_uid_tid(uid, Xof_html_elem.Tid_img);
-		this.Reset();
-		return rv;
-	}
-}
+//	class Xofv_file_mgr_fxt {
+//		private Xofv_file_mgr file_mgr;
+//		public Xof_xfer_mkr Mkr_xfer() {return mkr_xfer;} private final Xof_xfer_mkr mkr_xfer = new Xof_xfer_mkr();
+//		public Xof_orig_itm_mkr Mkr_orig() {return mkr_orig;} private final Xof_orig_itm_mkr mkr_orig = new Xof_orig_itm_mkr();
+//		public Xof_fsdb_mkr Mkr_fsdb() {return mkr_fsdb;} private final Xof_fsdb_mkr mkr_fsdb = new Xof_fsdb_mkr();		
+//		public Xou_cache_itm_mkr Mkr_cache() {return mkr_cache;} private final Xou_cache_itm_mkr mkr_cache = new Xou_cache_itm_mkr();
+//		public void Clear() {
+//			file_mgr = new Xofv_file_mgr(Bry_.Empty);
+//			Clear_repos();
+//		}
+//		private void Clear_repos() {
+//			Xofv_repo_mgr repo_mgr = file_mgr.Repo_mgr();
+//			Io_url root_dir = Io_url_.mem_dir_("mem/xowa/file/");
+//			Xofv_repo_itm repo_comm = Xofv_repo_itm.new_trg_fsys(Xofv_repo_itm.Tid_val_comm, Bry_.new_a7("comm"), root_dir.GenSubDir("comm"));
+//			Xofv_repo_itm repo_wiki = Xofv_repo_itm.new_trg_fsys(Xofv_repo_itm.Tid_val_wiki, Bry_.new_a7("wiki"), root_dir.GenSubDir("wiki"));
+//			repo_mgr.Add(repo_comm).Add(repo_wiki);
+//			mkr_orig.Setup_repos(repo_comm, repo_wiki);
+//			mkr_fsdb.Setup_repos(Bry_.new_a7("comm"), Bry_.new_a7("wiki"));
+//		}
+//		public Xofv_file_mgr_fxt Init_xfer_add(Xof_xfer_mkr mkr)	{file_mgr.Reg(mkr.Make()); return this;}
+//		public Xofv_file_mgr_fxt Init_cache_add(Xou_cache_itm_mkr mkr)	{mkr.Make(file_mgr.Cache_mgr()); return this;}
+//		public Xofv_file_mgr_fxt Init_fsys_add(String s) {Io_mgr.I.SaveFilStr(s, ""); return this;}
+//		public Xofv_file_mgr_fxt Exec_process_lnki() {file_mgr.Process_lnki(); return this;}
+//		public Xofv_file_mgr_fxt Test_fsys_get(String path) {
+//			Tfds.Eq_true(Io_mgr.I.ExistsFil(Io_url_.mem_fil_(path)), "fsys: " + path);
+//			return this;
+//		}
+//	}
 class Xof_orig_itm_mkr {
 	private byte[] ttl_bry; private int ext, orig_w, orig_h; private Xofv_repo_itm repo;
 	private byte[] redirect_bry;
@@ -154,8 +125,8 @@ class Xof_orig_itm_mkr {
 	public Xof_orig_itm_mkr Init_wiki(String ttl_str, int orig_w, int orig_h) {return Init(Bool_.N, ttl_str, null, orig_w, orig_h);}
 	private Xof_orig_itm_mkr Init(boolean repo_is_comm, String ttl_str, String redirect_str, int orig_w, int orig_h) {
 		repo = repo_is_comm ? repo_comm : repo_wiki;
-		this.ttl_bry = Bry_.new_utf8_(ttl_str); this.orig_w = orig_w; this.orig_h = orig_h;
-		this.redirect_bry = redirect_str == null ? Bry_.Empty : Bry_.new_utf8_(redirect_str);
+		this.ttl_bry = Bry_.new_u8(ttl_str); this.orig_w = orig_w; this.orig_h = orig_h;
+		this.redirect_bry = redirect_str == null ? Bry_.Empty : Bry_.new_u8(redirect_str);
 		this.ext = Xof_ext_.new_by_ttl_(ttl_bry).Id();
 		return this;
 	}
@@ -167,12 +138,12 @@ class Xof_orig_itm_mkr {
 class Xof_fsdb_mkr {
 	private byte[] repo_comm, repo_wiki, repo;
 	private byte[] ttl_bry; private byte lnki_type; private int file_w, file_h;
-	private double upright, thumbtime; private int page;
+	private double upright, time; private int page;
 	public Xof_fsdb_mkr() {this.Reset();}
 	public void Setup_repos(byte[] repo_comm, byte[] repo_wiki) {this.repo_comm = repo_comm; this.repo_wiki = repo_wiki;}
 	private void Reset() {
 		upright = Xop_lnki_tkn.Upright_null;
-		thumbtime = Xof_lnki_time.Null;
+		time = Xof_lnki_time.Null;
 		page = Xof_lnki_page.Null;
 	}
 	public Xof_fsdb_mkr Init_comm_thum(String ttl_str, int file_w, int file_h)	{return Init(Bool_.Y, Bool_.N, ttl_str, file_w, file_h);}
@@ -180,13 +151,13 @@ class Xof_fsdb_mkr {
 	public Xof_fsdb_mkr Init(boolean repo_is_commons, boolean file_is_orig, String ttl_str, int file_w, int file_h) {
 		this.lnki_type = file_is_orig ? Xop_lnki_type.Id_none : Xop_lnki_type.Id_thumb; 
 		this.repo = repo_is_commons ? repo_comm : repo_wiki;
-		this.ttl_bry = Bry_.new_utf8_(ttl_str);
+		this.ttl_bry = Bry_.new_u8(ttl_str);
 		this.file_w = file_w; this.file_h = file_h;
 		return this;
 	}
 	public Xof_fsdb_itm Make() {
 		Xof_fsdb_itm rv = new Xof_fsdb_itm();
-		rv.Ctor_by_lnki(ttl_bry, lnki_type, file_w, file_h, Xof_patch_upright_tid_.Tid_all, upright, thumbtime, page);
+		rv.Init_at_lnki(Xof_exec_tid.Tid_wiki_page, Bry_.new_a7("en.w"), ttl_bry, lnki_type, upright, file_w, file_h, time, page, Xof_patch_upright_tid_.Tid_all);
 		rv.Orig_repo_name_(repo);
 		this.Reset();
 		return rv;
@@ -202,8 +173,8 @@ class Xou_cache_itm_mkr {
 //			this.size = 1;
 	}
 	public Xou_cache_itm_mkr Init(String dir_str, String ttl_str, boolean is_orig, int w) {
-//			this.dir = Bry_.new_utf8_(dir_str);
-//			this.ttl = Bry_.new_utf8_(ttl_str);
+//			this.dir = Bry_.new_u8(dir_str);
+//			this.ttl = Bry_.new_u8(ttl_str);
 //			this.is_orig = is_orig;
 //			this.w = w;
 		return this;

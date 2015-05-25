@@ -20,9 +20,9 @@ import gplx.core.strings.*; import gplx.ios.*; /*IoUrlInfo*/
 public class Io_url implements CompareAble, EqAble, ParseAble, GfoInvkAble {	//_20101005 URL:doc/Io_url.txt
 	public IoUrlInfo Info() {return info;} IoUrlInfo info;
 	public String Raw() {return raw;} final String raw;
-	public byte[] RawBry() {return Bry_.new_utf8_(raw);}
+	public byte[] RawBry() {return Bry_.new_u8(raw);}
 //		public byte[] Http_file_bry() {
-//			try {return Bry_.new_utf8_(String_.Concat(http_file_str, java.net.URLEncoder.encode(raw, "UTF-8")));}	
+//			try {return Bry_.new_u8(String_.Concat(http_file_str, java.net.URLEncoder.encode(raw, "UTF-8")));}	
 //			catch (Exception e) {throw Err_.err_(e, "Http_file_bry");}
 //		}
 	public String To_http_file_str() {return Http_file_str + Http_file_str_encoder.Encode_str(raw);}
@@ -33,7 +33,7 @@ public class Io_url implements CompareAble, EqAble, ParseAble, GfoInvkAble {	//_
 	
 	public static final String Http_file_str = "file:///";
 	public static final int Http_file_len = String_.Len(Http_file_str);
-	public static final byte[] Http_file_bry = Bry_.new_ascii_(Http_file_str);
+	public static final byte[] Http_file_bry = Bry_.new_a7(Http_file_str);
 	public boolean Type_dir() {return info.IsDir(raw);} public boolean Type_fil() {return !info.IsDir(raw);}
 	public Io_url OwnerDir() {return Io_url_.new_inf_(info.OwnerDir(raw), info);}
 	public Io_url OwnerRoot() {return Io_url_.new_inf_(info.OwnerRoot(raw), info);}
@@ -61,8 +61,8 @@ public class Io_url implements CompareAble, EqAble, ParseAble, GfoInvkAble {	//_
 			? String_.DelBgn(raw, String_.Len(dirRaw))
 			: String_.Empty;
 	}
-	public ListAdp XtoNames() {
-		ListAdp list = ListAdp_.new_();
+	public List_adp XtoNames() {
+		List_adp list = List_adp_.new_();
 		Io_url cur = this;
 		while (!cur.EqNull()) {
 			list.Add(cur.NameAndExt_noDirSpr());
@@ -73,7 +73,7 @@ public class Io_url implements CompareAble, EqAble, ParseAble, GfoInvkAble {	//_
 	}
 	public Io_url GenParallel(Io_url oldRoot, Io_url newRoot) {return newRoot.GenSubFil_ary(GenRelUrl_orEmpty(oldRoot));}
 	public boolean Eq(Object obj)		{if (obj == null) return false; return String_.Eq(raw, ((Io_url)obj).raw);}
-	public boolean EqNull()			{return this.Eq(Io_url_.Null);}
+	public boolean EqNull()			{return this.Eq(Io_url_.Empty);}
 	Io_url GenSub(boolean isFil, String[] ary) {
 		String_bldr sb = String_bldr_.new_().Add(raw);
 		int len = Array_.Len(ary);

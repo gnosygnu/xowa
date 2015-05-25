@@ -30,9 +30,9 @@ public class Wdata_dict_rank {
 	, Str_deprecated							= "deprecated"
 	;
 	public static byte[] 
-	  Bry_preferred								= Bry_.new_ascii_(Str_preferred)
-	, Bry_normal								= Bry_.new_ascii_(Str_normal)
-	, Bry_deprecated							= Bry_.new_ascii_(Str_deprecated)
+	  Bry_preferred								= Bry_.new_a7(Str_preferred)
+	, Bry_normal								= Bry_.new_a7(Str_normal)
+	, Bry_deprecated							= Bry_.new_a7(Str_deprecated)
 	;
 	public static final Hash_adp_bry Dict = Hash_adp_bry.cs_()
 	.Add_bry_byte(Bry_preferred					, Tid_preferred)
@@ -48,7 +48,7 @@ public class Wdata_dict_rank {
 		}
 	}
 	public static byte Xto_tid(byte[] v) {
-		Object rv_obj = Dict.Get_by_bry(v); if	(rv_obj == null) throw Err_.new_fmt_("unknown rank: val=~{0}", String_.new_utf8_(v));
+		Object rv_obj = Dict.Get_by_bry(v); if	(rv_obj == null) throw Err_.new_fmt_("unknown rank: val=~{0}", String_.new_u8(v));
 		return ((Byte_obj_val)rv_obj).Val();
 	}
 }

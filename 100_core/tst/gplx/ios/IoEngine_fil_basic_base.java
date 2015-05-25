@@ -147,12 +147,12 @@ public abstract class IoEngine_fil_basic_base {
 			stream.Read(buffer, 0, textLen);
 		}
 		finally {stream.Rls();}
-		String actl = String_.new_utf8_(buffer);
+		String actl = String_.new_u8(buffer);
 		Tfds.Eq("text", actl);
 	}
 	@Test  @gplx.Virtual public void OpenStreamWrite() {
 		IoStream stream = IoEngine_xrg_openWrite.new_(fil).Exec();
-		byte[] buffer = Bry_.new_utf8_("text");
+		byte[] buffer = Bry_.new_u8("text");
 		int textLen = String_.Len("text");
 		stream.Write(buffer, 0, textLen);
 		stream.Rls();
@@ -160,12 +160,12 @@ public abstract class IoEngine_fil_basic_base {
 		fx.tst_LoadFilStr(fil, "text");
 	}
 //		@Test  public virtual void OpenStreamWrite_in_place() {
-//			byte[] buffer = Bry_.new_utf8_("a|b|c");
+//			byte[] buffer = Bry_.new_u8("a|b|c");
 //			IoStream stream = IoEngine_xrg_openWrite.new_(fil).Exec();
 //			stream.Write(buffer, 0, buffer.length);
 //			stream.Rls();
 //			
-//			buffer = Bry_.new_utf8_("B");
+//			buffer = Bry_.new_u8("B");
 //			stream = IoEngine_xrg_openWrite.new_(fil).Exec();
 //			stream.Seek(2);
 //			stream.Write(buffer, 0, buffer.length);

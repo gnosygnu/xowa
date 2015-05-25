@@ -24,7 +24,7 @@ class TdbDbSaveMgr {
 		}
 	}
 	public void SaveFile(TdbDatabase db, TdbFile fil) {
-		ListAdp tbls = FetchTablesWithSamePath(db, fil.Path());
+		List_adp tbls = FetchTablesWithSamePath(db, fil.Path());
 		boolean isSaveNeeded = db.IsNew();
 		for (Object tblObj : tbls) {
 			TdbTable tbl = (TdbTable)tblObj;
@@ -38,7 +38,7 @@ class TdbDbSaveMgr {
 			db.IsNew_set(false);
 		}
 	}
-	void SaveTblsToFile(TdbDatabase db, TdbFile fil, ListAdp tbls) {
+	void SaveTblsToFile(TdbDatabase db, TdbFile fil, List_adp tbls) {
 		DataWtr wtr = TdbStores.wtr_();
 		if (fil.Id() == TdbFile.MainFileId) {				// if MainFile, save critical Files and Tables data
 			db.Files().DataObj_Wtr(wtr);
@@ -48,10 +48,10 @@ class TdbDbSaveMgr {
 			TdbTable tbl = (TdbTable)tblObj;
 			tbl.DataObj_Wtr(wtr);
 		}
-		Io_mgr._.SaveFilStr(fil.Path(), wtr.XtoStr());
+		Io_mgr.I.SaveFilStr(fil.Path(), wtr.XtoStr());
 	}
-	ListAdp FetchTablesWithSamePath(TdbDatabase db, Io_url filPath) {
-		ListAdp list = ListAdp_.new_();
+	List_adp FetchTablesWithSamePath(TdbDatabase db, Io_url filPath) {
+		List_adp list = List_adp_.new_();
 		for (Object tblObj : db.Tables()) {
 			TdbTable tbl = (TdbTable)tblObj;
 			if (tbl.File().Path().Eq (filPath))

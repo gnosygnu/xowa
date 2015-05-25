@@ -19,9 +19,9 @@ package gplx.xowa; import gplx.*;
 import gplx.core.primitives.*;
 import gplx.xowa.xtns.scribunto.*;
 public class Xot_invk_temp implements Xot_invk {
-	private ListAdp			list = ListAdp_.new_();
+	private List_adp			list = List_adp_.new_();
 	private Hash_adp_bry	arg_key_hash;
-	private HashAdp			arg_idx_hash; private Int_obj_ref arg_idx_ref;
+	private Hash_adp			arg_idx_hash; private Int_obj_ref arg_idx_ref;
 	Xot_invk_temp() {}
 	public Xot_invk_temp(boolean root_frame) {this.root_frame = root_frame;}
 	public Xot_invk_temp(byte defn_tid, byte[] src, Arg_nde_tkn name_tkn, int src_bgn, int src_end) {
@@ -42,27 +42,27 @@ public class Xot_invk_temp implements Xot_invk {
 	public Arg_nde_tkn Args_eval_by_idx(byte[] src, int idx) {			// NOTE: idx is base0
 		return arg_idx_hash == null										// only true if no args, or all args are keys; EX: {{A|b=1|c=2}}
 			? null
-			: (Arg_nde_tkn)arg_idx_hash.Fetch(arg_idx_ref.Val_(idx));	// lookup int in hash; needed b/c multiple identical keys should retrieve last, not first; EX: {{A|1=a|1=b}}; PAGE:el.d:ἔχω DATE:2014-07-23
+			: (Arg_nde_tkn)arg_idx_hash.Get_by(arg_idx_ref.Val_(idx));	// lookup int in hash; needed b/c multiple identical keys should retrieve last, not first; EX: {{A|1=a|1=b}}; PAGE:el.d:ἔχω DATE:2014-07-23
 	}
-	public Arg_nde_tkn Args_get_by_idx(int i) {return (Arg_nde_tkn)list.FetchAt(i);}
+	public Arg_nde_tkn Args_get_by_idx(int i) {return (Arg_nde_tkn)list.Get_at(i);}
 	public Arg_nde_tkn Args_get_by_key(byte[] src, byte[] key) {
 		return arg_key_hash == null ? null : (Arg_nde_tkn)arg_key_hash.Get_by_bry(key);
 	}
 	public void Args_add(Arg_nde_tkn arg) {list.Add(arg);}
 	public void Args_add_by_key(byte[] key, Arg_nde_tkn arg) {
 		if (arg_key_hash == null) arg_key_hash = Hash_adp_bry.cs_();	// PERF: lazy
-		arg_key_hash.AddReplace(key, arg);
+		arg_key_hash.Add_if_dupe_use_nth(key, arg);
 		int key_as_int = Bry_.Xto_int_or(key, Int_.MinValue);
 		if (key_as_int != Int_.MinValue)						// key is int; add it to arg_idx_hash; EX:{{A|1=a}} vs {{A|a}}; DATE:2014-07-23
-			Arg_idx_hash_add(key_as_int - ListAdp_.Base1, arg);
+			Arg_idx_hash_add(key_as_int - List_adp_.Base1, arg);
 	}
 	public void Args_add_by_idx(Arg_nde_tkn arg) {Arg_idx_hash_add(++args_add_by_idx, arg);} private int args_add_by_idx = -1;	// NOTE: args_add_by_idx needs to be a separate variable; keeps track of args which don't have a key;
 	private void Arg_idx_hash_add(int int_key, Arg_nde_tkn arg) {
 		if (arg_idx_hash == null) {
-			arg_idx_hash = HashAdp_.new_();
+			arg_idx_hash = Hash_adp_.new_();
 			arg_idx_ref = Int_obj_ref.neg1_();
 		}
-		arg_idx_hash.AddReplace(Int_obj_ref.new_(int_key), arg);	// AddReplace to keep latest version; needed for {{A|1=a|1=b}} DATE:2014-07-23
+		arg_idx_hash.Add_if_dupe_use_nth(Int_obj_ref.new_(int_key), arg);	// Add_if_dupe_use_nth to keep latest version; needed for {{A|1=a|1=b}} DATE:2014-07-23
 	}
 	public static final Xot_invk_temp Page_is_caller = new Xot_invk_temp(true);	// SEE NOTE_2
 }

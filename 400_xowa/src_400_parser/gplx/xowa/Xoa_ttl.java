@@ -40,7 +40,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 		Bry_.Replace_reuse(rv, Byte_ascii.Space, Byte_ascii.Underline);
 		return rv;
 	}
-	public String Page_db_as_str() {return String_.new_utf8_(Page_db());}
+	public String Page_db_as_str() {return String_.new_u8(Page_db());}
 	public int Leaf_bgn() {return leaf_bgn;}
 	public byte[] Base_txt() {return leaf_bgn == -1	? Page_txt() : Bry_.Mid(full_txt, page_bgn, leaf_bgn - 1);}
 	public byte[] Leaf_txt() {return leaf_bgn == -1	? Page_txt() : Bry_.Mid(full_txt, leaf_bgn, anch_bgn == -1 ? full_txt.length : anch_bgn - 1);}
@@ -50,7 +50,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 	public byte[] Talk_txt() {return ns.Id_talk()		? Full_txt() : Bry_.Add(tors_txt, Page_txt());} 
 	public byte[] Subj_txt() {return ns.Id_subj()		? Full_txt() : Bry_.Add(tors_txt, Page_txt());} 
 	public byte[] Full_url() {return Xoa_url_encoder._.Encode(full_txt);}
-	public String Full_db_as_str() {return String_.new_utf8_(Full_db());}
+	public String Full_db_as_str() {return String_.new_u8(Full_db());}
 	public byte[] Full_db()  {return ns.Gen_ttl(this.Page_db());}
 	public byte[] Page_url() {return Xoa_url_encoder._.Encode(this.Page_txt());}
 	public byte[] Leaf_url() {return Xoa_url_encoder._.Encode(this.Leaf_txt());}
@@ -394,8 +394,8 @@ class Xoa_url_encoder {
 		}
 		return bb.Xto_bry_and_clear();
 	}
-	private static final byte[] Bry_amp = Bry_.new_ascii_("%26"), Bry_eq = Bry_.new_ascii_("%3D")
-		, Bry_plus = Bry_.new_ascii_("%2B"), Bry_apos = Bry_.new_ascii_("%27")
+	private static final byte[] Bry_amp = Bry_.new_a7("%26"), Bry_eq = Bry_.new_a7("%3D")
+		, Bry_plus = Bry_.new_a7("%2B"), Bry_apos = Bry_.new_a7("%27")
 		, Bry_underline = new byte[] {Byte_ascii.Underline}
 		;
 	Bry_bfr bb = Bry_bfr.new_();

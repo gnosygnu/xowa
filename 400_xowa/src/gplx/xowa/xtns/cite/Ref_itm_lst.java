@@ -20,7 +20,7 @@ public class Ref_itm_lst {
 	public Ref_itm_lst(byte[] grp_name) {this.grp_name = grp_name;}
 	byte[] grp_name; int idx_major_last = 0;
 	public int Itms_len() {return list.Count();}
-	public Ref_nde Itms_get_at(int i) {return (Ref_nde)list.FetchAt(i);}
+	public Ref_nde Itms_get_at(int i) {return (Ref_nde)list.Get_at(i);}
 	public void Itms_add(byte[] itm_name, byte[] follow, Ref_nde itm) {
 		if (itm_name == Bry_.Empty) {
 			if (follow == Bry_.Empty) {
@@ -28,7 +28,7 @@ public class Ref_itm_lst {
 				list.Add(itm);
 			}
 			else {
-				Object o = hash.Fetch(follow);
+				Object o = hash.Get_by(follow);
 				if (o == null) {// fail
 				}
 				else {
@@ -40,7 +40,7 @@ public class Ref_itm_lst {
 			}
 		}
 		else {
-			Object o = hash.Fetch(itm_name);
+			Object o = hash.Get_by(itm_name);
 			if (o == null) {
 				hash.Add(itm_name, itm);
 				itm.Idx_major_(idx_major_last++);
@@ -59,5 +59,5 @@ public class Ref_itm_lst {
 		list.Clear();
 		idx_major_last = 0;
 	}
-	HashAdp hash = HashAdp_.new_bry_(); ListAdp list = ListAdp_.new_();
+	Hash_adp hash = Hash_adp_bry.cs_(); List_adp list = List_adp_.new_();
 }

@@ -35,7 +35,7 @@ public class Xoad_wtr_dump {
 	public void Flush() {
 		int len = dump_itms.Count();
 		for (int i = 0; i < len; i++) {
-			Xoad_dump_itm data = (Xoad_dump_itm)dump_itms.FetchAt(i);
+			Xoad_dump_itm data = (Xoad_dump_itm)dump_itms.Get_at(i);
 			if (data != null) {
 				data.Flush(log_dir);
 				data.Rls();
@@ -46,24 +46,24 @@ public class Xoad_wtr_dump {
 	}
 	Xoad_dump_itm GetByItm(Gfo_msg_data data) {
 		byte[] path_bry = data.Item().Path_bry();
-		Xoad_dump_itm rv = (Xoad_dump_itm)dump_itms.Fetch(path_bry);
+		Xoad_dump_itm rv = (Xoad_dump_itm)dump_itms.Get_by(path_bry);
 		if (rv == null) {
 			rv = new Xoad_dump_itm(path_bry, data.Item().Key_bry());
 			dump_itms.Add(path_bry, rv);
 		}
 		return rv;
-	}	private OrderedHash dump_itms = OrderedHash_.new_bry_();
+	}	private Ordered_hash dump_itms = Ordered_hash_.new_bry_();
 }
 class Xoad_dump_itm {
 	Bry_bfr bfr = Bry_bfr.new_(4096);
 	int pageIdx_last;
 	public int BfrLen() {return bfr.Len();}
 	public Xoad_dump_itm(byte[] ownerKey, byte[] itmKey) {
-		fil_name = String_.new_utf8_(ownerKey) + "__" + String_.new_utf8_(itmKey);
+		fil_name = String_.new_u8(ownerKey) + "__" + String_.new_u8(itmKey);
 	}	String fil_name;
 	public void Flush(Io_url log_dir) {
 		Io_url fil_url = log_dir.GenSubFil_ary(fil_name, ".txt");
-		Io_mgr._.AppendFilByt(fil_url, bfr.Bfr(), bfr.Len());
+		Io_mgr.I.AppendFilByt(fil_url, bfr.Bfr(), bfr.Len());
 		bfr.Reset_if_gt(Io_mgr.Len_kb);
 	}
 	public void Rls() {

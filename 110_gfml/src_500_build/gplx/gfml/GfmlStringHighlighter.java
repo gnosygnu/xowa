@@ -31,13 +31,13 @@ class GfmlStringHighlighter {
 	}
 	public String[] Gen() {
 		String_bldr posBfr = String_bldr_.new_(), rawBfr = String_bldr_.new_(), symBfr = String_bldr_.new_();
-		ListAdp symList = ListAdp_.new_();
+		List_adp symList = List_adp_.new_();
 		int bgnPos = 0, endPos = 0;
 		int rawLen = String_.Len(raw); int rawLenDigits = Int_.DigitCount(rawLen);
-		int rawBfrBgn = -1, marksLastIdx = marks.LastIndex();
+		int rawBfrBgn = -1, marksLastIdx = marks.Idx_last();
 		for (int i = 0; i < marks.Count(); i++) {
-			GfmlStringHighlighterMarker curMark = (GfmlStringHighlighterMarker)marks.FetchAt(i);
-			GfmlStringHighlighterMarker nxtMark = i == marksLastIdx ? GfmlStringHighlighterMarker.Null : (GfmlStringHighlighterMarker)marks.FetchAt(i + 1);
+			GfmlStringHighlighterMarker curMark = (GfmlStringHighlighterMarker)marks.Get_at(i);
+			GfmlStringHighlighterMarker nxtMark = i == marksLastIdx ? GfmlStringHighlighterMarker.Null : (GfmlStringHighlighterMarker)marks.Get_at(i + 1);
 			// bgnPos
 			bgnPos = XtoBgnPos(curMark.Pos(), endPos);
 			if (i == 0) rawBfrBgn = bgnPos;
@@ -79,17 +79,17 @@ class GfmlStringHighlighter {
 			rawBfr.Add_at(0, " ");
 			symBfr.Add_at(0, " ");
 		}
-		ListAdp rv = ListAdp_.new_();
+		List_adp rv = List_adp_.new_();
 		rv.Add(posBfr.XtoStr());
 		rv.Add(rawBfr.XtoStr());
 		rv.Add(symBfr.XtoStr());
 		if (symList.Count() > 0)
 			rv.Add("");
 		for (int i = 0; i < symList.Count(); i++)
-			rv.Add((String)symList.FetchAt(i));
-		return rv.XtoStrAry();
+			rv.Add((String)symList.Get_at(i));
+		return rv.To_str_ary();
 	}
-	ListAdp marks = ListAdp_.new_();
+	List_adp marks = List_adp_.new_();
         public static GfmlStringHighlighter new_() {
 		GfmlStringHighlighter rv = new GfmlStringHighlighter();
 		return rv;

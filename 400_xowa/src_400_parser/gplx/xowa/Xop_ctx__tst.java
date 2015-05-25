@@ -27,7 +27,7 @@ class Xop_ctx__fxt {
 	public void Clear() {
 	}
 	public void Test_Src_limit_and_escape_nl(String src, int bgn, int limit, String expd) {
-		String actl = Xop_ctx_.Src_limit_and_escape_nl(Bry_.new_utf8_(src), bgn, limit);
+		String actl = Xop_ctx_.Src_limit_and_escape_nl(Bry_.new_u8(src), bgn, limit);
 		Tfds.Eq(expd, actl);
 	}
 }

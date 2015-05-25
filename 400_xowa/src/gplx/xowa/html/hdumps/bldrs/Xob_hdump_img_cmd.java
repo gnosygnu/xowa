@@ -83,7 +83,7 @@ interface Page_async_cmd {
 }
 class Page_async_cmd__img implements Page_async_cmd {
 	private Xog_page hpg;
-	private ListAdp missing = ListAdp_.new_();
+	private List_adp missing = List_adp_.new_();
 	public Page_async_cmd__img(Xog_page hpg) {this.hpg = hpg;}
 	public void Prep() {
 		int len = hpg.Img_count();
@@ -91,14 +91,14 @@ class Page_async_cmd__img implements Page_async_cmd {
 		missing.Clear();
 		for (int i = 0; i < len; ++i) {
 			Xohd_data_itm__base itm = ary[i];
-			boolean exists = Io_mgr._.ExistsFil(itm.Html_view_url());
+			boolean exists = Io_mgr.I.ExistsFil(itm.Html_view_url());
 			if (!exists) missing.Add(itm);
 		}
 	}
 	public void Exec() {
 		int len = missing.Count();
 		for (int i = 0; i < len; ++i) {
-//				Xohd_data_itm__base itm = (Xohd_data_itm__base)missing.FetchAt(i);
+//				Xohd_data_itm__base itm = (Xohd_data_itm__base)missing.Get_at(i);
 //				byte[] bytes = null; //fsdb.Db_get()ttl, file_w,....):
 //				Write file(bytes);
 		}

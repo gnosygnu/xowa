@@ -32,10 +32,10 @@ public class Gfo_thread_cmd_download implements Gfo_thread_cmd {
 	public int Async_sleep_interval()	{return Gfo_thread_cmd_.Async_sleep_interval_1_second;}
 	public boolean Async_prog_enabled()	{return false;}
 	@gplx.Virtual public byte Async_init() {
-		if (Io_mgr._.ExistsFil(trg)) {
+		if (Io_mgr.I.ExistsFil(trg)) {
 			int rslt = kit.Ask_yes_no_cancel(GRP_KEY, "target_exists", "Target file already exists: '~{0}'.\nDo you want to delete it?", trg.Raw());
 			switch (rslt) {
-				case Gfui_dlg_msg_.Btn_yes:		Io_mgr._.DeleteFil(trg); break;
+				case Gfui_dlg_msg_.Btn_yes:		Io_mgr.I.DeleteFil(trg); break;
 				case Gfui_dlg_msg_.Btn_no:		return Gfo_thread_cmd_.Init_cancel_step;
 				case Gfui_dlg_msg_.Btn_cancel:	return Gfo_thread_cmd_.Init_cancel_all;
 				default:						throw Err_mgr._.unhandled_(rslt);
@@ -59,7 +59,7 @@ public class Gfo_thread_cmd_download implements Gfo_thread_cmd {
 			kit.Ask_ok(GRP_KEY, "download.fail", "download failed. Please select 'read from file' if you've already downloaded a dump: url=~{0} error=~{1}", src, xrg.Rslt_err_str());
 		}
 	}	boolean download_pass = true;
-	protected gplx.ios.IoEngine_xrg_downloadFil xrg = Io_mgr._.DownloadFil_args("", Io_url_.Null);
+	protected gplx.ios.IoEngine_xrg_downloadFil xrg = Io_mgr.I.DownloadFil_args("", Io_url_.Empty);
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_async_bgn))				Download();
 		else if	(ctx.Match(k, Invk_owner))					return owner;

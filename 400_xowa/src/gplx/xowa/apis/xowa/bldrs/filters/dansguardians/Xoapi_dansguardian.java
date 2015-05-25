@@ -50,7 +50,7 @@ public class Xoapi_dansguardian implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_case_match_)) 						case_match = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_wildcard_enabled)) 					return Yn.Xto_str(wildcard_enabled);
 		else if	(ctx.Match(k, Invk_wildcard_enabled_)) 					wildcard_enabled = m.ReadYn("v");
-		else if	(ctx.Match(k, Invk_wildcard_char)) 						return String_.new_utf8_(wildcard_char);
+		else if	(ctx.Match(k, Invk_wildcard_char)) 						return String_.new_u8(wildcard_char);
 		else if	(ctx.Match(k, Invk_wildcard_char_)) 					wildcard_char = m.ReadBry("v");
 		else if	(ctx.Match(k, Invk_wildcard_list)) 						return "";
 		else if	(ctx.Match(k, Invk_wildcard_list_)) 					{}

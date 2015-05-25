@@ -23,7 +23,7 @@ class GfsCoreHelp implements GfoInvkAble {
 		if (String_.Eq(path, "")) {
 			String_bldr sb = String_bldr_.new_();
 			for (int i = 0; i < core.Root_as_regy().Count(); i++) {
-				GfsRegyItm itm = (GfsRegyItm)core.Root_as_regy().FetchAt(i);
+				GfsRegyItm itm = (GfsRegyItm)core.Root_as_regy().Get_at(i);
 				sb.Add_spr_unless_first(itm.Key(), String_.CrLf, i);
 			}
 			return sb.XtoStr();
@@ -57,7 +57,7 @@ class GfsCoreHelp implements GfoInvkAble {
 			invk.Invk(ctx, 0, "", GfoMsg_.Null);
 			String_bldr sb = String_bldr_.new_();
 			for (int i = 0; i < ctx.Help_browseList().Count(); i++) {
-				String s = (String)ctx.Help_browseList().FetchAt(i);
+				String s = (String)ctx.Help_browseList().Get_at(i);
 				sb.Add_spr_unless_first(s, String_.CrLf, i);
 			}
 			return sb.XtoStr();

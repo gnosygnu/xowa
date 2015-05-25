@@ -38,14 +38,14 @@ class Xow_domain_crt_itm__in implements Xow_domain_crt_itm {
 class Xow_domain_crt_itm__any_standard implements Xow_domain_crt_itm {
 	public boolean Matches(Xow_domain cur, Xow_domain comp) {
 		switch (comp.Domain_tid()) {
-			case Xow_domain_.Tid_int_wikipedia:
-			case Xow_domain_.Tid_int_wiktionary:
-			case Xow_domain_.Tid_int_wikisource:
-			case Xow_domain_.Tid_int_wikivoyage:
-			case Xow_domain_.Tid_int_wikiquote:
-			case Xow_domain_.Tid_int_wikibooks:
-			case Xow_domain_.Tid_int_wikiversity:
-			case Xow_domain_.Tid_int_wikinews:		return true;
+			case Xow_domain_type_.Tid_wikipedia:
+			case Xow_domain_type_.Tid_wiktionary:
+			case Xow_domain_type_.Tid_wikisource:
+			case Xow_domain_type_.Tid_wikivoyage:
+			case Xow_domain_type_.Tid_wikiquote:
+			case Xow_domain_type_.Tid_wikibooks:
+			case Xow_domain_type_.Tid_wikiversity:
+			case Xow_domain_type_.Tid_wikinews:		return true;
 			default:								return false;
 		}
 	}

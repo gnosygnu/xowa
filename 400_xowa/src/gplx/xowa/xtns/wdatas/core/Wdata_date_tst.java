@@ -67,7 +67,7 @@ class Wdata_date_fxt {
 	public int Init_before() {return init_before;} public Wdata_date_fxt Init_before_(int v) {init_before = v; return this;} private int init_before;
 	public int Init_after() {return init_after;} public Wdata_date_fxt Init_after_(int v) {init_after = v; return this;} private int init_after;
 	public void Test_parse(String raw, long expd_y, int expd_m, int expd_d, int expd_h, int expd_n, int expd_s) {
-		Wdata_date actl_date = Wdata_date.parse(Bry_.new_ascii_(raw), Wdata_date.Fmt_ymdhns, init_before, init_after, init_calendar_is_julian);
+		Wdata_date actl_date = Wdata_date.parse(Bry_.new_a7(raw), Wdata_date.Fmt_ymdhns, init_before, init_after, init_calendar_is_julian);
 		Tfds.Eq(expd_y, actl_date.Year());
 		Tfds.Eq(expd_m, actl_date.Month());
 		Tfds.Eq(expd_d, actl_date.Day());
@@ -84,7 +84,7 @@ class Wdata_date_fxt {
 	}
 	public void Test_xto_str(String raw, int precision, String expd) {
 		if (msgs == null) msgs = Wdata_hwtr_msgs.new_en_();
-		Wdata_date date = Wdata_date.parse(Bry_.new_ascii_(raw), precision, init_before, init_after, init_calendar_is_julian);
+		Wdata_date date = Wdata_date.parse(Bry_.new_a7(raw), precision, init_before, init_after, init_calendar_is_julian);
 		Wdata_date.Xto_str(tmp_bfr, tmp_time_fmtr, tmp_time_bfr, msgs, date);
 		Tfds.Eq(expd, tmp_bfr.Xto_str_and_clear());
 	}

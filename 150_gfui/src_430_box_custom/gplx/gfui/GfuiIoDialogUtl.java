@@ -21,23 +21,23 @@ import java.awt.FileDialog;
 
 import javax.swing.JFrame;
 public class GfuiIoDialogUtl {
-		public static Io_url SelectDir() {return SelectDir(Io_url_.Null);}
+		public static Io_url SelectDir() {return SelectDir(Io_url_.Empty);}
 	public static Io_url SelectDir(Io_url startingDir) {		
 		FileDialog openFileDialog = NewOpenFileDialog(startingDir);
 //		openFileDialog.FileName = @"press enter to select this folder";
 		openFileDialog.setVisible(true);
 		String selectedDir = openFileDialog.getDirectory();
-		if (selectedDir == null) return Io_url_.Null; // nothing selected
+		if (selectedDir == null) return Io_url_.Empty; // nothing selected
 		Io_url selected = Io_url_.new_any_(selectedDir);
 		Io_url selectedFil = selected.GenSubFil(openFileDialog.getFile());
 		return selectedFil.OwnerDir();
 	}
-	public static Io_url SelectFile() {return SelectFile(Io_url_.Null);}
+	public static Io_url SelectFile() {return SelectFile(Io_url_.Empty);}
 	public static Io_url SelectFile(Io_url startingDir) {
 		FileDialog openFileDialog = NewOpenFileDialog(startingDir);
 		openFileDialog.setVisible(true);
 		String selectedDir = openFileDialog.getDirectory();
-		if (selectedDir == null) return Io_url_.Null; // nothing selected
+		if (selectedDir == null) return Io_url_.Empty; // nothing selected
 		Io_url selected = Io_url_.new_any_(selectedDir);
 		Io_url selectedFil = selected.GenSubFil(openFileDialog.getFile());
 		return selectedFil;

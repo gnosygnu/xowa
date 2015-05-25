@@ -92,7 +92,7 @@ class String_bldr_thread_single extends String_bldr_base {
 	@Override public String XtoStr() {return sb.toString();}
 	@Override public int Count() {return sb.length();}												
 	@Override public String_bldr Add_at(int idx, String s) {sb.insert(idx, s); return this;}		
-	@Override public String_bldr Add(byte[] v) {sb.append(String_.new_utf8_(v)); return this;}	
+	@Override public String_bldr Add(byte[] v) {sb.append(String_.new_u8(v)); return this;}	
 	@Override public String_bldr Add(String s) {sb.append(s); return this;}						
 	@Override public String_bldr Add(char c) {sb.append(c); return this;}						
 	@Override public String_bldr Add(int i) {sb.append(i); return this;}							
@@ -105,7 +105,7 @@ class String_bldr_thread_multiple extends String_bldr_base {
 	@Override public String XtoStr() {return sb.toString();}
 	@Override public int Count() {return sb.length();}												
 	@Override public String_bldr Add_at(int idx, String s) {sb.insert(idx, s); return this;}		
-	@Override public String_bldr Add(byte[] v) {sb.append(String_.new_utf8_(v)); return this;}	
+	@Override public String_bldr Add(byte[] v) {sb.append(String_.new_u8(v)); return this;}	
 	@Override public String_bldr Add(String s) {sb.append(s); return this;}						
 	@Override public String_bldr Add(char c) {sb.append(c); return this;}						
 	@Override public String_bldr Add(int i) {sb.append(i); return this;}							

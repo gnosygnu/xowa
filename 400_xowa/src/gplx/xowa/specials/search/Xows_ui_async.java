@@ -66,5 +66,5 @@ class Xows_ui_async {
 		return -Int_.Compare(lhs.Page_len(), rhs.Page_len());
 	}
 	public static byte[] Gen_insert_key(byte[] wiki) {return Bry_.Add(Bry_insert_key, wiki);}
-	private static final byte[] Bry_insert_key = Bry_.new_ascii_("xowa_insert_");
+	private static final byte[] Bry_insert_key = Bry_.new_a7("xowa_insert_");
 }

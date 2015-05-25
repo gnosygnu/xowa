@@ -22,7 +22,7 @@ public class Xoh_skin_itm implements GfoInvkAble {
 	public String Key() {return key;} private final String key;
 	public void Fmt_(String v) {fmtr.Fmt_(v);}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_fmt))		return String_.new_utf8_(fmtr.Fmt());
+		if		(ctx.Match(k, Invk_fmt))		return String_.new_u8(fmtr.Fmt());
 		else if	(ctx.Match(k, Invk_fmt_))		fmtr.Fmt_(m.ReadStr("v"));
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;

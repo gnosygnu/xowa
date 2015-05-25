@@ -25,11 +25,11 @@ public class Io_sort_misc_tst {
 	}
 	private void tst_Io_url_gen_dir(String dir_str, String fmt, int digits, int calls, String... expd) {
 		Io_url dir = Io_url_.mem_dir_(dir_str);
-		ListAdp actl_list = ListAdp_.new_();
+		List_adp actl_list = List_adp_.new_();
 		Io_url_gen wkr = Io_url_gen_.dir_(dir, fmt, digits);
 		for (int i = 0; i < calls; i++)
 			actl_list.Add(wkr.Nxt_url().Raw());
-		String[] actl = actl_list.XtoStrAry();
+		String[] actl = actl_list.To_str_ary();
 		for (int i = 0; i < expd.length; i++)
 			expd[i] = dir_str + expd[i];
 		Tfds.Eq_ary_str(expd, actl);
@@ -42,12 +42,12 @@ public class Io_sort_misc_tst {
 		tst_Io_line_rdr_fld_comparer( 1, "ab", "a");
 	}
 	private void tst_Io_line_rdr_fld_comparer(int expd, String lhs_str, String rhs_str) {
-		byte[] lhs = Bry_.new_utf8_(lhs_str), rhs = Bry_.new_utf8_(rhs_str);
+		byte[] lhs = Bry_.new_u8(lhs_str), rhs = Bry_.new_u8(rhs_str);
 		Tfds.Eq(expd, Bry_.Compare(lhs, 0, lhs.length, rhs, 0, rhs.length));
 	}
 	Io_line_rdr new_Io_line_rdr(String url_str, String text) {
 		Io_url url = Io_url_.mem_fil_(url_str);
-		Io_mgr._.SaveFilStr(url, text);
+		Io_mgr.I.SaveFilStr(url, text);
 		Io_line_rdr rv = new Io_line_rdr(Gfo_usr_dlg_.Test(), url);
 		rv.Read_next();
 		return rv;

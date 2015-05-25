@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs; import gplx.*;
 import gplx.dbs.engines.*; import gplx.dbs.qrys.*;
 public class Db_conn {
-	private final ListAdp rls_list = ListAdp_.new_(); private final Db_engine engine;
+	private final List_adp rls_list = List_adp_.new_(); private final Db_engine engine;
 	public Db_conn(Db_engine engine) {this.engine = engine;}
 	public Db_conn_info		Conn_info()				{return engine.Conn_info();}
 	public void				Txn_bgn()				{engine.Txn_bgn("");}
@@ -48,7 +48,7 @@ public class Db_conn {
 	public void				Rls_conn() {
 		int len = rls_list.Count();
 		for (int i = 0; i < len; ++i) {
-			RlsAble itm = (RlsAble)rls_list.FetchAt(i);
+			RlsAble itm = (RlsAble)rls_list.Get_at(i);
 			itm.Rls();
 		}
 		engine.Conn_term();

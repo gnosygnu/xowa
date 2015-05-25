@@ -59,7 +59,7 @@ class Php_lxr_declaration extends Php_lxr_base {
 		tkn_wkr.Process(tkn_factory.Declaration(bgn, cur));
 		return cur;		
 	}
-	private static final byte[] Bry_declaration = Bry_.new_ascii_("<?php");
+	private static final byte[] Bry_declaration = Bry_.new_a7("<?php");
 }
 class Php_lxr_ws extends Php_lxr_base {
 	public Php_lxr_ws(byte ws_tid) {
@@ -95,7 +95,7 @@ class Php_lxr_ws extends Php_lxr_base {
 		tkn_wkr.Process(tkn_factory.Ws(bgn, cur, ws_tid));
 		return cur;
 	}
-	public static final byte[] Bry_ws_space = Bry_.new_ascii_(" "), Bry_ws_nl = Bry_.new_ascii_("\n"), Bry_ws_tab = Bry_.new_ascii_("\t"), Bry_ws_cr = Bry_.new_ascii_("\r");
+	public static final byte[] Bry_ws_space = Bry_.new_a7(" "), Bry_ws_nl = Bry_.new_a7("\n"), Bry_ws_tab = Bry_.new_a7("\t"), Bry_ws_cr = Bry_.new_a7("\r");
 }
 class Php_lxr_comment extends Php_lxr_base {
 	public Php_lxr_comment(byte comment_tid) {
@@ -127,8 +127,8 @@ class Php_lxr_comment extends Php_lxr_base {
 		return cur;
 	}
 	public static final Gfo_msg_itm Dangling_comment = Gfo_msg_itm_.new_warn_(Php_parser.Log_nde, "dangling_comment", "dangling_comment");
-	public static final byte[] Bry_bgn_mult = Bry_.new_ascii_("/*"), Bry_bgn_slash = Bry_.new_ascii_("//"), Bry_bgn_hash = Bry_.new_ascii_("#")
-		, Bry_end_mult = Bry_.new_ascii_("*/"), Bry_end_nl = Bry_.new_ascii_("\n");
+	public static final byte[] Bry_bgn_mult = Bry_.new_a7("/*"), Bry_bgn_slash = Bry_.new_a7("//"), Bry_bgn_hash = Bry_.new_a7("#")
+		, Bry_end_mult = Bry_.new_a7("*/"), Bry_end_nl = Bry_.new_a7("\n");
 }
 class Php_lxr_var extends Php_lxr_base {
 	@Override public byte Lxr_tid() {return Php_lxr_.Tid_var;}
@@ -165,10 +165,10 @@ class Php_lxr_var extends Php_lxr_base {
 		tkn_wkr.Process(tkn_factory.Var(bgn, cur));
 		return cur;		
 	}
-	private static final byte[] Bry_var = Bry_.new_ascii_("$");
+	private static final byte[] Bry_var = Bry_.new_a7("$");
 }
 class Php_lxr_sym extends Php_lxr_base {
-	public Php_lxr_sym(String hook_str, byte tkn_tid) {this.hook = Bry_.new_ascii_(hook_str); this.tkn_tid = tkn_tid;} private byte[] hook; byte tkn_tid;
+	public Php_lxr_sym(String hook_str, byte tkn_tid) {this.hook = Bry_.new_a7(hook_str); this.tkn_tid = tkn_tid;} private byte[] hook; byte tkn_tid;
 	@Override public byte Lxr_tid() {return Php_lxr_.Tid_sym;}
 	@Override public void Lxr_ini(Btrie_slim_mgr trie, Php_parser_interrupt[] parser_interrupts) {
 		trie.Add_obj(hook, this);
@@ -228,10 +228,10 @@ class Php_lxr_quote extends Php_lxr_base {
 		return cur;
 	}
 	public static final Gfo_msg_itm Dangling_quote = Gfo_msg_itm_.new_warn_(Php_parser.Log_nde, "dangling_quote", "dangling_quote");
-	public static final byte[] Quote_bry_single = Bry_.new_ascii_("'"), Quote_bry_double = Bry_.new_ascii_("\"");
+	public static final byte[] Quote_bry_single = Bry_.new_a7("'"), Quote_bry_double = Bry_.new_a7("\"");
 }
 class Php_lxr_keyword extends Php_lxr_base {
-	public Php_lxr_keyword(String hook_str, byte tkn_tid) {this.hook = Bry_.new_ascii_(hook_str); this.tkn_tid = tkn_tid;} private byte[] hook; byte tkn_tid;
+	public Php_lxr_keyword(String hook_str, byte tkn_tid) {this.hook = Bry_.new_a7(hook_str); this.tkn_tid = tkn_tid;} private byte[] hook; byte tkn_tid;
 	@Override public byte Lxr_tid() {return Php_lxr_.Tid_keyword;}
 	@Override public void Lxr_ini(Btrie_slim_mgr trie, Php_parser_interrupt[] parser_interrupts) {trie.Add_obj(hook, this);}
 	@Override public int Lxr_make(Php_ctx ctx, int bgn, int cur) {

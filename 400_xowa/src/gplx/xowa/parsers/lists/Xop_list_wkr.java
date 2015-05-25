@@ -84,7 +84,7 @@ public class Xop_list_wkr implements Xop_ctx_wkr {
 				posBldr.MoveDown();
 				symByt = curSymAry[i];
 				prvSymAry = Xop_list_wkr_.MakeSymAry(curSymAry, curSymLen);
-				Xop_list_tkn prvItm = tkn_mkr.List_bgn(bgn_pos, cur_pos, symByt, i + ListAdp_.Base1).List_path_(posBldr.XtoIntAry()).List_uid_(listId);
+				Xop_list_tkn prvItm = tkn_mkr.List_bgn(bgn_pos, cur_pos, symByt, i + List_adp_.Base1).List_path_(posBldr.XtoIntAry()).List_uid_(listId);
 				ctx.Subs_add_and_stack(root, prvItm);
 				ctx.Empty_ignored_y_();
 			}

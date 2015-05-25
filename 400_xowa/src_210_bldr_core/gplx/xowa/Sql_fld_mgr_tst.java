@@ -38,7 +38,7 @@ Sql_fld_mgr_fxt fxt = new Sql_fld_mgr_fxt();
 }
 class Sql_fld_mgr_fxt {
 	Sql_fld_mgr fld_mgr = new Sql_fld_mgr();
-	public void Exec_parse(String v) {fld_mgr.Parse(Bry_.new_ascii_(v));}
+	public void Exec_parse(String v) {fld_mgr.Parse(Bry_.new_a7(v));}
 	public void Exec_get(String key, int expd) {
 		Sql_fld_itm actl_itm = fld_mgr.Get_by_key(key);
 		Tfds.Eq(expd, actl_itm == null ? Sql_fld_mgr.Not_found : actl_itm.Idx());

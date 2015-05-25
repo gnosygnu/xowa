@@ -40,8 +40,8 @@ public class IptKey_ {
 		String val = rdr.ReadStrOr(key, ""); // NOTE: "" cannot be null, b/c nullRdr returns String.empty
 		return (String_.Eq(val, "")) ? or : parse_(val);
 	}
-	public static ListAdp printableKeys2_(IptKey[] add, IptKey[] del) {
-		ListAdp list = ListAdp_.new_();
+	public static List_adp printableKeys2_(IptKey[] add, IptKey[] del) {
+		List_adp list = List_adp_.new_();
 		for (IptKey key : add)
 			list.Add(key);
 		IptKeyStrMgr._.XtoIptKeyAry(list);
@@ -50,13 +50,13 @@ public class IptKey_ {
 		return list;
 	}
 	public static IptKey[] printableKeys_(IptKey[] add, IptKey[] del) {
-		ListAdp list = ListAdp_.new_();
+		List_adp list = List_adp_.new_();
 		for (IptKey key : add)
 			list.Add(key);
 		IptKeyStrMgr._.XtoIptKeyAry(list);
 		for (IptKey key : del)
 			list.Del(key);
-		return (IptKey[])list.Xto_ary(IptKey.class);
+		return (IptKey[])list.To_ary(IptKey.class);
 	}
 	private static IptKey get_or_new_(int val) {
 		IptKey rv = (IptKey)enm_mgr.Get(val);
@@ -102,10 +102,10 @@ public class IptKey_ {
 	, Shift = new_(KeyCode_Shift, "shift"), Ctrl = new_(KeyCode_Ctrl, "ctrl"), Alt = new_(KeyCode_Alt, "alt")
 	, Keypad_enter = new_(16777296, "keypad_enter")
 	;
-	private static OrderedHash ui_str_hash;
-	public static OrderedHash Ui_str_hash() {
+	private static Ordered_hash ui_str_hash;
+	public static Ordered_hash Ui_str_hash() {
 		if (ui_str_hash == null) {
-			ui_str_hash = OrderedHash_.new_();
+			ui_str_hash = Ordered_hash_.new_();
 			All_add(ui_str_hash
 			, IptKey_.Back, IptKey_.Tab, IptKey_.Clear, IptKey_.Enter
 			, IptKey_.Pause, IptKey_.CapsLock, IptKey_.Escape, IptKey_.Space
@@ -129,11 +129,11 @@ public class IptKey_ {
 		}
 		return ui_str_hash;
 	}
-	private static void All_add(OrderedHash hash, IptKey... ary) {
+	private static void All_add(Ordered_hash hash, IptKey... ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			IptKey key = ary[i];
-			hash.AddReplace(Int_obj_ref.new_(key.Val()), key);
+			hash.Add_if_dupe_use_nth(Int_obj_ref.new_(key.Val()), key);
 		}
 	}
 	public static String To_str(int val) {
@@ -146,7 +146,7 @@ public class IptKey_ {
             if (val == 0) return rv;	// handle modifiers only, like "mod.cs"; else will be "mod.cs+key.#0"
 			rv += "+";
 		}
-		IptKey key = (IptKey)IptKey_.Ui_str_hash().Fetch(Int_obj_ref.new_(val));
+		IptKey key = (IptKey)IptKey_.Ui_str_hash().Get_by(Int_obj_ref.new_(val));
 		String key_str = key == null ? "key.#" + Int_.Xto_str(val) : key.Key();
 		return rv + key_str;
 	}

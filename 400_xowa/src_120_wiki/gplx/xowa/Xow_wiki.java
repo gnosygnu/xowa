@@ -24,7 +24,7 @@ public interface Xow_wiki extends Xow_ttl_parser {
 	boolean						Type_is_edit();
 	byte[]						Domain_bry();			// EX: en.wikipedia.org
 	String						Domain_str();
-	int							Domain_tid();			// Xow_domain_.Tid_int_wikipedia
+	int							Domain_tid();			// Xow_domain_type_.Tid_wikipedia
 	byte[]						Domain_abrv();			// enwiki
 	Xow_domain					Domain_itm();
 	Xow_fsys_mgr				Fsys_mgr();
@@ -39,5 +39,6 @@ public interface Xow_wiki extends Xow_ttl_parser {
 	boolean						Html__hdump_enabled();
 	Xow_hzip_mgr				Html__hzip_mgr();
 	Xohd_hdump_rdr				Html__hdump_rdr();
-	Xoh_page_wtr_mgr_base			Html__page_wtr_mgr();
+	Xoh_page_wtr_mgr_base		Html__page_wtr_mgr();
+	void						Init_by_wiki();
 }

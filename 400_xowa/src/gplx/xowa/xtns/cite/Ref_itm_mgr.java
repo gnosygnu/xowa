@@ -22,7 +22,7 @@ public class Ref_itm_mgr {
 	private int uid_last;		
 	public boolean References__recursing() {return references__recursing;} public void References__recursing_(boolean v) {references__recursing = v;} private boolean references__recursing;
 	public Ref_itm_lst Lst_get(byte[] grp_name, int lst_idx) {
-		return Bry_.Len_eq_0(grp_name) ? grp_default.Lsts_get_at(lst_idx) : ((Ref_itm_grp)grps.Fetch(grp_name)).Lsts_get_at(lst_idx);	// NOTE: must be Bry_.Len_eq_0 else <references group=""/> not same as <references/>; DATE:2013-02-06
+		return Bry_.Len_eq_0(grp_name) ? grp_default.Lsts_get_at(lst_idx) : ((Ref_itm_grp)grps.Get_by(grp_name)).Lsts_get_at(lst_idx);	// NOTE: must be Bry_.Len_eq_0 else <references group=""/> not same as <references/>; DATE:2013-02-06
 	}	
 	public void Grps_add(byte[] grp_name, byte[] itm_name, byte[] follow, Ref_nde itm) {
 		Ref_itm_grp grp = Grps_get(grp_name);

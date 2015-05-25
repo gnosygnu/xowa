@@ -38,7 +38,7 @@ public class Xotdb_page_itm_ {
 			, page.Ns_id()
 			, Bry_.Mid					(bry, bgn + 26, end)
 			);
-		} catch (Exception e) {throw Err_.err_(e, "parse_by_ttl failed: {0}", String_.new_utf8_(bry, bgn, end));}
+		} catch (Exception e) {throw Err_.err_(e, "parse_by_ttl failed: {0}", String_.new_u8(bry, bgn, end));}
 	}
 	public static void Txt_ttl_save(Bry_bfr bfr, Xowd_page_itm page) {Txt_ttl_save(bfr, page.Id(), page.Text_db_id(), page.Tdb_row_idx(), page.Redirected(), page.Text_len(), page.Ttl_page_db());}
 	public static void Txt_ttl_save(Bry_bfr bfr, int id, int file_idx, int row_idx, boolean redirect, int text_len, byte[] ttl_wo_ns) {
@@ -63,7 +63,7 @@ public class Xotdb_page_itm_ {
 			, Base85_utl.XtoIntByAry	(bry, bgn + 26, bgn + 30)
 			, Bry_.Mid					(bry, bgn + 32, end)
 			);
-		} catch (Exception e) {throw Err_.err_(e, "parse_by_id failed: {0}", String_.new_utf8_(bry, bgn, end));}
+		} catch (Exception e) {throw Err_.err_(e, "parse_by_id failed: {0}", String_.new_u8(bry, bgn, end));}
 	}
 	public static void Txt_id_save(Bry_bfr bfr, Xowd_page_itm page) {
 		bfr	.Add_base85_len_5(page.Id())					.Add_byte_pipe()

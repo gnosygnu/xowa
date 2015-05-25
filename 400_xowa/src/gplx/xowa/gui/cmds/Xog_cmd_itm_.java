@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 public class Xog_cmd_itm_ {
-	private static final OrderedHash regy = OrderedHash_.new_();	// NOTE: must be defined at top
+	private static final Ordered_hash regy = Ordered_hash_.new_();	// NOTE: must be defined at top
 	public static final String 
 	  Key_app_exit												= new_dflt_(Xog_ctg_itm_.Tid_app			, "xowa.app.exit")
 
@@ -157,15 +157,15 @@ public class Xog_cmd_itm_ {
 		return key;
 	}
 	public static int Regy_len() {return regy.Count();}
-	public static Xog_cmd_itm Regy_get_at(int i) {return (Xog_cmd_itm)regy.FetchAt(i);}
-	public static Xog_cmd_itm Regy_get_or_null(String key) {return (Xog_cmd_itm)regy.Fetch(key);}
+	public static Xog_cmd_itm Regy_get_at(int i) {return (Xog_cmd_itm)regy.Get_at(i);}
+	public static Xog_cmd_itm Regy_get_or_null(String key) {return (Xog_cmd_itm)regy.Get_by(key);}
 	public static void Regy_add(Xog_cmd_itm itm) {regy.Add(itm.Key(), itm);}
 	public static final byte[]
-	  Msg_pre_api		= Bry_.new_ascii_("api-")
-	, Msg_pre_ctg		= Bry_.new_ascii_("api.ctg-")
-	, Msg_suf_name		= Bry_.new_ascii_("-name")
-	, Msg_suf_tip		= Bry_.new_ascii_("-tip")
-	, Msg_suf_letter	= Bry_.new_ascii_("-letter")
-	, Msg_suf_image		= Bry_.new_ascii_("-image")
+	  Msg_pre_api		= Bry_.new_a7("api-")
+	, Msg_pre_ctg		= Bry_.new_a7("api.ctg-")
+	, Msg_suf_name		= Bry_.new_a7("-name")
+	, Msg_suf_tip		= Bry_.new_a7("-tip")
+	, Msg_suf_letter	= Bry_.new_a7("-letter")
+	, Msg_suf_image		= Bry_.new_a7("-image")
 	;
 }

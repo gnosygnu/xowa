@@ -25,8 +25,8 @@ public class StackAdp_tst {
 		StackAdp stack = StackAdp_.new_();
 		for (int i : ary)
 			stack.Push(i);
-		ListAdp list = stack.XtoList();
-		int[] actl = (int[])list.Xto_ary(int.class);
+		List_adp list = stack.XtoList();
+		int[] actl = (int[])list.To_ary(int.class);
 		for (int i = 0; i < ary.length; i++)
 			Tfds.Eq(ary[i], actl[i]);
 	}

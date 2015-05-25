@@ -61,28 +61,28 @@ class Xowd_regy_mgr_fxt {
 	public void Clear() {
 		if (mgr == null) {
 			mgr_url = Io_url_.mem_fil_("mem/hive_regy.csv");
-			Io_mgr._.DeleteFil(mgr_url);
+			Io_mgr.I.DeleteFil(mgr_url);
 			mgr = new Xowd_regy_mgr(mgr_url);
 		}
 		else {
 			mgr.Clear();
 		}
 	}
-	public Xowd_regy_mgr_fxt Create(String key) {mgr.Create(Bry_.new_ascii_(key)); return this;}
-	public Xowd_regy_mgr_fxt Update_add(int fil_idx, String key) {mgr.Update_add(fil_idx, Bry_.new_ascii_(key)); return this;}
-	public Xowd_regy_mgr_fxt Update_change(int fil_idx, String old_key, String new_key) {mgr.Update_change(fil_idx, Bry_.new_ascii_(old_key), Bry_.new_ascii_(new_key)); return this;}
+	public Xowd_regy_mgr_fxt Create(String key) {mgr.Create(Bry_.new_a7(key)); return this;}
+	public Xowd_regy_mgr_fxt Update_add(int fil_idx, String key) {mgr.Update_add(fil_idx, Bry_.new_a7(key)); return this;}
+	public Xowd_regy_mgr_fxt Update_change(int fil_idx, String old_key, String new_key) {mgr.Update_change(fil_idx, Bry_.new_a7(old_key), Bry_.new_a7(new_key)); return this;}
 	public Xowd_regy_mgr_fxt Load(String lines) {
-		Io_mgr._.SaveFilStr(mgr_url, lines);
+		Io_mgr.I.SaveFilStr(mgr_url, lines);
 		mgr = new Xowd_regy_mgr(mgr_url);
 		return this;
 	}
 	public Xowd_regy_mgr_fxt Save() {mgr.Save(); return this;}
 	public Xowd_regy_mgr_fxt Tst_file(String expd) {
-		Tfds.Eq_str_lines(expd, Io_mgr._.LoadFilStr(mgr_url));
+		Tfds.Eq_str_lines(expd, Io_mgr.I.LoadFilStr(mgr_url));
 		return this;
 	}
 	public Xowd_regy_mgr_fxt Tst_find(String find, int expd) {
-		Tfds.Eq(expd, mgr.Files_find(Bry_.new_ascii_(find)));
+		Tfds.Eq(expd, mgr.Files_find(Bry_.new_a7(find)));
 		return this;
 	}
 }

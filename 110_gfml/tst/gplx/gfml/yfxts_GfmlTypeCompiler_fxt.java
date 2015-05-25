@@ -21,7 +21,7 @@ class GfmlTypeCompiler_fxt {
 	public GfmlNde_mok nde_() {return GfmlNde_mok.new_();}
 	public GfmlFld_mok fld_() {return GfmlFld_mok.new_();}
 	public GfmlTypRegy Regy() {return typBldr.TypeRegy();}
-	public void ini_Typ(ListAdp typs, GfmlTyp_mok typ) {typs.Add(typ);}
+	public void ini_Typ(List_adp typs, GfmlTyp_mok typ) {typs.Add(typ);}
 	@gplx.Internal protected void run_InitPragma(GfmlTypRegy regy, GfmlPragma pragma) {
 		GfmlTypeMakr makr = GfmlTypeMakr.new_();
 		GfmlType[] typeAry = pragma.MakePragmaTypes(makr);
@@ -34,7 +34,7 @@ class GfmlTypeCompiler_fxt {
 	}
 	public void tst_Compile(GfmlNde_mok nde, GfmlTyp_mok expd) {
 		GfmlNde gnde = run_Resolve(this.Regy(), "_type/type", nde);
-		OrderedHash list = OrderedHash_.new_();
+		Ordered_hash list = Ordered_hash_.new_();
 		GfmlType actlType = GfmlTypeCompiler.Compile(gnde, GfmlType_.Root, this.Regy(), list);
 		GfmlTyp_mok actl = GfmlTyp_mok.type_(actlType);
 		TfdsTstr_fxt tstr = TfdsTstr_fxt.new_();

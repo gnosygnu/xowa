@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public interface DataWtr extends SrlMgr {
-	HashAdp EnvVars();
+	Hash_adp EnvVars();
 
 	void InitWtr(String key, Object val);
 	void WriteTableBgn(String name, GfoFldList fields);

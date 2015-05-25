@@ -51,12 +51,12 @@ class Articles_itm {
 	public byte[] Text() {return text;} private byte[] text;
 }
 class Articles_itm_fmtr implements Bry_fmtr_arg {
-	private Xowe_wiki wiki; private ListAdp itms;
-	public void Init(Xowe_wiki wiki, ListAdp itms) {this.wiki = wiki; this.itms = itms;}
+	private Xowe_wiki wiki; private List_adp itms;
+	public void Init(Xowe_wiki wiki, List_adp itms) {this.wiki = wiki; this.itms = itms;}
 	public void XferAry(Bry_bfr bfr, int idx) {
 		int len = itms.Count();
 		for (int i = 0; i < len; i++) {
-			Articles_itm itm = (Articles_itm)itms.FetchAt(i);
+			Articles_itm itm = (Articles_itm)itms.Get_at(i);
 			Xoa_ttl ttl = Xoa_ttl.parse_(wiki, itm.Ttl()); if (ttl == null) continue;
 			fmtr.Bld_bfr(bfr, ttl.Full_db(), itm.Text());
 		}
@@ -65,9 +65,9 @@ class Articles_itm_fmtr implements Bry_fmtr_arg {
 	public static final Articles_itm_fmtr _ = new Articles_itm_fmtr(); Articles_itm_fmtr() {}
 }
 class Articles_xtn_skin_itm implements Xopg_xtn_skin_itm {
-	private ListAdp itms = ListAdp_.new_();
+	private List_adp itms = List_adp_.new_();
 	public byte Tid() {return Xopg_xtn_skin_itm_tid.Tid_sidebar;}
-	public byte[] Key() {return KEY;} public static final byte[] KEY = Bry_.new_utf8_("RelatedArticles");
+	public byte[] Key() {return KEY;} public static final byte[] KEY = Bry_.new_u8("RelatedArticles");
 	public void Add(Articles_itm itm) {itms.Add(itm);}
 	public void Write(Bry_bfr bfr, Xoae_page page) {
 		Xowe_wiki wiki = page.Wikie();

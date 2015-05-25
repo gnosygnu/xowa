@@ -23,7 +23,7 @@ public class GftBand {
 	public GftBand Len1_pct_(float val) {return Len1_(new GftSizeCalc_pct(val));}
 	public GftBand Len1_abs_(int v) {return Len1_(new GftSizeCalc_abs(v));}
 	public GftCell Cell_dfl() {return cell_dfl;} GftCell cell_dfl = new GftCell();
-	public ListAdp Cells() {return cells;} ListAdp cells = ListAdp_.new_();
+	public List_adp Cells() {return cells;} List_adp cells = List_adp_.new_();
 	public GftBand Cells_var_(int count) {
 		for (int i = 0; i < count; i++)
 			cells.Add(new GftCell().Len0_(new GftSizeCalc_var(count)));
@@ -37,28 +37,28 @@ public class GftBand {
 			cells.Add(new GftCell().Len0_(new GftSizeCalc_num(num)));
 		return this;
 	}
-	public ListAdp Items() {return items;} ListAdp items = ListAdp_.new_();
+	public List_adp Items() {return items;} List_adp items = List_adp_.new_();
 	public void Items_add(GftItem item) {items.Add(item);}
 	public void Calc(GftItem owner, int y, int h) {
 		int x = 0;
 		y = grid.Bands_dir().GetValByDir(y - h, y);
 		int availX = owner.Gft_w();
 		for (int i = 0; i < cells.Count(); i++) {
-			GftCell cell = (GftCell)cells.FetchAt(i);
+			GftCell cell = (GftCell)cells.Get_at(i);
 			if (cell.Len0().Key() == GftSizeCalc_abs.KEY) {
 				GftSizeCalc_abs calc = (GftSizeCalc_abs)cell.Len0();
 				availX -= calc.Val();
 			}
 			else if (cell.Len0().Key() == GftSizeCalc_var.KEY) {
 				if (i >= items.Count()) continue;
-				GftItem item = (GftItem)items.FetchAt(i);
+				GftItem item = (GftItem)items.Get_at(i);
 				GfuiElem elem = GfuiElem_.as_(item);
 				availX -= elem == null ? item.Gft_w() : elem.Width();
 			}
 		}
 		for (int i = 0; i < items.Count(); i++) {
-			GftItem item = (GftItem)items.FetchAt(i);
-			GftCell cell = i >= cells.Count() ? cell_dfl : (GftCell)cells.FetchAt(i);
+			GftItem item = (GftItem)items.Get_at(i);
+			GftCell cell = i >= cells.Count() ? cell_dfl : (GftCell)cells.Get_at(i);
 			int w = cell.Len0().Calc(grid, this, owner, item, availX);
 			item.Gft_rect_(RectAdp_.new_(x, y, w, h));
 //				Tfds.Write(item.Key_of_GfuiElem(), w, h, x, y);
@@ -71,7 +71,7 @@ public class GftBand {
 		rv.grid = grid;
 		rv.key = key; rv.idx = idx; rv.cell_dfl = cell_dfl.Clone(); rv.len1 = this.len1.Clone();
 		for (int i = 0; i < cells.Count(); i++) {
-			GftCell cell = (GftCell)cells.FetchAt(i);
+			GftCell cell = (GftCell)cells.Get_at(i);
 			rv.cells.Add(cell.Clone());
 		}
 		return rv;

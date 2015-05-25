@@ -21,9 +21,9 @@ public class Html_atr_ {
 	  Src_str = "src"
 	;
 	public static final byte[] 
-	  Id_bry		= Bry_.new_ascii_("id")
-	, Cls_bry		= Bry_.new_ascii_("class")
-	, Style_bry		= Bry_.new_ascii_("style")
-	, Href_bry		= Bry_.new_ascii_("href")
+	  Id_bry		= Bry_.new_a7("id")
+	, Cls_bry		= Bry_.new_a7("class")
+	, Style_bry		= Bry_.new_a7("style")
+	, Href_bry		= Bry_.new_a7("href")
 	;
 }

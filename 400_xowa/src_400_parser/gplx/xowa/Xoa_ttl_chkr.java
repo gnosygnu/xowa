@@ -21,7 +21,7 @@ public class Xoa_ttl_chkr implements Tst_chkr {
 	public int Chk(Tst_mgr mgr, String path, Object o) {
 		Xoa_ttl actl = (Xoa_ttl)o;
 		int rv = 0;
-		rv += mgr.Tst_val(expd_str == null, path, "raw", expd_str, String_.new_utf8_(actl.Raw()));
+		rv += mgr.Tst_val(expd_str == null, path, "raw", expd_str, String_.new_u8(actl.Raw()));
 		return rv;
 	}
 	public String Expd_str() {return expd_str;} public Xoa_ttl_chkr Expd_str_(String v) {expd_str = v; return this;} private String expd_str;

@@ -22,21 +22,21 @@ public class Wdata_lbl_wkr_wiki implements Wdata_lbl_wkr {
 	private Xoapi_wikibase wikibase_api;
 	public Wdata_lbl_wkr_wiki(Xoapi_wikibase wikibase_api, Wdata_wiki_mgr wdata_mgr) {this.wikibase_api = wikibase_api; this.wdata_mgr = wdata_mgr;}
 	public void Resolve(Wdata_lbl_mgr lbl_mgr, Wdata_lang_sorter sorter) {
-		ListAdp queue = lbl_mgr.Queue();
+		List_adp queue = lbl_mgr.Queue();
 		int len = queue.Count();
 		for (int i = 0; i < len; ++i) {
-			Wdata_lbl_itm itm = (Wdata_lbl_itm)queue.FetchAt(i);
+			Wdata_lbl_itm itm = (Wdata_lbl_itm)queue.Get_at(i);
 			Wdata_doc wdoc = wdata_mgr.Pages_get(itm.Ttl());
-			OrderedHash labels = wdoc.Label_list();
+			Ordered_hash labels = wdoc.Label_list();
 			if (labels.Count() == 0) continue;
-			labels.SortBy(sorter);
+			labels.Sort_by(sorter);
 			Wdata_langtext_itm label = Wdata_langtext_itm.Get_itm_or_null(wdoc.Label_list(), wikibase_api.Core_langs());
 			if (label == null)
 				itm.Load_vals(Bry_.Empty, itm.Ttl());	// NOTE: use itm.Ttl() in case no label is found for the core_lang
 			else {
 				itm.Load_vals(label.Lang(), label.Text());
 				if (itm.Text_en_enabled()) {
-					Wdata_langtext_itm en_label = (Wdata_langtext_itm)labels.Fetch(Xol_lang_.Key_en);
+					Wdata_langtext_itm en_label = (Wdata_langtext_itm)labels.Get_by(Xol_lang_.Key_en);
 					itm.Text_en_(en_label == null ? Bry_.Empty : en_label.Text());
 				}
 			}

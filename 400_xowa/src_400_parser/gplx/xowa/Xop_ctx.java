@@ -29,10 +29,10 @@ public class Xop_ctx {
 		for (Xop_ctx_wkr wkr : wkrs) wkr.Ctor_ctx(this);
 	}
 	public Xoae_app				App()				{return app;} private Xoae_app app;
-	public Xowe_wiki				Wiki()				{return wiki;} private Xowe_wiki wiki;
+	public Xowe_wiki			Wiki()				{return wiki;} private Xowe_wiki wiki;
 	public Xol_lang				Lang()				{return wiki.Lang();}
 	public Xop_tkn_mkr			Tkn_mkr()			{return app.Tkn_mkr();}
-	public Xoae_page				Cur_page()			{return cur_page;} public void Cur_page_(Xoae_page v) {cur_page = v;} private Xoae_page cur_page;
+	public Xoae_page			Cur_page()			{return cur_page;} public void Cur_page_(Xoae_page v) {cur_page = v;} private Xoae_page cur_page;
 	public byte					Parse_tid()			{return parse_tid;} public Xop_ctx Parse_tid_(byte v) {parse_tid = v; xnde_names_tid = v; return this;} private byte parse_tid = Xop_parser_.Parse_tid_null;
 	public byte					Xnde_names_tid()	{return xnde_names_tid;} public Xop_ctx Xnde_names_tid_(byte v) {xnde_names_tid = v; return this;} private byte xnde_names_tid = Xop_parser_.Parse_tid_null;
 	public Xop_amp_wkr			Amp()				{return amp;}	private Xop_amp_wkr  amp  = new Xop_amp_wkr();

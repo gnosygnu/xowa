@@ -170,8 +170,8 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 			}
 			return true;
 		} catch (Exception e) {
-			ctx.App().Usr_dlg().Warn_many("", "", "fatal error in lnki: page=~{0} src=~{1} err=~{2}", String_.new_utf8_(ctx.Cur_page().Ttl().Full_db()), String_.new_utf8_(src, lnki.Src_bgn(), lnki.Src_end()), Err_.Message_gplx(e));
+			ctx.App().Usr_dlg().Warn_many("", "", "fatal error in lnki: page=~{0} src=~{1} err=~{2}", String_.new_u8(ctx.Cur_page().Ttl().Full_db()), String_.new_u8(src, lnki.Src_bgn(), lnki.Src_end()), Err_.Message_gplx(e));
 			return false;
 		}
-	}	private static final byte[] Const_pipe = Bry_.new_ascii_("|");
+	}	private static final byte[] Const_pipe = Bry_.new_a7("|");
 }

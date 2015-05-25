@@ -48,5 +48,5 @@ class Wdata_prop_val_visitor implements Wdata_claim_visitor {
 	}
 	public void Visit_system(Wdata_claim_itm_system itm) {}
 	private static final byte[] Ignore_comma = new byte[]{Byte_ascii.Comma};
-	private static final byte[] Bry_quantity_margin_of_error = Bry_.new_utf8_("±");
+	private static final byte[] Bry_quantity_margin_of_error = Bry_.new_u8("±");
 }

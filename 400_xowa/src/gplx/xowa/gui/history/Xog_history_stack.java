@@ -17,12 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.history; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 public class Xog_history_stack {
-	private final ListAdp list = ListAdp_.new_();
+	private final List_adp list = List_adp_.new_();
 	public int Len() {return list.Count();}
 	public void Clear() {list.Clear(); cur_pos = 0;}
-	public Xog_history_itm Get_at(int i) {return (Xog_history_itm)list.FetchAt(i);}
+	public Xog_history_itm Get_at(int i) {return (Xog_history_itm)list.Get_at(i);}
 	public int Cur_pos() {return cur_pos;} private int cur_pos = 0;
-	public Xog_history_itm Cur_itm() {return list.Count() == 0 ? Xog_history_itm.Null : (Xog_history_itm)list.FetchAt(cur_pos);}
+	public Xog_history_itm Cur_itm() {return list.Count() == 0 ? Xog_history_itm.Null : (Xog_history_itm)list.Get_at(cur_pos);}
 	public void Add(Xog_history_itm new_itm) {
 		Xog_history_itm cur_itm = this.Cur_itm(); 
 		if (cur_itm != Xog_history_itm.Null && cur_itm.Eq_wo_bmk_pos(new_itm)) return;		// do not add if last itm is same;
@@ -51,7 +51,7 @@ public class Xog_history_stack {
 	public void Srl_save(Bry_bfr bfr) {
 		int len = list.Count();
 		for (int i = 0; i < len; ++i) {
-			Xog_history_itm itm = (Xog_history_itm)list.FetchAt(i);
+			Xog_history_itm itm = (Xog_history_itm)list.Get_at(i);
 			itm.Srl_save(bfr);
 		}
 	}

@@ -19,7 +19,7 @@ package gplx.xowa.xtns.wdatas.parsers; import gplx.*; import gplx.xowa.*; import
 import gplx.core.primitives.*;
 import gplx.json.*; import gplx.xowa.xtns.wdatas.core.*;
 class Wdata_claims_parser_v2 {
-	public void Make_claim_itms(byte[] qid, ListAdp claim_itms_list, byte[] src, Json_itm_kv claim_grp) {
+	public void Make_claim_itms(byte[] qid, List_adp claim_itms_list, byte[] src, Json_itm_kv claim_grp) {
 		Json_itm_ary claim_itms_ary = Json_itm_ary.cast_(claim_grp.Val());
 		int claim_itms_len = claim_itms_ary.Subs_len();
 		int pid = Parse_pid(claim_grp.Key().Data_bry());
@@ -102,14 +102,14 @@ class Wdata_claims_parser_v2 {
 		return rv;
 	}
 	private Wdata_claim_grp Parse_props_grp(byte[] qid, int pid, Json_itm_ary props_ary) {
-		ListAdp list = ListAdp_.new_();
+		List_adp list = List_adp_.new_();
 		int len = props_ary.Subs_len();
 		for (int i = 0; i < len; ++i) {
 			Json_itm_nde qualifier_nde = Json_itm_nde.cast_(props_ary.Subs_get_at(i));
 			Wdata_claim_itm_core qualifier_itm = Parse_mainsnak(qid, qualifier_nde, pid);
 			list.Add(qualifier_itm);
 		}
-		return new Wdata_claim_grp(Int_obj_ref.new_(pid), (Wdata_claim_itm_core[])list.Xto_ary_and_clear(Wdata_claim_itm_core.class));
+		return new Wdata_claim_grp(Int_obj_ref.new_(pid), (Wdata_claim_itm_core[])list.To_ary_and_clear(Wdata_claim_itm_core.class));
 	}
 	public Wdata_claim_itm_core Parse_mainsnak(byte[] qid, Json_itm_nde nde, int pid) {
 		int len = nde.Subs_len();
@@ -239,7 +239,7 @@ class Wdata_claims_parser_v2 {
 		return new Wdata_claim_itm_time(pid, snak_tid, time, timezone, before, after, precision, calendarmodel);
 	}
 	private static int Parse_pid(byte[] pid_bry) {
-		int rv = Bry_.Xto_int_or(pid_bry, 1, pid_bry.length, -1); if (rv == -1) throw Err_.new_("invalid pid; pid={0}", String_.new_utf8_(pid_bry));
+		int rv = Bry_.Xto_int_or(pid_bry, 1, pid_bry.length, -1); if (rv == -1) throw Err_.new_("invalid pid; pid={0}", String_.new_u8(pid_bry));
 		return rv;
 	}
 }

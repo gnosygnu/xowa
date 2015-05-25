@@ -19,7 +19,7 @@ package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.xowa.wikis.*; import gplx.xowa.html.modules.*; import gplx.xowa.apps.fsys.*;
 public class Hiero_xtn_mgr extends Xox_mgr_base implements GfoInvkAble {
 	@Override public boolean Enabled_default() {return true;}
-	@Override public byte[] Xtn_key() {return Xtn_key_static;} public static final byte[] Xtn_key_static = Bry_.new_ascii_("hiero");
+	@Override public byte[] Xtn_key() {return Xtn_key_static;} public static final byte[] Xtn_key_static = Bry_.new_a7("hiero");
 	@Override public Xox_mgr Clone_new() {return new Hiero_xtn_mgr();}
 	public static byte[] Img_src_dir;
 	@Override public void Xtn_init_by_wiki(Xowe_wiki wiki) {}
@@ -29,7 +29,7 @@ public class Hiero_xtn_mgr extends Xox_mgr_base implements GfoInvkAble {
 		if (!Enabled()) return;
 		Xoae_app app = wiki.Appe();
 		Io_url ext_root_dir = Hiero_root_dir(app.Fsys_mgr());
-		Img_src_dir = Bry_.new_utf8_(ext_root_dir.GenSubDir("img").To_http_file_str());
+		Img_src_dir = Bry_.new_u8(ext_root_dir.GenSubDir("img").To_http_file_str());
 		app.Gfs_mgr().Run_url_for(this, ext_root_dir.GenSubFil_nest("data", "tables.gfs"));
 		html_wtr = new Hiero_html_mgr(this);
 		parser.Init();

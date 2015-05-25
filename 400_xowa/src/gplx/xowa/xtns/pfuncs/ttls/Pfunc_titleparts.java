@@ -43,7 +43,7 @@ public class Pfunc_titleparts extends Pf_func_base {
 			ctx.Msg_log().Add_itm_none(Pfunc_titleparts_log.Bgn_is_invalid, src, caller.Src_bgn(), caller.Src_end());
 			parts_bgn = 0;	// NOTE: do not return
 		}
-		else if (parts_bgn > 0) parts_bgn -= ListAdp_.Base1;	// adjust for base1
+		else if (parts_bgn > 0) parts_bgn -= List_adp_.Base1;	// adjust for base1
 		bb.Add(TitleParts(argx, parts_len, parts_bgn));
 	}
 	private byte[] TitleParts(byte[] src, int parts_len, int parts_bgn) {

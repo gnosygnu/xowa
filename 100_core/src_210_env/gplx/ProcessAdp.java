@@ -44,14 +44,14 @@ public class ProcessAdp implements GfoInvkAble, RlsAble {
 	public int Thread_interval() {return thread_interval;} public ProcessAdp Thread_interval_(int v) {thread_interval = v; return this;} int thread_interval = 20;
 	public String Thread_kill_name() {return thread_kill_name;} public ProcessAdp Thread_kill_name_(String v) {thread_kill_name = v; return this;} private String thread_kill_name = "";
 	public Io_url Tmp_dir() {return tmp_dir;} @gplx.Virtual public ProcessAdp Tmp_dir_(Io_url v) {tmp_dir = v; return this;} Io_url tmp_dir;
-	private ProcessAdp WhenBgn_run() {return Invk_cmds(whenBgnList);} ListAdp whenBgnList = ListAdp_.new_();
+	private ProcessAdp WhenBgn_run() {return Invk_cmds(whenBgnList);} List_adp whenBgnList = List_adp_.new_();
 	public ProcessAdp WhenEnd_add(GfoInvkAbleCmd cmd) {whenEndList.Add(cmd); return this;}
 	public ProcessAdp WhenEnd_del(GfoInvkAbleCmd cmd) {whenEndList.Del(cmd); return this;}
 	public Gfo_usr_dlg Prog_dlg() {return prog_dlg;} public ProcessAdp Prog_dlg_(Gfo_usr_dlg v) {prog_dlg = v; return this;} Gfo_usr_dlg prog_dlg;
 	public String Prog_fmt() {return prog_fmt;} public ProcessAdp Prog_fmt_(String v) {prog_fmt = v; return this;} private String prog_fmt = "";	// NOTE: set to "", else cmds that do not set prog_fmt will fail on fmtr.Fmt(null)
 	private GfoInvkAble owner;
-	private ProcessAdp WhenEnd_run() {return Invk_cmds(whenEndList);} ListAdp whenEndList = ListAdp_.new_();
-	private ProcessAdp Invk_cmds(ListAdp list) {
+	private ProcessAdp WhenEnd_run() {return Invk_cmds(whenEndList);} List_adp whenEndList = List_adp_.new_();
+	private ProcessAdp Invk_cmds(List_adp list) {
 		for (Object o : list)
 			((GfoInvkAbleCmd)o).Invk();
 		return this;
@@ -81,7 +81,7 @@ public class ProcessAdp implements GfoInvkAble, RlsAble {
 		else if	(ctx.Match(k, Invk_enabled_))					enabled = m.ReadBool("v");
 		else if	(ctx.Match(k, Invk_cmd))						return exe_url.Raw();
 		else if	(ctx.Match(k, Invk_cmd_))						this.Exe_url_(Bry_fmtr_eval_mgr_.Eval_url(cmd_url_eval, m.ReadBry("cmd")));
-		else if	(ctx.Match(k, Invk_args))						return String_.new_utf8_(args_fmtr.Fmt());
+		else if	(ctx.Match(k, Invk_args))						return String_.new_u8(args_fmtr.Fmt());
 		else if	(ctx.Match(k, Invk_args_))						args_fmtr.Fmt_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_cmd_args_))					{this.Exe_url_(Bry_fmtr_eval_mgr_.Eval_url(cmd_url_eval, m.ReadBry("cmd"))); args_fmtr.Fmt_(m.ReadBry("args"));}
 		else if	(ctx.Match(k, Invk_mode_))						run_mode = m.ReadByte("v");
@@ -96,7 +96,7 @@ public class ProcessAdp implements GfoInvkAble, RlsAble {
 	public static ProcessAdp ini_(GfoInvkAble owner, Gfo_usr_dlg usr_dlg, ProcessAdp process, Bry_fmtr_eval_mgr cmd_url_eval, byte run_mode, int timeout, String cmd_url_fmt, String args_fmt, String... args_keys) {
 		process.Run_mode_(run_mode).Thread_timeout_seconds_(timeout);
 		process.cmd_url_eval = cmd_url_eval;
-		Io_url cmd_url = Bry_fmtr_eval_mgr_.Eval_url(cmd_url_eval, Bry_.new_utf8_(cmd_url_fmt));
+		Io_url cmd_url = Bry_fmtr_eval_mgr_.Eval_url(cmd_url_eval, Bry_.new_u8(cmd_url_fmt));
 		process.Exe_url_(cmd_url).Tmp_dir_(cmd_url.OwnerDir());
 		process.Args_fmtr().Fmt_(args_fmt).Keys_(args_keys);
 		process.owner = owner;
@@ -256,7 +256,7 @@ public class ProcessAdp implements GfoInvkAble, RlsAble {
 		process.Process_run_and_end();
 		return;
 	}
-		public static final ListAdp Test_runs = ListAdp_.new_();
+		public static final List_adp Test_runs = List_adp_.new_();
 	private ProcessAdp Test_runs_add() {Test_runs.Add(exe_url.Raw() + " " + args_str); exit_code = Exit_pass; return this;}
 	public static int run_wait_arg_(Io_url url, String arg) {
 		ProcessAdp process = new ProcessAdp();
@@ -266,7 +266,7 @@ public class ProcessAdp implements GfoInvkAble, RlsAble {
 	private static final String GRP_KEY = "gplx.process";
 	public static final int Exit_pass = 0, Exit_init = -1;
 	public static String[] Xto_process_bldr_args_utl(Io_url exe_url, String args_str) {		
-		ListAdp list = ListAdp_.new_();
+		List_adp list = List_adp_.new_();
 		list.Add(exe_url.Xto_api());
 		String_bldr sb = String_bldr_.new_();
 		int len = String_.Len(args_str);
@@ -283,7 +283,7 @@ public class ProcessAdp implements GfoInvkAble, RlsAble {
 				sb.Add(c);
 		}
 		if (sb.Has_some()) list.Add(sb.XtoStr());
-		return list.XtoStrAry();
+		return list.To_str_ary();
 	}
 }
 class Thread_ProcessAdp_async extends Thread {

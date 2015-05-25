@@ -31,7 +31,7 @@ public class Map_geolink_func extends Pf_func_base {
 			for (int i = 0; i < args_len; i++) {
 				Arg_nde_tkn arg = self.Args_get_by_idx(i);				
 				byte[] key = Pf_func_.Eval_tkn(tmp_bfr, ctx, src, caller, arg.Key_tkn());
-				Object key_tid_obj = Key_hash.Fetch(key);
+				Object key_tid_obj = Key_hash.Get_by(key);
 				if (key_tid_obj != null) {
 					byte[] val = Pf_func_.Eval_tkn(tmp_bfr, ctx, src, caller, arg.Val_tkn());
 					switch (((Byte_obj_val)key_tid_obj).Val()) {
@@ -81,9 +81,9 @@ public class Map_geolink_func extends Pf_func_base {
 			;
 	}
 	private static final byte[] 
-	  Bry_arg_0_fail = Bry_.new_ascii_("0_N")
-	, Bry_arg_1_fail = Bry_.new_ascii_("0_E")
-	, Bry_arg_5_fail = Bry_.new_ascii_("0")
+	  Bry_arg_0_fail = Bry_.new_a7("0_N")
+	, Bry_arg_1_fail = Bry_.new_a7("0_E")
+	, Bry_arg_5_fail = Bry_.new_a7("0")
 	;
 /*
 	return wfMsgReplaceArgs( $pattern, $args );

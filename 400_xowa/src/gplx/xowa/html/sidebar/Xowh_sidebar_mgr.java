@@ -19,8 +19,8 @@ package gplx.xowa.html.sidebar; import gplx.*; import gplx.xowa.*; import gplx.x
 import gplx.core.btries.*; import gplx.xowa.langs.msgs.*;
 public class Xowh_sidebar_mgr implements GfoInvkAble {
 	public Xowh_sidebar_mgr(Xowe_wiki wiki) {this.wiki = wiki;} private Xowe_wiki wiki;		
-	public int Grps_len() {return grps.Count();} ListAdp grps = ListAdp_.new_();
-	public Xowh_sidebar_itm Grps_get_at(int i) {return (Xowh_sidebar_itm)grps.FetchAt(i);}
+	public int Grps_len() {return grps.Count();} List_adp grps = List_adp_.new_();
+	public Xowh_sidebar_itm Grps_get_at(int i) {return (Xowh_sidebar_itm)grps.Get_at(i);}
 	public byte[] Html_bry() {return html_bry;} private byte[] html_bry;
 	public void Init() {
 		try {
@@ -28,7 +28,7 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 			Xol_msg_itm sidebar_msg = Xol_msg_mgr_.Get_msg_itm(bfr, wiki, wiki.Lang(), CONST_sidebar_ttl);
 			if (	sidebar_msg.Src() == Xol_msg_itm.Src_missing
 				||	(	sidebar_msg.Src() == Xol_msg_itm.Src_lang
-					&&	wiki.Domain_tid() == gplx.xowa.wikis.Xow_domain_.Tid_int_home
+					&&	wiki.Domain_tid() == gplx.xowa.wikis.Xow_domain_type_.Tid_home
 				)) {
 				html_bry = Bry_.Empty;
 				bfr.Mkr_rls();
@@ -49,7 +49,7 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 			(	Bry_.Eq(wiki, Ignore_wiki_ess)			// occurs in 2014-02-03 dump; ignored by MW
 			&&	Bry_.Eq(item, Ignore_item_ess_random)
 			);
-	}	private static byte[] Ignore_wiki_ess = Bry_.new_ascii_("es.wikisource.org"), Ignore_item_ess_random = Bry_.new_utf8_("special:Random/Página djvu");
+	}	private static byte[] Ignore_wiki_ess = Bry_.new_a7("es.wikisource.org"), Ignore_item_ess_random = Bry_.new_u8("special:Random/Página djvu");
 	public void Parse(Bry_bfr bfr, Bry_bfr comment_bfr, byte[] src) {
 		byte[][] lines = Bry_.Split(src, Byte_ascii.NewLine);
 		int lines_len = lines.length;
@@ -77,7 +77,7 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 			else {
 				if (pipe_pos == Bry_.NotFound) {		// not of format of "href|main"; (EX: "href_only")
 					if (!Ignore(wiki.Domain_bry(), bry))	// suppress warning if ignored; DATE:2014-02-11
-						wiki.Appe().Usr_dlg().Warn_many(GRP_KEY, "parse.line.missing_text", "sidebar item is missing pipe; only href is available; item will be hidden: item=~{0}", String_.new_utf8_(bry));
+						wiki.Appe().Usr_dlg().Warn_many(GRP_KEY, "parse.line.missing_text", "sidebar item is missing pipe; only href is available; item will be hidden: item=~{0}", String_.new_u8(bry));
 					continue;
 				}
 				byte[] href_key = Bry_.Mid(bry, 0, pipe_pos);
@@ -94,7 +94,7 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 	public void Bld_html(Bry_bfr bfr) {
 		int len = grps.Count();
 		for (int i = 0; i < len; i++) {
-			Xowh_sidebar_itm grp = (Xowh_sidebar_itm)grps.FetchAt(i);
+			Xowh_sidebar_itm grp = (Xowh_sidebar_itm)grps.Get_at(i);
 			html_grp_fmtr_arg.Grp_(wiki, grp, html_itm_fmtr);
 			html_grp_fmtr.Bld_bfr_many(bfr, grp.Id(), grp.Text(), html_grp_fmtr_arg);
 		}
@@ -123,7 +123,7 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 		else											return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_html_grp_fmt_ = "html_grp_fmt_", Invk_html_itm_fmt_ = "html_itm_fmt_";
-	private static final byte[] CONST_id_prefix = Bry_.new_ascii_("n-");
+	private static final byte[] CONST_id_prefix = Bry_.new_a7("n-");
 	private static final byte Ignore_tid_search = 1, Ignore_tid_toolbox = 2, Ignore_tid_toolbox_end = 3, Ignore_tid_languages = 4;
 	private static final Btrie_slim_mgr ignore_trie = Btrie_slim_mgr.ci_ascii_()
 	.Add_str_byte("SEARCH", Ignore_tid_search)
@@ -132,5 +132,5 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 	.Add_str_byte("LANGUAGES", Ignore_tid_languages)
 	;
 	private static final String GRP_KEY = "xowa.wiki.gui.skin.mgr";
-	private static final byte[] CONST_sidebar_ttl = Bry_.new_ascii_("Sidebar");
+	private static final byte[] CONST_sidebar_ttl = Bry_.new_a7("Sidebar");
 }

@@ -28,7 +28,7 @@ public class Xoctg_pagelist_grp implements Bry_fmtr_arg {
 		lbl_ctg_help	= Xol_msg_mgr_.Get_msg_val(wiki, wiki.Lang(), Key_pagecategorieslink, Bry_.Ary_empty);
 		lbl_hidden		= wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_ctg_tbl_hidden);
 		itms.Init_wiki(wiki);
-	}	private byte[] lbl_ctg_help, lbl_ctg_text, lbl_hidden; private static final byte[] Key_pagecategorieslink = Bry_.new_ascii_("pagecategorieslink");
+	}	private byte[] lbl_ctg_help, lbl_ctg_text, lbl_hidden; private static final byte[] Key_pagecategorieslink = Bry_.new_a7("pagecategorieslink");
 	public boolean Type_is_normal() {return type_is_normal;} private boolean type_is_normal;
 	public Xoctg_pagelist_itms Itms() {return itms;} private Xoctg_pagelist_itms itms = new Xoctg_pagelist_itms();
 	public void XferAry(Bry_bfr bfr, int idx) {

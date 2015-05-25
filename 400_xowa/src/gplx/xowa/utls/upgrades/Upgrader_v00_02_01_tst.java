@@ -22,12 +22,12 @@ public class Upgrader_v00_02_01_tst {
 		Xoae_app app = Xoa_app_fxt.app_();
 		Xowe_wiki wiki = Xoa_app_fxt.wiki_tst_(app);
 		Io_url cfg_dir = wiki.Fsys_mgr().Root_dir().GenSubDir("cfg");
-		Io_mgr._.SaveFilStr(cfg_dir.GenSubFil("siteInfo.xml"), Str_siteinfo_xml);
-		Io_mgr._.SaveFilStr(cfg_dir.GenSubFil("wiki.gfs"), Str_wikistats_gfs);
+		Io_mgr.I.SaveFilStr(cfg_dir.GenSubFil("siteInfo.xml"), Str_siteinfo_xml);
+		Io_mgr.I.SaveFilStr(cfg_dir.GenSubFil("wiki.gfs"), Str_wikistats_gfs);
 		Upgrader_v00_02_01 mgr = new Upgrader_v00_02_01();
 		mgr.Run(wiki);
-		Tfds.Eq_str_lines(Xow_cfg_wiki_core_tst.Const_wiki_core_cfg, Io_mgr._.LoadFilStr(wiki.Tdb_fsys_mgr().Cfg_wiki_core_fil()));
-		Tfds.Eq_str_lines("/* assume content ... */", Io_mgr._.LoadFilStr(wiki.Tdb_fsys_mgr().Cfg_wiki_stats_fil()));
+		Tfds.Eq_str_lines(Xow_cfg_wiki_core_tst.Const_wiki_core_cfg, Io_mgr.I.LoadFilStr(wiki.Tdb_fsys_mgr().Cfg_wiki_core_fil()));
+		Tfds.Eq_str_lines("/* assume content ... */", Io_mgr.I.LoadFilStr(wiki.Tdb_fsys_mgr().Cfg_wiki_stats_fil()));
 	}
 	public static String Str_siteinfo_xml = String_.Concat_lines_nl
 	(	"<siteinfo>"

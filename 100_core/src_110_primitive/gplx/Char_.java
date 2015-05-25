@@ -66,7 +66,7 @@ public class Char_ {
 		return false;
 	}
 	public static String XtoStr(char[] ary, int pos, int length) {return new String(ary, pos, length);}
-	public static byte[] XtoByteAry(int v) {return Bry_.new_utf8_(Char_.XtoStr((char)v));}
+	public static byte[] XtoByteAry(int v) {return Bry_.new_u8(Char_.XtoStr((char)v));}
 	public static char XbyInt(int i) {return (char)i;}
 	public static String XtoStr(int b) {return XtoStr((char)b);}
 	public static String XtoStr(char c) {return String.valueOf(c);}	

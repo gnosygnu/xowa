@@ -19,7 +19,7 @@ package gplx;
 public class IoUrlClassXtn extends ClassXtn_base implements ClassXtn {
 	public String Key() {return Key_const;}						public static final String Key_const = "ioPath";
 	@Override public Class<?> UnderClass()					{return Io_url.class;}
-	public Object DefaultValue()								{return Io_url_.Null;}
+	public Object DefaultValue()								{return Io_url_.Empty;}
 	@Override public Object ParseOrNull(String raw)				{return Io_url_.new_any_(raw);}
 	@Override public Object XtoDb(Object obj)					{return Io_url_.cast_(obj).Raw();}
 	@Override public String XtoUi(Object obj, String fmt)		{return Io_url_.cast_(obj).Raw();}

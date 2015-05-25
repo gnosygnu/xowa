@@ -30,20 +30,20 @@ public class Xof_url_bldr {
 	}
 	public Xof_url_bldr Init_by_itm(byte mode, byte[] ttl, byte[] md5, Xof_ext ext, int file_w, double time, int page) {
 		this.ttl = ttl; this.md5 = md5;	this.ext = ext; this.file_w = file_w; this.time = time; this.page = page;
-		if (wmf_protocol_is_file && fsys_tid_is_wnt) this.ttl = Xof_repo_itm.Ttl_invalid_fsys_chars(ttl); // NOTE: changed ttl does not change md5
-		this.file_is_thumb = mode == Xof_repo_itm.Mode_thumb;
-		this.area = Xof_repo_itm.Mode_names_key[mode];
+		if (wmf_protocol_is_file && fsys_tid_is_wnt) this.ttl = Xof_repo_itm_.Ttl_invalid_fsys_chars(bfr, ttl); // NOTE: changed ttl does not change md5
+		this.file_is_thumb = mode == Xof_repo_itm_.Mode_thumb;
+		this.area = Xof_repo_itm_.Mode_names_key[mode];
 		return this;
 	}
 	public Xof_url_bldr Init_for_src_file(byte mode, Xof_repo_itm repo, byte[] ttl, byte[] md5, Xof_ext ext, int file_w, double time, int page) {
 		this.wmf_dir_hive = Bool_.Y; this.wmf_protocol_is_file = repo.Tarball();
-		this.dir_spr = repo.Dir_spr(); this.root = repo.Root(); this.area = repo.Mode_names()[mode];
+		this.dir_spr = repo.Dir_spr(); this.root = repo.Root_bry(); this.area = repo.Mode_names()[mode];
 		this.ttl = repo.Gen_name_src(ttl); this.md5 = md5; this.ext = ext;
-		this.file_is_thumb = mode == Xof_repo_itm.Mode_thumb; this.file_w = file_w; this.time = time; this.page = page;
+		this.file_is_thumb = mode == Xof_repo_itm_.Mode_thumb; this.file_w = file_w; this.time = time; this.page = page;
 		return this;
 	}
 	public Xof_url_bldr Init_for_trg_file(byte mode, Xof_repo_itm repo, byte[] ttl, byte[] md5, Xof_ext ext, int file_w, double time, int page) {
-		return Init(Bool_.N, Bool_.N, repo.Dir_spr(), repo.Root()
+		return Init(Bool_.N, Bool_.N, repo.Dir_spr(), repo.Root_bry()
 			, repo.Mode_names()[mode], repo.Dir_depth(), repo.Gen_name_trg(ttl, md5, ext), md5, ext, mode, file_w, time, page);
 	}
 	public Xof_url_bldr Init_for_trg_html(byte mode, Xof_repo_itm repo, byte[] ttl, byte[] md5, Xof_ext ext, int file_w, double time, int page) {
@@ -57,16 +57,23 @@ public class Xof_url_bldr {
 		this.wmf_dir_hive = wmf_dir_hive; this.wmf_protocol_is_file = wmf_protocol_is_file; this.dir_spr = dir_spr;
 		this.root = root;  this.area = area; this.md5_dir_depth = md5_dir_depth;
 		this.ttl = ttl; this.md5 = md5; this.ext = ext;
-		this.file_is_thumb = file_mode == Xof_repo_itm.Mode_thumb; this.file_w = file_w; this.time = time; this.page = page;			
+		this.file_is_thumb = file_mode == Xof_repo_itm_.Mode_thumb; this.file_w = file_w; this.time = time; this.page = page;			
 		return this;
 	}
 	public byte[] Xto_bry() {Bld(); byte[] rv = bfr.Xto_bry_and_clear(); Clear(); return rv;}
 	public String Xto_str() {Bld(); String rv = bfr.Xto_str(); Clear(); return rv;}
 	public Io_url Xto_url() {Bld(); Io_url rv = Io_url_.new_fil_(bfr.Xto_str()); Clear(); return rv;}
 	public Io_url To_url_trg(Xof_repo_itm repo_itm, Xof_fsdb_itm itm, boolean orig) {
-		byte mode = orig ? Xof_repo_itm.Mode_orig : Xof_repo_itm.Mode_thumb;
-//			return this.Init_for_trg_file(mode, repo_itm, itm.Lnki_ttl(), itm.Lnki_md5(), itm.Lnki_ext(), itm.Html_w(), itm.Lnki_time(), itm.Lnki_page()).Xto_url();
-		return this.Init_for_trg_file(mode, repo_itm, itm.Lnki_ttl(), itm.Lnki_md5(), itm.Lnki_ext(), itm.Html_w(), itm.Lnki_time(), itm.Lnki_page()).Xto_url();
+		byte mode = orig ? Xof_repo_itm_.Mode_orig : Xof_repo_itm_.Mode_thumb;
+		return this.Init_for_trg_file(mode, repo_itm, itm.Orig_ttl(), itm.Orig_ttl_md5(), itm.Orig_ext(), itm.Html_w(), itm.Lnki_time(), itm.Lnki_page()).Xto_url();
+	}
+	public Io_url To_url_trg(Xof_repo_itm repo_itm, gplx.xowa.files.caches.Xou_cache_itm itm, boolean orig) {
+		byte mode = orig ? Xof_repo_itm_.Mode_orig : Xof_repo_itm_.Mode_thumb;
+		return this.Init_for_trg_file(mode, repo_itm, itm.Orig_ttl(), itm.Orig_ttl_md5(), itm.Orig_ext_itm(), itm.Html_w(), itm.Lnki_time(), itm.Lnki_page()).Xto_url();
+	}
+	public Io_url To_url_trg(Xof_repo_itm repo_itm, Xof_file_itm itm, boolean orig) {
+		byte mode = orig ? Xof_repo_itm_.Mode_orig : Xof_repo_itm_.Mode_thumb;
+		return this.Init_for_trg_file(mode, repo_itm, itm.Orig_ttl(), itm.Orig_ttl_md5(), itm.Orig_ext(), itm.Html_w(), itm.Lnki_time(), itm.Lnki_page()).Xto_url();
 	}
 	private void Bld() {
 		Add_core();
@@ -177,16 +184,16 @@ public class Xof_url_bldr {
 		return this;
 	}
 	public static final byte[]
-	  Bry_reg = Bry_.new_ascii_("reg.csv")
-	, Bry_px = Bry_.new_ascii_("px"), Bry_px_dash = Bry_.new_ascii_("px-")
-	, Bry_thumb = Bry_.new_ascii_("thumb"), Bry_mid = Bry_.new_ascii_("mid-")
+	  Bry_reg = Bry_.new_a7("reg.csv")
+	, Bry_px = Bry_.new_a7("px"), Bry_px_dash = Bry_.new_a7("px-")
+	, Bry_thumb = Bry_.new_a7("thumb"), Bry_mid = Bry_.new_a7("mid-")
 	;
 	private static final byte[]
-	  Bry_lossy_page  = Bry_.new_ascii_("lossy-page"), Bry_page = Bry_.new_ascii_("page")
-	, Bry_lossy_page1 = Bry_.new_ascii_("lossy-page1-"), Bry_page1 = Bry_.new_ascii_("page1-"), Bry_seek = Bry_.new_ascii_("seek%3D");
+	  Bry_lossy_page  = Bry_.new_a7("lossy-page"), Bry_page = Bry_.new_a7("page")
+	, Bry_lossy_page1 = Bry_.new_a7("lossy-page1-"), Bry_page1 = Bry_.new_a7("page1-"), Bry_seek = Bry_.new_a7("seek%3D");
 	public static final Xof_url_bldr Temp = new Xof_url_bldr();
 	private static final Url_encoder encoder_src_http = Url_encoder.new_http_url_(); // NOTE: changed from new_html_href_mw_ to new_url_ on 2012-11-19; issues with A%2Cb becoming A%252Cb
-	public static Xof_url_bldr new_v2_() {
+	public static Xof_url_bldr new_v2() {
 		Xof_url_bldr rv = new Xof_url_bldr();
 		rv.time_dlm = Byte_ascii.Dash;
 		return rv;

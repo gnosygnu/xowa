@@ -96,7 +96,7 @@ public class Db_stmt_cmd implements Db_stmt {
 	public Db_stmt Crt_bry_as_str(String k, byte[] v)	{return Add_bry_as_str(Bool_.Y, k, v);}
 	public Db_stmt Val_bry_as_str(String k, byte[] v)	{return Add_bry_as_str(Bool_.N, k, v);}
 	public Db_stmt Val_bry_as_str(byte[] v)				{return Add_bry_as_str(Bool_.N, Key_na, v);}
-	private Db_stmt Add_bry_as_str(boolean where, String k, byte[] v) {return Add_str(where, k, String_.new_utf8_(v));}
+	private Db_stmt Add_bry_as_str(boolean where, String k, byte[] v) {return Add_str(where, k, String_.new_u8(v));}
 	public Db_stmt Crt_str(String k, String v)	{return Add_str(Bool_.Y, k, v);}
 	public Db_stmt Val_str(String k, String v)	{return Add_str(Bool_.N, k, v);}
 	public Db_stmt Val_str(String v)			{return Add_str(Bool_.N, Key_na, v);}

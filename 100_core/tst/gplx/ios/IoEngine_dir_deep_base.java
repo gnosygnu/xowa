@@ -92,7 +92,7 @@ public abstract class IoEngine_dir_deep_base {
 //			tst_(dialog, 2, "scan", src_dir0a_dir0a);
 //		}
 //		void tst_(ConsoleDlg_dev dialog, int i, String s, Io_url root) {
-//			Object o = dialog.Written.FetchAt(i);
+//			Object o = dialog.Written.Get_at(i);
 //			IoStatusArgs args = (IoStatusArgs)o;
 //			Tfds.Eq(s, args.Op);
 //			Tfds.Eq(root, args.Path);

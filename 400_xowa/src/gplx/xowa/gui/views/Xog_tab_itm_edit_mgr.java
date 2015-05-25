@@ -31,7 +31,7 @@ public class Xog_tab_itm_edit_mgr {
 		Invalidate(wiki);
 		page.Data_raw_(new_text);
 		wiki.ParsePage_root(page, true);			// refresh html
-		win_itm.Usr_dlg().Prog_one("", "", "saved page ~{0}", String_.new_utf8_(page.Ttl().Full_txt_raw()));	// NOTE: show message after ParsePage_root, b/c ParsePage_root will flash "Loading page"; DATE:2014-05-17
+		win_itm.Usr_dlg().Prog_one("", "", "saved page ~{0}", String_.new_u8(page.Ttl().Full_txt_raw()));	// NOTE: show message after ParsePage_root, b/c ParsePage_root will flash "Loading page"; DATE:2014-05-17
 		if (!quick_save) {							// full_save; save page and go to read mode
 			page.Html_data().Edit_preview_(Bry_.Empty);
 			Xoae_page stack_page = tab.History_mgr().Cur_page(wiki);			// NOTE: must be to CurPage() else changes will be lost when going Bwd,Fwd
@@ -74,7 +74,7 @@ public class Xog_tab_itm_edit_mgr {
 			win_itm.Kit().Ask_ok("", "", "The Main Page cannot be renamed");
 			return;
 		}
-		byte[] new_text = Bry_.new_utf8_(tab.Html_itm().Get_elem_value(Xog_html_itm.Elem_id__xowa_edit_rename_box));
+		byte[] new_text = Bry_.new_u8(tab.Html_itm().Get_elem_value(Xog_html_itm.Elem_id__xowa_edit_rename_box));
 		if (Bry_.Len_eq_0(new_text)) return;		// no ttl given; exit
 		new_text = Xoa_ttl.Replace_spaces(new_text);	// ttls cannot have spaces; only underscores
 		Xoa_ttl new_ttl = Xoa_ttl.parse_(wiki, new_text);
@@ -86,7 +86,7 @@ public class Xog_tab_itm_edit_mgr {
 		wiki.Db_mgr().Save_mgr().Data_rename(page, new_ns_id, new_text);
 		page.Ttl_(Xoa_ttl.parse_(wiki, Bry_.Add(page.Ttl().Ns().Name_db_w_colon(), new_text)));
 		win_itm.Page__mode_(Xopg_view_mode.Tid_read);
-		win_itm.Usr_dlg().Prog_one("", "", "renamed page to {0}", String_.new_utf8_(page.Ttl().Full_txt_raw()));
+		win_itm.Usr_dlg().Prog_one("", "", "renamed page to {0}", String_.new_u8(page.Ttl().Full_txt_raw()));
 	}
 	public static void Focus(Xog_win_itm win, String elem_focus_id) {
 		Gfui_html html_box = win.Active_html_box();

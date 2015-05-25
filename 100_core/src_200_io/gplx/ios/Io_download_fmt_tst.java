@@ -66,7 +66,7 @@ class Io_download_fmt_fxt {
 		return this;
 	}		
 	public Io_download_fmt_fxt Ini(String prog_msg_hdr, String src_url, int src_len) {
-		fmt.Init(src_url, prog_msg_hdr);
+		fmt.Download_init(src_url, prog_msg_hdr);
 		fmt.Bgn(src_len);
 		return this;
 	}

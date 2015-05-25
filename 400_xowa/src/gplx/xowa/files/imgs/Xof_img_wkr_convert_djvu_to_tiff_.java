@@ -30,7 +30,7 @@ class Xof_img_wkr_convert_djvu_to_tiff_app implements Xof_img_wkr_convert_djvu_t
 class Xof_img_wkr_convert_djvu_to_tiff_mok implements Xof_img_wkr_convert_djvu_to_tiff {
 	public Xof_img_wkr_convert_djvu_to_tiff_mok(int w, int h) {this.w = w; this.h = h;} private int w, h;
 	public boolean Exec(Io_url src, Io_url trg) {
-		Io_mgr._.SaveFilStr(trg, gplx.gfui.SizeAdp_.new_(w, h).XtoStr());
+		Io_mgr.I.SaveFilStr(trg, gplx.gfui.SizeAdp_.new_(w, h).XtoStr());
 		return true;
 	}
 }

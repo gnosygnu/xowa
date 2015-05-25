@@ -57,17 +57,17 @@ class Xow_mainpage_finder_fxt {
 		fxt.Reset_for_msgs();
 	}	private Xop_fxt fxt = new Xop_fxt();
 	public void Init_siteinfo(String mainpage_val) {
-		fxt.Wiki().Props().Main_page_(Bry_.new_ascii_(mainpage_val));
+		fxt.Wiki().Props().Main_page_(Bry_.new_a7(mainpage_val));
 	}
 	public void Init_mediawiki_page(String mainpage_val) {
-		fxt.Init_page_create(String_.new_ascii_(Ttl_mainpage), mainpage_val);
-	}	private static final byte[] Ttl_mainpage = Bry_.new_ascii_("MediaWiki:Mainpage"); // TEST:
+		fxt.Init_page_create(String_.new_a7(Ttl_mainpage), mainpage_val);
+	}	private static final byte[] Ttl_mainpage = Bry_.new_a7("MediaWiki:Mainpage"); // TEST:
 	public void Init_lang(String mainpage_val) {
 		Xol_msg_itm msg_itm = fxt.Wiki().Lang().Msg_mgr().Itm_by_key_or_new(Xow_mainpage_finder.Msg_mainpage);
-		msg_itm.Atrs_set(Bry_.new_ascii_(mainpage_val), false, false);
+		msg_itm.Atrs_set(Bry_.new_a7(mainpage_val), false, false);
 	}
 	public void Test_mainpage(String expd) {
 		byte[] actl = Xow_mainpage_finder.Find_or(fxt.Wiki(), fxt.Wiki().Props().Main_page());
-		Tfds.Eq(expd, String_.new_ascii_(actl));
+		Tfds.Eq(expd, String_.new_a7(actl));
 	}
 }

@@ -31,12 +31,12 @@ public class Xob_url_fixer_tst {
 	@Test   public void Site_only()			{fxt.Test_fix("//site"						, null);}
 }
 class Xob_url_fixer_fxt {
-	public void Site_(String v) {site_bry = Bry_.new_utf8_(v);} private byte[] site_bry;
+	public void Site_(String v) {site_bry = Bry_.new_u8(v);} private byte[] site_bry;
 	public void Clear() {
 		this.Site_("site");
 	}
 	public void Test_fix(String raw, String expd) {
-		byte[] raw_bry = Bry_.new_utf8_(raw);
-		Tfds.Eq(expd, String_.new_utf8_(Xob_url_fixer.Fix(site_bry, raw_bry, raw_bry.length)));
+		byte[] raw_bry = Bry_.new_u8(raw);
+		Tfds.Eq(expd, String_.new_u8(Xob_url_fixer.Fix(site_bry, raw_bry, raw_bry.length)));
 	}
 }	

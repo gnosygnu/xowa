@@ -31,10 +31,10 @@ public class Xow_ns implements GfoInvkAble {
 		else {
 			this.name_bry			= v;
 			this.name_db_w_colon	= Bry_.Add(v, Byte_ascii.Colon);
-			this.name_str			= String_.new_utf8_(v);
+			this.name_str			= String_.new_u8(v);
 		}
 		this.num_str = Int_.Xto_str_pad_bgn_zero(id, 3);
-		this.num_bry = Bry_.new_ascii_(num_str);
+		this.num_bry = Bry_.new_a7(num_str);
 		this.name_enc = Xoa_url_encoder._.Encode(name_bry);
 		this.name_txt = Bry_.Replace(name_enc, Byte_ascii.Underline, Byte_ascii.Space);
 		this.name_txt_w_colon = Bry_.Replace(name_db_w_colon, Byte_ascii.Underline, Byte_ascii.Space);
@@ -79,16 +79,16 @@ public class Xow_ns implements GfoInvkAble {
 	public byte[]	Gen_ttl(byte[] page)	{return id == Xow_ns_.Id_main ? page : Bry_.Add(name_db_w_colon, page);}
 	public void		Aliases_add(String alias) {
 		if (String_.Eq(alias, name_str)) return;
-		if (aliases == null) aliases = OrderedHash_.new_();
-		aliases.Add_if_new(alias, alias);
-	}	private OrderedHash aliases;
+		if (aliases == null) aliases = Ordered_hash_.new_();
+		aliases.Add_if_dupe_use_1st(alias, alias);
+	}	private Ordered_hash aliases;
 	public KeyVal[] Aliases_as_scrib_ary() {	// NOTE: intended for Scrib_lib_site; DATE:2014-02-15
 		if (aliases == null) return KeyVal_.Ary_empty;
 		int len = aliases.Count();
 		KeyVal[] rv = new KeyVal[len];
 		for (int i = 0; i < len; i++) {
-			String alias = (String)aliases.FetchAt(i);
-			rv[i] = KeyVal_.int_(i + ListAdp_.Base1, alias);
+			String alias = (String)aliases.Get_at(i);
+			rv[i] = KeyVal_.int_(i + List_adp_.Base1, alias);
 		}
 		return rv;
 	}

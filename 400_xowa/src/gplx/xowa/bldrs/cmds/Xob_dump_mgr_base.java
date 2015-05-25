@@ -105,7 +105,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 		}
 	}
 	private void Exec_db_itm(Xob_dump_bmk dump_bmk, int ns_ord, int ns_id, int db_id) {
-		ListAdp pages = ListAdp_.new_();
+		List_adp pages = List_adp_.new_();
 		Xow_ns ns = wiki.Ns_mgr().Ids_get_or_null(ns_id);
 		int pg_id = pg_bgn;
 		while (true) {
@@ -118,7 +118,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 			}
 			usr_dlg.Prog_many("", "", "fetched pages: ~{0}", pages_len);
 			for (int i = 0; i < pages_len; i++) {
-				Xowd_page_itm page = (Xowd_page_itm)pages.FetchAt(i);
+				Xowd_page_itm page = (Xowd_page_itm)pages.Get_at(i);
 				dump_bmk.Pg_id_(pg_id);
 				Exec_pg_itm(ns_ord, ns, db_id, page);
 				if (	pg_id		>= pg_end
@@ -135,7 +135,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 			if ((exec_count % progress_interval) == 0)
 				usr_dlg.Prog_many("", "", "parsing: ns=~{0} db=~{1} pg=~{2} count=~{3} time=~{4} rate=~{5} ttl=~{6}"
 					, ns.Id(), db_id, page.Id(), exec_count
-					, Env_.TickCount_elapsed_in_sec(time_bgn), rate_mgr.Rate_as_str(), String_.new_utf8_(page.Ttl_page_db()));
+					, Env_.TickCount_elapsed_in_sec(time_bgn), rate_mgr.Rate_as_str(), String_.new_u8(page.Ttl_page_db()));
 			ctx.Clear();
 			Exec_pg_itm_hook(ns_ord, ns, page, page.Text());
 			ctx.App().Utl__bfr_mkr().Clear_fail_check();	// make sure all bfrs are released
@@ -151,14 +151,14 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 				Free();
 		}
 		catch (Exception exc) {
-			bldr.Usr_dlg().Warn_many(GRP_KEY, "parse", "failed to parse ~{0} error ~{1}", String_.new_utf8_(page.Ttl_page_db()), Err_.Message_lang(exc));
+			bldr.Usr_dlg().Warn_many(GRP_KEY, "parse", "failed to parse ~{0} error ~{1}", String_.new_u8(page.Ttl_page_db()), Err_.Message_lang(exc));
 			ctx.App().Utl__bfr_mkr().Clear();
 			this.Free();
 		}
 	}
 	public abstract void Exec_pg_itm_hook(int ns_ord, Xow_ns ns, Xowd_page_itm page, byte[] page_text);
 	private void Exec_commit(int ns_id, int db_id, int pg_id, byte[] ttl) {
-		usr_dlg.Prog_many("", "", "committing: ns=~{0} db=~{1} pg=~{2} count=~{3} ttl=~{4}", ns_id, db_id, pg_id, exec_count, String_.new_utf8_(ttl));
+		usr_dlg.Prog_many("", "", "committing: ns=~{0} db=~{1} pg=~{2} count=~{3} ttl=~{4}", ns_id, db_id, pg_id, exec_count, String_.new_u8(ttl));
 		Exec_commit_hook();
 		bmk_mgr.Save(ns_id, db_id, pg_id);
 		if (exit_after_commit) exit_now = true;
@@ -218,7 +218,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 }
 class Xob_dump_mgr_base_ {
 	public static void Load_all_tmpls(Gfo_usr_dlg usr_dlg, Xowe_wiki wiki, Xob_dump_src_id page_src) {
-		ListAdp pages = ListAdp_.new_();
+		List_adp pages = List_adp_.new_();
 		Xow_ns ns_tmpl = wiki.Ns_mgr().Ns_template();
 		Xow_defn_cache defn_cache = wiki.Cache_mgr().Defn_cache();
 		int cur_page_id = -1;
@@ -230,7 +230,7 @@ class Xob_dump_mgr_base_ {
 			if (page_count == 0) break;	// no more pages in db;
 			Xowd_page_itm page = null;
 			for (int i = 0; i < page_count; i++) {
-				page = (Xowd_page_itm)pages.FetchAt(i);
+				page = (Xowd_page_itm)pages.Get_at(i);
 				Xot_defn_tmpl defn = new Xot_defn_tmpl();
 				defn.Init_by_new(ns_tmpl, ns_tmpl.Gen_ttl(page.Ttl_page_db()), page.Text(), null, false);	// NOTE: passing null, false; will be overriden later when Parse is called
 				defn_cache.Add(defn, ns_tmpl.Case_match());
@@ -242,7 +242,7 @@ class Xob_dump_mgr_base_ {
 		usr_dlg.Note_many("", "", "tmpl_load done: ~{0}", load_count);
 	}
 	public static Xowd_db_file[] Init_text_files_ary(Xowd_db_mgr core_data_mgr) {
-		ListAdp text_files_list = ListAdp_.new_();
+		List_adp text_files_list = List_adp_.new_();
 		int len = core_data_mgr.Dbs__len();
 		if (len == 1) return new Xowd_db_file[] {core_data_mgr.Dbs__get_at(0)};	// single file: return core; note that there are no Tid = Text
 		for (int i = 0; i < len; i++) {
@@ -254,13 +254,13 @@ class Xob_dump_mgr_base_ {
 					break;
 			}
 		}
-		return (Xowd_db_file[])text_files_list.Xto_ary_and_clear(Xowd_db_file.class);
+		return (Xowd_db_file[])text_files_list.To_ary_and_clear(Xowd_db_file.class);
 	}
 }
 class Xob_dump_bmk_mgr {
 	private Bry_bfr save_bfr = Bry_bfr.reset_(1024);
 	public Io_url Cfg_url() {return cfg_url;} public Xob_dump_bmk_mgr Cfg_url_(Io_url v) {cfg_url = v; return this;} private Io_url cfg_url;
-	public void Reset() {Io_mgr._.DeleteFil(cfg_url);}
+	public void Reset() {Io_mgr.I.DeleteFil(cfg_url);}
 	public void Load(Xoae_app app, Xob_dump_mgr_base dump_mgr) {
 		app.Gfs_mgr().Run_url_for(dump_mgr, cfg_url);
 	}
@@ -268,7 +268,7 @@ class Xob_dump_bmk_mgr {
 		Save_itm(save_bfr, Xob_dump_mgr_base.Invk_ns_bgn_, ns_id);
 		Save_itm(save_bfr, Xob_dump_mgr_base.Invk_db_bgn_, db_id);
 		Save_itm(save_bfr, Xob_dump_mgr_base.Invk_pg_bgn_, pg_id);
-		Io_mgr._.SaveFilBfr(cfg_url, save_bfr);
+		Io_mgr.I.SaveFilBfr(cfg_url, save_bfr);
 	}
 	private void Save_itm(Bry_bfr save_bfr, String key, int val) {
 		String fmt = "{0}('{1}');\n";
@@ -300,7 +300,7 @@ class Xob_rate_mgr {
 			.Add_int_variable(count).Add_byte_pipe()
 			.Add_int_variable(dif).Add_byte_nl()
 			;
-		Io_mgr._.AppendFilByt(log_file, save_bfr.Xto_bry_and_clear());
+		Io_mgr.I.AppendFilByt(log_file, save_bfr.Xto_bry_and_clear());
 	}
 	public String Rate_as_str() {return Int_.Xto_str(Rate());}
 	public int Rate() {

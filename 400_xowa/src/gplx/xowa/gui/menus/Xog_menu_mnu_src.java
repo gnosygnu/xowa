@@ -236,12 +236,12 @@ class Xog_menu_bldr {
 		return this;
 	}
 	private static final byte[]
-	  Const_spr				= Bry_.new_ascii_("add_spr;\n")
-	, Const_itm_btn_bgn_lhs	= Bry_.new_ascii_("add_btn_default('")
-	, Const_itm_btn_bgn_rhs	= Bry_.new_ascii_("');\n")
-	, Const_itm_grp_bgn_lhs	= Bry_.new_ascii_("add_grp_default('")
-	, Const_itm_grp_bgn_rhs	= Bry_.new_ascii_("') {\n")
-	, Const_itm_grp_end		= Bry_.new_ascii_("}\n")
+	  Const_spr				= Bry_.new_a7("add_spr;\n")
+	, Const_itm_btn_bgn_lhs	= Bry_.new_a7("add_btn_default('")
+	, Const_itm_btn_bgn_rhs	= Bry_.new_a7("');\n")
+	, Const_itm_grp_bgn_lhs	= Bry_.new_a7("add_grp_default('")
+	, Const_itm_grp_bgn_rhs	= Bry_.new_a7("') {\n")
+	, Const_itm_grp_end		= Bry_.new_a7("}\n")
 	;
 	public static final Xog_menu_bldr _ = new Xog_menu_bldr(); Xog_menu_bldr() {}
 }

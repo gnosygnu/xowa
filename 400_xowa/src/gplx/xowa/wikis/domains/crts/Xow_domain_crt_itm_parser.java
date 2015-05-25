@@ -19,15 +19,15 @@ package gplx.xowa.wikis.domains.crts; import gplx.*; import gplx.xowa.*; import 
 import gplx.xowa.langs.*;
 class Xow_domain_crt_itm_parser {
 	public Xow_domain_crt_kv_itm[] Parse_as_kv_itms_or_null(byte[] raw) {
-		ListAdp rv = Parse_as_obj_or_null(raw, Bool_.N);
-		return rv == null ? null : (Xow_domain_crt_kv_itm[])rv.Xto_ary_and_clear(Xow_domain_crt_kv_itm.class);
+		List_adp rv = Parse_as_obj_or_null(raw, Bool_.N);
+		return rv == null ? null : (Xow_domain_crt_kv_itm[])rv.To_ary_and_clear(Xow_domain_crt_kv_itm.class);
 	}
 	public Xow_domain_crt_kv_ary[] Parse_as_kv_arys_or_null(byte[] raw) {
-		ListAdp rv = Parse_as_obj_or_null(raw, Bool_.Y);
-		return rv == null ? null : (Xow_domain_crt_kv_ary[])rv.Xto_ary_and_clear(Xow_domain_crt_kv_ary.class);
+		List_adp rv = Parse_as_obj_or_null(raw, Bool_.Y);
+		return rv == null ? null : (Xow_domain_crt_kv_ary[])rv.To_ary_and_clear(Xow_domain_crt_kv_ary.class);
 	}
-	public ListAdp Parse_as_obj_or_null(byte[] raw, boolean is_ary) {
-		ListAdp rv = ListAdp_.new_();
+	public List_adp Parse_as_obj_or_null(byte[] raw, boolean is_ary) {
+		List_adp rv = List_adp_.new_();
 		byte[][] line_ary = Bry_.Split_lines(raw);
 		int line_len = line_ary.length;
 		for (int i = 0; i < line_len; ++i) {
@@ -70,8 +70,8 @@ class Xow_domain_crt_itm_parser {
 		Xow_domain_crt_itm rv = (Xow_domain_crt_itm)itm_hash.Get_by_bry(raw); if (rv != null) return rv;	// singleton; EX: <self>, <same_type>, etc..
 		int raw_len = raw.length;
 		if		(Bry_.HasAtBgn(raw, Wild_lang)) {		// EX: *.wikipedia
-			int wiki_tid = Xow_domain_.Tid__get_int(raw, Wild_lang.length, raw_len);
-			return wiki_tid == Xow_domain_.Tid_int_null ? Xow_domain_crt_itm_.Null : new Xow_domain_crt_itm__type(wiki_tid);
+			int wiki_tid = Xow_domain_type_.Get_type_as_tid(raw, Wild_lang.length, raw_len);
+			return wiki_tid == Xow_domain_type_.Tid_null ? Xow_domain_crt_itm_.Null : new Xow_domain_crt_itm__type(wiki_tid);
 		}
 		else if	(Bry_.HasAtEnd(raw, Wild_type)) {		// EX: en.*
 			Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key(raw, 0, raw_len - Wild_type.length);
@@ -86,6 +86,6 @@ class Xow_domain_crt_itm_parser {
 	.Add_str_obj("<same_lang>"	, Xow_domain_crt_itm__same_lang.I)
 	.Add_str_obj("<any>"		, Xow_domain_crt_itm__any_wiki.I)
 	;
-	private static final byte[] Wild_lang = Bry_.new_ascii_("*."), Wild_type = Bry_.new_ascii_(".*");
+	private static final byte[] Wild_lang = Bry_.new_a7("*."), Wild_type = Bry_.new_a7(".*");
         public static final Xow_domain_crt_itm_parser I = new Xow_domain_crt_itm_parser(); Xow_domain_crt_itm_parser() {}
 }

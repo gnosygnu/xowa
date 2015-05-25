@@ -94,7 +94,7 @@ class Php_srl_parser_fxt {
 	public Php_srl_itm_kv itm_kvi_(int k, Php_srl_itm v){return factory.Kv().Key_(itm_int_(k)).Val_(v);}
 	public Php_srl_itm_kv itm_kvs_(String k, Php_srl_itm v){return factory.Kv().Key_(itm_str_(k)).Val_(v);}
 	public void Test_parse(String raw_str, Php_srl_itm... expd_ary) {
-		byte[] raw = Bry_.new_utf8_(raw_str);
+		byte[] raw = Bry_.new_u8(raw_str);
 		Php_srl_itm_ary root = parser.Parse(raw);
 		Php_srl_itm root_sub = root.Subs_get_at(0).Val();
 		root_sub.Xto_bfr(tmp_bfr, 0);

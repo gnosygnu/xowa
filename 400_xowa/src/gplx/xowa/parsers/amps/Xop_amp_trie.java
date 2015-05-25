@@ -19,17 +19,17 @@ package gplx.xowa.parsers.amps; import gplx.*; import gplx.xowa.*; import gplx.x
 import gplx.core.btries.*;
 public class Xop_amp_trie {
 	public static final byte[]		// NOTE: top_define
-	  Bry_xowa_lt			= Bry_.new_ascii_("&xowa_lt;")
-	, Bry_xowa_brack_bgn	= Bry_.new_ascii_("&xowa_brack_bgn;")
-	, Bry_xowa_brack_end	= Bry_.new_ascii_("&xowa_brack_end;")
-	, Bry_xowa_pipe			= Bry_.new_ascii_("&xowa_pipe;")
-	, Bry_xowa_apos			= Bry_.new_ascii_("&xowa_apos;")
-	, Bry_xowa_colon		= Bry_.new_ascii_("&xowa_colon;")
-	, Bry_xowa_underline	= Bry_.new_ascii_("&xowa_underline;")
-	, Bry_xowa_asterisk		= Bry_.new_ascii_("&xowa_asterisk;")
-	, Bry_xowa_space		= Bry_.new_ascii_("&xowa_space;")
-	, Bry_xowa_nl			= Bry_.new_ascii_("&xowa_nl;")
-	, Bry_xowa_dash			= Bry_.new_ascii_("&xowa_dash;")
+	  Bry_xowa_lt			= Bry_.new_a7("&xowa_lt;")
+	, Bry_xowa_brack_bgn	= Bry_.new_a7("&xowa_brack_bgn;")
+	, Bry_xowa_brack_end	= Bry_.new_a7("&xowa_brack_end;")
+	, Bry_xowa_pipe			= Bry_.new_a7("&xowa_pipe;")
+	, Bry_xowa_apos			= Bry_.new_a7("&xowa_apos;")
+	, Bry_xowa_colon		= Bry_.new_a7("&xowa_colon;")
+	, Bry_xowa_underline	= Bry_.new_a7("&xowa_underline;")
+	, Bry_xowa_asterisk		= Bry_.new_a7("&xowa_asterisk;")
+	, Bry_xowa_space		= Bry_.new_a7("&xowa_space;")
+	, Bry_xowa_nl			= Bry_.new_a7("&xowa_nl;")
+	, Bry_xowa_dash			= Bry_.new_a7("&xowa_dash;")
 	;
 	public static final Btrie_slim_mgr _ = new_(); Xop_amp_trie() {}
 	private static Btrie_slim_mgr new_() {// REF.MW: Sanitizer|$wgHtmlEntities; NOTE:added apos
@@ -303,7 +303,7 @@ public class Xop_amp_trie {
 		Reg_prefix(rv, Xop_amp_trie_itm.Tid_num_dec, "#");
 		return rv;
 	}
-	private static void Reg_name(Btrie_slim_mgr trie, boolean tid_is_xowa, int char_int, String xml_name_str) {Reg_name(trie, tid_is_xowa, char_int, Bry_.new_ascii_(xml_name_str));}
+	private static void Reg_name(Btrie_slim_mgr trie, boolean tid_is_xowa, int char_int, String xml_name_str) {Reg_name(trie, tid_is_xowa, char_int, Bry_.new_a7(xml_name_str));}
 	private static void Reg_name(Btrie_slim_mgr trie, boolean tid_is_xowa, int char_int, byte[] xml_name_bry) {
 		byte itm_tid = tid_is_xowa ? Xop_amp_trie_itm.Tid_name_xowa : Xop_amp_trie_itm.Tid_name_std;
 		Xop_amp_trie_itm itm = new Xop_amp_trie_itm(itm_tid, char_int, xml_name_bry);
@@ -311,7 +311,7 @@ public class Xop_amp_trie {
 		trie.Add_obj(key, itm);
 	}
 	private static void Reg_prefix(Btrie_slim_mgr trie, byte prefix_type, String prefix) {
-		byte[] prefix_ary = Bry_.new_ascii_(prefix);
+		byte[] prefix_ary = Bry_.new_a7(prefix);
 		Xop_amp_trie_itm itm = new Xop_amp_trie_itm(prefix_type, Xop_amp_trie_itm.Char_int_null, prefix_ary);
 		trie.Add_obj(prefix_ary, itm);
 	}

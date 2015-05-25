@@ -20,11 +20,11 @@ import gplx.core.primitives.*; import gplx.core.btries.*;
 class Imap_desc_tid {
 	public static final byte Tid_tr = 0, Tid_br = 1, Tid_bl = 2, Tid_tl = 3, Tid_none = 4, Tid_null = 5;
 	public static final byte[] 
-	  Key_tr		= Bry_.new_ascii_("top-right")
-	, Key_br		= Bry_.new_ascii_("bottom-right")
-	, Key_bl		= Bry_.new_ascii_("bottom-left")
-	, Key_tl		= Bry_.new_ascii_("top-left")
-	, Key_none		= Bry_.new_ascii_("none")
+	  Key_tr		= Bry_.new_a7("top-right")
+	, Key_br		= Bry_.new_a7("bottom-right")
+	, Key_bl		= Bry_.new_a7("bottom-left")
+	, Key_tl		= Bry_.new_a7("top-left")
+	, Key_none		= Bry_.new_a7("none")
 	;
 	public static Btrie_slim_mgr trie_(Xowe_wiki wiki) {
 		Btrie_slim_mgr rv = Btrie_slim_mgr.ci_utf_8_();

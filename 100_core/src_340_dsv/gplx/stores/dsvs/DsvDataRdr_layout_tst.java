@@ -121,10 +121,10 @@ public class DsvDataRdr_layout_tst {
 	}
 	void tst_Layout(int subIdx, int... expd) {
 		GfoNde tbl = root.Subs().FetchAt_asGfoNde(subIdx);
-		DsvStoreLayout layout = (DsvStoreLayout)tbl.EnvVars().Fetch(DsvStoreLayout.Key_const);
+		DsvStoreLayout layout = (DsvStoreLayout)tbl.EnvVars().Get_by(DsvStoreLayout.Key_const);
 		int[] actl = new int[layout.HeaderList().Count()];
 		for (int i = 0; i < actl.length; i++)
-			actl[i] = layout.HeaderList().FetchAt(i).Id();
+			actl[i] = layout.HeaderList().Get_at(i).Id();
 		Tfds.Eq_ary(expd, actl);
 	}
 	GfoNde root;

@@ -65,5 +65,5 @@ class Xow_popup_anchor_finder {
 		rv = Bry_finder.Find_bwd(src, Byte_ascii.NewLine, id_bgn);
 		return rv == Bry_finder.Not_found ? 0 : rv;
 	}
-	private static final byte[] Hdr_bgn = Bry_.new_ascii_("\n="), Id_bry = Bry_.new_ascii_("id");
+	private static final byte[] Hdr_bgn = Bry_.new_a7("\n="), Id_bry = Bry_.new_a7("id");
 }

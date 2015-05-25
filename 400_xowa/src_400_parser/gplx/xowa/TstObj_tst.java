@@ -24,14 +24,14 @@ interface TstRuleMgr {
 class Xop_rule_mgr implements TstRuleMgr {
 	public boolean SkipChkVal(String expdTypeKey, TstAtr expd) {
 		String key = expdTypeKey + "." + expd.Key();
-		Xop_rule_dat ruleDat = (Xop_rule_dat)hash.Fetch(key); if (ruleDat == null) return false;
+		Xop_rule_dat ruleDat = (Xop_rule_dat)hash.Get_by(key); if (ruleDat == null) return false;
 		if (expd.ValType().Eq(expd.Val(), ruleDat.SkipVal())) return true;
 		return false;
 	}
 	public boolean SkipChkObj(String expdTypeKey, String atrKey, TstObj expd) {
 		String key = expdTypeKey + "." + atrKey;
-		Xop_rule_dat ruleDat = (Xop_rule_dat)hash.Fetch(key); if (ruleDat == null) return false;
-		TstAtr expdAtr = (TstAtr)expd.Atrs().Fetch(ruleDat.SubKey());
+		Xop_rule_dat ruleDat = (Xop_rule_dat)hash.Get_by(key); if (ruleDat == null) return false;
+		TstAtr expdAtr = (TstAtr)expd.Atrs().Get_by(ruleDat.SubKey());
 		if (expdAtr == null) return false;
 		if (expdAtr.ValType().Eq(expdAtr.Val(), ruleDat.SkipVal())) return true;
 		return false;
@@ -51,7 +51,7 @@ class Xop_rule_mgr implements TstRuleMgr {
 		return this;
 	}
 	public String Reg() {return typeKey;}
-	OrderedHash hash = OrderedHash_.new_();
+	Ordered_hash hash = Ordered_hash_.new_();
 	public static final Xop_rule_mgr _ = new Xop_rule_mgr();
 }
 class Xop_rule_dat {
@@ -78,22 +78,22 @@ public class TstObj_tst {
 	}
 	private static int Add(int[] ary) {int rv = 0; for (int i = 0; i < ary.length; i++) rv += ary[i]; return rv;}
 	@gplx.Internal protected static void Eval(String raw, TstObj expdChk, TstObj actlChk, TstRuleMgr ruleMgr) {
-		ListAdp rslts = ListAdp_.new_();
-		Eval(rslts, ruleMgr, OrderedHash_.new_(), "", expdChk, actlChk);
+		List_adp rslts = List_adp_.new_();
+		Eval(rslts, ruleMgr, Ordered_hash_.new_(), "", expdChk, actlChk);
 
 		String_bldr sb = String_bldr_.new_();
 		sb.Add(raw).Add(Op_sys.Lnx.Nl_str());
 		boolean pass = true;
 		int[] cols = new int[3];
 		for (int i = 0; i < rslts.Count(); i++) {
-			TstRslt rslt = (TstRslt)rslts.FetchAt(i);
+			TstRslt rslt = (TstRslt)rslts.Get_at(i);
 			Max(cols, 0, rslt.EvalStr());
 			Max(cols, 1, rslt.Id());
 			Max(cols, 2, rslt.Key());
 		}
 		String hdr =  String_.Repeat(" ", Add(cols) + 3);
 		for (int i = 0; i < rslts.Count(); i++) {
-			TstRslt rslt = (TstRslt)rslts.FetchAt(i);
+			TstRslt rslt = (TstRslt)rslts.Get_at(i);
 //				if (rslt.EvalPass()) continue;
 			sb	.Add(String_.PadEnd(rslt.EvalStr(), cols[0] + 1, " "))
 				.Add(String_.PadEnd(rslt.Id(), cols[1] + 1, " "))
@@ -107,13 +107,13 @@ public class TstObj_tst {
 		if (pass) return;
 		throw Err_.new_(Op_sys.Lnx.Nl_str() + sb.XtoStr());
 	}
-	private static void Eval(ListAdp rslts, TstRuleMgr ruleMgr, OrderedHash props, String idx, TstObj expd, TstObj actl) {
+	private static void Eval(List_adp rslts, TstRuleMgr ruleMgr, Ordered_hash props, String idx, TstObj expd, TstObj actl) {
 		int expdLen = expd.Atrs().Count();
 		props.Clear();
 		for (int i = 0; i < expdLen; i++) {
-			TstAtr expdAtr = (TstAtr)expd.Atrs().FetchAt(i);
+			TstAtr expdAtr = (TstAtr)expd.Atrs().Get_at(i);
 			String key = expdAtr.Key();
-			TstAtr actlAtr = (TstAtr)actl.Atrs().Fetch(key);
+			TstAtr actlAtr = (TstAtr)actl.Atrs().Get_by(key);
 			if (expdAtr.ValType() == ObjectClassXtn._) {
 				SrlObj expdSrl = (SrlObj)expdAtr.Val();
 				TstObj expdTst = TstObj.new_();
@@ -121,7 +121,7 @@ public class TstObj_tst {
 				TstObj actlTst = TstObj.new_();
 				if (actlAtr != null) ((SrlObj)actlAtr.Val()).SrlObj_Srl(actlTst);
 				if (ruleMgr.SkipChkObj(expdAtr.TypeKey(), key, expdTst)) continue;
-				Eval(rslts, ruleMgr, OrderedHash_.new_(), idx + "." + key, expdTst, actlTst);
+				Eval(rslts, ruleMgr, Ordered_hash_.new_(), idx + "." + key, expdTst, actlTst);
 			}
 			else {
 				if (actlAtr == null) actlAtr = new TstAtr();
@@ -133,8 +133,8 @@ public class TstObj_tst {
 		int expdSubsLen = expd.Subs().Count(), actlSubsLen = actl.Subs().Count();
 		int maxLen = expdSubsLen > actlSubsLen ? expdSubsLen : actlSubsLen;
 		for (int i = 0; i < maxLen; i++) {
-			TstObj expdSub = i < expdSubsLen ? (TstObj)expd.Subs().FetchAt(i) : TstObj.Null;
-			TstObj actlSub = i < actlSubsLen ? (TstObj)actl.Subs().FetchAt(i) : TstObj.Null;
+			TstObj expdSub = i < expdSubsLen ? (TstObj)expd.Subs().Get_at(i) : TstObj.Null;
+			TstObj actlSub = i < actlSubsLen ? (TstObj)actl.Subs().Get_at(i) : TstObj.Null;
 //				if (ruleMgr != null) ruleMgr.Eval(expd.TypeKey(), expdSub.PropName(), expdAtr, actlAtr, skip);
 			String iAsStr = Int_.Xto_str(i);
 			String subId = String_.Eq(idx, "") ? iAsStr : idx + "." + iAsStr;
@@ -148,7 +148,7 @@ public class TstObj_tst {
 			Eval(rslts, ruleMgr, props, subId, expdSub, actlSub);
 		}
 	}
-	private static void Eval(ListAdp rslts, String id, String key, TstAtr expd, TstAtr actl, boolean srcIsExpd) {
+	private static void Eval(List_adp rslts, String id, String key, TstAtr expd, TstAtr actl, boolean srcIsExpd) {
 		int evalType = 0;
 		boolean evalPass = false; String evalStr = "";
 		switch (evalType) {
@@ -182,7 +182,7 @@ class MockObj {
 }
 class TstObj implements SrlMgr {
 	public boolean	Type_rdr() {return false;}
-	public OrderedHash Atrs() {return atrs;} private OrderedHash atrs = OrderedHash_.new_();
+	public Ordered_hash Atrs() {return atrs;} private Ordered_hash atrs = Ordered_hash_.new_();
 	public Object StoreRoot(SrlObj root, String key) {return null;}
 	public boolean	SrlBoolOr(String key, boolean v)					{Atrs_add(key, v, BoolClassXtn._); return v;}
 	public byte	SrlByteOr(String key, byte v)					{Atrs_add(key, v, ByteClassXtn._); return v;}
@@ -196,15 +196,15 @@ class TstObj implements SrlMgr {
 		Atrs_add(key, v, ObjectClassXtn._);
 		return v;
 	}
-	public void	SrlList(String key, ListAdp list, SrlObj proto, String itmKey) {}
+	public void	SrlList(String key, List_adp list, SrlObj proto, String itmKey) {}
 	public String TypeKey() {return typeKey;} public void TypeKey_(String v) {typeKey = v;} private String typeKey;
 	private void Atrs_add(String key, Object val, ClassXtn valType) {
 		atrs.Add(key, new TstAtr().TypeKey_(typeKey).Key_(key).Val_(val).ValType_(valType));
 	}
-	public ListAdp Subs() {return subs;} ListAdp subs = ListAdp_.Null;
+	public List_adp Subs() {return subs;} List_adp subs = List_adp_.Noop;
 	public SrlMgr SrlMgr_new(Object o) {return Subs_new();}
 	public TstObj Subs_new() {
-		if (subs == ListAdp_.Null) subs = ListAdp_.new_();
+		if (subs == List_adp_.Noop) subs = List_adp_.new_();
 		TstObj rv = TstObj.new_();
 		subs.Add(rv);
 		return rv;

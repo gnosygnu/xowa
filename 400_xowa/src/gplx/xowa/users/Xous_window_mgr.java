@@ -19,24 +19,25 @@ package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.gui.views.*;
 import gplx.xowa.apis.xowa.startups.tabs.*;
 public class Xous_window_mgr implements GfoInvkAble {
-	public Xous_window_mgr(Xou_user user) {
+	public Xous_window_mgr(Xoue_user user) {
 		this.user = user;
 	}
-	public Xou_user User() {return user;} private Xou_user user;
+	public Xoue_user User() {return user;} private Xoue_user user;
 	public Rect_ref Rect() {if (rect == null) rect = Rect_new(); return rect;} Rect_ref rect;
 	public boolean Maximized() {return maximized;} private boolean maximized = false;
 	public void Save_window(gplx.gfui.GfuiWin win) {
-		gplx.xowa.cfgs.Xoa_cfg_mgr cfg_mgr = user.App().Cfg_mgr();
+		Xoae_app app = user.Appe();
+		gplx.xowa.cfgs.Xoa_cfg_mgr cfg_mgr = app.Cfg_mgr();
 		if (user.Cfg_mgr().Startup_mgr().Window_mgr().Mode_tid() == Xouc_window_mgr.Mode_tid_previous) {
 			cfg_mgr.Set_by_app("app.user.session.window.maximized"	, Yn.Xto_str(win.Maximized()));
 			cfg_mgr.Set_by_app("app.user.session.window.rect"		, win.Rect().Xto_str());
 		}
-		Xoapi_startup_tabs startup_tabs = user.App().Api_root().App().Startup().Tabs();
+		Xoapi_startup_tabs startup_tabs = app.Api_root().App().Startup().Tabs();
 		if (startup_tabs.Type() == Xoapi_startup_tabs_tid_.Tid_previous) {
-			cfg_mgr.Set_by_app("xowa.api.app.startup.tabs.previous"	, Calc_previous_tabs(user.App().Gui_mgr().Browser_win().Tab_mgr()));
+			cfg_mgr.Set_by_app("xowa.api.app.startup.tabs.previous"	, Calc_previous_tabs(app.Gui_mgr().Browser_win().Tab_mgr()));
 		}
 		cfg_mgr.Set_by_app("xowa.api.app.env.version_previous"	, Xoa_app_.Version);
-		user.App().Api_root().Html().Page().Toggle_mgr().Save(cfg_mgr);
+		app.Api_root().Html().Page().Toggle_mgr().Save(cfg_mgr);
 		cfg_mgr.Db_save_txt();
 	}
 	private String Calc_previous_tabs(Xog_tab_mgr tab_mgr) {

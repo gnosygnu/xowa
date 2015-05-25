@@ -114,7 +114,7 @@ class GfmlBldrCmd_whitespace implements GfmlBldrCmd {
 	public String Key() {return "gfml.whitespace_exec";}
 	public void Exec(GfmlBldr bldr, GfmlTkn tkn) {
 		if (bldr.CurNdeFrame().waitingTkns.Count() > 0) {
-			GfmlObj t = (GfmlObj)bldr.CurNdeFrame().waitingTkns.FetchAt(bldr.CurNdeFrame().waitingTkns.Count() - 1);
+			GfmlObj t = (GfmlObj)bldr.CurNdeFrame().waitingTkns.Get_at(bldr.CurNdeFrame().waitingTkns.Count() - 1);
 			if (t.ObjType() == GfmlObj_.Type_nde)
 				bldr.CurNdeFrame().IdxNdeBgn_set(bldr.CurNdeFrame().WaitingTkns().Count() + 1);
 		}

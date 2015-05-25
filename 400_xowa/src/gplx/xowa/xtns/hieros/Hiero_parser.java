@@ -19,7 +19,7 @@ package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.core.btries.*; import gplx.html.*; import gplx.xowa.html.*;
 class Hiero_parser {
 	private Btrie_slim_mgr trie = Btrie_slim_mgr.cs_();
-	private ListAdp blocks = ListAdp_.new_();
+	private List_adp blocks = List_adp_.new_();
 	private Hiero_block cur_block;
 	private Bry_bfr cur_tkn = Bry_bfr.reset_(16);
 	public Hiero_block[] Parse(byte[] src, int bgn, int end) {
@@ -64,7 +64,7 @@ class Hiero_parser {
 			}
 		}			
 		this.New_block();// flush remaining items
-		return (Hiero_block[])blocks.Xto_ary_and_clear(Hiero_block.class);
+		return (Hiero_block[])blocks.To_ary_and_clear(Hiero_block.class);
 	}
 	private void New_block() {
 		this.New_token(null);
@@ -112,7 +112,7 @@ class Hiero_parser {
 		int keys_len = keys.length;
 		for (int i = 0; i < keys_len; i++) {
 			String key_str = keys[i];
-			byte[] key_bry = Bry_.new_utf8_(key_str);
+			byte[] key_bry = Bry_.new_u8(key_str);
 			Hiero_parser_itm itm = new Hiero_parser_itm(tid, key_bry);
 			trie.Add_obj(key_bry, itm);
 		}
@@ -125,8 +125,8 @@ class Hiero_parser_itm {
 	public static final byte Tid_block_spr = 1, Tid_tkn_spr = 2, Tid_single_char = 3, Tid_dot = 4, Tid_comment = 5;
 }
 class Hiero_block {
-	private ListAdp list = ListAdp_.new_();
+	private List_adp list = List_adp_.new_();
 	public int Len() {return list.Count();}
-	public byte[] Get_at(int i) {return (byte[])list.FetchAt(i);}
+	public byte[] Get_at(int i) {return (byte[])list.Get_at(i);}
 	public void Add(byte[] v) {list.Add(v);}
 }

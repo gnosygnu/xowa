@@ -44,7 +44,7 @@ public class Xop_log_invoke_wkr implements GfoInvkAble {
 	private void Exclude_mod_names_add(String[] v) {
 		int len = v.length;
 		for (int i = 0; i < len; i++) {
-			byte[] bry = Bry_.new_utf8_(v[i]);
+			byte[] bry = Bry_.new_u8(v[i]);
 			exclude_mod_names.Add_bry_bry(bry);
 		}
 	}

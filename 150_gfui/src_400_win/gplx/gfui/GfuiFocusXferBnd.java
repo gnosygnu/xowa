@@ -23,21 +23,21 @@ class GfuiFocusXferBnd implements InjectAble, GfoInvkAble {
 		IptBnd_.cmd_to_(IptCfg_.Null, elem, this, Invk_FocusPrev, IptKey_.Up);
 	}
 	@gplx.Internal protected void Focus(GfuiElem cur, boolean fwd) {
-		ListAdp allElemsInOwnerWin = ListAdp_.new_(); AddSubs(cur.OwnerWin(), allElemsInOwnerWin);
-		int curIdx = allElemsInOwnerWin.IndexOf(cur);
+		List_adp allElemsInOwnerWin = List_adp_.new_(); AddSubs(cur.OwnerWin(), allElemsInOwnerWin);
+		int curIdx = allElemsInOwnerWin.Idx_of(cur);
 		GfuiElem target = cur;
 		while (true) {	// find next visible elem
 			int cycle = TabBox_.Cycle(fwd, curIdx, allElemsInOwnerWin.Count());
-			target = GfuiElem_.cast_(allElemsInOwnerWin.FetchAt(cycle));
+			target = GfuiElem_.cast_(allElemsInOwnerWin.Get_at(cycle));
 			if (target.Visible()) break;
 			if (cycle == curIdx) break;	// either (a) one elem in allElemsInOwnerWin or (b) n elems, and cycled back to start; break, else infinite loop
 			curIdx = cycle;
 		}
 		target.Focus();
 	}
-	void AddSubs(GfuiElem owner, ListAdp allElemsInOwnerWin) {
+	void AddSubs(GfuiElem owner, List_adp allElemsInOwnerWin) {
 		for (int i = 0; i < owner.SubElems().Count(); i++) {
-			GfuiElemBase sub = (GfuiElemBase)owner.SubElems().FetchAt(i);
+			GfuiElemBase sub = (GfuiElemBase)owner.SubElems().Get_at(i);
 			if (sub.Click_able()) allElemsInOwnerWin.Add(sub);
 			AddSubs(sub, allElemsInOwnerWin);
 		}

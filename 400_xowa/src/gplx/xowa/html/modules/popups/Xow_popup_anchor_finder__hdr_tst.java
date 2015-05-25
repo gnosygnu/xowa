@@ -78,8 +78,8 @@ class Xop_popup_hdr_finder_fxt {
 	}
 	public void Test_find_not(String src_str, String hdr_str) {Test_find(src_str, hdr_str, Bry_finder.Not_found);}
 	public void Test_find(String src_str, String hdr_str, int expd)  {
-		byte[] src = Bry_.new_utf8_(src_str);
-		byte[] hdr = Bry_.new_utf8_(hdr_str);
+		byte[] src = Bry_.new_u8(src_str);
+		byte[] hdr = Bry_.new_u8(hdr_str);
 		Tfds.Eq(expd, finder.Find(src, src.length, hdr, 0), hdr_str);
 	}
 }

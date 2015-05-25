@@ -33,7 +33,7 @@ public class GfmlTkn_ {
 	@gplx.Internal protected static GfmlTkn composite_list_(String tknType, GfmlObjList list) {
 		GfmlTkn[] ary = new GfmlTkn[list.Count()];
 		for (int i = 0; i < list.Count(); i++)
-			ary[i] = (GfmlTkn)list.FetchAt(i);
+			ary[i] = (GfmlTkn)list.Get_at(i);
 		return GfmlTkn_.composite_(tknType, ary);
 	}
 }

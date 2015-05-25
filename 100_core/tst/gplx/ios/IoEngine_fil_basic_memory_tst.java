@@ -31,7 +31,7 @@ public class IoEngine_fil_basic_memory_tst extends IoEngine_fil_basic_base {
 
 		// bugfix: verify changed file in ownerDir's hash
 		IoItmDir dirItm = fx.tst_ScanDir(fil.OwnerDir(), fil);
-		IoItmFil_mem filItm = (IoItmFil_mem)dirItm.SubFils().FetchAt(0);
+		IoItmFil_mem filItm = (IoItmFil_mem)dirItm.SubFils().Get_at(0);
 		Tfds.Eq(filItm.Text(), "changed");
 	}
 	@Test  public void RecycleFil() {
@@ -39,10 +39,10 @@ public class IoEngine_fil_basic_memory_tst extends IoEngine_fil_basic_base {
 		fx.tst_ExistsPaths(true, fil);
 
 		IoRecycleBin bin = IoRecycleBin._;
-		ListAdp list = Tfds.RscDir.XtoNames(); 
+		List_adp list = Tfds.RscDir.XtoNames(); 
 //			foreach (String s in list)
 //				Tfds.Write(s);
-		list.DelAt(0); // remove drive
+		list.Del_at(0); // remove drive
 		IoEngine_xrg_recycleFil recycleXrg = bin.Send_xrg(fil)
 			.RootDirNames_(list)
 			.AppName_("gplx.test").Time_(DateAdp_.parse_gplx("20100102_115559123")).Uuid_(Guid_adp_.parse_("467ffb41-cdfe-402f-b22b-be855425784b"));

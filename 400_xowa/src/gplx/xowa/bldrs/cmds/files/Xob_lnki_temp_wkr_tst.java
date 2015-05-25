@@ -40,6 +40,6 @@ class Xob_lnki_temp_wkr_fxt {
 	}
 
 	public void Test_Xto_commons(String ttl, String expd) {
-		Tfds.Eq(expd, String_.new_utf8_(Xob_lnki_temp_wkr.Xto_commons(wiki_ns_file_is_case_match_all, commons_wiki, Bry_.new_utf8_(ttl))));
+		Tfds.Eq(expd, String_.new_u8(Xob_lnki_temp_wkr.Xto_commons(wiki_ns_file_is_case_match_all, commons_wiki, Bry_.new_u8(ttl))));
 	}
 }

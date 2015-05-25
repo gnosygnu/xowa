@@ -17,19 +17,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfml; import gplx.*;
 class GfmlTypeCompiler {
-	@gplx.Internal protected static GfmlType Compile(GfmlNde nde, GfmlType owner, GfmlTypRegy typeRegy, OrderedHash results) {return Compile(nde, owner, true, typeRegy, results);}
-	static GfmlType Compile(GfmlNde nde, GfmlType owner, boolean isTopLevel, GfmlTypRegy typeRegy, OrderedHash results) {
+	@gplx.Internal protected static GfmlType Compile(GfmlNde nde, GfmlType owner, GfmlTypRegy typeRegy, Ordered_hash results) {return Compile(nde, owner, true, typeRegy, results);}
+	static GfmlType Compile(GfmlNde nde, GfmlType owner, boolean isTopLevel, GfmlTypRegy typeRegy, Ordered_hash results) {
 		String name = nde.SubKeys().FetchDataOrFail("name");
 		String typeKey = FetchTypeKey(nde, owner, isTopLevel, name);
 		GfmlType rv = FetchTypeOrNew(name, typeKey, typeRegy, results);
 		for (int i = 0; i < nde.SubHnds().Count(); i++) {
-			GfmlNde subNde = (GfmlNde)nde.SubHnds().FetchAt(i);
+			GfmlNde subNde = (GfmlNde)nde.SubHnds().Get_at(i);
 			GfmlFld fld = CompileFld(subNde, rv, typeRegy, results);
 			rv.SubFlds().Add(fld);
 		}
 		return rv;
 	}
-	static GfmlFld CompileFld(GfmlNde nde, GfmlType ownerType, GfmlTypRegy typeRegy, OrderedHash results) {
+	static GfmlFld CompileFld(GfmlNde nde, GfmlType ownerType, GfmlTypRegy typeRegy, Ordered_hash results) {
 		String name = nde.SubKeys().FetchDataOrFail("name");
 		String typeKey = nde.SubKeys().FetchDataOrNull("type");
 		GfmlObj defaultTkn = FetchDefaultTkn(nde, name); boolean isDefaultTknNde = defaultTkn.ObjType() == GfmlObj_.Type_nde;
@@ -62,10 +62,10 @@ class GfmlTypeCompiler {
 		}
 		return typeKey;
 	}
-	static GfmlType FetchTypeOrNew(String name, String typeKey, GfmlTypRegy typeRegy, OrderedHash results) {
+	static GfmlType FetchTypeOrNew(String name, String typeKey, GfmlTypRegy typeRegy, Ordered_hash results) {
 		GfmlType rv = typeRegy.FetchOrNull(typeKey);					// look for type in regy to see if it was declared earlier
 		if (rv == GfmlType_.Null) {
-			rv = (GfmlType)results.Fetch(rv.Key());						// look for type in current pragma's results
+			rv = (GfmlType)results.Get_by(rv.Key());						// look for type in current pragma's results
 			if (rv == null) {											// nothing found; create and add
 				rv = GfmlType_.new_(typeKey, name);
 				results.Add(typeKey, rv);
@@ -74,7 +74,7 @@ class GfmlTypeCompiler {
 		return rv;
 	}
 	static GfmlObj FetchDefaultTkn(GfmlNde nde, String name) {
-		GfmlItm defaultTkn = nde.SubKeys().Fetch("default"); if (defaultTkn == null) return GfmlTkn_.Null;
+		GfmlItm defaultTkn = nde.SubKeys().Get_by("default"); if (defaultTkn == null) return GfmlTkn_.Null;
 		GfmlItm itm = GfmlItm_.as_(defaultTkn); if (itm.ObjType() == GfmlObj_.Type_atr) return GfmlAtr.as_(itm).DatTkn();
 		GfmlNde rv = GfmlNde.new_(GfmlTkn_.val_(name), GfmlType_.new_any_(), true);
 		for (int i = 0; i < itm.SubObjs_Count(); i++) {
@@ -86,7 +86,7 @@ class GfmlTypeCompiler {
 	@gplx.Internal protected static void AddDefaultAtrs(GfmlNde nde, GfmlType type, GfmlTypRegy regy) { 
 		if (type.IsTypeAny()) return;
 		for (int i = 0; i < type.SubFlds().Count(); i++) {
-			GfmlFld subFld = (GfmlFld)type.SubFlds().FetchAt(i);
+			GfmlFld subFld = (GfmlFld)type.SubFlds().Get_at(i);
 			if (subFld.DefaultTkn() == GfmlTkn_.Null) continue;
 			if (nde.SubKeys().Has(subFld.Name())) continue;
 			GfmlNde defaultNde = GfmlNde.as_(subFld.DefaultTkn());

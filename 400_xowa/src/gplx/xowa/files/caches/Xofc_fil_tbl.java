@@ -120,7 +120,7 @@ class Xofc_fil_tbl implements RlsAble {
 		}
 		finally {rdr.Rls();}
 	}
-	public void Select_all(Bry_bfr fil_key_bldr, OrderedHash hash) {
+	public void Select_all(Bry_bfr fil_key_bldr, Ordered_hash hash) {
 		hash.Clear();
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empy).Exec_select__rls_auto();
 		try {
@@ -128,7 +128,7 @@ class Xofc_fil_tbl implements RlsAble {
 				Xofc_fil_itm fil_itm = new_itm(rdr);
 				byte[] key = fil_itm.Gen_hash_key_v1(fil_key_bldr);
 				if (hash.Has(key))		// NOTE: need to check for uniqueness else dupe file will cause select to fail; shouldn't happen, but somehow did; DATE:2013-12-28
-					Gfo_usr_dlg_.I.Warn_many("", "", "cache had duplicate itm: key=~{0}", String_.new_utf8_(key));
+					Gfo_usr_dlg_.I.Warn_many("", "", "cache had duplicate itm: key=~{0}", String_.new_u8(key));
 				else
 					hash.Add(key, fil_itm);
 			}

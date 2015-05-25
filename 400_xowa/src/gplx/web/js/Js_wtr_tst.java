@@ -34,7 +34,7 @@ class Js_wtr_fxt {
 		wtr.Quote_char_(Byte_ascii.Apos);
 	}
 	public void Test_write_val_html(String raw, String expd) {
-		wtr.Add_str_quote_html(Bry_.new_utf8_(raw));
+		wtr.Add_str_quote_html(Bry_.new_u8(raw));
 		Tfds.Eq(expd, wtr.Xto_str_and_clear());
 	}
 }

@@ -20,7 +20,7 @@ import gplx.xowa.net.*;
 public class Gfo_url_parser {
 	private boolean pass = true;
 	private Gfo_url url;
-	private ListAdp segs = ListAdp_.new_(), args = ListAdp_.new_();
+	private List_adp segs = List_adp_.new_(), args = List_adp_.new_();
 	private Url_encoder encoder = Url_encoder.new_html_href_mw_().Itms_raw_same_many(Byte_ascii.Underline); private Hash_adp_bry protocols = Hash_adp_bry.ci_ascii_();	// ASCII:url_protocol; EX:"http:", "ftp:", etc
 	public Gfo_url_parser() {
 		Init_protocols(Xoo_protocol_itm.Ary());
@@ -209,7 +209,7 @@ public class Gfo_url_parser {
 			}			
 			++pos;
 		}
-		url.Segs_((byte[][])segs.Xto_ary(byte[].class));
+		url.Segs_((byte[][])segs.To_ary(byte[].class));
 	}
 	private void Parse_anchor(byte[] src, int bgn, int end) {		
 		if (bgn == end) return;
@@ -264,7 +264,7 @@ public class Gfo_url_parser {
 			++pos;
 		}
 		url.Args_bgn_(bgn - 1);	// NOTE: bgn is 1st char after ?; -1 to place at ?
-		url.Args_((Gfo_url_arg[])args.Xto_ary(Gfo_url_arg.class));
+		url.Args_((Gfo_url_arg[])args.To_ary(Gfo_url_arg.class));
 	}
 	private void Args_add(byte[] src, int key_bgn, int key_end, int val_bgn, int val_end) {
 		encoder.Decode(src, key_bgn, key_end, tmp_bfr, false);

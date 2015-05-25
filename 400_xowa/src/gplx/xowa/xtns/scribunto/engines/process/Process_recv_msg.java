@@ -24,7 +24,7 @@ public class Process_recv_msg {
 		arg_keys.Add("values"		, Byte_obj_val.new_(Arg_values));
 		arg_keys.Add("id"			, Byte_obj_val.new_(Arg_id));
 		arg_keys.Add("args"			, Byte_obj_val.new_(Arg_args));
-	}	private HashAdp arg_keys = HashAdp_.new_(); private static final byte Arg_op = 0, Arg_values = 1, Arg_id = 2, Arg_args = 3;
+	}	private Hash_adp arg_keys = Hash_adp_.new_(); private static final byte Arg_op = 0, Arg_values = 1, Arg_id = 2, Arg_args = 3;
 	public String Op() {return op;} private String op;
 	public String Call_id() {return call_id;} private String call_id;
 	public KeyVal[] Rslt_ary() {return rslt_ary;} private KeyVal[] rslt_ary;
@@ -40,7 +40,7 @@ public class Process_recv_msg {
 			for (int i = 0; i < len; i++) {
 				KeyVal kv = rslt_ary[i];
 				String kv_key = kv.Key();
-				Byte_obj_val bv = (Byte_obj_val)arg_keys.Fetch(kv_key);
+				Byte_obj_val bv = (Byte_obj_val)arg_keys.Get_by(kv_key);
 				if	(bv != null) {
 					switch (bv.Val()) {
 						case Arg_op:		op = kv.Val_to_str_or_empty(); break;
@@ -53,7 +53,7 @@ public class Process_recv_msg {
 			return op;
 		}
 		catch (Exception e) {
-			throw Scrib_xtn_mgr.err_(e, "failed to extract data: {0} {1}", Err_.Message_gplx_brief(e), String_.new_utf8_(rsp));
+			throw Scrib_xtn_mgr.err_(e, "failed to extract data: {0} {1}", Err_.Message_gplx_brief(e), String_.new_u8(rsp));
 		}
 	}
 }

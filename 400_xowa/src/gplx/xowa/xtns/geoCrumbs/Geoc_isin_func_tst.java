@@ -30,6 +30,6 @@ class Geoc_isin_func_fxt {
 	}
 	public void Test_parse(String raw, String expd) {
 		fxt.Test_parse_tmpl_str_test(raw, "{{test}}"	, "");
-		Tfds.Eq(expd, String_.new_utf8_(fxt.Page().Html_data().Content_sub()));
+		Tfds.Eq(expd, String_.new_u8(fxt.Page().Html_data().Content_sub()));
 	}
 }

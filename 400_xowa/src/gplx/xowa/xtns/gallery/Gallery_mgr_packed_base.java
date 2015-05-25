@@ -46,10 +46,10 @@ public class Gallery_mgr_packed_base extends Gallery_mgr_base {
 	@Override public void Get_thumb_size(Xop_lnki_tkn lnki, Xof_ext ext) {
 		Get_thumb_size_static(lnki, ext, itm_default_w, itm_default_h);
 	}
-	@Override public void Adjust_image_parameters(Xof_xfer_itm xfer_itm) {
+	@Override public void Adjust_image_parameters(Xof_file_itm xfer_itm) {
 		int w = (int)(xfer_itm.Html_w() / Scale_factor);
 		int h = (int)(xfer_itm.Html_h() / Scale_factor);
-		xfer_itm.Set__html_size(w, h);
+		xfer_itm.Html_size_(w, h);
 	}
 	public static final double Scale_factor = 1.5d;	// We artificially have 1.5 the resolution neccessary so that we can scale it up by that much on the client side, without worrying about requesting a new image.
 	private static final int Scale_factor_x_60 = (int)(Scale_factor * 60);
@@ -75,9 +75,9 @@ class Gallery_mgr_packed_overlay extends Gallery_mgr_packed_base {
 			;
 	}
 	private static final byte[] 
-	  Wrap_gallery_text_0 = Bry_.new_ascii_("\n      <div class=\"gallerytextwrapper\" style=\"width: ")
-	, Wrap_gallery_text_1 = Bry_.new_ascii_("px\"><div class=\"gallerytext\">\n") // NOTE: The newline after <div class="gallerytext"> is needed to accommodate htmltidy
-	, Wrap_gallery_text_2 = Bry_.new_ascii_("\n      </div></div>")	// NOTE: 2nd </div> is not part of MW, but needed to close div
+	  Wrap_gallery_text_0 = Bry_.new_a7("\n      <div class=\"gallerytextwrapper\" style=\"width: ")
+	, Wrap_gallery_text_1 = Bry_.new_a7("px\"><div class=\"gallerytext\">\n") // NOTE: The newline after <div class="gallerytext"> is needed to accommodate htmltidy
+	, Wrap_gallery_text_2 = Bry_.new_a7("\n      </div></div>")	// NOTE: 2nd </div> is not part of MW, but needed to close div
 	;
 }
 class Gallery_mgr_packed_hover extends Gallery_mgr_packed_overlay {		@Override public byte[] Tid_bry() {return Gallery_mgr_base_.Packed_hover_bry;}

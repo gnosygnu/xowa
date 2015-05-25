@@ -24,7 +24,7 @@ public class Xow_popup_parser_data {
 	private int words_needed_min;
 	public int Words_found() {return words_found;} private int words_found;
 	public Bry_bfr Wrdx_bfr() {return wrdx_bfr;} private Bry_bfr wrdx_bfr = Bry_bfr.reset_(255);
-	public Xow_popup_word[] Words_found_ary() {return (Xow_popup_word[])words_found_list.Xto_ary_and_clear(Xow_popup_word.class);} private ListAdp words_found_list = ListAdp_.new_();
+	public Xow_popup_word[] Words_found_ary() {return (Xow_popup_word[])words_found_list.To_ary_and_clear(Xow_popup_word.class);} private List_adp words_found_list = List_adp_.new_();
 	public int Tmpl_loop_count() {return tmpl_loop_count;} private int tmpl_loop_count;
 	public void Tmpl_loop_count_add() {++tmpl_loop_count;}
 	private Xow_popup_itm popup_itm;

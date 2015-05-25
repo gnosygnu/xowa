@@ -25,9 +25,10 @@ import gplx.xowa2.apps.*; import gplx.xowa2.wikis.specials.*; import gplx.xowa2.
 import gplx.fsdb.*; import gplx.fsdb.meta.*;
 public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser {
 	private final Xof_fsdb_mgr__sql fsdb_mgr; private Fsdb_db_mgr db_core_mgr;
+	private boolean init_needed = true;
 	public Xowv_wiki(Xoav_app app, byte[] domain_bry, Io_url wiki_root_dir) {
 		this.app = app;
-		this.domain_bry = domain_bry; this.domain_str = String_.new_utf8_(domain_bry); 
+		this.domain_bry = domain_bry; this.domain_str = String_.new_u8(domain_bry); 
 		this.domain_itm = Xow_domain_.parse(domain_bry);
 		this.domain_tid = domain_itm.Domain_tid();
 		this.domain_abrv = Xow_wiki_alias.Build_alias(Xow_domain_.parse(domain_bry));
@@ -36,7 +37,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser {
 		this.html__hdump_rdr = new Xohd_hdump_rdr(app, this);
 		this.xwiki_mgr = new Xow_xwiki_mgr();
 		this.special_mgr = new Xosp_special_mgr(this);
-		this.fsys_mgr = new Xow_fsys_mgr(wiki_root_dir, wiki_root_dir);
+		this.fsys_mgr = new Xow_fsys_mgr(wiki_root_dir, app.Fsys_mgr().File_dir().GenSubDir(domain_str));
 		this.fsdb_mgr = new Xof_fsdb_mgr__sql();
 	}
 	public Xoa_app						App() {return app;}
@@ -50,7 +51,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser {
 	public Xow_fsys_mgr					Fsys_mgr() {return fsys_mgr;} private Xow_fsys_mgr fsys_mgr;
 	public Xowd_db_mgr					Data_mgr__core_mgr() {return data_mgr__core_mgr;} private Xowd_db_mgr data_mgr__core_mgr;
 	public Xow_repo_mgr					File__repo_mgr() {return file_mgr__repo_mgr;} private Xowv_repo_mgr file_mgr__repo_mgr = new Xowv_repo_mgr();
-	public Xof_fsdb_mode				File__fsdb_mode() {return file_mgr__fsdb_mode;} private final Xof_fsdb_mode file_mgr__fsdb_mode = Xof_fsdb_mode.new_view();
+	public Xof_fsdb_mode				File__fsdb_mode() {return file_mgr__fsdb_mode;} private final Xof_fsdb_mode file_mgr__fsdb_mode = Xof_fsdb_mode.new_v2_gui();
 	public Xof_orig_mgr					File__orig_mgr() {return orig_mgr;} private final Xof_orig_mgr orig_mgr = new Xof_orig_mgr();
 	public Xof_bin_mgr					File__bin_mgr() {return fsdb_mgr.Bin_mgr();}
 	public Fsm_mnt_mgr					File__mnt_mgr() {return fsdb_mgr.Mnt_mgr();}
@@ -63,26 +64,26 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser {
 	public Xosp_special_mgr Special_mgr() {return special_mgr;} private Xosp_special_mgr special_mgr;
 	public Xow_xwiki_mgr Xwiki_mgr() {return xwiki_mgr;} private Xow_xwiki_mgr xwiki_mgr;
 	public Xoav_app Appv() {return app;} private final Xoav_app app;
-	private boolean init_needed = true;
+	public void Init_by_wiki() {
+		if (!init_needed) return;
+		init_needed = false;
+		if (String_.Eq(domain_str, "xowa")) return;					// FIXME: ignore "xowa" for now; WHEN:converting xowa to sqlitedb
+		data_mgr__core_mgr = new Xowd_db_mgr(fsys_mgr.Root_dir(), domain_itm);
+		Io_url core_url = gplx.xowa.wikis.Xow_fsys_mgr.Find_core_fil(fsys_mgr.Root_dir(), domain_str);
+		data_mgr__core_mgr.Init_by_load(core_url);
+		app.Html__css_installer().Install(this, Xowd_css_core_mgr.Key_mobile);	// must init after data_mgr
+		this.db_core_mgr = Fsdb_db_mgr_.new_detect(this, fsys_mgr.Root_dir(), fsys_mgr.File_dir());
+		if (db_core_mgr != null)	// will be null for xowa db
+			fsdb_mgr.Mnt_mgr().Ctor_by_load(db_core_mgr);
+		file_mgr__repo_mgr.Add_repo(app, fsys_mgr.File_dir(), Xow_domain_.Domain_bry_commons, Xow_domain_.Domain_bry_commons);
+		file_mgr__repo_mgr.Add_repo(app, fsys_mgr.File_dir(), domain_bry, domain_bry);
+		orig_mgr.Init_by_wiki(this, file_mgr__fsdb_mode, db_core_mgr.File__orig_tbl_ary(), Xof_url_bldr.new_v2());
+		fsdb_mgr.Init_by_wiki(this);
+		data_mgr__core_mgr.Db__core().Tbl__ns().Select_all(ns_mgr);
+		html__hdump_rdr.Init_by_db(data_mgr__core_mgr);
+	}
 	public void Pages_get(Xog_page rv, Gfo_url url, Xoa_ttl ttl) {
-		if (init_needed) {
-			init_needed = false;
-			if (!String_.Eq(domain_str, "xowa")) {					// FIXME: ignore "xowa" for now; WHEN:converting xowa to sqlitedb
-				data_mgr__core_mgr = new Xowd_db_mgr(fsys_mgr.Root_dir(), domain_itm);
-				Io_url core_url = gplx.xowa.wikis.Xow_fsys_mgr.Find_core_fil(fsys_mgr.Root_dir(), domain_str);
-				data_mgr__core_mgr.Init_by_load(core_url);
-				app.Html__css_installer().Install(this, Xowd_css_core_mgr.Key_mobile);	// must init after data_mgr
-				this.db_core_mgr = Fsdb_db_mgr_.new_detect(this, fsys_mgr.Root_dir(), fsys_mgr.File_dir());
-				if (db_core_mgr != null)	// will be null for xowa db
-					fsdb_mgr.Mnt_mgr().Ctor_by_load(db_core_mgr);
-				file_mgr__repo_mgr.Add_repo(app, fsys_mgr.File_dir(), Bry_.new_utf8_("commons.wikimedia.org"), Bry_.new_utf8_("simple.wikipedia.org"));
-				file_mgr__repo_mgr.Add_repo(app, fsys_mgr.File_dir(), Bry_.new_utf8_("simple.wikipedia.org"), Bry_.new_utf8_("commons.wikimedia.org"));
-				orig_mgr.Init_by_wiki(file_mgr__fsdb_mode, db_core_mgr.File__orig_tbl_ary(), domain_bry, app.Wmf_mgr().Download_wkr(), file_mgr__repo_mgr, Xof_url_bldr.new_v2_());
-				fsdb_mgr.Init_by_wiki(this);
-				data_mgr__core_mgr.Db__core().Tbl__ns().Select_all(ns_mgr);
-				html__hdump_rdr.Init_by_db(data_mgr__core_mgr);
-			}
-		}
+		if (init_needed) Init_by_wiki();
 		if (ttl.Ns().Id_special())
 			special_mgr.Get_by_ttl(rv, url, ttl);
 		else

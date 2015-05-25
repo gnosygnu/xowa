@@ -22,12 +22,12 @@ public class Pfunc_ns extends Pf_func_base {	// EX: {{ns:6}} -> File
 	@Override public int Id() {return Xol_kwd_grp_.Id_url_ns;}
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_ns(encode).Name_(name);}
 	@Override public boolean Func_require_colon_arg() {return true;}
-	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bb) {
+	@Override public void Func_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr) {
 		byte[] val_dat_ary = Eval_argx(ctx, src, caller, self); if (val_dat_ary == Bry_.Empty) return;
 
 		int val_dat_ary_len = val_dat_ary.length;
-		int ns_id = Bry_.Xto_int_or(val_dat_ary, 0, val_dat_ary_len, -1);
-		if (ns_id == -1) {
+		int ns_id = Bry_.Xto_int_or(val_dat_ary, 0, val_dat_ary_len, Int_.MinValue);
+		if (ns_id == Int_.MinValue) {
 			Object o = ctx.Wiki().Ns_mgr().Names_get_or_null(val_dat_ary, 0, val_dat_ary_len);
 			if (o == null
 				&& !Bry_.Eq(ctx.Lang().Key_bry(), Xol_lang_.Key_en)) // foreign language; english canonical names are still valid; REF.MW: Language.php|getNsIndex
@@ -35,13 +35,13 @@ public class Pfunc_ns extends Pf_func_base {	// EX: {{ns:6}} -> File
 			if (o != null) {
 				Xow_ns itm = (Xow_ns)o;
 				if (itm.Id() == Xow_ns_.Id_file) itm = ctx.Wiki().Ns_mgr().Ns_file();	// handles "Image" -> "File"
-				bb.Add(encode ? itm.Name_enc() : itm.Name_txt());
+				bfr.Add(encode ? itm.Name_enc() : itm.Name_txt());
 			}
 		}
 		else {
 			Xow_ns itm = (Xow_ns)ctx.Wiki().Ns_mgr().Ids_get_or_null(ns_id);
 			if (itm == null) return;	// occurs when ns_id is not known; EX: {{ns:999}}; SEE: Wiktionary:Grease pit archive/2007/October; "{{ns:114}}"
-			bb.Add(encode ? itm.Name_enc() : itm.Name_txt());
+			bfr.Add(encode ? itm.Name_enc() : itm.Name_txt());
 		}
 	}
 	private static Hash_adp_bry canonical;

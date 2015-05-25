@@ -74,9 +74,9 @@ public abstract class Gallery_mgr_base {
 		}
 		bfr.Add(box_html_end_bry);
 		tmp_bfr.Mkr_rls();
-	}	private static final byte[] box_id_prefix_bry = Bry_.new_ascii_("xowa_gallery_ul_"), itm_id_prefix_bry = Bry_.new_ascii_("xowa_gallery_li_");
+	}	private static final byte[] box_id_prefix_bry = Bry_.new_a7("xowa_gallery_ul_"), itm_id_prefix_bry = Bry_.new_a7("xowa_gallery_li_");
 	public static byte File_found_mode = Bool_.__byte;
-	public void Write_html_itm(Bry_bfr bfr, Bry_bfr tmp_bfr, Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, byte[] src, Gallery_xnde xnde, byte[] gallery_ul_id, int i, Xof_xfer_itm xfer_itm, boolean hctx_is_hdump) {
+	public void Write_html_itm(Bry_bfr bfr, Bry_bfr tmp_bfr, Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, byte[] src, Gallery_xnde xnde, byte[] gallery_ul_id, int i, Xof_file_itm xfer_itm, boolean hctx_is_hdump) {
 		Gallery_itm itm = (Gallery_itm)xnde.Itms_get_at(i);
 		Xoa_ttl ttl = itm.Ttl();
 		byte[] itm_caption = itm.Caption_bry(); if (itm_caption == null) itm_caption = Bry_.Empty;
@@ -85,17 +85,16 @@ public abstract class Gallery_mgr_base {
 		int lnki_w_orig = lnki.W(), lnki_h_orig = lnki.H(); // store orig lnki_w / lnki_w
 		this.Get_thumb_size(lnki, itm.Ext());	// packed=expand by 1.5;
 		if (xfer_itm == null) {	// will be null on 1st pass
-			xfer_itm = html_wtr.Lnki_wtr().File_wtr().Lnki_eval(ctx, page, lnki, html_wtr.Queue_add_ref())
-			.Gallery_mgr_h_(xnde.Itm_h_or_default())
-			.Html_elem_tid_(Xof_html_elem.Tid_gallery_v2)
-			;
+			xfer_itm = html_wtr.Lnki_wtr().File_wtr().Lnki_eval(Xof_exec_tid.Tid_wiki_page, ctx, page, lnki);
+			xfer_itm.Html_gallery_mgr_h_(xnde.Itm_h_or_default());
+			xfer_itm.Html_elem_tid_(Xof_html_elem.Tid_gallery_v2);
 		}
 		int img_uid = xfer_itm.Html_uid();
 		byte[] gallery_li_id = tmp_bfr.Add(itm_id_prefix_bry).Add_int_variable(img_uid).Xto_bry_and_clear();
 		byte[] itm_html = Bry_.Empty;
 		int html_w_expand = xfer_itm.Html_w();
 		int html_h_expand = xfer_itm.Html_h();
-		boolean file_found = xfer_itm.File_found();
+		boolean file_found = xfer_itm.File_exists();
 		if (File_found_mode != Bool_.__byte)
 			file_found = File_found_mode == Bool_.Y_byte;
 		int vpad = -1, img_div_w = -1;
@@ -123,7 +122,7 @@ public abstract class Gallery_mgr_base {
 			this.Adjust_image_parameters(xfer_itm);	// trad=noop; packed=reduce by 1.5
 			int html_w_normal = xfer_itm.Html_w();
 			int html_h_normal = xfer_itm.Html_h();
-			xfer_itm.Init_for_gallery(html_w_normal, html_h_normal, html_w_expand);// NOTE: file_w should be set to expanded width so js can resize if gallery
+			xfer_itm.Init_at_gallery_bgn(html_w_normal, html_h_normal, html_w_expand);// NOTE: file_w should be set to expanded width so js can resize if gallery
 			img_div_w = this.Get_thumb_div_width(html_w_expand);
 			itm_div0_fmtr.Bld_bfr_many(tmp_bfr, img_div_w);
 			Gallery_img_pad_fmtr_arg vpad_fmtr = hctx_is_hdump ? (Gallery_img_pad_fmtr_arg)img_pad_fmtr__hdump : (Gallery_img_pad_fmtr_arg)img_pad_fmtr__basic;
@@ -154,16 +153,14 @@ public abstract class Gallery_mgr_base {
 			page.Hdump_data().Imgs_add_img(new Xohd_data_itm__gallery_itm().Data_init_gallery(itm_div_width, img_div_w, vpad), xfer_itm, Xohd_data_itm__gallery_itm.Tid_gallery);
 	}
 	private static final byte[] 
-	  Wrap_gallery_text_bgn = Bry_.new_ascii_("\n      <div class=\"gallerytext\">") // NOTE: The newline after <div class="gallerytext"> is needed to accommodate htmltidy
-	, Wrap_gallery_text_end = Bry_.new_ascii_("\n      </div>")	// NOTE: prepend "\n"; will cause extra \n when caption exists, but needed when caption doesn't exists; EX: "<div class='caption'>    </div>"; \n puts
+	  Wrap_gallery_text_bgn = Bry_.new_a7("\n      <div class=\"gallerytext\">") // NOTE: The newline after <div class="gallerytext"> is needed to accommodate htmltidy
+	, Wrap_gallery_text_end = Bry_.new_a7("\n      </div>")	// NOTE: prepend "\n"; will cause extra \n when caption exists, but needed when caption doesn't exists; EX: "<div class='caption'>    </div>"; \n puts
 	;
 	@gplx.Virtual public void Get_thumb_size(Xop_lnki_tkn lnki, Xof_ext ext) { // REF.MW: getThumbParams; Get the transform parameters for a thumbnail.
 		lnki.W_(itm_default_w);
 		lnki.H_(itm_default_h);
 	}
-	@gplx.Virtual public void Adjust_image_parameters(Xof_xfer_itm xfer_itm) {	// REF.MW: Adjust the image parameters for a thumbnail. Used by a subclass to insert extra high resolution images.
-	}
-	
+	@gplx.Virtual public void Adjust_image_parameters(Xof_file_itm xfer_itm) {}	// REF.MW: Adjust the image parameters for a thumbnail. Used by a subclass to insert extra high resolution images.		
 	public static final Bry_fmtr
 	  box_style_max_width_fmtr		= Bry_fmtr.new_(	"max-width:~{max_width}px;_width:~{max_width}px;", "max_width")				// id=xowa_gallery_ul_1
 	, box_cls_fmtr					= Bry_fmtr.new_(	"gallery mw-gallery-~{mode}", "mode")
@@ -178,10 +175,10 @@ public abstract class Gallery_mgr_base {
 	;
 
 	private static final byte[] 
-	  itm_li_end_bry	= Bry_.new_ascii_		  ( "\n    </div>"
+	  itm_li_end_bry	= Bry_.new_a7		  ( "\n    </div>"
 													  + "\n  </li>")
-	, box_html_end_bry	= Bry_.new_ascii_		  ( "\n</ul>")
-	, itm_divs_end_bry	= Bry_.new_ascii_		  ( "\n        </div>\n      </div>")
+	, box_html_end_bry	= Bry_.new_a7		  ( "\n</ul>")
+	, itm_divs_end_bry	= Bry_.new_a7		  ( "\n        </div>\n      </div>")
 	;
 	private static byte[] Fmt_and_add(Bry_bfr tmp_bfr, Bry_fmtr fmtr, byte[] trailer, Object... fmtr_args) {
 		fmtr.Bld_bfr_many(tmp_bfr, fmtr_args);
@@ -191,7 +188,7 @@ public abstract class Gallery_mgr_base {
 		}
 		return tmp_bfr.Xto_bry_and_clear();
 	}
-	private static void Box_hdr_write(Bry_bfr bfr, Xop_xatr_whitelist_mgr whitelist_mgr, byte[] src, byte[] gallery_ul_uid, byte[] cls, byte[] style, ListAdp xatr_list, boolean hctx_is_hdump, int uid) {
+	private static void Box_hdr_write(Bry_bfr bfr, Xop_xatr_whitelist_mgr whitelist_mgr, byte[] src, byte[] gallery_ul_uid, byte[] cls, byte[] style, List_adp xatr_list, boolean hctx_is_hdump, int uid) {
 		bfr.Add_byte(Byte_ascii.Lt).Add(Html_tag_.Ul_name_bry);
 		Html_wtr.Write_atr_bry(bfr, Html_atr_.Id_bry, gallery_ul_uid);
 		Html_wtr.Write_atr_bry(bfr, Html_atr_.Cls_bry, cls);
@@ -206,7 +203,7 @@ public abstract class Gallery_mgr_base {
 		if (xatr_list != null) {
 			int len = xatr_list.Count();
 			for (int i = 0; i < len; i++) {
-				Xop_xatr_itm xatr = (Xop_xatr_itm)xatr_list.FetchAt(i);
+				Xop_xatr_itm xatr = (Xop_xatr_itm)xatr_list.Get_at(i);
 				if (!whitelist_mgr.Chk(Xop_xnde_tag_.Tid_ul, src, xatr)) continue;
 				byte[] key = xatr.Key_bry();
 				byte[] val = xatr.Val_as_bry(src);

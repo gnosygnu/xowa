@@ -32,7 +32,7 @@ public class Xol_msg_mgr implements GfoInvkAble {
 	}
 	public int Itms_max() {return itms_max;} private Xol_msg_itm[] itms; int itms_max = Xol_msg_itm_.Id__max; int itms_id_next = Xol_msg_itm_.Id__max;
 	public Xol_msg_itm Itm_by_id_or_null(int id) {return id < itms_max ? itms[id] : null;}
-	public Xol_msg_itm Itm_by_key_or_null(byte[] key) {return (Xol_msg_itm)hash.Fetch(key);}
+	public Xol_msg_itm Itm_by_key_or_null(byte[] key) {return (Xol_msg_itm)hash.Get_by(key);}
 	public Xol_msg_itm Itms_new(byte[] msg_key) {
 		Xol_msg_itm rv = new Xol_msg_itm(itms_id_next++, msg_key);
 		Itms_reg(rv);
@@ -40,12 +40,12 @@ public class Xol_msg_mgr implements GfoInvkAble {
 	}
 	public Xol_msg_itm Itm_by_key_or_new(String key, String val) {return Itm_by_key_or_new(key, val, false);}	// TEST:
 	public Xol_msg_itm Itm_by_key_or_new(String key, String val, boolean has_fmt_arg) {	// TEST:
-		Xol_msg_itm rv = Itm_by_key_or_new(Bry_.new_utf8_(key));
-		Xol_msg_itm_.update_val_(rv, Bry_.new_utf8_(val));
+		Xol_msg_itm rv = Itm_by_key_or_new(Bry_.new_u8(key));
+		Xol_msg_itm_.update_val_(rv, Bry_.new_u8(val));
 		return rv;
 	}
 	public Xol_msg_itm Itm_by_key_or_new(byte[] key) {
-		Object o = hash.Fetch(key);
+		Object o = hash.Get_by(key);
 		Xol_msg_itm rv = null;
 		if (o == null) { // key not found; likely not a system_id; generate a custom one
 			rv = new Xol_msg_itm(itms_id_next++, key);
@@ -55,7 +55,7 @@ public class Xol_msg_mgr implements GfoInvkAble {
 			rv = (Xol_msg_itm)o;
 		}
 		return rv;
-	}	HashAdp hash;
+	}	Hash_adp hash;
 	public byte[] Val_by_id(int id) {	// NOTE: Val_by_id needs to exist on lang (not wiki_msg_mgr); {{#time}} can pass in lang, and will need to call lang's msg_mgr directly
 		Xol_msg_itm itm = Itm_by_id_or_null(id);
 		return itm == null ? null : itm.Val();
@@ -67,7 +67,7 @@ public class Xol_msg_mgr implements GfoInvkAble {
 		if (itm.Has_tmpl_txt()) rv = wiki.Parser().Parse_text_to_wtxt(rv);
 		return rv;
 	}
-	public byte[] Val_by_str_or_empty(String str) {return Val_by_bry_or(Bry_.new_utf8_(str), Bry_.Empty);}
+	public byte[] Val_by_str_or_empty(String str) {return Val_by_bry_or(Bry_.new_u8(str), Bry_.Empty);}
 	public byte[] Val_by_bry_or(byte[] bry, byte[] or) {
 		Xol_msg_itm itm = Itm_by_key_or_null(bry);
 		return itm == null ? or : itm.Val();
@@ -94,8 +94,8 @@ public class Xol_msg_mgr implements GfoInvkAble {
 			rv[i] = Xol_msg_itm_.new_(i);
 		return rv;
 	}
-	private static HashAdp Hash_new(Xol_msg_itm[] ary) {
-		HashAdp rv = Hash_adp_bry.ci_ascii_();	// ASCII:MW messages are currently all ASCII
+	private static Hash_adp Hash_new(Xol_msg_itm[] ary) {
+		Hash_adp rv = Hash_adp_bry.ci_ascii_();	// ASCII:MW messages are currently all ASCII
 		for (int i = 0; i < Xol_msg_itm_.Id__max; i++) {
 			Xol_msg_itm itm = ary[i]; if (itm == null) continue;	// NOTE: can be null when msg_mgr is owned by wiki
 			rv.Add(itm.Key(), itm);

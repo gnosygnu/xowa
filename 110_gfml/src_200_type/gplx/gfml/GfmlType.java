@@ -24,7 +24,7 @@ public class GfmlType implements GfmlScopeItm {
 	public GfmlType Clone() {
 		GfmlType rv = new GfmlType().ctor_GfmlType_(key, ndeName).DocPos_(docPos.NewClone());
 		for (int i = 0; i < subFlds.Count(); i++) {
-			GfmlFld subFld = (GfmlFld)subFlds.FetchAt(i);
+			GfmlFld subFld = (GfmlFld)subFlds.Get_at(i);
 			rv.subFlds.Add(subFld.Clone());
 		}
 		return rv;

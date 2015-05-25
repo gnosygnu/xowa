@@ -28,7 +28,7 @@ public class Xol_grammar_manual_regy {
 			hash = Hash_adp_bry.ci_ascii_();	// ASCII:currently only being used for Wikiuutiset; DATE:2014-07-07
 			ary[type_tid] = hash;
 		}
-		hash.Add_str_obj(orig, Bry_.new_ascii_(repl));
+		hash.Add_str_obj(orig, Bry_.new_a7(repl));
 		return this;
 	}
 }

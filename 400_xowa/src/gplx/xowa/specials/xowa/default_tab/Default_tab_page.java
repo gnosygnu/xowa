@@ -23,5 +23,5 @@ public class Default_tab_page implements Xows_page {
 		page.Html_data().Custom_html_(Bry_.Empty);
 		page.Html_data().Custom_name_(Tab_name_bry);
 	}
-	public static final byte[] Tab_name_bry = Bry_.new_ascii_("New Tab");
+	public static final byte[] Tab_name_bry = Bry_.new_a7("New Tab");
 }

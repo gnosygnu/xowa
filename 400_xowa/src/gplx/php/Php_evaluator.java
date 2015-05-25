@@ -25,10 +25,10 @@ NOTE: naive implementation of PHP evaluator. intended only for parsing Messages*
 public class Php_evaluator implements Php_tkn_wkr {
 	byte mode = Mode_key_bgn, next_tid = 0, next_mode = 0;
 	Php_line_assign cur_line; Php_itm_ary cur_ary; Php_key cur_kv_key;
-	ListAdp frame_stack = ListAdp_.new_();
+	List_adp frame_stack = List_adp_.new_();
 	public Php_evaluator(Gfo_msg_log msg_log) {this.msg_log = msg_log;} Gfo_msg_log msg_log;
 	public void Init(Php_ctx ctx) {src = ctx.Src(); frame_stack.Clear();} private byte[] src;
-	public ListAdp List() {return lines;} ListAdp lines = ListAdp_.new_();
+	public List_adp List() {return lines;} List_adp lines = List_adp_.new_();
 	public Gfo_msg_log Msg_log() {return msg_log;}
 	public void Clear() {
 		lines.Clear(); msg_log.Clear();
@@ -179,7 +179,7 @@ public class Php_evaluator implements Php_tkn_wkr {
 						if (frame_stack.Count() == 0)
 							cur_ary = null;
 						else {
-							Php_scanner_frame frame = (Php_scanner_frame)ListAdp_.Pop(frame_stack);
+							Php_scanner_frame frame = (Php_scanner_frame)List_adp_.Pop(frame_stack);
 							cur_ary = frame.Ary();
 							frame.Rls();
 						}
@@ -204,7 +204,7 @@ public class Php_evaluator implements Php_tkn_wkr {
 						if (frame_stack.Count() == 0)
 							cur_ary = null;
 						else {
-							Php_scanner_frame frame = (Php_scanner_frame)ListAdp_.Pop(frame_stack);
+							Php_scanner_frame frame = (Php_scanner_frame)List_adp_.Pop(frame_stack);
 							cur_ary = frame.Ary();
 							frame.Rls();
 						}

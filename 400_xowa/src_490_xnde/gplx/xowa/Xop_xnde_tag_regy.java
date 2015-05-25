@@ -33,21 +33,21 @@ public class Xop_xnde_tag_regy {
 		Init_reg(tag_regy_wiki_main	, Xop_xnde_tag_.Ary);
 	}
 	private Xop_xnde_tag[] FilterXtns(Xop_xnde_tag[] ary, Xop_xnde_tag... more) {
-		ListAdp rv = ListAdp_.new_();
+		List_adp rv = List_adp_.new_();
 		for (Xop_xnde_tag itm : ary)
 			if (itm.Xtn()) rv.Add(itm);
 		for (Xop_xnde_tag itm : more)
 			rv.Add(itm);
-		return (Xop_xnde_tag[])rv.Xto_ary(Xop_xnde_tag.class);
+		return (Xop_xnde_tag[])rv.To_ary(Xop_xnde_tag.class);
 	}
 	private void Init_reg(Btrie_slim_mgr tag_regy, Xop_xnde_tag... ary) {
 		for (Xop_xnde_tag tag : ary) {
 			tag_regy.Add_obj(tag.Name_bry(), tag);
-			OrderedHash langs = tag.Langs();
+			Ordered_hash langs = tag.Langs();
 			if (langs != null) {						// tag has langs; EX: <section>; DATE:2014-07-18
 				int langs_len = langs.Count();
 				for (int i = 0; i < langs_len; ++i) {	// register each lang's tag; EX:"<Abschnitt>", "<trecho>"
-					Xop_xnde_tag_lang lang = (Xop_xnde_tag_lang)langs.FetchAt(i);
+					Xop_xnde_tag_lang lang = (Xop_xnde_tag_lang)langs.Get_at(i);
 					tag_regy.Add_obj(lang.Name_bry(), tag);
 				}
 			}

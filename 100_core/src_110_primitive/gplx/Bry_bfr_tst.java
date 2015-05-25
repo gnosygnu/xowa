@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 import org.junit.*;
 public class Bry_bfr_tst {
-	Bry_bfr bb = Bry_bfr.new_(16);
+	private Bry_bfr bb = Bry_bfr.new_(16);
 	@Before public void setup() {bb.Clear();} private ByteAryBfr_fxt fxt = new ByteAryBfr_fxt();
 	@Test  public void AddByte() {
 		bb = Bry_bfr.new_(2);	// NOTE: make sure auto-expands
@@ -38,8 +38,8 @@ public class Bry_bfr_tst {
 		if (String_.Len(s) == 1)
 			bb.Add_byte((byte)String_.CharAt(s, 0));
 		else
-			bb.Add(Bry_.new_utf8_(s));
-		Tfds.Eq(expdStr, String_.new_utf8_(bb.Xto_bry()));
+			bb.Add(Bry_.new_u8(s));
+		Tfds.Eq(expdStr, String_.new_u8(bb.Xto_bry()));
 		Tfds.Eq(expdLen, bb.Bfr_max());
 	}
 	@Test  public void Add_dte() {
@@ -47,7 +47,7 @@ public class Bry_bfr_tst {
 	}
 	void tst_AddDte(String raw) {
 		bb.Add_dte(DateAdp_.parse_fmt(raw, Bry_.Fmt_csvDte));
-		Tfds.Eq(raw, String_.new_utf8_(bb.Xto_bry()));
+		Tfds.Eq(raw, String_.new_u8(bb.Xto_bry()));
 	}
 	@Test  public void Add_int_variable() {
 		Add_int_variable(-1);
@@ -64,12 +64,12 @@ public class Bry_bfr_tst {
 	}
 	void tst_Add_float(float v) {
 		bb.Add_float(v);
-		Tfds.Eq(v, Float_.parse_(String_.new_utf8_(bb.Xto_bry())));
+		Tfds.Eq(v, Float_.parse_(String_.new_u8(bb.Xto_bry())));
 	}
 	void Add_int_variable(int val) {
 		bb.Clear();
 		bb.Add_int_variable(val);
-		Tfds.Eq(val, Int_.parse_(String_.new_utf8_(bb.Xto_bry())));
+		Tfds.Eq(val, Int_.parse_(String_.new_u8(bb.Xto_bry())));
 	}
 	@Test  public void Add_int_fixed_len3()				{tst_Add_int_fixed(123, 3, "123");}
 	@Test  public void Add_int_fixed_pad_1()			{tst_Add_int_fixed(2, 1, "2");}
@@ -79,7 +79,7 @@ public class Bry_bfr_tst {
 	@Test  public void Add_int_fixed_neg_pad1()			{tst_Add_int_fixed(-2, 1, "-");}
 	@Test  public void Add_int_fixed_chop_1()			{tst_Add_int_fixed(123, 1, "3");}
 	@Test  public void Add_int_fixed_chop_neg()			{tst_Add_int_fixed(-21, 2, "-1");}
-	void tst_Add_int_fixed(int val, int digits, String expd) {Tfds.Eq(expd, String_.new_utf8_(bb.Add_int_fixed(val, digits).Xto_bry()));}
+	void tst_Add_int_fixed(int val, int digits, String expd) {Tfds.Eq(expd, String_.new_u8(bb.Add_int_fixed(val, digits).Xto_bry()));}
 	@Test  public void Add_long_fixed_len3()			{tst_Add_long_fixed(123, 3, "123");}
 	@Test  public void Add_long_fixed_pad_1()			{tst_Add_long_fixed(2, 1, "2");}
 	@Test  public void Add_long_fixed_pad_2()			{tst_Add_long_fixed(2, 2, "02");}
@@ -89,7 +89,7 @@ public class Bry_bfr_tst {
 	@Test  public void Add_long_fixed_chop_1()			{tst_Add_long_fixed(123, 1, "3");}
 	@Test  public void Add_long_fixed_chop_neg()		{tst_Add_long_fixed(-21, 2, "-1");}
 	@Test  public void Add_long_fixed_large()			{tst_Add_long_fixed(123456789012345L, 15, "123456789012345");}
-	void tst_Add_long_fixed(long val, int digits, String expd) {Tfds.Eq(expd, String_.new_utf8_(bb.Add_long_fixed(val, digits).Xto_bry()));}
+	void tst_Add_long_fixed(long val, int digits, String expd) {Tfds.Eq(expd, String_.new_u8(bb.Add_long_fixed(val, digits).Xto_bry()));}
 	@Test  public void AddDte_short() {
 		tst_AddDte_short("2010-08-26T22:38:36Z");
 	}
@@ -133,7 +133,7 @@ public class Bry_bfr_tst {
 	}
 	void tst_XtoAryAndClearAndTrim(String raw, String expd) {
 		bb.Add_str(raw);
-		Tfds.Eq(expd, String_.new_utf8_(bb.Xto_bry_and_clear_and_trim()));
+		Tfds.Eq(expd, String_.new_u8(bb.Xto_bry_and_clear_and_trim()));
 	}
 	@Test  public void XtoInt() {
 		tst_XtoInt("123", 123);
@@ -216,11 +216,11 @@ class ByteAryBfr_fxt {
 	}
 	public void Test_Add_int_pad_bgn(byte pad_byte, int str_len, int val, String expd) {Tfds.Eq(expd, bfr.Add_int_pad_bgn(pad_byte, str_len, val).Xto_str_and_clear());}
 	public void Test_Add_bry_escape(String val, String expd) {
-		byte[] val_bry = Bry_.new_utf8_(val);
-		Tfds.Eq(expd, bfr.Add_bry_escape(Byte_ascii.Apos, Byte_ascii.Apos, val_bry, 0, val_bry.length).Xto_str_and_clear());
+		byte[] val_bry = Bry_.new_u8(val);
+		Tfds.Eq(expd, bfr.Add_bry_escape(Byte_ascii.Apos, Byte_.Ary(Byte_ascii.Apos, Byte_ascii.Apos), val_bry, 0, val_bry.length).Xto_str_and_clear());
 	}
-	public void Test_Insert_at(String init, int pos, String val, String expd)	{Tfds.Eq(expd, bfr.Add_str(init).Insert_at(pos, Bry_.new_utf8_(val)).Xto_str_and_clear());}
-	public void Test_Insert_at(String init, int pos, String val, int val_bgn, int val_end, String expd)	{Tfds.Eq(expd, bfr.Add_str(init).Insert_at(pos, Bry_.new_utf8_(val), val_bgn, val_end).Xto_str_and_clear());}
+	public void Test_Insert_at(String init, int pos, String val, String expd)	{Tfds.Eq(expd, bfr.Add_str(init).Insert_at(pos, Bry_.new_u8(val)).Xto_str_and_clear());}
+	public void Test_Insert_at(String init, int pos, String val, int val_bgn, int val_end, String expd)	{Tfds.Eq(expd, bfr.Add_str(init).Insert_at(pos, Bry_.new_u8(val), val_bgn, val_end).Xto_str_and_clear());}
 	public void Test_Delete_rng(String init, int bgn, int end, String expd)		{Tfds.Eq(expd, bfr.Add_str(init).Delete_rng(bgn, end).Xto_str_and_clear());}
 	public void Test_Delete_rng_to_bgn(String init, int pos, String expd)		{Tfds.Eq(expd, bfr.Add_str(init).Delete_rng_to_bgn(pos).Xto_str_and_clear());}
 	public void Test_Delete_rng_to_end(String init, int pos, String expd)		{Tfds.Eq(expd, bfr.Add_str(init).Delete_rng_to_end(pos).Xto_str_and_clear());}

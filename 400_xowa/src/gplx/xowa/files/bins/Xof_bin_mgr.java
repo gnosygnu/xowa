@@ -22,22 +22,23 @@ import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.
 import gplx.xowa.wmfs.*;
 public class Xof_bin_mgr {		
 	private final Fsm_mnt_mgr mnt_mgr;
-	private final Gfo_usr_dlg usr_dlg; private final Xow_repo_mgr repo_mgr; private final Xof_cache_mgr cache_mgr; private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2_();
+	private final Gfo_usr_dlg usr_dlg; private final Xow_repo_mgr repo_mgr; private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
 	private Xof_bin_wkr[] wkrs = Xof_bin_wkr_.Ary_empty; private int wkrs_len;
 	private final String_obj_ref resize_warning = String_obj_ref.null_(); private final Xof_img_size tmp_size = new Xof_img_size();
-	public Xof_bin_mgr(Fsm_mnt_mgr mnt_mgr, Xow_repo_mgr repo_mgr, Xof_cache_mgr cache_mgr, Xof_img_wkr_resize_img resize_wkr) {
-		this.mnt_mgr = mnt_mgr; this.repo_mgr = repo_mgr; this.cache_mgr = cache_mgr;
-		this.usr_dlg = Gfo_usr_dlg_.I;			
+	private final Io_download_fmt download_fmt;
+	public Xof_bin_mgr(Fsm_mnt_mgr mnt_mgr, Xow_repo_mgr repo_mgr, Xof_img_wkr_resize_img resize_wkr, Io_download_fmt download_fmt) {
+		this.mnt_mgr = mnt_mgr; this.repo_mgr = repo_mgr; this.download_fmt = download_fmt;
+		this.usr_dlg = Gfo_usr_dlg_.I;
 		this.Resizer_(resize_wkr);
 	}
 	public void Resizer_(Xof_img_wkr_resize_img v) {resizer = v;} private Xof_img_wkr_resize_img resizer;
 	public void Wkrs__del(String key) {
-		ListAdp list = ListAdp_.new_();
+		List_adp list = List_adp_.new_();
 		for (Xof_bin_wkr wkr : wkrs) {
 			if (String_.Eq(key, wkr.Key())) continue;
 			list.Add(wkr);
 		}
-		this.wkrs = (Xof_bin_wkr[])list.Xto_ary(Xof_bin_wkr.class);
+		this.wkrs = (Xof_bin_wkr[])list.To_ary(Xof_bin_wkr.class);
 		this.wkrs_len = wkrs.length;
 	}
 	public void Wkrs__add(Xof_bin_wkr v) {
@@ -52,17 +53,17 @@ public class Xof_bin_mgr {
 		}
 		return null;
 	}
-	public boolean Find_to_url_as_bool(byte exec_tid, Xof_fsdb_itm itm) {return Find_to_url(exec_tid, itm) != Io_url_.Null;}
-	private Io_url Find_to_url(byte exec_tid, Xof_fsdb_itm itm) {
-		Io_stream_rdr rdr = Find_as_rdr(exec_tid, itm);
-		if (rdr == Io_stream_rdr_.Null) return Io_url_.Null;
-		Io_url trg = itm.Html_view_url();
-		if (itm.File_resized()) return trg;			// rdr is opened directly from trg; return its url; occurs when url goes through imageMagick / inkscape, or when thumb is already on disk;
-		Io_stream_wtr_.Save_rdr(trg, rdr);			// rdr is stream; either from http_wmf or fsdb; save to trg and return;
-		if (!Env_.Mode_testing()) cache_mgr.Reg(itm, rdr.Len());
+	public boolean Find_to_url_as_bool(int exec_tid, Xof_fsdb_itm fsdb) {return Find_to_url(exec_tid, fsdb) != Io_url_.Empty;}
+	private Io_url Find_to_url(int exec_tid, Xof_fsdb_itm fsdb) {
+		Io_stream_rdr rdr = Find_as_rdr(exec_tid, fsdb);
+		if (rdr == Io_stream_rdr_.Null) return Io_url_.Empty;
+		Io_url trg = fsdb.Html_view_url();
+		fsdb.File_size_(rdr.Len());
+		if (fsdb.File_resized()) return trg;				// rdr is opened directly from trg; return its url; occurs when url goes through imageMagick / inkscape, or when thumb is already on disk;
+		Io_stream_wtr_.Save_rdr(trg, rdr, download_fmt);	// rdr is stream; either from http_wmf or fsdb; save to trg and return;
 		return trg;
 	}
-	public Io_stream_rdr Find_as_rdr(byte exec_tid, Xof_fsdb_itm fsdb) {
+	public Io_stream_rdr Find_as_rdr(int exec_tid, Xof_fsdb_itm fsdb) {
 		Io_stream_rdr rv = Io_stream_rdr_.Null;
 		Xof_repo_itm repo = repo_mgr.Repos_get_by_wiki(fsdb.Orig_repo_name()).Trg();
 		boolean file_is_orig = fsdb.File_is_orig();
@@ -89,12 +90,12 @@ public class Xof_bin_mgr {
 				}
 				rv = wkr.Get_as_rdr(fsdb, Bool_.N, fsdb.Orig_w());				// thumb missing; get orig;
 				if (rv == Io_stream_rdr_.Null) {
-					usr_dlg.Log_direct(String_.Format("bin_mgr:thumb not found; wkr={0} ttl={1} w={2}", wkr.Key(), fsdb.Lnki_ttl(), fsdb.Lnki_w()));
+					usr_dlg.Log_direct(String_.Format("bin_mgr:thumb not found; wkr={0} ttl={1} w={2}", wkr.Key(), fsdb.Orig_ttl(), fsdb.Lnki_w()));
 					continue;													// nothing found; continue;
 				}
 				if (!wkr.Resize_allowed()) continue;
 				Io_url orig = url_bldr.To_url_trg(repo, fsdb, Bool_.Y);			// get orig url
-				Io_stream_wtr_.Save_rdr(orig, rv);
+				Io_stream_wtr_.Save_rdr(orig, rv, download_fmt);
 				boolean resized = Resize(exec_tid, fsdb, file_is_orig, orig, trg);
 				if (!resized) continue;
 				fsdb.File_exists_y_();
@@ -105,9 +106,9 @@ public class Xof_bin_mgr {
 		}
 		return Io_stream_rdr_.Null;
 	}
-	private boolean Resize(byte exec_tid, Xof_fsdb_itm itm, boolean file_is_orig, Io_url src, Io_url trg) {			
-		tmp_size.Html_size_calc(exec_tid, itm.Lnki_w(), itm.Lnki_h(), itm.Lnki_type(), mnt_mgr.Patch_upright(), itm.Lnki_upright(), itm.Lnki_ext().Id(), itm.Orig_w(), itm.Orig_h(), Xof_img_size.Thumb_width_img);
-		boolean rv = resizer.Exec(src, trg, tmp_size.Html_w(), tmp_size.Html_h(), itm.Lnki_ext().Id(), resize_warning);
+	private boolean Resize(int exec_tid, Xof_fsdb_itm itm, boolean file_is_orig, Io_url src, Io_url trg) {			
+		tmp_size.Html_size_calc(exec_tid, itm.Lnki_w(), itm.Lnki_h(), itm.Lnki_type(), mnt_mgr.Patch_upright(), itm.Lnki_upright(), itm.Orig_ext().Id(), itm.Orig_w(), itm.Orig_h(), Xof_img_size.Thumb_width_img);
+		boolean rv = resizer.Exec(src, trg, tmp_size.Html_w(), tmp_size.Html_h(), itm.Orig_ext().Id(), resize_warning);
 		itm.File_resized_y_();
 		return rv;
 	}

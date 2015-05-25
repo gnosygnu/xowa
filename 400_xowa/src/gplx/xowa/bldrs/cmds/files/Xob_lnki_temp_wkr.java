@@ -64,8 +64,8 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 		gplx.xowa.xtns.scores.Score_xnde.Log_wkr = log_mgr.Make_wkr();
 		gplx.xowa.xtns.hieros.Hiero_xnde.Log_wkr = log_mgr.Make_wkr();
 		Xof_fsdb_mgr__sql trg_fsdb_mgr = new Xof_fsdb_mgr__sql();
-		wiki.File__fsdb_mode().Tid_make_y_();
-		Fsdb_db_mgr__v2 fsdb_core = Fsdb_db_mgr__v2_bldr.I.Make(wiki, Bool_.Y);
+		wiki.File__fsdb_mode().Tid_v2_bld_y_();
+		Fsdb_db_mgr__v2 fsdb_core = Fsdb_db_mgr__v2_bldr.I.Get_or_make(wiki, Bool_.Y);
 		trg_fsdb_mgr.Init_by_wiki(wiki);
 		Fsm_mnt_mgr trg_mnt_mgr = trg_fsdb_mgr.Mnt_mgr();
 		wiki.File_mgr().Init_file_mgr_by_load(wiki);										// must happen after fsdb.make
@@ -106,12 +106,12 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 				page.Root_(root);
 				hdump_bldr.Insert_page(page);
 				link_dump_cmd.Page_bgn(page.Revision_data().Id());
-				ListAdp lnki_list = page.Redlink_lnki_list().Lnki_list();
+				List_adp lnki_list = page.Redlink_lnki_list().Lnki_list();
 				int len = lnki_list.Count();
 				for (int i = 0; i < len; ++i) {
-					Xop_lnki_tkn lnki = (Xop_lnki_tkn)lnki_list.FetchAt(i);
+					Xop_lnki_tkn lnki = (Xop_lnki_tkn)lnki_list.Get_at(i);
 					Xoa_ttl trg_ttl = lnki.Ttl();
-					link_dump_cmd.Add(lnki.Html_id(), trg_ttl.Ns().Id(), trg_ttl.Page_db());
+					link_dump_cmd.Add(lnki.Html_uid(), trg_ttl.Ns().Id(), trg_ttl.Page_db());
 				}
 			}
 			root.Clear();
@@ -143,7 +143,7 @@ public class Xob_lnki_temp_wkr extends Xob_dump_mgr_base implements Xopg_redlink
 		byte[] ttl_commons = Xto_commons(ns_file_is_case_match_all, commons_wiki, ttl);
 		if (	Xof_lnki_page.Null_n(lnki_page) 				// page set
 			&&	Xof_lnki_time.Null_n(lnki_time))			// thumbtime set
-				usr_dlg.Warn_many("", "", "page and thumbtime both set; this may be an issue with fsdb: page=~{0} ttl=~{1}", ctx.Cur_page().Ttl().Page_db_as_str(), String_.new_utf8_(ttl));
+				usr_dlg.Warn_many("", "", "page and thumbtime both set; this may be an issue with fsdb: page=~{0} ttl=~{1}", ctx.Cur_page().Ttl().Page_db_as_str(), String_.new_u8(ttl));
 		if (lnki.Ns_id() == Xow_ns_.Id_media)
 			lnki_src_tid = Xob_lnki_src_tid.Tid_media;
 		tbl.Insert_cmd_by_batch(ctx.Cur_page().Bldr__ns_ord(), ctx.Cur_page().Revision_data().Id(), ttl, ttl_commons, Byte_.By_int(ext.Id()), lnki.Lnki_type(), lnki_src_tid, lnki.W(), lnki.H(), lnki.Upright(), lnki_time, lnki_page);
@@ -195,14 +195,14 @@ class Xob_lnki_temp_wkr_ {
 		return rv;
 	}
 	private static int[] Ids_by_aliases(Xow_ns_mgr ns_mgr, String[] aliases) {
-		ListAdp list = ListAdp_.new_();
+		List_adp list = List_adp_.new_();
 		int len = aliases.length;
 		for (int i = 0; i < len; i++) {
 			String alias = aliases[i];
 			if (String_.Eq(alias, Xow_ns_.Key_main))
 				list.Add(ns_mgr.Ns_main());
 			else {
-				Xow_ns ns = ns_mgr.Names_get_or_null(Bry_.new_utf8_(alias));
+				Xow_ns ns = ns_mgr.Names_get_or_null(Bry_.new_u8(alias));
 				if (ns != null)
 					list.Add(ns);
 			}
@@ -210,7 +210,7 @@ class Xob_lnki_temp_wkr_ {
 		len = list.Count();
 		int[] rv = new int[len];
 		for (int i = 0; i < len; i++) {
-			rv[i] = ((Xow_ns)list.FetchAt(i)).Id();
+			rv[i] = ((Xow_ns)list.Get_at(i)).Id();
 		}
 		return rv;
 	}

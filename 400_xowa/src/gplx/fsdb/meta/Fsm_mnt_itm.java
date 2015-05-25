@@ -38,10 +38,10 @@ public class Fsm_mnt_itm {
 		if (!cfg_mgr.Patch_next_id()) Fsm_mnt_itm_.Patch_next_id(this, name);
 	}
 	public int Next_id() {return cfg_mgr.Next_id();}
-	public Fsd_fil_itm		Select_fil_or_null(byte[] dir, byte[] fil, boolean is_thumb, int width, double time) {return atr_mgr.Select_fil_or_null(dir, fil);}
-	public boolean				Select_thm(Fsd_thm_itm rv, byte[] dir, byte[] fil) {
+	public Fsd_fil_itm		Select_fil_or_null(byte[] dir, byte[] fil) {return atr_mgr.Select_fil_or_null(dir, fil);}
+	public boolean				Select_thm(boolean exact, Fsd_thm_itm rv, byte[] dir, byte[] fil) {
 		Fsd_fil_itm fil_itm = atr_mgr.Select_fil_or_null(dir, fil);
-		return fil_itm == Fsd_fil_itm.Null ? Bool_.N : atr_mgr.Select_thm(rv, fil_itm.Dir_id(), fil_itm.Fil_id());
+		return fil_itm == Fsd_fil_itm.Null ? Bool_.N : atr_mgr.Select_thm(exact, rv, fil_itm.Dir_id(), fil_itm.Fil_id());
 	}
 	public void				Insert_img(Fsd_img_itm rv, Fsm_atr_fil atr_fil, Fsm_bin_fil bin_fil, byte[] dir, byte[] fil, int ext_id, int img_w, int img_h, long bin_len, Io_stream_rdr bin_rdr) {
 		int fil_id = atr_fil.Insert_img(rv, dir, fil, ext_id, img_w, img_h, bin_fil.Id(), bin_len, bin_rdr);

@@ -58,7 +58,7 @@ class Xoh_rtl_utl_fxt {
 	public void Init() {
 	}
 	public void Test_reverse_li(String raw, String expd) {
-		byte[] actl = Xoh_rtl_utl.Reverse_li(Bry_.new_utf8_(raw));
-		Tfds.Eq_str_lines(expd, String_.new_utf8_(actl));
+		byte[] actl = Xoh_rtl_utl.Reverse_li(Bry_.new_u8(raw));
+		Tfds.Eq_str_lines(expd, String_.new_u8(actl));
 	}
 }

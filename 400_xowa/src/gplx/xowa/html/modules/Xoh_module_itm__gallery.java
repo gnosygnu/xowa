@@ -31,6 +31,6 @@ public class Xoh_module_itm__gallery implements Xoh_module_itm {
 		wtr.Write_js_global_ini_atr_val(Key_enabled			, true);
 	}
 	private static final byte[]
-	  Key_enabled				= Bry_.new_ascii_("gallery-packed-enabled")
+	  Key_enabled				= Bry_.new_a7("gallery-packed-enabled")
 	;
 }

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.modules.popups; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.modules.*;
 public class Xopg_popup_mgr {
-	public OrderedHash Itms() {return itms;} private OrderedHash itms = OrderedHash_.new_(); 
+	public Ordered_hash Itms() {return itms;} private Ordered_hash itms = Ordered_hash_.new_(); 
 	public void Clear() {
 		itms.Clear();
 	}

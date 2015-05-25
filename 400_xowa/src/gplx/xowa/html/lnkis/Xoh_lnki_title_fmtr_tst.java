@@ -33,7 +33,7 @@ class Xoh_lnki_title_fmtr_fxt {
 	Xoh_lnki_title_fmtr title_wkr = new Xoh_lnki_title_fmtr();
 	public Xoh_lnki_title_fmtr_fxt Clear() {return this;}
 	public void Test_parse(String raw, String expd) {
-		byte[] raw_bry = Bry_.new_utf8_(raw);
+		byte[] raw_bry = Bry_.new_u8(raw);
 		Xop_root_tkn root = fxt.Ctx().Tkn_mkr().Root(raw_bry);
 		fxt.Parser().Parse_page_all_clear(root, fxt.Ctx(), fxt.Ctx().Tkn_mkr(), raw_bry);
 		title_wkr.Set(raw_bry, root).Bld_recurse(bfr, root);

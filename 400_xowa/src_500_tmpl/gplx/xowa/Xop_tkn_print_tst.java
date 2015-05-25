@@ -30,7 +30,7 @@ public class Xop_tkn_print_tst {
 	@Test  public void Tmpl_pf()		{tst_Print("{{#expr:1}}");}
 	private void tst_Print(String raw) {
 		Xop_ctx ctx = fxt.Ctx();
-		byte[] raw_bry = Bry_.new_utf8_(raw);
+		byte[] raw_bry = Bry_.new_u8(raw);
 		Xot_defn_tmpl defn = fxt.run_Parse_tmpl(Bry_.Empty, raw_bry);
 		Xot_fmtr_prm raw_fmtr = new Xot_fmtr_prm();
 		defn.Root().Tmpl_fmt(ctx, raw_bry, raw_fmtr);

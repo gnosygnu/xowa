@@ -24,7 +24,7 @@ public class Xob_category_registry_sql implements Xob_cmd {
 		// setup
 		wiki.Html_mgr().Importing_ctgs_(Bool_.Y);
 		Io_url rslt_dir = Xob_category_registry_sql.Tmp_dir(wiki);
-		Io_mgr._.DeleteDirDeep(rslt_dir);
+		Io_mgr.I.DeleteDirDeep(rslt_dir);
 		Xob_tmp_wtr rslt_wtr = Xob_tmp_wtr.new_wo_ns_(Io_url_gen_.dir_(rslt_dir), Io_mgr.Len_mb);
 		// read data
 		Gfo_usr_dlg usr_dlg = wiki.Appe().Usr_dlg();

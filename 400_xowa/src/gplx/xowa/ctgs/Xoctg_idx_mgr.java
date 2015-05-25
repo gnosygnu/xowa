@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.ctgs; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*; import gplx.core.flds.*;
 public class Xoctg_idx_mgr implements GfoInvkAble {
-	ListAdp itms = ListAdp_.new_();
+	List_adp itms = List_adp_.new_();
 	public int Block_len() {return block_len;} public Xoctg_idx_mgr Block_len_(int v) {this.block_len = v; return this;} private int block_len = Io_mgr.Len_mb;
 	public int Itms_len() {return itms.Count();}
-	public Xoctg_idx_itm Itms_get_at(int i) {return (Xoctg_idx_itm)itms.FetchAt(i);}
+	public Xoctg_idx_itm Itms_get_at(int i) {return (Xoctg_idx_itm)itms.Get_at(i);}
 	public void Itms_add(Xoctg_idx_itm itm) {itms.Add(itm);}
 	public byte[] Src() {return src;} public Xoctg_idx_mgr Src_(byte[] v) {src = v; return this;} private byte[] src;
 	public int Total() {return total;} public Xoctg_idx_mgr Total_(int v) {total = v; return this;} private int total;
@@ -33,7 +33,7 @@ public class Xoctg_idx_mgr implements GfoInvkAble {
 		int pipe_pos_cur = -1, pipe_pos_prv = -1;
 		for (int i = block_len; i < len; i += block_len) {
 			usr_dlg.Prog_many("", "", "indexing ~{0} ~{1}", i, len);
-			pipe_pos_cur = Bry_finder.Find_fwd(src, Byte_ascii.Pipe, i, len); if (pipe_pos_cur == Bry_.NotFound) throw Err_.new_fmt_("ctg_idx_mgr could not find pipe.next; ctg={0} pos={1}", String_.new_ascii_(ctg), i);
+			pipe_pos_cur = Bry_finder.Find_fwd(src, Byte_ascii.Pipe, i, len); if (pipe_pos_cur == Bry_.NotFound) throw Err_.new_fmt_("ctg_idx_mgr could not find pipe.next; ctg={0} pos={1}", String_.new_a7(ctg), i);
 			if (pipe_pos_cur == len - 1) break;
 			Index_itm(ctg, src, pipe_pos_cur + 1, len);	// +1 to skip pipe
 			pipe_pos_prv = pipe_pos_cur;
@@ -43,7 +43,7 @@ public class Xoctg_idx_mgr implements GfoInvkAble {
 			Index_itm(ctg, src, pipe_pos_cur + 1, len);
 	}
 	private void Index_itm(byte[] ctg, byte[] src, int bgn, int len) {
-		int end = Bry_finder.Find_fwd(src, Byte_ascii.Pipe, bgn, len); if (end == Bry_.NotFound) throw Err_.new_fmt_("Ctg_idx_mgr could not find pipe.end; ctg={0} pos={1}", String_.new_ascii_(ctg), bgn);
+		int end = Bry_finder.Find_fwd(src, Byte_ascii.Pipe, bgn, len); if (end == Bry_.NotFound) throw Err_.new_fmt_("Ctg_idx_mgr could not find pipe.end; ctg={0} pos={1}", String_.new_a7(ctg), bgn);
 		fld_rdr.Pos_(bgn);
 		Xoctg_idx_itm itm = new Xoctg_idx_itm().Parse(fld_rdr, bgn);
 		itms.Add(itm);
@@ -55,9 +55,9 @@ public class Xoctg_idx_mgr implements GfoInvkAble {
 		Xoctg_idx_itm rv = null;
 		int comp_prv = Int_.MinValue, comp_cur = 0;
 		while (true) {
-			rv = (Xoctg_idx_itm)itms.FetchAt(pos);
+			rv = (Xoctg_idx_itm)itms.Get_at(pos);
 			comp_cur = Bry_.Compare(find, rv.Sortkey());
-			// Tfds.Write(dif, pos, comp_cur, comp_prv, String_.new_ascii_(find), String_.new_ascii_(rv.Sortkey()));
+			// Tfds.Write(dif, pos, comp_cur, comp_prv, String_.new_a7(find), String_.new_a7(rv.Sortkey()));
 			if (comp_cur == CompareAble_.Same) break;		// exact match; stop
 			dif /= 2;
 			if (dif == 0) dif = 1;							// make sure dif is at least 1
@@ -99,11 +99,11 @@ public class Xoctg_idx_mgr implements GfoInvkAble {
 			pos_cur = dir_fwd ? itm_bgn : itm_bgn - 1;	// -1 to position at pipe (note that -1 in FindBwd will position before)
 			tmp_prv_itm.Copy(tmp_cur_itm);
 		}
-		// Tfds.Write(arg_is_from, dir_fwd, String_.new_utf8_(find), String_.new_utf8_(tmp_cur_itm.Sortkey()), String_.new_utf8_(tmp_prv_itm.Sortkey()));
+		// Tfds.Write(arg_is_from, dir_fwd, String_.new_u8(find), String_.new_u8(tmp_cur_itm.Sortkey()), String_.new_u8(tmp_prv_itm.Sortkey()));
 		if (comp_cur == CompareAble_.Same) return tmp_cur_itm;
 		return (arg_is_from && dir_fwd) || (!arg_is_from && !dir_fwd) ? tmp_cur_itm : tmp_prv_itm;	// see note above
 	}	private Xoctg_idx_itm tmp_cur_itm = new Xoctg_idx_itm(), tmp_prv_itm = new Xoctg_idx_itm(); Gfo_fld_rdr fld_rdr = Gfo_fld_rdr.xowa_();
-	public void Find(ListAdp rv, byte[] src, boolean arg_is_from, byte[] find, int find_count, Xoctg_view_itm last_plus_one) {
+	public void Find(List_adp rv, byte[] src, boolean arg_is_from, byte[] find, int find_count, Xoctg_view_itm last_plus_one) {
 		int tmp_pos = 0; int src_len = src.length;
 		last_plus_one.Clear();
 		if (find != null) {	// find == null when no args passed; EX: "en.wikipedia.org/wiki/Category:A" (vs "en.wikipedia.org/wiki/Category:A?from=B")
@@ -136,10 +136,10 @@ public class Xoctg_idx_mgr implements GfoInvkAble {
 			if (tmp_pos == src_len) break; // last pipe; stop
 		}
 		if (!arg_is_from)
-			rv.SortBy(Xoctg_view_itm_sorter_sortkey._);
+			rv.Sort_by(Xoctg_view_itm_sorter_sortkey._);
 		int rv_count = rv.Count();
 		if (rv_count > 0) {
-			Xoctg_view_itm last_itm = (Xoctg_view_itm)rv.FetchAt(rv_count - 1);
+			Xoctg_view_itm last_itm = (Xoctg_view_itm)rv.Get_at(rv_count - 1);
 			int last_itm_pos = last_itm.Pos();
 			tmp_pos = Bry_finder.Find_fwd(src, Byte_ascii.Pipe, last_itm_pos);
 			if (tmp_pos != Bry_.NotFound && tmp_pos < src_len - 1) {

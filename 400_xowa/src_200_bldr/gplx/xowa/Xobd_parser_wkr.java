@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.xowa.wikis.data.tbls.*;
 public interface Xobd_parser_wkr extends GfoInvkAble {
-	OrderedHash Wkr_hooks();
+	Ordered_hash Wkr_hooks();
 	void Wkr_bgn(Xob_bldr bldr);
 	int Wkr_run(Xowd_page_itm page, byte[] src, int src_len, int bgn, int end);
 	void Wkr_end();

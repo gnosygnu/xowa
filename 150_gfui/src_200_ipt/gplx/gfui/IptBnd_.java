@@ -34,16 +34,16 @@ public class IptBnd_ {
 		box.IptBnds().Add(bnd);
 	}
 	public static Object Srl(GfoMsg owner, IptBnd bnd) {GfoMsg_.srl_(owner, "bnd").Add("key", bnd.Key()).Add("ipt", AryXtoStr(bnd.Ipts())); return bnd;}
-	static String AryXtoStr(ListAdp ary) {
+	static String AryXtoStr(List_adp ary) {
 		String_bldr sb = String_bldr_.new_();
 		for (int i = 0; i < ary.Count(); i++)
-			sb.Add_spr_unless_first(((IptArg)ary.FetchAt(i)).Key(), "|", i);
+			sb.Add_spr_unless_first(((IptArg)ary.Get_at(i)).Key(), "|", i);
 		return sb.XtoStr();
 	}
 }
 class IptBnd_invk implements IptBnd {
 	public String		Key() {return key;} private String key;
-	public ListAdp		Ipts() {return ipts;}  ListAdp ipts;
+	public List_adp		Ipts() {return ipts;}  List_adp ipts;
 	public IptEventType	EventTypes() {return eventTypes;} IptEventType	eventTypes;
 	public void			Exec(IptEventData iptData) {
 		GfoMsg newMsg = m.CloneNew();

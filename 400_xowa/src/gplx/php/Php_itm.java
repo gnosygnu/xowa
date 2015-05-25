@@ -29,13 +29,13 @@ class Php_itm_bool_true implements Php_itm, Php_itm_sub {
 	public byte Itm_tid() {return Php_itm_.Tid_bool_true;}
 	public byte[] Val_obj_bry() {return Bry_true;}
 	public static final Php_itm_bool_true _ = new Php_itm_bool_true(); Php_itm_bool_true() {}
-	private static final byte[] Bry_true = Bry_.new_ascii_("true");
+	private static final byte[] Bry_true = Bry_.new_a7("true");
 }
 class Php_itm_bool_false implements Php_itm, Php_itm_sub {
 	public byte Itm_tid() {return Php_itm_.Tid_bool_false;}
 	public byte[] Val_obj_bry() {return Bry_true;}
 	public static final Php_itm_bool_false _ = new Php_itm_bool_false(); Php_itm_bool_false() {}
-	private static final byte[] Bry_true = Bry_.new_ascii_("false");
+	private static final byte[] Bry_true = Bry_.new_a7("false");
 }
 class Php_itm_var implements Php_itm, Php_itm_sub, Php_key {
 	public Php_itm_var(byte[] v) {this.val_obj_bry = v;}

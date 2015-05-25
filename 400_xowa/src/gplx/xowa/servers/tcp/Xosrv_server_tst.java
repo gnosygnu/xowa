@@ -34,7 +34,7 @@ class Xosrv_server_fxt {
 		return this;
 	} 	private Xoae_app app;
 	public void Test_exec_js(String raw, String expd) {
-		String actl = app.Tcp_server().Exec_js(null, Bry_.new_ascii_(raw));
+		String actl = app.Tcp_server().Exec_js(null, Bry_.new_a7(raw));
 		Tfds.Eq(expd, actl);
 	}
 }

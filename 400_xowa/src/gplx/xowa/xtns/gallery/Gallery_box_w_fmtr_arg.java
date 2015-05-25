@@ -28,7 +28,7 @@ class Gallery_box_w_fmtr_arg__basic implements Gallery_box_w_fmtr_arg {
 		bfr.Add_int_variable(width);
 		bfr.Add(Style_end);
 	}
-	private static final byte[] Style_bgn = Bry_.new_ascii_("style=\"width: "), Style_end = Bry_.new_ascii_("px\"");
+	private static final byte[] Style_bgn = Bry_.new_a7("style=\"width: "), Style_end = Bry_.new_a7("px\"");
 }
 class Gallery_box_w_fmtr_arg__hdump implements Gallery_box_w_fmtr_arg {
 	private int uid;
@@ -50,7 +50,7 @@ class Gallery_img_pad_fmtr_arg__basic implements Gallery_img_pad_fmtr_arg {
 		bfr.Add_int_variable(vpad);
 		bfr.Add(Style_end);
 	}
-	private static final byte[] Style_bgn = Bry_.new_ascii_("style=\"margin:"), Style_end = Bry_.new_ascii_("px auto;\"");
+	private static final byte[] Style_bgn = Bry_.new_a7("style=\"margin:"), Style_end = Bry_.new_a7("px auto;\"");
 }
 class Gallery_img_pad_fmtr_arg__hdump implements Gallery_img_pad_fmtr_arg {
 	private int uid;

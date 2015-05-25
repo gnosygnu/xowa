@@ -24,7 +24,7 @@ abstract class Json_itm_wkr__base implements Json_itm_wkr {
 	private Json_parser json_parser = new Json_parser();
 	private Php_text_itm_parser php_quote_parser = new Php_text_itm_parser().Quote_is_single_(true);	// assume values are equivalent to php single quote; DATE:2014-08-06
 	public void Exec(byte[] src) {
-		ListAdp tmp_list = ListAdp_.new_(); Byte_obj_ref tmp_result = Byte_obj_ref.zero_(); Bry_bfr tmp_bfr = Bry_bfr.reset_(16); 
+		List_adp tmp_list = List_adp_.new_(); Byte_obj_ref tmp_result = Byte_obj_ref.zero_(); Bry_bfr tmp_bfr = Bry_bfr.reset_(16); 
 		Json_doc jdoc = json_parser.Parse(src);
 		this.Exec_bgn();
 		Json_itm_nde root = jdoc.Root();
@@ -47,7 +47,7 @@ abstract class Json_itm_wkr__base implements Json_itm_wkr {
 	@gplx.Virtual public void Exec_bgn() {}
 	@gplx.Virtual public void Exec_end() {}
 	public abstract void Read_kv_sub(byte[] key, byte[] val);
-	private static final byte[] Name_metadata = Bry_.new_ascii_("@metadata");
+	private static final byte[] Name_metadata = Bry_.new_a7("@metadata");
 }
 class Json_itm_wkr__gfs extends Json_itm_wkr__base {
 	private Gfs_bldr gfs_bldr = new Gfs_bldr();

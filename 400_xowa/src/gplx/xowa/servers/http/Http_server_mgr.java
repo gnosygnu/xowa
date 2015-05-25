@@ -72,16 +72,16 @@ public class Http_server_mgr implements GfoInvkAble {
 	}
 	public String Parse_page_to_html(Xoae_app app, String wiki_domain_str, String page_ttl_str) {
 		Init_gui();
-		byte[] wiki_domain = Bry_.new_utf8_(wiki_domain_str);
-		byte[] page_ttl = Bry_.new_utf8_(page_ttl_str);
+		byte[] wiki_domain = Bry_.new_u8(wiki_domain_str);
+		byte[] page_ttl = Bry_.new_u8(page_ttl_str);
 		Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(wiki_domain);							// get the wiki
 		Xoa_url page_url = app.Url_parser().Parse(page_ttl);									// get the url (needed for query args)
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, page_ttl);											// get the ttl
-		Xoae_page page = wiki.GetPageByTtl(page_url, ttl);										// get page and parse it
+		Xoae_page page = wiki.Load_page_by_ttl(page_url, ttl);										// get page and parse it
 		Gxw_html_server.Assert_tab(app, page);													// HACK: assert at least 1 tab
 		app.Gui_mgr().Browser_win().Active_page_(page);											// HACK: init gui_mgr's page for output (which server ordinarily doesn't need)
 		if (page.Missing()) {																	// if page does not exist, replace with message; else null_ref error; DATE:2014-03-08
-			page.Data_raw_(Bry_.new_ascii_("'''Page not found.'''"));
+			page.Data_raw_(Bry_.new_a7("'''Page not found.'''"));
 			wiki.ParsePage(page, false);			
 		}
 		byte[] output_html = wiki.Html_mgr().Page_wtr_mgr().Gen(page, Xopg_view_mode.Tid_read);		// write html from page data
@@ -95,7 +95,7 @@ public class Http_server_mgr implements GfoInvkAble {
 				}
 				break;
 		}
-		return String_.new_utf8_(output_html);
+		return String_.new_u8(output_html);
 	}
 	private void Note(String s) {
 		usr_dlg.Prog_many("", "", s);
@@ -222,7 +222,7 @@ class HttpRequest implements Runnable{
 					String home_url = app.Http_server().Home();;
 					if (String_.HasAtBgn(home_url, "file://")) {
 						Io_url file_url = Io_url_.http_any_(home_url, Op_sys.Cur().Tid_is_wnt());
-						String page_html = Io_mgr._.LoadFilStr(file_url);
+						String page_html = Io_mgr.I.LoadFilStr(file_url);
 						Write_page(dos, page_html, app_root_dir, wiki_domain);
 					}
 					else

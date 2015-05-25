@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.gui.menus; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 import gplx.xowa.gui.menus.dom.*;
 public class Xog_window_mnu_mgr implements GfoInvkAble {
-	private OrderedHash hash = OrderedHash_.new_();
+	private Ordered_hash hash = Ordered_hash_.new_();
 	public Xog_mnu_grp Browser() {return browser;} private Xog_mnu_grp browser;
 	public Xog_window_mnu_mgr(Xoa_gui_mgr gui_mgr, Xog_menu_mgr menu_mgr) {
 		this.gui_mgr = gui_mgr;
@@ -28,7 +28,7 @@ public class Xog_window_mnu_mgr implements GfoInvkAble {
 		browser.Source_exec(gui_mgr.App().Gfs_mgr());	// NOTE: build menu now; NOTE: do not set default here, or else will override user setting
 	}
 	public Xog_mnu_grp Get_or_new(String key) {			
-		Xog_mnu_grp rv = (Xog_mnu_grp)hash.Fetch(key);
+		Xog_mnu_grp rv = (Xog_mnu_grp)hash.Get_by(key);
 		if (rv == null) {
 			rv = new Xog_mnu_grp(gui_mgr, false, key);
 			hash.Add(key, rv);

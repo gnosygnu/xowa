@@ -176,7 +176,7 @@ class Gallery_itm_chkr implements Tst_chkr {
 		Gallery_itm actl = (Gallery_itm)actl_obj;
 		int err = 0;
 		err += mgr.Tst_sub_obj(expd_lnki, actl.Ttl(), path, err);
-		err += mgr.Tst_val(expd_caption == null, "", "caption", expd_caption, String_.new_utf8_(actl.Caption_bry()));
+		err += mgr.Tst_val(expd_caption == null, "", "caption", expd_caption, String_.new_u8(actl.Caption_bry()));
 		return err;
 	}
 }

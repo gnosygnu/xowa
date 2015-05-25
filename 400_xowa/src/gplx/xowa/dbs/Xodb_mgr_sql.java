@@ -36,7 +36,7 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 	public DateAdp Dump_date_query() {
 		DateAdp rv = wiki.Props().Modified_latest(); if (rv != null) return rv;
 		Io_url url = core_data_mgr.Db__core().Url();
-		return Io_mgr._.QueryFil(url).ModifiedTime();
+		return Io_mgr.I.QueryFil(url).ModifiedTime();
 	}
 	public void Category_version_update(boolean version_is_1) {
 		String grp = Xow_cfg_consts.Grp_wiki_init;

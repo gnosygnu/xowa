@@ -17,11 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.ios; import gplx.*;
 public class IoUrlInfoRegy implements GfoInvkAble {
-	public void Reg(IoUrlInfo info) {hash.AddReplace(info.Key(), info);}
+	public void Reg(IoUrlInfo info) {hash.Add_if_dupe_use_nth(info.Key(), info);}
 	public IoUrlInfo Match(String raw) {
 		if (String_.Len(raw) == 0) return IoUrlInfo_.Nil;
 		for (int i = hash.Count(); i > 0; i--) {
-			IoUrlInfo info = (IoUrlInfo)hash.FetchAt(i - 1);
+			IoUrlInfo info = (IoUrlInfo)hash.Get_at(i - 1);
 			if (info.Match(raw)) return info;
 		}
 		throw Err_.new_("could not match ioPathInfo").Add("raw", raw).Add("count", hash.Count());
@@ -44,7 +44,7 @@ public class IoUrlInfoRegy implements GfoInvkAble {
 		}
 		return this;
 	}	public static final String Invk_Add = "Add";
-	OrderedHash hash = OrderedHash_.new_();
+	Ordered_hash hash = Ordered_hash_.new_();
         public static final IoUrlInfoRegy _ = new IoUrlInfoRegy();
 	IoUrlInfoRegy() {
 		this.Reset();

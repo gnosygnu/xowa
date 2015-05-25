@@ -44,7 +44,7 @@ public class Scrib_lib_message implements Scrib_lib {
 		byte fmt_tid = Scrib_lib_message_data.Fmt_tid_plain;
 		KeyVal[] data_kvary = args.Pull_kv_ary(0);
 		Scrib_lib_message_data msg_data = new Scrib_lib_message_data().Parse(data_kvary); 
-		return rslt.Init_obj(String_.new_utf8_(msg_data.Make_msg(core.Cur_lang(), core.Wiki(), core.Ctx(), true, fmt_tid)));
+		return rslt.Init_obj(String_.new_u8(msg_data.Make_msg(core.Cur_lang(), core.Wiki(), core.Ctx(), true, fmt_tid)));
 	}
 	public boolean Check(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte chk_tid = Scrib_lib_message_data.parse_chk_(args.Pull_bry(0));
@@ -66,8 +66,8 @@ class Scrib_lib_message_data {
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
 			KeyVal kv = ary[i];
-			byte[] kv_key = Bry_.new_ascii_(kv.Key());
-			Object key_obj = key_hash.Fetch(kv_key); if (key_obj == null) throw Err_.new_fmt_("msg_key is invalid: {0}", kv_key);
+			byte[] kv_key = Bry_.new_a7(kv.Key());
+			Object key_obj = key_hash.Get_by(kv_key); if (key_obj == null) throw Err_.new_fmt_("msg_key is invalid: {0}", kv_key);
 			byte key_tid = ((Byte_obj_val)key_obj).Val();
 			switch (key_tid) {
 				case Key_tid_keys:
@@ -161,7 +161,7 @@ class Scrib_lib_message_data {
 	public static byte parse_chk_(byte[] key) {return parse_or_fail(check_hash, key, "invalid check arg: {0}");}
 	public static byte parse_or_fail(Hash_adp_bry hash, byte[] key, String fmt) {
 		Object o = hash.Get_by_bry(key);
-		if (o == null) throw Err_.new_fmt_(fmt, String_.new_utf8_(key));
+		if (o == null) throw Err_.new_fmt_(fmt, String_.new_u8(key));
 		return ((Byte_obj_val)o).Val();
 	}
 	public static final byte Fmt_tid_parse = 1, Fmt_tid_text = 2, Fmt_tid_plain = 3, Fmt_tid_escaped = 4, Fmt_tid_parseAsBlock = 5;

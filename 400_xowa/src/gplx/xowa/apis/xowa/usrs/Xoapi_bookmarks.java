@@ -37,8 +37,8 @@ public class Xoapi_bookmarks implements GfoInvkAble {
 			wiki_domain = url.Wiki_bry();
 			ttl_full_txt = url.Page_bry();
 		}
-		app.User().Bookmarks_add(wiki_domain, ttl_full_txt);
-		app.Usr_dlg().Prog_many("", "", "bookmark added: ~{0}", String_.new_utf8_(ttl_full_txt));
+		app.Usere().Bookmarks_add(wiki_domain, ttl_full_txt);
+		app.Usr_dlg().Prog_many("", "", "bookmark added: ~{0}", String_.new_u8(ttl_full_txt));
 	}
 	public void Show() {win.Page__navigate_by_url_bar("home/wiki/Data:Bookmarks");}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

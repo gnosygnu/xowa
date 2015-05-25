@@ -54,7 +54,7 @@ class Indicator_html_bldr_fxt {
 	}
 	public void Init_indicator(String name, String html) {
 		Indicator_xnde xnde = new Indicator_xnde();
-		xnde.Init_for_test(name, Bry_.new_utf8_(html));			
+		xnde.Init_for_test(name, Bry_.new_u8(html));			
 		Indicator_html_bldr indicators = page.Html_data().Indicators();
 		indicators.Add(xnde);
 	}

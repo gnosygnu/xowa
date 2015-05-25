@@ -33,7 +33,7 @@ public class Xoctg_hiddencat_ttl_wkr extends Xob_itm_dump_base implements Xob_cm
 		join_wkr.Flush();
 		Io_url_gen make_url_gen = Io_url_gen_.dir_(temp_dir.GenSubDir("make"));
 		Xobdc_merger.Basic(bldr.Usr_dlg(), join_wkr.Dump_url_gen(), temp_dir.GenSubDir("sort"), sort_mem_len, Io_sort_split_itm_sorter._, Io_line_rdr_key_gen_.first_pipe, new Io_sort_fil_basic(bldr.Usr_dlg(), make_url_gen, make_fil_len));
-		if (delete_temp) Io_mgr._.DeleteDirDeep(src_sql_dir);
+		if (delete_temp) Io_mgr.I.DeleteDirDeep(src_sql_dir);
 	}
 	public void Cmd_term() {}
 }
@@ -45,24 +45,24 @@ class Xob_sql_join_wkr_ctg_hidden implements Xob_sql_join_wkr {
 	}	private Xoae_app app = null; Xowe_wiki wiki = null; Io_url src_sql_dir;
 	public Io_url_gen Dump_url_gen() {return dump_url_gen;} Io_url_gen dump_url_gen;
 	public Io_line_rdr New_main_rdr() {
-		Io_url[] urls = Io_mgr._.QueryDir_fils(src_sql_dir);
+		Io_url[] urls = Io_mgr.I.QueryDir_fils(src_sql_dir);
 		return new Io_line_rdr(app.Usr_dlg(), urls).Key_gen_(Io_line_rdr_key_gen_.first_pipe);
 	} 
 	public Io_line_rdr New_join_rdr() {
 		Io_url make_dir = wiki.Tdb_fsys_mgr().Url_site_dir(Xotdb_dir_info_.Tid_id);
 		app.Usr_dlg().Prog_many("", "", "getting id files: ~{0}", make_dir.Raw());
-		Io_url[] urls = Io_mgr._.QueryDir_args(make_dir).Recur_().FilPath_("*.xdat").ExecAsUrlAry();
+		Io_url[] urls = Io_mgr.I.QueryDir_args(make_dir).Recur_().FilPath_("*.xdat").ExecAsUrlAry();
 		return new Io_line_rdr(app.Usr_dlg(), urls).Key_gen_(Io_line_rdr_key_gen_.first_pipe).File_skip_line0_(true);
 	} 
 	public void Process_match(Io_line_rdr main, Io_line_rdr join, byte[] key_bry) {
 		byte[] src = join.Bfr();
 		int itm_end = join.Itm_pos_end();
 		int pipe_pos = Bry_finder.Find_bwd(src, Byte_ascii.Pipe, itm_end);
-		if (pipe_pos == Bry_.NotFound) throw Err_.new_fmt_("failed to find pipe for name: ~{0}", String_.new_utf8_(src, join.Itm_pos_bgn(), join.Itm_pos_end()));
+		if (pipe_pos == Bry_.NotFound) throw Err_.new_fmt_("failed to find pipe for name: ~{0}", String_.new_u8(src, join.Itm_pos_bgn(), join.Itm_pos_end()));
 		file_bfr.Add_mid(src, pipe_pos + 1, itm_end - 1).Add_byte_pipe();
 		file_bfr.Add(key_bry).Add_byte_nl();
 	}	private Bry_bfr file_bfr = Bry_bfr.new_();
 	public void Flush() {
-		Io_mgr._.SaveFilBfr(dump_url_gen.Nxt_url(), file_bfr);
+		Io_mgr.I.SaveFilBfr(dump_url_gen.Nxt_url(), file_bfr);
 	}
 }

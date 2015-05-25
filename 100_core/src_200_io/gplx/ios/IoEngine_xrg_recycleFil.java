@@ -25,7 +25,7 @@ public class IoEngine_xrg_recycleFil extends IoEngine_xrg_fil_affects1_base {
 	public Guid_adp Uuid() {return uuid;} public IoEngine_xrg_recycleFil Uuid_(Guid_adp val) {uuid = val; return this;} Guid_adp uuid;
 	public boolean Uuid_include() {return uuid_include;} public IoEngine_xrg_recycleFil Uuid_include_() {uuid_include = true; return this;} private boolean uuid_include;
 	public DateAdp Time() {return time;} public IoEngine_xrg_recycleFil Time_(DateAdp val) {time = val; return this;} DateAdp time;
-	public ListAdp RootDirNames() {return rootDirNames;} public IoEngine_xrg_recycleFil RootDirNames_(ListAdp val) {rootDirNames = val; return this;} ListAdp rootDirNames;
+	public List_adp RootDirNames() {return rootDirNames;} public IoEngine_xrg_recycleFil RootDirNames_(List_adp val) {rootDirNames = val; return this;} List_adp rootDirNames;
 	public Io_url RecycleUrl() {
 		String dayName = time.XtoStr_fmt("yyyyMMdd"), timeName = time.XtoStr_fmt("hhmmssfff");
 		String rootDirStr = ConcatWith_ary(this.Url().Info().DirSpr(), rootDirNames);
@@ -33,27 +33,27 @@ public class IoEngine_xrg_recycleFil extends IoEngine_xrg_fil_affects1_base {
 		String uuidStr = uuid_include ? uuid.XtoStr() : "";
 		return recycleDir.GenSubFil_ary(appName, ";", timeName, ";", uuidStr, ";", String_.LimitToFirst(this.Url().NameAndExt(), 128));
 	}
-	String ConcatWith_ary(String separator, ListAdp ary) {
+	String ConcatWith_ary(String separator, List_adp ary) {
 		String_bldr sb = String_bldr_.new_();
 		int aryLen = ary.Count();
 		for (int i = 0; i < aryLen; i++) {
 			if (i != 0) sb.Add(separator);
-			Object val = ary.FetchAt(i);
+			Object val = ary.Get_at(i);
 			sb.Add_obj(Object_.Xto_str_strict_or_empty(val));
 		}
 		return sb.XtoStr();			
 	}
 	@Override public void Exec() {
-		IoEnginePool._.Fetch(this.Url().Info().EngineKey()).RecycleFil(this);
+		IoEnginePool._.Get_by(this.Url().Info().EngineKey()).RecycleFil(this);
 	}
 	public IoEngine_xrg_recycleFil(int v) {
 		mode = v;
 		time = DateAdp_.Now();
 		uuid = Guid_adp_.new_();
-		rootDirNames = ListAdp_.new_(); rootDirNames.Add("z_trash");
+		rootDirNames = List_adp_.new_(); rootDirNames.Add("z_trash");
 	}
 	public static IoEngine_xrg_recycleFil sysm_(Io_url url) {return new IoEngine_xrg_recycleFil(SysmConst);}
 	public static IoEngine_xrg_recycleFil gplx_(Io_url url) {IoEngine_xrg_recycleFil rv = new IoEngine_xrg_recycleFil(GplxConst); rv.Url_set(url); return rv;}
-        public static IoEngine_xrg_recycleFil proto_() {return gplx_(Io_url_.Null);}
+        public static IoEngine_xrg_recycleFil proto_() {return gplx_(Io_url_.Empty);}
 	public static final int GplxConst = 0, SysmConst = 1;
 }

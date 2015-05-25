@@ -25,8 +25,8 @@ public class Xowh_sidebar_itm {
 	public byte[] Accesskey() {return accesskey;} public Xowh_sidebar_itm Accesskey_(byte[] v) {accesskey = v; return this;} private byte[] accesskey;
 	public byte[] Atr_accesskey_and_title() {return atr_accesskey_and_title;} public Xowh_sidebar_itm Atr_accesskey_and_title_(byte[] v) {atr_accesskey_and_title = v; return this;} private byte[] atr_accesskey_and_title = Bry_.Empty;
 	public byte[] Text() {return text;} public Xowh_sidebar_itm Text_(byte[] v) {text = v; return this;} private byte[] text;
-	public int Itms_len() {return itms.Count();} ListAdp itms = ListAdp_.new_();
-	public Xowh_sidebar_itm Itms_get_at(int i) {return (Xowh_sidebar_itm)itms.FetchAt(i);}
+	public int Itms_len() {return itms.Count();} List_adp itms = List_adp_.new_();
+	public Xowh_sidebar_itm Itms_get_at(int i) {return (Xowh_sidebar_itm)itms.Get_at(i);}
 	public Xowh_sidebar_itm Itms_add(Xowh_sidebar_itm... ary) {
 		int ary_len = ary.length;
 		for (int i = 0; i < ary_len; i++)

@@ -20,13 +20,13 @@ import gplx.core.primitives.*;
 import gplx.xowa.html.*;
 import gplx.xowa.dbs.*; import gplx.xowa.ctgs.*; import gplx.xowa.wikis.data.tbls.*;
 public class Dpl_xnde implements Xox_xnde, Xop_xnde_atr_parser {
-	private Dpl_itm itm = new Dpl_itm(); private ListAdp pages = ListAdp_.new_();
+	private Dpl_itm itm = new Dpl_itm(); private List_adp pages = List_adp_.new_();
 	public void Xatr_parse(Xowe_wiki wiki, byte[] src, Xop_xatr_itm xatr, Object xatr_key_obj) {} // NOTE: <dynamicPageList> has no attributes
 	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
 		itm.Parse(wiki, ctx, ctx.Cur_page().Ttl().Full_txt(), src, xnde);
 		Dpl_page_finder.Find_pages(pages, wiki, itm);
 		if (itm.Sort_ascending() != Bool_.__byte)
-			pages.SortBy(new Dpl_page_sorter(itm));
+			pages.Sort_by(new Dpl_page_sorter(itm));
 	}
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
 		Xowe_wiki wiki = ctx.Wiki();
@@ -34,7 +34,7 @@ public class Dpl_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 		int itms_len = pages.Count();
 		if (itms_len == 0) {
 			if (!itm.Suppress_errors())
-				bfr.Add_str("No pages meet these criteria.");
+				bfr.Add_str_a7("No pages meet these criteria.");
 			return;
 		}
 		int itms_bgn = 0;
@@ -47,7 +47,7 @@ public class Dpl_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 		boolean showns = itm.Show_ns();
 		bfr.Add(html_mode.Grp_bgn()).Add_byte_nl();
 		for (int i = itms_bgn; i < itms_len; i++) {
-			Xowd_page_itm page = (Xowd_page_itm)pages.FetchAt(i);
+			Xowd_page_itm page = (Xowd_page_itm)pages.Get_at(i);
 			Xoa_ttl ttl = Xoa_ttl.parse_(wiki, page.Ns_id(), page.Ttl_page_db());
 			byte[] ttl_page_txt = showns ? ttl.Full_txt() : ttl.Page_txt();
 			if (ttl_page_txt == null) continue;	// NOTE: apparently DynamicPageList allows null pages; DATE:2013-07-22
@@ -55,7 +55,7 @@ public class Dpl_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 			case Dpl_html_data.Tid_list_ul:
 			case Dpl_html_data.Tid_list_ol:
 				bfr.Add(Xoh_consts.Space_2).Add(html_mode.Itm_bgn()).Add(Xoh_consts.A_bgn);
-				bfr.Add_str("/wiki/").Add(ttl_page_txt);
+				bfr.Add_str_a7("/wiki/").Add(ttl_page_txt);
 				bfr.Add(Xoh_consts.A_bgn_lnki_0).Add(ttl_page_txt).Add_byte(Byte_ascii.Quote);
 				if (itm.No_follow()) bfr.Add(Bry_nofollow);
 				bfr.Add_byte(Byte_ascii.Gt);
@@ -68,48 +68,48 @@ public class Dpl_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 		}
 		bfr.Add(html_mode.Grp_end()).Add_byte_nl();
 	}
-	private static byte[] Bry_nofollow = Bry_.new_ascii_(" rel=\"nofollow\"");  
+	private static byte[] Bry_nofollow = Bry_.new_a7(" rel=\"nofollow\"");  
 }
 class Dpl_page_finder {
-	public static void Find_pages(ListAdp rv, Xowe_wiki wiki, Dpl_itm itm) {
+	public static void Find_pages(List_adp rv, Xowe_wiki wiki, Dpl_itm itm) {
 		rv.Clear();
-		ListAdp includes = itm.Ctg_includes(); if (includes == null) return;
+		List_adp includes = itm.Ctg_includes(); if (includes == null) return;
 		int includes_len = includes.Count();
-		OrderedHash old_regy = OrderedHash_.new_(), new_regy = OrderedHash_.new_(), cur_regy = OrderedHash_.new_();
+		Ordered_hash old_regy = Ordered_hash_.new_(), new_regy = Ordered_hash_.new_(), cur_regy = Ordered_hash_.new_();
 		Xodb_load_mgr load_mgr = wiki.Db_mgr().Load_mgr();
 		Xowd_page_itm tmp_page = new Xowd_page_itm();
 		Int_obj_ref tmp_id = Int_obj_ref.zero_();
-		ListAdp del_list = ListAdp_.new_();
+		List_adp del_list = List_adp_.new_();
 		int ns_filter = itm.Ns_filter();
-		OrderedHash exclude_pages = OrderedHash_.new_();
+		Ordered_hash exclude_pages = Ordered_hash_.new_();
 		Find_excludes(exclude_pages, load_mgr, tmp_page, tmp_id, itm.Ctg_excludes());
 
 		for (int i = 0; i < includes_len; i++) {	// loop over includes
-			byte[] include = (byte[])includes.FetchAt(i);
+			byte[] include = (byte[])includes.Get_at(i);
 			cur_regy.Clear(); del_list.Clear();
 			Find_pages_in_ctg(cur_regy, load_mgr, tmp_page, tmp_id, include);
 			Del_old_pages_not_in_cur(i, tmp_id, old_regy, cur_regy, del_list);
 			Add_cur_pages_also_in_old(i, tmp_id, old_regy, cur_regy, new_regy, exclude_pages, ns_filter);
 			old_regy = new_regy;
-			new_regy = OrderedHash_.new_();
+			new_regy = Ordered_hash_.new_();
 		}			
 		int pages_len = old_regy.Count();
 		for (int i = 0; i < pages_len; i++) {		// loop over old and create pages
-			Int_obj_ref old_id = (Int_obj_ref)old_regy.FetchAt(i);
+			Int_obj_ref old_id = (Int_obj_ref)old_regy.Get_at(i);
 			rv.Add(new Xowd_page_itm().Id_(old_id.Val()));
 		}			
 		wiki.Db_mgr().Load_mgr().Load_by_ids(Cancelable_.Never, rv, 0, pages_len);
-		rv.SortBy(Xowd_page_itm_sorter.IdAsc);
+		rv.Sort_by(Xowd_page_itm_sorter.IdAsc);
 	}
-	private static void Find_excludes(OrderedHash exclude_pages, Xodb_load_mgr load_mgr, Xowd_page_itm tmp_page, Int_obj_ref tmp_id, ListAdp exclude_ctgs) {
+	private static void Find_excludes(Ordered_hash exclude_pages, Xodb_load_mgr load_mgr, Xowd_page_itm tmp_page, Int_obj_ref tmp_id, List_adp exclude_ctgs) {
 		if (exclude_ctgs == null) return;
 		int exclude_ctgs_len = exclude_ctgs.Count();
 		for (int i = 0; i < exclude_ctgs_len; i++) {
-			byte[] exclude_ctg = (byte[])exclude_ctgs.FetchAt(i);
+			byte[] exclude_ctg = (byte[])exclude_ctgs.Get_at(i);
 			Find_pages_in_ctg(exclude_pages, load_mgr, tmp_page, tmp_id, exclude_ctg);
 		}
 	}
-	private static void Find_pages_in_ctg(OrderedHash list, Xodb_load_mgr load_mgr, Xowd_page_itm tmp_page, Int_obj_ref tmp_id, byte[] ctg_ttl) {
+	private static void Find_pages_in_ctg(Ordered_hash list, Xodb_load_mgr load_mgr, Xowd_page_itm tmp_page, Int_obj_ref tmp_id, byte[] ctg_ttl) {
 		Xoctg_view_ctg ctg = new Xoctg_view_ctg().Name_(ctg_ttl);
 		load_mgr.Load_ctg_v1(ctg, ctg_ttl);
 
@@ -128,31 +128,31 @@ class Dpl_page_finder {
 			}
 		}
 	}
-	private static void Del_old_pages_not_in_cur(int i, Int_obj_ref tmp_id, OrderedHash old_regy, OrderedHash cur_regy, ListAdp del_list) {
+	private static void Del_old_pages_not_in_cur(int i, Int_obj_ref tmp_id, Ordered_hash old_regy, Ordered_hash cur_regy, List_adp del_list) {
 		if (i == 0) return;						// skip logic for first ctg (which doesn't have a predecessor)
 		int old_len = old_regy.Count();
 		for (int j = 0; j < old_len; j++) {		// if cur is not in new, del it
-			Int_obj_ref old_id = (Int_obj_ref)old_regy.FetchAt(j);
+			Int_obj_ref old_id = (Int_obj_ref)old_regy.Get_at(j);
 			if (!cur_regy.Has(tmp_id.Val_(old_id.Val())))	// old_itm does not exist in cur_regy
 				del_list.Add(old_id);						// remove; EX: (A,B) in old; B only in cur; old should now be (A) only				
 		}
 		int del_len = del_list.Count();
 		for (int j = 0; j < del_len; j++) {
-			Int_obj_ref old_itm = (Int_obj_ref)del_list.FetchAt(j);
+			Int_obj_ref old_itm = (Int_obj_ref)del_list.Get_at(j);
 			old_regy.Del(tmp_id.Val_(old_itm.Val()));
 		}
 	}
-	private static void Add_cur_pages_also_in_old(int i, Int_obj_ref tmp_id, OrderedHash old_regy, OrderedHash cur_regy, OrderedHash new_regy, OrderedHash exclude_pages, int ns_filter) {
+	private static void Add_cur_pages_also_in_old(int i, Int_obj_ref tmp_id, Ordered_hash old_regy, Ordered_hash cur_regy, Ordered_hash new_regy, Ordered_hash exclude_pages, int ns_filter) {
 		int found_len = cur_regy.Count();
 		for (int j = 0; j < found_len; j++) {			// if new_page is in cur, add it
-			Xoctg_view_itm cur_itm = (Xoctg_view_itm)cur_regy.FetchAt(j);
+			Xoctg_view_itm cur_itm = (Xoctg_view_itm)cur_regy.Get_at(j);
 			if (ns_filter != Dpl_itm.Ns_filter_null && ns_filter != cur_itm.Ttl().Ns().Id()) continue;
 			tmp_id.Val_(cur_itm.Id());					// set tmp_id, since it will be used at least once
 			if (exclude_pages.Has(tmp_id)) continue;	// ignore excluded pages
 			if (i != 0) {								// skip logic for first ctg (which doesn't have a predecessor)
 				if (!old_regy.Has(tmp_id)) continue;	// cur_itm not in old_regy; ignore
 			}
-			new_regy.AddKeyVal(Int_obj_ref.new_(cur_itm.Id()));
+			new_regy.Add_as_key_and_val(Int_obj_ref.new_(cur_itm.Id()));
 		}
 	}
 }

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfui; import gplx.*;
 import java.awt.Window;
 public class GfuiWin extends GfuiElemBase {
-	private GxwWin win; private ListAdp loadList = ListAdp_.new_(); 
+	private GxwWin win; private List_adp loadList = List_adp_.new_(); 
 	public void Show()					{win.ShowWin();}
 	public void Hide()					{win.HideWin();}
 	public void Close()					{win.CloseWin();}

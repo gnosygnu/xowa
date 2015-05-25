@@ -19,7 +19,7 @@ package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.x
 import gplx.core.primitives.*;
 class Gallery_mgr_base_ {
 	public static byte Get_or_traditional(byte[] bry) {
-		Byte_obj_val rv = (Byte_obj_val)Hash.Fetch(bry);
+		Byte_obj_val rv = (Byte_obj_val)Hash.Get_by(bry);
 		return rv == null ? Traditional_tid : rv.Val();
 	}
 	public static Gallery_mgr_base New_by_mode(byte mode) {
@@ -48,11 +48,11 @@ class Gallery_mgr_base_ {
 	, Packed_overlay_tid	= 4
 	;
 	public static final byte[]
-	  Traditional_bry		= Bry_.new_ascii_("traditional")
-	, Nolines_bry			= Bry_.new_ascii_("nolines")
-	, Packed_bry			= Bry_.new_ascii_("packed")
-	, Packed_hover_bry		= Bry_.new_ascii_("packed-hover")
-	, Packed_overlay_bry	= Bry_.new_ascii_("packed-overlay")
+	  Traditional_bry		= Bry_.new_a7("traditional")
+	, Nolines_bry			= Bry_.new_a7("nolines")
+	, Packed_bry			= Bry_.new_a7("packed")
+	, Packed_hover_bry		= Bry_.new_a7("packed-hover")
+	, Packed_overlay_bry	= Bry_.new_a7("packed-overlay")
 	;
 	private static final Hash_adp_bry Hash = Hash_adp_bry.ci_ascii_()
 	.Add_bry_byte(Traditional_bry		, Traditional_tid)

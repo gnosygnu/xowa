@@ -50,7 +50,7 @@ public class Utf16_ {
 		}
 		else throw Err_.new_fmt_("invalid utf8 byte: byte={0}", b0);
 	}
-	public static byte[] Encode_hex_to_bry(String raw) {return Encode_hex_to_bry(Bry_.new_ascii_(raw));}
+	public static byte[] Encode_hex_to_bry(String raw) {return Encode_hex_to_bry(Bry_.new_a7(raw));}
 	public static byte[] Encode_hex_to_bry(byte[] raw) {
 		if (raw == null) return null;
 		int int_val = gplx.texts.HexDecUtl.parse_or_(raw, Int_.MinValue);

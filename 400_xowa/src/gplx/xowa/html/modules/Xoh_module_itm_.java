@@ -18,18 +18,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html.modules; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 public class Xoh_module_itm_ {
 	public static final byte[]	// SRL: navframe, toc, title_rewrite are in wiki.cfg
-	  Key_collapsible		= Bry_.new_ascii_("collapsible")
-	, Key_css				= Bry_.new_ascii_("css")
-	, Key_gallery			= Bry_.new_ascii_("gallery")
-	, Key_globals			= Bry_.new_ascii_("globals")
-	, Key_hiero				= Bry_.new_ascii_("hiero")
-	, Key_mathjax			= Bry_.new_ascii_("mathjax")
-	, Key_navframe			= Bry_.new_ascii_("navframe")
-	, Key_popups			= Bry_.new_ascii_("popups")
-	, Key_search_suggest	= Bry_.new_ascii_("xowa.search_suggest")
-	, Key_timeline			= Bry_.new_ascii_("xowa.timeline")
-	, Key_title_rewrite		= Bry_.new_ascii_("title_rewrite")
-	, Key_toc				= Bry_.new_ascii_("toc")
-	, Key_top_icon			= Bry_.new_ascii_("top_icon")
+	  Key_collapsible		= Bry_.new_a7("collapsible")
+	, Key_css				= Bry_.new_a7("css")
+	, Key_gallery			= Bry_.new_a7("gallery")
+	, Key_globals			= Bry_.new_a7("globals")
+	, Key_hiero				= Bry_.new_a7("hiero")
+	, Key_mathjax			= Bry_.new_a7("mathjax")
+	, Key_navframe			= Bry_.new_a7("navframe")
+	, Key_popups			= Bry_.new_a7("popups")
+	, Key_search_suggest	= Bry_.new_a7("xowa.search_suggest")
+	, Key_timeline			= Bry_.new_a7("xowa.timeline")
+	, Key_title_rewrite		= Bry_.new_a7("title_rewrite")
+	, Key_toc				= Bry_.new_a7("toc")
+	, Key_top_icon			= Bry_.new_a7("top_icon")
 	;
 }

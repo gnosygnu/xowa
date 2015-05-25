@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.langs.cases; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 public class Xol_case_itm_ {
 	public static final byte Tid_both = 0, Tid_upper = 1, Tid_lower = 2;
-	public static Xol_case_itm new_(int tid, String src_str, String trg_str) {return new_((byte)tid, Bry_.new_utf8_(src_str), Bry_.new_utf8_(trg_str));}
+	public static Xol_case_itm new_(int tid, String src_str, String trg_str) {return new_((byte)tid, Bry_.new_u8(src_str), Bry_.new_u8(trg_str));}
 	public static Xol_case_itm new_(byte tid, byte[] src, byte[] trg) {
 		if (src.length == 1 && trg.length == 1)
 			return new Xol_case_itm_byt(tid, src[0], trg[0]);
@@ -26,7 +26,7 @@ public class Xol_case_itm_ {
 			return new Xol_case_itm_bry(tid, src, trg);
 	}
 	public static Xol_case_itm[] parse_xo_(byte[] src) {
-		ListAdp list = ListAdp_.new_();
+		List_adp list = List_adp_.new_();
 		int src_len = src.length, src_pos = 0, fld_bgn = 0, fld_idx = 0;
 		byte cur_cmd = Byte_.Zero;
 		byte[] cur_lhs = null;
@@ -48,7 +48,7 @@ public class Xol_case_itm_ {
 									case Byte_ascii.Num_2:	cur_cmd = Xol_case_itm_.Tid_lower; fail = false; break;
 								}
 							}
-							if (fail) throw Err_mgr._.fmt_(GRP_KEY, "parse_xo_", "cmd is invalid: ~{0}", String_.new_utf8_(src, fld_bgn, src_pos));
+							if (fail) throw Err_mgr._.fmt_(GRP_KEY, "parse_xo_", "cmd is invalid: ~{0}", String_.new_u8(src, fld_bgn, src_pos));
 							break;
 						case 1: cur_lhs = csv_parser.Load(src, fld_bgn, src_pos); break;
 					}
@@ -70,20 +70,20 @@ public class Xol_case_itm_ {
 			if (last) break;
 			++src_pos;
 		}
-		return (Xol_case_itm[])list.Xto_ary(Xol_case_itm.class);
+		return (Xol_case_itm[])list.To_ary(Xol_case_itm.class);
 	}
 	public static Xol_case_itm[] parse_mw_(byte[] raw) {
-		OrderedHash hash = OrderedHash_.new_bry_();
+		Ordered_hash hash = Ordered_hash_.new_bry_();
 		int pos = 0;
 		pos = parse_mw_grp(hash, raw, Bool_.Y, pos);
 		pos = parse_mw_grp(hash, raw, Bool_.N, pos);
-		return (Xol_case_itm[])hash.Xto_ary(Xol_case_itm.class);
+		return (Xol_case_itm[])hash.To_ary(Xol_case_itm.class);
 	}
-	private static int parse_mw_grp(OrderedHash hash, byte[] raw, boolean section_is_upper, int find_bgn) {
+	private static int parse_mw_grp(Ordered_hash hash, byte[] raw, boolean section_is_upper, int find_bgn) {
 		byte[] find = section_is_upper ? parse_mw_upper : parse_mw_lower;
 		int raw_len = raw.length;
-		int pos = Bry_finder.Find_fwd(raw, find, find_bgn);					if (pos == Bry_.NotFound) throw Err_mgr._.fmt_(GRP_KEY, "section_name_not_found", "could not find section name: ~{0}", String_.new_utf8_(find));
-		pos = Bry_finder.Find_fwd(raw, Byte_ascii.Curly_bgn, pos, raw_len);	if (pos == Bry_.NotFound) throw Err_mgr._.fmt_(GRP_KEY, "section_bgn_not_found", "could not find '{' after section name: ~{0}", String_.new_utf8_(find));
+		int pos = Bry_finder.Find_fwd(raw, find, find_bgn);					if (pos == Bry_.NotFound) throw Err_mgr._.fmt_(GRP_KEY, "section_name_not_found", "could not find section name: ~{0}", String_.new_u8(find));
+		pos = Bry_finder.Find_fwd(raw, Byte_ascii.Curly_bgn, pos, raw_len);	if (pos == Bry_.NotFound) throw Err_mgr._.fmt_(GRP_KEY, "section_bgn_not_found", "could not find '{' after section name: ~{0}", String_.new_u8(find));
 		int itm_bgn = 0;
 		boolean quote_off = true, itm_is_first = true;
 		byte[] cur_lhs = Bry_.Empty;
@@ -117,7 +117,7 @@ public class Xol_case_itm_ {
 								tid = Xol_case_itm_.Tid_lower;
 								rev_tid = Xol_case_itm_.Tid_upper;
 							}
-							Xol_case_itm_bry itm = (Xol_case_itm_bry)hash.Fetch(upper);
+							Xol_case_itm_bry itm = (Xol_case_itm_bry)hash.Get_by(upper);
 							if (itm == null) {
 								itm = new Xol_case_itm_bry(tid, upper, lower);
 								hash.Add(upper, itm);
@@ -143,6 +143,6 @@ public class Xol_case_itm_ {
 			++pos;
 		}
 		return pos;
-	}	private static final byte[] parse_mw_upper= Bry_.new_ascii_("wikiUpperChars"), parse_mw_lower= Bry_.new_ascii_("wikiLowerChars"), Bry_upper = Bry_.new_ascii_("upper"), Bry_lower = Bry_.new_ascii_("lower"), Bry_pipe = Bry_.new_ascii_("|");
+	}	private static final byte[] parse_mw_upper= Bry_.new_a7("wikiUpperChars"), parse_mw_lower= Bry_.new_a7("wikiLowerChars"), Bry_upper = Bry_.new_a7("upper"), Bry_lower = Bry_.new_a7("lower"), Bry_pipe = Bry_.new_a7("|");
 	static final String GRP_KEY = "xowa.langs.case_parser";
 }

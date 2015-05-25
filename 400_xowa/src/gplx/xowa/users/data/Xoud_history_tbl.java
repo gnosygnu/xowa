@@ -67,7 +67,7 @@ public class Xoud_history_tbl implements RlsAble {
 		}
 		finally {rdr.Rls();}
 	}
-	public void Select_by_top(ListAdp rv, int count) {
+	public void Select_by_top(List_adp rv, int count) {
 		if (stmt_select_by_top == null) {
 			Db_qry__select_in_tbl qry = new Db_qry__select_in_tbl(tbl_name, flds.To_str_ary(), null, null, null, fld_time + " DESC", " LIMIT " + Int_.Xto_str(count));
 			stmt_select_by_top = conn.Stmt_new(qry);

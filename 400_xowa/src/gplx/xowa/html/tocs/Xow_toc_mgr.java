@@ -194,9 +194,9 @@ public class Xow_toc_mgr implements Bry_fmtr_arg {
 		bfmtr_main.Bld_bfr_many(bfr, Bry_fmtr_arg_.bry_(bry_contents), this);
 	}
 	private static final byte[]
-	  Bry_list_bgn = Bry_.new_utf8_("  <ul>\n")
-	, Bry_list_end = Bry_.new_utf8_("  </ul>\n")
-	, Bry_item_end = Bry_.new_utf8_("  </li>\n")
+	  Bry_list_bgn = Bry_.new_u8("  <ul>\n")
+	, Bry_list_end = Bry_.new_u8("  </ul>\n")
+	, Bry_item_end = Bry_.new_u8("  </li>\n")
 	;
 	private Bry_fmtr
 	  bfmtr_main = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last

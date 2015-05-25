@@ -20,7 +20,7 @@ import org.junit.*; import gplx.dbs.*;
 public class Xof_cache_mgr_tst {
 //		@Before public void init() {fxt.Reset();} private Xof_cache_mgr_fxt fxt = new Xof_cache_mgr_fxt();
 	@Test  	public void Basic() {
-//			Xof_cache_itm itm = fxt.Bldr_itm("A.png").Make();
+//			Xou_cache_itm itm = fxt.Bldr_itm("A.png").Make();
 //			fxt.Test_get_n(itm);
 //			fxt.Exec_update(itm);
 //			fxt.Test_get_y(itm);
@@ -59,14 +59,14 @@ public class Xof_cache_mgr_tst {
 //			temp_view_date = -1;			
 //		}
 //		public Xof_cache_itm_mkr Init(String dir_str, String ttl_str, boolean is_orig, int w) {
-////			this.dir = Bry_.new_utf8_(dir_str);
-////			this.ttl = Bry_.new_utf8_(ttl_str);
+////			this.dir = Bry_.new_u8(dir_str);
+////			this.ttl = Bry_.new_u8(ttl_str);
 ////			this.is_orig = is_orig;
 ////			this.w = w;
 //			return this;
 //		}
-//		public Xof_cache_itm Make() {
-//			return new Xof_cache_itm(key_bfr, db_state, lnki_site, lnki_ttl, lnki_type, lnki_upright, lnki_w, lnki_h, file_w, file_h, );
+//		public Xou_cache_itm Make() {
+//			return new Xou_cache_itm(key_bfr, db_state, lnki_site, lnki_ttl, lnki_type, lnki_upright, lnki_w, lnki_h, file_w, file_h, );
 //			this.Reset();
 //		}
 //	}

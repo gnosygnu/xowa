@@ -50,7 +50,7 @@ public class Xoa_maint_mgr implements GfoInvkAble {
 	public boolean Wmf_status_parse() {
 		Wmf_dump_list_parser parser = new Wmf_dump_list_parser();
 		Hash_adp_bry itms_hash = Hash_adp_bry.cs_();		
-		Wmf_dump_itm[] itms = parser.Parse(Io_mgr._.LoadFilBry(wmf_dump_status_url));
+		Wmf_dump_itm[] itms = parser.Parse(Io_mgr.I.LoadFilBry(wmf_dump_status_url));
 		int len = itms.length;
 		for (int i = 0; i < len; i++) {
 			Wmf_dump_itm itm = itms[i];

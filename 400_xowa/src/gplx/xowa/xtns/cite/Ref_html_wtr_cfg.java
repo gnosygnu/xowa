@@ -39,8 +39,8 @@ public class Ref_html_wtr_cfg {
 		backlabels		= v;
 		backlabels_len	= v.length;
 	}
-	public static final byte[] Msg_backlabels_err = Bry_.new_ascii_("cite_error_no_link_label_group");
-	private static final byte[] Msg_backlabels = Bry_.new_ascii_("cite_references_link_many_format_backlink_labels");
+	public static final byte[] Msg_backlabels_err = Bry_.new_a7("cite_error_no_link_label_group");
+	private static final byte[] Msg_backlabels = Bry_.new_a7("cite_references_link_many_format_backlink_labels");
 	public static Ref_html_wtr_cfg new_() {
 		Ref_html_wtr_cfg rv = new Ref_html_wtr_cfg();
 		rv.Itm_html_		("<sup id=\"cite_ref-~{itm_id}\" class=\"reference\"><a href=\"#cite_note-~{grp_id}\">[~{grp_key}]</a></sup>");
@@ -53,8 +53,8 @@ public class Ref_html_wtr_cfg {
 		rv.Grp_html_list_	(" <sup><a href=\"#cite_ref-~{itm_id}\">~{backlabel}</a></sup>");
 		rv.Grp_id_uid_		("~{uid}");
 		rv.Grp_id_key_		("~{itm_key}-~{major}");
-		rv.grp_bgn = Bry_.new_ascii_("<ol class=\"references\">\n");
-		rv.grp_end = Bry_.new_ascii_("</ol>\n");
+		rv.grp_bgn = Bry_.new_a7("<ol class=\"references\">\n");
+		rv.grp_end = Bry_.new_a7("</ol>\n");
 		rv.Backlabels_		(Ref_backlabels_default);
 		return rv;
 	}	Ref_html_wtr_cfg() {}
@@ -91,12 +91,12 @@ public class Ref_html_wtr_cfg {
 		int ary_len = ary.length;
 		byte[][] rv = new byte[ary_len][];
 		for (int i = 0; i < ary_len; i++)
-			rv[i] = Bry_.new_ascii_(ary[i]);
+			rv[i] = Bry_.new_a7(ary[i]);
 		return rv;
 	}
 	public static byte[][] Ref_backlabels_xby_bry(byte[] raw) {
 		if (raw == null) return Ref_backlabels_default;
-		ListAdp list = ListAdp_.new_();
+		List_adp list = List_adp_.new_();
 		int len = raw.length, pos = 0, bgn = -1;
 		while (true) {
 			boolean last = pos == len;
@@ -116,6 +116,6 @@ public class Ref_html_wtr_cfg {
 			if (last) break;
 			++pos;
 		}
-		return (byte[][])list.Xto_ary_and_clear(byte[].class);
+		return (byte[][])list.To_ary_and_clear(byte[].class);
 	}
 }

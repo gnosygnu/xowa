@@ -38,7 +38,7 @@ class Io_stream_rdr_fxt {
 	}
 	public Io_stream_rdr_fxt Expd_bytes_read(int v) {expd_bytes_read = v; return this;} private int expd_bytes_read = Int_.MinValue;
 	public Io_stream_rdr_fxt Init_stream(String v) {
-		byte[] stream_bry = Bry_.new_ascii_(v);
+		byte[] stream_bry = Bry_.new_a7(v);
 		stream_bry_len = stream_bry.length;
 		stream = Io_stream_rdr_.Stream_new_mem(stream_bry);
 		return this;
@@ -47,7 +47,7 @@ class Io_stream_rdr_fxt {
 		byte[] bfr = new byte[stream_bry_len];	// allocate whole stream; may not use it all
 		int actl_bytes_read = Io_stream_rdr_.Stream_read_by_parts(stream, 8, bfr, bgn, len);
 		Tfds.Eq(expd_bytes_read, actl_bytes_read, "bytes_read");
-		Tfds.Eq(expd_str, String_.new_utf8_(bfr, bgn, bgn + actl_bytes_read), "str");
+		Tfds.Eq(expd_str, String_.new_u8(bfr, bgn, bgn + actl_bytes_read), "str");
 		return this;
 	}
 	public void Rls() {

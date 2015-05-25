@@ -20,9 +20,9 @@ import gplx.xmls.*; /*Xpath_*/
 public class XmlDataRdr extends DataRdr_base implements DataRdr {
 	@Override public String NameOfNode() {return nde.Name();} public String XtoStr() {return nde.Xml_outer();}
 	@Override public int FieldCount() {return nde.Atrs() == null ? 0 : nde.Atrs().Count();} // nde.Attributes == null when nde is XmlText; ex: <node>val</node>
-	@Override public String KeyAt(int i) {return nde.Atrs().FetchAt(i).Name();}
+	@Override public String KeyAt(int i) {return nde.Atrs().Get_at(i).Name();}
 	@Override public Object ReadAt(int i) {
-		XmlAtr attrib = nde.Atrs().FetchAt(i);
+		XmlAtr attrib = nde.Atrs().Get_at(i);
 		return (attrib == null) ? null : attrib.Value();
 	}
 	@Override public Object Read(String key) {
@@ -33,7 +33,7 @@ public class XmlDataRdr extends DataRdr_base implements DataRdr {
 			nde = null;
 			return false; 
 		}
-		nde = peerList.FetchAt(pos);
+		nde = peerList.Get_at(pos);
 		return true;
 	}
 	@Override public DataRdr Subs() {
@@ -56,7 +56,7 @@ public class XmlDataRdr extends DataRdr_base implements DataRdr {
 	public void Rls() {nde = null; peerList = null;}
 	public String NodeValue_get() {
 		if (nde.SubNdes().Count() != 1) return "";
-		XmlNde sub = nde.SubNdes().FetchAt(0);
+		XmlNde sub = nde.SubNdes().Get_at(0);
 		return (sub.NdeType_textOrEntityReference()) ? sub.Text_inner() : "";
 	}
 	public String Node_OuterXml() {return nde.Xml_outer();}

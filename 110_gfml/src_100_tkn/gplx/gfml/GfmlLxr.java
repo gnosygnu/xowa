@@ -29,6 +29,6 @@ public interface GfmlLxr extends GfoEvObj {
 class GfmlLxrRegy {
 	public int Count() {return hash.Count();}
 	public void Add(GfmlLxr lxr) {hash.Add(lxr.Key(), lxr);}
-	public GfmlLxr Fetch(String key) {return (GfmlLxr)hash.Fetch(key);}
-	HashAdp hash = HashAdp_.new_();
+	public GfmlLxr Get_by(String key) {return (GfmlLxr)hash.Get_by(key);}
+	Hash_adp hash = Hash_adp_.new_();
 }

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.gui.menus.dom; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*; import gplx.xowa.gui.menus.*;
 import gplx.gfui.*; import gplx.xowa.gui.cmds.*;
 public class Xog_mnu_evt_mgr implements GfoEvObj {
-	private OrderedHash itms = OrderedHash_.new_();
+	private Ordered_hash itms = Ordered_hash_.new_();
 	public Xog_mnu_evt_mgr(Xog_mnu_base owner) {this.ev_mgr = GfoEvMgr.new_(this);}
 	public GfoEvMgr EvMgr() {return ev_mgr;} private GfoEvMgr ev_mgr;
 	public void Sub(Gfui_mnu_itm mnu_itm) {
@@ -28,7 +28,7 @@ public class Xog_mnu_evt_mgr implements GfoEvObj {
 		if		(ctx.Match(k, Evt_selected_changed)) {
 			int len = itms.Count();
 			for (int i = 0; i < len; i++) {
-				Gfui_mnu_itm itm = (Gfui_mnu_itm)itms.FetchAt(i);
+				Gfui_mnu_itm itm = (Gfui_mnu_itm)itms.Get_at(i);
 				itm.Selected_(m.ReadBool("v"));
 			}
 		}

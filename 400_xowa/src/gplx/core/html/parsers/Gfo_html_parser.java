@@ -25,16 +25,16 @@ class Gfo_html_parser {
 //			int src_len = src.length;
 //			int prv_pos = 0; 
 //			int css_find_bgn_len = Css_find_bgn.length;
-//			byte[] protocol_prefix_bry = Bry_.new_utf8_(protocol_prefix);
+//			byte[] protocol_prefix_bry = Bry_.new_u8(protocol_prefix);
 //			while (true) {
 //				int url_bgn = Bry_finder.Find_fwd(src, Css_find_bgn, prv_pos);	 				if (url_bgn == Bry_.NotFound) break;	// nothing left; stop
 //				url_bgn += css_find_bgn_len;
-//				int url_end = Bry_finder.Find_fwd(src, Byte_ascii.Quote, url_bgn, src_len); 	if (url_end == Bry_.NotFound) {usr_dlg.Warn_many("", "main_page.css_parse", "could not find css; pos='~{0}' text='~{1}'", url_bgn, String_.new_utf8_len_safe_(src, url_bgn, url_bgn + 32)); break;}
+//				int url_end = Bry_finder.Find_fwd(src, Byte_ascii.Quote, url_bgn, src_len); 	if (url_end == Bry_.NotFound) {usr_dlg.Warn_many("", "main_page.css_parse", "could not find css; pos='~{0}' text='~{1}'", url_bgn, String_.new_u8_by_len(src, url_bgn, url_bgn + 32)); break;}
 //				byte[] css_url_bry = Bry_.Mid(src, url_bgn, url_end);
 //				css_url_bry = Bry_.Replace(css_url_bry, Css_amp_find, Css_amp_repl);		// &amp; -> &
 //				css_url_bry = url_encoder.Decode(css_url_bry);								// %2C ->		%7C -> |
 //				css_url_bry = Bry_.Add(protocol_prefix_bry, css_url_bry);
-//				rv.Add(String_.new_utf8_(css_url_bry));
+//				rv.Add(String_.new_u8(css_url_bry));
 //				prv_pos = url_end;
 //			}
 //			return rv.XtoStrAry();

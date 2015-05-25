@@ -196,8 +196,8 @@ class Xowh_sidebar_mgr_fxt {
 		return this;
 	}
 	public Xowe_wiki Wiki() {return wiki;}
-	public Xowh_sidebar_itm nav_grp_(String text, String title, Xowh_sidebar_itm... itms) {return new Xowh_sidebar_itm(Xowh_sidebar_itm.Tid_grp).Text_(Bry_.new_ascii_(text)).Title_(Bry_.new_ascii_(title));}
-	public Xowh_sidebar_itm nav_itm_(String text, String title, String accesskey, String href) {return new Xowh_sidebar_itm(Xowh_sidebar_itm.Tid_itm).Text_(Bry_.new_ascii_(text)).Title_(Bry_.new_ascii_(title)).Accesskey_(Bry_.new_ascii_(accesskey)).Href_(Bry_.new_ascii_(href));}
+	public Xowh_sidebar_itm nav_grp_(String text, String title, Xowh_sidebar_itm... itms) {return new Xowh_sidebar_itm(Xowh_sidebar_itm.Tid_grp).Text_(Bry_.new_a7(text)).Title_(Bry_.new_a7(title));}
+	public Xowh_sidebar_itm nav_itm_(String text, String title, String accesskey, String href) {return new Xowh_sidebar_itm(Xowh_sidebar_itm.Tid_itm).Text_(Bry_.new_a7(text)).Title_(Bry_.new_a7(title)).Accesskey_(Bry_.new_a7(accesskey)).Href_(Bry_.new_a7(href));}
 	public Xowh_sidebar_mgr_fxt Init_popups_enabled_(boolean v) {app.Api_root().Html().Modules().Popups().Enabled_(v); return this;}
 	public Xowh_sidebar_mgr_fxt Init_msg_grp(String key, String text, String title) {
 		Init_msg(key, text);
@@ -213,12 +213,12 @@ class Xowh_sidebar_mgr_fxt {
 	}
 	public Xowh_sidebar_mgr_fxt Init_msg(String key, String val) {
 		Xol_msg_mgr msg_mgr = wiki.Lang().Msg_mgr();
-		Xol_msg_itm msg_itm = msg_mgr.Itm_by_key_or_new(Bry_.new_ascii_(key));
-		msg_itm.Atrs_set(Bry_.new_ascii_(val), false, String_.Has(val, "{{"));
+		Xol_msg_itm msg_itm = msg_mgr.Itm_by_key_or_new(Bry_.new_a7(key));
+		msg_itm.Atrs_set(Bry_.new_a7(val), false, String_.Has(val, "{{"));
 		return this;
 	}
 	public void Test_parse(String raw, Xowh_sidebar_itm... expd) {
-		sidebar_mgr.Parse(bfr, comment_bfr, Bry_.new_ascii_(raw));
+		sidebar_mgr.Parse(bfr, comment_bfr, Bry_.new_a7(raw));
 		Tfds.Eq_str_lines(Xto_str(expd), Xto_str_grps(sidebar_mgr));
 	}
 	public void Test_html(String expd) {

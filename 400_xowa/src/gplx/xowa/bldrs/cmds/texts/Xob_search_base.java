@@ -20,7 +20,7 @@ import gplx.core.primitives.*;
 import gplx.ios.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.dbs.*; import gplx.xowa.tdbs.*; import gplx.xowa.wikis.data.tbls.*;
 public abstract class Xob_search_base extends Xob_itm_dump_base implements Xobd_wkr, GfoInvkAble {
-	private final OrderedHash list = OrderedHash_.new_(); private Xol_lang lang;
+	private final Ordered_hash list = Ordered_hash_.new_(); private Xol_lang lang;
 	public abstract String Wkr_key();
 	public abstract Io_make_cmd Make_cmd_site();
 	public void Wkr_ini(Xob_bldr bldr) {}
@@ -58,11 +58,11 @@ public abstract class Xob_search_base extends Xob_itm_dump_base implements Xobd_
 		dump_bfr.ClearAndReset();
 		Xobdc_merger.Ns(bldr.Usr_dlg(), tmp_wtr_mgr.Regy(), Xotdb_dir_info_.Name_search_ttl, temp_dir, make_dir, sort_mem_len, Io_line_rdr_key_gen_.first_pipe, this.Make_cmd_site());
 		tmp_wtr_mgr.Rls_all();
-		if (delete_temp) Io_mgr._.DeleteDirDeep(temp_dir);
+		if (delete_temp) Io_mgr.I.DeleteDirDeep(temp_dir);
 	}
 	public void Wkr_print() {}
 	// private static final int row_fixed_len = 5 + 1 + 1 + 1;	// 5=rowId; 1=|; 1=NmsOrd; 1=|		
-	public static byte[][] Split_ttl_into_words(Xol_lang lang, OrderedHash list, Bry_bfr bfr, byte[] ttl) {
+	public static byte[][] Split_ttl_into_words(Xol_lang lang, Ordered_hash list, Bry_bfr bfr, byte[] ttl) {
 		if (lang != null)	// null lang passed in by searcher
 			ttl = lang.Case_mgr().Case_build_lower(ttl);
 		int ttl_len = ttl.length; Bry_obj_ref word_ref = Bry_obj_ref.new_(Bry_.Empty);
@@ -102,8 +102,8 @@ public abstract class Xob_search_base extends Xob_itm_dump_base implements Xobd_
 					break;
 			}
 		}
-		byte[][] rv = (byte[][])list.Xto_ary(byte[].class);
-		list.Clear(); list.ResizeBounds(16);
+		byte[][] rv = (byte[][])list.To_ary(byte[].class);
+		list.Clear(); list.Resize_bounds(16);
 		return rv;
 	}
 }

@@ -35,7 +35,7 @@ class Xoctg_url_mok extends Xoctg_url {	public Xoctg_url_mok Page_bgn_(String v)
 	public Xoctg_url_mok Page_end_(String v) {return Grp(Xoa_ctg_mgr.Tid_page, Bool_.N, v);}
 	Xoctg_url_mok Grp(byte tid, boolean v, String bmk) {
 		this.Grp_fwds()[tid] = v ? Bool_.Y_byte : Bool_.N_byte;
-		this.Grp_idxs()[tid] = Bry_.new_ascii_(bmk);
+		this.Grp_idxs()[tid] = Bry_.new_a7(bmk);
 		return this;
 	}	
 }
@@ -53,7 +53,7 @@ class Xodb_load_mgr_sql_fxt {
 	public void Rls() {fxt.Rls();}
 	public Xowd_page_itm[] pages_(Xowd_page_itm... ary) {return ary;}
 	public Xowd_page_itm ctg_(int id, String ttl, boolean hidden, int count_subcs, int count_files, int count_pages) {
-		Xowd_page_itm rv = new Xowd_page_itm().Ns_id_(Xow_ns_.Id_category).Id_(id).Ttl_page_db_(Bry_.new_ascii_(ttl));
+		Xowd_page_itm rv = new Xowd_page_itm().Ns_id_(Xow_ns_.Id_category).Id_(id).Ttl_page_db_(Bry_.new_a7(ttl));
 		Xowd_category_itm ctg = Xowd_category_itm.load_(id, 0, hidden, count_subcs, count_files, count_pages);
 		rv.Xtn_(ctg);
 		return rv;
@@ -106,7 +106,7 @@ class Xodb_load_mgr_sql_fxt {
 			Xoctg_view_grp view_grp = view_ctg.Grp_by_tid(i);
 			Xoctg_mok_grp mok_grp = expd.Grps_get_or_new(i);
 			Tfds.Eq_ary_str(Xto_str(mok_grp), Xto_str(view_grp));
-			Tfds.Eq(String_.new_ascii_(mok_grp.Last_plus_one_sortkey()), String_.new_ascii_(view_grp.Itms_last_sortkey()));
+			Tfds.Eq(String_.new_a7(mok_grp.Last_plus_one_sortkey()), String_.new_a7(view_grp.Itms_last_sortkey()));
 		}
 	}
 	String[] Xto_str(Xoctg_view_grp grp) {
@@ -120,12 +120,12 @@ class Xodb_load_mgr_sql_fxt {
 		return rv;
 	}
 	String[] Xto_str(Xoctg_mok_grp grp) {
-		ListAdp list = grp.Itms();
+		List_adp list = grp.Itms();
 		int len = list.Count();
 		String[] rv = new String[len];
 		for (int i = 0; i< len; i++) {
-			Xowd_page_itm itm = (Xowd_page_itm)list.FetchAt(i);
-			rv[i] = String_.new_ascii_(itm.Ttl_page_db());
+			Xowd_page_itm itm = (Xowd_page_itm)list.Get_at(i);
+			rv[i] = String_.new_a7(itm.Ttl_page_db());
 		}
 		return rv;
 	}
@@ -137,12 +137,12 @@ class Xodb_load_mgr_sql_fxt {
 class Xoctg_mok_grp {
 	public byte Tid() {return tid;} public Xoctg_mok_grp Tid_(byte v) {this.tid = v; return this;} private byte tid;
 	public byte[] Last_plus_one_sortkey() {return last_plus_one_sortkey;} public Xoctg_mok_grp Last_plus_one_sortkey_(byte[] v) {this.last_plus_one_sortkey = v; return this;} private byte[] last_plus_one_sortkey;
-	public ListAdp Itms() {return itms;} ListAdp itms = ListAdp_.new_();
+	public List_adp Itms() {return itms;} List_adp itms = List_adp_.new_();
 }
 class Xoctg_mok_ctg {
 	public Xoctg_mok_ctg(Int_obj_ref next_id) {this.next_id = next_id;} Int_obj_ref next_id;
 	public byte[] Ttl() {return ttl;}
-	public Xoctg_mok_ctg Ttl_(String v) {return Ttl_(Bry_.new_ascii_(v));}
+	public Xoctg_mok_ctg Ttl_(String v) {return Ttl_(Bry_.new_a7(v));}
 	public Xoctg_mok_ctg Ttl_(byte[] v) {this.ttl = v; return this;} private byte[] ttl;
 	public Xoctg_mok_grp[] Grps() {return grps;} private Xoctg_mok_grp[] grps = new Xoctg_mok_grp[3];
 	public Xoctg_mok_grp Grps_get_or_new(byte tid) {
@@ -156,18 +156,18 @@ class Xoctg_mok_ctg {
 	public Xoctg_mok_ctg Grp_pages_(int count) {return Grp_pages_(0, count, null);}
 	public Xoctg_mok_ctg Grp_pages_(int bgn, int end, String last_itm_plus_one_sortkey) {
 		Xoctg_mok_grp grp = Grps_get_or_new(Xoa_ctg_mgr.Tid_page);
-		byte[] ttl_prefix = Bry_.new_ascii_("Page_");
+		byte[] ttl_prefix = Bry_.new_a7("Page_");
 		int ns_id = Xow_ns_.Id_main;
 		byte ctg_tid = Xoa_ctg_mgr.Tid_page;
 		for (int i = bgn; i < end; i++) {
-			byte[] ttl = Bry_.Add(ttl_prefix, Bry_.new_ascii_(Int_.Xto_str_pad_bgn_zero(i, 3)));
+			byte[] ttl = Bry_.Add(ttl_prefix, Bry_.new_a7(Int_.Xto_str_pad_bgn_zero(i, 3)));
 			Xoctg_page_xtn db_ctg = new Xoctg_page_xtn(ctg_tid, ttl);
 			Xowd_page_itm page = new Xowd_page_itm();
 			int page_id = next_id.Val_add_post();
 			page.Id_(page_id).Ns_id_(ns_id).Ttl_page_db_(ttl).Xtn_(db_ctg);
 			grp.Itms().Add(page);
 		}
-		grp.Last_plus_one_sortkey_(Bry_.new_ascii_(last_itm_plus_one_sortkey));
+		grp.Last_plus_one_sortkey_(Bry_.new_a7(last_itm_plus_one_sortkey));
 		return this;
 	}
 }

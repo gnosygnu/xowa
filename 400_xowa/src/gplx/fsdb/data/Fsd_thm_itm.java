@@ -26,7 +26,7 @@ public class Fsd_thm_itm {
 	public int		Dir_id() {return dir_id;} private int dir_id;
 	public int		Fil_id() {return fil_id;} private int fil_id;
 	public int		Thm_id() {return thm_id;} private int thm_id;
-	public int		Db_bin_id() {return bin_db_id;} private int bin_db_id;
+	public int		Bin_db_id() {return bin_db_id;} private int bin_db_id;
 	public int		W() {return w;} private int w;
 	public int		H() {return h;} private int h;
 	public double	Time() {return time;} private double time;

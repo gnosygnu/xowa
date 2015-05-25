@@ -44,11 +44,11 @@ public class Btrie_fast_mgr {
 	}
 	public Btrie_fast_mgr Add_bry_bval(byte   key, byte val) {return Add(new byte[] {key}, Byte_obj_val.new_(val));}
 	public Btrie_fast_mgr Add_bry_bval(byte[] key, byte val) {return Add(key, Byte_obj_val.new_(val));}
-	public Btrie_fast_mgr Add_str_byte(String key, byte val) {return Add(Bry_.new_utf8_(key), Byte_obj_val.new_(val));}
+	public Btrie_fast_mgr Add_str_byte(String key, byte val) {return Add(Bry_.new_u8(key), Byte_obj_val.new_(val));}
 	public Btrie_fast_mgr Add(byte key, Object val) {return Add(new byte[] {key}, val);}
-	public Btrie_fast_mgr Add(String key, Object val) {return Add(Bry_.new_utf8_(key), val);}
+	public Btrie_fast_mgr Add(String key, Object val) {return Add(Bry_.new_u8(key), val);}
 	public Btrie_fast_mgr Add(byte[] key, Object val) {
-		if (val == null) throw Err_.new_("null objects cannot be registered").Add("key", String_.new_utf8_(key));
+		if (val == null) throw Err_.new_("null objects cannot be registered").Add("key", String_.new_u8(key));
 		int key_len = key.length; int key_end = key_len - 1;
 		ByteTrieItm_fast cur = root;
 		for (int i = 0; i < key_len; i++) {
@@ -63,7 +63,7 @@ public class Btrie_fast_mgr {
 		return this;
 	}
 	public Btrie_fast_mgr Add_stub(byte tid, String s) {
-		byte[] bry = Bry_.new_utf8_(s);
+		byte[] bry = Bry_.new_u8(s);
 		Btrie_itm_stub stub = new Btrie_itm_stub(tid, bry);
 		return Add(bry, stub);
 	}

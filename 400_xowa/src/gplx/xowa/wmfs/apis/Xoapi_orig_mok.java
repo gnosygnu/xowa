@@ -25,10 +25,10 @@ public class Xoapi_orig_mok extends Xoapi_orig_base {
 	}
 	public void Clear() {wiki_str = ttl_str = redirect_str = ""; orig_w = orig_h = 0;}
 	@Override public boolean Api_query_size_exec(Xoapi_orig_rslts rv, Xof_download_wkr download_wkr, byte[] ttl, int width, int height, Gfo_usr_dlg usr_dlg, byte[] repo_wiki_key) {
-		if (!Bry_.Eq(ttl, Bry_.new_utf8_(ttl_str))) return false;
-		if (!String_.Eq(wiki_str, String_.new_ascii_(repo_wiki_key))) return false;
+		if (!Bry_.Eq(ttl, Bry_.new_u8(ttl_str))) return false;
+		if (!String_.Eq(wiki_str, String_.new_a7(repo_wiki_key))) return false;
 		if (fail) return false;
-		byte[] orig_page = String_.Eq(redirect_str, "") ? ttl : Bry_.new_utf8_(redirect_str);
+		byte[] orig_page = String_.Eq(redirect_str, "") ? ttl : Bry_.new_u8(redirect_str);
 		rv.Init_all(repo_wiki_key, orig_page, orig_w, orig_h);
 		return true;
 	}

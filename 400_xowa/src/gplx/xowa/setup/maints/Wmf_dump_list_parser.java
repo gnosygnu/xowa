@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.setup.maints; import gplx.*; import gplx.xowa.*; import gplx.xowa.setup.*;
 public class Wmf_dump_list_parser {
 	public Wmf_dump_itm[] Parse(byte[] src) {
-		OrderedHash itms = OrderedHash_.new_bry_();
+		Ordered_hash itms = Ordered_hash_.new_bry_();
 		int pos = 0;
 		while (true) {
 			int a_pos = Bry_finder.Find_fwd(src, Find_anchor, pos); if (a_pos == Bry_.NotFound) break;	// no more anchors found
@@ -32,7 +32,7 @@ public class Wmf_dump_list_parser {
 				itm.Status_msg_(Parse_status_msg(src, a_pos));
 			} catch (Exception e) {Err_.Noop(e);}
 		}
-		return (Wmf_dump_itm[])itms.Xto_ary(Wmf_dump_itm.class);
+		return (Wmf_dump_itm[])itms.To_ary(Wmf_dump_itm.class);
 	}
 	private boolean Parse_href(Wmf_dump_itm itm, byte[] src, int a_pos) {	// EX: http://dumps.wikimedia.org/enwiki/20130807
 		int href_pos = Bry_finder.Find_fwd(src, Find_href, a_pos); if (href_pos == Bry_.NotFound) return false;	// no <li>; something bad happened
@@ -42,7 +42,7 @@ public class Wmf_dump_list_parser {
 		int date_end = href_bry.length;
 		int date_bgn = Bry_finder.Find_bwd(href_bry, Byte_ascii.Slash); if (date_bgn == Bry_.NotFound) return false;
 		byte[] date_bry = Bry_.Mid(href_bry, date_bgn + 1, date_end);
-		DateAdp date = DateAdp_.parse_fmt(String_.new_ascii_(date_bry), "yyyyMMdd");
+		DateAdp date = DateAdp_.parse_fmt(String_.new_a7(date_bry), "yyyyMMdd");
 		itm.Dump_date_(date);
 		int abrv_end = date_bgn;
 		int abrv_bgn = Bry_finder.Find_bwd(href_bry, Byte_ascii.Slash, abrv_end); if (abrv_bgn == Bry_.NotFound) abrv_bgn = -1;	// "enwiki/20130708"
@@ -54,7 +54,7 @@ public class Wmf_dump_list_parser {
 		int li_pos = Bry_finder.Find_bwd(src, Find_li, a_pos); if (li_pos == Bry_.NotFound) return null;
 		int bgn = Bry_finder.Find_fwd(src, Byte_ascii.Gt, li_pos + Find_li.length); if (bgn == Bry_.NotFound) return null;
 		byte[] rv_bry = Bry_.Mid(src, bgn + 1, a_pos);
-		return DateAdp_.parse_fmt(String_.Trim(String_.new_ascii_(rv_bry)), "yyyy-MM-dd HH:mm:ss");
+		return DateAdp_.parse_fmt(String_.Trim(String_.new_a7(rv_bry)), "yyyy-MM-dd HH:mm:ss");
 	}
 	private byte[] Parse_status_msg(byte[] src, int a_pos) {
 		int span_pos = Bry_finder.Find_fwd(src, Find_span_bgn, a_pos); if (span_pos == Bry_.NotFound) return null;
@@ -63,10 +63,10 @@ public class Wmf_dump_list_parser {
 		return Bry_.Mid(src, bgn + 1, end);
 	}
 	private static byte[]
-		Find_anchor = Bry_.new_ascii_("<a")
-	,	Find_href = Bry_.new_ascii_(" href=")
-	, 	Find_li = Bry_.new_ascii_("<li")
-	, 	Find_span_bgn = Bry_.new_ascii_("<span")
-	, 	Find_span_end = Bry_.new_ascii_("</span>")
+		Find_anchor = Bry_.new_a7("<a")
+	,	Find_href = Bry_.new_a7(" href=")
+	, 	Find_li = Bry_.new_a7("<li")
+	, 	Find_span_bgn = Bry_.new_a7("<span")
+	, 	Find_span_end = Bry_.new_a7("</span>")
 	;
 }

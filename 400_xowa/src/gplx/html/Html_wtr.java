@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.html; import gplx.*;
 public class Html_wtr {
 	private Bry_bfr bfr = Bry_bfr.reset_(255);
-	private ListAdp nde_stack = ListAdp_.new_();
+	private List_adp nde_stack = List_adp_.new_();
 	public byte Atr_quote() {return atr_quote;} public Html_wtr Atr_quote_(byte v) {atr_quote = v; return this;} private byte atr_quote = Byte_ascii.Quote;
 	public Html_wtr Nde_full_atrs(byte[] tag, byte[] text, boolean text_escape, byte[]... atrs) {
 		Nde_bgn(tag);
@@ -68,7 +68,7 @@ public class Html_wtr {
 	}
 	public Html_wtr Nde_end_inline() {
 		bfr.Add_byte(Byte_ascii.Slash).Add_byte(Byte_ascii.Gt);
-		nde_stack.PopLast();
+		List_adp_.Pop_last(nde_stack);
 		return this;
 	}
 	public Html_wtr Nde_end_hdr() {
@@ -76,7 +76,7 @@ public class Html_wtr {
 		return this;
 	}
 	public Html_wtr Nde_end() {
-		byte[] name = (byte[])nde_stack.PopLast();
+		byte[] name = (byte[])List_adp_.Pop_last(nde_stack);
 		bfr.Add_byte(Byte_ascii.Lt).Add_byte(Byte_ascii.Slash);
 		bfr.Add(name);
 		bfr.Add_byte(Byte_ascii.Gt);

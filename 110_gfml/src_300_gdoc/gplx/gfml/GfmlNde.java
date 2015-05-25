@@ -24,7 +24,7 @@ public class GfmlNde implements GfmlItm {
 	public boolean			KeyedSubObj() {return keyedSubObj;} public GfmlNde KeyedSubObj_(boolean v) {keyedSubObj = v; return this;} private boolean keyedSubObj;
 	public int ChainId() {return chainId;} public GfmlNde ChainId_(int v) {chainId = v; return this;} int chainId;	// can use boolean chainHead, but this is easier for debugging
 	public int			SubObjs_Count() {return subObjs.Count();} GfmlObjList subObjs = GfmlObjList.new_();
-	public GfmlObj		SubObjs_GetAt(int i) {return (GfmlObj)subObjs.FetchAt(i);}
+	public GfmlObj		SubObjs_GetAt(int i) {return (GfmlObj)subObjs.Get_at(i);}
 	public void			SubObjs_Add(GfmlObj gobj) {
 		subObjs.Add(gobj);
 		GfmlItm subItm = GfmlItm_.as_(gobj);
@@ -43,7 +43,7 @@ public class GfmlNde implements GfmlItm {
 	public String			XtoStr() {return GfmlDocWtr_.xtoStr_(this);}
 	public void				UpdateNde(String hnd) {
 		for (int i = 0; i < subHnds.Count(); i++) {
-			GfmlNde nde = (GfmlNde)subHnds.FetchAt(i);
+			GfmlNde nde = (GfmlNde)subHnds.Get_at(i);
 			if (String_.Eq(nde.hndTkn.Raw(), hnd)) return;
 		}
 		int endAtrPos = PosOf(false, ";", "}");
@@ -58,7 +58,7 @@ public class GfmlNde implements GfmlItm {
 		subNde.SubObjs_Add(endParen);
 		subNde.SubObjs_Add(bgnBrace);
 		subNde.SubObjs_Add(endBrace);
-		subObjs.AddAt(subNde, endAtrPos);
+		subObjs.Add_at(subNde, endAtrPos);
 		// a(){b(){}}
 		// a:{} -> a:{b:{}}
 	}
@@ -67,7 +67,7 @@ public class GfmlNde implements GfmlItm {
 		int end = fwd ? subObjs.Count() : 0;
 		int dif = fwd ? 1 : -1;
 		for (int i = bgn; i != end; i+=dif) {
-			GfmlObj subObj = (GfmlObj)subObjs.FetchAt(i);
+			GfmlObj subObj = (GfmlObj)subObjs.Get_at(i);
 			GfmlTkn subTkn = GfmlTkn_.as_(subObj);
 			if (subTkn == null) continue;
 			if (String_.In(subTkn.Raw(), find)) {
@@ -77,7 +77,7 @@ public class GfmlNde implements GfmlItm {
 		return -1;
 	}
 	public void				UpdateAtr(String key, String val) {
-		GfmlAtr atr = (GfmlAtr)subKeys.Fetch(key);
+		GfmlAtr atr = (GfmlAtr)subKeys.Get_by(key);
 		if (atr != null) {atr.UpdateAtr(key, val); return;}
 		val = String_.Replace(val, "'", "''");
 		GfmlTkn quote = GfmlTkn_.new_("'", "");
@@ -90,10 +90,10 @@ public class GfmlNde implements GfmlItm {
 		atr.SubObjs_Add(valTkn);
 		int endAtrPos = PosOf(true, ";", "{");
 		if (subKeys.Count() != 0) {
-			subObjs.AddAt(GfmlTkn_.new_(" ", ""), endAtrPos);
+			subObjs.Add_at(GfmlTkn_.new_(" ", ""), endAtrPos);
 			endAtrPos++;
 		}
-		subObjs.AddAt(atr, endAtrPos);
+		subObjs.Add_at(atr, endAtrPos);
 	}
 
 	@gplx.Internal protected void ObjType_set_pragma() {objType = GfmlObj_.Type_prg;}

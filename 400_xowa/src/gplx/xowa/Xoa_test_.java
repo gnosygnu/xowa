@@ -23,11 +23,11 @@ public class Xoa_test_ {
 	public static void Db_init(Io_url sqlite_url) {Db_init(Db_is_mem_dflt(), sqlite_url);}
 	public static void Db_init(boolean db_is_mem, Io_url sqlite_url) {
 		if (db_is_mem) {
-			Io_mgr._.InitEngine_mem();
+			Io_mgr.I.InitEngine_mem();
 			Db_conn_bldr.I.Reg_default_mem();
 		}
 		else {
-			Io_mgr._.DeleteDirDeep(sqlite_url);
+			Io_mgr.I.DeleteDirDeep(sqlite_url);
 			Db_conn_bldr.I.Reg_default_sqlite();
 		}
 	}

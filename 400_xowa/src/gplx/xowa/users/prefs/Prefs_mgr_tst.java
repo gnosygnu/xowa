@@ -57,9 +57,8 @@ public class Prefs_mgr_tst {
 		fxt.Exec_get("<textarea xowa_prop='app.user.name'></textarea>", "<textarea xowa_prop='app.user.name' id='xowa_prop_0'>test_user</textarea>");
 	}
 	@Test   public void Get_textarea_escaped() {
-		fxt.App().User().Key_str_("<b>a</b>");
-		fxt.Exec_get("<textarea xowa_prop='app.user.name'></textarea>", "<textarea xowa_prop='app.user.name' id='xowa_prop_0'>&lt;b&gt;a&lt;/b&gt;</textarea>");
-		fxt.App().User().Key_str_("test_user");
+		fxt.App().Api_root().Test_str_("<b>a</b>");
+		fxt.Exec_get("<textarea xowa_prop='app.api.test_str'></textarea>", "<textarea xowa_prop='app.api.test_str' id='xowa_prop_0'>&lt;b&gt;a&lt;/b&gt;</textarea>");
 	}
 	@Test   public void Set_textarea() {
 		fxt.Init_elem_atr_val("xowa_prop_0", "abc");
@@ -103,9 +102,34 @@ public class Prefs_mgr_tst {
 		fxt.Test_Scrub_tidy_trailing_nl_in_textarea(Bool_.N, Bool_.Y, "a\n", "a\n");
 		fxt.Test_Scrub_tidy_trailing_nl_in_textarea(Bool_.Y, Bool_.N, "a\n", "a\n");
 	}
+	@Test   public void Ref() {// PURPOSE: references were duplicating; DATE:2015-05-16
+		fxt.Parser_fxt().Test_html_full_str
+		( String_.Concat_lines_nl_skip_last
+		( "<xowa_cmd>"
+		, "app.user.prefs.exec_get("
+		, "<:['"
+		, "<ref name='a'/>"
+		, "<references>"
+		, "<ref name='a'>b</ref>"
+		, "']:>"
+		, ");"
+		, "</xowa_cmd>"
+		), String_.Concat_lines_nl_skip_last
+		( "<sup id=\"cite_ref-a_0-0\" class=\"reference\"><a href=\"#cite_note-a-0\">[1]</a></sup>"
+		, "<ol class=\"references\">"
+		, "<li id=\"cite_note-a-0\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-a_0-0\">^</a></span> <span class=\"reference-text\">b</span></li>"
+		, "</ol>"
+		)
+		);
+//			(	"<ref name='a'><references><ref name='a'>a1</ref></references>", String_.Concat
+//			(	"<input type='xowa_io' xowa_prop='app.fsys.apps.media' xowa_io_msg='Select program for Web Browser' id='xowa_prop_0' value=''></input>"
+//			,	"<button id='xowa_prop_0_io' class='options_button' onclick='xowa_io_select(\"file\", \"xowa_prop_0\", \"Select program for Web Browser\");'>...</button>"
+//			));
+	}
 }
 class Prefs_mgr_fxt {
 	public Xoae_app App() {return app;} private Xoae_app app; 
+	private Prefs_mgr prefs_mgr; private Gfui_html_mok html_box;
 	public void Clear() {
 		if (app == null) {
 			GfsCore._.Clear();	// NOTE: clear GfsCore, else Props test will fail for mass run
@@ -115,7 +139,8 @@ class Prefs_mgr_fxt {
 			html_box = new Gfui_html_mok();
 			prefs_mgr.Html_box_mok_(html_box);
 		}
-	}	Prefs_mgr prefs_mgr; Gfui_html_mok html_box;
+	}
+	public Xop_fxt Parser_fxt() {return new Xop_fxt(app, app.Usere().Wiki());}
 	public Prefs_mgr_fxt Init_elem_atr_val(String elem_id, String atr_val) {
 		html_box.Html_elem_atr_add(elem_id, gplx.gfui.Gfui_html.Atr_value, atr_val);
 		return this;
@@ -129,12 +154,12 @@ class Prefs_mgr_fxt {
 		return this;
 	}
 	public Prefs_mgr_fxt Exec_get(String src_str, String expd) {
-		String actl = String_.new_utf8_(prefs_mgr.Props_get(Bry_.new_utf8_(src_str)));
+		String actl = String_.new_u8(prefs_mgr.Props_get(Bry_.new_u8(src_str)));
 		Tfds.Eq_str_lines(expd, actl);
 		return this;
 	}
 	public Prefs_mgr_fxt Test_set(String src_str) {
-		prefs_mgr.Props_set(Bry_.new_utf8_(src_str));
+		prefs_mgr.Props_set(Bry_.new_u8(src_str));
 		return this;
 	}
 	public void Test_Scrub_tidy_trailing_nl_in_textarea(boolean tidy_enabled, boolean elem_is_textarea, String val, String expd) {
@@ -142,8 +167,8 @@ class Prefs_mgr_fxt {
 		Tfds.Eq(expd, actl);
 	}
 }
-class Gfui_html_mok extends Gfui_html {	private HashAdp elem_atrs = HashAdp_.new_();
-	public void Html_elem_atr_add(String elem_id, String atr_key, Object atr_val) {elem_atrs.AddReplace(elem_id + "." + atr_key, atr_val);}
-	@Override public String Html_elem_atr_get_str(String elem_id, String atr_key) {return (String)elem_atrs.Fetch(elem_id + "." + atr_key);}
-	@Override public boolean Html_elem_atr_get_bool(String elem_id, String atr_key) {return Bool_.parse_((String)elem_atrs.Fetch(elem_id + "." + atr_key));}
+class Gfui_html_mok extends Gfui_html {	private Hash_adp elem_atrs = Hash_adp_.new_();
+	public void Html_elem_atr_add(String elem_id, String atr_key, Object atr_val) {elem_atrs.Add_if_dupe_use_nth(elem_id + "." + atr_key, atr_val);}
+	@Override public String Html_elem_atr_get_str(String elem_id, String atr_key) {return (String)elem_atrs.Get_by(elem_id + "." + atr_key);}
+	@Override public boolean Html_elem_atr_get_bool(String elem_id, String atr_key) {return Bool_.parse_((String)elem_atrs.Get_by(elem_id + "." + atr_key));}
 }

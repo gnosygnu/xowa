@@ -98,11 +98,11 @@ public class Xot_tmpl_wtr {
 					tkn.Tmpl_evaluate(ctx, src, Xot_invk_temp.Page_is_caller.Src_(src), rslt_bfr);
 				}
 				catch (Exception exc) {
-					Err_string = String_.new_utf8_(src, tkn.Src_bgn(), tkn.Src_end()) + "|" + ClassAdp_.NameOf_obj(exc) + "|" + Err_.Message_lang(exc);
+					Err_string = String_.new_u8(src, tkn.Src_bgn(), tkn.Src_end()) + "|" + ClassAdp_.NameOf_obj(exc) + "|" + Err_.Message_lang(exc);
 					if (Env_.Mode_testing())
 						throw Err_.err_(exc, Err_string);
 					else
-						ctx.App().Usr_dlg().Warn_many("", "", "failed to write tkn: page=~{0} err=~{1}", String_.new_utf8_(ctx.Cur_page().Ttl().Page_db()), Err_string);
+						ctx.App().Usr_dlg().Warn_many("", "", "failed to write tkn: page=~{0} err=~{1}", String_.new_u8(ctx.Cur_page().Ttl().Page_db()), Err_string);
 				}
 				break;
 		}

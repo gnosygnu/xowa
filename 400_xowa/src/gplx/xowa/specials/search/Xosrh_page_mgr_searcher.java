@@ -17,5 +17,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
 public interface Xosrh_page_mgr_searcher {
-	ListAdp Parse_search_and_load_ids(Cancelable cancelable, Bry_bfr bfr, Xows_ns_mgr ns_Mgr, byte[] search);
+	List_adp Parse_search_and_load_ids(Cancelable cancelable, Bry_bfr bfr, Xows_ns_mgr ns_Mgr, byte[] search);
 }

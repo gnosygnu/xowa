@@ -35,13 +35,13 @@ public class Xoctg_hiddencat_parser_sql extends Xoctg_hiddencat_parser_base {
 	@Override public void Cmd_end() {
 		tbl.Update_end();
 		if (!Env_.Mode_testing())	// NOTE: do not delete when testing
-			Io_mgr._.DeleteDirDeep(wiki.Fsys_mgr().Tmp_dir());	// delete /wiki/wiki_name/tmp
-		Io_url[] sql_files = Io_mgr._.QueryDir_args(wiki.Fsys_mgr().Root_dir()).FilPath_("*.sql.gz").ExecAsUrlAry();
+			Io_mgr.I.DeleteDirDeep(wiki.Fsys_mgr().Tmp_dir());	// delete /wiki/wiki_name/tmp
+		Io_url[] sql_files = Io_mgr.I.QueryDir_args(wiki.Fsys_mgr().Root_dir()).FilPath_("*.sql.gz").ExecAsUrlAry();
 		int len = sql_files.length;
 		for (int i = 0; i < len; i++) {
 			Io_url sql_file = sql_files[i];
-			Io_mgr._.DeleteFil(sql_file);
+			Io_mgr.I.DeleteFil(sql_file);
 		}
-		Io_mgr._.DeleteFil_args(wiki.Fsys_mgr().Root_dir().GenSubFil("xowa_categorylinks.sql")).MissingFails_off().Exec();
+		Io_mgr.I.DeleteFil_args(wiki.Fsys_mgr().Root_dir().GenSubFil("xowa_categorylinks.sql")).MissingFails_off().Exec();
 	}
 }

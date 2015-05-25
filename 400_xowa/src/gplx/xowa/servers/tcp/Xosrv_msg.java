@@ -40,7 +40,7 @@ public class Xosrv_msg {
 	public static final Xosrv_msg Exit = new Xosrv_msg();
 	public static Xosrv_msg fail_(String fmt, Object... ary) {
 		Xosrv_msg rv = new Xosrv_msg();
-		rv.msg_text = Bry_.new_utf8_(String_.Format(fmt, ary));
+		rv.msg_text = Bry_.new_u8(String_.Format(fmt, ary));
 		return rv;
 	}
 	public static Xosrv_msg new_(byte[] cmd_name, byte[] msg_id, byte[] sender, byte[] recipient, byte[] msg_date, byte[] msg_text) {

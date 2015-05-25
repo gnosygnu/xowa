@@ -18,16 +18,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfui; import gplx.*;
 public class GfuiElemList {
 	public int Count()						{return hash.Count();}
-	public GfuiElem FetchAt(int idx)		{return (GfuiElem)hash.FetchAt(idx);}
-	public GfuiElem Fetch(String key)		{return (GfuiElem)hash.Fetch(key);}
+	public GfuiElem Get_at(int idx)		{return (GfuiElem)hash.Get_at(idx);}
+	public GfuiElem Get_by(String key)		{return (GfuiElem)hash.Get_by(key);}
 	public void Add(GfuiElem box)			{Add_exec(box);}
 	public void DelOrFail(GfuiElem box)		{Del_exec(box);}
-	public void DelAt(int idx)				{Del_exec(FetchAt(idx));}
-	public int IndexOfA(GfuiElem box)		{return hash.IndexOf(box);}
-	public void MoveTo(int src, int trg)	{hash.MoveTo(src, trg);}
+	public void Del_at(int idx)				{Del_exec(Get_at(idx));}
+	public int IndexOfA(GfuiElem box)		{return hash.Idx_of(box);}
+	public void Move_to(int src, int trg)	{hash.Move_to(src, trg);}
 	public void Clear() {
 		for (int i = 0; i < this.Count(); i++)
-			Del_exec(this.FetchAt(i));
+			Del_exec(this.Get_at(i));
 		hash.Clear();
 	}
 	void Add_exec(GfuiElem box) {
@@ -44,7 +44,7 @@ public class GfuiElemList {
 		owner.IptBnds().Cfgs_delAll();
 		box.Dispose();
 	}
-	GfuiElem owner; OrderedHash hash = OrderedHash_.new_();
+	GfuiElem owner; Ordered_hash hash = Ordered_hash_.new_();
 	public static GfuiElemList new_(GfuiElem owner) {
 		GfuiElemList rv = new GfuiElemList();
 		rv.owner = owner;

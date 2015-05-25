@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs.engines.sqlite; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
 import gplx.dbs.qrys.*;
 public class Sqlite_txn_mgr {
-	private final ListAdp txn_list = ListAdp_.new_();
+	private final List_adp txn_list = List_adp_.new_();
 	public Sqlite_txn_mgr(Db_engine engine) {this.engine = engine;} private final Db_engine engine;
 	private boolean pragma_needed = Bool_.Y, txn_started = Bool_.N; // NOTE: txns only support 1 level; SQLite fails when nesting transactions; DATE:2015-03-11
 	public void	Txn_bgn(String name) {
@@ -44,7 +44,7 @@ public class Sqlite_txn_mgr {
 	}
 	public void	Txn_end() {
 		if (txn_list.Count() == 0) {Gfo_usr_dlg_.I.Warn_many("", "", "no txns in stack;"); return;}
-		String txn_last = (String)txn_list.PopLast();
+		String txn_last = (String)List_adp_.Pop_last(txn_list);
 		if (txn_list.Count() == 0) {// no txns left; commit it
 			engine.Exec_as_obj(Db_qry_sql.xtn_("COMMIT TRANSACTION;"));
 			txn_started = false;
@@ -54,7 +54,7 @@ public class Sqlite_txn_mgr {
 	}
 	public void	Txn_cxl() {
 		if (txn_list.Count() == 0) {Gfo_usr_dlg_.I.Warn_many("", "", "no txns in stack;"); return;}
-		String txn_last = (String)txn_list.PopLast();
+		String txn_last = (String)List_adp_.Pop_last(txn_list);
 		if (txn_list.Count() == 0) {// no txns left; rollback
 			engine.Exec_as_obj(Db_qry_sql.xtn_("ROLLBACK TRANSACTION;"));
 			txn_started = false;
@@ -64,7 +64,7 @@ public class Sqlite_txn_mgr {
 	}
 	public void	Txn_sav() {
 		if (txn_list.Count() == 0) {Gfo_usr_dlg_.I.Warn_many("", "", "no txns in stack;"); return;}
-		String name = (String)txn_list.FetchAt(txn_list.Count() - 1);
+		String name = (String)txn_list.Get_at(txn_list.Count() - 1);
 		this.Txn_end(); this.Txn_bgn(name);
 	}
 }

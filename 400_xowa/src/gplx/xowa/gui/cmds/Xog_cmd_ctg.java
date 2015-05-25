@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 public class Xog_cmd_ctg {
-	public Xog_cmd_ctg(int tid, String key_str) {this.tid = tid; this.key_str = key_str; this.key_bry = Bry_.new_utf8_(key_str);}
+	public Xog_cmd_ctg(int tid, String key_str) {this.tid = tid; this.key_str = key_str; this.key_bry = Bry_.new_u8(key_str);}
 	public int Tid() {return tid;} private int tid;
 	public String Key_str() {return key_str;} private String key_str;
 	public byte[] Key_bry() {return key_bry;} private byte[] key_bry;

@@ -66,7 +66,7 @@ public class Xoa_url_parser {
 			byte[] sub_bry = segs_ary[1];							// lang/type seems to be 2nd seg; EX: "en", "fr"; "commons"
 			byte[] lang_bry = sub_bry;
 			if (upload_segs_hash.Has(sub_bry)) {					// wikimedia links will have fmt of "/wikipedia/commons"; must change to wikimedia
-				domain_bry = Xow_domain_.Tid_bry_wikimedia;
+				domain_bry = Xow_domain_type_.Key_bry_wikimedia;
 				lang_bry = Xol_lang_itm_.Key__unknown;
 			}
 			tmp_bfr.Clear().Add(sub_bry).Add_byte(Byte_ascii.Dot)	// add lang/type + .;	EX: "en."; "fr."; "commons."
@@ -132,7 +132,7 @@ public class Xoa_url_parser {
 			;
 	}
 	public static Xoa_url Parse_url(Xoae_app app, Xowe_wiki cur_wiki, String raw) {
-		byte[] raw_bry = Bry_.new_utf8_(raw);
+		byte[] raw_bry = Bry_.new_u8(raw);
 		return Parse_url(Xoa_url.blank_(), app, cur_wiki, raw_bry, 0, raw_bry.length, false);
 	}
 	public static Xoa_url Parse_url(Xoae_app app, Xowe_wiki cur_wiki, byte[] raw, int bgn, int end, boolean from_url_bar) {return Parse_url(Xoa_url.blank_(), app, cur_wiki, raw, bgn, end, from_url_bar);}
@@ -151,7 +151,7 @@ public class Xoa_url_parser {
 		else {												// parse failed; url doesn't have protocol
 			byte[] wiki_bry = rv.Wiki_bry();
 			if (Bry_.Len_gt_0(wiki_bry)) {					// NOTE: wiki_bry is null when passing in Category:A from home_wiki
-				Xow_xwiki_itm xwiki_itm = app.User().Wiki().Xwiki_mgr().Get_by_key(wiki_bry);	// check if url.Wiki_bry is actually wiki; note that checking User().Wiki().Xwiki_mgr() to find "offline" wikis
+				Xow_xwiki_itm xwiki_itm = app.Usere().Wiki().Xwiki_mgr().Get_by_key(wiki_bry);	// check if url.Wiki_bry is actually wiki; note that checking User().Wiki().Xwiki_mgr() to find "offline" wikis
 				if (	xwiki_itm != null						// null-check
 					&&	Bry_.Eq(xwiki_itm.Domain_bry(), wiki_bry)// check that xwiki.domain == wiki; avoids false lang matches like "so/page" or "C/page"; EX: "fr.wikipedia.org" vs "fr"; ca.s:So/Natura_del_so; DATE:2014-04-26; PAGE:no.b:C/Variabler; DATE:2014-10-14
 					)
@@ -228,9 +228,9 @@ public class Xoa_url_parser {
 	}
 	private static Xowe_wiki Parse_url__wiki(Xoae_app app, byte[] key) {
 		Xowe_wiki rv = null;
-		Xow_xwiki_itm xwiki = app.User().Wiki().Xwiki_mgr().Get_by_key(key);
+		Xow_xwiki_itm xwiki = app.Usere().Wiki().Xwiki_mgr().Get_by_key(key);
  			if (xwiki == null)
-			rv = app.User().Wiki();
+			rv = app.Usere().Wiki();
 		else
 			rv = app.Wiki_mgr().Get_by_key_or_make(xwiki.Domain_bry());
 		return rv;			
@@ -254,7 +254,7 @@ public class Xoa_url_parser {
 		return bfr.To_bry_and_rls();
 	}
 	public static Xoa_url Parse_from_url_bar(Xoae_app app, Xowe_wiki wiki, String s) {
-		byte[] bry = Bry_.new_utf8_(s);
+		byte[] bry = Bry_.new_u8(s);
 		bry = Parse_from_url_bar__strip_mobile(bry);
 		byte[] fmt = app.Gui_mgr().Url_macro_mgr().Fmt_or_null(bry);
 		if (fmt != null) bry = fmt;
@@ -283,15 +283,15 @@ public class Xoa_url_parser {
 	}
 	// private static final byte Tid_xowa = (byte)Gfo_url_parser.Protocol_file_tid + 1;
 	private static final byte Id_arg_redirect = 0, Id_arg_uselang = 1, Id_arg_title = 2, Id_arg_action = 3, Id_arg_fulltext = 4, Id_arg_xowa_vnt = 5;
-	private static final byte[] Bry_arg_redirect = Bry_.new_ascii_("redirect"), Bry_arg_uselang = Bry_.new_ascii_("uselang"), Bry_arg_title = Bry_.new_ascii_("title"), Bry_arg_fulltext = Bry_.new_ascii_("fulltext");
-	private static final byte[] Bry_upload_wikimedia_org = Bry_.new_ascii_("upload.wikimedia.org"), Bry_dot_org = Bry_.new_ascii_(".org")
-		, Bry_file = Bry_.new_ascii_("File:");	// NOTE: File does not need i18n; is a canonical namespace 
-	public static final byte[] Bry_wiki_name = Bry_.new_ascii_("wiki");
+	private static final byte[] Bry_arg_redirect = Bry_.new_a7("redirect"), Bry_arg_uselang = Bry_.new_a7("uselang"), Bry_arg_title = Bry_.new_a7("title"), Bry_arg_fulltext = Bry_.new_a7("fulltext");
+	private static final byte[] Bry_upload_wikimedia_org = Bry_.new_a7("upload.wikimedia.org"), Bry_dot_org = Bry_.new_a7(".org")
+		, Bry_file = Bry_.new_a7("File:");	// NOTE: File does not need i18n; is a canonical namespace 
+	public static final byte[] Bry_wiki_name = Bry_.new_a7("wiki");
 	private static final byte[][] Bry_wiki_name_bry = new byte[][] {Bry_wiki_name};
-	public static final byte[] Bry_arg_action_eq_edit = Bry_.new_ascii_("action=edit")
-	, Bry_arg_action = Bry_.new_ascii_("action")
-	, Bry_arg_action_edit = Bry_.new_ascii_("edit")
-	, Bry_arg_xowa_vnt = Bry_.new_ascii_("xowa_vnt")
+	public static final byte[] Bry_arg_action_eq_edit = Bry_.new_a7("action=edit")
+	, Bry_arg_action = Bry_.new_a7("action")
+	, Bry_arg_action_edit = Bry_.new_a7("edit")
+	, Bry_arg_xowa_vnt = Bry_.new_a7("xowa_vnt")
 	;
 	private static final Hash_adp_bry qry_args_hash = Hash_adp_bry.ci_ascii_()
 	.Add_bry_byte(Bry_arg_redirect, Id_arg_redirect)
@@ -302,5 +302,5 @@ public class Xoa_url_parser {
 	.Add_bry_byte(Bry_arg_xowa_vnt, Id_arg_xowa_vnt)
 	;
 	private static final Hash_adp_bry upload_segs_hash = Hash_adp_bry.ci_ascii_()
-	.Add_bry_bry(Xow_domain_.Tid_bry_commons);//.Add_bry_bry(Xow_domain_.Tid_bry_species_bry).Add_bry_bry(Xow_domain_.Tid_bry_meta_bry);
+	.Add_bry_bry(Xow_domain_type_.Key_bry_commons);//.Add_bry_bry(Xow_domain_type_.Key_bry_species_bry).Add_bry_bry(Xow_domain_type_.Key_bry_meta_bry);
 }

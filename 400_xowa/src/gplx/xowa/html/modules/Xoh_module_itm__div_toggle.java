@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //	public class Xoh_module_itm__div_toggle : Xoh_module_itm {
 //		public boolean Enabled() {return enabled;} public void Enabled_y_() {enabled = true;} public void Enabled_(boolean v) {enabled = v;} private boolean enabled;
 //		public void Clear() {enabled = false;}
-//		public byte[] Key() {return Key_const;} private static final byte[] Key_const = Bry_.new_ascii_("div_toggle");
+//		public byte[] Key() {return Key_const;} private static final byte[] Key_const = Bry_.new_a7("div_toggle");
 //		public void Write_css_script(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_module_wtr wtr) {}
 //		public void Write_js_include(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_module_wtr wtr) {}
 //		public void Write_css_include(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_module_wtr wtr) {		}

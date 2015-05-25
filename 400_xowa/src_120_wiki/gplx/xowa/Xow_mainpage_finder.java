@@ -28,5 +28,5 @@ public class Xow_mainpage_finder {
 		tmp_bfr.Mkr_rls();
 		return rv;
 	}
-	public static final byte[] Msg_mainpage = Bry_.new_ascii_("mainpage");
+	public static final byte[] Msg_mainpage = Bry_.new_a7("mainpage");
 }

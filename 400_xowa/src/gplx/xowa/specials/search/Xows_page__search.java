@@ -34,7 +34,7 @@ public class Xows_page__search implements Xows_page, GfoInvkAble, GfoEvObj {
 	public Xows_special_meta Special_meta() {return Xows_special_meta_.Itm__search;}
 	private void Multi_wikis_changed() {
 		Xow_domain_crt_itm crt = search_api.Multi_wikis_crt(wiki_domain);
-		this.search_domain_ary = app.User().Wiki().Xwiki_mgr().Get_by_crt(wiki_domain, crt);
+		this.search_domain_ary = app.Usere().Wiki().Xwiki_mgr().Get_by_crt(wiki_domain, crt);
 		if (search_domain_ary.length == 0) search_domain_ary = new Xow_domain[] {wiki_domain};	// default to current if bad input
 		Multi_sorts_changed();
 	}
@@ -45,7 +45,7 @@ public class Xows_page__search implements Xows_page, GfoInvkAble, GfoEvObj {
 		Xow_domain_sorter__manual.Sort(sorter, search_domain_ary);
 	}
 	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
-		if (wiki.Domain_tid() == Xow_domain_.Tid_int_home) return;	// do not allow search in home wiki; will throw null ref error b/c no search_ttl dirs
+		if (wiki.Domain_tid() == Xow_domain_type_.Tid_home) return;	// do not allow search in home wiki; will throw null ref error b/c no search_ttl dirs
 		if (search_domain_ary == null) Multi_wikis_changed();
 		// get args
 		Xog_search_suggest_mgr search_suggest_mgr = wiki.Appe().Gui_mgr().Search_suggest_mgr();

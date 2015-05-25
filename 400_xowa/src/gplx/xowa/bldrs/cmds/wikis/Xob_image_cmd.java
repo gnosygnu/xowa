@@ -61,7 +61,7 @@ public class Xob_image_cmd extends Xob_itm_dump_base implements Xob_cmd, GfoInvk
 				tbl_image.Insert(stmt, cur_ttl, cur_media_type, cur_minor_mime, cur_size, cur_width, cur_height, cur_bits, cur_ext_id, cur_timestamp);
 				++commit_count;
 				if ((commit_count % 10000) == 0) {
-					usr_dlg.Prog_many("", "", "committing: count=~{0} last=~{1}", commit_count, String_.new_utf8_(cur_ttl));
+					usr_dlg.Prog_many("", "", "committing: count=~{0} last=~{1}", commit_count, String_.new_u8(cur_ttl));
 					conn.Txn_sav();
 				}
 				break;
@@ -80,7 +80,7 @@ public class Xob_image_cmd extends Xob_itm_dump_base implements Xob_cmd, GfoInvk
 	public static int Calc_ext_id(Gfo_usr_dlg usr_dlg, byte[] file, byte[] media_type, byte[] minor_mime, int w, int h) {
 		Xof_ext file_ext = Xof_ext_.new_by_ttl_(file);			int file_ext_id = file_ext.Id();
 		Xof_ext mime_ext = Xof_mime_minor_.ext_(minor_mime);	int mime_ext_id = mime_ext.Id();
-		int media_type_id = Xof_media_type.Xto_byte(String_.new_utf8_(media_type));
+		int media_type_id = Xof_media_type.Xto_byte(String_.new_u8(media_type));
 		if (file_ext_id != mime_ext_id) {							// file_ext_id != mime_ext_id; EX: "A.png" actually has a minor_mime of "jpg"
 			boolean update = false, notify = true;
 			switch (file_ext_id) {
@@ -102,7 +102,7 @@ public class Xob_image_cmd extends Xob_itm_dump_base implements Xob_cmd, GfoInvk
 				file_ext_id = mime_ext_id;
 			else {
 				if (notify)
-					usr_dlg.Log_many("", "", "image.ext_calc.mismatch_exts: file=~{0} mime=~{1}", String_.new_utf8_(file), String_.new_utf8_(minor_mime));			
+					usr_dlg.Log_many("", "", "image.ext_calc.mismatch_exts: file=~{0} mime=~{1}", String_.new_u8(file), String_.new_u8(minor_mime));			
 			}
 		}
 		if (    file_ext_id		== Xof_ext_.Id_ogg			// file_ext is ".ogg"
@@ -111,7 +111,7 @@ public class Xob_image_cmd extends Xob_itm_dump_base implements Xob_cmd, GfoInvk
 			if (w > 0 && h > 0)								// some .ogg files are "VIDEO" but have 0 width, 0 height
 				file_ext_id = Xof_ext_.Id_ogv;				// manually specify ogv
 			else
-				usr_dlg.Log_many("", "", "image.ext_calc.ogg_video_with_null_size: media_type=~{0} minor_mime=~{1} w=~{2} h=~{3} file=~{4}", String_.new_utf8_(media_type), String_.new_utf8_(minor_mime), w, h, String_.new_utf8_(file));
+				usr_dlg.Log_many("", "", "image.ext_calc.ogg_video_with_null_size: media_type=~{0} minor_mime=~{1} w=~{2} h=~{3} file=~{4}", String_.new_u8(media_type), String_.new_u8(minor_mime), w, h, String_.new_u8(file));
 		}
 		return file_ext_id;
 	}

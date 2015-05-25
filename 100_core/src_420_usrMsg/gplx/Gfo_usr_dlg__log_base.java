@@ -20,7 +20,7 @@ import gplx.core.strings.*;
 public class Gfo_usr_dlg__log_base implements Gfo_usr_dlg__log {
 	private int archive_dirs_max = 8;
 	private Io_url log_dir, err_fil;
-	private OrderedHash queued_list = OrderedHash_.new_();
+	private Ordered_hash queued_list = Ordered_hash_.new_();
 	private Bry_fmtr fmtr = Bry_fmtr.tmp_(); private Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	public boolean Queue_enabled() {return queue_enabled;} public void Queue_enabled_(boolean v) {queue_enabled = v; if (!v) this.Flush();} private boolean queue_enabled;
 	public boolean Enabled() {return enabled;} public void Enabled_(boolean v) {enabled = v;} private boolean enabled = true;
@@ -29,7 +29,7 @@ public class Gfo_usr_dlg__log_base implements Gfo_usr_dlg__log {
 	private void Flush() {
 		int queued_len = queued_list.Count();
 		for (int i = 0; i < queued_len; i++) {
-			Usr_log_fil fil = (Usr_log_fil)queued_list.FetchAt(i);
+			Usr_log_fil fil = (Usr_log_fil)queued_list.Get_at(i);
 			if (fil.Url() == null) {
 				fil.Url_(session_dir.GenSubFil("session.txt"));
 			}
@@ -45,26 +45,26 @@ public class Gfo_usr_dlg__log_base implements Gfo_usr_dlg__log {
 	}
 	public void Log_term() {
 		if (!enabled) return;
-		Io_url[] archive_dirs = Io_mgr._.QueryDir_args(log_dir).DirInclude_().DirOnly_().ExecAsUrlAry();
+		Io_url[] archive_dirs = Io_mgr.I.QueryDir_args(log_dir).DirInclude_().DirOnly_().ExecAsUrlAry();
 		int archive_dirs_len = archive_dirs.length;
 		int session_cutoff = archive_dirs_len - archive_dirs_max;
 		for (int i = 0; i < session_cutoff; i++) {
 			Io_url archive_dir = archive_dirs[i];
-			Io_mgr._.DeleteDirDeep(archive_dir);
+			Io_mgr.I.DeleteDirDeep(archive_dir);
 			this.Log_to_session("archive dir del: " + session_dir.Raw());
 		}
 		this.Log_to_session("app term");
 		MoveCurrentToArchive(session_dir);
 	}
-	private void MoveCurrentToArchive(Io_url dir) {Io_mgr._.MoveDirDeep(dir, dir.OwnerDir().GenSubDir(DateAdp_.Now().XtoStr_fmt_yyyyMMdd_HHmmss_fff()));}
+	private void MoveCurrentToArchive(Io_url dir) {Io_mgr.I.MoveDirDeep(dir, dir.OwnerDir().GenSubDir(DateAdp_.Now().XtoStr_fmt_yyyyMMdd_HHmmss_fff()));}
 	public void Log_info(boolean warn, String s) {if (warn) Log_to_err(s); else Log_to_session(s);}
 	public void Log_msg_to_url_fmt(Io_url url, String fmt, Object... args) {
 		if (!enabled) return;
-		String msg = Bld_msg(String_.new_utf8_(fmtr.Fmt_(fmt).Bld_bry_many(tmp_bfr, args)));
+		String msg = Bld_msg(String_.new_u8(fmtr.Fmt_(fmt).Bld_bry_many(tmp_bfr, args)));
 		Log_msg(url, msg);
 		Log_msg(session_fil, msg);
 	}
-	public void Log_to_session_fmt(String fmt, Object... args) {Log_to_session(String_.new_utf8_(fmtr.Fmt_(fmt).Bld_bry_many(tmp_bfr, args)));}
+	public void Log_to_session_fmt(String fmt, Object... args) {Log_to_session(String_.new_u8(fmtr.Fmt_(fmt).Bld_bry_many(tmp_bfr, args)));}
 	public void Log_to_session(String s) {
 		if (!enabled) return;
 		String line = Bld_msg(s);
@@ -87,7 +87,7 @@ public class Gfo_usr_dlg__log_base implements Gfo_usr_dlg__log {
 	private void Log_msg(Io_url url, String txt) {
 		if (queue_enabled) {
 			String url_raw = url == null ? "mem" : url.Raw();
-			Usr_log_fil fil = (Usr_log_fil)queued_list.Fetch(url_raw);
+			Usr_log_fil fil = (Usr_log_fil)queued_list.Get_by(url_raw);
 			if (fil == null) {
 				fil = new Usr_log_fil(url);
 				queued_list.Add(url_raw, fil);
@@ -95,7 +95,7 @@ public class Gfo_usr_dlg__log_base implements Gfo_usr_dlg__log {
 			fil.Add(txt);
 		}
 		else
-			Io_mgr._.AppendFilStr(url, txt);
+			Io_mgr.I.AppendFilStr(url, txt);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_enabled_))				enabled = m.ReadYn("v");
@@ -114,7 +114,7 @@ class Usr_log_fil {
 	public void Flush() {
 		if (sb.Count() == 0) return;
 		try {
-			Io_mgr._.AppendFilStr(url, sb.Xto_str_and_clear());
+			Io_mgr.I.AppendFilStr(url, sb.Xto_str_and_clear());
 		}
 		catch (Exception e) {
 			ConsoleAdp._.WriteLine(Err_.Message_gplx_brief(e));

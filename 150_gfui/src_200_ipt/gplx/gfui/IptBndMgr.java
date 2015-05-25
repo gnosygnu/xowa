@@ -27,22 +27,22 @@ public class IptBndMgr implements SrlAble {
 			if (IptEventType_.Has(bnd.EventTypes(), list.EventType()))
 				list.Add(bnd);
 		for (int i = 0; i < bnd.Ipts().Count(); i++) {
-			IptArg arg = (IptArg)bnd.Ipts().FetchAt(i);
+			IptArg arg = (IptArg)bnd.Ipts().Get_at(i);
 			chainMgr.Add(arg);
 		}
 	}
-	@gplx.Internal protected ListAdp Cfgs() {return cfgs;} ListAdp cfgs = ListAdp_.new_();
+	@gplx.Internal protected List_adp Cfgs() {return cfgs;} List_adp cfgs = List_adp_.new_();
 	@gplx.Internal protected void Cfgs_delAll() {
-		ListAdp del = ListAdp_.new_();
+		List_adp del = List_adp_.new_();
 		for (int i = 0; i < cfgs.Count(); i++) {
-			IptCfgPtr ptr = (IptCfgPtr)cfgs.FetchAt(i);
+			IptCfgPtr ptr = (IptCfgPtr)cfgs.Get_at(i);
 			IptCfg cfg = IptCfgRegy._.GetOrNew(ptr.CfgKey());
 			cfg.Owners_del(ptr.CfgKey());
 			for (IptBndHash list : regy) {
 				for (int j = 0; j < list.Count(); j++) {
 					IptBndListItm itmList = list.Get_at(j);
 					for (int k = 0; k < itmList.Count(); k++) {
-						IptBnd bnd = itmList.FetchAt(k);							
+						IptBnd bnd = itmList.Get_at(k);							
 						if (String_.Eq(ptr.BndKey(), bnd.Key())) {
 							list.Del(bnd);
 						}
@@ -52,7 +52,7 @@ public class IptBndMgr implements SrlAble {
 			del.Add(cfg);
 		}
 		for (int i = 0; i < del.Count(); i++) {
-			IptCfg cfg = (IptCfg)del.FetchAt(i);
+			IptCfg cfg = (IptCfg)del.Get_at(i);
 			cfgs.Del(cfg);
 		}
 	}
@@ -62,7 +62,7 @@ public class IptBndMgr implements SrlAble {
 			for (int j = 0; j < list.Count(); j++) {
 				IptBndListItm itmList = list.Get_at(j);
 				for (int i = 0; i < itmList.Count(); i++) {
-					IptBnd bnd = itmList.FetchAt(i);
+					IptBnd bnd = itmList.Get_at(i);
 					if (String_.Eq(key, bnd.Key())) {
 						old = bnd;
 						break;
@@ -74,7 +74,7 @@ public class IptBndMgr implements SrlAble {
 		this.Del(old);
 		old.Ipts().Clear();
 		if (ary == IptArg_.Ary_empty) return;	// "unbind"; exit after deleting; DATE:2014-05-13
-		old.Ipts().AddMany((Object[])ary);
+		old.Ipts().Add_many((Object[])ary);
 		this.Add(old);
 	}
 	public void Del_by_key(String key) {Del_by(true, key);}
@@ -84,7 +84,7 @@ public class IptBndMgr implements SrlAble {
 	}
 	private void Del_by(boolean del_by_key, String del_key) {
 		int regy_len = regy.length;
-		ListAdp deleted = ListAdp_.new_();
+		List_adp deleted = List_adp_.new_();
 		for (int i = 0; i < regy_len; i++) {
 			IptBndHash list = regy[i];
 			int list_len = list.Count();
@@ -92,7 +92,7 @@ public class IptBndMgr implements SrlAble {
 				IptBndListItm bnds = list.Get_at(j);
 				int bnds_len = bnds.Count();
 				for (int k = 0; k < bnds_len; k++) {
-					IptBnd itm_bnd = bnds.FetchAt(k);
+					IptBnd itm_bnd = bnds.Get_at(k);
 					if (del_by_key) {
 						if (String_.Eq(del_key, itm_bnd.Key())) {
 							deleted.Add(itm_bnd);
@@ -100,7 +100,7 @@ public class IptBndMgr implements SrlAble {
 					}
 					else {
 						if (itm_bnd.Ipts().Count() != 1) continue;	// only delete if bnd has 1 ipt; should only be called by xowa which does 1 bnd per ipt 
-						IptArg itm_ipt = (IptArg)itm_bnd.Ipts().FetchAt(0);
+						IptArg itm_ipt = (IptArg)itm_bnd.Ipts().Get_at(0);
 						if (String_.Eq(del_key, itm_ipt.Key()))
 							deleted.Add(itm_bnd);
 					}
@@ -109,7 +109,7 @@ public class IptBndMgr implements SrlAble {
 		}
 		int deleted_len = deleted.Count();
 		for (int i = 0; i < deleted_len; i++) {
-			IptBnd bnd = (IptBnd)deleted.FetchAt(i);
+			IptBnd bnd = (IptBnd)deleted.Get_at(i);
 			this.Del(bnd);
 			bnd.Ipts().Clear();
 		}
@@ -121,7 +121,7 @@ public class IptBndMgr implements SrlAble {
 			}
 		}
 		for (int i = 0; i < bnd.Ipts().Count(); i++) {
-			IptArg arg = (IptArg)bnd.Ipts().FetchAt(i);
+			IptArg arg = (IptArg)bnd.Ipts().Get_at(i);
 			chainMgr.Del(arg);
 		}
 	}
@@ -144,11 +144,11 @@ public class IptBndMgr implements SrlAble {
 	public Object Srl(GfoMsg owner) {
 		GfoMsg m = GfoMsg_.srl_(owner, "mgr");
 		for (int i = 0; i < hash.Count(); i++)
-			((IptBnd)hash.FetchAt(i)).Srl(m);
+			((IptBnd)hash.Get_at(i)).Srl(m);
 		return this;
 	}
 	IptArgChainMgr chainMgr = new IptArgChainMgr();
-	OrderedHash hash = OrderedHash_.new_(); IptEventType curTypes = IptEventType_.None;
+	Ordered_hash hash = Ordered_hash_.new_(); IptEventType curTypes = IptEventType_.None;
 	public static IptBndMgr new_() {return new IptBndMgr();}
 	IptBndHash[] regy = new IptBndHash[8];
 	IptBndMgr() {ClearLists();}
@@ -173,18 +173,18 @@ class IptBndHash implements SrlAble {
 	private IptBndListItm wildcard_list;
 	public IptEventType EventType() {return eventType;} IptEventType eventType;
 	public int Count() {return hash.Count();}
-	public IptBndListItm Get_by(String key) {return wildcard_list == null ? (IptBndListItm)hash.Fetch(key) : wildcard_list;}
-	public IptBndListItm Get_at(int i) {return (IptBndListItm)hash.FetchAt(i);}
+	public IptBndListItm Get_by(String key) {return wildcard_list == null ? (IptBndListItm)hash.Get_by(key) : wildcard_list;}
+	public IptBndListItm Get_at(int i) {return (IptBndListItm)hash.Get_at(i);}
 	public void Add(IptBnd bnd) {
 		for (int i = 0; i < bnd.Ipts().Count(); i++) {
-			IptArg arg = (IptArg)bnd.Ipts().FetchAt(i);
+			IptArg arg = (IptArg)bnd.Ipts().Get_at(i);
 			if (!IptArg_.EventType_match(arg, eventType)) continue;	// bnd may have multiple ipts of different evTypes; only add bnd if evType matches
 			if (String_.Eq(arg.Key(), IptArg_.Wildcard_key)) {
 				if (wildcard_list == null) wildcard_list = new IptBndListItm(IptArg_.Wildcard_key);
 				wildcard_list.Add(bnd);
 			}
 			else {
-				IptBndListItm itm = (IptBndListItm)hash.Fetch(arg.Key());
+				IptBndListItm itm = (IptBndListItm)hash.Get_by(arg.Key());
 				if (itm == null) {
 					itm = new IptBndListItm(arg.Key());
 					hash.Add(arg.Key(), itm);
@@ -195,7 +195,7 @@ class IptBndHash implements SrlAble {
 	}
 	public void Del(IptBnd bnd) {
 		for (int i = 0; i < bnd.Ipts().Count(); i++) {
-			IptArg arg = (IptArg)bnd.Ipts().FetchAt(i);
+			IptArg arg = (IptArg)bnd.Ipts().Get_at(i);
 			if (!IptArg_.EventType_match(arg, eventType)) continue;	// bnd may have multiple ipts of different evTypes; only add bnd if evType matches
 			hash.Del(arg.Key());
 		}
@@ -203,20 +203,20 @@ class IptBndHash implements SrlAble {
 	public Object Srl(GfoMsg owner) {
 		GfoMsg m = GfoMsg_.srl_(owner, "list").Add("eventType", eventType.Name());
 		for (int i = 0; i < hash.Count(); i++)
-			((IptBndListItm)hash.FetchAt(i)).Srl(m);
+			((IptBndListItm)hash.Get_at(i)).Srl(m);
 		return this;
 	}
-	OrderedHash hash = OrderedHash_.new_();
+	Ordered_hash hash = Ordered_hash_.new_();
 	public IptBndHash(IptEventType eventType) {this.eventType = eventType;}
 }
 class IptBndListItm implements SrlAble {
 	public String IptKey() {return iptKey;} private String iptKey;
 	public int Count() {return list.Count();}
-	public IptBnd FetchAt(int i)  {return (IptBnd)list.FetchAt(i);}
-	public void Add(IptBnd bnd) {list.AddAt(0, bnd);}
+	public IptBnd Get_at(int i)  {return (IptBnd)list.Get_at(i);}
+	public void Add(IptBnd bnd) {list.Add_at(0, bnd);}
 	public boolean Exec(IptEventData evData) {
 		for (int i = 0; i < list.Count(); i++) {
-			IptBnd bnd = (IptBnd)list.FetchAt(i);
+			IptBnd bnd = (IptBnd)list.Get_at(i);
 			try {bnd.Exec(evData);}
 			catch (Exception exc) {
 				UsrDlg_._.Stop(UsrMsg.new_("Error while processing event").Add("bnd", SrlAble_.XtoStr(bnd)).Add("exc", Err_.Message_lang(exc)));
@@ -229,17 +229,17 @@ class IptBndListItm implements SrlAble {
 	public Object Srl(GfoMsg owner) {
 		GfoMsg m = GfoMsg_.srl_(owner, "itm").Add("iptKey", iptKey);
 		for (int i = 0; i < list.Count(); i++)
-			((IptBnd)list.FetchAt(i)).Srl(m);
+			((IptBnd)list.Get_at(i)).Srl(m);
 		return this;
 	}
-	ListAdp list = ListAdp_.new_();
+	List_adp list = List_adp_.new_();
 	public IptBndListItm(String iptKey) {this.iptKey = iptKey;}
 }
 class IptArgChainMgr {
 	public void Clear() {regy.Clear();}
 	public String Process(IptArg arg) {
 //			if (String_.Eq(arg.Key(), "key_7")) return "";
-		HashAdp hash = (HashAdp)active.Fetch(arg.Key());
+		Hash_adp hash = (Hash_adp)active.Get_by(arg.Key());
 		if (hash == null) {
 			active = regy;
 			String r = activeKey;
@@ -254,7 +254,7 @@ class IptArgChainMgr {
 	public String ActiveKey() {return activeKey;}
 	String activeKey = "";
 	public IptArgChainMgr() {active = regy;}
-	HashAdp active;
+	Hash_adp active;
 	public void Add(IptArg arg) {
 		if (arg.getClass() != IptKeyChain.class) return;
 		IptKeyChain chain = (IptKeyChain)arg;
@@ -265,23 +265,23 @@ class IptArgChainMgr {
 		IptKeyChain chain = (IptKeyChain)arg;
 		Del_recur(regy, chain.Chained(), 0);
 	}
-	void Add_recur(HashAdp cur, IptArg[] ary, int i) {
+	void Add_recur(Hash_adp cur, IptArg[] ary, int i) {
 		if (i == ary.length - 1) return;	// -1 b/c last should not be registered; ex: key.a,key.b should register key.a only
 		IptArg ipt = ary[i];
-		HashAdp next = (HashAdp)cur.Fetch(ipt.Key());
+		Hash_adp next = (Hash_adp)cur.Get_by(ipt.Key());
 		if (next == null) {
-			next = HashAdp_.new_();
+			next = Hash_adp_.new_();
 			cur.Add(ipt.Key(), next);
 		}
 		Add_recur(next, ary, i + 1);
 	}// a,b,c
-	void Del_recur(HashAdp cur, IptArg[] ary, int i) {
+	void Del_recur(Hash_adp cur, IptArg[] ary, int i) {
 		IptArg ipt = ary[i];
 		if (i == ary.length - 1) {
 			cur.Del(ipt.Key());
 			return;	// -1 b/c last should not be registered; ex: key.a,key.b should register key.a only
 		}
-		HashAdp next = (HashAdp)cur.Fetch(ipt.Key());
+		Hash_adp next = (Hash_adp)cur.Get_by(ipt.Key());
 		if (next == null) {
 			return;
 		}
@@ -289,5 +289,5 @@ class IptArgChainMgr {
 		if (cur.Count() == 1)
 			cur.Clear();
 	}
-	HashAdp regy = HashAdp_.new_();
+	Hash_adp regy = Hash_adp_.new_();
 }

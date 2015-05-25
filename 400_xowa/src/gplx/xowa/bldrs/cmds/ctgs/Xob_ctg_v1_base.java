@@ -23,7 +23,7 @@ public abstract class Xob_ctg_v1_base extends Xob_itm_dump_base implements Xobd_
 	public Xob_ctg_v1_base Ctor(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki); return this;}
 	public abstract String Wkr_key();
 	public abstract Io_sort_cmd Make_sort_cmd();
-	public OrderedHash Wkr_hooks() {return wkr_hooks;} private OrderedHash wkr_hooks = OrderedHash_.new_bry_();
+	public Ordered_hash Wkr_hooks() {return wkr_hooks;} private Ordered_hash wkr_hooks = Ordered_hash_.new_bry_();
 	public void Wkr_bgn(Xob_bldr bldr) {
 		this.Init_dump(this.Wkr_key(), wiki.Tdb_fsys_mgr().Site_dir().GenSubDir(Xotdb_dir_info_.Name_category));
 		Bry_bfr tmp_bfr = bldr.App().Utl__bfr_mkr().Get_b512();
@@ -66,9 +66,9 @@ public abstract class Xob_ctg_v1_base extends Xob_itm_dump_base implements Xobd_
 		}
 	}
 	@gplx.Virtual public void Log(byte err_tid, Xowd_page_itm page, byte[] src, int ctg_bgn) {
-		String title = String_.new_utf8_(page.Ttl_full_db());
+		String title = String_.new_u8(page.Ttl_full_db());
 		int ctg_end = ctg_bgn + 40; if (ctg_end > src.length) ctg_end = src.length;
-		String ctg_str = String_.Replace(String_.new_utf8_(src, ctg_bgn, ctg_end), "\n", "");
+		String ctg_str = String_.Replace(String_.new_u8(src, ctg_bgn, ctg_end), "\n", "");
 		String err = "";
 		switch (err_tid) {
 			case Tid_eos:		err = "eos"; break;
@@ -84,19 +84,19 @@ public abstract class Xob_ctg_v1_base extends Xob_itm_dump_base implements Xobd_
 	public static void Process_ctg_row(Gfo_fld_wtr fld_wtr, int dump_fil_len, Io_url_gen dump_url_gen, int page_id, byte[] src, int src_len, int bgn, int end) {
 		int len = end - bgn;
 		Bry_bfr dump_bfr = fld_wtr.Bfr();
-		if (dump_bfr.Len() + row_fixed_len + len > dump_fil_len) Io_mgr._.AppendFilBfr(dump_url_gen.Nxt_url(), dump_bfr);
+		if (dump_bfr.Len() + row_fixed_len + len > dump_fil_len) Io_mgr.I.AppendFilBfr(dump_url_gen.Nxt_url(), dump_bfr);
 		byte[] ttl = Bry_.Mid(src, bgn, end);
 		Bry_.Replace_reuse(ttl, Byte_ascii.Space, Byte_ascii.Underline);
 		fld_wtr.Write_bry_escape_fld(ttl).Write_int_base85_len5_row(page_id);
 	}
 	public void Wkr_end() {
 		this.Term_dump(this.Make_sort_cmd());
-		if (delete_temp) Io_mgr._.DeleteDirDeep(temp_dir);
+		if (delete_temp) Io_mgr.I.DeleteDirDeep(temp_dir);
 	}
 	private Gfo_fld_wtr fld_wtr = Gfo_fld_wtr.xowa_();
 	Btrie_fast_mgr trie = Btrie_fast_mgr.cs_().Add_stub(Tid_brack_end, "]]").Add_stub(Tid_pipe, "|").Add_stub(Tid_nl, "\n").Add_stub(Tid_brack_bgn, "[[");
 	static final int row_fixed_len = 5 + 1 + 1;	// 5=rowId; 1=|; 1=\n
-	ListAdp category_list = ListAdp_.new_(); Int_obj_ref cur_pos = Int_obj_ref.zero_();
+	List_adp category_list = List_adp_.new_(); Int_obj_ref cur_pos = Int_obj_ref.zero_();
 	static final byte Tid_eos = 0, Tid_brack_end = 1, Tid_pipe = 2, Tid_nl = 3, Tid_brack_bgn = 4;
 	private static int Move_fwd_while_space(byte[] src, int src_len, int pos) {
 		while (true) {

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.gui.menus; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 import gplx.xowa.gui.menus.dom.*;
 public class Xog_popup_mnu_mgr implements GfoInvkAble {
-	private OrderedHash hash = OrderedHash_.new_();
+	private Ordered_hash hash = Ordered_hash_.new_();
 	private Xoa_gui_mgr gui_mgr;
 	private Xog_mnu_grp[] mnus = new Xog_mnu_grp[6];
 	public Xog_popup_mnu_mgr(Xoa_gui_mgr gui_mgr, Xog_menu_mgr menu_mgr) {
@@ -45,7 +45,7 @@ public class Xog_popup_mnu_mgr implements GfoInvkAble {
 			Xog_mnu_base.Update_grp_by_lang(gui_mgr.Menu_mgr().Menu_bldr(), lang, mnus[i]);
 	}
 	public Xog_mnu_grp Get_or_new(String key) {			
-		Xog_mnu_grp rv = (Xog_mnu_grp)hash.Fetch(key);
+		Xog_mnu_grp rv = (Xog_mnu_grp)hash.Get_by(key);
 		if (rv == null) {
 			rv = new Xog_mnu_grp(gui_mgr, true, key);
 			hash.Add(key, rv);

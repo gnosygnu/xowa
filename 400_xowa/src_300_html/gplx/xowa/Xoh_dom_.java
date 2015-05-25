@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.html.*;
 public class Xoh_dom_ {
-	private static final byte[] Lt_bry = Bry_.new_ascii_("<"), Space_bry = Bry_.new_ascii_(" ");
+	private static final byte[] Lt_bry = Bry_.new_a7("<"), Space_bry = Bry_.new_a7(" ");
 	public static byte[] Query_val_by_where(Xoh_find rv, byte[] src, byte[] where_nde, byte[] where_key, byte[] where_val, byte[] query_key, int bgn) {
 		int src_len = src.length;		
 		where_nde = Bry_.Add(Lt_bry, where_nde, Space_bry);
@@ -64,14 +64,8 @@ public class Xoh_dom_ {
 		rv.Set_all(tag_bgn, tag_end, key_bgn, key_end, val_bgn, val_end);
 		return true;
 	}
-	public static String Title_by_href(Url_encoder encoder, Bry_bfr bfr, byte[] href_dec, byte[] html_src) {
-		int slash_pos = Bry_finder.Find_bwd(href_dec, Byte_ascii.Slash);
-		encoder.Encode(bfr, href_dec, slash_pos + 1, href_dec.length);
-		byte[] name_enc = bfr.Xto_bry_and_clear();
-		bfr.Add_mid(href_dec, 0, slash_pos + Int_.Const_dlm_len);	// include trailing slash			
-		bfr.Add(name_enc);
-		byte[] href_enc = bfr.Xto_bry_and_clear();			
-		byte[] xowa_title = Xoh_dom_.Query_val_by_where(dom_find, html_src, Html_tag_.A_name_bry, Html_atr_.Href_bry, href_enc, gplx.xowa.html.Xoh_consts.Atr_xowa_title_bry, 0);
-		return String_.new_utf8_(xowa_title);
-	}	static final Xoh_find dom_find = new Xoh_find(); 
+	public static String Title_by_href(byte[] href, byte[] html_src) {
+		byte[] xowa_title = Xoh_dom_.Query_val_by_where(dom_find, html_src, Html_tag_.A_name_bry, Html_atr_.Href_bry, href, gplx.xowa.html.Xoh_consts.Atr_xowa_title_bry, 0);
+		return String_.new_u8(xowa_title);
+	}	private static final Xoh_find dom_find = new Xoh_find();
 }

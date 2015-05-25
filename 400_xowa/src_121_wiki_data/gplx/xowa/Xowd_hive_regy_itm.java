@@ -24,7 +24,7 @@ public class Xowd_hive_regy_itm {// csv file with the format of "idx|bgn|end|cou
 	public byte[]	End() {return end;} public Xowd_hive_regy_itm End_(byte[] v) {end = v; return this;} private byte[] end;
 	public int		Count() {return count;} public Xowd_hive_regy_itm Count_(int v) {this.count = v; return this;} private int count;
 	public static Xowd_hive_regy_itm[] parse_fil_(ByteAry_fil utl) {
-		ListAdp rv = utl.Itms();
+		List_adp rv = utl.Itms();
 		byte[] ary = utl.Raw_bry();
 		int ary_len = utl.Raw_len(); if (ary_len == 0) return Xowd_hive_regy_itm.Ary_empty; //throw Err_mgr._.fmt_("xowa.wiki.data", "title_registry_file_not_found", "title_registry file not found: ~{0}", utl.Fil().Xto_api());
 		Int_obj_ref pos = Int_obj_ref.zero_();

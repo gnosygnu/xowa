@@ -19,7 +19,7 @@ package gplx.xowa.xtns.pfuncs.ttls; import gplx.*; import gplx.xowa.*; import gp
 import gplx.core.primitives.*; import gplx.core.btries.*;
 public class Pfunc_rel2abs extends Pf_func_base {
 	@Override public boolean Func_require_colon_arg() {return true;}
-	private static final byte[] Ary_dot_slash = Bry_.new_ascii_("./"), Ary_dot_dot = Bry_.new_ascii_(".."), Ary_dot_dot_slash = Bry_.new_ascii_("../");
+	private static final byte[] Ary_dot_slash = Bry_.new_a7("./"), Ary_dot_dot = Bry_.new_a7(".."), Ary_dot_dot_slash = Bry_.new_a7("../");
 	private static void qry_bgns_with_init() {
 		qry_bgns_with = Btrie_fast_mgr.cs_();
 		qry_bgns_with.Add(Byte_ascii.Slash, Int_obj_ref.new_(Id_slash));

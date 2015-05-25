@@ -29,7 +29,7 @@ public class Ref_itm_mgr_cfg_tst {
 class Ref_itm_mgr_cfg_fxt {
 	public void Clear() {}
 	public void Test_Ref_backlabels_xby_bry(String raw, String... expd) {
-		byte[][] actl = Ref_html_wtr_cfg.Ref_backlabels_xby_bry(Bry_.new_utf8_(raw));
+		byte[][] actl = Ref_html_wtr_cfg.Ref_backlabels_xby_bry(Bry_.new_u8(raw));
 		Tfds.Eq_ary_str(expd, String_.Ary(actl));
 	}
 }

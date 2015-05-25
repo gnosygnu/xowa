@@ -25,7 +25,7 @@ public class Btrie_slim_mgr_tst {
 		run_Add("a"		,	1);
 		run_Add("abc"	,	123);
 	}
-	@Test  public void Fetch() {
+	@Test  public void Get_by() {
 		ini_setup1();
 		tst_MatchAtCur("a"		, 1);
 		tst_MatchAtCur("abc"	, 123);
@@ -65,27 +65,27 @@ public class Btrie_slim_mgr_tst {
 	}
 	@Test  public void Del() {
 		ini_setup1();
-		trie.Del(Bry_.new_ascii_("a"));	// delete "a"; "abc" still remains;
+		trie.Del(Bry_.new_a7("a"));	// delete "a"; "abc" still remains;
 		tst_MatchAtCur("a"		, null);
 		tst_MatchAtCur("abc"	, 123);
 
-		trie.Del(Bry_.new_ascii_("abc"));
+		trie.Del(Bry_.new_a7("abc"));
 		tst_MatchAtCur("abc"	, null);
 	}
 
-	private void run_Add(String k, int val) {trie.Add_obj(Bry_.new_ascii_(k), val);}
+	private void run_Add(String k, int val) {trie.Add_obj(Bry_.new_a7(k), val);}
 	private void tst_Match(String srcStr, byte b, int bgn_pos, int expd) {
-		byte[] src = Bry_.new_ascii_(srcStr);
+		byte[] src = Bry_.new_a7(srcStr);
 		Object actl = trie.Match_bgn_w_byte(b, src, bgn_pos, src.length);
 		Tfds.Eq(expd, actl);
 	}
 	private void tst_MatchAtCur(String srcStr, Object expd) {
-		byte[] src = Bry_.new_ascii_(srcStr);
+		byte[] src = Bry_.new_a7(srcStr);
 		Object actl = trie.Match_bgn_w_byte(src[0], src, 0, src.length);
 		Tfds.Eq(expd, actl);
 	}
 	private void tst_MatchAtCurExact(String srcStr, Object expd) {
-		byte[] src = Bry_.new_ascii_(srcStr);
+		byte[] src = Bry_.new_a7(srcStr);
 		Object actl = trie.Match_exact(src, 0, src.length);
 		Tfds.Eq(expd, actl);
 	}

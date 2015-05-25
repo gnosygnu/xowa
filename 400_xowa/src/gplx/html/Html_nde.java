@@ -39,7 +39,7 @@ public class Html_nde {
 	public int Name_bgn() {return name_bgn;} public Html_nde Name_bgn_(int v) {name_bgn = v; return this;} private int name_bgn;
 	public int Name_end() {return name_end;} public Html_nde Name_end_(int v) {name_end = v; return this;} private int name_end;
 	public void Clear() {tag_lhs_bgn = tag_rhs_bgn = -1;}
-	public String Atrs_val_by_key_str(String find_key_str) {return String_.new_utf8_(Atrs_val_by_key_bry(Bry_.new_utf8_(find_key_str)));}
+	public String Atrs_val_by_key_str(String find_key_str) {return String_.new_u8(Atrs_val_by_key_bry(Bry_.new_u8(find_key_str)));}
 	public byte[] Atrs_val_by_key_bry(byte[] find_key_bry) {
 		for (int i = 0; i < atrs_len; i ++) {
 			int atrs_idx = i * 5;

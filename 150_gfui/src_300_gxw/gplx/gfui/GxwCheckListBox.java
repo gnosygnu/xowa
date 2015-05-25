@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfui; import gplx.*;
 public interface GxwCheckListBox extends GxwElem {
 	int Items_count();
-	ListAdp Items_getAll();
-	ListAdp Items_getChecked();
+	List_adp Items_getAll();
+	List_adp Items_getChecked();
 
 	void Items_add(Object obj, boolean v);
 	void Items_reverse();

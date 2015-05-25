@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
 import gplx.xowa.specials.search.parsers_old.*;
 class Xows_db_cache {	// one cache per search term; EX: "Earth* AND (History OR Future) AND -"middle earth"" is one cache
-	private final OrderedHash hash = OrderedHash_.new_bry_();
+	private final Ordered_hash hash = Ordered_hash_.new_bry_();
 	public Xows_db_word[]	Words()		{return words;}		private Xows_db_word[] words;		// words in cache; EX: earth, history, future but not "middle earth" (since not'ed)
 	public Xows_db_matcher	Matcher()	{return matcher;}	private Xows_db_matcher matcher;	// criteria
 	public boolean Done() {return done;} public void Done_y_() {done = true;} private boolean done;	// marks if db search is done
@@ -29,14 +29,14 @@ class Xows_db_cache {	// one cache per search term; EX: "Earth* AND (History OR 
 		this.words		= new Xows_db_matcher_bldr().Gather_words_for_db(cxl, matcher, word_tbl);
 	}
 	public boolean Has(byte[] key) {return hash.Has(key);}
-	public Xows_db_row Get_at(int i) {return (Xows_db_row)hash.FetchAt(i);}
+	public Xows_db_row Get_at(int i) {return (Xows_db_row)hash.Get_at(i);}
 	public void Add(Xows_db_row row) {hash.Add(row.Page_ttl().Full_db(), row);}
 	public void Get_between(Xows_ui_rslt search_ui, int bgn, int end) {
 		if (bgn >= hash.Count()) return;	// requested start not in cache; exit
 		for (int i = bgn; i < end; ++i) {
 			if (i >= hash.Count()) break;
-			search_ui.Add((Xows_db_row)hash.FetchAt(i));
+			search_ui.Add((Xows_db_row)hash.Get_at(i));
 		}
 	}
-	public void Sort() {hash.SortBy(Xows_db_row_sorter.Page_len_dsc);}
+	public void Sort() {hash.Sort_by(Xows_db_row_sorter.Page_len_dsc);}
 }

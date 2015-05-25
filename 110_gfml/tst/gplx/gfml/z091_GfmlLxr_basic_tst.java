@@ -54,14 +54,14 @@ public class z091_GfmlLxr_basic_tst {
 	}
 	GfmlTkn tst_Fetch(String raw, String... expd) {
 		CharStream stream = CharStream.pos0_(raw);
-		ListAdp list = ListAdp_.new_();
+		List_adp list = List_adp_.new_();
 		GfmlTkn tkn = null;
 		while (true) {
 			tkn = rootLxr.MakeTkn(stream, 0);
 			if (tkn == GfmlTkn_.EndOfStream) break;
 			list.Add(tkn.Raw());
 		}
-		String[] actl = (String[])list.Xto_ary(String.class);
+		String[] actl = (String[])list.To_ary(String.class);
 		Tfds.Eq_ary(expd, actl);
 		return tkn;
 	}

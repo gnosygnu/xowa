@@ -47,7 +47,7 @@ public class Io_stream_rdr_ {
 		}
 		finally {rdr.Rls();}
 	}
-	public static String Load_all_as_str(Io_stream_rdr rdr) {return String_.new_utf8_(Load_all_as_bry(rdr));}
+	public static String Load_all_as_str(Io_stream_rdr rdr) {return String_.new_u8(Load_all_as_bry(rdr));}
 	public static byte[] Load_all_as_bry(Io_stream_rdr rdr) {return Load_all_as_bry(Bry_bfr.new_(), rdr);}
 	public static byte[] Load_all_as_bry(Bry_bfr rv, Io_stream_rdr rdr) {
 		Load_all_to_bfr(rv, rdr);
@@ -63,8 +63,8 @@ public class Io_stream_rdr_ {
 			}
 		} finally {rdr.Rls();}
 	}
-	public static final Io_stream_rdr Null = new Io_stream_rdr_null();
-	public static Io_stream_rdr mem_(String v) {return mem_(Bry_.new_utf8_(v));}
+	public static final Io_stream_rdr Null = new Io_stream_rdr_noop();
+	public static Io_stream_rdr mem_(String v) {return mem_(Bry_.new_u8(v));}
 	public static Io_stream_rdr mem_(byte[] v) {
 		Io_stream_rdr rv = new Io_stream_rdr_adp(Stream_new_mem(v));
 		rv.Len_(v.length);
@@ -109,10 +109,11 @@ public class Io_stream_rdr_ {
 	public static final int Read_done = -1;
 	public static final int Read_done_compare = 1;
 }
-class Io_stream_rdr_null implements Io_stream_rdr {
+class Io_stream_rdr_noop implements Io_stream_rdr {
 	public Object Under() {return null;}
 	public byte Tid() {return Io_stream_.Tid_null;}
-	public Io_url Url() {return Io_url_.Null;} public Io_stream_rdr Url_(Io_url v) {return this;}
+	public boolean Exists() {return false;}
+	public Io_url Url() {return Io_url_.Empty;} public Io_stream_rdr Url_(Io_url v) {return this;}
 	public long Len() {return Io_mgr.Len_null;} public Io_stream_rdr Len_(long v) {return this;}
 	public void Open_mem(byte[] v) {}
 	public Io_stream_rdr Open() {return this;}
@@ -125,6 +126,7 @@ class Io_stream_rdr_adp implements Io_stream_rdr {
 	public Io_stream_rdr_adp(java.io.InputStream strm) {this.strm = strm;} 
 	public Object Under() {return strm;}
 	public byte Tid() {return Io_stream_.Tid_raw;}
+	public boolean Exists() {return len > 0;}
 	public Io_url Url() {return url;} public Io_stream_rdr Url_(Io_url v) {this.url = v; return this;} private Io_url url;
 	public long Len() {return len;} public Io_stream_rdr Len_(long v) {len = v; return this;} private long len = Io_mgr.Len_null;
 	public void Open_mem(byte[] v) {}
@@ -144,6 +146,7 @@ class Io_stream_rdr_adp implements Io_stream_rdr {
 }
 abstract class Io_stream_rdr_base implements Io_stream_rdr {	
 	public abstract byte Tid();
+	public boolean Exists() {return this.Len() > 0;}
 	public Object Under() {return stream;} public Io_stream_rdr Under_(java.io.InputStream v) {this.stream = v; return this;} protected java.io.InputStream stream;
 	public Io_url Url() {return url;} public Io_stream_rdr Url_(Io_url v) {this.url = v; return this;} protected Io_url url;
 	public long Len() {return len;} public Io_stream_rdr Len_(long v) {len = v; return this;} private long len = Io_mgr.Len_null;
@@ -175,11 +178,11 @@ class Io_stream_rdr_file extends Io_stream_rdr_base {
 	@Override public byte Tid() {return Io_stream_.Tid_raw;}
 	public Io_stream_rdr Open() {
 		try {
-			if (!Io_mgr._.Exists(url))
+			if (!Io_mgr.I.Exists(url))
 				stream = Wrap_stream(new java.io.ByteArrayInputStream(Bry_.Empty));
 			else {
 				if (url.Info().EngineKey() == gplx.ios.IoEngine_.MemKey)
-					stream = Wrap_stream(new java.io.ByteArrayInputStream(Io_mgr._.LoadFilBry(url.Xto_api())));
+					stream = Wrap_stream(new java.io.ByteArrayInputStream(Io_mgr.I.LoadFilBry(url.Xto_api())));
 				else
 					stream = Wrap_stream(new java.io.FileInputStream(url.Xto_api()));
 			}
@@ -191,6 +194,7 @@ class Io_stream_rdr_file extends Io_stream_rdr_base {
 }
 class Io_stream_rdr_zip implements Io_stream_rdr {
 	@Override public byte Tid() {return Io_stream_.Tid_zip;}
+	public boolean Exists() {return this.Len() > 0;}
 	public Io_url Url() {return url;} public Io_stream_rdr Url_(Io_url v) {this.url = v; return this;} Io_url url;
 	public long Len() {return len;} public Io_stream_rdr Len_(long v) {len = v; return this;} private long len = Io_mgr.Len_null;
 	public Object Under() {return zip_stream;} private java.util.zip.ZipInputStream zip_stream;

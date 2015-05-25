@@ -25,12 +25,12 @@ public class Xoh_lnke_wtr {
 		if (!hctx.Mode_is_alt()) {		// write href, unless mode is alt
 			if (hctx.Mode_is_hdump()) {
 				if (lnke.Lnke_typ() == Xop_lnke_tkn.Lnke_typ_text)
-					bfr.Add_str("<a xtid='a_lnke_txt' href=\"");
+					bfr.Add_str_a7("<a xtid='a_lnke_txt' href=\"");
 				else {
 					if (lnke.Subs_len() == 0)
-						bfr.Add_str("<a xtid='a_lnke_brk_n' href=\"");
+						bfr.Add_str_a7("<a xtid='a_lnke_brk_n' href=\"");
 					else
-						bfr.Add_str("<a xtid='a_lnke_brk_y' href=\"");
+						bfr.Add_str_a7("<a xtid='a_lnke_brk_y' href=\"");
 				}
 			}
 			else
@@ -89,7 +89,7 @@ public class Xoh_lnke_wtr {
 		}
 	}
 	private static final byte[]
-	  A_lhs_end_external	= Bry_.new_ascii_("\" class=\"external text\" rel=\"nofollow\">")
-	, A_lhs_end_internal	= Bry_.new_ascii_("\">")
+	  A_lhs_end_external	= Bry_.new_a7("\" class=\"external text\" rel=\"nofollow\">")
+	, A_lhs_end_internal	= Bry_.new_a7("\">")
 	;
 }

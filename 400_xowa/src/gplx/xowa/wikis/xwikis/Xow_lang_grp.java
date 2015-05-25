@@ -22,10 +22,10 @@ public class Xow_lang_grp implements GfoInvkAble {
 	public byte[] Name() {return name;} public Xow_lang_grp Name_(byte[] v) {name = v; return this;} private byte[] name;
 	public int Sort_idx() {return sort_idx;} public Xow_lang_grp Sort_idx_(int v) {sort_idx = v; return this;} private int sort_idx = 0;
 	public byte Sort_mode() {return sort_mode;} public Xow_lang_grp Sort_mode_(byte v) {sort_mode = v; return this;} private byte sort_mode = Sort_mode_page_name;
-	public Xow_lang_itm[] Itms() {if (itms == null) itms = (Xow_lang_itm[])itm_list.Xto_ary(Xow_lang_itm.class); return itms;} private Xow_lang_itm[] itms;
+	public Xow_lang_itm[] Itms() {if (itms == null) itms = (Xow_lang_itm[])itm_list.To_ary(Xow_lang_itm.class); return itms;} private Xow_lang_itm[] itms;
 	public int Itms_len() {return this.Itms().length;}
 	public Xow_lang_itm Itms_get(int i) {return this.Itms()[i];}
-	public void Itms_add(Xow_lang_itm itm) {itms = null; itm_list.Add(itm);} ListAdp itm_list = ListAdp_.new_();
+	public void Itms_add(Xow_lang_itm itm) {itms = null; itm_list.Add(itm);} List_adp itm_list = List_adp_.new_();
 	public void Itms_active_len_add_one_() {++itms_active_len;}
 	public int Itms_active_len() {return itms_active_len;} private int itms_active_len;
 	public void Itms_reset() {
@@ -36,8 +36,8 @@ public class Xow_lang_grp implements GfoInvkAble {
 		itms_active_len = 0;
 	}
 	public Bry_fmtr Html_all() {return html_all;} Bry_fmtr html_all; public Xow_lang_grp Html_all_(String s) {html_all = Bry_fmtr.new_(s, "all_name", "grps"); return this;}
-	public byte[] Html_grp_bgn() {return html_grp_bgn;} private byte[] html_grp_bgn = Bry_.new_ascii_("\n    <tr>");
-	public byte[] Html_grp_end() {return html_grp_end;} private byte[] html_grp_end = Bry_.new_ascii_("\n    </tr>");
+	public byte[] Html_grp_bgn() {return html_grp_bgn;} private byte[] html_grp_bgn = Bry_.new_a7("\n    <tr>");
+	public byte[] Html_grp_end() {return html_grp_end;} private byte[] html_grp_end = Bry_.new_a7("\n    </tr>");
 	public Bry_fmtr Html_itm() {return html_itm;} Bry_fmtr html_itm; public Xow_lang_grp Html_itm_(String s) {html_itm = Bry_fmtr.new_(s, "lang_code", "lang_domain", "lang_name", "lang_href", "pagename_translation", "page_badge"); return this;}
 	public void Html_bld(Bry_bfr bfr, Xowe_wiki wiki) {
 		Xow_lang_itm[] itms_ary = this.Itms();

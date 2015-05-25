@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.flds; import gplx.*; import gplx.core.*;
 public class Gfo_fld_rdr extends Gfo_fld_base {
-	private Bry_bfr bfr = Bry_bfr.new_(); private static final byte[] Bry_nil = Bry_.new_ascii_("\\0");
+	private Bry_bfr bfr = Bry_bfr.new_(); private static final byte[] Bry_nil = Bry_.new_a7("\\0");
 	public byte[] Data() {return data;} public Gfo_fld_rdr Data_(byte[] v) {data = v; data_len = v.length; pos = 0; return this;} private byte[] data; int data_len;
 	public int Pos() {return pos;} public Gfo_fld_rdr Pos_(int v) {pos = v; return this;} private int pos;
 	public int Fld_bgn() {return fld_bgn;} public Gfo_fld_rdr Fld_bgn_(int v) {fld_bgn = v; return this;} private int fld_bgn;
@@ -26,7 +26,7 @@ public class Gfo_fld_rdr extends Gfo_fld_base {
 	public int Row_idx() {return row_idx;} private int row_idx;
 	public void Ini(byte[] data, int pos) {this.data = data; this.data_len = data.length; this.pos = pos;}
 
-	public String Read_str_simple()	{Move_next_simple(); return String_.new_utf8_(data, fld_bgn, fld_end);}
+	public String Read_str_simple()	{Move_next_simple(); return String_.new_u8(data, fld_bgn, fld_end);}
 	public byte[] Read_bry_simple() {Move_next_simple(); return Bry_.Mid(data, fld_bgn, fld_end);}	// was Mid_by_len???; 20120915
 	public int Read_int_base85_lenN(int len)	{fld_bgn = pos; fld_end = pos + len - 1	; pos = pos + len + 1	; return Base85_utl.XtoIntByAry(data, fld_bgn, fld_end);}
 	public int Read_int_base85_len5()			{fld_bgn = pos; fld_end = pos + 4		; pos = pos + 6			; return Base85_utl.XtoIntByAry(data, fld_bgn, fld_end);}
@@ -54,7 +54,7 @@ public class Gfo_fld_rdr extends Gfo_fld_base {
 		f += (data[fld_bgn + 16] - Byte_ascii.Num_0) *  100;
 		f += (data[fld_bgn + 17] - Byte_ascii.Num_0) *   10;
 		f += (data[fld_bgn + 18] - Byte_ascii.Num_0);
-		if (data[fld_bgn + 19] != fld_dlm) throw Err_.new_("csv date is invalid").Add("txt", String_.new_utf8_len_safe_(data, fld_bgn, 20));
+		if (data[fld_bgn + 19] != fld_dlm) throw Err_.new_("csv date is invalid").Add("txt", String_.new_u8_by_len(data, fld_bgn, 20));
 		fld_end = pos + 20;
 		pos = fld_end + 1; ++fld_idx;
 		return DateAdp_.new_(y, M, d, H, m, s, f);
@@ -80,7 +80,7 @@ public class Gfo_fld_rdr extends Gfo_fld_base {
 		}
 		throw Err_.new_("fld_dlm failed").Add("fld_dlm", (char)fld_dlm).Add("bgn", fld_bgn);
 	}
-	public String Read_str_escape()	{Move_next_escaped(bfr); return String_.new_utf8_(bfr.Xto_bry_and_clear());}
+	public String Read_str_escape()	{Move_next_escaped(bfr); return String_.new_u8(bfr.Xto_bry_and_clear());}
 	public byte[] Read_bry_escape()	{Move_next_escaped(bfr); return bfr.Xto_bry_and_clear();}
 	public void Move_1() {++pos;}
 	public void Move_next_escaped() {Move_next_escaped(bfr); bfr.Clear();}

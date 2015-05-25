@@ -49,9 +49,9 @@ public class Xoapi_search implements GfoInvkAble, GfoEvMgrOwner {
 		else if	(ctx.Match(k, Invk_results_per_page_)) 						results_per_page = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk_async_db)) 								return Yn.Xto_str(async_db);
 		else if	(ctx.Match(k, Invk_async_db_)) 								async_db = m.ReadYn("v");
-		else if	(ctx.Match(k, Invk_multi_wikis)) 							return String_.new_utf8_(multi_wikis_bry);
+		else if	(ctx.Match(k, Invk_multi_wikis)) 							return String_.new_u8(multi_wikis_bry);
 		else if	(ctx.Match(k, Invk_multi_wikis_)) 							Multi_wikis_bry_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_multi_sorts)) 							return String_.new_utf8_(multi_sorts_bry);
+		else if	(ctx.Match(k, Invk_multi_sorts)) 							return String_.new_u8(multi_sorts_bry);
 		else if	(ctx.Match(k, Invk_multi_sorts_)) 							Multi_sorts_bry_(m.ReadBry("v"));
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
@@ -67,7 +67,7 @@ public class Xoapi_search implements GfoInvkAble, GfoEvMgrOwner {
 	, Evt_multi_sorts_changed = "multi_sorts_changed"
 	;
 	public static final byte[]
-	  Dflt_multi_wikis_bry = Bry_.new_ascii_("<any>|<self>")
-	, Dflt_multi_sorts_bry = Bry_.new_ascii_("<any>|<self>,*.wikipedia,*.wikivoyage,*.wiktionary,*.wikisource,*.wikiquote,*.wikibooks,*.wikiversity,*.wikinews")
+	  Dflt_multi_wikis_bry = Bry_.new_a7("<any>|<self>")
+	, Dflt_multi_sorts_bry = Bry_.new_a7("<any>|<self>,*.wikipedia,*.wikivoyage,*.wiktionary,*.wikisource,*.wikiquote,*.wikibooks,*.wikiversity,*.wikinews")
 	;
 }

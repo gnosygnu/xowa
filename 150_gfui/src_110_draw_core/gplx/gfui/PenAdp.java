@@ -41,13 +41,13 @@ public class PenAdp implements GfoInvkAble {
 }
 class PenAdpCache {
 		public BasicStroke Fetch(float width) {
-		Object rv = hash.Fetch(width);
+		Object rv = hash.Get_by(width);
 		if (rv == null) {
 			rv = new BasicStroke(width);
 			hash.Add(width, rv);
 		}
 		return (BasicStroke)rv;
 	}
-		HashAdp hash = HashAdp_.new_();
+		Hash_adp hash = Hash_adp_.new_();
 	public static final PenAdpCache _ = new PenAdpCache(); PenAdpCache() {}
 }

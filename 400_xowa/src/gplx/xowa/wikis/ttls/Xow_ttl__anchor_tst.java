@@ -22,7 +22,7 @@ public class Xow_ttl__anchor_tst {
 	@Test   public void Anch_y()					{fxt.Init_ttl("a#b")			.Expd_full_txt("A").Expd_page_txt("A").Expd_anch_txt("b").Test();}
 	@Test   public void Anch_only()					{fxt.Init_ttl("#a")				.Expd_full_txt("").Expd_page_txt("").Expd_anch_txt("a").Test();}
 	@Test   public void Anchor_fails() {	// PURPOSE: :#batch:Main Page causes ttl to fail b/c # is treated as anchor; DATE:2013-01-02
-		fxt.Wiki().Xwiki_mgr().Add_full(Bry_.new_ascii_("#batch"), Bry_.new_ascii_("none"));
+		fxt.Wiki().Xwiki_mgr().Add_full(Bry_.new_a7("#batch"), Bry_.new_a7("none"));
 		fxt.Init_ttl(":#batch:Main Page").Expd_full_txt("Main Page").Test();
 	}
 	@Test   public void Anchor_angles() {// PURPOSE: angles in anchor should be encoded; DATE: 2013-01-23

@@ -62,16 +62,16 @@ public class Bry_finder_tst {
 	}
 }
 class Bry_finder_fxt {
-	public void Test_Find_fwd(String src, String lkp, int bgn, int expd) {Tfds.Eq(expd, Bry_finder.Find_fwd(Bry_.new_utf8_(src), Bry_.new_utf8_(lkp), bgn));}
-	public void Test_Find_bwd(String src, String lkp, int bgn, int expd) {Tfds.Eq(expd, Bry_finder.Find_bwd(Bry_.new_utf8_(src), Bry_.new_utf8_(lkp), bgn));}
-	public void Test_Find_bwd_1st_ws_tst(String src, int pos, int expd) {Tfds.Eq(expd, Bry_finder.Find_bwd_last_ws(Bry_.new_ascii_(src), pos));}
+	public void Test_Find_fwd(String src, String lkp, int bgn, int expd) {Tfds.Eq(expd, Bry_finder.Find_fwd(Bry_.new_u8(src), Bry_.new_u8(lkp), bgn));}
+	public void Test_Find_bwd(String src, String lkp, int bgn, int expd) {Tfds.Eq(expd, Bry_finder.Find_bwd(Bry_.new_u8(src), Bry_.new_u8(lkp), bgn));}
+	public void Test_Find_bwd_1st_ws_tst(String src, int pos, int expd) {Tfds.Eq(expd, Bry_finder.Find_bwd_last_ws(Bry_.new_a7(src), pos));}
 	public void Test_Trim_bwd_space_tab(String raw_str, int expd) {
-		byte[] raw_bry = Bry_.new_utf8_(raw_str);
+		byte[] raw_bry = Bry_.new_u8(raw_str);
 		int actl = Bry_finder.Trim_bwd_space_tab(raw_bry, raw_bry.length, 0);
 		Tfds.Eq(expd, actl, raw_str);
 	}
 	public void Test_Trim_fwd_space_tab(String raw_str, int expd) {
-		byte[] raw_bry = Bry_.new_utf8_(raw_str);
+		byte[] raw_bry = Bry_.new_u8(raw_str);
 		int actl = Bry_finder.Trim_fwd_space_tab(raw_bry, 0, raw_bry.length);
 		Tfds.Eq(expd, actl, raw_str);
 	}

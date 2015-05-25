@@ -23,12 +23,12 @@ public class GfoNdeList_ {
 }
 class GfoNdeList_base implements GfoNdeList {
 	public int Count() {return list.Count();}
-	public GfoNde FetchAt_asGfoNde(int i) {return (GfoNde)list.FetchAt(i);}
+	public GfoNde FetchAt_asGfoNde(int i) {return (GfoNde)list.Get_at(i);}
 	public void Add(GfoNde rcd) {list.Add(rcd);}
 	public void Del(GfoNde rcd) {list.Del(rcd);}
 	public void Clear() {list.Clear();}
-	public void SortBy(ComparerAble comparer) {list.SortBy(comparer);}
-	ListAdp list = ListAdp_.new_();
+	public void Sort_by(ComparerAble comparer) {list.Sort_by(comparer);}
+	List_adp list = List_adp_.new_();
 }
 class GfoNdeList_null implements GfoNdeList {
 	public int Count() {return 0;}
@@ -36,5 +36,5 @@ class GfoNdeList_null implements GfoNdeList {
 	public void Add(GfoNde rcd) {}
 	public void Del(GfoNde rcd) {}
 	public void Clear() {}
-	public void SortBy(ComparerAble comparer) {}
+	public void Sort_by(ComparerAble comparer) {}
 }

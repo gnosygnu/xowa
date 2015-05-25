@@ -38,7 +38,7 @@ public class Xog_menu_mgr implements GfoInvkAble {
 			if (!app.App_type().Uid_is_gui()) return;	// NOTE: do not try to initialize menu if http_server; will fail in headless mode when it tries to load SWT images; DATE:2015-03-27
 			popup_mnu_mgr.Init_by_kit();
 			window_mnu_mgr.Init_by_kit();
-			Lang_changed(app.User().Lang());
+			Lang_changed(app.Usere().Lang());
 		}
 		catch (Exception e) {	// ignore errors while loading custom menus, else fatal error; DATE:2014-07-01
 			app.Usr_dlg().Warn_many("", "", "error while loading menus; err=~{0}", Err_.Message_gplx(e));

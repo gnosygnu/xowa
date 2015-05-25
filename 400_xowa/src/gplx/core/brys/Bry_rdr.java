@@ -85,6 +85,6 @@ public class Bry_rdr {
 	public double Read_double_to_pipe() {return Read_double_to(Byte_ascii.Pipe);}
 	public double Read_double_to(byte to_char) {
 		byte[] double_bry = Read_bry_to(to_char);
-		return Double_.parse_(String_.new_ascii_(double_bry));	// double will never have utf8
+		return Double_.parse_(String_.new_a7(double_bry));	// double will never have utf8
 	}
 }

@@ -25,7 +25,7 @@ public class Xob_page_txt extends Xob_itm_dump_base implements Xobd_wkr, GfoInvk
 		redirect_mgr = wiki.Redirect_mgr(); page_storage_type = wiki.Appe().Setup_mgr().Dump_mgr().Data_storage_format();
 		fsys_mgr = wiki.Tdb_fsys_mgr();			
 		make_dir = fsys_mgr.Ns_dir();
-		if (Io_mgr._.QueryDir_args(make_dir).DirOnly_().ExecAsUrlAry().length > 0) throw bldr.Usr_dlg().Fail_many("xowa.bldr.itm", "dir_empty", "dir_must_be_empty: ~{0}", make_dir.Raw());
+		if (Io_mgr.I.QueryDir_args(make_dir).DirOnly_().ExecAsUrlAry().length > 0) throw bldr.Usr_dlg().Fail_many("xowa.bldr.itm", "dir_empty", "dir_must_be_empty: ~{0}", make_dir.Raw());
 		this.Init_dump(Xob_cmd_keys.Key_tdb_make_page, make_dir);
 		this.data_rpt_typ = stat_mgr.GetOrNew(Xotdb_dir_info_.Tid_page);
 		ttl_wtr_mgr = new Xob_tmp_wtr_mgr(new Xob_tmp_wtr_wkr__ttl(temp_dir, dump_fil_len));			
@@ -46,7 +46,7 @@ public class Xob_page_txt extends Xob_itm_dump_base implements Xobd_wkr, GfoInvk
 		
 		// idx: EX: 00100|aB64|Ttl;
 		Xob_tmp_wtr ttl_wtr = ttl_wtr_mgr.Get_or_new(ns);
-		int file_idx = page_wtr.Fil_idx(), row_idx = page_wtr.Idx_pos() - ListAdp_.LastIdxOffset;
+		int file_idx = page_wtr.Fil_idx(), row_idx = page_wtr.Idx_pos() - List_adp_.LastIdxOffset;
 		page.Text_db_id_(file_idx).Tdb_row_idx_(row_idx);
 		if (ttl_wtr.FlushNeeded(Xotdb_page_itm_.Txt_ttl_len__fixed + ttl_len)) ttl_wtr.Flush(bldr.Usr_dlg());
 		Xotdb_page_itm_.Txt_ttl_save(ttl_wtr.Bfr(), id, file_idx, row_idx, redirect, text_len, ttl_wo_ns);
@@ -56,7 +56,7 @@ public class Xob_page_txt extends Xob_itm_dump_base implements Xobd_wkr, GfoInvk
 		ttl_wtr_mgr.Flush_all(bldr.Usr_dlg());
 		Xobdc_merger.Ns(bldr.Usr_dlg(), ttl_wtr_mgr.Regy(), Xotdb_dir_info_.Name_title, temp_dir, make_dir, sort_mem_len, Io_line_rdr_key_gen_.last_pipe, new Io_sort_cmd_ns(bldr.Usr_dlg()));
 		ttl_wtr_mgr.Rls_all();
-		if (delete_temp) Io_mgr._.DeleteDirDeep(temp_dir);
+		if (delete_temp) Io_mgr.I.DeleteDirDeep(temp_dir);
 	}
 	public void Wkr_print() {bldr.Usr_dlg().Note_many(GRP_KEY, "print", "~{0}", stat_mgr.Print(wiki.Ns_mgr()));}
 	Xob_xdat_file_wtr Page_wtr_get(Xow_ns ns) {

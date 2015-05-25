@@ -30,8 +30,8 @@ public class GfuiCheckListPanel extends GfuiElemBase {
 	}
 	public void Items_clear() {listBox.Items_clear();}
 	public void Items_add(Object item, boolean checkBoxState) {listBox.Items_add(item, checkBoxState);}
-	public ListAdp Items_getAll() {return listBox.Items_getAll();}
-	public ListAdp Items_getChecked() {return listBox.Items_getChecked();}
+	public List_adp Items_getAll() {return listBox.Items_getAll();}
+	public List_adp Items_getChecked() {return listBox.Items_getChecked();}
 	public void SetAllCheckStates(boolean v) {
 		listBox.Items_setAll(v);
 	}

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 class Wdata_fmtr__toc_div implements Bry_fmtr_arg {
-	private final ListAdp itms = ListAdp_.new_(); private final  Wdata_fmtr__toc_itm fmtr_itm = new Wdata_fmtr__toc_itm();
+	private final List_adp itms = List_adp_.new_(); private final  Wdata_fmtr__toc_itm fmtr_itm = new Wdata_fmtr__toc_itm();
 	private byte[] tbl_hdr; 
 	public void Init_by_lang(Wdata_hwtr_msgs msgs)	{this.tbl_hdr = msgs.Toc_tbl_hdr();}
 	public void Init_by_wdoc(Wdata_doc wdoc)		{itms.Clear();}
@@ -25,7 +25,7 @@ class Wdata_fmtr__toc_div implements Bry_fmtr_arg {
 	public void XferAry(Bry_bfr bfr, int idx) {
 		int itms_len = itms.Count();
 		if (itms_len <= gplx.xowa.html.tocs.Xow_hdr_mgr.Toc_min) return;
-		fmtr_itm.Init_by_itm((Wdata_toc_data[])itms.Xto_ary_and_clear(Wdata_toc_data.class));
+		fmtr_itm.Init_by_itm((Wdata_toc_data[])itms.To_ary_and_clear(Wdata_toc_data.class));
 		fmtr.Bld_bfr_many(bfr, tbl_hdr, fmtr_itm);
 	}
 	private final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
@@ -46,7 +46,7 @@ class Wdata_fmtr__toc_itm implements Bry_fmtr_arg {
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			Wdata_toc_data itm = ary[i];
-			fmtr.Bld_bfr_many(bfr, i + ListAdp_.Base1, itm.Href(), itm.Text());
+			fmtr.Bld_bfr_many(bfr, i + List_adp_.Base1, itm.Href(), itm.Text());
 		}
 	}
 	private final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last

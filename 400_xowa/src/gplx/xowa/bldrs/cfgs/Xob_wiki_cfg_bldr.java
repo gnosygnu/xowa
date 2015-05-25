@@ -22,21 +22,21 @@ public class Xob_wiki_cfg_bldr implements GfoInvkAble {
 	public void Exec() {
 		int len = hash.Count();
 		for (int i = 0; i < len; i++) {
-			Xoac_wiki_cfg_bldr_fil fil = (Xoac_wiki_cfg_bldr_fil)hash.FetchAt(i);
+			Xoac_wiki_cfg_bldr_fil fil = (Xoac_wiki_cfg_bldr_fil)hash.Get_at(i);
 			Exec_fil(fil);
 		}
 	}
 	private void Exec_fil(Xoac_wiki_cfg_bldr_fil fil) {
 		String wiki_key = fil.Wiki();
 		Io_url cfg_file = app.Fsys_mgr().Cfg_wiki_core_dir().GenSubFil(wiki_key + ".gfs");
-		String cfg_text = Io_mgr._.LoadFilStr_args(cfg_file).MissingIgnored_().Exec();
+		String cfg_text = Io_mgr.I.LoadFilStr_args(cfg_file).MissingIgnored_().Exec();
 		int len = fil.Itms_count();
 		String_bldr sb = String_bldr_.new_();
 		for (int i = 0; i < len; i++) {
 			Xoac_wiki_cfg_bldr_cmd cmd = fil.Itms_get_at(i);
 			cfg_text = cmd.Exec(sb, wiki_key, cfg_text);
 		}
-		Io_mgr._.SaveFilStr(cfg_file, cfg_text);
+		Io_mgr.I.SaveFilStr(cfg_file, cfg_text);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_get))		 		return Itms_get_or_new(m.ReadStr("v"));
@@ -46,11 +46,11 @@ public class Xob_wiki_cfg_bldr implements GfoInvkAble {
 	}	private static final String Invk_get = "get", Invk_run = "run";
 	public void Clear() {hash.Clear();}
 	public Xoac_wiki_cfg_bldr_fil Itms_get_or_new(String wiki) {
-		Xoac_wiki_cfg_bldr_fil rv = (Xoac_wiki_cfg_bldr_fil)hash.Fetch(wiki);
+		Xoac_wiki_cfg_bldr_fil rv = (Xoac_wiki_cfg_bldr_fil)hash.Get_by(wiki);
 		if (rv == null) {
 			rv = new Xoac_wiki_cfg_bldr_fil(wiki);
 			hash.Add(wiki, rv);
 		}
 		return rv;
-	}	private OrderedHash hash = OrderedHash_.new_();
+	}	private Ordered_hash hash = Ordered_hash_.new_();
 }

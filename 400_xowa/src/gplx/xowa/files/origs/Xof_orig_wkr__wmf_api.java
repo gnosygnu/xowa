@@ -24,18 +24,9 @@ public class Xof_orig_wkr__wmf_api implements Xof_orig_wkr {
 		this.orig_api = orig_api; this.download_wkr = download_wkr; this.repo_mgr = repo_mgr; this.wiki_domain = wiki_domain;
 	}
 	public byte Tid() {return Xof_orig_wkr_.Tid_wmf_api;}
-	public void			Find_by_list(OrderedHash rv, ListAdp itms) {
-		int len = itms.Count();
-		for (int i = 0; i < len; ++i) {
-			Xof_fsdb_itm fsdb = (Xof_fsdb_itm)itms.FetchAt(i);
-			byte[] fsdb_ttl = fsdb.Lnki_ttl();
-			if (rv.Has(fsdb_ttl)) continue;
-			Xof_orig_itm orig = Find_as_itm(fsdb_ttl);
-			if (orig == Xof_orig_itm.Null) continue;
-			rv.Add(fsdb_ttl, orig);
-		}
-	}
-	public Xof_orig_itm Find_as_itm(byte[] ttl) {
+	public void			Find_by_list(Ordered_hash rv, List_adp itms) {Xof_orig_wkr_.Find_by_list(this, rv, itms);}
+	public Xof_orig_itm Find_as_itm(byte[] ttl, int list_idx, int list_len) {
+		Xoa_app_.Usr_dlg().Prog_none("", "", Prog_msg(list_idx, list_len, ttl));
 		boolean found = orig_api.Api_query_size(api_rv, download_wkr, repo_mgr, ttl, Xof_img_size.Null, Xof_img_size.Null);	// pass in null size to look for orig; DATE:2015-02-10
 		if (!found) return Xof_orig_itm.Null;	// ttl not found by api; return
 		byte api_repo = Bry_.Eq(api_rv.Orig_wiki(), wiki_domain) ? Xof_orig_itm.Repo_wiki : Xof_orig_itm.Repo_comm;
@@ -56,5 +47,8 @@ public class Xof_orig_wkr__wmf_api implements Xof_orig_wkr {
 		boolean is_audio = w == 0 && h == 0; // wmf returns back w/h of 0 if audio; non-0 if video; DATE:2013-11-11
 		int actl_ext_id = is_audio ? Xof_ext_.Id_oga : Xof_ext_.Id_ogv;
 		return Xof_ext_.new_by_id_(actl_ext_id);
+	}
+	private static String Prog_msg(int idx, int len, byte[] ttl) {
+		return String_.Format("downloading file {0} of {1}: {2}", idx + List_adp_.Base1, len, ttl);
 	}
 }

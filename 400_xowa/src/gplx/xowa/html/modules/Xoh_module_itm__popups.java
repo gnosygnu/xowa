@@ -35,7 +35,7 @@ public class Xoh_module_itm__popups implements Xoh_module_itm {
 		if (!enabled) return;
 		wtr.Write_js_line(Jquery_init);	// NOTE: must assert that jquery is init'd, else popup.js will not compile after going back / forward; DATE:2014-09-10
 		wtr.Write_js_tail_load_lib(app.Fsys_mgr().Bin_any_dir().GenSubFil_nest("xowa", "html", "res", "src", "xowa", "popups", "popups.js"));
-	}	public static final byte[] Jquery_init = Bry_.new_ascii_("xowa.js.jquery.init();"), Mw_init = Bry_.new_ascii_("xowa.js.mediaWiki.init();");
+	}	public static final byte[] Jquery_init = Bry_.new_a7("xowa.js.jquery.init();"), Mw_init = Bry_.new_a7("xowa.js.mediaWiki.init();");
 	public void Write_js_head_global(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_module_wtr wtr) {
 		if (!enabled) return;
 		Xoapi_popups api_popups = app.Api_root().Html().Modules().Popups();
@@ -49,12 +49,12 @@ public class Xoh_module_itm__popups implements Xoh_module_itm {
 	}
 	private static byte[] Css_url;
 	private static final byte[]
-	  Key_win_show_delay			= Bry_.new_ascii_("popups-win-show_delay")
-	, Key_win_hide_delay			= Bry_.new_ascii_("popups-win-hide_delay")
-	, Key_win_max_w					= Bry_.new_ascii_("popups-win-max_w")
-	, Key_win_max_h					= Bry_.new_ascii_("popups-win-max_h")
-	, Key_win_show_all_max_w		= Bry_.new_ascii_("popups-win-show_all_max_w")
-	, Key_win_bind_focus_blur		= Bry_.new_ascii_("popups-win-bind_focus_blur")
-	, Key_win_bind_hover_area		= Bry_.new_ascii_("popups-win-bind_hover_area")
+	  Key_win_show_delay			= Bry_.new_a7("popups-win-show_delay")
+	, Key_win_hide_delay			= Bry_.new_a7("popups-win-hide_delay")
+	, Key_win_max_w					= Bry_.new_a7("popups-win-max_w")
+	, Key_win_max_h					= Bry_.new_a7("popups-win-max_h")
+	, Key_win_show_all_max_w		= Bry_.new_a7("popups-win-show_all_max_w")
+	, Key_win_bind_focus_blur		= Bry_.new_a7("popups-win-bind_focus_blur")
+	, Key_win_bind_hover_area		= Bry_.new_a7("popups-win-bind_hover_area")
 	;
 }

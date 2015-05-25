@@ -46,7 +46,7 @@ public class Pfunc_pad extends Pf_func_base {
 		}
 		if (!pad_dir_right) bfr.Add(val);
 	}
-	boolean pad_dir_right; static final byte[] Ary_pad_dflt = Bry_.new_ascii_("0");
+	boolean pad_dir_right; static final byte[] Ary_pad_dflt = Bry_.new_a7("0");
 	public Pfunc_pad(int id, boolean pad_dir_right) {this.id = id; this.pad_dir_right = pad_dir_right;}
 	@Override public int Id() {return id;} private int id;
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_pad(id, pad_dir_right).Name_(name);}

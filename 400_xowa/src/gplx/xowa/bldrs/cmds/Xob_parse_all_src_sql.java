@@ -27,7 +27,7 @@ class Xob_dump_src_id {
 		this.page_db_url = db_mgr.Core_data_mgr().Db__core().Url().Raw();
 		return this;
 	}
-	public void Get_pages(ListAdp list, int text_db_idx, int cur_ns, int prv_id) {
+	public void Get_pages(List_adp list, int text_db_idx, int cur_ns, int prv_id) {
 		DataRdr rdr = DataRdr_.Null;
 		int size_len = 0;
 		list.Clear();

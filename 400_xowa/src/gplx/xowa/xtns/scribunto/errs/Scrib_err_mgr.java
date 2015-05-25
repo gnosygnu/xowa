@@ -17,13 +17,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.errs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 class Scrib_err_mgr implements GfoInvkAble {
-	private OrderedHash hash = OrderedHash_.new_bry_();
+	private Ordered_hash hash = Ordered_hash_.new_bry_();
 	private int key_id = 0;
-	private static final byte[] Key_prefix = Bry_.new_ascii_("scrib_err_");
+	private static final byte[] Key_prefix = Bry_.new_a7("scrib_err_");
 	private Scrib_err_cmd Set(byte[] key) {
 		if (key == null) Bry_.Add(Key_prefix, Bry_.XbyInt(key_id++));
 		Scrib_err_cmd rv = new Scrib_err_cmd(key);
-		hash.Add_if_new(key, rv);
+		hash.Add_if_dupe_use_1st(key, rv);
 		return rv;
 	}
 	public void Clear() {
@@ -33,7 +33,7 @@ class Scrib_err_mgr implements GfoInvkAble {
 	public void Process(Scrib_err_data err) {
 		int len = hash.Count();
 		for (int i = 0; i < len; i++) {
-			Scrib_err_cmd itm = (Scrib_err_cmd)hash.FetchAt(i);
+			Scrib_err_cmd itm = (Scrib_err_cmd)hash.Get_at(i);
 			if (itm.Warn_disabled(err)) {
 				// log
 			}

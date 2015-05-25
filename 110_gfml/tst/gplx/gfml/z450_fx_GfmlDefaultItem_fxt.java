@@ -25,9 +25,9 @@ class GfmlDefaultItem_fxt {
 		Tfds.Eq(GfmlFld_mok.XtoRaw(expd.Val()), GfmlFld_mok.XtoRaw(actl.Val()));
 		Tfds.Eq(Val_to_str_or_null(expd.ValPrev()), Val_to_str_or_null(actl.ValPrev()));
 	}
-	@gplx.Internal protected void tst_List(ListAdp list, GfmlDefaultItem... expdAry) {
+	@gplx.Internal protected void tst_List(List_adp list, GfmlDefaultItem... expdAry) {
 		for (int i = 0; i < expdAry.length; i++) {
-			GfmlDefaultItem actl = (GfmlDefaultItem)list.FetchAt(i);
+			GfmlDefaultItem actl = (GfmlDefaultItem)list.Get_at(i);
 			GfmlDefaultItem expd = expdAry[i];
 			tst_Item(actl, expd);
 		}

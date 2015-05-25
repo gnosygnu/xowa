@@ -28,9 +28,9 @@ public class Wdata_dict_reference {
 	, Str_snaks_order							= "snaks-order"
 	;
 	public static final byte[]
-	  Bry_hash									= Bry_.new_ascii_(Str_hash)
-	, Bry_snaks									= Bry_.new_ascii_(Str_snaks)
-	, Bry_snaks_order							= Bry_.new_ascii_(Str_snaks_order)
+	  Bry_hash									= Bry_.new_a7(Str_hash)
+	, Bry_snaks									= Bry_.new_a7(Str_snaks)
+	, Bry_snaks_order							= Bry_.new_a7(Str_snaks_order)
 	;
 	public static Hash_adp_bry Dict = Hash_adp_bry.cs_()
 	.Add_bry_byte(Bry_hash						, Tid_hash)

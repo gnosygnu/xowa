@@ -24,11 +24,11 @@ public class Wdata_claim_grp {
 	public String Id_str() {if (id_str == null) id_str = "P" + Int_.Xto_str(id_ref.Val()); return id_str;} private String id_str;
 	public int Len() {return itms.length;} private Wdata_claim_itm_core[] itms;
 	public Wdata_claim_itm_core Get_at(int i) {return itms[i];}
-	public static ListAdp Xto_list(OrderedHash hash) {
+	public static List_adp Xto_list(Ordered_hash hash) {
 		int len = hash.Count();
-		ListAdp rv = ListAdp_.new_();
+		List_adp rv = List_adp_.new_();
 		for (int i = 0; i < len; ++i) {
-			Wdata_claim_grp grp = (Wdata_claim_grp)hash.FetchAt(i);
+			Wdata_claim_grp grp = (Wdata_claim_grp)hash.Get_at(i);
 			int grp_len = grp.Len();
 			for (int j = 0; j < grp_len; ++j)
 				rv.Add(grp.Get_at(j));

@@ -19,7 +19,7 @@ package gplx.json; import gplx.*;
 public class Json_parser {
 	public Json_factory Factory() {return factory;} private Json_factory factory = new Json_factory();
 	private byte[] src; private int src_len, pos; private Number_parser num_parser = new Number_parser();
-	private static final byte[] Bry_bool_rue = Bry_.new_ascii_("rue"), Bry_bool_alse = Bry_.new_ascii_("alse"), Bry_null_ull = Bry_.new_ascii_("ull");
+	private static final byte[] Bry_bool_rue = Bry_.new_a7("rue"), Bry_bool_alse = Bry_.new_a7("alse"), Bry_null_ull = Bry_.new_a7("ull");
 	public Json_doc Parse(byte[] src) {
 		Json_doc doc = new Json_doc();
 		this.src = src; this.src_len = src.length; pos = 0;
@@ -161,7 +161,7 @@ public class Json_parser {
 	}
 	Err err_(byte[] src, int bgn, String fmt, Object... args) {return err_(src, bgn, src.length, fmt, args);}
 	Err err_(byte[] src, int bgn, int src_len, String fmt, Object... args) {
-		String msg = String_.Format(fmt, args) + " " + Int_.Xto_str(bgn) + " " + String_.new_utf8_len_safe_(src, bgn, 20);
+		String msg = String_.Format(fmt, args) + " " + Int_.Xto_str(bgn) + " " + String_.new_u8_by_len(src, bgn, 20);
 		return Err_.new_(msg);
 	}
 }

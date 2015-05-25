@@ -24,7 +24,7 @@ public class Php_parser {
 	byte[] src; int src_len; Php_tkn_wkr tkn_wkr; Php_tkn_factory tkn_factory = new Php_tkn_factory(); Php_ctx ctx = new Php_ctx();
 	Php_parser_interrupt[] parser_interrupts = new Php_parser_interrupt[256]; 
 	public Php_parser() {
-		ListAdp list = ListAdp_.new_();
+		List_adp list = List_adp_.new_();
 		Init_lxr(list, new Php_lxr_declaration());
 		Init_lxr(list, new Php_lxr_ws(Php_tkn_ws.Tid_space));
 		Init_lxr(list, new Php_lxr_ws(Php_tkn_ws.Tid_nl));
@@ -49,14 +49,14 @@ public class Php_parser {
 		Init_lxr(list, new Php_lxr_num());
 		Init_lxr(list, new Php_lxr_quote(Byte_ascii.Apos));
 		Init_lxr(list, new Php_lxr_quote(Byte_ascii.Quote));
-		lxrs = (Php_lxr[])list.Xto_ary(Php_lxr.class);
+		lxrs = (Php_lxr[])list.To_ary(Php_lxr.class);
 		lxrs_len = list.Count();
 	}
-	private void Init_lxr(ListAdp list, Php_lxr lxr) {
+	private void Init_lxr(List_adp list, Php_lxr lxr) {
 		lxr.Lxr_ini(trie, parser_interrupts);
 		list.Add(lxr);
 	}
-	public void Parse_tkns(String src, Php_tkn_wkr tkn_wkr) {Parse_tkns(Bry_.new_utf8_(src), tkn_wkr);}
+	public void Parse_tkns(String src, Php_tkn_wkr tkn_wkr) {Parse_tkns(Bry_.new_u8(src), tkn_wkr);}
 	public void Parse_tkns(byte[] src, Php_tkn_wkr tkn_wkr) {
 		this.src = src; this.src_len = src.length; this.tkn_wkr = tkn_wkr;
 		ctx.Src_(src);

@@ -60,7 +60,7 @@ public class Fsd_bin_tbl implements RlsAble {
 	public boolean Select_to_url(int owner_id, Io_url url) {
 		byte[] rv = Select(owner_id);
 		if (rv == null) return false;
-		Io_mgr._.SaveFilBry(url, rv);
+		Io_mgr.I.SaveFilBry(url, rv);
 		return true;
 	}
 	private byte[] Select(int owner_id) {

@@ -34,7 +34,7 @@ public class Xow_lang_mgr {
 	public void Itms_reg(Xow_xwiki_itm xwiki, Xoac_lang_itm lang) {
 		int lang_id = xwiki.Lang_id();
 		Xoac_lang_grp ini_grp = lang.Grp();
-		Xow_lang_grp grp = (Xow_lang_grp)hash.Fetch(ini_grp.Key_bry());
+		Xow_lang_grp grp = (Xow_lang_grp)hash.Get_by(ini_grp.Key_bry());
 		if (grp == null) {
 			grp = Grps_get_or_new(ini_grp.Key_bry());
 			grp.Name_(ini_grp.Name_bry());
@@ -48,9 +48,9 @@ public class Xow_lang_mgr {
 		grp.Itms_add(itm);
 	}
 	public int Grps_len() {return hash.Count();}
-	public Xow_lang_grp Grps_get_at(int i) {return (Xow_lang_grp)hash.FetchAt(i);}
+	public Xow_lang_grp Grps_get_at(int i) {return (Xow_lang_grp)hash.Get_at(i);}
 	Xow_lang_grp Grps_get_or_new(byte[] key) {
-		Xow_lang_grp rv = (Xow_lang_grp)hash.Fetch(key);
+		Xow_lang_grp rv = (Xow_lang_grp)hash.Get_by(key);
 		if (rv == null) {
 			int id = hash.Count();
 			rv = Xow_lang_grp.dflt_(this, id, key);
@@ -59,17 +59,17 @@ public class Xow_lang_mgr {
 			rv.Name_(key);
 		}
 		return rv;
-	}	private OrderedHash hash = OrderedHash_.new_bry_();
-	public void Grps_sort() {hash.SortBy(Xow_lang_grp_sorter_sort_idx._);}
-	public void Html_bld(Bry_bfr bfr, Xowe_wiki wiki, ListAdp slink_list, byte[] qid) {
+	}	private Ordered_hash hash = Ordered_hash_.new_bry_();
+	public void Grps_sort() {hash.Sort_by(Xow_lang_grp_sorter_sort_idx._);}
+	public void Html_bld(Bry_bfr bfr, Xowe_wiki wiki, List_adp slink_list, byte[] qid) {
 		int grp_len = hash.Count();
 		for (int i = 0; i < grp_len; i++) {
-			Xow_lang_grp grp = (Xow_lang_grp)hash.FetchAt(i);
+			Xow_lang_grp grp = (Xow_lang_grp)hash.Get_at(i);
 			grp.Itms_reset();
 		}
 		int slink_len = slink_list.Count();
 		for (int i = 0; i < slink_len; i++) {
-			Wdata_sitelink_itm slink = (Wdata_sitelink_itm)slink_list.FetchAt(i);
+			Wdata_sitelink_itm slink = (Wdata_sitelink_itm)slink_list.Get_at(i);
 			Xoa_ttl ttl = slink.Page_ttl();
 			Xow_xwiki_itm xwiki = ttl.Wik_itm();
 			int lang_id = xwiki.Lang_id();
@@ -94,10 +94,10 @@ public class Xow_lang_mgr {
 	public static Xow_lang_mgr dflt_() {return new Xow_lang_mgr();}
 }
 class Xow_lang_html implements Bry_fmtr_arg {
-	private Xow_lang_mgr lang_mgr; Xowe_wiki wiki; ListAdp ttl_list; private byte[] qid;
+	private Xow_lang_mgr lang_mgr; Xowe_wiki wiki; List_adp ttl_list; private byte[] qid;
 	private Xoapi_toggle_itm toggle_itm;
 	private int stage = 0;
-	public Xow_lang_html Init(Xow_lang_mgr lang_mgr, Xowe_wiki wiki, ListAdp ttl_list, int ttl_list_len, byte[] qid) {
+	public Xow_lang_html Init(Xow_lang_mgr lang_mgr, Xowe_wiki wiki, List_adp ttl_list, int ttl_list_len, byte[] qid) {
 		this.lang_mgr = lang_mgr; this.wiki = wiki; this.ttl_list = ttl_list; this.qid = qid;
 		toggle_itm = wiki.Appe().Api_root().Html().Page().Toggle_mgr().Get_or_new("wikidata-langs");
 		return this;
@@ -139,7 +139,7 @@ class Xow_lang_html implements Bry_fmtr_arg {
 					byte[] page_name = itm.Page_name();
 					byte[] local_name = itm.Lang_name();
 					byte[] badge_cls = Badge_cls(tmp_bfr, itm.Page_badges());
-					if (wiki.Appe().User().Wiki().Xwiki_mgr().Get_by_key(domain) == null)
+					if (wiki.Appe().Usere().Wiki().Xwiki_mgr().Get_by_key(domain) == null)
 						tmp_bfr.Add(Xoh_href_parser.Href_http_bry).Add(domain).Add(Xoh_href_parser.Href_wiki_bry);
 					else
 						tmp_bfr.Add(Xoh_href_parser.Href_site_bry).Add(domain).Add(Xoh_href_parser.Href_wiki_bry);
@@ -171,7 +171,7 @@ class Xow_lang_html implements Bry_fmtr_arg {
 				if (i != 0) bfr.Add_byte_comma();
 				byte[] badge = badges[i];
 				byte[] badge_cls = (byte[])badges_hash.Get_by_bry(badge);
-				if (badge_cls == null) Gfo_usr_dlg_.I.Warn_many("", "", "unknown badge: badge=~{0}", String_.new_utf8_(badge));
+				if (badge_cls == null) Gfo_usr_dlg_.I.Warn_many("", "", "unknown badge: badge=~{0}", String_.new_u8(badge));
 				else bfr.Add(badge_cls);
 			}
 		}
@@ -179,14 +179,14 @@ class Xow_lang_html implements Bry_fmtr_arg {
 		return bfr.Xto_bry_and_clear();
 	}
 	private static final byte[]
-	  Badge_none_cls	= Bry_.new_ascii_("badge-none")
-	, Cls_bgn			= Bry_.new_ascii_(" class='")
+	  Badge_none_cls	= Bry_.new_a7("badge-none")
+	, Cls_bgn			= Bry_.new_a7(" class='")
 	;
 	private static Hash_adp_bry badges_hash = Hash_adp_bry.ci_ascii_()
-	.Add_str_obj("Q17437798", Bry_.new_ascii_("badge-goodarticle"))
-	.Add_str_obj("Q17437796", Bry_.new_ascii_("badge-featuredarticle"))
-	.Add_str_obj("Q17559452", Bry_.new_ascii_("badge-recommendedarticle"))
-	.Add_str_obj("Q17506997", Bry_.new_ascii_("badge-featuredlist"))
-	.Add_str_obj("Q17580674", Bry_.new_ascii_("badge-featuredportal"))
+	.Add_str_obj("Q17437798", Bry_.new_a7("badge-goodarticle"))
+	.Add_str_obj("Q17437796", Bry_.new_a7("badge-featuredarticle"))
+	.Add_str_obj("Q17559452", Bry_.new_a7("badge-recommendedarticle"))
+	.Add_str_obj("Q17506997", Bry_.new_a7("badge-featuredlist"))
+	.Add_str_obj("Q17580674", Bry_.new_a7("badge-featuredportal"))
 	;
 }

@@ -36,7 +36,7 @@ public class IptBndMgr_tst {
 		public IptBndMgr_fx ini_Clear() {under.Clear(); return this;}
 		public IptBndMgr_fx run_Add(String raw) {
 			IptArg[] args = IptArg_.parse_ary_(raw);
-			ListAdp list = ListAdp_.new_();
+			List_adp list = List_adp_.new_();
 			for (IptArg arg : args)
 				list.Add(arg);
 
@@ -61,7 +61,7 @@ public class IptBndMgr_tst {
 	}
 	class IptBnd_mok implements IptBnd {
 		public String Key() {return key;} public IptBnd_mok Key_(String v) {key = v; return this;} private String key;
-		public ListAdp Ipts() {return args;} public IptBnd_mok Ipts_(ListAdp v) {args = v; return this;} ListAdp args;
+		public List_adp Ipts() {return args;} public IptBnd_mok Ipts_(List_adp v) {args = v; return this;} List_adp args;
 		public IptEventType EventTypes() {return eventTypes;} public IptBnd_mok EventTypes_(IptEventType v) {eventTypes = v; return this;} IptEventType eventTypes;
 		public Object Srl(GfoMsg owner) {return this;}
 		public void Exec(IptEventData iptData) {

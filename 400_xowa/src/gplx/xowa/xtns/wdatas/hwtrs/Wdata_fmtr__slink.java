@@ -24,7 +24,7 @@ class Wdata_fmtr__slink_grp implements Bry_fmtr_arg {
 		fmtr_tbl.Init_by_ctor(lang_sorter, toggle_mgr, lbl_regy, href_encoder, fmtr_toc, xwiki_mgr);
 	}
 	public void Init_by_lang(Wdata_hwtr_msgs msgs) {fmtr_tbl.Init_by_lang(msgs);}
-	public void Init_by_wdoc(OrderedHash list) {
+	public void Init_by_wdoc(Ordered_hash list) {
 		this.is_empty = list.Count() == 0; if (is_empty) return;
 		fmtr_tbl.Init_by_wdoc(list);
 	}
@@ -50,7 +50,7 @@ class Wdata_fmtr__slink_tbl implements Bry_fmtr_arg {
 		fmtr_row.Init_by_ctor(lbl_regy, href_encoder, xwiki_mgr);
 		for (int i = 0; i < Wdata_slink_grp.Idx__len; ++i) {
 			byte[] wiki_name = Wdata_slink_grp.Name_by_tid(i);
-			String toggle_itm_key = "wikidatawiki-slink-" + String_.new_ascii_(wiki_name);
+			String toggle_itm_key = "wikidatawiki-slink-" + String_.new_a7(wiki_name);
 			Xoapi_toggle_itm toggle_itm = toggle_mgr.Get_or_new(toggle_itm_key);
 			Wdata_toc_data toc_data = new Wdata_toc_data(fmtr_toc, href_encoder);
 			grps[i] = new Wdata_slink_grp(i, wiki_name, toggle_itm, toc_data);
@@ -64,14 +64,14 @@ class Wdata_fmtr__slink_tbl implements Bry_fmtr_arg {
 			grp.Toggle_itm().Init_msgs(msgs.Toggle_title_y(), msgs.Toggle_title_n());
 		}
 	}
-	public void Init_by_wdoc(OrderedHash list) {
+	public void Init_by_wdoc(Ordered_hash list) {
 		Wdata_slink_grp.Sift(grps, list);
 		for (int i = 0; i < Wdata_slink_grp.Idx__len; ++i) {
 			Wdata_slink_grp grp = grps[i];
 			int itms_count = grp.Rows().Count();
 			if (itms_count == 0) continue;
 			grp.Toc_data().Make(itms_count);
-			grp.Rows().SortBy(lang_sorter);
+			grp.Rows().Sort_by(lang_sorter);
 		}
 	}
 	public void XferAry(Bry_bfr bfr, int idx) {
@@ -99,18 +99,18 @@ class Wdata_fmtr__slink_tbl implements Bry_fmtr_arg {
 }
 class Wdata_fmtr__slink_row implements Bry_fmtr_arg {
 	private final Wdata_fmtr__slink_badges fmtr_badges = new Wdata_fmtr__slink_badges(); private Xow_xwiki_mgr xwiki_mgr;
-	private Url_encoder href_encoder; private OrderedHash list; 
+	private Url_encoder href_encoder; private Ordered_hash list; 
 	public void Init_by_ctor(Wdata_lbl_mgr lbl_regy, Url_encoder href_encoder, Xow_xwiki_mgr xwiki_mgr) {
 		this.href_encoder = href_encoder; this.xwiki_mgr = xwiki_mgr;
 		fmtr_badges.Init_by_ctor(lbl_regy);
 	}
-	public void Init_by_page(OrderedHash list) {this.list = list;}
+	public void Init_by_page(Ordered_hash list) {this.list = list;}
 	public void XferAry(Bry_bfr bfr, int idx) {
 		int len = list.Count();
 		for (int i = 0; i < len; ++i) {
-			Wdata_sitelink_itm itm = (Wdata_sitelink_itm)list.FetchAt(i);
+			Wdata_sitelink_itm itm = (Wdata_sitelink_itm)list.Get_at(i);
 			Xow_domain domain_info = itm.Domain_info();
-			byte[] wmf_key			= domain_info.Wmf_key();
+			byte[] wmf_key			= domain_info.Abrv_wm();
 			Xol_lang_itm lang_itm	= domain_info.Lang_itm();
 			byte[] lang_key			= lang_itm.Key();
 			byte[] lang_name		= lang_itm.Localized_name();
@@ -121,7 +121,7 @@ class Wdata_fmtr__slink_row implements Bry_fmtr_arg {
 			fmtr_row.Bld_bfr_many(bfr, lang_name, lang_key, wmf_key, href_site, domain_bry, href_encoder.Encode(page_name), Html_utl.Escape_html_as_bry(itm.Name()), fmtr_badges);
 		}
 	}
-	private static final byte[] Href_site_xowa = Bry_.new_ascii_("/site/"), Href_site_http = Bry_.new_ascii_("https://");
+	private static final byte[] Href_site_xowa = Bry_.new_a7("/site/"), Href_site_http = Bry_.new_a7("https://");
 	private final Bry_fmtr fmtr_row = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "            <li class='wikibase-sitelinkview'>"																// wikibase-sitelinkview-~{wmf_key} data-wb-siteid='~{wmf_key}'
