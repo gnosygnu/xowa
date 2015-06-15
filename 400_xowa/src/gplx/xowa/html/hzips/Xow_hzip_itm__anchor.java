@@ -82,6 +82,13 @@ public class Xow_hzip_itm__anchor {
 		int id_end = Bry_finder.Find_fwd(src, Byte_ascii.Quote, id_bgn, src_len);			if (id_end == Bry_finder.Not_found) return Xow_hzip_mgr.Unhandled;
 		int id = Bry_.Xto_int_or(src, id_bgn, id_end, -1);									if (id == Bry_finder.Not_found) return Xow_hzip_mgr.Unhandled;
 		int a_rhs_bgn = Bry_finder.Find_fwd(src, Find_a_rhs_bgn_bry, a_lhs_end, src_len);	if (a_rhs_bgn == Bry_finder.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("a.a_rhs_bgn_missing", bgn, ttl_end);
+		int ttl_len = ttl_end - ttl_bgn;
+		int html_text_len = a_rhs_bgn - a_lhs_end;
+		if (	!caption					// lnki_text_n; EX: [[A]] not [[A|A1]]
+			&&	site == null				// not xwiki; EX: [[wikt:A]]
+			&&	html_text_len != ttl_len) {	// note that in 99% of lnki_text_n cases, html_text_len == text_len; however, tidy sometimes relocates html inside html_text; PAGE:en.w:Abyssal_plain; EX:<font color='green'>[[A]]</font>; DATE:2015-06-02
+			caption = true;					// change to lnki_text_y
+		}			
 		// caption
 		if (caption)
 			bfr.Add(Xow_hzip_dict.Bry_lnki_text_y);
@@ -92,7 +99,6 @@ public class Xow_hzip_itm__anchor {
 		if (site != null) {
 			bfr.Add_byte_pipe().Add(site).Add_byte_pipe();
 		}
-		int ttl_len = ttl_end - ttl_bgn;
 		if (caption) {
 			bfr.Add(ttl.Page_db());
 			bfr.Add_byte(Xow_hzip_dict.Escape);
@@ -100,10 +106,9 @@ public class Xow_hzip_itm__anchor {
 			return a_lhs_end;
 		}
 		else {
-			int capt_len = a_rhs_bgn - a_lhs_end;
-			if (capt_len == ttl_len && Bry_.Match(src, ttl_bgn, ttl_end, src, a_lhs_end, a_rhs_bgn))
+			if (!ttl.Ns().Id_main())		// non-main ns should write page_db only; EX: "Template:A" should write "A" since "Template" will be inferred by ns_id
 				bfr.Add(ttl.Page_db());
-			else
+			else							// main ns should write html_text; handles [[a]] which has <a href="A">a</a>
 				bfr.Add_mid(src, a_lhs_end, a_rhs_bgn);
 			bfr.Add_byte(Xow_hzip_dict.Escape);
 			stats.Lnki_text_n_add();
@@ -181,7 +186,7 @@ public class Xow_hzip_itm__anchor {
 		// page
 		int ttl_end = Bry_finder.Find_fwd(src, Xow_hzip_dict.Escape, ttl_bgn, src_len);		if (ttl_end == Bry_finder.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("a.ttl_end_missing", bgn, ttl_bgn);
 		byte[] ttl_bry = Bry_.Mid(src, ttl_bgn, ttl_end);
-		Xoa_ttl ttl = ttl_parser.Ttl_parse(ns.Id(), ttl_bry);
+		Xoa_ttl ttl = ttl_parser.Ttl_parse(ns.Id(), ttl_bry); if (ttl == null) return hzip_mgr.Warn_by_pos_add_dflt("a.ttl_is_invalid", bgn, ttl_bgn);
 		byte[] ttl_full = ttl.Full_db();
 		bfr.Add_str_a7("<a href='");
 		if (site_bry != null) {
@@ -206,7 +211,7 @@ public class Xow_hzip_itm__anchor {
 		return rv;
 	}
 	public void Html_plain(Bry_bfr bfr, Xop_lnki_tkn lnki) {
-		bfr.Add_str
+		bfr.Add_str_a7
 			(  lnki.Caption_exists()				// caption exists; EX: [[A|b]]
 			|| lnki.Tail_bgn() != -1				// trailing chars; EX: [[A]]b
 			? "<a xtid='a_lnki_text_y' href=\""		// embed caption

@@ -119,6 +119,7 @@ public class Xop_xatr_whitelist_mgr {
 		Ini_nde(Xop_xnde_tag_.Tid_bdi		 , "common");
 		Ini_nde(Xop_xnde_tag_.Tid_data		 , "common", "value");
 		Ini_nde(Xop_xnde_tag_.Tid_mark		 , "common");
+		Ini_nde(Xop_xnde_tag_.Tid_q			 , "common");
 		Ini_all_loose("data");
 		return this;
 	}

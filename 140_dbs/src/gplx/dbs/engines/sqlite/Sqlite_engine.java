@@ -20,9 +20,10 @@ import java.sql.*;
 import gplx.stores.*; import gplx.dbs.engines.*; import gplx.dbs.engines.sqlite.*;
 import gplx.dbs.qrys.*; 
 public class Sqlite_engine extends Db_engine_sql_base {
-	private final Sqlite_txn_mgr txn_mgr;
+	private final Sqlite_txn_mgr txn_mgr; private final Sqlite_schema_mgr schema_mgr;
 	Sqlite_engine() {
 		this.txn_mgr = new Sqlite_txn_mgr(this);
+		this.schema_mgr = new Sqlite_schema_mgr(this);
 	}
 	@Override public String Tid() {return Sqlite_conn_info.Tid_const;}
 	@Override public Db_engine New_clone(Db_conn_info connectInfo) {
@@ -38,6 +39,7 @@ public class Sqlite_engine extends Db_engine_sql_base {
 	@Override public void	Txn_end()				{txn_mgr.Txn_end();}
 	@Override public void	Txn_cxl()				{txn_mgr.Txn_cxl();}
 	@Override public void	Txn_sav()				{txn_mgr.Txn_sav();}
+	@Override public boolean	Schema_tbl_exists(String name)		{return schema_mgr.Tbl_exists(name);}
 		static boolean loaded = false; 
 	@gplx.Internal @Override protected Connection Conn_new() {
 		if (!loaded) {
@@ -77,7 +79,7 @@ class Db_rdr__sqlite extends Db_rdr__basic {	@Override public byte Read_byte(int
 	@Override public DateAdp Read_date_by_str(String k) {
 		try {
 			String val = rdr.getString(k);
-			return val == null ? null : DateAdp_.parse_fmt(val, "M/dd/yyyy hh:mm tt");
+			return val == null ? null : DateAdp_.parse_fmt(val, "yyyyMMdd_HHmmss");
 		} 	catch (Exception e) {throw Err_.new_("read failed: i={0} type={1} err={2}", k, DateAdp_.Cls_ref_type, Err_.Message_lang(e));}
 	}
 //	@Override public DecimalAdp ReadDecimalOr(String key, DecimalAdp or) {

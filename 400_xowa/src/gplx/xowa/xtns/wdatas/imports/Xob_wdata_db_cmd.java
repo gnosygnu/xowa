@@ -414,7 +414,7 @@ class Xob_wdata_db_visitor implements Wdata_claim_visitor {
 	public void Visit_globecoordinate(Wdata_claim_itm_globecoordinate itm)	{rv = Bry_.Add_w_dlm(Byte_ascii.Comma, itm.Lat(), itm.Lng());}
 	public void Visit_system(Wdata_claim_itm_system itm)					{rv = Bry_.Empty;}
 	public void Visit_entity(Wdata_claim_itm_entity itm) {
-		Wdata_doc entity_doc = wdata_mgr.Pages_get(Bry_.Add(Wdata_wiki_mgr.Bry_q, itm.Entity_id_bry()));
+		Wdata_doc entity_doc = wdata_mgr.Pages_get(itm.Page_ttl_db());
 		rv = entity_doc == null ? Bry_.Empty : entity_doc.Label_list_get(lang_key);
 	}
 }

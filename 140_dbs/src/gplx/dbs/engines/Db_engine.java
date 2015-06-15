@@ -38,4 +38,5 @@ public interface Db_engine {
 	void			Ddl_delete_tbl(String tbl);
 	void			Env_db_attach(String alias, Io_url db_url);
 	void			Env_db_detach(String alias);
+	boolean			Schema_tbl_exists(String name);
 }

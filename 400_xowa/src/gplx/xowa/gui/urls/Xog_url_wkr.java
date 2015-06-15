@@ -81,7 +81,7 @@ public class Xog_url_wkr {
 		Xof_fsdb_itm fsdb = Xof_orig_file_downloader.Make_fsdb(wiki, lnki_ttl, img_size, url_bldr);
 		if (!Io_mgr.I.ExistsFil(href_url)) {
 //				if (!Xof_orig_file_downloader.Get_to_url(fsdb, href_url, wiki, lnki_ttl, url_bldr))
-			if (!Xof_file_wkr.Show_img(fsdb, Xoa_app_.Usr_dlg(), wiki.File__bin_mgr(), wiki.File__mnt_mgr(), wiki.App().User().File__cache_mgr(), wiki.File__repo_mgr(), gplx.xowa.files.gui.Xog_js_wkr_.Noop, img_size, url_bldr, page))
+			if (!Xof_file_wkr.Show_img(fsdb, Xoa_app_.Usr_dlg(), wiki.File__bin_mgr(), wiki.File__mnt_mgr(), wiki.App().User().User_db_mgr().Cache_mgr(), wiki.File__repo_mgr(), gplx.xowa.files.gui.Xog_js_wkr_.Noop, img_size, url_bldr, page))
 				return Rslt_handled;
 		}
 		gplx.ios.IoItmFil fil = Io_mgr.I.QueryFil(href_url);
@@ -89,14 +89,14 @@ public class Xog_url_wkr {
 			ProcessAdp media_player = app.Prog_mgr().App_by_ext(href_url.Ext());
 			media_player.Run(href_url);
 			fsdb.File_size_(fil.Size());
-			gplx.xowa.files.caches.Xou_cache_mgr cache_mgr = wiki.Appe().User().File__cache_mgr();
+			gplx.xowa.files.caches.Xou_cache_mgr cache_mgr = wiki.Appe().User().User_db_mgr().Cache_mgr();
 			cache_mgr.Update(fsdb);
 			cache_mgr.Db_save();
 		}
 		return Rslt_handled;
 	}
 	private Xoa_url Exec_url_page(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xog_win_itm win, byte[] href_bry) {	// EX: "Page"; "/wiki/Page"; // rewritten; DATE:2014-01-19
-		Xoa_url rv = app.Url_parser().Parse(href_bry);	// needed for query_args
+		Xoa_url rv = app.Utl__url_parser().Parse(href_bry);	// needed for query_args
 		byte[] anchor_bry = href.Anchor();
 		byte[] page_bry = rv.Page_bry();
 		byte[][] segs_ary = rv.Segs_ary();

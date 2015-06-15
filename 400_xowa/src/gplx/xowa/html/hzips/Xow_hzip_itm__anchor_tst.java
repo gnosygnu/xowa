@@ -76,6 +76,10 @@ public class Xow_hzip_itm__anchor_tst {
 		fxt.Test_save(brys, "<a xtid='a_lnki_text_n' href=\"/wiki/A\" title=\"A\">A</a><a xtid='a_lnki_text_n' href=\"/wiki/B\" id=\"xowa_lnki_3\" title=\"B\">B</a>");
 		fxt.Test_load(brys, "<a xtid='a_lnki_text_n' href=\"/wiki/A\" title=\"A\">A</a><a href='/wiki/B' id='xowa_lnki_3' title='B'>B</a>");
 	}
+	@Test   public void Srl_lnki_text_y__html() {	// PURPOSE: PAGE:en.w:Abyssal_plain; DATE:2015-06-02
+		byte[][] brys = Bry_.Ary(Xow_hzip_dict.Bry_lnki_text_y, Bry_.ints_(2), fxt.Make_int(3), Bry_.new_a7("A"), Xow_hzip_dict.Escape_bry, Bry_.new_a7("<font color='white'>A1</font>"), Xow_hzip_dict.Bry_a_rhs);
+		fxt.Test_save(brys, "<a xtid='a_lnki_text_n' href=\"/wiki/A\" id=\"xowa_lnki_3\" title='A'><font color='white'>A1</font></a>");
+	}
 	@Test   public void Srl_lnke_txt() {
 		byte[][] brys = Bry_.Ary(Xow_hzip_dict.Bry_lnke_txt, Bry_.new_a7("http://a.org"), Xow_hzip_dict.Escape_bry);
 		fxt.Test_save(brys, "<a xtid='a_lnke_txt' rel=\"nofollow\" class=\"external free\" href=\"http://a.org\">http://a.org</a>");

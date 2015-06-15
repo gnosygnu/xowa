@@ -29,8 +29,12 @@ class Wdata_visitor__html_wtr implements Wdata_claim_visitor {
 	}
 	public void Visit_entity(Wdata_claim_itm_entity itm) {
 		int entity_id = itm.Entity_id();
-		byte[] text = lbl_mgr.Get_text__qid(entity_id);
-		Wdata_hwtr_mgr.Write_link_wikidata(tmp_bfr, Bry_.Add(Byte_ascii.Ltr_Q, Int_.Xto_bry(entity_id)), text);			
+		byte[] text = itm.Entity_tid_is_qid() ? lbl_mgr.Get_text__qid(entity_id) : lbl_mgr.Get_text__pid(entity_id);
+		if (text == null) {// handle incomplete wikidata dumps; DATE:2015-06-11
+			Xoa_app_.Usr_dlg().Warn_many("", "", "wbase.html_visitor:page does not exists; page=~{0}", entity_id);
+			return;
+		}
+		Wdata_hwtr_mgr.Write_link_wikidata(tmp_bfr, itm.Page_ttl_gui(), text);			
 	}
 	public void Visit_monolingualtext(Wdata_claim_itm_monolingualtext itm) {
 		tmp_bfr.Add(itm.Text());

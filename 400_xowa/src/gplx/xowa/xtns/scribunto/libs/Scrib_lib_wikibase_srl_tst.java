@@ -177,7 +177,7 @@ public class Scrib_lib_wikibase_srl_tst {
 		);
 	}
 	@Test   public void Claims_entity() {
-		fxt.Init_prop(fxt.Wdata_fxt().Make_claim_entity(2, 3));
+		fxt.Init_prop(fxt.Wdata_fxt().Make_claim_entity_qid(2, 3));
 		fxt.Test
 		(	"claims:"
 		,	"  P2:"
@@ -197,7 +197,7 @@ public class Scrib_lib_wikibase_srl_tst {
 		);
 	}
 	@Test   public void Claims_base_0() {	// PURPOSE: test for legacyStyle (aka base_0); used by pl.w:Module:Wikidane; DATE:2014-05-09
-		fxt.Init_prop(fxt.Wdata_fxt().Make_claim_entity(2, 3));
+		fxt.Init_prop(fxt.Wdata_fxt().Make_claim_entity_qid(2, 3));
 		fxt.Test(true
 		,	"claims:"
 		,	"  P2:"

@@ -31,23 +31,24 @@ public class Xof_fsdb_mgr__sql implements Xof_fsdb_mgr, GfoInvkAble {
 		try {
 			init = true;
 //				if (wiki.File__fsdb_mode().Tid_v0()) return;
-			this.url_bldr = Xof_url_bldr.new_v2(); 
-			this.repo_mgr = wiki.File__repo_mgr(); 
-			Fsdb_db_mgr core = Fsdb_db_mgr_.new_detect(wiki, wiki.Fsys_mgr().Root_dir(), wiki.Fsys_mgr().File_dir());
-			if (core == null) return;
+			this.url_bldr = Xof_url_bldr.new_v2();
+			this.repo_mgr = wiki.File__repo_mgr();
+			Fsdb_db_mgr fsdb_core = wiki.File__fsdb_core();
+			// Fsdb_db_mgr fsdb_core = Fsdb_db_mgr_.new_detect(wiki, wiki.Fsys_mgr().Root_dir(), wiki.Fsys_mgr().File_dir());
+			if (fsdb_core == null) return;
 			fsdb_enabled = true;
-			mnt_mgr.Ctor_by_load(core);
+			mnt_mgr.Ctor_by_load(fsdb_core);
 			this.bin_mgr = new Xof_bin_mgr(mnt_mgr, repo_mgr, wiki.App().File__img_mgr().Wkr_resize_img(), wiki.App().Wmf_mgr().Download_wkr().Download_xrg().Download_fmt());
 			bin_mgr.Wkrs__add(Xof_bin_wkr__fsdb_sql.new_(mnt_mgr));
 			bin_mgr.Wkrs__add(Xof_bin_wkr__http_wmf.new_(wiki));
-		}	catch (Exception exc) {throw Err_.new_fmt_("failed to initialize fsdb_mgr: wiki={0) err={1}", wiki.Domain_str(), Err_.Message_gplx_brief(exc));}
+		}	catch (Exception exc) {throw Err_.new_fmt_("failed to initialize fsdb_mgr: wiki={0} dbg={1} err={2}", wiki.Domain_str(), Err_.Message_gplx_brief(exc));}
 	}
 	public void Fsdb_search_by_list(List_adp itms, Xow_wiki cur_wiki, Xoa_page page, Xog_js_wkr js_wkr) {
 		if (!fsdb_enabled) return;
 		int len = itms.Count();
 		Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.I;
 		Xow_wiki wiki = page.Commons_mgr().Source_wiki_or(cur_wiki);
-		Xou_cache_mgr cache_mgr = wiki.App().User().File__cache_mgr();
+		Xou_cache_mgr cache_mgr = wiki.App().User().User_db_mgr().Cache_mgr();
 		for (int i = 0; i < len; i++) {
 			if (usr_dlg.Canceled()) return;
 			Xof_fsdb_itm fsdb = (Xof_fsdb_itm)itms.Get_at(i);

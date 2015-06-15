@@ -121,6 +121,7 @@ class Wdata_claims_parser_v2 {
 			switch (tid) {
 				case Wdata_dict_mainsnak.Tid_snaktype:		snak_tid = Wdata_dict_snak_tid.Xto_tid(sub.Val().Data_bry()); break;
 				case Wdata_dict_mainsnak.Tid_datavalue:		return Parse_datavalue(qid, pid, snak_tid, Json_itm_nde.cast_(sub.Val()));
+				case Wdata_dict_mainsnak.Tid_datatype:		break;		// ignore: has values like "wikibase-property"; EX: www.wikidata.org/wiki/Property:P397; DATE:2015-06-12
 				case Wdata_dict_mainsnak.Tid_property:		break;		// ignore: pid already available above
 				case Wdata_dict_mainsnak.Tid_hash:			break;		// ignore: "84487fc3f93b4f74ab1cc5a47d78f596f0b49390"
 			}
@@ -153,17 +154,18 @@ class Wdata_claims_parser_v2 {
 	private Wdata_claim_itm_entity Parse_datavalue_entity(byte[] qid, int pid, byte snak_tid, Json_itm_nde nde) {
 		Hash_adp_bry dict = Wdata_dict_value_entity.Dict;
 		int len = nde.Subs_len();
+		byte entity_tid = Byte_.Max_value_127;
 		byte[] entity_id_bry = null;
 		for (int i = 0; i < len; ++i) {
 			Json_itm_kv sub = Json_itm_kv.cast_(nde.Subs_get_at(i));
 			byte tid = Wdata_dict_utl.Get_tid_or_invalid(qid, dict, sub.Key().Data_bry()); if (tid == Wdata_dict_utl.Tid_invalid) continue;
 			switch (tid) {
-				case Wdata_dict_value_entity.Tid_entity_type:		break;	// ignore: "item"
+				case Wdata_dict_value_entity.Tid_entity_type:		entity_tid = Wdata_dict_value_entity_tid.Xto_tid(sub.Val().Data_bry()); break;
 				case Wdata_dict_value_entity.Tid_numeric_id:		entity_id_bry = sub.Val().Data_bry(); break;
 			}
 		}
 		if (entity_id_bry == null) throw Err_.new_("pid is invalid entity; pid={0}", pid);
-		return new Wdata_claim_itm_entity(pid, snak_tid, entity_id_bry);
+		return new Wdata_claim_itm_entity(pid, snak_tid, entity_tid, entity_id_bry);
 	}
 	private Wdata_claim_itm_monolingualtext Parse_datavalue_monolingualtext(byte[] qid, int pid, byte snak_tid, Json_itm_nde nde) {
 		Hash_adp_bry dict = Wdata_dict_value_monolingualtext.Dict;

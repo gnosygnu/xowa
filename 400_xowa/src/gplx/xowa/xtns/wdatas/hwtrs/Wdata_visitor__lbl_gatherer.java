@@ -21,7 +21,10 @@ class Wdata_visitor__lbl_gatherer implements Wdata_claim_visitor {
 	private Wdata_lbl_mgr lbl_mgr;
 	public Wdata_visitor__lbl_gatherer(Wdata_lbl_mgr lbl_mgr) {this.lbl_mgr = lbl_mgr;}
 	public void Visit_entity(Wdata_claim_itm_entity itm) {
-		lbl_mgr.Queue_if_missing__qid(itm.Entity_id());
+		if (itm.Entity_tid_is_qid())
+			lbl_mgr.Queue_if_missing__qid(itm.Entity_id());
+		else
+			lbl_mgr.Queue_if_missing__pid(itm.Entity_id());
 	}
 	public void Visit_time(Wdata_claim_itm_time itm) {
 		byte[] ttl = Wdata_lbl_itm.Extract_ttl(itm.Calendar());

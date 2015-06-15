@@ -52,13 +52,16 @@ public class Xohd_hdump_rdr {
 				return;
 			}
 			Bry_bfr bfr = bfr_mkr.Get_m001();
+			Xoa_app_.Usr_dlg().Plog_many("", "", "hdump.load.abrv: ttl=~{0}", ttl.Full_db_as_str());
 			byte[] body_bry = abrv_mgr.Parse(bfr, rv);
+			Xoa_app_.Usr_dlg().Plog_many("", "", "hdump.load.hzip: ttl=~{0}", ttl.Full_db_as_str());
 			body_bry = hzip_mgr.Parse(bfr, ttl.Page_db(), body_bry, rv.Redlink_uids());
 			bfr.Mkr_rls();
 			rv.Page_body_(body_bry);
 		}
 	}
 	private boolean Get_by_ttl__fill_hpg(Xog_page rv, Xoa_ttl ttl) {
+		Xoa_app_.Usr_dlg().Plog_many("", "", "hdump.load.meta: ttl=~{0}", ttl.Full_db_as_str());
 		core_data_mgr.Tbl__page().Select_by_ttl(dbpg, ttl.Ns(), ttl.Page_db());	// get rows from db
 		if (dbpg.Redirect_id() != -1) Get_by_ttl__resolve_redirect(dbpg, rv);
 		if (dbpg.Html_db_id() == -1) return false;								// dbpg does not hdump; exit;

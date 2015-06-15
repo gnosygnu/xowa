@@ -27,9 +27,18 @@ public class Xow_wmf_api_mgr {
 			String wiki = wiki_ary[i];
 			if (!wkr.Api_wiki_enabled(wiki)) continue;
 			String call	= String_.Format("https://{0}/w/api.php?{1}", wiki, wkr.Api_qargs());	// EX: https://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=namespaces
-			usr_dlg.Prog_many("", "", "wmf_api:calling; wiki~{0} api=~{1}", wiki, call);
-			byte[] rslt = Io_mgr.I.DownloadFil_args("", null).Trg_engine_key_(trg_engine_key).Exec_as_bry(call);
-			if (rslt == null) {usr_dlg.Warn_many("", "", "wmf_api:wmf api returned nothing; api=~{0}", call); continue;}
+			usr_dlg.Prog_many("", "", "wmf_api:calling; wiki=~{0} api=~{1}", wiki, call);
+			byte[] rslt = null;
+			for (int j = 0; j < 5; ++j) {
+				rslt = Io_mgr.I.DownloadFil_args("", null).User_agent_(Xoa_app_.User_agent).Trg_engine_key_(trg_engine_key).Exec_as_bry(call);
+				if (rslt != null) break;
+				usr_dlg.Warn_many("", "", "wmf_api:wmf api returned nothing; retrying; api=~{0}", call);
+				gplx.core.threads.Thread_adp_.Sleep(1000);
+			}
+			if (rslt == null) {
+				usr_dlg.Warn_many("", "", "wmf_api:wmf api returned nothing; api=~{0}", call);
+				continue;
+			}
 			wkr.Api_exec(wiki, rslt);
 		}
 		wkr.Api_term();
@@ -872,9 +881,6 @@ public class Xow_wmf_api_mgr {
 , "zu.wikipedia.org"
 , "zu.wiktionary.org"
 , "zu.wikibooks.org"
-, "ne.wikipedia.org"
-, "ne.wiktionary.org"
-, "ne.wikibooks.org"
 };
 //, "als.wikisource.org"
 //, "als.wikinews.org"

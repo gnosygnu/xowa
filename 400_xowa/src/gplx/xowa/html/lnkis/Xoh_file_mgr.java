@@ -50,7 +50,7 @@ public class Xoh_file_mgr {
 			)
 			return false;	
 		if (source_wiki.File_mgr().Version() == Xow_file_mgr.Version_2)
-			return ctx.App().Usere().File__xfer_itm_finder().Find(source_wiki, xfer.Lnki_exec_tid(), xfer, ctx.Cur_page().Url_bry_safe());
+			return ctx.App().User().User_db_mgr().File__xfer_itm_finder().Find(source_wiki, xfer.Lnki_exec_tid(), xfer, ctx.Cur_page().Url_bry_safe());
 		else
 			return source_wiki.File_mgr().Find_meta(xfer);
 	}

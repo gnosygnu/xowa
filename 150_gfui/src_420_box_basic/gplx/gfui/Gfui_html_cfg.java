@@ -25,10 +25,9 @@ public class Gfui_html_cfg implements GfoInvkAble {
 	public String Doc_selected_get_href_or_text()								{return Exec_fmt(fmtr_doc_selected_get_href_or_text);}				private Bry_fmtr fmtr_doc_selected_get_href_or_text = Bry_fmtr.keys_();
 	public String Doc_selected_get_src_or_empty()								{return Exec_fmt(fmtr_doc_selected_get_src_or_empty);}				private Bry_fmtr fmtr_doc_selected_get_src_or_empty = Bry_fmtr.keys_();
 	public String Doc_selected_get_active_or_selection()						{return Exec_fmt(fmtr_doc_selected_get_active_or_selection);}		private Bry_fmtr fmtr_doc_selected_get_active_or_selection = Bry_fmtr.keys_();
-	public String Doc_loaded()													{return Exec_fmt(fmtr_doc_loaded);}									private Bry_fmtr fmtr_doc_loaded = Bry_fmtr.keys_();
-	public String Doc_find_html(String find, boolean dir_fwd, boolean case_match, boolean wrap_find, boolean search_text_is_diff, int prv_find_bgn) {
-		return Exec_fmt(fmtr_doc_find_html, find, Bool_.Xto_str_lower(dir_fwd), Bool_.Xto_str_lower(case_match), Bool_.Xto_str_lower(wrap_find), Bool_.Xto_str_lower(search_text_is_diff), Int_.Xto_str(prv_find_bgn));
-	}	private Bry_fmtr fmtr_doc_find_html = Bry_fmtr.keys_("find_text", "dir_fwd", "case_match", "wrap_find", "find_text_is_diff", "prv_find_bgn");
+	public String Doc_find_html(String find, boolean dir_fwd, boolean case_match, boolean wrap_find, boolean highlight_matches) {
+		return Exec_fmt(fmtr_doc_find_html, find, Bool_.Xto_str_lower(dir_fwd), Bool_.Xto_str_lower(case_match), Bool_.Xto_str_lower(wrap_find), Bool_.Xto_str_lower(highlight_matches));
+	}	private Bry_fmtr fmtr_doc_find_html = Bry_fmtr.keys_("find_text", "dir_fwd", "case_match", "wrap_find", "highlight_matches");
 	public String Doc_find_edit(String find, boolean dir_fwd, boolean case_match, boolean wrap_find, boolean search_text_is_diff, int prv_find_bgn) {
 		return Exec_fmt(fmtr_doc_find_edit, find, Bool_.Xto_str_lower(dir_fwd), Bool_.Xto_str_lower(case_match), Bool_.Xto_str_lower(wrap_find), Bool_.Xto_str_lower(search_text_is_diff), Int_.Xto_str(prv_find_bgn));
 	}	private Bry_fmtr fmtr_doc_find_edit = Bry_fmtr.keys_("find_text", "dir_fwd", "case_match", "wrap_find", "find_text_is_diff", "prv_find_bgn");
@@ -75,7 +74,6 @@ public class Gfui_html_cfg implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_doc_selected_get_active_or_selection_))		fmtr_doc_selected_get_active_or_selection.Fmt_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_doc_find_html_))								fmtr_doc_find_html.Fmt_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_doc_find_edit_))								fmtr_doc_find_edit.Fmt_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_doc_loaded_))								fmtr_doc_loaded.Fmt_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_elem_atr_get_))								fmtr_elem_atr_get.Fmt_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_elem_atr_get_toString_))						fmtr_elem_atr_get_toString.Fmt_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_elem_atr_set_))								fmtr_elem_atr_set.Fmt_(m.ReadBry("v"));
@@ -104,7 +102,7 @@ public class Gfui_html_cfg implements GfoInvkAble {
 		node_path.Val_(node_path_val);
 	}
 	public static final String Invk_debug_file_ = "debug_file_"
-	, Invk_doc_html_ = "doc_html_", Invk_doc_body_focus_ = "doc_body_focus_", Invk_doc_selection_focus_toggle_ = "doc_selection_focus_toggle_", Invk_doc_loaded_ = "doc_loaded"
+	, Invk_doc_html_ = "doc_html_", Invk_doc_body_focus_ = "doc_body_focus_", Invk_doc_selection_focus_toggle_ = "doc_selection_focus_toggle_"
 	, Invk_doc_active_atr_get_ = "doc_active_atr_get_", Invk_doc_find_html_ = "doc_find_html_", Invk_doc_find_edit_ = "doc_find_edit_"
 	, Invk_doc_selected_get_text_or_href_ = "doc_selected_get_text_or_href_", Invk_doc_selected_get_href_or_text_ = "doc_selected_get_href_or_text_", Invk_doc_selected_get_src_or_empty_ = "doc_selected_get_src_or_empty_", Invk_doc_selected_get_active_or_selection_ = "doc_selected_get_active_or_selection_"
 	, Invk_win_print_preview_ = "win_print_preview_"

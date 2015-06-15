@@ -23,27 +23,23 @@ public class Thread_adp implements Runnable {
 		this.name = name; this.invk = invk; this.cmd = cmd; this.msg = msg;
 		this.ctor_ThreadAdp();
 	}
-		public Thread_adp Start() {thread.start(); return this;}
+		void ctor_ThreadAdp() {
+		this.thread = name == null ? new Thread(this) : new Thread(this, name);
+	}
+	public Thread Under_thread() {return thread;} private Thread thread;
+	public Thread_adp Start() {
+		thread.start();
+		return this;
+	}
 	public void Interrupt() {thread.interrupt();}
 	public void Join() {
-		try {
-			thread.join();		
-		}
-		catch (Exception e) {
-			Err_.Noop(e);
-		}
+		try {thread.join();}
+		catch (Exception e) {Err_.Noop(e);}
 	}
 //	public void Stop() {thread.stop();}
 	public boolean IsAlive() {return thread.isAlive();}
-	void ctor_ThreadAdp() {
-		if (name == null)
-			thread = new Thread(this);
-		else
-			thread = new Thread(this, name);
-	}
 	@Override public void run() {
 		invk.Invk(GfsCtx._, 0, cmd, msg);
 	}
-	public Thread Under_thread() {return thread;} private Thread thread;
 		public static final Thread_adp Null = new Thread_adp(Thread_adp_.Name_null, GfoInvkAble_.Null, "", GfoMsg_.Null);
 }

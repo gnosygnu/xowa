@@ -51,7 +51,7 @@ public class Xoh_lnke_wtr {
 		byte[] lnke_xwiki_wiki = lnke.Lnke_xwiki_wiki();
 		if (lnke_xwiki_wiki == null) {
 			if (lnke.Lnke_relative()) {		// relative; EX: //a.org
-				bfr.Add(app.Url_parser().Url_parser().Relative_url_protocol_bry()).Add_mid(src, lnke_bgn, lnke_end);
+				bfr.Add(app.Utl__url_parser().Url_parser().Relative_url_protocol_bry()).Add_mid(src, lnke_bgn, lnke_end);
 				return true;
 			}
 			else {							// xowa or regular; EX: http://a.org

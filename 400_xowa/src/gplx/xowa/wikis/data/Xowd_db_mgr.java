@@ -29,9 +29,10 @@ public class Xowd_db_mgr {
 	public Xowd_db_file				Db__text()		{return db__text;}		private Xowd_db_file db__text;
 	public Xowd_db_file				Db__html()		{return db__html;}		private Xowd_db_file db__html;
 	public Xowd_db_file				Db__cat_core()	{return db__cat_core;}	private Xowd_db_file db__cat_core;
-	public Xowd_db_file				Db__search()		{return db__search;}	private Xowd_db_file db__search;
+	public Xowd_db_file				Db__search()	{return db__search;}	private Xowd_db_file db__search;
 	public Xowd_db_file				Db__wbase()		{return db__wbase;}		private Xowd_db_file db__wbase;
 	public int						Dbs__len()		{return dbs__ary.length;}
+	public void						Db__wbase_(Xowd_db_file v) {db__wbase = v;}
 	public Xowd_db_file				Dbs__get_at(int i) {return dbs__ary[i];}
 	public Xowd_db_file				Dbs__make_by_tid(byte tid) {
 		int tid_idx = Get_tid_idx(db_file_hash, tid);

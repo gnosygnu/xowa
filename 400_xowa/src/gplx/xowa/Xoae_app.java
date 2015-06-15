@@ -45,7 +45,7 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 		gui_mgr = new Xoa_gui_mgr(this);
 		bldr = new Xob_bldr(this);
 		file_mgr.Ctor_by_app(this);
-		href_parser = new Xoh_href_parser(Xoa_app_.Utl__encoder_mgr().Href(), url_parser.Url_parser());
+		href_parser = new Xoh_href_parser(Xoa_app_.Utl__encoder_mgr().Href(), utl_url_parser.Url_parser());
 		sanitizer = new Xop_sanitizer(parser_amp_mgr, msg_log);
 		user_mgr = new Xou_user_mgr(this, user);
 		sys_cfg = new Xoa_sys_cfg(this);
@@ -74,8 +74,10 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 	public Xowmf_mgr			Wmf_mgr()				{return wmf_mgr;} private final Xowmf_mgr wmf_mgr = new Xowmf_mgr();
 	public Bry_bfr_mkr			Utl__bfr_mkr()			{return Xoa_app_.Utl__bfr_mkr();}
 	public Url_encoder_mgr		Utl__encoder_mgr()		{return Xoa_app_.Utl__encoder_mgr();}
+	public Xoa_url_parser		Utl__url_parser()		{return utl_url_parser;} private final Xoa_url_parser utl_url_parser = new Xoa_url_parser();
 	
 	public Xoae_wiki_mgr		Wiki_mgr() {return wiki_mgr;} private Xoae_wiki_mgr wiki_mgr;
+	public Xoa_wiki_mgr			Wiki_mgri() {return wiki_mgr;}
 	public Xou_user_mgr			User_mgr() {return user_mgr;} private Xou_user_mgr user_mgr;
 	public Xof_file_mgr			File_mgr() {return file_mgr;} private Xof_file_mgr file_mgr = new Xof_file_mgr();
 	public Xoa_lang_mgr			Lang_mgr() {return lang_mgr;} private Xoa_lang_mgr lang_mgr;
@@ -95,7 +97,6 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 	public Xoa_shell			Shell() {return shell;} private Xoa_shell shell;
 	public Xoa_thread_mgr		Thread_mgr() {return thread_mgr;} private Xoa_thread_mgr thread_mgr = new Xoa_thread_mgr();
 	public Xoa_hive_mgr			Hive_mgr() {return hive_mgr;} private Xoa_hive_mgr hive_mgr;
-	public Xoa_url_parser		Url_parser() {return url_parser;} private Xoa_url_parser url_parser = new Xoa_url_parser();
 	public Xoh_href_parser		Href_parser() {return href_parser;}
 	public Xop_sanitizer		Sanitizer() {return sanitizer;} private Xop_sanitizer sanitizer;
 	public Xop_xatr_parser		Xatr_parser() {return xatr_parser;} private Xop_xatr_parser xatr_parser = new Xop_xatr_parser();

@@ -39,6 +39,11 @@ public class Xowd_css_core_tbl implements RlsAble {
 		Db_stmt stmt_update = conn.Stmt_update_exclude(tbl_name, flds, fld_id);
 		stmt_update.Val_str(fld_key, key).Val_str(fld_updated_on, updated_on.XtoStr_fmt_yyyyMMdd_HHmmss()).Crt_int(fld_id, id).Exec_update();
 	}
+	public Xowd_css_core_itm Select_by_key(String key) {
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld_key).Crt_str(fld_key, key).Exec_select__rls_auto();
+		try {return rdr.Move_next() ? new_itm(rdr) : null;}
+		finally {rdr.Rls();}
+	}
 	public int Select_id_by_key(String key) {
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld_key).Crt_str(fld_key, key).Exec_select__rls_auto();
 		try {return rdr.Move_next() ? rdr.Read_int(fld_id) : Id_null;}

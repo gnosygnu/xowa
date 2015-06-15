@@ -20,7 +20,6 @@ import gplx.xowa.users.data.*;
 import gplx.xowa.files.caches.*;
 public interface Xou_user {
 	String					Key();
-	Xou_db_file				Data__db_file();
-	Xou_cache_mgr			File__cache_mgr();
-	Xou_file_itm_finder		File__xfer_itm_finder();
+	Xou_db_mgr				User_db_mgr();
+	Xow_wiki				Wikii();
 }

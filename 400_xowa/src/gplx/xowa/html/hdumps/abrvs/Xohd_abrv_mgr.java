@@ -91,43 +91,45 @@ public class Xohd_abrv_mgr {
 		}
 		byte[] a_title = img.Lnki_ttl();
 		byte[] a_href = Bry_.Add(Xohd_abrv_.A_href_bgn, a_title);
-		switch (tid) {
-			case Xohd_abrv_.Tid_file_info: fmtr.Html_thumb_part_info	(bfr, uid, a_href, cfg_file.Img_media_info_btn()); return rv;
-			case Xohd_abrv_.Tid_file_mgnf: fmtr.Html_thumb_part_magnify	(bfr, uid, a_href, a_title, cfg_file.Img_thumb_magnify()); return rv;
-			case Xohd_abrv_.Tid_file_play: fmtr.Html_thumb_part_play	(bfr, uid, img_view_w, Xoh_file_wtr__basic.Play_btn_max_width, a_href, a_title, cfg_file.Img_media_play_btn()); return rv;
-			case Xohd_abrv_.Tid_gallery_box_max: {
-				Xohd_data_itm__gallery_mgr gly = (Xohd_data_itm__gallery_mgr)hpg.Gallery_itms().Get_by(uid);
-				if (gly != null) {	// -1 means no box_max
-					byte[] style = Gallery_mgr_base.box_style_max_width_fmtr.Bld_bry_many(tmp_bfr, gly.Box_max());
-					Html_wtr.Write_atr_bry(bfr, Bool_.N, Byte_ascii.Quote, Html_atr_.Style_bry, style);
+		try {
+			switch (tid) {
+				case Xohd_abrv_.Tid_file_info: fmtr.Html_thumb_part_info	(bfr, uid, a_href, cfg_file.Img_media_info_btn()); return rv;
+				case Xohd_abrv_.Tid_file_mgnf: fmtr.Html_thumb_part_magnify	(bfr, uid, a_href, a_title, cfg_file.Img_thumb_magnify()); return rv;
+				case Xohd_abrv_.Tid_file_play: fmtr.Html_thumb_part_play	(bfr, uid, img_view_w, Xoh_file_wtr__basic.Play_btn_max_width, a_href, a_title, cfg_file.Img_media_play_btn()); return rv;
+				case Xohd_abrv_.Tid_gallery_box_max: {
+					Xohd_data_itm__gallery_mgr gly = (Xohd_data_itm__gallery_mgr)hpg.Gallery_itms().Get_by(uid);
+					if (gly != null) {	// -1 means no box_max
+						byte[] style = Gallery_mgr_base.box_style_max_width_fmtr.Bld_bry_many(tmp_bfr, gly.Box_max());
+						Html_wtr.Write_atr_bry(bfr, Bool_.N, Byte_ascii.Quote, Html_atr_.Style_bry, style);
+					}
+					return rv;
 				}
-				return rv;
+				case Xohd_abrv_.Tid_gallery_box_w: {
+					Xohd_data_itm__gallery_itm gly = (Xohd_data_itm__gallery_itm)img;
+					byte[] style = Gallery_mgr_base.hdump_box_w_fmtr.Bld_bry_many(tmp_bfr, gly.Box_w());
+					Html_wtr.Write_atr_bry(bfr, Bool_.N, Byte_ascii.Quote, Html_atr_.Style_bry, style);
+					return rv;
+				}
+				case Xohd_abrv_.Tid_gallery_img_w: {
+					Xohd_data_itm__gallery_itm gly = (Xohd_data_itm__gallery_itm)img;
+					byte[] style = Gallery_mgr_base.hdump_box_w_fmtr.Bld_bry_many(tmp_bfr, gly.Img_w());
+					Html_wtr.Write_atr_bry(bfr, Bool_.N, Byte_ascii.Quote, Html_atr_.Style_bry, style);
+					return rv;
+				}
+				case Xohd_abrv_.Tid_gallery_img_pad: {
+					Xohd_data_itm__gallery_itm gly = (Xohd_data_itm__gallery_itm)img;
+					byte[] style = Gallery_mgr_base.hdump_img_pad_fmtr.Bld_bry_many(tmp_bfr, gly.Img_pad());
+					Html_wtr.Write_atr_bry(bfr, Bool_.N, Byte_ascii.Quote, Html_atr_.Style_bry, style);
+					return rv;
+				}
 			}
-			case Xohd_abrv_.Tid_gallery_box_w: {
-				Xohd_data_itm__gallery_itm gly = (Xohd_data_itm__gallery_itm)img;
-				byte[] style = Gallery_mgr_base.hdump_box_w_fmtr.Bld_bry_many(tmp_bfr, gly.Box_w());
-				Html_wtr.Write_atr_bry(bfr, Bool_.N, Byte_ascii.Quote, Html_atr_.Style_bry, style);
-				return rv;
+			url_bldr.Init_by_root(img.Orig_repo_id() == Xof_repo_itm_.Repo_remote ? file_dir_comm : file_dir_wiki, Byte_ascii.Slash, false, false, 2);
+			url_bldr.Init_by_itm(img.File_is_orig() ? Xof_repo_itm_.Mode_orig : Xof_repo_itm_.Mode_thumb, img.Lnki_ttl(), Xof_file_wkr_.Md5_(img.Lnki_ttl()), Xof_ext_.new_by_id_(img.Orig_ext()), img.File_w(), img.Lnki_time(), img.Lnki_page());
+			byte[] img_src = url_bldr.Xto_bry(); 
+			if (tid == Xohd_abrv_.Tid_img) {
+				fmtr_img.Bld_bfr_many(bfr, img_src, img_view_w, img.Html_h());
 			}
-			case Xohd_abrv_.Tid_gallery_img_w: {
-				Xohd_data_itm__gallery_itm gly = (Xohd_data_itm__gallery_itm)img;
-				byte[] style = Gallery_mgr_base.hdump_box_w_fmtr.Bld_bry_many(tmp_bfr, gly.Img_w());
-				Html_wtr.Write_atr_bry(bfr, Bool_.N, Byte_ascii.Quote, Html_atr_.Style_bry, style);
-				return rv;
-			}
-			case Xohd_abrv_.Tid_gallery_img_pad: {
-				Xohd_data_itm__gallery_itm gly = (Xohd_data_itm__gallery_itm)img;
-				byte[] style = Gallery_mgr_base.hdump_img_pad_fmtr.Bld_bry_many(tmp_bfr, gly.Img_pad());
-				Html_wtr.Write_atr_bry(bfr, Bool_.N, Byte_ascii.Quote, Html_atr_.Style_bry, style);
-				return rv;
-			}
-		}
-		url_bldr.Init_by_root(img.Orig_repo_id() == Xof_repo_itm_.Repo_remote ? file_dir_comm : file_dir_wiki, Byte_ascii.Slash, false, false, 2);
-		url_bldr.Init_by_itm(img.File_is_orig() ? Xof_repo_itm_.Mode_orig : Xof_repo_itm_.Mode_thumb, img.Lnki_ttl(), Xof_file_wkr_.Md5_(img.Lnki_ttl()), Xof_ext_.new_by_id_(img.Orig_ext()), img.File_w(), img.Lnki_time(), img.Lnki_page());
-		byte[] img_src = url_bldr.Xto_bry(); 
-		if (tid == Xohd_abrv_.Tid_img) {
-			fmtr_img.Bld_bfr_many(bfr, img_src, img_view_w, img.Html_h());
-		}
+		} catch (Exception e) {Xoa_app_.Usr_dlg().Warn_many("", "", "abrv.read: page=~{0} itm=~{1} err=~{2}", hpg.Url_bry_safe(), img == null ? "<NULL>" : img.Data_print(), Err_.Message_gplx(e));}
 		return rv;
 	}
 	private int Write_redlink(Bry_bfr bfr, Xog_page hpg, int uid, int rv) {

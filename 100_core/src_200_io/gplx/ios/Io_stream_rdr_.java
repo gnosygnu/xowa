@@ -63,7 +63,7 @@ public class Io_stream_rdr_ {
 			}
 		} finally {rdr.Rls();}
 	}
-	public static final Io_stream_rdr Null = new Io_stream_rdr_noop();
+	public static final Io_stream_rdr Noop = new Io_stream_rdr_noop();
 	public static Io_stream_rdr mem_(String v) {return mem_(Bry_.new_u8(v));}
 	public static Io_stream_rdr mem_(byte[] v) {
 		Io_stream_rdr rv = new Io_stream_rdr_adp(Stream_new_mem(v));

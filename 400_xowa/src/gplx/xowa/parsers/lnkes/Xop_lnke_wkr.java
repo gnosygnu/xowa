@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.parsers.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.xowa.apps.progs.*; import gplx.xowa.net.*; import gplx.xowa.wikis.xwikis.*;
 public class Xop_lnke_wkr implements Xop_ctx_wkr {
-	public void Ctor_ctx(Xop_ctx ctx) {url_parser = ctx.App().Url_parser().Url_parser();} Gfo_url_parser url_parser; Gfo_url_site_data site_data = new Gfo_url_site_data(); Xoa_url_parser xo_url_parser = new Xoa_url_parser(); Xoa_url xo_url_parser_url = Xoa_url.blank_();
+	public void Ctor_ctx(Xop_ctx ctx) {url_parser = ctx.App().Utl__url_parser().Url_parser();} Gfo_url_parser url_parser; Gfo_url_site_data site_data = new Gfo_url_site_data(); Xoa_url_parser xo_url_parser = new Xoa_url_parser(); Xoa_url xo_url_parser_url = Xoa_url.blank_();
 	public void Page_bgn(Xop_ctx ctx, Xop_root_tkn root) {}
 	public void Page_end(Xop_ctx ctx, Xop_root_tkn root, byte[] src, int src_len) {}
 	public boolean Dangling_goes_on_stack() {return dangling_goes_on_stack;} public void Dangling_goes_on_stack_(boolean v) {dangling_goes_on_stack = v;} private boolean dangling_goes_on_stack;

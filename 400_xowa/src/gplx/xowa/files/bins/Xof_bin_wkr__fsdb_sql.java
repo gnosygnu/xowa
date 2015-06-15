@@ -30,10 +30,10 @@ public class Xof_bin_wkr__fsdb_sql implements Xof_bin_wkr {
 	public void Skip_mgr_init(Fsm_cfg_mgr cfg_mgr, String[] wkrs) {this.skip_mgr = new Xof_bin_skip_mgr(cfg_mgr, wkrs);}
 	public Io_stream_rdr Get_as_rdr(Xof_fsdb_itm fsdb, boolean is_thumb, int w) {
 		Find_ids(fsdb, is_thumb, w);
-		int bin_db_id = tmp_ids.Bin_db_id(); if (bin_db_id == Fsd_bin_tbl.Bin_db_id_null) return Io_stream_rdr_.Null;
+		int bin_db_id = tmp_ids.Bin_db_id(); if (bin_db_id == Fsd_bin_tbl.Bin_db_id_null) return Io_stream_rdr_.Noop;
 		Fsm_bin_fil bin_db = mnt_mgr.Bins__at(tmp_ids.Mnt_id(), bin_db_id);
 		Io_stream_rdr rdr = bin_db.Select_as_rdr(tmp_ids.Itm_id());
-		if (skip_mgr != null && skip_mgr.Skip(fsdb, rdr)) return Io_stream_rdr_.Null;
+		if (skip_mgr != null && skip_mgr.Skip(fsdb, rdr)) return Io_stream_rdr_.Noop;
 		return rdr;
 	}
 	public boolean Get_to_fsys(Xof_fsdb_itm itm, boolean is_thumb, int w, Io_url bin_url) {return Get_to_fsys(itm.Orig_repo_name(), itm.Orig_ttl(), itm.Orig_ext(), is_thumb, w, itm.Lnki_time(), itm.Lnki_page(), bin_url);}
@@ -53,7 +53,7 @@ public class Xof_bin_wkr__fsdb_sql implements Xof_bin_wkr {
 		}
 		else {
 			Fsd_fil_itm fil_itm = Select_fil_bin(orig_repo, orig_ttl);		// find orig
-			if (fil_itm == Fsd_fil_itm.Null) return Io_stream_rdr_.Null;
+			if (fil_itm == Fsd_fil_itm.Null) return Io_stream_rdr_.Noop;
 			tmp_ids.Init_by_fil(fil_itm);
 			rv.Init_by_fsdb_near(Bool_.Y, rv.Orig_w());
 		}

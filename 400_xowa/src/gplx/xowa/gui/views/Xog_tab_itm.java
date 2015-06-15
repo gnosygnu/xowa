@@ -157,7 +157,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 			Xog_tab_itm_read_mgr.Show_page(this, page, true);
 			if (app.Api_root().Usr().History().Enabled()) {
 				app.Usere().History_mgr().Add(page);
-				app.Usere().Data_mgr().History_mgr().Update_async(app.Async_mgr(), ttl, url);
+				app.User().User_db_mgr().History_mgr().Update_async(app.Async_mgr(), ttl, url);
 			}
 			usr_dlg.Prog_none("", "", "rendering html");
 			// html_itm.Html_box().Size_(tab_mgr.Tab_mgr().Size()); // COMMENTED: causes clicks on macosx to be off by 4 px; NOTE: must resize tab here, else scrolling to anchor in background tab doesn't work (html_box has size of 0, 0) DATE:2015-05-03
@@ -166,7 +166,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 			if (wkr.Hdump_enabled()) {
 				wiki.File_mgr().Init_file_mgr_by_load(wiki);
 				Xof_fsdb_mgr fsdb_mgr = wiki.File_mgr().Fsdb_mgr();
-				async_wkr = new Xof_file_wkr(wiki.File__orig_mgr(), fsdb_mgr.Bin_mgr(), fsdb_mgr.Mnt_mgr(), app.Usere().File__cache_mgr(), wiki.File__repo_mgr(), html_itm, page, page.Hdump_data().Imgs());
+				async_wkr = new Xof_file_wkr(wiki.File__orig_mgr(), fsdb_mgr.Bin_mgr(), fsdb_mgr.Mnt_mgr(), app.Usere().User_db_mgr().Cache_mgr(), wiki.File__repo_mgr(), html_itm, page, page.Hdump_data().Imgs());
 				if (wiki.Html__hdump_enabled() && page.Revision_data().Html_db_id() == -1) {
 					wiki.Html__hdump_wtr().Save(page);
 				}
@@ -185,7 +185,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 		if (imgs.Count() > 0) {
 			Xof_file_wkr file_thread = new Xof_file_wkr
 				( wiki.File__orig_mgr(), wiki.File__bin_mgr(), wiki.File__mnt_mgr()
-				, app.User().File__cache_mgr(), wiki.File__repo_mgr(), html_itm, page, imgs
+				, app.User().User_db_mgr().Cache_mgr(), wiki.File__repo_mgr(), html_itm, page, imgs
 				);
 			thread_pool.Add_at_end(file_thread); thread_pool.Run();
 		}
@@ -253,7 +253,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 		}	catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.redlinks: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_brief(e));}
 		try {app.File_mgr().Cache_mgr().Compress_check();}
 		catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.cache: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_brief(e));}
-		app.Usere().File__cache_mgr().Page_end(app.Wiki_mgr());
+		app.Usere().User_db_mgr().Cache_mgr().Page_end(app.Wiki_mgr());
 		app.Log_wtr().Queue_enabled_(false);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

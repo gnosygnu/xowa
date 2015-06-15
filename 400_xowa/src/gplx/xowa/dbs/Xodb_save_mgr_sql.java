@@ -70,9 +70,9 @@ public class Xodb_save_mgr_sql implements Xodb_save_mgr {
 		db_mgr.Load_mgr().Load_by_id(db_page, page.Revision_data().Id());
 		Xowd_text_tbl text_tbl = db_mgr.Core_data_mgr().Dbs__get_at(db_page.Text_db_id()).Tbl__text();
 		text_tbl.Update(page.Revision_data().Id(), text_raw);
-		int html_db_id = db_page.Html_db_id();
-		if (html_db_id != -1)
-			db_mgr.Core_data_mgr().Tbl__page().Update__html_db_id(page_id, -1);	// zap html_db_id so that next load will repopulate it
+//			int html_db_id = db_page.Html_db_id();
+//			if (html_db_id != -1)
+//				db_mgr.Core_data_mgr().Tbl__page().Update__html_db_id(page_id, -1);	// zap html_db_id so that next load will repopulate it
 	}
 	public void Data_rename(Xoae_page page, int trg_ns, byte[] trg_ttl) {
 		db_mgr.Core_data_mgr().Tbl__page().Update__ns__ttl(page.Revision_data().Id(), trg_ns, trg_ttl);

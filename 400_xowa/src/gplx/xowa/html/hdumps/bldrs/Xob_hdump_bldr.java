@@ -23,12 +23,14 @@ public class Xob_hdump_bldr {
 	private final Xowd_db_mgr wiki_db_mgr; private final Xob_ns_to_db_mgr ns_to_db_mgr; int prv_row_len = 0;
 	private final Xodump_stats_itm stats_itm = new Xodump_stats_itm(); private final Xodump_stats_tbl stats_tbl;
 	private final Xog_page tmp_hpg = new Xog_page(); private final Bry_bfr tmp_bfr = Bry_bfr.reset_(Io_mgr.Len_mb);
-	private final Xohd_page_html_mgr__save hdump_save_mgr = new Xohd_page_html_mgr__save();		
-	public Xob_hdump_bldr(Xow_ns_mgr ns_mgr, Xodb_mgr_sql db_mgr, Db_conn make_conn, long hdump_db_max) {
+	private final Xohd_page_html_mgr__save hdump_save_mgr = new Xohd_page_html_mgr__save();
+	private final boolean hzip_enabled;
+	public Xob_hdump_bldr(Xow_ns_mgr ns_mgr, Xodb_mgr_sql db_mgr, Db_conn make_conn, long hdump_db_max, boolean hzip_enabled) {
 		this.wiki_db_mgr = db_mgr.Core_data_mgr();
 		this.ns_to_db_mgr = new Xob_ns_to_db_mgr(new Xob_ns_to_db_wkr__html(wiki_db_mgr.Db__core()), wiki_db_mgr, hdump_db_max);
 		this.stats_tbl = new Xodump_stats_tbl(make_conn);
 		Xob_ns_file_itm.Init_ns_bldr_data(Xowd_db_file_.Tid_html_data, ns_mgr, gplx.xowa.apis.xowa.bldrs.imports.Xoapi_import.Ns_file_map__each);
+		this.hzip_enabled = hzip_enabled;
 	}
 	public void Bld_term() {
 		this.Commit();
@@ -54,7 +56,7 @@ public class Xob_hdump_bldr {
 		Xow_hzip_mgr hzip_mgr = wiki.Html_mgr().Hzip_mgr();
 		page.File_queue().Clear();																					// need to reset uid to 0, else xowa_file_# will resume from last
 		wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_view_mode.Tid_read).Write_body(tmp_bfr, Xoh_wtr_ctx.Hdump, page);	// write to html again, except in hdump mode
-		hzip_mgr.Write(tmp_bfr, stats_itm, page.Url().Xto_full_bry(), tmp_bfr.Xto_bry_and_clear());					// hzip data
+		if (hzip_enabled) hzip_mgr.Write(tmp_bfr, stats_itm, page.Url().Xto_full_bry(), tmp_bfr.Xto_bry_and_clear());					// hzip data
 		page.Hdump_data().Body_(tmp_bfr.Xto_bry_and_clear());														// write to body bry
 	}
 }

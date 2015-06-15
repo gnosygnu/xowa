@@ -24,7 +24,7 @@ public class Xop_link_parser {
 	public byte[] Parse(Bry_bfr tmp_bfr, Xoa_url tmp_url, Xowe_wiki wiki, byte[] raw, byte[] or) {
 		html_xowa_ttl = null; html_anchor_cls = Xoh_lnki_consts.Tid_a_cls_image; html_anchor_rel = Xoh_lnki_consts.Tid_a_rel_none;	// default member variables for html
 		Xoae_app app = wiki.Appe(); int raw_len = raw.length;
-		app.Url_parser().Parse(tmp_url, raw);							
+		app.Utl__url_parser().Parse(tmp_url, raw);							
 		switch (tmp_url.Protocol_tid()) {
 			case Xoo_protocol_itm.Tid_http: case Xoo_protocol_itm.Tid_https:	// "http:" or "https:"; check if to offline wiki and redirect 
 				byte[] wiki_bry = tmp_url.Wiki_bry(), page_bry = tmp_url.Page_bry();

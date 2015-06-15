@@ -34,19 +34,12 @@ public class Xou_db_file {
 	public Xou_cache_tbl			Tbl__cache()	{return tbl__cache;}	private final Xou_cache_tbl tbl__cache;
 	public Xoud_bmk_tbl				Tbl__bmk()		{return tbl__bmk;}		private final Xoud_bmk_tbl tbl__bmk;
 	public void Init_assert() {
-		boolean create = false;
-		if (Env_.Mode_testing()) {
-			create = true;
-		}
-		else {
-			Schema_db_mgr schema_db_mgr = new Schema_db_mgr();
-			schema_db_mgr.Loader_(Schema_loader_mgr_.Sqlite);
-			schema_db_mgr.Init(conn);
-			create = !schema_db_mgr.Tbl_mgr().Has(tbl__cache.Tbl_name());
-		}
-		if (create) {
+		if (!conn.Schema_tbl_exists(tbl__cache.Tbl_name())) {
 			tbl__cfg.Create_tbl();
 			tbl__cache.Create_tbl();
 		}
+//			if (!conn.Schema_tbl_exists(tbl__bmk.Tbl_name())) {
+//				tbl__bmk.Create_tbl();
+//			}
 	}
 }

@@ -24,6 +24,7 @@ public class Xohd_data_itm__gallery_mgr implements Xohd_data_itm {
 	public int Data_tid() {return Xohd_data_tid.Tid_gallery;}
 	public void Data_write(Bry_bfr bfr) {
 		bfr	.Add_int_variable(Xohd_data_tid.Tid_gallery).Add_byte_pipe()
+			.Add_int_variable(uid).Add_byte_pipe()
 			.Add_int_variable(box_max).Add_byte_pipe()
 			;
 		bfr.Add_byte_nl();

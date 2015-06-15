@@ -55,12 +55,20 @@ public class Wdata_visitor__html_wtr_tst {
 		, "+0.1234 ±0.0001 units"
 		);
 	}
-	@Test   public void Entity() {
+	@Test   public void Entity_qid() {
 		fxt
 		.Init_resolved_qid(1, "item_1")
 		.Test_claim_val
-		( fxt.Wdata_fxt().Make_claim_entity(1, 1)
+		( fxt.Wdata_fxt().Make_claim_entity_qid(1, 1)
 		, "<a href='/wiki/Q1'>item_1</a>"
+		);
+	}
+	@Test   public void Entity_pid() {
+		fxt
+		.Init_resolved_pid(1, "item_1")
+		.Test_claim_val
+		( fxt.Wdata_fxt().Make_claim_entity_pid(1, 1)
+		, "<a href='/wiki/Property:P1'>item_1</a>"
 		);
 	}
 	@Test   public void Globecoordinate() {

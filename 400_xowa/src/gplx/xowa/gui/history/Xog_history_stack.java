@@ -65,5 +65,6 @@ public class Xog_history_stack {
 			this.Add(itm);
 		}
 	}
+	public void Cur_pos_(int v) {this.cur_pos = v;}
 	public static final byte Nav_fwd = 1, Nav_bwd = 2, Nav_by_anchor = 3;
 }

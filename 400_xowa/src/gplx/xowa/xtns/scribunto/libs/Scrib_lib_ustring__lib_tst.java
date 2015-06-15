@@ -82,6 +82,9 @@ public class Scrib_lib_ustring__lib_tst {
 	@Test  public void Gsub_replace_is_int() {	// PURPOSE: do not fail if integer is passed in for @replace; PAGE:en.d:λύω DATE:2014-09-02
 		Exec_gsub_regx("abcd", 1	 , -1, 1		, "abcd;0");
 	}
+	@Test   public void Gsub_word_class() {		// PURPOSE: handle %w in extended regex; PAGE:en.w:A♯_(musical_note) DATE:2015-06-10
+		Exec_gsub_regx("(a b)", "[^%w%p%s]", -1, "x", "(a b);0");	// was returning "(x x)" b/c ^%w was incorrectly matching "a" and "b"
+	}
 	@Test  public void Gmatch_init() {
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_ustring.Invk_gmatch_init, Object_.Ary("abcabc", "a(b)")						, "1=a(b)\n2=\n  1=false");
 		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_ustring.Invk_gmatch_init, Object_.Ary("abcabc", "a()(b)")					, "1=a()(b)\n2=\n  1=true\n  2=false");

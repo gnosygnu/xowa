@@ -19,7 +19,6 @@ package gplx.xowa.files.gui; import gplx.*; import gplx.xowa.*; import gplx.xowa
 public interface Xog_js_wkr {
 	void Html_img_update		(String uid, String src, int w, int h);
 	void Html_redlink			(String html_uid);
-	boolean Html_doc_loaded		();
 
 	void Html_atr_set			(String uid, String key, String val);
 	void Html_elem_replace_html	(String uid, String html);

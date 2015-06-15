@@ -47,6 +47,7 @@ public class Xob_cmd_keys {
 	, Key_util_cleanup				= "util.cleanup"			// "core.cleanup"
 	, Key_util_download				= "util.download"			// "file.download"
 	, Key_util_xml_dump				= "util.xml_dump"
+	, Key_wbase_json_dump			= "wbase.json_dump"
 	, Key_wbase_qid					= "wbase.qid"				// "text.wdata.qid"
 	, Key_wbase_pid					= "wbase.pid"				// "text.wdata.pid"
 	, Key_wbase_db					= "wbase.db"				// "wiki.wdata_db"

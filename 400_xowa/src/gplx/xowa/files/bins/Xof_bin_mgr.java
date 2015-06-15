@@ -56,7 +56,7 @@ public class Xof_bin_mgr {
 	public boolean Find_to_url_as_bool(int exec_tid, Xof_fsdb_itm fsdb) {return Find_to_url(exec_tid, fsdb) != Io_url_.Empty;}
 	private Io_url Find_to_url(int exec_tid, Xof_fsdb_itm fsdb) {
 		Io_stream_rdr rdr = Find_as_rdr(exec_tid, fsdb);
-		if (rdr == Io_stream_rdr_.Null) return Io_url_.Empty;
+		if (rdr == Io_stream_rdr_.Noop) return Io_url_.Empty;
 		Io_url trg = fsdb.Html_view_url();
 		fsdb.File_size_(rdr.Len());
 		if (fsdb.File_resized()) return trg;				// rdr is opened directly from trg; return its url; occurs when url goes through imageMagick / inkscape, or when thumb is already on disk;
@@ -64,7 +64,7 @@ public class Xof_bin_mgr {
 		return trg;
 	}
 	public Io_stream_rdr Find_as_rdr(int exec_tid, Xof_fsdb_itm fsdb) {
-		Io_stream_rdr rv = Io_stream_rdr_.Null;
+		Io_stream_rdr rv = Io_stream_rdr_.Noop;
 		Xof_repo_itm repo = repo_mgr.Repos_get_by_wiki(fsdb.Orig_repo_name()).Trg();
 		boolean file_is_orig = fsdb.File_is_orig();
 		if (file_is_orig || exec_tid == Xof_exec_tid.Tid_viewer_app) {			// orig or viewer_app; note that viewer_app always return orig
@@ -73,7 +73,7 @@ public class Xof_bin_mgr {
 			for (int i = 0; i < wkrs_len; i++) {
 				Xof_bin_wkr wkr = wkrs[i];
 				rv = wkr.Get_as_rdr(fsdb, Bool_.N, fsdb.Html_w());
-				if (rv == Io_stream_rdr_.Null) continue;						// orig not found; continue;
+				if (rv == Io_stream_rdr_.Noop) continue;						// orig not found; continue;
 				fsdb.File_exists_y_();
 				return rv;
 			}
@@ -84,12 +84,12 @@ public class Xof_bin_mgr {
 			for (int i = 0; i < wkrs_len; i++) {
 				Xof_bin_wkr wkr = wkrs[i];
 				rv = wkr.Get_as_rdr(fsdb, Bool_.Y, fsdb.Html_w());				// get thumb's bin
-				if (rv != Io_stream_rdr_.Null) {								// thumb's bin exists;
+				if (rv != Io_stream_rdr_.Noop) {								// thumb's bin exists;
 					fsdb.File_exists_y_();
 					return rv;
 				}
 				rv = wkr.Get_as_rdr(fsdb, Bool_.N, fsdb.Orig_w());				// thumb missing; get orig;
-				if (rv == Io_stream_rdr_.Null) {
+				if (rv == Io_stream_rdr_.Noop) {
 					usr_dlg.Log_direct(String_.Format("bin_mgr:thumb not found; wkr={0} ttl={1} w={2}", wkr.Key(), fsdb.Orig_ttl(), fsdb.Lnki_w()));
 					continue;													// nothing found; continue;
 				}
@@ -104,7 +104,7 @@ public class Xof_bin_mgr {
 				return rv;
 			}
 		}
-		return Io_stream_rdr_.Null;
+		return Io_stream_rdr_.Noop;
 	}
 	private boolean Resize(int exec_tid, Xof_fsdb_itm itm, boolean file_is_orig, Io_url src, Io_url trg) {			
 		tmp_size.Html_size_calc(exec_tid, itm.Lnki_w(), itm.Lnki_h(), itm.Lnki_type(), mnt_mgr.Patch_upright(), itm.Lnki_upright(), itm.Orig_ext().Id(), itm.Orig_w(), itm.Orig_h(), Xof_img_size.Thumb_width_img);

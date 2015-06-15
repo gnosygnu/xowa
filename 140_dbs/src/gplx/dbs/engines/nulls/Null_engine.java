@@ -38,5 +38,6 @@ public class Null_engine implements Db_engine {
 	public void				Ddl_delete_tbl(String tbl)						{}
 	public void				Env_db_attach(String alias, Io_url db_url)		{}
 	public void				Env_db_detach(String alias)						{}
+	public boolean				Schema_tbl_exists(String name)					{return false;}
         public static final Null_engine _ = new Null_engine(); Null_engine() {}
 }

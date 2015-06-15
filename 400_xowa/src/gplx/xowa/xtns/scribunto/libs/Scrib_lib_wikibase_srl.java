@@ -23,7 +23,7 @@ class Scrib_lib_wikibase_srl {
 		List_adp rv = List_adp_.new_();
 		if (header_enabled) {
 			rv.Add(KeyVal_.new_("id", wdoc.Qid()));
-			rv.Add(KeyVal_.new_("type", Wdata_dict_value_entity.Val_entity_type_item_str));
+			rv.Add(KeyVal_.new_("type", Wdata_dict_value_entity_tid.Str_item));
 			rv.Add(KeyVal_.new_("schemaVersion", base_adj + 1));	// NOTE: needed by mw.wikibase.lua
 		}
 		Srl_root(rv, Wdata_doc_parser_v2.Str_labels			, Srl_langtexts	(Wdata_dict_langtext.Str_language	, Wdata_dict_langtext.Str_value, wdoc.Label_list()));

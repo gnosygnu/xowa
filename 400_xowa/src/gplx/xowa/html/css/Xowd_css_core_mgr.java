@@ -16,7 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.css; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import gplx.dbs.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.dbs.*;
+import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.bldrs.css.*;
 public class Xowd_css_core_mgr {
 	public static void Set(Xowd_css_core_tbl core_tbl, Xowd_css_file_tbl file_tbl, Io_url css_dir, String key) {
 		Db_conn conn = core_tbl.Conn();

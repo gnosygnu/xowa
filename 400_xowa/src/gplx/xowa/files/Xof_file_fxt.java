@@ -32,7 +32,10 @@ public class Xof_file_fxt {
 		Xow_repo_mgr_.Assert_repos(wiki.Appe(), wiki);
 		return this;
 	}
-	public Xof_file_fxt Init_cache() {wiki.Appe().Usere().Init_db(); return this;}
+	public Xof_file_fxt Init_cache() {
+		wiki.App().User().User_db_mgr().Init_by_app(Bool_.N, wiki.App().Fsys_mgr().Root_dir().GenSubFil_nest("user", "xowa.user.anonymous.sqlite3"));
+		return this;
+	}
 	public Xof_file_fxt Init_orig() {
 		Db_conn conn = Db_conn_bldr.I.Get_or_new(Io_url_.mem_fil_("mem/xowa/wiki/" + wiki.Domain_str() + "/orig.xowa")).Conn();
 		Xof_orig_tbl orig_tbl = new Xof_orig_tbl(conn, Bool_.Y);

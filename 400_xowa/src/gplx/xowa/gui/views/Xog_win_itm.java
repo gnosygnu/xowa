@@ -156,7 +156,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 			wiki.ParsePage_root(page, true);		// NOTE: must reparse page if (a) Edit -> Read; or (b) "Options" save
 			Xoa_url url = page.Url();
 			if (url.Args_exists(Xoa_url_parser.Bry_arg_action, Xoa_url_parser.Bry_arg_action_edit))	// url has ?action=edit
-				app.Url_parser().Parse(url, url.Xto_full_bry());	// remove all query args; handle (1) s.w:Earth?action=edit; (2) click on Read; DATE:2014-03-06
+				app.Utl__url_parser().Parse(url, url.Xto_full_bry());	// remove all query args; handle (1) s.w:Earth?action=edit; (2) click on Read; DATE:2014-03-06
 		}
 		tab.View_mode_(new_mode_tid);
 		if (page.Missing()) return;

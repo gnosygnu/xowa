@@ -22,7 +22,7 @@ public class Xoud_history_special implements Bry_fmtr_arg, Xows_page {
 	public Xows_special_meta Special_meta() {return Xows_special_meta_.Itm__page_history;}
 	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
 		Xoae_app app = wiki.Appe();
-		Xoud_history_mgr mgr = app.Usere().Data_mgr().History_mgr();
+		Xoud_history_mgr mgr = app.User().User_db_mgr().History_mgr();
 		mgr.Select(rows, 100);
 		Bry_bfr bfr = app.Utl__bfr_mkr().Get_m001(); 
 		html_grp.Bld_bfr_many(bfr, this);

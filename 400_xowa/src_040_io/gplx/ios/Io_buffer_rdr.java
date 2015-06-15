@@ -17,16 +17,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.ios; import gplx.*;
 import gplx.ios.*;/*IoStream*/
-public class Io_buffer_rdr implements RlsAble {	//_20120115
+public class Io_buffer_rdr implements RlsAble {
+	private Io_stream_rdr rdr;
 	Io_buffer_rdr(Io_stream_rdr rdr, Io_url url, int bfr_len) {
+		this.rdr = rdr; this.url = url;
 		if (bfr_len <= 0) throw Err_.new_("bfr_len must be > 0").Add("bfr_len", bfr_len);
 		bfr = new byte[bfr_len]; this.bfr_len = bfr_len;
-		this.rdr = rdr;
 		IoItmFil fil = Io_mgr.I.QueryFil(url); if (!fil.Exists()) throw Err_.new_("fil does not exist").Add("url", url);
 		fil_len = fil.Size();
 		fil_pos = 0;
 		fil_eof = false;
-	}	Io_stream_rdr rdr;
+	}
+	public Io_url Url() {return url;} private Io_url url;
 	public byte[] Bfr() {return bfr;} private byte[] bfr;
 	public int Bfr_len() {return bfr_len;} private int bfr_len;
 	public long Fil_len() {return fil_len;} long fil_len;
@@ -39,7 +41,7 @@ public class Io_buffer_rdr implements RlsAble {	//_20120115
 			bfr[i - bfr_pos] = bfr[i];
 		return Bfr_load(bfr_len - bfr_pos, bfr_pos);		// fill rest of bfr; EX: [2]... will come from file
 	}
-	boolean Bfr_load(int bgn, int len) {
+	private boolean Bfr_load(int bgn, int len) {
 		int read = rdr.Read(bfr, bgn, len);
 		if (read == gplx.ios.Io_stream_rdr_.Read_done) {fil_eof = true; return false;}
 		fil_pos += read;
@@ -57,15 +59,15 @@ public class Io_buffer_rdr implements RlsAble {	//_20120115
 		bfr_len = -1;
 		if (rdr != null) rdr.Rls();
 	}
-	@gplx.Internal protected void DumpToFil(int bgn, int len, String urlStr, String msg) {
+	@gplx.Internal protected void Dump_to_file(int bgn, int len, String url_str, String msg) {	// DBG:
 		String text = String_.new_u8_by_len(bfr, bgn, len);
-		Io_mgr.I.AppendFilStr(Io_url_.new_any_(urlStr), msg + text + "\n");
+		Io_mgr.I.AppendFilStr(Io_url_.new_any_(url_str), msg + text + "\n");
 	}
 	public static Io_buffer_rdr new_(Io_stream_rdr rdr, int bfr_len) {
 		Io_buffer_rdr rv = new Io_buffer_rdr(rdr, rdr.Url(), bfr_len);
 		rdr.Open();
 		rv.Bfr_load(0, bfr_len);
 		return rv;
-	}	Io_buffer_rdr() {}
-	public static final Io_buffer_rdr Null = new Io_buffer_rdr();
+	}
+	public static final Io_buffer_rdr Null = new Io_buffer_rdr(); Io_buffer_rdr() {}
 }

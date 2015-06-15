@@ -27,6 +27,10 @@ public class Wdata_lbl_wkr_wiki implements Wdata_lbl_wkr {
 		for (int i = 0; i < len; ++i) {
 			Wdata_lbl_itm itm = (Wdata_lbl_itm)queue.Get_at(i);
 			Wdata_doc wdoc = wdata_mgr.Pages_get(itm.Ttl());
+			if (wdoc == null) {
+				Xoa_app_.Usr_dlg().Warn_many("", "", "wbase.lbl_wkr:page does not exists; page=~{0}", itm.Ttl());
+				continue; // handle incomplete wikidata dumps; DATE:2015-06-11
+			}
 			Ordered_hash labels = wdoc.Label_list();
 			if (labels.Count() == 0) continue;
 			labels.Sort_by(sorter);

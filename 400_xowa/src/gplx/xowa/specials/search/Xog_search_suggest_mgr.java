@@ -35,7 +35,7 @@ public class Xog_search_suggest_mgr implements GfoInvkAble {
 		this.args_default_str = v;
 		byte[] bry = Bry_.new_u8("http://x.org/a?" + v);
 		Gfo_url tmp_url = new Gfo_url();
-		app.Url_parser().Url_parser().Parse(tmp_url, bry, 0, bry.length);
+		app.Utl__url_parser().Url_parser().Parse(tmp_url, bry, 0, bry.length);
 		args_default = tmp_url.Args();
 	}
 	private String args_default_str = "";// default args for search

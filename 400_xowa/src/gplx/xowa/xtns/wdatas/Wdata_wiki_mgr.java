@@ -41,7 +41,9 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 	public void Init_by_app() {}
 	public Wdata_doc_parser Wdoc_parser(Json_doc jdoc) {
 		Json_itm_kv itm_0 = Json_itm_kv.cast_(jdoc.Root().Subs_get_at(0));										// get 1st node
-		return Bry_.Eq(itm_0.Key().Data_bry(), Wdata_doc_parser_v2.Bry_type) ? wdoc_parser_v2 : wdoc_parser_v1;	// if "type", must be v2
+		return Bry_.Eq(itm_0.Key().Data_bry(), Wdata_doc_parser_v2.Bry_type) 
+			|| Bry_.Eq(itm_0.Key().Data_bry(), Wdata_doc_parser_v2.Bry_id) 
+			? wdoc_parser_v2 : wdoc_parser_v1;	// if "type", must be v2
 	}
 	public Xop_log_property_wkr Property_wkr() {return property_wkr;} private Xop_log_property_wkr property_wkr;
 	public Int_obj_ref Tmp_prop_ref() {return tmp_prop_ref;} Int_obj_ref tmp_prop_ref = Int_obj_ref.zero_();
@@ -202,6 +204,11 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 	public static final int Ns_property = 120;
 	public static final String Ns_property_name = "Property";
 	public static final byte[] Ns_property_name_bry = Bry_.new_a7(Ns_property_name);
+	public static final byte[]
+	  Ttl_prefix_qid_bry_db		= Bry_.new_a7("q")	// NOTE: for historical reasons this is standardized as lowercase q not Q; DATE:2015-06-12
+	, Ttl_prefix_qid_bry_gui	= Bry_.new_a7("Q")	// NOTE: use uppercase Q for writing html; DATE:2015-06-12
+	, Ttl_prefix_pid_bry		= Bry_.new_a7("Property:P")
+	;
 	public static final int Pid_null = -1;
 	public static final byte[] Html_json_id = Bry_.new_a7("xowa-wikidata-json");
 	public static boolean Wiki_page_is_json(int wiki_tid, int ns_id) {

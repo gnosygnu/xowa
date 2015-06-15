@@ -47,6 +47,10 @@ public class DateAdp_ implements GfoInvkAble {
 		return new DateAdp(y, M, d, h, m, s, f);
 	}
 	public static DateAdp cast_(Object arg) {try {return (DateAdp)arg;} catch(Exception exc) {throw Err_.type_mismatch_exc_(exc, DateAdp.class, arg);}}
+	public static DateAdp parse_iso8561_or(String raw, DateAdp or) {
+		try {return parse_iso8561(raw);}
+		catch (Exception e) {Err_.Noop(e); return or;}
+	}
 	public static DateAdp parse_iso8561(String raw) {	// NOTE: for now, same as parse_gplx
 		int[] ary = date_parser.Parse_iso8651_like(raw);
 		if (ary[1] < 1 || ary[1] > 12) return DateAdp_.MinValue;	// guard against invalid month

@@ -43,7 +43,7 @@ public class Xohd_hdump_wtr {
 		else {
 			hdump_db = core_data_mgr.Dbs__get_at(html_db_id);
 			html_db_id = hdump_db.Id();
-			return;
+			// return;	// DELETE: don't remember why return was here; DATE:2015-06-06
 		}
 		save_mgr.Update(tmp_bfr, hdump_db.Tbl__html(), page);
 		tmp_bfr.Mkr_rls();

@@ -25,11 +25,11 @@ public class Xoav_wiki_mgr implements Xoa_wiki_mgr, GfoInvkAble {
 	public Xowv_wiki Import_by_fil(Io_url fil) {
 		Io_url wiki_dir = fil.OwnerDir();
 		Xowv_wiki rv = Load(Gen_domain_str(fil.NameOnly()), wiki_dir);
-		app.User_data_mgr().Site_mgr().Import(rv.Domain_str(), rv.Domain_str(), wiki_dir.Raw(), "");
+		app.User().User_db_mgr().Site_mgr().Import(rv.Domain_str(), rv.Domain_str(), wiki_dir.Raw(), "");
 		return rv;
 	}
 	public void Load_by_user_data() {
-		Xoud_site_row[] ary = app.User_data_mgr().Site_mgr().Get_all();
+		Xoud_site_row[] ary = app.User().User_db_mgr().Site_mgr().Get_all();
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			Xoud_site_row itm = ary[i];

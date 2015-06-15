@@ -136,12 +136,12 @@ public class Xoa_url_parser {
 		return Parse_url(Xoa_url.blank_(), app, cur_wiki, raw_bry, 0, raw_bry.length, false);
 	}
 	public static Xoa_url Parse_url(Xoae_app app, Xowe_wiki cur_wiki, byte[] raw, int bgn, int end, boolean from_url_bar) {return Parse_url(Xoa_url.blank_(), app, cur_wiki, raw, bgn, end, from_url_bar);}
-	public static Xoa_url Parse_url(Xoa_url rv, Xoae_app app, Xowe_wiki cur_wiki, byte[] raw, int bgn, int end, boolean from_url_bar) {
+	public static Xoa_url Parse_url(Xoa_url rv, Xoae_app app, Xow_wiki cur_wiki, byte[] raw, int bgn, int end, boolean from_url_bar) {
 		Xowe_wiki wiki = null; Bry_bfr_mkr bfr_mkr = app.Utl__bfr_mkr();
 		byte[] cur_wiki_key = cur_wiki.Domain_bry();
 		byte[] page_bry = Bry_.Empty;
 		boolean page_is_main_page = false;
-		if (app.Url_parser().Parse(rv, raw, bgn, end)) {	// parse passed; url has protocol; take Page; EX: "http://en.wikipedia.org/wiki/Earth"
+		if (app.Utl__url_parser().Parse(rv, raw, bgn, end)) {	// parse passed; url has protocol; take Page; EX: "http://en.wikipedia.org/wiki/Earth"
 			wiki = Parse_url__wiki(app, rv.Wiki_bry());
 			if (rv.Segs_ary().length == 0 && rv.Page_bry() != null && Bry_.Eq(rv.Page_bry(), Xoa_url_parser.Bry_wiki_name))	// wiki, but directly after site; EX:en.wikipedia.org/wiki
 				page_is_main_page = true;
@@ -214,7 +214,7 @@ public class Xoa_url_parser {
 			byte[] anchor_bry = Xoa_app_.Utl__encoder_mgr().Id().Encode(rv.Anchor_bry());	// reencode for anchors (which use . encoding, not % encoding); PAGE:en.w:Enlightenment_Spain#Enlightened_despotism_.281759%E2%80%931788.29
 			rv.Anchor_bry_(anchor_bry);
 		}
-		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, page_bry);
+		Xoa_ttl ttl = wiki.Ttl_parse(page_bry);
 		if (ttl != null) {	// can still be empty; EX: "en.wikipedia.org"
 			Xow_xwiki_itm lang_xwiki = ttl.Wik_itm();
 			if (lang_xwiki != null && lang_xwiki.Type_is_xwiki_lang(wiki.Lang().Lang_id())) {	// format of http://en.wikipedia.org/wiki/fr:A
@@ -267,7 +267,7 @@ public class Xoa_url_parser {
 	}
 	private static byte[] Parse_from_url_bar__strip_mobile(byte[] v) {// DATE:2014-05-03
 		int pos = Bry_finder.Find_fwd(v, Byte_ascii.Dot);
-		if (	pos == Bry_finder.Not_found	// no dot; EX: "A"
+		if (	pos == Bry_finder.Not_found		// no dot; EX: "A"
 			||	pos + 2 >= v.length				// not enough space for .m.; EX: "A.b"
 			)	
 			return v;
@@ -285,7 +285,7 @@ public class Xoa_url_parser {
 	private static final byte Id_arg_redirect = 0, Id_arg_uselang = 1, Id_arg_title = 2, Id_arg_action = 3, Id_arg_fulltext = 4, Id_arg_xowa_vnt = 5;
 	private static final byte[] Bry_arg_redirect = Bry_.new_a7("redirect"), Bry_arg_uselang = Bry_.new_a7("uselang"), Bry_arg_title = Bry_.new_a7("title"), Bry_arg_fulltext = Bry_.new_a7("fulltext");
 	private static final byte[] Bry_upload_wikimedia_org = Bry_.new_a7("upload.wikimedia.org"), Bry_dot_org = Bry_.new_a7(".org")
-		, Bry_file = Bry_.new_a7("File:");	// NOTE: File does not need i18n; is a canonical namespace 
+	, Bry_file = Bry_.new_a7("File:");	// NOTE: File does not need i18n; is a canonical namespace 
 	public static final byte[] Bry_wiki_name = Bry_.new_a7("wiki");
 	private static final byte[][] Bry_wiki_name_bry = new byte[][] {Bry_wiki_name};
 	public static final byte[] Bry_arg_action_eq_edit = Bry_.new_a7("action=edit")

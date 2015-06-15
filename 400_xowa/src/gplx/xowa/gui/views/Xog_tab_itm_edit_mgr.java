@@ -26,11 +26,13 @@ public class Xog_tab_itm_edit_mgr {
 			wiki.Db_mgr().Save_mgr().Data_create(page.Ttl(), new_text);
 			page.Edit_mode_update_();	// set to update so that next save does not try to create
 		}
-		else
+		else {
 			wiki.Db_mgr().Save_mgr().Data_update(page, new_text);
+		}
 		Invalidate(wiki);
 		page.Data_raw_(new_text);
 		wiki.ParsePage_root(page, true);			// refresh html
+		if (wiki.Html__hdump_enabled()) wiki.Html__hdump_wtr().Save(page);	// must go after wiki.ParsePage_root
 		win_itm.Usr_dlg().Prog_one("", "", "saved page ~{0}", String_.new_u8(page.Ttl().Full_txt_raw()));	// NOTE: show message after ParsePage_root, b/c ParsePage_root will flash "Loading page"; DATE:2014-05-17
 		if (!quick_save) {							// full_save; save page and go to read mode
 			page.Html_data().Edit_preview_(Bry_.Empty);

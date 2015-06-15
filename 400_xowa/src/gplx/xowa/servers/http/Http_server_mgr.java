@@ -75,7 +75,7 @@ public class Http_server_mgr implements GfoInvkAble {
 		byte[] wiki_domain = Bry_.new_u8(wiki_domain_str);
 		byte[] page_ttl = Bry_.new_u8(page_ttl_str);
 		Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_make(wiki_domain);							// get the wiki
-		Xoa_url page_url = app.Url_parser().Parse(page_ttl);									// get the url (needed for query args)
+		Xoa_url page_url = app.Utl__url_parser().Parse(page_ttl);									// get the url (needed for query args)
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, page_ttl);											// get the ttl
 		Xoae_page page = wiki.Load_page_by_ttl(page_url, ttl);										// get page and parse it
 		Gxw_html_server.Assert_tab(app, page);													// HACK: assert at least 1 tab

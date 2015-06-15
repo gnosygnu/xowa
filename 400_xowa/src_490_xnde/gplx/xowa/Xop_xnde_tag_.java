@@ -136,8 +136,9 @@ public class Xop_xnde_tag_ {
 , Tid_xowa_tag_end = 110
 , Tid_quiz = 111
 , Tid_indicator = 112
+, Tid_q = 113
 	;
-	public static final int _MaxLen = 113;
+	public static final int _MaxLen = 114;
 	public static final Xop_xnde_tag[] Ary = new Xop_xnde_tag[_MaxLen];
 	private static Xop_xnde_tag new_(int id, String name) {
 		Xop_xnde_tag rv = new Xop_xnde_tag(id, name);
@@ -258,5 +259,6 @@ public class Xop_xnde_tag_ {
 , Tag_xowa_tag_end = new_(Tid_xowa_tag_end, "xtag_end").Xtn_()
 , Tag_quiz = new_(Tid_quiz, "quiz").Xtn_()
 , Tag_indicator = new_(Tid_indicator, "indicator").Xtn_()
+, Tag_q = new_(Tid_q, "q")
 	;
 }

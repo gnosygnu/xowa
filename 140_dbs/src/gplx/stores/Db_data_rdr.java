@@ -56,7 +56,7 @@ public class Db_data_rdr extends DataRdr_base implements DataRdr {
 			java.io.InputStream input_stream = rdr.getBinaryStream(key);			
 			return gplx.ios.Io_stream_rdr_.file_(input_stream);
 		}
-		catch (SQLException e) {return gplx.ios.Io_stream_rdr_.Null;}
+		catch (SQLException e) {return gplx.ios.Io_stream_rdr_.Noop;}
 	}
 	
 	public boolean MoveNextPeer() {

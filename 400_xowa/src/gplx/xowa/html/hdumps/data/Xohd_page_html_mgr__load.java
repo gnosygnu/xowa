@@ -23,6 +23,7 @@ public class Xohd_page_html_mgr__load {
 	private final Xohd_page_srl_mgr srl_mgr = Xohd_page_srl_mgr.I;
 	private final Bry_rdr rdr = new Bry_rdr(); private final List_adp rows = List_adp_.new_(), imgs = List_adp_.new_();
 	public void Load_page(Xow_wiki wiki, Xog_page hpg, Xowd_html_tbl tbl, int page_id, Xoa_ttl page_ttl) {
+		Xoa_app_.Usr_dlg().Plog_many("", "", "hdump.load.text: ttl=~{0}", page_ttl.Full_db_as_str());
 		tbl.Select_by_page(rows, page_id);
 		Parse_rows(wiki, hpg, page_id, Xoa_url.blank_(), page_ttl, rows);
 	}
@@ -62,6 +63,7 @@ public class Xohd_page_html_mgr__load {
 			default									: throw Err_.unhandled(tid);
 		}
 		img_itm.Data_parse(rdr);
+		// Xoa_app_.Usr_dlg().Log_many("", "", "itm: ~{0}", img_itm.Data_print());
 		rdr.Pos_add_one();
 		return img_itm;
 	}
@@ -80,6 +82,6 @@ public class Xohd_page_html_mgr__load {
 	private void Load_data_gallery(Xog_page hpg) {
 		int uid = rdr.Read_int_to_pipe();
 		int box_max = rdr.Read_int_to_pipe();
-		hpg.Gallery_itms().Add(uid, new Xohd_data_itm__gallery_mgr(uid, box_max));
+		hpg.Gallery_itms().Add_if_dupe_use_nth(uid, new Xohd_data_itm__gallery_mgr(uid, box_max));	// TODO: temporarily added b/c last build did not add gallery uid correctly
 	}
 }

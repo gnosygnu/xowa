@@ -45,7 +45,7 @@ class DataRdr_null implements DataRdr {
 	public byte ReadByte(String key) {return Byte_.Min_value;}			public byte ReadByteOr(String key, byte or) {return or;}
 	public DecimalAdp ReadDecimal(String key) {return DecimalAdp_.Zero;}public DecimalAdp ReadDecimalOr(String key, DecimalAdp or) {return or;}
 	public DateAdp ReadDate(String key) {return DateAdp_.MinValue;}		public DateAdp ReadDateOr(String key, DateAdp or) {return or;}
-	public gplx.ios.Io_stream_rdr ReadRdr(String key) {return gplx.ios.Io_stream_rdr_.Null;}
+	public gplx.ios.Io_stream_rdr ReadRdr(String key) {return gplx.ios.Io_stream_rdr_.Noop;}
 	public boolean MoveNextPeer() {return false;}
 	public DataRdr Subs() {return this;}
 	public DataRdr Subs_byName(String name) {return this;}

@@ -26,8 +26,9 @@ public class Fsm_mnt_mgr implements GfoInvkAble {
 		this.mnt_tbl = new Fsm_mnt_tbl	(conn, db_core.File__schema_is_1());
 		this.mnt_ary = mnt_tbl.Select_all();
 		this.mnt_ary_len = mnt_ary.length;
-		for (int i = 0; i < mnt_ary_len; ++i)
+		for (int i = 0; i < mnt_ary_len; ++i) {
 			mnt_ary[i].Ctor_by_load(db_core);
+		}
 		this.insert_idx = cfg_tbl.Select_int(Cfg_grp_core, Cfg_key_mnt_insert_idx);
 		Db_cfg_hash cfg_hash = this.Mnts__get_main().Cfg_mgr().Grps_get_or_load(Xof_fsdb_mgr_cfg.Grp_xowa);
 		boolean use_thumb_w	= cfg_hash.Get(Xof_fsdb_mgr_cfg.Key_upright_use_thumb_w).To_yn_or_n();

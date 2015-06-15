@@ -101,7 +101,7 @@ public class Bry_ {
 			}
 		}
 	}
-	public static byte[] Coalesce(byte[] orig, byte[] val_if_not_blank) {return Bry_.Len_eq_0(val_if_not_blank) ? orig : val_if_not_blank;}
+	public static byte[] Coalesce(byte[] orig, byte[] val_if_not_blank) {return Bry_.Len_eq_0(orig) ? val_if_not_blank : orig;}
 	public static byte Get_at_end_or_fail(byte[] bry) {
 		if (bry == null) throw Err_.new_("bry is null");
 		int bry_len = bry.length;

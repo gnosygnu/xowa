@@ -152,4 +152,7 @@ public class Xop_xnde_wkr__basic_tst {
 		fxt.Test_parse_page_all_str("{{test}}", "<pre>{{a}}</pre>");
 		fxt.Init_defn_clear();
 	}
+	@Test  public void Quote() {// PURPOSE: handle <q> element; DATE:2015-05-29
+		fxt.Test_parse_page_wiki_str("<q>a</q>", "<q>a</q>");
+	}
 }

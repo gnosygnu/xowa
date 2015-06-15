@@ -19,5 +19,6 @@ package gplx.xowa2.users; import gplx.*; import gplx.xowa2.*;
 public class Xouv_cfg_keys {
 	public static final String
 	  Key_history_stack = "xowa.gui.history_stack"
+	, Key_history_idx	= "xowa.gui.history.idx"
 	;
 }

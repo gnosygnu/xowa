@@ -40,7 +40,7 @@ public class Xoapi_find implements GfoInvkAble {
 }
 class Xog_find_box {
 	private Xoae_app app; private Xog_win_itm win; private GfuiTextBox find_box;
-	private boolean dir_fwd = true, case_match = false, wrap_search = true;
+	private String prv_find_text; private boolean dir_fwd = true, case_match = false, wrap_search = true;
 	public Xog_find_box(Xoae_app app) {
 		this.app = app;
 		this.win = app.Gui_mgr().Browser_win();
@@ -49,10 +49,11 @@ class Xog_find_box {
 	public void Show() {app.Gui_mgr().Layout().Find_show();}
 	public void Hide() {
 		app.Gui_mgr().Layout().Find_close();
-		if (win.Tab_mgr().Active_tab_is_null()) return;	// if no active_tab, just exit
-		win.Active_html_itm().Html_box().Html_js_eval_script("return xowa_find_html_all_del();");
+		Xog_tab_itm tab = win.Tab_mgr().Active_tab(); if (tab == Xog_tab_itm_.Null) return;
+		if (tab.View_mode() == Xopg_view_mode.Tid_read)	// do not fire find("") for edit / html, else focus issues; DATE:2015-06-10
+			Exec_find(prv_find_text, Bool_.N);
 	}
-	public void Show_by_paste()		{
+	public void Show_by_paste()	{
 		this.Show();
 		if (win.Tab_mgr().Active_tab_is_null()) return;	// if no active_tab, just show box; don't try to copy what's on tab;
 		find_box.Text_(win.Active_html_itm().Html_selected_get_text_or_href());
@@ -65,12 +66,16 @@ class Xog_find_box {
 			win.Usr_dlg().Prog_direct("Find direction changed to " + (fwd ? "forward" : "backward"));
 	}
 	public void Exec() {
+		prv_find_text = find_box.Text();
+		Exec_find(prv_find_text, Bool_.Y);
+	}
+	private void Exec_find(String find, boolean highlight_matches) {
 		Xog_tab_itm tab = win.Tab_mgr().Active_tab(); if (tab == Xog_tab_itm_.Null) return;
 		String elem_id = tab.View_mode() == Xopg_view_mode.Tid_read 
 			? Gfui_html.Elem_id_body
 			: Xog_html_itm.Elem_id__xowa_edit_data_box
 			;
-		tab.Html_box().Html_doc_find(elem_id, find_box.Text(), dir_fwd, case_match, wrap_search);
+		tab.Html_box().Html_doc_find(elem_id, find, dir_fwd, case_match, wrap_search, highlight_matches);
 		win.Usr_dlg().Prog_direct("");
 	}
 	public void Case_toggle() {

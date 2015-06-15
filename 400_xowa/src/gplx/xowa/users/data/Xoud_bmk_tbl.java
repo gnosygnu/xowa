@@ -18,54 +18,40 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*;
 public class Xoud_bmk_tbl implements RlsAble {
-	private final String tbl_name = "user_bmk"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
-	private final String fld_id, fld_wiki, fld_page, fld_qarg, fld_name, fld_comment, fld_tag, fld_sort, fld_time, fld_count;		
+	private final String tbl_name = "bmk_core"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
+	private final String fld_id, fld_url;
 	public Xoud_bmk_tbl(Db_conn conn) {
 		this.conn = conn;
 		fld_id						= flds.Add_int_pkey_autonum("bmk_id");
-		fld_wiki					= flds.Add_str("bmk_wiki", 255);
-		fld_page					= flds.Add_str("bmk_page", 255);
-		fld_qarg					= flds.Add_str("bmk_qarg", 255);
-		fld_name					= flds.Add_str("bmk_name", 255);
-		fld_comment					= flds.Add_str("bmk_comment", 2048);
-		fld_tag						= flds.Add_str("bmk_tag", 2048);
-		fld_sort					= flds.Add_int("bmk_sort");
-		fld_count					= flds.Add_int("bmk_count");
-		fld_time					= flds.Add_str("bmk_time", 20);
+		fld_url						= flds.Add_str("bmk_url", 255);
 		conn.Rls_reg(this);
 	}
 	public Db_conn Conn() {return conn;} private final Db_conn conn;
-	public void Insert(String wiki, String page, String qarg, String name, String comment, String tag, int sort, DateAdp time, int count) {
+	public String Tbl_name() {return tbl_name;}
+	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds.To_fld_ary()));}
+	public void Insert(byte[] url) {
 		Db_stmt stmt_insert = conn.Stmt_insert(tbl_name, flds);
-		stmt_insert.Clear().Val_str(fld_wiki, wiki).Val_str(fld_page, page).Val_str(fld_qarg, qarg)
-			.Val_str(fld_name, name).Val_str(fld_comment, comment).Val_str(fld_tag, tag)
-			.Val_int(fld_sort, sort).Val_int(fld_count, count).Val_str(fld_time, time.XtoStr_fmt_iso_8561())
+		stmt_insert.Clear().Val_bry_as_str(fld_url, url)
 			.Exec_insert();
 	}
 	public void Delete(int id) {
 		Db_stmt stmt_delete = conn.Stmt_delete(tbl_name, fld_id);
 		stmt_delete.Clear().Crt_int(fld_id, id).Exec_delete();
 	}
-	public void Select_all(List_adp rv) {
+	public Xoud_bmk_row[] Select_all() {
+		List_adp list = List_adp_.new_();
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empy).Clear().Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next())
-				rv.Add(new_row(rdr));
+				list.Add(new_row(rdr));
 		}
 		finally {rdr.Rls();}
+		return (Xoud_bmk_row[])list.To_ary_and_clear(Xoud_bmk_row.class);
 	}
 	private Xoud_bmk_row new_row(Db_rdr rdr) {
 		return new Xoud_bmk_row
 		( rdr.Read_int(fld_id)
-		, rdr.Read_str(fld_wiki)
-		, rdr.Read_str(fld_page)
-		, rdr.Read_str(fld_qarg)
-		, rdr.Read_str(fld_name)
-		, rdr.Read_str(fld_comment)
-		, rdr.Read_str(fld_tag)
-		, rdr.Read_int(fld_sort)
-		, rdr.Read_int(fld_count)
-		, rdr.Read_date_by_str(fld_time)
+		, rdr.Read_bry_by_str(fld_url)
 		);
 	}
 	public void Rls() {}

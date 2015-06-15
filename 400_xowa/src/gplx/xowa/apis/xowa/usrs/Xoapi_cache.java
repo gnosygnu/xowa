@@ -19,7 +19,7 @@ package gplx.xowa.apis.xowa.usrs; import gplx.*; import gplx.xowa.*; import gplx
 import gplx.ios.*; import gplx.xowa.files.caches.*;
 public class Xoapi_cache implements GfoInvkAble {
 	private Xou_cache_mgr cache_mgr;
-	public void Init_by_app(Xoa_app app) {this.cache_mgr = app.User().File__cache_mgr();}
+	public void Init_by_app(Xoa_app app) {this.cache_mgr = app.User().User_db_mgr().Cache_mgr();}
 	private String Info() {
 		cache_mgr.Page_bgn();
 		Bry_bfr bfr = Bry_bfr.new_(255);

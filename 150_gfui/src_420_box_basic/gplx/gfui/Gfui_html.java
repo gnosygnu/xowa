@@ -27,7 +27,7 @@ public class Gfui_html extends GfuiElemBase {
 	public String				Html_doc_selected_get_href_or_text() {return under.Html_doc_selected_get_href_or_text();}
 	public String				Html_doc_selected_get_src_or_empty() {return under.Html_doc_selected_get_src_or_empty();}
 	public String				Html_doc_selected_get_active_or_selection() {return under.Html_doc_selected_get_active_or_selection();}		
-	public boolean				Html_doc_find(String elem_id, String find, boolean dir_fwd, boolean case_match, boolean wrap_find) {return under.Html_doc_find(elem_id, find, dir_fwd, case_match, wrap_find);}
+	public boolean				Html_doc_find(String elem_id, String find, boolean dir_fwd, boolean case_match, boolean wrap_find, boolean highlight_matches) {return under.Html_doc_find(elem_id, find, dir_fwd, case_match, wrap_find, highlight_matches);}
 	public void					Html_doc_body_focus() {under.Html_doc_body_focus();}
 	public void					Html_doc_selection_focus_toggle() {under.Html_doc_selection_focus_toggle();}
 	@gplx.Virtual public String		Html_elem_atr_get_str(String elem_id, String atr_key) {return under.Html_elem_atr_get_str(elem_id, atr_key);}
@@ -47,7 +47,6 @@ public class Gfui_html extends GfuiElemBase {
 	public String				Html_active_atr_get_str(String atrKey, String or) {return under.Html_active_atr_get_str(atrKey, or);}
 	public void					Html_js_enabled_(boolean v) {under.Html_js_enabled_(v);}
 	public void					Html_js_eval_proc(String name, String... args) {under.Html_js_eval_proc(name, args);}
-	public boolean					Html_doc_loaded() {return under.Html_doc_loaded();}
 	public String				Html_js_eval_script(String script) {return under.Html_js_eval_script(script);}
 	public void					Html_js_cbks_add(String js_func_name, GfoInvkAble invk) {under.Html_js_cbks_add(js_func_name, invk);}
 	public void					Html_invk_src_(GfoEvObj v) {under.Html_invk_src_(v);}

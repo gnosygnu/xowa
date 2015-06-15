@@ -194,7 +194,7 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 			case Wdata_dict_val_tid.Tid_entity: {
 				Json_itm_nde sub_nde = Json_itm_nde.cast_(ary.Subs_get_at(3));
 				Json_itm_kv entity_kv = Json_itm_kv.cast_(sub_nde.Subs_get_at(1));
-				return new Wdata_claim_itm_entity(pid, snak_tid, entity_kv.Val().Data_bry());
+				return new Wdata_claim_itm_entity(pid, snak_tid, Wdata_dict_value_entity_tid.Tid_item, entity_kv.Val().Data_bry());
 			}
 			case Wdata_dict_val_tid.Tid_time: {
 				Json_itm_nde sub_nde = Json_itm_nde.cast_(ary.Subs_get_at(3));

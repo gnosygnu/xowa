@@ -16,20 +16,25 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.fsdb; import gplx.*;
-import gplx.dbs.*; import gplx.xowa.*; import gplx.xowa.wikis.data.*;
+import gplx.dbs.*; import gplx.xowa.*; import gplx.xowa.wikis.data.*; import gplx.fsdb.meta.*;
 public class Fsdb_db_mgr_ {
 	public static Fsdb_db_mgr new_detect(Xow_wiki wiki, Io_url wiki_dir, Io_url file_dir) {
 		Gfo_usr_dlg usr_dlg = Xoa_app_.Usr_dlg();
+		Io_url url = file_dir.GenSubFil(Fsdb_db_mgr__v1.Mnt_name); // EX: /xowa/file/en.wikipedia.org/wiki.mnt.sqlite3
+		if	(Db_conn_bldr.I.Exists(url)) {	// NOTE: check v1 before v2; note that as of v2.5.4, v2 files are automatically created on new import; DATE:2015-06-09
+			usr_dlg.Log_many("", "", "fsdb.db_core.v1: url=~{0}", url.Raw());
+			usr_dlg.Log_many("", "", "fsdb.db_core.v1 exists: orig=~{0} abc=~{1} atr=~{2}"
+				, Db_conn_bldr.I.Exists(file_dir.GenSubFil(Fsdb_db_mgr__v1.Orig_name))
+				, Db_conn_bldr.I.Exists(file_dir.GenSubFil_nest(Fsm_mnt_tbl.Mnt_name_main, Fsdb_db_mgr__v1.Abc_name))
+				, Db_conn_bldr.I.Exists(file_dir.GenSubFil_nest(Fsm_mnt_tbl.Mnt_name_main, Fsdb_db_mgr__v1.Atr_name))
+				);
+			return new Fsdb_db_mgr__v1(file_dir);
+		}
 		String domain_str = wiki.Domain_str();
 		Fsdb_db_mgr rv = null;
 		rv = load_or_null(Xowd_db_layout.Itm_few, usr_dlg, wiki_dir, wiki, domain_str); if (rv != null) return rv;
 		rv = load_or_null(Xowd_db_layout.Itm_lot, usr_dlg, wiki_dir, wiki, domain_str); if (rv != null) return rv;
 		rv = load_or_null(Xowd_db_layout.Itm_all, usr_dlg, wiki_dir, wiki, domain_str); if (rv != null) return rv;
-		Io_url url = file_dir.GenSubFil(Fsdb_db_mgr__v1.Mnt_name);						// EX: /xowa/file/en.wikipedia.org/wiki.mnt.sqlite3
-		if	(Db_conn_bldr.I.Exists(url)) {
-			usr_dlg.Log_many("", "", "fsdb.db_core.v1: url=~{0}", url.Raw());
-			return new Fsdb_db_mgr__v1(file_dir);
-		}
 		usr_dlg.Log_many("", "", "fsdb.db_core.none: wiki_dir=~{0} file_dir=~{1}", wiki_dir.Raw(), file_dir.Raw());
 		return null;
 	}

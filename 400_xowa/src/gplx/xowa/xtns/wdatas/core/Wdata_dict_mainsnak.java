@@ -23,6 +23,7 @@ public class Wdata_dict_mainsnak {
 	, Tid_hash									= 2
 	, Tid_datavalue								= 3
 	, Tid_type									= 4
+	, Tid_datatype								= 5
 	;
 	public static byte[] 
 	  Bry_snaktype								= Bry_.new_a7("snaktype")
@@ -30,6 +31,7 @@ public class Wdata_dict_mainsnak {
 	, Bry_hash									= Bry_.new_a7("hash")
 	, Bry_datavalue								= Bry_.new_a7("datavalue")
 	, Bry_type									= Bry_.new_a7("type")
+	, Bry_datatype								= Bry_.new_a7("datatype")
 	;
 	public static final Hash_adp_bry Dict = Hash_adp_bry.cs_()
 	.Add_bry_byte(Bry_snaktype					, Tid_snaktype)
@@ -37,5 +39,6 @@ public class Wdata_dict_mainsnak {
 	.Add_bry_byte(Bry_hash						, Tid_hash)
 	.Add_bry_byte(Bry_datavalue					, Tid_datavalue)
 	.Add_bry_byte(Bry_type						, Tid_type)
+	.Add_bry_byte(Bry_datatype					, Tid_datatype)
 	;
 }

@@ -77,6 +77,7 @@ public class Xow_hzip_mgr {
 					case Xow_hzip_dict.Tid_lnke_brk_text_y:		pos = itm__anchor.Load_lnke(rv, src, src_len, itm_pos, tid); break;
 					case Xow_hzip_dict.Tid_a_rhs:				pos = itm_pos; rv.Add_str("</a>"); break;
 					case Xow_hzip_dict.Tid_hdr_lhs:				pos = itm__header.Load(rv, src, src_len, itm_pos); break;
+					default:									pos = itm_pos; Warn_by_pos("hzip.load.unknown", pos, itm_pos); break;	// NOTE: should not happen, but handle else infinite loop; DATE:2015-06-08
 				}
 			}
 			else {
@@ -92,7 +93,7 @@ public class Xow_hzip_mgr {
 	private int Warn_by_pos(String err, int bgn, int end, int end_adj) {
 		end += end_adj; if (end > src_len) end = src_len;
 		usr_dlg.Warn_many("", "", "hzip failed: page=~{0} err=~{1} mid=~{2}", String_.new_u8(page_url), err, String_.new_u8(src, bgn, end));
-		return Unhandled;
+		return end + 1;
 	}
 	public static final int Unhandled = -1;
 	private static final byte 

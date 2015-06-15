@@ -32,7 +32,7 @@ class Scrib_lib_wikibase_srl_visitor implements Wdata_claim_visitor {
 	private static KeyVal[] Entity_value(Wdata_claim_itm_core itm) {
 		Wdata_claim_itm_entity claim_entity = (Wdata_claim_itm_entity)itm;
 		KeyVal[] rv = new KeyVal[2];
-		rv[0] = KeyVal_.new_(Wdata_dict_value_entity.Str_entity_type, Wdata_dict_value_entity.Val_entity_type_item_str);
+		rv[0] = KeyVal_.new_(Wdata_dict_value_entity.Str_entity_type, claim_entity.Entity_tid_str());
 		rv[1] = KeyVal_.new_(Wdata_dict_value_entity.Str_numeric_id, Int_.Xto_str(claim_entity.Entity_id()));
 		return rv;
 	}

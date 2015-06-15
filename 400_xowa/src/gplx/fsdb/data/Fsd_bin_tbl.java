@@ -54,7 +54,7 @@ public class Fsd_bin_tbl implements RlsAble {
 	public Io_stream_rdr Select_as_rdr(int owner_id) {
 		byte[] rv = Select(owner_id);
 		return rv == null
-			? Io_stream_rdr_.Null
+			? Io_stream_rdr_.Noop
 			: Io_stream_rdr_.mem_(rv);
 	}
 	public boolean Select_to_url(int owner_id, Io_url url) {

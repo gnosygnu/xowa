@@ -103,7 +103,7 @@ public class Wdata_doc_wtr {
 						wtr.Val(Bool_.Y, Wdata_dict_val_tid.Bry_entity);
 						wtr.Comma();
 						wtr.Nde_bgn();
-						wtr.Kv(Bool_.N, Wdata_dict_value_entity.Bry_entity_type			, Wdata_dict_value_entity.Val_entity_type_item_bry);
+						wtr.Kv(Bool_.N, Wdata_dict_value_entity.Bry_entity_type			, claim_entity.Entity_tid_bry());
 						wtr.Kv(Bool_.Y, Wdata_dict_value_entity.Bry_numeric_id			, claim_entity.Entity_id());
 						wtr.Nde_end();
 						break;

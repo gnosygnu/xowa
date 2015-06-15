@@ -33,10 +33,4 @@ public class Wdata_dict_value_entity {
 	.Add_bry_byte(Bry_entity_type				, Tid_entity_type)
 	.Add_bry_byte(Bry_numeric_id				, Tid_numeric_id)
 	;
-	public static final String
-	  Val_entity_type_item_str					= "item"
-	;
-	public static final byte[]
-	  Val_entity_type_item_bry					= Bry_.new_a7(Val_entity_type_item_str)
-	;
 }

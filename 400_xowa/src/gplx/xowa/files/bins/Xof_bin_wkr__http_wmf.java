@@ -31,7 +31,7 @@ public class Xof_bin_wkr__http_wmf implements Xof_bin_wkr {
 		boolean rv = rdr.Exists();	// NOTE: use Exists which detects for response_code 200, not content length > 0; DATE:2015-05-20
 		if (!rv) Handle_error();
 		fsdb.Fsdb_insert_y_();
-		return rv ? rdr : Io_stream_rdr_.Null;
+		return rv ? rdr : Io_stream_rdr_.Noop;
 	}
 	public boolean Get_to_fsys(Xof_fsdb_itm fsdb, boolean is_thumb, int w, Io_url bin_url) {
 		boolean rv = Get_to_fsys(fsdb.Orig_repo_name(), fsdb.Orig_ttl(), fsdb.Orig_ttl_md5(), fsdb.Orig_ext(), is_thumb, w, fsdb.Lnki_time(), fsdb.Lnki_page(), bin_url);

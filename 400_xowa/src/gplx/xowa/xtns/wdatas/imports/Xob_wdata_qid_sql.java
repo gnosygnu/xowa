@@ -22,10 +22,12 @@ public class Xob_wdata_qid_sql extends Xob_wdata_qid_base {
 	@Override public String Wkr_key() {return gplx.xowa.bldrs.Xob_cmd_keys.Key_wbase_qid;}
 	@Override public void Qid_bgn() {
 		Xowd_db_mgr db_mgr = wiki.Db_mgr_as_sql().Core_data_mgr();
-		Xowd_db_file wbase_db = db_mgr.Props().Layout_text().Tid_is_all_or_few()
+		boolean db_is_all_or_few = db_mgr.Props().Layout_text().Tid_is_all_or_few();
+		Xowd_db_file wbase_db = db_is_all_or_few
 			? db_mgr.Db__core()
-			: db_mgr.Dbs__make_by_tid(Xowd_db_file_.Tid_wbase)
-			;
+			: db_mgr.Dbs__make_by_tid(Xowd_db_file_.Tid_wbase);
+		if (db_is_all_or_few)
+			db_mgr.Db__wbase_(wbase_db);
 		tbl = wbase_db.Tbl__wbase_qid();
 		tbl.Create_tbl();
 		tbl.Insert_bgn();

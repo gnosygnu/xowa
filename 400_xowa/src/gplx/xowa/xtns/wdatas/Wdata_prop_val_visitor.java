@@ -25,7 +25,7 @@ class Wdata_prop_val_visitor implements Wdata_claim_visitor {
 	public void Visit_time(Wdata_claim_itm_time itm)						{bfr.Add(itm.Time());}
 	public void Visit_monolingualtext(Wdata_claim_itm_monolingualtext itm)	{bfr.Add(itm.Text());}			// phrase only; PAGE:en.w:Alberta; EX: {{#property:motto}} -> "Fortis et libre"; DATE:2014-08-28
 	public void Visit_entity(Wdata_claim_itm_entity itm) {
-		Wdata_doc entity_doc = wdata_mgr.Pages_get(Bry_.Add(Byte_ascii.Ltr_q, itm.Entity_id_bry()));
+		Wdata_doc entity_doc = wdata_mgr.Pages_get(itm.Page_ttl_db());
 		if (entity_doc == null) return;	// NOTE: wiki may refer to entity that no longer exists; EX: {{#property:p1}} which links to Q1, but p1 links to Q2 and Q2 was deleted; DATE:2014-02-01
 		byte[] label = entity_doc.Label_list_get(lang_key);
 		if (label == null && !Bry_.Eq(lang_key, Xol_lang_.Key_en))	// NOTE: some properties may not exist in language of wiki; default to english; DATE:2013-12-19

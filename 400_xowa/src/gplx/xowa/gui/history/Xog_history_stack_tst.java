@@ -44,7 +44,7 @@ class Xog_history_stack_fxt {
 		if (app == null) {
 			app = Xoa_app_fxt.app_();
 			wiki = Xoa_app_fxt.wiki_tst_(app);
-			url_parser = app.Url_parser();
+			url_parser = app.Utl__url_parser();
 		}
 		return this;
 	}	private Xoae_app app; private Xowe_wiki wiki; private Xog_history_stack stack = new Xog_history_stack(); private Xoa_url_parser url_parser;

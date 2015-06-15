@@ -185,7 +185,7 @@ public class IoEngine_memory extends IoEngine_base {
 		Io_url src = Io_url_.mem_fil_(xrg.Src());
 		if (!ExistsFil_api(src)) {
 			xrg.Rslt_(IoEngine_xrg_downloadFil.Rslt_fail_file_not_found);
-			return Io_stream_rdr_.Null;
+			return Io_stream_rdr_.Noop;
 		}
 		byte[] bry = Bry_.new_u8(FetchFil(Io_url_.mem_fil_(xrg.Src())).Text());
 		return Io_stream_rdr_.mem_(bry);

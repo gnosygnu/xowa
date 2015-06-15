@@ -27,7 +27,8 @@ abstract class Wdata_doc_parser_fxt_base {
 	public Wdata_langtext_itm Make_langval(String lang, String text) {return new Wdata_langtext_itm(Bry_.new_u8(lang), Bry_.new_u8(text));}
 	public Wdata_alias_itm Make_alias(String lang, String... vals) {return new Wdata_alias_itm(Bry_.new_u8(lang), Bry_.Ary(vals));}
 	public Wdata_claim_itm_core Make_claim_str(int pid, String val) {return new Wdata_claim_itm_str(pid, Wdata_dict_snak_tid.Tid_value, Bry_.new_u8(val));}
-	public Wdata_claim_itm_core Make_claim_entity(int pid, int entityId) {return new Wdata_claim_itm_entity(pid, Wdata_dict_snak_tid.Tid_value, Int_.Xto_bry(entityId));}
+	public Wdata_claim_itm_core Make_claim_entity_qid(int pid, int entityId) {return new Wdata_claim_itm_entity(pid, Wdata_dict_snak_tid.Tid_value, Wdata_dict_value_entity_tid.Tid_item, Int_.Xto_bry(entityId));}
+	public Wdata_claim_itm_core Make_claim_entity_pid(int pid, int entityId) {return new Wdata_claim_itm_entity(pid, Wdata_dict_snak_tid.Tid_value, Wdata_dict_value_entity_tid.Tid_property, Int_.Xto_bry(entityId));}
 	public Wdata_claim_itm_core Make_claim_monolingualtext(int pid, String lang, String text) {return new Wdata_claim_itm_monolingualtext(pid, Wdata_dict_snak_tid.Tid_value, Bry_.new_u8(lang), Bry_.new_u8(text));}
 	public Wdata_claim_itm_core Make_claim_globecoordinate(int pid, String lat, String lng, String prc) {return new Wdata_claim_itm_globecoordinate(pid, Wdata_dict_snak_tid.Tid_value, Bry_.new_u8(lat), Bry_.new_u8(lng), Bry_.new_a7("null"), Bry_.new_u8(prc), Bry_.new_a7("http://www.wikidata.org/entity/Q2"));}
 	public Wdata_claim_itm_core Make_claim_quantity(int pid, int val, int unit, int ubound, int lbound) {return new Wdata_claim_itm_quantity(pid, Wdata_dict_snak_tid.Tid_value, Bry_.new_u8(Int_.Xto_str(val)), Bry_.new_u8(Int_.Xto_str(unit)), Bry_.new_u8(Int_.Xto_str(ubound)), Bry_.new_u8(Int_.Xto_str(lbound)));}

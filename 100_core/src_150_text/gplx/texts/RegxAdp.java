@@ -20,10 +20,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 public class RegxAdp {
 		void Under_sync() {
-		try {under = Pattern.compile(pattern, Pattern.DOTALL);}
+		try {under = Pattern.compile(pattern, Pattern.DOTALL | Pattern.UNICODE_CHARACTER_CLASS);}	// JRE.7:UNICODE_CHARACTER_CLASS; added during %w fix for en.w:A#; DATE:2015-06-10 
 		catch (Exception e) {	// NOTE: if invalid, then default to empty pattern (which should return nothing); EX:d:〆る generates [^]; DATE:2013-10-20
 			pattern_is_invalid = true;
-			under = Pattern.compile("", Pattern.DOTALL);
+			under = Pattern.compile("", Pattern.DOTALL | Pattern.UNICODE_CHARACTER_CLASS);
 		}
 	}  private Pattern under;
 	public RegxMatch Match(String input, int bgn) {

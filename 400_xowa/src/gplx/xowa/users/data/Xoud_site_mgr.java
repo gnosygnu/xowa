@@ -21,7 +21,7 @@ public class Xoud_site_mgr {
 	private Xoud_site_tbl tbl;
 	private final Xoud_id_mgr id_mgr;
 	public Xoud_site_mgr(Xoud_id_mgr id_mgr) {this.id_mgr = id_mgr;}
-	public void Conn_(Db_conn conn, boolean created, int user_id) {
+	public void Conn_(Db_conn conn, boolean created) {
 		tbl = new Xoud_site_tbl(conn);
 		if (created) tbl.Create_tbl();
 	}

@@ -24,6 +24,7 @@ public class Html_utl {
 		byte[] escaped = Escape_html_as_bry(tmp_bfr, key, Bool_.N, Bool_.N, Bool_.N, Bool_.Y, Bool_.Y);
 		return encoder_id.Encode(escaped);
 	}
+	public static String Escape_for_atr_val_as_str(Bry_bfr bfr, byte quote_byte, String s) {return String_.new_u8(Escape_for_atr_val_as_bry(bfr, quote_byte, s));}
 	public static byte[] Escape_for_atr_val_as_bry(Bry_bfr bfr, byte quote_byte, String s) {
 		if (s == null) return null;
 		return Escape_for_atr_val_as_bry(bfr, quote_byte, Bry_.new_u8(s));

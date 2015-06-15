@@ -47,7 +47,7 @@ class Xop_mylanguage_page_fxt {
 	public void Init_cur_lang(String lang) {app.Sys_cfg().Lang_(Bry_.new_a7(lang));}
 	public void Test_open(String link, String expd) {
 		Xoae_page page = parser_fxt.Ctx().Cur_page();
-		Xoa_url url = Xoa_url_parser.Parse_url(app, wiki, link);
+		Xoa_url url = app.Utl__url_parser().Parse(Bry_.new_u8(link));
 		page.Url_(url);
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_a7(link));
 		page.Ttl_(ttl);

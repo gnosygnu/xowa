@@ -209,7 +209,7 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	private void Download_exec(Xodb_tbl_oimg_xfer_itm fsdb) {
 		Io_stream_rdr src_rdr = src_bin_mgr.Find_as_rdr(Xof_exec_tid.Tid_wiki_page, fsdb);
 		try {
-			if (src_rdr == Io_stream_rdr_.Null) {	// download failed
+			if (src_rdr == Io_stream_rdr_.Noop) {	// download failed
 				++exec_fail;
 				usr_dlg.Warn_many("", "", "failed: ttl=~{0}", String_.Format("[[File:{0}|{1}px]]", fsdb.Orig_ttl(), fsdb.Html_w()));
 				Print_progress(fsdb);

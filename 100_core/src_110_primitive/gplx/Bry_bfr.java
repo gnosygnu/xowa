@@ -393,7 +393,7 @@ public class Bry_bfr {
 		else if	(o_type == Bry_bfr.class)			Add_bfr_and_preserve((Bry_bfr)o);
 		else if	(o_type == DateAdp.class)         Add_dte((DateAdp)o);
 		else if	(o_type == Io_url.class)			Add(((Io_url)o).RawBry());
-		else if	(o_type == boolean.class)			Add_yn(Bool_.cast_(o));
+		else if	(o_type == Boolean.class)			Add_yn(Bool_.cast_(o));				
 		else if	(o_type == Double.class)			Add_double(Double_.cast_(o));		
 		else if	(o_type == Float.class)			Add_float(Float_.cast_(o));			
 		else										((Bry_fmtr_arg)o).XferAry(this, 0);

@@ -36,6 +36,7 @@ public class Xof_file_wkr implements Gfo_thread_wkr {
 		int len = imgs.Count();
 		for (int i = 0; i < len; ++i)
 			Ctor_by_hdump(hpg, (Xohd_data_itm__base)imgs.Get_at(i));
+		Xoa_app_.Usr_dlg().Prog_none("", "", "");
 	}
 	private void Ctor_by_hdump(Xoa_page hpg, Xohd_data_itm__base hdump) {
 		Xof_fsdb_itm fsdb = new Xof_fsdb_itm();
@@ -48,6 +49,7 @@ public class Xof_file_wkr implements Gfo_thread_wkr {
 	}
 	public static boolean Show_img(Xof_fsdb_itm fsdb, Gfo_usr_dlg usr_dlg, Xof_bin_mgr bin_mgr, Fsm_mnt_mgr mnt_mgr, Xou_cache_mgr cache_mgr, Xow_repo_mgr repo_mgr, Xog_js_wkr js_wkr, Xof_img_size img_size, Xof_url_bldr url_bldr, Xoa_page page) {
 		try {
+			usr_dlg.Log_many("", "", "file.get: file=~{0} width=~{1} page=~{2}", fsdb.Orig_ttl(), fsdb.Lnki_w(), page.Ttl().Full_db());
 			if (fsdb.Orig_ext() == null) {
 				usr_dlg.Warn_many("", "", "file.missing.ext: file=~{0} width=~{1} page=~{2}", fsdb.Orig_ttl(), fsdb.Lnki_w(), page.Ttl().Full_db());
 				return false;
@@ -91,7 +93,7 @@ public class Xof_file_wkr implements Gfo_thread_wkr {
 		if (fsdb_sql_wkr != null) {
 			Io_stream_rdr file_rdr = fsdb_sql_wkr.Get_to_fsys_near(fsdb, fsdb.Orig_repo_name(), fsdb.Orig_ttl(), fsdb.Orig_ext(), fsdb.Lnki_time(), fsdb.Lnki_page());
 			try {
-				if (file_rdr != Io_stream_rdr_.Null) {
+				if (file_rdr != Io_stream_rdr_.Noop) {
 					Xof_repo_itm repo = repo_mgr.Get_trg_by_id_or_null(fsdb.Orig_repo_id(), fsdb.Lnki_ttl(), page.Url_bry_safe());
 					Io_url file_url = url_bldr.Init_for_trg_file(Xof_repo_itm_.Mode_by_bool(!fsdb.File_is_orig()), repo, fsdb.Orig_ttl(), fsdb.Orig_ttl_md5(), fsdb.Orig_ext(), fsdb.File_w(), fsdb.Lnki_time(), fsdb.Lnki_page()).Xto_url();
 					Io_stream_wtr_.Save_rdr(file_url, file_rdr, Io_download_fmt.Null);
@@ -129,20 +131,5 @@ public class Xof_file_wkr implements Gfo_thread_wkr {
 			Xoa_app_.Usr_dlg().Warn_many("", "", "failed to save file: ttl=~{0} url=~{1} err=~{2}", itm.Orig_ttl(), html_url.Raw(), Err_.Message_gplx(e));
 		}
 		finally {rdr.Rls();}
-	}
-}
-class Xof_redlink_wkr implements Gfo_thread_wkr {
-	private Xog_js_wkr js_wkr; private int[] uids;
-	public Xof_redlink_wkr(Xog_js_wkr js_wkr, int[] uids) {
-		this.js_wkr = js_wkr; this.uids = uids;
-	}
-	public String Name() {return "xowa.redlinks";}
-	public boolean Resume() {return true;}
-	public void Exec() {
-		int len = uids.length;
-		for (int i = 0; i < len; ++i) {
-			int uid = uids[i];
-			js_wkr.Html_atr_set(Int_.Xto_str(uid), "", "");
-		}
 	}
 }

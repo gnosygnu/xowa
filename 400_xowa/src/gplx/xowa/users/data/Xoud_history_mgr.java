@@ -20,7 +20,7 @@ import gplx.core.threads.*; import gplx.dbs.*;
 import gplx.xowa.specials.*;
 public class Xoud_history_mgr implements GfoInvkAble {
 	private Xoud_history_tbl history_tbl;
-	public void Conn_(Db_conn new_conn, boolean created, int user_id) {
+	public void Conn_(Db_conn new_conn, boolean created) {
 		history_tbl = new Xoud_history_tbl(new_conn);
 		if (created) history_tbl.Create_tbl();
 	}

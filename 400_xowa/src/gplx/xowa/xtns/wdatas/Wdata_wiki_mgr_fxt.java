@@ -48,7 +48,8 @@ public class Wdata_wiki_mgr_fxt {
 	}
 	public Wdata_claim_itm_core Make_claim_monolingual(int pid, String lang, String text) {return new Wdata_claim_itm_monolingualtext(pid, Wdata_dict_snak_tid.Tid_value, Bry_.new_u8(lang), Bry_.new_u8(text));}
 	public Wdata_claim_itm_core Make_claim_quantity(int pid, String amount, String unit, String ubound, String lbound) {return new Wdata_claim_itm_quantity(pid, Wdata_dict_snak_tid.Tid_value, Bry_.new_a7(amount), Bry_.new_a7(unit), Bry_.new_a7(ubound), Bry_.new_a7(lbound));}
-	public Wdata_claim_itm_core Make_claim_entity(int pid, int val) {return new Wdata_claim_itm_entity(pid, Wdata_dict_snak_tid.Tid_value, Int_.Xto_bry(val));}
+	public Wdata_claim_itm_core Make_claim_entity_qid(int pid, int val) {return new Wdata_claim_itm_entity(pid, Wdata_dict_snak_tid.Tid_value, Wdata_dict_value_entity_tid.Tid_item, Int_.Xto_bry(val));}
+	public Wdata_claim_itm_core Make_claim_entity_pid(int pid, int val) {return new Wdata_claim_itm_entity(pid, Wdata_dict_snak_tid.Tid_value, Wdata_dict_value_entity_tid.Tid_property, Int_.Xto_bry(val));}
 	public Wdata_claim_itm_core Make_claim_geo(int pid, String lon, String lat) {return Make_claim_geo(pid, lon, lat, ".000277777", null, "Q2");}
 	public Wdata_claim_itm_core Make_claim_geo(int pid, String lon, String lat, String prc, String alt, String glb) {
 		return new Wdata_claim_itm_globecoordinate(pid, Wdata_dict_snak_tid.Tid_value, Bry_.new_a7(lat), Bry_.new_a7(lon), Bry_.new_a7(alt), Bry_.new_a7(prc), Bry_.new_a7(glb));

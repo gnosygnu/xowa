@@ -74,7 +74,7 @@ public abstract class Xohd_data_itm__base implements Xohd_data_itm {
 		);
 	}
 	@gplx.Virtual public void Data_parse(Bry_rdr rdr) {
-		this.lnki_ttl = rdr.Read_bry_to_pipe();
+		this.lnki_ttl = Xoa_app_.Utl__encoder_mgr().Http_url().Decode(rdr.Read_bry_to_pipe());
 		this.orig_ext = rdr.Read_int_to_pipe();
 		this.lnki_type = rdr.Read_byte_to_pipe();
 		this.lnki_w = rdr.Read_int_to_pipe();

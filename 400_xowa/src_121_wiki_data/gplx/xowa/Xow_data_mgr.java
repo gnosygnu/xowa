@@ -25,8 +25,8 @@ public class Xow_data_mgr implements GfoInvkAble {
 	public Xow_data_mgr(Xowe_wiki wiki) {this.wiki = wiki; this.redirect_mgr = wiki.Redirect_mgr();}
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public boolean Version_is_1() {return Bool_.Y;}
-	public Xoae_page Get_page(Xoa_ttl ttl, boolean called_from_tmpl) {wiki.Appe().Url_parser().Parse(tmp_url, ttl.Raw()); return Get_page(tmp_url, ttl, called_from_tmpl, false);}
-	public Xoae_page Get_page_from_msg(Xoa_ttl ttl) {wiki.Appe().Url_parser().Parse(tmp_url, ttl.Raw()); return Get_page(tmp_url, ttl, false, true);}
+	public Xoae_page Get_page(Xoa_ttl ttl, boolean called_from_tmpl) {wiki.Appe().Utl__url_parser().Parse(tmp_url, ttl.Raw()); return Get_page(tmp_url, ttl, called_from_tmpl, false);}
+	public Xoae_page Get_page_from_msg(Xoa_ttl ttl) {wiki.Appe().Utl__url_parser().Parse(tmp_url, ttl.Raw()); return Get_page(tmp_url, ttl, false, true);}
 	public Xoae_page Get_page(Xoa_url url, Xoa_ttl ttl, boolean called_from_tmpl, boolean called_from_msg) {
 		Xoae_page rv = Xoae_page.new_(wiki, ttl);
 		return Get_page(rv, url, ttl, called_from_tmpl, called_from_msg);

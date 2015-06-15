@@ -35,7 +35,7 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble {
 		domain_tid = domain_itm.Domain_tid();
 		domain_abrv = Xow_wiki_alias.Build_alias(Xow_domain_.parse(domain_bry));
 		fsys_mgr = new Xow_fsys_mgr(wiki_dir, app.Fsys_mgr().File_dir().GenSubDir(domain_str));
-		xwiki_mgr = new Xow_xwiki_mgr(this, app.Url_parser().Url_parser());
+		xwiki_mgr = new Xow_xwiki_mgr(this, app.Utl__url_parser().Url_parser());
 		xwiki_mgr.Add_full(domain_bry, domain_bry);	// add full name to xwiki_mgr; needed for lookup in home ns; EX: [[en.wikipedia.org:Earth]]
 		html_mgr = new Xow_html_mgr(this);
 		this.html_mgr__hdump_rdr = new Xohd_hdump_rdr(app, this);
@@ -77,56 +77,55 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble {
 		maint_mgr = new Xow_maint_mgr(this);
 		cache_mgr = new Xow_cache_mgr(this);
 	}
-	public boolean					Type_is_edit() {return Bool_.Y;}
-	public byte[]				Domain_bry() {return domain_bry;} private final byte[] domain_bry; 
-	public String				Domain_str() {return domain_str;} private final String domain_str;
-	public int					Domain_tid() {return domain_tid;} private final int domain_tid;
-	public byte[]				Domain_abrv() {return domain_abrv;} private final byte[] domain_abrv;
-	public Xow_domain			Domain_itm() {return domain_itm;} private final Xow_domain domain_itm;
-	public Xoa_app				App() {return app;}
-	public Xol_lang				Lang() {return lang;} private final Xol_lang lang;
-	public Xow_ns_mgr			Ns_mgr() {return ns_mgr;} private final Xow_ns_mgr ns_mgr;
-	public Xow_fsys_mgr			Fsys_mgr() {return fsys_mgr;} private final Xow_fsys_mgr fsys_mgr;
-	public Xoa_ttl				Ttl_parse(byte[] ttl)				{return Xoa_ttl.parse_(this, ttl);}
-	public Xoa_ttl				Ttl_parse(int ns_id, byte[] ttl)	{return Xoa_ttl.parse_(this, ns_id, ttl);}
-	public Xowd_db_mgr			Data_mgr__core_mgr() {return db_mgr.Tid() == Xodb_mgr_txt.Tid_txt ? null : this.Db_mgr_as_sql().Core_data_mgr();}	// TEST:
-	public Xow_repo_mgr			File__repo_mgr() {return file_mgr.Repo_mgr();}
-	public Xof_orig_mgr			File__orig_mgr() {return file_mgr.Orig_mgr();}
-	public Xof_bin_mgr			File__bin_mgr() {return file_mgr.Fsdb_mgr().Bin_mgr();}
-	public Fsm_mnt_mgr			File__mnt_mgr() {return file_mgr.Fsdb_mgr().Mnt_mgr();}
-	public Xof_fsdb_mode		File__fsdb_mode() {return file_mgr.Fsdb_mode();}
-	public Fsdb_db_mgr			File__file_db_core() {return file_mgr.Db_core();}
+	public Xow_ns_mgr				Ns_mgr() {return ns_mgr;} private final Xow_ns_mgr ns_mgr;
+	public Xoa_ttl					Ttl_parse(byte[] ttl)				{return Xoa_ttl.parse_(this, ttl);}
+	public Xoa_ttl					Ttl_parse(int ns_id, byte[] ttl)	{return Xoa_ttl.parse_(this, ns_id, ttl);}
+	public boolean						Type_is_edit() {return Bool_.Y;}
+	public Xoa_app					App() {return app;}
+	public Xol_lang					Lang() {return lang;} private final Xol_lang lang;
+	public byte[]					Domain_bry() {return domain_bry;} private final byte[] domain_bry; 
+	public String					Domain_str() {return domain_str;} private final String domain_str;
+	public int						Domain_tid() {return domain_tid;} private final int domain_tid;
+	public byte[]					Domain_abrv() {return domain_abrv;} private final byte[] domain_abrv;
+	public Xow_domain				Domain_itm() {return domain_itm;} private final Xow_domain domain_itm;
+	public Xow_fsys_mgr				Fsys_mgr() {return fsys_mgr;} private final Xow_fsys_mgr fsys_mgr;
+	public Xowd_db_mgr				Data_mgr__core_mgr() {return db_mgr.Tid() == Xodb_mgr_txt.Tid_txt ? null : this.Db_mgr_as_sql().Core_data_mgr();}	// TEST:
+	public Xof_fsdb_mode			File__fsdb_mode() {return file_mgr.Fsdb_mode();}
+	public Fsdb_db_mgr				File__fsdb_core() {return file_mgr.Db_core();}
+	public Xow_repo_mgr				File__repo_mgr() {return file_mgr.Repo_mgr();}
+	public Xof_orig_mgr				File__orig_mgr() {return file_mgr.Orig_mgr();}
+	public Xof_bin_mgr				File__bin_mgr() {return file_mgr.Fsdb_mgr().Bin_mgr();}
+	public Fsm_mnt_mgr				File__mnt_mgr() {return file_mgr.Fsdb_mgr().Mnt_mgr();}
+	public boolean						Html__hdump_enabled() {return html_mgr__hdump_enabled;}	private boolean html_mgr__hdump_enabled = Bool_.N;
+	public Xow_hzip_mgr				Html__hzip_mgr() {return html_mgr.Hzip_mgr();}
+	public Xohd_hdump_rdr			Html__hdump_rdr() {return html_mgr__hdump_rdr;} private final Xohd_hdump_rdr html_mgr__hdump_rdr;
+	public Xoh_page_wtr_mgr_base	Html__page_wtr_mgr() {return html_mgr.Page_wtr_mgr();}
+	public Xow_xwiki_mgr			Xwiki_mgr() {return xwiki_mgr;} private final Xow_xwiki_mgr xwiki_mgr;
 
-	public boolean					Html__hdump_enabled() {return html_mgr__hdump_enabled;}	private boolean html_mgr__hdump_enabled = Bool_.N;
-	public Xow_hzip_mgr			Html__hzip_mgr() {return html_mgr.Hzip_mgr();}
-	public Xohd_hdump_rdr		Html__hdump_rdr() {return html_mgr__hdump_rdr;} private final Xohd_hdump_rdr html_mgr__hdump_rdr;
-	public Xohd_hdump_wtr		Html__hdump_wtr() {return html_mgr__hdump_wtr;} private final Xohd_hdump_wtr html_mgr__hdump_wtr;
-	public Xoh_page_wtr_mgr_base		Html__page_wtr_mgr() {return html_mgr.Page_wtr_mgr();}
+	public Xohd_hdump_wtr			Html__hdump_wtr() {return html_mgr__hdump_wtr;} private final Xohd_hdump_wtr html_mgr__hdump_wtr;
+	public int						Xwiki_domain_tid() {return xwiki_domain_tid;} private int xwiki_domain_tid;
+	public Xoae_app					Appe() {return app;} private Xoae_app app;
+	public Xow_utl_mgr				Utl_mgr() {return utl_mgr;} private Xow_utl_mgr utl_mgr;
+	public Xow_gui_mgr				Gui_mgr() {return gui_mgr;} private Xow_gui_mgr gui_mgr = new Xow_gui_mgr();
+	public Xow_user					User() {return user;} private Xow_user user = new Xow_user();
+	public Xow_data_mgr				Data_mgr() {return data_mgr;} private Xow_data_mgr data_mgr;
+	public Xodb_mgr					Db_mgr() {return db_mgr;} private Xodb_mgr db_mgr;
+	public Xodb_mgr_sql				Db_mgr_as_sql() {return (Xodb_mgr_sql)db_mgr;}
+	public Xows_mgr					Special_mgr() {return special_mgr;} private Xows_mgr special_mgr;
+	public Xow_html_mgr				Html_mgr() {return html_mgr;} private Xow_html_mgr html_mgr;
+	public Xow_xtn_mgr				Xtn_mgr() {return xtn_mgr;} private Xow_xtn_mgr xtn_mgr;
+	public Xow_cache_mgr			Cache_mgr() {return cache_mgr;} private Xow_cache_mgr cache_mgr;
+	public Xow_page_mgr				Page_mgr() {return page_mgr;} private Xow_page_mgr page_mgr = new Xow_page_mgr();
 
-	public Xow_xwiki_mgr		Xwiki_mgr() {return xwiki_mgr;} private final Xow_xwiki_mgr xwiki_mgr;
-	public int					Xwiki_domain_tid() {return xwiki_domain_tid;} private int xwiki_domain_tid;
-	public Xoae_app				Appe() {return app;} private Xoae_app app;
-	public Xow_utl_mgr			Utl_mgr() {return utl_mgr;} private Xow_utl_mgr utl_mgr;
-	public Xow_gui_mgr			Gui_mgr() {return gui_mgr;} private Xow_gui_mgr gui_mgr = new Xow_gui_mgr();
-	public Xow_user				User() {return user;} private Xow_user user = new Xow_user();
-	public Xow_data_mgr			Data_mgr() {return data_mgr;} private Xow_data_mgr data_mgr;
-	public Xodb_mgr				Db_mgr() {return db_mgr;} private Xodb_mgr db_mgr;
-	public Xodb_mgr_sql			Db_mgr_as_sql() {return (Xodb_mgr_sql)db_mgr;}
-	public Xows_mgr				Special_mgr() {return special_mgr;} private Xows_mgr special_mgr;
-	public Xow_html_mgr			Html_mgr() {return html_mgr;} private Xow_html_mgr html_mgr;
-	public Xow_xtn_mgr			Xtn_mgr() {return xtn_mgr;} private Xow_xtn_mgr xtn_mgr;
-	public Xow_cache_mgr		Cache_mgr() {return cache_mgr;} private Xow_cache_mgr cache_mgr;
-	public Xow_page_mgr			Page_mgr() {return page_mgr;} private Xow_page_mgr page_mgr = new Xow_page_mgr();
-
-	public byte[]				Commons_wiki_key() {return commons_wiki_key;} private byte[] commons_wiki_key = Xow_domain_.Domain_bry_commons;
-	public Xob_hive_mgr			Hive_mgr() {return hive_mgr;} private Xob_hive_mgr hive_mgr;
-	public Xow_msg_mgr			Msg_mgr() {return msg_mgr;} private Xow_msg_mgr msg_mgr;
-	public Xow_fragment_mgr		Fragment_mgr() {return fragment_mgr;} private Xow_fragment_mgr fragment_mgr;
-	public Bfmtr_eval_wiki		Eval_mgr() {return eval_mgr;} private Bfmtr_eval_wiki eval_mgr;
-	public Bry_bfr_mkr			Utl__bfr_mkr() {return app.Utl__bfr_mkr();}
-	public byte[]				Wdata_wiki_lang() {return wdata_wiki_lang;} private byte[] wdata_wiki_lang;
-	public void					Wdata_wiki_lang_(byte[] v) {this.wdata_wiki_lang = v; Wdata_wiki_abrv_();}	// TEST:
-	public byte[]				Wdata_wiki_abrv() {return wdata_wiki_abrv;} private byte[] wdata_wiki_abrv; private int wdata_wiki_tid;
+	public byte[]					Commons_wiki_key() {return commons_wiki_key;} private byte[] commons_wiki_key = Xow_domain_.Domain_bry_commons;
+	public Xob_hive_mgr				Hive_mgr() {return hive_mgr;} private Xob_hive_mgr hive_mgr;
+	public Xow_msg_mgr				Msg_mgr() {return msg_mgr;} private Xow_msg_mgr msg_mgr;
+	public Xow_fragment_mgr			Fragment_mgr() {return fragment_mgr;} private Xow_fragment_mgr fragment_mgr;
+	public Bfmtr_eval_wiki			Eval_mgr() {return eval_mgr;} private Bfmtr_eval_wiki eval_mgr;
+	public Bry_bfr_mkr				Utl__bfr_mkr() {return app.Utl__bfr_mkr();}
+	public byte[]					Wdata_wiki_lang() {return wdata_wiki_lang;} private byte[] wdata_wiki_lang;
+	public void						Wdata_wiki_lang_(byte[] v) {this.wdata_wiki_lang = v; Wdata_wiki_abrv_();}	// TEST:
+	public byte[]					Wdata_wiki_abrv() {return wdata_wiki_abrv;} private byte[] wdata_wiki_abrv; private int wdata_wiki_tid;
 	private void Wdata_wiki_abrv_() {
 		Bry_bfr bfr = app.Utl__bfr_mkr().Get_b128();
 		Xow_wiki_alias.Build_alias_by_lang_tid(bfr, wdata_wiki_lang, Int_obj_ref.new_(wdata_wiki_tid));

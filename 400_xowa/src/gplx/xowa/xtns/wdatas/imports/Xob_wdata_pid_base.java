@@ -37,6 +37,9 @@ public abstract class Xob_wdata_pid_base extends Xob_itm_dump_base implements Xo
 			bldr.Usr_dlg().Warn_many(GRP_KEY, "json.invalid", "json is invalid: ns=~{0} id=~{1}", page.Ns_id(), String_.new_u8(page.Ttl_page_db()));
 			return;
 		}
+		Parse_jdoc(jdoc);
+	}
+	public void Parse_jdoc(Json_doc jdoc) {
 		Wdata_doc_parser wdoc_parser = app.Wiki_mgr().Wdata_mgr().Wdoc_parser(jdoc);
 		byte[] qid = wdoc_parser.Parse_qid(jdoc);
 		Ordered_hash list = wdoc_parser.Parse_langvals(qid, jdoc, Bool_.Y);

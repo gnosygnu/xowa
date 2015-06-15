@@ -22,20 +22,20 @@ import gplx.xowa.files.*; import gplx.xowa.files.caches.*;
 public class Xoue_user implements Xou_user, GfoEvMgrOwner, GfoInvkAble {
 	public Xoue_user(Xoae_app app, Io_url user_dir) {
 		this.app = app; this.key = user_dir.NameOnly();
-		this.fsys_mgr = new Xou_fsys_mgr(app, this, user_dir);
-		this.history_mgr = new Xou_history_mgr(fsys_mgr.App_data_history_fil());
 		this.ev_mgr = GfoEvMgr.new_(this);
+		this.fsys_mgr = new Xou_fsys_mgr(app, this, user_dir);
+		this.user_db_mgr = new Xou_db_mgr(app);
+		this.history_mgr = new Xou_history_mgr(fsys_mgr.App_data_history_fil());
 		this.prefs_mgr = new gplx.xowa.users.prefs.Prefs_mgr(app);
 		this.cfg_mgr = new Xou_cfg(this);
 		this.session_mgr = new Xou_session(this);
 	}
-	public String					Key() {return key;} private String key;
-	public Xou_db_file				Data__db_file() {return db_file;} private Xou_db_file db_file;
-	public Xou_cache_mgr			File__cache_mgr() {return cache_mgr;} private Xou_cache_mgr cache_mgr;
-	public Xou_file_itm_finder		File__xfer_itm_finder() {return xfer_itm_finder;} private Xou_file_itm_finder xfer_itm_finder;
-	public Xoae_app					Appe() {return app;} private final Xoae_app app;
 	public GfoEvMgr					EvMgr() {return ev_mgr;} private final GfoEvMgr ev_mgr;
-	public Xoud_db_mgr Data_mgr() {return data_mgr;} private Xoud_db_mgr data_mgr = new Xoud_db_mgr();
+	public String					Key() {return key;} private String key;
+	public Xou_db_mgr				User_db_mgr()  {return user_db_mgr;} private final Xou_db_mgr user_db_mgr;
+	public Xow_wiki					Wikii() {return wiki;}
+
+	public Xoae_app					Appe() {return app;} private final Xoae_app app;
 	public Xol_lang Lang() {if (lang == null) {lang = app.Lang_mgr().Get_by_key_or_new(app.Sys_cfg().Lang()); lang.Init_by_load();} return lang;} private Xol_lang lang;		
 	public void Lang_(Xol_lang v) {
 		lang = v;
@@ -57,19 +57,11 @@ public class Xoue_user implements Xou_user, GfoEvMgrOwner, GfoInvkAble {
 	public void Init_by_app(Xoae_app app) {
 		Io_url user_system_cfg = fsys_mgr.App_data_cfg_dir().GenSubFil(Xou_fsys_mgr.Name_user_system_cfg);
 		if (!Io_mgr.I.ExistsFil(user_system_cfg)) Xou_user_.User_system_cfg_make(app.Usr_dlg(), user_system_cfg);
-		Init_db();
+		user_db_mgr.Init_by_app(Bool_.N, fsys_mgr.Root_dir().OwnerDir().GenSubFil("xowa.user." + key + ".sqlite3")); // EX: /xowa/user/xowa.user.anonymous.sqlite3
 		if (!Env_.Mode_testing()) {
 			this.Available_from_fsys();
 			// data_mgr.Init_by_app(app);
 		}
-	}
-	public void Init_db() {	// TEST:
-		Io_url db_url = fsys_mgr.Root_dir().OwnerDir().GenSubFil("xowa.user." + key + ".sqlite3");	// EX: /xowa/user/xowa.user.anonymous.sqlite3
-		Db_conn_bldr_data db_conn_bldr = Db_conn_bldr.I.Get_or_new(db_url);
-		this.db_file = new Xou_db_file(db_conn_bldr.Conn());
-		db_file.Init_assert();
-		this.cache_mgr = new Xou_cache_mgr(app.Wiki_mgr(), app.Fsys_mgr().File_dir(), db_file);
-		this.xfer_itm_finder = new Xou_file_itm_finder(cache_mgr);
 	}
 	public void App_term() {
 		session_mgr.Window_mgr().Save_window(app.Gui_mgr().Browser_win().Win_box());

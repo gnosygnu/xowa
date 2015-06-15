@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*;
-public class Xoud_cfg_mgr {
-	private Db_cfg_tbl tbl;
-	public void Conn_(Db_conn new_conn, boolean created, int user_id) {
+public class Xoud_cfg_mgr {		
+	public Db_cfg_tbl Tbl() {return tbl;} private Db_cfg_tbl tbl;
+	public void Conn_(Db_conn new_conn, boolean created) {
 		tbl = new Db_cfg_tbl(new_conn, "user_opt");
 		if (created) tbl.Create_tbl();
 	}

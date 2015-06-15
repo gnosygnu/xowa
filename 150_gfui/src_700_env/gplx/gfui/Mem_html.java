@@ -25,7 +25,6 @@ class Mem_html extends GxwTextMemo_lang implements Gxw_html {		public String Htm
 	public String Html_doc_selected_get_href_or_text() {return "";}
 	public String Html_doc_selected_get_src_or_empty() {return "";}
 	public String Html_doc_selected_get_active_or_selection() {return "";}
-	public boolean Html_doc_loaded() {return true;}
 	public boolean Html_window_print_preview() {return false;}
 	public void Html_invk_src_(GfoEvObj v) {}
 	public String Html_elem_atr_get_str(String elem_id, String atr_key) {
@@ -87,7 +86,7 @@ class Mem_html extends GxwTextMemo_lang implements Gxw_html {		public String Htm
 		if (!Int_.Between(pos, q0, q1)) return null;	// current pos is not between nearest quotes
 		return String_.Mid(txt, q0 + 1, q1);
 	}
-	public boolean Html_doc_find(String elem_id, String find, boolean dir_fwd, boolean case_match, boolean wrap_find) {
+	public boolean Html_doc_find(String elem_id, String find, boolean dir_fwd, boolean case_match, boolean wrap_find, boolean highlight_matches) {
 //			String txt = this.TextVal();
 //			int pos = this.SelBgn();
 //			int bgn = String_.FindFwd(txt, find, pos);	if (bgn == String_.Find_none) return false;

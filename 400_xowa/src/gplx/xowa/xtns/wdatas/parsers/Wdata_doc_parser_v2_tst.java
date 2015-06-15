@@ -205,7 +205,19 @@ public class Wdata_doc_parser_v2_tst {
 		, ", 'type':'wikibase-entityid'"
 		, "}"
 		)
-		, fxt.Make_claim_entity(1, 123)
+		, fxt.Make_claim_entity_qid(1, 123)
+		);
+	}
+	@Test   public void Claims_data_property() {
+		fxt.Test_claims_data(String_.Concat_lines_nl_skip_last
+		( "{ 'value':"
+		, "  { 'entity-type':'property'"
+		, "  , 'numeric-id':'398'"
+		, "  }"
+		, ", 'type':'wikibase-entityid'"
+		, "}"
+		)
+		, fxt.Make_claim_entity_pid(1, 398)
 		);
 	}
 	@Test   public void Claims_data_monolingualtext() {
@@ -311,7 +323,7 @@ public class Wdata_doc_parser_v2_tst {
 		, "    ]"
 		, "  }"
 		, "}"
-		), fxt.Make_claim_entity(1, 11), fxt.Make_claim_entity(1, 12), fxt.Make_claim_entity(2, 21)
+		), fxt.Make_claim_entity_qid(1, 11), fxt.Make_claim_entity_qid(1, 12), fxt.Make_claim_entity_qid(2, 21)
 		);
 	}
 	@Test   public void Pid_order() {
@@ -362,7 +374,7 @@ public class Wdata_doc_parser_v2_tst {
 		, "    }"
 		, "  ]"
 		, "}"
-		), Int_.Ary(2, 3), fxt.Make_claim_entity(2, 21), fxt.Make_claim_entity(3, 31))
+		), Int_.Ary(2, 3), fxt.Make_claim_entity_qid(2, 21), fxt.Make_claim_entity_qid(3, 31))
 		;
 	}
 	@Test   public void References_empty() { // PURPOSE:sometimes references can have 0 snaks; return back an empty Wdata_claim_grp_list, not null; PAGE:Птичкин,_Евгений_Николаевич; DATE:2015-02-16

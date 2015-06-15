@@ -40,10 +40,9 @@ class Swt_html implements Gxw_html, Swt_control, FocusListener {
 		this.kit = kit;
 		lnr_location = new Swt_html_lnr_location(this);
 		lnr_status = new Swt_html_lnr_status(this);
-		int browser_type = Swt_html.Browser_tid_none;
-		Object browser_type_obj = ctorArgs.FetchValOr(Swt_kit.Cfg_Html_BrowserType, null);
-		if (browser_type_obj != null) browser_type = Int_.cast_(browser_type_obj);
-		browser = new Browser(owner_control.Under_composite(), browser_type);
+		Object browser_tid_obj = ctorArgs.FetchValOr(Swt_kit.Cfg_Html_BrowserType, null);
+		this.browser_tid = browser_tid_obj == null ? Browser_tid_none : Int_.cast_(browser_tid_obj);
+		browser = new Browser(owner_control.Under_composite(), browser_tid);
 		core = new Swt_core_cmds_html(this, browser);
 		browser.addKeyListener(new Swt_lnr_key(this));
 		browser.addMouseListener(new Swt_html_lnr_mouse(this, browser, kit));
@@ -58,6 +57,7 @@ class Swt_html implements Gxw_html, Swt_control, FocusListener {
 	@Override public Control Under_control() {return browser;} private Browser browser;
 	@Override public Composite Under_composite() {return null;}
 	@Override public Control Under_menu_control() {return browser;}
+	public int Browser_tid() {return browser_tid;} private final int browser_tid;
 	public String 		Html_doc_html() 												{return Eval_script_as_str(kit.Html_cfg().Doc_html());}
 	public void 		Html_doc_html_load_by_mem(String html) {
 		html_doc_html_load_tid = Gxw_html_load_tid_.Tid_mem;
@@ -75,7 +75,6 @@ class Swt_html implements Gxw_html, Swt_control, FocusListener {
 	public String 		Html_doc_selected_get_src_or_empty() 							{return Eval_script_as_str(kit.Html_cfg().Doc_selected_get_src_or_empty());}
 	public String 		Html_doc_selected_get_active_or_selection() 					{return Eval_script_as_str(kit.Html_cfg().Doc_selected_get_active_or_selection());}
 	public void 		Html_doc_body_focus() 											{Eval_script_as_exec(kit.Html_cfg().Doc_body_focus());}
-	public boolean 		Html_doc_loaded() 												{return Bool_.parse_((String)Eval_script(kit.Html_cfg().Doc_loaded()));}
 	public void 		Html_doc_selection_focus_toggle() 								{Eval_script_as_exec(kit.Html_cfg().Doc_selection_focus_toggle());}
 	public String 		Html_elem_atr_get_str(String elem_id, String atr_key) 			{return Eval_script_as_str(kit.Html_cfg().Elem_atr_get(elem_id, atr_key));}
 	public boolean 		Html_elem_atr_get_bool(String elem_id, String atr_key) 			{return Bool_.parse_((String)Eval_script(kit.Html_cfg().Elem_atr_get_toString(elem_id, atr_key)));}
@@ -119,20 +118,16 @@ class Swt_html implements Gxw_html, Swt_control, FocusListener {
 		Gfui_html_cfg.Html_window_vpos_parse(v, scroll_top, node_path);
 		return Eval_script_as_exec(kit.Html_cfg().Window_vpos_(node_path.Val(), scroll_top.Val()));
 	}	private String_obj_ref scroll_top = String_obj_ref.null_(), node_path = String_obj_ref.null_();
-	public boolean Html_doc_find(String elem_id, String find, boolean dir_fwd, boolean case_match, boolean wrap_find) {
+	public boolean Html_doc_find(String elem_id, String find, boolean dir_fwd, boolean case_match, boolean wrap_find, boolean highlight_matches) {
 		// if (String_.Eq(find, String_.Empty)) return false;
 		find = String_.Replace(find, "\\", "\\\\");	// escape \ -> \\
 		find = String_.Replace(find, "'", "\\'");	// escape ' -> \'; NOTE: \\' instead of \'
-		boolean search_text_is_diff = !String_.Eq(find, prv_find_str);
-		prv_find_str = find;
 		String script = String_.Eq(elem_id, Gfui_html.Elem_id_body)
-			? kit.Html_cfg().Doc_find_html(find, dir_fwd, case_match, wrap_find, search_text_is_diff, prv_find_bgn)
-			: kit.Html_cfg().Doc_find_edit(find, dir_fwd, case_match, wrap_find, search_text_is_diff, prv_find_bgn);
-		Object result_obj = Eval_script(script);
-		try  				{prv_find_bgn = (int)Double_.cast_(result_obj);}
-		catch (Exception e) {Err_.Noop(e); return false;}
+			? kit.Html_cfg().Doc_find_html(find, dir_fwd, case_match, wrap_find, highlight_matches)
+			: kit.Html_cfg().Doc_find_edit(find, dir_fwd, case_match, wrap_find, false, -1);
+		Eval_script(script);
 		return true;
-	}	private String prv_find_str = ""; private int prv_find_bgn;
+	}
 	public void Html_invk_src_(GfoEvObj invk) {lnr_location.Host_set(invk); lnr_status.Host_set(invk);}
 	public void Html_dispose() {
 		browser.dispose();
@@ -186,8 +181,8 @@ class Swt_html_eval_rslt {
 	public Object Result() {return result;} public void Result_set(Object v) 	{result = v; error = null;} private Object result;
 	public String Error () {return error;} 	public void Error_set(String v) 	{error = v; result = null;} private String error;
 }
-class Swt_html_lnr_Traverse implements TraverseListener {
-	public Swt_html_lnr_Traverse(Swt_html html_box) {}
+class Swt_html_lnr_traverse implements TraverseListener {
+	public Swt_html_lnr_traverse(Swt_html html_box) {}
 	@Override public void keyTraversed(TraverseEvent arg0) {}
 }
 class Swt_html_lnr_title implements TitleListener {
@@ -240,6 +235,10 @@ class Swt_html_lnr_location implements LocationListener {
 	private void Pub_evt(LocationEvent arg, String evt) {		
 		String location = arg.location;
 		if (String_.Eq(location, "about:blank")) return;	// location changing event fires once when page is loaded; ignore
+		if (	html_box.Browser_tid() == Swt_html.Browser_tid_webkit	// webkit prefixes "about:blank" to anchors; causes TOC to fail when clicking on links; EX:about:blank#TOC1; DATE:2015-06-09
+			&&	String_.HasAtBgn(location, "about:blank")) {
+			location = String_.Mid(location, 11);	// 11 = "about:blank".length 
+		}
 		if (	html_box.Html_doc_html_load_tid() == Gxw_html_load_tid_.Tid_url	// navigating to file://page.html will fire location event; ignore if url mode
 			&& 	String_.HasAtBgn(location, "file:")
 			&& 	String_.HasAtEnd(location, ".html")

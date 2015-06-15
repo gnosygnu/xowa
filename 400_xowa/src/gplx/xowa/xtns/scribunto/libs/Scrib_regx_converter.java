@@ -36,7 +36,7 @@ public class Scrib_regx_converter {
 			switch (cur) {
 				case Byte_ascii.Pow:
 					q_flag = i != 0;
-					bfr.Add(anchor == Anchor_null || q_flag ? Bry_pow_escaped : anchor);	// NOTE: must add anchor \G when using offsets; EX:cs.n:Category:1._z�r�_2008; DATE:2014-05-07
+					bfr.Add(anchor == Anchor_null || q_flag ? Bry_pow_escaped : anchor);	// NOTE: must add anchor \G when using offsets; EX:cs.n:Category:1._zárí_2008; DATE:2014-05-07
 					break;
 				case Byte_ascii.Dollar:
 					q_flag = i < len - 1;
@@ -221,10 +221,9 @@ public class Scrib_regx_converter {
 	;
 	public static final byte[] Anchor_null = null, Anchor_G = Bry_.new_a7("\\G"), Anchor_pow = Bry_.new_a7("^");
 	private void Init() {
-		// REF:tchrist@http://stackoverflow.com/questions/4304928/unicode-equivalents-for-w-and-b-in-java-regular-expressions; PAGE:pl.w:Benjamin_Franklin DATE:2014-08-13			
-				String regx_w = "[\\pL\\pM\\p{Nd}\\p{Nl}\\p{Pc}[\\p{InEnclosedAlphanumerics}&&\\p{So}]]";
-		String regx_W = "[^\\pL\\pM\\p{Nd}\\p{Nl}\\p{Pc}[\\p{InEnclosedAlphanumerics}&&\\p{So}]]";
-				Init_itm(Bool_.Y, "d", "\\p{Nd}");
+		String regx_w = "\\w"; // JRE.7: \w not support in JRE.6; PAGE:en.w:A♯_(musical_note) DATE:2015-06-10
+		String regx_W = "\\W"; // JRE.7: \w not support in JRE.6; PAGE:en.w:A♯_(musical_note) DATE:2015-06-10
+		Init_itm(Bool_.Y, "d", "\\p{Nd}");
 		Init_itm(Bool_.Y, "l", "\\p{Ll}");
 		Init_itm(Bool_.Y, "u", "\\p{Lu}");
 		Init_itm(Bool_.Y, "a", "\\p{L}");
