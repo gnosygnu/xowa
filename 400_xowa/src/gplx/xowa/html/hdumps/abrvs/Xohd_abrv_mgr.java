@@ -26,6 +26,7 @@ public class Xohd_abrv_mgr {
 	private Xoh_cfg_file cfg_file; private Xof_url_bldr url_bldr = Xof_url_bldr.new_v2(); private Xoh_file_html_fmtr__base html_fmtr;
 	private byte[] root_dir, file_dir, file_dir_comm, file_dir_wiki, hiero_img_dir;
 	private byte[] wiki_domain;
+	private final Xohd_abrv_wkr__hdr wkr__hdr = new Xohd_abrv_wkr__hdr();
 	public Xohd_abrv_mgr(Gfo_usr_dlg usr_dlg, Xoa_fsys_mgr fsys_mgr, Url_encoder fsys_encoder, byte[] wiki_domain) {
 		this.usr_dlg = usr_dlg;
 		this.root_dir = fsys_mgr.Root_dir().To_http_file_bry();
@@ -43,17 +44,17 @@ public class Xohd_abrv_mgr {
 		this.Init();
 		byte[] src = hpg.Page_body(); int len = src.length;
 		Xohd_data_itm__base[] imgs = hpg.Img_itms(); int imgs_len = hpg.Img_itms().length;
-		bry_rdr.Src_(src);
+		bry_rdr.Init(src);
 		int pos = 0; int rng_bgn = -1;
 		while (pos < len) {
 			byte b = src[pos];
 			Object o = trie.Match_bgn_w_byte(b, src, pos, len);
-			if (o == null) {
+			if (o == null) {	// regular char; set bgn and move to next char
 				if (rng_bgn == -1) rng_bgn = pos;
 				++pos;
 			}
-			else {
-				if (rng_bgn != -1) {
+			else {						// special tkn
+				if (rng_bgn != -1) {	// pending rng exists; add it
 					rv.Add_mid(src, rng_bgn, pos);
 					rng_bgn = -1;
 				}
@@ -75,6 +76,8 @@ public class Xohd_abrv_mgr {
 			case Xohd_abrv_.Tid_dir:					bfr.Add(root_dir); return rv;
 			case Xohd_abrv_.Tid_hiero_dir:				bfr.Add(hiero_img_dir); return rv;
 			case Xohd_abrv_.Tid_redlink:				return Write_redlink(bfr, hpg, uid, rv);
+			case Xohd_abrv_.Tid_hdr_bgn:				return wkr__hdr.Write_bgn(bfr, hpg, uid, rv);
+			case Xohd_abrv_.Tid_hdr_end:				return wkr__hdr.Write_end(bfr, hpg, uid, rv);
 		}
 		if (itm.Elem_is_xnde()) rv += 2;		// if xnde, skip "/>"
 		if (uid == bry_rdr.Or_int())			{usr_dlg.Warn_many("", "", "index is not a valid int; hpg=~{0} text=~{1}", hpg.Url().Xto_full_str_safe(), Bry_.Mid_safe(src, uid_bgn, uid_end)); return uid_end;}
@@ -148,4 +151,12 @@ class Hdump_html_fmtr_itm {
 	public byte[] Key() {return key;} private final byte[] key;
 	public boolean Elem_is_xnde() {return elem_is_xnde;} private final boolean elem_is_xnde;
 	public byte Subst_end_byte() {return subst_end_byte;} private final byte subst_end_byte;
+}
+class Xohd_abrv_wkr__hdr {
+	public int Write_bgn(Bry_bfr bfr, Xog_page hpg, int uid, int rv) {
+		return rv;
+	}
+	public int Write_end(Bry_bfr bfr, Xog_page hpg, int uid, int rv) {
+		return rv;
+	}
 }

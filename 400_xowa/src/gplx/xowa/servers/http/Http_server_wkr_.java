@@ -21,8 +21,8 @@ class Http_server_wkr_ {
 	public static String Assert_main_page(Xoae_app app, String req) {
 		int mode = -1;
 		String[] req_array = String_.Split(req, "/");
-		if		(String_.HasAtEnd(req, "wiki/")) 	mode = 0;
-		else if	(String_.HasAtEnd(req, "wiki")) 	mode = 1;
+		if		(String_.Has_at_end(req, "wiki/")) 	mode = 0;
+		else if	(String_.Has_at_end(req, "wiki")) 	mode = 1;
 		else if (req_array.length == 3)				mode = 2;
 		if (mode == -1) return req;	// not a link to a Main Page; EX:localhost:8080/en.wikipedia.org/wiki/Earth
 		if (req_array.length < 3) return req; // shouldn't happen; EX: "localhost:8080wiki"

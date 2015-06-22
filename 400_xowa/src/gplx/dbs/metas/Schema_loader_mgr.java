@@ -15,9 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.dbs.schemas.updates; import gplx.*; import gplx.dbs.*; import gplx.dbs.schemas.*;
-public interface Schema_update_cmd {
-	String Name();
-	boolean Exec_is_done();
-	void Exec(Schema_db_mgr mgr, Db_conn conn);
+package gplx.dbs.metas; import gplx.*; import gplx.dbs.*;
+public interface Schema_loader_mgr {
+	void Load(Schema_db_mgr db_mgr, Db_conn conn);
 }

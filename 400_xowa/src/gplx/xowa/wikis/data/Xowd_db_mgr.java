@@ -23,6 +23,7 @@ public class Xowd_db_mgr {
 	private final Io_url wiki_root_dir; private final Xow_domain domain_itm;
 	public Xowd_db_mgr(Io_url wiki_root_dir, Xow_domain domain_itm) {this.wiki_root_dir = wiki_root_dir; this.domain_itm = domain_itm;}
 	public Xowd_core_db_props		Props()			{return props;} private Xowd_core_db_props props = Xowd_core_db_props.Test;
+	public Xowd_core_mw_props		Mw_props()		{return mw_props;} private final Xowd_core_mw_props mw_props = new Xowd_core_mw_props();
 	public Db_cfg_tbl				Tbl__cfg()		{return db__core.Tbl__cfg();}
 	public Xowd_page_tbl			Tbl__page()		{return db__core.Tbl__page();}
 	public Xowd_db_file				Db__core()		{return db__core;}		private Xowd_db_file db__core;
@@ -69,6 +70,7 @@ public class Xowd_db_mgr {
 			Dbs__set_by_tid(db);
 			db_file_hash.Add_or_new(db);
 		}
+		mw_props.Init_by_load(Tbl__cfg());
 	}
 	public void Init_by_make(Xowd_core_db_props props, Xob_info_session info_session) {
 		this.props = props;

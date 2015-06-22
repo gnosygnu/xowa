@@ -30,7 +30,7 @@ public interface Xow_wiki extends Xow_ttl_parser {
 	byte[]						Domain_abrv();			// enwiki
 	Xow_domain					Domain_itm();
 	Xow_fsys_mgr				Fsys_mgr();
-	Xowd_db_mgr					Data_mgr__core_mgr();
+	Xowd_db_mgr					Data__core_mgr();
 	Xof_fsdb_mode				File__fsdb_mode();
 	Fsdb_db_mgr					File__fsdb_core();
 	Xow_repo_mgr				File__repo_mgr();

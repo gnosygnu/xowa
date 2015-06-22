@@ -31,13 +31,13 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 	}
 	public void Load_init(Xowe_wiki wiki) {
 		Load_init_cfg(wiki);
-		Xowd_db_file db_core = wiki.Data_mgr__core_mgr().Db__core();
+		Xowd_db_file db_core = wiki.Data__core_mgr().Db__core();
 		db_core.Tbl__site_stats().Select(wiki.Stats());
 		db_core.Tbl__ns().Select_all(wiki.Ns_mgr());
 	}
 	private void Load_init_cfg(Xowe_wiki wiki) {
 		String version_key = Xoa_gfs_mgr.Build_code(Xowe_wiki.Invk_props, Xow_wiki_props.Invk_bldr_version);
-		Db_cfg_hash cfg_hash = db_mgr.Core_data_mgr().Tbl__cfg().Select_as_hash(Xow_cfg_consts.Grp_wiki_init);
+		Db_cfg_hash cfg_hash = db_mgr.Core_data_mgr().Tbl__cfg().Select_as_hash(Xow_cfg_consts.Grp__wiki_init);
 		String version_val = cfg_hash.Get(version_key).To_str_or("");
 		Xodb_upgrade_mgr.Upgrade(db_mgr, cfg_hash, version_key, version_val);
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_k004();

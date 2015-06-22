@@ -131,13 +131,13 @@ public class Xoa_url_parser {
 			: ary
 			;
 	}
-	public static Xoa_url Parse_url(Xoae_app app, Xowe_wiki cur_wiki, String raw) {
+	public static Xoa_url Parse_url(Xoa_app app, Xow_wiki cur_wiki, String raw) {
 		byte[] raw_bry = Bry_.new_u8(raw);
 		return Parse_url(Xoa_url.blank_(), app, cur_wiki, raw_bry, 0, raw_bry.length, false);
 	}
-	public static Xoa_url Parse_url(Xoae_app app, Xowe_wiki cur_wiki, byte[] raw, int bgn, int end, boolean from_url_bar) {return Parse_url(Xoa_url.blank_(), app, cur_wiki, raw, bgn, end, from_url_bar);}
-	public static Xoa_url Parse_url(Xoa_url rv, Xoae_app app, Xow_wiki cur_wiki, byte[] raw, int bgn, int end, boolean from_url_bar) {
-		Xowe_wiki wiki = null; Bry_bfr_mkr bfr_mkr = app.Utl__bfr_mkr();
+	public static Xoa_url Parse_url(Xoa_app app, Xow_wiki cur_wiki, byte[] raw, int bgn, int end, boolean from_url_bar) {return Parse_url(Xoa_url.blank_(), app, cur_wiki, raw, bgn, end, from_url_bar);}
+	public static Xoa_url Parse_url(Xoa_url rv, Xoa_app app, Xow_wiki cur_wiki, byte[] raw, int bgn, int end, boolean from_url_bar) {
+		Xow_wiki wiki = null; Bry_bfr_mkr bfr_mkr = app.Utl__bfr_mkr();
 		byte[] cur_wiki_key = cur_wiki.Domain_bry();
 		byte[] page_bry = Bry_.Empty;
 		boolean page_is_main_page = false;
@@ -151,15 +151,15 @@ public class Xoa_url_parser {
 		else {												// parse failed; url doesn't have protocol
 			byte[] wiki_bry = rv.Wiki_bry();
 			if (Bry_.Len_gt_0(wiki_bry)) {					// NOTE: wiki_bry is null when passing in Category:A from home_wiki
-				Xow_xwiki_itm xwiki_itm = app.Usere().Wiki().Xwiki_mgr().Get_by_key(wiki_bry);	// check if url.Wiki_bry is actually wiki; note that checking User().Wiki().Xwiki_mgr() to find "offline" wikis
+				Xow_xwiki_itm xwiki_itm = app.User().Wikii().Xwiki_mgr().Get_by_key(wiki_bry);	// check if url.Wiki_bry is actually wiki; note that checking User().Wiki().Xwiki_mgr() to find "offline" wikis
 				if (	xwiki_itm != null						// null-check
 					&&	Bry_.Eq(xwiki_itm.Domain_bry(), wiki_bry)// check that xwiki.domain == wiki; avoids false lang matches like "so/page" or "C/page"; EX: "fr.wikipedia.org" vs "fr"; ca.s:So/Natura_del_so; DATE:2014-04-26; PAGE:no.b:C/Variabler; DATE:2014-10-14
 					)
-					wiki =  app.Wiki_mgr().Get_by_key_or_make(xwiki_itm.Domain_bry());
+					wiki =  app.Wiki_mgri().Get_by_key_or_make_3(xwiki_itm.Domain_bry());
 			}
 			if (rv.Page_bry() == null) {					// 1 seg; EX: "Earth"; "fr.wikipedia.org"
 				if (wiki != null) {							// wiki_bry is known wiki; EX: "fr.wikipedia.org"
-					wiki = app.Wiki_mgr().Get_by_key_or_make(wiki_bry);	// call get again, but this time "make" it
+					wiki = app.Wiki_mgri().Get_by_key_or_make_3(wiki_bry);	// call get again, but this time "make" it
 					page_is_main_page = true;
 				}
 				else {										// otherwise, assume page name
@@ -184,7 +184,7 @@ public class Xoa_url_parser {
 					if (colon_pos != Bry_.NotFound) {							// alias found
 						Xow_xwiki_itm xwiki = cur_wiki.Xwiki_mgr().Get_by_mid(page_bry, 0, colon_pos);
 						if (xwiki != null) {
-							wiki = app.Wiki_mgr().Get_by_key_or_make(xwiki.Domain_bry());
+							wiki = app.Wiki_mgri().Get_by_key_or_make_3(xwiki.Domain_bry());
 							page_bry = Bry_.Mid(page_bry, colon_pos + 1, page_bry.length); 
 							if (rv.Segs_ary().length == 0)		// handle xwiki without segs; EX: commons:Commons:Media_of_the_day; DATE:2014-02-19
 								rv.Segs_ary_(new byte[][] {Bry_wiki_name, page_bry});	// create segs of "/wiki/Page"
@@ -202,10 +202,11 @@ public class Xoa_url_parser {
 				}
 			}
 		}
-		if (page_is_main_page) {	// Main_Page requested; EX: "zh.wikipedia.org"; "zh.wikipedia.org/wiki/"; DATE:2014-02-16
+		if (page_is_main_page) {		// Main_Page requested; EX: "zh.wikipedia.org"; "zh.wikipedia.org/wiki/"; DATE:2014-02-16
 			if (from_url_bar) {
-				wiki.Init_assert();	// NOTE: must call Init_assert to load Main_Page; only call if from url_bar, else all sister wikis will be loaded when parsing Sister_wikis panel
-				page_bry = wiki.Props().Main_page();
+				wiki.Init_by_wiki();	// NOTE: must call Init_assert to load Main_Page; only call if from url_bar, else all sister wikis will be loaded when parsing Sister_wikis panel
+				// page_bry = ((Xowe_wiki)wiki).Props().Main_page();
+				page_bry = wiki.Data__core_mgr().Mw_props().Main_page();
 			}
 			else
 				page_bry = Xoa_page_.Main_page_bry_empty;
@@ -218,7 +219,7 @@ public class Xoa_url_parser {
 		if (ttl != null) {	// can still be empty; EX: "en.wikipedia.org"
 			Xow_xwiki_itm lang_xwiki = ttl.Wik_itm();
 			if (lang_xwiki != null && lang_xwiki.Type_is_xwiki_lang(wiki.Lang().Lang_id())) {	// format of http://en.wikipedia.org/wiki/fr:A
-				wiki = app.Wiki_mgr().Get_by_key_or_make(lang_xwiki.Domain_bry());
+				wiki = app.Wiki_mgri().Get_by_key_or_make_3(lang_xwiki.Domain_bry());
 				page_bry = ttl.Page_txt();
 			}
 		}
@@ -226,13 +227,13 @@ public class Xoa_url_parser {
 		rv.Page_bry_(page_bry);
 		return rv;
 	}
-	private static Xowe_wiki Parse_url__wiki(Xoae_app app, byte[] key) {
-		Xowe_wiki rv = null;
-		Xow_xwiki_itm xwiki = app.Usere().Wiki().Xwiki_mgr().Get_by_key(key);
+	private static Xow_wiki Parse_url__wiki(Xoa_app app, byte[] key) {
+		Xow_wiki rv = null;
+		Xow_xwiki_itm xwiki = app.User().Wikii().Xwiki_mgr().Get_by_key(key);
  			if (xwiki == null)
-			rv = app.Usere().Wiki();
+			rv = app.User().Wikii();
 		else
-			rv = app.Wiki_mgr().Get_by_key_or_make(xwiki.Domain_bry());
+			rv = app.Wiki_mgri().Get_by_key_or_make_3(xwiki.Domain_bry());
 		return rv;			
 	}
 	private static byte[] Parse_url__combine(Bry_bfr_mkr bry_bfr_mkr, byte[] wiki, byte[][] segs, byte[] page) {

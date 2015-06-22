@@ -39,7 +39,7 @@ public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 		return Io_mgr.I.QueryFil(url).ModifiedTime();
 	}
 	public void Category_version_update(boolean version_is_1) {
-		String grp = Xow_cfg_consts.Grp_wiki_init;
+		String grp = Xow_cfg_consts.Grp__wiki_init;
 		String key = Xoa_gfs_mgr.Build_code(Xowe_wiki.Invk_db_mgr, Xodb_mgr_sql.Invk_category_version);
 		core_data_mgr.Tbl__cfg().Delete_val(grp, key);// always delete ctg version
 		category_version = version_is_1 ? Xoa_ctg_mgr.Version_1 : Xoa_ctg_mgr.Version_2;

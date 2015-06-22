@@ -47,7 +47,7 @@ public class Xob_css_status {
 		rv.Fs_exists_(exists, css_dir);
 	}
 	private static void Chk_db(Xob_css_status rv, Xow_wiki wiki, Io_url css_dir) {
-		Xowd_db_mgr core_db_mgr = wiki.Data_mgr__core_mgr();
+		Xowd_db_mgr core_db_mgr = wiki.Data__core_mgr();
 		if (	core_db_mgr == null
 			||	core_db_mgr.Props() != null
 			||	!core_db_mgr.Props().Schema_is_1()

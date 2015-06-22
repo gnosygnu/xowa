@@ -70,7 +70,7 @@ public class Xoa_css_img_downloader {
 					continue;
 				}
 				byte[] img_raw = Bry_.Mid(src, bgn_pos, end_pos); int img_raw_len = img_raw.length;
-				if (Bry_.HasAtBgn(img_raw, Bry_data_image, 0, img_raw_len)) {	// base64
+				if (Bry_.Has_at_bgn(img_raw, Bry_data_image, 0, img_raw_len)) {	// base64
 					bfr.Add_mid(src, prv_pos, end_pos);							// nothing to download; just add entire String
 					prv_pos = end_pos;
 					continue;
@@ -104,7 +104,7 @@ public class Xoa_css_img_downloader {
 		}
 	}
 	public static byte[] Import_url_build(byte[] stylesheet_prefix, byte[] rel_url_prefix, byte[] css_url) {
-		return Bry_.HasAtBgn(css_url, Bry_http_protocol)			// css_url already starts with "http"; return self; PAGE:tr.n:Main_Page; DATE:2014-06-04
+		return Bry_.Has_at_bgn(css_url, Bry_http_protocol)			// css_url already starts with "http"; return self; PAGE:tr.n:Main_Page; DATE:2014-06-04
 			? css_url
 			: Bry_.Add(stylesheet_prefix, css_url)
 			;
@@ -141,8 +141,8 @@ public class Xoa_css_img_downloader {
 	;
 	public byte[] Clean_img_url(byte[] raw, int raw_len) {
 		int pos_bgn = 0;
-		if (Bry_.HasAtBgn(raw, Bry_fwd_slashes, 0, raw_len)) pos_bgn = Bry_fwd_slashes.length;
-		if (Bry_.HasAtBgn(raw, Bry_http, 0, raw_len)) pos_bgn = Bry_http.length;
+		if (Bry_.Has_at_bgn(raw, Bry_fwd_slashes, 0, raw_len)) pos_bgn = Bry_fwd_slashes.length;
+		if (Bry_.Has_at_bgn(raw, Bry_http, 0, raw_len)) pos_bgn = Bry_http.length;
 		int pos_slash = Bry_finder.Find_fwd(raw, Byte_ascii.Slash, pos_bgn, raw_len);
 		if (pos_slash == Bry_.NotFound) return null; // first segment is site_name; at least one slash must be present for image name; EX: site.org/img_name.jpg
 		if (pos_slash == raw_len - 1) return null; // "site.org/" is invalid

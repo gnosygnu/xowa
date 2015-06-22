@@ -97,7 +97,7 @@ public class Scrib_lib_title_tst {
 	}
 	private static void Wiki_orig_tbl__create(Xowe_wiki wiki) {
 		Xowe_wiki_bldr.Create(wiki, 1, "dump.xml");
-		Xowd_db_file text_db = wiki.Data_mgr__core_mgr().Dbs__make_by_tid(Xowd_db_file_.Tid_text); text_db.Tbl__text().Create_tbl();
+		Xowd_db_file text_db = wiki.Data__core_mgr().Dbs__make_by_tid(Xowd_db_file_.Tid_text); text_db.Tbl__text().Create_tbl();
 		Fsdb_db_mgr__v2_bldr.I.Get_or_make(wiki, Bool_.Y);
 		wiki.File_mgr().Init_file_mgr_by_load(wiki);
 	}

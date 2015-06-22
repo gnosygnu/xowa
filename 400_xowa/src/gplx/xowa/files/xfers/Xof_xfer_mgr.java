@@ -291,7 +291,7 @@ public class Xof_xfer_mgr {
 	private boolean Img_convert(Io_url src_url, Io_url trg_url) {
 		rslt.Atrs_src_trg_(src_url.Xto_api(), trg_url);	// NOTE: must be set at start; Img_rename_by_size may overwrite trg
 		if (Io_mgr.I.ExistsFil(trg_url)) return true; // NOTE: already converted; occurs when same image used twice on same page (EX: flags)
-		if (!file_mgr.Img_mgr().Wkr_resize_img().Exec(src_url, trg_url, lnki_w, lnki_h, orig_ext.Id(), img_convert_rslt)) {
+		if (!file_mgr.Img_mgr().Wkr_resize_img().Resize_exec(src_url, trg_url, lnki_w, lnki_h, orig_ext.Id(), img_convert_rslt)) {
 			return rslt.Fail("convert failed|" + src_url.Raw() + "|" + img_convert_rslt.Val());
 		}
 		if (lnki_w < 1 || lnki_h < 1) {	// lnki_w or lnki_h is invalid >>> get real size for thumb

@@ -91,7 +91,7 @@ public class Scrib_lib_site implements Scrib_lib {
 		int rv_len = 7;
 		if (is_extralanguage_link) rv_len += 2;
 		String url = String_.new_u8(itm.Domain_bry());
-		boolean url_is_relative = String_.HasAtBgn(url, "//");
+		boolean url_is_relative = String_.Has_at_bgn(url, "//");
 		KeyVal[] rv = new KeyVal[rv_len];
 		rv[ 0] = KeyVal_.new_("prefix"					, prefix);
 		rv[ 1] = KeyVal_.new_("url"						, url);								// wfExpandUrl( $row['iw_url'], PROTO_RELATIVE ),
@@ -117,11 +117,11 @@ public class Scrib_lib_site implements Scrib_lib {
 	}
 	private void Bld_info(KeyVal[] rv) {
 		Xow_wiki_props props = core.Wiki().Props();
-		rv[0] = KeyVal_.new_("siteName"			, props.SiteName());
+		rv[0] = KeyVal_.new_("siteName"			, props.Site_name());
 		rv[1] = KeyVal_.new_("server"			, props.Server());
 		rv[2] = KeyVal_.new_("scriptPath"		, props.ScriptPath());
 		rv[3] = KeyVal_.new_("stylePath"		, props.StylePath());
-		rv[4] = KeyVal_.new_("currentVersion"	, props.CurrentVersion());
+		rv[4] = KeyVal_.new_("currentVersion"	, props.Current_version());
 	}
 	private KeyVal[] Bld_ns_ary(Xowe_wiki wiki) {
 		Xow_ns_mgr ns_mgr = wiki.Ns_mgr();

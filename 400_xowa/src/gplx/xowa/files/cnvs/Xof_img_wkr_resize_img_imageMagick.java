@@ -23,7 +23,7 @@ public class Xof_img_wkr_resize_img_imageMagick implements Xof_img_wkr_resize_im
 	public Xof_img_wkr_resize_img_imageMagick(Xowmf_mgr wmf_mgr, ProcessAdp cmd_convert, ProcessAdp cmd_convert_svg_to_png) {
 		this.wmf_mgr = wmf_mgr; this.cmd_convert = cmd_convert; this.cmd_convert_svg_to_png = cmd_convert_svg_to_png;
 	}
-	public boolean Exec(Io_url src, Io_url trg, int trg_w, int trg_h, int ext_id, String_obj_ref rslt_val) {
+	public boolean Resize_exec(Io_url src, Io_url trg, int trg_w, int trg_h, int ext_id, String_obj_ref rslt_val) {
 		if (!Io_mgr.I.ExistsFil(src)) return false;
 		Io_mgr.I.CreateDirIfAbsent(trg.OwnerDir());
 		if (init_needed) {
@@ -38,6 +38,6 @@ public class Xof_img_wkr_resize_img_imageMagick implements Xof_img_wkr_resize_im
 		rslt_val.Val_(cmd.Rslt_out());
 		boolean rv = cmd.Exit_code_pass();
 		if (!rv) Xoa_app_.Usr_dlg().Log_many("", "process_warning", "process completed with warnings: ~{0}", cmd.Rslt_out());
-		return true;
+		return rv;	// NOTE: was true (?); DATE:2015-06-16
 	}
 }

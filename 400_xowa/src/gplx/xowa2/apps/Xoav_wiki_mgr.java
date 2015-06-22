@@ -44,11 +44,12 @@ public class Xoav_wiki_mgr implements Xoa_wiki_mgr, GfoInvkAble {
 		// if (rv == null) rv = New_wiki(key);	// TODO: must make wiki, but need wiki_url; DATE:2015-05-23
 		return rv;
 	}
+	public Xow_wiki	Get_by_key_or_make_3(byte[] key) {return Get_by_key_or_make_2(key);}
 	public void Load_by_dir(Io_url wiki_root_dir)	{
 		Io_url[] wiki_dirs = Io_mgr.I.QueryDir_args(wiki_root_dir).DirOnly_().ExecAsUrlAry();
 		for (Io_url wiki_dir : wiki_dirs) {
 			String wiki_dir_url = wiki_dir.Raw();
-			if (String_.HasAtBgn(wiki_dir_url, "#")) continue;
+			if (String_.Has_at_bgn(wiki_dir_url, "#")) continue;
 			Load(wiki_dir.NameOnly(), wiki_dir);
 		}
 	}

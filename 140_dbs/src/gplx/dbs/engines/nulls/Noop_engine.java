@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
  package gplx.dbs.engines.nulls; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-public class Null_engine implements Db_engine {
-	public String			Tid() {return Null_conn_info.Tid_const;}
+public class Noop_engine implements Db_engine {
+	public String			Tid() {return Noop_conn_info.Tid_const;}
 	public Db_conn_info		Conn_info() {return Db_conn_info_.Null;}
 	public void				Conn_open() {}
 	public void				Conn_term() {}
@@ -38,6 +38,7 @@ public class Null_engine implements Db_engine {
 	public void				Ddl_delete_tbl(String tbl)						{}
 	public void				Env_db_attach(String alias, Io_url db_url)		{}
 	public void				Env_db_detach(String alias)						{}
-	public boolean				Schema_tbl_exists(String name)					{return false;}
-        public static final Null_engine _ = new Null_engine(); Null_engine() {}
+	public boolean				Meta_tbl_exists(String tbl)						{return false;}
+	public boolean				Meta_fld_exists(String tbl, String fld)			{return false;}
+        public static final Noop_engine _ = new Noop_engine(); Noop_engine() {}
 }

@@ -133,7 +133,7 @@ public class Prefs_mgr implements GfoInvkAble {
 		return	// if tidy_enabled and text_area and ends with \n, then remove \n; DATE:2014-06-21
 			(	tidy_enabled
 			&&	elem_tid == Elem_tid_textarea
-			&&	String_.HasAtEnd(val, "\n")
+			&&	String_.Has_at_end(val, "\n")
 			)
 			? String_.MidByLen(val, 0, String_.Len(val) - 1)
 			: val

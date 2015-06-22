@@ -20,13 +20,13 @@ public class Xoav_url_parser {
 	private static final byte[] Bry_site = Bry_.new_a7("/site/"), Bry_wiki = Bry_.new_a7("/wiki/"), Bry_http = Bry_.new_a7("http:");
 	public void Parse_xo_href(Xoav_url rv, byte[] src, byte[] cur_wiki_bry) {
 		rv.Clear();
-		int pos = Bry_.HasAtBgn(src, Bry_http) ? Bry_http.length  : 0;	// DRD: DRD:2.2 adds "http:" to all links
+		int pos = Bry_.Has_at_bgn(src, Bry_http) ? Bry_http.length  : 0;	// DRD: DRD:2.2 adds "http:" to all links
 		int src_len = src.length;
-		if (Bry_.HasAtBgn(src, Bry_site, pos, src_len))
+		if (Bry_.Has_at_bgn(src, Bry_site, pos, src_len))
 			pos = Parse_wiki(rv, src, src_len, pos);
 		else
 			rv.Wiki_bry_(cur_wiki_bry);
-		if (Bry_.HasAtBgn(src, Bry_wiki, pos, src_len)) pos = Parse_page(rv, src, src_len, pos);
+		if (Bry_.Has_at_bgn(src, Bry_wiki, pos, src_len)) pos = Parse_page(rv, src, src_len, pos);
 	}
 	private int Parse_wiki(Xoav_url rv, byte[] src, int src_len, int pos) {
 		int wiki_bgn = pos + Bry_site.length;

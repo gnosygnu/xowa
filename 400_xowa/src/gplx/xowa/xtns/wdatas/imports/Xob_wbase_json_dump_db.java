@@ -42,7 +42,7 @@ class Xob_wbase_json_dump_db {
 	}
 	public void Parse_bgn(long src_fil_len, String src_fil_name) {
 		Xowe_wiki_bldr.Create(wiki, src_fil_len, src_fil_name);
-		this.db_mgr = wiki.Data_mgr__core_mgr();
+		this.db_mgr = wiki.Data__core_mgr();
 		this.page_tbl = db_mgr.Tbl__page();
 		pid_cmd.Cmd_ctor(bldr, wiki); qid_cmd.Cmd_ctor(bldr, wiki);
 		wiki.Ns_mgr().Add_defaults();
@@ -67,7 +67,7 @@ class Xob_wbase_json_dump_db {
 		if (jdoc == null)	{usr_dlg.Warn_many("", "", "wbase.json_dump:json is invalid: json=~{0}", json_bry); return;}
 		byte[] id = jdoc.Get_val_as_bry_or(id_key, null);
 		if (id == null)		{usr_dlg.Warn_many("", "", "wbase.json_dump:id is invalid: json=~{0}", json_bry); return;}
-		boolean jdoc_is_qid = Bry_.HasAtBgn(id, Byte_ascii.Ltr_Q, 0);
+		boolean jdoc_is_qid = Bry_.Has_at_bgn(id, Byte_ascii.Ltr_Q, 0);
 		Xow_ns ns = jdoc_is_qid ? ns_mgr.Ns_main() : ns_mgr.Ids_get_or_null(Wdata_wiki_mgr.Ns_property);
 		int random_int = ns.Count() + 1; ns.Count_(random_int);
 		byte[] json_zip = text_zip_mgr.Zip(text_zip_tid, json_bry);
@@ -89,7 +89,7 @@ class Xob_wbase_json_dump_db {
 		Xowd_db_file db_core = db_mgr.Db__core();
 		db_core.Tbl__site_stats().Update(page_count_main, page_id, ns_mgr.Ns_file().Count());	// save page stats
 		db_core.Tbl__ns().Insert(ns_mgr);															// save ns
-		db_mgr.Tbl__cfg().Insert_str(Xow_cfg_consts.Grp_wiki_init, "props.modified_latest", page_modified_on.XtoStr_fmt(DateAdp_.Fmt_iso8561_date_time));
+		db_mgr.Tbl__cfg().Insert_str(Xow_cfg_consts.Grp__wiki_init, "props.modified_latest", page_modified_on.XtoStr_fmt(DateAdp_.Fmt_iso8561_date_time));
 	}
 	private static final byte[] id_key = Bry_.new_a7("id");
 }

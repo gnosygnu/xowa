@@ -44,7 +44,7 @@ public class App_cmd_mgr {
 		errs.Clear(); tmp_vals.Clear();
 		for (int i = 0; i < ary_len; i++) {
 			String itm = ary[i];
-			if (String_.HasAtBgn(itm, arg_prefix)) {	// key
+			if (String_.Has_at_bgn(itm, arg_prefix)) {	// key
 				if (arg != null) {
 					String[] tmp_ary = tmp_vals.To_str_ary();
 					if (!arg.Parse(this, tmp_ary)) {continue;}

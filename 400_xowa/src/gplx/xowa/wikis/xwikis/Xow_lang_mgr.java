@@ -140,7 +140,7 @@ class Xow_lang_html implements Bry_fmtr_arg {
 					byte[] local_name = itm.Lang_name();
 					byte[] badge_cls = Badge_cls(tmp_bfr, itm.Page_badges());
 					if (wiki.Appe().Usere().Wiki().Xwiki_mgr().Get_by_key(domain) == null)
-						tmp_bfr.Add(Xoh_href_parser.Href_http_bry).Add(domain).Add(Xoh_href_parser.Href_wiki_bry);
+						tmp_bfr.Add(Xoh_href_parser.Href_https_bry).Add(domain).Add(Xoh_href_parser.Href_wiki_bry);
 					else
 						tmp_bfr.Add(Xoh_href_parser.Href_site_bry).Add(domain).Add(Xoh_href_parser.Href_wiki_bry);
 					if (!itm.Empty_xwiki()) tmp_bfr.Add(page_name);

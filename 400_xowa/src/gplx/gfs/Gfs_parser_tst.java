@@ -147,7 +147,7 @@ class Gfs_parser_fxt {
 		catch (Exception e) {
 			String actl_err = Err_.Message_gplx_brief(e);
 			actl_err = String_.GetStrBefore(actl_err, ":");
-			boolean match = String_.HasAtBgn(actl_err, expd_err);
+			boolean match = String_.Has_at_bgn(actl_err, expd_err);
 			if (!match) Tfds.Fail("expecting '" + expd_err + "' got '" + actl_err + "'"); 
 			return;
 		}

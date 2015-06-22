@@ -24,15 +24,15 @@ public class Xow_hzip_itm__header_tst {
 //			fxt.Test_save(brys, "<h2><span class='mw-headline' id='A'>A<!--xo_hdr_end--></span></h2>");
 //			fxt.Test_load(brys, "<h2><span class='mw-headline' id='A'>A</span></h2>");
 	}
-	@Test   public void Html_basic() {
+//		@Test   public void Html_basic() {
 //			fxt.Test_html("==A==", "<h2><span class='mw-headline' id='A'>A<!--xo_hdr_end--></span></h2>\n");
-	}
-	@Test   public void Srl_anchor() {
+//		}
+//		@Test   public void Srl_anchor() {
 //			byte[][] brys = Bry_.Ary(Xow_hzip_dict.Bry_hdr_lhs, Bry_.ints_(2), Bry_.new_a7("A <a xtid='a_lnki_text_n' href=\"/wiki/B\" xowa_redlink='1'>b</a> c"), Xow_hzip_dict.Escape_bry);
 //			fxt.Test_save(brys, "<h2><span class='mw-headline' id='A_b_c'>A <a xtid='a_lnki_text_n' href=\"/wiki/B\" xowa_redlink='1'>b</a> c<!--xo_hdr_end--></span></h2>");
 ////			fxt.Test_load(brys, "<h2><span class='mw-headline' id='A_b_c'>A <a xtid='a_lnki_text_n' href=\"/wiki/B\" xowa_redlink='1'>b</a> c<!--xo_hdr_end--></span></h2>");
-	}
-	@Test   public void Html_anchor() {
+//		}
+//		@Test   public void Html_anchor() {
 //			fxt.Test_html("==A [[b]] c==", "<h2><span class='mw-headline' id='A_b_c'>A <a xtid='a_lnki_text_n' href=\"/wiki/B\" xowa_redlink='1'>b</a> c<!--xo_hdr_end--></span></h2>\n");
-	}
+//		}
 }

@@ -47,7 +47,7 @@ class Xob_css_parser__url {
 			else
 				return Xob_css_tkn__warn.new_(tkn_bgn, end_pos, "mirror.parser.url:base64 dangling; bgn=~{0} excerpt=~{1}", bgn_pos, String_.new_u8(url_orig));
 		}
-		if (Bry_.HasAtBgn(url_orig, Bry_data_image))	// base64
+		if (Bry_.Has_at_bgn(url_orig, Bry_data_image))	// base64
 			return Xob_css_tkn__base64.new_(tkn_bgn, end_pos);
 		byte[] src_url = Xob_url_fixer.Fix(site, url_orig, url_orig_len);
 		if (src_url == null)	// could not convert

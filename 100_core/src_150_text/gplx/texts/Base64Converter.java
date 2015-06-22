@@ -55,7 +55,7 @@ public class Base64Converter {
 	public static byte[] Decode(String s){
 		if (toInt == null) Init();
 		int sLen = String_.Len(s);
-		int delta = String_.HasAtEnd(s, "==") ? 2 : String_.HasAtEnd(s, "=") ? 1 : 0;
+		int delta = String_.Has_at_end(s, "==") ? 2 : String_.Has_at_end(s, "=") ? 1 : 0;
 		byte[] buffer = new byte[sLen *3/4 - delta];
 		int mask = 0xFF;
 		int index = 0;

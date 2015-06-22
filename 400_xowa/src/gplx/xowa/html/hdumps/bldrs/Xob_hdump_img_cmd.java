@@ -35,7 +35,7 @@ class Xob_hdump_img_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		html_tbl = new Xowd_html_tbl(conn, wiki.Db_mgr_as_sql().Core_data_mgr().Props().Zip_tid_text());
 		int cur_page_id = -1;
 		while (rdr.Move_next()) {
-			int lnki_page_id		= rdr.Read_int(0);
+			int lnki_page_id		= rdr.Read_int("lnki_page_id");
 			if (lnki_page_id != cur_page_id) {
 				Save(cur_page_id, bfr.Xto_bry_and_clear());
 				cur_page_id = lnki_page_id;

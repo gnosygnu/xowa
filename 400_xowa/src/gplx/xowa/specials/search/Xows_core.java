@@ -66,7 +66,7 @@ class Xows_core {
 		cmd_hash.Del(cmd.Key());
 	}
 	private void Assert_page_count(Xowe_wiki wiki) {
-		Xowd_db_file search_db = wiki.Data_mgr__core_mgr().Db__search();
+		Xowd_db_file search_db = wiki.Data__core_mgr().Db__search();
 		if (ask_for_upgrade
 			&& wiki.App().App_type().Uid_is_gui()
 			&& !search_db.Tbl__search_word().Ddl__page_count()

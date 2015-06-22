@@ -72,7 +72,7 @@ class Xog_search_suggest_cmd implements GfoInvkAble, Cancelable {
 		for (int i = 0; i < page_ary_len; i++) {
 			Xowd_page_itm page = page_ary[i];
 			if (page != null) {
-				if (!Bry_.HasAtBgn(page.Ttl_page_db(), search_ttl_bry)) continue;	// look-ahead may return other titles that don't begin with search; ignore
+				if (!Bry_.Has_at_bgn(page.Ttl_page_db(), search_ttl_bry)) continue;	// look-ahead may return other titles that don't begin with search; ignore
 				if (page.Text_len() > all_pages_min) {
 					rslts_2.Add(page);
 					idx++;

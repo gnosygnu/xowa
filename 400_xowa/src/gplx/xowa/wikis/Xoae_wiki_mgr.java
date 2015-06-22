@@ -43,6 +43,7 @@ public class Xoae_wiki_mgr implements Xoa_wiki_mgr, GfoInvkAble {
 		rv.Init_assert();
 		return rv;
 	}
+	public Xow_wiki Get_by_key_or_make_3(byte[] key) {return Get_by_key_or_make(key);}
 	public Xowe_wiki Get_by_key_or_make(byte[] key) {
 		Xowe_wiki rv = this.Get_by_key_or_null(key);
 		if (rv == null) rv = New_wiki(key);

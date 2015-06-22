@@ -220,7 +220,7 @@ class HttpRequest implements Runnable{
 			if(!req.contains("%file%")){
 				if(req.equals("/")) {	// no page; EX:"localhost:8080" vs "localhost:8080/en.wikipedia.org/wiki/Earth"
 					String home_url = app.Http_server().Home();;
-					if (String_.HasAtBgn(home_url, "file://")) {
+					if (String_.Has_at_bgn(home_url, "file://")) {
 						Io_url file_url = Io_url_.http_any_(home_url, Op_sys.Cur().Tid_is_wnt());
 						String page_html = Io_mgr.I.LoadFilStr(file_url);
 						Write_page(dos, page_html, app_root_dir, wiki_domain);

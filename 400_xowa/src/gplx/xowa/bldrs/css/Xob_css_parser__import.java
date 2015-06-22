@@ -24,7 +24,7 @@ class Xob_css_parser__import {
 	public Xob_css_tkn__base Parse(byte[] src, int src_len, int tkn_bgn, int tkn_end) {	// " @import"
 		int bgn_pos = Bry_finder.Find_fwd_while_ws(src, tkn_end, src_len);	// skip any ws after " @import"
 		if (bgn_pos == src_len) return Xob_css_tkn__warn.new_(tkn_bgn, tkn_end, "mirror.parser.import:EOS after import; bgn=~{0}", tkn_bgn);
-		if (!Bry_.HasAtBgn(src, Tkn_url_bry, bgn_pos, src_len)) return Xob_css_tkn__warn.new_(tkn_bgn, tkn_end, "mirror.parser.import:url missing; bgn=~{0}", tkn_bgn);
+		if (!Bry_.Has_at_bgn(src, Tkn_url_bry, bgn_pos, src_len)) return Xob_css_tkn__warn.new_(tkn_bgn, tkn_end, "mirror.parser.import:url missing; bgn=~{0}", tkn_bgn);
 		tkn_end = bgn_pos + Tkn_url_bry.length;
 		Xob_css_tkn__base frag = url_parser.Parse(src, src_len, bgn_pos, tkn_end);
 		if (frag.Tid() != Xob_css_tkn__url.Tid_url) return Xob_css_tkn__warn.new_(tkn_bgn, frag.Pos_end(), "mirror.parser.import:url invalid; bgn=~{0}", tkn_bgn);

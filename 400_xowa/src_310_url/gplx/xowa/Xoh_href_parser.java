@@ -105,7 +105,7 @@ public class Xoh_href_parser {
 			if (app.Xwiki_mgr__missing(xwiki.Domain_bry())) {									// xwiki is not offline; use http:
 				Bry_fmtr url_fmtr = xwiki.Url_fmtr();
 				if (url_fmtr == null) {
-					bfr.Add(Href_http_bry);														// add "http://";	EX: http://
+					bfr.Add(Href_https_bry);													// add "https://";	EX: https://
 					bfr.Add(xwiki.Domain_bry());												// add xwiki;		EX: en_dict	 
 					bfr.Add(Href_wiki_bry);														// add "/wiki/";	EX: /wiki/
 				}
@@ -133,8 +133,10 @@ public class Xoh_href_parser {
 			encoder.Encode(bfr_encoder, ttl_full, anch_bgn, ttl_full.length);	// add anchor
 		}
 	}
-	public static final String Href_http_str = "http://", Href_file_str = "file:///", Href_wiki_str = "/wiki/", Href_site_str = "/site/", Href_xcmd_str = "/xcmd/";
-	public static final byte[] Href_http_bry = Bry_.new_u8(Href_http_str), Href_file_bry = Bry_.new_a7(Href_file_str), Href_site_bry = Bry_.new_a7(Href_site_str), Href_wiki_bry = Bry_.new_a7(Href_wiki_str);
+	public static final String Href_file_str = "file:///", Href_wiki_str = "/wiki/", Href_site_str = "/site/", Href_xcmd_str = "/xcmd/";
+	public static final byte[] 
+	  Href_https_bry = Bry_.new_u8("https://")	// NOTE: must be "https:" or wmf api won't work; DATE:2015-06-17
+	, Href_file_bry = Bry_.new_a7(Href_file_str), Href_site_bry = Bry_.new_a7(Href_site_str), Href_wiki_bry = Bry_.new_a7(Href_wiki_str);
 
 	private static final int Href_wiki_len = Href_wiki_bry.length;
 	static final byte Seg_null_tid = 0, Seg_wiki_tid = 1, Seg_site_tid = 2, Seg_xcmd_tid = 3;

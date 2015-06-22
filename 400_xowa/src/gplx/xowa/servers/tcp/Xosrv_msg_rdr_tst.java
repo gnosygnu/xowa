@@ -55,7 +55,7 @@ class Xosrv_msg_rdr_fxt {
 		msg_rdr_stream.Data_bry_(raw_bry).Read_limit_(raw_bry.length);
 		Xosrv_msg msg = msg_rdr.Read();
 		String msg_text = String_.new_a7(msg.Msg_text());
-		Tfds.Eq_true(String_.HasAtBgn(msg_text, expd_err), msg_text);
+		Tfds.Eq_true(String_.Has_at_bgn(msg_text, expd_err), msg_text);
 	}
 	public void Test_print(Xosrv_msg msg, String expd) {
 		Bry_bfr bfr = Bry_bfr.new_();

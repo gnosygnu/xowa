@@ -25,7 +25,7 @@ class Xodb_upgrade_mgr {
 //				version_new = "0.6.2.1";
 //			}
 //			if (version_new != null) {
-//				db_mgr.Tbl_xowa_cfg().Update(Xodb_mgr_sql.Grp_wiki_init, version_key, version_new);
+//				db_mgr.Tbl_xowa_cfg().Update(Xodb_mgr_sql.Grp__wiki_init, version_key, version_new);
 //			}
 	}
 }
@@ -45,7 +45,7 @@ class Xodb_upgrade_mgr {
 //					byte data_storage_format_byte = Byte_.parse_(kv.Val_to_str_or_empty());
 //					String data_storage_format_name = Xoi_dump_mgr.Wtr_tid_to_str(data_storage_format_byte);
 //					kv.Val_(data_storage_format_name);	// update memory
-//					db_mgr.Tbl_xowa_cfg().Update(Xodb_mgr_sql.Grp_wiki_init, gfs_data_storage_format, data_storage_format_name); // update_database
+//					db_mgr.Tbl_xowa_cfg().Update(Xodb_mgr_sql.Grp__wiki_init, gfs_data_storage_format, data_storage_format_name); // update_database
 //					break;
 //				}
 //			}			

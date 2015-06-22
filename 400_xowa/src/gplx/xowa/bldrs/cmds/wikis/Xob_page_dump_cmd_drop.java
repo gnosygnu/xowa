@@ -22,7 +22,7 @@ public class Xob_page_dump_cmd_drop extends Xob_itm_basic_base implements Xob_cm
 	public String Cmd_key() {return Xob_cmd_keys.Key_wiki_page_dump_drop;}
 	public void Cmd_run() {
 		wiki.Init_assert();
-		Xowd_db_mgr db_mgr = wiki.Data_mgr__core_mgr();
+		Xowd_db_mgr db_mgr = wiki.Data__core_mgr();
 		int len = db_mgr.Dbs__len();
 		for (int i = 0; i < len; i++) {
 			Xowd_db_file db_file = db_mgr.Dbs__get_at(i);

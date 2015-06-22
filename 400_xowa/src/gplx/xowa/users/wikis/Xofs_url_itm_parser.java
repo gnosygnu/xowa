@@ -35,7 +35,7 @@ class Xofs_url_itm_parser {
 	public void Parse(Xofs_url_itm itm, String raw_str) {
 		itm.Raw_(raw_str);
 		byte[] raw = Bry_.new_u8(raw_str);
-		if (!Bry_.HasAtBgn(raw, Xowa_fs_protocol)) {	// raw does not start with "xowa-fs://"; mark as custom str and exit
+		if (!Bry_.Has_at_bgn(raw, Xowa_fs_protocol)) {	// raw does not start with "xowa-fs://"; mark as custom str and exit
 			itm.Tid_is_xowa_(false);
 			itm.Url_(raw_str);
 			return;

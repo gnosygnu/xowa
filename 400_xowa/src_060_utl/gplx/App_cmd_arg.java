@@ -100,7 +100,7 @@ public class App_cmd_arg {
 		if (val_has_dir != Op_sys.Tid_nil) {
 			if (dir) {	// NOTE: need to do extra logic to guarantee trailing "/"; JAVA:7 apparently strips "/dir/" to "/dir" when passed in as argument; DATE:2013-03-20
 				String val_dir_spr = val_has_dir == Op_sys.Tid_lnx ? Op_sys.Lnx.Fsys_dir_spr_str() : Op_sys.Wnt.Fsys_dir_spr_str();
-				if (!String_.HasAtEnd(val_str, val_dir_spr))
+				if (!String_.Has_at_end(val_str, val_dir_spr))
 					val_str += val_dir_spr;
 				return Io_url_.new_dir_(val_str);
 			}

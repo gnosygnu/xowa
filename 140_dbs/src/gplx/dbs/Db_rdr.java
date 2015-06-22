@@ -18,25 +18,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs; import gplx.*;
 public interface Db_rdr {
 	boolean		Move_next();
-	byte[]		Read_bry(int i);
 	byte[]		Read_bry(String k);
-	byte[]		Read_bry_by_str(int i);
+	byte[]		Read_bry_in_parts(String tbl, String fld, String crt_key, Object crt_val);
 	byte[]		Read_bry_by_str(String k);
-	String 		Read_str(int i);
 	String 		Read_str(String k);
-	byte 		Read_byte(int i);
 	byte 		Read_byte(String k);
-	int 		Read_int(int i);
 	int 		Read_int(String k);
-	long 		Read_long(int i);
 	long 		Read_long(String k);
-	float		Read_float(int i);
 	float		Read_float(String k);
-	double		Read_double(int i);
 	double		Read_double(String k);
-	DateAdp		Read_date_by_str(int i);
 	DateAdp		Read_date_by_str(String k);
-	boolean		Read_bool_by_byte(int i);
 	boolean		Read_bool_by_byte(String k);
 	void		Rls();
 }

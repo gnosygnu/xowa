@@ -21,25 +21,16 @@ public class Db_rdr_ {
 }
 class Db_rdr__empty implements Db_rdr {
 	public boolean			Move_next()						{return false;}
-	public byte[]		Read_bry(int i)					{return Bry_.Empty;}
 	public byte[]		Read_bry(String k)				{return Bry_.Empty;}
-	public byte[]		Read_bry_by_str(int i)			{return Bry_.Empty;}
 	public byte[]		Read_bry_by_str(String k)		{return Bry_.Empty;}
-	public byte			Read_byte(int i)				{return Byte_.Max_value_127;}
+	public byte[]		Read_bry_in_parts(String tbl, String fld, String crt_key, Object crt_val) {return Bry_.Empty;}
 	public byte			Read_byte(String k)				{return Byte_.Max_value_127;}
-	public String 		Read_str(int i)					{return String_.Empty;}
 	public String 		Read_str(String k)				{return String_.Empty;}
-	public DateAdp		Read_date_by_str(int i)			{return DateAdp_.MinValue;}
 	public DateAdp		Read_date_by_str(String k)		{return DateAdp_.MinValue;}
-	public int 			Read_int(int i)					{return Int_.MinValue;}
 	public int 			Read_int(String k)				{return Int_.MinValue;}
-	public long 		Read_long(int i)				{return Long_.MinValue;}
 	public long 		Read_long(String k)				{return Long_.MinValue;}
-	public float		Read_float(int i)				{return Float_.NaN;}
 	public float		Read_float(String k)			{return Float_.NaN;}
-	public double		Read_double(int i)				{return Double_.NaN;}
 	public double		Read_double(String k)			{return Double_.NaN;}
-	public boolean			Read_bool_by_byte(int i)		{return false;}
 	public boolean			Read_bool_by_byte(String k)		{return false;}
 	public void			Rls() {}
 }

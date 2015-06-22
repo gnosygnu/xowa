@@ -86,7 +86,7 @@ abstract class Xosp_fbrow_cmd__base implements Xosp_fbrow_cmd {
 	, "    <td>"
 	, "      <table width='100%'>"
 	, "        <tr>"
-	, "          <td align='right'><a href='javascript:get_selected_chk(\"/wiki/Special:XowaFileBrowser?cmd=~{cmd_src}&amp;path=~{url_enc}&amp;selected=\", \"chk_\");'>~{cmd_gui}</a>"
+	, "          <td align='left'><a href='javascript:get_selected_chk(\"/wiki/Special:XowaFileBrowser?cmd=~{cmd_src}&amp;path=~{url_enc}&amp;selected=\", \"chk_\");'>~{cmd_gui}</a>"
 	, "      	 </td>"
 	, "        </tr>"
 	, "      </table>"
@@ -183,7 +183,7 @@ class Xosp_fbrow_cmd__wiki_add extends Xosp_fbrow_cmd__base {
 	@Override public Xosp_fbrow_cmd Make_new() {return new Xosp_fbrow_cmd__wiki_add();}
 	@Override protected void Process_itm(Xosp_fbrow_data_sub itm) {
 		byte[] url_bry = itm.Url().RawBry();
-		if (!Bry_.HasAtEnd(url_bry, Ext_xowa)) itm.Selectable_(false);
+		if (!Bry_.Has_at_end(url_bry, Ext_xowa)) itm.Selectable_(false);
 	}
 	@Override protected Xosp_fbrow_rslt Write_html_selected(Xoa_url_arg_mgr arg_mgr, String selected, GfoInvkAble select_invkable) {
 		String[] wikis = String_.Split(selected, ";");

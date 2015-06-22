@@ -42,7 +42,7 @@ public class IoRecycleBin {
 		String nameAndExt = url.NameAndExt_noDirSpr() + "|";
 		for (int i = linesLen; i > 0; i--) {
 			String line = lines[i - 1];
-			if (String_.HasAtBgn(line, nameAndExt)) {
+			if (String_.Has_at_bgn(line, nameAndExt)) {
 				String[] terms = String_.Split(line, "|");
 				Io_url origUrl = url.OwnerRoot().GenSubFil(terms[1]);
 				list.Add(origUrl);

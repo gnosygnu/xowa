@@ -19,9 +19,9 @@ package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*; import gplx.dbs
 import gplx.core.primitives.*; import gplx.core.criterias.*; import gplx.dbs.qrys.*;
 public class Mem_tbl {
 	private final List_adp rows = List_adp_.new_(); private final List_adp where_rows = List_adp_.new_();
-	private final Hash_adp autonum_hash = Hash_adp_.new_();
-	private final Db_meta_tbl meta;
+	private final Hash_adp autonum_hash = Hash_adp_.new_();		
 	public Mem_tbl(Db_meta_tbl meta) {this.meta = meta;}
+	public Db_meta_tbl Meta() {return meta;} private final Db_meta_tbl meta;
 	public int Insert(Db_stmt__mem stmt) {
 		Mem_itm itm = new Mem_itm();
 		Db_meta_fld[] flds = meta.Flds();

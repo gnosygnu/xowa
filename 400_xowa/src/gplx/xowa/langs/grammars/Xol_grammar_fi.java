@@ -53,7 +53,7 @@ public class Xol_grammar_fi implements Xol_grammar {
 		byte[] lower = lang.Case_mgr().Case_build_lower(word, 0, word_len);
 		boolean aou = Vowel_harmony(lower, word_len);
 		// PHP: if ( preg_match( '/wiki$/i', $word ) ) $aou = false;
-		if (aou && Bry_.HasAtEnd(lower, Xoa_url_parser.Bry_wiki_name))
+		if (aou && Bry_.Has_at_end(lower, Xoa_url_parser.Bry_wiki_name))
 			aou = false;			
 		// PHP: if ( preg_match( '/[bcdfghjklmnpqrstvwxz]$/i', $word ) ) $word .= 'i';
 		switch (lower[word_len - 1]) {

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
-import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.schemas.*; import gplx.dbs.schemas.updates.*;
+import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.metas.*; import gplx.dbs.metas.updates.*;
 public class Xoud_regy_tbl {
 	public static final String Tbl_name = "user_regy", Fld_regy_grp = "regy_grp", Fld_regy_key = "regy_key", Fld_regy_val = "regy_val";
 	private static final String[] Flds__all = new String[] {Fld_regy_grp, Fld_regy_key, Fld_regy_val};
@@ -68,10 +68,10 @@ public class Xoud_regy_tbl {
 	@gplx.Virtual public String Select_val(String grp, String key) {
 		if (stmt_select_key == null) stmt_select_key = Db_stmt_.new_select_as_rdr(conn, Db_qry__select_in_tbl.new_(Tbl_name, String_.Ary(Fld_regy_grp, Fld_regy_key), Flds__all, Db_qry__select_in_tbl.Order_by_null));
 		try {
-			Db_rdr rdr = stmt_select_key.Clear().Val_str(grp).Val_str(key).Exec_select__rls_manual();
+			Db_rdr rdr = stmt_select_key.Clear().Val_str(Fld_regy_grp, grp).Val_str(Fld_regy_key, key).Exec_select__rls_manual();
 			String rv = null;
 			if (rdr.Move_next())
-				rv = rdr.Read_str(2);
+				rv = rdr.Read_str(Fld_regy_val);
 			rdr.Rls();
 			return rv;
 		}
@@ -79,9 +79,9 @@ public class Xoud_regy_tbl {
 	}
 	private Xoud_regy_row Make_row(Db_rdr rdr) {
 		return new Xoud_regy_row
-		( rdr.Read_str(0)
-		, rdr.Read_str(1)
-		, rdr.Read_str(2)
+		( rdr.Read_str(Fld_regy_grp)
+		, rdr.Read_str(Fld_regy_key)
+		, rdr.Read_str(Fld_regy_val)
 		);
 	}
 	public void Rls_all() {

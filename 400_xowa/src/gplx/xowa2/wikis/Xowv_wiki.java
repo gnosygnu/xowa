@@ -49,7 +49,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser {
 	public byte[]						Domain_abrv() {return domain_abrv;} private final byte[] domain_abrv;
 	public Xow_ns_mgr					Ns_mgr() {return ns_mgr;} private final Xow_ns_mgr ns_mgr;
 	public Xow_fsys_mgr					Fsys_mgr() {return fsys_mgr;} private Xow_fsys_mgr fsys_mgr;
-	public Xowd_db_mgr					Data_mgr__core_mgr() {return data_mgr__core_mgr;} private Xowd_db_mgr data_mgr__core_mgr;
+	public Xowd_db_mgr					Data__core_mgr() {return data_mgr__core_mgr;} private Xowd_db_mgr data_mgr__core_mgr;
 	public Xow_repo_mgr					File__repo_mgr() {return file_mgr__repo_mgr;} private Xowv_repo_mgr file_mgr__repo_mgr = new Xowv_repo_mgr();
 	public Xof_fsdb_mode				File__fsdb_mode() {return file_mgr__fsdb_mode;} private final Xof_fsdb_mode file_mgr__fsdb_mode = Xof_fsdb_mode.new_v2_gui();
 	public Fsdb_db_mgr					File__fsdb_core() {return db_core_mgr;}

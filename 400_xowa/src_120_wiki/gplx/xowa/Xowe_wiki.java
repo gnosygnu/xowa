@@ -89,7 +89,7 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble {
 	public byte[]					Domain_abrv() {return domain_abrv;} private final byte[] domain_abrv;
 	public Xow_domain				Domain_itm() {return domain_itm;} private final Xow_domain domain_itm;
 	public Xow_fsys_mgr				Fsys_mgr() {return fsys_mgr;} private final Xow_fsys_mgr fsys_mgr;
-	public Xowd_db_mgr				Data_mgr__core_mgr() {return db_mgr.Tid() == Xodb_mgr_txt.Tid_txt ? null : this.Db_mgr_as_sql().Core_data_mgr();}	// TEST:
+	public Xowd_db_mgr				Data__core_mgr() {return db_mgr.Tid() == Xodb_mgr_txt.Tid_txt ? null : this.Db_mgr_as_sql().Core_data_mgr();}	// TEST:
 	public Xof_fsdb_mode			File__fsdb_mode() {return file_mgr.Fsdb_mode();}
 	public Fsdb_db_mgr				File__fsdb_core() {return file_mgr.Db_core();}
 	public Xow_repo_mgr				File__repo_mgr() {return file_mgr.Repo_mgr();}
@@ -267,8 +267,8 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble {
 		if (html_mgr__hdump_enabled) {
 			// if (db_mgr.Tid() == Xodb_mgr_txt.Tid_txt) this.Db_mgr_create_as_sql();
 			Xowd_html_tbl.Assert_col__page_html_db_id(Db_mgr_as_sql().Core_data_mgr());	// NOTE: must go above html_mgr.Init_by_wiki b/c Page_load will be done via messages
-			html_mgr__hdump_rdr.Init_by_db(this.Data_mgr__core_mgr());
-			html_mgr__hdump_wtr.Init_by_db(this.Data_mgr__core_mgr());
+			html_mgr__hdump_rdr.Init_by_db(this.Data__core_mgr());
+			html_mgr__hdump_wtr.Init_by_db(this.Data__core_mgr());
 		}
 	}
 	public void Rls() {

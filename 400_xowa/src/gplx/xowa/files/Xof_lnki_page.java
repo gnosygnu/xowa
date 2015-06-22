@@ -23,6 +23,5 @@ public class Xof_lnki_page {
 	public static boolean		Null_n(int v) {return v != Null;}
 	public static int		Db_load_int(DataRdr rdr, String fld)	{return rdr.ReadInt(fld);}
 	public static int		Db_load_int(Db_rdr rdr, String fld)		{return rdr.Read_int(fld);}
-	public static int		Db_load_int(Db_rdr rdr, int ord)		{return rdr.Read_int(ord);}
 	public static int		Db_save_int(int v) {return v;}
 }

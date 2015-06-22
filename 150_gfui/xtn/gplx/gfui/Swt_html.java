@@ -236,12 +236,12 @@ class Swt_html_lnr_location implements LocationListener {
 		String location = arg.location;
 		if (String_.Eq(location, "about:blank")) return;	// location changing event fires once when page is loaded; ignore
 		if (	html_box.Browser_tid() == Swt_html.Browser_tid_webkit	// webkit prefixes "about:blank" to anchors; causes TOC to fail when clicking on links; EX:about:blank#TOC1; DATE:2015-06-09
-			&&	String_.HasAtBgn(location, "about:blank")) {
+			&&	String_.Has_at_bgn(location, "about:blank")) {
 			location = String_.Mid(location, 11);	// 11 = "about:blank".length 
 		}
 		if (	html_box.Html_doc_html_load_tid() == Gxw_html_load_tid_.Tid_url	// navigating to file://page.html will fire location event; ignore if url mode
-			&& 	String_.HasAtBgn(location, "file:")
-			&& 	String_.HasAtEnd(location, ".html")
+			&& 	String_.Has_at_bgn(location, "file:")
+			&& 	String_.Has_at_end(location, ".html")
 			)
 			return;
 		try {

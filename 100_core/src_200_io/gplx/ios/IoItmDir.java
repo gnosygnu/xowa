@@ -41,7 +41,7 @@ public class IoItmDir extends IoItm_base {
 		String dirSpr = this.Url().Info().DirSpr(); int dirSprLen = String_.Len(dirSpr);
 		String currDirStr = this.Url().Raw();
 		String findDirStr = findDirUrl.Raw();
-		if (!String_.HasAtBgn(findDirStr, currDirStr)) return null;	// findUrl must start with currUrl;
+		if (!String_.Has_at_bgn(findDirStr, currDirStr)) return null;	// findUrl must start with currUrl;
 		String findName = String_.DelEnd(currDirStr, dirSprLen);	// seed findName for String_.MidByLen below;
 		IoItmDir curDir = this;			
 		while (true) {

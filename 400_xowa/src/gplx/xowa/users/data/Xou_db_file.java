@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
-import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.dbs.schemas.*;
+import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.dbs.metas.*;
 import gplx.xowa.files.caches.*;
 public class Xou_db_file {
 	private final Db_conn conn;
@@ -34,11 +34,11 @@ public class Xou_db_file {
 	public Xou_cache_tbl			Tbl__cache()	{return tbl__cache;}	private final Xou_cache_tbl tbl__cache;
 	public Xoud_bmk_tbl				Tbl__bmk()		{return tbl__bmk;}		private final Xoud_bmk_tbl tbl__bmk;
 	public void Init_assert() {
-		if (!conn.Schema_tbl_exists(tbl__cache.Tbl_name())) {
+		if (!conn.Meta_tbl_exists(tbl__cache.Tbl_name())) {
 			tbl__cfg.Create_tbl();
 			tbl__cache.Create_tbl();
 		}
-//			if (!conn.Schema_tbl_exists(tbl__bmk.Tbl_name())) {
+//			if (!conn.Meta_tbl_exists(tbl__bmk.Tbl_name())) {
 //				tbl__bmk.Create_tbl();
 //			}
 	}

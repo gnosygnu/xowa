@@ -42,7 +42,7 @@ public class Xoapi_url implements GfoInvkAble {
 		else {
 			for (int i = 0; i < urls_len; i++) {
 				String url = urls[i];
-				if (String_.HasAtBgn(url, "\"") &&  String_.HasAtBgn(url, "\""))
+				if (String_.Has_at_bgn(url, "\"") &&  String_.Has_at_bgn(url, "\""))
 					url = String_.Mid(url, 1, String_.Len(url) - 1);
 				app.Gui_mgr().Browser_win().Tab_mgr().Tabs_new_link(url, false);
 			}

@@ -21,7 +21,7 @@ public class Xob_wdata_pid_sql extends Xob_wdata_pid_base {
 	private Xowd_wbase_pid_tbl tbl;
 	@Override public String Wkr_key() {return gplx.xowa.bldrs.Xob_cmd_keys.Key_wbase_pid;}
 	@Override public void Pid_bgn() {
-		Xowd_db_mgr db_mgr = wiki.Data_mgr__core_mgr();
+		Xowd_db_mgr db_mgr = wiki.Data__core_mgr();
 		tbl = db_mgr.Db__wbase().Tbl__wbase_pid();
 		tbl.Create_tbl();
 		tbl.Insert_bgn();

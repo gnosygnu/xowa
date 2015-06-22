@@ -46,7 +46,13 @@ public class Fsdb_db_mgr__v1 implements Fsdb_db_mgr {
 		Io_url url = file_dir.GenSubFil_nest(mnt_name, bin_name);	// EX: /xowa/enwiki/fsdb.main/fsdb.bin.0000.sqlite3
 		return new Fsdb_db_file(url, Db_conn_bldr.I.Get(url));
 	}
-	public Fsdb_db_file		File__bin_file__new(int mnt_id, String file_name) {throw Err_.not_implemented_();}
+	public Fsdb_db_file		File__bin_file__new(int mnt_id, String file_name) {
+		String mnt_name = mnt_id == Fsm_mnt_mgr.Mnt_idx_main ? Fsm_mnt_tbl.Mnt_name_main : Fsm_mnt_tbl.Mnt_name_user;
+		Io_url url = file_dir.GenSubFil_nest(mnt_name, file_name);	// EX: /xowa/enwiki/fsdb.main/fsdb.bin.0000.sqlite3
+		Db_conn conn = Db_conn_bldr.I.New(url);
+		Fsd_bin_tbl bin_tbl = new Fsd_bin_tbl(conn, Bool_.Y); bin_tbl.Create_tbl();
+		return new Fsdb_db_file(url, conn);
+	}
 	public static final String Orig_name = "wiki.orig#00.sqlite3", Mnt_name = "wiki.mnt.sqlite3", Abc_name	= "fsdb.abc.sqlite3", Atr_name= "fsdb.atr.00.sqlite3";
 	private static Fsdb_db_file get_db(Io_url file) {
 		Db_conn conn = Db_conn_bldr.I.Get(file);

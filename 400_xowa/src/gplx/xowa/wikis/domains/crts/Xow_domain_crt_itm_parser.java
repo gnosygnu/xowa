@@ -69,11 +69,11 @@ class Xow_domain_crt_itm_parser {
 	public Xow_domain_crt_itm Parse_itm(byte[] raw) {						
 		Xow_domain_crt_itm rv = (Xow_domain_crt_itm)itm_hash.Get_by_bry(raw); if (rv != null) return rv;	// singleton; EX: <self>, <same_type>, etc..
 		int raw_len = raw.length;
-		if		(Bry_.HasAtBgn(raw, Wild_lang)) {		// EX: *.wikipedia
+		if		(Bry_.Has_at_bgn(raw, Wild_lang)) {		// EX: *.wikipedia
 			int wiki_tid = Xow_domain_type_.Get_type_as_tid(raw, Wild_lang.length, raw_len);
 			return wiki_tid == Xow_domain_type_.Tid_null ? Xow_domain_crt_itm_.Null : new Xow_domain_crt_itm__type(wiki_tid);
 		}
-		else if	(Bry_.HasAtEnd(raw, Wild_type)) {		// EX: en.*
+		else if	(Bry_.Has_at_end(raw, Wild_type)) {		// EX: en.*
 			Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key(raw, 0, raw_len - Wild_type.length);
 			return lang_itm == null ? Xow_domain_crt_itm_.Null : new Xow_domain_crt_itm__lang(lang_itm.Id());
 		}

@@ -96,7 +96,7 @@ class GfoConsoleWinCmds implements GfoInvkAble {
 		GfsCore._.ExecRegy("gplx.gfui.GfoConsoleWin.ini");
 	}
 	public void Results_add(String s) {
-		if (!String_.HasAtEnd(s, GfuiTextBox_.NewLine))
+		if (!String_.Has_at_end(s, GfuiTextBox_.NewLine))
 			s += GfuiTextBox_.NewLine;
 		statusBox.Text_(statusBox.Text() + s);
 		statusBox.SelBgn_set(String_.Len(statusBox.Text()) - 1);

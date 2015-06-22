@@ -60,7 +60,7 @@ abstract class IoUrlInfo_base implements IoUrlInfo {
 	public abstract boolean CaseSensitive();
 	public abstract boolean Match(String raw);
 	public abstract String EngineKey();
-	public boolean IsDir(String raw) {return String_.HasAtEnd(raw, DirSpr());}
+	public boolean IsDir(String raw) {return String_.Has_at_end(raw, DirSpr());}
 	public abstract String XtoRootName(String raw, int rawLen);
 	@gplx.Virtual public String Xto_api(String raw) {
 		return IsDir(raw)
@@ -142,7 +142,7 @@ class IoUrlInfo_lnx extends IoUrlInfo_base {
 	@Override public String DirSpr()			{return DirSprStr;} static final String DirSprStr = Op_sys.Lnx.Fsys_dir_spr_str();
 	@Override public byte DirSpr_byte()		{return Byte_ascii.Slash;}
 	@Override public boolean CaseSensitive()	{return Op_sys.Lnx.Fsys_case_match();}
-	@Override public boolean Match(String raw)	{return String_.HasAtBgn(raw, DirSprStr);}	// anything that starts with /
+	@Override public boolean Match(String raw)	{return String_.Has_at_bgn(raw, DirSprStr);}	// anything that starts with /
 	@Override public String XtoRootName(String raw, int rawLen) {
 		return rawLen == 1 && String_.Eq(raw, DirSprStr)
 			? "root"
@@ -180,7 +180,7 @@ class IoUrlInfo_mem extends IoUrlInfo_base {
 	@Override public String XtoRootName(String raw, int rawLen) {
 		return String_.Eq(raw, key) ? String_.DelEnd(key, 1) : null;
 	}
-	@Override public boolean Match(String raw) {return String_.HasAtBgn(raw, key);}
+	@Override public boolean Match(String raw) {return String_.Has_at_bgn(raw, key);}
 	public static IoUrlInfo_mem new_(String key, String engineKey) {
 		IoUrlInfo_mem rv = new IoUrlInfo_mem();
 		rv.key = key; rv.engineKey = engineKey;
@@ -196,7 +196,7 @@ class IoUrlInfo_alias extends IoUrlInfo_base {
 	@Override public String XtoRootName(String raw, int rawLen) {
 		return String_.Eq(raw, srcRootDir) ? srcRootName : null;
 	}
-	@Override public boolean Match(String raw) {return String_.HasAtBgn(raw, srcDir);}
+	@Override public boolean Match(String raw) {return String_.Has_at_bgn(raw, srcDir);}
 	@Override public String Xto_api(String raw) {			
 		String rv = String_.Replace(raw, srcDir, trgDir);											// replace src with trg
 		if (!String_.Eq(srcDirSpr, trgDirSpr)) rv = String_.Replace(rv, srcDirSpr, trgDirSpr);		// replace dirSprs

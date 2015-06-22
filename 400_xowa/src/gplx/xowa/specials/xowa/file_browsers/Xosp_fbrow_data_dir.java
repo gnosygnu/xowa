@@ -35,7 +35,7 @@ class Xosp_fbrow_data_dir {
 		for (int i = 0; i < len; ++i) {
 			IoItm_base src = (IoItm_base)itms.Get_at(i);
 			Io_url src_url = src.Url();
-			if (String_.HasAtBgn(src_url.NameAndExt(), ".")) continue;	// ignore hidden "." files; NameAndExt() b/c ".ext" has NameOnly of ""; EX: "/dir/.hidden"
+			if (String_.Has_at_bgn(src_url.NameAndExt(), ".")) continue;	// ignore hidden "." files; NameAndExt() b/c ".ext" has NameOnly of ""; EX: "/dir/.hidden"
 			Xosp_fbrow_data_sub trg = null;
 			if (dir)
 				trg = new Xosp_fbrow_data_sub(src_url, -1, null);

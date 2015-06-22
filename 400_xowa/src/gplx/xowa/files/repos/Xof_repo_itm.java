@@ -50,7 +50,7 @@ public class Xof_repo_itm implements GfoInvkAble {
 			this.wiki_abrv_xo = Xow_domain_abrv_xo_.To_bry(v, domain_itm.Lang_itm(), domain_itm.Domain_type());
 	}
 	public Xof_repo_itm Root_str_(String root_str) {
-		this.wmf_fsys = String_.HasAtBgn(root_str, "http") || String_.HasAtBgn(root_str, "ftp");
+		this.wmf_fsys = String_.Has_at_bgn(root_str, "http") || String_.Has_at_bgn(root_str, "ftp");
 		if (wmf_fsys) {
 			this.root_bry = Bry_.new_u8(root_str);
 			this.dir_spr = Byte_ascii.Slash;

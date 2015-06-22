@@ -15,9 +15,10 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.dbs.schemas; import gplx.*; import gplx.dbs.*;
-public class Schema_idx_itm {
-	public Schema_idx_itm(String name, String sql) {this.name = name; this.sql = sql;}
-	public String Name() {return name;} private final String name;
-	public String Sql() {return sql;} private final String sql;
+package gplx.dbs.metas; import gplx.*; import gplx.dbs.*;
+public class Meta_tbl_mgr {
+	private final Ordered_hash hash = Ordered_hash_.new_();
+	public void Add(Meta_tbl_itm itm) {hash.Add(itm.Name(), itm);}
+	public boolean Has(String name) {return hash.Has(name);}
+	public Meta_tbl_itm Get_by(String name) {return (Meta_tbl_itm)hash.Get_by(name);}
 }

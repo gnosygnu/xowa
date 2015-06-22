@@ -24,8 +24,8 @@ public class Xoa_wiki_regy {
 	public boolean Has(byte[] domain) {if (init_needed) Init(); return hash.Has(domain);}
 	public boolean Url_is_invalid_domain(Xoa_url url) {
 		if (!Bry_.Eq(url.Page_bry(), Xoa_page_.Main_page_bry)) return false;		// page is not "Main_Page"; assume not an invalid domain str; EX: "uk/wiki/Main_Page"
-		if (	 Bry_.Eq(Xow_domain_type_.Key_bry_home, url.Wiki_bry())					// wiki is "home"
-			&&	!Bry_.Eq(Xow_domain_type_.Key_bry_home, url.Raw()))						// raw is "home"; should be "home/wiki/Main_Page"; DATE:2014-02-09
+		if (	 Bry_.Eq(Xow_domain_type_.Key_bry_home, url.Wiki_bry())				// wiki is "home"
+			&&	!Bry_.Eq(Xow_domain_type_.Key_bry_home, url.Raw()))					// raw is "home"; should be "home/wiki/Main_Page"; DATE:2014-02-09
 			return false;															// special case to handle "home" which should mean "home" in any wiki, but "home/wiki/Main_Page" in home wiki
 		return !this.Has(url.Wiki_bry());
 	}

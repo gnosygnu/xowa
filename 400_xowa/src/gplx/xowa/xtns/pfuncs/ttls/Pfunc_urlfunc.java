@@ -32,7 +32,7 @@ public class Pfunc_urlfunc extends Pf_func_base {	// EX: {{lc:A}} -> a
 		Xow_xwiki_itm xwiki = ttl.Wik_itm();
 		if (xwiki != null) {	// xwiki exists; add as //commons.wikimedia.org/wiki/A#b?c=d
 			if (tid == Tid_canonical)
-				trg.Add(Xoh_href_parser.Href_http_bry);							//	"http://"
+				trg.Add(Xoh_href_parser.Href_https_bry);						//	"https://"
 			else
 				trg.Add(Xoa_consts.Url_relative_prefix);						//	"//"
 			trg.Add(xwiki.Domain_bry())											//  "commons.wikimedia.org"

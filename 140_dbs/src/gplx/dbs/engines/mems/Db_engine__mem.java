@@ -46,6 +46,11 @@ public class Db_engine__mem implements Db_engine {
 	public void			Ddl_delete_tbl(String tbl)						{}
 	public void			Env_db_attach(String alias, Io_url db_url)		{}
 	public void			Env_db_detach(String alias)						{}
-	public boolean			Schema_tbl_exists(String name)					{return tbl_hash.Has(name);}
+	public boolean			Meta_tbl_exists(String tbl)						{return tbl_hash.Has(tbl);}
+	public boolean			Meta_fld_exists(String tbl, String fld)			{
+		Mem_tbl mem_tbl = (Mem_tbl)tbl_hash.Get_by(tbl); if (mem_tbl == null) return false;
+		return mem_tbl.Meta().Flds_has(fld);
+	}
+//		public boolean			Meta_fld_exists(String name)					{return tbl_hash.Has(name);}
         public static final Db_engine__mem _ = new Db_engine__mem(); Db_engine__mem() {}
 }

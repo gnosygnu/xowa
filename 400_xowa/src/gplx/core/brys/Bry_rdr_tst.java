@@ -43,7 +43,7 @@ public class Bry_rdr_tst {
 class Bry_rdr_fxt {
 	private Bry_rdr rdr;
 	public void Clear() {rdr = new Bry_rdr();}
-	public Bry_rdr_fxt Init_src(String v)	{rdr.Src_(Bry_.new_u8(v)); return this;}
+	public Bry_rdr_fxt Init_src(String v)	{rdr.Init(Bry_.new_u8(v)); return this;}
 	public Bry_rdr_fxt Init_pos(int v)		{rdr.Pos_(v); return this;}
 	public void Test_read_int(int expd_val) {
 		Tfds.Eq(expd_val, rdr.Read_int_to_pipe());

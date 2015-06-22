@@ -15,10 +15,9 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.dbs.schemas; import gplx.*; import gplx.dbs.*;
-public class Schema_tbl_mgr {
-	private final Ordered_hash hash = Ordered_hash_.new_();
-	public void Add(Schema_tbl_itm itm) {hash.Add(itm.Name(), itm);}
-	public boolean Has(String name) {return hash.Has(name);}
-	public Schema_tbl_itm Get(String name) {return (Schema_tbl_itm)hash.Get_by(name);}
+package gplx.dbs.metas.updates; import gplx.*; import gplx.dbs.*; import gplx.dbs.metas.*;
+public interface Schema_update_cmd {
+	String Name();
+	boolean Exec_is_done();
+	void Exec(Schema_db_mgr mgr, Db_conn conn);
 }

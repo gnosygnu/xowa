@@ -62,17 +62,17 @@ public class Xoa_url_parser_basic_tst {
 		fxt.Reset().Expd_wiki("commons.wikimedia.org").Expd_page("File:A.png").Test_parse_w_wiki("http://upload.wikimedia.org/wikipedia/commons/thumb/7/70/A.png/220px-A.png");
 	}
 	@Test  public void Parse_lang() {
-		Xow_xwiki_mgr xwiki_mgr = fxt.Wiki().Xwiki_mgr();
+		Xow_xwiki_mgr xwiki_mgr = fxt.Wiki_en_w().Xwiki_mgr();
 		xwiki_mgr.Add_full(Bry_.new_a7("fr"), Bry_.new_a7("fr.wikipedia.org"), Bry_.new_a7("http://fr.wikipedia.org/~{0}"));
 		fxt.Expd_wiki("fr.wikipedia.org").Expd_page("A").Test_parse_w_wiki("http://en.wikipedia.org/wiki/fr:A");
 	}
 	@Test  public void Alias_wiki() {
-		Xow_xwiki_mgr xwiki_mgr = fxt.Wiki().Xwiki_mgr();
+		Xow_xwiki_mgr xwiki_mgr = fxt.Wiki_en_w().Xwiki_mgr();
 		xwiki_mgr.Add_full(Bry_.new_a7("s"), Bry_.new_a7("en.wikisource.org"));
 		fxt.Expd_wiki("en.wikisource.org").Expd_page("A/b/c").Test_parse_w_wiki("s:A/b/c");
 	}
 	@Test  public void Xwiki_no_segs() {	// PURPOSE: handle xwiki without full url; EX: "commons:Commons:Media_of_the_day"; DATE:2014-02-19
-		Xow_xwiki_mgr xwiki_mgr = fxt.Wiki().Xwiki_mgr();
+		Xow_xwiki_mgr xwiki_mgr = fxt.Wiki_en_w().Xwiki_mgr();
 		xwiki_mgr.Add_full(Bry_.new_a7("s"), Bry_.new_a7("en.wikisource.org"));
 		fxt.Expd_wiki("en.wikisource.org").Expd_page("Project:A").Test_parse_w_wiki("s:Project:A");
 	}
@@ -92,22 +92,22 @@ public class Xoa_url_parser_basic_tst {
 		fxt.Expd_wiki("en.wikipedia.org").Expd_page("A").Test_parse_w_wiki("A?redirect=no");
 	}
 	@Test  public void Namespace_in_different_wiki() {	// PURPOSE.fix: namespaced titles would default to default_wiki instead of current_wiki
-		fxt.Expd_wiki("en.wikisource.org").Expd_page("Category:A").Test_parse_w_wiki(fxt.Wiki_wikisource(), "Category:A");
+		fxt.Expd_wiki("en.wikisource.org").Expd_page("Category:A").Test_parse_w_wiki(fxt.Wiki_en_s(), "Category:A");
 	}		
 	@Test  public void Action_is_edit() {
 		fxt.Expd_wiki("en.wikipedia.org").Expd_page("A").Expd_action_is_edit_y().Test_parse_w_wiki("A?action=edit");
 	}
 	@Test  public void Assert_state_cleared() {	// PURPOSE.fix: action_is_edit (et. al.) was not being cleared on parse even though Xoa_url reused; DATE:20121231
 		byte[] raw = Bry_.new_a7("A?action=edit");
-		Xoa_url url = Xoa_url_parser.Parse_url(fxt.App(), fxt.Wiki(), raw, 0, raw.length, false);
+		Xoa_url url = Xoa_url_parser.Parse_url(fxt.App(), fxt.Wiki_en_w(), raw, 0, raw.length, false);
 		Tfds.Eq(true, url.Action_is_edit());
 		raw = Bry_.new_a7("B");
-		Xoa_url_parser.Parse_url(url, fxt.App(), fxt.Wiki(), raw, 0, raw.length, false);
+		Xoa_url_parser.Parse_url(url, fxt.App(), fxt.Wiki_en_w(), raw, 0, raw.length, false);
 		Tfds.Eq(false, url.Action_is_edit());
 	}
 	@Test  public void Query_arg() {	// PURPOSE.fix: query args were not printing out
 		byte[] raw = Bry_.new_a7("en.wikipedia.org/wiki/Special:Search/Earth?fulltext=yes");
-		Xoa_url url = Xoa_url_parser.Parse_url(fxt.App(), fxt.Wiki(), raw, 0, raw.length, false);
+		Xoa_url url = Xoa_url_parser.Parse_url(fxt.App(), fxt.Wiki_en_w(), raw, 0, raw.length, false);
 		Xoa_url_parser parser = new Xoa_url_parser();
 		Tfds.Eq("en.wikipedia.org/wiki/Special:Search/Earth?fulltext=yes", parser.Build_str(url));
 	}
@@ -130,8 +130,8 @@ class Xoa_url_parser_chkr implements Tst_chkr {
 	public Xoa_url_parser_chkr Reset() {
 		if (app == null) {
 			app = Xoa_app_fxt.app_();
-			wiki = Xoa_app_fxt.wiki_(app, "en.wikipedia.org");
-			wiki_wikisource = Xoa_app_fxt.wiki_(app, "en.wikisource.org");
+			wiki_en_w = Xoa_app_fxt.wiki_(app, "en.wikipedia.org");
+			wiki_en_s = Xoa_app_fxt.wiki_(app, "en.wikisource.org");
 			app.Usere().Wiki().Xwiki_mgr().Add_full("en.wikipedia.org", "en.wikipedia.org");
 			app.Usere().Wiki().Xwiki_mgr().Add_full("en.wikisource.org", "en.wikisource.org");
 		}
@@ -140,8 +140,8 @@ class Xoa_url_parser_chkr implements Tst_chkr {
 		return this;
 	}
 	public Xoae_app App() {return app;} private Xoae_app app;
-	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
-	public Xowe_wiki Wiki_wikisource() {return wiki_wikisource;} private Xowe_wiki wiki_wikisource;
+	public Xowe_wiki Wiki_en_w() {return wiki_en_w;} private Xowe_wiki wiki_en_w;
+	public Xowe_wiki Wiki_en_s() {return wiki_en_s;} private Xowe_wiki wiki_en_s;
 	public Class<?> TypeOf() {return Xoa_url.class;}
 	public Xoa_url_parser_chkr Expd_wiki(String v) 				{this.expd_wiki_str = v; return this;} private String expd_wiki_str;
 	public Xoa_url_parser_chkr Expd_page(String v) 				{this.expd_page = v; return this;} private String expd_page;
@@ -159,11 +159,11 @@ class Xoa_url_parser_chkr implements Tst_chkr {
 		return rv;
 	}
 	public Xoa_url_parser_chkr Test_parse_from_url_bar(String raw, String expd) {
-		Xoa_url actl_url = Xoa_url_parser.Parse_from_url_bar(app, wiki, raw);
+		Xoa_url actl_url = Xoa_url_parser.Parse_from_url_bar(app, wiki_en_w, raw);
 		Tfds.Eq(expd, actl_url.Xto_full_str());
 		return this;
 	}
-	public void Test_parse_w_wiki(String raw) {Test_parse_w_wiki(wiki, raw);}
+	public void Test_parse_w_wiki(String raw) {Test_parse_w_wiki(wiki_en_w, raw);}
 	public void Test_parse_w_wiki(Xowe_wiki w, String raw) {
 		Xoa_url url = Xoa_url_parser.Parse_url(app, w, raw);
 		Tst_mgr tst_mgr = new Tst_mgr();

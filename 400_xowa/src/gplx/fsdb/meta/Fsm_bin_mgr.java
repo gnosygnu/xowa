@@ -29,11 +29,12 @@ public class Fsm_bin_mgr {
 		this.dbs__ary_len = dbs__ary.length;
 		if (dbs__ary_len > 0) this.nth_db = dbs__ary[dbs__ary_len - 1];
 	}
+	public int Dbs__len()					{return dbs__ary_len;}
 	public Fsm_bin_fil Dbs__get_nth()		{return nth_db;}
 	public Fsm_bin_fil Dbs__get_at(int i)	{return dbs__ary[i];}
 	public Fsm_bin_fil Dbs__make(String file_name) {
 		Fsdb_db_file db = core_mgr.File__bin_file__new(mnt_id, file_name);
-		Fsm_bin_fil rv = new Fsm_bin_fil(dbs__ary_len, db.Url().NameAndExt(), Fsm_bin_fil.Bin_len_null, db.Conn(), core_mgr.File__schema_is_1());
+		Fsm_bin_fil rv = new Fsm_bin_fil(core_mgr.File__schema_is_1(), dbs__ary_len, db.Url(), db.Url().NameAndExt(), db.Conn(), Fsm_bin_fil.Bin_len_null);
 		tbl.Insert(rv.Id(), rv.Url_rel());
 		Dbs__add(rv);
 		return rv;

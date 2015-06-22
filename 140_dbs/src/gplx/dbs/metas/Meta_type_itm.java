@@ -15,9 +15,14 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.dbs.engines.nulls; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-public class Null_conn_info extends Db_conn_info__base {
-	@Override public String Tid() {return Tid_const;} public static final String Tid_const = "null_db";
-	@Override public Db_conn_info New_self(String raw, GfoMsg m) {return this;}
-	public static final Null_conn_info _ = new Null_conn_info(); Null_conn_info() {this.Ctor("", "", "gplx_key=null_db", "");}
+package gplx.dbs.metas; import gplx.*; import gplx.dbs.*;
+public class Meta_type_itm {
+	public Meta_type_itm(int tid_ansi, int tid_sqlite, byte[] name, int len_1, int len_2) {
+		this.tid_ansi = tid_ansi; this.tid_sqlite = tid_sqlite; this.name = name; this.len_1 = len_1; this.len_2 = len_2;
+	}
+	public int Tid_ansi() {return tid_ansi;} private final int tid_ansi;
+	public int Tid_sqlite() {return tid_sqlite;} private final int tid_sqlite;
+	public byte[] Name() {return name;} private final byte[] name;
+	public int Len_1() {return len_1;} private final int len_1;
+	public int Len_2() {return len_2;} private final int len_2;
 }

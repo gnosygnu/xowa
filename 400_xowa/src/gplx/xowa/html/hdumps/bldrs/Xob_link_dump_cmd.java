@@ -20,7 +20,7 @@ import gplx.core.brys.*; import gplx.dbs.*;
 public class Xob_link_dump_cmd {
 	private Xob_link_dump_tbl tbl; private int src_page_id; private Io_url page_db_url;
 	public void Init_by_wiki(Xowe_wiki wiki) {
-		this.page_db_url = wiki.Data_mgr__core_mgr().Db__core().Url(); 
+		this.page_db_url = wiki.Data__core_mgr().Db__core().Url(); 
 		this.tbl = Xob_link_dump_tbl.Get_or_new(wiki);
 		tbl.Insert_bgn();
 	}

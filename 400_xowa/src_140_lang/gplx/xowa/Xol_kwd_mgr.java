@@ -47,7 +47,7 @@ public class Xol_kwd_mgr implements GfoInvkAble {
 			}
 		}
 		return kwd_default_trie == null
-			? Bry_.HasAtBgn(match, kwd_default_key, 0, match_len)
+			? Bry_.Has_at_bgn(match, kwd_default_key, 0, match_len)
 			: kwd_default_trie.Match_bgn(match, 0, match_len) != null
 			;
 	}

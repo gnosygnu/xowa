@@ -50,9 +50,9 @@ class Xosrh_qry_itm {
 		byte wiki_db_tid = wiki.Db_mgr().Tid();
 		if (wiki_db_tid == Xodb_mgr_sql.Tid_sql
 			&& wiki.Appe().Gui_mgr().Search_suggest_mgr().Auto_wildcard()) {	// HACK: auto-asterisk words for sqlite; DATE:2013-09-05
-			if (!Bry_.HasAtEnd(search_word, new byte[] {Byte_ascii.Asterisk}))
+			if (!Bry_.Has_at_end(search_word, new byte[] {Byte_ascii.Asterisk}))
 				search_word = Bry_.Add(search_word, Byte_ascii.Asterisk);
-			if (!Bry_.HasAtBgn(search_word, new byte[] {Byte_ascii.Asterisk}))
+			if (!Bry_.Has_at_bgn(search_word, new byte[] {Byte_ascii.Asterisk}))
 				search_word = Bry_.Add(Byte_ascii.Asterisk, search_word);
 		}
 		wiki.Db_mgr().Load_mgr().Load_search(cancelable, found, search_word, results_max);

@@ -414,8 +414,8 @@ public class Bry_ {
 			if (src[i] == lkp) return true;
 		return false;
 	}
-	public static boolean HasAtEnd(byte[] src, byte[] lkp) {int src_len = src.length; return HasAtEnd(src, lkp, src_len - lkp.length, src_len);}
-	public static boolean HasAtEnd(byte[] src, byte[] lkp, int src_bgn, int src_end) {
+	public static boolean Has_at_end(byte[] src, byte[] lkp) {int src_len = src.length; return Has_at_end(src, lkp, src_len - lkp.length, src_len);}
+	public static boolean Has_at_end(byte[] src, byte[] lkp, int src_bgn, int src_end) {
 		int lkp_len = lkp.length;
 		if (src_bgn < 0) return false;
 		int pos = src_end - lkp_len; if (pos < src_bgn) return false; // lkp is longer than src
@@ -424,11 +424,11 @@ public class Bry_ {
 		}
 		return true;
 	}
-	public static boolean HasAtBgn(byte[] src, byte lkp, int src_bgn) {
+	public static boolean Has_at_bgn(byte[] src, byte lkp, int src_bgn) {
 		return src_bgn < src.length ? src[src_bgn] == lkp : false;
 	}
-	public static boolean HasAtBgn(byte[] src, byte[] lkp) {return HasAtBgn(src, lkp, 0, src.length);}
-	public static boolean HasAtBgn(byte[] src, byte[] lkp, int src_bgn, int src_end) {
+	public static boolean Has_at_bgn(byte[] src, byte[] lkp) {return Has_at_bgn(src, lkp, 0, src.length);}
+	public static boolean Has_at_bgn(byte[] src, byte[] lkp, int src_bgn, int src_end) {
 		int lkp_len = lkp.length;
 		if (lkp_len + src_bgn > src_end) return false; // lkp is longer than src
 		for (int i = 0; i < lkp_len; i++) {

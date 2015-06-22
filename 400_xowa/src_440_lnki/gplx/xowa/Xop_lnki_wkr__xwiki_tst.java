@@ -54,7 +54,7 @@ public class Xop_lnki_wkr__xwiki_tst {
 		fxt.Wiki().Xwiki_mgr().Add_full(Bry_.new_a7("test"), Bry_.new_a7("test.wikimedia.org"));	// register alias only, but not in user_wiki
 		fxt.Test_parse_page_wiki_str
 		( "[[test:A|A]]", String_.Concat_lines_nl_skip_last
-		( "<a href=\"http://test.wikimedia.org/wiki/A\">A</a>"
+		( "<a href=\"https://test.wikimedia.org/wiki/A\">A</a>"
 		));
 	}
 	@Test  public void Literal_lang() {

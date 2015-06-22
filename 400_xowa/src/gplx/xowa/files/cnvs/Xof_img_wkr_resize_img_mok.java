@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files.cnvs; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.core.primitives.*; import gplx.gfui.*; import gplx.xowa.files.cnvs.*;
 public class Xof_img_wkr_resize_img_mok implements Xof_img_wkr_resize_img {
-	public boolean Exec(Io_url src, Io_url trg, int trg_w, int trg_h, int ext_id, String_obj_ref rslt_val) {
+	public boolean Resize_exec(Io_url src, Io_url trg, int trg_w, int trg_h, int ext_id, String_obj_ref rslt_val) {
 		SizeAdp src_size = ImageAdp_.txt_fil_(src).Size();
 		int src_w = src_size.Width(), src_h = src_size.Height();
 		if (trg_w < 1) throw Err_.new_fmt_("trg_w must be > 0: {0}", trg_w);

@@ -225,7 +225,7 @@ public class Xowd_page_tbl implements RlsAble {
 				if (cancelable.Canceled()) return;
 				Xowd_page_itm page = new Xowd_page_itm();
 				Read_page__idx(page, rdr);
-				if (max_val_check && !Bry_.HasAtBgn(page.Ttl_page_db(), key)) break;
+				if (max_val_check && !Bry_.Has_at_bgn(page.Ttl_page_db(), key)) break;
 				nxt_itm = page;
 				if (rslt_idx == max_results) {}	// last item which is not meant for rslts, but only for nxt itm
 				else {

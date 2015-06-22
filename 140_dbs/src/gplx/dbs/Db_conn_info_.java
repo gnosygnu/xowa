@@ -19,7 +19,7 @@ package gplx.dbs; import gplx.*;
 import gplx.dbs.engines.nulls.*; import gplx.dbs.engines.mems.*; import gplx.dbs.engines.sqlite.*; import gplx.dbs.engines.tdbs.*;
 import gplx.dbs.engines.mysql.*; import gplx.dbs.engines.postgres.*;
 public class Db_conn_info_ {
-	public static final Db_conn_info Null			= Null_conn_info._;
+	public static final Db_conn_info Null			= Noop_conn_info.I;
 	public static final Db_conn_info Test			= Mysql_conn_info.new_("127.0.0.1", "unit_tests", "root", "mysql7760");
 	public static Db_conn_info parse_(String raw)		{return Db_conn_info_pool._.Parse(raw);}
 	public static Db_conn_info sqlite_(Io_url url)		{return Sqlite_conn_info.load_(url);}
@@ -30,7 +30,7 @@ public class Db_conn_info_ {
 class Db_conn_info_pool {
 	private Ordered_hash regy = Ordered_hash_.new_();
 	public Db_conn_info_pool() {
-		this.Add(Null_conn_info._).Add(Tdb_conn_info._).Add(Mysql_conn_info._).Add(Postgres_conn_info._).Add(Sqlite_conn_info._);
+		this.Add(Noop_conn_info.I).Add(Tdb_conn_info._).Add(Mysql_conn_info._).Add(Postgres_conn_info._).Add(Sqlite_conn_info._);
 		this.Add(Db_conn_info__mem.I);
 	}
 	public Db_conn_info_pool Add(Db_conn_info itm) {regy.Add_if_dupe_use_nth(itm.Tid(), itm); return this;}

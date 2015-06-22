@@ -17,5 +17,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
 public interface Xoa_wiki_mgr {
-	Xow_wiki Get_by_key_or_make_2(byte[] key);
+	Xow_wiki	Get_by_key_or_make_2(byte[] key);
+	Xow_wiki	Get_by_key_or_make_3(byte[] key);
 }

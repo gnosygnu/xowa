@@ -15,14 +15,18 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.dbs.schemas; import gplx.*; import gplx.dbs.*;
-import gplx.dbs.schemas.updates.*;
-public class Schema_db_mgr {
-	public Schema_loader_mgr Loader() {return loader;} public void Loader_(Schema_loader_mgr v) {loader = v;} private Schema_loader_mgr loader;
-	public Schema_update_mgr Updater() {return updater;} private final Schema_update_mgr updater = new Schema_update_mgr();
-	public Schema_tbl_mgr Tbl_mgr() {return tbl_mgr;} private final Schema_tbl_mgr tbl_mgr = new Schema_tbl_mgr();
-	public void Init(Db_conn conn) {
-		loader.Load(this, conn);
-		updater.Update(this, conn);
+package gplx.dbs.metas.updates; import gplx.*; import gplx.dbs.*; import gplx.dbs.metas.*;
+public class Schema_update_mgr {		
+	private List_adp cmds = List_adp_.new_();
+	public void Add(Schema_update_cmd cmd) {cmds.Add(cmd);}
+	public void Update(Schema_db_mgr schema_mgr, Db_conn conn) {
+		int cmds_len = cmds.Count();
+		for (int i = 0; i < cmds_len; ++i) {
+			Schema_update_cmd cmd = (Schema_update_cmd)cmds.Get_at(i);
+			try {cmd.Exec(schema_mgr, conn);}
+			catch (Exception e) {
+				Gfo_usr_dlg_.I.Warn_many("", "", "failed to run update cmd; name=~{0} err=~{1}", cmd.Name(), Err_.Message_gplx_brief(e));
+			}
+		}
 	}
 }

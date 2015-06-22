@@ -42,7 +42,7 @@ class ErrProcData {
 		for (int i = 0; i < len; i++) {
 			ErrProcData md = ErrProcData.parse_(lines[i]);
 			if (md.SourceLine() == 0) break;	// ASSUME: java code; not interested
-			if (String_.HasAtBgn(md.signatureRaw, "gplx.Err_") || String_.HasAtBgn(md.signatureRaw, "gplx.Err.")) continue;	// java includes entire stackTrace from point of creation; only care about point of throw
+			if (String_.Has_at_bgn(md.signatureRaw, "gplx.Err_") || String_.Has_at_bgn(md.signatureRaw, "gplx.Err.")) continue;	// java includes entire stackTrace from point of creation; only care about point of throw
 			list.Add(md);
 		}			
 		return (ErrProcData[])list.To_ary(ErrProcData.class);

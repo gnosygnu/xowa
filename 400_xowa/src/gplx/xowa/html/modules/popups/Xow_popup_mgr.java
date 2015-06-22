@@ -82,7 +82,7 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 		Show_popup_html(Cbk_xowa_popups_show_update, Mode_show_all, popup_itm);
 	}
 	public String Get_async_bgn(byte[] js_cbk, byte[] href) {
-		if (Bry_.HasAtBgn(href, gplx.xowa.parsers.lnkes.Xop_lnke_wkr.Bry_xowa_protocol)) return null; // ignore xowa-cmd
+		if (Bry_.Has_at_bgn(href, gplx.xowa.parsers.lnkes.Xop_lnke_wkr.Bry_xowa_protocol)) return null; // ignore xowa-cmd
 		synchronized (thread_lock) {
 			if (async_itm != null) async_itm.Cancel();
 			async_itm = new Xow_popup_itm(++async_id_next, href, Bry_.Empty, show_init_word_count);

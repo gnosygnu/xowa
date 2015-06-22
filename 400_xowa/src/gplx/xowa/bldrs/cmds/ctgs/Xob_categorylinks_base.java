@@ -29,7 +29,7 @@ public abstract class Xob_categorylinks_base extends Xob_sql_dump_base implement
 	public void Exec(byte[] src, byte[] fld_key, int fld_idx, int fld_bgn, int fld_end, Bry_bfr file_bfr, Sql_file_parser_data data) {
 		if		(Bry_.Eq(fld_key, Fld_cl_from))			cur_id = Bry_.Xto_int_or(src, fld_bgn, fld_end, -1);
 		else if (Bry_.Eq(fld_key, Fld_cl_to))			cur_ctg = Bry_.Mid(src, fld_bgn, fld_end);
-		else if (Bry_.Eq(fld_key, Fld_cl_collation))	cur_collation_is_uca = Bry_.HasAtBgn(src, Collation_uca, fld_bgn, fld_end);
+		else if (Bry_.Eq(fld_key, Fld_cl_collation))	cur_collation_is_uca = Bry_.Has_at_bgn(src, Collation_uca, fld_bgn, fld_end);
 		else if (Bry_.Eq(fld_key, Fld_cl_timestamp)) {
 			date_parser.Parse_iso8651_like(cur_modified_on, src, fld_bgn, fld_end);
 			cur_date = fld_end - fld_bgn == 0	// ignore null dates added by ctg_v1

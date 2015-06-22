@@ -88,6 +88,7 @@ public class Xof_bin_mgr {
 					fsdb.File_exists_y_();
 					return rv;
 				}
+				if (fsdb.Orig_ext().Id_is_video()) continue;					// item is video; don't download orig as imageMagick can't thumbnail it; DATE:2015-06-16
 				rv = wkr.Get_as_rdr(fsdb, Bool_.N, fsdb.Orig_w());				// thumb missing; get orig;
 				if (rv == Io_stream_rdr_.Noop) {
 					usr_dlg.Log_direct(String_.Format("bin_mgr:thumb not found; wkr={0} ttl={1} w={2}", wkr.Key(), fsdb.Orig_ttl(), fsdb.Lnki_w()));
@@ -108,7 +109,7 @@ public class Xof_bin_mgr {
 	}
 	private boolean Resize(int exec_tid, Xof_fsdb_itm itm, boolean file_is_orig, Io_url src, Io_url trg) {			
 		tmp_size.Html_size_calc(exec_tid, itm.Lnki_w(), itm.Lnki_h(), itm.Lnki_type(), mnt_mgr.Patch_upright(), itm.Lnki_upright(), itm.Orig_ext().Id(), itm.Orig_w(), itm.Orig_h(), Xof_img_size.Thumb_width_img);
-		boolean rv = resizer.Exec(src, trg, tmp_size.Html_w(), tmp_size.Html_h(), itm.Orig_ext().Id(), resize_warning);
+		boolean rv = resizer.Resize_exec(src, trg, tmp_size.Html_w(), tmp_size.Html_h(), itm.Orig_ext().Id(), resize_warning);
 		itm.File_resized_y_();
 		return rv;
 	}

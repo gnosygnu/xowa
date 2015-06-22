@@ -41,6 +41,6 @@ public class Db_conn_pool {
 	}
         public static final Db_conn_pool I = new Db_conn_pool(); Db_conn_pool() {this.Init();}
 	private void Init() {
-		this.Engines__add(Null_engine._, TdbEngine._, Mysql_engine._, Postgres_engine._, Sqlite_engine._, Db_engine__mem._);
+		this.Engines__add(Noop_engine._, TdbEngine._, Mysql_engine._, Postgres_engine._, Sqlite_engine._, Db_engine__mem._);
 	}
 }

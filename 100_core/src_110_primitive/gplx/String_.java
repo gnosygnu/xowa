@@ -79,8 +79,8 @@ public class String_ implements GfoInvkAble {
 	public static char CharAt(String s, int i)								{return s.charAt(i);}							
 	public static int CodePointAt(String s, int i)							{return s.codePointAt(i);}
 	public static boolean Has(String s, String find)							{return s.indexOf(find) != String_.Find_none;}	
-	public static boolean HasAtBgn(String s, String v)							{return s.startsWith(v);}				
-	public static boolean HasAtEnd(String s, String v)							{return s.endsWith(v);}					
+	public static boolean Has_at_bgn(String s, String v)						{return s.startsWith(v);}				
+	public static boolean Has_at_end(String s, String v)						{return s.endsWith(v);}					
 	public static int FindFwd(String s, String find)						{return s.indexOf(find);}				
 	public static int FindFwd(String s, String find, int pos)				{return s.indexOf(find, pos);}			
 	public static int FindBwd(String s, String find)						{return s.lastIndexOf(find);}			
@@ -204,7 +204,7 @@ public class String_ implements GfoInvkAble {
 	}
 	public static String DelBgnIf(String s, String find) {
 		if (s == null) throw Err_arg.null_("s"); if (find == null) throw Err_arg.null_("find");
-		return HasAtBgn(s, find) ? String_.Mid(s, Len(find)) : s;
+		return Has_at_bgn(s, find) ? String_.Mid(s, Len(find)) : s;
 	}
 	public static String DelEnd(String s, int count) {
 		if (count < 0) throw Err_arg.cannotBe_("< 0", "count", count);
@@ -214,7 +214,7 @@ public class String_ implements GfoInvkAble {
 	}
 	public static String DelEndIf(String s, String find) {
 		if (s == null) throw Err_arg.null_("s"); if (find == null) throw Err_arg.null_("find");
-		return HasAtEnd(s, find) ? Mid_lang(s, 0, Len(s) - Len(find)) : s;
+		return Has_at_end(s, find) ? Mid_lang(s, 0, Len(s) - Len(find)) : s;
 	}
 	public static String LowerFirst(String s) {
 		int len = Len(s); if (len == 0) return String_.Empty;

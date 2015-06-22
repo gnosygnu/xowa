@@ -21,7 +21,7 @@ public class Xohd_abrv_ {
 	public static final byte
 	  Tid_dir = 1, Tid_img = 2, Tid_img_style = 3, Tid_file_play = 4, Tid_file_info = 5, Tid_file_mgnf = 6
 	, Tid_hiero_dir = 7, Tid_gallery_box_max = 8, Tid_gallery_box_w = 9, Tid_gallery_img_w = 10, Tid_gallery_img_pad = 11
-	, Tid_redlink = 12, Tid_toc = 13
+	, Tid_redlink = 12, Tid_toc = 13, Tid_hdr_bgn = 14, Tid_hdr_end = 15
 	;
 	public static final byte[]
 	  Key_dir					= Bry_.new_a7("~{xowa_dir}")
@@ -37,6 +37,8 @@ public class Xohd_abrv_ {
 	, Key_gallery_img_pad		= Bry_.new_a7("xowa_gly_img_pad='")
 	, Key_redlink				= Bry_.new_a7("xowa_redlink='")
 	, Key_toc					= Bry_.new_a7("~{xowa_toc}")
+	, Key_hdr_bgn				= Bry_.new_a7("<h")
+	, Key_hdr_end				= Bry_.new_a7("</h")
 	;
 	public static final byte[]
 	  A_href_bgn				= Bry_.new_a7("/wiki/File:")
@@ -60,6 +62,8 @@ public class Xohd_abrv_ {
 		trie_itm(rv, Tid_gallery_img_pad	, Byte_ascii.Apos		, Key_gallery_img_pad);
 		trie_itm(rv, Tid_redlink			, Byte_ascii.Apos		, Key_redlink);
 		trie_itm(rv, Tid_toc				, Byte_ascii.Nil		, Key_toc);
+//			trie_itm(rv, Tid_hdr_bgn			, Byte_ascii.Nil		, Key_hdr_bgn);
+//			trie_itm(rv, Tid_hdr_end			, Byte_ascii.Nil		, Key_hdr_end);
 		return rv;
 	}
 	private static void trie_itm(Btrie_slim_mgr trie, byte tid, byte subst_end_byte, byte[] key_bry) {

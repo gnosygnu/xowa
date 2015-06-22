@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
-import gplx.core.threads.*; import gplx.dbs.*; import gplx.dbs.schemas.updates.*; import gplx.dbs.schemas.*;
+import gplx.core.threads.*; import gplx.dbs.*; import gplx.dbs.metas.updates.*; import gplx.dbs.metas.*;
 import gplx.xowa.files.caches.*;
 public class Xou_db_mgr {
 	private final Xoa_app app;

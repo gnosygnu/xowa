@@ -63,7 +63,7 @@ public class IptKey_ {
 		return (rv == null) ? new_(val, enm_mgr.GetStr(val)) : rv;
 	}
 	static IptKey new_(int val, String name) {
-		IptKey rv = new IptKey(val, String_.HasAtBgn(name, "key.") ? name : "key." + name);
+		IptKey rv = new IptKey(val, String_.Has_at_bgn(name, "key.") ? name : "key." + name);
 		enm_mgr.RegObj(val, name, rv);
 		return rv;
 	}

@@ -22,7 +22,7 @@ public class Xob_page_dump_cmd_make extends Xob_itm_basic_base implements Xob_cm
 	public String Cmd_key() {return Xob_cmd_keys.Key_wiki_page_dump_make;}
 	public void Cmd_run() {
 		wiki.Init_assert();
-		Xowd_db_mgr db_mgr = wiki.Data_mgr__core_mgr();
+		Xowd_db_mgr db_mgr = wiki.Data__core_mgr();
 		Io_url page_db_url = db_mgr.Db__core().Url();
 		int len = db_mgr.Dbs__len();
 		for (int i = 0; i < len; i++) {

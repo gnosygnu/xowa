@@ -63,7 +63,8 @@ public class TdbEngine implements Db_engine {
 	public void			Ddl_delete_tbl(String tbl)						{}
 	public void			Env_db_attach(String alias, Io_url db_url)		{}
 	public void			Env_db_detach(String alias)						{}
-	public boolean			Schema_tbl_exists(String name)					{return false;}
+	public boolean			Meta_tbl_exists(String name)					{return false;}
+	public boolean			Meta_fld_exists(String tbl, String fld)			{return false;}
 
 	Hash_adp wkrs = Hash_adp_.new_(); TdbDbLoadMgr loadMgr = TdbDbLoadMgr.new_(); TdbDbSaveMgr saveMgr = TdbDbSaveMgr.new_();
 	public static final TdbEngine _ = new TdbEngine(); 

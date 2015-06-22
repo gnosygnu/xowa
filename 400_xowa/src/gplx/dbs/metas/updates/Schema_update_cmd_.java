@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.dbs.schemas.updates; import gplx.*; import gplx.dbs.*; import gplx.dbs.schemas.*;
+package gplx.dbs.metas.updates; import gplx.*; import gplx.dbs.*; import gplx.dbs.metas.*;
 import gplx.dbs.engines.sqlite.*;
 public class Schema_update_cmd_ {
 	public static Schema_update_cmd Make_tbl_create(String tbl_name, String tbl_sql, Db_idx_itm... tbl_idxs) {return new Schema_update_cmd__tbl_create(tbl_name, tbl_sql, tbl_idxs);}

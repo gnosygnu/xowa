@@ -57,7 +57,7 @@ public class Xoa_css_extractor {
 				this.Install_by_wmf((Xowe_wiki)wiki, wiki_html_dir);
 		}
 		catch (Exception e) {	// if error, failover; paranoia catch for outliers like bad network connectivity fail, or MediaWiki: message not existing; DATE:2013-11-21
-			wiki.App().Usr_dlg().Warn_many("", "", "failed while trying to generate css; failing over; wiki='~{0}' err=~{1}", wiki.Domain_str(), Err_.Message_gplx(e));
+			wiki.App().Usr_dlg().Warn_many("", "", "failed to get css; failing over; wiki='~{0}' err=~{1}", wiki.Domain_str(), Err_.Message_gplx(e));
 			Css_common_failover();		// only failover xowa_common.css; xowa_wiki.css comes from MediaWiki:Common.css / Vector.css
 		}
 	}
@@ -77,7 +77,7 @@ public class Xoa_css_extractor {
 		Logo_setup();
 	}
 	private boolean Install_by_db(Xow_wiki wiki, Io_url wiki_html_dir, String css_key) {
-		Xowd_db_mgr core_db_mgr = wiki.Data_mgr__core_mgr();
+		Xowd_db_mgr core_db_mgr = wiki.Data__core_mgr();
 		if (	core_db_mgr == null
 			||	core_db_mgr.Props() == null
 			||	core_db_mgr.Props().Schema_is_1()

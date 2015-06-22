@@ -573,7 +573,7 @@ class Io_stream_rdr_http implements Io_stream_rdr {
 				return this;
 			}
 	        read_done = false;
-			this.exists = src_conn.getResponseCode() == 200;	// ASSUME: response code of 200 means that file exists; note that content_length seems to always be -1; DATE:2015-05-20
+			this.exists = Int_.In(src_conn.getResponseCode(), 200, 301);	// ASSUME: response code of 200 (OK) or 301 (Redirect) means that file exists; note that content_length seems to always be -1; DATE:2015-05-20
 	        src_stream = new java.io.BufferedInputStream(src_conn.getInputStream());
     		xfer_fmt.Bgn(content_length);
 		}

@@ -39,7 +39,8 @@ public class Sqlite_engine extends Db_engine_sql_base {
 	@Override public void	Txn_end()				{txn_mgr.Txn_end();}
 	@Override public void	Txn_cxl()				{txn_mgr.Txn_cxl();}
 	@Override public void	Txn_sav()				{txn_mgr.Txn_sav();}
-	@Override public boolean	Schema_tbl_exists(String name)		{return schema_mgr.Tbl_exists(name);}
+	@Override public boolean	Meta_tbl_exists(String tbl)				{return schema_mgr.Tbl_exists(tbl);}
+	@Override public boolean	Meta_fld_exists(String tbl, String fld) {return schema_mgr.Fld_exists(tbl, fld);}
 		static boolean loaded = false; 
 	@gplx.Internal @Override protected Connection Conn_new() {
 		if (!loaded) {
@@ -55,8 +56,7 @@ public class Sqlite_engine extends Db_engine_sql_base {
 	}
 		public static final Sqlite_engine _ = new Sqlite_engine();
 }
-class Db_rdr__sqlite extends Db_rdr__basic {	@Override public byte Read_byte(int i)			{try {return (byte)rdr.getInt(i + 1);} catch (Exception e) {throw Err_.new_("read failed: i={0} type={1} err={2}", i, Byte_.Cls_val_name, Err_.Message_lang(e));}} 
-	@Override public byte Read_byte(String k)		{try {return (byte)Int_.cast_(rdr.getObject(k));} catch (Exception e) {throw Err_.new_("read failed: k={0} type={1} err={2}", k, Byte_.Cls_val_name, Err_.Message_lang(e));}} 
+class Db_rdr__sqlite extends Db_rdr__basic {	@Override public byte Read_byte(String k)		{try {return (byte)Int_.cast_(rdr.getObject(k));} catch (Exception e) {throw Err_.new_("read failed: k={0} type={1} err={2}", k, Byte_.Cls_val_name, Err_.Message_lang(e));}} 
 		@Override public boolean Read_bool_by_byte(String k) {
 		try {
 			int val = rdr.getInt(k);

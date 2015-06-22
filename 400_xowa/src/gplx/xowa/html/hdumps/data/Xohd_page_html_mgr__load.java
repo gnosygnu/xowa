@@ -43,7 +43,7 @@ public class Xohd_page_html_mgr__load {
 		rows.Clear();
 	}
 	private void Parse_data(Xog_page hpg, Xowd_html_row row) {
-		rdr.Src_(row.Data());
+		rdr.Init(row.Data());
 		while (!rdr.Pos_is_eos()) {
 			int tid = rdr.Read_int_to_pipe();
 			switch (tid) {

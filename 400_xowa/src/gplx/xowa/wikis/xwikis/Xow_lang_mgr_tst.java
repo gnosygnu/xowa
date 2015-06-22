@@ -68,7 +68,7 @@ public class Xow_lang_mgr_tst {
 		, "  <h4>grp1</h4>"
 		, "  <table style='width: 100%;'>"
 		, "    <tr>"
-		, "      <td style='width: 10%; padding-bottom: 5px;'>Chinese</td><td style='width: 20%; padding-bottom: 5px;'><li class='badge-none'><a hreflang=\"zh\" title=\"Earth\" href=\"http://zh.wikipedia.org/wiki/Earth\">Earth</a></li></td><td style='width: 3%; padding-bottom: 5px;'></td>"
+		, "      <td style='width: 10%; padding-bottom: 5px;'>Chinese</td><td style='width: 20%; padding-bottom: 5px;'><li class='badge-none'><a hreflang=\"zh\" title=\"Earth\" href=\"https://zh.wikipedia.org/wiki/Earth\">Earth</a></li></td><td style='width: 3%; padding-bottom: 5px;'></td>"
 		, "    </tr>"
 		, "  </table>"
 		, "  </div>"

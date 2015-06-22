@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.dbs.schemas.updates; import gplx.*; import gplx.dbs.*; import gplx.dbs.schemas.*;
+package gplx.dbs.metas.updates; import gplx.*; import gplx.dbs.*; import gplx.dbs.metas.*;
 import org.junit.*; import gplx.dbs.*;
 public class Schema_update_mgr_tst {
 	@Before public void init() {fxt.Clear();} private Schema_update_mgr_fxt fxt = new Schema_update_mgr_fxt();
@@ -23,7 +23,7 @@ public class Schema_update_mgr_tst {
 		fxt.Test_exec_y(new Schema_update_cmd__mock());
 	}
 	@Test   public void Delete() {
-		fxt.Init_itm(Schema_itm_tid.Tid_table, Schema_update_cmd__mock.Tbl_name);
+		fxt.Init_itm(Meta_itm_tid.Tid_table, Schema_update_cmd__mock.Tbl_name);
 		fxt.Test_exec_n(new Schema_update_cmd__mock());
 	}
 }
@@ -34,7 +34,7 @@ class Schema_update_mgr_fxt {
 		db_mgr = new Schema_db_mgr();
 	}
 	public void Init_itm(int tid, String name) {
-		db_mgr.Tbl_mgr().Add(new Schema_tbl_itm(name, "sql"));
+		db_mgr.Tbl_mgr().Add(new Meta_tbl_itm(name, "sql"));
 	}
 	public void Test_exec_y(Schema_update_cmd cmd) {Test_exec(cmd, Bool_.Y);}
 	public void Test_exec_n(Schema_update_cmd cmd) {Test_exec(cmd, Bool_.N);}

@@ -42,8 +42,8 @@ public class Xowd_site_stats_tbl {
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld_row_id).Crt_int(fld_row_id, Site_stats_row_id).Exec_select__rls_auto();
 		try {
 			if (rdr.Move_next()) {
-				stats.NumArticles_	(rdr.Read_int(fld_good_articles));	
-				stats.NumPages_		(rdr.Read_int(fld_total_pages));		
+				stats.NumArticles_	((int)rdr.Read_long(fld_good_articles));	// #<>(int)rdr.Read_long~rdr.Read_int
+				stats.NumPages_		((int)rdr.Read_long(fld_total_pages));		// #<>(int)rdr.Read_long~rdr.Read_int
 				stats.NumFiles_		(rdr.Read_int(fld_images));
 			}
 		} finally {rdr.Rls();}

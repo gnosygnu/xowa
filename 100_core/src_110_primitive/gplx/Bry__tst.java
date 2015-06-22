@@ -47,7 +47,7 @@ public class Bry__tst {
 		}
 		Tfds.Eq_ary(expd, Bry_.XtoStrBytesByInt(val, Int_.DigitCount(val)));
 	}
-	@Test  public void HasAtEnd() {
+	@Test  public void Has_at_end() {
 		tst_HasAtEnd("a|bcd|e", "d"	, 2, 5, true);		// y_basic
 		tst_HasAtEnd("a|bcd|e", "bcd"	, 2, 5, true);		// y_many
 		tst_HasAtEnd("a|bcd|e", "|bcd"	, 2, 5, false);		// n_long
@@ -56,14 +56,14 @@ public class Bry__tst {
 		tst_HasAtEnd("abc", "bd", false);		// n
 		tst_HasAtEnd("a", "ab", false);		// exceeds_len
 	}
-	void tst_HasAtEnd(String src, String find, int bgn, int end, boolean expd) {Tfds.Eq(expd, Bry_.HasAtEnd(Bry_.new_u8(src), Bry_.new_u8(find), bgn, end));}
-	void tst_HasAtEnd(String src, String find, boolean expd) {Tfds.Eq(expd, Bry_.HasAtEnd(Bry_.new_u8(src), Bry_.new_u8(find)));}
-	@Test  public void HasAtBgn() {
+	void tst_HasAtEnd(String src, String find, int bgn, int end, boolean expd) {Tfds.Eq(expd, Bry_.Has_at_end(Bry_.new_u8(src), Bry_.new_u8(find), bgn, end));}
+	void tst_HasAtEnd(String src, String find, boolean expd) {Tfds.Eq(expd, Bry_.Has_at_end(Bry_.new_u8(src), Bry_.new_u8(find)));}
+	@Test  public void Has_at_bgn() {
 		tst_HasAtBgn("y_basic"	, "a|bcd|e", "b"	, 2, 5, true);
 		tst_HasAtBgn("y_many"	, "a|bcd|e", "bcd"	, 2, 5, true);
 		tst_HasAtBgn("n_long"	, "a|bcd|e", "bcde"	, 2, 5, false);
 		tst_HasAtBgn("n_pos"	, "a|bcd|e", "|bc"	, 2, 5, false);
-	}	void tst_HasAtBgn(String tst, String src, String find, int bgn, int end, boolean expd) {Tfds.Eq(expd, Bry_.HasAtBgn(Bry_.new_u8(src), Bry_.new_u8(find), bgn, end), tst);}
+	}	void tst_HasAtBgn(String tst, String src, String find, int bgn, int end, boolean expd) {Tfds.Eq(expd, Bry_.Has_at_bgn(Bry_.new_u8(src), Bry_.new_u8(find), bgn, end), tst);}
 	@Test  public void Match() {
 		tst_Match("abc", 0, "abc", true);
 		tst_Match("abc", 2,  "c", true);

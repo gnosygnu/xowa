@@ -100,7 +100,6 @@ public class Xog_tab_itm implements GfoInvkAble {
 	public void Show_url_bgn(Xoa_url url) {
 		this.tab_is_loading = true;
 		Xoae_app app = win.App(); Gfo_usr_dlg usr_dlg = app.Usr_dlg();
-//			Xoae_page page = Xoae_page.Empty; 
 		if (	url.Anchor_str() != null						// url has anchor
 			&&	url.Eq_page(page.Url())							// url has same page_name as existing page
 			&&	url.Args().length == 0) {						// url has no args; needed for Category:A?from=b#mw-pages

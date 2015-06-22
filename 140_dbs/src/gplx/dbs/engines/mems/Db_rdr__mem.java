@@ -28,25 +28,16 @@ public class Db_rdr__mem implements Db_rdr {
 			row = rows[row_idx];
 		return rv;
 	}
-	public byte[] Read_bry(int i)				{return (byte[])row.Get_at(i);}
 	public byte[] Read_bry(String k)			{return (byte[])row.Get_by(k);}
-	public String Read_str(int i)				{return (String)row.Get_at(i);}
 	public String Read_str(String k)			{return (String)row.Get_by(k);}
-	public byte[] Read_bry_by_str(int i)		{return Bry_.new_u8_safe((String)row.Get_at(i));}		// NOTE: null b/c db can have NULL
 	public byte[] Read_bry_by_str(String k)		{return Bry_.new_u8_safe((String)row.Get_by(k));}		// NOTE: null b/c db can have NULL
-	public DateAdp Read_date_by_str(int i)		{return DateAdp_.parse_iso8561((String)row.Get_at(i));}
+	@gplx.Virtual public byte[] Read_bry_in_parts(String tbl, String fld, String crt_key, Object crt_val) {throw Err_.not_implemented_();}
 	public DateAdp Read_date_by_str(String k)	{return DateAdp_.parse_iso8561((String)row.Get_by(k));}
-	public byte Read_byte(int i)				{return Byte_.cast_(row.Get_at(i));}
 	public byte Read_byte(String k)				{return Byte_.cast_(row.Get_by(k));}
-	public int Read_int(int i)					{return Int_.cast_(row.Get_at(i));}
 	public int Read_int(String k)				{return Int_.cast_(row.Get_by(k));}
-	public long Read_long(int i)				{return Long_.cast_(row.Get_at(i));}
 	public long Read_long(String k)				{return Long_.cast_(row.Get_by(k));}
-	public float Read_float(int i)				{return Float_.cast_(row.Get_at(i));}
 	public float Read_float(String k)			{return Float_.cast_(row.Get_by(k));}
-	public double Read_double(int i)			{return Double_.cast_(row.Get_at(i));}
 	public double Read_double(String k)			{return Double_.cast_(row.Get_by(k));}
-	public boolean Read_bool_by_byte(int i)		{return Byte_.cast_(row.Get_at(i)) == 1;}
 	public boolean Read_bool_by_byte(String k)		{return Byte_.cast_(row.Get_by(k)) == 1;}
 	public void Rls()							{}
 }

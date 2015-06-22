@@ -68,7 +68,13 @@ public class Fsd_bin_tbl implements RlsAble {
 		Db_rdr rdr = stmt_select.Clear().Crt_int(fld_owner_id, owner_id).Exec_select__rls_manual();
 		try {
 			if (rdr.Move_next()) {
-				byte[] rv = rdr.Read_bry(fld_data);
+				byte[] rv = null;
+				try {rv = rdr.Read_bry(fld_data);}
+				catch (Exception e) {
+					if (Op_sys.Cur().Tid_is_drd() && String_.Has(Err_.Message_lang(e), "get field slot from row")) { 	// get field slot from row 0 col 0 failed
+						rv = rdr.Read_bry_in_parts(tbl_name, fld_data, fld_owner_id, owner_id);
+					}
+				}
 				return rv == null ? Bry_.Empty : rv;	// NOTE: bug in v0.10.1 where .ogg would save as null; return Bry_.Empty instead, else java.io.ByteArrayInputStream would fail on null
 			}
 			else

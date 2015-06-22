@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.ios.*; import gplx.dbs.*; import gplx.dbs.cfgs.*;
-import gplx.dbs.schemas.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.dbs.*;
+import gplx.dbs.metas.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.dbs.*;
 public class Xowd_core_db_props {
 	public Xowd_core_db_props(int schema, Xowd_db_layout layout_text, Xowd_db_layout layout_html, Xowd_db_layout layout_file, byte zip_tid_text, byte zip_tid_html) {
 		this.schema = schema;

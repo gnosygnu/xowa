@@ -35,7 +35,7 @@ public class EnmMgr {
 			String term = String_.Trim(ary[i]);	// ex: key.ctrl + key.a
 			if (prefix != null) term = String_.Replace(term, prefix, "");
 			int cur = -1;
-			if (String_.HasAtBgn(term, "#"))
+			if (String_.Has_at_bgn(term, "#"))
 				cur = Int_.parse_(String_.Mid(term, 1));
 			else
 				cur = Int_.cast_(rawRegy.Get_by(term));			

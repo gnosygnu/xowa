@@ -35,13 +35,19 @@ public class Xoa_url_parser_url_bar_tst {
 		fxt.Test_parse_from_url_bar("fr.s:Auteur:Shakespeare"	, "fr.wikisource.org/wiki/Auteur:Shakespeare");	// url_macros
 	}
 	@Test  public void Home() {
+		Init_db(fxt.App().Usere().Wiki());
 		fxt.Test_parse_from_url_bar("home"						, "en.wikipedia.org/wiki/home");				// home should go to current wiki's home; DATE:2014-02-09
 		fxt.Test_parse_from_url_bar("home/wiki/Main_Page"		, "home/wiki/Main_Page");						// home Main_Page should go to home; DATE:2014-02-09
 	}
 	@Test  public void Custom() {
+//			fxt.App().Usere().Wiki().Xwiki_mgr().Add_full("zh.wikipedia.org", "zh.wikipedia.org");
+//			gplx.xowa.wikis.Xoa_wiki_regy.Make_wiki_dir(fxt.App(), "zh.wikipedia.org");
+//			fxt.App().Wiki_mgr().Get_by_key_or_make(Bry_.new_a7("zh.wikipedia.org")).Props().Main_page_(Bry_.new_a7("Zh_Main_Page"));
 		fxt.App().Usere().Wiki().Xwiki_mgr().Add_full("zh.wikipedia.org", "zh.wikipedia.org");
+		Xowe_wiki zh_wiki = fxt.App().Wiki_mgr().Get_by_key_or_make(Bry_.new_a7("zh.wikipedia.org"));
+		Init_db(zh_wiki);
 		gplx.xowa.wikis.Xoa_wiki_regy.Make_wiki_dir(fxt.App(), "zh.wikipedia.org");
-		fxt.App().Wiki_mgr().Get_by_key_or_make(Bry_.new_a7("zh.wikipedia.org")).Props().Main_page_(Bry_.new_a7("Zh_Main_Page"));
+		zh_wiki.Data__core_mgr().Mw_props().Main_page_(Bry_.new_a7("Zh_Main_Page"));
 		fxt.Test_parse_from_url_bar("zh.w:"						, "zh.wikipedia.org/wiki/Zh_Main_Page");
 		fxt.Test_parse_from_url_bar("zh.w:Main_Page"			, "zh.wikipedia.org/wiki/Main_Page");
 	}
@@ -53,5 +59,11 @@ public class Xoa_url_parser_url_bar_tst {
 		fxt.Test_parse_from_url_bar("A.b"						, "en.wikipedia.org/wiki/A.b");		// bounds-check: 2
 		fxt.Test_parse_from_url_bar("A.b.m."					, "en.wikipedia.org/wiki/A.b.m.");	// false-match
 		fxt.Test_parse_from_url_bar("en.x.wikipedia.org/wiki/A"	, "en.wikipedia.org/wiki/en.x.wikipedia.org/A");	// fail
+	}
+	public static void Init_db(Xowe_wiki wiki) {
+		Xoa_test_.Db_init(true, Xoa_test_.Url_root());
+		wiki.Ns_mgr().Init_w_defaults();
+		Xowe_wiki_bldr.Create(wiki, 1, "dump.xml");
+		wiki.Data__core_mgr().Db__core().Tbl__ns().Insert(wiki.Ns_mgr());
 	}
 }

@@ -44,7 +44,7 @@ public class Fs_root_wkr_fsdb {
 			String thumb_name = Int_.Xto_str(html_w) + orig_url.Ext();
 			Io_url thumb_url = thumb_dir.GenSubFil_ary(thumb_rel + orig_url.Info().DirSpr(), thumb_name);
 			if (!Io_mgr.I.ExistsFil(thumb_url)) {
-				if (!wiki.Appe().File_mgr().Img_mgr().Wkr_resize_img().Exec(orig_url, thumb_url, html_w, html_h, fsdb_itm.Orig_ext().Id(), tmp_resize_result))
+				if (!wiki.Appe().File_mgr().Img_mgr().Wkr_resize_img().Resize_exec(orig_url, thumb_url, html_w, html_h, fsdb_itm.Orig_ext().Id(), tmp_resize_result))
 					return false;
 			}
 			fsdb_itm.Html_size_(html_w, html_h);

@@ -55,7 +55,7 @@ public class Xow_popup_parser {
 			tmpl_keeplist = new Xop_keeplist_wiki(wiki);
 			tmpl_ctx.Tmpl_keeplist_(tmpl_keeplist);
 		}
-		if (!Bry_.HasAtEnd(raw, Byte_ascii.NewLine_bry)) raw = Bry_.Add(raw, Byte_ascii.NewLine_bry);
+		if (!Bry_.Has_at_end(raw, Byte_ascii.NewLine_bry)) raw = Bry_.Add(raw, Byte_ascii.NewLine_bry);
 		tmpl_keeplist.Srl().Load_by_bry(raw);
 	}
 	private boolean Canceled(Xow_popup_itm popup_itm, Xog_tab_itm cur_tab) {return popup_itm.Canceled() || cur_tab != null && cur_tab.Tab_is_loading();}

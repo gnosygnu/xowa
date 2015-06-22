@@ -66,7 +66,7 @@ public class Gfo_thread_cmd_unzip implements Gfo_thread_cmd {
 			Io_url zip_dir = Io_url_.Empty;
 			for (int i = 0; i < dirs_len; i++) {
 				Io_url dir = dirs[i];
-				if (String_.HasAtBgn(String_.Lower(dir.NameOnly()), String_.Lower(trg.NameOnly()))) {	// HACK: check that directory starts with archive name; DATE:2013-12-22
+				if (String_.Has_at_bgn(String_.Lower(dir.NameOnly()), String_.Lower(trg.NameOnly()))) {	// HACK: check that directory starts with archive name; DATE:2013-12-22
 					zip_dir = dir;
 					break;
 				}

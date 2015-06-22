@@ -50,7 +50,7 @@ public class IptArgChainMgr_tst {
 			}
 	        else if	(expd == 1) {
 				Tfds.Eq(process, "", "1:{0} should be empty:process", literal);
-				Tfds.Eq_true(String_.HasAtEnd(activeKey, key.Key() + ","), "1:{0} should set key:activeKey,{1}", literal, activeKey);
+				Tfds.Eq_true(String_.Has_at_end(activeKey, key.Key() + ","), "1:{0} should set key:activeKey,{1}", literal, activeKey);
 			}
 	        else if	(expd == 2) {
 				Tfds.Eq_true(String_.EqNot(process, ""), "2:{0} should not be empty;process,{1}", literal, process);

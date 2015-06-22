@@ -47,7 +47,7 @@ abstract class Xoctg_fmtr_itm_base implements Xoctg_fmtr_itm {
 			Xoa_ttl ttl = itm.Ttl();
 			byte[] itm_sortkey = itm.Sortkey();
 			byte[] ttl_bry = ttl.Page_txt();
-			if (!Bry_.HasAtBgn(itm_sortkey, ttl_char_0, 0, itm_sortkey.length)) {
+			if (!Bry_.Has_at_bgn(itm_sortkey, ttl_char_0, 0, itm_sortkey.length)) {
 				grp_end_idx = i;
 				grp_end_at_col = i == col_end;
 				return;

@@ -71,11 +71,11 @@ public class Xob_wiki_cfg_bldr_tst {
 //				line = String_.Replace(line, "/** ", "");
 //				int pos = String_.FindBwd(line, " (");
 //				if (pos == String_.Find_none) continue;	// en; en_rtl have no "language" line
-//				if (	String_.HasAtBgn(lang_code, "be_")
-//					|| 	String_.HasAtBgn(lang_code, "crh_")
-//					|| 	String_.HasAtBgn(lang_code, "kk_")
-//					|| 	String_.HasAtBgn(lang_code, "ku_")
-//					|| 	String_.HasAtBgn(lang_code, "sr_")
+//				if (	String_.Has_at_bgn(lang_code, "be_")
+//					|| 	String_.Has_at_bgn(lang_code, "crh_")
+//					|| 	String_.Has_at_bgn(lang_code, "kk_")
+//					|| 	String_.Has_at_bgn(lang_code, "ku_")
+//					|| 	String_.Has_at_bgn(lang_code, "sr_")
 //					|| 	String_.In(lang_code, "de_formal", "nb", "nl_informal", "nn", "no")
 //					) {
 //					int new_pos = String_.FindBwd(line, " (", pos - 1);

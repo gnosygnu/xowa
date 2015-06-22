@@ -228,7 +228,7 @@ class Xog_html_itm__href_extractor {
 			default: throw Err_.unhandled(text_tid);
 		}
 		int href_bgn = 2;	// 2 for length of "2|"
-		if (Bry_.HasAtBgn(text_bry, File_protocol_bry, 2, text_len)) {
+		if (Bry_.Has_at_bgn(text_bry, File_protocol_bry, 2, text_len)) {
 			href_bgn += File_protocol_len;	// skip "file://"
 		}
 		Byte_obj_val href_tid = (Byte_obj_val)href_trie.Match_bgn(text_bry, href_bgn, text_len);

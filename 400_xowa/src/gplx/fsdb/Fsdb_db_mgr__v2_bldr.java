@@ -20,7 +20,7 @@ import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.fsdb.meta.*; import gplx.
 import gplx.xowa.*; import gplx.xowa.wikis.data.*; import gplx.xowa.bldrs.infos.*;
 public class Fsdb_db_mgr__v2_bldr {
 	public Fsdb_db_mgr__v2 Get_or_make(Xow_wiki wiki, boolean delete_if_exists) { 	// NOTE: must check if file exists else imports with existing v2 dbs will fail; DATE:2015-05-23
-		Xowd_db_layout layout = wiki.Data_mgr__core_mgr().Props().Layout_file();
+		Xowd_db_layout layout = wiki.Data__core_mgr().Props().Layout_file();
 		String domain_str = wiki.Domain_str();
 		Io_url wiki_dir = wiki.Fsys_mgr().Root_dir();
 		String main_core_name = Main_core_name(layout, domain_str);
@@ -99,7 +99,7 @@ public class Fsdb_db_mgr__v2_bldr {
 	}
 	public static void Make_cfg_data(Xow_wiki wiki, String file_core_name, Fsdb_db_file file, byte file_tid, int part_id) {
 		Db_cfg_tbl cfg_tbl = file.Tbl__cfg();
-		Xowd_db_file core_db = wiki.Data_mgr__core_mgr().Db__core();
+		Xowd_db_file core_db = wiki.Data__core_mgr().Db__core();
 		core_db.Info_session().Save(cfg_tbl);
 		Xob_info_file info_file = new Xob_info_file(-1, Xowd_db_file_.To_key(file_tid), Xob_info_file.Ns_ids_empty, part_id, Guid_adp_.new_(), 2, file_core_name, file.Url().NameAndExt());
 		info_file.Save(cfg_tbl);

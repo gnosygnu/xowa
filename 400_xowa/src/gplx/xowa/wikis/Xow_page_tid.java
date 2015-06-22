@@ -24,7 +24,7 @@ public class Xow_page_tid {
 			case Xow_ns_.Id_user:
 				return Identify_by_ttl(ttl);
 			case gplx.xowa.xtns.scribunto.Scrib_xtn_mgr.Ns_id_module:
-				return	(Bry_.HasAtEnd(ttl, Ext_doc))
+				return	(Bry_.Has_at_end(ttl, Ext_doc))
 					? Tid_wikitext : Tid_lua;
 			default:
 				return Wdata_wiki_mgr.Wiki_page_is_json(wiki_tid, ns_id)
@@ -32,8 +32,8 @@ public class Xow_page_tid {
 		}
 	}
 	public static byte Identify_by_ttl(byte[] ttl) {
-		if		(Bry_.HasAtEnd(ttl, Ext_css))	return Tid_css;
-		else if (Bry_.HasAtEnd(ttl, Ext_js))	return Tid_js;
+		if		(Bry_.Has_at_end(ttl, Ext_css))	return Tid_css;
+		else if (Bry_.Has_at_end(ttl, Ext_js))	return Tid_js;
 		else									return Tid_wikitext;
 	}
 	private static final byte[] Ext_js = Bry_.new_a7(".js"), Ext_css = Bry_.new_a7(".css"), Ext_doc= Bry_.new_a7("/doc");

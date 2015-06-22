@@ -32,8 +32,8 @@ public class Pfunc_urlfunc_tst {
 	@Test   public void Xwiki()	{
 		fxt.Wiki().Xwiki_mgr().Add_full("commons", "commons.wikimedia.org");
 		fxt.Reset().Test_parse_tmpl_str_test("{{localurl:commons:A}}"		, "{{test}}", "//commons.wikimedia.org/wiki/A");
-		fxt.Reset().Test_parse_tmpl_str_test("{{fullurl:commons:A}}"			, "{{test}}", "//commons.wikimedia.org/wiki/A");
-		fxt.Reset().Test_parse_tmpl_str_test("{{canonicalurl:commons:A}}"	, "{{test}}", "http://commons.wikimedia.org/wiki/A");
+		fxt.Reset().Test_parse_tmpl_str_test("{{fullurl:commons:A}}"		, "{{test}}", "//commons.wikimedia.org/wiki/A");
+		fxt.Reset().Test_parse_tmpl_str_test("{{canonicalurl:commons:A}}"	, "{{test}}", "https://commons.wikimedia.org/wiki/A");
 	}
 	@Test   public void Xwiki_qarg_fix()	{
 		fxt.Wiki().Xwiki_mgr().Add_full("commons", "commons.wikimedia.org");

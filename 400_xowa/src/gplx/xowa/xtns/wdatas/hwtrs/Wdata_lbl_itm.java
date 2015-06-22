@@ -39,7 +39,7 @@ public class Wdata_lbl_itm {
 	private static final byte[] Ttl_prefix_pid = Bry_.new_a7("Property:P"), Ttl_prefix_qid = Bry_.new_a7("Q");
 	private static final byte[] Extract_ttl_qid = Bry_.new_a7("http://www.wikidata.org/entity/");
 	public static byte[] Extract_ttl(byte[] href) {
-		if (Bry_.HasAtBgn(href, Extract_ttl_qid))	// qid
+		if (Bry_.Has_at_bgn(href, Extract_ttl_qid))	// qid
 			return Bry_.Mid(href, Extract_ttl_qid.length, href.length);
 		else										// possibly support pid in future, but so far, nothing referencing just "Property:P##"
 			return null;

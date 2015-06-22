@@ -74,7 +74,8 @@ public abstract class Db_engine_sql_base implements Db_engine {
 	public void Ddl_delete_tbl(String tbl)						{Exec_as_int(Db_sqlbldr__sqlite.I.Bld_drop_tbl(tbl));}
 	@gplx.Virtual public void Env_db_attach(String alias, Io_url db_url) {}
 	@gplx.Virtual public void	Env_db_detach(String alias) {}
-	@gplx.Virtual public boolean Schema_tbl_exists(String name) {return false;}
+	@gplx.Virtual public boolean Meta_tbl_exists(String tbl)					{return false;}
+	@gplx.Virtual public boolean	Meta_fld_exists(String tbl, String fld)		{return false;}
 	@gplx.Virtual public DataRdr New_rdr(ResultSet rdr, String sql) {return gplx.stores.Db_data_rdr_.new_(rdr, sql);}
 	@gplx.Virtual public Sql_qry_wtr SqlWtr() {return Sql_qry_wtr_.new_ansi();}
 	private Db_rdr New_rdr(Db_stmt stmt, Object rdr, String sql) {

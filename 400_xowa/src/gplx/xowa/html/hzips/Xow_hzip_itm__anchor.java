@@ -44,7 +44,7 @@ public class Xow_hzip_itm__anchor {
 	private int Save_img_full(Bry_bfr bfr, Xodump_stats_itm stats, byte[] src, int src_len, int bgn, int pos) {
 		bfr.Add(Xow_hzip_dict.Bry_img_full);
 		int xatrs_bgn = Bry_finder.Move_fwd(src, Find_img_xatrs, pos, src_len);				if (xatrs_bgn == Bry_finder.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("a.img_xatrs_missing", bgn, pos);
-		bry_rdr.Src_(src).Pos_(xatrs_bgn);
+		bry_rdr.Init(src, xatrs_bgn);
 		int a_cls		= bry_rdr.Read_int_to_pipe();
 		int a_rel		= bry_rdr.Read_int_to_pipe();
 		int img_rel		= bry_rdr.Read_int_to_pipe();

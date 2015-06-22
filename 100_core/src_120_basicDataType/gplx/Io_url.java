@@ -57,7 +57,7 @@ public class Io_url implements CompareAble, EqAble, ParseAble, GfoInvkAble {	//_
 	}
 	public String GenRelUrl_orEmpty(Io_url dir) {
 		String dirRaw = dir.Raw();
-		return String_.HasAtBgn(raw, dirRaw)
+		return String_.Has_at_bgn(raw, dirRaw)
 			? String_.DelBgn(raw, String_.Len(dirRaw))
 			: String_.Empty;
 	}

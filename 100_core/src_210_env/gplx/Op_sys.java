@@ -66,7 +66,7 @@ public class Op_sys {
 		else 											throw Err_mgr._.fmt_(GRP_KEY, "unknown_bitness", "unknown bitness; expecting 32 or 64; System.getProperty(\"bit.level\") yielded ~{0}", bitness_str);
 		
 		os_name = System.getProperty("os.name").toLowerCase();
-		if 		(String_.HasAtBgn(os_name, "win")) {
+		if 		(String_.Has_at_bgn(os_name, "win")) {
 			String os_version = System.getProperty("os.version").toLowerCase();//  "Windows 7".equals(osName) && "6.1".equals(osVersion);
 			byte sub_tid = Sub_tid_unknown;
 			if 		(String_.Eq(os_name, "windows xp") && String_.Eq(os_version, "5.1"))	sub_tid = Sub_tid_win_xp;
@@ -75,7 +75,7 @@ public class Op_sys {
 			return new_wnt_(bitness_byte, sub_tid);
 		}
 		else if	(String_.Eq(os_name, "linux")) 			return new_unx_flavor_(Tid_lnx, os_name, bitness_byte);
-		else if	(String_.HasAtBgn(os_name, "mac")) 		return new_unx_flavor_(Tid_osx, os_name, bitness_byte);	// EX:Mac OS X
+		else if	(String_.Has_at_bgn(os_name, "mac")) 		return new_unx_flavor_(Tid_osx, os_name, bitness_byte);	// EX:Mac OS X
 		else											throw Err_mgr._.fmt_(GRP_KEY, "unknown_os_name", "unknown os_name; expecting windows, linux, mac; System.getProperty(\"os.name\") yielded ~{0}", os_name);
 		} catch (Exception exc) {Drd.os_name = os_name; return Drd;}
 	}

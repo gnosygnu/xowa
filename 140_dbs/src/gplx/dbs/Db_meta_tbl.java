@@ -24,6 +24,17 @@ public class Db_meta_tbl {
 	}
 	public String Name() {return name;} private final String name;		
 	public Db_meta_fld[] Flds() {return flds;} private final Db_meta_fld[] flds;
+	public boolean Flds_has(String fld) {
+		if (flds_hash == null) {
+			flds_hash = Ordered_hash_.new_();
+			int len = flds.length;
+			for (int i = 0; i < len; ++i) {
+				Db_meta_fld fld_itm = flds[i];
+				flds_hash.Add(fld_itm.Name(), fld_itm);
+			}
+		}
+		return flds_hash.Has(fld);
+	}	private Ordered_hash flds_hash;
 	public Db_meta_idx[] Idxs() {return idxs;} private final Db_meta_idx[] idxs;
 	public String To_sql_create() {return Db_sqlbldr__sqlite.I.Bld_create_tbl(this);}
 	public static Db_meta_tbl new_(String name, Db_meta_fld_list flds, Db_meta_idx... idxs) {return new Db_meta_tbl(name, flds.To_fld_ary(), idxs);}

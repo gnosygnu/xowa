@@ -52,7 +52,7 @@ class Xows_arg_mgr {
 				}
 			}
 			else {
-				if (Bry_.HasAtBgn(key, Ns_bry))		// check for ns*; EX: &ns0=1&ns8=1; NOTE: lowercase only
+				if (Bry_.Has_at_bgn(key, Ns_bry))		// check for ns*; EX: &ns0=1&ns8=1; NOTE: lowercase only
 					ns_mgr.Add_by_parse(key, arg.Val_bry());
 			}
 		}

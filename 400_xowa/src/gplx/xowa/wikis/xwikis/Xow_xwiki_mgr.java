@@ -90,7 +90,7 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 				&& Bry_.Eq(alias, lang_itm.Key()))	// alias == lang.key; only assign langs to aliases that have lang key; EX: w|en.wikipedia.org; "w" alias should not be registered for "en"; DATE:2013-07-25
 				lang_id = lang_itm.Id();
 		}
-		byte[] url_fmt = Bry_.Add(Xoh_href_parser.Href_http_bry, domain_bry, Xoh_href_parser.Href_wiki_bry, Arg_0);
+		byte[] url_fmt = Bry_.Add(Xoh_href_parser.Href_https_bry, domain_bry, Xoh_href_parser.Href_wiki_bry, Arg_0);
 		return Xow_xwiki_itm.new_(alias, url_fmt, lang_id, domain.Domain_tid(), domain_bry);
 	}	static final byte[] Arg_0 = Bry_.new_a7("~{0}");
 	String Exec_itms_print(byte[] raw) {

@@ -76,7 +76,7 @@ public class Xol_num_fmtr_base implements GfoInvkAble {
 						wkr.Fmt(src, num_bgn, i, tmp);
 						num_bgn = dec_pos = -1;	// reset vars
 						if (b == Byte_ascii.Dot			// current char is "."; NOTE: all languages treat "." as decimal separator for parse; EX: for de, "1.23" is "1,23" DATE:2013-10-21
-							//|| Bry_.HasAtBgn(src, dec_dlm, i, src_len)
+							//|| Bry_.Has_at_bgn(src, dec_dlm, i, src_len)
 							) {	// current char is languages's decimal delimiter; note this can be "," or any other multi-byte separator
 							dec_pos = i;
 //								i += dec_dlm.length - 1;

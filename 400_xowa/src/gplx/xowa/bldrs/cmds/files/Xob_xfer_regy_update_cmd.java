@@ -38,8 +38,9 @@ public class Xob_xfer_regy_update_cmd extends Xob_itm_basic_base implements Xob_
 		Sqlite_engine_.Tbl_create_and_delete(make_db_provider, Xob_fsdb_regy_tbl.Tbl_name, Xob_fsdb_regy_tbl.Tbl_sql);
 		Sqlite_engine_.Db_attach(make_db_provider, "fsdb_db", fsdb_atr_url.Raw());
 		make_db_provider.Txn_bgn();
+		make_db_provider.Exec_sql(Xob_fsdb_regy_tbl.Update_regy_nil);
 		make_db_provider.Exec_sql(Xob_fsdb_regy_tbl.Insert_fsdb_fil);
-		String fsdb_thm_tbl = "fsdb_thm";
+		String fsdb_thm_tbl = fsdb_abc_mgr.Db_mgr().File__schema_is_1() ? "fsdb_xtn_thm" : "fsdb_thm";
 		String insert_sql_fsdb_thm = wiki.File_mgr().Fsdb_mgr().Mnt_mgr().Mnts__get_main().Cfg_mgr().Schema_thm_page()	// Cfg_get(Fsm_cfg_mgr.Grp_core).Get_yn_or_n(Fsm_cfg_mgr.Key_schema_thm_page)
 			? String_.Format(Xob_fsdb_regy_tbl.Insert_fsdb_thm, fsdb_thm_tbl)
 			: Xob_fsdb_regy_tbl.Insert_fsdb_thm_v0
@@ -133,6 +134,7 @@ class Xob_fsdb_regy_tbl {
 	,	"        JOIN fsdb_db.fsdb_dir d ON f.fil_owner_id = d.dir_id"
 	,	";"
 	)
+	,	Update_regy_nil = "UPDATE xfer_regy SET xfer_status = 0;"
 	,	Update_regy_fil = String_.Concat_lines_nl
 	(	"REPLACE INTO xfer_regy "
 	,	"( lnki_id, lnki_tier_id, lnki_page_id, orig_page_id, orig_repo, lnki_ttl, orig_redirect_src, lnki_ext, orig_media_type"

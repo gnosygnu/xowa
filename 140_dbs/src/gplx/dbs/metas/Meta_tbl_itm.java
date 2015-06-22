@@ -15,9 +15,10 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.dbs.schemas; import gplx.*; import gplx.dbs.*;
-public class Schema_tbl_itm {
-	public Schema_tbl_itm(String name, String sql) {this.name = name; this.sql = sql;}
+package gplx.dbs.metas; import gplx.*; import gplx.dbs.*;
+public class Meta_tbl_itm {
+	public Meta_tbl_itm(String name, String sql) {this.name = name; this.sql = sql;}
+	public Meta_fld_mgr Flds() {return flds;} private final Meta_fld_mgr flds = new Meta_fld_mgr();
 	public String Name() {return name;} private final String name;
 	public String Sql() {return sql;} private final String sql;
 }

@@ -44,7 +44,7 @@ public class Db_conn {
 	public void				Ddl_create_idx(Gfo_usr_dlg usr_dlg, Db_meta_idx... idxs)		{engine.Ddl_create_idx(usr_dlg, idxs);}
 	public void				Ddl_append_fld(String tbl, Db_meta_fld fld)							{engine.Ddl_append_fld(tbl, fld);}
 	public void				Ddl_delete_tbl(String tbl)											{engine.Ddl_delete_tbl(tbl);}
-	public boolean				Schema_tbl_exists(String tbl)										{return engine.Schema_tbl_exists(tbl);}
+	public boolean				Meta_tbl_exists(String tbl)										{return engine.Meta_tbl_exists(tbl);}
 	public void				Rls_reg(RlsAble rls) {rls_list.Add(rls);}
 	public void				Rls_conn() {
 		int len = rls_list.Count();

@@ -119,8 +119,8 @@ public class Xob_cleanup_cmd extends Xob_itm_basic_base implements Xob_cmd {
 			if (	!String_.Eq(url.Ext(), ".xowa")
 				&&	!String_.Eq(url.Ext(), ".sqlite3"))
 				continue;
-			if (	String_.HasAtBgn(url.NameAndExt(), file_prefix)
-				||	String_.HasAtBgn(url.NameAndExt(), html_prefix)
+			if (	String_.Has_at_bgn(url.NameAndExt(), file_prefix)
+				||	String_.Has_at_bgn(url.NameAndExt(), html_prefix)
 				) continue;	// skip
 			Io_mgr.I.DeleteFil(url);
 			deleted++;

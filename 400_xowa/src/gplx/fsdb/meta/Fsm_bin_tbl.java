@@ -19,19 +19,27 @@ package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*;
 public class Fsm_bin_tbl {
 	private final String tbl_name; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
-	private final String fld_uid, fld_url;
+	private final String fld_uid, fld_url, fld_bin_len, fld_bin_max;
 	private final Db_conn conn; private int mnt_id;
 	public Fsm_bin_tbl(Db_conn conn, boolean schema_is_1, int mnt_id) {
 		this.conn = conn; this.mnt_id = mnt_id;
 		String fld_prefix = "";
-		if (schema_is_1)			{tbl_name = "fsdb_db_bin";}
-		else						{tbl_name = "fsdb_dbb"; fld_prefix = "dbb_";}
+		if (schema_is_1)	{tbl_name = "fsdb_db_bin";}
+		else				{tbl_name = "fsdb_dbb"; fld_prefix = "dbb_";}
 		fld_uid				= flds.Add_int_pkey	(fld_prefix + "uid");
 		fld_url				= flds.Add_str		(fld_prefix + "url", 255);
+		if (schema_is_1) {
+			fld_bin_len = flds.Add_long("bin_len");
+			fld_bin_max = flds.Add_long("bin_max");
+		}
+		else {
+			fld_bin_len = Db_meta_fld.Key_null;
+			fld_bin_max = Db_meta_fld.Key_null;
+		}
 	}
 	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds));}
 	public void Insert(int id, String url_rel) {
-		conn.Stmt_insert(tbl_name, flds).Crt_int(fld_uid, id).Val_str(fld_url, url_rel).Exec_insert();
+		conn.Stmt_insert(tbl_name, flds).Crt_int(fld_uid, id).Val_str(fld_url, url_rel).Val_long(fld_bin_len, 0).Val_long(fld_bin_max, 0).Exec_insert();
 	}
 	public Fsm_bin_fil[] Select_all(Fsdb_db_mgr db_conn_mgr) {
 		List_adp rv = List_adp_.new_();
@@ -41,7 +49,7 @@ public class Fsm_bin_tbl {
 				int bin_id = rdr.Read_int(fld_uid);
 				String bin_url = rdr.Read_str(fld_url);
 				Fsdb_db_file bin_db = db_conn_mgr.File__bin_file__at(mnt_id, bin_id, bin_url);
-				Fsm_bin_fil itm = new Fsm_bin_fil(bin_id, bin_url, Fsm_bin_fil.Bin_len_null, bin_db.Conn(), db_conn_mgr.File__schema_is_1());
+				Fsm_bin_fil itm = new Fsm_bin_fil(db_conn_mgr.File__schema_is_1(), bin_id, bin_db.Url(), bin_url, bin_db.Conn(), Fsm_bin_fil.Bin_len_null);
 				rv.Add(itm);
 			}
 		}	finally {rdr.Rls();}

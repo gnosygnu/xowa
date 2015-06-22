@@ -23,6 +23,7 @@ public class Xow_cfg_consts {
 	, Grp__bldr_session		= "xowa.bldr.session"
 	, Grp__bldr_db			= "xowa.bldr.db"
 	, Grp__bldr_fsdb		= "xowa.bldr.fsdb"
-	, Grp_wiki_init			= "wiki.init"
+	, Grp__wiki_init		= "wiki.init"
+	, Key__init__main_page  = "props.main_page"
 	;
 }

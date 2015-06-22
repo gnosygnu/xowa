@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
-import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.schemas.*; import gplx.dbs.schemas.updates.*;
+import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.metas.*; import gplx.dbs.metas.updates.*;
 public class Xoud_history_tbl implements RlsAble {
 	private final String tbl_name = "user_history"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private final String fld_wiki, fld_page, fld_qarg, fld_time, fld_count;

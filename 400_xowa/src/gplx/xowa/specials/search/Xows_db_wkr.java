@@ -22,7 +22,7 @@ import gplx.gfui.*;
 class Xows_db_wkr {
 	public void Search(Xows_ui_cmd cmd, Xows_ui_qry qry, Xows_ui_rslt rslt, Xows_db_cache cache, Xow_wiki wiki) {
 		// assert matcher
-		Xowd_db_file search_db = wiki.Data_mgr__core_mgr().Db__search();
+		Xowd_db_file search_db = wiki.Data__core_mgr().Db__search();
 		Xoa_app_.Usr_dlg().Prog_many("", "", "search started (please wait)");
 		Xows_db_matcher matcher = cache.Matcher();
 		if (matcher == null) {
@@ -35,7 +35,7 @@ class Xows_db_wkr {
 		}
 		// init
 		int rslts_wanted = qry.Itms_end() - qry.Itms_bgn();
-		Xowd_db_file core_db = wiki.Data_mgr__core_mgr().Db__core();
+		Xowd_db_file core_db = wiki.Data__core_mgr().Db__core();
 		Xowd_page_tbl page_tbl = core_db.Tbl__page();
 		Xowd_search_link_tbl link_tbl = search_db.Tbl__search_link();
 		Xows_db_word[] word_ary = cache.Words(); int word_ary_len = word_ary.length;

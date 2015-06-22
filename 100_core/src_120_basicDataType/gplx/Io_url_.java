@@ -55,7 +55,7 @@ public class Io_url_ {
 	private static String parse_http_file(String v, boolean wnt) {
 		byte[] v_bry = Bry_.new_u8(v);
 		int v_len = v_bry.length;
-		if (Bry_.HasAtBgn(v_bry, Io_url.Http_file_bry, 0, v_len)) {
+		if (Bry_.Has_at_bgn(v_bry, Io_url.Http_file_bry, 0, v_len)) {
 			byte[] rv = new byte[v_len - Io_url.Http_file_len];
 			for (int i = 0; i < rv.length; i++) {
 				byte b = v_bry[i + Io_url.Http_file_len];
@@ -80,13 +80,13 @@ public class Io_url_ {
 		return Io_url_.new_any_(val);
 	}
 	static String EndsWith_or_add(String raw, String endsWith) {
-		if (String_.HasAtEnd(raw, endsWith)) return raw;
+		if (String_.Has_at_end(raw, endsWith)) return raw;
 		return raw += endsWith;
 	}
 	public static Io_url Rel_dir(String s) {return IsAbs(s) ? Io_url_.new_dir_(s) : Env_.AppUrl().OwnerDir().GenSubDir(s);}
 	public static Io_url Rel_fil(String s) {return IsAbs(s) ? Io_url_.new_fil_(s) : Env_.AppUrl().OwnerDir().GenSubFil(s);}
 	static boolean IsAbs(String s) {
-		return String_.HasAtBgn(s, Op_sys.Lnx.Fsys_dir_spr_str())
+		return String_.Has_at_bgn(s, Op_sys.Lnx.Fsys_dir_spr_str())
 			|| (String_.Len(s) > 2
 				&& (	(String_.CharAt(s, 1) == ':'  && String_.CharAt(s, 2) == '\\')
 					||	(String_.CharAt(s, 1) == '\\' && String_.CharAt(s, 2) == '\\')
