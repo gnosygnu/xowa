@@ -98,7 +98,7 @@ public class Bry_finder {
 		for (int i = cur; i > -1; i--) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.NewLine: case Byte_ascii.CarriageReturn:
+				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr:
 					rv = i;
 					break;
 				default:
@@ -112,7 +112,7 @@ public class Bry_finder {
 		for (int i = cur; i > -1; --i) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.NewLine: case Byte_ascii.CarriageReturn:
+				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr:
 					return i;
 			}
 		}
@@ -125,7 +125,7 @@ public class Bry_finder {
 		for (int i = cur; i < end; i++) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.NewLine: case Byte_ascii.CarriageReturn:
+				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr:
 					rv = i;
 					break;
 				default:
@@ -140,7 +140,7 @@ public class Bry_finder {
 		for (int i = cur; i >= end; i--) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.NewLine: case Byte_ascii.CarriageReturn:
+				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr:
 					break;
 				default:
 					return i;
@@ -153,7 +153,7 @@ public class Bry_finder {
 		for (int i = cur; i >= end; i--) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.NewLine: case Byte_ascii.CarriageReturn:
+				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr:
 					break;
 				default:
 					return i;
@@ -199,7 +199,7 @@ public class Bry_finder {
 		while (true) {
 			if (cur == end) return Bry_finder.Not_found;
 			switch (src[cur])  {
-				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.NewLine: case Byte_ascii.CarriageReturn:
+				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr:
 					return cur;
 				default: 
 					++cur;
@@ -240,7 +240,7 @@ public class Bry_finder {
 			if (cur == end) return cur;
 			try {
 				switch (src[cur]) {
-					case Byte_ascii.NewLine: case Byte_ascii.CarriageReturn:
+					case Byte_ascii.Nl: case Byte_ascii.Cr:
 					case Byte_ascii.Space: case Byte_ascii.Tab:		++cur; break;
 					default:										return cur; 
 				}
@@ -282,9 +282,9 @@ public class Bry_finder {
 			if (cur == end) return cur;
 			switch (src[cur]) {
 				case Byte_ascii.Space:
-				case Byte_ascii.NewLine:
+				case Byte_ascii.Nl:
 				case Byte_ascii.Tab:
-				case Byte_ascii.CarriageReturn:
+				case Byte_ascii.Cr:
 					++cur;
 					break;
 				default:

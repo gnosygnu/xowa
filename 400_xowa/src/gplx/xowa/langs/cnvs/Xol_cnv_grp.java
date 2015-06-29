@@ -38,7 +38,7 @@ public class Xol_cnv_grp implements GfoInvkAble {
 		Xol_csv_parser csv_parser = Xol_csv_parser._;
 		while (true) {
 			boolean last = pos == len;
-			byte b = last ? Byte_ascii.NewLine : raw[pos];
+			byte b = last ? Byte_ascii.Nl : raw[pos];
 			switch (b) {
 				case Byte_ascii.Pipe:
 					switch (fld_idx) {
@@ -48,7 +48,7 @@ public class Xol_cnv_grp implements GfoInvkAble {
 					fld_bgn = pos + 1;
 					++fld_idx;
 					break;
-				case Byte_ascii.NewLine:
+				case Byte_ascii.Nl:
 					if (fld_bgn < pos) {	// guard against trailing new lines
 						trg = csv_parser.Load(raw, fld_bgn, pos);
 						hash.Add_if_dupe_use_nth(src, new Xol_cnv_itm(src, trg));

@@ -90,7 +90,7 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 					}
 					break;
 				case Byte_ascii.Space:		lnke_end_tid = End_tid_space; break;
-				case Byte_ascii.NewLine:	lnke_end_tid = End_tid_nl; break;
+				case Byte_ascii.Nl:	lnke_end_tid = End_tid_nl; break;
 				case Byte_ascii.Gt: case Byte_ascii.Lt: 
 					lnke_end_tid = End_tid_invalid;
 					break;

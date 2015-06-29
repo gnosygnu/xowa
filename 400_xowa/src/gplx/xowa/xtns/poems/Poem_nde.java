@@ -23,8 +23,8 @@ public class Poem_nde implements Xox_xnde {
 		int itm_bgn = xnde.Tag_open_end(), itm_end = xnde.Tag_close_bgn();
 		if (itm_bgn == src.length)	return;  // NOTE: handle inline where there is no content to parse; EX: <poem/>
 		if (itm_bgn >= itm_end)		return;  // NOTE: handle inline where there is no content to parse; EX: a<poem/>b
-		if (src[itm_bgn] 		== Byte_ascii.NewLine)	++itm_bgn;	// ignore 1st \n; 
-		if (src[itm_end - 1] 	== Byte_ascii.NewLine				// ignore last \n; 
+		if (src[itm_bgn] 		== Byte_ascii.Nl)	++itm_bgn;	// ignore 1st \n; 
+		if (src[itm_end - 1] 	== Byte_ascii.Nl				// ignore last \n; 
 			&& itm_end != itm_bgn)						--itm_end;	// ...if not same as 1st \n; EX: <poem>\n</poem>
 		Poem_xtn_mgr xtn_mgr = (Poem_xtn_mgr)wiki.Xtn_mgr().Get_or_fail(Poem_xtn_mgr.XTN_KEY);
 		byte[] poem_bry = Parse_lines(wiki.Utl__bfr_mkr(), src, itm_bgn, itm_end);
@@ -67,7 +67,7 @@ public class Poem_nde implements Xox_xnde {
 					break;
 				}
 			}
-			int line_end = Bry_finder.Find_fwd(src, Byte_ascii.NewLine, line_bgn, src_end);						// find end "\n"
+			int line_end = Bry_finder.Find_fwd(src, Byte_ascii.Nl, line_bgn, src_end);						// find end "\n"
 			if (line_end == Bry_finder.Not_found) line_end = src_end;											// no "\n"; use eos;
 			bfr.Add_mid(src, line_bgn, line_end);																// add everything from line_bgn to line_end
 			if (indent_enabled) bfr.Add(Html_tag_.Span_rhs);													// if "\n:", add </span>

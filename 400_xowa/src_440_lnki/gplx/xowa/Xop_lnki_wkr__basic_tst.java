@@ -344,7 +344,7 @@ public class Xop_lnki_wkr__basic_tst {
 		Xoae_page previous_page = Xoae_page.test_(wiki, ttl);
 		previous_page.Redirected_ttls().Add(Bry_.new_a7("Src"));		// simulate redirect from "Src"
 		fxt.App().Usere().History_mgr().Add(previous_page);					// simulate "Src" already being clicked once; this is the key call
-		fxt.Wtr_cfg().Lnki_visited_(true);
+		fxt.Wtr_cfg().Lnki_visited_y_();
 		fxt.Test_parse_page_all_str("[[Src]]"		, "<a href=\"/wiki/Src\" class=\"xowa-visited\">Src</a>");	// show [[Src]] as visited since it exists in history
 		fxt.Test_parse_page_all_str("[[Other]]"		, "<a href=\"/wiki/Other\">Other</a>");						// show other pages as not visited
 	}

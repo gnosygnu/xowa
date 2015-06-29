@@ -265,7 +265,6 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble {
 	private void Html__hdump_enabled_(boolean v) {
 		this.html_mgr__hdump_enabled = v;
 		if (html_mgr__hdump_enabled) {
-			// if (db_mgr.Tid() == Xodb_mgr_txt.Tid_txt) this.Db_mgr_create_as_sql();
 			Xowd_html_tbl.Assert_col__page_html_db_id(Db_mgr_as_sql().Core_data_mgr());	// NOTE: must go above html_mgr.Init_by_wiki b/c Page_load will be done via messages
 			html_mgr__hdump_rdr.Init_by_db(this.Data__core_mgr());
 			html_mgr__hdump_wtr.Init_by_db(this.Data__core_mgr());

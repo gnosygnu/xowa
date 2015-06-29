@@ -117,14 +117,14 @@ public class Xobc_utl_make_lang_kwds implements GfoInvkAble, Xol_lang_transform 
 		List_adp rv = List_adp_.new_(); int fld_idx = 0;
 		while (true) {
 			boolean last = pos == src_len;	// NOTE: logic occurs b/c of \n}~-> dlm which gobbles up last \n
-			byte b = last ? Byte_ascii.NewLine : src[pos];
+			byte b = last ? Byte_ascii.Nl : src[pos];
 			switch (b) {
 				case Byte_ascii.Pipe:
 					cur_key = csv_parser.Load(src, fld_bgn, pos);
 					fld_bgn = pos + 1;
 					++fld_idx;
 					break;
-				case Byte_ascii.NewLine:
+				case Byte_ascii.Nl:
 					if (pos - fld_bgn > 0 || fld_idx == 1) {
 						byte[] cur_val = csv_parser.Load(src, fld_bgn, pos);
 						Xobcl_kwd_row row = new Xobcl_kwd_row(cur_key, Bry_.Split(cur_val, Byte_ascii.Tilde));

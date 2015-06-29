@@ -42,7 +42,7 @@ public class Bry_rdr {
 	public int Read_int_to_semic()	{return Read_int_to(Byte_ascii.Semic);}
 	public int Read_int_to_comma()	{return Read_int_to(Byte_ascii.Comma);}
 	public int Read_int_to_pipe()	{return Read_int_to(Byte_ascii.Pipe);}
-	public int Read_int_to_nl()		{return Read_int_to(Byte_ascii.NewLine);}
+	public int Read_int_to_nl()		{return Read_int_to(Byte_ascii.Nl);}
 	public int Read_int_to_quote()	{return Read_int_to(Byte_ascii.Quote);}
 	public int Read_int_to_non_num(){return Read_int_to(Byte_ascii.Nil);}
 	public int Read_int_to(byte to_char) {
@@ -74,7 +74,7 @@ public class Bry_rdr {
 		}
 		return bgn == pos ? or_int : rv * negative;
 	}
-	public byte[] Read_bry_to_nl()		{return Read_bry_to(Byte_ascii.NewLine);}
+	public byte[] Read_bry_to_nl()		{return Read_bry_to(Byte_ascii.Nl);}
 	public byte[] Read_bry_to_semic()	{return Read_bry_to(Byte_ascii.Semic);}
 	public byte[] Read_bry_to_pipe()	{return Read_bry_to(Byte_ascii.Pipe);}
 	public byte[] Read_bry_to_quote()	{return Read_bry_to(Byte_ascii.Quote);}
@@ -104,7 +104,7 @@ public class Bry_rdr {
 	@gplx.Virtual public Bry_rdr Skip_ws() {
 		while (pos < src_len) {
 			switch (src[pos]) {
-				case Byte_ascii.Tab: case Byte_ascii.NewLine: case Byte_ascii.CarriageReturn: case Byte_ascii.Space:
+				case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Space:
 					++pos;
 					break;
 				default:

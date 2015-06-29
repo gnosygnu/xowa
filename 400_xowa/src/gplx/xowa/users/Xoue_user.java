@@ -120,7 +120,7 @@ public class Xoue_user implements Xou_user, GfoEvMgrOwner, GfoInvkAble {
 		}
 	}
 	private void Available_from_bulk(byte[] raw) {
-		byte[][] wikis = Bry_.Split(raw, Byte_ascii.NewLine);
+		byte[][] wikis = Bry_.Split(raw, Byte_ascii.Nl);
 		Xowe_wiki usr_wiki = Wiki();
 		int wikis_len = wikis.length;
 		for (int i = 0; i < wikis_len; i++)

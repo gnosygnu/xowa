@@ -61,7 +61,7 @@ public class Cfg_nde_root implements GfoInvkAble {
 		List_adp cmds = List_adp_.new_();
 		while (true) {
 			boolean last = src_pos == src_len;
-			byte b = last ? Byte_ascii.NewLine : src[src_pos];
+			byte b = last ? Byte_ascii.Nl : src[src_pos];
 			switch (b) {
 				case Byte_ascii.Pipe:
 					switch (fld_idx) {
@@ -84,7 +84,7 @@ public class Cfg_nde_root implements GfoInvkAble {
 					++fld_idx;
 					fld_bgn = src_pos + 1;
 					break;
-				case Byte_ascii.NewLine:
+				case Byte_ascii.Nl:
 					if (!(fld_idx == 0 && fld_bgn == src_pos)) {
 						Cfg_nde_cmd cmd = null;
 						switch (cur_cmd) {

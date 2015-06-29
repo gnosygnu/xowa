@@ -71,7 +71,7 @@ public class TimeSpanAdp_ {
 					if	(i == 0 && unit_val > 0)		// only if first char && unit_val > 0 
 						sign = -1;
 					break;
-				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.NewLine: case Byte_ascii.CarriageReturn:
+				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr:
 					if (fail_if_ws) return parse_null;
 					break;
 				default:

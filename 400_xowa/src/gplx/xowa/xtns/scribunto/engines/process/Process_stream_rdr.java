@@ -43,8 +43,8 @@ public class Process_stream_rdr {
 				byte b = trg_bry[trg_idx];
 				if (escaped) {			// escaped mode; convert cur byte to appropriate byte
 					switch (b) {
-						case Byte_ascii.Ltr_n:		b = Byte_ascii.NewLine; break;
-						case Byte_ascii.Ltr_r: 		b = Byte_ascii.CarriageReturn; break; 
+						case Byte_ascii.Ltr_n:		b = Byte_ascii.Nl; break;
+						case Byte_ascii.Ltr_r: 		b = Byte_ascii.Cr; break; 
 						case Byte_ascii.Backslash: 	b = Byte_ascii.Backslash; break;
 						default: 					throw Err_.unhandled(b);
 					}

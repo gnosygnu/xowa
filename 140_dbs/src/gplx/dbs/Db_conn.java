@@ -44,7 +44,8 @@ public class Db_conn {
 	public void				Ddl_create_idx(Gfo_usr_dlg usr_dlg, Db_meta_idx... idxs)		{engine.Ddl_create_idx(usr_dlg, idxs);}
 	public void				Ddl_append_fld(String tbl, Db_meta_fld fld)							{engine.Ddl_append_fld(tbl, fld);}
 	public void				Ddl_delete_tbl(String tbl)											{engine.Ddl_delete_tbl(tbl);}
-	public boolean				Meta_tbl_exists(String tbl)										{return engine.Meta_tbl_exists(tbl);}
+	public boolean				Meta_tbl_exists(String tbl)											{return engine.Meta_tbl_exists(tbl);}
+	public boolean				Meta_fld_exists(String tbl, String fld)								{return engine.Meta_fld_exists(tbl, fld);}
 	public void				Rls_reg(RlsAble rls) {rls_list.Add(rls);}
 	public void				Rls_conn() {
 		int len = rls_list.Count();
@@ -56,7 +57,7 @@ public class Db_conn {
 		Db_conn_pool.I.Del(engine.Conn_info());
 	}
 	public int				Exec_sql(String sql)			{return this.Exec_qry(Db_qry_sql.dml_(sql));}
-	public Db_rdr			Exec_sql_as_rdr2(String sql)	{return this.Stmt_new(Db_qry_sql.dml_(sql)).Exec_select__rls_auto();}
+	public Db_rdr			Exec_sql_as_rdr_v2(String sql)	{return this.Stmt_new(Db_qry_sql.dml_(sql)).Exec_select__rls_auto();}
 	public int				Exec_sql_plog_ntx(String msg, String sql) {return Exec_sql_plog(Bool_.N, msg, sql);}
 	public int				Exec_sql_plog_txn(String msg, String sql) {return Exec_sql_plog(Bool_.Y, msg, sql);}
 	public int				Exec_sql_plog(boolean txn, String msg, String sql) {

@@ -126,7 +126,7 @@ public class Html_parser {
 	private void Skip_ws() {
 		while (pos < end) {
 			switch (src[pos]) {
-				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.NewLine: case Byte_ascii.CarriageReturn:
+				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr:
 					++pos;
 					break;
 				default:

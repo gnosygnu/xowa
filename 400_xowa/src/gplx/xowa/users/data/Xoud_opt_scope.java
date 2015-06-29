@@ -48,7 +48,7 @@ class Xoud_opt_scope_parser {
 	public Xoud_opt_scope Parse_itm(byte[] src, int bgn, int end) {
 		int lang_dot = Bry_finder.Find_fwd(src, Byte_ascii.Dot, bgn, end);					if (lang_dot == Bry_finder.Not_found) return Warn("scope.parse.missing_lang_dot: src=~{0}", src, bgn, end);
 		int lang_id = Int_.MinValue;
-		if (lang_dot == 1 && src[bgn] == Byte_ascii.Asterisk)
+		if (lang_dot == 1 && src[bgn] == Byte_ascii.Star)
 			lang_id = Xoud_opt_scope.Lang_id_wildcard;
 		else {
 			Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key_or_null(src, bgn, lang_dot);	if (lang_itm == null) return Warn("scope.parse.invalid_lang: src=~{0}", src, bgn, end);

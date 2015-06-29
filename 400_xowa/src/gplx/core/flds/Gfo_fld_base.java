@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.flds; import gplx.*; import gplx.core.*;
 public class Gfo_fld_base {
-	public byte Row_dlm() {return row_dlm;} public Gfo_fld_base Row_dlm_(byte v) {row_dlm = v; return this;} protected byte row_dlm = Byte_ascii.NewLine;
+	public byte Row_dlm() {return row_dlm;} public Gfo_fld_base Row_dlm_(byte v) {row_dlm = v; return this;} protected byte row_dlm = Byte_ascii.Nl;
 	public byte Fld_dlm() {return fld_dlm;} public Gfo_fld_base Fld_dlm_(byte v) {fld_dlm = v; return this;} protected byte fld_dlm = Byte_ascii.Pipe;
 	public byte Escape_dlm() {return escape_dlm;} public Gfo_fld_base Escape_dlm_(byte v) {escape_dlm = v; return this;} protected byte escape_dlm = Byte_ascii.Tilde;
 	public byte Quote_dlm() {return quote_dlm;} public Gfo_fld_base Quote_dlm_(byte v) {quote_dlm = v; return this;} protected byte quote_dlm = Byte_ascii.Nil;
@@ -32,12 +32,12 @@ public class Gfo_fld_base {
 		return this;
 	} 
 	Gfo_fld_base Ini_common() {
-		return	 Escape_reg(Byte_ascii.NewLine, Byte_ascii.Ltr_n).Escape_reg(Byte_ascii.Tab, Byte_ascii.Ltr_t).Escape_reg(Byte_ascii.CarriageReturn, Byte_ascii.Ltr_r)
+		return	 Escape_reg(Byte_ascii.Nl, Byte_ascii.Ltr_n).Escape_reg(Byte_ascii.Tab, Byte_ascii.Ltr_t).Escape_reg(Byte_ascii.Cr, Byte_ascii.Ltr_r)
 				.Escape_reg(Byte_ascii.Backfeed, Byte_ascii.Ltr_b);	// .Escape_reg(Byte_ascii.Nil, Byte_ascii.Num_0)
 	}
 	protected Gfo_fld_base Ctor_xdat_base() {
 		return 	Escape_clear().Ini_common()
-				.Fld_dlm_(Byte_ascii.Pipe).Row_dlm_(Byte_ascii.NewLine).Escape_dlm_(Byte_ascii.Tilde).Quote_dlm_(Byte_ascii.Nil)
+				.Fld_dlm_(Byte_ascii.Pipe).Row_dlm_(Byte_ascii.Nl).Escape_dlm_(Byte_ascii.Tilde).Quote_dlm_(Byte_ascii.Nil)
 				.Escape_reg(Byte_ascii.Pipe, Byte_ascii.Ltr_p).Escape_reg(Byte_ascii.Tilde);
 	}
 	protected Gfo_fld_base Ctor_sql_base() {

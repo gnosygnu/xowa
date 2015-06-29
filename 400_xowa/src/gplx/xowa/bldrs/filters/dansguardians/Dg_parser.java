@@ -39,7 +39,7 @@ class Dg_parser {
 		int file_id = ++next_id;
 		while (line_bgn < src_len) {
 			++line_idx;
-			int line_end = Bry_finder.Find_fwd(src, Byte_ascii.NewLine, line_bgn); if (line_end == Bry_finder.Not_found) line_end = src_len;
+			int line_end = Bry_finder.Find_fwd(src, Byte_ascii.Nl, line_bgn); if (line_end == Bry_finder.Not_found) line_end = src_len;
 			Dg_rule line = Parse_line(rel_path, file_id, line_idx, src, line_bgn, line_end);
 			if (line.Tid() != Dg_rule.Tid_invalid)
 				lines.Add(line);

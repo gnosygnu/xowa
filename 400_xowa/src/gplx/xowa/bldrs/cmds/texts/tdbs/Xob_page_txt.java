@@ -42,7 +42,7 @@ public class Xob_page_txt extends Xob_itm_dump_base implements Xobd_wkr, GfoInvk
 		Xob_xdat_file_wtr page_wtr = Page_wtr_get(ns);
 		if (page_wtr.FlushNeeded(Xotdb_page_itm_.Txt_page_len__fixed + ttl_len + text_len)) page_wtr.Flush(bldr.Usr_dlg());
 		Xotdb_page_itm_.Txt_page_save(page_wtr.Bfr(), id, page.Modified_on(), ttl_wo_ns, text, false);
-		page_wtr.Add_idx(Byte_ascii.NewLine);
+		page_wtr.Add_idx(Byte_ascii.Nl);
 		
 		// idx: EX: 00100|aB64|Ttl;
 		Xob_tmp_wtr ttl_wtr = ttl_wtr_mgr.Get_or_new(ns);

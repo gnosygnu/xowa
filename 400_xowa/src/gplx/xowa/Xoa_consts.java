@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 public class Xoa_consts {
 	public static final byte[] 
-	  Nl_bry						= new byte[] {Byte_ascii.NewLine}
+	  Nl_bry						= new byte[] {Byte_ascii.Nl}
 	, Slash_bry						= new byte[] {Byte_ascii.Slash}
 	, Pipe_bry						= new byte[] {Byte_ascii.Pipe}
 	, Invk_bgn						= new byte[] {Byte_ascii.Curly_bgn, Byte_ascii.Curly_bgn}						// "{{"

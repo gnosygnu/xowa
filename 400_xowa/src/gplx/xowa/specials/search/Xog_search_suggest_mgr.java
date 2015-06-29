@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
 import gplx.gfui.*; import gplx.core.threads.*; import gplx.xowa.gui.*; import gplx.xowa.gui.views.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.web.js.*;
+import gplx.core.js.*;
 public class Xog_search_suggest_mgr implements GfoInvkAble {
 	public Xog_search_suggest_mgr(Xoa_gui_mgr gui_mgr) {
 		this.app = gui_mgr.App();
@@ -79,21 +79,21 @@ public class Xog_search_suggest_mgr implements GfoInvkAble {
 			return;	// do not notify if search terms do not match
 		}
 		List_adp found = cur_cmd.Results();
-		wtr.Add_str(cbk_func);
-		wtr.Add_paren_bgn();
-			wtr.Add_str_quote(search_bry).Add_comma();				
-			wtr.Add_brack_bgn();
-				int len = found.Count();
-				for (int i = 0; i < len; i++) {
-					Xowd_page_itm p = (Xowd_page_itm)found.Get_at(i);
-					Xow_ns ns = wiki.Ns_mgr().Ids_get_or_null(p.Ns_id());
-					byte[] ttl = Xoa_ttl.Replace_unders(ns.Gen_ttl(p.Ttl_page_db()));
-					wtr.Add_str_arg(i, ttl);
-				}
-			wtr.Add_brack_end();
-		wtr.Add_paren_end_semic();
+		wtr.Func_init(cbk_func);
+		wtr.Prm_bry(search_bry);
+		wtr.Prm_spr();
+		wtr.Ary_init();
+		int len = found.Count();
+		for (int i = 0; i < len; i++) {
+			Xowd_page_itm p = (Xowd_page_itm)found.Get_at(i);
+			Xow_ns ns = wiki.Ns_mgr().Ids_get_or_null(p.Ns_id());
+			byte[] ttl = Xoa_ttl.Replace_unders(ns.Gen_ttl(p.Ttl_page_db()));
+			wtr.Ary_bry(ttl);
+		}
+		wtr.Ary_term();
+		wtr.Func_term();
 		if (log_enabled) app.Usr_dlg().Log_many("", "", "search end: word=~{0}", String_.new_u8(search_bry));
-		main_win.Active_html_box().Html_js_eval_script(wtr.Xto_str_and_clear());
+		main_win.Active_html_box().Html_js_eval_script(wtr.To_str_and_clear());
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_search_async))			Search_async();

@@ -99,7 +99,7 @@ class Scrib_lib_text_ {
 					bfr.Add_byte(Byte_ascii.Brack_bgn).Add_byte(Byte_ascii.Case_upper(b)).Add_byte(b).Add_byte(Byte_ascii.Brack_end);	// [Aa]
 					break;
 				case Byte_ascii.Paren_bgn: case Byte_ascii.Paren_end: case Byte_ascii.Pow: case Byte_ascii.Dollar: case Byte_ascii.Percent: case Byte_ascii.Dot:
-				case Byte_ascii.Brack_bgn: case Byte_ascii.Brack_end: case Byte_ascii.Asterisk: case Byte_ascii.Plus: case Byte_ascii.Question: case Byte_ascii.Dash:
+				case Byte_ascii.Brack_bgn: case Byte_ascii.Brack_end: case Byte_ascii.Star: case Byte_ascii.Plus: case Byte_ascii.Question: case Byte_ascii.Dash:
 					bfr.Add_byte(Byte_ascii.Percent).Add_byte(b);	// regex is '/([a-zA-Z])|([()^$%.\[\]*+?-])/'
 					break;
 				default:	// ignore

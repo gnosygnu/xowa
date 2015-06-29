@@ -67,7 +67,7 @@ public class Int_ary_ {
 						num_bgn = pos;
 					num_end = pos + 1;	// num_end is always after pos; EX: "9": num_end = 1; "98,7": num_end=2
 					break;
-				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.NewLine: case Byte_ascii.CarriageReturn:	// NOTE: parseNumList replaces ws with '', so "1 1" will become "11"
+				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr:	// NOTE: parseNumList replaces ws with '', so "1 1" will become "11"
 					break;
 				case Byte_ascii.Comma:
 					if (pos == raw_len -1) return or;	// eos; EX: "1,"

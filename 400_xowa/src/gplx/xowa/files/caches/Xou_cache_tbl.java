@@ -90,7 +90,7 @@ public class Xou_cache_tbl implements RlsAble {
 	}
 	public void Select_all(Bry_bfr fil_key_bldr, Ordered_hash hash) {
 		hash.Clear();
-		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empy).Exec_select__rls_auto();
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empty).Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {
 				Xou_cache_itm itm = new_itm(rdr);
@@ -112,7 +112,7 @@ public class Xou_cache_tbl implements RlsAble {
 			itm.Db_state_(Db_cmd_mode.Tid_ignore);
 		} catch (Exception e) {stmt_bldr.Rls(); throw Err_.err_(e, Err_.Message_gplx(e));}
 	}
-	@gplx.Internal protected Db_rdr Select_all_for_test() {return conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empy).Exec_select__rls_manual();}
+	@gplx.Internal protected Db_rdr Select_all_for_test() {return conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empty).Exec_select__rls_manual();}
 	private void Db_save_crt(Db_stmt stmt, Xou_cache_itm itm, boolean insert) {
 		if (insert) {
 			stmt.Val_bry_as_str		(fld_lnki_wiki_abrv		, itm.Lnki_wiki_abrv())

@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.dbs.*; import gplx.xowa.bldrs.*;
+import gplx.xowa.wmfs.*; import gplx.xowa.wmfs.data.*;
 public class Xob_site_ns_cmd implements Xob_cmd {
 	private final Xob_bldr bldr;
 	public Xob_site_ns_cmd(Xob_bldr bldr, Xow_wiki wiki) {this.bldr = bldr;}

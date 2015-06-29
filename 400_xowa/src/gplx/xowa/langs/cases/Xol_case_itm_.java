@@ -33,7 +33,7 @@ public class Xol_case_itm_ {
 		Xol_csv_parser csv_parser = Xol_csv_parser._;
 		while (true) {
 			boolean last = src_pos == src_len;
-			byte b = last ? Byte_ascii.NewLine : src[src_pos];
+			byte b = last ? Byte_ascii.Nl : src[src_pos];
 			switch (b) {
 				case Byte_ascii.Pipe:
 					switch (fld_idx) {
@@ -55,7 +55,7 @@ public class Xol_case_itm_ {
 					++fld_idx;
 					fld_bgn = src_pos + 1;
 					break;
-				case Byte_ascii.NewLine:
+				case Byte_ascii.Nl:
 					if (!(fld_idx == 0 && fld_bgn == src_pos)) {
 						byte[] cur_rhs = csv_parser.Load(src, fld_bgn, src_pos);
 						Xol_case_itm itm = Xol_case_itm_.new_(cur_cmd, cur_lhs, cur_rhs);

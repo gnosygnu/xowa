@@ -37,13 +37,13 @@ public class Xoae_wiki_mgr implements Xoa_wiki_mgr, GfoInvkAble {
 	public Xowe_wiki Get_at(int i) {return Int_.Between(i, 0, this.Count() - 1) ? (Xowe_wiki)list.Get_at(i) : null;}
 	public Xowe_wiki Get_by_key_or_null(byte[] key) {return Bry_.Len_eq_0(key) ? null : (Xowe_wiki)hash.Get_by(key);}
 	public Xowe_wiki Get_by_key_or_null(byte[] src, int bgn, int end) {return (Xowe_wiki)hash.Get_by_mid(src, bgn, end);}
-	public Xow_wiki Get_by_key_or_make_2(byte[] key) {
+	public Xow_wiki Get_by_key_or_make_init_y(byte[] key) {
 		Xowe_wiki rv = this.Get_by_key_or_null(key);
 		if (rv == null) rv = New_wiki(key);
 		rv.Init_assert();
 		return rv;
 	}
-	public Xow_wiki Get_by_key_or_make_3(byte[] key) {return Get_by_key_or_make(key);}
+	public Xow_wiki Get_by_key_or_make_init_n(byte[] key) {return Get_by_key_or_make(key);}
 	public Xowe_wiki Get_by_key_or_make(byte[] key) {
 		Xowe_wiki rv = this.Get_by_key_or_null(key);
 		if (rv == null) rv = New_wiki(key);

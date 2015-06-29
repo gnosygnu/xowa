@@ -106,7 +106,7 @@ public class Xoh_file_wtr__basic {
 		, byte[] lnki_ttl, Xof_ext orig_ext, byte[] lnki_href, byte[] img_view_src, byte[] img_orig_src, byte[] alt) {
 		if (lnki_halign == Xop_lnki_align_h.Center) bfr.Add(Div_center_bgn);
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();
-		byte[] anchor_title = html_wtr.Cfg().Lnki_title()
+		byte[] anchor_title = html_wtr.Cfg().Lnki__title()
 			? Arg_anchor_title(tmp_bfr, src, lnki, lnki_ttl, anchor_title_wkr)	// NOTE: Arg_anchor_title should only be called if there is no caption, else refs may not show; DATE:2014-03-05
 			: Bry_.Empty;	
 		Xoh_file_img_wkr lnki_file_wkr = lnki.Lnki_file_wkr(); if (lnki_file_wkr == null) lnki_file_wkr = html_fmtr;

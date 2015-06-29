@@ -55,7 +55,7 @@ public class Xow_popup_parser {
 			tmpl_keeplist = new Xop_keeplist_wiki(wiki);
 			tmpl_ctx.Tmpl_keeplist_(tmpl_keeplist);
 		}
-		if (!Bry_.Has_at_end(raw, Byte_ascii.NewLine_bry)) raw = Bry_.Add(raw, Byte_ascii.NewLine_bry);
+		if (!Bry_.Has_at_end(raw, Byte_ascii.Nl_bry)) raw = Bry_.Add(raw, Byte_ascii.Nl_bry);
 		tmpl_keeplist.Srl().Load_by_bry(raw);
 	}
 	private boolean Canceled(Xow_popup_itm popup_itm, Xog_tab_itm cur_tab) {return popup_itm.Canceled() || cur_tab != null && cur_tab.Tab_is_loading();}
@@ -182,7 +182,7 @@ public class Xow_popup_parser {
 				wrdx_bfr.Add_byte_nl();
 		}
 		if (last_hdr_tkn != null) {
-			wrdx_bfr.Trim_end(Byte_ascii.NewLine);
+			wrdx_bfr.Trim_end(Byte_ascii.Nl);
 			byte[] last_hdr_bry = ((Xop_hdr_tkn)last_hdr_tkn.Tkn()).Hdr_toc_text();
 			html_mkr.Fmtr_next_sect().Bld_bfr_one(wrdx_bfr, last_hdr_bry);
 		}

@@ -122,7 +122,7 @@ class Xofc_fil_tbl implements RlsAble {
 	}
 	public void Select_all(Bry_bfr fil_key_bldr, Ordered_hash hash) {
 		hash.Clear();
-		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empy).Exec_select__rls_auto();
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empty).Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {
 				Xofc_fil_itm fil_itm = new_itm(rdr);

@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.users.prefs; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import org.junit.*;
 import gplx.gfui.*; import gplx.xowa.apps.*;
+import gplx.xowa.gui.views.*;
 public class Prefs_mgr_tst {
 	private Prefs_mgr_fxt fxt = new Prefs_mgr_fxt();
 	@Before public void init() {fxt.Clear();}	
@@ -167,8 +168,12 @@ class Prefs_mgr_fxt {
 		Tfds.Eq(expd, actl);
 	}
 }
-class Gfui_html_mok extends Gfui_html {	private Hash_adp elem_atrs = Hash_adp_.new_();
+class Gfui_html_mok extends Xog_html_itm {	private Hash_adp elem_atrs = Hash_adp_.new_();
 	public void Html_elem_atr_add(String elem_id, String atr_key, Object atr_val) {elem_atrs.Add_if_dupe_use_nth(elem_id + "." + atr_key, atr_val);}
-	@Override public String Html_elem_atr_get_str(String elem_id, String atr_key) {return (String)elem_atrs.Get_by(elem_id + "." + atr_key);}
-	@Override public boolean Html_elem_atr_get_bool(String elem_id, String atr_key) {return Bool_.parse_((String)elem_atrs.Get_by(elem_id + "." + atr_key));}
+	@Override public String	Html_elem_atr_get_str(String id, String atr_key) {
+		return (String)elem_atrs.Get_by(id + "." + atr_key);
+	}
+	@Override public boolean		Html_elem_atr_get_bool(String id, String atr_key) {
+		return Bool_.parse_((String)elem_atrs.Get_by(id + "." + atr_key));
+	}
 }

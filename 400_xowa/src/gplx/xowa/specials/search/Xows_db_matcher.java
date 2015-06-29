@@ -21,7 +21,7 @@ public class Xows_db_matcher {
 	private final Gfo_pattern raw_pattern;
 	public Xows_db_matcher(int tid, byte[] raw, Xows_db_matcher lhs, Xows_db_matcher rhs) {
 		this.tid = tid; this.raw = raw; this.lhs = lhs; this.rhs = rhs;
-		this.raw_pattern = Bry_.Has(raw, Byte_ascii.Asterisk) ? new Gfo_pattern(raw) : null;
+		this.raw_pattern = Bry_.Has(raw, Byte_ascii.Star) ? new Gfo_pattern(raw) : null;
 	}
 	public int Tid() {return tid;} private final int tid;
 	public int Page_count() {return page_count;} public void Page_count_(int v) {page_count = v;} private int page_count;

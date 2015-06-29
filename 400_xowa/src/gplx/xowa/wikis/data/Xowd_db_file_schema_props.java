@@ -32,8 +32,7 @@ public class Xowd_db_file_schema_props {
 	}
 	public static final String Grp = Xow_cfg_consts.Grp__wiki_schema;
 	public static final String
-	  Key__col_page_html_text_id		= "col.page.page_html_text_id"
-	, Key__tbl_css_core					= "tbl.css_core"						// VERSION:2.4.1
+	  Key__tbl_css_core					= "tbl.css_core"						// VERSION:2.4.1
 	, Key__col_search_word_page_count	= "col.search_word.word_page_count"		// VERSION:2.4.2
 	;
 }

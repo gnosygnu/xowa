@@ -36,7 +36,7 @@ public class Xop_pre_lxr implements Xop_lxr {
 		if (txt_pos == src_len) return cur_pos;			// "\n\s" at EOS; treat as \n only; EX: "a\n   " -> ""; also bounds check
 		byte b = src[txt_pos];
 		if (bgn_pos == Xop_parser_.Doc_bgn_bos) {		// BOS; gobble up all \s\t; EX: "BOS\s\s\sa" -> "BOSa"
-			if		(b == Byte_ascii.NewLine) {			// next char is nl
+			if		(b == Byte_ascii.Nl) {			// next char is nl
 				cur_pos = txt_pos;						// position at nl; NOTE: do not position after nl, else may break hdr, tblw, list, etc; EX: "\s\n{|" needs to preserve "\n" for tblw
 				ctx.Subs_add(root, tkn_mkr.Ignore(bgn_pos, cur_pos, Xop_ignore_tkn.Ignore_tid_pre_at_bos));
 				return cur_pos;							// ignore pre if blank line at bos; EX: "BOS\s\s\n" -> "BOS\n"
@@ -74,7 +74,7 @@ public class Xop_pre_lxr implements Xop_lxr {
 		return ctx.Para().Process_pre(ctx, tkn_mkr, root, src, src_len, bgn_pos, cur_pos, txt_pos);
 	}
 	public static final Xop_pre_lxr _ = new Xop_pre_lxr(); Xop_pre_lxr() {}
-	private static final byte[] Hook_space = new byte[] {Byte_ascii.NewLine, Byte_ascii.Space};
+	private static final byte[] Hook_space = new byte[] {Byte_ascii.Nl, Byte_ascii.Space};
 }
 /*
 NOTE_4: Close_all_lists_unless_category; PAGE:en.w:SHA-2

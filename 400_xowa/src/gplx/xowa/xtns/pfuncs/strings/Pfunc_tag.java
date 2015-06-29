@@ -114,7 +114,7 @@ class Pfunc_tag_kv_bldr {
 					else if (itm_end == -1)
 						itm_end = i;
 					break;
-				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.NewLine:// NOTE: do not need to handle ws, b/c argBldr will trim it EX: {{#tag|a| b = c }}; " b " and " c " are automatically trimmed
+				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl:// NOTE: do not need to handle ws, b/c argBldr will trim it EX: {{#tag|a| b = c }}; " b " and " c " are automatically trimmed
 					break;
 				default:
 					if		(itm_bgn == -1)	itm_bgn = i;

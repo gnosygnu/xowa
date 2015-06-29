@@ -194,8 +194,8 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 						qarg_bgn = -1;	// always reset qarg; handles ttls which have question_mark which are premptively assumed to be qarg; PAGE:en.w:Portal:Organized_Labour/Did_You_Know?/1 DATE:2014-06-08
 					}
 					break;	// flag last leaf_bgn
-				case Byte_ascii.NewLine:	// NOTE: for now, treat nl just like space; not sure if it should accept "a\nb" or "\nab"; need to handle trailing \n for "Argentina\n\n" in {{Infobox settlement|pushpin_map=Argentina|pushpin_label_position=|pushpin_map_alt=|pushpin_map_caption=Location of Salta in Argentina}};
-				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.CarriageReturn:	// added \t, \r; DATE:2013-03-27
+				case Byte_ascii.Nl:	// NOTE: for now, treat nl just like space; not sure if it should accept "a\nb" or "\nab"; need to handle trailing \n for "Argentina\n\n" in {{Infobox settlement|pushpin_map=Argentina|pushpin_label_position=|pushpin_map_alt=|pushpin_map_caption=Location of Salta in Argentina}};
+				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Cr:	// added \t, \r; DATE:2013-03-27
 				case Byte_ascii.Underline:if (ltr_bgn != -1) add_ws = true; ++cur;//cur = ttlTrie.Match_pos(); 
 					continue;	// only mark add_ws if ltr_seen; this ignores ws at bgn; also, note "continue"
 				case Byte_ascii.Question:
@@ -411,7 +411,7 @@ class Xoa_ttl_trie {
 		rv.Add(Byte_ascii.Underline			, Byte_obj_val.new_(Id_underline));
 		rv.Add(Byte_ascii.Amp				, Byte_obj_val.new_(Id_amp));
 		rv.Add(Xop_comm_lxr.Bgn_ary			, Byte_obj_val.new_(Id_comment_bgn));
-		rv.Add(Byte_ascii.NewLine			, Byte_obj_val.new_(Id_newLine));
+		rv.Add(Byte_ascii.Nl			, Byte_obj_val.new_(Id_newLine));
 		rv.Add(Byte_ascii.Brack_bgn			, Byte_obj_val.new_(Id_invalid));
 		rv.Add(Byte_ascii.Curly_bgn			, Byte_obj_val.new_(Id_invalid));
 		return rv;

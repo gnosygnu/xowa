@@ -101,13 +101,13 @@ public class Xoh_lnki_wtr {
 			else
 				bfr.Add(Xoh_consts.A_bgn);							// '<a href="'
 			app.Href_parser().Build_to_bfr(bfr, app, wiki.Domain_bry(), lnki_ttl, hctx.Mode_is_popup());	// '/wiki/A'
-			if (cfg.Lnki_id()) {
+			if (cfg.Lnki__id()) {
 				int lnki_html_id = lnki.Html_uid();
 				if (lnki_html_id > Lnki_id_ignore)					// html_id=0 for skipped lnkis; EX:anchors and interwiki
 					bfr	.Add(Xoh_consts.A_mid_id)					// '" id=\"xowa_lnki_'
 						.Add_int_variable(lnki_html_id);			// '1234'
 			}
-			if (cfg.Lnki_title()) {
+			if (cfg.Lnki__title()) {
 				bfr	.Add(Xoh_consts.A_bgn_lnki_0);					// '" title=\"'
 				byte[] lnki_title_bry = lnki_ttl.Page_txt();		// 'Abcd'		NOTE: use Page_txt to (a) replace underscores with spaces; (b) get title casing; EX:[[roman_empire]] -> Roman empire
 				Html_utl.Escape_html_to_bfr(bfr, lnki_title_bry, 0, lnki_title_bry.length, Bool_.N, Bool_.N, Bool_.N, Bool_.Y, Bool_.N);	// escape title; DATE:2014-10-27
@@ -118,7 +118,7 @@ public class Xoh_lnki_wtr {
 				bfr.Add(gplx.xowa.html.hdumps.abrvs.Xohd_abrv_.Html_redlink_end);
 			}
 			else {
-				if (cfg.Lnki_visited()
+				if (cfg.Lnki__visited()
 					&& history_mgr.Has(wiki.Domain_bry(), ttl_bry))
 					bfr.Add(Bry_xowa_visited);						// '" class="xowa-visited'
 				bfr.Add(Xoh_consts.__end_quote);					// '">'	

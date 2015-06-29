@@ -21,16 +21,17 @@ public class Fsdb_db_mgr__v1 implements Fsdb_db_mgr {
 	private final Io_url file_dir;
 	private final Fsdb_db_file orig_file, mnt_file, abc_file__main, abc_file__user, atr_file__main, atr_file__user;
 	private final Xof_orig_tbl[] orig_tbl_ary;
+	private String bin_prefix__main = "fsdb.bin.", bin_prefix__user = "fsdb.bin.";
 	public Fsdb_db_mgr__v1(Io_url file_dir) {
 		this.file_dir = file_dir;
-		this.orig_file		= get_db(file_dir.GenSubFil(Orig_name));								// EX: /xowa/enwiki/wiki.orig#00.sqlite3
-		this.mnt_file		= get_db(file_dir.GenSubFil(Mnt_name));									// EX: /xowa/enwiki/wiki.mnt.sqlite3
-		this.abc_file__main	= get_db(file_dir.GenSubFil_nest(Fsm_mnt_tbl.Mnt_name_main, Abc_name));	// EX: /xowa/enwiki/fsdb.main/fsdb.abc.sqlite3
-		this.atr_file__main	= get_db(file_dir.GenSubFil_nest(Fsm_mnt_tbl.Mnt_name_main, Atr_name));	// EX: /xowa/enwiki/fsdb.main/fsdb.atr.00.sqlite3
-		if (Db_conn_bldr.I.Get(file_dir.GenSubFil_nest(Fsm_mnt_tbl.Mnt_name_user, Abc_name)) == null)	// user doesn't exist; create; DATE:2015-04-20
+		this.orig_file		= get_db(file_dir.GenSubFil(Orig_name));										// EX: /xowa/enwiki/wiki.orig#00.sqlite3
+		this.mnt_file		= get_db(file_dir.GenSubFil(Mnt_name));											// EX: /xowa/enwiki/wiki.mnt.sqlite3
+		this.abc_file__main	= get_db(file_dir.GenSubFil_nest(Fsm_mnt_tbl.Mnt_name_main, Abc_name));			// EX: /xowa/enwiki/fsdb.main/fsdb.abc.sqlite3
+		this.atr_file__main	= get_db(Get_atr_db_url(Bool_.Y, file_dir, Fsm_mnt_tbl.Mnt_name_main));			// EX: /xowa/enwiki/fsdb.main/fsdb.atr.00.sqlite3
+		if (Db_conn_bldr.I.Get(file_dir.GenSubFil_nest(Fsm_mnt_tbl.Mnt_name_user, Abc_name)) == null)		// user doesn't exist; create; DATE:2015-04-20
 			Fsdb_db_mgr__v1_bldr.I.Make_core_dir(file_dir, Fsm_mnt_mgr.Mnt_idx_user, Fsm_mnt_tbl.Mnt_name_user);
-		this.abc_file__user	= get_db(file_dir.GenSubFil_nest(Fsm_mnt_tbl.Mnt_name_user, Abc_name));	// EX: /xowa/enwiki/fsdb.user/fsdb.abc.sqlite3
-		this.atr_file__user	= get_db(file_dir.GenSubFil_nest(Fsm_mnt_tbl.Mnt_name_user, Atr_name));	// EX: /xowa/enwiki/fsdb.user/fsdb.atr.00.sqlite3
+		this.abc_file__user	= get_db(file_dir.GenSubFil_nest(Fsm_mnt_tbl.Mnt_name_user, Abc_name));			// EX: /xowa/enwiki/fsdb.user/fsdb.abc.sqlite3
+		this.atr_file__user	= get_db(Get_atr_db_url(Bool_.N, file_dir, Fsm_mnt_tbl.Mnt_name_user));			// EX: /xowa/enwiki/fsdb.user/fsdb.atr.00.sqlite3
 		this.orig_tbl_ary	= new Xof_orig_tbl[] {new Xof_orig_tbl(orig_file.Conn(), this.File__schema_is_1())};
 	}
 	public boolean				File__schema_is_1()					{return Bool_.Y;}
@@ -41,8 +42,9 @@ public class Fsdb_db_mgr__v1 implements Fsdb_db_mgr {
 	public Fsdb_db_file		File__abc_file__at(int mnt_id)		{return mnt_id == Fsm_mnt_mgr.Mnt_idx_main ? abc_file__main : abc_file__user;}
 	public Fsdb_db_file		File__atr_file__at(int mnt_id)		{return mnt_id == Fsm_mnt_mgr.Mnt_idx_main ? atr_file__main : atr_file__user;}
 	public Fsdb_db_file		File__bin_file__at(int mnt_id, int bin_id, String file_name) {
-		String bin_name = "fsdb.bin." + Int_.Xto_str_pad_bgn_zero(bin_id, 4) + ".sqlite3";
-		String mnt_name = mnt_id == Fsm_mnt_mgr.Mnt_idx_main ? Fsm_mnt_tbl.Mnt_name_main : Fsm_mnt_tbl.Mnt_name_user;
+		boolean mnt_is_main = mnt_id == Fsm_mnt_mgr.Mnt_idx_main;
+		String bin_name = (mnt_is_main ? bin_prefix__main : bin_prefix__user) + Int_.Xto_str_pad_bgn_zero(bin_id, 4) + ".sqlite3";
+		String mnt_name = mnt_is_main ? Fsm_mnt_tbl.Mnt_name_main : Fsm_mnt_tbl.Mnt_name_user;
 		Io_url url = file_dir.GenSubFil_nest(mnt_name, bin_name);	// EX: /xowa/enwiki/fsdb.main/fsdb.bin.0000.sqlite3
 		return new Fsdb_db_file(url, Db_conn_bldr.I.Get(url));
 	}
@@ -53,7 +55,21 @@ public class Fsdb_db_mgr__v1 implements Fsdb_db_mgr {
 		Fsd_bin_tbl bin_tbl = new Fsd_bin_tbl(conn, Bool_.Y); bin_tbl.Create_tbl();
 		return new Fsdb_db_file(url, conn);
 	}
-	public static final String Orig_name = "wiki.orig#00.sqlite3", Mnt_name = "wiki.mnt.sqlite3", Abc_name	= "fsdb.abc.sqlite3", Atr_name= "fsdb.atr.00.sqlite3";
+	private Io_url Get_atr_db_url(boolean main, Io_url file_dir, String mnt_name) {
+		Io_url rv = null;
+		rv = file_dir.GenSubFil_nest(mnt_name, Atr_name_v1a);
+		if (Io_mgr.I.ExistsFil(rv)) {
+			if (main)
+				bin_prefix__main = "fsdb.bin#";
+			else
+				bin_prefix__user = "fsdb.bin#";
+			return rv;
+		}
+		rv = file_dir.GenSubFil_nest(mnt_name, Atr_name_v1b); if (Io_mgr.I.ExistsFil(rv)) return rv;
+		throw Err_.new_("could not find atr file: dir={0} mnt={1}", file_dir.Raw(), mnt_name);
+	}
+	public static final String Orig_name = "wiki.orig#00.sqlite3", Mnt_name = "wiki.mnt.sqlite3", Abc_name	= "fsdb.abc.sqlite3"
+	, Atr_name_v1a = "fsdb.atr#00.sqlite3", Atr_name_v1b = "fsdb.atr.00.sqlite3";
 	private static Fsdb_db_file get_db(Io_url file) {
 		Db_conn conn = Db_conn_bldr.I.Get(file);
 		if (conn == null) conn = Db_conn_.Noop;
@@ -73,7 +89,7 @@ class Fsdb_db_mgr__v1_bldr {
 		Fsm_bin_tbl dbb_tbl = new Fsm_bin_tbl(db_abc.Conn(), schema_is_1, mnt_id); dbb_tbl.Create_tbl();
 		dbb_tbl.Insert(0, "fsdb.bin.0000.sqlite3");
 		// make atr_fil
-		Fsdb_db_file db_atr = new_db(mnt_dir.GenSubFil(Fsdb_db_mgr__v1.Atr_name));
+		Fsdb_db_file db_atr = new_db(mnt_dir.GenSubFil(Fsdb_db_mgr__v1.Atr_name_v1b));	// create atr database in v1b style; "fsdb.atr.00.sqlite3" not "fsdb.atr#00.sqlite3"
 		Fsd_dir_tbl dir_tbl = new Fsd_dir_tbl(db_atr.Conn(), schema_is_1); dir_tbl.Create_tbl();
 		Fsd_fil_tbl fil_tbl = new Fsd_fil_tbl(db_atr.Conn(), schema_is_1, mnt_id); fil_tbl.Create_tbl();
 		Fsd_thm_tbl thm_tbl = new Fsd_thm_tbl(db_atr.Conn(), schema_is_1, mnt_id, Bool_.Y); thm_tbl.Create_tbl();

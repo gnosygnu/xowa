@@ -26,7 +26,7 @@ public class Dsv_tbl_parser implements GfoInvkAble, RlsAble {
 	public int Row_idx() {return row_idx;} private int row_idx = 0;
 	public boolean Skip_blank_lines() {return skip_blank_lines;} public Dsv_tbl_parser Skip_blank_lines_(boolean v) {skip_blank_lines = v; return this;} private boolean skip_blank_lines = true;
 	public byte Fld_dlm() {return fld_dlm;} public Dsv_tbl_parser Fld_dlm_(byte v) {fld_dlm = v; return this;} private byte fld_dlm = Byte_ascii.Pipe;
-	public byte Row_dlm() {return row_dlm;} public Dsv_tbl_parser Row_dlm_(byte v) {row_dlm = v; return this;} private byte row_dlm = Byte_ascii.NewLine;
+	public byte Row_dlm() {return row_dlm;} public Dsv_tbl_parser Row_dlm_(byte v) {row_dlm = v; return this;} private byte row_dlm = Byte_ascii.Nl;
 	public void Init(Dsv_wkr_base mgr, Dsv_fld_parser... fld_parsers) {
 		this.mgr = mgr;
 		this.fld_parsers = fld_parsers;

@@ -49,7 +49,7 @@ public class Wmf_latest_parser {
 			byte[] date_bry = Bry_.Mid(src, date_bgn, date_end);
 			DateAdp date = DateAdp_.parse_fmt(String_.new_a7(Replace_or(tmp_bfr, date_trie, date_bry, 3, date_or)), "dd-MM-yyyy HH:mm");
 			int size_bgn = Bry_finder.Find_fwd_while_space_or_tab(src, date_end, src_len); if (size_bgn == Bry_finder.Not_found) {Gfo_usr_dlg_.I.Warn_many("", "", "size_bgn not found"); break;}
-			size_end = Bry_finder.Find_fwd(src, Byte_ascii.CarriageReturn, size_bgn, src_len);
+			size_end = Bry_finder.Find_fwd(src, Byte_ascii.Cr, size_bgn, src_len);
 			byte[] size_bry = Bry_.Mid(src, size_bgn, size_end);
 			long size = Long_.parse_or_(String_.new_u8(size_bry), -1);
 			Wmf_latest_itm itm = new Wmf_latest_itm(name, date, size);

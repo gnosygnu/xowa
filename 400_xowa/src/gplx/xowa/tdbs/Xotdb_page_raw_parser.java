@@ -34,7 +34,7 @@ public class Xotdb_page_raw_parser {
 	}	Io_line_rdr rdr; Xowe_wiki wiki; Xow_ns_mgr ns_mgr; Xow_ns ns_itm;
 	public void Skip_first_line() {
 		rdr.Read_next();
-		int pos = Bry_finder.Find_fwd(rdr.Bfr(), Byte_ascii.NewLine);
+		int pos = Bry_finder.Find_fwd(rdr.Bfr(), Byte_ascii.Nl);
 //			rdr.Move(pos + 1);
 		rdr.Truncate(pos + 1);
 	}

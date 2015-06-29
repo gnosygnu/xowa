@@ -507,7 +507,7 @@ class Xop_popup_parser_fxt {
 	public void Test_Assert_at_end(String raw, String expd) {
 		if (test_bfr == null) test_bfr = Bry_bfr.new_();
 		test_bfr.Clear().Add_str(raw);
-		Bry_bfr_.Assert_at_end(test_bfr, Byte_ascii.NewLine);
+		Bry_bfr_.Assert_at_end(test_bfr, Byte_ascii.Nl);
 		Tfds.Eq(expd, test_bfr.Xto_str_and_clear());
 	}	private Bry_bfr test_bfr;
 }

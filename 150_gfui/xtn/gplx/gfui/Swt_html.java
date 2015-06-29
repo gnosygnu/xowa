@@ -28,7 +28,6 @@ import org.eclipse.swt.graphics.*;
 import org.eclipse.swt.widgets.*;
 import java.security.acl.Owner;
 
-import gplx.*;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.*;
 import org.eclipse.swt.events.*;
@@ -58,7 +57,6 @@ class Swt_html implements Gxw_html, Swt_control, FocusListener {
 	@Override public Composite Under_composite() {return null;}
 	@Override public Control Under_menu_control() {return browser;}
 	public int Browser_tid() {return browser_tid;} private final int browser_tid;
-	public String 		Html_doc_html() 												{return Eval_script_as_str(kit.Html_cfg().Doc_html());}
 	public void 		Html_doc_html_load_by_mem(String html) {
 		html_doc_html_load_tid = Gxw_html_load_tid_.Tid_mem;
 		browser.setText(html);	// DBG: Io_mgr.I.SaveFilStr(Io_url_.new_fil_("C:\\temp.txt"), s)
@@ -70,63 +68,41 @@ class Swt_html implements Gxw_html, Swt_control, FocusListener {
 	}
 	public byte 		Html_doc_html_load_tid() {return html_doc_html_load_tid;} private byte html_doc_html_load_tid;
 	public void 		Html_doc_html_load_tid_(byte v) {html_doc_html_load_tid = v;}
-	public String 		Html_doc_selected_get_text_or_href() 							{return Eval_script_as_str(kit.Html_cfg().Doc_selected_get_text_or_href());}
-	public String 		Html_doc_selected_get_href_or_text() 							{return Eval_script_as_str(kit.Html_cfg().Doc_selected_get_href_or_text());}
-	public String 		Html_doc_selected_get_src_or_empty() 							{return Eval_script_as_str(kit.Html_cfg().Doc_selected_get_src_or_empty());}
-	public String 		Html_doc_selected_get_active_or_selection() 					{return Eval_script_as_str(kit.Html_cfg().Doc_selected_get_active_or_selection());}
-	public void 		Html_doc_body_focus() 											{Eval_script_as_exec(kit.Html_cfg().Doc_body_focus());}
-	public void 		Html_doc_selection_focus_toggle() 								{Eval_script_as_exec(kit.Html_cfg().Doc_selection_focus_toggle());}
-	public String 		Html_elem_atr_get_str(String elem_id, String atr_key) 			{return Eval_script_as_str(kit.Html_cfg().Elem_atr_get(elem_id, atr_key));}
-	public boolean 		Html_elem_atr_get_bool(String elem_id, String atr_key) 			{return Bool_.parse_((String)Eval_script(kit.Html_cfg().Elem_atr_get_toString(elem_id, atr_key)));}
-	public Object 		Html_elem_atr_get_obj(String elem_id, String atr_key) 			{return Eval_script(kit.Html_cfg().Elem_atr_get(elem_id, atr_key));}
-	public boolean 		Html_elem_atr_set(String elem_id, String atr_key, String atr_val){return Eval_script_as_exec(kit.Html_cfg().Elem_atr_set(elem_id, atr_key, Escape_quotes(atr_val)));}
-	public boolean 		Html_elem_atr_set_append(String elem_id, String atr_key, String atr_val)
-																						{return Eval_script_as_exec(kit.Html_cfg().Elem_atr_set_append(elem_id, atr_key, Escape_quotes(atr_val)));}
-	public boolean 		Html_elem_delete(String elem_id) 								{return Eval_script_as_exec(kit.Html_cfg().Elem_delete(elem_id));}
-	public boolean 		Html_elem_replace_html(String id, String html) 					{return Eval_script_as_exec(kit.Html_cfg().Elem_replace_html(id, html));}
-	public boolean 		Html_elem_append_above(String id, String html) 					{return Eval_script_as_exec(kit.Html_cfg().Elem_append_above(id, html));}
-	public boolean 		Html_gallery_packed_exec() 										{return Eval_script_as_exec(kit.Html_cfg().Gallery_packed_exec());}
-	public boolean 		Html_elem_focus(String elem_id) 								{return Eval_script_as_exec(kit.Html_cfg().Elem_focus(elem_id));}
-	public boolean 		Html_elem_scroll_into_view(String id) 							{return Eval_script_as_bool(kit.Html_cfg().Elem_scroll_into_view(Escape_quotes(id)));}
-	public String 		Html_window_vpos() 												{return Eval_script_as_str(kit.Html_cfg().Window_vpos());}
-	public boolean 		Html_window_print_preview()										{return Eval_script_as_bool(kit.Html_cfg().Window_print_preview());}
 	public void 		Html_js_enabled_(boolean v) 									{browser.setJavascriptEnabled(v);}
 	public void 		Html_js_cbks_add(String func_name, GfoInvkAble invk) 			{new Swt_html_func(browser, func_name, invk);}
 	public String 		Html_js_eval_script(String script) 								{return Eval_script_as_str(script);}
-	public boolean Html_elem_img_update(String elem_id, String elem_src, int elem_width, int elem_height) {
-		elem_src = Escape_quotes(elem_src);
-		int count = 0;
-		while (count < 5) {
-			boolean rv = Eval_script_as_bool(kit.Html_cfg().Elem_img_update(elem_id, elem_src, elem_width, elem_height));
-			if (rv) return rv;
-			Thread_adp_.Sleep(100);
-			count++;
+	public boolean 	Html_js_eval_proc_as_bool(String proc, Object... args) {return Bool_.cast_(Html_js_eval_proc_as_obj(proc, args));}
+	public String	Html_js_eval_proc_as_str(String proc, Object... args) {return Object_.Xto_str_strict_or_null(Html_js_eval_proc_as_obj(proc, args));}
+	private Object Html_js_eval_proc_as_obj(String proc, Object... args) {
+		Bry_bfr bfr = Bry_bfr.new_();
+		bfr.Add_str_a7("return ").Add_str_u8(proc).Add_byte(Byte_ascii.Paren_bgn);
+		int args_len = args.length;
+		for (int i = 0; i < args_len; ++i) {
+			Object arg = args[i];
+			if (i != 0) bfr.Add_byte(Byte_ascii.Comma);
+			boolean quote_val = true;
+			if 		(	ClassAdp_.Eq_typeSafe(arg, Bool_.Cls_ref_type)
+					||	ClassAdp_.Eq_typeSafe(arg, Int_.Cls_ref_type)
+					||	ClassAdp_.Eq_typeSafe(arg, Long_.Cls_ref_type)
+				) {
+				quote_val = false;
+			}
+			if (quote_val) bfr.Add_byte(Byte_ascii.Apos);
+			if (quote_val) 
+				bfr.Add_str_u8(Escape_quote(Object_.Xto_str_strict_or_null_mark(arg)));
+			else
+				bfr.Add_obj_strict(arg);
+			if (quote_val) bfr.Add_byte(Byte_ascii.Apos);
 		}
-		return false;
+		bfr.Add_byte(Byte_ascii.Paren_end).Add_byte(Byte_ascii.Semic);
+		return Eval_script(bfr.Xto_str_and_clear());
 	}
-	public String Html_active_atr_get_str(String atr_key, String or) {
-		Object rv_obj = Eval_script(kit.Html_cfg().Active_atr_get_str(atr_key));
-		String rv = (String)rv_obj;
-		return rv == null || !eval_rslt.Result_pass() ? or : rv;
-	}
-	public void Html_js_eval_proc(String proc, String... args) {
-		Bry_fmtr fmtr = kit.Html_cfg().Js_scripts_get(proc);
-		String script = fmtr.Bld_str_many(args);
-		Eval_script(script);
-	}
-	public boolean Html_window_vpos_(String v) {
-		Gfui_html_cfg.Html_window_vpos_parse(v, scroll_top, node_path);
-		return Eval_script_as_exec(kit.Html_cfg().Window_vpos_(node_path.Val(), scroll_top.Val()));
-	}	private String_obj_ref scroll_top = String_obj_ref.null_(), node_path = String_obj_ref.null_();
-	public boolean Html_doc_find(String elem_id, String find, boolean dir_fwd, boolean case_match, boolean wrap_find, boolean highlight_matches) {
-		// if (String_.Eq(find, String_.Empty)) return false;
-		find = String_.Replace(find, "\\", "\\\\");	// escape \ -> \\
-		find = String_.Replace(find, "'", "\\'");	// escape ' -> \'; NOTE: \\' instead of \'
-		String script = String_.Eq(elem_id, Gfui_html.Elem_id_body)
-			? kit.Html_cfg().Doc_find_html(find, dir_fwd, case_match, wrap_find, highlight_matches)
-			: kit.Html_cfg().Doc_find_edit(find, dir_fwd, case_match, wrap_find, false, -1);
-		Eval_script(script);
-		return true;
+	private static String Escape_quote(String v) {
+		String rv = v;
+		rv = String_.Replace(rv, "'", "\\'");
+		rv = String_.Replace(rv, "\"", "\\\"");
+		rv = String_.Replace(rv, "\n", "\\n");
+		return rv;
 	}
 	public void Html_invk_src_(GfoEvObj invk) {lnr_location.Host_set(invk); lnr_status.Host_set(invk);}
 	public void Html_dispose() {
@@ -136,18 +112,12 @@ class Swt_html implements Gxw_html, Swt_control, FocusListener {
 	}
 	private GfuiElem delete_owner, delete_cur;
 	public void Delete_elems_(GfuiElem delete_owner, GfuiElem delete_cur) {this.delete_owner = delete_owner; this.delete_cur = delete_cur;}	// HACK: set owner / cur so delete can work;
-	private String Escape_quotes(String v) {return String_.Replace(String_.Replace(v, "'", "\\'"), "\"", "\\\"");}
 	@Override public GxwCore_base Core() {return core;} private GxwCore_base core;
 	@Override public GxwCbkHost Host() {return host;} @Override public void Host_set(GxwCbkHost host) {this.host = host;} GxwCbkHost host;
 	@Override public String TextVal() {return browser.getText();}
 	@Override public void TextVal_set(String v) {browser.setText(v);}
 	@Override public void EnableDoubleBuffering() {}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {return GfoInvkAble_.Rv_unhandled;}
-	private boolean Eval_script_as_bool(String script) 	{
-		Object result_obj = Eval_script(script);
-		return eval_rslt.Result_pass() && Bool_.cast_or_(result_obj, false);
-	}
-	private boolean Eval_script_as_exec(String script) 	{Eval_script(script); return eval_rslt.Result_pass();}
 	private String Eval_script_as_str(String script) 	{return (String)Eval_script(script);}
 	public Object Eval_script(String script) {
 		eval_rslt.Clear();

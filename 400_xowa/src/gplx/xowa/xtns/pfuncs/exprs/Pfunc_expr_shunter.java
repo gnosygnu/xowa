@@ -161,7 +161,7 @@ public class Pfunc_expr_shunter {
 		Btrie_fast_mgr rv = Btrie_fast_mgr.ci_ascii_();	// NOTE:ci.ascii:MW_const.en; math and expressions
 		Trie_add(rv, new Ws_tkn(Byte_ascii.Space));
 		Trie_add(rv, new Ws_tkn(Byte_ascii.Tab));
-		Trie_add(rv, new Ws_tkn(Byte_ascii.NewLine));
+		Trie_add(rv, new Ws_tkn(Byte_ascii.Nl));
 		Trie_add(rv, Paren_bgn_tkn._);
 		Trie_add(rv, Paren_end_tkn._);
 		Trie_add(rv, new Func_tkn_plus("+"));

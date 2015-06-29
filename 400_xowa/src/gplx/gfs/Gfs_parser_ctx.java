@@ -117,8 +117,8 @@ class Gfs_err_mgr {
 			byte b = src[i];
 			switch (b) {
 				case Byte_ascii.Tab: 			bfr.Add(Esc_tab); break;
-				case Byte_ascii.NewLine:		bfr.Add(Esc_nl); break;
-				case Byte_ascii.CarriageReturn: bfr.Add(Esc_cr); break;
+				case Byte_ascii.Nl:		bfr.Add(Esc_nl); break;
+				case Byte_ascii.Cr: bfr.Add(Esc_cr); break;
 				default:						bfr.Add_byte(b); break;
 			}
 		}

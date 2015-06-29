@@ -53,7 +53,7 @@ public class Xoa_lang_mgr implements GfoInvkAble {
 		Xol_csv_parser csv_parser = Xol_csv_parser._;
 		while (true) {
 			boolean last = pos == len;
-			byte b = last ? Byte_ascii.NewLine : src[pos];
+			byte b = last ? Byte_ascii.Nl : src[pos];
 			switch (b) {
 				case Byte_ascii.Pipe:
 					switch (fld_idx) {
@@ -64,7 +64,7 @@ public class Xoa_lang_mgr implements GfoInvkAble {
 					fld_bgn = pos + 1;
 					++fld_idx;
 					break;
-				case Byte_ascii.NewLine:
+				case Byte_ascii.Nl:
 					byte[] grp = csv_parser.Load(src, fld_bgn, pos);
 					Xol_lang_itm itm = Xol_lang_itm_.Get_by_key(code);
 					itm.Localized_name_(name, grp);

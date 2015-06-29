@@ -20,7 +20,7 @@ public class Bry_bldr {
 	public byte[] Val() {return val;} private byte[] val;
 	public Bry_bldr New_256() {return New(256);}
 	public Bry_bldr New(int len) {val = new byte[len]; return this;}
-	public Bry_bldr Set_rng_ws(byte v)					{return Set_many(v, Byte_ascii.Space, Byte_ascii.Tab, Byte_ascii.NewLine, Byte_ascii.CarriageReturn);}
+	public Bry_bldr Set_rng_ws(byte v)					{return Set_many(v, Byte_ascii.Space, Byte_ascii.Tab, Byte_ascii.Nl, Byte_ascii.Cr);}
 	public Bry_bldr Set_rng_xml_identifier(byte v)		{return Set_rng_alpha_lc(v).Set_rng_alpha_uc(v).Set_rng_num(v).Set_many(v, Byte_ascii.Underline, Byte_ascii.Dash);}
 	public Bry_bldr Set_rng_alpha(byte v)				{return Set_rng_alpha_lc(v).Set_rng_alpha_uc(v);}
 	public Bry_bldr Set_rng_alpha_lc(byte v)			{return Set_rng(v, Byte_ascii.Ltr_a, Byte_ascii.Ltr_z);}

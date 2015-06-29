@@ -75,8 +75,8 @@ public class Xog_url_wkr {
 		Io_url href_url = Io_url_.http_any_(String_.new_u8(Xoa_app_.Utl__encoder_mgr().Http_url().Decode(href_bry)), Op_sys.Cur().Tid_is_wnt());
 		gplx.gfui.Gfui_html html_box = win.Active_html_box();
 		String xowa_ttl = wiki.Gui_mgr().Cfg_browser().Content_editable()
-			? html_box.Html_active_atr_get_str(gplx.xowa.html.Xoh_consts.Atr_xowa_title_str, null)
-			: Xoh_dom_.Title_by_href(href_bry, Bry_.new_u8(html_box.Html_doc_html()));
+			? html_box.Html_js_eval_proc_as_str(Xog_js_procs.Selection__get_active_for_editable_mode, gplx.xowa.html.Xoh_consts.Atr_xowa_title_str, null)
+			: Xoh_dom_.Title_by_href(href_bry, Bry_.new_u8(html_box.Html_js_eval_proc_as_str(Xog_js_procs.Doc__root_html_get)));
 		byte[] lnki_ttl = Xoa_app_.Utl__encoder_mgr().Http_url().Decode(Xoa_ttl.Replace_spaces(Bry_.new_u8(xowa_ttl)));
 		Xof_fsdb_itm fsdb = Xof_orig_file_downloader.Make_fsdb(wiki, lnki_ttl, img_size, url_bldr);
 		if (!Io_mgr.I.ExistsFil(href_url)) {

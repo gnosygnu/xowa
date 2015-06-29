@@ -15,9 +15,10 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
+package gplx.xowa.wmfs; import gplx.*; import gplx.xowa.*;
 import gplx.json.*;
-class Xow_wmf_api_wkr__ns implements Xow_wmf_api_wkr {
+import gplx.xowa.wmfs.data.*;
+public class Xow_wmf_api_wkr__ns implements Xow_wmf_api_wkr {
 	private final Json_parser parser = new Json_parser();
 	private final Xowmf_site_tbl tbl_site; private final Xowmf_ns_tbl tbl_ns;
 	private int site_id_next = 1;

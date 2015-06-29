@@ -61,7 +61,7 @@ public class Xoh_lnki_title_fmtr implements Bry_fmtr_arg {
 		for (int i = bgn; i < end; i++) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.NewLine: case Byte_ascii.CarriageReturn: case Byte_ascii.Tab:		// NOTE: escape ws so that it renders correctly in tool tips
+				case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Tab:		// NOTE: escape ws so that it renders correctly in tool tips
 				case Byte_ascii.Quote: case Byte_ascii.Lt: case Byte_ascii.Gt: case Byte_ascii.Amp:	// NOTE: escape possible javascript injection characters
 					bfr.Add(Escape_bgn);
 					bfr.Add_int_variable(b);

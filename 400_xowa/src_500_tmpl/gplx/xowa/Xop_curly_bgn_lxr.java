@@ -30,7 +30,7 @@ public class Xop_curly_bgn_lxr implements Xop_lxr {
 		rv.Add(Byte_ascii.Colon, Bry_.Empty);
 		rv.Add(Byte_ascii.Semic, Bry_.Empty);
 		rv.Add(Byte_ascii.Hash, Bry_.Empty);
-		rv.Add(Byte_ascii.Asterisk, Bry_.Empty);
+		rv.Add(Byte_ascii.Star, Bry_.Empty);
 		return rv;
 	}
 }

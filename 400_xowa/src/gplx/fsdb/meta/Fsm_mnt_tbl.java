@@ -45,7 +45,7 @@ public class Fsm_mnt_tbl implements RlsAble {
 	}	
 	public Fsm_mnt_itm[] Select_all() {
 		List_adp list = List_adp_.new_();
-		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empy).Clear().Exec_select__rls_auto();
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empty).Clear().Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {
 				Fsm_mnt_itm itm = new Fsm_mnt_itm(rdr.Read_int(fld_id), rdr.Read_str(fld_name), rdr.Read_str(fld_url));

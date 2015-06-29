@@ -88,7 +88,7 @@ public class Sql_file_parser {
 						break;
 					case Mode_row_end:
 						switch (b) {
-							case Byte_ascii.NewLine:		break;	// ignore \n
+							case Byte_ascii.Nl:		break;	// ignore \n
 							case Byte_ascii.Comma:			mode = Mode_row_bgn; break;
 							case Byte_ascii.Semic:			mode = Mode_sql_bgn; break;
 							default:						throw Err_.unhandled(mode);
@@ -100,7 +100,7 @@ public class Sql_file_parser {
 							case Byte_ascii.Apos:			mode = Mode_quote;	break;	// NOTE: never escape apos by doubling; will fail for empty fields; EX: ", '', ''"; DATE:2013-07-06
 							case Byte_ascii.Backslash:		mode_prv = mode; mode = Mode_escape; break;
 							default:						val_bfr.Add_byte(b); break;
-							case Byte_ascii.Space: case Byte_ascii.NewLine:	break;
+							case Byte_ascii.Space: case Byte_ascii.Nl:	break;
 							case Byte_ascii.Comma:
 								Commit_fld(fld_idx++, val_bfr, fil_bfr, data);
 								break;
@@ -137,7 +137,7 @@ public class Sql_file_parser {
 		finally {rdr.Rls();}
 	}
 	private void Commit_row(Gfo_usr_dlg usr_dlg, Bry_bfr fil_bfr) {
-		fil_bfr.Add_byte(Byte_ascii.NewLine);
+		fil_bfr.Add_byte(Byte_ascii.Nl);
 		if (fil_bfr.Len() > trg_len) {
 			Io_url trg_fil = trg_fil_gen.Nxt_url();				
 			usr_dlg.Prog_one(GRP_KEY, "make", "making ~{0}", trg_fil.NameAndExt());

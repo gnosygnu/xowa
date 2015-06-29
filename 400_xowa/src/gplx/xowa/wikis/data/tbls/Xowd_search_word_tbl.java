@@ -56,7 +56,7 @@ public class Xowd_search_word_tbl implements RlsAble {
 			stmt_select_in = conn.Stmt_new(qry);
 		}
 		List_adp list = List_adp_.new_();
-		Db_rdr rdr = stmt_select_in.Clear().Crt_bry_as_str(fld_text, Bry_.Replace(word, Byte_ascii.Asterisk, Byte_ascii.Percent)).Exec_select__rls_manual();
+		Db_rdr rdr = stmt_select_in.Clear().Crt_bry_as_str(fld_text, Bry_.Replace(word, Byte_ascii.Star, Byte_ascii.Percent)).Exec_select__rls_manual();
 		try	{
 			int row_count = 0;
 			while (rdr.Move_next()) {
@@ -72,8 +72,8 @@ public class Xowd_search_word_tbl implements RlsAble {
 	}
 	public void Select_by_word(Cancelable cancelable, Xowd_search_link_tbl search_page_tbl, List_adp rv, byte[] search, int results_max) {
 		gplx.core.criterias.Criteria crt = null; 
-		if (Bry_.Has(search, Byte_ascii.Asterisk)) {
-			search = Bry_.Replace(search, Byte_ascii.Asterisk, Byte_ascii.Percent);
+		if (Bry_.Has(search, Byte_ascii.Star)) {
+			search = Bry_.Replace(search, Byte_ascii.Star, Byte_ascii.Percent);
 			crt = Db_crt_.like_	(fld_text, String_.new_u8(search));
 		}
 		else
@@ -97,9 +97,9 @@ public class Xowd_search_word_tbl implements RlsAble {
 			flds.Add_int_dflt("word_page_count", 0);
 	}
 	public void Ddl__page_count__add(Xowd_search_link_tbl link_tbl, Db_cfg_tbl cfg_tbl) {
-		Db_meta_fld page_count_fld = new Db_meta_fld("word_page_count", Db_meta_fld.Tid_int, Db_meta_fld.Len_null, Bool_.N, Bool_.N, Bool_.N, 0);
+		Db_meta_fld page_count_fld = Db_meta_fld.new_int("word_page_count").Default_(0);
 		conn.Txn_bgn();
-		conn.Ddl_append_fld(tbl_name, page_count_fld);	// ALTER TABLE search_word ADD word_page_count integer NOT NULL DEFAULT 0;
+		conn.Ddl_append_fld(tbl_name, page_count_fld);	// SQL: ALTER TABLE search_word ADD word_page_count integer NOT NULL DEFAULT 0;
 		String sql = String_.Format(String_.Concat_lines_nl_skip_last
 		( "REPLACE INTO {0} ({1}, {2}, word_page_count)"
 		, "SELECT   w.{1}"
@@ -114,7 +114,7 @@ public class Xowd_search_word_tbl implements RlsAble {
 		);
 		conn.Exec_sql_plog_ntx("calculating page count per word (please wait)", sql);
 		Ddl__page_count__cfg(cfg_tbl);
-		fld_page_count = page_count_fld.Name(); flds.Add_itm(page_count_fld); this.Rls();
+		fld_page_count = page_count_fld.Name(); flds.Add(page_count_fld); this.Rls();
 		conn.Txn_end();
 	}
 	public void Ddl__page_count__cfg(Db_cfg_tbl cfg_tbl) {

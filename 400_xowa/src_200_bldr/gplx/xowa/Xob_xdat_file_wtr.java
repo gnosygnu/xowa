@@ -73,7 +73,7 @@ public class Xob_xdat_file_wtr {
 			idx_bry[idx_bry_pos + Len_base85] = Dlm_fld;
 			prv_pos = cur_pos;
 		}
-		idx_bry[idx_bry_len - 1] = Byte_ascii.NewLine;
+		idx_bry[idx_bry_len - 1] = Byte_ascii.Nl;
 		wtr.Write(idx_bry, 0, idx_bry_len);
 	}
 //		public void Flush(Gfo_usr_dlg usr_dlg) {
@@ -102,7 +102,7 @@ public class Xob_xdat_file_wtr {
 //				idx_bry[idx_bry_pos + Len_base85] = Dlm_idx;
 //				prv_pos = cur_pos;
 //			}
-//			idx_bry[idx_bry_len - 1] = Byte_ascii.NewLine;
+//			idx_bry[idx_bry_len - 1] = Byte_ascii.Nl;
 //			stream.Write(idx_bry, 0, idx_bry_len);
 //		}
 	static final int Len_idx_itm = 6, Len_base85 = 5;

@@ -19,7 +19,7 @@ package gplx.xowa.specials; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.users.history.*;
 import gplx.xowa.specials.*;
 import gplx.xowa.specials.allPages.*; import gplx.xowa.specials.search.*; import gplx.xowa.specials.nearby.*; import gplx.xowa.specials.randoms.*; import gplx.xowa.specials.statistics.*; import gplx.xowa.xtns.translates.*; import gplx.xowa.specials.movePage.*;
-import gplx.xowa.specials.xowa.system_data.*; import gplx.xowa.specials.xowa.default_tab.*; import gplx.xowa.specials.xowa.popup_history.*; import gplx.xowa.specials.xowa.file_browsers.*; import gplx.xowa.specials.xowa.bookmarks.*;
+import gplx.xowa.specials.xowa.system_data.*; import gplx.xowa.specials.xowa.default_tab.*; import gplx.xowa.specials.xowa.popup_history.*; import gplx.xowa.specials.xowa.file_browsers.*; import gplx.xowa.specials.xowa.bookmarks.*; import gplx.xowa.specials.xowa.diags.*;
 import gplx.xowa.xtns.wdatas.specials.*;
 import gplx.xowa.users.data.*;
 public class Xows_mgr {
@@ -47,6 +47,7 @@ public class Xows_mgr {
 	public Popup_history_page			Page_popup_history() {return page_popup_history;} private final Popup_history_page page_popup_history = new Popup_history_page();
 	public Xosp_fbrow_special			Page_file_browser() {return page_file_browser;} private final Xosp_fbrow_special page_file_browser = new Xosp_fbrow_special();
 	public Xows_bmk_page				Page_bmk() {return page_bmk;} private final Xows_bmk_page page_bmk = new Xows_bmk_page();
+	public Xows_diag_page				Page_diag() {return page_diag;} private final Xows_diag_page page_diag = new Xows_diag_page();
 	public void Evt_lang_changed(Xol_lang lang) {
 		hash.Clear();
 		hash.Add_str_obj(Xows_special_meta_.Key__search					, page_search);
@@ -67,6 +68,7 @@ public class Xows_mgr {
 		hash.Add_str_obj(Xows_special_meta_.Key__popup_history			, page_popup_history);
 		hash.Add_str_obj(Xows_special_meta_.Key__file_browser			, page_file_browser);
 		hash.Add_str_obj(Xows_special_meta_.Key__bookmarks				, page_bmk);
+		hash.Add_str_obj(Xows_special_meta_.Key__diag					, page_diag);
 	}
 	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
 		int slash_pos = Bry_finder.Find_fwd(ttl.Page_txt_wo_qargs(), Xoa_ttl.Subpage_spr);	// check for slash

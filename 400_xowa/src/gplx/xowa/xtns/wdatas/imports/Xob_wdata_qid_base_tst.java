@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import org.junit.*;
 import gplx.xowa.wikis.*; import gplx.xowa.tdbs.*; import gplx.dbs.*;
+import gplx.xowa.wmfs.data.*;
 public class Xob_wdata_qid_base_tst {
 	private gplx.xowa.bldrs.Xob_fxt fxt; // NOTE: reset memory instance (don't just call clear)
 	@Before public void init() {

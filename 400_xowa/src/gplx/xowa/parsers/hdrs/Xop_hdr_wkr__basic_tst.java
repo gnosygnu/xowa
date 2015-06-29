@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.hdrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
-public class Xop_hdr_wkr_basic_tst {
+public class Xop_hdr_wkr__basic_tst {
 	@Before public void init() {fxt.Reset();} private Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
 	@Test  public void H2()							{fxt.Test_parse_page_wiki_str("==a=="				, "<h2>a</h2>\n");}
@@ -82,7 +82,7 @@ public class Xop_hdr_wkr_basic_tst {
 	@Test  public void Err_hdr()					{fxt.Init_log_(Xop_hdr_log.Mismatched)					.Test_parse_page_wiki_str("====a== =="	, "<h2>==a== </h2>\n").tst_Log_check();}
 	@Test  public void Err_end_hdr_is_1()			{fxt.Init_log_(Xop_hdr_log.Mismatched, Xop_hdr_log.Len_1).Test_parse_page_wiki_str("==a="			, "<h1>=a</h1>\n").tst_Log_check();}
 	@Test  public void Html_hdr_many() {
-		fxt.Wtr_cfg().Toc_show_(true);
+		fxt.Wtr_cfg().Toc__show_(Bool_.Y);
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		(	"==a=="
 		,	"==a=="
@@ -95,7 +95,7 @@ public class Xop_hdr_wkr_basic_tst {
 		,	"<h2><span class='mw-headline' id='a_3'>a</span></h2>"
 		,	""
 		));
-		fxt.Wtr_cfg().Toc_show_(false);
+		fxt.Wtr_cfg().Toc__show_(Bool_.N);
 	}
 	@Test  public void Hdr_inside_dangling_tmpl_fix() {	// PURPOSE: one-off fix to handle == inside dangling tmpl; DATE:2014-02-11
 		fxt.Test_parse_page_all_str("{{a|}\n==b=="

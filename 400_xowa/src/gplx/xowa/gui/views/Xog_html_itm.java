@@ -21,6 +21,8 @@ import gplx.gfui.*; import gplx.xowa.gui.menus.*; import gplx.xowa.gui.menus.dom
 import gplx.html.*; import gplx.xowa.html.modules.*; import gplx.xowa.pages.*;
 public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 	private Xoae_app app; private final Object thread_lock = new Object();
+	private final String_obj_ref scroll_top = String_obj_ref.null_(), node_path = String_obj_ref.null_();
+	protected Xog_html_itm() {}	// TEST: for prefs_mgr
 	public Xog_html_itm(Xog_tab_itm owner_tab) {
 		this.owner_tab = owner_tab;
 		app = owner_tab.Tab_mgr().Win().App();
@@ -45,10 +47,10 @@ public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 		this.html_box = html_box;
 		html_box.Html_js_cbks_add("xowa_exec", js_cbk);
 	}
-	public String Html_selected_get_src_or_empty() {return html_box.Html_doc_selected_get_src_or_empty();}
-	public String Html_selected_get_href_or_text() {return Html_extract_text(html_box.Html_doc_selected_get_href_or_text());}
-	public String Html_selected_get_text_or_href() {return Html_extract_text(html_box.Html_doc_selected_get_text_or_href());}
-	public String Html_selected_get_active_or_selection() {return Html_extract_text(html_box.Html_doc_selected_get_active_or_selection());}		
+	public String Html_selected_get_src_or_empty()			{return html_box.Html_js_eval_proc_as_str(Xog_js_procs.Selection__get_src_or_empty);}
+	public String Html_selected_get_href_or_text()			{return Html_extract_text(html_box.Html_js_eval_proc_as_str(Xog_js_procs.Selection__get_href_or_text));}
+	public String Html_selected_get_text_or_href()			{return Html_extract_text(html_box.Html_js_eval_proc_as_str(Xog_js_procs.Selection__get_text_or_href));}
+	public String Html_selected_get_active_or_selection()	{return Html_extract_text(html_box.Html_js_eval_proc_as_str(Xog_js_procs.Selection__get_active_or_selection));}
 	private String Html_extract_text(String v) {
 		Xoae_page page = owner_tab.Page();
 		String site = owner_tab.Wiki().Domain_str();
@@ -59,8 +61,8 @@ public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 		byte view_mode = owner_tab.View_mode();			
 		byte[] html_src = page.Wikie().Html_mgr().Page_wtr_mgr().Gen(page, view_mode);	// NOTE: must use wiki of page, not of owner tab; DATE:2015-03-05
 		Html_src_(page, html_src);
-		if (view_mode == Xopg_view_mode.Tid_read){			// used only for Xosrh test; DATE:2014-01-29
-			html_box.Html_doc_body_focus();					// NOTE: only focus if read so up / down will scroll box; edit / html should focus edit-box; DATE:2014-06-05
+		if (view_mode == Xopg_view_mode.Tid_read){						// used only for Xosrh test; DATE:2014-01-29
+			html_box.Html_js_eval_proc_as_str(Xog_js_procs.Win__focus_body);	// NOTE: only focus if read so up / down will scroll box; edit / html should focus edit-box; DATE:2014-06-05
 			page.Root().Data_htm_(html_src);
 		}
 	}
@@ -89,8 +91,8 @@ public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 		trg_itm.js_cbk = src_js_cbk;
 	}
 	public byte[] Get_elem_value_for_edit_box_as_bry()	{return Bry_.new_u8(this.Get_elem_value_for_edit_box());}
-	public String Get_elem_value_for_edit_box()			{return html_box.Html_elem_atr_get_str(Elem_id__xowa_edit_data_box, Gfui_html.Atr_value);}
-	public String Get_elem_value(String elem_id)		{return html_box.Html_elem_atr_get_str(elem_id, Gfui_html.Atr_value);}
+	public String Get_elem_value_for_edit_box()			{return Html_elem_atr_get_str(Elem_id__xowa_edit_data_box, Gfui_html.Atr_value);}
+	public String Get_elem_value(String elem_id)		{return Html_elem_atr_get_str(elem_id, Gfui_html.Atr_value);}
 	public void Html_img_update(String elem_id, String elem_src, int elem_width, int elem_height) {
 		GfoMsg m = GfoMsg_.new_cast_(Invk_html_img_update).Add("elem_id", elem_id).Add("elem_src", elem_src).Add("elem_width", elem_width).Add("elem_height", elem_height);
 		GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_img_update, m);
@@ -99,16 +101,20 @@ public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 		GfoMsg m = GfoMsg_.new_cast_(Invk_html_elem_delete).Add("elem_id", elem_id);
 		GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_elem_delete, m);
 	}
+	@gplx.Virtual public String	Html_elem_atr_get_str(String id, String atr_key)		{return html_box.Html_js_eval_proc_as_str(Xog_js_procs.Doc__atr_get_as_obj, id, atr_key);}
+	@gplx.Virtual public boolean		Html_elem_atr_get_bool(String id, String atr_key)		{return Bool_.parse_(html_box.Html_js_eval_proc_as_str(Xog_js_procs.Doc__atr_get_to_str, id, atr_key));}
+	
+
 	public void Html_atr_set(String elem_id, String atr_key, String atr_val) {
 		synchronized (thread_lock) {	// needed for Special:Search and async cancel; DATE:2015-05-02
 			GfoMsg m = GfoMsg_.new_cast_(Invk_html_elem_atr_set).Add("elem_id", elem_id).Add("atr_key", atr_key).Add("atr_val", atr_val);
 			GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_elem_atr_set, m);
 		}
 	}
-	public void Html_redlink(String html_uid) {Html_elem_atr_set_append(html_uid, "class", gplx.xowa.html.lnkis.Xoh_redlink_utl.New_str);}
-	public void Html_elem_atr_set_append(String elem_id, String atr_key, String atr_val) {
-		GfoMsg m = GfoMsg_.new_cast_(Invk_html_elem_atr_set_append).Add("elem_id", elem_id).Add("atr_key", atr_key).Add("atr_val", atr_val);
-		GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_elem_atr_set_append, m);
+	public void Html_redlink(String html_uid) {Html_doc_atr_append_or_set(html_uid, "class", gplx.xowa.html.lnkis.Xoh_redlink_utl.New_str);}
+	private void Html_doc_atr_append_or_set(String elem_id, String atr_key, String atr_val) {
+		GfoMsg m = GfoMsg_.new_cast_(Invk_html_doc_atr_append_or_set).Add("elem_id", elem_id).Add("atr_key", atr_key).Add("atr_val", atr_val);
+		GfoInvkAble_.InvkCmd_msg(cmd_sync, Invk_html_doc_atr_append_or_set, m);
 	}
 	public void Html_elem_replace_html(String id, String html) {
 		synchronized (thread_lock) {	// needed for Special:Search and async; DATE:2015-04-23
@@ -148,22 +154,24 @@ public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 		String html_doc_pos = owner_tab.Page().Html_data().Bmk_pos();
 		if (html_doc_pos == null) {
 			String auto_focus_id = app.Gui_mgr().Html_mgr().Auto_focus_id();
-			if (String_.Len_eq_0(auto_focus_id)) return;		// don't focus anything
-			if (String_.Eq(auto_focus_id, " first_anchor"))		// NOTE: HTML 4/5 do not allow space as id; XOWA using space here to create a unique_key that will never collide with any id
-				html_box.Html_doc_body_focus();					// NOTE: will focus body if content-editable, or first_anchor otherwise
+			if (String_.Len_eq_0(auto_focus_id)) return;					// don't focus anything
+			if (String_.Eq(auto_focus_id, " first_anchor"))					// NOTE: HTML 4/5 do not allow space as id; XOWA using space here to create a unique_key that will never collide with any id
+				html_box.Html_js_eval_proc_as_str(Xog_js_procs.Win__focus_body);	// NOTE: will focus body if content-editable, else first_anchor
 			else
-				html_box.Html_elem_focus(auto_focus_id);
+				html_box.Html_js_eval_proc_as_str(Xog_js_procs.Doc__elem_focus, auto_focus_id);
 		}
 		else if (String_.Eq(html_doc_pos, gplx.xowa.gui.history.Xog_history_itm.Html_doc_pos_toc))	// NOTE: special case to handle TOC clicks; DATE:2013-07-17
 			Scroll_page_by_id("toc");
-		else
-			html_box.Html_window_vpos_(html_doc_pos);
+		else {
+			Html_window_vpos_parse(html_doc_pos, scroll_top, node_path);
+			html_box.Html_js_eval_proc_as_str(Xog_js_procs.Win__vpos_set, node_path.Val(), scroll_top.Val());
+		}
 	}
 	public void Scroll_page_by_id_gui(String id)	{GfoInvkAble_.InvkCmd_val(cmd_async, Invk_scroll_page_by_id, id);}
 	private boolean Scroll_page_by_id(String id) {
 		return (id == null) 
 			? false
-			: html_box.Html_elem_scroll_into_view(Xoa_app_.Utl__encoder_mgr().Id().Encode_str(id));
+			: html_box.Html_js_eval_proc_as_bool(Xog_js_procs.Win__scroll_elem_into_view, Xoa_app_.Utl__encoder_mgr().Id().Encode_str(id));
 	}
 	public void Js_enabled_(boolean v) {
 		html_box.Html_js_enabled_(v);
@@ -179,17 +187,17 @@ public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 		kit.Set_mnu_popup(html_box, popup_mnu.Under_mnu());
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_html_img_update))					html_box.Html_elem_img_update(m.ReadStr("elem_id"), m.ReadStr("elem_src"), m.ReadInt("elem_width"), m.ReadInt("elem_height"));
-		else if	(ctx.Match(k, Invk_html_elem_atr_set))					html_box.Html_elem_atr_set(m.ReadStr("elem_id"), m.ReadStr("atr_key"), m.ReadStr("atr_val"));
-		else if	(ctx.Match(k, Invk_html_elem_atr_set_append))			html_box.Html_elem_atr_set_append(m.ReadStr("elem_id"), m.ReadStr("atr_key"), m.ReadStr("atr_val"));
-		else if	(ctx.Match(k, Invk_html_elem_delete))					html_box.Html_elem_delete(m.ReadStr("elem_id"));
-		else if	(ctx.Match(k, Invk_html_elem_replace_html))				html_box.Html_elem_replace_html(m.ReadStr("id"), m.ReadStr("html"));
-		else if	(ctx.Match(k, Invk_html_elem_append_above))				html_box.Html_elem_append_above(m.ReadStr("id"), m.ReadStr("html"));
-		else if	(ctx.Match(k, Invk_html_gallery_packed_exec))			html_box.Html_gallery_packed_exec();
+		if		(ctx.Match(k, Invk_html_img_update))					html_box.Html_js_eval_proc_as_bool	(Xog_js_procs.Doc__elem_img_update		, m.ReadStr("elem_id"), m.ReadStr("elem_src"), m.ReadInt("elem_width"), m.ReadInt("elem_height"));
+		else if	(ctx.Match(k, Invk_html_elem_atr_set))					html_box.Html_js_eval_proc_as_str	(Xog_js_procs.Doc__atr_set				, m.ReadStr("elem_id"), m.ReadStr("atr_key"), m.ReadStr("atr_val"));
+		else if	(ctx.Match(k, Invk_html_doc_atr_append_or_set))			html_box.Html_js_eval_proc_as_str	(Xog_js_procs.Doc__atr_append_or_set	, m.ReadStr("elem_id"), m.ReadStr("atr_key"), m.ReadStr("atr_val"));
+		else if	(ctx.Match(k, Invk_html_elem_delete))					html_box.Html_js_eval_proc_as_bool	(Xog_js_procs.Doc__elem_delete			, m.ReadStr("elem_id"));
+		else if	(ctx.Match(k, Invk_html_elem_replace_html))				html_box.Html_js_eval_proc_as_str	(Xog_js_procs.Doc__elem_replace_html	, m.ReadStr("id"), m.ReadStr("html"));
+		else if	(ctx.Match(k, Invk_html_elem_append_above))				html_box.Html_js_eval_proc_as_str	(Xog_js_procs.Doc__elem_append_above	, m.ReadStr("id"), m.ReadStr("html"));
+		else if	(ctx.Match(k, Invk_html_gallery_packed_exec))			html_box.Html_js_eval_proc_as_str	(Xog_js_procs.Xtn__gallery_packed_exec);
 		else if	(ctx.Match(k, Invk_html_popups_bind_hover_to_doc))		html_box.Html_js_eval_script("xowa_popups_bind_doc();");
 		else if (ctx.Match(k, Invk_scroll_page_by_bmk))					Scroll_page_by_bmk();
 		else if (ctx.Match(k, Invk_scroll_page_by_id))					Scroll_page_by_id(m.ReadStr("v"));
-		else if (ctx.Match(k, Invk_html_elem_focus))					html_box.Html_elem_focus(m.ReadStr("v"));
+		else if (ctx.Match(k, Invk_html_elem_focus))					html_box.Html_js_eval_proc_as_str(Xog_js_procs.Doc__elem_focus, m.ReadStr("v"));
 		else if (ctx.Match(k, GfuiElemKeys.Evt_menu_detected))			When_menu_detected();
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
@@ -197,7 +205,7 @@ public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 	private static final String 
 	  Invk_html_gallery_packed_exec = "html_gallery_packed_exec", Invk_html_popups_bind_hover_to_doc = "html_popups_bind_hover_to_doc"
 	, Invk_html_img_update = "html_img_update", Invk_html_elem_atr_set = "html_elem_atr_set"
-	, Invk_html_elem_atr_set_append = "html_elem_atr_set_append", Invk_html_elem_delete = "html_elem_delete", Invk_html_elem_replace_html = "html_elem_replace_html", Invk_html_elem_append_above = "html_elem_append_above"
+	, Invk_html_doc_atr_append_or_set = "html_doc_atr_append_or_set", Invk_html_elem_delete = "html_elem_delete", Invk_html_elem_replace_html = "html_elem_replace_html", Invk_html_elem_append_above = "html_elem_append_above"
 	, Invk_scroll_page_by_bmk = "scroll_page_by_bmk", Invk_scroll_page_by_id = "scroll_page_by_id"
 	;
 	public static final String 
@@ -206,6 +214,13 @@ public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 	, Elem_id__first_heading			= "firstHeading"
 	, Invk_html_elem_focus				= "html_elem_focus"
 	;
+	public static void Html_window_vpos_parse(String v, String_obj_ref scroll_top, String_obj_ref node_path) {
+		int pipe_pos = String_.FindFwd(v, "|"); if (pipe_pos == String_.Find_none) return; // if elem_get_path returns invalid value, don't fail; DATE:2014-04-05
+		scroll_top.Val_(String_.Mid(v, 0, pipe_pos));
+		String node_path_val = String_.Mid(v, pipe_pos + 1, String_.Len(v));
+		node_path_val = "'" + String_.Replace(node_path_val, ",", "','") + "'";
+		node_path.Val_(node_path_val);
+	}
 }
 class Xog_html_itm__href_extractor {
 	private static final byte Text_tid_none = 0, Text_tid_text = 1, Text_tid_href = 2;

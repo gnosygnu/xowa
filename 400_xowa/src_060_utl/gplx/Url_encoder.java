@@ -208,7 +208,7 @@ public class Url_encoder implements Url_encoder_interface {
 		rv.Itms_ini(Byte_ascii.Percent);
 		mediawiki_base(rv, true);
 		rv.Itms_raw_diff(Byte_ascii.Space, Byte_ascii.Underline);
-		rv.Itms_raw_same_many(Byte_ascii.Semic, Byte_ascii.At, Byte_ascii.Dollar, Byte_ascii.Bang, Byte_ascii.Asterisk
+		rv.Itms_raw_same_many(Byte_ascii.Semic, Byte_ascii.At, Byte_ascii.Dollar, Byte_ascii.Bang, Byte_ascii.Star
 				, Byte_ascii.Paren_bgn, Byte_ascii.Paren_end, Byte_ascii.Comma, Byte_ascii.Slash, Byte_ascii.Colon
 				, Byte_ascii.Hash// NOTE: not part of wfUrlEncode; not sure where this is specified; needed for A#b
 				);

@@ -25,7 +25,7 @@ public class Dsv_fld_parser_ {
 	}
 }
 class Dsv_fld_parser_line implements Dsv_fld_parser {
-	private byte row_dlm = Byte_ascii.NewLine; private final byte comment_dlm;
+	private byte row_dlm = Byte_ascii.Nl; private final byte comment_dlm;
 	public Dsv_fld_parser_line(byte comment_dlm) {this.comment_dlm = comment_dlm;}
 	public void Init(byte fld_dlm, byte row_dlm) {
 		this.row_dlm = row_dlm;
@@ -53,7 +53,7 @@ class Dsv_fld_parser_line implements Dsv_fld_parser {
 	}
 }
 class Dsv_fld_parser_bry implements Dsv_fld_parser {
-	private byte fld_dlm = Byte_ascii.Pipe, row_dlm = Byte_ascii.NewLine;
+	private byte fld_dlm = Byte_ascii.Pipe, row_dlm = Byte_ascii.Nl;
 	public void Init(byte fld_dlm, byte row_dlm) {
 		this.fld_dlm = fld_dlm; this.row_dlm = row_dlm;
 	}
@@ -83,7 +83,7 @@ class Dsv_fld_parser_bry implements Dsv_fld_parser {
 	public static final Dsv_fld_parser_bry _ = new Dsv_fld_parser_bry(); Dsv_fld_parser_bry() {}
 }
 class Dsv_fld_parser_int implements Dsv_fld_parser {
-	private byte fld_dlm = Byte_ascii.Pipe, row_dlm = Byte_ascii.NewLine;
+	private byte fld_dlm = Byte_ascii.Pipe, row_dlm = Byte_ascii.Nl;
 	public void Init(byte fld_dlm, byte row_dlm) {
 		this.fld_dlm = fld_dlm; this.row_dlm = row_dlm;
 	}

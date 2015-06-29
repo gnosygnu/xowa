@@ -103,9 +103,9 @@ public class Xop_para_wkr implements Xop_ctx_wkr {
 					if (line_is_ws) {														// line is entirely ws
 						int next_char_pos = prv_nl_pos + 2;									// "\n\s".length
 						if (	next_char_pos < src.length									// bounds check
-							&&	src[next_char_pos] == Byte_ascii.NewLine					// is "\n\s\n"; i.e.: "\n" only
+							&&	src[next_char_pos] == Byte_ascii.Nl					// is "\n\s\n"; i.e.: "\n" only
 							) {
-							ctx.Subs_add(root, ctx.Tkn_mkr().Bry_raw(bgn_pos, bgn_pos, Byte_ascii.NewLine_bry));	// add a "\n" tkn; note that adding a NewLine tkn doesn't work, b/c Xoh_html_wtr has code to remove consecutive \n; PAGE:en.w:Preferred_numbers DATE:2014-06-24
+							ctx.Subs_add(root, ctx.Tkn_mkr().Bry_raw(bgn_pos, bgn_pos, Byte_ascii.Nl_bry));	// add a "\n" tkn; note that adding a NewLine tkn doesn't work, b/c Xoh_html_wtr has code to remove consecutive \n; PAGE:en.w:Preferred_numbers DATE:2014-06-24
 							prv_nl_pos = bgn_pos;
 						}
 					}
@@ -174,7 +174,7 @@ public class Xop_para_wkr implements Xop_ctx_wkr {
 					int nxt_pos = tblw_ws_trie.Match_pos();
 					if (nxt_pos < src_len) {	// bounds check
 						switch (src[nxt_pos]) {	// check that next char is "end" of xnde name; guard against false matches like "<trk" PAGE:de.v:Via_Jutlandica/Gpx DATE:2014-11-29
-							case Byte_ascii.Space: case Byte_ascii.NewLine: case Byte_ascii.Tab:		// whitespace
+							case Byte_ascii.Space: case Byte_ascii.Nl: case Byte_ascii.Tab:		// whitespace
 							case Byte_ascii.Slash: case Byte_ascii.Gt:									// end node
 							case Byte_ascii.Quote: case Byte_ascii.Apos:								// quotes
 								if (bgn_pos != Xop_parser_.Doc_bgn_bos)
@@ -217,7 +217,7 @@ public class Xop_para_wkr implements Xop_ctx_wkr {
 								byte b = src[j];
 								switch (b) {
 									case Byte_ascii.Space: case Byte_ascii.Tab: break;	// ignore space / tab
-									case Byte_ascii.NewLine:
+									case Byte_ascii.Nl:
 										nl_at_eol = j;
 										j = src_len;
 										break;

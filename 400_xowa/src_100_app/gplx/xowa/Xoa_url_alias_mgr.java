@@ -35,7 +35,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //			Xol_csv_parser csv_parser = Xol_csv_parser._;
 //			while (true) {
 //				boolean last = pos == len;
-//				byte b = last ? Byte_ascii.NewLine : src[pos];
+//				byte b = last ? Byte_ascii.Nl : src[pos];
 //				switch (b) {
 //					case Byte_ascii.Pipe:
 //						switch (fld_idx) {
@@ -45,7 +45,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //						fld_bgn = pos + 1;
 //						++fld_idx;
 //						break;
-//					case Byte_ascii.NewLine:
+//					case Byte_ascii.Nl:
 //						if (fld_bgn < pos) {	// guard against trailing new lines
 //							wiki = csv_parser.Load(src, fld_bgn, pos);
 //							hash.Add_bry_obj(alias, wiki);

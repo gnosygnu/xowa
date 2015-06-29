@@ -155,11 +155,11 @@ public class Xoa_url_parser {
 				if (	xwiki_itm != null						// null-check
 					&&	Bry_.Eq(xwiki_itm.Domain_bry(), wiki_bry)// check that xwiki.domain == wiki; avoids false lang matches like "so/page" or "C/page"; EX: "fr.wikipedia.org" vs "fr"; ca.s:So/Natura_del_so; DATE:2014-04-26; PAGE:no.b:C/Variabler; DATE:2014-10-14
 					)
-					wiki =  app.Wiki_mgri().Get_by_key_or_make_3(xwiki_itm.Domain_bry());
+					wiki =  app.Wiki_mgri().Get_by_key_or_make_init_n(xwiki_itm.Domain_bry());
 			}
 			if (rv.Page_bry() == null) {					// 1 seg; EX: "Earth"; "fr.wikipedia.org"
 				if (wiki != null) {							// wiki_bry is known wiki; EX: "fr.wikipedia.org"
-					wiki = app.Wiki_mgri().Get_by_key_or_make_3(wiki_bry);	// call get again, but this time "make" it
+					wiki = app.Wiki_mgri().Get_by_key_or_make_init_n(wiki_bry);	// call get again, but this time "make" it
 					page_is_main_page = true;
 				}
 				else {										// otherwise, assume page name
@@ -184,7 +184,7 @@ public class Xoa_url_parser {
 					if (colon_pos != Bry_.NotFound) {							// alias found
 						Xow_xwiki_itm xwiki = cur_wiki.Xwiki_mgr().Get_by_mid(page_bry, 0, colon_pos);
 						if (xwiki != null) {
-							wiki = app.Wiki_mgri().Get_by_key_or_make_3(xwiki.Domain_bry());
+							wiki = app.Wiki_mgri().Get_by_key_or_make_init_n(xwiki.Domain_bry());
 							page_bry = Bry_.Mid(page_bry, colon_pos + 1, page_bry.length); 
 							if (rv.Segs_ary().length == 0)		// handle xwiki without segs; EX: commons:Commons:Media_of_the_day; DATE:2014-02-19
 								rv.Segs_ary_(new byte[][] {Bry_wiki_name, page_bry});	// create segs of "/wiki/Page"
@@ -219,7 +219,7 @@ public class Xoa_url_parser {
 		if (ttl != null) {	// can still be empty; EX: "en.wikipedia.org"
 			Xow_xwiki_itm lang_xwiki = ttl.Wik_itm();
 			if (lang_xwiki != null && lang_xwiki.Type_is_xwiki_lang(wiki.Lang().Lang_id())) {	// format of http://en.wikipedia.org/wiki/fr:A
-				wiki = app.Wiki_mgri().Get_by_key_or_make_3(lang_xwiki.Domain_bry());
+				wiki = app.Wiki_mgri().Get_by_key_or_make_init_n(lang_xwiki.Domain_bry());
 				page_bry = ttl.Page_txt();
 			}
 		}
@@ -233,7 +233,7 @@ public class Xoa_url_parser {
  			if (xwiki == null)
 			rv = app.User().Wikii();
 		else
-			rv = app.Wiki_mgri().Get_by_key_or_make_3(xwiki.Domain_bry());
+			rv = app.Wiki_mgri().Get_by_key_or_make_init_n(xwiki.Domain_bry());
 		return rv;			
 	}
 	private static byte[] Parse_url__combine(Bry_bfr_mkr bry_bfr_mkr, byte[] wiki, byte[][] segs, byte[] page) {

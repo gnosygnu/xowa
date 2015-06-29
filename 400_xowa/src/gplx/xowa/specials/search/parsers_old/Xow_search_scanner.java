@@ -121,7 +121,7 @@ class Xow_search_scanner {
 			int words_len = words.length;
 			if (	words_len == 1					// only one word
 				&&	!Bry_.Eq(words[0], cur_word)	// split word not same as raw
-				&&	Bry_finder.Find_fwd(cur_word, Byte_ascii.Asterisk) == -1	// no asterisk
+				&&	Bry_finder.Find_fwd(cur_word, Byte_ascii.Star) == -1	// no asterisk
 				) {
 				tkns.Add(Xow_search_tkn.new_bry(tid, words[0]));
 				return;

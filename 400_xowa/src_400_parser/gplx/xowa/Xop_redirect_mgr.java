@@ -92,7 +92,7 @@ class Xop_redirect_mgr_ {
 	public static int Get_kwd_end_or_end(byte[] src, int bgn, int end) {	// get end of kwd
 		for (int i = bgn; i < end; ++i) {
 			switch (src[i]) {
-				case Byte_ascii.NewLine: case Byte_ascii.Space: case Byte_ascii.Tab:
+				case Byte_ascii.Nl: case Byte_ascii.Space: case Byte_ascii.Tab:
 				case Byte_ascii.Brack_bgn: case Byte_ascii.Colon:
 					return i;	// ASSUME: kwd does not have these chars
 				default:
@@ -105,7 +105,7 @@ class Xop_redirect_mgr_ {
 		boolean colon_null = true;
 		for (int i = bgn; i < end; ++i) {
 			switch (src[i]) {
-				case Byte_ascii.NewLine: case Byte_ascii.Space: case Byte_ascii.Tab: break;	// skip all ws
+				case Byte_ascii.Nl: case Byte_ascii.Space: case Byte_ascii.Tab: break;	// skip all ws
 				case Byte_ascii.Colon: // allow 1 colon
 					if (colon_null)
 						colon_null = false;

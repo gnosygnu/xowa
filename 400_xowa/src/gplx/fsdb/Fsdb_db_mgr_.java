@@ -23,10 +23,11 @@ public class Fsdb_db_mgr_ {
 		Io_url url = file_dir.GenSubFil(Fsdb_db_mgr__v1.Mnt_name); // EX: /xowa/file/en.wikipedia.org/wiki.mnt.sqlite3
 		if	(Db_conn_bldr.I.Exists(url)) {	// NOTE: check v1 before v2; note that as of v2.5.4, v2 files are automatically created on new import; DATE:2015-06-09
 			usr_dlg.Log_many("", "", "fsdb.db_core.v1: url=~{0}", url.Raw());
-			usr_dlg.Log_many("", "", "fsdb.db_core.v1 exists: orig=~{0} abc=~{1} atr=~{2}"
+			usr_dlg.Log_many("", "", "fsdb.db_core.v1 exists: orig=~{0} abc=~{1} atr_a=~{2}, atr_b=~{3}"
 				, Db_conn_bldr.I.Exists(file_dir.GenSubFil(Fsdb_db_mgr__v1.Orig_name))
 				, Db_conn_bldr.I.Exists(file_dir.GenSubFil_nest(Fsm_mnt_tbl.Mnt_name_main, Fsdb_db_mgr__v1.Abc_name))
-				, Db_conn_bldr.I.Exists(file_dir.GenSubFil_nest(Fsm_mnt_tbl.Mnt_name_main, Fsdb_db_mgr__v1.Atr_name))
+				, Db_conn_bldr.I.Exists(file_dir.GenSubFil_nest(Fsm_mnt_tbl.Mnt_name_main, Fsdb_db_mgr__v1.Atr_name_v1a))
+				, Db_conn_bldr.I.Exists(file_dir.GenSubFil_nest(Fsm_mnt_tbl.Mnt_name_main, Fsdb_db_mgr__v1.Atr_name_v1b))
 				);
 			return new Fsdb_db_mgr__v1(file_dir);
 		}

@@ -45,7 +45,7 @@ public class Xopg_tmpl_prepend_mgr {
 					Bry_bfr stack_bfr = stack[i];
 					switch (stack_bfr.Get_at_last_or_nil_if_empty()) {
 						case Byte_ascii.Nil:		continue;					// bfr is empty; ignore it
-						case Byte_ascii.NewLine:	add = false; i = -1; break;	// bfr ends in \n; don't add and stop; PAGE:bn.w:লিওনেল_মেসি |ko.w:도쿄_지하철_히비야_선|DATE:2014-05-27
+						case Byte_ascii.Nl:	add = false; i = -1; break;	// bfr ends in \n; don't add and stop; PAGE:bn.w:লিওনেল_মেসি |ko.w:도쿄_지하철_히비야_선|DATE:2014-05-27
 						default:					i = -1; break;				// bfr has char; stop
 					}
 				}
@@ -53,7 +53,7 @@ public class Xopg_tmpl_prepend_mgr {
 			else																// called from func arg; always add \n; EX:vi.w:Friedrich_II_của_Phổ; DATE:2014-04-26
 				add = true;
 			if (add)
-				bfr.Add_byte(Byte_ascii.NewLine);
+				bfr.Add_byte(Byte_ascii.Nl);
 		}
 		if (called_from_tmpl) --stack_len;
 	}

@@ -38,7 +38,7 @@ public class Xof_math_subst_regy {
 						case Byte_ascii.Curly_end:
 						case Byte_ascii.Brack_end:
 						case Byte_ascii.Underline:
-						case Byte_ascii.NewLine: // NOTE: needed for \begin\n
+						case Byte_ascii.Nl: // NOTE: needed for \begin\n
 							break;
 						default:
 							if (itm.WholeWord()) {

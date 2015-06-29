@@ -98,7 +98,7 @@ public class Xob_xdat_file {
 		if (insert) bfr.Add(new_itm);
 		itm_0_bgn = (ary_len * Len_idx_itm) + Len_itm_dlm;
 		src = bfr.Xto_bry_and_clear(); 
-	}	static final byte Dlm_hdr_fld = Byte_ascii.Pipe, Dlm_row = Byte_ascii.NewLine;		
+	}	static final byte Dlm_hdr_fld = Byte_ascii.Pipe, Dlm_row = Byte_ascii.Nl;		
 	public void Save(Io_url url) {
 		Bry_bfr bfr = Bry_bfr.new_();
 		Srl_save_bry(bfr);
@@ -153,7 +153,7 @@ public class Xob_xdat_file {
 			while (true) {
 				slot_bgn = itm_count * Len_idx_itm;
 				if (slot_bgn >= src_len) break;
-				if (src[slot_bgn] == Byte_ascii.NewLine) break;
+				if (src[slot_bgn] == Byte_ascii.Nl) break;
 				int tmp_val = Base85_utl.XtoIntByAry(src, slot_bgn, slot_bgn + Offset_base85);
 				slot_new = slot_old + tmp_val;
 				int new_idx = itm_count + 1;
@@ -186,7 +186,7 @@ public class Xob_xdat_file {
 			int row_len = row.length + dlm_len;
 			bfr.Add_base85_len_5(row_len).Add_byte(Byte_ascii.Pipe);
 		}
-		bfr.Add_byte(Byte_ascii.NewLine);
+		bfr.Add_byte(Byte_ascii.Nl);
 		for (int i = 1; i < rows_len; i++) {	// i=1; skip 1st row (which is empty header)
 			byte[] row = rows[i];
 			bfr.Add(row);

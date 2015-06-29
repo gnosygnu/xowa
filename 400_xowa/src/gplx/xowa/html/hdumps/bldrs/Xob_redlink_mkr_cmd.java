@@ -36,7 +36,7 @@ public class Xob_redlink_mkr_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		try {
 			while (rdr.Move_next()) {
 				// switch html_db if needed
-				int html_db_id = rdr.Read_int(page_tbl.Fld_html_db_id().Name());
+				int html_db_id = rdr.Read_int(page_tbl.Fld_html_db_id());
 				if (html_db_id != cur_html_db_id) {
 					if (html_dump_tbl != null) html_dump_tbl.Conn().Txn_end();
 					html_dump_tbl = wiki.Data__core_mgr().Dbs__get_at(html_db_id).Tbl__html();

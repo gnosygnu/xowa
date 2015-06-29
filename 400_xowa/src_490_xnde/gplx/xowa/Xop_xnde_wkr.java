@@ -67,7 +67,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		if (tag_obj != null) {
 			if (atrs_bgn_pos >= src_len) return ctx.Lxr_make_txt_(atrs_bgn_pos);	// truncated tag; EX: "<br"
 			switch (src[atrs_bgn_pos]) {	// NOTE: not sure about rules; Preprocessor_DOM.php calls preg_match on $elementsRegex which seems to break on word boundaries; $elementsRegex = "~($xmlishRegex)(?:\s|\/>|>)|(!--)~iA";
-				case Byte_ascii.Tab: case Byte_ascii.NewLine: case Byte_ascii.CarriageReturn: case Byte_ascii.Space:
+				case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Space:
 					++atrs_bgn_pos;	// set bgn_pos to be after ws
 					break;
 				case Byte_ascii.Slash: case Byte_ascii.Gt:
@@ -231,7 +231,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			boolean valid = true;
 			for (int i = tag_end_pos; i < gtPos; i++) {
 				switch (src[i]) {
-					case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.NewLine: break;
+					case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: break;
 					case Byte_ascii.Slash: break;
 					default: valid = false; break;
 				}
@@ -255,7 +255,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 				findPos = end_lhs;
 				for (int i = end_lhs + end_bry_len; i < src_len; i++) {
 					switch (src[i]) {
-						case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.NewLine: break;
+						case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: break;
 						case Byte_ascii.Slash: break;
 						case Byte_ascii.Gt: end_rhs = i + 1; i = src_len; break;	// +1 to place after Gt
 						default:			findPos = i    ; i = src_len; break;
@@ -521,7 +521,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			byte b = src[rv];
 			switch (b) {
 				case Byte_ascii.Space:
-				case Byte_ascii.NewLine:
+				case Byte_ascii.Nl:
 				case Byte_ascii.Tab:
 					++rv;
 					break;
@@ -674,7 +674,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 					case Xop_xnde_tag_.Tid_source:	// added on DATE:2014-06-24
 					case Xop_xnde_tag_.Tid_pre:	 // NOTE: pre must be an xtn, but does not create an xtn node (it gobbles up everything between); still need to touch the para_wkr; DATE:2014-02-20
 						ctx.Para().Process_block__xnde(tag, Xop_xnde_tag.Block_bgn);
-						if (Bry_finder.Find_fwd(src, Byte_ascii.NewLine, xnde.Tag_open_end(), xnde.Tag_close_bgn()) != Bry_finder.Not_found)
+						if (Bry_finder.Find_fwd(src, Byte_ascii.Nl, xnde.Tag_open_end(), xnde.Tag_close_bgn()) != Bry_finder.Not_found)
 							ctx.Para().Process_nl(ctx, root, src, xnde.Tag_open_bgn(), xnde.Tag_open_bgn());
 						ctx.Para().Process_block__xnde(tag, Xop_xnde_tag.Block_end);
 						break;

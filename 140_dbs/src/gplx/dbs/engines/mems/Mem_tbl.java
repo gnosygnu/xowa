@@ -23,7 +23,7 @@ public class Mem_tbl {
 	public Mem_tbl(Db_meta_tbl meta) {this.meta = meta;}
 	public Db_meta_tbl Meta() {return meta;} private final Db_meta_tbl meta;
 	public int Insert(Db_stmt__mem stmt) {
-		Mem_itm itm = new Mem_itm();
+		Mem_row itm = new Mem_row();
 		Db_meta_fld[] flds = meta.Flds();
 		int len = flds.length;
 		for (int i = 0; i < len; ++i) {
@@ -50,7 +50,7 @@ public class Mem_tbl {
 		int where_rows_len = where_rows.Count();
 		String[] update_cols = qry.Cols_for_update(); int update_cols_len = update_cols.length;
 		for (int i = 0; i < where_rows_len; ++i) {
-			Mem_itm itm = (Mem_itm)where_rows.Get_at(i);
+			Mem_row itm = (Mem_row)where_rows.Get_at(i);
 			for (int j = 0; j < update_cols_len; ++j)
 				itm.Set_by(update_cols[j], stmt.Args_get_at(j));
 		}
@@ -62,7 +62,7 @@ public class Mem_tbl {
 		Select_rows_where(where_rows, stmt, qry.Where());
 		int where_rows_len = where_rows.Count();
 		for (int i = 0; i < where_rows_len; ++i) {
-			Mem_itm itm = (Mem_itm)where_rows.Get_at(i);
+			Mem_row itm = (Mem_row)where_rows.Get_at(i);
 			rows.Del(itm);
 		}
 		return where_rows_len;
@@ -81,13 +81,13 @@ public class Mem_tbl {
 		}
 		where.Val_from_args(stmt.Crts());
 		Select_rows_where(where_rows, stmt, where);
-		return new Db_rdr__mem(select, (Mem_itm[])where_rows.To_ary_and_clear(Mem_itm.class));
+		return new Db_rdr__mem(select, (Mem_row[])where_rows.To_ary_and_clear(Mem_row.class));
 	}
 	private void Select_rows_where(List_adp rv, Db_stmt__mem stmt, Criteria crt) {
 		rv.Clear();
 		int rows_len = rows.Count();
 		for (int i = 0; i < rows_len; ++i) {
-			Mem_itm itm = (Mem_itm)rows.Get_at(i);
+			Mem_row itm = (Mem_row)rows.Get_at(i);
 			if (crt.Matches(itm)) 
 				rv.Add(itm);
 		}

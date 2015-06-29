@@ -99,7 +99,7 @@ public class Xop_hdr_wkr implements Xop_ctx_wkr {
 			if (cur == end) return cur;
 			byte b = src[cur];
 			switch (b) {
-				case Byte_ascii.NewLine:
+				case Byte_ascii.Nl:
 					cur++;
 					last_nl = cur;
 					break;

@@ -148,7 +148,7 @@ public class Json_parser {
 	private void Skip_ws() {
 		while (pos < src_len) {
 			switch (src[pos]) {
-				case Byte_ascii.Space: case Byte_ascii.NewLine: case Byte_ascii.Tab: case Byte_ascii.CarriageReturn: ++pos; break;
+				case Byte_ascii.Space: case Byte_ascii.Nl: case Byte_ascii.Tab: case Byte_ascii.Cr: ++pos; break;
 				default: return;
 			}
 		}

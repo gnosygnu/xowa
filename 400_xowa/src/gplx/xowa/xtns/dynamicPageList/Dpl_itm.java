@@ -64,7 +64,7 @@ class Dpl_itm {
 					key_id = Dpl_itm_keys.Parse(src, fld_bgn, fld_end, Dpl_itm_keys.Key_null);
 					if (key_id == Dpl_itm_keys.Key_null) {	// unknown key; warn and set pos to end of line; EX: "unknown=";
 						Parse_missing_key(usr_dlg, page_ttl, src, fld_bgn, fld_end);
-						fld_bgn = Bry_finder.Find_fwd(src, Byte_ascii.NewLine, pos);
+						fld_bgn = Bry_finder.Find_fwd(src, Byte_ascii.Nl, pos);
 						if (fld_bgn == Bry_.NotFound) loop = false;
 					}
 					else {									// known key; set pos to val_bgn
@@ -92,7 +92,7 @@ class Dpl_itm {
 			++pos;
 		}
 	}
-	private static final byte Dlm_fld = Byte_ascii.Eq, Dlm_row = Byte_ascii.NewLine;
+	private static final byte Dlm_fld = Byte_ascii.Eq, Dlm_row = Byte_ascii.Nl;
 	public void Parse_cmd(Xowe_wiki wiki, byte key_id, byte[] val) {
 		sub_root.Clear();
 		val = wiki.Parser().Parse_text_to_wtxt(sub_root, sub_ctx, sub_tkn_mkr, val);

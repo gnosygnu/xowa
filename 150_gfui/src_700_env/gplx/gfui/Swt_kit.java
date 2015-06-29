@@ -64,7 +64,6 @@ public class Swt_kit implements Gfui_kit {
 	public void 				Kit_sync_cmd_add(Swt_gui_cmd cmd) {synchronized (thread_lock) {sync_cmd_list.Add(cmd);}}
 	public void 				Kit_sync_cmd_del(Swt_gui_cmd cmd) {synchronized (thread_lock) {sync_cmd_list.Del(cmd);}}
 	public GfoInvkAbleCmd 		Kit_term_cbk() {return term_cbk;} public void Kit_term_cbk_(GfoInvkAbleCmd v) {this.term_cbk = v;} private GfoInvkAbleCmd term_cbk = GfoInvkAbleCmd.Null;
-	public Gfui_html_cfg 		Html_cfg() {return html_cfg;} private final Gfui_html_cfg html_cfg = new Gfui_html_cfg();
 	public void Kit_init(Gfo_usr_dlg gui_wtr) {
 		this.gui_wtr = gui_wtr;
 		this.msg_wkr_stop 	= new Swt_msg_wkr_stop(this, gui_wtr);
@@ -231,12 +230,11 @@ public class Swt_kit implements Gfui_kit {
 					Cfg_set(type, Swt_kit.Cfg_Html_BrowserType, Cfg_Html_BrowserType_parse(val));
 			}
 		}
-		else if	(String_.Eq(k, Invk_HtmlBox)) {return html_cfg;}
 		else if	(String_.Eq(k, Invk_ask_file)) return this.New_dlg_file(Gfui_kit_.File_dlg_type_open, m.Args_getAt(0).Val_to_str_or_empty()).Ask();
 		else if (String_.Eq(k, Invk_shell_close)) shell.close();
 		return this;
 	}
-	public static final String Invk_Cfg_add = "Cfg_add", Invk_HtmlBox = "HtmlBox", Invk_ask_file = "ask_file";	// private or public?
+	public static final String Invk_Cfg_add = "Cfg_add", Invk_ask_file = "ask_file";	// private or public?
 	public static final String Invk_shell_close = "shell_close";	// public
 	public static final Swt_kit _ = new Swt_kit(); private Swt_kit() {}	// singleton b/c of following line "In particular, some platforms which SWT supports will not allow more than one active display" (http://help.eclipse.org/indigo/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/swt/widgets/Display.html)
 	public static final String Cfg_Html_BrowserType = "BrowserType";

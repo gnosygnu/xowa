@@ -58,7 +58,7 @@ class Pxd_parser {
 		while (cur_pos < src_len) {
 			byte b = src[cur_pos];
 			switch (b) {	
-				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.NewLine:
+				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl:
 					if (tkn_type != Pxd_itm_.Tid_ws) MakePrvTkn(cur_pos, Pxd_itm_.Tid_ws); break; // SEE:NOTE_1 for logic
 				case Byte_ascii.Dash: case Byte_ascii.Dot: case Byte_ascii.Colon: case Byte_ascii.Slash:
 					if (tkn_type != b) MakePrvTkn(cur_pos, b); break;

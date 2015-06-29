@@ -31,7 +31,7 @@ class Io_sort_filCmd_reg implements Io_sort_filCmd { // 123|bgn|end|1
 	}	
 	public void Fil_end() {
 		bfr.Add_mid(prv_key, 0, prv_key_len).Add_byte(Byte_ascii.Pipe)
-			.Add_int_variable(itm_count).Add_byte(Byte_ascii.NewLine);
+			.Add_int_variable(itm_count).Add_byte(Byte_ascii.Nl);
 		itm_count = 0;
 	}
 	public void Flush(Io_url fil) {

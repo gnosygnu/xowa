@@ -99,7 +99,7 @@ public class Xob_xdat_file_tst {
 		Tfds.Eq_str_lines(expd, actl);		
 	}
 	private void tst_Find(Xob_xdat_file rdr, String find, int expd, boolean exact) {
-		rdr.Find(itm, Bry_.new_u8(find), 2, Byte_ascii.NewLine, exact);
+		rdr.Find(itm, Bry_.new_u8(find), 2, Byte_ascii.Nl, exact);
 		int id = Bry_.Xto_int_or(Bry_.Mid(itm.Itm_bry(), 0, 1), -1);
 			Tfds.Eq(expd, id);
 	}

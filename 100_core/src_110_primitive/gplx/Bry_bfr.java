@@ -159,7 +159,7 @@ public class Bry_bfr {
 	public Bry_bfr Add_byte_backslash()		{return Add_byte(Byte_ascii.Backslash);}
 	public Bry_bfr Add_byte_quote()			{return Add_byte(Byte_ascii.Quote);}
 	public Bry_bfr Add_byte_space()			{return Add_byte(Byte_ascii.Space);}
-	public Bry_bfr Add_byte_nl()			{return Add_byte(Byte_ascii.NewLine);}
+	public Bry_bfr Add_byte_nl()			{return Add_byte(Byte_ascii.Nl);}
 	public Bry_bfr Add_byte_dot()			{return Add_byte(Byte_ascii.Dot);}
 	public Bry_bfr Add_byte(byte val) {
 		int new_pos = bfr_len + 1;
@@ -362,7 +362,7 @@ public class Bry_bfr {
 		for (int i = bgn; i < end; i++) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.NewLine: 	bfr[bfr_len] = Byte_ascii.Backslash; bfr[bfr_len + 1] = Byte_ascii.Ltr_n;		bfr_len += 2; break;
+				case Byte_ascii.Nl: 	bfr[bfr_len] = Byte_ascii.Backslash; bfr[bfr_len + 1] = Byte_ascii.Ltr_n;		bfr_len += 2; break;
 				case Byte_ascii.Tab: 		bfr[bfr_len] = Byte_ascii.Backslash; bfr[bfr_len + 1] = Byte_ascii.Ltr_t;		bfr_len += 2; break;
 				case Byte_ascii.Backslash: 	bfr[bfr_len] = Byte_ascii.Backslash; bfr[bfr_len + 1] = Byte_ascii.Backslash; bfr_len += 2; break;
 				default:					bfr[bfr_len] = b; ++bfr_len; break;
@@ -399,6 +399,23 @@ public class Bry_bfr {
 		else										((Bry_fmtr_arg)o).XferAry(this, 0);
 		return this;
 	}
+	public Bry_bfr Add_obj_strict(Object o) {
+		if (o == null) return this;	// treat null as empty String;
+		Class<?> o_type = o.getClass();
+		if		(o_type == byte[].class)          Add((byte[])o);
+		else if	(o_type == Integer.class)         Add_int_variable(Int_.cast_(o));    
+		else if	(o_type == Byte.class)            Add_byte(Byte_.cast_(o));           
+		else if	(o_type == Long.class)            Add_long_variable(Long_.cast_(o));  
+		else if	(o_type == String.class)          Add_str((String)o);
+		else if	(o_type == Bry_bfr.class)			Add_bfr_and_preserve((Bry_bfr)o);
+		else if	(o_type == DateAdp.class)         Add_dte((DateAdp)o);
+		else if	(o_type == Io_url.class)			Add(((Io_url)o).RawBry());
+		else if	(o_type == Boolean.class)			Add_bool(Bool_.cast_(o));			
+		else if	(o_type == Double.class)			Add_double(Double_.cast_(o));		
+		else if	(o_type == Float.class)			Add_float(Float_.cast_(o));			
+		else										((Bry_fmtr_arg)o).XferAry(this, 0);
+		return this;
+	}
 	public Bry_bfr Add_yn(boolean v) {Add_byte(v ? Byte_ascii.Ltr_y : Byte_ascii.Ltr_n); return this;}
 	public Bry_bfr Add_base85_len_5(int v) {return Add_base85(v, 5);}
 	public Bry_bfr Add_base85(int v, int pad)	{
@@ -409,7 +426,7 @@ public class Bry_bfr {
 		return this;
 	}
 	public boolean Match_end_byt(byte b)		{return bfr_len == 0 ? false : bfr[bfr_len - 1] == b;}
-	public boolean Match_end_byt_nl_or_bos()	{return bfr_len == 0 ? true : bfr[bfr_len - 1] == Byte_ascii.NewLine;}
+	public boolean Match_end_byt_nl_or_bos()	{return bfr_len == 0 ? true : bfr[bfr_len - 1] == Byte_ascii.Nl;}
 	public boolean Match_end_ary(byte[] ary)	{return Bry_.Match(bfr, bfr_len - ary.length, bfr_len, ary);}
 	public Bry_bfr Insert_at(int add_pos, byte[] add_bry) {return Insert_at(add_pos, add_bry, 0, add_bry.length);}
 	public Bry_bfr Insert_at(int add_pos, byte[] add_bry, int add_bgn, int add_end) {

@@ -28,7 +28,7 @@ public class Xog_tab_itm_read_mgr {
 		Xoae_page cur_page = tab.Page(); Xog_html_itm html_itm = tab.Html_itm(); Gfui_html html_box = html_itm.Html_box();
 		Xog_win_itm win = tab.Tab_mgr().Win();
 		if (cur_page != null && !new_page_is_same) {	// if new_page_is_same, don't update DocPos; will "lose" current position
-			cur_page.Html_data().Bmk_pos_(html_box.Html_window_vpos());
+			cur_page.Html_data().Bmk_pos_(html_box.Html_js_eval_proc_as_str(Xog_js_procs.Win__vpos_get));
 			tab.History_mgr().Update_html_doc_pos(cur_page, history_nav_type);	// HACK: old_page is already in stack, but need to update its hdoc_pos
 		}
 		win.Usr_dlg().Prog_none("", "", "locating images");

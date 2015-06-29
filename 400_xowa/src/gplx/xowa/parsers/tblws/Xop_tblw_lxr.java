@@ -47,14 +47,14 @@ public class Xop_tblw_lxr implements Xop_lxr {
 					}
 					else {	// \n| or \n! but no tbl
 						if (	bgn_pos != Xop_parser_.Doc_bgn_bos		// avoid ! at BOS
-							&&	src[bgn_pos] == Byte_ascii.NewLine)		// handle "!" etc.
+							&&	src[bgn_pos] == Byte_ascii.Nl)		// handle "!" etc.
 							return Xop_tblw_wkr.Handle_false_tblw_match(ctx, root, src, bgn_pos, cur_pos, tkn_mkr.Txt(bgn_pos + 1, cur_pos), true);	// +1 to ignore \n of "\n!", "\n!!", "\n|"; DATE:2014-02-19
 						else											// handle "!!" only
 							return ctx.Lxr_make_txt_(cur_pos);
 					}
 				}
 				if (wlxr_type == Xop_tblw_wkr.Tblw_type_th2) {											// !!; extra check to make sure \n! exists; DATE:2014-10-19
-					int prv_th_pos = Bry_finder.Find_bwd(src, Byte_ascii.NewLine, bgn_pos);				// search for previous \n
+					int prv_th_pos = Bry_finder.Find_bwd(src, Byte_ascii.Nl, bgn_pos);				// search for previous \n
 					boolean invalid = prv_th_pos == Bry_finder.Not_found;									// no \n; invalid
 					if (!invalid) {
 						++prv_th_pos;																	// skip \n

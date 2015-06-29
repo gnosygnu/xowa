@@ -102,7 +102,7 @@ public class Ref_html_wtr_cfg {
 			boolean last = pos == len;
 			byte b = last ? Byte_ascii.Space : raw[pos];
 			switch (b) {
-				case Byte_ascii.Space: case Byte_ascii.NewLine: case Byte_ascii.Tab:
+				case Byte_ascii.Space: case Byte_ascii.Nl: case Byte_ascii.Tab:
 					if (bgn != -1) { // guard against leading ws, or multiple ws; EX: "bos\s\s" or "\s\s"
 						list.Add(Bry_.Mid(raw, bgn, pos));
 						bgn = -1;

@@ -51,7 +51,7 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 			);
 	}	private static byte[] Ignore_wiki_ess = Bry_.new_a7("es.wikisource.org"), Ignore_item_ess_random = Bry_.new_u8("special:Random/Página djvu");
 	public void Parse(Bry_bfr bfr, Bry_bfr comment_bfr, byte[] src) {
-		byte[][] lines = Bry_.Split(src, Byte_ascii.NewLine);
+		byte[][] lines = Bry_.Split(src, Byte_ascii.Nl);
 		int lines_len = lines.length;
 		Url_encoder id_encoder = Xoa_app_.Utl__encoder_mgr().Id();
 		Xowh_sidebar_itm cur_grp = null;
@@ -59,8 +59,8 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 		for (int i = 0; i < lines_len; i++) {
 			byte[] line = lines[i]; int line_len = line.length;
 			if	(line_len == 0) continue;					// skip blank lines
-			if	(line[0] != Byte_ascii.Asterisk) continue;	// skip non-list items; must begin with "*"
-			byte tid = line[1] == Byte_ascii.Asterisk ? Xowh_sidebar_itm.Tid_itm : Xowh_sidebar_itm.Tid_grp;
+			if	(line[0] != Byte_ascii.Star) continue;	// skip non-list items; must begin with "*"
+			byte tid = line[1] == Byte_ascii.Star ? Xowh_sidebar_itm.Tid_itm : Xowh_sidebar_itm.Tid_grp;
 			byte[] bry = Bry_.Trim(line, tid, line_len);	// trim *, **; note that tid indicates # of asterisks
 			bry = gplx.html.Html_utl.Del_comments(comment_bfr, bry);	// strip comments; DATE:2014-03-08
 			if (ignore_trie.Match_bgn(bry, 0, bry.length) != null) continue; // ignore SEARCH, TOOLBOX, LANGUAGES

@@ -124,9 +124,7 @@ public class Xof_fsdb_itm implements Xof_file_itm {
 	public void Html_orig_url_(Io_url v) {html_orig_url = v;}
 	public void Html_img_wkr_(Js_img_wkr v) {html_img_wkr = v;}
 	public void Html_gallery_mgr_h_(int v) {html_gallery_mgr_h = v;}
-	public void File_size_(long v) {
-		this.file_size = v;
-	}
+	public void File_size_(long v) {this.file_size = v;}
 	private void Orig_ttl_(byte[] v) {
 		this.orig_ttl = v;
 		this.orig_ttl_md5 = Xof_file_wkr_.Md5_fast(v);

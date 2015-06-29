@@ -18,35 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfui; import gplx.*;
 public class Gfui_html extends GfuiElemBase {		
 	public void					Under_html_(Gxw_html v) {under = v;} private Gxw_html under;
-	public String				Html_doc_html() {return under.Html_doc_html();}
 	public void					Html_doc_html_load_by_mem(String html)				{under.Html_doc_html_load_by_mem(html);}
 	public void					Html_doc_html_load_by_url(String path, String html)	{under.Html_doc_html_load_by_url(path, html);}
 	public byte					Html_doc_html_load_tid()							{return under.Html_doc_html_load_tid();}
 	public void					Html_doc_html_load_tid_(byte v)						{under.Html_doc_html_load_tid_(v);}
-	public String				Html_doc_selected_get_text_or_href() {return under.Html_doc_selected_get_text_or_href();}
-	public String				Html_doc_selected_get_href_or_text() {return under.Html_doc_selected_get_href_or_text();}
-	public String				Html_doc_selected_get_src_or_empty() {return under.Html_doc_selected_get_src_or_empty();}
-	public String				Html_doc_selected_get_active_or_selection() {return under.Html_doc_selected_get_active_or_selection();}		
-	public boolean				Html_doc_find(String elem_id, String find, boolean dir_fwd, boolean case_match, boolean wrap_find, boolean highlight_matches) {return under.Html_doc_find(elem_id, find, dir_fwd, case_match, wrap_find, highlight_matches);}
-	public void					Html_doc_body_focus() {under.Html_doc_body_focus();}
-	public void					Html_doc_selection_focus_toggle() {under.Html_doc_selection_focus_toggle();}
-	@gplx.Virtual public String		Html_elem_atr_get_str(String elem_id, String atr_key) {return under.Html_elem_atr_get_str(elem_id, atr_key);}
-	@gplx.Virtual public boolean			Html_elem_atr_get_bool(String elem_id, String atr_key) {return under.Html_elem_atr_get_bool(elem_id, atr_key);}
-	public boolean					Html_elem_atr_set(String elem_id, String atr_key, String v) {return under.Html_elem_atr_set(elem_id, atr_key, v);}
-	public boolean					Html_elem_atr_set_append(String elem_id, String atr_key, String append) {return under.Html_elem_atr_set_append(elem_id, atr_key, append);}
-	public boolean			  		Html_elem_delete(String elem_id) {return under.Html_elem_delete(elem_id);}
-	public boolean			  		Html_elem_replace_html(String id, String html) {return under.Html_elem_replace_html(id, html);}
-	public boolean			  		Html_elem_append_above(String id, String html) {return under.Html_elem_append_above(id, html);}
-	public boolean					Html_gallery_packed_exec() {return under.Html_gallery_packed_exec();}
-	public void					Html_elem_focus(String elem_id) {under.Html_elem_focus(elem_id);}
-	public boolean			  		Html_elem_scroll_into_view(String elem_id) {return under.Html_elem_scroll_into_view(elem_id);}
-	public boolean					Html_elem_img_update(String elem_id, String elem_src, int elem_width, int elem_height) {return under.Html_elem_img_update(elem_id, elem_src, elem_width, elem_height);}
-	public String				Html_window_vpos() {return under.Html_window_vpos();}
-	public void					Html_window_vpos_(String v) {under.Html_window_vpos_(v);}
-	public boolean					Html_window_print_preview() {return under.Html_window_print_preview();}
-	public String				Html_active_atr_get_str(String atrKey, String or) {return under.Html_active_atr_get_str(atrKey, or);}
 	public void					Html_js_enabled_(boolean v) {under.Html_js_enabled_(v);}
-	public void					Html_js_eval_proc(String name, String... args) {under.Html_js_eval_proc(name, args);}
+	@gplx.Virtual public String		Html_js_eval_proc_as_str(String name, Object... args) {return under.Html_js_eval_proc_as_str(name, args);}
+	@gplx.Virtual public boolean			Html_js_eval_proc_as_bool(String name, Object... args) {return under.Html_js_eval_proc_as_bool(name, args);}
 	public String				Html_js_eval_script(String script) {return under.Html_js_eval_script(script);}
 	public void					Html_js_cbks_add(String js_func_name, GfoInvkAble invk) {under.Html_js_cbks_add(js_func_name, invk);}
 	public void					Html_invk_src_(GfoEvObj v) {under.Html_invk_src_(v);}

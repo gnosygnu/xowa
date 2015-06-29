@@ -71,11 +71,11 @@ class Xog_find_box {
 	}
 	private void Exec_find(String find, boolean highlight_matches) {
 		Xog_tab_itm tab = win.Tab_mgr().Active_tab(); if (tab == Xog_tab_itm_.Null) return;
-		String elem_id = tab.View_mode() == Xopg_view_mode.Tid_read 
-			? Gfui_html.Elem_id_body
-			: Xog_html_itm.Elem_id__xowa_edit_data_box
-			;
-		tab.Html_box().Html_doc_find(elem_id, find, dir_fwd, case_match, wrap_search, highlight_matches);
+		boolean find_in_hdoc = tab.View_mode() == Xopg_view_mode.Tid_read;
+		if (find_in_hdoc)
+			tab.Html_box().Html_js_eval_proc_as_str(Xog_js_procs.Win__find_in_hdoc		, find, dir_fwd, case_match, wrap_search, highlight_matches);
+		else
+			tab.Html_box().Html_js_eval_proc_as_str(Xog_js_procs.Win__find_in_textarea	, find, dir_fwd, case_match, wrap_search);
 		win.Usr_dlg().Prog_direct("");
 	}
 	public void Case_toggle() {

@@ -136,7 +136,7 @@ public class Xop_list_wkr implements Xop_ctx_wkr {
 				for (int i = cur_pos; i < src_len; i++) {
 					curByt = src[i];
 					switch (curByt) {
-						case Byte_ascii.Asterisk:
+						case Byte_ascii.Star:
 						case Byte_ascii.Hash:
 						case Byte_ascii.Semic:
 						case Byte_ascii.Colon:
@@ -156,7 +156,7 @@ public class Xop_list_wkr implements Xop_ctx_wkr {
 			}
 			curByt = src[cur_pos];
 			switch (curByt) {
-				case Byte_ascii.Asterisk:
+				case Byte_ascii.Star:
 				case Byte_ascii.Hash:
 				case Byte_ascii.Semic:
 					curSymAry[curSymLen++] = curByt;

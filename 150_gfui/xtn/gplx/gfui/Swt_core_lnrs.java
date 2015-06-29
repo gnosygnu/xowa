@@ -74,7 +74,7 @@ class Swt_lnr_key implements KeyListener {
 	IptEvtDataKey XtoKeyData(KeyEvent ev) {
 		int val = ev.keyCode;
 		switch (val) {
-			case Byte_ascii.CarriageReturn:	val = 10; break; // enter key is 13 whereas .net/swing is 10
+			case Byte_ascii.Cr:	val = 10; break; // enter key is 13 whereas .net/swing is 10
 			case Byte_ascii.Ltr_a: case Byte_ascii.Ltr_b: case Byte_ascii.Ltr_c: case Byte_ascii.Ltr_d: case Byte_ascii.Ltr_e:
 			case Byte_ascii.Ltr_f: case Byte_ascii.Ltr_g: case Byte_ascii.Ltr_h: case Byte_ascii.Ltr_i: case Byte_ascii.Ltr_j:
 			case Byte_ascii.Ltr_k: case Byte_ascii.Ltr_l: case Byte_ascii.Ltr_m: case Byte_ascii.Ltr_n: case Byte_ascii.Ltr_o:

@@ -40,12 +40,12 @@ class Xows_text_parser__v1 {
 			switch (b) {
 				case Byte_ascii.Underline:	// underline is word-breaking; EX: A_B -> A, B
 				case Byte_ascii.Space:		// should not occur, but just in case (only underscores)
-				case Byte_ascii.Tab: case Byte_ascii.NewLine: case Byte_ascii.CarriageReturn:	// should not occur in titles, but just in case
+				case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr:	// should not occur in titles, but just in case
 
 				case Byte_ascii.Dash:	// treat hypenated words separately
 				case Byte_ascii.Dot:	// treat abbreviations as separate words; EX: A.B.C.
 				case Byte_ascii.Bang: case Byte_ascii.Hash: case Byte_ascii.Dollar: case Byte_ascii.Percent:
-				case Byte_ascii.Amp: case Byte_ascii.Paren_bgn: case Byte_ascii.Paren_end: case Byte_ascii.Asterisk:
+				case Byte_ascii.Amp: case Byte_ascii.Paren_bgn: case Byte_ascii.Paren_end: case Byte_ascii.Star:
 				case Byte_ascii.Comma: case Byte_ascii.Slash:
 				case Byte_ascii.Colon: case Byte_ascii.Semic: case Byte_ascii.Gt:
 				case Byte_ascii.Question: case Byte_ascii.At: case Byte_ascii.Brack_bgn: case Byte_ascii.Brack_end:

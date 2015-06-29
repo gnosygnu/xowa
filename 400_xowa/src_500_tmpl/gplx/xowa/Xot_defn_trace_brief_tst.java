@@ -42,7 +42,7 @@ class Xot_defn_trace_fxt {
 		Xop_root_tkn root = ctx.Tkn_mkr().Root(src);
 		fxt.Parser().Parse_page_all_clear(root, ctx, ctx.Tkn_mkr(), src);
 		ctx.Defn_trace().Print(src, tmp);
-		String[] actl_ary = String_.Split(tmp.Xto_str_and_clear(), (char)Byte_ascii.NewLine);
+		String[] actl_ary = String_.Split(tmp.Xto_str_and_clear(), (char)Byte_ascii.Nl);
 		Tfds.Eq_ary(expd_ary, actl_ary);
 	}	private Bry_bfr tmp = Bry_bfr.new_();
 	String[] XtoStr(Xot_defn_trace_itm_brief[] ary) {

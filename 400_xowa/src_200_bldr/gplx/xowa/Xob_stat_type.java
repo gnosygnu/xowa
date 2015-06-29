@@ -28,7 +28,7 @@ public class Xob_stat_type {
 			Xob_stat_itm itm = (Xob_stat_itm)regy.Get_at(i);
 			sb.Add(Xotdb_dir_info_.Tid_name(tid)).Add(Xob_stat_itm.Dlm);
 			itm.XtoStr(sb);
-			sb.Add(Byte_ascii.NewLine);
+			sb.Add(Byte_ascii.Nl);
 		}
 	}
 	Ordered_hash regy = Ordered_hash_.new_();

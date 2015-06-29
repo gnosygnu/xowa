@@ -93,7 +93,7 @@ class Xoad_dump_itm {
 		for (int i = bgn; i < end; i++) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.NewLine:	bfr.Add_byte(Byte_ascii.Backslash); bfr.Add_byte(Byte_ascii.Ltr_n); break;
+				case Byte_ascii.Nl:	bfr.Add_byte(Byte_ascii.Backslash); bfr.Add_byte(Byte_ascii.Ltr_n); break;
 				case Byte_ascii.Tab:		bfr.Add_byte(Byte_ascii.Backslash); bfr.Add_byte(Byte_ascii.Ltr_t); break;
 				default:					bfr.Add_byte(b); break;
 			}

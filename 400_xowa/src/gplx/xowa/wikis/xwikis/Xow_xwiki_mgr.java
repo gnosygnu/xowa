@@ -61,7 +61,7 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 		return (Xow_domain[])rv.To_ary_and_clear(Xow_domain.class);
 	}
 	public void Add_bulk(byte[] raw) {
-		byte[][] rows = Bry_.Split(raw, Byte_ascii.NewLine);
+		byte[][] rows = Bry_.Split(raw, Byte_ascii.Nl);
 		int rows_len = rows.length;
 		Hash_adp_bry lang_regy = Xol_lang_itm_.Regy();
 		for (int i = 0; i < rows_len; i++) {

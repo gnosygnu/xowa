@@ -193,7 +193,7 @@ public class Bry_fmtr {
 					}
 					else {	// ~{0}; ~~ -> ~; ~n -> newLine; ~t -> tab
 						if		(nxt_byte == char_escape)		tmp_byte = char_escape;
-						else if	(nxt_byte == char_escape_nl)	tmp_byte = Byte_ascii.NewLine;
+						else if	(nxt_byte == char_escape_nl)	tmp_byte = Byte_ascii.Nl;
 						else if (nxt_byte == char_escape_tab)	tmp_byte = Byte_ascii.Tab;
 						else {
 							if (fail_when_invalid_escapes) throw Err_.new_("unknown escape code").Add("code", Char_.XbyInt(nxt_byte)).Add("fmt_pos", fmt_pos + 1);

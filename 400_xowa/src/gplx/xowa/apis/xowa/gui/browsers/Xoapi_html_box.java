@@ -30,12 +30,12 @@ public class Xoapi_html_box implements GfoInvkAble, GfoEvMgrOwner {
 		Gfui_html html_box = tab.Html_itm().Html_box();
 		html_box.Focus();
 		if (tab.View_mode() != Xopg_view_mode.Tid_read)	// if edit / html, place focus in edit box
-			html_box.Html_elem_focus(Xog_html_itm.Elem_id__xowa_edit_data_box);
+			html_box.Html_js_eval_proc_as_str(Xog_js_procs.Doc__elem_focus, Xog_html_itm.Elem_id__xowa_edit_data_box);
 	}
 	public void Selection_focus() {
 		Xog_tab_itm tab = win.Active_tab(); if (tab == Xog_tab_itm_.Null) return;
 		Gfui_html html_box = tab.Html_itm().Html_box();
-		html_box.Html_doc_selection_focus_toggle();
+		html_box.Html_js_eval_proc_as_str(Xog_js_procs.Selection__toggle_focus_for_anchor);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_focus)) 							this.Focus();

@@ -21,13 +21,13 @@ public class Xoh_file_wtr_basic_tst {
 	private Xop_fxt fxt = new Xop_fxt();
 	@Before public void init() {fxt.Reset();}
 	@Test  public void Img_full() {	// PURPOSE: full with title was outputting invalid html; DATE:2013-12-31
-		fxt.Wtr_cfg().Lnki_title_(true);
+		fxt.Wtr_cfg().Lnki__title_(true);
 		fxt.Test_parse_page_wiki_str
 		(	"[[File:A.png]]"
 		,	String_.Concat_lines_nl_skip_last
 		(	"<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"	// NOTE: used to output class=\"image\"A.png 
 		));
-		fxt.Wtr_cfg().Lnki_title_(false);
+		fxt.Wtr_cfg().Lnki__title_(false);
 	}
 	@Test  public void Img_embed() {
 		fxt.Test_parse_page_wiki_str("[[File:A.png|9x8px|alt=abc]]", Xop_fxt.html_img_none("File:A.png", "abc", "file:///mem/wiki/repo/trg/thumb/7/0/A.png/9px.png", "A.png"));
@@ -185,65 +185,65 @@ public class Xoh_file_wtr_basic_tst {
 		fxt.Init_para_n_();
 	}
 	@Test  public void Img_title() {
-		fxt.Wtr_cfg().Lnki_title_(true);
+		fxt.Wtr_cfg().Lnki__title_(true);
 		Tst_img_title("[[File:A.png|frameless|a b]]", "a b");
 		Tst_img_title("[[File:A.png|thumb|a b]]", "Enlarge");	// caption should not replace text
-		fxt.Wtr_cfg().Lnki_title_(false);
+		fxt.Wtr_cfg().Lnki__title_(false);
 	}
 	@Test   public void Title_escape() {	// PURPOSE: escape quotes in title; PAGE:none; DATE:2014-10-27
-		fxt.Wtr_cfg().Lnki_title_(true);
+		fxt.Wtr_cfg().Lnki__title_(true);
 		fxt.Test_parse_page_wiki_str("[[A\"B]]", "<a href=\"/wiki/A%22B\" title=\"A&quot;B\">A\"B</a>");
-		fxt.Wtr_cfg().Lnki_title_(false);
+		fxt.Wtr_cfg().Lnki__title_(false);
 	}
 	@Test  public void Img_title__caption_has_lnki() {	// PURPOSE: caption with lnki should show in title; PAGE:en.w:Earth; DATE:2014-08-06
-		fxt.Wtr_cfg().Lnki_title_(true);
+		fxt.Wtr_cfg().Lnki__title_(true);
 		Tst_img_title("[[File:A.png|frameless|[[A]]]]"		, "A");		// ttl only
 		Tst_img_title("[[File:A.png|frameless|[[A|B]]]]"	, "B");		// caption
 		Tst_img_title("[[File:A.png|frameless|[[A]]b]]"		, "Ab");	// tail
-		fxt.Wtr_cfg().Lnki_title_(false);
+		fxt.Wtr_cfg().Lnki__title_(false);
 	}
 	@Test  public void Lnki_alt_is_text() {	// PURPOSE: (a) alt should default to caption; (b) alt should not show html chars (like <a src=")
-		fxt.Wtr_cfg().Lnki_title_(true);
+		fxt.Wtr_cfg().Lnki__title_(true);
 		fxt.Test_parse_page_all_str
 		(	"[[File:A.png|a[[b]]c]]"
 		,	"<a href=\"/wiki/File:A.png\" class=\"image\" title=\"aBc\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"abc\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
 		);
-		fxt.Wtr_cfg().Lnki_title_(false);
+		fxt.Wtr_cfg().Lnki__title_(false);
 	}
 	@Test  public void Alt_ignore_apos() {// PURPOSE: alt should ignore apos; EX: [[File:A.png|''A'']] should have alt of A; DATE:2013-10-25
-		fxt.Wtr_cfg().Lnki_title_(true);
+		fxt.Wtr_cfg().Lnki__title_(true);
 		fxt.Test_parse_page_all_str
 			(	"[[File:A.png|''b'']]"
 			,	"<a href=\"/wiki/File:A.png\" class=\"image\" title=\"b\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"b\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
 			);
-		fxt.Wtr_cfg().Lnki_title_(false);
+		fxt.Wtr_cfg().Lnki__title_(false);
 	}
 	@Test  public void Alt_ignore_lnke() {// PURPOSE: alt should ignore lnke
-		fxt.Wtr_cfg().Lnki_title_(true);
+		fxt.Wtr_cfg().Lnki__title_(true);
 		fxt.Test_parse_page_all_str
 			(	"[[File:A.png|b[http://c.org d] e]]"
 			,	"<a href=\"/wiki/File:A.png\" class=\"image\" title=\"bd e\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"bd e\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
 			);
-		fxt.Wtr_cfg().Lnki_title_(false);
+		fxt.Wtr_cfg().Lnki__title_(false);
 	}
 	@Test  public void Alt_ignore_list() {// PURPOSE: alt should ignore list
-		fxt.Wtr_cfg().Lnki_title_(true);
+		fxt.Wtr_cfg().Lnki__title_(true);
 		fxt.Test_parse_page_all_str
 		(	"[[File:A.png|b\n*c]]"
 		,	"<a href=\"/wiki/File:A.png\" class=\"image\" title=\"bc\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"b*c\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
 		);
-		fxt.Wtr_cfg().Lnki_title_(false);
+		fxt.Wtr_cfg().Lnki__title_(false);
 	}
 	@Test  public void Alt_ignore_tblw() {// PURPOSE: alt should ignore tblw
-		fxt.Wtr_cfg().Lnki_title_(true);
+		fxt.Wtr_cfg().Lnki__title_(true);
 		fxt.Test_parse_page_all_str
 			(	"[[File:A.png|\n{|\n|-\n|b\n|}\n]]"
 			,	"<a href=\"/wiki/File:A.png\" class=\"image\" title=\"b&#10;\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"   b  \" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
 			);
-		fxt.Wtr_cfg().Lnki_title_(false);
+		fxt.Wtr_cfg().Lnki__title_(false);
 	}
 	@Test  public void Alt_ignore_para() {// PURPOSE: alt should ignore para
-		fxt.Wtr_cfg().Lnki_title_(true);
+		fxt.Wtr_cfg().Lnki__title_(true);
 		fxt.Init_para_y_();
 		fxt.Test_parse_page_all_str
 			(	"[[File:A.png|b\nc]]"
@@ -252,15 +252,15 @@ public class Xoh_file_wtr_basic_tst {
 			,	"</p>"
 			));
 		fxt.Init_para_n_();
-		fxt.Wtr_cfg().Lnki_title_(false);
+		fxt.Wtr_cfg().Lnki__title_(false);
 	}
 	@Test  public void Lnki_empty_alt_is_omitted() {// PURPOSE: empty alt should be ignored; DATE:2013-07-30
-		fxt.Wtr_cfg().Lnki_title_(true);
+		fxt.Wtr_cfg().Lnki__title_(true);
 		fxt.Test_parse_page_all_str
 		(	"[[File:A.png|a|alt=]]"
 		,	"<a href=\"/wiki/File:A.png\" class=\"image\" title=\"a\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
 		);
-		fxt.Wtr_cfg().Lnki_title_(false);
+		fxt.Wtr_cfg().Lnki__title_(false);
 	}
 	@Test   public void Href_anchor_leading_space() {	// PURPOSE: space before anchor should be preserved, not " " -> "#"
 		fxt.Test_parse_page_all_str("[[A #b]]", "<a href=\"/wiki/A#b\">A #b</a>");
@@ -275,13 +275,13 @@ public class Xoh_file_wtr_basic_tst {
 		fxt.Test_parse_page_all_str("[[Help:a #b]]", "<a href=\"/wiki/Help:A#b\">Help:A #b</a>");
 	}
 	@Test  public void Lnki_caption_nested_file() { // PURPOSE: nested lnki in caption breaks alt with html chars; EX:de.w:Wien; DATE:2013-12-16
-		fxt.Wtr_cfg().Lnki_title_(true);
+		fxt.Wtr_cfg().Lnki__title_(true);
 		fxt.Test_parse_page_wiki_str("[[File:A.png|none|[[File:B.png|20px|d]] c]]", String_.Concat_lines_nl_skip_last
 			(	"<div class=\"floatnone\">"
 			,	"<a href=\"/wiki/File:A.png\" class=\"image\" title=\"d c\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"d c\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a></div>"
 			,	""
 			));
-		fxt.Wtr_cfg().Lnki_title_(false);
+		fxt.Wtr_cfg().Lnki__title_(false);
 	}
 	private void Tst_img_title(String raw, String expd_ttl) {
 		String actl = fxt.Exec_parse_page_wiki_as_str(raw);

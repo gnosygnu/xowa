@@ -58,7 +58,7 @@ class Xoud_user_tbl {
 	}
 	public int Select_id_next() {
 		int rv = 1;
-		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empy).Exec_select__rls_auto();
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empty).Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {
 				int cur = rdr.Read_int(fld_id);

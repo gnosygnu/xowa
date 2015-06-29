@@ -17,8 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
 public class Xoh_html_wtr_cfg {
-	public boolean Toc_show() {return toc_show;} public Xoh_html_wtr_cfg Toc_show_(boolean v) {toc_show = v; return this;} private boolean toc_show;
-	public boolean Lnki_id() {return lnki_id;} public Xoh_html_wtr_cfg Lnki_id_(boolean v) {lnki_id = v; return this;} private boolean lnki_id;
-	public boolean Lnki_title() {return lnki_title;} public Xoh_html_wtr_cfg Lnki_title_(boolean v) {lnki_title = v; return this;} private boolean lnki_title;
-	public boolean Lnki_visited() {return lnki_visited;} public Xoh_html_wtr_cfg Lnki_visited_(boolean v) {lnki_visited = v; return this;} private boolean lnki_visited;
+	public boolean Toc__show()			{return toc__show;} public Xoh_html_wtr_cfg Toc__show_(boolean v) {toc__show = v; return this;} private boolean toc__show;
+	public boolean Lnki__id()			{return lnki__id;} public Xoh_html_wtr_cfg Lnki__id_y_() {lnki__id = Bool_.Y; return this;} private boolean lnki__id;
+	public boolean Lnki__title()		{return lnki__title;} public Xoh_html_wtr_cfg Lnki__title_(boolean v)	{lnki__title = v; return this;} private boolean lnki__title;
+	public boolean Lnki__visited()		{return lnki__visited;} public Xoh_html_wtr_cfg Lnki_visited_y_() {lnki__visited = true; return this;} private boolean lnki__visited;
+	public boolean Hdr__div_wrapper()	{return hdr__div_wrapper;} public Xoh_html_wtr_cfg Hdr__div_wrapper_(boolean v) {hdr__div_wrapper = v; return this;} private boolean hdr__div_wrapper;
 }

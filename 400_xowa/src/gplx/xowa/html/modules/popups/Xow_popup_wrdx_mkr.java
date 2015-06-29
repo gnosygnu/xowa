@@ -129,7 +129,7 @@ public class Xow_popup_wrdx_mkr {
 						wrdx_bfr.Del_by_1();
 				}
 				if (	tkn_src_end < wtxt_len				// bounds check
-					&&	wtxt_bry[tkn_src_end] == Byte_ascii.NewLine	// hdr_tkn will not include trailing "\n". add it; note that this behavior is by design. NOTE:hdr.trailing_nl; DATE:2014-06-17
+					&&	wtxt_bry[tkn_src_end] == Byte_ascii.Nl	// hdr_tkn will not include trailing "\n". add it; note that this behavior is by design. NOTE:hdr.trailing_nl; DATE:2014-06-17
 					) {
 					wrdx_bfr.Add_mid(wtxt_bry, tkn_src_bgn, tkn_src_end + 1);	// +1 to add the trailing \n
 					add_tkn = false;
@@ -195,8 +195,8 @@ public class Xow_popup_wrdx_mkr {
 	private boolean Wtxt_bfr_ends_w_2_nl(Bry_bfr wrdx_bfr, int wrdx_bfr_len) {
 		byte[] hdom_bfr_bry = wrdx_bfr.Bfr();
 		return
-			(	hdom_bfr_bry[wrdx_bfr_len - 1] == Byte_ascii.NewLine	// prv 2 bytes are \n
-			&&	hdom_bfr_bry[wrdx_bfr_len - 2] == Byte_ascii.NewLine
+			(	hdom_bfr_bry[wrdx_bfr_len - 1] == Byte_ascii.Nl	// prv 2 bytes are \n
+			&&	hdom_bfr_bry[wrdx_bfr_len - 2] == Byte_ascii.Nl
 			);
 	}
 }

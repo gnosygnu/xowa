@@ -50,7 +50,7 @@ public class Xowd_cat_link_tbl implements RlsAble {
 			.Val_int(fld_timestamp		, timestamp)
 			.Exec_insert();
 	}
-	public void Delete_all() {conn.Stmt_delete(tbl_name, Db_meta_fld.Ary_empy).Exec_delete();}
+	public void Delete_all() {conn.Stmt_delete(tbl_name, Db_meta_fld.Ary_empty).Exec_delete();}
 	public int Select_by_type(List_adp list, int cat_page_id, byte arg_tid, byte[] arg_sortkey, boolean arg_is_from, int limit) {
 		String arg_sortkey_str = arg_sortkey == null ? "" : String_.new_u8(arg_sortkey);
 		gplx.core.criterias.Criteria comp_crt = !arg_is_from 

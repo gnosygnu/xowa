@@ -53,7 +53,7 @@ public class Xop_xatr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_AT
 			b = src[i];
 			switch (b) {
 				case Byte_ascii.Gt:			return i;
-				case Byte_ascii.Space: case Byte_ascii.NewLine: case Byte_ascii.Tab: // skip any ws
+				case Byte_ascii.Space: case Byte_ascii.Nl: case Byte_ascii.Tab: // skip any ws
 					break;
 				case Byte_ascii.Slash:
 					if (slash_found)		{log_mgr.Add_str_warn_key_none(Msg_mgr, "multiple slashes not allowed", src, i); return String_.Find_none;}	// only allow one slash
@@ -108,7 +108,7 @@ public class Xop_xatr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_AT
 			switch (mode) {
 				case Mode_atr_bgn:
 					switch (b) {
-						case Byte_ascii.Space: case Byte_ascii.NewLine: case Byte_ascii.Tab: // skip any ws at bgn; note that once a non-ws char is encountered, it will immediately go into another mode
+						case Byte_ascii.Space: case Byte_ascii.Nl: case Byte_ascii.Tab: // skip any ws at bgn; note that once a non-ws char is encountered, it will immediately go into another mode
 							break;
 						case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
 						case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
@@ -143,7 +143,7 @@ public class Xop_xatr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_AT
 					break;
 				case Mode_invalid:
 					switch (b) {
-						case Byte_ascii.Space: case Byte_ascii.NewLine: case Byte_ascii.Tab:
+						case Byte_ascii.Space: case Byte_ascii.Nl: case Byte_ascii.Tab:
 							Make(log_mgr, src, i);
 							mode = Mode_atr_bgn;
 							break;
@@ -168,7 +168,7 @@ public class Xop_xatr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_AT
 						case Byte_ascii.Colon: case Byte_ascii.Dash: case Byte_ascii.Dot: case Byte_ascii.Underline:
 							if (key_bfr_on) key_bfr.Add_byte(b);
 							break;
-						case Byte_ascii.Space: case Byte_ascii.NewLine: case Byte_ascii.Tab:
+						case Byte_ascii.Space: case Byte_ascii.Nl: case Byte_ascii.Tab:
 							if (valid) {
 								key_end = i;
 								mode = Mode_eq;
@@ -201,7 +201,7 @@ public class Xop_xatr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_AT
 					break;
 				case Mode_eq:
 					switch (b) {
-						case Byte_ascii.Space: case Byte_ascii.NewLine: case Byte_ascii.Tab: // skip ws
+						case Byte_ascii.Space: case Byte_ascii.Nl: case Byte_ascii.Tab: // skip ws
 							if (key_end == -1) {		// EX: "a = b"; key_end != -1 b/c 1st \s sets key_end; EX: "a b = c"; key_end
 								val_end = i - 1;
 								Make(log_mgr, src, i);
@@ -223,7 +223,7 @@ public class Xop_xatr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_AT
 					break;
 				case Mode_val_bgn:
 					switch (b) {
-						case Byte_ascii.Space: case Byte_ascii.NewLine: case Byte_ascii.Tab: // skip-ws
+						case Byte_ascii.Space: case Byte_ascii.Nl: case Byte_ascii.Tab: // skip-ws
 							ws_is_before_val = true;
 							break;
 						case Byte_ascii.Quote: case Byte_ascii.Apos:
@@ -283,7 +283,7 @@ public class Xop_xatr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_AT
 							}
 							prv_is_ws = false;
 							break;
-						case Byte_ascii.NewLine: case Byte_ascii.Tab: case Byte_ascii.CarriageReturn:	// REF.MW:Sanitizer.php|decodeTagAttributes $value = preg_replace( '/[\t\r\n ]+/', ' ', $value );
+						case Byte_ascii.Nl: case Byte_ascii.Tab: case Byte_ascii.Cr:	// REF.MW:Sanitizer.php|decodeTagAttributes $value = preg_replace( '/[\t\r\n ]+/', ' ', $value );
 						case Byte_ascii.Space:
 							if (!val_bfr_on) {
 								val_bfr.Add_mid(src, val_bgn, i);
@@ -314,14 +314,14 @@ public class Xop_xatr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_AT
 						case Byte_ascii.Ltr_p: case Byte_ascii.Ltr_q: case Byte_ascii.Ltr_r: case Byte_ascii.Ltr_s: case Byte_ascii.Ltr_t:
 						case Byte_ascii.Ltr_u: case Byte_ascii.Ltr_v: case Byte_ascii.Ltr_w: case Byte_ascii.Ltr_x: case Byte_ascii.Ltr_y: case Byte_ascii.Ltr_z:
 						case Byte_ascii.Bang: case Byte_ascii.Hash: case Byte_ascii.Dollar: case Byte_ascii.Percent:
-						case Byte_ascii.Amp: case Byte_ascii.Paren_bgn: case Byte_ascii.Paren_end: case Byte_ascii.Asterisk:
+						case Byte_ascii.Amp: case Byte_ascii.Paren_bgn: case Byte_ascii.Paren_end: case Byte_ascii.Star:
 						case Byte_ascii.Comma: case Byte_ascii.Dash: case Byte_ascii.Dot: case Byte_ascii.Slash:
 						case Byte_ascii.Colon: case Byte_ascii.Semic: case Byte_ascii.Gt:
 						case Byte_ascii.Question: case Byte_ascii.At: case Byte_ascii.Brack_bgn: case Byte_ascii.Brack_end:
 						case Byte_ascii.Pow: case Byte_ascii.Underline: case Byte_ascii.Tick:
 						case Byte_ascii.Curly_bgn: case Byte_ascii.Pipe: case Byte_ascii.Curly_end: case Byte_ascii.Tilde:
 							break;
-						case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.NewLine:
+						case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl:
 							val_end = i;
 							Make(log_mgr, src, i);
 							break;

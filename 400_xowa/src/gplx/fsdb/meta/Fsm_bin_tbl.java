@@ -43,7 +43,7 @@ public class Fsm_bin_tbl {
 	}
 	public Fsm_bin_fil[] Select_all(Fsdb_db_mgr db_conn_mgr) {
 		List_adp rv = List_adp_.new_();
-		Db_rdr rdr = conn.Stmt_select_order(tbl_name, flds, Db_meta_fld.Ary_empy, fld_uid).Clear().Exec_select__rls_auto();
+		Db_rdr rdr = conn.Stmt_select_order(tbl_name, flds, Db_meta_fld.Ary_empty, fld_uid).Clear().Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {
 				int bin_id = rdr.Read_int(fld_uid);

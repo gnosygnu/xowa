@@ -47,7 +47,7 @@ public class Xows_ns_mgr {
 		int ns_enabled = Bry_.Xto_int(val);
 		if (ns_enabled == 1) {										// make sure set to 1; EX: ignore &ns0=0
 			int key_len = key.length;
-			if (key_len == 3 && key[2] == Byte_ascii.Asterisk)		// translate ns* as ns_all
+			if (key_len == 3 && key[2] == Byte_ascii.Star)		// translate ns* as ns_all
 				ns_all = true;
 			else {
 				int ns_id = Bry_.Xto_int_or(key, 2, key_len, Int_.MinValue);
@@ -77,5 +77,5 @@ public class Xows_ns_mgr {
 			return tmp_bfr.Xto_bry_and_clear();
 		}
 	}
-	private static final byte[] Hash_key_all = new byte[] {Byte_ascii.Asterisk}, Hash_key_main = new byte[] {Byte_ascii.Num_0};
+	private static final byte[] Hash_key_all = new byte[] {Byte_ascii.Star}, Hash_key_main = new byte[] {Byte_ascii.Num_0};
 }

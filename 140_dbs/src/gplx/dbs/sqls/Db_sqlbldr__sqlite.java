@@ -65,14 +65,14 @@ public class Db_sqlbldr__sqlite implements Db_sqlbldr {
 		tmp_bfr.Add_str_a7(fld.Name()).Add_byte_space();
 		Tid_to_sql(tmp_bfr, fld.Tid(), fld.Len()); tmp_bfr.Add_byte_space();
 		tmp_bfr.Add_str_a7(fld.Nullable() ? "NULL " : "NOT NULL ");
-		if (fld.Default_value() != Db_meta_fld.Default_value_null) {
+		if (fld.Default() != Db_meta_fld.Default_value_null) {
 			tmp_bfr.Add_str_a7("DEFAULT ");
 			boolean quote = Bool_.N;
 			switch (fld.Tid()) {
 				case Db_meta_fld.Tid_str: case Db_meta_fld.Tid_text: quote = Bool_.Y; break;
 			}
 			if (quote) tmp_bfr.Add_byte_apos();
-			tmp_bfr.Add_str_u8(Object_.Xto_str_strict_or_null(fld.Default_value()));
+			tmp_bfr.Add_str_u8(Object_.Xto_str_strict_or_null(fld.Default()));
 			if (quote) tmp_bfr.Add_byte_apos();
 			tmp_bfr.Add_byte_space();
 		}

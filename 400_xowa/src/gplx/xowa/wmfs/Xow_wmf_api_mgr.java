@@ -15,7 +15,8 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
+package gplx.xowa.wmfs; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.wmfs.data.*;
 public class Xow_wmf_api_mgr {
 	public void Trg_engine_key(String v) {this.trg_engine_key = v;} private String trg_engine_key = gplx.ios.IoEngine_.SysKey;
 	public void Api_exec(Xow_wmf_api_wkr wkr) {this.Api_exec(Wikis, wkr);}

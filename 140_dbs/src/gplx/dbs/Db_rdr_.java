@@ -23,7 +23,7 @@ class Db_rdr__empty implements Db_rdr {
 	public boolean			Move_next()						{return false;}
 	public byte[]		Read_bry(String k)				{return Bry_.Empty;}
 	public byte[]		Read_bry_by_str(String k)		{return Bry_.Empty;}
-	public byte[]		Read_bry_in_parts(String tbl, String fld, String crt_key, Object crt_val) {return Bry_.Empty;}
+	public void			Save_bry_in_parts(Io_url url, String tbl, String fld, String crt_key, Object crt_val) {}
 	public byte			Read_byte(String k)				{return Byte_.Max_value_127;}
 	public String 		Read_str(String k)				{return String_.Empty;}
 	public DateAdp		Read_date_by_str(String k)		{return DateAdp_.MinValue;}

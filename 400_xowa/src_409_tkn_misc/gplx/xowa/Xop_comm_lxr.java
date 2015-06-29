@@ -70,7 +70,7 @@ public class Xop_comm_lxr implements Xop_lxr {
 				case Byte_ascii.Space:
 				case Byte_ascii.Tab:
 					break;
-				case Byte_ascii.NewLine:
+				case Byte_ascii.Nl:
 					loop = false;
 					nl_rhs = loop_pos;
 					break;

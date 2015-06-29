@@ -42,7 +42,7 @@ public class Xob_xdat_file_wtr_tst {
 		Tfds.Eq(expd, String_.new_u8(wtr.Bfr().Bfr(), 0, wtr.Bfr().Len()));
 	}
 	private void tst_Add_idx(Xob_xdat_file_wtr wtr, int expd) {
-		wtr.Add_idx(Byte_ascii.NewLine);
+		wtr.Add_idx(Byte_ascii.Nl);
 		Tfds.Eq(expd, wtr.Idx()[wtr.Idx_pos() - 1]);
 	}
 	private void tst_Flush(Xob_xdat_file_wtr wtr, String expd) {

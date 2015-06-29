@@ -41,6 +41,7 @@ public class Xob_cmd_keys {
 	, Key_file_xfer_regy			= "file.xfer_regy"
 	, Key_file_xfer_regy_update		= "file.xfer_regy_update"
 	, Key_file_fsdb_make			= "file.fsdb_make"
+	, Key_file_fsdb_reduce			= "file.fsdb_reduce"
 	, Key_file_orig_reg				= "file.orig_reg"
 	, Key_file_xfer_update			= "file.xfer_update"
 	, Key_html_redlinks				= "html.redlinks"

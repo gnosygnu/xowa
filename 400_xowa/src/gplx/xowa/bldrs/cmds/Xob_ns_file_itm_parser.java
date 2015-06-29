@@ -46,7 +46,7 @@ public class Xob_ns_file_itm_parser extends Dsv_wkr_base {
 			return;
 		}
 		int[] ns_ids = null;
-		if (ns_ids_bry.length == 1 && ns_ids_bry[0] == Byte_ascii.Asterisk) {	// "*"
+		if (ns_ids_bry.length == 1 && ns_ids_bry[0] == Byte_ascii.Star) {	// "*"
 			int len = ns_mgr.Ords_len();
 			ns_ids = new int[len];
 			for (int i = 0; i < len; ++i)

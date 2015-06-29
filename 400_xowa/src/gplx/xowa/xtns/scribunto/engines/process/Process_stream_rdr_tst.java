@@ -55,8 +55,8 @@ class Process_stream_rdr_fxt {
 					b = src_bry[i];
 					switch (b) {
 						case Byte_ascii.Backslash: 	bfr.Add_byte(Byte_ascii.Backslash); break;
-						case Byte_ascii.Ltr_n: 		bfr.Add_byte(Byte_ascii.NewLine); break;
-						case Byte_ascii.Ltr_r: 		bfr.Add_byte(Byte_ascii.CarriageReturn); break;
+						case Byte_ascii.Ltr_n: 		bfr.Add_byte(Byte_ascii.Nl); break;
+						case Byte_ascii.Ltr_r: 		bfr.Add_byte(Byte_ascii.Cr); break;
 						default: 					throw Err_.unhandled(b);
 					}
 					break;

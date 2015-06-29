@@ -39,8 +39,8 @@ public class Sql_bry_rdr extends Bry_rdr {		public byte[] Read_sql_identifier() 
 		byte[] end_bry = null;
 		switch (b_0) {
 			case Byte_ascii.Dash:	bgn_1 = Byte_ascii.Dash;		end_bry = Comm_end_line; break;
-			case Byte_ascii.Slash:	bgn_1 = Byte_ascii.Asterisk;	end_bry = Comm_end_multi; break;
-			case Byte_ascii.Tab: case Byte_ascii.NewLine: case Byte_ascii.CarriageReturn: case Byte_ascii.Space:
+			case Byte_ascii.Slash:	bgn_1 = Byte_ascii.Star;	end_bry = Comm_end_multi; break;
+			case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Space:
 				++pos;
 				return super.Skip_ws();
 			default:
@@ -53,5 +53,5 @@ public class Sql_bry_rdr extends Bry_rdr {		public byte[] Read_sql_identifier() 
 		pos = end_pos + end_bry.length;
 		return this.Skip_ws();
 	}
-	private static final byte[] Comm_end_line = Byte_ascii.NewLine_bry, Comm_end_multi = Bry_.new_a7("*/");
+	private static final byte[] Comm_end_line = Byte_ascii.Nl_bry, Comm_end_multi = Bry_.new_a7("*/");
 }

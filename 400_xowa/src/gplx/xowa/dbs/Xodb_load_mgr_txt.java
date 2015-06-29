@@ -71,7 +71,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		Xow_ns ns = wiki.Ns_mgr().Ns_main();
 		int search_len = search.length;
 		byte match_tid = Xows_page__search.Match_tid_all;
-		if (search_len > 0 && search[search_len - 1] == Byte_ascii.Asterisk) {
+		if (search_len > 0 && search[search_len - 1] == Byte_ascii.Star) {
 			search = Bry_.Mid(search, 0, search_len - 1);
 			match_tid = Xows_page__search.Match_tid_bgn;
 		}

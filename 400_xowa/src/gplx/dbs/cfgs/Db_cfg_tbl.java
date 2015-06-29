@@ -37,7 +37,7 @@ public class Db_cfg_tbl implements RlsAble {
 	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds, Db_meta_idx.new_unique_by_tbl(tbl_name, "main", fld_grp, fld_key, fld_val)));}
 	public void Delete_val(String grp, String key)	{conn.Stmt_delete(tbl_name, fld_grp, fld_key).Crt_str(fld_grp, grp).Crt_str(fld_key, key).Exec_delete();}
 	public void Delete_grp(String grp)				{conn.Stmt_delete(tbl_name, fld_grp).Crt_str(fld_grp, grp).Exec_delete();}
-	public void Delete_all()						{conn.Stmt_delete(tbl_name, Db_meta_fld.Ary_empy).Exec_delete();}
+	public void Delete_all()						{conn.Stmt_delete(tbl_name, Db_meta_fld.Ary_empty).Exec_delete();}
 	public void Insert_yn		(String grp, String key, boolean  val)		{Insert_str(grp, key, val ? "y" : "n");}
 	public void Insert_byte		(String grp, String key, byte val)			{Insert_str(grp, key, Byte_.Xto_str(val));}
 	public void Insert_int		(String grp, String key, int val)			{Insert_str(grp, key, Int_.Xto_str(val));}

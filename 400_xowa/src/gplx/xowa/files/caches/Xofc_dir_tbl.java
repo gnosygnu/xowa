@@ -73,7 +73,7 @@ class Xofc_dir_tbl implements RlsAble {
 	}		
 	public void Select_all(List_adp list) {
 		list.Clear();
-		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empy).Exec_select__rls_auto();
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empty).Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next())
 				list.Add(new_itm(rdr));

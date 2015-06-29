@@ -116,7 +116,7 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 		ctx.Parse_tid_(parse_tid_old);
 	}
 	public int Parse_to_src_end(Xop_root_tkn root, Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, byte[] src, Btrie_fast_mgr trie, int pos, int len) {
-		byte b = pos == -1 ? Byte_ascii.NewLine : src[pos];	// simulate newLine at bgn of src; needed for lxrs which rely on \n (EX: "=a=")
+		byte b = pos == -1 ? Byte_ascii.Nl : src[pos];	// simulate newLine at bgn of src; needed for lxrs which rely on \n (EX: "=a=")
 		int txt_bgn = pos == -1 ? 0 : pos; Xop_tkn_itm txt_tkn = null;
 		while (true) {
 			Object o = trie.Match_bgn_w_byte(b, src, pos, len);
@@ -137,7 +137,7 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 		return pos;
 	}
 	public int Parse_to_stack_end(Xop_root_tkn root, Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, byte[] src, int src_len, Btrie_fast_mgr trie, int pos, int end) {
-		byte b = pos == -1 ? Byte_ascii.NewLine : src[pos];	// simulate newLine at bgn of src; needed for lxrs which rely on \n (EX: "=a=")
+		byte b = pos == -1 ? Byte_ascii.Nl : src[pos];	// simulate newLine at bgn of src; needed for lxrs which rely on \n (EX: "=a=")
 		int txt_bgn = pos == -1 ? 0 : pos; Xop_tkn_itm txt_tkn = null;
 		Xop_lxr lxr = null;
 		while (true) {

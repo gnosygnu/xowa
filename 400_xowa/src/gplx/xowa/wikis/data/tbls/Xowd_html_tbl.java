@@ -61,14 +61,11 @@ public class Xowd_html_tbl implements RlsAble {
 		stmt_select = Db_stmt_.Rls(stmt_select);
 	}
 	public static void Assert_col__page_html_db_id(Xowd_db_mgr db_mgr) {
-		Db_cfg_tbl cfg_tbl = db_mgr.Tbl__cfg();
-		String exists = cfg_tbl.Select_str_or(Xow_cfg_consts.Grp__wiki_schema, Xowd_db_file_schema_props.Key__col_page_html_text_id, "n");
-		if (String_.Eq(exists, "y")) return;
-		Xowd_page_tbl pg_tbl = db_mgr.Tbl__page();
-		Db_conn conn = db_mgr.Db__core().Conn();
-		conn.Ddl_append_fld(pg_tbl.Tbl_name(), pg_tbl.Fld_html_db_id());		// TODO: currently NULL; change to NOT NULL DEFAULT -1; ALTER TABLE page ADD html_db_id int NULL;
-//			conn.Ddl_append_fld(pg_tbl.Tbl_name(), pg_tbl.Fld_page_redirect_id());	// TODO: currently NULL; change to NOT NULL DEFAULT -1; ALTER TABLE page ADD html_db_id int NULL;
-		cfg_tbl.Insert_yn(Xow_cfg_consts.Grp__wiki_schema, Xowd_db_file_schema_props.Key__col_page_html_text_id, Bool_.Y);
-		pg_tbl.Hdump_enabled_(Bool_.Y);
+		Xowd_page_tbl page_tbl = db_mgr.Tbl__page(); Db_conn page_conn = page_tbl.Conn();
+		boolean html_flds_exists = page_conn.Meta_fld_exists(page_tbl.Tbl_name(), page_tbl.Fld_html_db_id());
+		if (html_flds_exists) return;
+		page_conn.Ddl_append_fld(page_tbl.Tbl_name(), Db_meta_fld.new_int(page_tbl.Fld_html_db_id()).Default_(-1));
+		page_conn.Ddl_append_fld(page_tbl.Tbl_name(), Db_meta_fld.new_int(page_tbl.Fld_redirect_id()).Default_(-1));
+		page_tbl.Hdump_enabled_(Bool_.Y);
 	}
 }

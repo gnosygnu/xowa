@@ -72,13 +72,13 @@ class Gfs_parser_ {
 		trie_add_rng(rv, word_lxr, Byte_ascii.Ltr_A, Byte_ascii.Ltr_Z);
 		trie_add_rng(rv, word_lxr, Byte_ascii.Num_0, Byte_ascii.Num_9);
 		rv.Add(Byte_ascii.Underline, word_lxr);
-		trie_add_many(rv, Gfs_lxr_whitespace._, Byte_ascii.Space, Byte_ascii.NewLine, Byte_ascii.CarriageReturn, Byte_ascii.Tab);
+		trie_add_many(rv, Gfs_lxr_whitespace._, Byte_ascii.Space, Byte_ascii.Nl, Byte_ascii.Cr, Byte_ascii.Tab);
 		trie_add_quote(rv, new byte[] {Byte_ascii.Apos});
 		trie_add_quote(rv, new byte[] {Byte_ascii.Quote});
 		trie_add_quote(rv, Bry_.new_a7("<:[\"\n"), Bry_.new_a7("\n\"]:>"));
 		trie_add_quote(rv, Bry_.new_a7("<:['\n"), Bry_.new_a7("\n']:>"));
-		trie_add_comment(rv, new byte[] {Byte_ascii.Slash, Byte_ascii.Slash}, new byte[] {Byte_ascii.NewLine});
-		trie_add_comment(rv, new byte[] {Byte_ascii.Slash, Byte_ascii.Asterisk}, new byte[] {Byte_ascii.Asterisk, Byte_ascii.Slash});
+		trie_add_comment(rv, new byte[] {Byte_ascii.Slash, Byte_ascii.Slash}, new byte[] {Byte_ascii.Nl});
+		trie_add_comment(rv, new byte[] {Byte_ascii.Slash, Byte_ascii.Star}, new byte[] {Byte_ascii.Star, Byte_ascii.Slash});
 		rv.Add(Byte_ascii.Semic, Gfs_lxr_semic._);
 		rv.Add(Byte_ascii.Paren_bgn, Gfs_lxr_paren_bgn._);
 		rv.Add(Byte_ascii.Paren_end, Gfs_lxr_paren_end._);

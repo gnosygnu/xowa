@@ -19,10 +19,10 @@ package gplx;
 public class Byte_ascii {
 	public static final byte
 	      Nil			=   0												 , Backfeed         =   8, Tab				=   9
-		, NewLine		=  10, Formfeed			=  12, CarriageReturn	=  13
+		, Nl			=  10, Formfeed			=  12, Cr				=  13
 													 , Space			=  32, Bang				=  33, Quote			=  34
 		, Hash			=  35, Dollar           =  36, Percent			=  37, Amp				=  38, Apos				=  39
-		, Paren_bgn		=  40, Paren_end		=  41, Asterisk			=  42, Plus				=  43, Comma			=  44
+		, Paren_bgn		=  40, Paren_end		=  41, Star				=  42, Plus				=  43, Comma			=  44
 		, Dash			=  45, Dot				=  46, Slash			=  47, Num_0			=  48, Num_1			=  49
 		, Num_2			=  50, Num_3			=  51, Num_4			=  52, Num_5			=  53, Num_6			=  54
 		, Num_7			=  55, Num_8			=  56, Num_9			=  57, Colon			=  58, Semic			=  59
@@ -49,7 +49,7 @@ public class Byte_ascii {
 		switch (b) {
 			case Byte_ascii.Bang: case Byte_ascii.Quote:
 			case Byte_ascii.Hash: case Byte_ascii.Dollar: case Byte_ascii.Percent: case Byte_ascii.Amp: case Byte_ascii.Apos:
-			case Byte_ascii.Paren_bgn: case Byte_ascii.Paren_end: case Byte_ascii.Asterisk: case Byte_ascii.Plus: case Byte_ascii.Comma:
+			case Byte_ascii.Paren_bgn: case Byte_ascii.Paren_end: case Byte_ascii.Star: case Byte_ascii.Plus: case Byte_ascii.Comma:
 			case Byte_ascii.Dash: case Byte_ascii.Dot: case Byte_ascii.Slash:
 			case Byte_ascii.Colon: case Byte_ascii.Semic:
 			case Byte_ascii.Lt: case Byte_ascii.Eq: case Byte_ascii.Gt: case Byte_ascii.Question: case Byte_ascii.At:
@@ -68,7 +68,7 @@ public class Byte_ascii {
 	}
 	public static boolean Is_ws(byte b) {
 		switch (b) {
-			case Byte_ascii.Tab: case Byte_ascii.NewLine: case Byte_ascii.CarriageReturn: case Byte_ascii.Space: return true;
+			case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Space: return true;
 			default: return false;
 		}
 	}
@@ -79,19 +79,17 @@ public class Byte_ascii {
 	public static byte Case_upper(byte b) {
 		return b > 96 && b < 123
 			? (byte)(b - 32)
-			: b
-		  ;
+			: b;
 	}
 	public static byte Case_lower(byte b) {
 		return b > 64 && b < 91
 			? (byte)(b + 32)
-			: b
-		  ;
+			: b;
 	}
 	public static final byte[] Space_len2 = new byte[] {Space, Space}, Space_len4 = new byte[] {Space, Space, Space, Space};
 	public static final byte[]
 	  Tab_bry				= new byte[] {Byte_ascii.Tab}
-	, NewLine_bry			= new byte[] {Byte_ascii.NewLine}
+	, Nl_bry				= new byte[] {Byte_ascii.Nl}
 	, Bang_bry				= new byte[] {Byte_ascii.Bang}
 	, Dot_bry				= new byte[] {Byte_ascii.Dot}
 	, Comma_bry				= new byte[] {Byte_ascii.Comma}
@@ -106,7 +104,7 @@ public class Byte_ascii {
 	, Pipe_bry				= new byte[] {Byte_ascii.Pipe}
 	, Underline_bry			= new byte[] {Byte_ascii.Underline}
 	, Slash_bry				= new byte[] {Byte_ascii.Slash}
-	, Asterisk_bry			= new byte[] {Byte_ascii.Asterisk}
+	, Asterisk_bry			= new byte[] {Byte_ascii.Star}
 	, Dash_bry				= new byte[] {Byte_ascii.Dash}
 	, Space_bry				= new byte[] {Byte_ascii.Space}
 	;

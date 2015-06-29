@@ -39,12 +39,12 @@ public class Xoav_wiki_mgr implements Xoa_wiki_mgr, GfoInvkAble {
 	public Xowv_wiki Load_by_fil(Io_url fil)		{
 		return Load(Gen_domain_str(fil.NameOnly()), fil.OwnerDir());
 	}
-	public Xow_wiki Get_by_key_or_make_2(byte[] key) {
+	public Xow_wiki Get_by_key_or_make_init_y(byte[] key) {
 		Xow_wiki rv = this.Get_by_domain(key);
-		// if (rv == null) rv = New_wiki(key);	// TODO: must make wiki, but need wiki_url; DATE:2015-05-23
+		// if (rv == null) rv = New_wiki(key);	// TODO: must init wiki, but need wiki_url; DATE:2015-05-23
 		return rv;
 	}
-	public Xow_wiki	Get_by_key_or_make_3(byte[] key) {return Get_by_key_or_make_2(key);}
+	public Xow_wiki	Get_by_key_or_make_init_n(byte[] key) {return Get_by_key_or_make_init_y(key);}
 	public void Load_by_dir(Io_url wiki_root_dir)	{
 		Io_url[] wiki_dirs = Io_mgr.I.QueryDir_args(wiki_root_dir).DirOnly_().ExecAsUrlAry();
 		for (Io_url wiki_dir : wiki_dirs) {

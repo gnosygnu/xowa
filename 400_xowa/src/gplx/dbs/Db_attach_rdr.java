@@ -32,7 +32,7 @@ public class Db_attach_rdr {
 	}
 	public Db_rdr Exec_as_rdr(String sql) {
 		sql = String_.Replace(sql, "<attach_db>", diff_db ? attach_name + "." : "");	// replace <attach> with either "attach_db." or "";
-		return conn.Exec_sql_as_rdr2(sql);
+		return conn.Exec_sql_as_rdr_v2(sql);
 	}
 	public void Detach() {
 		if (diff_db) conn.Env_db_detach(attach_name);

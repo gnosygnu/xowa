@@ -232,8 +232,8 @@ public class Xop_xatr_whitelist_mgr {
 			switch (b) {
 				case Byte_ascii.Space:
 				case Byte_ascii.Tab:
-				case Byte_ascii.CarriageReturn:
-				case Byte_ascii.NewLine:					
+				case Byte_ascii.Cr:
+				case Byte_ascii.Nl:					
 					break;
 				default:
 					return b;

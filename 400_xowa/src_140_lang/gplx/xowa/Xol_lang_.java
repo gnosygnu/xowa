@@ -38,7 +38,7 @@ public class Xol_lang_ {
 			case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
 			case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
 				return Char_tid_num;
-			case Byte_ascii.Space: case Byte_ascii.NewLine: case Byte_ascii.Tab: case Byte_ascii.CarriageReturn:
+			case Byte_ascii.Space: case Byte_ascii.Nl: case Byte_ascii.Tab: case Byte_ascii.Cr:
 				return Char_tid_ws;
 			default:
 				return Char_tid_misc;

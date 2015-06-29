@@ -108,7 +108,7 @@ class Xoctg_make_link_mgr {
 	}
 	public void Write_bgn() {
 		make_cmd.Sort_bgn();
-		make_cmd.Line_dlm_(Byte_ascii.NewLine);
+		make_cmd.Line_dlm_(Byte_ascii.Nl);
 	}
 	public void Flush() {
 		make_cmd.Sort_end();
@@ -177,7 +177,7 @@ class Xoctg_make_main_mgr {
 	}
 	public void Write_bgn() {
 		make_cmd.Sort_bgn();
-		make_cmd.Line_dlm_(Byte_ascii.NewLine);
+		make_cmd.Line_dlm_(Byte_ascii.Nl);
 	}
 	public void Flush() {
 		make_cmd.Sort_end();

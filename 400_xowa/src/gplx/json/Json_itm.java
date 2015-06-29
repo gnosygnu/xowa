@@ -90,8 +90,8 @@ class Json_itm_str extends Json_itm_base {
 					b = src[++i];
 					switch (b) {	// NOTE: must properly unescape chars; EX:wd.q:2; DATE:2014-04-23
 						case Byte_ascii.Ltr_t:				bfr.Add_byte(Byte_ascii.Tab); break;
-						case Byte_ascii.Ltr_n:				bfr.Add_byte(Byte_ascii.NewLine); break;
-						case Byte_ascii.Ltr_r:				bfr.Add_byte(Byte_ascii.CarriageReturn); break;
+						case Byte_ascii.Ltr_n:				bfr.Add_byte(Byte_ascii.Nl); break;
+						case Byte_ascii.Ltr_r:				bfr.Add_byte(Byte_ascii.Cr); break;
 						case Byte_ascii.Ltr_b:				bfr.Add_byte(Byte_ascii.Backfeed); break;
 						case Byte_ascii.Ltr_f:				bfr.Add_byte(Byte_ascii.Formfeed); break;
 						case Byte_ascii.Ltr_u:

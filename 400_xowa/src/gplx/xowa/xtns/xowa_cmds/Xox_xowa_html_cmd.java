@@ -36,8 +36,8 @@ public class Xox_xowa_html_cmd implements Xox_xnde, Xop_xnde_atr_parser {
 		}
 		Xop_xatr_itm.Xatr_parse(wiki.Appe(), this, atr_hash, wiki, src, xnde);
 		int itm_bgn = xnde.Tag_open_end(), itm_end = xnde.Tag_close_bgn();
-		if (src[itm_bgn] 		== Byte_ascii.NewLine) ++itm_bgn;	// ignore 1st \n; 
-		// if (src[itm_end - 1] 	== Byte_ascii.NewLine) --itm_end;	// ignore last \n;
+		if (src[itm_bgn] 		== Byte_ascii.Nl) ++itm_bgn;	// ignore 1st \n; 
+		// if (src[itm_end - 1] 	== Byte_ascii.Nl) --itm_end;	// ignore last \n;
 		byte[] raw = Bry_.Mid(src, itm_bgn, itm_end);
 		if (pos_val == Pos_head_end)
 			ctx.Cur_page().Html_data().Custom_head_end_concat(raw);

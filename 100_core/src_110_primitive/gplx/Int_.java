@@ -225,7 +225,7 @@ public class Int_ implements GfoInvkAble {
 					cur_val += (b - Byte_ascii.Num_0) * cur_mult;
 					cur_mult *= 10;
 					break;
-				case Byte_ascii.Space: case Byte_ascii.NewLine: case Byte_ascii.CarriageReturn: case Byte_ascii.Tab:
+				case Byte_ascii.Space: case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Tab:
 					break;
 				case Byte_ascii.Comma:
 					if (cur_idx < 0) return or;

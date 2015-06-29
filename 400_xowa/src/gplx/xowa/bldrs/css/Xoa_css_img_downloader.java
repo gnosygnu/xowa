@@ -168,7 +168,7 @@ public class Xoa_css_img_downloader {
 			byte b = raw_bry[i];
 			switch (b) {
 				//case Byte_ascii.Slash:
-				case Byte_ascii.Backslash: case Byte_ascii.Colon: case Byte_ascii.Asterisk: case Byte_ascii.Question:
+				case Byte_ascii.Backslash: case Byte_ascii.Colon: case Byte_ascii.Star: case Byte_ascii.Question:
 				case Byte_ascii.Quote: case Byte_ascii.Lt: case Byte_ascii.Gt: case Byte_ascii.Pipe:
 					raw_bry[i] = Byte_ascii.Underline;
 					break;

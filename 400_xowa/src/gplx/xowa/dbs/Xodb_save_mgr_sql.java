@@ -32,7 +32,7 @@ public class Xodb_save_mgr_sql implements Xodb_save_mgr {
 		int page_id = db_file.Tbl__cfg().Select_int_or("db", "page.id_next", -1);
 		if (page_id == -1) {	// HACK: changed for tests; was dbs.qrys.Db_qry_sql.rdr_("SELECT (Max(page_id) + 1) AS max_page_id FROM page;")
 //				Db_rdr rdr = db_mgr.Core_data_mgr().Tbl__page().Conn().Stmt_new(Db_qry_sql.rdr_("SELECT (Max(page_id) + 1) AS max_page_id FROM page;")).Exec_select__rls_manual();
-			Db_rdr rdr = db_mgr.Core_data_mgr().Tbl__page().Conn().Stmt_select(db_file.Tbl__page().Tbl_name(), String_.Ary(db_file.Tbl__page().Fld_page_id()), Db_meta_fld.Ary_empy).Exec_select__rls_auto();
+			Db_rdr rdr = db_mgr.Core_data_mgr().Tbl__page().Conn().Stmt_select(db_file.Tbl__page().Tbl_name(), String_.Ary(db_file.Tbl__page().Fld_page_id()), Db_meta_fld.Ary_empty).Exec_select__rls_auto();
 			try {
 				int max_page_id = -1;
 				while (rdr.Move_next()) {

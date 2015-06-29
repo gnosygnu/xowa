@@ -57,9 +57,9 @@ public class Xoh_page_body_cls {	// REF.MW:Skin.php|getPageClasses
 		for (int i = 0; i < src_len; ++i) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.Tab: case Byte_ascii.NewLine: case Byte_ascii.Space:
+				case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Space:
 				case Byte_ascii.Bang: case Byte_ascii.Quote: case Byte_ascii.Hash: case Byte_ascii.Dollar: case Byte_ascii.Percent:
-				case Byte_ascii.Amp: case Byte_ascii.Apos: case Byte_ascii.Paren_bgn: case Byte_ascii.Paren_end: case Byte_ascii.Asterisk:
+				case Byte_ascii.Amp: case Byte_ascii.Apos: case Byte_ascii.Paren_bgn: case Byte_ascii.Paren_end: case Byte_ascii.Star:
 				case Byte_ascii.Plus: case Byte_ascii.Comma: case Byte_ascii.Dot: case Byte_ascii.Backslash: case Byte_ascii.Slash:
 				case Byte_ascii.Colon: case Byte_ascii.Semic: case Byte_ascii.Gt: case Byte_ascii.Eq: case Byte_ascii.Lt:
 				case Byte_ascii.Question: case Byte_ascii.At: case Byte_ascii.Brack_bgn: case Byte_ascii.Brack_end:

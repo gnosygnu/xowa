@@ -28,7 +28,7 @@ class Xows_db_matcher_bldr {
 		switch (matcher.Tid()) {
 			case Xows_db_matcher.Tid_word:
 				byte[] word_text = matcher.Raw();
-				if (Bry_.Has(word_text, Byte_ascii.Asterisk))
+				if (Bry_.Has(word_text, Byte_ascii.Star))
 					Load_word_many(cxl, rv, word_text, word_tbl);
 				else
 					Load_word_one(rv, word_text, word_tbl);

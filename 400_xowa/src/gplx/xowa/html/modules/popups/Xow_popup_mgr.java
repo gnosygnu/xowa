@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.modules.popups; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.modules.*;
 import gplx.core.primitives.*; import gplx.core.threads.*;
-import gplx.web.js.*;
+import gplx.core.js.*;
 import gplx.xowa.gui.views.*;
 import gplx.xowa.specials.*; import gplx.xowa.specials.search.*;
 import gplx.xowa.apis.xowa.html.modules.*;
@@ -245,13 +245,12 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 }
 class Xow_popup_mgr_ {
 	public static String Bld_js_cmd(Js_wtr js_wtr, String cbk, byte[] mode, byte[] href, byte[] html) {
-		js_wtr.Add_str(cbk);
-		js_wtr.Add_paren_bgn();
-		js_wtr.Add_str_quote(mode).Add_comma();
-		js_wtr.Add_str_quote(href).Add_comma();
-		js_wtr.Add_str_quote_html(html);
-		js_wtr.Add_paren_end_semic();
-		return js_wtr.Xto_str_and_clear();
+		js_wtr.Func_init(cbk);
+		js_wtr.Prm_bry(mode);
+		js_wtr.Prm_bry(href);
+		js_wtr.Prm_bry(html);
+		js_wtr.Func_term();
+		return js_wtr.To_str_and_clear();
 	}
 }
 class Load_popup_wkr implements Gfo_thread_wkr {

@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
 public class Db_rdr__mem implements Db_rdr {
-	private final Mem_itm[] rows; private int row_idx = -1; private final int rows_len;
-	private Mem_itm row;
-	public Db_rdr__mem(String[] cols, Mem_itm[] rows) {
+	private final Mem_row[] rows; private int row_idx = -1; private final int rows_len;
+	private Mem_row row;
+	public Db_rdr__mem(String[] cols, Mem_row[] rows) {
 		this.rows = rows; this.rows_len = rows.length;
 	}
 	public boolean Move_next() {
@@ -31,7 +31,7 @@ public class Db_rdr__mem implements Db_rdr {
 	public byte[] Read_bry(String k)			{return (byte[])row.Get_by(k);}
 	public String Read_str(String k)			{return (String)row.Get_by(k);}
 	public byte[] Read_bry_by_str(String k)		{return Bry_.new_u8_safe((String)row.Get_by(k));}		// NOTE: null b/c db can have NULL
-	@gplx.Virtual public byte[] Read_bry_in_parts(String tbl, String fld, String crt_key, Object crt_val) {throw Err_.not_implemented_();}
+	@gplx.Virtual public void Save_bry_in_parts(Io_url url, String tbl, String fld, String crt_key, Object crt_val) {throw Err_.not_implemented_();}
 	public DateAdp Read_date_by_str(String k)	{return DateAdp_.parse_iso8561((String)row.Get_by(k));}
 	public byte Read_byte(String k)				{return Byte_.cast_(row.Get_by(k));}
 	public int Read_int(String k)				{return Int_.cast_(row.Get_by(k));}

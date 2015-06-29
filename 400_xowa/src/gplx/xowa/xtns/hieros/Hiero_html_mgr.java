@@ -92,7 +92,7 @@ class Hiero_html_mgr {
 				switch (v[0]) {
 					case Byte_ascii.Brack_bgn: case Byte_ascii.Brack_end:
 					case Byte_ascii.Paren_bgn: case Byte_ascii.Paren_end:
-					case Byte_ascii.Asterisk: case Byte_ascii.Colon: case Byte_ascii.Bang:
+					case Byte_ascii.Star: case Byte_ascii.Colon: case Byte_ascii.Bang:
 						amp = true;
 						break;
 				}
@@ -122,7 +122,7 @@ class Hiero_html_mgr {
 							total += line_max;
 							line_max = 0;
 							continue;
-						case Byte_ascii.Asterisk:
+						case Byte_ascii.Star:
 							if (height > line_max)
 								line_max = height;
 							continue;
@@ -150,7 +150,7 @@ class Hiero_html_mgr {
 						case Byte_ascii.Colon:
 							temp_bfr.Add_str_a7("\n            <br/>");
 							continue;
-						case Byte_ascii.Asterisk:
+						case Byte_ascii.Star:
 							temp_bfr.Add_byte_space();
 							continue;
 					}

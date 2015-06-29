@@ -23,8 +23,8 @@ public class Xop_xowa_cmd implements Xox_xnde {
 	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
 		int itm_bgn = xnde.Tag_open_end(), itm_end = xnde.Tag_close_bgn();
 		if (itm_bgn == src.length)	return;  // NOTE: handle inline where there is no content to parse; EX: <xowa_cmd/>
-		if (src[itm_bgn] 		== Byte_ascii.NewLine) ++itm_bgn;	// ignore 1st \n; 
-		if (src[itm_end - 1] 	== Byte_ascii.NewLine) --itm_end;	// ignore last \n;
+		if (src[itm_bgn] 		== Byte_ascii.Nl) ++itm_bgn;	// ignore 1st \n; 
+		if (src[itm_end - 1] 	== Byte_ascii.Nl) --itm_end;	// ignore last \n;
 		byte[] raw = Bry_.Mid(src, itm_bgn, itm_end);
 		byte[] xtn_src = raw;
 		if (wiki.Sys_cfg().Xowa_cmd_enabled()) {	// only exec if enabled for wiki

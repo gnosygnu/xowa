@@ -49,5 +49,5 @@ public class Wdata_external_lang_links_data {
 		}
 		tmp_bfr.Mkr_rls();
 	}
-	public static final byte[] Key_sort = new byte[] {Byte_ascii.Asterisk};
+	public static final byte[] Key_sort = new byte[] {Byte_ascii.Star};
 }

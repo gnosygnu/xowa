@@ -143,8 +143,8 @@ public class Gallery_itm_parser {
 			cur_byte = src[cur_pos];
 			switch (cur_byte) {
 				case Byte_ascii.Pipe:			return Mode_pipe;
-				case Byte_ascii.NewLine:		return Mode_nl;
-				case Byte_ascii.CarriageReturn:
+				case Byte_ascii.Nl:		return Mode_nl;
+				case Byte_ascii.Cr:
 				case Byte_ascii.Space:
 				case Byte_ascii.Tab:
 					++cur_pos;
@@ -209,11 +209,11 @@ public class Gallery_itm_parser {
 		while (cur_pos < end_pos) {
 			cur_byte = src[cur_pos];
 			switch (cur_byte) {
-				case Byte_ascii.CarriageReturn:
+				case Byte_ascii.Cr:
 				case Byte_ascii.Space:
 				case Byte_ascii.Tab:			++cur_pos; continue; // ignore
 				case Byte_ascii.Pipe:			return Mode_pipe;
-				case Byte_ascii.NewLine:		return Mode_nl;
+				case Byte_ascii.Nl:		return Mode_nl;
 				default:						return Mode_text;
 			}
 		}

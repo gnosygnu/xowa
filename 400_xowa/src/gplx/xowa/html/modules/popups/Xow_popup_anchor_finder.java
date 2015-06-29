@@ -31,7 +31,7 @@ class Xow_popup_anchor_finder {
 		return Find_id(bgn);
 	}
 	private boolean Find_hdr(int lhs_bgn) {
-		int nl_rhs = Bry_finder.Find_fwd(src, Byte_ascii.NewLine, nl_lhs + 1, src_len);		// look for \n
+		int nl_rhs = Bry_finder.Find_fwd(src, Byte_ascii.Nl, nl_lhs + 1, src_len);		// look for \n
 		if (nl_rhs == Bry_finder.Not_found) nl_rhs = src_len - 1;							// no more \n; set to last idx
 		nl_lhs = nl_rhs;																	// update nl_lhs for loop
 		int lhs_end = Bry_finder.Find_fwd_while(src, lhs_bgn + 1, nl_rhs, Byte_ascii.Eq);	// skip eq; EX: "\n==="; +1 to skip eq
@@ -62,7 +62,7 @@ class Xow_popup_anchor_finder {
 		int id_bgn = Bry_finder.Find_bwd_ws(src, id_end - 1, bgn);
 		boolean id_match = Int_.Bounds_chk(id_bgn, id_end, src_len) && Bry_.Eq(Id_bry, src, id_bgn + 1, id_end);
 		if (!id_match) return rv;
-		rv = Bry_finder.Find_bwd(src, Byte_ascii.NewLine, id_bgn);
+		rv = Bry_finder.Find_bwd(src, Byte_ascii.Nl, id_bgn);
 		return rv == Bry_finder.Not_found ? 0 : rv;
 	}
 	private static final byte[] Hdr_bgn = Bry_.new_a7("\n="), Id_bry = Bry_.new_a7("id");

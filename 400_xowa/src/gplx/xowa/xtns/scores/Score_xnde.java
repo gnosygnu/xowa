@@ -181,8 +181,8 @@ public class Score_xnde implements Xox_xnde, Xop_xnde_atr_parser, Xoh_cmd_itm {
 		byte[] rslt = Bry_.new_u8(rslt_str);	// expect 1st line to be of form "GNU LilyPond 2.16.2"
 		int bgn_pos	= Bry_finder.Find_fwd(rslt, Version_find_bgn); if (bgn_pos == Bry_.NotFound) return Version_unknown;
 		bgn_pos += Version_find_bgn.length + 1;	// +1 for trailing space
-		int end_pos = Bry_finder.Find_fwd(rslt, Byte_ascii.NewLine, bgn_pos); if (bgn_pos == Bry_.NotFound) return Version_unknown;
-		if (rslt[end_pos - 1] == Byte_ascii.CarriageReturn) end_pos = end_pos - 1;
+		int end_pos = Bry_finder.Find_fwd(rslt, Byte_ascii.Nl, bgn_pos); if (bgn_pos == Bry_.NotFound) return Version_unknown;
+		if (rslt[end_pos - 1] == Byte_ascii.Cr) end_pos = end_pos - 1;
 		return Bry_.Mid(rslt, bgn_pos, end_pos);
 	}
 	public static final byte Xatr_id_lang_is_abc = 0, Xatr_id_code_is_raw = 1, Xatr_id_output_midi = 2, Xatr_id_output_ogg = 3, Xatr_id_file_midi = 4, Xatr_id_file_ogg = 5;
@@ -196,7 +196,7 @@ public class Score_xnde implements Xox_xnde, Xop_xnde_atr_parser, Xoh_cmd_itm {
 	;
 	private static final byte[] 
 	  Lang_abc = Bry_.new_a7("ABC")
-	, Abc_tagline_bgn = Bry_.new_a7("tagline ="), Abc_tagline_end = new byte[] {Byte_ascii.NewLine}, Abc_tagline_repl = Bry_.new_a7("tagline = \"\"\n")
+	, Abc_tagline_bgn = Bry_.new_a7("tagline ="), Abc_tagline_end = new byte[] {Byte_ascii.Nl}, Abc_tagline_repl = Bry_.new_a7("tagline = \"\"\n")
 	, Version_unknown = Bry_.new_a7("unknown"), Version_find_bgn = Bry_.new_a7("GNU LilyPond")
 	;
 	static final String GRP_KEY = "xowa.xtns.scores.itm";

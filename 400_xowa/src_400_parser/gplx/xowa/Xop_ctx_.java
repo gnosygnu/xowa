@@ -23,7 +23,7 @@ public class Xop_ctx_ {
 		int src_len = src.length;
 		if (end > src_len) end = src_len;
 		byte[] rv = Bry_.Mid(src, bgn, end);
-		rv = Bry_.Replace(rv, Byte_ascii.NewLine, Byte_ascii.Tab); // change nl to tab so text editor will show one warning per line
+		rv = Bry_.Replace(rv, Byte_ascii.Nl, Byte_ascii.Tab); // change nl to tab so text editor will show one warning per line
 		return String_.new_u8(rv);
 	}
 }

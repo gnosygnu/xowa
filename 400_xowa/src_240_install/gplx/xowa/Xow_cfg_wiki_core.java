@@ -54,7 +54,7 @@ public class Xow_cfg_wiki_core {
 		Xol_csv_parser csv_parser = Xol_csv_parser._;
 		while (true) {
 			boolean last = pos == len;
-			byte b = last ? Byte_ascii.NewLine : src[pos];
+			byte b = last ? Byte_ascii.Nl : src[pos];
 			switch (b) {
 				case Byte_ascii.Pipe:
 					switch (fld_idx) {
@@ -65,7 +65,7 @@ public class Xow_cfg_wiki_core {
 					fld_bgn = pos + 1;
 					++fld_idx;
 					break;
-				case Byte_ascii.NewLine:
+				case Byte_ascii.Nl:
 					if (pos > row_bgn) {	// guard against blank lines
 						cur_name = csv_parser.Load(src, fld_bgn, pos);
 						ns_mgr.Add_new(cur_id, cur_name, cur_case_match, false);

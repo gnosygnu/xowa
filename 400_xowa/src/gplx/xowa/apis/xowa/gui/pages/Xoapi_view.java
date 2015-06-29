@@ -31,7 +31,7 @@ public class Xoapi_view implements GfoInvkAble {
 	public void Refresh()				{if (Active_tab_is_null()) return; win.Page__refresh();}
 	public void Print() {
 		if (this.Active_tab_is_null()) return;
-		win.Active_html_box().Html_window_print_preview();
+		win.Active_html_box().Html_js_eval_proc_as_str(Xog_js_procs.Win__print_preview);
 	}
 	public void Save_as() {
 		if (this.Active_tab_is_null()) return;

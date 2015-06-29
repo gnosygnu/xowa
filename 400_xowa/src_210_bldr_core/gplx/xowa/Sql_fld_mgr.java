@@ -26,15 +26,15 @@ class Sql_fld_mgr {
 	public Sql_fld_mgr Parse(byte[] raw) {
 		hash.Clear();
 		int bgn = Bry_finder.Find_fwd(raw, Tkn_create_table); if (bgn == Bry_.NotFound) throw Err_.new_("could not find 'CREATE TABLE'");
-		bgn = Bry_finder.Find_fwd(raw, Byte_ascii.NewLine, bgn); if (bgn == Bry_.NotFound) throw Err_.new_("could not find new line after 'CREATE TABLE'");
+		bgn = Bry_finder.Find_fwd(raw, Byte_ascii.Nl, bgn); if (bgn == Bry_.NotFound) throw Err_.new_("could not find new line after 'CREATE TABLE'");
 		bgn += Int_.Const_position_after_char;
 		int end = Bry_finder.Find_fwd(raw, Tkn_unique_index); if (end == Bry_.NotFound) throw Err_.new_("could not find 'UNIQUE KEY'");
-		end = Bry_finder.Find_bwd(raw, Byte_ascii.NewLine, end); if (bgn == Bry_.NotFound) throw Err_.new_("could not find new line before 'UNIQUE KEY'");
+		end = Bry_finder.Find_bwd(raw, Byte_ascii.Nl, end); if (bgn == Bry_.NotFound) throw Err_.new_("could not find new line before 'UNIQUE KEY'");
 		Parse_lines(Bry_.Mid(raw, bgn, end));
 		return this;
 	}
 	private void Parse_lines(byte[] raw) {
-		byte[][] lines = Bry_.Split(raw, Byte_ascii.NewLine);
+		byte[][] lines = Bry_.Split(raw, Byte_ascii.Nl);
 		int lines_len = lines.length;
 		int fld_idx = 0;
 		for (int i = 0; i < lines_len; i++) {

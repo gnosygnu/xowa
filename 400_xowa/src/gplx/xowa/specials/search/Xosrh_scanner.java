@@ -118,7 +118,7 @@ class Xosrh_scanner {
 			byte[] cur_word = Bry_.Mid(src, src_bgn, src_end);
 			byte[][] words = gplx.xowa.bldrs.cmds.texts.Xob_search_base.Split_ttl_into_words(null, tmp_list, tmp_bfr, cur_word);
 			int words_len = words.length;
-			if (words_len == 1 && !Bry_.Eq(words[0], cur_word) && Bry_finder.Find_fwd(cur_word, Byte_ascii.Asterisk) == -1) {
+			if (words_len == 1 && !Bry_.Eq(words[0], cur_word) && Bry_finder.Find_fwd(cur_word, Byte_ascii.Star) == -1) {
 				tkns.Add(Xosrh_qry_tkn.new_bry_(tid, words[0]));
 				return;
 			}

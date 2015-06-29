@@ -30,7 +30,7 @@ public class Xoh_html_wtr {
 		lnke_wtr = new Xoh_lnke_wtr(wiki);
 	}
 	public void Init_by_wiki(Xowe_wiki wiki) {
-		cfg.Toc_show_(true).Lnki_title_(true).Lnki_visited_(true).Lnki_id_(true);	// NOTE: set during Init_by_wiki, b/c all tests assume these are false
+		cfg.Toc__show_(Bool_.Y).Lnki__title_(true).Lnki_visited_y_().Lnki__id_y_();	// NOTE: set during Init_by_wiki, b/c all tests assume these are false
 		ref_wtr.Init_by_wiki(wiki);
 	}
 	public Xow_html_mgr Html_mgr() {return html_mgr;} private Xow_html_mgr html_mgr;
@@ -46,6 +46,8 @@ public class Xoh_html_wtr {
 			page.Slink_list().Clear();	// HACK: always clear langs; necessary for reload
 			lnki_wtr.Init_by_page(ctx, hctx, src, ctx.Cur_page());				
 			Write_tkn(bfr, ctx, hctx, src, null, -1, root);
+			if (cfg.Hdr__div_wrapper())
+				bfr.Add(Tag_hdr__div_wrapper_end);
 		}
 		finally {
 			page.Category_list_(page.Html_data().Ctgs_to_ary());
@@ -107,14 +109,19 @@ public class Xoh_html_wtr {
 	private static final byte[] Bry_hdr_bgn = Bry_.new_a7("<span class='mw-headline' id='"), Bry_hdr_end = Bry_.new_a7("</span>");
 	@gplx.Virtual public void Hr(Xop_ctx ctx, Xoh_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Xop_hr_tkn tkn)				{bfr.Add(Tag_hr);}
 	@gplx.Virtual public void Hdr(Xop_ctx ctx, Xoh_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Xop_hdr_tkn hdr) {
-		if (hdr.Hdr_html_first() && cfg.Toc_show() && !page.Hdr_mgr().Toc_manual()) {	// __TOC__ not specified; place at top; NOTE: if __TOC__ was specified, then it would be placed wherever __TOC__ appears
+		boolean hdr_is_1st = hdr.Hdr_html_first();
+		if (hdr_is_1st && cfg.Toc__show() && !page.Hdr_mgr().Toc_manual()) {	// __TOC__ not specified; place at top; NOTE: if __TOC__ was specified, then it would be placed wherever __TOC__ appears
 			wiki.Html_mgr().Toc_mgr().Html(ctx.Cur_page(), hctx, src, bfr);
 		}
 		int hdr_len = hdr.Hdr_len();
 		if (hdr_len > 0) {	// NOTE: need to check hdr_len b/c it could be dangling
 			Para_assert_tag_starts_on_nl(bfr, hdr.Src_bgn()); 
+			if (	cfg.Hdr__div_wrapper()				// div_wrapper enabled
+				&&	!hdr_is_1st							// not 1st <h#>; 2nd and up will close previous <#>
+				)
+				bfr.Add(Tag_hdr__div_wrapper_end);		// add </div>
 			bfr.Add(Tag_hdr_bgn).Add_int(hdr_len, 1, 1);
-			if (cfg.Toc_show()) {
+			if (cfg.Toc__show()) {
 				bfr.Add_byte(Tag__end);
 				bfr.Add(Bry_hdr_bgn);
 				bfr.Add(hdr.Hdr_html_id());
@@ -128,12 +135,14 @@ public class Xoh_html_wtr {
 			Write_tkn(bfr, ctx, hctx, src, hdr, i, hdr.Subs_get(i));
 		if (hdr_len > 0) {	// NOTE: need to check hdr_len b/c it could be dangling
 			if (hdr.Hdr_end_manual() > 0) bfr.Add_byte_repeat(Byte_ascii.Eq, hdr.Hdr_end_manual());
-			if (cfg.Toc_show()) {
+			if (cfg.Toc__show()) {
 				if (hctx.Mode_is_hdump())
 					bfr.Add(Xow_hzip_itm__header.Hdr_end);
 				bfr.Add(Bry_hdr_end);
 			}
 			bfr.Add(Tag_hdr_end).Add_int(hdr_len, 1, 1).Add_byte(Tag__end).Add_byte_nl();// NOTE: do not need to check hdr_len b/c it is impossible for end to occur without bgn
+			if (	cfg.Hdr__div_wrapper())				// div_wrapper enabled
+				bfr.Add(Tag_hdr__div_wrapper_bgn);		// add <div>
 		}
 	}
 	public void Apos(Xop_ctx ctx, Xoh_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Xop_apos_tkn apos) {
@@ -231,7 +240,7 @@ public class Xoh_html_wtr {
 			case Xop_list_tkn_.List_itmTyp_dd: tag = Tag_list_itm_dd_end; break;
 			default: throw Err_.unhandled(type);
 		}
-		bfr.Add_byte_if_not_last(Byte_ascii.NewLine);
+		bfr.Add_byte_if_not_last(Byte_ascii.Nl);
 		if (indent_level > 0) bfr.Add_byte_repeat(Byte_ascii.Space, indent_level * 2);
 		bfr.Add(tag);
 	}
@@ -240,7 +249,7 @@ public class Xoh_html_wtr {
 			bfr.Add_byte_space();
 		else {
 			if (tkn.Nl_tid() == Xop_nl_tkn.Tid_char) {
-				bfr.Add_byte_if_not_last(Byte_ascii.NewLine);
+				bfr.Add_byte_if_not_last(Byte_ascii.Nl);
 			}
 		}
 	}
@@ -252,7 +261,7 @@ public class Xoh_html_wtr {
 			if (hctx.Mode_is_alt())
 				bfr.Add_byte_space();
 			else
-				bfr.Add_byte_if_not_last(Byte_ascii.NewLine);
+				bfr.Add_byte_if_not_last(Byte_ascii.Nl);
 		}
 		switch (para.Para_end()) {
 			case Xop_para_tkn.Tid_none:		break;
@@ -353,7 +362,7 @@ public class Xoh_html_wtr {
 			case Xop_xnde_tag_.Tid_li: {
 				byte[] name = tag.Name_bry();
 				int bfr_len = bfr.Len();
-				if (bfr_len > 0 && bfr.Bfr()[bfr_len - 1] != Byte_ascii.NewLine) bfr.Add_byte_nl();	// NOTE: always add nl before li else some lists will merge and force long horizontal bar; EX:w:Music
+				if (bfr_len > 0 && bfr.Bfr()[bfr_len - 1] != Byte_ascii.Nl) bfr.Add_byte_nl();	// NOTE: always add nl before li else some lists will merge and force long horizontal bar; EX:w:Music
 				if (xnde.Tag_visible()) {
 					bfr.Add_byte(Tag__bgn).Add(name);
 					if (xnde.Atrs_bgn() > Xop_tblw_wkr.Atrs_ignore_check) Xnde_atrs(tag_id, hctx, src, xnde.Atrs_bgn(), xnde.Atrs_end(), xnde.Atrs_ary(), bfr);
@@ -567,7 +576,7 @@ public class Xoh_html_wtr {
 		if (hctx.Mode_is_alt())			// add \s for each \n
 			bfr.Add_byte_space();
 		else {
-			bfr.Add_byte_if_not_last(Byte_ascii.NewLine);
+			bfr.Add_byte_if_not_last(Byte_ascii.Nl);
 			if (indent_level > 0) bfr.Add_byte_repeat(Byte_ascii.Space, indent_level * 2);
 //			boolean para_mode = tblw_bgn && tbl_para && depth == 1;	// DELETE: old code; adding <p> to handle strange mozilla key down behavior on linux; DATE:2013-03-30
 //			if (para_mode) {bfr.Add(Xoh_consts.P_bgn);}
@@ -587,11 +596,11 @@ public class Xoh_html_wtr {
 		}
 		else {
 			--indent_level;
-			bfr.Add_byte_if_not_last(Byte_ascii.NewLine);
+			bfr.Add_byte_if_not_last(Byte_ascii.Nl);
 			if (indent_level > 0) bfr.Add_byte_repeat(Byte_ascii.Space, indent_level * 2);
 			bfr.Add(end);
 //			if (para_mode) {bfr.Add(Xoh_consts.P_end);}				// DELETE: old code; adding <p> to handle strange mozilla key down behavior on linux; DATE:2013-03-30
-			bfr.Add_byte_if_not_last(Byte_ascii.NewLine);
+			bfr.Add_byte_if_not_last(Byte_ascii.Nl);
 //				bfr.Add_byte_nl();
 		}
 	}
@@ -613,6 +622,7 @@ public class Xoh_html_wtr {
 	, Tag_para_bgn = Bry_.new_a7("<p>"), Tag_para_end = Bry_.new_a7("</p>"), Tag_para_mid = Bry_.new_a7("</p>\n\n<p>")
 	, Tag_pre_bgn = Bry_.new_a7("<pre>"), Tag_pre_end = Bry_.new_a7("</pre>")
 	;
+	private static final byte[] Tag_hdr__div_wrapper_bgn = Bry_.new_a7("<div>\n"), Tag_hdr__div_wrapper_end = Bry_.new_a7("</div>\n");
 	public static final byte Tag__bgn = Byte_ascii.Lt, Tag__end = Byte_ascii.Gt;
 	public static final byte Dir_spr_http = Byte_ascii.Slash;
 	private int indent_level = 0;

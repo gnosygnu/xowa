@@ -52,7 +52,7 @@ class Xow_hzip_mgr_fxt {
 		parser.Parse_page_all_clear(root, ctx, tkn_mkr, html_bry);
 		Xoh_wtr_ctx hctx = Xoh_wtr_ctx.Hdump;
 		Xoh_html_wtr html_wtr = wiki.Html_mgr().Html_wtr();
-		html_wtr.Cfg().Toc_show_(Bool_.Y);	// needed for hdr to show <span class='mw-headline' id='A'>
+		html_wtr.Cfg().Toc__show_(Bool_.Y);	// needed for hdr to show <span class='mw-headline' id='A'>
 		html_wtr.Write_all(bfr, ctx, hctx, html_bry, root);
 		Tfds.Eq(expd, bfr.Xto_str_and_clear());
 	}

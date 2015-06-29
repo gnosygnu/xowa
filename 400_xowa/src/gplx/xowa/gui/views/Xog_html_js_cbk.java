@@ -91,7 +91,7 @@ public class Xog_html_js_cbk implements GfoInvkAble {
 	private String[][] Get_titles_meta(GfoMsg m) {
 		Xowe_wiki wiki = html_itm.Owner_tab().Wiki();
 		try {
-			byte[][] ttls = Bry_.Split(Bry_.new_u8((String)m.ReadValAt(0)), Byte_ascii.NewLine);
+			byte[][] ttls = Bry_.Split(Bry_.new_u8((String)m.ReadValAt(0)), Byte_ascii.Nl);
 			int ttls_len = ttls.length;
 			String[][] rv = new String[ttls_len][];
 			for (int i = 0; i < ttls_len; i++) {

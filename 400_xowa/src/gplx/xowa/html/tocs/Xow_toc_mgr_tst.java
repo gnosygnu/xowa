@@ -519,16 +519,16 @@ class Xow_toc_mgr_fxt {
 		Tfds.Eq_ary(String_.SplitLines_nl(expd), String_.SplitLines_nl(tmp.Xto_str_and_clear()), raw);
 	}
 	public void Test_html_all(String raw, String expd) {
-		fxt.Wtr_cfg().Toc_show_(true);
+		fxt.Wtr_cfg().Toc__show_(Bool_.Y);
 		toc_mgr.Clear();
 		fxt.Test_parse_page_all_str(raw, expd);
-		fxt.Wtr_cfg().Toc_show_(false);
+		fxt.Wtr_cfg().Toc__show_(Bool_.N);
 	}
 	public void Test_html_frag(String raw, String frag) {
-		fxt.Wtr_cfg().Toc_show_(true);
+		fxt.Wtr_cfg().Toc__show_(Bool_.Y);
 		toc_mgr.Clear();
 		fxt.Test_html_full_frag(raw, frag);
-		fxt.Wtr_cfg().Toc_show_(false);
+		fxt.Wtr_cfg().Toc__show_(Bool_.N);
 	}
 	public String toc_tbl_nl_y(String... ary) {return toc_tbl(Bool_.Y, ary);}
 	public String toc_tbl_nl_n(String... ary) {return toc_tbl(Bool_.N, ary);}

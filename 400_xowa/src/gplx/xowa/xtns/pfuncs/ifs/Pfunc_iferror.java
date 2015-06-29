@@ -57,7 +57,7 @@ public class Pfunc_iferror extends Pf_func_base {
 						break;
 					case State_nde:		// <(?:strong|span|p|div)\s
 						switch (src[pos_nxt]) {
-							case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.NewLine:
+							case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl:
 								state = State_nde;
 								++pos_nxt;
 								break;
@@ -67,7 +67,7 @@ public class Pfunc_iferror extends Pf_func_base {
 						if (state == State_nde) {
 							valid = true;
 							switch (src[pos - 1]) {								
-								case Byte_ascii.Quote: case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.NewLine:
+								case Byte_ascii.Quote: case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl:
 									break;
 								default:
 									valid = false;
@@ -83,14 +83,14 @@ public class Pfunc_iferror extends Pf_func_base {
 						if (state == State_class) {
 							valid = true;
 							switch (src[pos - 1]) {								
-								case Byte_ascii.Quote: case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.NewLine:
+								case Byte_ascii.Quote: case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl:
 									break;
 								default:
 									valid = false;
 									break;
 							}
 							switch (src[pos_nxt]) {
-								case Byte_ascii.Quote: case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.NewLine:
+								case Byte_ascii.Quote: case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl:
 									break;
 								default:
 									valid = false;

@@ -364,7 +364,7 @@ public class Bry_ {
 		}
 		return rv;
 	}
-	public static final byte[] Trim_ary_ws = mask_(256, Byte_ascii.Tab, Byte_ascii.NewLine, Byte_ascii.CarriageReturn, Byte_ascii.Space);
+	public static final byte[] Trim_ary_ws = mask_(256, Byte_ascii.Tab, Byte_ascii.Nl, Byte_ascii.Cr, Byte_ascii.Space);
 	public static byte[] Trim(byte[] src) {return Trim(src, 0, src.length, true, true, Trim_ary_ws);}
 	public static byte[] Trim(byte[] src, int bgn, int end) {return Trim(src, bgn, end, true, true, Trim_ary_ws);}
 	public static byte[] Trim(byte[] src, int bgn, int end, boolean trim_bgn, boolean trim_end, byte[] trim_ary) {
@@ -456,7 +456,7 @@ public class Bry_ {
 		for (int i = src_bgn; i < src_len; i++) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.NewLine: case Byte_ascii.CarriageReturn:
+				case Byte_ascii.Nl: case Byte_ascii.Cr:
 					break;
 				default:
 					return i;
@@ -468,7 +468,7 @@ public class Bry_ {
 		for (int i = src_bgn; i > -1; i--) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.NewLine: case Byte_ascii.CarriageReturn:
+				case Byte_ascii.Nl: case Byte_ascii.Cr:
 					break;
 				default:
 					return i;
@@ -676,7 +676,7 @@ public class Bry_ {
 					break;
 				case Byte_ascii.Dash:
 					return i == bgn ? rv * -1 : or;
-				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.NewLine: case Byte_ascii.CarriageReturn:
+				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr:
 					if (numbers_seen)
 						ws_seen = true;
 					break;						
@@ -930,7 +930,7 @@ public class Bry_ {
 	public static int Trim_end_pos(byte[] src, int end) {
 		for (int i = end - 1; i > -1; i--) {
 			switch (src[i]) {
-				case Byte_ascii.Tab: case Byte_ascii.NewLine: case Byte_ascii.CarriageReturn: case Byte_ascii.Space:
+				case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Space:
 					break;
 				default:
 					return i + 1;
@@ -960,13 +960,13 @@ public class Bry_ {
 		List_adp rv = List_adp_.new_();
 		while (true) {
 			boolean last = src_pos == src_len;
-			byte b = last ? Byte_ascii.NewLine : src[src_pos];
+			byte b = last ? Byte_ascii.Nl : src[src_pos];
 			int nxt_bgn = src_pos + 1; 
 			switch (b) {
-				case Byte_ascii.CarriageReturn:
-				case Byte_ascii.NewLine:
-					if (	b == Byte_ascii.CarriageReturn		// check for crlf
-						&& nxt_bgn < src_len && src[nxt_bgn] == Byte_ascii.NewLine) {
+				case Byte_ascii.Cr:
+				case Byte_ascii.Nl:
+					if (	b == Byte_ascii.Cr		// check for crlf
+						&& nxt_bgn < src_len && src[nxt_bgn] == Byte_ascii.Nl) {
 							++nxt_bgn;
 					}
 					if (last && (src_pos - fld_bgn == 0)) {}	// ignore trailing itms

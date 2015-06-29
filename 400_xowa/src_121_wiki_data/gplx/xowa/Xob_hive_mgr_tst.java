@@ -34,7 +34,7 @@ class Xob_reg_wtr {
 		.Add_int_variable(fil_count++).Add_byte(Byte_ascii.Pipe)
 		.Add(bgn).Add_byte(Byte_ascii.Pipe)
 		.Add(end).Add_byte(Byte_ascii.Pipe)
-		.Add_int_variable(itm_count).Add_byte(Byte_ascii.NewLine);		
+		.Add_int_variable(itm_count).Add_byte(Byte_ascii.Nl);		
 	}
 	public void Flush(Io_url url) {
 		Io_mgr.I.SaveFilBfr(url, bfr);

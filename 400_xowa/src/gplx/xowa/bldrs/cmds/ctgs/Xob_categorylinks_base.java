@@ -36,7 +36,7 @@ public abstract class Xob_categorylinks_base extends Xob_sql_dump_base implement
 				? 0 : Bit_.Xto_int_date_short(cur_modified_on);
 		}
 		else if (Bry_.Eq(fld_key, Fld_cl_sortkey)) {
-			int nl_pos = Bry_finder.Find_fwd(src, Byte_ascii.NewLine, fld_bgn, fld_end);
+			int nl_pos = Bry_finder.Find_fwd(src, Byte_ascii.Nl, fld_bgn, fld_end);
 			if (nl_pos != Bry_.NotFound)	// sortkey sometimes has format of "sortkey\ntitle"; EX: "WALES, JIMMY\nJIMMY WALES"; discard 2nd to conserve hard-disk space
 				fld_end = nl_pos;
 			cur_sortkey = Bry_.Mid(src, fld_bgn, fld_end);

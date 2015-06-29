@@ -20,7 +20,7 @@ import gplx.xowa.files.*;
 class Xofo_lnki_parser extends Obj_ary_parser_base {
 	Number_parser parser = new Number_parser(); Xofo_lnki[] ary; int ary_idx;		
 	public Xofo_lnki[] Parse_ary(byte[] bry, int bgn, int end) {
-		Parse_core(bry, bgn, end, Byte_ascii.Semic, Byte_ascii.NewLine);
+		Parse_core(bry, bgn, end, Byte_ascii.Semic, Byte_ascii.Nl);
 		return ary;
 	}
 	@Override protected void Ary_len_(int v) {

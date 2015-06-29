@@ -25,7 +25,7 @@ public class Xop_list_wkr_ {
 	}
 	public static byte Compare_normalize(byte b) {	// convert : to ; for sake of determining levels; EX: ";:" is actually same group
 		switch (b) {
-			case Byte_ascii.Asterisk:
+			case Byte_ascii.Star:
 			case Byte_ascii.Hash:
 			case Byte_ascii.Semic:		return b;
 			case Byte_ascii.Colon:		return Byte_ascii.Semic;

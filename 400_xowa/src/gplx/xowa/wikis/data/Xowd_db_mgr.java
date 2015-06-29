@@ -89,7 +89,6 @@ public class Xowd_db_mgr {
 			db__core.Tbl__cat_link().Create_tbl();
 		}
 		Dbs__add_and_save(db__core);
-		db__core.Tbl__cfg().Insert_yn(Xow_cfg_consts.Grp__wiki_schema, Xowd_db_file_schema_props.Key__col_page_html_text_id, Bool_.Y);
 		props.Cfg_save(db__core.Tbl__cfg());	// NOTE: must save cfg now, especially zip_tid; latter will be reloaded after import is done;
 		conn.Txn_end();
 	}

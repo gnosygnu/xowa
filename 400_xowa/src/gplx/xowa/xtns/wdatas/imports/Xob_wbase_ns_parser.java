@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.dbs.*;
 import gplx.xowa.wikis.*;
+import gplx.xowa.wmfs.data.*;
 class Xob_wbase_ns_parser {
 	private final Hash_adp_bry ns_mgr_hash = Hash_adp_bry.cs_();
 	private final Xowmf_site_tbl tbl_site; private final Xowmf_ns_tbl tbl_itm;

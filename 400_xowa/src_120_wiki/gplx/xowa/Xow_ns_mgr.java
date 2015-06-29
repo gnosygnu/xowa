@@ -248,7 +248,7 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 	}	private static final String Invk_add_alias_bulk = "add_alias_bulk", Invk_get_by_id_or_new = "get_by_id_or_new";
 	public static final String Invk_load = "load", Invk_clear = "clear";
 	private void Exec_add_alias_bulk(byte[] raw) {
-		byte[][] lines = Bry_.Split(raw, Byte_ascii.NewLine);
+		byte[][] lines = Bry_.Split(raw, Byte_ascii.Nl);
 		int lines_len = lines.length;
 		for (int i = 0; i < lines_len; i++) {
 			byte[] line = lines[i];

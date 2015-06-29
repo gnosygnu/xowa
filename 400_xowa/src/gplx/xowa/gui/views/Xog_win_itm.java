@@ -111,7 +111,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 	private void Win__link_click() {	// NOTE: only applies when content_editable=y; if n, then link_click will be handled by SwtBrowser location changed (Win__link_clicked)
 		Xog_tab_itm tab = tab_mgr.Active_tab(); Xowe_wiki wiki = tab.Wiki();
 		if (wiki.Gui_mgr().Cfg_browser().Content_editable()) {	
-			String href = tab.Html_itm().Html_box().Html_active_atr_get_str(Gfui_html.Atr_href, null);
+			String href = tab.Html_itm().Html_box().Html_js_eval_proc_as_str(Xog_js_procs.Selection__get_active_for_editable_mode, Gfui_html.Atr_href, null);
 			if (String_.Len_eq_0(href)) return; // NOTE: href can be null for images; EX: [[File:Loudspeaker.svg|11px|link=|alt=play]]; link= basically means don't link to image
 			Page__navigate_by_internal_href(href, tab);
 		}
@@ -136,7 +136,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 		kit.Kit_term();	// NOTE: Kit_term calls shell.close() which in turn is hooked up to app.Term_cbk() event; DATE:2014-09-09
 	}
 	private void App__eval(String s) {
-		String snippet = this.Active_html_box().Html_elem_atr_get_str(s, Gfui_html.Atr_innerHTML);
+		String snippet = this.Active_html_itm().Html_elem_atr_get_str(s, Gfui_html.Atr_innerHTML);
 		app.Gfs_mgr().Run_str(snippet);
 	}
 	private static String Parse_evt_location_changing(String v) { // EX: about:blank#anchor -> anchor
@@ -196,7 +196,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 	}
 	public void Page__refresh() {
 		Xog_tab_itm tab = tab_mgr.Active_tab(); Xoae_page page = tab.Page(); Xog_html_itm html_itm = tab.Html_itm();
-		page.Html_data().Bmk_pos_(html_itm.Html_box().Html_window_vpos());
+		page.Html_data().Bmk_pos_(html_itm.Html_box().Html_js_eval_proc_as_str(Xog_js_procs.Win__vpos_get));
 		html_itm.Show(page);
 		if (page.Url().Anchor_str() == null)
 			html_itm.Scroll_page_by_bmk_gui();

@@ -24,14 +24,14 @@ public class Xol_lang_srl {
 		List_adp rv = List_adp_.new_(); Xol_csv_parser csv_parser = Xol_csv_parser._;
 		while (true) {
 			boolean last = pos == src_len;	// NOTE: logic occurs b/c of \n}~-> dlm which gobbles up last \n
-			byte b = last ? Byte_ascii.NewLine : src[pos];
+			byte b = last ? Byte_ascii.Nl : src[pos];
 			switch (b) {
 				case Byte_ascii.Pipe:
 					cur_id = Bry_.Xto_int_or(src, fld_bgn, pos, Int_.MinValue);
 					if (cur_id == Int_.MinValue) throw Err_mgr._.fmt_(GRP_KEY, "invalid_id", "invalid_id: ~{0}", String_.new_u8(src, fld_bgn, pos));					
 					fld_bgn = pos + 1;
 					break;
-				case Byte_ascii.NewLine:
+				case Byte_ascii.Nl:
 					byte[] cur_name = csv_parser.Load(src, fld_bgn, pos);
 					Xow_ns ns = new Xow_ns(cur_id, Xow_ns_case_.Id_1st, cur_name, false);
 					rv.Add(ns);
@@ -53,7 +53,7 @@ public class Xol_lang_srl {
 		Xol_csv_parser csv_parser = Xol_csv_parser._;
 		while (true) {
 			boolean last = pos == src_len;	// NOTE: logic occurs b/c of \n}~-> dlm which gobbles up last \n
-			byte b = last ? Byte_ascii.NewLine : src[pos];
+			byte b = last ? Byte_ascii.Nl : src[pos];
 			switch (b) {
 				case Byte_ascii.Pipe:
 					switch (fld_idx) {
@@ -77,7 +77,7 @@ public class Xol_lang_srl {
 					cur_words.Add(word);
 					fld_bgn = pos + 1;
 					break;
-				case Byte_ascii.NewLine:
+				case Byte_ascii.Nl:
 					if (cur_words.Count() > 0) {	// guard against blank line wiping out entries; EX: "toc|0|toc1\n\n"; 2nd \n will get last grp and make 0 entries
 						int cur_id = Xol_kwd_grp_.Id_by_bry(cur_key); if (cur_id == -1) throw Err_mgr._.fmt_(GRP_KEY, "invalid_keyword", "key does not have id: ~{0}", cur_id);
 						Xol_kwd_grp grp = keyword_mgr.Get_or_new(cur_id);
@@ -101,13 +101,13 @@ public class Xol_lang_srl {
 		Xol_csv_parser csv_parser = Xol_csv_parser._;
 		while (true) {
 			boolean last = pos == src_len;	// NOTE: logic occurs b/c of \n}~-> dlm which gobbles up last \n
-			byte b = last ? Byte_ascii.NewLine : src[pos];
+			byte b = last ? Byte_ascii.Nl : src[pos];
 			switch (b) {
 				case Byte_ascii.Pipe:
 					cur_key = csv_parser.Load(src, fld_bgn, pos);
 					fld_bgn = pos + 1;
 					break;
-				case Byte_ascii.NewLine:
+				case Byte_ascii.Nl:
 					byte[] cur_val = csv_parser.Load(src, fld_bgn, pos);
 					Xol_msg_itm itm = msg_mgr.Itm_by_key_or_new(cur_key).Src_(Xol_msg_itm.Src_lang);	// NOTE: this proc should only be called when loading lang.gfs
 					Xol_msg_itm_.update_val_(itm, cur_val);
@@ -127,13 +127,13 @@ public class Xol_lang_srl {
 		Xol_csv_parser csv_parser = Xol_csv_parser._;
 		while (true) {
 			boolean last = pos == src_len;	// NOTE: logic occurs b/c of \n}~-> dlm which gobbles up last \n
-			byte b = last ? Byte_ascii.NewLine : src[pos];
+			byte b = last ? Byte_ascii.Nl : src[pos];
 			switch (b) {
 				case Byte_ascii.Pipe:
 					cur_key = csv_parser.Load(src, fld_bgn, pos);
 					fld_bgn = pos + 1;
 					break;
-				case Byte_ascii.NewLine:
+				case Byte_ascii.Nl:
 					byte[] cur_val_raw = csv_parser.Load(src, fld_bgn, pos);
 					byte[][] cur_vals = Bry_.Split(cur_val_raw, Byte_ascii.Tilde);
 					special_mgr.Add(cur_key, cur_vals);

@@ -55,7 +55,7 @@ class Imap_parser {
 			if (itm_end == src_end) break;
 			itm_bgn = Bry_finder.Trim_fwd_space_tab(src, itm_end + 1, src_end);					// trim ws at start, and look for first char
 			if (itm_bgn == src_end) break;														// line is entirely ws and terminated by eos; EX: "\n  EOS"
-			itm_end = Bry_finder.Find_fwd_until(src, itm_bgn, src_end, Byte_ascii.NewLine);		// look for \n
+			itm_end = Bry_finder.Find_fwd_until(src, itm_bgn, src_end, Byte_ascii.Nl);		// look for \n
 			if (itm_end == Bry_finder.Not_found) itm_end = src_end;								// no \n; make EOS = \n
 			itm_end = Bry_finder.Trim_bwd_space_tab(src, itm_end, itm_bgn);						// trim any ws at end
 			if (itm_end - itm_bgn == 0) continue;												// line is entirely ws; continue;
@@ -205,13 +205,13 @@ class Imap_parser {
 			pos = Bry_finder.Trim_fwd_space_tab(src, pos, src_end);	// trim ws
 			if (pos == src_end) break;
 			byte b = src[pos];
-			if (b == Byte_ascii.NewLine)	// new-line; end
+			if (b == Byte_ascii.Nl)	// new-line; end
 				break;
 			else {
 				Object tid_obj = tid_trie.Match_bgn_w_byte(b, src, pos, src_end);
 				if (tid_obj == null) {		// not a known imap line; assume continuation of img line and skip to next line
 					imap_ctx.Wiki().Appe().Usr_dlg().Note_many("", "", "image_map extending image over multiple lines; page=~{0} imageMap=~{1}", String_.new_u8(imap_ctx.Cur_page().Ttl().Full_txt()), String_.new_u8(imap_img_src));
-					int next_line = Bry_finder.Find_fwd(src, Byte_ascii.NewLine, pos);
+					int next_line = Bry_finder.Find_fwd(src, Byte_ascii.Nl, pos);
 					if (next_line == Bry_finder.Not_found) next_line = src_end;
 					rv = next_line;
 					pos = rv + 1;

@@ -93,7 +93,7 @@ public class Xog_tab_itm_edit_mgr {
 	public static void Focus(Xog_win_itm win, String elem_focus_id) {
 		Gfui_html html_box = win.Active_html_box();
 		html_box.Focus();
-		html_box.Html_elem_focus(elem_focus_id);
+		html_box.Html_js_eval_proc_as_str(Xog_js_procs.Doc__elem_focus, elem_focus_id);
 	}
 	public static void Debug(Xog_win_itm win, byte view_tid) {
 		Xog_tab_itm tab = win.Tab_mgr().Active_tab(); Xoae_page page = tab.Page();

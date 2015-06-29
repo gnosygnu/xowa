@@ -79,7 +79,7 @@ public class Xoh_js_cleaner {
 		for (; atr_pos < end; atr_pos++) {
 			byte atr_b = src[atr_pos];
 			switch (atr_b) {
-				case Byte_ascii.Tab: case Byte_ascii.NewLine: case Byte_ascii.CarriageReturn: case Byte_ascii.Space: break;
+				case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Space: break;
 				case Byte_ascii.Eq:
 					next_byte_is_equal = true;
 					++atr_pos;

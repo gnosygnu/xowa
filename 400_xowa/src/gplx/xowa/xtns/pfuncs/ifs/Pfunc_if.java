@@ -23,7 +23,7 @@ public class Pfunc_if extends Pf_func_base {
 		boolean val_is_empty = true; int val_len = val.length;
 		for (int i = 0; i < val_len; i++) {
 			switch (val[i]) {
-				case Byte_ascii.Space: case Byte_ascii.NewLine: case Byte_ascii.Tab:	break;										// ws; continue
+				case Byte_ascii.Space: case Byte_ascii.Nl: case Byte_ascii.Tab:	break;										// ws; continue
 				default:																val_is_empty = false; i = val_len; break;	// non-ws; break loop
 			}
 		}

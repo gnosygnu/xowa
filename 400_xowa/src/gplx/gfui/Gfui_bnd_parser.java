@@ -48,7 +48,7 @@ public class Gfui_bnd_parser {
 		tkns.Clear(); mod_val = Mod_val_null;
 		int pos = 0; int itm_bgn = -1, itm_end = -1; boolean is_numeric = false;
 		while (pos <= src_len) {			// loop over bytes and break up tkns by symbols
-			byte b = pos == src_len ? Byte_ascii.NewLine: src[pos];	// treat eos as "\n" for purpose of separating tokens
+			byte b = pos == src_len ? Byte_ascii.Nl: src[pos];	// treat eos as "\n" for purpose of separating tokens
 			Gfui_bnd_tkn sym_tkn = null;
 			switch (b) {
 				case Byte_ascii.Plus:		// simultaneous; EX: Ctrl + S
@@ -60,7 +60,7 @@ public class Gfui_bnd_parser {
 				case Byte_ascii.Comma:		// chorded; EX: Ctrl + S, Ctrl + T
 					sym_tkn = Itm_sym_comma;
 					break;
-				case Byte_ascii.NewLine:	// eos: process anything in bfr
+				case Byte_ascii.Nl:	// eos: process anything in bfr
 					sym_tkn = Itm_sym_eos;
 					break;
 				case Byte_ascii.Space:

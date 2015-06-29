@@ -51,7 +51,7 @@ public class Xowd_cat_core_tbl implements RlsAble {
 	public void Update_by_batch(int id, byte hidden) {
 		stmt_update.Clear().Val_byte(fld_hidden, hidden).Crt_int(fld_id, id).Exec_update();
 	}
-	public void Delete_all() {conn.Stmt_delete(tbl_name, Db_meta_fld.Ary_empy).Exec_delete();;}
+	public void Delete_all() {conn.Stmt_delete(tbl_name, Db_meta_fld.Ary_empty).Exec_delete();;}
 	public Xowd_category_itm Select(int id) {
 		if (stmt_select == null) stmt_select = conn.Stmt_select(tbl_name, flds, fld_id);
 		Db_rdr rdr = stmt_select.Clear().Crt_int(fld_id, id).Exec_select__rls_manual();

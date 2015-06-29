@@ -84,7 +84,7 @@ class Xob_css_tkn__url extends Xob_css_tkn__base {
 				case Byte_ascii.Slash:
 				case Byte_ascii.Backslash:
 					break;
-				case Byte_ascii.Lt: case Byte_ascii.Gt: case Byte_ascii.Colon: case Byte_ascii.Pipe: case Byte_ascii.Question: case Byte_ascii.Asterisk: case Byte_ascii.Quote:
+				case Byte_ascii.Lt: case Byte_ascii.Gt: case Byte_ascii.Colon: case Byte_ascii.Pipe: case Byte_ascii.Question: case Byte_ascii.Star: case Byte_ascii.Quote:
 					src[i] = Byte_ascii.Underline;
 					break;
 				default:

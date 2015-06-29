@@ -58,8 +58,8 @@ public class Gfs_bldr {
 	public Gfs_bldr Add_paren_end()				{bfr.Add_byte(Byte_ascii.Paren_end); return this;}
 	public Gfs_bldr Add_quote_xtn_bgn()			{bfr.Add(Bry_xquote_bgn); return this;}
 	public Gfs_bldr Add_quote_xtn_end()			{bfr.Add(Bry_xquote_end); return this;}
-	public Gfs_bldr Add_quote_xtn_apos_bgn()	{bfr.Add_byte(Byte_ascii.Paren_bgn).Add_byte(Byte_ascii.Apos).Add_byte(Byte_ascii.NewLine); return this;}
-	public Gfs_bldr Add_quote_xtn_apos_end()	{bfr.Add_byte(Byte_ascii.Apos).Add_byte(Byte_ascii.Paren_end).Add_byte(Byte_ascii.Semic).Add_byte(Byte_ascii.NewLine); return this;}
+	public Gfs_bldr Add_quote_xtn_apos_bgn()	{bfr.Add_byte(Byte_ascii.Paren_bgn).Add_byte(Byte_ascii.Apos).Add_byte(Byte_ascii.Nl); return this;}
+	public Gfs_bldr Add_quote_xtn_apos_end()	{bfr.Add_byte(Byte_ascii.Apos).Add_byte(Byte_ascii.Paren_end).Add_byte(Byte_ascii.Semic).Add_byte(Byte_ascii.Nl); return this;}
 	public Gfs_bldr Add_quote_0()				{bfr.Add_byte(Byte_ascii.Apos); return this;}
 	public Gfs_bldr Add_term_nl()				{bfr.Add(Bry_semic_nl); return this;}
 	public Gfs_bldr Add_eq_str(String k, byte[] v) {

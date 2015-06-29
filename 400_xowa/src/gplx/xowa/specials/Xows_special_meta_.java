@@ -34,6 +34,7 @@ public class Xows_special_meta_ {
 	, Uid__nearby				= 13
 	, Uid__page_history			= 14
 	, Uid__bookmarks			= 15
+	, Uid__diag					= 16
 	;
 	public static final String
 	  Key__all_pages			= "AllPages"
@@ -51,6 +52,7 @@ public class Xows_special_meta_ {
 	, Key__nearby				= "Nearby"
 	, Key__page_history			= "XowaHistory"
 	, Key__bookmarks			= "XowaBookmarks"
+	, Key__diag					= "XowaDiag"
 	;
 	public static final Xows_special_meta
 	  Itm__all_pages			= new Xows_special_meta(Src__mw		, Uid__all_pages			, Key__all_pages)
@@ -68,5 +70,6 @@ public class Xows_special_meta_ {
 	, Itm__nearby				= new Xows_special_meta(Src__xowa	, Uid__nearby				, Key__nearby)
 	, Itm__page_history			= new Xows_special_meta(Src__xowa	, Uid__page_history			, Key__page_history)
 	, Itm__bookmarks			= new Xows_special_meta(Src__xowa	, Uid__bookmarks			, Key__bookmarks)
+	, Itm__diag					= new Xows_special_meta(Src__xowa	, Uid__diag					, Key__diag)
 	;
 }

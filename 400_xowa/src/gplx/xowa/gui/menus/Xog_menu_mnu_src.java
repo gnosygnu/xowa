@@ -25,7 +25,7 @@ class Xog_menu_mgr_src {
 	.	Add_btn(Xog_cmd_itm_.Key_gui_browser_tabs_close_cur)
 	.	Add_spr()
 	.	Add_btn(Xog_cmd_itm_.Key_gui_page_view_save_as)
-//		.	Add_btn(Xog_cmd_itm_.Key_gui_page_view_print)
+	.	Add_btn(Xog_cmd_itm_.Key_gui_page_view_print)
 	.	Add_btn(Xog_cmd_itm_.Key_app_exit)
 	. Add_grp_end()
 	. Add_grp_bgn(Xog_cmd_itm_.Key_gui_menus_group_edit)

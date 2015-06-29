@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 import org.junit.*;
+import gplx.core.primitives.*;
 public class Xog_html_itm_tst {
 	@Before public void init() {fxt.Clear();} private Xog_html_itm_fxt fxt = new Xog_html_itm_fxt();
 	@Test   public void Extract_href__text() {
@@ -34,6 +35,10 @@ public class Xog_html_itm_tst {
 		fxt.Test_extract_href("2|/wiki/Page_2"										, "en.wikipedia.org/wiki/Page_2");
 		fxt.Test_extract_href("2|#anchor"											, "en.wikipedia.org/wiki/Page_0#anchor");
 	}
+	@Test  public void Html_window_vpos_parse() {
+		fxt.Test_Html_window_vpos_parse("0|0,1,2", "0", "'0','1','2'");
+		fxt.Test_Html_window_vpos_parse("org.eclipse.swt.SWTException: Permission denied for <file://> to get property Selection.rangeCount", null, null);	// check that invalid path doesn't fail; DATE:2014-04-05
+	}
 }
 class Xog_html_itm_fxt {
 	public void Clear() {
@@ -44,5 +49,12 @@ class Xog_html_itm_fxt {
 	public String Cur_page() {return cur_page;} public Xog_html_itm_fxt Cur_page_(String v) {cur_page = v; return this;} private String cur_page;
 	public void Test_extract_href(String text_str, String expd) {
 		Tfds.Eq(expd, Xog_html_itm__href_extractor.Html_extract_text(cur_wiki, cur_page, text_str));
+	}
+	private String_obj_ref scroll_top = String_obj_ref.null_(), node_path = String_obj_ref.null_();
+	public void Test_Html_window_vpos_parse(String raw, String expd_scroll_top, String expd_node_path) {
+		scroll_top.Val_null_(); node_path.Val_null_();
+		Xog_html_itm.Html_window_vpos_parse(raw, scroll_top, node_path);
+		Tfds.Eq(expd_scroll_top, scroll_top.Val(), expd_scroll_top);
+		Tfds.Eq(expd_node_path, node_path.Val(), expd_node_path);
 	}
 }

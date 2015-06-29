@@ -40,7 +40,7 @@ public class Xoud_bmk_tbl implements RlsAble {
 	}
 	public Xoud_bmk_row[] Select_all() {
 		List_adp list = List_adp_.new_();
-		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empy).Clear().Exec_select__rls_auto();
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empty).Clear().Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next())
 				list.Add(new_row(rdr));

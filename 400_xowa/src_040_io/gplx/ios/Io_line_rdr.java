@@ -25,7 +25,7 @@ public class Io_line_rdr {
 		urls[0] = url;
 		url_idx = 0;
 	}
-	public byte Line_dlm() {return line_dlm;} public Io_line_rdr Line_dlm_(byte v) {line_dlm = v; return this;} private byte line_dlm = Byte_ascii.NewLine;
+	public byte Line_dlm() {return line_dlm;} public Io_line_rdr Line_dlm_(byte v) {line_dlm = v; return this;} private byte line_dlm = Byte_ascii.Nl;
 	public byte[] Bfr() {return bfr;} private byte[] bfr;
 	public int Bfr_len() {return bfr_len;} private int bfr_len;
 	public byte Bfr_state() {return bfr_state;} private byte bfr_state = Bfr_state_bgn; static final byte Bfr_state_bgn = 0, Bfr_state_mid = 1, Bfr_state_end = 2;
@@ -139,7 +139,7 @@ public class Io_line_rdr {
 		if (file_skip_line0) {
 			byte[] stream_bry = Io_mgr.I.LoadFilBry(url);
 			int stream_bry_len = stream_bry.length;
-			int nl_pos = Bry_finder.Find_fwd(stream_bry, Byte_ascii.NewLine, 0, stream_bry_len);
+			int nl_pos = Bry_finder.Find_fwd(stream_bry, Byte_ascii.Nl, 0, stream_bry_len);
 			if (nl_pos == Bry_.NotFound)
 				stream_bry = Bry_.Empty;
 			else

@@ -19,7 +19,7 @@ package gplx.dbs; import gplx.*;
 public interface Db_rdr {
 	boolean		Move_next();
 	byte[]		Read_bry(String k);
-	byte[]		Read_bry_in_parts(String tbl, String fld, String crt_key, Object crt_val);
+	void		Save_bry_in_parts(Io_url url, String tbl, String fld, String crt_key, Object crt_val);
 	byte[]		Read_bry_by_str(String k);
 	String 		Read_str(String k);
 	byte 		Read_byte(String k);

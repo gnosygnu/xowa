@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.prefs; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.core.primitives.*; import gplx.html.*; import gplx.gfui.*;
+import gplx.xowa.gui.views.*;
 public class Prefs_mgr implements GfoInvkAble {
 	public Prefs_mgr(Xoae_app app) {
 		this.app = app;
@@ -27,7 +28,7 @@ public class Prefs_mgr implements GfoInvkAble {
 		html_wtr = new Prefs_html_wtr(this);
 	}	private Xoae_app app; private Hash_adp_bry atrs_hash; private Html_parser html_rdr = new Html_parser(); private Prefs_html_wtr html_wtr;
 	private Prefs_trg_mgr option_trgs_mgr = new Prefs_trg_mgr();
-	public void Html_box_mok_(Gfui_html v) {this.html_box_mok = v;} private Gfui_html html_box_mok;
+	public void Html_box_mok_(Xog_html_itm v) {this.html_box_mok = v;} private Xog_html_itm html_box_mok;
 	public byte[] Props_get(byte[] src) {
 //			option_trgs_mgr.Init(app.Gui_mgr().Browser_win().Active_page().Url());
 		if (props_get_fmtr == null) props_get_fmtr = Bry_fmtr.keys_().Eval_mgr_(app.Gfs_mgr().Eval_mgr());
@@ -76,14 +77,14 @@ public class Prefs_mgr implements GfoInvkAble {
 		if 	(eval_code == null) eval_code = hnde.Atrs_val_by_key_bry(Bry_prop_set);
 		String hnde_val = null;
 		String hnde_key = "xowa_prop_" + Int_.Xto_str(i);
-		Gfui_html html_box = html_box_mok == null ? app.Gui_mgr().Browser_win().Active_tab().Html_itm().Html_box() : html_box_mok;	// TEST:
+		Xog_html_itm html_itm = html_box_mok == null ? app.Gui_mgr().Browser_win().Active_tab().Html_itm() : html_box_mok;	// TEST:
 		byte elem_tid = Prefs_mgr.Elem_tid_tid_of(hnde);
 		switch (elem_tid) {
 			case Elem_tid_input_text:
 			case Elem_tid_input_xowa_io:
-			case Elem_tid_select: 			hnde_val = html_box.Html_elem_atr_get_str(hnde_key, gplx.gfui.Gfui_html.Atr_value); break;
-			case Elem_tid_textarea:			hnde_val = Html_utl.Unescape_as_str(html_box.Html_elem_atr_get_str(hnde_key, gplx.gfui.Gfui_html.Atr_value)); break;
-			case Elem_tid_input_checkbox:	hnde_val = html_box.Html_elem_atr_get_bool(hnde_key, "checked") ? "y" : "n"; break;
+			case Elem_tid_select: 			hnde_val = html_itm.Html_elem_atr_get_str(hnde_key, gplx.gfui.Gfui_html.Atr_value); break;
+			case Elem_tid_textarea:			hnde_val = Html_utl.Unescape_as_str(html_itm.Html_elem_atr_get_str(hnde_key, gplx.gfui.Gfui_html.Atr_value)); break;
+			case Elem_tid_input_checkbox:	hnde_val = html_itm.Html_elem_atr_get_bool(hnde_key, "checked") ? "y" : "n"; break;
 		}			
 		byte[] get_cmd = Props_get(eval_code); 
 		Object get_val = Eval_run(Bry_.Add(get_cmd, Byte_ascii.Semic));

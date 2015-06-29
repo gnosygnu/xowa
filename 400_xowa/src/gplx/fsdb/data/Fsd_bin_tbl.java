@@ -16,12 +16,14 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.fsdb.data; import gplx.*; import gplx.fsdb.*;
+import gplx.core.primitives.*;
 import gplx.dbs.*; import gplx.ios.*;
 import gplx.dbs.engines.sqlite.*;
 public class Fsd_bin_tbl implements RlsAble {
 	private final String tbl_name = "fsdb_bin"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
-	private final String fld_owner_id, fld_owner_tid, fld_part_id, fld_data_url, fld_data;		
-	private Db_conn conn; private Db_stmt stmt_insert, stmt_select; private final Bry_bfr tmp_bfr = Bry_bfr.reset_(Io_mgr.Len_kb);
+	private final String fld_owner_id, fld_owner_tid, fld_part_id, fld_data_url, fld_data;
+	private Db_conn conn; private Db_stmt stmt_insert, stmt_select; private Bry_bfr tmp_bfr;
+	private final Bool_obj_ref saved_in_parts = Bool_obj_ref.n_();
 	public Fsd_bin_tbl(Db_conn conn, boolean schema_is_1) {
 		this.conn = conn;
 		fld_owner_id		= flds.Add_int_pkey	("bin_owner_id");
@@ -40,9 +42,12 @@ public class Fsd_bin_tbl implements RlsAble {
 	public void Insert_commit()	{conn.Txn_sav();}
 	public void Insert_end()	{conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
 	public void Insert_rdr(int id, byte tid, long bin_len, Io_stream_rdr bin_rdr) {
-		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(tbl_name, flds);
+		if (stmt_insert == null) {
+			stmt_insert = conn.Stmt_insert(tbl_name, flds);
+			tmp_bfr = Bry_bfr.reset_(Io_mgr.Len_kb);
+		}
 		byte[] bin_ary = null;
-		synchronized (tmp_bfr) {bin_ary = Io_stream_rdr_.Load_all_as_bry(tmp_bfr, bin_rdr);}
+		bin_ary = Io_stream_rdr_.Load_all_as_bry(tmp_bfr, bin_rdr);
 		stmt_insert.Clear()
 		.Val_int(fld_owner_id, id)
 		.Val_byte(fld_owner_tid, tid)
@@ -52,18 +57,20 @@ public class Fsd_bin_tbl implements RlsAble {
 		.Exec_insert();
 	}
 	public Io_stream_rdr Select_as_rdr(int owner_id) {
-		byte[] rv = Select(owner_id);
+		byte[] rv = Select(owner_id, null);
 		return rv == null
 			? Io_stream_rdr_.Noop
 			: Io_stream_rdr_.mem_(rv);
 	}
 	public boolean Select_to_url(int owner_id, Io_url url) {
-		byte[] rv = Select(owner_id);
+		saved_in_parts.Val_n();
+		byte[] rv = Select(owner_id, url);
 		if (rv == null) return false;
+		if (saved_in_parts.Val_y()) return true;
 		Io_mgr.I.SaveFilBry(url, rv);
 		return true;
 	}
-	private byte[] Select(int owner_id) {
+	private byte[] Select(int owner_id, Io_url url) {
 		if (stmt_select == null) stmt_select = conn.Stmt_select(tbl_name, String_.Ary(fld_data), fld_owner_id);
 		Db_rdr rdr = stmt_select.Clear().Crt_int(fld_owner_id, owner_id).Exec_select__rls_manual();
 		try {
@@ -71,8 +78,12 @@ public class Fsd_bin_tbl implements RlsAble {
 				byte[] rv = null;
 				try {rv = rdr.Read_bry(fld_data);}
 				catch (Exception e) {
-					if (Op_sys.Cur().Tid_is_drd() && String_.Has(Err_.Message_lang(e), "get field slot from row")) { 	// get field slot from row 0 col 0 failed
-						rv = rdr.Read_bry_in_parts(tbl_name, fld_data, fld_owner_id, owner_id);
+					if (	Op_sys.Cur().Tid_is_drd() 
+						&&	url != null														// called by Select_to_url
+						&&	String_.Has(Err_.Message_lang(e), "get field slot from row")	// get field slot from row 0 col 0 failed
+						) { 	
+						rdr.Save_bry_in_parts(url, tbl_name, fld_data, fld_owner_id, owner_id);
+						saved_in_parts.Val_y_();
 					}
 				}
 				return rv == null ? Bry_.Empty : rv;	// NOTE: bug in v0.10.1 where .ogg would save as null; return Bry_.Empty instead, else java.io.ByteArrayInputStream would fail on null

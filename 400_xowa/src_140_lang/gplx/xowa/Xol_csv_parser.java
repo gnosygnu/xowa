@@ -22,8 +22,8 @@ public class Xol_csv_parser {
 		for (int i = 0; i < len; i++) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.CarriageReturn: 		bfr.Add_byte(Byte_ascii.Backslash); bfr.Add_byte(Byte_ascii.Ltr_r); break;
-				case Byte_ascii.NewLine: 				bfr.Add_byte(Byte_ascii.Backslash); bfr.Add_byte(Byte_ascii.Ltr_n); break;
+				case Byte_ascii.Cr: 		bfr.Add_byte(Byte_ascii.Backslash); bfr.Add_byte(Byte_ascii.Ltr_r); break;
+				case Byte_ascii.Nl: 				bfr.Add_byte(Byte_ascii.Backslash); bfr.Add_byte(Byte_ascii.Ltr_n); break;
 				case Byte_ascii.Tab: 					bfr.Add_byte(Byte_ascii.Backslash); bfr.Add_byte(Byte_ascii.Ltr_t); break;
 				case Byte_ascii.Backslash: 				bfr.Add_byte(Byte_ascii.Backslash); bfr.Add_byte(Byte_ascii.Backslash); break;
 				case Byte_ascii.Pipe: 					bfr.Add(Bry_pipe); break;
@@ -42,8 +42,8 @@ public class Xol_csv_parser {
 					byte nxt_byte = src[nxt_pos];
 					switch (nxt_byte) {
 						case Byte_ascii.Backslash:		bfr.Add_byte(Byte_ascii.Backslash); break;
-						case Byte_ascii.Ltr_r: 			bfr.Add_byte(Byte_ascii.CarriageReturn); break;
-						case Byte_ascii.Ltr_n:			bfr.Add_byte(Byte_ascii.NewLine); break;
+						case Byte_ascii.Ltr_r: 			bfr.Add_byte(Byte_ascii.Cr); break;
+						case Byte_ascii.Ltr_n:			bfr.Add_byte(Byte_ascii.Nl); break;
 						case Byte_ascii.Ltr_t:			bfr.Add_byte(Byte_ascii.Tab); break;
 						case Byte_ascii.Ltr_u:
 							int utf_len = 1;

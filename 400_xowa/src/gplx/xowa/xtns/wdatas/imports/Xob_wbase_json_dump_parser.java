@@ -72,11 +72,11 @@ class Xob_wbase_json_dump_parser {
 			if (pos < bry_len)
 				b = bry[pos];
 			else {
-				b = Byte_ascii.NewLine;
+				b = Byte_ascii.Nl;
 				pos = bry_len;
 				exit = true;
 			}
-			if (b == Byte_ascii.NewLine) {
+			if (b == Byte_ascii.Nl) {
 				byte[] json_bry = Bry_.Mid(bry, page_bgn, pos);
 				if (json_bry.length == 1 && json_bry[0] == Byte_ascii.Brack_end) return -1;
 				if (exit) return -1;

@@ -29,7 +29,8 @@ public class Xowd_page_tbl implements RlsAble {
 	public String Fld_page_ns()					{return fld_ns;}
 	public String Fld_page_title()				{return fld_title;}
 	public String Fld_page_len()				{return fld_len;}
-	public Db_meta_fld Fld_html_db_id()			{return flds.Get_by(fld_html_db_id);}
+	public String Fld_html_db_id()				{return fld_html_db_id;}
+	public String Fld_redirect_id()				{return fld_redirect_id;}
 	public String[] Flds_select_idx()			{return flds_select_idx;}
 	public String[] Flds_select_all()			{return flds_select_all;}
 	public Db_conn Conn() {return conn;}
@@ -162,7 +163,7 @@ public class Xowd_page_tbl implements RlsAble {
 		if (Bry_.Len_eq_0(search)) return;	// do not allow empty search
 		Criteria crt = Criteria_.And_many(Db_crt_.eq_(fld_ns, Xow_ns_.Id_main), Db_crt_.like_(fld_title, ""));
 		Db_qry__select_cmd qry = Db_qry_.select_().From_(tbl_name).Cols_(fld_id, fld_len, fld_ns, fld_title).Where_(crt);	// NOTE: use fields from main index only
-		search = Bry_.Replace(search, Byte_ascii.Asterisk, Byte_ascii.Percent);
+		search = Bry_.Replace(search, Byte_ascii.Star, Byte_ascii.Percent);
 		Db_rdr rdr = conn.Stmt_new(qry).Clear().Crt_int(fld_ns, Xow_ns_.Id_main).Val_bry_as_str(fld_title, search).Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {

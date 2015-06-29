@@ -28,7 +28,7 @@ public class Db_rdr__basic implements Db_rdr {
 	}
 	@gplx.Virtual public byte[]		Read_bry(String k)			{try {return (byte[])rdr.getObject(k);} catch (Exception e) {throw Err_.new_("read failed: k={0} type={1} err={2}", k, Bry_.Cls_val_name, Err_.Message_lang(e));}} 
 	@gplx.Virtual public byte[]		Read_bry_by_str(String k)	{try {return Bry_.new_u8((String)rdr.getObject(k));} catch (Exception e) {throw Err_.new_("read failed: k={0} type={1} err={2}", k, String_.Cls_val_name, Err_.Message_lang(e));}} 
-	@gplx.Virtual public byte[]		Read_bry_in_parts(String tbl, String fld, String crt_key, Object crt_val) {throw Err_.not_implemented_();}
+	@gplx.Virtual public void			Save_bry_in_parts(Io_url url, String tbl, String fld, String crt_key, Object crt_val) {throw Err_.not_implemented_();}
 	@gplx.Virtual public String 		Read_str(String k)			{try {return (String)rdr.getObject(k);} catch (Exception e) {throw Err_.new_("read failed: k={0} type={1} err={2}", k, String_.Cls_val_name, Err_.Message_lang(e));}} 
 	@gplx.Virtual public DateAdp		Read_date_by_str(String k)	{return DateAdp_.parse_iso8561(Read_str(k));}
 	@gplx.Virtual public int 			Read_int(String k)			{try {return Int_.cast_(rdr.getObject(k));} catch (Exception e) {throw Err_.new_("read failed: k={0} type={1} err={2}", k, Int_.Cls_val_name, Err_.Message_lang(e));}} 

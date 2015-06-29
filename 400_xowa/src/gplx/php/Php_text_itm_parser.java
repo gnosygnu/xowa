@@ -67,11 +67,11 @@ public class Php_text_itm_parser {
 							case Byte_ascii.Backslash:	next_char = Byte_ascii.Backslash; break;
 							case Byte_ascii.Quote:		next_char = Byte_ascii.Quote; break;
 							case Byte_ascii.Ltr_N:
-							case Byte_ascii.Ltr_n:		next_char = Byte_ascii.NewLine; break;
+							case Byte_ascii.Ltr_n:		next_char = Byte_ascii.Nl; break;
 							case Byte_ascii.Ltr_T:
 							case Byte_ascii.Ltr_t:		next_char = Byte_ascii.Tab; break;
 							case Byte_ascii.Ltr_R:
-							case Byte_ascii.Ltr_r:		next_char = Byte_ascii.CarriageReturn; break;					
+							case Byte_ascii.Ltr_r:		next_char = Byte_ascii.Cr; break;					
 							case Byte_ascii.Ltr_U:
 							case Byte_ascii.Ltr_u:	{	// EX: "\u007C"
 								rslt_val = Rslt_dirty;

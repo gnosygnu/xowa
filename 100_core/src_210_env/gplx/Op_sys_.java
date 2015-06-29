@@ -26,7 +26,7 @@ public class Op_sys_ {
 			case Byte_ascii.Colon:
 			case Byte_ascii.Pipe:
 			case Byte_ascii.Question:
-			case Byte_ascii.Asterisk:
+			case Byte_ascii.Star:
 			case Byte_ascii.Quote:		return true;
 			default:					return false;
 		}
