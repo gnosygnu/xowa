@@ -33,6 +33,7 @@ public class Hash_adp_bry extends gplx.lists.Hash_adp_base implements Hash_adp {
 	public Hash_adp_bry Add_bry_int(byte[] key, int val)			{this.Add_base(key, Int_obj_val.new_(val)); return this;}
 	public Hash_adp_bry Add_bry_bry(byte[] key)						{this.Add_base(key, key); return this;}
 	public Hash_adp_bry Add_str_byte(String key, byte val)			{this.Add_base(Bry_.new_u8(key), Byte_obj_val.new_(val)); return this;}
+	public Hash_adp_bry Add_str_int(String key, int val)			{this.Add_base(Bry_.new_u8(key), Int_obj_val.new_(val)); return this;}
 	public Hash_adp_bry Add_str_obj(String key, Object val)			{this.Add_base(Bry_.new_u8(key), val); return this;}
 	public Hash_adp_bry Add_bry_obj(byte[] key, Object val)			{this.Add_base(key, val); return this;}
 	public Hash_adp_bry Add_many_str(String... ary) {

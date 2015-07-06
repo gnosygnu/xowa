@@ -27,7 +27,9 @@ public class Xoa_shell implements GfoInvkAble {
 		return this;
 	}
 	private String Fetch_page(GfoMsg m) {
-		return String_.new_u8(app.Gui_mgr().Browser_win().App__retrieve_by_url(m.ReadStr("url"), m.ReadStrOr("output_type", "html")));
+		String url = m.ReadStr("url");
+		if (String_.Has_at_bgn(url, "//")) url = String_.Replace(url, "//", "");	// NOTE: handle Firefox_addon which sometimes sends urls of the form "//wiki/" when coming from the sidebar; DATE:2015-07-04
+		return String_.new_u8(app.Gui_mgr().Browser_win().App__retrieve_by_url(url, m.ReadStrOr("output_type", "html")));
 	}
 	private static final String Invk_fetch_page = "fetch_page"
 	, Invk_chars_per_line_max_ = "chars_per_line_max_"

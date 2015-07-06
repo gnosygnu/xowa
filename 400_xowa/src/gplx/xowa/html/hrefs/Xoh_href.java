@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa; import gplx.*;
+package gplx.xowa.html.hrefs; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 public class Xoh_href {
 	public byte[] Raw() {return raw;} public Xoh_href Raw_(byte[] v) {raw = v; return this;} private byte[] raw;
 	public byte[] Wiki() {return wiki;} public Xoh_href Wiki_(byte[] v) {wiki = v; return this;} private byte[] wiki;

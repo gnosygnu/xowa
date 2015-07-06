@@ -51,7 +51,7 @@ public class Xoapi_bookmarks implements GfoInvkAble {
 //				url = app.Utl__url_parser().Parse(Bry_.new_u8(url_str));
 //			app.User().User_db_mgr().Bmk_mgr().Add(url);
 //		}
-//		public void Show() {win.Page__navigate_by_url_bar("home/wiki/System:XowaBookmarks");}
+//		public void Show() {win.Page__navigate_by_url_bar("home/wiki/Special:XowaBookmarks");}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_enabled)) 							return Yn.Xto_str(this.Enabled());
 		else if	(ctx.Match(k, Invk_enabled_)) 							Enabled_(m.ReadYn("v"));

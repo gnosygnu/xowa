@@ -17,7 +17,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.xowa.wikis.*;
+import gplx.xowa.html.hrefs.*;
 public class Xow_wiki_props implements GfoInvkAble {
+	public byte[] Main_page() {return main_page;} private byte[] main_page = Xoa_page_.Main_page_bry;	// HACK: default to Main_Page b/c some code tries to do Xoa_ttl.parse_() which will not work with ""; DATE:2014-02-16
+	public Xow_wiki_props Main_page_(byte[] v) {main_page = v; return this;}
+	public void Main_page_update(Xowe_wiki wiki) {
+		siteinfo_mainpage = main_page;										// note that main_page came from <siteinfo>; store old value for record's sake
+		main_page = Xow_mainpage_finder.Find_or(wiki, siteinfo_mainpage);	// get new main_page from mainpage_finder
+	}
+
 	public byte[] Site_name() {return site_name;} private byte[] site_name = Bry_.Empty;
 	public byte[] ServerName() {return serverName;} public Xow_wiki_props ServerName_(byte[] v) {serverName = v; server = Bry_.Add(bry_http, v); return this;} private byte[] serverName = Bry_.new_a7("localhost");
 	public byte[] Server() {return server;} private byte[] server = Bry_.new_a7("http://localhost"); static final byte[] bry_http = Bry_.new_a7("http://");
@@ -27,18 +35,11 @@ public class Xow_wiki_props implements GfoInvkAble {
 	public byte[] ContentLanguage() {return contentLanguage;} public Xow_wiki_props ContentLanguage_(byte[] v) {contentLanguage = v; return this;} private byte[] contentLanguage = Bry_.Empty;
 	public byte[] DirectionMark() {return directionMark;} public Xow_wiki_props DirectionMark_(byte[] v) {directionMark = v; return this;} private byte[] directionMark = Bry_.Empty;
 	public byte[] Current_version() {return Current_version_const;}
-
 	public byte[] Bldr_version() {return bldr_version;} public Xow_wiki_props Bldr_version_(byte[] v) {bldr_version = v; return this;} private byte[] bldr_version = Bry_.Empty;
 	public int Css_version() {return css_version;} public Xow_wiki_props Css_version_(int v) {css_version = v; return this;} private int css_version = 1;
 	public byte[] Siteinfo_misc() {return siteinfo_misc;}
 	public byte[] Siteinfo_mainpage() {return siteinfo_mainpage;} private byte[] siteinfo_mainpage = Bry_.Empty;
 	public DateAdp Modified_latest() {return modified_latest;} private DateAdp modified_latest;
-	public byte[] Main_page() {return main_page;}
-	public Xow_wiki_props Main_page_(byte[] v) {main_page = v; return this;} private byte[] main_page = Xoa_page_.Main_page_bry;	// HACK: default to Main_Page b/c some code tries to do Xoa_ttl.parse_() which will not work with ""; DATE:2014-02-16
-	public void Main_page_update(Xowe_wiki wiki) {
-		siteinfo_mainpage = main_page;										// note that main_page came from <siteinfo>; store old value for record's sake
-		main_page = Xow_mainpage_finder.Find_or(wiki, siteinfo_mainpage);	// get new main_page from mainpage_finder
-	}
 	public Xow_wiki_props SiteName_(int v) {site_name = Bry_.new_a7(String_.UpperFirst(String_.new_a7(Xow_domain_type_.Get_type_as_bry(v)))); return this;} 
 	public Xow_wiki_props Siteinfo_misc_(byte[] v) {
 		siteinfo_misc = v;
@@ -47,6 +48,13 @@ public class Xow_wiki_props implements GfoInvkAble {
 			site_name = Bry_.Mid(siteinfo_misc, 0, pipe_0);
 		return this;
 	}	private byte[] siteinfo_misc = Bry_.Empty;
+	public void Init_by_load(gplx.dbs.cfgs.Db_cfg_tbl cfg_tbl) {
+		this.main_page = cfg_tbl.Select_bry_or(Xow_cfg_consts.Grp__wiki_init, Xow_cfg_consts.Key__init__main_page, null);
+		if (main_page == null) {
+			Xoa_app_.Usr_dlg().Warn_many("", "", "mw_props.load; main_page not found; conn=~{0}", cfg_tbl.Conn().Conn_info().Xto_api());
+			this.main_page = Xoa_page_.Main_page_bry;
+		}
+	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_main_page_))						main_page = m.ReadBry("v");
 		else if	(ctx.Match(k, Invk_bldr_version_))					bldr_version = m.ReadBry("v");

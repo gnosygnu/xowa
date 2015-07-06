@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.xowa.langs.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.apis.xowa.html.*; import gplx.xowa.xtns.wdatas.core.*;
+import gplx.xowa.html.hrefs.*;
 public class Xow_lang_mgr {
 	Xow_lang_mgr() {
 		int len = Xol_lang_itm_.Id__max;

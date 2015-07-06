@@ -103,6 +103,7 @@ gui {
 		}
 		prog {
 			focus();
+			show_short_link;
 		}
 		info {
 			focus();
@@ -148,8 +149,7 @@ gui {
 		}
 	}
 }
-html {
-
+html {			
 }
 net {
 }

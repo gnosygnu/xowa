@@ -20,7 +20,8 @@ import gplx.ios.*;
 import gplx.dbs.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.langs.cases.*; import gplx.intl.*; import gplx.xowa.users.data.*;
 import gplx.xowa.*; import gplx.xowa.apps.*;
 import gplx.xowa2.apps.urls.*; import gplx.xowa.files.caches.*; import gplx.xowa.files.imgs.*;
-import gplx.xowa.bldrs.css.*; import gplx.xowa.html.wtrs.*;
+import gplx.xowa.bldrs.css.*;
+import gplx.xowa.html.hrefs.*; import gplx.xowa.html.wtrs.*; import gplx.xowa.html.js.*;
 import gplx.xowa.users.*;
 import gplx.xowa.wikis.*;
 import gplx.xowa.wmfs.*;
@@ -36,19 +37,21 @@ public class Xoav_app implements Xoa_app {
 		this.utl_msg_log = Gfo_msg_log.Test();
 		this.href_parser = new Xoh_href_parser(Xoa_app_.Utl__encoder_mgr().Href(), url_parser.Url_parser());
 		this.html__lnki_bldr = new Xoh_lnki_bldr(this, href_parser);
+		this.html__json_exec = new Xoh_json_exec(this);
 		this.user = new Xouv_user("anonymous");
 	}
 	public Xou_user					User()						{return user;} private final Xouv_user user;
 	public Xoa_app_type				App_type()					{return app_type;} private final Xoa_app_type app_type;
 	public Xoa_fsys_mgr				Fsys_mgr()					{return fsys_mgr;} private final Xoa_fsys_mgr fsys_mgr;
 	public Xoav_wiki_mgr			Wiki_mgr()					{return wiki_mgr;} private final Xoav_wiki_mgr wiki_mgr;
-	public Xoa_wiki_mgr				Wiki_mgri()				{return wiki_mgr;}
+	public Xoa_wiki_mgr				Wiki_mgri()					{return wiki_mgr;}
 	public Xof_cache_mgr			File__cache_mgr()			{return file__cache_mgr;} private final Xof_cache_mgr file__cache_mgr;
 	public Xof_img_mgr				File__img_mgr()				{return file__img_mgr;} private final Xof_img_mgr file__img_mgr;
 	public Io_download_fmt			File__download_fmt()		{return file__download_fmt;} private final Io_download_fmt file__download_fmt = new Io_download_fmt();
 	public Xoh_href_parser			Html__href_parser()			{return href_parser;} private Xoh_href_parser href_parser;
 	public Xoh_lnki_bldr			Html__lnki_bldr()			{return html__lnki_bldr;} private final Xoh_lnki_bldr html__lnki_bldr;
 	public Xoa_css_extractor		Html__css_installer()		{return html__css_installer;} private final Xoa_css_extractor html__css_installer = new Xoa_css_extractor();
+		public Xoh_json_exec		Html__json_exec()			{return html__json_exec;} private final Xoh_json_exec html__json_exec;
 	public boolean						Xwiki_mgr__missing(byte[] domain)	{return wiki_mgr.Get_by_domain(domain) == null;}
 	public Xowmf_mgr				Wmf_mgr()					{return wmf_mgr;} private final Xowmf_mgr wmf_mgr = new Xowmf_mgr();
 	public Gfo_usr_dlg				Usr_dlg() {return usr_dlg;} public void Usr_dlg_(Gfo_usr_dlg v) {usr_dlg = v; Xoa_app_.Usr_dlg_(usr_dlg);} private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Noop;

@@ -20,7 +20,10 @@ public class Xoh_module_mgr implements Bry_fmtr_arg {
 	private Xoae_app app; private Xowe_wiki wiki; private Xoae_page page; private Xoh_module_itm[] itms; private int itms_len;
 	private Xoh_module_wtr wtr = new Xoh_module_wtr();
 	public Xoh_module_mgr() {
-		Itms_add(itm__css, itm__globals, itm__popups, itm__toc, itm__collapsible, itm__navframe, itm__gallery, itm__mathjax, itm__hiero, itm__top_icon, itm__title_rewrite, itm__search_suggest, itm__timeline);
+		Itms_add(itm__css, itm__globals, itm__popups, itm__toc, itm__collapsible, itm__navframe, itm__gallery
+		, itm__mathjax, itm__hiero, itm__top_icon, itm__title_rewrite, itm__search_suggest, itm__timeline
+		, itm__xoui
+		);
 	}
 	public Xoh_module_itm__css					Itm__css() {return itm__css;} private Xoh_module_itm__css itm__css = new Xoh_module_itm__css();
 	public Xoh_module_itm__globals				Itm__globals() {return itm__globals;} private Xoh_module_itm__globals itm__globals = new Xoh_module_itm__globals();
@@ -35,6 +38,7 @@ public class Xoh_module_mgr implements Bry_fmtr_arg {
 	public Xoh_module_itm__search_suggest		Itm__search_suggest() {return itm__search_suggest;} private Xoh_module_itm__search_suggest itm__search_suggest = new Xoh_module_itm__search_suggest();
 	public Xoh_module_itm__timeline				Itm__timeline() {return itm__timeline;} private Xoh_module_itm__timeline itm__timeline = new Xoh_module_itm__timeline();
 	public Xoh_module_itm__title_rewrite		Itm__title_rewrite() {return itm__title_rewrite;} private Xoh_module_itm__title_rewrite itm__title_rewrite = new Xoh_module_itm__title_rewrite();
+	public Xoh_module_itm__xoui					Itm__xoui() {return itm__xoui;} private Xoh_module_itm__xoui itm__xoui = new Xoh_module_itm__xoui();
 	public Xoh_module_mgr Init(Xoae_app app, Xowe_wiki wiki, Xoae_page page) {
 		this.app = app; this.wiki = wiki; this.page = page;
 		return this;

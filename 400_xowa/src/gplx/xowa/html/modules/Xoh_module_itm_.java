@@ -31,5 +31,6 @@ public class Xoh_module_itm_ {
 	, Key_title_rewrite		= Bry_.new_a7("title_rewrite")
 	, Key_toc				= Bry_.new_a7("toc")
 	, Key_top_icon			= Bry_.new_a7("top_icon")
+	, Key_xoui				= Bry_.new_a7("xoui")
 	;
 }

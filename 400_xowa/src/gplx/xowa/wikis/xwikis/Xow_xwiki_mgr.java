@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.xowa.langs.*;
+import gplx.xowa.html.hrefs.*;
 public class Xow_xwiki_mgr implements GfoInvkAble {
 	private Xowe_wiki wiki; private Xow_xwiki_mgr_srl srl;
 	public Xow_xwiki_mgr() {}	// FIXME: current placeholder for viewer

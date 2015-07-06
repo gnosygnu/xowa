@@ -42,16 +42,18 @@ public class Xowd_css_core_mgr {
 		}
 		catch (Exception e) {conn.Txn_cxl(); throw Err_.err_(e);}
 	}
-	public static void Get(Xowd_css_core_tbl core_tbl, Xowd_css_file_tbl file_tbl, Io_url css_dir, String key) {
-		int css_id = core_tbl.Select_id_by_key(key); if (css_id == Xowd_css_core_tbl.Id_null) throw Err_.new_("skin:unknown key: {0}", key);
+	public static boolean Get(Xowd_css_core_tbl core_tbl, Xowd_css_file_tbl file_tbl, Io_url css_dir, String key) {
+		int css_id = core_tbl.Select_id_by_key(key); if (css_id == Xowd_css_core_tbl.Id_null) return false;	// unknown key; return false (not found)
 		Xowd_css_file_itm[] file_list = file_tbl.Select_by_owner(css_id);
 		// Io_mgr.I.DeleteDirDeep(css_dir); // NOTE: do not delete existing files; just overwrite;
 		int len = file_list.length;
+		if (len == 0) return false;	// no css files in db
 		for (int i = 0; i < len; ++i) {
 			Xowd_css_file_itm file = file_list[i];
 			Io_url file_url = Io_url_.new_fil_(css_dir.Gen_sub_path_for_os(file.Path()));
 			Io_mgr.I.SaveFilBry(file_url, file.Data());
 		}
+		return true;
 	}
 	public static final String Key_default = "xowa.default", Key_mobile = "xowa.mobile";
 }

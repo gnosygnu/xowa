@@ -49,16 +49,20 @@ public class Xoa_css_extractor {
 			wiki.Html__page_wtr_mgr().Init_css_urls(css_comm_fil, css_wiki_fil);
 			if (wiki.Domain_tid() == Xow_domain_type_.Tid_home || Env_.Mode_testing()) return;		// NOTE: do not download if home_wiki; also needed for TEST
 			if (Io_mgr.I.ExistsFil(css_wiki_fil)) return;											// css file exists; nothing to generate
+			if (wiki.Html__css_installing()) return;
+			wiki.Html__css_installing_(true);
 			wiki.App().Usr_dlg().Log_many("", "", "generating css for '~{0}'", wiki.Domain_str());
 			if (css_key != null) {
 				if (Install_by_db(wiki, wiki_html_dir, css_key)) return;
 			}
 			if (wiki.Type_is_edit())
 				this.Install_by_wmf((Xowe_wiki)wiki, wiki_html_dir);
+			wiki.Html__css_installing_(false);
 		}
 		catch (Exception e) {	// if error, failover; paranoia catch for outliers like bad network connectivity fail, or MediaWiki: message not existing; DATE:2013-11-21
 			wiki.App().Usr_dlg().Warn_many("", "", "failed to get css; failing over; wiki='~{0}' err=~{1}", wiki.Domain_str(), Err_.Message_gplx(e));
 			Css_common_failover();		// only failover xowa_common.css; xowa_wiki.css comes from MediaWiki:Common.css / Vector.css
+			wiki.Html__css_installing_(false);
 		}
 	}
 	private void Install_by_wmf(Xowe_wiki wiki, Io_url wiki_html_dir) {
@@ -87,8 +91,7 @@ public class Xoa_css_extractor {
 			return false;
 		}
 		Xowd_db_file core_db = core_db_mgr.Db__core();
-		gplx.xowa.html.css.Xowd_css_core_mgr.Get(core_db.Tbl__css_core(), core_db.Tbl__css_file(), wiki_html_dir, css_key);
-		return true;
+		return gplx.xowa.html.css.Xowd_css_core_mgr.Get(core_db.Tbl__css_core(), core_db.Tbl__css_file(), wiki_html_dir, css_key);
 	}
 	public void Css_common_setup() {
 		if (opt_download_css_common)

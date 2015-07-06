@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa; import gplx.*;
+package gplx.xowa.html.hrefs; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import org.junit.*;
 import gplx.xowa.net.*;
 public class Xoh_href_parser_tst {		
@@ -132,14 +132,14 @@ public class Xoh_href_parser_tst {
 			.Test_parse();
 	}
 
-	@Test   public void Parse_brief_wiki()				{fxt.Init_hover_full_n_().Test_parse("file:///wiki/A"						, "A");}
-	@Test   public void Parse_brief_http()				{fxt.Init_hover_full_n_().Test_parse("http://a.org/b"						, "http://a.org/b");}
-	@Test   public void Parse_brief_file()				{fxt.Init_hover_full_n_().Test_parse("file:///C/xowa/file/a.png"			, "file:///C/xowa/file/a.png");}
-	@Test   public void Parse_brief_anchor()			{fxt.Init_hover_full_n_().Test_parse("#a"									, "#a");}
-	@Test   public void Parse_brief_anchor_file()		{fxt.Init_hover_full_n_().Test_parse("file:///#a"							, "#a");}
-	@Test   public void Parse_brief_xwiki()				{fxt.Init_hover_full_n_().Test_parse("file:///site/en.wikt.org/wiki/Page"	, "en.wikt.org/Page");}
-	@Test   public void Parse_brief_xwiki_2()			{fxt.Init_hover_full_n_().Expd_page_("a").Test_parse("/wiki/wikt:a"			, "en.wiktionary.org/a");}
-	@Test   public void Parse_brief_error()				{fxt.Init_hover_full_n_().Test_parse("file:///wiki/{{{extlink}}}"			, "");}	// {{{extlink}}} not a valid title; return empty
+	@Test   public void Hover_string_wiki()				{fxt.Init_hover_full_n_().Test_hover_string("file:///wiki/A"						, "A");}
+	@Test   public void Hover_string_http()				{fxt.Init_hover_full_n_().Test_hover_string("http://a.org/b"						, "http://a.org/b");}
+	@Test   public void Hover_string_file()				{fxt.Init_hover_full_n_().Test_hover_string("file:///C/xowa/file/a.png"			, "file:///C/xowa/file/a.png");}
+	@Test   public void Hover_string_anchor()			{fxt.Init_hover_full_n_().Test_hover_string("#a"									, "#a");}
+	@Test   public void Hover_string_anchor_file()		{fxt.Init_hover_full_n_().Test_hover_string("file:///#a"							, "#a");}
+	@Test   public void Hover_string_xwiki()				{fxt.Init_hover_full_n_().Test_hover_string("file:///site/en.wikt.org/wiki/Page"	, "en.wikt.org/Page");}
+	@Test   public void Hover_string_xwiki_2()			{fxt.Init_hover_full_n_().Expd_page_("a").Test_hover_string("/wiki/wikt:a"			, "en.wiktionary.org/a");}
+	@Test   public void Hover_string_error()				{fxt.Init_hover_full_n_().Test_hover_string("file:///wiki/{{{extlink}}}"			, "");}	// {{{extlink}}} not a valid title; return empty
 //		@Test   public void Parse_site_qarg()				{fxt.Prep_raw_("/site/en.wikt.org/wiki/A?action=edit").Expd_tid_(Xoh_href.Tid_site).Expd_full_("en.wikt.org/wiki/A").Expd_page_("A").Expd_qarg_("action=edit").Test_parse();}
 //		@Test   public void Parse_wiki_qarg()				{fxt.Prep_raw_("/wiki/A?action=edit").Expd_tid_(Xoh_href.Tid_wiki).Expd_full_("en.wikipedia.org/wiki/A").Expd_page_("A").Expd_qarg_("action=edit").Test_parse();}
 	//@Test   public void Parse_site_anchor()				{fxt.Prep_raw_("/site/en.wikt.org/wiki/A#b_c"		).Expd_tid_(Xoh_href.Tid_site).Expd_full_("en.wikt.org/wiki/A#b_c").Expd_page_("A").Expd_anch_("b_c").Test_parse();}
@@ -213,7 +213,7 @@ class Xoh_href_parser_fxt {
 	}
 	public Xoh_href_parser_fxt Init_hover_full_y_() {return Init_hover_full_(Bool_.Y);}
 	public Xoh_href_parser_fxt Init_hover_full_n_() {return Init_hover_full_(Bool_.N);}
-	public Xoh_href_parser_fxt Init_hover_full_(boolean v)	{wiki.Gui_mgr().Cfg_browser().Link_hover_full_(v); return this;}
+	public Xoh_href_parser_fxt Init_hover_full_(boolean v)	{show_full_hover_string = v; return this;}
 	public Xoh_href_parser_fxt Prep_raw_(String v)	{this.prep_raw = v; return this;} private String prep_raw;
 	public Xoh_href_parser_fxt Expd_tid_(byte v)	{this.expd_tid = v; return this;} private byte expd_tid;
 	public Xoh_href_parser_fxt Expd_full_(String v)	{this.expd_full = v; return this;} private String expd_full;
@@ -231,9 +231,10 @@ class Xoh_href_parser_fxt {
 			Tfds.Eq(expd_full, tmp_bfr.Xto_str_and_clear());
 		}
 	}
-	public void Test_parse(String raw, String expd) {
+	private boolean show_full_hover_string = false;
+	public void Test_hover_string(String raw, String expd) {
 		href_parser.Parse(href, raw, wiki, Page_1_ttl);
-		href.Print_to_bfr(tmp_bfr, wiki.Gui_mgr().Cfg_browser().Link_hover_full());
+		href.Print_to_bfr(tmp_bfr, show_full_hover_string);
 		Tfds.Eq(expd, tmp_bfr.Xto_str_and_clear());
 	}
 	public void Test_build(String raw, String expd) {

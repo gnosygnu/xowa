@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.movePage; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
 import gplx.core.primitives.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.html.hrefs.*;
 public class Move_page implements Xows_page {
 	private Move_trg_ns_list_fmtr ns_list_fmtr = new Move_trg_ns_list_fmtr();
 	private Move_url_args args = new Move_url_args();

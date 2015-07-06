@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.core.primitives.*;
 import gplx.xowa.langs.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.net.*; import gplx.xowa.files.*;
+import gplx.xowa.html.hrefs.*;
 public class Xoa_url_parser {
 	private final Url_encoder encoder = Url_encoder.new_html_href_mw_().Itms_raw_same_many(Byte_ascii.Underline); private final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	public Gfo_url_parser Url_parser() {return url_parser;} private Gfo_url_parser url_parser = new Gfo_url_parser(); private Gfo_url gfo_url = new Gfo_url();
@@ -205,8 +206,7 @@ public class Xoa_url_parser {
 		if (page_is_main_page) {		// Main_Page requested; EX: "zh.wikipedia.org"; "zh.wikipedia.org/wiki/"; DATE:2014-02-16
 			if (from_url_bar) {
 				wiki.Init_by_wiki();	// NOTE: must call Init_assert to load Main_Page; only call if from url_bar, else all sister wikis will be loaded when parsing Sister_wikis panel
-				// page_bry = ((Xowe_wiki)wiki).Props().Main_page();
-				page_bry = wiki.Data__core_mgr().Mw_props().Main_page();
+				page_bry = wiki.Props().Main_page();
 			}
 			else
 				page_bry = Xoa_page_.Main_page_bry_empty;

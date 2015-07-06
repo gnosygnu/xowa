@@ -22,7 +22,7 @@ import gplx.fsdb.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.fsdb.meta.*;
 import gplx.xowa.langs.vnts.*; import gplx.xowa.gui.views.*; import gplx.xowa.wikis.xwikis.*;
-import gplx.xowa.html.wtrs.*; import gplx.xowa.html.hzips.*; import gplx.xowa.html.hdumps.*; import gplx.xowa.html.css.*; import gplx.xowa.html.ns_files.*;
+import gplx.xowa.html.wtrs.*; import gplx.xowa.html.hzips.*; import gplx.xowa.html.hdumps.*; import gplx.xowa.html.css.*; import gplx.xowa.html.ns_files.*; import gplx.xowa.html.xouis.tbls.*;
 import gplx.xowa.setup.maints.*; import gplx.xowa.wikis.caches.*;
 import gplx.xowa.bldrs.xmls.*; import gplx.xowa.xtns.pfuncs.*;
 import gplx.xowa.tdbs.*;
@@ -100,7 +100,10 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble {
 	public Xow_hzip_mgr				Html__hzip_mgr() {return html_mgr.Hzip_mgr();}
 	public Xohd_hdump_rdr			Html__hdump_rdr() {return html_mgr__hdump_rdr;} private final Xohd_hdump_rdr html_mgr__hdump_rdr;
 	public Xoh_page_wtr_mgr_base	Html__page_wtr_mgr() {return html_mgr.Page_wtr_mgr();}
+	public Xoui_tbl_mgr				Html__xoui_tbl_mgr() {return html__xoui_tbl_mgr;} private final Xoui_tbl_mgr html__xoui_tbl_mgr = new Xoui_tbl_mgr();
+	public boolean						Html__css_installing() {return html__css_installing;} public void Html__css_installing_(boolean v) {html__css_installing = v;} private boolean html__css_installing;
 	public Xow_xwiki_mgr			Xwiki_mgr() {return xwiki_mgr;} private final Xow_xwiki_mgr xwiki_mgr;
+	public Xow_wiki_props			Props() {return props;} private final Xow_wiki_props props = new Xow_wiki_props();
 
 	public Xohd_hdump_wtr			Html__hdump_wtr() {return html_mgr__hdump_wtr;} private final Xohd_hdump_wtr html_mgr__hdump_wtr;
 	public int						Xwiki_domain_tid() {return xwiki_domain_tid;} private int xwiki_domain_tid;
@@ -146,7 +149,6 @@ public class Xowe_wiki implements Xow_wiki, GfoInvkAble {
 	public Xotdb_fsys_mgr		Tdb_fsys_mgr() {return tdb_fsys_mgr;} private final Xotdb_fsys_mgr tdb_fsys_mgr;
 
 	public Xow_wiki_stats Stats() {return stats;} private Xow_wiki_stats stats;
-	public Xow_wiki_props Props() {return props;} private Xow_wiki_props props = new Xow_wiki_props();
 	public Xou_history_cfg Cfg_history() {return cfg_history;} private Xou_history_cfg cfg_history = new Xou_history_cfg();
 	public Xoh_cfg_gallery Cfg_gallery() {return cfg_gallery;} private Xoh_cfg_gallery cfg_gallery = new Xoh_cfg_gallery();
 	public Xoh_file_page_wtr Cfg_file_page() {return cfg_file_page;} private Xoh_file_page_wtr cfg_file_page = new Xoh_file_page_wtr();

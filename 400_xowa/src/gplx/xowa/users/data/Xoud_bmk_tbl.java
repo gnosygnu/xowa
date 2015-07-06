@@ -19,20 +19,28 @@ package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.dbs.*; import gplx.dbs.qrys.*;
 public class Xoud_bmk_tbl implements RlsAble {
 	private final String tbl_name = "bmk_core"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
-	private final String fld_id, fld_url;
+	private final String fld_id, fld_name, fld_url;
 	public Xoud_bmk_tbl(Db_conn conn) {
 		this.conn = conn;
 		fld_id						= flds.Add_int_pkey_autonum("bmk_id");
+		fld_name					= flds.Add_str("bmk_name", 255);
 		fld_url						= flds.Add_str("bmk_url", 255);
 		conn.Rls_reg(this);
 	}
 	public Db_conn Conn() {return conn;} private final Db_conn conn;
 	public String Tbl_name() {return tbl_name;}
 	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds.To_fld_ary()));}
-	public void Insert(byte[] url) {
+	public void Insert(byte[] name, byte[] url) {
 		Db_stmt stmt_insert = conn.Stmt_insert(tbl_name, flds);
-		stmt_insert.Clear().Val_bry_as_str(fld_url, url)
+		stmt_insert.Clear().Val_bry_as_str(fld_name, name).Val_bry_as_str(fld_url, url)
 			.Exec_insert();
+	}
+	public void Update(int id, byte[] name, byte[] url) {
+		Db_stmt stmt_update = conn.Stmt_update_exclude(tbl_name, flds, fld_id);
+		stmt_update.Clear()
+			.Val_bry_as_str(fld_name, name).Val_bry_as_str(fld_url, url)
+			.Crt_int(fld_id, id)
+			.Exec_update();
 	}
 	public void Delete(int id) {
 		Db_stmt stmt_delete = conn.Stmt_delete(tbl_name, fld_id);
@@ -51,6 +59,7 @@ public class Xoud_bmk_tbl implements RlsAble {
 	private Xoud_bmk_row new_row(Db_rdr rdr) {
 		return new Xoud_bmk_row
 		( rdr.Read_int(fld_id)
+		, rdr.Read_bry_by_str(fld_name)
 		, rdr.Read_bry_by_str(fld_url)
 		);
 	}

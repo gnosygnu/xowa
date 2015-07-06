@@ -158,7 +158,7 @@ public class Xoa_css_img_downloader {
 			String src = ary[i];
 			Io_url trg = css_dir.GenSubFil_nest(Op_sys.Cur().Fsys_http_frag_to_url_str(Replace_invalid_chars_str(src)));
 			if (Io_mgr.I.ExistsFil(trg)) continue;
-			download_wkr.Download(true, "http://" + src, trg, "download: " + src); // ILN
+			download_wkr.Download(true, "https://" + src, trg, "download: " + src); // ILN
 		}
 	}
 	String Replace_invalid_chars_str(String raw_str) {return String_.new_u8(Replace_invalid_chars(Bry_.new_u8(raw_str)));}

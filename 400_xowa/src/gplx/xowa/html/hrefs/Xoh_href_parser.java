@@ -15,7 +15,7 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa; import gplx.*;
+package gplx.xowa.html.hrefs; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import gplx.core.btries.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.net.*; import gplx.xowa.parsers.lnkes.*;
 import gplx.xowa.wikis.*;
 public class Xoh_href_parser {

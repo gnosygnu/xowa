@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.ctgs; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.html.*; import gplx.xowa.html.lnkis.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.html.*; import gplx.xowa.html.hrefs.*; import gplx.xowa.html.lnkis.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.users.history.*;
 public class Xoctg_pagelist_itms implements Bry_fmtr_arg {
 	public void Init_app(Xoae_app app, Bry_fmtr fmtr_itm) {

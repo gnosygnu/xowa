@@ -21,6 +21,7 @@ public class Db_conn {
 	private final List_adp rls_list = List_adp_.new_(); private final Db_engine engine;
 	public Db_conn(Db_engine engine) {this.engine = engine;}
 	public Db_conn_info		Conn_info()				{return engine.Conn_info();}
+	public boolean				Eq(Db_conn comp)		{return String_.Eq(engine.Conn_info().Xto_api(), comp.Conn_info().Xto_api());}
 	public void				Txn_bgn()				{engine.Txn_bgn("");}
 	public void				Txn_bgn(String name)	{engine.Txn_bgn(name);}
 	public void				Txn_end()				{engine.Txn_end();}

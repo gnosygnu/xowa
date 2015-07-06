@@ -22,7 +22,7 @@ import gplx.xowa.langs.*; import gplx.xowa.specials.*; import gplx.xowa.cfgs2.*;
 import gplx.xowa.bldrs.css.*;
 import gplx.xowa.files.caches.*; import gplx.xowa.files.imgs.*;
 import gplx.xowa.wikis.*; import gplx.xowa.users.*; import gplx.xowa.gui.*; import gplx.xowa.cfgs.*; import gplx.xowa.ctgs.*; import gplx.xowa.html.tocs.*; import gplx.xowa.fmtrs.*; import gplx.xowa.html.*;
-import gplx.xowa.html.wtrs.*; import gplx.xowa.html.ns_files.*;
+import gplx.xowa.html.hrefs.*; import gplx.xowa.html.wtrs.*; import gplx.xowa.html.ns_files.*; import gplx.xowa.html.js.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.tblws.*;
 import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.math.*;
 import gplx.xowa.parsers.logs.*; import gplx.xowa.servers.tcp.*; import gplx.xowa.servers.http.*;
@@ -62,6 +62,7 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 		cfg_regy = new Xocfg_regy(this);
 		html_mgr = new Xoh_html_mgr(this);
 		this.html__lnki_bldr = new Xoh_lnki_bldr(this, href_parser);
+		this.html__json_exec = new Xoh_json_exec(this);
 	}
 	public Xoa_app_type			App_type()				{return app_type;} private final Xoa_app_type app_type;
 	public Xoa_fsys_mgr			Fsys_mgr()				{return fsys_mgr;} private final Xoa_fsys_mgr fsys_mgr;
@@ -71,6 +72,7 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 	public Xoh_href_parser		Html__href_parser()		{return href_parser;} private Xoh_href_parser href_parser;
 	public Xoh_lnki_bldr		Html__lnki_bldr()		{return html__lnki_bldr;} private final Xoh_lnki_bldr html__lnki_bldr;
 	public Xoa_css_extractor	Html__css_installer()	{return html__css_installer;} private final Xoa_css_extractor html__css_installer = new Xoa_css_extractor();
+	public Xoh_json_exec		Html__json_exec()		{return html__json_exec;} private final Xoh_json_exec html__json_exec;
 	public Xowmf_mgr			Wmf_mgr()				{return wmf_mgr;} private final Xowmf_mgr wmf_mgr = new Xowmf_mgr();
 	public Bry_bfr_mkr			Utl__bfr_mkr()			{return Xoa_app_.Utl__bfr_mkr();}
 	public Url_encoder_mgr		Utl__encoder_mgr()		{return Xoa_app_.Utl__encoder_mgr();}

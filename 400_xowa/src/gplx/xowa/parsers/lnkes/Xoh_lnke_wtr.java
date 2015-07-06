@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.xowa.html.*; import gplx.xowa.net.*;
+import gplx.xowa.html.*; import gplx.xowa.html.hrefs.*;
+import gplx.xowa.net.*;
 public class Xoh_lnke_wtr {
 	private Xoae_app app;
 	public Xoh_lnke_wtr(Xowe_wiki wiki) {this.app = wiki.Appe();}

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.wtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import gplx.html.*;
+import gplx.html.*; import gplx.xowa.html.hrefs.*;
 public class Xoh_lnki_wtr_utl {
 	private final Xoa_app app; private final Xow_wiki wiki; private final Xoh_href_parser href_parser; private final Bry_bfr tmp_bfr = Bry_bfr.new_(255);
 	public Xoh_lnki_wtr_utl(Xow_wiki wiki, Xoh_href_parser href_parser) {

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.xowa.html.*;
+import gplx.xowa.html.*; import gplx.xowa.html.hrefs.*;
 public class Xop_redirect_mgr {		
 	private final Xowe_wiki wiki; private final Url_encoder url_decoder; private Hash_adp_bry redirect_hash;
 	public Xop_redirect_mgr(Xowe_wiki wiki) {this.wiki = wiki; this.url_decoder = Xoa_app_.Utl__encoder_mgr().Http_url_ttl();}	// NOTE: must be Url_ttl, not Url; PAGE:en.w:Template:Positionskarte+ -> Template:Location_map+, not Template:Location_map DATE:2014-08-21

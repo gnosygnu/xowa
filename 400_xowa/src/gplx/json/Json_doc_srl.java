@@ -50,7 +50,7 @@ public class Json_doc_srl {
 	}
 	private void Write_kv_str(boolean comma, byte[] key, String val) {
 		Write_key(comma, key);							// "key":
-		Write_str(Bry_.new_u8(val));				// "val"
+		Write_str(Bry_.new_u8(val));					// "val"
 		Write_new_line();								// \n
 	}
 	private void Write_key(boolean comma, byte[] key) {	// "key":

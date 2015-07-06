@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
-import gplx.gfui.*;
+import gplx.gfui.*; import gplx.xowa.html.hrefs.*;
 public class Xog_win_itm__prog_href_mgr {
 	private static Xoh_href		tmp_href	= new Xoh_href();
 	private static Bry_bfr	tmp_bfr		= Bry_bfr.reset_(512);
@@ -34,7 +34,7 @@ public class Xog_win_itm__prog_href_mgr {
 			return;
 		}
 		app.Href_parser().Parse(tmp_href, href, wiki, page.Ttl().Page_url());
-		tmp_href.Print_to_bfr(tmp_bfr, wiki.Gui_mgr().Cfg_browser().Link_hover_full());
+		tmp_href.Print_to_bfr(tmp_bfr, !app.Api_root().Gui().Browser().Prog().Show_short_url());
 		usr_dlg.Prog_direct(tmp_bfr.Xto_str_and_clear());
 	}
 }

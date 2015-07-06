@@ -61,5 +61,7 @@ public class Json_doc {
 	public static Json_doc new_apos_concat_nl(String... ary) {return new_apos_(String_.Concat_lines_nl(ary));}
 	public static Json_doc new_apos_(String v) {return new_(Bry_.Replace(Bry_.new_u8(v), Byte_ascii.Apos, Byte_ascii.Quote));}
 	public static Json_doc new_(String v) {return new_(Bry_.new_u8(v));}
-	public static Json_doc new_(byte[] v) {return parser.Parse(v);}	static Json_parser parser = new Json_parser();
+	public static Json_doc new_(byte[] v) {
+		synchronized (parser) {return parser.Parse(v);}
+	}	private static final Json_parser parser = new Json_parser();
 }

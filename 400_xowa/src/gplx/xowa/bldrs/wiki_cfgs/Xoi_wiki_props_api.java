@@ -20,7 +20,7 @@ import gplx.xmls.*; import gplx.ios.*;
 public class Xoi_wiki_props_api {
 	private IoEngine_xrg_downloadFil download_args = IoEngine_xrg_downloadFil.new_("", Io_url_.Empty);
 	public String Api_src(String wiki_domain) {
-		return String_.Concat("http://", wiki_domain, "/w/api.php?action=query&format=xml&meta=siteinfo&siprop=namespacealiases|namespaces");
+		return String_.Concat("https://", wiki_domain, "/w/api.php?action=query&format=xml&meta=siteinfo&siprop=namespacealiases|namespaces");
 	}
 	public byte[] Exec_api(String src) {
 		return download_args.Exec_as_bry(src);

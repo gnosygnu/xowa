@@ -40,16 +40,13 @@ public class Xou_db_mgr {
 		this.db_file = new Xou_db_file(conn); db_file.Init_assert();
 		this.cache_mgr = new Xou_cache_mgr(app.Wiki_mgri(), app.Fsys_mgr().File_dir(), db_file);
 		this.xfer_itm_finder = new Xou_file_itm_finder(cache_mgr);
+//			this.bmk_mgr.Conn_(conn, created);
+//			if (!created && !conn.Meta_tbl_exists(bmk_mgr.Tbl().Tbl_name()))
+//				bmk_mgr.Tbl().Create_tbl();
 		if (drd) {
 			cfg_mgr.Conn_(conn, created);
 			site_mgr.Conn_(conn, created);
-//				bmk_mgr.Conn_(conn, created);
 //				history_mgr.Conn_(user_conn, created);
 		}
 	}
-//		private void Init_user_db_changes(Schema_update_mgr updater) {
-//			updater.Add(Schema_update_cmd_.Make_tbl_create(Xoud_regy_tbl.Tbl_name	, Xoud_regy_tbl.Tbl_sql		, Xoud_regy_tbl.Idx_core));
-//			updater.Add(Schema_update_cmd_.Make_tbl_create(Xoud_history_tbl.Tbl_name, Xoud_history_tbl.Tbl_sql	, Xoud_history_tbl.Idx_core));
-//			updater.Add(Schema_update_cmd_.Make_tbl_create(Xoud_site_tbl.Tbl_name	, Xoud_site_tbl.Tbl_sql));
-//		}
 }

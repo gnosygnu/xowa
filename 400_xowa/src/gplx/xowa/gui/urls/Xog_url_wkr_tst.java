@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.urls; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
-import org.junit.*; import gplx.xowa.gui.views.*;
+import org.junit.*; import gplx.xowa.html.hrefs.*; import gplx.xowa.gui.views.*;
 public class Xog_url_wkr_tst {
 	@Before public void init() {fxt.Clear();} private Xog_url_wkr_fxt fxt = new Xog_url_wkr_fxt();
 	@Test  public void term() {fxt.Clear();}

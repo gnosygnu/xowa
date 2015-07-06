@@ -15,17 +15,18 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
+package gplx.xowa.html.js; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import org.junit.*; import gplx.xowa.xtns.wdatas.*;
-public class Xog_html_js_cbk_tst {
-	@Before public void init() {fxt.Clear();} private Xog_html_js_cbk_fxt fxt = new Xog_html_js_cbk_fxt();
+import gplx.xowa.gui.views.*;
+public class Xoh_js_cbk_tst {
+	@Before public void init() {fxt.Clear();} private Xoh_js_cbk_fxt fxt = new Xoh_js_cbk_fxt();
 	@Test   public void Get_title() {
 		fxt.Fxt().Init_page_create("exists");
 		fxt.Test_get_title("exists", "1" , "0" , Int_.Xto_str(Int_.MinValue), "Exists", "false", "0001-01-01 00:00:00", "0");
 		fxt.Test_get_title("absent", "0", "-1", Int_.Xto_str(Int_.MinValue), null	, "false", "0001-01-01 00:00:00", "0");
 	}
 }
-class Xog_html_js_cbk_fxt {
+class Xoh_js_cbk_fxt {
 	public void Clear() {
 		fxt = new Xop_fxt();
 		Xoa_app_fxt.Init_gui(fxt.App(), fxt.Wiki());
@@ -37,9 +38,9 @@ class Xog_html_js_cbk_fxt {
 		Xoae_page page = Xoae_page.test_(wiki, Xoa_ttl.parse_(wiki, Bry_.new_a7("mock_page")));
 		Xog_tab_itm tab = app.Gui_mgr().Browser_win().Active_tab();
 		tab.Page_(page);
-		Xog_html_js_cbk exec = tab.Html_itm().Js_cbk();
-		GfoMsg msg = GfoMsg_.new_cast_(Xog_html_js_cbk.Invk_get_titles_meta).Add("ttl", ttl);
-		String[][] actl = (String[][])GfoInvkAble_.InvkCmd_msg(exec, Xog_html_js_cbk.Invk_get_titles_meta, msg);
+		Xoh_js_cbk exec = tab.Html_itm().Js_cbk();
+		GfoMsg msg = GfoMsg_.new_cast_(Xoh_js_cbk.Invk_get_titles_meta).Add("ttl", ttl);
+		String[][] actl = (String[][])GfoInvkAble_.InvkCmd_msg(exec, Xoh_js_cbk.Invk_get_titles_meta, msg);
 		Tfds.Eq_ary_str(expd, actl[0]);
 	}
 }

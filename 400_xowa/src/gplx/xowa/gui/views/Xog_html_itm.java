@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
 import gplx.gfui.*; import gplx.xowa.gui.menus.*; import gplx.xowa.gui.menus.dom.*; import gplx.xowa.files.gui.*;
-import gplx.html.*; import gplx.xowa.html.modules.*; import gplx.xowa.pages.*;
+import gplx.html.*; import gplx.xowa.html.js.*; import gplx.xowa.html.modules.*; import gplx.xowa.pages.*;
 public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 	private Xoae_app app; private final Object thread_lock = new Object();
 	private final String_obj_ref scroll_top = String_obj_ref.null_(), node_path = String_obj_ref.null_();
@@ -26,7 +26,7 @@ public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 	public Xog_html_itm(Xog_tab_itm owner_tab) {
 		this.owner_tab = owner_tab;
 		app = owner_tab.Tab_mgr().Win().App();
-		js_cbk = new Xog_html_js_cbk(this);
+		js_cbk = new Xoh_js_cbk(this);
 		Gfui_kit kit = owner_tab.Tab_mgr().Win().Kit();
 		cmd_sync = kit.New_cmd_sync(this);	// NOTE: always use sync; async will cause some images to be "lost" in update;
 		cmd_async = kit.New_cmd_async(this);
@@ -35,7 +35,7 @@ public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 	public GfoEvMgr			EvMgr() {return ev_mgr;} private GfoEvMgr ev_mgr;
 	public Xog_tab_itm		Owner_tab() {return owner_tab;} private Xog_tab_itm owner_tab;
 	public Gfui_html		Html_box() {return html_box;} private Gfui_html html_box;
-	public Xog_html_js_cbk	Js_cbk() {return js_cbk;} private Xog_html_js_cbk js_cbk;
+	public Xoh_js_cbk		Js_cbk() {return js_cbk;} private Xoh_js_cbk js_cbk;
 	public GfoInvkAble		Cmd_sync() {return cmd_sync;} private GfoInvkAble cmd_sync;
 	public GfoInvkAble		Cmd_async() {return cmd_async;} private GfoInvkAble cmd_async; 
 	public void Switch_mem(Xog_html_itm comp) {
@@ -83,8 +83,8 @@ public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 		Xog_html_itm src_itm = this;
 		Gfui_html src_html = html_box;
 		Gfui_html trg_html = trg_itm.html_box;
-		Xog_html_js_cbk src_js_cbk = js_cbk;
-		Xog_html_js_cbk trg_js_cbk = trg_itm.js_cbk;
+		Xoh_js_cbk src_js_cbk = js_cbk;
+		Xoh_js_cbk trg_js_cbk = trg_itm.js_cbk;
 		src_itm.html_box = trg_html;
 		trg_itm.html_box = src_html;
 		src_itm.js_cbk = trg_js_cbk;

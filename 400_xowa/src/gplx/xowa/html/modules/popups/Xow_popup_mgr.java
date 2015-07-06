@@ -19,6 +19,7 @@ package gplx.xowa.html.modules.popups; import gplx.*; import gplx.xowa.*; import
 import gplx.core.primitives.*; import gplx.core.threads.*;
 import gplx.core.js.*;
 import gplx.xowa.gui.views.*;
+import gplx.xowa.html.hrefs.*;
 import gplx.xowa.specials.*; import gplx.xowa.specials.search.*;
 import gplx.xowa.apis.xowa.html.modules.*;
 public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.ctgs; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.html.*; import gplx.xowa.html.lnkis.*;
+import gplx.xowa.html.*; import gplx.xowa.html.hrefs.*; import gplx.xowa.html.lnkis.*;
 import gplx.xowa.users.history.*;
 abstract class Xoctg_fmtr_itm_base implements Xoctg_fmtr_itm {
 	public void Init_from_all(Xowe_wiki wiki, Xol_lang lang, Xoctg_view_ctg ctg, Xoctg_fmtr_all mgr, Xoctg_view_grp itms_list, int itms_list_len) {

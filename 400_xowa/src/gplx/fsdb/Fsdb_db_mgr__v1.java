@@ -46,7 +46,13 @@ public class Fsdb_db_mgr__v1 implements Fsdb_db_mgr {
 		String bin_name = (mnt_is_main ? bin_prefix__main : bin_prefix__user) + Int_.Xto_str_pad_bgn_zero(bin_id, 4) + ".sqlite3";
 		String mnt_name = mnt_is_main ? Fsm_mnt_tbl.Mnt_name_main : Fsm_mnt_tbl.Mnt_name_user;
 		Io_url url = file_dir.GenSubFil_nest(mnt_name, bin_name);	// EX: /xowa/enwiki/fsdb.main/fsdb.bin.0000.sqlite3
-		return new Fsdb_db_file(url, Db_conn_bldr.I.Get(url));
+		Db_conn conn = Db_conn_bldr.I.Get(url);
+		if (conn == null) {	// NOTE: handle wikis with missing bin files; EX:sv.w missing bin.0010; DATE:2015-07-04
+			gplx.xowa.Xoa_app_.Usr_dlg().Warn_many("", "", "fsdb.v1: missing db; db=~{0}", url.Raw());
+			return Fsdb_db_mgr__v1_bldr.I.new_db__bin(url);
+		}
+		else
+			return new Fsdb_db_file(url, conn);
 	}
 	public Fsdb_db_file		File__bin_file__new(int mnt_id, String file_name) {
 		String mnt_name = mnt_id == Fsm_mnt_mgr.Mnt_idx_main ? Fsm_mnt_tbl.Mnt_name_main : Fsm_mnt_tbl.Mnt_name_user;
@@ -94,9 +100,14 @@ class Fsdb_db_mgr__v1_bldr {
 		Fsd_fil_tbl fil_tbl = new Fsd_fil_tbl(db_atr.Conn(), schema_is_1, mnt_id); fil_tbl.Create_tbl();
 		Fsd_thm_tbl thm_tbl = new Fsd_thm_tbl(db_atr.Conn(), schema_is_1, mnt_id, Bool_.Y); thm_tbl.Create_tbl();
 		// make bin_fil
-		Fsdb_db_file db_bin = new_db(mnt_dir.GenSubFil("fsdb.bin.0000.sqlite3"));
-		Fsd_bin_tbl bin_tbl = new Fsd_bin_tbl(db_bin.Conn(), schema_is_1); bin_tbl.Create_tbl();
+		new_db__bin(mnt_dir.GenSubFil("fsdb.bin.0000.sqlite3"));
 	}
 	private Fsdb_db_file new_db(Io_url url) {return new Fsdb_db_file(url, Db_conn_bldr.I.New(url));}
+	public Fsdb_db_file new_db__bin(Io_url url) {
+		Fsdb_db_file rv = new_db(url);
+		Fsd_bin_tbl bin_tbl = new Fsd_bin_tbl(rv.Conn(), true);	// NOTE: schema_is_1 is always true b/c it is in Fsdb_db_mgr__v1_bldr
+		bin_tbl.Create_tbl();
+		return rv;
+	}
         public static final Fsdb_db_mgr__v1_bldr I = new Fsdb_db_mgr__v1_bldr(); Fsdb_db_mgr__v1_bldr() {}
 }

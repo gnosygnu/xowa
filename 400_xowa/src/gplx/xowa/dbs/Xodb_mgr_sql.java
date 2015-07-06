@@ -22,7 +22,7 @@ import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 public class Xodb_mgr_sql implements Xodb_mgr, GfoInvkAble {
 	public Xodb_mgr_sql(Xowe_wiki wiki) {
 		this.wiki = wiki;
-		this.core_data_mgr = new Xowd_db_mgr(wiki.Fsys_mgr().Root_dir(), wiki.Domain_itm());
+		this.core_data_mgr = new Xowd_db_mgr(wiki, wiki.Fsys_mgr().Root_dir(), wiki.Domain_itm());
 		this.load_mgr = new Xodb_load_mgr_sql(this, core_data_mgr);
 		this.save_mgr = new Xodb_save_mgr_sql(this, wiki.Page_mgr());
 	}

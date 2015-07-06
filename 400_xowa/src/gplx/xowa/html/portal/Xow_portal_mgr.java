@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.portal; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import gplx.xowa.wikis.*; import gplx.xowa.gui.*; import gplx.xowa.html.sidebar.*; import gplx.xowa.pages.*; import gplx.xowa.langs.vnts.*;
+import gplx.xowa.html.hrefs.*;
 import gplx.xowa.apis.xowa.html.*; import gplx.xowa.apis.xowa.html.skins.*;
 public class Xow_portal_mgr implements GfoInvkAble {
 	private Xowe_wiki wiki; private boolean lang_is_rtl; private Xoapi_toggle_itm toggle_itm;
@@ -107,11 +108,11 @@ public class Xow_portal_mgr implements GfoInvkAble {
 		return tmp_bfr.To_bry_and_rls();
 	}
 	public byte[] Missing_ns_cls() {return missing_ns_cls;} public Xow_portal_mgr Missing_ns_cls_(byte[] v) {missing_ns_cls = v; return this;} private byte[] missing_ns_cls;	// NOTE: must be null due to Init check above
-	private Bry_fmtr div_personal_fmtr = Bry_fmtr.new_("~{portal_personal_subj_href};~{portal_personal_subj_text};~{portal_personal_talk_cls};~{portal_personal_talk_href};~{portal_personal_talk_cls};", "portal_personal_subj_href", "portal_personal_subj_text", "portal_personal_subj_cls", "portal_personal_talk_href", "portal_personal_talk_cls");
-	private Bry_fmtr div_ns_fmtr = Bry_fmtr.new_("~{portal_ns_subj_href};~{portal_ns_subj_cls};~{portal_ns_talk_href};~{portal_ns_talk_cls};~{portal_div_vnts}", "portal_ns_subj_href", "portal_ns_subj_cls", "portal_ns_talk_href", "portal_ns_talk_cls", "portal_div_vnts");
-	private Bry_fmtr div_view_fmtr = Bry_fmtr.new_("", "portal_view_read_cls", "portal_view_edit_cls", "portal_view_html_cls", "search_text");
-	private Bry_fmtr div_logo_fmtr = Bry_fmtr.new_("", "portal_nav_main_href", "portal_logo_url");
-	private Bry_fmtr div_wikis_fmtr = Bry_fmtr.new_("", "toggle_btn", "toggle_hdr");
+	private final Bry_fmtr div_personal_fmtr = Bry_fmtr.new_("~{portal_personal_subj_href};~{portal_personal_subj_text};~{portal_personal_talk_cls};~{portal_personal_talk_href};~{portal_personal_talk_cls};", "portal_personal_subj_href", "portal_personal_subj_text", "portal_personal_subj_cls", "portal_personal_talk_href", "portal_personal_talk_cls");
+	private final Bry_fmtr div_ns_fmtr = Bry_fmtr.new_("~{portal_ns_subj_href};~{portal_ns_subj_cls};~{portal_ns_talk_href};~{portal_ns_talk_cls};~{portal_div_vnts}", "portal_ns_subj_href", "portal_ns_subj_cls", "portal_ns_talk_href", "portal_ns_talk_cls", "portal_div_vnts");
+	private final Bry_fmtr div_view_fmtr = Bry_fmtr.new_("", "portal_view_read_cls", "portal_view_edit_cls", "portal_view_html_cls", "search_text");
+	private final Bry_fmtr div_logo_fmtr = Bry_fmtr.new_("", "portal_nav_main_href", "portal_logo_url");
+	private final Bry_fmtr div_wikis_fmtr = Bry_fmtr.new_("", "toggle_btn", "toggle_hdr");
 	private byte[] Reverse_li(byte[] bry) {
 		return lang_is_rtl ? Xoh_rtl_utl.Reverse_li(bry) : bry;
 	}

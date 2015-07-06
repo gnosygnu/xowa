@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apis.xowa.navs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apis.*; import gplx.xowa.apis.xowa.*;
 import gplx.xowa.gui.views.*;
+import gplx.xowa.html.hrefs.*;
 public class Xoapi_wiki implements GfoInvkAble {
 	private Xog_win_itm win;
 	public void Init_by_kit(Xoae_app app) {

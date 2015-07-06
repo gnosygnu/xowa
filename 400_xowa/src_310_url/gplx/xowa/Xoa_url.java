@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.xowa.html.hrefs.*;
 public class Xoa_url {
 	public byte[]			Raw() {return raw;} public Xoa_url Raw_(byte[] v) {raw = v; return this;} private byte[] raw = Bry_.Empty;
 	public byte[]			Wiki_bry() {return wiki_bry;} public Xoa_url Wiki_bry_(byte[] v) {wiki_bry = v; return this;} private byte[] wiki_bry;

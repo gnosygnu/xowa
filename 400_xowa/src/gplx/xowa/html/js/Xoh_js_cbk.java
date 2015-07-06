@@ -15,14 +15,17 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
+package gplx.xowa.html.js; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import gplx.core.threads.*; import gplx.xowa.xtns.pfuncs.ifs.*; import gplx.xowa.wikis.data.tbls.*;
-public class Xog_html_js_cbk implements GfoInvkAble {
+import gplx.json.*;
+import gplx.xowa.html.js.*;
+import gplx.xowa.gui.views.*;
+public class Xoh_js_cbk implements GfoInvkAble {
 	private Xoae_app app;
 	private Xog_html_itm html_itm;
 	private Xop_root_tkn root = new Xop_root_tkn();
-	private Bry_bfr bfr = Bry_bfr.reset_(255);
-	public Xog_html_js_cbk(Xog_html_itm html_itm) {this.html_itm = html_itm; this.app = html_itm.Owner_tab().Tab_mgr().Win().App();}
+	private final Bry_bfr bfr = Bry_bfr.reset_(255);
+	public Xoh_js_cbk(Xog_html_itm html_itm) {this.html_itm = html_itm; this.app = html_itm.Owner_tab().Tab_mgr().Win().App();}
 	private String Xowa_exec_test(GfoMsg m) {	// concat args with pipe; EX: xowa_exec('proc', 'arg0', 'arg1'); -> proc|arg0|arg1
 		bfr.Clear();
 		bfr.Add_str(m.Key());
@@ -181,12 +184,14 @@ public class Xog_html_js_cbk implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_get_current_url))					return String_.new_u8(html_itm.Owner_tab().Page().Url().Raw());
 		else if	(ctx.Match(k, Invk_xowa_exec_test))						return Xowa_exec_test(m);
 		else if	(ctx.Match(k, Invk_xowa_exec_test_as_array))			return Xowa_exec_test_as_array(m);
+		else if	(ctx.Match(k, Invk_exec_json))							return app.Html__json_exec().Exec_json(m);
 		else	return GfoInvkAble_.Rv_unhandled;
 	}
 	public static final String Invk_parse_to_html = "parse_to_html", Invk_wikidata_get_label = "wikidata_get_label", Invk_get_page = "get_page", Invk_cmd = "cmd", Invk_scripts_exec = "scripts_exec"
 	, Invk_get_search_suggestions = "get_search_suggestions", Invk_get_titles_meta = "get_titles_meta", Invk_get_titles_exists = "get_titles_exists", Invk_get_current_url = "get_current_url"
 	, Invk_xowa_exec_test = "xowa_exec_test", Invk_xowa_exec_test_as_array = "xowa_exec_test_as_array"
 	, Invk_popups_get_async_bgn = "popups_get_async_bgn"
-	, Invk_popups_get_html = "popups_get_html"		
+	, Invk_popups_get_html = "popups_get_html"
+	, Invk_exec_json = "exec_json"
 	;
 }

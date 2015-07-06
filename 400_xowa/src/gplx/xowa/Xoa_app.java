@@ -23,7 +23,7 @@ import gplx.xowa.files.caches.*; import gplx.xowa.files.imgs.*;
 import gplx.xowa.urls.encoders.*;
 import gplx.xowa.wikis.*;
 import gplx.xowa.wmfs.*;
-import gplx.xowa.html.wtrs.*;
+import gplx.xowa.html.hrefs.*; import gplx.xowa.html.wtrs.*; import gplx.xowa.html.js.*;
 import gplx.xowa.users.*;
 public interface Xoa_app {
 	Xoa_app_type			App_type();
@@ -35,6 +35,7 @@ public interface Xoa_app {
 	Xoh_href_parser			Html__href_parser();
 	Xoh_lnki_bldr			Html__lnki_bldr();
 	Xoa_css_extractor		Html__css_installer();
+	Xoh_json_exec			Html__json_exec();
 	Xou_user				User();
 	Xowmf_mgr				Wmf_mgr();
 	boolean					Xwiki_mgr__missing(byte[] domain);

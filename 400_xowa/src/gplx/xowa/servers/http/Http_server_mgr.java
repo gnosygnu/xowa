@@ -34,6 +34,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.servers.http; import gplx.*; import gplx.xowa.*; import gplx.xowa.servers.*;
 import gplx.ios.*; import gplx.json.*; import gplx.xowa.gui.*; import gplx.xowa.pages.*;
+import gplx.core.net.*; import gplx.core.threads.*;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.Console;
@@ -195,6 +196,31 @@ class Http_server_wkr implements Runnable {
 			}  
 	    }
 	}
+//	public void run() {		
+//		try {
+//			if (server_socket == null)
+//				server_socket = new ServerSocket(port);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		while (true) {// Listen for a TCP connection request.
+//			try {
+//				if (canceled) {
+//					if (server_socket != null)
+//						server_socket.close();
+//					server_socket = null;
+//					canceled = false;
+//					break;
+//				}
+//				Socket connectionSocket = server_socket.accept(); //Construct object to process HTTP request message
+//				Socket_adp client_socket = new Socket_adp__base(connectionSocket);
+//				Xosrv_http_wkr wkr = new Xosrv_http_wkr(client_socket, webserver.App());
+//				Thread_adp_.invk_(wkr, Xosrv_http_wkr.Invk_run).Start();
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}  
+//	    }
+//	}
 }
 class HttpRequest implements Runnable{
 	private static final String CRLF = "\r\n";
@@ -314,7 +340,7 @@ class HttpRequest implements Runnable{
 		try{
 			strm.writeBytes("HTTP/1.1 200 OK: ");
 			strm.writeBytes("Content-Type: text/html; charset=utf-8" + CRLF);
-			strm.writeBytes("Access-Control-Allow-Origin: *" + CRLF);	// No 'Access-Control-Allow-Origin' header is present on the requested resource.
+//			strm.writeBytes("Access-Control-Allow-Origin: *" + CRLF);	// No 'Access-Control-Allow-Origin' header is present on the requested resource.
 			strm.writeBytes(CRLF);				
 			strm.write(page_html.getBytes(Charset.forName("UTF-8")));
 			strm.close();

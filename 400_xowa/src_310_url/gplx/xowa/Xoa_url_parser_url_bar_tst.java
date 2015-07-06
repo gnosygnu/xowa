@@ -47,7 +47,7 @@ public class Xoa_url_parser_url_bar_tst {
 		Xowe_wiki zh_wiki = fxt.App().Wiki_mgr().Get_by_key_or_make(Bry_.new_a7("zh.wikipedia.org"));
 		Init_db(zh_wiki);
 		gplx.xowa.wikis.Xoa_wiki_regy.Make_wiki_dir(fxt.App(), "zh.wikipedia.org");
-		zh_wiki.Data__core_mgr().Mw_props().Main_page_(Bry_.new_a7("Zh_Main_Page"));
+		zh_wiki.Props().Main_page_(Bry_.new_a7("Zh_Main_Page"));
 		fxt.Test_parse_from_url_bar("zh.w:"						, "zh.wikipedia.org/wiki/Zh_Main_Page");
 		fxt.Test_parse_from_url_bar("zh.w:Main_Page"			, "zh.wikipedia.org/wiki/Main_Page");
 	}

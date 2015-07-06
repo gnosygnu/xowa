@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.portal; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
+import gplx.xowa.html.hrefs.*;
 public class Xoh_subpages_bldr implements Bry_fmtr_arg {
 	private Xoae_app app;
 	private Bry_bfr tmp_bfr = Bry_bfr.reset_(255), ttl_bfr = Bry_bfr.reset_(255);

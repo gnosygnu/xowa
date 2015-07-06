@@ -35,6 +35,15 @@ public class Json_itm_nde extends Json_itm_base implements Json_grp {
 		}
 		return null;
 	}
+	public byte[] Subs_get_val_by_key_as_bry(byte[] key, byte[] or) {
+		Json_itm kv_obj = Subs_get_by_key(key);
+		if (kv_obj == null) return or;	// key not found;
+		if (kv_obj.Tid() != Json_itm_.Tid_kv) return or; // key is not a key_val
+		Json_itm_kv kv = (Json_itm_kv)kv_obj;
+		Json_itm val = kv.Val();
+		if (val == null) return or;
+		return val.Data_bry();
+	}
 	public Json_itm_nde Subs_add_many(Json_itm... ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; i++)

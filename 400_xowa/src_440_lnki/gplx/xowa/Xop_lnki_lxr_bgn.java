@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.core.btries.*;
-class Xop_lnki_lxr_bgn implements Xop_lxr {
+public class Xop_lnki_lxr_bgn implements Xop_lxr {
 	public byte Lxr_tid() {return Xop_lxr_.Tid_lnki_bgn;}
 	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Xop_tkn_.Lnki_bgn, this);}
 	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
@@ -36,13 +36,6 @@ class Xop_lnki_lxr_bgn implements Xop_lxr {
 		return cur_pos;
 	}
 	public static final Xop_lnki_lxr_bgn _ = new Xop_lnki_lxr_bgn();
-}
-class Xop_lnki_lxr_end implements Xop_lxr {
-	public byte Lxr_tid() {return Xop_lxr_.Tid_lnki_end;}
-	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Xop_tkn_.Lnki_end, this);}
-	public void Init_by_lang(Xol_lang lang, Btrie_fast_mgr core_trie) {}
-	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {return ctx.Lnki().Make_tkn(ctx, tkn_mkr, root, src, src_len, bgn_pos, cur_pos);}
-	public static final Xop_lnki_lxr_end _ = new Xop_lnki_lxr_end();
 }
 class Xop_lnki_size	{public static final int  None = 0, Width		= 1, Height		= 2, WidthHeight = 4, Upright	= 8;}
 /*

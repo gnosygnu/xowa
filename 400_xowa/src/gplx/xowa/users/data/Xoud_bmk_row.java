@@ -17,9 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 public class Xoud_bmk_row {
-	public Xoud_bmk_row(int id, byte[] url) {
-		this.id = id; this.url = url;
+	public Xoud_bmk_row(int id, byte[] name, byte[] url) {
+		this.id = id; this.name = name; this.url = url;
 	}
 	public int		Id() {return id;} private final int id;
+	public byte[]	Name() {return name;} private final byte[] name;
 	public byte[]	Url() {return url;} private final byte[] url;
 }

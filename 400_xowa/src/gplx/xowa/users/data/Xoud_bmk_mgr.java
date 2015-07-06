@@ -17,9 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.dbs.*;
-public class Xoud_bmk_mgr {
-	private Xoud_bmk_tbl tbl;
-	private Xoud_bmk_hwtr hwtr = new Xoud_bmk_hwtr();
+public class Xoud_bmk_mgr {		
+	private final Xoud_bmk_hwtr hwtr = new Xoud_bmk_hwtr();
+	public Xoud_bmk_tbl Tbl() {return tbl;} private Xoud_bmk_tbl tbl;
 	public void Init_by_app(Xoa_app app) {
 		hwtr.Init_by_app(app);
 	}
@@ -28,10 +28,7 @@ public class Xoud_bmk_mgr {
 		if (created) tbl.Create_tbl();
 	}
 	public void Add(Xoa_url url) {
-		tbl.Insert(url.Raw());
+		tbl.Insert(url.Page_bry(), url.Raw());
 	}
-	public void Get_all(Bry_bfr bfr) {
-		Xoud_bmk_row[] row_ary = tbl.Select_all();
-		hwtr.Write(bfr, row_ary);
-	}
+	public Xoud_bmk_row[] Get_all() {return tbl.Select_all();}
 }

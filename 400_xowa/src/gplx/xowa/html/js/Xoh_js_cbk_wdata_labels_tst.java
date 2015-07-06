@@ -15,9 +15,9 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
+package gplx.xowa.html.js; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import org.junit.*; import gplx.xowa.xtns.wdatas.*;
-public class Xog_html_js_cbk_wdata_labels_tst {
+public class Xoh_js_cbk_wdata_labels_tst {
 	@Before public void init() {fxt.Init();} Wdata_wiki_mgr_fxt fxt = new Wdata_wiki_mgr_fxt();
 	@Test   public void Basic() {
 		fxt.Init_pages_add(fxt.Wdoc_bldr("q1").Add_label("en", "en_q1").Xto_wdoc());
@@ -52,12 +52,12 @@ public class Xog_html_js_cbk_wdata_labels_tst {
 	}
 	private void Tst_wikidata_label_get(String[] args, String[] expd) {
 		Xoa_app_fxt.Init_gui(fxt.App(), fxt.Wiki());
-		Xog_html_js_cbk exec = fxt.App().Gui_mgr().Browser_win().Active_html_itm().Js_cbk();
-		GfoMsg msg = GfoMsg_.new_cast_(Xog_html_js_cbk.Invk_wikidata_get_label);
+		Xoh_js_cbk exec = fxt.App().Gui_mgr().Browser_win().Active_html_itm().Js_cbk();
+		GfoMsg msg = GfoMsg_.new_cast_(Xoh_js_cbk.Invk_wikidata_get_label);
 		int args_len = args.length;
 		for (int i = 0; i < args_len; i++)
 			msg.Add("v", args[i]);
-		String[] actl = (String[])GfoInvkAble_.InvkCmd_msg(exec, Xog_html_js_cbk.Invk_wikidata_get_label, msg);
+		String[] actl = (String[])GfoInvkAble_.InvkCmd_msg(exec, Xoh_js_cbk.Invk_wikidata_get_label, msg);
 		Tfds.Eq_ary_str(expd, actl);
 	}
 }
