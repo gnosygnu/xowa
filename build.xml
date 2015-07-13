@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_jar" name="create runnable jar for XOWA">
+    <target name="compile_core">
+        <delete dir="100_core/bin"/>
+        <mkdir dir="100_core/bin"/>
+        <javac fork="yes" includeantruntime="false" sourcepath="" srcdir="100_core" destdir="100_core/bin" classpath="lib/junit.jar:100_core/lib/commons-compress-1.5.jar">
+          <include name="**/*.java"/>
+        </javac>
+    </target>
+    <target name="compile_gfml">
+        <delete dir="110_gfml/bin"/>
+        <mkdir dir="110_gfml/bin"/>
+        <javac fork="yes" includeantruntime="false" sourcepath="" srcdir="110_gfml" destdir="110_gfml/bin" classpath="lib/junit.jar:100_core/bin">
+          <include name="**/*.java"/>
+        </javac>
+    </target>
+    <target name="compile_dbs">
+        <delete dir="140_dbs/bin"/>
+        <mkdir dir="140_dbs/bin"/>
+        <javac fork="yes" includeantruntime="false" sourcepath="" srcdir="140_dbs" destdir="140_dbs/bin" classpath="lib/junit.jar:100_core/bin:140_dbs/lib/sqlite-jdbc-3.7.15-M1.jar">
+          <include name="**/*.java"/>
+        </javac>
+    </target>
+    <target name="compile_gfui">
+        <delete dir="150_gfui/bin"/>
+        <mkdir dir="150_gfui/bin"/>
+        <javac fork="yes" includeantruntime="false" sourcepath="" srcdir="150_gfui" destdir="150_gfui/bin" classpath="lib/junit.jar:150_gfui/lib/swt.jar:100_core/bin:110_gfml/bin">
+          <include name="**/*.java"/>
+        </javac>
+    </target>
+    <target name="compile_xowa" depends="compile_core,compile_gfml,compile_dbs,compile_gfui">
+        <delete dir="400_xowa/bin"/>
+        <mkdir dir="400_xowa/bin"/>
+        <javac fork="yes" includeantruntime="false" sourcepath="" srcdir="400_xowa" destdir="400_xowa/bin" classpath="lib/junit.jar:100_core/bin:110_gfml/bin:140_dbs/bin:150_gfui/bin:400_xowa/lib/luaj_xowa.jar:400_xowa/lib/jtidy_xowa.jar">
+          <compilerarg line="-encoding utf-8"/>
+          <include name="**/*.java"/>
+        </javac>
+    </target>
+    <target name="create_jar" depends="compile_xowa">
+        <jar destfile="../xowa_${plat_name}.jar">
+            <manifest>
+                <attribute name="Main-Class" value="gplx.xowa.Xowa_main"/>
+                <attribute name="Class-Path" value=". bin/${plat_name}/swt/swt.jar bin/any/java/apache/commons-compress-1.5.jar bin/any/java/jdbc/sqlite/sqlite-jdbc-3.7.15-M1.jar bin/any/java/luaj/luaj_xowa.jar bin/any/java/jtidy/jtidy_xowa.jar"/>
+            </manifest>
+            <fileset dir="100_core/bin"/>
+            <fileset dir="110_gfml/bin"/>
+            <fileset dir="140_dbs/bin"/>
+            <fileset dir="150_gfui/bin"/>
+            <fileset dir="400_xowa/bin"/>
+        </jar>
+    </target>
+</project>

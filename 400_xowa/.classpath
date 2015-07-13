@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="src_040_io"/>
+	<classpathentry kind="src" path="src_060_utl"/>
+	<classpathentry kind="src" path="src_100_app"/>
+	<classpathentry kind="src" path="src_120_wiki"/>
+	<classpathentry kind="src" path="src_121_wiki_data"/>
+	<classpathentry kind="src" path="src_140_lang"/>
+	<classpathentry kind="src" path="src_160_file"/>
+	<classpathentry kind="src" path="src_161_meta"/>
+	<classpathentry kind="src" path="src_200_bldr"/>
+	<classpathentry kind="src" path="src_210_bldr_core"/>
+	<classpathentry kind="src" path="src_240_install"/>
+	<classpathentry kind="src" path="src_300_html"/>
+	<classpathentry kind="src" path="src_310_url"/>
+	<classpathentry kind="src" path="src_400_parser"/>
+	<classpathentry kind="src" path="src_405_tkn"/>
+	<classpathentry kind="src" path="src_409_tkn_misc"/>
+	<classpathentry kind="src" path="src_440_lnki"/>
+	<classpathentry kind="src" path="src_490_xnde"/>
+	<classpathentry kind="src" path="src_500_tmpl"/>
+	<classpathentry kind="src" path="xtn"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/100_core"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/150_gfui"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/140_dbs"/>
+	<classpathentry kind="lib" path="lib/luaj_xowa.jar"/>
+	<classpathentry kind="lib" path="lib/jtidy_xowa.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

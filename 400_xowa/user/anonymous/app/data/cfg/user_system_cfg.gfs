@@ -1,0 +1,6 @@
+app.scripts.txns.get('user.prefs.general').version_('0.9.0.0').bgn();
+app.files.download.enabled_('n');
+app.files.math.enabled_('y');
+app.files.math.renderer_('mathjax');
+app.scripts.txns.get('user.prefs.general').end();
+

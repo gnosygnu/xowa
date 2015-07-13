@@ -1,0 +1,4 @@
+app.cfgs.get('app.sys_cfg.options_version', 'app').val = '2';
+app.cfgs.get('app.files.download.enabled', 'app').val = 'n';
+app.cfgs.get('app.files.math.enabled', 'app').val = 'y';
+app.cfgs.get('app.files.math.renderer', 'app').val = 'mathjax';
