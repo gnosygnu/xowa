@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>XOWA by gnosygnu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">XOWA</h1>
+      <h2 class="project-tagline">xowa offline wiki application</h2>
+      <a href="https://github.com/gnosygnu/xowa" class="btn">View on GitHub</a>
+      <a href="https://github.com/gnosygnu/xowa/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/gnosygnu/xowa/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h2>
+<a id="overview" class="anchor" href="#overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h2>
+
+<p>XOWA is an offline Wikipedia application that lets you run Wikipedia on your computer.</p>
+
+<p><img src="http://xowa.sourceforge.net/wiki/file_screenshot_wikipedia_xowa.png" alt="XOWA showing Wikipedia's article on Wikipedia"></p>
+
+<h2>
+<a id="features" class="anchor" href="#features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features</h2>
+
+<ul>
+<li>Run a complete copy of English Wikipedia from your computer.</li>
+<li>Display 5.0+ million articles in full HTML formatting.</li>
+<li>Show images within an article. Access 4.0+ million images using the offline image databases.</li>
+<li>Set up over 800+ other wikis including: English Wiktionary, English Wikisource, English Wikiquote, English Wikivoyage, Non-English wikis (French Wiktionary, German Wikisource, Dutch Wikivoyage), Wikidata, Wikimedia Commons and many more.</li>
+<li>Update your wiki whenever you want, using Wikimedia's database backups.</li>
+<li>Navigate between offline wikis. Click on "Look up this word in Wiktionary" and instantly view the page in Wiktionary.</li>
+<li>Edit articles to remove vandalism or errors.<br>
+</li>
+<li>Install to a flash memory card for portability to other machines.</li>
+<li>Run on Windows, Linux and Mac OS X. (Android Alpha available)</li>
+<li>Run as an HTTP server to browse from Firefox, Chrome or Safari</li>
+<li>View the HTML source for any wiki page.</li>
+<li>Search for any page by title using a Wikipedia-like Search box. Search across wikis as well.</li>
+<li>Browse pages by alphabetical order using Special:AllPages.</li>
+<li>Find a word on a page.</li>
+<li>Access a history of viewed pages.</li>
+<li>Bookmark your favorite pages.</li>
+<li>Preview articles by hovering over links</li>
+<li>Customize any one of over 50 options</li>
+</ul>
+
+<h2>
+<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h2>
+
+<p>XOWA is written in Java and requires 1.7 or above.</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<ul>
+<li>Download xowa_app_your_operating_system_name.zip from <a href="https://github.com/gnosygnu/xowa/releases/">https://github.com/gnosygnu/xowa/releases/</a>
+</li>
+<li>Unzip to any folder on your hard drive (or flash memory card)</li>
+<li>Run XOWA
+
+<ul>
+<li>On '''Windows''', double-click '''C:\xowa\xowa_64.exe'''</li>
+<li>On '''Linux''', open a terminal and run <code>sh /home/your_user_name/xowa/xowa_linux_64.sh</code>
+</li>
+<li>On '''OS X''', open a terminal and run <code>sh /Users/your_user_name/xowa/xowa_macosx_64.sh</code>
+</li>
+</ul>
+</li>
+</ul>
+
+<h2>
+<a id="development-info" class="anchor" href="#development-info" aria-hidden="true"><span class="octicon octicon-link"></span></a>Development Info</h2>
+
+<h3>
+<a id="dependencies" class="anchor" href="#dependencies" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dependencies</h3>
+
+<p>XOWA has seven dependencies:</p>
+
+<ul>
+<li>JUnit 4.8.2 (default version with Eclipse)</li>
+<li><a href="http://download.eclipse.org/eclipse/downloads/drops4/R-4.5-201506032000/">SWT 4.5.1</a></li>
+<li><a href="https://github.com/gnosygnu/luaj_xowa">LuaJ</a></li>
+<li><a href="https://github.com/gnosygnu/jtidy_xowa%20jtidy_xowa.jar">JTidy</a></li>
+<li><a href="https://bitbucket.org/xerial/sqlite-jdbc/downloads">SQLite JDBC</a></li>
+<li><a href="https://dev.mysql.com/downloads/connector/j/">MySQL JDBC</a></li>
+<li><a href="https://jdbc.postgresql.org/download.html">Postgres JDBC</a></li>
+</ul>
+
+<h3>
+<a id="compilation-instructions-ant-command-line" class="anchor" href="#compilation-instructions-ant-command-line" aria-hidden="true"><span class="octicon octicon-link"></span></a>Compilation instructions (ANT command-line)</h3>
+
+<h4>
+<a id="setup-the-xowa-app" class="anchor" href="#setup-the-xowa-app" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup the XOWA app</h4>
+
+<ul>
+<li>Download the latest XOWA app package for your operating system. For example, if you're on a 64-bit Linux system, "xowa_app_linux_64_v1.9.5.1.zip".</li>
+<li>Unzip the XOWA app package to a directory. For the sake of simplicity, these instructions assume this directory is "/xowa/"</li>
+<li>Review your directories. You should have the following:
+
+<ul>
+<li>An XOWA jar: "/xowa/xowa_linux_64.jar"</li>
+<li>An XOWA "/bin/any/" directory with several jar files. For example, "/xowa/bin/any/java/apache/commons-compress-1.5.jar"</li>
+<li>An XOWA "/bin/linux_64/" directory with an SWT jar: "/xowa/bin/linux_64/swt/swt.jar"</li>
+</ul>
+</li>
+</ul>
+
+<h4>
+<a id="setup-the-xowa-source" class="anchor" href="#setup-the-xowa-source" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup the XOWA source</h4>
+
+<ul>
+<li>Download the latest XOWA source archive. For example: "xowa_source_v1.9.5.1.7z"</li>
+<li>Unzip the source to "/xowa/dev". When you're done, you'll have a file called "/xowa/dev/build.xml" as well as others
+
+<ul>
+<li>NOTE: if you're not on a Linux 64-bit system, overwrite the swt jar at "/xowa/dev/150_gfui/lib/swt.jar" with the copy from your "/bin/OS" directory. For example, if you're on a 64 bit Windows system, replace "/xowa/dev/150_gfui/lib/swt.jar" with "/bin/windows_64/swt/swt/jar"</li>
+</ul>
+</li>
+</ul>
+
+<h4>
+<a id="run-the-ant-file" class="anchor" href="#run-the-ant-file" aria-hidden="true"><span class="octicon octicon-link"></span></a>Run the ant file</h4>
+
+<ul>
+<li>Open up a console, and run "ant -buildfile build.xml -Dplat_name=linux_64"</li>
+</ul>
+
+<h3>
+<a id="ide-instructions-eclipse" class="anchor" href="#ide-instructions-eclipse" aria-hidden="true"><span class="octicon octicon-link"></span></a>IDE instructions (Eclipse)</h3>
+
+<h4>
+<a id="environment" class="anchor" href="#environment" aria-hidden="true"><span class="octicon octicon-link"></span></a>Environment</h4>
+
+<p>The '''xowa_source.7z''' was built with Eclipse Indigo. There are no OS dependencies, nor are there dependencies on Eclipse.</p>
+
+<h4>
+<a id="setup" class="anchor" href="#setup" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup</h4>
+
+<ul>
+<li>Follow the steps in these two sections from above:
+
+<ul>
+<li>Setup the XOWA app</li>
+<li>Setup the XOWA source</li>
+</ul>
+</li>
+<li>Launch Eclipse. Choose a workbench folder of "/xowa/dev"</li>
+<li>If the projects don't load, do File -&gt; Import -&gt; Existing Projects Into Workspace</li>
+<li>Select all projects. Do File -&gt; Refresh.</li>
+<li>Right-click on 400_xowa in the Package Explorer. Select Debug As -&gt; Java Application. Select Xowa_main. XOWA should launch.</li>
+<li>Right-click on 400_xowa in the Package Explorer. Select Debug As -&gt; JUnit Test. All tests should pass.</li>
+</ul>
+
+<h4>
+<a id="eclipse-specific-settings" class="anchor" href="#eclipse-specific-settings" aria-hidden="true"><span class="octicon octicon-link"></span></a>Eclipse-specific settings</h4>
+
+<p>This section documents specific project customizations that differ from the standard Eclipse defaults.</p>
+
+<h5>
+<a id="project-properties" class="anchor" href="#project-properties" aria-hidden="true"><span class="octicon octicon-link"></span></a>Project properties</h5>
+
+<p>Resource -&gt; Text file encoding -&gt; Other -&gt; UTF-8</p>
+
+<h5>
+<a id="preferences" class="anchor" href="#preferences" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preferences</h5>
+
+<p>These settings are available under Window -&gt; Preferences</p>
+
+<ul>
+<li>Disable Spelling
+
+<ul>
+<li>General -&gt; Editors -&gt; Text Editors -&gt; Spelling
+*Ignore Warnings</li>
+<li>Java -&gt; Compiler -&gt; Errors/Warnings
+
+<ul>
+<li>Annotations -&gt; Unhandled token in '<a href="https://github.com/SuppressWarnings" class="user-mention">@SuppressWarnings</a>'</li>
+<li>Potential programming problems -&gt; Serializable class without serialVersionUID</li>
+<li>Generic Types -&gt; Unnecessary generic type operation (In Eclipse Luna: "Unchecked generic type operation")</li>
+<li>Generic Types -&gt; Usage of a raw type</li>
+<li>Unnecessary Code -&gt; Unused import</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<h5>
+<a id="configuration-arguments" class="anchor" href="#configuration-arguments" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuration arguments</h5>
+
+<ul>
+<li>Configuration arguments
+
+<ul>
+<li>Run -&gt; Debug Configurations -&gt; Arguments
+
+<ul>
+<li><code>--root_dir /xowa/ --show_license n --show_args n</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>XOWA is released under the AGPLv3 license. See LICENSE.txt for more information.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/gnosygnu/xowa">XOWA</a> is maintained by <a href="https://github.com/gnosygnu">gnosygnu</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
+
