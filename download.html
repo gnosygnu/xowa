@@ -17,7 +17,116 @@
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
 
 <!-- page_bgn -->
-XOWA has moved. Please go to <a href='https://github.com/gnosygnu/xowa/releases'>https://github.com/gnosygnu/xowa/releases</a>
+<p>All files are available at <a href="https://github.com/gnosygnu/xowa/releases/" class="external text" rel="nofollow">https://github.com/gnosygnu/xowa/releases/</a>
+
+<h2><span class='mw-headline' id='Windows'> Windows </span></h2>
+<ul>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.7.3.1/xowa_app_windows_64_v2.7.3.1.zip" class="external text" rel="nofollow">Windows (64-bit)</a>
+  </li>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.7.3.1/xowa_app_windows_v2.7.3.1.zip" class="external text" rel="nofollow">Windows (32-bit)</a>
+  </li>
+</ul>
+
+<h2><span class='mw-headline' id='Linux'> Linux </span></h2>
+<ul>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.7.3.1/xowa_app_linux_64_v2.7.3.1.zip" class="external text" rel="nofollow">Linux (64-bit)</a>
+  </li>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.7.3.1/xowa_app_linux_v2.7.3.1.zip" class="external text" rel="nofollow">Linux (32-bit)</a>
+  </li>
+</ul>
+
+<h2><span class='mw-headline' id='Mac_OS_X'> Mac OS X </span></h2>
+<ul>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.7.3.1/xowa_app_macosx_64_v2.7.3.1.zip" class="external text" rel="nofollow">Mac OS X (64-bit)</a>
+  </li>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.7.3.1/xowa_app_macosx_v2.7.3.1.zip" class="external text" rel="nofollow">Mac OS X (32-bit)</a>
+  </li>
+</ul>
+
+<h2><span class='mw-headline' id='Source'> Source code </span></h2>
+<ul>
+  <li> <a href="https://github.com/gnosygnu/xowa/archive/v2.7.3.1.zip" class="external text" rel="nofollow">Source code</a>
+  </li>
+</ul>
+
+<br/>
+    <h2>
+      <span class='mw-headline'>Change log</span>
+    </h2>
+
+    <h2>
+      <span class='mw-headline' id='v2.7.3.1_.282015-07-19.29'>v2.7.3.1 (2015-07-19)</span>
+    </h2>
+    <p>
+      <b>major</b>
+    </p>
+    <ul>
+      <li>
+        Special: Add new bookmarks page {assisted by anonymous4}. See: [[Special:XowaBookmarks]]
+      </li>
+    </ul>
+    <p>
+      <b>fix</b>
+    </p>
+    <ul>
+      <li>
+        Make.Images: Do not delete entire css directory when building databases {detected by gnosygnu.gui}. [broken since:v2.7.2]
+      </li>
+      <li>
+        Edit: Fix missing edit-toolbar.js b/c of broken path {detected by gnosygnu.gui}. [broken since:v1.10.2]
+      </li>
+      <li>
+        Options: Fix "Page storage format" not working {detected by gnosygnu.gui}. See: [[Help:Options/Import]] [broken since:v2.4.1]
+      </li>
+      <li>
+        HttpServer: Fix wrong Main Page when clicking on wiki in sidebar; EX:click on zh.w in sidebar -&gt; Wikipedia:首页 x&gt; Main_Page {detected by anonymous4}. [broken since:v2.7.2]
+      </li>
+    </ul>
+    <p>
+      <b>change</b>
+    </p>
+    <ul>
+      <li>
+        Parser.Lnki: Handle non-english numbers for pixel sizes (affects missing images in Persian wikis); EX:[[پرونده:Shahbazi 3.jpg|۲۰۰px]] {detected by gnosygnu.build.process}. See: <a href="https://fa.wikipedia.org/wiki/فهرست_آثار_علیرضا_شاپور_شهبازی">https://fa.wikipedia.org/wiki/فهرست_آثار_علیرضا_شاپور_شهبازی</a>
+      </li>
+    </ul>
+    <p>
+      <b>trivial</b>
+    </p>
+    <ul>
+      <li>
+        Make.Images: Ignore main_page not found warning while building {detected by gnosygnu.build.warning}.
+      </li>
+      <li>
+        Import.Online: Handle missing latest links at dumps.wikimedia.org: add logging; go back more than one month if necessary {detected by Anselm}.
+      </li>
+      <li>
+        Wikidata: Add "gomwiki", "lrcwiki" to list of known wikis {detected by gnosygnu.build.warning}.
+      </li>
+    </ul>
+    <p>
+      <b>dev</b>
+    </p>
+    <ul>
+      <li>
+        Javascript: Upgrade jquery from 1.83 to 1.11.3 (affects nothing known); EX:/xowa/bin/any/xowa/html/res/lib/jquery/jquery-ui-1.11.3.js.
+      </li>
+      <li>
+        Javascript: Add jquery-ui-1.11.4.js (affects drag-and-drop to reorder bookmarks); EX:/xowa/bin/any/xowa/html/res/lib/jquery-ui/jquery-ui-1.11.4.js. See: [[Special:XowaBookmarks]]
+      </li>
+      <li>
+        Javascript: Add notifyjs-0.3.1.js (affects notification messages when adding bookmarks); EX:/xowa/bin/any/xowa/html/res/lib/notifyjs/notifyjs-0.3.1.js. See: [[Special:XowaBookmarks]]
+      </li>
+      <li>
+        Javascript: Add dbui-0.1.1.js (affects database changes for bookmarks); EX:/xowa/bin/any/xowa/html/res/src/xowa/dbui/dbui-0.1.1.js. See: [[Special:XowaBookmarks]]
+      </li>
+      <li>
+        Source: Refactor Console_adp classes.
+      </li>
+      <li>
+        Source: Clean up Err object.
+      </li>
+    </ul>
 <!-- page_end -->
 
       <div class="visualClear">
