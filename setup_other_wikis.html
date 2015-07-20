@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+  <title>XOWA: Set up Other Wikipedias</title>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <link rel="shortcut icon" href="xowa-logo.png" />
+  <link rel="stylesheet" href="xowa.css" type="text/css">
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject skin-vector action-submit vector-animateLayout" spellcheck="false">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body">
+  <h1 id="firstHeading" class="firstHeading"><span>Set up Other Wikipedias</span></h1>
+  <div id="bodyContent">
+    <div id="siteSub">From XOWA: a free, open-source, offline wiki application</div>
+    <div id="contentSub"></div>
+    <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
+
+<!-- page_bgn -->
+    <h2>
+      <span class='mw-headline' id='Overview'>Overview</span>
+    </h2>
+    <p>
+      Other Wikipedias will follow the same process as setting up Simple Wikipedia or English Wikipedia. The steps are summarized below, but you should read both <a href="http://xowa.sourceforge.net/setup_simpewiki.html" class="external text" rel="nofollow">Help:Set up Simple Wikipedia</a> and <a href="http://xowa.sourceforge.net/setup_enwiki.html" class="external text" rel="nofollow">Help:Set up English Wikipedia</a>
+    </p>
+    <p>
+      Note that some Wikipedias will require a lot of disk space. For example, German Wikipeda requires at least 40 GB. Depending on your location it may take several hours to download that much data. Please prepare accordingly.
+    </p>
+    <h2>
+      <span class='mw-headline' id='Part_1:_Set_up_the_wiki'>Part 1: Set up the wiki</span>
+    </h2>
+    <p>
+      The first part is to set up the wiki. The set-up process involves the following steps:
+    </p>
+    <ul>
+      <li>XOWA will download the database dump from the Wikimedia backup servers
+      </li>
+      <li>The database dump will be multiple GBs and take several hours to download
+      </li>
+      <li>XOWA will take about an hour to build the wiki and produce a wiki 2 times the dump size. For example, German Wikipedia's dump is currently about 3 GB, so XOWA will generate a 6 GB wiki
+      </li>
+    </ul>
+    <p>
+      To begin the process, do the following
+    </p>
+    <ul>
+      <li>Launch XOWA
+      </li>
+      <li>Use the menu bar and select Tools -&gt; Import From List. Alternatively, you can enter <code>home/wiki/Help:Import/List</code> into the address bar
+      </li>
+      <li>Find your wiki's name in the list.
+      </li>
+      <li>Click on the "latest" link to the left.
+      </li>
+    </ul>
+    <p>
+      The import process will start. When it's done, it will automatically load the Main Page.
+    </p>
+    <h2>
+      <span class='mw-headline' id='Part_2:_Download_the_images'>Part 2: Download the images</span>
+    </h2>
+    <p>
+      This part usually takes much longer to complete. It will require many GB of disk space and many hours of download time. For example, German Wikipedia takes up 32 GB and may take 16 hours to download.
+    </p>
+    <p>
+      When you're ready to start, do the following:
+    </p>
+    <ul>
+      <li>Go to <a href="http://xowa.sourceforge.net/image_dbs.html" class="external text" rel="nofollow">the download page</a>
+      </li>
+      <li>Find your wiki in the list and click on the link
+      </li>
+      <li>Download the files from archive.org.
+      </li>
+      <li>Unzip the files in your xowa root directory. When you are done, you will have a file called /xowa/file/your_wiki.org/fsdb.main/fsdb.abc.sqlite3 as well as many others.
+      </li>
+      <li>Launch XOWA
+      </li>
+      <li>Enter "home/wiki/Help:Options/Files" into the address bar.
+      </li>
+      <li>Make sure "Retrieval enabled" is checked.
+      </li>
+      <li>Visit any page. All the images for this page will load.
+      </li>
+    </ul>
+    <h2>
+      <span class='mw-headline' id='Updating_the_wiki'>Updating the wiki</span>
+    </h2>
+    <p>
+      If you want to update your wiki, you won't have to repeat the whole process.
+    </p>
+    <ul>
+      <li>If you update your wiki, you do not have to update the images. The two are independent of each other. Note that a later wiki dump may cite images not in the current XOWA image dump. These images won't show until you download the latest monthly update.
+      </li>
+      <li>XOWA will update images every few months. If you would like an update earlier, please post at <a href="https://sourceforge.net/p/xowa/discussion/general/thread/67c4cdb5/" class="external text" rel="nofollow">https://sourceforge.net/p/xowa/discussion/general/thread/67c4cdb5/</a>
+      </li>
+    </ul>
+
+<!-- page_end -->    
+
+      <div class="visualClear">
+        <div style='float:right'>
+          <a href="http://sourceforge.net/">Hosted by <img src="http://sflogo.sourceforge.net/sflogo.php?group_id=188445" alt="SourceForge.net" /></a>
+        </div>
+<br/><br/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="mw-head" class="noprint">
+  <div id="left-navigation">
+    <div id="p-namespaces" class="vectorTabs">
+      <h3>Namespaces</h3>
+      <ul>
+        <li  id="ca-nstab-main" class="selected"><span><a id="ca-nstab-main-href" href="index.html">Page</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id='mw-panel' class='noprint'>
+  <div id='p-logo'>
+    <a style="background-image: url(xowa-logo.png);" href="http://xowa.sourceforge.net" title="Visit the main page"></a>
+  </div>
+  <div class="portal" id='xowa-portal-home'>
+    <h3>XOWA</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://xowa.sourceforge.net" title='Visit the main page'>Main page</a></li>
+        <li><a href="blog.html" title='Follow XOWA''s development process'>Blog</a></li>
+        <li><a href="screenshots.html" title='See screenshots of XOWA'>Screenshots</a></li>
+        <li><a href="download.html" title='Download the XOWA application'>Download XOWA</a></li>
+        <li><a href="image_dbs.html" title='Download offline wikis and image databases'>Download wikis</a></li>
+        <li><a href="reviews.html" title='Read what others have written about XOWA'>Media</a></li>
+        <li><a href="about.html" title='Get more information about XOWA'>About</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-help'>
+    <h3>Help</h3>
+    <div class="body">
+      <ul>
+        <li><a href="requirements.html" title='Get XOWA&apos;s system requirements'>Requirements</a></li>
+        <li><a href="installation.html" title='Get instructions for installing XOWA'>Installation</a></li>
+        <li><a href="setup_simplewiki.html" title='Learn how to set up Simple Wikipedia'>Set up Simple Wikipedia</a></li>
+        <li><a href="setup_enwiki.html" title='Learn how to set up English Wikipedia'>Set up English Wikipedia</a></li>
+        <li><a href="setup_other_wikis.html" title='Learn how to set up Other Wikipedias'>Set up Other Wikipedias</a></li>
+        <li><a href="contact.html" title='Questions? Comments? Leave feedback for XOWA'>Feedback</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="portal" id='xowa-portal-links'>
+    <h3>Links</h3>
+    <div class="body">
+      <ul>
+        <li><a href="http://dumps.wikimedia.org/backup-index.html" title="Get wiki datababase dumps directly from Wikimedia">Wikimedia dumps</a></li>
+        <li><a href="https://archive.org/search.php?query=xowa" title="Search archive.org for XOWA files">XOWA @ archive.org</a></li>
+        <li><a href="http://en.wikipedia.org" title="Visit Wikipedia (and compare to XOWA!)">English Wikipedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id='xowa-portal-donate'>
+    <h3>Donate</h3>
+    <div class="body">
+      <ul>
+        <li><a href="https://archive.org/donate/index.php" title="Support archive.org!">archive.org</a></li><!-- listed first due to recent fire damages: http://blog.archive.org/2013/11/06/scanning-center-fire-please-help-rebuild/ -->
+        <li><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector" title="Support Wikipedia!">Wikipedia</a></li>
+        <!-- <li><a href="" title="Support XOWA! (but only after you've supported archive.org and Wikipedia)">XOWA</a></li> -->
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>
