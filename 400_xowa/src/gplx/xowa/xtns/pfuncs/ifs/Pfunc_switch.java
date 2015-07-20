@@ -84,6 +84,6 @@ public class Pfunc_switch extends Pf_func_base {
 			return tmp.Xto_bry_and_clear_and_trim();
 		}
 	}
-	public static final byte[] Dflt_keyword = Bry_.new_u8("#default");	// NOTE: technically should pull from messages, but would need to cache Dflt_keyword on wiki level; checked all Messages files, and no one overrides it; DATE:2014-05-29
+	public static final byte[] Dflt_keyword = Bry_.new_a7("#default");	// NOTE: technically should pull from messages, but would need to cache Dflt_keyword on wiki level; checked all Messages files, and no one overrides it; DATE:2014-05-29
 	private static int Dflt_keyword_len = Dflt_keyword.length;
 }

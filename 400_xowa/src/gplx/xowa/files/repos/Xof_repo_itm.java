@@ -73,7 +73,7 @@ public class Xof_repo_itm implements GfoInvkAble {
 		return Xof_repo_itm_.Ttl_shorten_ttl(tmp_bfr, rv, ttl_max_len, md5, ext.Ext());
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_owner))				throw Exc_.new_unimplemented_w_msg("deprecated repo_itm.owner");
+		if		(ctx.Match(k, Invk_owner))				throw Err_.new_unimplemented_w_msg("deprecated repo_itm.owner");
 		else if	(ctx.Match(k, Invk_fsys_))				fsys_is_wnt = String_.Eq(m.ReadStr("v"), "wnt");
 		else if	(ctx.Match(k, Invk_primary_))			primary = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_ext_rules_))			Ext_rules_(m.ReadBry("v"));

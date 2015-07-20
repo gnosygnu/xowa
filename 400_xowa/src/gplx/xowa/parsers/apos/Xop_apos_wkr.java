@@ -47,7 +47,7 @@ public class Xop_apos_wkr implements Xop_ctx_wkr {
 				break; 
 		}
 		if (dat.Dual_cmd() != 0) {	// earlier dual tkn assumed to be <i><b>; </i> encountered so change dual to <b><i>
-			if (dual_tkn == null) throw Exc_.new_("dual tkn is null");	// should never happen
+			if (dual_tkn == null) throw Err_.new_wo_type("dual tkn is null");	// should never happen
 			dual_tkn.Apos_cmd_(dat.Dual_cmd());
 			dual_tkn = null;
 		}

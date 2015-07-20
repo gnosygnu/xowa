@@ -20,8 +20,8 @@ public class Dsv_fld_parser_ {
 	public static final Dsv_fld_parser Bry_parser = Dsv_fld_parser_bry._;
 	public static final Dsv_fld_parser Int_parser = Dsv_fld_parser_int._;
 	public static final Dsv_fld_parser Line_parser__comment_is_pipe = new Dsv_fld_parser_line(Byte_ascii.Pipe);
-	public static Exc err_fld_unhandled(Dsv_fld_parser parser, Dsv_wkr_base wkr, int fld_idx, byte[] src, int bgn, int end) {
-		throw Exc_.new_("fld unhandled", "parser", ClassAdp_.NameOf_obj(parser), "wkr", ClassAdp_.NameOf_obj(wkr), "fld_idx", fld_idx, "val", String_.new_u8(src, bgn, end)).Stack_erase_1_();
+	public static Err err_fld_unhandled(Dsv_fld_parser parser, Dsv_wkr_base wkr, int fld_idx, byte[] src, int bgn, int end) {
+		throw Err_.new_wo_type("fld unhandled", "parser", ClassAdp_.NameOf_obj(parser), "wkr", ClassAdp_.NameOf_obj(wkr), "fld_idx", fld_idx, "val", String_.new_u8(src, bgn, end)).Trace_ignore_add_1_();
 	}
 }
 class Dsv_fld_parser_line implements Dsv_fld_parser {

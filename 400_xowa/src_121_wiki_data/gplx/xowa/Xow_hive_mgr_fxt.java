@@ -55,7 +55,7 @@ public class Xow_hive_mgr_fxt {
 				if 		(ttl_idx == 0) 					ttl_0 = ttl_bry;
 				else if (ttl_idx == ttls_per_file - 1) 	ttl_n = ttl_bry;
 				Xotdb_page_itm_.Txt_ttl_save(xdat_wtr.Bfr(), id++, 0, ttl_idx, ttl_idx % 2 == 1, 1, ttl_bry);
-				xdat_wtr.Add_idx(Byte_ascii.Nil);
+				xdat_wtr.Add_idx(Byte_ascii.Null);
 			}
 			xdat_wtr.Flush(wiki.Appe().Usr_dlg());
 			reg_wtr.Add(ttl_0, ttl_n, ttls_per_file);

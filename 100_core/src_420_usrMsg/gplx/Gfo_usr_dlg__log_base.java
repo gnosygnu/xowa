@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
-import gplx.core.strings.*;
+import gplx.core.strings.*; import gplx.core.consoles.*;
 public class Gfo_usr_dlg__log_base implements Gfo_usr_dlg__log {
 	private int archive_dirs_max = 8;
 	private Io_url log_dir, err_fil;
@@ -81,7 +81,7 @@ public class Gfo_usr_dlg__log_base implements Gfo_usr_dlg__log {
 			Log_msg(session_fil, line);
 			Log_msg(err_fil, line);
 		} 
-		catch (Exception e) {Exc_.Noop(e);}			// java.lang.StringBuilder can throw exceptions in some situations when called on a different thread; ignore errors
+		catch (Exception e) {Err_.Noop(e);}			// java.lang.StringBuilder can throw exceptions in some situations when called on a different thread; ignore errors
 	}	private String_bldr sb = String_bldr_.new_thread();	// NOTE: use java.lang.StringBuffer to try to avoid random exceptions when called on a different thread
 	private String Bld_msg(String s) {return sb.Add(DateAdp_.Now().XtoUtc().XtoStr_fmt_yyyyMMdd_HHmmss_fff()).Add(" ").Add(s).Add_char_nl().Xto_str_and_clear();}
 	private void Log_msg(Io_url url, String txt) {
@@ -117,7 +117,7 @@ class Usr_log_fil {
 			Io_mgr.I.AppendFilStr(url, sb.Xto_str_and_clear());
 		}
 		catch (Exception e) {
-			ConsoleAdp._.WriteLine(Err_.Message_gplx_brief(e));
+			Console_adp__sys.I.Write_str_w_nl(Err_.Message_gplx_full(e));
 		}
 	}
 }

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.security; import gplx.*;
-import org.junit.*; import gplx.ios.*; /*IoStream*/
+import org.junit.*; import gplx.core.consoles.*; import gplx.ios.*; /*IoStream*/
 public class HashAlgo_tth192_tst {
 	@Test  public void Char0000() {tst_CalcBase32FromString("", "LWPNACQDBZRYXW3VHJVCJ64QBZNGHOHHHZWCLNQ");}
 	@Test  public void Char0001() {tst_CalcBase32FromString("\0", "VK54ZIEEVTWNAUI5D5RDFIL37LX2IQNSTAXFKSA");}
@@ -33,7 +33,7 @@ public class HashAlgo_tth192_tst {
 	}
 	void tst_CalcBase32FromString(String raw, String expd) {
 		IoStream stream = IoStream_.mem_txt_(Io_url_.Empty, raw);
-		String actl = HashAlgo_.Tth192.CalcHash(ConsoleDlg_.Null, stream);
+		String actl = HashAlgo_.Tth192.CalcHash(Console_adp_.Noop, stream);
 		Tfds.Eq(expd, actl);
 	}
 }

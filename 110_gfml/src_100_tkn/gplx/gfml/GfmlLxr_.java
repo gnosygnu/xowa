@@ -31,7 +31,7 @@ public class GfmlLxr_ {
 	public static final GfmlLxr Null = new GfmlLxr_null();
 	public static final String CmdTknChanged_evt = "Changed";
 	public static GfmlLxr as_(Object obj) {return obj instanceof GfmlLxr ? (GfmlLxr)obj : null;}
-	public static GfmlLxr cast_(Object obj) {try {return (GfmlLxr)obj;} catch(Exception exc) {throw Exc_.new_type_mismatch_w_exc(exc, GfmlLxr.class, obj);}}
+	public static GfmlLxr cast_(Object obj) {try {return (GfmlLxr)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfmlLxr.class, obj);}}
 }
 class GfmlLxr_null implements GfmlLxr {
 	public String Key() {return "gfml.nullLxr";}
@@ -95,7 +95,7 @@ class GfmlLxr_group implements GfmlLxr {
 	}
 	public GfmlLxr SubLxr() {throw Err_sublxr();}
 	public void SubLxr_Add(GfmlLxr... lexer) {throw Err_sublxr();}
-	Exc Err_sublxr() {return Exc_.new_unimplemented_w_msg("group lxr does not have subLxrs", "key", key, "output_tkn", outputTkn.Raw()).Stack_erase_1_();}
+	Err Err_sublxr() {return Err_.new_unimplemented_w_msg("group lxr does not have subLxrs", "key", key, "output_tkn", outputTkn.Raw()).Trace_ignore_add_1_();}
 	GfmlTrie trie = GfmlTrie.new_(); String_bldr sb = String_bldr_.new_(); boolean ignoreOutput;
 	public static GfmlLxr_group new_(String key, String[] hooks, GfmlTkn outputTkn, boolean ignoreOutput) {
 		GfmlLxr_group rv = new GfmlLxr_group();
@@ -213,5 +213,5 @@ class GfmlLxr_frame extends GfmlLxr_singleton {		GfmlFrame frame; GfmlLxr endLxr
 		return rv;
 	}	GfmlLxr_frame() {}
 	public static GfmlLxr_frame as_(Object obj) {return obj instanceof GfmlLxr_frame ? (GfmlLxr_frame)obj : null;}
-	public static GfmlLxr_frame cast_(Object obj) {try {return (GfmlLxr_frame)obj;} catch(Exception exc) {throw Exc_.new_type_mismatch_w_exc(exc, GfmlLxr_frame.class, obj);}}
+	public static GfmlLxr_frame cast_(Object obj) {try {return (GfmlLxr_frame)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfmlLxr_frame.class, obj);}}
 }

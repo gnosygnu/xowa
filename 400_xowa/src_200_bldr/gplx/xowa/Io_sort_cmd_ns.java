@@ -37,7 +37,7 @@ public class Io_sort_cmd_ns implements Io_make_cmd {
 		if (key_bfr_0.Len() == 0) {key_bfr_0.Add_mid(bfr, key_bgn, key_end);}
 		key_bfr_n.Clear().Add_mid(bfr, key_bgn, key_end);
 		fil_wtr.Bfr().Add_mid(rdr.Bfr(), itm_bgn, itm_end);
-		fil_wtr.Add_idx(Byte_ascii.Nil);
+		fil_wtr.Add_idx(Byte_ascii.Null);
 		++itm_count;
 	}
 	public void Sort_end() {

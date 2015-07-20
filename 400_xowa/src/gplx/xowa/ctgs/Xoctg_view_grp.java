@@ -30,8 +30,8 @@ public class Xoctg_view_grp {
 	public Xoctg_view_itm Itms_at_first() {return Itms_at(0);}
 	public Xoctg_view_itm Itms_at_last() {return Itms_at(itms.length - 1);}
 	Xoctg_view_itm Itms_at(int i) {
-		if (i < 0 || i >= itms.length) throw Exc_.new_("ctg.view: i is out of bounds", "i", i, "len", itms.length, "tid", tid);
-		Xoctg_view_itm rv = itms[i]; if (rv == null) throw Exc_.new_("ctg.view: itm is null", "i", i, "len", itms.length, "tid", tid);
+		if (i < 0 || i >= itms.length) throw Err_.new_wo_type("ctg.view: i is out of bounds", "i", i, "len", itms.length, "tid", tid);
+		Xoctg_view_itm rv = itms[i]; if (rv == null) throw Err_.new_wo_type("ctg.view: itm is null", "i", i, "len", itms.length, "tid", tid);
 		return rv;
 	}
 	public void Itms_add(Xoctg_view_itm sub) {tmp_list.Add(sub);}

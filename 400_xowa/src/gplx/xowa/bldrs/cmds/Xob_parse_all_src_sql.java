@@ -71,7 +71,7 @@ class Xob_dump_src_id {
 			case Bool_.Y_byte:	return Sql_select__redirect_y;
 			case Bool_.N_byte:	return Sql_select__redirect_n;
 			case Bool_.__byte:	return Sql_select__redirect__;
-			default:			throw Exc_.new_unhandled(redirect);
+			default:			throw Err_.new_unhandled(redirect);
 		}
 	}
 	private static final String Sql_select = String_.Concat_lines_nl

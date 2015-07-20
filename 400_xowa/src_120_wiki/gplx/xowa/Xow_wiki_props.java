@@ -48,10 +48,11 @@ public class Xow_wiki_props implements GfoInvkAble {
 			site_name = Bry_.Mid(siteinfo_misc, 0, pipe_0);
 		return this;
 	}	private byte[] siteinfo_misc = Bry_.Empty;
-	public void Init_by_load(gplx.dbs.cfgs.Db_cfg_tbl cfg_tbl) {
+	public void Init_by_load(Xoa_app app, gplx.dbs.cfgs.Db_cfg_tbl cfg_tbl) {
 		this.main_page = cfg_tbl.Select_bry_or(Xow_cfg_consts.Grp__wiki_init, Xow_cfg_consts.Key__init__main_page, null);
-		if (main_page == null) {
-			Xoa_app_.Usr_dlg().Warn_many("", "", "mw_props.load; main_page not found; conn=~{0}", cfg_tbl.Conn().Conn_info().Xto_api());
+		if	(main_page == null) {			// main_page not found
+			if	(!app.Bldr__running()) 		// not building; note that Init_by_load is called by bldr cmds like css; DATE:2015-07-13
+				Xoa_app_.Usr_dlg().Warn_many("", "", "mw_props.load; main_page not found; conn=~{0}", cfg_tbl.Conn().Conn_info().Xto_api());
 			this.main_page = Xoa_page_.Main_page_bry;
 		}
 	}

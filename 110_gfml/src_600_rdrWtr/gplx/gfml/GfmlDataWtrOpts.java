@@ -23,5 +23,5 @@ public class GfmlDataWtrOpts {
 	public boolean IgnoreNullNames() {return ignoreNullNames;} public GfmlDataWtrOpts IgnoreNullNamesOn_() {ignoreNullNames = true; return this;} private boolean ignoreNullNames;
         public static final GfmlDataWtrOpts _ = new GfmlDataWtrOpts();
 	public static GfmlDataWtrOpts new_() {return new GfmlDataWtrOpts();} GfmlDataWtrOpts() {}
-	public static GfmlDataWtrOpts cast_(Object obj) {try {return (GfmlDataWtrOpts)obj;} catch(Exception exc) {throw Exc_.new_type_mismatch_w_exc(exc, GfmlDataWtrOpts.class, obj);}}
+	public static GfmlDataWtrOpts cast_(Object obj) {try {return (GfmlDataWtrOpts)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfmlDataWtrOpts.class, obj);}}
 }

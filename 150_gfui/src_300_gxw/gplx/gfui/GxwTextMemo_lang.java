@@ -47,7 +47,7 @@ public class GxwTextMemo_lang extends JScrollPane implements GxwTextMemo {
 		else if (c.getRGB() == Color.WHITE.getRGB()) 	txt_box.setCaretColor(Color.BLACK);		
 		super.setBackground(c);
 	}
-	public void ScrollTillCaretIsVisible() {throw Exc_.new_unimplemented();}
+	public void ScrollTillCaretIsVisible() {throw Err_.new_unimplemented();}
 	public void Margins_set(int left, int top, int right, int bot) {
 		if (left == 0 && right == 0) {
 			txt_box.setBorder(BorderFactory.createLineBorder(Color.BLACK));

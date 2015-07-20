@@ -43,7 +43,7 @@ public class Xol_cnv_grp implements GfoInvkAble {
 				case Byte_ascii.Pipe:
 					switch (fld_idx) {
 						case 0:		src = csv_parser.Load(raw, fld_bgn, pos); break;
-						default:	throw Exc_.new_unhandled(fld_idx);
+						default:	throw Err_.new_unhandled(fld_idx);
 					}
 					fld_bgn = pos + 1;
 					++fld_idx;

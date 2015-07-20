@@ -23,7 +23,7 @@ public class CharStream {
 	public boolean AtBgn() {return pos <= BgnPos;}
 	public boolean AtEnd() {return pos >= len;}
 	public boolean AtMid() {return pos > BgnPos && pos < len;}
-	public char Cur() {try {return ary[pos];} catch (Exception exc) {Exc_.Noop(exc); throw Exc_.new_missing_idx(pos, this.Len());}}
+	public char Cur() {try {return ary[pos];} catch (Exception exc) {Err_.Noop(exc); throw Err_.new_missing_idx(pos, this.Len());}}
 	public void MoveNext() {pos++;}
 	public void MoveNextBy(int offset) {pos += offset;}
 	public void MoveBack() {pos--;}

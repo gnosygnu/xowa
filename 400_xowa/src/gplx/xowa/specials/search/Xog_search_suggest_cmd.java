@@ -49,7 +49,7 @@ class Xog_search_suggest_cmd implements GfoInvkAble, Cancelable {
 			working = false;
 		} 
 		catch(Exception e) {
-			app.Usr_dlg().Prog_many("", "", "error during search: ~{0}", Err_.Message_gplx_brief(e));
+			app.Usr_dlg().Prog_many("", "", "error during search: err=~{0}", Err_.Message_gplx_full(e));
 		}
 	}
 	private boolean Search_by_all_pages_v2() {

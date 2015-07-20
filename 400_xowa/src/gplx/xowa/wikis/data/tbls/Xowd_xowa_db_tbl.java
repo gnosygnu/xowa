@@ -71,7 +71,7 @@ public class Xowd_xowa_db_tbl {
 			case Db_cmd_mode.Tid_update:	stmt.Clear();								Commit_itm_vals(stmt, itm); stmt.Crt_int(fld_id, itm.Id()).Exec_update(); break;
 			case Db_cmd_mode.Tid_delete:	stmt.Clear().Crt_int(fld_id, itm.Id()).Exec_delete();	break;
 			case Db_cmd_mode.Tid_ignore:	break;
-			default:						throw Exc_.new_unhandled(itm.Cmd_mode());
+			default:						throw Err_.new_unhandled(itm.Cmd_mode());
 		}
 		itm.Cmd_mode_(Db_cmd_mode.Tid_ignore);
 	}

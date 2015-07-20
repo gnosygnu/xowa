@@ -74,7 +74,7 @@ public abstract class IoEngine_fil_basic_base {
 		try {fx.run_SaveFilText(fil, "changed");}
 		catch (Exception exc) {
 			fx.tst_LoadFilStr(fil, "text");
-			Exc_.Noop(exc);
+			Err_.Noop(exc);
 			return;
 		}
 		Tfds.Fail_expdError();
@@ -111,7 +111,7 @@ public abstract class IoEngine_fil_basic_base {
 
 		engine.UpdateFilAttrib(fil, IoItmAttrib.readOnly_());
 		try {engine.DeleteFil_api(IoEngine_xrg_deleteFil.new_(fil));}
-		catch (Exception exc) {Exc_.Noop(exc);
+		catch (Exception exc) {Err_.Noop(exc);
 			fx.tst_ExistsPaths(true, fil);
 			return;
 		}

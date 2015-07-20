@@ -66,7 +66,7 @@ class Xog_page_bldr {
 	public Xog_page Bld() {
 		Xog_page rv = new Xog_page();
 		rv.Page_body_(body);
-		Xopg_module_mgr mod_mgr = rv.Module_mgr();
+		Xopg_module_mgr mod_mgr = rv.Head_mgr();
 		if (html_modules != null) {
 			mod_mgr.Math_exists_(html_modules[0]);
 			mod_mgr.Imap_exists_(html_modules[1]);

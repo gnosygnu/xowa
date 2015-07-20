@@ -49,7 +49,7 @@ public class DateAdp implements CompareAble, GfoInvkAble {
 			case DateAdp_.SegIdx_dayOfWeek:		return this.DayOfWeek();
 			case DateAdp_.SegIdx_weekOfYear:	return this.WeekOfYear();
 			case DateAdp_.SegIdx_dayOfYear:		return this.DayOfYear();
-			default: throw Exc_.new_unhandled(segmentIdx);
+			default: throw Err_.new_unhandled(segmentIdx);
 		}
 	}
 	public int[] XtoSegAry() {

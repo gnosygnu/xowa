@@ -52,7 +52,7 @@ class Xob_wbase_json_dump_parser {
 		}
 		catch (Exception e) {
 			String msg = usr_dlg.Warn_many("", "", "dump_rdr:error while reading; url=~{0} err=~{1}", src_fil.Raw(), Err_.Message_lang(e));
-			throw Exc_.new_(msg);
+			throw Err_.new_wo_type(msg);
 		}
 		finally {buffer_rdr.Rls();}
 	}

@@ -27,7 +27,7 @@ public class Db_cfg_hash {
 	}
 	public void Set(String key, String val) {hash.Del(key); Add(key, val);}
 	public void Add(String key, String val) {
-		if (hash.Has(key)) throw Exc_.new_("itm exists", "grp", grp, "key", key);
+		if (hash.Has(key)) throw Err_.new_wo_type("itm exists", "grp", grp, "key", key);
 		Db_cfg_itm itm = new Db_cfg_itm(grp, key, val);
 		hash.Add(key, itm);
 	}

@@ -129,7 +129,7 @@ public class Xol_case_mgr implements GfoInvkAble, Gfo_case_mgr {
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_add_bulk))				Add_bulk(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_clear))					throw Exc_.new_unimplemented();
+		else if	(ctx.Match(k, Invk_clear))					throw Err_.new_unimplemented();
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_clear = "clear", Invk_add_bulk = "add_bulk";

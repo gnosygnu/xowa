@@ -32,7 +32,7 @@ public class String_ implements GfoInvkAble {
 				? null
 				: new String(v, bgn, end - bgn, "ASCII");		
 		}
-		catch (Exception e) {throw Exc_.new_exc(e, "core", "unsupported encoding");}
+		catch (Exception e) {throw Err_.new_exc(e, "core", "unsupported encoding");}
 	}	
 	public static String new_u8(byte[] v) {return v == null ? null : new_u8(v, 0, v.length);}
 	public static String new_u8(byte[] v, int bgn, int end) {
@@ -41,7 +41,7 @@ public class String_ implements GfoInvkAble {
 				? null
 				: new String(v, bgn, end - bgn, "UTF-8");		
 		}
-		catch (Exception e) {throw Exc_.new_exc(e, "core", "unsupported encoding");}
+		catch (Exception e) {throw Err_.new_exc(e, "core", "unsupported encoding");}
 	}
 	public static String new_u8_by_len(byte[] v, int bgn, int len)	{
 		int v_len = v.length;
@@ -170,7 +170,7 @@ public class String_ implements GfoInvkAble {
 			else if (bgn > end)					msg = "@bgn > @end";
 			else if (bgn < 0 || bgn >= len)		msg = "@bgn is invalid";
 			else if (end < 0 || end >  len)		msg = "@end is invalid";
-			throw Exc_.new_exc(e, "core", msg, "s", s, "bgn", bgn, "end", end, "len", len);
+			throw Err_.new_exc(e, "core", msg, "s", s, "bgn", bgn, "end", end, "len", len);
 		}
 	}
 	public static String MidByLenSafe(String s, int bgn, int len) {
@@ -179,41 +179,43 @@ public class String_ implements GfoInvkAble {
 	}
 	public static String MidByLen(String s, int bgn, int len) {return Mid_lang(s, bgn, len);}
 	public static String GetStrBefore(String s, String spr) {
-		int sprPos = String_.FindFwd(s, spr); if (sprPos == String_.Find_none) throw Exc_.new_("could not find spr", "s", s, "spr", spr);
+		int sprPos = String_.FindFwd(s, spr); if (sprPos == String_.Find_none) throw Err_.new_wo_type("could not find spr", "s", s, "spr", spr);
 		return Mid(s, 0, sprPos);
 	}
 	public static String GetStrAfter(String s, String spr) {
-		int sprPos = String_.FindFwd(s, spr); if (sprPos == String_.Find_none) throw Exc_.new_("could not find spr", "s", s, "spr", spr);
+		int sprPos = String_.FindFwd(s, spr); if (sprPos == String_.Find_none) throw Err_.new_wo_type("could not find spr", "s", s, "spr", spr);
 		return Mid(s, sprPos + 1);
 	}
 	public static String LimitToFirst(String s, int len) {
-		if (len < 0) throw Err_arg.cannotBe_("< 0", "len", len);
+		if (len < 0) throw Err_.new_invalid_arg("< 0", "len", len);
 		int sLen = Len(s); if (len > sLen) return s;
 		return Mid_lang(s, 0, len);
 	}
 	public static String LimitToLast(String s, int len) {
-		if (len < 0) throw Err_arg.cannotBe_("< 0", "len", len);
+		if (len < 0) throw Err_.new_invalid_arg("< 0", "len", len);
 		int sLen = Len(s); if (len > sLen) return s;
 		return Mid_lang(s, sLen - len, len);
 	}
 	public static String DelBgn(String s, int count) {
-		if (count < 0) throw Err_arg.cannotBe_("< 0", "count", count);
-		if (s == null) throw Err_arg.null_("s");
-		int len = Len(s); if (count > len) throw Err_arg.cannotBe_("> @len", "count", count).Add("len", len);
+		if (count < 0) throw Err_.new_invalid_arg("< 0", "count", count);
+		if (s == null) throw Err_.new_null();
+		int len = Len(s); if (count > len) throw Err_.new_invalid_arg("> @len", "count", count, "len", len);
 		return String_.Mid(s, count);
 	}
 	public static String DelBgnIf(String s, String find) {
-		if (s == null) throw Err_arg.null_("s"); if (find == null) throw Err_arg.null_("find");
+		if (s == null) throw Err_.new_null();
+		if (find == null) throw Err_.new_null();
 		return Has_at_bgn(s, find) ? String_.Mid(s, Len(find)) : s;
 	}
 	public static String DelEnd(String s, int count) {
-		if (count < 0) throw Err_arg.cannotBe_("< 0", "count", count);
-		if (s == null) throw Err_arg.null_("s");
-		int len = Len(s); if (count > len) throw Err_arg.cannotBe_("> len", "count", count).Add("len", len);
+		if (count < 0) throw Err_.new_invalid_arg("< 0", "count", count);
+		if (s == null) throw Err_.new_null();
+		int len = Len(s); if (count > len) throw Err_.new_invalid_arg("> len", "count", count, "len", len);
 		return Mid_lang(s, 0, len + -count);
 	}
 	public static String DelEndIf(String s, String find) {
-		if (s == null) throw Err_arg.null_("s"); if (find == null) throw Err_arg.null_("find");
+		if (s == null) throw Err_.new_null();
+		if (find == null) throw Err_.new_null();
 		return Has_at_end(s, find) ? Mid_lang(s, 0, Len(s) - Len(find)) : s;
 	}
 	public static String LowerFirst(String s) {
@@ -252,14 +254,14 @@ public class String_ implements GfoInvkAble {
 		return (last == len) ? s : Mid_lang(s, 0, last);
 	}
 	public static String Repeat(String s, int count) {
-		if (count < 0) throw Exc_.new_("count cannot be negative", "count", count, "s", s);
+		if (count < 0) throw Err_.new_wo_type("count cannot be negative", "count", count, "s", s);
 		String_bldr sb = String_bldr_.new_();
 		for (int i = 0; i < count; i++)
 			sb.Add(s);
 		return sb.XtoStr();
 	}
 	public static String Insert(String s, int pos, String toInsert) {
-		if (pos < 0 || pos >= String_.Len(s)) throw Exc_.new_("String_.Insert failed; pos invalid", "pos", pos, "s", s, "toInsert", toInsert);
+		if (pos < 0 || pos >= String_.Len(s)) throw Err_.new_wo_type("String_.Insert failed; pos invalid", "pos", pos, "s", s, "toInsert", toInsert);
 		return s.substring(0, pos) + toInsert + s.substring(pos);
 	}
 	public static String Format(String fmt, Object... args) {return Format_do(fmt, args);}
@@ -488,7 +490,7 @@ public class String_ implements GfoInvkAble {
 	}
 	public static String read_(Object obj) {// NOTE: same as cast_; for consistent readability only
 		String rv = as_(obj);
-		if (rv == null && obj != null) throw Exc_.new_type_mismatch(String.class, obj); // NOTE: obj != null needed; EX: cast_(null) --> null
+		if (rv == null && obj != null) throw Err_.new_type_mismatch(String.class, obj); // NOTE: obj != null needed; EX: cast_(null) --> null
 		return rv;
 	}
 	public static String[] Ary(byte[]... ary) {

@@ -81,7 +81,7 @@ class GftGrid_fx {
 		else if	(String_.Eq(name, "y")) return item.Gft_y();
 		else if	(String_.Eq(name, "w")) return item.Gft_w();
 		else if	(String_.Eq(name, "h")) return item.Gft_h();
-		else throw Exc_.new_unhandled(name);
+		else throw Err_.new_unhandled(name);
 	}
 	static int[] rng_(int expdVal, int len) {
 		int[] rv = new int[len];

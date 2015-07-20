@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
-import gplx.core.strings.*;
+import gplx.core.strings.*; import gplx.core.consoles.*;
 public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	public static boolean SkipDb = false;
 	public static void Eq(Object expd, Object actl)											{Eq_wkr(expd, actl, true, EmptyStr);}
@@ -36,8 +36,8 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	public static void Eq_str_lines(String lhs, String rhs)									{Eq_str_lines(lhs, rhs, EmptyStr);}
 	public static void Eq_str_lines(String lhs, String rhs, String note)					{
 		if		(lhs == null && rhs == null)	return;	// true
-		else if (lhs == null)					throw Exc_.new_("lhs is null", "note", note);
-		else if (rhs == null)					throw Exc_.new_("rhs is null", "note", note);
+		else if (lhs == null)					throw Err_.new_wo_type("lhs is null", "note", note);
+		else if (rhs == null)					throw Err_.new_wo_type("rhs is null", "note", note);
 		else									Eq_ary_wkr(String_.Split(lhs, Char_.NewLine), String_.Split(rhs, Char_.NewLine), false, note);
 	}
 	public static void Eq(Object expd, Object actl, String fmt, Object... args)		{Eq_wkr(expd, actl, true, String_.Format(fmt, args));}
@@ -66,13 +66,13 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 		else	actl = lhs.Eq(rhs);
 		if (expd == actl) return;
 		String msg = msgBldr.Eq_xtoStr(lhs, rhs, customMsg);
-		throw Exc_.new_(msg);
+		throw Err_.new_wo_type(msg);
 	}
 	static void Eq_wkr(Object lhs, Object rhs, boolean expd, String customMsg) {
 		boolean actl = Object_.Eq(lhs, rhs);
 		if (expd == actl) return;
 		String msg = msgBldr.Eq_xtoStr(lhs, rhs, customMsg);
-		throw Exc_.new_(msg);
+		throw Err_.new_wo_type(msg);
 	}
 	static void Eq_ary_wkr(Object lhsAry, Object rhsAry, boolean compareUsingEquals, String customMsg) {
 		List_adp list = List_adp_.new_(); boolean pass = true;
@@ -95,7 +95,7 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 		}
 		if (pass) return;
 		String msg = msgBldr.Eq_ary_xtoStr(list, lhsLen, rhsLen, customMsg);
-		throw Exc_.new_(msg);
+		throw Err_.new_wo_type(msg);
 	}
 	static void Eq_list_wkr(List_adp lhsList, List_adp rhsList, TfdsEqListItmStr xtoStr, String customMsg) {
 		List_adp list = List_adp_.new_(); boolean pass = true;
@@ -117,7 +117,7 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 		}
 		if (pass) return;
 		String msg = msgBldr.Eq_ary_xtoStr(list, lhsLen, rhsLen, customMsg);
-		throw Exc_.new_(msg);
+		throw Err_.new_wo_type(msg);
 	}
 	static void Eq_ary_wkr_addItm(List_adp list, int i, boolean isEq, String lhsString, String rhsString) {
 		TfdsEqAryItm itm = new TfdsEqAryItm().Idx_(i).Eq_(isEq).Lhs_(lhsString).Rhs_(rhsString);
@@ -125,24 +125,13 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	}
 	public static void Err_classMatch(Exception exc, Class<?> type) {
 		boolean match = ClassAdp_.Eq_typeSafe(exc, type);
-		if (!match) throw Exc_.new_w_type("Tfds", "error types do not match", "expdType", ClassAdp_.FullNameOf_type(type), "actlType", ClassAdp_.NameOf_obj(exc), "actlMsg", Err_.Message_lang(exc));
+		if (!match) throw Err_.new_("Tfds", "error types do not match", "expdType", ClassAdp_.FullNameOf_type(type), "actlType", ClassAdp_.NameOf_obj(exc), "actlMsg", Err_.Message_lang(exc));
 	}
 	public static void Eq_err(Err expd, Exception actlExc) {
-		Tfds.Eq(XtoStr_Err(expd), XtoStr_Err(actlExc));
+		Tfds.Eq(Err_.Message_gplx_full(expd), Err_.Message_gplx_full(actlExc));
 	}
 	public static void Err_has(Exception e, String hdr) {
-		Tfds.Eq_true(String_.Has(Err_.Message_gplx_brief(e), hdr), "could not find '{0}' in '{1}'", hdr, Err_.Message_gplx_brief(e));
-	}
-	static String XtoStr_Err(Exception e) {
-		Err err = Err_.as_(e); if (err == null) return Err_.Message_lang(e);
-		String_bldr sb = String_bldr_.new_();
-		sb.Add(err.Hdr()).Add(":");
-		for (Object kvo : err.Args()) {
-			KeyVal kv = (KeyVal)kvo;
-			if (sb.Count() != 0) sb.Add(" ");
-			sb.Add_fmt("{0}={1}", kv.Key(), kv.Val());
-		}
-		return sb.XtoStr();
+		Tfds.Eq_true(String_.Has(Err_.Message_gplx_full(e), hdr), "could not find '{0}' in '{1}'", hdr, Err_.Message_gplx_full(e));
 	}
 	static final String EmptyStr = TfdsMsgBldr.EmptyStr;
 	static TfdsMsgBldr msgBldr = TfdsMsgBldr.new_();
@@ -159,7 +148,7 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	}
 	private static final DateAdp time0 = DateAdp_.parse_gplx("2001-01-01 00:00:00.000");
 	private static DateAdp nowTime; // NOTE: cannot set to time0 due to static initialization;
-	public static void WriteText(String text) {ConsoleAdp._.WriteText(text);}
+	public static void WriteText(String text) {Console_adp__sys.I.Write_str(text);}
 	public static void Write_bry(byte[] ary) {Write(String_.new_u8(ary));}
 	public static void Write() {Write("tmp");}
 	public static void Write(Object... ary) {

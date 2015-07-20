@@ -37,7 +37,7 @@ public class Xob_xdat_file_wtr {
 	public Bry_bfr Bfr() {return bfr;} Bry_bfr bfr;
 	public Xob_xdat_file_wtr Add_idx(byte data_dlm) {return Add_idx_direct(bfr.Len(), data_dlm);}
 	public Xob_xdat_file_wtr Add_idx_direct(int itm_len, byte data_dlm) {
-		if (data_dlm != Byte_ascii.Nil) {	// write closing dlm for data_eny, unless Byte_.Null passed in
+		if (data_dlm != Byte_ascii.Null) {	// write closing dlm for data_eny, unless Byte_.Null passed in
 			bfr.Add_byte(data_dlm);
 			++itm_len;
 		}

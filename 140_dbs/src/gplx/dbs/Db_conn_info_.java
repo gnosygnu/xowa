@@ -50,7 +50,7 @@ class Db_conn_info_pool {
 			Db_conn_info prototype = (Db_conn_info)regy.Get_by(url_tid);
 			return prototype.New_self(raw, m);
 		}
-		catch(Exception exc) {throw Exc_.new_parse_exc(exc, Db_conn_info.class, raw);}
+		catch(Exception exc) {throw Err_.new_parse_exc(exc, Db_conn_info.class, raw);}
 	}
 	public static final Db_conn_info_pool _ = new Db_conn_info_pool();
 }

@@ -41,7 +41,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 			case Proc_gmatch_init:							return Gmatch_init(args, rslt);
 			case Proc_gmatch_callback:						return Gmatch_callback(args, rslt);
 			case Proc_gsub:									return Gsub(args, rslt);
-			default: throw Exc_.new_unhandled(key);
+			default: throw Err_.new_unhandled(key);
 		}
 	}
 	private static final int Proc_find = 0, Proc_match = 1, Proc_gmatch_init = 2, Proc_gmatch_callback = 3, Proc_gsub = 4;
@@ -209,7 +209,7 @@ class Scrib_lib_ustring_gsub_mgr {
 			tmp_repl_tid = Repl_tid_luacbk;
 			repl_func = (Scrib_lua_proc)repl_obj;
 		}
-		else throw Exc_.new_unhandled(ClassAdp_.NameOf_type(repl_type));
+		else throw Err_.new_unhandled(ClassAdp_.NameOf_type(repl_type));
 	}
 	private String Exec_repl(byte repl_tid, byte[] repl_bry, String text, String regx, int limit) {
 		RegxAdp regx_mgr = Scrib_lib_ustring.RegxAdp_new_(core.Ctx(), regx);
@@ -316,7 +316,7 @@ class Scrib_lib_ustring_gsub_mgr {
 				tmp_bfr.Add_str(Scrib_kv_utl_.Val_to_str(rslts, 0));
 				break;
 			}
-			default: throw Exc_.new_unhandled(repl_tid);
+			default: throw Err_.new_unhandled(repl_tid);
 		}
 	}
 	static final byte Repl_tid_null = 0, Repl_tid_string = 1, Repl_tid_table = 2, Repl_tid_luacbk = 3;

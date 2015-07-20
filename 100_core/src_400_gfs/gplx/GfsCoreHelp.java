@@ -30,8 +30,8 @@ class GfsCoreHelp implements GfoInvkAble {
 		}
 		else return Exec(ctx, core.Root_as_regy(), path);
 	}
-	public static Exc Err_Unhandled(String objPath, String key) {return Exc_.new_("obj does not handle msgKey", "objPath", objPath, "key", key).Stack_erase_1_();}
-	static Exc Err_Unhandled(String[] itmAry, int i) {
+	public static Err Err_Unhandled(String objPath, String key) {return Err_.new_wo_type("obj does not handle msgKey", "objPath", objPath, "key", key).Trace_ignore_add_1_();}
+	static Err Err_Unhandled(String[] itmAry, int i) {
 		String_bldr sb = String_bldr_.new_();
 		for (int j = 0; j < i; j++)
 			sb.Add_spr_unless_first(itmAry[j], ".", j);

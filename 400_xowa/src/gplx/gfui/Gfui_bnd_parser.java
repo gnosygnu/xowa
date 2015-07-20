@@ -69,7 +69,7 @@ public class Gfui_bnd_parser {
 					++pos;
 					continue;
 				case Byte_ascii.Hash:
-					if (is_numeric) throw Exc_.new_("multiple numeric symbols in keycode");
+					if (is_numeric) throw Err_.new_wo_type("multiple numeric symbols in keycode");
 					is_numeric = true;
 					++pos;
 					continue;
@@ -103,10 +103,10 @@ public class Gfui_bnd_parser {
 			int tkn_bgn = itm_bgn;
 			if (src_is_gfui) {	// remove "key." in "key.#10"
 				tkn_bgn = Bry_finder.Move_fwd(src, Byte_ascii.Dot, itm_bgn, itm_end);
-				if (tkn_bgn == -1) throw Exc_.new_("invalid keycode.dot", "keycode", Bry_.Mid(src, tkn_bgn, itm_end));
+				if (tkn_bgn == -1) throw Err_.new_wo_type("invalid keycode.dot", "keycode", Bry_.Mid(src, tkn_bgn, itm_end));
 				++tkn_bgn;		// skip #
 			}
-			int keycode = Bry_.Xto_int_or(src, tkn_bgn, itm_end, -1); if (keycode == -1) throw Exc_.new_("invalid keycode", "keycode", Bry_.Mid(src, tkn_bgn, itm_end));
+			int keycode = Bry_.Xto_int_or(src, tkn_bgn, itm_end, -1); if (keycode == -1) throw Err_.new_wo_type("invalid keycode", "keycode", Bry_.Mid(src, tkn_bgn, itm_end));
 			tkn = new Gfui_bnd_tkn(Gfui_bnd_tkn.Tid_key, keycode, Bry_.Empty, Bry_.Empty);
 		}
 		else
@@ -122,7 +122,7 @@ public class Gfui_bnd_parser {
 			case Gfui_bnd_tkn.Tid_mod_ca:		mod_adj = Gfui_bnd_tkn.Tid_mod_ca; break;
 			case Gfui_bnd_tkn.Tid_mod_cas:		mod_adj = Gfui_bnd_tkn.Tid_mod_cas; break;
 			case Gfui_bnd_tkn.Tid_key:			break;
-			default: throw Exc_.new_unhandled(tkn.Tid());
+			default: throw Err_.new_unhandled(tkn.Tid());
 		}
 		switch (sym_tkn.Tid()) {
 			case Gfui_bnd_tkn.Tid_sym_plus:		// EX: Ctrl + A

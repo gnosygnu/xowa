@@ -44,14 +44,14 @@ class Xows_cmd__fs_check {
 			try {
 				IoItmDir sub_itm = (IoItmDir)sub_itms.Get_at(i);
 				bfr.Add_str_a7("dir").Add_byte_pipe().Add_str_u8(sub_itm.Name()).Add_byte_nl();
-			}	catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx(e));}
+			}	catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx_full(e));}
 		}
 		sub_itms = dir_itm.SubFils(); len = sub_itms.Count();
 		for (int i = 0; i < len; ++i) {
 			try {
 				IoItmFil sub_itm = (IoItmFil)sub_itms.Get_at(i);
 				bfr.Add_str_a7("fil").Add_byte_pipe().Add_str_u8(sub_itm.Name()).Add_byte_pipe().Add_long_variable(sub_itm.Size()).Add_byte_pipe().Add_dte(sub_itm.ModifiedTime()).Add_byte_nl();
-			}	catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx(e));}
+			}	catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx_full(e));}
 		}
 	}
         public static final Xows_cmd__fs_check I = new Xows_cmd__fs_check(); Xows_cmd__fs_check() {}

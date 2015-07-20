@@ -48,7 +48,7 @@ public class Utf16_ {
 				| 	( ary[pos + 3] & 0x3f)
 				;			
 		}
-		else throw Exc_.new_("invalid utf8 byte", "byte", b0);
+		else throw Err_.new_wo_type("invalid utf8 byte", "byte", b0);
 	}
 	public static byte[] Encode_hex_to_bry(String raw) {return Encode_hex_to_bry(Bry_.new_a7(raw));}
 	public static byte[] Encode_hex_to_bry(byte[] raw) {
@@ -75,7 +75,7 @@ public class Utf16_ {
 		}	
 		else if((c > 55295)				// 0xD800
 			 && (c < 56320)) {			// 0xDFFF
-			if (c_pos >= c_ary.length) throw Exc_.new_("incomplete surrogate pair at end of String", "char", c);
+			if (c_pos >= c_ary.length) throw Err_.new_wo_type("incomplete surrogate pair at end of String", "char", c);
 			char nxt_char = c_ary[c_pos + 1];
 			int v = Surrogate_merge(c, nxt_char);
 			b_ary[b_pos] 	= (byte)(0xF0 | (v >> 18));
@@ -115,7 +115,7 @@ public class Utf16_ {
 			src[++pos] 	= (byte)(0x80 | (c        & 0x3F));
 			return 4;
 		}
-		else throw Exc_.new_("UTF-16 int must be between 0 and 2097152", "char", c);
+		else throw Err_.new_wo_type("UTF-16 int must be between 0 and 2097152", "char", c);
 	}
 	private static int Len_by_int(int c) {
 		if	   ((c >       -1)
@@ -123,7 +123,7 @@ public class Utf16_ {
 		else if (c <     2048)	return 2;		// 1 << 11
 		else if (c <   65536)	return 3;		// 1 << 16
 		else if (c < 2097152)	return 4;
-		else throw Exc_.new_("UTF-16 int must be between 0 and 2097152", "char", c);
+		else throw Err_.new_wo_type("UTF-16 int must be between 0 and 2097152", "char", c);
 	}
 	public static int Len_by_char(int c) {
 		if	   ((c >       -1)
@@ -132,6 +132,6 @@ public class Utf16_ {
 		else if((c >    55295)					// 0xD800
 			 && (c <    56320))	return 4;		// 0xDFFF
 		else if (c <    65536)	return 3;		// 1 << 16
-		else throw Exc_.new_("UTF-16 int must be between 0 and 65536", "char", c);
+		else throw Err_.new_wo_type("UTF-16 int must be between 0 and 65536", "char", c);
 	}
 }

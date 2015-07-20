@@ -60,7 +60,7 @@ public class Xohd_page_html_mgr__load {
 		switch (tid) {
 			case Xohd_data_itm__base.Tid_basic		: img_itm = new Xohd_data_itm__img(); break;
 			case Xohd_data_itm__base.Tid_gallery	: img_itm = new Xohd_data_itm__gallery_itm(); break;
-			default									: throw Exc_.new_unhandled(tid);
+			default									: throw Err_.new_unhandled(tid);
 		}
 		img_itm.Data_parse(rdr);
 		// Xoa_app_.Usr_dlg().Log_many("", "", "itm: ~{0}", img_itm.Data_print());

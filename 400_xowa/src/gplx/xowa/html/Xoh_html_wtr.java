@@ -164,7 +164,7 @@ public class Xoh_html_wtr {
 			case Xop_apos_tkn_.Cmd_b_end__i_bgn:	bfr.Add(Html_tag_.B_rhs).Add(Html_tag_.I_lhs); break;		
 			case Xop_apos_tkn_.Cmd_i_end__b_bgn:	bfr.Add(Html_tag_.I_rhs).Add(Html_tag_.B_lhs); break;
 			case Xop_apos_tkn_.Cmd_nil:				break;
-			default: throw Exc_.new_unhandled(apos.Apos_cmd());
+			default: throw Err_.new_unhandled(apos.Apos_cmd());
 		}
 	}
 	public static byte[] Ttl_to_title(byte[] ttl) {return ttl;}	// FUTURE: swap html chars?
@@ -194,7 +194,7 @@ public class Xoh_html_wtr {
 			case Xop_list_tkn_.List_itmTyp_ul: tag = Tag_list_grp_ul_bgn; break;
 			case Xop_list_tkn_.List_itmTyp_dd:
 			case Xop_list_tkn_.List_itmTyp_dt: tag = Tag_list_grp_dl_bgn; break;
-			default: throw Exc_.new_unhandled(type);
+			default: throw Err_.new_unhandled(type);
 		}
 		if (bfr.Len() > 0) bfr.Add_byte_nl();	// NOTE: do not add newLine if start 
 		if (indent_level > 0) bfr.Add_byte_repeat(Byte_ascii.Space, indent_level * 2);
@@ -208,7 +208,7 @@ public class Xoh_html_wtr {
 			case Xop_list_tkn_.List_itmTyp_ul: tag = Tag_list_itm_li_bgn; break;
 			case Xop_list_tkn_.List_itmTyp_dt: tag = Tag_list_itm_dt_bgn; break;
 			case Xop_list_tkn_.List_itmTyp_dd: tag = Tag_list_itm_dd_bgn; break;
-			default: throw Exc_.new_unhandled(type);
+			default: throw Err_.new_unhandled(type);
 		}
 		bfr.Add_byte_nl();
 		if (indent_level > 0) bfr.Add_byte_repeat(Byte_ascii.Space, indent_level * 2);
@@ -223,7 +223,7 @@ public class Xoh_html_wtr {
 			case Xop_list_tkn_.List_itmTyp_ul: tag = Tag_list_grp_ul_end; break;
 			case Xop_list_tkn_.List_itmTyp_dd:
 			case Xop_list_tkn_.List_itmTyp_dt: tag = Tag_list_grp_dl_end; break;
-			default: throw Exc_.new_unhandled(type);
+			default: throw Err_.new_unhandled(type);
 		}
 		bfr.Add_byte_nl();
 		if (indent_level > 0) bfr.Add_byte_repeat(Byte_ascii.Space, indent_level * 2);
@@ -238,7 +238,7 @@ public class Xoh_html_wtr {
 			case Xop_list_tkn_.List_itmTyp_ul: tag = Tag_list_itm_li_end; break;
 			case Xop_list_tkn_.List_itmTyp_dt: tag = Tag_list_itm_dt_end; break;
 			case Xop_list_tkn_.List_itmTyp_dd: tag = Tag_list_itm_dd_end; break;
-			default: throw Exc_.new_unhandled(type);
+			default: throw Err_.new_unhandled(type);
 		}
 		bfr.Add_byte_if_not_last(Byte_ascii.Nl);
 		if (indent_level > 0) bfr.Add_byte_repeat(Byte_ascii.Space, indent_level * 2);
@@ -267,13 +267,13 @@ public class Xoh_html_wtr {
 			case Xop_para_tkn.Tid_none:		break;
 			case Xop_para_tkn.Tid_para:		bfr.Add(Tag_para_end).Add_byte_nl(); break;
 			case Xop_para_tkn.Tid_pre:			bfr.Add(Tag_pre_end).Add_byte_nl(); break;
-			default:								throw Exc_.new_unhandled(para.Para_end());
+			default:								throw Err_.new_unhandled(para.Para_end());
 		}
 		switch (para.Para_bgn()) {
 			case Xop_para_tkn.Tid_none:		break;
 			case Xop_para_tkn.Tid_para:		Para_assert_tag_starts_on_nl(bfr, para.Src_bgn()); bfr.Add(Tag_para_bgn); break;
 			case Xop_para_tkn.Tid_pre:			Para_assert_tag_starts_on_nl(bfr, para.Src_bgn()); bfr.Add(Tag_pre_bgn); break;
-			default:								throw Exc_.new_unhandled(para.Para_bgn());
+			default:								throw Err_.new_unhandled(para.Para_bgn());
 		}
 		if (para.Space_bgn() > 0)
 			bfr.Add_byte_repeat(Byte_ascii.Space, para.Space_bgn());
@@ -513,7 +513,7 @@ public class Xoh_html_wtr {
 			bfr.Add(atr_key);
 			bfr.Add_byte(Byte_ascii.Eq);
 		}
-		byte quote_byte = atr.Quote_byte(); if (quote_byte == Byte_ascii.Nil) quote_byte = Byte_ascii.Quote;
+		byte quote_byte = atr.Quote_byte(); if (quote_byte == Byte_ascii.Null) quote_byte = Byte_ascii.Quote;
 		bfr.Add_byte(quote_byte);
 		if (atr.Key_tid() == Xop_xatr_itm.Key_tid_id) {	// ids should not have spaces; DATE:2013-04-01
 			if (atr.Val_bry() == null)

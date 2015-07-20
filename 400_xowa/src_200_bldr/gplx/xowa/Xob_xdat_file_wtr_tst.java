@@ -26,9 +26,9 @@ public class Xob_xdat_file_wtr_tst {
 		tst_Write(wtr, ">a", "<1>a");
 		tst_Write(wtr, ">b", "<1>a>b");
 		tst_Add_idx(wtr, 7);
-		wtr.Bfr().Add(Bry_.new_u8("<2>b>cc"));
+		wtr.Bfr().Add(Bry_.new_a7("<2>b>cc"));
 		tst_Add_idx(wtr, 15);
-		wtr.Bfr().Add(Bry_.new_u8("<3>c>dd"));
+		wtr.Bfr().Add(Bry_.new_a7("<3>c>dd"));
 		tst_Add_idx(wtr, 23);
 		tst_Flush(wtr, String_.Concat
 			( "!!!!(|!!!!)|!!!!)|\n"

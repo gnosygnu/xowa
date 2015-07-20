@@ -43,7 +43,6 @@ import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Button;
 import org.omg.PortableServer.THREAD_POLICY_ID;
 
-import gplx.core.threads.Thread_adp_;
 import gplx.core.threads.*;
 public class Swt_kit implements Gfui_kit {
 	private final KeyValHash ctor_args = KeyValHash.new_(); private final KeyValHash ctor_args_null = KeyValHash.new_();
@@ -208,7 +207,7 @@ public class Swt_kit implements Gfui_kit {
 			return rv;
 		}
 		catch (Exception e) {
-			Gfo_usr_dlg_.I.Warn_many("", "", "error while calculating font height; err=~{0}", Err_.Message_gplx_brief(e));
+			Gfo_usr_dlg_.I.Warn_many("", "", "error while calculating font height; err=~{0}", Err_.Message_gplx_full(e));
 			return 8;
 		}
 	}
@@ -323,7 +322,7 @@ class Swt_gui_cmd implements GfuiInvkCmd, Runnable {
 			try {target.Invk(invk_ctx, invk_ikey, invk_key, invk_msg);}
 			catch (Exception e) {
 				if (kit.Kit_mode__term()) return;	// NOTE: if shutting down, don't warn; warn will try to write to status.bar, which will fail b/c SWT is shutting down; failures will try to write to status.bar again, causing StackOverflow exception; DATE:2014-05-04
-				usr_dlg.Warn_many("", "", "fatal error while running; key=~{0} err=~{1}", invk_key, Err_.Message_gplx_brief(e));
+				usr_dlg.Warn_many("", "", "fatal error while running; key=~{0} err=~{1}", invk_key, Err_.Message_gplx_full(e));
 			}
 		}
 	} 

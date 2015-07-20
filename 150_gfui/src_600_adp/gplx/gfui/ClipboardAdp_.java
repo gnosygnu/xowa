@@ -37,7 +37,7 @@ public class ClipboardAdp_ {
 				Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 		String rv = "";
 		try {rv = clipboard.getData(DataFlavor.stringFlavor).toString();}
-		catch (Exception e) {throw Exc_.new_exc(e, "ui", "clipboard get_data failed");}
+		catch (Exception e) {throw Err_.new_exc(e, "ui", "clipboard get_data failed");}
 		if (Op_sys.Cur().Tid_is_wnt()) {	// WORKAROUND:JAVA: On Windows, Clipboard will have \r\n, but Java automatically converts to \n
 			String_bldr remake = String_bldr_.new_();
 			for (int i = 0; i < String_.Len(rv); i++) {

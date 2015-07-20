@@ -36,7 +36,7 @@ public class Prefs_mgr implements GfoInvkAble {
 		props_get_fmtr.Fmt_(src);
 		Bry_bfr bfr = Bry_bfr.new_();
 		try {src = props_get_fmtr.Fmt_(src).Bld_bry_none(bfr);}
-		catch (Exception e) {src = Bry_.Add(src, Bry_.new_u8(Err_.Message_gplx_brief(e)));}
+		catch (Exception e) {src = Bry_.Add(src, Bry_.new_u8(Err_.Message_gplx_full(e)));}
 		Html_nde[] hndes = html_rdr.Parse_as_ary(src);
 		hndes = Html_selecter.Select(src, hndes, atrs_hash);
 		int pos = 0;
@@ -93,11 +93,11 @@ public class Prefs_mgr implements GfoInvkAble {
 		get_str  = Scrub_tidy_trailing_nl_in_textarea(tidy_enabled, elem_tid, get_str);
 		if (String_.Eq(get_str, hnde_val)) return;
 		try		{app.Cfg_mgr().Set_by_app(String_.new_u8(get_cmd), hnde_val);}
-		catch (Exception e) {app.Usr_dlg().Warn_many("", "", "pref update failed: code=~{0} err=~{1}", String_.new_u8(eval_code), Err_.Message_gplx_brief(e));}
+		catch (Exception e) {app.Usr_dlg().Warn_many("", "", "pref update failed: code=~{0} err=~{1}", eval_code, Err_.Message_gplx_full(e));}
 	}
 	private Object Eval_run(byte[] cmd) {
 		try {return Eval(cmd);}
-		catch (Exception e) {Exc_.Noop(e); return null;}		
+		catch (Exception e) {Err_.Noop(e); return null;}		
 	}
 	private byte[] Parse_wikitext_to_html(byte[] src) {
 		Xowe_wiki wiki = app.Usere().Wiki();	// NOTE: this limits prefs to home_wiki only
@@ -122,10 +122,10 @@ public class Prefs_mgr implements GfoInvkAble {
 		else if	(Bry_.Eq(elem_name, Nde_input)) {
 			byte[] input_type = hnde.Atrs_val_by_key_bry(Input_type);
 			if 		(input_type == null) 						return Elem_tid_input_text;// treat <input /> as <input type='text'/>
-			if		(Bry_.Eq(input_type, Type_text))		return Elem_tid_input_text;
-			else if	(Bry_.Eq(input_type, Type_checkbox))	return Elem_tid_input_checkbox;
-			else if	(Bry_.Eq(input_type, Type_combo))		return Elem_tid_input_combo;
-			else if	(Bry_.Eq(input_type, Type_xowa_io))		return Elem_tid_input_xowa_io;
+			if		(Bry_.Eq(input_type, Type_text))			return Elem_tid_input_text;
+			else if	(Bry_.Eq(input_type, Type_checkbox))		return Elem_tid_input_checkbox;
+			else if	(Bry_.Eq(input_type, Type_combo))			return Elem_tid_input_combo;
+			else if	(Bry_.Eq(input_type, Type_xowa_io))			return Elem_tid_input_xowa_io;
 			else 												return Elem_tid_null;
 		}
 		else													return Elem_tid_null;

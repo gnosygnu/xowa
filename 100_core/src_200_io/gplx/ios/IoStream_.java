@@ -36,7 +36,7 @@ public class IoStream_ {
 	public static Object				input_stream_(Io_url url)		{
 				try {
 			return new java.io.FileInputStream(url.Raw());
-		} catch (Exception e) {throw Exc_.new_("file not found", "url", url.Raw());}
+		} catch (Exception e) {throw Err_.new_wo_type("file not found", "url", url.Raw());}
 			}
 }
 class IoStream_null implements IoStream {
@@ -76,7 +76,7 @@ class IoStream_base implements IoStream {
 			int rv = under.read(array, offset, count);
 			return rv == -1 ? 0 : rv;	// NOTE: fis returns -1 if nothing read; .NET returned 0; Hash will fail if -1 returned (will try to create array of 0 length)
 		}	// NOTE: fis keeps track of offset, only need to pass in array (20110606: this NOTE no longer seems to make sense; deprecate)
-		catch 	(IOException e) {throw Exc_.new_exc(e, "io", "file read failed", "url", url);}
+		catch 	(IOException e) {throw Err_.new_exc(e, "io", "file read failed", "url", url);}
 	}
 	public long Seek(long seek_pos) {
 		try {
@@ -84,7 +84,7 @@ class IoStream_base implements IoStream {
 			pos = under.getFilePointer();
 			return pos;
 		}
-		catch 	(IOException e) {throw Exc_.new_exc(e, "io", "seek failed", "url", url);}
+		catch 	(IOException e) {throw Err_.new_exc(e, "io", "seek failed", "url", url);}
 	}
 	@gplx.Virtual public void Write(byte[] array, int offset, int count) {bfr.Add_mid(array, offset, offset + count); this.Flush();} Bry_bfr bfr = Bry_bfr.reset_(16);
 	public void Write_and_flush(byte[] bry, int bgn, int end) {
@@ -103,7 +103,7 @@ class IoStream_base implements IoStream {
 			for (int i = 0; i < buffer_len; i++)
 				buffer[i] = bry[i + buffer_bgn];
 			try 	{under.write(buffer, 0, buffer_len);}
-			catch 	(IOException e) {throw Exc_.new_exc(e, "io", "write failed", "url", url);}
+			catch 	(IOException e) {throw Err_.new_exc(e, "io", "write failed", "url", url);}
 			buffer_bgn = buffer_end;
 		}
 //		this.Rls();
@@ -126,9 +126,9 @@ class IoStream_base implements IoStream {
 			if (mode_is_append) under.seek(under.length());
 //			else				under.seek(0);
 		}
-		catch 	(IOException e) {throw Exc_.new_exc(e, "io", "seek failed", "url", url);}
+		catch 	(IOException e) {throw Err_.new_exc(e, "io", "seek failed", "url", url);}
 		try {under.write(bfr.Bfr(), 0, bfr.Len());}
-		catch 	(IOException e) {throw Exc_.new_exc(e, "io", "write failed", "url", url);}
+		catch 	(IOException e) {throw Err_.new_exc(e, "io", "write failed", "url", url);}
 		bfr.Clear();
 	}
 	@gplx.Virtual public void Rls() {
@@ -155,10 +155,10 @@ class IoStream_base implements IoStream {
 				break;
 		}
 		try {rv.under = new RandomAccessFile(file, ctor_mode);} 
-		catch (FileNotFoundException e) {throw Exc_.new_exc(e, "io", "file open failed", "url", url);}
+		catch (FileNotFoundException e) {throw Err_.new_exc(e, "io", "file open failed", "url", url);}
 		if (mode == IoStream_.Mode_wtr_create) {
 			try {rv.under.setLength(0);}
-			catch (IOException e) {throw Exc_.new_exc(e, "io", "file truncate failed", "url", url);}
+			catch (IOException e) {throw Err_.new_exc(e, "io", "file truncate failed", "url", url);}
 		}
 		rv.length = file.length();
 		return rv;

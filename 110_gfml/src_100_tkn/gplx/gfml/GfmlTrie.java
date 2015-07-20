@@ -48,7 +48,7 @@ public class GfmlTrie {
 		return result;
 	}
 	public void Add(String symbol, Object data) {
-		if (data == null) throw Exc_.new_("null objects cannot be registered", "symbol", symbol);
+		if (data == null) throw Err_.new_wo_type("null objects cannot be registered", "symbol", symbol);
 
 		char[] ary = String_.XtoCharAry(symbol); int lastIndex = ary.length - 1;
 		IntObjHash_base curLink = rootLink;

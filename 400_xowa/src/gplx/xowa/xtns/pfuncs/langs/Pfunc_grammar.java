@@ -26,7 +26,7 @@ public class Pfunc_grammar extends Pf_func_base {
 		Xol_lang lang = ctx.Cur_page().Lang();
 		boolean pass = false;
 		try {pass = lang.Grammar().Grammar_eval(bfr, lang, word, argx);}
-		catch (Exception e) {Exc_.Noop(e);}
+		catch (Exception e) {Err_.Noop(e);}
 		if (!pass) Xot_invk_tkn.Print_not_found(bfr, ctx.Wiki().Ns_mgr(), this.Name());
 	}
 }	

@@ -37,7 +37,7 @@ public class Xob_diff_regy_make_cmd extends Xob_itm_basic_base implements Xob_cm
 			Sqlite_engine_.Idx_create(make_db_provider, Xob_diff_regy_tbl.Idx_xfer_regy__join);
 		}
 		catch (Exception exc) {
-			app.Usr_dlg().Warn_many("", "", "error while making indexes: err=~{0}", Err_.Message_gplx(exc));
+			app.Usr_dlg().Warn_many("", "", "error while making indexes: err=~{0}", Err_.Message_gplx_full(exc));
 		}
 	}
 	private void Make_diff_regy(Db_conn make_db_provider) {

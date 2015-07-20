@@ -23,7 +23,7 @@ class Insider_xtn_skin_itm implements Xopg_xtn_skin_itm {
 	private Insider_html_bldr html_bldr;
 	public Insider_xtn_skin_itm(Insider_html_bldr html_bldr) {this.html_bldr = html_bldr;}
 	public byte Tid() {return Xopg_xtn_skin_itm_tid.Tid_sidebar;}
-	public byte[] Key() {return KEY;} public static final byte[] KEY = Bry_.new_u8("Insider");
+	public byte[] Key() {return KEY;} public static final byte[] KEY = Bry_.new_a7("Insider");
 	public List_adp Itms() {return itms;}
 	public void Add(byte[] itm) {itms.Add(itm);}
 	public void Write(Bry_bfr bfr, Xoae_page page) {

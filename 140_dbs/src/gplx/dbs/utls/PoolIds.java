@@ -42,7 +42,7 @@ public class PoolIds {
 		if (rv == 0) {
 			rv = conn.Exec_qry(Db_qry_.insert_(Tbl_Name).Arg_(Fld_id_path, url).Arg_(Fld_id_next_id, val));
 		}
-		if (rv != 1) throw Exc_.new_("failed to update nextId", "url", url, "nextId", val);
+		if (rv != 1) throw Err_.new_wo_type("failed to update nextId", "url", url, "nextId", val);
 	}
 	public static final String Tbl_Name					= "pool_ids";
 	@gplx.Internal protected static final String Fld_id_path				= "id_path";

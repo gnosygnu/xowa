@@ -51,12 +51,12 @@ public class Db_qry__select_cmd implements Db_qry {
 	public Sql_from From() {return from;} Sql_from from;
 	public Db_qry__select_cmd From_(String tblName) {return From_(tblName, null);}
 	public Db_qry__select_cmd From_(String tblName, String alias) {
-		if (from != null) throw Exc_.new_("super table already defined", "from", from.Tbls().Count());
+		if (from != null) throw Err_.new_wo_type("super table already defined", "from", from.Tbls().Count());
 		from = Sql_from.new_(Sql_tbl_src.new_().JoinType_(Sql_join_itmType.From).TblName_(tblName).Alias_(alias));
 		return this;
 	}
 	public Db_qry__select_cmd Join_(String name, String alias, Sql_join_itm... ary) {
-		if (from == null) throw Exc_.new_("super table is not defined");
+		if (from == null) throw Err_.new_wo_type("super table is not defined");
 		Sql_tbl_src tbl = Sql_tbl_src.new_().JoinType_(Sql_join_itmType.Inner).TblName_(name).Alias_(alias);
 		for (Sql_join_itm itm : ary)
 			tbl.JoinLinks().Add(itm);
@@ -118,7 +118,7 @@ public class Db_qry__select_cmd implements Db_qry {
 	}
 	public Sql_group_by GroupBy() {return groupBy;} Sql_group_by groupBy = null;
 	public Db_qry__select_cmd GroupBy_(String... flds) {
-		if (groupBy != null) throw Exc_.new_("group by already defined", "group", groupBy);
+		if (groupBy != null) throw Err_.new_wo_type("group by already defined", "group", groupBy);
 		groupBy = Sql_group_by.new_(flds);
 		return this;
 	}

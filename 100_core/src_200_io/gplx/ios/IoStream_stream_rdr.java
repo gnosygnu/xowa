@@ -21,7 +21,7 @@ public class IoStream_stream_rdr implements IoStream {
 		try {
 						return stream.read(bfr, bfr_bgn, bfr_len);
 					}
-		catch (Exception e) {throw Exc_.new_exc(e, "core", "failed to read from stream");}
+		catch (Exception e) {throw Err_.new_exc(e, "core", "failed to read from stream");}
 	}
 	public IoStream UnderRdr_(Object v) {this.stream = (java.io.InputStream)v; return this;}  java.io.InputStream stream;	
 	public Object UnderRdr() {return stream;}

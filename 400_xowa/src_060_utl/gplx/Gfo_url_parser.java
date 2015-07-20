@@ -137,7 +137,7 @@ public class Gfo_url_parser {
 	private void Parse_site(byte[] src, int bgn, int end) {
 		int dot_count = 0, dot_pos_0 = -1, dot_pos_1 = -1;
 		boolean loop = true;
-		byte b = Byte_ascii.Nil;
+		byte b = Byte_ascii.Null;
 		while (loop) {
 			if (bgn == end) {
 				url.Err_(Gfo_url.Err_site_missing);

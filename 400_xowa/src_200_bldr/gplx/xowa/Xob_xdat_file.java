@@ -108,7 +108,7 @@ public class Xob_xdat_file {
 			wtr.Write(bfr.Bfr(), 0, bfr.Len());
 			wtr.Flush();
 		}
-		catch (Exception e) {throw Exc_.new_exc(e, "xo", "failed to save file", "url", url.Xto_api());}
+		catch (Exception e) {throw Err_.new_exc(e, "xo", "failed to save file", "url", url.Xto_api());}
 		finally {
 			wtr.Rls();
 		}
@@ -146,7 +146,7 @@ public class Xob_xdat_file {
 	public Xob_xdat_file Clear() {src = null; itm_ends = Int_.Ary_empty; return this;}
 	private int[] itm_ends = Int_.Ary_empty; private int itm_0_bgn;
 	public Xob_xdat_file Parse(byte[] src, int src_len, Io_url url) {// SEE:NOTE_1;xdat format
-		if (src_len == 0) throw Exc_.new_("file cannot be empty for parse", "url", url.Raw());
+		if (src_len == 0) throw Err_.new_wo_type("file cannot be empty for parse", "url", url.Raw());
 		int itm_count = 0, tmp_len = Parse_tmp_len; int[] tmp = Parse_tmp;
 		try {
 			int slot_bgn = 0, slot_old = 0, slot_new = 0;
@@ -171,7 +171,7 @@ public class Xob_xdat_file {
 				itm_ends[i] = tmp[i];
 			itm_0_bgn = slot_bgn + Len_itm_dlm;
 			this.src = Bry_.Mid(src, 0, itm_ends_last + itm_0_bgn);
-		} catch (Exception e) {throw Exc_.new_exc(e, "xo", "failed to parse idx", "itm_count", itm_count, "url", url.Raw());}
+		} catch (Exception e) {throw Err_.new_exc(e, "xo", "failed to parse idx", "itm_count", itm_count, "url", url.Raw());}
 		return this;
 	}	private static final int Parse_tmp_len = 8 * 1024; static int[] Parse_tmp = new int[Parse_tmp_len];
 	static final int Len_itm_dlm = 1, Len_idx_itm = 6, Offset_base85 = 4;	// 6 = 5 (base85_int) + 1 (new_line/pipe)
@@ -196,8 +196,8 @@ public class Xob_xdat_file {
 	}
 }
 class Xob_xdat_file_ {
-	public static int BinarySearch(int itm_0_bgn, byte[] src, int[] itm_ends, byte[] lkp, int lkp_bgn, byte lkp_dlm, int itm_end_adj, boolean exact, Xob_xdat_itm xdat_itm) {if (lkp == null) throw Exc_.new_null("lkp is null");
-		int itm_ends_len = itm_ends.length; if (itm_ends_len == 0) throw Exc_.new_("itm_ends_len cannot have 0 itms");
+	public static int BinarySearch(int itm_0_bgn, byte[] src, int[] itm_ends, byte[] lkp, int lkp_bgn, byte lkp_dlm, int itm_end_adj, boolean exact, Xob_xdat_itm xdat_itm) {if (lkp == null) throw Err_.new_null();
+		int itm_ends_len = itm_ends.length; if (itm_ends_len == 0) throw Err_.new_wo_type("itm_ends_len cannot have 0 itms");
 		int lo = -1, hi = itm_ends_len - 1; // NOTE: -1 is necessary; see test
 		int itm_idx = (hi - lo) / 2;
 		int lkp_len = lkp.length;

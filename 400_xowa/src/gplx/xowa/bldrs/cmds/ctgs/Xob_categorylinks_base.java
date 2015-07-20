@@ -47,7 +47,7 @@ public abstract class Xob_categorylinks_base extends Xob_sql_dump_base implement
 				case Byte_ascii.Ltr_f:
 				case Byte_ascii.Ltr_p:	cur_tid = char_0; break;
 				case Byte_ascii.Ltr_s:	cur_tid = Byte_ascii.Ltr_c; break; 
-				default:				throw Exc_.new_unhandled(char_0);
+				default:				throw Err_.new_unhandled(char_0);
 			}
 			if (cur_collation_is_uca) {
 				if (trie == null) {
@@ -70,7 +70,7 @@ public abstract class Xob_categorylinks_base extends Xob_sql_dump_base implement
 		wiki.Html_mgr().Importing_ctgs_(Bool_.N);
 	}		
 	private static final byte[] Fld_cl_from = Bry_.new_a7("cl_from"), Fld_cl_to = Bry_.new_a7("cl_to"), Fld_cl_timestamp = Bry_.new_a7("cl_timestamp"), Fld_cl_collation = Bry_.new_a7("cl_collation"), Fld_cl_sortkey = Bry_.new_a7("cl_sortkey"), Fld_cl_type = Bry_.new_a7("cl_type");
-	private static final byte[] Collation_uca = Bry_.new_u8("uca"), Sortkey_space = new byte[] {Byte_ascii.Space};
+	private static final byte[] Collation_uca = Bry_.new_a7("uca"), Sortkey_space = new byte[] {Byte_ascii.Space};
 }
 class Xoctg_link_sql_sorter implements gplx.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {

@@ -666,7 +666,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 					case Xop_xnde_tag_.Tid_listing_sleep:			xnde_xtn = tkn_mkr.Xnde_listing(tag_id); break;
 					case Xop_xnde_tag_.Tid_timeline:
 						boolean log_wkr_enabled = Timeline_log_wkr != Xop_log_basic_wkr.Null; if (log_wkr_enabled) Timeline_log_wkr.Log_end_xnde(ctx.Cur_page(), Xop_log_basic_wkr.Tid_timeline, src, xnde);
-						ctx.Cur_page().Html_data().Module_mgr().Itm__timeline().Enabled_y_();
+						ctx.Cur_page().Html_data().Head_mgr().Itm__timeline().Enabled_y_();
 						break;
 					case Xop_xnde_tag_.Tid_xowa_tag_bgn:
 					case Xop_xnde_tag_.Tid_xowa_tag_end:
@@ -691,9 +691,9 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 					catch (Exception e) {
 						String err_msg = String_.Format("failed to render extension: title={0} excerpt={1} err={2}", ctx.Cur_page().Ttl().Full_txt()
 							, Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn())
-							, Err_.Message_gplx_brief(e));
+							, Err_.Message_gplx_log(e));
 						if (Env_.Mode_testing()) 
-							throw Exc_.new_exc(e, "xo", err_msg);
+							throw Err_.new_exc(e, "xo", err_msg);
 						else
 							ctx.Wiki().Appe().Usr_dlg().Warn_many("", "", err_msg);
 					}

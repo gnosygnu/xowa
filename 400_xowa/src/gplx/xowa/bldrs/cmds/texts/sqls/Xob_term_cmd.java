@@ -23,7 +23,7 @@ public class Xob_term_cmd extends Xob_term_base {
 	@Override public void Cmd_end_hook() {
 		Io_mgr.I.DeleteDirDeep(wiki.Fsys_mgr().Tmp_dir());
 		Db_cfg_tbl cfg_tbl = wiki.Data__core_mgr().Tbl__cfg();
-		cfg_tbl.Insert_bry(Xow_cfg_consts.Grp__wiki_init, "props.bldr_version", wiki.Props().Bldr_version());
+		cfg_tbl.Insert_bry(Xow_cfg_consts.Grp__wiki_init, Xow_cfg_consts.Key__init__bldr_version, wiki.Props().Bldr_version());
 		cfg_tbl.Insert_bry(Xow_cfg_consts.Grp__wiki_init, Xow_cfg_consts.Key__init__main_page, wiki.Props().Main_page());
 		cfg_tbl.Insert_bry(Xow_cfg_consts.Grp__wiki_init, "props.siteinfo_misc", wiki.Props().Siteinfo_misc());
 		cfg_tbl.Insert_bry(Xow_cfg_consts.Grp__wiki_init, "props.siteinfo_mainpage", wiki.Props().Siteinfo_mainpage());

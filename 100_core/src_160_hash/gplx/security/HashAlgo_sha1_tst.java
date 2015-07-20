@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.security; import gplx.*;
 import org.junit.*;
-import gplx.ios.*; /*IoStream*/
+import gplx.core.consoles.*; import gplx.ios.*; /*IoStream*/
 public class HashAlgo_sha1_tst {
 	@Test  public void Empty() {
 		tst_CalcBase16FromString("", "da39a3ee5e6b4b0d3255bfef95601890afd80709");
@@ -37,7 +37,7 @@ public class HashAlgo_sha1_tst {
 	}
 	void tst_CalcBase16FromString(String raw, String expd) {
 		IoStream stream = IoStream_.mem_txt_(Io_url_.Empty, raw);
-		String actl = HashAlgo_.Sha1.CalcHash(ConsoleDlg_.Null, stream);
+		String actl = HashAlgo_.Sha1.CalcHash(Console_adp_.Noop, stream);
 		Tfds.Eq(expd, actl);
 	}
 	/*

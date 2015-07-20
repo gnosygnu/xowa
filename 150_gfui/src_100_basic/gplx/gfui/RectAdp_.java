@@ -28,7 +28,7 @@ public class RectAdp_ {
 		try {
 			String[] ary = String_.Split(raw, ",");
 			return RectAdp_.new_(Int_.parse_(ary[0]), Int_.parse_(ary[1]), Int_.parse_(ary[2]), Int_.parse_(ary[3]));
-		}	catch(Exception exc) {throw Exc_.new_parse_exc(exc, RectAdp.class, raw);}
+		}	catch(Exception exc) {throw Err_.new_parse_exc(exc, RectAdp.class, raw);}
 	}
 	public static String Xto_str(RectAdp rect) {return String_.Format("{0},{1},{2},{3}", rect.X(), rect.Y(), rect.Width(), rect.Height());}
 }

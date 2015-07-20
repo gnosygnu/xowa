@@ -45,7 +45,7 @@ public class Scrib_lib_title implements Scrib_lib {
 			case Proc_getCurrentTitle:					return GetCurrentTitle(args, rslt);
 			case Proc_protectionLevels:					return ProtectionLevels(args, rslt);
 			case Proc_cascadingProtection:				return CascadingProtection(args, rslt);
-			default: throw Exc_.new_unhandled(key);
+			default: throw Err_.new_unhandled(key);
 		}
 	}
 	private static final int Proc_newTitle = 0, Proc_makeTitle = 1, Proc_getExpensiveData = 2, Proc_getUrl = 3, Proc_getContent = 4, Proc_getFileInfo = 5, Proc_getCurrentTitle = 6, Proc_protectionLevels = 7, Proc_cascadingProtection = 8;
@@ -62,7 +62,7 @@ public class Scrib_lib_title implements Scrib_lib {
 		Xowe_wiki wiki = core.Wiki();
 		byte[] ns_bry = null;
 		if (ns_obj != null) {
-			ns_bry = Parse_ns(wiki, ns_obj); if (ns_bry == null) throw Exc_.new_("unknown ns", "ns", Object_.Xto_str_strict_or_empty(ns_bry));
+			ns_bry = Parse_ns(wiki, ns_obj); if (ns_bry == null) throw Err_.new_wo_type("unknown ns", "ns", Object_.Xto_str_strict_or_empty(ns_bry));
 		}
 		if (ns_bry != null) {
 			Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
@@ -78,7 +78,7 @@ public class Scrib_lib_title implements Scrib_lib {
 		byte[] ttl_bry = args.Pull_bry(0);
 		byte[] url_func_bry = args.Pull_bry(1);
 		Object url_func_obj = url_func_hash.Get_by(url_func_bry);
-		if (url_func_obj == null) throw Exc_.new_("url_function is not valid", "url_func", String_.new_u8(url_func_bry));
+		if (url_func_obj == null) throw Err_.new_wo_type("url_function is not valid", "url_func", String_.new_u8(url_func_bry));
 		byte url_func_tid = ((Byte_obj_val)url_func_obj).Val();
 		byte[] qry_bry = args.Extract_qry_args(wiki, 2);
 		// byte[] proto = Scrib_kv_utl_.Val_to_bry_or(values, 3, null);	// NOTE: Scribunto has more conditional logic around argument 2 and setting protocols; DATE:2014-07-07

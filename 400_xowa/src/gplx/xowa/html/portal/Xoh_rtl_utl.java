@@ -65,9 +65,9 @@ public class Xoh_rtl_utl {
 		bfr.Add_mid(src, li_n_end, ul_end);				// add from nth "</li>" -> "</ul>"
 	}
 	private static final byte[]
-	  Ul_bgn = Bry_.new_u8("<ul")
-	, Ul_end = Bry_.new_u8("</ul>")
-	, Li_bgn = Bry_.new_u8("<li")
-	, Li_end = Bry_.new_u8("</li>")
+	  Ul_bgn = Bry_.new_a7("<ul")
+	, Ul_end = Bry_.new_a7("</ul>")
+	, Li_bgn = Bry_.new_a7("<li")
+	, Li_end = Bry_.new_a7("</li>")
 	;
 }

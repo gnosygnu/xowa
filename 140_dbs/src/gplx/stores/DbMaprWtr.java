@@ -63,7 +63,7 @@ public class DbMaprWtr extends DataWtr_base implements DataWtr {
 	}
 	@Override public void WriteData(String name, Object val) {
 		DbMaprItm ownerMapr = (DbMaprItm)mgr.MaprStack().Get_at_last();
-		String fld = ""; try {fld = ownerMapr.Flds_get(name).DbFld();} catch (Exception e) {throw Exc_.new_exc(e, "db", "failed to fetch fld from mapr", "key", name);}
+		String fld = ""; try {fld = ownerMapr.Flds_get(name).DbFld();} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to fetch fld from mapr", "key", name);}
 		WriteDataVal(fld, val);
 	}
 	void WriteDataVal(String fld, Object val) {

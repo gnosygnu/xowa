@@ -25,7 +25,7 @@ class Upgrader_v00_02_01 {
 		usr_dlg.Note_many(GRP_KEY, "run.bgn", "migrate.bgn for ~{0}", wiki.Domain_str());
 		Io_url siteinfo_url = cfg_dir.GenSubFil_nest("siteInfo.xml");
 		usr_dlg.Note_many(GRP_KEY, "siteinfo.bgn", "siteinfo.bgn for ~{0}", siteinfo_url.Raw());
-		String siteinfo_str = Io_mgr.I.LoadFilStr_args(siteinfo_url).MissingIgnored_(true).Exec(); if (String_.Len_eq_0(siteinfo_str)) throw Exc_.new_("could not find siteinfo.xml", "url", siteinfo_url.Raw());
+		String siteinfo_str = Io_mgr.I.LoadFilStr_args(siteinfo_url).MissingIgnored_(true).Exec(); if (String_.Len_eq_0(siteinfo_str)) throw Err_.new_wo_type("could not find siteinfo.xml", "url", siteinfo_url.Raw());
 		usr_dlg.Note_many(GRP_KEY, "siteinfo.parse", "parsing siteinfo");
 		gplx.xowa.bldrs.xmls.Xob_siteinfo_parser.Siteinfo_parse(wiki, usr_dlg, siteinfo_str);	// NOTE: this also resets the namespaces on the wiki; not necessary, but is benign
 		usr_dlg.Note_many(GRP_KEY, "siteinfo.save", "saving siteinfo");

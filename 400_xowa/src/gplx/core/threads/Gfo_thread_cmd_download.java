@@ -38,7 +38,7 @@ public class Gfo_thread_cmd_download implements Gfo_thread_cmd {
 				case Gfui_dlg_msg_.Btn_yes:		Io_mgr.I.DeleteFil(trg); break;
 				case Gfui_dlg_msg_.Btn_no:		return Gfo_thread_cmd_.Init_cancel_step;
 				case Gfui_dlg_msg_.Btn_cancel:	return Gfo_thread_cmd_.Init_cancel_all;
-				default:						throw Exc_.new_unhandled(rslt);
+				default:						throw Err_.new_unhandled(rslt);
 			}
 		}
 		usr_dlg.Prog_many(GRP_KEY, "download.bgn", "contacting web server: '~{0}'", src);	// update progress; some servers (like WMF dump servers) are slow to respond

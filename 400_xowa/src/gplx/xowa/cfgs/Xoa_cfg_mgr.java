@@ -78,7 +78,7 @@ public class Xoa_cfg_mgr implements GfoInvkAble {
 				return Eval_set(wiki, grp.Key_str(), itm.Val());					
 			}
 			default:
-				throw Exc_.new_unhandled(tid_byte);
+				throw Err_.new_unhandled(tid_byte);
 		}
 	}
 	public void Reset_all() {

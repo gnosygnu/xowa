@@ -30,17 +30,17 @@ public class Db_data_rdr extends DataRdr_base implements DataRdr {
 	@Override public String KeyAt(int i) {
 		String rv = null; 
 		try {rv = rdr.getMetaData().getColumnLabel(i + List_adp_.Base1);}
-		catch (SQLException e) {throw Exc_.new_exc(e, "db", "get columnName failed", "i", i, "commandText", commandText);}
+		catch (SQLException e) {throw Err_.new_exc(e, "db", "get columnName failed", "i", i, "commandText", commandText);}
 		return rv;
 	}
 	@Override public Object ReadAt(int i) {
 		Object rv;
-		try {rv = rdr.getObject(i + List_adp_.Base1);} catch(Exception exc) {throw Exc_.new_("could not read val from dataReader; idx not found or rdr not open", "idx", i, "sql", commandText);}
+		try {rv = rdr.getObject(i + List_adp_.Base1);} catch(Exception exc) {throw Err_.new_wo_type("could not read val from dataReader; idx not found or rdr not open", "idx", i, "sql", commandText);}
 		return rv;
 	}
 	@Override public Object Read(String key) {
 		Object rv;
-		try {rv = rdr.getObject(key);} catch(Exception exc) {throw Exc_.new_("could not read val from dataReader; key not found or rdr may not be open", "key", key, "sql", commandText);}
+		try {rv = rdr.getObject(key);} catch(Exception exc) {throw Err_.new_wo_type("could not read val from dataReader; key not found or rdr may not be open", "key", key, "sql", commandText);}
 		return rv;
 	}
 	@Override public DateAdp ReadDate(String key) {
@@ -61,20 +61,20 @@ public class Db_data_rdr extends DataRdr_base implements DataRdr {
 	
 	public boolean MoveNextPeer() {
 		try {return rdr.next();}
-		catch (Exception e) {throw Exc_.new_exc(e, "db", "could not move next; check column casting error in SQL", "sql", commandText);}
+		catch (Exception e) {throw Err_.new_exc(e, "db", "could not move next; check column casting error in SQL", "sql", commandText);}
 	}
-	@Override public DataRdr Subs()							{throw Exc_.new_unimplemented();}
-	public DataRdr Subs_byName(String fld)					{throw Exc_.new_unimplemented();}
-	@Override public DataRdr Subs_byName_moveFirst(String fld)		{throw Exc_.new_unimplemented();}		
+	@Override public DataRdr Subs()							{throw Err_.new_unimplemented();}
+	public DataRdr Subs_byName(String fld)					{throw Err_.new_unimplemented();}
+	@Override public DataRdr Subs_byName_moveFirst(String fld)		{throw Err_.new_unimplemented();}		
 	public void Rls() {
 		try {rdr.close();}
-		catch (SQLException e) {throw Exc_.new_exc(e, "db", "reader dispose failed", "commandText", commandText);}
+		catch (SQLException e) {throw Err_.new_exc(e, "db", "reader dispose failed", "commandText", commandText);}
 		this.EnvVars().Clear();
 	}
 	@gplx.Internal protected Db_data_rdr ctor_db_data_rdr(ResultSet rdr, String commandText) {
 		this.rdr = rdr; this.commandText = commandText; this.Parse_set(false);
 		try {fieldCount = this.rdr.getMetaData().getColumnCount();}
-		catch (SQLException e) {Exc_.new_exc(e, "xo", "get columnCount failed", "commandText", commandText);}
+		catch (SQLException e) {Err_.new_exc(e, "xo", "get columnCount failed", "commandText", commandText);}
 		return this;
 	}
 	@Override public SrlMgr SrlMgr_new(Object o) {return new Db_data_rdr();}

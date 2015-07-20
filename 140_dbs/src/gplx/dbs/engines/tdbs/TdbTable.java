@@ -50,16 +50,16 @@ public class TdbTable {
 		layout = TdbStores.FetchLayout(rdr);
 		GfoNdeRdr ndeRdr = GfoNdeRdr_.as_(rdr );
 		if (ndeRdr != null) {
-			if (ndeRdr.UnderNde() == null) throw Exc_.new_("ndeRdr.UnderNde is null", "name", rdr.NameOfNode());
+			if (ndeRdr.UnderNde() == null) throw Err_.new_wo_type("ndeRdr.UnderNde is null", "name", rdr.NameOfNode());
 			rows = ndeRdr.UnderNde().Subs();
 			flds = ndeRdr.UnderNde().SubFlds();
 		}
 		else {	// XmlRdr needs to load each row again...
-			throw Exc_.new_invalid_op("TableLoad not implemented").Args_add("rdrType", ClassAdp_.NameOf_obj(rdr), "rdrName", rdr.NameOfNode());
+			throw Err_.new_invalid_op("TableLoad not implemented").Args_add("rdrType", ClassAdp_.NameOf_obj(rdr), "rdrName", rdr.NameOfNode());
 		}
 		isLoaded = true;
 	}
 	DsvStoreLayout layout;
 	public static TdbTable as_(Object obj) {return obj instanceof TdbTable ? (TdbTable)obj : null;}
-	public static TdbTable cast_(Object obj) {try {return (TdbTable)obj;} catch(Exception exc) {throw Exc_.new_type_mismatch_w_exc(exc, TdbTable.class, obj);}}
+	public static TdbTable cast_(Object obj) {try {return (TdbTable)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, TdbTable.class, obj);}}
 }

@@ -22,8 +22,8 @@ public class Xowmf_wiki_dump_dirs_parser {
 		int pos = 0;
 		while (true) {
 			int href_bgn = Bry_finder.Move_fwd(src, Tkn_href		, pos);			if (href_bgn == Bry_finder.Not_found) break;
-			int href_end = Bry_finder.Find_fwd(src, Byte_ascii.Quote, href_bgn);	if (href_end == Bry_finder.Not_found) throw Exc_.new_("unable to find date_end", "wiki", wiki, "snip", Bry_.Mid_by_len_safe(src, href_bgn - 3, 25));
-			if (src[href_end - 1] != Byte_ascii.Slash) throw Exc_.new_("href should end in slash", "wiki", wiki, "snip", Bry_.Mid_by_len_safe(src, href_bgn - 3, 25));
+			int href_end = Bry_finder.Find_fwd(src, Byte_ascii.Quote, href_bgn);	if (href_end == Bry_finder.Not_found) throw Err_.new_wo_type("unable to find date_end", "wiki", wiki, "snip", Bry_.Mid_by_len_safe(src, href_bgn - 3, 25));
+			if (src[href_end - 1] != Byte_ascii.Slash) throw Err_.new_wo_type("href should end in slash", "wiki", wiki, "snip", Bry_.Mid_by_len_safe(src, href_bgn - 3, 25));
 			pos = href_end + 1;
 			byte[] href_bry = Bry_.Mid(src, href_bgn, href_end - 1);
 			if (Bry_.Eq(href_bry, Tkn_owner)) continue;	// ignore <a href="../">

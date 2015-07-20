@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
-import gplx.json.*; import gplx.xowa.wikis.*; import gplx.xowa.html.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.apis.xowa.xtns.*; import gplx.xowa.apis.xowa.html.*; import gplx.xowa.users.*;
+import gplx.core.json.*; import gplx.xowa.wikis.*; import gplx.xowa.html.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.apis.xowa.xtns.*; import gplx.xowa.apis.xowa.html.*; import gplx.xowa.users.*;
 import gplx.xowa.xtns.wdatas.parsers.*; import gplx.xowa.xtns.wdatas.pfuncs.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.hwtrs.*;
 public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 	private final Wdata_doc_parser wdoc_parser_v1, wdoc_parser_v2;
@@ -40,7 +40,7 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 	public Json_parser Jdoc_parser() {return jdoc_parser;} private Json_parser jdoc_parser = new Json_parser();
 	public void Init_by_app() {}
 	public Wdata_doc_parser Wdoc_parser(Json_doc jdoc) {
-		Json_itm_kv itm_0 = Json_itm_kv.cast_(jdoc.Root().Subs_get_at(0));										// get 1st node
+		Json_itm_kv itm_0 = Json_itm_kv.cast_(jdoc.Root().Get_at(0));										// get 1st node
 		return Bry_.Eq(itm_0.Key().Data_bry(), Wdata_doc_parser_v2.Bry_type) 
 			|| Bry_.Eq(itm_0.Key().Data_bry(), Wdata_doc_parser_v2.Bry_id) 
 			? wdoc_parser_v2 : wdoc_parser_v1;	// if "type", must be v2

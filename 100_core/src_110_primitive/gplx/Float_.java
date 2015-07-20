@@ -21,8 +21,8 @@ public class Float_ {
 	public static final Class<?> Cls_ref_type = Float.class;
 	public static final float NaN = Float.NaN;;					
 	public static boolean IsNaN(float v) {return Float.isNaN(v);}		
-	public static float cast_(Object obj)	{try {return (Float)obj;} catch(Exception exc) {throw Exc_.new_type_mismatch_w_exc(exc, float.class, obj);}}
-	public static float parse_(String raw)	{try {return Float.parseFloat(raw);} catch(Exception exc) {throw Exc_.new_parse_exc(exc, float.class, raw);}} 
+	public static float cast_(Object obj)	{try {return (Float)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, float.class, obj);}}
+	public static float parse_(String raw)	{try {return Float.parseFloat(raw);} catch(Exception exc) {throw Err_.new_parse_exc(exc, float.class, raw);}} 
 	public static String Xto_str(float v) {
 				int v_int = (int)v;
 		return v - v_int == 0 ? Int_.Xto_str(v_int) : Float.toString(v);

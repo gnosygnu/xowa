@@ -57,7 +57,7 @@ class Xows_db_matcher_bldr {
 				break;
 			case Xows_db_matcher.Tid_not:		break;			// never add "NOT" to db_search
 			case Xows_db_matcher.Tid_null:		break;			// should not happen
-			default:							throw Exc_.new_unhandled(matcher.Tid());
+			default:							throw Err_.new_unhandled(matcher.Tid());
 		}
 	}
 	private List_adp Calc_lowest(List_adp lhs, List_adp rhs) {

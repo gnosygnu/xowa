@@ -461,7 +461,7 @@ class Xop_popup_parser_fxt {
 	public void Clear() {
 		Xoae_app app = Xoa_app_fxt.app_();
 		this.wiki = Xoa_app_fxt.wiki_(app, "en.wiki");
-		parser = wiki.Html_mgr().Module_mgr().Popup_mgr().Parser();
+		parser = wiki.Html_mgr().Head_mgr().Popup_mgr().Parser();
 		parser.Init_by_wiki(wiki);
 		parser.Cfg().Tmpl_read_len_(4);
 		parser.Cfg().Ellipsis_(Bry_.Empty);

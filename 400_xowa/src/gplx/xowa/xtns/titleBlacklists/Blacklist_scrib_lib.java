@@ -29,7 +29,7 @@ public class Blacklist_scrib_lib implements Scrib_lib {
 	public boolean Procs_exec(int key, Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		switch (key) {
 			case Proc_test:										return Test(args, rslt);
-			default: throw Exc_.new_unhandled(key);
+			default: throw Err_.new_unhandled(key);
 		}
 	}
 	private static final int Proc_test = 0;

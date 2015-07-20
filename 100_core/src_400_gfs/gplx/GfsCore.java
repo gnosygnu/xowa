@@ -56,7 +56,7 @@ public class GfsCore implements GfoInvkAble {
 	public Object ExecFile(Io_url url) {return ExecText(Io_mgr.I.LoadFilStr(url));}
 	public Object ExecFile_ignoreMissing(GfoInvkAble root, Io_url url) {
 		if (!Io_mgr.I.ExistsFil(url)) return null; 
-		if (msgParser == null) throw Exc_.new_("msgParser is null");
+		if (msgParser == null) throw Err_.new_wo_type("msgParser is null");
 		return Exec_bry(Io_mgr.I.LoadFilBry(url), root);
 	}
 	public Object Exec_bry(byte[] bry) {return Exec_bry(bry, root);}
@@ -71,7 +71,7 @@ public class GfsCore implements GfoInvkAble {
 		return rv;
 	}
 	public Object ExecText(String text) {
-		if (msgParser == null) throw Exc_.new_("msgParser is null");
+		if (msgParser == null) throw Err_.new_wo_type("msgParser is null");
 		GfsCtx ctx = GfsCtx.new_();
 		return ExecMany(ctx, msgParser.ParseToMsg(text));
 	}
@@ -96,7 +96,7 @@ class GfsCore_ {
 		if		(rv == GfoInvkAble_.Rv_cancel)		return rv;
 		else if (rv == GfoInvkAble_.Rv_unhandled)	{
 			if (ctx.Fail_if_unhandled())
-				throw Exc_.new_("Object does not support key", "key", owner_msg.Key(), "ownerType", ClassAdp_.FullNameOf_obj(owner_invk));
+				throw Err_.new_wo_type("Object does not support key", "key", owner_msg.Key(), "ownerType", ClassAdp_.FullNameOf_obj(owner_invk));
 			else {
 				Gfo_usr_dlg usr_dlg = ctx.Usr_dlg();
 				if (usr_dlg != null) usr_dlg.Warn_many(GRP_KEY, "unhandled_key", "Object does not support key: key=~{0} ownerType=~{1}", owner_msg.Key(), ClassAdp_.FullNameOf_obj(owner_invk));
@@ -119,7 +119,7 @@ class GfsCore_ {
 				if		(type == String.class)					invk = String_.Gfs;
 				else if (Int_.TypeMatch(type))						invk = Int_.Gfs;
 				else if (ClassAdp_.Eq(type, Bool_.Cls_ref_type))	invk = Bool_.Gfs;
-				else throw Exc_.new_("unknown primitive", "type", ClassAdp_.NameOf_type(type), "obj", Object_.Xto_str_strict_or_null_mark(rv));
+				else throw Err_.new_wo_type("unknown primitive", "type", ClassAdp_.NameOf_type(type), "obj", Object_.Xto_str_strict_or_null_mark(rv));
 				primitive = rv;
 			}
 			Object exec_rv = null;

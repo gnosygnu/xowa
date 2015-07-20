@@ -31,7 +31,7 @@ public class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 				case Db_qry_.Tid_select_in_tbl:
 				case Db_qry_.Tid_select:		return Bld_qry_select((Db_qry__select_cmd)cmd);
 				case Db_qry_.Tid_sql:			return ((Db_qry_sql)cmd).Xto_sql();
-				default:						throw Exc_.new_unhandled(cmd.Tid());
+				default:						throw Err_.new_unhandled(cmd.Tid());
 			}
 		}
 	}
@@ -51,7 +51,7 @@ public class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 			sb.Add(Bld_qry_select(cmd.Select()));
 			return sb.Xto_str_and_clear();
 		}
-		int arg_count = cmd.Args().Count(); if (arg_count == 0) throw Exc_.new_("Db_qry_insert has no columns", "base_table", cmd.Base_table());
+		int arg_count = cmd.Args().Count(); if (arg_count == 0) throw Err_.new_wo_type("Db_qry_insert has no columns", "base_table", cmd.Base_table());
 		int last = arg_count - 1;
 		sb.Add_many("INSERT INTO ", cmd.Base_table(), " (");
 		for (int i = 0; i < arg_count; i++) {
@@ -69,7 +69,7 @@ public class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 		return sb.Xto_str_and_clear();
 	}
 	private String Bld_qry_update(Db_qry_update cmd) {
-		int arg_count = cmd.Args().Count(); if (arg_count == 0) throw Exc_.new_("Db_qry_update has no columns", "base_table", cmd.Base_table());
+		int arg_count = cmd.Args().Count(); if (arg_count == 0) throw Err_.new_wo_type("Db_qry_update has no columns", "base_table", cmd.Base_table());
 		sb.Add_many("UPDATE ", cmd.Base_table(), " SET ");
 		for (int i = 0; i < arg_count; i++) {
 			KeyVal pair = cmd.Args().Get_at(i);
@@ -140,7 +140,7 @@ public class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 		sb.Add(" INDEXED BY ").Add(idx_name);
 	}
 	private void Xto_sql_col(String_bldr sb, Object obj) {
-		if (obj == null) throw Exc_.new_null("ColName");
+		if (obj == null) throw Err_.new_null();
 		sb.Add_obj(obj);	// FIXME: options for bracketing; ex: [name]
 	}
 	public void Bld_val(String_bldr sb, Db_arg arg) {
@@ -211,7 +211,7 @@ public class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 			Append_db_obj_ary(sb, (Db_obj_ary_crt)crt);
 		}
 		else {
-			Criteria_fld leaf = Criteria_fld.as_(crt); if (leaf == null) throw Exc_.new_invalid_op(crt.XtoStr());
+			Criteria_fld leaf = Criteria_fld.as_(crt); if (leaf == null) throw Err_.new_invalid_op(crt.XtoStr());
 			sb.Add(leaf.Key());
 			Bld_where_crt(sb, leaf.Crt());
 		}
@@ -224,7 +224,7 @@ public class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 			case Criteria_.Tid_in:			Bld_where_in(sb, Criteria_in.as_(crt)); break;
 			case Criteria_.Tid_like:		Bld_where_like(sb, Criteria_like.as_(crt)); break;
 			case Criteria_.Tid_iomatch:		Bld_where_iomatch(sb, Criteria_ioMatch.as_(crt)); break;
-			default:						throw Exc_.new_unhandled(crt);
+			default:						throw Err_.new_unhandled(crt);
 		}
 	}
 	private void Bld_where_eq(String_bldr sb, Criteria_eq crt) {

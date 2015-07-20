@@ -27,7 +27,7 @@ public class Xob_download_wkr extends Xob_itm_basic_base implements Xob_cmd {
 	public String Cmd_key() {return Xob_cmd_keys.Key_util_download;}
 	public void Cmd_init(Xob_bldr bldr) {}
 	public void Cmd_bgn(Xob_bldr bldr) {
-		if (dump_type == null) throw Exc_.new_("dump_type must be specified");
+		if (dump_type == null) throw Err_.new_wo_type("dump_type must be specified");
 		Xob_dump_file dump_file = Xob_dump_file.new_(wiki.Domain_str(), dump_date, dump_type);
 		if (dump_src == null) {
 			dump_file.Server_url_(app.Setup_mgr().Dump_mgr().Server_urls()[0]);
@@ -43,7 +43,7 @@ public class Xob_download_wkr extends Xob_itm_basic_base implements Xob_cmd {
 		IoEngine_xrg_downloadFil download_wkr = app.Wmf_mgr().Download_wkr().Download_xrg();
 		download_wkr.Src_last_modified_query_(false).Init(dump_src, dump_trg_zip);
 		if (!download_wkr.Exec())
-			usr_dlg.Warn_many("", "", "download failed: src=~{0} trg=~{1} err=~{2}", dump_src, dump_trg_zip.Raw(), Err_.Message_gplx_brief(download_wkr.Rslt_err()));
+			usr_dlg.Warn_many("", "", "download failed: src=~{0} trg=~{1} err=~{2}", dump_src, dump_trg_zip.Raw(), Err_.Message_gplx_full(download_wkr.Rslt_err()));
 		if (unzip) {
 			usr_dlg.Note_many("", "", "unzipping file: now=~{0} trg=~{1}", DateAdp_.Now().XtoStr_fmt_yyyyMMdd_HHmmss(), dump_trg_bin.Raw());
 			Xob_unzip_wkr unzip_wkr = new Xob_unzip_wkr().Init(app).Process_run_mode_(ProcessAdp.Run_mode_sync_block);

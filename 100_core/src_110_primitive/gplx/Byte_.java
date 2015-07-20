@@ -24,13 +24,13 @@ public class Byte_ {
 	, Min_value		= Byte.MIN_VALUE		
 	, Max_value_127	= 127
 	; 
-	public static byte		cast_(Object o)		{try {return (Byte)o;} catch (Exception e) {throw Exc_.new_type_mismatch_w_exc(e, byte.class, o);}}
+	public static byte		cast_(Object o)		{try {return (Byte)o;} catch (Exception e) {throw Err_.new_type_mismatch_w_exc(e, byte.class, o);}}
 	public static byte		parse_(String raw)	{return Byte.parseByte(raw);}	
 	public static byte		parse_or_(String raw, byte or) {
 		if (raw == null) return or;
 		try {
 			return parse_(raw);
-		} catch (Exception e) {Exc_.Noop(e); return or;}
+		} catch (Exception e) {Err_.Noop(e); return or;}
 	}
 	public static byte		By_int(int v)	{return v > 127 ? (byte)(v - 256) : (byte)v;} // PERF?: (byte)(v & 0xff)
 	public static int		Xto_int(byte v) {return v < 0 ? (int)v + 256 : v;}

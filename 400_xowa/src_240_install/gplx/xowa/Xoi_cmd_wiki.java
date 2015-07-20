@@ -74,7 +74,7 @@ class Xoi_cmd_wiki_unzip extends Gfo_thread_cmd_unzip implements Gfo_thread_cmd 
 				case Gfui_dlg_msg_.Btn_yes:		Io_mgr.I.DeleteFil(trg); break;
 				case Gfui_dlg_msg_.Btn_no:		return Gfo_thread_cmd_.Init_cancel_step;
 				case Gfui_dlg_msg_.Btn_cancel:	return Gfo_thread_cmd_.Init_cancel_all;
-				default:						throw Exc_.new_unhandled(rslt);
+				default:						throw Err_.new_unhandled(rslt);
 			}
 		}
 		return Gfo_thread_cmd_.Init_ok;

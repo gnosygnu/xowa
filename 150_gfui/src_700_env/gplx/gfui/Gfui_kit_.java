@@ -25,7 +25,7 @@ public class Gfui_kit_ {
 		if		(String_.Eq(key, Mem().Key()))			return Mem();
 		else if	(String_.Eq(key, Swt().Key()))			return Swt();
 		else if	(String_.Eq(key, Swing().Key()))		return Swing();
-		else											throw Exc_.new_unhandled(key);
+		else											throw Err_.new_unhandled(key);
 	}
 	public static final String Cfg_HtmlBox = "HtmlBox";
 	public static final byte File_dlg_type_open = 0, File_dlg_type_save = 1;

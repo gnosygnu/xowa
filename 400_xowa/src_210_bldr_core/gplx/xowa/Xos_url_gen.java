@@ -19,7 +19,7 @@ package gplx.xowa; import gplx.*;
 import gplx.ios.*;
 public class Xos_url_gen implements Io_url_gen {
 	public Xos_url_gen(Io_url root) {this.root = root;} Io_url root; int idx = 0;
-	public byte[] Ext() {return ext;} public Xos_url_gen Ext_(byte[] v) {ext = v; return this;} private byte[] ext = Bry_.new_u8(".csv");
+	public byte[] Ext() {return ext;} public Xos_url_gen Ext_(byte[] v) {ext = v; return this;} private byte[] ext = Bry_.new_a7(".csv");
 	public Io_url Cur_url() {return cur_url;} Io_url cur_url;
 	public Io_url Nxt_url() {cur_url = bld_fil_(root, idx++, ext); return cur_url;}
 	public Io_url[] Prv_urls() {

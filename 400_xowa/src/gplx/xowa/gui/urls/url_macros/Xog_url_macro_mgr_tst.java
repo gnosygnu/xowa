@@ -29,7 +29,7 @@ public class Xog_url_macro_mgr_tst {
 	@Test  public void Type_custom()		{fxt.Test("wd.q:123"			, "www.wikidata.org/wiki/Q123");}
 	@Test  public void Type_del() {
 		fxt.Test("w:A", "en.wikipedia.org/wiki/A");
-		fxt.Abrv_mgr().Types_mgr().Del(Bry_.new_u8("w"));
+		fxt.Abrv_mgr().Types_mgr().Del(Bry_.new_a7("w"));
 		fxt.Test("w:A", null);
 	}
 	@Test  public void Type_set() {

@@ -44,7 +44,7 @@ class Xohd_page_srl_itm__html_module implements Xohd_page_srl_itm {
 	public int Load(Xog_page hpg, byte[] bry, int bry_len, int itm_bgn, Int_obj_ref count_ref) {
 		itm_bgn += 2; // skip bin_int_abrv of [1, 0]
 		byte flag = bry[itm_bgn];
-		hpg.Module_mgr().Init(Enm_.Has_byte(flag, Tid_math), Enm_.Has_byte(flag, Tid_imap), Enm_.Has_byte(flag, Tid_packed), Enm_.Has_byte(flag, Tid_hiero));
+		hpg.Head_mgr().Init(Enm_.Has_byte(flag, Tid_math), Enm_.Has_byte(flag, Tid_imap), Enm_.Has_byte(flag, Tid_packed), Enm_.Has_byte(flag, Tid_hiero));
 		return 3;
 	}
 	public void Save(Xog_page hpg, Bry_bfr bfr) {
@@ -55,7 +55,7 @@ class Xohd_page_srl_itm__html_module implements Xohd_page_srl_itm {
 		bfr.Add_byte(flag);
 	}
 	private static byte Calc_flag(Xog_page hpg) {
-		Xopg_module_mgr module_mgr = hpg.Module_mgr();
+		Xopg_module_mgr module_mgr = hpg.Head_mgr();
 		return Calc_flag(module_mgr.Math_exists(), module_mgr.Imap_exists(), module_mgr.Gallery_packed_exists(), module_mgr.Hiero_exists());
 	}
 	public static byte Calc_flag(boolean math, boolean imap, boolean packed, boolean hiero) {

@@ -43,7 +43,7 @@ public class Sql_file_parser {
 		int len = flds_req.length;
 		for (int i = 0; i < len; i++) {
 			byte[] fld = flds_req[i];
-			Sql_fld_itm itm = fld_mgr.Get_by_key(fld); if (itm == null) throw Exc_.new_("could not find field", "fld", fld);
+			Sql_fld_itm itm = fld_mgr.Get_by_key(fld); if (itm == null) throw Err_.new_wo_type("could not find field", "fld", fld);
 			flds_all[itm.Idx()] = itm;
 		} 
 	}
@@ -75,14 +75,14 @@ public class Sql_file_parser {
 						cur_pos = Bry_finder.Find_fwd(bfr, Bry_insert_into, cur_pos);
 						if (cur_pos == Bry_.NotFound || cur_pos > bfr_len) {reading_file = false; continue;}
 						cur_pos = Bry_finder.Find_fwd(bfr, Bry_values, cur_pos);
-						if (cur_pos == Bry_.NotFound || cur_pos > bfr_len) throw Exc_.new_("VALUES not found");	// something went wrong;
+						if (cur_pos == Bry_.NotFound || cur_pos > bfr_len) throw Err_.new_wo_type("VALUES not found");	// something went wrong;
 						mode = Mode_fld;
 						cur_pos += Bry_values.length;
 						break;
 					case Mode_row_bgn:
 						switch (b) {
 							case Byte_ascii.Paren_bgn:		mode = Mode_fld; break;
-							default:						throw Exc_.new_unhandled(mode);
+							default:						throw Err_.new_unhandled(mode);
 						}
 						++cur_pos;
 						break;
@@ -91,7 +91,7 @@ public class Sql_file_parser {
 							case Byte_ascii.Nl:		break;	// ignore \n
 							case Byte_ascii.Comma:			mode = Mode_row_bgn; break;
 							case Byte_ascii.Semic:			mode = Mode_sql_bgn; break;
-							default:						throw Exc_.new_unhandled(mode);
+							default:						throw Err_.new_unhandled(mode);
 						}
 						++cur_pos;
 						break;
@@ -124,12 +124,12 @@ public class Sql_file_parser {
 						break;
 					case Mode_escape:
 						byte escape_val = decode_regy[b];
-						if (escape_val == Byte_ascii.Nil)	{val_bfr.Add_byte(Byte_ascii.Backslash).Add_byte(b);}
+						if (escape_val == Byte_ascii.Null)	{val_bfr.Add_byte(Byte_ascii.Backslash).Add_byte(b);}
 						else								val_bfr.Add_byte(escape_val);
 						mode = mode_prv;
 						++cur_pos;
 						break;
-					default:								throw Exc_.new_unhandled(mode);
+					default:								throw Err_.new_unhandled(mode);
 				}
 			}
 			Io_mgr.I.AppendFilByt(trg_fil_gen.Nxt_url(), fil_bfr.Xto_bry_and_clear());
@@ -157,6 +157,6 @@ public class Sql_file_parser {
 		}
 		val_bfr.Clear();
 	}
-	private static final byte[] Bry_insert_into = Bry_.new_u8("INSERT INTO "), Bry_values = Bry_.new_u8(" VALUES (");
+	private static final byte[] Bry_insert_into = Bry_.new_a7("INSERT INTO "), Bry_values = Bry_.new_a7(" VALUES (");
 	private static final String GRP_KEY = "xowa.bldr.sql";
 }

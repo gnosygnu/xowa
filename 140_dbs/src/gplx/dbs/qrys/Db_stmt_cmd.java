@@ -42,7 +42,7 @@ public class Db_stmt_cmd implements Db_stmt {
 	public Db_stmt Val_byte(byte v)				{return Add_byte(Bool_.N, Key_na, v);}
 	private Db_stmt Add_byte(boolean where, String k, byte v) {
 		if (k == Db_meta_fld.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
-		try {stmt.setByte(++val_idx, v);} catch (Exception e) {this.Rls(); throw Exc_.new_exc(e, "db", "failed to add value", "type", "byte", "val", v, "sql", sql);}	
+		try {stmt.setByte(++val_idx, v);} catch (Exception e) {this.Rls(); throw Err_.new_exc(e, "db", "failed to add value", "type", "byte", "val", v, "sql", sql);}	
 		return this;
 	}
 	public Db_stmt Crt_int(String k, int v)	{return Add_int(Bool_.Y, k, v);}
@@ -50,7 +50,7 @@ public class Db_stmt_cmd implements Db_stmt {
 	public Db_stmt Val_int(int v)			{return Add_int(Bool_.N, Key_na, v);}
 	private Db_stmt Add_int(boolean where, String k, int v) {
 		if (k == Db_meta_fld.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
-		try {stmt.setInt(++val_idx, v);} catch (Exception e) {this.Rls(); throw Exc_.new_exc(e, "db", "failed to add value", "type", "int", "val", v, "sql", sql);}	
+		try {stmt.setInt(++val_idx, v);} catch (Exception e) {this.Rls(); throw Err_.new_exc(e, "db", "failed to add value", "type", "int", "val", v, "sql", sql);}	
 		return this;
 	}
 	public Db_stmt Crt_long(String k, long v)	{return Add_long(Bool_.Y, k, v);}
@@ -58,7 +58,7 @@ public class Db_stmt_cmd implements Db_stmt {
 	public Db_stmt Val_long(long v)				{return Add_long(Bool_.N, Key_na, v);}
 	private Db_stmt Add_long(boolean where, String k, long v) {
 		if (k == Db_meta_fld.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
-		try {stmt.setLong(++val_idx, v);} catch (Exception e) {this.Rls(); throw Exc_.new_exc(e, "db", "failed to add value", "type", "long", "val", v, "sql", sql);}	
+		try {stmt.setLong(++val_idx, v);} catch (Exception e) {this.Rls(); throw Err_.new_exc(e, "db", "failed to add value", "type", "long", "val", v, "sql", sql);}	
 		return this;
 	}
 	public Db_stmt Crt_float(String k, float v)	{return Add_float(Bool_.Y, k, v);}
@@ -66,7 +66,7 @@ public class Db_stmt_cmd implements Db_stmt {
 	public Db_stmt Val_float(float v)			{return Add_float(Bool_.N, Key_na, v);}
 	private Db_stmt Add_float(boolean where, String k, float v) {
 		if (k == Db_meta_fld.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
-		try {stmt.setFloat(++val_idx, v);} catch (Exception e) {this.Rls(); throw Exc_.new_exc(e, "db", "failed to add value", "type", "float", "val", v, "sql", sql);}	
+		try {stmt.setFloat(++val_idx, v);} catch (Exception e) {this.Rls(); throw Err_.new_exc(e, "db", "failed to add value", "type", "float", "val", v, "sql", sql);}	
 		return this;
 	}
 	public Db_stmt Crt_double(String k, double v)	{return Add_double(Bool_.Y, k, v);}
@@ -74,7 +74,7 @@ public class Db_stmt_cmd implements Db_stmt {
 	public Db_stmt Val_double(double v)				{return Add_double(Bool_.N, Key_na, v);}
 	private Db_stmt Add_double(boolean where, String k, double v) {
 		if (k == Db_meta_fld.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
-		try {stmt.setDouble(++val_idx, v);} catch (Exception e) {this.Rls(); throw Exc_.new_exc(e, "db", "failed to add value", "type", "double", "val", v, "sql", sql);}	
+		try {stmt.setDouble(++val_idx, v);} catch (Exception e) {this.Rls(); throw Err_.new_exc(e, "db", "failed to add value", "type", "double", "val", v, "sql", sql);}	
 		return this;
 	}
 	public Db_stmt Crt_decimal(String k, DecimalAdp v)	{return Add_decimal(Bool_.Y, k, v);}
@@ -82,7 +82,7 @@ public class Db_stmt_cmd implements Db_stmt {
 	public Db_stmt Val_decimal(DecimalAdp v)			{return Add_decimal(Bool_.N, Key_na, v);}
 	private Db_stmt Add_decimal(boolean where, String k, DecimalAdp v) {
 		if (k == Db_meta_fld.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
-		try {stmt.setBigDecimal(++val_idx, v.Xto_decimal());} catch (Exception e) {this.Rls(); throw Exc_.new_exc(e, "db", "failed to add value", "type", "decimal", "val", v, "sql", sql);}	
+		try {stmt.setBigDecimal(++val_idx, v.Xto_decimal());} catch (Exception e) {this.Rls(); throw Err_.new_exc(e, "db", "failed to add value", "type", "decimal", "val", v, "sql", sql);}	
 		return this;
 	}
 	public Db_stmt Crt_bry(String k, byte[] v)	{return Add_bry(Bool_.Y, k, v);}
@@ -90,7 +90,7 @@ public class Db_stmt_cmd implements Db_stmt {
 	public Db_stmt Val_bry(byte[] v)			{return Add_bry(Bool_.N, Key_na, v);}
 	private Db_stmt Add_bry(boolean where, String k, byte[] v) {
 		if (k == Db_meta_fld.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
-		try {stmt.setBytes(++val_idx, v);} catch (Exception e) {this.Rls(); throw Exc_.new_exc(e, "db", "failed to add value", "type", "byte[]", v.length, sql);}	
+		try {stmt.setBytes(++val_idx, v);} catch (Exception e) {this.Rls(); throw Err_.new_exc(e, "db", "failed to add value", "type", "byte[]", v.length, sql);}	
 		return this;
 	}
 	public Db_stmt Crt_bry_as_str(String k, byte[] v)	{return Add_bry_as_str(Bool_.Y, k, v);}
@@ -102,11 +102,11 @@ public class Db_stmt_cmd implements Db_stmt {
 	public Db_stmt Val_str(String v)			{return Add_str(Bool_.N, Key_na, v);}
 	private Db_stmt Add_str(boolean where, String k, String v) {
 		if (k == Db_meta_fld.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
-		try {stmt.setString(++val_idx, v);} catch (Exception e) {this.Rls(); throw Exc_.new_exc(e, "db", "failed to add value", "type", "String", "val", v, "sql", sql);}	
+		try {stmt.setString(++val_idx, v);} catch (Exception e) {this.Rls(); throw Err_.new_exc(e, "db", "failed to add value", "type", "String", "val", v, "sql", sql);}	
 		return this;
 	}
 	public Db_stmt Val_rdr_(gplx.ios.Io_stream_rdr v, long rdr_len) {
-		try {stmt.setBinaryStream(++val_idx, (java.io.InputStream)v.Under(), (int)rdr_len);} catch (Exception e) {throw Exc_.new_exc(e, "db", "failed to add value", "type", "rdr", "val", v);}	
+		try {stmt.setBinaryStream(++val_idx, (java.io.InputStream)v.Under(), (int)rdr_len);} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "rdr", "val", v);}	
 		return this;
 	}
 	public boolean Exec_insert() {
@@ -114,7 +114,7 @@ public class Db_stmt_cmd implements Db_stmt {
 		catch (Exception e) {
 			this.Rls();
 			Reset_stmt();
-			throw Exc_.new_exc(e, "db_stmt", "insert failed", "url", engine.Conn_info().Xto_api(), "sql", sql);
+			throw Err_.new_exc(e, "db_stmt", "insert failed", "url", engine.Conn_info().Xto_api(), "sql", sql);
 		}
 	}
 	public int Exec_update() {
@@ -122,7 +122,7 @@ public class Db_stmt_cmd implements Db_stmt {
 		catch (Exception e) {
 			this.Rls();
 			Reset_stmt();
-			throw Exc_.new_exc(e, "db_stmt", "update failed", "url", engine.Conn_info().Xto_api(), "sql", sql);
+			throw Err_.new_exc(e, "db_stmt", "update failed", "url", engine.Conn_info().Xto_api(), "sql", sql);
 		}
 	}
 	public int Exec_delete() {
@@ -130,25 +130,25 @@ public class Db_stmt_cmd implements Db_stmt {
 		catch (Exception e) {
 			this.Rls();
 			Reset_stmt();
-			throw Exc_.new_exc(e, "db_stmt", "delete failed", "url", engine.Conn_info().Xto_api(), "sql", sql);
+			throw Err_.new_exc(e, "db_stmt", "delete failed", "url", engine.Conn_info().Xto_api(), "sql", sql);
 		}
 	}
 	public DataRdr Exec_select() {
-		try {DataRdr rv = engine.New_rdr(stmt.executeQuery(), sql); return rv;} catch (Exception e) {throw Exc_.new_exc(e, "db", "failed to exec prepared statement", "sql", sql);}	
+		try {DataRdr rv = engine.New_rdr(stmt.executeQuery(), sql); return rv;} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to exec prepared statement", "sql", sql);}	
 	}
 	public Db_rdr Exec_select__rls_auto() {
-		try {return engine.New_rdr__rls_auto(this, stmt.executeQuery(), sql);}	catch (Exception e) {throw Exc_.new_exc(e, "db", "select failed", "sql", sql);}	
+		try {return engine.New_rdr__rls_auto(this, stmt.executeQuery(), sql);}	catch (Exception e) {throw Err_.new_exc(e, "db", "select failed", "sql", sql);}	
 	}
 	public Db_rdr Exec_select__rls_manual() {
-		try {return engine.New_rdr__rls_manual(stmt.executeQuery(), sql);}	catch (Exception e) {throw Exc_.new_exc(e, "db", "select failed", "sql", sql);}	
+		try {return engine.New_rdr__rls_manual(stmt.executeQuery(), sql);}	catch (Exception e) {throw Err_.new_exc(e, "db", "select failed", "sql", sql);}	
 	}
 	public Object Exec_select_val() {
-		try {Object rv = Db_qry__select_cmd.Rdr_to_val(engine.New_rdr(stmt.executeQuery(), sql)); return rv;} catch (Exception e) {throw Exc_.new_exc(e, "db", "failed to exec prepared statement", "sql", sql);}	
+		try {Object rv = Db_qry__select_cmd.Rdr_to_val(engine.New_rdr(stmt.executeQuery(), sql)); return rv;} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to exec prepared statement", "sql", sql);}	
 	}
 	public Db_stmt Clear() {
 		val_idx = 0;
 		try {stmt.clearBatch();}	
-		catch (Exception e) {throw Exc_.new_exc(e, "db", "failed to clear parameters", "sql", sql);}
+		catch (Exception e) {throw Err_.new_exc(e, "db", "failed to clear parameters", "sql", sql);}
 		return this;
 	}
 		public void Rls() {
@@ -158,6 +158,6 @@ public class Db_stmt_cmd implements Db_stmt {
 			stmt.close();									
 			stmt = null;
 		}
-		catch (Exception e) {throw Exc_.new_exc(e, "db", "failed to close command", "sql", sql);}
+		catch (Exception e) {throw Err_.new_exc(e, "db", "failed to close command", "sql", sql);}
 	}
 	}

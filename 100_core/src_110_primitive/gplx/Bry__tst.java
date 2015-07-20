@@ -127,7 +127,7 @@ public class Bry__tst {
 	}
 	void tst_ReadCsvStr_err(String raw) {
 		try {Bry_.ReadCsvStr(Bry_.new_u8(String_.Replace(raw, "'", "\"")), Int_obj_ref.zero_(), (byte)'|');}
-		catch (Exception e) {Exc_.Noop(e); return;}
+		catch (Exception e) {Err_.Noop(e); return;}
 		Tfds.Fail_expdError();
 	}
 	@Test  public void ReadCsvDte() {

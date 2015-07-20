@@ -16,12 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.security; import gplx.*;
+import gplx.core.consoles.*;
 import gplx.ios.*; /*IoStream*/
 public class HashAlgo_tth192 implements HashAlgo {
 	public String Key() {return KEY;} public static final String KEY = "tth192";
 	public int BlockSize() {return blockSize;} public void BlockSize_set(int v) {blockSize = v;} int blockSize = 1024;
-	public byte[] Calc_hash_bry(byte[] v) {return Bry_.new_a7(CalcHash(ConsoleDlg_.Null, gplx.ios.IoStream_.ary_(v)));}
-	public String CalcHash(ConsoleDlg dialog, IoStream stream) {
+	public byte[] Calc_hash_bry(byte[] v) {return Bry_.new_a7(CalcHash(Console_adp_.Noop, gplx.ios.IoStream_.ary_(v)));}
+	public String CalcHash(Console_adp dialog, IoStream stream) {
 		int leafCount = (int)(stream.Len() / blockSize);
 		HashDlgWtr dialogWtr = HashDlgWtr_.Current;
 		dialogWtr.Bgn(dialog, stream.Url(), CalcWorkUnits(stream.Len()));
@@ -136,7 +137,7 @@ public class HashAlgo_tth192 implements HashAlgo {
 }
 interface HashDlgWtr {
 	boolean Canceled();
-	void Bgn(ConsoleDlg dialog, Io_url url, int total);
+	void Bgn(Console_adp dialog, Io_url url, int total);
 	void Do(int increment);
 	void End();
 	void Fail(IoStream stream);
@@ -148,9 +149,9 @@ class HashDlgWtrDefault implements HashDlgWtr {
 	public int Total() {return total;} int total;
 	public int LastPercentage() {return lastPercentage;} int lastPercentage = 0;
 	public int Current() {return current;} int current = 0;
-	public boolean Canceled() {return dialog.CanceledChk();}
+	public boolean Canceled() {return dialog.Canceled_chk();}
 	String p;
-	public void Bgn(ConsoleDlg dialog, Io_url url, int total) {
+	public void Bgn(Console_adp dialog, Io_url url, int total) {
 		this.dialog = dialog; this.total = total;
 		p = url.Xto_api() + " - hash: ";
 		this.lastPercentage = 0; this.current = 0;
@@ -159,14 +160,14 @@ class HashDlgWtrDefault implements HashDlgWtr {
 		current += increment;
 		int percentage = (current * 100) / total;
 		if (percentage <= lastPercentage) return;
-		dialog.WriteTempText(String_.LimitToFirst(p, dialog.CharsPerLineMax()) + Int_.Xto_str(percentage) + "%");
+		dialog.Write_tmp(String_.LimitToFirst(p, dialog.Chars_per_line_max()) + Int_.Xto_str(percentage) + "%");
 		lastPercentage = percentage;			
 	}
 	public void End() {}
 	public void Fail(IoStream stream) {
 		//			stream.Dispose();
 	}
-	ConsoleDlg dialog;
+	Console_adp dialog;
 	public static HashDlgWtrDefault new_() {return new HashDlgWtrDefault();}
 }
 class Tiger192 extends BaseHash {

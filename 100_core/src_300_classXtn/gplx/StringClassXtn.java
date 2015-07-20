@@ -23,6 +23,6 @@ public class StringClassXtn extends ClassXtn_base implements ClassXtn {
 	public Object DefaultValue()								{return "";}
 	@Override public Object ParseOrNull(String raw)				{return raw;}
 	@Override public String XtoUi(Object obj, String fmt)		{return String_.as_(obj);}
-	public boolean Eq(Object lhs, Object rhs) {try {return String_.Eq(String_.cast_(lhs), String_.cast_(rhs));} catch (Exception e) {Exc_.Noop(e); return false;}}
+	public boolean Eq(Object lhs, Object rhs) {try {return String_.Eq(String_.cast_(lhs), String_.cast_(rhs));} catch (Exception e) {Err_.Noop(e); return false;}}
 	public static final StringClassXtn _ =  new StringClassXtn(); StringClassXtn() {} // added to ClassXtnPool by default
 }

@@ -92,7 +92,7 @@ public class Xoa_gui_mgr implements GfoEvObj, GfoInvkAble {
 		else if	(ctx.Match(k, Invk_cmds))							return cmd_mgr;
 		else if	(ctx.Match(k, Invk_url_macros))						return url_macro_mgr;
 		else if	(ctx.Match(k, Xoue_user.Evt_lang_changed))			Lang_changed((Xol_lang)m.ReadObj("v", ParseAble_.Null));
-		else throw Exc_.new_unhandled(k);
+		else throw Err_.new_unhandled(k);
 		return this;
 	}
 	private static final String 
@@ -112,8 +112,8 @@ public class Xoa_gui_mgr implements GfoEvObj, GfoInvkAble {
 			app.Log_wtr().Log_to_session_direct(log_bfr.Xto_str());
 			kit.Kit_run();	// NOTE: enters thread-loop
 		} catch (Exception e) {
-			app.Usr_dlg().Warn_many("", "", "run_failed: ~{0} ~{1}", log_bfr.Xto_str(), Err_.Message_gplx(e));
-			if (app.Gui_mgr().Kit() != null) app.Gui_mgr().Kit().Ask_ok("", "", Err_.Message_gplx(e));
+			app.Usr_dlg().Warn_many("", "", "run_failed: ~{0} ~{1}", log_bfr.Xto_str(), Err_.Message_gplx_full(e));
+			if (app.Gui_mgr().Kit() != null) app.Gui_mgr().Kit().Ask_ok("", "", Err_.Message_gplx_full(e));
 		}
 	}
 	private void layout_Init() {

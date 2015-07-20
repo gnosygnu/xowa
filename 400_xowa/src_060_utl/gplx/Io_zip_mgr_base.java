@@ -32,7 +32,7 @@ public class Io_zip_mgr_base implements Io_zip_mgr {
 			Zip_dir__add_dir(zip_strm, bry, "", src_dir, Zip_dir__get_subs(src_dir));
 			zip_strm.flush();
 			zip_strm.close();
-		} 	catch(IOException e) {Exc_.new_exc(e, "io", "error duing zip", "src", src_dir.Raw(), "trg", trg_fil.Raw());}
+		} 	catch(IOException e) {Err_.new_exc(e, "io", "error duing zip", "src", src_dir.Raw(), "trg", trg_fil.Raw());}
 	}
 	private void Zip_dir__add_dir(ZipOutputStream zip_strm, byte[] bry, String zip_path, Io_url owner_dir, Io_url[] subs) {
 		int len = subs.length;
@@ -53,7 +53,7 @@ public class Io_zip_mgr_base implements Io_zip_mgr {
 			while ((len = fil_strm.read(bry)) > 0)
 				zip_strm.write(bry, 0, len);
 			fil_strm.close();
-		} 	catch(IOException e) {throw Exc_.new_exc(e, "io", "error duing zip", "src", zip_path);}
+		} 	catch(IOException e) {throw Err_.new_exc(e, "io", "error duing zip", "src", zip_path);}
 	}
 	private Io_url[] Zip_dir__get_subs(Io_url url) {
 		return Io_mgr.I.QueryDir_args(url).DirInclude_().ExecAsUrlAry();
@@ -70,7 +70,7 @@ public class Io_zip_mgr_base implements Io_zip_mgr {
 				trgZip.write(tmp, 0, count);
 			}
 			trgZip.close();
-		}	catch(Exception e) {throw Exc_.new_("failed to zip", "err", e.getMessage());}
+		}	catch(Exception e) {throw Err_.new_wo_type("failed to zip", "err", e.getMessage());}
 		return trg_stream.toByteArray();
 			}
 	public byte[] Unzip_bry(byte[] src, int bgn, int len)  {
@@ -84,7 +84,7 @@ public class Io_zip_mgr_base implements Io_zip_mgr {
 					trg_stream.write(tmp, 0, count);
 				}
 			}
-		}	catch(Exception e) {throw Exc_.new_("failed to unzip", "err", e.getMessage());}
+		}	catch(Exception e) {throw Err_.new_wo_type("failed to unzip", "err", e.getMessage());}
 		return trg_stream.toByteArray();
 			}
 	public void Unzip_to_dir(Io_url src_fil, Io_url trg_dir) {
@@ -112,7 +112,7 @@ public class Io_zip_mgr_base implements Io_zip_mgr {
 			}
 			zip_strm.closeEntry();
 			zip_strm.close();
-		} 	catch(IOException e) {throw Exc_.new_exc(e, "io", "error duing unzip", "src", src_fil.Raw(), "trg", trg_dir.Raw());}
+		} 	catch(IOException e) {throw Err_.new_exc(e, "io", "error duing unzip", "src", src_fil.Raw(), "trg", trg_dir.Raw());}
 			}
 		byte[] tmp = new byte[4096]; int tmpLen = 4096;
 		public static final Io_zip_mgr _ = new Io_zip_mgr_base();

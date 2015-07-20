@@ -135,7 +135,7 @@ public class Xoh_href_parser {
 	}
 	public static final String Href_file_str = "file:///", Href_wiki_str = "/wiki/", Href_site_str = "/site/", Href_xcmd_str = "/xcmd/";
 	public static final byte[] 
-	  Href_https_bry = Bry_.new_u8("https://")	// NOTE: must be "https:" or wmf api won't work; DATE:2015-06-17
+	  Href_https_bry = Bry_.new_a7("https://")	// NOTE: must be "https:" or wmf api won't work; DATE:2015-06-17
 	, Href_file_bry = Bry_.new_a7(Href_file_str), Href_site_bry = Bry_.new_a7(Href_site_str), Href_wiki_bry = Bry_.new_a7(Href_wiki_str);
 
 	private static final int Href_wiki_len = Href_wiki_bry.length;
@@ -166,7 +166,7 @@ public class Xoh_href_parser {
 		if (ttl.Anch_bgn() != Bry_.NotFound) rv.Anchor_(ttl.Anch_txt());
 	}
 	private static void Parse_site(Xoh_href rv, Url_encoder encoder, Xowe_wiki wiki, byte[] raw, int bgn, int len) {	// /site/; EX: /site/fr.wikipedia.org/wiki/A
-		int slash = Bry_finder.Find_fwd(raw, Byte_ascii.Slash, bgn, len); if (slash == Bry_.NotFound) throw Exc_.new_("site href is missing slash", "snip", String_.new_u8(raw, bgn, len));
+		int slash = Bry_finder.Find_fwd(raw, Byte_ascii.Slash, bgn, len); if (slash == Bry_.NotFound) throw Err_.new_wo_type("site href is missing slash", "snip", String_.new_u8(raw, bgn, len));
 		rv.Tid_(Xoh_href.Tid_site);
 		byte[] wiki_bry = Bry_.Mid(raw, bgn, slash);					// wiki is text between "/site/" and next "/"
 		Xow_xwiki_itm xwiki = wiki.Appe().Usere().Wiki().Xwiki_mgr().Get_by_key(wiki_bry);	// NOTE: site may refer to alias in user_wiki; ex: /site/wikisource.org which points to en.wikisource.org; this occurs during lnke substitution; EX: [//wikisource.org Wikisource]
@@ -204,7 +204,7 @@ public class Xoh_href_parser {
 				page_bry = wiki.Props().Main_page();
 			else									
 				page_bry = ttl.Page_txt();
-			ttl = Xoa_ttl.parse_(wiki, page_bry); if (ttl == null) throw Exc_.new_("wiki href does not have valid title", "ttl", String_.new_u8(raw, bgn, len));
+			ttl = Xoa_ttl.parse_(wiki, page_bry); if (ttl == null) throw Err_.new_wo_type("wiki href does not have valid title", "ttl", String_.new_u8(raw, bgn, len));
 		}
 		rv.Page_(encoder.Decode(ttl.Full_txt()));	// add page; note that it should be decoded; EX: %20 -> " "; also note that anchor (#) or query params (?) are not parsed; the entire String will be reparsed later
 		if (ttl.Anch_bgn() != Bry_.NotFound)	// add anchor if it exists

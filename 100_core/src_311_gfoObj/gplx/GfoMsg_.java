@@ -29,7 +29,7 @@ public class GfoMsg_ {
 	}
 	public static GfoMsg root_(String... ary) {return root_leafArgs_(ary);}
 	public static GfoMsg root_leafArgs_(String[] ary, KeyVal... kvAry) {
-		int len = Array_.Len(ary); if (len == 0) throw Err_arg.cannotBe_("== 0", "@len", len);
+		int len = Array_.Len(ary); if (len == 0) throw Err_.new_invalid_arg("== 0", "@len", len);
 		GfoMsg root = new GfoMsg_base().ctor_(ary[0], false);
 		GfoMsg owner = root;
 		for (int i = 1; i < len; i++) {
@@ -159,7 +159,7 @@ class GfoMsg_base implements GfoMsg {
 	public boolean		ReadYn_toggle(String k, boolean cur) {
 		Object rv = ReadOr(k, "!");
 		if (rv == Nil) ThrowNotFound(k);
-		if (!parse) throw Exc_.new_("only parse supported");
+		if (!parse) throw Err_.new_wo_type("only parse supported");
 		String rv_str = (String)rv;
 		return (String_.Eq(rv_str, "!")) ? !cur : Yn.parse_(rv_str);
 	}
@@ -191,7 +191,7 @@ class GfoMsg_base implements GfoMsg {
 		}
 		return Nil;
 	}	int counter = 0;
-	void ThrowNotFound(String k) {throw Exc_.new_("arg not found in msg", "k", k, "counter", counter, "args", args);}
+	void ThrowNotFound(String k) {throw Err_.new_wo_type("arg not found in msg", "k", k, "counter", counter, "args", args);}
 	String ArgsXtoStr() {
 		if (this.Args_count() == 0) return "<<EMPTY>>";
 		String_bldr sb = String_bldr_.new_();

@@ -32,7 +32,7 @@ public class Prefs_mgr_tst {
 		fxt.Exec_get("~{<>app.user.name;<>}", "test_user");
 	}
 	@Test   public void Get_eval_fail() {
-		fxt.Exec_get_has("~{<>fail.prop;<>}", "~{<>fail.prop;<>}[err 0] key not found: key=fail");
+		fxt.Exec_get_has("~{<>fail.prop;<>}", "~{<>fail.prop;<>}[err 0] <gplx> key not found: key=fail");
 	}
 	@Test   public void Set() {
 		fxt.Init_elem_atr_val("xowa_prop_0", "abc");
@@ -161,7 +161,7 @@ class Prefs_mgr_fxt {
 	}
 	public Prefs_mgr_fxt Exec_get_has(String src_str, String expd) {
 		String actl = String_.new_u8(prefs_mgr.Props_get(Bry_.new_u8(src_str)));
-		Tfds.Eq_true(String_.Has_at_bgn(actl, expd));
+		Tfds.Eq_true(String_.Has(actl, expd));
 		return this;
 	}
 	public Prefs_mgr_fxt Test_set(String src_str) {

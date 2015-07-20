@@ -39,7 +39,7 @@ class Xob_subpage_parser {
 			}
 		}
 		catch (Exception e) {
-			throw Exc_.new_exc(e, "xo", "parse failed", "src", String_.new_u8(src));
+			throw Err_.new_exc(e, "xo", "parse failed", "src", String_.new_u8(src));
 		}
 		return (Xob_subpage_wiki[])wikis_list.To_ary(Xob_subpage_wiki.class);
 	}
@@ -62,7 +62,7 @@ class Xob_subpage_parser {
 			case Php_itm_.Tid_var:
 				return Xol_mw_lang_parser.Id_by_mw_name(((Php_itm)itm).Val_obj_bry());
 			default:
-				throw Exc_.new_unhandled(itm.Itm_tid());
+				throw Err_.new_unhandled(itm.Itm_tid());
 		}
 	}
 	private boolean Parse_ns_enabled(Php_itm itm) {
@@ -74,7 +74,7 @@ class Xob_subpage_parser {
 			case Php_itm_.Tid_bool_true:
 				return true;
 			default:
-				throw Exc_.new_unhandled(itm.Itm_tid());
+				throw Err_.new_unhandled(itm.Itm_tid());
 		}
 	}
 }

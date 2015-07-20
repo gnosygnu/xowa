@@ -167,7 +167,7 @@ public abstract class DataRdr_base implements SrlMgr {
 			if (parse) return Char_.parse_(String_.as_(val));
 			return Char_.cast_(val);
 		}
-		catch (Exception exc) {Exc_.Noop(exc); return or;}
+		catch (Exception exc) {Err_.Noop(exc); return or;}
 	}
 	public byte[] ReadBry(String key) {
 		Object val = Read(key);
@@ -188,7 +188,7 @@ public abstract class DataRdr_base implements SrlMgr {
 	public DateAdp SrlDateOr(String key, DateAdp or) {return ReadDateOr(key, or);}
 	public DecimalAdp SrlDecimalOr(String key, DecimalAdp or) {return ReadDecimalOr(key, or);}
 	public double SrlDoubleOr(String key, double or) {return ReadDoubleOr(key, or);}
-	public Object SrlObjOr(String key, Object or) {throw Exc_.new_unimplemented();}
+	public Object SrlObjOr(String key, Object or) {throw Err_.new_unimplemented();}
 	public void XtoStr_gfml(String_bldr sb) {
 		sb.Add(this.NameOfNode()).Add(":");
 		for (int i = 0; i < this.FieldCount(); i++) {
@@ -201,9 +201,9 @@ public abstract class DataRdr_base implements SrlMgr {
 	public abstract DataRdr Subs();
 	public void TypeKey_(String v) {}
 	public abstract SrlMgr SrlMgr_new(Object o);
-	static Exc Err_dataRdr_ReadFailed_err(Class<?> type, String key, Object val, Exception inner) {
+	static Err Err_dataRdr_ReadFailed_err(Class<?> type, String key, Object val, Exception inner) {
 		String innerMsg = inner == null ? "" : Err_.Message_lang(inner);
-		return Exc_.new_w_type("DataRdr_ReadFailed", "failed to read data", "key", key, "val", val, "type", type, "innerMsg", innerMsg).Stack_erase_1_();
+		return Err_.new_("DataRdr_ReadFailed", "failed to read data", "key", key, "val", val, "type", type, "innerMsg", innerMsg).Trace_ignore_add_1_();
 	}
 	static void Err_dataRdr_ReadFailed_useOr(Class<?> type, String key, Object val, Object or) {
 		UsrDlg_._.Warn(UsrMsg.new_("failed to read data; substituting default").Add("key", key).Add("val", val).Add("default", or).Add("type", type));

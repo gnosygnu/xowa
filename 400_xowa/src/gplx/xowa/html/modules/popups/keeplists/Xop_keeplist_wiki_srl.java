@@ -55,7 +55,7 @@ public class Xop_keeplist_wiki_srl extends Dsv_wkr_base {
 		rules_count = 0;
 	}
 	public Xop_keeplist_wiki Get_tmpl_keeplist() {
-		Xow_popup_parser popup_parser = wiki.Html_mgr().Module_mgr().Popup_mgr().Parser();
+		Xow_popup_parser popup_parser = wiki.Html_mgr().Head_mgr().Popup_mgr().Parser();
 		Xop_keeplist_wiki rv = popup_parser.Tmpl_keeplist();
 		if (rv == null) {
 			rv = new Xop_keeplist_wiki(wiki);

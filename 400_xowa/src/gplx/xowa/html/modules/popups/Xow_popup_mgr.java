@@ -137,13 +137,13 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 					Thread_adp_.Sleep(10);
 				}
 				Xoae_page popup_page = popup_wiki.Data_mgr().Get_page(popup_ttl, false);
-				byte[] rv = popup_wiki.Html_mgr().Module_mgr().Popup_mgr().Parser().Parse(wiki, popup_page, cur_page.Tab_data().Tab(), itm);
+				byte[] rv = popup_wiki.Html_mgr().Head_mgr().Popup_mgr().Parser().Parse(wiki, popup_page, cur_page.Tab_data().Tab(), itm);
 				Update_progress_bar(app, cur_wiki, cur_page, itm);
 				return rv;
 			}
 		}
 		catch(Exception e) {
-			app.Usr_dlg().Warn_many("", "", "failed to get popup: href=~{0} err=~{1}", String_.new_u8(itm.Page_href()), Err_.Message_gplx_brief(e));
+			app.Usr_dlg().Warn_many("", "", "failed to get popup: href=~{0} err=~{1}", itm.Page_href(), Err_.Message_gplx_full(e));
 			return null;
 		}
 		finally {
@@ -172,7 +172,7 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 			GfoInvkAble_.InvkCmd(async_cmd_show, Invk_show_popup);
 		}
 		catch(Exception e) {
-			app.Usr_dlg().Warn_many("", "", "failed to get popup: href=~{0} err=~{1}", String_.new_u8(async_itm.Page_href()), Err_.Message_gplx_brief(e));
+			app.Usr_dlg().Warn_many("", "", "failed to get popup: href=~{0} err=~{1}", async_itm.Page_href(), Err_.Message_gplx_full(e));
 		}
 	}
 	private void Show_popup() {
@@ -288,12 +288,12 @@ class Load_popup_wkr implements Gfo_thread_wkr {
 			if (ns_allowed_regy.Count() > 0 && !ns_allowed_regy.Has(ns_allowed_regy_key.Val_(popup_ttl.Ns().Id()))) return;
 			itm.Init(popup_wiki.Domain_bry(), popup_ttl);
 			Xoae_page popup_page = popup_wiki.Data_mgr().Get_page(popup_ttl, false);
-			byte[] rv = popup_wiki.Html_mgr().Module_mgr().Popup_mgr().Parser().Parse(wiki, popup_page, cur_page.Tab_data().Tab(), itm);
+			byte[] rv = popup_wiki.Html_mgr().Head_mgr().Popup_mgr().Parser().Parse(wiki, popup_page, cur_page.Tab_data().Tab(), itm);
 			Xow_popup_mgr.Update_progress_bar(app, wiki, cur_page, itm);
 			Rslt_(rv);
 		}
 		catch(Exception e) {
-			app.Usr_dlg().Warn_many("", "", "failed to get popup: href=~{0} err=~{1}", String_.new_u8(itm.Page_href()), Err_.Message_gplx_brief(e));
+			app.Usr_dlg().Warn_many("", "", "failed to get popup: href=~{0} err=~{1}", itm.Page_href(), Err_.Message_gplx_full(e));
 			Rslt_(null);
 		}
 		finally {

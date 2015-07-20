@@ -108,7 +108,7 @@ public class Xow_toc_mgr implements Bry_fmtr_arg {
 			bfr.Mkr_rls();
 			return bfr.Xto_bry_and_clear();
 		} catch (Exception e) {
-			Gfo_usr_dlg_.I.Warn_many("", "", "failed to write toc: url=~{0} err=~{1}", page.Url().Xto_full_str_safe(), Err_.Message_gplx_brief(e));
+			Gfo_usr_dlg_.I.Warn_many("", "", "failed to write toc: url=~{0} err=~{1}", page.Url().Xto_full_str_safe(), Err_.Message_gplx_full(e));
 			return Bry_.Empty;
 		}
 	}
@@ -194,9 +194,9 @@ public class Xow_toc_mgr implements Bry_fmtr_arg {
 		bfmtr_main.Bld_bfr_many(bfr, Bry_fmtr_arg_.bry_(bry_contents), this);
 	}
 	private static final byte[]
-	  Bry_list_bgn = Bry_.new_u8("  <ul>\n")
-	, Bry_list_end = Bry_.new_u8("  </ul>\n")
-	, Bry_item_end = Bry_.new_u8("  </li>\n")
+	  Bry_list_bgn = Bry_.new_a7("  <ul>\n")
+	, Bry_list_end = Bry_.new_a7("  </ul>\n")
+	, Bry_item_end = Bry_.new_a7("  </li>\n")
 	;
 	private Bry_fmtr
 	  bfmtr_main = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last

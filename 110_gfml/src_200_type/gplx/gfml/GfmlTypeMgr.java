@@ -88,7 +88,7 @@ class GfmlTypeMgr {
 			else
 				typKey = ndeHnd;
 		}
-		if (typKey == null) throw Exc_.new_("could not identity type for node", "ndeKey", ndeKey, "ndeHnd", ndeHnd, "typKey", nde.Type().Key());
+		if (typKey == null) throw Err_.new_wo_type("could not identity type for node", "ndeKey", ndeKey, "ndeHnd", ndeHnd, "typKey", nde.Type().Key());
 		rv = typeRegy.FetchOrNull(typKey, nde.DocPos());
 		return (rv == GfmlType_.Null)
 			? GfmlType_.new_any_()									// unknown typeKey; name is not known (see EX:2) -> create new anyType

@@ -44,7 +44,7 @@ public class Xob_cleanup_cmd extends Xob_itm_basic_base implements Xob_cmd {
 			Delete_wiki_sql(wiki);			
 		if (delete_all) {
 			Io_mgr.I.DeleteDir_cmd(wiki_root_dir).Exec();	// do not delete subdirs; needed to support "/prv" for fsdb; DATE:2015-04-01
-			Io_mgr.I.DeleteDirDeep(app.Usere().Fsys_mgr().Wiki_root_dir()); // delete css dir; DATE:2015-07-06
+			Io_mgr.I.DeleteDirDeep(app.Usere().Fsys_mgr().Wiki_root_dir().GenSubDir(wiki.Domain_str())); // delete css dir; DATE:2015-07-06
 		}
 		if (delete_by_match_ary != null)
 			Delete_by_match(wiki_root_dir, delete_by_match_ary);

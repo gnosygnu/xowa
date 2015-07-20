@@ -34,7 +34,7 @@ public class Xosrv_socket_rdr implements GfoInvkAble {
 				server.Msg_rcvd(msg);
 				rdr.Close();
 			}
-		}	catch (Exception e) {Exc_.Noop(e);}
+		}	catch (Exception e) {Err_.Noop(e);}
 		finally {rdr.Rls();}
 	}
 	public void Rls() {

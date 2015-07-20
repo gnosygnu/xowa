@@ -28,15 +28,15 @@ public class Db_engine__mem implements Db_engine {
 	public void			Txn_end()				{--txn_count;}
 	public void			Txn_cxl()				{--txn_count;}
 	public void			Txn_sav()				{this.Txn_end(); this.Txn_bgn("");}
-	public Object		Exec_as_obj(Db_qry qry) {throw Exc_.new_unimplemented();}
+	public Object		Exec_as_obj(Db_qry qry) {throw Err_.new_unimplemented();}
 	public void			Conn_open() {}
 	public void			Conn_term() {
-		if (txn_count != 0) throw Exc_.new_("Conn_term.txns still open", "txn_count", txn_count);
+		if (txn_count != 0) throw Err_.new_wo_type("Conn_term.txns still open", "txn_count", txn_count);
 	}
-	public Db_rdr		New_rdr__rls_manual(Object rdr_obj, String sql) {throw Exc_.new_unimplemented();}
-	public Db_rdr		New_rdr__rls_auto(Db_stmt stmt, Object rdr_obj, String sql) {throw Exc_.new_unimplemented();}
-	public DataRdr		New_rdr(java.sql.ResultSet rdr, String sql) {throw Exc_.new_unimplemented();} 
-	public Object		New_stmt_prep_as_obj(String sql) {throw Exc_.new_unimplemented();}
+	public Db_rdr		New_rdr__rls_manual(Object rdr_obj, String sql) {throw Err_.new_unimplemented();}
+	public Db_rdr		New_rdr__rls_auto(Db_stmt stmt, Object rdr_obj, String sql) {throw Err_.new_unimplemented();}
+	public DataRdr		New_rdr(java.sql.ResultSet rdr, String sql) {throw Err_.new_unimplemented();} 
+	public Object		New_stmt_prep_as_obj(String sql) {throw Err_.new_unimplemented();}
 	public void			Ddl_create_tbl(Db_meta_tbl meta) {
 		Mem_tbl mem_tbl = new Mem_tbl(meta);
 		tbl_hash.Add_if_dupe_use_nth(meta.Name(), mem_tbl);

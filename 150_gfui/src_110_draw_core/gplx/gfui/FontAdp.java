@@ -56,7 +56,7 @@ public class FontAdp implements GfoInvkAble {
 
 	public static final FontAdp NullPtr = null;
 	public static FontAdp as_(Object obj) {return obj instanceof FontAdp ? (FontAdp)obj : null;}
-	public static FontAdp cast_(Object obj) {try {return (FontAdp)obj;} catch(Exception exc) {throw Exc_.new_type_mismatch_w_exc(exc, FontAdp.class, obj);}}
+	public static FontAdp cast_(Object obj) {try {return (FontAdp)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, FontAdp.class, obj);}}
 	public static FontAdp new_(String name, float size, FontStyleAdp style) {
 		FontAdp rv = new FontAdp();
 		rv.name = name; rv.size = size; rv.style = style;

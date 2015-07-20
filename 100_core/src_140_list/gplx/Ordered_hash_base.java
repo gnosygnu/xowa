@@ -54,11 +54,11 @@ public class Ordered_hash_base extends Hash_adp_base implements Ordered_hash, Gf
 		AssertCounts();
 	}
 	void AssertCounts() {
-		if (super.Count() != ordered.Count()) throw Exc_.new_("counts do not match", "hash", super.Count(), "list", ordered.Count());
+		if (super.Count() != ordered.Count()) throw Err_.new_wo_type("counts do not match", "hash", super.Count(), "list", ordered.Count());
 	}
 	public void Resize_bounds(int i) {if (locked) Lock_fail(); ordered.Resize_bounds(i);}
 	public void Lock() {locked = true;} private boolean locked = false;
-	void Lock_fail() {throw Exc_.new_("collection is locked");}
+	void Lock_fail() {throw Err_.new_wo_type("collection is locked");}
 	static final String GRP_KEY = "gplx.lists.ordered_hash";
 	public void Add_at(int i, Object o) {if (locked) Lock_fail(); ordered.Add_at(i, o);}
 	public Object Get_at(int i) {return Get_at_base(i);}

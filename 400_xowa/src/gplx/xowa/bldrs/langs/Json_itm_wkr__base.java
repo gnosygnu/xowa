@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.langs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.core.primitives.*; import gplx.json.*; import gplx.php.*; import gplx.gfs.*;
+import gplx.core.primitives.*; import gplx.core.json.*; import gplx.php.*; import gplx.gfs.*;
 interface Json_itm_wkr {
 	void Read_kv_sub(byte[] key, byte[] val);
 }
@@ -27,10 +27,10 @@ abstract class Json_itm_wkr__base implements Json_itm_wkr {
 		List_adp tmp_list = List_adp_.new_(); Byte_obj_ref tmp_result = Byte_obj_ref.zero_(); Bry_bfr tmp_bfr = Bry_bfr.reset_(16); 
 		Json_doc jdoc = json_parser.Parse(src);
 		this.Exec_bgn();
-		Json_itm_nde root = jdoc.Root();
-		int subs_len = root.Subs_len();
+		Json_nde root = jdoc.Root();
+		int subs_len = root.Len();
 		for (int i = 0; i < subs_len; ++i) {
-			Json_itm itm = root.Subs_get_at(i);
+			Json_itm itm = root.Get_at(i);
 			switch (itm.Tid()) {
 				case Json_itm_.Tid_kv:
 					Json_itm_kv kv = (Json_itm_kv)itm;

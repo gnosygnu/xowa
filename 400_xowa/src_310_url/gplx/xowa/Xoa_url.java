@@ -34,7 +34,7 @@ public class Xoa_url {
 	public boolean Redirect_force() {return redirect_force;} public Xoa_url Redirect_force_(boolean v) {redirect_force = v; return this;} private boolean redirect_force;
 	public boolean Search_fulltext() {return search_fulltext;} public Xoa_url Search_fulltext_(boolean v) {search_fulltext = v; return this;} private boolean search_fulltext;
 	public boolean Action_is_edit() {return action_is_edit;} public Xoa_url Action_is_edit_(boolean v) {action_is_edit = v; return this;} private boolean action_is_edit;
-	public byte Err() {return err;} public Xoa_url Err_(byte v) {err = v; return this;} private byte err;
+	public byte Err_code() {return err;} public Xoa_url Err_code_(byte v) {err = v; return this;} private byte err;
 	public byte[][] Segs_ary() {return segs_ary;} public Xoa_url Segs_ary_(byte[][] v) {segs_ary = v; return this;} private byte[][] segs_ary;
 	public byte[] Page_for_lnki() {
 		int raw_len = raw.length;
@@ -83,7 +83,7 @@ public class Xoa_url {
 	public boolean Eq_page(Xoa_url comp) {return Bry_.Eq(wiki_bry, comp.wiki_bry) && Bry_.Eq(page_bry, comp.page_bry) && redirect_force == comp.Redirect_force();}
 	public byte[] Xto_full_bry()		{return wiki_bry == null ? page_bry : Bry_.Add(wiki_bry, Xoa_consts.Url_wiki_intermediary, page_bry);}
 	public String Xto_full_str()		{return String_.new_u8(this.Xto_full_bry());}
-	public String Xto_full_str_safe()	{try {return Xto_full_str();} catch (Exception e) {return gplx.Err_.Message_gplx_brief(e);}}
+	public String Xto_full_str_safe()	{try {return Xto_full_str();} catch (Exception e) {return Err_.Message_gplx_full(e);}}
 	public static final Xoa_url Null = null;
 	public static Xoa_url blank_() {return new Xoa_url();}
 	public static Xoa_url new_(byte[] wiki, byte[] page) {

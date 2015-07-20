@@ -26,11 +26,11 @@ public class Xow_html_util implements GfoInvkAble {
 	String If_bool(String expr, String true_val, String false_val) {
 		Object o = wiki.Appe().Gfs_mgr().Run_str(expr);
 		try {return Bool_.cast_(o) ? true_val : false_val;}
-		catch (Exception e) {Exc_.Noop(e); return "expr failed: " + expr;}
+		catch (Exception e) {Err_.Noop(e); return "expr failed: " + expr;}
 	}
 	String If_yn(String expr, String true_val, String false_val) {
 		String o = String_.as_(wiki.Appe().Gfs_mgr().Run_str(expr));
 		try {return Yn.parse_(o) ? true_val : false_val;}
-		catch (Exception e) {Exc_.Noop(e); return "expr failed: " + expr;}
+		catch (Exception e) {Err_.Noop(e); return "expr failed: " + expr;}
 	}
 }

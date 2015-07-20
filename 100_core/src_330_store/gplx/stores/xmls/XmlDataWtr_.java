@@ -89,7 +89,7 @@ class XmlDataWtr extends DataWtr_base implements DataWtr {
 			sb.Add("</" + name + ">" + String_.CrLf);
 		}
 		names.Del_at(names.Count() - 1);
-		//			if (nde.ParentNode == null) throw Err_.new_("WriteXmlNodeEnd() called on root node");
+		//			if (nde.ParentNode == null) throw Err_.new_wo_type("WriteXmlNodeEnd() called on root node");
 //			nde = nde.ParentNode;
 //			WriteLineFeed(doc, nde);
 	}

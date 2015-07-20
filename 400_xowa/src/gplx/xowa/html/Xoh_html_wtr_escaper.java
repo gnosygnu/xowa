@@ -71,7 +71,7 @@ public class Xoh_html_wtr_escaper {
 									else									// parse failed; escape and continue
 										bfr.Add(Html_entity_.Amp_bry);
 									break;
-								default: throw Exc_.new_unhandled(itm_tid);
+								default: throw Err_.new_unhandled(itm_tid);
 							}
 						}
 					}
@@ -116,7 +116,7 @@ public class Xoh_html_wtr_escaper {
 			return end_gt;
 		}
 		catch (Exception e) {
-			Xoa_app_.Usr_dlg().Warn_many("", "", "unknown error in escape.nowiki: ~{0} ~{1}", Err_.Message_gplx_brief(e), String_.new_u8(src, bgn, end));
+			Xoa_app_.Usr_dlg().Warn_many("", "", "unknown error in escape.nowiki: ~{0} ~{1}", String_.new_u8(src, bgn, end), Err_.Message_gplx_full(e));
 			return Bry_.NotFound;
 		}
 	}

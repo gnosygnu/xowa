@@ -132,7 +132,7 @@ public class Xow_toc_mgr_tst {
 		, "  </ul>"
 		));
 	}
-	@Test   public void Exc() {	// PURPOSE: models strange case wherein jumping down does not work
+	@Test   public void Err() {	// PURPOSE: models strange case wherein jumping down does not work
 		fxt.Test_html_toc(String_.Concat_lines_nl_skip_last
 		( "==a=="
 		, "====b===="

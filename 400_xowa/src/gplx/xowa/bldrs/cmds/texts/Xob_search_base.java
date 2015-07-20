@@ -51,7 +51,7 @@ public abstract class Xob_search_base extends Xob_itm_dump_base implements Xobd_
 							.Add_base85_len_5(page.Id())			.Add_byte(Byte_ascii.Semic)
 							.Add_base85_len_5(page.Text().length)	.Add_byte(Byte_ascii.Nl);
 			}
-		} catch (Exception e) {bldr.Usr_dlg().Warn_many("", "", "search_index:fatal error: err=~{0}", Err_.Message_gplx_brief(e));}	// never let single page crash entire import
+		} catch (Exception e) {bldr.Usr_dlg().Warn_many("", "", "search_index:fatal error: err=~{0}", Err_.Message_gplx_full(e));}	// never let single page crash entire import
 	}
 	public void Wkr_end() {
 		tmp_wtr_mgr.Flush_all(bldr.Usr_dlg());

@@ -39,7 +39,7 @@ public class Io_stream_wtr_ {
 			case gplx.ios.Io_stream_.Tid_zip	: return new Io_stream_wtr_zip();
 			case gplx.ios.Io_stream_.Tid_gzip	: return new Io_stream_wtr_gzip();
 			case gplx.ios.Io_stream_.Tid_bzip2	: return new Io_stream_wtr_bzip2();
-			default								: throw Exc_.new_unhandled(v);
+			default								: throw Err_.new_unhandled(v);
 		}
 	}
 	public static void Save_all(Io_url url, byte[] bry, int bgn, int end) {
@@ -82,7 +82,7 @@ abstract class Io_stream_wtr_base implements Io_stream_wtr {
 		if (trg_bfr == null) {
 			if (!Io_mgr.I.ExistsFil(url)) Io_mgr.I.SaveFilStr(url, "");			
 			try {bry_stream = new java.io.FileOutputStream(url.Raw());}
-			catch (Exception e) {throw Exc_.new_exc(e, "io", "open failed", "url", url.Raw());}		
+			catch (Exception e) {throw Err_.new_exc(e, "io", "open failed", "url", url.Raw());}		
 		}
 		else {
 			mem_stream = new java.io.ByteArrayOutputStream();
@@ -93,11 +93,11 @@ abstract class Io_stream_wtr_base implements Io_stream_wtr {
 	}
 	public void Write(byte[] bry, int bgn, int len) {
 		try {zip_stream.write(bry, bgn, len);}
-		catch (Exception e) {Exc_.new_exc(e, "io", "write failed", "bgn", bgn, "len", len);}
+		catch (Exception e) {Err_.new_exc(e, "io", "write failed", "bgn", bgn, "len", len);}
 	}
 	public void Flush() {
 		if (trg_bfr != null) {
-			try {zip_stream.close();} catch (Exception e) {throw Exc_.new_exc(e, "io", "flush failed");}	// must close zip_stream to flush all bytes
+			try {zip_stream.close();} catch (Exception e) {throw Err_.new_exc(e, "io", "flush failed");}	// must close zip_stream to flush all bytes
 			trg_bfr.Add(mem_stream.toByteArray());
 		}
 	}
@@ -106,7 +106,7 @@ abstract class Io_stream_wtr_base implements Io_stream_wtr {
 			if (zip_stream != null) zip_stream.close();
 			if (mem_stream != null) mem_stream.close();
 		}
-		catch (Exception e) {throw Exc_.new_exc(e, "io", "close failed", "url", url.Raw());}
+		catch (Exception e) {throw Err_.new_exc(e, "io", "close failed", "url", url.Raw());}
 	}
 	public abstract java.io.OutputStream Wrap_stream(java.io.OutputStream stream);
 }
@@ -114,7 +114,7 @@ class Io_stream_wtr_bzip2 extends Io_stream_wtr_base {
 	@Override public byte Tid() {return Io_stream_.Tid_bzip2;}
 	@Override public java.io.OutputStream Wrap_stream(java.io.OutputStream stream) {
 		try {return new org.apache.commons.compress.compressors.bzip2.BZip2CompressorOutputStream(stream);}
-		catch (Exception e) {throw Exc_.new_exc(e, "io", "failed to open bzip2 stream");}
+		catch (Exception e) {throw Err_.new_exc(e, "io", "failed to open bzip2 stream");}
 	}
 	static final byte[] Bz2_header = new byte[] {Byte_ascii.Ltr_B, Byte_ascii.Ltr_Z};
 }
@@ -122,7 +122,7 @@ class Io_stream_wtr_gzip extends Io_stream_wtr_base {
 	@Override public byte Tid() {return Io_stream_.Tid_gzip;}
 	@Override public java.io.OutputStream Wrap_stream(java.io.OutputStream stream) {
 		try {return new java.util.zip.GZIPOutputStream(stream);}
-		catch (Exception e) {throw Exc_.new_exc(e, "io", "failed to open gz stream");}
+		catch (Exception e) {throw Err_.new_exc(e, "io", "failed to open gz stream");}
 	}
 }
 class Io_stream_wtr_zip implements Io_stream_wtr {
@@ -136,7 +136,7 @@ class Io_stream_wtr_zip implements Io_stream_wtr {
 		if (trg_bfr == null) {
 			if (!Io_mgr.I.ExistsFil(url)) Io_mgr.I.SaveFilStr(url, "");	// create file if it doesn't exist
 			try {bry_stream = new java.io.FileOutputStream(url.Xto_api());}
-			catch (Exception e) {throw Exc_.new_exc(e, "io", "open failed", "url", url.Raw());}
+			catch (Exception e) {throw Err_.new_exc(e, "io", "open failed", "url", url.Raw());}
 		}
 		else {
 			mem_stream = new java.io.ByteArrayOutputStream();
@@ -145,12 +145,12 @@ class Io_stream_wtr_zip implements Io_stream_wtr {
 		zip_stream = new java.util.zip.ZipOutputStream(bry_stream);
 		java.util.zip.ZipEntry entry = new java.util.zip.ZipEntry("file");
 		try {zip_stream.putNextEntry(entry);}
-		catch (Exception e) {throw Exc_.new_exc(e, "io", "open failed", "url", url.Raw());}
+		catch (Exception e) {throw Err_.new_exc(e, "io", "open failed", "url", url.Raw());}
 		return this;
 	}
 	public void Write(byte[] bry, int bgn, int len) {
 		try {zip_stream.write(bry, bgn, len);}
-		catch (Exception e) {throw Exc_.new_exc(e, "io", "write failed", "url", url.Raw(), "bgn", bgn, "len", len);}
+		catch (Exception e) {throw Err_.new_exc(e, "io", "write failed", "url", url.Raw(), "bgn", bgn, "len", len);}
 	}
 	public void Flush() {// fixed as of DATE:2014-04-15
 		try {
@@ -160,14 +160,14 @@ class Io_stream_wtr_zip implements Io_stream_wtr {
 				trg_bfr.Add(mem_stream.toByteArray());
 			zip_stream.flush();
 		}
-		catch (Exception e) {throw Exc_.new_exc(e, "io", "flush failed", "url", url.Raw());}
+		catch (Exception e) {throw Err_.new_exc(e, "io", "flush failed", "url", url.Raw());}
 	}
 	public void Rls() {
 		try {
 			if (zip_stream != null) zip_stream.close();
 			if (mem_stream != null) mem_stream.close();
 		}
-		catch (Exception e) {throw Exc_.new_exc(e, "io", "close failed", "url", url.Raw());}
+		catch (Exception e) {throw Err_.new_exc(e, "io", "close failed", "url", url.Raw());}
 	}
 	public byte[] To_ary_and_clear() {
 		byte[] rv = trg_bfr.Xto_bry_and_clear();
@@ -185,13 +185,13 @@ class Io_stream_wtr_file implements Io_stream_wtr {
 			if (trg_bfr == null)
 				bry_stream = Io_mgr.I.OpenStreamWrite(url);
 		}
-		catch (Exception e) {throw Exc_.new_exc(e, "io", "open failed", "url", url.Raw());}
+		catch (Exception e) {throw Err_.new_exc(e, "io", "open failed", "url", url.Raw());}
 		return this;
 	}
 	public void Write(byte[] bry, int bgn, int len) {
 		if (trg_bfr == null) {
 			try {bry_stream.Write(bry, bgn, len);}
-			catch (Exception e) {throw Exc_.new_exc(e, "io", "write failed", "url", url.Raw(), "bgn", bgn, "len", len);}
+			catch (Exception e) {throw Err_.new_exc(e, "io", "write failed", "url", url.Raw(), "bgn", bgn, "len", len);}
 		}
 		else
 			trg_bfr.Add_mid(bry, bgn, bgn + len);
@@ -208,6 +208,6 @@ class Io_stream_wtr_file implements Io_stream_wtr {
 			if (trg_bfr == null)
 				bry_stream.Rls();
 		}
-		catch (Exception e) {throw Exc_.new_exc(e, "io", "close failed", "url", url.Raw());}
+		catch (Exception e) {throw Err_.new_exc(e, "io", "close failed", "url", url.Raw());}
 	}
 }

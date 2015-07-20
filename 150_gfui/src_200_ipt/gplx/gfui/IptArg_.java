@@ -46,7 +46,7 @@ public class IptArg_ {
 				: parse_(raw);
 		}
 		catch (Exception exc) {	// as an "or" proc, handle errors; note that it may accept raw values from cfg files, so invalid input is possible; DATE:2014-06-04
-			Exc_.Noop(exc);
+			Err_.Noop(exc);
 			return IptKey_.None;
 		}
 	}
@@ -66,7 +66,7 @@ public class IptArg_ {
 		else if (type == IptMouseBtn.class)		return IptEventType_.MouseUp;	// changed from MouseDown; confirmed against Firefox, Eclipse; DATE:2014-05-16
 		else if (type == IptMouseWheel.class)		return IptEventType_.MouseWheel;
 		else if (type == IptMouseMove.class)		return IptEventType_.MouseMove;
-		else										throw Exc_.new_unhandled(type);
+		else										throw Err_.new_unhandled(type);
 	}
 	@gplx.Internal protected static boolean EventType_match(IptArg arg, IptEventType match) {
 		Class<?> type = arg.getClass();
@@ -75,7 +75,7 @@ public class IptArg_ {
 		else if (type == IptMouseBtn.class)		return match == IptEventType_.MouseDown || match == IptEventType_.MouseUp || match == IptEventType_.MousePress;
 		else if (type == IptMouseWheel.class)		return match == IptEventType_.MouseWheel;
 		else if (type == IptMouseMove.class)		return match == IptEventType_.MouseMove;
-		else										throw Exc_.new_unhandled(type);
+		else										throw Err_.new_unhandled(type);
 	}
 }
 class IptMacro {
@@ -113,6 +113,6 @@ class IptMacro {
 		return rv;
 	}
 	Ordered_hash regy;
-	static Exc parse_err(String raw, String loc) {return Exc_.new_w_type("gfui", "could not parse IptArg", "raw", raw, "loc", loc).Stack_erase_1_();}
+	static Err parse_err(String raw, String loc) {return Err_.new_("gfui", "could not parse IptArg", "raw", raw, "loc", loc).Trace_ignore_add_1_();}
 	public static final IptMacro _ = new IptMacro(); IptMacro() {}
 }

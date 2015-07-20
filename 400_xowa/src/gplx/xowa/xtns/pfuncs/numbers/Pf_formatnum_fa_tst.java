@@ -23,31 +23,34 @@ public class Pf_formatnum_fa_tst {
 	@Before public void init() {
 		Xoae_app app = Xoa_app_fxt.app_();
 		Xol_lang lang = new Xol_lang(app.Lang_mgr(), Bry_.new_a7("fa")).Init_by_load_assert();
-		String gfs = String_.Concat_lines_nl
-		( "numbers {"
-		, "  digits {"
-		, "    clear;"
-		, "    set('0', '۰');"
-		, "    set('1', '۱');"
-		, "    set('2', '۲');"
-		, "    set('3', '۳');"
-		, "    set('4', '۴');"
-		, "    set('5', '۵');"
-		, "    set('6', '۶');"
-		, "    set('7', '۷');"
-		, "    set('8', '۸');"
-		, "    set('9', '۹');"
-		, "    set('%', '٪');"
-		, "    set('.', '٫');"
-		, "    set(',', '٬');"
-		, "  }"
-		, "}"
-		);
-		app.Gfs_mgr().Run_str_for(lang, gfs);
+		app.Gfs_mgr().Run_str_for(lang, Persian_numbers_gfs);
 		Xowe_wiki wiki = Xoa_app_fxt.wiki_(app, "fa.wikipedia.org", lang);
 		fxt = new Xop_fxt(app, wiki);
 	}
-	@Test  public void Basic()	{
+	@Test  public void Basic() {
 		fxt.Test_parse_tmpl_str_test("{{formatnum:۱۵۰|R}}"		, "{{test}}",	"150");
 	}
+	@Test  public void English() {	// PURPOSE: make sure regular numbers are still read; DATE:2015-07-18
+		fxt.Test_parse_tmpl_str_test("{{formatnum:150|R}}"		, "{{test}}",	"150");
+	}
+	public static final String Persian_numbers_gfs = String_.Concat_lines_nl
+	( "numbers {"
+	, "  digits {"
+	, "    clear;"
+	, "    set('0', '۰');"
+	, "    set('1', '۱');"
+	, "    set('2', '۲');"
+	, "    set('3', '۳');"
+	, "    set('4', '۴');"
+	, "    set('5', '۵');"
+	, "    set('6', '۶');"
+	, "    set('7', '۷');"
+	, "    set('8', '۸');"
+	, "    set('9', '۹');"
+	, "    set('%', '٪');"
+	, "    set('.', '٫');"
+	, "    set(',', '٬');"
+	, "  }"
+	, "}"
+	);
 }

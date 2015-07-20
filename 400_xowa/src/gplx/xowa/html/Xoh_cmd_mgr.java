@@ -32,7 +32,7 @@ public class Xoh_cmd_mgr {
 				itm = (Xoh_cmd_itm)cmds.Get_at(i);
 				itm.Hcmd_exec(app, usr_dlg, page);
 				itm.Hcmd_write(app, usr_dlg, page);
-			} catch (Exception e) {throw Exc_.new_exc(e, "xo", "failed to execute html cmd", "name", itm == null ? "unknown" : itm.Hcmd_id());}
+			} catch (Exception e) {throw Err_.new_exc(e, "xo", "failed to execute html cmd", "name", itm == null ? "unknown" : itm.Hcmd_id());}
 		}
 		this.Clear();
 	}

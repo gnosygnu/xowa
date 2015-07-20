@@ -22,7 +22,7 @@ public class KeyVal_ {
 	public static KeyVal[] Ary(KeyVal... ary) {return ary;}
 	public static KeyVal[] Ary_cast_(Object o) {
 		try {return (KeyVal[])o;}
-		catch (Exception e) {throw Exc_.new_cast(e, KeyVal.class, o);}
+		catch (Exception e) {throw Err_.new_cast(e, KeyVal.class, o);}
 	}
 	public static KeyVal[] Ary_insert(KeyVal[] orig, boolean insert_at_end, KeyVal... vals) {
 		int orig_len = orig.length, vals_len = vals.length;

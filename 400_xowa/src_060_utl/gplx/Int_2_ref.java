@@ -39,7 +39,7 @@ public class Int_2_ref {
 			int v0 = Int_.parse_(itms[0]);
 			int v1 = Int_.parse_(itms[1]);
 			return new Int_2_ref(v0, v1);
-		} catch (Exception e) {Exc_.Noop(e); throw Exc_.new_parse("Int_2_ref", raw);}
+		} catch (Exception e) {Err_.Noop(e); throw Err_.new_parse("Int_2_ref", raw);}
 	}
 	public static Int_2_ref[] parse_ary_(String raw) {
 		try {
@@ -53,6 +53,6 @@ public class Int_2_ref {
 				rv[i] = new Int_2_ref(v0, v1);
 			}
 			return rv;
-		} catch (Exception e) {Exc_.Noop(e); throw Exc_.new_parse("Int_2_ref[]", raw);}
+		} catch (Exception e) {Err_.Noop(e); throw Err_.new_parse("Int_2_ref[]", raw);}
 	}
 }

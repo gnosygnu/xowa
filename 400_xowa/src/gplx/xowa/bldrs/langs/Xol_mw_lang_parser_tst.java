@@ -262,7 +262,7 @@ class Xol_mw_lang_parser_fxt {
 	public Xol_mw_lang_parser_fxt Parse_core(String raw)				{parser.Parse_core(raw, lang, tmp_bfr, Xol_lang_transform_null._); return this;}
 	public Xol_mw_lang_parser_fxt Parse_xtn (String raw)				{parser.Parse_xtn(raw, Io_url_.Empty, app.Lang_mgr(), tmp_bfr, false, Xol_lang_transform_null._); lang.Evt_lang_changed(); return this;}
 	public Xol_mw_lang_parser_fxt Tst_keyword(int id, boolean case_sensitive, String... words) {
-		Xol_kwd_grp lst = lang.Kwd_mgr().Get_at(id); if (lst == null) throw Exc_.new_("list should not be null");
+		Xol_kwd_grp lst = lang.Kwd_mgr().Get_at(id); if (lst == null) throw Err_.new_wo_type("list should not be null");
 		Tfds.Eq(case_sensitive, lst.Case_match());
 		int actl_len = lst.Itms().length;
 		String[] actl = new String[actl_len];

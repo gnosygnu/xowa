@@ -25,7 +25,7 @@ public class Luaj_server_func_recv extends OneArgFunction {
 	public LuaValue call(LuaValue tbl_val) {
 		LuaTable tbl = (LuaTable)tbl_val;
 		String op = Luaj_value_.Get_val_as_str(tbl, "op");
-		if (!String_.Eq(op, "call")) throw Exc_.new_("luaj_recvr only processes op calls");
+		if (!String_.Eq(op, "call")) throw Err_.new_wo_type("luaj_recvr only processes op calls");
 		return engine.Server_recv_call(tbl);
 	}
 	public static Luaj_server_func_recv _ = new Luaj_server_func_recv();

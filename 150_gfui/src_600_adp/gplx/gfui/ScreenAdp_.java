@@ -23,13 +23,13 @@ import java.awt.Toolkit;
 public class ScreenAdp_ {
 	public static final ScreenAdp Primary = screen_(0);
 	public static ScreenAdp as_(Object obj) {return obj instanceof ScreenAdp ? (ScreenAdp)obj : null;}
-	public static ScreenAdp cast_(Object obj) {try {return (ScreenAdp)obj;} catch(Exception exc) {throw Exc_.new_type_mismatch_w_exc(exc, ScreenAdp.class, obj);}}
+	public static ScreenAdp cast_(Object obj) {try {return (ScreenAdp)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, ScreenAdp.class, obj);}}
 	public static ScreenAdp parse_(String raw) {	// ex: {screen{1}
 		try {
 			raw = String_.Replace(raw, "{screen{", "");
 			raw = String_.Replace(raw, "}", "");
 			return ScreenAdp_.screen_(Int_.parse_(raw));
-		}	catch(Exception exc) {throw Exc_.new_parse_exc(exc, ScreenAdp.class, raw);}
+		}	catch(Exception exc) {throw Err_.new_parse_exc(exc, ScreenAdp.class, raw);}
 	}
 	public static ScreenAdp from_point_(PointAdp pos) {// NOTE: not using FromPoint b/c of plat_wce
 		if (ScreenAdp_.Count() == 1) return Primary;
@@ -46,7 +46,7 @@ public class ScreenAdp_ {
 //		return 1;//Screen.AllScreens.Length;
 			}
 	public static ScreenAdp screen_(int index) {
-				if (index >= ScreenAdp_.Count()) throw Exc_.new_missing_idx(index, ScreenAdp_.Count());
+				if (index >= ScreenAdp_.Count()) throw Err_.new_missing_idx(index, ScreenAdp_.Count());
 		GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice[] devs = env.getScreenDevices();
 		GraphicsConfiguration conf = devs[index].getDefaultConfiguration();		

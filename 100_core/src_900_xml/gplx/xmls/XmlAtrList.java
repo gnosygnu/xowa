@@ -25,7 +25,7 @@ public class XmlAtrList {
 		return (xatr == null) ? or : xatr.getNodeValue();
 	}
 	public XmlAtr Fetch(String key) {
-		Node xatr = list.getNamedItem(key); if (xatr == null) throw Err_arg.notFound_key_("key", key);
+		Node xatr = list.getNamedItem(key); if (xatr == null) throw Err_.new_missing_key(key);
 		return new XmlAtr(xatr);
 	}
 	public XmlAtr Fetch_or_null(String key) {

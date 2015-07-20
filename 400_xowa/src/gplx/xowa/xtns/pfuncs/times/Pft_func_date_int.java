@@ -27,7 +27,7 @@ public class Pft_func_date_int extends Pf_func_base {
 	        case Date_tid_lcl: date = DateAdp_.Now(); break;
 	        case Date_tid_utc: date = DateAdp_.Now().XtoUtc(); break;
 	        case Date_tid_rev: date = ctx.Cur_page().Revision_data().Modified_on(); break;
-			default: throw Exc_.new_unhandled(date_tid);
+			default: throw Err_.new_unhandled(date_tid);
 	    }
 		switch (id) {
 			case Xol_kwd_grp_.Id_utc_year:
@@ -81,7 +81,7 @@ public class Pft_func_date_int extends Pf_func_base {
 					.Add_int_fixed(date.Minute(), 2)
 					.Add_int_fixed(date.Second(), 2);
 				break;
-			default: throw Exc_.new_unhandled(id);
+			default: throw Err_.new_unhandled(id);
 		}
 	}
 	public static final int Date_tid_utc = 0, Date_tid_lcl = 1, Date_tid_rev = 2;

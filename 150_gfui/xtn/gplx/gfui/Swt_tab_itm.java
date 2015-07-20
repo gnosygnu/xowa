@@ -35,7 +35,7 @@ public class Swt_tab_itm implements Gxw_tab_itm, Swt_control, FocusListener {
 	public Swt_kit Kit() {return kit;} private Swt_kit kit;
 	@Override public Control Under_control() {return null;}
 	@Override public Composite Under_composite() {return null;}
-	@Override public Control Under_menu_control() {throw Exc_.new_unimplemented();}
+	@Override public Control Under_menu_control() {throw Err_.new_unimplemented();}
 	@Override public String Tab_name() {return tab_itm.getText();} @Override public void Tab_name_(String v) {tab_itm.setText(v);}
 	@Override public String Tab_tip_text() {return tab_itm.getToolTipText();} @Override public void Tab_tip_text_(String v) {tab_itm.setToolTipText(v);}
 	public void Subs_add(GfuiElem sub) {

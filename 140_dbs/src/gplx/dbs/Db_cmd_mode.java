@@ -36,7 +36,7 @@ public class Db_cmd_mode {
 			case Tid_ignore:					// must mark for update
 			case Tid_update:					// return self
 							return Tid_update;
-			default:		throw Exc_.new_unhandled(cur);
+			default:		throw Err_.new_unhandled(cur);
 		}
 	}
 }

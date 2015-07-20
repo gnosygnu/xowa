@@ -82,7 +82,7 @@ class Xog_url_wkr_fxt {
 		wiki = Xoa_app_fxt.wiki_tst_(app);
 		Xoa_app_fxt.Init_gui(app, wiki);
 		win = app.Gui_mgr().Browser_win();
-		win.Active_page_(Xoae_page.test_(wiki, Xoa_ttl.parse_(wiki, Bry_.new_u8("test"))));	// TODO: remove unnecessary page init
+		win.Active_page_(Xoae_page.test_(wiki, Xoa_ttl.parse_(wiki, Bry_.new_a7("test"))));	// TODO: remove unnecessary page init
 		expd_wiki = expd_page = expd_qargs = expd_anchor = null;
 	}
 	public Xog_url_wkr_fxt Init_exec(String raw) {

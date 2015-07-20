@@ -36,12 +36,12 @@ public class Yn {
 			case Bool_.N_int: return false;
 			case Bool_.Y_int: return true;
 			case Bool_.__int: return or;
-			default: throw Exc_.new_unhandled(v_int);
+			default: throw Err_.new_unhandled(v_int);
 		}
 	}
 	public static boolean parse_(String v) {
 		int v_int = parse_as_int(v);
-		if (v_int == Bool_.__int) Exc_.new_unhandled(v);
+		if (v_int == Bool_.__int) Err_.new_unhandled(v);
 		return v_int == Bool_.Y_int;
 	}
 	public static String Xto_str(boolean v) {return v ? "y" : "n";}
@@ -50,7 +50,7 @@ public class Yn {
 			case Bool_.Y_byte:		return "y";
 			case Bool_.N_byte:		return "n";
 			case Bool_.__byte:		return "?";
-			default:				throw Exc_.new_unhandled(v);
+			default:				throw Err_.new_unhandled(v);
 		}
 	}
 	public static byte Xto_nullable_byte(String v) {
@@ -62,7 +62,7 @@ public class Yn {
 				case '?':			return Bool_.__byte;
 			}
 		}
-		throw Exc_.new_unhandled(v);
+		throw Err_.new_unhandled(v);
 	}
 	public static boolean store_bool_or(SrlMgr mgr, String key, boolean or) {
 		String v = mgr.SrlStrOr(key, "");

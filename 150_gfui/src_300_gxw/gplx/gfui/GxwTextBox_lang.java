@@ -103,7 +103,7 @@ class GxwTextFld_cls_lang extends JTextField implements GxwTextFld {
 		try {
 			this.setSelectionStart(v);
 		} catch (Exception e) {
-			Exc_.Noop(e);
+			Err_.Noop(e);
 			} // NOTE: sometimes fails when skipping ahead in dvd player; v = 0, and start/end = 0
 	}
 	public int SelLen() {return this.getSelectionEnd() - this.getSelectionStart();} public void SelLen_set(int v) {this.setSelectionEnd(this.SelBgn() + v);}

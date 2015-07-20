@@ -39,7 +39,7 @@ public class Pfunc_filepath_tst {
 		app.Wiki_mgr().Add(commons_wiki);
 		app.File_mgr().Repo_mgr().Set("src_commons", "mem/xowa/file/commons/src/", commons_wiki.Domain_str());
 		app.File_mgr().Repo_mgr().Set("trg_commons", "mem/xowa/file/commons/trg/", commons_wiki.Domain_str());
-		en_wiki.File_mgr().Repo_mgr().Add_repo(Bry_.new_u8("src_commons"), Bry_.new_u8("trg_commons"));
+		en_wiki.File_mgr().Repo_mgr().Add_repo(Bry_.new_a7("src_commons"), Bry_.new_a7("trg_commons"));
 		Io_mgr.I.CreateDir(Io_url_.new_dir_("mem/xowa/wiki/commons.wikimedia.org/ns/000/page/"));	// HACK: create page_dir so Scan_dirs_zip will not identify commons as zipped; FIX: remove; WHEN: after redoing commons.css download logic
 	}
 	@Test  public void Wiki_is_local() {

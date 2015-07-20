@@ -18,7 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfui;
 import gplx.Byte_ascii;
 import gplx.Enm_;
-import gplx.Err_;
 import gplx.GfoEvMgr_;
 import gplx.GfoInvkAble_;
 import gplx.GfoMsg_;

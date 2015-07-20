@@ -33,7 +33,7 @@ public class Xog_search_suggest_mgr implements GfoInvkAble {
 	public Gfo_url_arg[] Args_default() {return args_default;} private Gfo_url_arg[] args_default = Gfo_url_arg.Ary_empty;
 	public void Args_default_str_(String v) {
 		this.args_default_str = v;
-		byte[] bry = Bry_.new_u8("http://x.org/a?" + v);
+		byte[] bry = Bry_.new_a7("http://x.org/a?" + v);
 		Gfo_url tmp_url = new Gfo_url();
 		app.Utl__url_parser().Url_parser().Parse(tmp_url, bry, 0, bry.length);
 		args_default = tmp_url.Args();
@@ -133,14 +133,14 @@ public class Xog_search_suggest_mgr implements GfoInvkAble {
 		if		(String_.Eq(v, Str_search_mode_search))			return Tid_search_mode_search;
 		else if	(String_.Eq(v, Str_search_mode_all_pages_v1))	return Tid_search_mode_all_pages_v1;
 		else if	(String_.Eq(v, Str_search_mode_all_pages_v2))	return Tid_search_mode_all_pages_v2;
-		else													throw Exc_.new_unhandled(v);
+		else													throw Err_.new_unhandled(v);
 	}
 	private static String Search_mode_str(byte v) {
 		switch (v) {
 			case Tid_search_mode_search:						return Str_search_mode_search;
 			case Tid_search_mode_all_pages_v1:					return Str_search_mode_all_pages_v1;
 			case Tid_search_mode_all_pages_v2:					return Str_search_mode_all_pages_v2;
-			default:											throw Exc_.new_unhandled(v);
+			default:											throw Err_.new_unhandled(v);
 		}
 	}
 }

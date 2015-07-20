@@ -38,9 +38,9 @@ public class Gfo_usr_dlg_base implements Gfo_usr_dlg {
 		String rv = Log_many(grp_key, msg_key, fmt, args);
 		return Prog_direct(rv);
 	}
-	public Exc Fail_many(String grp_key, String msg_key, String fmt, Object... args) {
-		Exc rv = Exc_.new_(Bld_msg_many(grp_key, msg_key, fmt, args));
-		log_wkr.Log_to_err(rv.To_str_all());
+	public Err Fail_many(String grp_key, String msg_key, String fmt, Object... args) {
+		Err rv = Err_.new_wo_type(Bld_msg_many(grp_key, msg_key, fmt, args));
+		log_wkr.Log_to_err(rv.To_str__full());
 		return rv;
 	}
 	private String Bld_msg_many(String grp_key, String msg_key, String fmt, Object[] args) {

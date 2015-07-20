@@ -33,6 +33,6 @@ public class Rect_ref {
 		try {
 			String[] ary = String_.Split(raw, ",");
 			return new Rect_ref(Int_.parse_(ary[0]), Int_.parse_(ary[1]), Int_.parse_(ary[2]), Int_.parse_(ary[3]));
-		}	catch(Exception exc) {throw Exc_.new_parse_exc(exc, Rect_ref.class, raw);}
+		}	catch(Exception exc) {throw Err_.new_parse_exc(exc, Rect_ref.class, raw);}
 	}
 }

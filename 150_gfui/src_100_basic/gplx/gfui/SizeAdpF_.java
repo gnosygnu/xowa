@@ -25,10 +25,10 @@ public class SizeAdpF_ {
 	public static SizeAdpF coerce_(Object obj) {SizeAdpF rv = as_(obj); return rv == null ? parse_((String)obj) : rv;}
 	public static SizeAdpF parse_(String s) {
 		try {
-			String[] ary = String_.Split(s, ","); if (ary.length != 2) throw Exc_.new_("SizeAdf should only have 2 numbers separated by 1 comma");
+			String[] ary = String_.Split(s, ","); if (ary.length != 2) throw Err_.new_wo_type("SizeAdf should only have 2 numbers separated by 1 comma");
 			float val1 = Float_.parse_(ary[0]);
 			float val2 = Float_.parse_(ary[1]);
 			return new_(val1, val2);
-		}	catch (Exception e) {throw Exc_.new_parse_exc(e, SizeAdpF.class, s);}
+		}	catch (Exception e) {throw Err_.new_parse_exc(e, SizeAdpF.class, s);}
 	}
 }

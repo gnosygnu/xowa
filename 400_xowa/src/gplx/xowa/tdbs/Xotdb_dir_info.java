@@ -40,7 +40,7 @@ public class Xotdb_dir_info {
 			case gplx.ios.Io_stream_.Tid_zip	: return "_zip";
 			case gplx.ios.Io_stream_.Tid_gzip	: return "_gz";
 			case gplx.ios.Io_stream_.Tid_bzip2	: return "_bz2";
-			default								: throw Exc_.new_unhandled(v);
+			default								: throw Err_.new_unhandled(v);
 		}
 	}
 	public static byte[] Wtr_ext(byte v) {
@@ -49,7 +49,7 @@ public class Xotdb_dir_info {
 			case gplx.ios.Io_stream_.Tid_zip	: return Wtr_zip_bry;
 			case gplx.ios.Io_stream_.Tid_gzip	: return Wtr_gz_bry;
 			case gplx.ios.Io_stream_.Tid_bzip2	: return Wtr_bz2_bry;
-			default								: throw Exc_.new_unhandled(v);
+			default								: throw Err_.new_unhandled(v);
 		}
 	}
 }

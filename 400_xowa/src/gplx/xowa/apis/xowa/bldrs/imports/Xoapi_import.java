@@ -66,6 +66,7 @@ public class Xoapi_import implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_ns_file_map_)) 						ns_file_map = m.ReadBry("v");
 		else if	(ctx.Match(k, Invk_zip_tid_text)) 						return Io_stream_.To_str(zip_tid_text);
 		else if	(ctx.Match(k, Invk_zip_tid_text_)) 						zip_tid_text = Io_stream_.To_tid(m.ReadStr("v"));
+		else if	(ctx.Match(k, Invk_zip_tid_list)) 						return Options_zip_tid__list;
 		else if	(ctx.Match(k, Invk_zip_tid_html)) 						return Io_stream_.To_str(zip_tid_html);
 		else if	(ctx.Match(k, Invk_zip_tid_html_)) 						zip_tid_html = Io_stream_.To_tid(m.ReadStr("v"));
 		else if	(ctx.Match(k, Invk_user_name)) 							return user_name;
@@ -73,6 +74,7 @@ public class Xoapi_import implements GfoInvkAble {
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}
+	private static KeyVal[] Options_zip_tid__list = KeyVal_.Ary(KeyVal_.new_("raw", "text"), KeyVal_.new_("gzip"), KeyVal_.new_("bzip2"));
 	private static final String
 	  Invk_layout_all_max		= "layout_all_max"		, Invk_layout_all_max_		= "layout_all_max_"
 	, Invk_layout_text_max		= "layout_text_max"		, Invk_layout_text_max_		= "layout_text_max_"
@@ -83,7 +85,7 @@ public class Xoapi_import implements GfoInvkAble {
 	, Invk_html_db_max			= "html_db_max"			, Invk_html_db_max_			= "html_db_max_"
 	, Invk_file_db_max			= "file_db_max"			, Invk_file_db_max_			= "file_db_max_"
 	, Invk_ns_file_map			= "ns_file_map"			, Invk_ns_file_map_			= "ns_file_map_"
-	, Invk_zip_tid_text			= "zip_tid_text"		, Invk_zip_tid_text_		= "zip_tid_text_"
+	, Invk_zip_tid_text			= "zip_tid_text"		, Invk_zip_tid_text_		= "zip_tid_text_", Invk_zip_tid_list		= "zip_tid_list"
 	, Invk_zip_tid_html			= "zip_tid_html"		, Invk_zip_tid_html_		= "zip_tid_html_"
 	, Invk_user_name			= "user_name"			, Invk_user_name_			= "user_name_"
 	;

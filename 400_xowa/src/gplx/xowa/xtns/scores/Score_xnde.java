@@ -38,7 +38,7 @@ public class Score_xnde implements Xox_xnde, Xop_xnde_atr_parser, Xoh_cmd_itm {
 			case Xatr_id_output_ogg:	output_ogg  = xatr.Val_as_bool_by_int(src); break;
 			case Xatr_id_file_midi:		file_midi = xatr.Val_as_bry(src); break;
 			case Xatr_id_file_ogg:		file_ogg = xatr.Val_as_bry(src); break;
-			default:					throw Exc_.new_unhandled(xatr_key.Val());
+			default:					throw Err_.new_unhandled(xatr_key.Val());
 		}
 	}
 	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
@@ -175,7 +175,7 @@ public class Score_xnde implements Xox_xnde, Xop_xnde_atr_parser, Xoh_cmd_itm {
 			lilypond_version_proc.Run();
 			return Get_lilypond_version(lilypond_version_proc.Rslt_out());
 		}
-		catch (Exception e) {Exc_.Noop(e); return Version_unknown;}
+		catch (Exception e) {Err_.Noop(e); return Version_unknown;}
 	}
 	public static byte[] Get_lilypond_version(String rslt_str) {
 		byte[] rslt = Bry_.new_u8(rslt_str);	// expect 1st line to be of form "GNU LilyPond 2.16.2"

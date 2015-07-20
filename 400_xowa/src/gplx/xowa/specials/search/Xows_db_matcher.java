@@ -52,7 +52,7 @@ public class Xows_db_matcher {
 			case Xows_db_matcher.Tid_and:
 				return lhs.Matches(page_ttl_lc, page_ttl_words) && rhs.Matches(page_ttl_lc, page_ttl_words);
 			case Xows_db_matcher.Tid_null: return false;
-			default: throw Exc_.new_unhandled(tid);
+			default: throw Err_.new_unhandled(tid);
 		}
 	}
 	public static final Xows_db_matcher Null = new Xows_db_matcher(Xows_db_matcher.Tid_null, null, null, null);

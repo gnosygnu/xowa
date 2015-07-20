@@ -106,7 +106,7 @@ public class Xob_xml_parser {
 					case Xob_xml_parser_.Id_id_bgn_frag: case Xob_xml_parser_.Id_timestamp_bgn_frag:
 						data_bgn = pos; /*warn*/
 						break;
-					default:								throw Exc_.new_unhandled(itm.Tid());	// shouldn't happen
+					default:								throw Err_.new_unhandled(itm.Tid());	// shouldn't happen
 				}
 			}
 		}

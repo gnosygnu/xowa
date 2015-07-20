@@ -48,7 +48,7 @@ public class Btrie_fast_mgr {
 	public Btrie_fast_mgr Add(byte key, Object val) {return Add(new byte[] {key}, val);}
 	public Btrie_fast_mgr Add(String key, Object val) {return Add(Bry_.new_u8(key), val);}
 	public Btrie_fast_mgr Add(byte[] key, Object val) {
-		if (val == null) throw Exc_.new_("null objects cannot be registered", "key", String_.new_u8(key));
+		if (val == null) throw Err_.new_wo_type("null objects cannot be registered", "key", String_.new_u8(key));
 		int key_len = key.length; int key_end = key_len - 1;
 		ByteTrieItm_fast cur = root;
 		for (int i = 0; i < key_len; i++) {

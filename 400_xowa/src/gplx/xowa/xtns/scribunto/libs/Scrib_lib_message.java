@@ -33,7 +33,7 @@ public class Scrib_lib_message implements Scrib_lib {
 			case Proc_plain:									return Plain(args, rslt);
 			case Proc_check:									return Check(args, rslt);
 			case Proc_init_message_for_lang:					return Init_message_for_lang(args, rslt);
-			default: throw Exc_.new_unhandled(key);
+			default: throw Err_.new_unhandled(key);
 		}
 	}
 	private static final int Proc_plain = 0, Proc_check = 1, Proc_init_message_for_lang = 2;
@@ -67,7 +67,7 @@ class Scrib_lib_message_data {
 		for (int i = 0; i < len; i++) {
 			KeyVal kv = ary[i];
 			byte[] kv_key = Bry_.new_a7(kv.Key());
-			Object key_obj = key_hash.Get_by(kv_key); if (key_obj == null) throw Exc_.new_("msg_key is invalid", "key", kv_key);
+			Object key_obj = key_hash.Get_by(kv_key); if (key_obj == null) throw Err_.new_wo_type("msg_key is invalid", "key", kv_key);
 			byte key_tid = ((Byte_obj_val)key_obj).Val();
 			switch (key_tid) {
 				case Key_tid_keys:
@@ -85,7 +85,7 @@ class Scrib_lib_message_data {
 					for (int j = 0; j < args_ary_len; j++)
 						args[j] = args_ary[j].Val_to_str_or_empty();
 					break; 
-				default:					throw Exc_.new_unhandled(key_tid);
+				default:					throw Err_.new_unhandled(key_tid);
 			}
 		}
 		return this;
@@ -123,7 +123,7 @@ class Scrib_lib_message_data {
 			case Check_tid_exists		: return Bry_.Len_gt_0(msg_val);
 			case Check_tid_isBlank		: return Bry_.Len_eq_0(msg_val);	// REF.MW: $message === false || $message === ''
 			case Check_tid_isDisabled	: return Bry_.Len_eq_0(msg_val) || msg_val.length == 1 && msg_val[0] == Byte_ascii.Dash;	// REF.MW: $message === false || $message === '' || $message === '-'
-			default						: throw Exc_.new_unhandled(chk_tid);
+			default						: throw Err_.new_unhandled(chk_tid);
 		}
 	}
 	public byte[] Make_msg(byte[] cur_lang, Xowe_wiki wiki, Xop_ctx ctx, boolean exec_params, byte fmt_tid) {
@@ -161,7 +161,7 @@ class Scrib_lib_message_data {
 	public static byte parse_chk_(byte[] key) {return parse_or_fail(check_hash, key, "invalid check arg: {0}");}
 	public static byte parse_or_fail(Hash_adp_bry hash, byte[] key, String fmt) {
 		Object o = hash.Get_by_bry(key);
-		if (o == null) throw Exc_.new_(fmt, "key", String_.new_u8(key)).Stack_erase_1_();
+		if (o == null) throw Err_.new_wo_type(fmt, "key", String_.new_u8(key)).Trace_ignore_add_1_();
 		return ((Byte_obj_val)o).Val();
 	}
 	public static final byte Fmt_tid_parse = 1, Fmt_tid_text = 2, Fmt_tid_plain = 3, Fmt_tid_escaped = 4, Fmt_tid_parseAsBlock = 5;

@@ -51,27 +51,32 @@ public class Xob_dump_file {
 	public boolean Connect() {
 		IoEngine_xrg_downloadFil args = Io_mgr.I.DownloadFil_args("", Io_url_.Empty);
 		boolean rv = Connect_exec(args, file_url);
-		if (	!rv
-			&&	String_.In(server_url, Xob_dump_file_.Server_wmf_http, Xob_dump_file_.Server_wmf_https)
-			&&	String_.Eq(dump_date, Xob_dump_file_.Date_latest)
-			) {	// WMF changed dumping approach to partial dumps; this sometimes causes /latest/ to be missing page_articles; try to get earlier dump; DATE:2015-07-09
+		// WMF changed dumping approach to partial dumps; this sometimes causes /latest/ to be missing page_articles; try to get earlier dump; DATE:2015-07-09
+		if (	!rv	// not found
+			&&	String_.In(server_url, Xob_dump_file_.Server_wmf_http, Xob_dump_file_.Server_wmf_https)	// server is dumps.wikimedia.org
+			&&	String_.Eq(dump_date, Xob_dump_file_.Date_latest)	// request dump was latest
+			) {
+			Xoa_app_.Usr_dlg().Warn_many("", "", "wmf.dump:latest not found; url=~{0}", file_url);
 			byte[] abrv_wm = Xow_wiki_alias.Build_alias(wiki_domain_itm);
 			String new_dump_root = Xob_dump_file_.Server_wmf_https + String_.new_u8(abrv_wm) + "/";	// EX: http://dumps.wikimedia.org/enwiki/
 			byte[] wiki_dump_dirs_src = args.Exec_as_bry(new_dump_root);
 			if (wiki_dump_dirs_src == null) {Xoa_app_.Usr_dlg().Warn_many("", "", "could not connect to dump server; url=~{0}", new_dump_root); return false;}
 			String[] dates = gplx.xowa.wmfs.dump_pages.Xowmf_wiki_dump_dirs_parser.Parse(wiki_domain_itm.Domain_bry(), wiki_dump_dirs_src);
 			int dates_len = dates.length;
-			if (	dates_len > 3	// need at least 3; EX: 20150601,20150701,latest; 20150701 and latest are same; 20150601 is last good
-				&&	String_.Eq(dates[dates_len - 1], Xob_dump_file_.Date_latest)) {	// last itm is latest
-				String new_dump_date = dates[dates_len - 3];
+			for (int i = dates_len - 1; i > -1; --i) {
+				String new_dump_date = dates[i];
+				if (String_.Eq(new_dump_date, Xob_dump_file_.Date_latest)) continue;	// skip latest; assume it is bad
 				String new_dump_file = String_.Replace(file_name, Xob_dump_file_.Date_latest, new_dump_date);	// replace "-latest-" with "-20150602-";
 				String new_file_url = new_dump_root + new_dump_date + "/" + new_dump_file;
 				rv = Connect_exec(args, new_file_url);
 				if (rv) {
+					Xoa_app_.Usr_dlg().Note_many("", "", "wmf.dump:dump found; url=~{0}", new_file_url);
 					dump_date = new_dump_date;
 					file_name = new_dump_file;
 					file_url = new_file_url;
 				}
+				else
+					Xoa_app_.Usr_dlg().Warn_many("", "", "wmf.dump:dump not found; url=~{0}", new_file_url);
 			}
 		}
 		return rv;

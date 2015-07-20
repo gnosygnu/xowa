@@ -293,7 +293,7 @@ public class Xowd_page_tbl implements RlsAble {
 					.Exec_update();
 				break;
 			} catch (Exception exc) {
-				if (String_.Has(Err_.Message_gplx_brief(exc), "columns page_namespace, page_random_int are not unique")) {	// HACK: terrible hack, but moving pages across ns will break UNIQUE index
+				if (String_.Has(Err_.Message_gplx_full(exc), "columns page_namespace, page_random_int are not unique")) {	// HACK: terrible hack, but moving pages across ns will break UNIQUE index
 					conn.Exec_sql_args("DROP INDEX {0}__name_random;", tbl_name); // is UNIQUE by default
 					conn.Exec_sql_args("CREATE INDEX {0}__name_random ON {0} ({1}, {2});", tbl_name, fld_ns, fld_random_int);
 				}

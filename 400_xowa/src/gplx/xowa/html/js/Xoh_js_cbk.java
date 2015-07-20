@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.js; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import gplx.core.threads.*; import gplx.xowa.xtns.pfuncs.ifs.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.json.*;
+import gplx.core.json.*;
 import gplx.xowa.html.js.*;
 import gplx.xowa.gui.views.*;
 public class Xoh_js_cbk implements GfoInvkAble {
@@ -66,22 +66,22 @@ public class Xoh_js_cbk implements GfoInvkAble {
 			Xoa_ttl ttl = Xoa_ttl.parse_(wiki, m.Args_getAt(0).Val_to_bry());
 			Xoae_page page = wiki.Data_mgr().Get_page(ttl, false);
 			return String_.new_u8(page.Data_raw());
-		} catch (Exception e) {Exc_.Noop(e); return null;}
+		} catch (Exception e) {Err_.Noop(e); return null;}
 	}
 	private String Popups_get_async_bgn(GfoMsg m) {
 		try {
 			byte[] js_cbk	= m.Args_getAt(0).Val_to_bry();
 			byte[] href_bry = m.Args_getAt(1).Val_to_bry();
-			return html_itm.Owner_tab().Wiki().Html_mgr().Module_mgr().Popup_mgr().Get_async_bgn(js_cbk, href_bry);
-		} catch (Exception e) {Exc_.Noop(e); return null;}
+			return html_itm.Owner_tab().Wiki().Html_mgr().Head_mgr().Popup_mgr().Get_async_bgn(js_cbk, href_bry);
+		} catch (Exception e) {Err_.Noop(e); return null;}
 	}
 	private String Popups_get_html(GfoMsg m) {
 		try {
 			int	   popups_id	= Int_.Xby_double_(Double_.cast_(m.Args_getAt(0).Val()));
 			byte[] href_bry		= m.Args_getAt(1).Val_to_bry();
 			byte[] tooltip_bry	= m.Args_getAt(2).Val_to_bry();
-			return html_itm.Owner_tab().Wiki().Html_mgr().Module_mgr().Popup_mgr().Show_init(popups_id, href_bry, tooltip_bry);
-		} catch (Exception e) {Exc_.Noop(e); return null;}
+			return html_itm.Owner_tab().Wiki().Html_mgr().Head_mgr().Popup_mgr().Show_init(popups_id, href_bry, tooltip_bry);
+		} catch (Exception e) {Err_.Noop(e); return null;}
 	}
 	private String[] Get_title_meta(Xowe_wiki wiki, byte[] ttl_bry) {
 		synchronized (tmp_page) {
@@ -102,7 +102,7 @@ public class Xoh_js_cbk implements GfoInvkAble {
 				rv[i] = Get_title_meta(wiki, ttl);
 			}
 			return rv;
-		} catch (Exception e) {Exc_.Noop(e); return null;}
+		} catch (Exception e) {Err_.Noop(e); return null;}
 	}
 	private boolean Get_title_exists(Xowe_wiki wiki, byte[] ttl) {
 		return Pfunc_ifexist.Exists(wiki, ttl);
@@ -118,7 +118,7 @@ public class Xoh_js_cbk implements GfoInvkAble {
 				rv[i] = Get_title_exists(wiki, ttl) ? "1" : "0";
 			}
 			return rv;
-		} catch (Exception e) {Exc_.Noop(e); return null;}
+		} catch (Exception e) {Err_.Noop(e); return null;}
 	}		
 	private String Get_search_suggestions(GfoMsg m) {
 		Xowe_wiki wiki = html_itm.Owner_tab().Wiki();
@@ -155,18 +155,18 @@ public class Xoh_js_cbk implements GfoInvkAble {
 						rv[i - 1] = String_.new_u8(val_bry);
 						break;
 					}
-				}	catch (Exception e) {Exc_.Noop(e); rv[i] = null;}
+				}	catch (Exception e) {Err_.Noop(e); rv[i] = null;}
 				finally {}
 			}
 			return rv;
-		} catch (Exception e) {Exc_.Noop(e); return null;}
+		} catch (Exception e) {Err_.Noop(e); return null;}
 	}
 	private String Scripts_exec(GfoMsg m) {
 		Object rv = null;
 		try {
 			rv = app.Gfs_mgr().Run_str(m.Args_getAt(0).Val_to_str_or_empty());
 		}
-		catch (Exception e) {Exc_.Noop(e); return null;}
+		catch (Exception e) {Err_.Noop(e); return null;}
 		return Object_.Xto_str_strict_or_empty(rv);
 	}
 	private static final byte[] Wikidata_get_label_xowa_ui_lang = Bry_.new_a7("xowa_ui_lang"), Wikidata_get_label_xowa_title = Bry_.new_a7("xowa_title");
@@ -184,7 +184,7 @@ public class Xoh_js_cbk implements GfoInvkAble {
 		else if	(ctx.Match(k, Invk_get_current_url))					return String_.new_u8(html_itm.Owner_tab().Page().Url().Raw());
 		else if	(ctx.Match(k, Invk_xowa_exec_test))						return Xowa_exec_test(m);
 		else if	(ctx.Match(k, Invk_xowa_exec_test_as_array))			return Xowa_exec_test_as_array(m);
-		else if	(ctx.Match(k, Invk_exec_json))							return app.Html__json_exec().Exec_json(m);
+		else if	(ctx.Match(k, Invk_exec_json))							return app.Html__bridge_mgr().Cmd_mgr().Exec(m);
 		else	return GfoInvkAble_.Rv_unhandled;
 	}
 	public static final String Invk_parse_to_html = "parse_to_html", Invk_wikidata_get_label = "wikidata_get_label", Invk_get_page = "get_page", Invk_cmd = "cmd", Invk_scripts_exec = "scripts_exec"

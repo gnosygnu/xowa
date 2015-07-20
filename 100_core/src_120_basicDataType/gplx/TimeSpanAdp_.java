@@ -157,6 +157,6 @@ public class TimeSpanAdp_ {
 	@gplx.Internal protected static final int Idx_Hour = 3;
 	static int[] ZeroPadding	= {3, 2, 2, 2,};
 	static String[] Sprs	= {".", MajorDelimiter, MajorDelimiter, "",};
-	public static TimeSpanAdp cast_(Object arg) {try {return (TimeSpanAdp)arg;} catch(Exception exc) {throw Exc_.new_type_mismatch_w_exc(exc, TimeSpanAdp.class, arg);}}
+	public static TimeSpanAdp cast_(Object arg) {try {return (TimeSpanAdp)arg;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, TimeSpanAdp.class, arg);}}
 	public static final double Ratio_f_to_s = 1000;
 }

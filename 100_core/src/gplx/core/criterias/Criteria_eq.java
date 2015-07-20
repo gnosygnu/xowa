@@ -22,10 +22,10 @@ public class Criteria_eq implements Criteria {
 	public boolean			Negated()	{return negated;} private final boolean negated;
 	public Object		Val()		{return val;} private Object val;
 	public void			Val_as_obj_(Object v) {this.val = v;}
-	public void			Val_from_args(Hash_adp args) {throw Exc_.new_unimplemented();}
+	public void			Val_from_args(Hash_adp args) {throw Err_.new_unimplemented();}
 	public boolean Matches(Object comp) {
 		Class<?> val_type = ClassAdp_.ClassOf_obj(val);
-		if (!ClassAdp_.Eq_typeSafe(comp, val_type)) throw Exc_.new_type_mismatch(val_type, comp);
+		if (!ClassAdp_.Eq_typeSafe(comp, val_type)) throw Err_.new_type_mismatch(val_type, comp);
 		boolean rv = Object_.Eq(val, comp);
 		return negated ? !rv : rv;
 	}

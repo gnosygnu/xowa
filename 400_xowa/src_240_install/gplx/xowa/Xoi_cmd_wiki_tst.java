@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import org.junit.*;
+import gplx.core.consoles.*;
 import gplx.brys.*; import gplx.core.threads.*; import gplx.xowa.wikis.*; import gplx.xowa.setup.maints.*; import gplx.xowa.xtns.wdatas.imports.*;
 public class Xoi_cmd_wiki_tst {
 	@Test  public void Run() {	// MAINT
@@ -118,7 +119,7 @@ public class Xoi_cmd_wiki_tst {
 				api.Build_cfg(bfr, wiki);
 			}
 			catch (Exception e) {
-				ConsoleAdp._.WriteLine(Err_.Message_gplx_brief(e));
+				Console_adp__sys.I.Write_str_w_nl(Err_.Message_gplx_full(e));
 			}
 		}
 		bfr.Add_str_a7("app.bldr.wiki_cfg_bldr.run;").Add_byte_nl();

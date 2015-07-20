@@ -37,7 +37,7 @@ class GfuiBorderEdge_ {
 		else if (val == GfuiBorderEdge.Top.Val())		return Top_raw;
 		else if (val == GfuiBorderEdge.Bot.Val())		return Bot_raw;
 		else if (val == GfuiBorderEdge.All.Val())		return All_raw;
-		else throw Exc_.new_unhandled(edge);
+		else throw Err_.new_unhandled(edge);
 	}
 	public static GfuiBorderEdge parse_(String raw) {
 		if		(String_.Eq(raw, Left_raw))		return GfuiBorderEdge.Left;
@@ -45,7 +45,7 @@ class GfuiBorderEdge_ {
 		else if (String_.Eq(raw, Top_raw))		return GfuiBorderEdge.Top;
 		else if (String_.Eq(raw, Bot_raw))		return GfuiBorderEdge.Bot;
 		else if (String_.Eq(raw, All_raw))		return GfuiBorderEdge.All;
-		else throw Exc_.new_unhandled(raw);
+		else throw Err_.new_unhandled(raw);
 	}
 	public static final String 
 		  All_raw	= "all"

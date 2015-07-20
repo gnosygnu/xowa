@@ -67,7 +67,7 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 		Xowd_category_itm ctg = fsys_mgr.Db__cat_core().Tbl__cat_core().Select(cat_page_id); if (ctg == Xowd_category_itm.Null) return false;
 		return Ctg_select_v1(db_mgr.Wiki(), db_mgr.Core_data_mgr(), rv, ctg.File_idx(), ctg);
 	}
-	public boolean Load_ctg_v2(Xoctg_data_ctg rv, byte[] ctg_bry) {throw Exc_.new_unimplemented();}
+	public boolean Load_ctg_v2(Xoctg_data_ctg rv, byte[] ctg_bry) {throw Err_.new_unimplemented();}
 	public void Load_ctg_v2a(Xoctg_view_ctg rv, Xoctg_url ctg_url, byte[] ctg_ttl, int load_max) {
 		int cat_page_id = db_mgr.Core_data_mgr().Tbl__page().Select_id(Xow_ns_.Id_category, ctg_ttl); if (cat_page_id == Xowd_page_itm.Id_null) return;
 		Xowd_category_itm ctg = fsys_mgr.Db__cat_core().Tbl__cat_core().Select(cat_page_id); if (ctg == Xowd_category_itm.Null) return;

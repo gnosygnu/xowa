@@ -41,7 +41,7 @@ public class Xog_menu_mgr implements GfoInvkAble {
 			Lang_changed(app.Usere().Lang());
 		}
 		catch (Exception e) {	// ignore errors while loading custom menus, else fatal error; DATE:2014-07-01
-			app.Usr_dlg().Warn_many("", "", "error while loading menus; err=~{0}", Err_.Message_gplx(e));
+			app.Usr_dlg().Warn_many("", "", "error while loading menus; err=~{0}", Err_.Message_gplx_full(e));
 		}
 	}
 	public void Lang_changed(Xol_lang lang) {

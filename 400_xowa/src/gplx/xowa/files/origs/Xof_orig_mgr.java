@@ -66,7 +66,7 @@ public class Xof_orig_mgr {
 				if (!Io_mgr.I.ExistsFil(fsdb.Html_view_url()))
 					fsdb.File_exists_n_();
 			} catch (Exception e) {
-				Xoa_app_.Usr_dlg().Warn_many("", "", "orig: ~{0}", Err_.Message_gplx_brief(e));
+				Xoa_app_.Usr_dlg().Warn_many("", "", "orig: exc=~{0}", Err_.Message_gplx_full(e));
 			}
 		}
 	}

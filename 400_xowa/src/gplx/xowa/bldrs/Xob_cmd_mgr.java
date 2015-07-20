@@ -80,7 +80,7 @@ public class Xob_cmd_mgr implements GfoInvkAble {
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_decompress_bz2))				return Add(new Xob_decompress_bz2_cmd(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_deploy_zip))					return Add(new Xob_deploy_zip_cmd(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_deploy_copy))					return Add(new Xob_deploy_copy_cmd(bldr, wiki));
-		else 																		throw Exc_.new_unhandled(cmd_key);
+		else 																		throw Err_.new_unhandled(cmd_key);
 	}
 	private Xobd_wkr Xml_rdr_direct_add(Xowe_wiki wiki, Xobd_wkr wkr) {
 		Xobd_rdr dump_rdr = Xml_rdr_get(wiki);
@@ -118,7 +118,7 @@ public class Xob_cmd_mgr implements GfoInvkAble {
 			Xob_cmd cmd = (Xob_cmd)list.Get_at(i);
 			if (String_.Eq(cmd.Cmd_key(), cmd_key)) return cmd;
 		}
-		throw Exc_.new_("cmd not found", "key", cmd_key);
+		throw Err_.new_wo_type("cmd not found", "key", cmd_key);
 	}
 	private Object Add_many(GfoMsg m) {
 		Xowe_wiki wiki = Wiki_get_or_make(m);
@@ -132,7 +132,7 @@ public class Xob_cmd_mgr implements GfoInvkAble {
 		return Add_many(wiki, cmds);
 	}
 	public Object Add_many(Xowe_wiki wiki, String... cmds) {
-		int len = cmds.length; if (len == 0) throw Exc_.new_("add_many cannot have 0 cmds");
+		int len = cmds.length; if (len == 0) throw Err_.new_wo_type("add_many cannot have 0 cmds");
 		Object rv = null;
 		for (int i = 0; i < len; i++)
 			rv = Add_cmd(wiki, cmds[i]);

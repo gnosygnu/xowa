@@ -16,13 +16,14 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apps; import gplx.*; import gplx.xowa.*;
+import gplx.core.consoles.*;
 public class Xoa_shell implements GfoInvkAble {
 	public Xoa_shell(Xoae_app app) {this.app = app;} private Xoae_app app;
 	public boolean Fetch_page_exec_async() {return fetch_page_exec_async;} private boolean fetch_page_exec_async = true;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_fetch_page))				return Fetch_page(m);
-		else if	(ctx.Match(k, Invk_chars_per_line_max_))	ConsoleAdp._.CharsPerLineMax_set(m.ReadInt("v"));
-		else if	(ctx.Match(k, Invk_backspace_by_bytes_))	ConsoleAdp._.Backspace_by_bytes_(m.ReadYn("v"));
+		else if	(ctx.Match(k, Invk_chars_per_line_max_))	Console_adp__sys.I.Chars_per_line_max_(m.ReadInt("v"));
+		else if	(ctx.Match(k, Invk_backspace_by_bytes_))	Console_adp__sys.I.Backspace_by_bytes_(m.ReadYn("v"));
 		else return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}

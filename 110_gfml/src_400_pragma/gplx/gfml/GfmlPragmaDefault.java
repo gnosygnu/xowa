@@ -32,7 +32,7 @@ class GfmlPragmaDefault implements GfmlPragma {
 		return list;
 	}
 	@gplx.Internal protected void CompileSubNde(GfmlNde nde, List_adp list) {
-		String typeKey = nde.SubKeys().FetchDataOrNull("typeKey"); if (typeKey == null) throw Exc_.new_missing_key("typeKey");
+		String typeKey = nde.SubKeys().FetchDataOrNull("typeKey"); if (typeKey == null) throw Err_.new_missing_key("typeKey");
 		for (int i = 0; i < nde.SubHnds().Count(); i++) {
 			GfmlNde subNde = (GfmlNde)nde.SubHnds().Get_at(i);
 			GfmlDefaultItem item = CompileItem(subNde, typeKey);
@@ -96,7 +96,7 @@ class GfmlDefaultPragma_bgnCmd implements GfmlBldrCmd {
 			GfmlDefaultItem item = (GfmlDefaultItem)itemObj;
 			if (!String_.Eq(item.TypeKey(), type.Key())) {
 				type = regy.FetchOrNull(item.TypeKey(), pos);
-				if (type == GfmlType_.Null) throw Exc_.new_("default type must exist", "typeKey", item.TypeKey());
+				if (type == GfmlType_.Null) throw Err_.new_wo_type("default type must exist", "typeKey", item.TypeKey());
 			}
 			type = type.Clone().DocPos_(pos);
 			regy.Add(type);
@@ -119,7 +119,7 @@ class GfmlDefaultPragma_endCmd implements GfmlBldrCmd {
 			GfmlDefaultItem item = (GfmlDefaultItem)itemObj;
 			if (!String_.Eq(item.TypeKey(), type.Key())) {
 				type = regy.FetchOrNull(item.TypeKey());
-				if (type == GfmlType_.Null) throw Exc_.new_("fatal: default type must exist", "typeKey", item.TypeKey());
+				if (type == GfmlType_.Null) throw Err_.new_wo_type("fatal: default type must exist", "typeKey", item.TypeKey());
 			}
 			item.Exec_end(type);
 		}

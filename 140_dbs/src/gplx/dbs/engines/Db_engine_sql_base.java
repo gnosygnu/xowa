@@ -41,7 +41,7 @@ public abstract class Db_engine_sql_base implements Db_engine {
 			Statement cmd = New_stmt_exec(sql);	
 			return cmd.executeUpdate(sql);			
 		}
-		catch (Exception e) {throw Exc_.new_exc(e, "db", "db.engine:exec failed", "url", conn_info.Xto_api(), "sql", sql);}
+		catch (Exception e) {throw Err_.new_exc(e, "db", "db.engine:exec failed", "url", conn_info.Xto_api(), "sql", sql);}
 	}
 	private DataRdr Exec_as_rdr(String sql) {
 		try {
@@ -50,7 +50,7 @@ public abstract class Db_engine_sql_base implements Db_engine {
 			ResultSet rdr = cmd.getResultSet();	
 			return New_rdr(rdr, sql);
 		}
-		catch (Exception e) {throw Exc_.new_exc(e, "db", "db.engine:rdr failed", "url", conn_info.Xto_api(), "sql", sql);}
+		catch (Exception e) {throw Err_.new_exc(e, "db", "db.engine:rdr failed", "url", conn_info.Xto_api(), "sql", sql);}
 	}
 	public void Ddl_create_tbl(Db_meta_tbl tbl) {Exec_as_int(tbl.To_sql_create());}
 	public void Ddl_create_idx(Gfo_usr_dlg usr_dlg, Db_meta_idx... ary) {
@@ -68,7 +68,7 @@ public abstract class Db_engine_sql_base implements Db_engine {
 			Gfo_usr_dlg_.I.Plog_many("", "", "column added to table: db=~{0} tbl=~{1} fld=~{2}", conn_info.Database(), tbl, fld.Name());
 		}
 		catch (Exception e) {	// catch error if column already added to table
-			Gfo_usr_dlg_.I.Warn_many("", "", "column not added to table: db=~{0} tbl=~{1} fld=~{2} err=~{3}", conn_info.Database(), tbl, fld.Name(), Err_.Message_gplx(e));
+			Gfo_usr_dlg_.I.Warn_many("", "", "column not added to table: db=~{0} tbl=~{1} fld=~{2} err=~{3}", conn_info.Database(), tbl, fld.Name(), Err_.Message_gplx_full(e));
 		}
 	}
 	public void Ddl_delete_tbl(String tbl)						{Exec_as_int(Db_sqlbldr__sqlite.I.Bld_drop_tbl(tbl));}
@@ -89,21 +89,21 @@ public abstract class Db_engine_sql_base implements Db_engine {
 	public void Conn_term() {
 		if (connection == null) return;	// connection never opened; just exit
 		try 	{connection.close();}
-		catch 	(Exception e) {throw Exc_.new_exc(e, "db", "Conn_term failed", "url", conn_info.Xto_raw());}
+		catch 	(Exception e) {throw Err_.new_exc(e, "db", "Conn_term failed", "url", conn_info.Xto_raw());}
 		connection = null;
 	}
 	public Object New_stmt_prep_as_obj(String sql) {
 		if (connection == null) connection = Conn_new();	// auto-open connection
 		try 	{return connection.prepareStatement(sql);}
-		catch 	(Exception e) {throw Exc_.new_exc(e, "db", "New_stmt_prep failed", "sql", sql);}
+		catch 	(Exception e) {throw Err_.new_exc(e, "db", "New_stmt_prep failed", "sql", sql);}
 	}
 	private Statement New_stmt_exec(String sql) {
 		if (connection == null) connection = Conn_new();	// auto-open connection
 		try 	{return connection.createStatement();}
-		catch 	(Exception e) {throw Exc_.new_exc(e, "db", "New_stmt_exec failed", "sql", sql);}
+		catch 	(Exception e) {throw Err_.new_exc(e, "db", "New_stmt_exec failed", "sql", sql);}
 	}
 	protected Connection Conn_make_by_url(String url, String uid, String pwd) {
 		try {return DriverManager.getConnection(url, uid, pwd);}
-		catch (SQLException e) {throw Exc_.new_exc(e, "db", "connection open failed", "info", Conn_info().Xto_raw());}
+		catch (SQLException e) {throw Err_.new_exc(e, "db", "connection open failed", "info", Conn_info().Xto_raw());}
 	}
 	}

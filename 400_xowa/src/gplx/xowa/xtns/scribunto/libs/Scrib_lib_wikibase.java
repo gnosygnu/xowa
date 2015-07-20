@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import gplx.json.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.xtns.wdatas.parsers.*;	
+import gplx.core.json.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.xtns.wdatas.parsers.*;	
 public class Scrib_lib_wikibase implements Scrib_lib {
 	public Scrib_lib_wikibase(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
@@ -33,7 +33,7 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 			case Proc_getEntity:						return GetEntity(args, rslt);
 			case Proc_getEntityId:						return GetEntityId(args, rslt);
 			case Proc_getGlobalSiteId:					return GetGlobalSiteId(args, rslt);
-			default: throw Exc_.new_unhandled(key);
+			default: throw Err_.new_unhandled(key);
 		}
 	}
 	private static final int Proc_getEntity = 0, Proc_getEntityId = 1, Proc_getGlobalSiteId = 2;

@@ -27,7 +27,7 @@ public class Xoctg_view_ctg {
 			case Xoa_ctg_mgr.Tid_subc: return subcs;
 			case Xoa_ctg_mgr.Tid_page: return pages;
 			case Xoa_ctg_mgr.Tid_file: return files;
-			default: throw Exc_.new_unhandled(tid);
+			default: throw Err_.new_unhandled(tid);
 		}
 	}
 	public boolean Hidden() {return hidden;} private boolean hidden;

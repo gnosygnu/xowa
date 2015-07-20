@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.ios; import gplx.*;
-import gplx.core.criterias.*;
+import gplx.core.consoles.*; import gplx.core.criterias.*;
 public class IoEngine_xrg_queryDir {
 	public Io_url Url() {return url;} public IoEngine_xrg_queryDir Url_(Io_url val) {url = val; return this;} Io_url url;
 	public boolean Recur() {return recur;} public IoEngine_xrg_queryDir Recur_() {return Recur_(true);} public IoEngine_xrg_queryDir Recur_(boolean val) {recur = val; return this;} private boolean recur = false;
@@ -30,7 +30,7 @@ public class IoEngine_xrg_queryDir {
 		return this;
 	}
 
-	public ConsoleDlg UsrDlg() {return usrDlg;} public IoEngine_xrg_queryDir UsrDlg_(ConsoleDlg val) {usrDlg = val; return this;} ConsoleDlg usrDlg = ConsoleDlg_.Null;
+	public Console_adp UsrDlg() {return usrDlg;} public IoEngine_xrg_queryDir UsrDlg_(Console_adp val) {usrDlg = val; return this;} Console_adp usrDlg = Console_adp_.Noop;
 	public IoEngine_xrg_queryDir FilPath_(String val) {
 		Criteria_ioMatch crt = Criteria_ioMatch.parse_(true, val, url.Info().CaseSensitive());
 		filCrt = Criteria_fld.new_(IoItm_base_.Prop_Path, crt);

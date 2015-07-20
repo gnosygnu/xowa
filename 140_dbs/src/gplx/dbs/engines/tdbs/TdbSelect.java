@@ -21,7 +21,7 @@ import gplx.lists.*; /*ComparerAble*/ import gplx.stores.*; /*GfoNdeRdr*/
 class TdbSelectWkr implements Db_qryWkr {
 	public Object Exec(Db_engine engineObj, Db_qry cmdObj) {
 		TdbEngine engine = TdbEngine.cast_(engineObj); Db_qry__select_cmd cmd = (Db_qry__select_cmd)cmdObj;
-		if (cmd.From().Tbls().Count() > 1) throw Exc_.new_w_type("gplx.tdbs", "joins not supported for tdbs", "sql", cmd.Xto_sql());
+		if (cmd.From().Tbls().Count() > 1) throw Err_.new_("gplx.tdbs", "joins not supported for tdbs", "sql", cmd.Xto_sql());
 
 		TdbTable tbl = engine.FetchTbl(cmd.From().BaseTable().TblName());
 		GfoNdeList rv = (cmd.Where() == Db_qry_.WhereAll && cmd.Limit() == Db_qry__select_cmd.Limit_disabled) ? rv = tbl.Rows() : FilterRecords(tbl, cmd.Where(), cmd.Limit());

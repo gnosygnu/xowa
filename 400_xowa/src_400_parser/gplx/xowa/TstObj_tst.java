@@ -105,7 +105,7 @@ public class TstObj_tst {
 			}
 		}
 		if (pass) return;
-		throw Exc_.new_(Op_sys.Lnx.Nl_str() + sb.XtoStr());
+		throw Err_.new_wo_type(Op_sys.Lnx.Nl_str() + sb.XtoStr());
 	}
 	private static void Eval(List_adp rslts, TstRuleMgr ruleMgr, Ordered_hash props, String idx, TstObj expd, TstObj actl) {
 		int expdLen = expd.Atrs().Count();

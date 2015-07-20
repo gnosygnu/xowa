@@ -43,28 +43,28 @@ public class Xob_xml_parser_tst {
 	@Test  public void Xml() {
 		Xowd_page_itm doc = doc_(1, "a", "&quot;a &amp; b &lt;&gt; a | b&quot;", Date_1);
 		fil = page_bldr.Add(doc).XtoByteStreamRdr();
-		tst_parse(fil, doc.Text_(Bry_.new_u8("\"a & b <> a | b\"")), 0);
+		tst_parse(fil, doc.Text_(Bry_.new_a7("\"a & b <> a | b\"")), 0);
 	}
 	@Test  public void Tab() {
 		Xowd_page_itm doc = doc_(1, "a", "a \t b", Date_1);
 		fil = page_bldr.Add(doc).XtoByteStreamRdr();
-		tst_parse(fil, doc.Text_(Bry_.new_u8("a &#09; b")), 0);
+		tst_parse(fil, doc.Text_(Bry_.new_a7("a &#09; b")), 0);
 	}
 	@Test  public void Tab_disable() {
 		Xowd_page_itm doc = doc_(1, "a", "a \t b", Date_1);
 		page_parser.Trie_tab_del_();
 		fil = page_bldr.Add(doc).XtoByteStreamRdr();
-		tst_parse(fil, doc.Text_(Bry_.new_u8("a \t b")), 0);
+		tst_parse(fil, doc.Text_(Bry_.new_a7("a \t b")), 0);
 	}
 	@Test  public void Cr_nl() {
 		Xowd_page_itm doc = doc_(1, "a", "a \r\n b", Date_1);
 		fil = page_bldr.Add(doc).XtoByteStreamRdr();
-		tst_parse(fil, doc.Text_(Bry_.new_u8("a \n b")), 0);
+		tst_parse(fil, doc.Text_(Bry_.new_a7("a \n b")), 0);
 	}
 	@Test  public void Cr() {
 		Xowd_page_itm doc = doc_(1, "a", "a \r b", Date_1);
 		fil = page_bldr.Add(doc).XtoByteStreamRdr();
-		tst_parse(fil, doc.Text_(Bry_.new_u8("a \n b")), 0);
+		tst_parse(fil, doc.Text_(Bry_.new_a7("a \n b")), 0);
 	}
 	@Test  public void Text_long() {
 		String s = String_.Repeat("a", 1024);

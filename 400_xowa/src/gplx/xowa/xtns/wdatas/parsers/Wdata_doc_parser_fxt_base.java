@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
-import gplx.json.*; import gplx.xowa.xtns.wdatas.core.*;
+import gplx.core.json.*; import gplx.xowa.xtns.wdatas.core.*;
 abstract class Wdata_doc_parser_fxt_base {
 	protected Wdata_doc_parser parser;
 	public void Init() {
@@ -61,13 +61,13 @@ abstract class Wdata_doc_parser_fxt_base {
 	}
 	public void Test_qualifiers(String raw, Wdata_claim_itm_base... expd_itms) {
 		Json_doc jdoc = Json_doc.new_apos_(raw);
-		Json_itm_nde qualifiers_nde = Json_itm_nde.cast_(Json_itm_kv.cast_(jdoc.Root().Subs_get_at(0)).Val());
+		Json_nde qualifiers_nde = Json_nde.cast_(Json_itm_kv.cast_(jdoc.Root().Get_at(0)).Val());
 		Wdata_claim_grp_list actl = parser.Parse_qualifiers(Q1_bry, qualifiers_nde);
 		Tfds.Eq_ary_str(expd_itms, To_ary(actl));
 	}
 	public void Test_references(String raw, int[] expd_order, Wdata_claim_itm_base... expd_itms) {
 		Json_doc jdoc = Json_doc.new_apos_(raw);
-		Json_itm_ary owner = Json_itm_ary.cast_(Json_itm_kv.cast_(jdoc.Root().Subs_get_at(0)).Val());
+		Json_itm_ary owner = Json_itm_ary.cast_(Json_itm_kv.cast_(jdoc.Root().Get_at(0)).Val());
 		Wdata_references_grp[] actl = parser.Parse_references(Q1_bry, owner);
 		Wdata_references_grp actl_grp = actl[0];
 		Tfds.Eq_ary(expd_order, actl_grp.References_order());
@@ -75,7 +75,7 @@ abstract class Wdata_doc_parser_fxt_base {
 	}
 	public void Test_pid_order(String raw, int... expd) {
 		Json_doc jdoc = Json_doc.new_apos_(raw);
-		Json_itm_ary nde = Json_itm_ary.cast_(Json_itm_kv.cast_(jdoc.Root().Subs_get_at(0)).Val());
+		Json_itm_ary nde = Json_itm_ary.cast_(Json_itm_kv.cast_(jdoc.Root().Get_at(0)).Val());
 		int[] actl = parser.Parse_pid_order(Q1_bry, nde);
 		Tfds.Eq_ary(expd, actl);
 	}

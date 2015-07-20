@@ -22,7 +22,7 @@ public interface Gfo_usr_dlg extends Cancelable {
 	Gfo_usr_dlg__gui	Gui_wkr(); void Gui_wkr_(Gfo_usr_dlg__gui v);
 	String				Log_many(String grp_key, String msg_key, String fmt, Object... args);
 	String				Warn_many(String grp_key, String msg_key, String fmt, Object... args);
-	Exc					Fail_many(String grp_key, String msg_key, String fmt, Object... args);
+	Err					Fail_many(String grp_key, String msg_key, String fmt, Object... args);
 	String				Prog_many(String grp_key, String msg_key, String fmt, Object... args);
 	String				Prog_none(String grp_key, String msg_key, String fmt);
 	String				Note_many(String grp_key, String msg_key, String fmt, Object... args);

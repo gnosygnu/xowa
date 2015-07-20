@@ -17,17 +17,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.xowa.bookmarks; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*; import gplx.xowa.specials.xowa.*;
 import gplx.core.primitives.*;
-import gplx.xowa.html.xouis.tbls.*;
+import gplx.xowa.html.bridges.dbuis.tbls.*;
 import gplx.xowa.users.data.*; import gplx.xowa.users.bmks.*;
 public class Xows_bmk_page implements Xows_page {
 	public Xows_special_meta Special_meta() {return Xows_special_meta_.Itm__bookmarks;}
 	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
-		Xoud_bmk_mgr bmk_mgr = wiki.App().User().User_db_mgr().Bmk_mgr();
-		page.Html_data().Module_mgr().Itm__xoui().Init(wiki.Appe()).Enabled_y_();
+		Xoa_app app = wiki.App();
+		Dbui_tbl_itm__bmk ui_tbl = Dbui_tbl_itm__bmk.get_or_new(app, app.User().User_db_mgr().Bmk_mgr().Tbl__itm());
+		page.Html_data().Head_mgr().Itm__dbui().Init(app).Enabled_y_();
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_m001();
-		Xoud_bmk_itm_row[] rows = bmk_mgr.Itms__get(Xoud_bmk_mgr.Owner_root);
-		Xoui_tbl_itm hui_tbl = Xoui_tbl_itm__bmk.new_(bmk_mgr.Tbl__itm(), rows);
-		wiki.Html__xoui_tbl_mgr().Write(bfr, hui_tbl);
+		ui_tbl.Select(bfr, Xoud_bmk_mgr.Owner_root);
 		page.Hdump_data().Body_(bfr.To_bry_and_rls());
 	}
 }

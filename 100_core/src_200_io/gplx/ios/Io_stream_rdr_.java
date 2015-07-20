@@ -35,7 +35,7 @@ public class Io_stream_rdr_ {
 			case Io_stream_.Tid_zip: 					return new Io_stream_rdr_zip();
 			case Io_stream_.Tid_gzip: 					return new Io_stream_rdr_gzip();
 			case Io_stream_.Tid_bzip2: 					return new Io_stream_rdr_bzip2();
-			default:									throw Exc_.new_unhandled(tid);
+			default:									throw Err_.new_unhandled(tid);
 		}
 	}
 	public static byte[] Load_all(Io_url url) {
@@ -78,7 +78,7 @@ public class Io_stream_rdr_ {
 			if (stream != null)
 				stream.close();									
 			return true;
-		} catch (Exception e) {Exc_.Noop(e); return false;}
+		} catch (Exception e) {Err_.Noop(e); return false;}
 	}
 	public static int Stream_read_by_parts(java.io.InputStream stream, int part_len, byte[] bry, int bgn, int len) {
 		/*
@@ -103,7 +103,7 @@ public class Io_stream_rdr_ {
 			return rv;
 		}
 		catch (Exception exc) {
-			throw Exc_.new_exc(exc, "io", "read failed", "bgn", bgn, "len", len);
+			throw Err_.new_exc(exc, "io", "read failed", "bgn", bgn, "len", len);
 		}
 	}
 	public static final int Read_done = -1;
@@ -133,15 +133,15 @@ class Io_stream_rdr_adp implements Io_stream_rdr {
 	public Io_stream_rdr Open() {return this;}
 	public int Read(byte[] bry, int bgn, int len) {
 		try {return strm.read(bry, bgn, len);}	
-		catch (Exception e) {throw Exc_.new_exc(e, "io", "read failed", "bgn", bgn, "len", len);}
+		catch (Exception e) {throw Err_.new_exc(e, "io", "read failed", "bgn", bgn, "len", len);}
 	}
 	public long Skip(long len) {
 		try {return strm.skip(len);}	
-		catch (Exception e) {throw Exc_.new_exc(e, "io", "skip failed", "len", len);}
+		catch (Exception e) {throw Err_.new_exc(e, "io", "skip failed", "len", len);}
 	}	
 	public void Rls() {
 		try {strm.close();} 
-		catch (Exception e) {throw Exc_.new_exc(e, "io", "close failed", "url", url.Xto_api());}
+		catch (Exception e) {throw Err_.new_exc(e, "io", "close failed", "url", url.Xto_api());}
 	}
 }
 abstract class Io_stream_rdr_base implements Io_stream_rdr {	
@@ -155,20 +155,20 @@ abstract class Io_stream_rdr_base implements Io_stream_rdr {
 	}
 	public Io_stream_rdr Open() {
 		try {stream = Wrap_stream(new java.io.FileInputStream(url.Xto_api()));}
-		catch (Exception e) {throw Exc_.new_exc(e, "io", "open failed", "url", url.Xto_api());}
+		catch (Exception e) {throw Err_.new_exc(e, "io", "open failed", "url", url.Xto_api());}
 		return this;
 	}
 	public int Read(byte[] bry, int bgn, int len) {
 		try {return stream.read(bry, bgn, len);}
-		catch (Exception e) {throw Exc_.new_exc(e, "io", "read failed", "bgn", bgn, "len", len);}
+		catch (Exception e) {throw Err_.new_exc(e, "io", "read failed", "bgn", bgn, "len", len);}
 	}
 	public long Skip(long len) {		
 		try {return stream.skip(len);}
-		catch (Exception e) {throw Exc_.new_exc(e, "io", "skip failed", "len", len);}
+		catch (Exception e) {throw Err_.new_exc(e, "io", "skip failed", "len", len);}
 	}
 	public void Rls() {
 		try {stream.close();}
-		catch (Exception e) {throw Exc_.new_exc(e, "io", "close failed", "url", url.Xto_api());}
+		catch (Exception e) {throw Err_.new_exc(e, "io", "close failed", "url", url.Xto_api());}
 	}
 	public abstract java.io.InputStream Wrap_stream(java.io.InputStream stream);
 }
@@ -185,7 +185,7 @@ class Io_stream_rdr_file extends Io_stream_rdr_base {
 					stream = Wrap_stream(new java.io.FileInputStream(url.Xto_api()));
 			}
 		}
-		catch (Exception e) {throw Exc_.new_exc(e, "io", "open failed", "url", url.Xto_api());}
+		catch (Exception e) {throw Err_.new_exc(e, "io", "open failed", "url", url.Xto_api());}
 		return this;
 	}
 	@Override public java.io.InputStream Wrap_stream(java.io.InputStream stream) {return stream;}
@@ -202,7 +202,7 @@ class Io_stream_rdr_zip implements Io_stream_rdr {
 	}
 	public Io_stream_rdr Open() {
 		try {Wrap_stream(new java.io.FileInputStream(url.Xto_api()));}
-		catch (Exception e) {throw Exc_.new_exc(e, "io", "open failed", "url", url.Xto_api());}
+		catch (Exception e) {throw Err_.new_exc(e, "io", "open failed", "url", url.Xto_api());}
 		return this;
 	}
 	void Wrap_stream(java.io.InputStream input_stream) {zip_stream = new java.util.zip.ZipInputStream(input_stream);}
@@ -218,15 +218,15 @@ class Io_stream_rdr_zip implements Io_stream_rdr {
 					return read;
 			}
 		}
-		catch (Exception e) {throw Exc_.new_exc(e, "io", "read failed", "bgn", bgn, "len", len);}
+		catch (Exception e) {throw Err_.new_exc(e, "io", "read failed", "bgn", bgn, "len", len);}
 	}
 	public long Skip(long len) {		
 		try {return zip_stream.skip(len);}
-		catch (Exception e) {throw Exc_.new_exc(e, "io", "skip failed", "len", len);}
+		catch (Exception e) {throw Err_.new_exc(e, "io", "skip failed", "len", len);}
 	}
 	public void Rls() {
 		try {zip_stream.close();}
-		catch (Exception e) {throw Exc_.new_exc(e, "io", "close failed", "url", url.Xto_api());}
+		catch (Exception e) {throw Err_.new_exc(e, "io", "close failed", "url", url.Xto_api());}
 	}
 }
 class Io_stream_rdr_gzip extends Io_stream_rdr_base {
@@ -245,19 +245,19 @@ class Io_stream_rdr_gzip extends Io_stream_rdr_base {
 			return total_read == 0 ? gplx.ios.Io_stream_rdr_.Read_done : total_read;	// gzip seems to allow 0 bytes read (bz2 and zip return -1 instead); normalize return to -1;
 		}
 		catch (Exception e) {
-			throw Exc_.new_exc(e, "io", "read failed", "bgn", bgn, "len", len);
+			throw Err_.new_exc(e, "io", "read failed", "bgn", bgn, "len", len);
 		}
 	}
 	@Override public java.io.InputStream Wrap_stream(java.io.InputStream stream) {
 		try {return new java.util.zip.GZIPInputStream(stream);}
-		catch (Exception exc) {throw Exc_.new_("failed to open gz stream");}
+		catch (Exception exc) {throw Err_.new_wo_type("failed to open gz stream");}
 	}
 }
 class Io_stream_rdr_bzip2 extends Io_stream_rdr_base {
 	@Override public byte Tid() {return Io_stream_.Tid_bzip2;}
 	@Override public java.io.InputStream Wrap_stream(java.io.InputStream stream) {
 		try {return new org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream(stream, true);}
-		catch (Exception exc) {throw Exc_.new_("failed to open bzip2 stream");}
+		catch (Exception exc) {throw Err_.new_wo_type("failed to open bzip2 stream");}
 	}
 	@Override public int Read(byte[] bry, int bgn, int len) {
 		return Io_stream_rdr_.Stream_read_by_parts(stream, Read_len, bry, bgn, len);

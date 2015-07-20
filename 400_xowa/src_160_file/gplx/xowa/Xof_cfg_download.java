@@ -36,7 +36,7 @@ public class Xof_cfg_download implements GfoInvkAble {
 		if		(String_.Eq(s, "none"))		return Redownload_none;
 		else if	(String_.Eq(s, "missing"))	return Redownload_missing;
 		else if	(String_.Eq(s, "all"))		return Redownload_all;
-		else								throw Exc_.new_unhandled(s);
+		else								throw Err_.new_unhandled(s);
 	}
 	public static final byte Redownload_none = 0, Redownload_missing = 1, Redownload_all = 2; 
 	String Redownload_to_str_(byte v) {
@@ -44,7 +44,7 @@ public class Xof_cfg_download implements GfoInvkAble {
 			case Redownload_none:		return "none";
 			case Redownload_missing:	return "missing";
 			case Redownload_all:		return "all";
-			default:					throw Exc_.new_unhandled(v);
+			default:					throw Err_.new_unhandled(v);
 		}
 	}
 }

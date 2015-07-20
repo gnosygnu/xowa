@@ -64,7 +64,7 @@ class Xob_bin_db_mgr {
 	}
 	public Xob_bin_db_itm Get_nth_by_tier(int tier_id) {
 		if (schema_is_1) return (Xob_bin_db_itm)nth_hash.Get_by(tier_key.Val_(0)); // v1 is always in ns_0
-		if (tier_id >= ns_ids_len) throw Exc_.new_("tier out of range", "tier_id", tier_id, "len", ns_ids_len);
+		if (tier_id >= ns_ids_len) throw Err_.new_wo_type("tier out of range", "tier_id", tier_id, "len", ns_ids_len);
 		int ns_id = ns_ids[tier_id];
 		return (Xob_bin_db_itm)nth_hash.Get_by(tier_key.Val_(ns_id));
 	}

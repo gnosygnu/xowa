@@ -40,7 +40,7 @@ public class Env_ {
 	public static String[] AppArgs() {return appArgs;} static String[] appArgs;
 	public static Io_url AppUrl() {
 		if (mode_testing) return Io_url_.mem_fil_("mem/testing.jar");
-		if (appUrl == Io_url_.Empty) throw Exc_.new_("Env_.Init was not called");
+		if (appUrl == Io_url_.Empty) throw Err_.new_wo_type("Env_.Init was not called");
 		return appUrl;
 	}	static Io_url appUrl = Io_url_.Empty;
 	public static void Exit() {Exit_code(0);}

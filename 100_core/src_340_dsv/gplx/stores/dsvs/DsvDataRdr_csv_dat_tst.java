@@ -86,7 +86,7 @@ public class DsvDataRdr_csv_dat_tst {
 			fx.run_parse_("a,\"\" ,c");
 			Tfds.Fail_expdError();
 		}
-		catch (Exc e) {
+		catch (Err e) {
     			Tfds.Eq_true(String_.Has(Err_.Message_lang(e), "invalid quote in quoted field"));
 		}
 	}

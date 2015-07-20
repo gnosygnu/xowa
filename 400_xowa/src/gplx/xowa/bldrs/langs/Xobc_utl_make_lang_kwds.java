@@ -53,7 +53,7 @@ public class Xobc_utl_make_lang_kwds implements GfoInvkAble, Xol_lang_transform 
 			for (int j = 0; j < cfg_grp_len; j++) {					
 				Xobcl_kwd_row cfg_grp = cfg_lang.Grps()[j];
 				int kwd_id = Xol_kwd_grp_.Id_by_bry(cfg_grp.Key());
-				if (kwd_id == -1) throw Exc_.new_("could not find kwd for key", "key", String_.new_u8(cfg_grp.Key()));
+				if (kwd_id == -1) throw Err_.new_wo_type("could not find kwd for key", "key", String_.new_u8(cfg_grp.Key()));
 				Xol_kwd_grp kwd_grp = lang.Kwd_mgr().Get_at(kwd_id);
 				tmp.Clear();
 				if (kwd_grp == null) {

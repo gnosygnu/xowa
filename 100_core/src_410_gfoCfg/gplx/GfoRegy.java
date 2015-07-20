@@ -21,7 +21,7 @@ public class GfoRegy implements GfoInvkAble {
 	public Hash_adp Parsers() {return parsers;} Hash_adp parsers = Hash_adp_.new_();
 	public GfoRegyItm FetchOrNull(String key) {return (GfoRegyItm)hash.Get_by(key);}
 	public Object FetchValOrFail(String key) {
-		GfoRegyItm rv = (GfoRegyItm)hash.Get_by(key); if (rv == null) throw Exc_.new_("regy does not have key", "key", key);
+		GfoRegyItm rv = (GfoRegyItm)hash.Get_by(key); if (rv == null) throw Err_.new_wo_type("regy does not have key", "key", key);
 		return rv.Val();
 	}
 	public Object FetchValOrNull(String key) {return FetchValOr(key, null);}
@@ -40,18 +40,18 @@ public class GfoRegy implements GfoInvkAble {
 			if (String_.EqNot(chopBgn, "")) {
 				pos = String_.FindFwd(key, chopBgn);
 				if		(pos == String_.Len(key) - 1)
-					throw Exc_.new_(Err_ChopBgn, "key", key, "chopBgn", chopBgn);
+					throw Err_.new_wo_type(Err_ChopBgn, "key", key, "chopBgn", chopBgn);
 				else if (pos != String_.Find_none)
 					key = String_.Mid(key, pos + 1);
 			}
 			if (String_.EqNot(chopEnd, "")) {
 				pos = String_.FindBwd(key, chopEnd);
 				if		(pos == 0)
-					throw Exc_.new_(Err_ChopEnd, "key", key, "chopEnd", chopEnd);
+					throw Err_.new_wo_type(Err_ChopEnd, "key", key, "chopEnd", chopEnd);
 				else if (pos != String_.Find_none)
 					key = String_.MidByLen(key, 0, pos);
 			}
-			if (hash.Has(key)) throw Exc_.new_(Err_Dupe, "key", key, "filUrl", filUrl);
+			if (hash.Has(key)) throw Err_.new_wo_type(Err_Dupe, "key", key, "filUrl", filUrl);
 			RegItm(key, null, GfoRegyItm.ValType_Url, filUrl);
 		}
 	}
@@ -59,7 +59,7 @@ public class GfoRegy implements GfoInvkAble {
 		Object o = val;
 		if (String_.EqNot(type, StringClassXtn.Key_const)) {
 			ParseAble parser = (ParseAble)parsers.Get_by(type);
-			if (parser == null) throw Exc_.new_("could not find parser", "type", type, "key", key, "val", val);
+			if (parser == null) throw Err_.new_wo_type("could not find parser", "type", type, "key", key, "val", val);
 			o = parser.ParseAsObj(val);
 		}
 		RegItm(key, o, GfoRegyItm.ValType_Obj, Io_url_.Empty);

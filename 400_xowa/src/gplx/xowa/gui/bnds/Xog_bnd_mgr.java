@@ -233,7 +233,7 @@ public class Xog_bnd_mgr {
 				Xog_bnd_itm cur_itm = (Xog_bnd_itm)regy.Get_by(new_itm.Key());
 				if (cur_itm == null) {win.Usr_dlg().Warn_many("", "", "binding no longer exists; key=~{0}", new_itm.Key());}	// could happen when breaking backward compatibility
 				cur_itm.Init_by_set(new_itm.Box(), new_itm.Ipt());
-			}	catch (Exception e) {win.Usr_dlg().Warn_many("", "", "failed to set custom binding; key=~{0} err=~{1}", new_itm.Key(), Err_.Message_gplx_brief(e));}
+			}	catch (Exception e) {win.Usr_dlg().Warn_many("", "", "failed to set custom binding; key=~{0} err=~{1}", new_itm.Key(), Err_.Message_gplx_full(e));}
 		}
 		startup_itms.Clear();
 	}

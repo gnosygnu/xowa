@@ -40,7 +40,7 @@ public class DbMaprItm {
 			DbMaprItm itm = (DbMaprItm)itmObj;
 			if (String_.Eq(find, itm.key)) return itm;
 		}
-		throw Err_arg.notFound_key_("find", find);
+		throw Err_.new_missing_key(find);
 	}
 	public DbMaprArg Flds_get(String key) {return (DbMaprArg)flds.Get_by(key);}
 	SrlObj proto; String key; List_adp subs = List_adp_.new_();

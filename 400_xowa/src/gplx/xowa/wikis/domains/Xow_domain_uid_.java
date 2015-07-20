@@ -61,7 +61,7 @@ public class Xow_domain_uid_ {
 			case Xow_domain_type_.Tid_wikiversity:			domain_tid = Tid_sub_wikiversity; break;
 			case Xow_domain_type_.Tid_wikinews:				domain_tid = Tid_sub_wikinews; break;
 			case Xow_domain_type_.Tid_wikimedia:			domain_tid = Tid_sub_wikimedia; break;
-			default:										throw Exc_.new_unhandled(domain.Domain_tid());
+			default:										throw Err_.new_unhandled(domain.Domain_tid());
 		}
 		return	Const_system_reserved						// reserve first 100 slots
 			+	domain_tid									// domain_tid assigned above
@@ -93,7 +93,7 @@ public class Xow_domain_uid_ {
 			case Tid_sub_wikiversity:			tid_int = Xow_domain_type_.Tid_wikiversity;  tid_bry = Xow_domain_type_.Key_bry_wikiversity; break;
 			case Tid_sub_wikinews:				tid_int = Xow_domain_type_.Tid_wikinews;		tid_bry = Xow_domain_type_.Key_bry_wikinews; break;
 			case Tid_sub_wikimedia:				tid_int = Xow_domain_type_.Tid_wikimedia;	tid_bry = Xow_domain_type_.Key_bry_wikimedia; break;
-			default:							throw Exc_.new_unhandled(type_id);
+			default:							throw Err_.new_unhandled(type_id);
 		}
 		Xol_lang_itm lang = Xol_lang_itm_.Get_by_id(lang_id);
 		Bry_bfr bfr = Xoa_app_.Utl__bfr_mkr().Get_b128();

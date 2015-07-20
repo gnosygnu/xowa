@@ -38,7 +38,7 @@ public class IconAdp {
 	public static IconAdp regy_(String key) {
 		GfoRegyItm itm = GfoRegy._.FetchOrNull(key);
 		if (itm == null) {UsrDlg_._.Warn("missing icon; key={0}", key); return null;}
-		if	(itm.ValType() != GfoRegyItm.ValType_Url) throw Exc_.new_("regyItm should be of type url", "key", key);
+		if	(itm.ValType() != GfoRegyItm.ValType_Url) throw Err_.new_wo_type("regyItm should be of type url", "key", key);
 		return IconAdp.file_(itm.Url());
 	}
 	public static IconAdp as_(Object obj) {return obj instanceof IconAdp ? (IconAdp)obj : null;}

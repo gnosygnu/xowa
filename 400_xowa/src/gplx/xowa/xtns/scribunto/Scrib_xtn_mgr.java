@@ -73,8 +73,8 @@ public class Scrib_xtn_mgr extends Xox_mgr_base {
 		if (invoke_wkr == null) invoke_wkr = app.Log_mgr().Make_wkr_invoke();
 		return invoke_wkr;
 	}
-	public static Exc err_(String fmt, Object... args)						{return Exc_.new_(fmt, args).Stack_erase_1_();}
-	public static Exc err_(Exception e, String fmt, Object... args)	{return Exc_.new_exc(e, "xo", fmt, args).Stack_erase_1_();}
+	public static Err err_(String fmt, Object... args)						{return Err_.new_wo_type(fmt, args).Trace_ignore_add_1_();}
+	public static Err err_(Exception e, String msg, Object... args)	{return Err_.new_exc(e, "xo", msg, args).Trace_ignore_add_1_();}
 	public static final int Ns_id_module = 828, Ns_id_module_talk = 829;
 	public static final String Ns_name_module = "Module", Ns_name_module_talk = "Module talk";
 }

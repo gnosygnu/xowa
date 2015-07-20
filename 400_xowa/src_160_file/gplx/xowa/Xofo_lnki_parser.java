@@ -52,12 +52,12 @@ class Xofo_lnki_parser extends Obj_ary_parser_base {
 		int fld_val = -1;
 		if (fld_idx < 3) {
 			fld_val = Bry_.Xto_int_or(bry, fld_bgn, i, Int_.MinValue);
-			if (fld_val == Int_.MinValue) throw Exc_.new_("invalid int", "val", String_.new_u8(bry, fld_bgn, i));
+			if (fld_val == Int_.MinValue) throw Err_.new_wo_type("invalid int", "val", String_.new_u8(bry, fld_bgn, i));
 			switch (fld_idx) {
 				case 0:	lnki.Lnki_type_((byte)fld_val); break;
 				case 1:	lnki.Lnki_w_(fld_val); break;
 				case 2:	lnki.Lnki_h_(fld_val); break;
-				default: throw Exc_.new_unhandled(fld_idx);
+				default: throw Err_.new_unhandled(fld_idx);
 			}
 		}
 		else {
@@ -67,7 +67,7 @@ class Xofo_lnki_parser extends Obj_ary_parser_base {
 			}
 			else if (Bry_.Match(bry, fld_bgn, eq_pos, Xop_lnki_arg_parser.Bry_thumbtime))	{
 				fld_val = Bry_.Xto_int_or(bry, eq_pos + 1, i, Int_.MinValue);	// +1 to position after eq
-				if (fld_val == Int_.MinValue) throw Exc_.new_("invalid int", "val", String_.new_u8(bry, eq_pos + 1, i));
+				if (fld_val == Int_.MinValue) throw Err_.new_wo_type("invalid int", "val", String_.new_u8(bry, eq_pos + 1, i));
 				lnki.Lnki_thumbtime_(Xof_lnki_time.X_int(fld_val));
 			}
 		}

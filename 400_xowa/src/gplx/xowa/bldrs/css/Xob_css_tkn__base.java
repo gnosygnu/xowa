@@ -62,7 +62,7 @@ class Xob_css_tkn__url extends Xob_css_tkn__base {
 		mgr.File_hash().Add_if_dupe_use_1st(src_url, new Xobc_download_itm(Xobc_download_itm.Tid_file, String_.new_u8(src_url), trg_url));
 	}
 	@Override public int Write(Bry_bfr bfr, byte[] src) {
-		byte quote = quote_byte; if (quote == Byte_ascii.Nil) quote = Byte_ascii.Apos;
+		byte quote = quote_byte; if (quote == Byte_ascii.Null) quote = Byte_ascii.Apos;
 		bfr.Add_str_a7(" url(");							// EX: ' url('
 		bfr.Add_byte(quote).Add(trg_url).Add_byte(quote);	// EX: '"a.png"'
 		bfr.Add_byte(Byte_ascii.Paren_end);					// EX: ')'
@@ -102,7 +102,7 @@ class Xob_css_tkn__import extends Xob_css_tkn__base {
 		mgr.Code_add(src_url);
 	}
 	@Override public int Write(Bry_bfr bfr, byte[] src) {
-		byte quote = quote_byte; if (quote == Byte_ascii.Nil) quote = Byte_ascii.Apos;
+		byte quote = quote_byte; if (quote == Byte_ascii.Null) quote = Byte_ascii.Apos;
 		bfr.Add_str_a7(" @import url(");					// EX: ' @import url('
 		bfr.Add_byte(quote).Add(trg_url).Add_byte(quote);	// EX: '"a.png"'
 		bfr.Add_byte(Byte_ascii.Paren_end);					// EX: ')'

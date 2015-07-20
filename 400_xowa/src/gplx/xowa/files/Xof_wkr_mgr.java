@@ -30,7 +30,7 @@ class Xof_wkr_mgr implements GfoInvkAble {
 		if (String_.Eq(key, "fs.dir"))
 			rv = new gplx.xowa.files.fsdb.fs_roots.Fs_root_fsdb_mgr(file_mgr.Wiki());
 		else
-			throw Exc_.new_unhandled(key);
+			throw Err_.new_unhandled(key);
 		file_mgr.Fsdb_mgr_(rv);
 		return rv;
 	}

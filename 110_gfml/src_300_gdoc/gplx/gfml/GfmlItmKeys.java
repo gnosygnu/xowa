@@ -27,7 +27,7 @@ public class GfmlItmKeys {
 	}
 	public String FetchDataOrNull(String key) {return FetchDataOr(key, null);}
 	public String FetchDataOrFail(String key) {
-		GfmlAtr atr = FetchAtr(key); if (atr == null) throw Exc_.new_missing_key(key);
+		GfmlAtr atr = FetchAtr(key); if (atr == null) throw Err_.new_missing_key(key);
 		return atr.DatTkn().Val();
 	}
 	public GfmlTkn FetchDataTknOrNull(String key) {

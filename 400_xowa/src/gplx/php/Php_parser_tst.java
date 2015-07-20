@@ -225,11 +225,11 @@ class Php_tkn_quote_chkr extends Php_tkn_chkr_base {
 	public Php_tkn_quote_chkr(int src_bgn, int src_end) {this.Src_rng_(src_bgn, src_end);}
 	@Override public Class<?> TypeOf() {return Php_tkn_quote.class;}
 	@Override public byte Tkn_tid() {return Php_tkn_.Tid_quote;}
-	public Php_tkn_quote_chkr Quote_tid_(byte v) {this.quote_tid = v; return this;} private byte quote_tid = Byte_ascii.Nil;
+	public Php_tkn_quote_chkr Quote_tid_(byte v) {this.quote_tid = v; return this;} private byte quote_tid = Byte_ascii.Null;
 	@Override public int Chk_tkn(Tst_mgr mgr, String path, Php_tkn actl_obj) {
 		Php_tkn_quote actl = (Php_tkn_quote)actl_obj;
 		int rv = 0;
-		rv += mgr.Tst_val(quote_tid == Byte_ascii.Nil, path, "quote_tid", quote_tid, actl.Quote_tid()); 
+		rv += mgr.Tst_val(quote_tid == Byte_ascii.Null, path, "quote_tid", quote_tid, actl.Quote_tid()); 
 		return rv;
 	}
 }

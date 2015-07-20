@@ -20,7 +20,7 @@ import gplx.core.primitives.*; import gplx.ios.*; /*IoItmFil, IoItmDir..*/
 public class Io_mgr {	// exists primarily to gather all cmds under gplx namespace; otherwise need to use gplx.ios whenever copying/deleting file
 	public boolean							Exists(Io_url url) {return url.Type_dir() ? ExistsDir(url) : ExistsFil(url);}
 	public boolean							ExistsFil(Io_url url) {return IoEnginePool._.Get_by(url.Info().EngineKey()).ExistsFil_api(url);}
-	public void							ExistsFilOrFail(Io_url url) {if (!ExistsFil(url)) throw Exc_.new_("could not find file", "url", url);}
+	public void							ExistsFilOrFail(Io_url url) {if (!ExistsFil(url)) throw Err_.new_wo_type("could not find file", "url", url);}
 	public void							SaveFilStr(String url, String text) {SaveFilStr_args(Io_url_.new_fil_(url), text).Exec();}
 	public void							SaveFilStr(Io_url url, String text) {SaveFilStr_args(url, text).Exec();}
 	public IoEngine_xrg_saveFilStr		SaveFilStr_args(Io_url url, String text) {return IoEngine_xrg_saveFilStr.new_(url, text);}
@@ -96,7 +96,7 @@ public class Io_mgr {	// exists primarily to gather all cmds under gplx namespac
 			stream.ReadAry(ary);
 			return ary;
 		}
-		catch (Exception e) {throw Exc_.new_("failed to load file", "url", url.Xto_api(), "e", Err_.Message_lang(e));}
+		catch (Exception e) {throw Err_.new_wo_type("failed to load file", "url", url.Xto_api(), "e", Err_.Message_lang(e));}
 		finally {stream.Rls();}
 	}
 	public byte[]						LoadFilBry_loose(Io_url url) {return Bry_.new_u8(LoadFilStr_loose(url));}

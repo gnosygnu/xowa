@@ -47,7 +47,7 @@ class Xol_cnv_mgr_fxt {
 	public Xop_fxt Parser_fxt() {return parser_fxt;} private Xop_fxt parser_fxt;
 	public void Clear() {
 		app = Xoa_app_fxt.app_();
-		Xol_lang lang = app.Lang_mgr().Get_by_key_or_new(Bry_.new_u8("zh"));
+		Xol_lang lang = app.Lang_mgr().Get_by_key_or_new(Bry_.new_a7("zh"));
 		Xol_lang_.Lang_init(lang);
 		Init_cnv(app, "zh", "zh-hant", KeyVal_.new_("x0", "x1"));
 		lang.Vnt_mgr().Enabled_(true);

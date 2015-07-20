@@ -36,5 +36,5 @@ public class GfxLineItm implements GfxItm {
 		return rv;
 	}	GfxLineItm() {}
 	public static GfxLineItm as_(Object obj) {return obj instanceof GfxLineItm ? (GfxLineItm)obj : null;}
-	public static GfxLineItm cast_(Object obj) {try {return (GfxLineItm)obj;} catch(Exception exc) {throw Exc_.new_type_mismatch_w_exc(exc, GfxLineItm.class, obj);}}
+	public static GfxLineItm cast_(Object obj) {try {return (GfxLineItm)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfxLineItm.class, obj);}}
 }

@@ -97,7 +97,6 @@ public class Bry_fmtr {
 		this.Fmt_(fmt).Bld_bfr_many(bfr, args);
 		return bfr.Xto_str_and_clear();
 	}
-
 	public String Bld_str_many(String... args) {
 		if (dirty) Compile(); 
 		String_bldr rv = String_bldr_.new_();
@@ -172,7 +171,7 @@ public class Bry_fmtr {
 				else if	(cur_byte == char_escape) {
 					if (fmt_pos == fmt_end) {
 						if (fail_when_invalid_escapes)
-							throw Exc_.new_("escape char encountered but no more chars left");
+							throw Err_.new_wo_type("escape char encountered but no more chars left");
 						else {
 							trg_bry[trg_pos] = cur_byte;
 							break;
@@ -196,7 +195,7 @@ public class Bry_fmtr {
 						else if	(nxt_byte == char_escape_nl)	tmp_byte = Byte_ascii.Nl;
 						else if (nxt_byte == char_escape_tab)	tmp_byte = Byte_ascii.Tab;
 						else {
-							if (fail_when_invalid_escapes) throw Exc_.new_("unknown escape code", "code", Char_.XbyInt(nxt_byte), "fmt_pos", fmt_pos + 1);
+							if (fail_when_invalid_escapes) throw Err_.new_wo_type("unknown escape code", "code", Char_.XbyInt(nxt_byte), "fmt_pos", fmt_pos + 1);
 							else
 								tmp_byte = cur_byte;
 						}
@@ -209,7 +208,7 @@ public class Bry_fmtr {
 					fmt_pos += 1;
 				}
 			}
-			if (lkp_is_active) throw Exc_.new_("idx mode not closed");
+			if (lkp_is_active) throw Err_.new_wo_type("idx mode not closed");
 			if (trg_pos > 0) {list.Add(Bry_fmtr_itm.dat_(trg_bry, trg_pos)); trg_pos = 0;}
 			itms = (Bry_fmtr_itm[])list.To_ary(Bry_fmtr_itm.class);
 			itms_len = itms.length;
@@ -217,9 +216,9 @@ public class Bry_fmtr {
 		}
 	}
 	int Compile_eval_cmd(byte[] fmt, int fmt_len, int eval_lhs_bgn, List_adp list) {
-		int eval_lhs_end = Bry_finder.Find_fwd(fmt, char_eval_end, eval_lhs_bgn + Int_.Const_dlm_len, fmt_len); if (eval_lhs_end == Bry_.NotFound) throw Exc_.new_("eval_lhs_end_invalid: could not find eval_lhs_end", "snip", String_.new_u8(fmt, eval_lhs_bgn, fmt_len));
+		int eval_lhs_end = Bry_finder.Find_fwd(fmt, char_eval_end, eval_lhs_bgn + Int_.Const_dlm_len, fmt_len); if (eval_lhs_end == Bry_.NotFound) throw Err_.new_wo_type("eval_lhs_end_invalid: could not find eval_lhs_end", "snip", String_.new_u8(fmt, eval_lhs_bgn, fmt_len));
 		byte[] eval_dlm = Bry_.Mid(fmt, eval_lhs_bgn		, eval_lhs_end + Int_.Const_dlm_len);
-		int eval_rhs_bgn = Bry_finder.Find_fwd(fmt, eval_dlm		, eval_lhs_end + Int_.Const_dlm_len, fmt_len); if (eval_rhs_bgn == Bry_.NotFound) throw Exc_.new_("eval_rhs_bgn_invalid: could not find eval_rhs_bgn", "snip", String_.new_u8(fmt, eval_lhs_end, fmt_len));
+		int eval_rhs_bgn = Bry_finder.Find_fwd(fmt, eval_dlm		, eval_lhs_end + Int_.Const_dlm_len, fmt_len); if (eval_rhs_bgn == Bry_.NotFound) throw Err_.new_wo_type("eval_rhs_bgn_invalid: could not find eval_rhs_bgn", "snip", String_.new_u8(fmt, eval_lhs_end, fmt_len));
 		byte[] eval_cmd = Bry_.Mid(fmt, eval_lhs_end + Int_.Const_dlm_len, eval_rhs_bgn);
 		byte[] eval_rslt = eval_mgr.Eval(eval_cmd);
 		int eval_rhs_end = eval_rhs_bgn + Int_.Const_dlm_len + eval_dlm.length;

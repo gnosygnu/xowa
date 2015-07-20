@@ -106,7 +106,7 @@ class GfoConsoleWinCmds implements GfoInvkAble {
 		String cmdText = consoleBox.SelLen() == 0 ? consoleBox.Text() : consoleBox.SelText();
 		String cmd = FixNewLines(cmdText);
 		GfoMsg runMsg = GfoMsg_.Null;
-		try {runMsg = GfsCore._.MsgParser().ParseToMsg(cmd);} catch (Exception e) {statusBox.Text_("invalid gfml " + Err_.Message_gplx(e)); return;}
+		try {runMsg = GfsCore._.MsgParser().ParseToMsg(cmd);} catch (Exception e) {statusBox.Text_("invalid gfml " + Err_.Message_gplx_full(e)); return;}
 		GfsCtx ctx = GfsCtx.new_();
 		Object rv = GfsCore._.ExecMany(ctx, runMsg);
 		resultBox.Text_(Object_.Xto_str_strict_or_empty(rv));
@@ -117,7 +117,7 @@ class GfoConsoleWinCmds implements GfoInvkAble {
 		String cmdText = "help:'" + consoleBox.SelText() + "';";
 		String cmd = FixNewLines(cmdText);
 		GfoMsg runMsg = GfoMsg_.Null;
-		try {runMsg = GfmlDataNde.XtoMsgNoRoot(cmd);} catch (Exception e) {statusBox.Text_("invalid gfml " + Err_.Message_gplx(e)); return;}
+		try {runMsg = GfmlDataNde.XtoMsgNoRoot(cmd);} catch (Exception e) {statusBox.Text_("invalid gfml " + Err_.Message_gplx_full(e)); return;}
 		GfsCtx ctx = GfsCtx.new_();
 		try {
 		Object rv = GfsCore._.ExecOne(ctx, runMsg);
@@ -125,7 +125,7 @@ class GfoConsoleWinCmds implements GfoInvkAble {
 			UsrDlg_._.Note(Object_.Xto_str_strict_or_empty(rv));
 		}
 //			Results_add(FixNewLines(ctx.Results_XtoStr()));
-		} catch (Exception e) {statusBox.Text_("help failed " + Err_.Message_gplx(e)); return;}
+		} catch (Exception e) {statusBox.Text_("help failed " + Err_.Message_gplx_full(e)); return;}
 	}
 	void Save() {
 		String consoleFilStr = consoleFilBox.Text();

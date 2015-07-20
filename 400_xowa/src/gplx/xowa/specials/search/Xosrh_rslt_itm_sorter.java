@@ -30,7 +30,7 @@ public class Xosrh_rslt_itm_sorter implements gplx.lists.ComparerAble {
 				case Tid_len_dsc:	return Int_.Compare(lhs.Text_len(), rhs.Text_len()) * -1;
 				case Tid_ttl_asc:	return Bry_.Compare(lhs.Ttl_page_db(), rhs.Ttl_page_db());
 				case Tid_id:		return Int_.Compare(lhs.Id(), rhs.Id());
-				default:			throw Exc_.new_unhandled(tid);
+				default:			throw Err_.new_unhandled(tid);
 			}
 		}
 	}
@@ -39,14 +39,14 @@ public class Xosrh_rslt_itm_sorter implements gplx.lists.ComparerAble {
 		if		(String_.Eq(v, "none"))			return Tid_none;
 		else if	(String_.Eq(v, "len_desc"))		return Tid_len_dsc;
 		else if	(String_.Eq(v, "title_asc"))	return Tid_ttl_asc;
-		else									throw Exc_.new_unhandled(v);
+		else									throw Err_.new_unhandled(v);
 	}
 	public static String Xto_url_arg(byte v) {
 		switch (v) {
 			case Tid_none:		return "";
 			case Tid_len_dsc:	return "&xowa_sort=len_desc";
 			case Tid_ttl_asc:	return "&xowa_sort=title_asc";
-			default:			throw Exc_.new_unhandled(v);
+			default:			throw Err_.new_unhandled(v);
 		}
 	}
 }

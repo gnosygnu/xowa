@@ -35,7 +35,7 @@ public class Pfunc_int_tst {
 		fxt.Test_parse_en("{{int:january/en}}", "January");
 	}
 	@Test  public void Lang_specified_by_page() {
-		fxt.Test_parse_lang("fr", "{{int:Lang}}", "fr");	// NOTE: "Lang" msg is added by Xol_lang; message_mgr.Itm_by_key_or_new(Bry_.new_u8("Lang")).Atrs_set(key_bry, false, false);
+		fxt.Test_parse_lang("fr", "{{int:Lang}}", "fr");	// NOTE: "Lang" msg is added by Xol_lang; message_mgr.Itm_by_key_or_new(Bry_.new_a7("Lang")).Atrs_set(key_bry, false, false);
 	}
 	@Test  public void Lang_missing_msg_return_en() {	// PURPOSE: if key does not exist in non-english language, use English; EX: la.w:Fasciculus:HannibalFrescoCapitolinec1510.jpg; DATE:2013-09-10
 		fxt.Init_msg_gfs("en_only_key", "en_only_val", false, false);

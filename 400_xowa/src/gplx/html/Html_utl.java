@@ -46,7 +46,7 @@ public class Html_utl {
 				switch (quote_byte) {
 					case Byte_ascii.Apos: 	bfr.Add(Html_entity_.Apos_num_bry); break;
 					case Byte_ascii.Quote: 	bfr.Add(Html_entity_.Quote_bry); break;
-					default: 				throw Exc_.new_unhandled(quote_byte);
+					default: 				throw Err_.new_unhandled(quote_byte);
 				}
 			}
 			else {

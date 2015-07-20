@@ -68,7 +68,7 @@ class GxwElemFactory_cls_mock extends GxwElemFactory_base {
 	@gplx.Internal @Override protected GxwTextFld text_fld_() {return new MockTextBox();}
 	@gplx.Internal @Override protected GxwTextFld text_memo_() {return new MockTextBoxMulti();}
 	@gplx.Internal @Override protected GxwTextHtml text_html_() {return new MockTextBoxMulti();}
-	@gplx.Internal @Override protected GxwCheckListBox checkListBox_(KeyValHash ctorArgs) {throw Exc_.new_unimplemented();}
+	@gplx.Internal @Override protected GxwCheckListBox checkListBox_(KeyValHash ctorArgs) {throw Err_.new_unimplemented();}
 	@gplx.Internal @Override protected GxwComboBox comboBox_() {return new MockComboBox();}
 	@gplx.Internal @Override protected GxwListBox listBox_() {return new MockListBox();}
 }

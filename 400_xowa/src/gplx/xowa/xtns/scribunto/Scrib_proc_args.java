@@ -27,19 +27,19 @@ public class Scrib_proc_args {
 	public int		Pull_int(int i)					{Object rv = Get_or_fail(i);
 		try {return Int_.coerce_(rv);} // coerce to handle "1" and 1; will still fail if "abc" is passed
 		catch (Exception e) {
-			Exc_.Noop(e);
-			throw Exc_.new_("bad argument; int expected", "idx", i, "len", ary_len);
+			Err_.Noop(e);
+			throw Err_.new_wo_type("bad argument; int expected", "idx", i, "len", ary_len);
 		}
 	}	
 	public long		Pull_long(int i)				{return (long)Pull_double(i);}
 	public double	Pull_double(int i)				{Object rv = Get_or_fail(i);
 		try {return Int_.coerce_(rv);} // coerce to handle "1" and 1; will still fail if "abc" is passed
 		catch (Exception e) {
-			Exc_.Noop(e);
+			Err_.Noop(e);
 			try {return Double_.coerce_(rv);} // coerce to handle "1" and 1; will still fail if "abc" is passed
 			catch (Exception e2) {
-				Exc_.Noop(e2);
-				throw Exc_.new_("bad argument; int expected", "idx", i, "len", ary_len);				
+				Err_.Noop(e2);
+				throw Err_.new_wo_type("bad argument; int expected", "idx", i, "len", ary_len);				
 			}
 		}
 	}	
@@ -137,10 +137,10 @@ public class Scrib_proc_args {
 		return kv == null ? null : kv.Val();
 	}
 	private Object Get_or_fail(int i) {
-		if (i < 0 || i >= ary_len) throw Exc_.new_("bad argument: nil", "idx", i, "len", ary_len);
+		if (i < 0 || i >= ary_len) throw Err_.new_wo_type("bad argument: nil", "idx", i, "len", ary_len);
 		KeyVal kv = ary[i];
 		Object rv = kv == null ? null : kv.Val();
-		if (rv == null) throw Exc_.new_("scrib arg is null", "idx", i, "len", ary_len);
+		if (rv == null) throw Err_.new_wo_type("scrib arg is null", "idx", i, "len", ary_len);
 		return rv;
 	}
 }

@@ -192,7 +192,7 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, GfoInvkAble {
 		Xoa_repo_mgr repo_mgr = wiki.Appe().File_mgr().Repo_mgr();
 		Xof_repo_itm src_repo = repo_mgr.Get_by(src_repo_key), trg_repo = repo_mgr.Get_by(trg_repo_key);
 		byte[] src_wiki_key = src_repo.Wiki_domain(), trg_wiki_key = trg_repo.Wiki_domain();
-		if (!Bry_.Eq(src_wiki_key, trg_wiki_key) && !Bry_.Eq(src_wiki_key, Xow_domain_type_.Key_bry_home)) throw Exc_.new_("wiki keys do not match", "src", String_.new_u8(src_wiki_key), "trg", String_.new_u8(trg_wiki_key));
+		if (!Bry_.Eq(src_wiki_key, trg_wiki_key) && !Bry_.Eq(src_wiki_key, Xow_domain_type_.Key_bry_home)) throw Err_.new_wo_type("wiki keys do not match", "src", String_.new_u8(src_wiki_key), "trg", String_.new_u8(trg_wiki_key));
 		Xof_repo_pair pair = new Xof_repo_pair((byte)repos.Count(), src_wiki_key, src_repo, trg_repo);
 		repos.Add(pair);
 		return pair;

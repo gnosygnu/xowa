@@ -46,7 +46,7 @@ public class Bry_bfr_mkr {
 			case Tid_b512: 	return mkr_b512;
 			case Tid_k004: 	return mkr_k004;
 			case Tid_m001: 	return mkr_m001;
-			default:		throw Exc_.new_unhandled(tid);
+			default:		throw Err_.new_unhandled(tid);
 		}
 	}
 }
@@ -72,7 +72,7 @@ class Bry_bfr_mkr_mgr {
 			for (int i = 0; i < ary_max; i++) {
 				Bry_bfr itm = ary[i];
 				if (itm != null) {
-					if (!itm.Mkr_idx_is_null()) throw Exc_.new_("failed to clear bfr", "idx", Int_.Xto_str(i));
+					if (!itm.Mkr_idx_is_null()) throw Err_.new_wo_type("failed to clear bfr", "idx", Int_.Xto_str(i));
 					itm.Clear();
 				}
 				ary[i] = null;
@@ -104,9 +104,9 @@ class Bry_bfr_mkr_mgr {
 			int rv_idx = -1;
 			if (free_len > 0) {
 				try {rv_idx = free[--free_len];}
-				catch (Exception e) {throw Exc_.new_exc(e, "core", "failed to get free index", "free_len", free_len, "free.length", free.length);}
+				catch (Exception e) {throw Err_.new_exc(e, "core", "failed to get free index", "free_len", free_len, "free.length", free.length);}
 				try {rv = ary[rv_idx];}
-				catch (Exception e) {throw Exc_.new_exc(e, "core", "failed to get bfr", "rv_idx", rv_idx, "ary.length", ary.length);}
+				catch (Exception e) {throw Err_.new_exc(e, "core", "failed to get bfr", "rv_idx", rv_idx, "ary.length", ary.length);}
 			}
 			else {
 				if (nxt_idx == ary_max)
@@ -146,7 +146,7 @@ class Bry_bfr_mkr_mgr {
 //		}
 	public void Rls(int idx) {
 		synchronized (thread_lock) {
-			if (idx == -1) throw Exc_.new_("rls called on bfr that was not created by factory");
+			if (idx == -1) throw Err_.new_wo_type("rls called on bfr that was not created by factory");
 			int new_ary_len = nxt_idx - 1;
 			if (idx == new_ary_len)
 				nxt_idx = new_ary_len;

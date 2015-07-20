@@ -23,7 +23,7 @@ public class IptKey_ {
 	public static IptKey[] Ary(IptKey... ary) {return ary;}
 	public static final IptKey[] Ary_empty = new IptKey[0];
 	public static IptKey as_(Object obj) {return obj instanceof IptKey ? (IptKey)obj : null;}
-	public static IptKey cast_(Object obj) {try {return (IptKey)obj;} catch(Exception exc) {throw Exc_.new_type_mismatch_w_exc(exc, IptKey.class, obj);}}
+	public static IptKey cast_(Object obj) {try {return (IptKey)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, IptKey.class, obj);}}
 	public static IptKey add_(IptKey... ary) {
 		if (ary.length == 0) return IptKey_.None;
 		int newVal = ary[0].Val();

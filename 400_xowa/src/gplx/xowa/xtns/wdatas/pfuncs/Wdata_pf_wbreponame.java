@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.pfuncs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
-import gplx.json.*;
+import gplx.core.json.*;
 import gplx.xowa.xtns.pfuncs.*;
 public class Wdata_pf_wbreponame extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_wbreponame;}

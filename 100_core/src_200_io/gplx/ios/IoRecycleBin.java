@@ -23,7 +23,7 @@ public class IoRecycleBin {
 	public void							Recover(Io_url url) {
 		String_bldr sb = String_bldr_.new_();
 		List_adp list = Regy_search(url, sb);
-		int listCount = list.Count(); if (listCount > 1) throw Exc_.new_("found more than 1 url", "count", list.Count());
+		int listCount = list.Count(); if (listCount > 1) throw Err_.new_wo_type("found more than 1 url", "count", list.Count());
 		Io_url trgUrl = (Io_url)list.Get_at(0);
 		IoEngine_xrg_xferFil.move_(url, trgUrl).ReadOnlyFails_(true).Overwrite_(false).Exec();
 		IoEngine_xrg_saveFilStr.new_(FetchRegistryUrl(url), sb.XtoStr()).Exec();

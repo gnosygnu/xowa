@@ -30,7 +30,7 @@ public class IoEngine_memory extends IoEngine_base {
 	@Override public void XferFil(IoEngine_xrg_xferFil args) {utl.XferFil(this, args);}
 	@Override public void MoveFil(IoEngine_xrg_xferFil args) {
 		Io_url src = args.Src(), trg = args.Trg(); boolean overwrite = args.Overwrite();
-		if (String_.Eq(src.Xto_api(), trg.Xto_api())) throw Exc_.new_("move failed; src is same as trg", "raw", src.Raw());
+		if (String_.Eq(src.Xto_api(), trg.Xto_api())) throw Err_.new_wo_type("move failed; src is same as trg", "raw", src.Raw());
 		CheckTransferArgs("move", src, trg, overwrite);
 		if (overwrite) DeleteFil(trg);
 		IoItmFil_mem curFil = FetchFil(src); curFil.Name_(trg.NameAndExt());
@@ -120,7 +120,7 @@ public class IoEngine_memory extends IoEngine_base {
 	}
 	@Override public void XferDir(IoEngine_xrg_xferDir args) {Io_url trg = args.Trg(); utl.XferDir(this, args.Src(), IoEnginePool._.Get_by(trg.Info().EngineKey()), trg, args);}
 	@Override public void MoveDirDeep(IoEngine_xrg_xferDir args) {Io_url trg = args.Trg(); utl.XferDir(this, args.Src(), IoEnginePool._.Get_by(trg.Info().EngineKey()), trg, args);}
-	@Override public void MoveDir(Io_url src, Io_url trg) {if (ExistsDir(trg)) throw Exc_.new_("trg already exists", "trg", trg);
+	@Override public void MoveDir(Io_url src, Io_url trg) {if (ExistsDir(trg)) throw Err_.new_wo_type("trg already exists", "trg", trg);
 		IoItmDir dir = FetchDir(src); dir.Name_(trg.NameAndExt());
 		for (Object filObj : dir.SubFils()) {			// move all subFiles
 			IoItmFil fil = (IoItmFil)filObj;
@@ -168,8 +168,8 @@ public class IoEngine_memory extends IoEngine_base {
 		return rv;
 	}
 	void CheckTransferArgs(String op, Io_url src, Io_url trg, boolean overwrite) {
-		if (!ExistsFil_api(src)) throw Exc_.new_("src does not exist", "src", src);
-		if (ExistsFil_api(trg) && !overwrite) throw Exc_.new_invalid_op("trg already exists").Args_add("op", op, "overwrite", false, "src", src, "trg", trg);
+		if (!ExistsFil_api(src)) throw Err_.new_wo_type("src does not exist", "src", src);
+		if (ExistsFil_api(trg) && !overwrite) throw Err_.new_invalid_op("trg already exists").Args_add("op", op, "overwrite", false, "src", src, "trg", trg);
 	}
 	public void Clear() {dirs.Clear();}
 	@Override public boolean DownloadFil(IoEngine_xrg_downloadFil xrg) {

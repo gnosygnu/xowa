@@ -50,7 +50,7 @@ public class GfuiBorderMgr {
 		else if (val == GfuiBorderEdge.Right.Val())		{right = pen; return;}
 		else if (val == GfuiBorderEdge.Top.Val())		{top = pen; return;}
 		else if (val == GfuiBorderEdge.Bot.Val())		{bot = pen; return;}
-		else throw Exc_.new_unhandled(edge);
+		else throw Err_.new_unhandled(edge);
 	}
 	void SyncPens(boolean isAll) {
 		if (isAll) {

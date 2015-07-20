@@ -21,9 +21,9 @@ public class Io_buffer_rdr implements RlsAble {
 	private Io_stream_rdr rdr;
 	Io_buffer_rdr(Io_stream_rdr rdr, Io_url url, int bfr_len) {
 		this.rdr = rdr; this.url = url;
-		if (bfr_len <= 0) throw Exc_.new_("bfr_len must be > 0", "bfr_len", bfr_len);
+		if (bfr_len <= 0) throw Err_.new_wo_type("bfr_len must be > 0", "bfr_len", bfr_len);
 		bfr = new byte[bfr_len]; this.bfr_len = bfr_len;
-		IoItmFil fil = Io_mgr.I.QueryFil(url); if (!fil.Exists()) throw Exc_.new_("fil does not exist", "url", url);
+		IoItmFil fil = Io_mgr.I.QueryFil(url); if (!fil.Exists()) throw Err_.new_wo_type("fil does not exist", "url", url);
 		fil_len = fil.Size();
 		fil_pos = 0;
 		fil_eof = false;
@@ -36,7 +36,7 @@ public class Io_buffer_rdr implements RlsAble {
 	public boolean Fil_eof() {return fil_eof;} private boolean fil_eof;
 	public boolean Bfr_load_all() {return Bfr_load(0, bfr_len);}
 	public boolean Bfr_load_from(int bfr_pos) {
-		if (bfr_pos < 0 || bfr_pos > bfr_len) throw Exc_.new_("invalid bfr_pos", "bfr_pos", bfr_pos, "bfr_len", bfr_len);
+		if (bfr_pos < 0 || bfr_pos > bfr_len) throw Err_.new_wo_type("invalid bfr_pos", "bfr_pos", bfr_pos, "bfr_len", bfr_len);
 		for (int i = bfr_pos; i < bfr_len; i++)				// shift end of bfr to bgn; EX: bfr[10] and load_from(8); [8] -> [0]; [9] -> [1];
 			bfr[i - bfr_pos] = bfr[i];
 		return Bfr_load(bfr_len - bfr_pos, bfr_pos);		// fill rest of bfr; EX: [2]... will come from file

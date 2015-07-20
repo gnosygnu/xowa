@@ -72,7 +72,7 @@ public class Fsdb_db_mgr__v1 implements Fsdb_db_mgr {
 			return rv;
 		}
 		rv = file_dir.GenSubFil_nest(mnt_name, Atr_name_v1b); if (Io_mgr.I.ExistsFil(rv)) return rv;
-		throw Exc_.new_("could not find atr file", "dir", file_dir.Raw(), "mnt", mnt_name);
+		throw Err_.new_wo_type("could not find atr file", "dir", file_dir.Raw(), "mnt", mnt_name);
 	}
 	public static final String Orig_name = "wiki.orig#00.sqlite3", Mnt_name = "wiki.mnt.sqlite3", Abc_name	= "fsdb.abc.sqlite3"
 	, Atr_name_v1a = "fsdb.atr#00.sqlite3", Atr_name_v1b = "fsdb.atr.00.sqlite3";

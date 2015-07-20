@@ -150,7 +150,7 @@ class Gfs_lxr_quote implements Gfs_lxr {
 	public int Process(Gfs_parser_ctx ctx, int lxr_bgn, int lxr_end) {
 		byte[] src = ctx.Src(); int src_len = ctx.Src_len();
 		int end_pos = Bry_finder.Find_fwd(src, end_bry, lxr_end, src_len);
-		if (end_pos == Bry_.NotFound) throw Exc_.new_("quote is not closed", "end", String_.new_u8(end_bry));
+		if (end_pos == Bry_.NotFound) throw Err_.new_wo_type("quote is not closed", "end", String_.new_u8(end_bry));
 		Bry_bfr bfr = ctx.Tmp_bfr().Clear();
 		int prv_pos = lxr_end;
 		int nxt_pos = end_pos + end_bry_len;
@@ -160,7 +160,7 @@ class Gfs_lxr_quote implements Gfs_lxr {
 				bfr.Add(end_bry);						// add end_bry
 				prv_pos = nxt_pos + end_bry_len;		// set prv_pos to after doubled end_bry
 				end_pos = Bry_finder.Find_fwd(src, end_bry, prv_pos, src_len);
-				if (end_pos == Bry_.NotFound) throw Exc_.new_("quote is not closed", "end", String_.new_u8(end_bry));
+				if (end_pos == Bry_.NotFound) throw Err_.new_wo_type("quote is not closed", "end", String_.new_u8(end_bry));
 				nxt_pos = end_pos + end_bry_len;
 				if (!Bry_.Match(src, nxt_pos, nxt_pos + end_bry_len, end_bry)) {
 					bfr.Add_mid(src, prv_pos, end_pos);

@@ -30,7 +30,7 @@ public class Xob_import_cfg {
 		if		(src_fil_xml == null && src_fil_bz2 == null)	return wiki.Fsys_mgr().Root_dir();
 		else if (src_fil_xml != null)							return src_fil_xml.OwnerDir();
 		else if (src_fil_bz2 != null)							return src_fil_bz2.OwnerDir();
-		else													throw Exc_.new_("unknown src dir");
+		else													throw Err_.new_wo_type("unknown src dir");
 	}
 	public Io_stream_rdr Src_rdr() {
 		if (src_fil_xml == null && src_fil_bz2 == null) {	// will usually be null; non-null when user specifies src through command-line

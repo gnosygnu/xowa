@@ -205,7 +205,7 @@ public class Gallery_itm_parser {
 				else
 					cur_itm.Page_end_(fld_end);
 				break;
-			default:			throw Exc_.new_unhandled(fld_end);
+			default:			throw Err_.new_unhandled(fld_end);
 		}
 	}
 	private byte Skip_ws() {

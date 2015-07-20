@@ -35,7 +35,7 @@ public class Process_server implements Scrib_server {
     	ProcessBuilder pb = new ProcessBuilder(process_args);
     	pb.redirectErrorStream(false);
     	try {process = pb.start();}
-    	catch (Exception e) {throw Exc_.new_exc(e, "core", "process init failed", "args", String_.AryXtoStr(process_args));}
+    	catch (Exception e) {throw Err_.new_exc(e, "core", "process init failed", "args", String_.AryXtoStr(process_args));}
         stream_write = process.getOutputStream();
         error_reader = new Process_server_gobbler_error(process.getErrorStream(), bry_error);
         error_reader.Start();
@@ -45,7 +45,7 @@ public class Process_server implements Scrib_server {
     	return Server_recv();
     }
     public void Server_send(byte[] cmd, Object[] cmd_objs) {
-        if (process == null) throw Exc_.new_("process not started");
+        if (process == null) throw Err_.new_wo_type("process not started");
         cmd_last = cmd;
 //        stream_read.Data_reset();
         stream_read = new Process_server_gobbler_recv(process.getInputStream(), process_rdr).Start();
@@ -53,7 +53,7 @@ public class Process_server implements Scrib_server {
 	        stream_write.write(cmd);
 	        stream_write.flush();
         }
-        catch (Exception e) {throw Exc_.new_exc(e, "core", "failed to write to output");}
+        catch (Exception e) {throw Err_.new_exc(e, "core", "failed to write to output");}
     }	private byte[] cmd_last;
     public byte[] Server_recv() {
     	long time_bgn = System.currentTimeMillis();
@@ -96,7 +96,7 @@ class Process_server_gobbler_error extends Thread {
         	if (terminating)
         		return;
         	else
-        		throw Exc_.new_exc(e, "core", "failed to write to output");
+        		throw Err_.new_exc(e, "core", "failed to write to output");
         }
     }
     public void Term() {

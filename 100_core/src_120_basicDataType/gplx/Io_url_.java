@@ -22,7 +22,7 @@ public class Io_url_ {
 	public static final Io_url NullPtr = null;
 	public static final Io_url Parser = new Io_url("", IoUrlInfo_.Nil);
 	public static Io_url as_(Object obj) {return obj instanceof Io_url ? (Io_url)obj : null;}
-	public static Io_url cast_(Object obj) {try {return (Io_url)obj;} catch(Exception exc) {throw Exc_.new_type_mismatch_w_exc(exc, Io_url.class, obj);}}
+	public static Io_url cast_(Object obj) {try {return (Io_url)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, Io_url.class, obj);}}
 	public static Io_url Usr() {
 		if (usr_dir == null) {
 			switch (Op_sys.Cur().Tid()) {
@@ -30,7 +30,7 @@ public class Io_url_ {
 				case Op_sys.Tid_lnx: usr_dir = Io_url_.new_inf_(String_.Format("/home/{0}/", Env_.UserName()), IoUrlInfo_.Lnx); break;
 				case Op_sys.Tid_osx: usr_dir = Io_url_.new_inf_(String_.Format("/Users/{0}/", Env_.UserName()), IoUrlInfo_.Lnx); break;
 				case Op_sys.Tid_drd: usr_dir = Io_url_.new_inf_(String_.Format("/mnt/{0}/", Env_.UserName()), IoUrlInfo_.Lnx); break;
-				default: throw Exc_.new_unhandled(Op_sys.Cur().Tid());
+				default: throw Err_.new_unhandled(Op_sys.Cur().Tid());
 			}
 		}
 		return usr_dir;

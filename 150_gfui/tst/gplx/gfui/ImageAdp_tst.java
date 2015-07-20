@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
 import org.junit.*;
+import gplx.core.consoles.*;
 import gplx.ios.*;
 import gplx.security.*;
 public class ImageAdp_tst {
@@ -38,8 +39,8 @@ public class ImageAdp_tst {
 		DateAdp afterModifiedTime = Io_mgr.I.QueryFil(save).ModifiedTime();
 		Tfds.Eq_true(CompareAble_.Is_more(afterModifiedTime, beforeModifiedTime));
 
-		String loadHash = HashAlgo_.Md5.CalcHash(ConsoleDlg_.Null, Io_mgr.I.OpenStreamRead(load));
-		String saveHash = HashAlgo_.Md5.CalcHash(ConsoleDlg_.Null, Io_mgr.I.OpenStreamRead(save));
+		String loadHash = HashAlgo_.Md5.CalcHash(Console_adp_.Noop, Io_mgr.I.OpenStreamRead(load));
+		String saveHash = HashAlgo_.Md5.CalcHash(Console_adp_.Noop, Io_mgr.I.OpenStreamRead(save));
 		Tfds.Eq(loadHash, saveHash);
 	}
 }

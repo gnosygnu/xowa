@@ -38,7 +38,7 @@ public class Xop_amp_mgr {
 				boolean ncr_is_hex = itm.Tid() == Xop_amp_trie_itm.Tid_num_hex;
 				boolean pass = Parse_as_int(ncr_is_hex, src, src_len, amp_pos, cur_pos);
 				return pass ? tkn_mkr.Amp_num(amp_pos, rslt_pos, rslt_val) : null;
-			default: throw Exc_.new_unhandled(itm.Tid());
+			default: throw Err_.new_unhandled(itm.Tid());
 		}
 	}
 	public boolean Parse_as_int(boolean ncr_is_hex, byte[] src, int src_len, int amp_pos, int int_bgn) {
@@ -106,7 +106,7 @@ public class Xop_amp_mgr {
 								pos = rslt_pos;
 								break;
 							default:
-								throw Exc_.new_unhandled(amp_itm.Tid());
+								throw Err_.new_unhandled(amp_itm.Tid());
 						}
 						continue;
 					}

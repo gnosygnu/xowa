@@ -54,7 +54,7 @@ public class Xob_ns_file_itm_parser extends Dsv_wkr_base {
 		}
 		else
 			ns_ids = Int_.Ary_parse(String_.new_u8(ns_ids_bry), ",");
-		if (ns_ids.length == 0) throw Exc_.new_("map.invalid.ns_missing", "src", this.Src());
+		if (ns_ids.length == 0) throw Err_.new_wo_type("map.invalid.ns_missing", "src", this.Src());
 		if (String_.Len_eq_0(name)) {	// no name; auto-generate
 			int ns_id_1st = ns_ids[0];	// take 1st ns_id
 			name = "ns." + Int_.Xto_str_pad_bgn_zero(ns_id_1st, 3);	// EX: ns.000

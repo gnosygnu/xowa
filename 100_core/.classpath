@@ -10,7 +10,6 @@
 	<classpathentry kind="src" path="src_160_hash"/>
 	<classpathentry kind="src" path="src_200_io"/>
 	<classpathentry kind="src" path="src_210_env"/>
-	<classpathentry kind="src" path="src_220_console"/>
 	<classpathentry kind="src" path="src_300_classXtn"/>
 	<classpathentry kind="src" path="src_310_gfoNde"/>
 	<classpathentry kind="src" path="src_311_gfoObj"/>

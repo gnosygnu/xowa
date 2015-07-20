@@ -37,11 +37,11 @@ public class Gxw_html_server implements Gxw_html {
 	public String		Html_js_eval_script(String script) {return Exec_as_str(script);}
 	public void			Html_js_cbks_add(String js_func_name, GfoInvkAble invk) {}
 	public void			Html_invk_src_(GfoEvObj v) {}
-	public GxwCore_base	Core() {throw Exc_.new_unimplemented();}
-	public GxwCbkHost	Host() {throw Exc_.new_unimplemented();} public void Host_set(GxwCbkHost host) {throw Exc_.new_unimplemented();}
-	public Object		UnderElem() {throw Exc_.new_unimplemented();}
-	public String		TextVal() {throw Exc_.new_unimplemented();} public void TextVal_set(String v) {throw Exc_.new_unimplemented();} 
-			public void			EnableDoubleBuffering() {throw Exc_.new_unimplemented();}
+	public GxwCore_base	Core() {throw Err_.new_unimplemented();}
+	public GxwCbkHost	Host() {throw Err_.new_unimplemented();} public void Host_set(GxwCbkHost host) {throw Err_.new_unimplemented();}
+	public Object		UnderElem() {throw Err_.new_unimplemented();}
+	public String		TextVal() {throw Err_.new_unimplemented();} public void TextVal_set(String v) {throw Err_.new_unimplemented();} 
+			public void			EnableDoubleBuffering() {throw Err_.new_unimplemented();}
 	private boolean Exec_as_bool(String s) {
 		Exec_as_str(s);
 		return true;	// NOTE: js is async, so immediate return value is not possible; return true for now;

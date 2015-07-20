@@ -33,7 +33,7 @@ public class Xop_fxt {
 		app.Wiki_mgr().Add(wiki);
 		app.File_mgr().Repo_mgr().Set("src:wiki", "mem/wiki/repo/src/", wiki.Domain_str()).Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2);
 		app.File_mgr().Repo_mgr().Set("trg:wiki", "mem/wiki/repo/trg/", wiki.Domain_str()).Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2).Primary_(true);
-		wiki.File_mgr().Repo_mgr().Add_repo(Bry_.new_u8("src:wiki"), Bry_.new_u8("trg:wiki"));
+		wiki.File_mgr().Repo_mgr().Add_repo(Bry_.new_a7("src:wiki"), Bry_.new_a7("trg:wiki"));
 		ctx = wiki.Ctx();
 		mock_wkr.Clear_commons();	// assume all files are in repo 0
 		wiki.File_mgr().Repo_mgr().Page_finder_(mock_wkr);
@@ -379,8 +379,8 @@ public class Xop_fxt {
 	}
 	public void Test_html_modules_js(String expd) {
 		Bry_bfr bfr = app.Utl__bfr_mkr().Get_k004();
-		this.Page().Html_data().Module_mgr().Init(app, wiki, this.Page());
-		this.Page().Html_data().Module_mgr().XferAry(bfr, 0);
+		this.Page().Html_data().Head_mgr().Init(app, wiki, this.Page());
+		this.Page().Html_data().Head_mgr().XferAry(bfr, 0);
 		bfr.Mkr_rls();
 		Tfds.Eq_str_lines(expd, bfr.Xto_str_and_clear());
 	}

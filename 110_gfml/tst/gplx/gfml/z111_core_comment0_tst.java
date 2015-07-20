@@ -46,6 +46,6 @@ public class z111_core_comment0_tst {
 //				fx.tst_Err("//", GfmlOutCmds.Frame_danglingBgn_Err_());
 //				Tfds.Fail_expdError();
 //			}
-//			catch (Exception exc) {Exc_.Noop(exc);}
+//			catch (Exception exc) {Err_.Noop(exc);}
 //		}
 }

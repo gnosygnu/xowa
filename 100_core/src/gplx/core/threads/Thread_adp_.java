@@ -18,12 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.core.threads; import gplx.*; import gplx.core.*;
 public class Thread_adp_ {
 		public static void Sleep(int milliseconds) {
-		try {Thread.sleep(milliseconds);} catch (InterruptedException e) {throw Exc_.new_exc(e, "core", "thread interrupted", "milliseconds", milliseconds);}
+		try {Thread.sleep(milliseconds);} catch (InterruptedException e) {throw Err_.new_exc(e, "core", "thread interrupted", "milliseconds", milliseconds);}
 	}
 	public static void Notify_all(Object o) {o.notifyAll();}
 	public static void Wait(Object o) {
 		try {o.wait();}
-		catch (InterruptedException e) {throw Exc_.new_exc(e, "core", "thread wait");}
+		catch (InterruptedException e) {throw Err_.new_exc(e, "core", "thread wait");}
 	}
 		public static Thread_adp invk_(GfoInvkAble invk, String cmd)					{return invk_(Name_null, invk, cmd);}
 	public static Thread_adp invk_(String name, GfoInvkAble invk, String cmd)		{return new Thread_adp(name, invk, cmd, GfoMsg_.Null);}

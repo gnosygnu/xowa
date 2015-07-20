@@ -49,7 +49,7 @@ class Dpl_html_data {
 		case Dpl_itm_keys.Key_none: 			return Itm_none;
 		case Dpl_itm_keys.Key_ordered: 			return Itm_ordered;
 		case Dpl_itm_keys.Key_unordered: 		return Itm_unordered;
-		default:								throw Exc_.new_unhandled(key);
+		default:								throw Err_.new_unhandled(key);
 		}
 	}
 }

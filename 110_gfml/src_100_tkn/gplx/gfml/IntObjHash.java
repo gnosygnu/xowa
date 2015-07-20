@@ -20,7 +20,7 @@ class IntObjHash_base {
 	public int Count() {return count;} int count;
 	public boolean Has(int key) {return Get_by(key) != null;}
 	public Object Get_by(int key) {
-		if (key < 0) throw Exc_.new_("key must be >= 0", "key", key);
+		if (key < 0) throw Err_.new_wo_type("key must be >= 0", "key", key);
 		if (key > maxKey) return null;
 		Object[] subAry = FetchSubAry(key);
 		return subAry == null ? null : subAry[subIdx];
@@ -40,8 +40,8 @@ class IntObjHash_base {
 		maxKey = -1;
 	}
 	void PutObjAtKey(int key, Object obj, boolean isAdd) {
-		if (key < 0) throw Exc_.new_("key must be >= 0", "key", key);
-		if (obj == null) throw Exc_.new_("Object cannot be null; call .Del on key instead", "key", key);
+		if (key < 0) throw Err_.new_wo_type("key must be >= 0", "key", key);
+		if (obj == null) throw Err_.new_wo_type("Object cannot be null; call .Del on key instead", "key", key);
 		if (key > maxKey) ExpandRootAry(key);
 		Object[] subAry = FetchSubAry(key);
 		if (subAry == null) {
@@ -49,8 +49,8 @@ class IntObjHash_base {
 			rootAry[rootIdx] = subAry;
 		}
 		Object curVal = subAry[subIdx];
-		if ( isAdd && curVal != null) throw Exc_.new_(".Add cannot be called on non-null vals; call .Set instead", "key", key, "val", curVal);
-		if (!isAdd && curVal == null) throw Exc_.new_(".Set cannot be called on null vals; call .Add instead", "key", key);
+		if ( isAdd && curVal != null) throw Err_.new_wo_type(".Add cannot be called on non-null vals; call .Set instead", "key", key, "val", curVal);
+		if (!isAdd && curVal == null) throw Err_.new_wo_type(".Set cannot be called on null vals; call .Add instead", "key", key);
 		subAry[subIdx] = obj;
 		if (isAdd) count++;
 	}

@@ -42,7 +42,7 @@ class Schema_loader_mgr__sqlite implements Schema_loader_mgr {
 						tbl_mgr.Add(tbl_itm);
 						break;
 					case Meta_itm_tid.Tid_index:	break;	// noop for now
-					default:						throw Exc_.new_unhandled(type_str);
+					default:						throw Err_.new_unhandled(type_str);
 				}
 			}
 		}	finally {rdr.Rls();}

@@ -28,7 +28,7 @@ public class Xol_lang_srl {
 			switch (b) {
 				case Byte_ascii.Pipe:
 					cur_id = Bry_.Xto_int_or(src, fld_bgn, pos, Int_.MinValue);
-					if (cur_id == Int_.MinValue) throw Exc_.new_("invalid_id", "id", String_.new_u8(src, fld_bgn, pos));					
+					if (cur_id == Int_.MinValue) throw Err_.new_wo_type("invalid_id", "id", String_.new_u8(src, fld_bgn, pos));					
 					fld_bgn = pos + 1;
 					break;
 				case Byte_ascii.Nl:
@@ -65,7 +65,7 @@ public class Xol_lang_srl {
 							switch (cs_byte) {
 								case Byte_ascii.Num_0: cur_cs = false; break;
 								case Byte_ascii.Num_1: cur_cs = true; break;
-								default: throw Exc_.new_("case sensitive should be 0 or 1", "cs", Byte_.Xto_str(cs_byte)); 
+								default: throw Err_.new_wo_type("case sensitive should be 0 or 1", "cs", Byte_.Xto_str(cs_byte)); 
 							}
 							break;
 					}
@@ -79,7 +79,7 @@ public class Xol_lang_srl {
 					break;
 				case Byte_ascii.Nl:
 					if (cur_words.Count() > 0) {	// guard against blank line wiping out entries; EX: "toc|0|toc1\n\n"; 2nd \n will get last grp and make 0 entries
-						int cur_id = Xol_kwd_grp_.Id_by_bry(cur_key); if (cur_id == -1) throw Exc_.new_("key does not have id", "id", cur_id);
+						int cur_id = Xol_kwd_grp_.Id_by_bry(cur_key); if (cur_id == -1) throw Err_.new_wo_type("key does not have id", "id", cur_id);
 						Xol_kwd_grp grp = keyword_mgr.Get_or_new(cur_id);
 						grp.Srl_load(cur_cs, (byte[][])cur_words.To_ary(byte[].class));
 					}

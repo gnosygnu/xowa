@@ -59,7 +59,7 @@ public class Xob_categorylinks_sql_make implements Io_make_cmd {
 			++cur_row_count;
 			if (cur_row_count % 100000  == 0) usr_dlg.Prog_one("", "", "inserting category row: ~{0}", cur_row_count);
 			if (cur_row_count % 1000000 == 0) {cat_core_tbl.Conn().Txn_sav(); cat_link_tbl.Conn().Txn_sav();}
-		}	catch (Exception e) {usr_dlg.Warn_many("", "", "ctg_links.insert failed: name=~{0} err=~{1}", String_.new_u8(new_cat_ttl), Err_.Message_gplx_brief(e));}
+		}	catch (Exception e) {usr_dlg.Warn_many("", "", "ctg_links.insert failed: name=~{0} err=~{1}", String_.new_u8(new_cat_ttl), Err_.Message_gplx_full(e));}
 	}
 	public void Sort_end() {
 		Save_ctg(Ttl_last);
@@ -110,7 +110,7 @@ public class Xob_categorylinks_sql_make implements Io_make_cmd {
 			case Byte_ascii.Ltr_f:	return Xoa_ctg_mgr.Tid_file;
 			case Byte_ascii.Ltr_p:	return Xoa_ctg_mgr.Tid_page;
 			case Byte_ascii.Ltr_c:	return Xoa_ctg_mgr.Tid_subc;
-			default:				throw Exc_.new_unhandled(ltr);
+			default:				throw Err_.new_unhandled(ltr);
 		}
 	}
 	public Io_sort_cmd Make_dir_(Io_url v) {return this;}

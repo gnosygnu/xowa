@@ -23,7 +23,7 @@ public class Xol_lang implements GfoInvkAble {
 	private boolean loaded = false;
 	public Xol_lang(Xoa_lang_mgr lang_mgr, byte[] key_bry) {
 		this.lang_mgr = lang_mgr; this.key_bry = key_bry; this.key_str = String_.new_u8(key_bry);
-		Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key(key_bry); if (lang_itm == null) throw Exc_.new_("unknown lang_key", "key", String_.new_u8(key_bry));
+		Xol_lang_itm lang_itm = Xol_lang_itm_.Get_by_key(key_bry); if (lang_itm == null) throw Err_.new_wo_type("unknown lang_key", "key", String_.new_u8(key_bry));
 		this.lang_id = lang_itm.Id();			
 		this.func_regy = new Xol_func_name_regy(lang_mgr, this);
 		this.ns_names = new Xol_ns_grp(this); this.ns_aliases = new Xol_ns_grp(this);
@@ -119,7 +119,7 @@ public class Xol_lang implements GfoInvkAble {
 		this.loaded = true;
 		boolean lang_is_en = lang_id == Xol_lang_itm_.Id_en;
 		if (!lang_is_en) Xol_lang_.Lang_init(this);
-		msg_mgr.Itm_by_key_or_new(Bry_.new_u8("Lang")).Atrs_set(key_bry, false, false);	// set "Lang" keyword; EX: for "fr", "{{int:Lang}}" -> "fr"
+		msg_mgr.Itm_by_key_or_new(Bry_.new_a7("Lang")).Atrs_set(key_bry, false, false);	// set "Lang" keyword; EX: for "fr", "{{int:Lang}}" -> "fr"
 		Load_lang(key_bry);
 		ns_aliases.Ary_add_(Xow_ns_.Canonical);	// NOTE: always add English canonical as aliases to all languages
 		this.Evt_lang_changed();

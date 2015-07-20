@@ -21,7 +21,7 @@ import gplx.html.*; import gplx.xowa.html.*;
 public class Xtn_syntaxHighlight_nde implements Xox_xnde, Xop_xnde_atr_parser {
 	private byte[] lang = Bry_.Empty; private byte[] style = null; private byte[] enclose = Bry_.Empty;
 	private boolean line_enabled = false; private int start = 1; private Int_rng_mgr highlight_idxs = Int_rng_mgr_null._;
-	public Xop_xnde_tkn Xnde() {throw Exc_.new_unimplemented();}
+	public Xop_xnde_tkn Xnde() {throw Err_.new_unimplemented();}
 	public void Xatr_parse(Xowe_wiki wiki, byte[] src, Xop_xatr_itm xatr, Object xatr_obj) {
 		if (xatr_obj == null) return;
 		byte xatr_tid = ((Byte_obj_val)xatr_obj).Val();

@@ -28,7 +28,7 @@ public class Db_attach_rdr {
 	public void Attach() {
 		try {
 			if (diff_db) conn.Env_db_attach(attach_name, attach_url);
-		}	catch (Exception e) {Exc_.Noop(e); Gfo_usr_dlg_.I.Warn_many("", "", "db:failed to attach db; name=~{0} url=~{1}", attach_name, attach_url.Raw());}
+		}	catch (Exception e) {Err_.Noop(e); Gfo_usr_dlg_.I.Warn_many("", "", "db:failed to attach db; name=~{0} url=~{1}", attach_name, attach_url.Raw());}
 	}
 	public Db_rdr Exec_as_rdr(String sql) {
 		sql = String_.Replace(sql, "<attach_db>", diff_db ? attach_name + "." : "");	// replace <attach> with either "attach_db." or "";

@@ -46,10 +46,10 @@ public class DateAdp_ implements GfoInvkAble {
 		int f = ary_len > 6 ? ary[6] : 0;
 		return new DateAdp(y, M, d, h, m, s, f);
 	}
-	public static DateAdp cast_(Object arg) {try {return (DateAdp)arg;} catch(Exception exc) {throw Exc_.new_type_mismatch_w_exc(exc, DateAdp.class, arg);}}
+	public static DateAdp cast_(Object arg) {try {return (DateAdp)arg;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, DateAdp.class, arg);}}
 	public static DateAdp parse_iso8561_or(String raw, DateAdp or) {
 		try {return parse_iso8561(raw);}
-		catch (Exception e) {Exc_.Noop(e); return or;}
+		catch (Exception e) {Err_.Noop(e); return or;}
 	}
 	public static DateAdp parse_iso8561(String raw) {	// NOTE: for now, same as parse_gplx
 		int[] ary = date_parser.Parse_iso8651_like(raw);
@@ -89,7 +89,7 @@ public class DateAdp_ implements GfoInvkAble {
 		SimpleDateFormat sdf = new SimpleDateFormat();
 		Date d = null;
 		try 	{d = sdf.parse(raw);}
-		catch 	(ParseException e) {throw Exc_.new_w_type("parse", "failed to parse to DateAdp", "raw", raw);}
+		catch 	(ParseException e) {throw Err_.new_("parse", "failed to parse to DateAdp", "raw", raw);}
 		GregorianCalendar cal = (GregorianCalendar)Calendar.getInstance();
 		cal.setTime(d);
 		return dateTime_(cal);
@@ -100,7 +100,7 @@ public class DateAdp_ implements GfoInvkAble {
 		SimpleDateFormat sdf = new SimpleDateFormat(fmt, Locale.US);
 		Date d = null;
 		try 	{d = sdf.parse(raw);}
-		catch 	(ParseException e) {throw Exc_.new_w_type("parse", "failed to parse to DateAdp", "raw", raw, "fmt", fmt);}
+		catch 	(ParseException e) {throw Err_.new_("parse", "failed to parse to DateAdp", "raw", raw, "fmt", fmt);}
 		GregorianCalendar cal = (GregorianCalendar)Calendar.getInstance();
 		cal.setTime(d);
 		return dateTime_(cal);

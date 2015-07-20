@@ -49,7 +49,7 @@ public class Xowd_db_file_ {
 			case Tid_file_core:		return Key_file_core;
 			case Tid_file_data:		return Key_file_data;
 			case Tid_file_user:		return Key_file_user;
-			default:				throw Exc_.new_unhandled(v);
+			default:				throw Err_.new_unhandled(v);
 		}
 	}
 }

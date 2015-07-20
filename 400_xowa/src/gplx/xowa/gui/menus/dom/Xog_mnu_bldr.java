@@ -44,7 +44,7 @@ public class Xog_mnu_bldr {
 					sub_gui = sub_gui_grp;
 					break;
 				}
-				default: throw Exc_.new_unhandled(sub_dom.Tid());
+				default: throw Err_.new_unhandled(sub_dom.Tid());
 			}
 			sub_dom.Under_gui_(sub_gui);
 		}
@@ -72,7 +72,7 @@ public class Xog_mnu_bldr {
 	}
 //		private void Add_chk(String key, String text, String shortcut, String img) {
 //			Xog_mnu_itm rv = Add_itm(Xog_mnu_itm.Tid_chk, key, text, shortcut, img);
-//			Xog_cmd_itm cmd = gui_mgr.Cmd_mgr().Regy().Get_or_null(key); if (cmd == null) throw Err_.new_("unknown cmd; key={0}", key);
+//			Xog_cmd_itm cmd = gui_mgr.Cmd_mgr().Regy().Get_or_null(key); if (cmd == null) throw Err_.new_wo_type("unknown cmd; key={0}", key);
 //			GfoEvObj pub = gui_mgr.App().Gfs_mgr().Get_owner_as_event_obj(cmd.Cmd());
 //			GfoEvMgr_.SubSame(pub, Xog_mnu_evt_mgr.Evt_selected_changed, rv.Evt_mgr());
 //		}

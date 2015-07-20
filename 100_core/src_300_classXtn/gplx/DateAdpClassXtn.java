@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 public class DateAdpClassXtn extends ClassXtn_base implements ClassXtn {
 	public String Key() {return Key_const;}						public static final String Key_const = "datetime";
-	public boolean Eq(Object lhs, Object rhs) {try {return DateAdp_.cast_(lhs).Eq(DateAdp_.cast_(rhs));} catch (Exception e) {Exc_.Noop(e); return false;}}
+	public boolean Eq(Object lhs, Object rhs) {try {return DateAdp_.cast_(lhs).Eq(DateAdp_.cast_(rhs));} catch (Exception e) {Err_.Noop(e); return false;}}
 	@Override public Class<?> UnderClass()					{return DateAdp.class;}
 	public Object DefaultValue()								{return DateAdp_.MinValue;}
 	@Override public Object ParseOrNull(String raw)				{return DateAdp_.parse_gplx(raw);}

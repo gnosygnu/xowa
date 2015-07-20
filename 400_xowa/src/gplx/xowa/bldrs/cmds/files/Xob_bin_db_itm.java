@@ -38,20 +38,20 @@ class Xob_bin_db_itm {
 	public static Xob_bin_db_itm new_v1(Fsm_bin_fil fil) {
 		byte[] name = Bry_.new_u8(fil.Url_rel());	// EX: "fsdb.bin.0000.sqlite3"
 		int ns_id = 0; // assume v1 dbs are all in main ns
-		int pt_id = Bry_.Xto_int_or(name, 9 , 13, Int_.MinValue);			if (pt_id == Int_.MinValue) throw Exc_.new_("bin_db_itm.parse: invalid pt_id", "name", fil.Url_rel(), "conn", fil.Conn().Conn_info().Xto_raw());
+		int pt_id = Bry_.Xto_int_or(name, 9 , 13, Int_.MinValue);			if (pt_id == Int_.MinValue) throw Err_.new_wo_type("bin_db_itm.parse: invalid pt_id", "name", fil.Url_rel(), "conn", fil.Conn().Conn_info().Xto_raw());
 		return new Xob_bin_db_itm(fil.Id(), fil.Url(), ns_id, pt_id);
 	}
 	public static Xob_bin_db_itm new_v2(Fsm_bin_fil fil) {
 		byte[] ns_bgn_tkn = Bry_.new_a7("file-ns."), ns_end_tkn = Bry_.new_a7("-db."), pt_end_tkn = Bry_.new_a7(".xowa");
 		int ns_bgn_tkn_len = ns_bgn_tkn.length, ns_end_tkn_len = ns_end_tkn.length; 
 		byte[] name = Bry_.new_u8(fil.Url_rel());	// EX: en.wikipedia.org-file-ns.000-db.001.xowa
-		int ns_bgn = Bry_finder.Find_fwd(name, ns_bgn_tkn, 0);				if (ns_bgn == Bry_finder.Not_found) throw Exc_.new_("bin_db_itm.parse: invalid ns_bgn", "name", fil.Url_rel(), "conn", fil.Conn().Conn_info().Xto_raw());
+		int ns_bgn = Bry_finder.Find_fwd(name, ns_bgn_tkn, 0);				if (ns_bgn == Bry_finder.Not_found) throw Err_.new_wo_type("bin_db_itm.parse: invalid ns_bgn", "name", fil.Url_rel(), "conn", fil.Conn().Conn_info().Xto_raw());
 		ns_bgn += ns_bgn_tkn_len;
-		int ns_end = Bry_finder.Find_fwd(name, ns_end_tkn, ns_bgn);			if (ns_end == Bry_finder.Not_found) throw Exc_.new_("bin_db_itm.parse: invalid ns_end", "name", fil.Url_rel(), "conn", fil.Conn().Conn_info().Xto_raw());
+		int ns_end = Bry_finder.Find_fwd(name, ns_end_tkn, ns_bgn);			if (ns_end == Bry_finder.Not_found) throw Err_.new_wo_type("bin_db_itm.parse: invalid ns_end", "name", fil.Url_rel(), "conn", fil.Conn().Conn_info().Xto_raw());
 		int pt_bgn = ns_end + ns_end_tkn_len;
-		int pt_end = Bry_finder.Find_fwd(name, pt_end_tkn, pt_bgn);			if (pt_end == Bry_finder.Not_found) throw Exc_.new_("bin_db_itm.parse: invalid pt_end", "name", fil.Url_rel(), "conn", fil.Conn().Conn_info().Xto_raw());
-		int ns_id = Bry_.Xto_int_or(name, ns_bgn, ns_end, Int_.MinValue);	if (ns_id == Int_.MinValue) throw Exc_.new_("bin_db_itm.parse: invalid ns_id", "name", fil.Url_rel(), "conn", fil.Conn().Conn_info().Xto_raw());
-		int pt_id = Bry_.Xto_int_or(name, pt_bgn, pt_end, Int_.MinValue);	if (pt_id == Int_.MinValue) throw Exc_.new_("bin_db_itm.parse: invalid pt_id", "name", fil.Url_rel(), "conn", fil.Conn().Conn_info().Xto_raw());
+		int pt_end = Bry_finder.Find_fwd(name, pt_end_tkn, pt_bgn);			if (pt_end == Bry_finder.Not_found) throw Err_.new_wo_type("bin_db_itm.parse: invalid pt_end", "name", fil.Url_rel(), "conn", fil.Conn().Conn_info().Xto_raw());
+		int ns_id = Bry_.Xto_int_or(name, ns_bgn, ns_end, Int_.MinValue);	if (ns_id == Int_.MinValue) throw Err_.new_wo_type("bin_db_itm.parse: invalid ns_id", "name", fil.Url_rel(), "conn", fil.Conn().Conn_info().Xto_raw());
+		int pt_id = Bry_.Xto_int_or(name, pt_bgn, pt_end, Int_.MinValue);	if (pt_id == Int_.MinValue) throw Err_.new_wo_type("bin_db_itm.parse: invalid pt_id", "name", fil.Url_rel(), "conn", fil.Conn().Conn_info().Xto_raw());
 		return new Xob_bin_db_itm(fil.Id(), fil.Url(), ns_id, pt_id);
 	}
 }

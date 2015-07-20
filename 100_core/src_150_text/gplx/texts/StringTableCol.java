@@ -31,9 +31,9 @@ public class StringTableCol {
 		if		(val == StringTableColAlign.Left.Val())	return cell + String_.Repeat(" ", diff);
 		else if (val == StringTableColAlign.Right.Val())	return String_.Repeat(" ", diff) + cell;
 		else if (val == StringTableColAlign.Mid.Val())	return String_.Concat(String_.Repeat(" ", diff / 2), cell, String_.Repeat(" ", (diff / 2) + (diff % 2)));
-		else									throw Exc_.new_unhandled(halign.Val());
+		else									throw Err_.new_unhandled(halign.Val());
 	}
 	public static StringTableCol new_() {return new StringTableCol();} StringTableCol() {}
 	public static StringTableCol as_(Object obj) {return obj instanceof StringTableCol ? (StringTableCol)obj : null;}
-	public static StringTableCol cast_(Object obj) {try {return (StringTableCol)obj;} catch(Exception exc) {throw Exc_.new_type_mismatch_w_exc(exc, StringTableCol.class, obj);}}
+	public static StringTableCol cast_(Object obj) {try {return (StringTableCol)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, StringTableCol.class, obj);}}
 }

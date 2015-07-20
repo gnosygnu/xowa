@@ -50,7 +50,7 @@ public class Xob_link_dump_cmd {
 			tbl.Create_idx_2();
 			conn.Env_vacuum();
 		} catch (Exception e) {
-                Tfds.Write(Err_.Message_gplx(e));
+                Tfds.Write(Err_.Message_gplx_full(e));
 		}
 	}
 }

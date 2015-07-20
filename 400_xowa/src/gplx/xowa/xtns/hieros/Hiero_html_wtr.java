@@ -82,7 +82,7 @@ class Hiero_html_wtr {
 	));
 	public byte[] Cartouche_img(Xoh_wtr_ctx hctx, boolean bgn, byte[] glyph) { // render open / close cartouche; note that MW has two branches, but they are both the same
 		int height = (int)((Hiero_html_mgr.Max_height * Hiero_html_mgr.scale) / 100);
-		Hiero_phoneme_itm phoneme_itm = phoneme_mgr.Get_by_key(glyph); if (phoneme_itm == null) throw Exc_.new_("missing phoneme", "glyph", String_.new_u8(glyph));
+		Hiero_phoneme_itm phoneme_itm = phoneme_mgr.Get_by_key(glyph); if (phoneme_itm == null) throw Err_.new_wo_type("missing phoneme", "glyph", String_.new_u8(glyph));
 		byte[] code = phoneme_itm.Gardiner_code();
 		byte[] title = bgn ? Html_entity_.Lt_bry : Html_entity_.Gt_bry;
 		return cartouche_img_fmtr.Bld_bry_many(temp_bfr, hiero_img_dir, code, height, title);

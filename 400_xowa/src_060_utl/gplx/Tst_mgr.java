@@ -40,7 +40,7 @@ public class Tst_mgr {
 	public void Tst_obj(Tst_chkr expd, Object actl) {
 		results.Clear();
 		int err = Tst_sub_obj(expd, actl, "", 0);
-		if (throwError && err > 0) throw Exc_.new_(Build());
+		if (throwError && err > 0) throw Err_.new_wo_type(Build());
 	}
 	public void Tst_ary(String ownerPath, Tst_chkr[] expd_ary, Object[] actl_ary) {
 		results.Clear();
@@ -59,7 +59,7 @@ public class Tst_mgr {
 		}
 		if (throwError && err > 0) {
 			String s = Build();
-			throw Exc_.new_(s);
+			throw Err_.new_wo_type(s);
 		}
 	}
 	public int Tst_sub_obj(Tst_chkr expd, Object actl, String path, int err) {

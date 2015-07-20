@@ -26,15 +26,15 @@ class Http_client_wtr__stream implements Http_client_wtr {
 			}
 	public void Write_bry(byte[] bry) {
 				try {stream.write(bry);}
-		catch (IOException e) {throw Exc_.new_exc(e, "net", "Write_bry failed");} 			
+		catch (IOException e) {throw Err_.new_exc(e, "net", "Write_bry failed");} 			
 			}
 	public void Write_str(String s) {
 				try {stream.writeBytes(s);}
-		catch (Exception e) {throw Exc_.new_exc(e, "net", "Write_str failed");} 
+		catch (Exception e) {throw Err_.new_exc(e, "net", "Write_str failed");} 
 			}
 	public void Write_mid(byte[] bry, int bgn, int end) {
 				try {stream.write(bry, bgn, end - bgn);}
-		catch (IOException e) {throw Exc_.new_exc(e, "net", "Write_mid failed");} 			
+		catch (IOException e) {throw Err_.new_exc(e, "net", "Write_mid failed");} 			
 			}
 	public void Write_stream(Io_stream_rdr stream_rdr) {
 		synchronized (tmp_stream_bry) {
@@ -48,6 +48,6 @@ class Http_client_wtr__stream implements Http_client_wtr {
 	}	
 	public void Rls() {
 				try {stream.close();}
-		catch (IOException e) {throw Exc_.new_exc(e, "net", "Rls failed");}			
+		catch (IOException e) {throw Err_.new_exc(e, "net", "Rls failed");}			
 			}
 }

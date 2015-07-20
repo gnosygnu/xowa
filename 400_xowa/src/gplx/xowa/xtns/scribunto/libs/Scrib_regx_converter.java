@@ -43,7 +43,7 @@ public class Scrib_regx_converter {
 					bfr.Add(q_flag ? Bry_dollar_escaped : Bry_dollar_literal);
 					break;
 				case Byte_ascii.Paren_bgn: {
-					if (i + 1 >= len) throw Exc_.new_("Unmatched open-paren at pattern character " + Int_.Xto_str(i));
+					if (i + 1 >= len) throw Err_.new_wo_type("Unmatched open-paren at pattern character " + Int_.Xto_str(i));
 					boolean capt_itm = src[i + 1] == Byte_ascii.Paren_end;	// current is "()" 						
 					++grps_len;
 					capt_list.Add(KeyVal_.int_(grps_len, capt_itm));
@@ -54,13 +54,13 @@ public class Scrib_regx_converter {
 				}
 				case Byte_ascii.Paren_end:
 					if (grps_open.Count() == 0)
-						throw Exc_.new_("Unmatched close-paren at pattern character " + Int_.Xto_str(i));
+						throw Err_.new_wo_type("Unmatched close-paren at pattern character " + Int_.Xto_str(i));
 					List_adp_.DelAt_last(grps_open);
 					bfr.Add_byte(Byte_ascii.Paren_end);
 					break;
 				case Byte_ascii.Percent:
 					++i;
-					if (i >= len) throw Exc_.new_("malformed pattern (ends with '%')");
+					if (i >= len) throw Err_.new_wo_type("malformed pattern (ends with '%')");
 					Object percent_obj = percent_hash.Get_by_mid(src, i, i + 1);
 					if (percent_obj != null) {
 						bfr.Add((byte[])percent_obj);
@@ -71,7 +71,7 @@ public class Scrib_regx_converter {
 						switch (nxt) {
 							case Byte_ascii.Ltr_b:	// EX: "%b()"
 								i += 2;
-								if (i >= len) throw Exc_.new_("malformed pattern (missing arguments to \'%b\')");
+								if (i >= len) throw Err_.new_wo_type("malformed pattern (missing arguments to \'%b\')");
 								byte char_0 = src[i - 1];
 								byte char_1 = src[i];
 								if (char_0 == char_1) {		// same char: easier regex; REF.MW: $bfr .= "{$d1}[^$d1]*$d1";
@@ -98,7 +98,7 @@ public class Scrib_regx_converter {
 							case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
 								grps_len = nxt - Byte_ascii.Num_0;
 								if (grps_len == 0 || grps_len > capt_list.Count() || grps_open_Has(grps_open, grps_len))
-									throw Exc_.new_("invalid capture index %" + grps_len + " at pattern character " + Int_.Xto_str(i));
+									throw Err_.new_wo_type("invalid capture index %" + grps_len + " at pattern character " + Int_.Xto_str(i));
 								bfr.Add(Bry_bf2_seg_0).Add_int_variable(grps_len);//.Add(Bry_bf2_seg_1);	// $bfr .= "\\g{m$grps_len}";
 								break;
 							default:
@@ -153,11 +153,11 @@ public class Scrib_regx_converter {
 						}
 						if (stop) break;
 					}
-					if (i >= len) throw Exc_.new_("Missing close-bracket for character set beginning at pattern character $nxt_pos");
+					if (i >= len) throw Err_.new_wo_type("Missing close-bracket for character set beginning at pattern character $nxt_pos");
 					bfr.Add_byte(Byte_ascii.Brack_end);
 					q_flag = true;
 					break;
-				case Byte_ascii.Brack_end: throw Exc_.new_("Unmatched close-bracket at pattern character " + Int_.Xto_str(i));
+				case Byte_ascii.Brack_end: throw Err_.new_wo_type("Unmatched close-bracket at pattern character " + Int_.Xto_str(i));
 				case Byte_ascii.Dot:
 					q_flag = true;
 					bfr.Add_byte(Byte_ascii.Dot);
@@ -183,7 +183,7 @@ public class Scrib_regx_converter {
 				}
 			}			
 		}
-		if (grps_open.Count() > 0) throw Exc_.new_("Unclosed capture beginning at pattern character " + Int_.cast_(grps_open.Get_at(0)));
+		if (grps_open.Count() > 0) throw Err_.new_wo_type("Unclosed capture beginning at pattern character " + Int_.cast_(grps_open.Get_at(0)));
 //			bfr.Add(Bry_regx_end);	// NOTE: do not add PHP /us at end; u=PCRE_UTF8 which is not needed for Java; s=PCRE_DOTALL which will be specified elsewhere
 		regx = bfr.Xto_str_and_clear();
 		return regx;

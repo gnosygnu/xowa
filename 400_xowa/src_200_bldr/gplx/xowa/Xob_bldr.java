@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.consoles.*;
 import gplx.xowa.apps.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.xmls.*; import gplx.xowa.bldrs.cfgs.*; import gplx.xowa.bldrs.langs.*;
 public class Xob_bldr implements GfoInvkAble {
 	private boolean pause_at_end = false; private long prv_prog_time; private Xob_xml_parser dump_parser;
@@ -67,9 +68,9 @@ public class Xob_bldr implements GfoInvkAble {
 			}
 			app.Usr_dlg().Note_many("", "", "bldr done: ~{0}", TimeSpanAdp_.from_(time_bgn).XtoStrUiAbbrv());
 			cmd_mgr.Clear();
-			if (pause_at_end && !Env_.Mode_testing()) {ConsoleAdp._.ReadLine("press enter to continue");}
+			if (pause_at_end && !Env_.Mode_testing()) {Console_adp__sys.I.Read_line("press enter to continue");}
 		}
-		catch (Exception e) {throw Exc_.new_exc(e, "bldr", "unknown error");}
+		catch (Exception e) {throw Err_.new_exc(e, "bldr", "unknown error");}
 	}
 	private void Cancel() {
 		int cmd_mgr_len = cmd_mgr.Len();

@@ -31,7 +31,7 @@ public class Pfunc_wiki_props extends Pf_func_base {
 			case Xol_kwd_grp_.Id_site_directionmark:	bfr.Add(props.DirectionMark()); break;
 			case Xol_kwd_grp_.Id_site_currentversion:	bfr.Add(props.Current_version()); break;
 			case Xol_kwd_grp_.Id_site_contentlanguage:	bfr.Add(ctx.Cur_page().Lang().Key_bry()); break;
-			default:									throw Exc_.new_unhandled(id);
+			default:									throw Err_.new_unhandled(id);
 		}
 	}
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_wiki_props(id).Name_(name);}

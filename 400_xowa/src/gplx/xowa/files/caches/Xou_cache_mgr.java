@@ -152,7 +152,7 @@ public class Xou_cache_mgr {
 				conn.Txn_end();
 				Io_mgr.I.Delete_dir_empty(cache_dir);
 			}
-			catch (Exception e) {Xoa_app_.Usr_dlg().Warn_many("", "", "failed to compress cache: err=~{0}", Err_.Message_gplx_brief(e)); return;}
+			catch (Exception e) {Xoa_app_.Usr_dlg().Warn_many("", "", "failed to compress cache: err=~{0}", Err_.Message_gplx_full(e)); return;}
 		}
 		Xoa_app_.Usr_dlg().Note_many("", "", "cache compress done");
 	}

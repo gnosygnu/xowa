@@ -44,7 +44,7 @@ class Xog_launcher_tabs {
 			return true;
 		}
 		catch (Exception e) {
-			app.Usr_dlg().Warn_many("", "", "failed to launch urls: urls=~{0} err=~{1}", String_.AryXtoStr(launch_urls), Err_.Message_gplx(e));
+			app.Usr_dlg().Warn_many("", "", "failed to launch urls: urls=~{0} err=~{1}", String_.AryXtoStr(launch_urls), Err_.Message_gplx_full(e));
 			Restore_tab_failover(app, home_wiki, win);
 			return false;
 		}
@@ -54,7 +54,7 @@ class Xog_launcher_tabs {
 			Launch_tab(win, home_wiki, gplx.xowa.users.Xouc_pages_mgr.Page_xowa);
 		}
 		catch (Exception e) {
-			app.Usr_dlg().Warn_many("", "", "failed to launch failover tab: err=~{0}", Err_.Message_gplx(e));
+			app.Usr_dlg().Warn_many("", "", "failed to launch failover tab: err=~{0}", Err_.Message_gplx_full(e));
 		}
 	}
 	private void Launch_tab(Xog_win_itm win, Xowe_wiki home_wiki, String launch_str) {
@@ -83,7 +83,7 @@ class Io_fil_marker {
 					Io_mgr.I.DeleteFil(url);			// delete
 			}
 			catch (Exception exc) {				// something unexpected happened
-				usr_dlg.Warn_many("", "", "marker.bgn failed: url=~{0} err=~{1}", url.Raw(), Err_.Message_gplx(exc));
+				usr_dlg.Warn_many("", "", "marker.bgn failed: url=~{0} err=~{1}", url.Raw(), Err_.Message_gplx_full(exc));
 				Io_mgr.I.DeleteFil(url);				// try to delete it again
 			}
 		}
@@ -95,7 +95,7 @@ class Io_fil_marker {
 				Io_mgr.I.DeleteFil(url);				// delete
 			}
 			catch (Exception exc) {
-				usr_dlg.Warn_many("", "", "marker.end failed: url=~{0} err=~{1}", url.Raw(), Err_.Message_gplx(exc));
+				usr_dlg.Warn_many("", "", "marker.end failed: url=~{0} err=~{1}", url.Raw(), Err_.Message_gplx_full(exc));
 				Io_mgr.I.DeleteFil(url);				// try to delete it again
 			}
 		}

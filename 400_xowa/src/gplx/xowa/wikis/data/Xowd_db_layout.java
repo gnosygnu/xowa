@@ -27,7 +27,7 @@ public class Xowd_db_layout {
 			case Const_all:		return Name_all;
 			case Const_few:		return Name_few;
 			case Const_lot:		return Name_lot;
-			default: 			throw Exc_.new_unimplemented();
+			default: 			throw Err_.new_unimplemented();
 		}
 	}
 	public static final String Name_all = "all", Name_few = "few", Name_lot = "lot";
@@ -41,6 +41,6 @@ public class Xowd_db_layout {
 		if		(String_.Eq(v, Name_all))	return Itm_all;
 		else if	(String_.Eq(v, Name_few))	return Itm_few;
 		else if	(String_.Eq(v, Name_lot))	return Itm_lot;
-		else								throw Exc_.new_unimplemented();
+		else								throw Err_.new_unimplemented();
 	}
 }

@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
+import gplx.core.consoles.*;
 public class UsrMsgWkr_console implements UsrMsgWkr {
 	public void ExecUsrMsg(int type, UsrMsg umsg) {
 		String text = umsg.XtoStr();
@@ -23,7 +24,7 @@ public class UsrMsgWkr_console implements UsrMsgWkr {
 			text = "!!!!" + text;
 		else if (type == UsrMsgWkr_.Type_Stop)
 			text = "****" + text;
-		ConsoleAdp._.WriteText(text);
+		Console_adp__sys.I.Write_str(text);
 	}
 	public static void RegAll(UsrDlg dlg) {
 		UsrMsgWkr wkr = new UsrMsgWkr_console();

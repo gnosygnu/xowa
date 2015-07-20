@@ -33,7 +33,7 @@ public class Xop_pipe_lxr implements Xop_lxr {
 					case Xop_parser_.Parse_tid_page_wiki:		// should never happen?
 						ctx.Subs_add(root, tkn_mkr.Pipe(bgn_pos, cur_pos));
 						break;
-					default: throw Exc_.new_unhandled(ctx.Parse_tid());
+					default: throw Err_.new_unhandled(ctx.Parse_tid());
 				}
 				return cur_pos;
 			case Xop_tkn_itm_.Tid_tblw_tb:

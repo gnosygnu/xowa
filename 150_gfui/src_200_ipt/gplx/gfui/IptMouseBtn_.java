@@ -40,7 +40,7 @@ public class IptMouseBtn_ {
 		else if	(String_.Eq(raw, Middle.Key())) return Middle;
 		else if	(String_.Eq(raw, X1.Key())) return X1;
 		else if	(String_.Eq(raw, X2.Key())) return X2;
-		else throw Exc_.new_parse_type(IptMouseBtn.class, raw);
+		else throw Err_.new_parse_type(IptMouseBtn.class, raw);
 	}
 	@gplx.Internal protected static IptMouseBtn api_(int val) {
 		if		(val == None.Val()) return None;
@@ -49,6 +49,6 @@ public class IptMouseBtn_ {
 		else if	(val == Middle.Val()) return Middle;
 		else if	(val == X1.Val()) return X1;
 		else if	(val == X2.Val()) return X2;
-		else throw Exc_.new_unhandled(val);
+		else throw Err_.new_unhandled(val);
 	}
 }

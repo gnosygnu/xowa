@@ -41,10 +41,10 @@ public class GfoNde implements GfoInvkAble {
 	}
 	int IndexOfOrFail(String key) {
 		int i = flds.Idx_of(key);
-		if ((i < 0 || i >= aryLen)) throw Exc_.new_("field name not found", "name", key, "index", i, "count", this.Flds().Count());
+		if ((i < 0 || i >= aryLen)) throw Err_.new_wo_type("field name not found", "name", key, "index", i, "count", this.Flds().Count());
 		return i;
 	}
-	boolean ChkIdx(int i) {if (i < 0 || i >= aryLen) throw Exc_.new_missing_idx(i, aryLen); return true;}
+	boolean ChkIdx(int i) {if (i < 0 || i >= aryLen) throw Err_.new_missing_idx(i, aryLen); return true;}
 	Object[] ary; int type; int aryLen;
 	@gplx.Internal protected GfoNde(int type, String name, GfoFldList flds, Object[] ary, GfoFldList subFlds, GfoNde[] subAry) {
 		this.type = type; this.name = name; this.flds = flds; this.ary = ary; aryLen = Array_.Len(ary); this.subFlds = subFlds;

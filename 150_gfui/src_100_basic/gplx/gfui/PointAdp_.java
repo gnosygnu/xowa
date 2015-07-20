@@ -20,13 +20,13 @@ public class PointAdp_ {
 	public static final PointAdp Null = new PointAdp(Int_.MinValue, Int_.MinValue);
 	public static final PointAdp Zero = new PointAdp(0, 0);
 	public static PointAdp as_(Object obj) {return obj instanceof PointAdp ? (PointAdp)obj : null;}
-	public static PointAdp cast_(Object obj) {try {return (PointAdp)obj;} catch(Exception exc) {throw Exc_.new_type_mismatch_w_exc(exc, PointAdp.class, obj);}}
+	public static PointAdp cast_(Object obj) {try {return (PointAdp)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, PointAdp.class, obj);}}
 	public static PointAdp new_(int x, int y) {return new PointAdp(x, y);}
 	public static PointAdp coerce_(Object o) {PointAdp rv = PointAdp_.as_(o); return (rv == null) ? parse_((String)o) : rv;}
 	public static PointAdp parse_(String raw) {
 		try {
 			String[] ary = String_.Split(raw, ",");
 			return new PointAdp(Int_.parse_(ary[0]), Int_.parse_(ary[1]));
-		}	catch (Exception exc) {throw Exc_.new_parse_exc(exc, PointAdp.class, raw);}
+		}	catch (Exception exc) {throw Err_.new_parse_exc(exc, PointAdp.class, raw);}
 	}
 }

@@ -41,7 +41,7 @@ public class Io_size_ {
 		int termsLen = Array_.Len(terms); if (termsLen > 2) return or;
 
 		DecimalAdp val = null;
-		try {val = DecimalAdp_.parse_(terms[0]);} catch (Exception exc) {Exc_.Noop(exc); return or;}
+		try {val = DecimalAdp_.parse_(terms[0]);} catch (Exception exc) {Err_.Noop(exc); return or;}
 
 		int unitPow = 0;
 		if (termsLen > 1) {
@@ -88,7 +88,7 @@ public class Io_size_ {
 	public static int	Load_int_(GfoMsg m) {return (int)Load_long_(m);}
 	public static long	Load_long_(GfoMsg m) {
 		String v = m.ReadStr("v");
-		long rv = parse_or_(v, Long_.MinValue); if (rv == Long_.MinValue) throw Exc_.new_("invalid val", "val", v);
+		long rv = parse_or_(v, Long_.MinValue); if (rv == Long_.MinValue) throw Err_.new_wo_type("invalid val", "val", v);
 		return rv;
 	}
 	public static String	To_str_mb(long v)				{return Long_.Xto_str(v / Io_mgr.Len_mb_long);}

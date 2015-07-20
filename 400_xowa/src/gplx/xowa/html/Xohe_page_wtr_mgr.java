@@ -70,7 +70,7 @@ public class Xohe_page_wtr_mgr extends Xoh_page_wtr_mgr_base implements GfoInvkA
 			case Xopg_view_mode.Tid_edit: return edit_wtr;
 			case Xopg_view_mode.Tid_html: return html_wtr;
 			case Xopg_view_mode.Tid_read: return read_wtr;
-			default: throw Exc_.new_unhandled(output_tid);
+			default: throw Err_.new_unhandled(output_tid);
 		}
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

@@ -28,7 +28,7 @@ public class Xob_deploy_zip_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	private void Exec(Xob_bldr bldr, String type_name) {
 		Log("initing wiki");
 		try {wiki.Init_assert();}
-		catch (Exception exc) {Log("failed to init wiki: ~{0}", Err_.Message_gplx_brief(exc));}
+		catch (Exception exc) {Log("failed to init wiki: ~{0}", Err_.Message_gplx_full(exc));}
 		Log("probing ns_dirs: ~{0}", wiki.Tdb_fsys_mgr().Ns_dir().Raw());
 		Io_url[] ns_dirs = Io_mgr.I.QueryDir_args(wiki.Tdb_fsys_mgr().Ns_dir()).DirOnly_().ExecAsUrlAry();
 		for (Io_url ns_dir : ns_dirs) {

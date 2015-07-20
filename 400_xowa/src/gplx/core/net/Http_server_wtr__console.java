@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.net; import gplx.*; import gplx.core.*;
+import gplx.core.consoles.*;
 class Http_server_wtr__console implements Http_server_wtr {
-	public void Write_str_w_nl(String s) {ConsoleAdp._.WriteLine(s);}
+	public void Write_str_w_nl(String s) {Console_adp__sys.I.Write_str_w_nl(s);}
 }

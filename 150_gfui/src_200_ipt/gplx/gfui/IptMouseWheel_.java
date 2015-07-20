@@ -25,7 +25,7 @@ public class IptMouseWheel_ {
 		if		(String_.Eq(raw, None.Key()))	return None;
 		else if	(String_.Eq(raw, Up.Key()))		return Up;
 		else if	(String_.Eq(raw, Down.Key()))	return Down;
-		else throw Exc_.new_parse_type(IptMouseWheel.class, raw);
+		else throw Err_.new_parse_type(IptMouseWheel.class, raw);
 	}
 	@gplx.Internal protected static IptMouseWheel api_(Object obj) {
 		int delta = Int_.cast_(obj);

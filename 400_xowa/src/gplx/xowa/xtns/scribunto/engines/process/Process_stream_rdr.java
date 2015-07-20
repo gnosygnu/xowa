@@ -24,10 +24,10 @@ public class Process_stream_rdr {
 		int bytes_read = rdr.Read(bry_header, 0, 16); 
 		if (bytes_read < 16) {
 			if (bytes_read == -1) return null;	// stream closed; should only occur when shutting down
-			else throw Exc_.new_("failed to read header");
+			else throw Err_.new_wo_type("failed to read header");
 		}
-		int body_len = HexDecUtl.parse_or_(bry_header, 0,8, -1); 	if (body_len == -1) throw Exc_.new_("failed to read body_len");
-		int chk_len= HexDecUtl.parse_or_(bry_header, 9, 16, -1);	if (chk_len == -1 || chk_len != (body_len * 2) - 1) throw Exc_.new_("failed to read chk_len");
+		int body_len = HexDecUtl.parse_or_(bry_header, 0,8, -1); 	if (body_len == -1) throw Err_.new_wo_type("failed to read body_len");
+		int chk_len= HexDecUtl.parse_or_(bry_header, 9, 16, -1);	if (chk_len == -1 || chk_len != (body_len * 2) - 1) throw Err_.new_wo_type("failed to read chk_len");
 		byte[] trg_bry = (body_len > bry_body.length) ? new byte[body_len] : bry_body;
 		return Read_body(trg_bry, body_len, rdr);
 	}
@@ -46,7 +46,7 @@ public class Process_stream_rdr {
 						case Byte_ascii.Ltr_n:		b = Byte_ascii.Nl; break;
 						case Byte_ascii.Ltr_r: 		b = Byte_ascii.Cr; break; 
 						case Byte_ascii.Backslash: 	b = Byte_ascii.Backslash; break;
-						default: 					throw Exc_.new_unhandled(b);
+						default: 					throw Err_.new_unhandled(b);
 					}
 				}
 				else {					// regular mode

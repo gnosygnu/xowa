@@ -24,7 +24,7 @@ public class Xop_xnde_tag_regy {
 			case Xop_parser_.Parse_tid_tmpl:		return tag_regy_tmpl;
 			case Xop_parser_.Parse_tid_page_tmpl:	return tag_regy_wiki_tmpl;
 			case Xop_parser_.Parse_tid_page_wiki:	return tag_regy_wiki_main;
-			default:								return tag_regy_wiki_tmpl; //throw Exc_.new_unhandled(i);
+			default:								return tag_regy_wiki_tmpl; //throw Err_.new_unhandled(i);
 		}
 	}	boolean nild = true;
 	public void Init() {

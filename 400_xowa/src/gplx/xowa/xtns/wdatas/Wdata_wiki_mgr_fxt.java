@@ -177,7 +177,7 @@ public class Wdata_wiki_mgr_fxt {
 	}
 	public void Test_write_json_as_html(String raw_str, String expd) {
 		byte[] raw_bry = Bry_.new_a7(raw_str);
-		raw_bry = gplx.json.Json_parser_tst.Replace_apos(raw_bry);
+		raw_bry = gplx.core.json.Json_parser_tst.Replace_apos(raw_bry);
 		Bry_bfr bfr = app.Utl__bfr_mkr().Get_b512();
 		Wdata_wiki_mgr.Write_json_as_html(wdata_mgr.Jdoc_parser(), bfr, raw_bry);
 		Tfds.Eq(expd, bfr.To_str_and_rls());

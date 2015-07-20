@@ -21,7 +21,7 @@ public class IptEvtDataKey {
 	public boolean Handled() {return handled;} public void Handled_set(boolean v) {handled = v;} private boolean handled;
 
 	public static IptEvtDataKey as_(Object obj) {return obj instanceof IptEvtDataKey ? (IptEvtDataKey)obj : null;}
-	public static IptEvtDataKey cast_(Object obj) {try {return (IptEvtDataKey)obj;} catch(Exception exc) {throw Exc_.new_type_mismatch_w_exc(exc, IptEvtDataKey.class, obj);}}
+	public static IptEvtDataKey cast_(Object obj) {try {return (IptEvtDataKey)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, IptEvtDataKey.class, obj);}}
 	@gplx.Internal protected static final IptEvtDataKey Null = new_(IptKey_.None);
 	@gplx.Internal protected static IptEvtDataKey test_(IptKey keyArg) {return new_(keyArg);}
 	@gplx.Internal protected static IptEvtDataKey int_(int val) {

@@ -29,7 +29,7 @@ public class Xoa_fsys_eval implements Bry_fmtr_eval_mgr {
 			case Tid_bin_plat_dir:		return app_fsys_mgr.Bin_plat_dir().RawBry();
 			case Tid_user_temp_dir:		return usr_fsys_mgr.App_temp_dir().RawBry();
 			case Tid_user_cfg_dir:		return usr_fsys_mgr.App_data_cfg_dir().RawBry();
-			default:					throw Exc_.new_unhandled(val);
+			default:					throw Err_.new_unhandled(val);
 		}
 	}
 	private static final byte Tid_bin_plat_dir = 0, Tid_user_temp_dir = 1, Tid_xowa_root_dir = 2, Tid_user_cfg_dir = 3;

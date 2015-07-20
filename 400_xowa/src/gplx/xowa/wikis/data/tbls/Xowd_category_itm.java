@@ -31,7 +31,7 @@ public class Xowd_category_itm {
 			case Xoa_ctg_mgr.Tid_subc: return count_subcs;
 			case Xoa_ctg_mgr.Tid_page: return count_pages;
 			case Xoa_ctg_mgr.Tid_file: return count_files;
-			default: throw Exc_.new_unhandled(tid);
+			default: throw Err_.new_unhandled(tid);
 		}		
 	} 
 	public static Xowd_category_itm load_(int id, int file_idx, boolean hidden, int count_subcs, int count_files, int count_pages) {

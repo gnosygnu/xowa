@@ -44,5 +44,5 @@ public class GfoNdeRdr_ {
 		return rv;
 	}
 	public static GfoNdeRdr as_(Object obj) {return obj instanceof GfoNdeRdr ? (GfoNdeRdr)obj : null;}
-	public static GfoNdeRdr cast_(Object obj) {try {return (GfoNdeRdr)obj;} catch(Exception exc) {throw Exc_.new_type_mismatch_w_exc(exc, GfoNdeRdr.class, obj);}}
+	public static GfoNdeRdr cast_(Object obj) {try {return (GfoNdeRdr)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfoNdeRdr.class, obj);}}
 }

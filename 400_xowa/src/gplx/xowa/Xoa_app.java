@@ -17,16 +17,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.ios.*;
-import gplx.xowa.apps.*; import gplx.xowa.apps.fsys.*;
+import gplx.xowa.apps.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apis.*;
 import gplx.xowa.bldrs.css.*;
 import gplx.xowa.files.caches.*; import gplx.xowa.files.imgs.*;
 import gplx.xowa.urls.encoders.*;
 import gplx.xowa.wikis.*;
 import gplx.xowa.wmfs.*;
-import gplx.xowa.html.hrefs.*; import gplx.xowa.html.wtrs.*; import gplx.xowa.html.js.*;
+import gplx.xowa.html.hrefs.*; import gplx.xowa.html.wtrs.*; import gplx.xowa.html.js.*; import gplx.xowa.html.bridges.*;
 import gplx.xowa.users.*;
 public interface Xoa_app {
 	Xoa_app_type			App_type();
+	Xoapi_root				Api_root();
 	Xoa_fsys_mgr			Fsys_mgr();
 	Xoa_wiki_mgr			Wiki_mgri();
 	Xof_cache_mgr			File__cache_mgr();
@@ -35,12 +36,13 @@ public interface Xoa_app {
 	Xoh_href_parser			Html__href_parser();
 	Xoh_lnki_bldr			Html__lnki_bldr();
 	Xoa_css_extractor		Html__css_installer();
-	Xoh_json_exec			Html__json_exec();
+	Xoh_bridge_mgr			Html__bridge_mgr();
 	Xou_user				User();
 	Xowmf_mgr				Wmf_mgr();
 	boolean					Xwiki_mgr__missing(byte[] domain);
+	boolean					Bldr__running(); void Bldr__running_(boolean v);
 	Gfo_usr_dlg				Usr_dlg();
 	Bry_bfr_mkr				Utl__bfr_mkr();
 	Url_encoder_mgr			Utl__encoder_mgr();
 	Xoa_url_parser			Utl__url_parser();
-}
+}	

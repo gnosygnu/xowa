@@ -26,8 +26,8 @@ public class Bool_ implements GfoInvkAble {
 	public static final byte[] Y_bry = new byte[] {Byte_ascii.Ltr_y}, N_bry = new byte[] {Byte_ascii.Ltr_n};
 	public static final String		True_str = "true", False_str = "false";
 	public static final byte[] True_bry = Bry_.new_a7(True_str), False_bry = Bry_.new_a7(False_str);
-	public static boolean		cast_(Object obj)				{try {return (Boolean)obj;} catch (Exception e) {throw Exc_.new_type_mismatch_w_exc(e, boolean.class, obj);}}
-	public static boolean		cast_or_(Object obj, boolean v)	{try {return (Boolean)obj;} catch (Exception e) {Exc_.Noop(e); return v;}}
+	public static boolean		cast_(Object obj)				{try {return (Boolean)obj;} catch (Exception e) {throw Err_.new_type_mismatch_w_exc(e, boolean.class, obj);}}
+	public static boolean		cast_or_(Object obj, boolean v)	{try {return (Boolean)obj;} catch (Exception e) {Err_.Noop(e); return v;}}
 	public static boolean		By_int(int v) {return v != 0;}
 	public static boolean		parse_(String raw) {
 		if		(	String_.Eq(raw, "true")
@@ -38,7 +38,7 @@ public class Bool_ implements GfoInvkAble {
 				||	String_.Eq(raw, "False")
 			)
 			return false;
-		throw Exc_.new_parse_type(boolean.class, raw);
+		throw Err_.new_parse_type(boolean.class, raw);
 	}
 	public static byte		Xto_byte(boolean v)		{return v ? Y_byte : N_byte;}
 	public static int		Xto_int(boolean v)			{return v ? 1 : 0;}

@@ -49,7 +49,7 @@ public class Xop_apos_dat {
 					case Xop_apos_tkn_.State_dual:	cmd = Xop_apos_tkn_.Cmd_i_end;			state = Xop_apos_tkn_.State_b;		dual_cmd = Xop_apos_tkn_.Cmd_bi_bgn; break;
 					case Xop_apos_tkn_.State_b:		cmd = Xop_apos_tkn_.Cmd_i_bgn;			state = Xop_apos_tkn_.State_bi;		break;
 					case Xop_apos_tkn_.State_nil:	cmd = Xop_apos_tkn_.Cmd_i_bgn;			state = Xop_apos_tkn_.State_i;		break;
-					default:						throw Exc_.new_unhandled(state);
+					default:						throw Err_.new_unhandled(state);
 				}
 				break;
 			}
@@ -61,7 +61,7 @@ public class Xop_apos_dat {
 					case Xop_apos_tkn_.State_dual:	cmd = Xop_apos_tkn_.Cmd_b_end;			state = Xop_apos_tkn_.State_i;		break; // NOTE: dual_cmd = Cmd_ib_bgn is implied
 					case Xop_apos_tkn_.State_i:		cmd = Xop_apos_tkn_.Cmd_b_bgn;			state = Xop_apos_tkn_.State_ib;		break;
 					case Xop_apos_tkn_.State_nil:	cmd = Xop_apos_tkn_.Cmd_b_bgn;			state = Xop_apos_tkn_.State_b;		break;
-					default:						throw Exc_.new_unhandled(state);
+					default:						throw Err_.new_unhandled(state);
 				}
 				break;
 			}
@@ -73,11 +73,11 @@ public class Xop_apos_dat {
 					case Xop_apos_tkn_.State_ib:	cmd = Xop_apos_tkn_.Cmd_bi_end;			state = Xop_apos_tkn_.State_nil;	break;
 					case Xop_apos_tkn_.State_dual:	cmd = Xop_apos_tkn_.Cmd_bi_end;			state = Xop_apos_tkn_.State_nil;	break; // NOTE: dual_cmd = Cmd_ib_bgn is implied
 					case Xop_apos_tkn_.State_nil:	cmd = Xop_apos_tkn_.Cmd_ib_bgn;			state = Xop_apos_tkn_.State_dual;	break;
-					default:						throw Exc_.new_unhandled(state);
+					default:						throw Err_.new_unhandled(state);
 				}
 				break;
 			}
-			default: throw Exc_.new_unhandled(apos_len);
+			default: throw Err_.new_unhandled(apos_len);
 		}
 	}
 }

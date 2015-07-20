@@ -44,11 +44,11 @@ public class Wdata_dict_rank {
 			case Tid_preferred					: return Str_preferred;
 			case Tid_normal						: return Str_normal;
 			case Tid_deprecated					: return Str_deprecated;
-			default								: throw Exc_.new_unhandled(tid);
+			default								: throw Err_.new_unhandled(tid);
 		}
 	}
 	public static byte Xto_tid(byte[] v) {
-		Object rv_obj = Dict.Get_by_bry(v); if	(rv_obj == null) throw Exc_.new_("unknown rank", "val", String_.new_u8(v));
+		Object rv_obj = Dict.Get_by_bry(v); if	(rv_obj == null) throw Err_.new_wo_type("unknown rank", "val", String_.new_u8(v));
 		return ((Byte_obj_val)rv_obj).Val();
 	}
 }

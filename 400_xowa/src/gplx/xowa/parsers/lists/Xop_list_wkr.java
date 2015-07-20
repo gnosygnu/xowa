@@ -149,7 +149,7 @@ public class Xop_list_wkr implements Xop_ctx_wkr {
 					if (stop) break;
 				}
 				for (int i = 0; i < Max_list_depth; i++)
-					curSymAry[i] = Byte_ascii.Nil;
+					curSymAry[i] = Byte_ascii.Null;
 				curSymLen = 0;
 				SymAry_fill_overflow = true;
 				return cur_pos;

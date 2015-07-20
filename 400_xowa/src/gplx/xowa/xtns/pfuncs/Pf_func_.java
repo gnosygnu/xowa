@@ -404,7 +404,7 @@ public class Pf_func_ {
 			case Xol_kwd_grp_.Id_cascadingSources:
 																return new Pf_func_noop(id);
 			case Xol_kwd_grp_.Id_bang:							return Pf_func_bang._;
-			default:											throw Exc_.new_unhandled(id);
+			default:											throw Err_.new_unhandled(id);
 		}
 	}
 }

@@ -37,7 +37,7 @@ class Map_math {// REF.MW:MapSources_math.php
 			if (until_step > 1 && error == 0)
 				Set_coord();
 		} catch (Exception e) {
-			Exc_.Noop(e);
+			Err_.Noop(e);
 			error = -128;
 		}
 		return error == 0;

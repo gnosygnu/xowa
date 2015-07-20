@@ -37,7 +37,7 @@ public class Xog_tab_itm_read_mgr {
 		catch (Exception e) {
 			if (String_.Eq(Err_.Message_lang(e), "class org.eclipse.swt.SWTException Widget is disposed")) return; // ignore errors caused by user closing tab early; DATE:2014-07-26
 			if (show_is_err) {	// trying to show error page, but failed; don't show again, else recursion until out of memory; TODO:always load error page; no reason it should fail; WHEN:html_skin; DATE:2014-06-08
-				Gfo_usr_dlg_.I.Warn_many("", "", "fatal error trying to load error page; page=~{0} err=~{1}" + new_page.Url().Xto_full_str_safe(), Err_.Message_gplx(e));
+				Gfo_usr_dlg_.I.Warn_many("", "", "fatal error trying to load error page; page=~{0} err=~{1}" + new_page.Url().Xto_full_str_safe(), Err_.Message_gplx_full(e));
 				return;
 			}
 			else
@@ -64,7 +64,7 @@ public class Xog_tab_itm_read_mgr {
 		if (url != null && ttl != null) {
 			try {url_str = url_parser.Build_str(url);}
 			catch (Exception e) {	// HACK: failed pages will have a null wiki; for now, catch and ignore; DATE:2014-06-22
-				Gfo_usr_dlg_.I.Warn_many("", "", "failed to build url: url=~{0}, err=~{1}", String_.new_u8(url.Raw()), Err_.Message_gplx(e));
+				Gfo_usr_dlg_.I.Warn_many("", "", "failed to build url: url=~{0}, err=~{1}", String_.new_u8(url.Raw()), Err_.Message_gplx_full(e));
 				url_str = String_.new_u8(ttl.Full_txt());
 			}
 			win_str = String_.new_u8(Bry_.Add(ttl.Full_txt(), Win_text_suffix_page));
@@ -74,7 +74,7 @@ public class Xog_tab_itm_read_mgr {
 	}
 	private static final byte[] Win_text_suffix_page = Bry_.new_a7(" - XOWA"); private static final String Win_text_blank = "XOWA";
 	public static void Show_page_err(Xog_win_itm win, Xog_tab_itm tab, Xowe_wiki wiki, Xoa_url url, Xoa_ttl ttl, Exception e) {
-		String err_msg = String_.Format("page_load fail: page={0} err={1}", String_.new_u8(url.Raw()), Err_.Message_gplx(e));
+		String err_msg = String_.Format("page_load fail: page={0} err={1}", String_.new_u8(url.Raw()), Err_.Message_gplx_full(e));
 		win.Usr_dlg().Warn_many("", "", err_msg);
 		win.App().Log_wtr().Queue_enabled_(false);
 		Xoae_page fail_page = wiki.Data_mgr().Get_page(ttl, false);

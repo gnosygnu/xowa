@@ -79,7 +79,7 @@ class Gfs_err_mgr {
 			KeyVal arg = args[i];
 			tmp_fail_args.Add(arg.Key(), arg.Val_to_str_or_empty());
 		}
-		throw Exc_.new_(Fail_msg(msg, tmp_fail_args));
+		throw Err_.new_wo_type(Fail_msg(msg, tmp_fail_args));
 	}
 	private void Fail_args_standard(byte[] src, int src_len, int pos) {
 		tmp_fail_args.Add("excerpt_bgn", Fail_excerpt_bgn(src, src_len, pos));		

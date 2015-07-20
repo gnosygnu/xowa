@@ -59,7 +59,7 @@ public class Xoa_lang_mgr implements GfoInvkAble {
 					switch (fld_idx) {
 						case 0:		code = csv_parser.Load(src, fld_bgn, pos); break;
 						case 1:		name = csv_parser.Load(src, fld_bgn, pos); break;
-						default:	throw Exc_.new_unhandled(fld_idx);
+						default:	throw Err_.new_unhandled(fld_idx);
 					}
 					fld_bgn = pos + 1;
 					++fld_idx;
@@ -90,7 +90,7 @@ public class Xoa_lang_mgr implements GfoInvkAble {
 			Cfg_nde_obj lang_grp = lang_root.Grps_get(key);
 			if (lang_grp == null) {
 				Xol_lang_itm itm = Xol_lang_itm_.Get_by_key(key);
-				if (itm == null) throw Exc_.new_("unknown lang group or key", "key", String_.new_u8(key));
+				if (itm == null) throw Err_.new_wo_type("unknown lang group or key", "key", String_.new_u8(key));
 				langs.Add(key, Xoac_lang_grp.Regy_get_or_new(key));
 			}
 			else

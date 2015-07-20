@@ -174,7 +174,7 @@ class Xosp_fbrow_html implements Bry_fmtr_arg {
 class Xosp_fbrow_cmd__err implements Xosp_fbrow_cmd {
 	public Xosp_fbrow_cmd Make_new() {return this;}
 	public Xosp_fbrow_rslt Write_html(Xoa_url_arg_mgr arg_mgr, GfoInvkAble select_invkable) {return Rslt;}
-	private static final Xosp_fbrow_rslt Rslt = new Xosp_fbrow_rslt(Bry_.Empty, Bry_.new_u8("url has unknown cmd"));
+	private static final Xosp_fbrow_rslt Rslt = new Xosp_fbrow_rslt(Bry_.Empty, Bry_.new_a7("url has unknown cmd"));
 		public static final Xosp_fbrow_cmd__err I = new Xosp_fbrow_cmd__err(); Xosp_fbrow_cmd__err() {}
 }
 class Xosp_fbrow_cmd__wiki_add extends Xosp_fbrow_cmd__base {

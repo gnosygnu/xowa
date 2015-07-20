@@ -35,7 +35,7 @@ public class Db_stmt_bldr {
 			case Db_cmd_mode.Tid_update:	if (update == null) update = conn.Stmt_update(tbl_name, flds_keys, flds_vals);	return update;
 			case Db_cmd_mode.Tid_delete:	if (delete == null) delete = conn.Stmt_delete(tbl_name, flds_keys);				return delete;
 			case Db_cmd_mode.Tid_ignore:	return Db_stmt_.Null;
-			default:						throw Exc_.new_unhandled(cmd_mode);
+			default:						throw Err_.new_unhandled(cmd_mode);
 		}
 	}
 	public void Batch_bgn() {conn.Txn_bgn(tbl_name);}

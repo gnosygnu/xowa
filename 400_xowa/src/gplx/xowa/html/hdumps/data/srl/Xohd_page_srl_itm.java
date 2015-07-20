@@ -35,7 +35,7 @@ abstract class Xohd_page_srl_itm__base implements Xohd_page_srl_itm {
 	}
 	public abstract byte[] Save_itm(Xog_page hpg);
 	public int Load(Xog_page hpg, byte[] bry, int bry_len, int itm_bgn, Int_obj_ref count_ref) {
-		int itm_len = Xow_hzip_int_.Load_bin_int_abrv(bry, bry_len, itm_bgn, count_ref); if (itm_len == -1) throw Exc_.new_("bry_itm has invalid len", "page", hpg.Page_id(), "tid", this.Tid());			
+		int itm_len = Xow_hzip_int_.Load_bin_int_abrv(bry, bry_len, itm_bgn, count_ref); if (itm_len == -1) throw Err_.new_wo_type("bry_itm has invalid len", "page", hpg.Page_id(), "tid", this.Tid());			
 		int data_bgn = itm_bgn + count_ref.Val(); if (itm_len == 0) return data_bgn;
 		int data_end = data_bgn + itm_len;
 		byte[] itm_data = Bry_.Mid(bry, data_bgn, data_end);

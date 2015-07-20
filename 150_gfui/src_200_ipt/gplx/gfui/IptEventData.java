@@ -36,7 +36,7 @@ public class IptEventData {
 	}
 
 	public static IptEventData as_(Object obj) {return obj instanceof IptEventData ? (IptEventData)obj : null;}
-	public static IptEventData cast_(Object obj) {try {return (IptEventData)obj;} catch(Exception exc) {throw Exc_.new_type_mismatch_w_exc(exc, IptEventData.class, obj);}}
+	public static IptEventData cast_(Object obj) {try {return (IptEventData)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, IptEventData.class, obj);}}
 	@gplx.Internal protected static IptEventData new_(GfuiElem sender, IptEventType eventType, IptArg eventArg, IptEvtDataKey keyData, IptEvtDataMouse mouseData) {return new_(sender, eventType, eventArg, keyData, IptEvtDataKeyHeld.Null, mouseData);}
 	@gplx.Internal protected static IptEventData new_(GfuiElem sender, IptEventType eventType, IptArg eventArg, IptEvtDataKey keyData, IptEvtDataKeyHeld keyPressData, IptEvtDataMouse mouseData) {
 		IptEventData rv = new IptEventData();

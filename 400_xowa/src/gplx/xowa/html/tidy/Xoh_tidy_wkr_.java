@@ -25,14 +25,14 @@ public class Xoh_tidy_wkr_ {
 			case Tid_null:							return Key_null;
 			case Tid_tidy:							return Key_tidy;
 			case Tid_jtidy:							return Key_jtidy;
-			default:								throw Exc_.new_unimplemented();
+			default:								throw Err_.new_unimplemented();
 		}
 	}
 	public static byte Xto_tid(String s) {
 		if		(String_.Eq(s, Key_tidy))			return Tid_tidy;
 		else if	(String_.Eq(s, Key_jtidy))			return Tid_jtidy;
 		else if	(String_.Eq(s, Key_null))			return Tid_null;
-		else										throw Exc_.new_unimplemented();
+		else										throw Err_.new_unimplemented();
 	}
 	public static KeyVal[] Options__list = KeyVal_.Ary(KeyVal_.new_(Key_tidy), KeyVal_.new_(Key_jtidy));
 }

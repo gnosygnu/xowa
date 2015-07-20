@@ -82,7 +82,7 @@ public class Bit_ {
 	public static int Shift_lhs(int val, int shift) {return val << shift;}
 	public static int Shift_rhs(int val, int shift) {return val >> shift;}
 	public static int Shift_lhs_to_int(int[] shift_ary, int... val_ary) {
-		int val_len = val_ary.length; if (val_len > shift_ary.length) throw Exc_.new_("vals must be less than shifts", "vals", val_len, "shifts", shift_ary.length);
+		int val_len = val_ary.length; if (val_len > shift_ary.length) throw Err_.new_wo_type("vals must be less than shifts", "vals", val_len, "shifts", shift_ary.length);
 		int rv = 0;
 		for (int i = 0; i < val_len; ++i) {
 			int val = val_ary[i];

@@ -21,7 +21,7 @@ public class Criteria_comp implements Criteria {
 	@gplx.Internal protected Criteria_comp(int comp_mode, Comparable val) {this.comp_mode = comp_mode; this.val = val;}
 	public byte				Tid() {return Criteria_.Tid_comp;}
 	public Comparable		Val() {return val;} private Comparable val;
-	public void				Val_from_args(Hash_adp args) {throw Exc_.new_unimplemented();}
+	public void				Val_from_args(Hash_adp args) {throw Err_.new_unimplemented();}
 	public void				Val_as_obj_(Object v) {val = (Comparable)v;}
 	public boolean Matches(Object compObj) {
 		Comparable comp = CompareAble_.as_(compObj);

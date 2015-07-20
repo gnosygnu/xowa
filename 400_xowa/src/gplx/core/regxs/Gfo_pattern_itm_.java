@@ -26,9 +26,9 @@ public class Gfo_pattern_itm_ {
 		int pos = 0;
 		while (true) {
 			boolean last = pos == raw_len;
-			byte b = last ? Byte_ascii.Nil : raw[pos];
+			byte b = last ? Byte_ascii.Null : raw[pos];
 			switch (b) {
-				case Byte_ascii.Nil:
+				case Byte_ascii.Null:
 					if (itm != null) {itm.Compile(raw, itm_bgn, pos); itm = null; itm_bgn = -1;}
 					break;
 				case Byte_ascii.Star:

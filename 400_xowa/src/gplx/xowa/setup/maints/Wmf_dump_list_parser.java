@@ -30,7 +30,7 @@ public class Wmf_dump_list_parser {
 				itms.Add(itm.Wiki_abrv(), itm);
 				itm.Status_time_(Parse_status_time(src, a_pos));	
 				itm.Status_msg_(Parse_status_msg(src, a_pos));
-			} catch (Exception e) {Exc_.Noop(e);}
+			} catch (Exception e) {Err_.Noop(e);}
 		}
 		return (Wmf_dump_itm[])itms.To_ary(Wmf_dump_itm.class);
 	}

@@ -45,7 +45,7 @@ public class KeyValHash {
 	}
 	public KeyVal FetchOrNull(String key) {return KeyVal_.as_(hash.Get_by(key));}
 	public static KeyValHash strAry_(String[] ary) {// needed for consoleLine
-		int aryLen = Array_.Len(ary); if (aryLen % 2 != 0) throw Exc_.new_("array length must be divisible by 2", "aryLen", aryLen, "ary", String_.Concat_lines_crlf(ary));
+		int aryLen = Array_.Len(ary); if (aryLen % 2 != 0) throw Err_.new_wo_type("array length must be divisible by 2", "aryLen", aryLen, "ary", String_.Concat_lines_crlf(ary));
 		KeyValHash rv = new KeyValHash();
 		String key = null;
 		for (int i = 0; i < aryLen; i++) {

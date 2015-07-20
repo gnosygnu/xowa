@@ -34,7 +34,7 @@ public class Xobc_utl_make_lang_tst {
 			);
 	}
 	@Test  public void Trailing_colon() {
-		fxt.Kwd_mgr().Parse_keep_trailing_colon(Bry_.new_u8("fr"), Bry_.new_u8(String_.Concat_lines_nl
+		fxt.Kwd_mgr().Parse_keep_trailing_colon(Bry_.new_a7("fr"), Bry_.new_u8(String_.Concat_lines_nl
 			(	"if|if:~si:~"
 			,	"ifeq|"
 			)));
@@ -61,7 +61,7 @@ public class Xobc_utl_make_lang_tst {
 			));
 	}
 	@Test  public void Prepend_hash() {
-		fxt.Kwd_mgr().Parse_prepend_hash(Bry_.new_u8("fr"), Bry_.new_u8(String_.Concat_lines_nl
+		fxt.Kwd_mgr().Parse_prepend_hash(Bry_.new_a7("fr"), Bry_.new_u8(String_.Concat_lines_nl
 			(	"if|if:~si:~"
 			,	"ifeq|"
 			,	"tag|tag~"
@@ -91,7 +91,7 @@ public class Xobc_utl_make_lang_tst {
 			));
 	}
 	@Test  public void Add_words_hash() {
-		fxt.Kwd_mgr().Parse_add_words(Bry_.new_u8("fr"), Bry_.new_u8(String_.Concat_lines_nl
+		fxt.Kwd_mgr().Parse_add_words(Bry_.new_a7("fr"), Bry_.new_u8(String_.Concat_lines_nl
 			(	"if|if_new:~if~"
 			,	"ifeq|"
 			)));
@@ -116,7 +116,7 @@ public class Xobc_utl_make_lang_tst {
 			));
 	}
 	@Test  public void Manual_text() {
-		fxt.Mgr().Parse_manual_text(Bry_.new_u8("fr"), Bry_.new_u8(String_.Concat_lines_nl
+		fxt.Mgr().Parse_manual_text(Bry_.new_a7("fr"), Bry_.new_u8(String_.Concat_lines_nl
 			(	"app;"
 			))
 			, fxt.Mgr().Manual_text_end_hash());

@@ -24,9 +24,9 @@ class Io_sort_cmd_img implements Io_sort_cmd {
 	public Io_url_gen Make_url_gen() {return make_url_gen;} public Io_sort_cmd_img Make_url_gen_(Io_url_gen v) {make_url_gen = v; return this;} Io_url_gen make_url_gen;
 	public void Sort_bgn() {
 		prv_itm_bgn = prv_itm_end = 0;
-	} 	byte line_dlm = Byte_ascii.Nil;
+	} 	byte line_dlm = Byte_ascii.Null;
 	public void Sort_do(Io_line_rdr rdr) {
-		if (line_dlm == Byte_ascii.Nil) line_dlm = rdr.Line_dlm();
+		if (line_dlm == Byte_ascii.Null) line_dlm = rdr.Line_dlm();
 		int rdr_key_bgn = rdr.Key_pos_bgn(), rdr_key_end = rdr.Key_pos_end();
 		if (prv_itm_end == 0 || !Bry_.Match(rdr.Bfr(), rdr_key_bgn, rdr_key_end, fil_bfr.Bfr(), prv_itm_bgn, prv_itm_end)) {
 			int fil_bfr_len = fil_bfr.Len();

@@ -82,10 +82,10 @@ public class Gfo_thread_cmd_unzip implements Gfo_thread_cmd {
 			case Term_cmd_for_src_noop: break;
 			case Term_cmd_for_src_delete: Io_mgr.I.DeleteFil(src); break;
 			case Term_cmd_for_src_move:
-				if (term_cmd_for_src_url == Io_url_.Empty) throw Exc_.new_("move specified, but no url");
+				if (term_cmd_for_src_url == Io_url_.Empty) throw Err_.new_wo_type("move specified, but no url");
 				Io_mgr.I.MoveFil_args(src, term_cmd_for_src_url, true).Exec();
 				break;
-			default: throw Exc_.new_unhandled(term_cmd_for_src);
+			default: throw Err_.new_unhandled(term_cmd_for_src);
 		}
 		usr_dlg.Prog_many(GRP_KEY, "done", "");
 		return true;
@@ -108,7 +108,7 @@ public class Gfo_thread_cmd_unzip implements Gfo_thread_cmd {
 		if 		(String_.Eq(s, "noop")) 		return Term_cmd_for_src_noop;
 		else if (String_.Eq(s, "delete")) 		return Term_cmd_for_src_delete;
 		else if (String_.Eq(s, "move")) 		return Term_cmd_for_src_move;
-		else									throw Exc_.new_unhandled(s);
+		else									throw Err_.new_unhandled(s);
 	}
 	static final String GRP_KEY = "xowa.thread.file.unzip";
 	public static final String KEY = "file.unzip";

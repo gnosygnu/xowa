@@ -38,14 +38,14 @@ public class Xof_cache_mgr implements GfoInvkAble {
 			dir_mgr.Save_all();
 			fil_mgr.Save_all();
 			cfg_mgr.Save_all();	// always save cfg_mgr last; fil_mgr / dir_mgr may change next_id during failed saves; DATE:2014-03-07
-		} catch (Exception e) {usr_dlg.Warn_many("", "", "cache_mgr.save:fatal error: err=~{0}", Err_.Message_gplx_brief(e));}
+		} catch (Exception e) {usr_dlg.Warn_many("", "", "cache_mgr.save:fatal error: err=~{0}", Err_.Message_gplx_full(e));}
 	}
 	public void Db_term() {
 		try {
 			cfg_mgr.Cleanup();
 			dir_mgr.Cleanup();
 			fil_mgr.Cleanup();
-		} catch (Exception e) {usr_dlg.Warn_many("", "", "cache_mgr.term:fatal error: err=~{0}", Err_.Message_gplx_brief(e));}
+		} catch (Exception e) {usr_dlg.Warn_many("", "", "cache_mgr.term:fatal error: err=~{0}", Err_.Message_gplx_full(e));}
 	}
 	public Xofc_fil_itm Reg(Xof_fsdb_itm itm, long bin_len) {return this.Reg(itm.Orig_repo_name(), itm.Orig_ttl(), itm.File_is_orig(), itm.File_w(), itm.File_w(), itm.Lnki_time(), itm.Orig_ext(), bin_len, DateAdp_.MaxValue, "");}
 	private Xofc_fil_itm Reg(byte[] repo, byte[] ttl, boolean fil_is_orig, int fil_w, int fil_h, double fil_thumbtime, Xof_ext ext, long bin_len, DateAdp modified, String hash) {

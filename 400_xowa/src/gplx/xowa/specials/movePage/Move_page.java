@@ -38,7 +38,7 @@ public class Move_page implements Xows_page {
 	private void Exec_rename(Xowe_wiki wiki, Xoae_page page) {
 		gplx.xowa.dbs.Xodb_save_mgr save_mgr = wiki.Db_mgr().Save_mgr();
 		int trg_ns_id = args.Trg_ns();
-		Xow_ns trg_ns = wiki.Ns_mgr().Ids_get_or_null(trg_ns_id); if (trg_ns == null) throw Exc_.new_("unknown ns", "ns", trg_ns_id);
+		Xow_ns trg_ns = wiki.Ns_mgr().Ids_get_or_null(trg_ns_id); if (trg_ns == null) throw Err_.new_wo_type("unknown ns", "ns", trg_ns_id);
 		byte[] trg_ttl_bry = args.Trg_ttl();
 		Xoa_ttl trg_ttl = Xoa_ttl.parse_(wiki, trg_ns_id, trg_ttl_bry);
 		Xowd_page_itm src_page = new Xowd_page_itm();

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
-import gplx.json.*; import gplx.xowa.html.*; import gplx.xowa.apis.xowa.html.*;
+import gplx.core.json.*; import gplx.xowa.html.*; import gplx.xowa.apis.xowa.html.*;
 class Wdata_fmtr__json implements Bry_fmtr_arg {
 	private final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	private Xoapi_toggle_itm toggle_itm; private Wdata_toc_data toc_data; private Json_doc jdoc;

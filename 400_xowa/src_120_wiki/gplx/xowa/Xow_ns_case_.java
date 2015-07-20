@@ -22,13 +22,13 @@ public class Xow_ns_case_ {
 	public static byte parse_(String s) {
 		if		(String_.Eq(s, Key_1st))		return Id_1st;
 		else if	(String_.Eq(s, Key_all))		return Id_all;
-		else									throw Exc_.new_unhandled(s);
+		else									throw Err_.new_unhandled(s);
 	}
 	public static String To_str(byte uid) {
 		switch (uid) {
 			case Id_all: return Key_all;
 			case Id_1st: return Key_1st;
-			default: throw Exc_.new_unhandled(uid);
+			default: throw Err_.new_unhandled(uid);
 		}
 	}
 }

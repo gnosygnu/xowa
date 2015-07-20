@@ -27,7 +27,7 @@ class GfmlVarTkn implements GfmlTkn {
 	}	String val;
 	public GfmlBldrCmd Cmd_of_Tkn() {return GfmlBldrCmd_.Null;}
 	public GfmlTkn[] SubTkns() {return ary;} GfmlTkn[] ary;
-	public GfmlTkn MakeNew(String rawNew, String valNew) {throw Exc_.new_invalid_op("makeNew cannot make copy of token with only raw").Args_add("key", key, "rawNew", rawNew, "valNew", valNew);}
+	public GfmlTkn MakeNew(String rawNew, String valNew) {throw Err_.new_invalid_op("makeNew cannot make copy of token with only raw").Args_add("key", key, "rawNew", rawNew, "valNew", valNew);}
 	public String TknType() {return "evalTkn";}
 
 	GfmlVarCtx ctx; String varKey;

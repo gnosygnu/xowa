@@ -42,7 +42,7 @@ public class StringTableBldr {
 			String[] row = (String[])rows.Get_at(rowI);
 			for (int colI = 0; colI < row.length; colI++) {
 				if (colI != 0) sb.Add(" ");
-				StringTableCol col = StringTableCol.as_(cols.Get_at(colI)); if (col == null) throw Exc_.new_missing_idx(colI, cols.Count());
+				StringTableCol col = StringTableCol.as_(cols.Get_at(colI)); if (col == null) throw Err_.new_missing_idx(colI, cols.Count());
 				sb.Add(col.PadCell(row[colI]));
 			}
 			sb.Add(String_.CrLf);

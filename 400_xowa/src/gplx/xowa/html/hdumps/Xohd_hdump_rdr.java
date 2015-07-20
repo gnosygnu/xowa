@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html.hdumps; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
-import gplx.xowa.html.hdumps.data.*; import gplx.xowa.html.hzips.*; import gplx.xowa.html.hdumps.abrvs.*; import gplx.xowa.html.hdumps.pages.*;
-import gplx.xowa.pages.*; import gplx.xowa.pages.skins.*; import gplx.xowa.html.modules.*;
+import gplx.xowa.html.heads.*; import gplx.xowa.html.hdumps.data.*; import gplx.xowa.html.hzips.*; import gplx.xowa.html.hdumps.abrvs.*; import gplx.xowa.html.hdumps.pages.*;
+import gplx.xowa.pages.*; import gplx.xowa.pages.skins.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa2.gui.*;
 public class Xohd_hdump_rdr {
 	private final Bry_bfr_mkr bfr_mkr; private final Xow_hzip_mgr hzip_mgr;
@@ -39,7 +39,7 @@ public class Xohd_hdump_rdr {
 		html_data.Display_ttl_(hpg.Display_ttl());
 		html_data.Content_sub_(hpg.Content_sub());
 		html_data.Xtn_skin_mgr().Add(new Xopg_xtn_skin_itm_stub(hpg.Sidebar_div()));
-		Load_module_mgr(html_data.Module_mgr(), hpg);
+		Load_module_mgr(html_data.Head_mgr(), hpg);
 		for (gplx.xowa.html.hdumps.core.Xohd_data_itm__base itm : hpg.Img_itms())
 			page.Hdump_data().Imgs_add(itm);
 	}
@@ -78,8 +78,8 @@ public class Xohd_hdump_rdr {
 			if (redirect_id == -1) break;
 		}
 	}
-	public static void Load_module_mgr(Xoh_module_mgr page_module_mgr, Xog_page hpg) {
-		Xopg_module_mgr dump_module_mgr = hpg.Module_mgr();
+	public static void Load_module_mgr(Xoh_head_mgr page_module_mgr, Xog_page hpg) {
+		Xopg_module_mgr dump_module_mgr = hpg.Head_mgr();
 		page_module_mgr.Itm__mathjax().Enabled_			(dump_module_mgr.Math_exists());
 		page_module_mgr.Itm__popups().Bind_hover_area_	(dump_module_mgr.Imap_exists());
 		page_module_mgr.Itm__gallery().Enabled_			(dump_module_mgr.Gallery_packed_exists());

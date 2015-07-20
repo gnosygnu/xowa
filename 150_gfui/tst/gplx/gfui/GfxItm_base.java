@@ -30,5 +30,5 @@ public abstract class GfxItm_base implements GfxItm {
 		pos = posVal; size = sizeVal;
 	}
 	public static GfxItm_base as_(Object obj) {return obj instanceof GfxItm_base ? (GfxItm_base)obj : null;}
-	public static GfxItm_base cast_(Object obj) {try {return (GfxItm_base)obj;} catch(Exception exc) {throw Exc_.new_type_mismatch_w_exc(exc, GfxItm_base.class, obj);}}
+	public static GfxItm_base cast_(Object obj) {try {return (GfxItm_base)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfxItm_base.class, obj);}}
 }

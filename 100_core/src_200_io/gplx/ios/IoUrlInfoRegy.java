@@ -24,7 +24,7 @@ public class IoUrlInfoRegy implements GfoInvkAble {
 			IoUrlInfo info = (IoUrlInfo)hash.Get_at(i - 1);
 			if (info.Match(raw)) return info;
 		}
-		throw Exc_.new_("could not match ioPathInfo", "raw", raw, "count", hash.Count());
+		throw Err_.new_wo_type("could not match ioPathInfo", "raw", raw, "count", hash.Count());
 	}
 	public void Reset() {
 		hash.Clear();

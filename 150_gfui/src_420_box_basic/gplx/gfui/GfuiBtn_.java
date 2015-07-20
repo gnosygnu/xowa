@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfui; import gplx.*;
 public class GfuiBtn_ {
 	public static GfuiBtn as_(Object obj) {return obj instanceof GfuiBtn ? (GfuiBtn)obj : null;}
-	public static GfuiBtn cast_(Object obj) {try {return (GfuiBtn)obj;} catch(Exception exc) {throw Exc_.new_type_mismatch_w_exc(exc, GfuiBtn.class, obj);}}
+	public static GfuiBtn cast_(Object obj) {try {return (GfuiBtn)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfuiBtn.class, obj);}}
 
 	public static GfuiBtn msg_(String key, GfuiElem owner, GfoMsg msg) {
 		GfuiBtn rv = new_(key); rv.Owner_(owner);

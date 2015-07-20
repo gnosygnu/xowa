@@ -34,7 +34,7 @@ public class Xocfg_bnd_mgr implements GfoInvkAble, Gfo_sort_able {
 		int len = bnd_mgr.Len();
 		for (int i = 0; i < len; i++) {
 			Xog_bnd_itm bnd = bnd_mgr.Get_at(i);
-			Xog_cmd_itm cmd = cmd_mgr.Get_or_null(bnd.Cmd()); if (cmd == null) throw Exc_.new_unhandled(bnd.Cmd());
+			Xog_cmd_itm cmd = cmd_mgr.Get_or_null(bnd.Cmd()); if (cmd == null) throw Err_.new_unhandled(bnd.Cmd());
 			Xocfg_bnd_itm cfg_itm = new Xocfg_bnd_itm(this, cmd, bnd);
 			regy.Add(bnd.Key(), cfg_itm);
 		}
@@ -48,7 +48,7 @@ public class Xocfg_bnd_mgr implements GfoInvkAble, Gfo_sort_able {
 			bnd_mgr_srl.Load_by_bry(src);
 		}
 		catch (Exception e) {	// catch errors, so that next cmd (which is page.reload) can still execute
-			app.Usr_dlg().Warn_many("", "", "failed to set bnds; src=~{0} err=~{1}", String_.new_u8(src), Err_.Message_gplx_brief(e));
+			app.Usr_dlg().Warn_many("", "", "failed to set bnds; src=~{0} err=~{1}", String_.new_u8(src), Err_.Message_gplx_full(e));
 		}
 	}
 	private void Show_shortcut_win(String uid, String name, String binding) {

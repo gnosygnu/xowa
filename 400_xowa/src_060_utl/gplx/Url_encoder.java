@@ -250,7 +250,7 @@ class Url_encoder_itm_hex implements Url_encoder_itm {
 	}
 	public int Decode(Bry_bfr bfr, byte[] src, int end, int idx, byte b, boolean fail_when_invalid) {
 		if (idx + 2 >= end) {
-			if (fail_when_invalid) throw Exc_.new_("decode needs 3 bytes", "idx", idx, "len", end, "snip", String_.new_u8(Bry_.Mid_by_len_safe(src, idx, 3)));
+			if (fail_when_invalid) throw Err_.new_wo_type("decode needs 3 bytes", "idx", idx, "len", end, "snip", String_.new_u8(Bry_.Mid_by_len_safe(src, idx, 3)));
 			else {
 				bfr.Add_byte(b);
 				return 0;
@@ -270,7 +270,7 @@ class Url_encoder_itm_hex implements Url_encoder_itm {
 			}
 		}
 		if (fail_when_invalid)
-			throw Exc_.new_("decode is invalid", "idx", idx, "snip", String_.new_u8(Bry_.Mid_by_len_safe(src, idx, 3)));
+			throw Err_.new_wo_type("decode is invalid", "idx", idx, "snip", String_.new_u8(Bry_.Mid_by_len_safe(src, idx, 3)));
 		else {
 			bfr.Add_byte(b);
 			return 0;

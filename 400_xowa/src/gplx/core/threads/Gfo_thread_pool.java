@@ -46,7 +46,7 @@ public class Gfo_thread_pool implements GfoInvkAble {
 	private void Run_wkr(Gfo_thread_wkr wkr) {
 		try {wkr.Exec();}
 		catch (Exception e) {
-			usr_dlg.Warn_many("", "", "uncaught exception while running thread; name=~{0} err=~{1}", wkr.Name(), Err_.Message_gplx_brief(e));
+			usr_dlg.Warn_many("", "", "uncaught exception while running thread; name=~{0} err=~{1}", wkr.Name(), Err_.Message_gplx_full(e));
 		}
 		finally {
 			if (wkr.Resume())

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfui; import gplx.*;
 public class GfuiAlign_ implements ParseAble {
 	public static GfuiAlign as_(Object obj) {return obj instanceof GfuiAlign ? (GfuiAlign)obj : null;}
-	public static GfuiAlign cast_(Object obj) {try {return (GfuiAlign)obj;} catch(Exception exc) {throw Exc_.new_type_mismatch_w_exc(exc, GfuiAlign.class, obj);}}
+	public static GfuiAlign cast_(Object obj) {try {return (GfuiAlign)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfuiAlign.class, obj);}}
 	public static final GfuiAlign 
 		  Null	= new_(0, "nil")
 		, Lo	= new_(1, "lo")
@@ -55,7 +55,7 @@ public class GfuiAlign_ implements ParseAble {
 		else if (posEnm == GfuiAlign_.Lo.Val())		rv = 0;
 		else if (posEnm == GfuiAlign_.Mid.Val())	rv = (outerSize - innerSize) / 2;
 		else if (posEnm == GfuiAlign_.Hi.Val())		rv = outerSize - innerSize;
-		else										throw Exc_.new_unhandled(posEnm);
+		else										throw Err_.new_unhandled(posEnm);
 		if (rv < 0) rv = 0;
 		return rv;
 	}

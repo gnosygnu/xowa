@@ -48,17 +48,17 @@ public class Scrib_kv_utl_ {
 		return rv;
 	}
 	public static String Val_to_str(KeyVal[] ary, int idx) {
-		if (ary == null) throw Exc_.new_("ary is null");
+		if (ary == null) throw Err_.new_wo_type("ary is null");
 		int ary_len = ary.length;
 		if (ary_len == 0 && idx == 0) return "";	// NOTE: Modules can throw exceptions in which return value is nothing; do not fail; return ""; EX: -logy; DATE:2013-10-14
-		if (idx >= ary_len) throw Exc_.new_("idx is not in bounds", "idx", idx, "len", KeyVal_.Ary_x_to_str(ary));
+		if (idx >= ary_len) throw Err_.new_wo_type("idx is not in bounds", "idx", idx, "len", KeyVal_.Ary_x_to_str(ary));
 		Object o = ary[idx].Val();
 		try {return (String)o;}
-		catch (Exception e) {throw Exc_.new_cast(e, String.class, o);}
+		catch (Exception e) {throw Err_.new_cast(e, String.class, o);}
 	}
 	public static KeyVal[] Val_to_KeyVal_ary(KeyVal[] ary, int idx) {
-		if (ary == null) throw Exc_.new_("ary is null"); if (idx >= ary.length) throw Exc_.new_("idx is not in bounds", "idx", idx, "len", KeyVal_.Ary_x_to_str(ary));
+		if (ary == null) throw Err_.new_wo_type("ary is null"); if (idx >= ary.length) throw Err_.new_wo_type("idx is not in bounds", "idx", idx, "len", KeyVal_.Ary_x_to_str(ary));
 		try {return (KeyVal[])ary[idx].Val();}
-		catch (Exception e) {throw Exc_.new_exc(e, "scrib", "cast as KeyVal[] failed", "ary", KeyVal_.Ary_x_to_str(ary));}
+		catch (Exception e) {throw Err_.new_exc(e, "scrib", "cast as KeyVal[] failed", "ary", KeyVal_.Ary_x_to_str(ary));}
 	}
 }

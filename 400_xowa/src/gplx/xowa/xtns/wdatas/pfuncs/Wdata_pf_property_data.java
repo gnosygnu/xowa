@@ -48,7 +48,7 @@ public class Wdata_pf_property_data {
 			switch (key_tid) {
 				case Atr_of_id: of = val; break;
 				case Atr_q_id:  q = val; break;
-				default: throw Exc_.new_unhandled(key_tid);
+				default: throw Err_.new_unhandled(key_tid);
 			}
 		}
 		tmp_bfr.Mkr_rls();	

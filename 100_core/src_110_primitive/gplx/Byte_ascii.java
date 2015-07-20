@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 public class Byte_ascii {
 	public static final byte
-	      Nil			=   0												 , Backfeed         =   8, Tab				=   9
+	      Null			=   0												 , Backfeed         =   8, Tab				=   9
 		, Nl			=  10, Formfeed			=  12, Cr				=  13
 													 , Space			=  32, Bang				=  33, Quote			=  34
 		, Hash			=  35, Dollar           =  36, Percent			=  37, Amp				=  38, Apos				=  39

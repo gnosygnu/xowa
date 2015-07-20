@@ -29,7 +29,7 @@ public class Xop_list_wkr_ {
 			case Byte_ascii.Hash:
 			case Byte_ascii.Semic:		return b;
 			case Byte_ascii.Colon:		return Byte_ascii.Semic;
-			default:					throw Exc_.new_unhandled(b);
+			default:					throw Err_.new_unhandled(b);
 		}
 	}
 	public static void Close_list_if_present(Xop_ctx ctx, Xop_root_tkn root, byte[] src, int bgn_pos, int cur_pos) {// close all list tkns on stack; EX: ***\n should close all 3 stars; used to only close 1

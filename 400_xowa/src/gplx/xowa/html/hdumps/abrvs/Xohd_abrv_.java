@@ -49,21 +49,21 @@ public class Xohd_abrv_ {
 	;
 	public static Btrie_slim_mgr new_trie() {
 		Btrie_slim_mgr rv = Btrie_slim_mgr.cs_();
-		trie_itm(rv, Tid_dir				, Byte_ascii.Nil		, Key_dir);
+		trie_itm(rv, Tid_dir				, Byte_ascii.Null		, Key_dir);
 		trie_itm(rv, Tid_img				, Byte_ascii.Apos		, Key_img);
 		trie_itm(rv, Tid_img_style			, Byte_ascii.Apos		, Key_img_style);
 		trie_itm(rv, Tid_file_play			, Byte_ascii.Apos		, Key_file_play);
 		trie_itm(rv, Tid_file_info			, Byte_ascii.Apos		, Key_file_info);
 		trie_itm(rv, Tid_file_mgnf			, Byte_ascii.Apos		, Key_file_mgnf);
-		trie_itm(rv, Tid_hiero_dir			, Byte_ascii.Nil		, Key_hiero_dir);
+		trie_itm(rv, Tid_hiero_dir			, Byte_ascii.Null		, Key_hiero_dir);
 		trie_itm(rv, Tid_gallery_box_max	, Byte_ascii.Apos		, Key_gallery_box_max);
 		trie_itm(rv, Tid_gallery_box_w		, Byte_ascii.Apos		, Key_gallery_box_w);
 		trie_itm(rv, Tid_gallery_img_w		, Byte_ascii.Apos		, Key_gallery_img_w);
 		trie_itm(rv, Tid_gallery_img_pad	, Byte_ascii.Apos		, Key_gallery_img_pad);
 		trie_itm(rv, Tid_redlink			, Byte_ascii.Apos		, Key_redlink);
-		trie_itm(rv, Tid_toc				, Byte_ascii.Nil		, Key_toc);
-//			trie_itm(rv, Tid_hdr_bgn			, Byte_ascii.Nil		, Key_hdr_bgn);
-//			trie_itm(rv, Tid_hdr_end			, Byte_ascii.Nil		, Key_hdr_end);
+		trie_itm(rv, Tid_toc				, Byte_ascii.Null		, Key_toc);
+//			trie_itm(rv, Tid_hdr_bgn			, Byte_ascii.Null		, Key_hdr_bgn);
+//			trie_itm(rv, Tid_hdr_end			, Byte_ascii.Null		, Key_hdr_end);
 		return rv;
 	}
 	private static void trie_itm(Btrie_slim_mgr trie, byte tid, byte subst_end_byte, byte[] key_bry) {

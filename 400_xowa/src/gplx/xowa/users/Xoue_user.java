@@ -79,7 +79,7 @@ public class Xoue_user implements Xou_user, GfoEvMgrOwner, GfoInvkAble {
 		Xoae_page bookmarks_page = wiki.Data_mgr().Get_page(bookmarks_ttl, false);
 		byte[] new_data = Bry_.Add(bookmarks_page.Data_raw(), new_entry);
 		wiki.Db_mgr().Save_mgr().Data_update(bookmarks_page, new_data);
-	}	private Bry_fmtr bookmarks_add_fmtr = Bry_fmtr.new_("* [[~{wiki_key}:~{page_name}]]\n", "wiki_key", "page_name"); byte[] Bry_data_bookmarks = Bry_.new_u8("Data:Bookmarks");
+	}	private Bry_fmtr bookmarks_add_fmtr = Bry_fmtr.new_("* [[~{wiki_key}:~{page_name}]]\n", "wiki_key", "page_name"); byte[] Bry_data_bookmarks = Bry_.new_a7("Data:Bookmarks");
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {			
 		if		(ctx.Match(k, Invk_available_from_bulk))		Available_from_bulk(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_available_from_fsys))		Available_from_fsys();
@@ -92,7 +92,7 @@ public class Xoue_user implements Xou_user, GfoEvMgrOwner, GfoInvkAble {
 		else if	(ctx.Match(k, Invk_prefs))						return prefs_mgr;
 		else if	(ctx.Match(k, Invk_cfg))						return cfg_mgr;
 		else if	(ctx.Match(k, Invk_session))					return session_mgr;
-		else if	(ctx.Match(k, "name"))							return key; //throw Exc_.new_unhandled(k);	// OBSOLETE: used to return key
+		else if	(ctx.Match(k, "name"))							return key; //throw Err_.new_unhandled(k);	// OBSOLETE: used to return key
 		else return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}

@@ -189,7 +189,7 @@ class Pxd_itm_unit extends Pxd_itm_base implements Pxd_itm_prototype {
 			case DateAdp_.SegIdx_day   : cur = cur.Add_day   (val); break;
 			case DateAdp_.SegIdx_month : cur = cur.Add_month (val); break;
 			case DateAdp_.SegIdx_year  : cur = cur.Add_year  (val); break;
-			default: throw Exc_.new_unhandled(this.Seg_idx());
+			default: throw Err_.new_unhandled(this.Seg_idx());
 		}
 		bldr.Date_(cur);
 	}

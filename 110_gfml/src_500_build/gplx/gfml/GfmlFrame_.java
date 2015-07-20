@@ -69,7 +69,7 @@ class GfmlFrame_eval extends GfmlFrame_base {
 	static String[] ExtractContextKey(String raw) {
 		String[] ary = String_.Split(raw, ".");
 		if (ary.length == 2) return ary; // NOOP: elems already assigned; context = ary[0]; key = ary[1];
-		if (ary.length > 2) throw Exc_.new_("invalid context key for eval frame; should have 0 or 1 dlms", "key", raw);
+		if (ary.length > 2) throw Err_.new_wo_type("invalid context key for eval frame; should have 0 or 1 dlms", "key", raw);
 		String[] rv = new String[2];
 		rv[0] = GfmlVarCtx_.DefaultKey;
 		rv[1] = ary[0];

@@ -75,7 +75,7 @@ public class Cfg_nde_root implements GfoInvkAble {
 									case Byte_ascii.Dash:	cur_cmd = Cfg_nde_cmd.Cmd_del; fail = false; break;
 								}
 							}
-							if (fail) throw Exc_.new_("cmd is invalid", "cmd", String_.new_u8(src, fld_bgn, src_pos));
+							if (fail) throw Err_.new_wo_type("cmd is invalid", "cmd", String_.new_u8(src, fld_bgn, src_pos));
 							break;
 						case 1: cur_grp_key = csv_parser.Load(src, fld_bgn, src_pos); break;
 						case 2: cur_itm_typ = csv_parser.Load(src, fld_bgn, src_pos); break;

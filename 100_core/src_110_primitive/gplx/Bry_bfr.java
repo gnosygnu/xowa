@@ -77,7 +77,7 @@ public class Bry_bfr {
 		return this;
 	}
 	public Bry_bfr ClearAndReset() {bfr_len = 0; if (reset > 0) Reset_if_gt(reset); return this;}
-	public byte Get_at_last_or_nil_if_empty() {return bfr_len == 0 ? Byte_ascii.Nil : bfr[bfr_len - 1];}
+	public byte Get_at_last_or_nil_if_empty() {return bfr_len == 0 ? Byte_ascii.Null : bfr[bfr_len - 1];}
 	public Bry_bfr Add_safe(byte[] val) {return val == null ? this : Add(val);}
 	public Bry_bfr Add(byte[] val) {
 		int val_len = val.length;
@@ -89,7 +89,7 @@ public class Bry_bfr {
 	}
 	public Bry_bfr Add_mid(byte[] val, int bgn, int end) {
 		int len = end - bgn;
-		if (len < 0) throw Exc_.new_("negative len", "bgn", bgn, "end", end, "excerpt", String_.new_u8_by_len(val, bgn, bgn + 16));	// NOTE: check for invalid end < bgn, else difficult to debug errors later; DATE:2014-05-11
+		if (len < 0) throw Err_.new_wo_type("negative len", "bgn", bgn, "end", end, "excerpt", String_.new_u8_by_len(val, bgn, bgn + 16));	// NOTE: check for invalid end < bgn, else difficult to debug errors later; DATE:2014-05-11
 		if (bfr_len + len > bfr_max) Resize((bfr_max + len) * 2);
 		Bry_.Copy_by_pos(val, bgn, end, bfr, bfr_len);
 		// Array_.CopyTo(val, bgn, bfr, bfr_len, len);
@@ -124,7 +124,7 @@ public class Bry_bfr {
 		if (trim_bgn) {
 			for (int i = 0; i < src_len; i++) {
 				byte b = src_bry[i];
-				if (trim_ary[b & 0xFF] == Byte_ascii.Nil) {
+				if (trim_ary[b & 0xFF] == Byte_ascii.Null) {
 					src_bgn = i;
 					i = src_len;
 					all_ws = false;
@@ -135,7 +135,7 @@ public class Bry_bfr {
 		if (trim_end) {
 			for (int i = src_len - 1; i > -1; i--) {
 				byte b = src_bry[i];
-				if (trim_ary[b & 0xFF] == Byte_ascii.Nil) {
+				if (trim_ary[b & 0xFF] == Byte_ascii.Null) {
 					src_end = i + 1;
 					i = -1;
 					all_ws = false;
@@ -288,7 +288,7 @@ public class Bry_bfr {
 			bfr_len += bry_len;
 			return this;
 		}
-		catch (Exception e) {throw Exc_.new_exc(e, "core", "invalid UTF-8 sequence", "s", str);}
+		catch (Exception e) {throw Err_.new_exc(e, "core", "invalid UTF-8 sequence", "s", str);}
 	}
 	public Bry_bfr Add_str_a7(String str) {
 		try {
@@ -302,11 +302,12 @@ public class Bry_bfr {
 			bfr_len += bry_len;
 			return this;
 		}
-		catch (Exception e) {throw Exc_.new_exc(e, "core", "invalid UTF-8 sequence", "s", str);}
+		catch (Exception e) {throw Err_.new_exc(e, "core", "invalid UTF-8 sequence", "s", str);}
 	}
-	public Bry_bfr Add_kv_line(String key, Object val) {
+	public Bry_bfr Add_kv_dlm(boolean line, String key, Object val) {
 		this.Add_str_a7(key).Add_byte_colon().Add_byte_space();
-		this.Add(Bry_.new_u8(Object_.Xto_str_strict_or_null_mark(val))).Add_byte_nl();
+		this.Add(Bry_.new_u8(Object_.Xto_str_strict_or_null_mark(val)));
+		this.Add_byte(line ? Byte_ascii.Nl : Byte_ascii.Tab);
 		return this;
 	}
 	public Bry_bfr Add_float(float f) {Add_str(Float_.Xto_str(f)); return this;}

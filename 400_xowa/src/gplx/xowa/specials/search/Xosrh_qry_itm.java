@@ -42,7 +42,7 @@ class Xosrh_qry_itm {
 				List_adp merged = Evaluate(src, tid == Xosrh_qry_itm.Tid_and, lhs, rhs);
 				return new Xosrh_qry_ids(false, merged);
 			case Xosrh_qry_itm.Tid_null: return Xosrh_qry_ids.Null;
-			default: throw Exc_.new_unhandled(tid);
+			default: throw Err_.new_unhandled(tid);
 		}
 	}
 	private static List_adp Search_word(Xowe_wiki wiki, Cancelable cancelable, Bry_bfr tmp_bfr, Xows_ns_mgr ns_mgr, byte[] search_word, int results_max) {
@@ -159,7 +159,7 @@ class Xosrh_qry_itm {
 			Xowd_page_itm id = (Xowd_page_itm)list_to_hash.Get_at(i);
 			try {
 				if (!tmp_hash.Has(id.Id_val())) tmp_hash.Add(id.Id_val(), id);
-			}	catch (Exception e) {Exc_.Noop(e); tmp_hash.Clear(); return List_adp_.Noop;}	// handle error in case of threading issues; must clear tmp_hash else will accumulate;
+			}	catch (Exception e) {Err_.Noop(e); tmp_hash.Clear(); return List_adp_.Noop;}	// handle error in case of threading issues; must clear tmp_hash else will accumulate;
 			if (tid == Evaluate_tid_or)
 				rv.Add(id);
 		}
@@ -177,7 +177,7 @@ class Xosrh_qry_itm {
 						rv.Add(id);
 					break; 
 				case Evaluate_tid_null: default:
-					throw Exc_.new_unhandled(tid);
+					throw Err_.new_unhandled(tid);
 			}			
 		}
 		tmp_hash.Clear();
@@ -199,7 +199,7 @@ class Xosrh_qry_itm {
 				bfr.Add_byte(Byte_ascii.Paren_end);
 				break;
 			case Xosrh_qry_itm.Tid_null: break;
-			default: throw Exc_.new_unhandled(tid);
+			default: throw Err_.new_unhandled(tid);
 		}
 	}
 	public static final byte Tid_null = 0, Tid_root = 1, Tid_word = 2, Tid_word_quote = 3, Tid_not = 4, Tid_or = 5, Tid_and = 6;

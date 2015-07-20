@@ -34,7 +34,7 @@ public class Xoctg_html_mgr implements GfoInvkAble {
 		}
 		catch (Exception e) { // ctg error should never cause page to fail
 			tmp_bfr.Mkr_rls();
-			Xoa_app_.Usr_dlg().Warn_many("", "", "failed to generate category: title=~{0} err=~{1}", String_.new_u8(page.Ttl().Full_txt()), Err_.Message_gplx_brief(e));
+			Xoa_app_.Usr_dlg().Warn_many("", "", "failed to generate category: title=~{0} err=~{1}", String_.new_u8(page.Ttl().Full_txt()), Err_.Message_gplx_full(e));
 		}
 	}	private Xoctg_url url_ctg = new Xoctg_url();
 	private void Bld_html_v2(Xowe_wiki wiki, Xoae_page page, Bry_bfr bfr) {
@@ -104,7 +104,7 @@ public class Xoctg_html_mgr implements GfoInvkAble {
 			case Xoa_ctg_mgr.Tid_subc: return mgr_subcs;
 			case Xoa_ctg_mgr.Tid_page: return mgr_pages;
 			case Xoa_ctg_mgr.Tid_file: return mgr_files;
-			default: throw Exc_.new_unhandled(tid);
+			default: throw Err_.new_unhandled(tid);
 		}
 	}
 	public static final int Grp_max_default = 200;

@@ -48,10 +48,10 @@ public class Xowd_search_temp_tbl {
 	public void Create_idx(Gfo_usr_dlg usr_dlg, Xowd_search_link_tbl search_link_tbl, Xowd_search_word_tbl search_word_tbl) {
 		conn.Ddl_delete_tbl(tbl_name);
 		try {search_word_tbl.Create_idx();} 
-		catch (Exception e) {usr_dlg.Warn_many("", "", "bldr.search_word.unique_search_failed: err=~{0}", Err_.Message_gplx_brief(e));}
+		catch (Exception e) {usr_dlg.Warn_many("", "", "bldr.search_word.unique_search_failed: err=~{0}", Err_.Message_gplx_full(e));}
 		try {search_link_tbl.Create_idx_unique();}
 		catch (Exception e) {
-			usr_dlg.Warn_many("", "", "bldr.search_page.unique_search_failed: err=~{0}", Err_.Message_gplx_brief(e));
+			usr_dlg.Warn_many("", "", "bldr.search_page.unique_search_failed: err=~{0}", Err_.Message_gplx_full(e));
 			search_link_tbl.Create_idx_normal();;
 		}
 	}

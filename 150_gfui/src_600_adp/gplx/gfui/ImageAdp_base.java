@@ -52,7 +52,7 @@ public class ImageAdp_base implements ImageAdp, RlsAble {
 	    boolean success = false;
 	    try {success = ImageIO.write((BufferedImage)under, fmtStr, fil);}
 	    catch (IOException e) {}
-	    if (!success) throw Exc_.new_w_type("gplx.gfui.imgs.SaveImageFailed", "save image failed", "srcUrl", url.Xto_api(), "trgFil", fil, "fmt", fmtStr);
+	    if (!success) throw Err_.new_("gplx.gfui.imgs.SaveImageFailed", "save image failed", "srcUrl", url.Xto_api(), "trgFil", fil, "fmt", fmtStr);
 		//#@endif
 			}
 	public ImageAdp Extract_image(RectAdp src_rect, SizeAdp trg_size) {return Extract_image(src_rect.X(), src_rect.Y(), src_rect.Width(), src_rect.Height(), trg_size.Width(), trg_size.Height());}

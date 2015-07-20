@@ -21,7 +21,7 @@ public class ByteClassXtn extends ClassXtn_base implements ClassXtn {
 	public String Key() {return Key_const;}
 	@Override public Class<?> UnderClass()					{return byte.class;}
 	public Object DefaultValue()								{return 0;}
-	public boolean Eq(Object lhs, Object rhs) {try {return Byte_.cast_(lhs) == Byte_.cast_(rhs);} catch (Exception e) {Exc_.Noop(e); return false;}}
+	public boolean Eq(Object lhs, Object rhs) {try {return Byte_.cast_(lhs) == Byte_.cast_(rhs);} catch (Exception e) {Err_.Noop(e); return false;}}
 	@Override public Object ParseOrNull(String raw)				{return raw == null ? (Object)null : Byte_.parse_(raw);}
 	@Override public Object XtoDb(Object obj)					{return Byte_.cast_(obj);}
 	public static final ByteClassXtn _ =  new ByteClassXtn(); ByteClassXtn() {} // added to ClassXtnPool by default

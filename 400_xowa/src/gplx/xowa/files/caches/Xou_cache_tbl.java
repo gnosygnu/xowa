@@ -107,10 +107,10 @@ public class Xou_cache_tbl implements RlsAble {
 				case Db_cmd_mode.Tid_update:	stmt.Clear();									Db_save_val(stmt, itm); Db_save_crt(stmt, itm, Bool_.N); stmt.Exec_update(); break;
 				case Db_cmd_mode.Tid_delete:	stmt.Clear(); Db_save_crt(stmt, itm, Bool_.N);	stmt.Exec_delete();	break;
 				case Db_cmd_mode.Tid_ignore:	break;
-				default:						throw Exc_.new_unhandled(itm.Db_state());
+				default:						throw Err_.new_unhandled(itm.Db_state());
 			}
 			itm.Db_state_(Db_cmd_mode.Tid_ignore);
-		} catch (Exception e) {stmt_bldr.Rls(); throw Exc_.new_exc(e, "xo", "db_save failed");}
+		} catch (Exception e) {stmt_bldr.Rls(); throw Err_.new_exc(e, "xo", "db_save failed");}
 	}
 	@gplx.Internal protected Db_rdr Select_all_for_test() {return conn.Stmt_select(tbl_name, flds, Db_meta_fld.Ary_empty).Exec_select__rls_manual();}
 	private void Db_save_crt(Db_stmt stmt, Xou_cache_itm itm, boolean insert) {

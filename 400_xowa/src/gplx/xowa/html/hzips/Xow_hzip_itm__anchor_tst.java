@@ -64,12 +64,12 @@ public class Xow_hzip_itm__anchor_tst {
 		fxt.Test_load(brys, "<a href='/wiki/A' id='xowa_lnki_3' title='A'>B<a href='/wiki/C' id='xowa_lnki_3' title='C'>C1</a>D</a>");
 	}
 	@Test   public void Srl_noop() {
-		byte[][] brys = Bry_.Ary(Bry_.new_u8("<a href='/wiki/A'>A"), Xow_hzip_dict.Bry_a_rhs);	// NOTE: still converts "</a>" to hzip
+		byte[][] brys = Bry_.Ary(Bry_.new_a7("<a href='/wiki/A'>A"), Xow_hzip_dict.Bry_a_rhs);	// NOTE: still converts "</a>" to hzip
 		fxt.Test_save(brys, "<a href='/wiki/A'>A</a>");
 		fxt.Test_load(brys, "<a href='/wiki/A'>A</a>");
 	}
 	@Test   public void Srl_lnki_text_y__multiple() {	// PURPOSE: if id is missing from 1st anchor, do not get from second
-		byte[][] brys = Bry_.Ary(Bry_.new_u8("<a xtid='a_lnki_text_n' href=\"/wiki/A\" title=\"A\">A")
+		byte[][] brys = Bry_.Ary(Bry_.new_a7("<a xtid='a_lnki_text_n' href=\"/wiki/A\" title=\"A\">A")
 			, Xow_hzip_dict.Bry_a_rhs
 			, Xow_hzip_dict.Bry_lnki_text_n, Bry_.ints_(2), fxt.Make_int(3), Bry_.new_a7("B"), Xow_hzip_dict.Escape_bry
 			);

@@ -26,7 +26,7 @@ public class Int_ implements GfoInvkAble {
 	public static final int Null = Int_.MinValue;
 	public static int coerce_(Object v) {
 		try {String s = String_.as_(v); return s == null ? Int_.cast_(v) : Int_.parse_(s);}
-		catch (Exception e) {throw Exc_.new_cast(e, int.class, v);}
+		catch (Exception e) {throw Err_.new_cast(e, int.class, v);}
 	}
 	public static int[] Ary_empty = new int[0];
 	public static int[] Ary(int... v) {return v;}
@@ -85,8 +85,8 @@ public class Int_ implements GfoInvkAble {
 	public static int Max(int lhs, int rhs) {return lhs > rhs ? lhs : rhs;}
 	public static int ModIfNeg1(int v, int or) {return v == -1 ? or : v;}
 	public static boolean RangeCheck(int v, int max) {return v >= 0 && v < max;}
-	public static void RangeCheckOrFail_list(int v, int max, String s)		{if (v < 0   || v >= max) throw Exc_.new_("bounds check failed", "msg", s, "v", v, "min",   0, "max", max - 1);}
-	public static void RangeCheckOrFail(int v, int min, int max, String s)	{if (v < min || v >= max) throw Exc_.new_("bounds check failed", "msg", s, "v", v, "min", min, "max", max);}
+	public static void RangeCheckOrFail_list(int v, int max, String s)		{if (v < 0   || v >= max) throw Err_.new_wo_type("bounds check failed", "msg", s, "v", v, "min",   0, "max", max - 1);}
+	public static void RangeCheckOrFail(int v, int min, int max, String s)	{if (v < min || v >= max) throw Err_.new_wo_type("bounds check failed", "msg", s, "v", v, "min", min, "max", max);}
 	public static boolean Between(int v, int lhs, int rhs) {
 		int lhsCompare = v == lhs ? 0 : (v < lhs ? -1 : 1);
 		int rhsCompare = v == rhs ? 0 : (v < rhs ? -1 : 1);
@@ -131,7 +131,7 @@ public class Int_ implements GfoInvkAble {
 		return rv * sign;
 	}	public static int[] Log10Ary = new int[] {1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000, Int_.MaxValue}; public static int Log10AryLen = 11;
 	public Int_ FailIfNeg1(String key, int val) {
-		if (val < 0) throw Exc_.new_("key must be >= 0", "key", key, "val", val);
+		if (val < 0) throw Err_.new_wo_type("key must be >= 0", "key", key, "val", val);
 		return this;
 	}
 	public static String Xto_str_pad_bgn_space(int v, int reqdPlaces)	{return Xto_str_pad_bgn_zero(v, reqdPlaces, Byte_ascii.Space, true);}	// EX: 1, 3 returns "  1"
@@ -155,9 +155,9 @@ public class Int_ implements GfoInvkAble {
 		return bfr.Xto_str();
 	}
 	public static int read_(Object o) {String s = String_.as_(o); return s != null ? Int_.parse_(s) : Int_.cast_(o);}
-	public static int parse_(String raw) {try {return Integer.parseInt(raw);} catch(Exception e) {throw Exc_.new_parse_exc(e, int.class, raw);}}
-	public static int cast_(Object obj) {try {return (Integer)obj;} catch(Exception exc) {throw Exc_.new_type_mismatch_w_exc(exc, int.class, obj);}}
-	public static int cast_or_(Object obj, int or) {try {return (Integer)obj;} catch(Exception e) {Exc_.Noop(e); return or;}}
+	public static int parse_(String raw) {try {return Integer.parseInt(raw);} catch(Exception e) {throw Err_.new_parse_exc(e, int.class, raw);}}
+	public static int cast_(Object obj) {try {return (Integer)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, int.class, obj);}}
+	public static int cast_or_(Object obj, int or) {try {return (Integer)obj;} catch(Exception e) {Err_.Noop(e); return or;}}
 	public static int Xby_double_(double v) {return (int)v;}
 	public static String Xto_str(int v) {return new Integer(v).toString();}
 	public static String Xto_str_fmt(int v, String fmt) {return new java.text.DecimalFormat(fmt).format(v);}

@@ -78,7 +78,7 @@ class Xob_search_wkr extends Xob_itm_basic_base implements Xobd_wkr {
 				byte[] word = words[i];
 				search_temp_tbl.Insert_cmd_by_batch(page_id, word);
 			}
-		}	catch (Exception e) {bldr.Usr_dlg().Warn_many("", "", "search_index:fatal error: err=~{0}", Err_.Message_gplx_brief(e));}	// never let single page crash entire import
+		}	catch (Exception e) {bldr.Usr_dlg().Warn_many("", "", "search_index:fatal error: err=~{0}", Err_.Message_gplx_full(e));}	// never let single page crash entire import
 	}
 	public void Wkr_end() {
 		search_temp_tbl.Make_data(usr_dlg, search_db.Tbl__search_link(), search_db.Tbl__search_word());

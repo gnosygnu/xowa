@@ -195,7 +195,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 	}
 	@gplx.Internal protected void Show_url_failed(Load_page_wkr wkr) {
 		try {
-			Xog_tab_itm_read_mgr.Show_page_err(win, this, wkr.Wiki(), wkr.Url(), wkr.Ttl(), wkr.Exc());
+			Xog_tab_itm_read_mgr.Show_page_err(win, this, wkr.Wiki(), wkr.Url(), wkr.Ttl(), wkr.Err());
 		} finally {
 			wkr.Wiki().Appe().Thread_mgr().Page_load_mgr().Resume();
 		}
@@ -216,11 +216,11 @@ public class Xog_tab_itm implements GfoInvkAble {
 				if (page.Html_data().Xtn_gallery_packed_exists())	// packed_gallery exists; fire js once; PAGE:en.w:National_Sculpture_Museum_(Valladolid); DATE:2014-07-21
 					html_itm.Html_gallery_packed_exec();
 				if (	page.Html_data().Xtn_imap_exists()			// imap exists; DATE:2014-08-07
-					&&	page.Html_data().Module_mgr().Itm__popups().Enabled()
+					&&	page.Html_data().Head_mgr().Itm__popups().Enabled()
 					)
 					html_itm.Html_popups_bind_hover_to_doc();		// rebind all elements to popup
 			}
-			catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.image: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_brief(e));}
+			catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.image: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_full(e));}
 		}
 		xfer_len = page.File_math().Count();
 		if (xfer_len > 0){
@@ -237,11 +237,11 @@ public class Xog_tab_itm implements GfoInvkAble {
 				}
 				page.File_math().Clear();
 			}
-			catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.math: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_brief(e));}
+			catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.math: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_full(e));}
 		}
 		if (page.Html_cmd_mgr().Count() > 0) {
 			try {page.Html_cmd_mgr().Exec(app, page);}
-			catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.cmds: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_brief(e));}
+			catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.cmds: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_full(e));}
 		}
 		try {
 			if (page.Tab_data().Tab() != null) {	// needed b/c Preview has page.Tab of null which causes null_ref error in redlinks
@@ -249,9 +249,9 @@ public class Xog_tab_itm implements GfoInvkAble {
 				Thread_adp_.invk_(gplx.xowa.apps.Xoa_thread_.Key_page_redlink, redlinks_wkr, gplx.xowa.parsers.lnkis.redlinks.Xog_redlink_mgr.Invk_run).Start();
 				usr_dlg.Prog_none("", "imgs.done", "");
 			}
-		}	catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.redlinks: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_brief(e));}
+		}	catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.redlinks: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_full(e));}
 		try {app.File_mgr().Cache_mgr().Compress_check();}
-		catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.cache: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_brief(e));}
+		catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.cache: page=~{0} err=~{1}", page_ttl_str, Err_.Message_gplx_full(e));}
 		app.Usere().User_db_mgr().Cache_mgr().Page_end(app.Wiki_mgr());
 		app.Log_wtr().Queue_enabled_(false);
 	}
@@ -271,7 +271,7 @@ class Load_files_wkr implements Gfo_thread_wkr {
 	public void Exec() {
 		try {tab.Async();}
 		catch (Exception e) {
-			tab.Tab_mgr().Win().App().Usr_dlg().Warn_many("error while running file wkr; page=~{0} err=~{1}", tab.Page().Url().Xto_full_str(), Err_.Message_gplx_brief(e));
+			tab.Tab_mgr().Win().App().Usr_dlg().Warn_many("error while running file wkr; page=~{0} err=~{1}", tab.Page().Url().Xto_full_str(), Err_.Message_gplx_full(e));
 		}
 	}
 }

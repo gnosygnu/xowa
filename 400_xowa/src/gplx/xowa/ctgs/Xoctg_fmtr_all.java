@@ -37,7 +37,7 @@ class Xoctg_fmtr_all {
 			case Xoa_ctg_mgr.Tid_subc: grps_enabled = Bool_.Y; msg_id_label = Xol_msg_itm_.Id_ctg_subc_label ; msg_id_stats = Xol_msg_itm_.Id_ctg_subc_count; div_id = Div_id_subc; url_arg_bgn = Url_arg_subc_bgn; url_arg_end = Url_arg_subc_end; this.fmtr_itm = Xoctg_fmtr_itm_subc._; break;
 			case Xoa_ctg_mgr.Tid_page: grps_enabled = Bool_.Y; msg_id_label = Xol_msg_itm_.Id_ctg_page_header; msg_id_stats = Xol_msg_itm_.Id_ctg_page_count; div_id = Div_id_page; url_arg_bgn = Url_arg_page_bgn; url_arg_end = Url_arg_page_end; this.fmtr_itm = Xoctg_fmtr_itm_page._; break;
 			case Xoa_ctg_mgr.Tid_file: grps_enabled = Bool_.Y; msg_id_label = Xol_msg_itm_.Id_ctg_file_header; msg_id_stats = Xol_msg_itm_.Id_ctg_file_count; div_id = Div_id_file; url_arg_bgn = Url_arg_file_bgn; url_arg_end = Url_arg_file_end; this.fmtr_itm = Xoctg_fmtr_itm_file._; break;
-			default: throw Exc_.new_unhandled(tid);
+			default: throw Err_.new_unhandled(tid);
 		}
 		html_all.Fmt_(String_.Concat_lines_nl_skip_last
 		(	""
@@ -103,7 +103,7 @@ class Xoctg_fmtr_all {
 //					,	"</div>"
 //					));
 				break;
-			default: throw Exc_.new_unhandled(tid);
+			default: throw Err_.new_unhandled(tid);
 		}
 	}
 	public byte[] Bld_bwd_fwd(Xowe_wiki wiki, Xoa_ttl ttl, Xoctg_view_grp view_grp) {

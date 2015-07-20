@@ -29,7 +29,7 @@ public class Scrib_lua_mod {
 	public Scrib_lua_proc Fncs_get_by_key(String key) {return (Scrib_lua_proc)hash.Get_by(key);}
 	public void Fncs_add(Scrib_lua_proc prc) {hash.Add(prc.Key(), prc);}
 	public int Fncs_get_id(String key) {
-		Scrib_lua_proc fnc = Fncs_get_by_key(key); if (fnc == null) throw Exc_.new_("Scrb_fnc does not exist", "module", name, "func", key);
+		Scrib_lua_proc fnc = Fncs_get_by_key(key); if (fnc == null) throw Err_.new_wo_type("Scrb_fnc does not exist", "module", name, "func", key);
 		return fnc.Id();
 	}
 	public Scrib_lua_proc LoadString(String text) {
@@ -44,7 +44,7 @@ public class Scrib_lua_mod {
 		hash.Clear();	// NOTE: questionable. should probably be removed, as it forces all modules to be "loadString"'d again; DATE:2013-10-16
 		this.LoadString(name);	// assert lua_id;
 		KeyVal[] rslt = core.Interpreter().ExecuteModule(lua_id);
-		if (rslt.length == 0) throw Exc_.new_("module missing", "name", name, "lua_id", lua_id);
+		if (rslt.length == 0) throw Err_.new_wo_type("module missing", "name", name, "lua_id", lua_id);
 		KeyVal[] prcs_ary = (KeyVal[])rslt[0].Val();
 		int prcs_len = prcs_ary.length;
 		for (int i = 0; i < prcs_len; i++) {

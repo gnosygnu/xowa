@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa2.gui; import gplx.*; import gplx.xowa2.*;
 import gplx.xowa.*; import gplx.xowa.html.hdumps.core.*; import gplx.xowa.html.hdumps.pages.*;
 import gplx.xowa.files.*;
-import gplx.xowa.pages.*; import gplx.xowa.pages.skins.*;	import gplx.xowa.html.modules.*;
+import gplx.xowa.pages.*; import gplx.xowa.pages.skins.*;	import gplx.xowa.html.heads.*;
 public class Xog_page implements Xoa_page {
 	public Xow_wiki			Wiki() {return wiki;} private Xow_wiki wiki;
 	public Xoa_url			Url() {return page_url;} private Xoa_url page_url;
@@ -31,7 +31,7 @@ public class Xog_page implements Xoa_page {
 	public int				Page_id() {return page_id;} private int page_id;
 	public int				Version_id() {return version_id;} public void Version_id_(int v) {version_id = v;} private int version_id;
 	public int				Img_count() {return img_count;} public void Img_count_(int v) {img_count = v;} private int img_count;
-	public Xopg_module_mgr	Module_mgr() {return module_mgr;} private Xopg_module_mgr module_mgr = new Xopg_module_mgr();
+	public Xopg_module_mgr	Head_mgr() {return module_mgr;} private Xopg_module_mgr module_mgr = new Xopg_module_mgr();
 	public byte[]			Html_head_xtn() {return html_head_xtn;} public void Html_head_xtn_(byte[] v) {html_head_xtn = v;} private byte[] html_head_xtn = Bry_.Empty;
 	public byte[]			Page_body() {return page_body;} public void Page_body_(byte[] v) {this.page_body = v;} private byte[] page_body;
 	public byte[]			Display_ttl() {return display_ttl;} public void Display_ttl_(byte[] v) {this.display_ttl = v;} private byte[] display_ttl;
@@ -56,7 +56,7 @@ public class Xog_page implements Xoa_page {
 		page_id						= page.Revision_data().Id();
 		page_body					= page.Hdump_data().Body();
 		Xopg_html_data html_data	= page.Html_data();
-		Xoh_module_mgr mod_mgr		= html_data.Module_mgr();	
+		Xoh_head_mgr mod_mgr		= html_data.Head_mgr();	
 		module_mgr.Init(mod_mgr.Itm__mathjax().Enabled(), mod_mgr.Itm__popups().Bind_hover_area(), mod_mgr.Itm__gallery().Enabled(), mod_mgr.Itm__hiero().Enabled());
 		display_ttl					= html_data.Display_ttl();
 		content_sub					= html_data.Content_sub();

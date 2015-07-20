@@ -28,7 +28,7 @@ public class Xoa_ctg_mgr implements GfoInvkAble {
 			case Missing_ctg_cls_normal_tid:					return Missing_ctg_cls_normal_css;
 			case Missing_ctg_cls_hide_tid:						return Missing_ctg_cls_hide_css;
 			case Missing_ctg_cls_red_tid:						return Missing_ctg_cls_red_css;
-			default:											throw Exc_.new_unhandled(missing_ctg_cls_tid);
+			default:											throw Err_.new_unhandled(missing_ctg_cls_tid);
 		}
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
@@ -49,14 +49,14 @@ public class Xoa_ctg_mgr implements GfoInvkAble {
 		if		(String_.Eq(v, Missing_ctg_cls_normal_str))		return Missing_ctg_cls_normal_tid;
 		else if	(String_.Eq(v, Missing_ctg_cls_hide_str))		return Missing_ctg_cls_hide_tid;
 		else if	(String_.Eq(v, Missing_ctg_cls_red_str))		return Missing_ctg_cls_red_tid;
-		else													throw Exc_.new_unhandled(v);
+		else													throw Err_.new_unhandled(v);
 	}
 	private static String Missing_ctg_cls_tid_print(byte v) {
 		switch (v) {
 			case Missing_ctg_cls_normal_tid:					return Missing_ctg_cls_normal_str;
 			case Missing_ctg_cls_hide_tid:						return Missing_ctg_cls_hide_str;
 			case Missing_ctg_cls_red_tid:						return Missing_ctg_cls_red_str;
-			default:											throw Exc_.new_unhandled(v);
+			default:											throw Err_.new_unhandled(v);
 		}
 	}
 	public static final byte Version_null = Byte_.Zero, Version_1 = 1, Version_2 = 2;

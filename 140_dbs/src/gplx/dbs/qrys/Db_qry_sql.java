@@ -20,7 +20,7 @@ import gplx.dbs.sqls.*;
 public class Db_qry_sql implements Db_qry {
 	public int			Tid() {return Db_qry_.Tid_sql;}
 	public boolean			Exec_is_rdr() {return isReader;} private boolean isReader;
-	public String		Base_table() {throw Exc_.new_unimplemented();}
+	public String		Base_table() {throw Err_.new_unimplemented();}
 	public String		Xto_sql() {return sql;} private String sql;		
 	public int Exec_qry(Db_conn conn) {return conn.Exec_qry(this);}
 	public static Db_qry_sql dml_(String sql) {return sql_(sql);}
@@ -37,7 +37,7 @@ public class Db_qry_sql implements Db_qry {
 		return rv;
 	}
 	public static Db_qry_sql as_(Object obj) {return obj instanceof Db_qry_sql ? (Db_qry_sql)obj : null;}
-	public static Db_qry_sql cast_(Object obj) {try {return (Db_qry_sql)obj;} catch(Exception exc) {throw Exc_.new_type_mismatch_w_exc(exc, Db_qry_sql.class, obj);}}
+	public static Db_qry_sql cast_(Object obj) {try {return (Db_qry_sql)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, Db_qry_sql.class, obj);}}
 	public static String Gen_sql(Db_qry qry, Object... args) {
 		byte[] src = Bry_.new_u8(Sql_qry_wtr_.Gen_placeholder_parameters(qry));
 		int src_len = src.length;

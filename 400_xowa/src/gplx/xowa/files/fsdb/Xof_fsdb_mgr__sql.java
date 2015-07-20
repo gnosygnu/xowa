@@ -41,7 +41,7 @@ public class Xof_fsdb_mgr__sql implements Xof_fsdb_mgr, GfoInvkAble {
 			this.bin_mgr = new Xof_bin_mgr(mnt_mgr, repo_mgr, wiki.App().File__img_mgr().Wkr_resize_img(), wiki.App().Wmf_mgr().Download_wkr().Download_xrg().Download_fmt());
 			bin_mgr.Wkrs__add(Xof_bin_wkr__fsdb_sql.new_(mnt_mgr));
 			bin_mgr.Wkrs__add(Xof_bin_wkr__http_wmf.new_(wiki));
-		}	catch (Exception e) {throw Exc_.new_exc(e, "xo", "failed to initialize fsdb_mgr}", "wiki", wiki.Domain_str());}
+		}	catch (Exception e) {throw Err_.new_exc(e, "xo", "failed to initialize fsdb_mgr}", "wiki", wiki.Domain_str());}
 	}
 	public void Fsdb_search_by_list(List_adp itms, Xow_wiki cur_wiki, Xoa_page page, Xog_js_wkr js_wkr) {
 		if (!fsdb_enabled) return;

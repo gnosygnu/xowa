@@ -43,7 +43,7 @@ class Xop_keeplist_wiki_fxt {
 	public Xop_keeplist_wiki keeplist_wiki_(String raw) {
 		Xoae_app app = Xoa_app_fxt.app_();
 		Xowe_wiki wiki = Xoa_app_fxt.wiki_(app, "enwiki");
-		Xow_popup_mgr popup_mgr = wiki.Html_mgr().Module_mgr().Popup_mgr();
+		Xow_popup_mgr popup_mgr = wiki.Html_mgr().Head_mgr().Popup_mgr();
 		popup_mgr.Init_by_wiki(wiki);
 		popup_mgr.Parser().Tmpl_keeplist_init_(Bry_.new_u8(raw));
 		Xop_keeplist_wiki rv = popup_mgr.Parser().Tmpl_keeplist();

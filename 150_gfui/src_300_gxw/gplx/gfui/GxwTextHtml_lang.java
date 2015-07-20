@@ -87,7 +87,7 @@ public class GxwTextHtml_lang extends JScrollPane implements GxwTextHtml {
 		editor.Html_enabled(v);
 	}
 	public GxwTextHtml_editor Editor() {return editor;} GxwTextHtml_editor editor;
-	public void ScrollTillCaretIsVisible() {throw Exc_.new_unimplemented();}
+	public void ScrollTillCaretIsVisible() {throw Err_.new_unimplemented();}
 	public GxwTextHtml_lang ctor() {
 		editor = new GxwTextHtml_editor().ctor();
 		core = new GxwCore_host(GxwCore_lang.new_(this), editor.core);
@@ -152,7 +152,7 @@ class GxwTextHtml_editor extends JEditorPane implements GxwTextHtml {
 //		this.setEditorKit(v ? new StyledEditorKit() : new DefaultEditorKit());
 		this.setEditorKit(v ? htmlKit : styledKit);
 	}
-	public void ScrollTillCaretIsVisible() {throw Exc_.new_unimplemented();}
+	public void ScrollTillCaretIsVisible() {throw Err_.new_unimplemented();}
 	public void Html_css_set(String s) {
 		StyleSheet styleSheet = htmlKit.getStyleSheet();
 		styleSheet.addRule(s);
@@ -187,14 +187,14 @@ class GxwTextHtml_editor extends JEditorPane implements GxwTextHtml {
 	public String Html_doc_html() {
 		Document doc = this.getDocument();
 		try {return this.getDocument().getText(0, doc.getLength());}
-		catch (Exception e) {throw Exc_.new_exc(e, "ui", "Html_doc_html");}
+		catch (Exception e) {throw Err_.new_exc(e, "ui", "Html_doc_html");}
 	}
 	public String Html_sel_text() {
 		Element elm = Html_sel_elm();
 		int sel_bgn = elm.getStartOffset();
 		int sel_end = elm.getEndOffset();
 		try {return this.getDocument().getText(sel_bgn, sel_end - sel_bgn);}
-		catch (Exception e) {throw Exc_.new_exc(e, "ui", "Html_sel_text");}
+		catch (Exception e) {throw Err_.new_exc(e, "ui", "Html_sel_text");}
 	}
 	static void Html_sel_atrs(AttributeSet atrs, List_adp list, String ownerKey, String dlm) {
 		if (atrs == null) return;

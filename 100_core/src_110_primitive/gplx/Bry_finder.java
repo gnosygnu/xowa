@@ -245,7 +245,7 @@ public class Bry_finder {
 					case Byte_ascii.Space: case Byte_ascii.Tab:		++cur; break;
 					default:										return cur; 
 				}
-			} catch (Exception e) {throw Exc_.new_exc(e, "core", "idx is invalid", "cur", cur, "src", src);}
+			} catch (Exception e) {throw Err_.new_exc(e, "core", "idx is invalid", "cur", cur, "src", src);}
 		}
 	}
 	public static int Find_fwd_while_letter(byte[] src, int cur, int end) {

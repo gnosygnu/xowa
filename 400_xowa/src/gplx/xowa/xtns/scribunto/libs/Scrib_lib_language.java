@@ -53,7 +53,7 @@ public class Scrib_lib_language implements Scrib_lib {
 			case Proc_convertGrammar:								return ConvertGrammar(args, rslt);
 			case Proc_gender:										return gender(args, rslt);
 			case Proc_isRTL:										return IsRTL(args, rslt);
-			default: throw Exc_.new_unhandled(key);
+			default: throw Err_.new_unhandled(key);
 		}
 	}
 	private static final int
@@ -99,7 +99,7 @@ public class Scrib_lib_language implements Scrib_lib {
 			for (int i = 0; i < len; i++) {
 				byte b = lang_code[i];
 				switch (b) {	// NOTE: snippet from MW follows; also \000 assumed to be Nil --> :/\\\000&<>'\" 
-					case Byte_ascii.Colon: case Byte_ascii.Slash: case Byte_ascii.Backslash: case Byte_ascii.Nil: case Byte_ascii.Amp: case Byte_ascii.Lt: case Byte_ascii.Gt: case Byte_ascii.Apos: case Byte_ascii.Quote:
+					case Byte_ascii.Colon: case Byte_ascii.Slash: case Byte_ascii.Backslash: case Byte_ascii.Null: case Byte_ascii.Amp: case Byte_ascii.Lt: case Byte_ascii.Gt: case Byte_ascii.Apos: case Byte_ascii.Quote:
 						valid = false;
 						i = len;
 						break;
@@ -231,7 +231,7 @@ public class Scrib_lib_language implements Scrib_lib {
 		lang.Grammar().Grammar_eval(bfr, lang, word, type);
 		return rslt.Init_obj(bfr.To_str_and_rls());
 	}
-	public boolean gender(Scrib_proc_args args, Scrib_proc_rslt rslt) {throw Exc_.new_unimplemented();}
+	public boolean gender(Scrib_proc_args args, Scrib_proc_rslt rslt) {throw Err_.new_unimplemented();}
 	public boolean IsRTL(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		Xol_lang lang = lang_(args);
 		return rslt.Init_obj(!lang.Dir_ltr());
@@ -239,7 +239,7 @@ public class Scrib_lib_language implements Scrib_lib {
 	private Xol_lang lang_(Scrib_proc_args args) {
 		byte[] lang_code = args.Cast_bry_or_null(0);
 		Xol_lang lang = lang_code == null ? null : core.App().Lang_mgr().Get_by_key_or_load(lang_code);
-		if (lang == null) throw Exc_.new_("lang_code is not valid", "lang_code", String_.new_u8(lang_code));
+		if (lang == null) throw Err_.new_wo_type("lang_code is not valid", "lang_code", String_.new_u8(lang_code));
 		return lang;
 	}
 }

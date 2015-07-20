@@ -20,11 +20,11 @@ public class IoErr {
 	public static String Namespace				= "gplx.ios.";
 	public static String FileIsReadOnly_key		= Namespace + "FileIsReadOnlyError";
 	public static String FileNotFound_key		= Namespace + "FileNotFoundError";
-	public static Exc FileIsReadOnly(Io_url url) {
-		return Exc_.new_w_type(FileIsReadOnly_key, "file is read-only", "url", url.Xto_api()).Stack_erase_1_();
+	public static Err FileIsReadOnly(Io_url url) {
+		return Err_.new_(FileIsReadOnly_key, "file is read-only", "url", url.Xto_api()).Trace_ignore_add_1_();
 	}
-	public static Exc FileNotFound(String op, Io_url url) {
+	public static Err FileNotFound(String op, Io_url url) {
 		// file is missing -- op='copy' file='C:\a.txt' copyFile_target='D:\a.txt' 
-		return Exc_.new_w_type(FileNotFound_key, "file not found", "op", op, "file", url.Xto_api()).Stack_erase_1_();
+		return Err_.new_(FileNotFound_key, "file not found", "op", op, "file", url.Xto_api()).Trace_ignore_add_1_();
 	}
 }

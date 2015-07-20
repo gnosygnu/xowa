@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfui; import gplx.*;
 public class GfuiChkBox_ {
 	public static GfuiChkBox as_(Object obj) {return obj instanceof GfuiChkBox ? (GfuiChkBox)obj : null;}
-	public static GfuiChkBox cast_(Object obj) {try {return (GfuiChkBox)obj;} catch(Exception exc) {throw Exc_.new_type_mismatch_w_exc(exc, GfuiChkBox.class, obj);}}
+	public static GfuiChkBox cast_(Object obj) {try {return (GfuiChkBox)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfuiChkBox.class, obj);}}
 	@gplx.Internal protected static GfuiChkBox new_() {
 		GfuiChkBox rv = new GfuiChkBox();
 		rv.ctor_GfuiBox_base(GfuiElem_.init_focusAble_true_());

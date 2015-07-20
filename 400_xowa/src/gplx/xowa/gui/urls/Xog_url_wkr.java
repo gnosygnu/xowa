@@ -48,7 +48,7 @@ public class Xog_url_wkr {
 	private Xoa_url Exec_url_xowa(Xoae_app app) {		// EX: xowa:app.version
 		// NOTE: must catch exception else it will bubble to SWT browser and raise secondary exception of xowa is not a registered protocol
 		try {app.Gfs_mgr().Run_str(String_.new_u8(href.Page()));}
-		catch (Exception e) {app.Gui_mgr().Kit().Ask_ok("", "", Err_.Message_gplx_brief(e));}
+		catch (Exception e) {app.Gui_mgr().Kit().Ask_ok("", "", Err_.Message_gplx_full(e));}
 		return Rslt_handled;
 	}
 	private Xoa_url Exec_url_http(Xoae_app app) {		// EX: http:a.org

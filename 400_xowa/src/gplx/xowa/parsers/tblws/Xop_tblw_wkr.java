@@ -105,7 +105,7 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 						else
 							return Xop_tblw_wkr.Handle_false_tblw_match(ctx, root, src, bgn_pos, cur_pos, tkn_mkr.Txt(bgn_pos + 1, cur_pos), true);	// +1 to skip "\n" in "\n|}" (don't convert \n to text); DATE:2014-02-19
 					}
-				default: throw Exc_.new_unhandled(wlxr_type);
+				default: throw Err_.new_unhandled(wlxr_type);
 			}
 		}
 

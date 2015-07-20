@@ -68,13 +68,13 @@ class Xofc_fil_tbl implements RlsAble {
 				case Db_cmd_mode.Tid_update:	stmt.Clear();								Db_save_modify(stmt, itm); stmt.Crt_int(fld_uid, itm.Uid()).Exec_update(); break;
 				case Db_cmd_mode.Tid_delete:	stmt.Clear().Crt_int(fld_uid, itm.Uid()); stmt.Exec_delete();	break;
 				case Db_cmd_mode.Tid_ignore:	break;
-				default:						throw Exc_.new_unhandled(itm.Cmd_mode());
+				default:						throw Err_.new_unhandled(itm.Cmd_mode());
 			}
 			itm.Cmd_mode_(Db_cmd_mode.Tid_ignore);
 			return null;
 		} catch (Exception e) {
 			stmt_bldr.Rls();	// null out bldr, else bad stmt will lead to other failures
-			return Err_.Message_gplx_brief(e);
+			return Err_.Message_gplx_full(e);
 		}
 	}
 	private void Db_save_modify(Db_stmt stmt, Xofc_fil_itm itm) {

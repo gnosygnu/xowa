@@ -30,7 +30,7 @@ class Xob_css_parser__url {
 				break;
 			default:										// not quoted; end byte is ")"; EX: ' url(a.png)'
 				end_byte = Byte_ascii.Paren_end;
-				quote_byte = Byte_ascii.Nil;
+				quote_byte = Byte_ascii.Null;
 				break;
 		}
 		int end_pos = Bry_finder.Find_fwd(src, end_byte, bgn_pos, src_len);

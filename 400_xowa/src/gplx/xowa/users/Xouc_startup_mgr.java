@@ -26,7 +26,7 @@ public class Xouc_startup_mgr implements GfoInvkAble {
 			case Page_home: return config.Pages_mgr().Home();
 			case Page_last: return String_.new_u8(config.User().Appe().Gui_mgr().Browser_win().Active_page().Ttl().Raw());
 			case Page_xowa: return Xouc_pages_mgr.Page_xowa;
-			default: throw Exc_.new_unhandled(page);
+			default: throw Err_.new_unhandled(page);
 		}
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

@@ -36,7 +36,7 @@ public class Scrib_lib_site implements Scrib_lib {
 			case Proc_usersInGroup:						return UsersInGroup(args, rslt);
 			case Proc_interwikiMap:						return InterwikiMap(args, rslt);
 			case Proc_init_site_for_wiki:				return Init_site_for_wiki(args, rslt);
-			default: throw Exc_.new_unhandled(key);
+			default: throw Err_.new_unhandled(key);
 		}
 	}
 	private static final int Proc_getNsIndex = 0, Proc_pagesInCategory = 1, Proc_pagesInNs = 2, Proc_usersInGroup = 3, Proc_interwikiMap = 4, Proc_init_site_for_wiki = 5;
@@ -71,7 +71,7 @@ public class Scrib_lib_site implements Scrib_lib {
 		else if (String_.Eq(filter, "!local"))
 			local = 0;
 		else if (filter != null)
-			throw Exc_.new_("bad argument #1 to 'interwikiMap' (unknown filter '$filter')", "filter", filter);
+			throw Err_.new_wo_type("bad argument #1 to 'interwikiMap' (unknown filter '$filter')", "filter", filter);
 		// TODO: cache interwikimap results
 		Xow_xwiki_mgr xwiki_mgr = core.Wiki().Xwiki_mgr();
 		int xwiki_len = xwiki_mgr.Len();

@@ -91,7 +91,7 @@ class Xoctg_make_link_mgr {
 			case Byte_ascii.Ltr_c: return subc_grp;
 			case Byte_ascii.Ltr_f: return file_grp;
 			case Byte_ascii.Ltr_p: return page_grp;
-			default: throw Exc_.new_unhandled(tid);
+			default: throw Err_.new_unhandled(tid);
 		}
 	}
 	public int Grps_bfr_len() {return subc_grp.Bfr_len() + file_grp.Bfr_len() + page_grp.Bfr_len();}

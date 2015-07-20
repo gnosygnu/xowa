@@ -23,13 +23,13 @@ public class Gxw_html_load_tid_ {
 		switch (v) {
 			case Tid_mem:							return Key_mem;
 			case Tid_url:							return Key_url;
-			default:								throw Exc_.new_unimplemented();
+			default:								throw Err_.new_unimplemented();
 		}
 	}
 	public static byte Xto_tid(String s) {
 		if		(String_.Eq(s, Key_mem))			return Tid_mem;
 		else if	(String_.Eq(s, Key_url))			return Tid_url;
-		else										throw Exc_.new_unimplemented();
+		else										throw Err_.new_unimplemented();
 	}
 	public static KeyVal[] Options__list = KeyVal_.Ary(KeyVal_.new_(Key_mem), KeyVal_.new_(Key_url));
 }

@@ -26,7 +26,7 @@ public class Io_stream_ {	// SERIALIZED
 			case Io_stream_.Tid_zip		: return ".zip";
 			case Io_stream_.Tid_gzip	: return ".gz";
 			case Io_stream_.Tid_bzip2	: return ".bz2";
-			default						: throw Exc_.new_unhandled(v);
+			default						: throw Err_.new_unhandled(v);
 		}
 	}
 	public static byte Obsolete_to_tid(String v) {
@@ -34,7 +34,7 @@ public class Io_stream_ {	// SERIALIZED
 		else if	(String_.Eq(v, ".zip"))			return Io_stream_.Tid_zip;
 		else if	(String_.Eq(v, ".gz"))			return Io_stream_.Tid_gzip;
 		else if	(String_.Eq(v, ".bz2"))			return Io_stream_.Tid_bzip2;
-		else									throw Exc_.new_unhandled(v);
+		else									throw Err_.new_unhandled(v);
 	}
 	public static String To_str(byte v) {
 		switch (v) {
@@ -42,7 +42,7 @@ public class Io_stream_ {	// SERIALIZED
 			case Io_stream_.Tid_zip		: return "zip";
 			case Io_stream_.Tid_gzip	: return "gzip";
 			case Io_stream_.Tid_bzip2	: return "bzip2";
-			default						: throw Exc_.new_unhandled(v);
+			default						: throw Err_.new_unhandled(v);
 		}
 	}
 	public static byte To_tid(String v) {
@@ -50,6 +50,6 @@ public class Io_stream_ {	// SERIALIZED
 		else if	(String_.Eq(v, "zip"))			return Io_stream_.Tid_zip;
 		else if	(String_.Eq(v, "gzip"))			return Io_stream_.Tid_gzip;
 		else if	(String_.Eq(v, "bzip2"))		return Io_stream_.Tid_bzip2;
-		else									throw Exc_.new_unhandled(v);
+		else									throw Err_.new_unhandled(v);
 	}
 }

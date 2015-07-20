@@ -45,7 +45,7 @@ public class Xob_xml_dumper_cmd implements Xob_cmd {
 				if ((++page_count % commit_interval) == 0) Commit();
 			}
 		}
-		catch (Exception e) {throw Exc_.new_exc(e, "xo", "xml_dumper failed");}
+		catch (Exception e) {throw Err_.new_exc(e, "xo", "xml_dumper failed");}
 		finally {page_rdr.Rls();}
 		xml_dumper.Write_root_end();
 		this.Commit();

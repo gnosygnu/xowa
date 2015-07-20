@@ -76,7 +76,7 @@ public class Xow_xtn_mgr implements GfoInvkAble {
 		return this;
 	}
 	public Xox_mgr Get_at(int i) {return (Xox_mgr)regy.Get_at(i);}
-	public Xox_mgr Get_or_fail(byte[] key) {Object rv = regy.Get_by(key); if (rv == null) throw Exc_.new_("unknown xtn", "key", String_.new_u8(key)); return (Xox_mgr)rv;}
+	public Xox_mgr Get_or_fail(byte[] key) {Object rv = regy.Get_by(key); if (rv == null) throw Err_.new_wo_type("unknown xtn", "key", String_.new_u8(key)); return (Xox_mgr)rv;}
 	private Xox_mgr Add(Xoae_app app, Xox_mgr xtn) {
 		xtn.Xtn_ctor_by_app(app);
 		regy.Add(xtn.Xtn_key(), xtn);

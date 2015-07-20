@@ -40,7 +40,7 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 			html_bry = bfr.To_bry_and_rls();
 			comment_bfr.Clear_and_rls();
 		} catch (Exception e) {
-			wiki.Appe().Usr_dlg().Warn_many(GRP_KEY, "sidebar.init", "sidebar init failed: ~{0} ~{1}", wiki.Domain_str(), Err_.Message_gplx_brief(e));
+			wiki.Appe().Usr_dlg().Warn_many(GRP_KEY, "sidebar.init", "sidebar init failed: ~{0} ~{1}", wiki.Domain_str(), Err_.Message_gplx_full(e));
 			html_bry = Bry_.Empty;
 		}
 	}

@@ -61,7 +61,7 @@ public class Xowd_regy_mgr {
 	public Xowd_hive_regy_itm Update_del(int fil_idx, byte[] key) {
 		Xowd_hive_regy_itm itm = files_ary[fil_idx];
 		itm.Count_(itm.Count() - 1);
-		throw Exc_.new_unimplemented();	// FUTURE: note that deletes are harder; rng ends could be deleted, so would need to open file and get new rng end
+		throw Err_.new_unimplemented();	// FUTURE: note that deletes are harder; rng ends could be deleted, so would need to open file and get new rng end
 	}
 	public void Save() {
 		Bry_bfr bfr = Bry_bfr.new_();

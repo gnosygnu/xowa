@@ -83,7 +83,7 @@ public abstract class IoEngine_dir_deep_base {
 //			fx.tst_ExistsPaths(true, trgTree);
 //		}
 //		@Test  public virtual void ProgressUi() {
-//			ConsoleDlg_dev dialog = ConsoleDlg_dev.new_();
+//			Console_adp__mem dialog = Console_adp__mem.new_();
 //			engine.SearchDir(src).Recur_().Prog_(dialog).ExecAsDir();
 //
 //			Tfds.Eq(dialog.Written.Count, 3); // 3 levels
@@ -91,7 +91,7 @@ public abstract class IoEngine_dir_deep_base {
 //			tst_(dialog, 1, "scan", src_dir0a);
 //			tst_(dialog, 2, "scan", src_dir0a_dir0a);
 //		}
-//		void tst_(ConsoleDlg_dev dialog, int i, String s, Io_url root) {
+//		void tst_(Console_adp__mem dialog, int i, String s, Io_url root) {
 //			Object o = dialog.Written.Get_at(i);
 //			IoStatusArgs args = (IoStatusArgs)o;
 //			Tfds.Eq(s, args.Op);

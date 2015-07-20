@@ -54,7 +54,7 @@ public class Gfo_fld_rdr extends Gfo_fld_base {
 		f += (data[fld_bgn + 16] - Byte_ascii.Num_0) *  100;
 		f += (data[fld_bgn + 17] - Byte_ascii.Num_0) *   10;
 		f += (data[fld_bgn + 18] - Byte_ascii.Num_0);
-		if (data[fld_bgn + 19] != fld_dlm) throw Exc_.new_("csv date is invalid", "txt", String_.new_u8_by_len(data, fld_bgn, 20));
+		if (data[fld_bgn + 19] != fld_dlm) throw Err_.new_wo_type("csv date is invalid", "txt", String_.new_u8_by_len(data, fld_bgn, 20));
 		fld_end = pos + 20;
 		pos = fld_end + 1; ++fld_idx;
 		return DateAdp_.new_(y, M, d, H, m, s, f);
@@ -78,7 +78,7 @@ public class Gfo_fld_rdr extends Gfo_fld_base {
 				return;
 			}
 		}
-		throw Exc_.new_("fld_dlm failed", "fld_dlm", (char)fld_dlm, "bgn", fld_bgn);
+		throw Err_.new_wo_type("fld_dlm failed", "fld_dlm", (char)fld_dlm, "bgn", fld_bgn);
 	}
 	public String Read_str_escape()	{Move_next_escaped(bfr); return String_.new_u8(bfr.Xto_bry_and_clear());}
 	public byte[] Read_bry_escape()	{Move_next_escaped(bfr); return bfr.Xto_bry_and_clear();}
@@ -100,13 +100,13 @@ public class Gfo_fld_rdr extends Gfo_fld_base {
 			}
 			else if (b == escape_dlm) {	
 				++i;
-//					if (i == data_len) throw Err_.new_("escape char at end of String");
+//					if (i == data_len) throw Err_.new_wo_type("escape char at end of String");
 				b = data[i];
 				byte escape_val = decode_regy[b];
-				if (escape_val == Byte_ascii.Nil)	{trg.Add_byte(escape_dlm).Add_byte(b);} //throw Err_.new_fmt_("unknown escape key: key={0}", data[i]);
+				if (escape_val == Byte_ascii.Null)	{trg.Add_byte(escape_dlm).Add_byte(b);} //throw Err_.new_fmt_("unknown escape key: key={0}", data[i]);
 				else								trg.Add_byte(escape_val);
 			}
-			else if (b == Byte_ascii.Nil) {
+			else if (b == Byte_ascii.Null) {
 				trg.Add(Bry_nil);
 			}
 			else if (b == quote_dlm) {

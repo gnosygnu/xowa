@@ -39,14 +39,14 @@ public class Meta_parser__tbl {
 	private void Parse_flds() {
 		byte[] src = rdr.Src();
 		while (true) {
-			Meta_fld_itm fld = fld_parser.Parse_fld(rdr); if (fld == null) throw Exc_.new_("unknown field", "src", rdr.Src());
+			Meta_fld_itm fld = fld_parser.Parse_fld(rdr); if (fld == null) throw Err_.new_wo_type("unknown field", "src", rdr.Src());
 			tbl.Flds().Add(fld);
 			int pos = rdr.Pos();
-			byte b = pos == rdr.Src_len() ? Byte_ascii.Nil : src[pos];
+			byte b = pos == rdr.Src_len() ? Byte_ascii.Null : src[pos];
 			switch (b) {
 				case Byte_ascii.Comma:		rdr.Pos_add_one(); break;
 				case Byte_ascii.Paren_end:	rdr.Pos_add_one(); return;
-				default:					throw Exc_.new_("premature end of flds", "src", rdr.Mid_by_len_safe(40));
+				default:					throw Err_.new_wo_type("premature end of flds", "src", rdr.Mid_by_len_safe(40));
 			}
 		}
 	}

@@ -42,7 +42,7 @@ public class TdbEngine implements Db_engine {
 		return wkr.Exec(this, qry);
 	}
 	public Db_stmt	New_stmt_prep(Db_qry qry) {return new Db_stmt_sql().Parse(qry, Sql_qry_wtr_.I.Xto_str(qry, true));}
-	public Object	New_stmt_prep_as_obj(String sql) {throw Exc_.new_unimplemented();}
+	public Object	New_stmt_prep_as_obj(String sql) {throw Err_.new_unimplemented();}
 	public Db_rdr	New_rdr__rls_manual(Object rdr_obj, String sql) {return Db_rdr_.Empty;}
 	public Db_rdr	New_rdr__rls_auto(Db_stmt stmt, Object rdr_obj, String sql) {return Db_rdr_.Empty;}
 	public DataRdr	New_rdr(java.sql.ResultSet rdr, String sql) {return DataRdr_.Null;} 
@@ -57,9 +57,9 @@ public class TdbEngine implements Db_engine {
 	public void FlushTbl(TdbTable tbl) {
 		saveMgr.SaveFile(db, tbl.File());
 	}
-	public void	Ddl_create_tbl(Db_meta_tbl meta) {throw Exc_.new_unimplemented();}
-	public void Ddl_create_idx(Gfo_usr_dlg usr_dlg, Db_meta_idx... ary) {throw Exc_.new_unimplemented();}
-	public void			Ddl_append_fld(String tbl, Db_meta_fld fld) {throw Exc_.new_unimplemented();}
+	public void	Ddl_create_tbl(Db_meta_tbl meta) {throw Err_.new_unimplemented();}
+	public void Ddl_create_idx(Gfo_usr_dlg usr_dlg, Db_meta_idx... ary) {throw Err_.new_unimplemented();}
+	public void			Ddl_append_fld(String tbl, Db_meta_fld fld) {throw Err_.new_unimplemented();}
 	public void			Ddl_delete_tbl(String tbl)						{}
 	public void			Env_db_attach(String alias, Io_url db_url)		{}
 	public void			Env_db_detach(String alias)						{}
@@ -77,7 +77,7 @@ public class TdbEngine implements Db_engine {
 		wkrs.Add(Db_qry_.Tid_flush, TdbFlushWkr.new_());
 	}
 	public static TdbEngine as_(Object obj) {return obj instanceof TdbEngine ? (TdbEngine)obj : null;}
-	public static TdbEngine cast_(Object obj) {try {return (TdbEngine)obj;} catch(Exception exc) {throw Exc_.new_type_mismatch_w_exc(exc, TdbEngine.class, obj);}}
+	public static TdbEngine cast_(Object obj) {try {return (TdbEngine)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, TdbEngine.class, obj);}}
 }
 interface Db_qryWkr {
 	Object Exec(Db_engine engine, Db_qry cmd);

@@ -99,7 +99,7 @@ public class GfuiElemBase implements GfuiElem {
 		if (subElems.Count() == 0)							// if no subs, focus self
 			underElem.Core().Focus();
 		else if (defaultFocusKey != null) {					// if default is specified, focus it
-			GfuiElem focusTarget = subElems.Get_by(defaultFocusKey); if (focusTarget == null) throw Exc_.new_("could not find defaultTarget for focus", "ownerKey", this.Key_of_GfuiElem(), "defaultTarget", defaultFocusKey);
+			GfuiElem focusTarget = subElems.Get_by(defaultFocusKey); if (focusTarget == null) throw Err_.new_wo_type("could not find defaultTarget for focus", "ownerKey", this.Key_of_GfuiElem(), "defaultTarget", defaultFocusKey);
 			focusTarget.Focus();	
 		}
 		else {												// else, activate first visible elem; NOTE: some elems are visible, but not Focus_able (ex: ImgGalleryBox)

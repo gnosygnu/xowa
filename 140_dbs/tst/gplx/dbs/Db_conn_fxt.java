@@ -33,7 +33,7 @@ public class Db_conn_fxt implements RlsAble {
 			rdr = conn.Exec_qry_as_rdr(qry);
 			tbl = GfoNde_.rdr_(rdr);
 		}
-		catch (Exception e) {Exc_.Noop(e); rdr.Rls();}
+		catch (Exception e) {Err_.Noop(e); rdr.Rls();}
 		Tfds.Eq(expd, tbl.Subs().Count(), "Exec_qry_as_rdr failed: sql={0}", qry.Xto_sql());
 	}	GfoNde tbl;
 	public GfoNde tst_RowAry(int index, Object... expdValAry) {

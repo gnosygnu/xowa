@@ -43,7 +43,7 @@ public class Xodump_stats_itm {
 			case 4:			++hdr_4; break;
 			case 5:			++hdr_5; break;
 			case 6:			++hdr_6; break;
-			default:	throw Exc_.new_unhandled(hdr_num);
+			default:	throw Err_.new_unhandled(hdr_num);
 		}
 	}
 }

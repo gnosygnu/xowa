@@ -50,13 +50,13 @@ class Xofc_dir_tbl implements RlsAble {
 				case Db_cmd_mode.Tid_update:	stmt.Clear()							.Val_bry_as_str(fld_name, itm.Name()).Crt_int(fld_id, itm.Id()).Exec_update(); break;
 				case Db_cmd_mode.Tid_delete:	stmt.Clear().Crt_int(fld_id, itm.Id()).Exec_delete(); break;
 				case Db_cmd_mode.Tid_ignore:	break;
-				default:						throw Exc_.new_unhandled(itm.Cmd_mode());
+				default:						throw Err_.new_unhandled(itm.Cmd_mode());
 			}
 			itm.Cmd_mode_(Db_cmd_mode.Tid_ignore);
 			return null;
 		} catch (Exception e) {
 			stmt_bldr.Rls(); // rls bldr, else bad stmt will lead to other failures
-			return Err_.Message_gplx_brief(e);
+			return Err_.Message_gplx_full(e);
 		}
 	}
 	public void Cleanup() {

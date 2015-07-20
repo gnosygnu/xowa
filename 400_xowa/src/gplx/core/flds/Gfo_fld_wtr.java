@@ -39,7 +39,7 @@ public class Gfo_fld_wtr extends Gfo_fld_base {
 		for (int i = bgn; i < end; i++) {
 			byte b = val[i];
 			byte escape_val = encode_regy[b & 0xFF];	// PATCH.JAVA:need to convert to unsigned byte
-			if (escape_val == Byte_ascii.Nil) 	bfr.Add_byte(b);
+			if (escape_val == Byte_ascii.Null) 	bfr.Add_byte(b);
 			else 								{bfr.Add_byte(escape_dlm); bfr.Add_byte(escape_val);}
 		}
 		return this;

@@ -38,7 +38,7 @@ public class Xol_csv_parser {
 			byte b = src[i];
 			switch (b) {
 				case Byte_ascii.Backslash: {
-					int nxt_pos = i + 1; if (nxt_pos == end) throw Exc_.new_("backslash cannot be last character");
+					int nxt_pos = i + 1; if (nxt_pos == end) throw Err_.new_wo_type("backslash cannot be last character");
 					byte nxt_byte = src[nxt_pos];
 					switch (nxt_byte) {
 						case Byte_ascii.Backslash:		bfr.Add_byte(Byte_ascii.Backslash); break;
@@ -57,7 +57,7 @@ public class Xol_csv_parser {
 							int utf_pos = i + 2;
 							for (int j = 0; j < utf_len; j++) {
 								int utf_int = Int_.Xto_int_hex(src, utf_pos, utf_pos + 4);
-								if (utf_int == -1) throw Exc_.new_("invalid value for \\u", "val", String_.new_u8(src, bgn, end));
+								if (utf_int == -1) throw Err_.new_wo_type("invalid value for \\u", "val", String_.new_u8(src, bgn, end));
 								utf_bytes[utf_idx++] = (byte)utf_int;
 								utf_pos += 6;
 							}

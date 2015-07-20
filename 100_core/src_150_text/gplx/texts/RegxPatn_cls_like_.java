@@ -33,7 +33,7 @@ public class RegxPatn_cls_like_ {
 			if (c == escape) { // escape: ignore cur, append next
 				i++;
 				if (i < rawLen) sb.Add(String_.CharAt(raw, i));
-				else throw Exc_.new_("escape cannot be last char", "raw", raw, "escape", escape, "i", i);
+				else throw Err_.new_wo_type("escape cannot be last char", "raw", raw, "escape", escape, "i", i);
 			}
 			else if (c == Wildcard) { // % -> .*
 				sb.Add(RegxBldr.Tkn_AnyChar).Add(RegxBldr.Tkn_Wild_0Plus);

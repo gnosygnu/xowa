@@ -46,7 +46,7 @@ public class Xow_html_mgr implements GfoInvkAble {
 	public Xohe_page_wtr_mgr	Page_wtr_mgr() {return page_wtr_mgr;} private Xohe_page_wtr_mgr page_wtr_mgr;
 	public Xow_portal_mgr		Portal_mgr() {return portal_mgr;} private Xow_portal_mgr portal_mgr;
 	public Xow_toc_mgr			Toc_mgr() {return toc_mgr;} private Xow_toc_mgr toc_mgr = new Xow_toc_mgr();
-	public Xow_module_mgr		Module_mgr() {return module_mgr;} private Xow_module_mgr module_mgr;
+	public Xow_module_mgr		Head_mgr() {return module_mgr;} private Xow_module_mgr module_mgr;
 	public Xow_hzip_mgr			Hzip_mgr() {return hzip_mgr;} private Xow_hzip_mgr hzip_mgr;
 	public boolean Importing_ctgs() {return importing_ctgs;} public void Importing_ctgs_(boolean v) {importing_ctgs = v;} private boolean importing_ctgs;
 	public int Img_thumb_width() {return img_thumb_width;} private int img_thumb_width = 220;

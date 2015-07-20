@@ -69,7 +69,7 @@ public class ProcessAdp implements GfoInvkAble, RlsAble {
 			case Run_mode_async:		return Run_async();
 			case Run_mode_sync_timeout:	return Run_wait();
 			case Run_mode_sync_block:	return Run_wait_sync();
-			default:					throw Exc_.new_unhandled(run_mode);
+			default:					throw Err_.new_unhandled(run_mode);
 		}
 	}
 	public String[] Xto_process_bldr_args(String... args) {
@@ -166,16 +166,16 @@ public class ProcessAdp implements GfoInvkAble, RlsAble {
 	        		thread.interrupt();
 	        		thread.Cancel();
 	        		try {thread.join();}
-	        		catch (InterruptedException e) {throw Exc_.new_exc(e, "core", "thread interrupted at timeout");}
+	        		catch (InterruptedException e) {throw Err_.new_exc(e, "core", "thread interrupted at timeout");}
 	        		break;
 	        	}
 	        }
 	        if (!thread_run) {
         		try {thread.join();}
-        		catch (InterruptedException e) {throw Exc_.new_exc(e, "core", "thread interrupted at join 2");}	        	
+        		catch (InterruptedException e) {throw Err_.new_exc(e, "core", "thread interrupted at join 2");}	        	
 	        }
 		} catch (Exception exc) {
-			Tfds.Write(Err_.Message_gplx_brief(exc));
+			Tfds.Write(Err_.Message_gplx_full(exc));
 		}
 		if (elapsed != notify_checkpoint) {
 			notify_fmtr.Bld_bfr_many(notify_bfr, exe_url.NameAndExt(), args_str, elapsed / 1000);
@@ -223,7 +223,7 @@ public class ProcessAdp implements GfoInvkAble, RlsAble {
 			java.util.List<String> command_list = pb.command();
 			String[] command_ary = new String[command_list.size()];
 			command_ary = command_list.toArray(command_ary);
-			throw Exc_.new_exc(e, "core", "process start failed", "args", String_.Concat_with_str(" ", command_ary));
+			throw Err_.new_exc(e, "core", "process start failed", "args", String_.Concat_with_str(" ", command_ary));
 		}
 		return process;
 	}
@@ -236,8 +236,8 @@ public class ProcessAdp implements GfoInvkAble, RlsAble {
 		    	sb.Add_str_w_crlf(line);
 	    	process.waitFor();
         }
-        catch (InterruptedException e) 	{throw Exc_.new_exc(e, "core", "thread interrupted at wait_for", "exe_url", exe_url.Xto_api(), "exeArgs", args_str);}
-        catch (IOException e) 			{throw Exc_.new_exc(e, "core", "io error", "exe_url", exe_url.Xto_api(), "exeArgs", args_str);}
+        catch (InterruptedException e) 	{throw Err_.new_exc(e, "core", "thread interrupted at wait_for", "exe_url", exe_url.Xto_api(), "exeArgs", args_str);}
+        catch (IOException e) 			{throw Err_.new_exc(e, "core", "io error", "exe_url", exe_url.Xto_api(), "exeArgs", args_str);}
         exit_code = process.exitValue();
         WhenEnd_run();
         process.destroy();
@@ -318,11 +318,11 @@ class Thread_ProcessAdp_sync extends Thread {
 	        }
 	        while (input_gobbler.isAlive()) {
 	        	try {input_gobbler.join(50);}
-	        	catch (InterruptedException e) {throw Exc_.new_exc(e, "core", "thread interrupted at input gobbler");}
+	        	catch (InterruptedException e) {throw Err_.new_exc(e, "core", "thread interrupted at input gobbler");}
 	        }
 	        while (error_gobbler.isAlive()) {
 	        	try {error_gobbler.join(50);}
-	        	catch (InterruptedException e) {throw Exc_.new_exc(e, "core", "thread interrupted at error gobbler");}
+	        	catch (InterruptedException e) {throw Err_.new_exc(e, "core", "thread interrupted at error gobbler");}
 	        }
 	        String result = input_gobbler.Rslt() + "\n" + error_gobbler.Rslt();
 	        process_adp.Process_post(result);
@@ -349,6 +349,6 @@ class StreamGobbler extends Thread {
 			stream.close();
 			rslt = sb.Xto_str_and_clear();
 		}
-		catch (Exception e) {throw Exc_.new_exc(e, "io", "failed reading stream", "name", name);}
+		catch (Exception e) {throw Err_.new_exc(e, "io", "failed reading stream", "name", name);}
 	}
 }

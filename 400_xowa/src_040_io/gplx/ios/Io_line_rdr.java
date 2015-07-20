@@ -42,7 +42,7 @@ public class Io_line_rdr {
 	public Io_line_rdr_key_gen Key_gen() {return key_gen;} public Io_line_rdr Key_gen_(Io_line_rdr_key_gen v) {key_gen = v; return this;} Io_line_rdr_key_gen key_gen = Io_line_rdr_key_gen_.first_pipe;
 	public void Truncate(int pos) {
 		this.Read_next();
-		int end = Bry_finder.Find_fwd(bfr, Byte_ascii.Nil); if (end == -1) end = bfr.length;
+		int end = Bry_finder.Find_fwd(bfr, Byte_ascii.Null); if (end == -1) end = bfr.length;
 		bfr = Bry_.Mid(bfr, pos, end);
 		bfr_len = bfr.length;
 		bfr_last_read = 0;

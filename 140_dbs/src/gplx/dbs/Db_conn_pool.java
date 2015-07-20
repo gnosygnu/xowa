@@ -28,7 +28,7 @@ public class Db_conn_pool {
 	public Db_conn Get_or_new(Db_conn_info url) {
 		Db_conn rv = (Db_conn)conn_hash.Get_by(url.Xto_api());
 		if (rv == null) {
-			Db_engine prime = (Db_engine)engine_hash.Get_by(url.Tid()); if (prime == null) Exc_.new_("db engine prototype not found", "tid", url.Tid());
+			Db_engine prime = (Db_engine)engine_hash.Get_by(url.Tid()); if (prime == null) Err_.new_wo_type("db engine prototype not found", "tid", url.Tid());
 			Db_engine clone = prime.New_clone(url);
 			rv = new Db_conn(clone);
 			conn_hash.Add(url.Xto_api(), rv);

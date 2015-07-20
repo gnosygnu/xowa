@@ -27,17 +27,17 @@ class Xows_cmd__file_check {
 		tmp_dir = wiki.Fsys_mgr().Tmp_dir();
 		boolean schema_1 = wiki.File__fsdb_core().File__schema_is_1();
 		Fsdb_db_file atr_main = null;
-		try {Write_kv(bfr, "machine.op_sys", Op_sys.Cur().Os_name());} catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx(e));}
-		try {Write_kv(bfr, "app.version", Xoa_app_.Version);} catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx(e));}
-		try {Write_kv(bfr, "cfg_file_retrieve", ((Xoae_app)app).File_mgr().Wmf_mgr().Enabled());} catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx(e));}
-		try {Write_kv(bfr, "fsdb.schema_is_1", schema_1);} catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx(e));}
-		try {Write_kv(bfr, "fsdb.mnt_file", wiki.File__fsdb_core().File__mnt_file().Url());} catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx(e));}
-		try {Write_kv(bfr, "fsdb.abc_file", wiki.File__fsdb_core().File__abc_file__at(Fsm_mnt_mgr.Mnt_idx_main).Url());} catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx(e));}
+		try {Write_kv(bfr, "machine.op_sys", Op_sys.Cur().Os_name());} catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx_full(e));}
+		try {Write_kv(bfr, "app.version", Xoa_app_.Version);} catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx_full(e));}
+		try {Write_kv(bfr, "cfg_file_retrieve", ((Xoae_app)app).File_mgr().Wmf_mgr().Enabled());} catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx_full(e));}
+		try {Write_kv(bfr, "fsdb.schema_is_1", schema_1);} catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx_full(e));}
+		try {Write_kv(bfr, "fsdb.mnt_file", wiki.File__fsdb_core().File__mnt_file().Url());} catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx_full(e));}
+		try {Write_kv(bfr, "fsdb.abc_file", wiki.File__fsdb_core().File__abc_file__at(Fsm_mnt_mgr.Mnt_idx_main).Url());} catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx_full(e));}
 		try {
 			atr_main = wiki.File__fsdb_core().File__atr_file__at(Fsm_mnt_mgr.Mnt_idx_main);
 			Write_kv(bfr, "fsdb.atr_file", atr_main.Url());
-		}	catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx(e));}
-		try {Write_kv(bfr, "fsdb.orig", wiki.File__fsdb_core().File__orig_tbl_ary()[0].Conn().Conn_info().Xto_raw());} catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx(e));}
+		}	catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx_full(e));}
+		try {Write_kv(bfr, "fsdb.orig", wiki.File__fsdb_core().File__orig_tbl_ary()[0].Conn().Conn_info().Xto_raw());} catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx_full(e));}
 		Fsdb_sql_mkr sql_mkr = schema_1 ? Fsdb_sql_mkr__v1.I : Fsdb_sql_mkr__v2.I;
 		String sql = "";
 		try {
@@ -45,7 +45,7 @@ class Xows_cmd__file_check {
 			sql = sql_mkr.Orig_by_ttl(file_bry);
 			Write_sect(bfr, "fsdb.orig.select", sql);
 			Db_rdr_utl.Load_and_write(orig_tbl.Conn(), sql, bfr);
-		}	catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx(e));}
+		}	catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx_full(e));}
 		Object[][] rows = null;
 		try {
 			sql = sql_mkr.Fil_by_ttl(file_bry);
@@ -53,7 +53,7 @@ class Xows_cmd__file_check {
 			rows = Db_rdr_utl.Load(atr_main.Conn(), sql);
 			Db_rdr_utl.Write_to_bfr(bfr, rows);
 			Write_thms(bfr, file_bry, sql_mkr, wiki.File__mnt_mgr().Mnts__get_main(), atr_main, rows);
-		}	catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx(e));}
+		}	catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx_full(e));}
 	}
 	private void Write_thms(Bry_bfr bfr, byte[] file_bry, Fsdb_sql_mkr sql_mkr, Fsm_mnt_itm mnt_itm, Fsdb_db_file atr_main, Object[][] rows) {
 		int rows_len = rows.length;

@@ -28,8 +28,8 @@ public class Sql_select_fld_list {
 		for (int i = 0; i < this.Count(); i++) {
 			Sql_select_fld_base selectFld = this.Get_at(i);
 			GfoFld fld = tbl.Flds().FetchOrNull(selectFld.Fld());
-			if (fld == null) throw Exc_.new_("fld not found in tbl", "fldName", selectFld.Fld(), "tblName", tbl.Name(), "tblFlds", tbl.Flds().XtoStr());
-			if (rv.Has(selectFld.Alias())) throw Exc_.new_("alias is not unique", "fldName", selectFld.Fld(), "flds", rv.XtoStr());
+			if (fld == null) throw Err_.new_wo_type("fld not found in tbl", "fldName", selectFld.Fld(), "tblName", tbl.Name(), "tblFlds", tbl.Flds().XtoStr());
+			if (rv.Has(selectFld.Alias())) throw Err_.new_wo_type("alias is not unique", "fldName", selectFld.Fld(), "flds", rv.XtoStr());
 			selectFld.GroupBy_type(fld);
 			rv.Add(selectFld.Alias(), selectFld.ValType());
 		}

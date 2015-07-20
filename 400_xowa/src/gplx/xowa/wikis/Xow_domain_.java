@@ -42,7 +42,7 @@ public class Xow_domain_ {
 	, Domain_bry_wmforg							= Bry_.new_a7(Domain_str_wmforg)
 	, Domain_bry_home							= Bry_.new_a7(Domain_str_home)
 	;
-	public static final byte[] Seg_bry_org = Bry_.new_a7("org"), Seg_bry_www = Bry_.new_u8("www");
+	public static final byte[] Seg_bry_org = Bry_.new_a7("org"), Seg_bry_www = Bry_.new_a7("www");
 	public static Xow_domain parse(byte[] raw) {
 		/*
 		~{type}.org				EX: wikimediafoundation

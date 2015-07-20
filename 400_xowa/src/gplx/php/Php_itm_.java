@@ -36,7 +36,7 @@ public class Php_itm_ {
 		switch (itm.Itm_tid()) {
 			case Php_itm_.Tid_kv:
 			case Php_itm_.Tid_ary:
-				throw Exc_.new_unhandled(itm.Itm_tid());
+				throw Err_.new_unhandled(itm.Itm_tid());
 			default:
 				return itm.Val_obj_bry();
 		}

@@ -49,7 +49,7 @@ public class Wdata_dict_value_entity_tid {
 		}
 	}
 	public static byte Xto_tid(byte[] v) {
-		Object rv_obj = Dict.Get_by_bry(v); if (rv_obj == null) throw Exc_.new_("unknown entity_tid", "val", v);
+		Object rv_obj = Dict.Get_by_bry(v); if (rv_obj == null) throw Err_.new_wo_type("unknown entity_tid", "val", v);
 		return ((Byte_obj_val)rv_obj).Val();
 	}
 }

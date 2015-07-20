@@ -190,7 +190,7 @@ public class Xosrh_core_tst {
 //			byte[] ttl_bry = Bry_.new_a7(ttl_str);
 //			Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry);
 //			Xoae_page page = Xoae_page.test_(wiki, ttl);
-//			byte[] url_bry = Bry_.new_u8("http://en.wikipedia.org/wiki/Special:Search/" + ttl_str + args_str);
+//			byte[] url_bry = Bry_.new_a7("http://en.wikipedia.org/wiki/Special:Search/" + ttl_str + args_str);
 //			Xoa_url url = wiki.Appe().Url_parser().Parse(url_bry);
 //			search_mgr.Special_gen(url, page, wiki, ttl);
 //			Tfds.Eq_str_lines(expd_html, String_.new_u8(page.Root().Data_htm()));

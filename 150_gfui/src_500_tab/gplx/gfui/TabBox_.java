@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.gfui; import gplx.*;
 public class TabBox_ {
 	public static TabBox as_(Object obj) {return obj instanceof TabBox ? (TabBox)obj : null;}
-	public static TabBox cast_(Object obj) {try {return (TabBox)obj;} catch(Exception exc) {throw Exc_.new_type_mismatch_w_exc(exc, TabBox.class, obj);}}
+	public static TabBox cast_(Object obj) {try {return (TabBox)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, TabBox.class, obj);}}
 	public static TabBox new_() {
 		TabBox rv = new TabBox();
 		rv.ctor_GfuiBox_base(GfuiElem_.init_focusAble_false_());

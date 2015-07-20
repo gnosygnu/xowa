@@ -21,9 +21,9 @@ public class Xof_meta_thumb_parser extends Obj_ary_parser_base {
 	Int_ary_parser int_ary_parser = new Int_ary_parser();
 	public Xof_meta_thumb[] Ary() {return ary;} private Xof_meta_thumb[] ary = new Xof_meta_thumb[Ary_max]; static final int Ary_max = 16;
 	public int Len() {return ary_idx;} private int ary_idx;
-	public void Parse_ary(byte[] bry, int bgn, int end) {super.Parse_core(bry, bgn, end, Byte_ascii.Semic, Byte_ascii.Nil);}
+	public void Parse_ary(byte[] bry, int bgn, int end) {super.Parse_core(bry, bgn, end, Byte_ascii.Semic, Byte_ascii.Null);}
 	public Xof_meta_thumb Parse_one(byte[] bry, int bgn, int end) {
-		super.Parse_core(bry, bgn, end, Byte_ascii.Semic, Byte_ascii.Nil);
+		super.Parse_core(bry, bgn, end, Byte_ascii.Semic, Byte_ascii.Null);
 		return ary[0];
 	}
 	public void Clear() {if (ary.length > Ary_max) ary = new Xof_meta_thumb[Ary_max];}
@@ -33,16 +33,16 @@ public class Xof_meta_thumb_parser extends Obj_ary_parser_base {
 	}
 	@Override protected void Parse_itm(byte[] bry, int bgn, int end) {	// EX: "1:45,40"; "1:45,40:3,4"
 		Xof_meta_thumb itm = new Xof_meta_thumb(); boolean height_found = false;
-		if (end - 2 < bgn)	throw Exc_.new_("itm must be at least 2 bytes long", "itm", String_.new_u8(bry, bgn, end)); // EX: 4,6
+		if (end - 2 < bgn)	throw Err_.new_wo_type("itm must be at least 2 bytes long", "itm", String_.new_u8(bry, bgn, end)); // EX: 4,6
 		int pos = bgn;
 		byte exists_byte = bry[pos];
 		switch (exists_byte) {
 			case Byte_ascii.Num_0: itm.Exists_(Xof_meta_itm.Exists_n); break;
 			case Byte_ascii.Num_1: itm.Exists_(Xof_meta_itm.Exists_y); break;
 			case Byte_ascii.Num_2: itm.Exists_(Xof_meta_itm.Exists_unknown); break;
-			default: throw Exc_.new_("exists must be 0,1,2", "exists", exists_byte, "itm", String_.new_u8(bry, bgn, end));
+			default: throw Err_.new_wo_type("exists must be 0,1,2", "exists", exists_byte, "itm", String_.new_u8(bry, bgn, end));
 		}
-		if (bry[pos + 1] != Dlm_exists) throw Exc_.new_("question must follow exists", "bad_char", bry[pos + 1], "itm", String_.new_u8(bry, bgn, end));
+		if (bry[pos + 1] != Dlm_exists) throw Err_.new_wo_type("question must follow exists", "bad_char", bry[pos + 1], "itm", String_.new_u8(bry, bgn, end));
 		pos += 2;
 		int num_bgn = pos;
 		while (pos < end) {

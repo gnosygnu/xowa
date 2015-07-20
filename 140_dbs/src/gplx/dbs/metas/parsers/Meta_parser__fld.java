@@ -21,17 +21,17 @@ public class Meta_parser__fld {
 	public Meta_type_itm Parse_type(Bry_rdr rdr) {
 		rdr.Skip_ws();
 		Object type_obj = type_trie.Match_bgn(rdr.Src(), rdr.Pos(), rdr.Src_len());
-		if (type_obj == null) throw Exc_.new_("invalid fld type", "snip", rdr.Mid_by_len_safe(40));
+		if (type_obj == null) throw Err_.new_wo_type("invalid fld type", "snip", rdr.Mid_by_len_safe(40));
 		Meta_parser__fld_itm type_itm = (Meta_parser__fld_itm)type_obj;
 		rdr.Pos_add(type_itm.Word().length);
 		int paren_itms_count = type_itm.Paren_itms_count();
 		int len_1 = Int_.MinValue, len_2 = Int_.MinValue;
 		if (paren_itms_count > 0) {
 			rdr.Skip_ws().Chk_byte_or_fail(Byte_ascii.Paren_bgn);
-			len_1 = rdr.Skip_ws().Read_int_to_non_num(); if (len_1 == Int_.MinValue) throw Exc_.new_("invalid fld len_1", "snip", rdr.Mid_by_len_safe(40));
+			len_1 = rdr.Skip_ws().Read_int_to_non_num(); if (len_1 == Int_.MinValue) throw Err_.new_wo_type("invalid fld len_1", "snip", rdr.Mid_by_len_safe(40));
 			if (paren_itms_count == 2) {
 				rdr.Skip_ws().Chk_byte_or_fail(Byte_ascii.Comma);
-				len_2 = rdr.Skip_ws().Read_int_to_non_num(); if (len_2 == Int_.MinValue) throw Exc_.new_("invalid fld len_2", "snip", rdr.Mid_by_len_safe(40));
+				len_2 = rdr.Skip_ws().Read_int_to_non_num(); if (len_2 == Int_.MinValue) throw Err_.new_wo_type("invalid fld len_2", "snip", rdr.Mid_by_len_safe(40));
 			}
 			rdr.Skip_ws().Chk_byte_or_fail(Byte_ascii.Paren_end);
 		}
@@ -49,7 +49,7 @@ public class Meta_parser__fld {
 				case Byte_ascii.Comma:		return fld;
 				case Byte_ascii.Paren_end:	return fld;
 			}
-			Object type_obj = fld_trie.Match_bgn(src, rdr.Pos(), src_len); if (type_obj == null) throw Exc_.new_("invalid", "snip", rdr.Mid_by_len_safe(40));
+			Object type_obj = fld_trie.Match_bgn(src, rdr.Pos(), src_len); if (type_obj == null) throw Err_.new_wo_type("invalid", "snip", rdr.Mid_by_len_safe(40));
 			Meta_fld_wkr__base type_wkr = (Meta_fld_wkr__base)type_obj;
 			switch (type_wkr.Tid()) {
 				case Meta_fld_wkr__base.Tid_end_comma:

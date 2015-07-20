@@ -68,7 +68,7 @@ class Swt_dlg_msg implements Gfui_dlg_msg, Runnable {
 			case Gfui_dlg_msg_.Ico_question: 		return SWT.ICON_QUESTION;
 			case Gfui_dlg_msg_.Ico_warning: 		return SWT.ICON_WARNING;
 			case Gfui_dlg_msg_.Ico_working: 		return SWT.ICON_WORKING;
-			default: 								throw Exc_.new_unhandled(v);
+			default: 								throw Err_.new_unhandled(v);
 		}		
 	}
 	int Xto_swt_btn(int v) {
@@ -79,7 +79,7 @@ class Swt_dlg_msg implements Gfui_dlg_msg, Runnable {
 			case Gfui_dlg_msg_.Btn_ignore: 		return SWT.IGNORE;
 			case Gfui_dlg_msg_.Btn_abort: 		return SWT.ABORT;
 			case Gfui_dlg_msg_.Btn_cancel: 		return SWT.CANCEL;
-			default: 							throw Exc_.new_unhandled(v);
+			default: 							throw Err_.new_unhandled(v);
 		}		
 	}
 	int Xto_gfui_btn(int v) {
@@ -90,7 +90,7 @@ class Swt_dlg_msg implements Gfui_dlg_msg, Runnable {
 			case SWT.IGNORE: 	return Gfui_dlg_msg_.Btn_ignore;
 			case SWT.ABORT: 	return Gfui_dlg_msg_.Btn_abort;
 			case SWT.CANCEL: 	return Gfui_dlg_msg_.Btn_cancel;
-			default: 							throw Exc_.new_unhandled(v);
+			default: 							throw Err_.new_unhandled(v);
 		}		
 	}
 }

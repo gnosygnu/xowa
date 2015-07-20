@@ -24,11 +24,11 @@ class Http_client_rdr__stream implements Http_client_rdr {
 			}
 	public String Read_line() {
 				try {return br.readLine();}
-		catch (IOException e) {throw Exc_.new_exc(e, "net", "Read_line failed");}			
+		catch (IOException e) {throw Err_.new_exc(e, "net", "Read_line failed");}			
 			}
 	public byte[] Read_line_as_bry() {return Bry_.new_u8(Read_line());}
 	public void Rls() {
 				try {br.close();}
-		catch (IOException e) {throw Exc_.new_exc(e, "net", "Rls failed");}			
+		catch (IOException e) {throw Err_.new_exc(e, "net", "Rls failed");}			
 		}
 }

@@ -41,8 +41,8 @@ public abstract class Hash_adp_base implements Hash_adp {
 	}
 	@gplx.Virtual public void Del(Object key) {Del_base(key);}
 	protected Object FetchOrFail_base(Object key) {
-		if (key == null) throw Exc_.new_("key cannot be null");
-		if (!Has_base(key)) throw Exc_.new_("key not found", "key", key);
+		if (key == null) throw Err_.new_wo_type("key cannot be null");
+		if (!Has_base(key)) throw Err_.new_wo_type("key not found", "key", key);
 		return Fetch_base(key);
 	}
 

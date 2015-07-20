@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
 import gplx.gfui.*; import gplx.xowa.gui.menus.*; import gplx.xowa.gui.menus.dom.*; import gplx.xowa.files.gui.*;
-import gplx.html.*; import gplx.xowa.html.js.*; import gplx.xowa.html.modules.*; import gplx.xowa.pages.*;
+import gplx.html.*; import gplx.xowa.html.js.*; import gplx.xowa.html.heads.*; import gplx.xowa.pages.*;
 public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 	private Xoae_app app; private final Object thread_lock = new Object();
 	private final String_obj_ref scroll_top = String_obj_ref.null_(), node_path = String_obj_ref.null_();
@@ -73,7 +73,7 @@ public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 			Io_url html_url = app.Usere().Fsys_mgr().App_temp_html_dir().GenSubFil_ary(owner_tab.Tab_key(), ".html");
 			try {html_box.Html_doc_html_load_by_url(html_url.Xto_api(), html_str);}
 			catch (Exception e) {
-				app.Usr_dlg().Warn_many("", "", "failed to write html to file; writing directly by memory: page=~{0} file=~{1} err=~{2}", page.Url().Xto_full_str_safe(), html_url.Raw(), Err_.Message_gplx(e));
+				app.Usr_dlg().Warn_many("", "", "failed to write html to file; writing directly by memory: page=~{0} file=~{1} err=~{2}", page.Url().Xto_full_str_safe(), html_url.Raw(), Err_.Message_gplx_full(e));
 				html_box.Html_doc_html_load_by_mem(html_str);
 			}
 		}
@@ -143,7 +143,7 @@ public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 	}
 	private boolean module_packed_done = false, module_popups_done = false;
 	public void Tab_selected(Xoae_page page) {
-		Xoh_module_mgr module_mgr = page.Html_data().Module_mgr();
+		Xoh_head_mgr module_mgr = page.Html_data().Head_mgr();
 		if (module_mgr.Itm__gallery().Enabled() && !module_packed_done)
 			this.Html_gallery_packed_exec();
 		if (module_mgr.Itm__popups().Enabled() && !module_popups_done)
@@ -241,7 +241,7 @@ class Xog_html_itm__href_extractor {
 			case Text_tid_none: return "";
 			case Text_tid_text: return String_.new_u8(text_bry, 2, text_len);	// 2 to skip "1|"
 			case Text_tid_href: break;	// fall through to below
-			default: throw Exc_.new_unhandled(text_tid);
+			default: throw Err_.new_unhandled(text_tid);
 		}
 		int href_bgn = 2;	// 2 for length of "2|"
 		if (Bry_.Has_at_bgn(text_bry, File_protocol_bry, 2, text_len)) {

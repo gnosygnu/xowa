@@ -45,7 +45,7 @@ class Xow_search_scanner {
 					case Xow_search_tkn.Tid_quote:	// find end quote and add as word
 						int quote_bgn = pos + 1;
 						int quote_end = Bry_finder.Find_fwd(src, Byte_ascii.Quote, quote_bgn, src_len);
-						if (quote_end == Bry_.NotFound) throw Exc_.new_("could not find end quote", "src", String_.new_u8(src));
+						if (quote_end == Bry_.NotFound) throw Err_.new_wo_type("could not find end quote", "src", String_.new_u8(src));
 						Tkns_add_word(Xow_search_tkn.Tid_word_quoted, quote_bgn, quote_end);
 						pos = quote_end + 1;		// +1 to place after quote
 						break;
@@ -58,7 +58,7 @@ class Xow_search_scanner {
 						tkns.Add(new_tkn(cur_tid, pos, pos_end));
 						pos = pos_end;
 						break;
-					default: throw Exc_.new_unhandled(cur_tid);
+					default: throw Err_.new_unhandled(cur_tid);
 				}
 			}
 		}
@@ -77,7 +77,7 @@ class Xow_search_scanner {
 		boolean join_is_word = true;
 		if (txt_bgn == -1) {		// no pending word;
 			if (cur_tid == Xow_search_tkn.Tid_not) return false;	// NOT is only operator if no pending tkn; EX: -abc -> NOT abc; a-b -> a-b
-			byte nxt_b = pos_end < src_len ? src[pos_end] : Byte_ascii.Nil;
+			byte nxt_b = pos_end < src_len ? src[pos_end] : Byte_ascii.Null;
 			Object nxt_obj = trie.Match_bgn_w_byte(nxt_b, src, pos_end, src_len);
 			if (nxt_obj == null)	// next tkn is text; join must be word
 				join_is_word = true;
@@ -91,7 +91,7 @@ class Xow_search_scanner {
 					case Xow_search_tkn.Tid_not: case Xow_search_tkn.Tid_and: case Xow_search_tkn.Tid_or:
 						join_is_word = true;	// next tkn is and or not; and/or is word; EX: andor; oror; or-abc;
 						break;
-					default: throw Exc_.new_unhandled(cur_tid);
+					default: throw Err_.new_unhandled(cur_tid);
 				}
 			}
 		}

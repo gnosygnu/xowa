@@ -70,7 +70,7 @@ public class Xowd_db_mgr {
 			Dbs__set_by_tid(db);
 			db_file_hash.Add_or_new(db);
 		}
-		wiki.Props().Init_by_load(Tbl__cfg());
+		wiki.Props().Init_by_load(wiki.App(), Tbl__cfg());
 	}
 	public void Init_by_make(Xowd_core_db_props props, Xob_info_session info_session) {
 		this.props = props;
@@ -133,7 +133,7 @@ public class Xowd_db_mgr {
 			case Xowd_db_layout.Const_all:		return domain_name + ".xowa";		// EX: en.wikipedia.org.xowa
 			case Xowd_db_layout.Const_few:		return domain_name + "-text.xowa";	// EX: en.wikipedia.org-text.xowa
 			case Xowd_db_layout.Const_lot:		return domain_name + "-core.xowa";	// EX: en.wikipedia.org-core.xowa
-			default: 							throw Exc_.new_unimplemented();
+			default: 							throw Err_.new_unimplemented();
 		}
 	}
 	private static byte Core_db_tid(Xowd_db_layout layout) {
@@ -141,7 +141,7 @@ public class Xowd_db_mgr {
 			case Xowd_db_layout.Const_all:		return Xowd_db_file_.Tid_wiki_solo;
 			case Xowd_db_layout.Const_few:		return Xowd_db_file_.Tid_text_solo;
 			case Xowd_db_layout.Const_lot:		return Xowd_db_file_.Tid_core;
-			default:							throw Exc_.new_unimplemented();
+			default:							throw Err_.new_unimplemented();
 		}
 	}
 }

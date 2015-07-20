@@ -51,7 +51,7 @@ public class Btrie_bwd_mgr {
 	}
 	public Btrie_bwd_mgr Add(String key, Object val) {return Add(Bry_.new_u8(key), val);}
 	public Btrie_bwd_mgr Add(byte[] key, Object val) {
-		if (val == null) throw Exc_.new_("null objects cannot be registered", "key", String_.new_u8(key));
+		if (val == null) throw Err_.new_wo_type("null objects cannot be registered", "key", String_.new_u8(key));
 		int key_len = key.length;
 		Btrie_slim_itm cur = root;
 		for (int i = key_len - 1; i > -1; i--) {

@@ -19,7 +19,7 @@ package gplx.gfui; import gplx.*;
 import gplx.texts.*;
 public class ColorAdp_ implements ParseAble {
 	public static ColorAdp as_(Object obj) {return obj instanceof ColorAdp ? (ColorAdp)obj : null;}
-	public static ColorAdp cast_(Object obj) {try {return (ColorAdp)obj;} catch(Exception exc) {throw Exc_.new_type_mismatch_w_exc(exc, ColorAdp.class, obj);}}
+	public static ColorAdp cast_(Object obj) {try {return (ColorAdp)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, ColorAdp.class, obj);}}
 	public static ColorAdp new_(int a, int r, int g, int b) {return ColorAdp.new_((int)a, (int)r, (int)g, (int)b);}
 	public static final ColorAdp_ Parser = new ColorAdp_();
 	public Object ParseAsObj(String raw) {return ColorAdp_.parse_(raw);}
@@ -28,7 +28,7 @@ public class ColorAdp_ implements ParseAble {
 		return rv;
 	}
 	public static ColorAdp parse_(String raw) {
-		ColorAdp rv = parse_internal_(raw); if (rv == null) throw Exc_.new_parse_type(ColorAdp.class, raw);
+		ColorAdp rv = parse_internal_(raw); if (rv == null) throw Err_.new_parse_type(ColorAdp.class, raw);
 		return rv;
 	}
 	static ColorAdp parse_internal_(String raw) {
@@ -66,7 +66,7 @@ public class ColorAdp_ implements ParseAble {
 				ary[idx++] = HexDecUtl.parse_(hexStr);
 			}
 			return ColorAdp.new_(ary[0], ary[1], ary[2], ary[3]);
-		}	catch (Exception exc) {throw Exc_.new_parse_exc(exc, ColorAdp.class, raw);}
+		}	catch (Exception exc) {throw Err_.new_parse_exc(exc, ColorAdp.class, raw);}
 	}
 	@gplx.Internal protected static ColorAdp parse_int_(String v) {
 		String[] ary = String_.Split(v, ",");
@@ -74,7 +74,7 @@ public class ColorAdp_ implements ParseAble {
 			case 1: return new_int_(Int_.parse_(ary[0]));
 			case 3:
 			case 4: return parse_int_ary_(ary);
-			default: throw Exc_.new_("invalid array", "len", ary.length);
+			default: throw Err_.new_wo_type("invalid array", "len", ary.length);
 		}
 	}
 	static ColorAdp parse_int_ary_(String[] ary) {

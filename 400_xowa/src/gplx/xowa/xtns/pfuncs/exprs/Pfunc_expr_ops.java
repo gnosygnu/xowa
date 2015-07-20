@@ -45,7 +45,7 @@ class Paren_bgn_tkn implements Expr_tkn, Func_tkn {
 	public int ArgCount() {return 0;}
 	public int Precedence() {return -1;}
 	public Func_tkn GetAlt() {return this;}
-	public boolean Calc(Xop_ctx ctx, Pfunc_expr_shunter shunter, Val_stack val_stack) {throw Exc_.new_unimplemented();}
+	public boolean Calc(Xop_ctx ctx, Pfunc_expr_shunter shunter, Val_stack val_stack) {throw Err_.new_unimplemented();}
 	public static Paren_bgn_tkn _ = new Paren_bgn_tkn(); Paren_bgn_tkn() {}
 }
 class Paren_end_tkn implements Expr_tkn {

@@ -23,7 +23,7 @@ public class DbMaprRdr extends DataRdr_base implements SrlMgr {
 		mgr = (DbMaprMgr)this.EnvVars().Get_by_or_fail(DbMaprWtr.Key_Mgr);
 		DbMaprItm rootMapr = mgr.Root();
 
-		GfoNde tbl = GetTbl(rootMapr, rootCrt); int subsCount = tbl.Subs().Count(); if (subsCount == 0) return null; if (subsCount > 1) throw Exc_.new_("criteria returned > 1 row", "criteria", rootCrt.XtoStr(), "subsCount", subsCount);
+		GfoNde tbl = GetTbl(rootMapr, rootCrt); int subsCount = tbl.Subs().Count(); if (subsCount == 0) return null; if (subsCount > 1) throw Err_.new_wo_type("criteria returned > 1 row", "criteria", rootCrt.XtoStr(), "subsCount", subsCount);
 		SrlObj root = subProto.SrlObj_New(null);
 		mgr.EnvStack_add(rootMapr, root); RowStack_add(tbl, 0);
 		root.SrlObj_Srl(this);
@@ -94,22 +94,22 @@ public class DbMaprRdr extends DataRdr_base implements SrlMgr {
 		return rv;
 	}
 	void RowStack_add(GfoNde tbl, int i) {
-		GfoNdeList ndeList = tbl.Subs(); if (i >= ndeList.Count()) throw Err_arg.outOfBounds_("rowIdx", i, ndeList.Count());
+		GfoNdeList ndeList = tbl.Subs(); if (i >= ndeList.Count()) throw Err_.new_missing_idx(i, ndeList.Count());
 		rowStack.Add(tbl.Subs().FetchAt_asGfoNde(i));
 	}
 	@Override public Object Read(String key) {
 		DbMaprItm mapr = (DbMaprItm)mgr.MaprStack().Get_at_last();
 		GfoNde row = (GfoNde)rowStack.Get_at_last();
 		DbMaprArg arg = mapr.Flds_get(key);
-		Object dbVal = null; try {dbVal = row.Read(arg.DbFld());} catch (Exception e) {throw Exc_.new_exc(e, "db", "failed to read dbVal from row", "key", key, "fld", arg.DbFld());}
+		Object dbVal = null; try {dbVal = row.Read(arg.DbFld());} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to read dbVal from row", "key", key, "fld", arg.DbFld());}
 		return dbVal;
 	}
-	@Override public DataRdr Subs_byName_moveFirst(String name) {throw Exc_.new_unimplemented();}
-	@Override public DataRdr Subs() {throw Exc_.new_unimplemented();}
-	@Override public int FieldCount() {throw Exc_.new_unimplemented();}
-	@Override public String KeyAt(int i) {throw Exc_.new_unimplemented();}
-	@Override public Object ReadAt(int i) {throw Exc_.new_unimplemented();}
-	@Override public KeyVal KeyValAt(int i) {throw Exc_.new_unimplemented();}
+	@Override public DataRdr Subs_byName_moveFirst(String name) {throw Err_.new_unimplemented();}
+	@Override public DataRdr Subs() {throw Err_.new_unimplemented();}
+	@Override public int FieldCount() {throw Err_.new_unimplemented();}
+	@Override public String KeyAt(int i) {throw Err_.new_unimplemented();}
+	@Override public Object ReadAt(int i) {throw Err_.new_unimplemented();}
+	@Override public KeyVal KeyValAt(int i) {throw Err_.new_unimplemented();}
 	@Override public SrlMgr SrlMgr_new(Object o) {return new DbMaprRdr();}
 	Hash_adp tables = Hash_adp_.new_();
 	Db_conn conn; Criteria rootCrt;

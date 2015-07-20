@@ -25,11 +25,11 @@ class Sql_fld_mgr {
 	}	private Ordered_hash hash = Ordered_hash_.new_bry_();
 	public Sql_fld_mgr Parse(byte[] raw) {
 		hash.Clear();
-		int bgn = Bry_finder.Find_fwd(raw, Tkn_create_table); if (bgn == Bry_.NotFound) throw Exc_.new_("could not find 'CREATE TABLE'");
-		bgn = Bry_finder.Find_fwd(raw, Byte_ascii.Nl, bgn); if (bgn == Bry_.NotFound) throw Exc_.new_("could not find new line after 'CREATE TABLE'");
+		int bgn = Bry_finder.Find_fwd(raw, Tkn_create_table); if (bgn == Bry_.NotFound) throw Err_.new_wo_type("could not find 'CREATE TABLE'");
+		bgn = Bry_finder.Find_fwd(raw, Byte_ascii.Nl, bgn); if (bgn == Bry_.NotFound) throw Err_.new_wo_type("could not find new line after 'CREATE TABLE'");
 		bgn += Int_.Const_position_after_char;
-		int end = Bry_finder.Find_fwd(raw, Tkn_unique_index); if (end == Bry_.NotFound) throw Exc_.new_("could not find 'UNIQUE KEY'");
-		end = Bry_finder.Find_bwd(raw, Byte_ascii.Nl, end); if (bgn == Bry_.NotFound) throw Exc_.new_("could not find new line before 'UNIQUE KEY'");
+		int end = Bry_finder.Find_fwd(raw, Tkn_unique_index); if (end == Bry_.NotFound) throw Err_.new_wo_type("could not find 'UNIQUE KEY'");
+		end = Bry_finder.Find_bwd(raw, Byte_ascii.Nl, end); if (bgn == Bry_.NotFound) throw Err_.new_wo_type("could not find new line before 'UNIQUE KEY'");
 		Parse_lines(Bry_.Mid(raw, bgn, end));
 		return this;
 	}

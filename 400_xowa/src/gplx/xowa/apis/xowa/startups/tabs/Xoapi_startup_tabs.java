@@ -51,7 +51,7 @@ public class Xoapi_startup_tabs implements GfoInvkAble {
 				case Xoapi_startup_tabs_tid_.Tid_xowa:			rv.Add(xowa_home); break;
 				case Xoapi_startup_tabs_tid_.Tid_custom:		Add_ary(rv, custom); break;
 				case Xoapi_startup_tabs_tid_.Tid_previous:		Add_ary(rv, previous); break;
-				default:										throw Exc_.new_unhandled(type);
+				default:										throw Err_.new_unhandled(type);
 			}
 		}
 		else

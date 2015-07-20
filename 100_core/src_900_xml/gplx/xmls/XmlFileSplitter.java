@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xmls; import gplx.*;
+import gplx.core.consoles.*;
 import gplx.ios.*;
 import gplx.texts.*;
 public class XmlFileSplitter {
@@ -33,7 +34,7 @@ public class XmlFileSplitter {
 
 		// split hdr: includes <root>, xmlNamespaces, and any DTD headers; will be prepended to each partFile
 		rdr.Read();
-		int findPos = FindMatchPos(rdr.CurAry(), nameAry); if (findPos == String_.Find_none) throw Exc_.new_("could not find any names in first segment");
+		int findPos = FindMatchPos(rdr.CurAry(), nameAry); if (findPos == String_.Find_none) throw Err_.new_wo_type("could not find any names in first segment");
 		byte[] dataAry = SplitHdr(rdr.CurAry(), findPos);
 		if (opts.XmlBgn() != null)
 			hdr = Bry_.new_u8(opts.XmlBgn());
@@ -46,7 +47,7 @@ public class XmlFileSplitter {
 		XmlSplitWtr partWtr = new XmlSplitWtr().Init_(partDir, hdr, opts);
 		while (true) {
 			partWtr.Bgn(partIdx++);
-			if (opts.StatusFmt() != null) ConsoleAdp._.WriteLine(String_.Format(opts.StatusFmt(), partWtr.Url().NameOnly()));
+			if (opts.StatusFmt() != null) Console_adp__sys.I.Write_str_w_nl(String_.Format(opts.StatusFmt(), partWtr.Url().NameOnly()));
 			partWtr.Write(tempAry);
 			if (!first) {
 				rdr.Read();

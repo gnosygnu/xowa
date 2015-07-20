@@ -71,6 +71,6 @@ public class Char_ {
 	public static String XtoStr(int b) {return XtoStr((char)b);}
 	public static String XtoStr(char c) {return String.valueOf(c);}	
 	public static byte XtoByte(char c) {return (byte)c;}
-	public static char cast_(Object o) {try {return (Character)o;} catch(Exception e) {throw Exc_.new_type_mismatch_w_exc(e, char.class, o);}}
-	public static char parse_(String raw) {try {return raw.charAt(0);} catch(Exception exc) {throw Exc_.new_parse_exc(exc, char.class, raw);}}
+	public static char cast_(Object o) {try {return (Character)o;} catch(Exception e) {throw Err_.new_type_mismatch_w_exc(e, char.class, o);}}
+	public static char parse_(String raw) {try {return raw.charAt(0);} catch(Exception exc) {throw Err_.new_parse_exc(exc, char.class, raw);}}
 }

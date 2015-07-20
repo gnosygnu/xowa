@@ -39,7 +39,7 @@ class TdbDbLoadMgr {
 			else if (String_.Eq(name, TdbTableList.StoreTableName))		db.Tables().DataObj_Rdr(rdr, db.Files());
 			else											db.Tables().Get_by_or_fail(rdr.NameOfNode()).DataObj_Rdr(rdr);
 		}
-		if (db.Files().Count() == 0) throw Exc_.new_("fatal error: db has no files", "connectInfo", db.DbUrl());
+		if (db.Files().Count() == 0) throw Err_.new_wo_type("fatal error: db has no files", "connectInfo", db.DbUrl());
 	}
 	DataRdr MakeDataRdr(Io_url fil) {
 		String text = Io_mgr.I.LoadFilStr(fil);

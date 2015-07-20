@@ -25,7 +25,7 @@ public class Xoapi_startup_tabs_tid_ {
 			case Tid_xowa:							return Key_xowa;
 			case Tid_previous:						return Key_previous;
 			case Tid_custom:						return Key_custom;
-			default:								throw Exc_.new_unimplemented();
+			default:								throw Err_.new_unimplemented();
 		}
 	}
 	public static byte Xto_tid(String s) {
@@ -33,7 +33,7 @@ public class Xoapi_startup_tabs_tid_ {
 		else if	(String_.Eq(s, Key_xowa))			return Tid_xowa;
 		else if	(String_.Eq(s, Key_previous))		return Tid_previous;
 		else if	(String_.Eq(s, Key_custom))			return Tid_custom;
-		else										throw Exc_.new_unimplemented();
+		else										throw Err_.new_unimplemented();
 	}
 	public static KeyVal[] Options__list = KeyVal_.Ary(KeyVal_.new_(Key_blank), KeyVal_.new_(Key_xowa), KeyVal_.new_(Key_previous), KeyVal_.new_(Key_custom));
 }

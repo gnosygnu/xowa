@@ -49,7 +49,7 @@ public class Db_cfg_tbl implements RlsAble {
 		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(tbl_name, flds);
 		try {
 			stmt_insert.Clear().Val_str(fld_grp, grp).Val_str(fld_key, key).Val_str(fld_val, val).Exec_insert();
-		} catch (Exception e) {throw Exc_.new_exc(e, "db", "db_cfg.insert failed", "grp", grp, "key", key, "val", val, "db", conn.Conn_info().Xto_api());}
+		} catch (Exception e) {throw Err_.new_exc(e, "db", "db_cfg.insert failed", "grp", grp, "key", key, "val", val, "db", conn.Conn_info().Xto_api());}
 	}
 	public void Update_yn		(String grp, String key, boolean  val)		{Update_str(grp, key, val ? "y" : "n");}
 	public void Update_byte		(String grp, String key, byte val)			{Update_str(grp, key, Byte_.Xto_str(val));}
@@ -84,7 +84,7 @@ public class Db_cfg_tbl implements RlsAble {
 	public DateAdp		Select_date_or	(String grp, String key, DateAdp or)	{String val = Select_str_or(grp, key, null)	; return val == null ? or : Parse_date	(grp, key, val);}
 	public Guid_adp		Select_guid_or	(String grp, String key, Guid_adp or)	{String val = Select_str_or(grp, key, null)	; return val == null ? or : Parse_guid	(grp, key, val);}
 	public String		Select_str		(String grp, String key) {
-		String rv = Select_str_or(grp, key, null); if (rv == null) throw Exc_.new_("cfg.missing", "grp", grp, "key", key);
+		String rv = Select_str_or(grp, key, null); if (rv == null) throw Err_.new_wo_type("cfg.missing", "grp", grp, "key", key);
 		return rv;
 	}
 	public String		Select_str_or	(String grp, String key, String or) {
@@ -119,5 +119,5 @@ public class Db_cfg_tbl implements RlsAble {
 	private byte[]		Parse_bry		(String grp, String key, String val)	{try {return Bry_.new_u8(val)		;} catch (Exception e) {throw err_parse(e, grp, key, val, Bry_.Cls_val_name);}}
 	private DateAdp		Parse_date		(String grp, String key, String val)	{try {return DateAdp_.parse_gplx(val)	;} catch (Exception e) {throw err_parse(e, grp, key, val, DateAdp_.Cls_ref_name);}}
 	private Guid_adp	Parse_guid		(String grp, String key, String val)	{try {return Guid_adp_.parse_(val)		;} catch (Exception e) {throw err_parse(e, grp, key, val, Guid_adp_.Cls_ref_name);}}
-	private Exc			err_parse(Exception e, String grp, String key, String val, String type) {return Exc_.new_exc(e, "db", "cfg.val is not parseable", "grp", grp, "key", key, "val", val, "type", type);}
+	private Err			err_parse(Exception e, String grp, String key, String val, String type) {return Err_.new_exc(e, "db", "cfg.val is not parseable", "grp", grp, "key", key, "val", val, "type", type);}
 }

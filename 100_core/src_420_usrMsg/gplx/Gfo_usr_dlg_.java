@@ -33,7 +33,7 @@ class Gfo_usr_dlg_noop implements Gfo_usr_dlg {
 	public Gfo_usr_dlg__gui Gui_wkr() {return Gfo_usr_dlg__gui_.Noop;} public void Gui_wkr_(Gfo_usr_dlg__gui v) {}
 	public String Log_many(String grp_key, String msg_key, String fmt, Object... args) {return "";}
 	public String Warn_many(String grp_key, String msg_key, String fmt, Object... args) {return "";}
-	public Exc Fail_many(String grp_key, String msg_key, String fmt, Object... args) {return Exc_.new_(fmt);}
+	public Err Fail_many(String grp_key, String msg_key, String fmt, Object... args) {return Err_.new_wo_type(fmt);}
 	public String Prog_many(String grp_key, String msg_key, String fmt, Object... args) {return "";}
 	public String Prog_none(String grp_key, String msg_key, String fmt) {return "";}
 	public String Note_many(String grp_key, String msg_key, String fmt, Object... args) {return "";}

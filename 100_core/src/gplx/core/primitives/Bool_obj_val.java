@@ -29,6 +29,6 @@ public class Bool_obj_val {
 		if		(String_.Eq(raw, "y"))	return Bool_obj_val.True;
 		else if	(String_.Eq(raw, "n"))	return Bool_obj_val.False;
 		else if	(String_.Eq(raw, ""))	return Bool_obj_val.Null;
-		else	throw Exc_.new_parse_type(Bool_obj_val.class, raw);
+		else	throw Err_.new_parse_type(Bool_obj_val.class, raw);
 	}
 }

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.json.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.pfuncs.*;
+import gplx.core.json.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.pfuncs.*;
 public class Wdata_xwiki_link_wtr implements Bry_fmtr_arg {
 	public Wdata_xwiki_link_wtr Page_(Xoae_page page) {this.page = page; return this;} private Xoae_page page;
 	public void XferAry(Bry_bfr bfr, int idx) {
@@ -67,7 +67,7 @@ public class Wdata_xwiki_link_wtr implements Bry_fmtr_arg {
 			if (external_links_mgr_enabled && external_links_mgr.Sort())
 				slink_list.Sort_by(Xoa_ttl_sorter._);
 			return doc.Qid();
-		} catch (Exception e) {Exc_.Noop(e); return Qid_null;}
+		} catch (Exception e) {Err_.Noop(e); return Qid_null;}
 	}
 	public static final byte[] Qid_null = Bry_.Empty;	// NOTE: return Empty, not null else Bry_fmtr will fail
 }

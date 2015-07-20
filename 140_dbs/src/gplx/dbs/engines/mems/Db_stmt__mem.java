@@ -41,49 +41,49 @@ public class Db_stmt__mem implements Db_stmt {
 	public Db_stmt Val_byte(String k, byte v)	{return Add_byte(Bool_.N, k, v);}
 	public Db_stmt Val_byte(byte v)				{return Add_byte(Bool_.N, Key_na, v);}
 	private Db_stmt Add_byte(boolean where, String k, byte v) {
-		try {Add(k, where, v);} catch (Exception e) {throw Exc_.new_exc(e, "db", "failed to add value", "type", "byte", "val", v);}
+		try {Add(k, where, v);} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "byte", "val", v);}
 		return this;
 	}
 	public Db_stmt Crt_int(String k, int v)	{return Add_int(Bool_.Y, k, v);}
 	public Db_stmt Val_int(String k, int v)	{return Add_int(Bool_.N, k, v);}
 	public Db_stmt Val_int(int v)			{return Add_int(Bool_.N, Key_na, v);}
 	private Db_stmt Add_int(boolean where, String k, int v) {
-		try {Add(k, where, v);} catch (Exception e) {throw Exc_.new_exc(e, "db", "failed to add value", "type", "int", "val", v);}
+		try {Add(k, where, v);} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "int", "val", v);}
 		return this;
 	}
 	public Db_stmt Crt_long(String k, long v)	{return Add_long(Bool_.Y, k, v);}
 	public Db_stmt Val_long(String k, long v)	{return Add_long(Bool_.N, k, v);}
 	public Db_stmt Val_long(long v)				{return Add_long(Bool_.N, Key_na, v);}
 	private Db_stmt Add_long(boolean where, String k, long v) {
-		try {Add(k, where, v);} catch (Exception e) {throw Exc_.new_exc(e, "db", "failed to add value", "type", "long", "val", v);} 
+		try {Add(k, where, v);} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "long", "val", v);} 
 		return this;
 	}
 	public Db_stmt Crt_float(String k, float v)	{return Add_float(Bool_.Y, k, v);}
 	public Db_stmt Val_float(String k, float v)	{return Add_float(Bool_.N, k, v);}
 	public Db_stmt Val_float(float v)			{return Add_float(Bool_.N, Key_na, v);}
 	private Db_stmt Add_float(boolean where, String k, float v) {
-		try {Add(k, where, v);} catch (Exception e) {throw Exc_.new_exc(e, "db", "failed to add value", "type", "float", "val", v);}
+		try {Add(k, where, v);} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "float", "val", v);}
 		return this;
 	}
 	public Db_stmt Crt_double(String k, double v)	{return Add_double(Bool_.Y, k, v);}
 	public Db_stmt Val_double(String k, double v)	{return Add_double(Bool_.N, k, v);}
 	public Db_stmt Val_double(double v)				{return Add_double(Bool_.N, Key_na, v);}
 	private Db_stmt Add_double(boolean where, String k, double v) {
-		try {Add(k, where, v);} catch (Exception e) {throw Exc_.new_exc(e, "db", "failed to add value", "type", "double", "val", v);} 
+		try {Add(k, where, v);} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "double", "val", v);} 
 		return this;
 	}
 	public Db_stmt Crt_decimal(String k, DecimalAdp v)	{return Add_decimal(Bool_.Y, k, v);}
 	public Db_stmt Val_decimal(String k, DecimalAdp v)	{return Add_decimal(Bool_.N, k, v);}
 	public Db_stmt Val_decimal(DecimalAdp v)			{return Add_decimal(Bool_.N, Key_na, v);}
 	private Db_stmt Add_decimal(boolean where, String k, DecimalAdp v) {
-		try {Add(k, where, v);} catch (Exception e) {throw Exc_.new_exc(e, "db", "failed to add value", "type", "decimal", "val", v);} 
+		try {Add(k, where, v);} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "decimal", "val", v);} 
 		return this;
 	}
 	public Db_stmt Crt_bry(String k, byte[] v)	{return Add_bry(Bool_.Y, k, v);}
 	public Db_stmt Val_bry(String k, byte[] v)	{return Add_bry(Bool_.N, k, v);}
 	public Db_stmt Val_bry(byte[] v)			{return Add_bry(Bool_.N, Key_na, v);}
 	private Db_stmt Add_bry(boolean where, String k, byte[] v) {
-		try {Add(k, where, v);} catch (Exception e) {throw Exc_.new_exc(e, "db", "failed to add value", "type", "byte[]", "val", v.length);} 
+		try {Add(k, where, v);} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "byte[]", "val", v.length);} 
 		return this;
 	}
 	public Db_stmt Crt_bry_as_str(String k, byte[] v)	{return Add_bry_as_str(Bool_.Y, k, v);}
@@ -94,7 +94,7 @@ public class Db_stmt__mem implements Db_stmt {
 	public Db_stmt Val_str(String k, String v)	{return Add_str(Bool_.N, k, v);}
 	public Db_stmt Val_str(String v)			{return Add_str(Bool_.N, Key_na, v);}
 	private Db_stmt Add_str(boolean where, String k, String v) {
-		try {Add(k, where, v);} catch (Exception e) {throw Exc_.new_exc(e, "db", "failed to add value", "type", "String", "val", v);} 
+		try {Add(k, where, v);} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "String", "val", v);} 
 		return this;
 	}
 	public Db_stmt Val_rdr_(gplx.ios.Io_stream_rdr v, long rdr_len) {
@@ -102,12 +102,12 @@ public class Db_stmt__mem implements Db_stmt {
 			Bry_bfr bfr = Bry_bfr.new_();
 			gplx.ios.Io_stream_rdr_.Load_all_to_bfr(bfr, v);
 			Add("", Bool_.N, bfr.Xto_str_and_clear());
-		} catch (Exception e) {throw Exc_.new_exc(e, "db", "failed to add value", "type", "rdr", "val", v);} 
+		} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "rdr", "val", v);} 
 		return this;
 	}
 	public boolean Exec_insert() {
 		Mem_tbl tbl = engine.Tbls_get(qry.Base_table());
-		if (tbl == null) throw Exc_.new_("must call Create_tbl", "tbl", qry.Base_table());
+		if (tbl == null) throw Err_.new_wo_type("must call Create_tbl", "tbl", qry.Base_table());
 		return tbl.Insert(this) == 1;
 	}
 	public int Exec_update() {
@@ -118,13 +118,13 @@ public class Db_stmt__mem implements Db_stmt {
 		Mem_tbl tbl = engine.Tbls_get(qry.Base_table());
 		return tbl.Delete(this);
 	}
-	public DataRdr Exec_select() {throw Exc_.new_unimplemented();}	
+	public DataRdr Exec_select() {throw Err_.new_unimplemented();}	
 	public Db_rdr Exec_select__rls_auto() {return this.Exec_select__rls_manual();}
 	public Db_rdr Exec_select__rls_manual() {
 		Mem_tbl tbl = engine.Tbls_get(qry.Base_table());
 		return tbl.Select(this);
 	}
-	public Object Exec_select_val() {throw Exc_.new_unimplemented();}
+	public Object Exec_select_val() {throw Err_.new_unimplemented();}
 	private void Add(String k, boolean where, Object v) {
 		if (k == Db_meta_fld.Key_null) return;	// key is explicitly null; ignore; allows schema_2+ type definitions
 		val_list.Add_if_dupe_use_1st(k, v);				// NOTE: only add if new; WHERE with IN will call Add many times; fld_ttl IN ('A.png', 'B.png');

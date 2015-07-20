@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.servers.tcp; import gplx.*; import gplx.xowa.*; import gplx.xowa.servers.*;
-import gplx.core.primitives.*; import gplx.ios.*; import gplx.json.*; import gplx.core.threads.*;
+import gplx.core.primitives.*; import gplx.ios.*; import gplx.core.json.*; import gplx.core.threads.*;
 public class Xosrv_server implements GfoInvkAble {
 	private long last_cmd;
 	public Xosrv_socket_rdr Rdr() {return rdr;} private Xosrv_socket_rdr rdr = new Xosrv_socket_rdr();
@@ -61,7 +61,7 @@ public class Xosrv_server implements GfoInvkAble {
 			app.Usr_dlg().Note_many("", "", "sending rsp: bytes=~{0}", String_.Len(rsp_str));
 			wtr.Write(rsp_msg);		
 			app.Usr_dlg().Note_many("", "", "rsp sent: elapsed=~{0}", TimeSpanAdp_.fracs_(Env_.TickCount() - time_bgn).XtoStrUiAbbrv());
-		} catch (Exception e) {app.Usr_dlg().Warn_many("", "", "server error: ~{0}", Err_.Message_gplx(e));}
+		} catch (Exception e) {app.Usr_dlg().Warn_many("", "", "server error: ~{0}", Err_.Message_gplx_full(e));}
 	}
 	private String Exec_cmd(String msg_text) {
 		Object rv_obj = app.Gfs_mgr().Run_str(msg_text);
@@ -78,7 +78,7 @@ public class Xosrv_server implements GfoInvkAble {
 			Object rv_obj = gplx.gfui.Gfui_html.Js_args_exec(app.Gui_mgr().Browser_win().Active_html_itm().Js_cbk(), xowa_exec_args);
 			trace.Val_("json_write: " + Object_.Xto_str_strict_or_null_mark(rv_obj));
 			return json_wtr.Write_root(Bry_xowa_js_result, rv_obj).Bld_as_str();
-		} catch (Exception e) {throw Exc_.new_exc(e, "http", "exec_js error", "trace", trace, "msg", msg_text);}
+		} catch (Exception e) {throw Err_.new_exc(e, "http", "exec_js error", "trace", trace, "msg", msg_text);}
 	}	private Xosrv_xowa_exec_parser xowa_exec_parser = new Xosrv_xowa_exec_parser(); private Json_doc_srl json_wtr = new Json_doc_srl(); private static final byte[] Bry_xowa_js_result = Bry_.new_a7("xowa_js_result");
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_rdr_port))				return rdr_port;
@@ -100,12 +100,12 @@ class Xosrv_xowa_exec_parser {
 	private Json_parser json_parser = new Json_parser();
 	public Object[] Parse_xowa_exec(byte[] msg_text) {	// parses JSON with format '{"args":["arg0","arg1","arg2"]}'
 		Json_doc doc = json_parser.Parse(msg_text);
-		Json_itm_kv args_kv = (Json_itm_kv)doc.Root().Subs_get_at(0);	// get "args" kv
+		Json_itm_kv args_kv = (Json_itm_kv)doc.Root().Get_at(0);	// get "args" kv
 		Json_itm_ary args_ary = (Json_itm_ary)args_kv.Val();			// get []
-		int len = args_ary.Subs_len();			
+		int len = args_ary.Len();			
 		Object[] rv = new Object[len];
 		for (int i = 0; i < len; i++) {	// extract args
-			Json_itm itm = args_ary.Subs_get_at(i);
+			Json_itm itm = args_ary.Get_at(i);
 			rv[i] = Parse_ary_itm(itm);
 		}
 		return rv;
@@ -116,13 +116,13 @@ class Xosrv_xowa_exec_parser {
 				return String_.new_u8(itm.Data_bry());
 			case Json_itm_.Tid_array: 
 				Json_itm_ary ary = (Json_itm_ary)itm;
-				int len = ary.Subs_len();
+				int len = ary.Len();
 				String[] rv = new String[len];
 				for (int i = 0; i < len; i++)
-					rv[i] = String_.new_u8(ary.Subs_get_at(i).Data_bry());
+					rv[i] = String_.new_u8(ary.Get_at(i).Data_bry());
 				return rv;
 			default:
-				throw Exc_.new_unhandled(itm.Tid());
+				throw Err_.new_unhandled(itm.Tid());
 		}
 	}
 }

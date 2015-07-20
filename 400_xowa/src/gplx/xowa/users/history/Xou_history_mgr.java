@@ -131,7 +131,7 @@ class Xou_history_itm_srl {
 				existing.Merge(itm);
 		}
 	}
-	catch (Exception e) {throw Exc_.new_parse_exc(e, Xou_history_itm.class, String_.new_u8(ary));}
+	catch (Exception e) {throw Err_.new_parse_exc(e, Xou_history_itm.class, String_.new_u8(ary));}
 	}
 	public static byte[] Save(Ordered_hash list) {
 		Bry_bfr bb = Bry_bfr.new_();

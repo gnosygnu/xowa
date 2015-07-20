@@ -20,7 +20,7 @@ public abstract class IoItm_base implements GfoInvkAble, CompareAble {
 	public abstract int TypeId(); public abstract boolean Type_dir(); public abstract boolean Type_fil();
 	public Io_url Url() {return ownerDir == null ? url : ownerDir.Url().GenSubFil(name); /*NOTE: must call .Url*/} Io_url url;		
 	public IoItmDir OwnerDir() {return ownerDir;} IoItmDir ownerDir;
-	public void OwnerDir_set(IoItmDir v) {if (v == this) throw Exc_.new_("dir cannot be its own owner", "url", v.url.Raw());
+	public void OwnerDir_set(IoItmDir v) {if (v == this) throw Err_.new_wo_type("dir cannot be its own owner", "url", v.url.Raw());
 		url = v == null && ownerDir != null
 						? ownerDir.url.GenSubFil(name)	// create url, since ownerDir will soon be null; NOTE: must call .url
 						: Io_url_.Empty;					// delete url, since ownerDir will be avail

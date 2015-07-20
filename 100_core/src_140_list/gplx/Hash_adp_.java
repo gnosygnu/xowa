@@ -26,8 +26,8 @@ class Hash_adp_noop implements Hash_adp {
 	public int Count() {return 0;}
 	public boolean Has(Object key) {return false;}
 	public Object Get_by(Object key) {return null;}
-	public Object Get_by_or_fail(Object key)				{throw Exc_.new_missing_key(Object_.Xto_str_strict_or_null_mark(key));}
-	public Object Get_by_or_new(Object key, NewAble proto) {throw Exc_.new_("could not add to null hash");}
+	public Object Get_by_or_fail(Object key)				{throw Err_.new_missing_key(Object_.Xto_str_strict_or_null_mark(key));}
+	public Object Get_by_or_new(Object key, NewAble proto) {throw Err_.new_wo_type("could not add to null hash");}
 	public void Add(Object key, Object val) {}
 	public void Add_as_key_and_val(Object val) {}
 	public void Add_if_dupe_use_nth(Object key, Object val) {}

@@ -32,7 +32,7 @@ public class String__tst {
 		err_LimitToFirst("abc", -1);
 	}
 	void tst_LimitToFirst(String s, int v, String expd) {Tfds.Eq(expd, String_.LimitToFirst(s, v));}
-	void err_LimitToFirst(String s, int v) {try {String_.LimitToFirst(s, v);} catch (Exception exc) {Tfds.Err_classMatch(exc, Err_arg.class); return;} Tfds.Fail_expdError();}
+	void err_LimitToFirst(String s, int v) {try {String_.LimitToFirst(s, v);} catch (Exception exc) {Tfds.Err_classMatch(exc, Err.class); return;} Tfds.Fail_expdError();}
 	@Test  public void LimitToLast() {
 		tst_LimitToLast("abc", 0, "");
 		tst_LimitToLast("abc", 1, "c");
@@ -42,7 +42,7 @@ public class String__tst {
 		err_LimitToLast("abc", -1);
 	}
 	void tst_LimitToLast(String s, int v, String expd) {Tfds.Eq(expd, String_.LimitToLast(s, v));}
-	void err_LimitToLast(String s, int v) {try {String_.LimitToLast(s, v);} catch (Exception exc) {Tfds.Err_classMatch(exc, Err_arg.class); return;} Tfds.Fail_expdError();}
+	void err_LimitToLast(String s, int v) {try {String_.LimitToLast(s, v);} catch (Exception exc) {Tfds.Err_classMatch(exc, Err.class); return;} Tfds.Fail_expdError();}
 	@Test  public void DelBgn() {
 		tst_DelBgn("abc", 0, "abc");
 		tst_DelBgn("abc", 1, "bc");
@@ -52,7 +52,7 @@ public class String__tst {
 		err_DelBgn("abc", 4);
 	}
 	void tst_DelBgn(String s, int v, String expd) {Tfds.Eq(expd, String_.DelBgn(s, v));}
-	void err_DelBgn(String s, int v) {try {String_.DelBgn(s, v);} catch (Exception exc) {Tfds.Err_classMatch(exc, Err_arg.class); return;} Tfds.Fail_expdError();}
+	void err_DelBgn(String s, int v) {try {String_.DelBgn(s, v);} catch (Exception exc) {Tfds.Err_classMatch(exc, Err.class); return;} Tfds.Fail_expdError();}
 	@Test  public void DelBgnIf() {
 		tst_DelBgnIf("abc", "", "abc");
 		tst_DelBgnIf("abc", "a", "bc");
@@ -64,7 +64,7 @@ public class String__tst {
 		err_DelBgnIf("abc", null);
 	}
 	void tst_DelBgnIf(String s, String v, String expd) {Tfds.Eq(expd, String_.DelBgnIf(s, v));}
-	void err_DelBgnIf(String s, String v) {try {String_.DelBgnIf(s, v);} catch (Exception exc) {Tfds.Err_classMatch(exc, Err_arg.class); return;} Tfds.Fail_expdError();}
+	void err_DelBgnIf(String s, String v) {try {String_.DelBgnIf(s, v);} catch (Exception exc) {Tfds.Err_classMatch(exc, Err.class); return;} Tfds.Fail_expdError();}
 	@Test  public void DelEnd() {
 		tst_DelEnd("abc", 0, "abc");
 		tst_DelEnd("abc", 1, "ab");
@@ -74,7 +74,7 @@ public class String__tst {
 		err_DelEnd("abc", 4);
 	}
 	void tst_DelEnd(String s, int v, String expd) {Tfds.Eq(expd, String_.DelEnd(s, v));}
-	void err_DelEnd(String s, int v) {try {String_.DelEnd(s, v);} catch (Exception exc) {Tfds.Err_classMatch(exc, Err_arg.class); return;} Tfds.Fail_expdError();}
+	void err_DelEnd(String s, int v) {try {String_.DelEnd(s, v);} catch (Exception exc) {Tfds.Err_classMatch(exc, Err.class); return;} Tfds.Fail_expdError();}
 	@Test  public void DelEndIf() {
 		tst_DelEndIf("abc", "", "abc");
 		tst_DelEndIf("abc", "c", "ab");
@@ -86,7 +86,7 @@ public class String__tst {
 		err_DelEndIf("", null);
 	}
 	void tst_DelEndIf(String s, String v, String expd) {Tfds.Eq(expd, String_.DelEndIf(s, v));}
-	void err_DelEndIf(String s, String v) {try {String_.DelEndIf(s, v);} catch (Exception exc) {Tfds.Err_classMatch(exc, Err_arg.class); return;} Tfds.Fail_expdError();}
+	void err_DelEndIf(String s, String v) {try {String_.DelEndIf(s, v);} catch (Exception exc) {Tfds.Err_classMatch(exc, Err.class); return;} Tfds.Fail_expdError();}
 	@Test  public void MidByPos() {
 		tst_MidByPos("abc", 0, 0, "");
 		tst_MidByPos("abc", 0, 1, "a");
@@ -97,7 +97,7 @@ public class String__tst {
 //			err_MidByPos("abc", 0, 4);
 	}
 	void tst_MidByPos(String s, int bgn, int end, String expd) {Tfds.Eq(expd, String_.Mid(s, bgn, end));}
-	void err_MidByPos(String s, int bgn, int end) {try {String_.Mid(s, bgn, end);} catch (Exception e) {Tfds.Err_classMatch(e, Exc.class); return;} Tfds.Fail_expdError();}
+	void err_MidByPos(String s, int bgn, int end) {try {String_.Mid(s, bgn, end);} catch (Exception e) {Tfds.Err_classMatch(e, Err.class); return;} Tfds.Fail_expdError();}
 	@Test  public void TrimEnd() {
 		tst_TrimEnd("a", "a");
 		tst_TrimEnd("a ", "a");

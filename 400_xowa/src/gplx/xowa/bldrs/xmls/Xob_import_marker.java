@@ -40,7 +40,7 @@ public class Xob_import_marker {
 			case Gfui_dlg_msg_.Btn_yes:		Xob_cleanup_cmd.Delete_wiki_sql(wiki); End(wiki); return false;	// delete wiki
 			case Gfui_dlg_msg_.Btn_no:		End(wiki); return true;		// delete marker
 			case Gfui_dlg_msg_.Btn_cancel:	return true;				// noop
-			default:						throw Exc_.new_unhandled(rslt);
+			default:						throw Err_.new_unhandled(rslt);
 		}
 	}
 	private static Io_url url_(Xowe_wiki wiki) {

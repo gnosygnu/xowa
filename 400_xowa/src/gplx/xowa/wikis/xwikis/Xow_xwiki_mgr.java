@@ -80,7 +80,7 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 				case 0:		alias			= fld; break;
 				case 1:		domain_bry	= fld; break;
 				case 2:		break;	// reserved for 0,1 (0=custom; 1=wmf)
-				default:	throw Exc_.new_unhandled(j);
+				default:	throw Err_.new_unhandled(j);
 			}
 		}
 		Xow_domain domain = Xow_domain_.parse(domain_bry);
@@ -119,7 +119,7 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 			byte[] key = keys[i];
 			Cfg_nde_obj peer_grp = peer_root.Grps_get(key);
 			if (peer_grp == null)
-				throw Exc_.new_("unknown peer group", "key", String_.new_u8(key));
+				throw Err_.new_wo_type("unknown peer group", "key", String_.new_u8(key));
 			else
 				Cfg_nde_obj_.Fill_recurse(peers, peer_grp);
 		}

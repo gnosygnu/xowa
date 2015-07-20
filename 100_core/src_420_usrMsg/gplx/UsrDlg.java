@@ -44,7 +44,7 @@ public class UsrDlg {
 		if		(type == UsrMsgWkr_.Type_Note)			return noteWkrs;
 		else if (type == UsrMsgWkr_.Type_Warn)			return warnWkrs;
 		else if (type == UsrMsgWkr_.Type_Stop)			return stopWkrs;
-		else throw Exc_.new_unhandled(type);
+		else throw Err_.new_unhandled(type);
 	}
 	UsrMsgWkrList noteWkrs = new UsrMsgWkrList(UsrMsgWkr_.Type_Note), warnWkrs = new UsrMsgWkrList(UsrMsgWkr_.Type_Warn), stopWkrs = new UsrMsgWkrList(UsrMsgWkr_.Type_Stop);
 	public static UsrDlg new_() {return new UsrDlg();}

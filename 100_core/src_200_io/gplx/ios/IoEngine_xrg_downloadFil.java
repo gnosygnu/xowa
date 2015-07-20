@@ -22,7 +22,7 @@ public class IoEngine_xrg_downloadFil {
 	public byte Rslt() {return rslt;} public IoEngine_xrg_downloadFil Rslt_(byte v) {rslt = v; return this;} private byte rslt = Rslt_pass;
 	public Exception Rslt_err() {return rslt_err;} public IoEngine_xrg_downloadFil Rslt_err_(Exception v) {rslt_err = v; return this;} private Exception rslt_err;
 	public String Rslt_err_str() {
-		return rslt_err == null ? "none" : Err_.Message_gplx_brief(rslt_err);
+		return rslt_err == null ? "none" : Err_.Message_gplx_full(rslt_err);
 	}
 	public String User_agent() {return user_agent;} public IoEngine_xrg_downloadFil User_agent_(String v) {user_agent = v; return this;} private String user_agent;
 	public Gfo_usr_dlg Prog_dlg() {return prog_dlg;} public IoEngine_xrg_downloadFil Prog_dlg_(Gfo_usr_dlg v) {prog_dlg = v; download_fmt.Ctor(prog_dlg); return this;} private Gfo_usr_dlg prog_dlg;

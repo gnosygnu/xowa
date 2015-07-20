@@ -20,7 +20,7 @@ public class DecimalAdpClassXtn extends ClassXtn_base implements ClassXtn {
 	public String Key() {return Key_const;}						public static final String Key_const = "decimal";	// current dsv files reference "decimal"
 	@Override public Class<?> UnderClass()					{return DecimalAdp.class;}
 	public Object DefaultValue()								{return 0;}
-	public boolean Eq(Object lhs, Object rhs) {try {return DecimalAdp_.cast_(lhs).Eq(DecimalAdp_.cast_(rhs));} catch (Exception e) {Exc_.Noop(e); return false;}}
+	public boolean Eq(Object lhs, Object rhs) {try {return DecimalAdp_.cast_(lhs).Eq(DecimalAdp_.cast_(rhs));} catch (Exception e) {Err_.Noop(e); return false;}}
 	@Override public Object ParseOrNull(String raw)				{return DecimalAdp_.parse_(raw);}
 	@Override public String XtoUi(Object obj, String fmt)		{return DecimalAdp_.cast_(obj).Xto_str();}
 	public static final DecimalAdpClassXtn _ =  new DecimalAdpClassXtn(); DecimalAdpClassXtn() {} // added to ClassXtnPool by default

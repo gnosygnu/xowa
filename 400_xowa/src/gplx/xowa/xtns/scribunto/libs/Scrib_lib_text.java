@@ -35,7 +35,7 @@ public class Scrib_lib_text implements Scrib_lib {
 			case Proc_killMarkers:						return KillMarkers(args, rslt);
 			case Proc_getEntityTable:					return GetEntityTable(args, rslt);
 			case Proc_init_text_for_wiki:				return Init_text_for_wiki(args, rslt);
-			default: throw Exc_.new_unhandled(key);
+			default: throw Err_.new_unhandled(key);
 		}
 	}
 	private static final int Proc_unstrip = 0, Proc_unstripNoWiki = 1, Proc_killMarkers = 2, Proc_getEntityTable = 3, Proc_init_text_for_wiki = 4;

@@ -17,13 +17,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
-import gplx.json.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.parsers.*;
+import gplx.core.json.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.parsers.*;
 public class Wdata_doc_bldr {
 	private Ordered_hash descr_list, label_list, slink_list, alias_list, claim_list;
 	public Wdata_doc_bldr() {this.Init();}
 	public Wdata_doc_bldr Qid_(String v) {this.qid = Bry_.new_a7(v); return this;} private byte[] qid;
 	public Wdata_doc_bldr Add_claims(Wdata_claim_itm_core... ary) {
-		if (ary.length == 0) throw Exc_.new_("claims must be greater than 0");
+		if (ary.length == 0) throw Err_.new_wo_type("claims must be greater than 0");
 		Wdata_claim_itm_core itm = ary[0];
 		Wdata_claim_grp grp = new Wdata_claim_grp(Int_obj_ref.new_(itm.Pid()), ary);
 		claim_list.Add(grp.Id_ref(), grp);

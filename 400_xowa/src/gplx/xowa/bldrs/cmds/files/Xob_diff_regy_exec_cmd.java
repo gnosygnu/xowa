@@ -75,7 +75,7 @@ class Xob_diff_regy_sql_runner {
 		else if (fsdb_db_tid == Fsdb_db_tid_.Tid_atr)
 			return abc_mgr.Atr_mgr().Db__core().Conn();
 		else
-			throw Exc_.new_unhandled(fsdb_db_tid);
+			throw Err_.new_unhandled(fsdb_db_tid);
 	}
 	public static String Build_url(String wiki_domain, int fsdb_db_id, String fsdb_db_type) {
 		return String_.Format("{0}-{1}-{2}.sql", wiki_domain, Int_.Xto_str_pad_bgn_zero(fsdb_db_id, 3), fsdb_db_type);
@@ -88,14 +88,14 @@ class Fsdb_db_tid_ {
 		if		(String_.Eq(s, Key_cfg))		return Tid_cfg;
 		else if	(String_.Eq(s, Key_atr))		return Tid_atr;
 		else if	(String_.Eq(s, Key_bin))		return Tid_bin;
-		else									throw Exc_.new_unhandled(s);
+		else									throw Err_.new_unhandled(s);
 	}
 	public static String Xto_key(byte v) {
 		switch (v) {
 			case Tid_cfg:	return Key_cfg;
 			case Tid_atr:	return Key_atr;
 			case Tid_bin:	return Key_bin;
-			default:		throw Exc_.new_unhandled(v);
+			default:		throw Err_.new_unhandled(v);
 		}
 	}
 }

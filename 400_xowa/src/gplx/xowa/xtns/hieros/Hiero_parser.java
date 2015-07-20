@@ -58,7 +58,7 @@ class Hiero_parser {
 					case Hiero_parser_itm.Tid_tkn_spr:
 						New_token(itm);
 						break;
-					default: throw Exc_.new_unhandled(itm.Tid());	// should never happen
+					default: throw Err_.new_unhandled(itm.Tid());	// should never happen
 				}
 				pos = new_pos;
 			}

@@ -33,7 +33,7 @@ public class DateAdp_parser {
 		int pos = bgn, rv_idx = 0, int_len = 0, max_len = max_lens[rv_idx];
 		while (true) {
 			int int_val = -1;
-			byte b = pos < end ? src[pos] : Byte_ascii.Nil;
+			byte b = pos < end ? src[pos] : Byte_ascii.Null;
 			switch (b) {
 				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
 				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
@@ -58,19 +58,19 @@ public class DateAdp_parser {
 }
 class IntBldr {
 	public int Add(char c) {
-		if (idx > digitsLen - 1) throw Exc_.new_missing_idx(idx, digitsLen);
+		if (idx > digitsLen - 1) throw Err_.new_missing_idx(idx, digitsLen);
 		digits[idx++] = XbyChar(c);
 		return idx;
 	}
 	public int Add(int i) {
-		if (idx > digitsLen - 1) throw Exc_.new_missing_idx(idx, digitsLen);
+		if (idx > digitsLen - 1) throw Err_.new_missing_idx(idx, digitsLen);
 		digits[idx++] = i;
 		return idx;
 	}
 	public int Parse(String raw) {
 		ParseStr(raw);
 		try {return Bld();}
-		catch (Exception exc) {throw Exc_.new_parse_exc(exc, int.class, raw);}
+		catch (Exception exc) {throw Err_.new_parse_exc(exc, int.class, raw);}
 	}
 	public boolean ParseTry(String raw) {
 		ParseStr(raw);
@@ -82,7 +82,7 @@ class IntBldr {
 		int rv = 0, exponent = 1;
 		for (int i = idx - 1; i > -1; i--) {
 			int digit = digits[i];
-			if (digit < 0) throw Exc_.new_("invalid char", "char", (char)-digits[i], "ascii", -digits[i]);
+			if (digit < 0) throw Err_.new_wo_type("invalid char", "char", (char)-digits[i], "ascii", -digits[i]);
 			rv += digit * exponent;
 			exponent *= 10;
 		}

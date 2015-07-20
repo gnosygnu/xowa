@@ -27,6 +27,6 @@ public class Scrib_lib_html implements Scrib_lib {
 	}
 	public Scrib_proc_mgr Procs() {return procs;} private Scrib_proc_mgr procs = new Scrib_proc_mgr();
 	public boolean Procs_exec(int key, Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		throw Exc_.new_unhandled(key);
+		throw Err_.new_unhandled(key);
 	}
 }

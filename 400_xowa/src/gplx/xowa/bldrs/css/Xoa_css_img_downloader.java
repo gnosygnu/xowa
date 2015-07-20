@@ -45,7 +45,7 @@ public class Xoa_css_img_downloader {
 				if (url_pos == Bry_.NotFound) {bfr.Add_mid(src, prv_pos, src_len); break;}	// no more "url("; exit;
 				int bgn_pos = url_pos + Bry_url_len;	// set bgn_pos after "url("
 				byte bgn_byte = src[bgn_pos];
-				byte end_byte = Byte_ascii.Nil;
+				byte end_byte = Byte_ascii.Null;
 				boolean quoted = true;
 				switch (bgn_byte) {									// find end_byte
 					case Byte_ascii.Quote: case Byte_ascii.Apos:	// quoted; end_byte is ' or "
@@ -99,7 +99,7 @@ public class Xoa_css_img_downloader {
 			return bfr.Xto_bry_and_clear();
 		}
 		catch (Exception e) {
-			usr_dlg.Warn_many("", "", "failed to convert local_urls: ~{0} ~{1}", String_.new_u8(rel_url_prefix), Err_.Message_gplx(e));
+			usr_dlg.Warn_many("", "", "failed to convert local_urls: ~{0} ~{1}", String_.new_u8(rel_url_prefix), Err_.Message_gplx_full(e));
 			return src;
 		}
 	}

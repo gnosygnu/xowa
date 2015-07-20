@@ -882,6 +882,8 @@ public class Xow_wmf_api_mgr {
 , "zu.wikipedia.org"
 , "zu.wiktionary.org"
 , "zu.wikibooks.org"
+, "gom.wikipedia.org"
+, "lrc.wikipedia.org"
 };
 //, "als.wikisource.org"
 //, "als.wikinews.org"

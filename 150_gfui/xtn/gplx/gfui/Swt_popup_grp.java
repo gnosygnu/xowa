@@ -141,7 +141,7 @@ class Swt_lnr__menu_detect implements MenuDetectListener {
 	@Override public void menuDetected(MenuDetectEvent arg0) {
 		try {GfoEvMgr_.Pub(elem, GfuiElemKeys.Evt_menu_detected);}
 		catch (Exception e) {
-			kit.Ask_ok("", "", "error during right-click; err=~{0}", Err_.Message_gplx(e));
+			kit.Ask_ok("", "", "error during right-click; err=~{0}", Err_.Message_gplx_full(e));
 		}
 	}	
 }
@@ -157,7 +157,7 @@ class Swt_popup_itm implements Gfui_mnu_itm {
 			case SWT.CASCADE: 	this.tid = Gfui_mnu_itm_.Tid_grp; break;
 			case SWT.CHECK:		this.tid = Gfui_mnu_itm_.Tid_chk; break;
 			case SWT.RADIO: 	this.tid = Gfui_mnu_itm_.Tid_rdo; break;
-			default:			throw Exc_.new_unhandled(swt_type);
+			default:			throw Err_.new_unhandled(swt_type);
 		}
 	}
 	@Override public int Tid() {return tid;} private int tid;
@@ -192,7 +192,7 @@ class Swt_lnr__menu_btn_cmd implements Listener {
 	public Swt_lnr__menu_btn_cmd(GfoInvkAble invk, String cmd) {this.invk = invk; this.cmd = cmd;} GfoInvkAble invk; String cmd;
 	public void handleEvent(Event ev) {
 		try {GfoInvkAble_.InvkCmd(invk, cmd);}
-		catch (Exception e) {Swt_kit._.Ask_ok("", "", "error while invoking command: cmd=~{0} err=~{1}", cmd, Err_.Message_gplx_brief(e));}
+		catch (Exception e) {Swt_kit._.Ask_ok("", "", "error while invoking command: cmd=~{0} err=~{1}", cmd, Err_.Message_gplx_full(e));}
 	}	
 }
 class Swt_lnr__menu_btn_msg implements Listener {
@@ -203,7 +203,7 @@ class Swt_lnr__menu_btn_msg implements Listener {
 			msg.Args_reset();
 			root_wkr.Run_str_for(invk, msg);
 		}
-		catch (Exception e) {Swt_kit._.Ask_ok("", "", "error while invoking command: cmd=~{0} err=~{1}", msg.Key(), Err_.Message_gplx_brief(e));}
+		catch (Exception e) {Swt_kit._.Ask_ok("", "", "error while invoking command: cmd=~{0} err=~{1}", msg.Key(), Err_.Message_gplx_full(e));}
 	}	
 }
 class Swt_lnr__menu_chk_msg implements Listener {
@@ -219,6 +219,6 @@ class Swt_lnr__menu_chk_msg implements Listener {
 			msg.Args_reset();
 			root_wkr.Run_str_for(invk, msg);
 		}
-		catch (Exception e) {Swt_kit._.Ask_ok("", "", "error while invoking command: cmd=~{0} err=~{1}", msg.Key(), Err_.Message_gplx_brief(e));}
+		catch (Exception e) {Swt_kit._.Ask_ok("", "", "error while invoking command: cmd=~{0} err=~{1}", msg.Key(), Err_.Message_gplx_full(e));}
 	}	
 }

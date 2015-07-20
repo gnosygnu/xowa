@@ -24,7 +24,7 @@ class GfsRegy implements GfoInvkAble {
 	public GfsRegyItm Get_by(String key) {return (GfsRegyItm)hash.Get_by(key);}
 	public GfsRegyItm FetchByType(GfoInvkAble invk) {return (GfsRegyItm)typeHash.Get_by(ClassAdp_.FullNameOf_obj(invk));}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		Object rv = (GfsRegyItm)hash.Get_by(k); if (rv == null) throw Exc_.new_missing_key(k);
+		Object rv = (GfsRegyItm)hash.Get_by(k); if (rv == null) throw Err_.new_missing_key(k);
 		return rv;
 	}
 	public void AddObj(GfoInvkAble invk, String key) {Add(key, invk, false);}

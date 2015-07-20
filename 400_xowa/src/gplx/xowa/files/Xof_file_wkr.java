@@ -84,7 +84,7 @@ public class Xof_file_wkr implements Gfo_thread_wkr {
 			cache_mgr.Update(fsdb);
 			return true;
 		} catch (Exception e) {
-			usr_dlg.Warn_many("", "", "file.unknown: ~{0}", Err_.Message_gplx_brief(e));
+			usr_dlg.Warn_many("", "", "file.unknown: err=~{0}", Err_.Message_gplx_full(e));
 			return false;
 		}
 	}
@@ -128,7 +128,7 @@ public class Xof_file_wkr implements Gfo_thread_wkr {
 			bin_updater.Save_bin(mnt_itm, atr_fil, bin_fil, itm, rdr, rdr_len);
 		}
 		catch (Exception e) {
-			Xoa_app_.Usr_dlg().Warn_many("", "", "failed to save file: ttl=~{0} url=~{1} err=~{2}", itm.Orig_ttl(), html_url.Raw(), Err_.Message_gplx(e));
+			Xoa_app_.Usr_dlg().Warn_many("", "", "failed to save file: ttl=~{0} url=~{1} err=~{2}", itm.Orig_ttl(), html_url.Raw(), Err_.Message_gplx_full(e));
 		}
 		finally {rdr.Rls();}
 	}

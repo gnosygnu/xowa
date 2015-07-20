@@ -33,7 +33,7 @@ public class Pfunc_scrib_lib implements Scrib_lib {
 	public boolean Procs_exec(int key, Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		switch (key) {
 			case Proc_expr:										return Expr(args, rslt);
-			default: throw Exc_.new_unhandled(key);
+			default: throw Err_.new_unhandled(key);
 		}
 	}
 	private static final int Proc_expr = 0;
@@ -47,6 +47,6 @@ public class Pfunc_scrib_lib implements Scrib_lib {
 		if (pass)
 			return rslt.Init_obj(expr_rslt);
 		else
-			throw Exc_.new_(expr_rslt);
+			throw Err_.new_wo_type(expr_rslt);
 	}
 }

@@ -23,7 +23,7 @@ class Sites_xtn_skin_itm implements Xopg_xtn_skin_itm {
 	private Sites_html_bldr html_bldr;
 	public Sites_xtn_skin_itm(Sites_html_bldr html_bldr) {this.html_bldr = html_bldr;}
 	public byte Tid() {return Xopg_xtn_skin_itm_tid.Tid_sidebar;}
-	public byte[] Key() {return KEY;} public static final byte[] KEY = Bry_.new_u8("RelatedSites");
+	public byte[] Key() {return KEY;} public static final byte[] KEY = Bry_.new_a7("RelatedSites");
 	public void Add(Sites_regy_itm itm) {itms.Add(itm);}
 	public void Write(Bry_bfr bfr, Xoae_page page) {
 		html_bldr.Bld_all(bfr, page, itms);

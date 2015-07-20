@@ -33,8 +33,8 @@ class TdbInsertWkr implements Db_qryWkr {
 		Sql_select_fld_list insertFlds = insert.Cols(); int insertFldsCount = insertFlds.Count();
 		GfoFldList selectFldsForNewRow = null;
 		try {selectFldsForNewRow = insertFlds.XtoGfoFldLst(tbl);}
-		catch (Exception e) {throw Exc_.new_exc(e, "db", "failed to generate flds for new row");}
-		if (insertFldsCount > selectFldsForNewRow.Count()) throw Exc_.new_("insert flds cannot exceed selectFlds", "insertFlds", insertFlds.XtoStr(), "selectFlds", selectFldsForNewRow.XtoStr());
+		catch (Exception e) {throw Err_.new_exc(e, "db", "failed to generate flds for new row");}
+		if (insertFldsCount > selectFldsForNewRow.Count()) throw Err_.new_wo_type("insert flds cannot exceed selectFlds", "insertFlds", insertFlds.XtoStr(), "selectFlds", selectFldsForNewRow.XtoStr());
 		while (rdr.MoveNextPeer()) {
 			count++;
 			GfoNde row = GfoNde_.vals_(selectFldsForNewRow, new Object[insertFldsCount]);

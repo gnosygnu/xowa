@@ -21,6 +21,7 @@ import gplx.core.threads.Thread_adp_;
 
 import java.security.acl.Owner;
 import gplx.*;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.*;
 import org.eclipse.swt.events.*;
@@ -160,7 +161,7 @@ class Swt_html_lnr_title implements TitleListener {
 	public Swt_html_lnr_title(Swt_html html_box) {this.html_box = html_box;}
 	@Override public void changed(TitleEvent ev) {
 		try {UsrDlg_._.Note(ev.title);}		
-		catch (Exception e) {html_box.Kit().Ask_ok("xowa.swt.html_box", "title.fail", Err_.Message_gplx_brief(e));}	// NOTE: must catch error or will cause app to lock; currently called inside displaySync 
+		catch (Exception e) {html_box.Kit().Ask_ok("xowa.swt.html_box", "title.fail", Err_.Message_gplx_full(e));}	// NOTE: must catch error or will cause app to lock; currently called inside displaySync 
 	}
 }
 class Swt_html_func extends BrowserFunction {    
@@ -174,7 +175,7 @@ class Swt_html_func extends BrowserFunction {
     		return gplx.gfui.Gfui_html.Js_args_exec(invk, args);
     	}
     	catch (Exception e) {
-    		return Err_.Message_gplx_brief(e);
+    		return Err_.Message_gplx_full(e);
     	}
     }
 }
@@ -187,7 +188,7 @@ class Swt_html_lnr_status implements StatusTextListener {
 		String ev_text = ev.text;
 //		if (String_.Has(ev_text, "Loading [MathJax]")) return;	// suppress MathJax messages; // NOTE: disabled for 2.1 (which no longer outputs messages to status); DATE:2013-05-03
 		try {if (host != null) GfoEvMgr_.PubObj(host, Gfui_html.Evt_link_hover, "v", ev_text);}
-		catch (Exception e) {html_box.Kit().Ask_ok("xowa.gui.html_box", "status.fail", Err_.Message_gplx_brief(e));}	// NOTE: must catch error or will cause app to lock; currently called inside displaySync 
+		catch (Exception e) {html_box.Kit().Ask_ok("xowa.gui.html_box", "status.fail", Err_.Message_gplx_full(e));}	// NOTE: must catch error or will cause app to lock; currently called inside displaySync 
 	}
 }
 class Swt_html_lnr_progress implements ProgressListener {
@@ -218,7 +219,7 @@ class Swt_html_lnr_location implements LocationListener {
 			GfoEvMgr_.PubObj(host, evt, "v", location);
 			arg.doit = false; // cancel navigation event, else there will be an error when trying to go to invalid location
 		}
-		catch (Exception e) {html_box.Kit().Ask_ok("xowa.gui.html_box", evt, Err_.Message_gplx_brief(e));}	// NOTE: must catch error or will cause app to lock; currently called inside displaySync 		
+		catch (Exception e) {html_box.Kit().Ask_ok("xowa.gui.html_box", evt, Err_.Message_gplx_full(e));}	// NOTE: must catch error or will cause app to lock; currently called inside displaySync 		
 	}
 }
 class Swt_html_lnr_mouse implements MouseListener {

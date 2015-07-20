@@ -21,7 +21,7 @@ public abstract class Xop_tkn_itm_base implements Xop_tkn_itm {
 	public Xop_tkn_grp Tkn_grp() {return grp == null ? this : grp;} private Xop_tkn_grp grp;	// NOTE: not sure about this; need to handle null refs when tkns are manipulated but not yet added to a group
 	public Xop_tkn_itm Tkn_ini_pos(boolean immutable, int bgn, int end) {this.immutable = immutable; this.src_bgn = bgn; this.src_end = end; return this;}
 	public Xop_tkn_itm Tkn_grp_(Xop_tkn_grp grp, int sub_idx) {this.grp = grp; this.tkn_sub_idx = sub_idx; return this;}
-	@gplx.Virtual public Xop_tkn_itm Tkn_clone(Xop_ctx ctx, int bgn, int end) {throw Exc_.new_("tkn_clone not implemented", "name", Xop_tkn_itm_.Tid__names[this.Tkn_tid()]);}
+	@gplx.Virtual public Xop_tkn_itm Tkn_clone(Xop_ctx ctx, int bgn, int end) {throw Err_.new_wo_type("tkn_clone not implemented", "name", Xop_tkn_itm_.Tid__names[this.Tkn_tid()]);}
 	public boolean Tkn_immutable() {return immutable;} private boolean immutable;
 	public int Tkn_sub_idx() {return tkn_sub_idx;} private int tkn_sub_idx = -1;
 	public int Src_bgn() {return src_bgn;} private int src_bgn = -1;
@@ -29,8 +29,8 @@ public abstract class Xop_tkn_itm_base implements Xop_tkn_itm {
 	public void Src_end_(int v) {src_end = v;}
 	public int Src_bgn_grp(Xop_tkn_grp grp, int sub_idx) {return immutable ? grp.Subs_src_bgn(sub_idx) : src_bgn;}
 	public int Src_end_grp(Xop_tkn_grp grp, int sub_idx) {return immutable ? grp.Subs_src_end(sub_idx) : src_end;}
-	public int Subs_src_bgn(int sub_idx) {if (subs_len == 0) throw Exc_.new_("no subs available", "idx", sub_idx); return subs_pos_ary[ sub_idx * 2];}
-	public int Subs_src_end(int sub_idx) {if (subs_len == 0) throw Exc_.new_("no subs available", "idx", sub_idx); return subs_pos_ary[(sub_idx * 2) + 1];}
+	public int Subs_src_bgn(int sub_idx) {if (subs_len == 0) throw Err_.new_wo_type("no subs available", "idx", sub_idx); return subs_pos_ary[ sub_idx * 2];}
+	public int Subs_src_end(int sub_idx) {if (subs_len == 0) throw Err_.new_wo_type("no subs available", "idx", sub_idx); return subs_pos_ary[(sub_idx * 2) + 1];}
 	public void Subs_src_pos_(int sub_idx, int bgn, int end) {
 		int pos_idx = sub_idx * 2;
 		int subs_pos_ary_len = subs_pos_ary.length;

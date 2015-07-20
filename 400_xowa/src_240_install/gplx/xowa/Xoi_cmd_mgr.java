@@ -22,7 +22,11 @@ public class Xoi_cmd_mgr implements GfoInvkAble {
 	public Xoi_cmd_mgr(Xoi_setup_mgr install_mgr) {this.app = install_mgr.App(); this.install_mgr = install_mgr;} private Xoae_app app; Xoi_setup_mgr install_mgr;
 	public Xoae_app App() {return app;}
 	public void Canceled_y_() {canceled = true;} private boolean canceled = false;
-	public boolean Working() {return working;} public void Working_n_() {working = false;} private boolean working;		
+	public boolean Working() {return working;} private boolean working;
+	public void Working_(boolean v) {
+		working = v;
+		app.Bldr__running_(v);
+	}		
 	private void Process_async(Gfo_thread_cmd cmd) {
 		byte init_rslt = cmd.Async_init();
 		if (init_rslt == Gfo_thread_cmd_.Init_ok) {
@@ -31,7 +35,7 @@ public class Xoi_cmd_mgr implements GfoInvkAble {
 			boolean async_prog_enabled = cmd.Async_prog_enabled();
 			int async_sleep_sum = 0;
 			while (cmd.Async_running()) {
-				if (canceled) {working = false; return;}
+				if (canceled) {this.Working_(Bool_.N); return;}
 				if (async_prog_enabled) cmd.Async_prog_run(async_sleep_sum);
 				Thread_adp_.Sleep(async_sleep_interval);
 				async_sleep_sum += async_sleep_interval;	// NOTE: this is not exact
@@ -41,7 +45,7 @@ public class Xoi_cmd_mgr implements GfoInvkAble {
 		if (cmd.Async_next_cmd() != null && init_rslt != Gfo_thread_cmd_.Init_cancel_all && term_pass)
 			Run_async(cmd.Async_next_cmd());
 		else
-			working = false;
+			this.Working_(Bool_.N);
 	}
 	private void Run_async(Gfo_thread_cmd cmd) {Thread_adp_.invk_msg_(cmd.Async_key(), this, GfoMsg_.new_cast_(Invk_process_async).Add("v", cmd)).Start();}
 	private void Cmds_run() {
@@ -59,12 +63,13 @@ public class Xoi_cmd_mgr implements GfoInvkAble {
 		}
 		Gfo_thread_cmd cmd = (Gfo_thread_cmd)cmds.Get_at(0);
 		cmds.Clear();
-		working = true;
+		this.Working_(Bool_.Y);
+		app.Bldr__running_(true);
 		this.Run_async(cmd);
 	}
 	Object Dump_add_many(GfoMsg m) {
 		int args_len = m.Args_count();
-		if (args_len < 4) throw Exc_.new_("Please provide the following: wiki name, wiki date, dump_type, and one command; EX: ('simple.wikipedia.org', 'latest', 'pages-articles', 'wiki.download')");
+		if (args_len < 4) throw Err_.new_wo_type("Please provide the following: wiki name, wiki date, dump_type, and one command; EX: ('simple.wikipedia.org', 'latest', 'pages-articles', 'wiki.download')");
 		String wiki_key = m.Args_getAt(0).Val_to_str_or_empty();
 		String wiki_date = m.Args_getAt(1).Val_to_str_or_empty();
 		String dump_type = m.Args_getAt(2).Val_to_str_or_empty();
@@ -110,7 +115,7 @@ public class Xoi_cmd_mgr implements GfoInvkAble {
 		else if	(String_.Eq(cmd_key, Xoi_cmd_category2_page_props.KEY_category2))		return new Xoi_cmd_category2_page_props(install_mgr, wiki_key, wiki_date).Owner_(this);
 		else if	(String_.Eq(cmd_key, Xoi_cmd_category2_categorylinks.KEY_category2))	return new Xoi_cmd_category2_categorylinks(install_mgr, wiki_key, wiki_date).Owner_(this);
 		else if	(String_.Eq(cmd_key, Xoi_cmd_search2_build.KEY))						return new Xoi_cmd_search2_build(install_mgr, wiki_key).Owner_(this);
-		else																			throw Exc_.new_unhandled(cmd_key);
+		else																			throw Err_.new_unhandled(cmd_key);
 	}
 	public static final String[] Wiki_cmds_valid = new String[] {Xoi_cmd_wiki_download.Key_wiki_download, Xoi_cmd_wiki_unzip.KEY_dump, Xoi_cmd_wiki_import.KEY, Xoi_cmd_wiki_zip.KEY, Xoi_cmd_category2_build.KEY, Xoi_cmd_category2_page_props.KEY_category2, Xoi_cmd_category2_categorylinks.KEY_category2};
 	public static final String Wiki_cmd_custom = "wiki.custom", Wiki_cmd_dump_file = "wiki.dump_file";
@@ -126,7 +131,7 @@ public class Xoi_cmd_mgr implements GfoInvkAble {
 //			else if	(String_.Eq(cmd_key, Gfo_thread_exec_sync.KEY))							return new Gfo_thread_exec_sync(app.Usr_dlg(), app.Gui_mgr().Kit(), Bry_fmtr_eval_mgr_.Eval_url(app.Url_cmd_eval(), m.ReadBry("url")), m.ReadStr("args")).Owner_(this);
 		else if	(String_.Eq(cmd_key, Xoi_cmd_imageMagick_download.KEY_imageMagick))		return new Xoi_cmd_imageMagick_download(app.Usr_dlg(), app.Gui_mgr().Kit(), Bry_fmtr_eval_mgr_.Eval_url(app.Url_cmd_eval(), m.ReadBry("trg"))).Owner_(this);
 		else if	(String_.Eq(cmd_key, Wiki_cmd_dump_file))								return Wiki_cmd_dump_file_make(m);
-		else																			throw Exc_.new_unhandled(cmd_key);
+		else																			throw Err_.new_unhandled(cmd_key);
 	}
 	Gfo_thread_cmd Wiki_cmd_dump_file_make(GfoMsg m) {
 		Xoi_cmd_dumpfile dumpfile = new Xoi_cmd_dumpfile().Parse_msg(m);

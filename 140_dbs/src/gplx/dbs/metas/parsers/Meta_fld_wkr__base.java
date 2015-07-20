@@ -97,7 +97,7 @@ class Meta_fld_wkr__default extends Meta_fld_wkr__base {
 			case Byte_ascii.Quote:
 			case Byte_ascii.Apos:
 				int bgn_pos = rdr.Pos() + 1;
-				int end_pos = Bry_finder.Find_fwd(src, b, bgn_pos); if (end_pos == Bry_finder.Not_found) throw Exc_.new_("unclosed quote", "snip", rdr.Mid_by_len_safe(40));
+				int end_pos = Bry_finder.Find_fwd(src, b, bgn_pos); if (end_pos == Bry_finder.Not_found) throw Err_.new_wo_type("unclosed quote", "snip", rdr.Mid_by_len_safe(40));
 				default_val = Bry_.Mid(src, bgn_pos, end_pos);
 				rdr.Pos_(end_pos + 1);
 				break;
@@ -107,7 +107,7 @@ class Meta_fld_wkr__default extends Meta_fld_wkr__base {
 				default_val = rdr.Read_int_to_non_num();
 				break;
 			default:
-				throw Exc_.new_("invalid field_default", "snip", rdr.Mid_by_len_safe(40));
+				throw Err_.new_wo_type("invalid field_default", "snip", rdr.Mid_by_len_safe(40));
 		}
 		fld.Default_val_(default_val);
 	}

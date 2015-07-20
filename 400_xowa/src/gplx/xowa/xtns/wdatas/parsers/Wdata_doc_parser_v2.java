@@ -16,28 +16,28 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
-import gplx.json.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.core.btries.*;
+import gplx.core.json.*; import gplx.xowa.xtns.wdatas.core.*; import gplx.core.btries.*;
 public class Wdata_doc_parser_v2 implements Wdata_doc_parser {
 	private Wdata_claims_parser_v2 claims_parser = new Wdata_claims_parser_v2();
 	public byte[] Parse_qid(Json_doc doc) {
 		try {
 			Json_itm itm = doc.Find_nde(Bry_id);
 			return Bry_.Lower_1st(itm.Data_bry());	// standardize on "q" instead of "Q" for compatibility with v1
-		}	catch (Exception e) {throw Exc_.new_exc(e, "xo", "failed to parse qid", "src", String_.new_u8(doc.Src()));}
+		}	catch (Exception e) {throw Err_.new_exc(e, "xo", "failed to parse qid", "src", String_.new_u8(doc.Src()));}
 	}
 	public Ordered_hash Parse_sitelinks(byte[] qid, Json_doc doc) {
 		try {
-			Json_itm_nde list_nde = Json_itm_nde.cast_(doc.Get_grp(Bry_sitelinks)); if (list_nde == null) return Wdata_doc_parser_v1.Empty_ordered_hash_bry;
+			Json_nde list_nde = Json_nde.cast_(doc.Get_grp(Bry_sitelinks)); if (list_nde == null) return Wdata_doc_parser_v1.Empty_ordered_hash_bry;
 			Ordered_hash rv = Ordered_hash_.new_bry_();
-			int list_len = list_nde.Subs_len();
+			int list_len = list_nde.Len();
 			Hash_adp_bry dict = Wdata_dict_sitelink.Dict;
 			for (int i = 0; i < list_len; ++i) {
-				Json_itm_kv data_kv		= Json_itm_kv.cast_(list_nde.Subs_get_at(i));
-				Json_itm_nde data_nde	= Json_itm_nde.cast_(data_kv.Val());
-				int data_nde_len		= data_nde.Subs_len();
+				Json_itm_kv data_kv		= Json_itm_kv.cast_(list_nde.Get_at(i));
+				Json_nde data_nde	= Json_nde.cast_(data_kv.Val());
+				int data_nde_len		= data_nde.Len();
 				Json_itm_kv site_kv = null, name_kv = null; Json_itm_ary badges_ary = null;
 				for (int j = 0; j < data_nde_len; ++j) {
-					Json_itm_kv sub = Json_itm_kv.cast_(data_nde.Subs_get_at(j));
+					Json_itm_kv sub = Json_itm_kv.cast_(data_nde.Get_at(j));
 					byte tid = Wdata_dict_utl.Get_tid_or_invalid(qid, dict, sub.Key().Data_bry()); if (tid == Wdata_dict_utl.Tid_invalid) continue;
 					switch (tid) {
 						case Wdata_dict_sitelink.Tid_site:			site_kv	= Json_itm_kv.cast_(sub); break;
@@ -50,22 +50,22 @@ public class Wdata_doc_parser_v2 implements Wdata_doc_parser {
 				rv.Add(site_bry, itm);
 			}
 			return rv;
-		} catch (Exception e) {throw Exc_.new_exc(e, "xo", "failed to parse sitelinks", "qid", String_.new_u8(qid));}
+		} catch (Exception e) {throw Err_.new_exc(e, "xo", "failed to parse sitelinks", "qid", String_.new_u8(qid));}
 	}
 	public Ordered_hash Parse_langvals(byte[] qid, Json_doc doc, boolean label_or_description) {
 		try {
 			byte[] langval_key = label_or_description ? Bry_labels : Bry_descriptions;
-			Json_itm_nde list_nde = Json_itm_nde.cast_(doc.Get_grp(langval_key)); if (list_nde == null) return Wdata_doc_parser_v1.Empty_ordered_hash_bry;
+			Json_nde list_nde = Json_nde.cast_(doc.Get_grp(langval_key)); if (list_nde == null) return Wdata_doc_parser_v1.Empty_ordered_hash_bry;
 			Ordered_hash rv = Ordered_hash_.new_bry_();
-			int list_len = list_nde.Subs_len();
+			int list_len = list_nde.Len();
 			Hash_adp_bry dict = Wdata_dict_langtext.Dict;
 			for (int i = 0; i < list_len; ++i) {
-				Json_itm_kv data_kv		= Json_itm_kv.cast_(list_nde.Subs_get_at(i));
-				Json_itm_nde data_nde	= Json_itm_nde.cast_(data_kv.Val());
+				Json_itm_kv data_kv		= Json_itm_kv.cast_(list_nde.Get_at(i));
+				Json_nde data_nde	= Json_nde.cast_(data_kv.Val());
 				Json_itm_kv text_kv = null;
-				int data_nde_len = data_nde.Subs_len();
+				int data_nde_len = data_nde.Len();
 				for (int j = 0; j < data_nde_len; ++j) {
-					Json_itm_kv sub = Json_itm_kv.cast_(data_nde.Subs_get_at(j));
+					Json_itm_kv sub = Json_itm_kv.cast_(data_nde.Get_at(j));
 					byte tid = Wdata_dict_utl.Get_tid_or_invalid(qid, dict, sub.Key().Data_bry()); if (tid == Wdata_dict_utl.Tid_invalid) continue;
 					switch (tid) {
 						case Wdata_dict_langtext.Tid_language:		break;
@@ -77,24 +77,24 @@ public class Wdata_doc_parser_v2 implements Wdata_doc_parser {
 				rv.Add(lang_bry, itm);
 			}
 			return rv;
-		} catch (Exception e) {throw Exc_.new_exc(e, "xo", "failed to parse langvals", "qid", String_.new_u8(qid), "langval_tid", label_or_description);}
+		} catch (Exception e) {throw Err_.new_exc(e, "xo", "failed to parse langvals", "qid", String_.new_u8(qid), "langval_tid", label_or_description);}
 	}
 	public Ordered_hash Parse_aliases(byte[] qid, Json_doc doc) {
 		try {
-			Json_itm_nde list_nde = Json_itm_nde.cast_(doc.Get_grp(Bry_aliases)); if (list_nde == null) return Wdata_doc_parser_v1.Empty_ordered_hash_bry;
+			Json_nde list_nde = Json_nde.cast_(doc.Get_grp(Bry_aliases)); if (list_nde == null) return Wdata_doc_parser_v1.Empty_ordered_hash_bry;
 			Ordered_hash rv = Ordered_hash_.new_bry_();
-			int list_len = list_nde.Subs_len();
+			int list_len = list_nde.Len();
 			Hash_adp_bry dict = Wdata_dict_langtext.Dict;
 			for (int i = 0; i < list_len; ++i) {
-				Json_itm_kv data_kv		= Json_itm_kv.cast_(list_nde.Subs_get_at(i));
+				Json_itm_kv data_kv		= Json_itm_kv.cast_(list_nde.Get_at(i));
 				Json_itm_ary vals_ary	= Json_itm_ary.cast_(data_kv.Val());
-				int vals_len = vals_ary.Subs_len();
+				int vals_len = vals_ary.Len();
 				byte[][] vals = new byte[vals_len][];
 				for (int j = 0; j < vals_len; ++j) {
-					Json_itm_nde lang_nde = Json_itm_nde.cast_(vals_ary.Subs_get_at(j));
-					int k_len = lang_nde.Subs_len();
+					Json_nde lang_nde = Json_nde.cast_(vals_ary.Get_at(j));
+					int k_len = lang_nde.Len();
 					for (int k = 0; k < k_len; ++k) {
-						Json_itm_kv sub = Json_itm_kv.cast_(lang_nde.Subs_get_at(k));
+						Json_itm_kv sub = Json_itm_kv.cast_(lang_nde.Get_at(k));
 						byte tid = Wdata_dict_utl.Get_tid_or_invalid(qid, dict, sub.Key().Data_bry()); if (tid == Wdata_dict_utl.Tid_invalid) continue;
 						switch (tid) {
 							case Wdata_dict_langtext.Tid_language:		break;
@@ -107,23 +107,23 @@ public class Wdata_doc_parser_v2 implements Wdata_doc_parser {
 				rv.Add(lang_bry, itm);
 			}
 			return rv;
-		} catch (Exception e) {throw Exc_.new_exc(e, "xo", "failed to parse sitelinks", "qid", String_.new_u8(qid));}
+		} catch (Exception e) {throw Err_.new_exc(e, "xo", "failed to parse sitelinks", "qid", String_.new_u8(qid));}
 	}
 	public Ordered_hash Parse_claims(byte[] qid, Json_doc doc) {
 		try {
-			Json_itm_nde list_nde = Json_itm_nde.cast_(doc.Get_grp(Bry_claims)); if (list_nde == null) return Wdata_doc_parser_v1.Empty_ordered_hash_generic;
+			Json_nde list_nde = Json_nde.cast_(doc.Get_grp(Bry_claims)); if (list_nde == null) return Wdata_doc_parser_v1.Empty_ordered_hash_generic;
 			List_adp temp_list = List_adp_.new_();
 			byte[] src = doc.Src();
-			int len = list_nde.Subs_len();
+			int len = list_nde.Len();
 			for (int i = 0; i < len; i++) {
-				Json_itm_kv claim_nde			= Json_itm_kv.cast_(list_nde.Subs_get_at(i));
+				Json_itm_kv claim_nde			= Json_itm_kv.cast_(list_nde.Get_at(i));
 				claims_parser.Make_claim_itms(qid, temp_list, src, claim_nde);
 			}
 			return Wdata_doc_parser_v1.Claims_list_to_hash(temp_list);
-		} catch (Exception e) {throw Exc_.new_exc(e, "xo", "failed to parse claims", "qid", String_.new_u8(doc.Src()));}
+		} catch (Exception e) {throw Err_.new_exc(e, "xo", "failed to parse claims", "qid", String_.new_u8(doc.Src()));}
 	}
-	public Wdata_claim_itm_base Parse_claims_data(byte[] qid, int pid, byte snak_tid, Json_itm_nde nde) {return claims_parser.Parse_datavalue(qid, pid, snak_tid, nde);}
-	public Wdata_claim_grp_list Parse_qualifiers(byte[] qid, Json_itm_nde nde) {return claims_parser.Parse_qualifiers(qid, nde);}
+	public Wdata_claim_itm_base Parse_claims_data(byte[] qid, int pid, byte snak_tid, Json_nde nde) {return claims_parser.Parse_datavalue(qid, pid, snak_tid, nde);}
+	public Wdata_claim_grp_list Parse_qualifiers(byte[] qid, Json_nde nde) {return claims_parser.Parse_qualifiers(qid, nde);}
 	public Wdata_references_grp[] Parse_references(byte[] qid, Json_itm_ary owner) {return claims_parser.Parse_references(qid, owner);}
 	public int[] Parse_pid_order(byte[] qid, Json_itm_ary ary) {return claims_parser.Parse_pid_order(ary);}
 	public static final String

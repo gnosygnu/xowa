@@ -31,11 +31,11 @@ public class Long_ {
   			, Long_.Pow(10, 15), Long_.Pow(10, 16), Long_.Pow(10, 17), Long_.Pow(10, 18), Long_.Pow(10, 19)
   			, Long_.MaxValue
   			};
-	public static long parse_(String raw)			{try {return Long.parseLong(raw);} catch(Exception e) {throw Exc_.new_parse_exc(e, long.class, raw);}} 
-	public static long cast_(Object obj) {try {return (Long)obj;} catch(Exception e) {throw Exc_.new_type_mismatch_w_exc(e, long.class, obj);}}
+	public static long parse_(String raw)			{try {return Long.parseLong(raw);} catch(Exception e) {throw Err_.new_parse_exc(e, long.class, raw);}} 
+	public static long cast_(Object obj) {try {return (Long)obj;} catch(Exception e) {throw Err_.new_type_mismatch_w_exc(e, long.class, obj);}}
 	public static long coerce_(Object v) {
 		try {String s = String_.as_(v); return s == null ? Long_.cast_(v) : Long_.parse_(s);}
-		catch (Exception e) {throw Exc_.new_cast(e, long.class, v);}
+		catch (Exception e) {throw Err_.new_cast(e, long.class, v);}
 	}
 	public static long Xby_int(int v) {return (long)v;}
 	public static String Xto_str(long v) {return Long.toString(v);}	
@@ -53,7 +53,7 @@ public class Long_ {
 				factor *= 10;
 			}
 			return rv;
-		} catch (Exception e) {Exc_.Noop(e); return or;}
+		} catch (Exception e) {Err_.Noop(e); return or;}
 	}
 	public static int Compare(long lhs, long rhs) {
 		if		(lhs == rhs) 	return CompareAble_.Same;

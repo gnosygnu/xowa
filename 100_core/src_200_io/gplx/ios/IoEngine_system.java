@@ -67,7 +67,7 @@ public class IoEngine_system extends IoEngine_base {
 			catch	(IOException e) {
 				Closeable_close(fc, url, false);
 				Closeable_close(fos, url, false);
-				throw Exc_.new_exc(e, "io", "write data to file failed", "url", url.Xto_api());
+				throw Err_.new_exc(e, "io", "write data to file failed", "url", url.Xto_api());
 			}
 			if (!Op_sys.Cur().Tid_is_drd()) {
 				File fil = new File(url.Xto_api());
@@ -118,7 +118,7 @@ public class IoEngine_system extends IoEngine_base {
 	    			reader.close();
 	    		}
 	    		catch 	(IOException e2) {}		    	
-		    	throw Exc_.new_exc(e, "io", "read data from file failed", "url", url_str, "pos", pos);
+		    	throw Err_.new_exc(e, "io", "read data from file failed", "url", url_str, "pos", pos);
 		    }
 		    if (pos == -1) break;
 		    sw.write(readerBuffer, 0, pos);
@@ -135,7 +135,7 @@ public class IoEngine_system extends IoEngine_base {
 		File dir = new File(url.Xto_api());
 		if (!dir.exists()) return;
 		boolean rv = dir.delete();
-		if (!rv) throw Exc_.new_w_type(IoEngineArgs._.Err_IoException, "delete dir failed", "url", url.Xto_api());
+		if (!rv) throw Err_.new_(IoEngineArgs._.Err_IoException, "delete dir failed", "url", url.Xto_api());
 	}
 	@Override public IoItmDir QueryDir(Io_url url) {
 		IoItmDir rv = IoItmDir_.scan_(url);
@@ -185,7 +185,7 @@ public class IoEngine_system extends IoEngine_base {
 				if (!Op_sys.Cur().Tid_is_drd())
 					IoEngine_system_xtn.SetWritable(f, true);
 			}
-			if (!rv) throw Exc_.new_w_type(IoEngineArgs._.Err_IoException, "set file attribute failed", "attribute", "readOnly", "cur", Fil_ReadOnly(f), "new", atr.ReadOnly(), "url", url.Xto_api());
+			if (!rv) throw Err_.new_(IoEngineArgs._.Err_IoException, "set file attribute failed", "attribute", "readOnly", "cur", Fil_ReadOnly(f), "new", atr.ReadOnly(), "url", url.Xto_api());
 		}
 		if (atr.Hidden() != f.isHidden()) {
 			//Runtime.getRuntime().exec("attrib +H myHiddenFile.java");			
@@ -208,7 +208,7 @@ public class IoEngine_system extends IoEngine_base {
 				finally {
 					UpdateFilAttrib(url, IoItmAttrib.readOnly_());
 				}
-				if (!success) throw Exc_.new_("could not update file modified time", "url", url.Xto_api(), "modifiedTime", modified.XtoStr_gplx_long());
+				if (!success) throw Err_.new_wo_type("could not update file modified time", "url", url.Xto_api(), "modifiedTime", modified.XtoStr_gplx_long());
 			}
 		}
 	}
@@ -242,7 +242,7 @@ public class IoEngine_system extends IoEngine_base {
 				rv = false;
 			}
 			if (!rv)
-				throw Exc_.new_("create file failed", "trg", trgUrl.Xto_api());
+				throw Err_.new_wo_type("create file failed", "trg", trgUrl.Xto_api());
 		}
 		FileInputStream srcStream = null; FileOutputStream trgStream = null;
 		FileChannel srcChannel = null, trgChannel = null;
@@ -264,7 +264,7 @@ public class IoEngine_system extends IoEngine_base {
 			// transfer data
 			long pos = 0, count = 0, read = 0;
 			try 	{count = srcChannel.size();}
-			catch 	(IOException e) {throw Exc_.new_exc(e, "io", "size failed", "src", srcUrl.Xto_api());}
+			catch 	(IOException e) {throw Err_.new_exc(e, "io", "size failed", "src", srcUrl.Xto_api());}
 			int totalBufferSize = IoEngineArgs._.LoadFilStr_BufferSize;
 			long transferSize = (count > totalBufferSize) ? totalBufferSize : count;	// transfer as much as fileSize, but limit to LoadFilStr_BufferSize 
 			while 	(pos < count) {
@@ -274,7 +274,7 @@ public class IoEngine_system extends IoEngine_base {
 					Closeable_close(trgChannel, trgUrl, false);
 					Closeable_close(srcStream, srcUrl, false);
 					Closeable_close(trgStream, srcUrl, false);
-					throw Exc_.new_exc(e, "io", "transfer data failed", "src", srcUrl.Xto_api(), "trg", trgUrl.Xto_api());
+					throw Err_.new_exc(e, "io", "transfer data failed", "src", srcUrl.Xto_api(), "trg", trgUrl.Xto_api());
 				}
 			    if (read == -1) break;
 			    pos += read;
@@ -341,12 +341,12 @@ public class IoEngine_system extends IoEngine_base {
 	}
 	void Chk_TrgFil_Overwrite(boolean overwrite, Io_url trg) {
 		if (!overwrite)
-			throw Exc_.new_invalid_op("trgFile exists but overwriteFlag not set").Args_add("trg", trg.Xto_api());		
+			throw Err_.new_invalid_op("trgFile exists but overwriteFlag not set").Args_add("trg", trg.Xto_api());		
 	}
 	@Override public void MoveDir(Io_url src, Io_url trg) {
 		String srcStr = src.Xto_api(), trgStr = trg.Xto_api();
 		File srcFil = new File(srcStr), trgFil = new File(trgStr);
-		if (trgFil.exists()) 	{throw Exc_.new_invalid_op("cannot move dir if trg exists").Args_add("src", src, "trg", trg);}
+		if (trgFil.exists()) 	{throw Err_.new_invalid_op("cannot move dir if trg exists").Args_add("src", src, "trg", trg);}
 		if (String_.Eq(src.OwnerRoot().Raw(), trg.OwnerRoot().Raw())) {			
 			srcFil.renameTo(trgFil);
 		}
@@ -360,7 +360,7 @@ public class IoEngine_system extends IoEngine_base {
 		try 	{closeable.close();}
 		catch 	(IOException e) {
 			if (throwErr)
-				throw Exc_.new_exc(e, "io", "close object failed", "class", ClassAdp_.NameOf_obj(closeable), "url", url_str);
+				throw Err_.new_exc(e, "io", "close object failed", "class", ClassAdp_.NameOf_obj(closeable), "url", url_str);
 //			else
 //				UsrDlg_._.Finally("failed to close FileChannel", "url", url, "apiErr", Err_.Message_err_arg(e));
 		}		
@@ -374,8 +374,8 @@ public class IoEngine_system extends IoEngine_base {
 		if (!Op_sys.Cur().Tid_is_drd())
 			IoEngine_system_xtn.SetWritable(fil, true);
 	}
-	private static Exc Err_text_unsupported_encoding(String encodingName, String text, String url_str, Exception e) {
-		return Exc_.new_exc(e, "io", "text is in unsupported encoding").Args_add("encodingName", encodingName, "text", text, "url", url_str);
+	private static Err Err_text_unsupported_encoding(String encodingName, String text, String url_str, Exception e) {
+		return Err_.new_exc(e, "io", "text is in unsupported encoding").Args_add("encodingName", encodingName, "text", text, "url", url_str);
 	}
 	boolean user_agent_needs_resetting = true;
 	@Override public Io_stream_rdr DownloadFil_as_rdr(IoEngine_xrg_downloadFil xrg) {
@@ -449,7 +449,7 @@ public class IoEngine_system extends IoEngine_base {
 					trg_stream.Rls();
 					DeleteFil_api(IoEngine_xrg_deleteFil.new_(xrg.Trg()));
 				}
-				catch (Exception e2) {Exc_.Noop(e2);}
+				catch (Exception e2) {Err_.Noop(e2);}
 			}
 			return false;
 		}
@@ -460,22 +460,22 @@ public class IoEngine_system extends IoEngine_base {
     			if (src_conn != null) src_conn.disconnect();
     			src_conn.getInputStream().close();
     		} 	catch (Exception exc) {
-    			Exc_.Noop(exc);
+    			Err_.Noop(exc);
     		}
     		if (trg_stream != null) trg_stream.Rls();
     	}
 	}	Io_url session_fil; Bry_bfr prog_fmt_bfr;
 		byte[] download_bfr; static final int Download_bfr_len = Io_mgr.Len_kb * 128;
-	public static Exc Err_Fil_NotFound(Io_url url) {
-		return Exc_.new_w_type(IoEngineArgs._.Err_FileNotFound, "file not found", "url", url.Xto_api()).Stack_erase_1_();
+	public static Err Err_Fil_NotFound(Io_url url) {
+		return Err_.new_(IoEngineArgs._.Err_FileNotFound, "file not found", "url", url.Xto_api()).Trace_ignore_add_1_();
 	}
-	public static Exc Err_Fil_NotFound(Exception e, Io_url url) {
-		return Exc_.new_exc(e, "io", "file not found", "url", url.Xto_api()).Stack_erase_1_();
+	public static Err Err_Fil_NotFound(Exception e, Io_url url) {
+		return Err_.new_exc(e, "io", "file not found", "url", url.Xto_api()).Trace_ignore_add_1_();
 	}
 	void MarkFileWritable(File fil, Io_url url, boolean readOnlyFails, String op) {	
 		if (Fil_ReadOnly(fil)) {
 			if (readOnlyFails)	// NOTE: java will always allow final files to be deleted; programmer api is responsible for check
-				throw Exc_.new_w_type(IoEngineArgs._.Err_ReadonlyFileNotWritable, "writable operation attempted on readOnly file", "op", op, "url", url.Xto_api());
+				throw Err_.new_(IoEngineArgs._.Err_ReadonlyFileNotWritable, "writable operation attempted on readOnly file", "op", op, "url", url.Xto_api());
 			else
 				Fil_Writable(fil);
 		}
@@ -483,7 +483,7 @@ public class IoEngine_system extends IoEngine_base {
 	void DeleteFil_lang(File fil, Io_url url) {	
 		boolean rv = Fil_Delete(fil);
 		if (!rv)
-			throw Exc_.new_w_type(IoEngineArgs._.Err_IoException, "file not deleted", "url", url.Xto_api());
+			throw Err_.new_(IoEngineArgs._.Err_IoException, "file not deleted", "url", url.Xto_api());
 	}
 	IoEngineUtl utl = IoEngineUtl.new_();
 	public static IoEngine_system new_() {return new IoEngine_system();} IoEngine_system() {}
@@ -610,10 +610,10 @@ class Io_stream_rdr_http implements Io_stream_rdr {
 			}
 			xrg.Prog_running_(false);
 		}
-		catch (Exception e) {Exc_.Noop(e);}	// ignore close errors; also Err_handle calls Rls() so it would be circular
+		catch (Exception e) {Err_.Noop(e);}	// ignore close errors; also Err_handle calls Rls() so it would be circular
 		finally {
 			try {if (src_stream != null) src_stream.close();} 
-			catch (Exception e) {Exc_.Noop(e);}	// ignore failures when cleaning up
+			catch (Exception e) {Err_.Noop(e);}	// ignore failures when cleaning up
 			if (src_conn != null) src_conn.disconnect();
 			src_stream = null;
 			src_conn = null;

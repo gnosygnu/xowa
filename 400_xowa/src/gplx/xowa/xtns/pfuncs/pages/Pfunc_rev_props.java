@@ -41,7 +41,7 @@ public class Pfunc_rev_props extends Pf_func_base {
 				bfr.Add_byte(Byte_ascii.Num_0);
 				break;
 			case Xol_kwd_grp_.Id_rev_protectionlevel: bfr.Add(rev_data.Protection_level()); break;
-			default: throw Exc_.new_unhandled(id);
+			default: throw Err_.new_unhandled(id);
 		}
 	}
 	public Pfunc_rev_props(int id) {this.id = id;}

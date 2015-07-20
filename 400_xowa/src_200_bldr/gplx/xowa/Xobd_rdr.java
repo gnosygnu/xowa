@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
+import gplx.core.consoles.*;
 import gplx.ios.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.xmls.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xobd_rdr implements Xob_cmd {
 	private Xob_bldr bldr; private Xowe_wiki wiki;
@@ -53,20 +54,20 @@ public class Xobd_rdr implements Xob_cmd {
 						wkr_ary[i].Wkr_run(page);
 				}
 				catch (Exception e) {
-					Exc_.Noop(e);
+					Err_.Noop(e);
 					long dividend = fil.Fil_pos();
 					if (dividend >= fil_len) dividend = fil_len - 1; // prevent % from going over 100
-					String msg = DecimalAdp_.CalcPctStr(dividend, fil_len, "00.00") + "|" + String_.new_u8(page.Ttl_full_db()) + "|\n" + Err_.Message_lang(e)  + "|" + Xot_tmpl_wtr.Err_string; Xot_tmpl_wtr.Err_string = "";
+					String msg = DecimalAdp_.CalcPctStr(dividend, fil_len, "00.00") + "|" + String_.new_u8(page.Ttl_full_db()) + "|" + Err_.Message_gplx_log(e)  + "|" + Xot_tmpl_wtr.Err_string; Xot_tmpl_wtr.Err_string = "";
 					bldr.Usr_dlg().Log_wkr().Log_to_session(msg);
-					ConsoleAdp._.WriteLine(msg);
+					Console_adp__sys.I.Write_str_w_nl(msg);
 				}
 			}
 		}
 		catch (Exception e) {
 			String msg = Err_.Message_lang(e);
 			bldr.Usr_dlg().Log_wkr().Log_to_session(msg);
-			ConsoleAdp._.WriteLine(msg);
-			throw Exc_.new_exc(e, "xo", "error while reading dump");
+			Console_adp__sys.I.Write_str_w_nl(msg);
+			throw Err_.new_exc(e, "xo", "error while reading dump");
 		}
 		finally {fil.Rls();}
 		bldr.Usr_dlg().Prog_none("", "", "reading completed: performing post-processing clean-up");
@@ -96,6 +97,6 @@ public class Xobd_rdr implements Xob_cmd {
 	String optRdrFillFmt = "reading ~{0} MB: ~{1} ~{2}";
 	static final String GRP_KEY = "xowa.bldr.rdr";
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		throw Exc_.new_unimplemented();
+		throw Err_.new_unimplemented();
 	}
 }

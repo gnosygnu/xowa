@@ -68,7 +68,7 @@ public class Xohd_abrv_mgr {
 	}
 	private int Write_data(Bry_bfr bfr, Xoh_file_html_fmtr__base fmtr, Xog_page hpg, byte[] src, Xohd_data_itm__base[] imgs, int imgs_len, int uid_bgn, Hdump_html_fmtr_itm itm) {
 		bry_rdr.Pos_(uid_bgn);
-		int uid = itm.Subst_end_byte() == Byte_ascii.Nil ? -1 : bry_rdr.Read_int_to(itm.Subst_end_byte());
+		int uid = itm.Subst_end_byte() == Byte_ascii.Null ? -1 : bry_rdr.Read_int_to(itm.Subst_end_byte());
 		int uid_end = bry_rdr.Pos();			// set uid_end after subst_end
 		int rv = uid_end;
 		byte tid = itm.Tid();
@@ -132,7 +132,7 @@ public class Xohd_abrv_mgr {
 			if (tid == Xohd_abrv_.Tid_img) {
 				fmtr_img.Bld_bfr_many(bfr, img_src, img_view_w, img.Html_h());
 			}
-		} catch (Exception e) {Xoa_app_.Usr_dlg().Warn_many("", "", "abrv.read: page=~{0} itm=~{1} err=~{2}", hpg.Url_bry_safe(), img == null ? "<NULL>" : img.Data_print(), Err_.Message_gplx(e));}
+		} catch (Exception e) {Xoa_app_.Usr_dlg().Warn_many("", "", "abrv.read: page=~{0} itm=~{1} err=~{2}", hpg.Url_bry_safe(), img == null ? "<NULL>" : img.Data_print(), Err_.Message_gplx_full(e));}
 		return rv;
 	}
 	private int Write_redlink(Bry_bfr bfr, Xog_page hpg, int uid, int rv) {

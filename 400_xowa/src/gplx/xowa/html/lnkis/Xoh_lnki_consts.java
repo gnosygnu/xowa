@@ -40,7 +40,7 @@ public class Xoh_lnki_consts {
 			case Tid_img_cls_none:			return other_is_empty ? Bry_.Empty : Bry_.Add(Bry_img_cls_prefix, other, Byte_ascii.Quote_bry);
 			case Tid_img_cls_thumbimage:	rv = Bry_img_cls_thumbimage; break;
 			case Tid_img_cls_thumbborder:	rv = Bry_img_cls_thumbborder; break;
-			default:						throw Exc_.new_unhandled(tid);
+			default:						throw Err_.new_unhandled(tid);
 		}
 		if (other_is_empty) return rv;
 		rv = Bry_.Copy(rv);									// copy for replace below

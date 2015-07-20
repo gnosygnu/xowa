@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.ios; import gplx.*;
-import gplx.core.criterias.*;
+import gplx.core.consoles.*; import gplx.core.criterias.*;
 public interface IoEngine {
 	String		Key();
 	boolean		ExistsFil_api(Io_url url);
@@ -57,7 +57,7 @@ class IoEngineUtl {
 			engine.MoveDirDeep(IoEngine_xrg_xferDir.move_(xrg.Url(), recycleUrl).Overwrite_(false).ReadOnlyFails_(true));
 	}
 	public void DeleteDirDeep(IoEngine engine, Io_url dirUrl, IoEngine_xrg_deleteDir args) {
-		ConsoleDlg usrDlg = args.UsrDlg();
+		Console_adp usrDlg = args.UsrDlg();
 		IoItmDir dir = engine.QueryDir(dirUrl); if (!dir.Exists()) return;
 		for (Object subDirObj : dir.SubDirs()) {
 			IoItmDir subDir = (IoItmDir)subDirObj;
@@ -69,12 +69,12 @@ class IoEngineUtl {
 			if (!args.MatchCrt().Matches(subFil)) continue;
 			Io_url subFilUrl = subFil.Url();
 			try {engine.DeleteFil_api(IoEngine_xrg_deleteFil.new_(subFilUrl).ReadOnlyFails_(args.ReadOnlyFails()));}
-			catch (Exception exc) {usrDlg.WriteLineFormat(Err_.Message_lang(exc));}
+			catch (Exception exc) {usrDlg.Write_fmt_w_nl(Err_.Message_lang(exc));}
 		}
 		// all subs deleted; now delete dir
 		if (!args.MatchCrt().Matches(dir)) return;
 		try {engine.DeleteDir(dir.Url());}
-		catch (Exception exc) {usrDlg.WriteLineFormat(Err_.Message_lang(exc));}
+		catch (Exception exc) {usrDlg.Write_fmt_w_nl(Err_.Message_lang(exc));}
 	}
 	public void XferDir(IoEngine srcEngine, Io_url src, IoEngine trgEngine, Io_url trg, IoEngine_xrg_xferDir args) {
 		trgEngine.CreateDir(trg);
@@ -118,9 +118,9 @@ class IoEngineUtl {
 		rv.Exists_set(QueryDirDeepCore(rv, args.Url(), engine, args.Recur(), args.SubDirScanCrt(), args.DirCrt(), args.FilCrt(), args.UsrDlg(), args.DirInclude()));
 		return rv;
 	}
-	static boolean QueryDirDeepCore(IoItmDir ownerDir, Io_url url, IoEngine engine, boolean recur, Criteria subDirScanCrt, Criteria dirCrt, Criteria filCrt, ConsoleDlg usrDlg, boolean dirInclude) {
-		if (usrDlg.CanceledChk()) return false;
-		if (usrDlg.Enabled()) usrDlg.WriteTempText(String_.Concat("scan: ", url.Raw()));
+	static boolean QueryDirDeepCore(IoItmDir ownerDir, Io_url url, IoEngine engine, boolean recur, Criteria subDirScanCrt, Criteria dirCrt, Criteria filCrt, Console_adp usrDlg, boolean dirInclude) {
+		if (usrDlg.Canceled_chk()) return false;
+		if (usrDlg.Enabled()) usrDlg.Write_tmp(String_.Concat("scan: ", url.Raw()));
 		IoItmDir scanDir = engine.QueryDir(url);
 		for (Object subDirObj : scanDir.SubDirs()) {
 			IoItmDir subDir = (IoItmDir)subDirObj;

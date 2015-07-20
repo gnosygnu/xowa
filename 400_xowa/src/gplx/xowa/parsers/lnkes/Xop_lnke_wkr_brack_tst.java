@@ -61,7 +61,7 @@ public class Xop_lnke_wkr_brack_tst {
 		));
 	}
 	@Test  public void Encode_xwiki() {	// PURPOSE: href title and args should always be encoded; PAGE:en.w:List_of_Category_A_listed_buildings_in_West_Lothian DATE:2014-07-15
-		fxt.App().Usere().Wiki().Xwiki_mgr().Add_full(Bry_.new_u8("commons.wikimedia.org"), Bry_.new_u8("commons.wikimedia.org"));
+		fxt.App().Usere().Wiki().Xwiki_mgr().Add_full(Bry_.new_a7("commons.wikimedia.org"), Bry_.new_a7("commons.wikimedia.org"));
 		fxt.Test_parse_page_wiki_str		// encode page
 		( "[http://commons.wikimedia.org/%22%3E_A B]"
 		, "<a href=\"/site/commons.wikimedia.org/wiki/%22%3E_A\">B</a>"		// '%22%3E' not '">'

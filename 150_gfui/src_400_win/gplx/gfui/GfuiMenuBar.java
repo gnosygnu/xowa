@@ -50,7 +50,7 @@ public class GfuiMenuBar implements GfoInvkAble {
 			GfsCore._.AddObj(this, "GfuiMenuBar_");
 			GfsCore._.ExecRegy("gplx.gfui.GfuiMenuBar.ini");
 		}
-		catch (Exception e) {GfuiEnv_.ShowMsg(Err_.Message_gplx(e));}
+		catch (Exception e) {GfuiEnv_.ShowMsg(Err_.Message_gplx_full(e));}
 	}
 	String separatorText, mnemonicPrefix; int separatorIdx = 0;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
@@ -218,7 +218,7 @@ class GfuiMenuBarItm {
 	GfuiMenuBarItmCmd itmCmd;
 	Object under;
 		public static GfoMsg CmdMsg(GfuiMenuBarItm itm) {
-		if (itm.cmd == null) throw Exc_.new_null("cmd was null for menu").Args_add("key", itm.key, "text", itm.text);
+		if (itm.cmd == null) throw Err_.new_null().Args_add("key", itm.key, "text", itm.text);
 		return gplx.gfml.GfmlDataNde.XtoMsgNoRoot(itm.cmd);
 	}
 	public static GfuiMenuBarItm new_() {return new GfuiMenuBarItm();}
@@ -243,7 +243,7 @@ class GfuiMenuBarItmType {
 	GfuiMenuBarItmType(int v, String n) {val = v; name = n; regy.Add(n, this);}
 	public static GfuiMenuBarItmType parse_(String raw) {
 		try {return (GfuiMenuBarItmType)regy.Get_by(raw);}
-		catch (Exception e) {Exc_.Noop(e); throw Exc_.new_parse("GfuiMenuBarItmType", raw);}
+		catch (Exception e) {Err_.Noop(e); throw Err_.new_parse("GfuiMenuBarItmType", raw);}
 	}
 	static Hash_adp regy = Hash_adp_.new_();
 	public static final GfuiMenuBarItmType Root = new GfuiMenuBarItmType(1, "root");
@@ -261,7 +261,7 @@ class GfuiMenuBarItmCmd implements ActionListener {
 			GfsCore._.ExecOne(GfsCtx._, GfuiMenuBarItm.CmdMsg(itm));
 		}
 		catch (Exception e) {
-			GfuiEnv_.ShowMsg(Err_.Message_gplx(e));
+			GfuiEnv_.ShowMsg(Err_.Message_gplx_full(e));
 		}
 	}
 	public static GfuiMenuBarItmCmd new_(GfuiMenuBarItm itm) {

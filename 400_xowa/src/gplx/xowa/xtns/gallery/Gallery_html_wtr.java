@@ -121,7 +121,7 @@ public class Gallery_html_wtr {
 	}
 }
 class Gallery_html_wtr_ {
-	public static final byte[] Cls_packed = Bry_.new_u8(" mw-gallery-packed");
+	public static final byte[] Cls_packed = Bry_.new_a7(" mw-gallery-packed");
 	public static final Bry_fmtr
 	  Mgr_all_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<ul id=\"xowa_gallery_ul_~{gallery_id}\" class=\"gallery~{gallery_cls}\" style=\"~{gallery_style}\">~{itm_list}"

@@ -37,10 +37,10 @@ public class Wdata_date {
 		switch (date[0]) {
 			case Byte_ascii.Plus:	break;
 			case Byte_ascii.Dash:	year_sign = -1; break;
-			default:				throw Exc_.new_unhandled(date[0]);
+			default:				throw Err_.new_unhandled(date[0]);
 		}
 		int year_end = Bry_finder.Find_fwd(date, Byte_ascii.Dash, 1);
-		long year		= Long_.parse_or_(String_.new_a7(date, 1, year_end), -1); if (year == -1) throw Exc_.new_("parse failed", "raw", String_.new_a7(date));
+		long year		= Long_.parse_or_(String_.new_a7(date, 1, year_end), -1); if (year == -1) throw Err_.new_wo_type("parse failed", "raw", String_.new_a7(date));
 		int month		= Bry_.Xto_int_or(date, year_end +  1, year_end +  3, -1);
 		int day			= Bry_.Xto_int_or(date, year_end +  4, year_end +  6, -1);
 		int hour		= Bry_.Xto_int_or(date, year_end +  7, year_end +  9, -1);

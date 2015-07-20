@@ -20,7 +20,7 @@ import gplx.core.strings.*;
 public class DataRdr_ {
 	public static final DataRdr Null = new DataRdr_null();
 	public static DataRdr as_(Object obj) {return obj instanceof DataRdr ? (DataRdr)obj : null;}
-	public static DataRdr cast_(Object obj) {try {return (DataRdr)obj;} catch(Exception exc) {throw Exc_.new_type_mismatch_w_exc(exc, DataRdr.class, obj);}}
+	public static DataRdr cast_(Object obj) {try {return (DataRdr)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, DataRdr.class, obj);}}
 }
 class DataRdr_null implements DataRdr {
 	public String NameOfNode() {return XtoStr();} public String XtoStr() {return "<< NULL READER >>";}

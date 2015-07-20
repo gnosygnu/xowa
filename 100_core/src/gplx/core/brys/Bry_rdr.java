@@ -44,7 +44,7 @@ public class Bry_rdr {
 	public int Read_int_to_pipe()	{return Read_int_to(Byte_ascii.Pipe);}
 	public int Read_int_to_nl()		{return Read_int_to(Byte_ascii.Nl);}
 	public int Read_int_to_quote()	{return Read_int_to(Byte_ascii.Quote);}
-	public int Read_int_to_non_num(){return Read_int_to(Byte_ascii.Nil);}
+	public int Read_int_to_non_num(){return Read_int_to(Byte_ascii.Null);}
 	public int Read_int_to(byte to_char) {
 		int bgn = pos;
 		int rv = 0;
@@ -64,7 +64,7 @@ public class Bry_rdr {
 					break;
 				default: {
 					boolean match = b == to_char;
-					if (to_char == Byte_ascii.Nil) {// hack for Read_int_to_non_num
+					if (to_char == Byte_ascii.Null) {// hack for Read_int_to_non_num
 						--pos;
 						match = true;
 					}
@@ -141,12 +141,12 @@ public class Bry_rdr {
 		int bry_len = bry.length;
 		boolean match = Bry_.Match(src, pos, pos + bry_len, bry);
 		if (match) pos += bry_len;
-		else throw Exc_.new_("bry.rdr:chk failed", "bry", bry, "pos", pos);
+		else throw Err_.new_wo_type("bry.rdr:chk failed", "bry", bry, "pos", pos);
 	}
 	public void Chk_byte_or_fail(byte b) {
 		boolean match = pos < src_len ? src[pos] == b : false;
 		if (match) ++pos;
-		else throw Exc_.new_("bry.rdr:chk failed", "byte", b, "pos", pos);
+		else throw Err_.new_wo_type("bry.rdr:chk failed", "byte", b, "pos", pos);
 	}
 	public byte[] Mid_by_len_safe(int len) {
 		int end = pos + len; if (end > src_len) end = src_len;

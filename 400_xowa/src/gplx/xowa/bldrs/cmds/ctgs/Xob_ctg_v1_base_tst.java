@@ -37,10 +37,10 @@ class Xowd_page_wkr_ctg_fxt {
 		Xowe_wiki wiki = Xoa_app_fxt.wiki_tst_(app);
 		Xob_bldr bldr = Xoa_app_fxt.bldr_(app);
 		Xobd_parser_wkr_ctg_tstr wkr = (Xobd_parser_wkr_ctg_tstr)new Xobd_parser_wkr_ctg_tstr().Ctor(bldr, wiki);
-		byte[] bry = Bry_.new_u8("[[Category:");
+		byte[] bry = Bry_.new_a7("[[Category:");
 		wkr.Wkr_hooks().Add(bry, bry);
 		mgr.Wkr_add(wkr);
-		Xowd_page_itm page = new Xowd_page_itm().Text_(src);//.Ttl_(Bry_.new_u8("Test"), new Xow_ns_mgr());
+		Xowd_page_itm page = new Xowd_page_itm().Text_(src);//.Ttl_(Bry_.new_a7("Test"), new Xow_ns_mgr());
 		mgr.Wkr_bgn(bldr);
 		mgr.Wkr_run(page);
 		byte[][] ttl = (byte[][])wkr.Found().To_ary(byte[].class);

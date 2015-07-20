@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.bldrs.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.origs.*;
-import gplx.json.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.xtns.wdatas.core.*;
+import gplx.core.json.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.xtns.wdatas.core.*;
 import gplx.xowa.bldrs.cmds.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xob_wdata_db_cmd extends Xob_dump_mgr_base implements Xob_cmd {
 	private Wdata_tbl_mgr tbl_mgr = new Wdata_tbl_mgr();
@@ -148,9 +148,9 @@ class Wdata_alias_tbl extends Wdata_tbl_base {
 			Json_itm_kv kv = (Json_itm_kv)hash.Get_at(i);
 			byte[] key = kv.Key().Data_bry();
 			Json_grp val_grp = (Json_grp)kv.Val();
-			int val_grp_len = val_grp.Subs_len();
+			int val_grp_len = val_grp.Len();
 			for (int j = 0; j < val_grp_len; j++) {
-				Json_itm val_itm = val_grp.Subs_get_at(j);
+				Json_itm val_itm = val_grp.Get_at(j);
 				byte[] val = Bry_.Empty;
 				if		(val_itm.Tid() == Json_itm_.Tid_string)
 					val = val_itm.Data_bry();
@@ -208,8 +208,8 @@ class Wdata_link_tbl extends Wdata_tbl_base {
 			if (kv_val.Tid() == Json_itm_.Tid_string)
 				val = kv_val.Data_bry();
 			else {
-				Json_itm_nde val_nde = (Json_itm_nde)kv.Val();
-				Json_itm_kv val_name_kv = (Json_itm_kv)val_nde.Subs_get_at(0);	// ASSUME: 1st item is always "name" kv; EX: "name":"Earth"
+				Json_nde val_nde = (Json_nde)kv.Val();
+				Json_itm_kv val_name_kv = (Json_itm_kv)val_nde.Get_at(0);	// ASSUME: 1st item is always "name" kv; EX: "name":"Earth"
 				val = val_name_kv.Val().Data_bry();
 			}
 			insert_stmt.Clear()

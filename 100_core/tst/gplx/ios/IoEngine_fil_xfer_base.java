@@ -43,7 +43,7 @@ public abstract class IoEngine_fil_xfer_base {
 		fx.run_SaveFilText(trg, "trg");
 
 		try {IoEngine_xrg_xferFil.copy_(src, trg).Exec();}
-		catch (Exception exc) {Exc_.Noop(exc);
+		catch (Exception exc) {Err_.Noop(exc);
 			fx.tst_ExistsPaths(true, src, trg);
 			fx.tst_LoadFilStr(trg, "trg");
 			return;
@@ -73,7 +73,7 @@ public abstract class IoEngine_fil_xfer_base {
 		fx.run_SaveFilText(trg, "trg");
 
 		try {IoEngine_xrg_xferFil.move_(src, trg).Exec();}
-		catch (Exception exc) {Exc_.Noop(exc);
+		catch (Exception exc) {Err_.Noop(exc);
 			fx.tst_ExistsPaths(true, src);
 			fx.tst_ExistsPaths(true, trg);
 			fx.tst_LoadFilStr(trg, "trg");

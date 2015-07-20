@@ -41,7 +41,7 @@ public class Xodump_stats_tbl implements RlsAble {
 		stmt_insert = Db_stmt_.Rls(stmt_insert);
 	}
 	public void Insert(Xog_page hpg, Xodump_stats_itm hzip, int wtxt_len, int row_orig_len, int row_zip_len) {
-		Xopg_module_mgr js_mgr = hpg.Module_mgr();
+		Xopg_module_mgr js_mgr = hpg.Head_mgr();
 		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(tbl_name, flds);
 		stmt_insert.Clear()
 			.Val_int(fld_page_id				, hpg.Page_id())

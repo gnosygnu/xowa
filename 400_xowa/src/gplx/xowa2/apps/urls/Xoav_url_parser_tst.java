@@ -29,7 +29,7 @@ public class Xoav_url_parser_tst {
 class Xoav_url_parser_fxt {
 	private Xoav_url_parser url_parser = new Xoav_url_parser(); private Xoav_url url = new Xoav_url();
 	public void Clear() {
-		cur_wiki = Bry_.new_u8("en.wikipedia.org");
+		cur_wiki = Bry_.new_a7("en.wikipedia.org");
 		url.Clear();
 	}
 	public Xoav_url_parser_fxt Init_cur_wiki(String v) {cur_wiki = Bry_.new_u8(v); return this;} private byte[] cur_wiki;

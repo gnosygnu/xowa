@@ -39,7 +39,7 @@ public class Xof_bin_skip_mgr {
 		Xof_bin_skip_wkr rv = null;
 		if		(String_.Eq(key, Xof_bin_skip_wkr_.Key__page_gt_1))		rv = Xof_bin_skip_wkr__page_gt_1.I;
 		else if	(String_.Eq(key, Xof_bin_skip_wkr_.Key__small_size))	rv = Xof_bin_skip_wkr__small_size.I;
-		else															throw Exc_.new_unhandled(key);
+		else															throw Err_.new_unhandled(key);
 		if (!rv.Skip_init(cfg_mgr)) return null;
 		return rv;
 	}

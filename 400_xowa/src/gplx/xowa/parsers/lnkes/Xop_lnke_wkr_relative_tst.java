@@ -36,7 +36,7 @@ public class Xop_lnke_wkr_relative_tst {
 		fxt.Test_parse_page_wiki_str("[//en.wikipedia.org/wiki/Category:A A]", "<a href=\"/site/en.wikipedia.org/wiki/Category:A\">A</a>");
 	}
 	@Test   public void Relurl() {
-		fxt.App().Usere().Wiki().Xwiki_mgr().Add_full(Bry_.new_u8("en.wikipedia.org"), Bry_.new_u8("en.wikipedia.org"));
+		fxt.App().Usere().Wiki().Xwiki_mgr().Add_full(Bry_.new_a7("en.wikipedia.org"), Bry_.new_a7("en.wikipedia.org"));
 		fxt.Test_parse_page_wiki_str("[[//en.wikipedia.org/ a]]", "[<a href=\"/site/en.wikipedia.org/wiki/\">a</a>]");
 	}
 }

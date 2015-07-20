@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.math; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.strings.*; import gplx.xowa.apps.progs.*;
+import gplx.core.strings.*; import gplx.core.consoles.*; import gplx.xowa.apps.progs.*;
 public class Xof_math_mgr implements GfoInvkAble {
 	private Xoae_app app;
 	public ProcessAdp Cmd_convert_tex_to_dvi() {return cmd_convert_tex_to_dvi;} private ProcessAdp cmd_convert_tex_to_dvi = new ProcessAdp();
@@ -32,7 +32,7 @@ public class Xof_math_mgr implements GfoInvkAble {
 	public void Make_itm(Xof_math_itm rv, String wiki_key, byte[] math_bry) {
 		Io_url math_dir = Make_math_dir(wiki_key);
 		math_bry = app.Math_subst_regy().Subst(math_bry);
-		String md5 = gplx.security.HashAlgo_.Md5.CalcHash(ConsoleDlg_.Null, gplx.ios.IoStream_.ary_(math_bry));
+		String md5 = gplx.security.HashAlgo_.Md5.CalcHash(Console_adp_.Noop, gplx.ios.IoStream_.ary_(math_bry));
 		Io_url png_fil = Make_png_fil(math_dir, md5);
 		rv.Ctor(math_bry, md5, png_fil);
 	}

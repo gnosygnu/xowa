@@ -44,7 +44,7 @@ class Xow_ttl_fxt {
 	public Xowe_wiki Wiki() {return fxt.Wiki();}
 	public void Reset() {
 		fxt.Reset();
-		fxt.Wiki().Xwiki_mgr().Add_full(Bry_.new_u8("fr"), Bry_.new_u8("fr.wikipedia.org"));
+		fxt.Wiki().Xwiki_mgr().Add_full(Bry_.new_a7("fr"), Bry_.new_a7("fr.wikipedia.org"));
 		test_raw = "Test page";
 		expd_ns_id = Int_.MinValue;
 		expd_xwik_txt = expd_full_txt = expd_full_url = expd_page_txt = expd_page_url = expd_leaf_txt = expd_leaf_url = expd_base_txt = expd_base_url

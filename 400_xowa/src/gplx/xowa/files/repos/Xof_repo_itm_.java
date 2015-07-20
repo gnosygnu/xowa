@@ -21,7 +21,7 @@ public class Xof_repo_itm_ {
 	public static final int Dir_depth_null = -1, Dir_depth_wmf = 2, Dir_depth_xowa = 4;
 	public static final byte Mode_orig = 0, Mode_thumb = 1, Mode_nil = Byte_.Max_value_127;
 	public static byte Mode_by_bool(boolean is_thumb) {return is_thumb ? Mode_thumb : Mode_orig;}
-	public static final byte[][] Mode_names_key = new byte[][] {Bry_.new_u8("orig"), Bry_.new_u8("thumb")};
+	public static final byte[][] Mode_names_key = new byte[][] {Bry_.new_a7("orig"), Bry_.new_a7("thumb")};
 	public static final byte Repo_remote = 0, Repo_local = 1, Repo_unknown = 126, Repo_null = Byte_.Max_value_127;
 	public static byte Repo_by_bool(boolean is_commons) {return is_commons ? Repo_remote : Repo_local;}
 	public static boolean Repo_is_known(byte repo) {

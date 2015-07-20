@@ -36,12 +36,12 @@ public class Xoa_gfs_mgr implements GfoInvkAble, GfoInvkRootWkr {
 		else if	(String_.Eq(type, "xowa_cfg_user"))		url = usr_fsys_mgr.App_data_cfg_user_fil();
 		else if	(String_.Eq(type, "xowa_cfg_os"))		{url = app_fsys_mgr.Bin_data_os_cfg_fil(); Xoa_gfs_mgr_.Cfg_os_assert(url);}
 		else if	(String_.Eq(type, "xowa_cfg_app"))		url = app_fsys_mgr.Root_dir().GenSubFil("xowa.gfs");
-		else											throw Exc_.new_("invalid gfs type", "type", type);
+		else											throw Err_.new_wo_type("invalid gfs type", "type", type);
 		try {Run_url(url);}
 		catch (Exception e) {				// gfs is corrupt; may happen if multiple XOWAs opened, and "Close all" chosen in OS; DATE:2014-07-01
 			if	(!String_.Eq(type, "xowa"))			// check if user.gfs
 				Io_mgr.I.MoveFil(url, url.GenNewNameOnly(url.NameOnly() + "-" + DateAdp_.Now().XtoStr_fmt_yyyyMMdd_HHmmss()));	// move file
-			Gfo_usr_dlg_.I.Warn_many("", "", "invalid gfs; obsoleting: src=~{0} err=~{1}", url.Raw(), Err_.Message_gplx(e));
+			Gfo_usr_dlg_.I.Warn_many("", "", "invalid gfs; obsoleting: src=~{0} err=~{1}", url.Raw(), Err_.Message_gplx_full(e));
 		}
 	}
 	public GfoMsg Parse_root_msg(String v) {return gplx.gfs.Gfs_msg_bldr._.ParseToMsg(v);}
@@ -67,7 +67,7 @@ public class Xoa_gfs_mgr implements GfoInvkAble, GfoInvkRootWkr {
 			}
 			return rv;
 		} catch (Exception e) {
-			Gfo_usr_dlg_.I.Warn_many("", "", "error while executing script: err=~{0}", Err_.Message_gplx(e));
+			Gfo_usr_dlg_.I.Warn_many("", "", "error while executing script: err=~{0}", Err_.Message_gplx_full(e));
 			return GfoInvkAble_.Rv_error;
 		}
 	}

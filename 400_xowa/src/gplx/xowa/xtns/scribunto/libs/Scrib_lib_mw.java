@@ -59,7 +59,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 			case Proc_newChildFrame:						return NewChildFrame(args, rslt);
 			case Proc_getFrameTitle:						return GetFrameTitle(args, rslt);
 			case Proc_setTTL:								return SetTTL(args, rslt);
-			default: throw Exc_.new_unhandled(key);
+			default: throw Err_.new_unhandled(key);
 		}
 	}
 	public static final int
@@ -250,7 +250,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		Xot_invk_mock frame = Xot_invk_mock.new_(parent_frame.Defn_tid(), 0, fnc_name, parser_func_args);	// pass something as frame_ttl; choosng fnc_name; DATE:2014-09-21
 		Xol_func_name_itm finder = cur_wiki.Lang().Func_regy().Find_defn(fnc_name, 0, fnc_name_len);
 		Xot_defn defn = finder.Func();
-		if (defn == Xot_defn_.Null) throw Exc_.new_("callParserFunction: function was not found", "function", String_.new_u8(fnc_name));
+		if (defn == Xot_defn_.Null) throw Err_.new_wo_type("callParserFunction: function was not found", "function", String_.new_u8(fnc_name));
 		Bry_bfr bfr = cur_wiki.Utl__bfr_mkr().Get_k004();
 		Xop_ctx fnc_ctx = Xop_ctx.new_sub_(cur_wiki);
 		fnc_ctx.Parse_tid_(Xop_parser_.Parse_tid_page_tmpl);	// default xnde names to template; needed for test, but should be in place; DATE:2014-06-27
@@ -340,7 +340,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 	public boolean NewChildFrame(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		Ordered_hash frame_list = core.Frame_created_list();
 		int frame_list_len = frame_list.Count();
-		if (frame_list_len > 100) throw Exc_.new_("newChild: too many frames");
+		if (frame_list_len > 100) throw Err_.new_wo_type("newChild: too many frames");
 		String frame_id = args.Pull_str(0);
 		Xot_invk frame = Scrib_frame_.Get_frame(core, frame_id);
 		Object ttl_obj = args.Cast_obj_or_null(1);	// NOTE: callers must pass named title else title will be false; EX: frame:newChild{'current', 'title0'} -> false; frame:newChild{'current', title='title0'} -> 'title0'; DATE:2014-05-20
@@ -351,7 +351,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		}
 		else {
 			ttl = Xoa_ttl.parse_(cur_wiki, Bry_.new_u8((String)ttl_obj));
-			if (ttl == null) throw Exc_.new_("newChild: invalid title", "title", (String)ttl_obj);
+			if (ttl == null) throw Err_.new_wo_type("newChild: invalid title", "title", (String)ttl_obj);
 		}
 		KeyVal[] args_ary = args.Pull_kv_ary(2);
 		Xot_invk_mock new_frame = Xot_invk_mock.new_(core.Frame_current().Defn_tid(), 0, ttl.Full_txt(), args_ary); // NOTE: use spaces, not unders; REF.MW:$frame->getTitle()->getPrefixedText(); DATE:2014-08-14

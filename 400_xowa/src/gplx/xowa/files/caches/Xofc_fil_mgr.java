@@ -113,7 +113,7 @@ class Xofc_fil_mgr {
 			this.Save_all();		// save everything again
 		}
 		catch (Exception e) {
-			usr_dlg.Warn_many("", "", "failed to compress cache: err=~{0}", Err_.Message_gplx_brief(e));
+			usr_dlg.Warn_many("", "", "failed to compress cache: err=~{0}", Err_.Message_gplx_full(e));
 		}
 		finally {tbl.Conn().Txn_end();}
 	}

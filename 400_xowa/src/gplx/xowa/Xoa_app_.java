@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
-import gplx.dbs.*; import gplx.ios.*; import gplx.gfui.*; 
+import gplx.core.consoles.*; import gplx.dbs.*; import gplx.ios.*; import gplx.gfui.*; 
 import gplx.xowa.apps.*; import gplx.xowa.langs.*; import gplx.xowa.users.*;
 import gplx.xowa.files.*; import gplx.xowa.html.hdumps.*; import gplx.xowa.html.hdumps.core.*;
 import gplx.xowa.urls.encoders.*;
@@ -26,7 +26,7 @@ public class Xoa_app_ {
 		boot_mgr.Run(args);
 	}
 	public static final String Name = "xowa";
-	public static final String Version = "2.7.1.2";
+	public static final String Version = "2.7.3.1";
 	public static String Build_date = "2012-12-30 00:00:00";
 	public static String Op_sys;
 	public static String User_agent = "";
@@ -51,9 +51,9 @@ class Xoa_app_boot_mgr {
 			Run_app(args_mgr);
 		}
 		catch (Exception e) {
-			String err_str = Err_.Message_gplx(e);
+			String err_str = Err_.Message_gplx_full(e);
 			log_wtr.Log_to_err(err_str);
-			ConsoleAdp._.WriteLine(err_str);
+			Console_adp__sys.I.Write_str_w_nl(err_str);
 			if (log_wtr.Log_dir() == null) log_wtr.Log_dir_(Env_.AppUrl().OwnerDir().GenSubFil("xowa.log"));
 			log_wtr.Queue_enabled_(false);
 		}
@@ -112,7 +112,7 @@ class Xoa_app_boot_mgr {
 			}
 			if (rv.Args_get("show_args").Val_as_bool())
 				rv.Print_args(usr_dlg);
-		}	catch (Exception e) {usr_dlg.Warn_many("", "", "args failed: ~{0} ~{1}", chkpoint, Err_.Message_gplx(e)); return null;}
+		}	catch (Exception e) {usr_dlg.Warn_many("", "", "args failed: ~{0} ~{1}", chkpoint, Err_.Message_gplx_full(e)); return null;}
 		return rv;
 	}
 	private void Run_app(App_cmd_mgr args_mgr) {
@@ -150,16 +150,16 @@ class Xoa_app_boot_mgr {
 				app.Http_server().Home_(http_server_home);
 				app.Init_by_app(); chkpoint = "init_gfs";
 			}
-			catch (Exception e) {usr_dlg.Warn_many("", "", "app init failed: ~{0} ~{1}", chkpoint, Err_.Message_gplx(e));}
+			catch (Exception e) {usr_dlg.Warn_many("", "", "app init failed: ~{0} ~{1}", chkpoint, Err_.Message_gplx_full(e));}
 			app.Usr_dlg().Log_wkr_(app.Log_wtr());	// NOTE: log_wtr must be set for cmd-line (else process will fail);
 
 			// run gfs
 			gplx.xowa.users.prefs.Prefs_rename_mgr._.Check(app.Usere().Fsys_mgr().App_data_cfg_user_fil());
 			try {app.Gfs_mgr().Run_url(cmd_file); chkpoint = "run_url";}
 			catch (Exception e) {
-				usr_dlg.Warn_many("", "", "script file failed: ~{0} ~{1} ~{2}", chkpoint, cmd_file.Raw(), Err_.Message_gplx(e));
+				usr_dlg.Warn_many("", "", "script file failed: ~{0} ~{1} ~{2}", chkpoint, cmd_file.Raw(), Err_.Message_gplx_full(e));
 				if (app_type_is_gui)
-					GfuiEnv_.ShowMsg(Err_.Message_gplx(e));
+					GfuiEnv_.ShowMsg(Err_.Message_gplx_full(e));
 			}
 			gplx.xowa.apps.setups.Xoa_setup_mgr.Delete_old_files(app);
 
@@ -172,7 +172,7 @@ class Xoa_app_boot_mgr {
 			else {
 				if (cmd_text != null) {
 					gplx.xowa.servers.Gxw_html_server.Init_gui_for_server(app, null); // NOTE: must init kit else "app.shell.fetch_page" will fail; DATE:2015-04-30
-					ConsoleAdp._.WriteLine_utf8(Object_.Xto_str_strict_or_empty(app.Gfs_mgr().Run_str(cmd_text)));
+					Console_adp__sys.I.Write_str_w_nl_utf8(Object_.Xto_str_strict_or_empty(app.Gfs_mgr().Run_str(cmd_text)));
 				}
 				if (app_type_is_gui) {
 					app.Gui_mgr().Run(); chkpoint = "run";
@@ -181,7 +181,7 @@ class Xoa_app_boot_mgr {
 					if (gplx.xowa.xtns.scribunto.Scrib_core.Core() != null) gplx.xowa.xtns.scribunto.Scrib_core.Core().Term();
 			}
 		}
-		catch (Exception e) {usr_dlg.Warn_many("", "", "app launch failed: ~{0} ~{1}", chkpoint, Err_.Message_gplx(e));}
+		catch (Exception e) {usr_dlg.Warn_many("", "", "app launch failed: ~{0} ~{1}", chkpoint, Err_.Message_gplx_full(e));}
 		finally {
 			if (app != null && app_type_is_gui)	// only cancel if app_type_is_gui is true; (force cmd_line to end process)
 				app.Setup_mgr().Cmd_mgr().Canceled_y_();
@@ -194,7 +194,7 @@ class Xoa_app_boot_mgr {
 			case Op_sys.Tid_lnx: rv = "linux"; break;
 			case Op_sys.Tid_wnt: rv = "windows"; break;
 			case Op_sys.Tid_osx: rv = "macosx"; break;
-			default: throw Exc_.new_unhandled("unknown platform " + Op_sys.Cur());
+			default: throw Err_.new_unhandled("unknown platform " + Op_sys.Cur());
 		}
 		if (op_sys.Bitness() == Op_sys.Bitness_64) rv += "_64";
 		return rv;

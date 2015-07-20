@@ -40,7 +40,7 @@ public class Process_send_wtr {
 				case Byte_ascii.Quote: 				bfr.Add_byte(Byte_ascii.Backslash).Add_byte(b); break;
 				case Byte_ascii.Nl:			bfr.Add_byte(Byte_ascii.Backslash).Add_byte(Byte_ascii.Ltr_n); break;
 				case Byte_ascii.Cr:		bfr.Add_byte(Byte_ascii.Backslash).Add_byte(Byte_ascii.Ltr_r); break;
-				case Byte_ascii.Nil:				bfr.Add(CONST_escape_000); break;
+				case Byte_ascii.Null:				bfr.Add(CONST_escape_000); break;
 				case Byte_ascii.Backslash:			bfr.Add_byte(Byte_ascii.Backslash).Add_byte(Byte_ascii.Backslash); break;
 				default: 							bfr.Add_byte(b); break;
 			}

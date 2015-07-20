@@ -37,8 +37,8 @@ public class Dsv_tbl_parser implements GfoInvkAble, RlsAble {
 	public void Clear() {
 		fld_bgn = fld_idx = row_bgn = row_idx = 0;
 	}
-	public Exc Err_row_bgn(String fmt, int pos) {
-		return Exc_.new_(fmt, "line", String_.new_u8(src, row_bgn, pos)).Stack_erase_1_();
+	public Err Err_row_bgn(String fmt, int pos) {
+		return Err_.new_wo_type(fmt, "line", String_.new_u8(src, row_bgn, pos)).Trace_ignore_add_1_();
 	}
 	public void Update_by_fld(int pos) {
 		fld_bgn = pos;

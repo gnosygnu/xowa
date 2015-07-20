@@ -41,7 +41,7 @@ public abstract class List_adp_base implements List_adp, GfoInvkAble {
 	public void Add_many(Object... ary) {for (Object o : ary) Add_base(o);}
 	public int Count() {return count;}
 	public int Idx_last() {return count - 1;}
-	protected Object Get_at_base(int index) {if (index >= count || index < 0) throw Exc_.new_missing_idx(index, count);
+	protected Object Get_at_base(int index) {if (index >= count || index < 0) throw Err_.new_missing_idx(index, count);
 		return list[index];
 	}
 	protected void Add_base(Object o) {
@@ -80,11 +80,11 @@ public abstract class List_adp_base implements List_adp, GfoInvkAble {
 			list[i] = null;
 		count = 0;
 	}
-	@gplx.Virtual public void Del_at(int index) {if (index >= count || index < 0) throw Exc_.new_missing_idx(index, count);
+	@gplx.Virtual public void Del_at(int index) {if (index >= count || index < 0) throw Err_.new_missing_idx(index, count);
 		Collapse(index);
 		count--;
 	}
-	public void Move_to(int src, int trg) {if (src >= count || src < 0) throw Exc_.new_missing_idx(src, count); if (trg >= count || trg < 0) throw Exc_.new_missing_idx(trg, count);
+	public void Move_to(int src, int trg) {if (src >= count || src < 0) throw Err_.new_missing_idx(src, count); if (trg >= count || trg < 0) throw Err_.new_missing_idx(trg, count);
 		if (src == trg) return;	// position not changed
 		Object o = list[src];
 		int dif = trg > src ? 1 : -1;
@@ -124,7 +124,7 @@ public abstract class List_adp_base implements List_adp, GfoInvkAble {
 	}
 	public String[] To_str_ary() {return (String[])To_ary(String.class);}
 	public Object Get_at(int i) {return Get_at_base(i);}
-	public Object Get_at_last() {if (count == 0) throw Exc_.new_invalid_op("cannot call Get_at_last on empty list"); return Get_at_base(count - 1);}
+	public Object Get_at_last() {if (count == 0) throw Err_.new_invalid_op("cannot call Get_at_last on empty list"); return Get_at_base(count - 1);}
 	public void Add(Object item) {Add_base(item);}
 	public void Add_at(int i, Object o) {AddAt_base(i, o);}
 	public void Del(Object item) {Del_base(item);}
@@ -140,7 +140,7 @@ public abstract class List_adp_base implements List_adp, GfoInvkAble {
 			&&	end >= 0 && end < len
 			&&	bgn <= end
 			)	return;
-		throw Exc_.new_("bounds check failed", "bgn", bgn, "end", end, "len", len);
+		throw Err_.new_wo_type("bounds check failed", "bgn", bgn, "end", end, "len", len);
 	}
 	void Resize_expand() {Resize_expand(count * 2);}
 	void Resize_expand(int newCount) {

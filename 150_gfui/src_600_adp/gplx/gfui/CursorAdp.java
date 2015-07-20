@@ -27,7 +27,7 @@ public class CursorAdp {
 				else {
 			java.awt.Robot robot = null;
 			try {robot = new java.awt.Robot();}
-			catch (java.awt.AWTException e) {throw Exc_.new_exc(e, "ui", "cursor pos set failed");}
+			catch (java.awt.AWTException e) {throw Err_.new_exc(e, "ui", "cursor pos set failed");}
 			robot.mouseMove(p.X(), p.Y());
 		}
 			}		

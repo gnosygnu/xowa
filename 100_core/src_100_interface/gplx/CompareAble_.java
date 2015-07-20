@@ -40,10 +40,10 @@ public class CompareAble_ {
 			return (actl * expt) > 0;			// actl=More||Less; expd will match if on same side of 0 (ex: expt=Less; actl=Less; -1 * -1 = 1)
 	}
 //		public static int FindSlot(ComparerAble comparer, Object[] ary, Object itm) {return FindSlot(comparer, ary, itm, false);}
-	public static int FindSlot(ComparerAble comparer, Object[] ary, Object itm) {if (itm == null) throw Exc_.new_null("itm is null");
+	public static int FindSlot(ComparerAble comparer, Object[] ary, Object itm) {if (itm == null) throw Err_.new_null();
 		int aryLen = ary.length;
 		switch (aryLen) {
-			case 0: throw Exc_.new_("ary cannot have 0 itms");
+			case 0: throw Err_.new_wo_type("ary cannot have 0 itms");
 			case 1: return 0;
 		}
 		int lo = -1, hi = aryLen - 1; // NOTE: -1 is necessary; see test

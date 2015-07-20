@@ -67,7 +67,7 @@ public class Xol_lnki_trail_mgr implements GfoInvkAble {
 	}
 	byte Add_rng_extract(GfoMsg m, String key) {
 		byte[] bry = m.ReadBry(key);
-		if (bry.length != 1) throw Exc_.new_("argument must be ascii character", "key", key, "bry", String_.new_u8(bry));
+		if (bry.length != 1) throw Err_.new_wo_type("argument must be ascii character", "key", key, "bry", String_.new_u8(bry));
 		return bry[0];
 	}
 }

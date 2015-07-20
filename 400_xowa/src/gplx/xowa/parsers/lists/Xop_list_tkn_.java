@@ -30,7 +30,7 @@ public class Xop_list_tkn_ {
 			case List_itmTyp_ol:	return Byt_ol;
 			case List_itmTyp_dt:
 			case List_itmTyp_dd:	return Byt_dl;
-			default:				throw Exc_.new_unhandled(b);
+			default:				throw Err_.new_unhandled(b);
 		}
 	}
 	public static byte[] XmlTag_itm(byte b) {
@@ -39,7 +39,7 @@ public class Xop_list_tkn_ {
 			case List_itmTyp_ol:	return Byt_li;
 			case List_itmTyp_dt:	return Byt_dt;
 			case List_itmTyp_dd:	return Byt_dd;
-			default:				throw Exc_.new_unhandled(b);
+			default:				throw Err_.new_unhandled(b);
 		}
 	}
 	public static byte Char_lst(byte b) {
@@ -48,7 +48,7 @@ public class Xop_list_tkn_ {
 			case List_itmTyp_ol:	return Byte_ascii.Hash;
 			case List_itmTyp_dt:	return Byte_ascii.Semic;
 			case List_itmTyp_dd:	return Byte_ascii.Colon;
-			default:				throw Exc_.new_unhandled(b);
+			default:				throw Err_.new_unhandled(b);
 		}
 	}
 }

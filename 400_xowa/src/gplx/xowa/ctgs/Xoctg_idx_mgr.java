@@ -33,7 +33,7 @@ public class Xoctg_idx_mgr implements GfoInvkAble {
 		int pipe_pos_cur = -1, pipe_pos_prv = -1;
 		for (int i = block_len; i < len; i += block_len) {
 			usr_dlg.Prog_many("", "", "indexing ~{0} ~{1}", i, len);
-			pipe_pos_cur = Bry_finder.Find_fwd(src, Byte_ascii.Pipe, i, len); if (pipe_pos_cur == Bry_.NotFound) throw Exc_.new_("ctg_idx_mgr could not find pipe.next", "ctg", String_.new_a7(ctg), "pos", i);
+			pipe_pos_cur = Bry_finder.Find_fwd(src, Byte_ascii.Pipe, i, len); if (pipe_pos_cur == Bry_.NotFound) throw Err_.new_wo_type("ctg_idx_mgr could not find pipe.next", "ctg", String_.new_a7(ctg), "pos", i);
 			if (pipe_pos_cur == len - 1) break;
 			Index_itm(ctg, src, pipe_pos_cur + 1, len);	// +1 to skip pipe
 			pipe_pos_prv = pipe_pos_cur;
@@ -43,7 +43,7 @@ public class Xoctg_idx_mgr implements GfoInvkAble {
 			Index_itm(ctg, src, pipe_pos_cur + 1, len);
 	}
 	private void Index_itm(byte[] ctg, byte[] src, int bgn, int len) {
-		int end = Bry_finder.Find_fwd(src, Byte_ascii.Pipe, bgn, len); if (end == Bry_.NotFound) throw Exc_.new_("Ctg_idx_mgr could not find pipe.end", "ctg", String_.new_a7(ctg), "pos", bgn);
+		int end = Bry_finder.Find_fwd(src, Byte_ascii.Pipe, bgn, len); if (end == Bry_.NotFound) throw Err_.new_wo_type("Ctg_idx_mgr could not find pipe.end", "ctg", String_.new_a7(ctg), "pos", bgn);
 		fld_rdr.Pos_(bgn);
 		Xoctg_idx_itm itm = new Xoctg_idx_itm().Parse(fld_rdr, bgn);
 		itms.Add(itm);

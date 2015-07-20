@@ -169,7 +169,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 				case Xoa_ctg_mgr.Tid_subc:	count = count_subcs; break;
 				case Xoa_ctg_mgr.Tid_file:	count = count_files; break;
 				case Xoa_ctg_mgr.Tid_page:	count = count_pages; break;
-				default:						throw Exc_.new_unhandled(i);
+				default:						throw Err_.new_unhandled(i);
 			}
 			idx_mgr.Total_(count);
 		}
@@ -327,7 +327,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 			int bgn = pos + 1 + (i * (Base85_utl.Len_int + gplx.xowa.apps.progs.Xoa_prog_mgr.Len_dlm_fld));
 			try {
 				int id = Base85_utl.XtoIntByAry(ary, bgn, bgn + Base85_utl.Len_int - 1);
-				if (id < 0) throw Exc_.new_("invalid id", "id", id);
+				if (id < 0) throw Err_.new_wo_type("invalid id", "id", id);
 				row.Id_(id);
 			}
 			catch (Exception e) {

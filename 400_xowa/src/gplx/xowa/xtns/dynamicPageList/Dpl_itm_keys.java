@@ -32,7 +32,7 @@ class Dpl_itm_keys {
 			case Dpl_itm_keys.Key_false:	return false;
 			case Dpl_itm_keys.Key_true:		return true;
 			case Dpl_itm_keys.Key_null:		return or;
-			default:						throw Exc_.new_unhandled(String_.new_u8(bry));	// shouldn't happen; should always go to or;
+			default:						throw Err_.new_unhandled(String_.new_u8(bry));	// shouldn't happen; should always go to or;
 		}
 	}
 	public static final byte

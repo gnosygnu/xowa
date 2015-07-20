@@ -50,7 +50,7 @@ public class z051_GfmlFldPool_keyed_tst {
 			tst_Keyed_PopNext(fldPool, GfmlItmKeys.NullKey);
 			Tfds.Fail("should have failed");
 		}
-		catch (Exception exc) {Exc_.Noop(exc);}
+		catch (Exception exc) {Err_.Noop(exc);}
 	}
 	@Test  public void PopByKey_PopNext() {
 		tst_Keyed_PopByKey(fldPool, "y", "y", "x", "z");

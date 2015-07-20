@@ -46,6 +46,6 @@ public class DsvStoreLayout {
 		return rv;
 	}
 	public static DsvStoreLayout as_(Object obj) {return obj instanceof DsvStoreLayout ? (DsvStoreLayout)obj : null;}
-	public static DsvStoreLayout cast_(Object obj) {try {return (DsvStoreLayout)obj;} catch(Exception exc) {throw Exc_.new_type_mismatch_w_exc(exc, DsvStoreLayout.class, obj);}}
+	public static DsvStoreLayout cast_(Object obj) {try {return (DsvStoreLayout)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, DsvStoreLayout.class, obj);}}
 	public static final String Key_const = "StoreLayoutWtr";
 }

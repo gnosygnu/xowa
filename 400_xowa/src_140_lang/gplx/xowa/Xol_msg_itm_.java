@@ -505,7 +505,7 @@ case Xol_msg_itm_.Id_xowa_wikidata_deprecated: return new_(Xol_msg_itm_.Id_xowa_
 case Xol_msg_itm_.Id_xowa_wikidata_normal: return new_(Xol_msg_itm_.Id_xowa_wikidata_normal, "xowa-wikidata-normal", "normal");
 case Xol_msg_itm_.Id_xowa_wikidata_preferred: return new_(Xol_msg_itm_.Id_xowa_wikidata_preferred, "xowa-wikidata-preferred", "preferred");
 case Xol_msg_itm_.Id_xowa_wikidata_links_special: return new_(Xol_msg_itm_.Id_xowa_wikidata_links_special, "xowa-wikidata-links-special", "Links (special wikis)");
-			default: throw Exc_.new_unhandled(id);
+			default: throw Err_.new_unhandled(id);
 		}
 	}
 	public static byte[] eval_(Bry_bfr bfr, Xol_msg_itm tmp_msg_itm, byte[] val, Object... args) {

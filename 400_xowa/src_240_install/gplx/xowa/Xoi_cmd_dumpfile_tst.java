@@ -70,7 +70,7 @@ class Xoi_cmd_dumpfile_fxt {
 		else if	(expd != null && actl != null) {
 			Tfds.Eq(expd, actl.Raw());
 		}
-		else if	(expd == null) throw Exc_.new_("actl should be null", "expd", expd);
-		else if	(actl == null) throw Exc_.new_("actl should not be null", "expd", expd);
+		else if	(expd == null) throw Err_.new_wo_type("actl should be null", "expd", expd);
+		else if	(actl == null) throw Err_.new_wo_type("actl should not be null", "expd", expd);
 	}
 }

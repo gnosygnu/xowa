@@ -192,7 +192,7 @@ class Xob_lnki_temp_wkr_ {
 			int id = i < ids_len ? rv[i] : -1;
 			wiki.Appe().Usr_dlg().Note_many("", "", "ns: ~{0} <- ~{1}", Int_.Xto_str_fmt(id, "0000"), alias);
 		}
-		if (aliases_len != ids_len) throw Exc_.new_("mismatch in aliases and ids", "aliases", aliases_len, "ids", ids_len);
+		if (aliases_len != ids_len) throw Err_.new_wo_type("mismatch in aliases and ids", "aliases", aliases_len, "ids", ids_len);
 		return rv;
 	}
 	private static int[] Ids_by_aliases(Xow_ns_mgr ns_mgr, String[] aliases) {

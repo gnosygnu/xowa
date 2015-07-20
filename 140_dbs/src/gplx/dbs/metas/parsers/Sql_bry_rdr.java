@@ -34,8 +34,8 @@ public class Sql_bry_rdr extends Bry_rdr {		public byte[] Read_sql_identifier() 
 		return Bry_.Mid(src, bgn, end);
 	}
 	@Override public Bry_rdr Skip_ws() {
-		byte b_0 = pos < src_len ? src[pos] : Byte_ascii.Nil;
-		byte bgn_1 = Byte_ascii.Nil;
+		byte b_0 = pos < src_len ? src[pos] : Byte_ascii.Null;
+		byte bgn_1 = Byte_ascii.Null;
 		byte[] end_bry = null;
 		switch (b_0) {
 			case Byte_ascii.Dash:	bgn_1 = Byte_ascii.Dash;		end_bry = Comm_end_line; break;
@@ -46,7 +46,7 @@ public class Sql_bry_rdr extends Bry_rdr {		public byte[] Read_sql_identifier() 
 			default:
 				return this;					
 		}
-		byte b_1 = pos + 1 < src_len ? src[pos + 1] : Byte_ascii.Nil;
+		byte b_1 = pos + 1 < src_len ? src[pos + 1] : Byte_ascii.Null;
 		if (b_1 != bgn_1) return this;
 		int end_pos = Bry_finder.Find_fwd(src, end_bry, pos + 2, src_len);
 		if (end_pos == Bry_finder.Not_found) return this;

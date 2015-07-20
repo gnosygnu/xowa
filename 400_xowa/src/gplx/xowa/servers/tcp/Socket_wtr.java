@@ -29,23 +29,23 @@ public class Socket_wtr {
 			socket.setSoTimeout(10000);
 			stream = socket.getOutputStream();
 					return this;
-		}	catch (Exception e) {throw Exc_.new_exc(e, "net", "failed to open socket", "host", host, "port", port);}
+		}	catch (Exception e) {throw Err_.new_exc(e, "net", "failed to open socket", "host", host, "port", port);}
 	}
 	public void Write(byte[] bry) {
 		try {
 					stream.write(bry, 0, bry.length);
-				}	catch (Exception e) {throw Exc_.new_exc(e, "net", "failed to write stream", "host", host, "port", port);}
+				}	catch (Exception e) {throw Err_.new_exc(e, "net", "failed to write stream", "host", host, "port", port);}
 	}
 	public void Close() {
 		try {
 					if (stream != null) stream.close();
 			if (socket != null) socket.close();
-				} 	catch (Exception e) {throw Exc_.new_exc(e, "net", "failed to close socket", "host", host, "port", port);}
+				} 	catch (Exception e) {throw Err_.new_exc(e, "net", "failed to close socket", "host", host, "port", port);}
 	}
 	public void Rls() {
 		try {
 					if (stream != null) stream.close();
 			if (socket != null) socket.close();
-				} 	catch (Exception e) {throw Exc_.new_exc(e, "net", "failed to release socket", "host", host, "port", port);}
+				} 	catch (Exception e) {throw Err_.new_exc(e, "net", "failed to release socket", "host", host, "port", port);}
 	}
 }

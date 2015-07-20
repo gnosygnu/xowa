@@ -65,7 +65,7 @@ class Xoh_tidy_wkr_jtidy implements Xoh_tidy_wkr {
 		}
 		catch (Exception exc) {
 			bfr.Add(orig);	// jtidy failed; restore original
-			app.Usr_dlg().Warn_many("", "", "jtidy.fail; page=~{0} exc=~{1}", page.Ttl().Full_db_as_str(), Err_.Message_gplx_brief(exc));
+			app.Usr_dlg().Warn_many("", "", "jtidy.fail; page=~{0} exc=~{1}", page.Ttl().Full_db_as_str(), Err_.Message_gplx_full(exc));
 		}
 		finally {
 			wtr.reset();

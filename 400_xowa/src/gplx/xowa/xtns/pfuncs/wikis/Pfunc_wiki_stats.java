@@ -35,7 +35,7 @@ public class Pfunc_wiki_stats extends Pf_func_base {
 			case Xol_kwd_grp_.Id_num_users:		v = stats.NumUsers(); break;
 			case Xol_kwd_grp_.Id_num_users_active: v = stats.NumUsersActive(); break;
 			case Xol_kwd_grp_.Id_num_admins:	v = stats.NumAdmins(); break;
-			default: throw Exc_.new_unhandled(id);
+			default: throw Err_.new_unhandled(id);
 		}
 		if (raw)
 			rslt_bfr.Add_int_variable(v);

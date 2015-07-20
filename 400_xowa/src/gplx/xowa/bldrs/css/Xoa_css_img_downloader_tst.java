@@ -115,7 +115,7 @@ public class Xoa_css_img_downloader_tst {
 		);
 	}
 	@Test  public void Import_url_relative_skip() {	// PURPOSE: if rel path, skip; "//site/a/b.css"; DATE:2014-02-03
-		fxt.Downloader().Stylesheet_prefix_(Bry_.new_u8("mem"));	// stylesheet prefix prefix defaults to ""; set to "mem", else test will try to retrieve "//url" which will fail
+		fxt.Downloader().Stylesheet_prefix_(Bry_.new_a7("mem"));	// stylesheet prefix prefix defaults to ""; set to "mem", else test will try to retrieve "//url" which will fail
 		Io_mgr.I.InitEngine_mem();
 		Io_mgr.I.SaveFilStr("mem//en.wikipedia.org/a/b.css", "imported_css");
 		fxt.Test_css_convert
@@ -144,7 +144,7 @@ public class Xoa_css_img_downloader_tst {
 		);
 	}
 	@Test  public void Wikisource_freedimg() {	// PURPOSE: check that "wikimedia" is replaced for FreedImg hack; PAGE:en.s:Page:Notes_on_Osteology_of_Baptanodon._With_a_Description_of_a_New_Species.pdf/3 DATE:2014-09-06
-		fxt.Downloader().Stylesheet_prefix_(Bry_.new_u8("mem"));	// stylesheet prefix prefix defaults to ""; set to "mem", else test will try to retrieve "//url" which will fail
+		fxt.Downloader().Stylesheet_prefix_(Bry_.new_a7("mem"));	// stylesheet prefix prefix defaults to ""; set to "mem", else test will try to retrieve "//url" which will fail
 		Io_mgr.I.InitEngine_mem();
 		Io_mgr.I.SaveFilStr("mem//en.wikisource.org/w/index.php?title=MediaWiki:Dynimg.css", ".freedImg img[src*=\"wikipedia\"], .freedImg img[src*=\"wikisource\"], .freedImg img[src*=\"score\"], .freedImg img[src*=\"math\"] {");
 		fxt.Test_css_convert

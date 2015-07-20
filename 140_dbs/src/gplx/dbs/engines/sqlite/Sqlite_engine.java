@@ -47,7 +47,7 @@ public class Sqlite_engine extends Db_engine_sql_base {
 			try {
 				Class.forName("org.sqlite.JDBC");
 			}
-			catch (ClassNotFoundException e) {throw Exc_.new_exc(e, "db", "could not load sqlite jdbc driver");}
+			catch (ClassNotFoundException e) {throw Err_.new_exc(e, "db", "could not load sqlite jdbc driver");}
 			loaded = true;					
 		}
 		Sqlite_conn_info conn_info_as_sqlite = (Sqlite_conn_info)conn_info;
@@ -56,31 +56,31 @@ public class Sqlite_engine extends Db_engine_sql_base {
 	}
 		public static final Sqlite_engine _ = new Sqlite_engine();
 }
-class Db_rdr__sqlite extends Db_rdr__basic {	@Override public byte Read_byte(String k)		{try {return (byte)Int_.cast_(rdr.getObject(k));} catch (Exception e) {throw Exc_.new_exc(e, "db", "read failed", "k", k, "type", Byte_.Cls_val_name);}} 
+class Db_rdr__sqlite extends Db_rdr__basic {	@Override public byte Read_byte(String k)		{try {return (byte)Int_.cast_(rdr.getObject(k));} catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "k", k, "type", Byte_.Cls_val_name);}} 
 		@Override public boolean Read_bool_by_byte(String k) {
 		try {
 			int val = rdr.getInt(k);
 			return val == 1;
-		} 	catch (Exception e) {throw Exc_.new_exc(e, "db", "read failed", "i", k, "type", Bool_.Cls_val_name);}
+		} 	catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "i", k, "type", Bool_.Cls_val_name);}
 	}
 	@Override public long Read_long(String k) {
 		try {
 			long val = rdr.getLong(k);
 			Number n = (Number)val;
 			return n.longValue();
-		} 	catch (Exception e) {throw Exc_.new_exc(e, "db", "read failed", "i", k, "type", Long_.Cls_val_name);}
+		} 	catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "i", k, "type", Long_.Cls_val_name);}
 	}
 	@Override public float Read_float(String k) {
 		try {
 			Double val = (Double)rdr.getDouble(k);
 			return val == null ? Float.NaN : val.floatValue();
-		} 	catch (Exception e) {throw Exc_.new_exc(e, "db", "read failed:", "i", k, "type", Float_.Cls_val_name);}
+		} 	catch (Exception e) {throw Err_.new_exc(e, "db", "read failed:", "i", k, "type", Float_.Cls_val_name);}
 	}
 	@Override public DateAdp Read_date_by_str(String k) {
 		try {
 			String val = rdr.getString(k);
 			return val == null ? null : DateAdp_.parse_fmt(val, "yyyyMMdd_HHmmss");
-		} 	catch (Exception e) {throw Exc_.new_exc(e, "db", "read failed", "i", k, "type", DateAdp_.Cls_ref_type);}
+		} 	catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "i", k, "type", DateAdp_.Cls_ref_type);}
 	}
 //	@Override public DecimalAdp ReadDecimalOr(String key, DecimalAdp or) {
 //		Object val = Read(key);

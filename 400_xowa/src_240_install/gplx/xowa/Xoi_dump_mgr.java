@@ -83,13 +83,13 @@ public class Xoi_dump_mgr implements GfoInvkAble {
 		switch (v) {
 			case Xoi_dump_mgr.Wiki_storage_type_xdat	: return "xdat";
 			case Xoi_dump_mgr.Wiki_storage_type_sqlite	: return "sqlite";
-			default										: throw Exc_.new_unhandled(v);
+			default										: throw Err_.new_unhandled(v);
 		}
 	}
 	public static byte Wiki_storage_type_parse(String v) {
 		if		(String_.Eq(v, "xdat"))				return Xoi_dump_mgr.Wiki_storage_type_xdat;
 		else if	(String_.Eq(v, "sqlite"))			return Xoi_dump_mgr.Wiki_storage_type_sqlite;
-		else										throw Exc_.new_unhandled(v);
+		else										throw Err_.new_unhandled(v);
 	}
 	private static final KeyVal[] Options_search_version_list = KeyVal_.Ary(KeyVal_.new_("1"), KeyVal_.new_("2")); 
 	public static String Options_search_version_str(byte v)		{return Byte_.Xto_str(v);}

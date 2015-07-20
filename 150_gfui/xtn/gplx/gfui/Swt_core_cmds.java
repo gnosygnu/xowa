@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
@@ -61,14 +62,14 @@ class Swt_core_cmds extends GxwCore_base {
 	}
 	@Override public String TipText() {return control.getToolTipText();} @Override public void TipText_set(String v) {control.setToolTipText(v);}
 	@Override public void Controls_add(GxwElem sub)	{
-		if (!compositeAble) throw Exc_.new_("cannot add sub to control");
+		if (!compositeAble) throw Err_.new_wo_type("cannot add sub to control");
 		Composite owner_as_composite = (Composite)control; 
 		Swt_control sub_as_WxSwt = (Swt_control)sub;
 		Control sub_as_swt = sub_as_WxSwt.Under_control();
 		sub_as_swt.setParent(owner_as_composite);
 	}
 	@Override public void Controls_del(GxwElem sub)	{
-		if (!compositeAble) throw Exc_.new_("cannot add sub to control");
+		if (!compositeAble) throw Err_.new_wo_type("cannot add sub to control");
 		Swt_control sub_as_WxSwt = (Swt_control)sub;
 		Control sub_as_swt = sub_as_WxSwt.Under_control();
 		sub_as_swt.dispose();	// SWT_NOTE: no way to officially remove sub from control; can only dispose
@@ -123,14 +124,14 @@ class Swt_core_cmds_dual extends GxwCore_base {
 	}
 	@Override public String TipText() {return inner.getToolTipText();} @Override public void TipText_set(String v) {inner.setToolTipText(v);}
 	@Override public void Controls_add(GxwElem sub)	{
-		if (!outer_is_composite) throw Exc_.new_("cannot add sub to outer");
+		if (!outer_is_composite) throw Err_.new_wo_type("cannot add sub to outer");
 		Composite owner_as_composite = (Composite)outer; 
 		Swt_control sub_as_WxSwt = (Swt_control)sub;
 		Control sub_as_swt = sub_as_WxSwt.Under_control();
 		sub_as_swt.setParent(owner_as_composite);
 	}
 	@Override public void Controls_del(GxwElem sub)	{
-		if (!outer_is_composite) throw Exc_.new_("cannot add sub to outer");
+		if (!outer_is_composite) throw Err_.new_wo_type("cannot add sub to outer");
 		Swt_control sub_as_WxSwt = (Swt_control)sub;
 		Control sub_as_swt = sub_as_WxSwt.Under_control();
 		sub_as_swt.dispose();	// SWT_NOTE: no way to officially remove sub from outer; can only dispose
@@ -220,7 +221,7 @@ class Swt_core_cmds_frames extends GxwCore_base {
 		prv_font = v;
 	}
 	@Override public String TipText() {return inner.getToolTipText();} @Override public void TipText_set(String v) {inner.setToolTipText(v);}
-	@Override public void Controls_add(GxwElem sub)	{throw Exc_.new_unimplemented();}
+	@Override public void Controls_add(GxwElem sub)	{throw Err_.new_unimplemented();}
 	@Override public void Controls_del(GxwElem sub)	{}
 	@Override public boolean Focus_has() {return inner.isFocusControl();}
 	@Override public boolean Focus_able() {return focus_able;} boolean focus_able;

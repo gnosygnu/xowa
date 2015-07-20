@@ -51,10 +51,10 @@ public class Xouc_setup_mgr implements GfoInvkAble {
 		boolean pass = false; String fail = "";
 		try {pass = new ProcessAdp().Exe_url_(Io_url_.new_fil_(exe)).Args_str_(arg).Run_wait_sync().Exit_code_pass();}
 		catch (Exception e) {
-			fail = Err_.Message_gplx_brief(e);
+			fail = Err_.Message_gplx_full(e);
 		}
 		if (!pass)
-			user.Appe().Usr_dlg().Prog_many("xowa.setup_mgr", "run.fail", "process exec failed: ~{0} ~{1} ~{2}", exe, arg, fail);
+			user.Appe().Usr_dlg().Prog_many("", "", "process exec failed: ~{0} ~{1} ~{2}", exe, arg, fail);
 		return pass;
 	}
 }

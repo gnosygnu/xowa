@@ -60,7 +60,7 @@ class Wdata_slink_grp {
 			case Idx_u: return msgs.Slink_tbl_hdr_u();
 			case Idx_n: return msgs.Slink_tbl_hdr_n();
 			case Idx_x: return msgs.Slink_tbl_hdr_x();
-			default:	throw Exc_.new_unhandled(tid);
+			default:	throw Err_.new_unhandled(tid);
 		}
 	}
 	public static byte[] Name_by_tid(int idx) {
@@ -74,7 +74,7 @@ class Wdata_slink_grp {
 			case Idx_u: return Xow_domain_type_.Key_bry_wikiversity;
 			case Idx_n: return Xow_domain_type_.Key_bry_wikinews;
 			case Idx_x: return Name_special;
-			default:	throw Exc_.new_unhandled(idx);
+			default:	throw Err_.new_unhandled(idx);
 		}
 	}
 	public static final int Idx__len = 9, Idx_w = 0, Idx_d = 1, Idx_s = 2, Idx_v = 3, Idx_q = 4, Idx_b = 5, Idx_u = 6, Idx_n = 7, Idx_x = 8;

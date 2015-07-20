@@ -166,7 +166,7 @@ public class IptBndMgr implements SrlAble {
 		else if (v == IptEventType_.MouseMove.Val())	return 5;
 		else if (v == IptEventType_.MouseWheel.Val())	return 6;
 		else if (v == IptEventType_.MousePress.Val())	return 7;
-		else											throw Exc_.new_unhandled(v);
+		else											throw Err_.new_unhandled(v);
 	}
 }
 class IptBndHash implements SrlAble {

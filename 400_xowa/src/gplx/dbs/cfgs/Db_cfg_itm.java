@@ -34,8 +34,8 @@ public class Db_cfg_itm {
 	public byte			To_byte()						{Fail_if_null(); try {return Byte_.parse_(val)				;} catch (Exception e) {throw err_parse(e, Byte_.Cls_val_name);}}
 	public int     		To_int()						{Fail_if_null(); try {return Int_.parse_(val)				;} catch (Exception e) {throw err_parse(e, Int_.Cls_val_name);}}
 	public String		To_str()						{Fail_if_null(); return val;}
-	private void		Fail_if_null()					{if (val == null) throw Exc_.new_("cfg.val is empty", "grp", grp, "key", key); }
-	private Exc			err_parse(Exception e, String type) {return Exc_.new_("cfg.val is not parseable", "grp", grp, "key", key, "val", val, "type", type).Stack_erase_1_();}
+	private void		Fail_if_null()					{if (val == null) throw Err_.new_wo_type("cfg.val is empty", "grp", grp, "key", key); }
+	private Err			err_parse(Exception e, String type) {return Err_.new_wo_type("cfg.val is not parseable", "grp", grp, "key", key, "val", val, "type", type).Trace_ignore_add_1_();}
 
 	private static final String Grp_none = "";
 	public static		Db_cfg_itm new_str		(String key, String val)						{return new Db_cfg_itm(Grp_none	, key, val);}

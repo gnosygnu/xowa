@@ -37,7 +37,7 @@ class Dpl_sort {
 		case Dpl_itm_keys.Key_categorysortkey: 	return Tid_categorysortkey;
 		case Dpl_itm_keys.Key_popularity: 		return Tid_popularity;	// FUTURE: default to categoryadd if counters disabled
 		case Dpl_itm_keys.Key_categoryadd: 		return Tid_categoryadd;
-		default:								throw Exc_.new_unhandled(key);
+		default:								throw Err_.new_unhandled(key);
 		}
 	}
 }

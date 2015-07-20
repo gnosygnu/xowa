@@ -81,7 +81,7 @@ class Imap_parser {
 						case Imap_itm_.Tid_invalid:			Parse_invalid(itm_bgn, itm_end); break;
 					}
 				}
-			} catch (Exception e) {usr_dlg.Warn_many("", "", "imap.parse:skipping line; page=~{0} line=~{1} err=~{2}", page_url.Xto_full_str_safe(), Bry_.Mid_safe(src, itm_bgn, itm_end), Err_.Message_gplx(e));}
+			} catch (Exception e) {usr_dlg.Warn_many("", "", "imap.parse:skipping line; page=~{0} line=~{1} err=~{2}", page_url.Xto_full_str_safe(), Bry_.Mid_safe(src, itm_bgn, itm_end), Err_.Message_gplx_full(e));}
 			++itm_idx;
 		}
 		rv.Init(xtn_mgr, imap_img_src, imap_img, imap_dflt, imap_desc, (Imap_itm_shape[])shapes.To_ary_and_clear(Imap_itm_shape.class), (Imap_err[])errs.To_ary_and_clear(Imap_err.class));

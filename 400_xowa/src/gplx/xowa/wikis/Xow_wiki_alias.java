@@ -26,8 +26,8 @@ public class Xow_wiki_alias {
 	public Xow_wiki_alias Parse(String fil_name) {return Parse(Bry_.new_a7(fil_name));}
 	public Xow_wiki_alias Parse(byte[] fil_name) {
 		int fil_name_len = fil_name.length;
-		int dash_0 = Bry_finder.Find_fwd(fil_name, Byte_ascii.Dash, 0			, fil_name_len); if (dash_0 == Bry_.NotFound) throw Exc_.new_parse_type(Xow_wiki_alias.class, String_.new_u8(fil_name));
-		int dash_1 = Bry_finder.Find_fwd(fil_name, Byte_ascii.Dash, dash_0 + 1	, fil_name_len); if (dash_1 == Bry_.NotFound) throw Exc_.new_parse_type(Xow_wiki_alias.class, String_.new_u8(fil_name));
+		int dash_0 = Bry_finder.Find_fwd(fil_name, Byte_ascii.Dash, 0			, fil_name_len); if (dash_0 == Bry_.NotFound) throw Err_.new_parse_type(Xow_wiki_alias.class, String_.new_u8(fil_name));
+		int dash_1 = Bry_finder.Find_fwd(fil_name, Byte_ascii.Dash, dash_0 + 1	, fil_name_len); if (dash_1 == Bry_.NotFound) throw Err_.new_parse_type(Xow_wiki_alias.class, String_.new_u8(fil_name));
 		domain = Parse__domain_name(fil_name, 0, dash_0);
 		date = String_.new_a7(fil_name, dash_0 + 1, dash_1);
 		tid = Parse__tid(fil_name, dash_1 + 1, fil_name_len);
@@ -63,7 +63,7 @@ public class Xow_wiki_alias {
 			case Xow_domain_type_.Tid_wikimedia:
 				return Bry_.Add(wiki_type.Lang_orig_key(), alias);
 			default:
-				throw Exc_.new_unhandled(tid);
+				throw Err_.new_unhandled(tid);
 		}
 	}
   	public static byte[] Parse_wmf_key(byte[] src) {return Parse__domain_name(src, 0, src.length);}
@@ -131,7 +131,7 @@ public class Xow_wiki_alias {
 	public static byte Parse__tid(byte[] src) {return Parse__tid(src, 0, src.length);}
 	public static byte Parse__tid(byte[] src, int bgn, int end) {
 		if (tid_bry_trie == null) Init_tids();
-		Object o = tid_bry_trie.Match_bgn(src, bgn, end); if (o == null) throw Exc_.new_parse_type(Xow_wiki_alias.class, String_.new_u8(src));
+		Object o = tid_bry_trie.Match_bgn(src, bgn, end); if (o == null) throw Err_.new_parse_type(Xow_wiki_alias.class, String_.new_u8(src));
 		return ((Byte_obj_ref)o).Val();
 	}
 	public static void Build_alias_by_lang_tid(Bry_bfr bfr, byte[] lang_key, Int_obj_ref wiki_tid) {
@@ -228,7 +228,7 @@ public class Xow_wiki_alias {
 			case Tid_categorylinks			: return Key_categorylinks;
 			case Tid_page_props				: return Key_page_props;
 			case Tid_image					: return Key_image;
-			default							: throw Exc_.new_unhandled(v);
+			default							: throw Err_.new_unhandled(v);
 		}
 	}
 	private static void Init_tid(String tid_str, byte tid) {

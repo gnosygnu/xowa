@@ -36,7 +36,7 @@ public class Scrib_lib_uri implements Scrib_lib {
 			case Proc_fullUrl:								return Url_func(args, rslt, Pfunc_urlfunc.Tid_full);
 			case Proc_canonicalUrl:							return Url_func(args, rslt, Pfunc_urlfunc.Tid_canonical);
 			case Proc_init_uri_for_page:					return Init_uri_for_page(args, rslt);
-			default: throw Exc_.new_unhandled(key);
+			default: throw Err_.new_unhandled(key);
 		}
 	}
 	private static final int Proc_anchorEncode = 0, Proc_localUrl = 1, Proc_fullUrl = 2, Proc_canonicalUrl = 3, Proc_init_uri_for_page = 4;

@@ -41,7 +41,7 @@ class Xox_xowa_html_cmd_fxt {
 		this.wiki = fxt.Wiki();
 		html_mgr = wiki.Html_mgr();			
 		wiki.Sys_cfg().Xowa_cmd_enabled_(true);
-		fxt.Page().Html_data().Module_mgr().Itm__css().Enabled_(false);
+		fxt.Page().Html_data().Head_mgr().Itm__css().Enabled_(false);
 		html_mgr.Page_wtr_mgr().Page_read_fmtr().Fmt_("<html><head></head><body>~{page_data}</body></html>");
 	}
 	public void Test_parse_w_skin(String raw, String expd) {

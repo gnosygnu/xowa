@@ -32,7 +32,7 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 		Xow_ns ns_itm = ttl.Ns(); byte[] ttl_bry = ttl.Page_db();
 		Xowd_page_itm db_page = Xowd_page_itm.new_tmp();
 		boolean found = load_mgr.Load_by_ttl(db_page, ns_itm, ttl_bry);
-		if (found) throw Exc_.new_("create requested but title already exists", "ttl", String_.new_u8(ttl_bry));
+		if (found) throw Err_.new_wo_type("create requested but title already exists", "ttl", String_.new_u8(ttl_bry));
 		int text_len = text.length;
 		Bry_bfr tmp = wiki.Utl__bfr_mkr().Get_m001();
 		int page_id = page_id_next++;
@@ -69,7 +69,7 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 		Xoa_ttl ttl = page.Ttl();
 		Xow_ns ns = ttl.Ns(); byte[] ttl_bry = ttl.Page_db();
 		Xowd_page_itm db_page = Xowd_page_itm.new_tmp();
-		if (!load_mgr.Load_by_ttl(db_page, ns, ttl_bry)) throw Exc_.new_("update requested but title does not exist", "ttl", String_.new_u8(ttl_bry));
+		if (!load_mgr.Load_by_ttl(db_page, ns, ttl_bry)) throw Err_.new_wo_type("update requested but title does not exist", "ttl", String_.new_u8(ttl_bry));
 		byte[] old_ttl = ttl_bry;
 		if (new_ttl != null) {
 			ttl_bry = new_ttl;

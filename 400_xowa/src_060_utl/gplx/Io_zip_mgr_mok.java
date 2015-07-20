@@ -27,10 +27,10 @@ public class Io_zip_mgr_mok implements Io_zip_mgr {
 	public byte[] Unzip_bry(byte[] src, int bgn, int len)		{
 		if (src == Bry_.Empty) return src;
 		byte[] section = Bry_.Mid(src, bgn, bgn + len);
-		if (!Bry_.Has_at_bgn(section, Bry_zipped, 0, section.length)) throw Exc_.new_("src not zipped", "section", String_.new_u8(section));
+		if (!Bry_.Has_at_bgn(section, Bry_zipped, 0, section.length)) throw Err_.new_wo_type("src not zipped", "section", String_.new_u8(section));
 		return Bry_.Mid(section, Bry_zipped.length, section.length);
 	}
 	public void Unzip_to_dir(Io_url src_fil, Io_url trg_dir) {}
-	private static final byte[] Bry_zipped = Bry_.new_u8("zipped:");
+	private static final byte[] Bry_zipped = Bry_.new_a7("zipped:");
 	public static final Io_zip_mgr_mok _ = new Io_zip_mgr_mok(); Io_zip_mgr_mok() {}
 }

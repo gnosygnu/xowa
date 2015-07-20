@@ -22,12 +22,12 @@ public class Xoac_wiki_itm implements Cfg_nde_obj, Xoac_wiki_obj {
 	public byte[][] Aliases() {return aliases;} private byte[][] aliases;
 	public byte[] Nde_key() {return key_bry;}
 	public boolean Nde_typ_is_grp() {return false;}
-	public Cfg_nde_obj Nde_subs_make(byte[] itm_type, byte[] itm_key, byte[][] itm_atrs) {throw Exc_.new_("leafs cannot have itms", "type", itm_type, "key", itm_key);}
-	public Cfg_nde_obj Nde_subs_get(byte[] key) {throw Exc_.new_("leafs cannot have itms", "key", key);}
+	public Cfg_nde_obj Nde_subs_make(byte[] itm_type, byte[] itm_key, byte[][] itm_atrs) {throw Err_.new_wo_type("leafs cannot have itms", "type", itm_type, "key", itm_key);}
+	public Cfg_nde_obj Nde_subs_get(byte[] key) {throw Err_.new_wo_type("leafs cannot have itms", "key", key);}
 	public int Nde_subs_len() {return 0;}
-	public Cfg_nde_obj Nde_subs_get_at(int i) {throw Exc_.new_("leafs cannot have itms", "idx", i);}
-	public void Nde_subs_add(byte[] itm_key, Cfg_nde_obj itm_obj) {throw Exc_.new_("leafs cannot have itms", "key", String_.new_u8(itm_key));}
-	public void Nde_subs_del(byte[] key) {throw Exc_.new_("leafs cannot delete itms", "key", String_.new_u8(key));}
+	public Cfg_nde_obj Nde_subs_get_at(int i) {throw Err_.new_wo_type("leafs cannot have itms", "idx", i);}
+	public void Nde_subs_add(byte[] itm_key, Cfg_nde_obj itm_obj) {throw Err_.new_wo_type("leafs cannot have itms", "key", String_.new_u8(itm_key));}
+	public void Nde_subs_del(byte[] key) {throw Err_.new_wo_type("leafs cannot delete itms", "key", String_.new_u8(key));}
 	public void Nde_atrs_set(byte[][] ary) {
 		int ary_len = ary.length;
 		if (ary_len > 0) aliases = Bry_.Split(ary[0], Byte_ascii.Semic);

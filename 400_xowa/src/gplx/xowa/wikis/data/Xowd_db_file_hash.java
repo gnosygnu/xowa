@@ -22,8 +22,8 @@ class Xowd_db_file_hash {
 	public void Clear() {hash.Clear(); count_total = 0;}
 	public void Del(Xowd_db_file file) {
 		Ordered_hash tids = (Ordered_hash)hash.Get_by(file.Tid());
-		if (tids == null) throw Exc_.new_("unknown file.tid", "url", file.Url());
-		if (!tids.Has(file.Id())) throw Exc_.new_("unknown file.id", "url", file.Url());
+		if (tids == null) throw Err_.new_wo_type("unknown file.tid", "url", file.Url());
+		if (!tids.Has(file.Id())) throw Err_.new_wo_type("unknown file.id", "url", file.Url());
 		tids.Del(file.Id());
 		--count_total;
 	}

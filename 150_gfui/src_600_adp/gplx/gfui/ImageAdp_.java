@@ -31,7 +31,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 public class ImageAdp_ {
 	public static ImageAdp as_(Object obj) {return obj instanceof ImageAdp ? (ImageAdp)obj : null;}
-	public static ImageAdp cast_(Object obj) {try {return (ImageAdp)obj;} catch(Exception exc) {throw Exc_.new_type_mismatch_w_exc(exc, ImageAdp.class, obj);}}
+	public static ImageAdp cast_(Object obj) {try {return (ImageAdp)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, ImageAdp.class, obj);}}
 	public static final ImageAdp Null = new_(10, 10);
 	public static ImageAdp new_(int width, int height) {
 		//		BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);	// JAVA: must be TYPE_INT_RGB or else ImageIO.write("bmp") will fail
@@ -49,7 +49,7 @@ public class ImageAdp_ {
 	}
 	public static SizeAdp SizeOf_svg(Io_url url) {return Gfui_svg_util.QuerySize(url);}
 	public static ImageAdp file_(Io_url url) {
-		if (url.EqNull()) throw Exc_.new_("cannot load image from null url");
+		if (url.EqNull()) throw Err_.new_wo_type("cannot load image from null url");
 		if (String_.Eq(url.Info().Key(), IoUrlInfo_.Mem.Key())) return txt_fil_(url);
 		if (!Io_mgr.I.ExistsFil(url)) return Null;
 
@@ -58,7 +58,7 @@ public class ImageAdp_ {
 			File f = new File(url.Xto_api());
 			img = ImageIO.read(f);
 		}
-		catch (IOException e) {throw Exc_.new_exc(e, "ui", "image load failed", "url", url.Xto_api());}
+		catch (IOException e) {throw Err_.new_exc(e, "ui", "image load failed", "url", url.Xto_api());}
 //		FileInputStream istream = new FileInputStream(new File(url.Xto_api()));
 //		JPEGImageDecoder dec = JPEGCodec.createJPEGDecoder(istream);
 //		BufferedImage im = dec.decodeAsBufferedImage();
@@ -110,7 +110,7 @@ class Gfui_svg_util {
 			double w = ParseAtr(xml, pos_ref, "width");
 			double h = ParseAtr(xml, pos_ref, "height");
 			return SizeAdp_.new_((int)w, (int)h);
-		} catch (Exception e) {Exc_.Noop(e); return SizeAdp_.Null;}
+		} catch (Exception e) {Err_.Noop(e); return SizeAdp_.Null;}
 	}
 	static double ParseAtr(String xml, Int_obj_ref pos_ref, String atr) {
 		int pos = String_.FindFwd(xml, atr, pos_ref.Val()); if (pos == -1) return -1;

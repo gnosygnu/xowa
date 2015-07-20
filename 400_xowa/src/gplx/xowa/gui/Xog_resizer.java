@@ -78,7 +78,7 @@ public class Xog_resizer {
 			try {
 				GfuiTextBox cur_box = (GfuiTextBox)cur_elem;
 				cur_box.Margins_set(0, txt_margin_v, 0, txt_margin_v);
-			}	catch (Exception e) {Exc_.Noop(e);}
+			}	catch (Exception e) {Err_.Noop(e);}
 		}
 		if (box.Mode() == Xog_layout_box.Mode_abs)	// absolute mode; set dimensions manually
 			cur_elem_rect.X_(box.X_abs()).Y_(box.Y_abs()).W_(box.W_abs()).H_(box.H_abs());

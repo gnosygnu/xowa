@@ -200,7 +200,7 @@ public class Xol_lang_srl_tst {
 class Xol_lang_srl_fxt {
 	public void Clear() {
 		app = Xoa_app_fxt.app_();
-		lang = new Xol_lang(app.Lang_mgr(), Bry_.new_u8("fr"));
+		lang = new Xol_lang(app.Lang_mgr(), Bry_.new_a7("fr"));
 		Xoa_gfs_mgr.Msg_parser_init();	// required by fallback_load
 	}	GfsCtx ctx = GfsCtx.new_(); Gfs_bldr bldr = new Gfs_bldr(); //Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	public Xoae_app App() {return app;} private Xoae_app app;

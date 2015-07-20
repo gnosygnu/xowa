@@ -73,7 +73,7 @@ class FocusTraversalPolicy_cls_base extends FocusTraversalPolicy {
 			try {elem = (GfuiElem)elems.Get_at(idx);}
 			catch (Exception e) {
 				System.out.println(idx);
-				Exc_.Noop(e);
+				Err_.Noop(e);
 			}
 			if (elem == null) return c; // FIXME: why is elem null?; REP: add new tab through history and then close out
 			if (elem.Focus_able() && elem.Visible()) {	
@@ -109,7 +109,7 @@ class FocusTraversalPolicy_cls_base extends FocusTraversalPolicy {
 			}
 			catch (Exception e) {
 				System.out.println(idx);
-				Exc_.Noop(e);				
+				Err_.Noop(e);				
 			}
 			if (elem == null) return c; // FIXME: why is elem null?; REP: add new tab through history and then close out
 			if (elem.Focus_able() && elem.Visible()) {

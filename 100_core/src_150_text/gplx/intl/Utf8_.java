@@ -51,7 +51,7 @@ public class Utf8_ {
 				return 3;
 			case 240: case 241: case 242: case 243: case 244: case 245: case 246: case 247:
 				return 4;
-			default: throw Exc_.new_("invalid initial utf8 byte", "byte", b);
+			default: throw Err_.new_wo_type("invalid initial utf8 byte", "byte", b);
 		}
 	}
 	public static byte[] Get_char_at_pos_as_bry(byte[] bry, int pos) {

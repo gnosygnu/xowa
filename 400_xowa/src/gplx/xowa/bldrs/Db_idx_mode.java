@@ -33,6 +33,6 @@ public class Db_idx_mode {
 		if		(String_.Eq(key, Key_skip))		return Itm_skip;
 		else if	(String_.Eq(key, Key_bgn))		return Itm_bgn;
 		else if	(String_.Eq(key, Key_end))		return Itm_end;
-		else									throw Exc_.new_unhandled(key);
+		else									throw Err_.new_unhandled(key);
 	}
 }

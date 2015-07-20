@@ -20,15 +20,16 @@ import gplx.dbs.*; import gplx.dbs.qrys.*;
 public class Xoud_bmk_itm_tbl implements RlsAble {
 	private final String tbl_name = "bmk_itm"; private final Db_meta_fld_list flds = Db_meta_fld_list.new_();
 	private final String fld_id, fld_owner, fld_sort, fld_name, fld_wiki, fld_url, fld_comment;
+	private Db_stmt stmt_update_sort;
 	public Xoud_bmk_itm_tbl(Db_conn conn) {
 		this.conn = conn;
 		fld_id						= flds.Add_int_pkey_autonum("itm_id");
 		fld_owner					= flds.Add_int("itm_owner");
 		fld_sort					= flds.Add_int("itm_sort");
-		fld_name					= flds.Add_str("itm_name", 255);
-		fld_wiki					= flds.Add_str("itm_wiki", 255);
-		fld_url						= flds.Add_str("itm_url", 255);
-		fld_comment					= flds.Add_str("itm_comment", 255);
+		fld_name					= flds.Add_str("itm_name"		, 255);
+		fld_wiki					= flds.Add_str("itm_wiki"		, 255);
+		fld_url						= flds.Add_str("itm_url"		, 1024);
+		fld_comment					= flds.Add_str("itm_comment"	, 4096);
 		conn.Rls_reg(this);
 	}
 	public Db_conn Conn() {return conn;} private final Db_conn conn;
@@ -48,6 +49,10 @@ public class Xoud_bmk_itm_tbl implements RlsAble {
 			.Val_bry_as_str(fld_wiki, wiki).Val_bry_as_str(fld_url, url).Val_bry_as_str(fld_comment, comment)
 			.Crt_int(fld_id, id)
 			.Exec_update();
+	}
+	public void Update_sort(int id, int sort) {
+		if (stmt_update_sort == null) stmt_update_sort = conn.Stmt_update(tbl_name, String_.Ary(fld_id), fld_sort);
+		stmt_update_sort.Clear().Val_int(fld_sort, sort).Crt_int(fld_id, id).Exec_update();;
 	}
 	public void Delete(int id) {
 		Db_stmt stmt_delete = conn.Stmt_delete(tbl_name, fld_id);
@@ -77,6 +82,13 @@ public class Xoud_bmk_itm_tbl implements RlsAble {
 		}
 		finally {rdr.Rls();}
 	}
+	public Xoud_bmk_itm_row Select_or_null(int id) {
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld_id).Crt_int(fld_id, id).Exec_select__rls_manual();
+		try {
+			return rdr.Move_next() ? new_row(rdr) : null;
+		}
+		finally {rdr.Rls();}
+	}
 	private Xoud_bmk_itm_row new_row(Db_rdr rdr) {
 		return new Xoud_bmk_itm_row
 		( rdr.Read_int(fld_id)
@@ -88,5 +100,7 @@ public class Xoud_bmk_itm_tbl implements RlsAble {
 		, rdr.Read_bry_by_str(fld_comment)
 		);
 	}
-	public void Rls() {}
+	public void Rls() {
+		stmt_update_sort = null;
+	}
 }

@@ -34,20 +34,20 @@ public class Socket_rdr {
 			stream = client.getInputStream();			
 			rdr_stream = new IoStream_stream_rdr().UnderRdr_(stream);
 					return this;
-		}	catch (Exception e) {throw Exc_.new_exc(e, "net", "failed to open socket", "port", port);}
+		}	catch (Exception e) {throw Err_.new_exc(e, "net", "failed to open socket", "port", port);}
 	}
 	public void Close() {
 		try {
 		//			if (server != null) server.close();
 			if (client != null) client.close();
 			if (stream != null) stream.close();
-				} 	catch (Exception e) {throw Exc_.new_exc(e, "net", "failed to close socket", "port", port);}
+				} 	catch (Exception e) {throw Err_.new_exc(e, "net", "failed to close socket", "port", port);}
 	}
 	public void Rls() {
 		try {
 					if (server != null) server.close();
 			if (client != null) client.close();
 			if (stream != null) stream.close();
-				} 	catch (Exception e) {throw Exc_.new_exc(e, "net", "failed to rls socket", "port", port);}
+				} 	catch (Exception e) {throw Err_.new_exc(e, "net", "failed to rls socket", "port", port);}
 	}
 }

@@ -90,6 +90,6 @@ public class Int_ary_ {
 		return (rv_idx == rv_len)	// on the off-chance that rv_len == rv_idx; EX: "1"
 			? rv
 			: (int[])Array_.Resize(rv, rv_idx);
-		} catch (Exception e) {Exc_.Noop(e); return or;}
+		} catch (Exception e) {Err_.Noop(e); return or;}
 	}
 }

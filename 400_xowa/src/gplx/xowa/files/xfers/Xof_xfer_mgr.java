@@ -313,7 +313,7 @@ public class Xof_xfer_mgr {
 			Io_url new_trg = trg_url.GenNewNameOnly(new_name);
 			if (trg_url.Eq(new_trg)) return true;	// HACK: io will delete file if moving unto itself; (i.e.: mv A.png A.png is same as del A.png); problem is that this proc is being called too many times
 			try {Io_mgr.I.MoveFil_args(trg_url, new_trg, true).Exec();}
-			catch (Exception exc) {Exc_.Noop(exc); return rslt.Fail("move failed");}
+			catch (Exception exc) {Err_.Noop(exc); return rslt.Fail("move failed");}
 			rslt.Trg_(new_trg);
 		}
 		return true;
@@ -331,7 +331,7 @@ public class Xof_xfer_mgr {
 			byte download_rslt = wmf_mgr.Download_wkr().Download(src_repo_is_wmf, src_str, trg_url, wmf_mgr.Download_wkr().Download_xrg().Prog_fmt_hdr());
 			if (download_rslt == gplx.ios.IoEngine_xrg_downloadFil.Rslt_fail_host_not_found) {
 				wiki.File_mgr().Cfg_download().Enabled_(false);
-				throw Exc_.new_("download_failed: host not found", "src", src_str, "trg", trg_url.Raw());
+				throw Err_.new_wo_type("download_failed: host not found", "src", src_str, "trg", trg_url.Raw());
 			}
 			pass = download_rslt == gplx.ios.IoEngine_xrg_downloadFil.Rslt_pass;
 		}

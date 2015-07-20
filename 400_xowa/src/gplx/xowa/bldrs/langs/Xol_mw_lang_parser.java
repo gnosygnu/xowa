@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.bldrs.langs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.intl.*; import gplx.php.*;
+import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.core.consoles.*; import gplx.intl.*; import gplx.php.*;
 import gplx.xowa.apps.fsys.*; import gplx.xowa.langs.*; import gplx.xowa.langs.numbers.*;
 public class Xol_mw_lang_parser {
 	private Php_parser parser = new Php_parser(); private Php_evaluator evaluator;
@@ -76,7 +76,7 @@ public class Xol_mw_lang_parser {
 				String text = Io_mgr.I.LoadFilStr(url);
 				Xol_lang lang = lang_mgr.Get_by_key_or_new(Bry_.new_u8(lang_key));
 				this.Parse_core(text, lang, bfr, lang_transform);
-			} catch (Exception exc) {Exc_.Noop(exc); Tfds.WriteText("failed to parse " + url.NameOnly() + Err_.Message_gplx_brief(exc) + "\n");}
+			} catch (Exception exc) {Err_.Noop(exc); Console_adp__sys.I.Write_str_w_nl("failed to parse " + url.NameOnly() + Err_.Message_gplx_full(exc));}
 		}
 	}
 	private void Parse_file_xtns_php(Xoa_lang_mgr lang_mgr, Io_url mediawiki_root, Bry_bfr bfr, Xol_lang_transform lang_transform) {
@@ -89,7 +89,7 @@ public class Xol_mw_lang_parser {
 			String text = Io_mgr.I.LoadFilStr(url);
 			boolean prepend_hash = String_.Eq("ParserFunctions.i18n.magic", url.NameOnly());
 			this.Parse_xtn(text, url, lang_mgr, bfr, prepend_hash, lang_transform);
-			} catch (Exception exc) {Exc_.Noop(exc); Tfds.WriteText("failed to parse " + url.NameOnly() + Err_.Message_gplx_brief(exc));}
+			} catch (Exception exc) {Err_.Noop(exc); Console_adp__sys.I.Write_str_w_nl("failed to parse " + url.NameOnly() + Err_.Message_gplx_full(exc));}
 		}
 	}
 	private void Parse_file_json(Xoa_lang_mgr lang_mgr, Bry_bfr bfr, Xol_lang_transform lang_transform, Io_url root_dir) {
@@ -104,7 +104,7 @@ public class Xol_mw_lang_parser {
 				try {
 					Xol_lang lang = lang_mgr.Get_by_key_or_new(Bry_.new_u8(fil.NameOnly()));
 					Xob_i18n_parser.Load_msgs(true, lang, fil);
-				}	catch (Exception exc) {Exc_.Noop(exc); Tfds.WriteText(String_.Format("failed to parse json file; url={0} err={1}\n", fil.Raw(), Err_.Message_gplx_brief(exc)));}
+				}	catch (Exception exc) {Err_.Noop(exc); Console_adp__sys.I.Write_str_w_nl(String_.Format("failed to parse json file; url={0} err={1}\n", fil.Raw(), Err_.Message_gplx_full(exc)));}
 			}
 		}
 	}
@@ -191,14 +191,14 @@ public class Xol_mw_lang_parser {
 							break;
 						case Tid_magicwords:
 							if (line.Key_subs().length == 0) continue;	// ignore lines like $magicWords = array();
-							if (line.Key_subs().length > 1) throw Exc_.new_("magicWords in xtn must have only 1 accessor", "len", line.Key_subs().length);
+							if (line.Key_subs().length > 1) throw Err_.new_wo_type("magicWords in xtn must have only 1 accessor", "len", line.Key_subs().length);
 							Php_key accessor = line.Key_subs()[0];
 							byte[] accessor_bry = accessor.Val_obj_bry();
 							if (Bry_.Eq(accessor_bry, lang_key))	// accessor must match lang_key
 								Parse_magicwords(line, lang.Key_bry(), lang.Kwd_mgr(), prepend_hash, lang_transform); 
 							break;
 					}
-				} catch (Exception exc) {Exc_.Noop(exc); Tfds.WriteText("failed to parse " + url.NameOnly() + Err_.Message_gplx_brief(exc) + "\n");}
+				} catch (Exception exc) {Err_.Noop(exc); Console_adp__sys.I.Write_str_w_nl("failed to parse " + url.NameOnly() + Err_.Message_gplx_full(exc));}
 			}
 		}
 	}
@@ -292,7 +292,7 @@ public class Xol_mw_lang_parser {
 	}
 	private boolean Parse_int_as_bool(Php_itm itm) {
 		int rv = Php_itm_.Parse_int_or(itm, Int_.MinValue);
-		if (rv == Int_.MinValue) throw Exc_.new_("value must be 0 or 1", "val", String_.new_u8(itm.Val_obj_bry()));
+		if (rv == Int_.MinValue) throw Err_.new_wo_type("value must be 0 or 1", "val", String_.new_u8(itm.Val_obj_bry()));
 		return rv == 1;
 	}
 	private void Parse_separatorTransformTable(Php_line_assign line, Xol_num_mgr num_mgr) {
@@ -310,7 +310,7 @@ public class Xol_mw_lang_parser {
 				||	Bry_.Eq(key_bry, Bry_separatorTransformTable_comma)
 				)
 				num_mgr.Separators_mgr().Set(key_bry, val_bry);
-			else throw Exc_.new_unhandled(String_.new_u8(key_bry));	// NOTE: as of v1.22.2, all Messages only have a key of "." or "," DATE:2014-04-15
+			else throw Err_.new_unhandled(String_.new_u8(key_bry));	// NOTE: as of v1.22.2, all Messages only have a key of "." or "," DATE:2014-04-15
 		}
 	}	private static final byte[] Bry_separatorTransformTable_comma = new byte[] {Byte_ascii.Comma}, Bry_separatorTransformTable_dot = new byte[] {Byte_ascii.Dot};
 	private void Parse_digitTransformTable(Php_line_assign line, Xol_num_mgr num_mgr) {

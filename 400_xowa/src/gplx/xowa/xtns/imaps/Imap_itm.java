@@ -32,7 +32,7 @@ class Imap_itm_ {
 			case Tid_shape_rect		: return Key_shape_rect;
 			case Tid_shape_circle	: return Key_shape_circle;
 			case Tid_shape_poly		: return Key_shape_poly;
-			default					: throw Exc_.new_unhandled(v);
+			default					: throw Err_.new_unhandled(v);
 		}
 	}
 }

@@ -53,11 +53,11 @@ public class Xoapi_popups implements GfoInvkAble, GfoEvMgrOwner {
 	public byte[]	Html_fmtr_next_sect_fmt_dflt()		{return html_fmtr_next_sect_dflt;}		private byte[] html_fmtr_next_sect_dflt			= Dflt_html_fmtr_next_sect;
 	public void Show_more(String popup_id) {
 		Xowe_wiki wiki = app.Gui_mgr().Browser_win().Active_tab().Wiki();
-		wiki.Html_mgr().Module_mgr().Popup_mgr().Show_more(popup_id);
+		wiki.Html_mgr().Head_mgr().Popup_mgr().Show_more(popup_id);
 	}
 	public void Show_all(String popup_id) {
 		Xowe_wiki wiki = app.Gui_mgr().Browser_win().Active_tab().Wiki();
-		wiki.Html_mgr().Module_mgr().Popup_mgr().Show_all(popup_id);
+		wiki.Html_mgr().Head_mgr().Popup_mgr().Show_all(popup_id);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_enabled))						return Yn.Xto_str(enabled);

@@ -58,6 +58,6 @@ public class Xobd_parser implements Xobd_wkr {
 	}
 	public void Wkr_print() {}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		throw Exc_.new_unimplemented();
+		throw Err_.new_unimplemented();
 	}
 }

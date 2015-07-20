@@ -49,10 +49,10 @@ public class Db_stmt_ {
 		return conn.Stmt_new(Db_qry_sql.rdr_(sql));
 	}
 	public static Err err_(Exception e, Db_stmt stmt, String proc) {
-		throw Exc_.new_exc(e, "db", "db stmt failed", "proc", proc);
+		throw Err_.new_exc(e, "db", "db stmt failed", "proc", proc);
 	}
 	public static Err err_(Exception e, String tbl, String proc) {
-		throw Exc_.new_exc(e, "core", "db call failed", "tbl", tbl, "proc", proc);
+		throw Err_.new_exc(e, "core", "db call failed", "tbl", tbl, "proc", proc);
 	}
 	public static Db_stmt Rls(Db_stmt v) {if (v != null) v.Rls(); return null;}
 }

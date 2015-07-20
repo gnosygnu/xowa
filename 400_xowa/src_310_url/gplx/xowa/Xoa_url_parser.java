@@ -59,7 +59,7 @@ public class Xoa_url_parser {
 			return false;
 		}
 		url.Protocol_is_relative_(gfo_url.Protocol_is_relative());
-		url.Err_(gfo_url.Err());
+		url.Err_code_(gfo_url.Err());
 		url.Raw_(src);
 		if (gfo_url.Site() != null && Bry_.Eq(gfo_url.Site(), Bry_upload_wikimedia_org)) {	// handle urls like "http://upload.wikimedia.org/wikipedia/commons/a/ab/C.svg"
 			byte[][] segs_ary = gfo_url.Segs();
@@ -121,7 +121,7 @@ public class Xoa_url_parser {
 		}
 		else
 			url.Args_(args);
-		return url.Err() == Gfo_url.Err_none;
+		return url.Err_code() == Gfo_url.Err_none;
 	}
 	private static byte[][] Segs_ary_remove_w(byte[][] ary) {
 		int len = ary.length;

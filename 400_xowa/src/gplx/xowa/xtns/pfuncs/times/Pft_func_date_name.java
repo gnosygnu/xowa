@@ -26,7 +26,7 @@ public class Pft_func_date_name extends Pf_func_base {
 	        case Pft_func_date_int.Date_tid_lcl: date = DateAdp_.Now(); break;
 	        case Pft_func_date_int.Date_tid_utc: date = DateAdp_.Now().XtoUtc(); break;
 	        case Pft_func_date_int.Date_tid_rev: date = ctx.Cur_page().Revision_data().Modified_on(); break;
-			default: throw Exc_.new_unhandled(date_tid);
+			default: throw Err_.new_unhandled(date_tid);
 	    }
 		byte[] val = ctx.Wiki().Msg_mgr().Val_by_id(base_idx + date.Segment(seg_idx));
 		bfr.Add(val);

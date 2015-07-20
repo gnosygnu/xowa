@@ -39,13 +39,13 @@ public class XmlDoc_ {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder bldr = null;
 		try 	{bldr = factory.newDocumentBuilder();}
-		catch 	(ParserConfigurationException e) {throw Exc_.new_exc(e, "xml", "failed to create newDocumentBuilder");}
+		catch 	(ParserConfigurationException e) {throw Err_.new_exc(e, "xml", "failed to create newDocumentBuilder");}
 		StringReader reader = new StringReader(raw);
 		InputSource source = new InputSource(reader);
 		Document doc = null;
 		try 	{doc = bldr.parse(source);}
-		catch 	(SAXException e) 	{throw Exc_.new_exc(e, "xml", "failed to parse xml", "raw", raw);} 
-		catch 	(IOException e) 	{throw Exc_.new_exc(e, "xml", "failed to parse xml", "raw", raw);}
+		catch 	(SAXException e) 	{throw Err_.new_exc(e, "xml", "failed to parse xml", "raw", raw);} 
+		catch 	(IOException e) 	{throw Err_.new_exc(e, "xml", "failed to parse xml", "raw", raw);}
 		return doc;		
 	}
 	public static final String Err_XmlException = "gplx.xmls.XmlException";

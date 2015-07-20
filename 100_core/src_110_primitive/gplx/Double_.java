@@ -29,12 +29,12 @@ public class Double_ {
 	, Inf_pos_bry	= Bry_.new_a7("INF")
 	;
 	public static boolean IsNaN(double v) {return Double.isNaN(v);}	
-	public static double cast_(Object o)					{try {return (Double)o;} catch(Exception e) {throw Exc_.new_type_mismatch_w_exc(e, double.class, o);}}
-	public static double parse_(String raw)					{try {return Double.parseDouble(raw);} catch(Exception e) {throw Exc_.new_parse_exc(e, double.class, raw);}}
-	public static double parse_or(String raw, double v)		{try {return Double.parseDouble(raw);} catch(Exception e) {Exc_.Noop(e); return v;}}
+	public static double cast_(Object o)					{try {return (Double)o;} catch(Exception e) {throw Err_.new_type_mismatch_w_exc(e, double.class, o);}}
+	public static double parse_(String raw)					{try {return Double.parseDouble(raw);} catch(Exception e) {throw Err_.new_parse_exc(e, double.class, raw);}}
+	public static double parse_or(String raw, double v)		{try {return Double.parseDouble(raw);} catch(Exception e) {Err_.Noop(e); return v;}}
 	public static double coerce_(Object v) {
 		try {String s = String_.as_(v); return s == null ? Double_.cast_(v) : Double_.parse_(s);}
-		catch (Exception e) {throw Exc_.new_cast(e, double.class, v);}
+		catch (Exception e) {throw Err_.new_cast(e, double.class, v);}
 	}
 	public static String Xto_str(double v) {
 				int v_int = (int)v;

@@ -53,16 +53,16 @@ public class Php_text_itm_parser {
 					if (txt_bgn != -1) {tmp_list.Add(new Php_text_itm_text(txt_bgn, i)); txt_bgn = -1; rslt_val = Rslt_dirty;}
 					boolean pos_is_last = i == raw_last;
 					int next_pos = i + 1;
-					byte next_char = pos_is_last ? Byte_ascii.Nil : raw[next_pos];
+					byte next_char = pos_is_last ? Byte_ascii.Null : raw[next_pos];
 					if (quote_is_single) {	// NOTE: q1 is simpler than q2; REF.MW:http://php.net/manual/en/language.types.String.php; DATE:2014-08-06
 						switch (next_char) {
 							case Byte_ascii.Apos:		next_char = Byte_ascii.Apos; break;
 							case Byte_ascii.Backslash:	next_char = Byte_ascii.Backslash; break;
-							default:					next_char = Byte_ascii.Nil; break;
+							default:					next_char = Byte_ascii.Null; break;
 						}
 					}
 					else {
-						if (pos_is_last) throw Exc_.new_("backslash_is_last_char", "raw", String_.new_u8(raw));
+						if (pos_is_last) throw Err_.new_wo_type("backslash_is_last_char", "raw", String_.new_u8(raw));
 						switch (next_char) {
 							case Byte_ascii.Backslash:	next_char = Byte_ascii.Backslash; break;
 							case Byte_ascii.Quote:		next_char = Byte_ascii.Quote; break;
@@ -87,10 +87,10 @@ public class Php_text_itm_parser {
 								i = next_pos + 2;	// +2 to skip rest; EX: \xc2; +2 for c2
 								continue;
 							}
-							default:					next_char = Byte_ascii.Nil; break;
+							default:					next_char = Byte_ascii.Null; break;
 						}
 					}
-					if (next_char == Byte_ascii.Nil) {
+					if (next_char == Byte_ascii.Null) {
 						if (txt_bgn == -1) txt_bgn = i;
 					}
 					else {
@@ -124,7 +124,7 @@ public class Php_text_itm_parser {
 	}	private static final byte[] CONST_utf_prefix = Bry_.new_a7("\\u00");
 	private void Parse_utf16(List_adp rv, byte[] src, int bgn, int src_len) {
 		int end = bgn + 4;
-		if (end >= src_len) throw Exc_.new_("utf16_parse", "src", String_.new_u8(src));
+		if (end >= src_len) throw Err_.new_wo_type("utf16_parse", "src", String_.new_u8(src));
 		int v = Int_.Xto_int_hex(src, bgn, end);	// +2; skip "\" + "u"
 		byte[] literal = gplx.intl.Utf16_.Encode_int_to_bry(v);
 		rv.Add(new Php_text_itm_utf16(bgn, end, literal));

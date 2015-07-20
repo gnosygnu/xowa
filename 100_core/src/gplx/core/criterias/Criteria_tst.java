@@ -86,7 +86,7 @@ class CriteriaFxt {
 	public void tst_MatchesNot(Criteria crt, Object... ary) {for (Object val : ary) Tfds.Eq(false, crt.Matches(val));}
 	public void tst_MatchesFail(Criteria crt, Object val) {
 		try {crt.Matches(val);}
-		catch(Exception exc) {Exc_.Noop(exc); return;}
+		catch(Exception exc) {Err_.Noop(exc); return;}
 		Tfds.Fail_expdError();
 	}
 }

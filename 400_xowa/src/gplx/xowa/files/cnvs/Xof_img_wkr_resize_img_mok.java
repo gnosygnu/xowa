@@ -21,7 +21,7 @@ public class Xof_img_wkr_resize_img_mok implements Xof_img_wkr_resize_img {
 	public boolean Resize_exec(Io_url src, Io_url trg, int trg_w, int trg_h, int ext_id, String_obj_ref rslt_val) {
 		SizeAdp src_size = ImageAdp_.txt_fil_(src).Size();
 		int src_w = src_size.Width(), src_h = src_size.Height();
-		if (trg_w < 1) throw Exc_.new_("trg_w must be > 0", "trg_w", trg_w);
+		if (trg_w < 1) throw Err_.new_wo_type("trg_w must be > 0", "trg_w", trg_w);
 		if (trg_h < 1) trg_h = Xof_xfer_itm_.Scale_h(src_w, src_h, trg_w);
 		Io_mgr.I.SaveFilStr(trg, SizeAdp_.new_(trg_w, trg_h).XtoStr());
 		return true;

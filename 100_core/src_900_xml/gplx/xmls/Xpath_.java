@@ -59,7 +59,7 @@ public class Xpath_ {
 	public static final String InnetTextKey = "&innerText";
 	public static KeyValHash ExtractKeyVals(String xml, Int_obj_ref posRef, String nodeName) {
 		int pos = posRef.Val();
-		Exc xmlErr = Exc_.new_("error parsing xml", "xml", xml, "pos", pos);
+		Err xmlErr = Err_.new_wo_type("error parsing xml", "xml", xml, "pos", pos);
 		String headBgnFind = "<" + nodeName + " "; int headBgnFindLen = String_.Len(headBgnFind);
 		int headBgn = String_.FindFwd(xml, headBgnFind, pos);						if (headBgn == String_.Find_none) return null;
 		int headEnd = String_.FindFwd(xml, ">", headBgn + headBgnFindLen);			if (headEnd == String_.Find_none) throw xmlErr;
@@ -67,14 +67,14 @@ public class Xpath_ {
 		KeyValHash rv = ExtractNodeVals(atrXml, xmlErr);
 		boolean noInnerText = String_.CharAt(xml, headEnd - 1) == '/';				// if />, then no inner text
 		if (!noInnerText) {
-			int tail = String_.FindFwd(xml, "</" + nodeName + ">", headBgn);		if (tail == String_.Find_none) throw Exc_.new_("could not find tailPos", "headBgn", headBgn);
+			int tail = String_.FindFwd(xml, "</" + nodeName + ">", headBgn);		if (tail == String_.Find_none) throw Err_.new_wo_type("could not find tailPos", "headBgn", headBgn);
 			String innerText = String_.Mid(xml, headEnd + 1, tail);
 			rv.Add(InnetTextKey, innerText);
 		}
 		posRef.Val_(headEnd);
 		return rv;
 	}
-	static KeyValHash ExtractNodeVals(String xml, Exc xmlErr) {
+	static KeyValHash ExtractNodeVals(String xml, Err xmlErr) {
 		KeyValHash rv = KeyValHash.new_();
 		int pos = 0;
 		while (true) {

@@ -142,7 +142,7 @@ public class Xob_wiki_cfg_bldr_tst {
 			}
 			sb.Add("\");');\n");
 			}
-			catch(Exception e) {sb.Add("// fail: " + wiki + " " + Err_.Message_gplx_brief(e)).Add_char_nl();}
+			catch(Exception e) {sb.Add("// fail: " + wiki + " " + Err_.Message_gplx_full(e)).Add_char_nl();}
 		}
 		return sb.Xto_str_and_clear();
 	}

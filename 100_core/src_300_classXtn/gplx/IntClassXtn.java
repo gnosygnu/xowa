@@ -21,7 +21,7 @@ public class IntClassXtn extends ClassXtn_base implements ClassXtn {
 	@Override public Class<?> UnderClass()					{return Integer.class;}	
 	public Object DefaultValue()								{return 0;}
 	@Override public Object ParseOrNull(String raw)				{return raw == null ? (Object)null : Int_.parse_(raw);}
-	public boolean Eq(Object lhs, Object rhs) {try {return Int_.cast_(lhs) == Int_.cast_(rhs);} catch (Exception e) {Exc_.Noop(e); return false;}}
+	public boolean Eq(Object lhs, Object rhs) {try {return Int_.cast_(lhs) == Int_.cast_(rhs);} catch (Exception e) {Err_.Noop(e); return false;}}
 	@Override public Object XtoDb(Object obj)					{return Int_.cast_(obj);}	// necessary for enums
 
 	public static final IntClassXtn _ = new IntClassXtn(); IntClassXtn() {} // added to ClassXtnPool by default

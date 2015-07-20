@@ -72,7 +72,7 @@ class DsvParser {
 				qteOn = false;
 			}
 			else
-				throw Exc_.new_("invalid quote in quoted field; quote must be followed by quote, fieldSpr, or recordSpr", "sym", strm.Cur(), "text", strm.Xto_str_by_pos(strm.Pos() - 10, strm.Pos() + 10));
+				throw Err_.new_wo_type("invalid quote in quoted field; quote must be followed by quote, fieldSpr, or recordSpr", "sym", strm.Cur(), "text", strm.Xto_str_by_pos(strm.Pos() - 10, strm.Pos() + 10));
 		}
 		else {																// regular char; append and continue
 			sb.Add(strm.Cur());
@@ -100,10 +100,10 @@ class DsvParser {
 			else if (String_.Eq(val, sym.FldNamesSym()))	lineMode = LineType_FldNames;	// @
 			else if (String_.Eq(val, sym.FldTypesSym()))	lineMode = LineType_FldTypes;	// $
 			else if (String_.Eq(val, sym.CommentSym()))		lineMode = LineType_Comment;	// '
-			else											throw Exc_.new_("unknown dsv cmd", "cmd", val);
+			else											throw Err_.new_wo_type("unknown dsv cmd", "cmd", val);
 		}
 		else
-			throw Exc_.new_("unable to process field value", "value", val);
+			throw Err_.new_wo_type("unable to process field value", "value", val);
 	}
 	void ProcessLine(CharStream strm, boolean cleanup) {
 		if (sb.Count() == 0 && tkns.Count() == 0)
@@ -207,7 +207,7 @@ class DsvTblBldr {
 	}
 	Object[] MakeValsAry(List_adp tkns) {
 		GfoFldList subFlds = tbl.SubFlds(); int subFldsCount = subFlds.Count();
-		if (tkns.Count() > subFldsCount) throw Exc_.new_("values.Count cannot be greater than fields.Count", "values.Count", tkns.Count(), "fields.Count", subFldsCount);
+		if (tkns.Count() > subFldsCount) throw Err_.new_wo_type("values.Count cannot be greater than fields.Count", "values.Count", tkns.Count(), "fields.Count", subFldsCount);
 		Object[] rv = new Object[subFldsCount];
 		for (int i = 0; i < subFldsCount; i++) {
 			ClassXtn typx = subFlds.Get_at(i).Type();

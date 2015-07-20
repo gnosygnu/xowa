@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
-import gplx.json.*;
+import gplx.core.json.*;
 public class Wdata_langtext_itm implements Wdata_lang_sortable {
 	public Wdata_langtext_itm(byte[] lang, byte[] text) {this.lang = lang; this.text = text;}  
 	public byte[] Lang() {return lang;} private final byte[] lang;

@@ -88,6 +88,6 @@ public class Xot_defn_tmpl implements Xot_defn {
 		page.Tmpl_stack_del();
 		return rv;
 	}
-	public Xot_defn Clone(int id, byte[] name) {throw Exc_.new_unimplemented();}
+	public Xot_defn Clone(int id, byte[] name) {throw Err_.new_unimplemented();}
 	boolean onlyInclude_exists;
 }

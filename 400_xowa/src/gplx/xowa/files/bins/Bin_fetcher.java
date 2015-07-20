@@ -25,7 +25,7 @@ class Bin_fetcher_fsys implements Bin_fetcher {
 	public void Init_src_url(Io_url src) {this.src = src;} private Io_url src;
 	public boolean Save_as_url(Io_url trg) {
 		try {Io_mgr.I.CopyFil(src, trg, true); return true;}
-		catch (Exception exc) {Exc_.Noop(exc); return false;}
+		catch (Exception exc) {Err_.Noop(exc); return false;}
 	}
 	public boolean Save_as_bry(Bry_obj_ref bry_ref) {
 		try {
@@ -33,7 +33,7 @@ class Bin_fetcher_fsys implements Bin_fetcher {
 			bry_ref.Val_(bry);
 			return true;
 		}
-		catch (Exception exc) {Exc_.Noop(exc); return false;}
+		catch (Exception exc) {Err_.Noop(exc); return false;}
 	}
 }
 class Bin_fetcher_http implements Bin_fetcher {
@@ -48,7 +48,7 @@ class Bin_fetcher_http implements Bin_fetcher {
 			bry_ref.Val_(rv);
 			return true;
 		}
-		catch (Exception exc) {Exc_.Noop(exc); return false;}
+		catch (Exception exc) {Err_.Noop(exc); return false;}
 	}
 }
 class Bin_fetcher_fsdb {

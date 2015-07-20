@@ -46,7 +46,7 @@ public class Pfunc_urlfunc extends Pf_func_base {	// EX: {{lc:A}} -> a
 				case Tid_local:		tmp_bfr.Add(ctx.Wiki().Props().ArticlePath());break;
 				case Tid_full:		tmp_bfr.Add(Bry_relative_url).Add(ctx.Wiki().Props().ServerName()).Add(ctx.Wiki().Props().ArticlePath()); break;
 				case Tid_canonical:	tmp_bfr.Add(ctx.Wiki().Props().Server()).Add(ctx.Wiki().Props().ArticlePath()); break;
-				default:			throw Exc_.new_unhandled(tid);
+				default:			throw Err_.new_unhandled(tid);
 			}
 			tmp_bfr.Add(ttl_ary);
 			trg.Add_bfr_and_clear(tmp_bfr);

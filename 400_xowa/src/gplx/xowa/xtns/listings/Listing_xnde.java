@@ -258,7 +258,7 @@ class Listing_xatrs {
 			case Xop_xnde_tag_.Tid_listing_listing: rv = Xop_xnde_tag_.Tag_listing_listing; break;
 			case Xop_xnde_tag_.Tid_listing_see:		rv = Xop_xnde_tag_.Tag_listing_see; break;
 			case Xop_xnde_tag_.Tid_listing_sleep:	rv = Xop_xnde_tag_.Tag_listing_sleep; break;
-			default: throw Exc_.new_unhandled(tid);
+			default: throw Err_.new_unhandled(tid);
 		}
 		return rv;
 	}

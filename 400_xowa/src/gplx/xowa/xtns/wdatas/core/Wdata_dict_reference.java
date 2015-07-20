@@ -42,7 +42,7 @@ public class Wdata_dict_reference {
 			case Tid_hash:						return Str_hash;
 			case Tid_snaks:						return Str_snaks;
 			case Tid_snaks_order:				return Str_snaks_order;
-			default: 							throw Exc_.new_unhandled(v);
+			default: 							throw Err_.new_unhandled(v);
 		}
 	}
 	public static byte[] Xto_bry(byte v) {
@@ -50,7 +50,7 @@ public class Wdata_dict_reference {
 			case Tid_hash:						return Bry_hash;
 			case Tid_snaks:						return Bry_snaks;
 			case Tid_snaks_order:				return Bry_snaks_order;
-			default: 							throw Exc_.new_unhandled(v);
+			default: 							throw Err_.new_unhandled(v);
 		}
 	}
 }

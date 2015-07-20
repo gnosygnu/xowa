@@ -27,7 +27,7 @@ public abstract class Obj_ary_parser_base {
 			return;
 		}
 		int pos_idx = 0;
-		int dlm_last = -1;	// NOTE: -1 b/c dlm_2 can be 0 (Byte_ascii.Nil) and need to do dlm_last != dlm_2 check below
+		int dlm_last = -1;	// NOTE: -1 b/c dlm_2 can be 0 (Byte_ascii.Null) and need to do dlm_last != dlm_2 check below
 		for (int i = bgn; i < end; i++) {
 			byte b = bry[i];
 			if (b == dlm_1 || b == dlm_2) {

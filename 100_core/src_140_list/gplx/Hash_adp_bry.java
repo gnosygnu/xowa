@@ -177,7 +177,7 @@ class Hash_adp_bry_itm_ci_utf8 extends Hash_adp_bry_itm_base {
 			case Gfo_case_mgr_.Tid_ascii:		if (Itm_ascii == null) Itm_ascii = new Hash_adp_bry_itm_ci_utf8(case_mgr); return Itm_ascii;
 			case Gfo_case_mgr_.Tid_utf8:		if (Itm_utf8  == null) Itm_utf8  = new Hash_adp_bry_itm_ci_utf8(case_mgr); return Itm_utf8;
 			case Gfo_case_mgr_.Tid_custom:		return new Hash_adp_bry_itm_ci_utf8(case_mgr);
-			default:							throw Exc_.new_unhandled(case_mgr.Tid());
+			default:							throw Err_.new_unhandled(case_mgr.Tid());
 		}
 	}
 	private static Hash_adp_bry_itm_ci_utf8 Itm_ascii, Itm_utf8;

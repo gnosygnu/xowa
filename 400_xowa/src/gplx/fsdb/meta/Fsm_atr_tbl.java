@@ -47,7 +47,7 @@ public class Fsm_atr_tbl {
 			}
 		}
 		finally {rdr.Rls();}
-		throw Exc_.new_("missing atr db", "conn", conn.Conn_info().Xto_api());
+		throw Err_.new_wo_type("missing atr db", "conn", conn.Conn_info().Xto_api());
 	}
 	public void Insert(int id, String url_rel) {
 		conn.Stmt_insert(tbl_name, flds).Val_int(fld_uid, id).Val_str(fld_url, url_rel).Exec_insert();

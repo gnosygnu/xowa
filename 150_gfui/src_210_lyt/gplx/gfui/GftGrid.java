@@ -111,7 +111,7 @@ public class GftGrid {
 				int h = band.Len1().Calc(this, band, owner, itm, availY);
 				band.Calc(owner, y, h);
 				y += h * bandDir.Val();
-				if (bandIdx + 1 >= bands.Count()) throw Exc_.new_("error retrieving band", "owner", owner.Key_of_GfuiElem(), "item", itm.Key_of_GfuiElem(), "bandIdx", bandIdx + 1, "count", bands.Count());
+				if (bandIdx + 1 >= bands.Count()) throw Err_.new_wo_type("error retrieving band", "owner", owner.Key_of_GfuiElem(), "item", itm.Key_of_GfuiElem(), "bandIdx", bandIdx + 1, "count", bands.Count());
 				band = (GftBand)bands.Get_at(++bandIdx);
 				band.Items().Clear();
 			}

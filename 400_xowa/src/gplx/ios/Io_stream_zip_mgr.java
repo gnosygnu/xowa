@@ -39,7 +39,7 @@ public class Io_stream_zip_mgr {
 			case Io_stream_.Tid_zip		: if (wtr_zip	== null) wtr_zip	= Io_stream_wtr_.new_by_mem(bfr, Io_stream_.Tid_zip)	; return wtr_zip.Open(); 
 			case Io_stream_.Tid_bzip2	: if (wtr_bzip2 == null) wtr_bzip2	= Io_stream_wtr_.new_by_mem(bfr, Io_stream_.Tid_bzip2)	; return wtr_bzip2.Open();
 			case Io_stream_.Tid_raw	:
-			default						: throw Exc_.new_unhandled(type);
+			default						: throw Err_.new_unhandled(type);
 		}
 	}
 	private Io_stream_rdr Rdr(byte type) {
@@ -48,7 +48,7 @@ public class Io_stream_zip_mgr {
 			case Io_stream_.Tid_zip		: if (rdr_zip	== null) rdr_zip	= Io_stream_rdr_.new_by_tid_(Io_stream_.Tid_zip)	; return rdr_zip; 
 			case Io_stream_.Tid_bzip2	: if (rdr_bzip2 == null) rdr_bzip2	= Io_stream_rdr_.new_by_tid_(Io_stream_.Tid_bzip2)	; return rdr_bzip2;
 			case Io_stream_.Tid_raw	:
-			default						: throw Exc_.new_unhandled(type);
+			default						: throw Err_.new_unhandled(type);
 		}
 	}
 }

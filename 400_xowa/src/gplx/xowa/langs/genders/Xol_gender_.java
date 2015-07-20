@@ -27,7 +27,7 @@ class Xol_gender__basic implements Xol_gender {
 			case Xol_gender_.Tid_male:		return when_m;
 			case Xol_gender_.Tid_female:	return when_f;
 			case Xol_gender_.Tid_unknown:	return when_u;
-			default:						throw Exc_.new_unimplemented();
+			default:						throw Err_.new_unimplemented();
 		}
 	}
 	public static final Xol_gender__basic I = new Xol_gender__basic(); Xol_gender__basic() {}

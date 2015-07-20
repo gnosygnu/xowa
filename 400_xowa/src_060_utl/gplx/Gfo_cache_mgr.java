@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
+import gplx.core.consoles.*;
 public class Gfo_cache_mgr {
 	private Ordered_hash hash = Ordered_hash_.new_bry_();
 	private Ordered_hash recent = Ordered_hash_.new_bry_();
@@ -64,7 +65,7 @@ public class Gfo_cache_mgr {
 		hash.Add(key, itm);
 	}
 	public void Reduce_recent() {
-//			ConsoleAdp._.WriteLine("reducing");
+//			Console_adp__sys.I.WriteLine("reducing");
 		int len = recent.Count();
 		for (int i = 0; i < len; i++) {
 			Gfo_cache_itm itm = (Gfo_cache_itm)recent.Get_at(i);
@@ -73,7 +74,7 @@ public class Gfo_cache_mgr {
 		recent.Clear();
 	}
 	public void Reduce_cache() {
-		ConsoleAdp._.WriteLine("compacting:");			
+		Console_adp__sys.I.Write_str_w_nl("compacting:");			
 //			hash.Sort();
 //			int len = hash.Count();
 //			List_adp deleted = List_adp_.new_();

@@ -34,7 +34,7 @@ public class Thread_adp implements Runnable {
 	public void Interrupt() {thread.interrupt();}
 	public void Join() {
 		try {thread.join();}
-		catch (Exception e) {Exc_.Noop(e);}
+		catch (Exception e) {Err_.Noop(e);}
 	}
 //	public void Stop() {thread.stop();}
 	public boolean IsAlive() {return thread.isAlive();}

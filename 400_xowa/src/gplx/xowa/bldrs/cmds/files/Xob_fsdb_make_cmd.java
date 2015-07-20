@@ -191,7 +191,7 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		}
 		catch (Exception exc) {
 			++exec_fail;
-			usr_dlg.Warn_many("", "", "download error; ttl=~{0} w=~{1} err=~{2}", fsdb.Orig_ttl(), fsdb.Lnki_w(), Err_.Message_gplx(exc));
+			usr_dlg.Warn_many("", "", "download error; ttl=~{0} w=~{1} err=~{2}", fsdb.Orig_ttl(), fsdb.Lnki_w(), Err_.Message_gplx_full(exc));
 		}
 	}
 	private void Download_exec(Xodb_tbl_oimg_xfer_itm fsdb) {
@@ -345,8 +345,8 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 			url = wiki.Fsys_mgr().Root_dir().GenSubDir("prv");		// v2: EX: /xowa/wiki/en.wikipedia.org/prv/
 			rv = Fsdb_db_mgr_.new_detect(wiki, url, url);			// note that v2 is prioritized over v1
 		}
-		else throw Exc_.new_("fsdb.make:unknown fsdb_type", "version", version);
-		if (rv == null) throw Exc_.new_("fsdb.make:source fsdb not found", "version", version, "url", url.Raw());
+		else throw Err_.new_wo_type("fsdb.make:unknown fsdb_type", "version", version);
+		if (rv == null) throw Err_.new_wo_type("fsdb.make:source fsdb not found", "version", version, "url", url.Raw());
 		return rv;
 	}
 	private static final byte Select_rv_stop = 0, Select_rv_process = 1, Select_rv_next_page = 2;

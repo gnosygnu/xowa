@@ -38,7 +38,7 @@ public class Xowd_page_itm_sorter implements ComparerAble {
 				int tid_comparable = Byte_.Compare(lhs_xtn.Tid(), rhs_xtn.Tid());
 				if (tid_comparable != CompareAble_.Same) return tid_comparable;
 				return Bry_.Compare(lhs_xtn.Sortkey(), rhs_xtn.Sortkey());
-			default:			throw Exc_.new_unhandled(compareType);
+			default:			throw Err_.new_unhandled(compareType);
 		}
 	}
 	Xowd_page_itm_sorter(byte compareType, int order) {this.compareType = compareType; this.order = order;}

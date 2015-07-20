@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.dbs;
-import gplx.*; import gplx.dbs.engines.sqlite.*;
+import gplx.*; import gplx.core.consoles.*; import gplx.dbs.engines.sqlite.*;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
@@ -123,7 +123,7 @@ public class SqliteDbMain {
 		}
 		rs.close();		
 		}catch(Exception e) {
-			Exc_.Noop(e);
+			Err_.Noop(e);
 		}
 	}
 	void Index() {
@@ -140,7 +140,7 @@ public class SqliteDbMain {
 		conn.commit();
 		conn.setAutoCommit(true);
 		}catch(Exception e) {
-			Exc_.Noop(e);
+			Err_.Noop(e);
 		}
 	}
 	void Mass_upload(Io_url dir) {
@@ -162,7 +162,7 @@ public class SqliteDbMain {
 		);
 		stat.executeUpdate(sql);
 	
-		ConsoleAdp._.WriteLine(DateAdp_.Now().XtoStr_fmt_yyyyMMdd_HHmmss_fff());
+		Console_adp__sys.I.Write_str_w_nl(DateAdp_.Now().XtoStr_fmt_yyyyMMdd_HHmmss_fff());
 //		stat.executeUpdate("BEGIN TRANSACTION");
 		stat.executeUpdate("PRAGMA synchronous=OFF");
 		stat.executeUpdate("PRAGMA count_changes=OFF");
@@ -176,13 +176,13 @@ public class SqliteDbMain {
 		conn.commit();
 		conn.setAutoCommit(true);
 		}catch(Exception e) {
-			Exc_.Noop(e);
+			Err_.Noop(e);
 		}
 	}
 	void Iterate_dir(Io_url dir) {
 		Io_url[] urls = Io_mgr.I.QueryDir_args(dir).DirInclude_().ExecAsUrlAry();
 		int urls_len = urls.length;
-		ConsoleAdp._.WriteLine(dir.Raw());
+		Console_adp__sys.I.Write_str_w_nl(dir.Raw());
 		boolean is_root = false;
 		for (int i = 0; i < urls_len; i++) {
 			Io_url url = urls[i];
@@ -193,7 +193,7 @@ public class SqliteDbMain {
 					is_root = true;
 					Insert_file(url);
 				}catch(Exception e) {
-					Exc_.Noop(e);
+					Err_.Noop(e);
 				}
 			}
 		}
@@ -203,7 +203,7 @@ public class SqliteDbMain {
 				stmt.clearBatch();
 			}			
 		}catch(Exception e) {
-			Exc_.Noop(e);
+			Err_.Noop(e);
 		}
 	}
 	void Insert_file(Io_url url) {
@@ -239,7 +239,7 @@ public class SqliteDbMain {
 		}
 		stmt.addBatch();
 		}catch(Exception e) {
-			Exc_.Noop(e);
+			Err_.Noop(e);
 		}
 	}
 }

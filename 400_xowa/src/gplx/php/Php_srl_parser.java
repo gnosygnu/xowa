@@ -188,10 +188,10 @@ public class Php_srl_parser {
 		}
 		throw err_(raw, raw_len, raw_len, "skip_ws found eos");
 	}
-	Exc err_(byte[] raw, int bgn, String fmt, Object... args) {return err_(raw, bgn, raw.length, fmt, args);}
-	Exc err_(byte[] raw, int bgn, int raw_len, String fmt, Object... args) {
+	Err err_(byte[] raw, int bgn, String fmt, Object... args) {return err_(raw, bgn, raw.length, fmt, args);}
+	Err err_(byte[] raw, int bgn, int raw_len, String fmt, Object... args) {
 		String msg = String_.Format(fmt, args) + " " + Int_.Xto_str(bgn) + " " + String_.new_u8_by_len(raw, bgn, 20);
-		return Exc_.new_(msg);
+		return Err_.new_wo_type(msg);
 	}
 }
 class Php_srl_factory {

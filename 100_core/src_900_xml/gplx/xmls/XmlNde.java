@@ -33,7 +33,7 @@ public class XmlNde {
 	    Transformer transformer = transformer_();
 	    StringWriter writer = new StringWriter();
 	    try {transformer.transform(new DOMSource(xnde), new StreamResult(writer));}
-	    catch (TransformerException e) {throw Exc_.new_exc(e, "xml", "failed to get xml string");}
+	    catch (TransformerException e) {throw Err_.new_exc(e, "xml", "failed to get xml string");}
 	    return writer.toString(); 
 	}
 	public String Text_inner() {return xnde.getTextContent();}
@@ -44,7 +44,7 @@ public class XmlNde {
 		TransformerFactory transformerfactory = TransformerFactory.newInstance();
 		Transformer transformer = null;
 		try {transformer = transformerfactory.newTransformer();}
-		catch (TransformerConfigurationException e) {throw Exc_.new_exc(e, "xml", "failed to get create transformer");}
+		catch (TransformerConfigurationException e) {throw Err_.new_exc(e, "xml", "failed to get create transformer");}
 	    transformer.setOutputProperty("omit-xml-declaration", "yes");
 		return transformer;
 	}

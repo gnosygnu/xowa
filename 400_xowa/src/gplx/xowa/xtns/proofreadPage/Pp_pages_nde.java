@@ -140,7 +140,7 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 			rv = full_bfr.Xto_bry_and_clear();
 		}
 		catch (Exception e) {
-			wiki.Appe().Usr_dlg().Warn_many("", "", "failed to write caption: page=~{0} lnki=~{1} err=~{2}", String_.new_u8(ctx.Cur_page().Ttl().Full_db()), String_.new_u8(index_page_src, lnki.Src_bgn(), lnki.Src_end()), Err_.Message_gplx_brief(e));
+			wiki.Appe().Usr_dlg().Warn_many("", "", "failed to write caption: page=~{0} lnki=~{1} err=~{2}", ctx.Cur_page().Ttl().Full_db(), String_.new_u8(index_page_src, lnki.Src_bgn(), lnki.Src_end()), Err_.Message_gplx_full(e));
 			rv = lnki.Ttl().Page_txt();
 		}
 		return rv;

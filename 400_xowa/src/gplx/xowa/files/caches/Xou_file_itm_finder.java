@@ -55,7 +55,7 @@ public class Xou_file_itm_finder {
 			else
 				return false;
 		} catch (Exception e) {
-			Xoa_app_.Usr_dlg().Warn_many("", "", "failed to find img: img=~{0} err=~{1}", lnki_ttl, Err_.Message_gplx_brief(e));
+			Xoa_app_.Usr_dlg().Warn_many("", "", "failed to find img: img=~{0} err=~{1}", lnki_ttl, Err_.Message_gplx_log(e));
 			return false;
 		}
 	}

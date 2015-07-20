@@ -52,7 +52,7 @@ public class List_adp_tst {
 	}
 	@Test  public void FetchAt_fail() {
 		try {list.Get_at(0);}
-		catch (Exception exc) {Exc_.Noop(exc); return;}
+		catch (Exception exc) {Err_.Noop(exc); return;}
 		Tfds.Fail("Get_at should fail for out of bound index");
 	}
 	@Test  public void Del_at() {
@@ -72,7 +72,7 @@ public class List_adp_tst {
 	}
 	@Test  public void DelAt_fail() {
 		try {list.Del_at(0);}
-		catch (Exception exc) {Exc_.Noop(exc); return;}
+		catch (Exception exc) {Err_.Noop(exc); return;}
 		Tfds.Fail("Del_at should fail for out of bound index");
 	}
 	@Test  public void Del() {

@@ -53,7 +53,7 @@ class Xop_vnt_flag_ {
 			case Tid_macro	: return "macro";
 			case Tid_name	: return "name";
 			case Tid_lang	: return "lang";
-			default			: throw Exc_.new_unhandled(tid);
+			default			: throw Err_.new_unhandled(tid);
 		}
 	}
 	public static final byte Tid__max = 12;

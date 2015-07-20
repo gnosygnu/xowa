@@ -19,14 +19,14 @@ package gplx.xowa.xtns.xowa_cmds; import gplx.*; import gplx.xowa.*; import gplx
 import gplx.core.primitives.*; import gplx.xowa.html.*;
 public class Xox_xowa_html_cmd implements Xox_xnde, Xop_xnde_atr_parser {
 	private byte pos_val = Pos_head_end;
-	public Xop_root_tkn Xtn_root() {throw Exc_.new_unimplemented_w_msg("xowa_html_cmd.xtn_root should not be called");}
-	public byte[] Xtn_html() {throw Exc_.new_unimplemented_w_msg("xowa_html_cmd.xtn_html should not be called");}
+	public Xop_root_tkn Xtn_root() {throw Err_.new_unimplemented_w_msg("xowa_html_cmd.xtn_root should not be called");}
+	public byte[] Xtn_html() {throw Err_.new_unimplemented_w_msg("xowa_html_cmd.xtn_html should not be called");}
 	public void Xatr_parse(Xowe_wiki wiki, byte[] src, Xop_xatr_itm xatr, Object xatr_key_obj) {
 		if (xatr_key_obj == null) return;
 		Byte_obj_val xatr_key = (Byte_obj_val)xatr_key_obj;
 		switch (xatr_key.Val()) {
 			case Xatr_pos_id:			pos_val = Pos_val(xatr.Val_as_bry(src)); break;
-			default:					throw Exc_.new_unhandled(xatr_key.Val());
+			default:					throw Err_.new_unhandled(xatr_key.Val());
 		}
 	}
 	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
@@ -47,7 +47,7 @@ public class Xox_xowa_html_cmd implements Xox_xnde, Xop_xnde_atr_parser {
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {}
 	private static byte Pos_val(byte[] bry) {
 		Object o = pos_val_hash.Get_by_bry(bry);
-		if (o == null) throw Exc_.new_("unknown pos", "pos", String_.new_u8(bry));
+		if (o == null) throw Err_.new_wo_type("unknown pos", "pos", String_.new_u8(bry));
 		return ((Byte_obj_val)o).Val();
 	}
 	private static final byte Pos_head_end = 1, Pos_html_end = 2;

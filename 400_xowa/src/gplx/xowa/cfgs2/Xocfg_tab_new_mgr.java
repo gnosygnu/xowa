@@ -35,7 +35,7 @@ class Xocfg_new_tab_pos {
 		else if	(String_.Eq(v, Key_all_end))	return Tid_all_end;
 		else if	(String_.Eq(v, Key_cur_prv))	return Tid_all_end;
 		else if	(String_.Eq(v, Key_cur_nxt))	return Tid_all_end;
-		else									throw Exc_.new_unhandled(v);
+		else									throw Err_.new_unhandled(v);
 	}
 	public static String Xto_str(byte v) {
 		switch (v) {
@@ -43,7 +43,7 @@ class Xocfg_new_tab_pos {
 			case Tid_all_end:	return Key_all_end;
 			case Tid_cur_prv:	return Key_cur_prv;
 			case Tid_cur_nxt:	return Key_cur_nxt;
-			default:			throw Exc_.new_unhandled(v);
+			default:			throw Err_.new_unhandled(v);
 		}
 	}
 	public static KeyVal[] Options__all = KeyVal_.Ary(KeyVal_.new_(Key_all_bgn), KeyVal_.new_(Key_all_end), KeyVal_.new_(Key_cur_prv), KeyVal_.new_(Key_cur_nxt));

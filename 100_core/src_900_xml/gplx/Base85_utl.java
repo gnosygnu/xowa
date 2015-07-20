@@ -58,7 +58,7 @@ public class Base85_utl {
 		if (v == 0) return 1;
 		for (int i = Pow85Last; i > -1; i--)
 			if (v >= Pow85[i]) return i + 1;
-		throw Exc_.new_("neg number not allowed", "v", v);
+		throw Err_.new_wo_type("neg number not allowed", "v", v);
 	}
 	static int[] Pow85 = new int[]{1, 85, 7225, 614125, 52200625}; // NOTE: ary constructed to match index to exponent; Pow85[1] = 85^1
 	static final int Pow85Last = 4, Radix = 85; static final byte AsciiOffset = 33;

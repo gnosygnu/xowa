@@ -77,14 +77,14 @@ public class Array_ {
 	public static void Set(Object ary, int i, Object o) {Array.set(ary, i, o);}
 	public static Object Expand(Object src, Object trg, int src_len) {
 		try					{System.arraycopy(src, 0, trg, 0, src_len);}
-		catch (Exception e)	{throw Exc_.new_exc(e, "core", "Array_.Expand failed", "src_len", src_len);}
+		catch (Exception e)	{throw Err_.new_exc(e, "core", "Array_.Expand failed", "src_len", src_len);}
 		return trg;
 	}
 	public static void Copy(Object src, Object trg) {System.arraycopy(src, 0, trg, 0, Len(src));}
 	public static void CopyTo(Object src, Object trg, int trgPos) {System.arraycopy(src, 0, trg, trgPos, Len(src));}
 	public static void CopyTo(Object src, int srcBgn, Object trg, int trgBgn, int srcLen) {System.arraycopy(src, srcBgn, trg, trgBgn, srcLen);}
 	public static Class<?> ComponentType(Object ary) {
-		if (ary == null) throw Exc_.new_null("ary");
+		if (ary == null) throw Err_.new_null();
 		return ary.getClass().getComponentType();
 	}
 	public static Object Resize_add(Object src, Object add) {

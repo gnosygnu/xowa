@@ -51,7 +51,7 @@ public class Xog_bnd_box_ {
 		else if	(String_.Eq(s, Key_browser_find))		return Tid_browser_find;
 		else if	(String_.Eq(s, Key_browser_prog))		return Tid_browser_prog;
 		else if	(String_.Eq(s, Key_browser_info))		return Tid_browser_info;
-		else											throw Exc_.new_unhandled(s);
+		else											throw Err_.new_unhandled(s);
 	}
 	public static String Xto_sys_str(int v) {
 		switch (v) {
@@ -62,7 +62,7 @@ public class Xog_bnd_box_ {
 			case Tid_browser_find:				return Key_browser_find;
 			case Tid_browser_prog:				return Key_browser_prog;
 			case Tid_browser_info:				return Key_browser_info;
-			default:							throw Exc_.new_unhandled(v);
+			default:							throw Err_.new_unhandled(v);
 		}
 	}
 	public static String Xto_gui_str(int v) {
@@ -74,7 +74,7 @@ public class Xog_bnd_box_ {
 			case Tid_browser_find:				return Gui_browser_find;
 			case Tid_browser_prog:				return Gui_browser_prog;
 			case Tid_browser_info:				return Gui_browser_info;
-			default:							throw Exc_.new_unhandled(v);
+			default:							throw Err_.new_unhandled(v);
 		}
 	}
 	public static int Xby_gui_str(String s) {
@@ -85,7 +85,7 @@ public class Xog_bnd_box_ {
 		else if	(String_.Eq(s, Gui_browser_find))		return Tid_browser_find;
 		else if	(String_.Eq(s, Gui_browser_prog))		return Tid_browser_prog;
 		else if	(String_.Eq(s, Gui_browser_info))		return Tid_browser_info;
-		else											throw Exc_.new_unhandled(s);
+		else											throw Err_.new_unhandled(s);
 	}
 	public static void Set_bnd_for_grp(byte mode, Xog_win_itm win, Xog_cmd_mgr_invk invk_mgr, Xog_bnd_box box, Xog_bnd_itm itm, IptArg ipt) {
 		GfuiElem box_elem = null;
@@ -97,7 +97,7 @@ public class Xog_bnd_box_ {
 		else if	(String_.Eq(grp_key, Xog_bnd_box_.Key_browser_find))			box_elem = win.Find_box();
 		else if	(String_.Eq(grp_key, Xog_bnd_box_.Key_browser_prog))			box_elem = win.Prog_box();
 		else if	(String_.Eq(grp_key, Xog_bnd_box_.Key_browser_info))			box_elem = win.Info_box();
-		else																	throw Exc_.new_("unknown box", "grp", grp_key);
+		else																	throw Err_.new_wo_type("unknown box", "grp", grp_key);
 		Set_bnd_for_elem(mode, box, box_elem, invk_mgr, itm, ipt);
 	}
 	public static void Set_bnd_for_elem(byte mode, Xog_bnd_box box, GfuiElem box_elem, Xog_cmd_mgr_invk invk_mgr, Xog_bnd_itm itm, IptArg ipt) {
@@ -112,7 +112,7 @@ public class Xog_bnd_box_ {
 			case Set_del_ipt:
 				box_elem.IptBnds().Del_by_ipt(ipt);
 				break;
-			default: throw Exc_.new_unhandled(mode);
+			default: throw Err_.new_unhandled(mode);
 		}
 	}
 	private static void Set_bnd_for_tab(byte mode, Xog_tab_mgr tab_mgr, Xog_cmd_mgr_invk invk_mgr, Xog_bnd_box box, Xog_bnd_itm itm, IptArg ipt) {

@@ -60,6 +60,6 @@ class GfmlTkn_composite implements GfmlTkn {
 	public String Val() {return GfmlTknAry_.XtoVal(ary);}
 	public GfmlBldrCmd Cmd_of_Tkn() {return GfmlBldrCmd_.Null;}
 	public GfmlTkn[] SubTkns() {return ary;} GfmlTkn[] ary;
-	public GfmlTkn MakeNew(String rawNew, String valNew) {throw Exc_.new_unimplemented_w_msg(".MakeNew cannot be invoked on GfmlTkn_composite (raw is available, but not val)", "tknType", tknType, "rawNew", rawNew, "valNew", valNew);}
+	public GfmlTkn MakeNew(String rawNew, String valNew) {throw Err_.new_unimplemented_w_msg(".MakeNew cannot be invoked on GfmlTkn_composite (raw is available, but not val)", "tknType", tknType, "rawNew", rawNew, "valNew", valNew);}
 	@gplx.Internal protected GfmlTkn_composite(String tknType, GfmlTkn[] ary) {this.tknType = tknType; this.ary = ary;}
 }

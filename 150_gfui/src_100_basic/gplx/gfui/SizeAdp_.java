@@ -20,7 +20,7 @@ public class SizeAdp_ {
 	public static final SizeAdp Null = new SizeAdp(Int_.MinValue, Int_.MinValue);
 	public static final SizeAdp Zero = new SizeAdp(0, 0);
 	public static final SizeAdp[] Ary_empty = new SizeAdp[0];
-	public static SizeAdp cast_(Object obj) {try {return (SizeAdp)obj;} catch(Exception exc) {throw Exc_.new_type_mismatch_w_exc(exc, SizeAdp.class, obj);}}
+	public static SizeAdp cast_(Object obj) {try {return (SizeAdp)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, SizeAdp.class, obj);}}
 	public static SizeAdp new_(int width, int height) {return new SizeAdp(width, height);}
 	public static SizeAdp parse_(String raw) {return parse_or_(raw, SizeAdp_.Null);}
 	public static SizeAdp parse_or_(String raw, SizeAdp or) {

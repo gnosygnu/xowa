@@ -23,7 +23,7 @@ public class Criteria_ {
 	public static Criteria Not(Criteria arg) {return new Criteria_not(arg);}
 	public static Criteria And(Criteria lhs, Criteria rhs) {return new Criteria_and(lhs, rhs);}
 	public static Criteria And_many(Criteria... ary) {
-		int len = Array_.Len(ary); if (len == 0) throw Exc_.new_("cannot AND 0 criterias;");
+		int len = Array_.Len(ary); if (len == 0) throw Err_.new_wo_type("cannot AND 0 criterias;");
 		Criteria rv = ary[0];
 		for (int i = 1; i < len; i++)
 			rv = And(rv, ary[i]);
@@ -31,7 +31,7 @@ public class Criteria_ {
 	}
 	public static Criteria Or(Criteria lhs, Criteria rhs) {return new Criteria_or(lhs, rhs);}
 	public static Criteria Or_many(Criteria... ary) {
-		int len = Array_.Len(ary); if (len == 0) throw Exc_.new_("cannot OR 0 criterias;");
+		int len = Array_.Len(ary); if (len == 0) throw Err_.new_wo_type("cannot OR 0 criterias;");
 		Criteria rv = ary[0];
 		for (int i = 1; i < len; i++)
 			rv = Or(rv, ary[i]);

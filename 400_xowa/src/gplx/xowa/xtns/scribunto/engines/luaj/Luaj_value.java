@@ -57,7 +57,7 @@ class Luaj_value_ {
 						kv = KeyVal_.new_(((LuaString)itm_key).tojstring(), itm_val_obj);
 						break;
 					default:
-						throw Exc_.new_unhandled(itm_key.type());
+						throw Err_.new_unhandled(itm_key.type());
 				}
 			}
 			temp.Add(kv);
@@ -80,7 +80,7 @@ class Luaj_value_ {
 					return v_num.todouble();
 			case LuaValue.TTABLE:				return X_tbl_to_kv_ary(server, (LuaTable)v);
 			case LuaValue.TFUNCTION:			return server.Get_id_by_closure(v);
-			default:							throw Exc_.new_unhandled(v.type());
+			default:							throw Err_.new_unhandled(v.type());
 		}		
 	}
 	public static LuaValue X_obj_to_val(Luaj_server server, Object o) {

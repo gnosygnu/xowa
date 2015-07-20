@@ -32,13 +32,13 @@ public class Xol_vnt_mgr implements GfoInvkAble {
 		if (!enabled) return;
 		Xop_vnt_lxr_.set_(wiki);
 		// VNT
-//			vnt_grp.Add(new Xolg_vnt_itm(Bry_.new_u8("zh-hans"), Bry_.new_u8("Simplified")));
-//			vnt_grp.Add(new Xolg_vnt_itm(Bry_.new_u8("zh-hant"), Bry_.new_u8("Traditional")));
-//			vnt_grp.Add(new Xolg_vnt_itm(Bry_.new_u8("zh-cn"), Bry_.new_u8("China")));
-//			vnt_grp.Add(new Xolg_vnt_itm(Bry_.new_u8("zh-hk"), Bry_.new_u8("Hong Kong")));
-//			vnt_grp.Add(new Xolg_vnt_itm(Bry_.new_u8("zh-mo"), Bry_.new_u8("Macau")));
-//			vnt_grp.Add(new Xolg_vnt_itm(Bry_.new_u8("zh-sg"), Bry_.new_u8("Singapore")));
-//			vnt_grp.Add(new Xolg_vnt_itm(Bry_.new_u8("zh-tw"), Bry_.new_u8("Taiwan")));
+//			vnt_grp.Add(new Xolg_vnt_itm(Bry_.new_a7("zh-hans"), Bry_.new_a7("Simplified")));
+//			vnt_grp.Add(new Xolg_vnt_itm(Bry_.new_a7("zh-hant"), Bry_.new_a7("Traditional")));
+//			vnt_grp.Add(new Xolg_vnt_itm(Bry_.new_a7("zh-cn"), Bry_.new_a7("China")));
+//			vnt_grp.Add(new Xolg_vnt_itm(Bry_.new_a7("zh-hk"), Bry_.new_a7("Hong Kong")));
+//			vnt_grp.Add(new Xolg_vnt_itm(Bry_.new_a7("zh-mo"), Bry_.new_a7("Macau")));
+//			vnt_grp.Add(new Xolg_vnt_itm(Bry_.new_a7("zh-sg"), Bry_.new_a7("Singapore")));
+//			vnt_grp.Add(new Xolg_vnt_itm(Bry_.new_a7("zh-tw"), Bry_.new_a7("Taiwan")));
 	}
 	public Xol_vnt_itm Get_or_new(byte[] key) {
 		Xol_vnt_itm rv = (Xol_vnt_itm)vnts.Get_by(key);

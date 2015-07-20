@@ -33,7 +33,7 @@ class Gfs_lxr_ {
 			case Tid_whitespace:		return "whitespace";
 			case Tid_comment:			return "comment";
 			case Tid_eq:				return "eq";
-			default:					throw Exc_.new_unhandled(tid);
+			default:					throw Err_.new_unhandled(tid);
 		}
 	}
 }

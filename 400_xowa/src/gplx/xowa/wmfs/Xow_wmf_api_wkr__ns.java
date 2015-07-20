@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wmfs; import gplx.*; import gplx.xowa.*;
-import gplx.json.*;
+import gplx.core.json.*;
 import gplx.xowa.wmfs.data.*;
 public class Xow_wmf_api_wkr__ns implements Xow_wmf_api_wkr {
 	private final Json_parser parser = new Json_parser();
@@ -37,12 +37,12 @@ public class Xow_wmf_api_wkr__ns implements Xow_wmf_api_wkr {
 			int site_id = ++site_id_next;
 			tbl_site.Insert(site_id, wiki_domain);
 			Json_doc jdoc = parser.Parse(rslt);
-			Json_grp ns_grp = jdoc.Get_grp(Bry_jpath); if (ns_grp == null) throw Exc_.new_("wmf_api_wkr.ns:invalid json", "json", rslt);
-			int ns_len = ns_grp.Subs_len();
+			Json_grp ns_grp = jdoc.Get_grp(Bry_jpath); if (ns_grp == null) throw Err_.new_wo_type("wmf_api_wkr.ns:invalid json", "json", rslt);
+			int ns_len = ns_grp.Len();
 			for (int i = 0; i < ns_len; ++i) {
 				try {
-					Json_itm_kv kv = (Json_itm_kv)ns_grp.Subs_get_at(i);
-					Json_itm_nde nde = (Json_itm_nde)kv.Val();
+					Json_itm_kv kv = (Json_itm_kv)ns_grp.Get_at(i);
+					Json_nde nde = (Json_nde)kv.Val();
 					int ns_id = Bry_.Xto_int_or(Get_val_or_null(nde, Bry_id), Int_.MinValue);
 					byte ns_case = Xow_ns_case_.parse_(String_.new_u8(Get_val_or_null(nde, Bry_case)));
 					byte[] ns_name = Get_val_or_null(nde, Bry_name);
@@ -52,22 +52,22 @@ public class Xow_wmf_api_wkr__ns implements Xow_wmf_api_wkr {
 					byte[] content = Get_val_or_null(nde, Bry_content);	
 					tbl_ns.Insert(site_id, ns_id, ns_case, subpages != null, content != null, ns_name, ns_canonical);
 				} catch (Exception e) {
-					Xoa_app_.Usr_dlg().Warn_many("", "", "wmf_api_wkr.ns:unknown; wiki=~{0} rslt=~{1} i=~{2} err=~{3}", wiki_domain, rslt, i, Err_.Message_gplx(e));
+					Xoa_app_.Usr_dlg().Warn_many("", "", "wmf_api_wkr.ns:unknown; wiki=~{0} rslt=~{1} i=~{2} err=~{3}", wiki_domain, rslt, i, Err_.Message_gplx_full(e));
 					continue;
 				}
 			}
 			tbl_site.Conn().Txn_sav();
 			return true;
 		} catch (Exception e) {
-			Xoa_app_.Usr_dlg().Warn_many("", "", "wmf_api_wkr.ns:unknown; wiki=~{0} rslt=~{1} err=~{2}", wiki_domain, rslt, Err_.Message_gplx(e));
+			Xoa_app_.Usr_dlg().Warn_many("", "", "wmf_api_wkr.ns:unknown; wiki=~{0} rslt=~{1} err=~{2}", wiki_domain, rslt, Err_.Message_gplx_full(e));
 			return false;
 		}
 	}
 	public void		Api_term() {
 		tbl_site.Conn().Txn_end();
 	}
-	private byte[] Get_val_or_null(Json_itm_nde nde, byte[] key) {
-		Json_itm sub = nde.Subs_get_by_key(key);
+	private byte[] Get_val_or_null(Json_nde nde, byte[] key) {
+		Json_itm sub = nde.Get_itm(key);
 		Json_itm_kv sub_as_kv = (Json_itm_kv)sub;			
 		return sub_as_kv == null ? null : sub_as_kv.Val().Data_bry();	// sub_as_kv == null when key is not present; note that "canonical" does not exist for Main ns
 	}

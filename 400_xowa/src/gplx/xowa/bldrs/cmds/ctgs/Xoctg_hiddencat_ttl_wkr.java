@@ -58,7 +58,7 @@ class Xob_sql_join_wkr_ctg_hidden implements Xob_sql_join_wkr {
 		byte[] src = join.Bfr();
 		int itm_end = join.Itm_pos_end();
 		int pipe_pos = Bry_finder.Find_bwd(src, Byte_ascii.Pipe, itm_end);
-		if (pipe_pos == Bry_.NotFound) throw Exc_.new_("failed to find pipe for name", "excerpt", String_.new_u8(src, join.Itm_pos_bgn(), join.Itm_pos_end()));
+		if (pipe_pos == Bry_.NotFound) throw Err_.new_wo_type("failed to find pipe for name", "excerpt", String_.new_u8(src, join.Itm_pos_bgn(), join.Itm_pos_end()));
 		file_bfr.Add_mid(src, pipe_pos + 1, itm_end - 1).Add_byte_pipe();
 		file_bfr.Add(key_bry).Add_byte_nl();
 	}	private Bry_bfr file_bfr = Bry_bfr.new_();

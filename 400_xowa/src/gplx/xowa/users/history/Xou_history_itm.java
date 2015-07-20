@@ -38,7 +38,7 @@ public class Xou_history_itm {
 			case Fld_view_count	: return view_count;
 			case Fld_view_bgn	: return view_bgn;
 			case Fld_view_end	: return view_end;
-			default				: throw Exc_.new_unhandled(idx);
+			default				: throw Err_.new_unhandled(idx);
 		}
 	}
 	public void Tally() {

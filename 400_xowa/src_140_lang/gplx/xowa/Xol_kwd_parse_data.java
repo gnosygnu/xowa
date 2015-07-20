@@ -25,7 +25,7 @@ public class Xol_kwd_parse_data {
 			byte b = raw[i];
 			switch (b) {
 				case Byte_ascii.Dollar:
-					byte prv = i == 0 ? Byte_ascii.Nil : raw[i - 1];
+					byte prv = i == 0 ? Byte_ascii.Null : raw[i - 1];
 					switch (prv) {
 						case Byte_ascii.Backslash: {	// ignore \$
 							if (dirty)	tmp.Add_byte(b);

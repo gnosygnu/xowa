@@ -22,7 +22,7 @@ public class Xop_xatr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_AT
 	private static final byte Mode_atr_bgn = 1, Mode_invalid = 2, Mode_key = 3, Mode_eq = 4, Mode_val_bgn = 5, Mode_val_quote = 6, Mode_val_raw = 7;
 	private byte mode = Mode_atr_bgn;
 	private int atr_bgn = -1, key_bgn = -1, key_end = -1, eq_pos = -1, val_bgn = -1, val_end = -1; boolean valid = true;
-	private byte quote_byte = Byte_ascii.Nil;
+	private byte quote_byte = Byte_ascii.Null;
 	private final Hash_adp_bry repeated_atrs_hash = Hash_adp_bry.ci_ascii_();		// ASCII:xnde_atrs
 	private final Bry_bfr key_bfr = Bry_bfr.new_(), val_bfr = Bry_bfr.new_();
 	private boolean key_bfr_on = false, val_bfr_on = false, ws_is_before_val = false;
@@ -376,7 +376,7 @@ public class Xop_xatr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_AT
 		}
 		if (val_bfr_on) xatr.Val_bry_(val_bfr.Xto_bry_and_clear());
 		xatrs.Add(xatr);
-		mode = Mode_atr_bgn; quote_byte = Byte_ascii.Nil; valid = true;
+		mode = Mode_atr_bgn; quote_byte = Byte_ascii.Null; valid = true;
 		atr_bgn = key_bgn = val_bgn = key_end = val_end = eq_pos = -1;
 		val_bfr_on = key_bfr_on = ws_is_before_val = false;
 	}

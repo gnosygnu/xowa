@@ -19,7 +19,7 @@ package gplx.ios; import gplx.*;
 import gplx.texts.*; /*Encoding_*/
 class IoStream_mem extends IoStream_base {
 	@Override public Io_url Url() {return url;} Io_url url;
-	@Override public Object UnderRdr() {throw Exc_.new_unimplemented();} // NOTE: should not use System.IO.MemoryStream, b/c resized data will not be captured in this instance's buffer
+	@Override public Object UnderRdr() {throw Err_.new_unimplemented();} // NOTE: should not use System.IO.MemoryStream, b/c resized data will not be captured in this instance's buffer
 	@Override public long Len() {return Array_.Len(buffer);}
 	public int Position() {return position;} public void Position_set(int v) {position = v;} int position;
 	public byte[] Buffer() {return buffer;} private byte[] buffer = new byte[0];

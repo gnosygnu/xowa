@@ -20,7 +20,7 @@ import gplx.lists.*; /*Ordered_hash_base*/ import gplx.stores.dsvs.*; /*DsvStore
 public class TdbTableList extends Ordered_hash_base {
 	public TdbTable Get_by(String name) {return TdbTable.as_(Fetch_base(name));}
 	public TdbTable Get_by_or_fail(String name) {
-		TdbTable rv = TdbTable.as_(Get_by(name)); if (rv == null) throw Exc_.new_("could not find table; database file may not exist", "table", name);
+		TdbTable rv = TdbTable.as_(Get_by(name)); if (rv == null) throw Err_.new_wo_type("could not find table; database file may not exist", "table", name);
 		return rv;
 	}
 	public void Add(TdbTable dataTable) {Add_base(dataTable.Name(), dataTable);}

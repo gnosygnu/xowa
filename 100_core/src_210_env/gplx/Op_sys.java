@@ -63,7 +63,7 @@ public class Op_sys {
 		byte bitness_byte = Bitness_32;
 		if		(String_.Eq(bitness_str, "32")) 		bitness_byte = Bitness_32;
 		else if	(String_.Eq(bitness_str, "64")) 		bitness_byte = Bitness_64;
-		else 											throw Exc_.new_("unknown bitness; expecting 32 or 64; System.getProperty(\"bit.level\")", "val", bitness_str);
+		else 											throw Err_.new_wo_type("unknown bitness; expecting 32 or 64; System.getProperty(\"bit.level\")", "val", bitness_str);
 		
 		os_name = System.getProperty("os.name").toLowerCase();
 		if 		(String_.Has_at_bgn(os_name, "win")) {
@@ -76,7 +76,7 @@ public class Op_sys {
 		}
 		else if	(String_.Eq(os_name, "linux")) 			return new_unx_flavor_(Tid_lnx, os_name, bitness_byte);
 		else if	(String_.Has_at_bgn(os_name, "mac")) 		return new_unx_flavor_(Tid_osx, os_name, bitness_byte);	// EX:Mac OS X
-		else											throw Exc_.new_("unknown os_name; expecting windows, linux, mac; System.getProperty(\"os.name\")", "val", os_name);
+		else											throw Err_.new_wo_type("unknown os_name; expecting windows, linux, mac; System.getProperty(\"os.name\")", "val", os_name);
 		} catch (Exception exc) {Drd.os_name = os_name; return Drd;}
 	}
 	public static void OpSysIsDroid() {

@@ -43,7 +43,7 @@ import java.math.BigDecimal;import java.math.MathContext;import java.math.Roun
 		else if (v >	999999 && v <      10000000) return 10000000;
 		else if (v >   9999999 && v <     100000000) return 100000000;
 		else if (v >  99999999 && v <    1000000000) return 1000000000;
-		else throw Exc_.new_("value must be between 0 and 1 billion", "v", v);
+		else throw Err_.new_wo_type("value must be between 0 and 1 billion", "v", v);
 	}
 	public static String CalcPctStr(long dividend, long divisor, String fmt) {
 		if (divisor == 0) return "%ERR";

@@ -27,7 +27,7 @@ public class Load_page_wkr implements Gfo_thread_wkr {
 	public Xoa_url Url() {return url;} private Xoa_url url;
 	public Xoa_ttl Ttl() {return ttl;} private Xoa_ttl ttl;
 	public boolean Hdump_enabled() {return hdump_enabled;} private boolean hdump_enabled;
-	public Exception Exc() {return exc;} private Exception exc;
+	public Exception Err() {return exc;} private Exception exc;
 	private final static Object thread_lock = new Object();
 	public static boolean Running() {
 		boolean rv = false;

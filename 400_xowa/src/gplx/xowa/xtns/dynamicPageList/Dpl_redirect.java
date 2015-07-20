@@ -24,7 +24,7 @@ class Dpl_redirect {
 			case Dpl_itm_keys.Key_exclude: 			return Tid_exclude;
 			case Dpl_itm_keys.Key_include: 			return Tid_include;
 			case Dpl_itm_keys.Key_only: 			return Tid_only;
-			default:								throw Exc_.new_unhandled(key);
+			default:								throw Err_.new_unhandled(key);
 		}
 	}
 }

@@ -29,7 +29,7 @@ public class Pfunc_tag_tst {
 	@Test   public void Ws_all()	    {fxt.Test_html_full_str("{{#tag:pre|a|   id   =   b   }}"			, "<pre id=\"b\">a</pre>");}
 	@Test   public void Ws_quoted()		{fxt.Test_html_full_str("{{#tag:pre|a|   id   = ' b ' }}"			, "<pre id=\"_b_\">a</pre>");}
 	@Test   public void Err_bad_key()	{fxt.Test_html_full_str("{{#tag:pre|a|id=val|b}}"					, "<pre id=\"val\">a</pre>");}	// PURPOSE: b was failing b/c id was larger and key_end set to 4 (whereas b was len=1)
-//		@Test   public void Exc()		{
+//		@Test   public void Err()		{
 //			fxt.Test_parse_tmpl_str_test("{{#tag:ref|George Robertson announced in January 2003 that he would be stepping down in December.<ref> {{cite news|title =NATO Secretary General to Leave His Post in December After 4 Years |first = Craig | last = Smith | work = The New York Times | date = January 23, 2003| url = http://www.nytimes.com/2003/01/23/world/nato-secretary-general-to-leave-his-post-in-december-after-4-years.html?scp=2&sq=lord+robertson&st=nyt|accessdate = 2009-03-29}}</ref> Jaap de Hoop Scheffer was selected as his successor, but could not assume the office until January 2004 because of his commitment in the Dutch Parliament.<ref> {{cite news|title = Jaap de Hoop Scheffer | work = Newsmakers | issue = 1 | publisher = Thomson Gale | date = January 1, 2005}}</ref> Robertson was asked to extend his term until Scheffer was ready, but declined, so Minuto-Rizzo, the Deputy Secretary General, took over in the interim.<ref name =\"ncsd\" />  |group=N|}}"
 //				, "{{test}}"	, "<pre id=\" b \">a</pre>");}
 	@Test   public void Nested_tmpl() {	// PURPOSE: nested template must get re-evaluated; EX:de.wikipedia.org/wiki/Freiburg_im_Breisgau; DATE:2013-12-18;

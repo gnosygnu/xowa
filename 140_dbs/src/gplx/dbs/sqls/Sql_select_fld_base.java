@@ -31,8 +31,8 @@ public abstract class Sql_select_fld_base {
 	}
 }
 class Sql_select_fld_wild extends Sql_select_fld_base {
-	@Override public Object GroupBy_eval(Object groupByVal, Object curVal, ClassXtn type) {throw Exc_.new_("group by eval not allowed on *");}
-	@Override public void GroupBy_type(GfoFld fld) {throw Exc_.new_("group by type not allowed on *");}
+	@Override public Object GroupBy_eval(Object groupByVal, Object curVal, ClassXtn type) {throw Err_.new_wo_type("group by eval not allowed on *");}
+	@Override public void GroupBy_type(GfoFld fld) {throw Err_.new_wo_type("group by type not allowed on *");}
 	@Override public String XtoSql() {return "*";}
 	public static final Sql_select_fld_wild _ = new Sql_select_fld_wild(); Sql_select_fld_wild() {this.ctor_(Tbl_null, "*", "*");}
 }

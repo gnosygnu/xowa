@@ -31,7 +31,7 @@ public class Db_rdr__mem implements Db_rdr {
 	public byte[] Read_bry(String k)			{return (byte[])row.Get_by(k);}
 	public String Read_str(String k)			{return (String)row.Get_by(k);}
 	public byte[] Read_bry_by_str(String k)		{return Bry_.new_u8_safe((String)row.Get_by(k));}		// NOTE: null b/c db can have NULL
-	@gplx.Virtual public void Save_bry_in_parts(Io_url url, String tbl, String fld, String crt_key, Object crt_val) {throw Exc_.new_unimplemented();}
+	@gplx.Virtual public void Save_bry_in_parts(Io_url url, String tbl, String fld, String crt_key, Object crt_val) {throw Err_.new_unimplemented();}
 	public DateAdp Read_date_by_str(String k)	{return DateAdp_.parse_iso8561((String)row.Get_by(k));}
 	public byte Read_byte(String k)				{return Byte_.cast_(row.Get_by(k));}
 	public int Read_int(String k)				{return Int_.cast_(row.Get_by(k));}

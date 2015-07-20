@@ -145,7 +145,7 @@ class Gfs_parser_fxt {
 		byte[] src_bry = Bry_.new_u8(src_str);
 		try {parser.Parse(src_bry);}
 		catch (Exception e) {
-			String actl_err = Err_.Message_gplx_brief(e);
+			String actl_err = Err_.Message_gplx_full(e);
 			actl_err = String_.GetStrBefore(actl_err, ":");
 			boolean match = String_.Has(actl_err, expd_err);
 			if (!match) Tfds.Fail("expecting '" + expd_err + "' got '" + actl_err + "'"); 

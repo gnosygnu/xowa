@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.security; import gplx.*;
-import org.junit.*; import gplx.ios.*; /*IoStream*/
+import org.junit.*; import gplx.core.consoles.*; import gplx.ios.*; /*IoStream*/
 public class HashDlgWtr_tst {
 	@Before public void setup() {
 		HashAlgo_tth192 algo = HashAlgo_tth192.new_();
@@ -29,7 +29,7 @@ public class HashDlgWtr_tst {
 		tst_Status(30, stringAry_(" - hash: 40%", " - hash: 60%", " - hash: 100%"));
 	}
 	void tst_Status(int count, String[] expdWritten) {
-		ConsoleDlg_dev dialog = ConsoleDlg_.Dev();
+		Console_adp__mem dialog = Console_adp_.Dev();
 		String data = String_.Repeat("A", count);
 		IoStream stream = IoStream_.mem_txt_(Io_url_.Empty, data);
 		calc.CalcHash(dialog, stream);

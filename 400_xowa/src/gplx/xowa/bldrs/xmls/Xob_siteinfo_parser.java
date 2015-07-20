@@ -27,7 +27,7 @@ public class Xob_siteinfo_parser {
 			int end = Bry_finder.Find_fwd(src, Bry_siteinfo_end, bgn); if (end == Bry_.NotFound) return null;
 			return Bry_.Mid(src, bgn, end + Bry_siteinfo_end.length);
 		}
-		catch (Exception e) {Exc_.Noop(e); return null;}
+		catch (Exception e) {Err_.Noop(e); return null;}
 		finally {rdr.Rls();}
 	}
 	public static void Siteinfo_parse(Xowe_wiki wiki, Gfo_usr_dlg usr_dlg, String siteinfo_str) {
@@ -42,7 +42,7 @@ public class Xob_siteinfo_parser {
 					||	String_.Eq(sub_nde.Name(), "case"))			siteinfo_misc_bfr.Add_str(sub_nde.Text_inner()).Add_byte_pipe();
 			else if	(	String_.Eq(sub_nde.Name(), "base")) {
 				String mainpage_url = sub_nde.Text_inner();
-				byte[] mainpage_name = Siteinfo_parse_mainpage(Bry_.new_u8(mainpage_url)); if (mainpage_name == null) throw Exc_.new_("could not extract mainpage", "mainpage", mainpage_url);
+				byte[] mainpage_name = Siteinfo_parse_mainpage(Bry_.new_u8(mainpage_url)); if (mainpage_name == null) throw Err_.new_wo_type("could not extract mainpage", "mainpage", mainpage_url);
 				wiki.Props().Main_page_(mainpage_name);
 			}
 			else if (	String_.Eq(sub_nde.Name(), "namespaces")) {
@@ -59,7 +59,7 @@ public class Xob_siteinfo_parser {
 		int bgn_pos	= Bry_finder.Find_fwd(url, wiki_bry, 0);
 		if (bgn_pos == Bry_.NotFound) {							// "/wiki/" not found; EX: http://mywiki/My_main_page
 			bgn_pos	= Bry_finder.Find_bwd(url, Byte_ascii.Slash);		// ASSUME last segment is page
-			if (bgn_pos == Bry_.NotFound) throw Exc_.new_("could not parse main page url", "url", String_.new_u8(url));
+			if (bgn_pos == Bry_.NotFound) throw Err_.new_wo_type("could not parse main page url", "url", String_.new_u8(url));
 			++bgn_pos;												// add 1 to position after slash
 		}
 		else														// "/wiki/" found
@@ -79,7 +79,7 @@ public class Xob_siteinfo_parser {
 				String name = sub_nde.Text_inner();
 				ns_mgr.Add_new(ns_id, Bry_.new_u8(name), case_match, false);
 			}
-			catch (Exception e) {throw Exc_.new_exc(e, "xo", "parse failed", "inner", sub_nde.Text_inner());}
+			catch (Exception e) {throw Err_.new_exc(e, "xo", "parse failed", "inner", sub_nde.Text_inner());}
 		}
 		ns_mgr.Init_w_defaults();
 	}

@@ -92,7 +92,7 @@ public class Db_sqlbldr__sqlite implements Db_sqlbldr {
 			case Db_meta_fld.Tid_str:		tmp_bfr.Add_str_a7("varchar(").Add_int_variable(len).Add_byte(Byte_ascii.Paren_end); break;
 			case Db_meta_fld.Tid_text:		tmp_bfr.Add_str_a7("text"); break;
 			case Db_meta_fld.Tid_bry:		tmp_bfr.Add_str_a7("blob"); break;
-			default:						throw Exc_.new_unhandled(tid);
+			default:						throw Err_.new_unhandled(tid);
 		}
 	}
         public static final Db_sqlbldr__sqlite I = new Db_sqlbldr__sqlite(); Db_sqlbldr__sqlite() {}

@@ -26,7 +26,7 @@ public class Xotdb_dir_info_ {
 			case Xotdb_dir_info_.Tid_category2_link:		return Xotdb_dir_info_.Name_category2_link;
 			case Xotdb_dir_info_.Tid_category2_main:		return Xotdb_dir_info_.Name_category2_main;
 			case Xotdb_dir_info_.Tid_search_ttl:			return Xotdb_dir_info_.Name_search_ttl;
-			default:										throw Exc_.new_unhandled(tid);
+			default:										throw Err_.new_unhandled(tid);
 		}
 	}
 	public static Xotdb_dir_info[] regy_() {

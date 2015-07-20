@@ -78,7 +78,7 @@ public class Pfunc_expr_shunter {
 						try {num = Bry_.XtoDecimalByPos(src, numBgn, cur_pos);}
 						catch (Exception exc) {
 							// NOTE: PATCH.PHP: 65.5.5 can evaluate to 65.5; EX "{{Geological eras|-600|height=2|border=none}}" eventually does "|10-to={{#ifexpr:{{{1|-4567}}}<-65.5|-65.5|{{{1}}}}}.5" which is 65.5.5
-							Exc_.Noop(exc); 
+							Err_.Noop(exc); 
 							int dot_count = 0;
 							for (int i = numBgn; i < cur_pos; i++) {
 								if (src[i] == Byte_ascii.Dot) {
@@ -88,7 +88,7 @@ public class Pfunc_expr_shunter {
 											try {
 												num = Bry_.XtoDecimalByPos(src, numBgn, i);
 											}
-											catch (Exception exc_inner) {Exc_.Noop(exc_inner);}
+											catch (Exception exc_inner) {Err_.Noop(exc_inner);}
 											break;
 									}
 								}

@@ -81,18 +81,18 @@ public class Xof_meta_mgr implements GfoInvkAble {
 	static final String GRP_KEY = "xowa.file_regy.";
 	private static Xof_meta_fil Get_fil_or_null_recur(Object[] ary, int depth_max, byte[] md5, int md5_idx) {
 		int ary_idx = Int_.Xto_int_hex(md5[md5_idx]);
-		if (ary_idx < 0 || ary_idx > 15) throw Exc_.new_("md5_not_valid", "md5", String_.new_u8(md5), "idx", md5_idx);
+		if (ary_idx < 0 || ary_idx > 15) throw Err_.new_wo_type("md5_not_valid", "md5", String_.new_u8(md5), "idx", md5_idx);
 		Object o = ary[ary_idx];
 		if (o == null) return null;
 		if (md5_idx == depth_max) {	// leaf; return fil
-			try {return (Xof_meta_fil)o;} catch (Exception exc) {throw Exc_.new_cast(exc, Xof_meta_fil.class, o);}
+			try {return (Xof_meta_fil)o;} catch (Exception exc) {throw Err_.new_cast(exc, Xof_meta_fil.class, o);}
 		}
-		Object[] nxt = null; try {nxt = (Object[])o;} catch(Exception exc) {throw Exc_.new_cast(exc, Object[].class, o);}
+		Object[] nxt = null; try {nxt = (Object[])o;} catch(Exception exc) {throw Err_.new_cast(exc, Object[].class, o);}
 		return Get_fil_or_null_recur(nxt, depth_max, md5, md5_idx + 1);
 	}
 	private static Xof_meta_fil Bld_new(Object[] ary, int depth_max, Xof_meta_mgr regy_mgr, byte[] md5, int md5_idx) {
 		int ary_idx = Int_.Xto_int_hex(md5[md5_idx]);
-		if (ary_idx < 0 || ary_idx > 15) throw Exc_.new_("md5_not_valid", "md", String_.new_u8(md5), "idx", md5_idx);
+		if (ary_idx < 0 || ary_idx > 15) throw Err_.new_wo_type("md5_not_valid", "md", String_.new_u8(md5), "idx", md5_idx);
 		Object o = ary[ary_idx];
 		if (md5_idx == depth_max) {	// leaf; create itm
 			Xof_meta_fil rv = null;
