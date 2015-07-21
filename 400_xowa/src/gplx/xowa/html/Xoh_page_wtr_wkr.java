@@ -118,10 +118,7 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 			return;
 		}
 		Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();
-		if (vnt_mgr.Enabled()) {	// VNT
-//				vnt_mgr.Convert_ttl(
-		}
-		if	(ns_id == Xow_ns_.Id_file)			// if [[File]], add boilerplate header
+		if (ns_id == Xow_ns_.Id_file)			// if [[File]], add boilerplate header
 			app.Ns_file_page_mgr().Bld_html(wiki, ctx, page, bfr, page.Ttl(), wiki.Cfg_file_page(), page.File_queue());
 		gplx.xowa.html.tidy.Xoh_tidy_mgr tidy_mgr = app.Html_mgr().Tidy_mgr();
 		boolean tidy_enabled = tidy_mgr.Enabled();
@@ -146,6 +143,8 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 			else
 				wiki.Html_mgr().Ctg_mgr().Bld(bfr, page, ctgs_len);
 		}
+		if (vnt_mgr.Enabled()) 	// VNT
+			bfr.Add(vnt_mgr.Convert_text(wiki, bfr.Xto_bry_and_clear()));
 	}
 	private void Write_body_pre(Bry_bfr bfr, Xoae_app app, Xowe_wiki wiki, byte[] data_raw, Bry_bfr tmp_bfr) {
 		Xoh_html_wtr_escaper.Escape(app.Parser_amp_mgr(), tmp_bfr, data_raw, 0, data_raw.length, false, false);

@@ -45,10 +45,10 @@ public class Dbui_cmd_mgr {
 		Dbui_val_hash rv = new Dbui_val_hash();
 		int len = grp.Len();
 		for (int i = 0; i < len; ++i) {
-			Json_itm_kv kv = (Json_itm_kv)grp.Get_at(i);
+			Json_kv kv = (Json_kv)grp.Get_at(i);
 			Json_nde nde = (Json_nde)kv.Val();
-			Json_itm_kv key = (Json_itm_kv)nde.Get_itm(Arg_key);
-			Json_itm_kv val = (Json_itm_kv)nde.Get_itm(Arg_val);
+			Json_kv key = (Json_kv)nde.Get_itm(Arg_key);
+			Json_kv val = (Json_kv)nde.Get_itm(Arg_val);
 			Dbui_val_itm fld = new Dbui_val_itm(val.Val().Data_bry(), Bry_.Empty);
 			rv.Add(key.Val().Data_bry(), fld);
 		}

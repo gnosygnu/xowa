@@ -71,7 +71,7 @@ public class Scrib_regx_converter {
 						switch (nxt) {
 							case Byte_ascii.Ltr_b:	// EX: "%b()"
 								i += 2;
-								if (i >= len) throw Err_.new_wo_type("malformed pattern (missing arguments to \'%b\')");
+								if (i >= len) throw Err_.new_wo_type("malformed pattern (missing arguments to '%b')");
 								byte char_0 = src[i - 1];
 								byte char_1 = src[i];
 								if (char_0 == char_1) {		// same char: easier regex; REF.MW: $bfr .= "{$d1}[^$d1]*$d1";
@@ -94,6 +94,22 @@ public class Scrib_regx_converter {
 									}
 								}
 								break;
+//								case Byte_ascii.Ltr_f: {	// EX: "%f[%a]"
+//									++i;
+//									if (i + 1 >= len || src[i] != Byte_ascii.Brack_bgn) throw Err_.new_("scribunto", "missing '[' after %f in pattern at pattern character $ii");
+//									Bry_bfr tmp_bfr = Xoa_app_.Utl__bfr_mkr().Get_b128();
+//									i = bracketedCharSetToRegex(tmp_bfr, src, i, len);
+//									byte[] bracketed_regx = tmp_bfr.To_bry_and_rls();
+//									int j = 1;
+//									bfr.Add_str_a7("(?<!").Add(bracketed_regx).Add_str_a7(")(?=$").Add(bracketed_regx).Add_str_a7(")");
+////									if ( preg_match( "/$re2/us", "\0" ) ) {
+////										$re .= "(?<!^)(?<!$re2)(?=$re2|$)";
+////									} else {
+////										$re .=       "(?<!$re2)(?=$re2)";
+////									}
+//
+//									break;
+//								}
 							case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
 							case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
 								grps_len = nxt - Byte_ascii.Num_0;
@@ -109,52 +125,7 @@ public class Scrib_regx_converter {
 					}
 					break;
 				case Byte_ascii.Brack_bgn:
-					bfr.Add_byte(Byte_ascii.Brack_bgn);
-					++i;
-					if (i < len && src[i] == Byte_ascii.Pow) {	// ^
-						bfr.Add_byte(Byte_ascii.Pow);
-						++i;						
-					}
-					boolean stop = false;
-					for (; i < len; i++) {
-						byte tmp_b = src[i];
-						switch (tmp_b) {
-							case Byte_ascii.Brack_end:
-								stop = true;
-								break;
-							case Byte_ascii.Percent:
-								++i;
-								if (i >= len)
-									stop = true;
-								else {
-									Object brack_obj = brack_hash.Get_by_mid(src, i, i + 1);
-									if (brack_obj != null)
-										bfr.Add((byte[])brack_obj);
-									else
-										Regx_quote(bfr, src[i]);
-								}
-								break;
-							default:
-								boolean normal = true;
-								if (i + 2 < len) {
-									byte dash_1 = src[i + 1];
-									byte dash_2 = src[i + 2];
-									if (dash_1 == Byte_ascii.Dash && dash_2 != Byte_ascii.Brack_end) {
-										Regx_quote(bfr, tmp_b);
-										bfr.Add_byte(Byte_ascii.Dash);
-										Regx_quote(bfr, dash_2);
-										i += 2;
-										normal = false;
-									}
-								}
-								if (normal)
-									Regx_quote(bfr, src[i]);
-								break;
-						}
-						if (stop) break;
-					}
-					if (i >= len) throw Err_.new_wo_type("Missing close-bracket for character set beginning at pattern character $nxt_pos");
-					bfr.Add_byte(Byte_ascii.Brack_end);
+					i = bracketedCharSetToRegex(bfr, src, i, len);
 					q_flag = true;
 					break;
 				case Byte_ascii.Brack_end: throw Err_.new_wo_type("Unmatched close-bracket at pattern character " + Int_.Xto_str(i));
@@ -188,6 +159,55 @@ public class Scrib_regx_converter {
 		regx = bfr.Xto_str_and_clear();
 		return regx;
 	}	private Bry_bfr bfr = Bry_bfr.new_();
+	private int bracketedCharSetToRegex(Bry_bfr bfr, byte[] src, int i, int len) {
+		bfr.Add_byte(Byte_ascii.Brack_bgn);
+		++i;
+		if (i < len && src[i] == Byte_ascii.Pow) {	// ^
+			bfr.Add_byte(Byte_ascii.Pow);
+			++i;						
+		}
+		boolean stop = false;
+		for (; i < len; i++) {
+			byte tmp_b = src[i];
+			switch (tmp_b) {
+				case Byte_ascii.Brack_end:
+					stop = true;
+					break;
+				case Byte_ascii.Percent:
+					++i;
+					if (i >= len)
+						stop = true;
+					else {
+						Object brack_obj = brack_hash.Get_by_mid(src, i, i + 1);
+						if (brack_obj != null)
+							bfr.Add((byte[])brack_obj);
+						else
+							Regx_quote(bfr, src[i]);
+					}
+					break;
+				default:
+					boolean normal = true;
+					if (i + 2 < len) {
+						byte dash_1 = src[i + 1];
+						byte dash_2 = src[i + 2];
+						if (dash_1 == Byte_ascii.Dash && dash_2 != Byte_ascii.Brack_end) {
+							Regx_quote(bfr, tmp_b);
+							bfr.Add_byte(Byte_ascii.Dash);
+							Regx_quote(bfr, dash_2);
+							i += 2;
+							normal = false;
+						}
+					}
+					if (normal)
+						Regx_quote(bfr, src[i]);
+					break;
+			}
+			if (stop) break;
+		}
+		if (i >= len) throw Err_.new_wo_type("Missing close-bracket for character set beginning at pattern character $nxt_pos");
+		bfr.Add_byte(Byte_ascii.Brack_end);
+		return i;
+	}
 	boolean grps_open_Has(List_adp list, int v) {
 		int len = list.Count();
 		for (int i = 0; i < len; i++) {

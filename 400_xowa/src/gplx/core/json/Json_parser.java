@@ -33,9 +33,9 @@ public class Json_parser {
 		doc.Ctor(src, root);
 		return doc;
 	}
-	Json_nde Make_nde(Json_doc doc) {
+	private Json_nde Make_nde(Json_doc doc) {
 		++pos;	// brack_bgn
-		Json_nde nde = new Json_nde(pos);
+		Json_nde nde = new Json_nde(doc, pos);
 		while (pos < src_len) {
 			Skip_ws();
 			if (src[pos] == Byte_ascii.Curly_end) 	{++pos; return nde;}
@@ -55,7 +55,7 @@ public class Json_parser {
 		Chk(Byte_ascii.Colon);
 		Skip_ws();
 		Json_itm val = Make_val(doc);
-		return new Json_itm_kv(key, val);
+		return new Json_kv(key, val);
 	}
 	Json_itm Make_val(Json_doc doc) {
 		while (pos < src_len) {
@@ -131,8 +131,8 @@ public class Json_parser {
 			? factory.Decimal(doc, num_bgn, pos)
 			: factory.Int(doc, num_bgn, pos);
 	}
-	Json_itm_ary Make_ary(Json_doc doc) {
-		Json_itm_ary rv = factory.Ary(pos++, pos);	// brack_bgn
+	Json_ary Make_ary(Json_doc doc) {
+		Json_ary rv = factory.Ary(pos++, pos);	// brack_bgn
 		while (pos < src_len) {
 			Skip_ws();
 			if (src[pos] == Byte_ascii.Brack_end) 	{++pos; return rv;}

@@ -20,7 +20,7 @@ public class Json_kv_ary_srl {
 	public static KeyVal Kv_by_itm(Json_itm itm) {
 		switch (itm.Tid()) {
 			case Json_itm_.Tid_kv:
-				Json_itm_kv kv = (Json_itm_kv)itm;
+				Json_kv kv = (Json_kv)itm;
 				return KeyVal_.new_(kv.Key_as_str(), Val_by_itm(kv.Val()));
 			default:
 				throw Err_.new_unhandled(itm.Tid());
@@ -33,13 +33,13 @@ public class Json_kv_ary_srl {
 			case Json_itm_.Tid_null:
 			case Json_itm_.Tid_string:
 			case Json_itm_.Tid_decimal:		return itm.Data();
-			case Json_itm_.Tid_array:		return Val_by_itm_ary((Json_itm_ary)itm);
+			case Json_itm_.Tid_array:		return Val_by_itm_ary((Json_ary)itm);
 			case Json_itm_.Tid_nde:			return Val_by_itm_nde((Json_nde)itm);
 			case Json_itm_.Tid_kv:			// kv should never be val; EX: "a":"b":c; not possible
 			default:						throw Err_.new_unhandled(itm.Tid());
 		}
 	}
-	private static KeyVal[] Val_by_itm_ary(Json_itm_ary itm) {
+	private static KeyVal[] Val_by_itm_ary(Json_ary itm) {
 		int subs_len = itm.Len();
 		KeyVal[] rv = new KeyVal[subs_len];
 		for (int i = 0; i < subs_len; i++) {

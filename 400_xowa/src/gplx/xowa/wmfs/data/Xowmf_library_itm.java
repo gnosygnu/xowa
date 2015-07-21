@@ -15,9 +15,9 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.xowa.langs.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-public class Xolg_vnt_itm {
-	public Xolg_vnt_itm(byte[] key, byte[] text) {this.key = key; this.text = text;}
-	public byte[] Key() {return key;} private final byte[] key;
-	public byte[] Text() {return text;} private final byte[] text;
+package gplx.xowa.wmfs.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.wmfs.*;
+class Xowmf_library_itm {
+	public Xowmf_library_itm(byte[] name, byte[] version) {this.name = name; this.version = version;}
+	public byte[] Name() {return name;} private final byte[] name;
+	public byte[] Version() {return version;} private final byte[] version;
 }

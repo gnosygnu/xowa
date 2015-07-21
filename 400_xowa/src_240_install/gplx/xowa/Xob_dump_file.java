@@ -74,6 +74,7 @@ public class Xob_dump_file {
 					dump_date = new_dump_date;
 					file_name = new_dump_file;
 					file_url = new_file_url;
+					break;
 				}
 				else
 					Xoa_app_.Usr_dlg().Warn_many("", "", "wmf.dump:dump not found; url=~{0}", new_file_url);
@@ -83,6 +84,7 @@ public class Xob_dump_file {
 	}
 	private boolean Connect_exec(IoEngine_xrg_downloadFil args, String cur_file_url) {			
 		boolean rv = args.Src_last_modified_query_(true).Exec_meta(cur_file_url);
+		Xoa_app_.Usr_dlg().Note_many("", "", "wmf.dump:connect log; url=~{0} result=~{1} fil_len=~{2} file_modified=~{3} server_url=~{4} dump_date=~{5}", cur_file_url, rv, args.Src_content_length(), args.Src_last_modified() == null ? "<<NULL>>" : args.Src_last_modified().XtoStr_fmt_yyyy_MM_dd_HH_mm_ss(), server_url, dump_date);
 		if (rv) {
 			file_len = args.Src_content_length();
 			file_modified = args.Src_last_modified();

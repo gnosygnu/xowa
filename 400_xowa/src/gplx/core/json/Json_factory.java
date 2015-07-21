@@ -23,7 +23,7 @@ public class Json_factory {
 	public Json_itm_int	Int(Json_doc doc, int bgn, int end)					{return new Json_itm_int(doc, bgn, end);}
 	public Json_itm		Decimal(Json_doc doc, int bgn, int end)				{return new Json_itm_decimal(doc, bgn, end);}
 	public Json_itm		Str(Json_doc doc, int bgn, int end, boolean exact)		{return new Json_itm_str(doc, bgn, end, exact);}
-	public Json_itm_kv	Kv(Json_itm key, Json_itm val)						{return new Json_itm_kv(key, val);}
-	public Json_itm_ary	Ary(int bgn, int end)								{return new Json_itm_ary(bgn, end);}
-	public Json_nde	Nde(int bgn)										{return new Json_nde(bgn);}
+	public Json_kv	Kv(Json_itm key, Json_itm val)						{return new Json_kv(key, val);}
+	public Json_ary	Ary(int bgn, int end)								{return new Json_ary(bgn, end);}
+	public Json_nde		Nde(Json_doc doc, int bgn)							{return new Json_nde(doc, bgn);}
 }

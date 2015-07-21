@@ -41,7 +41,7 @@ public class Xow_wmf_api_wkr__ns implements Xow_wmf_api_wkr {
 			int ns_len = ns_grp.Len();
 			for (int i = 0; i < ns_len; ++i) {
 				try {
-					Json_itm_kv kv = (Json_itm_kv)ns_grp.Get_at(i);
+					Json_kv kv = (Json_kv)ns_grp.Get_at(i);
 					Json_nde nde = (Json_nde)kv.Val();
 					int ns_id = Bry_.Xto_int_or(Get_val_or_null(nde, Bry_id), Int_.MinValue);
 					byte ns_case = Xow_ns_case_.parse_(String_.new_u8(Get_val_or_null(nde, Bry_case)));
@@ -68,7 +68,7 @@ public class Xow_wmf_api_wkr__ns implements Xow_wmf_api_wkr {
 	}
 	private byte[] Get_val_or_null(Json_nde nde, byte[] key) {
 		Json_itm sub = nde.Get_itm(key);
-		Json_itm_kv sub_as_kv = (Json_itm_kv)sub;			
+		Json_kv sub_as_kv = (Json_kv)sub;			
 		return sub_as_kv == null ? null : sub_as_kv.Val().Data_bry();	// sub_as_kv == null when key is not present; note that "canonical" does not exist for Main ns
 	}
 	private static final byte[] Bry_query = Bry_.new_a7("query"), Bry_namespaces = Bry_.new_a7("namespaces")

@@ -52,23 +52,23 @@ class Json_parser_fxt {
 	}	Json_parser parser; Json_factory factory; Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	Json_itm itm_int_(int v)								{return Json_itm_tmp.new_int_(v);}
 	Json_itm itm_str_(String v)								{return Json_itm_tmp.new_str_(v);}
-	public Json_itm_ary itm_ary_()							{return factory.Ary(-1, -1);}
-	public Json_nde itm_nde_()							{return factory.Nde(-1);}
-	public Json_itm_kv itm_kv_null_(String k)				{return factory.Kv(itm_str_(k), factory.Null());}
-	public Json_itm_kv itm_kv_(String k, String v)			{return factory.Kv(itm_str_(k), itm_str_(v));}
-	public Json_itm_kv itm_kv_(String k, int v)				{return factory.Kv(itm_str_(k), itm_int_(v));}
-	public Json_itm_kv itm_kv_(String k, boolean v)			{return factory.Kv(itm_str_(k), v ? factory.Bool_y() : factory.Bool_n());}
-	public Json_itm_kv itm_kv_dec_(String k, String v)		{return factory.Kv(itm_str_(k), new Json_itm_tmp(Json_itm_.Tid_decimal, v));}
-	public Json_itm_kv itm_kv_(String k, Json_nde v)	{return factory.Kv(itm_str_(k), v);}
-	public Json_itm_kv itm_kv_ary_int_(String k, int... v) {
-		Json_itm_ary ary = factory.Ary(-1, -1);
+	public Json_ary itm_ary_()							{return factory.Ary(-1, -1);}
+	public Json_nde itm_nde_()								{return factory.Nde(null, -1);}
+	public Json_kv itm_kv_null_(String k)				{return factory.Kv(itm_str_(k), factory.Null());}
+	public Json_kv itm_kv_(String k, String v)			{return factory.Kv(itm_str_(k), itm_str_(v));}
+	public Json_kv itm_kv_(String k, int v)				{return factory.Kv(itm_str_(k), itm_int_(v));}
+	public Json_kv itm_kv_(String k, boolean v)			{return factory.Kv(itm_str_(k), v ? factory.Bool_y() : factory.Bool_n());}
+	public Json_kv itm_kv_dec_(String k, String v)		{return factory.Kv(itm_str_(k), new Json_itm_tmp(Json_itm_.Tid_decimal, v));}
+	public Json_kv itm_kv_(String k, Json_nde v)	{return factory.Kv(itm_str_(k), v);}
+	public Json_kv itm_kv_ary_int_(String k, int... v) {
+		Json_ary ary = factory.Ary(-1, -1);
 		int len = v.length;
 		for (int i = 0; i < len; i++)
 			ary.Add(itm_int_(v[i]));
 		return factory.Kv(itm_str_(k), ary);
 	}
-	public Json_itm_kv itm_kv_ary_str_(String k, String... v) {
-		Json_itm_ary ary = factory.Ary(-1, -1);
+	public Json_kv itm_kv_ary_str_(String k, String... v) {
+		Json_ary ary = factory.Ary(-1, -1);
 		int len = v.length;
 		for (int i = 0; i < len; i++)
 			ary.Add(itm_str_(v[i]));
@@ -85,7 +85,7 @@ class Json_parser_fxt {
 	public void Test_parse_val0(String raw_str, Object expd) {
 		byte[] raw = Json_parser_tst.Replace_apos(Bry_.new_u8(raw_str));
 		Json_doc doc = parser.Parse(raw);
-		Json_itm_kv kv = Json_itm_kv.cast_(doc.Root().Get_at(0));	// assume root has kv as first sub; EX: {"a":"b"}
+		Json_kv kv = Json_kv.cast_(doc.Root().Get_at(0));	// assume root has kv as first sub; EX: {"a":"b"}
 		Object actl = kv.Val().Data();	 // NOTE: Data_bry is escaped val; EX: a\"b has DataBry of a"b
 		Tfds.Eq(expd, actl);
 	}

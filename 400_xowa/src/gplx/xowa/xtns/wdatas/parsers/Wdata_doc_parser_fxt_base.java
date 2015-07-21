@@ -61,13 +61,13 @@ abstract class Wdata_doc_parser_fxt_base {
 	}
 	public void Test_qualifiers(String raw, Wdata_claim_itm_base... expd_itms) {
 		Json_doc jdoc = Json_doc.new_apos_(raw);
-		Json_nde qualifiers_nde = Json_nde.cast_(Json_itm_kv.cast_(jdoc.Root().Get_at(0)).Val());
+		Json_nde qualifiers_nde = Json_nde.cast_(Json_kv.cast_(jdoc.Root().Get_at(0)).Val());
 		Wdata_claim_grp_list actl = parser.Parse_qualifiers(Q1_bry, qualifiers_nde);
 		Tfds.Eq_ary_str(expd_itms, To_ary(actl));
 	}
 	public void Test_references(String raw, int[] expd_order, Wdata_claim_itm_base... expd_itms) {
 		Json_doc jdoc = Json_doc.new_apos_(raw);
-		Json_itm_ary owner = Json_itm_ary.cast_(Json_itm_kv.cast_(jdoc.Root().Get_at(0)).Val());
+		Json_ary owner = Json_ary.cast_or_null(Json_kv.cast_(jdoc.Root().Get_at(0)).Val());
 		Wdata_references_grp[] actl = parser.Parse_references(Q1_bry, owner);
 		Wdata_references_grp actl_grp = actl[0];
 		Tfds.Eq_ary(expd_order, actl_grp.References_order());
@@ -75,7 +75,7 @@ abstract class Wdata_doc_parser_fxt_base {
 	}
 	public void Test_pid_order(String raw, int... expd) {
 		Json_doc jdoc = Json_doc.new_apos_(raw);
-		Json_itm_ary nde = Json_itm_ary.cast_(Json_itm_kv.cast_(jdoc.Root().Get_at(0)).Val());
+		Json_ary nde = Json_ary.cast_or_null(Json_kv.cast_(jdoc.Root().Get_at(0)).Val());
 		int[] actl = parser.Parse_pid_order(Q1_bry, nde);
 		Tfds.Eq_ary(expd, actl);
 	}

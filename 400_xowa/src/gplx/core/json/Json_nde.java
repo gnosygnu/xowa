@@ -16,18 +16,24 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.json; import gplx.*; import gplx.core.*;
-public class Json_nde extends Json_itm_base implements Json_grp {
+public class Json_nde extends Json_itm_base implements Json_grp {		
 	private Json_itm[] subs = Json_itm_.Ary_empty; private int subs_len = 0, subs_max = 0;
-	public Json_nde(int src_bgn) {this.Ctor(src_bgn, -1);}
+	public Json_nde(Json_doc jdoc, int src_bgn) {this.jdoc = jdoc; this.Ctor(src_bgn, -1);}
 	@Override public byte Tid() {return Json_itm_.Tid_nde;}
+	public Json_doc Doc() {return jdoc;} private final Json_doc jdoc;
 	public void Src_end_(int v) {this.src_end = v;}
 	@Override public Object Data() {return null;}
 	@Override public byte[] Data_bry() {return null;}
 	public int Len() {return subs_len;}
+	public Json_kv Get_at_as_kv(int i) {
+		Json_itm rv_itm = Get_at(i);
+		Json_kv rv = Json_kv.cast_(rv_itm); if (rv == null) throw Err_.new_("json", "sub is not kv", "i", i, "src", Bry_.Mid(jdoc.Src(), this.Src_bgn(), src_end));
+		return rv;
+	}
 	public Json_itm Get_at(int i) {return subs[i];}
 	public Json_nde Get(String key) {return Get(Bry_.new_u8(key));}
 	public Json_nde Get(byte[] key) {
-		Json_itm_kv kv = Json_itm_kv.cast_(this.Get_itm(key)); if (kv == null) throw Err_.new_("json", "kv not found", "key", key);
+		Json_kv kv = Json_kv.cast_(this.Get_itm(key)); if (kv == null) throw Err_.new_("json", "kv not found", "key", key);
 		Json_nde rv = Json_nde.cast_(kv.Val()); if (rv == null) throw Err_.new_("json", "nde not found", "key", key);
 		return rv;
 	}
@@ -35,7 +41,7 @@ public class Json_nde extends Json_itm_base implements Json_grp {
 		for (int i = 0; i < subs_len; i++) {
 			Json_itm itm = subs[i];
 			if (itm.Tid() == Json_itm_.Tid_kv) {
-				Json_itm_kv itm_as_kv = (Json_itm_kv)itm;
+				Json_kv itm_as_kv = (Json_kv)itm;
 				if (Bry_.Eq(key, itm_as_kv.Key().Data_bry()))
 					return itm;
 			}
@@ -52,7 +58,7 @@ public class Json_nde extends Json_itm_base implements Json_grp {
 		Json_itm kv_obj = Get_itm(key);
 		if (kv_obj == null) return or;	// key not found;
 		if (kv_obj.Tid() != Json_itm_.Tid_kv) return or; // key is not a key_val
-		Json_itm_kv kv = (Json_itm_kv)kv_obj;
+		Json_kv kv = (Json_kv)kv_obj;
 		Json_itm val = kv.Val();
 		if (val == null) return or;
 		return val.Data_bry();

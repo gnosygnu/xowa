@@ -17,11 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import org.junit.*;
-public class Xolg_vnt_grp_fmtr_tst {		
-	@Before public void init() {fxt.Clear();} private final Xolg_vnt_grp_fmtr_fxt fxt = new Xolg_vnt_grp_fmtr_fxt();
+public class Vnt_mnu_grp_fmtr_tst {		
+	@Before public void init() {fxt.Clear();} private final Vnt_mnu_grp_fmtr_fxt fxt = new Vnt_mnu_grp_fmtr_fxt();
 	@Test  public void Basic() {
 		fxt.Test_to_str("Earth", "zh-hk", String_.Concat_lines_nl_skip_last
-		( "    <div id='p-variants' role='navigation' class='vectorMenu' aria-labelledby='p-variants-label'>"
+		( ""
+		, "    <div id='p-variants' role='navigation' class='vectorMenu' aria-labelledby='p-variants-label'>"
 		, "      <h3 id='p-variants-label'><span>Choose lang</span><a href='#'></a></h3>"
 		, "      <div class='menu'>"
 		, "        <ul>"
@@ -38,13 +39,13 @@ public class Xolg_vnt_grp_fmtr_tst {
 		));
 	}
 }
-class Xolg_vnt_grp_fmtr_fxt {
-	private Xolg_vnt_grp vnt_grp;
+class Vnt_mnu_grp_fmtr_fxt {
+	private Vnt_mnu_grp vnt_grp;
 	public void Clear() {
 		this.Init_grp("Choose lang", "zh-hans", "Simplified", "zh-hant", "Traditional", "zh-cn", "China", "zh-hk", "Hong Kong", "zh-mo", "Macau", "zh-sg", "Singapore", "zh-tw", "Taiwan");
 	}
 	public void Init_grp(String text, String... langs) {
-		vnt_grp = new Xolg_vnt_grp();
+		vnt_grp = new Vnt_mnu_grp();
 		vnt_grp.Text_(Bry_.new_u8(text));
 		int len = langs.length;
 		String lang_code = "";
@@ -53,13 +54,13 @@ class Xolg_vnt_grp_fmtr_fxt {
 			if (i % 2 == 0)
 				lang_code = lang;
 			else {
-				Xolg_vnt_itm itm = new Xolg_vnt_itm(Bry_.new_u8(lang_code), Bry_.new_u8(lang));
+				Vnt_mnu_itm itm = new Vnt_mnu_itm(Bry_.new_u8(lang_code), Bry_.new_u8(lang));
 				vnt_grp.Add(itm);
 			}
 		}
 	}
 	public void Test_to_str(String page_href, String selected_vnt, String expd) {
-		Xolg_vnt_grp_fmtr vnt_grp_fmtr = new Xolg_vnt_grp_fmtr();
+		Vnt_mnu_grp_fmtr vnt_grp_fmtr = new Vnt_mnu_grp_fmtr();
 		Bry_bfr bfr = Bry_bfr.new_();
 		vnt_grp_fmtr.Init(vnt_grp, Bry_.new_u8(page_href), Bry_.new_u8(selected_vnt));
 		vnt_grp_fmtr.XferAry(bfr, 0);

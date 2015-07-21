@@ -33,7 +33,7 @@ abstract class Json_itm_wkr__base implements Json_itm_wkr {
 			Json_itm itm = root.Get_at(i);
 			switch (itm.Tid()) {
 				case Json_itm_.Tid_kv:
-					Json_itm_kv kv = (Json_itm_kv)itm;
+					Json_kv kv = (Json_kv)itm;
 					if (kv.Key().Data_eq(Name_metadata)) continue;		// ignore @metadata node
 					byte[] kv_key = kv.Key().Data_bry();
 					byte[] kv_val = kv.Val().Data_bry();						

@@ -16,15 +16,19 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.json; import gplx.*; import gplx.core.*;
-public class Json_itm_ary extends Json_itm_base implements Json_grp {
-	public Json_itm_ary(int src_bgn, int src_end) {this.Ctor(src_bgn, src_end);}
+public class Json_ary extends Json_itm_base implements Json_grp {
+	public Json_ary(int src_bgn, int src_end) {this.Ctor(src_bgn, src_end);}
 	@Override public byte Tid() {return Json_itm_.Tid_array;}
 	public void Src_end_(int v) {this.src_end = v;}
 	@Override public Object Data() {return null;}
 	@Override public byte[] Data_bry() {return null;}
 	public int Len() {return subs_len;} private int subs_len = 0, subs_max = 0;
+	public Json_nde Get_at_as_nde(int i) {
+		Json_itm rv = subs[i]; if (rv.Tid() != Json_itm_.Tid_nde) throw Err_.new_("json", "itm is not nde", "type", rv.Tid(), "i", i);
+		return (Json_nde)rv;
+	}
 	public Json_itm Get_at(int i) {return subs[i];}
-	public Json_itm_ary Add_many(Json_itm... ary) {
+	public Json_ary Add_many(Json_itm... ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; i++)
 			Add(ary[i]);
@@ -67,5 +71,9 @@ public class Json_itm_ary extends Json_itm_base implements Json_grp {
 		return rv;
 	}
 	private Json_itm[] subs = Json_itm_.Ary_empty;
-	public static Json_itm_ary cast_(Json_itm v) {return v == null || v.Tid() != Json_itm_.Tid_array ? null : (Json_itm_ary)v;}
+	public static Json_ary cast_or_null(Json_itm v) {return v == null || v.Tid() != Json_itm_.Tid_array ? null : (Json_ary)v;}
+	public static Json_ary cast(Json_itm v) {
+		if (v == null || v.Tid() != Json_itm_.Tid_array) throw Err_.new_("json", "itm is not array");
+		return (Json_ary)v;
+	}
 }

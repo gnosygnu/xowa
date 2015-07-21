@@ -34,6 +34,7 @@ public class Xob_dump_file_ {
 				||	String_.Eq(dump_server, Xob_dump_file_.Server_masaryk)
 				)
 			){
+			Xoa_app_.Usr_dlg().Note_many("", "", "wmf.dump:connect log; server_url=~{0} dump_date=~{1}", dump_server, dump_date);
 			Xoi_mirror_parser mirror_parser = new Xoi_mirror_parser();
 			String dump_wiki_url = dump_server + String_.new_a7(rv.Wiki_alias()) + "/";
 			byte[] dump_url_wiki_html = gplx.ios.IoEngine_xrg_downloadFil.new_("", Io_url_.Empty).Exec_as_bry(dump_wiki_url); if (Bry_.Len_eq_0(dump_url_wiki_html)) return;
@@ -46,13 +47,13 @@ public class Xob_dump_file_ {
 	public static byte[] Bld_dump_dir_url(byte[] server_url, byte[] alias, byte[] date) {
 		return Bry_.Add
 			(	server_url																	// "http://dumps.wikimedia.org/"
-			,	Bry_.Replace(alias, Byte_ascii.Dash, Byte_ascii.Underline), Bry_slash	// "simplewiki/"
+			,	Bry_.Replace(alias, Byte_ascii.Dash, Byte_ascii.Underline), Bry_slash		// "simplewiki/"
 			,	date, Bry_slash																// "latest/"
 			);
 	}
 	public static byte[] Bld_dump_file_name(byte[] alias, byte[] date, byte[] dump_file_type, byte[] ext) {
 		return Bry_.Add
-			(	Bry_.Replace(alias, Byte_ascii.Dash, Byte_ascii.Underline), Bry_dash	// "simplewiki-"
+			(	Bry_.Replace(alias, Byte_ascii.Dash, Byte_ascii.Underline), Bry_dash		// "simplewiki-"
 			,	date, Bry_dash																// "latest-"
 			,	dump_file_type																// "pages-articles"
 			,	ext																			// ".xml.bz2"

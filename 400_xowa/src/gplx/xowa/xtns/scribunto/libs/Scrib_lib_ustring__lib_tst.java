@@ -49,7 +49,7 @@ public class Scrib_lib_ustring__lib_tst {
 		Exec_match("aaa"	, "(a)"				, 1, "a;a;a");						// should return all matches
 		Exec_match("a b"	, "%S"				, 1, "a");							// %S was returning every match instead of 1st; PAGE:en.w:Bertrand_Russell; DATE:2014-04-02
 		Exec_match(1		, "a"				, 1, String_.Null_mark);			// Module can pass raw ints; PAGE:en.w:Budget_of_the_European_Union; DATE:2015-01-22
-		Exec_match(""		, "a?"				, 1, "");					// no results with ? should return "" not nil; PAGE:en.d:民; DATE:2015-01-30
+		Exec_match(""		, "a?"				, 1, "");							// no results with ? should return "" not nil; PAGE:en.d:民; DATE:2015-01-30
 	}
 	@Test  public void Match_args_out_of_order() {
 		fxt.Test_scrib_proc_empty(lib, Scrib_lib_ustring.Invk_match, KeyVal_.Ary(KeyVal_.int_(2, "[a]")));
@@ -115,6 +115,11 @@ public class Scrib_lib_ustring__lib_tst {
 		, "2="
 		, "  1=2"
 		));
+	}
+	@Test  public void Gsub_frontier_pattern() {	// PURPOSE: handle frontier pattern; EX:"%f[%a]"; NOTE:test will fail if run in 1.6 environment; DATE:2015-07-20
+//			fxt.Init_cbk(Scrib_core.Key_mw_interface, fxt.Core().Lib_ustring(), Scrib_lib_ustring.Invk_gsub);
+//			//Exec_gsub_regx("THE QUICK brOWN FOx JUMPS", "%f[%a]%u+%f[%A]", 1, "", "THE;1;QUICK;2;JUMPS;3;");
+//			Exec_gsub_regx("thE QUICK brOWN FOx JUMPS", "%f[%a]%u+%f[%A]", 1, "", "THE;1;QUICK;2;JUMPS;3;");
 	}
 //		@Test  public void Match_viwiktionary() {
 //			fxt.Init_cbk(Scrib_core.Key_mw_interface, fxt.Core().Lib_ustring(), Scrib_lib_ustring.Invk_match);

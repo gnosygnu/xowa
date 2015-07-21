@@ -19,8 +19,8 @@ package gplx.xowa.xtns.wdatas.parsers; import gplx.*; import gplx.xowa.*; import
 import gplx.core.primitives.*;
 import gplx.core.json.*; import gplx.xowa.xtns.wdatas.core.*;
 class Wdata_claims_parser_v2 {
-	public void Make_claim_itms(byte[] qid, List_adp claim_itms_list, byte[] src, Json_itm_kv claim_grp) {
-		Json_itm_ary claim_itms_ary = Json_itm_ary.cast_(claim_grp.Val());
+	public void Make_claim_itms(byte[] qid, List_adp claim_itms_list, byte[] src, Json_kv claim_grp) {
+		Json_ary claim_itms_ary = Json_ary.cast_or_null(claim_grp.Val());
 		int claim_itms_len = claim_itms_ary.Len();
 		int pid = Parse_pid(claim_grp.Key().Data_bry());
 		for (int i = 0; i < claim_itms_len; ++i) {
@@ -36,14 +36,14 @@ class Wdata_claims_parser_v2 {
 		byte rank_tid = Wdata_dict_rank.Tid_unknown;
 		Wdata_claim_itm_core claim_itm = null; Wdata_claim_grp_list qualifiers = null; int[] qualifiers_order = null; Wdata_references_grp[] snaks_grp = null;
 		for (int i = 0; i < len; ++i) {
-			Json_itm_kv sub = Json_itm_kv.cast_(nde.Get_at(i));
+			Json_kv sub = Json_kv.cast_(nde.Get_at(i));
 			byte tid = Wdata_dict_utl.Get_tid_or_invalid(qid, dict, sub.Key().Data_bry()); if (tid == Wdata_dict_utl.Tid_invalid) continue;
 			switch (tid) {
 				case Wdata_dict_claim.Tid_mainsnak:			claim_itm = Parse_mainsnak(qid, Json_nde.cast_(sub.Val()), pid); break;
 				case Wdata_dict_claim.Tid_rank:				rank_tid = Wdata_dict_rank.Xto_tid(sub.Val().Data_bry()); break;
-				case Wdata_dict_claim.Tid_references:		snaks_grp = Parse_references(qid, Json_itm_ary.cast_(sub.Val())); break;
+				case Wdata_dict_claim.Tid_references:		snaks_grp = Parse_references(qid, Json_ary.cast_or_null(sub.Val())); break;
 				case Wdata_dict_claim.Tid_qualifiers:		qualifiers = Parse_qualifiers(qid, Json_nde.cast_(sub.Val())); break;
-				case Wdata_dict_claim.Tid_qualifiers_order:	qualifiers_order = Parse_pid_order(Json_itm_ary.cast_(sub.Val())); break;
+				case Wdata_dict_claim.Tid_qualifiers_order:	qualifiers_order = Parse_pid_order(Json_ary.cast_or_null(sub.Val())); break;
 				case Wdata_dict_claim.Tid_type:				break;		// ignore: "statement"
 				case Wdata_dict_claim.Tid_id:				break;		// ignore: "Q2$F909BD1C-D34D-423F-9ED2-3493663321AF"
 			}
@@ -56,7 +56,7 @@ class Wdata_claims_parser_v2 {
 		}
 		return claim_itm;
 	}
-	public Wdata_references_grp[] Parse_references(byte[] qid, Json_itm_ary owner) {
+	public Wdata_references_grp[] Parse_references(byte[] qid, Json_ary owner) {
 		int len = owner.Len();
 		Wdata_references_grp[] rv = new Wdata_references_grp[len];
 		for (int i = 0; i < len; ++i) {
@@ -70,12 +70,12 @@ class Wdata_claims_parser_v2 {
 		Hash_adp_bry dict = Wdata_dict_reference.Dict;
 		Wdata_claim_grp_list snaks = null; int[] snaks_order = null;
 		for (int i = 0; i < len; ++i) {
-			Json_itm_kv sub = Json_itm_kv.cast_(owner.Get_at(i));
+			Json_kv sub = Json_kv.cast_(owner.Get_at(i));
 			byte tid = Wdata_dict_utl.Get_tid_or_invalid(qid, dict, sub.Key().Data_bry()); if (tid == Wdata_dict_utl.Tid_invalid) continue;
 			switch (tid) {
 				case Wdata_dict_reference.Tid_hash:	break;	// ignore: "b923b0d68beb300866b87ead39f61e63ec30d8af"
 				case Wdata_dict_reference.Tid_snaks:			snaks = Parse_qualifiers(qid, Json_nde.cast_(sub.Val())); break;
-				case Wdata_dict_reference.Tid_snaks_order:		snaks_order = Parse_pid_order(Json_itm_ary.cast_(sub.Val())); break;
+				case Wdata_dict_reference.Tid_snaks_order:		snaks_order = Parse_pid_order(Json_ary.cast_or_null(sub.Val())); break;
 			}
 		}
 		return new Wdata_references_grp(snaks, snaks_order);
@@ -85,14 +85,14 @@ class Wdata_claims_parser_v2 {
 		if (qualifiers_nde == null) return rv;	// NOTE:sometimes references can have 0 snaks; return back an empty Wdata_claim_grp_list, not null; PAGE:Птичкин,_Евгений_Николаевич; DATE:2015-02-16
 		int len = qualifiers_nde.Len();
 		for (int i = 0; i < len; ++i) {
-			Json_itm_kv qualifier_kv = Json_itm_kv.cast_(qualifiers_nde.Get_at(i));
+			Json_kv qualifier_kv = Json_kv.cast_(qualifiers_nde.Get_at(i));
 			int pid = Parse_pid(qualifier_kv.Key().Data_bry());
-			Wdata_claim_grp claims_grp = Parse_props_grp(qid, pid, Json_itm_ary.cast_(qualifier_kv.Val()));
+			Wdata_claim_grp claims_grp = Parse_props_grp(qid, pid, Json_ary.cast_or_null(qualifier_kv.Val()));
 			rv.Add(claims_grp);
 		}
 		return rv;
 	}
-	public int[] Parse_pid_order(Json_itm_ary ary) {
+	public int[] Parse_pid_order(Json_ary ary) {
 		int len = ary.Len();
 		int[] rv = new int[len];
 		for (int i = 0; i < len; ++i) {
@@ -101,7 +101,7 @@ class Wdata_claims_parser_v2 {
 		}
 		return rv;
 	}
-	private Wdata_claim_grp Parse_props_grp(byte[] qid, int pid, Json_itm_ary props_ary) {
+	private Wdata_claim_grp Parse_props_grp(byte[] qid, int pid, Json_ary props_ary) {
 		List_adp list = List_adp_.new_();
 		int len = props_ary.Len();
 		for (int i = 0; i < len; ++i) {
@@ -116,7 +116,7 @@ class Wdata_claims_parser_v2 {
 		Hash_adp_bry dict = Wdata_dict_mainsnak.Dict;
 		byte snak_tid = Byte_.Max_value_127;
 		for (int i = 0; i < len; ++i) {
-			Json_itm_kv sub = Json_itm_kv.cast_(nde.Get_at(i));
+			Json_kv sub = Json_kv.cast_(nde.Get_at(i));
 			byte tid = Wdata_dict_utl.Get_tid_or_invalid(qid, dict, sub.Key().Data_bry()); if (tid == Wdata_dict_utl.Tid_invalid) continue;
 			switch (tid) {
 				case Wdata_dict_mainsnak.Tid_snaktype:		snak_tid = Wdata_dict_snak_tid.Xto_tid(sub.Val().Data_bry()); break;
@@ -133,7 +133,7 @@ class Wdata_claims_parser_v2 {
 		Hash_adp_bry dict = Wdata_dict_datavalue.Dict;
 		Json_itm value_itm = null; byte value_tid = Wdata_dict_val_tid.Tid_unknown;
 		for (int i = 0; i < len; ++i) {
-			Json_itm_kv sub = Json_itm_kv.cast_(nde.Get_at(i));
+			Json_kv sub = Json_kv.cast_(nde.Get_at(i));
 			byte tid = Wdata_dict_utl.Get_tid_or_invalid(qid, dict, sub.Key().Data_bry()); if (tid == Wdata_dict_utl.Tid_invalid) continue;
 			switch (tid) {
 				case Wdata_dict_datavalue.Tid_type:			value_tid = Wdata_dict_val_tid.Xto_tid(sub.Val().Data_bry()); break;
@@ -157,7 +157,7 @@ class Wdata_claims_parser_v2 {
 		byte entity_tid = Byte_.Max_value_127;
 		byte[] entity_id_bry = null;
 		for (int i = 0; i < len; ++i) {
-			Json_itm_kv sub = Json_itm_kv.cast_(nde.Get_at(i));
+			Json_kv sub = Json_kv.cast_(nde.Get_at(i));
 			byte tid = Wdata_dict_utl.Get_tid_or_invalid(qid, dict, sub.Key().Data_bry()); if (tid == Wdata_dict_utl.Tid_invalid) continue;
 			switch (tid) {
 				case Wdata_dict_value_entity.Tid_entity_type:		entity_tid = Wdata_dict_value_entity_tid.Xto_tid(sub.Val().Data_bry()); break;
@@ -172,7 +172,7 @@ class Wdata_claims_parser_v2 {
 		int len = nde.Len();
 		byte[] lang = null, text = null;
 		for (int i = 0; i < len; ++i) {
-			Json_itm_kv sub = Json_itm_kv.cast_(nde.Get_at(i));
+			Json_kv sub = Json_kv.cast_(nde.Get_at(i));
 			byte tid = Wdata_dict_utl.Get_tid_or_invalid(qid, dict, sub.Key().Data_bry()); if (tid == Wdata_dict_utl.Tid_invalid) continue;
 			byte[] sub_val_bry = sub.Val().Data_bry();
 			switch (tid) {
@@ -188,7 +188,7 @@ class Wdata_claims_parser_v2 {
 		int len = nde.Len();
 		byte[] lat = null, lng = null, alt = null, prc = null, glb = null;
 		for (int i = 0; i < len; ++i) {
-			Json_itm_kv sub = Json_itm_kv.cast_(nde.Get_at(i));
+			Json_kv sub = Json_kv.cast_(nde.Get_at(i));
 			byte tid = Wdata_dict_utl.Get_tid_or_invalid(qid, dict, sub.Key().Data_bry()); if (tid == Wdata_dict_utl.Tid_invalid) continue;
 			byte[] sub_val_bry = sub.Val().Data_bry();
 			switch (tid) {
@@ -207,7 +207,7 @@ class Wdata_claims_parser_v2 {
 		int len = nde.Len();
 		byte[] amount = null, unit = null, ubound = null, lbound = null;
 		for (int i = 0; i < len; ++i) {
-			Json_itm_kv sub = Json_itm_kv.cast_(nde.Get_at(i));
+			Json_kv sub = Json_kv.cast_(nde.Get_at(i));
 			byte tid = Wdata_dict_utl.Get_tid_or_invalid(qid, dict, sub.Key().Data_bry()); if (tid == Wdata_dict_utl.Tid_invalid) continue;
 			byte[] sub_val_bry = sub.Val().Data_bry();
 			switch (tid) {
@@ -225,7 +225,7 @@ class Wdata_claims_parser_v2 {
 		int len = nde.Len();
 		byte[] time = null, timezone = null, before = null, after = null, precision = null, calendarmodel = null;
 		for (int i = 0; i < len; ++i) {
-			Json_itm_kv sub = Json_itm_kv.cast_(nde.Get_at(i));
+			Json_kv sub = Json_kv.cast_(nde.Get_at(i));
 			byte tid = Wdata_dict_utl.Get_tid_or_invalid(qid, dict, sub.Key().Data_bry()); if (tid == Wdata_dict_utl.Tid_invalid) continue;
 			byte[] sub_val_bry = sub.Val().Data_bry();
 			switch (tid) {

@@ -100,8 +100,8 @@ class Xosrv_xowa_exec_parser {
 	private Json_parser json_parser = new Json_parser();
 	public Object[] Parse_xowa_exec(byte[] msg_text) {	// parses JSON with format '{"args":["arg0","arg1","arg2"]}'
 		Json_doc doc = json_parser.Parse(msg_text);
-		Json_itm_kv args_kv = (Json_itm_kv)doc.Root().Get_at(0);	// get "args" kv
-		Json_itm_ary args_ary = (Json_itm_ary)args_kv.Val();			// get []
+		Json_kv args_kv = (Json_kv)doc.Root().Get_at(0);	// get "args" kv
+		Json_ary args_ary = (Json_ary)args_kv.Val();			// get []
 		int len = args_ary.Len();			
 		Object[] rv = new Object[len];
 		for (int i = 0; i < len; i++) {	// extract args
@@ -115,7 +115,7 @@ class Xosrv_xowa_exec_parser {
 			case Json_itm_.Tid_string:
 				return String_.new_u8(itm.Data_bry());
 			case Json_itm_.Tid_array: 
-				Json_itm_ary ary = (Json_itm_ary)itm;
+				Json_ary ary = (Json_ary)itm;
 				int len = ary.Len();
 				String[] rv = new String[len];
 				for (int i = 0; i < len; i++)

@@ -71,7 +71,7 @@ public class Xow_portal_mgr implements GfoInvkAble {
 		Bry_fmtr_arg vnt_menu = null;
 //			Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();	// VNT; DATE:2015-03-03
 //			if (vnt_mgr.Enabled()) {
-//				Xolg_vnt_grp_fmtr vnt_menu_fmtr = vnt_mgr.Vnt_mnu_fmtr();
+//				Vnt_mnu_grp_fmtr vnt_menu_fmtr = vnt_mgr.Vnt_mnu_fmtr();
 //				vnt_menu_fmtr.Init(vnt_mgr.Vnt_grp(), ttl.Full_db(), vnt_mgr.Cur_vnt());
 //				vnt_menu = wiki.Lang().Vnt_mgr().Enabled() ? vnt_menu_fmtr : null;
 //			}

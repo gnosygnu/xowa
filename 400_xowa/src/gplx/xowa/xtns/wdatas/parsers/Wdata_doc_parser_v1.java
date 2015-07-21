@@ -27,7 +27,7 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 				case Json_itm_.Tid_string:	// "entity":"q1"
 					return kv_val.Data_bry();
 				case Json_itm_.Tid_array:	// "entity":["item",1]
-					Json_itm_ary kv_val_as_ary = (Json_itm_ary)kv_val;
+					Json_ary kv_val_as_ary = (Json_ary)kv_val;
 					Json_itm entity_id = kv_val_as_ary.Get_at(1);
 					return Bry_.Add(Byte_ascii.Ltr_q, entity_id.Data_bry());
 				default:
@@ -41,16 +41,16 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 			Ordered_hash rv = Ordered_hash_.new_bry_();
 			int list_len = list_nde.Len();
 			for (int i = 0; i < list_len; ++i) {
-				Json_itm_kv wiki_kv		= Json_itm_kv.cast_(list_nde.Get_at(i));
+				Json_kv wiki_kv		= Json_kv.cast_(list_nde.Get_at(i));
 				byte[] site_bry			= wiki_kv.Key().Data_bry();
 				byte[] title_bry = null; byte[][] badges_bry_ary = null;
 				if (wiki_kv.Val().Tid() == Json_itm_.Tid_nde) {	// v1.2: "enwiki":{name:"Earth", badges:[]}
 					Json_nde val_nde	= Json_nde.cast_(wiki_kv.Val());
-					Json_itm_kv name_kv		= Json_itm_kv.cast_(val_nde.Get_at(0));
+					Json_kv name_kv		= Json_kv.cast_(val_nde.Get_at(0));
 					title_bry = name_kv.Val().Data_bry();
-					Json_itm_kv badges_kv	= Json_itm_kv.cast_(val_nde.Get_at(1));
+					Json_kv badges_kv	= Json_kv.cast_(val_nde.Get_at(1));
 					if (badges_kv != null) {// TEST:some tests do not define a badges nde; ignore if null; DATE:2014-09-19
-						Json_itm_ary badges_ary	= Json_itm_ary.cast_(badges_kv.Val());
+						Json_ary badges_ary	= Json_ary.cast_or_null(badges_kv.Val());
 						badges_bry_ary = badges_ary.Xto_bry_ary();
 					}
 				}
@@ -70,7 +70,7 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 			Ordered_hash rv = Ordered_hash_.new_bry_();
 			int list_len = list_nde.Len();
 			for (int i = 0; i < list_len; ++i) {
-				Json_itm_kv data_kv		= Json_itm_kv.cast_(list_nde.Get_at(i));
+				Json_kv data_kv		= Json_kv.cast_(list_nde.Get_at(i));
 				byte[] lang_bry			= data_kv.Key().Data_bry();
 				Wdata_langtext_itm itm = new Wdata_langtext_itm(lang_bry, data_kv.Val().Data_bry());
 				rv.Add(lang_bry, itm);
@@ -84,13 +84,13 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 			Ordered_hash rv = Ordered_hash_.new_bry_();
 			int list_len = list_nde.Len();
 			for (int i = 0; i < list_len; ++i) {
-				Json_itm_kv data_kv		= Json_itm_kv.cast_(list_nde.Get_at(i));
+				Json_kv data_kv		= Json_kv.cast_(list_nde.Get_at(i));
 				byte[] lang_bry			= data_kv.Key().Data_bry();
 				byte[][] vals_bry_ary	= null;
 				Json_itm data_val		= data_kv.Val();
 				switch (data_val.Tid()) {
 					case Json_itm_.Tid_array:		// EX: 'en':['en_val_1','en_val_2']
-						Json_itm_ary vals_ary	= Json_itm_ary.cast_(data_val);
+						Json_ary vals_ary	= Json_ary.cast_or_null(data_val);
 						vals_bry_ary = vals_ary.Xto_bry_ary();
 						break;
 					case Json_itm_.Tid_nde:			// EX: 'en':{'0:en_val_1','1:en_val_2'}; PAGE:wd.q:621080 DATE:2014-09-21
@@ -98,7 +98,7 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 						int vals_len = vals_nde.Len();
 						vals_bry_ary = new byte[vals_len][];
 						for (int j = 0; j < vals_len; ++j) {
-							Json_itm_kv vals_sub_kv = Json_itm_kv.cast_(vals_nde.Get_at(j));
+							Json_kv vals_sub_kv = Json_kv.cast_(vals_nde.Get_at(j));
 							vals_bry_ary[j] = vals_sub_kv.Val().Data_bry();
 						}
 						break;
@@ -112,7 +112,7 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 	}
 	public Ordered_hash Parse_claims(byte[] qid, Json_doc doc) {
 		try {
-			Json_itm_ary list_nde = Json_itm_ary.cast_(doc.Get_grp(Bry_claims)); if (list_nde == null) return Empty_ordered_hash_generic;
+			Json_ary list_nde = Json_ary.cast_or_null(doc.Get_grp(Bry_claims)); if (list_nde == null) return Empty_ordered_hash_generic;
 			List_adp temp_list = List_adp_.new_();
 			byte[] src = doc.Src();
 			int len = list_nde.Len();
@@ -151,13 +151,13 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 		int len = prop_nde.Len();	// should have 5 (m, q, g, rank, refs), but don't enforce (can rely on keys)
 		Wdata_claim_itm_core rv = null;
 		for (int i = 0; i < len; i++) {
-			Json_itm_kv kv = Json_itm_kv.cast_(prop_nde.Get_at(i));
+			Json_kv kv = Json_kv.cast_(prop_nde.Get_at(i));
 			Json_itm kv_key = kv.Key();
 			Byte_obj_val bv = (Byte_obj_val)Prop_key_hash.Get_by_mid(src, kv_key.Src_bgn(), kv_key.Src_end());
 			if (bv == null) {Warn("invalid prop node: ~{0}", String_.new_u8(src, kv_key.Src_bgn(), kv_key.Src_end())); return null;}
 			switch (bv.Val()) {
 				case Prop_tid_m:
-					rv = New_prop_by_m(src, Json_itm_ary.cast_(kv.Val()));
+					rv = New_prop_by_m(src, Json_ary.cast_or_null(kv.Val()));
 					if (rv == null) return null;
 					break;
 				case Prop_tid_g:
@@ -175,7 +175,7 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 		}
 		return rv;
 	}
-	private Wdata_claim_itm_core New_prop_by_m(byte[] src, Json_itm_ary ary) {
+	private Wdata_claim_itm_core New_prop_by_m(byte[] src, Json_ary ary) {
 		byte snak_tid = Wdata_dict_snak_tid.Xto_tid(ary.Get_at(0).Data_bry());
 		int pid = Json_itm_int.cast_(ary.Get_at(1)).Data_as_int();
 		switch (snak_tid) {
@@ -187,13 +187,13 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 		return Make_itm(pid, snak_tid, val_tid, ary);
 	}
 
-	private Wdata_claim_itm_core Make_itm(int pid, byte snak_tid, byte val_tid, Json_itm_ary ary) {
+	private Wdata_claim_itm_core Make_itm(int pid, byte snak_tid, byte val_tid, Json_ary ary) {
 		switch (val_tid) {
 			case Wdata_dict_val_tid.Tid_string:
 				return new Wdata_claim_itm_str(pid, snak_tid, ary.Get_at(3).Data_bry());
 			case Wdata_dict_val_tid.Tid_entity: {
 				Json_nde sub_nde = Json_nde.cast_(ary.Get_at(3));
-				Json_itm_kv entity_kv = Json_itm_kv.cast_(sub_nde.Get_at(1));
+				Json_kv entity_kv = Json_kv.cast_(sub_nde.Get_at(1));
 				return new Wdata_claim_itm_entity(pid, snak_tid, Wdata_dict_value_entity_tid.Tid_item, entity_kv.Val().Data_bry());
 			}
 			case Wdata_dict_val_tid.Tid_time: {
@@ -216,7 +216,7 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 		}		
 	}
 	private static byte[] Get_val(Json_nde sub_nde, int i) {
-		Json_itm_kv kv = Json_itm_kv.cast_(sub_nde.Get_at(i));
+		Json_kv kv = Json_kv.cast_(sub_nde.Get_at(i));
 		return kv.Val().Data_bry();
 	}
 	private void Warn(String fmt, Object... args) {usr_dlg.Warn_many("", "", fmt, args);}
@@ -233,15 +233,15 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 		Ordered_hash rv = Ordered_hash_.new_bry_();
 		int len = nde.Len();
 		for (int i = 0; i < len; i++) {
-			Json_itm_kv kv = Json_itm_kv.cast_(nde.Get_at(i));
+			Json_kv kv = Json_kv.cast_(nde.Get_at(i));
 			byte[] kv_key = kv.Key().Data_bry();
 			rv.Add(kv_key, kv);
 		}
 		return rv;
 	}
 	public Wdata_claim_grp_list Parse_qualifiers(byte[] qid, Json_nde nde)		{throw Err_.new_unimplemented();}
-	public Wdata_references_grp[] Parse_references(byte[] qid, Json_itm_ary owner)	{throw Err_.new_unimplemented();}
-	public int[] Parse_pid_order(byte[] qid, Json_itm_ary ary) {throw Err_.new_unimplemented();}
+	public Wdata_references_grp[] Parse_references(byte[] qid, Json_ary owner)	{throw Err_.new_unimplemented();}
+	public int[] Parse_pid_order(byte[] qid, Json_ary ary) {throw Err_.new_unimplemented();}
 	public static final String
 	  Str_entity								= "entity"
 	, Str_id									= "id"

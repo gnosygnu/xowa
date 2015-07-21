@@ -25,6 +25,6 @@ public interface Wdata_doc_parser {
 	Ordered_hash Parse_claims(byte[] qid, Json_doc doc);
 	Wdata_claim_itm_base Parse_claims_data(byte[] qid, int pid, byte snak_tid, Json_nde nde);
 	Wdata_claim_grp_list Parse_qualifiers(byte[] qid, Json_nde nde);
-	int[] Parse_pid_order(byte[] qid, Json_itm_ary ary);
-	Wdata_references_grp[] Parse_references(byte[] qid, Json_itm_ary owner);
+	int[] Parse_pid_order(byte[] qid, Json_ary ary);
+	Wdata_references_grp[] Parse_references(byte[] qid, Json_ary owner);
 }

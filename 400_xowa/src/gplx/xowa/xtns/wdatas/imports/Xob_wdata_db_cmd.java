@@ -102,7 +102,7 @@ abstract class Wdata_tbl_base {
 	public static void Exec_insert_kvs(Db_stmt stmt, int page_id, Ordered_hash hash) {
 		int len = hash.Count();
 		for (int i = 0; i < len; i++) {
-			Json_itm_kv kv = (Json_itm_kv)hash.Get_at(i);
+			Json_kv kv = (Json_kv)hash.Get_at(i);
 			stmt.Clear()
 			.Val_int(page_id)
 			.Val_bry_as_str(kv.Key().Data_bry())
@@ -145,7 +145,7 @@ class Wdata_alias_tbl extends Wdata_tbl_base {
 		int len = hash.Count();
 		Db_stmt insert_stmt = this.Insert_stmt();
 		for (int i = 0; i < len; i++) {
-			Json_itm_kv kv = (Json_itm_kv)hash.Get_at(i);
+			Json_kv kv = (Json_kv)hash.Get_at(i);
 			byte[] key = kv.Key().Data_bry();
 			Json_grp val_grp = (Json_grp)kv.Val();
 			int val_grp_len = val_grp.Len();
@@ -155,7 +155,7 @@ class Wdata_alias_tbl extends Wdata_tbl_base {
 				if		(val_itm.Tid() == Json_itm_.Tid_string)
 					val = val_itm.Data_bry();
 				else if (val_itm.Tid() == Json_itm_.Tid_kv) {	// EX: q80 and de aliases
-					val = ((Json_itm_kv)val_itm).Val().Data_bry();
+					val = ((Json_kv)val_itm).Val().Data_bry();
 				}
 				insert_stmt.Clear()
 				.Val_int(page_id)
@@ -201,7 +201,7 @@ class Wdata_link_tbl extends Wdata_tbl_base {
 		int len = hash.Count();
 		Db_stmt insert_stmt = this.Insert_stmt();
 		for (int i = 0; i < len; i++) {
-			Json_itm_kv kv = (Json_itm_kv)hash.Get_at(i);
+			Json_kv kv = (Json_kv)hash.Get_at(i);
 			byte[] key = kv.Key().Data_bry();
 			Json_itm kv_val = kv.Val();
 			byte[] val = Bry_.Empty;
@@ -209,7 +209,7 @@ class Wdata_link_tbl extends Wdata_tbl_base {
 				val = kv_val.Data_bry();
 			else {
 				Json_nde val_nde = (Json_nde)kv.Val();
-				Json_itm_kv val_name_kv = (Json_itm_kv)val_nde.Get_at(0);	// ASSUME: 1st item is always "name" kv; EX: "name":"Earth"
+				Json_kv val_name_kv = (Json_kv)val_nde.Get_at(0);	// ASSUME: 1st item is always "name" kv; EX: "name":"Earth"
 				val = val_name_kv.Val().Data_bry();
 			}
 			insert_stmt.Clear()

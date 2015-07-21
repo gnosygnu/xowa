@@ -50,7 +50,7 @@ public class Json_doc {
 		byte[] path = paths[paths_idx];
 		int subs_len = owner.Len();
 		for (int i = 0; i < subs_len; i++) {
-			Json_itm_kv itm = Json_itm_kv.cast_(owner.Get_at(i)); if (itm == null) continue;	// ignore simple props, arrays, ndes
+			Json_kv itm = Json_kv.cast_(owner.Get_at(i)); if (itm == null) continue;	// ignore simple props, arrays, ndes
 			if (!itm.Key_eq(path)) continue;
 			if (paths_idx == paths_last) return itm.Val();
 			Json_nde sub_nde = Json_nde.cast_(itm.Val()); if (sub_nde == null) return null;	// match, but has not a nde; exit
