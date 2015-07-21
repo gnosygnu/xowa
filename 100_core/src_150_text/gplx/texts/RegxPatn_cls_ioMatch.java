@@ -16,12 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.texts; import gplx.*;
+import gplx.core.regxs.*;
 public class RegxPatn_cls_ioMatch {
 	public String Raw() {return raw;} private String raw;
 	public boolean CaseSensitive() {return caseSensitive;} private boolean caseSensitive;
 	public boolean Matches(String text) {
 		text = String_.CaseNormalize(caseSensitive, text);
-		return RegxAdp_.Match(text, compiled);}	// WNT-centric: Io_mgr paths are case-insensitive;
+		return Regx_adp_.Match(text, compiled);}	// WNT-centric: Io_mgr paths are case-insensitive;
 	@Override public String toString() {return raw;}
 
 	String compiled;

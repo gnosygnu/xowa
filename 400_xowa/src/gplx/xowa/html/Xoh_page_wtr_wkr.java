@@ -117,13 +117,15 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 			bfr.Add(gplx.xowa.apps.Xoa_gfs_php_mgr.Xto_php(tmp_bfr, Bool_.N, data_raw));
 			return;
 		}
-		Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();
 		if (ns_id == Xow_ns_.Id_file)			// if [[File]], add boilerplate header
 			app.Ns_file_page_mgr().Bld_html(wiki, ctx, page, bfr, page.Ttl(), wiki.Cfg_file_page(), page.File_queue());
 		gplx.xowa.html.tidy.Xoh_tidy_mgr tidy_mgr = app.Html_mgr().Tidy_mgr();
 		boolean tidy_enabled = tidy_mgr.Enabled();
 		Bry_bfr hdom_bfr = tidy_enabled ? app.Utl__bfr_mkr().Get_m001() : bfr;	// if tidy, then write to tidy_bfr; note that bfr already has <html> and <head> written to it, so this can't be passed to tidy; DATE:2014-06-11
 		wiki.Html_mgr().Html_wtr().Write_all(hdom_bfr, page.Wikie().Ctx(), hctx, page.Root().Data_mid(), page.Root());
+//			Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();
+//			if (vnt_mgr.Enabled()) 	// VNT
+//				hdom_bfr.Add(vnt_mgr.Convert_text(wiki, hdom_bfr.Xto_bry_and_clear()));
 		if (tidy_enabled) {
 			tidy_mgr.Run_tidy_html(page, hdom_bfr);
 			bfr.Add_bfr_and_clear(hdom_bfr);
@@ -143,8 +145,6 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 			else
 				wiki.Html_mgr().Ctg_mgr().Bld(bfr, page, ctgs_len);
 		}
-		if (vnt_mgr.Enabled()) 	// VNT
-			bfr.Add(vnt_mgr.Convert_text(wiki, bfr.Xto_bry_and_clear()));
 	}
 	private void Write_body_pre(Bry_bfr bfr, Xoae_app app, Xowe_wiki wiki, byte[] data_raw, Bry_bfr tmp_bfr) {
 		Xoh_html_wtr_escaper.Escape(app.Parser_amp_mgr(), tmp_bfr, data_raw, 0, data_raw.length, false, false);

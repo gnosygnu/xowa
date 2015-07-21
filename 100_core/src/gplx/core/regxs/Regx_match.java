@@ -15,14 +15,14 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.texts; import gplx.*;
-public class RegxMatch {
-	public RegxMatch(boolean rslt, int find_bgn, int find_end, RegxGroup[] groups) {this.rslt = rslt; this.find_bgn = find_bgn; this.find_end = find_end; this.groups = groups;}
+package gplx.core.regxs; import gplx.*; import gplx.core.*;
+public class Regx_match {
+	public Regx_match(boolean rslt, int find_bgn, int find_end, Regx_group[] groups) {this.rslt = rslt; this.find_bgn = find_bgn; this.find_end = find_end; this.groups = groups;}
 	public boolean Rslt() {return rslt;} private boolean rslt;
 	public boolean Rslt_none() {return !rslt;}	// NOTE: was "|| find_end - find_bgn == 0"; DATE:2013-04-11; DATE:2014-09-02
 	public int Find_bgn() {return find_bgn;} int find_bgn;
 	public int Find_end() {return find_end;} int find_end;
 	public int Find_len() {return find_end - find_bgn;}
-	public RegxGroup[] Groups() {return groups;} RegxGroup[] groups = RegxGroup.Ary_empty;
-	public static final RegxMatch[] Ary_empty = new RegxMatch[0];
+	public Regx_group[] Groups() {return groups;} Regx_group[] groups = Regx_group.Ary_empty;
+	public static final Regx_match[] Ary_empty = new Regx_match[0];
 }

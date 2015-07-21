@@ -15,16 +15,15 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.texts; import gplx.*;
-public class RegxAdp_mpo_find {
-	public String Input() {return input;} public RegxAdp_mpo_find Input_(String val) {input = val; return this;} private String input;
-	public String Find() {return find;} public RegxAdp_mpo_find Find_(String val) {find = val; return this;} private String find;
-	public List_adp Exec_asList() {
-		RegxAdp regx = RegxAdp_.new_(find);
+package gplx.core.regxs; import gplx.*; import gplx.core.*;
+public class Regx_adp_ {
+	public static Regx_adp new_(String pattern) {return new Regx_adp(pattern);}
+	public static List_adp Find_all(String input, String find) {
+		Regx_adp regx = Regx_adp_.new_(find);
 		int idx = 0;
 		List_adp rv = List_adp_.new_();
 		while (true)  {
-			RegxMatch match = regx.Match(input, idx);
+			Regx_match match = regx.Match(input, idx);
 			if (match.Rslt_none()) break;
 			rv.Add(match);
 			int findBgn = match.Find_bgn();
@@ -32,5 +31,13 @@ public class RegxAdp_mpo_find {
 			if (idx > String_.Len(input)) break;
 		}
 		return rv;
+	}
+	public static String Replace(String raw, String regx_str, String replace) {
+		Regx_adp regx = Regx_adp_.new_(regx_str);
+		return regx.ReplaceAll(raw, replace);
+	}
+	public static boolean Match(String input, String pattern) {
+		Regx_adp rv = new Regx_adp(pattern);
+		return rv.Match(input, 0).Rslt();
 	}
 }

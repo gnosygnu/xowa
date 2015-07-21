@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.texts; import gplx.*;
-import org.junit.*;
+import org.junit.*; import gplx.core.regxs.*;
 public class RegxPatn_cls_like_tst {
 	@Test  public void Basic() {
 		tst_Match("abcd", "abcd", true);				// basic; pass
@@ -60,17 +60,17 @@ public class RegxPatn_cls_like_tst {
 		tst_Match("a~b", "a~b", '~', false);			// escape char; fail
 		tst_Match("a~b", "a~~b", '~', true);			// escape char; pass
 	}
-	@Test  public void Chars() {						// Escape RegxBldr; ex: LIKE 'a{' -> a\{
-		tst_EscapeRegxChar(RegxBldr.Tkn_Escape);		// \
-		tst_EscapeRegxChar(RegxBldr.Tkn_GroupBegin);	// [
-		tst_EscapeRegxChar(RegxBldr.Tkn_GroupEnd);		// ]
-		tst_EscapeRegxChar(RegxBldr.Tkn_LineBegin);		// ^
-		tst_EscapeRegxChar(RegxBldr.Tkn_LineEnd);		// $
-		tst_EscapeRegxChar(RegxBldr.Tkn_RepBegin);		// {
-		tst_EscapeRegxChar(RegxBldr.Tkn_RepEnd);		// }
-		tst_EscapeRegxChar(RegxBldr.Tkn_Wild_0or1);		// ?
-		tst_EscapeRegxChar(RegxBldr.Tkn_Wild_0Plus);	// *
-		tst_EscapeRegxChar(RegxBldr.Tkn_Wild_1Plus);	// +
+	@Test  public void Chars() {						// Escape Regx_bldr; ex: LIKE 'a{' -> a\{
+		tst_EscapeRegxChar(Regx_bldr.Tkn_Escape);		// \
+		tst_EscapeRegxChar(Regx_bldr.Tkn_GroupBegin);	// [
+		tst_EscapeRegxChar(Regx_bldr.Tkn_GroupEnd);		// ]
+		tst_EscapeRegxChar(Regx_bldr.Tkn_LineBegin);		// ^
+		tst_EscapeRegxChar(Regx_bldr.Tkn_LineEnd);		// $
+		tst_EscapeRegxChar(Regx_bldr.Tkn_RepBegin);		// {
+		tst_EscapeRegxChar(Regx_bldr.Tkn_RepEnd);		// }
+		tst_EscapeRegxChar(Regx_bldr.Tkn_Wild_0or1);		// ?
+		tst_EscapeRegxChar(Regx_bldr.Tkn_Wild_0Plus);	// *
+		tst_EscapeRegxChar(Regx_bldr.Tkn_Wild_1Plus);	// +
 	}
 	void tst_Match(String raw, String regx, boolean expd) {tst_Match(raw, regx, RegxPatn_cls_like.EscapeDefault, expd);}
 	void tst_Match(String raw, String regx, char escape, boolean expd) {

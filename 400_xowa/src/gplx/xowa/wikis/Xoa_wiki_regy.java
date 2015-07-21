@@ -39,7 +39,7 @@ public class Xoa_wiki_regy {
 		}
 		init_needed = true;
 	}
-	public static void Make_wiki_dir(Xoae_app app, String domain_str) {	// TEST: fake wiki_dir for Parse_from_url_bar; DATE:2014-02-16
+	public static void Make_wiki_dir(Xoa_app app, String domain_str) {	// TEST: fake wiki_dir for Parse_from_url_bar; DATE:2014-02-16
 		Io_url wiki_dir = app.Fsys_mgr().Wiki_dir();
 		Io_mgr.I.CreateDir(wiki_dir.GenSubDir(domain_str));
 	}

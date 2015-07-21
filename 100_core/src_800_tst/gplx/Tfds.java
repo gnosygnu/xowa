@@ -19,6 +19,12 @@ package gplx;
 import gplx.core.strings.*; import gplx.core.consoles.*;
 public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	public static boolean SkipDb = false;
+	public static void Eq_bool	(boolean expd	, boolean   actl, String fmt, Object... args)	{Eq_str(Bool_.Xto_str_lower(expd), Bool_.Xto_str_lower(actl), fmt, args);}
+	public static void Eq_str	(byte[] expd, String actl, String fmt, Object... args)	{Eq_str(String_.new_u8(expd), actl, fmt, args);}
+	public static void Eq_str	(byte[] expd, byte[] actl, String fmt, Object... args)	{Eq_str(String_.new_u8(expd), String_.new_u8(actl), fmt, args);}
+	public static void Eq_str	(String expd, byte[] actl, String fmt, Object... args)	{Eq_str(expd, String_.new_u8(actl), fmt, args);}
+	public static void Eq_str	(String expd, String actl, String fmt, Object... args)	{Eq_wkr(expd, actl, true, String_.Format(fmt, args));}
+
 	public static void Eq(Object expd, Object actl)											{Eq_wkr(expd, actl, true, EmptyStr);}
 	public static void Eq_able(EqAble expd, EqAble actl)									{Eq_able_wkr(expd, actl, true, EmptyStr);}
 	public static void Eq_able(EqAble expd, EqAble actl, String fmt, Object... args)	{Eq_able_wkr(expd, actl, true, String_.Format(fmt, args));}
@@ -29,10 +35,11 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	public static void Eq_date(DateAdp expd, DateAdp actl)									{Eq_wkr(expd.XtoStr_gplx(), actl.XtoStr_gplx(), true, EmptyStr);}
 	public static void Eq_date(DateAdp expd, DateAdp actl, String fmt, Object... args){Eq_wkr(expd.XtoStr_gplx(), actl.XtoStr_gplx(), true, String_.Format(fmt, args));}
 	public static void Eq_url(Io_url expd, Io_url actl)										{Eq_wkr(expd.Raw(), actl.Raw(), true, EmptyStr);}
+	public static void Eq_str(String expd, byte[] actl)										{Eq_wkr(expd, String_.new_u8(actl), true, EmptyStr);}
 	public static void Eq_bry(String expd, byte[] actl)										{Eq_wkr(expd, String_.new_u8(actl), true, EmptyStr);}
 	public static void Eq_bry(byte[] expd, byte[] actl)										{Eq_wkr(String_.new_u8(expd), String_.new_u8(actl), true, EmptyStr);}
-	public static void Eq_str(XtoStrAble expd, XtoStrAble actl, String msg)					{Eq_wkr(expd.XtoStr(), actl.XtoStr(), true, msg);}
-	public static void Eq_str(XtoStrAble expd, XtoStrAble actl)								{Eq_wkr(expd.XtoStr(), actl.XtoStr(), true, String_.Empty);}
+	public static void Eq_str_intf(XtoStrAble expd, XtoStrAble actl, String msg)			{Eq_wkr(expd.XtoStr(), actl.XtoStr(), true, msg);}
+	public static void Eq_str_intf(XtoStrAble expd, XtoStrAble actl)						{Eq_wkr(expd.XtoStr(), actl.XtoStr(), true, String_.Empty);}
 	public static void Eq_str_lines(String lhs, String rhs)									{Eq_str_lines(lhs, rhs, EmptyStr);}
 	public static void Eq_str_lines(String lhs, String rhs, String note)					{
 		if		(lhs == null && rhs == null)	return;	// true

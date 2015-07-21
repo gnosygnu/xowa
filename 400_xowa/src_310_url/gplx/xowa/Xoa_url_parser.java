@@ -20,7 +20,8 @@ import gplx.core.primitives.*;
 import gplx.xowa.langs.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.net.*; import gplx.xowa.files.*;
 import gplx.xowa.html.hrefs.*;
 public class Xoa_url_parser {
-	private final Url_encoder encoder = Url_encoder.new_html_href_mw_().Itms_raw_same_many(Byte_ascii.Underline); private final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
+	private final Url_encoder encoder = Url_encoder.new_html_href_mw_().Itms_raw_same_many(Byte_ascii.Underline);
+	private final Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	public Gfo_url_parser Url_parser() {return url_parser;} private Gfo_url_parser url_parser = new Gfo_url_parser(); private Gfo_url gfo_url = new Gfo_url();
 	public String Build_str(Xoa_url url) {									// transform to "canonical" form that fits url box for both XOWA and Mozilla Firefox
 		tmp_bfr.Add(url.Wiki_bry());										// add wiki;		EX: "en.wikipedia.org"

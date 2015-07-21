@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.texts; import gplx.*;
-import gplx.core.strings.*;
+import gplx.core.strings.*; import gplx.core.regxs.*;
 public class RegxPatn_cls_like_ {
 	public static RegxPatn_cls_like parse_(String regxRaw, char escape) {
 		String regx = Compile(regxRaw, escape);
@@ -26,7 +26,7 @@ public class RegxPatn_cls_like_ {
 		char Wildcard = '%', AnyChar = '_';
 		boolean insideCharSet = false;
 		String_bldr sb = String_bldr_.new_();
-		sb.Add(RegxBldr.Tkn_LineBegin);
+		sb.Add(Regx_bldr.Tkn_LineBegin);
 		int rawLen = String_.Len(raw);
 		for (int i = 0; i < rawLen; i++) {
 			char c = String_.CharAt(raw, i);
@@ -36,28 +36,28 @@ public class RegxPatn_cls_like_ {
 				else throw Err_.new_wo_type("escape cannot be last char", "raw", raw, "escape", escape, "i", i);
 			}
 			else if (c == Wildcard) { // % -> .*
-				sb.Add(RegxBldr.Tkn_AnyChar).Add(RegxBldr.Tkn_Wild_0Plus);
+				sb.Add(Regx_bldr.Tkn_AnyChar).Add(Regx_bldr.Tkn_Wild_0Plus);
 			}
 			else if (c == AnyChar) // _ -> .
-				sb.Add(RegxBldr.Tkn_AnyChar);
-			else if (c == RegxBldr.Tkn_CharSetBegin) { // toggle insideCharSet for ^
+				sb.Add(Regx_bldr.Tkn_AnyChar);
+			else if (c == Regx_bldr.Tkn_CharSetBegin) { // toggle insideCharSet for ^
 				insideCharSet = true;
 				sb.Add(c);
 			}
-			else if (c == RegxBldr.Tkn_CharSetEnd) { // toggle insideCharSet for ^
+			else if (c == Regx_bldr.Tkn_CharSetEnd) { // toggle insideCharSet for ^
 				insideCharSet = false;
 				sb.Add(c);
 			}
-			else if (c == RegxBldr.Tkn_Not && insideCharSet) { // ^ is used for Not in CharSet, but also used for LineStart; do not escape if insideCharSet
+			else if (c == Regx_bldr.Tkn_Not && insideCharSet) { // ^ is used for Not in CharSet, but also used for LineStart; do not escape if insideCharSet
 				insideCharSet = false;
 				sb.Add(c);
 			}
-			else if (RegxBldr.RegxChar_chk(c))
-				sb.Add(RegxBldr.Tkn_Escape).Add(c);
+			else if (Regx_bldr.RegxChar_chk(c))
+				sb.Add(Regx_bldr.Tkn_Escape).Add(c);
 			else // regular text
 				sb.Add(c);
 		}
-		sb.Add(RegxBldr.Tkn_LineEnd);
+		sb.Add(Regx_bldr.Tkn_LineEnd);
 		return sb.XtoStr();
 	}
 }

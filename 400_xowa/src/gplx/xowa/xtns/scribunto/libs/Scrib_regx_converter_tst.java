@@ -16,8 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import org.junit.*;
-import gplx.texts.*;
+import org.junit.*; import gplx.core.regxs.*;
 public class Scrib_regx_converter_tst {
 	@Before public void init() {fxt.Clear();} private Scrib_regx_converter_fxt fxt = new Scrib_regx_converter_fxt();
 	@Test   public void Basic()				{fxt.Test_parse("abc012ABC"				, "abc012ABC");}
@@ -61,7 +60,7 @@ class Scrib_regx_converter_fxt {
 	}
 	public void Test_replace(String text, String find, String replace, String expd) {
 		String regex_str = under.Parse(Bry_.new_u8(find), Scrib_regx_converter.Anchor_G);
-		String actl = RegxAdp_.Replace(text, regex_str, replace);
+		String actl = Regx_adp_.Replace(text, regex_str, replace);
 		Tfds.Eq(expd, actl);
 	}
 }

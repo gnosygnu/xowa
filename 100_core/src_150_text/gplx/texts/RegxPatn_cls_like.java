@@ -16,10 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.texts; import gplx.*;
+import gplx.core.regxs.*;
 public class RegxPatn_cls_like {
 	public char Escape() {return escape;} char escape; public static final char EscapeDefault = '|';
 	public String Raw() {return raw;} private String raw;
-	public boolean Matches(String text) {return RegxAdp_.Match(text, compiled);}
+	public boolean Matches(String text) {return Regx_adp_.Match(text, compiled);}
 	@Override public String toString() {return String_.Format("LIKE {0} ESCAPE {1} -> {2}", raw, escape, compiled);}
 
 	String compiled;

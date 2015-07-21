@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
+import gplx.core.regxs.*;
 public class Scrib_regx_converter {
 	private List_adp capt_list = List_adp_.new_(), grps_parens = List_adp_.new_(); private List_adp grps_open = List_adp_.new_();
 	public Scrib_regx_converter() {Init();}
@@ -94,20 +95,21 @@ public class Scrib_regx_converter {
 									}
 								}
 								break;
-//								case Byte_ascii.Ltr_f: {	// EX: "%f[%a]"
+//								case Byte_ascii.Ltr_f: {	// EX: lua frontier pattern; "%f[%a]"; DATE:2015-07-21
 //									++i;
 //									if (i + 1 >= len || src[i] != Byte_ascii.Brack_bgn) throw Err_.new_("scribunto", "missing '[' after %f in pattern at pattern character $ii");
+//
+//									// %f always followed by bracketed term; convert lua bracketed term to regex
 //									Bry_bfr tmp_bfr = Xoa_app_.Utl__bfr_mkr().Get_b128();
 //									i = bracketedCharSetToRegex(tmp_bfr, src, i, len);
 //									byte[] bracketed_regx = tmp_bfr.To_bry_and_rls();
-//									int j = 1;
-//									bfr.Add_str_a7("(?<!").Add(bracketed_regx).Add_str_a7(")(?=$").Add(bracketed_regx).Add_str_a7(")");
-////									if ( preg_match( "/$re2/us", "\0" ) ) {
-////										$re .= "(?<!^)(?<!$re2)(?=$re2|$)";
-////									} else {
-////										$re .=       "(?<!$re2)(?=$re2)";
-////									}
-//
+//									
+//									// scrib has following comment: 'Because %f considers the beginning and end of the String to be \0, determine if $re2 matches that and take it into account with "^" and "$".'
+//									// if the bracketed_regx is a negative class it will match \0; so, \W means anything not a word char, which will match \0; \w means word char which will not match \0
+//									if (Regx_adp_.Match("\0", String_.new_u8(bracketed_regx)))
+//										bfr.Add_str_a7("(?<!^)(?<!").Add(bracketed_regx).Add_str_a7(")(?=").Add(bracketed_regx).Add_str_a7("|$)");	// match bgn / end of String
+//									else
+//										bfr		 .Add_str_a7("(?<!").Add(bracketed_regx).Add_str_a7(")(?=").Add(bracketed_regx).Add_str_a7(  ")");
 //									break;
 //								}
 							case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:

@@ -34,7 +34,7 @@ public class Xob_dump_file_ {
 				||	String_.Eq(dump_server, Xob_dump_file_.Server_masaryk)
 				)
 			){
-			Xoa_app_.Usr_dlg().Note_many("", "", "wmf.dump:connect log; server_url=~{0} dump_date=~{1}", dump_server, dump_date);
+			Xoa_app_.Usr_dlg().Note_many("", "", "wmf.dump:dump date; server_url=~{0} dump_date=~{1}", dump_server, dump_date);
 			Xoi_mirror_parser mirror_parser = new Xoi_mirror_parser();
 			String dump_wiki_url = dump_server + String_.new_a7(rv.Wiki_alias()) + "/";
 			byte[] dump_url_wiki_html = gplx.ios.IoEngine_xrg_downloadFil.new_("", Io_url_.Empty).Exec_as_bry(dump_wiki_url); if (Bry_.Len_eq_0(dump_url_wiki_html)) return;

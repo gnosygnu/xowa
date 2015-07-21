@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.texts; import gplx.*;
-import gplx.core.strings.*;
+import gplx.core.strings.*; import gplx.core.regxs.*;
 public class RegxPatn_cls_ioMatch_ {
 	public static final String Wildcard			= "*";
 	public static final String OrDelimiter		= "|";
@@ -32,22 +32,22 @@ public class RegxPatn_cls_ioMatch_ {
 		if (raw == ImpossiblePath) return ImpossiblePath;
 
 		String_bldr sb = String_bldr_.new_();
-		sb.Add(RegxBldr.Tkn_LineBegin);									// Char_LineBegin for exact match (else "LIKE a" would match "abc")
+		sb.Add(Regx_bldr.Tkn_LineBegin);									// Char_LineBegin for exact match (else "LIKE a" would match "abc")
 		int rawLen = String_.Len(raw);
 		for (int i = 0; i < rawLen; i++) {
 			char c = String_.CharAt(raw, i);
 			if (c == '\\')
 				sb.Add("\\\\");
 			else if (c == '*')
-				sb.Add(".").Add(RegxBldr.Tkn_Wild_0Plus);
+				sb.Add(".").Add(Regx_bldr.Tkn_Wild_0Plus);
 			else if (c == '|')
-				sb.Add(RegxBldr.Tkn_LineEnd).Add("|").Add(RegxBldr.Tkn_LineBegin);		// each term must be bracketed by lineBgn/lineEnd; ex: A|B -> ^A$|^B$
+				sb.Add(Regx_bldr.Tkn_LineEnd).Add("|").Add(Regx_bldr.Tkn_LineBegin);		// each term must be bracketed by lineBgn/lineEnd; ex: A|B -> ^A$|^B$
 			else
 				sb.Add(c);
 		}
-		sb.Add(RegxBldr.Tkn_LineEnd);
+		sb.Add(Regx_bldr.Tkn_LineEnd);
 		return sb.XtoStr();
 	}
 	public static final String InvalidCharacters		= "|*?\"<>";		// : / \ are omitted b/c they will cause full paths to fail
-	public static final String ValidCharacters		= RegxBldr.Excludes(InvalidCharacters);
+	public static final String ValidCharacters		= Regx_bldr.Excludes(InvalidCharacters);
 }

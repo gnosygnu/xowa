@@ -15,13 +15,12 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package gplx.texts; import gplx.*;
-public class RegxAdp_mpo_replace {
-	public String Input() {return input;} public RegxAdp_mpo_replace Input_(String val) {input = val; return this;} private String input;
-	public String Find() {return find;} public RegxAdp_mpo_replace Find_(String val) {find = val; return this;} private String find;
-	public String Replace() {return replace;} public RegxAdp_mpo_replace Replace_(String val) {replace = val; return this;} private String replace;
-	public String Exec_asStr() {
-		RegxAdp regx = RegxAdp_.new_(find);
-		return regx.ReplaceAll(input, replace);
-	}
+package gplx.core.regxs; import gplx.*; import gplx.core.*;
+public class Regx_group {
+	public Regx_group(boolean rslt, int bgn, int end, String val) {this.rslt = rslt; this.bgn = bgn; this.end = end; this.val = val;}
+	public boolean Rslt() {return rslt;} private boolean rslt;
+	public int Bgn() {return bgn;} int bgn;
+	public int End() {return end;} int end;
+	public String Val() {return val;} private String val;
+	public static final Regx_group[] Ary_empty = new Regx_group[0];
 }

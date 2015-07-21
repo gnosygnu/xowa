@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import org.junit.*;
+import org.junit.*; import gplx.core.regxs.*;
 public class Scrib_lib_ustring__lib_tst {
 	@Before public void init() {
 		fxt.Clear_for_lib();
@@ -116,11 +116,19 @@ public class Scrib_lib_ustring__lib_tst {
 		, "  1=2"
 		));
 	}
-	@Test  public void Gsub_frontier_pattern() {	// PURPOSE: handle frontier pattern; EX:"%f[%a]"; NOTE:test will fail if run in 1.6 environment; DATE:2015-07-20
+//		@Test  public void Gsub_frontier_pattern() {	// PURPOSE: handle frontier pattern; EX:"%f[%a]"; DATE:2015-07-21
 //			fxt.Init_cbk(Scrib_core.Key_mw_interface, fxt.Core().Lib_ustring(), Scrib_lib_ustring.Invk_gsub);
-//			//Exec_gsub_regx("THE QUICK brOWN FOx JUMPS", "%f[%a]%u+%f[%A]", 1, "", "THE;1;QUICK;2;JUMPS;3;");
-//			Exec_gsub_regx("thE QUICK brOWN FOx JUMPS", "%f[%a]%u+%f[%A]", 1, "", "THE;1;QUICK;2;JUMPS;3;");
-	}
+//			Exec_gsub_regx("a b c", "%f[%W]", 5, "()", "a() b() c();3");
+//			Exec_gsub_regx("abC DEF gHI JKm NOP", "%f[%a]%u+%f[%A]", Int_.MaxValue, "()", "abC () gHI JKm ();2");	// based on http://lua-users.org/wiki/FrontierPattern
+//		}
+//		@Test  public void Gsub_frontier_pattern_utl() {// PURPOSE: standalone test for \0 logic in frontier pattern; note that verified against PHP: echo(preg_match( "/[\w]/us", "\0" )); DATE:2015-07-21
+//			Tfds.Eq(Bool_.N, Regx_adp_.Match("\0", "a"));		// \0 not matched by a
+//			Tfds.Eq(Bool_.N, Regx_adp_.Match("\0", "0"));		// \0 not matched by numeric 0
+//			Tfds.Eq(Bool_.N, Regx_adp_.Match("\0", "[\\w]"));	// \0 not matched by word_char
+//			Tfds.Eq(Bool_.Y, Regx_adp_.Match("\0", "[\\W]"));	// \0 matched by !word_char
+//			Tfds.Eq(Bool_.Y, Regx_adp_.Match("\0", "[\\x]"));	// \0 matched by any_char
+//			Tfds.Eq(Bool_.Y, Regx_adp_.Match("\0", "[\\X]"));	// \0 matched by !any_char
+//		}
 //		@Test  public void Match_viwiktionary() {
 //			fxt.Init_cbk(Scrib_core.Key_mw_interface, fxt.Core().Lib_ustring(), Scrib_lib_ustring.Invk_match);
 //			Exec_match("tr"	, "()(r)", 1, ";");						// should return all matches
