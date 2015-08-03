@@ -21,7 +21,7 @@ import gplx.xowa.parsers.lnkes.*;
 public class Xow_popup_wrdx_mkr {
 	private boolean skip_space;
 	private Xop_tkn_itm prv_tkn_seen, prv_tkn_added;
-	public Hash_adp_bry Xnde_id_ignore_list() {return xnde_id_ignore_list;} private Hash_adp_bry xnde_id_ignore_list = Hash_adp_bry.ci_ascii_();
+	public Hash_adp_bry Xnde_id_ignore_list() {return xnde_id_ignore_list;} private Hash_adp_bry xnde_id_ignore_list = Hash_adp_bry.ci_a7();
 	public void Init() {
 		skip_space = false;
 		prv_tkn_seen = prv_tkn_added = null;

@@ -41,7 +41,7 @@ public class Wdata_dict_value_time {
 	, Bry_precision								= Bry_.new_a7(Str_precision)
 	, Bry_calendarmodel							= Bry_.new_a7(Str_calendarmodel)
 	;
-	public static final Hash_adp_bry Dict = Hash_adp_bry.cs_()
+	public static final Hash_adp_bry Dict = Hash_adp_bry.cs()
 	.Add_bry_byte(Bry_time						, Tid_time)
 	.Add_bry_byte(Bry_timezone					, Tid_timezone)
 	.Add_bry_byte(Bry_before					, Tid_before)

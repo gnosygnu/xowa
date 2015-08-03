@@ -43,7 +43,7 @@ class Map_math {// REF.MW:MapSources_math.php
 		return error == 0;
 	}
 	public void Fail(Xop_ctx ctx, byte[] src, Xot_invk self, Bry_bfr bfr, byte[] pfunc_name) {
-		String page_str = ctx.Cur_page().Url().Xto_full_str_safe();
+		String page_str = ctx.Cur_page().Url().To_str();
 		String pfunc_name_str = String_.new_u8(pfunc_name);
 		String self_str = String_.new_u8(src, self.Src_bgn(), self.Src_end()); 
 		switch (error) {
@@ -183,7 +183,7 @@ class Map_math {// REF.MW:MapSources_math.php
 		if (pos != Bry_.NotFound)	// remove dlms from end of bry; EX: "123'" -> "123"
 			word_end = pos;
 		if (!Parse_input_word_is_compass(input[word_bgn])) {	// if ( is_numeric( $v ) ) {
-			double word_val = Bry_.XtoDoubleByPosOr(input, word_bgn, word_end, Double_.NaN);
+			double word_val = Bry_.To_double_or(input, word_bgn, word_end, Double_.NaN);
 			if (!Double_.IsNaN(word_val)) {
 				if (word_idx > 2) {error = -4; return;}
 				switch (word_idx) {
@@ -271,9 +271,9 @@ class Map_math {// REF.MW:MapSources_math.php
 	}
 	private static final byte Dir_unknown_id = 0, Dir_lat_id = 1, Dir_long_id = 2;
 	public static final byte[] Dir_lat_bry = Bry_.new_a7("lat"), Dir_long_bry = Bry_.new_a7("long");
-	private static final Btrie_slim_mgr Dir_trie = Btrie_slim_mgr.ci_ascii_()	// NOTE:ci.ascii:MW_const.en
-	.Add_bry_bval(Dir_lat_bry			, Dir_lat_id)
-	.Add_bry_bval(Dir_long_bry			, Dir_long_id)
+	private static final Btrie_slim_mgr Dir_trie = Btrie_slim_mgr.ci_a7()	// NOTE:ci.ascii:MW_const.en
+	.Add_bry_byte(Dir_lat_bry			, Dir_lat_id)
+	.Add_bry_byte(Dir_long_bry			, Dir_long_id)
 	;
 	private static final byte[] 
 	  Compass_N = new byte[] {Byte_ascii.Ltr_N}
@@ -286,7 +286,7 @@ class Map_math {// REF.MW:MapSources_math.php
 	private static final byte[] Input_units = new byte[] {Input_byte_degree, Byte_ascii.Apos, Byte_ascii.Quote, Byte_ascii.Space};
 	private static final int Input_units_len = Input_units.length;
 	private static final byte[] Input_bry_degree = Bry_.new_u8("°");
-	private static final Btrie_slim_mgr Input_trie = Btrie_slim_mgr.cs_()
+	private static final Btrie_slim_mgr Input_trie = Btrie_slim_mgr.cs()
 	.Add_str_byte("'"					, Input_tid_apos)		// NOTE: must add ' so that "'" -> "' "
 	.Add_str_byte("‘"					, Input_tid_apos)
 	.Add_str_byte("’"					, Input_tid_apos)
@@ -304,7 +304,7 @@ class Map_math {// REF.MW:MapSources_math.php
 	.Add_str_byte("\t"					, Input_tid_space)
 	.Add_str_byte("\n"					, Input_tid_space)
 	.Add_str_byte("\r"					, Input_tid_space)
-	.Add_bry_bval(Input_bry_degree		, Input_tid_degree)
+	.Add_bry_byte(Input_bry_degree		, Input_tid_degree)
 	.Add_str_byte("N"					, Input_tid_compass)
 	.Add_str_byte("S"					, Input_tid_compass)
 	.Add_str_byte("E"					, Input_tid_compass)

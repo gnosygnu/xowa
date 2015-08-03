@@ -56,6 +56,7 @@ public class Pxd_parser_tst {
 	@Test  public void Unit_day_neg_w_day()							{tst_date_("30 May 2012 -1 days"	, "2012-05-29");}	// PAGE:en.w:Main Page
 	@Test  public void Unit_week()									{tst_date_("- 1 week"				, "2012-02-26");}  // PURPOSE.FIX: "week" was not being handled; error on main Page; EX:da.wikipedia.org/Main_Page
 	@Test  public void Time_len_6()									{tst_time_("041526"					, "04:15:26.000");}
+	@Test  public void Time_len_12()								{tst_both_("201601020304"			, "2016-01-02 03:04:00.000");}	// PURPOSE: handle 12 digit datetime; PAGE:en.w:Boron; DATE:2015-07-29
 	@Test  public void Err_one_num()								{tst_time_("2"						, "Invalid year: 2");}	// occurs on some templates; PAGE:en.w:Voyager 1 and {{date}}
 	@Test  public void Dmy_at_y_dot()								{tst_date_("1.2.70"					, "1970-02-01");}	// PURPOSE: dmy when delimiter is dot
 	@Test  public void Mdy_at_y_slash()								{tst_date_("1/2/70"					, "1970-01-02");}	// PURPOSE: mdy when delimiter is slash

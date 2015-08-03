@@ -26,4 +26,5 @@ public class Url_encoder_mgr {
 	public Url_encoder	Gfs()			{return gfs;}			private final Url_encoder gfs			= Url_encoder.new_gfs_();
 	public Url_encoder	Fsys()			{return fsys;}			private final Url_encoder fsys			= Url_encoder.new_fsys_lnx_();
 	public Url_encoder	Fsys_safe()		{return fsys_safe;}		private final Url_encoder fsys_safe		= Url_encoder.new_fsys_wnt_();
+	public Url_encoder	Xourl()			{return xourl;}			private final Url_encoder xourl			= Url_encoder.new_html_href_mw_().Itms_raw_same_many(Byte_ascii.Underline);
 }

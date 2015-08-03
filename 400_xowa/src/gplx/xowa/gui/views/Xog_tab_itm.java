@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 import gplx.core.threads.*; import gplx.gfui.*; import gplx.xowa.gui.history.*; import gplx.xowa.gui.bnds.*;
 import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
+import gplx.xowa.langs.vnts.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.cfgs2.*;
 import gplx.xowa.pages.*; import gplx.xowa.pages.skins.*;
 public class Xog_tab_itm implements GfoInvkAble {
@@ -25,7 +26,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 	public Xog_tab_itm(Xog_tab_mgr tab_mgr, Gfui_tab_itm_data tab_data, Xowe_wiki wiki, Xoae_page page) {
 		this.tab_mgr = tab_mgr; this.tab_data = tab_data; this.wiki = wiki; this.page = page;
 		this.win = tab_mgr.Win(); this.cfg_tab_mgr = win.App().Cfg_regy	().App().Gui_mgr().Tab_mgr();
-		html_itm = new Xog_html_itm(this);
+		this.html_itm = new Xog_html_itm(this);
 		cmd_sync = win.Kit().New_cmd_sync(this);
 	}
 	public Xowe_wiki Wiki() {return wiki;} public void Wiki_(Xowe_wiki v) {this.wiki = v;} private Xowe_wiki wiki;
@@ -40,6 +41,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 		if (app.App_type().Uid_is_gui()) {	// NOTE: only run for gui; will cause firefox addon to fail; DATE:2014-05-03
 			html_box.Html_doc_html_load_by_mem("");	// NOTE: must set source, else control will be empty, and key events will not be raised; DATE:2014-04-30
 			IptBnd_.ipt_to_(IptCfg_.Null, html_box, this, "popup", IptEventType_.MouseDown, IptMouseBtn_.Right);
+			IptBnd_.cmd_to_(IptCfg_.Null, html_box, win, Xog_win_itm.Invk_exit, IptKey_.add_(IptKey_.Alt, IptKey_.F4));	// WORKAROUND:SWT: xulrunner_v24 no longer sends Alt+F4 to SwtShell; must manually subscribe it to quit; DATE:2015-07-31
 			GfoEvMgr_.SubSame(html_box, GfuiElemKeys.Evt_menu_detected, html_itm);
 			gui_mgr.Bnd_mgr().Bind(Xog_bnd_box_.Tid_browser_html, html_box);
 			if (!Env_.Mode_testing())
@@ -81,7 +83,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 	}	private Xoae_page page;		
 	public void Page_update_ui() {
 		this.Tab_name_();
-		tab_box.Tab_tip_text_(page.Url().Xto_full_str());
+		tab_box.Tab_tip_text_(page.Url().To_str());
 	}
 	public void Tab_name_() {
 		byte[] tab_name = page.Html_data().Custom_name();
@@ -100,21 +102,20 @@ public class Xog_tab_itm implements GfoInvkAble {
 	public void Show_url_bgn(Xoa_url url) {
 		this.tab_is_loading = true;
 		Xoae_app app = win.App(); Gfo_usr_dlg usr_dlg = app.Usr_dlg();
-		if (	url.Anchor_str() != null						// url has anchor
+		if (	url.Anch_str() != null							// url has anchor
 			&&	url.Eq_page(page.Url())							// url has same page_name as existing page
-			&&	url.Args().length == 0) {						// url has no args; needed for Category:A?from=b#mw-pages
-			html_itm.Scroll_page_by_id_gui(url.Anchor_str());	// skip page_load and jump to anchor
+			&&	url.Qargs_ary().length == 0) {						// url has no args; needed for Category:A?from=b#mw-pages
+			html_itm.Scroll_page_by_id_gui(url.Anch_str());		// skip page_load and jump to anchor
 			return;
 		}
-		if (url.Xowa_vnt() != null)
-			wiki.Lang().Vnt_mgr().Cur_vnt_(url.Xowa_vnt());
 		if (win.Page__async__working(url)) return;
 		app.Gui_mgr().Search_suggest_mgr().Cancel();			// cancel pending search_suggest calls
 		if (page != null) page.Tab_data().Close_mgr().When_close(this, url);			// cancel any current search cmds
 		app.Log_wtr().Queue_enabled_(true);
 		usr_dlg.Gui_wkr().Clear();
-		this.wiki = app.Wiki_mgr().Get_by_key_or_null(url.Wiki_bry());	// NOTE: must update wiki
-		wiki.Init_assert();	// NOTE: assert wiki.Init before parsing; needed b/c lang (with lang-specific ns) is only loaded on init, and parse Xoa_ttl.parse_ will fail below; EX:pt.wikipedia.org/wiki/Wikipedia:P�gina principal
+		this.wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_key_or_make_init_y(url.Wiki_bry());	// NOTE: must update wiki variable; DATE:????-??-??; NOTE: must load wiki; DATE:2015-07-22
+		if (url.Page_is_main()) url.Page_bry_(wiki.Props().Main_page());
+		if (url.Vnt_bry() != null) Cur_vnt_(wiki, url.Vnt_bry());
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, url.Page_bry());
 		if (ttl == null) {usr_dlg.Prog_one("", "", "title is invalid: ~{0}", String_.new_u8(url.Raw())); return;}
 		Tab_name_(String_.new_u8(ttl.Full_txt()));
@@ -122,6 +123,14 @@ public class Xog_tab_itm implements GfoInvkAble {
 		if (app.Api_root().Html().Modules().Popups().Enabled())
 			this.Html_box().Html_js_eval_script("if (window.xowa_popups_hide_all != null) window.xowa_popups_hide_all();");	// should be more configurable; DATE:2014-07-09
 		app.Thread_mgr().Page_load_mgr().Add_at_end(new Load_page_wkr(this, wiki, url, ttl)).Run();
+	}
+	private void Cur_vnt_(Xowe_wiki wiki, byte[] vnt) {
+		Xoae_app app = wiki.Appe();
+		gplx.xowa.apis.xowa.wikis.langs.Xoap_lang_variants vnt_mgr = app.Api_root().Wikis().Get(wiki.Domain_bry()).Lang().Variants();
+		if (Bry_.Eq(vnt, vnt_mgr.Current())) return;
+		vnt_mgr.Current_(vnt);
+		app.Cfg_mgr().Set_by_app(String_.Format("xowa.api.wikis.get('{0}').lang.variants.current", wiki.Domain_str()), String_.new_u8(vnt));
+		app.Cfg_mgr().Db_save_txt();
 	}
 	private void Show_url_loaded(Load_page_wkr wkr) {
 		Xowe_wiki wiki = wkr.Wiki(); Xoae_page page = wkr.Page();
@@ -151,7 +160,7 @@ public class Xog_tab_itm implements GfoInvkAble {
 				return;
 			}
 			if (!page.Redirected()) page.Url_(url);	// NOTE: handle redirect from commons
-			if (page.Ttl().Anch_bgn() != Bry_.NotFound) page.Url().Anchor_bry_(page.Ttl().Anch_txt());	// NOTE: occurs when page is a redirect to an anchor; EX: w:Duck race -> Rubber duck#Races
+			if (page.Ttl().Anch_bgn() != Bry_.NotFound) page.Url().Anch_bry_(page.Ttl().Anch_txt());	// NOTE: occurs when page is a redirect to an anchor; EX: w:Duck race -> Rubber duck#Races
 			history_mgr.Add(page);
 			Xog_tab_itm_read_mgr.Show_page(this, page, true);
 			if (app.Api_root().Usr().History().Enabled()) {
@@ -203,8 +212,8 @@ public class Xog_tab_itm implements GfoInvkAble {
 	public void Async() {
 		if (page == null) return;	// TEST: occurs during Xog_win_mgr_tst
 		Xowe_wiki wiki = page.Wikie(); Xoae_app app = wiki.Appe(); Xog_win_itm win_itm = tab_mgr.Win(); Gfo_usr_dlg usr_dlg = win_itm.Usr_dlg();
-		app.Usr_dlg().Log_many("", "", "page.async: url=~{0}", page.Url().Xto_full_str_safe());
-		if (page.Url().Anchor_str() != null) html_itm.Scroll_page_by_id_gui(page.Url().Anchor_str());
+		app.Usr_dlg().Log_many("", "", "page.async: url=~{0}", page.Url().To_str());
+		if (page.Url().Anch_str() != null) html_itm.Scroll_page_by_id_gui(page.Url().Anch_str());
 		if (usr_dlg.Canceled()) {usr_dlg.Prog_none("", "", ""); app.Log_wtr().Queue_enabled_(false); return;}
 		int xfer_len = 0;
 		xfer_len = page.File_queue().Count();
@@ -271,7 +280,7 @@ class Load_files_wkr implements Gfo_thread_wkr {
 	public void Exec() {
 		try {tab.Async();}
 		catch (Exception e) {
-			tab.Tab_mgr().Win().App().Usr_dlg().Warn_many("error while running file wkr; page=~{0} err=~{1}", tab.Page().Url().Xto_full_str(), Err_.Message_gplx_full(e));
+			tab.Tab_mgr().Win().App().Usr_dlg().Warn_many("error while running file wkr; page=~{0} err=~{1}", tab.Page().Url().To_str(), Err_.Message_gplx_full(e));
 		}
 	}
 }

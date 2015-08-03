@@ -16,7 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.gfui.*; import gplx.core.threads.*; import gplx.xowa.gui.*; import gplx.xowa.gui.views.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.core.net.*; import gplx.core.threads.*;
+import gplx.gfui.*; import gplx.xowa.gui.*; import gplx.xowa.gui.views.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.core.js.*;
 public class Xog_search_suggest_mgr implements GfoInvkAble {
 	public Xog_search_suggest_mgr(Xoa_gui_mgr gui_mgr) {
@@ -30,13 +31,13 @@ public class Xog_search_suggest_mgr implements GfoInvkAble {
 	public int All_pages_extend() {return all_pages_extend;} private int all_pages_extend = 1000;	// look ahead by 1000
 	public int All_pages_min() {return all_pages_min;} private int all_pages_min = 10000;			// only look at pages > 10 kb
 	public boolean Auto_wildcard() {return auto_wildcard;} private boolean auto_wildcard = false;			// automatically add wild-card; EX: Earth -> *Earth*
-	public Gfo_url_arg[] Args_default() {return args_default;} private Gfo_url_arg[] args_default = Gfo_url_arg.Ary_empty;
+	public Gfo_qarg_itm[] Args_default() {return args_default;} private Gfo_qarg_itm[] args_default = Gfo_qarg_itm.Ary_empty;
 	public void Args_default_str_(String v) {
 		this.args_default_str = v;
 		byte[] bry = Bry_.new_a7("http://x.org/a?" + v);
 		Gfo_url tmp_url = new Gfo_url();
-		app.Utl__url_parser().Url_parser().Parse(tmp_url, bry, 0, bry.length);
-		args_default = tmp_url.Args();
+		app.User().Wikii().Utl__url_parser().Url_parser().Parse(tmp_url, bry, 0, bry.length);
+		args_default = tmp_url.Qargs();
 	}
 	private String args_default_str = "";// default args for search
 	public static final int[] Ns_default_main = new int[] {Xow_ns_.Id_main};

@@ -21,10 +21,10 @@ public class Pfunc_expr_shunter {
 	Btrie_fast_mgr trie = expression_();
 	Val_stack val_stack = new Val_stack();
 	Func_tkn_stack prc_stack = new Func_tkn_stack();
-	public static final DecimalAdp Null_rslt = null;
+	public static final Decimal_adp Null_rslt = null;
 	public Bry_bfr Err() {return err_bfr;} Bry_bfr err_bfr = Bry_bfr.new_();
-	public DecimalAdp Err_set(Xop_ctx ctx, int msgId) {return Err_set(ctx, msgId, Bry_.Empty);}
-	public DecimalAdp Err_set(Xop_ctx ctx, int msg_id, byte[] arg) {
+	public Decimal_adp Err_set(Xop_ctx ctx, int msgId) {return Err_set(ctx, msgId, Bry_.Empty);}
+	public Decimal_adp Err_set(Xop_ctx ctx, int msg_id, byte[] arg) {
 		byte[] msg_val = ctx.Wiki().Msg_mgr().Val_by_id(msg_id);
 		err_bfr.Clear().Add(Err_bgn_ary);
 		tmp_fmtr.Fmt_(msg_val).Bld_bfr_one(err_bfr, arg);
@@ -34,7 +34,7 @@ public class Pfunc_expr_shunter {
 	public void Rslt_set(byte[] bry) {
 		err_bfr.Add(bry);
 	}
-	public DecimalAdp Evaluate(Xop_ctx ctx, byte[] src) {	// REF.MW: Expr.php
+	public Decimal_adp Evaluate(Xop_ctx ctx, byte[] src) {	// REF.MW: Expr.php
 		int src_len = src.length; if (src_len == 0) return Null_rslt;
 		int cur_pos = 0; byte cur_byt = src[0];
 		boolean mode_expr = true; Func_tkn prv_prc = null;
@@ -74,8 +74,8 @@ public class Pfunc_expr_shunter {
 								default: loop = false; break;
 							}
 						}
-						DecimalAdp num = Null_rslt;
-						try {num = Bry_.XtoDecimalByPos(src, numBgn, cur_pos);}
+						Decimal_adp num = Null_rslt;
+						try {num = Bry_.To_decimal(src, numBgn, cur_pos);}
 						catch (Exception exc) {
 							// NOTE: PATCH.PHP: 65.5.5 can evaluate to 65.5; EX "{{Geological eras|-600|height=2|border=none}}" eventually does "|10-to={{#ifexpr:{{{1|-4567}}}<-65.5|-65.5|{{{1}}}}}.5" which is 65.5.5
 							Err_.Noop(exc); 
@@ -86,7 +86,7 @@ public class Pfunc_expr_shunter {
 										case 0: dot_count = 1; break;
 										case 1: 
 											try {
-												num = Bry_.XtoDecimalByPos(src, numBgn, i);
+												num = Bry_.To_decimal(src, numBgn, i);
 											}
 											catch (Exception exc_inner) {Err_.Noop(exc_inner);}
 											break;

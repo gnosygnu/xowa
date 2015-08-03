@@ -70,7 +70,7 @@ class Xol_case_mgr_fxt {
 		return this;
 	}
 	public Xol_case_mgr_fxt Init_ltrs_universal() {
-		case_mgr = Xol_case_mgr_.Utf8();
+		case_mgr = Xol_case_mgr_.U8();
 		return this;
 	}
 	public Xol_case_mgr_fxt Upper(String raw_str, String expd) {return Case_build(Bool_.Y, raw_str, expd);}

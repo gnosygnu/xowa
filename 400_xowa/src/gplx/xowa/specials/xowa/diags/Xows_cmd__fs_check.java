@@ -16,10 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.xowa.diags; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*; import gplx.xowa.specials.xowa.*;
-import gplx.ios.*;
+import gplx.ios.*; import gplx.core.net.*;
 import gplx.fsdb.meta.*;
+import gplx.xowa.urls.*;
 class Xows_cmd__fs_check {
-	public void Exec(Bry_bfr bfr, Xoa_app app, Xoa_url url, Xoa_url_arg_hash arg_hash) {
+	public void Exec(Bry_bfr bfr, Xoa_app app, Xoa_url url, Gfo_qarg_mgr arg_hash) {
 		byte[] dir_bry  = arg_hash.Get_val_bry_or(Arg_dir, null);
 		if (dir_bry != null) {
 			Write_dir(bfr, Io_url_.new_dir_(String_.new_u8(dir_bry)));

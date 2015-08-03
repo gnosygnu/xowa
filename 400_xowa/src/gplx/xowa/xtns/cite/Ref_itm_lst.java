@@ -59,5 +59,5 @@ public class Ref_itm_lst {
 		list.Clear();
 		idx_major_last = 0;
 	}
-	Hash_adp hash = Hash_adp_bry.cs_(); List_adp list = List_adp_.new_();
+	Hash_adp hash = Hash_adp_bry.cs(); List_adp list = List_adp_.new_();
 }

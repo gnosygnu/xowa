@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.apis.xowa.usrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apis.*; import gplx.xowa.apis.xowa.*;
 import gplx.xowa.gui.history.*; import gplx.xowa.gui.views.*;
 import gplx.xowa.users.bmks.*;
+import gplx.xowa.wikis.*;
 public class Xoapi_bookmarks implements GfoInvkAble {
 	private Xoae_app app; private Xog_win_itm win;
 	public void Ctor_by_app(Xoae_app app) {this.app = app;}
@@ -30,20 +31,11 @@ public class Xoapi_bookmarks implements GfoInvkAble {
 		if (!enabled) return app.Html__bridge_mgr().Msg_bldr().To_json_str__empty();
 		Xoa_url url = null;
 		if (url_str == null) {
-			Xog_tab_itm tab = win.Active_tab(); if (tab == Xog_tab_itm_.Null) return app.Html__bridge_mgr().Msg_bldr().Clear().Notify_pass_("bookmark added").To_json_str();
+			Xog_tab_itm tab = win.Active_tab(); if (tab == Xog_tab_itm_.Null) return app.Html__bridge_mgr().Msg_bldr().Clear().Notify_pass_("bookmark added").To_json_str();	// called by http_server; return success
 			url = tab.Page().Url();
-			if (url.Wiki_bry() == null) {
-				url_str = "home/wiki/" + String_.new_u8(url.Page_bry());
-			}
-			else if (url.Page_bry() == null) {
-				url_str = tab.Wiki().Domain_str() + "/wiki/" + String_.new_u8(url.Wiki_bry());
-			}
-			else
-				url_str = String_.new_u8(url.Raw());
-			url = app.Utl__url_parser().Parse(Bry_.new_u8(url_str));
 		}
 		else
-			url = app.Utl__url_parser().Parse(Bry_.new_u8(url_str));
+			url = app.User().Wikii().Utl__url_parser().Parse(Bry_.new_u8(url_str));
 		app.User().User_db_mgr().Bmk_mgr().Itms__add(Xoud_bmk_mgr.Owner_root, url);
 		String msg = "bookmark added: " + String_.new_u8(url.Page_bry());
 		String rv = app.Html__bridge_mgr().Msg_bldr().Clear().Notify_pass_(msg).To_json_str();

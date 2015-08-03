@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.xowa.parsers.lnkes.*;
+import gplx.core.net.*;
 public class Xop_lnke_tkn extends Xop_tkn_itm_base {//20111222
 	public static final byte Lnke_typ_null = 0, Lnke_typ_brack = 1, Lnke_typ_text = 2, Lnke_typ_brack_dangling = 3;
 	@Override public byte Tkn_tid() {return Xop_tkn_itm_.Tid_lnke;}
@@ -25,8 +25,8 @@ public class Xop_lnke_tkn extends Xop_tkn_itm_base {//20111222
 	public byte[] Lnke_site() {return lnke_site;} public Xop_lnke_tkn Lnke_site_(byte[] v) {lnke_site = v; return this;} private byte[] lnke_site;
 	public byte[] Lnke_xwiki_wiki() {return lnke_xwiki_wiki;} private byte[] lnke_xwiki_wiki;
 	public byte[] Lnke_xwiki_page() {return lnke_xwiki_page;} private byte[] lnke_xwiki_page;
-	public Gfo_url_arg[] Lnke_xwiki_qargs() {return lnke_xwiki_qargs;} Gfo_url_arg[] lnke_xwiki_qargs;
-	public void Lnke_xwiki_(byte[] wiki, byte[] page, Gfo_url_arg[] args) {this.lnke_xwiki_wiki = wiki; this.lnke_xwiki_page = page; this.lnke_xwiki_qargs = args;}
+	public Gfo_qarg_itm[] Lnke_xwiki_qargs() {return lnke_xwiki_qargs;} Gfo_qarg_itm[] lnke_xwiki_qargs;
+	public void Lnke_xwiki_(byte[] wiki, byte[] page, Gfo_qarg_itm[] args) {this.lnke_xwiki_wiki = wiki; this.lnke_xwiki_page = page; this.lnke_xwiki_qargs = args;}
 	public int Lnke_bgn() {return lnke_bgn;} private int lnke_bgn;
 	public int Lnke_end() {return lnke_end;} private int lnke_end;
 	public Xop_lnke_tkn Lnke_rng_(int bgn, int end) {lnke_bgn = bgn; lnke_end = end; return this;}

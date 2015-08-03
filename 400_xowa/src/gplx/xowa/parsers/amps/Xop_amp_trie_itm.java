@@ -21,13 +21,13 @@ public class Xop_amp_trie_itm {
 	public Xop_amp_trie_itm(byte tid, int char_int, byte[] xml_name_bry) {
 		this.tid = tid;
 		this.char_int = char_int;
-		this.utf8_bry = gplx.intl.Utf16_.Encode_int_to_bry(char_int);
+		this.u8_bry = gplx.intl.Utf16_.Encode_int_to_bry(char_int);
 		this.xml_name_bry = xml_name_bry; 
 		this.key_name_len = xml_name_bry.length - 2;	// 2 for & and ;
 	}
 	public byte		Tid()			{return tid;}			private final byte tid;
 	public int		Char_int()		{return char_int;}		private final int char_int;			// val; EX: 160
-	public byte[]	Utf8_bry()		{return utf8_bry;}		private final byte[] utf8_bry;		// EX: new byte[] {192, 160}; (C2, A0)
+	public byte[]	U8_bry()		{return u8_bry;}		private final byte[] u8_bry;			// EX: new byte[] {192, 160}; (C2, A0)
 	public byte[]	Xml_name_bry()	{return xml_name_bry;}	private final byte[] xml_name_bry;	// EX: "&nbsp;"
 	public int		Key_name_len()	{return key_name_len;}	private final int key_name_len;		// EX: "nbsp".Len
 	public void Print_ncr(Bry_bfr bfr) {
@@ -49,7 +49,7 @@ public class Xop_amp_trie_itm {
 			case Byte_ascii.Quote:		bfr.Add(Html_entity_.Quote_bry); break;
 			case Byte_ascii.Amp:		bfr.Add(Html_entity_.Amp_bry); break;
 			default:
-				bfr.Add(utf8_bry);		// write literal; EX: "[" not "&#91;"
+				bfr.Add(u8_bry);		// write literal; EX: "[" not "&#91;"
 				break;
 		}			
 	}

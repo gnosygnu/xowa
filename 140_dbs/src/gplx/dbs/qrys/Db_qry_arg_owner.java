@@ -25,7 +25,7 @@ public interface Db_qry_arg_owner extends Db_qry {
 	Db_qry_arg_owner Arg_(String k, String v);
 	Db_qry_arg_owner Arg_(String k, byte[] v);
 	Db_qry_arg_owner Arg_(String k, DateAdp v);
-	Db_qry_arg_owner Arg_(String k, DecimalAdp v);
+	Db_qry_arg_owner Arg_(String k, Decimal_adp v);
 	Db_qry_arg_owner Arg_byte_(String k, byte v);
 	Db_qry_arg_owner Arg_bry_(String k, byte[] v);
 	Db_qry_arg_owner Arg_obj_(String key, Object val);

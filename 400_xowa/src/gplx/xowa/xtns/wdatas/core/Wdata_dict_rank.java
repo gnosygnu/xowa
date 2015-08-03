@@ -34,7 +34,7 @@ public class Wdata_dict_rank {
 	, Bry_normal								= Bry_.new_a7(Str_normal)
 	, Bry_deprecated							= Bry_.new_a7(Str_deprecated)
 	;
-	public static final Hash_adp_bry Dict = Hash_adp_bry.cs_()
+	public static final Hash_adp_bry Dict = Hash_adp_bry.cs()
 	.Add_bry_byte(Bry_preferred					, Tid_preferred)
 	.Add_bry_byte(Bry_normal					, Tid_normal)
 	.Add_bry_byte(Bry_deprecated				, Tid_deprecated)

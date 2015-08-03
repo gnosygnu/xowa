@@ -25,7 +25,7 @@ class Mem_html extends GxwTextMemo_lang implements Gxw_html {		public void Html_
 		this.SelBgn_set(0);
 		html_doc_html_load_tid = Gxw_html_load_tid_.Tid_mem;
 	}
-	public void Html_doc_html_load_by_url(String path, String html) {
+	public void Html_doc_html_load_by_url(Io_url path, String html) {
 		html_doc_html_load_tid = Gxw_html_load_tid_.Tid_url;
 	}
 	public byte Html_doc_html_load_tid() {return html_doc_html_load_tid;} private byte html_doc_html_load_tid;

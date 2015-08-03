@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import org.junit.*;
 public class Xop_xnde_wkr__xatrs_tst {
-	private Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
 	@Test  public void Inline() {
 		fxt.Test_parse_page_wiki("<ref cd=\"ef\" />"		, fxt.tkn_xnde_(0, 15).Atrs_rng_(5, 13));
@@ -44,6 +44,9 @@ public class Xop_xnde_wkr__xatrs_tst {
 		fxt.Page().Html_data().Html_restricted_n_();
 		fxt.Test_parse_page_wiki_str("<input value='a<'></input>", "<input value='a<'></input>");	// NOTE: do not call parse_page_all_str which will call Page.Clear and reset Restricted
 		fxt.Page().Html_data().Html_restricted_y_();
+	}
+	@Test  public void  Style__decode() {	// PURPOSE: style values should be decoded; PAGE:en.w:Boron; DATE:2015-07-29
+		fxt.Test_parse_page_all_str("<span style='background:&#x23;ffc0c0'>a</span>", "<span style='background:#ffc0c0'>a</span>");
 	}
 //		@Test  public void Unclosed() {	// PURPOSE: unclosed atr should be treated as key, which should be ignored; PAGE:en.w:Palace of Versailles
 //			fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last

@@ -94,11 +94,11 @@ class Sqlite_rdr extends Db_data_rdr {		@Override public float ReadFloat(String 
 		Double d = ((Double)val);
 		return val == null ? or : d.floatValue();
 	}
-	@Override public DecimalAdp ReadDecimal(String key) {return ReadDecimalOr(key, null);}
-	@Override public DecimalAdp ReadDecimalOr(String key, DecimalAdp or) {
+	@Override public Decimal_adp ReadDecimal(String key) {return ReadDecimalOr(key, null);}
+	@Override public Decimal_adp ReadDecimalOr(String key, Decimal_adp or) {
 		Object val = Read(key);
 		Double d = ((Double)val);
-		return val == null ? or : DecimalAdp_.double_(d);
+		return val == null ? or : Decimal_adp_.double_(d);
 	}
 	@Override public DateAdp ReadDate(String key) {return ReadDateOr(key, null);}
 	@Override public DateAdp ReadDateOr(String key, DateAdp or) {

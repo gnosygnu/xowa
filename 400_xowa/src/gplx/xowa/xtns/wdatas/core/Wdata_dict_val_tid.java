@@ -49,7 +49,7 @@ public class Wdata_dict_val_tid {
 	, Bry_monolingualtext						= Bry_.new_a7(Str_monolingualtext)
 	, Bry_unknown								= Bry_.new_a7(Str_unknown)
 	;
-	private static final Hash_adp_bry Dict = Hash_adp_bry.cs_()
+	private static final Hash_adp_bry Dict = Hash_adp_bry.cs()
 	.Add_bry_byte(Bry_string					, Tid_string)
 	.Add_bry_byte(Bry_entity					, Tid_entity)
 	.Add_bry_byte(Bry_time						, Tid_time)

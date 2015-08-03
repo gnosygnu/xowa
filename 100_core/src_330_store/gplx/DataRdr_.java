@@ -43,7 +43,7 @@ class DataRdr_null implements DataRdr {
 	public double ReadDouble(String key) {return Double_.NaN;}			public double ReadDoubleOr(String key, double or) {return or;}
 	public float ReadFloat(String key) {return Float_.NaN;}				public float ReadFloatOr(String key, float or) {return or;}
 	public byte ReadByte(String key) {return Byte_.Min_value;}			public byte ReadByteOr(String key, byte or) {return or;}
-	public DecimalAdp ReadDecimal(String key) {return DecimalAdp_.Zero;}public DecimalAdp ReadDecimalOr(String key, DecimalAdp or) {return or;}
+	public Decimal_adp ReadDecimal(String key) {return Decimal_adp_.Zero;}public Decimal_adp ReadDecimalOr(String key, Decimal_adp or) {return or;}
 	public DateAdp ReadDate(String key) {return DateAdp_.MinValue;}		public DateAdp ReadDateOr(String key, DateAdp or) {return or;}
 	public gplx.ios.Io_stream_rdr ReadRdr(String key) {return gplx.ios.Io_stream_rdr_.Noop;}
 	public boolean MoveNextPeer() {return false;}
@@ -57,7 +57,7 @@ class DataRdr_null implements DataRdr {
 	public long SrlLongOr(String key, long or) {return or;}
 	public String SrlStrOr(String key, String or) {return or;}
 	public DateAdp SrlDateOr(String key, DateAdp or) {return or;}
-	public DecimalAdp SrlDecimalOr(String key, DecimalAdp or) {return or;}
+	public Decimal_adp SrlDecimalOr(String key, Decimal_adp or) {return or;}
 	public double SrlDoubleOr(String key, double or) {return or;}
 	public Object SrlObjOr(String key, Object or) {return or;}
 	public void SrlList(String key, List_adp list, SrlObj proto, String itmKey) {}

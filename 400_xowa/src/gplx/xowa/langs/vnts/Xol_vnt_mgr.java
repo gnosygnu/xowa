@@ -27,12 +27,11 @@ public class Xol_vnt_mgr implements GfoInvkAble {
 	public Vnt_mnu_grp_fmtr Vnt_mnu_fmtr() {return vnt_mnu_fmtr;} private final Vnt_mnu_grp_fmtr vnt_mnu_fmtr = new Vnt_mnu_grp_fmtr();
 	public boolean Enabled() {return enabled;} public void Enabled_(boolean v) {this.enabled = v;} private boolean enabled = false;
 	public byte[] Cur_vnt() {return cur_vnt;} private byte[] cur_vnt = Bry_.Empty;
-	private void Vnt_grp_(byte[][] ary) {
+	public void Vnt_grp_(byte[][] ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			byte[] vnt = ary[i];				
 			byte[] msg = lang.Msg_mgr().Itm_by_key_or_new(Bry_.Add(Msg_variantname, vnt)).Val();
-//				byte[] msg = vnt;
 			vnt_grp.Add(new Vnt_mnu_itm(vnt, msg));
 		}
 	}
@@ -47,7 +46,7 @@ public class Xol_vnt_mgr implements GfoInvkAble {
 				break;
 			}
 		}
-		if (new_converter_ary_idx == -1) throw Err_.new_("lang.vnt", "uknown vnt", "key", v);
+		if (new_converter_ary_idx == -1) throw Err_.new_("lang.vnt", "unknown vnt", "key", v);
 		this.cur_vnt = v;
 		this.cur_converter_ary_idx = new_converter_ary_idx;
 		return this;
@@ -90,14 +89,16 @@ public class Xol_vnt_mgr implements GfoInvkAble {
 		return rv;
 	}
 	public Xowd_page_itm Convert_ttl(Xowe_wiki wiki, Bry_bfr tmp_bfr, Xow_ns ns, byte[] ttl_bry) {	// REF.MW:LanguageConverter.php|findVariantLink
-		int converted = Convert_ttl__convert_each_vnt(wiki, tmp_bfr, ns, ttl_bry);	// convert ttl for each vnt
-		if (converted == 0) return Xowd_page_itm.Null;								// ttl_bry has no conversions; exit;
-		wiki.Db_mgr().Load_mgr().Load_by_ttls(Cancelable_.Never, tmp_page_list, true, 0, converted);
-		for (int i = 0; i < converted; i++) {
-			Xowd_page_itm page = (Xowd_page_itm)tmp_page_list.Get_at(i);
-			if (page.Exists()) return page;											// return 1st found page
+		synchronized (tmp_page_list) {
+			int converted = Convert_ttl__convert_each_vnt(wiki, tmp_bfr, ns, ttl_bry);	// convert ttl for each vnt
+			if (converted == 0) return Xowd_page_itm.Null;								// ttl_bry has no conversions; exit;
+			wiki.Db_mgr().Load_mgr().Load_by_ttls(Cancelable_.Never, tmp_page_list, true, 0, converted);
+			for (int i = 0; i < converted; i++) {
+				Xowd_page_itm page = (Xowd_page_itm)tmp_page_list.Get_at(i);
+				if (page.Exists()) return page;											// return 1st found page
+			}
+			return Xowd_page_itm.Null;
 		}
-		return Xowd_page_itm.Null;
 	}
 	private int Convert_ttl__convert_each_vnt(Xowe_wiki wiki, Bry_bfr tmp_bfr, Xow_ns ns, byte[] ttl_bry) {
 		synchronized (tmp_page_list) {

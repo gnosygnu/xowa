@@ -26,8 +26,8 @@ class Xop_under_lxr implements Xop_lxr {
 		Xol_kwd_mgr kwd_mgr = lang.Kwd_mgr();
 		int under_kwds_len = under_kwds.length;
 		Xop_under_lxr lxr = new Xop_under_lxr();
-		lxr.words_trie_cs = Btrie_slim_mgr.cs_();
-		lxr.words_trie_ci = Btrie_utf8_mgr.new_(lang.Case_mgr());
+		lxr.words_trie_cs = Btrie_slim_mgr.cs();
+		lxr.words_trie_ci = Btrie_u8_mgr.new_(lang.Case_mgr());
 		core_trie.Add(Xop_under_hook.Key_std, lxr);
 		boolean hook_alt_null = true;
 		for (int i = 0; i < under_kwds_len; i++) {

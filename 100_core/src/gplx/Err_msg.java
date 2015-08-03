@@ -27,7 +27,9 @@ public class Err_msg {
 	public void Args_add(Object[] add) {
 		this.args = (Object[])Array_.Resize_add(args, add);
 	}
-	public String To_str() {return To_str_w_type(type, msg, args);}
+	public String To_str()			{return To_str_w_type(type, msg, args);}
+	public String To_str_wo_type()	{return To_str(msg, args);}
+	public String To_str_wo_args()	{return To_str(msg);}
 	public static String To_str(String msg, Object... args) {return To_str_w_type(null, msg, args);}
 	public static String To_str_w_type(String type, String msg, Object... args) {
 		String rv = String_.Len_eq_0(type) ? "" : "<" + type + "> ";

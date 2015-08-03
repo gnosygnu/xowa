@@ -71,7 +71,7 @@ class Dg_parser {
 				if (src[brack_bgn] != Byte_ascii.Lt) {Warn("dg.invalid_line.wrong_term_dlm", rel_path, line_idx, src, line_bgn, line_end); break;}
 				brack_end = Bry_finder.Find_fwd(src, Byte_ascii.Gt, brack_bgn);
 				if (brack_end == Bry_finder.Not_found) {Warn("dg.invalid_line.score not found", rel_path, line_idx, src, line_bgn, line_end); break;}
-				int parse_score = Bry_.Xto_int_or(src, brack_bgn + 1, brack_end, Int_.MinValue);
+				int parse_score = Bry_.To_int_or(src, brack_bgn + 1, brack_end, Int_.MinValue);
 				if (parse_score == Int_.MinValue) {Warn("dg.invalid_line.score is invalid", rel_path, line_idx, src, line_bgn, line_end); break;}
 				score = parse_score;
 				break;

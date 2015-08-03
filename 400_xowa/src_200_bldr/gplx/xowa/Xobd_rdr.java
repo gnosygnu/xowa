@@ -57,7 +57,7 @@ public class Xobd_rdr implements Xob_cmd {
 					Err_.Noop(e);
 					long dividend = fil.Fil_pos();
 					if (dividend >= fil_len) dividend = fil_len - 1; // prevent % from going over 100
-					String msg = DecimalAdp_.CalcPctStr(dividend, fil_len, "00.00") + "|" + String_.new_u8(page.Ttl_full_db()) + "|" + Err_.Message_gplx_log(e)  + "|" + Xot_tmpl_wtr.Err_string; Xot_tmpl_wtr.Err_string = "";
+					String msg = Decimal_adp_.CalcPctStr(dividend, fil_len, "00.00") + "|" + String_.new_u8(page.Ttl_full_db()) + "|" + Err_.Message_gplx_log(e)  + "|" + Xot_tmpl_wtr.Err_string; Xot_tmpl_wtr.Err_string = "";
 					bldr.Usr_dlg().Log_wkr().Log_to_session(msg);
 					Console_adp__sys.I.Write_str_w_nl(msg);
 				}

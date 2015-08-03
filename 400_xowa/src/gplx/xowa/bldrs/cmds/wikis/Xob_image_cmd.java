@@ -50,10 +50,10 @@ public class Xob_image_cmd extends Xob_itm_dump_base implements Xob_cmd, GfoInvk
 	public void Exec(byte[] src, byte[] fld_key, int fld_idx, int fld_bgn, int fld_end, Bry_bfr file_bfr, Sql_file_parser_data data) {
 		switch (fld_idx) {
 			case Fld_img_name: 			cur_ttl = Bry_.Mid(src, fld_bgn, fld_end); break;
-			case Fld_img_size: 			cur_size = Bry_.Xto_int_or(src, fld_bgn, fld_end, -1); break;
-			case Fld_img_width:			cur_width = Bry_.Xto_int_or(src, fld_bgn, fld_end, -1); break;
-			case Fld_img_height:		cur_height = Bry_.Xto_int_or(src, fld_bgn, fld_end, -1); break;
-			case Fld_img_bits: 			cur_bits = Bry_.Xto_int_or(src, fld_bgn, fld_end, -1); break;
+			case Fld_img_size: 			cur_size = Bry_.To_int_or(src, fld_bgn, fld_end, -1); break;
+			case Fld_img_width:			cur_width = Bry_.To_int_or(src, fld_bgn, fld_end, -1); break;
+			case Fld_img_height:		cur_height = Bry_.To_int_or(src, fld_bgn, fld_end, -1); break;
+			case Fld_img_bits: 			cur_bits = Bry_.To_int_or(src, fld_bgn, fld_end, -1); break;
 			case Fld_img_media_type:	cur_media_type = Bry_.Mid(src, fld_bgn, fld_end); break;
 			case Fld_img_minor_mime:	cur_minor_mime = Bry_.Mid(src, fld_bgn, fld_end); break;
 			case Fld_img_timestamp:	cur_timestamp = Bry_.Mid(src, fld_bgn, fld_end);

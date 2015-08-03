@@ -51,7 +51,7 @@ public class Xows_page__search implements Xows_page, GfoInvkAble, GfoEvObj {
 		Xog_search_suggest_mgr search_suggest_mgr = wiki.Appe().Gui_mgr().Search_suggest_mgr();
 		args_mgr.Clear();
 		args_mgr.Parse(search_suggest_mgr.Args_default());
-		args_mgr.Parse(url.Args());
+		args_mgr.Parse(url.Qargs_ary());
 		args_mgr.Ns_mgr().Add_main_if_empty();
 		// get search_bry
 		byte[] search_bry = args_mgr.Search_bry();
@@ -64,14 +64,14 @@ public class Xows_page__search implements Xows_page, GfoInvkAble, GfoEvObj {
 			&&	Bry_finder.Find_fwd(search_bry, Byte_ascii.Star) == -1		// search term does not have asterisk
 			)
 			search_bry = Bry_.Add(search_bry, Byte_ascii.Star);
-		url.Page_bry_(Bry_.Add(Xows_special_meta_.Itm__search.Ttl_bry(), Byte_ascii.Slash_bry, search_bry));// HACK: need to re-set Page b/c href_parser does not eliminate qargs; DATE:2013-02-08
+		// url.Page_bry_(Bry_.Add(Xows_special_meta_.Itm__search.Ttl_bry(), Byte_ascii.Slash_bry, search_bry));// HACK: need to re-set Page b/c href_parser does not eliminate qargs; DATE:2013-02-08
 		// search wiki
 		Xoa_ttl search_ttl = Xoa_ttl.parse_(wiki, search_bry); 
 		Xoae_page search_page = page;
 		if (!Bry_.Eq(search_bry, Xows_special_meta_.Itm__search.Ttl_bry()))	// do not lookup page else stack overflow; happens when going directly to Special:Search (from history)
 			search_page = wiki.Data_mgr().Get_page(search_ttl, false);	// try to find page; EX:Special:Search?search=Earth -> en.w:Earth; needed for search suggest
 		// page not found, or explicit_search invoked
-		if (search_page.Missing() || url.Search_fulltext()) {
+		if (search_page.Missing() || url.Qargs_mgr().Match(Qarg__fulltext, Qarg__fulltext__y)) {
 			if (args_mgr.Cancel() != null) {
 				search_mgr.Cancel(args_mgr.Cancel());
 				page.Tab_data().Cancel_show_y_();
@@ -99,4 +99,5 @@ public class Xows_page__search implements Xows_page, GfoInvkAble, GfoEvObj {
 	}
 	public static final byte Match_tid_all = 0, Match_tid_bgn = 1;
 	public static final byte Version_null = 0, Version_1 = 1, Version_2 = 2;
+	private static final byte[] Qarg__fulltext = Bry_.new_a7("fulltext"), Qarg__fulltext__y = Bry_.new_a7("y");
 }

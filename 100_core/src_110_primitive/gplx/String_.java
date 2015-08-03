@@ -534,4 +534,15 @@ public class String_ implements GfoInvkAble {
 		}
 		return trg_ary;
 	}
+	public static String To_str__as_kv_ary(String... ary) {
+		int len = ary.length;
+		Bry_bfr bfr = Bry_bfr.new_();
+		for (int i = 0; i < len; i+=2) {
+			bfr.Add_str_u8(ary[i]).Add_byte_eq();
+			String val = i + 1 < len ? ary[i + 1] : null;
+			if (val != null) bfr.Add_str_u8(val);
+			bfr.Add_byte_nl();
+		}
+		return bfr.Xto_str_and_clear();
+	}
 }

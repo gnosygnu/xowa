@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 import gplx.gfui.*; import gplx.xowa.cfgs2.*; import gplx.xowa.apis.xowa.gui.browsers.*; import gplx.xowa.specials.*;
+import gplx.xowa.urls.*;
 public class Xog_tab_mgr implements GfoEvObj {
 	private Ordered_hash tab_regy = Ordered_hash_.new_(); private int tab_uid = 0;
 	public Xog_tab_mgr(Xog_win_itm win) {
@@ -77,7 +78,7 @@ public class Xog_tab_mgr implements GfoEvObj {
 		boolean active_tab_is_null = this.Active_tab_is_null();
 		Xowe_wiki cur_wiki = active_tab_is_null ? win.App().Usere().Wiki() : active_tab.Wiki();
 		Xoa_ttl ttl = Xoa_ttl.parse_(cur_wiki, Xows_special_meta_.Itm__default_tab.Ttl_bry());
-		Xoa_url url = Xoa_url_parser.Parse_from_url_bar(win.App(), cur_wiki, ttl.Full_db_as_str());
+		Xoa_url url = cur_wiki.Utl__url_parser().Parse_by_urlbar(ttl.Full_db_as_str());
 		Xog_tab_itm rv = Tabs_new(focus, active_tab_is_null, cur_wiki, Xoae_page.new_(cur_wiki, ttl));
 		rv.Page_update_ui();
 		rv.Show_url_bgn(url);
@@ -102,7 +103,7 @@ public class Xog_tab_mgr implements GfoEvObj {
 	}
 	public void Tabs_new_dupe(boolean focus) {
 		if (this.Active_tab_is_null()) return;
-		String url = active_tab.Page().Url().Xto_full_str();
+		String url = active_tab.Page().Url().To_str();
 		Tabs_new_dflt(focus);
 		win.Page__navigate_by_url_bar(url);
 	}
@@ -161,7 +162,7 @@ public class Xog_tab_mgr implements GfoEvObj {
 	private void Tabs_closed(String key) {
 		Xog_tab_itm itm = Tabs_get_by_key_or_warn(key); if (itm == null) return;
 		itm.Html_box().Html_dispose();
-		closed_undo_list.Add(itm.Page().Url().Xto_full_str());
+		closed_undo_list.Add(itm.Page().Url().To_str());
 		tab_regy.Del(key);
 		if (tab_regy.Count() == 0) {
 			active_tab = Xog_tab_itm_.Null;
@@ -218,7 +219,7 @@ public class Xog_tab_mgr implements GfoEvObj {
 	public void Tabs_new_link(String link, boolean focus) {
 		Xowe_wiki wiki = active_tab.Wiki();
 		Xog_tab_itm new_tab = Tabs_new(focus, false, wiki, Xoae_page.new_(wiki, active_tab.Page().Ttl()));	// NOTE: do not use ttl from link, else middle-clicking pages with anchors won't work; DATE:2015-05-03
-		Xoa_url url = Xoa_url_parser.Parse_from_url_bar(win.App(), wiki, link);	// NOTE: link must be of form domain/wiki/page; DATE:2014-05-27
+		Xoa_url url = wiki.Utl__url_parser().Parse_by_urlbar(link);	// NOTE: link must be of form domain/wiki/page; DATE:2014-05-27
 		new_tab.Show_url_bgn(url);
 		if (focus)
 			tab_mgr.Tabs_select_by_idx(new_tab.Tab_idx());

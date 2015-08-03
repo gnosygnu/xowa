@@ -19,7 +19,7 @@ package gplx.xowa.langs.vnts; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.core.btries.*; import gplx.intl.*;
 import gplx.xowa.langs.cnvs.*;
 public class Xol_vnt_converter {
-	private Btrie_slim_mgr trie = Btrie_slim_mgr.cs_();
+	private Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
 	public Xol_vnt_converter(Xol_vnt_itm owner) {this.owner = owner;}
 	public byte[] Owner_key() {return owner.Key();}
 	public Xol_vnt_itm Owner() {return owner;} private Xol_vnt_itm owner;
@@ -49,6 +49,7 @@ public class Xol_vnt_converter {
 				pos = trie.Match_pos();
 			}
 		}
+		if (!matched) bfr.Add(src);	// no convert; make sure to add back src, else bfr will be blank
 		return matched;
 	}
 	public void Rebuild() {Clear(); Build();}

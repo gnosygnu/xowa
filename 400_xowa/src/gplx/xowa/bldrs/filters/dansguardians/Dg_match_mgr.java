@@ -20,7 +20,7 @@ import gplx.core.primitives.*; import gplx.core.btries.*;
 import gplx.xowa.bldrs.filters.core.*;
 public class Dg_match_mgr {
 	private int score_init, score_fail; private boolean log_enabled, case_match;
-	private final Btrie_slim_mgr btrie = Btrie_slim_mgr.cs_();
+	private final Btrie_slim_mgr btrie = Btrie_slim_mgr.cs();
 	private final Ordered_hash rules = Ordered_hash_.new_bry_();
 	private final Ordered_hash rule_group_hash = Ordered_hash_.new_bry_(), rule_tally_hash = Ordered_hash_.new_bry_();
 	private final Dg_parser parser = new Dg_parser();

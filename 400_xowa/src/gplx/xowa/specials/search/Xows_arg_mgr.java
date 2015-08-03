@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.core.primitives.*;
+import gplx.core.primitives.*; import gplx.core.net.*;
 class Xows_arg_mgr {
 	private final Xows_paging_parser paging_parser = new Xows_paging_parser();
 	public Xows_ns_mgr	Ns_mgr()		{return ns_mgr;} private final Xows_ns_mgr ns_mgr = new Xows_ns_mgr();
@@ -34,17 +34,17 @@ class Xows_arg_mgr {
 		this.cancel = null;
 		return this;
 	}
-	public void Parse(Gfo_url_arg[] arg_ary) {
+	public void Parse(Gfo_qarg_itm[] arg_ary) {
 		if (arg_ary == null) return;
 		int len = arg_ary.length;
 		for (int i = 0; i < len; ++i) {
-			Gfo_url_arg arg = arg_ary[i];
+			Gfo_qarg_itm arg = arg_ary[i];
 			byte[] key = arg.Key_bry();
 			Object tid = url_args.Get_by(key);
 			if (tid != null) {
 				switch (((Byte_obj_val)tid).Val()) {
 					case Arg_search: 		this.search_bry 	= Bry_.Replace(arg.Val_bry(), Byte_ascii.Plus, Byte_ascii.Space); break;
-					case Arg_page_idx: 		this.paging_idx 	= Bry_.Xto_int_or(arg.Val_bry(), 0); break;
+					case Arg_page_idx: 		this.paging_idx 	= Bry_.To_int_or(arg.Val_bry(), 0); break;
 					case Arg_sort: 			this.sort_tid		= Xosrh_rslt_itm_sorter.parse_(String_.new_a7(arg.Val_bry())); break;			
 					case Arg_cancel: 		this.cancel			= arg.Val_bry(); break;
 					case Arg_paging: 		this.paging_itms	= paging_parser.Parse(arg.Val_bry()); break;
@@ -64,7 +64,7 @@ class Xows_arg_mgr {
 	  Arg_bry_page_index	= Bry_.new_a7("xowa_page_index")
 	, Arg_bry_cancel		= Bry_.new_a7("cancel")
 	;
-	private static final Hash_adp_bry url_args = Hash_adp_bry.ci_ascii_()
+	private static final Hash_adp_bry url_args = Hash_adp_bry.ci_a7()
 		.Add_str_byte("xowa_paging", Arg_paging)
 		.Add_bry_byte(Arg_bry_page_index, Arg_page_idx)
 		.Add_str_byte("xowa_sort", Arg_sort)

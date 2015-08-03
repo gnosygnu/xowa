@@ -142,7 +142,7 @@ class Scrib_lib_wikibase_srl {
 		boolean snak_is_valued = itm.Snak_tid() != Wdata_dict_snak_tid.Tid_novalue;
 		int snak_is_valued_adj = snak_is_valued ? 1 : 0;
 		KeyVal[] rv = new KeyVal[2 + snak_is_valued_adj];
-		if (snak_is_valued)
+		if (snak_is_valued)	// NOTE: novalue must not return slot (no datavalue node in json); PAGE:ru.w:Лимонов,_Эдуард_Вениаминович; DATE:2015-02-16; ALSO: sv.w:Joseph_Jaquet; DATE:2015-07-31
 			rv[0] = KeyVal_.new_("datavalue", Srl_claims_prop_itm_core_val(itm));
 		rv[0 + snak_is_valued_adj] = KeyVal_.new_("property", pid);
 		rv[1 + snak_is_valued_adj] = KeyVal_.new_("snaktype", Wdata_dict_snak_tid.Xto_str(itm.Snak_tid()));
@@ -152,7 +152,7 @@ class Scrib_lib_wikibase_srl {
 	private static KeyVal[] Srl_claims_prop_itm_core_val(Wdata_claim_itm_core itm) {
 		switch (itm.Snak_tid()) {
 			case Wdata_dict_snak_tid.Tid_somevalue:		return Datavalue_somevalue;
-			case Wdata_dict_snak_tid.Tid_novalue:		return Datavalue_novalue;
+			case Wdata_dict_snak_tid.Tid_novalue:		return Datavalue_novalue;	// TODO: throw exc
 			default:
 				itm.Welcome(visitor);
 				return visitor.Rv();
@@ -160,5 +160,5 @@ class Scrib_lib_wikibase_srl {
 	}
 	public static final String Key_type = "type", Key_value = "value";
 	private static final KeyVal[] Datavalue_somevalue = new KeyVal[] {KeyVal_.new_(Key_type, ""), KeyVal_.new_(Key_value, "")};	// NOTE: must return ""; null fails; EX:w:Joseph-François_Malgaigne; DATE:2014-04-07
-	private static final KeyVal[] Datavalue_novalue = KeyVal_.Ary_empty;	// NOTE: novalue must return empty array (no datavalue node in json); PAGE:ru.w:Лимонов,_Эдуард_Вениаминович; DATE:2015-02-16
+	private static final KeyVal[] Datavalue_novalue = KeyVal_.Ary_empty;
 }

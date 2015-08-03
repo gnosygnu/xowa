@@ -46,7 +46,7 @@ public class Xous_window_mgr implements GfoInvkAble {
 		for (int i = 0; i < len; ++i) {
 			if (i != 0) bfr.Add_byte_nl();
 			Xog_tab_itm tab = tab_mgr.Tabs_get_at(i);
-			bfr.Add_str(tab.Page().Url().Xto_full_str_safe());
+			bfr.Add_str(tab.Page().Url().To_str());
 		}
 		return bfr.Xto_str_and_clear();
 	}

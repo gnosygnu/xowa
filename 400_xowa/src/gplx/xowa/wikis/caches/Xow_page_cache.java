@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 public class Xow_page_cache {
 	private Xowe_wiki wiki;
-	private Hash_adp_bry cache = Hash_adp_bry.cs_();	// NOTE: wiki titles are not case-sensitive when ns is "1st-letter" (EX: w:earth an w:Earth); in these cases, two entries will be stored
+	private Hash_adp_bry cache = Hash_adp_bry.cs();	// NOTE: wiki titles are not case-sensitive when ns is "1st-letter" (EX: w:earth an w:Earth); in these cases, two entries will be stored
 	public Xow_page_cache(Xowe_wiki wiki) {this.wiki = wiki;}
 	public byte[] Get_or_load_as_src(Xoa_ttl ttl) {
 		Xow_page_cache_itm rv = Get_or_load_as_itm(ttl);

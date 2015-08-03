@@ -44,7 +44,7 @@ public class Wdata_dict_claim {
 	, Bry_qualifiers							= Bry_.new_a7(Str_qualifiers)
 	, Bry_qualifiers_order						= Bry_.new_a7(Str_qualifiers_order)
 	;
-	public static final Hash_adp_bry Dict = Hash_adp_bry.cs_()
+	public static final Hash_adp_bry Dict = Hash_adp_bry.cs()
 	.Add_bry_byte(Bry_mainsnak					, Tid_mainsnak)
 	.Add_bry_byte(Bry_type						, Tid_type)
 	.Add_bry_byte(Bry_id						, Tid_id)

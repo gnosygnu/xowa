@@ -154,7 +154,7 @@ public class Xop_under_lxr_tst {
 	}
 	@Test  public void Utf8_ci() {	// PURPOSE: case-insensitive UTF8; DATE:2014-07-10
 		Xowe_wiki wiki = fxt.Wiki(); Xol_lang lang = wiki.Lang();
-		lang.Case_mgr_utf8_();
+		lang.Case_mgr_u8_();
 		fxt.Init_lang_kwds(lang, Xol_kwd_grp_.Id_toc, false, "__AÉI__");
 		wiki.Parser().Init_by_lang(lang);
 		fxt.Test_parse_page_all_str("a__AÉI__b", "ab");
@@ -162,7 +162,7 @@ public class Xop_under_lxr_tst {
 	}
 	@Test  public void Utf8_ci_asymmetric() {	// PURPOSE: case-insensitive UTF8; asymmetric; DATE:2014-07-10
 		Xowe_wiki wiki = fxt.Wiki(); Xol_lang lang = wiki.Lang();
-		lang.Case_mgr_utf8_();
+		lang.Case_mgr_u8_();
 		fxt.Init_lang_kwds(lang, Xol_kwd_grp_.Id_toc, false, "__İÇİNDEKİLER__");	// __TOC__ for tr.w
 		wiki.Parser().Init_by_lang(lang);
 		fxt.Test_parse_page_all_str("a__İçindekiler__b", "ab");

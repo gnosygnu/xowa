@@ -67,11 +67,17 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 		byte[] page_content_sub = Xoh_page_wtr_wkr_.Bld_page_content_sub(app, wiki, page, tmp_bfr);
 		byte[] js_edit_toolbar_bry = view_tid == Xopg_view_mode.Tid_edit ? wiki.Fragment_mgr().Html_js_edit_toolbar() : Bry_.Empty;
 		Xow_portal_mgr portal_mgr = wiki.Html_mgr().Portal_mgr().Init_assert();
+		byte[] page_name = Xoh_page_wtr_wkr_.Bld_page_name(tmp_bfr, page_ttl, null);					// NOTE: page_name does not show display_title (<i>). always pass in null
+		byte[] page_display = Xoh_page_wtr_wkr_.Bld_page_name(tmp_bfr, page_ttl, page.Html_data().Display_ttl());
+		Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();
+		if (vnt_mgr.Enabled()) { 	// VNT
+			page_name = vnt_mgr.Convert_text(wiki, page_name);
+			page_display = vnt_mgr.Convert_text(wiki, page_display);
+		}
 		fmtr.Bld_bfr_many(html_bfr
 		, root_dir_bry, Xoa_app_.Version, Xoa_app_.Build_date, app.Tcp_server().Running_str()
 		, page.Revision_data().Id()
-		, Xoh_page_wtr_wkr_.Bld_page_name(tmp_bfr, page_ttl, null)					// NOTE: page_name does not show display_title (<i>). always pass in null
-		, Xoh_page_wtr_wkr_.Bld_page_name(tmp_bfr, page_ttl, page.Html_data().Display_ttl())
+		, page_name, page_display
 		, page_modified_on_msg
 		, mgr.Css_common_bry(), mgr.Css_wiki_bry(), page.Html_data().Head_mgr().Init(app, wiki, page).Init_dflts()
 		, page.Lang().Dir_ltr_bry(), page.Html_data().Indicators(), page_content_sub, wiki.Html_mgr().Portal_mgr().Div_jump_to(), page_body_class, html_content_editable
@@ -123,9 +129,6 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 		boolean tidy_enabled = tidy_mgr.Enabled();
 		Bry_bfr hdom_bfr = tidy_enabled ? app.Utl__bfr_mkr().Get_m001() : bfr;	// if tidy, then write to tidy_bfr; note that bfr already has <html> and <head> written to it, so this can't be passed to tidy; DATE:2014-06-11
 		wiki.Html_mgr().Html_wtr().Write_all(hdom_bfr, page.Wikie().Ctx(), hctx, page.Root().Data_mid(), page.Root());
-//			Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();
-//			if (vnt_mgr.Enabled()) 	// VNT
-//				hdom_bfr.Add(vnt_mgr.Convert_text(wiki, hdom_bfr.Xto_bry_and_clear()));
 		if (tidy_enabled) {
 			tidy_mgr.Run_tidy_html(page, hdom_bfr);
 			bfr.Add_bfr_and_clear(hdom_bfr);
@@ -145,6 +148,9 @@ public class Xoh_page_wtr_wkr implements Bry_fmtr_arg {
 			else
 				wiki.Html_mgr().Ctg_mgr().Bld(bfr, page, ctgs_len);
 		}
+		Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();
+		if (vnt_mgr.Enabled()) 	// VNT
+			bfr.Add(vnt_mgr.Convert_text(wiki, bfr.Xto_bry_and_clear()));
 	}
 	private void Write_body_pre(Bry_bfr bfr, Xoae_app app, Xowe_wiki wiki, byte[] data_raw, Bry_bfr tmp_bfr) {
 		Xoh_html_wtr_escaper.Escape(app.Parser_amp_mgr(), tmp_bfr, data_raw, 0, data_raw.length, false, false);

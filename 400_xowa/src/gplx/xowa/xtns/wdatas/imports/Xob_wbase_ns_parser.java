@@ -20,7 +20,7 @@ import gplx.dbs.*;
 import gplx.xowa.wikis.*;
 import gplx.xowa.wmfs.data.*;
 class Xob_wbase_ns_parser {
-	private final Hash_adp_bry ns_mgr_hash = Hash_adp_bry.cs_();
+	private final Hash_adp_bry ns_mgr_hash = Hash_adp_bry.cs();
 	private final Xowmf_site_tbl tbl_site; private final Xowmf_ns_tbl tbl_itm;
 	public Xob_wbase_ns_parser(Db_conn conn) {
 		this.tbl_site	= new Xowmf_site_tbl(conn);
@@ -35,7 +35,7 @@ class Xob_wbase_ns_parser {
 			wiki_abrv = Bry_.Replace(wiki_abrv, Byte_ascii.Underline, Byte_ascii.Dash);
 			byte[] wiki_domain = Xow_wiki_alias.Parse__domain_name(wiki_abrv, 0, wiki_abrv.length);
 			int site_id = tbl_site.Select_id(String_.new_u8(wiki_domain)); if (site_id == -1) {Xoa_app_.Usr_dlg().Warn_many("", "", "wbase.ns_parser:unknown wmf_abrv; abrv=~{0}", wiki_abrv); return;}
-			ns_mgr = new Xow_ns_mgr(gplx.xowa.langs.cases.Xol_case_mgr_.Utf8());
+			ns_mgr = new Xow_ns_mgr(gplx.xowa.langs.cases.Xol_case_mgr_.U8());
 			tbl_itm.Select_all(ns_mgr, site_id); if (ns_mgr.Count() == 0) {Xoa_app_.Usr_dlg().Warn_many("", "", "wbase.ns_parser:no ns found; abrv=~{0}", wiki_abrv); return;}
 			ns_mgr_hash.Add_bry_obj(wiki_abrv, ns_mgr);
 		}

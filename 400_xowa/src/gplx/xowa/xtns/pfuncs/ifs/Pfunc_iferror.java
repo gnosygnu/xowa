@@ -109,7 +109,7 @@ public class Pfunc_iferror extends Pf_func_base {
 	private static final Btrie_slim_mgr trie = trie_();
 	static final byte State_null = 0, State_nde = 1, State_class = 2, State_error = 3, State_close = 4;
 	private static Btrie_slim_mgr trie_() {
-		Btrie_slim_mgr rv = Btrie_slim_mgr.ci_ascii_();	// NOTE:ci.ascii:MW_const.en
+		Btrie_slim_mgr rv = Btrie_slim_mgr.ci_a7();	// NOTE:ci.ascii:MW_const.en
 		trie_init(rv, State_nde  , "<strong");
 		trie_init(rv, State_nde  , "<span");
 		trie_init(rv, State_nde  , "<p");

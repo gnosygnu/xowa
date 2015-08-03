@@ -130,7 +130,7 @@ class Xosrh_scanner {
 	Ordered_hash tmp_list = Ordered_hash_.new_(); Bry_bfr tmp_bfr = Bry_bfr.new_();
 	Xosrh_qry_tkn new_tkn_(byte tid, int val_bgn, int val_end) {return Xosrh_qry_tkn.new_pos_(tid, val_bgn, val_end);}
 	private static byte[] Bry_and = Bry_.new_a7("AND");
-	private static final Btrie_slim_mgr trie = Btrie_slim_mgr.ci_ascii_()// NOTE:ci.ascii:OR / AND only
+	private static final Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7()// NOTE:ci.ascii:OR / AND only
 	.Add_str_byte(" ", Xosrh_qry_tkn.Tid_space)
 	.Add_str_byte("\"", Xosrh_qry_tkn.Tid_quote)
 	.Add_str_byte("-", Xosrh_qry_tkn.Tid_not)

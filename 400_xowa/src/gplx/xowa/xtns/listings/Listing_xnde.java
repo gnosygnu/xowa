@@ -231,7 +231,7 @@ class Listing_xatrs {
 	public static final byte Tid_name = 0, Tid_alt = 1, Tid_address = 2, Tid_directions = 3, Tid_phone = 4, Tid_tollfree = 5, Tid_email = 6, Tid_fax = 7, Tid_url = 8
 	, Tid_hours = 9, Tid_price = 10, Tid_checkin = 11, Tid_checkout = 12, Tid_lat = 13, Tid_long = 14
 	;
-	public static Hash_adp_bry Key_hash = Hash_adp_bry.cs_()
+	public static Hash_adp_bry Key_hash = Hash_adp_bry.cs()
 	.Add_str_byte("name"		, Tid_name)
 	.Add_str_byte("alt"			, Tid_alt)
 	.Add_str_byte("address"		, Tid_address)

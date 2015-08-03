@@ -30,7 +30,7 @@ public class Xol_lang implements GfoInvkAble {
 		this.kwd_mgr = new Xol_kwd_mgr(this);
 		this.msg_mgr = new Xol_msg_mgr(this, true);
 		this.specials_mgr = new Xol_specials_mgr(this);
-		this.case_mgr = Env_.Mode_testing() ? Xol_case_mgr_.Ascii() : Xol_case_mgr_.Utf8(); // NOTE: if test load ascii b/c utf8 is large; NOTE: placed here b/c tests do not call load; DATE:2014-07-04
+		this.case_mgr = Env_.Mode_testing() ? Xol_case_mgr_.A7() : Xol_case_mgr_.U8(); // NOTE: if test load ascii b/c utf8 is large; NOTE: placed here b/c tests do not call load; DATE:2014-07-04
 		this.num_mgr = Xol_num_mgr_.new_by_lang_id(lang_id);
 		this.lnki_trail_mgr = new Xol_lnki_trail_mgr(this);
 		this.vnt_mgr = new Xol_vnt_mgr(this);
@@ -52,7 +52,7 @@ public class Xol_lang implements GfoInvkAble {
 	public Xol_msg_mgr Msg_mgr() {return msg_mgr;} private final Xol_msg_mgr msg_mgr;
 	public Xol_specials_mgr Specials_mgr() {return specials_mgr;} private final Xol_specials_mgr specials_mgr;
 	public Xol_case_mgr Case_mgr() {return case_mgr;} private Xol_case_mgr case_mgr;
-	public void Case_mgr_utf8_() {case_mgr = Xol_case_mgr_.Utf8();}		// TEST:
+	public void Case_mgr_u8_() {case_mgr = Xol_case_mgr_.U8();}		// TEST:
 	public Xol_font_info Gui_font() {return gui_font;} private Xol_font_info gui_font = new Xol_font_info(null, 0, gplx.gfui.FontStyleAdp_.Plain);
 	public byte[] Fallback_bry() {return fallback_bry;}
 	private byte[] X_axis_end() {return dir_ltr ? X_axis_end_right : X_axis_end_left;}

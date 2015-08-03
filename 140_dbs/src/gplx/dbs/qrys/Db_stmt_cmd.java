@@ -77,12 +77,12 @@ public class Db_stmt_cmd implements Db_stmt {
 		try {stmt.setDouble(++val_idx, v);} catch (Exception e) {this.Rls(); throw Err_.new_exc(e, "db", "failed to add value", "type", "double", "val", v, "sql", sql);}	
 		return this;
 	}
-	public Db_stmt Crt_decimal(String k, DecimalAdp v)	{return Add_decimal(Bool_.Y, k, v);}
-	public Db_stmt Val_decimal(String k, DecimalAdp v)	{return Add_decimal(Bool_.N, k, v);}
-	public Db_stmt Val_decimal(DecimalAdp v)			{return Add_decimal(Bool_.N, Key_na, v);}
-	private Db_stmt Add_decimal(boolean where, String k, DecimalAdp v) {
+	public Db_stmt Crt_decimal(String k, Decimal_adp v)	{return Add_decimal(Bool_.Y, k, v);}
+	public Db_stmt Val_decimal(String k, Decimal_adp v)	{return Add_decimal(Bool_.N, k, v);}
+	public Db_stmt Val_decimal(Decimal_adp v)			{return Add_decimal(Bool_.N, Key_na, v);}
+	private Db_stmt Add_decimal(boolean where, String k, Decimal_adp v) {
 		if (k == Db_meta_fld.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
-		try {stmt.setBigDecimal(++val_idx, v.Xto_decimal());} catch (Exception e) {this.Rls(); throw Err_.new_exc(e, "db", "failed to add value", "type", "decimal", "val", v, "sql", sql);}	
+		try {stmt.setBigDecimal(++val_idx, v.Under_as_native());} catch (Exception e) {this.Rls(); throw Err_.new_exc(e, "db", "failed to add value", "type", "decimal", "val", v, "sql", sql);}	
 		return this;
 	}
 	public Db_stmt Crt_bry(String k, byte[] v)	{return Add_bry(Bool_.Y, k, v);}

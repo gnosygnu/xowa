@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
 import gplx.gfui.*; import gplx.xowa.gui.menus.*; import gplx.xowa.gui.menus.dom.*; import gplx.xowa.files.gui.*;
-import gplx.html.*; import gplx.xowa.html.js.*; import gplx.xowa.html.heads.*; import gplx.xowa.pages.*;
+import gplx.html.*; import gplx.xowa.html.hrefs.*; import gplx.xowa.html.js.*; import gplx.xowa.html.heads.*; import gplx.xowa.pages.*;
 public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 	private Xoae_app app; private final Object thread_lock = new Object();
 	private final String_obj_ref scroll_top = String_obj_ref.null_(), node_path = String_obj_ref.null_();
@@ -56,7 +56,7 @@ public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 		Xoae_page page = owner_tab.Page();
 		String site = owner_tab.Wiki().Domain_str();
 		String ttl = String_.new_u8(page.Ttl().Full_db());
-		return Xog_html_itm__href_extractor.Html_extract_text(site, ttl, v);
+		return Xoh_href_gui_utl.Html_extract_text(site, ttl, v);
 	}
 	public void Show(Xoae_page page) {
 		byte view_mode = owner_tab.View_mode();			
@@ -71,9 +71,9 @@ public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 		String html_str = String_.new_u8(html_bry);
 		if (owner_tab.Tab_mgr().Html_load_tid__url()) {
 			Io_url html_url = app.Usere().Fsys_mgr().App_temp_html_dir().GenSubFil_ary(owner_tab.Tab_key(), ".html");
-			try {html_box.Html_doc_html_load_by_url(html_url.Xto_api(), html_str);}
+			try {html_box.Html_doc_html_load_by_url(html_url, html_str);}
 			catch (Exception e) {
-				app.Usr_dlg().Warn_many("", "", "failed to write html to file; writing directly by memory: page=~{0} file=~{1} err=~{2}", page.Url().Xto_full_str_safe(), html_url.Raw(), Err_.Message_gplx_full(e));
+				app.Usr_dlg().Warn_many("", "", "failed to write html to file; writing directly by memory: page=~{0} file=~{1} err=~{2}", page.Url().To_str(), html_url.Raw(), Err_.Message_gplx_full(e));
 				html_box.Html_doc_html_load_by_mem(html_str);
 			}
 		}
@@ -222,40 +222,4 @@ public class Xog_html_itm implements Xog_js_wkr, GfoInvkAble, GfoEvObj {
 		node_path_val = "'" + String_.Replace(node_path_val, ",", "','") + "'";
 		node_path.Val_(node_path_val);
 	}
-}
-class Xog_html_itm__href_extractor {
-	private static final byte Text_tid_none = 0, Text_tid_text = 1, Text_tid_href = 2;
-	private static final byte Href_tid_wiki = 1, Href_tid_site = 2, Href_tid_anchor = 3;
-	private static final byte[] File_protocol_bry = Bry_.new_a7("file://");
-	private static final int File_protocol_len = File_protocol_bry.length;
-	private static final Btrie_slim_mgr href_trie = Btrie_slim_mgr.cs_()
-	.Add_str_byte("/site/"		, Href_tid_site)
-	.Add_str_byte("/wiki/"		, Href_tid_wiki)
-	.Add_str_byte("#"			, Href_tid_anchor)
-	;
-	public static String Html_extract_text(String site, String page, String text_str) {
-		byte[] text_bry = Bry_.new_u8(text_str);
-		int text_tid = Byte_ascii.Xto_digit(text_bry[0]);
-		int text_len = text_bry.length;
-		switch (text_tid) {
-			case Text_tid_none: return "";
-			case Text_tid_text: return String_.new_u8(text_bry, 2, text_len);	// 2 to skip "1|"
-			case Text_tid_href: break;	// fall through to below
-			default: throw Err_.new_unhandled(text_tid);
-		}
-		int href_bgn = 2;	// 2 for length of "2|"
-		if (Bry_.Has_at_bgn(text_bry, File_protocol_bry, 2, text_len)) {
-			href_bgn += File_protocol_len;	// skip "file://"
-		}
-		Byte_obj_val href_tid = (Byte_obj_val)href_trie.Match_bgn(text_bry, href_bgn, text_len);
-		if (href_tid != null) {
-			switch (href_tid.Val()) {
-				case Href_tid_wiki:			return site + String_.new_u8(text_bry, href_bgn, text_len);		
-				case Href_tid_site:			return String_.new_u8(text_bry, href_bgn + 6, text_len);			// +6 to skip "site/"
-				case Href_tid_anchor:		return site + "/wiki/" + page + String_.new_u8(text_bry, href_bgn, text_len);
-			}
-		}
-		return String_.new_u8(text_bry, 2, text_len);	// 2 to skip "2|"; handles "http://" text as well as any fall-thru from above
-	}
-	public static final Xog_html_itm__href_extractor _ = new Xog_html_itm__href_extractor(); Xog_html_itm__href_extractor() {}
 }

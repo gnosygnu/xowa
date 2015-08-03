@@ -20,7 +20,7 @@ public class Json_doc {
 	public void Ctor(byte[] src, Json_nde root) {this.src = src; this.root = root;}
 	public Bry_bfr Bfr() {return bfr;} Bry_bfr bfr = Bry_bfr.new_();
 	public Number_parser Utl_num_parser() {return utl_num_parser;} Number_parser utl_num_parser = new Number_parser();
-	public byte[] Str_utf8_bry() {return str_utf8_bry;} private byte[] str_utf8_bry = new byte[6];
+	public byte[] Str_u8_bry() {return str_u8_bry;} private byte[] str_u8_bry = new byte[6];
 	public byte[] Src() {return src;} private byte[] src;
 	public Json_nde Root() {return root;} Json_nde root;
 	public byte[] Get_val_as_bry_or(byte[]   qry_bry, byte[] or) {tmp_qry_bry[0] = qry_bry; return Get_val_as_bry_or(tmp_qry_bry, or);}

@@ -16,9 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.xowa.apps.progs.*; import gplx.xowa.net.*; import gplx.xowa.wikis.xwikis.*;
+import gplx.core.net.*; import gplx.xowa.urls.*;
+import gplx.xowa.apps.progs.*; import gplx.xowa.wikis.xwikis.*;	
 public class Xop_lnke_wkr implements Xop_ctx_wkr {
-	public void Ctor_ctx(Xop_ctx ctx) {url_parser = ctx.App().Utl__url_parser().Url_parser();} Gfo_url_parser url_parser; Gfo_url_site_data site_data = new Gfo_url_site_data(); Xoa_url_parser xo_url_parser = new Xoa_url_parser(); Xoa_url xo_url_parser_url = Xoa_url.blank_();
+	public void Ctor_ctx(Xop_ctx ctx) {url_parser = ctx.Wiki().Utl__url_parser().Url_parser();} Gfo_url_parser url_parser; Gfo_url_site_data site_data = new Gfo_url_site_data(); 
+	private Xoa_url xo_url_parser_url = Xoa_url.blank();
 	public void Page_bgn(Xop_ctx ctx, Xop_root_tkn root) {}
 	public void Page_end(Xop_ctx ctx, Xop_root_tkn root, byte[] src, int src_len) {}
 	public boolean Dangling_goes_on_stack() {return dangling_goes_on_stack;} public void Dangling_goes_on_stack_(boolean v) {dangling_goes_on_stack = v;} private boolean dangling_goes_on_stack;
@@ -38,7 +40,7 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 			)
 			return ctx.Lxr_make_txt_(cur_pos - 1);						// -1 to ignore ":" in making text colon; needed to process ":" for list like "; attl: b" PAGE:de.w:Mord_(Deutschland)#Besonders_verwerfliche_Begehungsweise; DATE:2015-01-09
 		if (ctx.Stack_get_typ(Xop_tkn_itm_.Tid_lnke) != null) return ctx.Lxr_make_txt_(cur_pos); // no nested lnke; return cur lnke as text; EX: "[irc://a irc://b]" -> "<a href='irc:a'>irc:b</a>"
-		if (proto_tid == Xoo_protocol_itm.Tid_xowa) return Make_tkn_xowa(ctx, tkn_mkr, root, src, src_len, bgn_pos, cur_pos, protocol, proto_tid, lnke_type);
+		if (proto_tid == Gfo_protocol_itm.Tid_xowa) return Make_tkn_xowa(ctx, tkn_mkr, root, src, src_len, bgn_pos, cur_pos, protocol, proto_tid, lnke_type);
 
 		// HACK: need to disable lnke if enclosing type is lnki and (1) arg is "link=" or (2) in 1st arg; basically, only enable for caption tkns (and preferably, thumb only) (which should be neither 1 or 2)
 		if (ctx.Cur_tkn_tid() == Xop_tkn_itm_.Tid_lnki && lnke_type == Xop_lnke_tkn.Lnke_typ_text) {
@@ -129,7 +131,7 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 					lnke_type = Xop_lnke_tkn.Lnke_typ_brack_dangling;
 					return ctx.Lxr_make_txt_(lnke_end);	// textify lnk; EX: [irc://a\n] textifies "[irc://a"
 				default:
-					lnke_bgn += proto_tid == Xoo_protocol_itm.Tid_relative_2 ? 2 : 1;	// if Tid_relative_2, then starts with [[; adjust by 2; EX:"[[//en" should have lnke_bgn at "//en", not "[//en"
+					lnke_bgn += proto_tid == Gfo_protocol_itm.Tid_relative_2 ? 2 : 1;	// if Tid_relative_2, then starts with [[; adjust by 2; EX:"[[//en" should have lnke_bgn at "//en", not "[//en"
 					lnke_type = Xop_lnke_tkn.Lnke_typ_brack;
 					break;
 			}
@@ -148,7 +150,7 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 				}
 			}
 		}
-		if (proto_tid == Xoo_protocol_itm.Tid_relative_2)	// for "[[//", add "["; rest of code handles "[//" normally, but still want to include literal "["; DATE:2013-02-02
+		if (proto_tid == Gfo_protocol_itm.Tid_relative_2)	// for "[[//", add "["; rest of code handles "[//" normally, but still want to include literal "["; DATE:2013-02-02
 			ctx.Subs_add(root, tkn_mkr.Txt(lnke_bgn - 1, lnke_bgn));
 		url_parser.Parse_site_fast(site_data, src, lnke_bgn, lnke_end);
 		int site_bgn = site_data.Site_bgn(), site_end = site_data.Site_end();
@@ -162,9 +164,12 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 		Xop_lnke_tkn tkn = tkn_mkr.Lnke(bgn_pos, brack_end_pos, protocol, proto_tid, lnke_type, lnke_bgn, lnke_end);
 		tkn.Lnke_relative_(site_data.Rel());
 		Xow_xwiki_itm xwiki = ctx.App().Usere().Wiki().Xwiki_mgr().Get_by_mid(src, site_bgn, site_end);	// NOTE: check User_wiki.Xwiki_mgr, not App.Wiki_mgr() b/c only it is guaranteed to know all wikis on system
-		if (xwiki != null) {	// lnke is to an xwiki; EX: [http://en.wikipedia.org/A a]
+		if (	xwiki != null												// lnke is to an xwiki; EX: [http://en.wikipedia.org/A a]
+			&& 	Byte_.In(proto_tid, Gfo_protocol_itm.Tid_relative_1, Gfo_protocol_itm.Tid_relative_2, Gfo_protocol_itm.Tid_http, Gfo_protocol_itm.Tid_https)	// only consider http / https; ignore mailto and others; PAGE:uk.w:Маскалі; DATE:2015-07-28
+			&& 	Bry_.Match(src, site_bgn, site_end, xwiki.Domain_bry())		// only consider full domains, not alliases; EX: [http://w/b] should not match alias of w for en.wikipedia.org
+			) {	
 			Xowe_wiki wiki = ctx.Wiki();
-			Xoa_url_parser.Parse_url(xo_url_parser_url, ctx.App(), wiki, src, lnke_bgn, lnke_end, false);
+			xo_url_parser_url = wiki.Utl__url_parser().Parse(src, lnke_bgn, lnke_end);
 			byte[] xwiki_wiki = xo_url_parser_url.Wiki_bry();
 			byte[] xwiki_page = xo_url_parser_url.Page_bry();
 			byte[] ttl_bry = xo_url_parser_url.Page_bry();
@@ -173,7 +178,7 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 				xwiki_wiki = ttl.Wik_itm().Domain_bry();
 				xwiki_page = ttl.Page_url();
 			}
-			tkn.Lnke_xwiki_(xwiki_wiki, xwiki_page, xo_url_parser_url.Args());
+			tkn.Lnke_xwiki_(xwiki_wiki, xwiki_page, xo_url_parser_url.Qargs_ary());
 		}			
 		ctx.Subs_add(root, tkn);
 		if (lnke_type == Xop_lnke_tkn.Lnke_typ_brack) {

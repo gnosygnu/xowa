@@ -39,11 +39,12 @@ public class Xob_bldr implements GfoInvkAble {
 	public void					Print_prog_msg(long cur, long end, int pct_idx, String fmt, Object... ary) {
 		long now = Env_.TickCount(); if (now - prv_prog_time < 100) return;
 		this.prv_prog_time = now;
-		if (pct_idx > -1) ary[pct_idx] = DecimalAdp_.CalcPctStr(cur, end, "00.00");
+		if (pct_idx > -1) ary[pct_idx] = Decimal_adp_.CalcPctStr(cur, end, "00.00");
 		app.Usr_dlg().Prog_many("", "", fmt, ary);
 	}
 	public void Run() {
 		try {
+			app.Bldr__running_(true);
 			app.Launch();	// HACK: bldr will be called by a gfs file which embeds "bldr.run" inside it; need to call Launch though before Run; DATE:2013-03-23
 			long time_bgn = Env_.TickCount();
 			int cmd_mgr_len = cmd_mgr.Len();
@@ -70,7 +71,10 @@ public class Xob_bldr implements GfoInvkAble {
 			cmd_mgr.Clear();
 			if (pause_at_end && !Env_.Mode_testing()) {Console_adp__sys.I.Read_line("press enter to continue");}
 		}
-		catch (Exception e) {throw Err_.new_exc(e, "bldr", "unknown error");}
+		catch (Exception e) {
+			app.Bldr__running_(false);
+			throw Err_.new_exc(e, "bldr", "unknown error");
+		}
 	}
 	private void Cancel() {
 		int cmd_mgr_len = cmd_mgr.Len();

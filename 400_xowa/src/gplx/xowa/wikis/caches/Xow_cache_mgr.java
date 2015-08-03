@@ -24,7 +24,7 @@ public class Xow_cache_mgr {
 		defn_cache = new Xow_defn_cache(wiki.Lang());
 		lst_cache = new Xow_defn_cache(wiki.Lang());
 	}
-	public Hash_adp Tmpl_result_cache() {return tmpl_result_cache;} private Hash_adp tmpl_result_cache = Hash_adp_bry.cs_();
+	public Hash_adp Tmpl_result_cache() {return tmpl_result_cache;} private Hash_adp tmpl_result_cache = Hash_adp_bry.cs();
 	public Xow_page_cache Page_cache() {return page_cache;} private Xow_page_cache page_cache;
 	public Xow_defn_cache Defn_cache() {return defn_cache;} private Xow_defn_cache defn_cache;
 	public Xow_defn_cache Lst_cache() {return lst_cache;} private Xow_defn_cache lst_cache;

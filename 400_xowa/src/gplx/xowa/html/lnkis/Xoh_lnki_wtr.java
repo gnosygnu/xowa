@@ -42,7 +42,7 @@ public class Xoh_lnki_wtr {
 	public void Write(Bry_bfr bfr, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki) {
 		Xoa_ttl lnki_ttl = lnki.Ttl();
 		if (lnki_ttl == null) {// NOTE: parser failed to properly invalidate lnki; escape tkn now and warn; DATE:2014-06-06
-			app.Usr_dlg().Warn_many("", "", "invalid lnki evaded parser; page=~{0} ex=~{1}", ctx.Cur_page().Url().Xto_full_str(), String_.new_u8(src, lnki.Src_bgn(), lnki.Src_end()));
+			app.Usr_dlg().Warn_many("", "", "invalid lnki evaded parser; page=~{0} ex=~{1}", ctx.Cur_page().Url().To_str(), String_.new_u8(src, lnki.Src_bgn(), lnki.Src_end()));
 			Xoh_html_wtr_escaper.Escape(app.Parser_amp_mgr(), bfr, src, lnki.Src_bgn(), lnki.Src_end(), true, false);
 			return;
 		}
@@ -100,7 +100,7 @@ public class Xoh_lnki_wtr {
 				wiki.Html_mgr().Hzip_mgr().Itm__anchor().Html_plain(bfr, lnki);
 			else
 				bfr.Add(Xoh_consts.A_bgn);							// '<a href="'
-			app.Href_parser().Build_to_bfr(bfr, app, wiki.Domain_bry(), lnki_ttl, hctx.Mode_is_popup());	// '/wiki/A'
+			app.Html__href_wtr().Build_to_bfr(bfr, app, wiki.Domain_bry(), lnki_ttl, hctx.Mode_is_popup());	// '/wiki/A'
 			if (cfg.Lnki__id()) {
 				int lnki_html_id = lnki.Html_uid();
 				if (lnki_html_id > Lnki_id_ignore)					// html_id=0 for skipped lnkis; EX:anchors and interwiki

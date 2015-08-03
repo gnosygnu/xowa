@@ -415,6 +415,6 @@ class Xob_wdata_db_visitor implements Wdata_claim_visitor {
 	public void Visit_system(Wdata_claim_itm_system itm)					{rv = Bry_.Empty;}
 	public void Visit_entity(Wdata_claim_itm_entity itm) {
 		Wdata_doc entity_doc = wdata_mgr.Pages_get(itm.Page_ttl_db());
-		rv = entity_doc == null ? Bry_.Empty : entity_doc.Label_list_get(lang_key);
+		rv = entity_doc == null ? Bry_.Empty : entity_doc.Label_list__get(lang_key);
 	}
 }

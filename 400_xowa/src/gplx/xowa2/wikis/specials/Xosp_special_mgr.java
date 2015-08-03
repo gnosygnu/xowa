@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa2.wikis.specials; import gplx.*; import gplx.xowa2.*; import gplx.xowa2.wikis.*;
+import gplx.core.net.*;
 import gplx.xowa.*; import gplx.xowa2.gui.*;
 import gplx.xowa.specials.*; import gplx.xowa.specials.xowa.file_browsers.*;
 public class Xosp_special_mgr {
@@ -23,11 +24,11 @@ public class Xosp_special_mgr {
 	private final Hash_adp_bry hash;
 	public Xosp_special_mgr(Xowv_wiki wiki) {
 		this.wiki = wiki;
-//			this.hash = Hash_adp_bry.ci_utf8_(wiki.Lang().Case_mgr());
-		this.hash = Hash_adp_bry.cs_();
+//			this.hash = Hash_adp_bry.ci_u8(wiki.Lang().Case_mgr());
+		this.hash = Hash_adp_bry.cs();
 	}
 	public void Get_by_ttl(Xog_page rv, Gfo_url url, Xoa_ttl ttl) {
-		Xosp_fbrow_rslt rslt = Xosp_fbrow_special.Gen(url.Args(), wiki.Appv().Wiki_mgr());
+		Xosp_fbrow_rslt rslt = Xosp_fbrow_special.Gen(url.Qargs(), wiki.Appv().Wiki_mgr());
 		rv.Init(wiki, -1, null, ttl);
 		rv.Page_body_(rslt.Html_body());
 		rv.Html_head_xtn_(rslt.Html_head());

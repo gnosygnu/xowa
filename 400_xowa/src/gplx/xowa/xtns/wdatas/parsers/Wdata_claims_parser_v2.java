@@ -241,7 +241,7 @@ class Wdata_claims_parser_v2 {
 		return new Wdata_claim_itm_time(pid, snak_tid, time, timezone, before, after, precision, calendarmodel);
 	}
 	private static int Parse_pid(byte[] pid_bry) {
-		int rv = Bry_.Xto_int_or(pid_bry, 1, pid_bry.length, -1); if (rv == -1) throw Err_.new_wo_type("invalid pid", "pid", String_.new_u8(pid_bry));
+		int rv = Bry_.To_int_or(pid_bry, 1, pid_bry.length, -1); if (rv == -1) throw Err_.new_wo_type("invalid pid", "pid", String_.new_u8(pid_bry));
 		return rv;
 	}
 }

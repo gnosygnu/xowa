@@ -20,7 +20,7 @@ import gplx.xowa.wikis.ttls.*;
 public class Xob_ttl_filter_mgr {
 	private boolean exclude_is_empty = true, include_is_empty = true;
 	private final Xob_ttl_filter_mgr_srl srl = new Xob_ttl_filter_mgr_srl();
-	private Hash_adp_bry exclude_hash = Hash_adp_bry.cs_(), include_hash = Hash_adp_bry.cs_();
+	private Hash_adp_bry exclude_hash = Hash_adp_bry.cs(), include_hash = Hash_adp_bry.cs();
 	public void Clear() {
 		exclude_hash.Clear();
 		include_hash.Clear();

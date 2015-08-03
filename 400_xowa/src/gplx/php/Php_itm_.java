@@ -26,7 +26,7 @@ public class Php_itm_ {
 				return rv;
 			case Php_itm_.Tid_quote:
 				byte[] bry = ((Php_itm_quote)itm).Val_obj_bry();
-				rv = Bry_.Xto_int_or(bry, -1);
+				rv = Bry_.To_int_or(bry, -1);
 				return (rv == -1) ? or : rv;
 			default:
 				return or;

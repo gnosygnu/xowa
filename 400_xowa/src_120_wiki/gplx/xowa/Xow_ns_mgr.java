@@ -20,12 +20,12 @@ import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.xowa.langs
 import gplx.xowa.xtns.scribunto.*;
 public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 	private Ordered_hash id_hash = Ordered_hash_.new_();		// hash for retrieval by id
-	private Hash_adp_bry name_hash;							// hash for retrieval by name; note that ns names are case-insensitive "File:" == "fILe:"
-	private Hash_adp_bry tmpl_hash;							// hash for retrieval by name; PERF for templates
+	private Hash_adp_bry name_hash;								// hash for retrieval by name; note that ns names are case-insensitive "File:" == "fILe:"
+	private Hash_adp_bry tmpl_hash;								// hash for retrieval by name; PERF for templates
 	private Ordered_hash aliases = Ordered_hash_.new_();		// hash to store aliases; used to populate name_hash;
 	public Xow_ns_mgr(Xol_case_mgr case_mgr) {
-		name_hash = Hash_adp_bry.ci_utf8_(case_mgr);
-		tmpl_hash = Hash_adp_bry.ci_utf8_(case_mgr);
+		name_hash = Hash_adp_bry.ci_u8(case_mgr);
+		tmpl_hash = Hash_adp_bry.ci_u8(case_mgr);
 	}
 	public Xow_ns_mgr Clear() {
 		name_hash.Clear();
@@ -222,7 +222,7 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 		}
 	}
 	private void Ords_sort_add(int ns_id) {
-		this.Add_new(ns_id, Bry_.XbyInt(ns_id), Xow_ns_case_.Id_1st, false);	// NOTE: name and case_match are mostly useless defaults; note that in theory this proc should not be called (all siteInfos should be well-formed) but just in case, create items now so that Get_by_ord() does not fail
+		this.Add_new(ns_id, Bry_.new_by_int(ns_id), Xow_ns_case_.Id_1st, false);	// NOTE: name and case_match are mostly useless defaults; note that in theory this proc should not be called (all siteInfos should be well-formed) but just in case, create items now so that Get_by_ord() does not fail
 	}
 	public byte[] Bld_ttl_w_ns(Bry_bfr bfr, boolean text_form, boolean literalize, int ns_id, byte[] ttl) {
 		if (ns_id == Xow_ns_.Id_main) return ttl;
@@ -254,7 +254,7 @@ public class Xow_ns_mgr implements GfoInvkAble, gplx.lists.ComparerAble {
 			byte[] line = lines[i];
 			if (line.length == 0) continue;
 			byte[][] flds = Bry_.Split(line, Byte_ascii.Pipe);
-			int cur_id = Bry_.Xto_int_or(flds[0], Int_.MinValue);
+			int cur_id = Bry_.To_int_or(flds[0], Int_.MinValue);
 			this.Aliases_add(cur_id, String_.new_u8(flds[1]));
 		}
 		Ords_sort();

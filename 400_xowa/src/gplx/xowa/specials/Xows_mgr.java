@@ -25,7 +25,7 @@ import gplx.xowa.users.data.*;
 public class Xows_mgr {
 	private final Hash_adp_bry hash;
 	public Xows_mgr(Xowe_wiki wiki, Xol_lang lang) {
-		hash = Hash_adp_bry.ci_utf8_(lang.Case_mgr());
+		hash = Hash_adp_bry.ci_u8(lang.Case_mgr());
 		page_allpages = new Xows_page_allpages(wiki);
 		page_search = new Xows_page__search(wiki);
 		page_random = new Xows_page_random(wiki);

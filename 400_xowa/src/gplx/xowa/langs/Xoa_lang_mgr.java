@@ -20,7 +20,7 @@ import gplx.intl.*;
 import gplx.xowa.apps.fsys.*; import gplx.xowa.bldrs.langs.*; import gplx.xowa.langs.vnts.*;
 public class Xoa_lang_mgr implements GfoInvkAble {
 	private final Xoa_fsys_mgr fsys_mgr; private final Gfo_msg_log msg_log; private final Xol_lang lang_en; 
-	private final Ordered_hash hash = Ordered_hash_.new_bry_(); private final Hash_adp_bry fallback_regy = Hash_adp_bry.cs_();
+	private final Ordered_hash hash = Ordered_hash_.new_bry_(); private final Hash_adp_bry fallback_regy = Hash_adp_bry.cs();
 	public Xoa_lang_mgr(Xoae_app app) {
 		this.fsys_mgr = app.Fsys_mgr(); this.msg_log = app.Msg_log();
 		mw_converter = new Xobc_utl_make_lang(this, fsys_mgr, msg_log);

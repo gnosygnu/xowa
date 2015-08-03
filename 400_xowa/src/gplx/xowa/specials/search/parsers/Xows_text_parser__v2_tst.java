@@ -115,7 +115,7 @@ class Xows_text_parser__v2_fxt {
 	private final Bry_bfr tmp_bfr = Bry_bfr.new_(32);
 	private Xol_case_mgr case_mgr;
 	public void Init() {
-		case_mgr = Xol_case_mgr_.Ascii();
+		case_mgr = Xol_case_mgr_.A7();
 		word_parser.Init_for_ttl(word_mgr, case_mgr);
 	}
 	public Xows_text_parser__v2_fxt Clear() {

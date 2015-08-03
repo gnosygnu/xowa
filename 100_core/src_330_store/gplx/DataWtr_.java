@@ -39,7 +39,7 @@ class DataWtr_null implements DataWtr {
 	public long SrlLongOr(String key, long or) {return or;}
 	public String SrlStrOr(String key, String or) {return or;}
 	public DateAdp SrlDateOr(String key, DateAdp or) {return or;}
-	public DecimalAdp SrlDecimalOr(String key, DecimalAdp or) {return or;}
+	public Decimal_adp SrlDecimalOr(String key, Decimal_adp or) {return or;}
 	public double SrlDoubleOr(String key, double or) {return or;}
 	public Object SrlObjOr(String key, Object or) {return or;}
 	public void SrlList(String key, List_adp list, SrlObj proto, String itmKey) {}

@@ -26,7 +26,7 @@ public class Pfunc_ns extends Pf_func_base {	// EX: {{ns:6}} -> File
 		byte[] val_dat_ary = Eval_argx(ctx, src, caller, self); if (val_dat_ary == Bry_.Empty) return;
 
 		int val_dat_ary_len = val_dat_ary.length;
-		int ns_id = Bry_.Xto_int_or(val_dat_ary, 0, val_dat_ary_len, Int_.MinValue);
+		int ns_id = Bry_.To_int_or(val_dat_ary, 0, val_dat_ary_len, Int_.MinValue);
 		if (ns_id == Int_.MinValue) {
 			Object o = ctx.Wiki().Ns_mgr().Names_get_or_null(val_dat_ary, 0, val_dat_ary_len);
 			if (o == null
@@ -46,7 +46,7 @@ public class Pfunc_ns extends Pf_func_base {	// EX: {{ns:6}} -> File
 	}
 	private static Hash_adp_bry canonical;
 	private static void canonical_() {
-		canonical = Hash_adp_bry.ci_ascii_();	// ASCII:canonical English names
+		canonical = Hash_adp_bry.ci_a7();	// ASCII:canonical English names
 		for (Xow_ns ns : Xow_ns_.Canonical)
 			canonical_add(ns.Id(), ns.Name_bry());
 	}

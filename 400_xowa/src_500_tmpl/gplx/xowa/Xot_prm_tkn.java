@@ -34,7 +34,7 @@ public class Xot_prm_tkn extends Xop_tkn_itm_base {
 			if (find_tkn_static) {	// subs_are_static, so extract idx/key; EX: {{{a b}}} will have 3 subs which are all static; {{{a{{{1}}}b}}} will be dynamic
 				int find_tkn_bgn = find_tkn.Dat_bgn(), find_tkn_end = find_tkn.Dat_end();
 				if (find_tkn_end - find_tkn_bgn > 0) {	// NOTE: handles empty find_tkns; EX: {{{|safesubst:}}}
-					prm_idx = Bry_.Xto_int_or(src, find_tkn_bgn, find_tkn_end, -1);			// parse as number first; note that bgn,end should not include ws; EX: " 1 " will fail
+					prm_idx = Bry_.To_int_or(src, find_tkn_bgn, find_tkn_end, -1);			// parse as number first; note that bgn,end should not include ws; EX: " 1 " will fail
 					if (prm_idx == -1) prm_key = Bry_.Mid(src, find_tkn_bgn, find_tkn_end);// not a number; parse as key
 				}
 			}
@@ -47,7 +47,7 @@ public class Xot_prm_tkn extends Xop_tkn_itm_base {
 			Bry_bfr find_bfr = Bry_bfr.new_();
 			for (int i = 0; i < subs_len; i++)
 				find_tkn.Subs_get(i).Tmpl_evaluate(ctx, src, caller, find_bfr);
-			prm_idx = Bry_.Xto_int_or_trim(find_bfr.Bfr(), 0, find_bfr.Len(), -1);	// parse as number first; NOTE: trim needed to transform "{{{ 1 }}}" to "1"; it.w:Portale:Giochi_da_tavolo; DATE:2014-02-09
+			prm_idx = Bry_.To_int_or__trim_ws(find_bfr.Bfr(), 0, find_bfr.Len(), -1);	// parse as number first; NOTE: trim needed to transform "{{{ 1 }}}" to "1"; it.w:Portale:Giochi_da_tavolo; DATE:2014-02-09
 			if (prm_idx == -1)
 				prm_key = find_bfr.Xto_bry_and_clear_and_trim();									// not a number; parse as key; NOTE: must trim; PAGE:en.w:William Shakespeare; {{Relatebardtree}}
 		}

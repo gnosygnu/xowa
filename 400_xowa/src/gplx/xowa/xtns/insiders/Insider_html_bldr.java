@@ -34,7 +34,7 @@ public class Insider_html_bldr implements Bry_fmtr_arg {
 	private Insider_xtn_mgr xtn_mgr;
 	private Bry_bfr tmp_ttl = Bry_bfr.reset_(255);
 	private List_adp list; private int list_len;
-	private Hash_adp_bry hash = Hash_adp_bry.cs_();
+	private Hash_adp_bry hash = Hash_adp_bry.cs();
 	public Insider_html_bldr(Insider_xtn_mgr xtn_mgr) {this.xtn_mgr = xtn_mgr;}
 	public void Bld_all(Bry_bfr bfr, Xoae_page page, List_adp list) {
 		this.list = list; this.list_len = list.Count();
@@ -43,7 +43,7 @@ public class Insider_html_bldr implements Bry_fmtr_arg {
 	}
 	public void XferAry(Bry_bfr bfr, int idx) {
 		Xowe_wiki wiki = xtn_mgr.Wiki();
-		Xoh_href_parser href_parser = wiki.Appe().Href_parser();
+		Url_encoder href_encoder = Xoa_app_.Utl__encoder_mgr().Href();
 		for (int i = 0; i < list_len; ++i) {
 			byte[] itm = (byte[])list.Get_at(i);
 			Xoa_ttl user_ttl = Xoa_ttl.parse_(wiki, Xow_ns_.Id_user, itm);
@@ -51,7 +51,7 @@ public class Insider_html_bldr implements Bry_fmtr_arg {
 			byte[] user_ttl_bry = user_ttl.Full_db();
 			if (hash.Has(user_ttl_bry)) continue;
 			hash.Add(user_ttl_bry, user_ttl_bry);
-			href_parser.Encoder().Encode(tmp_ttl, user_ttl_bry);
+			href_encoder.Encode(tmp_ttl, user_ttl_bry);
 			user_ttl_bry = tmp_ttl.Xto_bry_and_clear();
 			fmtr_itm.Bld_bfr(bfr, user_ttl_bry, user_ttl.Page_txt());
 		}

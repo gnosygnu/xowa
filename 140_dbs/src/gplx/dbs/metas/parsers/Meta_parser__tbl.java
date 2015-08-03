@@ -22,7 +22,7 @@ public class Meta_parser__tbl {
 	private final Meta_parser__fld fld_parser = new Meta_parser__fld();
 	private Meta_tbl_itm tbl;
 	public Meta_tbl_itm Parse(byte[] src) {
-		src = Bry_.Lower_ascii(src);
+		src = Bry_.Lcase__all(src);
 		rdr.Init(src);
 		tbl = null;
 		Parse_hdr();

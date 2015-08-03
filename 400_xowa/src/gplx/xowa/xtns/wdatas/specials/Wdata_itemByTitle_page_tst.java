@@ -61,7 +61,7 @@ class Wdata_itemByTitle_page_fxt {
 	}
 	public void Test_open(String link, String expd) {
 		Xoae_page page = wiki.Ctx().Cur_page();
-		Xoa_url url = app.Utl__url_parser().Parse(Bry_.new_u8(link));
+		Xoa_url url = app.User().Wikii().Utl__url_parser().Parse(Bry_.new_u8(link));
 		page.Url_(url);
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_a7(link));
 		page.Ttl_(ttl);

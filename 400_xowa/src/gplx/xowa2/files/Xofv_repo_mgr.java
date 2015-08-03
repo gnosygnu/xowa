@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa2.files; import gplx.*; import gplx.xowa2.*;
 import gplx.core.primitives.*;
 public class Xofv_repo_mgr {
-	private final Hash_adp_bry key_regy = Hash_adp_bry.cs_();
+	private final Hash_adp_bry key_regy = Hash_adp_bry.cs();
 	private final Hash_adp tid_regy = Hash_adp_.new_(); private final Byte_obj_ref tid_key = Byte_obj_ref.zero_();
 	public Xofv_repo_mgr Add(Xofv_repo_itm itm) {
 		key_regy.Add(itm.Key(), itm);

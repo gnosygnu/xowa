@@ -22,7 +22,7 @@ public class Wdata_doc_parser_v2 implements Wdata_doc_parser {
 	public byte[] Parse_qid(Json_doc doc) {
 		try {
 			Json_itm itm = doc.Find_nde(Bry_id);
-			return Bry_.Lower_1st(itm.Data_bry());	// standardize on "q" instead of "Q" for compatibility with v1
+			return Bry_.Lcase__1st(itm.Data_bry());	// standardize on "q" instead of "Q" for compatibility with v1
 		}	catch (Exception e) {throw Err_.new_exc(e, "xo", "failed to parse qid", "src", String_.new_u8(doc.Src()));}
 	}
 	public Ordered_hash Parse_sitelinks(byte[] qid, Json_doc doc) {

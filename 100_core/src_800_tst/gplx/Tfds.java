@@ -19,11 +19,13 @@ package gplx;
 import gplx.core.strings.*; import gplx.core.consoles.*;
 public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	public static boolean SkipDb = false;
-	public static void Eq_bool	(boolean expd	, boolean   actl, String fmt, Object... args)	{Eq_str(Bool_.Xto_str_lower(expd), Bool_.Xto_str_lower(actl), fmt, args);}
-	public static void Eq_str	(byte[] expd, String actl, String fmt, Object... args)	{Eq_str(String_.new_u8(expd), actl, fmt, args);}
-	public static void Eq_str	(byte[] expd, byte[] actl, String fmt, Object... args)	{Eq_str(String_.new_u8(expd), String_.new_u8(actl), fmt, args);}
-	public static void Eq_str	(String expd, byte[] actl, String fmt, Object... args)	{Eq_str(expd, String_.new_u8(actl), fmt, args);}
-	public static void Eq_str	(String expd, String actl, String fmt, Object... args)	{Eq_wkr(expd, actl, true, String_.Format(fmt, args));}
+	public static void Eq_bool	(boolean expd	, boolean   actl, String fmt, Object... args)	{Eq_exec_y(expd, actl, fmt, args);}
+	public static void Eq_byte	(byte expd	, byte   actl, String fmt, Object... args)	{Eq_exec_y(expd, actl, fmt, args);}
+	public static void Eq_int	(int  expd	, int    actl, String fmt, Object... args)	{Eq_exec_y(expd, actl, fmt, args);}
+	public static void Eq_str	(byte[] expd, byte[] actl, String fmt, Object... args)	{Eq_exec_y(String_.new_u8(expd), String_.new_u8(actl), fmt, args);}
+	public static void Eq_str	(byte[] expd, String actl, String fmt, Object... args)	{Eq_exec_y(String_.new_u8(expd), actl, fmt, args);}
+	public static void Eq_str	(String expd, byte[] actl, String fmt, Object... args)	{Eq_exec_y(expd, String_.new_u8(actl), fmt, args);}
+	public static void Eq_str	(String expd, String actl, String fmt, Object... args)	{Eq_exec_y(expd, actl, fmt, args);}
 
 	public static void Eq(Object expd, Object actl)											{Eq_wkr(expd, actl, true, EmptyStr);}
 	public static void Eq_able(EqAble expd, EqAble actl)									{Eq_able_wkr(expd, actl, true, EmptyStr);}
@@ -31,7 +33,7 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	public static void Eq_byte(byte expd, byte actl)										{Eq_wkr(expd, actl, true, EmptyStr);}
 	public static void Eq_long(long expd, long actl)										{Eq_wkr(expd, actl, true, EmptyStr);}
 	public static void Eq_float(float expd, float actl)										{Eq_wkr(expd, actl, true, EmptyStr);}
-	public static void Eq_decimal(DecimalAdp expd, DecimalAdp actl)							{Eq_wkr(expd.Xto_double(), actl.Xto_double(), true, EmptyStr);}
+	public static void Eq_decimal(Decimal_adp expd, Decimal_adp actl)						{Eq_wkr(expd.To_double(), actl.To_double(), true, EmptyStr);}
 	public static void Eq_date(DateAdp expd, DateAdp actl)									{Eq_wkr(expd.XtoStr_gplx(), actl.XtoStr_gplx(), true, EmptyStr);}
 	public static void Eq_date(DateAdp expd, DateAdp actl, String fmt, Object... args){Eq_wkr(expd.XtoStr_gplx(), actl.XtoStr_gplx(), true, String_.Format(fmt, args));}
 	public static void Eq_url(Io_url expd, Io_url actl)										{Eq_wkr(expd.Raw(), actl.Raw(), true, EmptyStr);}
@@ -66,6 +68,11 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	public static void Eq_ary_str(Object lhs, Object rhs)						{Eq_ary_wkr(lhs, rhs, false, EmptyStr);}					
 	public static void Eq_list(List_adp lhs, List_adp rhs)									{Eq_list_wkr(lhs, rhs, TfdsEqListItmStr_cls_default._, EmptyStr);}
 	public static void Eq_list(List_adp lhs, List_adp rhs, TfdsEqListItmStr xtoStr)			{Eq_list_wkr(lhs, rhs, xtoStr, EmptyStr);}
+	private static void Eq_exec_y(Object lhs, Object rhs, String fmt, Object[] args) {
+		if (Object_.Eq(lhs, rhs)) return;
+		String msg = msgBldr.Eq_xtoStr(lhs, rhs, String_.Format(fmt, args));
+		throw Err_.new_wo_type(msg);
+	}
 	static void Eq_able_wkr(EqAble lhs, EqAble rhs, boolean expd, String customMsg) {
 		boolean actl = false;
 		if		(lhs == null && rhs != null) actl = false;
@@ -156,7 +163,6 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	private static final DateAdp time0 = DateAdp_.parse_gplx("2001-01-01 00:00:00.000");
 	private static DateAdp nowTime; // NOTE: cannot set to time0 due to static initialization;
 	public static void WriteText(String text) {Console_adp__sys.I.Write_str(text);}
-	public static void Write_bry(byte[] ary) {Write(String_.new_u8(ary));}
 	public static void Write() {Write("tmp");}
 	public static void Write(Object... ary) {
 		String_bldr sb = String_bldr_.new_();

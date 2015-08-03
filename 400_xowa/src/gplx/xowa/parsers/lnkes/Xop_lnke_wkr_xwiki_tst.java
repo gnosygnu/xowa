@@ -40,4 +40,16 @@ public class Xop_lnke_wkr_xwiki_tst {
 		fxt.App().Usere().Wiki().Xwiki_mgr().Add_full(Bry_.new_a7("en.wikipedia.org"), Bry_.new_a7("en.wikipedia.org"));
 		fxt.Test_parse_page_wiki_str("[http://en.wikipedia.org/wiki/A?action=edit a]", "<a href=\"/site/en.wikipedia.org/wiki/A?action=edit\">a</a>");
 	}
+	@Test  public void Ignore_proto() {	// PURPOSE: handle other protocols; PAGE:uk.w:Маскалі; DATE:2015-07-28
+		fxt.Test_parse_page_wiki_str("[mailto:a b]", "<a href=\"mailto:a\" class=\"external text\" rel=\"nofollow\">b</a>");// should be /w/, not /en.wikipedia.org
+	}
+	@Test  public void Ignore_alias() {	// PURPOSE: fictitious example to make sure aliases are not subbed for domains; DATE:2015-07-28
+		fxt.Init_xwiki_add_user_("w", "en.wikipedia.org");
+		fxt.Test_parse_page_wiki_str("[https://w/b c]", "<a href=\"https://w/b\" class=\"external text\" rel=\"nofollow\">c</a>");// should be /w/, not /en.wikipedia.org
+	}
+	@Test  public void Xwiki__qargs() {	// PURPOSE: fix null ref error; PAGE:en.w:Wikipedia:Template_standardisation/demometa DATE:2015-08-02
+		fxt.Init_xwiki_add_user_("en.wikipedia.org");
+		fxt.Test_parse_page_wiki_str("[http://en.wikipedia.org/w/index.php?action&#61;edit&preload&#61;Template:Afd2+starter&editintro&#61;Template:Afd3+starter&title&#61;Wikipedia:Articles+for+deletion/Template_standardisation/demometa]"
+			, "<a href=\"/site/en.wikipedia.org/wiki/index.php?action=&#61;edit=&preload=&#61;Template:Afd2+starter=&editintro=&#61;Template:Afd3+starter=&title=&=\">[1]</a>");
+	}
 }

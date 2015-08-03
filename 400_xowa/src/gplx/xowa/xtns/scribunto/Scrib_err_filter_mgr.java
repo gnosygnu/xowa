@@ -19,7 +19,7 @@ package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx
 public class Scrib_err_filter_mgr implements GfoInvkAble {
 	private final Ordered_hash hash_by_mod = Ordered_hash_.new_();
 	public void Clear() {hash_by_mod.Clear();}
-	public boolean Count_gt_0() {return hash_by_mod.Count() > 0;}
+	public boolean Count_eq_0() {return hash_by_mod.Count() == 0;}
 	public boolean Match(String mod, String fnc, String err) {
 		List_adp itms = Get_itms_or_null(mod, fnc); if (itms == null) return false;
 		int itms_len = itms.Count();

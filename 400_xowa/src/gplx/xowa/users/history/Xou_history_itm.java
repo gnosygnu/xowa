@@ -18,12 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.users.history; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.core.primitives.*;
 public class Xou_history_itm {
+	private Xou_history_itm() {}
 	public Xou_history_itm(byte[] wiki, byte[] page) {
 		this.wiki = wiki;
 		this.page = page;
 		this.key = key_(wiki, page);
 		this.view_bgn = DateAdp_.Now();
-	}	private Xou_history_itm() {}
+	}
 	public byte[] Key() {return key;} private byte[] key;
 	public byte[] Wiki() {return wiki;} private byte[] wiki;
 	public byte[] Page() {return page;} private byte[] page;

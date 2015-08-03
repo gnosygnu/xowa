@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.gui.urls.url_macros; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*; import gplx.xowa.gui.urls.*;
 import gplx.core.btries.*;
 public class Xog_url_macro_grp implements GfoInvkAble {
-	public Btrie_slim_mgr Trie() {return trie;} private Btrie_slim_mgr trie = Btrie_slim_mgr.cs_();
+	public Btrie_slim_mgr Trie() {return trie;} private Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
 	public void Del(byte[] abrv) {trie.Del(abrv);}
 	public void Set(String abrv, String fmt) {Set(Bry_.new_u8(abrv), Bry_.new_u8(fmt));}
 	public void Set(byte[] abrv, byte[] fmt) {trie.Add_obj(abrv, new Xog_url_macro_itm(abrv, fmt));}

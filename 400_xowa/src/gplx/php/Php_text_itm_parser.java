@@ -104,7 +104,7 @@ public class Php_text_itm_parser {
 						//throw Err_mgr._.fmt_auto_(GRP_KEY, "dollar_is_last_char", String_.new_u8(raw));
 					}
 					int int_end = Find_fwd_non_int(raw, i + 1, raw_len);	// +1 to search after $
-					int int_val = Bry_.Xto_int_or(raw, i + 1, int_end, -1); // +1 to search after $
+					int int_val = Bry_.To_int_or(raw, i + 1, int_end, -1); // +1 to search after $
 					if (int_val == -1) {
 						tmp_list.Add(new Php_text_itm_text(i, i + 1)); 
 						continue;

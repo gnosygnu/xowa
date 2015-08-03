@@ -26,10 +26,10 @@ public class Pfunc_sub extends Pf_func_base {
 		int bgn = 0, len = Int_.MinValue;
 		if (self_args_len > 0) {
 			byte[] bgn_bry = Pf_func_.Eval_arg_or(ctx, src, caller, self, self_args_len, 0, null);
-			if (bgn_bry != null) bgn = Bry_.Xto_int_or(bgn_bry, 0);
+			if (bgn_bry != null) bgn = Bry_.To_int_or(bgn_bry, 0);
 			if (self_args_len > 1) {
 				byte[] len_bry = Pf_func_.Eval_arg_or(ctx, src, caller, self, self_args_len, 1, null);
-				if (len_bry != null) len = Bry_.Xto_int_or(len_bry, Int_.MinValue);
+				if (len_bry != null) len = Bry_.To_int_or(len_bry, Int_.MinValue);
 			}
 		}
 		int s_len = s.length;

@@ -78,7 +78,7 @@ public class Http_request_parser {
 					case Tid_x_requested_with:			this.x_requested_with = Bry_.Mid(line, val_bgn, line_len); break;
 					case Tid_cookie:					this.cookie = Bry_.Mid(line, val_bgn, line_len); break;
 					case Tid_referer:					this.referer = Bry_.Mid(line, val_bgn, line_len); break;
-					case Tid_content_length:			this.content_length = Bry_.Xto_int_or(line, val_bgn, line_len, -1); break;
+					case Tid_content_length:			this.content_length = Bry_.To_int_or(line, val_bgn, line_len, -1); break;
 					case Tid_content_type:				Parse_content_type(val_bgn, line, line_len); break;
 					case Tid_connection:				this.connection = Bry_.Mid(line, val_bgn, line_len); break;
 					case Tid_pragma:					this.pragma = Bry_.Mid(line, val_bgn, line_len); break;
@@ -146,7 +146,7 @@ public class Http_request_parser {
 	private String To_str() {return Make_request_itm().To_str(tmp_bfr, Bool_.N);}
 	private static final int Tid_get = 1, Tid_post = 2, Tid_host = 3, Tid_user_agent = 4, Tid_accept = 5, Tid_accept_language = 6, Tid_accept_encoding = 7, Tid_dnt = 8
 	, Tid_x_requested_with = 9, Tid_cookie = 10, Tid_referer = 11, Tid_content_length = 12, Tid_content_type = 13, Tid_connection = 14, Tid_pragma = 15, Tid_cache_control = 16, Tid_origin = 17;
-	private static final Btrie_slim_mgr trie = Btrie_slim_mgr.ci_ascii_()
+	private static final Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7()
 	.Add_str_int("GET"					, Tid_get)
 	.Add_str_int("POST"					, Tid_post)
 	.Add_str_int("Host:"				, Tid_host)

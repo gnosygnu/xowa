@@ -119,7 +119,7 @@ class Xol_mw_parse_fxt {
 	private Xol_mw_parse_grp Parse_grp(Php_line_assign line) {
 		Xol_mw_parse_grp grp = new Xol_mw_parse_grp();
 		byte[] key =  line.Key().Val_obj_bry();				// EX: "zh2Hant"
-		key = Bry_.Lower_ascii(key);						// EX: "zh2hant"
+		key = Bry_.Lcase__all(key);						// EX: "zh2hant"
 		byte[][] parts = Bry_.Split(key, Byte_ascii.Num_2);	// EX: "zh", "hant"
 		byte[] src = parts[0];
 		byte[] trg = Bry_.Add(parts[0], new byte[] {Byte_ascii.Dash}, parts[1]);

@@ -19,7 +19,7 @@ package gplx.xowa.xtns.wdatas.hwtrs; import gplx.*; import gplx.xowa.*; import g
 import gplx.core.primitives.*;
 import gplx.xowa.xtns.wdatas.core.*;
 public class Wdata_lbl_mgr {
-	private Hash_adp_bry ttl_hash = Hash_adp_bry.ci_ascii_();
+	private Hash_adp_bry ttl_hash = Hash_adp_bry.ci_a7();
 	private Hash_adp qid_hash = Hash_adp_.new_(), pid_hash = Hash_adp_.new_(); private Int_obj_ref int_hash_key = Int_obj_ref.neg1_();
 	private Wdata_visitor__lbl_gatherer lbl_gatherer;
 	public Wdata_lbl_mgr() {
@@ -134,6 +134,6 @@ public class Wdata_lbl_mgr {
 	public static int Qid_int(byte[] qid) {
 		byte qid_0 = qid[0];
 		if (qid_0 != Byte_ascii.Ltr_Q && qid_0 != Byte_ascii.Ltr_q) return -1;
-		return Bry_.Xto_int_or(qid, 1, qid.length, -1);
+		return Bry_.To_int_or(qid, 1, qid.length, -1);
 	}
 }

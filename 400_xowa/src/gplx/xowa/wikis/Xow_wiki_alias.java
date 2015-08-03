@@ -213,7 +213,7 @@ public class Xow_wiki_alias {
 		alias_val_hash.Add(domain_bval, alias_bry);
 	}
 	private static void Init_tids() {
-		tid_bry_trie = Btrie_slim_mgr.ci_ascii_();	// NOTE:ci.ascii:MW_const.en
+		tid_bry_trie = Btrie_slim_mgr.ci_a7();	// NOTE:ci.ascii:MW_const.en
 		tid_val_hash = Hash_adp_.new_();
 		Init_tid(Key_pages_articles		, Tid_pages_articles);
 		Init_tid(Key_pages_meta_current	, Tid_pages_meta_current);

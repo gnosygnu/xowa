@@ -49,7 +49,7 @@ class Xob_css_parser {
 		}
 	}
 	private static final byte Tkn_import = 1, Tkn_url = 2;
-	private static final Btrie_slim_mgr tkns_trie = Btrie_slim_mgr.ci_ascii_()
+	private static final Btrie_slim_mgr tkns_trie = Btrie_slim_mgr.ci_a7()
 	.Add_str_byte("@import"		, Tkn_import)
 	.Add_str_byte(" url("		, Tkn_url)
 	;

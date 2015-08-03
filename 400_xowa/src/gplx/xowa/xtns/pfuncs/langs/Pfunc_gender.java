@@ -52,7 +52,7 @@ public class Pfunc_gender extends Pf_func_base {
 		Object o = gender_cache.Get_by_bry(user_name);
 		return o == null ? user.Gender() : ((Int_obj_val)o).Val();
 	}
-	private static final Hash_adp_bry gender_cache = Hash_adp_bry.cs_()	// for tests
+	private static final Hash_adp_bry gender_cache = Hash_adp_bry.cs()	// for tests
 	.Add_str_int("xowa_male"	, Xol_gender_.Tid_male)
 	.Add_str_int("xowa_female"	, Xol_gender_.Tid_female)
 	;

@@ -22,7 +22,7 @@ public class Xop_log_invoke_wkr implements GfoInvkAble {
 	private Xop_log_mgr log_mgr;
 	private Db_conn conn; private Db_stmt stmt;
 	private boolean log_enabled = true;
-	private Hash_adp_bry exclude_mod_names = Hash_adp_bry.cs_();
+	private Hash_adp_bry exclude_mod_names = Hash_adp_bry.cs();
 	public Scrib_err_filter_mgr Err_filter_mgr() {return err_filter_mgr;} private final Scrib_err_filter_mgr err_filter_mgr = new Scrib_err_filter_mgr();
 	public Xop_log_invoke_wkr(Xop_log_mgr log_mgr, Db_conn conn) {
 		this.log_mgr = log_mgr;

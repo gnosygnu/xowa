@@ -81,13 +81,13 @@ class Imap_parser {
 						case Imap_itm_.Tid_invalid:			Parse_invalid(itm_bgn, itm_end); break;
 					}
 				}
-			} catch (Exception e) {usr_dlg.Warn_many("", "", "imap.parse:skipping line; page=~{0} line=~{1} err=~{2}", page_url.Xto_full_str_safe(), Bry_.Mid_safe(src, itm_bgn, itm_end), Err_.Message_gplx_full(e));}
+			} catch (Exception e) {usr_dlg.Warn_many("", "", "imap.parse:skipping line; page=~{0} line=~{1} err=~{2}", page_url.To_str(), Bry_.Mid_safe(src, itm_bgn, itm_end), Err_.Message_gplx_log(e));}
 			++itm_idx;
 		}
 		rv.Init(xtn_mgr, imap_img_src, imap_img, imap_dflt, imap_desc, (Imap_itm_shape[])shapes.To_ary_and_clear(Imap_itm_shape.class), (Imap_err[])errs.To_ary_and_clear(Imap_err.class));
 	}
 	private void Parse_comment(int itm_bgn, int itm_end) {}	// noop comments; EX: "# comment\n"
-	private void Parse_invalid(int itm_bgn, int itm_end) {usr_dlg.Warn_many("", "", "imap has invalid line: page=~{0} line=~{1}", page_url.Xto_full_str_safe(), String_.new_u8(src, itm_bgn, itm_end));}
+	private void Parse_invalid(int itm_bgn, int itm_end) {usr_dlg.Warn_many("", "", "imap has invalid line: page=~{0} line=~{1}", page_url.To_str(), String_.new_u8(src, itm_bgn, itm_end));}
 	private boolean Parse_desc(int itm_bgn, int itm_end) {
 		xtn_mgr.Desc_assert();
 		Btrie_slim_mgr trie = xtn_mgr.Desc_trie();
@@ -108,7 +108,7 @@ class Imap_parser {
 		boolean shape_is_poly = shape_tid == Imap_itm_.Tid_shape_poly;
 		int pos = Bry_finder.Trim_fwd_space_tab(src, tid_end_pos, itm_end);				// gobble any leading spaces
 		int grp_end = Bry_finder.Find_fwd(src, Byte_ascii.Brack_bgn, pos, itm_end);		// find first "["; note that this is a lazy way of detecting start of lnki / lnke; MW has complicated regex, but hopefully this will be enough; DATE:2014-10-22
-		if (grp_end == -1) {return Add_err(Bool_.Y, itm_bgn, itm_end, "No valid link was found");}
+		if (grp_end == -1) {return Add_err(Bool_.Y, itm_bgn, itm_end, "imap_No valid link was found");}
 		int num_bgn = -1, comma_pos = -1, pts_len = 0;
 		while (true) {
 			boolean last = pos == grp_end;
@@ -118,8 +118,13 @@ class Imap_parser {
 				default:				if (num_bgn == -1) num_bgn = pos; break;
 				case Byte_ascii.Space: case Byte_ascii.Tab:
 					if (num_bgn != -1) {
-						byte[] num_bry = comma_pos == -1 ? Bry_.Mid(src, num_bgn, pos) : Bry_.Mid(src, num_bgn, comma_pos);	// if commas exist, treat first as decimal; echo(intval(round('1,2,3,4' * 1))) -> 1; PAGE:fr.w:Gouesnou; DATE:2014-08-12
-						double num = Bry_.Xto_double_or(num_bry, Double_.NaN);
+						byte[] num_bry 
+							=		comma_pos == -1			// if commas exist, treat first as decimal; echo(intval(round('1,2,3,4' * 1))) -> 1; PAGE:fr.w:Gouesnou; DATE:2014-08-12
+								||	comma_pos < num_bgn		// if comma is at start of number, ignore; EX: "poly ,1 2"; PAGE:en.w:Area_codes_281,_346,_713,_and_832; DATE:2015-07-31
+							? Bry_.Mid(src, num_bgn, pos)
+							: Bry_.Mid(src, num_bgn, comma_pos)
+							;
+						double num = Bry_.To_double_or(num_bry, Double_.NaN);
 						if (Double_.IsNaN(num)) { 
 							if (shape_is_poly)	// poly code in ImageMap_body.php accepts invalid words and converts to 0; EX:"word1"; PAGE:uk.w:Стратосфера; DATE:2014-07-26
 								num = 0;
@@ -151,7 +156,7 @@ class Imap_parser {
 		return true;
 	}
 	private boolean Add_err(boolean clear_pts, int bgn, int end, String err_key) {
-		usr_dlg.Warn_many("", "", err_key + ": page=~{0} line=~{1}", page_url.Xto_full_str_safe(), String_.new_u8(src, bgn, end));
+		usr_dlg.Warn_many("", "", err_key + ": page=~{0} line=~{1}", page_url.To_str(), String_.new_u8(src, bgn, end));
 		errs.Add(new Imap_err(itm_idx, err_key));
 		if (clear_pts) pts.Clear();
 		return false;
@@ -222,13 +227,13 @@ class Imap_parser {
 		}
 		return rv;
 	}
-	private static Btrie_slim_mgr tid_trie = Btrie_slim_mgr.ci_ascii_()	// names are not i18n'd; // NOTE:ci.ascii:MW_const.en
+	private static Btrie_slim_mgr tid_trie = Btrie_slim_mgr.ci_a7()	// names are not i18n'd; // NOTE:ci.ascii:MW_const.en
 	.Add_str_byte("desc"						, Imap_itm_.Tid_desc)
 	.Add_str_byte("#"							, Imap_itm_.Tid_comment)
-	.Add_bry_bval(Imap_itm_.Key_dflt			, Imap_itm_.Tid_dflt)
-	.Add_bry_bval(Imap_itm_.Key_shape_rect		, Imap_itm_.Tid_shape_rect)
-	.Add_bry_bval(Imap_itm_.Key_shape_circle	, Imap_itm_.Tid_shape_circle)
-	.Add_bry_bval(Imap_itm_.Key_shape_poly		, Imap_itm_.Tid_shape_poly)
+	.Add_bry_byte(Imap_itm_.Key_dflt			, Imap_itm_.Tid_dflt)
+	.Add_bry_byte(Imap_itm_.Key_shape_rect		, Imap_itm_.Tid_shape_rect)
+	.Add_bry_byte(Imap_itm_.Key_shape_circle	, Imap_itm_.Tid_shape_circle)
+	.Add_bry_byte(Imap_itm_.Key_shape_poly		, Imap_itm_.Tid_shape_poly)
 	; 
 	private static final int Reqd_poly = -1;
 }

@@ -19,8 +19,8 @@ package gplx.xowa.specials.search; import gplx.*; import gplx.xowa.*; import gpl
 import gplx.dbs.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 class Xows_core {
 	private final Xoae_wiki_mgr wiki_mgr;
-	private final Hash_adp_bry cache_hash = Hash_adp_bry.cs_(); private final Hash_adp_bry cmd_hash = Hash_adp_bry.cs_();
-	private boolean ask_for_upgrade = true; private final Hash_adp_bry upgraded_wikis = Hash_adp_bry.cs_();		
+	private final Hash_adp_bry cache_hash = Hash_adp_bry.cs(); private final Hash_adp_bry cmd_hash = Hash_adp_bry.cs();
+	private boolean ask_for_upgrade = true; private final Hash_adp_bry upgraded_wikis = Hash_adp_bry.cs();		
 	public Xows_core(Xoae_wiki_mgr wiki_mgr) {this.wiki_mgr = wiki_mgr;}
 	private final Xows_html_wkr html_wkr = new Xows_html_wkr();
 	public Xows_db_cache Get_cache_or_new(byte[] key) {

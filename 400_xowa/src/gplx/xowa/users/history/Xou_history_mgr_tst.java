@@ -35,7 +35,7 @@ public class Xou_history_mgr_tst {
 	@Test   public void Normalize() {
 		fxt.Clear();
 		fxt.Add_many("Category:A_B", "Category:A B", "Category:a B", "Category:_A B_");
-		fxt.List_tst("Category:A B");
+		fxt.List_tst("Category:A_B");
 	}
 	@Test   public void Args() {
 		fxt.Clear();
@@ -70,10 +70,8 @@ class Xou_history_mgr_fxt {
 		page.Revision_data().Modified_on_(DateAdp_.Now());
 		byte[] url_bry = ttl_bry;
 		if (arg_str != null) url_bry = Bry_.Add(url_bry, Bry_.new_u8(arg_str));
-		Xoa_url url = app.Utl__url_parser().Parse(url_bry);
-		url.Wiki_bry_(wiki.Domain_bry());
+		Xoa_url url = wiki.Utl__url_parser().Parse(url_bry);
 		page.Url_(url);  // set url b/c history_mgr.Add uses url
-//			page.Url_(Xoa_url.new_(wiki.Key_bry(), url_bry));  // set url b/c history_mgr.Add uses url
 		under.Add(page);
 		return this;
 	}

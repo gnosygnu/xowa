@@ -18,12 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 import gplx.core.threads.*; import gplx.gfui.*; import gplx.xowa.gui.*; import gplx.xowa.gui.history.*; import gplx.xowa.xtns.math.*; import gplx.xowa.files.*;
 import gplx.xowa.gui.urls.*; import gplx.xowa.gui.views.*; import gplx.xowa.pages.*;
+import gplx.xowa.html.hrefs.*;
 import gplx.xowa.parsers.lnkis.redlinks.*; import gplx.xowa.specials.*;
+import gplx.xowa.urls.*;
 public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 	private GfoInvkAble sync_cmd;
 	public Xog_win_itm(Xoae_app app, Xoa_gui_mgr gui_mgr) {
 		this.app = app; this.gui_mgr = gui_mgr;
-		this.tab_mgr = new Xog_tab_mgr(this);			
+		this.tab_mgr = new Xog_tab_mgr(this);
 	}
 	public Gfui_kit			Kit() {return kit;} private Gfui_kit kit;
 	public Xoa_gui_mgr		Gui_mgr() {return gui_mgr;} private Xoa_gui_mgr gui_mgr;
@@ -57,9 +59,9 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_link_click))								Win__link_click();
 		else if	(ctx.Match(k, Invk_link_print))								Xog_win_itm__prog_href_mgr.Print(this);
-		else if	(ctx.Match(k, Gfui_html.Evt_link_hover))					Xog_win_itm__prog_href_mgr.Hover(app, this.Active_tab().Wiki(), this.Active_page(), m.ReadStr("v"));
+		else if	(ctx.Match(k, Gfui_html.Evt_link_hover))					Xog_win_itm__prog_href_mgr.Hover(app, this.Active_tab().Wiki(), this.Active_page(), Xoh_href_gui_utl.Standardize_xowa_link(m.ReadStr("v")));
 		else if	(ctx.Match(k, Gfui_html.Evt_location_changed))				Win__link_clicked(m.ReadStr("v"));
-		else if	(ctx.Match(k, Gfui_html.Evt_location_changing))				Page__navigate_by_internal_href(m.ReadStr("v"), tab_mgr.Active_tab());
+		else if	(ctx.Match(k, Gfui_html.Evt_location_changing))				Page__navigate_by_href(tab_mgr.Active_tab(), Xoh_href_gui_utl.Standardize_xowa_link(m.ReadStr("v")));
 		else if (ctx.Match(k, Gfui_html.Evt_win_resized))					Refresh_win_size();
 		else if (ctx.Match(k, Invk_page_refresh))							Page__refresh();
 		else if	(ctx.Match(k, Invk_page_async_exec))						Xog_tab_itm_read_mgr.Async((Xog_tab_itm)m.ReadObj("v"));
@@ -86,6 +88,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 		else if	(ctx.Match(k, Invk_app))									return app;
 		else if	(ctx.Match(k, Invk_page))									return this.Active_page();
 		else if	(ctx.Match(k, Invk_wiki))									return this.Active_tab().Wiki();
+		else if	(ctx.Match(k, Invk_exit))									App__exit();
 		else																return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}
@@ -105,6 +108,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 	, Invk_page_edit_save = "page_edit_save", Invk_page_edit_save_draft = "page_edit_save_draft", Invk_page_edit_preview = "page_edit_preview", Invk_page_edit_rename = "page_edit_rename"
 	, Invk_page_dbg_wiki = "page_dbg_wiki", Invk_page_dbg_html = "page_dbg_html"
 	, Invk_eval = "eval"
+	, Invk_exit = "exit"
 	// xowa.gfs: shortcuts
 	, Invk_page_goto = "page_goto", Invk_page_goto_recent = "page_goto_recent"
 	; 
@@ -113,7 +117,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 		if (wiki.Gui_mgr().Cfg_browser().Content_editable()) {	
 			String href = tab.Html_itm().Html_box().Html_js_eval_proc_as_str(Xog_js_procs.Selection__get_active_for_editable_mode, Gfui_html.Atr_href, null);
 			if (String_.Len_eq_0(href)) return; // NOTE: href can be null for images; EX: [[File:Loudspeaker.svg|11px|link=|alt=play]]; link= basically means don't link to image
-			Page__navigate_by_internal_href(href, tab);
+			Page__navigate_by_href(tab, href);
 		}
 	}
 	private void Win__link_clicked(String anchor_raw) {
@@ -127,7 +131,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 			url_box.Text_(url + "#" + anchor_str);					// update url box
 			page.Html_data().Bmk_pos_(Xog_history_itm.Html_doc_pos_toc); // HACK: anchor clicked; set docPos of curentPage to TOC (so back will go back to TOC)
 			tab.History_mgr().Update_html_doc_pos(page, Xog_history_stack.Nav_by_anchor); // HACK: update history_mgr; note that this must occur before setting Anchor (since Anchor will generate a new history itm)
-			page.Url().Anchor_bry_(anchor_bry);						// update url
+			page.Url().Anch_bry_(anchor_bry);						// update url
 		}
 		tab.History_mgr().Add(page);
 		app.Usere().History_mgr().Add(page.Url(), page.Ttl(), Bry_.Add_w_dlm(Byte_ascii.Hash, page.Url().Page_bry(), anchor_bry));
@@ -155,8 +159,8 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 			tab.Page_(page);			
 			wiki.ParsePage_root(page, true);		// NOTE: must reparse page if (a) Edit -> Read; or (b) "Options" save
 			Xoa_url url = page.Url();
-			if (url.Args_exists(Xoa_url_parser.Bry_arg_action, Xoa_url_parser.Bry_arg_action_edit))	// url has ?action=edit
-				app.Utl__url_parser().Parse(url, url.Xto_full_bry());	// remove all query args; handle (1) s.w:Earth?action=edit; (2) click on Read; DATE:2014-03-06
+			if (url.Qargs_mgr().Match(Xoa_url_.Qarg__action, Xoa_url_.Qarg__action__edit))	// url has ?action=edit
+				url = tab.Wiki().Utl__url_parser().Parse(url.To_bry_full_wo_qargs());	// remove all query args; handle (1) s.w:Earth?action=edit; (2) click on Read; DATE:2014-03-06
 		}
 		tab.View_mode_(new_mode_tid);
 		if (page.Missing()) return;
@@ -166,10 +170,9 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 	public void Page__navigate_by_search() {Page__navigate_by_url_bar(app.Gui_mgr().Win_cfg().Search_box_fmtr().Bld_str_many(search_box.Text()));}
 	public void Page__navigate_by_url_bar(String href) {
 		Xog_tab_itm tab = tab_mgr.Active_tab_assert();
-		Xoa_url url = Xoa_url_parser.Parse_from_url_bar(app, tab.Wiki(), href);
-		tab.Show_url_bgn(url);
+		tab.Show_url_bgn(tab.Wiki().Utl__url_parser().Parse_by_urlbar(href));
 	}
-	private void Page__navigate_by_internal_href(String href, Xog_tab_itm tab) {	// NOTE: different from Navigate_by_url_bar in that it handles "file:///" and other @gplx.Internal protected formats; EX: "/site/", "about:blank"; etc..
+	private void Page__navigate_by_href(Xog_tab_itm tab, String href) {	// NOTE: different from Navigate_by_url_bar in that it handles "file:///" and other @gplx.Internal protected formats; EX: "/site/", "about:blank"; etc..
 		Xoa_url url = Xog_url_wkr.Exec_url(this, href);
 		if (url != Xog_url_wkr.Rslt_handled)
 			tab.Show_url_bgn(url);
@@ -198,10 +201,10 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 		Xog_tab_itm tab = tab_mgr.Active_tab(); Xoae_page page = tab.Page(); Xog_html_itm html_itm = tab.Html_itm();
 		page.Html_data().Bmk_pos_(html_itm.Html_box().Html_js_eval_proc_as_str(Xog_js_procs.Win__vpos_get));
 		html_itm.Show(page);
-		if (page.Url().Anchor_str() == null)
+		if (page.Url().Anch_str() == null)
 			html_itm.Scroll_page_by_bmk_gui();
 		else
-			html_itm.Scroll_page_by_id_gui(page.Url().Anchor_str());
+			html_itm.Scroll_page_by_id_gui(page.Url().Anch_str());
 		Page__async__bgn(tab);
 	}
 	public void Page__async__bgn(Xog_tab_itm tab) {
@@ -252,8 +255,8 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 			Xoae_page new_page = Xoae_page.new_(home_wiki, ttl);
 			gplx.xowa.servers.Gxw_html_server.Assert_tab(app, new_page);		// HACK: assert at least 1 tab for Firefox addon; DATE:2015-01-23
 			this.Active_page_(new_page);
-			Xoa_url url = Xoa_url.blank_();
-			url = Xoa_url_parser.Parse_url(url, app, home_wiki, url_bry, 0, url_bry.length, true);
+			Xoa_url url = Xoa_url.blank();
+			url = home_wiki.Utl__url_parser().Parse(url_bry);
 			new_page.Url_(url);
 			return App__retrieve_by_href(url, output_html);
 		}
@@ -261,7 +264,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 	public byte[] App__retrieve_by_href(String href, boolean output_html) {return App__retrieve_by_href(Xog_url_wkr.Exec_url(this, href), output_html);}	// NOTE: used by drd
 	private byte[] App__retrieve_by_href(Xoa_url url, boolean output_html) {
 		if (url == null) return Bry_.new_a7("missing");
-		Xowe_wiki wiki = app.Wiki_mgr().Get_by_key_or_null(url.Wiki_bry());
+		Xowe_wiki wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_key_or_make_init_y(url.Wiki_bry());
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, url.Page_bry());
 		Xoae_page new_page = wiki.Load_page_by_ttl(url, ttl);
 		if (new_page.Missing()) {return Bry_.Empty;}
@@ -299,7 +302,7 @@ public class Xog_win_itm implements GfoInvkAble, GfoEvObj {
 
 		GfoEvMgr_.SubSame_many(this, this, Gfui_html.Evt_location_changed, Gfui_html.Evt_location_changing, Gfui_html.Evt_link_hover);
 		GfoEvMgr_.SubSame(win_box, Gfui_html.Evt_win_resized, this);
-		GfoEvMgr_.Sub(app.Gui_mgr().Win_cfg().Font(), Xol_font_info.Font_changed, this, Invk_window_font_changed);
+		GfoEvMgr_.Sub(app.Gui_mgr().Win_cfg().Font(), Xol_font_info.Font_changed, this, Invk_window_font_changed);			
 
 		if (	!Env_.Mode_testing()
 			&&	app.App_type().Uid_is_gui())	// only run for gui; do not run for tcp/http server; DATE:2014-05-03

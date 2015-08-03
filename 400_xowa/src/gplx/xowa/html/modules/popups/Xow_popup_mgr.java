@@ -25,7 +25,7 @@ import gplx.xowa.apis.xowa.html.modules.*;
 public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 	private Xoae_app app; private Xowe_wiki wiki; private Js_wtr js_wtr = new Js_wtr();
 	private int show_init_word_count = Xoapi_popups.Dflt_show_init_word_count, show_more_word_count = Xoapi_popups.Dflt_show_more_word_count;
-	private Xoh_href temp_href = new Xoh_href(); 
+	private Xoa_url tmp_url = Xoa_url.blank();
 	private static final Object thread_lock = new Object(); private Xow_popup_itm async_itm; private GfoInvkAble async_cmd_show; private int async_id_next = 1;
 	public Xow_popup_mgr(Xowe_wiki wiki) {
 		this.wiki = wiki; this.app = wiki.Appe();
@@ -117,11 +117,11 @@ public class Xow_popup_mgr implements GfoInvkAble, GfoEvObj {
 				Running_(true);
 				if (itm.Canceled()) return null;
 				cur_page.Popup_mgr().Itms().Add_if_dupe_use_nth(itm.Popup_id(), itm);
-				app.Href_parser().Parse(temp_href, itm.Page_href(), wiki, cur_page.Ttl().Full_url());			// NOTE: use Full_url, not Page_url, else anchors won't work for non-main ns; PAGE:en.w:Project:Sandbox; DATE:2014-08-07
-				if (temp_href.Protocol_tid() == gplx.xowa.net.Xoo_protocol_itm.Tid_file) return Bry_.Empty;		// NOTE: do not get popups for "file:///"; DATE:2015-04-05
-				Xowe_wiki popup_wiki = app.Wiki_mgr().Get_by_key_or_null(temp_href.Wiki());
+				app.Html__href_parser().Parse_as_url(tmp_url, itm.Page_href(), wiki, cur_page.Ttl().Full_url());	// NOTE: use Full_url, not Page_url, else anchors won't work for non-main ns; PAGE:en.w:Project:Sandbox; DATE:2014-08-07
+				if (!Xoa_url_.Tid_is_pagelike(tmp_url.Tid())) return Bry_.Empty;		// NOTE: do not get popups for "file:///"; DATE:2015-04-05
+				Xowe_wiki popup_wiki = app.Wiki_mgr().Get_by_key_or_null(tmp_url.Wiki_bry());
 				popup_wiki.Init_assert();
-				Xoa_ttl popup_ttl = Xoa_ttl.parse_(popup_wiki, temp_href.Page_and_anchor());
+				Xoa_ttl popup_ttl = Xoa_ttl.parse_(popup_wiki, tmp_url.To_bry_page_w_anch());
 				switch (popup_ttl.Ns().Id()) {
 					case Xow_ns_.Id_media:
 					case Xow_ns_.Id_file:
@@ -255,11 +255,11 @@ class Xow_popup_mgr_ {
 	}
 }
 class Load_popup_wkr implements Gfo_thread_wkr {
-	private Xow_popup_itm itm; private Xoae_page cur_page; private Xoh_href temp_href;
+	private Xow_popup_itm itm; private Xoae_page cur_page; private Xoa_url tmp_url;
 	private Hash_adp ns_allowed_regy; 
 	private Int_obj_ref ns_allowed_regy_key = Int_obj_ref.zero_();
-	public Load_popup_wkr(Xowe_wiki wiki, Xoae_page cur_page, Xow_popup_itm itm, Xoh_href temp_href, Hash_adp ns_allowed_regy, Int_obj_ref ns_allowed_regy_key) {
-		this.wiki = wiki; this.cur_page = cur_page; this.itm = itm; this.temp_href = temp_href; this.ns_allowed_regy = ns_allowed_regy; this.ns_allowed_regy_key = ns_allowed_regy_key;
+	public Load_popup_wkr(Xowe_wiki wiki, Xoae_page cur_page, Xow_popup_itm itm, Xoa_url tmp_url, Hash_adp ns_allowed_regy, Int_obj_ref ns_allowed_regy_key) {
+		this.wiki = wiki; this.cur_page = cur_page; this.itm = itm; this.tmp_url = tmp_url; this.ns_allowed_regy = ns_allowed_regy; this.ns_allowed_regy_key = ns_allowed_regy_key;
 	}
 	public String Name() {return "xowa.load_popup_wkr";}
 	public boolean Resume() {return false;}
@@ -272,11 +272,11 @@ class Load_popup_wkr implements Gfo_thread_wkr {
 		try {
 			if (itm.Canceled()) return;
 			cur_page.Popup_mgr().Itms().Add_if_dupe_use_nth(itm.Popup_id(), itm);
-			app.Href_parser().Parse(temp_href, itm.Page_href(), wiki, cur_page.Ttl().Full_url());			// NOTE: use Full_url, not Page_url, else anchors won't work for non-main ns; PAGE:en.w:Project:Sandbox; DATE:2014-08-07
-			if (temp_href.Protocol_tid() == gplx.xowa.net.Xoo_protocol_itm.Tid_file) return;			// NOTE: do not get popups for "file:///"; DATE:2015-04-05
-			Xowe_wiki popup_wiki = app.Wiki_mgr().Get_by_key_or_null(temp_href.Wiki());
+			app.Html__href_parser().Parse_as_url(tmp_url, itm.Page_href(), wiki, cur_page.Ttl().Full_url());	// NOTE: use Full_url, not Page_url, else anchors won't work for non-main ns; PAGE:en.w:Project:Sandbox; DATE:2014-08-07
+			if (!Xoa_url_.Tid_is_pagelike(tmp_url.Tid())) return;		// NOTE: do not get popups for "file:///"; DATE:2015-04-05
+			Xowe_wiki popup_wiki = app.Wiki_mgr().Get_by_key_or_null(tmp_url.Wiki_bry());
 			popup_wiki.Init_assert();
-			Xoa_ttl popup_ttl = Xoa_ttl.parse_(popup_wiki, temp_href.Page_and_anchor());
+			Xoa_ttl popup_ttl = Xoa_ttl.parse_(popup_wiki, tmp_url.To_bry_page_w_anch());
 			switch (popup_ttl.Ns().Id()) {
 				case Xow_ns_.Id_media:
 				case Xow_ns_.Id_file:

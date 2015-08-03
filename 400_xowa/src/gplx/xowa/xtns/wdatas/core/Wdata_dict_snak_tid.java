@@ -33,7 +33,7 @@ public class Wdata_dict_snak_tid {
 	, Bry_value									= Bry_.new_a7(Str_value)
 	, Bry_somevalue								= Bry_.new_a7(Str_somevalue)
 	;
-	private static Hash_adp_bry Dict = Hash_adp_bry.cs_()
+	private static Hash_adp_bry Dict = Hash_adp_bry.cs()
 	.Add_bry_byte(Bry_novalue					, Tid_novalue)
 	.Add_bry_byte(Bry_value						, Tid_value)
 	.Add_bry_byte(Bry_somevalue					, Tid_somevalue)

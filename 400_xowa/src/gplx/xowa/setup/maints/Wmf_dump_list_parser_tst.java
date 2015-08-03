@@ -42,7 +42,7 @@ public class Wmf_dump_list_parser_tst {
 		);
 	}
 //		@Test  public void Update() {	// MAINT:QUARTERLY:2015-03-01; must run C:\xowa\ and update dump status
-//			Hash_adp_bry excluded_domains = Hash_adp_bry.cs_().Add_many_str
+//			Hash_adp_bry excluded_domains = Hash_adp_bry.cs().Add_many_str
 //			( "advisory.wikipedia.org", "beta.wikiversity.org", "donate.wikipedia.org", "login.wikipedia.org"
 //			, "nostalgia.wikipedia.org", "outreach.wikipedia.org", "quality.wikipedia.org", "sources.wikipedia.org"
 //			, "strategy.wikipedia.org", "ten.wikipedia.org", "test2.wikipedia.org", "test.wikipedia.org"

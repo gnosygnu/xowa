@@ -26,7 +26,7 @@ public interface SrlMgr {
 	long		SrlLongOr(String key, long v);
 	String		SrlStrOr(String key, String v);
 	double		SrlDoubleOr(String key, double v);
-	DecimalAdp	SrlDecimalOr(String key, DecimalAdp v);
+	Decimal_adp	SrlDecimalOr(String key, Decimal_adp v);
 	DateAdp		SrlDateOr(String key, DateAdp v);
 	Object		SrlObjOr(String key, Object v);
 	void		SrlList(String key, List_adp list, SrlObj proto, String itmKey);

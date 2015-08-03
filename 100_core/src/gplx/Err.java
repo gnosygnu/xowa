@@ -44,19 +44,27 @@ public class Err extends RuntimeException {
 		msgs_ary[msgs_idx] = new Err_msg(type, msg, args);
 		++msgs_idx;
 	}
-	public String To_str__full()	{return To_str(Bool_.N);}
-	public String To_str__log()		{return To_str(Bool_.Y);}
-	private String To_str(boolean called_by_log) {
+	public String To_str__full()	{return To_str(Bool_.N, Bool_.Y);}
+	public String To_str__log()		{return To_str(Bool_.Y, Bool_.Y);}
+	public String To_str__msg_only(){
+		return msgs_idx == 0 ? "<<MISSING ERROR MESSAGE>>" : msgs_ary[0].To_str();	// take 1st message only
+	}
+	public String To_str__top_wo_args() {
+		return msgs_idx == 0 ? "<<MISSING ERROR MESSAGE>>" : msgs_ary[0].To_str_wo_args();
+	}
+	private String To_str(boolean called_by_log, boolean include_trace) {
 		String nl_str = called_by_log ? "\t" : "\n";
 		String rv = ""; //nl_str + "----------------------------------------------------------------------" + nl_str;
 		for (int i = 0; i < msgs_idx; ++i) {
 			rv += "[err " + Int_.Xto_str(i) + "] " + msgs_ary[i].To_str() + nl_str;
 		}
-		rv += "[trace]:" + Trace_to_str(is_gplx, called_by_log, trace_ignore, trace == null ? Err_.Trace_lang(this) : trace);
+		if (include_trace)
+			rv += "[trace]:" + Trace_to_str(is_gplx, called_by_log, trace_ignore, trace == null ? Err_.Trace_lang(this) : trace);
 		return rv;
 	}
-	@Override public String getMessage() {return To_str__full();}
+	@Override public String getMessage() {return To_str__msg_only();}
 	public static String Trace_to_str(boolean is_gplx, boolean called_by_log, int ignore_lines, String trace) {
+		if (trace == null) return "";	// WORKAROUND:.NET: StackTrace is only available when error is thrown; can't do "Console.Write(new Exception().StackTrace);
 		String[] lines = String_.Split_lang(trace, '\n'); int lines_len = lines.length; 
 		int line_bgn = 0;
 		if (is_gplx) {	// remove Err_.new_wo_type lines from trace for gplx exceptions

@@ -38,7 +38,7 @@ public class Xot_invk_mock implements Xot_invk {
 		for (int i = 0; i < list_len; i++) {	// iterate over list to find nth *non-keyd* arg; SEE:NOTE_1
 			Arg_nde_tkn nde = (Arg_nde_tkn)args.Get_at(i);
 			if (nde.KeyTkn_exists()) {
-				int key_int = Bry_.Xto_int_or(nde.Key_tkn().Dat_ary(), -1);
+				int key_int = Bry_.To_int_or(nde.Key_tkn().Dat_ary(), -1);
 				if (key_int == -1)
 					continue;
 				else {	// key is numeric
@@ -53,7 +53,7 @@ public class Xot_invk_mock implements Xot_invk {
 			if ((cur + idx_adj) == idx) return nde;
 			else ++cur;
 		}
-		return Args_get_by_key(src, Bry_.XtoStrBytesByInt(idx + 1, 1));
+		return Args_get_by_key(src, Bry_.To_a7_bry(idx + 1, 1));
 	}
 	public Arg_nde_tkn Args_get_by_key(byte[] src, byte[] key) {return (Arg_nde_tkn)args.Get_by(key);}
 	public static Xot_invk_mock new_(byte defn_tid, byte[] frame_ttl, KeyVal... args)		{return new_(defn_tid, 1, frame_ttl, args);}

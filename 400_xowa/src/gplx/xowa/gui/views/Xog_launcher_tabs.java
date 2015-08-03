@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
+import gplx.xowa.urls.*;
 class Xog_launcher_tabs {
 	public void Launch(Xog_win_itm win) {
 		Xoae_app app = win.App(); Gfo_log_bfr log_bfr = app.Log_bfr();
@@ -59,8 +60,8 @@ class Xog_launcher_tabs {
 	}
 	private void Launch_tab(Xog_win_itm win, Xowe_wiki home_wiki, String launch_str) {
 		Xoae_app app = win.App();
-		Xoa_url launch_url = Xoa_url_parser.Parse_from_url_bar(app, home_wiki, launch_str);
-		Xowe_wiki launch_wiki = app.Wiki_mgr().Get_by_key_or_null(launch_url.Wiki_bry());
+		Xoa_url launch_url = home_wiki.Utl__url_parser().Parse_by_urlbar(launch_str);
+		Xowe_wiki launch_wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_key_or_make_init_y(launch_url.Wiki_bry());
 		Xoa_ttl launch_ttl = Xoa_ttl.parse_(launch_wiki, launch_url.Page_bry());
 		Xog_tab_itm tab = win.Tab_mgr().Tabs_new_init(launch_wiki, Xoae_page.new_(launch_wiki, launch_ttl)); // WORKAROUND: set the tab to an empty page, else null ref later; DATE:2014-07-23
 		tab.Show_url_bgn(launch_url);

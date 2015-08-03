@@ -72,10 +72,10 @@ public class Db_stmt__mem implements Db_stmt {
 		try {Add(k, where, v);} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "double", "val", v);} 
 		return this;
 	}
-	public Db_stmt Crt_decimal(String k, DecimalAdp v)	{return Add_decimal(Bool_.Y, k, v);}
-	public Db_stmt Val_decimal(String k, DecimalAdp v)	{return Add_decimal(Bool_.N, k, v);}
-	public Db_stmt Val_decimal(DecimalAdp v)			{return Add_decimal(Bool_.N, Key_na, v);}
-	private Db_stmt Add_decimal(boolean where, String k, DecimalAdp v) {
+	public Db_stmt Crt_decimal(String k, Decimal_adp v)	{return Add_decimal(Bool_.Y, k, v);}
+	public Db_stmt Val_decimal(String k, Decimal_adp v)	{return Add_decimal(Bool_.N, k, v);}
+	public Db_stmt Val_decimal(Decimal_adp v)			{return Add_decimal(Bool_.N, Key_na, v);}
+	private Db_stmt Add_decimal(boolean where, String k, Decimal_adp v) {
 		try {Add(k, where, v);} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "decimal", "val", v);} 
 		return this;
 	}

@@ -62,7 +62,7 @@ class Xoud_opt_scope_parser {
 		usr_dlg.Warn_many("", "", fmt, String_.new_u8(src, bgn, end));
 		return Xoud_opt_scope.App;
 	}
-	private static final Btrie_slim_mgr btrie_by_type = Btrie_slim_mgr.cs_()
+	private static final Btrie_slim_mgr btrie_by_type = Btrie_slim_mgr.cs()
 	.Add_str_int("w"			, Xow_domain_type_.Tid_wikipedia)
 	.Add_str_int("d"			, Xow_domain_type_.Tid_wiktionary)
 	.Add_str_int("s"			, Xow_domain_type_.Tid_wikisource)

@@ -16,11 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.xowa.diags; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*; import gplx.xowa.specials.xowa.*;
-import gplx.ios.*; import gplx.core.primitives.*;
+import gplx.ios.*; import gplx.core.primitives.*; import gplx.core.net.*;
 import gplx.dbs.*;
 import gplx.fsdb.meta.*;
+import gplx.xowa.urls.*;
 class Xows_cmd__sql_dump {
-	public void Exec(Bry_bfr bfr, Xoa_app app, Xoa_url url, Xoa_url_arg_hash arg_hash) {
+	public void Exec(Bry_bfr bfr, Xoa_app app, Xoa_url url, Gfo_qarg_mgr arg_hash) {
 		Db_conn conn = null;
 		byte[] sql_bry = arg_hash.Get_val_bry_or(Arg_sql, null); if (sql_bry == null) {Xoa_app_.Usr_dlg().Warn_many("", "", "special.cmd; no sql: url=~{0}", url.Raw()); return;}
 		byte[] wiki_bry = arg_hash.Get_val_bry_or(Arg_wiki, null);
@@ -43,7 +44,7 @@ class Xows_cmd__sql_dump {
         public static final Xows_cmd__sql_dump I = new Xows_cmd__sql_dump(); Xows_cmd__sql_dump() {}
 	private static final byte[] Arg_wiki = Bry_.new_a7("wiki"), Arg_db_file = Bry_.new_a7("db_file"), Arg_db_type = Bry_.new_a7("db_type"), Arg_sql = Bry_.new_a7("sql");
 	private static final byte Db_type_fsdb_abc = 1, Db_type_fsdb_atr = 2, Db_type_wiki_core = 3;
-	private static final Hash_adp_bry db_type_hash = Hash_adp_bry.cs_()
+	private static final Hash_adp_bry db_type_hash = Hash_adp_bry.cs()
 	.Add_str_byte("fsdb.abc"		, Db_type_fsdb_abc)
 	.Add_str_byte("fsdb.atr"		, Db_type_fsdb_atr)
 	.Add_str_byte("wiki.core"		, Db_type_wiki_core)

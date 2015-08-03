@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.html; import gplx.*; import gplx.xowa.*;
-import gplx.core.primitives.*;
-import gplx.core.btries.*; import gplx.html.*; import gplx.xowa.wikis.*; import gplx.xowa.net.*;
+import gplx.core.primitives.*; import gplx.core.net.*;
+import gplx.core.btries.*; import gplx.html.*; import gplx.xowa.wikis.*;
 import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.lists.*; import gplx.xowa.html.lnkis.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.paras.*;
 import gplx.xowa.xtns.*; import gplx.xowa.xtns.dynamicPageList.*; import gplx.xowa.xtns.math.*; import gplx.xowa.langs.vnts.*; import gplx.xowa.xtns.cite.*; import gplx.xowa.html.hzips.*;
 public class Xoh_html_wtr {
@@ -633,7 +633,7 @@ class Xoh_display_ttl_wtr {
 	  Atr_key_style = Bry_.new_a7("style")
 	, Msg_style_restricted = Bry_.new_a7(" style='/* attempt to bypass $wgRestrictDisplayTitle */'")
 	;
-	private Btrie_slim_mgr style_trie = Btrie_slim_mgr.ci_ascii_()
+	private Btrie_slim_mgr style_trie = Btrie_slim_mgr.ci_a7()
 	.Add_str_byte__many(Byte_.By_int(0), "display", "user-select", "visibility");  // if ( preg_match( '/(display|user-select|visibility)\s*:/i', $decoded['style'] ) ) {
 	public boolean Is_style_restricted(Bry_bfr bfr, Xoh_wtr_ctx hctx, byte[] src, Xop_xatr_itm atr, byte[] atr_key) {
 		if (atr_key != null 

@@ -19,6 +19,7 @@ package gplx.xowa.bldrs.css; import gplx.*; import gplx.xowa.*; import gplx.xowa
 import gplx.ios.*; import gplx.xowa.html.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 import gplx.xowa.files.downloads.*;
+import gplx.core.net.*;
 public class Xoa_css_extractor {	
 	public IoEngine_xrg_downloadFil Download_xrg() {return download_xrg;} private IoEngine_xrg_downloadFil download_xrg = Io_mgr.I.DownloadFil_args("", Io_url_.Empty);	
 	public Xoa_css_extractor Wiki_domain_(byte[] v) {wiki_domain = v; return this;} private byte[] wiki_domain; 
@@ -33,6 +34,7 @@ public class Xoa_css_extractor {
 	public Xoa_css_extractor Url_encoder_(Url_encoder v) {url_encoder = v; return this;} private Url_encoder url_encoder;
 	public Xoa_css_extractor Wiki_code_(byte[] v) {this.wiki_code = v; return this;} private byte[] wiki_code = null;
 	private byte[] mainpage_html; private boolean lang_is_ltr = true;
+	private final Gfo_url_parser url_parser = new Gfo_url_parser();
 	public void Init_by_app(Xoae_app app) {
 		this.usr_dlg = app.Usr_dlg();
 		Xof_download_wkr download_wkr = app.Wmf_mgr().Download_wkr();
@@ -234,6 +236,7 @@ public class Xoa_css_extractor {
 		int prv_pos = 0; 
 		int css_find_bgn_len = Css_find_bgn.length;
 		byte[] protocol_prefix_bry = Bry_.new_u8(protocol_prefix);
+		Gfo_url gfo_url = new Gfo_url();
 		while (true) {
 			int url_bgn = Bry_finder.Find_fwd(raw, Css_find_bgn, prv_pos);	 				if (url_bgn == Bry_.NotFound) break;	// nothing left; stop
 			url_bgn += css_find_bgn_len;
@@ -241,7 +244,10 @@ public class Xoa_css_extractor {
 			byte[] css_url_bry = Bry_.Mid(raw, url_bgn, url_end);
 			css_url_bry = Bry_.Replace(css_url_bry, Css_amp_find, Css_amp_repl);		// &amp; -> &
 			css_url_bry = url_encoder.Decode(css_url_bry);								// %2C ->		%7C -> |
-			css_url_bry = Bry_.Add(protocol_prefix_bry, css_url_bry);
+			url_parser.Parse(gfo_url, css_url_bry, 0, css_url_bry.length);
+			if (	gfo_url.Protocol_tid() == Gfo_protocol_itm.Tid_relative_1			// if rel url, add protocol_prefix DATE:2015-08-01
+				||	(Env_.Mode_testing() && gfo_url.Protocol_tid() == Gfo_protocol_itm.Tid_unknown))	// TEST:
+				css_url_bry = Bry_.Add(protocol_prefix_bry, css_url_bry);
 			rv.Add(String_.new_u8(css_url_bry));
 			prv_pos = url_end;
 		}

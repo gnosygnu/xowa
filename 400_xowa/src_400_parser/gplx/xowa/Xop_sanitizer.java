@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.core.btries.*; import gplx.xowa.parsers.amps.*;
 public class Xop_sanitizer {
-	private Btrie_slim_mgr trie = Btrie_slim_mgr.cs_(), amp_trie;
+	private Btrie_slim_mgr trie = Btrie_slim_mgr.cs(), amp_trie;
 	private Xop_amp_mgr amp_mgr;
 	private Bry_bfr tmp_bfr = Bry_bfr.reset_(255);
 	public Xop_sanitizer(Xop_amp_mgr amp_mgr, Gfo_msg_log msg_log) {
@@ -76,7 +76,7 @@ public class Xop_sanitizer {
 							switch (itm_tid) {
 								case Xop_amp_trie_itm.Tid_name_std:
 								case Xop_amp_trie_itm.Tid_name_xowa:
-									bfr.Add(itm.Utf8_bry());
+									bfr.Add(itm.U8_bry());
 									pos += itm.Key_name_len() + 1;	// 1 for trailing ";"; EX: for "&nbsp; ", (a) pos is at "&", (b) "nbsp" is Key_name_len, (c) ";" needs + 1 
 									break;
 								case Xop_amp_trie_itm.Tid_num_dec:

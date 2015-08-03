@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.allPages; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import org.junit.*; import gplx.xowa.wikis.data.tbls.*;
+import org.junit.*; import gplx.core.net.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xows_page_allpages_tst {		
 	@Before public void init() {fxt.Clear();} private Xows_page_allpages_fxt fxt = new Xows_page_allpages_fxt();
 	@Test  public void Build_data() {
@@ -134,10 +134,10 @@ class Xows_page_allpages_fxt {
 		return this;
 	}	private Xoae_app app;
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki; Xows_page_allpages allpages;
-	public Xows_page_allpages_fxt Init_arg(String key, String val) {init_args.Add(new Gfo_url_arg(Bry_.new_a7(key), Bry_.new_a7(val))); return this;} private List_adp init_args = List_adp_.new_();
+	public Xows_page_allpages_fxt Init_arg(String key, String val) {init_args.Add(new Gfo_qarg_itm(Bry_.new_a7(key), Bry_.new_a7(val))); return this;} private List_adp init_args = List_adp_.new_();
 	public Xows_page_allpages_fxt Init_ttl_leaf(String val) {init_ttl_leaf = val; return this;} private String init_ttl_leaf;
 	public Xows_page_allpages_fxt Init_itms_per_page(int v) {init_itms_per_page = v; return this;} private int init_itms_per_page = 5;
-	public Xows_page_allpages_fxt Expd_arg(String key, String val) {expd_args.Add(new Gfo_url_arg(Bry_.new_a7(key), Bry_.new_a7(val))); return this;} private List_adp expd_args = List_adp_.new_();
+	public Xows_page_allpages_fxt Expd_arg(String key, String val) {expd_args.Add(new Gfo_qarg_itm(Bry_.new_a7(key), Bry_.new_a7(val))); return this;} private List_adp expd_args = List_adp_.new_();
 	public Xows_page_allpages_fxt Expd_prv(String v) {expd_prv = v; return this;} private String expd_prv;
 	public Xows_page_allpages_fxt Expd_nxt(String v) {expd_nxt = v; return this;} private String expd_nxt;
 	public Xows_page_allpages_fxt Expd_ttls(String... v) {expd_ttls = v; return this;} private String[] expd_ttls;
@@ -159,18 +159,17 @@ class Xows_page_allpages_fxt {
 		}
 		return rv;
 	}
-	public static String[] Xto_str_ary(Gfo_url_arg[] ary) {
+	public static String[] Xto_str_ary(Gfo_qarg_itm[] ary) {
 		int ary_len = ary.length;
 		String[] rv = new String[ary_len];
 		for (int i = 0; i < ary_len; i++) {
-			Gfo_url_arg itm = ary[i];
+			Gfo_qarg_itm itm = ary[i];
 			rv[i] = String_.new_u8(itm.Key_bry()) + "=" + String_.new_u8(itm.Val_bry());
 		}
 		return rv;
 	}
 	public Xows_page_allpages_fxt Test_special_gen() {
-		Xoa_url_parser parserx = new Xoa_url_parser();
-		parserx.Parse(init_url, Xows_special_meta_.Itm__all_pages.Ttl_bry());
+		init_url = app.User().Wikii().Utl__url_parser().Parse(Xows_special_meta_.Itm__all_pages.Ttl_bry());
 		Xoa_ttl init_ttl = Make_init_ttl();
 		allpages.Special_gen(wiki, wiki.Ctx().Cur_page(), init_url, init_ttl);
 		if (expd_display_ttl != null) Tfds.Eq(expd_display_ttl, String_.new_u8(wiki.Ctx().Cur_page().Html_data().Display_ttl()));
@@ -183,11 +182,11 @@ class Xows_page_allpages_fxt {
 		if (expd_nxt != null) Tfds.Eq(expd_nxt, Xto_str(wiki, allpages.Rslt_nxt()));
 		if (expd_prv != null) Tfds.Eq(expd_prv, Xto_str(wiki, allpages.Rslt_prv()));
 		if (expd_args.Count() > 0) {
-			Gfo_url_arg[] expd_args_ary = (Gfo_url_arg[])expd_args.To_ary(Gfo_url_arg.class); 
-			Tfds.Eq_ary_str(Xto_str_ary(init_url.Args()), Xto_str_ary(expd_args_ary));
+			Gfo_qarg_itm[] expd_args_ary = (Gfo_qarg_itm[])expd_args.To_ary(Gfo_qarg_itm.class); 
+			Tfds.Eq_ary_str(Xto_str_ary(expd_args_ary), Xto_str_ary(init_url.Qargs_ary()));
 		}
 		return this;
-	}	private Xoa_url init_url = Xoa_url.blank_();
+	}	private Xoa_url init_url = Xoa_url.blank();
 	public Xows_page_allpages_fxt Test_build_html(String expd) {
 		Exec_build();
 		allpages.Build_html(wiki.Ctx().Cur_page());
@@ -196,7 +195,7 @@ class Xows_page_allpages_fxt {
 	}
 	private void Exec_build() {
 		if (allpages.Itms_per_page() != init_itms_per_page) allpages.Itms_per_page_(init_itms_per_page);
-		init_url.Args_((Gfo_url_arg[])init_args.To_ary(Gfo_url_arg.class));
+		init_url.Qargs_ary_((Gfo_qarg_itm[])init_args.To_ary(Gfo_qarg_itm.class));
 		init_args.Clear();
 		Xoa_ttl init_ttl = Make_init_ttl();
 		allpages.Build_data(init_url, init_ttl);

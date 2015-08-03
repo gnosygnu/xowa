@@ -32,7 +32,7 @@ public class Int_ary_ {
 				||	pos_is_last
 				) {
 				if (num_bgn == -1) return or;			// empty itm; EX: "1,"; "1,,2"
-				int num = Bry_.Xto_int_or(src, num_bgn, num_end, Int_.MinValue);
+				int num = Bry_.To_int_or(src, num_bgn, num_end, Int_.MinValue);
 				if (num == Int_.MinValue) return or;	// not a number; parse failed
 				if (rv_len == 0) {						// rv not init'd
 					rv_len = (raw_len / 2) + 1;			// default rv_len to len of String / 2; + 1 to avoid fraction rounding down
@@ -77,7 +77,7 @@ public class Int_ary_ {
 				case Byte_ascii.Dash:
 					if (pos == raw_len -1) return or;	// eos; EX: "1-"
 					if (num_bgn == -1) return or;		// no rng_bgn; EX: "-2"
-					rng_bgn = Bry_.Xto_int_or(src, num_bgn, pos, Int_.MinValue);
+					rng_bgn = Bry_.To_int_or(src, num_bgn, pos, Int_.MinValue);
 					if (rng_bgn == Int_.MinValue) return or;
 					num_bgn = -1;
 					itm_is_rng = true;

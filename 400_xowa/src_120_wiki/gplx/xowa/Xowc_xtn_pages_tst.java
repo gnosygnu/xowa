@@ -31,7 +31,7 @@ class Xowc_xtn_pages_fxt {
 	private Xow_ns_mgr ns_mgr;
 	private Xowc_xtn_pages cfg_pages;
 	public void Clear() {
-		ns_mgr = Xow_ns_mgr_.default_(gplx.xowa.langs.cases.Xol_case_mgr_.Ascii());
+		ns_mgr = Xow_ns_mgr_.default_(gplx.xowa.langs.cases.Xol_case_mgr_.A7());
 		cfg_pages = new Xowc_xtn_pages();
 	}
 	public Xowc_xtn_pages_fxt Init_ns(int id, String name) {

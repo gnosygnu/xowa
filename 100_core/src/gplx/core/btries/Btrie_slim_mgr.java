@@ -46,13 +46,20 @@ public class Btrie_slim_mgr implements Btrie_mgr {
 	public Btrie_slim_mgr Add_bry(String key, String val)			{return (Btrie_slim_mgr)Add_obj(Bry_.new_u8(key), Bry_.new_u8(val));}
 	public Btrie_slim_mgr Add_bry(String key, byte[] val)			{return (Btrie_slim_mgr)Add_obj(Bry_.new_u8(key), val);}
 	public Btrie_slim_mgr Add_bry(byte[] v)							{return (Btrie_slim_mgr)Add_obj(v, v);}
-	public Btrie_slim_mgr Add_bry_bval(byte b, byte val)			{return (Btrie_slim_mgr)Add_obj(new byte[] {b}, Byte_obj_val.new_(val));}
-	public Btrie_slim_mgr Add_bry_bval(byte[] bry, byte val)		{return (Btrie_slim_mgr)Add_obj(bry, Byte_obj_val.new_(val));}
+	public Btrie_slim_mgr Add_bry_byte(byte b, byte val)			{return (Btrie_slim_mgr)Add_obj(new byte[] {b}, Byte_obj_val.new_(val));}
+	public Btrie_slim_mgr Add_bry_byte(byte[] bry, byte val)		{return (Btrie_slim_mgr)Add_obj(bry, Byte_obj_val.new_(val));}
 	public Btrie_slim_mgr Add_str_byte__many(byte val, String... ary) {
 		int ary_len = ary.length;
 		Byte_obj_val bval = Byte_obj_val.new_(val);
 		for (int i = 0; i < ary_len; i++)
 			Add_obj(Bry_.new_u8(ary[i]), bval);
+		return this;
+	}
+	public Btrie_slim_mgr Add_many_int(int val, String... ary) {
+		int len = ary.length;
+		Int_obj_val obj = Int_obj_val.new_(val);
+		for (int i = 0; i < len; i++)
+			Add_obj(Bry_.new_u8(ary[i]), obj);
 		return this;
 	}
 	public Btrie_slim_mgr Add_stub(String key, byte val)		{byte[] bry = Bry_.new_u8(key); return (Btrie_slim_mgr)Add_obj(bry, new Btrie_itm_stub(val, bry));}
@@ -121,8 +128,8 @@ public class Btrie_slim_mgr implements Btrie_mgr {
 		return dirty ? tmp_bfr.Xto_bry_and_clear() : src;
 	}
 	public void Clear() {root.Clear(); count = 0;}
-	public static Btrie_slim_mgr cs_()				{return new Btrie_slim_mgr(true);}
-	public static Btrie_slim_mgr ci_ascii_()		{return new Btrie_slim_mgr(false);}
-	public static Btrie_slim_mgr ci_utf_8_()		{return new Btrie_slim_mgr(false);}
+	public static Btrie_slim_mgr cs()				{return new Btrie_slim_mgr(Bool_.Y);}
+	public static Btrie_slim_mgr ci_a7()			{return new Btrie_slim_mgr(Bool_.N);}
+	public static Btrie_slim_mgr ci_u8()			{return new Btrie_slim_mgr(Bool_.N);}
 	public static Btrie_slim_mgr new_(boolean v)		{return new Btrie_slim_mgr(v);}
 }

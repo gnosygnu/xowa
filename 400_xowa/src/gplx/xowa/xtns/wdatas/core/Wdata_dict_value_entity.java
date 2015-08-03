@@ -29,7 +29,7 @@ public class Wdata_dict_value_entity {
 	  Bry_entity_type							= Bry_.new_a7(Str_entity_type)
 	, Bry_numeric_id							= Bry_.new_a7(Str_numeric_id)
 	;
-	public static final Hash_adp_bry Dict = Hash_adp_bry.cs_()
+	public static final Hash_adp_bry Dict = Hash_adp_bry.cs()
 	.Add_bry_byte(Bry_entity_type				, Tid_entity_type)
 	.Add_bry_byte(Bry_numeric_id				, Tid_numeric_id)
 	;

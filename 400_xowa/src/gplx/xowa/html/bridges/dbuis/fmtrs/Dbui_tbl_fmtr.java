@@ -41,7 +41,7 @@ class Dbui_head_cell_fmtr implements Bry_fmtr_arg {
 			Dbui_col_itm col = cols[i];
 			fmtr.Bld_bfr_many(bfr, col.Width(), col.Display());
 		}
-		bfr.Add_str_a7("\n    <div class='xo_head xo_resizable_col' style='width:35px;'>&nbsp;</div>");	// btns headers
+		bfr.Add_str_a7("\n    <div class='xo_head xo_resizable_col' style='width:50px;'>&nbsp;</div>");	// btns headers
 	}
 	private static final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""

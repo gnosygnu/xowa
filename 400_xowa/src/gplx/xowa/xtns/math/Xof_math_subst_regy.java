@@ -164,7 +164,7 @@ public class Xof_math_subst_regy {
 		Xof_math_subst_itm itm = new Xof_math_subst_itm(src_bry, Bry_.new_a7(trg_str), dollarSign, wholeWord);
 		trie.Add_obj(src_bry, itm);
 	}
-	private Btrie_slim_mgr trie = Btrie_slim_mgr.cs_();
+	private Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
 }
 class Xof_math_subst_itm {
 	public int SrcLen() {return src_len;} private int src_len;

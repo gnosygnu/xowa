@@ -25,7 +25,7 @@ class Xofs_url_itm_parser {
 	private static final byte[] Xowa_fs_protocol = Bry_.new_a7("xowa-fs://");
 	private static final int Xowa_fa_protocol_len = Xowa_fs_protocol.length;
 	private Bry_bfr url_bfr = Bry_bfr.reset_(16);
-	private Hash_adp_bry names = Hash_adp_bry.cs_();
+	private Hash_adp_bry names = Hash_adp_bry.cs();
 	public byte Dir_spr() {return dir_spr;} public void Dir_spr_(byte v) {dir_spr = v;} private byte dir_spr = Op_sys.Cur().Fsys_dir_spr_byte();
 	public void Names_add(String key_str, String val_str) {
 		byte[] key_bry = Bry_.new_u8(key_str);

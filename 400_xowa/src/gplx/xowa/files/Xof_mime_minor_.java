@@ -29,7 +29,7 @@ public class Xof_mime_minor_ {
 	, Mime_bmp = Bry_.new_a7("x-bmp"), Mime_bmp_2 = Bry_.new_a7("x-ms-bmp");
 	private static final Hash_adp mime_hash = mime_hash_();
 	private static Hash_adp mime_hash_() {
-		Hash_adp rv = Hash_adp_bry.cs_();
+		Hash_adp rv = Hash_adp_bry.cs();
 		mime_hash_itm_(rv, Xof_ext_.Bry_png		, Xof_ext_.Id_png);
 		mime_hash_itm_(rv, Xof_ext_.Bry_jpg		, Xof_ext_.Id_jpg);
 		mime_hash_itm_(rv, Xof_ext_.Bry_jpeg	, Xof_ext_.Id_jpeg);

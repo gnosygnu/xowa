@@ -25,7 +25,7 @@ public class Pfunc_rpos extends Pf_func_base {
 		int self_args_len = self.Args_len();
 		byte[] find = Pf_func_.Eval_arg_or(ctx, src, caller, self, self_args_len, 0, Byte_ascii.Space_bry);	// MW: use " " if find is missing
 		byte[] offset_bry = Pf_func_.Eval_arg_or(ctx, src, caller, self, self_args_len, 1, null);
-		int offset = offset_bry == null ? str.length : Bry_.Xto_int(offset_bry);
+		int offset = offset_bry == null ? str.length : Bry_.To_int_or_neg1(offset_bry);
 		int pos = Bry_finder.Find_bwd(str, find, offset);
 		if (pos == Bry_finder.Not_found) pos = -1;
 		trg.Add_int_variable(pos);

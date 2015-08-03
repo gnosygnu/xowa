@@ -24,7 +24,7 @@ class Dg_file {
 	public Dg_rule[] Lines() {return lines;} private final Dg_rule[] lines;
 }
 class Dg_rule {// EX: < wikipedia ><-30>
-	private final Hash_adp_bry word_idx_hash = Hash_adp_bry.cs_();
+	private final Hash_adp_bry word_idx_hash = Hash_adp_bry.cs();
 	public Dg_rule(int file_id, int id, int idx, int tid, byte[] key, int score, Dg_word[] words) {
 		this.file_id = file_id;
 		this.id = id; this.idx = idx; this.tid = tid; this.key = key; this.score = score; this.words = words;

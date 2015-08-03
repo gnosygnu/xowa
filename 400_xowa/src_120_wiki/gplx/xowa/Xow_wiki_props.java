@@ -25,11 +25,12 @@ public class Xow_wiki_props implements GfoInvkAble {
 		siteinfo_mainpage = main_page;										// note that main_page came from <siteinfo>; store old value for record's sake
 		main_page = Xow_mainpage_finder.Find_or(wiki, siteinfo_mainpage);	// get new main_page from mainpage_finder
 	}
+	public byte Protocol_tid() {return protocol_tid;} private final byte protocol_tid = gplx.core.net.Gfo_protocol_itm.Tid_https;	// NOTE: default protocol to https; handles external links like [//a.org]; may need to be changed for wikia or other non-WMF wikis; DATE:2015-07-27
 
 	public byte[] Site_name() {return site_name;} private byte[] site_name = Bry_.Empty;
 	public byte[] ServerName() {return serverName;} public Xow_wiki_props ServerName_(byte[] v) {serverName = v; server = Bry_.Add(bry_http, v); return this;} private byte[] serverName = Bry_.new_a7("localhost");
 	public byte[] Server() {return server;} private byte[] server = Bry_.new_a7("http://localhost"); static final byte[] bry_http = Bry_.new_a7("http://");
-	public byte[] ArticlePath() {return articlePath;} public Xow_wiki_props ArticlePath_(byte[] v) {articlePath = v; return this;} private byte[] articlePath = Xoh_href_parser.Href_wiki_bry;
+	public byte[] ArticlePath() {return articlePath;} public Xow_wiki_props ArticlePath_(byte[] v) {articlePath = v; return this;} private byte[] articlePath = Xoh_href_.Bry__wiki;
 	public byte[] ScriptPath() {return scriptPath;} public Xow_wiki_props ScriptPath_(byte[] v) {scriptPath = v; return this;} private byte[] scriptPath = Bry_.new_a7("/wiki");
 	public byte[] StylePath() {return stylePath;} public Xow_wiki_props StylePath_(byte[] v) {stylePath = v; return this;} private byte[] stylePath = Bry_.new_a7("/wiki/skins");
 	public byte[] ContentLanguage() {return contentLanguage;} public Xow_wiki_props ContentLanguage_(byte[] v) {contentLanguage = v; return this;} private byte[] contentLanguage = Bry_.Empty;
@@ -49,10 +50,10 @@ public class Xow_wiki_props implements GfoInvkAble {
 		return this;
 	}	private byte[] siteinfo_misc = Bry_.Empty;
 	public void Init_by_load(Xoa_app app, gplx.dbs.cfgs.Db_cfg_tbl cfg_tbl) {
+		if (app.Bldr__running()) return;	// never load main_page during bldr; note that Init_by_load is called by bldr cmds like css; DATE:2015-07-24
 		this.main_page = cfg_tbl.Select_bry_or(Xow_cfg_consts.Grp__wiki_init, Xow_cfg_consts.Key__init__main_page, null);
 		if	(main_page == null) {			// main_page not found
-			if	(!app.Bldr__running()) 		// not building; note that Init_by_load is called by bldr cmds like css; DATE:2015-07-13
-				Xoa_app_.Usr_dlg().Warn_many("", "", "mw_props.load; main_page not found; conn=~{0}", cfg_tbl.Conn().Conn_info().Xto_api());
+			Xoa_app_.Usr_dlg().Warn_many("", "", "mw_props.load; main_page not found; conn=~{0}", cfg_tbl.Conn().Conn_info().Xto_api());
 			this.main_page = Xoa_page_.Main_page_bry;
 		}
 	}

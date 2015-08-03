@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.btries.*; import gplx.html.*; import gplx.xowa.html.*;
 class Hiero_parser {
-	private Btrie_slim_mgr trie = Btrie_slim_mgr.cs_();
+	private Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
 	private List_adp blocks = List_adp_.new_();
 	private Hiero_block cur_block;
 	private Bry_bfr cur_tkn = Bry_bfr.reset_(16);

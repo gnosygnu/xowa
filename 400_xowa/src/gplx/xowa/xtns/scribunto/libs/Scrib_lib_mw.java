@@ -135,18 +135,18 @@ public class Scrib_lib_mw implements Scrib_lib {
 			if (idx == cur) return nde;
 			else ++cur;
 		}
-		return invk.Args_get_by_key(src, Bry_.XtoStrBytesByInt(idx + 1, 1));
+		return invk.Args_get_by_key(src, Bry_.To_a7_bry(idx + 1, 1));
 	}
 	private static boolean Verify_arg_key(byte[] src, int idx, Arg_nde_tkn nde) {
 		int key_int = Bry_.NotFound;
 		byte[] key_dat_ary = nde.Key_tkn().Dat_ary();
 		if (Env_.Mode_testing() && src == null)	// some tests will always pass a null src;
-			key_int = Bry_.Xto_int_or(key_dat_ary, 0, key_dat_ary.length, Bry_.NotFound);
+			key_int = Bry_.To_int_or(key_dat_ary, 0, key_dat_ary.length, Bry_.NotFound);
 		else {
 			if (Bry_.Len_eq_0(key_dat_ary))	// should be called by current context;
-				key_int = Bry_.Xto_int_or(src, nde.Key_tkn().Src_bgn(), nde.Key_tkn().Src_end(), Bry_.NotFound);
+				key_int = Bry_.To_int_or(src, nde.Key_tkn().Src_bgn(), nde.Key_tkn().Src_end(), Bry_.NotFound);
 			else							// will be called by parent context; note that this calls Xot_defn_tmpl_.Make_itm which sets a key_dat_ary; DATE:2013-09-23
-				key_int = Bry_.Xto_int_or(key_dat_ary, 0, key_dat_ary.length, Bry_.NotFound);
+				key_int = Bry_.To_int_or(key_dat_ary, 0, key_dat_ary.length, Bry_.NotFound);
 		}
 		if (key_int == Bry_.NotFound)		// key is not-numeric
 			return false;
@@ -185,7 +185,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 			if (key_missing)	// key missing; EX: {{a|val}}
 				key_as_int = ++arg_idx;// NOTE: MW requires a key; if none, then default to int index; NOTE: must be int, not String; NOTE: must be indexed to keyless args; EX: in "key1=val1,val2", "val2" must be "1" (1st keyless arg) not "2" (2nd arg); DATE:2013-11-09
 			else {				// key exists; EX:{{a|key=val}}
-				key_as_int = Bry_.Xto_int_or(tmp_bfr.Bfr(), 0, tmp_bfr.Len(), Int_.MinValue);
+				key_as_int = Bry_.To_int_or(tmp_bfr.Bfr(), 0, tmp_bfr.Len(), Int_.MinValue);
 				if (key_as_int == Int_.MinValue) {		// key is not int; create str
 					key_as_str = tmp_bfr.Xto_str_and_clear();
 					key_is_str = true;

@@ -39,6 +39,7 @@ public class Xoav_wiki_mgr implements Xoa_wiki_mgr, GfoInvkAble {
 	public Xowv_wiki Load_by_fil(Io_url fil)		{
 		return Load(Gen_domain_str(fil.NameOnly()), fil.OwnerDir());
 	}
+	public boolean Has(byte[] key) {return hash.Has(key);}
 	public Xow_wiki Get_by_key_or_make_init_y(byte[] key) {
 		Xow_wiki rv = this.Get_by_domain(key);
 		// if (rv == null) rv = New_wiki(key);	// TODO: must init wiki, but need wiki_url; DATE:2015-05-23

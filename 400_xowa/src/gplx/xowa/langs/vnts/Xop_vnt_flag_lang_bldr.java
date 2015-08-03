@@ -31,7 +31,7 @@ class Xop_vnt_flag_lang_bldr {
 		ary = new Xop_vnt_flag_lang_itm[len];
 		ary_len = len;
 	}
-	public Btrie_slim_mgr Trie() {return trie;} private Btrie_slim_mgr trie = Btrie_slim_mgr.ci_ascii_();	// NOTE:ci.ascii:MW_const.en; lang variant name; EX:zh-hans
+	public Btrie_slim_mgr Trie() {return trie;} private Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7();	// NOTE:ci.ascii:MW_const.en; lang variant name; EX:zh-hans
 	public void Add(Xop_vnt_flag_lang_itm itm) {
 		int idx = itm.Idx();
 		if (ary[idx] == null) {

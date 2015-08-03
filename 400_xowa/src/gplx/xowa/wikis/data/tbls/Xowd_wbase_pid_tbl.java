@@ -48,7 +48,7 @@ public class Xowd_wbase_pid_tbl implements RlsAble {
 		try {
 			if (!rdr.Move_next()) return Wdata_wiki_mgr.Pid_null;	// occurs when pid exists, but does not have entry for language; see hu.w:Marco Polo argali; DATE: 2014-02-01
 			byte[] pid_bry = rdr.Read_bry_by_str(fld_trg_ttl);
-			return pid_bry == null ?  Wdata_wiki_mgr.Pid_null : Bry_.Xto_int_or(pid_bry, 1, pid_bry.length, Wdata_wiki_mgr.Pid_null);
+			return pid_bry == null ?  Wdata_wiki_mgr.Pid_null : Bry_.To_int_or(pid_bry, 1, pid_bry.length, Wdata_wiki_mgr.Pid_null);
 		} finally {rdr.Rls();}
 	}
 	public void Rls() {

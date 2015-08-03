@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.files.exts; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.core.primitives.*;
 public class Xof_rule_grp implements GfoInvkAble {
-	private final Hash_adp_bry hash = Hash_adp_bry.cs_();
+	private final Hash_adp_bry hash = Hash_adp_bry.cs();
 	public Xof_rule_grp(Xof_rule_mgr owner, byte[] key) {this.owner = owner; this.key = key;}
 	public Xof_rule_mgr Owner() {return owner;} private final Xof_rule_mgr owner;
 	public byte[] Key() {return key;} private final byte[] key;

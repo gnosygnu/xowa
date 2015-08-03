@@ -18,12 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import org.junit.*;
 public class Xow_lang_mgr_tst {
-	private Xow_lang_mgr_fxt fxt = new Xow_lang_mgr_fxt();
+	private final Xow_lang_mgr_fxt fxt = new Xow_lang_mgr_fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test  public void Basic() {
 		fxt.tst("[[simple:Earth]] [[fr:Terre]] [[es:Tierra]] [[de:Erde]] [[it:Terre]]", String_.Concat_lines_nl_skip_last
 		( "<div id=\"xowa-lang\">"
-		, "  <h5><a href='javascript:xowa_toggle_visible(\"wikidata-langs\");' style='text-decoration: none !important;'>In other languages<img id='wikidata-langs-toggle-icon' src='file:///mem/xowa/user/test_user/app/img/window/portal/twisty_right.png' title='' /></a></h5>"
+		, "  <h5><a href='javascript:xowa_toggle_visible(\"wikidata-langs\");' style='text-decoration: none !important;'>In other languages<img id='wikidata-langs-toggle-icon' src='file:///mem/xowa/user/test_user/app/img/window/portal/twisty_right.png' title='' /></a> (links: 5) </h5>"
 		, "  <div id='wikidata-langs-toggle-elem' style='display:none;'>"
 		, "  <h4>grp1</h4>"
 		, "  <table style='width: 100%;'>"
@@ -47,7 +47,7 @@ public class Xow_lang_mgr_tst {
 	@Test  public void Empty() {
 		fxt.tst("[[simple:]]", String_.Concat_lines_nl_skip_last
 		( "<div id=\"xowa-lang\">"
-		, "  <h5><a href='javascript:xowa_toggle_visible(\"wikidata-langs\");' style='text-decoration: none !important;'>In other languages<img id='wikidata-langs-toggle-icon' src='file:///mem/xowa/user/test_user/app/img/window/portal/twisty_right.png' title='' /></a></h5>"
+		, "  <h5><a href='javascript:xowa_toggle_visible(\"wikidata-langs\");' style='text-decoration: none !important;'>In other languages<img id='wikidata-langs-toggle-icon' src='file:///mem/xowa/user/test_user/app/img/window/portal/twisty_right.png' title='' /></a> (links: 1) </h5>"
 		, "  <div id='wikidata-langs-toggle-elem' style='display:none;'>"
 		, "  <h4>grp1</h4>"
 		, "  <table style='width: 100%;'>"
@@ -63,7 +63,7 @@ public class Xow_lang_mgr_tst {
 //			fxt.Wiki().Xwiki_mgr().Add_full(Bry_.new_a7("zh"), Bry_.new_a7("zh.wikipedia.org"), Bry_.new_a7("http://zh.wikipedia.org/~{0}"));
 		fxt.tst("[[zh:Earth]]", String_.Concat_lines_nl_skip_last
 		( "<div id=\"xowa-lang\">"
-		, "  <h5><a href='javascript:xowa_toggle_visible(\"wikidata-langs\");' style='text-decoration: none !important;'>In other languages<img id='wikidata-langs-toggle-icon' src='file:///mem/xowa/user/test_user/app/img/window/portal/twisty_right.png' title='' /></a></h5>"
+		, "  <h5><a href='javascript:xowa_toggle_visible(\"wikidata-langs\");' style='text-decoration: none !important;'>In other languages<img id='wikidata-langs-toggle-icon' src='file:///mem/xowa/user/test_user/app/img/window/portal/twisty_right.png' title='' /></a> (links: 1) </h5>"
 		, "  <div id='wikidata-langs-toggle-elem' style='display:none;'>"
 		, "  <h4>grp1</h4>"
 		, "  <table style='width: 100%;'>"
@@ -78,7 +78,7 @@ public class Xow_lang_mgr_tst {
 	@Test  public void Anchor() {// PURPOSE: A#b was not showing anchor "#b"; DATE:2013-10-23
 		fxt.tst("[[simple:A#b]]", String_.Concat_lines_nl_skip_last
 		( "<div id=\"xowa-lang\">"
-		, "  <h5><a href='javascript:xowa_toggle_visible(\"wikidata-langs\");' style='text-decoration: none !important;'>In other languages<img id='wikidata-langs-toggle-icon' src='file:///mem/xowa/user/test_user/app/img/window/portal/twisty_right.png' title='' /></a></h5>"
+		, "  <h5><a href='javascript:xowa_toggle_visible(\"wikidata-langs\");' style='text-decoration: none !important;'>In other languages<img id='wikidata-langs-toggle-icon' src='file:///mem/xowa/user/test_user/app/img/window/portal/twisty_right.png' title='' /></a> (links: 1) </h5>"
 		, "  <div id='wikidata-langs-toggle-elem' style='display:none;'>"
 		, "  <h4>grp1</h4>"
 		, "  <table style='width: 100%;'>"

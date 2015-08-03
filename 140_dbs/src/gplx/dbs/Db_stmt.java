@@ -36,9 +36,9 @@ public interface Db_stmt extends RlsAble {
 	Db_stmt Crt_double(String k, double v);
 	Db_stmt Val_double(String k, double v);
 	Db_stmt Val_double(double v);
-	Db_stmt Crt_decimal(String k, DecimalAdp v);
-	Db_stmt Val_decimal(String k, DecimalAdp v);
-	Db_stmt Val_decimal(DecimalAdp v);
+	Db_stmt Crt_decimal(String k, Decimal_adp v);
+	Db_stmt Val_decimal(String k, Decimal_adp v);
+	Db_stmt Val_decimal(Decimal_adp v);
 	Db_stmt Crt_bry(String k, byte[] v);
 	Db_stmt Val_bry(String k, byte[] v);
 	Db_stmt Val_bry(byte[] v);

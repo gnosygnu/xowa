@@ -29,7 +29,7 @@ public class Wdata_dict_langtext {
 	  Bry_language								= Bry_.new_a7(Str_language)
 	, Bry_value									= Bry_.new_a7(Str_value)
 	;
-	public static final Hash_adp_bry Dict = Hash_adp_bry.cs_()
+	public static final Hash_adp_bry Dict = Hash_adp_bry.cs()
 	.Add_bry_byte(Bry_language					, Tid_language)
 	.Add_bry_byte(Bry_value						, Tid_value)
 	;

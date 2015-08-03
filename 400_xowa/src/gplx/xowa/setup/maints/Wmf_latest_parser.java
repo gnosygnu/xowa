@@ -30,11 +30,11 @@ public class Wmf_latest_parser {
 		byte[] date_bgn_bry = Bry_.new_a7("</a>");
 		byte[] date_end_bry = Bry_.new_a7("  ");
 //			byte[] size_bgn_bry = Bry_.new_a7("</td><td class=\"s\">");
-		Btrie_slim_mgr date_trie = Btrie_slim_mgr.cs_()
+		Btrie_slim_mgr date_trie = Btrie_slim_mgr.cs()
 			.Add_bry("Jan", "01").Add_bry("Feb", "02").Add_bry("Mar", "03").Add_bry("Apr", "04").Add_bry("May", "05").Add_bry("Jun", "06")
 			.Add_bry("Jul", "07").Add_bry("Aug", "08").Add_bry("Sep", "09").Add_bry("Oct", "10").Add_bry("Nov", "11").Add_bry("Dec", "12")
 			;
-//			Btrie_slim_mgr size_trie = Btrie_slim_mgr.cs_()
+//			Btrie_slim_mgr size_trie = Btrie_slim_mgr.cs()
 //				.Add_bry("B", "  B").Add_bry("K", " KB").Add_bry("M", " MB").Add_bry("G", " GB");
 		byte[] date_or = Bry_.new_a7("1970-01-01 00:00:00");
 //			byte[] size_or = Bry_.new_a7("0 B");

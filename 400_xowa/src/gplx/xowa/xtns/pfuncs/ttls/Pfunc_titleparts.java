@@ -29,7 +29,7 @@ public class Pfunc_titleparts extends Pf_func_base {
 
 		// get parts_len
 		byte[] parts_len_ary = Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, args_len, 0);
-		int parts_len = parts_len_ary == Bry_.Empty ? Int_.MinValue : Bry_.Xto_int_or(parts_len_ary, Int_.MaxValue);
+		int parts_len = parts_len_ary == Bry_.Empty ? Int_.MinValue : Bry_.To_int_or(parts_len_ary, Int_.MaxValue);
 		if (parts_len == Int_.MaxValue) {// len is not an int; EX: "a";
 			ctx.Msg_log().Add_itm_none(Pfunc_titleparts_log.Len_is_invalid, src, caller.Src_bgn(), caller.Src_end());
 			bb.Add(argx);
@@ -38,7 +38,7 @@ public class Pfunc_titleparts extends Pf_func_base {
 
 		// get parts_bgn
 		byte[] parts_bgn_arg = Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, args_len, 1);
-		int parts_bgn = parts_bgn_arg == Bry_.Empty ? 0 : Bry_.Xto_int_or(parts_bgn_arg, Int_.MinValue);
+		int parts_bgn = parts_bgn_arg == Bry_.Empty ? 0 : Bry_.To_int_or(parts_bgn_arg, Int_.MinValue);
 		if (parts_bgn == Int_.MinValue) {// parts_bgn is not an int; EX: "a"
 			ctx.Msg_log().Add_itm_none(Pfunc_titleparts_log.Bgn_is_invalid, src, caller.Src_bgn(), caller.Src_end());
 			parts_bgn = 0;	// NOTE: do not return

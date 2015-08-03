@@ -40,7 +40,7 @@ class Xow_hzip_xtid {
 	, Bry_img_full			= Bry_.new_a7("a_img_full")
 	, Bry_hdr				= Bry_.new_a7("hdr")
 	;
-	private static final Hash_adp_bry Xtids = Hash_adp_bry.cs_()
+	private static final Hash_adp_bry Xtids = Hash_adp_bry.cs()
 	.Add_bry_byte(Bry_lnki_text_n		, Xow_hzip_dict.Tid_lnki_text_n)
 	.Add_bry_byte(Bry_lnki_text_y		, Xow_hzip_dict.Tid_lnki_text_y)
 	.Add_bry_byte(Bry_lnke_txt			, Xow_hzip_dict.Tid_lnke_txt)

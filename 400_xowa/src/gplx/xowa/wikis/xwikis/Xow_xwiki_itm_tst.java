@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import org.junit.*; import gplx.xowa.wikis.*; import gplx.xowa.langs.*;
+import org.junit.*; import gplx.core.net.*; import gplx.xowa.wikis.*; import gplx.xowa.langs.*;
 public class Xow_xwiki_itm_tst {
 	@Before public void init() {fxt.Clear();} 		private Xow_xwiki_itm_fxt fxt = new Xow_xwiki_itm_fxt();
 	@Test   public void Commons()			{fxt.Test_new_by_mw("commons.wikimedia.org/wiki/$1"	, "commons.wikimedia.org"	, "commons.wikimedia.org/wiki/~{0}"		, Xow_domain_type_.Tid_commons		, Xol_lang_itm_.Id__unknown);}

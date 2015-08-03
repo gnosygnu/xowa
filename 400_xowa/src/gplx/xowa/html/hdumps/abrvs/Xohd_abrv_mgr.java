@@ -80,8 +80,8 @@ public class Xohd_abrv_mgr {
 			case Xohd_abrv_.Tid_hdr_end:				return wkr__hdr.Write_end(bfr, hpg, uid, rv);
 		}
 		if (itm.Elem_is_xnde()) rv += 2;		// if xnde, skip "/>"
-		if (uid == bry_rdr.Or_int())			{usr_dlg.Warn_many("", "", "index is not a valid int; hpg=~{0} text=~{1}", hpg.Url().Xto_full_str_safe(), Bry_.Mid_safe(src, uid_bgn, uid_end)); return uid_end;}
-		if (!Int_.Between(uid, 0, imgs_len))	{usr_dlg.Warn_many("", "", "index is out of range; hpg=~{0} idx=~{1} len=~{2}", hpg.Url().Xto_full_str_safe(), uid, imgs_len); return uid_end;}
+		if (uid == bry_rdr.Or_int())			{usr_dlg.Warn_many("", "", "index is not a valid int; hpg=~{0} text=~{1}", hpg.Url().To_str(), Bry_.Mid_safe(src, uid_bgn, uid_end)); return uid_end;}
+		if (!Int_.Between(uid, 0, imgs_len))	{usr_dlg.Warn_many("", "", "index is out of range; hpg=~{0} idx=~{1} len=~{2}", hpg.Url().To_str(), uid, imgs_len); return uid_end;}
 		if (uid >= imgs.length) return rv;
 		Xohd_data_itm__base img = imgs[uid];
 		int img_view_w = img.Html_w();

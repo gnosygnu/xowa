@@ -16,17 +16,20 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+import gplx.core.net.*;
 import gplx.xowa.langs.*;
 import gplx.xowa.html.hrefs.*;
 public class Xow_xwiki_mgr implements GfoInvkAble {
 	private Xowe_wiki wiki; private Xow_xwiki_mgr_srl srl;
+	private final Ordered_hash list = Ordered_hash_.new_bry_();
+	private final Hash_adp_bry hash = Hash_adp_bry.ci_a7();
 	public Xow_xwiki_mgr() {}	// FIXME: current placeholder for viewer
 	public Xow_xwiki_mgr(Xowe_wiki wiki, Gfo_url_parser url_parser) {
 		this.wiki = wiki;
 		srl = new Xow_xwiki_mgr_srl(this, url_parser);
 	}		
 	public Xow_lang_mgr Lang_mgr() {return lang_mgr;} private final Xow_lang_mgr lang_mgr = Xow_lang_mgr.dflt_();
-	public int Len() {return list.Count();} private Ordered_hash list = Ordered_hash_.new_bry_(); private Hash_adp_bry hash = Hash_adp_bry.ci_ascii_();	// ASCII:lang_code
+	public int Len() {return list.Count();}
 	public void Clear() {hash.Clear(); list.Clear();}
 	public Xow_xwiki_itm Get_at(int i)								{return (Xow_xwiki_itm)list.Get_at(i);}
 	public Xow_xwiki_itm Get_by_key(byte[] key)						{return (Xow_xwiki_itm)hash.Get_by_bry(key);}
@@ -91,13 +94,13 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 				&& Bry_.Eq(alias, lang_itm.Key()))	// alias == lang.key; only assign langs to aliases that have lang key; EX: w|en.wikipedia.org; "w" alias should not be registered for "en"; DATE:2013-07-25
 				lang_id = lang_itm.Id();
 		}
-		byte[] url_fmt = Bry_.Add(Xoh_href_parser.Href_https_bry, domain_bry, Xoh_href_parser.Href_wiki_bry, Arg_0);
+		byte[] url_fmt = Bry_.Add(Xoh_href_.Bry__https, domain_bry, Xoh_href_.Bry__wiki, Arg_0);
 		return Xow_xwiki_itm.new_(alias, url_fmt, lang_id, domain.Domain_tid(), domain_bry);
 	}	static final byte[] Arg_0 = Bry_.new_a7("~{0}");
 	String Exec_itms_print(byte[] raw) {
 		Bry_fmtr fmtr = Bry_fmtr.new_bry_(raw, "wiki_key");//, "wiki_type_url", "wiki_lang", "wiki_name", "wiki_logo_url");
 		Bry_bfr tmp_bfr = Xoa_app_.Utl__bfr_mkr().Get_k004();
-		Hash_adp_bry seen = Hash_adp_bry.ci_ascii_();	// ASCII:url_domain; EX:en.wikipedia.org
+		Hash_adp_bry seen = Hash_adp_bry.ci_a7();	// ASCII:url_domain; EX:en.wikipedia.org
 		int wikis_len = list.Count();
 		for (int i = 0; i < wikis_len; i++) {
 			Xow_xwiki_itm itm = (Xow_xwiki_itm)list.Get_at(i);
@@ -195,7 +198,7 @@ public class Xow_xwiki_mgr implements GfoInvkAble {
 			list.Add_if_dupe_use_nth(xwiki_key, xwiki);	// only add to list if domain is new; some wikis like commons will be added multiple times under different aliases (commons, c, commons.wikimedia.org); need to check domain and add only once DATE:2014-11-07
 		}
 		hash.Add_if_dupe_use_nth(xwiki_key, xwiki);
-	}	private final Hash_adp_bry domain_hash = Hash_adp_bry.ci_ascii_(); 
+	}	private final Hash_adp_bry domain_hash = Hash_adp_bry.ci_a7(); 
 	public void Add_many(byte[] v) {srl.Load_by_bry(v);}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_count))						return list.Count();

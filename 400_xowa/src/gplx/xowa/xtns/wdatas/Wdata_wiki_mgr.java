@@ -22,7 +22,7 @@ import gplx.xowa.xtns.wdatas.parsers.*; import gplx.xowa.xtns.wdatas.pfuncs.*; i
 public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 	private final Wdata_doc_parser wdoc_parser_v1, wdoc_parser_v2;
 	private final Wdata_prop_val_visitor prop_val_visitor;
-	private final Hash_adp_bry qids_cache = Hash_adp_bry.cs_(), pids_cache = Hash_adp_bry.cs_();
+	private final Hash_adp_bry qids_cache = Hash_adp_bry.cs(), pids_cache = Hash_adp_bry.cs();
 	private Int_obj_ref wiki_tid_ref = Int_obj_ref.zero_();
 	private Wdata_hwtr_mgr hwtr_mgr;
 	public Wdata_wiki_mgr(Xoae_app app) {
@@ -120,7 +120,7 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 		for (int i = 0; i < qids_len; i++) {
 			byte[] qid = qids[i];
 			int qid_len = qid.length;
-			int qid_val = Bry_.Xto_int_or(qid, 1, qid_len, Int_.MaxValue);
+			int qid_val = Bry_.To_int_or(qid, 1, qid_len, Int_.MaxValue);
 			if (qid_val < qid_min) {
 				qid_min = qid_val;
 				qid_idx = i;
@@ -130,21 +130,26 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 	}
 	public void Resolve_to_bfr(Bry_bfr bfr, Wdata_claim_grp prop_grp, byte[] lang_key) {
 		int len = prop_grp.Len();
-		for (int i = 0; i < len; i++) {	// NOTE: multiple props possible; EX: roles = scientist,painter
-			if (i != 0) bfr.Add(Prop_tmpl_val_dlm);
+		Wdata_claim_itm_core selected = null;
+		for (int i = 0; i < len; i++) {								// NOTE: multiple props possible; EX: {{#property:P1082}}; PAGE:en.w:Earth DATE:2015-08-02
 			Wdata_claim_itm_core prop = prop_grp.Get_at(i);
-			switch (prop.Snak_tid()) {
-				case Wdata_dict_snak_tid.Tid_novalue	: bfr.Add(Wdata_dict_snak_tid.Bry_novalue); break;
-				case Wdata_dict_snak_tid.Tid_somevalue	: bfr.Add(Wdata_dict_snak_tid.Bry_somevalue); break;
-				default: {
-					prop_val_visitor.Init(bfr, lang_key);
-					prop.Welcome(prop_val_visitor);
-					break;
-				}
+			if (selected == null) selected = prop;					// if selected not set, set it; will always set to 1st prop
+			if (prop.Rank_tid() == Wdata_dict_rank.Tid_preferred) {	// if prop is preferred, select it and exit;
+				selected = prop;
+				break;
+			}
+		}
+		switch (selected.Snak_tid()) {
+			case Wdata_dict_snak_tid.Tid_novalue	: bfr.Add(Wdata_dict_snak_tid.Bry_novalue); break;
+			case Wdata_dict_snak_tid.Tid_somevalue	: bfr.Add(Wdata_dict_snak_tid.Bry_somevalue); break;
+			default: {
+				prop_val_visitor.Init(bfr, lang_key);
+				selected.Welcome(prop_val_visitor);
+				break;
 			}
 		}
 	}
-	public static final byte[] Bry_q = Bry_.new_a7("q"), Prop_tmpl_val_dlm = Bry_.new_a7(", ");
+	public static final byte[] Bry_q = Bry_.new_a7("q");
 	public byte[] Popup_text(Xoae_page page) {
 		Hwtr_mgr_assert();
 		Wdata_doc wdoc = this.Pages_get_by_ttl_name(page.Ttl().Page_db());			 

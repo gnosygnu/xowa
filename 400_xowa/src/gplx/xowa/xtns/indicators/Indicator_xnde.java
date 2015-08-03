@@ -37,6 +37,6 @@ public class Indicator_xnde implements Xox_xnde, Xop_xnde_atr_parser {
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {
 	}
 	private static final byte Xatr_name = 0;
-	private static final Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_ascii_()
+	private static final Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7()
 	.Add_str_obj("name", Byte_obj_val.new_(Xatr_name));
 }

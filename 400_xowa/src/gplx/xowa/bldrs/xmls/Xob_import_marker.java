@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.xmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.gfui.*; import gplx.xowa.bldrs.cmds.utils.*;
 public class Xob_import_marker {
-	private final Hash_adp_bry in_progress_hash = Hash_adp_bry.cs_();
+	private final Hash_adp_bry in_progress_hash = Hash_adp_bry.cs();
 	public void Bgn(Xowe_wiki wiki) {
 		in_progress_hash.Add_as_key_and_val(wiki.Domain_bry());
 		Io_mgr.I.SaveFilStr(url_(wiki), "XOWA has created this file to indicate that an import is in progress. This file will be deleted once the import is completed.");

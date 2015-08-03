@@ -42,24 +42,24 @@ class Wdata_visitor__html_wtr implements Wdata_claim_visitor {
 	}
 	public void Visit_quantity(Wdata_claim_itm_quantity itm) {
 		try {
-			DecimalAdp val = itm.Amount_as_num();
-			DecimalAdp hi = itm.Ubound_as_num();
-			DecimalAdp lo = itm.Lbound_as_num();
-			DecimalAdp hi_diff = hi.Op_subtract(val);
-			DecimalAdp lo_diff = val.Op_subtract(lo);
-			float hi_diff_val = (float)hi_diff.Xto_double();
-			float lo_diff_val = (float)lo_diff.Xto_double();
+			Decimal_adp val = itm.Amount_as_num();
+			Decimal_adp hi = itm.Ubound_as_num();
+			Decimal_adp lo = itm.Lbound_as_num();
+			Decimal_adp hi_diff = hi.Subtract(val);
+			Decimal_adp lo_diff = val.Subtract(lo);
+			float hi_diff_val = (float)hi_diff.To_double();
+			float lo_diff_val = (float)lo_diff.To_double();
 			tmp_bfr.Add(itm.Amount()).Add_byte_space();
 			if (hi_diff.Eq(lo_diff)) {		// delta is same in both directions; EX: val=50 hi=60 lo=40 -> hi_diff == lo_diff == 10
 				if (hi_diff_val != 0)		// skip if 0
-					tmp_bfr.Add(msgs.Sym_plusminus()).Add_str(hi_diff.Xto_str());
+					tmp_bfr.Add(msgs.Sym_plusminus()).Add_str(hi_diff.To_str());
 			}
 			else {							// delta is diff in both directions; EX: val=50 hi=60 lo=30 -> hi_diff == 10, lo_diff == 20
 				if (hi_diff_val != 0)		// skip if 0
-					tmp_bfr.Add(msgs.Sym_plus()).Add_str(hi_diff.Xto_str());
+					tmp_bfr.Add(msgs.Sym_plus()).Add_str(hi_diff.To_str());
 				if (lo_diff_val != 0) {		// skip if 0
 					if (hi_diff_val != 0) tmp_bfr.Add(Time_plus_minus_spr);
-					tmp_bfr.Add(msgs.Sym_minus()).Add_str(lo_diff.Xto_str());
+					tmp_bfr.Add(msgs.Sym_minus()).Add_str(lo_diff.To_str());
 				}
 			}
 			byte[] unit = itm.Unit();
@@ -87,8 +87,8 @@ class Wdata_visitor__html_wtr implements Wdata_claim_visitor {
 	}
 	public void Visit_globecoordinate(Wdata_claim_itm_globecoordinate itm) {
 		try {
-			DecimalAdp precision_frac = itm.Prc_as_num();						// precision is a decimal; EX: .00027777
-			int precision_int = Math_.Log10(DecimalAdp_.One.Op_divide(precision_frac).Xto_int());		// convert precision to log10 integer; EX: .00027777 -> 3600 -> 3
+			Decimal_adp precision_frac = itm.Prc_as_num();						// precision is a decimal; EX: .00027777
+			int precision_int = Math_.Log10(Decimal_adp_.One.Divide(precision_frac).To_int());		// convert precision to log10 integer; EX: .00027777 -> 3600 -> 3
 			gplx.xowa.xtns.mapSources.Map_dd2dms_func.Deg_to_dms(tmp_bfr, Bool_.Y, itm.Lng(), precision_int);
 			tmp_bfr.Add_byte_comma().Add_byte_space();
 			gplx.xowa.xtns.mapSources.Map_dd2dms_func.Deg_to_dms(tmp_bfr, Bool_.N, itm.Lat(), precision_int);

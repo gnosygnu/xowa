@@ -43,6 +43,7 @@ public class Xop_xatr_whitelist_mgr {
 		switch (itm_key_tid) {
 			case Xop_xatr_itm.Key_tid_style:
 				if (!Scrub_style(xatr, src)) return false;
+				xatr.Val_bry_(gplx.xowa.parsers.amps.Xop_amp_mgr.I.Decode_as_bry(xatr.Val_as_bry(src)));	// NOTE: must decode style values; "&#amp;#000000" -> "#000000"; see MW:checkCss; PAGE:en.w:Boron DATE:2015-07-29
 				break;
 			case Xop_xatr_itm.Key_tid_role:
 				if (!Bry_.Eq(Val_role_presentation, xatr.Val_as_bry(src))) return false; // MW: For now we only support role="presentation"; DATE:2014-04-05
@@ -123,7 +124,7 @@ public class Xop_xatr_whitelist_mgr {
 		Ini_all_loose("data");
 		return this;
 	}
-	private Hash_adp_bry grp_hash = Hash_adp_bry.cs_();
+	private Hash_adp_bry grp_hash = Hash_adp_bry.cs();
 	private void Ini_grp(String key_str, String base_grp, String... cur_itms) {
 		byte[][] itms = Bry_.Ary(cur_itms);
 		if (base_grp != null)
@@ -173,12 +174,12 @@ public class Xop_xatr_whitelist_mgr {
 		key_trie.Add_obj(key, rv);
 		return rv;
 	}
-	private Hash_adp_bry tid_hash = Hash_adp_bry.ci_ascii_()
+	private Hash_adp_bry tid_hash = Hash_adp_bry.ci_a7()
 	.Add_str_byte("id", Xop_xatr_itm.Key_tid_id)
 	.Add_str_byte("style", Xop_xatr_itm.Key_tid_style)
 	.Add_str_byte("role", Xop_xatr_itm.Key_tid_role)
 	;
-	private Btrie_slim_mgr key_trie = Btrie_slim_mgr.ci_ascii_();	// NOTE:ci.ascii:HTML.node_name
+	private Btrie_slim_mgr key_trie = Btrie_slim_mgr.ci_a7();	// NOTE:ci.ascii:HTML.node_name
 	public boolean Scrub_style(Xop_xatr_itm xatr, byte[] raw) { // REF:Sanitizer.php|checkCss; '! expression | filter\s*: | accelerator\s*: | url\s*\( !ix'; NOTE: this seems to affect MS IE only; DATE:2013-04-01
 		byte[] val_bry = xatr.Val_bry();
 		byte[] chk_bry; int chk_bgn, chk_end;
@@ -242,7 +243,7 @@ public class Xop_xatr_whitelist_mgr {
 		return Byte_ascii.Null; 
 	}
 	static final byte Style_expression = 0, Style_filter = 1, Style_accelerator = 2, Style_url = 3, Style_urls = 4, Style_comment = 5, Style_image = 6, Style_image_set = 7;
-	private static Btrie_slim_mgr style_trie = Btrie_slim_mgr.ci_ascii_()	// NOTE:ci.ascii:Javascript
+	private static Btrie_slim_mgr style_trie = Btrie_slim_mgr.ci_a7()	// NOTE:ci.ascii:Javascript
 	.Add_str_byte("expression"	, Style_expression)
 	.Add_str_byte("filter"		, Style_filter)
 	.Add_str_byte("accelerator"	, Style_accelerator)

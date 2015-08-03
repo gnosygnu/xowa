@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 public class Number_parser {
 	public int				Rv_as_int() {return (int)int_val;} long int_val = 0;
-	public DecimalAdp		Rv_as_dec() {return dec_val == null ? DecimalAdp_.long_(int_val) : dec_val;} DecimalAdp dec_val = null;
+	public Decimal_adp		Rv_as_dec() {return dec_val == null ? Decimal_adp_.long_(int_val) : dec_val;} Decimal_adp dec_val = null;
 	public boolean				Has_err()  {return has_err;} private boolean has_err;
 	public boolean				Has_frac() {return has_frac;} private boolean has_frac;
 	public boolean				Hex_enabled() {return hex_enabled;} public Number_parser Hex_enabled_(boolean v) {hex_enabled = v; return this;} private boolean hex_enabled;
@@ -169,7 +169,7 @@ public class Number_parser {
 				if (exp_neg)	frc_multiplier	*= exp_multiplier;	// divide, so apply to frc
 				else			full_val		*= exp_multiplier;	// multiply, so apply to full_val
 			}
-			dec_val = DecimalAdp_.divide_(full_val, frc_multiplier);
+			dec_val = Decimal_adp_.divide_(full_val, frc_multiplier);
 		}
 		else {
 			if (has_neg) int_val *= -1;

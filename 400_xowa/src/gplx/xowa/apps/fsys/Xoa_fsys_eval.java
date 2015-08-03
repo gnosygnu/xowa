@@ -33,7 +33,7 @@ public class Xoa_fsys_eval implements Bry_fmtr_eval_mgr {
 		}
 	}
 	private static final byte Tid_bin_plat_dir = 0, Tid_user_temp_dir = 1, Tid_xowa_root_dir = 2, Tid_user_cfg_dir = 3;
-	private static final Hash_adp_bry hash = Hash_adp_bry.ci_ascii_()
+	private static final Hash_adp_bry hash = Hash_adp_bry.ci_a7()
 	.Add_str_byte("bin_plat_dir"	, Tid_bin_plat_dir)
 	.Add_str_byte("user_temp_dir"	, Tid_user_temp_dir)
 	.Add_str_byte("xowa_root_dir"	, Tid_xowa_root_dir)

@@ -41,7 +41,7 @@ public class Map_geolink_func extends Pf_func_base {
 						case Key_tid_lat_neg:	mer_x_neg = val; break;
 						case Key_tid_long_pos:	mer_y_pos = val; break;
 						case Key_tid_long_min:	mer_y_neg = val; break;
-						case Key_tid_prec:		prec = Bry_.Xto_int_or(val, prec); break;
+						case Key_tid_prec:		prec = Bry_.To_int_or(val, prec); break;
 					}
 				}
 			}
@@ -90,7 +90,7 @@ public class Map_geolink_func extends Pf_func_base {
 */
 	public static final Map_geolink_func _ = new Map_geolink_func(); Map_geolink_func() {}
 	private static final byte Key_tid_lat_val = 1, Key_tid_long_val = 2, Key_tid_lat_pos = 3, Key_tid_lat_neg = 4, Key_tid_long_pos = 5, Key_tid_long_min = 6, Key_tid_prec = 7;
-	private static final Hash_adp_bry Key_hash = Hash_adp_bry.cs_()
+	private static final Hash_adp_bry Key_hash = Hash_adp_bry.cs()
 	.Add_str_byte("lat"			, Key_tid_lat_val)
 	.Add_str_byte("long"		, Key_tid_long_val)
 	.Add_str_byte("plusLat"		, Key_tid_lat_pos)

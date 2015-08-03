@@ -97,14 +97,14 @@ public class Xow_xtn_mgr implements GfoInvkAble {
 		}
 	}
 	private static final byte Tid_cite = 0, Tid_sites = 1, Tid_insider = 2, Tid_imap = 3, Tid_proofread = 4, Tid_wikibase = 5, Tid_indicator = 6;
-	private static final Btrie_slim_mgr xtn_tid_trie = Btrie_slim_mgr.cs_()
-	.Add_bry_bval(Cite_xtn_mgr.XTN_KEY		, Tid_cite)
-	.Add_bry_bval(Sites_xtn_mgr.XTN_KEY		, Tid_sites)
-	.Add_bry_bval(Insider_xtn_mgr.XTN_KEY	, Tid_insider)
-	.Add_bry_bval(Indicator_xtn_mgr.XTN_KEY	, Tid_indicator)
-	.Add_bry_bval(Imap_xtn_mgr.XTN_KEY		, Tid_imap)
-	.Add_bry_bval(Pp_xtn_mgr.XTN_KEY		, Tid_proofread)
-	.Add_bry_bval(Wdata_xtn_mgr.XTN_KEY		, Tid_wikibase)
+	private static final Btrie_slim_mgr xtn_tid_trie = Btrie_slim_mgr.cs()
+	.Add_bry_byte(Cite_xtn_mgr.XTN_KEY		, Tid_cite)
+	.Add_bry_byte(Sites_xtn_mgr.XTN_KEY		, Tid_sites)
+	.Add_bry_byte(Insider_xtn_mgr.XTN_KEY	, Tid_insider)
+	.Add_bry_byte(Indicator_xtn_mgr.XTN_KEY	, Tid_indicator)
+	.Add_bry_byte(Imap_xtn_mgr.XTN_KEY		, Tid_imap)
+	.Add_bry_byte(Pp_xtn_mgr.XTN_KEY		, Tid_proofread)
+	.Add_bry_byte(Wdata_xtn_mgr.XTN_KEY		, Tid_wikibase)
 	;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_get))				return Get_or_fail(m.ReadBry("v"));

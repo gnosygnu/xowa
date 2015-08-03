@@ -22,7 +22,7 @@ interface Xows_text_tkn {
 }
 class Xows_text_tkn__split implements Xows_text_tkn {
 	private final boolean add_sym_as_word;
-	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs_();
+	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
 	public Xows_text_tkn__split(boolean add_sym_as_word, byte[][] ary) {
 		this.add_sym_as_word = add_sym_as_word;
 		int len = ary.length;

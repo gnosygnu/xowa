@@ -23,14 +23,14 @@ public class Pfunc_expr extends Pf_func_base {
 		Evaluate(bfr, ctx, val_dat_ary);
 	}
 	public static boolean Evaluate(Bry_bfr bfr, Xop_ctx ctx, byte[] expr) {
-		DecimalAdp rslt = shunter.Evaluate(ctx, expr);	// NOTE: php uses "float" but really is a double; http://www.php.net/manual/en/language.types.float.php
+		Decimal_adp rslt = shunter.Evaluate(ctx, expr);	// NOTE: php uses "float" but really is a double; http://www.php.net/manual/en/language.types.float.php
 		if (rslt == Pfunc_expr_shunter.Null_rslt) {
 			bfr.Add_bfr_and_preserve(shunter.Err());
 			shunter.Err().Clear();
 			return false;
 		}
 		else {
-			bfr.Add_str(rslt.Xto_str());
+			bfr.Add_str(rslt.To_str());
 			return true;
 		}
 	}

@@ -44,10 +44,9 @@ class Xog_history_stack_fxt {
 		if (app == null) {
 			app = Xoa_app_fxt.app_();
 			wiki = Xoa_app_fxt.wiki_tst_(app);
-			url_parser = app.Utl__url_parser();
 		}
 		return this;
-	}	private Xoae_app app; private Xowe_wiki wiki; private Xog_history_stack stack = new Xog_history_stack(); private Xoa_url_parser url_parser;
+	}	private Xoae_app app; private Xowe_wiki wiki; private Xog_history_stack stack = new Xog_history_stack();
 	public Xog_history_stack_fxt Test_cur(String expd) {
 		Xog_history_itm page = stack.Cur_itm();
 		String actl = page == null ? null : String_.new_u8(page.Page());
@@ -75,8 +74,8 @@ class Xog_history_stack_fxt {
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, ttl_bry);
 		Xoae_page page = Xoae_page.test_(wiki, ttl);
 		byte[] url_bry = ttl_bry;
-		if (arg_str != null) url_bry = Bry_.Add(url_bry, Bry_.new_u8(arg_str));
-		Xoa_url url = url_parser.Parse(url_bry);
+		if (arg_str != null) url_bry = Bry_.Add(url_bry, Bry_.new_u8(arg_str));			
+		Xoa_url url = app.User().Wikii().Utl__url_parser().Parse(url_bry);
 		page.Url_(url);  // set url b/c history_mgr.Add uses url
 		stack.Add(Xog_history_mgr.new_(page));
 		return this;

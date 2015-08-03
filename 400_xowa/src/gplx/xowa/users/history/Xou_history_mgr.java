@@ -16,12 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.history; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
-import gplx.core.primitives.*; import gplx.xowa.html.hrefs.*;
+import gplx.core.primitives.*; import gplx.core.net.*; import gplx.xowa.html.hrefs.*; 
 public class Xou_history_mgr implements GfoInvkAble {
 	private final Xou_history_html html_mgr = new Xou_history_html(); private Xou_history_sorter sorter = new Xou_history_sorter().Sort_fld_(Xou_history_itm.Fld_view_end).Ascending_(false);
 	private final Io_url history_fil;
 	private Ordered_hash itms = Ordered_hash_.new_bry_();
 	private boolean load_chk = false;
+	private final Bry_bfr tmp_bfr = Bry_bfr.new_();
 	public Xou_history_mgr(Io_url history_fil) {this.history_fil = history_fil;}
 	public int Len() {return itms.Count();}
 	public void Clear() {itms.Clear();}
@@ -30,7 +31,7 @@ public class Xou_history_mgr implements GfoInvkAble {
 		if (!load_chk) Load();
 		int len = itms.Count(); if (len == 0) return String_.new_a7(Xoa_page_.Main_page_bry);	// if no history, return Main_page (which should go to home/wiki/Main_page)
 		Xou_history_itm itm = (Xou_history_itm)itms.Get_at(0);
-		return String_.new_u8(Bry_.Add(itm.Wiki(), Xoh_href_parser.Href_wiki_bry, itm.Page()));
+		return String_.new_u8(Bry_.Add(itm.Wiki(), Xoh_href_.Bry__wiki, itm.Page()));
 	}
 	public Xou_history_itm Get_or_null(byte[] wiki, byte[] page) {
 		if (!load_chk) Load();
@@ -51,8 +52,8 @@ public class Xou_history_mgr implements GfoInvkAble {
 			page_ttl = page.Redirected_ttls__itm_0();
 		else {
 			page_ttl = Bry_.Add(ttl.Ns().Name_db_w_colon(), ttl.Page_txt());  // use ttl.Page_txt() b/c it normalizes space/casing (url.Page_txt does not)
-			if (url.Args().length > 0)
-				page_ttl = Bry_.Add(page_ttl, url.Args_all_as_bry());
+			if (url.Qargs_ary().length > 0)
+				page_ttl = Bry_.Add(page_ttl, url.Qargs_mgr().To_bry());
 		}
 		Add(url, ttl, page_ttl);
 	}
@@ -62,10 +63,17 @@ public class Xou_history_mgr implements GfoInvkAble {
 		byte[] key = Xou_history_itm.key_(url.Wiki_bry(), page_ttl);
 		Xou_history_itm itm = (Xou_history_itm)itms.Get_by(key);
 		if (itm == null) {
-			itm = new Xou_history_itm(url.Wiki_bry(), page_ttl);
+			itm = new Xou_history_itm(url.Wiki_bry(), To_full_db_w_qargs(url, ttl));
 			itms.Add(key, itm);
 		}
 		itm.Tally();
+	}
+	private byte[] To_full_db_w_qargs(Xoa_url url, Xoa_ttl ttl) {
+		byte[] page = Xoa_ttl.Replace_spaces(ttl.Full_txt_wo_qarg());
+		tmp_bfr.Add(page);
+		Gfo_qarg_mgr qarg_mgr = url.Qargs_mgr();
+		qarg_mgr.To_bry(tmp_bfr, Xoa_app_.Utl__encoder_mgr().Href(), Bool_.N);
+		return tmp_bfr.Xto_bry_and_clear();
 	}
 	public void Sort() {itms.Sort_by(sorter);}
 	public void Load() {

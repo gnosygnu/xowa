@@ -62,7 +62,7 @@ public class Scrib_lib_title implements Scrib_lib {
 		Xowe_wiki wiki = core.Wiki();
 		byte[] ns_bry = null;
 		if (ns_obj != null) {
-			ns_bry = Parse_ns(wiki, ns_obj); if (ns_bry == null) throw Err_.new_wo_type("unknown ns", "ns", Object_.Xto_str_strict_or_empty(ns_bry));
+			ns_bry = Parse_ns(wiki, ns_obj); if (ns_bry == null) throw Err_.new_wo_type("unknown ns", "ns", Object_.Xto_str_strict_or_empty(ns_obj));
 		}
 		if (ns_bry != null) {
 			Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
@@ -94,12 +94,12 @@ public class Scrib_lib_title implements Scrib_lib {
 		Pfunc_urlfunc.UrlString(core.Ctx(), url_func_tid, false, ttl_bry, bfr, qry_bry);
 		return rslt.Init_obj(bfr.To_str_and_rls());
 	}
-	private static final Hash_adp_bry url_func_hash = Hash_adp_bry.ci_ascii_()
+	private static final Hash_adp_bry url_func_hash = Hash_adp_bry.ci_a7()
 	.Add_str_byte("fullUrl", Pfunc_urlfunc.Tid_full)
 	.Add_str_byte("localUrl", Pfunc_urlfunc.Tid_local)
 	.Add_str_byte("canonicalUrl", Pfunc_urlfunc.Tid_canonical);
 	// private static final byte[] Proto_relative = Bry_.new_a7("relative");
-	// private static final Hash_adp_bry proto_hash = Hash_adp_bry.ci_ascii_().Add_str_obj("http", Bry_.new_a7("http://")).Add_str_obj("https", Bry_.new_a7("https://")).Add_str_obj("relative", Bry_.new_a7("//")).Add_str_obj("canonical", Bry_.new_a7("1"));
+	// private static final Hash_adp_bry proto_hash = Hash_adp_bry.ci_a7().Add_str_obj("http", Bry_.new_a7("http://")).Add_str_obj("https", Bry_.new_a7("https://")).Add_str_obj("relative", Bry_.new_a7("//")).Add_str_obj("canonical", Bry_.new_a7("1"));
 	private byte[] Parse_ns(Xowe_wiki wiki, Object ns_obj) {
 		if (ClassAdp_.Eq_typeSafe(ns_obj, String.class))
 			return Bry_.new_u8(String_.cast_(ns_obj));

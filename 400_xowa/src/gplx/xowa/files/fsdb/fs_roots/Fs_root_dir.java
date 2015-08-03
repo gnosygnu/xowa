@@ -104,7 +104,7 @@ class Fs_root_dir {
 	public static byte[] Xto_fil_bry(Io_url url) {
 		byte[] rv = Bry_.new_u8(url.NameAndExt());
 		rv = Bry_.Replace(rv, Byte_ascii.Space, Byte_ascii.Underline);
-		rv = Bry_.Upper_1st(rv);
+		rv = Bry_.Ucase__1st(rv);
 		return rv;
 	}
 }

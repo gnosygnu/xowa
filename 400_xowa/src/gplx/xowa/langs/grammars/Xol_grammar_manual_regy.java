@@ -25,7 +25,7 @@ public class Xol_grammar_manual_regy {
 	public Xol_grammar_manual_regy Itms_add(byte type_tid, String orig, String repl) {
 		Hash_adp_bry hash = ary[type_tid];
 		if (hash == null) {
-			hash = Hash_adp_bry.ci_ascii_();	// ASCII:currently only being used for Wikiuutiset; DATE:2014-07-07
+			hash = Hash_adp_bry.ci_a7();	// ASCII:currently only being used for Wikiuutiset; DATE:2014-07-07
 			ary[type_tid] = hash;
 		}
 		hash.Add_str_obj(orig, Bry_.new_a7(repl));

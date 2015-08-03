@@ -33,7 +33,7 @@ class Xop_vnt_rules_parser {
 	private byte[] cur_macro_bry = null;
 	private byte[] cur_lang_bry = null;
 	public Xop_vnt_rules_parser(Xol_vnt_mgr vnt_mgr) {
-		trie = Btrie_slim_mgr.ci_ascii_();	// NOTE:ci.ascii:MW_const.en; lang variant name; EX:zh-hans
+		trie = Btrie_slim_mgr.ci_a7();	// NOTE:ci.ascii:MW_const.en; lang variant name; EX:zh-hans
 		Xol_vnt_converter[] ary = vnt_mgr.Converter_ary();
 		int ary_len = ary.length;
 		for (int i = 0; i < ary_len; i++) {

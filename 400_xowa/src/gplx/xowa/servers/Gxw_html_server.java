@@ -27,7 +27,7 @@ public class Gxw_html_server implements Gxw_html {
 		this.usr_dlg = usr_dlg; this.wtr = wtr;			
 	} 
 	public void			Html_doc_html_load_by_mem(String html) {Exec_as_str("location.reload(true);");}	// HACK: force reload of page
-	public void			Html_doc_html_load_by_url(String path, String html) {Exec_as_str("location.reload(true);");}	// HACK: force reload of page
+	public void			Html_doc_html_load_by_url(Io_url path, String html) {Exec_as_str("location.reload(true);");}	// HACK: force reload of page
 	public byte			Html_doc_html_load_tid() {return html_doc_html_load_tid;} private byte html_doc_html_load_tid;
 	public void			Html_doc_html_load_tid_(byte v) {html_doc_html_load_tid = v;}
 	public void			Html_dispose() {}

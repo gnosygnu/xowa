@@ -54,10 +54,10 @@ public class Xob_hdump_bldr {
 	private void Hzip_data(Xoae_page page) {
 		Xowe_wiki wiki = page.Wikie();
 		Xow_hzip_mgr hzip_mgr = wiki.Html_mgr().Hzip_mgr();
-		page.File_queue().Clear();																					// need to reset uid to 0, else xowa_file_# will resume from last
-		wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_view_mode.Tid_read).Write_body(tmp_bfr, Xoh_wtr_ctx.Hdump, page);	// write to html again, except in hdump mode
-		if (hzip_enabled) hzip_mgr.Write(tmp_bfr, stats_itm, page.Url().Xto_full_bry(), tmp_bfr.Xto_bry_and_clear());					// hzip data
-		page.Hdump_data().Body_(tmp_bfr.Xto_bry_and_clear());														// write to body bry
+		page.File_queue().Clear();																								// need to reset uid to 0, else xowa_file_# will resume from last
+		wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_view_mode.Tid_read).Write_body(tmp_bfr, Xoh_wtr_ctx.Hdump, page);				// write to html again, except in hdump mode
+		if (hzip_enabled) hzip_mgr.Write(tmp_bfr, stats_itm, page.Url().To_bry_full_wo_qargs(), tmp_bfr.Xto_bry_and_clear());	// hzip data
+		page.Hdump_data().Body_(tmp_bfr.Xto_bry_and_clear());																	// write to body bry
 	}
 }
 class Xob_ns_to_db_wkr__html implements Xob_ns_to_db_wkr {

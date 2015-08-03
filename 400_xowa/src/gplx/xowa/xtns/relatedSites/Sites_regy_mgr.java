@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.xtns.relatedSites; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.wikis.xwikis.*; import gplx.xowa.pages.skins.*;
 public class Sites_regy_mgr implements GfoInvkAble {
-	private Hash_adp_bry hash = Hash_adp_bry.cs_();
+	private Hash_adp_bry hash = Hash_adp_bry.cs();
 	private Xow_xwiki_mgr xwiki_mgr;
 	public Sites_regy_mgr(Sites_xtn_mgr xtn_mgr) {this.xtn_mgr = xtn_mgr;}
 	public void Init_by_wiki(Xowe_wiki wiki) {this.xwiki_mgr = wiki.Xwiki_mgr();}

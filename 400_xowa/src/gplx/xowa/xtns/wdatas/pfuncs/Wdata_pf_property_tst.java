@@ -55,8 +55,18 @@ public class Wdata_pf_property_tst {
 	}
 	@Test   public void Quantity() {
 		fxt.Init_links_add("enwiki", "Test_page", "q1");
-		fxt.Init_pages_add(fxt.doc_("q1", fxt.Make_claim_quantity(1, "+1,234", "2", "+1,236", "+1232")));
+		fxt.Init_pages_add(fxt.doc_("q1", fxt.Make_claim_quantity(1, "+1234", "2", "+1236", "+1232")));
 		fxt.Test_parse("{{#property:p1}}", "1,234±2");
+	}
+	@Test   public void Quantity__no_plus_minus() {	// PURPOSE:do not output ± if lbound == val == ubound; PAGE:en.w:Tintinan DATE:2015-08-02
+		fxt.Init_links_add("enwiki", "Test_page", "q1");
+		fxt.Init_pages_add(fxt.doc_("q1", fxt.Make_claim_quantity(1, "+1234", "1", "+1234", "+1234")));
+		fxt.Test_parse("{{#property:p1}}", "1,234");
+	}
+	@Test   public void Quantity__long() {	// PURPOSE: must cast to long for large numbers; EX:{{#property:P1082}} PAGE:en.w:Earth; DATE:2015-08-02
+		fxt.Init_links_add("enwiki", "Test_page", "q1");
+		fxt.Init_pages_add(fxt.doc_("q1", fxt.Make_claim_quantity(1, "+4321000000", "1", "4321000000", "4321000000")));
+		fxt.Test_parse("{{#property:p1}}", "4,321,000,000");
 	}
 	@Test   public void Monolingualtext() {
 		fxt.Init_links_add("enwiki", "Test_page", "q1");
@@ -76,7 +86,7 @@ public class Wdata_pf_property_tst {
 	@Test   public void Multiple() {
 		fxt.Init_links_add("enwiki", "Test_page", "q1");
 		fxt.Init_pages_add(fxt.doc_("q1", fxt.Make_claim_str(1, "a"), fxt.Make_claim_str(1, "b")));
-		fxt.Test_parse("{{#property:p1}}", "a, b");
+		fxt.Test_parse("{{#property:p1}}", "a");	// only take first; DATE:2015-08-02
 	}
 	@Test   public void Q() {
 		fxt.Init_links_add("enwiki", "Test_page", "q2");

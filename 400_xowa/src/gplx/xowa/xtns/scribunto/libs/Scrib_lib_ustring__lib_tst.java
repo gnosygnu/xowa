@@ -70,7 +70,8 @@ public class Scrib_lib_ustring__lib_tst {
 		Exec_gsub_regx("a%b%c", "%%(%w+)%%"	, -1, Scrib_kv_utl_.flat_many_("b", "B")			, "aBc;1");
 	}
 	@Test  public void Gsub_capture() {
-		Exec_gsub_regx("aa"			, "(a)%1"				, 1, "%1z", "az;1");	// capture
+		Exec_gsub_regx("aa"			, "(a)%1"				, 1, "%0z", "aaz;1");	// capture; handle %0; PAGE:en.w:Wikipedia:Wikipedia_Signpost/Templates/Voter/testcases; DATE:2015-08-02
+		Exec_gsub_regx("aa"			, "(a)%1"				, 1, "%1z", "az;1");	// capture; handle %1+; PAGE:en.w:Wikipedia:Wikipedia_Signpost/Templates/Voter/testcases; DATE:2015-08-02
 		Exec_gsub_regx("a\"b'c\"d"	, "([\"'])(.-)%1"		, 1, "%1z", "a\"zd;1");	// capture; http://www.lua.org/pil/20.3.html; {{#invoke:test|gsub_string|a"b'c"d|(["'])(.-)%1|%1z}}
 	}
 	@Test  public void Gsub_no_replace() {// PURPOSE: gsub with no replace argument should not fail; EX:d:'orse; DATE:2013-10-14
@@ -116,19 +117,19 @@ public class Scrib_lib_ustring__lib_tst {
 		, "  1=2"
 		));
 	}
-//		@Test  public void Gsub_frontier_pattern() {	// PURPOSE: handle frontier pattern; EX:"%f[%a]"; DATE:2015-07-21
-//			fxt.Init_cbk(Scrib_core.Key_mw_interface, fxt.Core().Lib_ustring(), Scrib_lib_ustring.Invk_gsub);
-//			Exec_gsub_regx("a b c", "%f[%W]", 5, "()", "a() b() c();3");
-//			Exec_gsub_regx("abC DEF gHI JKm NOP", "%f[%a]%u+%f[%A]", Int_.MaxValue, "()", "abC () gHI JKm ();2");	// based on http://lua-users.org/wiki/FrontierPattern
-//		}
-//		@Test  public void Gsub_frontier_pattern_utl() {// PURPOSE: standalone test for \0 logic in frontier pattern; note that verified against PHP: echo(preg_match( "/[\w]/us", "\0" )); DATE:2015-07-21
-//			Tfds.Eq(Bool_.N, Regx_adp_.Match("\0", "a"));		// \0 not matched by a
-//			Tfds.Eq(Bool_.N, Regx_adp_.Match("\0", "0"));		// \0 not matched by numeric 0
-//			Tfds.Eq(Bool_.N, Regx_adp_.Match("\0", "[\\w]"));	// \0 not matched by word_char
-//			Tfds.Eq(Bool_.Y, Regx_adp_.Match("\0", "[\\W]"));	// \0 matched by !word_char
-//			Tfds.Eq(Bool_.Y, Regx_adp_.Match("\0", "[\\x]"));	// \0 matched by any_char
-//			Tfds.Eq(Bool_.Y, Regx_adp_.Match("\0", "[\\X]"));	// \0 matched by !any_char
-//		}
+	@Test  public void Gsub_frontier_pattern() {	// PURPOSE: handle frontier pattern; EX:"%f[%a]"; DATE:2015-07-21
+		fxt.Init_cbk(Scrib_core.Key_mw_interface, fxt.Core().Lib_ustring(), Scrib_lib_ustring.Invk_gsub);
+		Exec_gsub_regx("a b c", "%f[%W]", 5, "()", "a() b() c();3");
+		Exec_gsub_regx("abC DEF gHI JKm NOP", "%f[%a]%u+%f[%A]", Int_.MaxValue, "()", "abC () gHI JKm ();2");	// based on http://lua-users.org/wiki/FrontierPattern
+	}
+	@Test  public void Gsub_frontier_pattern_utl() {// PURPOSE: standalone test for \0 logic in frontier pattern; note that verified against PHP: echo(preg_match( "/[\w]/us", "\0" )); DATE:2015-07-21
+		Tfds.Eq(Bool_.N, Regx_adp_.Match("\0", "a"));		// \0 not matched by a
+		Tfds.Eq(Bool_.N, Regx_adp_.Match("\0", "0"));		// \0 not matched by numeric 0
+		Tfds.Eq(Bool_.N, Regx_adp_.Match("\0", "[\\w]"));	// \0 not matched by word_char
+		Tfds.Eq(Bool_.Y, Regx_adp_.Match("\0", "[\\W]"));	// \0 matched by !word_char
+		Tfds.Eq(Bool_.Y, Regx_adp_.Match("\0", "[\\x]"));	// \0 matched by any_char
+		Tfds.Eq(Bool_.Y, Regx_adp_.Match("\0", "[\\X]"));	// \0 matched by !any_char
+	}
 //		@Test  public void Match_viwiktionary() {
 //			fxt.Init_cbk(Scrib_core.Key_mw_interface, fxt.Core().Lib_ustring(), Scrib_lib_ustring.Invk_match);
 //			Exec_match("tr"	, "()(r)", 1, ";");						// should return all matches

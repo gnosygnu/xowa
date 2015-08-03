@@ -36,7 +36,7 @@ public class Xop_amp_mgr_decode_tst {
 	@Test  public void Num_ignore_extra_x()			{fxt.Test_decode_as_bry("&#xx26D0;"			, Char_.XtoStr(Char_.XbyInt(9936)));}	// 2nd x is ignored
 }
 class Xop_amp_mgr_fxt {
-	private Xop_amp_mgr amp_mgr = new Xop_amp_mgr();
+	private Xop_amp_mgr amp_mgr = Xop_amp_mgr.I;
 	public void Reset() {}
 	public void Test_decode_as_bry(String raw, String expd) {
 		Tfds.Eq(expd, String_.new_u8(amp_mgr.Decode_as_bry(Bry_.new_u8(raw))));

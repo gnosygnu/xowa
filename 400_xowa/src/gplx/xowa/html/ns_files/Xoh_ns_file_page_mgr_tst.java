@@ -108,7 +108,7 @@ class Xoh_ns_file_page_mgr_fxt {
 //			file.Orig_ttl_and_redirect_(ttl_bry, Bry_.Empty);
 		file.Init_at_orig(Byte_.Zero, wiki.Domain_bry(), ttl_bry, Xof_ext_.new_by_ttl_(ttl_bry), 0, 0, Bry_.Empty);
 		file.Init_at_hdoc(0, Xof_html_elem.Tid_img);
-		wkr.Bld_html(wiki, bfr, file, ttl, opt, Bry_.XtoStrBytesByInt(html_file_size, 0), play_btn_icon);	// TEST: must pass in elem_val b/c test only uses 2nd Bld_html while app uses 1st
+		wkr.Bld_html(wiki, bfr, file, ttl, opt, Bry_.To_a7_bry(html_file_size, 0), play_btn_icon);	// TEST: must pass in elem_val b/c test only uses 2nd Bld_html while app uses 1st
 		Tfds.Eq_str_lines(expd, bfr.Xto_str_and_clear());
 	}	static final byte[] play_btn_icon = Bry_.new_a7("file:///mem/xowa/user/test_user/app/img/file/play.png");
 	public static final String Hdr = String_.Concat_lines_nl_skip_last

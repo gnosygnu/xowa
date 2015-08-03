@@ -35,13 +35,12 @@ public class Xoh_subpages_bldr_tst {
 }
 class Xoh_subpages_bldr_fxt {
 	private Xoae_app app;
-	private Xoh_subpages_bldr subpages_bldr;
+	private Xoh_subpages_bldr subpages_bldr = new Xoh_subpages_bldr();
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public void Init() {
 		this.app = Xoa_app_fxt.app_();
 		this.wiki = Xoa_app_fxt.wiki_tst_(app);
 		wiki.Ns_mgr().Ids_get_or_null(Xow_ns_.Id_help).Subpages_enabled_(true);
-		this.subpages_bldr = new Xoh_subpages_bldr(app);
 	}
 	public void Test_bld(String ttl_str, String expd) {
 		byte[] actl = subpages_bldr.Bld(wiki.Ns_mgr(), Xoa_ttl.parse_(wiki, Bry_.new_u8(ttl_str)));

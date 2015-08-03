@@ -25,8 +25,8 @@ public class TimeSpanAdp_ {
 		long fracs = (long)(seconds * Divisors[Idx_Sec]);
 		return new TimeSpanAdp(fracs);
 	}
-	public static TimeSpanAdp decimal_(DecimalAdp seconds)	{
-		return new TimeSpanAdp(seconds.Xto_long_mult_1000());
+	public static TimeSpanAdp decimal_(Decimal_adp seconds)	{
+		return new TimeSpanAdp(seconds.To_long_mult_1000());
 	}
 	public static TimeSpanAdp units_(int frc, int sec, int min, int hour) {
 		int[] units = new int[] {frc, sec, min, hour};

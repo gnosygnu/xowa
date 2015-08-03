@@ -211,7 +211,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		switch (defn.Defn_tid()) {
 			case Xot_defn_.Tid_null:	// defn is unknown
 				if (ignore_hash == null) {					// ignore SafeSubst templates
-					ignore_hash = Hash_adp_bry.ci_ascii_();
+					ignore_hash = Hash_adp_bry.ci_a7();
 					ignore_hash.Add_str_obj("Citation needed{{subst", String_.Empty);
 					ignore_hash.Add_str_obj("Clarify{{subst", String_.Empty);
 				}

@@ -13,7 +13,6 @@
 	<classpathentry kind="src" path="src_210_bldr_core"/>
 	<classpathentry kind="src" path="src_240_install"/>
 	<classpathentry kind="src" path="src_300_html"/>
-	<classpathentry kind="src" path="src_310_url"/>
 	<classpathentry kind="src" path="src_400_parser"/>
 	<classpathentry kind="src" path="src_405_tkn"/>
 	<classpathentry kind="src" path="src_409_tkn_misc"/>

@@ -164,9 +164,9 @@ public class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 			sb.Add(Object_.Xto_str_strict_or_null(val));
 		else if (val_type == DateAdp.class)
 			Bld_val_date(sb, arg, (DateAdp)val);
-		else if (val_type == DecimalAdp.class) {
-			DecimalAdp valDecimal = (DecimalAdp)val;				
-			sb.Add(valDecimal.Xto_str());
+		else if (val_type == Decimal_adp.class) {
+			Decimal_adp valDecimal = (Decimal_adp)val;				
+			sb.Add(valDecimal.To_str());
 		}
 		else {
 			String valString = Object_.Xto_str_strict_or_null(val);

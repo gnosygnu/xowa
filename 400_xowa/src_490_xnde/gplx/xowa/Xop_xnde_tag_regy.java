@@ -54,8 +54,8 @@ public class Xop_xnde_tag_regy {
 		}
 	}
 	private Btrie_slim_mgr
-	  tag_regy_wiki_main	= Btrie_slim_mgr.ci_utf_8_()	// NOTE:ci.utf8; he.s and <section> alias DATE:2014-07-18
-	, tag_regy_wiki_tmpl	= Btrie_slim_mgr.ci_utf_8_()
-	, tag_regy_tmpl			= Btrie_slim_mgr.ci_utf_8_()
+	  tag_regy_wiki_main	= Btrie_slim_mgr.ci_u8()	// NOTE:ci.utf8; he.s and <section> alias DATE:2014-07-18
+	, tag_regy_wiki_tmpl	= Btrie_slim_mgr.ci_u8()
+	, tag_regy_tmpl			= Btrie_slim_mgr.ci_u8()
 	;
 }

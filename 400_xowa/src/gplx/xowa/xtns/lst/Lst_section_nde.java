@@ -40,7 +40,7 @@ public class Lst_section_nde implements Xox_xnde, Xop_xnde_atr_parser {
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_xnde_tkn xnde, byte[] src) {}	// NOTE: write nothing; <section> is just a bookmark
 	public static final byte Xatr_name = 0, Xatr_bgn = 1, Xatr_end = 2;
 	public static Hash_adp_bry new_xatrs_(Xol_lang lang) {
-		Hash_adp_bry rv = Hash_adp_bry.ci_utf8_(lang.Case_mgr());	// UTF8:see xatrs below
+		Hash_adp_bry rv = Hash_adp_bry.ci_u8(lang.Case_mgr());	// UTF8:see xatrs below
 		rv.Add_str_byte("name", Lst_section_nde.Xatr_name);
 		Xatrs_add(rv, "begin", "end");
 		switch (lang.Lang_id()) {	// NOTE: as of v315572b, i18n is done directly in code, not in magic.php; am wary of adding keywords for general words like begin/end, so adding them manually per language; DATE:2013-02-09

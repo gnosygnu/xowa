@@ -108,7 +108,7 @@ class Xop_languages_fmtr implements Bry_fmtr_arg {
 	}	private List_adp langs; private Xowe_wiki wiki; private Xoa_ttl root_ttl; private byte[] cur_lang;
 	public void XferAry(Bry_bfr bfr, int idx) {
 		int len = langs.Count();
-		Xoh_href_parser parser = wiki.Appe().Href_parser();
+		Xoh_href_wtr href_wtr = wiki.Appe().Html__href_wtr();
 		int ns_id = root_ttl.Ns().Id();
 		byte[] root_ttl_bry = root_ttl.Page_db();	// NOTE: do not use .Full(); ns will be added in Xoa_ttl.parse below
 		for (int i = 0; i < len; i++) {
@@ -117,7 +117,7 @@ class Xop_languages_fmtr implements Bry_fmtr_arg {
 			boolean lang_is_en = Bry_.Eq(lang_key, Xol_lang_.Key_en);
 			byte[] lang_ttl_bry = lang_is_en ? root_ttl_bry : Bry_.Add_w_dlm(Xoa_ttl.Subpage_spr, root_ttl_bry, lang_key);
 			Xoa_ttl lang_ttl = Xoa_ttl.parse_(wiki, ns_id, lang_ttl_bry);
-			byte[] lang_href = parser.Build_to_bry(wiki, lang_ttl);
+			byte[] lang_href = href_wtr.Build_to_bry(wiki, lang_ttl);
 			byte[] lang_title = Xoh_html_wtr.Ttl_to_title(lang_ttl.Full_txt());
 			Bry_fmtr fmtr = null;
 			if		(Bry_.Eq(lang_key, Xol_lang_.Key_en)) 	fmtr = Xop_languages_xnde.fmtr_itm_english;

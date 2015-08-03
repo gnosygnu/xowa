@@ -26,15 +26,15 @@ public class Pfunc_case_tst {
 	@Test  public void Uc()					{fxt.Test_parse_tmpl_str_test("{{uc:abc}}"					, "{{test}}", "ABC");}
 	@Test  public void Uc_first()			{fxt.Test_parse_tmpl_str_test("{{ucfirst:abc}}"				, "{{test}}", "Abc");}
 	@Test  public void Multi_byte()			{// NOTE: separate test b/c will sometimes fail in suite
-		fxt.Wiki().Lang().Case_mgr_utf8_();
+		fxt.Wiki().Lang().Case_mgr_u8_();
 		fxt.Test_parse_tmpl_str_test("{{uc:ĉ}}"						, "{{test}}", "Ĉ");					// upper all
 	}
 	@Test  public void Multi_byte_asymmetric() {
-		fxt.Wiki().Lang().Case_mgr_utf8_();
+		fxt.Wiki().Lang().Case_mgr_u8_();
 		fxt.Test_parse_tmpl_str_test("{{uc:ⱥ}}"						, "{{test}}", "Ⱥ");					// handle multi-byte asymmetry (lc is 3 bytes; uc is 2 bytes)
 	}
 	@Test  public void Multi_byte_first() {
-		fxt.Wiki().Lang().Case_mgr_utf8_();
+		fxt.Wiki().Lang().Case_mgr_u8_();
 		fxt.Test_parse_tmpl_str_test("{{ucfirst:провинция}}"		, "{{test}}", "Провинция");			// upper first; DATE:2014-02-04
 	}
 }

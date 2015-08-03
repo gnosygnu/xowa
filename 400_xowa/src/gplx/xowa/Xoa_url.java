@@ -1,0 +1,118 @@
+/*
+XOWA: the XOWA Offline Wiki Application
+Copyright (C) 2012 gnosygnu@gmail.com
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+package gplx.xowa; import gplx.*;
+import gplx.core.net.*; import gplx.xowa.urls.*;
+import gplx.xowa.html.hrefs.*;
+public class Xoa_url {
+	public int				Tid() {return tid;} private int tid;
+	public byte[]			Raw() {return raw;} private byte[] raw = Bry_.Empty;
+	public byte[]			Wiki_bry() {return wiki_bry;} public Xoa_url Wiki_bry_(byte[] v) {wiki_bry = v; return this;} private byte[] wiki_bry;
+	public byte[]			Page_bry() {return page_bry;} public Xoa_url Page_bry_(byte[] v) {page_bry = v; return this;} private byte[] page_bry;
+	public byte[]			Anch_bry() {return anch_bry;} public Xoa_url Anch_bry_(byte[] v) {anch_bry = v; return this;} private byte[] anch_bry;
+	public String			Anch_str() {return anch_bry == null ? null : String_.new_u8(anch_bry);}
+	public byte[][]			Segs_ary() {return segs_ary;} private byte[][] segs_ary;
+	public Gfo_qarg_itm[]	Qargs_ary() {return qargs_ary;} public Xoa_url Qargs_ary_(Gfo_qarg_itm[] v) {qargs_ary = v; return this;} private Gfo_qarg_itm[] qargs_ary = Gfo_qarg_itm.Ary_empty;
+	public Gfo_qarg_mgr		Qargs_mgr() {if (qargs_mgr == null) qargs_mgr = new Gfo_qarg_mgr().Load(qargs_ary); return qargs_mgr;} private Gfo_qarg_mgr qargs_mgr;
+	public byte				Protocol_tid() {return protocol_tid;} private byte protocol_tid;
+	public byte[]			Protocol_bry() {return protocol_bry;} private byte[] protocol_bry;
+	public boolean				Protocol_is_relative() {return protocol_is_relative;} private boolean protocol_is_relative;
+	public byte[]			Vnt_bry() {return vnt_bry;} private byte[] vnt_bry;
+	public boolean				Wiki_is_missing() {return wiki_is_missing;} private boolean wiki_is_missing;
+	public boolean				Wiki_is_same() {return wiki_is_same;} private boolean wiki_is_same;
+	public boolean				Page_is_main() {return page_is_main;} private boolean page_is_main;
+	public Xoa_url Ctor(int tid, byte[] raw, byte protocol_tid, byte[] protocol_bry, boolean protocol_is_relative
+		, byte[] wiki, byte[] page, Gfo_qarg_itm[] qargs,  byte[] anch
+		, byte[][] segs_ary, byte[] vnt_bry, boolean wiki_is_missing, boolean wiki_is_same, boolean page_is_main) {
+		this.tid = tid; this.raw = raw;
+		this.protocol_tid = protocol_tid; this.protocol_bry = protocol_bry; this.protocol_is_relative = protocol_is_relative;
+		this.wiki_bry = wiki; this.page_bry = page; this.qargs_ary = qargs; this.anch_bry = anch;
+		this.segs_ary = segs_ary; this.vnt_bry = vnt_bry;
+		this.wiki_is_missing = wiki_is_missing; this.wiki_is_same = wiki_is_same; this.page_is_main = page_is_main;
+		return this;
+	}
+	public byte[] Page_for_lnki() {
+		int raw_len = raw.length;
+		int page_bgn = Page_bgn(raw_len);
+		if (page_bgn == Bry_.NotFound)	// no /wiki/ found; return page
+			return page_bry == null ? Bry_.Empty : page_bry;	// guard against null ref
+		else
+			return Bry_.Mid(raw, page_bgn, raw_len);// else take everything after "/wiki/";
+	}
+	private int Page_bgn(int raw_len) {
+		int wiki_pos = Bry_finder.Find_fwd(raw, Xoh_href_.Bry__wiki, 0, raw_len);	 // look for /wiki/
+		return wiki_pos == Bry_.NotFound ? Bry_.NotFound : wiki_pos + Xoh_href_.Bry__wiki.length;
+	}
+	public boolean Eq_page(Xoa_url comp) {return Bry_.Eq(wiki_bry, comp.wiki_bry) && Bry_.Eq(page_bry, comp.page_bry) && this.Qargs_mgr().Match(Xoa_url_.Qarg__redirect, Xoa_url_.Qarg__redirect__yes) == comp.Qargs_mgr().Match(Xoa_url_.Qarg__redirect, Xoa_url_.Qarg__redirect__yes);}
+	public String To_str()					{return String_.new_u8(To_bry(Bool_.Y, Bool_.Y));}
+	public byte[] To_bry_page_w_anch()		{
+		byte[] page = page_bry, anch = anch_bry;
+		byte[] anch_spr = anch == null ? null : Byte_ascii.Hash_bry;
+		return Bry_.Add(page, anch_spr, anch);
+	}
+	public byte[] To_bry_full_wo_qargs()	{return To_bry(Bool_.Y, Bool_.N);}
+	public byte[] To_bry(boolean full, boolean show_qargs) {							// currently used for status bar; not embedded in any html
+		switch (tid) {
+			case Xoa_url_.Tid_unknown:											// unknown; should not occur?
+				return Bry_.Len_eq_0(raw) ? Bry_.Add(wiki_bry, Byte_ascii.Slash_bry, page_bry) : raw;	// raw is empty when using new_();
+			case Xoa_url_.Tid_inet:												// protocol; embed all; EX: "http://a.org/A"; "file:///C/dir/file.txt"
+			case Xoa_url_.Tid_file:												// file; EX: "file:///C:/A/B.jpg"
+				return raw;
+			case Xoa_url_.Tid_xcmd:												// xcmd; embed page only; EX: "xowa.usr.bookmarks.add"
+				return page_bry;
+			default:
+				throw Err_.new_unhandled(tid);
+			case Xoa_url_.Tid_anch:
+			case Xoa_url_.Tid_page:
+				break;
+		}
+		byte[] wiki = wiki_bry, page = page_bry, anch = anch_bry;
+		byte[] wiki_spr = vnt_bry == null ? Xoh_href_.Bry__wiki : Bry_.Add(Byte_ascii.Slash_bry, vnt_bry, Byte_ascii.Slash_bry);
+		byte[] anch_spr = anch == null ? null : Byte_ascii.Hash_bry;
+		if (!full) {
+			boolean tid_is_anch = tid == Xoa_url_.Tid_anch;
+			if (	wiki_is_same										// same wiki; don't show wiki; EX: "/wiki/A" -> "A" x> "en.wikipedia.org/wiki/A"
+				||	tid_is_anch) {										// anch never shows wiki;	EX: #A
+				wiki = wiki_spr = null;									// don't show wiki;
+			}
+			if (tid_is_anch)
+				page = null;
+		}
+		byte[] rv = Bry_.Add
+		( wiki, wiki_spr												// add wiki_key;	EX: "en.wikipedia.org", "/wiki/"
+		, page															// add page;		EX: "A"
+		, anch_spr, anch												// add anch			EX: "#", "B"
+		);
+		if (show_qargs || qargs_ary.length > 0) {
+			Bry_bfr bfr = Xoa_app_.Utl__bfr_mkr().Get_b128();
+			bfr.Add(rv);
+			Gfo_qarg_mgr.Concat_bfr(bfr, Xoa_app_.Utl__encoder_mgr().Href(), qargs_ary);
+			return bfr.To_bry_and_rls();
+		}
+		else
+			return rv;
+	}
+	public static final Xoa_url Null = null;
+	public static Xoa_url blank() {return new Xoa_url();}
+	public static Xoa_url new_(byte[] wiki, byte[] page) {
+		Xoa_url rv = new Xoa_url();
+		rv.Wiki_bry_(wiki);
+		rv.Page_bry_(page);
+		rv.tid = Xoa_url_.Tid_page;
+		return rv;
+	}	Xoa_url() {}
+}

@@ -49,21 +49,24 @@ public class Xoa_maint_mgr implements GfoInvkAble {
 	}
 	public boolean Wmf_status_parse() {
 		Wmf_dump_list_parser parser = new Wmf_dump_list_parser();
-		Hash_adp_bry itms_hash = Hash_adp_bry.cs_();		
+		Hash_adp_bry itms_hash = Hash_adp_bry.cs();		
 		Wmf_dump_itm[] itms = parser.Parse(Io_mgr.I.LoadFilBry(wmf_dump_status_url));
 		int len = itms.length;
+		Xoa_app_.Usr_dlg().Log_many("", "", "maint.html count; count=~{0}", len);
 		for (int i = 0; i < len; i++) {
 			Wmf_dump_itm itm = itms[i];
 			byte[] wiki_abrv = itm.Wiki_abrv();
+			Xoa_app_.Usr_dlg().Log_many("", "", "maint.html itm; itm=~{0}", wiki_abrv);
 			byte[] wiki_domain = Xow_wiki_alias.Parse__domain_name(wiki_abrv, 0, wiki_abrv.length);
 			if (wiki_domain == Xow_wiki_alias.Parse__domain_name_null) continue;	// invalid wiki-name; ex: nycwikimedia
 			itms_hash.Add(wiki_domain, itm);
 		}
 		len = app.Wiki_mgr().Count();
+		Xoa_app_.Usr_dlg().Log_many("", "", "maint.wiki_count; count=~{0}", len);
 		for (int i = 0; i < len; i++) {
 			Xowe_wiki wiki = app.Wiki_mgr().Get_at(i);
-			Wmf_dump_itm itm = (Wmf_dump_itm)itms_hash.Get_by_bry(wiki.Domain_bry());
-			if (itm == null) continue;
+			Xoa_app_.Usr_dlg().Log_many("", "", "maint.wiki_itm; wiki=~{0}", wiki.Domain_str());
+			Wmf_dump_itm itm = (Wmf_dump_itm)itms_hash.Get_by_bry(wiki.Domain_bry()); if (itm == null) continue;
 			wiki.Maint_mgr().Wmf_dump_date_(itm.Dump_date()).Wmf_dump_done_(itm.Status_tid() == Wmf_dump_itm.Status_tid_complete).Wmf_dump_status_(itm.Status_msg());
 		}
 		return true;

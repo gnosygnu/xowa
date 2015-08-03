@@ -116,7 +116,7 @@ class Gallery_xnde_atrs {
 	, Style_tid			= 6
 	, Class_tid			= 7
 	;
-	public static Hash_adp_bry Key_hash = Hash_adp_bry.ci_ascii_()
+	public static Hash_adp_bry Key_hash = Hash_adp_bry.ci_a7()
 	.Add_str_byte("mode"			, Mode_tid)
 	.Add_str_byte("perrow"			, Perrow_tid)
 	.Add_str_byte("widths"			, Widths_tid)

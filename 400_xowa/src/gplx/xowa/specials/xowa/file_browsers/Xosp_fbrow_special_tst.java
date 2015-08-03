@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.xowa.file_browsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*; import gplx.xowa.specials.xowa.*;
-import org.junit.*; import gplx.ios.*;
+import org.junit.*; import gplx.core.net.*; import gplx.ios.*;
 public class Xosp_fbrow_special_tst {
 	@Before public void init() {fxt.Clear();} private Xosp_fbrow_special_fxt fxt = new Xosp_fbrow_special_fxt();
 	@Test    public void Basic() {
@@ -136,8 +136,8 @@ class Xosp_fbrow_special_fxt {
 	}
 	public void Test_nav(String path, String expd) {
 		Xoa_url_arg_mgr args_mgr = new Xoa_url_arg_mgr(null);
-		Xoa_url url = Xoa_url.new_(Bry_.Empty, Bry_.Empty).Args_(Gfo_url_arg.Ary("cmd", "xowa.wiki.add", "mode", "view", "path", path));
-		args_mgr.Init(url.Args());
+		Xoa_url url = Xoa_url.new_(Bry_.Empty, Bry_.Empty).Qargs_ary_(Gfo_qarg_itm.Ary("cmd", "xowa.wiki.add", "mode", "view", "path", path));
+		args_mgr.Init(url.Qargs_ary());
 		Xosp_fbrow_cmd__wiki_add cmd = new Xosp_fbrow_cmd__wiki_add();
 		byte[] actl = cmd.Write_html(args_mgr, GfoInvkAble_.Null).Html_body();
 		Tfds.Eq_str_lines(expd, String_.new_u8(actl));

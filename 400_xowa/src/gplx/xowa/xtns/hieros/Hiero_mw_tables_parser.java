@@ -114,5 +114,5 @@ public class Hiero_mw_tables_parser {
 		Io_mgr.I.SaveFilBfr(save_fil, bldr.Bfr());
 	}
 	private static final byte Tid_prefabs = 0, Tid_files = 1, Tid_phonemes = 2;
-	private static Hash_adp_bry Tid_hash = Hash_adp_bry.cs_().Add_str_byte("wh_prefabs", Tid_prefabs).Add_str_byte("wh_files", Tid_files).Add_str_byte("wh_phonemes", Tid_phonemes);
+	private static Hash_adp_bry Tid_hash = Hash_adp_bry.cs().Add_str_byte("wh_prefabs", Tid_prefabs).Add_str_byte("wh_files", Tid_files).Add_str_byte("wh_phonemes", Tid_phonemes);
 }

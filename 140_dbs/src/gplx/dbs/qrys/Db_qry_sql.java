@@ -71,8 +71,8 @@ public class Db_qry_sql implements Db_qry {
 			bfr.Add_byte(Byte_.cast_(val));
 		else if (ClassAdp_.Eq(val_type, DateAdp_.Cls_ref_type))
 			bfr.Add_byte_apos().Add_str(DateAdp_.cast_(val).XtoStr_gplx_long()).Add_byte_apos();
-		else if (ClassAdp_.Eq(val_type, DecimalAdp_.Cls_ref_type))
-			bfr.Add_str(DecimalAdp_.cast_(val).Xto_str());
+		else if (ClassAdp_.Eq(val_type, Decimal_adp_.Cls_ref_type))
+			bfr.Add_str(Decimal_adp_.cast_(val).To_str());
 		else {
 			byte[] val_bry = Bry_.new_u8(Object_.Xto_str_strict_or_null(val));
 			val_bry = Bry_.Replace(val_bry, Byte_ascii.Apos_bry, Bry_escape_apos);

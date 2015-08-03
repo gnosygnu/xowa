@@ -25,7 +25,10 @@ public class Pfunc_scrib_lib_tst {
 		lib.Init();
 		lib.Core_(fxt.Core());
 	}	private Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt(); private Pfunc_scrib_lib lib;
-	@Test   public void Expr() {
+	@Test   public void Expr__pass() {
 		fxt.Test_scrib_proc_str(lib, Pfunc_scrib_lib.Invk_expr, Object_.Ary("1 + 2")						, "3");
+	}
+	@Test   public void Expr__fail() {	// PURPOSE: if bad input don't throw error; return error message; PAGE:es.w:Freer_(Texas) DATE:2015-07-28
+		fxt.Test_scrib_proc_str(lib, Pfunc_scrib_lib.Invk_expr, Object_.Ary("fail")							, "<strong class=\"error\">Expression error: Unrecognised word \"fail\"</strong>");
 	}
 }	

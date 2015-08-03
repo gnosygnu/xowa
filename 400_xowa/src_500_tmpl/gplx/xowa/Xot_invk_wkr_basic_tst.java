@@ -223,7 +223,7 @@ public class Xot_invk_wkr_basic_tst {
 	@Test  public void Recurse() {
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("test_recurse", "bgn:{{test_recurse}}:end");
-		fxt.Test_parse_page_all_str("{{test_recurse}}", "bgn:<span class=\"error\">Template loop detected:test_recurse</span>:end");
+		fxt.Test_parse_page_all_str("{{test_recurse}}", "bgn::end");
 		fxt.Init_defn_clear();
 	}
 	@Test  public void Ws_nl() {

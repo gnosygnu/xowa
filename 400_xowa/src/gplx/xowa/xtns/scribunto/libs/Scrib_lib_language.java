@@ -183,11 +183,20 @@ public class Scrib_lib_language implements Scrib_lib {
 		boolean utc = args.Cast_bool_or_n(3);
 		Bry_bfr tmp_bfr = core.App().Utl__bfr_mkr().Get_b512();
 		Pft_fmt_itm[] fmt_ary = Pft_fmt_itm_.Parse(core.Ctx(), fmt_bry);
-		DateAdp date 
-			= Bry_.Len_eq_0(date_bry)
-			? DateAdp_.Now()
-			: Pft_func_time.ParseDate(date_bry, utc, tmp_bfr)
-			;	// NOTE: MW is actually more strict about date; however, not sure about PHP's date parse, so using more lax version
+		DateAdp date = null;
+		if (Bry_.Len_eq_0(date_bry))
+			date = DateAdp_.Now();
+		else {				
+			if (date_bry[0] == Byte_ascii.Plus) {				// detect wikidata-style dates; EX: +00000002010-05-01T00:00:00Z; PAGE:en.w:Mountain_Province; DATE:2015-07-29
+				int date_bry_len = date_bry.length;
+				if (	date_bry[date_bry_len -  1] == Byte_ascii.Ltr_Z
+					&&	date_bry[date_bry_len - 10] == Byte_ascii.Ltr_T) {
+					int year_bgn = Bry_finder.Find_fwd_while(date_bry, 1, date_bry_len, Byte_ascii.Num_0);
+					date_bry = Bry_.Mid(date_bry, year_bgn);	// lop off beginning "+000000..."
+				}
+			}
+			date = Pft_func_time.ParseDate(date_bry, utc, tmp_bfr);	// NOTE: not using java's datetime parse b/c it is more strict; not reconstructing PHP's datetime parse b/c it is very complicated (state machine); re-using MW's parser b/c it is inbetween; DATE:2015-07-29
+		}
 		if (date == null || tmp_bfr.Len() > 0) {tmp_bfr.Mkr_rls(); return rslt.Init_fail("bad argument #2 to 'formatDate' (not a valid timestamp)");}
 		Pft_func_formatdate.Date_bldr().Format(tmp_bfr, core.Wiki(), lang, date, fmt_ary);
 		byte[] rv = tmp_bfr.To_bry_and_rls();

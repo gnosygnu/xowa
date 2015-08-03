@@ -35,7 +35,7 @@ public class Wdata_dict_value_quantity {
 	, Bry_upperbound							= Bry_.new_a7(Str_upperbound)
 	, Bry_lowerbound							= Bry_.new_a7(Str_lowerbound)
 	;
-	public static final Hash_adp_bry Dict = Hash_adp_bry.cs_()
+	public static final Hash_adp_bry Dict = Hash_adp_bry.cs()
 	.Add_bry_byte(Bry_amount					, Tid_amount)
 	.Add_bry_byte(Bry_unit						, Tid_unit)
 	.Add_bry_byte(Bry_upperbound				, Tid_upperbound)

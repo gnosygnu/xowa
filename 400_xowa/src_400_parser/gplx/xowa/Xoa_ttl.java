@@ -94,6 +94,13 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 	}
 	public static Xoa_ttl parse_(Xowe_wiki wiki, byte[] raw) {return new_(wiki, wiki.Appe().Msg_log(), raw, 0, raw.length);}
 	private static final Object thread_lock = new Object();
+	// $dbkey = preg_replace( '/\xE2\x80[\x8E\x8F\xAA-\xAE]/S', '', $dbkey );
+	// $dbkey = preg_replace( '/[ _\xA0\x{1680}\x{180E}\x{2000}-\x{200A}\x{2028}\x{2029}\x{202F}\x{205F}\x{3000}]+/u', '_', $dbkey );
+	private static final int Char__bidi = 1, Char__ws = 2;
+	private static final Btrie_slim_mgr char_trie = Btrie_slim_mgr.cs()
+	.Add_many_int(Char__bidi	, "\u00E2\u0080\u008E", "\u00E2\u0080\u008F", "\u00E2\u0080\u00AA", "\u00E2\u0080\u00AB", "\u00E2\u0080\u00AC", "\u00E2\u0080\u00AD", "\u00E2\u0080\u00AE")
+	.Add_many_int(Char__ws		, "\u00A0", "\u1680", "\u180E", "\u2000", "\u2001", "\u2002", "\u2003", "\u2004", "\u2005", "\u2006", "\u2007", "\u2008", "\u2009", "\u200A", "\u2028", "\u2029", "\u202F", "\u205F", "\u3000")
+	;
 	public static Xoa_ttl new_(Xowe_wiki wiki, Gfo_msg_log msg_log, byte[] src, int bgn, int end) {
 		Xoae_app app = wiki.Appe();
 		Bry_bfr_mkr bry_mkr = app.Utl__bfr_mkr();
@@ -120,7 +127,6 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 		FUTURE:
 		- "/", "a/" (should be page); "#" (not a page)
 		- Talk:Help:a disallowed; Category talk:Help:a allowed
-		- forbid extended ws: '/[ _\xA0\x{1680}\x{180E}\x{2000}-\x{200A}\x{2028}\x{2029}\x{202F}\x{205F}\x{3000}]+/u'
 		- remove invalid characters $rxTc
 		- forbid ./ /.
 		- forbid ~~~
@@ -217,7 +223,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 										cur = match_pos; // set cur after ";"
 										continue;
 									case Byte_ascii.Amp:
-										b_ary = Byte_ascii.Amp_bry;		// NTOE: if &amp; convert to &; PAGE:en.w:Amadou Bagayoko?redirect=n; DATE:2014-09-23
+										b_ary = Byte_ascii.Amp_bry;		// NOTE: if &amp; convert to &; PAGE:en.w:Amadou Bagayoko?redirect=n; DATE:2014-09-23
 										break;
 									case Byte_ascii.Quote:
 									case Byte_ascii.Lt:
@@ -233,7 +239,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 										}
 										break;
 									default:
-										b_ary = amp_itm.Utf8_bry();
+										b_ary = amp_itm.U8_bry();
 										break;
 								}
 							}
@@ -294,20 +300,22 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 						return false;
 					}
 					break;
-				case Bidi_0_E2:
-					if (cur + 2 < end) {
-						if (	src[cur + 1] == Bidi_1_80) {
-							switch (src[cur + 2]) {
-								case Bidi_2_8E: case Bidi_2_8F: case Bidi_2_AA: case Bidi_2_AB: case Bidi_2_AC: case Bidi_2_AD: case Bidi_2_AE:
-									cur += 3;
+				default:
+					if ((b & 0xff) > 127) {// PATCH.JAVA:need to convert to unsigned byte
+						Object char_obj = char_trie.Match_bgn_w_byte(b, src, cur, end);
+						if (char_obj != null) {
+							int tid = ((Int_obj_val)(char_obj)).Val();
+							switch (tid) {
+								case Char__bidi:	// ignore bidi
+									cur = char_trie.Match_pos();
 									continue;
-								default:
-									break;							
-							}
+								case Char__ws:		// treat extended_ws as space; PAGE:ja.w:Template:Location_map_USA New_York; DATE:2015-07-28
+									cur = char_trie.Match_pos();
+									if (ltr_bgn != -1) add_ws = true;
+									continue;
+							}								
 						}
 					}
-					break;
-				default:
 					break;
 			}
 			++cur;
@@ -362,17 +370,6 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 	public static final int Wik_bgn_int = -1;
 	public static final byte Subpage_spr = Byte_ascii.Slash;	// EX: A/B/C
 	public static final int Anch_bgn_anchor_only = 1;	// signifies lnki which is only anchor; EX: [[#anchor]]
-	private static final byte 	// NOTE: Bidi characters appear in File titles /\xE2\x80[\x8E\x8F\xAA-\xAE]/S
-		Bidi_0_E2 	= (byte)226
-	,	Bidi_1_80 	= (byte)128
-	,	Bidi_2_8E 	= (byte)142
-	,	Bidi_2_8F	= (byte)143
-	,	Bidi_2_AA	= (byte)170
-	,	Bidi_2_AB	= (byte)171
-	,	Bidi_2_AC	= (byte)172
-	,	Bidi_2_AD	= (byte)173
-	,	Bidi_2_AE	= (byte)174
-	;
 	public static final int Max_len = 2048;	// ASSUME: max len of 256 * 8 bytes
 	public static final int Null_wik_bgn = -1;
 	public static final Xoa_ttl Null = null;

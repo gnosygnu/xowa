@@ -25,7 +25,7 @@ public class Pfunc_pad_tst {
 	@Test   public void L_len_neg1()		{fxt.Test_parse_tmpl_str_test("{{padleft: a|-1|01}}"			, "{{test}}"	, "a");}
 	@Test   public void L_val_null()		{fxt.Test_parse_tmpl_str_test("{{padleft: |4|0}}"				, "{{test}}"	, "0000");}
 	@Test   public void L_word_3()			{fxt.Test_parse_tmpl_str_test("{{padleft: abc|4}}"				, "{{test}}"	, "0abc");}
-	@Test   public void L_word_3_utf8()		{fxt.Test_parse_tmpl_str_test("{{padleft: niǎo|5}}"				, "{{test}}"	, "0niǎo");}	// PURPOSE:use length of String in chars, not bytes; PAGE:zh.d:不 DATE:2014-08-27
+	@Test   public void L_word_3_u8()		{fxt.Test_parse_tmpl_str_test("{{padleft: niǎo|5}}"				, "{{test}}"	, "0niǎo");}	// PURPOSE:use length of String in chars, not bytes; PAGE:zh.d:不 DATE:2014-08-27
 	@Test   public void L_exc_len_bad1()	{fxt.Test_parse_tmpl_str_test("{{padleft:a|bad|01}}"			, "{{test}}"	, "a");}
 	@Test   public void L_exc_pad_ws()		{fxt.Test_parse_tmpl_str_test("{{padleft:a|4|\n \t}}"			, "{{test}}"	, "a");}
 	@Test   public void R_len_3()			{fxt.Test_parse_tmpl_str_test("{{padright:a|4|0}}"				, "{{test}}"	, "a000");}

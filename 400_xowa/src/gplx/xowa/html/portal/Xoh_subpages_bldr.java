@@ -18,10 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html.portal; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import gplx.xowa.html.hrefs.*;
 public class Xoh_subpages_bldr implements Bry_fmtr_arg {
-	private Xoae_app app;
 	private Bry_bfr tmp_bfr = Bry_bfr.reset_(255), ttl_bfr = Bry_bfr.reset_(255);
 	private byte[][] segs;
-	public Xoh_subpages_bldr(Xoae_app app) {this.app = app;}
 	public byte[] Bld(Xow_ns_mgr ns_mgr, Xoa_ttl ttl) {
 		Xow_ns ns = ttl.Ns();
 		if (!	(	ns.Subpages_enabled()				// ns has subpages
@@ -47,8 +45,8 @@ public class Xoh_subpages_bldr implements Bry_fmtr_arg {
 			byte[] seg = segs[i];
 			ttl_bfr.Add(seg);
 			byte[] seg_ttl = ttl_bfr.Xto_bry();															
-			byte[] seg_ttl_enc = app.Href_parser().Encoder().Encode(ttl_bfr.Xto_bry());
-			byte[] href = Bry_.Add(Xoh_href_parser.Href_wiki_bry, seg_ttl_enc);		// EX: /wiki/Help:A
+			byte[] seg_ttl_enc = Xoa_app_.Utl__encoder_mgr().Href().Encode(ttl_bfr.Xto_bry());
+			byte[] href = Bry_.Add(Xoh_href_.Bry__wiki, seg_ttl_enc);		// EX: /wiki/Help:A
 			fmtr_itm.Bld_bfr(bfr, dlm, href, seg_ttl, seg);
 		}
 		ttl_bfr.Clear();

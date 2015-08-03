@@ -17,5 +17,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.intl; import gplx.*;
 public class Gfo_case_mgr_ {
-	public static final byte Tid_ascii = 0, Tid_utf8 = 1, Tid_custom = 2;
+	public static final byte Tid_a7 = 0, Tid_u8 = 1, Tid_custom = 2;
 }

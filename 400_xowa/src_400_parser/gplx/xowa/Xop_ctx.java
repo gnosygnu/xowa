@@ -79,7 +79,7 @@ public class Xop_ctx {
 		return this;
 	}
 	public String Page_url_str() {
-		try {return cur_page.Url().Xto_full_str_safe();}
+		try {return cur_page.Url().To_str();}
 		catch (Exception e) {Err_.Noop(e); return "page_url shouldn't fail";}
 	}
 	public void Page_bgn(Xop_root_tkn root, byte[] src) {

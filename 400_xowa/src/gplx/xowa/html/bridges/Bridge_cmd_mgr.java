@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html.bridges; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*;
 import gplx.core.json.*;
 public class Bridge_cmd_mgr {
-	private final Hash_adp_bry cmd_hash = Hash_adp_bry.cs_();
+	private final Hash_adp_bry cmd_hash = Hash_adp_bry.cs();
 	public void Add(Bridge_cmd_itm cmd) {cmd_hash.Add_bry_obj(cmd.Key(), cmd);}
 	public String Exec(GfoMsg m) {
 		if (m.Args_count() == 0) throw Err_.new_("bridge.cmds", "no json specified for json_exec");

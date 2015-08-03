@@ -33,7 +33,7 @@ public class Xop_amp_trie {
 	;
 	public static final Btrie_slim_mgr _ = new_(); Xop_amp_trie() {}
 	private static Btrie_slim_mgr new_() {// REF.MW: Sanitizer|$wgHtmlEntities; NOTE:added apos
-		Btrie_slim_mgr rv = Btrie_slim_mgr.cs_();
+		Btrie_slim_mgr rv = Btrie_slim_mgr.cs();
 		Reg_name(rv, Bool_.Y,   60, Bry_xowa_lt);
 		Reg_name(rv, Bool_.Y,   91, Bry_xowa_brack_bgn);
 		Reg_name(rv, Bool_.Y,   93, Bry_xowa_brack_end);

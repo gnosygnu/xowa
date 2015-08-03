@@ -183,8 +183,8 @@ public class Xop_lnki_wkr__basic_tst {
 		fxt.Init_log_(Xop_ttl_log.Len_0, Xop_lnki_log.Invalid_ttl);
 		fxt.Test_parse_page_wiki("[[ ]]", fxt.tkn_txt_(0, 2), fxt.tkn_space_(2, 3), fxt.tkn_txt_(3, 5));
 	}
-	@Test  public void Exc_invalid_utf8() {	// PURPOSE: "%DO" is an invalid UTF-8 sequence (requires 2 bytes, not just %D0); DATE:2013-11-11
-		fxt.Ctx().Lang().Case_mgr_utf8_();						// NOTE: only occurs during Universal
+	@Test  public void Exc_invalid_u8() {	// PURPOSE: "%DO" is an invalid UTF-8 sequence (requires 2 bytes, not just %D0); DATE:2013-11-11
+		fxt.Ctx().Lang().Case_mgr_u8_();						// NOTE: only occurs during Universal
 		fxt.Test_parse_page_all_str("[[%D0]]", "[[%D0]]");		// invalid titles render literally
 	}
 	@Test  public void Ex_eq() {	// make sure that eq is not evaluated for kv delimiter

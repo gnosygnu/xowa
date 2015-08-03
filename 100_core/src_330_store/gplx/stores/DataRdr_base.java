@@ -131,27 +131,27 @@ public abstract class DataRdr_base implements SrlMgr {
 		try {return (parse) ? DateAdp_.parse_gplx(String_.as_(val)) : (DateAdp)val;} 
 		catch (Exception exc) {throw Err_dataRdr_ReadFailed_err(DateAdp.class, key, val, exc);}
 	}
-	@gplx.Virtual public DecimalAdp ReadDecimal(String key) {
+	@gplx.Virtual public Decimal_adp ReadDecimal(String key) {
 		Object val = Read(key);
 		try {
-			if (parse) return DecimalAdp_.parse_(String_.as_(val));
-			DecimalAdp rv = DecimalAdp_.as_(val);
+			if (parse) return Decimal_adp_.parse_(String_.as_(val));
+			Decimal_adp rv = Decimal_adp_.as_(val);
 			return (rv == null) 
-				? DecimalAdp_.db_(val)	// HACK: GfoNde_.rdr_ will call ReadAt(int i) on Db_data_rdr; since no Db_data_rdr knows about DecimalAdp, it will always return decimalType
+				? Decimal_adp_.db_(val)	// HACK: GfoNde_.rdr_ will call ReadAt(int i) on Db_data_rdr; since no Db_data_rdr knows about Decimal_adp, it will always return decimalType
 				: rv;
 		}
-		catch (Exception exc) {throw Err_dataRdr_ReadFailed_err(DecimalAdp.class, key, val, exc);}
+		catch (Exception exc) {throw Err_dataRdr_ReadFailed_err(Decimal_adp.class, key, val, exc);}
 	}
-	@gplx.Virtual public DecimalAdp ReadDecimalOr(String key, DecimalAdp or) {
+	@gplx.Virtual public Decimal_adp ReadDecimalOr(String key, Decimal_adp or) {
 		Object val = Read(key); if (val == null) return or;
 		try {
-			if (parse) return DecimalAdp_.parse_(String_.as_(val));
-			DecimalAdp rv = DecimalAdp_.as_(val);
+			if (parse) return Decimal_adp_.parse_(String_.as_(val));
+			Decimal_adp rv = Decimal_adp_.as_(val);
 			return (rv == null) 
-				? DecimalAdp_.db_(val)	// HACK: GfoNde_.rdr_ will call ReadAt(int i) on Db_data_rdr; since no Db_data_rdr knows about DecimalAdp, it will always return decimalType
+				? Decimal_adp_.db_(val)	// HACK: GfoNde_.rdr_ will call ReadAt(int i) on Db_data_rdr; since no Db_data_rdr knows about Decimal_adp, it will always return decimalType
 				: rv;
 		}
-		catch (Exception exc) {throw Err_dataRdr_ReadFailed_err(DecimalAdp.class, key, val, exc);}
+		catch (Exception exc) {throw Err_dataRdr_ReadFailed_err(Decimal_adp.class, key, val, exc);}
 	}
 	public char ReadChar(String key) {
 		Object val = Read(key);
@@ -186,7 +186,7 @@ public abstract class DataRdr_base implements SrlMgr {
 	public long SrlLongOr(String key, long or) {return ReadLongOr(key, or);}
 	public String SrlStrOr(String key, String or) {return ReadStrOr(key, or);}
 	public DateAdp SrlDateOr(String key, DateAdp or) {return ReadDateOr(key, or);}
-	public DecimalAdp SrlDecimalOr(String key, DecimalAdp or) {return ReadDecimalOr(key, or);}
+	public Decimal_adp SrlDecimalOr(String key, Decimal_adp or) {return ReadDecimalOr(key, or);}
 	public double SrlDoubleOr(String key, double or) {return ReadDoubleOr(key, or);}
 	public Object SrlObjOr(String key, Object or) {throw Err_.new_unimplemented();}
 	public void XtoStr_gfml(String_bldr sb) {

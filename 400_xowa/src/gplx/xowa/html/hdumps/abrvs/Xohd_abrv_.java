@@ -48,7 +48,7 @@ public class Xohd_abrv_ {
 	, Html_redlink_end			= Bry_.new_a7("'>")
 	;
 	public static Btrie_slim_mgr new_trie() {
-		Btrie_slim_mgr rv = Btrie_slim_mgr.cs_();
+		Btrie_slim_mgr rv = Btrie_slim_mgr.cs();
 		trie_itm(rv, Tid_dir				, Byte_ascii.Null		, Key_dir);
 		trie_itm(rv, Tid_img				, Byte_ascii.Apos		, Key_img);
 		trie_itm(rv, Tid_img_style			, Byte_ascii.Apos		, Key_img_style);

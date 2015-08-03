@@ -19,7 +19,7 @@ package gplx.gfui; import gplx.*;
 public class Gfui_html extends GfuiElemBase {		
 	public void					Under_html_(Gxw_html v) {under = v;} private Gxw_html under;
 	public void					Html_doc_html_load_by_mem(String html)				{under.Html_doc_html_load_by_mem(html);}
-	public void					Html_doc_html_load_by_url(String path, String html)	{under.Html_doc_html_load_by_url(path, html);}
+	public void					Html_doc_html_load_by_url(Io_url path, String html)	{under.Html_doc_html_load_by_url(path, html);}
 	public byte					Html_doc_html_load_tid()							{return under.Html_doc_html_load_tid();}
 	public void					Html_doc_html_load_tid_(byte v)						{under.Html_doc_html_load_tid_(v);}
 	public void					Html_js_enabled_(boolean v) {under.Html_js_enabled_(v);}

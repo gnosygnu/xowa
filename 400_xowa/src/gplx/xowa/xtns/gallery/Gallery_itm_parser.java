@@ -20,7 +20,7 @@ import gplx.core.primitives.*; import gplx.core.btries.*;
 import gplx.xowa.parsers.lnkis.redlinks.*;
 import gplx.xowa.files.*;
 public class Gallery_itm_parser {		
-	private Xowe_wiki wiki; private Btrie_slim_mgr trie = Btrie_slim_mgr.ci_utf_8_();
+	private Xowe_wiki wiki; private Btrie_slim_mgr trie = Btrie_slim_mgr.ci_u8();
 	private Gallery_itm cur_itm;
 	private byte[] src; private int end_pos;
 	private int cur_pos; private byte cur_byte;
@@ -66,7 +66,7 @@ public class Gallery_itm_parser {
 			lnki_tkn.Link_tkn_(new Arg_nde_tkn_mock("link", String_.new_u8(src, cur_itm.Link_bgn(), cur_itm.Link_end())));	// NOTE: hackish, but add the link as arg_nde, since gallery link is not parsed like a regular lnki
 		cur_itm.Lnki_tkn_(lnki_tkn);
 		if (cur_itm.Page_bgn() != -1) {
-			int page_val = Bry_.Xto_int_or(src, cur_itm.Page_bgn(), cur_itm.Page_end(), -1);
+			int page_val = Bry_.To_int_or(src, cur_itm.Page_bgn(), cur_itm.Page_end(), -1);
 			if (page_val == -1) Xoa_app_.Usr_dlg().Warn_many("", "", "page is not an int: wiki=~{0} ttl=~{1} page=~{2}", wiki.Domain_str(), ctx.Cur_page().Ttl().Page_db(), String_.new_u8(src, cur_itm.Page_bgn(), cur_itm.Page_end()));
 			lnki_tkn.Page_(page_val);
 		}

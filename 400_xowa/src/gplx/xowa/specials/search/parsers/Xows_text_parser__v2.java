@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.specials.search.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*; import gplx.xowa.specials.search.*;
 import gplx.core.btries.*; import gplx.xowa.langs.cases.*;
 class Xows_text_parser__v2 {
-	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs_();
+	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
 	private final Bry_bfr bfr = Bry_bfr.new_(32);
 	private Xob_word_mgr word_mgr; private Xol_case_mgr case_mgr;
 	private byte[] src; private int end;	// bgn, 

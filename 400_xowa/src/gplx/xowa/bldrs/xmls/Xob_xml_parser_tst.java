@@ -22,7 +22,7 @@ public class Xob_xml_parser_tst {
 		Io_mgr.I.InitEngine_mem();
 		Xoae_app app = Xoa_app_fxt.app_();
 		bldr = new Xob_bldr(app);
-	}	private Xow_ns_mgr ns_mgr = Xow_ns_mgr_.default_(gplx.xowa.langs.cases.Xol_case_mgr_.Ascii());
+	}	private Xow_ns_mgr ns_mgr = Xow_ns_mgr_.default_(gplx.xowa.langs.cases.Xol_case_mgr_.A7());
 	@Test  public void Basic_docs_1() {
 		Xowd_page_itm doc = doc_(1, "a", "a a", Date_1);
 		fil = page_bldr.Add(doc).XtoByteStreamRdr();

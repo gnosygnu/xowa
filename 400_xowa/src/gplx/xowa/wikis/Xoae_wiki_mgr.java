@@ -19,7 +19,7 @@ package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.langs.*; import gplx.xowa.xtns.wdatas.*; import gplx.xowa.wikis.domains.crts.*;
 public class Xoae_wiki_mgr implements Xoa_wiki_mgr, GfoInvkAble {
 	private Xoae_app app;
-	private List_adp list = List_adp_.new_(); private Hash_adp_bry hash = Hash_adp_bry.ci_ascii_();	// ASCII:url_domain; EX:en.wikipedia.org
+	private List_adp list = List_adp_.new_(); private Hash_adp_bry hash = Hash_adp_bry.ci_a7();	// ASCII:url_domain; EX:en.wikipedia.org
 	public Xoae_wiki_mgr(Xoae_app app) {
 		this.app = app;
 		wiki_regy = new Xoa_wiki_regy(app);
@@ -34,6 +34,7 @@ public class Xoae_wiki_mgr implements Xoa_wiki_mgr, GfoInvkAble {
 	}
 	public int Count() {return hash.Count();}
 	public void Del(byte[] key) {hash.Del(key);}
+	public boolean Has(byte[] key) {return hash.Has(key);}
 	public Xowe_wiki Get_at(int i) {return Int_.Between(i, 0, this.Count() - 1) ? (Xowe_wiki)list.Get_at(i) : null;}
 	public Xowe_wiki Get_by_key_or_null(byte[] key) {return Bry_.Len_eq_0(key) ? null : (Xowe_wiki)hash.Get_by(key);}
 	public Xowe_wiki Get_by_key_or_null(byte[] src, int bgn, int end) {return (Xowe_wiki)hash.Get_by_mid(src, bgn, end);}

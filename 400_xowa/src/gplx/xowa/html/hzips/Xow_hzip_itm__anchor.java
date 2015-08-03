@@ -80,7 +80,7 @@ public class Xow_hzip_itm__anchor {
 		if (id_bgn > a_lhs_end) return Xow_hzip_mgr.Unhandled;
 		id_bgn += Find_id_bry.length + gplx.xowa.parsers.lnkis.redlinks.Xopg_redlink_lnki_list.Lnki_id_prefix_len;
 		int id_end = Bry_finder.Find_fwd(src, Byte_ascii.Quote, id_bgn, src_len);			if (id_end == Bry_finder.Not_found) return Xow_hzip_mgr.Unhandled;
-		int id = Bry_.Xto_int_or(src, id_bgn, id_end, -1);									if (id == Bry_finder.Not_found) return Xow_hzip_mgr.Unhandled;
+		int id = Bry_.To_int_or(src, id_bgn, id_end, -1);									if (id == Bry_finder.Not_found) return Xow_hzip_mgr.Unhandled;
 		int a_rhs_bgn = Bry_finder.Find_fwd(src, Find_a_rhs_bgn_bry, a_lhs_end, src_len);	if (a_rhs_bgn == Bry_finder.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("a.a_rhs_bgn_missing", bgn, ttl_end);
 		int ttl_len = ttl_end - ttl_bgn;
 		int html_text_len = a_rhs_bgn - a_lhs_end;
@@ -132,7 +132,7 @@ public class Xow_hzip_itm__anchor {
 				int a_lhs_end = Bry_finder.Find_fwd(src, Byte_ascii.Gt, href_end, src_len);			if (a_lhs_end == Bry_finder.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("a.a_lhs_end_missing", bgn, href_end);
 				int num_bgn = a_lhs_end + 2; // skip >[
 				int num_end = Bry_finder.Find_fwd(src, Byte_ascii.Brack_end, num_bgn, src_len);		if (num_end == Bry_finder.Not_found) return hzip_mgr.Warn_by_pos_add_dflt("a.num_end_missing", bgn, href_end);
-				int num = Bry_.Xto_int_or(src, num_bgn, num_end, -1);								if (num == -1) return hzip_mgr.Warn_by_pos_add_dflt("a.num_invalid", num_bgn, num_end);
+				int num = Bry_.To_int_or(src, num_bgn, num_end, -1);								if (num == -1) return hzip_mgr.Warn_by_pos_add_dflt("a.num_invalid", num_bgn, num_end);
 				Xow_hzip_int_.Save_bin_int_abrv(bfr, num);
 				int a_rhs_bgn = num_end + 1;
 				int a_rhs_end = a_rhs_bgn + Find_a_rhs_bgn_len;

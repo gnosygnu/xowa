@@ -44,13 +44,13 @@ public class Xows_ns_mgr {
 		ns_all = true;
 	}
 	public void Add_by_parse(byte[] key, byte[] val) {
-		int ns_enabled = Bry_.Xto_int(val);
+		int ns_enabled = Bry_.To_int_or_neg1(val);
 		if (ns_enabled == 1) {										// make sure set to 1; EX: ignore &ns0=0
 			int key_len = key.length;
 			if (key_len == 3 && key[2] == Byte_ascii.Star)		// translate ns* as ns_all
 				ns_all = true;
 			else {
-				int ns_id = Bry_.Xto_int_or(key, 2, key_len, Int_.MinValue);
+				int ns_id = Bry_.To_int_or(key, 2, key_len, Int_.MinValue);
 				if (ns_id != Int_.MinValue) {						// ignore invalid ints; EX: &nsabc=1;
 					Add_by_id(ns_id);
 					ns_main = ns_all = false;

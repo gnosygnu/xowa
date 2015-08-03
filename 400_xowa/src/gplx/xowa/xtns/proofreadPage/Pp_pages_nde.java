@@ -59,7 +59,7 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 		if (page.Pages_recursed()) return;	// moved from Pp_index_parser; DATE:2014-05-21s
 		page.Pages_recursed_(true);
 		Bry_bfr full_bfr = app.Utl__bfr_mkr().Get_m001();
-		Hash_adp_bry lst_page_regy = ctx.Lst_page_regy(); if (lst_page_regy == null) lst_page_regy = Hash_adp_bry.cs_();	// SEE:NOTE:page_regy; DATE:2014-01-01
+		Hash_adp_bry lst_page_regy = ctx.Lst_page_regy(); if (lst_page_regy == null) lst_page_regy = Hash_adp_bry.cs();	// SEE:NOTE:page_regy; DATE:2014-01-01
 		page.Html_data().Indicators().Enabled_(Bool_.N);				// disable <indicator> b/c <page> should not add to current page; PAGE:en.s:The_Parochial_System_(Wilberforce,_1838); DATE:2015-04-29
 		byte[] page_bry = Bld_wikitext(full_bfr, lst_page_regy);
 		if (page_bry != null)
@@ -267,7 +267,7 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 			Xowd_page_itm page = (Xowd_page_itm)rslt.Get_at(i);
 			Xoa_ttl page_ttl = Xoa_ttl.parse_(wiki, ns_page_id, page.Ttl_page_db());	if (page_ttl == null) continue;					// page_ttl is not valid; should never happen;
 			byte[] page_ttl_leaf = page_ttl.Leaf_txt();									if (page_ttl_leaf == null) continue;			// page is not leaf; should not happen
-			int page_leaf_val = Bry_.Xto_int_or(page_ttl_leaf, Int_.MinValue);			if (page_leaf_val == Int_.MinValue) continue;	// leaf is not int; ignore
+			int page_leaf_val = Bry_.To_int_or(page_ttl_leaf, Int_.MinValue);			if (page_leaf_val == Int_.MinValue) continue;	// leaf is not int; ignore
 			if (page_leaf_val > page_leaf_max) page_leaf_max = page_leaf_val;
 		}
 		return page_leaf_max;
@@ -313,7 +313,7 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 			step_int = 1;
 			return true;
 		}
-		step_int = Bry_.Xto_int_or(step_bry, Int_.MinValue);
+		step_int = Bry_.To_int_or(step_bry, Int_.MinValue);
 		if (step_int < 1 || step_int > 1000) {
 			Fail_args("pages node does not have a valid 'step': step={0}", String_.new_u8(step_bry));
 			return false;
@@ -368,7 +368,7 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 		tmp_parser.Parse_text_to_wdom(rv, tmp_ctx, tmp_ctx.Tkn_mkr(), wikitext, Xop_parser_.Doc_bgn_bos);
 		return rv;
 	}
-	private static Hash_adp_bry xtn_atrs = Hash_adp_bry.ci_ascii_()	// NOTE: these do not seem to be i18n'd; no ProofreadPage.magic.php; ProofreadPage.i18n.php only has messages; ProofreadPage.body.php refers to names literally
+	private static Hash_adp_bry xtn_atrs = Hash_adp_bry.ci_a7()	// NOTE: these do not seem to be i18n'd; no ProofreadPage.magic.php; ProofreadPage.i18n.php only has messages; ProofreadPage.body.php refers to names literally
 	.Add_str_obj("index"		, Byte_obj_val.new_(Pp_pages_nde.Xatr_index_ttl))
 	.Add_str_obj("from"			, Byte_obj_val.new_(Pp_pages_nde.Xatr_bgn_page))
 	.Add_str_obj("to"			, Byte_obj_val.new_(Pp_pages_nde.Xatr_end_page))
@@ -421,7 +421,7 @@ public class Pp_pages_nde implements Xox_xnde, Xop_xnde_atr_parser {
 NOTE:page_regy
 . original implmentation was following
 in Xop_ctx
-	public Hash_adp_bry			Lst_page_regy()		{if (lst_page_regy == null) lst_page_regy = Hash_adp_bry.cs_(); return lst_page_regy;} 
+	public Hash_adp_bry			Lst_page_regy()		{if (lst_page_regy == null) lst_page_regy = Hash_adp_bry.cs(); return lst_page_regy;} 
 in Pp_pages_nde
 	Hash_adp_bry lst_page_regy = ctx.Lst_page_regy();
 . current implementation is following
@@ -429,7 +429,7 @@ in Xop_ctx
 	public Hash_adp_bry			Lst_page_regy()		{return lst_page_regy;} 
 in Pp_pages_nde
 	Hash_adp_bry lst_page_regy = ctx.Lst_page_regy();
-	if (lst_page_regy == null) lst_page_regy = Hash_adp_bry.cs_();
+	if (lst_page_regy == null) lst_page_regy = Hash_adp_bry.cs();
 . note that this only skips transcluded <pages> within a given <pages> call, not across the entire page
 EX: Page:A/1 has the following text
 <pages index="A" from=1 to=3 />

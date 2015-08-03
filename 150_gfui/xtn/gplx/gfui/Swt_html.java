@@ -58,14 +58,17 @@ class Swt_html implements Gxw_html, Swt_control, FocusListener {
 	@Override public Composite Under_composite() {return null;}
 	@Override public Control Under_menu_control() {return browser;}
 	public int Browser_tid() {return browser_tid;} private final int browser_tid;
+	public String Load_by_url_path() {return load_by_url_path;} private String load_by_url_path;
 	public void 		Html_doc_html_load_by_mem(String html) {
-		html_doc_html_load_tid = Gxw_html_load_tid_.Tid_mem;
+		this.html_doc_html_load_tid = Gxw_html_load_tid_.Tid_mem;
+		this.load_by_url_path = null; 
 		browser.setText(html);	// DBG: Io_mgr.I.SaveFilStr(Io_url_.new_fil_("C:\\temp.txt"), s)
 	}
-	public void Html_doc_html_load_by_url(String path, String html) {
-		html_doc_html_load_tid = Gxw_html_load_tid_.Tid_url;
+	public void Html_doc_html_load_by_url(Io_url path, String html) {
+		this.html_doc_html_load_tid = Gxw_html_load_tid_.Tid_url;
+		this.load_by_url_path = path.To_http_file_str(); 
 		Io_mgr.I.SaveFilStr(path, html);
-		browser.setUrl(path);
+		browser.setUrl(path.Xto_api());
 	}
 	public byte 		Html_doc_html_load_tid() {return html_doc_html_load_tid;} private byte html_doc_html_load_tid;
 	public void 		Html_doc_html_load_tid_(byte v) {html_doc_html_load_tid = v;}
@@ -183,9 +186,10 @@ class Swt_html_lnr_status implements StatusTextListener {
 	public Swt_html_lnr_status(Swt_html html_box) {this.html_box = html_box;} private Swt_html html_box;
 	public void Host_set(GfoEvObj host) {this.host = host;} GfoEvObj host;
 	@Override public void changed(StatusTextEvent ev) {
-		if (html_box.Kit().Kit_mode__term())
-			return;	// shutting down raises status changed events; ignore, else SWT exception thrown; DATE:2014-05-29 
+		if (html_box.Kit().Kit_mode__term()) return;	// shutting down raises status changed events; ignore, else SWT exception thrown; DATE:2014-05-29 
 		String ev_text = ev.text;
+		String load_by_url_path = html_box.Load_by_url_path();
+		if (load_by_url_path != null) ev_text = String_.Replace(ev_text, load_by_url_path, "");	// remove "C:/xowa/tab_1.html"
 //		if (String_.Has(ev_text, "Loading [MathJax]")) return;	// suppress MathJax messages; // NOTE: disabled for 2.1 (which no longer outputs messages to status); DATE:2013-05-03
 		try {if (host != null) GfoEvMgr_.PubObj(host, Gfui_html.Evt_link_hover, "v", ev_text);}
 		catch (Exception e) {html_box.Kit().Ask_ok("xowa.gui.html_box", "status.fail", Err_.Message_gplx_full(e));}	// NOTE: must catch error or will cause app to lock; currently called inside displaySync 

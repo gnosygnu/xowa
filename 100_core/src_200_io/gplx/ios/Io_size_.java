@@ -24,24 +24,24 @@ public class Io_size_ {
 			pow++;
 		}
 		long div = (long)Math_.Pow((long)1024, (long)pow);
-		DecimalAdp valDecimal = DecimalAdp_.divide_(val, div);
+		Decimal_adp valDecimal = Decimal_adp_.divide_(val, div);
 		String[] unit = Io_size_.Units[pow];
-		return valDecimal.Xto_str("#,##0.000") + " " + String_.PadBgn(unit[0], 2, " ");
+		return valDecimal.To_str("#,##0.000") + " " + String_.PadBgn(unit[0], 2, " ");
 	}
 	public static String To_str(long val, int exp_1024, String val_fmt, String unit_pad, boolean round_0_to_1) {
 		long exp_val = (long)Math_.Pow(1024, exp_1024);
-		DecimalAdp val_as_decimal = DecimalAdp_.divide_(val, exp_val);
-		if (round_0_to_1 && val_as_decimal.Comp_lt(1)) val_as_decimal = DecimalAdp_.One;
+		Decimal_adp val_as_decimal = Decimal_adp_.divide_(val, exp_val);
+		if (round_0_to_1 && val_as_decimal.Comp_lt(1)) val_as_decimal = Decimal_adp_.One;
 		String[] unit = Io_size_.Units[exp_1024];
-		return val_as_decimal.Xto_str(val_fmt) + " " + String_.PadBgn(unit[0], 2, unit_pad);
+		return val_as_decimal.To_str(val_fmt) + " " + String_.PadBgn(unit[0], 2, unit_pad);
 	}
 	public static long parse_or_(String raw, long or) {
 		if (raw == null || raw == String_.Empty) return or;
 		String[] terms = String_.Split(raw, " ");
 		int termsLen = Array_.Len(terms); if (termsLen > 2) return or;
 
-		DecimalAdp val = null;
-		try {val = DecimalAdp_.parse_(terms[0]);} catch (Exception exc) {Err_.Noop(exc); return or;}
+		Decimal_adp val = null;
+		try {val = Decimal_adp_.parse_(terms[0]);} catch (Exception exc) {Err_.Noop(exc); return or;}
 
 		int unitPow = 0;
 		if (termsLen > 1) {
@@ -50,13 +50,13 @@ public class Io_size_ {
 		}
 		int curPow = unitPow;
 		while (curPow > 0) {
-			val = val.Op_mult(1024);
+			val = val.Multiply(1024);
 			curPow--;
 		}
 		// DELETED:do not check for fractional bytes; EX: 10.7 GB DATE:2015-01-06
-		// DecimalAdp comp = val.Op_truncate_decimal();
+		// Decimal_adp comp = val.Op_truncate_decimal();
 		// if (!val.Eq(comp)) return or;
-		return val.Xto_long();
+		return val.To_long();
 	}
 	private static int parse_unitPow_(String unitStr) {
 		int unitLen = Array_.Len(Units);
@@ -108,8 +108,8 @@ class Io_size_fmtr_arg implements Bry_fmtr_arg {
 			pow++;
 		}
 		long div = (long)Math_.Pow((long)1024, (long)pow);		
-		DecimalAdp val_decimal = DecimalAdp_.divide_(val, div);
-		bfr.Add_str(val_decimal.Xto_str("#,###.000")).Add_byte(Byte_ascii.Space).Add(gplx.ios.Io_size_.Units_bry[pow]);
+		Decimal_adp val_decimal = Decimal_adp_.divide_(val, div);
+		bfr.Add_str(val_decimal.To_str("#,###.000")).Add_byte(Byte_ascii.Space).Add(gplx.ios.Io_size_.Units_bry[pow]);
 		if (suffix != null) 
 			bfr.Add(suffix);
 	}

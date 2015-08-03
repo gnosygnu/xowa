@@ -47,9 +47,9 @@ class Json_itm_decimal extends Json_itm_base {
 	@Override public byte Tid() {return Json_itm_.Tid_decimal;}
 	@Override public Object Data() {
 		if (data == null)
-			data = DecimalAdp_.parse_(String_.new_a7(this.Data_bry()));
+			data = Decimal_adp_.parse_(String_.new_a7(this.Data_bry()));
 		return data;
-	}	DecimalAdp data;
+	}	Decimal_adp data;
 	@Override public byte[] Data_bry() {
 		if (data_bry == null) data_bry = Bry_.Mid(doc.Src(), this.Src_bgn(), this.Src_end());
 		return data_bry;
@@ -82,7 +82,7 @@ class Json_itm_str extends Json_itm_base {
 		byte[] src = doc.Src(); int bgn = this.Src_bgn(), end = this.Src_end();
 		if (exact) return Bry_.Mid(src, bgn, end);
 		Bry_bfr bfr = doc.Bfr();
-		byte[] utf8_bry = doc.Str_utf8_bry();
+		byte[] utf8_bry = doc.Str_u8_bry();
 		for (int i = bgn; i < end; i++) {
 			byte b = src[i];
 			switch (b) {

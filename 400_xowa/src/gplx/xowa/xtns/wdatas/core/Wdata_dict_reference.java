@@ -32,7 +32,7 @@ public class Wdata_dict_reference {
 	, Bry_snaks									= Bry_.new_a7(Str_snaks)
 	, Bry_snaks_order							= Bry_.new_a7(Str_snaks_order)
 	;
-	public static Hash_adp_bry Dict = Hash_adp_bry.cs_()
+	public static Hash_adp_bry Dict = Hash_adp_bry.cs()
 	.Add_bry_byte(Bry_hash						, Tid_hash)
 	.Add_bry_byte(Bry_snaks						, Tid_snaks)
 	.Add_bry_byte(Bry_snaks_order				, Tid_snaks_order)

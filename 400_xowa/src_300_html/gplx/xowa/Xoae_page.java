@@ -29,7 +29,7 @@ public class Xoae_page implements Xoa_page {
 	}	Xoae_page() {}	// called by Null
 	public Xow_wiki					Wiki() {return wiki;}
 	public Xoa_ttl					Ttl() {return ttl;} public Xoae_page Ttl_(Xoa_ttl v) {ttl = v; url.Wiki_bry_(wiki.Domain_bry()).Page_bry_(v.Full_url()); return this;} private Xoa_ttl ttl;
-	public Xoa_url					Url() {return url;} public Xoae_page Url_(Xoa_url v) {url = v; return this;} private Xoa_url url = Xoa_url.blank_();
+	public Xoa_url					Url() {return url;} public Xoae_page Url_(Xoa_url v) {url = v; return this;} private Xoa_url url = Xoa_url.blank();
 	public byte[]					Url_bry_safe() {return url == null ? Bry_.Empty : url.Raw();}
 	public void						Xtn_gallery_packed_exists_y_() {html_data.Xtn_gallery_packed_exists_y_();}
 	public boolean						Exists() {return !Missing();}

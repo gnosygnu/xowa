@@ -25,7 +25,7 @@ public class Xohd_page_html_mgr__load {
 	public void Load_page(Xow_wiki wiki, Xog_page hpg, Xowd_html_tbl tbl, int page_id, Xoa_ttl page_ttl) {
 		Xoa_app_.Usr_dlg().Plog_many("", "", "hdump.load.text: ttl=~{0}", page_ttl.Full_db_as_str());
 		tbl.Select_by_page(rows, page_id);
-		Parse_rows(wiki, hpg, page_id, Xoa_url.blank_(), page_ttl, rows);
+		Parse_rows(wiki, hpg, page_id, Xoa_url.blank(), page_ttl, rows);
 	}
 	public void Parse_rows(Xow_wiki wiki, Xog_page hpg, int page_id, Xoa_url page_url, Xoa_ttl page_ttl, List_adp rows) {	// TEST:
 		hpg.Init(wiki, page_id, page_url, page_ttl);

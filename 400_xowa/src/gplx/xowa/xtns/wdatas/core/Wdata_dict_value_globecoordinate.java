@@ -38,7 +38,7 @@ public class Wdata_dict_value_globecoordinate {
 	, Bry_precision								= Bry_.new_a7(Str_precision)
 	, Bry_globe									= Bry_.new_a7(Str_globe)
 	;
-	public static final Hash_adp_bry Dict = Hash_adp_bry.cs_()
+	public static final Hash_adp_bry Dict = Hash_adp_bry.cs()
 	.Add_bry_byte(Bry_latitude					, Tid_latitude)
 	.Add_bry_byte(Bry_longitude					, Tid_longitude)
 	.Add_bry_byte(Bry_altitude					, Tid_altitude)

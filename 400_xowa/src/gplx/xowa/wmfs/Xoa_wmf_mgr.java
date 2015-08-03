@@ -30,7 +30,7 @@ public class Xoa_wmf_mgr implements GfoInvkAble {
 			Xowe_wiki wiki = wiki_mgr.Get_at(i);
 			wiki.File_mgr().Cfg_download().Enabled_(v);
 		}		
-	} 
+	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_enabled))			return Yn.Xto_str(enabled);
 		else if	(ctx.Match(k, Invk_enabled_))			Enabled_(m.ReadYn("v"));

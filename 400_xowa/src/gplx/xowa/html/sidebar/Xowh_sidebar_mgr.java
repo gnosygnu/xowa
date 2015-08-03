@@ -90,7 +90,7 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 					cur_grp.Itms_add(cur_itm);
 			}
 		}
-	}	private Xoa_url tmp_url = Xoa_url.blank_();
+	}	private Xoa_url tmp_url = Xoa_url.blank();
 	public void Bld_html(Bry_bfr bfr) {
 		int len = grps.Count();
 		for (int i = 0; i < len; i++) {
@@ -125,7 +125,7 @@ public class Xowh_sidebar_mgr implements GfoInvkAble {
 	}	private static final String Invk_html_grp_fmt_ = "html_grp_fmt_", Invk_html_itm_fmt_ = "html_itm_fmt_";
 	private static final byte[] CONST_id_prefix = Bry_.new_a7("n-");
 	private static final byte Ignore_tid_search = 1, Ignore_tid_toolbox = 2, Ignore_tid_toolbox_end = 3, Ignore_tid_languages = 4;
-	private static final Btrie_slim_mgr ignore_trie = Btrie_slim_mgr.ci_ascii_()
+	private static final Btrie_slim_mgr ignore_trie = Btrie_slim_mgr.ci_a7()
 	.Add_str_byte("SEARCH", Ignore_tid_search)
 	.Add_str_byte("TOOLBOX", Ignore_tid_toolbox)
 	.Add_str_byte("TOOLBOXEND", Ignore_tid_toolbox_end)

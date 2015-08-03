@@ -16,13 +16,14 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.parsers.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+import gplx.core.net.*;
 import gplx.xowa.html.*; import gplx.xowa.html.hrefs.*;
-import gplx.xowa.net.*;
+import gplx.xowa.urls.*;
 public class Xoh_lnke_wtr {
-	private Xoae_app app;
-	public Xoh_lnke_wtr(Xowe_wiki wiki) {this.app = wiki.Appe();}
+//		private Xoae_app app;
+	public Xoh_lnke_wtr(Xowe_wiki wiki) {}// this.app = wiki.Appe();}
 	public void Write_all(Bry_bfr bfr, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xop_ctx ctx, byte[] src, Xop_lnke_tkn lnke) {
-		int lnke_bgn = lnke.Lnke_bgn(), lnke_end = lnke.Lnke_end(); boolean proto_is_xowa = lnke.Proto_tid() == Xoo_protocol_itm.Tid_xowa;
+		int lnke_bgn = lnke.Lnke_bgn(), lnke_end = lnke.Lnke_end(); boolean proto_is_xowa = lnke.Proto_tid() == Gfo_protocol_itm.Tid_xowa;
 		if (!hctx.Mode_is_alt()) {		// write href, unless mode is alt
 			if (hctx.Mode_is_hdump()) {
 				if (lnke.Lnke_typ() == Xop_lnke_tkn.Lnke_typ_text)
@@ -52,7 +53,7 @@ public class Xoh_lnke_wtr {
 		byte[] lnke_xwiki_wiki = lnke.Lnke_xwiki_wiki();
 		if (lnke_xwiki_wiki == null) {
 			if (lnke.Lnke_relative()) {		// relative; EX: //a.org
-				bfr.Add(app.Utl__url_parser().Url_parser().Relative_url_protocol_bry()).Add_mid(src, lnke_bgn, lnke_end);
+				bfr.Add(ctx.Wiki().Utl__url_parser().Url_parser().Relative_url_protocol_bry()).Add_mid(src, lnke_bgn, lnke_end);
 				return true;
 			}
 			else {							// xowa or regular; EX: http://a.org
@@ -69,10 +70,10 @@ public class Xoh_lnke_wtr {
 		}
 		else {	// xwiki
 			Url_encoder href_encoder = Xoa_app_.Utl__encoder_mgr().Href_quotes();
-			bfr.Add(Xoh_href_parser.Href_site_bry).Add(lnke_xwiki_wiki).Add(Xoh_href_parser.Href_wiki_bry)
+			bfr.Add(Xoh_href_.Bry__site).Add(lnke_xwiki_wiki).Add(Xoh_href_.Bry__wiki)
 				.Add(href_encoder.Encode(lnke.Lnke_xwiki_page()));	// NOTE: must encode page; EX:%22%3D -> '">' which will end attribute; PAGE:en.w:List_of_Category_A_listed_buildings_in_West_Lothian DATE:2014-07-15
 			if (lnke.Lnke_xwiki_qargs() != null)
-				Xoa_url_arg_hash.Concat_bfr(bfr, href_encoder, lnke.Lnke_xwiki_qargs()); // NOTE: must encode args
+				Gfo_qarg_mgr.Concat_bfr(bfr, href_encoder, lnke.Lnke_xwiki_qargs()); // NOTE: must encode args
 			return false;
 		}
 	}

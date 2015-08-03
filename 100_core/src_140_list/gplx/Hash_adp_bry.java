@@ -22,7 +22,7 @@ public class Hash_adp_bry extends gplx.lists.Hash_adp_base implements Hash_adp {
 	private final Hash_adp_bry_itm_base proto, key_ref;
 	Hash_adp_bry(Hash_adp_bry_itm_base proto) {
 		this.proto = proto;
-		key_ref = proto.New();
+		this.key_ref = proto.New();
 	}
 	@Override protected Object Fetch_base(Object key)				{return super.Fetch_base(key_ref.Init((byte[])key));}
 	@Override protected void Del_base(Object key)					{super.Del_base(key_ref.Init((byte[])key));}
@@ -55,10 +55,10 @@ public class Hash_adp_bry extends gplx.lists.Hash_adp_base implements Hash_adp {
 		key_itm.Init(key_bry, 0, key_bry.length);
 		super.Add_base(key_itm, val);
 	}
-	public static Hash_adp_bry cs_()								{return new Hash_adp_bry(Hash_adp_bry_itm_cs._);}
-	public static Hash_adp_bry ci_ascii_()							{return new Hash_adp_bry(Hash_adp_bry_itm_ci_ascii._);}
-	public static Hash_adp_bry ci_utf8_(Gfo_case_mgr case_mgr)		{return new Hash_adp_bry(Hash_adp_bry_itm_ci_utf8.get_or_new(case_mgr));}
-	public static Hash_adp_bry c__utf8_(boolean case_match, Gfo_case_mgr case_mgr)	{return case_match ? cs_() : ci_utf8_(case_mgr);}
+	public static Hash_adp_bry cs()												{return new Hash_adp_bry(Hash_adp_bry_itm_cs._);}
+	public static Hash_adp_bry ci_a7()											{return new Hash_adp_bry(Hash_adp_bry_itm_ci_a7._);}
+	public static Hash_adp_bry ci_u8(Gfo_case_mgr case_mgr)						{return new Hash_adp_bry(Hash_adp_bry_itm_ci_u8.get_or_new(case_mgr));}
+	public static Hash_adp_bry c__u8(boolean case_match, Gfo_case_mgr case_mgr)	{return case_match ? cs() : ci_u8(case_mgr);}
 }
 abstract class Hash_adp_bry_itm_base {
 	public abstract Hash_adp_bry_itm_base New();
@@ -92,9 +92,9 @@ class Hash_adp_bry_itm_cs extends Hash_adp_bry_itm_base {
 	}
         public static final Hash_adp_bry_itm_cs _ = new Hash_adp_bry_itm_cs(); Hash_adp_bry_itm_cs() {}
 }
-class Hash_adp_bry_itm_ci_ascii extends Hash_adp_bry_itm_base {
+class Hash_adp_bry_itm_ci_a7 extends Hash_adp_bry_itm_base {
 	private byte[] src; int src_bgn, src_end;
-	@Override public Hash_adp_bry_itm_base New() {return new Hash_adp_bry_itm_ci_ascii();}
+	@Override public Hash_adp_bry_itm_base New() {return new Hash_adp_bry_itm_ci_a7();}
 	@Override public Hash_adp_bry_itm_base Init(byte[] src, int src_bgn, int src_end) {this.src = src; this.src_bgn = src_bgn; this.src_end = src_end; return this;}
 	@Override public int hashCode() {
 		int rv = 0;
@@ -108,7 +108,7 @@ class Hash_adp_bry_itm_ci_ascii extends Hash_adp_bry_itm_base {
 	}
 	@Override public boolean equals(Object obj) {
 		if (obj == null) return false;
-		Hash_adp_bry_itm_ci_ascii comp = (Hash_adp_bry_itm_ci_ascii)obj;
+		Hash_adp_bry_itm_ci_a7 comp = (Hash_adp_bry_itm_ci_a7)obj;
 		byte[] comp_src = comp.src; int comp_bgn = comp.src_bgn, comp_end = comp.src_end;
 		int comp_len = comp_end - comp_bgn, src_len = src_end - src_bgn;
 		if (comp_len != src_len) return false;
@@ -123,13 +123,13 @@ class Hash_adp_bry_itm_ci_ascii extends Hash_adp_bry_itm_base {
 		}
 		return true;
 	}
-        public static final Hash_adp_bry_itm_ci_ascii _ = new Hash_adp_bry_itm_ci_ascii(); Hash_adp_bry_itm_ci_ascii() {}
+        public static final Hash_adp_bry_itm_ci_a7 _ = new Hash_adp_bry_itm_ci_a7(); Hash_adp_bry_itm_ci_a7() {}
 }
-class Hash_adp_bry_itm_ci_utf8 extends Hash_adp_bry_itm_base {
+class Hash_adp_bry_itm_ci_u8 extends Hash_adp_bry_itm_base {
 	private final Gfo_case_mgr case_mgr;
-	Hash_adp_bry_itm_ci_utf8(Gfo_case_mgr case_mgr) {this.case_mgr = case_mgr;}
+	Hash_adp_bry_itm_ci_u8(Gfo_case_mgr case_mgr) {this.case_mgr = case_mgr;}
 	private byte[] src; int src_bgn, src_end;
-	@Override public Hash_adp_bry_itm_base New() {return new Hash_adp_bry_itm_ci_utf8(case_mgr);}
+	@Override public Hash_adp_bry_itm_base New() {return new Hash_adp_bry_itm_ci_u8(case_mgr);}
 	@Override public Hash_adp_bry_itm_base Init(byte[] src, int src_bgn, int src_end) {this.src = src; this.src_bgn = src_bgn; this.src_end = src_end; return this;}
 	@Override public int hashCode() {
 		int rv = 0;
@@ -149,7 +149,7 @@ class Hash_adp_bry_itm_ci_utf8 extends Hash_adp_bry_itm_base {
 	}
 	@Override public boolean equals(Object obj) {
 		if (obj == null) return false;
-		Hash_adp_bry_itm_ci_utf8 trg_itm = (Hash_adp_bry_itm_ci_utf8)obj;
+		Hash_adp_bry_itm_ci_u8 trg_itm = (Hash_adp_bry_itm_ci_u8)obj;
 		byte[] trg = trg_itm.src; int trg_bgn = trg_itm.src_bgn, trg_end = trg_itm.src_end;
 		int src_c_bgn = src_bgn;
 		int trg_c_bgn = trg_bgn;
@@ -176,13 +176,13 @@ class Hash_adp_bry_itm_ci_utf8 extends Hash_adp_bry_itm_base {
 		}
 		return src_c_bgn == src_end && trg_c_bgn == trg_end;										// only return true if both src and trg read to end of their brys, otherwise "a","ab" will match
 	}
-        public static Hash_adp_bry_itm_ci_utf8 get_or_new(Gfo_case_mgr case_mgr) {
+        public static Hash_adp_bry_itm_ci_u8 get_or_new(Gfo_case_mgr case_mgr) {
 		switch (case_mgr.Tid()) {
-			case Gfo_case_mgr_.Tid_ascii:		if (Itm_ascii == null) Itm_ascii = new Hash_adp_bry_itm_ci_utf8(case_mgr); return Itm_ascii;
-			case Gfo_case_mgr_.Tid_utf8:		if (Itm_utf8  == null) Itm_utf8  = new Hash_adp_bry_itm_ci_utf8(case_mgr); return Itm_utf8;
-			case Gfo_case_mgr_.Tid_custom:		return new Hash_adp_bry_itm_ci_utf8(case_mgr);
+			case Gfo_case_mgr_.Tid_a7:			if (Itm_a7 == null) Itm_a7 = new Hash_adp_bry_itm_ci_u8(case_mgr); return Itm_a7;
+			case Gfo_case_mgr_.Tid_u8:			if (Itm_u8 == null) Itm_u8 = new Hash_adp_bry_itm_ci_u8(case_mgr); return Itm_u8;
+			case Gfo_case_mgr_.Tid_custom:		return new Hash_adp_bry_itm_ci_u8(case_mgr);
 			default:							throw Err_.new_unhandled(case_mgr.Tid());
 		}
 	}
-	private static Hash_adp_bry_itm_ci_utf8 Itm_ascii, Itm_utf8;
+	private static Hash_adp_bry_itm_ci_u8 Itm_a7, Itm_u8;
 }

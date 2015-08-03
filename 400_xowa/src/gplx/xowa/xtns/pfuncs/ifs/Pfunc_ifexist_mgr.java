@@ -19,7 +19,7 @@ package gplx.xowa.xtns.pfuncs.ifs; import gplx.*; import gplx.xowa.*; import gpl
 import gplx.xowa.wmfs.apis.*; import gplx.xowa.wikis.data.tbls.*;
 public class Pfunc_ifexist_mgr {
 	private Xowd_page_itm db_page = Xowd_page_itm.new_tmp();
-	private Hash_adp regy = Hash_adp_bry.cs_();
+	private Hash_adp regy = Hash_adp_bry.cs();
 	public void Clear() {regy.Clear();}
 	public boolean Exists(Xowe_wiki wiki, byte[] raw_bry) {
 		if (Bry_.Len_eq_0(raw_bry)) return false;	// return early; NOTE: {{autolink}} can pass in "" (see test)

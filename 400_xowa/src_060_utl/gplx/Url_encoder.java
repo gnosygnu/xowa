@@ -109,11 +109,9 @@ public class Url_encoder implements Url_encoder_interface {
 			byte[] bry = Bry_.new_u8(str); Decode(bry, 0, bry.length, tmp_bfr, true); return tmp_bfr.Xto_str_and_clear();
 		}
 	}
-	public byte[] Decode(byte[] bry) {
-		synchronized (thread_lock) {
-			Decode(bry, 0, bry.length, tmp_bfr, false); return tmp_bfr.Xto_bry_and_clear();
-		}
-	}
+	public byte[] Decode(byte[] bry)								{return Decode(tmp_bfr, bry,   0, bry.length);}
+	public byte[] Decode(byte[] bry, int bgn, int end)				{return Decode(tmp_bfr, bry, bgn,        end);}
+	public byte[] Decode(Bry_bfr bfr, byte[] bry, int bgn, int end)	{Decode(bry, bgn,        end, bfr    , false); return bfr.Xto_bry_and_clear();}
 	public byte[] Decode_lax(byte[] bry) {
 		synchronized (thread_lock) {
 			Decode(bry, 0, bry.length, tmp_bfr, false); return tmp_bfr.Xto_bry_and_clear();
@@ -297,9 +295,9 @@ class Url_encoder_itm_html_ent implements Url_encoder_itm {
 		}
 		else {
 			Xop_amp_trie_itm itm = (Xop_amp_trie_itm)o;
-			byte[] bry_utf8 = itm.Utf8_bry();	// NOTE: must utf8 encode val; EX: &nbsp; is 160 but must become 192,160
-			for (int i = 0; i < bry_utf8.length; i++)
-				Url_encoder_itm_hex.Encode_byte(bry_utf8[i], bfr, Byte_ascii.Dot);
+			byte[] bry_u8 = itm.U8_bry();	// NOTE: must utf8 encode val; EX: &nbsp; is 160 but must become 192,160
+			for (int i = 0; i < bry_u8.length; i++)
+				Url_encoder_itm_hex.Encode_byte(bry_u8[i], bfr, Byte_ascii.Dot);
 			return itm.Xml_name_bry().length - 1;	// -1 to ignore & in XmlEntityName
 		}			
 	}

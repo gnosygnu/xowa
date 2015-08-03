@@ -36,6 +36,9 @@ public class Wdata_wiki_mgr_fxt {
 		return this;
 	}	private Xoae_app app; private Xowe_wiki wiki; private Wdata_wiki_mgr wdata_mgr; private Wdata_doc_bldr wdoc_bldr; private Xop_fxt parser_fxt;
 	public Xoae_app App() {return app;}
+	public void Init_lang_fallbacks(String... fallbacks) {
+		wiki.Lang().Fallback_bry_(Bry_.new_a7(String_.Concat_with_str(",", fallbacks)));
+	}
 	public Wdata_doc_bldr Wdoc_bldr(String qid) {return wdoc_bldr.Qid_(qid);}
 	public Wdata_claim_itm_core Make_claim_novalue(int pid)			{return Wdata_claim_itm_system.new_novalue(pid);}
 	public Wdata_claim_itm_core Make_claim_somevalue(int pid)		{return Wdata_claim_itm_system.new_somevalue(pid);}

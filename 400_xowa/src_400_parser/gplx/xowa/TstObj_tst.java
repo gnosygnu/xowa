@@ -189,7 +189,7 @@ class TstObj implements SrlMgr {
 	public int SrlIntOr(String key, int v)						{Atrs_add(key, v, IntClassXtn._); return v;}
 	public long SrlLongOr(String key, long v)					{Atrs_add(key, v, LongClassXtn._); return v;}
 	public String SrlStrOr(String key, String v)				{Atrs_add(key, v, StringClassXtn._); return v;}
-	public DecimalAdp SrlDecimalOr(String key, DecimalAdp v)	{Atrs_add(key, v, DecimalAdpClassXtn._); return v;}
+	public Decimal_adp SrlDecimalOr(String key, Decimal_adp v)	{Atrs_add(key, v, DecimalAdpClassXtn._); return v;}
 	public DateAdp SrlDateOr(String key, DateAdp v)				{Atrs_add(key, v, DateAdpClassXtn._); return v;}
 	public double SrlDoubleOr(String key, double v)				{Atrs_add(key, v, DoubleClassXtn._); return v;}
 	public Object SrlObjOr(String key, Object v)				{

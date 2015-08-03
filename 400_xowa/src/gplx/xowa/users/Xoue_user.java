@@ -34,7 +34,7 @@ public class Xoue_user implements Xou_user, GfoEvMgrOwner, GfoInvkAble {
 	public GfoEvMgr					EvMgr() {return ev_mgr;} private final GfoEvMgr ev_mgr;
 	public String					Key() {return key;} private String key;
 	public Xou_db_mgr				User_db_mgr()  {return user_db_mgr;} private final Xou_db_mgr user_db_mgr;
-	public Xow_wiki					Wikii() {return wiki;}
+	public Xow_wiki					Wikii() {return this.Wiki();}
 	public int						Gender() {return Xol_gender_.Tid_unknown;}
 	public Xoae_app					Appe() {return app;} private final Xoae_app app;
 	public Xol_lang Lang() {if (lang == null) {lang = app.Lang_mgr().Get_by_key_or_new(app.Sys_cfg().Lang()); lang.Init_by_load();} return lang;} private Xol_lang lang;		

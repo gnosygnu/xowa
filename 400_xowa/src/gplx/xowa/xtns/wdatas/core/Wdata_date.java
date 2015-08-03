@@ -41,11 +41,11 @@ public class Wdata_date {
 		}
 		int year_end = Bry_finder.Find_fwd(date, Byte_ascii.Dash, 1);
 		long year		= Long_.parse_or_(String_.new_a7(date, 1, year_end), -1); if (year == -1) throw Err_.new_wo_type("parse failed", "raw", String_.new_a7(date));
-		int month		= Bry_.Xto_int_or(date, year_end +  1, year_end +  3, -1);
-		int day			= Bry_.Xto_int_or(date, year_end +  4, year_end +  6, -1);
-		int hour		= Bry_.Xto_int_or(date, year_end +  7, year_end +  9, -1);
-		int minute		= Bry_.Xto_int_or(date, year_end + 10, year_end + 12, -1);
-		int second		= Bry_.Xto_int_or(date, year_end + 13, year_end + 15, -1);
+		int month		= Bry_.To_int_or(date, year_end +  1, year_end +  3, -1);
+		int day			= Bry_.To_int_or(date, year_end +  4, year_end +  6, -1);
+		int hour		= Bry_.To_int_or(date, year_end +  7, year_end +  9, -1);
+		int minute		= Bry_.To_int_or(date, year_end + 10, year_end + 12, -1);
+		int second		= Bry_.To_int_or(date, year_end + 13, year_end + 15, -1);
 		return new Wdata_date(year * year_sign, month, day, hour, minute, second, precision, before, after, calendar_is_julian);
 	}
 	public static Wdata_date Xto_julian(Wdata_date date) {

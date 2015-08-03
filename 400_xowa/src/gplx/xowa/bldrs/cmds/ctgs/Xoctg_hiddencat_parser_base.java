@@ -29,7 +29,7 @@ public abstract class Xoctg_hiddencat_parser_base extends Xob_sql_dump_base impl
 	}
 	public void Exec(byte[] src, byte[] fld_key, int fld_idx, int fld_bgn, int fld_end, Bry_bfr file_bfr, Sql_file_parser_data data) {
 		switch (fld_idx) {
-			case Fld_id:			cur_id = Bry_.Xto_int_or(src, fld_bgn, fld_end, -1); break;
+			case Fld_id:			cur_id = Bry_.To_int_or(src, fld_bgn, fld_end, -1); break;
 			case Fld_key:			cur_is_hiddencat = Bry_.Eq(Key_hiddencat, src, fld_bgn, fld_end); break;
 			case Fld_val:
 				if (!cur_is_hiddencat) {data.Cancel_row_y_(); return;}

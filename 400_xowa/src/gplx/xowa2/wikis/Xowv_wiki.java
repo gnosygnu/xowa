@@ -16,11 +16,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa2.wikis; import gplx.*; import gplx.xowa2.*;
-import gplx.core.primitives.*;
+import gplx.core.primitives.*; import gplx.core.net.*;
 import gplx.xowa.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.langs.cases.*; import gplx.xowa.wikis.ttls.*;
 import gplx.xowa.files.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.bins.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*; import gplx.xowa.files.repos.*; import gplx.xowa.wikis.data.tbls.*; import gplx.dbs.*;
 import gplx.xowa.html.*; import gplx.xowa.html.wtrs.*; import gplx.xowa.html.hdumps.*; import gplx.xowa.html.hzips.*; import gplx.xowa.html.css.*; import gplx.xowa.html.bridges.dbuis.tbls.*;
+import gplx.xowa.urls.*;
 import gplx.xowa2.apps.*; import gplx.xowa2.wikis.specials.*; import gplx.xowa2.gui.*;
 import gplx.fsdb.*; import gplx.fsdb.meta.*;
 public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser {
@@ -39,6 +40,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser {
 		this.special_mgr = new Xosp_special_mgr(this);
 		this.fsys_mgr = new Xow_fsys_mgr(wiki_root_dir, app.Fsys_mgr().File_dir().GenSubDir(domain_str));
 		this.fsdb_mgr = new Xof_fsdb_mgr__sql();
+		this.url__parser = new Xoa_url_parser(this);
 	}
 	public Xoa_app						App() {return app;}
 	public boolean							Type_is_edit() {return Bool_.N;}
@@ -63,6 +65,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser {
 	public Xoh_page_wtr_mgr_base		Html__page_wtr_mgr() {return html__page_wtr_mgr;} private final Xohv_page_wtr_mgr html__page_wtr_mgr = new Xohv_page_wtr_mgr();
 	public Xow_wiki_props				Props() {return props;} private final Xow_wiki_props props = new Xow_wiki_props();
 	public Xol_lang						Lang() {throw Err_.new_unimplemented();}
+	public Xoa_url_parser				Utl__url_parser() {return url__parser;} private final Xoa_url_parser url__parser;
 
 	public Xosp_special_mgr Special_mgr() {return special_mgr;} private Xosp_special_mgr special_mgr;
 	public Xow_xwiki_mgr Xwiki_mgr() {return xwiki_mgr;} private Xow_xwiki_mgr xwiki_mgr;

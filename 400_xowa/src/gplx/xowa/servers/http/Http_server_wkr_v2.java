@@ -125,7 +125,7 @@ class Http_server_wkr_v2 implements GfoInvkAble {
 	}
 	private static final byte[] Key__msg = Bry_.new_a7("msg"), Key__app_mode = Bry_.new_a7("app_mode");
 	private static final int Tid_post_url_json = 1, Tid_post_url_gfs = 2;
-	private static final Hash_adp_bry post_url_hash = Hash_adp_bry.ci_ascii_()
+	private static final Hash_adp_bry post_url_hash = Hash_adp_bry.ci_a7()
 	.Add_str_int("/exec/json"	, Tid_post_url_json)
 	.Add_str_int("/exec/gfs"	, Tid_post_url_gfs)
 	;
@@ -187,7 +187,7 @@ class Http_file_utl {
 	, Mime_js				= Bry_.new_a7("application/javascript")
 	, Mime_octet_stream		= Bry_.new_a7("application/octet-stream")
 	;
-	private static final Hash_adp_bry mime_hash = Hash_adp_bry.ci_ascii_()
+	private static final Hash_adp_bry mime_hash = Hash_adp_bry.ci_a7()
 	.Add_str_obj(".htm"		, Mime_html)
 	.Add_str_obj(".html"	, Mime_html)
 	.Add_str_obj(".jpg"		, Mime_jpg)

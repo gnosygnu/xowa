@@ -147,7 +147,7 @@ public class Php_srl_parser {
 		pos = bgn;
 		pos = Chk(raw, pos + 1, Byte_ascii.Colon);
 		int int_end = Skip_while_num(raw, raw_len, pos, true);
-		int int_val = Bry_.Xto_int_or(raw, pos, int_end, Int_.MinValue);
+		int int_val = Bry_.To_int_or(raw, pos, int_end, Int_.MinValue);
 		pos = int_end;
 		return int_val;		
 	}
@@ -155,7 +155,7 @@ public class Php_srl_parser {
 		pos = bgn;
 		pos = Chk(raw, pos + 1, Byte_ascii.Colon);
 		int int_end = Skip_while_num(raw, raw_len, pos, true);
-		int int_val = Bry_.Xto_int_or(raw, pos, int_end, Int_.MinValue);
+		int int_val = Bry_.To_int_or(raw, pos, int_end, Int_.MinValue);
 		Php_srl_itm_int rv = factory.Int(pos, int_end, int_val);
 		pos = int_end;
 		return rv;

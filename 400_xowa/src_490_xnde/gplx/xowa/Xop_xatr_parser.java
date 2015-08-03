@@ -23,7 +23,7 @@ public class Xop_xatr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_AT
 	private byte mode = Mode_atr_bgn;
 	private int atr_bgn = -1, key_bgn = -1, key_end = -1, eq_pos = -1, val_bgn = -1, val_end = -1; boolean valid = true;
 	private byte quote_byte = Byte_ascii.Null;
-	private final Hash_adp_bry repeated_atrs_hash = Hash_adp_bry.ci_ascii_();		// ASCII:xnde_atrs
+	private final Hash_adp_bry repeated_atrs_hash = Hash_adp_bry.ci_a7();		// ASCII:xnde_atrs
 	private final Bry_bfr key_bfr = Bry_bfr.new_(), val_bfr = Bry_bfr.new_();
 	private boolean key_bfr_on = false, val_bfr_on = false, ws_is_before_val = false;
 	public Bry_obj_ref Bry_obj() {return bry_ref;} private final Bry_obj_ref bry_ref = Bry_obj_ref.null_();
@@ -388,7 +388,7 @@ public class Xop_xatr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_AT
 		}
 		repeated_atrs_hash.Add(key_bry, cur);
 	}
-	private static final Hash_adp_bry xnde_hash = Hash_adp_bry.ci_ascii_()
+	private static final Hash_adp_bry xnde_hash = Hash_adp_bry.ci_a7()
 	.Add_bry_bry(Xop_xnde_tag_.Tag_nowiki.Name_bry())
 	.Add_bry_bry(Xop_xnde_tag_.Tag_noinclude.Name_bry())
 	.Add_bry_bry(Xop_xnde_tag_.Tag_includeonly.Name_bry())

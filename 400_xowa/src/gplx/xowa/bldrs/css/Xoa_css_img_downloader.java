@@ -39,7 +39,7 @@ public class Xoa_css_img_downloader {
 			int src_len = src.length;
 			int prv_pos = 0;
 			Bry_bfr bfr = Bry_bfr.new_(src_len);
-			Hash_adp img_hash = Hash_adp_bry.cs_();
+			Hash_adp img_hash = Hash_adp_bry.cs();
 			while (true) {
 				int url_pos = Bry_finder.Find_fwd(src, Bry_url, prv_pos);
 				if (url_pos == Bry_.NotFound) {bfr.Add_mid(src, prv_pos, src_len); break;}	// no more "url("; exit;

@@ -74,7 +74,7 @@ public class Xop_xnde_tag {
 		}
 		Xop_xnde_tag_lang lang = (Xop_xnde_tag_lang)langs.Get_by(langs_key);
 		if (lang == null) return null;										// cur tag is a lang tag, but no tag for this lang; EX: "<trecho>" and cur_lang=de
-		return Bry_.Eq_ci_ascii(lang.Name_bry(), src, bgn, end)
+		return Bry_.Eq_ci_a7(lang.Name_bry(), src, bgn, end)
 			? lang
 			: null;
 	}

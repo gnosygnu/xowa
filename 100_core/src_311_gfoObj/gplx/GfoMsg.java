@@ -47,8 +47,8 @@ public interface GfoMsg {
 	double	ReadDoubleOr(String k, double or);
 	DateAdp	ReadDate(String k);
 	DateAdp	ReadDateOr(String k, DateAdp or);
-	DecimalAdp ReadDecimal(String k);
-	DecimalAdp ReadDecimalOr(String k, DecimalAdp or);
+	Decimal_adp ReadDecimal(String k);
+	Decimal_adp ReadDecimalOr(String k, Decimal_adp or);
 	String	ReadStr(String k);
 	String	ReadStrOr(String k, String or);
 	Io_url	ReadIoUrl(String k);

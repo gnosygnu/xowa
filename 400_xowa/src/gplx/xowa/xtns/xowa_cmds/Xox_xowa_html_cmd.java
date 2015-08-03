@@ -56,10 +56,10 @@ public class Xox_xowa_html_cmd implements Xox_xnde, Xop_xnde_atr_parser {
 	, Xatr_pos_val__head_end	= Bry_.new_a7("head.end")
 	, Xatr_pos_val__html_end	= Bry_.new_a7("html.end")
 	;
-	private static final Hash_adp_bry pos_val_hash = Hash_adp_bry.ci_ascii_()
+	private static final Hash_adp_bry pos_val_hash = Hash_adp_bry.ci_a7()
 	.Add_bry_byte(Xatr_pos_val__head_end, Pos_head_end)
 	.Add_bry_byte(Xatr_pos_val__html_end, Pos_html_end)
 	;
 	private static final byte Xatr_pos_id = 1;
-	private static final Hash_adp_bry atr_hash = Hash_adp_bry.ci_ascii_().Add_bry_byte(Xatr_pos_key, Xatr_pos_id);
+	private static final Hash_adp_bry atr_hash = Hash_adp_bry.ci_a7().Add_bry_byte(Xatr_pos_key, Xatr_pos_id);
 }

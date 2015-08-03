@@ -85,21 +85,21 @@ class Pxd_itm_sym extends Pxd_itm_base {
 }
 class Pxd_itm_int_dmy_14 extends Pxd_itm_base implements Pxd_itm_int_interface {
 	public Pxd_itm_int_dmy_14(int ary_idx, byte[] src, int digits) {this.Ctor(ary_idx); this.src = src; this.digits = digits;} private byte[] src; int digits;
-	public int Xto_int_or(int or) {return Bry_.Xto_int_or(src, or);}
+	public int Xto_int_or(int or) {return Bry_.To_int_or(src, or);}
 	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_int_dmy_14;}
 	@Override public int Eval_idx() {return eval_idx;} private int eval_idx = 20;
 	@Override public void Time_ini(DateAdpBldr bldr) {
 		if (this.Seg_idx() != Pxd_itm_base.Seg_idx_null) return;						// has seg_idx; already eval'd by something else
-		bldr.Seg_set(DateAdp_.SegIdx_year	, Bry_.Xto_int_or(src,  0,  4, 0));
-		bldr.Seg_set(DateAdp_.SegIdx_month	, Bry_.Xto_int_or(src,  4,  6, 0));
+		bldr.Seg_set(DateAdp_.SegIdx_year	, Bry_.To_int_or(src,  0,  4, 0));
+		bldr.Seg_set(DateAdp_.SegIdx_month	, Bry_.To_int_or(src,  4,  6, 0));
 		if (digits > 6) {
-			bldr.Seg_set(DateAdp_.SegIdx_day	, Bry_.Xto_int_or(src,  6,  8, 0));
+			bldr.Seg_set(DateAdp_.SegIdx_day	, Bry_.To_int_or(src,  6,  8, 0));
 			if (digits > 8) {
-				bldr.Seg_set(DateAdp_.SegIdx_hour	, Bry_.Xto_int_or(src,  8, 10, 0));
+				bldr.Seg_set(DateAdp_.SegIdx_hour	, Bry_.To_int_or(src,  8, 10, 0));
 				if (digits > 10) {
-					bldr.Seg_set(DateAdp_.SegIdx_minute	, Bry_.Xto_int_or(src, 10, 12, 0));
+					bldr.Seg_set(DateAdp_.SegIdx_minute	, Bry_.To_int_or(src, 10, 12, 0));
 					if (digits > 12)
-						bldr.Seg_set(DateAdp_.SegIdx_second	, Bry_.Xto_int_or(src, 12, 14, 0));
+						bldr.Seg_set(DateAdp_.SegIdx_second	, Bry_.To_int_or(src, 12, 14, 0));
 				}
 			}
 		}
@@ -107,14 +107,14 @@ class Pxd_itm_int_dmy_14 extends Pxd_itm_base implements Pxd_itm_int_interface {
 }
 class Pxd_itm_int_mhs_6 extends Pxd_itm_base implements Pxd_itm_int_interface {
 	public Pxd_itm_int_mhs_6(int ary_idx, byte[] src) {this.Ctor(ary_idx); this.src = src;} private byte[] src;
-	public int Xto_int_or(int or) {return Bry_.Xto_int_or(src, or);}
+	public int Xto_int_or(int or) {return Bry_.To_int_or(src, or);}
 	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_int_hms_6;}
 	@Override public int Eval_idx() {return eval_idx;} private int eval_idx = 20;
 	@Override public void Time_ini(DateAdpBldr bldr) {
 		if (this.Seg_idx() != Pxd_itm_base.Seg_idx_null) return;						// has seg_idx; already eval'd by something else
-		bldr.Seg_set(DateAdp_.SegIdx_hour	, Bry_.Xto_int_or(src, 0,  2, 0));
-		bldr.Seg_set(DateAdp_.SegIdx_minute	, Bry_.Xto_int_or(src, 2,  4, 0));
-		bldr.Seg_set(DateAdp_.SegIdx_second	, Bry_.Xto_int_or(src, 4,  6, 0));
+		bldr.Seg_set(DateAdp_.SegIdx_hour	, Bry_.To_int_or(src, 0,  2, 0));
+		bldr.Seg_set(DateAdp_.SegIdx_minute	, Bry_.To_int_or(src, 2,  4, 0));
+		bldr.Seg_set(DateAdp_.SegIdx_second	, Bry_.To_int_or(src, 4,  6, 0));
 	}
 }
 class Pxd_itm_sorter implements gplx.lists.ComparerAble {

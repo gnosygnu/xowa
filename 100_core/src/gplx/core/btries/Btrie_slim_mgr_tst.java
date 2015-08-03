@@ -21,7 +21,7 @@ public class Btrie_slim_mgr_tst {
 	@Before public void init() {
 	}	private Btrie_slim_mgr trie;
 	private void ini_setup1() {
-		trie = Btrie_slim_mgr.cs_();
+		trie = Btrie_slim_mgr.cs();
 		run_Add("a"		,	1);
 		run_Add("abc"	,	123);
 	}
@@ -44,7 +44,7 @@ public class Btrie_slim_mgr_tst {
 		tst_MatchAtCurExact("abc", 123);
 	}
 	private void ini_setup2() {
-		trie = Btrie_slim_mgr.cs_();
+		trie = Btrie_slim_mgr.cs();
 		run_Add("a"	,	1);
 		run_Add("b"	,	2);
 	}
@@ -54,7 +54,7 @@ public class Btrie_slim_mgr_tst {
 		tst_MatchAtCur("b", 2);
 	}
 	private void ini_setup_caseAny() {
-		trie = Btrie_slim_mgr.ci_ascii_();	// NOTE:ci.ascii:test
+		trie = Btrie_slim_mgr.ci_a7();	// NOTE:ci.ascii:test
 		run_Add("a"	,	1);
 		run_Add("b"	,	2);
 	}

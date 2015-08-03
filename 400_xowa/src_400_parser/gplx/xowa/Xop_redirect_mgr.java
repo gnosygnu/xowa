@@ -71,7 +71,7 @@ public class Xop_redirect_mgr {
 			if (i != 0) redirect_bfr.Add(Bry_redirect_dlm);
 			byte[] redirect_ttl = (byte[])list.Get_at(i);
 			redirect_bfr.Add(Xoh_consts.A_bgn)			// '<a href="'
-				.Add(Xoh_href_parser.Href_wiki_bry)		// '/wiki/'
+				.Add(Xoh_href_.Bry__wiki)		// '/wiki/'
 				.Add(redirect_ttl)						// 'PageA'
 				.Add(Bry_redirect_arg)					// ?redirect=no
 				.Add(Xoh_consts.A_bgn_lnki_0)			// '" title="'

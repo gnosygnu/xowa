@@ -85,8 +85,11 @@ public class Scrib_invoke_func_fxt {
 	}
 	public void Test_parse_err(String raw, String expd_err_type) {
 		Scrib_invoke_func.Error(tmp_bfr, fxt.Wiki().Msg_mgr(), expd_err_type);
-		byte[] expd_err = tmp_bfr.Xto_bry_and_clear();
-		fxt.Test_parse_page_tmpl_str(raw, String_.new_u8(expd_err));
+		fxt.Test_parse_page_tmpl_str(raw, tmp_bfr.Xto_str_and_clear());
+	}
+	public void Test_error(Exception e, String expd) {
+		Scrib_invoke_func.Error(tmp_bfr, fxt.Wiki().Msg_mgr(), e);
+		Tfds.Eq_str(expd, tmp_bfr.Xto_str_and_clear(), "error");
 	}
 	public void Test_lib_proc(Scrib_lib lib, String func_name, Object[] args, String expd) {Test_lib_proc_kv(lib, func_name, Scrib_kv_utl_.base1_many_(args), expd);}
 	public void Test_lib_proc_kv(Scrib_lib lib, String func_name, KeyVal[] args, String expd) {
@@ -108,8 +111,10 @@ public class Scrib_invoke_func_fxt {
 	public void Init_frame_current(KeyVal... ary) {
 		core.Frame_current_(Xot_invk_mock.test_(Bry_.new_a7("Module:Mod_0"), ary));
 	}
-	public void Clear_for_lib() {
-		fxt = new Xop_fxt();	// NOTE: don't try to cache fxt on func_fxt level; causes errors in Language_lib
+	public void Clear_for_lib() {Clear_for_lib("en.wikipedia.org", "en");}
+	public void Clear_for_lib(String domain, String lang) {
+		Xoae_app app = Xoa_app_fxt.app_();
+		fxt = new Xop_fxt(app, Xoa_app_fxt.wiki_(app, domain, app.Lang_mgr().Get_by_key_or_new(Bry_.new_u8(lang)))); // NOTE: don't try to cache fxt on func_fxt level; causes errors in Language_lib
 		core_fxt = new Scrib_core_fxt(fxt);
 		core = core_fxt.Core();
 		Xot_invk parent_frame = new Xot_invk_temp(true); parent_frame.Frame_tid_(Scrib_frame_.Tid_null); 

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa; import gplx.*;
 import gplx.core.btries.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xobd_parser implements Xobd_wkr {
-	private Btrie_slim_mgr trie = Btrie_slim_mgr.ci_ascii_();		// NOTE:ci.ascii:MW_const.en; ctg.v1 assumes [[Category:
+	private Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7();		// NOTE:ci.ascii:MW_const.en; ctg.v1 assumes [[Category:
 	private List_adp wkr_list = List_adp_.new_();
 	public String Wkr_key() {return KEY;} static final String KEY = "page_parser";
 	public void Wkr_ini(Xob_bldr bldr) {}

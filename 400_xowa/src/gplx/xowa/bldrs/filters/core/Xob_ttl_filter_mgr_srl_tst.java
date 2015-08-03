@@ -37,7 +37,7 @@ public class Xob_ttl_filter_mgr_srl_tst {
 }
 class Xob_ttl_filter_mgr_srl_fxt {
 	private final Xob_ttl_filter_mgr_srl mgr = new Xob_ttl_filter_mgr_srl();
-	private final Hash_adp_bry hash = Hash_adp_bry.cs_();
+	private final Hash_adp_bry hash = Hash_adp_bry.cs();
 	public void Clear() {
 		hash.Clear();
 	}

@@ -32,7 +32,7 @@ public class Score_xnde implements Xox_xnde, Xop_xnde_atr_parser, Xoh_cmd_itm {
 		if (xatr_key_obj == null) return;
 		Byte_obj_val xatr_key = (Byte_obj_val)xatr_key_obj;
 		switch (xatr_key.Val()) {
-			case Xatr_id_lang_is_abc:	lang_is_abc = Bry_.Eq(Bry_.Upper_ascii(xatr.Val_as_bry(src)), Lang_abc); break;
+			case Xatr_id_lang_is_abc:	lang_is_abc = Bry_.Eq(Bry_.Ucase__all(xatr.Val_as_bry(src)), Lang_abc); break;
 			case Xatr_id_code_is_raw:	code_is_raw = xatr.Val_as_bool_by_int(src); break;
 			case Xatr_id_output_midi:	output_midi = xatr.Val_as_bool_by_int(src); break;
 			case Xatr_id_output_ogg:	output_ogg  = xatr.Val_as_bool_by_int(src); break;
@@ -186,7 +186,7 @@ public class Score_xnde implements Xox_xnde, Xop_xnde_atr_parser, Xoh_cmd_itm {
 		return Bry_.Mid(rslt, bgn_pos, end_pos);
 	}
 	public static final byte Xatr_id_lang_is_abc = 0, Xatr_id_code_is_raw = 1, Xatr_id_output_midi = 2, Xatr_id_output_ogg = 3, Xatr_id_file_midi = 4, Xatr_id_file_ogg = 5;
-	private static final Hash_adp_bry atr_hash = Hash_adp_bry.ci_ascii_()
+	private static final Hash_adp_bry atr_hash = Hash_adp_bry.ci_a7()
 	.Add_str_byte("lang", Xatr_id_lang_is_abc)
 	.Add_str_byte("raw", Xatr_id_code_is_raw)
 	.Add_str_byte("midi", Xatr_id_output_midi)

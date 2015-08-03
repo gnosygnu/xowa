@@ -44,6 +44,14 @@ public class Pft_fmt_itm_ {
 	, Tid_hebrew_month_name_full		= 23
 	, Tid_hebrew_month_name_gen			= 24
 	, Tid_hebrew_numeral				= 25
+	, Tid_iranian_year_idx				= 26
+	, Tid_iranian_month_idx				= 27
+	, Tid_iranian_day_idx				= 28
+	, Tid_iranian_month_name			= 29
+	, Tid_hijiri_year_idx				= 30
+	, Tid_hijiri_month_idx				= 31
+	, Tid_hijiri_day_idx				= 32
+	, Tid_hijiri_month_name				= 33
 	;
 
 	public static final Pft_fmt_itm 
@@ -91,6 +99,14 @@ public class Pft_fmt_itm_ {
 	, Iso_fmt					= new Pft_fmt_itm_iso_fmt()
 	, Rfc_5322					= new Pft_fmt_itm_rfc_5322()
 	, Timezone_offset			= new Pft_fmt_itm_timezone_offset()
+	, Iranian_year_idx			= new Pft_fmt_itm_iranian_year_idx()
+	, Iranian_month_idx			= new Pft_fmt_itm_iranian_month_idx()
+	, Iranian_day_idx			= new Pft_fmt_itm_iranian_day_idx()
+	, Iranian_month_name		= new Pft_fmt_itm_iranian_month_name()
+	, Hijiri_year_idx			= new Pft_fmt_itm_hijiri_year_idx()
+	, Hijiri_month_idx			= new Pft_fmt_itm_hijiri_month_idx()
+	, Hijiri_day_idx			= new Pft_fmt_itm_hijiri_day_idx()
+	, Hijiri_month_name			= new Pft_fmt_itm_hijiri_month_name()
 	;
 	public static final Btrie_fast_mgr Regy = Btrie_fast_mgr.cs_()
 	.Add(Byte_ascii.Ltr_Y		, Pft_fmt_itm_.Year_len4)				// 2012
@@ -135,7 +151,15 @@ public class Pft_fmt_itm_ {
 	.Add("xjx"					, Pft_fmt_itm_.Hebrew_month_name_gen)
 	.Add("xjY"					, Pft_fmt_itm_.Hebrew_year_num)
 	.Add("xh"					, Pft_fmt_itm_.Hebrew_numeral)
-	// TODO: foreign; space; "
+	.Add("xij"					, Pft_fmt_itm_.Iranian_day_idx)
+	.Add("xiF"					, Pft_fmt_itm_.Iranian_month_name)
+	.Add("xin"					, Pft_fmt_itm_.Iranian_month_idx)
+	.Add("xiY"					, Pft_fmt_itm_.Iranian_year_idx)
+	.Add("xmj"					, Pft_fmt_itm_.Hijiri_day_idx)
+	.Add("xmF"					, Pft_fmt_itm_.Hijiri_month_name)
+	.Add("xmn"					, Pft_fmt_itm_.Hijiri_month_idx)
+	.Add("xmY"					, Pft_fmt_itm_.Hijiri_year_idx)
+	// TODO: space; "
 	;
 	public static Pft_fmt_itm[] Parse(Xop_ctx ctx, byte[] fmt) {
 		Btrie_fast_mgr trie = Pft_fmt_itm_.Regy;

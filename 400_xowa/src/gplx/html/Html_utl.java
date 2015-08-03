@@ -103,12 +103,12 @@ public class Html_utl {
 			return dirty ? bfr.Xto_bry_and_clear() : bry;
 	}
 
-	private static final Btrie_slim_mgr unescape_trie = Btrie_slim_mgr.ci_ascii_()
-	.Add_bry_bval(Html_entity_.Lt_bry		, Byte_ascii.Lt)
-	.Add_bry_bval(Html_entity_.Gt_bry		, Byte_ascii.Gt)
-	.Add_bry_bval(Html_entity_.Amp_bry		, Byte_ascii.Amp)
-	.Add_bry_bval(Html_entity_.Quote_bry	, Byte_ascii.Quote)
-	.Add_bry_bval(Html_entity_.Apos_num_bry	, Byte_ascii.Apos)
+	private static final Btrie_slim_mgr unescape_trie = Btrie_slim_mgr.ci_a7()
+	.Add_bry_byte(Html_entity_.Lt_bry		, Byte_ascii.Lt)
+	.Add_bry_byte(Html_entity_.Gt_bry		, Byte_ascii.Gt)
+	.Add_bry_byte(Html_entity_.Amp_bry		, Byte_ascii.Amp)
+	.Add_bry_byte(Html_entity_.Quote_bry	, Byte_ascii.Quote)
+	.Add_bry_byte(Html_entity_.Apos_num_bry	, Byte_ascii.Apos)
 	;
 	public static String Unescape_as_str(String src) {
 		Bry_bfr bfr = Bry_bfr.reset_(255);

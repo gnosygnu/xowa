@@ -27,7 +27,7 @@ public class Xog_history_mgr {
 		if (itm == Xog_history_itm.Null) return Xoae_page.Empty;
 		Xoae_page rv = Get_or_fetch(wiki, itm);
 		byte[] anch_key = itm.Anch();
-		rv.Url().Anchor_bry_(anch_key); // must override anchor as it may be different for cached page
+		rv.Url().Anch_bry_(anch_key); // must override anchor as it may be different for cached page
 		rv.Html_data().Bmk_pos_(itm.Bmk_pos());
 		return rv;
 	}
@@ -62,14 +62,14 @@ public class Xog_history_mgr {
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, itm.Page());
 		return wiki.Data_mgr().Get_page(ttl, false);
 	}
-	private static byte[] Build_page_key(Xoae_page page) {return Build_page_key(page.Wiki().Domain_bry(), page.Ttl().Full_url(), page.Url().Args_all_as_bry());}
+	private static byte[] Build_page_key(Xoae_page page) {return Build_page_key(page.Wiki().Domain_bry(), page.Ttl().Full_url(), page.Url().Qargs_mgr().To_bry());}
 	private static byte[] Build_page_key(byte[] wiki_key, byte[] page_key, byte[] args_key) {return Bry_.Add_w_dlm(Byte_ascii.Pipe, wiki_key, page_key, args_key);}
 	public static Xog_history_itm new_(Xoae_page pg) {
 		byte[] wiki = pg.Wiki().Domain_bry();
 		byte[] page = pg.Ttl().Full_url();		// get page_name only (no anchor; no query args)
-		byte[] anch = pg.Url().Anchor_bry();
-		byte[] qarg = pg.Url().Args_all_as_bry();
-		boolean redirect_force = pg.Url().Redirect_force();
+		byte[] anch = pg.Url().Anch_bry();
+		byte[] qarg = pg.Url().Qargs_mgr().To_bry();
+		boolean redirect_force = pg.Url().Qargs_mgr().Match(Xoa_url_.Qarg__redirect, Xoa_url_.Qarg__redirect__yes);
 		String bmk_pos = pg.Html_data().Bmk_pos();
 		if (bmk_pos == null) bmk_pos = Xog_history_itm.Html_doc_pos_toc;	// never allow null doc_pos; set to top
 		return new Xog_history_itm(wiki, page, anch, qarg, redirect_force, bmk_pos);

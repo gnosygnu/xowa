@@ -33,7 +33,7 @@ public class Sites_html_bldr implements Bry_fmtr_arg {
 	private Sites_xtn_mgr xtn_mgr;
 	private Bry_bfr tmp_ttl = Bry_bfr.reset_(255);
 	private List_adp list; private int list_len;
-	private Hash_adp_bry hash = Hash_adp_bry.cs_();
+	private Hash_adp_bry hash = Hash_adp_bry.cs();
 	public Sites_html_bldr(Sites_xtn_mgr xtn_mgr) {this.xtn_mgr = xtn_mgr;}
 	private Bry_fmtr url_fmtr = Bry_fmtr.keys_("title");
 	public void Bld_all(Bry_bfr bfr, Xoae_page page, List_adp list) {
@@ -43,7 +43,7 @@ public class Sites_html_bldr implements Bry_fmtr_arg {
 	}
 	public void XferAry(Bry_bfr bfr, int idx) {
 		Xowe_wiki wiki = xtn_mgr.Wiki();
-		Xoh_href_parser href_parser = wiki.Appe().Href_parser();
+		Xoh_href_parser href_parser = wiki.Appe().Html__href_parser();
 		for (int i = 0; i < list_len; ++i) {
 			Sites_regy_itm itm = (Sites_regy_itm)list.Get_at(i);
 			byte[] xwiki_itm_name = itm.Xwiki_itm().Domain_name();
@@ -54,10 +54,10 @@ public class Sites_html_bldr implements Bry_fmtr_arg {
 		}
 	}
 	private static byte[] Xto_href(Bry_bfr tmp_bfr, Bry_fmtr url_fmtr, Xoh_href_parser href_parser, Xowe_wiki wiki, Xow_xwiki_itm xwiki_itm, byte[] ttl_page_db) {
-		href_parser.Encoder().Encode(tmp_bfr, ttl_page_db);
+		Xoa_app_.Utl__encoder_mgr().Href().Encode(tmp_bfr, ttl_page_db);
 		byte[] rv = url_fmtr.Fmt_(xwiki_itm.Url_fmt()).Bld_bry_many(tmp_bfr, tmp_bfr.Xto_bry_and_clear());			
 		if (xwiki_itm.Domain_tid() != Xow_domain_type_.Tid_other)
-			rv = Bry_.Add(Xoh_href_parser.Href_site_bry, rv);
+			rv = Bry_.Add(Xoh_href_.Bry__site, rv);
 		return rv;
 	}
 	private static final Bry_fmtr

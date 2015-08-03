@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.modules; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.xowa.html.heads.*; import gplx.xowa.html.modules.popups.*;
 public class Xow_module_mgr implements GfoInvkAble {
-	private Hash_adp_bry regy = Hash_adp_bry.cs_();
+	private Hash_adp_bry regy = Hash_adp_bry.cs();
 	public Xow_module_mgr(Xowe_wiki wiki) {
 		this.popup_mgr = new Xow_popup_mgr(wiki);
 		regy.Add_bry_obj(Xoh_head_itm_.Key__top_icon		, itm__top_icon);

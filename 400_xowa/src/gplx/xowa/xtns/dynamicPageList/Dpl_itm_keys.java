@@ -79,7 +79,7 @@ class Dpl_itm_keys {
 	, Key_false = 40
 	, Key_true = 41
 	;
-	private static final Hash_adp_bry keys = Hash_adp_bry.ci_ascii_()
+	private static final Hash_adp_bry keys = Hash_adp_bry.ci_a7()
 	.Add_str_byte("category", Dpl_itm_keys.Key_category)
 	.Add_str_byte("notcategory", Dpl_itm_keys.Key_notcategory)
 	.Add_str_byte("namespace", Dpl_itm_keys.Key_ns)

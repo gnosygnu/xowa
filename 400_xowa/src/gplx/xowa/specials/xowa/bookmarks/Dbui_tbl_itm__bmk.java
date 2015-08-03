@@ -56,7 +56,7 @@ public class Dbui_tbl_itm__bmk implements Dbui_tbl_itm {
 		byte[] new_name = vals.Get_val_as_bry("name");
 		byte[] new_url_bry = vals.Get_val_as_bry("url");
 		byte[] new_comment = vals.Get_val_as_bry("comment");
-		Xoa_url new_url = app.Utl__url_parser().Parse(new_url_bry);
+		Xoa_url new_url = app.User().Wikii().Utl__url_parser().Parse(new_url_bry);
 		if (new_url.Page_bry() == null) return msg_bldr.Clear().Notify_fail_(Err_msg.To_str("Url is invalid", "url", new_url.Raw())).To_json_str();
 		tbl.Update(db_row.Id(), db_row.Owner(), db_row.Sort(), new_name, new_url.Wiki_bry(), new_url_bry, new_comment);
 		Dbui_row_itm ui_row = Get_ui_row(row_pkey, new_name, new_url_bry, new_comment);
@@ -67,7 +67,7 @@ public class Dbui_tbl_itm__bmk implements Dbui_tbl_itm {
 		int len = db_rows.length; if (len != pkeys.length) return msg_bldr.Clear().Notify_fail_(Err_msg.To_str("Rows have changed")).Notify_hint_("Please reload the page").To_json_str();
 		for (int i = 0; i < len; ++i) {
 			int old_pkey = db_rows[i].Id();
-			int new_pkey = Bry_.Xto_int(pkeys[i]);
+			int new_pkey = Bry_.To_int_or_neg1(pkeys[i]);
 			if (old_pkey == new_pkey) continue;	// order hasn't changed; EX: 5 in list; 4th moved to 5th; 1 through 3 will have same sort order;
 			tbl.Update_sort(new_pkey, i);
 		}
@@ -87,7 +87,7 @@ public class Dbui_tbl_itm__bmk implements Dbui_tbl_itm {
 		return app.Html__bridge_mgr().Msg_bldr().Clear().Data("html", tmp_bfr.Xto_bry_and_clear()).To_json_str();
 	}
 	private Xoud_bmk_itm_row Get_db_row(byte[] pkey) {
-		int bmk_id = Bry_.Xto_int_or_fail(pkey);
+		int bmk_id = Bry_.To_int(pkey);
 		return tbl.Select_or_null(bmk_id);
 	}
 	private Dbui_row_itm Get_ui_row(Xoud_bmk_itm_row row) {return Get_ui_row(Int_.Xto_bry(row.Id()), row.Name(), row.Url(), row.Comment());}

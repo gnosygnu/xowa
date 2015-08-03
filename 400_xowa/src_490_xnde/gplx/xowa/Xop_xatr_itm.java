@@ -38,9 +38,9 @@ public class Xop_xatr_itm {
 	public String Val_as_str(byte[] src) {return String_.new_u8(Val_as_bry(src));}
 	public byte[] Val_as_bry(byte[] src) {if (val_bry == null) val_bry = Bry_.Mid(src, val_bgn, val_end); return val_bry;}	// NOTE: val_bry is cached
 	public byte[] Val_as_bry__blank_to_null(byte[] src) {byte[] rv = Val_as_bry(src); return Bry_.Len_eq_0(rv) ? null : rv;}
-	public int Val_as_int_or(byte[] src, int or) {return val_bry == null ? Bry_.Xto_int_or_lax(src, val_bgn, val_end, or) : Bry_.Xto_int_or(val_bry, or);}
+	public int Val_as_int_or(byte[] src, int or) {return val_bry == null ? Bry_.To_int_or__lax(src, val_bgn, val_end, or) : Bry_.To_int_or(val_bry, or);}
 	public boolean Val_as_bool_by_int(byte[] src) {return Val_as_int_or(src, 0) == 1;}
-	public boolean Val_as_bool(byte[] src) {return Bry_.Eq(Bry_.Lower_ascii(Val_as_bry(src)), Bool_.True_bry);}
+	public boolean Val_as_bool(byte[] src) {return Bry_.Eq(Bry_.Lcase__all(Val_as_bry(src)), Bool_.True_bry);}
 	public static Xop_xatr_itm[] Xatr_parse(Xoae_app app, Xop_xnde_atr_parser parser, Hash_adp_bry hash, Xowe_wiki wiki, byte[] src, Xop_xnde_tkn xnde) {
 		Xop_xatr_itm[] xatr_ary = app.Xatr_parser().Parse(app.Msg_log(), src, xnde.Atrs_bgn(), xnde.Atrs_end());
 		for (int i = 0; i < xatr_ary.length; i++) {

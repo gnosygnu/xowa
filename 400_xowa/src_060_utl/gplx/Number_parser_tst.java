@@ -29,19 +29,19 @@ public class Number_parser_tst {
 		fxt.Test_int("00001", 1);
 	}
 	@Test  public void Decimal() {
-		fxt.Test_dec("1.23", DecimalAdp_.parse_("1.23"));
-		fxt.Test_dec("1.023", DecimalAdp_.parse_("1.023"));
-		fxt.Test_dec("-1.23", DecimalAdp_.parse_("-1.23"));
+		fxt.Test_dec("1.23", Decimal_adp_.parse_("1.23"));
+		fxt.Test_dec("1.023", Decimal_adp_.parse_("1.023"));
+		fxt.Test_dec("-1.23", Decimal_adp_.parse_("-1.23"));
 	}
 	@Test  public void Double_long() {
-		fxt.Test_dec(".42190046219457", DecimalAdp_.parse_(".42190046219457"));
+		fxt.Test_dec(".42190046219457", Decimal_adp_.parse_(".42190046219457"));
 	}
 	@Test  public void Exponent() {
 		fxt.Test_int("1E2", 100);
-		fxt.Test_dec("1.234E2", DecimalAdp_.parse_("123.4"));
-		fxt.Test_dec("1.234E-2", DecimalAdp_.parse_(".01234"));
-		fxt.Test_dec("123.4E-2", DecimalAdp_.parse_("1.234"));
-		fxt.Test_dec("+6.0E-3", DecimalAdp_.parse_(".006"));
+		fxt.Test_dec("1.234E2", Decimal_adp_.parse_("123.4"));
+		fxt.Test_dec("1.234E-2", Decimal_adp_.parse_(".01234"));
+		fxt.Test_dec("123.4E-2", Decimal_adp_.parse_("1.234"));
+		fxt.Test_dec("+6.0E-3", Decimal_adp_.parse_(".006"));
 	}
 	@Test  public void Err() {
 		fxt.Test_err("+", true);
@@ -77,10 +77,10 @@ class Number_parser_fxt {
 		int actl = parser.Parse(raw_bry, 0, raw_bry.length).Rv_as_int(); 
 		Tfds.Eq(expd, actl, raw);
 	}
-	public void Test_dec(String raw, DecimalAdp expd) {
+	public void Test_dec(String raw, Decimal_adp expd) {
 		byte[] raw_bry = Bry_.new_a7(raw);
-		DecimalAdp actl = parser.Parse(raw_bry, 0, raw_bry.length).Rv_as_dec(); 
-		Tfds.Eq(expd.Xto_decimal(), actl.Xto_decimal(), raw);
+		Decimal_adp actl = parser.Parse(raw_bry, 0, raw_bry.length).Rv_as_dec(); 
+		Tfds.Eq(expd.To_double(), actl.To_double(), raw);
 	}
 	public void Test_err(String raw, boolean expd) {
 		byte[] raw_bry = Bry_.new_a7(raw);

@@ -49,7 +49,7 @@ public class Load_page_wkr implements Gfo_thread_wkr {
 				Thread_adp_.Sleep(10);
 			}
 			Xoae_app app = wiki.Appe();
-			app.Usr_dlg().Log_many("", "", "page.load: url=~{0}", url.Xto_full_str_safe());
+			app.Usr_dlg().Log_many("", "", "page.load: url=~{0}", url.To_str());
 			if (Env_.System_memory_free() < app.Sys_cfg().Free_mem_when())	// check if low in memory
 				app.Free_mem(false);										// clear caches (which will clear bry_bfr_mk)
 			else															// not low in memory

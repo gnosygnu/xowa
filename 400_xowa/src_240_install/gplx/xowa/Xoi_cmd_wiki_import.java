@@ -103,7 +103,7 @@ class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 	private void Open_wiki(String wiki_key) {
 		Xog_win_itm main_win = install_mgr.App().Gui_mgr().Browser_win();
 		if (main_win.Active_page() == null) return; // will be null when invoked through cmd-line
-		byte[] url = Bry_.Add(wiki.Domain_bry(), Xoh_href_parser.Href_wiki_bry, wiki.Props().Main_page());
+		byte[] url = Bry_.Add(wiki.Domain_bry(), Xoh_href_.Bry__wiki, wiki.Props().Main_page());
 		main_win.Page__navigate_by_url_bar(String_.new_u8(url));
 	}	
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

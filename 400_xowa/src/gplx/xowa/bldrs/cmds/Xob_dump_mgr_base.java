@@ -173,7 +173,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 		Exec_commit(-1, -1, -1, Bry_.Empty);
 		Exec_end_hook();
 		Free();
-		usr_dlg.Note_many("", "", "done: ~{0} ~{1}", exec_count, DecimalAdp_.divide_safe_(exec_count, Env_.TickCount_elapsed_in_sec(time_bgn)).Xto_str("#,###.000"));
+		usr_dlg.Note_many("", "", "done: ~{0} ~{1}", exec_count, Decimal_adp_.divide_safe_(exec_count, Env_.TickCount_elapsed_in_sec(time_bgn)).To_str("#,###.000"));
 	}
 	private void Free() {
 		ctx.App().Free_mem(true);
@@ -294,9 +294,9 @@ class Xob_rate_mgr {
 	}
 	private void Save(int count, long bgn, long end) {
 		int dif = (int)(end - bgn) / 1000;
-		DecimalAdp rate = DecimalAdp_.divide_safe_(count, dif);
+		Decimal_adp rate = Decimal_adp_.divide_safe_(count, dif);
 		save_bfr
-			.Add_str(rate.Xto_str("#,##0.000")).Add_byte_pipe()
+			.Add_str(rate.To_str("#,##0.000")).Add_byte_pipe()
 			.Add_int_variable(count).Add_byte_pipe()
 			.Add_int_variable(dif).Add_byte_nl()
 			;

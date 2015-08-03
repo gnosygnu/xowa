@@ -80,7 +80,7 @@ class Xow_domain_crt_itm_parser {
 		else
 			return new Xow_domain_crt_itm__wiki(raw);	// EX: en.wikipedia.org
 	}
-	private static final Hash_adp_bry itm_hash = Hash_adp_bry.cs_()
+	private static final Hash_adp_bry itm_hash = Hash_adp_bry.cs()
 	.Add_str_obj("<self>"		, Xow_domain_crt_itm__self.I)
 	.Add_str_obj("<same_type>"	, Xow_domain_crt_itm__same_type.I)
 	.Add_str_obj("<same_lang>"	, Xow_domain_crt_itm__same_lang.I)

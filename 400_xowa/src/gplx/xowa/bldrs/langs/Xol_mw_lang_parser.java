@@ -331,7 +331,7 @@ public class Xol_mw_lang_parser {
 	, Tid_fallback = 5, Tid_rtl = 6
 	, Tid_separatorTransformTable = 7, Tid_digitTransformTable = 8, Tid_digitGroupingPattern = 9
 	;
-	private static Hash_adp_bry Tid_hash = Hash_adp_bry.cs_()
+	private static Hash_adp_bry Tid_hash = Hash_adp_bry.cs()
 	.Add_str_byte("namespaceNames", Tid_namespaceNames).Add_str_byte("namespaceAliases", Tid_namespaceAliases).Add_str_byte("specialPageAliases", Tid_specialPageAliases)
 	.Add_str_byte("messages", Tid_messages).Add_str_byte("magicWords", Tid_magicwords)
 	.Add_str_byte("fallback", Tid_fallback).Add_str_byte("rtl", Tid_rtl)
@@ -340,7 +340,7 @@ public class Xol_mw_lang_parser {
 	;
 	public static int Id_by_mw_name(byte[] src) {
 		if (mw_names == null) {
-			mw_names = Btrie_slim_mgr.cs_();
+			mw_names = Btrie_slim_mgr.cs();
 			mw_names.Add_obj("NS_MEDIA", Int_obj_val.new_(Xow_ns_.Id_media));
 			mw_names.Add_obj("NS_SPECIAL", Int_obj_val.new_(Xow_ns_.Id_special));
 			mw_names.Add_obj("NS_MAIN", Int_obj_val.new_(Xow_ns_.Id_main));

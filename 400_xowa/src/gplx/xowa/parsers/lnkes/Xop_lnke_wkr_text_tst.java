@@ -29,7 +29,7 @@ public class Xop_lnke_wkr_text_tst {
 		fxt.Test_parse_page_wiki("irc://a b c", fxt.tkn_lnke_(0, 7).Lnke_rng_(0, 7), fxt.tkn_space_(7, 8), fxt.tkn_txt_(8, 9), fxt.tkn_space_(9, 10), fxt.tkn_txt_(10, 11));
 	}
 	@Test  public void Text_before_ascii() {	// PURPOSE: free form external urls should not match if preceded by letters; EX:de.w:Sylvie_und_Bruno; DATE:2014-05-11
-		fxt.Ctx().Lang().Case_mgr_utf8_();
+		fxt.Ctx().Lang().Case_mgr_u8_();
 		String expd_lnke_html = "<a href=\"tel:a\" class=\"external text\" rel=\"nofollow\">tel:a</a>";
 		fxt.Test_parse_page_wiki_str("titel:a"		, "titel:a");
 		fxt.Test_parse_page_wiki_str(" tel:a"		, " " + expd_lnke_html);

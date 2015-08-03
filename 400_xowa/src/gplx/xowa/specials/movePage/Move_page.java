@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.movePage; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.core.primitives.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.core.primitives.*; import gplx.core.net.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.html.hrefs.*;
 public class Move_page implements Xows_page {
 	private Move_trg_ns_list_fmtr ns_list_fmtr = new Move_trg_ns_list_fmtr();
@@ -67,7 +67,7 @@ public class Move_page implements Xows_page {
 		wiki.Parser().Parse_text_to_html(tmp_bfr, page, true, msg_mgr.Val_by_key_obj("movepagetext"));
 		fmtr_all.Bld_bfr_many(tmp_bfr
 		, msg_mgr.Val_by_key_obj("move-page-legend")
-		, Bry_.Add(Xoh_href_parser.Href_wiki_bry, src_ttl.Full_db())
+		, Bry_.Add(Xoh_href_.Bry__wiki, src_ttl.Full_db())
 		, gplx.html.Html_utl.Escape_html_as_bry(src_ttl.Full_txt())
 		, src_ttl.Full_txt()
 		, msg_mgr.Val_by_key_obj("newtitle")
@@ -147,19 +147,19 @@ class Move_url_args {
 	public boolean Create_redirect() {return create_redirect;} private boolean create_redirect;
 	public void Parse(Xoa_url url) {
 		this.Clear();
-		Gfo_url_arg[] args = url.Args();
+		Gfo_qarg_itm[] args = url.Qargs_ary();
 		int args_len = args.length;
 		for (int i = 0; i < args_len; i++) {
-			Gfo_url_arg arg = args[i];
+			Gfo_qarg_itm arg = args[i];
 			Object tid_obj = arg_keys.Get_by(arg.Key_bry());
 			byte[] val_bry = arg.Val_bry();
 			if (tid_obj != null) {
 				switch (((Byte_obj_val)tid_obj).Val()) {
 					case Key_submitted:				submitted = true; break;	// wpMove will only be in query_args if move button is pressed
 					case Key_src_ttl:				src_ttl = val_bry; break;
-					case Key_trg_ns:				trg_ns = Bry_.Xto_int_or_fail(val_bry); break;
+					case Key_trg_ns:				trg_ns = Bry_.To_int(val_bry); break;
 					case Key_trg_ttl:				trg_ttl = val_bry; break;
-					case Key_create_redirect:		create_redirect = Bry_.Xto_bool_by_int_or_fail(val_bry); break;
+					case Key_create_redirect:		create_redirect = Bry_.To_bool_by_int(val_bry); break;
 				}
 			}
 		}
@@ -171,7 +171,7 @@ class Move_url_args {
 		create_redirect = false;
 	}
 	private static final byte Key_submitted = 1, Key_src_ttl = 2, Key_trg_ns = 3, Key_trg_ttl = 4, Key_create_redirect = 5;
-	private static final Hash_adp_bry arg_keys = Hash_adp_bry.ci_ascii_()
+	private static final Hash_adp_bry arg_keys = Hash_adp_bry.ci_a7()
 	.Add_str_byte("wpMove"			, Key_submitted)
 	.Add_str_byte("wpOldTitle"		, Key_src_ttl)
 	.Add_str_byte("wpNewTitleNs"	, Key_trg_ns)

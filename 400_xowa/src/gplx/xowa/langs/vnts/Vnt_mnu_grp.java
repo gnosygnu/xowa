@@ -17,9 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 public class Vnt_mnu_grp {
-	private final List_adp list = List_adp_.new_();
+	private final Ordered_hash list = Ordered_hash_.new_bry_();
 	public int Len() {return list.Count();}
+	public boolean Has(byte[] key) {return list.Has(key);}
 	public Vnt_mnu_itm Get_at(int i) {return (Vnt_mnu_itm)list.Get_at(i);}
-	public void Add(Vnt_mnu_itm itm) {list.Add(itm);}
-	public byte[] Text() {return text;} public void Text_(byte[] v) {text = v;} private byte[] text;
+	public void Add(Vnt_mnu_itm itm) {list.Add_if_dupe_use_1st(itm.Key(), itm);}
+	public Vnt_mnu_itm Get_by(byte[] key) {return (Vnt_mnu_itm)list.Get_by(key);}
 }

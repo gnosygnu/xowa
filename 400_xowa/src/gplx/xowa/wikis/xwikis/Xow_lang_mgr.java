@@ -25,11 +25,11 @@ public class Xow_lang_mgr {
 	}
 	public Bry_fmtr Html_div() {return html_div;} private final Bry_fmtr html_div = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<div id=\"xowa-lang\">"
-	, "  <h5>~{toggle_btn}~{wikidata_link}</h5>"
+	, "  <h5>~{toggle_btn} (links: ~{len}) ~{wikidata_link}</h5>"
 	, "  <div~{toggle_hdr}>~{grps}"
 	, "  </div>"
 	, "</div>"
-	), "wikidata_link", "toggle_btn", "toggle_hdr", "grps");
+	), "len", "wikidata_link", "toggle_btn", "toggle_hdr", "grps");
 	public Bry_fmtr Html_wikidata_link() {return html_wikidata_link;} private final Bry_fmtr html_wikidata_link = Bry_fmtr.new_(" (<a href=\"/site/www.wikidata.org/wiki/~{qid}\">wikidata</a>)", "qid");
 	public void Clear() {hash.Clear();}
 	public void Itms_reg(Xow_xwiki_itm xwiki, Xoac_lang_itm lang) {
@@ -111,7 +111,7 @@ class Xow_lang_html implements Bry_fmtr_arg {
 				byte[] msg_lang = wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_page_lang_header);
 				byte[] wikidata_link = Bry_.Len_eq_0(qid) ? Bry_.Empty : lang_mgr.Html_wikidata_link().Bld_bry_many(tmp_bfr, qid);
 				toggle_itm.Init(wiki, msg_lang);
-				lang_mgr.Html_div().Bld_bfr_many(bfr, wikidata_link, toggle_itm.Html_toggle_btn(), toggle_itm.Html_toggle_hdr(), this);
+				lang_mgr.Html_div().Bld_bfr_many(bfr, ttl_list.Count(), wikidata_link, toggle_itm.Html_toggle_btn(), toggle_itm.Html_toggle_hdr(), this);
 				stage = 0;
 				break;
 			}
@@ -141,9 +141,9 @@ class Xow_lang_html implements Bry_fmtr_arg {
 					byte[] local_name = itm.Lang_name();
 					byte[] badge_cls = Badge_cls(tmp_bfr, itm.Page_badges());
 					if (wiki.Appe().Usere().Wiki().Xwiki_mgr().Get_by_key(domain) == null)
-						tmp_bfr.Add(Xoh_href_parser.Href_https_bry).Add(domain).Add(Xoh_href_parser.Href_wiki_bry);
+						tmp_bfr.Add(Xoh_href_.Bry__https).Add(domain).Add(Xoh_href_.Bry__wiki);
 					else
-						tmp_bfr.Add(Xoh_href_parser.Href_site_bry).Add(domain).Add(Xoh_href_parser.Href_wiki_bry);
+						tmp_bfr.Add(Xoh_href_.Bry__site).Add(domain).Add(Xoh_href_.Bry__wiki);
 					if (!itm.Empty_xwiki()) tmp_bfr.Add(page_name);
 					grp.Html_itm().Bld_bfr_many(bfr, lang_key, domain, local_name, tmp_bfr.Xto_bry_and_clear(), page_name, badge_cls);
 					++grp_counter;
@@ -183,7 +183,7 @@ class Xow_lang_html implements Bry_fmtr_arg {
 	  Badge_none_cls	= Bry_.new_a7("badge-none")
 	, Cls_bgn			= Bry_.new_a7(" class='")
 	;
-	private static Hash_adp_bry badges_hash = Hash_adp_bry.ci_ascii_()
+	private static Hash_adp_bry badges_hash = Hash_adp_bry.ci_a7()
 	.Add_str_obj("Q17437798", Bry_.new_a7("badge-goodarticle"))
 	.Add_str_obj("Q17437796", Bry_.new_a7("badge-featuredarticle"))
 	.Add_str_obj("Q17559452", Bry_.new_a7("badge-recommendedarticle"))

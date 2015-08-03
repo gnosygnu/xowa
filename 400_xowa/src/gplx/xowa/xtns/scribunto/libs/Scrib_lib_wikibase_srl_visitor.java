@@ -46,7 +46,8 @@ class Scrib_lib_wikibase_srl_visitor implements Wdata_claim_visitor {
 		rv[0] = KeyVal_.new_(Wdata_dict_value_monolingualtext.Str_text			, String_.new_u8(itm.Text()));
 		rv[1] = KeyVal_.new_(Wdata_dict_value_monolingualtext.Str_language		, String_.new_u8(itm.Lang()));
 		return rv;
-	}		public void Visit_quantity(Wdata_claim_itm_quantity itm) {
+	}
+	public void Visit_quantity(Wdata_claim_itm_quantity itm) {
 		rv = new KeyVal[2];
 		rv[0] = KeyVal_.new_(Scrib_lib_wikibase_srl.Key_type, Wdata_dict_val_tid.Str_quantity);
 		rv[1] = KeyVal_.new_(Scrib_lib_wikibase_srl.Key_value, Quantity_value(itm));

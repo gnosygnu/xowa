@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.primitives.*;
-import gplx.xowa.parsers.lnkes.*; import gplx.xowa.html.*; import gplx.xowa.net.*;
+import gplx.core.primitives.*; import gplx.core.net.*;
+import gplx.xowa.parsers.lnkes.*; import gplx.xowa.html.*;
 interface Imap_link_owner {
 	void Link_tid_(int v);
 	void Link_href_(byte[] v);
@@ -32,7 +32,7 @@ class Imap_link_owner_ {
 			switch (tkn_tid) {
 				case Xop_tkn_itm_.Tid_lnki: {
 					Xop_lnki_tkn lnki_tkn = (Xop_lnki_tkn)tkn;
-					link_owner.Link_href_(app.Href_parser().Build_to_bry(wiki, lnki_tkn.Ttl()));
+					link_owner.Link_href_(app.Html__href_wtr().Build_to_bry(wiki, lnki_tkn.Ttl()));
 					wiki.Html_mgr().Html_wtr().Lnki_wtr().Write_caption(bfr, Xoh_wtr_ctx.Alt, src, lnki_tkn, lnki_tkn.Ttl());
 					link_owner.Link_text_(bfr.Xto_bry_and_clear());
 					break;
@@ -40,7 +40,7 @@ class Imap_link_owner_ {
 				case Xop_tkn_itm_.Tid_lnke: {
 					Xop_lnke_tkn lnke = (Xop_lnke_tkn)tkn;
 					Xop_ctx ctx = wiki.Ctx();
-					int lnke_bgn = lnke.Lnke_bgn(), lnke_end = lnke.Lnke_end(); boolean proto_is_xowa = lnke.Proto_tid() == Xoo_protocol_itm.Tid_xowa;
+					int lnke_bgn = lnke.Lnke_bgn(), lnke_end = lnke.Lnke_end(); boolean proto_is_xowa = lnke.Proto_tid() == Gfo_protocol_itm.Tid_xowa;
 					Xoh_lnke_wtr lnke_wtr = wiki.Html_mgr().Html_wtr().Lnke_wtr();
 					lnke_wtr.Write_href(bfr, ctx, src, lnke, lnke_bgn, lnke_end, proto_is_xowa);
 					link_owner.Link_href_(bfr.Xto_bry_and_clear());

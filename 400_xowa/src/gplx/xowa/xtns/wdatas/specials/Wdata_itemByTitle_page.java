@@ -16,9 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wdatas.*;
+import gplx.core.net.*;
 import gplx.xowa.wikis.*; import gplx.xowa.specials.*;
+import gplx.xowa.urls.*;
 public class Wdata_itemByTitle_page implements Xows_page {
-	private Xoa_url_arg_hash arg_hash = new Xoa_url_arg_hash();
+	private Gfo_qarg_mgr arg_hash = new Gfo_qarg_mgr();
 	private static final byte[] Arg_site = Bry_.new_a7("site"), Arg_page = Bry_.new_a7("page");
 	public Bry_fmtr Html_fmtr() {return html_fmtr;}
 	private Wdata_itemByTitle_cfg cfg;
@@ -30,9 +32,9 @@ public class Wdata_itemByTitle_page implements Xows_page {
 		byte[] site_bry = cfg.Site_default();
 		byte[] page_bry = Bry_.Empty;
 		byte[] raw_bry = ttl.Full_txt_wo_qarg(); 					// EX: enwiki/Earth
-		int args_len = url.Args().length;
+		int args_len = url.Qargs_ary().length;
 		if (args_len > 0) {
-			arg_hash.Load(url);
+			arg_hash.Load(url.Qargs_ary());
 			site_bry = arg_hash.Get_val_bry_or(Arg_site, Bry_.Empty);
 			page_bry = arg_hash.Get_val_bry_or(Arg_page, Bry_.Empty);
 		}

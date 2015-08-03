@@ -20,7 +20,7 @@ public class Gfo_usr_dlg_fmt {
 	public boolean Write_prog_cur(int cur, Gfo_usr_dlg usr_dlg) {
 		if (cur < prog_prv + prog_interval) return usr_dlg.Canceled();
 		prog_prv = cur;
-		String pct = DecimalAdp_.CalcPctStr(cur + List_adp_.Base1, end, "00.00");
+		String pct = Decimal_adp_.CalcPctStr(cur + List_adp_.Base1, end, "00.00");
 		usr_dlg.Prog_many(grp_key, msg_key, fmt, Int_.Xto_str_pad_bgn_zero(cur + List_adp_.Base1, endLen), end, pct);
 		return usr_dlg.Canceled();
 	}	String fmt; int end, endLen;

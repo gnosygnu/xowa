@@ -55,7 +55,7 @@ class Xowmf_json_parser {
 			Json_nde sub = ary.Get_at_as_nde(i);
 			Fail_if_wrong_count(sub, sub.Len(), 2, "namespacealias");
 			byte[] id_bry = sub.Get_bry(Atr_namespacealias_id);
-			int id = Bry_.Xto_int_or(id_bry, Int_.MaxValue); if (id == Int_.MaxValue) throw Err_.new_("wmf.data", "invalid id for namespacealias", "id", id_bry, "src", Extract(sub));
+			int id = Bry_.To_int_or(id_bry, Int_.MaxValue); if (id == Int_.MaxValue) throw Err_.new_("wmf.data", "invalid id for namespacealias", "id", id_bry, "src", Extract(sub));
 			list.Add(id, new Xowmf_namespacealias_itm(id, sub.Get_bry(Atr_namespacealias_alias)));
 		}
 	}
@@ -161,7 +161,7 @@ class Xowmf_json_parser {
 	, Atr_skins_code		= Bry_.new_a7("code"), Atr_skins_dflt = Bry_.new_a7("de"+"fault"), Atr_skins_name = Bry_.new_a7("*")
 	, Atr_languages_code	= Bry_.new_a7("code"), Atr_languages_name = Bry_.new_a7("*")
 	;
-	private static final Hash_adp_bry nde_hash = Hash_adp_bry.cs_()
+	private static final Hash_adp_bry nde_hash = Hash_adp_bry.cs()
 	.Add_bry_int(Nde_general				, Tid_general)
 	.Add_bry_int(Nde_namespaces				, Tid_namespaces)
 	.Add_bry_int(Nde_statistics				, Tid_statistics)

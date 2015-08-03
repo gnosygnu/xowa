@@ -133,7 +133,7 @@ class Xow_search_scanner {
 	}
 	private Xow_search_tkn new_tkn(byte tid, int val_bgn, int val_end) {return Xow_search_tkn.new_pos(tid, val_bgn, val_end);}
 	private static final byte[] Bry_and = Bry_.new_a7("AND");
-	private static final Btrie_slim_mgr trie = Btrie_slim_mgr.ci_ascii_()// NOTE:ci.ascii:OR / AND only
+	private static final Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7()// NOTE:ci.ascii:OR / AND only
 	.Add_str_byte(" "	, Xow_search_tkn.Tid_space)
 	.Add_str_byte("\""	, Xow_search_tkn.Tid_quote)
 	.Add_str_byte("-"	, Xow_search_tkn.Tid_not)

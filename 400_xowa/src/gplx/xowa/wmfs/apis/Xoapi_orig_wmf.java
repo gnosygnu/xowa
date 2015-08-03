@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wmfs.apis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wmfs.*;
+import gplx.core.net.*;
 import gplx.xowa.files.downloads.*;
 import gplx.xowa.html.hrefs.*;
 public class Xoapi_orig_wmf extends Xoapi_orig_base {
@@ -37,16 +38,16 @@ public class Xoapi_orig_wmf extends Xoapi_orig_base {
 
 			byte[] orig_wiki = null, orig_page = null; int orig_w = 0, orig_h = 0;
 			if (Parse_xml_val(tmp_rng, usr_dlg, xml, xml_len, pos, Bry_xml_width))
-				orig_w = Bry_.Xto_int_or(xml, tmp_rng.Val_0(), tmp_rng.Val_1(), 0);
+				orig_w = Bry_.To_int_or(xml, tmp_rng.Val_0(), tmp_rng.Val_1(), 0);
 
 			if (Parse_xml_val(tmp_rng, usr_dlg, xml, xml_len, pos, Bry_xml_height))
-				orig_h = Bry_.Xto_int_or(xml, tmp_rng.Val_0(), tmp_rng.Val_1(), 0);
+				orig_h = Bry_.To_int_or(xml, tmp_rng.Val_0(), tmp_rng.Val_1(), 0);
 
 			if (Parse_xml_val(tmp_rng, usr_dlg, xml, xml_len, pos, Bry_xml_descriptionurl)) {
 				byte[] file_url = Bry_.Mid(xml, tmp_rng.Val_0(), tmp_rng.Val_1());
 				url_parser.Parse(url, file_url, 0, file_url.length);
-				orig_wiki = url.Site();
-				byte[] page = Xoa_ttl.Replace_spaces(url.Page());
+				orig_wiki = url.Segs__get_at_1st();
+				byte[] page = Xoa_ttl.Replace_spaces(url.Segs__get_at_nth());
 				int colon_pos = Bry_finder.Find_fwd(page, Byte_ascii.Colon, 0, page.length);
 				if (colon_pos != Bry_.NotFound)
 					page = Bry_.Mid(page, colon_pos + 1, page.length);
@@ -68,7 +69,7 @@ public class Xoapi_orig_wmf extends Xoapi_orig_base {
 	}
 	public static String Bld_api_url(byte[] wiki_key, byte[] ttl, int width, int height) {
 		synchronized (tmp_bfr) {
-			tmp_bfr.Add(Xoh_href_parser.Href_https_bry)				// "https://"
+			tmp_bfr.Add(Xoh_href_.Bry__https)						// "https://"
 				.Add(wiki_key)										// "commons.wikimedia.org"
 				.Add(Bry_api)										// "/w/api.php?action=query&format=xml&prop=imageinfo&iiprop=size|url&titles=File:"
 				.Add(tmp_encoder.Encode(ttl))						// "A%20B.png"

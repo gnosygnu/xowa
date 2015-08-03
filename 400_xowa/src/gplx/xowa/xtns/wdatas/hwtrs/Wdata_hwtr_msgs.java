@@ -223,5 +223,5 @@ public class Wdata_hwtr_msgs {
 			rv[i] = gplx.html.Html_utl.Escape_html_as_bry(msg_mgr.Val_by_key_obj(ids[i]));
 		return rv;
 	}
-	private static byte[] Name_(byte[] v) {return Bry_.Upper_1st(Bry_.Copy(v));}
+	private static byte[] Name_(byte[] v) {return Bry_.Ucase__1st(Bry_.Copy(v));}
 }

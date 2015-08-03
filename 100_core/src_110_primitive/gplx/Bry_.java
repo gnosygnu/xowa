@@ -177,31 +177,6 @@ public class Bry_ {
 		for (int i = 0; i < src_len; i++)
 			trg[i + trg_bgn] = src[i + src_bgn];
 	}
-	public static byte[][] XtoByteAryAry(String... strAry) {
-		int strAryLen = strAry.length;
-		byte[][] rv = new byte[strAryLen][];
-		for (int i = 0; i < strAryLen; i++)
-			rv[i] = Bry_.new_u8(strAry[i]);
-		return rv;
-	}
-	public static byte[] Xto_str_lower(byte[] src, int bgn, int end) {
-		int len = end - bgn;
-		byte[] rv = new byte[len];
-		for (int i = bgn; i < end; i++) {
-			byte b = src[i];
-			switch (b) {
-  					case Byte_ascii.Ltr_A: case Byte_ascii.Ltr_B: case Byte_ascii.Ltr_C: case Byte_ascii.Ltr_D: case Byte_ascii.Ltr_E:
-  					case Byte_ascii.Ltr_F: case Byte_ascii.Ltr_G: case Byte_ascii.Ltr_H: case Byte_ascii.Ltr_I: case Byte_ascii.Ltr_J:
-  					case Byte_ascii.Ltr_K: case Byte_ascii.Ltr_L: case Byte_ascii.Ltr_M: case Byte_ascii.Ltr_N: case Byte_ascii.Ltr_O:
-  					case Byte_ascii.Ltr_P: case Byte_ascii.Ltr_Q: case Byte_ascii.Ltr_R: case Byte_ascii.Ltr_S: case Byte_ascii.Ltr_T:
-  					case Byte_ascii.Ltr_U: case Byte_ascii.Ltr_V: case Byte_ascii.Ltr_W: case Byte_ascii.Ltr_X: case Byte_ascii.Ltr_Y: case Byte_ascii.Ltr_Z:
-					b += 32;
-					break;
-			}
-			rv[i - bgn] = b;
-		}
-		return rv;
-	}
 	public static byte[] Replace_one(byte[] src, byte[] find, byte[] repl) {
 		int src_len = src.length;
 		int findPos = Bry_finder.Find(src, find, 0, src_len, true); if (findPos == Bry_.NotFound) return src;
@@ -325,7 +300,7 @@ public class Bry_ {
 	}
 	public static byte[] Mid_safe(byte[] src, int bgn, int end) {
 		try {return Mid(src, bgn, end);}
-		catch (Exception e) {Err_.Noop(e); return Bry_.Add_w_dlm(Byte_ascii.Space, Bry_.XbyInt(bgn), Bry_.XbyInt(end));}
+		catch (Exception e) {Err_.Noop(e); return Bry_.Add_w_dlm(Byte_ascii.Space, Bry_.new_by_int(bgn), Bry_.new_by_int(end));}
 	}
 	public static byte[] Mid(byte[] src, int bgn) {return Mid(src, bgn, src.length);}
 	public static byte[] Mid_or(byte[] src, int bgn, int end, byte[] or) {
@@ -562,7 +537,7 @@ public class Bry_ {
 			if (lhs[i] != rhs[i + rhs_bgn]) return false;
 		return true;
 	}
-	public static boolean Eq_ci_ascii(byte[] lhs, byte[] rhs, int rhs_bgn, int rhs_end) {
+	public static boolean Eq_ci_a7(byte[] lhs, byte[] rhs, int rhs_bgn, int rhs_end) {
 		if		(lhs == null && rhs == null) return true;
 		else if (lhs == null || rhs == null) return false;
 		int lhs_len = lhs.length;
@@ -575,8 +550,22 @@ public class Bry_ {
 		}
 		return true;
 	}
-	public static byte[] XtoStrBytesByInt(int val, int padLen) {return XtoStrBytesByInt(val, null, 0, padLen);}
-	public static byte[] XtoStrBytesByInt(int val, byte[] ary, int aryPos, int padLen) {
+	public static int To_int_by_a7(byte[] v) {
+		int v_len = v.length;
+		int mod = 8 * (v_len - 1);
+		int rv = 0;
+		for (int i = 0; i < v_len; i++) {
+			rv |= v[i] << mod;
+			mod -= 8;
+		}
+		return rv;
+//			return	((0xFF & v[0]) << 24) 
+//				|	((0xFF & v[1]) << 16)
+//				|	((0xFF & v[2]) <<  8)
+//				|	(0xFF  & v[3]);
+	}
+	public static byte[] To_a7_bry(int val, int pad_len) {return To_a7_bry(val, null, 0, pad_len);}
+	public static byte[] To_a7_bry(int val, byte[] ary, int aryPos, int pad_len) {
 		int neg = 0;
 		if	(val < 0) {
 			val *= -1;
@@ -584,47 +573,57 @@ public class Bry_ {
 		}
 		int digits = val == 0 ? 0 : Math_.Log10(val);
 		digits += 1;						// digits = log + 1; EX: Log(1-9) = 0, Log(10-99) = 1
-		int aryLen = digits + neg, aryBgn = aryPos, pad = 0;
-		if (aryLen < padLen) {				// padding specified
-			pad = padLen - aryLen;
-			aryLen = padLen;
+		int ary_len = digits + neg, aryBgn = aryPos, pad = 0;
+		if (ary_len < pad_len) {				// padding specified
+			pad = pad_len - ary_len;
+			ary_len = pad_len;
 		}
-		if (ary == null) ary = new byte[aryLen];
+		if (ary == null) ary = new byte[ary_len];
 		long factor = 1;					// factor needs to be long to handle 1 billion (for which factor would be 10 billion)
 		for (int i = 0; i < digits; i++)	// calc maxFactor
 			factor *= 10;
 		if (neg == 1) ary[0] = Byte_NegSign;
 
 		for (int i = 0; i < pad; i++)		// fill ary with pad
-			ary[i + aryBgn] = XtoStrByte(0);
+			ary[i + aryBgn] = Byte_ascii.To_a7_byte(0);
 		aryBgn += pad;						// advance aryBgn by pad
-		for (int i = neg; i < aryLen - pad; i++) {
+		for (int i = neg; i < ary_len - pad; i++) {
 			int denominator = (int)(factor / 10); // cache denominator to check for divide by 0
 			int digit = denominator == 0 ? 0 : (int)((val % factor) / denominator);
-			ary[aryBgn + i] = XtoStrByte(digit);
+			ary[aryBgn + i] = Byte_ascii.To_a7_byte(digit);
 			factor /= 10;
 		}
 		return ary;
 	}
-	public static byte Xto_byte_by_int(byte[] ary, int bgn, int end, byte or)	{return (byte)Xto_int_or(ary, bgn, end, or);}
-	public static int Xto_int(byte[] ary)										{return Xto_int_or(ary, null, 0, ary.length, -1);}
-	public static int Xto_int_or_fail(byte[] ary)								{
-		int rv = Xto_int_or(ary, null, 0, ary.length, Int_.MinValue);
-		if (rv == Int_.MinValue) throw Err_.new_wo_type("could not parse to int", "val", String_.new_u8(ary));
-		return rv;
+	public static byte[] new_by_int(int v) {
+		byte b0 = (byte)(v >> 24);
+		byte b1 = (byte)(v >> 16);
+		byte b2 = (byte)(v >>  8);
+		byte b3 = (byte)(v);
+		if		(b0 != 0)	return new byte[] {b0, b1, b2, b3};
+		else if	(b1 != 0)	return new byte[] {b1, b2, b3};
+		else if	(b2 != 0)	return new byte[] {b2, b3};
+		else				return new byte[] {b3};
 	}
-	public static boolean Xto_bool_by_int_or_fail(byte[] ary) {
-		int rv = Xto_int_or(ary, null, 0, ary.length, Int_.MinValue);
+	public static boolean To_bool_by_int(byte[] ary) {
+		int rv = To_int_or(ary, null, 0, ary.length, Int_.MinValue);
 		switch (rv) {
 			case 0: return false;
 			case 1: return true;
 			default: throw Err_.new_wo_type("could not parse to boolean int", "val", String_.new_u8(ary));
 		}
 	}
-	public static int Xto_int_or(byte[] ary, int or)							{return Xto_int_or(ary, null, 0, ary.length, or);}
-	public static int Xto_int_or(byte[] ary, int bgn, int end, int or)			{return Xto_int_or(ary, null, bgn, end, or);}
-	public static int Xto_int_or(byte[] ary, byte[] ignore_ary, int or)			{return Xto_int_or(ary, ignore_ary, 0, ary.length, or);}
-	public static int Xto_int_or(byte[] ary, byte[] ignore_ary, int bgn, int end, int or) {
+	public static byte To_int_as_byte(byte[] ary, int bgn, int end, byte or)	{return (byte)To_int_or(ary, bgn, end, or);}
+	public static int To_int(byte[] ary) {
+		int rv = To_int_or(ary, null, 0, ary.length, Int_.MinValue);
+		if (rv == Int_.MinValue) throw Err_.new_wo_type("could not parse to int", "val", String_.new_u8(ary));
+		return rv;
+	}
+	public static int To_int_or_neg1(byte[] ary)								{return To_int_or(ary, null, 0, ary.length, -1);}
+	public static int To_int_or(byte[] ary, int or)								{return To_int_or(ary, null, 0, ary.length, or);}
+	public static int To_int_or(byte[] ary, int bgn, int end, int or)			{return To_int_or(ary, null, bgn, end, or);}
+	public static int To_int_or(byte[] ary, byte[] ignore_ary, int or)			{return To_int_or(ary, ignore_ary, 0, ary.length, or);}
+	public static int To_int_or(byte[] ary, byte[] ignore_ary, int bgn, int end, int or) {
 		if (	ary == null
 			||	end == bgn				// null-len
 			)	return or;
@@ -658,7 +657,42 @@ public class Bry_ {
 		}
 		return rv;
 	}
-	public static int Xto_int_or_trim(byte[] ary, int bgn, int end, int or) {	// NOTE: same as Xto_int_or, except trims ws at bgn / end; DATE:2014-02-09
+	public static long To_long_or(byte[] ary, long or) {return To_long_or(ary, null, 0, ary.length, or);}
+	public static long To_long_or(byte[] ary, byte[] ignore_ary, int bgn, int end, long or) {
+		if (	ary == null
+			||	end == bgn				// null-len
+			)	return or;
+		long rv = 0, multiple = 1;
+		for (int i = end - 1; i >= bgn; i--) {	// -1 b/c end will always be next char; EX: {{{1}}}; bgn = 3, end = 4
+			byte b = ary[i];
+			switch (b) {
+				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
+				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
+					rv += multiple * (b - Byte_ascii.Num_0);
+					multiple *= 10;
+					break;
+				case Byte_ascii.Dash:
+					return i == bgn ? rv * -1 : or;
+				case Byte_ascii.Plus:
+					return i == bgn ? rv : or;
+				default:
+					boolean invalid = true;
+					if (ignore_ary != null) {
+						int ignore_ary_len = ignore_ary.length;
+						for (int j = 0; j < ignore_ary_len; j++) {
+							if (b == ignore_ary[j]) {
+								invalid = false;
+								break;
+							}
+						}
+					}
+					if (invalid) return or;
+					break;
+			}
+		}
+		return rv;
+	}
+	public static int To_int_or__trim_ws(byte[] ary, int bgn, int end, int or) {	// NOTE: same as To_int_or, except trims ws at bgn / end; DATE:2014-02-09
 		if (end == bgn) return or;	// null len
 		int rv = 0, multiple = 1;
 		boolean numbers_seen = false, ws_seen = false;
@@ -684,7 +718,7 @@ public class Bry_ {
 		}
 		return rv;
 	}
-	public static int Xto_int_or_lax(byte[] ary, int bgn, int end, int or) {
+	public static int To_int_or__lax(byte[] ary, int bgn, int end, int or) {
 		if (end == bgn) return or;	// null-len
 		int end_num = end;
 		for (int i = bgn; i < end; i++) {
@@ -705,14 +739,12 @@ public class Bry_ {
 					break;
 			}
 		}
-		return Xto_int_or(ary, bgn, end_num, or);
+		return To_int_or(ary, bgn, end_num, or);
 	}
-	public static float XtoFloatByPos(byte[] ary, int bgn, int end) {return Float_.parse_(String_.new_u8(ary, bgn, end));}
-	public static double Xto_double(byte[] bry) {return Double_.parse_(String_.new_u8(bry, 0, bry.length));}
-	public static double Xto_double_or(byte[] bry, double or) {return Double_.parse_or(String_.new_u8(bry, 0, bry.length), or);}
-	public static double XtoDoubleByPosOr(byte[] ary, int bgn, int end, double or) {return Double_.parse_or(String_.new_u8(ary, bgn, end), or);}
-	public static double XtoDoubleByPos(byte[] ary, int bgn, int end) {return Double_.parse_(String_.new_u8(ary, bgn, end));}
-	public static DecimalAdp XtoDecimalByPos(byte[] ary, int bgn, int end) {return DecimalAdp_.parse_(String_.new_u8(ary, bgn, end));}
+	public static double To_double(byte[] ary, int bgn, int end)				{return Double_.parse_(String_.new_u8(ary, bgn, end));}
+	public static double To_double_or(byte[] bry, double or)					{return Double_.parse_or(String_.new_u8(bry, 0, bry.length), or);}
+	public static double To_double_or(byte[] ary, int bgn, int end, double or)	{return Double_.parse_or(String_.new_u8(ary, bgn, end), or);}
+	public static Decimal_adp To_decimal(byte[] ary, int bgn, int end)			{return Decimal_adp_.parse_(String_.new_u8(ary, bgn, end));}
 	public static final byte Dlm_fld = (byte)'|', Dlm_row = (byte)'\n', Dlm_quote = (byte)'"', Dlm_null = 0, Ascii_zero = 48;
 	public static final String Fmt_csvDte = "yyyyMMdd HHmmss.fff";
 	public static DateAdp ReadCsvDte(byte[] ary, Int_obj_ref posRef, byte lkp) {// ASSUME: fmt = yyyyMMdd HHmmss.fff
@@ -783,7 +815,7 @@ public class Bry_ {
 		int bgn = posRef.Val();
 		int pos = Bry_finder.Find_fwd(ary, lkp, bgn, ary.length);
 		if (pos == Bry_.NotFound) throw Err_.new_wo_type("lkp failed", "lkp", (char)lkp, "bgn", bgn);
-		int rv = Bry_.Xto_int_or(ary, posRef.Val(), pos, -1);
+		int rv = Bry_.To_int_or(ary, posRef.Val(), pos, -1);
 		posRef.Val_(pos + 1);	// +1 = lkp.Len
 		return rv;
 	}
@@ -791,7 +823,7 @@ public class Bry_ {
 		int bgn = posRef.Val();
 		int pos = Bry_finder.Find_fwd(ary, lkp, bgn, ary.length);
 		if (pos == Bry_.NotFound) throw Err_.new_wo_type("lkp failed", "lkp", (char)lkp, "bgn", bgn);
-		double rv = Bry_.XtoDoubleByPos(ary, posRef.Val(), pos);
+		double rv = Bry_.To_double(ary, posRef.Val(), pos);
 		posRef.Val_(pos + 1);	// +1 = lkp.Len
 		return rv;
 	}
@@ -801,37 +833,6 @@ public class Bry_ {
 		posRef.Val_(pos + 1);	// +1 = lkp.Len
 	}
 	public static byte Byte_NegSign = (byte)'-';
-	public static int XtoIntBy4Bytes(byte[] v) {
-		int v_len = v.length;
-		int mod = 8 * (v_len - 1);
-		int rv = 0;
-		for (int i = 0; i < v_len; i++) {
-			rv |= v[i] << mod;
-			mod -= 8;
-		}
-		return rv;
-//			return	((0xFF & v[0]) << 24) 
-//				|	((0xFF & v[1]) << 16)
-//				|	((0xFF & v[2]) <<  8)
-//				|	(0xFF  & v[3]);
-	}
-	public static byte[] XbyInt(int v) {
-		byte b0 = (byte)(v >> 24);
-		byte b1 = (byte)(v >> 16);
-		byte b2 = (byte)(v >>  8);
-		byte b3 = (byte)(v);
-		if		(b0 != 0)	return new byte[] {b0, b1, b2, b3};
-		else if	(b1 != 0)	return new byte[] {b1, b2, b3};
-		else if	(b2 != 0)	return new byte[] {b2, b3};
-		else				return new byte[] {b3};
-	}
-	public static byte XtoStrByte(int digit) {
-		switch (digit) {
-			case 0: return Byte_ascii.Num_0; case 1: return Byte_ascii.Num_1; case 2: return Byte_ascii.Num_2; case 3: return Byte_ascii.Num_3; case 4: return Byte_ascii.Num_4;
-			case 5: return Byte_ascii.Num_5; case 6: return Byte_ascii.Num_6; case 7: return Byte_ascii.Num_7; case 8: return Byte_ascii.Num_8; case 9: return Byte_ascii.Num_9;
-			default: throw Err_.new_wo_type("unknown digit", "digit", digit);
-		}
-	}
 	public static byte[][] Split(byte[] src, byte dlm) {return Split(src, dlm, false);}
 	public static byte[][] Split(byte[] src, byte dlm, boolean trim) {
 		if (Bry_.Len_eq_0(src)) return Bry_.Ary_empty;
@@ -993,41 +994,43 @@ public class Bry_ {
 		}
 		return ary;
 	}
-	public static byte[] Upper_1st(byte[] ary) {
-		if (ary == null) return null;
-		int len = ary.length;
-		if (len == 0) return ary;
-		byte b = ary[0];
-		if (b > 96 && b < 123)
-			ary[0] = (byte)(b - 32);
-		return ary;
-	}
-	public static byte[] Upper_ascii(byte[] ary) {
-		int len = ary.length;
-		for (int i = 0; i < len; i++) {
-			byte b = ary[i];
-			if (b > 96 && b < 123)
-				ary[i] = (byte)(b - 32);
+	public static byte[] Ucase__all(byte[] src)						{return Xcase__all(Bool_.Y, src, 0, -1);}
+	public static byte[] Lcase__all(byte[] src)						{return Xcase__all(Bool_.N, src, 0, -1);}
+	public static byte[] Lcase__all(byte[] src, int bgn, int end)	{return Xcase__all(Bool_.N, src, bgn, end);}
+	private static byte[] Xcase__all(boolean upper, byte[] src, int bgn, int end) {
+		if (src == null) return null;
+		int len = end == -1 ? src.length : end - bgn; if (len == 0) return src;
+		byte[] rv = new byte[len];
+		for (int i = 0; i < len; ++i) {
+			byte b = src[i + bgn];
+			if (upper) {
+				if (b > 96 && b < 123) b -= 32;
+			}
+			else {
+				if (b > 64 && b <  91) b += 32;
+			}
+			rv[i] = b;
 		}
-		return ary;
+		return rv;
 	}
-	public static byte[] Lower_1st(byte[] ary) {
-		if (ary == null) return null;
-		int len = ary.length;
-		if (len == 0) return ary;
-		byte b = ary[0];
-		if (b > 64 && b < 91)
-			ary[0] = (byte)(b + 32);
-		return ary;
-	}
-	public static byte[] Lower_ascii(byte[] ary) {
-		int len = ary.length;
-		for (int i = 0; i < len; i++) {
-			byte b = ary[i];
-			if (b > 64 && b < 91)
-				ary[i] = (byte)(b + 32);
+	public static byte[] Ucase__1st(byte[] src)						{return Xcase__1st(Bool_.Y, src);}
+	public static byte[] Lcase__1st(byte[] src)						{return Xcase__1st(Bool_.N, src);}
+	private static byte[] Xcase__1st(boolean upper, byte[] src) {
+		if (src == null) return null;
+		int len = src.length; if (len == 0) return src;
+		byte[] rv = new byte[len];
+		byte b = src[0];
+		if (upper) {
+			if (b > 96 && b < 123) b -= 32;
 		}
-		return ary;
+		else {
+			if (b > 64 && b <  91) b += 32;
+		}
+		rv[0] = b;
+		for (int i = 1; i < len; ++i) {
+			rv[i] = src[i];
+		}
+		return rv;
 	}
 	public static byte[] Null_if_empty(byte[] v) {return Len_eq_0(v) ? null : v;}
 	public static byte Get_at_end(byte[] v) {

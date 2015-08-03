@@ -95,23 +95,23 @@ public class Scrib_regx_converter {
 									}
 								}
 								break;
-//								case Byte_ascii.Ltr_f: {	// EX: lua frontier pattern; "%f[%a]"; DATE:2015-07-21
-//									++i;
-//									if (i + 1 >= len || src[i] != Byte_ascii.Brack_bgn) throw Err_.new_("scribunto", "missing '[' after %f in pattern at pattern character $ii");
-//
-//									// %f always followed by bracketed term; convert lua bracketed term to regex
-//									Bry_bfr tmp_bfr = Xoa_app_.Utl__bfr_mkr().Get_b128();
-//									i = bracketedCharSetToRegex(tmp_bfr, src, i, len);
-//									byte[] bracketed_regx = tmp_bfr.To_bry_and_rls();
-//									
-//									// scrib has following comment: 'Because %f considers the beginning and end of the String to be \0, determine if $re2 matches that and take it into account with "^" and "$".'
-//									// if the bracketed_regx is a negative class it will match \0; so, \W means anything not a word char, which will match \0; \w means word char which will not match \0
-//									if (Regx_adp_.Match("\0", String_.new_u8(bracketed_regx)))
-//										bfr.Add_str_a7("(?<!^)(?<!").Add(bracketed_regx).Add_str_a7(")(?=").Add(bracketed_regx).Add_str_a7("|$)");	// match bgn / end of String
-//									else
-//										bfr		 .Add_str_a7("(?<!").Add(bracketed_regx).Add_str_a7(")(?=").Add(bracketed_regx).Add_str_a7(  ")");
-//									break;
-//								}
+							case Byte_ascii.Ltr_f: {	// EX: lua frontier pattern; "%f[%a]"; DATE:2015-07-21
+								++i;
+								if (i + 1 >= len || src[i] != Byte_ascii.Brack_bgn) throw Err_.new_("scribunto", "missing '[' after %f in pattern at pattern character $ii");
+
+								// %f always followed by bracketed term; convert lua bracketed term to regex
+								Bry_bfr tmp_bfr = Xoa_app_.Utl__bfr_mkr().Get_b128();
+								i = bracketedCharSetToRegex(tmp_bfr, src, i, len);
+								byte[] bracketed_regx = tmp_bfr.To_bry_and_rls();
+								
+								// scrib has following comment: 'Because %f considers the beginning and end of the String to be \0, determine if $re2 matches that and take it into account with "^" and "$".'
+								// if the bracketed_regx is a negative class it will match \0; so, \W means anything not a word char, which will match \0; \w means word char which will not match \0
+								if (Regx_adp_.Match("\0", String_.new_u8(bracketed_regx)))
+									bfr.Add_str_a7("(?<!^)(?<!").Add(bracketed_regx).Add_str_a7(")(?=").Add(bracketed_regx).Add_str_a7("|$)");	// match bgn / end of String
+								else
+									bfr		 .Add_str_a7("(?<!").Add(bracketed_regx).Add_str_a7(")(?=").Add(bracketed_regx).Add_str_a7(  ")");
+								break;
+							}
 							case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
 							case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
 								grps_len = nxt - Byte_ascii.Num_0;
@@ -282,5 +282,5 @@ public class Scrib_regx_converter {
 			brack_hash.Add_if_dupe_use_nth(lua_bry, php_bry);	// replace percent_hash definitions
 		}
 	}
-	private final Hash_adp_bry percent_hash = Hash_adp_bry.cs_(), brack_hash = Hash_adp_bry.cs_();
+	private final Hash_adp_bry percent_hash = Hash_adp_bry.cs(), brack_hash = Hash_adp_bry.cs();
 }

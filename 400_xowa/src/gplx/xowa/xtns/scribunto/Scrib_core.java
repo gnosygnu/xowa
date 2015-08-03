@@ -19,10 +19,11 @@ package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx
 import gplx.xowa.xtns.scribunto.libs.*;
 import gplx.xowa.xtns.scribunto.engines.*;
 public class Scrib_core {
-	private Hash_adp_bry mods = Hash_adp_bry.cs_();
+	private Hash_adp_bry mods = Hash_adp_bry.cs();
 	public Scrib_core(Xoae_app app, Xop_ctx ctx) {// NOTE: ctx needed for language reg
 		this.app = app; this.ctx = ctx;
 		this.wiki = ctx.Wiki(); this.page = ctx.Cur_page();	// NOTE: wiki / page needed for title reg; DATE:2014-02-05
+		this.lang = wiki.Lang();
 		this.Engine_(Scrib_engine_type.Type_lua, false);	// TEST: default to lua
 		fsys_mgr.Root_dir_(app.Fsys_mgr().Bin_xtns_dir().GenSubDir_nest("Scribunto"));
 		lib_mw = new Scrib_lib_mw(this);
@@ -39,6 +40,7 @@ public class Scrib_core {
 	}
 	public Xoae_app App() {return app;} private Xoae_app app;
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
+	public Xol_lang Lang() {return lang;} private Xol_lang lang;
 	@gplx.Internal protected void Wiki_(Xowe_wiki v) {this.wiki = v;} // TEST:
 	public Xoae_page Page() {return page;} private Xoae_page page;
 	public boolean Enabled() {return enabled;} private boolean enabled = true;

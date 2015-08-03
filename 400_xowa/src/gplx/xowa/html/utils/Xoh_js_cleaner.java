@@ -199,5 +199,5 @@ public class Xoh_js_cleaner {
 		Reg_itm("seekSegmentTime");
 		ctor = false;
 	}
-	private void Reg_itm(String s) {trie.Add_bry(Bry_.new_a7(s));} Btrie_slim_mgr trie = Btrie_slim_mgr.ci_ascii_();	// NOTE:ci.ascii:javascript event name
+	private void Reg_itm(String s) {trie.Add_bry(Bry_.new_a7(s));} Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7();	// NOTE:ci.ascii:javascript event name
 }

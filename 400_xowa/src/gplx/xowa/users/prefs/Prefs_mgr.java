@@ -16,12 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.prefs; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
-import gplx.core.primitives.*; import gplx.html.*; import gplx.gfui.*;
+import gplx.core.primitives.*; import gplx.core.net.*; import gplx.html.*; import gplx.gfui.*;
 import gplx.xowa.gui.views.*;
+import gplx.xowa.urls.*;
 public class Prefs_mgr implements GfoInvkAble {
 	public Prefs_mgr(Xoae_app app) {
 		this.app = app;
-		atrs_hash = Hash_adp_bry.cs_();
+		atrs_hash = Hash_adp_bry.cs();
 		atrs_hash.Add(Bry_prop, Byte_obj_val.new_(Tid_prop));
 		atrs_hash.Add(Bry_prop_get, Byte_obj_val.new_(Tid_prop_get));
 		atrs_hash.Add(Bry_prop_set, Byte_obj_val.new_(Tid_prop_set));
@@ -143,11 +144,11 @@ public class Prefs_mgr implements GfoInvkAble {
 	public static final byte Elem_tid_null = 0, Elem_tid_input_text = 1, Elem_tid_textarea = 2, Elem_tid_input_checkbox = 3, Elem_tid_select = 4, Elem_tid_input_combo = 5, Elem_tid_input_xowa_io = 6;	
 }
 class Prefs_trg_mgr {
-	private Xoa_url_arg_hash arg_hash = new Xoa_url_arg_hash();
+	private Gfo_qarg_mgr arg_hash = new Gfo_qarg_mgr();
 	public byte[] Trg_type() {return trg_type;} private byte[] trg_type;
 	public byte[] Trg_val() {return trg_val;} private byte[] trg_val;
 	public void Init(Xoa_url url) {
-		arg_hash.Load(url);
+		arg_hash.Load(url.Qargs_ary());
 		trg_type = arg_hash.Get_val_bry_or(Prefs_trg_mgr.Arg_option_trg_type_bry, null);
 		trg_val = arg_hash.Get_val_bry_or(Prefs_trg_mgr.Arg_option_trg_val_bry, null);
 	}

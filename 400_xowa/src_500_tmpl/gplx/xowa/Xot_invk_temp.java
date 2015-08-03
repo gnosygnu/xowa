@@ -50,9 +50,9 @@ public class Xot_invk_temp implements Xot_invk {
 	}
 	public void Args_add(Arg_nde_tkn arg) {list.Add(arg);}
 	public void Args_add_by_key(byte[] key, Arg_nde_tkn arg) {
-		if (arg_key_hash == null) arg_key_hash = Hash_adp_bry.cs_();	// PERF: lazy
+		if (arg_key_hash == null) arg_key_hash = Hash_adp_bry.cs();	// PERF: lazy
 		arg_key_hash.Add_if_dupe_use_nth(key, arg);
-		int key_as_int = Bry_.Xto_int_or(key, Int_.MinValue);
+		int key_as_int = Bry_.To_int_or(key, Int_.MinValue);
 		if (key_as_int != Int_.MinValue)						// key is int; add it to arg_idx_hash; EX:{{A|1=a}} vs {{A|a}}; DATE:2014-07-23
 			Arg_idx_hash_add(key_as_int - List_adp_.Base1, arg);
 	}

@@ -84,11 +84,11 @@ public class Xop_lnke_wkr_brack_tst {
 	@Test  public void Encode_relative() {	// PURPOSE: counterpart to Encode_xwiki; DATE:2014-07-15
 		fxt.Test_parse_page_wiki_str		// encode page
 		( "[//a.org/%22%3E_A B]"
-		, "<a href=\"http://a.org/%22%3E_A\" class=\"external text\" rel=\"nofollow\">B</a>"		// '%22%3E' not '">'
+		, "<a href=\"https://a.org/%22%3E_A\" class=\"external text\" rel=\"nofollow\">B</a>"		// '%22%3E' not '">'
 		);
 		fxt.Test_parse_page_wiki_str		// encode args
 		( "[//a.org/A?b=%22%3E_C D]"
-		, "<a href=\"http://a.org/A?b=%22%3E_C\" class=\"external text\" rel=\"nofollow\">D</a>"	// '%22%3E' not '">'
+		, "<a href=\"https://a.org/A?b=%22%3E_C\" class=\"external text\" rel=\"nofollow\">D</a>"	// '%22%3E' not '">'
 		);
 	}
 }

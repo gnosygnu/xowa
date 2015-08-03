@@ -20,7 +20,7 @@ import gplx.core.btries.*;
 public class Php_parser {
 	Php_lxr[] lxrs; int lxrs_len;
 	int txt_bgn; Php_tkn_txt txt_tkn;
-	private Btrie_slim_mgr trie = Btrie_slim_mgr.ci_ascii_();	// NOTE:ci:PHP tkns are ASCII
+	private Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7();	// NOTE:ci:PHP tkns are ASCII
 	byte[] src; int src_len; Php_tkn_wkr tkn_wkr; Php_tkn_factory tkn_factory = new Php_tkn_factory(); Php_ctx ctx = new Php_ctx();
 	Php_parser_interrupt[] parser_interrupts = new Php_parser_interrupt[256]; 
 	public Php_parser() {

@@ -26,8 +26,8 @@ public class Xop_redirect_mgr_tst {
 	@Test  public void Exc_false_match()		{fxt.Test_redirect("#REDIRECTA [[a]]", "");}
 	@Test  public void Exc_lnki_not_found()		{fxt.Test_redirect("#REDIRECT test", "");}
 	@Test  public void Ws()						{fxt.Test_redirect("\n#REDIRECT [[a]]", "A");}	// PAGE:en.w:Germany; {{Template group}} -> \n#REDIRECT [[Template:Navboxes]]
-	@Test  public void Utf8() {
-		fxt.Init_utf8();
+	@Test  public void U8() {
+		fxt.Init_u8();
 		fxt.Init_kwds(Bool_.N, "#REDIRECT", "#перенаправление");
 		fxt.Test_redirect("#REDIRECT [[A]]", "A");
 		fxt.Test_redirect("#reDirect [[A]]", "A");
@@ -47,8 +47,8 @@ class Xop_redirect_mgr_fxt {
 		fxt.Reset();
 	}
 	public void Init_kwds(boolean case_match, String... kwds) {fxt.Init_lang_kwds(Xol_kwd_grp_.Id_redirect, case_match, kwds);}
-	public void Init_utf8() {
-		fxt.Wiki().Lang().Case_mgr_utf8_();
+	public void Init_u8() {
+		fxt.Wiki().Lang().Case_mgr_u8_();
 	}
 	public void Test_frame_ttl(String tmpl_ttl_str, String tmpl_wtxt_str, String redirect_ttl, String expd_frame_ttl) {
 		fxt.Init_page_create(tmpl_ttl_str, tmpl_wtxt_str);								// create redirect_src

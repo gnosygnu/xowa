@@ -43,7 +43,7 @@ public class Xow_wmf_api_wkr__ns implements Xow_wmf_api_wkr {
 				try {
 					Json_kv kv = (Json_kv)ns_grp.Get_at(i);
 					Json_nde nde = (Json_nde)kv.Val();
-					int ns_id = Bry_.Xto_int_or(Get_val_or_null(nde, Bry_id), Int_.MinValue);
+					int ns_id = Bry_.To_int_or(Get_val_or_null(nde, Bry_id), Int_.MinValue);
 					byte ns_case = Xow_ns_case_.parse_(String_.new_u8(Get_val_or_null(nde, Bry_case)));
 					byte[] ns_name = Get_val_or_null(nde, Bry_name);
 					byte[] ns_canonical = Get_val_or_null(nde, Bry_canonical);

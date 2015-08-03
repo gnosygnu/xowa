@@ -20,7 +20,7 @@ import gplx.html.*; import gplx.xowa.files.*; import gplx.xowa.html.hdumps.core.
 public class Xoh_file_wtr__basic {		
 	private final Xowe_wiki wiki; private final Xow_html_mgr html_mgr; private final Xoh_html_wtr html_wtr; private final Bry_bfr_mkr bfr_mkr; private final Bry_bfr scratch_bfr = Bry_bfr.reset_(Io_mgr.Len_kb);
 	private final Xoh_lnki_text_fmtr media_alt_fmtr, caption_fmtr;
-	private final Xop_link_parser tmp_link_parser = new Xop_link_parser(); private Xoa_url tmp_url = Xoa_url.blank_(); private final Xoh_lnki_title_fmtr anchor_title_wkr = new Xoh_lnki_title_fmtr();
+	private final Xop_link_parser tmp_link_parser = new Xop_link_parser(); private Xoa_url tmp_url = Xoa_url.blank(); private final Xoh_lnki_title_fmtr anchor_title_wkr = new Xoh_lnki_title_fmtr();
 	private Xoh_file_html_fmtr__base html_fmtr = Xoh_file_html_fmtr__base.Base;
 	private Xoae_page page; private boolean cfg_alt_defaults_to_caption;
 	public Xoh_file_wtr__basic(Xowe_wiki wiki, Xow_html_mgr html_mgr, Xoh_html_wtr html_wtr) {
@@ -45,7 +45,7 @@ public class Xoh_file_wtr__basic {
 		if (lnki_halign == Xop_lnki_align_h.Null)
 			lnki_halign = wiki.Lang().Img_thumb_halign_default();	// if halign is not supplied, then default to align for language
 		byte[] lnki_halign_bry = Xop_lnki_align_h.Html_names[lnki_halign];
-		byte[] lnki_href = wiki.Appe().Href_parser().Build_to_bry(wiki, lnki.Ttl());
+		byte[] lnki_href = wiki.Appe().Html__href_wtr().Build_to_bry(wiki, lnki.Ttl());
 		byte[] img_view_src = xfer_itm.Html_view_url().To_http_file_bry();
 		byte[] img_orig_src = xfer_itm.Html_orig_url().To_http_file_bry();
 		byte[] lnki_ttl = lnki.Ttl().Page_txt();				

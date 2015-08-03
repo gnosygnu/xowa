@@ -50,7 +50,7 @@ public class Xof_ext_ {
 	};
 	private static final Hash_adp id_hash = id_hash_new_();
 	private static Hash_adp id_hash_new_() {
-		Hash_adp rv = Hash_adp_bry.cs_();
+		Hash_adp rv = Hash_adp_bry.cs();
 		id_hash_new_(rv, Bry_png, Id_png);		id_hash_new_(rv, Bry_jpg, Id_jpg);		id_hash_new_(rv, Bry_jpeg, Id_jpeg);
 		id_hash_new_(rv, Bry_gif, Id_gif);		id_hash_new_(rv, Bry_tif, Id_tif);		id_hash_new_(rv, Bry_tiff, Id_tiff);
 		id_hash_new_(rv, Bry_svg, Id_svg);		id_hash_new_(rv, Bry_djvu, Id_djvu);	id_hash_new_(rv, Bry_pdf, Id_pdf);
@@ -61,7 +61,7 @@ public class Xof_ext_ {
 	}
 	private static void id_hash_new_(Hash_adp hash, byte[] key, int val) {hash.Add(key, Int_obj_val.new_(val));}
 
-	private static final Hash_adp_bry ext_hash = Hash_adp_bry.ci_ascii_()
+	private static final Hash_adp_bry ext_hash = Hash_adp_bry.ci_a7()
 	.Add_bry_bry(Bry_png).Add_bry_bry(Bry_jpg).Add_bry_bry(Bry_jpeg)
 	.Add_bry_bry(Bry_gif).Add_bry_bry(Bry_tif).Add_bry_bry(Bry_tiff)
 	.Add_bry_bry(Bry_svg).Add_bry_bry(Bry_djvu).Add_bry_bry(Bry_pdf)
@@ -82,7 +82,7 @@ public class Xof_ext_ {
 	public static Xof_ext new_by_ttl_(byte[] ttl) {
 		int ttl_len = ttl.length;
 		int dot_pos = Bry_finder.Find_bwd(ttl, Byte_ascii.Dot);
-		byte[] ext = (dot_pos == Bry_.NotFound || dot_pos == ttl_len) ? Bry_.Empty : Bry_.Xto_str_lower(ttl, dot_pos + 1, ttl_len); // +1 to bgn after .
+		byte[] ext = (dot_pos == Bry_.NotFound || dot_pos == ttl_len) ? Bry_.Empty : Bry_.Lcase__all(ttl, dot_pos + 1, ttl_len); // +1 to bgn after .
 		return new_(Get_id_by_ext_(ext), ext);
 	}
 	public static Xof_ext new_by_ext_(byte[] ext)	{return new_(Get_id_by_ext_(ext), ext);}

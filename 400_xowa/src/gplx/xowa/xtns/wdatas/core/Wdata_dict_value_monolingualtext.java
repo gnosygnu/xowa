@@ -29,7 +29,7 @@ public class Wdata_dict_value_monolingualtext {
 	  Bry_text									= Bry_.new_a7(Str_text)
 	, Bry_language								= Bry_.new_a7(Str_language)
 	;
-	public static final Hash_adp_bry Dict = Hash_adp_bry.cs_()
+	public static final Hash_adp_bry Dict = Hash_adp_bry.cs()
 	.Add_bry_byte(Bry_text						, Tid_text)
 	.Add_bry_byte(Bry_language					, Tid_language)
 	;

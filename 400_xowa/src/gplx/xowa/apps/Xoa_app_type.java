@@ -35,7 +35,7 @@ public class Xoa_app_type {
 	}
 	private static final int Uid_cmd = 1, Uid_gui = 2, Uid_tcp = 3, Uid_http = 4, Uid_file = 5;
 	private static final byte[] Key_cmd = Bry_.new_a7("cmd"), Key_gui = Bry_.new_a7("gui"), Key_tcp = Bry_.new_a7("server"), Key_http = Bry_.new_a7("http_server"), Key_file = Bry_.new_a7("file");
-	private static final Hash_adp_bry type_hash = Hash_adp_bry.cs_()
+	private static final Hash_adp_bry type_hash = Hash_adp_bry.cs()
 	.Add_bry_int(Key_cmd	, Uid_cmd)
 	.Add_bry_int(Key_gui	, Uid_gui)
 	.Add_bry_int(Key_http	, Uid_http)

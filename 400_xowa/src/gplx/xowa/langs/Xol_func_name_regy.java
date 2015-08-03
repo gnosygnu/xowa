@@ -20,7 +20,7 @@ import gplx.core.btries.*; import gplx.intl.*; import gplx.xowa.xtns.pfuncs.*;
 public class Xol_func_name_regy {
 	private final Xoa_lang_mgr lang_mgr; private final Xol_lang lang;
 	private final Xol_func_name_itm finder = new Xol_func_name_itm();
-	private final Btrie_slim_mgr cs_trie = Btrie_slim_mgr.cs_(), ci_trie = Btrie_slim_mgr.ci_utf_8_();
+	private final Btrie_slim_mgr cs_trie = Btrie_slim_mgr.cs(), ci_trie = Btrie_slim_mgr.ci_u8();
 	public Xol_func_name_regy(Xoa_lang_mgr lang_mgr, Xol_lang lang) {this.lang_mgr = lang_mgr; this.lang = lang;}
 	public void Evt_lang_changed(Xol_lang lang) {
 		Xol_kwd_mgr kwd_mgr = lang.Kwd_mgr();

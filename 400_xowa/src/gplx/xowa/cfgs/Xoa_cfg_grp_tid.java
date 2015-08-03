@@ -43,5 +43,5 @@ public class Xoa_cfg_grp_tid {
 			factory.Add(key, rv);
 		}
 		return rv;
-	}	static Hash_adp_bry factory = Hash_adp_bry.cs_();
+	}	static Hash_adp_bry factory = Hash_adp_bry.cs();
 }

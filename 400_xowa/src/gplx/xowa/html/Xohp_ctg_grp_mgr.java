@@ -53,7 +53,7 @@ class Xoh_ctg_itm_fmtr implements Bry_fmtr_arg {
 		for (int i = 0; i < ctgs_len; i++) {
 			byte[] page_name = page.Category_list()[i];
 			tmp_bfr.Add(ctg_prefix).Add(page_name);
-			page.Wikie().Appe().Href_parser().Build_to_bfr(tmp_href, app, wiki.Domain_bry(), wiki.Ttl_parse(tmp_bfr.Xto_bry_and_clear()));
+			page.Wikie().Appe().Html__href_wtr().Build_to_bfr(tmp_href, app, wiki.Domain_bry(), wiki.Ttl_parse(tmp_bfr.Xto_bry_and_clear()));
 			itm_fmtr.Bld_bfr(bfr, tmp_href.Xto_bry_and_clear(), page_name, page_name);
 		}
 		tmp_bfr.Mkr_rls();

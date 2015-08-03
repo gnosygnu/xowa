@@ -22,8 +22,7 @@ public class Wdata_xwiki_link_wtr implements Bry_fmtr_arg {
 	public void XferAry(Bry_bfr bfr, int idx) {
 		List_adp slink_list = page.Slink_list();
 		byte[] qid = Write_wdata_links(slink_list, page.Wikie(), page.Ttl(), page.Wdata_external_lang_links());
-		int slink_list_len = slink_list.Count();
-		if (slink_list_len > 0)
+		if (slink_list.Count() > 0)
 			page.Wikie().Xwiki_mgr().Lang_mgr().Html_bld(bfr, page.Wikie(), slink_list, qid);
 	}
 	public static byte[] Write_wdata_links(List_adp slink_list, Xowe_wiki wiki, Xoa_ttl ttl, Wdata_external_lang_links_data external_links_mgr) {

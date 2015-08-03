@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa; import gplx.*;
 import gplx.core.btries.*; import gplx.core.flds.*; import gplx.ios.*; import gplx.core.threads.*;
-import gplx.xowa.apps.*; import gplx.xowa.apps.caches.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apis.*; import gplx.xowa.urls.encoders.*; import gplx.xowa.apps.progs.*;
+import gplx.xowa.apps.*; import gplx.xowa.apps.caches.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apis.*; import gplx.xowa.apps.metas.*; import gplx.xowa.urls.encoders.*; import gplx.xowa.apps.progs.*;
 import gplx.xowa.langs.*; import gplx.xowa.specials.*; import gplx.xowa.cfgs2.*;
 import gplx.xowa.bldrs.css.*;
 import gplx.xowa.files.caches.*; import gplx.xowa.files.imgs.*;
@@ -37,6 +37,7 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 		cfg_mgr = new Xoa_cfg_mgr(this);
 		api_root = new Xoapi_root(this);
 		user = new Xoue_user(this, user_dir);
+		this.meta_mgr = new Xoa_meta_mgr(this);
 		url_cmd_eval = new Xoa_fsys_eval(fsys_mgr, user.Fsys_mgr());			
 		fsys_mgr.Init_by_app(prog_mgr);
 		log_wtr.Log_dir_(user.Fsys_mgr().App_temp_dir().GenSubDir("log"));
@@ -45,7 +46,6 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 		gui_mgr = new Xoa_gui_mgr(this);
 		bldr = new Xob_bldr(this);
 		file_mgr.Ctor_by_app(this);
-		href_parser = new Xoh_href_parser(Xoa_app_.Utl__encoder_mgr().Href(), utl_url_parser.Url_parser());
 		sanitizer = new Xop_sanitizer(parser_amp_mgr, msg_log);
 		user_mgr = new Xou_user_mgr(this, user);
 		sys_cfg = new Xoa_sys_cfg(this);
@@ -61,21 +61,22 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 		http_server = new Http_server_mgr(this);
 		cfg_regy = new Xocfg_regy(this);
 		html_mgr = new Xoh_html_mgr(this);
-		this.html__lnki_bldr = new Xoh_lnki_bldr(this, href_parser);
+		this.html__lnki_bldr = new Xoh_lnki_bldr(this, html__href_wtr);
 	}
 	public Xoa_app_type			App_type()				{return app_type;} private final Xoa_app_type app_type;
 	public Xoa_fsys_mgr			Fsys_mgr()				{return fsys_mgr;} private final Xoa_fsys_mgr fsys_mgr;
 	public Xof_cache_mgr		File__cache_mgr()		{return file_mgr.Cache_mgr();}
 	public Xof_img_mgr			File__img_mgr()			{return file_mgr.Img_mgr();}
 	public Io_download_fmt		File__download_fmt()	{return wmf_mgr.Download_wkr().Download_xrg().Download_fmt();}
-	public Xoh_href_parser		Html__href_parser()		{return href_parser;} private Xoh_href_parser href_parser;
+	public Xoh_href_parser		Html__href_parser()		{return html__href_parser;} private final Xoh_href_parser html__href_parser = new Xoh_href_parser();
+	public Xoh_href_wtr			Html__href_wtr()		{return html__href_wtr;} private final Xoh_href_wtr html__href_wtr = new Xoh_href_wtr();
 	public Xoh_lnki_bldr		Html__lnki_bldr()		{return html__lnki_bldr;} private final Xoh_lnki_bldr html__lnki_bldr;
 	public Xoa_css_extractor	Html__css_installer()	{return html__css_installer;} private final Xoa_css_extractor html__css_installer = new Xoa_css_extractor();
 	public Xoh_bridge_mgr		Html__bridge_mgr()		{return html__bridge_mgr;} private final Xoh_bridge_mgr html__bridge_mgr = new Xoh_bridge_mgr();
 	public Xowmf_mgr			Wmf_mgr()				{return wmf_mgr;} private final Xowmf_mgr wmf_mgr = new Xowmf_mgr();
 	public Bry_bfr_mkr			Utl__bfr_mkr()			{return Xoa_app_.Utl__bfr_mkr();}
 	public Url_encoder_mgr		Utl__encoder_mgr()		{return Xoa_app_.Utl__encoder_mgr();}
-	public Xoa_url_parser		Utl__url_parser()		{return utl_url_parser;} private final Xoa_url_parser utl_url_parser = new Xoa_url_parser();
+	public Xoa_meta_mgr			Meta_mgr()				{return meta_mgr;} private final Xoa_meta_mgr meta_mgr;
 	public boolean					Bldr__running() {return bldr__running;} public void Bldr__running_(boolean v) {this.bldr__running = v;} private boolean bldr__running;
 	
 	public Xoae_wiki_mgr		Wiki_mgr() {return wiki_mgr;} private Xoae_wiki_mgr wiki_mgr;
@@ -99,7 +100,6 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 	public Xoa_shell			Shell() {return shell;} private Xoa_shell shell;
 	public Xoa_thread_mgr		Thread_mgr() {return thread_mgr;} private Xoa_thread_mgr thread_mgr = new Xoa_thread_mgr();
 	public Xoa_hive_mgr			Hive_mgr() {return hive_mgr;} private Xoa_hive_mgr hive_mgr;
-	public Xoh_href_parser		Href_parser() {return href_parser;}
 	public Xop_sanitizer		Sanitizer() {return sanitizer;} private Xop_sanitizer sanitizer;
 	public Xop_xatr_parser		Xatr_parser() {return xatr_parser;} private Xop_xatr_parser xatr_parser = new Xop_xatr_parser();
 	public Xop_xnde_tag_regy	Xnde_tag_regy() {return xnde_tag_regy;} private Xop_xnde_tag_regy xnde_tag_regy = new Xop_xnde_tag_regy();
@@ -129,7 +129,7 @@ public class Xoae_app implements Xoa_app, GfoInvkAble {
 
 	public Xosrv_server			Tcp_server() {return tcp_server;} private Xosrv_server tcp_server = new Xosrv_server();
 	public Http_server_mgr		Http_server() {return http_server;} private Http_server_mgr http_server;
-	public Xop_amp_mgr			Parser_amp_mgr() {return parser_amp_mgr;} private Xop_amp_mgr parser_amp_mgr = new Xop_amp_mgr();
+	public Xop_amp_mgr			Parser_amp_mgr() {return parser_amp_mgr;} private Xop_amp_mgr parser_amp_mgr = Xop_amp_mgr.I;
 
 	private Xoa_fmtr_mgr fmtr_mgr;
 	public Number_parser Utl_num_parser() {return utl_num_parser;} private Number_parser utl_num_parser = new Number_parser();

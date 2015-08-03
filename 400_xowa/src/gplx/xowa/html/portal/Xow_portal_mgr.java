@@ -45,8 +45,8 @@ public class Xow_portal_mgr implements GfoInvkAble {
 		Init_fmtr(tmp_bfr, eval_mgr, div_view_fmtr);
 		Init_fmtr(tmp_bfr, eval_mgr, div_ns_fmtr);
 		byte[] wiki_user_name = wiki.User().Name();
-		div_personal_bry = Init_fmtr(tmp_bfr, eval_mgr, div_personal_fmtr, Bry_.Add(Xoh_href_parser.Href_wiki_bry, wiki.Ns_mgr().Ids_get_or_null(Xow_ns_.Id_user).Name_db_w_colon(), wiki_user_name), wiki_user_name, Ns_cls_by_id(wiki.Ns_mgr(), Xow_ns_.Id_user), Bry_.Add(Xoh_href_parser.Href_wiki_bry, wiki.Ns_mgr().Ids_get_or_null(Xow_ns_.Id_user_talk).Name_db_w_colon(), wiki_user_name), Ns_cls_by_id(wiki.Ns_mgr(), Xow_ns_.Id_user_talk));
-		byte[] main_page_href_bry = tmp_bfr.Add(Xoh_href_parser.Href_site_bry).Add(wiki.Domain_bry()).Add(Xoh_href_parser.Href_wiki_bry).Xto_bry_and_clear();	// NOTE: build /site/en.wikipedia.org/wiki/ href; no Main_Page, as that will be inserted by Xoh_href_parser
+		div_personal_bry = Init_fmtr(tmp_bfr, eval_mgr, div_personal_fmtr, Bry_.Add(Xoh_href_.Bry__wiki, wiki.Ns_mgr().Ids_get_or_null(Xow_ns_.Id_user).Name_db_w_colon(), wiki_user_name), wiki_user_name, Ns_cls_by_id(wiki.Ns_mgr(), Xow_ns_.Id_user), Bry_.Add(Xoh_href_.Bry__wiki, wiki.Ns_mgr().Ids_get_or_null(Xow_ns_.Id_user_talk).Name_db_w_colon(), wiki_user_name), Ns_cls_by_id(wiki.Ns_mgr(), Xow_ns_.Id_user_talk));
+		byte[] main_page_href_bry = tmp_bfr.Add(Xoh_href_.Bry__site).Add(wiki.Domain_bry()).Add(Xoh_href_.Bry__wiki).Xto_bry_and_clear();	// NOTE: build /site/en.wikipedia.org/wiki/ href; no Main_Page, as that will be inserted by Xoh_href_parser
 		div_logo_bry = Init_fmtr(tmp_bfr, eval_mgr, div_logo_fmtr, main_page_href_bry, Xoa_app_.Utl__encoder_mgr().Fsys().Encode_http(wiki.Appe().Usere().Fsys_mgr().Wiki_root_dir().GenSubFil_nest(wiki.Domain_str(), "html", "logo.png")));
 		div_home_bry = Init_fmtr(tmp_bfr, eval_mgr, div_home_fmtr);
 		div_wikis_fmtr.Eval_mgr_(eval_mgr);
@@ -69,14 +69,14 @@ public class Xow_portal_mgr implements GfoInvkAble {
 		else
 			subj_cls = Xow_portal_mgr.Cls_selected_y;
 		Bry_fmtr_arg vnt_menu = null;
-//			Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();	// VNT; DATE:2015-03-03
-//			if (vnt_mgr.Enabled()) {
-//				Vnt_mnu_grp_fmtr vnt_menu_fmtr = vnt_mgr.Vnt_mnu_fmtr();
-//				vnt_menu_fmtr.Init(vnt_mgr.Vnt_grp(), ttl.Full_db(), vnt_mgr.Cur_vnt());
-//				vnt_menu = wiki.Lang().Vnt_mgr().Enabled() ? vnt_menu_fmtr : null;
-//			}
+		Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();	// VNT; DATE:2015-03-03
+		if (vnt_mgr.Enabled()) {
+			Vnt_mnu_grp_fmtr vnt_menu_fmtr = vnt_mgr.Vnt_mnu_fmtr();
+			vnt_menu_fmtr.Init(vnt_mgr.Vnt_grp(), wiki.Domain_bry(), ttl.Full_db(), vnt_mgr.Cur_vnt());
+			vnt_menu = wiki.Lang().Vnt_mgr().Enabled() ? vnt_menu_fmtr : null;
+		}
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();
-		div_ns_fmtr.Bld_bfr_many(tmp_bfr, Bry_.Add(Xoh_href_parser.Href_wiki_bry, ttl.Subj_txt()), subj_cls, Bry_.Add(Xoh_href_parser.Href_wiki_bry, ttl.Talk_txt()), talk_cls, vnt_menu);
+		div_ns_fmtr.Bld_bfr_many(tmp_bfr, Bry_.Add(Xoh_href_.Bry__wiki, ttl.Subj_txt()), subj_cls, Bry_.Add(Xoh_href_.Bry__wiki, ttl.Talk_txt()), talk_cls, vnt_menu);
 		return tmp_bfr.To_bry_and_rls();
 	}
 	private byte[] Ns_cls_by_ord(Xow_ns_mgr ns_mgr, int ns_ord) {

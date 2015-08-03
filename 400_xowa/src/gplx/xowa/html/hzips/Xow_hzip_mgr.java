@@ -101,7 +101,7 @@ public class Xow_hzip_mgr {
 	, Tid_a_rhs = 1
 	, Tid_h_lhs = 2
 	;
-	private Btrie_slim_mgr btrie = Btrie_slim_mgr.cs_()
+	private Btrie_slim_mgr btrie = Btrie_slim_mgr.cs()
 	.Add_str_byte("<a "			, Tid_a_lhs)
 	.Add_str_byte("</a>"		, Tid_a_rhs)
 //		.Add_str_byte("<h"			, Tid_h_lhs)

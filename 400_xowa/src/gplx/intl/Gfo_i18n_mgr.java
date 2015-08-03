@@ -23,7 +23,7 @@ public class Gfo_i18n_mgr {
 	public Gfo_i18n_mgr Add_txt_many(String key, String... ary) {return this;}
 }
 class Gfo_i18n_lng {
-	private Hash_adp_bry hash = Hash_adp_bry.cs_();
+	private Hash_adp_bry hash = Hash_adp_bry.cs();
 	public Gfo_i18n_lng(String lng) {this.lng = lng;}
 	public String Lng() {return lng;} private final String lng;
 	public void Add(int src, byte[] key, byte[] val, boolean val_fmt_exists, Gfo_i18n_val_cmd val_cmd) {

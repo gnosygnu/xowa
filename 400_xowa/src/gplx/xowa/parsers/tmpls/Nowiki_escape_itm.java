@@ -46,7 +46,7 @@ public class Nowiki_escape_itm {
 	private static final byte[] Pre_bry = new byte[] {Byte_ascii.Nl, Byte_ascii.Space};	// NOTE: must go before trie_new
 	private static final Btrie_slim_mgr trie = trie_new();
 	private static Btrie_slim_mgr trie_new() {
-		Btrie_slim_mgr rv = Btrie_slim_mgr.cs_();
+		Btrie_slim_mgr rv = Btrie_slim_mgr.cs();
 		trie_new_itm(rv, Byte_ascii.Lt_bry				, Xop_amp_trie.Bry_xowa_lt);
 		trie_new_itm(rv, Byte_ascii.Brack_bgn_bry		, Xop_amp_trie.Bry_xowa_brack_bgn);
 		trie_new_itm(rv, Byte_ascii.Brack_end_bry		, Xop_amp_trie.Bry_xowa_brack_end);	// PAGE:en.w: Tall_poppy_syndrome DATE:2014-07-23
@@ -57,7 +57,7 @@ public class Nowiki_escape_itm {
 		trie_new_itm(rv, Byte_ascii.Asterisk_bry		, Xop_amp_trie.Bry_xowa_asterisk);
 		trie_new_itm(rv, Byte_ascii.Dash_bry			, Xop_amp_trie.Bry_xowa_dash);		// needed to handle "|<nowiki>-</nowiki>"; PAGE:de.w:Liste_von_Vereinen_und_Vereinigungen_von_Gl�ubigen_(r�misch-katholische_Kirche) DATE:2015-01-08
 		trie_new_itm(rv, Byte_ascii.Space_bry			, Xop_amp_trie.Bry_xowa_space);
-		trie_new_itm(rv, Byte_ascii.Nl_bry			, Xop_amp_trie.Bry_xowa_nl);
+		trie_new_itm(rv, Byte_ascii.Nl_bry				, Xop_amp_trie.Bry_xowa_nl);
 		trie_new_itm(rv, Pre_bry						, Pre_bry);
 		return rv;
 	}		

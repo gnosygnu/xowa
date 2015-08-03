@@ -27,19 +27,21 @@ class Wdata_prop_val_visitor implements Wdata_claim_visitor {
 	public void Visit_entity(Wdata_claim_itm_entity itm) {
 		Wdata_doc entity_doc = wdata_mgr.Pages_get(itm.Page_ttl_db());
 		if (entity_doc == null) return;	// NOTE: wiki may refer to entity that no longer exists; EX: {{#property:p1}} which links to Q1, but p1 links to Q2 and Q2 was deleted; DATE:2014-02-01
-		byte[] label = entity_doc.Label_list_get(lang_key);
+		byte[] label = entity_doc.Label_list__get(lang_key);
 		if (label == null && !Bry_.Eq(lang_key, Xol_lang_.Key_en))	// NOTE: some properties may not exist in language of wiki; default to english; DATE:2013-12-19
-			label = entity_doc.Label_list_get(Xol_lang_.Key_en);
+			label = entity_doc.Label_list__get(Xol_lang_.Key_en);
 		if (label != null)	// if label is still not found, don't add null reference
 			bfr.Add(label);
 	}
 	public void Visit_quantity(Wdata_claim_itm_quantity itm) {
 		byte[] amount_bry = itm.Amount();
-		int val = Bry_.Xto_int_or(amount_bry, Ignore_comma, 0, amount_bry.length, 0);
+		long val = Bry_.To_long_or(amount_bry, Ignore_comma, 0, amount_bry.length, 0);	// NOTE: must cast to long for large numbers; EX:{{#property:P1082}} PAGE:en.w:Earth; DATE:2015-08-02
 		Xol_lang lang = app.Lang_mgr().Get_by_key(lang_key);
-		bfr.Add(lang.Num_mgr().Format_num(val));	// amount; EX: 1,234
-		bfr.Add(Bry_quantity_margin_of_error);		// symbol: EX: ±
-		bfr.Add(itm.Unit());						// unit;   EX: 1
+		bfr.Add(lang.Num_mgr().Format_num_by_long(val));	// amount; EX: 1,234
+		if (itm.Lbound_as_num().To_long() != val && itm.Ubound_as_num().To_long() != val) {	// NOTE: do not output ± if lbound == val == ubound; PAGE:en.w:Tintinan DATE:2015-08-02
+			bfr.Add(Bry_quantity_margin_of_error);			// symbol: EX: ±
+			bfr.Add(itm.Unit());							// unit;   EX: 1
+		}
 	}
 	public void Visit_globecoordinate(Wdata_claim_itm_globecoordinate itm) {
 		bfr.Add(itm.Lat());

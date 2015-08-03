@@ -33,7 +33,7 @@ public class Wdata_dict_mainsnak {
 	, Bry_type									= Bry_.new_a7("type")
 	, Bry_datatype								= Bry_.new_a7("datatype")
 	;
-	public static final Hash_adp_bry Dict = Hash_adp_bry.cs_()
+	public static final Hash_adp_bry Dict = Hash_adp_bry.cs()
 	.Add_bry_byte(Bry_snaktype					, Tid_snaktype)
 	.Add_bry_byte(Bry_property					, Tid_property)
 	.Add_bry_byte(Bry_hash						, Tid_hash)

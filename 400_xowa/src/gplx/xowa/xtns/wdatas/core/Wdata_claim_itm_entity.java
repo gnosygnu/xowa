@@ -21,7 +21,7 @@ public class Wdata_claim_itm_entity extends Wdata_claim_itm_core { 	public Wdata
 		this.Ctor(pid, snak_tid);
 		this.entity_tid = entity_tid;
 		this.entity_id_bry = entity_id_bry;
-		this.entity_id = Bry_.Xto_int_or_fail(entity_id_bry);
+		this.entity_id = Bry_.To_int(entity_id_bry);
 	}
 	@Override public byte Val_tid() {return Wdata_dict_val_tid.Tid_entity;}
 	public int Entity_id() {return entity_id;} private final int entity_id;

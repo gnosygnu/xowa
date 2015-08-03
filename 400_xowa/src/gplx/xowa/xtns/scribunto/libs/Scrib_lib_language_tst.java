@@ -75,6 +75,12 @@ public class Scrib_lib_language_tst {
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_formatDate, Object_.Ary("en", "Y-m-d", "2013-03-17", false), "2013-03-17");
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_formatDate, Object_.Ary("en", "Y-m-d"), DateAdp_.Now().XtoStr_fmt_yyyy_MM_dd());	// empty date should default to today;
 	}
+	@Test   public void FormatDate__ymd_12() {
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_formatDate, Object_.Ary("en", "Y-m-d", "201603160102", false), "2016-03-16");		// handle long numeric date (12 digits); PAGE:en.w:Boron; DATE:2015-07-29
+	}
+	@Test   public void FormatDate__utc() {
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_formatDate, Object_.Ary("en", "Y-m-d", "+00000002010-05-01T00:00:00Z", false), "2010-05-01");		// handle Wikidata style dates; PAGE:en.w:Mountain_Province; DATE:2015-07-29
+	}
 	@Test  public void FormatDate_date_omitted() {	// PURPOSE: some calls skip the date; retrieve arg_4 by int; EX: pl.w:L._Frank_Baum
 		Tfds.Now_enabled_y_();
 		Tfds.Now_set(DateAdp_.new_(2013, 12, 19, 1, 2, 3, 4));

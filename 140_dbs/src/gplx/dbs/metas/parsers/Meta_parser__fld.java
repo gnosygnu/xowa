@@ -70,14 +70,14 @@ public class Meta_parser__fld {
 	, Meta_fld_wkr__default.I
 	);
 	private static Btrie_slim_mgr fld_trie_init(Meta_fld_wkr__base... wkrs) {
-		Btrie_slim_mgr rv = Btrie_slim_mgr.ci_ascii_();
+		Btrie_slim_mgr rv = Btrie_slim_mgr.ci_a7();
 		for (Meta_fld_wkr__base wkr : wkrs)
 			wkr.Reg(rv);
 		return rv;
 	}
 	private static final Btrie_slim_mgr type_trie = type_trie_init();
 	private static Btrie_slim_mgr type_trie_init() {
-		Btrie_slim_mgr rv = Btrie_slim_mgr.ci_ascii_();
+		Btrie_slim_mgr rv = Btrie_slim_mgr.ci_a7();
 		Meta_parser__fld_itm.reg_many(rv, Db_meta_fld.Tid_byte		, Sqlite_tid.Tid_int		, 0, "tinyint", "int2");
 		Meta_parser__fld_itm.reg_many(rv, Db_meta_fld.Tid_short		, Sqlite_tid.Tid_int		, 0, "smallint");
 		Meta_parser__fld_itm.reg_many(rv, Db_meta_fld.Tid_int		, Sqlite_tid.Tid_int		, 0, "int", "integer", "mediumint");

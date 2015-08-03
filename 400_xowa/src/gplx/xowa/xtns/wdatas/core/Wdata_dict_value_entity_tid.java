@@ -30,7 +30,7 @@ public class Wdata_dict_value_entity_tid {
 	  Bry_item									= Bry_.new_a7(Str_item)
 	, Bry_property								= Bry_.new_a7(Str_property)
 	;
-	private static Hash_adp_bry Dict = Hash_adp_bry.cs_()
+	private static Hash_adp_bry Dict = Hash_adp_bry.cs()
 	.Add_bry_byte(Bry_item						, Tid_item)
 	.Add_bry_byte(Bry_property					, Tid_property)
 	;

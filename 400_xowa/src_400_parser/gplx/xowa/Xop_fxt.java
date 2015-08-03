@@ -197,8 +197,9 @@ public class Xop_fxt {
 		app.Usere().Wiki().Xwiki_mgr().Add_full(domain, domain);
 		return this;
 	}
-	public Xop_fxt	Init_xwiki_add_user_(String domain) {
-		app.Usere().Wiki().Xwiki_mgr().Add_full(domain, domain);
+	public Xop_fxt	Init_xwiki_add_user_(String domain) {return Init_xwiki_add_user_(domain, domain);}
+	public Xop_fxt	Init_xwiki_add_user_(String alias, String domain) {
+		app.Usere().Wiki().Xwiki_mgr().Add_full(alias, domain);
 		return this;
 	}
 	public void Test_parse_template(String tmpl_raw, String expd) {Test_parse_tmpl_str_test(tmpl_raw, "{{test}}", expd);}

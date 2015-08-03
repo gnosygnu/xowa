@@ -37,7 +37,7 @@ public class Xosrh_core_tst {
 //			fxt.Test_search("b*", 3, "B3_13");
 //		}
 //		@Test  public void Url() {
-//			Xoa_url url = Xoa_url_parser.Parse_url(fxt.App(), fxt.Wiki(), "Special:Search/Abc?fulltext=y&xowa_sort=len_desc");
+//			Xoa_url url = Xoa_url_parser_old.Parse_url(fxt.App(), fxt.Wiki(), "Special:Search/Abc?fulltext=y&xowa_sort=len_desc");
 //			fxt.Search_mgr().Args_mgr().Clear().Parse(url.Args());
 //			Tfds.Eq(Xosrh_rslt_itm_sorter.Tid_len_dsc, fxt.Search_mgr().Args_mgr().Sort_tid());
 //		}
@@ -167,12 +167,12 @@ public class Xosrh_core_tst {
 //		}
 //		public Xows_page__search Search_mgr() {return search_mgr;}
 //		public void Test_url_search_bry(String url_str, String expd) {
-//			Xoa_url url = Xoa_url_parser.Parse_url(app, wiki, url_str);
+//			Xoa_url url = Xoa_url_parser_old.Parse_url(app, wiki, url_str);
 //			search_mgr.Args_mgr().Clear().Parse(url.Args());
 //			Tfds.Eq(expd, String_.new_u8(search_mgr.Args_mgr().Search_bry()));
 //		}
 //		public void Test_url__ns(String url_str, String expd) {
-//			Xoa_url url = Xoa_url_parser.Parse_url(app, wiki, url_str);
+//			Xoa_url url = Xoa_url_parser_old.Parse_url(app, wiki, url_str);
 //			search_mgr.Args_mgr().Clear().Parse(url.Args());
 //			Tfds.Eq(expd, String_.new_a7(search_mgr.Args_mgr().Ns_mgr().Xto_hash_key()));
 //		}
@@ -197,7 +197,7 @@ public class Xosrh_core_tst {
 //		}
 //		public void Test_search2(byte match_tid, String ttl_str, int page_idx, byte sort_tid, params String[] expd_ary) {
 //			Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b128();
-//			Xoa_url_parser url_parser = new Xoa_url_parser();			
+//			Xoa_url_parser_old url_parser = new Xoa_url_parser_old();			
 //			byte[] url_raw = Bry_.new_a7("Special:Search/" + ttl_str + ((match_tid == Xows_page__search.Match_tid_all) ? "" : "*")  + "?fulltext=y" + Xosrh_rslt_itm_sorter.Xto_url_arg(sort_tid) + "&xowa_page_size=1&xowa_page_index=" + page_idx);
 //			Xoa_url url = url_parser.Parse(url_raw);
 //			Xoa_ttl ttl = Xoa_ttl.parse_(wiki, url_raw);

@@ -27,7 +27,7 @@ public class Xoud_bmk_mgr {
 		if (!conn.Meta_tbl_exists(tbl__itm.Tbl_name())) tbl__itm.Create_tbl();
 	}
 	public void Itms__add(int owner, Xoa_url url) {
-		tbl__itm.Insert(owner, tbl__itm.Select_sort_next(owner), Xoa_ttl.Replace_unders(url.Page_bry()), url.Wiki_bry(), url.Raw(), Bry_.Empty);
+		tbl__itm.Insert(owner, tbl__itm.Select_sort_next(owner), Xoa_ttl.Replace_unders(url.Page_bry()), url.Wiki_bry(), url.To_bry(Bool_.Y, Bool_.Y), Bry_.Empty);
 	}
 	public static final int Owner_root = -1;
 }

@@ -98,12 +98,13 @@ class Pxd_parser {
 		Pxd_itm itm = null;
 		switch (tkn_type) {
 			case Pxd_itm_.Tid_int:
-				int int_val = Bry_.Xto_int_or(src, tkn_bgn_pos, cur_pos, Int_.MinValue);
+				int int_val = Bry_.To_int_or(src, tkn_bgn_pos, cur_pos, Int_.MinValue);
 				if (int_val == Int_.MinValue) {} // FUTURE: warn
 				int digits = cur_pos - tkn_bgn_pos;
 				switch (digits) {
-					case 14:
-					case 8:
+					case 14:	// yyyyMMddhhmmss
+					case 12:	// yyyyMMddhhmm; PAGE:en.w:Boron; DATE:2015-07-29
+					case 8:		// yyyyMMdd
 						itm = new Pxd_itm_int_dmy_14(tkns_len, Bry_.Mid(src, tkn_bgn_pos, cur_pos), digits); break;
 					case 6:
 						itm = new Pxd_itm_int_mhs_6(tkns_len, Bry_.Mid(src, tkn_bgn_pos, cur_pos)); break;
@@ -164,7 +165,7 @@ class Pxd_parser {
 class Pxd_parser_ {
 	public static Btrie_slim_mgr Trie() {
 		if (trie == null) {
-			trie = Btrie_slim_mgr.ci_ascii_();	// NOTE:ci.ascii:MW_const.en
+			trie = Btrie_slim_mgr.ci_a7();	// NOTE:ci.ascii:MW_const.en
 			Init();
 		}
 		return trie;

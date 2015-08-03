@@ -66,6 +66,6 @@ public class Err_ {
 	}
 	public static String Message_gplx_full(Exception e)	{return cast_or_make(e).To_str__full();}
 	public static String Message_gplx_log(Exception e)	{return cast_or_make(e).To_str__log();}
-	private static Err cast_or_make(Exception e) {return ClassAdp_.Eq_typeSafe(e, Err.class) ? (Err)e : new Err(Bool_.N, Err_.Trace_lang(e), ClassAdp_.NameOf_obj(e), Err_.Message_lang(e));}
+	public static Err cast_or_make(Exception e) {return ClassAdp_.Eq_typeSafe(e, Err.class) ? (Err)e : new Err(Bool_.N, Err_.Trace_lang(e), ClassAdp_.NameOf_obj(e), Err_.Message_lang(e));}
 	public static final String Type__op_canceled = "gplx.op_canceled";
 }

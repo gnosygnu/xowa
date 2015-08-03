@@ -53,7 +53,7 @@ public class Xop_lnki_wkr__link_tst {
 	@Test  public void Link_external_relative() {
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.png|12x10px|link=//fr.wikipedia.org/wiki/|c]]", String_.Concat_lines_nl_skip_last
-		( "<a href=\"http://fr.wikipedia.org/wiki/\" rel=\"nofollow\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"c\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
+		( "<a href=\"https://fr.wikipedia.org/wiki/\" rel=\"nofollow\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"c\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
 		));
 	}
 	@Test  public void Link_external_absolute() {
@@ -65,7 +65,7 @@ public class Xop_lnki_wkr__link_tst {
 	@Test  public void Link_external_double_http() {// PURPOSE.fix: link=http://a.org?b=http://c.org breaks lnki; DATE:2013-02-03
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.png|12x10px|link=//a.org?b=http://c.org]]", String_.Concat_lines_nl_skip_last
-		( "<a href=\"http://a.org?b=http://c.org\" rel=\"nofollow\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
+		( "<a href=\"https://a.org?b=http://c.org\" rel=\"nofollow\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
 		));
 	}
 	@Test  public void Link_xwiki_relative() {	// NOTE: changed href to return "wiki/" instead of "wiki"; DATE:2013-02-18
@@ -105,6 +105,7 @@ public class Xop_lnki_wkr__link_tst {
 	}
 	@Test  public void Link_xwiki_alias() {	// [[File:Commons-logo.svg|25x25px|link=http://en.wikipedia.org/wiki/commons:Special:Search/Earth|alt=|Search Commons]]
 		fxt.Init_xwiki_add_wiki_and_user_("commons", "commons.wikimedia.org");
+		fxt.Init_xwiki_add_wiki_and_user_("en.wikipedia.org", "en.wikipedia.org"); // DATE:2015-07-22
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.png|12x10px|link=http://en.wikipedia.org/wiki/commons:B|c]]", String_.Concat_lines_nl_skip_last
 		( "<a href=\"/site/commons.wikimedia.org/wiki/B\" rel=\"nofollow\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"c\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
@@ -113,6 +114,7 @@ public class Xop_lnki_wkr__link_tst {
 	}
 	@Test  public void Link_xwiki_alias_sub_page() {	// same as above, but for sub-page; [[File:Commons-logo.svg|25x25px|link=http://en.wikipedia.org/wiki/commons:Special:Search/Earth|alt=|Search Commons]]
 		fxt.Init_xwiki_add_wiki_and_user_("commons", "commons.wikimedia.org");
+		fxt.Init_xwiki_add_wiki_and_user_("en.wikipedia.org", "en.wikipedia.org");	// DATE:2015-07-22
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.png|12x10px|link=http://en.wikipedia.org/wiki/commons:Special:Search/B|c]]", String_.Concat_lines_nl_skip_last
 		( "<a href=\"/site/commons.wikimedia.org/wiki/Special:Search/B\" rel=\"nofollow\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"c\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
@@ -138,7 +140,7 @@ public class Xop_lnki_wkr__link_tst {
 	@Test  public void Encode() {// PURPOSE: encode invalid characters in link; PAGE:en.w:List_of_cultural_heritage_sites_in_Punjab,_Pakistan DATE:2014-07-16
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.png|link=//b?c\">|d]]"
-		, "<a href=\"http://b?c%22%3E\" rel=\"nofollow\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"d\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
+		, "<a href=\"https://b?c%22%3E\" rel=\"nofollow\" xowa_title=\"A.png\"><img id=\"xowa_file_img_0\" alt=\"d\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
 		);
 	}
 }

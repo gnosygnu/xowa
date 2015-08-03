@@ -30,10 +30,10 @@ public class Pfunc_explode extends Pf_func_base {
 			if (Bry_.Len_eq_0(dlm)) dlm = Byte_ascii.Space_bry;	// handle empty String; EX: {{#explode:a b||1}}
 			if (args_len > 1) {
 				byte[] pos_bry = Pf_func_.Eval_arg_or(ctx, src, caller, self, args_len, 1, null);
-				if (pos_bry != null) idx = Bry_.Xto_int_or(pos_bry, 0);
+				if (pos_bry != null) idx = Bry_.To_int_or(pos_bry, 0);
 				if (args_len > 2) {
 					byte[] limit_bry = Pf_func_.Eval_arg_or(ctx, src, caller, self, args_len, 2, null);
-					if (limit_bry != null) limit = Bry_.Xto_int_or(pos_bry, -1);
+					if (limit_bry != null) limit = Bry_.To_int_or(pos_bry, -1);
 				}
 			}
 		}

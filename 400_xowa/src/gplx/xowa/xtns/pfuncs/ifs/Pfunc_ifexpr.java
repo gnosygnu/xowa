@@ -23,14 +23,14 @@ public class Pfunc_ifexpr extends Pf_func_base {
 		int self_args_len = self.Args_len();
 		byte[] val_dat_ary = Eval_argx(ctx, src, caller, self);
 		if (val_dat_ary == null) return;
-		DecimalAdp result = shunter.Evaluate(ctx, val_dat_ary);
+		Decimal_adp result = shunter.Evaluate(ctx, val_dat_ary);
 		boolean is_nan = result == Pfunc_expr_shunter.Null_rslt;
 		if (is_nan && shunter.Err().Len() > 0) {
 			bb.Add_bfr_and_preserve(shunter.Err());
 			shunter.Err().Clear();
 		}
 		else {
-			if (is_nan || result.Xto_int() == 0)
+			if (is_nan || result.To_int() == 0)
 				bb.Add(Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, self_args_len, 1));
 			else
 				bb.Add(Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, self_args_len, 0));

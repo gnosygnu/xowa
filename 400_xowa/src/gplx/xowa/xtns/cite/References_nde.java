@@ -53,6 +53,6 @@ public class References_nde implements Xox_xnde, Xop_xnde_atr_parser {
 	}
 	private static final byte Xatr_id_group = 0;
 	public static boolean Enabled = true;
-	private static final Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_ascii_()
+	private static final Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7()
 	.Add_str_obj("group", Byte_obj_val.new_(References_nde.Xatr_id_group));
 }

@@ -46,7 +46,7 @@ public class Xowd_wbase_qid_tbl implements RlsAble {
 		if (stmt_select == null) stmt_select = conn.Stmt_select(tbl_name, flds, fld_src_wiki, fld_src_ns, fld_src_ttl);
 		if (src_ttl_has_spaces) src_ttl = Xoa_ttl.Replace_unders(src_ttl);	// NOTE: v2.4.2.1-v2.4.3.2 stores ttl in spaces ("A B"), while xowa will use under form ("A_B"); DATE:2015-04-21
 		Db_rdr rdr = stmt_select.Clear()
-				.Crt_bry_as_str(fld_src_wiki, src_wiki).Crt_int(fld_src_ns, Bry_.Xto_int(src_ns)).Crt_bry_as_str(fld_src_ttl, src_ttl)
+				.Crt_bry_as_str(fld_src_wiki, src_wiki).Crt_int(fld_src_ns, Bry_.To_int_or_neg1(src_ns)).Crt_bry_as_str(fld_src_ttl, src_ttl)
 				.Exec_select__rls_manual();
 		try {
 			return rdr.Move_next() ? rdr.Read_bry_by_str(fld_trg_ttl) : null;

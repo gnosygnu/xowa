@@ -19,8 +19,8 @@ package gplx.gfui; import gplx.*;
 public class Gfui_bnd_parser {
 	private Bry_bfr tmp_bfr = Bry_bfr.reset_(32);
 	private Hash_adp_bry
-	  gfui_regy = Hash_adp_bry.ci_ascii_()
-	, norm_regy = Hash_adp_bry.ci_ascii_()
+	  gfui_regy = Hash_adp_bry.ci_a7()
+	, norm_regy = Hash_adp_bry.ci_a7()
 	;
 	private static final Gfui_bnd_tkn
 	  Itm_sym_plus		= new_sym_(Gfui_bnd_tkn.Tid_sym_plus	, new byte[] {Byte_ascii.Plus})
@@ -106,7 +106,7 @@ public class Gfui_bnd_parser {
 				if (tkn_bgn == -1) throw Err_.new_wo_type("invalid keycode.dot", "keycode", Bry_.Mid(src, tkn_bgn, itm_end));
 				++tkn_bgn;		// skip #
 			}
-			int keycode = Bry_.Xto_int_or(src, tkn_bgn, itm_end, -1); if (keycode == -1) throw Err_.new_wo_type("invalid keycode", "keycode", Bry_.Mid(src, tkn_bgn, itm_end));
+			int keycode = Bry_.To_int_or(src, tkn_bgn, itm_end, -1); if (keycode == -1) throw Err_.new_wo_type("invalid keycode", "keycode", Bry_.Mid(src, tkn_bgn, itm_end));
 			tkn = new Gfui_bnd_tkn(Gfui_bnd_tkn.Tid_key, keycode, Bry_.Empty, Bry_.Empty);
 		}
 		else

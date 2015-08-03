@@ -45,7 +45,7 @@ class Xop_randomRootPage_page_fxt {
 	}
 	public static Xoae_page Test_special_open(Xowe_wiki wiki, Xows_page special_page, String special_url) {
 		Xoae_page page = wiki.Ctx().Cur_page();
-		Xoa_url url = wiki.Appe().Utl__url_parser().Parse(Bry_.new_u8(special_url));
+		Xoa_url url = wiki.Utl__url_parser().Parse(Bry_.new_u8(special_url));
 		page.Url_(url);
 		Xoa_ttl ttl = Xoa_ttl.parse_(wiki, Bry_.new_a7(special_url));
 		page.Ttl_(ttl);

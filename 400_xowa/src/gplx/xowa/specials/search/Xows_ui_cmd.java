@@ -45,7 +45,7 @@ class Xows_ui_cmd implements GfoInvkAble, Cancelable, Xog_tab_close_lnr {
 		if (!cache.Done() && (qry.Itms_end() > cache.Itms_end())) {
 			if (async) {
 				fill_from_cache = false; // NOTE: do not retrieve cached results to page, else ui_async cmd will add out of order; DATE:2015-04-24
-				if (async_wkr == null) async_wkr = new Xows_ui_async(this, new Xows_html_row(new gplx.xowa.html.wtrs.Xoh_lnki_bldr(wiki.App(), wiki.App().Html__href_parser())), js_wkr, qry.Page_len(), wiki.Domain_bry());
+				if (async_wkr == null) async_wkr = new Xows_ui_async(this, new Xows_html_row(new gplx.xowa.html.wtrs.Xoh_lnki_bldr(wiki.App(), wiki.App().Html__href_wtr())), js_wkr, qry.Page_len(), wiki.Domain_bry());
 				Thread_adp_.invk_(gplx.xowa.apps.Xoa_thread_.Key_special_search_db, this, Invk_search_db).Start();
 			}
 			else
@@ -88,7 +88,7 @@ class Xows_ui_cmd implements GfoInvkAble, Cancelable, Xog_tab_close_lnr {
 	}
 	public boolean When_close(Xog_tab_itm tab, Xoa_url url) {
 		if (url != Xoa_url.Null) {	// not called by close_tab (Ctrl+W)
-			byte[] cancel_arg = url.Args_hash().Get_val_bry_or(Xows_arg_mgr.Arg_bry_cancel, null);
+			byte[] cancel_arg = url.Qargs_mgr().Get_val_bry_or(Xows_arg_mgr.Arg_bry_cancel, null);
 			if (cancel_arg != null)	return true; // cancel arg exists; assume tab is not being closed; note that cancel will be processed by Xows_page__special; DATE:2015-04-30
 		}
 		this.Cancel();

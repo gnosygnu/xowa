@@ -17,14 +17,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 public class Vnt_mnu_grp_fmtr implements Bry_fmtr_arg {
-	private Vnt_mnu_grp grp;
 	private final Xolg_vnt_itm_fmtr itm_fmtr = new Xolg_vnt_itm_fmtr();
-	public void Init(Vnt_mnu_grp grp, byte[] page_href, byte[] page_vnt) {
-		this.grp = grp;
-		itm_fmtr.Init(grp, page_href, page_vnt);
+	private Vnt_mnu_grp grp; private byte[] page_vnt;
+	public void Init(Vnt_mnu_grp grp, byte[] wiki_domain, byte[] page_href, byte[] page_vnt) {
+		this.grp = grp; this.page_vnt = page_vnt;
+		itm_fmtr.Init(grp, wiki_domain, page_href, page_vnt);
 	}
 	public void XferAry(Bry_bfr bfr, int idx) {
-		fmtr.Bld_bfr_many(bfr, grp.Text(), itm_fmtr);
+		Vnt_mnu_itm mnu_itm = grp.Get_by(page_vnt);
+		fmtr.Bld_bfr_many(bfr, mnu_itm == null ? Bry_.Empty : mnu_itm.Text(), itm_fmtr);
 	}
 	private static final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
@@ -39,21 +40,21 @@ public class Vnt_mnu_grp_fmtr implements Bry_fmtr_arg {
 	);
 }
 class Xolg_vnt_itm_fmtr implements Bry_fmtr_arg {
-	private Vnt_mnu_grp grp; private byte[] page_href, page_vnt;
-	public void Init(Vnt_mnu_grp grp, byte[] page_href, byte[] page_vnt) {this.grp = grp; this.page_href = page_href; this.page_vnt = page_vnt;}
+	private Vnt_mnu_grp grp; private byte[] wiki_domain, page_href, page_vnt;
+	public void Init(Vnt_mnu_grp grp, byte[] wiki_domain, byte[] page_href, byte[] page_vnt) {this.grp = grp; this.wiki_domain = wiki_domain; this.page_href = page_href; this.page_vnt = page_vnt;}
 	public void XferAry(Bry_bfr bfr, int idx) {
 		int len = grp.Len();
 		for (int i = 0; i < len; ++i) {
 			Vnt_mnu_itm itm = grp.Get_at(i);
 			boolean itm_is_selected = Bry_.Eq(itm.Key(), page_vnt);
 			byte[] itm_cls_selected = itm_is_selected ? Itm_cls_selected_y : Bry_.Empty;
-			fmtr.Bld_bfr_many(bfr, i, itm_cls_selected, itm.Key(), itm.Text(), page_href);
+			fmtr.Bld_bfr_many(bfr, i, itm_cls_selected, wiki_domain, itm.Key(), itm.Text(), page_href);
 		}
 	}
 	private static final byte[] Itm_cls_selected_y = Bry_.new_a7(" class='selected'");
-	private static final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private static final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last	// NOTE: using "/site/zh.w/zh-hans/A" instead of "/zh-hans/A" b/c it is easier for href_parser; if /site/ ever needs to truly mean "not-this-site", then change this to "/lang/"; DATE:2015-07-30
 	( ""
-	, "          <li id='ca-varlang-~{itm_idx}'~{itm_cls_selected}><a href='/wiki/~{itm_href}?xowa_vnt=~{itm_lang}' lang='~{itm_lang}' hreflang='~{itm_lang}'>~{itm_text}</a></li>"
-	), "itm_idx", "itm_cls_selected", "itm_lang", "itm_text", "itm_href"
+	, "          <li id='ca-varlang-~{itm_idx}'~{itm_cls_selected}><a href='/site/~{wiki_domain}/~{itm_lang}/~{itm_href}' lang='~{itm_lang}' hreflang='~{itm_lang}' class='xowa-hover-off'>~{itm_text}</a></li>"
+	), "itm_idx", "itm_cls_selected", "wiki_domain", "itm_lang", "itm_text", "itm_href"
 	);
 }

@@ -276,7 +276,7 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		if (exit_after_commit) exit_now = true;
 	}
 	public void Cmd_end() {
-		usr_dlg.Note_many("", "", "fsdb_make.done: count=~{0} rate=~{1}", exec_count, DecimalAdp_.divide_safe_(exec_count, Env_.TickCount_elapsed_in_sec(time_bgn)).Xto_str("#,###.000"));
+		usr_dlg.Note_many("", "", "fsdb_make.done: count=~{0} rate=~{1}", exec_count, Decimal_adp_.divide_safe_(exec_count, Env_.TickCount_elapsed_in_sec(time_bgn)).To_str("#,###.000"));
 		if (src_fsdb_wkr != null) {
 			src_fsdb_wkr.Mnt_mgr().Mnts__get_main().Txn_end();	// NOTE: src_fsdb_wkr will be null if no src db defined
 		}

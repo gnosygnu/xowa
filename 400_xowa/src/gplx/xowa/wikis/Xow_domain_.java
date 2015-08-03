@@ -96,7 +96,7 @@ public class Xow_domain_ {
 		Object o = lang_to_gfs_hash.Get_by_bry(v);
 		return o == null ? v : (byte[])o;
 	}
-	private static final Hash_adp_bry lang_to_gfs_hash = Hash_adp_bry.ci_ascii_()	// ASCII:lang_code
+	private static final Hash_adp_bry lang_to_gfs_hash = Hash_adp_bry.ci_a7()	// ASCII:lang_code
 	.Add_str_obj("simple"			, Bry_.new_a7("en"))
 	.Add_str_obj("zh-classical"		, Bry_.new_a7("lzh"))
 	.Add_str_obj("no"				, Bry_.new_a7("nb"))

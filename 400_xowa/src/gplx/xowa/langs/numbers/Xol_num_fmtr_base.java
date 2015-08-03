@@ -23,7 +23,7 @@ public class Xol_num_fmtr_base implements GfoInvkAble {
 	private Gfo_num_fmt_wkr[] cache; int cache_len = 16;
 	private Bry_bfr tmp = Bry_bfr.new_();
 	public boolean Standard() {return standard;} private boolean standard = true;
-	public byte[] Dec_dlm() {return dec_dlm;} public Xol_num_fmtr_base Dec_dlm_(byte[] v) {this.dec_dlm = v; dlm_trie.Add_bry_bval(v, Raw_tid_dec); return this;} private byte[] dec_dlm = Dec_dlm_default;
+	public byte[] Dec_dlm() {return dec_dlm;} public Xol_num_fmtr_base Dec_dlm_(byte[] v) {this.dec_dlm = v; dlm_trie.Add_bry_byte(v, Raw_tid_dec); return this;} private byte[] dec_dlm = Dec_dlm_default;
 	private byte[] grp_dlm;
 	public byte[] Raw(byte tid, byte[] src) {
 		int src_len = src.length;
@@ -120,7 +120,7 @@ public class Xol_num_fmtr_base implements GfoInvkAble {
 			byte[] itm_dlm = itm.Dlm();
 			Object o = dlm_trie.Match_exact(itm_dlm, 0, itm_dlm.length);	// check for existing Object
 			if (o == null) {
-				dlm_trie.Add_bry_bval(itm_dlm, Raw_tid_grp);
+				dlm_trie.Add_bry_byte(itm_dlm, Raw_tid_grp);
 				grp_dlm = itm_dlm;
 			}
 		}

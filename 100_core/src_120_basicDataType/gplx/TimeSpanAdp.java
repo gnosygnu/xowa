@@ -19,11 +19,11 @@ package gplx;
 import gplx.core.strings.*;
 public class TimeSpanAdp implements CompareAble, EqAble {
 	public long Fracs() {return fracs;} long fracs; public int FracsAsInt() {return (int)fracs;}
-	public DecimalAdp TotalSecs() {
-		return DecimalAdp_.divide_(fracs, TimeSpanAdp_.Divisors[TimeSpanAdp_.Idx_Sec]);
+	public Decimal_adp TotalSecs() {
+		return Decimal_adp_.divide_(fracs, TimeSpanAdp_.Divisors[TimeSpanAdp_.Idx_Sec]);
 	}
-	public DecimalAdp Total_days() {
-		return DecimalAdp_.divide_(fracs, TimeSpanAdp_.Divisors[TimeSpanAdp_.Idx_Hour]  * 24);
+	public Decimal_adp Total_days() {
+		return Decimal_adp_.divide_(fracs, TimeSpanAdp_.Divisors[TimeSpanAdp_.Idx_Hour]  * 24);
 	}
 	public int[] Units() {return TimeSpanAdp_.Split_long(fracs, TimeSpanAdp_.Divisors);}
 	public int Units_fracs() {

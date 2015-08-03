@@ -26,7 +26,7 @@ public class Xoapi_url implements GfoInvkAble {
 	public void Exec_new_tab_by_paste() {Exec_wkr(Bool_.Y, ClipboardAdp_.GetText());}
 	public void Restore() {
 		Xog_tab_itm tab = app.Gui_mgr().Browser_win().Active_tab(); if (tab == Xog_tab_itm_.Null) return;
-		this.Url_box().Text_(tab.Page().Url().Xto_full_str());
+		this.Url_box().Text_(tab.Page().Url().To_str());
 	}
 	private void Exec_wkr(boolean new_tab, String urls_text) {
 		if (Op_sys.Cur().Tid_is_wnt())

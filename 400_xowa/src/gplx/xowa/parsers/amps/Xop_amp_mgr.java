@@ -76,46 +76,49 @@ public class Xop_amp_mgr {
 		int src_len = src.length;
 		boolean dirty = false;
 		int pos = 0;
-		while (pos < src_len) {
-			byte b = src[pos];
-			if (b == Byte_ascii.Amp) {
-				int nxt_pos = pos + 1;
-				if (nxt_pos < src_len) {
-					byte nxt_b = src[nxt_pos];
-					Object amp_obj = amp_trie.Match_bgn_w_byte(nxt_b, src, nxt_pos, src_len);
-					if (amp_obj != null) {
-						if (!dirty) {
-							tmp_bfr.Add_mid(src, 0, pos);
-							dirty = true;
+		synchronized (tmp_bfr) {
+			while (pos < src_len) {
+				byte b = src[pos];
+				if (b == Byte_ascii.Amp) {
+					int nxt_pos = pos + 1;
+					if (nxt_pos < src_len) {
+						byte nxt_b = src[nxt_pos];
+						Object amp_obj = amp_trie.Match_bgn_w_byte(nxt_b, src, nxt_pos, src_len);
+						if (amp_obj != null) {
+							if (!dirty) {
+								tmp_bfr.Add_mid(src, 0, pos);
+								dirty = true;
+							}
+							Xop_amp_trie_itm amp_itm = (Xop_amp_trie_itm)amp_obj;
+							switch (amp_itm.Tid()) {
+								case Xop_amp_trie_itm.Tid_name_std:
+								case Xop_amp_trie_itm.Tid_name_xowa:
+									tmp_bfr.Add(amp_itm.U8_bry());
+									pos = amp_trie.Match_pos();
+									break;
+								case Xop_amp_trie_itm.Tid_num_hex:
+								case Xop_amp_trie_itm.Tid_num_dec:
+									boolean ncr_is_hex = amp_itm.Tid() == Xop_amp_trie_itm.Tid_num_hex;
+									int int_bgn = amp_trie.Match_pos();
+									if (Parse_as_int(ncr_is_hex, src, src_len, pos, int_bgn))
+										tmp_bfr.Add_u8_int(rslt_val);
+									else 
+										tmp_bfr.Add_mid(src, pos, nxt_pos);
+									pos = rslt_pos;
+									break;
+								default:
+									throw Err_.new_unhandled(amp_itm.Tid());
+							}
+							continue;
 						}
-						Xop_amp_trie_itm amp_itm = (Xop_amp_trie_itm)amp_obj;
-						switch (amp_itm.Tid()) {
-							case Xop_amp_trie_itm.Tid_name_std:
-							case Xop_amp_trie_itm.Tid_name_xowa:
-								tmp_bfr.Add(amp_itm.Utf8_bry());
-								pos = amp_trie.Match_pos();
-								break;
-							case Xop_amp_trie_itm.Tid_num_hex:
-							case Xop_amp_trie_itm.Tid_num_dec:
-								boolean ncr_is_hex = amp_itm.Tid() == Xop_amp_trie_itm.Tid_num_hex;
-								int int_bgn = amp_trie.Match_pos();
-								if (Parse_as_int(ncr_is_hex, src, src_len, pos, int_bgn))
-									tmp_bfr.Add_u8_int(rslt_val);
-								else 
-									tmp_bfr.Add_mid(src, pos, nxt_pos);
-								pos = rslt_pos;
-								break;
-							default:
-								throw Err_.new_unhandled(amp_itm.Tid());
-						}
-						continue;
-					}
-				}					
+					}					
+				}
+				if (dirty)
+					tmp_bfr.Add_byte(b);
+				++pos;
 			}
-			if (dirty)
-				tmp_bfr.Add_byte(b);
-			++pos;
+			return dirty ? tmp_bfr.Xto_bry_and_clear() : src;
 		}
-		return dirty ? tmp_bfr.Xto_bry_and_clear() : src;
 	}
+        public static final Xop_amp_mgr I = new Xop_amp_mgr(); Xop_amp_mgr() {}
 }

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa2.gui; import gplx.*; import gplx.xowa2.*;
-import gplx.core.threads.*;
+import gplx.core.threads.*; import gplx.core.net.*;
 import gplx.xowa.*;
 import gplx.xowa.gui.history.*;
 import gplx.xowa2.apps.*; import gplx.xowa2.wikis.*;

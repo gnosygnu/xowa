@@ -76,7 +76,7 @@ class Xob_url_fixer_tkn {
 	private static Btrie_slim_mgr bgn_trie;
 	public static Btrie_slim_mgr Bgn_trie() {
 		if (bgn_trie == null) {
-			bgn_trie = Btrie_slim_mgr.ci_ascii_();
+			bgn_trie = Btrie_slim_mgr.ci_a7();
 			trie_add(bgn_trie, Tid_bgn_slash_1	, "/");
 			trie_add(bgn_trie, Tid_bgn_slash_2	, "//");
 			trie_add(bgn_trie, Tid_bgn_http		, "http://");
@@ -88,7 +88,7 @@ class Xob_url_fixer_tkn {
 	private static Btrie_slim_mgr mid_trie;
 	public static Btrie_slim_mgr Mid_trie() {
 		if (mid_trie == null) {
-			mid_trie = Btrie_slim_mgr.ci_ascii_();
+			mid_trie = Btrie_slim_mgr.ci_a7();
 			trie_add(mid_trie, Tid_mid_rel_1	, "/../");
 			trie_add(mid_trie, Tid_mid_rel_2	, "/./");
 			trie_add(mid_trie, Tid_mid_slash	, "/");

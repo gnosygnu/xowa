@@ -25,7 +25,7 @@ public class Xop_tblw_ws_itm {
 	public static final byte Type_tb = Xop_tblw_wkr.Tblw_type_tb, Type_te = Xop_tblw_wkr.Tblw_type_te, Type_tr = Xop_tblw_wkr.Tblw_type_tr, Type_tc = Xop_tblw_wkr.Tblw_type_tc
 		, Type_th = Xop_tblw_wkr.Tblw_type_th, Type_td = Xop_tblw_wkr.Tblw_type_td, Type_nl = 16, Type_xnde = 17;
 	public static Btrie_slim_mgr trie_() {// MW.REF:Parser.php|doBlockLevels
-		Btrie_slim_mgr rv = Btrie_slim_mgr.cs_();
+		Btrie_slim_mgr rv = Btrie_slim_mgr.cs();
 		trie_itm(rv, Type_tb, Xop_tblw_lxr_ws.Hook_tb);
 		trie_itm(rv, Type_te, Xop_tblw_lxr_ws.Hook_te);
 		trie_itm(rv, Type_tr, Xop_tblw_lxr_ws.Hook_tr);

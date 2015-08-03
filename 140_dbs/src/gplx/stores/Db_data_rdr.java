@@ -50,7 +50,7 @@ public class Db_data_rdr extends DataRdr_base implements DataRdr {
 		g.setTime(ts);
 		return DateAdp_.dateTime_(g);
 	}
-	@Override public DecimalAdp ReadDecimal(String key) {return DecimalAdp_.db_(this.Read(key));}
+	@Override public Decimal_adp ReadDecimal(String key) {return Decimal_adp_.db_(this.Read(key));}
 	@Override public gplx.ios.Io_stream_rdr ReadRdr(String key) {
 		try {
 			java.io.InputStream input_stream = rdr.getBinaryStream(key);			

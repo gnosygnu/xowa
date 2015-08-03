@@ -32,7 +32,7 @@ public class Wdata_dict_datavalue {
 	, Bry_type									= Bry_.new_a7(Str_type)
 	, Bry_error									= Bry_.new_a7(Str_error)
 	;
-	public static final Hash_adp_bry Dict = Hash_adp_bry.cs_()
+	public static final Hash_adp_bry Dict = Hash_adp_bry.cs()
 	.Add_bry_byte(Bry_value						, Tid_value)
 	.Add_bry_byte(Bry_type						, Tid_type)
 	.Add_bry_byte(Bry_error						, Tid_error)

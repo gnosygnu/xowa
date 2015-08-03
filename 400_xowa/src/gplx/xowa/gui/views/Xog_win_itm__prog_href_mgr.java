@@ -18,8 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.gui.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.gui.*;
 import gplx.gfui.*; import gplx.xowa.html.hrefs.*;
 public class Xog_win_itm__prog_href_mgr {
-	private static Xoh_href		tmp_href	= new Xoh_href();
-	private static Bry_bfr	tmp_bfr		= Bry_bfr.reset_(512);
 	public static void Print(Xog_win_itm win) {	// PURPOSE: print href in prog box when in content editable mode
 		String href = win.Active_html_box().Html_js_eval_proc_as_str(Xog_js_procs.Selection__get_active_for_editable_mode, Gfui_html.Atr_href, "");// get selected href from html_box
 		href = Xoa_app_.Utl__encoder_mgr().Href().Decode_str(href);								// remove url encodings
@@ -33,8 +31,9 @@ public class Xog_win_itm__prog_href_mgr {
 			usr_dlg.Prog_direct("");			// clear out previous entry
 			return;
 		}
-		app.Href_parser().Parse(tmp_href, href, wiki, page.Ttl().Page_url());
-		tmp_href.Print_to_bfr(tmp_bfr, !app.Api_root().Gui().Browser().Prog().Show_short_url());
-		usr_dlg.Prog_direct(tmp_bfr.Xto_str_and_clear());
+		Xoa_url url = Xoa_url.blank();
+		app.Html__href_parser().Parse_as_url(url, Bry_.new_u8(href), wiki, page.Ttl().Page_txt());
+//			Xoa_url url = wiki.Utl__url_parser().Parse(Bry_.new_u8(href));
+		usr_dlg.Prog_direct(String_.new_u8(url.To_bry(!app.Api_root().Gui().Browser().Prog().Show_short_url(), Bool_.Y)));
 	}
 }

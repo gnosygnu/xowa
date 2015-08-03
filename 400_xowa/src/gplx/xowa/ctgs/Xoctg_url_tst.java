@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.ctgs; import gplx.*; import gplx.xowa.*;
-import org.junit.*;
+import org.junit.*; import gplx.xowa.urls.*;
 public class Xoctg_url_tst {
 	@Before public void init() {fxt.Clear();} private Xoctg_url_fxt fxt = new Xoctg_url_fxt();
 	@Test   public void Basic() {
@@ -30,14 +30,15 @@ class Xoctg_url_fxt {
 	public Xoctg_url_chkr url() {return expd.Clear();} private Xoctg_url_chkr expd;
 	public void Clear() {
 		if (parser == null) {
-			parser = new Xoa_url_parser();
-			page_url = Xoa_url.blank_();
+			Xoa_app app = Xoa_app_fxt.app_();
+			parser = app.User().Wikii().Utl__url_parser();
+			page_url = Xoa_url.blank();
 			ctg_url = new Xoctg_url();
 			expd = new Xoctg_url_chkr();
 		}
 	}	private Xoa_url_parser parser; Xoa_url page_url; Xoctg_url ctg_url;
 	public void Test_parse(String url_str, Xoctg_url_chkr expd) {
-		parser.Parse(page_url, Bry_.new_u8(url_str));
+		page_url = parser.Parse(Bry_.new_u8(url_str));
 		ctg_url.Parse(Gfo_usr_dlg_.Test(), page_url);
 		expd.Chk(ctg_url);
 		expd.Clear();

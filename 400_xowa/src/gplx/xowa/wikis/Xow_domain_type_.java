@@ -80,8 +80,8 @@ public class Xow_domain_type_ {
 	, Key_bry_other				= Bry_.new_a7(Key_str_other)
 	;
 	private static final Xow_domain_type[] ary = new Xow_domain_type[Tid__len];
-	private static final Hash_adp_bry type_regy = Hash_adp_bry.ci_ascii_();	// LOC:must go before new_()
-	private static final Hash_adp_bry abrv_regy = Hash_adp_bry.cs_();		// LOC:must go before new_()
+	private static final Hash_adp_bry type_regy = Hash_adp_bry.ci_a7();	// LOC:must go before new_()
+	private static final Hash_adp_bry abrv_regy = Hash_adp_bry.cs();		// LOC:must go before new_()
 	public static final Xow_domain_type 
 	  Itm_wikipedia				= new_(Bool_.Y	, Xow_domain_type_src_.Tid_wmf	, Tid_wikipedia			, Key_bry_wikipedia			, "w"			, ".wikipedia.org")
 	, Itm_wiktionary			= new_(Bool_.Y	, Xow_domain_type_src_.Tid_wmf	, Tid_wiktionary		, Key_bry_wiktionary		, "d"			, ".wiktionary.org")

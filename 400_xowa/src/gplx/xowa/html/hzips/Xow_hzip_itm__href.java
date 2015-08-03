@@ -68,17 +68,17 @@ class Xow_hzip_itm__href {
 	, Tid_ext_asp		= 6
 	, Tid_ext_aspx		= 7
 	;
-//		private static final Btrie_slim_mgr proto_trie = Btrie_slim_mgr.ci_ascii_()
+//		private static final Btrie_slim_mgr proto_trie = Btrie_slim_mgr.ci_a7()
 //		.Add_str_byte("http", Tid_proto_http)
 //		.Add_str_byte("https", Tid_proto_http)
 //		;
-//		private static final Btrie_slim_mgr tld_trie = Btrie_slim_mgr.ci_ascii_()
+//		private static final Btrie_slim_mgr tld_trie = Btrie_slim_mgr.ci_a7()
 //		.Add_str_byte("com", Tid_tld_com)
 //		.Add_str_byte("org", Tid_tld_org)
 //		.Add_str_byte("net", Tid_tld_net)
 //		.Add_str_byte("gov", Tid_tld_gov)
 //		;
-//		private static final Btrie_slim_mgr ext_trie = Btrie_slim_mgr.ci_ascii_()
+//		private static final Btrie_slim_mgr ext_trie = Btrie_slim_mgr.ci_a7()
 //		.Add_str_byte("htm", Tid_ext_htm)
 //		.Add_str_byte("html", Tid_ext_html)
 //		.Add_str_byte("php", Tid_ext_php)

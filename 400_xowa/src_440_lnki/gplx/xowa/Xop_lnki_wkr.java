@@ -158,7 +158,7 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 							if (number_parser.Has_err())
 								ctx.Msg_log().Add_itm_none(Xop_lnki_log.Upright_val_is_invalid, src, val_tkn_bgn, val_tkn_end);
 							else
-								lnki.Upright_(number_parser.Rv_as_dec().Xto_double());
+								lnki.Upright_(number_parser.Rv_as_dec().To_double());
 						}
 						else	// no =; EX: [[Image:a|upright]]
 							lnki.Upright_(gplx.xowa.files.Xof_img_size.Upright_default_marker);// NOTE: was incorrectly hardcoded as 1; DATE:2014-07-23

@@ -20,6 +20,7 @@ import gplx.core.primitives.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.xwikis.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.fsdb.meta.*; import gplx.fsdb.*;
 import gplx.xowa.html.*; import gplx.xowa.html.wtrs.*; import gplx.xowa.html.hzips.*; import gplx.xowa.html.hdumps.*; import gplx.xowa.html.bridges.dbuis.tbls.*;
+import gplx.xowa.urls.*;
 public interface Xow_wiki extends Xow_ttl_parser {
 	boolean						Type_is_edit();
 	Xoa_app						App();
@@ -45,4 +46,5 @@ public interface Xow_wiki extends Xow_ttl_parser {
 	Xow_xwiki_mgr				Xwiki_mgr();
 	Xow_wiki_props				Props();
 	void						Init_by_wiki();
+	Xoa_url_parser				Utl__url_parser();
 }

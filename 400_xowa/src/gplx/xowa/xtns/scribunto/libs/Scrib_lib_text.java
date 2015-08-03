@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import gplx.xowa.net.*;
+import gplx.core.net.*;
 public class Scrib_lib_text implements Scrib_lib {
 	public Scrib_lib_text(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
@@ -65,11 +65,11 @@ public class Scrib_lib_text implements Scrib_lib {
 class Scrib_lib_text_ {
 	public static KeyVal[] Init_nowiki_protocols(Xowe_wiki wiki) {
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b128();
-		Ordered_hash protocols = Xoo_protocol_itm.Regy;
+		Ordered_hash protocols = Gfo_protocol_itm.Regy;
 		int len = protocols.Count();
 		List_adp rv = List_adp_.new_();
 		for (int i = 0; i < len; i++) {
-			Xoo_protocol_itm itm = (Xoo_protocol_itm)protocols.Get_at(i);
+			Gfo_protocol_itm itm = (Gfo_protocol_itm)protocols.Get_at(i);
 			if (itm.Text_ends_w_colon()) {	// To convert the protocol into a case-insensitive Lua pattern, we need to replace letters with a character class like [Xx] and insert a '%' before various punctuation.
 				KeyVal kv = Init_nowiki_protocols_itm(bfr, itm);
 				rv.Add(kv);
@@ -78,7 +78,7 @@ class Scrib_lib_text_ {
 		bfr.Mkr_rls();
 		return (KeyVal[])rv.To_ary(KeyVal.class);
 	}
-	private static KeyVal Init_nowiki_protocols_itm(Bry_bfr bfr, Xoo_protocol_itm itm) {
+	private static KeyVal Init_nowiki_protocols_itm(Bry_bfr bfr, Gfo_protocol_itm itm) {
 		byte[] key = itm.Key_wo_colon_bry();
 		int end = key.length - 1;	// -1 to ignore final colon
 		for (int i = 0; i < end; i++) {

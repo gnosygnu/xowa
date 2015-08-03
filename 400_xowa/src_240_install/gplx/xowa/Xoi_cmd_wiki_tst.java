@@ -19,6 +19,7 @@ package gplx.xowa; import gplx.*;
 import org.junit.*;
 import gplx.core.consoles.*;
 import gplx.brys.*; import gplx.core.threads.*; import gplx.xowa.wikis.*; import gplx.xowa.setup.maints.*; import gplx.xowa.xtns.wdatas.imports.*;
+import gplx.xowa.wmfs.*;
 public class Xoi_cmd_wiki_tst {
 	@Test  public void Run() {	// MAINT
 //			Bld_import_list(Xow_wmf_api_mgr.Wikis);

@@ -108,11 +108,11 @@ class Dpl_itm {
 			case Dpl_itm_keys.Key_stablepages:			stable_pages = Dpl_stable_tid.Parse(val); break;
 			case Dpl_itm_keys.Key_qualitypages:			quality_pages = Dpl_redirect.Parse(val); break;
 			case Dpl_itm_keys.Key_addfirstcategorydate:	Parse_ctg_date(val); break;
-			case Dpl_itm_keys.Key_count:				count = Bry_.Xto_int_or(val, Int_.MinValue); break;
-			case Dpl_itm_keys.Key_offset:				offset = Bry_.Xto_int_or(val, Int_.MinValue); break;
-			case Dpl_itm_keys.Key_imagesperow:			gallery_imgs_per_row = Bry_.Xto_int_or(val, Int_.MinValue); break;
-			case Dpl_itm_keys.Key_imagewidth:			gallery_img_w = Bry_.Xto_int_or(val, Int_.MinValue); break;
-			case Dpl_itm_keys.Key_imageheight:			gallery_img_h = Bry_.Xto_int_or(val, Int_.MinValue); break;
+			case Dpl_itm_keys.Key_count:				count = Bry_.To_int_or(val, Int_.MinValue); break;
+			case Dpl_itm_keys.Key_offset:				offset = Bry_.To_int_or(val, Int_.MinValue); break;
+			case Dpl_itm_keys.Key_imagesperow:			gallery_imgs_per_row = Bry_.To_int_or(val, Int_.MinValue); break;
+			case Dpl_itm_keys.Key_imagewidth:			gallery_img_w = Bry_.To_int_or(val, Int_.MinValue); break;
+			case Dpl_itm_keys.Key_imageheight:			gallery_img_h = Bry_.To_int_or(val, Int_.MinValue); break;
 			case Dpl_itm_keys.Key_gallerycaption:		gallery_caption = val; break;	// FUTURE: parse for {{int:}}?
 			case Dpl_itm_keys.Key_galleryshowfilesize:	gallery_filesize = Dpl_itm_keys.Parse_as_bool(val, true); break;
 			case Dpl_itm_keys.Key_galleryshowfilename:	gallery_filename = Dpl_itm_keys.Parse_as_bool(val, true); break;
@@ -148,7 +148,7 @@ class Dpl_itm {
 		else
 			usr_dlg.Warn_many("", "", err_msg);
 	}
-	private static final Hash_adp_bry Known_invalid_keys = Hash_adp_bry.ci_ascii_()
+	private static final Hash_adp_bry Known_invalid_keys = Hash_adp_bry.ci_a7()
 	.Add_str_obj("orcer"						, Bool_obj_val.True)	// ignore as per http://en.wikinews.org/wiki/Template_talk:United_States; (Note it doesn't make a difference, as categoryadd is the default order method.)
 	.Add_str_obj("addcategorydatefirst"			, Bool_obj_val.True)
 	.Add_str_obj("mainspace"					, Bool_obj_val.True)

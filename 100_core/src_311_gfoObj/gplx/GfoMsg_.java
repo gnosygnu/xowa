@@ -138,7 +138,7 @@ class GfoMsg_base implements GfoMsg {
 	public long		ReadLong(String k)						{Object rv = ReadOr(k, 0)	; if (rv == Nil) ThrowNotFound(k); return parse ? Long_.parse_((String)rv) : Long_.cast_(rv);}
 	public float	ReadFloat(String k)						{Object rv = ReadOr(k, 0)	; if (rv == Nil) ThrowNotFound(k); return parse ? Float_.parse_((String)rv) : Float_.cast_(rv);}
 	public double	ReadDouble(String k)					{Object rv = ReadOr(k, 0)	; if (rv == Nil) ThrowNotFound(k); return parse ? Double_.parse_((String)rv) : Double_.cast_(rv);}
-	public DecimalAdp ReadDecimal(String k)					{Object rv = ReadOr(k, 0)	; if (rv == Nil) ThrowNotFound(k); return parse ? DecimalAdp_.parse_((String)rv) : DecimalAdp_.cast_(rv);}
+	public Decimal_adp ReadDecimal(String k)					{Object rv = ReadOr(k, 0)	; if (rv == Nil) ThrowNotFound(k); return parse ? Decimal_adp_.parse_((String)rv) : Decimal_adp_.cast_(rv);}
 	public String	ReadStr(String k)						{Object rv = ReadOr(k, null); if (rv == Nil) ThrowNotFound(k); return (String)rv;}
 	public DateAdp	ReadDate(String k)						{Object rv = ReadOr(k, null); if (rv == Nil) ThrowNotFound(k); return parse ? DateAdp_.parse_gplx((String)rv) : DateAdp_.cast_(rv);}
 	public Io_url	ReadIoUrl(String k)						{Object rv = ReadOr(k, null); if (rv == Nil) ThrowNotFound(k); return parse ? Io_url_.new_any_((String)rv) : Io_url_.cast_(rv);}
@@ -148,7 +148,7 @@ class GfoMsg_base implements GfoMsg {
 	public long		ReadLongOr(String k, long or)			{Object rv = ReadOr(k, or)	; if (rv == Nil) return or		; return parse ? Long_.parse_((String)rv) : Long_.cast_(rv);}
 	public float	ReadFloatOr(String k, float or)			{Object rv = ReadOr(k, or)	; if (rv == Nil) return or		; return parse ? Float_.parse_((String)rv) : Float_.cast_(rv);}
 	public double	ReadDoubleOr(String k,double or)		{Object rv = ReadOr(k, or)	; if (rv == Nil) return or		; return parse ? Double_.parse_((String)rv) : Double_.cast_(rv);}
-	public DecimalAdp ReadDecimalOr(String k,DecimalAdp or)	{Object rv = ReadOr(k, or); if (rv == Nil) return or	; return parse ? DecimalAdp_.parse_((String)rv) : DecimalAdp_.cast_(rv);}
+	public Decimal_adp ReadDecimalOr(String k,Decimal_adp or)	{Object rv = ReadOr(k, or); if (rv == Nil) return or	; return parse ? Decimal_adp_.parse_((String)rv) : Decimal_adp_.cast_(rv);}
 	public String	ReadStrOr(String k, String or)			{Object rv = ReadOr(k, or)	; if (rv == Nil) return or		; return (String)rv;}
 	public DateAdp	ReadDateOr(String k, DateAdp or)		{Object rv = ReadOr(k, or)	; if (rv == Nil) return or		; return parse ? DateAdp_.parse_gplx((String)rv) : DateAdp_.cast_(rv);}
 	public Io_url	ReadIoUrlOr(String k, Io_url or)		{Object rv = ReadOr(k, or)	; if (rv == Nil) return or		; return parse ? Io_url_.new_any_((String)rv) : Io_url_.cast_(rv);}

@@ -36,7 +36,7 @@ public class Map_dd2dms_func extends Pf_func_base {
 				switch (((Byte_obj_val)key_tid_obj).Val()) {
 					case Key_tid_plus:		plus = val; break;
 					case Key_tid_minus:		minus = val; break;
-					case Key_tid_precision:	prec = Bry_.Xto_int_or(val, prec); break;
+					case Key_tid_precision:	prec = Bry_.To_int_or(val, prec); break;
 				}
 			}
 		}
@@ -57,7 +57,7 @@ public class Map_dd2dms_func extends Pf_func_base {
 	}
 	public static final Map_dd2dms_func _ = new Map_dd2dms_func(); Map_dd2dms_func() {}
 	private static final byte Key_tid_plus = 1, Key_tid_minus = 2, Key_tid_precision = 3;
-	private static final Hash_adp_bry Key_hash = Hash_adp_bry.cs_()
+	private static final Hash_adp_bry Key_hash = Hash_adp_bry.cs()
 	.Add_str_byte("plus"		, Key_tid_plus)
 	.Add_str_byte("minus"		, Key_tid_minus)
 	.Add_str_byte("precision"	, Key_tid_precision)

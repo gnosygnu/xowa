@@ -55,5 +55,5 @@ public class Wdata_pf_property_data {
 	}
 	static final byte Atr_of_id = 1, Atr_q_id = 2;
 	private static final byte[] Atr_of_bry = Bry_.new_a7("of"), Atr_q_bry = Bry_.new_a7("q");
-	private static final Hash_adp_bry Atr_keys = Hash_adp_bry.ci_ascii_().Add_bry_byte(Atr_of_bry, Atr_of_id).Add_bry_byte(Atr_q_bry, Atr_q_id);
+	private static final Hash_adp_bry Atr_keys = Hash_adp_bry.ci_a7().Add_bry_byte(Atr_of_bry, Atr_of_id).Add_bry_byte(Atr_q_bry, Atr_q_id);
 } 

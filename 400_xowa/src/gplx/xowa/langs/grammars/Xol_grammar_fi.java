@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.langs.grammars; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
+import gplx.xowa.urls.*;
 public class Xol_grammar_fi implements Xol_grammar {
 	public boolean Vowel_harmony(byte[] word, int word_len) {
 		// $aou = preg_match( '/[aou][^äöy]*$/i', $word );
@@ -53,7 +54,7 @@ public class Xol_grammar_fi implements Xol_grammar {
 		byte[] lower = lang.Case_mgr().Case_build_lower(word, 0, word_len);
 		boolean aou = Vowel_harmony(lower, word_len);
 		// PHP: if ( preg_match( '/wiki$/i', $word ) ) $aou = false;
-		if (aou && Bry_.Has_at_end(lower, Xoa_url_parser.Bry_wiki_name))
+		if (aou && Bry_.Has_at_end(lower, Bry_wiki))
 			aou = false;			
 		// PHP: if ( preg_match( '/[bcdfghjklmnpqrstvwxz]$/i', $word ) ) $word .= 'i';
 		switch (lower[word_len - 1]) {
@@ -76,5 +77,6 @@ public class Xol_grammar_fi implements Xol_grammar {
 	}	static Xol_grammar_manual_regy manual_regy;
 	private static final byte[] Bry_sta_y = Bry_.new_a7("sta"), Bry_sta_n = Bry_.new_u8("stä"), Bry_a_y = Bry_.new_a7("a"), Bry_a_n = Bry_.new_u8("ä"), Bry_ssa_y = Bry_.new_a7("ssa"), Bry_ssa_n = Bry_.new_u8("ssä");
 	static final byte Trie_vh_back = 0, Trie_vh_front = 1;
-	private static Btrie_slim_mgr trie_vh = Btrie_slim_mgr.cs_().Add_str_byte__many(Trie_vh_back, "a", "o", "u").Add_str_byte__many(Trie_vh_front, "ä", "ö", "y");
+	private static Btrie_slim_mgr trie_vh = Btrie_slim_mgr.cs().Add_str_byte__many(Trie_vh_back, "a", "o", "u").Add_str_byte__many(Trie_vh_front, "ä", "ö", "y");
+	private static final byte[] Bry_wiki = Bry_.new_a7("wiki");
 }

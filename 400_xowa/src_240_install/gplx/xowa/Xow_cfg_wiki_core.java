@@ -58,8 +58,8 @@ public class Xow_cfg_wiki_core {
 			switch (b) {
 				case Byte_ascii.Pipe:
 					switch (fld_idx) {
-						case 0:		cur_id = Bry_.Xto_int_or(src, fld_bgn, pos, Int_.MinValue);					if (cur_id == Int_.MinValue)		throw Err_.new_wo_type("failed to load id", "id", String_.new_u8(src, fld_bgn, pos)); break;
-						case 1:		cur_case_match = Bry_.Xto_byte_by_int(src, fld_bgn, pos, Byte_.Max_value_127);	if (cur_id == Byte_.Max_value_127)	throw Err_.new_wo_type("failed to load match", "id", String_.new_u8(src, fld_bgn, pos)); break;
+						case 0:		cur_id = Bry_.To_int_or(src, fld_bgn, pos, Int_.MinValue);					if (cur_id == Int_.MinValue)		throw Err_.new_wo_type("failed to load id", "id", String_.new_u8(src, fld_bgn, pos)); break;
+						case 1:		cur_case_match = Bry_.To_int_as_byte(src, fld_bgn, pos, Byte_.Max_value_127);	if (cur_id == Byte_.Max_value_127)	throw Err_.new_wo_type("failed to load match", "id", String_.new_u8(src, fld_bgn, pos)); break;
 						default:	throw Err_.new_unhandled(fld_idx);
 					}
 					fld_bgn = pos + 1;

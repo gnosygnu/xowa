@@ -32,7 +32,7 @@ public class Wdata_dict_sitelink {
 	, Bry_title									= Bry_.new_a7(Str_title)
 	, Bry_badges								= Bry_.new_a7(Str_badges)
 	;
-	public static final Hash_adp_bry Dict = Hash_adp_bry.cs_()
+	public static final Hash_adp_bry Dict = Hash_adp_bry.cs()
 	.Add_bry_byte(Bry_site						, Tid_site)
 	.Add_bry_byte(Bry_title						, Tid_title)
 	.Add_bry_byte(Bry_badges					, Tid_badges)

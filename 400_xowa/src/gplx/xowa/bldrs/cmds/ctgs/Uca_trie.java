@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.bldrs.cmds.ctgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
 import gplx.core.btries.*;
 class Uca_trie {
+	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
 	public void Init() {
 Init_itm(1, Bry_.ints_(1,1));
 Init_itm(2, Bry_.ints_(1,1));
@@ -1043,7 +1044,7 @@ Init_itm(1021, Bry_.ints_(91,74,1,5,1,143));
 Init_itm(1022, Bry_.ints_(91,72,1,5,1,143));
 Init_itm(1023, Bry_.ints_(91,76,1,5,1,143));
 Init_itm(1024, Bry_.ints_(92,52,1,134,143,1,143,5));
-	}	private Btrie_slim_mgr trie = Btrie_slim_mgr.cs_();
+	}
 	public void Clear() {trie.Clear();}
 	public void Decode(Bry_bfr tmp, byte[] src, int bgn, int end) {
 		int i = bgn;

@@ -27,7 +27,7 @@ class Imap_desc_tid {
 	, Key_none		= Bry_.new_a7("none")
 	;
 	public static Btrie_slim_mgr trie_(Xowe_wiki wiki) {
-		Btrie_slim_mgr rv = Btrie_slim_mgr.ci_utf_8_();
+		Btrie_slim_mgr rv = Btrie_slim_mgr.ci_u8();
 		trie_add(rv, Key_tr, Key_br, Key_bl, Key_tl, Key_none);
 		byte[][] lang_types = Parse_lang_types(wiki);
 		if (lang_types != null)
@@ -35,11 +35,11 @@ class Imap_desc_tid {
 		return rv;
 	}
 	private static void trie_add(Btrie_slim_mgr trie, byte[]... ary) {
-		trie.Add_bry_bval(ary[0]	,Tid_tr);
-		trie.Add_bry_bval(ary[1]	,Tid_br);
-		trie.Add_bry_bval(ary[2]	,Tid_bl);
-		trie.Add_bry_bval(ary[3]	,Tid_tl);
-		trie.Add_bry_bval(ary[4]	,Tid_none);
+		trie.Add_bry_byte(ary[0]	,Tid_tr);
+		trie.Add_bry_byte(ary[1]	,Tid_br);
+		trie.Add_bry_byte(ary[2]	,Tid_bl);
+		trie.Add_bry_byte(ary[3]	,Tid_tl);
+		trie.Add_bry_byte(ary[4]	,Tid_none);
 	}
 	private static byte[][] Parse_lang_types(Xowe_wiki wiki) {
 		byte[] val = wiki.Msg_mgr().Val_by_key_obj("imagemap_desc_types");

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.html.bridges.dbuis; import gplx.*; import gplx.xowa.*; import gplx.xowa.html.*; import gplx.xowa.html.bridges.*;
 import gplx.core.json.*; import gplx.xowa.html.bridges.dbuis.tbls.*;
 public class Dbui_cmd_mgr {
-	private final Hash_adp_bry hash = Hash_adp_bry.cs_();
+	private final Hash_adp_bry hash = Hash_adp_bry.cs();
 	private boolean init;
 	public void Init_by_bridge(Bridge_cmd_mgr cmd_mgr) {
 		if (init) return;

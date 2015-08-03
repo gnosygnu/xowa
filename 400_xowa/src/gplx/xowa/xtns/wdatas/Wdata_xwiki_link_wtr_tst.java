@@ -34,7 +34,7 @@ public class Wdata_xwiki_link_wtr_tst {
 		fxt.Init_external_links_mgr_clear();
 		fxt.Test_parse_langs("{{noexternallanglinks:de}}", String_.Concat_lines_nl
 		( "<div id=\"xowa-lang\">"
-		, "  <h5><a href='javascript:xowa_toggle_visible(\"wikidata-langs\");' style='text-decoration: none !important;'>In other languages<img id='wikidata-langs-toggle-icon' src='file:///mem/xowa/user/test_user/app/img/window/portal/twisty_right.png' title='' /></a> (<a href=\"/site/www.wikidata.org/wiki/Q1\">wikidata</a>)</h5>"
+		, "  <h5><a href='javascript:xowa_toggle_visible(\"wikidata-langs\");' style='text-decoration: none !important;'>In other languages<img id='wikidata-langs-toggle-icon' src='file:///mem/xowa/user/test_user/app/img/window/portal/twisty_right.png' title='' /></a> (links: 1)  (<a href=\"/site/www.wikidata.org/wiki/Q1\">wikidata</a>)</h5>"
 		, "  <div id='wikidata-langs-toggle-elem' style='display:none;'>"
 		, "  <h4>grp1</h4>"
 		, "  <table style='width: 100%;'>"
@@ -89,7 +89,7 @@ public class Wdata_xwiki_link_wtr_tst {
 		.Xto_wdoc());
 		fxt.Test_parse_langs("", String_.Concat_lines_nl
 		( "<div id=\"xowa-lang\">"
-		, "  <h5><a href='javascript:xowa_toggle_visible(\"wikidata-langs\");' style='text-decoration: none !important;'>In other languages<img id='wikidata-langs-toggle-icon' src='file:///mem/xowa/user/test_user/app/img/window/portal/twisty_right.png' title='' /></a> (<a href=\"/site/www.wikidata.org/wiki/Q1\">wikidata</a>)</h5>"
+		, "  <h5><a href='javascript:xowa_toggle_visible(\"wikidata-langs\");' style='text-decoration: none !important;'>In other languages<img id='wikidata-langs-toggle-icon' src='file:///mem/xowa/user/test_user/app/img/window/portal/twisty_right.png' title='' /></a> (links: 3)  (<a href=\"/site/www.wikidata.org/wiki/Q1\">wikidata</a>)</h5>"
 		, "  <div id='wikidata-langs-toggle-elem' style='display:none;'>"
 		, "  <h4>grp1</h4>"
 		, "  <table style='width: 100%;'>"

@@ -16,12 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.specials.xowa.system_data; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*; import gplx.xowa.specials.xowa.*;
-import gplx.core.primitives.*;
+import gplx.core.primitives.*; import gplx.core.net.*;
+import gplx.xowa.urls.*;
 public class System_data_page implements Xows_page {
-	private Xoa_url_arg_hash arg_hash = new Xoa_url_arg_hash();
+	private Gfo_qarg_mgr arg_hash = new Gfo_qarg_mgr();
 	public Xows_special_meta Special_meta() {return Xows_special_meta_.Itm__system_data;}
 	public void Special_gen(Xowe_wiki wiki, Xoae_page page, Xoa_url url, Xoa_ttl ttl) {
-		arg_hash.Load(url);
+		arg_hash.Load(url.Qargs_ary());
 		byte[] file_type = arg_hash.Get_val_bry_or(Arg_type, null); if (file_type == null) return;
 		Byte_obj_val type_val = (Byte_obj_val)type_hash.Get_by_bry(file_type); if (type_val == null) return; 
 		Io_url file_url = Path_from_type(wiki, type_val.Val()); if (file_url == null) return;
@@ -46,7 +47,7 @@ public class System_data_page implements Xows_page {
 
 	private static final byte[] Arg_type = Bry_.new_a7("type");
 	private static final byte Type_log_session = 1, Type_cfg_app = 2, Type_cfg_lang = 3, Type_cfg_user = 4, Type_cfg_custom = 5, Type_usr_history = 6;
-	private static final Hash_adp_bry type_hash = Hash_adp_bry.cs_()
+	private static final Hash_adp_bry type_hash = Hash_adp_bry.cs()
 	.Add_str_byte("log_session"		, Type_log_session)
 	.Add_str_byte("cfg_app"			, Type_cfg_app)
 	.Add_str_byte("cfg_lang"		, Type_cfg_lang)

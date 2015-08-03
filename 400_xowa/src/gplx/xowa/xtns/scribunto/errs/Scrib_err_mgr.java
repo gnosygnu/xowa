@@ -21,7 +21,7 @@ class Scrib_err_mgr implements GfoInvkAble {
 	private int key_id = 0;
 	private static final byte[] Key_prefix = Bry_.new_a7("scrib_err_");
 	private Scrib_err_cmd Set(byte[] key) {
-		if (key == null) Bry_.Add(Key_prefix, Bry_.XbyInt(key_id++));
+		if (key == null) Bry_.Add(Key_prefix, Bry_.new_by_int(key_id++));
 		Scrib_err_cmd rv = new Scrib_err_cmd(key);
 		hash.Add_if_dupe_use_1st(key, rv);
 		return rv;

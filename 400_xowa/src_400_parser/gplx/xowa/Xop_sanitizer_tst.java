@@ -35,7 +35,7 @@ class Xop_sanitizer_fxt {
 	public Xop_sanitizer sanitizer;
 	public void Clear() {
 		if (sanitizer != null) return;
-		sanitizer = new Xop_sanitizer(new Xop_amp_mgr(), new Gfo_msg_log(Xoa_app_.Name));
+		sanitizer = new Xop_sanitizer(Xop_amp_mgr.I, new Gfo_msg_log(Xoa_app_.Name));
 	}
 	public void tst_Escape_id(String raw, String expd)  {
 		byte[] raw_bry = Bry_.new_u8(raw);

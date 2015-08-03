@@ -76,6 +76,13 @@ public class Byte_ascii {
 		return b > Byte_ascii.Slash && b < Byte_ascii.Colon;
 	}
 	public static int Xto_digit(byte b) {return b - Byte_ascii.Num_0;}
+	public static byte To_a7_byte(int digit) {
+		switch (digit) {
+			case 0: return Byte_ascii.Num_0; case 1: return Byte_ascii.Num_1; case 2: return Byte_ascii.Num_2; case 3: return Byte_ascii.Num_3; case 4: return Byte_ascii.Num_4;
+			case 5: return Byte_ascii.Num_5; case 6: return Byte_ascii.Num_6; case 7: return Byte_ascii.Num_7; case 8: return Byte_ascii.Num_8; case 9: return Byte_ascii.Num_9;
+			default: throw Err_.new_("Byte_ascii", "unknown digit", "digit", digit);
+		}
+	}
 	public static byte Case_upper(byte b) {
 		return b > 96 && b < 123
 			? (byte)(b - 32)
@@ -91,6 +98,8 @@ public class Byte_ascii {
 	  Tab_bry				= new byte[] {Byte_ascii.Tab}
 	, Nl_bry				= new byte[] {Byte_ascii.Nl}
 	, Bang_bry				= new byte[] {Byte_ascii.Bang}
+	, Quote_bry				= new byte[] {Byte_ascii.Quote}
+	, Hash_bry				= new byte[] {Byte_ascii.Hash}
 	, Dot_bry				= new byte[] {Byte_ascii.Dot}
 	, Comma_bry				= new byte[] {Byte_ascii.Comma}
 	, Colon_bry				= new byte[] {Byte_ascii.Colon}
@@ -100,7 +109,6 @@ public class Byte_ascii {
 	, Brack_bgn_bry			= new byte[] {Byte_ascii.Brack_bgn}
 	, Brack_end_bry			= new byte[] {Byte_ascii.Brack_end}
 	, Apos_bry				= new byte[] {Byte_ascii.Apos}
-	, Quote_bry				= new byte[] {Byte_ascii.Quote}
 	, Pipe_bry				= new byte[] {Byte_ascii.Pipe}
 	, Underline_bry			= new byte[] {Byte_ascii.Underline}
 	, Slash_bry				= new byte[] {Byte_ascii.Slash}
