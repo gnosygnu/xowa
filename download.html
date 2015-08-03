@@ -21,31 +21,31 @@
 
 <h2><span class='mw-headline' id='Windows'> Windows </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.7.3.3/xowa_app_windows_64_v2.7.3.3.zip" class="external text" rel="nofollow">Windows (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.8.1.1/xowa_app_windows_64_v2.8.1.1.zip" class="external text" rel="nofollow">Windows (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.7.3.3/xowa_app_windows_v2.7.3.3.zip" class="external text" rel="nofollow">Windows (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.8.1.1/xowa_app_windows_v2.8.1.1.zip" class="external text" rel="nofollow">Windows (32-bit)</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Linux'> Linux </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.7.3.3/xowa_app_linux_64_v2.7.3.3.zip" class="external text" rel="nofollow">Linux (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.8.1.1/xowa_app_linux_64_v2.8.1.1.zip" class="external text" rel="nofollow">Linux (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.7.3.3/xowa_app_linux_v2.7.3.3.zip" class="external text" rel="nofollow">Linux (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.8.1.1/xowa_app_linux_v2.8.1.1.zip" class="external text" rel="nofollow">Linux (32-bit)</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Mac_OS_X'> Mac OS X </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.7.3.3/xowa_app_macosx_64_v2.7.3.3.zip" class="external text" rel="nofollow">Mac OS X (64-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.8.1.1/xowa_app_macosx_64_v2.8.1.1.zip" class="external text" rel="nofollow">Mac OS X (64-bit)</a>
   </li>
-  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.7.3.3/xowa_app_macosx_v2.7.3.3.zip" class="external text" rel="nofollow">Mac OS X (32-bit)</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/releases/download/v2.8.1.1/xowa_app_macosx_v2.8.1.1.zip" class="external text" rel="nofollow">Mac OS X (32-bit)</a>
   </li>
 </ul>
 
 <h2><span class='mw-headline' id='Source'> Source code </span></h2>
 <ul>
-  <li> <a href="https://github.com/gnosygnu/xowa/archive/v2.7.3.3.zip" class="external text" rel="nofollow">Source code</a>
+  <li> <a href="https://github.com/gnosygnu/xowa/archive/v2.8.1.1.zip" class="external text" rel="nofollow">Source code</a>
   </li>
 </ul>
 
@@ -55,14 +55,20 @@
     </h2>
 
     <h2>
-      <span class='mw-headline' id='v2.7.3.3_.282015-07-19.29'>v2.7.3.3 (2015-07-19)</span>
+      <span class='mw-headline' id='v2.8.1.1_.282015-08-03.29'>v2.8.1.1 (2015-08-03)</span>
     </h2>
     <p>
       <b>major</b>
     </p>
     <ul>
       <li>
-        Special: Add new bookmarks page {assisted by anonymous4}. See: [[Special:XowaBookmarks]]
+        Html: Show multi-language drop-down for Chinese languages {assisted by anonymous4}. See: <a href="https://zh.wikipedia.org/wiki/太阳">https://zh.wikipedia.org/wiki/太阳</a>
+      </li>
+      <li>
+        Scribunto.Wikibase: Support new functions: getLabel, getDescription, etc. (affects many pages with invalid Location maps or script errors) {detected by gnosygnu.build.warning}. See: <a href="https://es.wikipedia.org/wiki/La_Orotava">https://es.wikipedia.org/wiki/La_Orotava</a> <a href="https://en.wikipedia.org/wiki/Abraham_Lincoln">https://en.wikipedia.org/wiki/Abraham_Lincoln</a>
+      </li>
+      <li>
+        XULRunner: Downgrade XULRunner to version 24 for Windows (affects xowa not starting on Windows 8 machines) {detected by anonymous}.
       </li>
     </ul>
     <p>
@@ -70,16 +76,19 @@
     </p>
     <ul>
       <li>
-        Make.Images: Do not delete entire css directory when building databases {detected by gnosygnu.gui}. [broken since:v2.7.2]
+        Import: Store correct Main_Page name (affects wrong Main_Page used for uk.v, zh.w, and other wikis without a Main_Page) {detected by gnosygnu.gui}. See: <a href="https://uk.wikisource.org/wiki/">https://uk.wikisource.org</a> [broken since:v2.7.2]
       </li>
       <li>
-        Edit: Fix missing edit-toolbar.js b/c of broken path {detected by gnosygnu.gui}. [broken since:v1.10.2]
+        Css: Fix css files not being downloaded for some wikis (affects zh.q css not downloading); EX:https:https://zh.wikiquote.org... {detected by gnosygnu.gui}. See: <a href="https://zh.wikiquote.org/wiki/">https://zh.wikiquote.org</a>
       </li>
       <li>
-        Options: Fix "Page storage format" not working {detected by gnosygnu.gui}. See: [[Help:Options/Import]] [broken since:v2.4.1]
+        Gui: Allow Alt+F4 to close window when HTML browser has focus {detected by anonymous}. [broken since:v2.6.5]
       </li>
       <li>
-        HttpServer: Fix wrong Main Page when clicking on wiki in sidebar; EX:click on zh.w in sidebar -&gt; Wikipedia:首页 x&gt; Main_Page {detected by anonymous4}. [broken since:v2.7.2]
+        Scribunto: Return length of 0 for empty string, not empty string (affects several sv.w pages showing script error); EX:/xowa/xtns/Scribunto/engines/LuaCommon/lualib/ustring/ustring.lua {detected by gnosygnu.build.warning}. See: <a href="https://sv.wikipedia.org/wiki/Riseberga">https://sv.wikipedia.org/wiki/Riseberga</a> <a href="https://fa.wikipedia.org/wiki/آتن">https://fa.wikipedia.org/wiki/آتن</a> [broken since:v2.4.4]
+      </li>
+      <li>
+        Make.Images: Show warning message for Scribunto errors {gnosygnu.gui}. [broken since:v2.2.4]
       </li>
     </ul>
     <p>
@@ -87,21 +96,88 @@
     </p>
     <ul>
       <li>
-        Parser.Lnki: Handle non-english numbers for pixel sizes (affects missing images in Persian wikis); EX:[[پرونده:Shahbazi 3.jpg|۲۰۰px]] {detected by gnosygnu.build.process}. See: <a href="https://fa.wikipedia.org/wiki/فهرست_آثار_علیرضا_شاپور_شهبازی">https://fa.wikipedia.org/wiki/فهرست_آثار_علیرضا_شاپور_شهبازی</a>
+        History: Store query arguments in history. See: <a href="https://en.wikipedia.org/wiki/Special:XowaSystemData?type=log_session">https://en.wikipedia.org/wiki/Special:XowaSystemData?type=log_session</a> <a href="https://en.wikipedia.org/wiki/Special:Search/A?search=A&amp;fulltext=y">https://en.wikipedia.org/wiki/Special:Search/A?search=A&amp;fulltext=y</a>
+      </li>
+      <li>
+        Module.Popups: Show popup in front of Read / Edit / View HTML {detected by gnosygnu.gui}. See: <a href="https://en.wikipedia.org/wiki/Area_codes_281,_346,_713,_and_832">https://en.wikipedia.org/wiki/Area_codes_281,_346,_713,_and_832</a>
+      </li>
+      <li>
+        Wikibase: Show count of sitelinks in "In other languages". See: <a href="https://en.wikipedia.org/wiki/A">https://en.wikipedia.org/wiki/A</a>
+      </li>
+      <li>
+        Html: Decode entity references in style attribute values (affects periodic table element pages in en.w not showing correct infobox colors); EX:&lt;span style='background:&amp;#x23;ffc0c0'&gt;a&lt;/span&gt; {detected by gnosygnu.gui}. See: <a href="https://en.wikipedia.org/wiki/Boron">https://en.wikipedia.org/wiki/Boron</a>
       </li>
     </ul>
     <p>
-      <b>trivial</b>
+      <b>significant</b>
     </p>
     <ul>
       <li>
-        Make.Images: Ignore main_page not found warning while building {detected by gnosygnu.build.warning}.
+        Scribunto.Wikibase: Always use v2 entity style (affects several pages in ja.w showing script error when using Module:Location_map ) {detected by gnosygnu.build.warning}. See: <a href="https://ja.wikipedia.org/wiki/東京競馬場">https://ja.wikipedia.org/wiki/東京競馬場</a>
       </li>
       <li>
-        Import.Online: Handle missing latest links at dumps.wikimedia.org: add logging; go back more than one month if necessary {detected by Anselm}.
+        Scribunto.Wikibase: Update .lua files to latest version (affects several pages in ja.w showing script error when using Module:Location_map ); EX:bin\any\xowa\xtns\Scribunto\engines\LuaCommon\lualib\mw.wikibase* {detected by gnosygnu.build.warning}. See: <a href="https://ja.wikipedia.org/wiki/東京競馬場">https://ja.wikipedia.org/wiki/東京競馬場</a>
       </li>
       <li>
-        Wikidata: Add "gomwiki", "lrcwiki" to list of known wikis {detected by gnosygnu.build.warning}.
+        Scribunto: Support Lua frontier pattern %f (affects none known); EX:gsub('thE QUICK brOWN FOx JUMPS', '%f[%a]%u+%f[%A]', '-') -&gt; 'thE - brOWN FOx -'. See: <a href="http://lua-users.org/wiki/FrontierPattern" class="external text" rel="nofollow">http://lua-users.org/wiki/FrontierPattern</a>
+      </li>
+      <li>
+        Scribunto: Handle replace argument of %0 for gsub (affects a few en.w pages with script error); EX:{{#invoke:Gnosygnu|gsub_string|aa|(a)%1|%0z}} -&gt; aaz x&gt; error {detected by gnosygnu.build.warning}. See: <a href="https://en.wikipedia.org/wiki/Wikipedia:Wikipedia_Signpost/Templates/Voter/testcases">https://en.wikipedia.org/wiki/Wikipedia:Wikipedia_Signpost/Templates/Voter/testcases</a>
+      </li>
+      <li>
+        Scribunto: Parse wikidata-style dates (affects several en.w pages showing script error for Population year in Infobox) {detected by gnosygnu.build.warning}. See: <a href="https://en.wikipedia.org/wiki/Metro_Manila">https://en.wikipedia.org/wiki/Metro_Manila</a> <a href="https://en.wikipedia.org/wiki/Mountain_Province">https://en.wikipedia.org/wiki/Mountain_Province</a>
+      </li>
+      <li>
+        Scribunto: Do not throw error if invalid input for parserFunction.expr; return error message instead (affects several dozen es.w pages with missing location map) {detected by gnosygnu.build.warning}. See: <a href="https://es.wikipedia.org/wiki/Freer_(Texas)">https://es.wikipedia.org/wiki/Freer_(Texas)</a>
+      </li>
+      <li>
+        ParserFunctions: Parse 12 digit year-month-day time (affects some en.w pages showing invalid expiry date at top of page); EX:201603160102 {detected by gnosygnu.build.warning}. See: <a href="https://en.wikipedia.org/wiki/Boron">https://en.wikipedia.org/wiki/Boron</a>
+      </li>
+      <li>
+        ParserFunctions: Change scale for Decimal from 28 to 14.
+      </li>
+      <li>
+        Title: Convert extended whitespace characters to whitespace (affects several pages in ja.w showing script error when using Module:Location_map ) {detected by gnosygnu.build.warning}. See: <a href="https://ja.wikipedia.org/wiki/ジョージ湖の戦い">https://ja.wikipedia.org/wiki/ジョージ湖の戦い</a> <a href="https://ja.wikipedia.org/wiki/Template:Location_map_USA　New_York">https://ja.wikipedia.org/wiki/Template:Location_map_USA　New_York</a>
+      </li>
+    </ul>
+    <p>
+      <b>minor</b>
+    </p>
+    <ul>
+      <li>
+        ParserFunctions: Support Iranian time formats for year, day, month and month name (affects 1 fa.w page with script error); EX:{{#time:xiY|2012-01-02}} -&gt; 1390. See: <a href="https://fa.wikipedia.org/wiki/فهرست_مقامات_عالی‌رتبه_جمهوری_اسلامی_ایران">https://fa.wikipedia.org/wiki/فهرست_مقامات_عالی‌رتبه_جمهوری_اسلامی_ایران</a>
+      </li>
+      <li>
+        ParserFunctions: Support Hijiri (Islamic) time formats for year, day, month and month name (affects none known); EX:{{#time:xmY|2012-01-02}} -&gt; 1433.
+      </li>
+      <li>
+        Parser.Lnke: Ignore xwiki aliases (affects none known); EX:[http://w/A] -&gt; http://w/A x&gt; http://en.wikipedia.org/w/A {detected by gnosygnu.build.warning}. See: <a href="https://uk.wikipedia.org/wiki/Маскалі">https://uk.wikipedia.org/wiki/Маскалі</a>
+      </li>
+      <li>
+        Parser.Template: Do not show "Template loop detected"; add as warning instead (affects some pages showing "Template loop detected") {detected by gnosygnu.gui}. See: <a href="https://fa.wikipedia.org/wiki/مورکم">https://fa.wikipedia.org/wiki/مورکم</a>
+      </li>
+      <li>
+        Title: Ignore bi-directional characters (affects none known).
+      </li>
+      <li>
+        Wikibase: Do not show range if quantity value matches upper-bound and lower-bound (affects 1 en.w page showing a script error) {detected by gnosygnu.build.warning}. See: <a href="https://en.wikipedia.org/wiki/Tintinan">https://en.wikipedia.org/wiki/Tintinan</a>
+      </li>
+      <li>
+        Wikibase: Use 64-bit numbers for quantity, not 32-bit numbers (affects none known); EX:{{#property:P1082}} {detected by gnosygnu.gui}. See: <a href="https://en.wikipedia.org/wiki/Earth">https://en.wikipedia.org/wiki/Earth</a>
+      </li>
+      <li>
+        Wikibase: Show only first claim (use preferred if available) when multiple claims exist (affects none known); EX:{{#property:P1082}} {detected by gnosygnu.gui}. See: <a href="https://en.wikipedia.org/wiki/Earth">https://en.wikipedia.org/wiki/Earth</a>
+      </li>
+      <li>
+        ImageMap: Ignore coordinates that start with comma (affects 1 en.w page that doesn't have popup for one area); EX:poly ,1 2 {detected by gnosygnu.build.warning}. See: <a href="https://en.wikipedia.org/wiki/Area_codes_281,_346,_713,_and_832">https://en.wikipedia.org/wiki/Area_codes_281,_346,_713,_and_832</a>
+      </li>
+    </ul>
+    <p>
+      <b>doc</b>
+    </p>
+    <ul>
+      <li>
+        Doc: Change link from [[Help:Core/Category]] to [[Help:Category]] {detected by Anselm}. See: [[Help:Wiki maintenance]]
       </li>
     </ul>
     <p>
@@ -109,24 +185,21 @@
     </p>
     <ul>
       <li>
-        Javascript: Upgrade jquery from 1.83 to 1.11.3 (affects nothing known); EX:/xowa/bin/any/xowa/html/res/lib/jquery/jquery-ui-1.11.3.js.
+        Setup: Add logging to troubleshoot missing www.wikidata.org entry on [[Help:Wiki_maintenance]] {requested by Anselm}. See: [[Help:Wiki maintenance]]
       </li>
       <li>
-        Javascript: Add jquery-ui-1.11.4.js (affects drag-and-drop to reorder bookmarks); EX:/xowa/bin/any/xowa/html/res/lib/jquery-ui/jquery-ui-1.11.4.js. See: [[Special:XowaBookmarks]]
+        Source: Refactor regex classes.
       </li>
       <li>
-        Javascript: Add notifyjs-0.3.1.js (affects notification messages when adding bookmarks); EX:/xowa/bin/any/xowa/html/res/lib/notifyjs/notifyjs-0.3.1.js. See: [[Special:XowaBookmarks]]
+        Source: Clean up Decimal_adp.
       </li>
       <li>
-        Javascript: Add dbui-0.1.1.js (affects database changes for bookmarks); EX:/xowa/bin/any/xowa/html/res/src/xowa/dbui/dbui-0.1.1.js. See: [[Special:XowaBookmarks]]
-      </li>
-      <li>
-        Source: Refactor Console_adp classes.
-      </li>
-      <li>
-        Source: Clean up Err object.
+        Source: Clean up Bry_.
       </li>
     </ul>
+    <p>
+      <br>
+    </p>
 <!-- page_end -->
     </div>
   </div>

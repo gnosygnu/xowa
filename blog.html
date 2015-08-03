@@ -18,6 +18,60 @@
 
 <!-- page_bgn -->
     <h2>
+      <span class='mw-headline' id='Release:_v2.8.1.1_.282015-08-02_22:15_Sun.29'>Release: v2.8.1.1 (2015-08-02 22:15 Sun)</span>
+    </h2>
+    <h3>
+      <span class='mw-headline' id='Language_conversion_dropdown_for_Chinese_wikis'>Language conversion dropdown for Chinese wikis</span>
+    </h3>
+    <p>
+      v2.8.1 now supports the language conversion dropdown for Chinese wikis. This enables users to switch between China, Macau, Malaysia, Singapore and Taiwan conversions for zh.wikipedia.org (as well as other zh.*.org wikis)
+    </p>
+    <p>
+      Unfortunately, I discovered this doesn't work perfectly for Serbian wikis. I'll fix this in a future release, but if you're a Serbian user, you will have to manually use explicit conversion links. For example: sr.wikipedia.org/sr-ec and sr.wikipedia.org/sr-el
+    </p>
+    <p>
+      Thanks to anonymous4 for reviewing and testing this feature.
+    </p>
+    <h3>
+      <span class='mw-headline' id='Windows_8.1_support_.28by_downgrading_to_XULRunner_24.29'>Windows 8.1 support (by downgrading to XULRunner 24)</span>
+    </h3>
+    <p>
+      There were a few reports with XOWA not working on Windows 8.1. See: <a href="https://github.com/gnosygnu/xowa/issues/14" class="external text" rel="nofollow">https://github.com/gnosygnu/xowa/issues/14</a> . I don't have a Windows 8.1 box, but it looks like the issues were related to the recent upgrade to XULRunner 31. Although XULRunner 31 works fine on Windows 7 and Windows XP, it looks like it fails on Windows 8.1. I downgraded to XULRunner 24 and it looks like that should fix the issue.
+    </p>
+    <p>
+      Thanks to anonymous#14 for helping me work through it.
+    </p>
+    <h3>
+      <span class='mw-headline' id='Fix_for_incorrect_Main_Page_in_various_wikis'>Fix for incorrect Main_Page in various wikis</span>
+    </h3>
+    <p>
+      v2.7.2 introduced a bug wherein the Main_Page was incorrectly detected for some wikis. This affected uk.wikisource.org, zh.wikipedia.org, www.wikidata.org and several others. If you've imported a wiki and the wiki doesn't open, please try to import it again with v2.8.1
+    </p>
+    <h3>
+      <span class='mw-headline' id='Scribunto_and_Wikibase_updates'>Scribunto and Wikibase updates</span>
+    </h3>
+    <p>
+      I discovered I accidentally disabled the build warning codes back in February. As a result, a number of minor Scribunto and Wikibase issues accumulated over the past few months. v2.8.1 resolves about 90% of these issues, though there are still a few more to go through.
+    </p>
+    <h3>
+      <span class='mw-headline' id='Various_minor_fixes'>Various minor fixes</span>
+    </h3>
+    <p>
+      There were a lot of other minor fixes in v2.8.1. Most of these are parser related, but there are a few interesting items under the <b>change</b> section. Please have a look at the [[Help:Change log]]
+    </p>
+    <h3>
+      <span class='mw-headline' id='Next_release:_v2.8.2'>Next release: v2.8.2</span>
+    </h3>
+    <p>
+      I delayed packages for another wiki due to all the parser issues (particularly the Wikibase ones). I'm going to resume with images for 2015-07 English Wikipedia as well as the still-delayed Ukraine, Persian and Bengali wikis.
+    </p>
+    <p>
+      For v2.8.2, I'm going to make yet another attempt at converting the home wiki to a sqlite database. A new Android Alpha is still on the list as well.
+    </p>
+    <p>
+      <br>
+    </p>
+    <h2>
       <span class='mw-headline' id='Release:_NONE_.282015-07-26_21:55_Sun.29'>Release: NONE (2015-07-26 21:55 Sun)</span>
     </h2>
     <p>
