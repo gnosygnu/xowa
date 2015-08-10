@@ -18,6 +18,49 @@
 
 <!-- page_bgn -->
     <h2>
+      <span class='mw-headline' id='Release:_v2.8.2.1_.282015-08-09_20:25_Sun.29'>Release: v2.8.2.1 (2015-08-09 20:25 Sun)</span>
+    </h2>
+    <p>
+      v2.8.2 is a light release. It has another attempt at a fix for the Windows 8.1 issue, and a bunch of minor fixes.
+    </p>
+    <h3>
+      <span class='mw-headline' id='Windows_8.1_support_.28by_upgrading_to_SWT_4.6M1.29'>Windows 8.1 support (by upgrading to SWT 4.6M1)</span>
+    </h3>
+    <p>
+      There have been a number of reports of XOWA not working on Windows 8.1. See <a href="https://github.com/gnosygnu/xowa/issues/13" class="external text" rel="nofollow">https://github.com/gnosygnu/xowa/issues/13</a> and <a href="https://github.com/gnosygnu/xowa/issues/14" class="external text" rel="nofollow">https://github.com/gnosygnu/xowa/issues/14</a>
+    </p>
+    <p>
+      I was able to get a loaner Windows 8.1, and was able to reproduce the issue. I tried various ways to fix it, but the only thing that worked was upgrading to SWT 4.6M1. I'm hoping it handles the Windows 10 error in <a href="http://sourceforge.net/p/xowa/discussion/general/thread/652c6303/" class="external text" rel="nofollow">http://sourceforge.net/p/xowa/discussion/general/thread/652c6303/</a> as well as other random reports
+    </p>
+    <p>
+      If you're running Windows 8 or Windows 10 and it works, please drop by and comment on <a href="https://github.com/gnosygnu/xowa/issues/13" class="external text" rel="nofollow">github</a> or <a href="http://sourceforge.net/p/xowa/discussion/general/thread/652c6303/" class="external text" rel="nofollow">sourceforge</a>
+    </p>
+    <h3>
+      <span class='mw-headline' id='Minor_fixes_for_file_download'>Minor fixes for file download</span>
+    </h3>
+    <p>
+      While generating the 2015-07 images, I noticed a bunch of minor file issues. They affect something like 5,000 images (out of 4,000,000). These were fixed in this release, and will show up in the next image update
+    </p>
+    <h3>
+      <span class='mw-headline' id='Minor_fixes_for_Wikibase'>Minor fixes for Wikibase</span>
+    </h3>
+    <p>
+      There were a handful of minor fixes with wikibase, primarily revolving around date.
+    </p>
+    <h3>
+      <span class='mw-headline' id='Next_release:_v2.8.3'>Next release: v2.8.3</span>
+    </h3>
+    <p>
+      Packages were delayed again this week. Part of this is related to the erratic <a href="https://lists.wikimedia.org/pipermail/xmldatadumps-l/2015-August/001166.html" class="external text" rel="nofollow">Wikimedia dump server schedule</a>. The other part was due to the file issues found during the English Wikipedia 2015-07 generation.
+    </p>
+    <p>
+      I was planning to release the 2015-07 update today, but ran across a small issue. In addition, the dumps actually ran early this month, so I'm going to wait a week and release 2015-08 next week. At this point, I'll also regenerate all the other wikis, including Ukraine, Persian, Bengali, etc.
+    </p>
+    <p>
+      I'm going to focus more on packages this week, with English Wikipedia being the main priority. If I have time, I'm going to work on the home database as well as Android.
+    </p>
+
+    <h2>
       <span class='mw-headline' id='Release:_Windows_64-bit_update_.282015-08-03_20:15_Mon.29'>Release: Windows 64-bit update (2015-08-03 20:15 Mon)</span>
     </h2>
     <p>
