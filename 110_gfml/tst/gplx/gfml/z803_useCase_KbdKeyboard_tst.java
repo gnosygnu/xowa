@@ -58,7 +58,7 @@ public class z803_useCase_KbdKeyboard_tst {
 		Io_url url = Tfds.RscDir.GenSubFil_nest("110_gfml", "cfgs_archive", "gfui-keyboard-ui.cfg.gfml");
 		raw = Io_mgr.I.LoadFilStr(url);
 		gdoc = GfmlDoc_.parse_any_eol_(raw);
-//			Tfds.Write(gdoc.RootNde().XtoStr());
+//			Tfds.Write(gdoc.RootNde().To_str());
 	}
 	String TypeHeader = String_.Concat
 		(	"_type:{"

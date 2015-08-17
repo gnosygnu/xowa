@@ -30,7 +30,7 @@ public class Base85_utl_tst {
 		tst_Log(     52200625, 5);
 		tst_Log(Int_.MaxValue, 5);
 	}	void tst_Log(int val, int expd) {Tfds.Eq(expd, Base85_utl.DigitCount(val));}
-	@Test  public void XtoStr() {
+	@Test  public void To_str() {
 		tst_XtoStr(           0, "!");
 		tst_XtoStr(          84, "u");
 		tst_XtoStr(          85, "\"!");
@@ -42,7 +42,7 @@ public class Base85_utl_tst {
 		tst_XtoStr(    52200625, "\"!!!!");
 	}
 	void tst_XtoStr(int val, String expd) {
-		String actl = Base85_utl.XtoStr(val, 0);
+		String actl = Base85_utl.To_str(val, 0);
 		Tfds.Eq(expd, actl);
 		Tfds.Eq(val, Base85_utl.XtoIntByStr(expd));
 	}

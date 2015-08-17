@@ -25,7 +25,7 @@ public class Xof_orig_wkr__xo_meta implements Xof_orig_wkr {
 	public byte				Tid() {return Xof_orig_wkr_.Tid_xowa_meta;}
 	public void				Find_by_list(Ordered_hash rv, List_adp itms) {Xof_orig_wkr_.Find_by_list(this, rv, itms);}
 	public Xof_orig_itm		Find_as_itm(byte[] ttl, int list_idx, int list_len) {
-		byte[] md5 = Xof_file_wkr_.Md5_(ttl);
+		byte[] md5 = Xof_file_wkr_.Md5(ttl);
 		url_bfr.Add(wiki_meta_dir.RawBry())					// /xowa/file/#meta/simple.wikipedia.org/
 			.Add_byte(md5[0]).Add_byte(dir_spr_byte)		// 0/
 			.Add_byte(md5[1]).Add_byte(dir_spr_byte)		// 6/

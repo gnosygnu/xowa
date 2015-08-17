@@ -28,7 +28,7 @@ public class Criteria_between implements Criteria {
 	}
 	public Comparable	Lhs()		{return lhs;} private Comparable lhs;
 	public Comparable	Rhs()		{return rhs;} private Comparable rhs;
-	public String XtoStr() {return String_.Concat_any("BETWEEN ", lhs, " AND ", rhs);}
+	public String To_str() {return String_.Concat_any("BETWEEN ", lhs, " AND ", rhs);}
 	public boolean Matches(Object compObj) {
 		Comparable comp = CompareAble_.as_(compObj);
 		int lhsResult = CompareAble_.CompareComparables(lhs, comp);

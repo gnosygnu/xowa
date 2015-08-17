@@ -31,17 +31,13 @@ public class Xouc_setup_mgr implements GfoInvkAble {
 			case Op_sys.Tid_drd: 
 			case Op_sys.Tid_wnt: return;
 		}
-		String op_sys_name = Xoa_app_.Op_sys;
+		String op_sys_name = Xoa_app_.Op_sys_str;
 		String[] plats_ary = String_.Split(setup_completed, ";");
 		int plats_ary_len = plats_ary.length;
 		for (int i = 0; i < plats_ary_len; i++) {
 			if (String_.Eq(plats_ary[i], op_sys_name)) return;
 		}
-//			Io_url lua_url			= app.Fsys_mgr().Bin_plat_dir().GenSubFil_nest("lua", "lua");
-//			Io_url lua_install_url	= app.Fsys_mgr().Bin_plat_dir().GenSubFil_nest("lua", "lua_install");
-//			Run(String_.Format("mv -f \"{0}\" \"{1}\"", lua_install_url.Raw(), lua_url.Raw()));
-//			Run(String_.Format("chmod 774 \"{0}\"", lua_url.Raw()));
-		Io_url setup_url = app.Fsys_mgr().Root_dir().GenSubFil_ary("setup_", op_sys_name, ".sh");
+		Io_url setup_url = app.Fsys_mgr().Root_dir().GenSubFil_nest("bin", op_sys_name, "xowa", "script", "setup_lua.sh");
 		Run("sh", String_.Format("\"{0}\"", setup_url.Raw()));
 		setup_completed += op_sys_name + ";";
 		app.Cfg_mgr().Set_by_all("app.user.cfg.setup.setup_completed", setup_completed);

@@ -69,7 +69,7 @@ class Gfs_msg_bldr_fxt {
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
 			if (i != 0) sb.Add_char_crlf();
-			sb.Add(ary[i].XtoStr());
+			sb.Add(ary[i].To_str());
 		}
 		return sb.Xto_str_and_clear();
 	}

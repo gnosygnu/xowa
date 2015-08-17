@@ -27,7 +27,7 @@ public class Criteria_comp implements Criteria {
 		Comparable comp = CompareAble_.as_(compObj);
 		return CompareAble_.Is(comp_mode, comp, val);
 	}
-	public String XtoStr() {return String_.Concat_any(XtoSymbol(), " ", val);}
+	public String To_str() {return String_.Concat_any(XtoSymbol(), " ", val);}
 	public String XtoSymbol() {
 		String comp_sym = comp_mode < CompareAble_.Same ? "<" : ">";
 		String eq_sym = comp_mode % 2 == CompareAble_.Same ? "=" : "";

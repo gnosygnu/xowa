@@ -400,7 +400,7 @@ class Xoa_url_encoder {
 }
 class Xoa_ttl_trie {
 	public static Btrie_fast_mgr new_() {
-		Btrie_fast_mgr rv = Btrie_fast_mgr.cs_();
+		Btrie_fast_mgr rv = Btrie_fast_mgr.cs();
 		rv.Add(Byte_ascii.Colon				, Byte_obj_val.new_(Id_colon));
 		rv.Add(Byte_ascii.Hash				, Byte_obj_val.new_(Id_hash));
 		rv.Add(Byte_ascii.Slash				, Byte_obj_val.new_(Id_slash));

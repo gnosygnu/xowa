@@ -48,14 +48,14 @@ public class CharStream {
 		if (rv) pos++;
 		return rv;
 	}
-	public String XtoStr() {return Char_.XtoStr(ary, 0, len);}
+	public String To_str() {return Char_.To_str(ary, 0, len);}
 	public String XtoStrAtCur(int length) {
 		length = (pos + length > len) ? len - pos : length;
-		return Char_.XtoStr(ary, pos, length);
+		return Char_.To_str(ary, pos, length);
 	}
 	public String Xto_str_by_pos(int bgn, int end) {
 		if (bgn < 0) bgn = 0; if (end > len - 1) end = len - 1;
-		return Char_.XtoStr(ary, bgn, end - bgn + 1);
+		return Char_.To_str(ary, bgn, end - bgn + 1);
 	}
 	public static CharStream pos0_(String text) {
 		CharStream rv = new CharStream();

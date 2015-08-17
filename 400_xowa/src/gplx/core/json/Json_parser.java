@@ -71,7 +71,7 @@ public class Json_parser {
 				case Byte_ascii.Brack_bgn:	return Make_ary(doc);
 				case Byte_ascii.Curly_bgn:	return Make_nde(doc);
 			}
-			throw Err_.new_unhandled(Char_.XtoStr(b));
+			throw Err_.new_unhandled(Char_.To_str(b));
 		}
 		throw Err_.new_wo_type("eos reached in val");
 	}
@@ -157,7 +157,7 @@ public class Json_parser {
 		if (src[pos] == expd)
 			++pos;
 		else
-			throw err_(src, pos, "expected '{0}' but got '{1}'", Char_.XtoStr(expd), Char_.XtoStr(src[pos]));
+			throw err_(src, pos, "expected '{0}' but got '{1}'", Char_.To_str(expd), Char_.To_str(src[pos]));
 	}
 	Err err_(byte[] src, int bgn, String fmt, Object... args) {return err_(src, bgn, src.length, fmt, args);}
 	Err err_(byte[] src, int bgn, int src_len, String fmt, Object... args) {

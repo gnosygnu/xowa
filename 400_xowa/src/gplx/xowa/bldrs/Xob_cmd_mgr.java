@@ -60,7 +60,7 @@ public class Xob_cmd_mgr implements GfoInvkAble {
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_wbase_qid))					return Xml_rdr_direct_add(wiki, new Xob_wdata_qid_sql().Ctor(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_wbase_pid))					return Xml_rdr_direct_add(wiki, new Xob_wdata_pid_sql().Ctor(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_wbase_db))					return Add(new Xob_wdata_db_cmd(bldr, wiki));
-		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_wbase_ns))					return Add(new Xob_site_ns_cmd(bldr, wiki));
+		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_site_meta))					return Add(new Xob_site_meta_cmd(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_tdb_text_init))				return Add(new Xob_init_tdb(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_tdb_make_page))				return Xml_rdr_direct_add(wiki, new Xob_page_txt(bldr, wiki));
 		else if	(String_.Eq(cmd_key, Xob_cmd_keys.Key_tdb_make_id))					return Xml_rdr_direct_add(wiki, new Xob_make_id_wkr(bldr, wiki));

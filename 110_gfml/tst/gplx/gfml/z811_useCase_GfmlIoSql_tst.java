@@ -36,9 +36,9 @@ public class z811_useCase_GfmlIoSql_tst {
 	void tst_Doc(String raw, GfmlNdeWrapper expd) {
 		GfmlDoc doc = SqlDoc.XtoDoc(raw);
 		GfmlNde actl = (GfmlNde)doc.RootNde();
-		Tfds.Eq_ary_str(XtoStr(expd.Nde()), XtoStr(actl));
+		Tfds.Eq_ary_str(To_str(expd.Nde()), To_str(actl));
 	}
-	String[] XtoStr(GfmlNde nde) {
+	String[] To_str(GfmlNde nde) {
 		List_adp list = List_adp_.new_();
 		for (int i = 0; i < nde.SubObjs_Count(); i++) {
 			GfmlAtr atr = (GfmlAtr)nde.SubObjs_GetAt(i);

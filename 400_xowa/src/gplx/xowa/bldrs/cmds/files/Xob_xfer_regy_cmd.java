@@ -24,7 +24,7 @@ public class Xob_xfer_regy_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	public void Cmd_bgn(Xob_bldr bldr) {}
 	public void Cmd_run() {
 		Db_conn conn = Xob_db_file.new__file_make(wiki.Fsys_mgr().Root_dir()).Conn();
-		conn.Txn_bgn();
+		conn.Txn_bgn("bldr__xfer_regy");
 		Xob_xfer_regy_tbl.Create_table(conn);
 		Xob_xfer_regy_tbl.Create_data(usr_dlg, conn);
 		Xob_xfer_regy_tbl.Create_index(usr_dlg, conn);

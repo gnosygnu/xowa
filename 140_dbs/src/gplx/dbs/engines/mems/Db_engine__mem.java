@@ -25,7 +25,7 @@ public class Db_engine__mem implements Db_engine {
 	public Db_stmt		New_stmt_prep(Db_qry qry) {return new Db_stmt__mem(this, qry);}
 	public Mem_tbl		Tbls_get(String name) {return (Mem_tbl)tbl_hash.Get_by(name);}
 	public void			Txn_bgn(String name)	{++txn_count;} private int txn_count = 0;
-	public void			Txn_end()				{--txn_count;}
+	public String		Txn_end()				{--txn_count; return "";}
 	public void			Txn_cxl()				{--txn_count;}
 	public void			Txn_sav()				{this.Txn_end(); this.Txn_bgn("");}
 	public Object		Exec_as_obj(Db_qry qry) {throw Err_.new_unimplemented();}

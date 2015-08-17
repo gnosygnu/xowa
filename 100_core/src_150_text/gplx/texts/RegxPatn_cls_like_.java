@@ -58,6 +58,6 @@ public class RegxPatn_cls_like_ {
 				sb.Add(c);
 		}
 		sb.Add(Regx_bldr.Tkn_LineEnd);
-		return sb.XtoStr();
+		return sb.To_str();
 	}
 }

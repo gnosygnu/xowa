@@ -23,7 +23,7 @@ public class Xof_meta_fil_tst {
 	@Test  public void Bld_url() {fxt.Bld_url("mem/root/", "abcdef", 3, "mem/root/a/b/abc.csv");}
 }
 class Xof_meta_fil_fxt {
-	byte[] md5_(byte[] name) {return Xof_file_wkr_.Md5_(name);}
+	byte[] md5_(byte[] name) {return Xof_file_wkr_.Md5(name);}
 	public void Ini() {}
 	public void Bld_url(String root, String md5, int depth, String expd) {Tfds.Eq(expd, Xof_meta_fil.Bld_url(Io_url_.new_dir_(root), Bry_.new_a7(md5), depth).Raw());}
 }

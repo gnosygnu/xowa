@@ -25,6 +25,9 @@ public class Http_request_parser_tst {
 	@Test   public void Type_content_type()	{
 		fxt.Test_content_type("Content-Type: multipart/form-data; boundary=---------------------------72432484930026", "multipart/form-data", "-----------------------------72432484930026");
 	}
+	@Test   public void Type_content_type__x_www_form_url_encoded()	{	// PURPOSE: ignore content-type for GET calls like by Mathematica server; DATE:2015-08-04
+		fxt.Test_content_type("Content-Type: application/x-www-form-urlencoded", null, null);
+	}
 	@Test   public void Type_form_data() {
 		fxt.Test_form_data(String_.Ary
 		( "POST /url HTTP/1.1"

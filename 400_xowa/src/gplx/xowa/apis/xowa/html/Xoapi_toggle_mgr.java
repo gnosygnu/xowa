@@ -18,12 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.apis.xowa.html; import gplx.*; import gplx.xowa.*; import gplx.xowa.apis.*; import gplx.xowa.apis.xowa.*;
 import gplx.xowa.cfgs.*;
 public class Xoapi_toggle_mgr implements GfoInvkAble {
-	private Ordered_hash hash = Ordered_hash_.new_bry_();
+	private Xoae_app app;
+	private final Ordered_hash hash = Ordered_hash_.new_bry_();
+	public void Ctor_by_app(Xoae_app app) {this.app = app;}
 	public Xoapi_toggle_itm Get_or_new(String key_str) {
 		byte[] key_bry = Bry_.new_u8(key_str);
 		Xoapi_toggle_itm rv = (Xoapi_toggle_itm)hash.Get_by(key_bry);
 		if (rv == null) {
-			rv = new Xoapi_toggle_itm(key_bry);
+			rv = new Xoapi_toggle_itm(app, key_bry);
 			hash.Add(key_bry, rv);
 		}
 		return rv;

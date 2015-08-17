@@ -40,7 +40,7 @@ public class Xob_wdata_db_cmd extends Xob_dump_mgr_base implements Xob_cmd {
 	@Override protected void Cmd_bgn_end() {
 		wdata_mgr = bldr.App().Wiki_mgr().Wdata_mgr();
 		json_parser = wdata_mgr.Jdoc_parser();
-		tbl_mgr.Conn().Txn_bgn();
+		tbl_mgr.Conn().Txn_bgn("bldr__wdata_db");
 	}
 	@Override public void Exec_pg_itm_hook(int ns_ord, Xow_ns ns, Xowd_page_itm page, byte[] page_src) {
 		Json_doc jdoc = json_parser.Parse(page_src); if (jdoc == null) return; // not a json document

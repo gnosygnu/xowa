@@ -95,7 +95,7 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, GfoInvkAble {
 	}
 	byte[] Xfer_by_meta__find_main_ptr(Xof_meta_itm meta_itm, Xof_xfer_itm xfer_itm) {
 		byte[] redirect = meta_itm.Ptr_ttl(); int redirect_tries = 0;
-		byte[] md5 = Xof_file_wkr_.Md5_(redirect);
+		byte[] md5 = Xof_file_wkr_.Md5(redirect);
 		while (true) {
 			boolean found = page_finder.Locate(tmp_rslt, repos, redirect);
 			if (!found) return null;

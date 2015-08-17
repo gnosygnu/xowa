@@ -32,7 +32,7 @@ public class Xowd_text_tbl implements RlsAble {
 		conn.Rls_reg(this);
 	}
 	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds));}
-	public void Insert_bgn() {conn.Txn_bgn(); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
+	public void Insert_bgn() {conn.Txn_bgn("schema__text__insert"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
 	public void Insert_end() {conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
 	public void Insert_cmd_by_batch(int page_id, byte[] text_data) {
 		stmt_insert.Clear().Val_int(fld_page_id, page_id).Val_bry(fld_text_data, text_data).Exec_insert();

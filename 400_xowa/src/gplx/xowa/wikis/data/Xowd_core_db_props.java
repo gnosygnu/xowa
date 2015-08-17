@@ -32,7 +32,7 @@ public class Xowd_core_db_props {
 	public byte				Zip_tid_text()			{return zip_tid_text;}		private final byte zip_tid_text;
 	public byte				Zip_tid_html()			{return zip_tid_html;}		private final byte zip_tid_html;
 	public void Cfg_save(Db_cfg_tbl tbl) {
-		tbl.Conn().Txn_bgn();
+		tbl.Conn().Txn_bgn("make__core__cfg__save");
 		tbl.Insert_int		(Cfg_grp, Cfg_key__schema_version		, schema);
 		tbl.Insert_str		(Cfg_grp, Cfg_key__layout_text			, layout_text.Name());
 		tbl.Insert_str		(Cfg_grp, Cfg_key__layout_html			, layout_html.Name());

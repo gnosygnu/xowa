@@ -190,7 +190,7 @@ class DsvTblBldr {
 			String_bldr sb = String_bldr_.new_();
 			for (int i = 0; i < tkns.Count(); i++)
 				sb.Add((String)tkns.Get_at(i));
-			layout.HeaderList().Add_Comment(sb.XtoStr());
+			layout.HeaderList().Add_Comment(sb.To_str());
 			tkns.Clear();
 		}
 	}

@@ -45,7 +45,7 @@ public class TdbDbLoadMgr_tst {
 		Tfds.Eq(file2.Path().Raw(), "C:\\file.dsv");
 
 		db.Files().DataObj_Wtr(wtr);
-		Tfds.Eq(wtr.XtoStr(), raw);
+		Tfds.Eq(wtr.To_str(), raw);
 	}
 	@Test  public void ReadDbTbls() {
 		String raw = String_.Concat_lines_crlf
@@ -66,7 +66,7 @@ public class TdbDbLoadMgr_tst {
 		Tfds.Eq(table.File().Id(), 1);
 
 		db.Tables().DataObj_Wtr(wtr);
-		Tfds.Eq(wtr.XtoStr(), raw);
+		Tfds.Eq(wtr.To_str(), raw);
 	}
 	@Test  public void ReadTbl() {
 		String raw = String_.Concat_lines_crlf
@@ -91,7 +91,7 @@ public class TdbDbLoadMgr_tst {
 		Tfds.Eq(row.Read("name"), "me");
 
 		tbl.DataObj_Wtr(wtr);
-		Tfds.Eq(wtr.XtoStr(), raw);
+		Tfds.Eq(wtr.To_str(), raw);
 	}
 	DataRdr rdr_(String raw) {
 		DataRdr rdr = DsvDataRdr_.dsv_(raw);

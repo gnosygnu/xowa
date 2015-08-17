@@ -22,4 +22,5 @@ public class Dbui_btn_itm {
 	public String Cmd() {return cmd;} private final String cmd;
 	public String Img() {return img;} private final String img;
 	public String Text() {return text;} private final String text;
+	public static final Dbui_btn_itm[] Ary_empty = new Dbui_btn_itm[0];
 }

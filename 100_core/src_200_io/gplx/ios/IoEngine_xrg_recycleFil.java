@@ -30,7 +30,7 @@ public class IoEngine_xrg_recycleFil extends IoEngine_xrg_fil_affects1_base {
 		String dayName = time.XtoStr_fmt("yyyyMMdd"), timeName = time.XtoStr_fmt("hhmmssfff");
 		String rootDirStr = ConcatWith_ary(this.Url().Info().DirSpr(), rootDirNames);
 		Io_url recycleDir = this.Url().OwnerRoot().GenSubDir_nest(rootDirStr, dayName);
-		String uuidStr = uuid_include ? uuid.XtoStr() : "";
+		String uuidStr = uuid_include ? uuid.To_str() : "";
 		return recycleDir.GenSubFil_ary(appName, ";", timeName, ";", uuidStr, ";", String_.LimitToFirst(this.Url().NameAndExt(), 128));
 	}
 	String ConcatWith_ary(String separator, List_adp ary) {
@@ -41,7 +41,7 @@ public class IoEngine_xrg_recycleFil extends IoEngine_xrg_fil_affects1_base {
 			Object val = ary.Get_at(i);
 			sb.Add_obj(Object_.Xto_str_strict_or_empty(val));
 		}
-		return sb.XtoStr();			
+		return sb.To_str();			
 	}
 	@Override public void Exec() {
 		IoEnginePool._.Get_by(this.Url().Info().EngineKey()).RecycleFil(this);

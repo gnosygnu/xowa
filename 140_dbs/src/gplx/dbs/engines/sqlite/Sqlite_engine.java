@@ -36,7 +36,7 @@ public class Sqlite_engine extends Db_engine_sql_base {
 	@Override public void	Env_db_attach(String alias, Io_url db_url)	{Exec_as_int(String_.Format("ATTACH '{0}' AS {1};", db_url.Raw(), alias));}
 	@Override public void	Env_db_detach(String alias)					{Exec_as_int(String_.Format("DETACH {0};", alias));}
 	@Override public void	Txn_bgn(String name)	{txn_mgr.Txn_bgn(name);}
-	@Override public void	Txn_end()				{txn_mgr.Txn_end();}
+	@Override public String	Txn_end()				{return txn_mgr.Txn_end();}
 	@Override public void	Txn_cxl()				{txn_mgr.Txn_cxl();}
 	@Override public void	Txn_sav()				{txn_mgr.Txn_sav();}
 	@Override public boolean	Meta_tbl_exists(String tbl)				{return schema_mgr.Tbl_exists(tbl);}

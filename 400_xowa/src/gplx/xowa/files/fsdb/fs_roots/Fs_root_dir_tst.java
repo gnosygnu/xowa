@@ -61,7 +61,7 @@ class Fs_root_dir_fxt {
 	}
 	public static void Save_img(String url, int w, int h) {
 		gplx.gfui.SizeAdp img_size = gplx.gfui.SizeAdp_.new_(w, h);
-		Io_mgr.I.SaveFilStr(url, img_size.XtoStr());
+		Io_mgr.I.SaveFilStr(url, img_size.To_str());
 	}
 	public void Test_xto_fil_bry(String url_str, String expd) {
 		Io_url url = Io_url_.new_fil_(url_str);

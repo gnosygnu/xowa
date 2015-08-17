@@ -48,7 +48,7 @@ class TdbDbSaveMgr {
 			TdbTable tbl = (TdbTable)tblObj;
 			tbl.DataObj_Wtr(wtr);
 		}
-		Io_mgr.I.SaveFilStr(fil.Path(), wtr.XtoStr());
+		Io_mgr.I.SaveFilStr(fil.Path(), wtr.To_str());
 	}
 	List_adp FetchTablesWithSamePath(TdbDatabase db, Io_url filPath) {
 		List_adp list = List_adp_.new_();

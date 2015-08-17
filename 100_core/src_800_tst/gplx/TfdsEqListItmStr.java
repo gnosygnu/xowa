@@ -17,5 +17,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public interface TfdsEqListItmStr {
-	String XtoStr(Object cur, Object actl);
+	String To_str(Object cur, Object actl);
 }

@@ -50,11 +50,11 @@ class Sql_qry_wtr_fxt {
 		String_bldr sb = String_bldr_.new_();
 		Db_arg arg = new Db_arg("not needed", val);
 		sql_wtr.Bld_val(sb, arg);
-		Tfds.Eq(expd, sb.XtoStr());
+		Tfds.Eq(expd, sb.To_str());
 	}
 	public void Test_where(Criteria crt, String expd) {
 		String_bldr sb = String_bldr_.new_();
 		sql_wtr.Bld_where_val(sb, crt);
-		Tfds.Eq(expd, sb.XtoStr());
+		Tfds.Eq(expd, sb.To_str());
 	}
 }

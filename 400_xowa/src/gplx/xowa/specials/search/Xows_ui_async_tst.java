@@ -53,8 +53,8 @@ class Xows_ui_async_fxt {
 		int expd_len = expd.length;
 		Tfds.Eq(expd_len, js_wkr.Log__len());
 		for (int i = 0; i < expd_len; ++i) {
-			String expd_str = String_.ConcatWith_any("\n", expd[i]);
-			String actl_str = String_.ConcatWith_any("\n", js_wkr.Log__get_at(i));
+			String expd_str = String_.Concat_with_obj("\n", expd[i]);
+			String actl_str = String_.Concat_with_obj("\n", js_wkr.Log__get_at(i));
 			Tfds.Eq_str_lines(expd_str, actl_str);
 		}			
 		js_wkr.Log__clear();

@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public class Base85_utl {
-	public static String XtoStr(int val, int minLen) {return String_.new_u8(XtoStrByAry(val, null, 0, minLen));}
+	public static String To_str(int val, int minLen) {return String_.new_u8(XtoStrByAry(val, null, 0, minLen));}
 	public static byte[] XtoStrByAry(int val, int minLen) {return XtoStrByAry(val, null, 0, minLen);}
 	public static byte[] XtoStrByAry(int val, byte[] ary, int aryPos, int minLen) {
 		int strLen = DigitCount(val);

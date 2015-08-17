@@ -19,7 +19,7 @@ package gplx;
 import gplx.lists.*;
 public class ClassXtnPool extends Hash_adp_base {
 	public void Add(ClassXtn typx) {Add_base(typx.Key(), typx);}
-	public ClassXtn Get_by_or_fail(String key) {return (ClassXtn)FetchOrFail_base(key);}
+	public ClassXtn Get_by_or_fail(String key) {return (ClassXtn)Get_by_or_fail_base(key);}
 
 	public static final ClassXtnPool _ =  new ClassXtnPool();
 	public static final String Format_null = "";

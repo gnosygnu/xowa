@@ -78,7 +78,7 @@ public class Xowd_db_mgr {
 		byte core_db_tid = Core_db_tid(props.Layout_text());
 		Io_url core_db_url = wiki_root_dir.GenSubFil(core_file_name);
 		Db_conn conn = Db_conn_bldr.I.New(core_db_url);
-		conn.Txn_bgn();
+		conn.Txn_bgn("make__core__tbls");
 		Dbs__set_by_tid(Xowd_db_file.make_(info_session, props, Xowd_db_file_.Id_core, core_db_tid, core_db_url, Xob_info_file.Ns_ids_empty, Xob_info_file.Part_id_1st, core_file_name, conn));
 		db__core.Tbl__db().Create_tbl();
 		db__core.Tbl__ns().Create_tbl();

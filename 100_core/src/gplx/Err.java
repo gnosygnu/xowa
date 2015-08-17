@@ -47,7 +47,7 @@ public class Err extends RuntimeException {
 	public String To_str__full()	{return To_str(Bool_.N, Bool_.Y);}
 	public String To_str__log()		{return To_str(Bool_.Y, Bool_.Y);}
 	public String To_str__msg_only(){
-		return msgs_idx == 0 ? "<<MISSING ERROR MESSAGE>>" : msgs_ary[0].To_str();	// take 1st message only
+		return msgs_idx == 0 ? "<<MISSING ERROR MESSAGE>>" : msgs_ary[0].To_str_wo_type();	// take 1st message only
 	}
 	public String To_str__top_wo_args() {
 		return msgs_idx == 0 ? "<<MISSING ERROR MESSAGE>>" : msgs_ary[0].To_str_wo_args();

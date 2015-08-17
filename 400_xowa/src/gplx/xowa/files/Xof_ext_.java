@@ -122,7 +122,7 @@ public class Xof_ext_ {
 			default:											return false;
 		}
 	}
-	public static boolean Id_supports_thumbtime(int v) {	// identifies if tid supports thumbtime in lnki; EX: [[File:A.ogv|thumbtime=1]]; 
+	public static boolean Id_supports_time(int v) {	// identifies if tid supports thumbtime in lnki; EX: [[File:A.ogv|thumbtime=1]]; 
 		switch (v) {
 			case Id_ogg: case Id_ogv: case Id_webm:				return true;
 			default:											return false;

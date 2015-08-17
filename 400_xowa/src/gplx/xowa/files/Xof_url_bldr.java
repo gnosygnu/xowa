@@ -50,10 +50,11 @@ public class Xof_url_bldr {
 		return Init(Bool_.N, Bool_.N, Byte_ascii.Slash, repo.Root_http()
 			, repo.Mode_names()[mode], repo.Dir_depth(), repo.Gen_name_trg(ttl, md5, ext), md5, ext, mode, file_w, time, page);
 	}
-	public Xof_url_bldr Init(boolean wmf_dir_hive, boolean wmf_protocol_is_file, byte dir_spr
+	private Xof_url_bldr Init(boolean wmf_dir_hive, boolean wmf_protocol_is_file, byte dir_spr
 		, byte[] root, byte[] area, int md5_dir_depth
 		, byte[] ttl, byte[] md5, Xof_ext ext
-		, byte file_mode, int file_w, double time, int page) {
+		, byte file_mode, int file_w, double time, int page
+		) {
 		this.wmf_dir_hive = wmf_dir_hive; this.wmf_protocol_is_file = wmf_protocol_is_file; this.dir_spr = dir_spr;
 		this.root = root;  this.area = area; this.md5_dir_depth = md5_dir_depth;
 		this.ttl = ttl; this.md5 = md5; this.ext = ext;
@@ -126,10 +127,12 @@ public class Xof_url_bldr {
 			case Xof_ext_.Id_ogg:
 			case Xof_ext_.Id_ogv:
 			case Xof_ext_.Id_webm:
+				bfr.Add_int_variable(file_w);											// add file_w;				EX: "220"; PAGE:en.w:Alice_Brady; DATE:2015-08-06
+				bfr.Add(Bry_px_dash);													// add px;					EX: "px-"
 				if (Xof_lnki_time.Null_n(time))
-					bfr.Add(Bry_seek).Add_str(Xof_lnki_time.X_str(time)).Add_byte(Byte_ascii.Dash);// add seek;				EX: "seek%3D5-"
+					bfr.Add(Bry_seek).Add_str(Xof_lnki_time.X_str(time)).Add_byte(Byte_ascii.Dash);// add seek;		EX: "seek%3D5-"
 				else
-					bfr.Add(Bry_mid);													// add mid;					EX: "mid-"
+					bfr.Add_byte(Byte_ascii.Dash);										// add mid;					EX: "-"; NOTE: was "mid-"; DATE:2015-08-06
 				break;
 			case Xof_ext_.Id_tif:
 			case Xof_ext_.Id_tiff:
@@ -148,7 +151,13 @@ public class Xof_url_bldr {
 				bfr.Add(Bry_px_dash);													// add px;					EX: "px-"
 				break;
 		}
-		bfr.Add(encoder_src_http.Encode(ttl));											// add ttl again;			EX: "A.png"
+		int ttl_len = ttl.length;
+		if (ttl_len > 160) {															// long file name
+			bfr.Add(Bry_thumnbail_w_dot);
+			bfr.Add(ext.Ext());
+		}
+		else
+			bfr.Add(encoder_src_http.Encode(ttl));										// add ttl again;			EX: "A.png"
 		switch (file_ext_id) {
 			case Xof_ext_.Id_svg:
 			case Xof_ext_.Id_bmp:
@@ -178,7 +187,8 @@ public class Xof_url_bldr {
 	}
 	private Xof_url_bldr Clear() {
 		root = area = ttl = md5 = null;
-		file_w = 0; time = Xof_lnki_time.Null;
+		file_w = Xof_img_size.Null;
+		time = Xof_lnki_time.Null;
 		ext = null;
 		bfr.Clear();
 		return this;
@@ -186,7 +196,8 @@ public class Xof_url_bldr {
 	public static final byte[]
 	  Bry_reg = Bry_.new_a7("reg.csv")
 	, Bry_px = Bry_.new_a7("px"), Bry_px_dash = Bry_.new_a7("px-")
-	, Bry_thumb = Bry_.new_a7("thumb"), Bry_mid = Bry_.new_a7("mid-")
+	, Bry_thumb = Bry_.new_a7("thumb")
+	, Bry_thumnbail_w_dot = Bry_.new_a7("thumbnail.")
 	;
 	private static final byte[]
 	  Bry_lossy_page  = Bry_.new_a7("lossy-page"), Bry_page = Bry_.new_a7("page")

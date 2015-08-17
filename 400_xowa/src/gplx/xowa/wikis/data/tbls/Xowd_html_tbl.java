@@ -32,7 +32,7 @@ public class Xowd_html_tbl implements RlsAble {
 	public Db_conn Conn() {return conn;}
 	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds));}
 	public void Create_idx() {conn.Ddl_create_idx(Gfo_usr_dlg_.I, Db_meta_idx.new_unique_by_tbl(tbl_name, "main", fld_page_id, fld_html_tid));}
-	public void Insert_bgn() {conn.Txn_bgn(); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
+	public void Insert_bgn() {conn.Txn_bgn("schema__html__insert"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
 	public void Insert_end() {conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
 	public int Insert(int page_id, int tid, byte[] data) {
 		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(tbl_name, flds);

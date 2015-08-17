@@ -42,7 +42,7 @@ public class GfsCtx {
 	}
 	public boolean Write_note(String fmt, Object... ary) {UsrDlg_._.Note(fmt, ary); return false;}
 	public boolean Write_warn(String fmt, Object... ary) {UsrDlg_._.Note("! " + fmt, ary); return false;}
-	public boolean Write_stop(UsrMsg umsg) {UsrDlg_._.Note("* " + umsg.XtoStr()); return false;}
+	public boolean Write_stop(UsrMsg umsg) {UsrDlg_._.Note("* " + umsg.To_str()); return false;}
 	public boolean Write_stop(String fmt, Object... ary) {UsrDlg_._.Note("* " + fmt, ary); return false;}
 	public boolean Deny() {return deny;} private boolean deny;
         public static final GfsCtx _ = new GfsCtx();

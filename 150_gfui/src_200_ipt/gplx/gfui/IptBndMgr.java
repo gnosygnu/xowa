@@ -219,7 +219,7 @@ class IptBndListItm implements SrlAble {
 			IptBnd bnd = (IptBnd)list.Get_at(i);
 			try {bnd.Exec(evData);}
 			catch (Exception exc) {
-				UsrDlg_._.Stop(UsrMsg.new_("Error while processing event").Add("bnd", SrlAble_.XtoStr(bnd)).Add("exc", Err_.Message_lang(exc)));
+				UsrDlg_._.Stop(UsrMsg.new_("Error while processing event").Add("bnd", SrlAble_.To_str(bnd)).Add("exc", Err_.Message_lang(exc)));
 				return false;
 			}
 			if (evData.CancelIteration) break;

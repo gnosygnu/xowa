@@ -24,7 +24,7 @@ public class Xowd_css_core_mgr {
 		Db_conn conn = core_tbl.Conn();
 		Io_url[] file_list = Io_mgr.I.QueryDir_args(css_dir).Recur_().ExecAsUrlAry();
 		try {
-			conn.Txn_bgn();
+			conn.Txn_bgn("schema__css_core__set");
 			int css_id = core_tbl.Select_id_by_key(key);
 			DateAdp updated_on = DateAdp_.Now().XtoUtc();
 			if (css_id == -1)

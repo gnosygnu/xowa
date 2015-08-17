@@ -65,11 +65,11 @@ public class Char_ {
 			if (itm == match) return true;
 		return false;
 	}
-	public static String XtoStr(char[] ary, int pos, int length) {return new String(ary, pos, length);}
-	public static byte[] XtoByteAry(int v) {return Bry_.new_u8(Char_.XtoStr((char)v));}
+	public static String To_str(char[] ary, int pos, int length) {return new String(ary, pos, length);}
+	public static byte[] XtoByteAry(int v) {return Bry_.new_u8(Char_.To_str((char)v));}
 	public static char XbyInt(int i) {return (char)i;}
-	public static String XtoStr(int b) {return XtoStr((char)b);}
-	public static String XtoStr(char c) {return String.valueOf(c);}	
+	public static String To_str(int b) {return To_str((char)b);}
+	public static String To_str(char c) {return String.valueOf(c);}	
 	public static byte XtoByte(char c) {return (byte)c;}
 	public static char cast_(Object o) {try {return (Character)o;} catch(Exception e) {throw Err_.new_type_mismatch_w_exc(e, char.class, o);}}
 	public static char parse_(String raw) {try {return raw.charAt(0);} catch(Exception exc) {throw Err_.new_parse_exc(exc, char.class, raw);}}

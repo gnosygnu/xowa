@@ -50,17 +50,18 @@ public class Err_ {
 	}
 
 	public static String Message_lang(Exception e)		{return e.getMessage();} 
-	public static String Trace_lang(Exception e) {
-				String rv = "";
-		StackTraceElement[] ary = e.getStackTrace();		
+		public static String Trace_lang(Exception e) 	{return Trace_lang_exec(e.getStackTrace());}
+	public static String Trace_lang(Error e) 		{return Trace_lang_exec(e.getStackTrace());}
+	private static String Trace_lang_exec(StackTraceElement[] ary) {
+		String rv = "";
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
 			if (i != 0) rv += "\n";
 			rv += ary[i].toString();
 		}
 		return rv;
-			}
-	public static boolean Type_match(Exception e, String type) {
+	}
+		public static boolean Type_match(Exception e, String type) {
 		Err exc = Err_.as_(e);
 		return exc == null ? false : exc.Type_match(type);
 	}

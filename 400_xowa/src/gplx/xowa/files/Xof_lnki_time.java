@@ -31,7 +31,7 @@ public class Xof_lnki_time {
 	public static boolean		Null_n(double v) {return v != Null;}
 	public static final int		Null_as_int = -1;
 
-	public static double	Convert_to_xowa_thumbtime	(int ext, double val)	{return Xof_ext_.Id_supports_thumbtime(ext)	? val		: Null;}
+	public static double	Convert_to_xowa_thumbtime	(int ext, double val)	{return Xof_ext_.Id_supports_time(ext)	? val		: Null;}
 	public static int		Convert_to_xowa_page		(int ext, double val)	{return Xof_ext_.Id_supports_page(ext)		? (int)val	: Xof_lnki_page.Null;}
 	public static double	Convert_to_fsdb_thumbtime	(int ext, double thumbtime, int page) {
 		return	page != Xof_lnki_page.Null

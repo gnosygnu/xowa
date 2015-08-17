@@ -19,7 +19,7 @@ package gplx.gfui; import gplx.*;
 public class GfuiBnd_box_status implements GfoInvkAble, UsrMsgWkr {
 	public GfuiElem Box() {return box;} GfuiElem box;
 	public void ExecUsrMsg(int type, UsrMsg umsg) {
-		box.Invoke(GfoInvkAbleCmd.arg_(this, WriteText_cmd, umsg.XtoStr()));
+		box.Invoke(GfoInvkAbleCmd.arg_(this, WriteText_cmd, umsg.To_str()));
 	}
 	public void WriteText(String text) {
 		GfuiElem lastFocus = GfuiFocusMgr._.FocusedElem();	// HACK:WINFORMS:.Visible=true will automatically transfer focus to textBox; force Focus back to original

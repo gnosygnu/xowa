@@ -54,7 +54,7 @@ class IoUrlTypeGrp implements GfoInvkAble {
 			for (int i = 0; i < m.Args_count(); i++) {
 				String s = m.ReadStr("v");
 				if (list.Has(s)) {
-					ctx.Write_warn(UsrMsg.new_("itm already has filter").Add("key", key).Add("filter", s).XtoStr());
+					ctx.Write_warn(UsrMsg.new_("itm already has filter").Add("key", key).Add("filter", s).To_str());
 					list.Del(s);
 				}
 				list.Add(s, s);
@@ -67,7 +67,7 @@ class IoUrlTypeGrp implements GfoInvkAble {
 			for (int i = 0; i < list.Count(); i++)
 				sb.Add_spr_unless_first((String)list.Get_at(i), " ", i);
 			sb.Add("}");
-			return sb.XtoStr();
+			return sb.To_str();
 		}
 		else if	(ctx.Match(k, Invk_Clear)) {if (ctx.Deny()) return this; list.Clear();}
 		else return GfoInvkAble_.Rv_unhandled;

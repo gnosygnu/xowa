@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.langs.numbers; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import gplx.core.btries.*;
 public class Xol_transform_mgr implements GfoInvkAble {
-	private Btrie_fast_mgr trie_k_to_v = Btrie_fast_mgr.cs_();
-	private Btrie_fast_mgr trie_v_to_k = Btrie_fast_mgr.cs_();
+	private Btrie_fast_mgr trie_k_to_v = Btrie_fast_mgr.cs();
+	private Btrie_fast_mgr trie_v_to_k = Btrie_fast_mgr.cs();
 	private Ordered_hash hash = Ordered_hash_.new_bry_();
 	private boolean empty = true;
 	public void Clear() {hash.Clear(); trie_k_to_v.Clear(); trie_v_to_k.Clear(); empty = true;}

@@ -42,8 +42,8 @@ public class Sqlite_txn_mgr {
 		}
 		txn_list.Add(name);
 	}
-	public void	Txn_end() {
-		if (txn_list.Count() == 0) {Gfo_usr_dlg_.I.Warn_many("", "", "no txns in stack;"); return;}
+	public String Txn_end() {
+		if (txn_list.Count() == 0) {Gfo_usr_dlg_.I.Warn_many("", "", "no txns in stack;"); return "";}
 		String txn_last = (String)List_adp_.Pop_last(txn_list);
 		if (txn_list.Count() == 0) {// no txns left; commit it
 			engine.Exec_as_obj(Db_qry_sql.xtn_("COMMIT TRANSACTION;"));
@@ -51,6 +51,7 @@ public class Sqlite_txn_mgr {
 		}
 		else
 			engine.Exec_as_obj(Db_qry_sql.xtn_(String_.Format("RELEASE SAVEPOINT {0};", txn_last)));
+		return txn_last;
 	}
 	public void	Txn_cxl() {
 		if (txn_list.Count() == 0) {Gfo_usr_dlg_.I.Warn_many("", "", "no txns in stack;"); return;}

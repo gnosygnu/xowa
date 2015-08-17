@@ -202,9 +202,12 @@ public class Xog_tab_itm implements GfoInvkAble {
 			thread_pool.Add_at_end(redlink_thread); thread_pool.Run();
 		}
 	}
+	public void Exec_notify(boolean pass, String msg) {
+		this.Html_box().Html_js_eval_proc_as_str("xowa.cmds.exec_by_str", "xowa.notify", "{\"text\":\"" + msg + "\",\"status\":\"" + (pass ? "success" : "error") + "\"}");
+	}
 	@gplx.Internal protected void Show_url_failed(Load_page_wkr wkr) {
 		try {
-			Xog_tab_itm_read_mgr.Show_page_err(win, this, wkr.Wiki(), wkr.Url(), wkr.Ttl(), wkr.Err());
+			Xog_tab_itm_read_mgr.Show_page_err(win, this, wkr.Wiki(), wkr.Url(), wkr.Ttl(), wkr.Exec_err());
 		} finally {
 			wkr.Wiki().Appe().Thread_mgr().Page_load_mgr().Resume();
 		}

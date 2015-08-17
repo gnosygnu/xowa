@@ -29,7 +29,7 @@ public class z901_perf_tst {
 //			sbXml.Add(longText);
 //			sbXml.Add("/>");
 //			tmr.Bgn();
-//			gplx.xmls.XmlDoc_.parse_(sbXml.XtoStr());
+//			gplx.xmls.XmlDoc_.parse_(sbXml.To_str());
 //			tmr.End_and_print("xml");	// 400
 
 		String_bldr sbGfml = String_bldr_.new_();
@@ -40,11 +40,11 @@ public class z901_perf_tst {
 //			sbGfml.Add(longText);
 		}
 //			tmr.Bgn();
-//			gplx.texts.CharStream.pos0_(sbGfml.XtoStr());
+//			gplx.texts.CharStream.pos0_(sbGfml.To_str());
 //			tmr.End_and_print("char");	// 1700
 
 		tmr.Bgn();
-		GfmlDoc_.parse_any_eol_(sbGfml.XtoStr());
+		GfmlDoc_.parse_any_eol_(sbGfml.To_str());
 		tmr.End_and_print("gfml");	// 1700
 	}
 	//@Test  

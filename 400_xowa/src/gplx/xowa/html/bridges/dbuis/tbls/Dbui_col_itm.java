@@ -22,5 +22,5 @@ public class Dbui_col_itm {
 	public String Key() {return key;} private final String key;
 	public String Display() {return display;} private final String display;
 	public int Width() {return width;} private final int width;
-	public static final int Type_id_str = 1, Type_id_text = 2;
+	public static final int Type_id_str = 1, Type_id_text = 2, Type_id_int = 3, Type_id_datetime = 4;
 }

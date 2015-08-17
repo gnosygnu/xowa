@@ -274,7 +274,7 @@ public class ProcessAdp implements GfoInvkAble, RlsAble {
 		for (int i = 0; i < len; i++) {
 			char c = String_.CharAt(args_str, i);
 			if (c == ' ' && !in_quotes) {	// space encountered; assume arg done
-				list.Add(sb.XtoStr());
+				list.Add(sb.To_str());
 				sb.Clear();
 			}
 			else if (c == '"')				// NOTE: ProcessBuilder seems to have issues with quotes; do not call sb.Add()
@@ -282,7 +282,7 @@ public class ProcessAdp implements GfoInvkAble, RlsAble {
 			else
 				sb.Add(c);
 		}
-		if (sb.Has_some()) list.Add(sb.XtoStr());
+		if (sb.Has_some()) list.Add(sb.To_str());
 		return list.To_str_ary();
 	}
 }

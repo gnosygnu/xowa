@@ -79,7 +79,7 @@ public class GfmlDataNde {
 class GfmlDataWtr2 extends DataWtr_base implements DataWtr {
 	@Override public void WriteData(String name, Object val) {
 		GfmlTkn nameTkn = GfmlTkn_.raw_(name);
-		GfmlTkn valTkn = GfmlTkn_.raw_(XtoStr(val));
+		GfmlTkn valTkn = GfmlTkn_.raw_(To_str(val));
 		GfmlAtr atr = GfmlAtr.new_(nameTkn, valTkn, GfmlType_.String);
 		GfmlNde nde = gdoc.RootNde().SubHnds().Get_at(0);
 		nde.SubKeys().Add(atr);
@@ -91,8 +91,8 @@ class GfmlDataWtr2 extends DataWtr_base implements DataWtr {
 	@Override public void WriteNodeEnd() {}
 	public void WriteLeafEnd() {}
 	public void Clear() {}
-	public String XtoStr() {return "";}
-	String XtoStr(Object obj) {
+	public String To_str() {return "";}
+	String To_str(Object obj) {
 		if (obj == null) return "''";
 		String s = obj.toString();
 		return String_.Concat("'", String_.Replace(s, "'", "''"), "'");

@@ -35,7 +35,7 @@ public class GfmlDataRdr extends GfmlDataRdr_base {
 		rv.SetNode(nde);
 		return rv;
 	}
-	public static DataRdr wtr_(DataWtr wtr) {return raw_root_(wtr.XtoStr());}
+	public static DataRdr wtr_(DataWtr wtr) {return raw_root_(wtr.To_str());}
 	@Override public SrlMgr SrlMgr_new(Object o) {return new GfmlDataRdr();}
 	@gplx.Internal protected GfmlDataRdr() {
 		this.Parse_set(true);

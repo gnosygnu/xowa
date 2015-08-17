@@ -82,7 +82,7 @@ class Xop_vnt_flag_ {
 	, Flag_macro	= new Xop_vnt_flag(Tid_macro)
 	, Flag_name		= new Xop_vnt_flag(Tid_name)
 	;
-	public static final Btrie_fast_mgr Trie = Btrie_fast_mgr.ci_ascii_()	// NOTE: match either lc or uc; EX: -{D}- or -{d}-; // NOTE:ci.ascii:MW_const.en; flag keys; EX: -{S|a}-
+	public static final Btrie_fast_mgr Trie = Btrie_fast_mgr.ci_a7()	// NOTE: match either lc or uc; EX: -{D}- or -{d}-; // NOTE:ci.ascii:MW_const.en; flag keys; EX: -{S|a}-
 	.Add(Byte_ascii.Ltr_S			, Xop_vnt_flag_.Flag_show)
 	.Add(Byte_ascii.Plus			, Xop_vnt_flag_.Flag_all)
 	.Add(Byte_ascii.Ltr_E			, Xop_vnt_flag_.Flag_err)

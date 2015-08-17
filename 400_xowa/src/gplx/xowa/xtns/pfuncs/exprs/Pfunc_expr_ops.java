@@ -35,7 +35,7 @@ class Ws_tkn implements Expr_tkn {
 	public int Tid() {return Expr_tkn_.Tid_space;}
 	public byte[] Val_ary() {return val_ary;} private byte[] val_ary;
 	public String Val_str() {return val_str;} private String val_str;
-	public Ws_tkn(byte b) {this.val_ary = new byte[] {b}; this.val_str = Char_.XtoStr(Char_.XbyInt(b));}
+	public Ws_tkn(byte b) {this.val_ary = new byte[] {b}; this.val_str = Char_.To_str(Char_.XbyInt(b));}
 }
 class Paren_bgn_tkn implements Expr_tkn, Func_tkn {
 	public int Tid() {return Expr_tkn_.Tid_paren_lhs;}

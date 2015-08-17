@@ -20,7 +20,7 @@ import gplx.core.consoles.*;
 public class Xof_file_wkr_ {
 	public static final Url_encoder Md5_decoder = Url_encoder.new_http_url_().Itms_raw_same_many(Byte_ascii.Plus);
 	public static byte[] Md5_fast(byte[] v) {return Bry_.new_a7(gplx.security.HashAlgo_.Md5.CalcHash(Console_adp_.Noop, gplx.ios.IoStream_.ary_(v)));}
-	public static byte[] Md5_(byte[] ttl) {
+	public static byte[] Md5(byte[] ttl) {
 		ttl = Md5_decoder.Decode_lax(Ttl_standardize(ttl));
 		return Xof_file_wkr_.Md5_fast(ttl);					// NOTE: md5 is calculated off of url_decoded ttl; EX: A%2Cb is converted to A,b and then md5'd. note that A%2Cb still remains the title
 	}

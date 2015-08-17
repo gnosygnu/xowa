@@ -45,11 +45,11 @@ class XmlDataWtr extends DataWtr_base implements DataWtr {
 	public void WriteTableBgn(String name, GfoFldList fields) {this.WriteXmlNodeBegin(name);}
 	@Override public void WriteNodeBgn(String nodeName) {this.WriteXmlNodeBegin(nodeName);}
 	@Override public void WriteNodeEnd() {this.WriteXmlNodeEnd();}
-	public String XtoStr() {
+	public String To_str() {
 		while (names.Count() > 0) {
 			WriteXmlNodeEnd();
 		}
-		return sb.XtoStr();
+		return sb.To_str();
 //			while (nde.ParentNode != null)
 //				WriteXmlNodeEnd();			// close all open ndes automatically
 //			return doc.OuterXml;

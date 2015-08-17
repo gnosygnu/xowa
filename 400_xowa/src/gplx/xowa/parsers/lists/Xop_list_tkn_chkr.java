@@ -30,7 +30,7 @@ public class Xop_list_tkn_chkr extends Xop_tkn_chkr_base {
 		err += mgr.Tst_val(list_bgn == 0, path, "list_bgn", list_bgn, actl.List_bgn());
 		err += mgr.Tst_val(list_itmTyp == Xop_list_tkn_.List_itmTyp_null, path, "list_itmTyp", list_itmTyp, actl.List_itmTyp());
 		err += mgr.Tst_val(list_sub_last == Bool_.__byte, path, "list_sub_last", list_sub_last, actl.List_sub_last());
-		err += mgr.Tst_val(list_path == Int_.Ary_empty, path, "list_path", Array_.XtoStr(list_path), Array_.XtoStr(actl.List_path()));
+		err += mgr.Tst_val(list_path == Int_.Ary_empty, path, "list_path", Array_.To_str(list_path), Array_.To_str(actl.List_path()));
 		return err;
 	}
 }

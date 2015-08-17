@@ -33,7 +33,7 @@ public class Tst_mgr {
 		return itm.Pass() ? 0 : 1;
 	}
 	public int Tst_val_ary(boolean skip, String path, String name, Object expd, Object actl) {	
-		Tst_itm itm = Tst_itm.eq_(skip, path, name, XtoStr(expd), XtoStr(actl));
+		Tst_itm itm = Tst_itm.eq_(skip, path, name, To_str(expd), To_str(actl));
 		results.Add(itm);
 		return itm.Pass() ? 0 : 1;
 	}
@@ -79,7 +79,7 @@ public class Tst_mgr {
 			return expd_obj.Chk(this, path, actl_obj);
 		}
 	}
-	String XtoStr(Object ary) {	
+	String To_str(Object ary) {	
 		if (ary == null) return "<NULL>";
 		int len = Array_.Len(ary);
 		for (int i = 0; i < len; i++) {

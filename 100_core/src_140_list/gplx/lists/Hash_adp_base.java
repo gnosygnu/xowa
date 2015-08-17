@@ -19,7 +19,7 @@ package gplx.lists; import gplx.*;
 public abstract class Hash_adp_base implements Hash_adp {
 	public boolean Has(Object key) {return Has_base(key);}
 	public Object Get_by(Object key) {return Fetch_base(key);}
-	public Object Get_by_or_fail(Object key) {return FetchOrFail_base(key);}
+	public Object Get_by_or_fail(Object key) {return Get_by_or_fail_base(key);}
 	public Object Get_by_or_new(Object key, NewAble proto) {
 		Object rv = Fetch_base(key);
 		if (rv == null) {
@@ -40,18 +40,18 @@ public abstract class Hash_adp_base implements Hash_adp {
 		return true;
 	}
 	@gplx.Virtual public void Del(Object key) {Del_base(key);}
-	protected Object FetchOrFail_base(Object key) {
+	protected Object Get_by_or_fail_base(Object key) {
 		if (key == null) throw Err_.new_wo_type("key cannot be null");
 		if (!Has_base(key)) throw Err_.new_wo_type("key not found", "key", key);
 		return Fetch_base(key);
 	}
 
-	java.util.Hashtable hash = new java.util.Hashtable();
-	@gplx.Virtual public int Count() {return hash.size();}									
-	@gplx.Virtual public void Clear() {hash.clear();}										
-	@gplx.Virtual protected void Add_base(Object key, Object val) {hash.put(key, val);}	
-	@gplx.Virtual protected void Del_base(Object key) {hash.remove(key);}					
-	@gplx.Virtual protected boolean Has_base(Object key) {return hash.containsKey(key);}		
-	@gplx.Virtual protected Object Fetch_base(Object key) {return hash.get(key);}				
-	@gplx.Virtual public java.util.Iterator iterator() {return hash.values().iterator();}
+	private final java.util.Hashtable hash = new java.util.Hashtable();			
+	@gplx.Virtual public int Count() {return hash.size();}														
+	@gplx.Virtual public void Clear() {hash.clear();}															
+	@gplx.Virtual protected void Add_base(Object key, Object val) {hash.put(key, val);}						
+	@gplx.Virtual protected void Del_base(Object key) {hash.remove(key);}										
+	@gplx.Virtual protected boolean Has_base(Object key) {return hash.containsKey(key);}							
+	@gplx.Virtual protected Object Fetch_base(Object key) {return hash.get(key);}									
+	@gplx.Virtual public java.util.Iterator iterator() {return hash.values().iterator();}	
 }

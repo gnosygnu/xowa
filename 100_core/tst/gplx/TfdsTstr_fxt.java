@@ -64,7 +64,7 @@ public class TfdsTstr_fxt {
 				sb.Add_fmt_line("{0}{1} {2}", errorKey, String_.PadEnd("", nameLenMax, " "), itm.Actl());
 		}
 		sb.Add(String_.Repeat("_", 80));
-		throw Err_.new_wo_type(sb.XtoStr());
+		throw Err_.new_wo_type(sb.To_str());
 	}
 	List_adp list = List_adp_.new_(); 
         public static TfdsTstr_fxt new_() {return new TfdsTstr_fxt();} TfdsTstr_fxt() {}
@@ -83,7 +83,7 @@ class TfdsTstrItm {
 			if (i != 0) sb.Add(".");
 			sb.Add((String)list.Get_at(i));
 		}
-		subName = sb.XtoStr();
+		subName = sb.To_str();
 	}
 	public int CompareResult() {return compareResult;} public TfdsTstrItm CompareResult_(int val) {compareResult = val; return this;} int compareResult;
 	public boolean Compare() {

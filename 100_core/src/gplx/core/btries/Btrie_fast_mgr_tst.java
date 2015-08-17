@@ -59,7 +59,7 @@ public class Btrie_fast_mgr_tst {
 class Btrie_fast_mgr_fxt {
 	private Btrie_fast_mgr trie;
 	public void Clear() {
-		trie = Btrie_fast_mgr.cs_();
+		trie = Btrie_fast_mgr.cs();
 		Init_add(  1	, Byte_ascii.Ltr_a);
 		Init_add(123	, Byte_ascii.Ltr_a, Byte_ascii.Ltr_b, Byte_ascii.Ltr_c);
 	}

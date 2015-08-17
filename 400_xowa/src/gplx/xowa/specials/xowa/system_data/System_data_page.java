@@ -36,7 +36,7 @@ public class System_data_page implements Xows_page {
 		Xoae_app app = wiki.Appe();
 		switch (type) {
 			case Type_log_session:			return app.Log_wtr().Session_fil();
-			case Type_cfg_app:				return app.Fsys_mgr().Root_dir().GenSubFil("xowa.gfs");
+			case Type_cfg_app:				return app.Fsys_mgr().Cfg_app_fil();
 			case Type_cfg_lang:				return Xol_lang_.xo_lang_fil_(app.Fsys_mgr(), wiki.Lang().Key_str());
 			case Type_cfg_user:				return app.Usere().Fsys_mgr().App_data_cfg_user_fil();
 			case Type_cfg_custom:			return app.Usere().Fsys_mgr().App_data_cfg_custom_fil();

@@ -36,6 +36,12 @@ public class Xohd_hdump_wtr {
 		Xowd_db_file hdump_db = Xowd_db_file.Null;
 		if (html_db_id == -1) {
 			hdump_db = core_data_mgr.Db__html();
+			if (hdump_db == null) {					
+				hdump_db = core_data_mgr.Dbs__make_by_tid(Xowd_db_file_.Tid_html_data);
+				Xowd_html_tbl tbl = hdump_db.Tbl__html();
+				tbl.Create_tbl();
+			}
+			
 			html_db_id = hdump_db.Id();
 			page.Revision_data().Html_db_id_(html_db_id);
 			core_data_mgr.Tbl__page().Update__html_db_id(page.Revision_data().Id(), html_db_id);

@@ -112,7 +112,7 @@ public class Xob_xdat_file_tst {
 			String line = lines[i];
 			sb.Add(line).Add_char_nl();
 		}
-		byte[] bry = Bry_.new_u8(sb.XtoStr());
+		byte[] bry = Bry_.new_u8(sb.To_str());
 		return new Xob_xdat_file().Parse(bry, bry.length, Io_url_.Empty);
 	}
 }

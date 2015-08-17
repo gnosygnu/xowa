@@ -18,14 +18,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.apis.xowa; import gplx.*; import gplx.xowa.*; import gplx.xowa.apis.*;
 import gplx.xowa.apis.xowa.html.*;
 public class Xoapi_html implements GfoInvkAble {
+	public void Ctor_by_app(Xoae_app app) {
+		page.Ctor_by_app(app);
+	}
 	public void Init_by_kit(Xoae_app app) {
 		tidy.Init_by_kit(app);
 		modules.Init_by_kit(app);
 	}
-	public Xoapi_tidy		Tidy() {return tidy;} private Xoapi_tidy tidy = new Xoapi_tidy();
-	public Xoapi_modules	Modules() {return modules;} private Xoapi_modules modules = new Xoapi_modules();
-	public Xoapi_skins		Skins() {return skins;} private Xoapi_skins skins = new Xoapi_skins();
-	public Xoapi_page		Page() {return page;} private Xoapi_page page = new Xoapi_page();
+	public Xoapi_tidy		Tidy() {return tidy;} private final Xoapi_tidy tidy = new Xoapi_tidy();
+	public Xoapi_modules	Modules() {return modules;} private final Xoapi_modules modules = new Xoapi_modules();
+	public Xoapi_skins		Skins() {return skins;} private final Xoapi_skins skins = new Xoapi_skins();
+	public Xoapi_page		Page() {return page;} private final Xoapi_page page = new Xoapi_page();
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_tidy)) 						return tidy;
 		else if	(ctx.Match(k, Invk_modules)) 					return modules;

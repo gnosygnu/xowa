@@ -30,7 +30,7 @@ public class HexDecUtl_tst {
 		tst_XtoInt("7FFFFFFF", Int_.MaxValue);
 		tst_XtoInt_bry("100", 256);
 	}
-	@Test  public void XtoStr() {
+	@Test  public void To_str() {
 		tst_XtoStr(0, "0");
 		tst_XtoStr(15, "F");
 		tst_XtoStr(16, "10");
@@ -57,7 +57,7 @@ public class HexDecUtl_tst {
 	private void tst_XtoInt_bry(String raw, int expd) {Tfds.Eq(expd, HexDecUtl.parse_or_(Bry_.new_a7(raw), -1));}
 	private void tst_XtoStr(int val, String expd) {tst_XtoStr(val, 0, expd);}
 	private void tst_XtoStr(int val, int pad, String expd) {
-		String actl = HexDecUtl.XtoStr(val, pad);
+		String actl = HexDecUtl.To_str(val, pad);
 		Tfds.Eq(expd, actl);
 	}
 }

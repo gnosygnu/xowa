@@ -53,7 +53,7 @@ public class KeyVal_ {
 				sb.Add(Object_.Xto_str_strict_or_null_mark(itm_val));
 			sb.Add_char_nl();
 		}
-		return sb.XtoStr();
+		return sb.To_str();
 	}
 	public static Object Ary_get_by_key_or_null(KeyVal[] ary, String key) {
 		int len = ary.length;

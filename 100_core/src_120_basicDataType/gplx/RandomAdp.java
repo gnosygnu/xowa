@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 import java.util.*;	
 public class RandomAdp {
+	private final Random under;
+	public RandomAdp(Random v) {this.under = v;}
 	public int Next(int max) {return under.nextInt(max);}	
-	public RandomAdp(Random v) {under = v;}
-	Random under;
 }

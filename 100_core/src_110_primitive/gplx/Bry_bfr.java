@@ -495,6 +495,7 @@ public class Bry_bfr {
 		return this;
 	}
 	public boolean Eq(byte b) {return bfr_len == 1 && bfr[0] == b;}
+	public byte[] Xto_bry(int bgn, int end) {return bfr_len == 0 ? Bry_.Empty : Bry_.Mid(bfr, bgn, end);}
 	public byte[] Xto_bry() {return bfr_len == 0 ? Bry_.Empty : Bry_.Mid(bfr, 0, bfr_len);}
 	public byte[] Xto_bry_and_reset(int v) {
 		byte[] rv = Xto_bry();

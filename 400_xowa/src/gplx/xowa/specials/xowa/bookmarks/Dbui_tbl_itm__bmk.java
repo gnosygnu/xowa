@@ -21,6 +21,7 @@ import gplx.xowa.users.data.*; import gplx.xowa.users.bmks.*;
 import gplx.xowa.html.bridges.*; import gplx.xowa.html.bridges.dbuis.*; import gplx.xowa.html.bridges.dbuis.tbls.*; import gplx.xowa.html.bridges.dbuis.fmtrs.*;
 public class Dbui_tbl_itm__bmk implements Dbui_tbl_itm {
 	private final Xoa_app app; private final Xoud_bmk_itm_tbl tbl;
+	private final Dbui_tbl_fmtr tbl_fmtr = new Dbui_tbl_fmtr();
 	private final Dbui_cells_fmtr cells_fmtr = new Dbui_cells_fmtr(); private final Dbui_val_fmtr edit_val_fmtr = Dbui_val_fmtr_.new_edit(); private final Dbui_val_fmtr view_val_fmtr = Dbui_val_fmtr_.new_view();
 	private final Bry_bfr tmp_bfr = Bry_bfr.new_(255);
 	private final Bridge_msg_bldr msg_bldr;
@@ -29,7 +30,6 @@ public class Dbui_tbl_itm__bmk implements Dbui_tbl_itm {
 	public Dbui_btn_itm[] View_btns() {return view_btns;}
 	public Dbui_btn_itm[] Edit_btns() {return edit_btns;}
 	public Dbui_col_itm[] Cols() {return cols;}
-	private final Dbui_tbl_fmtr tbl_fmtr = new Dbui_tbl_fmtr();
 	public void Reg(Bridge_cmd_mgr bridge_mgr) {
 		Dbui_cmd_mgr dbui_mgr = Dbui_cmd_mgr.I;
 		dbui_mgr.Init_by_bridge(bridge_mgr);

@@ -65,7 +65,7 @@ public class z081_GfmlDataWtr_tst {
 		tst_XtoStr(wtr, "root:key='data''s';");
 	}
 	void tst_XtoStr(DataWtr wtr, String expd) {
-		String actl = wtr.XtoStr();
+		String actl = wtr.To_str();
 		Tfds.Eq(expd, actl);
 	}
 }

@@ -23,5 +23,5 @@ public interface GfoFldList {
 	GfoFld Get_at(int i);
 	GfoFld FetchOrNull(String key);
 	GfoFldList Add(String key, ClassXtn c);
-	String XtoStr();
+	String To_str();
 }

@@ -36,7 +36,7 @@ public class Xoa_url_parser {
 		this.app = wiki.App();
 		this.wiki = wiki; this.domain_bry = wiki.Domain_bry();
 		this.encoder = app.Utl__encoder_mgr().Xourl();
-		this.vnt_mgr = wiki.Lang().Vnt_mgr();
+		this.vnt_mgr = wiki.Type_is_edit() ? wiki.Lang().Vnt_mgr() : null;
 	}
 	public Xoa_url Parse_by_urlbar(String str) {
 		Xoae_app app = (Xoae_app)wiki.App();

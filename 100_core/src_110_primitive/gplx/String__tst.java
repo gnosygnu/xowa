@@ -153,11 +153,11 @@ public class String__tst {
 		// acceptance
 		tst_Split("this\r\nis\na\rtest\r\n.", "\r\n", "this", "is\na\rtest", ".");
 	}	void tst_Split(String text, String separator, String... expd) {Tfds.Eq_ary(expd, String_.Split(text, separator));}
-	@Test  public void ConcatWith_any() {
+	@Test  public void Concat_with_obj() {
 		tst_ConcatWith_any("a|b", "|", "a", "b");						// do not append final delimiter
 		tst_ConcatWith_any("a||c", "|", "a", null, "c");				// null
 		tst_ConcatWith_any("a|b", "|", Object_.Ary("a", "b"));			// pass array as arg
-	}	void tst_ConcatWith_any(String expd, String delimiter, Object... array) {Tfds.Eq(expd, String_.ConcatWith_any(delimiter, array));}
+	}	void tst_ConcatWith_any(String expd, String delimiter, Object... array) {Tfds.Eq(expd, String_.Concat_with_obj(delimiter, array));}
 	@Test  public void Compare_byteAry() {
 		tst_Compare_byteAry("a", "a", CompareAble_.Same);
 		tst_Compare_byteAry("a", "b", CompareAble_.Less);

@@ -23,7 +23,7 @@ public class UsrMsgWkr_test implements UsrMsgWkr {
 	public boolean HasWarn(UsrMsg um) {
 		for (int i = 0; i < msgs.Count(); i++) {
 			UsrMsg found = (UsrMsg)msgs.Get_at(i);
-			if (String_.Eq(um.XtoStr(), found.XtoStr())) return true;
+			if (String_.Eq(um.To_str(), found.To_str())) return true;
 		}
 		return false;
 	}

@@ -26,11 +26,11 @@ public class ColorAdp {
 	public String XtoHexStr() {
 		String_bldr sb = String_bldr_.new_();
 		sb.Add("#");
-		sb.Add(HexDecUtl.XtoStr(Alpha(), 2));
-		sb.Add(HexDecUtl.XtoStr(Red(), 2));
-		sb.Add(HexDecUtl.XtoStr(Green(), 2));
-		sb.Add(HexDecUtl.XtoStr(Blue(), 2));
-		return sb.XtoStr();
+		sb.Add(HexDecUtl.To_str(Alpha(), 2));
+		sb.Add(HexDecUtl.To_str(Red(), 2));
+		sb.Add(HexDecUtl.To_str(Green(), 2));
+		sb.Add(HexDecUtl.To_str(Blue(), 2));
+		return sb.To_str();
 	}
 	public boolean Eq(Object obj) {
 		ColorAdp comp = ColorAdp_.as_(obj); if (comp == null) return false;

@@ -59,8 +59,9 @@ public class Xows_page__search implements Xows_page, GfoInvkAble, GfoEvObj {
 			search_bry = ttl.Leaf_txt_wo_qarg();	// assume search is in leaf; EX: Special:Search/Earth
 			args_mgr.Search_bry_(search_bry);
 		}
+		if (Bry_.Len_eq_0(search_bry)) return;		// emptry String; exit now, else null ref error; DATE:2015-08-11
 		if (	search_suggest_mgr.Auto_wildcard()	// add * automatically if option set
-			&&	wiki.Db_mgr().Tid() == gplx.xowa.dbs.Xodb_mgr_sql.Tid_sql		// only apply to sql
+			&&	wiki.Db_mgr().Tid() == gplx.xowa.dbs.Xodb_mgr_sql.Tid_sql	// only apply to sql
 			&&	Bry_finder.Find_fwd(search_bry, Byte_ascii.Star) == -1		// search term does not have asterisk
 			)
 			search_bry = Bry_.Add(search_bry, Byte_ascii.Star);

@@ -28,7 +28,7 @@ public class TdbEngine implements Db_engine {
 	}
 	public void Conn_term() {}
 	public void Txn_bgn(String name)	{}
-	public void Txn_end()				{}
+	public String Txn_end()				{return "";}
 	public void Txn_cxl()				{}
 	public void Txn_sav()				{}
 	public Db_engine New_clone(Db_conn_info conn_info) {

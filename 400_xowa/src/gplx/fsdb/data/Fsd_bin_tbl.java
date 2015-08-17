@@ -38,7 +38,7 @@ public class Fsd_bin_tbl implements RlsAble {
 		stmt_select = Db_stmt_.Rls(stmt_select);
 	}
 	public void Create_tbl()	{conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds));}
-	public void Insert_bgn()	{conn.Txn_bgn(); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
+	public void Insert_bgn()	{conn.Txn_bgn("fsdb_bin__insert"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
 	public void Insert_commit()	{conn.Txn_sav();}
 	public void Insert_end()	{conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
 	public void Insert_rdr(int id, byte tid, long bin_len, Io_stream_rdr bin_rdr) {

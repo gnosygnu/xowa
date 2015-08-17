@@ -28,7 +28,7 @@ public class Xob_info_session {
 	public DateAdp Time() {return time;} private final DateAdp time;
 	public Guid_adp Uuid() {return guid;} private final Guid_adp guid;
 	public void Save(Db_cfg_tbl tbl) {
-		tbl.Conn().Txn_bgn();
+		tbl.Conn().Txn_bgn("make__info__session");
 		tbl.Insert_str		(Cfg_grp, Cfg_key__user			, user);
 		tbl.Insert_str		(Cfg_grp, Cfg_key__version		, version);
 		tbl.Insert_str		(Cfg_grp, Cfg_key__wiki_domain	, wiki_domain);

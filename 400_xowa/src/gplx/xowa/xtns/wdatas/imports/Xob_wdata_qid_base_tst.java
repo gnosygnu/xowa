@@ -57,13 +57,10 @@ public class Xob_wdata_qid_base_tst {
 	}
 	@Test  public void Ns() {
 		// setup db
-		Db_conn conn = Xowmf_site_tbl.Get_conn_or_new(fxt.App().Fsys_mgr().Root_dir());
-		Xowmf_site_tbl site_tbl = new Xowmf_site_tbl(conn);
-		site_tbl.Insert(1, "en.wikipedia.org");
-		site_tbl.Insert(2, "fr.wikipedia.org");
-		Xowmf_ns_tbl ns_tbl = new Xowmf_ns_tbl(conn);
-		ns_tbl.Insert(1, Xow_ns_.Id_help, Xow_ns_case_.Id_1st, Bool_.Y, Bool_.N, Bry_.new_a7("Help"), Bry_.Empty);
-		ns_tbl.Insert(2, Xow_ns_.Id_help, Xow_ns_case_.Id_1st, Bool_.Y, Bool_.N, Bry_.new_a7("Aide"), Bry_.Empty);
+		Site_core_db json_db = new Site_core_db(fxt.App().Fsys_mgr().Cfg_site_meta_fil());
+		Site_namespace_tbl ns_tbl = json_db.Tbl__namespace();
+		ns_tbl.Insert(Bry_.new_a7("en.w"), Xow_ns_.Id_help, Xow_ns_case_.Bry__1st, Bry_.Empty, Bry_.new_a7("Help"), Bool_.N, Bool_.N, Bry_.Empty);
+		ns_tbl.Insert(Bry_.new_a7("fr.w"), Xow_ns_.Id_help, Xow_ns_case_.Bry__1st, Bry_.Empty, Bry_.new_a7("Aide"), Bool_.N, Bool_.N, Bry_.Empty);
 		// run test
 		fxt.doc_ary_
 		(	fxt.doc_wo_date_(1, "11", Xob_wdata_pid_base_tst.json_("q1", "links", String_.Ary("enwiki", "Help:Q1_en", "frwiki", "Aide:Q1_fr")))

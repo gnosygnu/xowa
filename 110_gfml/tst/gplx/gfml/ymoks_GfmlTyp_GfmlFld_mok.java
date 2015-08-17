@@ -37,7 +37,7 @@ class GfmlFld_mok {
 		GfmlTkn tkn = GfmlTkn_.as_(gobj);
 		if (tkn != null) return tkn.Raw();
 		GfmlNde nde = GfmlNde.as_(gobj);
-		return nde.XtoStr();
+		return nde.To_str();
 	}
 }
 class GfmlTyp_mok {

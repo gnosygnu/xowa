@@ -80,9 +80,9 @@ class GfmlStringHighlighter {
 			symBfr.Add_at(0, " ");
 		}
 		List_adp rv = List_adp_.new_();
-		rv.Add(posBfr.XtoStr());
-		rv.Add(rawBfr.XtoStr());
-		rv.Add(symBfr.XtoStr());
+		rv.Add(posBfr.To_str());
+		rv.Add(rawBfr.To_str());
+		rv.Add(symBfr.To_str());
 		if (symList.Count() > 0)
 			rv.Add("");
 		for (int i = 0; i < symList.Count(); i++)

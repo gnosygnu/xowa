@@ -82,7 +82,7 @@ public class Io_url implements CompareAble, EqAble, ParseAble, GfoInvkAble {	//_
 			if (isFil && i == len - 1) break;	// do not add closing backslash if last term
 			sb.Add(info.DirSpr());
 		}
-		return Io_url_.new_inf_(sb.XtoStr(), info);
+		return Io_url_.new_inf_(sb.To_str(), info);
 	}
 	public Object ParseAsObj(String raw) {return Io_url_.new_any_(raw);}
 	@Override public String toString()	{return raw;}

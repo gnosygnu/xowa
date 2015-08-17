@@ -35,7 +35,7 @@ public class Xob_redirect_cmd extends Xob_dump_mgr_base {
 		encoder = Xoa_app_.Utl__encoder_mgr().Http_url_ttl();
 		redirect_tbl = new Xob_redirect_tbl(wiki.Fsys_mgr().Root_dir(), Xoa_app_.Utl__encoder_mgr().Http_url_ttl()).Create_table();
 		conn = redirect_tbl.Conn();
-		conn.Txn_bgn();
+		conn.Txn_bgn("bldr__redirect");
 		return conn;
 	}		
 	@Override protected void Cmd_bgn_end() {}

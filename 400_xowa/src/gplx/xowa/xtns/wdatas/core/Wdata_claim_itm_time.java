@@ -26,7 +26,7 @@ public class Wdata_claim_itm_time extends Wdata_claim_itm_core { 	public Wdata_c
 	public Wdata_date Time_as_date() {
 		if (time_as_date == null) time_as_date = Wdata_date.parse(time, this.Precision_int(), this.Before_int(), this.After_int(), this.Calendar_is_julian());
 		return time_as_date;
-	} private Wdata_date time_as_date;
+	}	private Wdata_date time_as_date;
 	public byte[] Before() {return before;} private final byte[] before;
 	public byte[] After() {return after;} private final byte[] after;
 	public byte[] Precision() {return precision;} private final byte[] precision;
@@ -67,5 +67,21 @@ public class Wdata_claim_itm_time extends Wdata_claim_itm_core { 	public Wdata_c
 		return String_.Concat_with_str("|", Wdata_dict_snak_tid.Xto_str(this.Snak_tid()), Wdata_dict_val_tid.Xto_str(this.Val_tid()), String_.new_u8(time), String_.new_u8(before), String_.new_u8(after), String_.new_u8(precision), String_.new_u8(calendar));
 	}
 	@Override public void Welcome(Wdata_claim_visitor visitor) {visitor.Visit_time(this);}
+	public void Write_to_bfr(Bry_bfr bfr, Bry_bfr tmp_time_bfr, Bry_fmtr tmp_time_fmtr, Wdata_hwtr_msgs msgs, byte[] ttl) {
+		try {
+			Wdata_date date = this.Time_as_date();
+			boolean calendar_is_julian = this.Calendar_is_julian();
+			byte[] calendar_display = null;
+			if (calendar_is_julian) {
+				date = Wdata_date.Xto_julian(date);
+				calendar_display = msgs.Time_julian();
+			}
+			Wdata_date.Xto_str(bfr, tmp_time_fmtr, tmp_time_bfr, msgs, date);
+			if (calendar_display != null)
+				bfr.Add_byte_space().Add(calendar_display);
+		} catch (Exception e) {
+			Xoa_app_.Usr_dlg().Warn_many("", "", "failed to write time; ttl=~{0} pid=~{1} err=~{2}", ttl, this.Pid(), Err_.Message_gplx_log(e));
+		}
+	}
 	private static final byte[] Calendar_julian = Bry_.new_a7("http://www.wikidata.org/entity/Q1985786");
 }

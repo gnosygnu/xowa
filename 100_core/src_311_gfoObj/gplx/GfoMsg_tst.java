@@ -33,7 +33,7 @@ public class GfoMsg_tst {
 		mok.Str0 = "b";
 		tst_Msg(GfoInvkXtoStr.ReadMsg(mok, Mok.Invk_Cmd0), "Mok.Cmd0:bool0='y' int0='2' str0='b';");
 	}
-	void tst_Msg(GfoMsg m, String expd) {Tfds.Eq(expd, m.XtoStr());}
+	void tst_Msg(GfoMsg m, String expd) {Tfds.Eq(expd, m.To_str());}
 	class Mok implements GfoInvkAble {
 		public boolean Bool0;
 		public int Int0;

@@ -17,11 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
 import org.junit.*; import gplx.xowa.files.*;
-public class Xof_img_size_tst {		
+public class Xof_img_size_tst {
+	private final Xof_img_size_fxt fxt = new Xof_img_size_fxt();
 	@Before public void init() {
 		fxt.Reset();
 		fxt.Orig_(400, 200);
-	}	private Xof_img_size_fxt fxt = new Xof_img_size_fxt();
+	}
 	@Test  	public void Lnki_lt_orig_null() 		{fxt.Lnki_type_(Xop_lnki_type.Id_null)		.Lnki_(200, 100).Test_html(200, 100, Bool_.N);}	// [[File:A.png|200px]]           -> 200,100; File_is_orig = n
 	@Test  	public void Lnki_lt_orig_thumb() 		{fxt.Lnki_type_(Xop_lnki_type.Id_thumb)		.Lnki_(200, 100).Test_html(200, 100, Bool_.N);}	// [[File:A.png|thumb|200px]]     -> 200,100; File_is_orig = n
 	@Test  	public void Lnki_lt_orig_frameless() 	{fxt.Lnki_type_(Xop_lnki_type.Id_frameless)	.Lnki_(200, 100).Test_html(200, 100, Bool_.N);}	// [[File:A.png|frameless|200px]] -> 200,100; File_is_orig = n
@@ -76,6 +77,9 @@ public class Xof_img_size_tst {
 	}
 	@Test  	public void Frame_and_thumb(){ // PURPOSE: frame and thumb should be treated as frame; Enm.Has(val, Id_frame) vs val == Id_frame; PAGE:en.w:History_of_Western_Civilization; DATE:2015-04-16
 		fxt.Lnki_type_(Enm_.Add_byte(Xop_lnki_type.Id_frame, Xop_lnki_type.Id_thumb)).Lnki_(200,  -1).Test_html(400, 200, Bool_.Y);	// mut return same as Lnki_lt_orig_frame above
+	}
+	@Test  	public void Video__use_orig_w(){ // PURPOSE: video should use orig_w; DATE:2015-08-07
+		fxt.Lnki_type_(Xop_lnki_type.Id_none).Lnki_ext_(Xof_ext_.Id_ogv).Lnki_(-1,  -1).Orig_(500, 250).Test_html(500, 250, Bool_.N);
 	}
 }
 class Xof_img_size_fxt {

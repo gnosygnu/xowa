@@ -47,14 +47,8 @@ public class Xop_lnki_wkr__uncommon_tst {
 	@Test  public void Toc_fails() {	// PURPOSE: null ref when writing hdr with lnki inside xnde; EX:pl.d:head_sth_off;DATE:2014-05-07
 		fxt.Test_parse_page_all_str("== <i>[[A]]</i> ==", "<h2> <i><a href=\"/wiki/A\">A</a></i> </h2>\n");
 	}
-	@Test  public void Large_size() {	// PURPOSE: size larger than int should be discard, not be Int_.MaxValue: PAGE:id.w:Baho; DATE:2014-06-10
-		fxt.Test_html_wiki_frag("[[File:A.png|9999999999x30px]]", " width=\"0\" height=\"30\"");	// width should not be Int_.MaxValue
-	}
 	@Test  public void Upright_is_large() {	// PURPOSE: handle large upright which overflows int; PAGE:de.w:Feuerland DATE:2015-02-03
 		fxt.Test_html_wiki_frag("[[File:A.png|upright=1.333333333333333333333333333333333333333333333333333333333333333333333]]", " width=\"0\" height=\"0\"");	// failure would print out original lnki
-	}
-	@Test  public void Mistaken_x_px() {	// PURPOSE: 1234xTextpx interpreted as size; PAGE:es.b:Alimentación_infantil; DATE:2015-07-10
-		fxt.Test_html_wiki_frag("[[File:A.png|1234xSomeTextpx]]", " width=\"0\" height=\"0\"");	// width should be 0
 	}
 	@Test  public void Persian() {	// PURPOSE: handle il8n nums; EX:[[پرونده:Shahbazi 3.jpg|۲۰۰px]] -> 200px; PAGE:fa.w:فهرست_آثار_علیرضا_شاپور_شهبازی; DATE:2015-07-18
 		Xol_lang lang = fxt.Wiki().Lang();

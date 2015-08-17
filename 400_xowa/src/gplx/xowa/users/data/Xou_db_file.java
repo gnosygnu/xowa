@@ -27,20 +27,15 @@ public class Xou_db_file {
 		this.tbl__site		= new Xoud_site_tbl(conn);
 		this.tbl__history	= new Xoud_history_tbl(conn);
 		this.tbl__cache		= new Xou_cache_tbl(conn);
-//			this.tbl__bmk		= new Xoud_bmk_tbl(conn);
 	}
 	public Db_cfg_tbl				Tbl__cfg()		{return tbl__cfg;}		private final Db_cfg_tbl tbl__cfg;
 	public Xoud_site_tbl			Tbl__site()		{return tbl__site;}		private final Xoud_site_tbl tbl__site;
 	public Xoud_history_tbl			Tbl__history()	{return tbl__history;}	private final Xoud_history_tbl tbl__history;
 	public Xou_cache_tbl			Tbl__cache()	{return tbl__cache;}	private final Xou_cache_tbl tbl__cache;
-//		public Xoud_bmk_tbl				Tbl__bmk()		{return tbl__bmk;}		private final Xoud_bmk_tbl tbl__bmk;
 	public void Init_assert() {
 		if (!conn.Meta_tbl_exists(tbl__cache.Tbl_name())) {
 			tbl__cfg.Create_tbl();
 			tbl__cache.Create_tbl();
 		}
-//			if (!conn.Meta_tbl_exists(tbl__bmk.Tbl_name())) {
-//				tbl__bmk.Create_tbl();
-//			}
 	}
 }

@@ -110,7 +110,7 @@ class Xow_lang_html implements Bry_fmtr_arg {
 				Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b128().Mkr_rls();
 				byte[] msg_lang = wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_page_lang_header);
 				byte[] wikidata_link = Bry_.Len_eq_0(qid) ? Bry_.Empty : lang_mgr.Html_wikidata_link().Bld_bry_many(tmp_bfr, qid);
-				toggle_itm.Init(wiki, msg_lang);
+				toggle_itm.Init(msg_lang);
 				lang_mgr.Html_div().Bld_bfr_many(bfr, ttl_list.Count(), wikidata_link, toggle_itm.Html_toggle_btn(), toggle_itm.Html_toggle_hdr(), this);
 				stage = 0;
 				break;

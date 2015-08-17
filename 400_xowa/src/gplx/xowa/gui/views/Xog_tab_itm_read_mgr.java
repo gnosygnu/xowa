@@ -60,12 +60,8 @@ public class Xog_tab_itm_read_mgr {
 	public static void Update_selected_tab_blank(Xog_win_itm win) {Update_selected_tab(win, null, null);} // called when all tabs are null
 	public static void Update_selected_tab(Xog_win_itm win, Xoa_url url, Xoa_ttl ttl) {
 		String url_str = "", win_str = Win_text_blank;
-		if (url != null && ttl != null) {	// TODO: remove; no longer needed for new url parser
-			try {url_str = url.To_str();}
-			catch (Exception e) {	// HACK: failed pages will have a null wiki; for now, catch and ignore; DATE:2014-06-22
-				Gfo_usr_dlg_.I.Warn_many("", "", "failed to build url: url=~{0}, err=~{1}", String_.new_u8(url.Raw()), Err_.Message_gplx_full(e));
-				url_str = String_.new_u8(ttl.Full_txt());
-			}
+		if (url != null && ttl != null) {
+			url_str = url.To_str();
 			win_str = String_.new_u8(Bry_.Add(ttl.Full_txt(), Win_text_suffix_page));
 		}
 		win.Url_box().Text_(url_str);

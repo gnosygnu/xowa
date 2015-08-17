@@ -44,7 +44,7 @@ public class HierStrBldr {
 		for (int i = 0; i < multipleAry.length; i++)
 			sb.Add_fmt(dirFmt, Int_.Xto_str_fmt(multipleAry[i], numFmt));
 		sb.Add_fmt(filFmt, Int_.Xto_str_fmt(idx, numFmt));
-		return sb.XtoStr();
+		return sb.To_str();
 	}
 	public HierStrBldr Ctor_io(Io_url root, String dirFmt, String filFmt, String numFmt, int... filCountMaxs) {
 		this.Ctor(root.Raw(), dirFmt + dirSpr, filFmt, numFmt, filCountMaxs);

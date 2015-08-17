@@ -21,6 +21,8 @@ public class Json_kv extends Json_itm_base {
 	@Override public byte Tid() {return Json_itm_.Tid_kv;}
 	public Json_itm Key() {return key;} Json_itm key;
 	public Json_itm Val() {return val;} Json_itm val;
+	public Json_nde Val_as_nde() {return Json_nde.cast_(val);}
+	public Json_ary Val_as_ary() {return Json_ary.cast(val);}
 	public byte[] Key_as_bry() {return key.Data_bry();}
 	public String Key_as_str() {return (String)key.Data();}
 	public byte[] Val_as_bry() {return val.Data_bry();}

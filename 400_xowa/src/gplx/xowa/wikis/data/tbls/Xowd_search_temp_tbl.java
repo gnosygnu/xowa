@@ -31,7 +31,7 @@ public class Xowd_search_temp_tbl {
 		fld_word_text		= flds.Add_str("word_text", 255);
 	}
 	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds));}
-	public void Insert_bgn() {conn.Txn_bgn(); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
+	public void Insert_bgn() {conn.Txn_bgn("schema__search_temp__insert"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
 	public void Insert_end() {conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
 	public void Insert_cmd_by_batch(int page_id, byte[] word) {
 		stmt_insert.Clear()

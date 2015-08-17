@@ -25,7 +25,7 @@ public class Xob_xfer_temp_cmd_thumb extends Xob_itm_basic_base implements Xob_c
 		Db_conn conn = Xob_db_file.new__file_make(wiki.Fsys_mgr().Root_dir()).Conn();
 		Xob_xfer_temp_tbl.Create_table(conn);
 		Db_stmt trg_stmt = Xob_xfer_temp_tbl.Insert_stmt(conn);
-		conn.Txn_bgn();
+		conn.Txn_bgn("bldr__xfer_temp_thumb");
 		DataRdr rdr = conn.Exec_sql_as_rdr(Sql_select);
 		Xob_xfer_temp_itm temp_itm = new Xob_xfer_temp_itm();
 		Xof_img_size img_size = new Xof_img_size();

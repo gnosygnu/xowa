@@ -22,7 +22,7 @@ class IptKeyStrMgr {
 		IptKey rv = charKeys[charVal];
 		return (rv == null) ? IptKey_.None : rv;
 	}
-	public String XtoStr(IptKey key) {
+	public String To_str(IptKey key) {
 		if (literals == null) Init();
 		Object rv = literals.Get_by(key.Val());
 		return rv == null ? String_.Empty : (String)rv;
@@ -62,7 +62,7 @@ class IptKeyStrMgr {
 		Reg(lowerKey, lowerChr);
 		Reg(upperKey, upperChr);
 	}
-	void Reg(IptKey k, char c) {Reg(k, Char_.XtoStr(c), (int)c);}
+	void Reg(IptKey k, char c) {Reg(k, Char_.To_str(c), (int)c);}
 	void Reg(IptKey k, String s, int charVal) {
 		int v = k.Val();
 		literals.Add(v, s);

@@ -96,7 +96,7 @@ public class Php_srl_parser {
 				switch (b) {
 					case Byte_ascii.Num_1: 	rv = factory.Bool_y(); break;
 					case Byte_ascii.Num_0:	rv = factory.Bool_n(); break;
-					default:				throw err_(raw, pos, raw_len, "unknown boolean type {0}", Char_.XtoStr(b));
+					default:				throw err_(raw, pos, raw_len, "unknown boolean type {0}", Char_.To_str(b));
 				}
 				pos = Chk(raw, pos + 1, Byte_ascii.Semic);
 				break;
@@ -139,7 +139,7 @@ public class Php_srl_parser {
 				rv = factory.Func(func_bgn, pos, func_id);
 				pos += 2;
 				break;
-			default: throw err_(raw, pos, "unexpected type: {0}", Char_.XtoStr(b));
+			default: throw err_(raw, pos, "unexpected type: {0}", Char_.To_str(b));
 		}
 		return rv;
 	}	static final byte[] CONST_funct_bgn = Bry_.new_a7("O:42:\"Scribunto_LuaStandaloneInterpreterFunction\":1:{s:2:\"id\";i:"), CONST_funct_end = Bry_.new_a7(";}");
@@ -165,7 +165,7 @@ public class Php_srl_parser {
 		if (actl == expd)
 			return i + 1;
 		else
-			throw err_(raw, i, "expected '{0}' but got '{1}'", Char_.XtoStr(expd), Char_.XtoStr(actl));
+			throw err_(raw, i, "expected '{0}' but got '{1}'", Char_.To_str(expd), Char_.To_str(actl));
 	}
 	int Skip_while_num(byte[] raw, int raw_len, int bgn, boolean num_is_int) {
 		int num_len = 1;

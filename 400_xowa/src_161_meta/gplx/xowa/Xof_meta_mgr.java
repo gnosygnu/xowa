@@ -37,7 +37,7 @@ public class Xof_meta_mgr implements GfoInvkAble {
 		}
 		return rv;
 	}
-	public Xof_meta_itm Get_itm_or_new(byte[] ttl) {return Get_itm_or_new(ttl, gplx.xowa.files.Xof_file_wkr_.Md5_(ttl));}
+	public Xof_meta_itm Get_itm_or_new(byte[] ttl) {return Get_itm_or_new(ttl, gplx.xowa.files.Xof_file_wkr_.Md5(ttl));}
 	public Xof_meta_itm Get_itm_or_new(byte[] ttl, byte[] md5) {
 		Xof_meta_fil fil = this.Get_fil_or_new(md5);
 		return fil.Get_or_new(ttl);

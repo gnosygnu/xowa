@@ -25,7 +25,7 @@ public class GfmlAtr implements GfmlItm {
 	public int		SubObjs_Count()			{return subObjs.Count();}
 	public GfmlObj	SubObjs_GetAt(int i)	{return (GfmlObj)subObjs.Get_at(i);} GfmlObjList subObjs = GfmlObjList.new_();	// PERF?: make capacity 3 instead of 8
 	public void		SubObjs_Add(GfmlObj o)	{subObjs.Add(o);}
-	public String	XtoStr() {return String_.Concat(this.Key(), "=", this.DatTkn().Val());}
+	public String	To_str() {return String_.Concat(this.Key(), "=", this.DatTkn().Val());}
 	@gplx.Internal protected void	Key_set(String v) {keyTkn = GfmlTkn_.val_(v);}	// used for 1 test
 
 	public static GfmlAtr as_(Object obj) {return obj instanceof GfmlAtr ? (GfmlAtr)obj : null;}

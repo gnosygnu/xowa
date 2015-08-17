@@ -39,7 +39,7 @@ public class Pft_func_formatdate extends Pf_func_base {
 	}
 	public static Pft_func_formatdate_bldr Date_bldr() {return date_bldr;} private static Pft_func_formatdate_bldr date_bldr = new Pft_func_formatdate_bldr();		
 	private static final Pft_fmt_itm[] Fmt_itms_default = new Pft_fmt_itm[0];
-	private static final Btrie_fast_mgr trie = Btrie_fast_mgr.cs_()
+	private static final Btrie_fast_mgr trie = Btrie_fast_mgr.cs()
 		.Add("dmy"			, new Pft_fmt_itm[] {Pft_fmt_itm_.Day_int, Pft_fmt_itm_.Byte_space, Pft_fmt_itm_.Month_name, Pft_fmt_itm_.Byte_space, Pft_fmt_itm_.Year_len4})
 		.Add("mdy"			, new Pft_fmt_itm[] {Pft_fmt_itm_.Month_name, Pft_fmt_itm_.Byte_space, Pft_fmt_itm_.Day_int, Pft_fmt_itm_.Byte_comma, Pft_fmt_itm_.Byte_space, Pft_fmt_itm_.Year_len4})
 		.Add("ymd"			, new Pft_fmt_itm[] {Pft_fmt_itm_.Year_len4, Pft_fmt_itm_.Byte_space, Pft_fmt_itm_.Month_name, Pft_fmt_itm_.Byte_space, Pft_fmt_itm_.Day_int})

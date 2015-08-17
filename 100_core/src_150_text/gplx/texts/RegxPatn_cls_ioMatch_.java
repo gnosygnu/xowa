@@ -46,7 +46,7 @@ public class RegxPatn_cls_ioMatch_ {
 				sb.Add(c);
 		}
 		sb.Add(Regx_bldr.Tkn_LineEnd);
-		return sb.XtoStr();
+		return sb.To_str();
 	}
 	public static final String InvalidCharacters		= "|*?\"<>";		// : / \ are omitted b/c they will cause full paths to fail
 	public static final String ValidCharacters		= Regx_bldr.Excludes(InvalidCharacters);

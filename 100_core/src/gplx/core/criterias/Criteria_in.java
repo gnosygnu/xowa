@@ -41,6 +41,6 @@ public class Criteria_in implements Criteria {
 		}
 		return negated ? !rv : rv;
 	}
-	public String XtoStr() {return String_.Concat_any("IN ", String_.Concat_any(ary));}
+	public String To_str() {return String_.Concat_any("IN ", String_.Concat_any(ary));}
 	public static Criteria_in as_(Object obj) {return obj instanceof Criteria_in ? (Criteria_in)obj : null;}
 }

@@ -46,7 +46,7 @@ public class Xop_xnde_wkr__nowiki_tst {
 			));
 	}
 	@Test  public void Lnke() {	// PAGE:en.w:Doomsday_argument; <nowiki>[0,&nbsp;1]</nowiki>
-		fxt.Test_parse_page_wiki_str("a <nowiki>[0,&nbsp;1]</nowiki> b", "a [0,&nbsp;1] b");	// NOTE: not "0" + Byte_.XtoStr(160) + "1"; depend on browser to translate &nbsp;
+		fxt.Test_parse_page_wiki_str("a <nowiki>[0,&nbsp;1]</nowiki> b", "a [0,&nbsp;1] b");	// NOTE: not "0" + Byte_.To_str(160) + "1"; depend on browser to translate &nbsp;
 	}
 	@Test  public void Xatrs_val_text() {
 		fxt.Test_parse_page_all_str

@@ -211,7 +211,7 @@ public class Sql_qry_wtr_ansi implements Sql_qry_wtr {
 			Append_db_obj_ary(sb, (Db_obj_ary_crt)crt);
 		}
 		else {
-			Criteria_fld leaf = Criteria_fld.as_(crt); if (leaf == null) throw Err_.new_invalid_op(crt.XtoStr());
+			Criteria_fld leaf = Criteria_fld.as_(crt); if (leaf == null) throw Err_.new_invalid_op(crt.To_str());
 			sb.Add(leaf.Key());
 			Bld_where_crt(sb, leaf.Crt());
 		}

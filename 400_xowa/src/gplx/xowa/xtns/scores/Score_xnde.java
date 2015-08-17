@@ -69,7 +69,7 @@ public class Score_xnde implements Xox_xnde, Xop_xnde_atr_parser, Xoh_cmd_itm {
 		tmp_bfr.Add(code).Add_byte_pipe().Add_int_bool(lang_is_abc).Add_byte_pipe().Add_int_bool(code_is_raw);
 		sha1 = gplx.security.HashAlgo_.Sha1.Calc_hash_bry(tmp_bfr.To_bry_and_rls()); // NOTE: MW transforms to base32; for now, keep sha1 as raw
 		sha1_prefix = String_.new_a7(sha1, 0, 8);
-		output_dir = app.Fsys_mgr().File_dir().GenSubDir_nest(wiki.Domain_str(), "lilypond", Char_.XtoStr(sha1[0]), Char_.XtoStr(sha1[1]), String_.new_a7(sha1));	// NOTE: MW also adds an extra level for 8-len; EX: /.../sha1_32_len/sha1_8_len/
+		output_dir = app.Fsys_mgr().File_dir().GenSubDir_nest(wiki.Domain_str(), "lilypond", Char_.To_str(sha1[0]), Char_.To_str(sha1[1]), String_.new_a7(sha1));	// NOTE: MW also adds an extra level for 8-len; EX: /.../sha1_32_len/sha1_8_len/
 		png_file = output_dir.GenSubFil(sha1_prefix + ".png");
 		aud_file = output_dir.GenSubFil(sha1_prefix + ".midi");
 		hcmd_id = "xowa_score_" + Int_.Xto_str(page.Html_cmd_mgr().Count());

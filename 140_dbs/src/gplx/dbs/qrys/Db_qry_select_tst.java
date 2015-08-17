@@ -72,18 +72,18 @@ public class Db_qry_select_tst {
 //		@Test  public void GroupBy() {
 //			cmd.From_("tbl0").groupBy_("fld0", "fld1");
 //			expd = "SELECT fld0, fld1 FROM tbl0 GROUP BY fld0, fld1";
-//			Tfds.Eq(cmd.XtoStr(), expd);
+//			Tfds.Eq(cmd.To_str(), expd);
 //		}
 //		@Test  public void Union() {
 //			cmd.From_("tbl0").select("fld0").union_(qry2.from("tbl1").select("fld0"));
 //			cmd.From_("tbl0").select("fld0").union_().from("tbl1").select("fld0"); // feasible, but will be bad later when trying to access Db_qry__select_cmd props
 //			expd = "SELECT fld0 FROM tbl0 UNION SELECT fld0 FROM tbl1";
-//			Tfds.Eq(cmd.XtoStr(), expd);
+//			Tfds.Eq(cmd.To_str(), expd);
 //		}
 //		@Test  public void Having() {
 //			cmd.From_("tbl0").groupBy_("fld0", "fld1");
 //			expd = "SELECT fld0, fld1 FROM tbl0 GROUP BY fld0, fld1 HAVING Count(fld0) > 1";
-//			Tfds.Eq(cmd.XtoStr(), expd);
+//			Tfds.Eq(cmd.To_str(), expd);
 //		}
 	void tst_XtoStr(Db_qry qry, String expd) {Tfds.Eq(expd, cmd.Xto_sql());}
 }

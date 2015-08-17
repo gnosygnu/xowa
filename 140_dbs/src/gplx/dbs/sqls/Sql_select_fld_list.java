@@ -28,8 +28,8 @@ public class Sql_select_fld_list {
 		for (int i = 0; i < this.Count(); i++) {
 			Sql_select_fld_base selectFld = this.Get_at(i);
 			GfoFld fld = tbl.Flds().FetchOrNull(selectFld.Fld());
-			if (fld == null) throw Err_.new_wo_type("fld not found in tbl", "fldName", selectFld.Fld(), "tblName", tbl.Name(), "tblFlds", tbl.Flds().XtoStr());
-			if (rv.Has(selectFld.Alias())) throw Err_.new_wo_type("alias is not unique", "fldName", selectFld.Fld(), "flds", rv.XtoStr());
+			if (fld == null) throw Err_.new_wo_type("fld not found in tbl", "fldName", selectFld.Fld(), "tblName", tbl.Name(), "tblFlds", tbl.Flds().To_str());
+			if (rv.Has(selectFld.Alias())) throw Err_.new_wo_type("alias is not unique", "fldName", selectFld.Fld(), "flds", rv.To_str());
 			selectFld.GroupBy_type(fld);
 			rv.Add(selectFld.Alias(), selectFld.ValType());
 		}
@@ -44,13 +44,13 @@ public class Sql_select_fld_list {
 		}
 		return rv;
 	}
-	public String XtoStr() {
+	public String To_str() {
 		String_bldr sb = String_bldr_.new_();
 		for (int i = 0; i < this.Count(); i++) {
 			Sql_select_fld_base fld = this.Get_at(i);
 			sb.Add_fmt("{0},{1}|", fld.Fld(), fld.Alias());
 		}
-		return sb.XtoStr();
+		return sb.To_str();
 	}
 	Ordered_hash hash = Ordered_hash_.new_();
 	public static Sql_select_fld_list new_() {return new Sql_select_fld_list();} Sql_select_fld_list() {}

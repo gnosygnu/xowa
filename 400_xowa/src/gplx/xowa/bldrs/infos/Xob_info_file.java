@@ -31,7 +31,7 @@ public class Xob_info_file {
 	public String Core_file_name() {return core_file_name;} private final String core_file_name;
 	public String Orig_file_name() {return orig_file_name;} private final String orig_file_name;
 	public void Save(Db_cfg_tbl tbl) {
-		tbl.Conn().Txn_bgn();
+		tbl.Conn().Txn_bgn("make__info__file");
 		tbl.Insert_int		(Cfg_grp, Cfg_key__id				, id);
 		tbl.Insert_str		(Cfg_grp, Cfg_key__type				, type);
 		tbl.Insert_str		(Cfg_grp, Cfg_key__ns_ids			, ns_ids);

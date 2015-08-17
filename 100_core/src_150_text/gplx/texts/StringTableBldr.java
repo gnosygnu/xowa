@@ -36,7 +36,7 @@ public class StringTableBldr {
 		cols.Add(i, col);
 		return col;
 	}
-	public String XtoStr() {
+	public String To_str() {
 		sb.Clear();
 		for (int rowI = 0; rowI < rows.Count(); rowI++) {
 			String[] row = (String[])rows.Get_at(rowI);

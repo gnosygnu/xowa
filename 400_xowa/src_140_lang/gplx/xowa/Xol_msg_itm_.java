@@ -226,32 +226,33 @@ public static final int
 , Id_xowa_wikidata_east = 204
 , Id_xowa_wikidata_meters = 205
 , Id_xowa_wikidata_julian = 206
-, Id_xowa_wikidata_decade = 207
-, Id_xowa_wikidata_century = 208
-, Id_xowa_wikidata_millenium = 209
-, Id_xowa_wikidata_years1e4 = 210
-, Id_xowa_wikidata_years1e5 = 211
-, Id_xowa_wikidata_years1e6 = 212
-, Id_xowa_wikidata_years1e7 = 213
-, Id_xowa_wikidata_years1e8 = 214
-, Id_xowa_wikidata_years1e9 = 215
-, Id_xowa_wikidata_bc = 216
-, Id_xowa_wikidata_inTime = 217
-, Id_ctg_tbl_hidden = 218
-, Id_ctg_help_page = 219
-, Id_statistics_title = 220
-, Id_statistics_header_pages = 221
-, Id_statistics_articles = 222
-, Id_statistics_pages = 223
-, Id_statistics_pages_desc = 224
-, Id_statistics_header_ns = 225
-, Id_wikibase_diffview_rank = 226
-, Id_xowa_wikidata_deprecated = 227
-, Id_xowa_wikidata_normal = 228
-, Id_xowa_wikidata_preferred = 229
-, Id_xowa_wikidata_links_special = 230
+, Id_xowa_wikidata_year = 207
+, Id_xowa_wikidata_decade = 208
+, Id_xowa_wikidata_century = 209
+, Id_xowa_wikidata_millenium = 210
+, Id_xowa_wikidata_years1e4 = 211
+, Id_xowa_wikidata_years1e5 = 212
+, Id_xowa_wikidata_years1e6 = 213
+, Id_xowa_wikidata_years1e7 = 214
+, Id_xowa_wikidata_years1e8 = 215
+, Id_xowa_wikidata_years1e9 = 216
+, Id_xowa_wikidata_bc = 217
+, Id_xowa_wikidata_inTime = 218
+, Id_ctg_tbl_hidden = 219
+, Id_ctg_help_page = 220
+, Id_statistics_title = 221
+, Id_statistics_header_pages = 222
+, Id_statistics_articles = 223
+, Id_statistics_pages = 224
+, Id_statistics_pages_desc = 225
+, Id_statistics_header_ns = 226
+, Id_wikibase_diffview_rank = 227
+, Id_xowa_wikidata_deprecated = 228
+, Id_xowa_wikidata_normal = 229
+, Id_xowa_wikidata_preferred = 230
+, Id_xowa_wikidata_links_special = 231
 ;
-	public static final int Id__max = 231;
+	public static final int Id__max = 232;
 	public static Xol_msg_itm new_(int id, String key, String val) {return new_(id, Bry_.new_u8(key), Bry_.new_u8(val));}
 	public static Xol_msg_itm new_(int id, byte[] key, byte[] val) {
 		Xol_msg_itm rv = new Xol_msg_itm(id, key);
@@ -481,6 +482,7 @@ case Xol_msg_itm_.Id_xowa_wikidata_west: return new_(Xol_msg_itm_.Id_xowa_wikida
 case Xol_msg_itm_.Id_xowa_wikidata_east: return new_(Xol_msg_itm_.Id_xowa_wikidata_east, "xowa-wikidata-east", "E");
 case Xol_msg_itm_.Id_xowa_wikidata_meters: return new_(Xol_msg_itm_.Id_xowa_wikidata_meters, "xowa-wikidata-meters", "&nbsp;m");
 case Xol_msg_itm_.Id_xowa_wikidata_julian: return new_(Xol_msg_itm_.Id_xowa_wikidata_julian, "xowa-wikidata-julian", "<sup>jul</sup>");
+case Xol_msg_itm_.Id_xowa_wikidata_year: return new_(Xol_msg_itm_.Id_xowa_wikidata_year, "xowa-wikidata-year", "~{0}");
 case Xol_msg_itm_.Id_xowa_wikidata_decade: return new_(Xol_msg_itm_.Id_xowa_wikidata_decade, "xowa-wikidata-decade", "~{0}0s");
 case Xol_msg_itm_.Id_xowa_wikidata_century: return new_(Xol_msg_itm_.Id_xowa_wikidata_century, "xowa-wikidata-century", "~{0}. century");
 case Xol_msg_itm_.Id_xowa_wikidata_millenium: return new_(Xol_msg_itm_.Id_xowa_wikidata_millenium, "xowa-wikidata-millenium", "~{0}. millenium");

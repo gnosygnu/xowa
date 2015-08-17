@@ -77,5 +77,5 @@ public class Xoa_maint_mgr implements GfoInvkAble {
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_wmf_status_update = "wmf_status_update", Invk_wikis = "wikis";
-	public static Io_url Wmf_dump_status_url(Xoae_app app) {return app.Fsys_mgr().Bin_any_dir().GenSubDir_nest("html", "xowa", "maint", "backup-index.html");}
+	public static Io_url Wmf_dump_status_url(Xoae_app app) {return app.Fsys_mgr().Bin_xowa_dir().GenSubDir_nest("xtns", "xowa", "maintenance", "backup-index.html");}
 }

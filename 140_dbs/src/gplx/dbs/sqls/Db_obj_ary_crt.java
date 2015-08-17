@@ -24,7 +24,7 @@ public class Db_obj_ary_crt implements gplx.core.criterias.Criteria {
 	public void				Val_from_args(Hash_adp args) {throw Err_.new_unimplemented();}
 	public void				Val_as_obj_(Object v) {throw Err_.new_unimplemented();}
 	public boolean				Matches(Object obj) {return false;}
-	public String			XtoStr() {return "";}
+	public String			To_str() {return "";}
 	public static Db_obj_ary_crt new_(Db_fld... flds) {return new Db_obj_ary_crt().Flds_(flds);}
 	public static Db_obj_ary_crt new_by_type(byte type_tid, String... names) {
 		int len = names.length;

@@ -52,8 +52,8 @@ public class Db_cfg_itm {
 	public static		Db_cfg_itm new_yn		(String grp, String key, boolean val)			{return new Db_cfg_itm(grp		, key, Yn.Xto_str(val));}
 	public static		Db_cfg_itm new_DateAdp	(String key, DateAdp val)						{return new Db_cfg_itm(Grp_none	, key, val.XtoStr_fmt_yyyyMMdd_HHmmss());}
 	public static		Db_cfg_itm new_DateAdp	(String grp, String key, DateAdp val)			{return new Db_cfg_itm(grp		, key, val.XtoStr_fmt_yyyyMMdd_HHmmss());}
-	public static		Db_cfg_itm new_guid		(String key, Guid_adp val)						{return new Db_cfg_itm(Grp_none	, key, val.XtoStr());}
-	public static		Db_cfg_itm new_guid		(String grp, String key, Guid_adp val)			{return new Db_cfg_itm(grp		, key, val.XtoStr());}
+	public static		Db_cfg_itm new_guid		(String key, Guid_adp val)						{return new Db_cfg_itm(Grp_none	, key, val.To_str());}
+	public static		Db_cfg_itm new_guid		(String grp, String key, Guid_adp val)			{return new Db_cfg_itm(grp		, key, val.To_str());}
 
 	public static final Db_cfg_itm Empty = new Db_cfg_itm("empty", "empty", null);
 }

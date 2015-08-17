@@ -31,7 +31,7 @@ public class PenAdp implements GfoInvkAble {
 		else return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}	static final String Invk_Width_ = "Width_", Invk_Color_ = "Color_";
-	@Override public String toString() {return String_bldr_.new_().Add_kv_obj("width", width).Add_kv("color", color.XtoHexStr()).XtoStr();}
+	@Override public String toString() {return String_bldr_.new_().Add_kv_obj("width", width).Add_kv("color", color.XtoHexStr()).To_str();}
 	@Override public int hashCode() {return color.Value() ^ (int)width;}
 	@Override public boolean equals(Object obj) {	// cannot use Eq b/c of difficulty in comparing null instances
 		PenAdp comp = PenAdp_.as_(obj); if (comp == null) return false;

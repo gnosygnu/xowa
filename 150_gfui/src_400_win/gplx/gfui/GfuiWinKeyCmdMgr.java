@@ -56,6 +56,6 @@ class GfuiWinKeyCmdMgr implements GfuiWinOpenAble, GfoInvkAble, GfoEvObj {
 	}
 	public static IptKey ExtractKeyFromText(String raw) {
 		int pos = ExtractPosFromText(raw); if (pos == String_.Find_none) return IptKey_.None;
-		return IptKey_.parse_("key." + String_.Lower(Char_.XtoStr(String_.CharAt(raw, pos + 1))));	// pos=& pos; + 1 to get next letter
+		return IptKey_.parse_("key." + String_.Lower(Char_.To_str(String_.CharAt(raw, pos + 1))));	// pos=& pos; + 1 to get next letter
 	}
 }

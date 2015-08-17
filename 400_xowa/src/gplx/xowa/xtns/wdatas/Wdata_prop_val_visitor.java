@@ -16,13 +16,17 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.xtns.wdatas; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.xtns.wdatas.core.*;
+import gplx.xowa.xtns.wdatas.core.*; import gplx.xowa.xtns.wdatas.hwtrs.*;
 class Wdata_prop_val_visitor implements Wdata_claim_visitor {
 	private Wdata_wiki_mgr wdata_mgr; private Xoae_app app; private Bry_bfr bfr; private byte[] lang_key;
+	private final Bry_bfr tmp_time_bfr = Bry_bfr.reset_(255); private final Bry_fmtr tmp_time_fmtr = Bry_fmtr.new_();
+	private Wdata_hwtr_msgs msgs;
 	public Wdata_prop_val_visitor(Xoae_app app, Wdata_wiki_mgr wdata_mgr) {this.app = app; this.wdata_mgr = wdata_mgr;}
-	public void Init(Bry_bfr bfr, byte[] lang_key) {this.bfr = bfr; this.lang_key = lang_key;}
+	public void Init(Bry_bfr bfr, Wdata_hwtr_msgs msgs, byte[] lang_key) {this.bfr = bfr; ; this.msgs = msgs; this.lang_key = lang_key;}
 	public void Visit_str(Wdata_claim_itm_str itm)							{bfr.Add(itm.Val_str());}
-	public void Visit_time(Wdata_claim_itm_time itm)						{bfr.Add(itm.Time());}
+	public void Visit_time(Wdata_claim_itm_time itm) {
+		itm.Write_to_bfr(bfr, tmp_time_bfr, tmp_time_fmtr, msgs, Bry_.Empty);	// for now, don't bother passing ttl; only used for error msg; DATE:2015-08-03
+	}
 	public void Visit_monolingualtext(Wdata_claim_itm_monolingualtext itm)	{bfr.Add(itm.Text());}			// phrase only; PAGE:en.w:Alberta; EX: {{#property:motto}} -> "Fortis et libre"; DATE:2014-08-28
 	public void Visit_entity(Wdata_claim_itm_entity itm) {
 		Wdata_doc entity_doc = wdata_mgr.Pages_get(itm.Page_ttl_db());

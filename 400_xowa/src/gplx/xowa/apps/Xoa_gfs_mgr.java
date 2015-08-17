@@ -35,7 +35,7 @@ public class Xoa_gfs_mgr implements GfoInvkAble, GfoInvkRootWkr {
 		else if	(String_.Eq(type, "xowa_cfg_custom"))	url = usr_fsys_mgr.App_data_cfg_custom_fil();
 		else if	(String_.Eq(type, "xowa_cfg_user"))		url = usr_fsys_mgr.App_data_cfg_user_fil();
 		else if	(String_.Eq(type, "xowa_cfg_os"))		{url = app_fsys_mgr.Bin_data_os_cfg_fil(); Xoa_gfs_mgr_.Cfg_os_assert(url);}
-		else if	(String_.Eq(type, "xowa_cfg_app"))		url = app_fsys_mgr.Root_dir().GenSubFil("xowa.gfs");
+		else if	(String_.Eq(type, "xowa_cfg_app"))		url = app_fsys_mgr.Cfg_app_fil();
 		else											throw Err_.new_wo_type("invalid gfs type", "type", type);
 		try {Run_url(url);}
 		catch (Exception e) {				// gfs is corrupt; may happen if multiple XOWAs opened, and "Close all" chosen in OS; DATE:2014-07-01

@@ -30,7 +30,7 @@ public class GfuiBorderEdge {
 	public static final GfuiBorderEdge All		= new GfuiBorderEdge(15);
 }
 class GfuiBorderEdge_ {
-	public static String XtoStr(GfuiBorderEdge edge) {
+	public static String To_str(GfuiBorderEdge edge) {
 		int val = edge.Val();
 		if		(val == GfuiBorderEdge.Left.Val())		return Left_raw;
 		else if (val == GfuiBorderEdge.Right.Val())		return Right_raw;

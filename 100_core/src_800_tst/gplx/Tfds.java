@@ -40,8 +40,8 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	public static void Eq_str(String expd, byte[] actl)										{Eq_wkr(expd, String_.new_u8(actl), true, EmptyStr);}
 	public static void Eq_bry(String expd, byte[] actl)										{Eq_wkr(expd, String_.new_u8(actl), true, EmptyStr);}
 	public static void Eq_bry(byte[] expd, byte[] actl)										{Eq_wkr(String_.new_u8(expd), String_.new_u8(actl), true, EmptyStr);}
-	public static void Eq_str_intf(XtoStrAble expd, XtoStrAble actl, String msg)			{Eq_wkr(expd.XtoStr(), actl.XtoStr(), true, msg);}
-	public static void Eq_str_intf(XtoStrAble expd, XtoStrAble actl)						{Eq_wkr(expd.XtoStr(), actl.XtoStr(), true, String_.Empty);}
+	public static void Eq_str_intf(To_str_able expd, To_str_able actl, String msg)			{Eq_wkr(expd.To_str(), actl.To_str(), true, msg);}
+	public static void Eq_str_intf(To_str_able expd, To_str_able actl)						{Eq_wkr(expd.To_str(), actl.To_str(), true, String_.Empty);}
 	public static void Eq_str_lines(String lhs, String rhs)									{Eq_str_lines(lhs, rhs, EmptyStr);}
 	public static void Eq_str_lines(String lhs, String rhs, String note)					{
 		if		(lhs == null && rhs == null)	return;	// true
@@ -117,15 +117,15 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 		for (int i = 0; i < lhsLen; i++) {
 			Object lhs = lhsList.Get_at(i);
 			Object rhs = i >= rhsLen ? null : rhsList.Get_at(i);
-			String lhsStr = xtoStr.XtoStr(lhs, lhs);
-			String rhsStr = rhs == null ? "<<N/A>>" : xtoStr.XtoStr(rhs, lhs);
+			String lhsStr = xtoStr.To_str(lhs, lhs);
+			String rhsStr = rhs == null ? "<<N/A>>" : xtoStr.To_str(rhs, lhs);
 			boolean isEq = Object_.Eq(lhsStr, rhsStr); if (!isEq) pass = false;
 			Eq_ary_wkr_addItm(list, i, isEq, lhsStr, rhsStr);
 		}
 		for (int i = lhsLen; i < rhsLen; i++) {
 			String lhsStr = "<<N/A>>";
 			Object rhs = rhsList.Get_at(i);
-			String rhsStr = xtoStr.XtoStr(rhs, null);
+			String rhsStr = xtoStr.To_str(rhs, null);
 			Eq_ary_wkr_addItm(list, i, false, lhsStr, rhsStr);
 			pass = false;
 		}
@@ -169,11 +169,11 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 		int aryLen = Array_.Len(ary);
 		for (int i = 0; i < aryLen; i++)
 			sb.Add_many("'", Object_.Xto_str_strict_or_null_mark(ary[i]), "'", " ");
-		WriteText(sb.XtoStr() + String_.CrLf);
+		WriteText(sb.To_str() + String_.CrLf);
 	}
 }
 class TfdsEqListItmStr_cls_default implements TfdsEqListItmStr {
-	public String XtoStr(Object cur, Object actl) {
+	public String To_str(Object cur, Object actl) {
 		return Object_.Xto_str_strict_or_null_mark(cur);
 	}
 	public static final TfdsEqListItmStr_cls_default _ = new TfdsEqListItmStr_cls_default(); TfdsEqListItmStr_cls_default() {}
@@ -221,7 +221,7 @@ class TfdsMsgBldr {
 //				String itmComparison = (String)obj;
 //				sb.Add_fmt_line("{0}{1}", "\t\t", itmComparison);
 //			}
-		return WrapMsg(sb.XtoStr());
+		return WrapMsg(sb.To_str());
 	}
 	String CustomMsg_xtoStr(String customMsg) {
 		return (customMsg == EmptyStr) 
@@ -231,8 +231,8 @@ class TfdsMsgBldr {
 	public String Obj_xtoStr(Object obj) {
 		String s = String_.as_(obj);
 		if (s != null) return String_.Concat("'", s, "'"); // if Object is String, put quotes around it for legibility
-		XtoStrAble xtoStrAble = XtoStrAble_.as_(obj);
-		if (xtoStrAble != null) return xtoStrAble.XtoStr();
+		To_str_able xtoStrAble = To_str_able_.as_(obj);
+		if (xtoStrAble != null) return xtoStrAble.To_str();
 		return Object_.Xto_str_strict_or_null_mark(obj);
 	}
 	String WrapMsg(String text) {

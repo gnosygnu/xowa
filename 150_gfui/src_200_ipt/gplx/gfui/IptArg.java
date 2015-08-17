@@ -32,7 +32,7 @@ class IptKeyChain implements IptArg {
 			IptArg itm = ary[i];
 			sb.Add_spr_unless_first(itm.Key(), ",", i);
 		}
-		key = sb.XtoStr();
+		key = sb.To_str();
 	}
 	public static IptKeyChain parse_(String raw) {
 		String[] itms = String_.Split(raw, ",");

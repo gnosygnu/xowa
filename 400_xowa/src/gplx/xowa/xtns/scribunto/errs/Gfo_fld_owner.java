@@ -59,7 +59,7 @@ class Gfo_fld_crt implements Criteria {
 	}
 	public void				Val_from_args(Hash_adp args) {throw Err_.new_unimplemented();}
 	public void				Val_as_obj_(Object v) {throw Err_.new_unimplemented();}
-	public String XtoStr() {return String_.Concat(Byte_.Xto_str(fld_idx), " ", crt.XtoStr());}
+	public String To_str() {return String_.Concat(Byte_.Xto_str(fld_idx), " ", crt.To_str());}
 	public static Gfo_fld_crt new_(byte fld_idx, Criteria crt) {
 		Gfo_fld_crt rv = new Gfo_fld_crt();
 		rv.fld_idx = fld_idx; rv.crt = crt;

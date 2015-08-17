@@ -23,6 +23,7 @@ public class Xoapi_root implements GfoInvkAble {
 		app_api.Ctor_by_app(app);
 		usr_api.Ctor_by_app(app);
 		bldr_api.Ctor_by_app(app);
+		html_api.Ctor_by_app(app);
 	}
 	public void Init_by_kit(Xoae_app app) {
 		this.app = app;

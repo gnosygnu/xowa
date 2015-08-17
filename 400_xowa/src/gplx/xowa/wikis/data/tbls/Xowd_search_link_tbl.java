@@ -37,7 +37,7 @@ public class Xowd_search_link_tbl {
 	public void Create_tbl()		{conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds));}
 	public void Create_idx_unique() {conn.Ddl_create_idx(Xoa_app_.Usr_dlg(), Db_meta_idx.new_unique_by_tbl(tbl_name, "main", fld_word_id, fld_page_id));}
 	public void Create_idx_normal() {conn.Ddl_create_idx(Xoa_app_.Usr_dlg(), Db_meta_idx.new_normal_by_tbl(tbl_name, "main", fld_word_id, fld_page_id));}
-	public void Insert_bgn() {conn.Txn_bgn(); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
+	public void Insert_bgn() {conn.Txn_bgn("schema__search_link__insert"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
 	public void Insert_end() {conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
 	public void Insert_cmd_by_batch(int word_id, int page_id) {
 		stmt_insert.Clear().Val_int(fld_word_id, word_id).Val_int(fld_page_id, page_id).Exec_insert();

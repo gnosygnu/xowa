@@ -33,7 +33,7 @@ public class Xowd_search_word_tbl implements RlsAble {
 	}
 	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds));}
 	public void Create_idx() {conn.Ddl_create_idx(Xoa_app_.Usr_dlg(), Db_meta_idx.new_unique_by_tbl(tbl_name, "main", fld_text, fld_id, fld_page_count));}
-	public void Insert_bgn() {conn.Txn_bgn(); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
+	public void Insert_bgn() {conn.Txn_bgn("schema__search_word__insert"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
 	public void Insert_end() {conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
 	public void Insert_cmd_by_batch(int id, byte[] word, int page_count) {
 		stmt_insert.Clear().Val_int(fld_id, id).Val_bry_as_str(fld_text, word).Val_int(fld_page_count, page_count).Exec_insert();
@@ -98,7 +98,7 @@ public class Xowd_search_word_tbl implements RlsAble {
 	}
 	public void Ddl__page_count__add(Xowd_search_link_tbl link_tbl, Db_cfg_tbl cfg_tbl) {
 		Db_meta_fld page_count_fld = Db_meta_fld.new_int("word_page_count").Default_(0);
-		conn.Txn_bgn();
+		conn.Txn_bgn("schema__search_word__upgrade");
 		conn.Ddl_append_fld(tbl_name, page_count_fld);	// SQL: ALTER TABLE search_word ADD word_page_count integer NOT NULL DEFAULT 0;
 		String sql = String_.Format(String_.Concat_lines_nl_skip_last
 		( "REPLACE INTO {0} ({1}, {2}, word_page_count)"

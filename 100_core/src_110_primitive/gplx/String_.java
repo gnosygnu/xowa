@@ -238,7 +238,7 @@ public class String_ implements GfoInvkAble {
 		for (int i = 0; i < padLen; i++)
 			sb.Add(pad);
 		if (bgn) sb.Add(s);
-		return sb.XtoStr();
+		return sb.To_str();
 	}
 	public static String TrimEnd(String s) {if (s == null) return null;
 		int len = String_.Len(s);
@@ -258,7 +258,7 @@ public class String_ implements GfoInvkAble {
 		String_bldr sb = String_bldr_.new_();
 		for (int i = 0; i < count; i++)
 			sb.Add(s);
-		return sb.XtoStr();
+		return sb.To_str();
 	}
 	public static String Insert(String s, int pos, String toInsert) {
 		if (pos < 0 || pos >= String_.Len(s)) throw Err_.new_wo_type("String_.Insert failed; pos invalid", "pos", pos, "s", s, "toInsert", toInsert);
@@ -272,15 +272,15 @@ public class String_ implements GfoInvkAble {
 		String_bldr sb = String_bldr_.new_();
 		for (String val : ary)
 			sb.Add(val);
-		return sb.XtoStr();
+		return sb.To_str();
 	}
 	public static String Concat_any(Object... ary) {
 		String_bldr sb = String_bldr_.new_();
 		for (Object val : ary)
 			sb.Add_obj(val);
-		return sb.XtoStr();
+		return sb.To_str();
 	}
-	public static String ConcatWith_any(String separator, Object... ary) {
+	public static String Concat_with_obj(String separator, Object... ary) {
 		String_bldr sb = String_bldr_.new_();
 		int aryLen = Array_.Len(ary);
 		for (int i = 0; i < aryLen; i++) {
@@ -288,7 +288,7 @@ public class String_ implements GfoInvkAble {
 			Object val = ary[i];
 			sb.Add_obj(Object_.Xto_str_strict_or_empty(val));
 		}
-		return sb.XtoStr();			
+		return sb.To_str();			
 	}
 	public static String Concat_with_str(String spr, String... ary) {
 		String_bldr sb = String_bldr_.new_();
@@ -297,13 +297,13 @@ public class String_ implements GfoInvkAble {
 			if (i != 0) sb.Add(spr);
 			sb.Add_obj(ary[i]);
 		}
-		return sb.XtoStr();			
+		return sb.To_str();			
 	}
 	public static String Concat_lines_crlf(String... values) {
 		String_bldr sb = String_bldr_.new_();
 		for (String val : values)
 			sb.Add(val).Add(String_.CrLf);
-		return sb.XtoStr();
+		return sb.To_str();
 	}
 	public static String Concat_lines_crlf_skipLast(String... values) {
 		String_bldr sb = String_bldr_.new_();
@@ -311,13 +311,13 @@ public class String_ implements GfoInvkAble {
 			if (sb.Count() != 0) sb.Add(String_.CrLf);
 			sb.Add(val);
 		}
-		return sb.XtoStr();
+		return sb.To_str();
 	}
 	public static String Concat_lines_nl(String... values) {
 		String_bldr sb = String_bldr_.new_();
 		for (String val : values)
 			sb.Add(val).Add("\n");
-		return sb.XtoStr();
+		return sb.To_str();
 	}
 	public static String Concat_lines_nl_skip_last(String... ary) {
 		String_bldr sb = String_bldr_.new_();
@@ -326,7 +326,7 @@ public class String_ implements GfoInvkAble {
 			sb.Add(ary[i]);
 			if (i != ary_end) sb.Add("\n");
 		}
-		return sb.XtoStr();
+		return sb.To_str();
 	}
 
 	public static String[] Ary(String... ary) {return ary;}
@@ -344,7 +344,7 @@ public class String_ implements GfoInvkAble {
 		String_bldr sb = String_bldr_.new_();
 		for (String s : ary)
 			sb.Add(s).Add(";");
-		return sb.XtoStr();
+		return sb.To_str();
 	}
 	public static final String[] Ary_empty = new String[0];
 	public static String[] Split(String raw, char dlm) {return Split(raw, dlm, false);}
@@ -419,7 +419,7 @@ public class String_ implements GfoInvkAble {
 		}
 		if (Len(numberStr) > 0)	// unclosed bracket; add bracketBgn and whatever is in numberStr; ex: "{0"
 			sb.Add(bracketBgn).Add(numberStr);
-		return sb.XtoStr();
+		return sb.To_str();
 	}
 	static String[] Split_do(String s, String spr, boolean skipChar13) {
 		if (String_.Eq(s, "")			// "".Split('a') return array with one member: ""

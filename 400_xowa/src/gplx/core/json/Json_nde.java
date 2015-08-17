@@ -31,6 +31,7 @@ public class Json_nde extends Json_itm_base implements Json_grp {
 		return rv;
 	}
 	public Json_itm Get_at(int i) {return subs[i];}
+	public Json_kv Get_kv(byte[] key) {return Json_kv.cast_(Get_itm(key));}
 	public Json_nde Get(String key) {return Get(Bry_.new_u8(key));}
 	public Json_nde Get(byte[] key) {
 		Json_kv kv = Json_kv.cast_(this.Get_itm(key)); if (kv == null) throw Err_.new_("json", "kv not found", "key", key);
@@ -48,6 +49,7 @@ public class Json_nde extends Json_itm_base implements Json_grp {
 		}
 		return null;
 	}
+	public boolean Has(byte[] key) {return Get_bry(key, null) != null;}
 	public byte[] Get_bry(byte[] key) {
 		byte[] rv = Get_bry(key, null); if (rv == null) throw Err_.new_("json", "key missing", "key", key);
 		return rv;
@@ -60,8 +62,7 @@ public class Json_nde extends Json_itm_base implements Json_grp {
 		if (kv_obj.Tid() != Json_itm_.Tid_kv) return or; // key is not a key_val
 		Json_kv kv = (Json_kv)kv_obj;
 		Json_itm val = kv.Val();
-		if (val == null) return or;
-		return val.Data_bry();
+		return (val == null) ? or : val.Data_bry();
 	}
 	public Json_nde Add_many(Json_itm... ary) {
 		int len = ary.length;

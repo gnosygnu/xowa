@@ -167,7 +167,7 @@ class GxwTextHtml_editor extends JEditorPane implements GxwTextHtml {
 			KeyVal atr = atrs[i];
 			sb.Add(atr.Key() + "=").Add(atr.Val_to_str_or_null()).Add_char_crlf();
 		}
-		return sb.XtoStr();
+		return sb.To_str();
 	}
 	Element Html_sel_elm() {
 		HTMLDocument doc = (HTMLDocument)this.getDocument();

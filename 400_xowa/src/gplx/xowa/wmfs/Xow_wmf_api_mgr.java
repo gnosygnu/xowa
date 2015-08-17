@@ -16,48 +16,16 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.wmfs; import gplx.*; import gplx.xowa.*;
+import gplx.core.json.*;
 import gplx.xowa.wmfs.data.*;
 public class Xow_wmf_api_mgr {
 	public void Trg_engine_key(String v) {this.trg_engine_key = v;} private String trg_engine_key = gplx.ios.IoEngine_.SysKey;
-	public void Api_exec(Xow_wmf_api_wkr wkr) {this.Api_exec(Wikis, wkr);}
-	public void Api_exec(String[] wiki_ary, Xow_wmf_api_wkr wkr) {
-		Gfo_usr_dlg usr_dlg = Xoa_app_.Usr_dlg();
-		int len = wiki_ary.length;
-		wkr.Api_init();
-		for (int i = 0; i < len; ++i) {
-			String wiki = wiki_ary[i];
-			if (!wkr.Api_wiki_enabled(wiki)) continue;
-			String call	= String_.Format("https://{0}/w/api.php?{1}", wiki, wkr.Api_qargs());	// EX: https://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=namespaces
-			usr_dlg.Prog_many("", "", "wmf_api:calling; wiki=~{0} api=~{1}", wiki, call);
-			byte[] rslt = null;
-			for (int j = 0; j < 5; ++j) {
-				rslt = Io_mgr.I.DownloadFil_args("", null).User_agent_(Xoa_app_.User_agent).Trg_engine_key_(trg_engine_key).Exec_as_bry(call);
-				if (rslt != null) break;
-				usr_dlg.Warn_many("", "", "wmf_api:wmf api returned nothing; retrying; api=~{0}", call);
-				gplx.core.threads.Thread_adp_.Sleep(1000);
-			}
-			if (rslt == null) {
-				usr_dlg.Warn_many("", "", "wmf_api:wmf api returned nothing; api=~{0}", call);
-				continue;
-			}
-			wkr.Api_exec(wiki, rslt);
-		}
-		wkr.Api_term();
-	}
-	public void Api_exec2(String[] wiki_ary, Xow_wmf_api_wkr[] wkr) {
-		Gfo_usr_dlg usr_dlg = Xoa_app_.Usr_dlg();
-		int len = wiki_ary.length;
-		String all_args = "";
-		Xowmf_json_tbl json_tbl = new Xowmf_json_tbl(null);
-		for (int i = 0; i < len; ++i) {
-			String wiki = wiki_ary[i];
-			String call	= String_.Format("https://{0}/w/api.php?{1}", wiki, all_args);	// EX: https://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=namespaces
-			usr_dlg.Prog_many("", "", "wmf_api:calling; wiki~{0} api=~{1}", wiki, call);
-			byte[] rslt = Io_mgr.I.DownloadFil_args("", null).Trg_engine_key_(trg_engine_key).Exec_as_bry(call);
-			if (rslt == null) {usr_dlg.Warn_many("", "", "wmf_api:wmf api returned nothing; api=~{0}", call); continue;}
-			int site_id = -1;
-			json_tbl.Insert(site_id, DateAdp_.Now(), rslt);
-		}
+	public byte[] Api_exec(Gfo_usr_dlg usr_dlg, Xowmf_mgr wmf_mgr, String domain_str, String api_args) {
+		String call	= String_.Format("https://{0}/w/api.php?{1}", domain_str, api_args);	// EX: https://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=namespaces
+		usr_dlg.Prog_many("", "", "wmf_api:calling; wiki~{0} api=~{1}", domain_str, call);
+		byte[] rslt = wmf_mgr.Download_wkr().Download_xrg().Trg_engine_key_(trg_engine_key).Exec_as_bry(call);
+		if (rslt == null) usr_dlg.Warn_many("", "", "wmf_api:wmf api returned nothing; api=~{0}", call);
+		return rslt;
 	}
 	public static String[] Wikis = new String[]
 { "commons.wikimedia.org"
@@ -269,7 +237,7 @@ public class Xow_wmf_api_mgr {
 , "uk.wikiquote.org"
 , "uk.wikinews.org"
 , "uk.wikivoyage.org"
-, "uk.wikimedia.org"
+, "ua.wikimedia.org"
 , "vi.wikipedia.org"
 , "vi.wiktionary.org"
 , "vi.wikisource.org"
@@ -884,6 +852,7 @@ public class Xow_wmf_api_mgr {
 , "zu.wikibooks.org"
 , "gom.wikipedia.org"
 , "lrc.wikipedia.org"
+, "azb.wikipedia.org"
 };
 //, "als.wikisource.org"
 //, "als.wikinews.org"

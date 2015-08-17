@@ -46,7 +46,7 @@ public class Fsm_bin_mgr {
 	}
 	public void Txn_bgn() {
 		for (int i = 0; i < dbs__ary_len; ++i)
-			dbs__ary[i].Conn().Txn_bgn();
+			dbs__ary[i].Conn().Txn_bgn("fsdb__meta__bin");
 	}
 	public void Txn_end() {
 		for (int i = 0; i < dbs__ary_len; ++i)

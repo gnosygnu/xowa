@@ -30,6 +30,7 @@ class Xobd_page_dump_tbl {
 	}
 	public void Create_data(Io_url page_db_url, int text_db_id) {
 		conn.Ddl_create_tbl(Db_meta_tbl.new_(Tbl_name, flds));
+		conn.Stmt_delete(Tbl_name).Exec_delete();	// always clear tables again; allows commands to be rerun; DATE:2015-08-04
 		Db_attach_cmd.new_(conn, "page_db", page_db_url)
 			.Add_fmt("text_db_prep.clone_page", Sql_insert_data, text_db_id)
 			.Exec();

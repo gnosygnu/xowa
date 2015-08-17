@@ -42,15 +42,15 @@ public class Xob_stat_mgr {
 			}
 			sb.Add_str_w_crlf(ns);
 		}
-		return sb.XtoStr();
+		return sb.To_str();
 	}
-	public String XtoStr() {
+	public String To_str() {
 		String_bldr sb = String_bldr_.new_();
 		for (int i = 0; i < regy.Count(); i++) {
 			Xob_stat_type typ = (Xob_stat_type)regy.Get_at(i);
-			typ.XtoStr(sb);
+			typ.To_str(sb);
 		}
-		return sb.XtoStr();
+		return sb.To_str();
 	}
 	String[] GetNmsAry(Xow_ns_mgr nsMgr) {
 		Ordered_hash nsRegy = Ordered_hash_.new_();

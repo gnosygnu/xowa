@@ -29,12 +29,12 @@ public class Xoud_history_mgr implements GfoInvkAble {
 //			async_mgr.Queue(this, Invk_update, "wiki", String_.new_u8(url.Wiki_bry()), "page", String_.new_u8(url.Page_bry()), "qarg", String_.new_u8(url.Args_all_as_bry()));
 	}
 	private void Update(String wiki, String page, String qarg) {
-		Xoud_history_row row = history_tbl.Select_by_page(wiki, page, qarg);
-		DateAdp time = DateAdp_.Now();
-		if (row == null)
-			history_tbl.Insert(wiki, page, qarg, time, 1);
-		else
-			history_tbl.Update(wiki, page, qarg, time, row.History_count() + 1);
+//			Xoud_history_row row = history_tbl.Select_by_page(wiki, page, qarg);
+//			DateAdp time = DateAdp_.Now();
+//			if (row == null)
+//				history_tbl.Insert(wiki, page, qarg, time, 1);
+//			else
+//				history_tbl.Update(wiki, page, qarg, time, row.Count() + 1);
 	}
 	public void Select(List_adp rv, int top) {
 		history_tbl.Select_by_top(rv, top);

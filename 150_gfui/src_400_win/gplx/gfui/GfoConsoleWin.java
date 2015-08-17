@@ -64,10 +64,10 @@ public class GfoConsoleWin implements GfoInvkAble, UsrMsgWkr {
 	}
 	public void ExecUsrMsg(int type, UsrMsg umsg) {
 		if (win == null) this.Init();
-		String s = umsg.XtoStr();
+		String s = umsg.To_str();
 		if		(type == UsrMsgWkr_.Type_Warn) {
 			if (!win.Pin()) win.Pin_();
-			s = "!!warn!! " + umsg.XtoStr();
+			s = "!!warn!! " + umsg.To_str();
 			if (logger == null) return;
 			logger.Write(s);
 		}

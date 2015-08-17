@@ -40,7 +40,7 @@ public class GfmlNde implements GfmlItm {
 	public GfmlDocPos		DocPos() {return docPos;} GfmlDocPos docPos = GfmlDocPos_.Null;
 	public GfmlItmKeys		SubKeys() {return subKeys;} GfmlItmKeys subKeys = GfmlItmKeys.new_();
 	public GfmlItmHnds		SubHnds() {return subHnds;} GfmlItmHnds subHnds = GfmlItmHnds.new_();
-	public String			XtoStr() {return GfmlDocWtr_.xtoStr_(this);}
+	public String			To_str() {return GfmlDocWtr_.xtoStr_(this);}
 	public void				UpdateNde(String hnd) {
 		for (int i = 0; i < subHnds.Count(); i++) {
 			GfmlNde nde = (GfmlNde)subHnds.Get_at(i);

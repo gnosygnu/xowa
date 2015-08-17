@@ -62,12 +62,12 @@ public class Array_ {
 		CopyTo(src, 0, trg, 0, copy_len);
 		return trg;
 	}
-	public static String XtoStr(Object ary) {	
+	public static String To_str(Object ary) {	
 		String_bldr sb = String_bldr_.new_();
 		int ary_len = Len(ary);
 		for (int i = 0; i < ary_len; i++)
 			sb.Add_obj(Get(ary, i)).Add_char_nl();
-		return sb.XtoStr();
+		return sb.To_str();
 	}
 		public static int Len(Object ary) {return Array.getLength(ary);}
 	public static final int LenAry(Object[] ary) {return ary == null ? 0 : ary.length;}

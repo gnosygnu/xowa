@@ -51,7 +51,7 @@ public class ClipboardAdp_ {
 				}
 				remake.Add(c);
 			}				
-			rv = remake.XtoStr();
+			rv = remake.To_str();
 //			rv = String_.Replace(rv, "\n", Env_.NewLine);
 		}
 		return rv;

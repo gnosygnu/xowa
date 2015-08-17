@@ -99,7 +99,7 @@ public class Xoi_cmd_wiki_tst {
 		bfr.Add_byte_pipe();
 		bfr.Add_str(dump_file.File_modified().XtoStr_fmt_yyyy_MM_dd_HH_mm());
 		bfr.Add_byte_pipe();
-//			bfr.Add_str(String_.ConcatWith_any(",", (Object[])dump_file.Dump_available_dates()));
+//			bfr.Add_str(String_.Concat_with_obj(",", (Object[])dump_file.Dump_available_dates()));
 //			bfr.Add_byte_pipe();
 		bfr.Add_str(dump_file.Dump_date());
 		bfr.Add_byte_nl();

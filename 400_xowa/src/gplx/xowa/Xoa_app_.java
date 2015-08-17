@@ -19,16 +19,48 @@ package gplx.xowa; import gplx.*;
 import gplx.core.consoles.*; import gplx.dbs.*; import gplx.ios.*; import gplx.gfui.*; 
 import gplx.xowa.apps.*; import gplx.xowa.langs.*; import gplx.xowa.users.*;
 import gplx.xowa.files.*; import gplx.xowa.html.hdumps.*; import gplx.xowa.html.hdumps.core.*;
+import gplx.xowa.gui.views.boots.*;
 import gplx.xowa.urls.encoders.*;
 public class Xoa_app_ {
 	public static void Run(String... args) {
-		Xoa_app_boot_mgr boot_mgr = new Xoa_app_boot_mgr();
-		boot_mgr.Run(args);
+		try {
+			Xoa_app_boot_mgr boot_mgr = new Xoa_app_boot_mgr();
+			boot_mgr.Run(args);
+		} catch (Error e) {	
+			String err_text = e.toString();
+			String err_details = String_.Concat_lines_nl_skip_last
+			( "OS: " + Op_sys.Cur().Os_name()
+			, "Java: " + Env_.Env_prop__java_version() + " (" + Op_sys.Cur().Bitness_str() + " bit)"
+			, "Java path: " + Env_.Env_prop("java.home")
+			, "XOWA: " + Version
+			, "XOWA path: " + Env_.AppUrl().Raw()
+			, ""
+			, "Error: " + err_text
+			, "Stack: " + Err_.Trace_lang(e)
+			);
+			String full_msg = String_.Concat_lines_nl_skip_last
+			( "Sorry! XOWA failed to run!"
+			, ""
+			, "Please check the TROUBLESHOOTING section in the readme.txt for known issues."
+			, ""
+			, "You can also open an issue or send an email with the data below."
+			, ""
+			, "Thanks!"
+			, ""
+			, "----"
+			, err_details
+			);
+			if (Op_sys.Cur().Tid_is_osx())
+				Console_adp__sys.I.Write_str(err_text);
+			else
+				new Xog_error_win(new Xog_error_data(full_msg, err_details, err_text));
+			Gfo_usr_dlg_.I.Log_many("", "", err_details);
+		}
 	}
 	public static final String Name = "xowa";
-	public static final String Version = "2.8.1.1";
+	public static final String Version = "2.8.3.1";
 	public static String Build_date = "2012-12-30 00:00:00";
-	public static String Op_sys;
+	public static String Op_sys_str;
 	public static String User_agent = "";
 	public static final Gfo_msg_grp Nde = Gfo_msg_grp_.prj_(Name);
 	public static Gfo_usr_dlg usr_dlg_console_() {
@@ -65,7 +97,7 @@ class Xoa_app_boot_mgr {
 		Io_url jar_url = Env_.AppUrl();
 		Xoa_app_.Build_date = Io_mgr.I.QueryFil(jar_url).ModifiedTime().XtoUtc().XtoStr_fmt("yyyy-MM-dd HH:mm");
 		log_wtr.Log_to_session_fmt("env.init: jar_url=~{0}; build_date=~{1}", jar_url.NameAndExt(), Xoa_app_.Build_date);
-		log_wtr.Log_to_session_fmt("env.init: op_sys=~{0}", Op_sys.Cur().Xto_str());
+		log_wtr.Log_to_session_fmt("env.init: op_sys=~{0}", Op_sys.Cur().To_str());
 		chkpoint = "init_env";
 		return true;
 	}
@@ -86,7 +118,7 @@ class Xoa_app_boot_mgr {
 			,	App_cmd_arg.opt_("wiki_dir").Example_url_("C:\\xowa\\wiki\\").Note_("directory for wikis; defaults to '/xowa/wiki/'")
 			,	App_cmd_arg.opt_("bin_dir_name").Example_("windows").Note_("platform-dependent directory name inside /xowa/bin/; valid values are 'linux', 'macosx', 'windows', 'linux_64', 'macosx_64', 'windows_64'; defaults to detected version")
 			,	App_cmd_arg.opt_("app_mode").Example_("gui").Note_("type of app to run; valid values are 'gui', 'cmd', 'server', 'http_server'; defaults to 'gui'")
-			,	App_cmd_arg.opt_("cmd_file").Example_url_("C:\\xowa\\xowa.gfs").Note_("file_path of script to execute; defaults to 'xowa.gfs'")
+			,	App_cmd_arg.opt_("cmd_file").Example_url_("C:\\xowa\\bin\\any\\xowa\\cfg\\app\\xowa.gfs").Note_("file_path of script to execute; defaults to 'xowa.gfs'")
 			,	App_cmd_arg.opt_("cmd_text").Example_("\"app.shell.fetch_page('en.wikipedia.org/wiki/Earth', 'html');\"").Note_("script to run; runs after cmd_file; does nothing if empty; default is empty.\nCurrently a useful cmd is to do 'java -jar xowa_your_platform.jar --app_mode cmd --show_license n --show_args n --cmd_text \"app.shell.fetch_page('en.wikipedia.org/wiki/Earth' 'html');\"'. This will output the page's html to the console. You can also change 'html' to 'wiki' to get the wikitext.")
 			,	App_cmd_arg.opt_("url").Example_("en.wikipedia.org/wiki/Earth").Note_("url to be shown when xowa first launches; default is home/wiki/Main_Page")
 			,	App_cmd_arg.opt_("server_port_recv").Example_("55000").Note_("applies to --app_mode server; port where xowa server will receive messages; clients should send messages to this port")
@@ -124,22 +156,23 @@ class Xoa_app_boot_mgr {
 			Io_url root_dir = args_mgr.Args_get("root_dir").Val_as_url_rel_dir_or(jar_dir, jar_dir);
 			Io_url user_dir = args_mgr.Args_get("user_dir").Val_as_url_rel_dir_or(root_dir.GenSubDir("user"), root_dir.GenSubDir_nest("user", Xoue_user.Key_xowa_user));
 			Io_url wiki_dir = args_mgr.Args_get("wiki_dir").Val_as_url_rel_dir_or(root_dir.GenSubDir("wiki"), root_dir.GenSubDir("wiki"));
-			Io_url cmd_file = args_mgr.Args_get("cmd_file").Val_as_url_rel_fil_or(jar_dir, root_dir.GenSubFil("xowa.gfs"));
+			Io_url cmd_file = args_mgr.Args_get("cmd_file").Val_as_url_rel_fil_or(jar_dir, root_dir.GenSubFil_nest("bin", "any", "xowa", "cfg" ,"app", "xowa.gfs"));
 			String app_mode = args_mgr.Args_get("app_mode").Val_as_str_or("gui");
 			String launch_url = args_mgr.Args_get("url").Val_as_str_or(null);
 			int server_port_recv = args_mgr.Args_get("server_port_recv").Val_as_int_or(55000);
 			int server_port_send = args_mgr.Args_get("server_port_send").Val_as_int_or(55001);
 			int http_server_port = args_mgr.Args_get("http_server_port").Val_as_int_or(8080);
 			String http_server_home = args_mgr.Args_get("http_server_home").Val_as_str_or("home/wiki/Main_Page");
-			Xoa_app_.Op_sys = args_mgr.Args_get("bin_dir_name").Val_as_str_or(Bin_dir_name());
-			Xoa_app_.User_agent = String_.Format("XOWA/{0} ({1}) [gnosygnu@gmail.com]", Xoa_app_.Version, Xoa_app_.Op_sys);
+			Xoa_app_.Op_sys_str = args_mgr.Args_get("bin_dir_name").Val_as_str_or(Bin_dir_name());
+			Xoa_app_.User_agent = String_.Format("XOWA/{0} ({1}) [gnosygnu@gmail.com]", Xoa_app_.Version, Xoa_app_.Op_sys_str);
 			String cmd_text = args_mgr.Args_get("cmd_text").Val_as_str_or(null);
 			Xoa_app_type app_type = Xoa_app_type.parse(app_mode);
 			app_type_is_gui = app_type.Uid_is_gui();
+			Xog_splash_win splash_win = new Xog_splash_win(app_type_is_gui);
 
 			// init app
 			Db_conn_bldr.I.Reg_default_sqlite();
-			app = new Xoae_app(usr_dlg, app_type, root_dir, wiki_dir, root_dir.GenSubDir("file"), user_dir, root_dir.GenSubDir_nest("user", "anonymous", "wiki"), Xoa_app_.Op_sys);
+			app = new Xoae_app(usr_dlg, app_type, root_dir, wiki_dir, root_dir.GenSubDir("file"), user_dir, root_dir.GenSubDir_nest("user", "anonymous", "wiki"), Xoa_app_.Op_sys_str);
 			usr_dlg.Log_wkr().Queue_enabled_(false); log_wtr.Log_to_session_fmt("app.init");
 			try {
 				app.Sys_cfg().Lang_(System_lang());
@@ -175,7 +208,7 @@ class Xoa_app_boot_mgr {
 					Console_adp__sys.I.Write_str_w_nl_utf8(Object_.Xto_str_strict_or_empty(app.Gfs_mgr().Run_str(cmd_text)));
 				}
 				if (app_type_is_gui) {
-					app.Gui_mgr().Run(); chkpoint = "run";
+					app.Gui_mgr().Run(splash_win); chkpoint = "run";
 				}
 				else	// teardown app, else lua will keep process running
 					if (gplx.xowa.xtns.scribunto.Scrib_core.Core() != null) gplx.xowa.xtns.scribunto.Scrib_core.Core().Term();

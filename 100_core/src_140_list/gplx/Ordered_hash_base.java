@@ -73,7 +73,7 @@ public class Ordered_hash_base extends Hash_adp_base implements Ordered_hash, Gf
 				.Add(":").Add(ordered.Get_at(i).toString())
 				.Add(Op_sys.Cur().Nl_str());
 		}
-		return sb.XtoStr();
+		return sb.To_str();
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_SetKeyOnly)) {

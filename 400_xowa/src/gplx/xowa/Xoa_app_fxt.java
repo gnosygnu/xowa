@@ -59,6 +59,14 @@ public class Xoa_app_fxt {
 		app.File_mgr().Repo_mgr().Set("trg:c", "mem/wiki/repo/trg/", "commons.wikimedia.org").Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2).Primary_(true);
 		wiki.File_mgr().Repo_mgr().Add_repo(Bry_.new_a7("src:c"), Bry_.new_a7("trg:c"));
 	}
+	public static void repo2_(Xoae_app app, Xowe_wiki wiki) {
+		app.File_mgr().Repo_mgr().Set("src:wiki", "mem/http/en.wikipedia.org/"		, wiki.Domain_str()).Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2);
+		app.File_mgr().Repo_mgr().Set("trg:wiki", "mem/file/en.wikipedia.org/"		, wiki.Domain_str()).Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2).Primary_(true);
+		wiki.File_mgr().Repo_mgr().Add_repo(Bry_.new_a7("src:wiki"), Bry_.new_a7("trg:wiki"));
+		app.File_mgr().Repo_mgr().Set("src:comm", "mem/http/commons.wikimedia.org/"	, "commons.wikimedia.org").Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2);
+		app.File_mgr().Repo_mgr().Set("trg:comm", "mem/file/commons.wikimedia.org/"	, "commons.wikimedia.org").Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2).Primary_(true);
+		wiki.File_mgr().Repo_mgr().Add_repo(Bry_.new_a7("src:comm"), Bry_.new_a7("trg:comm"));
+	}
 	public static void Init_gui(Xoae_app app, Xowe_wiki wiki) {
 		app.Gui_mgr().Browser_win().Init_by_kit(gplx.gfui.Mem_kit._);
 		app.Gui_mgr().Browser_win().Tab_mgr().Tabs_new_init(wiki, Xoae_page.Empty);

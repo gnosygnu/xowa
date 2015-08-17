@@ -24,6 +24,11 @@ public class Gfo_usr_dlg_ {
 			test = new Gfo_usr_dlg_base(Gfo_usr_dlg__log_.Noop, Gfo_usr_dlg__gui_.Test);
 		return test;
 	}	private static Gfo_usr_dlg_base test;
+	public static Gfo_usr_dlg Test_console() {
+		if (test_console == null)
+			test_console = new Gfo_usr_dlg_base(Gfo_usr_dlg__log_.Noop, Gfo_usr_dlg__gui_.Console);
+		return test_console;
+	}	private static Gfo_usr_dlg_base test_console;
 }
 class Gfo_usr_dlg_noop implements Gfo_usr_dlg {
 	public boolean Canceled() {return false;} public void Canceled_y_() {} public void Canceled_n_() {}

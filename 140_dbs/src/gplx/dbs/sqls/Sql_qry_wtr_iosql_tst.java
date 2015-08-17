@@ -55,6 +55,6 @@ public class Sql_qry_wtr_iosql_tst {
 		String_bldr sb = String_bldr_.new_();
 		Sql_qry_wtr_ansi whereWtr = (Sql_qry_wtr_ansi)Sql_qry_wtr_.new_ansi();
 		whereWtr.Bld_where_val(sb, crt);
-		Tfds.Eq(expd, sb.XtoStr());
+		Tfds.Eq(expd, sb.To_str());
 	}
 }

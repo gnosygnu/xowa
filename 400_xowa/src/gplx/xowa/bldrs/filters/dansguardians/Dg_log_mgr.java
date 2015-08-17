@@ -31,7 +31,7 @@ class Dg_log_mgr {
 		tbl_rule.Conn_(conn, created);
 		tbl_page_score.Conn_(conn, created);
 		tbl_page_rule.Conn_(conn, created);
-		conn.Txn_bgn();
+		conn.Txn_bgn("dansguardian");
 	}
 	public void Insert_file(Dg_file file) {tbl_file.Insert(file.Id(), file.Rel_path(), file.Lines().length);}
 	public void Insert_rule(Dg_rule rule) {tbl_rule.Insert(rule.File_id(), rule.Id(), rule.Idx(), rule.Score(), Dg_word.Ary_concat(rule.Words(), tmp_bfr, Byte_ascii.Tilde));}

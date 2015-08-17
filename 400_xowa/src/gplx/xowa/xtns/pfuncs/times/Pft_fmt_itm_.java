@@ -108,7 +108,7 @@ public class Pft_fmt_itm_ {
 	, Hijiri_day_idx			= new Pft_fmt_itm_hijiri_day_idx()
 	, Hijiri_month_name			= new Pft_fmt_itm_hijiri_month_name()
 	;
-	public static final Btrie_fast_mgr Regy = Btrie_fast_mgr.cs_()
+	public static final Btrie_fast_mgr Regy = Btrie_fast_mgr.cs()
 	.Add(Byte_ascii.Ltr_Y		, Pft_fmt_itm_.Year_len4)				// 2012
 	.Add(Byte_ascii.Ltr_y		, Pft_fmt_itm_.Year_len2)				// 12
 	.Add(Byte_ascii.Ltr_L		, Pft_fmt_itm_.Year_isLeap)				// 1,0

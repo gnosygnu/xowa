@@ -52,7 +52,7 @@ public class Xoa_url_parser__xwiki_tst {
 		tstr.Run_parse(en_s, "Category:A").Chk_wiki("en.wikisource.org").Chk_page("Category:A");
 	}		
 	@Test  public void Case_sensitive() {
-		// tstr.Run_parse("en.wikipedia.org/wiki/a").Chk_wiki("en.wikipedia.org").Chk_page("A");	// TODO: enforce case sentitive?
+		// tstr.Run_parse("en.wikipedia.org/wiki/a").Chk_wiki("en.wikipedia.org").Chk_page("A");
 		Xowe_wiki en_d = tstr.Prep_create_wiki("en.wiktionary.org");
 		Xow_ns_mgr ns_mgr = en_d.Ns_mgr();
 

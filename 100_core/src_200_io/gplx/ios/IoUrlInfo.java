@@ -131,7 +131,7 @@ class IoUrlInfo_wnt extends IoUrlInfo_base {
 	@Override public boolean Match(String raw)	{return String_.Len(raw) > 1 && String_.CharAt(raw, 1) == ':';} // 2nd char is :; assumes 1 letter drives
 	@Override public String XtoRootName(String raw, int rawLen) {
 		return rawLen == 3 && String_.CharAt(raw, 1) == ':' // only allow single letter drives; ex: C:\; note, CharAt(raw, 1) to match Match
-			? Char_.XtoStr(String_.CharAt(raw, 0))
+			? Char_.To_str(String_.CharAt(raw, 0))
 			: null;
 	}
 	public static final IoUrlInfo_wnt _ = new IoUrlInfo_wnt(); IoUrlInfo_wnt() {}

@@ -101,9 +101,6 @@ public class Xoue_user implements Xou_user, GfoEvMgrOwner, GfoInvkAble {
 	public static final String Key_xowa_user = "anonymous";
 	public static final String Evt_lang_changed = "lang_changed";
 	public void Available_from_fsys() {
-		Io_url bookmarks_dir = fsys_mgr.Home_wiki_dir().GenSubDir_nest("wiki", "home", "ns", "730");	// NOTE: putting bookmark check here (instead of at init) b/c Init runs before xowa.gfs, and Bookmarks needs xowa.gfs to run first
-		if (!Io_mgr.I.ExistsDir(bookmarks_dir)) Xou_user_.Bookmarks_make(app, this.Wiki());
-
 		Io_url[] dirs = Io_mgr.I.QueryDir_args(app.Fsys_mgr().Wiki_dir()).Recur_(false).DirOnly_().ExecAsUrlAry();
 		Xowe_wiki usr_wiki = Wiki();
 		int dirs_len = dirs.length;

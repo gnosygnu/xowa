@@ -54,7 +54,7 @@ public abstract class GfmlDataRdr_base extends DataRdr_base implements DataRdr {
 		return rv;
 	}		
 	public void Rls() {}
-	public String XtoStr() {return curNde.XtoStr();}
+	public String To_str() {return curNde.To_str();}
 	@gplx.Internal protected void SetNode(GfmlNde curNde) {this.curNde = curNde; this.list = curNde.SubHnds();}
 	GfmlNde curNde; GfmlItmHnds list; int pos = -1;
 }

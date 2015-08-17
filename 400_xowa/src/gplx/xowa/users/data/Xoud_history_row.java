@@ -17,17 +17,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 public class Xoud_history_row {
-	public Xoud_history_row(String history_wiki, String history_page, String history_qarg, DateAdp history_time, int history_count) {
-		this.history_wiki = history_wiki;
-		this.history_page = history_page;
-		this.history_qarg = history_qarg;
-		this.history_time = history_time;
-		this.history_count = history_count;
+	public Xoud_history_row(int id, byte[] wiki, byte[] url, DateAdp time, int count) {
+		this.id = id;
+		this.wiki = wiki; this.url = url;
+		this.time = time; this.count = count;
 	}
-	public String History_wiki() {return history_wiki;} private final String history_wiki;
-	public String History_page() {return history_page;} private final String history_page;
-	public String History_qarg() {return history_qarg;} private final String history_qarg;
-	public DateAdp History_time() {return history_time;} private final DateAdp history_time;
-	public int History_count() {return history_count;} private final int history_count;
-	public static final Xoud_history_row Null = null;
+	public int Id() {return id;} private final int id;
+	public byte[] Wiki() {return wiki;} private final byte[] wiki;
+	public byte[] Url()  {return url;} private final byte[] url;
+	public DateAdp Time() {return time;} private final DateAdp time;
+	public int Count() {return count;} private final int count;
 }

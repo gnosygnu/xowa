@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.langs.cases; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import gplx.core.btries.*; import gplx.intl.*;
 public class Xol_case_mgr implements GfoInvkAble, Gfo_case_mgr {
-	private Bry_bfr tmp_bfr = Bry_bfr.new_(); private Btrie_fast_mgr upper_trie = Btrie_fast_mgr.cs_(), lower_trie = Btrie_fast_mgr.cs_(); private Xol_case_itm[] itms;
+	private Bry_bfr tmp_bfr = Bry_bfr.new_(); private Btrie_fast_mgr upper_trie = Btrie_fast_mgr.cs(), lower_trie = Btrie_fast_mgr.cs(); private Xol_case_itm[] itms;
 	public Xol_case_mgr(byte tid) {this.tid = tid;}
 	public byte Tid() {return tid;} private byte tid;
 	public Gfo_case_itm Get_or_null(byte bgn_byte, byte[] src, int bgn, int end) {

@@ -85,7 +85,7 @@ class Xofc_fil_mgr {
 			long cur_size = 0, actl_size = 0;
 			Xof_url_bldr url_bldr = new Xof_url_bldr();
 			List_adp deleted = List_adp_.new_();
-			tbl.Conn().Txn_bgn();
+			tbl.Conn().Txn_bgn("user__file_cache__compress");
 			long compress_to = cfg_mgr.Cache_min();
 			for (int i = 0; i < len; ++i) {
 				Xofc_fil_itm itm = (Xofc_fil_itm)hash.Get_at(i);
@@ -124,7 +124,7 @@ class Xofc_fil_mgr {
 		wiki.Init_assert();
 		Xof_repo_itm trg_repo = repo_mgr.Get_by_primary(wiki_domain);
 		byte[] ttl = itm.Name();			
-		byte[] md5 = Xof_file_wkr_.Md5_(ttl);
+		byte[] md5 = Xof_file_wkr_.Md5(ttl);
 		int itm_ext_id = itm.Ext().Id();
 		Io_url fil_url = url_bldr.Init_for_trg_file(mode_id, trg_repo, ttl, md5, itm.Ext(), itm.W()
 			, Xof_lnki_time.Convert_to_xowa_thumbtime	(itm_ext_id, itm.Time())

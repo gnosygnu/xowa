@@ -81,7 +81,7 @@ public class DbMaprWtr extends DataWtr_base implements DataWtr {
 	public void WriteLeafBgn(String leafName) {}
 	public void WriteLeafEnd() {}
 	public void Clear() {}
-	public String XtoStr() {return "";}
+	public String To_str() {return "";}
 	@Override public SrlMgr SrlMgr_new(Object o) {return new DbMaprWtr();}
 	DbMaprMgr mgr; Db_conn conn; String curTableName; Db_qry_insert insertCmd;		
 	public static DbMaprWtr new_by_url_(Db_conn_info url) {

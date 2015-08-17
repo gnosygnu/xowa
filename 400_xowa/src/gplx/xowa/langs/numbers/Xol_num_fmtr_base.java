@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.langs.numbers; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
 public class Xol_num_fmtr_base implements GfoInvkAble {
-	private Btrie_fast_mgr dlm_trie = Btrie_fast_mgr.cs_(); 
+	private Btrie_fast_mgr dlm_trie = Btrie_fast_mgr.cs(); 
 	private Xol_num_grp[] grp_ary = Xol_num_grp.Ary_empty; int grp_ary_len;
 	private Gfo_num_fmt_wkr[] cache; int cache_len = 16;
 	private Bry_bfr tmp = Bry_bfr.new_();

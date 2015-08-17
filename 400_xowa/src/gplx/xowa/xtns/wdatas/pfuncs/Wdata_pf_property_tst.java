@@ -46,7 +46,7 @@ public class Wdata_pf_property_tst {
 	@Test   public void Time() {
 		fxt.Init_links_add("enwiki", "Test_page", "q1");
 		fxt.Init_pages_add(fxt.doc_("q1", fxt.Make_claim_time(1, "2012-01-02 03:04:05")));
-		fxt.Test_parse("{{#property:p1}}", "+00000002012-01-02T03:04:05Z");
+		fxt.Test_parse("{{#property:p1}}", "30405 2 Jan 2012");	// NOTE: format is missing ":" b/c test does not init messages for html_wtr;  DATE:2015-08-03
 	}
 	@Test   public void Geodata() {
 		fxt.Init_links_add("enwiki", "Test_page", "q1");

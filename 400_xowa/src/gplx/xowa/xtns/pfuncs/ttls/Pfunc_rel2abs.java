@@ -21,7 +21,7 @@ public class Pfunc_rel2abs extends Pf_func_base {
 	@Override public boolean Func_require_colon_arg() {return true;}
 	private static final byte[] Ary_dot_slash = Bry_.new_a7("./"), Ary_dot_dot = Bry_.new_a7(".."), Ary_dot_dot_slash = Bry_.new_a7("../");
 	private static void qry_bgns_with_init() {
-		qry_bgns_with = Btrie_fast_mgr.cs_();
+		qry_bgns_with = Btrie_fast_mgr.cs();
 		qry_bgns_with.Add(Byte_ascii.Slash, Int_obj_ref.new_(Id_slash));
 		qry_bgns_with.Add(Byte_ascii.Dot, Int_obj_ref.new_(Id_dot));
 		qry_bgns_with.Add(Ary_dot_slash, Int_obj_ref.new_(Id_dot_slash));

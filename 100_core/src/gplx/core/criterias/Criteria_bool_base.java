@@ -22,7 +22,7 @@ public abstract class Criteria_bool_base implements Criteria {
 	public abstract boolean	Matches(Object curVal);
 	public void				Val_from_args(Hash_adp args) {lhs.Val_from_args(args); rhs.Val_from_args(args);}
 	public void				Val_as_obj_(Object v) {throw Err_.new_unimplemented();}
-	public String			XtoStr() {return String_.Concat(lhs.XtoStr(), " ", this.op_literal, " ", rhs.XtoStr());}
+	public String			To_str() {return String_.Concat(lhs.To_str(), " ", this.op_literal, " ", rhs.To_str());}
 	public String			Op_literal() {return op_literal;} private String op_literal;
 	public Criteria			Lhs() {return lhs;} private Criteria lhs;
 	public Criteria			Rhs() {return rhs;} private Criteria rhs;
@@ -44,7 +44,7 @@ class Criteria_const implements Criteria {
 	public boolean				Matches(Object comp) {return val;} private final boolean val;
 	public void				Val_from_args(Hash_adp args) {;}
 	public void				Val_as_obj_(Object v) {throw Err_.new_unimplemented();}
-	public String			XtoStr() {return String_.Concat(" IS ", Bool_.Xto_str_lower(val));}
+	public String			To_str() {return String_.Concat(" IS ", Bool_.Xto_str_lower(val));}
 }
 class Criteria_not implements Criteria {
 	private final Criteria criteria;
@@ -53,5 +53,5 @@ class Criteria_not implements Criteria {
 	public boolean				Matches(Object obj) {return !criteria.Matches(obj);}
 	public void				Val_from_args(Hash_adp args) {criteria.Val_from_args(args);}
 	public void				Val_as_obj_(Object v) {criteria.Val_as_obj_(v);}
-	public String			XtoStr() {return String_.Concat_any(" NOT ", criteria.XtoStr());}
+	public String			To_str() {return String_.Concat_any(" NOT ", criteria.To_str());}
 }

@@ -53,7 +53,7 @@ public class IptBndMgr_tst {
 				IptEventData evData = IptEventData.new_(null, IptArg_.EventType_default(arg), arg, null, null);
 				under.Process(evData);
 			}
-			Tfds.Eq(expd, output.XtoStr());
+			Tfds.Eq(expd, output.To_str());
 			return this;
 		}
 		String_bldr output = String_bldr_.new_();

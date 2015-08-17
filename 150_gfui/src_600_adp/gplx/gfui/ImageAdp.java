@@ -42,7 +42,7 @@ class ImageAdp_txt implements ImageAdp {
 	public void Rls() {disposed = true;}
 	public void SaveAsBmp(Io_url url) {SaveAs(url, ".bmp");}
 	public void SaveAsPng(Io_url url) {SaveAs(url, ".png");}
-	void SaveAs(Io_url url, String ext) {Io_mgr.I.SaveFilStr(url.GenNewExt(ext), size.XtoStr());}
+	void SaveAs(Io_url url, String ext) {Io_mgr.I.SaveFilStr(url.GenNewExt(ext), size.To_str());}
 	public ImageAdp Extract_image(RectAdp src_rect, SizeAdp trg_size) {return Extract_image(src_rect.X(), src_rect.Y(), src_rect.Width(), src_rect.Height(), trg_size.Width(), trg_size.Height());}
 	public ImageAdp Extract_image(int src_x, int src_y, int src_w, int src_h, int trg_w, int trg_h) {return ImageAdp_.txt_mem_(Io_url_.Empty, SizeAdp_.new_(trg_w, trg_h));}
 	public ImageAdp Resize(int width, int height) {return ImageAdp_.txt_mem_(Io_url_.Empty, SizeAdp_.new_(width, height));}

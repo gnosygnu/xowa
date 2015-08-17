@@ -47,7 +47,7 @@ public class Xohd_hdump_rdr {
 		synchronized (dbpg) {
 			dbpg.Clear();
 			if (	!Get_by_ttl__fill_hpg(rv, ttl)
-				||	rv.Page_body() == null) {	// occurs when row exists in page, but not in html
+				||	rv.Page_body() == null) {	// occurs when row exists in page_table, but not in html_table
 				rv.Exists_n_();
 				return;
 			}

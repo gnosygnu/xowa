@@ -89,7 +89,7 @@ public class XmlDataWtr_tst {
 	}
 	void tst_XStr(XmlDataWtr wtr, String... parts) {
 		String expd = String_.Concat(parts);
-		Tfds.Eq(expd, wtr.XtoStr());
+		Tfds.Eq(expd, wtr.To_str());
 	}
 	XmlDataWtr wtr;
 }

@@ -21,13 +21,13 @@ public class CharStream_tst {
 	@Before public void setup() {
 		stream = CharStream.pos0_("abcdefgh");
 	}
-	@Test  public void XtoStr() {
-		Tfds.Eq(stream.XtoStr(), "abcdefgh");
+	@Test  public void To_str() {
+		Tfds.Eq(stream.To_str(), "abcdefgh");
 	}
 	@Test  public void CurrentText() {
 		stream.MoveNextBy(1);
 		Tfds.Eq(stream.XtoStrAtCur(2), "bc");
-		Tfds.Eq(stream.XtoStr(), "abcdefgh");
+		Tfds.Eq(stream.To_str(), "abcdefgh");
 	}
 	@Test  public void CurrentText_outOfBounds() {
 		stream.MoveNextBy(7);

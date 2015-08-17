@@ -76,7 +76,7 @@ public class Xowd_xowa_db_tbl {
 		itm.Cmd_mode_(Db_cmd_mode.Tid_ignore);
 	}
 	private void Commit_itm_vals(Db_stmt stmt, Xowd_db_file itm) {
-		stmt.Val_byte(fld_type, itm.Tid()).Val_str(fld_url, itm.Url_rel()).Val_str(fld_ns_ids, itm.Ns_ids()).Val_int(fld_part_id, itm.Part_id()).Val_str(fld_guid, itm.Guid().XtoStr());
+		stmt.Val_byte(fld_type, itm.Tid()).Val_str(fld_url, itm.Url_rel()).Val_str(fld_ns_ids, itm.Ns_ids()).Val_int(fld_part_id, itm.Part_id()).Val_str(fld_guid, itm.Guid().To_str());
 	}
 }
 class Xowd_db_file_sorter__id implements gplx.lists.ComparerAble {

@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.gfui; import gplx.*;
-public class PointAdp implements XtoStrAble {
+public class PointAdp implements To_str_able {
 	public int X() {return x;} final int x;
 	public int Y() {return y;} final int y;
 	public		PointAdp Op_add(PointAdp val) {return new PointAdp(x + val.x, y + val.y);}
@@ -27,8 +27,8 @@ public class PointAdp implements XtoStrAble {
 		PointAdp comp = PointAdp_.as_(compObj); if (comp == null) return false;
 		return x == comp.x && y == comp.y;
 	}
-	public String XtoStr() {return String_.Concat_any(x, ",", y);}
-	@Override public String toString() {return XtoStr();}
+	public String To_str() {return String_.Concat_any(x, ",", y);}
+	@Override public String toString() {return To_str();}
 	@Override public boolean equals(Object obj) {return Eq(obj);}
 	@Override public int hashCode() {return super.hashCode();}
 	@gplx.Internal protected PointAdp(int x, int y) {this.x = x; this.y = y;}

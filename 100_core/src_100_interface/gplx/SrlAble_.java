@@ -19,18 +19,18 @@ package gplx;
 import gplx.core.strings.*;
 public class SrlAble_ {
 	public static SrlAble as_(Object obj) {return obj instanceof SrlAble ? (SrlAble)obj : null;}
-	public static String XtoStr(GfoMsg owner) {
+	public static String To_str(GfoMsg owner) {
 		String_bldr sb = String_bldr_.new_();
-		XtoStr(owner, sb, 0, false);
-		return sb.XtoStr();
+		To_str(owner, sb, 0, false);
+		return sb.To_str();
 	}
-	public static String XtoStr(Object o) {
+	public static String To_str(Object o) {
 		SrlAble s = SrlAble_.as_(o); if (s == null) return Object_.Xto_str_strict_or_null_mark(o);
 		GfoMsg m = GfoMsg_.new_parse_("root");
 		s.Srl(m);
-		return XtoStr(m);
+		return To_str(m);
 	}
-	static void XtoStr(GfoMsg owner, String_bldr sb, int depth, boolean indentOn) {
+	static void To_str(GfoMsg owner, String_bldr sb, int depth, boolean indentOn) {
 		String indent = String_.Repeat(" ", depth * 4);
 		if (indentOn) sb.Add(indent);
 		sb.Add(owner.Key()).Add(":");
@@ -46,7 +46,7 @@ public class SrlAble_ {
 		}
 		else if (subsCount == 1) {
 			sb.Add("{");
-			XtoStr(owner.Subs_getAt(0), sb, depth + 1, false);
+			To_str(owner.Subs_getAt(0), sb, depth + 1, false);
 			sb.Add("}");
 			return;
 		}
@@ -55,7 +55,7 @@ public class SrlAble_ {
 			if (subsCount > 1) sb.Add_char_crlf();
 			for (int i = 0; i < subsCount; i++) {
 				GfoMsg sub = owner.Subs_getAt(i);
-				XtoStr(sub, sb, depth + 1, true);
+				To_str(sub, sb, depth + 1, true);
 				sb.Add_char_crlf();
 			}
 			sb.Add(indent);

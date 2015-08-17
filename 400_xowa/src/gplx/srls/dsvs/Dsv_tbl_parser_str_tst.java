@@ -55,7 +55,7 @@ public class Dsv_tbl_parser_str_tst {
 	}
 }
 abstract class Mok_mgr_base extends Dsv_wkr_base {
-	public abstract XtoStrAble[] Itms();
+	public abstract To_str_able[] Itms();
 }
 class Dsv_mok_fxt {
 	private Dsv_tbl_parser tbl_parser = new Dsv_tbl_parser();
@@ -67,15 +67,15 @@ class Dsv_mok_fxt {
 	public Mok_mgr_base mgr_str_(int len) {return new Mok_str_mgr(len);}
 	public Mok_str_itm itm_str_(String... flds) {return new Mok_str_itm(flds);}
 	public Mok_int_itm itm_int_(String fld_0, int fld_1, int fld_2) {return new Mok_int_itm(fld_0, fld_1, fld_2);}
-	public void Test_load(String src, Mok_mgr_base mgr, XtoStrAble... expd) {
+	public void Test_load(String src, Mok_mgr_base mgr, To_str_able... expd) {
 		mgr.Load_by_bry(Bry_.new_u8(src));
 		Tfds.Eq_ary_str(expd, mgr.Itms());
 	}
 }
-class Mok_str_itm implements XtoStrAble {
+class Mok_str_itm implements To_str_able {
 	private String[] flds;
 	public Mok_str_itm(String[] flds) {this.flds = flds;}
-	public String XtoStr() {return String_.Concat_with_str("|", flds);}
+	public String To_str() {return String_.Concat_with_str("|", flds);}
 }
 class Mok_str_mgr extends Mok_mgr_base {
 	private int flds_len;
@@ -83,7 +83,7 @@ class Mok_str_mgr extends Mok_mgr_base {
 		this.flds_len = flds_len;
 	}
 	public void Clear() {itms.Clear();}
-	@Override public XtoStrAble[] Itms() {return (XtoStrAble[])itms.To_ary(XtoStrAble.class);} private List_adp itms = List_adp_.new_();
+	@Override public To_str_able[] Itms() {return (To_str_able[])itms.To_ary(To_str_able.class);} private List_adp itms = List_adp_.new_();
 	private List_adp flds = List_adp_.new_();
 	@Override public boolean Write_bry(Dsv_tbl_parser parser, int fld_idx, byte[] src, int bgn, int end) {
 		flds.Add(String_.new_u8(src, bgn, end));

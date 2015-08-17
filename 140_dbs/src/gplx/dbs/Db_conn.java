@@ -22,7 +22,7 @@ public class Db_conn {
 	public Db_conn(Db_engine engine) {this.engine = engine;}
 	public Db_conn_info		Conn_info()				{return engine.Conn_info();}
 	public boolean				Eq(Db_conn comp)		{return String_.Eq(engine.Conn_info().Xto_api(), comp.Conn_info().Xto_api());}
-	public void				Txn_bgn()				{engine.Txn_bgn("");}
+//		public void				Txn_bgn()				{engine.Txn_bgn("");}
 	public void				Txn_bgn(String name)	{engine.Txn_bgn(name);}
 	public void				Txn_end()				{engine.Txn_end();}
 	public void				Txn_cxl()				{engine.Txn_cxl();}
@@ -67,7 +67,7 @@ public class Db_conn {
 	public int				Exec_sql_plog_txn(String msg, String sql) {return Exec_sql_plog(Bool_.Y, msg, sql);}
 	public int				Exec_sql_plog(boolean txn, String msg, String sql) {
 		Gfo_usr_dlg_.I.Plog_many("", "", msg);
-		if (txn) this.Txn_bgn();
+		if (txn) this.Txn_bgn(msg);
 		int rv = Exec_sql(sql);
 		if (txn) this.Txn_end();
 		Gfo_usr_dlg_.I.Plog_many("", "", "done:" + msg);

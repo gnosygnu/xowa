@@ -33,7 +33,7 @@ public class Xowd_wbase_pid_tbl implements RlsAble {
 	}
 	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds));}
 	public void Create_idx() {conn.Ddl_create_idx(Xoa_app_.Usr_dlg(), Db_meta_idx.new_normal_by_tbl(tbl_name, "src", fld_src_lang, fld_src_ttl));}
-	public void Insert_bgn() {conn.Txn_bgn(); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
+	public void Insert_bgn() {conn.Txn_bgn("schema__wbase_pid__insert"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
 	public void Insert_end() {conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
 	public void Insert_cmd_by_batch(byte[] src_lang, byte[] src_ttl, byte[] trg_ttl) {
 		stmt_insert.Clear()

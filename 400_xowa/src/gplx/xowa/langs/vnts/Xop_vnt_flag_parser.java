@@ -100,7 +100,7 @@ class Xop_vnt_flag_parser {
 	}
 	private static Btrie_fast_mgr flag_trie = Xop_vnt_flag_.Trie;
 //		private static final byte Dlm_tid_bgn = 0, Dlm_tid_end = 1, Dlm_tid_pipe = 2, Dlm_tid_colon = 3, Dlm_tid_semic = 4, Dlm_tid_kv = 5;
-//		private static Btrie_fast_mgr dlm_trie = Btrie_fast_mgr.cs_()
+//		private static Btrie_fast_mgr dlm_trie = Btrie_fast_mgr.cs()
 //		.Add_bry_byte(Xop_vnt_lxr_.Hook_bgn	, Dlm_tid_bgn)
 //		.Add_bry_byte(Xop_vnt_lxr_.Hook_end		, Dlm_tid_end)
 //		.Add_bry_byte(Byte_ascii.Pipe				, Dlm_tid_pipe)

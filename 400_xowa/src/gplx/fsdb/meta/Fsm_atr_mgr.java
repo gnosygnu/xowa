@@ -29,6 +29,6 @@ public class Fsm_atr_mgr {
 	public Fsm_atr_fil		Db__core()		{return db__core;}
 	public Fsd_fil_itm		Select_fil_or_null(byte[] dir, byte[] fil)						{return db__core.Select_fil_or_null(dir, fil);}
 	public boolean				Select_thm(boolean exact, Fsd_thm_itm rv, int dir_id, int fil_id)	{return db__core.Select_thm(exact, rv, dir_id, fil_id);}
-	public void Txn_bgn()	{db__core.Conn().Txn_bgn();}
+	public void Txn_bgn()	{db__core.Conn().Txn_bgn("fsdb__fsm_atr_mgr");}
 	public void Txn_end()	{db__core.Conn().Txn_end();}
 }

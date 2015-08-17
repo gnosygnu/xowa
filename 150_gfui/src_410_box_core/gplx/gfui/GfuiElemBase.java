@@ -241,7 +241,7 @@ public class GfuiElemBase implements GfuiElem {
 					GfuiElem subE = (GfuiElem)this.SubElems().Get_at(i);
 					sb.Add_str_w_crlf(subE.Key_of_GfuiElem());
 				}
-				return sb.XtoStr();
+				return sb.To_str();
 			}
 			else {
 				Object rv = this.InvkMgr().Invk(ctx, ikey, k, m, this);

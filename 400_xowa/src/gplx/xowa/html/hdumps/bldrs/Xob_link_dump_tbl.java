@@ -48,7 +48,7 @@ class Xob_link_dump_tbl implements RlsAble {
 	public void Rls() {
 		stmt_insert = Db_stmt_.Rls(stmt_insert);
 	}
-	public void Insert_bgn() {conn.Txn_bgn();}
+	public void Insert_bgn() {conn.Txn_bgn("bldr__link_dump");}
 	public void Insert_end() {conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
 	public void Insert_cmd_by_batch(int src_page_id, int src_html_uid, int trg_ns, byte[] trg_ttl) {
 		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(Tbl_name, flds.To_str_ary_wo_autonum());

@@ -42,6 +42,6 @@ class Crt__match_exact implements Criteria {
 	}
 	public void			Val_as_obj_(Object v) {Val_as_bry_ary_((byte[][])v);}
 	public void			Val_from_args(Hash_adp args) {throw Err_.new_unimplemented();}
-	public String XtoStr() {return String_.Concat_any(this.To_str_name(), " ", String_.Ary(ary));}
+	public String To_str() {return String_.Concat_any(this.To_str_name(), " ", String_.Ary(ary));}
 	public byte Tid_match_exact = 12;
 }

@@ -18,12 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx;
 public class Op_sys {
 	Op_sys(byte tid, byte sub_tid, String os_name, byte bitness, String nl_str, byte fsys_dir_spr_byte, boolean fsys_case_match) {
-		this.tid = tid; this.sub_tid = sub_tid; this.os_name = os_name; this.bitness = bitness; this.nl_str = nl_str; this.fsys_dir_spr_byte = fsys_dir_spr_byte;  this.fsys_dir_spr_str = Char_.XtoStr((char)fsys_dir_spr_byte); this.fsys_case_match = fsys_case_match;
+		this.tid = tid; this.sub_tid = sub_tid; this.os_name = os_name; this.bitness = bitness; this.nl_str = nl_str; this.fsys_dir_spr_byte = fsys_dir_spr_byte;  this.fsys_dir_spr_str = Char_.To_str((char)fsys_dir_spr_byte); this.fsys_case_match = fsys_case_match;
 	}
 	public byte Tid() {return tid;} private final byte tid;
 	public byte Sub_tid() {return sub_tid;} private final byte sub_tid;
 	public String Os_name() {return os_name;} private String os_name;
 	public byte Bitness() {return bitness;} private final byte bitness;
+	public String Bitness_str() {return (bitness == Bitness_32 ? "32" : "64");}
 	public String Nl_str() {return nl_str;} private final String nl_str;
 	public String Fsys_dir_spr_str() {return fsys_dir_spr_str;} private final String fsys_dir_spr_str;
 	public byte Fsys_dir_spr_byte() {return fsys_dir_spr_byte;} private final byte fsys_dir_spr_byte;
@@ -34,7 +35,7 @@ public class Op_sys {
 	public boolean Tid_is_lnx() {return tid == Tid_lnx;}
 	public boolean Tid_is_osx() {return tid == Tid_osx;}
 	public boolean Tid_is_drd() {return tid == Tid_drd;}
-	public String Xto_str() {return os_name + (bitness == Bitness_32 ? "32" : "64");}
+	public String To_str() {return os_name + Bitness_str();}
 
 	public static final byte Tid_nil = 0, Tid_wnt = 1, Tid_lnx = 2, Tid_osx = 3, Tid_drd = 4;
 	public static final byte Sub_tid_unknown = 0, Sub_tid_win_xp = 1, Sub_tid_win_7 = 2, Sub_tid_win_8 = 3;

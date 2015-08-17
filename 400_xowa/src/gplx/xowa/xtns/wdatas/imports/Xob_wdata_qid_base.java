@@ -29,7 +29,7 @@ public abstract class Xob_wdata_qid_base extends Xob_itm_dump_base implements Xo
 	public void Wkr_bgn(Xob_bldr bldr) {
 		this.Init_dump(this.Wkr_key(), wiki.Tdb_fsys_mgr().Site_dir().GenSubDir_nest("data", "qid"));	// NOTE: must pass in correct make_dir in order to delete earlier version (else make_dirs will append)
 		this.parser = bldr.App().Wiki_mgr().Wdata_mgr().Jdoc_parser();
-		this.ns_parser = new Xob_wbase_ns_parser(Xowmf_site_tbl.Get_conn_or_new(bldr.App().Fsys_mgr().Root_dir()));
+		this.ns_parser = new Xob_wbase_ns_parser(bldr.App().Fsys_mgr().Cfg_site_meta_fil());
 		this.Qid_bgn();
 	}
 	public void Wkr_run(Xowd_page_itm page) {

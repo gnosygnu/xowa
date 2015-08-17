@@ -61,6 +61,6 @@ public class SrlAble__tst {
 			)
 			);
 	}
-	void tst_Srl_(GfoMsg m, String expd) {Tfds.Eq(expd, SrlAble_.XtoStr(m));}
+	void tst_Srl_(GfoMsg m, String expd) {Tfds.Eq(expd, SrlAble_.To_str(m));}
 }
 //class SrlAble__tst

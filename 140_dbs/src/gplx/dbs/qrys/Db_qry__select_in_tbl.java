@@ -56,7 +56,7 @@ public class Db_qry__select_in_tbl implements Db_qry {
 			if (having_sql		!= null) sb.Add(having_sql);
 			if (order_by_sql	!= null) {sb.Add(" ORDER BY "); sb.Add(order_by_sql);}
 			if (limit_sql		!= null) sb.Add(limit_sql);
-			return sb.XtoStr();
+			return sb.To_str();
 		}
 	}
 	public static Db_qry__select_in_tbl new_(String base_table, String[] where_flds, String[] select_flds, String[] order_flds) {

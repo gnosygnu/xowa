@@ -23,7 +23,7 @@ public class DbMaprRdr extends DataRdr_base implements SrlMgr {
 		mgr = (DbMaprMgr)this.EnvVars().Get_by_or_fail(DbMaprWtr.Key_Mgr);
 		DbMaprItm rootMapr = mgr.Root();
 
-		GfoNde tbl = GetTbl(rootMapr, rootCrt); int subsCount = tbl.Subs().Count(); if (subsCount == 0) return null; if (subsCount > 1) throw Err_.new_wo_type("criteria returned > 1 row", "criteria", rootCrt.XtoStr(), "subsCount", subsCount);
+		GfoNde tbl = GetTbl(rootMapr, rootCrt); int subsCount = tbl.Subs().Count(); if (subsCount == 0) return null; if (subsCount > 1) throw Err_.new_wo_type("criteria returned > 1 row", "criteria", rootCrt.To_str(), "subsCount", subsCount);
 		SrlObj root = subProto.SrlObj_New(null);
 		mgr.EnvStack_add(rootMapr, root); RowStack_add(tbl, 0);
 		root.SrlObj_Srl(this);

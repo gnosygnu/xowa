@@ -43,7 +43,7 @@ public class Db_cfg_tbl implements RlsAble {
 	public void Insert_int		(String grp, String key, int val)			{Insert_str(grp, key, Int_.Xto_str(val));}
 	public void Insert_long		(String grp, String key, long val)			{Insert_str(grp, key, Long_.Xto_str(val));}
 	public void Insert_date		(String grp, String key, DateAdp val)		{Insert_str(grp, key, val.XtoStr_fmt_yyyyMMdd_HHmmss());}
-	public void Insert_guid		(String grp, String key, Guid_adp val)		{Insert_str(grp, key, val.XtoStr());}
+	public void Insert_guid		(String grp, String key, Guid_adp val)		{Insert_str(grp, key, val.To_str());}
 	public void Insert_bry		(String grp, String key, byte[] val)		{Insert_str(grp, key, String_.new_u8(val));}
 	public void Insert_str		(String grp, String key, String val) {
 		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(tbl_name, flds);
@@ -56,7 +56,7 @@ public class Db_cfg_tbl implements RlsAble {
 	public void Update_int		(String grp, String key, int val)			{Update_str(grp, key, Int_.Xto_str(val));}
 	public void Update_long		(String grp, String key, long val)			{Update_str(grp, key, Long_.Xto_str(val));}
 	public void Update_date		(String grp, String key, DateAdp val)		{Update_str(grp, key, val.XtoStr_fmt_yyyyMMdd_HHmmss());}
-	public void Update_guid		(String grp, String key, Guid_adp val)		{Update_str(grp, key, val.XtoStr());}
+	public void Update_guid		(String grp, String key, Guid_adp val)		{Update_str(grp, key, val.To_str());}
 	public void Update_bry		(String grp, String key, byte[] val)		{Update_str(grp, key, String_.new_u8(val));}
 	public void Update_str		(String grp, String key, String val) {
 		if (stmt_update == null) stmt_update = conn.Stmt_update_exclude(tbl_name, flds, fld_grp, fld_key);

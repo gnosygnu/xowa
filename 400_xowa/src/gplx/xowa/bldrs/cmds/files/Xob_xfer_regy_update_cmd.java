@@ -37,7 +37,7 @@ public class Xob_xfer_regy_update_cmd extends Xob_itm_basic_base implements Xob_
 		Io_url fsdb_atr_url = ((gplx.dbs.engines.sqlite.Sqlite_conn_info)conn.Conn_info()).Url();
 		Sqlite_engine_.Tbl_create_and_delete(make_db_provider, Xob_fsdb_regy_tbl.Tbl_name, Xob_fsdb_regy_tbl.Tbl_sql);
 		Sqlite_engine_.Db_attach(make_db_provider, "fsdb_db", fsdb_atr_url.Raw());
-		make_db_provider.Txn_bgn();
+		make_db_provider.Txn_bgn("bldr__xfer_regy_update");
 		make_db_provider.Exec_sql(Xob_fsdb_regy_tbl.Update_regy_nil);
 		make_db_provider.Exec_sql(Xob_fsdb_regy_tbl.Insert_fsdb_fil);
 		String fsdb_thm_tbl = fsdb_abc_mgr.Db_mgr().File__schema_is_1() ? "fsdb_xtn_thm" : "fsdb_thm";
@@ -51,7 +51,7 @@ public class Xob_xfer_regy_update_cmd extends Xob_itm_basic_base implements Xob_
 		Sqlite_engine_.Db_detach(make_db_provider, "fsdb_db");
 	}
 	private void Update_status(Db_conn make_db_provider) {
-		make_db_provider.Txn_bgn();
+		make_db_provider.Txn_bgn("bldr__xfer_regy_update_status");
 		make_db_provider.Exec_sql(Xob_fsdb_regy_tbl.Update_regy_fil);
 		make_db_provider.Exec_sql(Xob_fsdb_regy_tbl.Update_regy_thm);
 		make_db_provider.Txn_end();

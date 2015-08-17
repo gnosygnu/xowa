@@ -17,29 +17,24 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa.apis.xowa.html; import gplx.*; import gplx.xowa.*; import gplx.xowa.apis.*; import gplx.xowa.apis.xowa.*;
 public class Xoapi_toggle_itm implements GfoInvkAble {
-	public Xoapi_toggle_itm(byte[] key_bry) {this.key_bry = key_bry;}
-	public byte[] Key_bry() {return key_bry;} private byte[] key_bry;
+	private final Xoae_app app;	// NOTE: needed to get "img_dir" below
+	private byte[] img_title_val_y, img_title_val_n;
+	public Xoapi_toggle_itm(Xoae_app app, byte[] key_bry) {
+		this.app = app; this.key_bry = key_bry;
+	}
+	public byte[] Key_bry() {return key_bry;} private final byte[] key_bry;
 	public byte[] Heading_bry() {return heading_bry;} private byte[] heading_bry;
 	public byte[] Icon_src() {return icon_src;} private byte[] icon_src = Bry_.Empty;
 	public byte[] Icon_title() {return icon_title;} private byte[] icon_title = Bry_.Empty;
 	public byte[] Elem_display() {return elem_display;} private byte[] elem_display = Bry_.Empty;
 	public byte[] Html_toggle_hdr_cls() {return html_toggle_hdr_cls;} public Xoapi_toggle_itm Html_toggle_hdr_cls_(byte[] v) {html_toggle_hdr_cls = v; return this;} private byte[] html_toggle_hdr_cls = Bry_.Empty;
 	public boolean Visible() {return visible;} private boolean visible;
-	public Xoapi_toggle_itm Init(Xowe_wiki wiki, byte[] heading_bry) {
-		if (Img_src_y == null) {
-			Io_url img_dir = wiki.Appe().Usere().Fsys_mgr().App_img_dir().GenSubDir_nest("window", "portal");
-			Img_src_y = img_dir.GenSubFil("twisty_down.png").To_http_file_bry();
-			Img_src_n = img_dir.GenSubFil("twisty_right.png").To_http_file_bry();
-		}
-		icon_src = visible ? Img_src_y : Img_src_n;
-		byte[] img_title_msg = visible ? Img_title_msg_y : Img_title_msg_n;
-		icon_title = wiki.Msg_mgr().Val_by_key_obj(img_title_msg);
-		elem_display = visible ? Img_display_y : Img_display_n;
-		this.heading_bry = heading_bry;
+	public Xoapi_toggle_itm Init(byte[] heading_bry) {
+		this.heading_bry = heading_bry;		// NOTE: sets "Wikis" or "In other languages"; Wikidata twisties are empty;
+		this.icon_title = app.Usere().Msg_mgr().Val_by_key_obj(visible ? Img_title_msg_y : Img_title_msg_n); // set title ("show" or "hide")
 		Html_toggle_gen();
 		return this;
 	}
-	private byte[] img_title_val_y, img_title_val_n;
 	public Xoapi_toggle_itm Init_fsys(Io_url img_dir) {
 		if (Img_src_y == null) {
 			Img_src_y = img_dir.GenSubFil("twisty_down.png").To_http_file_bry();
@@ -54,7 +49,15 @@ public class Xoapi_toggle_itm implements GfoInvkAble {
 	}
 	public byte[] Html_toggle_btn() {return html_toggle_btn;} private byte[] html_toggle_btn;
 	public byte[] Html_toggle_hdr() {return html_toggle_hdr;} private byte[] html_toggle_hdr;
-	private void Html_toggle_gen() {
+	private void Assert_img_src() {
+		if (Img_src_y == null) {
+			Io_url img_dir = app.Usere().Fsys_mgr().App_img_dir().GenSubDir_nest("window", "portal");
+			Img_src_y = img_dir.GenSubFil("twisty_down.png").To_http_file_bry();
+			Img_src_n = img_dir.GenSubFil("twisty_right.png").To_http_file_bry();
+		}
+	}
+	private void Html_toggle_gen() {			
+		Assert_img_src();// NOTE: must call Assert_img_src else wikidata twisties will be missing img; DATE:2015-08-05
 		if (visible) {
 			icon_src = Img_src_y;
 			icon_title = img_title_val_y;
@@ -77,7 +80,7 @@ public class Xoapi_toggle_itm implements GfoInvkAble {
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_visible)) 			return Yn.Xto_str(visible);
-		else if	(ctx.Match(k, Invk_visible_)) 			{this.visible = m.ReadYn("v"); Html_toggle_gen();}
+		else if	(ctx.Match(k, Invk_visible_))			this.visible = m.ReadYn("v");
 		else	return GfoInvkAble_.Rv_unhandled;
 		return this;
 	}

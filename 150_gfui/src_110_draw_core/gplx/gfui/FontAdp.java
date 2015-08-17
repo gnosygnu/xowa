@@ -52,7 +52,7 @@ public class FontAdp implements GfoInvkAble {
 		}
 		else return GfoInvkAble_.Rv_unhandled;
 	}	static final String Invk_name_ = "name_", Invk_size_ = "size_", Invk_style_ = "style_";
-	@Override public String toString() {return String_bldr_.new_().Add_kv("name", name).Add_kv_obj("size", size).Add_kv_obj("style", style).XtoStr();}
+	@Override public String toString() {return String_bldr_.new_().Add_kv("name", name).Add_kv_obj("size", size).Add_kv_obj("style", style).To_str();}
 
 	public static final FontAdp NullPtr = null;
 	public static FontAdp as_(Object obj) {return obj instanceof FontAdp ? (FontAdp)obj : null;}

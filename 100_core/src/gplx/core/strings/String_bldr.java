@@ -31,7 +31,7 @@ public interface String_bldr {
 	String_bldr Add_spr_unless_first(String s, String spr, int i);
 	String_bldr Clear();
 	String Xto_str_and_clear();
-	String XtoStr();
+	String To_str();
 	int Count();
 	String_bldr Add(byte[] v);
 	String_bldr Add(String s);
@@ -71,12 +71,12 @@ abstract class String_bldr_base implements String_bldr {
 	}
 	public String_bldr Clear() {Del(0, Count()); return this;}
 	public String Xto_str_and_clear() {
-		String rv = XtoStr();
+		String rv = To_str();
 		Clear();
 		return rv;
 	}
-	@Override public String toString() {return XtoStr();}
-	public abstract String XtoStr();
+	@Override public String toString() {return To_str();}
+	public abstract String To_str();
 	public abstract int Count();
 	public abstract String_bldr Add_at(int idx, String s);
 	public abstract String_bldr Add(byte[] v);
@@ -89,7 +89,7 @@ abstract class String_bldr_base implements String_bldr {
 }
 class String_bldr_thread_single extends String_bldr_base {
 	private java.lang.StringBuilder sb = new java.lang.StringBuilder();
-	@Override public String XtoStr() {return sb.toString();}
+	@Override public String To_str() {return sb.toString();}
 	@Override public int Count() {return sb.length();}												
 	@Override public String_bldr Add_at(int idx, String s) {sb.insert(idx, s); return this;}		
 	@Override public String_bldr Add(byte[] v) {sb.append(String_.new_u8(v)); return this;}	
@@ -102,7 +102,7 @@ class String_bldr_thread_single extends String_bldr_base {
 }
 class String_bldr_thread_multiple extends String_bldr_base {
 	private java.lang.StringBuffer sb = new java.lang.StringBuffer();
-	@Override public String XtoStr() {return sb.toString();}
+	@Override public String To_str() {return sb.toString();}
 	@Override public int Count() {return sb.length();}												
 	@Override public String_bldr Add_at(int idx, String s) {sb.insert(idx, s); return this;}		
 	@Override public String_bldr Add(byte[] v) {sb.append(String_.new_u8(v)); return this;}	

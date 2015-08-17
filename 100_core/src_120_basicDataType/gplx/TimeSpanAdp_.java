@@ -80,7 +80,7 @@ public class TimeSpanAdp_ {
 		}
 		return sign * (val_f + (val_s * Divisors[1]) + (val_m * Divisors[2]) + (val_h * Divisors[3]));
 	}
-	@gplx.Internal protected static String XtoStr(long frc, String fmt) {
+	@gplx.Internal protected static String To_str(long frc, String fmt) {
 		String_bldr sb = String_bldr_.new_();
 		int[] units = Split_long(frc, Divisors);
 
@@ -119,7 +119,7 @@ public class TimeSpanAdp_ {
 			sb.Add(Int_.Xto_str_pad_bgn_zero(val, zeros));
 			first = false;
 		}
-		return sb.XtoStr();
+		return sb.To_str();
 	}
 	@gplx.Internal protected static int[] Split_long(long fracs, int[] divisors) {
 		int divLength = Array_.Len(divisors);

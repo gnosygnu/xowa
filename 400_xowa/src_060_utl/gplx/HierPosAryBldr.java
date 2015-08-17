@@ -50,11 +50,11 @@ public class HierPosAryBldr {
 			rv[i] = ary[i];
 		return rv;
 	}
-	public String XtoStr() {
+	public String To_str() {
 		String_bldr sb = String_bldr_.new_();
 		for (int i = 0; i < aryIdx; i++)
 			sb.Add_spr_unless_first(Int_.Xto_str(ary[i]), " ", i);
-		return sb.XtoStr();
+		return sb.To_str();
 	}
 	int[] ary; int aryIdx = -1; int root = -1;
 	public HierPosAryBldr(int ary_max)	{ary = new int[ary_max]; this.Init();}

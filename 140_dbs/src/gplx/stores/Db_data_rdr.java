@@ -23,7 +23,7 @@ import java.sql.Timestamp;
 import java.util.GregorianCalendar;
 import gplx.dbs.*;
 public class Db_data_rdr extends DataRdr_base implements DataRdr {
-	@Override public String NameOfNode() {return commandText;} public String XtoStr() {return commandText;} private String commandText;
+	@Override public String NameOfNode() {return commandText;} public String To_str() {return commandText;} private String commandText;
 		private ResultSet rdr;
 	private int fieldCount;
 	@Override public int FieldCount() {return fieldCount;}

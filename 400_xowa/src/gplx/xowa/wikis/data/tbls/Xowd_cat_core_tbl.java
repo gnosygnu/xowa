@@ -38,7 +38,7 @@ public class Xowd_cat_core_tbl implements RlsAble {
 		conn.Rls_reg(this);
 	}
 	public Xowd_cat_core_tbl Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds)); return this;}
-	public void Insert_bgn() {conn.Txn_bgn(); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
+	public void Insert_bgn() {conn.Txn_bgn("schema__cat_core__insert"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
 	public void Insert_end() {conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
 	public void Insert_cmd_by_batch(int id, int pages, int subcats, int files, byte hidden, int link_db_id) {
 		stmt_insert.Clear()
@@ -46,7 +46,7 @@ public class Xowd_cat_core_tbl implements RlsAble {
 			.Val_byte(fld_hidden, hidden).Val_int(fld_link_db_id, link_db_id)
 			.Exec_insert();
 	}
-	public void Update_bgn() {conn.Txn_bgn(); stmt_update = conn.Stmt_update(tbl_name, String_.Ary(fld_id), fld_hidden);}
+	public void Update_bgn() {conn.Txn_bgn("schema__cat_core__update"); stmt_update = conn.Stmt_update(tbl_name, String_.Ary(fld_id), fld_hidden);}
 	public void Update_end() {conn.Txn_end(); stmt_update = Db_stmt_.Rls(stmt_update);}
 	public void Update_by_batch(int id, byte hidden) {
 		stmt_update.Clear().Val_byte(fld_hidden, hidden).Crt_int(fld_id, id).Exec_update();

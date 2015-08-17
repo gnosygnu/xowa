@@ -127,7 +127,7 @@ public class Xohd_abrv_mgr {
 				}
 			}
 			url_bldr.Init_by_root(img.Orig_repo_id() == Xof_repo_itm_.Repo_remote ? file_dir_comm : file_dir_wiki, Byte_ascii.Slash, false, false, 2);
-			url_bldr.Init_by_itm(img.File_is_orig() ? Xof_repo_itm_.Mode_orig : Xof_repo_itm_.Mode_thumb, img.Lnki_ttl(), Xof_file_wkr_.Md5_(img.Lnki_ttl()), Xof_ext_.new_by_id_(img.Orig_ext()), img.File_w(), img.Lnki_time(), img.Lnki_page());
+			url_bldr.Init_by_itm(img.File_is_orig() ? Xof_repo_itm_.Mode_orig : Xof_repo_itm_.Mode_thumb, img.Lnki_ttl(), Xof_file_wkr_.Md5(img.Lnki_ttl()), Xof_ext_.new_by_id_(img.Orig_ext()), img.File_w(), img.Lnki_time(), img.Lnki_page());
 			byte[] img_src = url_bldr.Xto_bry(); 
 			if (tid == Xohd_abrv_.Tid_img) {
 				fmtr_img.Bld_bfr_many(bfr, img_src, img_view_w, img.Html_h());

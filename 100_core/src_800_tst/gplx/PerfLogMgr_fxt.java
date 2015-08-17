@@ -39,16 +39,16 @@ public class PerfLogMgr_fxt {
 		String_bldr sb = String_bldr_.new_();
 		for (Object itmObj : entries) {
 			PerfLogItm itm = (PerfLogItm)itmObj;
-			sb.Add(itm.XtoStr()).Add_char_crlf();
+			sb.Add(itm.To_str()).Add_char_crlf();
 		}
-		Io_mgr.I.AppendFilStr(url, sb.XtoStr());
+		Io_mgr.I.AppendFilStr(url, sb.To_str());
 		entries.Clear();
 	}
 	List_adp entries = List_adp_.new_(); PerfLogTmr tmr = PerfLogTmr.new_(); Io_url url = Io_url_.Empty;
 	public static final PerfLogMgr_fxt _ = new PerfLogMgr_fxt(); PerfLogMgr_fxt() {}
 	class PerfLogItm {
-		public String XtoStr() {
-			String secondsStr = TimeSpanAdp_.XtoStr(milliseconds, TimeSpanAdp_.Fmt_Default);
+		public String To_str() {
+			String secondsStr = TimeSpanAdp_.To_str(milliseconds, TimeSpanAdp_.Fmt_Default);
 			secondsStr = String_.PadBgn(secondsStr, 7, "0"); // 7=000.000; left-aligns all times
 			return String_.Concat(secondsStr, "|", text);
 		}

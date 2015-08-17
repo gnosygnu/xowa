@@ -26,7 +26,7 @@ class GfsCoreHelp implements GfoInvkAble {
 				GfsRegyItm itm = (GfsRegyItm)core.Root_as_regy().Get_at(i);
 				sb.Add_spr_unless_first(itm.Key(), String_.CrLf, i);
 			}
-			return sb.XtoStr();
+			return sb.To_str();
 		}
 		else return Exec(ctx, core.Root_as_regy(), path);
 	}
@@ -35,7 +35,7 @@ class GfsCoreHelp implements GfoInvkAble {
 		String_bldr sb = String_bldr_.new_();
 		for (int j = 0; j < i; j++)
 			sb.Add_spr_unless_first(itmAry[j], ".", j);
-		return Err_Unhandled(sb.XtoStr(), itmAry[i]);
+		return Err_Unhandled(sb.To_str(), itmAry[i]);
 	}
 	static Object Exec(GfsCtx rootCtx, GfoInvkAble rootInvk, String path) {
 		String[] itmAry = String_.Split(path, ".");
@@ -60,7 +60,7 @@ class GfsCoreHelp implements GfoInvkAble {
 				String s = (String)ctx.Help_browseList().Get_at(i);
 				sb.Add_spr_unless_first(s, String_.CrLf, i);
 			}
-			return sb.XtoStr();
+			return sb.To_str();
 		}
 	}
 	public static GfsCoreHelp as_(Object obj) {return obj instanceof GfsCoreHelp ? (GfsCoreHelp)obj : null;}

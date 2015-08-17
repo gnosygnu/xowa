@@ -37,7 +37,7 @@ public class TdbDbSaveMgr_tst {
 			,	"1,mem/dir/db0.dsv,dsv"
 			);
 		db.Files().DataObj_Wtr(wtr);
-		String actl = wtr.XtoStr();
+		String actl = wtr.To_str();
 		Tfds.Eq(expd, actl);
 	}
 	@Test  public void WriteDbTbls() {
@@ -52,7 +52,7 @@ public class TdbDbSaveMgr_tst {
 			,	"================================, ,\" \",//"
 			);
 		db.Tables().DataObj_Wtr(wtr);
-		String actl = wtr.XtoStr();
+		String actl = wtr.To_str();
 		Tfds.Eq(expd, actl);			
 	}
 	@Test  public void WriteTbl() {
@@ -71,7 +71,7 @@ public class TdbDbSaveMgr_tst {
 		tbl.Flds().Add("name", StringClassXtn._);
 
 		tbl.DataObj_Wtr(wtr);
-		String actl = wtr.XtoStr();
+		String actl = wtr.To_str();
 		Tfds.Eq(expd, actl);			
 	}
 }

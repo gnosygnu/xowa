@@ -42,13 +42,13 @@ class GfoFldList_base implements GfoFldList {
 		idxs.Add(key, idxs.Count());
 		return this;
 	}
-	public String XtoStr() {
+	public String To_str() {
 		String_bldr sb = String_bldr_.new_();
 		for (int i = 0; i < hash.Count(); i++) {
 			GfoFld fld = this.Get_at(i);
 			sb.Add(fld.Key()).Add("|");
 		}
-		return sb.XtoStr();
+		return sb.To_str();
 	}
 	Ordered_hash hash = Ordered_hash_.new_(); Hash_adp idxs = Hash_adp_.new_(); // PERF: idxs used for Idx_of; need to recalc if Del ever added 
 }
@@ -59,5 +59,5 @@ class GfoFldList_null implements GfoFldList {
 	public GfoFld Get_at(int i) {return GfoFld.Null;}
 	public GfoFld FetchOrNull(String key) {return null;}
 	public GfoFldList Add(String key, ClassXtn typx) {return this;}
-	public String XtoStr() {return "<<GfoFldList_.Null>>";}
+	public String To_str() {return "<<GfoFldList_.Null>>";}
 }

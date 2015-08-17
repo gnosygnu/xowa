@@ -40,7 +40,7 @@ public class Xoa_css_extractor {
 		Xof_download_wkr download_wkr = app.Wmf_mgr().Download_wkr();
 		this.download_xrg = download_wkr.Download_xrg();
 		css_img_downloader = new Xoa_css_img_downloader().Ctor(usr_dlg, download_wkr, Bry_.new_u8(protocol_prefix));
-		failover_dir = app.Fsys_mgr().Bin_any_dir().GenSubDir_nest("html", "xowa", "import");
+		failover_dir = app.Fsys_mgr().Bin_xowa_dir().GenSubDir_nest("html", "css", "failover");
 		url_encoder = Xoa_app_.Utl__encoder_mgr().Http_url();
 	}
 	public void Install(Xow_wiki wiki, String css_key) {

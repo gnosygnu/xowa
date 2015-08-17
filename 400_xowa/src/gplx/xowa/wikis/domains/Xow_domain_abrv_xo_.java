@@ -18,6 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.wikis.domains; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.xowa.langs.*;
 public class Xow_domain_abrv_xo_ {
+	public static byte[] To_bry(byte[] domain_bry) {
+		Xow_domain domain_itm = Xow_domain_.parse(domain_bry);
+		return Xow_domain_abrv_xo_.To_bry(domain_itm.Domain_bry(), domain_itm.Lang_orig_itm(), domain_itm.Domain_type());
+	}
 	public static byte[] To_bry(byte[] domain_bry, Xol_lang_itm lang, Xow_domain_type type) {	// en.wikipedia.org -> en.w			
 		byte[] type_abrv = type.Abrv();
 		if		(type.Multi_lang())			// wikipedia,wiktionary,etc..

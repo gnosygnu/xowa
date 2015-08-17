@@ -36,7 +36,7 @@ public class Xob_page_cmd extends Xob_itm_basic_base implements Xobd_wkr, GfoInv
 		this.ns_to_db_mgr = new Xob_ns_to_db_mgr(new Xob_ns_to_db_wkr__text(), db_mgr, import_cfg.Text_db_max());
 		if (redirect_id_enabled) {
 			this.redirect_tbl = new Xob_redirect_tbl(wiki.Fsys_mgr().Root_dir(), Xoa_app_.Utl__encoder_mgr().Http_url_ttl()).Create_table();
-			redirect_tbl.Conn().Txn_bgn();
+			redirect_tbl.Conn().Txn_bgn("bldr__page__redirect");
 		}
 		this.dg_match_mgr = app.Api_root().Bldr().Wiki().Filter().Dansguardian().New_mgr(wiki.Domain_str(), wiki.Fsys_mgr().Root_dir());
 		app.Bldr().Dump_parser().Trie_tab_del_();	// disable swapping &#09; for \t

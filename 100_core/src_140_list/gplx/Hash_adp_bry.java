@@ -49,6 +49,12 @@ public class Hash_adp_bry extends gplx.lists.Hash_adp_base implements Hash_adp {
 		}
 		return this;
 	}
+	public Hash_adp_bry Add_many_bry(byte[]... ary) {
+		int ary_len = ary.length;
+		for (int i = 0; i < ary_len; i++)
+			Add_bry_bry(ary[i]);
+		return this;
+	}
 	@Override protected void Add_base(Object key, Object val) {
 		byte[] key_bry = (byte[])key;
 		Hash_adp_bry_itm_base key_itm = proto.New();

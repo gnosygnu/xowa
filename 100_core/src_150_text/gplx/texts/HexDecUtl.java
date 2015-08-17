@@ -49,7 +49,7 @@ public class HexDecUtl {
 		int rv = parse_or_(raw, -1); if (rv == -1) throw Err_.new_parse("HexDec", "raw");
 		return rv;
 	}
-	public static String XtoStr(int val, int pad) {
+	public static String To_str(int val, int pad) {
 		char[] ary = new char[8]; int idx = 8; // 8 is max len of hexString; (2^4 * 8); EX: int.MaxValue = 7FFFFFFF
 		do {
 			int byt = val % 16;

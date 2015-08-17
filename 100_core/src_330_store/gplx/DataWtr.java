@@ -28,5 +28,5 @@ public interface DataWtr extends SrlMgr {
 	void WriteLeafEnd();
 
 	void Clear();
-	String XtoStr();
+	String To_str();
 }

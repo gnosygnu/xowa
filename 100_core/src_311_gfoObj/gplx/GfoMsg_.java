@@ -199,7 +199,7 @@ class GfoMsg_base implements GfoMsg {
 			KeyVal rv = (KeyVal)this.Args_getAt(i);
 			sb.Add_fmt("{0};", rv.Key());
 		}
-		return sb.XtoStr();
+		return sb.To_str();
 	}
 	public GfoMsg CloneNew() {
 		GfoMsg_base rv = new GfoMsg_base().ctor_(key, parse);
@@ -220,12 +220,12 @@ class GfoMsg_base implements GfoMsg {
 
 	protected List_adp args;
 	List_adp subs;
-	public String XtoStr() {
+	public String To_str() {
 		String_bldr sb = String_bldr_.new_();
-		XtoStr(sb, new XtoStrWkr_gplx(), this);
+		To_str(sb, new XtoStrWkr_gplx(), this);
 		return sb.Xto_str_and_clear();
 	}
-	void XtoStr(String_bldr sb, XtoStrWkr wkr, GfoMsg m) {
+	void To_str(String_bldr sb, XtoStrWkr wkr, GfoMsg m) {
 		sb.Add(m.Key());
 		if (m.Subs_count() == 0) {
 			sb.Add(":");
@@ -236,7 +236,7 @@ class GfoMsg_base implements GfoMsg {
 				if (!first) sb.Add(" ");
 				sb.Add(kv.Key());
 				sb.Add("='");
-				sb.Add(wkr.XtoStr(kv.Val()));
+				sb.Add(wkr.To_str(kv.Val()));
 				sb.Add("'");
 				first = false;
 			}
@@ -244,7 +244,7 @@ class GfoMsg_base implements GfoMsg {
 		}
 		else {
 			sb.Add(".");
-			XtoStr(sb, wkr, m.Subs_getAt(0));
+			To_str(sb, wkr, m.Subs_getAt(0));
 		}
 	}
 
@@ -253,10 +253,10 @@ class GfoMsg_base implements GfoMsg {
 	static final String_obj_val Nil = String_obj_val.new_("<<NOT FOUND>>");
 }
 interface XtoStrWkr {
-	String XtoStr(Object o);
+	String To_str(Object o);
 }
 class XtoStrWkr_gplx implements XtoStrWkr {
-	public String XtoStr(Object o) {
+	public String To_str(Object o) {
 		if (o == null) return "<<NULL>>";
 		Class<?> type = ClassAdp_.ClassOf_obj(o);
 		String rv = null;

@@ -17,6 +17,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx;
 public class Guid_adp {
-	public String XtoStr() {return guid.toString();}
+	public String To_str() {return guid.toString();}
 	public Guid_adp(java.util.UUID guid) {this.guid = guid;} java.util.UUID guid;
 }

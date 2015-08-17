@@ -32,7 +32,7 @@ class GfmlTknAry_ {
 		String_bldr sb = String_bldr_.new_();
 		for (GfmlTkn tkn : ary)
 			sb.Add(tkn.Raw());
-		return sb.XtoStr();
+		return sb.To_str();
 	}
 	@gplx.Internal protected static String XtoVal(GfmlTkn[] ary) {return XtoVal(ary, 0, ary.length);}
 	static String XtoVal(GfmlTkn[] ary, int bgn, int end) {
@@ -41,6 +41,6 @@ class GfmlTknAry_ {
 			GfmlTkn tkn = ary[i];
 			sb.Add(tkn.Val());
 		}
-		return sb.XtoStr();
+		return sb.To_str();
 	}
 }

@@ -44,6 +44,6 @@ public class Btrie_slim_itm_tst {
 		Object actl = actl_itm == null ? null : actl_itm.Val();
 		Tfds.Eq(expd, actl);
 	}
-	private void run_Add(byte... ary) {for (byte b : ary) itm.Ary_add(b, Char_.XtoStr((char)b));}
+	private void run_Add(byte... ary) {for (byte b : ary) itm.Ary_add(b, Char_.To_str((char)b));}
 	private void run_Del(byte... ary) {for (byte b : ary) itm.Ary_del(b);}
 }

@@ -50,7 +50,7 @@ public class DataRdr_mem extends DataRdr_base implements GfoNdeRdr {
 		boolean hasFirst = subRdr.MoveNextPeer();
 		return (hasFirst) ? subRdr : DataRdr_.Null;
 	}
-	public String XtoStr() {return cur.XtoStr();}
+	public String To_str() {return cur.To_str();}
 	public void Rls() {this.cur = null; this.peerList = null;}
 	@Override public SrlMgr SrlMgr_new(Object o) {return new DataRdr_mem();}
 	GfoNdeList Peers_get() {

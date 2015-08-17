@@ -287,7 +287,10 @@ class Wdata_hwtr_mgr_fxt {
 		if (doc_hwtr == null) {
 			doc_hwtr = new Wdata_hwtr_mgr();
 			Wdata_hwtr_msgs msgs = Wdata_hwtr_msgs.new_en_();
-			doc_hwtr.Init_by_ctor(new Xoapi_wikibase(), new Wdata_lbl_wkr__test(resolved_ttls), Url_encoder.new_html_href_mw_(), new Xoapi_toggle_mgr(), new Xow_xwiki_mgr());
+			Xoapi_toggle_mgr toggle_mgr = new Xoapi_toggle_mgr();
+			wdata_fxt.Init();
+			toggle_mgr.Ctor_by_app(wdata_fxt.App());	// must init, else null error
+			doc_hwtr.Init_by_ctor(new Xoapi_wikibase(), new Wdata_lbl_wkr__test(resolved_ttls), Url_encoder.new_html_href_mw_(), toggle_mgr, new Xow_xwiki_mgr());
 			doc_hwtr.Init_by_lang(msgs);				
 		}
 		resolved_ttls.Clear();

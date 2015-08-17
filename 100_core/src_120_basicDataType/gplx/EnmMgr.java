@@ -59,7 +59,7 @@ public class EnmMgr {
 		if (cur > 0											// cur is non-Modifier; NOTE: check needed for args that are just a Modifier;
 			|| sb.Count() == 0)								// cur is IptKey.None; cur == 0, but sb.length will also be 0
 			AppendRaw(sb, cur);
-		return sb.XtoStr();
+		return sb.To_str();
 	}
 	void AppendRaw(String_bldr sb, int key) {
 		String raw = (String)valRegy.Get_by(key);

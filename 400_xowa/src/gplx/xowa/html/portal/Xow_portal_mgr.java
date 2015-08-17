@@ -102,7 +102,7 @@ public class Xow_portal_mgr implements GfoInvkAble {
 	public byte[] Div_home_bry() {return api_skin != null && api_skin.Sidebar_home_enabled() ? div_home_bry : Bry_.Empty;} private byte[] div_home_bry = Bry_.Empty;
 	public byte[] Div_wikis_bry(Bry_bfr_mkr bfr_mkr) {
 		if (toggle_itm == null)	// TEST:lazy-new b/c Init_by_wiki
-			toggle_itm = wiki.Appe().Api_root().Html().Page().Toggle_mgr().Get_or_new("offline-wikis").Init(wiki.Appe().Usere().Wiki(), Bry_.new_a7("Wikis"));
+			toggle_itm = wiki.Appe().Api_root().Html().Page().Toggle_mgr().Get_or_new("offline-wikis").Init(Bry_.new_a7("Wikis"));
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();
 		div_wikis_fmtr.Bld_bfr_many(tmp_bfr, toggle_itm.Html_toggle_btn(), toggle_itm.Html_toggle_hdr());
 		return tmp_bfr.To_bry_and_rls();

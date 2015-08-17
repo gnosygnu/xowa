@@ -40,7 +40,7 @@ public class Fsdb_db_mgr__v2_bldr {
 	private Fsdb_db_file Load_core_file(Io_url url) {return new Fsdb_db_file(url, Db_conn_bldr.I.Get(url));}
 	private Fsdb_db_file Make_core_file_main(Xow_wiki wiki, Io_url main_core_url, String main_core_name, Xowd_db_layout layout) {
 		Db_conn conn = layout.Tid_is_all() ? Db_conn_bldr.I.Get(main_core_url) : Db_conn_bldr.I.New(main_core_url);	// if all, use existing (assumes same file name); else, create new
-		conn.Txn_bgn();
+		conn.Txn_bgn("fsdb__core_file");
 		Fsdb_db_file rv = Make_core_file(main_core_url, conn, schema_is_1, Fsm_mnt_mgr.Mnt_idx_main);
 		if (!layout.Tid_is_all()) // do not make cfg data if all
 			Make_cfg_data(wiki, main_core_name, rv, Main_core_tid(layout), -1);
@@ -50,7 +50,7 @@ public class Fsdb_db_mgr__v2_bldr {
 	}
 	public Fsdb_db_file Make_core_file_user(Xow_wiki wiki, Io_url user_core_url, String user_file_name, String main_core_name) { // always create file; do not create mnt_tbl;
 		Db_conn conn = Db_conn_bldr.I.New(user_core_url);
-		conn.Txn_bgn();
+		conn.Txn_bgn("fsdb__core_user");
 		Fsdb_db_file rv = Make_core_file(user_core_url, conn, schema_is_1, Fsm_mnt_mgr.Mnt_idx_user);
 		Fsm_bin_tbl dbb_tbl = new Fsm_bin_tbl(conn, schema_is_1, Fsm_mnt_mgr.Mnt_idx_user); dbb_tbl.Insert(0, user_file_name);
 		Make_bin_tbl(rv);

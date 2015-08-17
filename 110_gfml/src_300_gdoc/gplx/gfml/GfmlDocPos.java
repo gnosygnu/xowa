@@ -52,7 +52,7 @@ public class GfmlDocPos implements CompareAble {
 		int newIdx = ary[oldLen - 1];
 		return new GfmlDocPos(newAry, newIdx);
 	}
-	@Override public String toString() {return path;} public String XtoStr() {return path;}
+	@Override public String toString() {return path;} public String To_str() {return path;}
 	void MakePath() {
 		String_bldr sb = String_bldr_.new_();
 		for (int i = 0; i < ary.length; i++) {
@@ -60,7 +60,7 @@ public class GfmlDocPos implements CompareAble {
 			sb.Add("_");
 		}
 		sb.Add(idx);
-		path = sb.XtoStr();
+		path = sb.To_str();
 	}
 	int[] ary; int idx;
 	@gplx.Internal protected GfmlDocPos(int[] ary, int idx) {this.ary = ary; this.idx = idx;}

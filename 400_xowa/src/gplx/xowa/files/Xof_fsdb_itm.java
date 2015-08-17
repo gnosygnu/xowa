@@ -77,7 +77,7 @@ public class Xof_fsdb_itm implements Xof_file_itm {
 		this.orig_ext = orig_ext;							// NOTE: always use orig_ext since this comes directly from wmf_api; DATE:2015-05-17
 	}
 	public void Init_at_lnki_by_near(int file_w) {
-		this.lnki_w = file_w; this.lnki_h = Xof_img_size.Size_null_deprecated;
+		this.lnki_w = file_w; this.lnki_h = Xof_img_size.Size__neg1;
 	}
 	public void	Init_at_html(int exec_tid, Xof_img_size img_size, Xof_repo_itm repo, Xof_url_bldr url_bldr) {
 		Calc_html_size(exec_tid, img_size);
@@ -115,6 +115,9 @@ public class Xof_fsdb_itm implements Xof_file_itm {
 	}
 	public void Init_at_xfer(int idx, int len) {
 		this.xfer_idx = idx; this.xfer_len = len;
+	}
+	public void Change_repo(byte orig_repo_id, byte[] orig_repo_name) {
+		this.orig_repo_id = orig_repo_id; this.orig_repo_name = orig_repo_name;
 	}
 	public void File_is_orig_(boolean v) {this.file_is_orig = v;}
 	public void Orig_repo_name_(byte[] v) {orig_repo_name = v;}

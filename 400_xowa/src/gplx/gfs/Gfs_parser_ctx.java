@@ -66,10 +66,10 @@ class Gfs_parser_ctx {
 }
 class Gfs_err_mgr {
 	public void Fail_eos(Gfs_parser_ctx ctx) {Fail(ctx, Fail_msg_eos, ctx.Src_len());}
-	public void Fail_unknown_char(Gfs_parser_ctx ctx, int pos, byte c) {Fail(ctx, Fail_msg_unknown_char, pos, KeyVal_.new_("char", Char_.XtoStr((char)c)));}
+	public void Fail_unknown_char(Gfs_parser_ctx ctx, int pos, byte c) {Fail(ctx, Fail_msg_unknown_char, pos, KeyVal_.new_("char", Char_.To_str((char)c)));}
 	public void Fail_nde_stack_empty(Gfs_parser_ctx ctx, int pos) {Fail(ctx, Fail_msg_nde_stack_empty, pos);}
 	public void Fail_invalid_lxr(Gfs_parser_ctx ctx, int pos, byte cur_lxr, byte c) {
-		Fail(ctx, Fail_msg_invalid_lxr, pos, KeyVal_.new_("char", Char_.XtoStr((char)c)), KeyVal_.new_("cur_lxr", Gfs_lxr_.Tid__name(cur_lxr)), KeyVal_.new_("prv_lxr", Gfs_lxr_.Tid__name(ctx.Prv_lxr())));
+		Fail(ctx, Fail_msg_invalid_lxr, pos, KeyVal_.new_("char", Char_.To_str((char)c)), KeyVal_.new_("cur_lxr", Gfs_lxr_.Tid__name(cur_lxr)), KeyVal_.new_("prv_lxr", Gfs_lxr_.Tid__name(ctx.Prv_lxr())));
 	}
 	private void Fail(Gfs_parser_ctx ctx, String msg, int pos, KeyVal... args) {
 		byte[] src = ctx.Src(); int src_len = ctx.Src_len(); 

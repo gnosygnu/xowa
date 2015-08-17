@@ -37,7 +37,7 @@ public abstract class Db_conn_info__base implements Db_conn_info {
 			if (hash.Has(xtn.Key())) continue;
 			sb.Add_fmt("{0}={1};", xtn.Key(), xtn.Val_to_str_or_empty());
 		}
-		return sb.XtoStr();
+		return sb.To_str();
 	}
 	protected static String Bld_raw(String... ary) {
 		Bry_bfr bfr = Bry_bfr.reset_(255);

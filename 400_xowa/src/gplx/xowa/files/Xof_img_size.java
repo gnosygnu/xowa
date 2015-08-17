@@ -27,59 +27,63 @@ public class Xof_img_size {
 		file_is_orig = false;
 	}
 	public void Html_size_calc(int exec_tid, int lnki_w, int lnki_h, byte lnki_type, int upright_patch, double lnki_upright, int orig_ext, int orig_w, int orig_h, int thm_dflt_w) {
-		this.Clear();											// always clear before calc; caller should be responsible, but just to be safe.
-		if (Enm_.HasInt(lnki_type, Xop_lnki_type.Id_frame)		// frame: always return orig size; Linker.php!makeThumbLink2; // Use image dimensions, don't scale
-			&& lnki_h == Null) {								// unless lnki_h specified; DATE:2013-12-22
-			html_w = file_w = orig_w;
-			html_h = file_h = orig_h;
-			file_is_orig = Xof_ext_.Orig_file_is_img(orig_ext);	// file_is_orig = true, unless svg, ogv, pdf
-			if (file_is_orig)
-				file_w = file_h = Size__same_as_orig;
-			return;
-		}
-		html_w = lnki_w; html_h = lnki_h;						// set html vals to lnki vals
-		file_is_orig = false;
-		if (html_w == Null && html_h == Null) {					// no size set; NOTE: do not default to thumb if only height is set; EX: x900px should have w=0 h=900
-			if (Xop_lnki_type.Id_defaults_to_thumb(lnki_type))
-				html_w = thm_dflt_w;
-			else if (	orig_ext == Xof_ext_.Id_pdf				// pdf and viewing on page; default to 220
-					&&	exec_tid == Xof_exec_tid.Tid_wiki_page)
-				html_w = thm_dflt_w;
-			else
-				html_w = orig_w;
-		}
-		html_w = Upright_calc(upright_patch, lnki_upright, html_w, lnki_w, lnki_h, lnki_type);
-		if (orig_w == Null) return;								// no orig_w; just use html_w and html_h (html_h will likely be -1 and wrong)
-
-		boolean ext_is_svg = orig_ext == Xof_ext_.Id_svg;
-		if (html_w == Xof_img_size.Null) {
-			if	(	ext_is_svg									// following strange MW logic; REF.MW:Linker.php|makeImageLink|If its a vector image, and user only specifies height, we don't want it to be limited by its "normal" width; DATE: 2013-11-26
-				&&	html_h != Xof_img_size.Null)
-				html_w = Svg_max_width;
-			else
-				html_w = orig_w;								// html_w missing >>> use orig_w; REF.MW:Linker.php|makeImageLink2|$hp['width'] = $file->getWidth( $page );				
-		}
-		if (html_h != Xof_img_size.Null) {						// html_h exists; REF.MW:ImageHandler.php|normaliseParams|if ( isset( $params['height'] ) && $params['height'] != -1 ) {
-			if (	(long)html_w * (long)orig_h 
-				>	(long)html_h * (long)orig_w)				// html ratio > orig ratio; recalc html_w; SEE:NOTE_2; NOTE: casting to long to prevent int overflow; [[File:A.png|9999999999x90px]]; DATE:2014-04-26
-				html_w = Calc_w(orig_w, orig_h, html_h);
-		}
-		html_h = Scale_h(orig_w, orig_h, html_w);				// calc html_h
-		if (	html_w >= orig_w								// html >= orig
-			&&	(	Xof_ext_.Orig_file_is_img(orig_ext)			// orig is img (ignore for svg, ogv, pdf, etc)
-				||	ext_is_svg && exec_tid == Xof_exec_tid.Tid_wiki_file	// limit to size if svg and [[File]] page
-				)
-			) {
-			file_is_orig = true;								// use orig img (don't create thumb)
-			file_w = file_h = Size__same_as_orig;
-			if (Xop_lnki_type.Id_limits_large_size(lnki_type)) {// do not allow html_w > orig_w; REF.MW:Generic.php|normaliseParams
-				html_w = orig_w;
-				html_h = orig_h;
+		synchronized (this) {
+			this.Clear();											// always clear before calc; caller should be responsible, but just to be safe.
+			if (Xof_ext_.Id_supports_time(orig_ext) && lnki_w == Xof_img_size.Null)	// use orig_w if no size specified for video; EX:[[File:A.ogv]] -> [[File:A.ogv|550px]] where 550px is orig_w; DATE:2015-08-07
+				lnki_w = orig_w;
+			if (Enm_.HasInt(lnki_type, Xop_lnki_type.Id_frame)		// frame: always return orig size; Linker.php!makeThumbLink2; // Use image dimensions, don't scale
+				&& lnki_h == Null) {								// unless lnki_h specified; DATE:2013-12-22
+				html_w = file_w = orig_w;
+				html_h = file_h = orig_h;
+				file_is_orig = Xof_ext_.Orig_file_is_img(orig_ext);	// file_is_orig = true, unless svg, ogv, pdf
+				if (file_is_orig)
+					file_w = file_h = Size__same_as_orig;
+				return;
 			}
-		}
-		else {													// html < orig
-			file_w = html_w;
-			file_h = html_h;
+			html_w = lnki_w; html_h = lnki_h;						// set html vals to lnki vals
+			file_is_orig = false;
+			if (html_w == Null && html_h == Null) {					// no size set; NOTE: do not default to thumb if only height is set; EX: x900px should have w=0 h=900
+				if (Xop_lnki_type.Id_defaults_to_thumb(lnki_type))
+					html_w = thm_dflt_w;
+				else if (	orig_ext == Xof_ext_.Id_pdf				// pdf and viewing on page; default to 220
+						&&	exec_tid == Xof_exec_tid.Tid_wiki_page)
+					html_w = thm_dflt_w;
+				else
+					html_w = orig_w;
+			}
+			html_w = Upright_calc(upright_patch, lnki_upright, html_w, lnki_w, lnki_h, lnki_type);
+			if (orig_w == Null) return;								// no orig_w; just use html_w and html_h (html_h will likely be -1 and wrong)
+
+			boolean ext_is_svg = orig_ext == Xof_ext_.Id_svg;
+			if (html_w == Xof_img_size.Null) {
+				if	(	ext_is_svg									// following strange MW logic; REF.MW:Linker.php|makeImageLink|If its a vector image, and user only specifies height, we don't want it to be limited by its "normal" width; DATE: 2013-11-26
+					&&	html_h != Xof_img_size.Null)
+					html_w = Svg_max_width;
+				else
+					html_w = orig_w;								// html_w missing >>> use orig_w; REF.MW:Linker.php|makeImageLink2|$hp['width'] = $file->getWidth( $page );				
+			}
+			if (html_h != Xof_img_size.Null) {						// html_h exists; REF.MW:ImageHandler.php|normaliseParams|if ( isset( $params['height'] ) && $params['height'] != -1 ) {
+				if (	(long)html_w * (long)orig_h 
+					>	(long)html_h * (long)orig_w)				// html ratio > orig ratio; recalc html_w; SEE:NOTE_2; NOTE: casting to long to prevent int overflow; [[File:A.png|9999999999x90px]]; DATE:2014-04-26
+					html_w = Calc_w(orig_w, orig_h, html_h);
+			}
+			html_h = Scale_h(orig_w, orig_h, html_w);				// calc html_h
+			if (	html_w >= orig_w								// html >= orig
+				&&	(	Xof_ext_.Orig_file_is_img(orig_ext)			// orig is img (ignore for svg, ogv, pdf, etc)
+					||	ext_is_svg && exec_tid == Xof_exec_tid.Tid_wiki_file	// limit to size if svg and [[File]] page
+					)
+				) {
+				file_is_orig = true;								// use orig img (don't create thumb)
+				file_w = file_h = Size__same_as_orig;
+				if (Xop_lnki_type.Id_limits_large_size(lnki_type)) {// do not allow html_w > orig_w; REF.MW:Generic.php|normaliseParams
+					html_w = orig_w;
+					html_h = orig_h;
+				}
+			}
+			else {													// html < orig
+				file_w = html_w;
+				file_h = html_h;
+			}
 		}
 	}
 //		private static boolean Calc_limit_size(int exec_tid, int lnki_type, int lnki_ext) {
@@ -135,7 +139,7 @@ public class Xof_img_size {
 	public static final int Null = -1;
 	public static final int Thumb_width_img = 220, Thumb_width_ogv = 220;
 	public static final double Upright_null = -1, Upright_default_marker = 0; // REF:MW: if ( isset( $fp['upright'] ) && $fp['upright'] == 0 )
-	public static final int Size_null_deprecated = -1, Size_null = 0;	// Size_null = 0, b/c either imageMagick / inkscape fails when -1 is passed
+	public static final int Size__neg1 = -1, Size_null = 0;	// Size_null = 0, b/c either imageMagick / inkscape fails when -1 is passed
 	public static final int Size__same_as_orig = -1;
 	private static final int Svg_max_width = 2048;
 }

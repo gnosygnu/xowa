@@ -73,14 +73,14 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		this.trg_atr_fil = trg_mnt_itm.Atr_mgr().Db__core();
 		this.trg_cfg_mgr = trg_mnt_itm.Cfg_mgr();
 		bin_db_mgr.Init_by_mnt_mgr(trg_mnt_mgr);
-		trg_atr_fil.Conn().Txn_bgn();			
+		trg_atr_fil.Conn().Txn_bgn("bldr__fsdb_make__trg_atr_fil");			
 		if (!trg_atr_fil.Conn().Eq(trg_cfg_mgr.Tbl().Conn()))	// need to create txn for v1; DATE:2015-07-04
-			trg_cfg_mgr.Tbl().Conn().Txn_bgn();
+			trg_cfg_mgr.Tbl().Conn().Txn_bgn("bldr__fsdb_make__trg_cfg_fil");
 		// bldr_db
 		Xob_db_file bldr_db = Xob_db_file.new__file_make(wiki.Fsys_mgr().Root_dir());
 		this.bldr_conn = bldr_db.Conn();
 		this.bldr_cfg_tbl = bldr_db.Tbl__cfg();	// NOTE: cfg and atr is in same db; use it
-		bldr_cfg_tbl.Conn().Txn_bgn();
+		bldr_cfg_tbl.Conn().Txn_bgn("bldr__fsdb_make__bldr_cfg_tbl");
 	}
 	public void Cmd_run() {
 		Init_bldr_bmks();
@@ -129,7 +129,7 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		Db_cfg_hash bmk_hash = bldr_cfg_tbl.Select_as_hash(Cfg_fsdb_make);
 		String tier_id_str = bmk_hash.Get(Cfg_tier_id_bmk).To_str_or(null);
 		if (tier_id_str == null) {	// bmks not found; new db;
-			bldr_conn.Txn_bgn();
+			bldr_conn.Txn_bgn("bldr__fsdb_make__bldr_conn");
 			bldr_cfg_tbl.Insert_int(Cfg_fsdb_make, Cfg_tier_id_bmk	, tier_id_bmk);
 			bldr_cfg_tbl.Insert_int(Cfg_fsdb_make, Cfg_page_id_bmk	, page_id_bmk);
 			bldr_cfg_tbl.Insert_int(Cfg_fsdb_make, Cfg_lnki_id_bmk	, lnki_id_bmk);
@@ -227,21 +227,21 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	}
 	private void Make_trg_bin_file(boolean try_nth, Xodb_tbl_oimg_xfer_itm fsdb, long src_rdr_len) {
 		boolean make = true, txn_bgn = true;
+		if (trg_bin_fil != null) {				// pre-existing bin_file; 
+			if (trg_mnt_itm.Db_mgr().File__solo_file())
+				txn_bgn = false;				// solo file; do nothing
+			else
+				trg_bin_fil.Conn().Txn_end();	// close txn before making new db
+		}
 		int tier_id = fsdb.Lnki_tier_id();
 		Xob_bin_db_itm nth_bin_db = bin_db_mgr.Get_nth_by_tier(tier_id);
-		if (try_nth) {						// try_nth is true; occurs for new runs or changed tier
-			if (	nth_bin_db.Id() != -1	// nth exists; 
+		if (try_nth) {							// try_nth is true; occurs for new runs or changed tier
+			if (	nth_bin_db.Id() != -1		// nth exists; 
 				&&	nth_bin_db.Db_len() + src_rdr_len < trg_bin_db_max) { // if src_rdr_len exceeds
-				make = false;				// do not make; use existing
-				txn_bgn = false;
+				make = false;					// do not make; use existing
 			}				
 		}
-		if (make) {							// no nth; make it;
-			if (trg_bin_fil != null) {			// pre-existing bin_file; 
-				trg_bin_fil.Conn().Txn_end();	// close txn before making new db
-				if (trg_mnt_itm.Db_mgr().File__solo_file())
-					txn_bgn = false;
-			}
+		if (make) {								// no nth; make it;
 			int ns_id = bin_db_mgr.Get_ns_id(tier_id);
 			int pt_id = bin_db_mgr.Increment_pt_id(nth_bin_db);
 			String new_bin_db_name = bin_db_mgr.Gen_name(wiki.Domain_str(), ns_id, pt_id);
@@ -252,12 +252,12 @@ public class Xob_fsdb_make_cmd extends Xob_itm_basic_base implements Xob_cmd {
 					Fsdb_db_mgr__v2_bldr.Make_cfg_data(wiki, trg_atr_fil.Url_rel(), trg_bin_db, Xowd_db_file_.Tid_file_data, trg_bin_fil.Id() + List_adp_.Base1);
 			}
 		}
-		else {	// nth available; use it
+		else {									// nth available; use it
 			this.trg_bin_fil = trg_mnt_itm.Bin_mgr().Dbs__get_at(nth_bin_db.Id());
 			trg_bin_fil.Bin_len_(nth_bin_db.Db_len());
 		}
 		if (txn_bgn)
-			trg_bin_fil.Conn().Txn_bgn();
+			trg_bin_fil.Conn().Txn_bgn("bldr__fsdb_make__trg_bin_fil");
 	}
 	private void Txn_sav() {
 		usr_dlg.Prog_many("", "", "committing data: count=~{0} failed=~{1}", exec_count, exec_fail);

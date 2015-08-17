@@ -73,8 +73,8 @@ public class Xof_xfer_mgr {
 		}
 
 		// BLOCK: orig; get orig for convert; note that Img_download will not download file again if src exists
-		src_str = this.Src_url(src_repo, Xof_repo_itm_.Mode_orig, Xof_img_size.Size_null_deprecated);
-		trg_url = this.Trg_url(trg_repo, Xof_repo_itm_.Mode_orig, Xof_img_size.Size_null_deprecated);
+		src_str = this.Src_url(src_repo, Xof_repo_itm_.Mode_orig, Xof_img_size.Size__neg1);
+		trg_url = this.Trg_url(trg_repo, Xof_repo_itm_.Mode_orig, Xof_img_size.Size__neg1);
 		if (!Img_download(src_str, trg_url, false)) return false;
 		trg_url = rslt.Trg();
 
@@ -114,7 +114,7 @@ public class Xof_xfer_mgr {
 				}
 				if (!Bry_.Eq(rslts.Orig_page(), orig_ttl)) {
 					orig_ttl = rslts.Orig_page();
-					orig_ttl_md5 = Xof_file_wkr_.Md5_(orig_ttl);
+					orig_ttl_md5 = Xof_file_wkr_.Md5(orig_ttl);
 					meta_itm.Ptr_ttl_(orig_ttl);
 				}
 				meta_itm.Vrtl_repo_(xfer_itm.Orig_repo_id());
@@ -138,7 +138,7 @@ public class Xof_xfer_mgr {
 				if (!wmf_api_found) return false;	// not found in wmf_api; exit now
 			}
 			else if (src_repo.Tarball()) {
-				String src_str = this.Src_url(src_repo, Xof_repo_itm_.Mode_orig, Xof_img_size.Size_null_deprecated);
+				String src_str = this.Src_url(src_repo, Xof_repo_itm_.Mode_orig, Xof_img_size.Size__neg1);
 				meta_itm.Orig_exists_(Xof_meta_itm.Exists_unknown);	// mark exists unknown; note need to assertively mark unknown b/c it may have been marked n in previous pass through multiple repos; DATE:20121227
 				meta_itm.Vrtl_repo_(Xof_meta_itm.Repo_unknown);		// mark repo unknown;
 				if (!Cmd_query_size(Io_url_.new_fil_(src_str))) {
@@ -256,8 +256,8 @@ public class Xof_xfer_mgr {
 	}
 	boolean Make_other() {
 		if (!Orig_max_download() && !force_orig) return false;
-		String src_str = this.Src_url(src_repo, Xof_repo_itm_.Mode_orig, Xof_img_size.Size_null_deprecated);
-		Io_url trg_url = this.Trg_url(trg_repo, Xof_repo_itm_.Mode_orig, Xof_img_size.Size_null_deprecated);
+		String src_str = this.Src_url(src_repo, Xof_repo_itm_.Mode_orig, Xof_img_size.Size__neg1);
+		Io_url trg_url = this.Trg_url(trg_repo, Xof_repo_itm_.Mode_orig, Xof_img_size.Size__neg1);
 		return Cmd_download(src_str, trg_url, true);
 	}
 	boolean Orig_max_download() {

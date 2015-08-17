@@ -93,7 +93,7 @@ class DsvDataWtr_fxt {
 	public void tst_XtoStr(DsvDataWtr wtr, GfoNde root, String expd) {
 		wtr.Clear();
 		root.XtoStr_wtr(wtr);
-		String actl = wtr.XtoStr();
+		String actl = wtr.To_str();
 		Tfds.Eq(expd, actl);
 	}
 	public static DsvDataWtr_fxt new_() {return new DsvDataWtr_fxt();} DsvDataWtr_fxt() {}

@@ -45,7 +45,7 @@ class Xot_defn_trace_fxt {
 		String[] actl_ary = String_.Split(tmp.Xto_str_and_clear(), (char)Byte_ascii.Nl);
 		Tfds.Eq_ary(expd_ary, actl_ary);
 	}	private Bry_bfr tmp = Bry_bfr.new_();
-	String[] XtoStr(Xot_defn_trace_itm_brief[] ary) {
+	String[] To_str(Xot_defn_trace_itm_brief[] ary) {
 		String[] rv = new String[ary.length];
 		for (int i = 0; i < rv.length; i++) {
 			Xot_defn_trace_itm_brief itm = ary[i];

@@ -53,7 +53,7 @@ public class Xop_log_mgr implements GfoInvkAble {
 	public void Delete_all() {
 		log_tbl.Delete();
 	}
-	public void Txn_bgn() {conn.Txn_bgn();}
+	public void Txn_bgn() {conn.Txn_bgn("log_mgr");}
 	public void Txn_end() {conn.Txn_end();}
 	public void Rls() {
 		if (log_tbl != null)	log_tbl.Rls();

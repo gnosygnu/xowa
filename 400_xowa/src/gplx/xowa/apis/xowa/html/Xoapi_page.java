@@ -18,7 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.apis.xowa.html; import gplx.*; import gplx.xowa.*; import gplx.xowa.apis.*; import gplx.xowa.apis.xowa.*;
 import gplx.core.btries.*;
 public class Xoapi_page implements GfoInvkAble {
-	public Xoapi_toggle_mgr Toggle_mgr() {return toggle_mgr;} private Xoapi_toggle_mgr toggle_mgr = new Xoapi_toggle_mgr();
+	public void Ctor_by_app(Xoae_app app) {
+		toggle_mgr.Ctor_by_app(app);
+	}
+	public Xoapi_toggle_mgr Toggle_mgr() {return toggle_mgr;} private final Xoapi_toggle_mgr toggle_mgr = new Xoapi_toggle_mgr();
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_toggles)) 			return toggle_mgr;
 		else	return GfoInvkAble_.Rv_unhandled;

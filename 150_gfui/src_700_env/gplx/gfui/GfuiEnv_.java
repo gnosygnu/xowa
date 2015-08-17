@@ -97,7 +97,7 @@ public class GfuiEnv_ {
 	public static final String Err_GfuiException = "gplx.dbs.GfuiException"; // TODO: used in JAVA. move
 }
 class GfuiInterruptLnr implements UsrMsgWkr {
-	public void ExecUsrMsg(int type, UsrMsg umsg) {GfuiEnv_.ShowMsg(umsg.XtoStr());}
+	public void ExecUsrMsg(int type, UsrMsg umsg) {GfuiEnv_.ShowMsg(umsg.To_str());}
 	public static GfuiInterruptLnr new_() {return new GfuiInterruptLnr();} GfuiInterruptLnr() {}
 }
 class GfuiFormRunner implements Runnable {

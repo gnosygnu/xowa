@@ -29,7 +29,7 @@ public class GfmlDataWtr extends DataWtr_base implements DataWtr {
 		if (nde.SubKeys().Count() != 0) AddTkn_nullVal(keyedSpr);	// add keyedSprTkn if not first
 		GfmlTkn keyTkn = AddTkn_raw(name);
 		AddTkn_raw("=");
-		GfmlTkn valTkn = AddTkn_raw(XtoStr(val));
+		GfmlTkn valTkn = AddTkn_raw(To_str(val));
 		GfmlAtr atr = GfmlAtr.new_(keyTkn, valTkn, GfmlType_.String);
 		nde.SubObjs_Add(atr);
 	}
@@ -72,13 +72,13 @@ public class GfmlDataWtr extends DataWtr_base implements DataWtr {
 	public void Clear() {nde.SubObjs_Clear();}
 	public void WriteTableBgn(String name, GfoFldList fields) {}
 	public void CloseBranchHdr(boolean isInline) {}
-	public String XtoStr() {
+	public String To_str() {
 		while (stack.Count() > 0) {	// auto-close all nodes
 			WriteNodeEnd();
 		}
 		return GfmlDocWtr_.xtoStr_(gdoc.RootNde());
 	}
-	String XtoStr(Object obj) {
+	String To_str(Object obj) {
 		if (obj == null) return "''";
 		String s = Object_.Xto_str_strict_or_empty(obj);
 		return String_.Concat("'", String_.Replace(s, "'", "''"), "'");

@@ -121,7 +121,7 @@ class GfmlUpdateFx {
 			GfmlUpdateCmd cmd = (GfmlUpdateCmd)cmds.Get_at(i);
 			cmd.Exec(actlDoc);
 		}
-		String actl = actlDoc.RootNde().XtoStr();
+		String actl = actlDoc.RootNde().To_str();
 		Tfds.Eq(expd, actl);
 		cmds.Clear();
 		return this;

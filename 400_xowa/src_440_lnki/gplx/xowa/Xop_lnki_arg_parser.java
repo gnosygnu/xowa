@@ -19,9 +19,9 @@ package gplx.xowa; import gplx.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
 import gplx.xowa.langs.numbers.*;
 public class Xop_lnki_arg_parser {
-	private final Btrie_fast_mgr key_trie = Btrie_fast_mgr.cs_();
+	private final Btrie_fast_mgr key_trie = Btrie_fast_mgr.cs();
 	private final Bry_bfr int_bfr = Bry_bfr.reset_(16);
-	private final Btrie_bwd_mgr px_trie = Btrie_bwd_mgr.cs_(); private final Btrie_fast_mgr size_trie = Btrie_fast_mgr.cs_();
+	private final Btrie_bwd_mgr px_trie = Btrie_bwd_mgr.cs_(); private final Btrie_fast_mgr size_trie = Btrie_fast_mgr.cs();
 	private int lnki_w, lnki_h;
 	public void Evt_lang_changed(Xol_lang lang) {
 		Bry_bfr tmp_bfr = int_bfr;
@@ -75,8 +75,8 @@ public class Xop_lnki_arg_parser {
 				byte b = src[i];
 				Object o = size_trie.Match_bgn_w_byte(b, src, i, itm_end);
 				if (o == null) {
-					this.lnki_w = 0;		// NOTE: must null out width; EX: "123xTextpx"; PAGE:es.b:Alimentación_infantil; DATE:2015-07-10
-					return Tid_caption;		// letter or other invalid character; return caption
+					this.lnki_w = Xop_lnki_tkn.Width_null;	// NOTE: must null out width; EX: "123xTextpx"; PAGE:es.b:Alimentación_infantil; DATE:2015-07-10; NOTE: must be -1, not 0; DATE:2015-08-05
+					return Tid_caption;						// letter or other invalid character; return caption
 				}
 				Byte_obj_val v = (Byte_obj_val)o;
 				switch (v.Val()) {	// NOTE: d0 - d9 handle non-english numbers; EX:fa.w and ۲۰۰px; DATE:2015-07-18

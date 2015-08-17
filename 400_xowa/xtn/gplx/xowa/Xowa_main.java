@@ -16,8 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.xowa;
+
 public class Xowa_main {
-	public static void main(String[] args) {
-		gplx.xowa.Xoa_app_.Run(args);
+	public static void main(String[] args) {		
+	    gplx.xowa.Xoa_app_.Run(args);
 	}
 }

@@ -20,7 +20,7 @@ import gplx.core.strings.*;
 public abstract class GfxItm_base implements GfxItm {
 	public PointAdp Pos() {return pos;} PointAdp pos = PointAdp_.Zero;
 	public SizeAdp Size() {return size;} SizeAdp size = SizeAdp_.Zero;
-	@Override public String toString() {return String_bldr_.new_().Add_kv_obj("pos", pos).Add_kv_obj("size", size).XtoStr();}
+	@Override public String toString() {return String_bldr_.new_().Add_kv_obj("pos", pos).Add_kv_obj("size", size).To_str();}
 	@Override public int hashCode() {return this.toString().hashCode();}
 	@Override public boolean equals(Object obj) {
 		GfxItm_base comp = GfxItm_base.as_(obj); if (comp == null) return false;

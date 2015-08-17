@@ -100,7 +100,7 @@ public class Xou_cache_mgr {
 		synchronized (thread_lock) {
 			Db_conn conn = cache_tbl.Conn();
 			try {
-				conn.Txn_bgn();
+				conn.Txn_bgn("user__file_cache__save");
 				int len = hash.Count();
 				for (int i = 0; i < len; ++i) {
 					Xou_cache_itm itm = (Xou_cache_itm)hash.Get_at(i);
@@ -136,14 +136,16 @@ public class Xou_cache_mgr {
 				for (int i = 0; i < len; ++i) {							// iterate and find items to delete
 					Xou_cache_grp grp = (Xou_cache_grp)grp_hash.Get_at(i);
 					fsys_size_temp = fsys_size_calc + grp.File_size();
-					if (fsys_size_temp > reduce_to)					// fsys_size_cur exceeded; mark itm for deletion
+					if (	fsys_size_temp > reduce_to					// fsys_size_cur exceeded; mark itm for deletion
+						||	fsys_size_temp == -1						// fsys_size sometimes -1; note -1 b/c file is missing; should fix, but for now, consider -1 size deleted; DATE:2015-08-05
+						)
 						deleted.Add(grp);
 					else
 						fsys_size_calc = fsys_size_temp;
 				}
 				len = deleted.Count();
 				Db_conn conn = cache_tbl.Conn();
-				conn.Txn_bgn();
+				conn.Txn_bgn("user__file_cache__delete");
 				for (int i = 0; i < len; i++) {							// iterate and delete
 					Xou_cache_grp grp = (Xou_cache_grp)deleted.Get_at(i);
 					grp.Delete(hash, cache_tbl);

@@ -87,10 +87,15 @@ public class Env_ {
 			);
 		return String_.Format(fmt, programName);
 	}
-	public static String Env_prop__user_language() {return Env_prop(Env_prop_key__user_language);}
+	public static String Env_prop__user_language()	{return Env_prop(Env_prop_key__user_language);}
+	public static String Env_prop__java_version()	{return Env_prop(Env_prop_key__java_version);}
 	public static String Env_prop(String key) {
 				return System.getProperty(key);
-			}	static final String Env_prop_key__user_language = "user.language";
+			}
+	private static final String
+	  Env_prop_key__user_language = "user.language"
+	, Env_prop_key__java_version = "java.version"
+	;
 	public static void Term_add(GfoInvkAble invk, String cmd) {
 				Thread_adp thread = Thread_adp_.invk_(invk, cmd);
 		Runtime.getRuntime().addShutdownHook(thread.Under_thread());

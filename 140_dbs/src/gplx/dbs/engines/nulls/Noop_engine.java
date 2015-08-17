@@ -28,7 +28,7 @@ public class Noop_engine implements Db_engine {
 	public Object			New_stmt_prep_as_obj(String sql) {throw Err_.new_unimplemented();}
 	public DataRdr			New_rdr(java.sql.ResultSet rdr, String sql) {return DataRdr_.Null;} 
 	public void				Txn_bgn(String name)	{}
-	public void				Txn_end()				{}
+	public String			Txn_end()				{return "";}
 	public void				Txn_cxl()				{}
 	public void				Txn_sav()				{}
 	public Object			Exec_as_obj(Db_qry cmd) {return cmd.Exec_is_rdr() ? (Object)DataRdr_.Null : -1;}

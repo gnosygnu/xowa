@@ -26,12 +26,12 @@ public class IoRecycleBin {
 		int listCount = list.Count(); if (listCount > 1) throw Err_.new_wo_type("found more than 1 url", "count", list.Count());
 		Io_url trgUrl = (Io_url)list.Get_at(0);
 		IoEngine_xrg_xferFil.move_(url, trgUrl).ReadOnlyFails_(true).Overwrite_(false).Exec();
-		IoEngine_xrg_saveFilStr.new_(FetchRegistryUrl(url), sb.XtoStr()).Exec();
+		IoEngine_xrg_saveFilStr.new_(FetchRegistryUrl(url), sb.To_str()).Exec();
 	}
 	public void Regy_add(IoEngine_xrg_recycleFil xrg) {
 		Io_url url = xrg.RecycleUrl();
 		Io_url regyUrl = FetchRegistryUrl(url);
-		String text = String_.ConcatWith_any("|", url.NameAndExt_noDirSpr(), xrg.Url().GenRelUrl_orEmpty(url.OwnerRoot()), xrg.Uuid().XtoStr(), xrg.AppName(), xrg.Time());
+		String text = String_.Concat_with_obj("|", url.NameAndExt_noDirSpr(), xrg.Url().GenRelUrl_orEmpty(url.OwnerRoot()), xrg.Uuid().To_str(), xrg.AppName(), xrg.Time());
 		IoEngine_xrg_saveFilStr.new_(regyUrl, text).Append_().Exec();
 	}
 	public List_adp Regy_search(Io_url url, String_bldr sb) {

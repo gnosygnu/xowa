@@ -19,7 +19,7 @@ package gplx.xowa.bldrs.xmls; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.core.btries.*;
 public class Xob_xml_parser_ {
 	public static Btrie_fast_mgr trie_() {
-		Btrie_fast_mgr rv = Btrie_fast_mgr.cs_();
+		Btrie_fast_mgr rv = Btrie_fast_mgr.cs();
 		trie_add(rv, Bry_page_bgn, Id_page_bgn); trie_add(rv, Bry_page_bgn_frag, Id_page_bgn_frag); trie_add(rv, Bry_page_end, Id_page_end);
 		trie_add(rv, Bry_id_bgn, Id_id_bgn); trie_add(rv, Bry_id_bgn_frag, Id_id_bgn_frag); trie_add(rv, Bry_id_end, Id_id_end);
 		trie_add(rv, Bry_title_bgn, Id_title_bgn); trie_add(rv, Bry_title_bgn_frag, Id_title_bgn_frag); trie_add(rv, Bry_title_end, Id_title_end);

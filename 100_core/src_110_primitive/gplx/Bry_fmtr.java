@@ -113,7 +113,7 @@ public class Bry_fmtr {
 			else
 				rv.Add(itm.DatStr());
 		}
-		return rv.XtoStr();
+		return rv.To_str();
 	}	private Bry_fmtr_itm[] itms; int itms_len;
 	public byte[] Missing_bgn() {return missing_bgn;} public Bry_fmtr Missing_bgn_(byte[] v) {missing_bgn = v; return this;} private byte[] missing_bgn = missing_bgn_static; static byte[] missing_bgn_static = Bry_.new_u8("~{"), missing_end_static = Bry_.new_u8("}");
 	public byte[] Missing_end() {return missing_end;} public Bry_fmtr Missing_end_(byte[] v) {missing_end = v; return this;} private byte[] missing_end = missing_end_static;

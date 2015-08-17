@@ -55,8 +55,8 @@ public class Prefs_mgr implements GfoInvkAble {
 		Xoae_page page = app.Gui_mgr().Browser_win().Active_page();
 		Props_set(page.Data_raw());
 		page.Wikie().ParsePage_root(page, true);	// reparse in order to save new values to root; needed for history and going back / fwd; DATE:2014-02-07
-		app.Api_root().Gui().Page().View().Reload();	// force reload to update page; needed for language; DATE:2014-05-26
-		app.Usr_dlg().Prog_direct("options saved (" + DateAdp_.Now().XtoStr_fmt("HH:mm:ss") + ")");
+		// app.Api_root().Gui().Page().View().Reload();	// force reload to update page; needed for language; DATE:2014-05-26; NOTE: deactivate on 2015-08-13; refreshing page causes options to not show
+		Xog_tab_itm tab = app.Gui_mgr().Browser_win().Active_tab(); if (tab != null) tab.Exec_notify(Bool_.Y, "options saved");
 	}
 	public void Props_set(byte[] src) {
 		src = Bry_.Replace(src, Bry_.new_a7("<xowa_cmd>"), Bry_.new_a7("&lt;xowa_cmd>"));

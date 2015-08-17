@@ -57,7 +57,7 @@ public class Http_request_parser {
 						if (Bry_.Has_at_end(line, Tkn_content_type_boundary_end)) break;	// last form_data pair will end with "--"; stop
 						line = Parse_content_type_boundary(rdr);
 					}
-					break;	// assume form_data ends POST request
+					break;	// assume form_data sends POST request
 				}
 				Object o = trie.Match_bgn(line, 0, line_len);
 				if (o == null) {
@@ -101,7 +101,8 @@ public class Http_request_parser {
 		this.protocol = Bry_.Mid(line, url_end + 1, line_len);
 	}
 	private void Parse_content_type(int val_bgn, byte[] line, int line_len) {	// EX: Content-Type: multipart/form-data; boundary=---------------------------72432484930026
-		int boundary_bgn = Bry_finder.Find_fwd(line, Tkn_boundary, val_bgn, line_len); if (boundary_bgn == Bry_finder.Not_found) throw Err_.new_wo_type("invalid content_type", "line", line, "request", To_str());
+		// handle wolfram and other clients; DATE:2015-08-03
+		int boundary_bgn = Bry_finder.Find_fwd(line, Tkn_boundary, val_bgn, line_len); if (boundary_bgn == Bry_finder.Not_found) return; // PURPOSE: ignore content-type for GET calls like by Mathematica server; DATE:2015-08-04 // throw Err_.new_wo_type("invalid content_type", "line", line, "request", To_str());
 		int content_type_end = Bry_finder.Find_bwd(line, Byte_ascii.Semic, boundary_bgn);
 		this.content_type = Bry_.Mid(line, val_bgn, content_type_end);
 		this.content_type_boundary = Bry_.Add(Tkn_content_type_boundary_end, Bry_.Mid(line, boundary_bgn += Tkn_boundary.length, line_len));

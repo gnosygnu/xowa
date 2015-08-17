@@ -53,7 +53,7 @@ public class StringTableBldr_tst {
 			);
 	}
 	void tst_XtoStr(String... expdLines) {
-		String expd = String_.ConcatWith_any(String_.CrLf, (Object[])expdLines);
-		Tfds.Eq(expd, bldr.XtoStr());
+		String expd = String_.Concat_with_obj(String_.CrLf, (Object[])expdLines);
+		Tfds.Eq(expd, bldr.To_str());
 	}
 }

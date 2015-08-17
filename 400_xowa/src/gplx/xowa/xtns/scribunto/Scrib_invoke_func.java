@@ -58,13 +58,13 @@ public class Scrib_invoke_func extends Pf_func_base {
 		}
 		catch (Exception e) {
 			Error(bfr, wiki.Msg_mgr(), e);
-			bfr.Add(Html_tag_.Comm_bgn).Add_str(Err_.Message_lang(e)).Add(Html_tag_.Comm_end);
-			String invoke_error = String_.Replace(Err_.Message_gplx_log(e), "\n", "");	// NOTE: replace \n as error may have excerpt which will have \n
+			Err err = Err_.cast_or_make(e);
+			bfr.Add(Html_tag_.Comm_bgn).Add_str(err.To_str__full()).Add(Html_tag_.Comm_end);
 			Scrib_err_filter_mgr err_filter_mgr = invoke_wkr == null ? null : invoke_wkr.Err_filter_mgr();
-			if (	err_filter_mgr == null																		// no err_filter_mgr defined;
-				||	err_filter_mgr.Count_eq_0()																	// err_filter_mgr exists, but no definitions
-				||	!err_filter_mgr.Match(String_.new_u8(mod_name), String_.new_u8(fnc_name), invoke_error))	// err_filter_mgr has defintion and it doesn't match current; print warn; DATE:2015-07-24					
-				ctx.App().Usr_dlg().Warn_many("", "", "invoke failed: ~{0} ~{1} ~{2}", ctx.Cur_page().Ttl().Raw(), String_.new_u8(src, self.Src_bgn(), self.Src_end()), String_.Replace(Err_.Message_gplx_log(e), "\n", "\t"));
+			if (	err_filter_mgr == null																				// no err_filter_mgr defined;
+				||	err_filter_mgr.Count_eq_0(	)																		// err_filter_mgr exists, but no definitions
+				||	!err_filter_mgr.Match(String_.new_u8(mod_name), String_.new_u8(fnc_name), err.To_str__msg_only()))	// NOTE: must be To_str__msg_only; err_filter_mgr has defintion and it doesn't match current; print warn; DATE:2015-07-24
+				ctx.App().Usr_dlg().Warn_many("", "", "invoke failed: ~{0} ~{1} ~{2}", ctx.Cur_page().Ttl().Raw(), String_.new_u8(src, self.Src_bgn(), self.Src_end()), err.To_str__log(), "\n", "\t");
 			Scrib_core.Core_invalidate_when_page_changes();	// NOTE: invalidate core when page changes, not for rest of page, else page with many errors will be very slow due to multiple invalidations; PAGE:th.d:all; DATE:2014-10-03
 		}
 	}

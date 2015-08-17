@@ -34,7 +34,7 @@ public class Io_size__tst {
 		// fxt.Test_XtoLongFail("1.1");	// DELETED:do not check for fractional bytes; EX: 10.7 GB DATE:2015-01-06
 		// fxt.Test_XtoLongFail("1.51 kb");
 	}
-	@Test    public void XtoStr() {
+	@Test    public void To_str() {
 		fxt.Test_XtoStr(1, "1.000  B");
 		fxt.Test_XtoStr(1024, "1.000 KB");
 		fxt.Test_XtoStr(1536, "1.500 KB");

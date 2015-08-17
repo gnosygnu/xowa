@@ -334,7 +334,7 @@ class Swt_msg_wkr_stop implements UsrMsgWkr {
 	private final Swt_kit kit; private final Gfo_usr_dlg gui_wtr;
 	public Swt_msg_wkr_stop(Swt_kit kit, Gfo_usr_dlg gui_wtr) {this.kit = kit; this.gui_wtr = gui_wtr;}
 	public void ExecUsrMsg(int type, UsrMsg umsg) {
-		String msg = umsg.XtoStr(); 
+		String msg = umsg.To_str(); 
 		kit.Ask_ok("xowa.gui", "stop", msg);
 		gui_wtr.Log_many("", "", msg);
 	}

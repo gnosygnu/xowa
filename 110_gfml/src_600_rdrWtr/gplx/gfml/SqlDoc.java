@@ -83,7 +83,7 @@ class SqlCmd_quote_end implements GfmlBldrCmd {
 			sb.Add(pnd.Val());
 		}
 		//Int_.Xto_str(bldr.CurNdeFrame().Nde().SubTkns().length)
-		GfmlAtr atr = GfmlAtr.new_(GfmlTkn_.raw_("word"), GfmlTkn_.raw_(sb.XtoStr()), GfmlType_.String);
+		GfmlAtr atr = GfmlAtr.new_(GfmlTkn_.raw_("word"), GfmlTkn_.raw_(sb.To_str()), GfmlType_.String);
 		bldr.CurNdeFrame().CurNde().SubObjs_Add(atr);
 		bldr.Frames_end();
 	}

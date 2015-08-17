@@ -23,13 +23,13 @@ public class DataRdr_ {
 	public static DataRdr cast_(Object obj) {try {return (DataRdr)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, DataRdr.class, obj);}}
 }
 class DataRdr_null implements DataRdr {
-	public String NameOfNode() {return XtoStr();} public String XtoStr() {return "<< NULL READER >>";}
+	public String NameOfNode() {return To_str();} public String To_str() {return "<< NULL READER >>";}
 	public boolean Type_rdr() {return true;}
 	public Hash_adp EnvVars() {return Hash_adp_.Noop;}
 	public Io_url Uri() {return Io_url_.Empty;} public void Uri_set(Io_url s) {}
 	public boolean Parse() {return parse;} public void Parse_set(boolean v) {parse = v;} private boolean parse;
 	public int FieldCount() {return 0;}
-	public String KeyAt(int i) {return XtoStr();}
+	public String KeyAt(int i) {return To_str();}
 	public Object ReadAt(int i) {return null;}
 	public KeyVal KeyValAt(int i) {return KeyVal_.new_(this.KeyAt(i), this.ReadAt(i));}
 	public Object Read(String name) {return null;}

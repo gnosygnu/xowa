@@ -28,7 +28,7 @@ public class Xob_stat_itm implements NewAble {
 		if (size > SizeMax) {SizeMax = size; SizeMaxIdx = idx;}
 		if (size < SizeMin) {SizeMin = size; SizeMinIdx = idx;}
 	}
-	public void XtoStr(String_bldr sb) {
+	public void To_str(String_bldr sb) {
 		XtoStr_fld(sb, ns).XtoStr_fld(sb, Fils).XtoStr_fld(sb, Size).XtoStr_fld(sb, SizeMax).XtoStr_fld(sb, SizeMaxIdx).XtoStr_fld(sb, SizeMin);
 		sb.Add(Int_.Xto_str(SizeMinIdx));
 	}

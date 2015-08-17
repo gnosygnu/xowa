@@ -48,43 +48,46 @@ public class Scrib_lib_mw implements Scrib_lib {
 			case Proc_loadPackage:							return LoadPackage(args, rslt);
 			case Proc_loadPHPLibrary:						return LoadPHPLibrary(args, rslt);
 			case Proc_frameExists:							return FrameExists(args, rslt);
-			case Proc_parentFrameExists:					return ParentFrameExists(args, rslt);
+			case Proc_newChildFrame:						return NewChildFrame(args, rslt);
 			case Proc_getExpandedArgument:					return GetExpandedArgument(args, rslt);
 			case Proc_getAllExpandedArguments:				return GetAllExpandedArguments(args, rslt);
 			case Proc_expandTemplate:						return ExpandTemplate(args, rslt);
-			case Proc_preprocess:							return Preprocess(args, rslt);
 			case Proc_callParserFunction:					return CallParserFunction(args, rslt);
+			case Proc_preprocess:							return Preprocess(args, rslt);
 			case Proc_incrementExpensiveFunctionCount:		return IncrementExpensiveFunctionCount(args, rslt);
 			case Proc_isSubsting:							return IsSubsting(args, rslt);
-			case Proc_newChildFrame:						return NewChildFrame(args, rslt);
 			case Proc_getFrameTitle:						return GetFrameTitle(args, rslt);
 			case Proc_setTTL:								return SetTTL(args, rslt);
+			case Proc_parentFrameExists:					return ParentFrameExists(args, rslt);	// DEPRECATED:not in Scribunto anymore
 			default: throw Err_.new_unhandled(key);
 		}
 	}
 	public static final int
 	  Proc_loadPackage = 0, Proc_loadPHPLibrary = 1
-	, Proc_frameExists = 2, Proc_parentFrameExists = 3
+	, Proc_frameExists = 2, Proc_newChildFrame = 3
 	, Proc_getExpandedArgument = 4, Proc_getAllExpandedArguments = 5
-	, Proc_expandTemplate = 6, Proc_preprocess = 7, Proc_callParserFunction = 8
+	, Proc_expandTemplate = 6, Proc_callParserFunction = 7, Proc_preprocess = 8
 	, Proc_incrementExpensiveFunctionCount = 9, Proc_isSubsting = 10
-	, Proc_newChildFrame = 11, Proc_getFrameTitle = 12, Proc_setTTL = 13
+	, Proc_getFrameTitle = 11, Proc_setTTL = 12
+	, Proc_parentFrameExists = 13
 	;
 	public static final String 
 	  Invk_loadPackage = "loadPackage", Invk_loadPHPLibrary = "loadPHPLibrary"
-	, Invk_frameExists = "frameExists", Invk_parentFrameExists = "parentFrameExists"
+	, Invk_frameExists = "frameExists", Invk_newChildFrame = "newChildFrame"
 	, Invk_getExpandedArgument = "getExpandedArgument", Invk_getAllExpandedArguments = "getAllExpandedArguments"
-	, Invk_expandTemplate = "expandTemplate", Invk_preprocess = "preprocess", Invk_callParserFunction = "callParserFunction"
+	, Invk_expandTemplate = "expandTemplate", Invk_callParserFunction = "callParserFunction", Invk_preprocess = "preprocess"
 	, Invk_incrementExpensiveFunctionCount = "incrementExpensiveFunctionCount", Invk_isSubsting = "isSubsting"
-	, Invk_newChildFrame = "newChildFrame", Invk_getFrameTitle = "getFrameTitle", Invk_setTTL = "setTTL"
+	, Invk_getFrameTitle = "getFrameTitle", Invk_setTTL = "setTTL"
+	, Invk_parentFrameExists = "parentFrameExists"
 	;
 	private static final String[] Proc_names = String_.Ary
 	( Invk_loadPackage, Invk_loadPHPLibrary
-	, Invk_frameExists, Invk_parentFrameExists
+	, Invk_frameExists, Invk_newChildFrame
 	, Invk_getExpandedArgument, Invk_getAllExpandedArguments
-	, Invk_expandTemplate, Invk_preprocess, Invk_callParserFunction
+	, Invk_expandTemplate, Invk_callParserFunction, Invk_preprocess
 	, Invk_incrementExpensiveFunctionCount, Invk_isSubsting
-	, Invk_newChildFrame, Invk_getFrameTitle, Invk_setTTL
+	, Invk_getFrameTitle, Invk_setTTL
+	, Invk_parentFrameExists
 	);
 	public boolean LoadPackage(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		String mod_name = args.Pull_str(0);

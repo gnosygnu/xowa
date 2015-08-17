@@ -29,6 +29,6 @@ public class Criteria_eq implements Criteria {
 		boolean rv = Object_.Eq(val, comp);
 		return negated ? !rv : rv;
 	}
-	public String XtoStr() {return String_.Concat_any("= ", val);}
+	public String To_str() {return String_.Concat_any("= ", val);}
 	public static Criteria_eq as_(Object obj) {return obj instanceof Criteria_eq ? (Criteria_eq)obj : null;}
 }

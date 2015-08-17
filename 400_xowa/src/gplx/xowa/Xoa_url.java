@@ -68,7 +68,7 @@ public class Xoa_url {
 	public byte[] To_bry(boolean full, boolean show_qargs) {							// currently used for status bar; not embedded in any html
 		switch (tid) {
 			case Xoa_url_.Tid_unknown:											// unknown; should not occur?
-				return Bry_.Len_eq_0(raw) ? Bry_.Add(wiki_bry, Byte_ascii.Slash_bry, page_bry) : raw;	// raw is empty when using new_();
+				return Bry_.Len_eq_0(raw) ? Bry_.Add(wiki_bry, Xoh_href_.Bry__wiki, page_bry) : raw;	// raw is empty when using new_();
 			case Xoa_url_.Tid_inet:												// protocol; embed all; EX: "http://a.org/A"; "file:///C/dir/file.txt"
 			case Xoa_url_.Tid_file:												// file; EX: "file:///C:/A/B.jpg"
 				return raw;

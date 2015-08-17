@@ -26,7 +26,7 @@ public class Xob_xfer_temp_cmd_orig extends Xob_itm_basic_base implements Xob_cm
 		Db_conn conn = Xob_db_file.new__file_make(wiki.Fsys_mgr().Root_dir()).Conn();
 		Xob_xfer_temp_tbl.Create_table(conn);
 		Db_stmt trg_stmt = Xob_xfer_temp_tbl.Insert_stmt(conn);
-		conn.Txn_bgn();
+		conn.Txn_bgn("bldr__xfer_temp");
 		DataRdr rdr = conn.Exec_sql_as_rdr(Sql_select);
 		long[] ext_maxs = Calc_ext_max();
 		while (rdr.MoveNextPeer()) {

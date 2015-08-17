@@ -53,7 +53,7 @@ public class Xowd_page_tbl implements RlsAble {
 		conn.Rls_reg(this);
 	}
 	public void Create_tbl() {conn.Ddl_create_tbl(Db_meta_tbl.new_(tbl_name, flds.To_fld_ary()));}
-	public void Insert_bgn() {conn.Txn_bgn(); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
+	public void Insert_bgn() {conn.Txn_bgn("schema__page__insert"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
 	public void Insert_end() {conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
 	public void Insert_cmd_by_batch(int page_id, int ns_id, byte[] ttl_wo_ns, boolean page_is_redirect, DateAdp modified_on, int page_len, int random_int, int text_db_id, int html_db_id) {
 		stmt_insert.Clear()
@@ -141,7 +141,7 @@ public class Xowd_page_tbl implements RlsAble {
 				hash.Add(p.Id_val(), p);
 		}
 		hash.Sort_by(Xowd_page_itm_sorter.IdAsc);	// sort by ID to reduce disk thrashing; DATE:2015-03-31
-		conn.Txn_bgn();
+		conn.Txn_bgn("schema__page__select_in");
 		try {
 			Xowd_page_tbl__id wkr = new Xowd_page_tbl__id();
 			wkr.Ctor(this, tbl_name, fld_id);

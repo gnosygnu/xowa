@@ -48,7 +48,7 @@ public class z082_GfmlDataWtrOpts_tst {
 		tst_XtoStr(wtr, String_.Concat("root:{key1='data1';}"));			
 	}
 	void tst_XtoStr(DataWtr wtr, String expd) {
-		String actl = wtr.XtoStr();
+		String actl = wtr.To_str();
 		Tfds.Eq(expd, actl);
 	}
 }

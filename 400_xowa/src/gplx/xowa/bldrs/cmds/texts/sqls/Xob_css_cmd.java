@@ -32,7 +32,7 @@ public class Xob_css_cmd implements Xob_cmd {
 		usr_dlg.Plog_many("", "", Cmd_key() + ":css_dir; dir=~{0}", css_dir.Raw());
 		wiki.Init_db_mgr();	// NOTE: must follow Install b/c Init_assert also calls Install; else will download any css from db
 		Xowd_db_file core_db = wiki.Db_mgr_as_sql().Core_data_mgr().Db__core();
-		core_db.Conn().Txn_bgn();
+		core_db.Conn().Txn_bgn("bldr__css");
 		core_db.Tbl__css_core().Create_tbl();
 		core_db.Tbl__css_file().Create_tbl();
 		gplx.xowa.html.css.Xowd_css_core_mgr.Set(core_db.Tbl__css_core(), core_db.Tbl__css_file(), css_dir, css_key);

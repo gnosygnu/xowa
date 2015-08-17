@@ -31,7 +31,7 @@ class DataWtr_null implements DataWtr {
 	public void WriteNodeEnd() {}
 	public void WriteLeafEnd() {}
 	public void Clear() {}
-	public String XtoStr() {return "";}
+	public String To_str() {return "";}
 	public Object StoreRoot(SrlObj root, String key) {return null;}
 	public boolean SrlBoolOr(String key, boolean v) {return v;}
 	public byte SrlByteOr(String key, byte v) {return v;}

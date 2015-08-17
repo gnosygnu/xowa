@@ -31,6 +31,6 @@ public class Criteria_like implements Criteria {
 		boolean rv = pattern.Matches(comp);
 		return negated ? !rv : rv;
 	}
-	public String XtoStr() {return String_.Concat_any("LIKE ", pattern);}
+	public String To_str() {return String_.Concat_any("LIKE ", pattern);}
 	public static Criteria_like as_(Object obj) {return obj instanceof Criteria_like ? (Criteria_like)obj : null;}
 }

@@ -110,11 +110,11 @@ public class Btrie_fast_mgr {
 		}
 		return dirty ? tmp_bfr.Xto_bry_and_clear() : src;
 	}
-	public static Btrie_fast_mgr cs_()		{return new Btrie_fast_mgr(false);}
-	public static Btrie_fast_mgr ci_ascii_()	{return new Btrie_fast_mgr(true);}
+	public static Btrie_fast_mgr cs()			{return new Btrie_fast_mgr(Bool_.N);}
+	public static Btrie_fast_mgr ci_a7()		{return new Btrie_fast_mgr(Bool_.Y);}
 	public static Btrie_fast_mgr new_(boolean case_any) {return new Btrie_fast_mgr(case_any);}
-	Btrie_fast_mgr(boolean caseAny) {
-		root = new ByteTrieItm_fast(Byte_.Zero, null, caseAny);
+	Btrie_fast_mgr(boolean case_any) {
+		root = new ByteTrieItm_fast(Byte_.Zero, null, case_any);
 	}
 }
 class ByteTrieItm_fast {
@@ -122,7 +122,7 @@ class ByteTrieItm_fast {
 	public byte Key_byte() {return key_byte;} private byte key_byte;
 	public Object Val() {return val;} public void Val_set(Object val) {this.val = val;} Object val;
 	public boolean Ary_is_empty() {return ary_is_empty;} private boolean ary_is_empty;
-	public boolean CaseAny() {return caseAny;} public ByteTrieItm_fast CaseAny_(boolean v) {caseAny = v; return this;} private boolean caseAny;
+	public boolean CaseAny() {return case_any;} public ByteTrieItm_fast CaseAny_(boolean v) {case_any = v; return this;} private boolean case_any;
 	public void Clear() {
 		val = null;
 		for (int i = 0; i < 256; i++) {
@@ -135,22 +135,22 @@ class ByteTrieItm_fast {
 		ary_is_empty = true;
 	}
 	public ByteTrieItm_fast Ary_find(byte b) {
-		int key_byte = (caseAny && (b > 64 && b < 91) ? b + 32 : b) & 0xff;// PATCH.JAVA:need to convert to unsigned byte
+		int key_byte = (case_any && (b > 64 && b < 91) ? b + 32 : b) & 0xff;// PATCH.JAVA:need to convert to unsigned byte
 		return ary[key_byte];
 	}
 	public ByteTrieItm_fast Ary_add(byte b, Object val) {
-		int key_byte = (caseAny && (b > 64 && b < 91) ? b + 32 : b) & 0xff;// PATCH.JAVA:need to convert to unsigned byte
-		ByteTrieItm_fast rv = new ByteTrieItm_fast(b, val, caseAny);
+		int key_byte = (case_any && (b > 64 && b < 91) ? b + 32 : b) & 0xff;// PATCH.JAVA:need to convert to unsigned byte
+		ByteTrieItm_fast rv = new ByteTrieItm_fast(b, val, case_any);
 		ary[key_byte] = rv;
 		++ary_len;
 		ary_is_empty = false;
 		return rv;
 	}
 	public void Ary_del(byte b) {
-		int key_byte = (caseAny && (b > 64 && b < 91) ? b + 32 : b) & 0xff;// PATCH.JAVA:need to convert to unsigned byte
+		int key_byte = (case_any && (b > 64 && b < 91) ? b + 32 : b) & 0xff;// PATCH.JAVA:need to convert to unsigned byte
 		ary[key_byte] = null;
 		--ary_len;
 		ary_is_empty = ary_len == 0;
 	}	int ary_len = 0;
-	public ByteTrieItm_fast(byte key_byte, Object val, boolean caseAny) {this.key_byte = key_byte; this.val = val; this.caseAny = caseAny;}
+	public ByteTrieItm_fast(byte key_byte, Object val, boolean case_any) {this.key_byte = key_byte; this.val = val; this.case_any = case_any;}
 }

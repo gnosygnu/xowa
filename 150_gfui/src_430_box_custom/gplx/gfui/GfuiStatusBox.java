@@ -29,7 +29,7 @@ public class GfuiStatusBox extends GfuiTextBox implements UsrMsgWkr { 	public Gf
 			) return;
 		this.CreateControlIfNeeded();		// WORKAROUND.WINFORMS: else will sometimes throw: Cannot call Invoke or InvokeAsync on a control until the window handle has been created
 		this.VisibilityDuration_(umsg.VisibilityDuration());		
-		String text = String_.Replace(umsg.XtoStr(), Op_sys.Cur().Nl_str(), " "); // replace NewLine with " " since TextBox cannot show NewLine
+		String text = String_.Replace(umsg.To_str(), Op_sys.Cur().Nl_str(), " "); // replace NewLine with " " since TextBox cannot show NewLine
 		Invoke(GfoInvkAbleCmd.arg_(this, Invk_WriteText, text));
 	}
 	public void WriteText(String text) {

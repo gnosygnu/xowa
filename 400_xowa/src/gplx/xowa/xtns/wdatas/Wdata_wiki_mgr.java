@@ -129,6 +129,7 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 		return qids[qid_idx];
 	}
 	public void Resolve_to_bfr(Bry_bfr bfr, Wdata_claim_grp prop_grp, byte[] lang_key) {
+		Hwtr_mgr_assert();
 		int len = prop_grp.Len();
 		Wdata_claim_itm_core selected = null;
 		for (int i = 0; i < len; i++) {								// NOTE: multiple props possible; EX: {{#property:P1082}}; PAGE:en.w:Earth DATE:2015-08-02
@@ -143,7 +144,7 @@ public class Wdata_wiki_mgr implements GfoEvObj, GfoInvkAble {
 			case Wdata_dict_snak_tid.Tid_novalue	: bfr.Add(Wdata_dict_snak_tid.Bry_novalue); break;
 			case Wdata_dict_snak_tid.Tid_somevalue	: bfr.Add(Wdata_dict_snak_tid.Bry_somevalue); break;
 			default: {
-				prop_val_visitor.Init(bfr, lang_key);
+				prop_val_visitor.Init(bfr, hwtr_mgr.Msgs(), lang_key);
 				selected.Welcome(prop_val_visitor);
 				break;
 			}

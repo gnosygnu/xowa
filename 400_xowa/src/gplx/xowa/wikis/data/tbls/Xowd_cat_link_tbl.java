@@ -39,7 +39,7 @@ public class Xowd_cat_link_tbl implements RlsAble {
 		, Db_meta_idx.new_normal_by_tbl(tbl_name, "from", fld_from)
 		);
 	}
-	public void Insert_bgn() {conn.Txn_bgn(); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
+	public void Insert_bgn() {conn.Txn_bgn("schema__cat_link__insert"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
 	public void Insert_end() {conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
 	public void Insert_cmd_by_batch(int page_id, int ctg_page_id, byte ctg_tid, byte[] sortkey, int timestamp) {
 		stmt_insert.Clear()

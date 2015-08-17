@@ -49,7 +49,7 @@ public class Xof_xfer_queue_html_cases_tst {
 	@Test  public void Ogg_vid_thumb() {
 		fxt	.ini_page_create_commons			("File:A.ogg");
 		fxt	.Lnki_orig_("A.ogg")
-			.Src(	fxt.img_("mem/src/commons.wikimedia.org/thumb/4/42/A.ogg/mid-A.ogg.jpg", 300, 40))
+			.Src(	fxt.img_("mem/src/commons.wikimedia.org/thumb/4/42/A.ogg/-1px--A.ogg.jpg", 300, 40))
 			.Trg(	fxt.img_("mem/trg/commons.wikimedia.org/fit/4/2/A.ogg/300px.jpg", 300, 40)
 				,	fxt.reg_("mem/xowa/file/#meta/en.wikipedia.org/4/42.csv", "A.ogg|0||0?0,0|1?300,40")
 				);
@@ -234,7 +234,7 @@ public class Xof_xfer_queue_html_cases_tst {
 		fxt.Src_en_wiki_repo().Ext_rules().Get_or_new(Xof_ext_.Bry_ogv).View_max_(0);
 		Io_mgr.I.SaveFilStr("mem/xowa/file/#meta/en.wikipedia.org/d/d0.csv", "A.ogv|0||2?0,0|1?300,40\n");	// simulate (a)
 		fxt	.Lnki_("A.ogv", true, -1, -1, -1, 5)															
-		.Src(	fxt.img_("mem/src/commons.wikimedia.org/thumb/d/d0/A.ogv/seek%3D5-A.ogv.jpg", 300, 40)	
+		.Src(	fxt.img_("mem/src/commons.wikimedia.org/thumb/d/d0/A.ogv/-1px-seek%3D5-A.ogv.jpg", 300, 40)	
 				)
 		.Trg(	fxt.img_("mem/trg/commons.wikimedia.org/fit/d/0/A.ogv/300px@5.jpg", 300, 40)
 			,	fxt.reg_("mem/xowa/file/#meta/en.wikipedia.org/d/d0.csv", "A.ogv|0||2?0,0|1?300,40@5")
@@ -246,7 +246,7 @@ public class Xof_xfer_queue_html_cases_tst {
 		fxt	.ini_page_create_commons			("File:A.webm");
 		fxt	.Lnki_thumb_("A.webm", 220)
 		.Src(	fxt.ogg_("mem/src/commons.wikimedia.org/3/34/A.webm")
-			,	fxt.img_("mem/src/commons.wikimedia.org/thumb/3/34/A.webm/mid-A.webm.jpg", 300, 40)	
+			,	fxt.img_("mem/src/commons.wikimedia.org/thumb/3/34/A.webm/220px--A.webm.jpg", 300, 40)	
 				)
 		.Trg(	fxt.ogg_("mem/trg/commons.wikimedia.org/raw/3/4/A.webm")
 			,	fxt.img_("mem/trg/commons.wikimedia.org/fit/3/4/A.webm/300px.jpg", 300, 40)
@@ -257,7 +257,7 @@ public class Xof_xfer_queue_html_cases_tst {
 	@Test  public void Ogv_thumb() {// d00d1d5019e37cc219a91a2f8ad47bfe
 		fxt	.ini_page_create_commons			("File:A.ogv");
 		fxt	.Lnki_orig_("A.ogv")
-			.Src(	fxt.img_("mem/src/commons.wikimedia.org/thumb/d/d0/A.ogv/mid-A.ogv.jpg", 300, 40))
+			.Src(	fxt.img_("mem/src/commons.wikimedia.org/thumb/d/d0/A.ogv/-1px--A.ogv.jpg", 300, 40))
 			.Trg(	fxt.img_("mem/trg/commons.wikimedia.org/fit/d/0/A.ogv/300px.jpg", 300, 40)
 				,	fxt.reg_("mem/xowa/file/#meta/en.wikipedia.org/d/d0.csv", "A.ogv|0||0?0,0|1?300,40")
 				)
@@ -269,7 +269,7 @@ public class Xof_xfer_queue_html_cases_tst {
 	}
 	@Test  public void Thumbtime_ignored_if_non_media() { // PURPOSE: ignore thumbtime if not media; PAGE:en.w:Moon; EX:[[File:A.png|thumbtime=0.02]] DATE:2014-07-22
 		fxt	.ini_page_create_en_wiki("File:A.png");
-		fxt	.Lnki_("A.png", true, 90, Xof_img_size.Size_null_deprecated, Xof_img_size.Size_null_deprecated, 2)	// thumbtime of 2 specified; will be ignored below
+		fxt	.Lnki_("A.png", true, 90, Xof_img_size.Size__neg1, Xof_img_size.Size__neg1, 2)	// thumbtime of 2 specified; will be ignored below
 			.Src(	fxt.img_("mem/src/en.wikipedia.org/thumb/7/70/A.png/90px-A.png", 90, 80))
 			.Trg(	fxt.img_("mem/trg/en.wikipedia.org/fit/7/0/A.png/90px.png", 90, 80)
 				,	fxt.reg_("mem/xowa/file/#meta/en.wikipedia.org/7/70.csv", "A.png|y||2?0,0|1?90,80")

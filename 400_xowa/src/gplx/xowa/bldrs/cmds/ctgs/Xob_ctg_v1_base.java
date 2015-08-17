@@ -94,7 +94,7 @@ public abstract class Xob_ctg_v1_base extends Xob_itm_dump_base implements Xobd_
 		if (delete_temp) Io_mgr.I.DeleteDirDeep(temp_dir);
 	}
 	private Gfo_fld_wtr fld_wtr = Gfo_fld_wtr.xowa_();
-	Btrie_fast_mgr trie = Btrie_fast_mgr.cs_().Add_stub(Tid_brack_end, "]]").Add_stub(Tid_pipe, "|").Add_stub(Tid_nl, "\n").Add_stub(Tid_brack_bgn, "[[");
+	Btrie_fast_mgr trie = Btrie_fast_mgr.cs().Add_stub(Tid_brack_end, "]]").Add_stub(Tid_pipe, "|").Add_stub(Tid_nl, "\n").Add_stub(Tid_brack_bgn, "[[");
 	static final int row_fixed_len = 5 + 1 + 1;	// 5=rowId; 1=|; 1=\n
 	List_adp category_list = List_adp_.new_(); Int_obj_ref cur_pos = Int_obj_ref.zero_();
 	static final byte Tid_eos = 0, Tid_brack_end = 1, Tid_pipe = 2, Tid_nl = 3, Tid_brack_bgn = 4;

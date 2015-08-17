@@ -23,6 +23,6 @@ public class Guid_adp__tst {
 	}
 	void tst_parse_(String s) {
 		Guid_adp uuid = Guid_adp_.parse_(s);
-		Tfds.Eq(uuid.XtoStr(), s);
+		Tfds.Eq(uuid.To_str(), s);
 	}
 }

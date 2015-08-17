@@ -158,7 +158,7 @@ public class Pfunc_expr_shunter {
 		return val_stack.Len() == 0 ? Null_rslt : val_stack.Pop();	// HACK: for [[List of Premiers of South Australia by time in office]] and {{#expr:\n{{age in days
 	}
 	private static Btrie_fast_mgr expression_() {
-		Btrie_fast_mgr rv = Btrie_fast_mgr.ci_ascii_();	// NOTE:ci.ascii:MW_const.en; math and expressions
+		Btrie_fast_mgr rv = Btrie_fast_mgr.ci_a7();	// NOTE:ci.ascii:MW_const.en; math and expressions
 		Trie_add(rv, new Ws_tkn(Byte_ascii.Space));
 		Trie_add(rv, new Ws_tkn(Byte_ascii.Tab));
 		Trie_add(rv, new Ws_tkn(Byte_ascii.Nl));
@@ -166,7 +166,7 @@ public class Pfunc_expr_shunter {
 		Trie_add(rv, Paren_end_tkn._);
 		Trie_add(rv, new Func_tkn_plus("+"));
 		Trie_add(rv, new Func_tkn_minus("-"));
-		Trie_add(rv, new Func_tkn_minus(Char_.XtoStr((char)8722)));
+		Trie_add(rv, new Func_tkn_minus(Char_.To_str((char)8722)));
 		Trie_add(rv, new Func_tkn_times("*"));
 		Trie_add(rv, new Func_tkn_divide("/"));
 		Trie_add(rv, new Func_tkn_divide("div"));

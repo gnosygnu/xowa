@@ -31,7 +31,7 @@ class GfmlAtr_mok implements GfmlItm_mok {
 	public String XtoStrStub() {
 		String_bldr sb = String_bldr_.new_();
 		sb.Add_kv("key=", key).Add_kv("val=", val);
-		return sb.XtoStr();
+		return sb.To_str();
 	}
         public static final GfmlAtr_mok Null = new GfmlAtr_mok().Key_(String_.Null_mark).Val_(String_.Null_mark);
 	public static GfmlAtr_mok as_(Object obj) {return obj instanceof GfmlAtr_mok ? (GfmlAtr_mok)obj : null;}
@@ -54,7 +54,7 @@ class GfmlNde_mok implements GfmlItm_mok {
 	public String XtoStrStub() {
 		String_bldr sb = String_bldr_.new_();
 		sb.Add_kv("key=", key).Add_kv("hnd=", hnd).Add_kv("typ=", typ).Add_kv("subs=", Int_.Xto_str(subs.Count()));
-		return sb.XtoStr();
+		return sb.To_str();
 	}
 	public GfmlNde_mok Subs_(GfmlItm_mok... ary) {
 		for (GfmlItm_mok itm : ary)

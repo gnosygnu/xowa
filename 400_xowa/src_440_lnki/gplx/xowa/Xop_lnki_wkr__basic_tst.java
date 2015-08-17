@@ -65,45 +65,6 @@ public class Xop_lnki_wkr__basic_tst {
 			.Caption_tkn_(fxt.tkn_arg_nde_(22, 25).Val_tkn_(fxt.tkn_arg_itm_(fxt.tkn_txt_(22, 23), fxt.tkn_space_(23, 24), fxt.tkn_txt_(24, 25)))))
 			;
 	}
-	@Test  public void Thumbtime() {
-		fxt.Test_parse_page_wiki("[[File:A.ogv|thumbtime=123]]", fxt.tkn_lnki_().Thumbtime_(123));
-		fxt.Test_parse_page_wiki("[[File:A.ogv|thumbtime=1:23]]", fxt.tkn_lnki_().Thumbtime_(83));
-		fxt.Test_parse_page_wiki("[[File:A.ogv|thumbtime=1:01:01]]", fxt.tkn_lnki_().Thumbtime_(3661));
-		fxt.Init_log_(Xop_lnki_log.Upright_val_is_invalid).Test_parse_page_wiki("[[File:A.ogv|thumbtime=a]]", fxt.tkn_lnki_().Thumbtime_(-1));
-	}
-	@Test  public void Width_ws() {
-		fxt.Test_parse_page_wiki("[[Image:a| 123 px]]"		, fxt.tkn_lnki_().Width_(123));
-	}
-	@Test  public void Height() {
-		fxt.Test_parse_page_wiki("[[Image:a|x40px]]"			, fxt.tkn_lnki_().Height_(40).Width_(-1));
-	}
-	@Test  public void Size_double_px_ignored() {
-		fxt.Test_parse_page_wiki("[[Image:a|40pxpx]]"		, fxt.tkn_lnki_().Width_(40).Height_(-1));
-	}
-	@Test  public void Size_px_px_ignored() {
-		fxt.Test_parse_page_wiki("[[Image:a|40px20px]]"		, fxt.tkn_lnki_().Width_(-1).Height_(-1));
-	}
-	@Test  public void Size_double_px_ws_allowed() {
-		fxt.Test_parse_page_wiki("[[Image:a|40pxpx  ]]"		, fxt.tkn_lnki_().Width_(40).Height_(-1));
-	}
-	@Test  public void Size_double_px_ws_allowed_2() {	// PURPOSE: handle ws between px's; EX:sv.w:Drottningholms_slott; DATE:2014-03-01
-		fxt.Test_parse_page_wiki("[[Image:a|40px px]]"		, fxt.tkn_lnki_().Width_(40).Height_(-1));
-	}
-	@Test  public void Size_large_numbers() {	// PURPOSE: perf code identified large sizes as caption; DATE:2014-02-15
-		fxt.Test_parse_page_wiki("[[Image:a|1234567890x1234567890px]]"		, fxt.tkn_lnki_().Width_(1234567890).Height_(1234567890));
-	}
-	@Test  public void Size_dangling_xnde() {	// PURPOSE: dangling xnde should not eat rest of lnki; PAGE:sr.w:Сићевачка_клисура DATE:2014-07-03
-		fxt.Init_log_(Xop_xnde_log.Dangling_xnde).Test_parse_page_wiki("[[Image:a.png|<b>c|40px]]"	, fxt.tkn_lnki_().Width_(40).Height_(-1));
-	}
-	@Test   public void Size_ws_para() {	// PURPOSE: <p> in arg_bldr causes parse to fail; EX: w:Supreme_Court_of_the_United_States; DATE:2014-04-05; updated test; DATE:2015-03-31
-		fxt.Init_para_y_();
-		fxt.Test_parse_page_all("[[File:A.png| \n 40px]]"
-		, fxt.tkn_para_bgn_para_(0)
-		, fxt.tkn_lnki_().Width_(40).Height_(-1)
-		, fxt.tkn_para_end_para_(22));
-		fxt.Init_para_n_();
-	}
-
 	@Test  public void Image_upright() {
 		fxt.Test_parse_page_wiki("[[Image:a|upright=.123]]"	, fxt.tkn_lnki_().Upright_(.123));
 		fxt.Test_parse_page_wiki("[[Image:a|upright]]"		, fxt.tkn_lnki_().Upright_(gplx.xowa.files.Xof_img_size.Upright_default_marker));		// no eq tokn

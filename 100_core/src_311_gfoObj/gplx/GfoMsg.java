@@ -19,7 +19,7 @@ package gplx;
 public interface GfoMsg {
 	String	Key();
 	GfoMsg	CloneNew();
-	String	XtoStr();
+	String	To_str();
 	GfoMsg	Clear();
 	GfoMsg  Parse_(boolean v);
 

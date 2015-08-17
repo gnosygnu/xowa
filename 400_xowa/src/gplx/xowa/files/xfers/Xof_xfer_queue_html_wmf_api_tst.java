@@ -158,7 +158,7 @@ public class Xof_xfer_queue_html_wmf_api_tst {
 	@Test  public void Imap() { // PURPOSE: check that imap downloads orig, even when thumb is requested; DATE:2014-08-08
 		fxt	.ini_page_create_commons("File:A.png");
 		fxt	.ini_page_api("commons", "A.png", "", 180, 160);
-		fxt	.Lnki_("A.png", true, 90, Xof_img_size.Size_null_deprecated, Xof_img_size.Size_null_deprecated, Xof_lnki_time.Null_as_int);	// thumbtime of 2 specified; will be ignored below
+		fxt	.Lnki_("A.png", true, 90, Xof_img_size.Size__neg1, Xof_img_size.Size__neg1, Xof_lnki_time.Null_as_int);	// thumbtime of 2 specified; will be ignored below
 		fxt	.Xfer_itm().Html_elem_tid_(Xof_html_elem.Tid_imap);
 		fxt	.Src(	fxt.img_("mem/src/commons.wikimedia.org/thumb/7/70/A.png/90px-A.png", 90, 80))
 			.Trg(	fxt.img_("mem/trg/commons.wikimedia.org/fit/7/0/A.png/90px.png", 90, 80)

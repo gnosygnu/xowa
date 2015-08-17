@@ -33,7 +33,7 @@ public class Criteria_fld implements Criteria {
 		Object comp = GfoInvkAble_.InvkCmd(invk, key);			
 		return crt.Matches(comp);
 	}
-	public String		XtoStr() {return String_.Concat(key, " ", crt.XtoStr());}
+	public String		To_str() {return String_.Concat(key, " ", crt.To_str());}
 	public static final String Key_null = null;
 	public static Criteria_fld as_(Object obj) {return obj instanceof Criteria_fld ? (Criteria_fld)obj : null;}
 	public static Criteria_fld new_(String key, Criteria crt) {return new Criteria_fld(key, crt);}

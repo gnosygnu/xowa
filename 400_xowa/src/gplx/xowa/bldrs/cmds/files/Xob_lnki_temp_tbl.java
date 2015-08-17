@@ -40,7 +40,7 @@ class Xob_lnki_temp_tbl {
 	public Xob_lnki_temp_tbl(Db_conn conn) {this.conn = conn;}
 	public Db_conn Conn()		{return conn;} private final Db_conn conn;
 	public void Create_tbl()	{conn.Ddl_create_tbl(Db_meta_tbl.new_(Tbl_name, flds));}
-	public void Insert_bgn()	{conn.Txn_bgn(); stmt_insert = conn.Stmt_insert(Tbl_name, flds);}
+	public void Insert_bgn()	{conn.Txn_bgn("bldr__lnki_temp"); stmt_insert = conn.Stmt_insert(Tbl_name, flds);}
 	public void Insert_commit()	{conn.Txn_sav();}
 	public void Insert_end()	{conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
 	public void Insert_cmd_by_batch(int tier_id, int page_id, byte[] ttl, byte[] ttl_commons, byte ext_id, byte img_type, byte lnki_src_tid, int w, int h, double upright, double time, int page) {

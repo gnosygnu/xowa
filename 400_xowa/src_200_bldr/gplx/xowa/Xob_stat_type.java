@@ -23,11 +23,11 @@ public class Xob_stat_type {
 	public Xob_stat_itm GetOrNew(String ns) {return (Xob_stat_itm)regy.Get_by_or_new(ns, Xob_stat_itm._);}
 	public Xob_stat_itm GetAt(int i) {return (Xob_stat_itm)regy.Get_at(i);}
 	public int Count() {return regy.Count();}
-	public void XtoStr(String_bldr sb) {
+	public void To_str(String_bldr sb) {
 		for (int i = 0; i < regy.Count(); i++) {
 			Xob_stat_itm itm = (Xob_stat_itm)regy.Get_at(i);
 			sb.Add(Xotdb_dir_info_.Tid_name(tid)).Add(Xob_stat_itm.Dlm);
-			itm.XtoStr(sb);
+			itm.To_str(sb);
 			sb.Add(Byte_ascii.Nl);
 		}
 	}

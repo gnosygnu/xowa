@@ -226,7 +226,7 @@ public class Xow_hzip_itm__anchor {
 	;
 	private static final byte Href_tid_wiki = 1, Href_tid_site = 2;
 	private static final int Href_bry_len = 6; // "/wiki/".length
-	private static final Btrie_fast_mgr btrie_href = Btrie_fast_mgr.cs_()
+	private static final Btrie_fast_mgr btrie_href = Btrie_fast_mgr.cs()
 	.Add_str_byte("/wiki/", Href_tid_wiki)
 	.Add_str_byte("/site/", Href_tid_site);
 	private static final int 

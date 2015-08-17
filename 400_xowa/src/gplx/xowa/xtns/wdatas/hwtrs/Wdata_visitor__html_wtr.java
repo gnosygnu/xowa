@@ -69,22 +69,7 @@ class Wdata_visitor__html_wtr implements Wdata_claim_visitor {
 			Gfo_usr_dlg_.I.Warn_many("", "", "failed to write quantity; ttl=~{0} pid=~{1} err=~{2}", ttl, itm.Pid(), Err_.Message_gplx_full(e));
 		}
 	}	private static final byte[] Time_plus_minus_spr = Bry_.new_a7(" / ");
-	public void Visit_time(Wdata_claim_itm_time itm) {
-		try {
-			Wdata_date date = itm.Time_as_date();
-			boolean calendar_is_julian = itm.Calendar_is_julian();
-			byte[] calendar_display = null;
-			if (calendar_is_julian) {
-				date = Wdata_date.Xto_julian(date);
-				calendar_display = msgs.Time_julian();
-			}
-			Wdata_date.Xto_str(tmp_bfr, tmp_time_fmtr, tmp_time_bfr, msgs, date);
-			if (calendar_display != null)
-				tmp_bfr.Add_byte_space().Add(calendar_display);
-		} catch (Exception e) {
-			Gfo_usr_dlg_.I.Warn_many("", "", "failed to write time; ttl=~{0} pid=~{1} err=~{2}", ttl, itm.Pid(), Err_.Message_gplx_full(e));
-		}
-	}
+	public void Visit_time(Wdata_claim_itm_time itm) {itm.Write_to_bfr(tmp_bfr, tmp_time_bfr, tmp_time_fmtr, msgs, ttl);}
 	public void Visit_globecoordinate(Wdata_claim_itm_globecoordinate itm) {
 		try {
 			Decimal_adp precision_frac = itm.Prc_as_num();						// precision is a decimal; EX: .00027777

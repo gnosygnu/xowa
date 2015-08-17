@@ -198,18 +198,19 @@ public class Int_ implements GfoInvkAble {
 				return -1;
 		}
 	}
-	public static String Xto_str_hex(int v) {
+	public static String Xto_str_hex(int v) {return Xto_str_hex(Bool_.Y, Bool_.Y, v);}
+	public static String Xto_str_hex(boolean zero_pad, boolean upper, int v) {
 		String rv = Integer.toHexString(v); 
-		int rvLen = String_.Len(rv);
-		if (rvLen < 8) rv = String_.Repeat("0", 8 - rvLen) + rv;
-		return String_.Upper(rv);
+		int rv_len = String_.Len(rv);
+		if (zero_pad && rv_len < 8) rv = String_.Repeat("0", 8 - rv_len) + rv;
+		return upper ? String_.Upper(rv) : rv;
 	}
 	public static String Xto_str(int[] ary) {return Xto_str(ary, " ");}
 	public static String Xto_str(int[] ary, String dlm) {
 		String_bldr sb = String_bldr_.new_();
 		for (int i = 0; i < ary.length; i++)
 			sb.Add_spr_unless_first(Int_.Xto_str(ary[i]), dlm, i);
-		return sb.XtoStr();
+		return sb.To_str();
 	}
 	public static int[] Ary_parse(String raw_str, int reqd_len, int[] or) {
 		byte[] raw_bry = Bry_.new_a7(raw_str);

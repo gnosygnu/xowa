@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
 import gplx.lists.*; /*Ordered_hash_base*/ import gplx.stores.dsvs.*; /*DsvStoreLayout*/
 public class TdbFileList extends Ordered_hash_base {
-	public TdbFile Get_by_or_fail(int id) {return TdbFile.as_(FetchOrFail_base(id));}
+	public TdbFile Get_by_or_fail(int id) {return TdbFile.as_(Get_by_or_fail_base(id));}
 	public void Add(TdbFile src) {Add_base(src.Id(), src);}
 
 	Io_url dbInfo;

@@ -98,7 +98,7 @@ public class Pfunc_anchorencode extends Pf_func_base {	// EX: {{anchorencode:a b
 			Tkn(src, xnde.Subs_get(i), xnde, i, tmp_bfr);
 		}		
 	}
-	private static Btrie_fast_mgr encode_trie = Btrie_fast_mgr.cs_();
+	private static Btrie_fast_mgr encode_trie = Btrie_fast_mgr.cs();
 	private static Xop_ctx anchor_ctx;  static Xop_tkn_mkr anchor_tkn_mkr;
 	private static Xop_parser anchor_parser; 
 }

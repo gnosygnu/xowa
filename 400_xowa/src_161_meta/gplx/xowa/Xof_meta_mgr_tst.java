@@ -59,7 +59,7 @@ public class Xof_meta_mgr_tst {
 }
 class Xof_file_regy_fxt {
 	Xof_meta_mgr regy_mgr;
-	byte[] md5_(byte[] name) {return Xof_file_wkr_.Md5_(name);}
+	byte[] md5_(byte[] name) {return Xof_file_wkr_.Md5(name);}
 	public void Ini() {
 		Io_mgr.I.InitEngine_mem();
 		Xoae_app app = Xoa_app_fxt.app_();

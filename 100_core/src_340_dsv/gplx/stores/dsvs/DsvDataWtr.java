@@ -38,7 +38,7 @@ public class DsvDataWtr extends DataWtr_base implements DataWtr {
 	}
 	@Override public void WriteNodeEnd()							{}
 	public void Clear() {sb.Clear();}
-	public String XtoStr() {return sb.XtoStr();}
+	public String To_str() {return sb.To_str();}
 	void WriteTableName(String tableName) {
 		sb.WriteFld(tableName);
 		sb.WriteCmd(sym.TblNameSym());
@@ -64,7 +64,7 @@ public class DsvDataWtr extends DataWtr_base implements DataWtr {
 }
 class DsvStringBldr {
 	public void Clear() {sb.Clear();}
-	public String XtoStr() {return sb.XtoStr();}
+	public String To_str() {return sb.To_str();}
 	public void WriteCmd(String cmd) {
 		WriteFld(sym.CmdSequence(), true);
 		WriteFld(cmd);

@@ -20,7 +20,8 @@ import gplx.xowa.langs.cases.*; import gplx.xowa.wikis.*; import gplx.xowa.xtns.
 import gplx.xowa.wikis.domains.*;
 class Xou_user_ {
 	public static Xowe_wiki new_or_create_(Xoue_user user, Xoae_app app) {
-		Io_url wiki_dir = user.Fsys_mgr().Home_wiki_dir().GenSubDir_nest("wiki", Xow_domain_type_.Key_str_home);
+//			Io_url wiki_dir = user.Fsys_mgr().Home_wiki_dir().GenSubDir_nest("wiki", Xow_domain_type_.Key_str_home);
+		Io_url wiki_dir = app.Fsys_mgr().Home_wiki_dir();
 		Xol_lang lang = app.Lang_mgr().Get_by_key_or_new(app.Lang_mgr().Default_lang());
 		lang.Init_by_load();	// NOTE: lang.Load() must occur before Xowe_wiki.new() b/c wiki will create parsers based on lang
 		Xowe_wiki rv = new Xowe_wiki(app, lang, ns_home_(lang.Case_mgr()), Xow_domain_uid_.To_domain(Xow_domain_uid_.Tid_xowa), wiki_dir);

@@ -66,7 +66,7 @@ public class Gfs_parser {
 }
 class Gfs_parser_ {
 	public static Btrie_fast_mgr trie_() {
-		Btrie_fast_mgr rv = Btrie_fast_mgr.ci_ascii_();	// NOTE:ci.ascii:gfs;letters/symbols only;
+		Btrie_fast_mgr rv = Btrie_fast_mgr.ci_a7();	// NOTE:ci.ascii:gfs;letters/symbols only;
 		Gfs_lxr_identifier word_lxr = Gfs_lxr_identifier._;
 		trie_add_rng(rv, word_lxr, Byte_ascii.Ltr_a, Byte_ascii.Ltr_z);
 		trie_add_rng(rv, word_lxr, Byte_ascii.Ltr_A, Byte_ascii.Ltr_Z);

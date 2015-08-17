@@ -84,7 +84,7 @@ public class Regx_adp__tst implements TfdsEqListItmStr {
 		}
 		return rv.To_str_ary();
 	}
-	public String XtoStr(Object curObj, Object expdObj) {
+	public String To_str(Object curObj, Object expdObj) {
 		Regx_match cur = (Regx_match)curObj, expd = (Regx_match)expdObj;
 		String rv = "bgn=" + cur.Find_bgn();
 		if (expd != null && expd.Find_len() != Int_.MinValue) rv += " len=" + cur.Find_len();

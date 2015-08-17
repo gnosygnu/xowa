@@ -38,7 +38,7 @@ public class IptBnd_ {
 		String_bldr sb = String_bldr_.new_();
 		for (int i = 0; i < ary.Count(); i++)
 			sb.Add_spr_unless_first(((IptArg)ary.Get_at(i)).Key(), "|", i);
-		return sb.XtoStr();
+		return sb.To_str();
 	}
 }
 class IptBnd_invk implements IptBnd {

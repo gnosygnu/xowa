@@ -18,20 +18,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package gplx.xowa.gui; import gplx.*; import gplx.xowa.*;
 import gplx.gfui.*; import gplx.xowa.specials.search.*; import gplx.xowa.gui.menus.*; import gplx.xowa.gui.cmds.*; import gplx.xowa.cfgs.gui.*; import gplx.xowa.users.*;
 import gplx.xowa.gui.bnds.*; import gplx.xowa.gui.views.*; import gplx.xowa.gui.urls.url_macros.*;
+import gplx.xowa.gui.views.boots.*;
 public class Xoa_gui_mgr implements GfoEvObj, GfoInvkAble {
 	public Xoa_gui_mgr(Xoae_app app) {
-		evMgr = GfoEvMgr.new_(this);
+		this.ev_mgr = GfoEvMgr.new_(this);
 		this.app = app;
-		browser_win = new Xog_win_itm(app, this);
+		this.browser_win = new Xog_win_itm(app, this);
 		bnd_mgr = new Xog_bnd_mgr(browser_win);
 		win_cfg = new Xocfg_win(app);
 		html_mgr = new Xog_html_mgr(app);
 		menu_mgr = new Xog_menu_mgr(this);
 		search_suggest_mgr = new Xog_search_suggest_mgr(this);
 	}
-	public GfoEvMgr EvMgr() {return evMgr;} private GfoEvMgr evMgr;
+	public GfoEvMgr EvMgr() {return ev_mgr;} private GfoEvMgr ev_mgr;
 	public Xoae_app App() {return app;} private Xoae_app app;
-	public Xog_win_itm Browser_win() {return browser_win;} private Xog_win_itm browser_win;
+	public Xog_win_itm Browser_win() {return browser_win;} private final Xog_win_itm browser_win;
 	public IptCfgRegy Ipt_cfgs() {return ipt_cfgs;} IptCfgRegy ipt_cfgs = new IptCfgRegy();
 	public Xog_bnd_mgr Bnd_mgr() {return bnd_mgr;} private Xog_bnd_mgr bnd_mgr;
 	public Gfui_kit Kit() {return kit;} private Gfui_kit kit = Gfui_kit_.Mem();
@@ -78,7 +79,7 @@ public class Xoa_gui_mgr implements GfoEvObj, GfoInvkAble {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_kit))							return kit;
 		else if	(ctx.Match(k, Invk_kit_))							this.kit = Gfui_kit_.Get_by_key(m.ReadStrOr("v", Gfui_kit_.Swt().Key()));
-		else if	(ctx.Match(k, Invk_run))							Run();
+		else if	(ctx.Match(k, Invk_run))							Run(RlsAble_.Null);
 		else if	(ctx.Match(k, Invk_browser_type))					kit.Cfg_set("HtmlBox", "BrowserType", gplx.gfui.Swt_kit.Cfg_Html_BrowserType_parse(m.ReadStr("v")));
 		else if	(ctx.Match(k, Invk_xul_runner_path_))				kit.Cfg_set("HtmlBox", "XulRunnerPath", Bry_fmtr_eval_mgr_.Eval_url(app.Url_cmd_eval(), m.ReadBry("v")).Xto_api());
 		else if	(ctx.Match(k, Invk_bnds))							return bnd_mgr;
@@ -100,7 +101,7 @@ public class Xoa_gui_mgr implements GfoEvObj, GfoInvkAble {
 	, Invk_main_win = "main_win", Invk_browser_win = "browser_win", Invk_bnds = "bnds"
 	, Invk_bindings = "bindings", Invk_win_opts = "win_opts", Invk_layout = "layout", Invk_html = "html"
 	, Invk_search_suggest = "search_suggest", Invk_menus = "menus", Invk_cmds = "cmds", Invk_url_macros = "url_macros";
-	public void Run() {
+	public void Run(RlsAble splash_win) {
 		Gfo_log_bfr log_bfr = app.Log_bfr();
 		try {
 			Xoa_gui_mgr ui_mgr = app.Gui_mgr();
@@ -110,6 +111,7 @@ public class Xoa_gui_mgr implements GfoEvObj, GfoInvkAble {
 			Xog_win_itm_.Show_win(main_win); log_bfr.Add("app.gui.win_load.done");
 			Xog_tab_itm_read_mgr.Launch(main_win);
 			app.Log_wtr().Log_to_session_direct(log_bfr.Xto_str());
+			splash_win.Rls();
 			kit.Kit_run();	// NOTE: enters thread-loop
 		} catch (Exception e) {
 			app.Usr_dlg().Warn_many("", "", "run_failed: ~{0} ~{1}", log_bfr.Xto_str(), Err_.Message_gplx_full(e));

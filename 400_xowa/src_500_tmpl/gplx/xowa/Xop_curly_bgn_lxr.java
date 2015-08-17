@@ -24,7 +24,7 @@ public class Xop_curly_bgn_lxr implements Xop_lxr {
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {return ctx.Curly().MakeTkn_bgn(ctx, tkn_mkr, root, src, src_len, bgn_pos, cur_pos);}
 	public static final Xop_curly_bgn_lxr _ = new Xop_curly_bgn_lxr(); Xop_curly_bgn_lxr() {}
 	public static Btrie_fast_mgr tmpl_bgn_trie_() {	// hook sequences for adding new_line to tmpl return; "{|" "|-" ":" ";" "#" "*"; EX: "{{a}}" returns "*"; convert to "\n*"
-		Btrie_fast_mgr rv = Btrie_fast_mgr.cs_();
+		Btrie_fast_mgr rv = Btrie_fast_mgr.cs();
 		rv.Add(Xop_tblw_lxr_ws.Hook_tb, Bry_.Empty);
 		rv.Add(Bry_.new_a7("|-"), Bry_.Empty);
 		rv.Add(Byte_ascii.Colon, Bry_.Empty);

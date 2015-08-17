@@ -19,7 +19,7 @@ package gplx;
 import gplx.core.consoles.*;
 public class UsrMsgWkr_console implements UsrMsgWkr {
 	public void ExecUsrMsg(int type, UsrMsg umsg) {
-		String text = umsg.XtoStr();
+		String text = umsg.To_str();
 		if		(type == UsrMsgWkr_.Type_Warn)
 			text = "!!!!" + text;
 		else if (type == UsrMsgWkr_.Type_Stop)

@@ -46,13 +46,13 @@ public class TimeSpanAdp implements CompareAble, EqAble {
 		TimeSpanAdp comp = TimeSpanAdp_.cast_(o); if (comp == null) return false;
 		return fracs == comp.fracs;
 	}
-	@Override public String toString()				{return XtoStr(TimeSpanAdp_.Fmt_Default);}
+	@Override public String toString()				{return To_str(TimeSpanAdp_.Fmt_Default);}
 	@Override public boolean equals(Object obj)			{TimeSpanAdp comp = TimeSpanAdp_.cast_(obj); return Object_.Eq(fracs, comp.fracs);}
 	@Override public int hashCode() {return super.hashCode();}
 
-	public String XtoStr()	{return TimeSpanAdp_.XtoStr(fracs, TimeSpanAdp_.Fmt_Default);}
-	public String XtoStr(String format)	{
-		return TimeSpanAdp_.XtoStr(fracs, format);
+	public String To_str()	{return TimeSpanAdp_.To_str(fracs, TimeSpanAdp_.Fmt_Default);}
+	public String To_str(String format)	{
+		return TimeSpanAdp_.To_str(fracs, format);
 	}
 	public String XtoStrUiAbbrv()	{
 		if (fracs == 0) return "0" + UnitAbbrv(0);
@@ -70,7 +70,7 @@ public class TimeSpanAdp implements CompareAble, EqAble {
 			if (sb.Count() != 0) sb.Add(" ");
 			sb.Add_obj(unit).Add(UnitAbbrv(i));
 		}
-		return sb.XtoStr();
+		return sb.To_str();
 	}
 	String UnitAbbrv(int i) {
 		switch (i) {

@@ -30,7 +30,7 @@ public class Regx_bldr {
 				sb.Add(Regx_bldr.Tkn_Escape);
 			sb.Add(c);
 		}
-		return sb.XtoStr();
+		return sb.To_str();
 	}
 	public static boolean RegxChar_chk(char c) {
 		return

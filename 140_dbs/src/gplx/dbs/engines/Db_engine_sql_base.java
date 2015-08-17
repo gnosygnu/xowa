@@ -27,10 +27,13 @@ public abstract class Db_engine_sql_base implements Db_engine {
 	public Db_rdr		New_rdr__rls_auto(Db_stmt stmt, Object rdr_obj, String sql)	{return New_rdr(stmt, rdr_obj, sql);}
 	@gplx.Virtual public Db_rdr New_rdr_clone() {return new Db_rdr__basic();}
 	public Db_stmt		New_stmt_prep(Db_qry qry) {return new Db_stmt_cmd(this, qry);}
-	@gplx.Virtual public void	Txn_bgn(String name)	{Exec_as_obj(Db_qry_sql.xtn_("BEGIN TRANSACTION;"));}
-	@gplx.Virtual public void	Txn_end()				{Exec_as_obj(Db_qry_sql.xtn_("COMMIT TRANSACTION;"));}
-	@gplx.Virtual public void	Txn_cxl()				{Exec_as_obj(Db_qry_sql.xtn_("ROLLBACK TRANSACTION;"));}
-	@gplx.Virtual public void	Txn_sav()				{this.Txn_end(); this.Txn_bgn("");}
+	@gplx.Virtual public void		Txn_bgn(String name)	{Exec_as_obj(Db_qry_sql.xtn_("BEGIN TRANSACTION;"));}
+	@gplx.Virtual public String	Txn_end()				{Exec_as_obj(Db_qry_sql.xtn_("COMMIT TRANSACTION;")); return "";}
+	@gplx.Virtual public void		Txn_cxl()				{Exec_as_obj(Db_qry_sql.xtn_("ROLLBACK TRANSACTION;"));}
+	@gplx.Virtual public void		Txn_sav() {
+		String txn_name = this.Txn_end();
+		this.Txn_bgn(txn_name);
+	}
 	public Object		Exec_as_obj(Db_qry qry) {
 		if (qry.Tid() == Db_qry_.Tid_flush) return null;	// ignore flush (delete-db) statements
 		String sql = this.SqlWtr().Xto_str(qry, false); // DBG: Tfds.Write(sql);

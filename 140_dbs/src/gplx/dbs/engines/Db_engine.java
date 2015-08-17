@@ -26,7 +26,7 @@ public interface Db_engine {
 	Object			New_stmt_prep_as_obj(String sql);
 	DataRdr			New_rdr(java.sql.ResultSet rdr, String sql); 
 	void			Txn_bgn(String name);
-	void			Txn_end();
+	String			Txn_end();
 	void			Txn_cxl();
 	void			Txn_sav();
 	void			Conn_open();

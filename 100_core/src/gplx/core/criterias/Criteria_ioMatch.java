@@ -29,7 +29,7 @@ public class Criteria_ioMatch implements Criteria { // EX: url IOMATCH '*.xml|*.
 		boolean rv = pattern.Matches(comp.XtoCaseNormalized());
 		return match ? rv : !rv;
 	}
-	public String XtoStr() {return String_.Concat_any("IOMATCH ", pattern);}
+	public String To_str() {return String_.Concat_any("IOMATCH ", pattern);}
 
 	public static final String TokenName = "IOMATCH";
 	public static Criteria_ioMatch as_(Object obj) {return obj instanceof Criteria_ioMatch ? (Criteria_ioMatch)obj : null;}

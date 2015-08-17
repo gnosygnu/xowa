@@ -36,6 +36,7 @@ public class Wdata_date_tst {
 		fxt.Test_xto_str(date, Wdata_date.Fmt_ymdhns	, "4:05:06 3 Feb 2001");
 	}
 	@Test   public void Xto_str_year() {
+		fxt.Test_xto_str("+00000001970-01-01T00:00:00Z",  9, "1970");
 		fxt.Test_xto_str("-00000001234-01-01T00:00:00Z",  9, "1234 BC");
 		fxt.Test_xto_str("+00000001987-01-01T00:00:00Z",  8, "1980s");
 		fxt.Test_xto_str("+00000001987-01-01T00:00:00Z",  7, "19. century");

@@ -41,7 +41,7 @@ public class App_cmd_arg {
 		return this;
 	}
 	public App_cmd_arg Example_list_str_(String v) {
-		example = String_.ConcatWith_any(" ", v);
+		example = String_.Concat_with_obj(" ", v);
 		val_tid = Val_tid_list_string;
 		return this;
 	}

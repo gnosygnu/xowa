@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package gplx.core.criterias; import gplx.*; import gplx.core.*;
-public interface Criteria extends XtoStrAble {
+public interface Criteria extends To_str_able {
 	byte Tid();
 	boolean Matches(Object obj);
 	void Val_from_args(Hash_adp args);
