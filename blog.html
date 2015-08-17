@@ -18,6 +18,80 @@
 
 <!-- page_bgn -->
     <h2>
+      <span class='mw-headline' id='Release:_v2.8.3.1_.282015-08-16_21:15_Sun.29'>Release: v2.8.3.1 (2015-08-16 21:15 Sun)</span>
+    </h2>
+    <p>
+      v2.8.3 is a significant release, but mostly from an infrastructure point-of-view. It has several application startup and deployment changes. It also has an update for English Wikipedia 2015-08-05
+    </p>
+    <h3>
+      <span class='mw-headline' id='English_Wikipedia_images_for_2015-08-05'>English Wikipedia images for 2015-08-05</span>
+    </h3>
+    <p>
+      The update itself contains about 157,000 new images. I'm posting v2b tonight and will post v2a and v1 over the next few days. See [[Help:Set up English Wikipedia#File databases: v1, v2a and v2b]]
+    </p>
+    <h3>
+      <span class='mw-headline' id='Application_startup_changes.2C_including_splash_animation.2C_fatal_error_window.2C_and_.exe_changes'>Application startup changes, including splash animation, fatal error window, and .exe changes</span>
+    </h3>
+    <p>
+      v2.8.3 has a number of application startup changes. The most noticeable one is a splash animation to show that XOWA is launching after you double-clicked the exe (or ran the sh).
+    </p>
+    <p>
+      In addition, I added a "fatal error" window to give more information if XOWA fails to run because of SWT or XULRunner.
+    </p>
+    <p>
+      Finally, I rebuilt xowa.exe with launch4j. Also, both exe's now support a standalone JRE. If you place a JRE in /xowa/bin/windows/java/jre , it will run on systems without java installed.
+    </p>
+    <p>
+      Unfortunately, these changes aren't uniform across all operating systems.
+    </p>
+    <ul>
+      <li>
+        Windows: All of the above apply
+      </li>
+      <li>
+        Linux: Only the first 2 apply. A standalone JRE will probably not happen due to the many varieties of Linux distros as well as the general Linux philosophy of a central package manager
+      </li>
+      <li>
+        Mac OS X: None apply. I had problems with the splash and the error window, whereas I haven't looked at the standalone JRE. I'll work on these for a future release, though it's difficult to say when.
+      </li>
+    </ul>
+    <h3>
+      <span class='mw-headline' id='XOWA_home_wiki_is_now_a_sqlite3_database'>XOWA home wiki is now a sqlite3 database</span>
+    </h3>
+    <p>
+      When v0.0.0 was first released, XOWA used text files for all its wikis. XOWA has since moved to sqlite3 databases in v0.7.1 but the home wiki still remained in the text file format.
+    </p>
+    <p>
+      With v2.8.3, the home wiki now is in a sqlite3 format. This should be the start of a number of changes, including better namespaces (everything is in the Help namespace), a functioning Search, image support, and overall better editing. Also, the home wiki will soon be part of the Android Alpha app.
+    </p>
+    <h3>
+      <span class='mw-headline' id='Cleanup_of_.2Fxowa.2F_root_directory'>Cleanup of /xowa/ root directory</span>
+    </h3>
+    <p>
+      v2.8.3 now deploys much fewer files to the /xowa/ root directory. This was done primarily to avoid confusion for new users, as well as general deployment aesthetics. All other files have been moved to elsewhere in the /xowa/bin/xowa/ hierarchy. See the Change Log for more details.
+    </p>
+    <p>
+      For upgrade users, you can ignore these old files in the /xowa/ root directory or clean them up manually. You can also update your app by regenerating the XOWA root directory. See [[Help:Upgrading]] and "Upgrading by an xowa_app package and regenerating the XOWA root directory"
+    </p>
+    <h3>
+      <span class='mw-headline' id='Trivial_Scribunto_parser_fix'>Trivial Scribunto parser fix</span>
+    </h3>
+    <p>
+      v2.8.3 has one trivial Scribunto fix that caused "Script error" on about a dozen or so pages in English Wikipedia.
+    </p>
+    <h3>
+      <span class='mw-headline' id='Next_release:_v2.8.4'>Next release: v2.8.4</span>
+    </h3>
+    <p>
+      Now that English Wikipedia images were finally released, I'm going to resume the long overdue backlog. I'm scheduling Ukraine, Persian and Bengali for this week.
+    </p>
+    <p>
+      I did some Android development this week, and will work on Search support. I'll also work on any issues the new builds turn up, including one outstanding one for broken Math expressions on some pages: <a href="https://github.com/gnosygnu/xowa/issues/10" class="external text" rel="nofollow">https://github.com/gnosygnu/xowa/issues/10</a>
+    </p>
+    <p>
+      <br>
+    </p>
+    <h2>
       <span class='mw-headline' id='Release:_v2.8.2.1_.282015-08-09_20:25_Sun.29'>Release: v2.8.2.1 (2015-08-09 20:25 Sun)</span>
     </h2>
     <p>
